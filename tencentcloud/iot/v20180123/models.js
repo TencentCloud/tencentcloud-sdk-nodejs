@@ -796,24 +796,28 @@ class DataTemplate extends  AbstractModel {
 
         /**
          * 数字类型
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {NumberData || null}
          */
         this.Number = null;
 
         /**
          * 字符串类型
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {StringData || null}
          */
         this.String = null;
 
         /**
          * 枚举类型
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {EnumData || null}
          */
         this.Enum = null;
 
         /**
          * 布尔类型
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {BoolData || null}
          */
         this.Bool = null;
@@ -1661,7 +1665,7 @@ class GetDataHistoryRequest extends  AbstractModel {
 
         /**
          * 查询数据量
-         * @type {Array.<number> || null}
+         * @type {number || null}
          */
         this.Size = null;
 
@@ -2119,12 +2123,14 @@ class RuleQuery extends  AbstractModel {
 
         /**
          * Topic
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Topic = null;
 
         /**
          * 产品Id
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ProductId = null;
@@ -3075,12 +3081,14 @@ class DeviceStatus extends  AbstractModel {
 
         /**
          * 首次上线时间
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.FirstOnline = null;
 
         /**
          * 最后上线时间
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.LastOnline = null;
@@ -3620,18 +3628,21 @@ class Action extends  AbstractModel {
 
         /**
          * 转发至topic
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {TopicAction || null}
          */
         this.Topic = null;
 
         /**
          * 转发至第三发
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {ServiceAction || null}
          */
         this.Service = null;
 
         /**
          * 转发至第三发Ckafka
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {CkafkaAction || null}
          */
         this.Ckafka = null;

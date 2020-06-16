@@ -72,6 +72,20 @@ class AgentClientElem extends  AbstractModel {
          */
         this.Status = null;
 
+        /**
+         * 业务员ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SalesUin = null;
+
+        /**
+         * 业务员姓名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SalesName = null;
+
     }
 
     /**
@@ -89,6 +103,8 @@ class AgentClientElem extends  AbstractModel {
         this.Phone = 'Phone' in params ? params.Phone : null;
         this.HasOverdueBill = 'HasOverdueBill' in params ? params.HasOverdueBill : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.SalesUin = 'SalesUin' in params ? params.SalesUin : null;
+        this.SalesName = 'SalesName' in params ? params.SalesName : null;
 
     }
 }
@@ -346,6 +362,34 @@ class DescribeAgentAuditedClientsRequest extends  AbstractModel {
 }
 
 /**
+ * RemovePayRelationForClient请求参数结构体
+ * @class
+ */
+class RemovePayRelationForClientRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 客户账号ID
+         * @type {string || null}
+         */
+        this.ClientUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClientUin = 'ClientUin' in params ? params.ClientUin : null;
+
+    }
+}
+
+/**
  * AgentPayDeals请求参数结构体
  * @class
  */
@@ -383,6 +427,55 @@ class AgentPayDealsRequest extends  AbstractModel {
         this.OwnerUin = 'OwnerUin' in params ? params.OwnerUin : null;
         this.AgentPay = 'AgentPay' in params ? params.AgentPay : null;
         this.DealNames = 'DealNames' in params ? params.DealNames : null;
+
+    }
+}
+
+/**
+ * DescribeAgentClientGrade返回参数结构体
+ * @class
+ */
+class DescribeAgentClientGradeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 审核状态：0待审核，1，已审核
+         * @type {number || null}
+         */
+        this.AuditStatus = null;
+
+        /**
+         * 实名认证状态：0，未实名认证，1实名认证
+         * @type {number || null}
+         */
+        this.AuthState = null;
+
+        /**
+         * 客户级别
+         * @type {string || null}
+         */
+        this.ClientGrade = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AuditStatus = 'AuditStatus' in params ? params.AuditStatus : null;
+        this.AuthState = 'AuthState' in params ? params.AuthState : null;
+        this.ClientGrade = 'ClientGrade' in params ? params.ClientGrade : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -549,6 +642,34 @@ class DescribeClientBalanceRequest extends  AbstractModel {
 }
 
 /**
+ * RemovePayRelationForClient返回参数结构体
+ * @class
+ */
+class RemovePayRelationForClientResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeRebateInfos请求参数结构体
  * @class
  */
@@ -586,6 +707,34 @@ class DescribeRebateInfosRequest extends  AbstractModel {
         this.RebateMonth = 'RebateMonth' in params ? params.RebateMonth : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * CreatePayRelationForClient返回参数结构体
+ * @class
+ */
+class CreatePayRelationForClientResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -931,6 +1080,18 @@ class DescribeAgentClientsRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * 业务员ID
+         * @type {string || null}
+         */
+        this.SalesUin = null;
+
+        /**
+         * 业务员姓名（模糊查询）
+         * @type {string || null}
+         */
+        this.SalesName = null;
+
     }
 
     /**
@@ -946,6 +1107,8 @@ class DescribeAgentClientsRequest extends  AbstractModel {
         this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SalesUin = 'SalesUin' in params ? params.SalesUin : null;
+        this.SalesName = 'SalesName' in params ? params.SalesName : null;
 
     }
 }
@@ -1100,6 +1263,13 @@ class AgentAuditedClient extends  AbstractModel {
          */
         this.SalesName = null;
 
+        /**
+         * 代客邮箱
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Mail = null;
+
     }
 
     /**
@@ -1124,6 +1294,7 @@ class AgentAuditedClient extends  AbstractModel {
         this.ProjectType = 'ProjectType' in params ? params.ProjectType : null;
         this.SalesUin = 'SalesUin' in params ? params.SalesUin : null;
         this.SalesName = 'SalesName' in params ? params.SalesName : null;
+        this.Mail = 'Mail' in params ? params.Mail : null;
 
     }
 }
@@ -1242,6 +1413,34 @@ class ModifyClientRemarkRequest extends  AbstractModel {
 }
 
 /**
+ * CreatePayRelationForClient请求参数结构体
+ * @class
+ */
+class CreatePayRelationForClientRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 客户账号ID
+         * @type {string || null}
+         */
+        this.ClientUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClientUin = 'ClientUin' in params ? params.ClientUin : null;
+
+    }
+}
+
+/**
  * AgentTransferMoney返回参数结构体
  * @class
  */
@@ -1351,6 +1550,13 @@ class AgentBillElem extends  AbstractModel {
          */
         this.ProjectType = null;
 
+        /**
+         * 活动ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ActivityId = null;
+
     }
 
     /**
@@ -1372,6 +1578,7 @@ class AgentBillElem extends  AbstractModel {
         this.PayerMode = 'PayerMode' in params ? params.PayerMode : null;
         this.ClientType = 'ClientType' in params ? params.ClientType : null;
         this.ProjectType = 'ProjectType' in params ? params.ProjectType : null;
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
 
     }
 }
@@ -1745,6 +1952,13 @@ class AgentDealElem extends  AbstractModel {
          */
         this.PayerMode = null;
 
+        /**
+         * 活动ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ActivityId = null;
+
     }
 
     /**
@@ -1782,6 +1996,7 @@ class AgentDealElem extends  AbstractModel {
         this.ProjectType = 'ProjectType' in params ? params.ProjectType : null;
         this.SalesUin = 'SalesUin' in params ? params.SalesUin : null;
         this.PayerMode = 'PayerMode' in params ? params.PayerMode : null;
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
 
     }
 }
@@ -1885,17 +2100,49 @@ class DescribeRebateInfosResponse extends  AbstractModel {
     }
 }
 
+/**
+ * DescribeAgentClientGrade请求参数结构体
+ * @class
+ */
+class DescribeAgentClientGradeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 代客uin
+         * @type {string || null}
+         */
+        this.ClientUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClientUin = 'ClientUin' in params ? params.ClientUin : null;
+
+    }
+}
+
 module.exports = {
     AgentClientElem: AgentClientElem,
     DescribeAgentDealsCacheRequest: DescribeAgentDealsCacheRequest,
     DescribeSalesmansRequest: DescribeSalesmansRequest,
     DescribeAgentAuditedClientsRequest: DescribeAgentAuditedClientsRequest,
+    RemovePayRelationForClientRequest: RemovePayRelationForClientRequest,
     AgentPayDealsRequest: AgentPayDealsRequest,
+    DescribeAgentClientGradeResponse: DescribeAgentClientGradeResponse,
     RebateInfoElem: RebateInfoElem,
     DescribeClientBalanceResponse: DescribeClientBalanceResponse,
     AgentTransferMoneyRequest: AgentTransferMoneyRequest,
     DescribeClientBalanceRequest: DescribeClientBalanceRequest,
+    RemovePayRelationForClientResponse: RemovePayRelationForClientResponse,
     DescribeRebateInfosRequest: DescribeRebateInfosRequest,
+    CreatePayRelationForClientResponse: CreatePayRelationForClientResponse,
     DescribeAgentAuditedClientsResponse: DescribeAgentAuditedClientsResponse,
     DescribeAgentBillsResponse: DescribeAgentBillsResponse,
     DescribeAgentPayDealsRequest: DescribeAgentPayDealsRequest,
@@ -1908,6 +2155,7 @@ module.exports = {
     DescribeAgentPayDealsResponse: DescribeAgentPayDealsResponse,
     DealGoodsPriceElem: DealGoodsPriceElem,
     ModifyClientRemarkRequest: ModifyClientRemarkRequest,
+    CreatePayRelationForClientRequest: CreatePayRelationForClientRequest,
     AgentTransferMoneyResponse: AgentTransferMoneyResponse,
     AgentBillElem: AgentBillElem,
     AuditApplyClientResponse: AuditApplyClientResponse,
@@ -1917,5 +2165,6 @@ module.exports = {
     AgentDealElem: AgentDealElem,
     AgentSalesmanElem: AgentSalesmanElem,
     DescribeRebateInfosResponse: DescribeRebateInfosResponse,
+    DescribeAgentClientGradeRequest: DescribeAgentClientGradeRequest,
 
 }

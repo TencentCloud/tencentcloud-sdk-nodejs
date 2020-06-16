@@ -16,32 +16,48 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const AudioModerationResponse = models.AudioModerationResponse;
-const DescribeModerationOverviewRequest = models.DescribeModerationOverviewRequest;
-const TextModerationResponse = models.TextModerationResponse;
+const CustomResult = models.CustomResult;
 const TextData = models.TextData;
-const VideoModerationResponse = models.VideoModerationResponse;
+const TextModerationRequest = models.TextModerationRequest;
+const DetailResult = models.DetailResult;
 const ImageModerationResponse = models.ImageModerationResponse;
+const TextModerationResponse = models.TextModerationResponse;
 const ImageModerationRequest = models.ImageModerationRequest;
+const CreateFileSampleRequest = models.CreateFileSampleRequest;
 const ImageData = models.ImageData;
 const ImagePornDetect = models.ImagePornDetect;
 const DeleteTextSampleResponse = models.DeleteTextSampleResponse;
+const TextSample = models.TextSample;
 const CreateTextSampleResponse = models.CreateTextSampleResponse;
-const ImagePolityDetect = models.ImagePolityDetect;
+const TextOutputID = models.TextOutputID;
+const FileSampleInfo = models.FileSampleInfo;
+const DescribeFileSampleRequest = models.DescribeFileSampleRequest;
+const CodeDetect = models.CodeDetect;
 const ImageTerrorDetect = models.ImageTerrorDetect;
 const DescribeTextSampleResponse = models.DescribeTextSampleResponse;
-const TextSample = models.TextSample;
-const OverviewRecord = models.OverviewRecord;
+const CodePosition = models.CodePosition;
+const DeleteFileSampleResponse = models.DeleteFileSampleResponse;
+const FileSample = models.FileSample;
+const DescribeFileSampleResponse = models.DescribeFileSampleResponse;
+const TextOutputRes = models.TextOutputRes;
 const CreateTextSampleRequest = models.CreateTextSampleRequest;
-const TextModerationRequest = models.TextModerationRequest;
+const DeleteFileSampleRequest = models.DeleteFileSampleRequest;
 const Filter = models.Filter;
-const DescribeModerationOverviewResponse = models.DescribeModerationOverviewResponse;
+const OCRDetect = models.OCRDetect;
+const Coordinate = models.Coordinate;
 const Similar = models.Similar;
 const ImageHotDetect = models.ImageHotDetect;
+const TextOutputComm = models.TextOutputComm;
 const DescribeTextSampleRequest = models.DescribeTextSampleRequest;
-const AudioModerationRequest = models.AudioModerationRequest;
+const CodeDetail = models.CodeDetail;
+const ImagePolityDetect = models.ImagePolityDetect;
+const OCRItem = models.OCRItem;
 const ImageIllegalDetect = models.ImageIllegalDetect;
-const VideoModerationRequest = models.VideoModerationRequest;
+const RrectF = models.RrectF;
+const CreateFileSampleResponse = models.CreateFileSampleResponse;
+const LogoDetail = models.LogoDetail;
+const Logo = models.Logo;
+const PhoneDetect = models.PhoneDetect;
 const DeleteTextSampleRequest = models.DeleteTextSampleRequest;
 
 
@@ -56,18 +72,9 @@ class CmsClient extends AbstractClient {
     }
     
     /**
-     * 根据日期，渠道和服务类型查询识别结果概览数据
-     * @param {DescribeModerationOverviewRequest} req
-     * @param {function(string, DescribeModerationOverviewResponse):void} cb
-     * @public
-     */
-    DescribeModerationOverview(req, cb) {
-        let resp = new DescribeModerationOverviewResponse();
-        this.request("DescribeModerationOverview", req, resp, cb);
-    }
-
-    /**
-     * 删除文字样本库，暂时只支持单个删除
+     * 本文档适用于文本内容安全、音频内容安全自定义识别库的管理。
+<br>
+删除文本样本库，暂时只支持单个删除。
      * @param {DeleteTextSampleRequest} req
      * @param {function(string, DeleteTextSampleResponse):void} cb
      * @public
@@ -78,7 +85,9 @@ class CmsClient extends AbstractClient {
     }
 
     /**
-     * 新增文本类型样本库
+     * 本文档适用于文本内容安全、音频内容安全自定义识别库的管理。
+<br>
+通过该接口可以将文本新增到样本库。
      * @param {CreateTextSampleRequest} req
      * @param {function(string, CreateTextSampleResponse):void} cb
      * @public
@@ -89,29 +98,22 @@ class CmsClient extends AbstractClient {
     }
 
     /**
-     * 视频内容检测（Video Moderation, VM）服务能识别涉黄、涉政、涉恐等违规视频，同时支持用户配置视频黑库，打击自定义的违规内容。
-     * @param {VideoModerationRequest} req
-     * @param {function(string, VideoModerationResponse):void} cb
+     * 本文档适用于图片内容安全、视频内容安全自定义识别库的管理。
+<br>
+通过该接口可以将图片新增到样本库。
+     * @param {CreateFileSampleRequest} req
+     * @param {function(string, CreateFileSampleResponse):void} cb
      * @public
      */
-    VideoModeration(req, cb) {
-        let resp = new VideoModerationResponse();
-        this.request("VideoModeration", req, resp, cb);
+    CreateFileSample(req, cb) {
+        let resp = new CreateFileSampleResponse();
+        this.request("CreateFileSample", req, resp, cb);
     }
 
     /**
-     * 音频内容检测（Audio Moderation, AM）服务使用了波形分析、声纹分析等技术，能识别涉黄、涉政、涉恐等违规音频，同时支持用户配置音频黑库，打击自定义的违规内容。
-     * @param {AudioModerationRequest} req
-     * @param {function(string, AudioModerationResponse):void} cb
-     * @public
-     */
-    AudioModeration(req, cb) {
-        let resp = new AudioModerationResponse();
-        this.request("AudioModeration", req, resp, cb);
-    }
-
-    /**
-     * 支持批量查询文字样本库
+     * 本文档适用于文本内容安全、音频内容安全自定义识别库的管理。
+<br>
+支持批量查询文本样本库。
      * @param {DescribeTextSampleRequest} req
      * @param {function(string, DescribeTextSampleResponse):void} cb
      * @public
@@ -119,6 +121,19 @@ class CmsClient extends AbstractClient {
     DescribeTextSample(req, cb) {
         let resp = new DescribeTextSampleResponse();
         this.request("DescribeTextSample", req, resp, cb);
+    }
+
+    /**
+     * 本文档适用于图片内容安全、视频内容安全自定义识别库的管理。
+<br>
+查询图片样本库，支持批量查询。
+     * @param {DescribeFileSampleRequest} req
+     * @param {function(string, DescribeFileSampleResponse):void} cb
+     * @public
+     */
+    DescribeFileSample(req, cb) {
+        let resp = new DescribeFileSampleResponse();
+        this.request("DescribeFileSample", req, resp, cb);
     }
 
     /**
@@ -141,6 +156,19 @@ class CmsClient extends AbstractClient {
     ImageModeration(req, cb) {
         let resp = new ImageModerationResponse();
         this.request("ImageModeration", req, resp, cb);
+    }
+
+    /**
+     * 本文档适用于图片内容安全、视频内容安全自定义识别库的管理。
+<br>
+删除图片样本库，支持批量删除，一次提交不超过20个。
+     * @param {DeleteFileSampleRequest} req
+     * @param {function(string, DeleteFileSampleResponse):void} cb
+     * @public
+     */
+    DeleteFileSample(req, cb) {
+        let resp = new DeleteFileSampleResponse();
+        this.request("DeleteFileSample", req, resp, cb);
     }
 
 

@@ -16,15 +16,33 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const ImageModerationRequest = models.ImageModerationRequest;
+const VodPoliticalOcrReviewResult = models.VodPoliticalOcrReviewResult;
 const Candidate = models.Candidate;
 const TerrorismResult = models.TerrorismResult;
-const PoliticsResult = models.PoliticsResult;
-const PornResult = models.PornResult;
-const DisgustResult = models.DisgustResult;
-const FaceRect = models.FaceRect;
-const FaceResult = models.FaceResult;
+const VodPoliticalAsrReviewResult = models.VodPoliticalAsrReviewResult;
+const VideoModerationResponse = models.VideoModerationResponse;
+const VodMetaData = models.VodMetaData;
 const ImageModerationResponse = models.ImageModerationResponse;
+const VodVideoStreamItem = models.VodVideoStreamItem;
+const ImageModerationRequest = models.ImageModerationRequest;
+const VideoModerationRequest = models.VideoModerationRequest;
+const VodPoliticalReviewSegmentItem = models.VodPoliticalReviewSegmentItem;
+const VodPornReviewResult = models.VodPornReviewResult;
+const DisgustResult = models.DisgustResult;
+const VodPornReviewSegmentItem = models.VodPornReviewSegmentItem;
+const VodPoliticalReviewResult = models.VodPoliticalReviewResult;
+const VodAudioStreamItem = models.VodAudioStreamItem;
+const VodOcrTextSegmentItem = models.VodOcrTextSegmentItem;
+const PoliticsResult = models.PoliticsResult;
+const VodAsrTextSegmentItem = models.VodAsrTextSegmentItem;
+const PornResult = models.PornResult;
+const DescribeVideoTaskRequest = models.DescribeVideoTaskRequest;
+const VodTerrorismReviewResult = models.VodTerrorismReviewResult;
+const FaceResult = models.FaceResult;
+const VodPornAsrReviewResult = models.VodPornAsrReviewResult;
+const DescribeVideoTaskResponse = models.DescribeVideoTaskResponse;
+const FaceRect = models.FaceRect;
+const VodPornOcrResult = models.VodPornOcrResult;
 
 
 /**
@@ -46,6 +64,28 @@ class TicmClient extends AbstractClient {
     ImageModeration(req, cb) {
         let resp = new ImageModerationResponse();
         this.request("ImageModeration", req, resp, cb);
+    }
+
+    /**
+     * 本接口提供多种维度的视频审核能力，支持色情和性感内容识别，政治人物和涉政敏感场景识别，以及暴恐人物、场景、旗帜标识等违禁内容的识别。
+     * @param {VideoModerationRequest} req
+     * @param {function(string, VideoModerationResponse):void} cb
+     * @public
+     */
+    VideoModeration(req, cb) {
+        let resp = new VideoModerationResponse();
+        this.request("VideoModeration", req, resp, cb);
+    }
+
+    /**
+     * 提交完视频审核任务后，可以通过本接口来获取当前处理的进度和结果
+     * @param {DescribeVideoTaskRequest} req
+     * @param {function(string, DescribeVideoTaskResponse):void} cb
+     * @public
+     */
+    DescribeVideoTask(req, cb) {
+        let resp = new DescribeVideoTaskResponse();
+        this.request("DescribeVideoTask", req, resp, cb);
     }
 
 

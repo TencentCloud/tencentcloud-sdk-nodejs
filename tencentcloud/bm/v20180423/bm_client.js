@@ -51,6 +51,7 @@ const Tag = models.Tag;
 const CreateCustomImageResponse = models.CreateCustomImageResponse;
 const HostedDeviceOutBandInfo = models.HostedDeviceOutBandInfo;
 const ReturnDevicesRequest = models.ReturnDevicesRequest;
+const ModifyDeviceAliasesResponse = models.ModifyDeviceAliasesResponse;
 const PsaRegulation = models.PsaRegulation;
 const DescribeDevicePartitionResponse = models.DescribeDevicePartitionResponse;
 const DescribeHostedDeviceOutBandInfoRequest = models.DescribeHostedDeviceOutBandInfoRequest;
@@ -68,11 +69,14 @@ const ShutdownDevicesResponse = models.ShutdownDevicesResponse;
 const TaskType = models.TaskType;
 const DeleteUserCmdsRequest = models.DeleteUserCmdsRequest;
 const DeviceDiskSizeInfo = models.DeviceDiskSizeInfo;
+const AttachCamRoleRequest = models.AttachCamRoleRequest;
 const DescribeDeviceClassResponse = models.DescribeDeviceClassResponse;
 const DescribeDeviceHardwareInfoResponse = models.DescribeDeviceHardwareInfoResponse;
 const ModifyUserCmdRequest = models.ModifyUserCmdRequest;
 const DescribeDevicePriceInfoResponse = models.DescribeDevicePriceInfoResponse;
+const ReloadDeviceOsResponse = models.ReloadDeviceOsResponse;
 const RunUserCmdResponse = models.RunUserCmdResponse;
+const ReloadDeviceOsRequest = models.ReloadDeviceOsRequest;
 const DescribeUserCmdsRequest = models.DescribeUserCmdsRequest;
 const DescribeTaskInfoRequest = models.DescribeTaskInfoRequest;
 const RepairTaskControlResponse = models.RepairTaskControlResponse;
@@ -113,12 +117,13 @@ const DescribeOperationResultResponse = models.DescribeOperationResultResponse;
 const DescribeDeviceClassRequest = models.DescribeDeviceClassRequest;
 const ModifyCustomImageAttributeRequest = models.ModifyCustomImageAttributeRequest;
 const DeletePsaRegulationResponse = models.DeletePsaRegulationResponse;
+const DeviceClassPartitionInfo = models.DeviceClassPartitionInfo;
 const DescribeTaskOperationLogRequest = models.DescribeTaskOperationLogRequest;
 const DescribeDeviceOperationLogRequest = models.DescribeDeviceOperationLogRequest;
 const DescribeOperationResultRequest = models.DescribeOperationResultRequest;
-const DeviceClassPartitionInfo = models.DeviceClassPartitionInfo;
+const AttachCamRoleResponse = models.AttachCamRoleResponse;
 const RecoverDevicesResponse = models.RecoverDevicesResponse;
-const ModifyDeviceAliasesResponse = models.ModifyDeviceAliasesResponse;
+const DetachCamRoleResponse = models.DetachCamRoleResponse;
 const ShutdownDevicesRequest = models.ShutdownDevicesRequest;
 const UnbindPsaTagRequest = models.UnbindPsaTagRequest;
 const ModifyCustomImageAttributeResponse = models.ModifyCustomImageAttributeResponse;
@@ -145,6 +150,7 @@ const DevicePositionInfo = models.DevicePositionInfo;
 const DeviceInfo = models.DeviceInfo;
 const ResetDevicePasswordResponse = models.ResetDevicePasswordResponse;
 const DescribeUserCmdTasksRequest = models.DescribeUserCmdTasksRequest;
+const DetachCamRoleRequest = models.DetachCamRoleRequest;
 const DescribeDeviceClassPartitionResponse = models.DescribeDeviceClassPartitionResponse;
 
 
@@ -167,6 +173,17 @@ class BmClient extends AbstractClient {
     DescribeUserCmds(req, cb) {
         let resp = new DescribeUserCmdsResponse();
         this.request("DescribeUserCmds", req, resp, cb);
+    }
+
+    /**
+     * 重启机器
+     * @param {RebootDevicesRequest} req
+     * @param {function(string, RebootDevicesResponse):void} cb
+     * @public
+     */
+    RebootDevices(req, cb) {
+        let resp = new RebootDevicesResponse();
+        this.request("RebootDevices", req, resp, cb);
     }
 
     /**
@@ -255,6 +272,17 @@ class BmClient extends AbstractClient {
     StartDevices(req, cb) {
         let resp = new StartDevicesResponse();
         this.request("StartDevices", req, resp, cb);
+    }
+
+    /**
+     * 重装操作系统
+     * @param {ReloadDeviceOsRequest} req
+     * @param {function(string, ReloadDeviceOsResponse):void} cb
+     * @public
+     */
+    ReloadDeviceOs(req, cb) {
+        let resp = new ReloadDeviceOsResponse();
+        this.request("ReloadDeviceOs", req, resp, cb);
     }
 
     /**
@@ -402,14 +430,25 @@ class BmClient extends AbstractClient {
     }
 
     /**
-     * 重启机器
-     * @param {RebootDevicesRequest} req
-     * @param {function(string, RebootDevicesResponse):void} cb
+     * 服务器绑定CAM角色
+     * @param {DetachCamRoleRequest} req
+     * @param {function(string, DetachCamRoleResponse):void} cb
      * @public
      */
-    RebootDevices(req, cb) {
-        let resp = new RebootDevicesResponse();
-        this.request("RebootDevices", req, resp, cb);
+    DetachCamRole(req, cb) {
+        let resp = new DetachCamRoleResponse();
+        this.request("DetachCamRole", req, resp, cb);
+    }
+
+    /**
+     * 服务器绑定CAM角色，该角色授权访问黑石物理服务器服务，为黑石物理服务器提供了访问资源的权限，如请求服务器的临时证书
+     * @param {AttachCamRoleRequest} req
+     * @param {function(string, AttachCamRoleResponse):void} cb
+     * @public
+     */
+    AttachCamRole(req, cb) {
+        let resp = new AttachCamRoleResponse();
+        this.request("AttachCamRole", req, resp, cb);
     }
 
     /**

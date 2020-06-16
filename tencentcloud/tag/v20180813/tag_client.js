@@ -19,27 +19,36 @@ const AbstractClient = require('../../common/abstract_client')
 const DescribeTagsResponse = models.DescribeTagsResponse;
 const DeleteTagRequest = models.DeleteTagRequest;
 const DeleteResourceTagResponse = models.DeleteResourceTagResponse;
+const DescribeResourceTagsByTagKeysRequest = models.DescribeResourceTagsByTagKeysRequest;
 const ModifyResourceTagsResponse = models.ModifyResourceTagsResponse;
 const DescribeTagKeysResponse = models.DescribeTagKeysResponse;
 const DescribeTagValuesRequest = models.DescribeTagValuesRequest;
 const ModifyResourceTagsRequest = models.ModifyResourceTagsRequest;
+const DescribeResourcesByTagsResponse = models.DescribeResourcesByTagsResponse;
 const DescribeTagKeysRequest = models.DescribeTagKeysRequest;
+const DescribeResourceTagsResponse = models.DescribeResourceTagsResponse;
 const DescribeResourceTagsByResourceIdsRequest = models.DescribeResourceTagsByResourceIdsRequest;
-const Tag = models.Tag;
+const DescribeResourceTagsByResourceIdsResponse = models.DescribeResourceTagsByResourceIdsResponse;
 const TagResource = models.TagResource;
 const DescribeTagsRequest = models.DescribeTagsRequest;
 const AddResourceTagRequest = models.AddResourceTagRequest;
 const CreateTagRequest = models.CreateTagRequest;
+const DescribeResourceTagsByTagKeysResponse = models.DescribeResourceTagsByTagKeysResponse;
+const TagFilter = models.TagFilter;
+const Tag = models.Tag;
+const DescribeResourceTagsRequest = models.DescribeResourceTagsRequest;
 const CreateTagResponse = models.CreateTagResponse;
-const DescribeResourceTagsByResourceIdsResponse = models.DescribeResourceTagsByResourceIdsResponse;
 const DeleteTagResponse = models.DeleteTagResponse;
+const ResourceIdTag = models.ResourceIdTag;
 const AddResourceTagResponse = models.AddResourceTagResponse;
 const UpdateResourceTagValueRequest = models.UpdateResourceTagValueRequest;
 const DescribeTagValuesResponse = models.DescribeTagValuesResponse;
 const DeleteResourceTagRequest = models.DeleteResourceTagRequest;
 const UpdateResourceTagValueResponse = models.UpdateResourceTagValueResponse;
 const TagKeyObject = models.TagKeyObject;
+const ResourceTag = models.ResourceTag;
 const TagWithDelete = models.TagWithDelete;
+const DescribeResourcesByTagsRequest = models.DescribeResourcesByTagsRequest;
 
 
 /**
@@ -52,6 +61,17 @@ class TagClient extends AbstractClient {
         super("tag.tencentcloudapi.com", "2018-08-13", credential, region, profile);
     }
     
+    /**
+     * 根据标签键获取资源标签
+     * @param {DescribeResourceTagsByTagKeysRequest} req
+     * @param {function(string, DescribeResourceTagsByTagKeysResponse):void} cb
+     * @public
+     */
+    DescribeResourceTagsByTagKeys(req, cb) {
+        let resp = new DescribeResourceTagsByTagKeysResponse();
+        this.request("DescribeResourceTagsByTagKeys", req, resp, cb);
+    }
+
     /**
      * 本接口用于修改资源已关联的标签值（标签键不变）
      * @param {UpdateResourceTagValueRequest} req
@@ -86,6 +106,40 @@ class TagClient extends AbstractClient {
     }
 
     /**
+     * 查询资源关联标签
+     * @param {DescribeResourceTagsRequest} req
+     * @param {function(string, DescribeResourceTagsResponse):void} cb
+     * @public
+     */
+    DescribeResourceTags(req, cb) {
+        let resp = new DescribeResourceTagsResponse();
+        this.request("DescribeResourceTags", req, resp, cb);
+    }
+
+    /**
+     * 本接口用于修改资源关联的所有标签
+     * @param {ModifyResourceTagsRequest} req
+     * @param {function(string, ModifyResourceTagsResponse):void} cb
+     * @public
+     */
+    ModifyResourceTags(req, cb) {
+        let resp = new ModifyResourceTagsResponse();
+        this.request("ModifyResourceTags", req, resp, cb);
+    }
+
+    /**
+     * 用于查询已建立的标签列表中的标签键。
+
+     * @param {DescribeTagKeysRequest} req
+     * @param {function(string, DescribeTagKeysResponse):void} cb
+     * @public
+     */
+    DescribeTagKeys(req, cb) {
+        let resp = new DescribeTagKeysResponse();
+        this.request("DescribeTagKeys", req, resp, cb);
+    }
+
+    /**
      * 本接口用于解除标签和资源的关联关系
      * @param {DeleteResourceTagRequest} req
      * @param {function(string, DeleteResourceTagResponse):void} cb
@@ -94,17 +148,6 @@ class TagClient extends AbstractClient {
     DeleteResourceTag(req, cb) {
         let resp = new DeleteResourceTagResponse();
         this.request("DeleteResourceTag", req, resp, cb);
-    }
-
-    /**
-     * 本接口用于创建一对标签键和标签值
-     * @param {CreateTagRequest} req
-     * @param {function(string, CreateTagResponse):void} cb
-     * @public
-     */
-    CreateTag(req, cb) {
-        let resp = new CreateTagResponse();
-        this.request("CreateTag", req, resp, cb);
     }
 
     /**
@@ -120,14 +163,14 @@ class TagClient extends AbstractClient {
     }
 
     /**
-     * 本接口用于修改资源关联的所有标签
-     * @param {ModifyResourceTagsRequest} req
-     * @param {function(string, ModifyResourceTagsResponse):void} cb
+     * 通过标签查询资源列表
+     * @param {DescribeResourcesByTagsRequest} req
+     * @param {function(string, DescribeResourcesByTagsResponse):void} cb
      * @public
      */
-    ModifyResourceTags(req, cb) {
-        let resp = new ModifyResourceTagsResponse();
-        this.request("ModifyResourceTags", req, resp, cb);
+    DescribeResourcesByTags(req, cb) {
+        let resp = new DescribeResourcesByTagsResponse();
+        this.request("DescribeResourcesByTags", req, resp, cb);
     }
 
     /**
@@ -153,15 +196,14 @@ class TagClient extends AbstractClient {
     }
 
     /**
-     * 用于查询已建立的标签列表中的标签键。
-
-     * @param {DescribeTagKeysRequest} req
-     * @param {function(string, DescribeTagKeysResponse):void} cb
+     * 本接口用于创建一对标签键和标签值
+     * @param {CreateTagRequest} req
+     * @param {function(string, CreateTagResponse):void} cb
      * @public
      */
-    DescribeTagKeys(req, cb) {
-        let resp = new DescribeTagKeysResponse();
-        this.request("DescribeTagKeys", req, resp, cb);
+    CreateTag(req, cb) {
+        let resp = new CreateTagResponse();
+        this.request("CreateTag", req, resp, cb);
     }
 
 

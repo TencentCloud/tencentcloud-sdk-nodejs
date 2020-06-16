@@ -17,6 +17,41 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * 描述预付费模式，即包年包月相关参数。包括购买时长和自动续费逻辑等。
+ * @class
+ */
+class ChargePrepaid extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36。
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * 自动续费标识。取值范围：<br><li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费<br><li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费<br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费<br><br>默认取值：NOTIFY_AND_AUTO_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
+         * @type {string || null}
+         */
+        this.RenewFlag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Period = 'Period' in params ? params.Period : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+
+    }
+}
+
+/**
  * 本地磁盘规格
  * @class
  */
@@ -48,6 +83,12 @@ class LocalDiskType extends  AbstractModel {
          */
         this.MaxSize = null;
 
+        /**
+         * 购买时本地盘是否为必选。取值范围：<br><li>REQUIRED：表示必选<br><li>OPTIONAL：表示可选。
+         * @type {string || null}
+         */
+        this.Required = null;
+
     }
 
     /**
@@ -61,6 +102,7 @@ class LocalDiskType extends  AbstractModel {
         this.PartitionType = 'PartitionType' in params ? params.PartitionType : null;
         this.MinSize = 'MinSize' in params ? params.MinSize : null;
         this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
+        this.Required = 'Required' in params ? params.Required : null;
 
     }
 }
@@ -102,7 +144,7 @@ class RenewInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/9388)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。
+         * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -184,13 +226,13 @@ class ModifyInstancesProjectRequest extends  AbstractModel {
         super();
 
         /**
-         * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/9388) API返回值中的`InstanceId`获取。每次请求允许操作的实例数量上限是100。
+         * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728) API返回值中的`InstanceId`获取。每次请求允许操作的实例数量上限是100。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
 
         /**
-         * 项目ID。项目可以使用[AddProject](https://cloud.tencent.com/doc/api/403/4398)接口创建。后续使用[DescribeInstances](https://cloud.tencent.com/document/api/213/9388)接口查询实例时，项目ID可用于过滤结果。
+         * 项目ID。项目可以使用[AddProject](https://cloud.tencent.com/doc/api/403/4398)接口创建。可通过[`DescribeProject`](https://cloud.tencent.com/document/product/378/4400) API返回值中的`projectId`获取。后续使用[DescribeInstances](https://cloud.tencent.com/document/api/213/15728)接口查询实例时，项目ID可用于过滤结果。
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -282,6 +324,12 @@ class HostResource extends  AbstractModel {
          */
         this.DiskAvailable = null;
 
+        /**
+         * cdh实例磁盘类型
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
     }
 
     /**
@@ -297,6 +345,7 @@ class HostResource extends  AbstractModel {
         this.MemAvailable = 'MemAvailable' in params ? params.MemAvailable : null;
         this.DiskTotal = 'DiskTotal' in params ? params.DiskTotal : null;
         this.DiskAvailable = 'DiskAvailable' in params ? params.DiskAvailable : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
 
     }
 }
@@ -310,7 +359,7 @@ class DeleteDisasterRecoverGroupsRequest extends  AbstractModel {
         super();
 
         /**
-         * 分散置放群组ID列表，可通过[DescribeDisasterRecoverGroups](https://cloud.tencent.com/document/api/213/17810)接口获取。
+         * 分散置放群组ID列表，可通过[DescribeDisasterRecoverGroups](https://cloud.tencent.com/document/api/213/17810)接口获取。每次请求允许操作的分散置放群组数量上限是100。
          * @type {Array.<string> || null}
          */
         this.DisasterRecoverGroupIds = null;
@@ -440,13 +489,13 @@ class CreateDisasterRecoverGroupResponse extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 置放群组内可容纳的云主机数量。
+         * 置放群组内可容纳的云服务器数量。
          * @type {number || null}
          */
         this.CvmQuotaTotal = null;
 
         /**
-         * 置放群组内已有的云主机数量。
+         * 置放群组内已有的云服务器数量。
          * @type {number || null}
          */
         this.CurrentNum = null;
@@ -580,7 +629,7 @@ class AssociateSecurityGroupsRequest extends  AbstractModel {
         this.SecurityGroupIds = null;
 
         /**
-         * 被绑定的`实例ID`，类似ins-lesecurk，支持指定多个实例。
+         * 被绑定的`实例ID`，类似ins-lesecurk，支持指定多个实例，每次请求批量实例的上限为100。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -609,7 +658,7 @@ class ResetInstancesTypeRequest extends  AbstractModel {
         super();
 
         /**
-         * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为1。
+         * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。本接口目前仅支持每次操作1个实例。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -621,7 +670,7 @@ class ResetInstancesTypeRequest extends  AbstractModel {
         this.InstanceType = null;
 
         /**
-         * 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机，然后再重置用户密码。取值范围：<br><li>TRUE：表示在正常关机失败后进行强制关机<br><li>FALSE：表示在正常关机失败后不进行强制关机<br><br>默认取值：FALSE。<br><br>强制关机的效果等同于关闭物理计算机的电源开关。强制关机可能会导致数据丢失或文件系统损坏，请仅在服务器不能正常关机时使用。
+         * 是否对运行中的实例选择强制关机。建议对运行中的实例先手动关机。取值范围：<br><li>TRUE：表示在正常关机失败后进行强制关机<br><li>FALSE：表示在正常关机失败后不进行强制关机<br><br>默认取值：FALSE。<br><br>强制关机的效果等同于关闭物理计算机的电源开关。强制关机可能会导致数据丢失或文件系统损坏，请仅在服务器不能正常关机时使用。
          * @type {boolean || null}
          */
         this.ForceStop = null;
@@ -728,7 +777,7 @@ class RunInstancesRequest extends  AbstractModel {
         this.Placement = null;
 
         /**
-         * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。镜像类型分为四种：<br/><li>公共镜像</li><li>自定义镜像</li><li>共享镜像</li><li>服务市场镜像</li><br/>可通过以下方式获取可用的镜像ID：<br/><li>`公共镜像`、`自定义镜像`、`共享镜像`的镜像ID可通过登录[控制台](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE)查询；`服务镜像市场`的镜像ID可通过[云市场](https://market.cloud.tencent.com/list)查询。</li><li>通过调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) ，取返回信息中的`ImageId`字段。</li>
+         * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。镜像类型分为四种：<br/><li>公共镜像</li><li>自定义镜像</li><li>共享镜像</li><li>服务市场镜像</li><br/>可通过以下方式获取可用的镜像ID：<br/><li>`公共镜像`、`自定义镜像`、`共享镜像`的镜像ID可通过登录[控制台](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE)查询；`服务镜像市场`的镜像ID可通过[云市场](https://market.cloud.tencent.com/list)查询。</li><li>通过调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) ，传入InstanceType获取当前机型支持的镜像列表，取返回信息中的`ImageId`字段。</li>
          * @type {string || null}
          */
         this.ImageId = null;
@@ -747,7 +796,7 @@ class RunInstancesRequest extends  AbstractModel {
 
         /**
          * 实例机型。不同实例机型指定了不同的资源规格。
-<br><li>对于付费模式为PREPAID或POSTPAID\_BY\_HOUR的实例创建，具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例类型](https://cloud.tencent.com/document/product/213/11518)描述。若不指定该参数，则默认机型为S1.SMALL1。<br><li>对于付费模式为CDHPAID的实例创建，该参数以"CDH_"为前缀，根据cpu和内存配置生成，具体形式为：CDH_XCXG，例如对于创建cpu为1核，内存为1G大小的专用宿主机的实例，该参数应该为CDH_1C1G。
+<br><li>对于付费模式为PREPAID或POSTPAID\_BY\_HOUR的实例创建，具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。若不指定该参数，则默认机型为S1.SMALL1。<br><li>对于付费模式为CDHPAID的实例创建，该参数以"CDH_"为前缀，根据CPU和内存配置生成，具体形式为：CDH_XCXG，例如对于创建CPU为1核，内存为1G大小的专用宿主机的实例，该参数应该为CDH_1C1G。
          * @type {string || null}
          */
         this.InstanceType = null;
@@ -759,13 +808,13 @@ class RunInstancesRequest extends  AbstractModel {
         this.SystemDisk = null;
 
         /**
-         * 实例数据盘配置信息。若不指定该参数，则默认不购买数据盘。支持购买的时候指定11块数据盘，其中最多包含1块LOCAL_BASIC数据盘或者LOCAL_SSD数据盘，最多包含10块CLOUD_BASIC数据盘、CLOUD_PREMIUM数据盘或者CLOUD_SSD数据盘。
+         * 实例数据盘配置信息。若不指定该参数，则默认不购买数据盘。支持购买的时候指定21块数据盘，其中最多包含1块LOCAL_BASIC数据盘或者LOCAL_SSD数据盘，最多包含20块CLOUD_BASIC数据盘、CLOUD_PREMIUM数据盘或者CLOUD_SSD数据盘。
          * @type {Array.<DataDisk> || null}
          */
         this.DataDisks = null;
 
         /**
-         * 私有网络相关信息配置。通过该参数可以指定私有网络的ID，子网ID等信息。若不指定该参数，则默认使用基础网络。若在此参数中指定了私有网络ip，表示每个实例的主网卡ip，而且InstanceCount参数必须与私有网络ip的个数一致。
+         * 私有网络相关信息配置。通过该参数可以指定私有网络的ID，子网ID等信息。若不指定该参数，则默认使用基础网络。若在此参数中指定了私有网络IP，表示每个实例的主网卡IP，而且InstanceCount参数必须与私有网络IP的个数一致。
          * @type {VirtualPrivateCloud || null}
          */
         this.VirtualPrivateCloud = null;
@@ -783,7 +832,7 @@ class RunInstancesRequest extends  AbstractModel {
         this.InstanceCount = null;
 
         /**
-         * 实例显示名称。<br><li>不指定实例显示名称则默认显示‘未命名’。</li><li>购买多台实例，如果指定模式串`{R:x}`，表示生成数字`[x, x+n-1]`，其中`n`表示购买实例的数量，例如`server_{R:3}`，购买1台时，实例显示名称为`server_3`；购买2台时，实例显示名称分别为`server_3`，`server_4`。支持指定多个模式串`{R:x}`。</li><li>购买多台实例，如果不指定模式串，则在实例显示名称添加后缀`1、2...n`，其中`n`表示购买实例的数量，例如`server_`，购买2台时，实例显示名称分别为`server_1`，`server_2`。
+         * 实例显示名称。<br><li>不指定实例显示名称则默认显示‘未命名’。</li><li>购买多台实例，如果指定模式串`{R:x}`，表示生成数字`[x, x+n-1]`，其中`n`表示购买实例的数量，例如`server_{R:3}`，购买1台时，实例显示名称为`server_3`；购买2台时，实例显示名称分别为`server_3`，`server_4`。支持指定多个模式串`{R:x}`。</li><li>购买多台实例，如果不指定模式串，则在实例显示名称添加后缀`1、2...n`，其中`n`表示购买实例的数量，例如`server_`，购买2台时，实例显示名称分别为`server_1`，`server_2`。</li><li>最多支持60个字符（包含模式串）。
          * @type {string || null}
          */
         this.InstanceName = null;
@@ -801,13 +850,13 @@ class RunInstancesRequest extends  AbstractModel {
         this.SecurityGroupIds = null;
 
         /**
-         * 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。若不指定该参数，则默认开启云监控、云安全服务。
+         * 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。若不指定该参数，则默认公共镜像开启云监控、云安全服务；自定义镜像与镜像市场镜像默认不开启云监控，云安全服务，而使用镜像里保留的服务。
          * @type {EnhancedService || null}
          */
         this.EnhancedService = null;
 
         /**
-         * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。<br>更多详细信息请参阅：如何保证幂等性。
+         * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
          * @type {string || null}
          */
         this.ClientToken = null;
@@ -831,7 +880,7 @@ class RunInstancesRequest extends  AbstractModel {
         this.DisasterRecoverGroupIds = null;
 
         /**
-         * 标签描述列表。通过指定该参数可以同时绑定标签到相应的资源实例，当前仅支持绑定标签到云主机实例。
+         * 标签描述列表。通过指定该参数可以同时绑定标签到相应的资源实例，当前仅支持绑定标签到云服务器实例。
          * @type {Array.<TagSpecification> || null}
          */
         this.TagSpecification = null;
@@ -847,6 +896,16 @@ class RunInstancesRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.UserData = null;
+
+        /**
+         * 是否只预检此次请求。
+true：发送检查请求，不会创建实例。检查项包括是否填写了必需参数，请求格式，业务限制和云服务器库存。
+如果检查不通过，则返回对应错误码；
+如果检查通过，则返回RequestId.
+false（默认）：发送正常请求，通过检查后直接创建实例
+         * @type {boolean || null}
+         */
+        this.DryRun = null;
 
     }
 
@@ -939,6 +998,7 @@ class RunInstancesRequest extends  AbstractModel {
             this.InstanceMarketOptions = obj;
         }
         this.UserData = 'UserData' in params ? params.UserData : null;
+        this.DryRun = 'DryRun' in params ? params.DryRun : null;
 
     }
 }
@@ -1108,7 +1168,7 @@ class SystemDisk extends  AbstractModel {
         super();
 
         /**
-         * 系统盘类型。系统盘类型限制详见[CVM实例配置](/document/product/213/2177)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><br>默认取值：CLOUD_BASIC。
+         * 系统盘类型。系统盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><br>默认取值：CLOUD_BASIC。
          * @type {string || null}
          */
         this.DiskType = null;
@@ -1150,20 +1210,20 @@ class ResetInstanceRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/9388) API返回值中的`InstanceId`获取。
+         * 实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) API返回值中的`InstanceId`获取。
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。镜像类型分为四种：<br/><li>公共镜像</li><li>自定义镜像</li><li>共享镜像</li><li>服务市场镜像</li><br/>可通过以下方式获取可用的镜像ID：<br/><li>`公共镜像`、`自定义镜像`、`共享镜像`的镜像ID可通过登录[控制台](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE)查询；`服务镜像市场`的镜像ID可通过[云市场](https://market.cloud.tencent.com/list)查询。</li><li>通过调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/9418) ，取返回信息中的`ImageId`字段。</li>
+         * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。镜像类型分为四种：<br/><li>公共镜像</li><li>自定义镜像</li><li>共享镜像</li><li>服务市场镜像</li><br/>可通过以下方式获取可用的镜像ID：<br/><li>`公共镜像`、`自定义镜像`、`共享镜像`的镜像ID可通过登录[控制台](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE)查询；`服务镜像市场`的镜像ID可通过[云市场](https://market.cloud.tencent.com/list)查询。</li><li>通过调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) ，取返回信息中的`ImageId`字段。</li>
 <br>默认取值：默认使用当前镜像。
          * @type {string || null}
          */
         this.ImageId = null;
 
         /**
-         * 实例系统盘配置信息。系统盘为云盘的实例可以通过该参数指定重装后的系统盘大小来实现对系统盘的扩容操作，若不指定则默认系统盘大小保持不变。系统盘大小只支持扩容不支持缩容；重装只支持修改系统盘的大小，不能修改系统盘的类型。
+         * 实例系统盘配置信息。系统盘为云盘的实例可以通过该参数指定重装后的系统盘大小来实现对系统盘的扩容操作，若不指定大小且原系统盘大小小于镜像大小，则会自动扩容，产生多余的磁盘费用。系统盘大小只支持扩容不支持缩容；重装只支持修改系统盘的大小，不能修改系统盘的类型。
          * @type {SystemDisk || null}
          */
         this.SystemDisk = null;
@@ -1181,7 +1241,7 @@ class ResetInstanceRequest extends  AbstractModel {
         this.EnhancedService = null;
 
         /**
-         * 重装系统时，可以指定修改实例的HostName。
+         * 重装系统时，可以指定修改实例的主机名。<br><li>点号（.）和短横线（-）不能作为 HostName 的首尾字符，不能连续使用。<br><li>Windows 实例：名字符长度为[2, 15]，允许字母（不限制大小写）、数字和短横线（-）组成，不支持点号（.），不能全是数字。<br><li>其他类型（Linux 等）实例：字符长度为[2, 60]，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。
          * @type {string || null}
          */
         this.HostName = null;
@@ -1264,6 +1324,12 @@ class InstanceTypeConfig extends  AbstractModel {
          */
         this.Memory = null;
 
+        /**
+         * FPGA核数，单位：核。
+         * @type {number || null}
+         */
+        this.FPGA = null;
+
     }
 
     /**
@@ -1279,6 +1345,7 @@ class InstanceTypeConfig extends  AbstractModel {
         this.GPU = 'GPU' in params ? params.GPU : null;
         this.CPU = 'CPU' in params ? params.CPU : null;
         this.Memory = 'Memory' in params ? params.Memory : null;
+        this.FPGA = 'FPGA' in params ? params.FPGA : null;
 
     }
 }
@@ -1310,7 +1377,7 @@ class AllocateHostsRequest extends  AbstractModel {
         this.HostChargePrepaid = null;
 
         /**
-         * 实例计费类型。目前仅支持：PREPAID（预付费，即包年包月模式）。
+         * 实例计费类型。目前仅支持：PREPAID（预付费，即包年包月模式），默认为：'PREPAID'。
          * @type {string || null}
          */
         this.HostChargeType = null;
@@ -1322,7 +1389,7 @@ class AllocateHostsRequest extends  AbstractModel {
         this.HostType = null;
 
         /**
-         * 购买CDH实例数量。
+         * 购买CDH实例数量，默认为：1。
          * @type {number || null}
          */
         this.HostCount = null;
@@ -1380,14 +1447,14 @@ class LoginSettings extends  AbstractModel {
         super();
 
         /**
-         * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到16位，至少包括两项[a-z，A-Z]、[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。<br><li>Windows实例密码必须12到16位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = { } [ ] : ; ' , . ? /]中的特殊符号。<br><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
+         * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到30位，至少包括两项[a-z]，[A-Z]、[0-9] 和 [( ) \` ~ ! @ # $ % ^ & *  - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。<br><li>Windows实例密码必须12到30位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /]中的特殊符号。<br><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Password = null;
 
         /**
-         * 密钥ID列表。关联密钥后，就可以通过对应的私钥来访问实例；KeyId可通过接口DescribeKeyPairs获取，密钥与密码不能同时指定，同时Windows操作系统不支持指定密钥。当前仅支持购买的时候指定一个密钥。
+         * 密钥ID列表。关联密钥后，就可以通过对应的私钥来访问实例；KeyId可通过接口[DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699)获取，密钥与密码不能同时指定，同时Windows操作系统不支持指定密钥。当前仅支持购买的时候指定一个密钥。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
@@ -1467,6 +1534,55 @@ class DescribeRegionsResponse extends  AbstractModel {
 }
 
 /**
+ * PurchaseReservedInstancesOffering请求参数结构体
+ * @class
+ */
+class PurchaseReservedInstancesOfferingRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 购买预留实例计费数量
+         * @type {number || null}
+         */
+        this.InstanceCount = null;
+
+        /**
+         * 预留实例计费配置ID
+         * @type {string || null}
+         */
+        this.ReservedInstancesOfferingId = null;
+
+        /**
+         * 试运行
+         * @type {boolean || null}
+         */
+        this.DryRun = null;
+
+        /**
+         * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。<br>更多详细信息请参阅：如何保证幂等性
+         * @type {string || null}
+         */
+        this.ClientToken = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
+        this.ReservedInstancesOfferingId = 'ReservedInstancesOfferingId' in params ? params.ReservedInstancesOfferingId : null;
+        this.DryRun = 'DryRun' in params ? params.DryRun : null;
+        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
+
+    }
+}
+
+/**
  * RebootInstances请求参数结构体
  * @class
  */
@@ -1475,7 +1591,7 @@ class RebootInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/9388)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。
+         * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -1600,7 +1716,7 @@ class DescribeInstancesStatusResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * [实例状态](https://cloud.tencent.com/document/api/213/15738) 列表。
+         * [实例状态](https://cloud.tencent.com/document/api/213/15753#InstanceStatus) 列表。
          * @type {Array.<InstanceStatus> || null}
          */
         this.InstanceStatusSet = null;
@@ -1682,6 +1798,8 @@ class ZoneInfo extends  AbstractModel {
 <li> na-toronto-1 </li>
 <li> na-ashburn-1 </li>
 <li> na-ashburn-2 </li>
+<li> ap-nanjing-1 </li>
+<li> ap-nanjing-2 </li>
          * @type {string || null}
          */
         this.Zone = null;
@@ -1827,14 +1945,14 @@ class ResetInstancesPasswordRequest extends  AbstractModel {
 
         /**
          * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：
-Linux实例密码必须8-30位，推荐使用12位以上密码，不能以“/”开头，至少包含以下字符中的三种不同字符，字符种类：<br><li>小写字母：[a-z]<br><li>大写字母：[A-Z]<br><li>数字：0-9<br><li>特殊字符： ()\`~!@#$%^&\*-+=\_|{}[]:;'<>,.?/:
-Windows实例密码必须12~30位，不能以“/”开头且不包括用户名，至少包含以下字符中的三种不同字符<br><li>小写字母：[a-z]<br><li>大写字母：[A-Z]<br><li>数字： 0-9<br><li>特殊字符：()\`~!@#$%^&\*-+=\_|{}[]:;' <>,.?/:<br><li>如果实例即包含`Linux`实例又包含`Windows`实例，则密码复杂度限制按照`Windows`实例的限制。
+Linux实例密码必须8-30位，推荐使用12位以上密码，不能以“/”开头，至少包含以下字符中的三种不同字符，字符种类：<br><li>小写字母：[a-z]<br><li>大写字母：[A-Z]<br><li>数字：0-9<br><li>特殊字符： ()\`~!@#$%^&\*-+=\_|{}[]:;'<>,.?/
+Windows实例密码必须12~30位，不能以“/”开头且不包括用户名，至少包含以下字符中的三种不同字符<br><li>小写字母：[a-z]<br><li>大写字母：[A-Z]<br><li>数字： 0-9<br><li>特殊字符：()\`~!@#$%^&\*-+=\_|{}[]:;' <>,.?/<br><li>如果实例即包含`Linux`实例又包含`Windows`实例，则密码复杂度限制按照`Windows`实例的限制。
          * @type {string || null}
          */
         this.Password = null;
 
         /**
-         * 待重置密码的实例操作系统用户名。不得超过64个字符。
+         * 待重置密码的实例操作系统的用户名。不得超过64个字符。
          * @type {string || null}
          */
         this.UserName = null;
@@ -1976,24 +2094,24 @@ class ModifyInstancesVpcAttributeResponse extends  AbstractModel {
 }
 
 /**
- * CreateKeyPair返回参数结构体
+ * InquiryPriceResetInstancesType请求参数结构体
  * @class
  */
-class CreateKeyPairResponse extends  AbstractModel {
+class InquiryPriceResetInstancesTypeRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 密钥对信息。
-         * @type {KeyPair || null}
+         * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。本接口每次请求批量实例的上限为1。
+         * @type {Array.<string> || null}
          */
-        this.KeyPair = null;
+        this.InstanceIds = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 实例机型。不同实例机型指定了不同的资源规格，具体取值可参见附表[实例资源规格](https://cloud.tencent.com/document/product/213/11518)对照表，也可以调用查询[实例资源规格列表](https://cloud.tencent.com/document/product/213/15749)接口获得最新的规格表。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceType = null;
 
     }
 
@@ -2004,13 +2122,8 @@ class CreateKeyPairResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.KeyPair) {
-            let obj = new KeyPair();
-            obj.deserialize(params.KeyPair)
-            this.KeyPair = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
 
     }
 }
@@ -2024,7 +2137,7 @@ class DescribeInstancesOperationLimitRequest extends  AbstractModel {
         super();
 
         /**
-         * 按照一个或者多个实例ID查询，可通过[DescribeInstances](https://cloud.tencent.com/document/api/213/9388)API返回值中的InstanceId获取。实例ID形如：ins-xxxxxxxx。（此参数的具体格式可参考API[简介](https://cloud.tencent.com/document/api/213/15688)的id.N一节）。每次请求的实例的上限为100。
+         * 按照一个或者多个实例ID查询，可通过[DescribeInstances](https://cloud.tencent.com/document/api/213/15728)API返回值中的InstanceId获取。实例ID形如：ins-xxxxxxxx。（此参数的具体格式可参考API[简介](https://cloud.tencent.com/document/api/213/15688)的ids.N一节）。每次请求的实例的上限为100。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -2060,7 +2173,7 @@ class ModifyInstancesChargeTypeRequest extends  AbstractModel {
         super();
 
         /**
-         * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/9388)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。
+         * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -2135,7 +2248,7 @@ class ModifyImageSharePermissionRequest extends  AbstractModel {
         super();
 
         /**
-         * 镜像ID，形如`img-gvbnzy6f`。镜像Id可以通过如下方式获取：<br><li>通过[DescribeImages](https://cloud.tencent.com/document/api/213/15715)接口返回的`ImageId`获取。<br><li>通过[镜像控制台](https://console.cloud.tencent.com/cvm/image)获取。 <br>镜像ID必须指定为状态为`NORMAL`的镜像。镜像状态请参考[镜像数据表](/document/api/213/9452#image_state)。
+         * 镜像ID，形如`img-gvbnzy6f`。镜像Id可以通过如下方式获取：<br><li>通过[DescribeImages](https://cloud.tencent.com/document/api/213/15715)接口返回的`ImageId`获取。<br><li>通过[镜像控制台](https://console.cloud.tencent.com/cvm/image)获取。 <br>镜像ID必须指定为状态为`NORMAL`的镜像。镜像状态请参考[镜像数据表](https://cloud.tencent.com/document/product/213/15753#Image)。
          * @type {string || null}
          */
         this.ImageId = null;
@@ -2211,7 +2324,7 @@ class InquiryPriceResizeInstanceDisksRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 待扩容的数据盘配置信息。只支持扩容非弹性数据盘（[`DescribeDisks`](https://cloud.tencent.com/document/api/362/16315)接口返回值中的`Portable`为`false`表示非弹性），且[数据盘类型](/document/api/213/9452#block_device)为：`CLOUD_BASIC`、`CLOUD_PREMIUM`、`CLOUD_SSD`。数据盘容量单位：GB。最小扩容步长：10G。关于数据盘类型的选择请参考硬盘产品简介。可选数据盘类型受到实例类型`InstanceType`限制。另外允许扩容的最大容量也因数据盘类型的不同而有所差异。
+         * 待扩容的数据盘配置信息。只支持扩容非弹性数据盘（[`DescribeDisks`](https://cloud.tencent.com/document/api/362/16315)接口返回值中的`Portable`为`false`表示非弹性），且[数据盘类型](https://cloud.tencent.com/document/product/213/15753#DataDisk)为：`CLOUD_BASIC`、`CLOUD_PREMIUM`、`CLOUD_SSD`。数据盘容量单位：GB。最小扩容步长：10G。关于数据盘类型的选择请参考硬盘产品简介。可选数据盘类型受到实例类型`InstanceType`限制。另外允许扩容的最大容量也因数据盘类型的不同而有所差异。
          * @type {Array.<DataDisk> || null}
          */
         this.DataDisks = null;
@@ -2488,7 +2601,7 @@ class ModifyInstancesAttributeRequest extends  AbstractModel {
         super();
 
         /**
-         * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/9388) API返回值中的`InstanceId`获取。每次请求允许操作的实例数量上限是100。
+         * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728) API返回值中的`InstanceId`获取。每次请求允许操作的实例数量上限是100。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -2530,7 +2643,7 @@ class RenewHostsRequest extends  AbstractModel {
         super();
 
         /**
-         * 一个或多个待操作的CDH实例ID。
+         * 一个或多个待操作的CDH实例ID。每次请求的CDH实例的上限为100。
          * @type {Array.<string> || null}
          */
         this.HostIds = null;
@@ -2697,7 +2810,7 @@ class Placement extends  AbstractModel {
         super();
 
         /**
-         * 实例所属的[可用区](/document/product/213/9452#zone)ID。该参数也可以通过调用  [DescribeZones](/document/api/213/9455) 的返回值中的Zone字段来获取。
+         * 实例所属的[可用区](https://cloud.tencent.com/document/product/213/15753#ZoneInfo)ID。该参数也可以通过调用  [DescribeZones](https://cloud.tencent.com/document/product/213/15707) 的返回值中的Zone字段来获取。
          * @type {string || null}
          */
         this.Zone = null;
@@ -2709,7 +2822,7 @@ class Placement extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * 实例所属的专用宿主机ID列表。如果您有购买专用宿主机并且指定了该参数，则您购买的实例就会随机的部署在这些专用宿主机上。
+         * 实例所属的专用宿主机ID列表，仅用于入参。如果您有购买专用宿主机并且指定了该参数，则您购买的实例就会随机的部署在这些专用宿主机上。
          * @type {Array.<string> || null}
          */
         this.HostIds = null;
@@ -2719,6 +2832,12 @@ class Placement extends  AbstractModel {
          * @type {Array.<string> || null}
          */
         this.HostIps = null;
+
+        /**
+         * 实例所属的专用宿主机ID，仅用于出参。
+         * @type {string || null}
+         */
+        this.HostId = null;
 
     }
 
@@ -2733,6 +2852,7 @@ class Placement extends  AbstractModel {
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.HostIds = 'HostIds' in params ? params.HostIds : null;
         this.HostIps = 'HostIps' in params ? params.HostIps : null;
+        this.HostId = 'HostId' in params ? params.HostId : null;
 
     }
 }
@@ -2746,7 +2866,7 @@ class DescribeDisasterRecoverGroupsRequest extends  AbstractModel {
         super();
 
         /**
-         * 分散置放群组ID列表。
+         * 分散置放群组ID列表。每次请求允许操作的分散置放群组数量上限是100。
          * @type {Array.<string> || null}
          */
         this.DisasterRecoverGroupIds = null;
@@ -2795,7 +2915,7 @@ class SyncImagesRequest extends  AbstractModel {
         super();
 
         /**
-         * 镜像ID列表 ，镜像ID可以通过如下方式获取：<br><li>通过[DescribeImages](https://cloud.tencent.com/document/api/213/15715)接口返回的`ImageId`获取。<br><li>通过[镜像控制台](https://console.cloud.tencent.com/cvm/image)获取。<br>镜像ID必须满足限制：<br><li>镜像ID对应的镜像状态必须为`NORMAL`。<br><li>镜像大小小于50GB。<br>镜像状态请参考[镜像数据表](/document/api/213/9452#image_state)。
+         * 镜像ID列表 ，镜像ID可以通过如下方式获取：<br><li>通过[DescribeImages](https://cloud.tencent.com/document/api/213/15715)接口返回的`ImageId`获取。<br><li>通过[镜像控制台](https://console.cloud.tencent.com/cvm/image)获取。<br>镜像ID必须满足限制：<br><li>镜像ID对应的镜像状态必须为`NORMAL`。<br><li>镜像大小小于50GB。<br>镜像状态请参考[镜像数据表](https://cloud.tencent.com/document/product/213/15753#Image)。
          * @type {Array.<string> || null}
          */
         this.ImageIds = null;
@@ -2936,6 +3056,13 @@ class CreateImageResponse extends  AbstractModel {
         super();
 
         /**
+         * 镜像ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -2950,6 +3077,7 @@ class CreateImageResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3126,7 +3254,7 @@ class InquiryPriceRunInstancesRequest extends  AbstractModel {
         this.ImageId = null;
 
         /**
-         * 实例[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br>默认值：POSTPAID_BY_HOUR。
+         * 实例[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br><li>SPOTPAID：竞价付费<br>默认值：POSTPAID_BY_HOUR。
          * @type {string || null}
          */
         this.InstanceChargeType = null;
@@ -3138,7 +3266,7 @@ class InquiryPriceRunInstancesRequest extends  AbstractModel {
         this.InstanceChargePrepaid = null;
 
         /**
-         * 实例机型。不同实例机型指定了不同的资源规格，具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[CVM实例配置](https://cloud.tencent.com/document/product/213/2177)描述。若不指定该参数，则默认机型为S1.SMALL1。
+         * 实例机型。不同实例机型指定了不同的资源规格，具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。若不指定该参数，则默认机型为S1.SMALL1。
          * @type {string || null}
          */
         this.InstanceType = null;
@@ -3150,13 +3278,13 @@ class InquiryPriceRunInstancesRequest extends  AbstractModel {
         this.SystemDisk = null;
 
         /**
-         * 实例数据盘配置信息。若不指定该参数，则默认不购买数据盘。支持购买的时候指定11块数据盘，其中最多包含1块LOCAL_BASIC数据盘或者LOCAL_SSD数据盘，最多包含10块CLOUD_BASIC数据盘、CLOUD_PREMIUM数据盘或者CLOUD_SSD数据盘。
+         * 实例数据盘配置信息。若不指定该参数，则默认不购买数据盘。支持购买的时候指定21块数据盘，其中最多包含1块LOCAL_BASIC数据盘或者LOCAL_SSD数据盘，最多包含20块CLOUD_BASIC数据盘、CLOUD_PREMIUM数据盘或者CLOUD_SSD数据盘。
          * @type {Array.<DataDisk> || null}
          */
         this.DataDisks = null;
 
         /**
-         * 私有网络相关信息配置。通过该参数可以指定私有网络的ID，子网ID等信息。若不指定该参数，则默认使用基础网络。若在此参数中指定了私有网络ip，那么InstanceCount参数只能为1。
+         * 私有网络相关信息配置。通过该参数可以指定私有网络的ID，子网ID等信息。若不指定该参数，则默认使用基础网络。若在此参数中指定了私有网络IP，那么InstanceCount参数只能为1。
          * @type {VirtualPrivateCloud || null}
          */
         this.VirtualPrivateCloud = null;
@@ -3174,7 +3302,7 @@ class InquiryPriceRunInstancesRequest extends  AbstractModel {
         this.InstanceCount = null;
 
         /**
-         * 实例显示名称。<br><li>不指定实例显示名称则默认显示‘未命名’。</li><li>购买多台实例，如果指定模式串`{R:x}`，表示生成数字`[x, x+n-1]`，其中`n`表示购买实例的数量，例如`server_{R:3}`，购买1台时，实例显示名称为`server_3`；购买2台时，实例显示名称分别为`server_3`，`server_4`。支持指定多个模式串`{R:x}`。</li><li>购买多台实例，如果不指定模式串，则在实例显示名称添加后缀`1、2...n`，其中`n`表示购买实例的数量，例如`server_`，购买2台时，实例显示名称分别为`server_1`，`server_2`。
+         * 实例显示名称。<br><li>不指定实例显示名称则默认显示‘未命名’。</li><li>购买多台实例，如果指定模式串`{R:x}`，表示生成数字`[x, x+n-1]`，其中`n`表示购买实例的数量，例如`server_{R:3}`，购买1台时，实例显示名称为`server_3`；购买2台时，实例显示名称分别为`server_3`，`server_4`。支持指定多个模式串`{R:x}`。</li><li>购买多台实例，如果不指定模式串，则在实例显示名称添加后缀`1、2...n`，其中`n`表示购买实例的数量，例如`server_`，购买2台时，实例显示名称分别为`server_1`，`server_2`。</li><li>最多支持60个字符（包含模式串）。
          * @type {string || null}
          */
         this.InstanceName = null;
@@ -3210,7 +3338,7 @@ class InquiryPriceRunInstancesRequest extends  AbstractModel {
         this.HostName = null;
 
         /**
-         * 标签描述列表。通过指定该参数可以同时绑定标签到相应的资源实例，当前仅支持绑定标签到云主机实例。
+         * 标签描述列表。通过指定该参数可以同时绑定标签到相应的资源实例，当前仅支持绑定标签到云服务器实例。
          * @type {Array.<TagSpecification> || null}
          */
         this.TagSpecification = null;
@@ -3365,7 +3493,14 @@ class Image extends  AbstractModel {
         this.Architecture = null;
 
         /**
-         * 镜像状态
+         * 镜像状态:
+CREATING-创建中
+NORMAL-正常
+CREATEFAILED-创建失败
+USING-使用中
+SYNCING-同步中
+IMPORTING-导入中
+IMPORTFAILED-导入失败
          * @type {string || null}
          */
         this.ImageState = null;
@@ -3572,6 +3707,56 @@ class CreateDisasterRecoverGroupRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeReservedInstances返回参数结构体
+ * @class
+ */
+class DescribeReservedInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合条件的预留实例计费数量。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 符合条件的预留实例计费列表。
+         * @type {Array.<ReservedInstances> || null}
+         */
+        this.ReservedInstancesSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ReservedInstancesSet) {
+            this.ReservedInstancesSet = new Array();
+            for (let z in params.ReservedInstancesSet) {
+                let obj = new ReservedInstances();
+                obj.deserialize(params.ReservedInstancesSet[z]);
+                this.ReservedInstancesSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeImportImageOs返回参数结构体
  * @class
  */
@@ -3663,19 +3848,19 @@ class DataDisk extends  AbstractModel {
         super();
 
         /**
-         * 数据盘大小，单位：GB。最小调整步长为10G，不同数据盘类型取值范围不同，具体限制详见：[CVM实例配置](/document/product/213/2177)。默认值为0，表示不购买数据盘。更多限制详见产品文档。
+         * 数据盘大小，单位：GB。最小调整步长为10G，不同数据盘类型取值范围不同，具体限制详见：[存储概述](https://cloud.tencent.com/document/product/213/4952)。默认值为0，表示不购买数据盘。更多限制详见产品文档。
          * @type {number || null}
          */
         this.DiskSize = null;
 
         /**
-         * 数据盘类型。数据盘类型限制详见[CVM实例配置](/document/product/213/2177)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><br>默认取值：LOCAL_BASIC。<br><br>该参数对`ResizeInstanceDisk`接口无效。
+         * 数据盘类型。数据盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><br>默认取值：LOCAL_BASIC。<br><br>该参数对`ResizeInstanceDisk`接口无效。
          * @type {string || null}
          */
         this.DiskType = null;
 
         /**
-         * 数据盘ID。LOCAL_BASIC 和 LOCAL_SSD 类型没有ID。暂时不支持该参数。
+         * 数据盘ID。LOCAL_BASIC 和 LOCAL_SSD 类型没有ID，暂时不支持该参数。
          * @type {string || null}
          */
         this.DiskId = null;
@@ -3698,6 +3883,17 @@ class DataDisk extends  AbstractModel {
          */
         this.SnapshotId = null;
 
+        /**
+         * 数据盘是加密。取值范围：
+<li>TRUE：加密
+<li>FALSE：不加密<br>
+默认取值：FALSE<br>
+该参数目前仅用于 `RunInstances` 接口。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Encrypt = null;
+
     }
 
     /**
@@ -3712,6 +3908,7 @@ class DataDisk extends  AbstractModel {
         this.DiskId = 'DiskId' in params ? params.DiskId : null;
         this.DeleteWithInstance = 'DeleteWithInstance' in params ? params.DeleteWithInstance : null;
         this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
+        this.Encrypt = 'Encrypt' in params ? params.Encrypt : null;
 
     }
 }
@@ -3784,7 +3981,7 @@ class OperationCountLimit extends  AbstractModel {
         super();
 
         /**
-         * 实例操作。
+         * 实例操作。取值范围：<br><li>`INSTANCE_DEGRADE`：降配操作<br><li>`INTERNET_CHARGE_TYPE_CHANGE`：修改网络带宽计费模式
          * @type {string || null}
          */
         this.Operation = null;
@@ -3991,7 +4188,7 @@ class Externals extends  AbstractModel {
         this.ReleaseAddress = null;
 
         /**
-         * 不支持的网络类型
+         * 不支持的网络类型，取值范围：<br><li>BASIC：基础网络<br><li>VPC1.0：私有网络VPC1.0
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
@@ -4087,7 +4284,7 @@ class CreateImageRequest extends  AbstractModel {
         this.ImageName = null;
 
         /**
-         * 需要制作镜像的实例ID
+         * 需要制作镜像的实例ID。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -4099,7 +4296,8 @@ class CreateImageRequest extends  AbstractModel {
         this.ImageDescription = null;
 
         /**
-         * 软关机失败时是否执行强制关机以制作镜像
+         * 是否执行强制关机以制作镜像。
+取值范围：<br><li>TRUE：表示关机之后制作镜像<br><li>FALSE：表示开机状态制作镜像<br><br>默认取值：FALSE。<br><br>开机状态制作镜像，可能导致部分数据未备份，影响数据安全。
          * @type {string || null}
          */
         this.ForcePoweroff = null;
@@ -4111,25 +4309,19 @@ class CreateImageRequest extends  AbstractModel {
         this.Sysprep = null;
 
         /**
-         * 实例处于运行中时，是否允许关机执行制作镜像任务。
-         * @type {string || null}
-         */
-        this.Reboot = null;
-
-        /**
-         * 实例需要制作镜像的数据盘Id
+         * 基于实例创建整机镜像时，指定包含在镜像里的数据盘Id
          * @type {Array.<string> || null}
          */
         this.DataDiskIds = null;
 
         /**
-         * 需要制作镜像的快照Id,必须包含一个系统盘快照
+         * 基于快照创建镜像，指定快照ID，必须包含一个系统盘快照。不可与InstanceId同时传入。
          * @type {Array.<string> || null}
          */
         this.SnapshotIds = null;
 
         /**
-         * 检测请求的合法性，但不会对操作的资源产生任何影响
+         * 检测本次请求的是否成功，但不会对操作的资源产生任何影响
          * @type {boolean || null}
          */
         this.DryRun = null;
@@ -4148,7 +4340,6 @@ class CreateImageRequest extends  AbstractModel {
         this.ImageDescription = 'ImageDescription' in params ? params.ImageDescription : null;
         this.ForcePoweroff = 'ForcePoweroff' in params ? params.ForcePoweroff : null;
         this.Sysprep = 'Sysprep' in params ? params.Sysprep : null;
-        this.Reboot = 'Reboot' in params ? params.Reboot : null;
         this.DataDiskIds = 'DataDiskIds' in params ? params.DataDiskIds : null;
         this.SnapshotIds = 'SnapshotIds' in params ? params.SnapshotIds : null;
         this.DryRun = 'DryRun' in params ? params.DryRun : null;
@@ -4257,6 +4448,7 @@ class Instance extends  AbstractModel {
 
         /**
          * 自动续费标识。取值范围：<br><li>`NOTIFY_AND_MANUAL_RENEW`：表示通知即将过期，但不自动续费<br><li>`NOTIFY_AND_AUTO_RENEW`：表示通知即将过期，而且自动续费<br><li>`DISABLE_NOTIFY_AND_MANUAL_RENEW`：表示不通知即将过期，也不自动续费。
+<br><li>注意：后付费模式本项为null
          * @type {string || null}
          */
         this.RenewFlag = null;
@@ -4268,7 +4460,7 @@ class Instance extends  AbstractModel {
         this.CreatedTime = null;
 
         /**
-         * 到期时间。按照`ISO8601`标准表示，并且使用`UTC`时间。格式为：`YYYY-MM-DDThh:mm:ssZ`。
+         * 到期时间。按照`ISO8601`标准表示，并且使用`UTC`时间。格式为：`YYYY-MM-DDThh:mm:ssZ`。注意：后付费模式本项为null
          * @type {string || null}
          */
         this.ExpiredTime = null;
@@ -4309,6 +4501,54 @@ class Instance extends  AbstractModel {
          * @type {string || null}
          */
         this.StopChargingMode = null;
+
+        /**
+         * 实例全局唯一ID
+         * @type {string || null}
+         */
+        this.Uuid = null;
+
+        /**
+         * 实例的最新操作。例：StopInstances、ResetInstance。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LatestOperation = null;
+
+        /**
+         * 实例的最新操作状态。取值范围：<br><li>SUCCESS：表示操作成功<br><li>OPERATING：表示操作执行中<br><li>FAILED：表示操作失败
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LatestOperationState = null;
+
+        /**
+         * 实例最新操作的唯一请求 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LatestOperationRequestId = null;
+
+        /**
+         * 分散置放群组ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DisasterRecoverGroupId = null;
+
+        /**
+         * 实例的IPv6地址。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.IPv6Addresses = null;
+
+        /**
+         * CAM角色名。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CamRoleName = null;
 
     }
 
@@ -4384,6 +4624,13 @@ class Instance extends  AbstractModel {
             }
         }
         this.StopChargingMode = 'StopChargingMode' in params ? params.StopChargingMode : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.LatestOperation = 'LatestOperation' in params ? params.LatestOperation : null;
+        this.LatestOperationState = 'LatestOperationState' in params ? params.LatestOperationState : null;
+        this.LatestOperationRequestId = 'LatestOperationRequestId' in params ? params.LatestOperationRequestId : null;
+        this.DisasterRecoverGroupId = 'DisasterRecoverGroupId' in params ? params.DisasterRecoverGroupId : null;
+        this.IPv6Addresses = 'IPv6Addresses' in params ? params.IPv6Addresses : null;
+        this.CamRoleName = 'CamRoleName' in params ? params.CamRoleName : null;
 
     }
 }
@@ -4434,24 +4681,24 @@ class EnhancedService extends  AbstractModel {
 }
 
 /**
- * InquiryPriceResetInstancesType请求参数结构体
+ * CreateKeyPair返回参数结构体
  * @class
  */
-class InquiryPriceResetInstancesTypeRequest extends  AbstractModel {
+class CreateKeyPairResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为1。
-         * @type {Array.<string> || null}
+         * 密钥对信息。
+         * @type {KeyPair || null}
          */
-        this.InstanceIds = null;
+        this.KeyPair = null;
 
         /**
-         * 实例机型。不同实例机型指定了不同的资源规格，具体取值可参见附表实例资源规格对照表，也可以调用查询实例资源规格列表接口获得最新的规格表。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.InstanceType = null;
+        this.RequestId = null;
 
     }
 
@@ -4462,8 +4709,13 @@ class InquiryPriceResetInstancesTypeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
-        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+
+        if (params.KeyPair) {
+            let obj = new KeyPair();
+            obj.deserialize(params.KeyPair)
+            this.KeyPair = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4499,6 +4751,93 @@ class DescribeInstanceVncUrlResponse extends  AbstractModel {
         }
         this.InstanceVncUrl = 'InstanceVncUrl' in params ? params.InstanceVncUrl : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeReservedInstancesOfferings请求参数结构体
+ * @class
+ */
+class DescribeReservedInstancesOfferingsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 试运行, 默认为 false。
+         * @type {boolean || null}
+         */
+        this.DryRun = null;
+
+        /**
+         * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 以最大有效期作为过滤参数。
+计量单位: 秒
+默认为 94608000。
+         * @type {number || null}
+         */
+        this.MaxDuration = null;
+
+        /**
+         * 以最小有效期作为过滤参数。
+计量单位: 秒
+默认为 2592000。
+         * @type {number || null}
+         */
+        this.MinDuration = null;
+
+        /**
+         * <li><strong>zone</strong></li>
+<p style="padding-left: 30px;">按照预留实例计费可购买的【<strong>可用区</strong>】进行过滤。形如：ap-guangzhou-1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p>
+<li><strong>duration</strong></li>
+<p style="padding-left: 30px;">按照预留实例计费【<strong>有效期</strong>】即预留实例计费购买时长进行过滤。形如：31536000。</p><p style="padding-left: 30px;">类型：Integer</p><p style="padding-left: 30px;">计量单位：秒</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：31536000 (1年) | 94608000（3年）</p>
+<li><strong>instance-type</strong></li>
+<p style="padding-left: 30px;">按照【<strong>预留实例计费类型</strong>】进行过滤。形如：S3.MEDIUM4。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/11518">预留实例计费类型列表</a></p>
+<li><strong>offering-type</strong></li>
+<p style="padding-left: 30px;">按照【<strong>付款类型</strong>】进行过滤。形如：All Upfront (预付全部费用)。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：All Upfront (预付全部费用)</p>
+<li><strong>product-description</strong></li>
+<p style="padding-left: 30px;">按照预留实例计费的【<strong>平台描述</strong>】（即操作系统）进行过滤。形如：linux。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：linux</p>
+<li><strong>reserved-instances-offering-id</strong></li>
+<p style="padding-left: 30px;">按照【<strong>预留实例计费配置ID</strong>】进行过滤。形如：650c138f-ae7e-4750-952a-96841d6e9fc1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DryRun = 'DryRun' in params ? params.DryRun : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.MaxDuration = 'MaxDuration' in params ? params.MaxDuration : null;
+        this.MinDuration = 'MinDuration' in params ? params.MinDuration : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -4961,7 +5300,7 @@ class CreateKeyPairRequest extends  AbstractModel {
 }
 
 /**
- * 描述实例的状态。状态类型详见[实例状态表](/document/api/213/9452#INSTANCE_STATE)
+ * 描述实例的状态。状态类型详见[实例状态表](/document/api/213/15753#InstanceStatus)
  * @class
  */
 class InstanceStatus extends  AbstractModel {
@@ -4975,7 +5314,7 @@ class InstanceStatus extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * [实例状态](/document/api/213/9452#INSTANCE_STATE)。
+         * 实例状态。取值范围：<br><li>PENDING：表示创建中<br></li><li>LAUNCH_FAILED：表示创建失败<br></li><li>RUNNING：表示运行中<br></li><li>STOPPED：表示关机<br></li><li>STARTING：表示开机中<br></li><li>STOPPING：表示关机中<br></li><li>REBOOTING：表示重启中<br></li><li>SHUTDOWN：表示停止待销毁<br></li><li>TERMINATING：表示销毁中。<br></li>
          * @type {string || null}
          */
         this.InstanceState = null;
@@ -5125,19 +5464,19 @@ class DisasterRecoverGroup extends  AbstractModel {
         this.Type = null;
 
         /**
-         * 分散置放群组内最大容纳云主机数量。
+         * 分散置放群组内最大容纳云服务器数量。
          * @type {number || null}
          */
         this.CvmQuotaTotal = null;
 
         /**
-         * 分散置放群组内云主机当前数量。
+         * 分散置放群组内云服务器当前数量。
          * @type {number || null}
          */
         this.CurrentNum = null;
 
         /**
-         * 分散置放群组内，云主机id列表。
+         * 分散置放群组内，云服务器id列表。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
@@ -5219,9 +5558,10 @@ class DescribeInstanceTypeConfigsRequest extends  AbstractModel {
         super();
 
         /**
-         * 过滤条件。
-<li> zone - String - 是否必填：否 -（过滤条件）按照[可用区](https://cloud.tencent.com/document/api/213/9452#zone)过滤。</li>
-<li> instance-family - String - 是否必填：否 -（过滤条件）按照实例机型系列过滤。实例机型系列形如：S1、I1、M1等。</li>
+         * <li><strong>zone</strong></li>
+<p style="padding-left: 30px;">按照【<strong>可用区</strong>】进行过滤。可用区形如：ap-guangzhou-1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p>
+<li><strong>instance-family</strong></li>
+<p style="padding-left: 30px;">按照【<strong>实例机型系列</strong>】进行过滤。实例机型系列形如：S1、I1、M1等。</p><p style="padding-left: 30px;">类型：Integer</p><p style="padding-left: 30px;">必选：否</p>
 每次请求的`Filters`的上限为10，`Filter.Values`的上限为1。
          * @type {Array.<Filter> || null}
          */
@@ -5384,7 +5724,7 @@ class ModifyInstancesVpcAttributeRequest extends  AbstractModel {
         this.InstanceIds = null;
 
         /**
-         * 私有网络相关信息配置。通过该参数指定私有网络的ID，子网ID，私有网络ip等信息。当指定私有网络ID和子网ID（子网必须在实例所在的可用区）与指定实例所在私有网络不一致时，会将实例迁移至指定的私有网络的子网下。可通过`PrivateIpAddresses`指定私有网络子网IP，若需指定则所有已指定的实例均需要指定子网IP，此时`InstanceIds`与`PrivateIpAddresses`一一对应。不指定`PrivateIpAddresses`时随机分配私有网络子网IP。
+         * 私有网络相关信息配置，通过该参数指定私有网络的ID，子网ID，私有网络ip等信息。<br><li>当指定私有网络ID和子网ID（子网必须在实例所在的可用区）与指定实例所在私有网络不一致时，会将实例迁移至指定的私有网络的子网下。<br><li>可通过`PrivateIpAddresses`指定私有网络子网IP，若需指定则所有已指定的实例均需要指定子网IP，此时`InstanceIds`与`PrivateIpAddresses`一一对应。<br><li>不指定`PrivateIpAddresses`时随机分配私有网络子网IP。
          * @type {VirtualPrivateCloud || null}
          */
         this.VirtualPrivateCloud = null;
@@ -5424,24 +5764,50 @@ class ModifyInstancesVpcAttributeRequest extends  AbstractModel {
 }
 
 /**
- * 描述预付费模式，即包年包月相关参数。包括购买时长和自动续费逻辑等。
+ * DescribeReservedInstances请求参数结构体
  * @class
  */
-class ChargePrepaid extends  AbstractModel {
+class DescribeReservedInstancesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36。
-         * @type {number || null}
+         * 试运行。默认为 false。
+         * @type {boolean || null}
          */
-        this.Period = null;
+        this.DryRun = null;
 
         /**
-         * 自动续费标识。取值范围：<br><li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费<br><li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费<br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费<br><br>默认取值：NOTIFY_AND_AUTO_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
-         * @type {string || null}
+         * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+         * @type {number || null}
          */
-        this.RenewFlag = null;
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * <li><strong>zone</strong></li>
+<p style="padding-left: 30px;">按照预留实例计费可购买的【<strong>可用区</strong>】进行过滤。形如：ap-guangzhou-1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p>
+<li><strong>duration</strong></li>
+<p style="padding-left: 30px;">按照预留实例计费【<strong>有效期</strong>】即预留实例计费购买时长进行过滤。形如：31536000。</p><p style="padding-left: 30px;">类型：Integer</p><p style="padding-left: 30px;">计量单位：秒</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：31536000 (1年) | 94608000（3年）</p>
+<li><strong>instance-type</strong></li>
+<p style="padding-left: 30px;">按照【<strong>预留实例计费类型</strong>】进行过滤。形如：S3.MEDIUM4。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/11518">预留实例计费类型列表</a></p>
+<li><strong>offering-type</strong></li>
+<p style="padding-left: 30px;">按照【<strong>付款类型</strong>】进行过滤。形如：All Upfront (预付全部费用)。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：All Upfront (预付全部费用)</p>
+<li><strong>product-description</strong></li>
+<p style="padding-left: 30px;">按照预留实例计费的【<strong>平台描述</strong>】（即操作系统）进行过滤。形如：linux。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：linux</p>
+<li><strong>reserved-instances-id</strong></li>
+<p style="padding-left: 30px;">按照已购买【<strong>预留实例计费ID</strong>】进行过滤。形如：650c138f-ae7e-4750-952a-96841d6e9fc1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>state</strong></li>
+<p style="padding-left: 30px;">按照已购买【<strong>预留实例计费状态</strong>】进行过滤。形如：active。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：active (以创建) | pending (等待被创建) | retired (过期)</p>
+每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
 
     }
 
@@ -5452,8 +5818,18 @@ class ChargePrepaid extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Period = 'Period' in params ? params.Period : null;
-        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+        this.DryRun = 'DryRun' in params ? params.DryRun : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -5510,15 +5886,15 @@ class DescribeZoneInstanceConfigInfosRequest extends  AbstractModel {
         super();
 
         /**
-         * 过滤条件。
-
-<li> zone - String - 是否必填：否 -（过滤条件）按照可用区过滤。</li>
-
-<li> instance-family String - 是否必填：否 -（过滤条件）按照机型系列过滤。按照实例机型系列过滤。实例机型系列形如：S1、I1、M1等。</li>
-
-<li> instance-type - String - 是否必填：否 - （过滤条件）按照机型过滤。按照实例机型过滤。不同实例机型指定了不同的资源规格，具体取值可通过调用接口 DescribeInstanceTypeConfigs 来获得最新的规格表或参见实例类型描述。若不指定该参数，则默认机型为S1.SMALL1。</li>
-
-<li> instance-charge-type - String - 是否必填：否 -（过滤条件）按照实例计费模式过滤。 (PREPAID：表示预付费，即包年包月 | POSTPAID_BY_HOUR：表示后付费，即按量计费 | CDHPAID：表示CDH付费，即只对CDH计费，不对CDH上的实例计费。 )  </li>
+         * <li><strong>zone</strong></li>
+<p style="padding-left: 30px;">按照【<strong>可用区</strong>】进行过滤。可用区形如：ap-guangzhou-1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p>
+<li><strong>instance-family</strong></li>
+<p style="padding-left: 30px;">按照【<strong>实例机型系列</strong>】进行过滤。实例机型系列形如：S1、I1、M1等。</p><p style="padding-left: 30px;">类型：Integer</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>instance-type</strong></li>
+<p style="padding-left: 30px;">按照【<strong>实例机型</strong>】进行过滤。不同实例机型指定了不同的资源规格，具体取值可通过调用接口 [DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/product/213/15749) 来获得最新的规格表或参见[实例类型](https://cloud.tencent.com/document/product/213/11518)描述。若不指定该参数，则默认机型为S1.SMALL1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>instance-charge-type</strong></li>
+<p style="padding-left: 30px;">按照【<strong>实例计费模式</strong>】进行过滤。(PREPAID：表示预付费，即包年包月 | POSTPAID_BY_HOUR：表示后付费，即按量计费 | CDHPAID：表示[CDH](https://cloud.tencent.com/document/product/416)付费，即只对[CDH](https://cloud.tencent.com/document/product/416)计费，不对[CDH](https://cloud.tencent.com/document/product/416)上的实例计费。)</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -5604,32 +5980,74 @@ class ItemPrice extends  AbstractModel {
         super();
 
         /**
-         * 后续单价，单位：元。
+         * 后续合计费用的原价，后付费模式使用，单位：元。<br><li>如返回了其他时间区间项，如UnitPriceSecondStep，则本项代表时间区间在(0, 96)小时；若未返回其他时间区间项，则本项代表全时段，即(0, ∞)小时
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.UnitPrice = null;
 
         /**
-         * 后续计价单元，可取值范围： <br><li>HOUR：表示计价单元是按每小时来计算。当前涉及该计价单元的场景有：实例按小时后付费（POSTPAID_BY_HOUR）、带宽按小时后付费（BANDWIDTH_POSTPAID_BY_HOUR）：<br><li>GB：表示计价单元是按每GB来计算。当前涉及该计价单元的场景有：流量按小时后付费（TRAFFIC_POSTPAID_BY_HOUR）。
+         * 后续计价单元，后付费模式使用，可取值范围： <br><li>HOUR：表示计价单元是按每小时来计算。当前涉及该计价单元的场景有：实例按小时后付费（POSTPAID_BY_HOUR）、带宽按小时后付费（BANDWIDTH_POSTPAID_BY_HOUR）：<br><li>GB：表示计价单元是按每GB来计算。当前涉及该计价单元的场景有：流量按小时后付费（TRAFFIC_POSTPAID_BY_HOUR）。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ChargeUnit = null;
 
         /**
-         * 预支费用的原价，单位：元。
+         * 预支合计费用的原价，预付费模式使用，单位：元。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.OriginalPrice = null;
 
         /**
-         * 预支费用的折扣价，单位：元。
+         * 预支合计费用的折扣价，预付费模式使用，单位：元。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.DiscountPrice = null;
+
+        /**
+         * 折扣，如20.0代表2折
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Discount = null;
+
+        /**
+         * 后续合计费用的折扣价，后付费模式使用，单位：元<br><li>如返回了其他时间区间项，如UnitPriceDiscountSecondStep，则本项代表时间区间在(0, 96)小时；若未返回其他时间区间项，则本项代表全时段，即(0, ∞)小时
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UnitPriceDiscount = null;
+
+        /**
+         * 使用时间区间在(96, 360)小时的后续合计费用的原价，后付费模式使用，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UnitPriceSecondStep = null;
+
+        /**
+         * 使用时间区间在(96, 360)小时的后续合计费用的折扣价，后付费模式使用，单位：元
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UnitPriceDiscountSecondStep = null;
+
+        /**
+         * 使用时间区间在(360, ∞)小时的后续合计费用的原价，后付费模式使用，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UnitPriceThirdStep = null;
+
+        /**
+         * 使用时间区间在(360, ∞)小时的后续合计费用的折扣价，后付费模式使用，单位：元
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UnitPriceDiscountThirdStep = null;
 
     }
 
@@ -5644,6 +6062,12 @@ class ItemPrice extends  AbstractModel {
         this.ChargeUnit = 'ChargeUnit' in params ? params.ChargeUnit : null;
         this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
         this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+        this.Discount = 'Discount' in params ? params.Discount : null;
+        this.UnitPriceDiscount = 'UnitPriceDiscount' in params ? params.UnitPriceDiscount : null;
+        this.UnitPriceSecondStep = 'UnitPriceSecondStep' in params ? params.UnitPriceSecondStep : null;
+        this.UnitPriceDiscountSecondStep = 'UnitPriceDiscountSecondStep' in params ? params.UnitPriceDiscountSecondStep : null;
+        this.UnitPriceThirdStep = 'UnitPriceThirdStep' in params ? params.UnitPriceThirdStep : null;
+        this.UnitPriceDiscountThirdStep = 'UnitPriceDiscountThirdStep' in params ? params.UnitPriceDiscountThirdStep : null;
 
     }
 }
@@ -5729,6 +6153,37 @@ class InstanceTypeQuotaItem extends  AbstractModel {
          */
         this.Price = null;
 
+        /**
+         * 售罄原因。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SoldOutReason = null;
+
+        /**
+         * 内网带宽，单位Gbps。
+         * @type {number || null}
+         */
+        this.InstanceBandwidth = null;
+
+        /**
+         * 网络收发包能力，单位万PPS。
+         * @type {number || null}
+         */
+        this.InstancePps = null;
+
+        /**
+         * 本地存储块数量。
+         * @type {number || null}
+         */
+        this.StorageBlockAmount = null;
+
+        /**
+         * 处理器型号。
+         * @type {string || null}
+         */
+        this.CpuType = null;
+
     }
 
     /**
@@ -5768,12 +6223,17 @@ class InstanceTypeQuotaItem extends  AbstractModel {
             obj.deserialize(params.Price)
             this.Price = obj;
         }
+        this.SoldOutReason = 'SoldOutReason' in params ? params.SoldOutReason : null;
+        this.InstanceBandwidth = 'InstanceBandwidth' in params ? params.InstanceBandwidth : null;
+        this.InstancePps = 'InstancePps' in params ? params.InstancePps : null;
+        this.StorageBlockAmount = 'StorageBlockAmount' in params ? params.StorageBlockAmount : null;
+        this.CpuType = 'CpuType' in params ? params.CpuType : null;
 
     }
 }
 
 /**
- * 支持的操作系统类型，根据windows和linux分类。
+ * 支持的操作系统类型，根据windows和Linux分类。
  * @class
  */
 class ImageOsList extends  AbstractModel {
@@ -5858,12 +6318,17 @@ class DescribeHostsRequest extends  AbstractModel {
         super();
 
         /**
-         * 过滤条件。
-<li> zone - String - 是否必填：否 - （过滤条件）按照可用区过滤。</li>
-<li> project-id - Integer - 是否必填：否 - （过滤条件）按照项目ID过滤。可通过调用 DescribeProject 查询已创建的项目列表或登录控制台进行查看；也可以调用 AddProject 创建新的项目。</li>
-<li> host-id - String - 是否必填：否 - （过滤条件）按照CDH ID过滤。CDH ID形如：host-11112222。</li>
-<li> host-name - String - 是否必填：否 - （过滤条件）按照CDH实例名称过滤。</li>
-<li> host-state - String - 是否必填：否 - （过滤条件）按照CDH实例状态进行过滤。（PENDING：创建中|LAUNCH_FAILURE：创建失败|RUNNING：运行中|EXPIRED：已过期）</li>
+         * <li><strong>zone</strong></li>
+<p style="padding-left: 30px;">按照【<strong>可用区</strong>】进行过滤。可用区形如：ap-guangzhou-1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p>
+<li><strong>project-id</strong></li>
+<p style="padding-left: 30px;">按照【<strong>项目ID</strong>】进行过滤，可通过调用[DescribeProject](https://cloud.tencent.com/document/api/378/4400)查询已创建的项目列表或登录[控制台](https://console.cloud.tencent.com/cvm/index)进行查看；也可以调用[AddProject](https://cloud.tencent.com/document/api/378/4398)创建新的项目。项目ID形如：1002189。</p><p style="padding-left: 30px;">类型：Integer</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>host-id</strong></li>
+<p style="padding-left: 30px;">按照【<strong>[CDH](https://cloud.tencent.com/document/product/416) ID</strong>】进行过滤。[CDH](https://cloud.tencent.com/document/product/416) ID形如：host-xxxxxxxx。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>host-name</strong></li>
+<p style="padding-left: 30px;">按照【<strong>CDH实例名称</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>host-state</strong></li>
+<p style="padding-left: 30px;">按照【<strong>CDH实例状态</strong>】进行过滤。（PENDING：创建中 | LAUNCH_FAILURE：创建失败 | RUNNING：运行中 | EXPIRED：已过期）</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -5941,7 +6406,7 @@ class DescribeInstancesStatusRequest extends  AbstractModel {
         super();
 
         /**
-         * 按照一个或者多个实例ID查询。实例ID形如：`ins-11112222`。此参数的具体格式可参考API[简介](https://cloud.tencent.com/document/api/213/15688)的`id.N`一节）。每次请求的实例的上限为100。
+         * 按照一个或者多个实例ID查询。实例ID形如：`ins-11112222`。此参数的具体格式可参考API[简介](https://cloud.tencent.com/document/api/213/15688)的`ids.N`一节）。每次请求的实例的上限为100。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -6073,6 +6538,111 @@ class SharePermission extends  AbstractModel {
         }
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
         this.AccountId = 'AccountId' in params ? params.AccountId : null;
+
+    }
+}
+
+/**
+ * 描述用户已购买预留实例计费信息
+ * @class
+ */
+class ReservedInstances extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 已购买的预留实例计费ID。形如：650c138f-ae7e-4750-952a-96841d6e9fc1。
+         * @type {string || null}
+         */
+        this.ReservedInstancesId = null;
+
+        /**
+         * 预留实例计费的类型。形如：S3.MEDIUM4。
+返回项：<a href="https://cloud.tencent.com/document/product/213/11518">预留实例计费类型列表</a>
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * 预留实例计费可购买的可用区。形如：ap-guangzhou-1。
+返回项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a>
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 预留实例计费开始时间。形如：1949-10-01 00:00:00
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 预留实例计费到期时间。形如：1949-10-01 00:00:00
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 预留实例计费【有效期】即预留实例计费购买时长。形如：31536000。
+计量单位：秒。
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * 已购买的预留实例计费个数。形如：10。
+         * @type {number || null}
+         */
+        this.InstanceCount = null;
+
+        /**
+         * 描述预留实例计费的平台描述（即操作系统）。形如：linux。
+返回项： linux 。
+         * @type {string || null}
+         */
+        this.ProductDescription = null;
+
+        /**
+         * 预留实例计费购买的状态。形如：active
+返回项： active (以创建) | pending (等待被创建) | retired (过期)。
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * 可购买的预留实例计费类型的结算货币，使用ISO 4217标准货币代码。形如：USD。
+返回项：USD（美元）。
+         * @type {string || null}
+         */
+        this.CurrencyCode = null;
+
+        /**
+         * 预留实例计费的付款类型。形如：All Upfront。
+返回项： All Upfront (预付全部费用)。
+         * @type {string || null}
+         */
+        this.OfferingType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReservedInstancesId = 'ReservedInstancesId' in params ? params.ReservedInstancesId : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
+        this.ProductDescription = 'ProductDescription' in params ? params.ProductDescription : null;
+        this.State = 'State' in params ? params.State : null;
+        this.CurrencyCode = 'CurrencyCode' in params ? params.CurrencyCode : null;
+        this.OfferingType = 'OfferingType' in params ? params.OfferingType : null;
 
     }
 }
@@ -6237,6 +6807,99 @@ class InquiryPriceResetInstancesTypeResponse extends  AbstractModel {
 }
 
 /**
+ * 描述可购买预留实例计费信息
+ * @class
+ */
+class ReservedInstancesOffering extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 预留实例计费可购买的可用区。形如：ap-guangzhou-1。
+返回项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a>
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 可购买的预留实例计费类型的结算货币，使用ISO 4217标准货币代码。
+返回项：USD（美元）。
+         * @type {string || null}
+         */
+        this.CurrencyCode = null;
+
+        /**
+         * 预留实例计费【有效期】即预留实例计费购买时长。形如：31536000。
+计量单位：秒
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * 预留实例计费的购买价格。形如：4000.0。
+计量单位：与 currencyCode 一致，目前支持 USD（美元）
+         * @type {number || null}
+         */
+        this.FixedPrice = null;
+
+        /**
+         * 预留实例计费的实例类型。形如：S3.MEDIUM4。
+返回项：<a href="https://cloud.tencent.com/product/cvm/instances">预留实例计费类型列表</a>
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * 预留实例计费的付款类型。形如：All Upfront。
+返回项： All Upfront (预付全部费用)。
+         * @type {string || null}
+         */
+        this.OfferingType = null;
+
+        /**
+         * 可购买的预留实例计费配置ID。形如：650c138f-ae7e-4750-952a-96841d6e9fc1。
+         * @type {string || null}
+         */
+        this.ReservedInstancesOfferingId = null;
+
+        /**
+         * 预留实例计费的平台描述（即操作系统）。形如：linux。
+返回项： linux 。
+         * @type {string || null}
+         */
+        this.ProductDescription = null;
+
+        /**
+         * 扣除预付费之后的使用价格 (按小时计费)。形如：0.0。
+目前，因为只支持 All Upfront 付款类型，所以默认为 0元/小时。
+计量单位：元/小时，货币单位与 currencyCode 一致，目前支持 USD（美元）
+         * @type {number || null}
+         */
+        this.UsagePrice = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.CurrencyCode = 'CurrencyCode' in params ? params.CurrencyCode : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.FixedPrice = 'FixedPrice' in params ? params.FixedPrice : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.OfferingType = 'OfferingType' in params ? params.OfferingType : null;
+        this.ReservedInstancesOfferingId = 'ReservedInstancesOfferingId' in params ? params.ReservedInstancesOfferingId : null;
+        this.ProductDescription = 'ProductDescription' in params ? params.ProductDescription : null;
+        this.UsagePrice = 'UsagePrice' in params ? params.UsagePrice : null;
+
+    }
+}
+
+/**
  * 操作系统支持的类型。
  * @class
  */
@@ -6327,7 +6990,7 @@ class InquiryPriceRenewInstancesRequest extends  AbstractModel {
         this.InstanceChargePrepaid = null;
 
         /**
-         * 试运行。
+         * 试运行，测试使用，不执行具体逻辑。取值范围：<br><li>TRUE：跳过执行逻辑<br><li>FALSE：执行逻辑<br><br>默认取值：FALSE。
          * @type {boolean || null}
          */
         this.DryRun = null;
@@ -6369,27 +7032,40 @@ class DescribeInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * 按照一个或者多个实例ID查询。实例ID形如：`ins-xxxxxxxx`。（此参数的具体格式可参考API[简介](https://cloud.tencent.com/document/api/213/15688)的`id.N`一节）。每次请求的实例的上限为100。参数不支持同时指定`InstanceIds`和`Filters`。
+         * 按照一个或者多个实例ID查询。实例ID形如：`ins-xxxxxxxx`。（此参数的具体格式可参考API[简介](https://cloud.tencent.com/document/api/213/15688)的`ids.N`一节）。每次请求的实例的上限为100。参数不支持同时指定`InstanceIds`和`Filters`。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
 
         /**
-         * 过滤条件。
-<li> zone - String - 是否必填：否 -（过滤条件）按照可用区过滤。</li>
-<li> project-id - Integer - 是否必填：否 -（过滤条件）按照项目ID过滤。可通过调用[DescribeProject](https://cloud.tencent.com/document/api/378/4400)查询已创建的项目列表或登录[控制台](https://console.cloud.tencent.com/cvm/index)进行查看；也可以调用[AddProject](https://cloud.tencent.com/document/api/378/4398)创建新的项目。</li>
-<li> host-id - String - 是否必填：否 - （过滤条件）按照[CDH](https://cloud.tencent.com/document/product/416) ID过滤。[CDH](https://cloud.tencent.com/document/product/416) ID形如：host-xxxxxxxx。</li>
-<li> vpc-id - String - 是否必填：否 - （过滤条件）按照VPC ID进行过滤。VPC ID形如：vpc-xxxxxxxx。</li>
-<li> subnet-id - String - 是否必填：否 - （过滤条件）按照子网ID进行过滤。子网ID形如：subnet-xxxxxxxx。</li>
-<li> instance-id - String - 是否必填：否 - （过滤条件）按照实例ID过滤。实例ID形如：ins-xxxxxxxx。</li>
-<li> security-group-id - String - 是否必填：否 - （过滤条件）按照安全组ID过滤，安全组ID形如: sg-8jlk3f3r。</li>
-<li> instance-name - String - 是否必填：否 - （过滤条件）按照实例名称过滤。</li>
-<li> instance-charge-type - String - 是否必填：否 -（过滤条件）按照实例计费模式过滤。 (PREPAID：表示预付费，即包年包月 | POSTPAID_BY_HOUR：表示后付费，即按量计费 | CDHPAID：表示[CDH](https://cloud.tencent.com/document/product/416)付费，即只对[CDH](https://cloud.tencent.com/document/product/416)计费，不对[CDH](https://cloud.tencent.com/document/product/416)上的实例计费。 )  </li>
-<li> private-ip-address - String - 是否必填：否 - （过滤条件）按照实例主网卡的内网IP过滤。</li>
-<li> public-ip-address - String - 是否必填：否 - （过滤条件）按照实例主网卡的公网IP过滤，包含实例创建时自动分配的IP和实例创建后手动绑定的弹性IP。</li>
-<li> tag-key - String - 是否必填：否 - （过滤条件）按照标签键进行过滤。</li>
-<li> tag-value - String - 是否必填：否 - （过滤条件）按照标签值进行过滤。</li>
-<li> tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例2。</li>
+         * <li><strong>zone</strong></li>
+<p style="padding-left: 30px;">按照【<strong>可用区</strong>】进行过滤。可用区形如：ap-guangzhou-1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p>
+<li><strong>project-id</strong></li>
+<p style="padding-left: 30px;">按照【<strong>项目ID</strong>】进行过滤，可通过调用[DescribeProject](https://cloud.tencent.com/document/api/378/4400)查询已创建的项目列表或登录[控制台](https://console.cloud.tencent.com/cvm/index)进行查看；也可以调用[AddProject](https://cloud.tencent.com/document/api/378/4398)创建新的项目。项目ID形如：1002189。</p><p style="padding-left: 30px;">类型：Integer</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>host-id</strong></li>
+<p style="padding-left: 30px;">按照【<strong>[CDH](https://cloud.tencent.com/document/product/416) ID</strong>】进行过滤。[CDH](https://cloud.tencent.com/document/product/416) ID形如：host-xxxxxxxx。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>vpc-id</strong></li>
+<p style="padding-left: 30px;">按照【<strong>VPC ID</strong>】进行过滤。VPC ID形如：vpc-xxxxxxxx。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>subnet-id</strong></li>
+<p style="padding-left: 30px;">按照【<strong>子网ID</strong>】进行过滤。子网ID形如：subnet-xxxxxxxx。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>instance-id</strong></li>
+<p style="padding-left: 30px;">按照【<strong>实例ID</strong>】进行过滤。实例ID形如：ins-xxxxxxxx。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>security-group-id</strong></li>
+<p style="padding-left: 30px;">按照【<strong>安全组ID</strong>】进行过滤。安全组ID形如: sg-8jlk3f3r。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>instance-name</strong></li>
+<p style="padding-left: 30px;">按照【<strong>实例名称</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>instance-charge-type</strong></li>
+<p style="padding-left: 30px;">按照【<strong>实例计费模式</strong>】进行过滤。(PREPAID：表示预付费，即包年包月 | POSTPAID_BY_HOUR：表示后付费，即按量计费 | CDHPAID：表示[CDH](https://cloud.tencent.com/document/product/416)付费，即只对[CDH](https://cloud.tencent.com/document/product/416)计费，不对[CDH](https://cloud.tencent.com/document/product/416)上的实例计费。)</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>private-ip-address</strong></li>
+<p style="padding-left: 30px;">按照【<strong>实例主网卡的内网IP</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>public-ip-address</strong></li>
+<p style="padding-left: 30px;">按照【<strong>实例主网卡的公网IP</strong>】进行过滤，包含实例创建时自动分配的IP和实例创建后手动绑定的弹性IP。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>tag-key</strong></li>
+<p style="padding-left: 30px;">按照【<strong>标签键</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>tag-value</strong></li>
+<p style="padding-left: 30px;">按照【<strong>标签值</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>tag:tag-key</strong></li>
+<p style="padding-left: 30px;">按照【<strong>标签键值对</strong>】进行过滤。tag-key使用具体的标签键进行替换。使用请参考示例2。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
 每次请求的`Filters`的上限为10，`Filter.Values`的上限为5。参数不支持同时指定`InstanceIds`和`Filters`。
          * @type {Array.<Filter> || null}
          */
@@ -6564,17 +7240,9 @@ class DescribeImagesRequest extends  AbstractModel {
          * 过滤条件，每次请求的`Filters`的上限为0，`Filters.Values`的上限为5。参数不可以同时指定`ImageIds`和`Filters`。详细的过滤条件如下：
 <li> image-id - String - 是否必填： 否 - （过滤条件）按照镜像ID进行过滤</li>
 <li> image-type - String - 是否必填： 否 - （过滤条件）按照镜像类型进行过滤。取值范围：
-    PRIVATE_IMAGE: 私有镜像 (本帐户创建的镜像) 
+    PRIVATE_IMAGE: 私有镜像 (本账户创建的镜像) 
     PUBLIC_IMAGE: 公共镜像 (腾讯云官方镜像)
-    MARKET_IMAGE: 服务市场 (服务市场提供的镜像) 
-   SHARED_IMAGE: 共享镜像(其他账户共享给本帐户的镜像) 。</li>
-<li> image-state - String - 是否必填： 否 - （过滤条件）按照镜像状态进行过滤。取值范围：
-    CREATING: 创建中
-    NORMAL: 正常
-    USING: 使用中
-    SYNCING: 同步中
-    IMPORTING: 导入中
-    DELETING: 删除中。</li>
+   SHARED_IMAGE: 共享镜像(其他账户共享给本账户的镜像) 。</li>
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -6702,7 +7370,7 @@ class ModifyInstancesRenewFlagRequest extends  AbstractModel {
         super();
 
         /**
-         * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/9388) API返回值中的`InstanceId`获取。每次请求允许操作的实例数量上限是100。
+         * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728) API返回值中的`InstanceId`获取。每次请求允许操作的实例数量上限是100。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -6789,6 +7457,12 @@ class ModifyHostsAttributeRequest extends  AbstractModel {
          */
         this.RenewFlag = null;
 
+        /**
+         * 项目ID。项目可以使用[AddProject](https://cloud.tencent.com/doc/api/403/4398)接口创建。可通过[`DescribeProject`](https://cloud.tencent.com/document/product/378/4400) API返回值中的`projectId`获取。后续使用[DescribeHosts](https://cloud.tencent.com/document/api/213/16474)接口查询实例时，项目ID可用于过滤结果。
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
     }
 
     /**
@@ -6801,6 +7475,7 @@ class ModifyHostsAttributeRequest extends  AbstractModel {
         this.HostIds = 'HostIds' in params ? params.HostIds : null;
         this.HostName = 'HostName' in params ? params.HostName : null;
         this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
 
     }
 }
@@ -6820,7 +7495,7 @@ class ImportKeyPairRequest extends  AbstractModel {
         this.KeyName = null;
 
         /**
-         * 密钥对创建后所属的[项目](/document/product/378/10863)ID。<br><br>可以通过以下方式获取项目ID：<br><li>通过[项目列表](https://console.cloud.tencent.com/project)查询项目ID。<br><li>通过调用接口 [DescribeProject](https://cloud.tencent.com/document/api/378/4400)，取返回信息中的 `projectId ` 获取项目ID。
+         * 密钥对创建后所属的[项目](https://cloud.tencent.com/document/product/378/10861)ID。<br><br>可以通过以下方式获取项目ID：<br><li>通过[项目列表](https://console.cloud.tencent.com/project)查询项目ID。<br><li>通过调用接口 [DescribeProject](https://cloud.tencent.com/document/api/378/4400)，取返回信息中的 `projectId ` 获取项目ID。
 
 如果是默认项目，直接填0就可以。
          * @type {number || null}
@@ -6922,6 +7597,56 @@ class KeyPair extends  AbstractModel {
         this.PrivateKey = 'PrivateKey' in params ? params.PrivateKey : null;
         this.AssociatedInstanceIds = 'AssociatedInstanceIds' in params ? params.AssociatedInstanceIds : null;
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+
+    }
+}
+
+/**
+ * DescribeReservedInstancesOfferings返回参数结构体
+ * @class
+ */
+class DescribeReservedInstancesOfferingsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合条件的预留实例计费数量。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 符合条件的预留实例计费列表。
+         * @type {Array.<ReservedInstancesOffering> || null}
+         */
+        this.ReservedInstancesOfferingsSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ReservedInstancesOfferingsSet) {
+            this.ReservedInstancesOfferingsSet = new Array();
+            for (let z in params.ReservedInstancesOfferingsSet) {
+                let obj = new ReservedInstancesOffering();
+                obj.deserialize(params.ReservedInstancesOfferingsSet[z]);
+                this.ReservedInstancesOfferingsSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7088,6 +7813,12 @@ class VirtualPrivateCloud extends  AbstractModel {
          */
         this.PrivateIpAddresses = null;
 
+        /**
+         * 为弹性网卡指定随机生成的 IPv6 地址数量。
+         * @type {number || null}
+         */
+        this.Ipv6AddressCount = null;
+
     }
 
     /**
@@ -7101,6 +7832,7 @@ class VirtualPrivateCloud extends  AbstractModel {
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
         this.AsVpcGateway = 'AsVpcGateway' in params ? params.AsVpcGateway : null;
         this.PrivateIpAddresses = 'PrivateIpAddresses' in params ? params.PrivateIpAddresses : null;
+        this.Ipv6AddressCount = 'Ipv6AddressCount' in params ? params.Ipv6AddressCount : null;
 
     }
 }
@@ -7238,7 +7970,7 @@ class ResizeInstanceDisksRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 待扩容的数据盘配置信息。只支持扩容非弹性数据盘（[`DescribeDisks`](https://cloud.tencent.com/document/api/362/16315)接口返回值中的`Portable`为`false`表示非弹性），且[数据盘类型](/document/api/213/9452#block_device)为：`CLOUD_BASIC`、`CLOUD_PREMIUM`、`CLOUD_SSD`。数据盘容量单位：GB。最小扩容步长：10G。关于数据盘类型的选择请参考硬盘产品简介。可选数据盘类型受到实例类型`InstanceType`限制。另外允许扩容的最大容量也因数据盘类型的不同而有所差异。
+         * 待扩容的数据盘配置信息。只支持扩容非弹性数据盘（[`DescribeDisks`](https://cloud.tencent.com/document/api/362/16315)接口返回值中的`Portable`为`false`表示非弹性），且[数据盘类型](/document/api/213/9452#block_device)为：`CLOUD_BASIC`、`CLOUD_PREMIUM`、`CLOUD_SSD`。数据盘容量单位：GB。最小扩容步长：10G。关于数据盘类型的选择请参考[硬盘产品简介](https://cloud.tencent.com/document/product/362/2353)。可选数据盘类型受到实例类型`InstanceType`限制。另外允许扩容的最大容量也因数据盘类型的不同而有所差异。
          * @type {Array.<DataDisk> || null}
          */
         this.DataDisks = null;
@@ -7323,6 +8055,41 @@ class DescribeInstanceInternetBandwidthConfigsRequest extends  AbstractModel {
 }
 
 /**
+ * PurchaseReservedInstancesOffering返回参数结构体
+ * @class
+ */
+class PurchaseReservedInstancesOfferingResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 已购买预留实例计费ID
+         * @type {string || null}
+         */
+        this.ReservedInstanceId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReservedInstanceId = 'ReservedInstanceId' in params ? params.ReservedInstanceId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * HDD的本地存储信息
  * @class
  */
@@ -7382,19 +8149,19 @@ class InternetAccessible extends  AbstractModel {
         this.InternetChargeType = null;
 
         /**
-         * 公网出带宽上限，单位：Mbps。默认值：0Mbps。不同机型带宽上限范围不一致，具体限制详见[购买网络带宽](/document/product/213/509)。
+         * 公网出带宽上限，单位：Mbps。默认值：0Mbps。不同机型带宽上限范围不一致，具体限制详见[购买网络带宽](https://cloud.tencent.com/document/product/213/12523)。
          * @type {number || null}
          */
         this.InternetMaxBandwidthOut = null;
 
         /**
-         * 是否分配公网IP。取值范围：<br><li>TRUE：表示分配公网IP<br><li>FALSE：表示不分配公网IP<br><br>当公网带宽大于0Mbps时，可自由选择开通与否，默认开通公网IP；当公网带宽为0，则不允许分配公网IP。
+         * 是否分配公网IP。取值范围：<br><li>TRUE：表示分配公网IP<br><li>FALSE：表示不分配公网IP<br><br>当公网带宽大于0Mbps时，可自由选择开通与否，默认开通公网IP；当公网带宽为0，则不允许分配公网IP。该参数仅在RunInstances接口中作为入参使用。
          * @type {boolean || null}
          */
         this.PublicIpAssigned = null;
 
         /**
-         * 带宽包ID。可通过[`DescribeBandwidthPackages`](https://cloud.tencent.com/document/api/215/19209)接口返回值中的`BandwidthPackageId`获取。
+         * 带宽包ID。可通过[`DescribeBandwidthPackages`](https://cloud.tencent.com/document/api/215/19209)接口返回值中的`BandwidthPackageId`获取。该参数仅在RunInstances接口中作为入参使用。
          * @type {string || null}
          */
         this.BandwidthPackageId = null;
@@ -7553,7 +8320,7 @@ class InstanceChargePrepaid extends  AbstractModel {
         super();
 
         /**
-         * 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36。
+         * 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60。
          * @type {number || null}
          */
         this.Period = null;
@@ -7625,6 +8392,7 @@ class Price extends  AbstractModel {
 }
 
 module.exports = {
+    ChargePrepaid: ChargePrepaid,
     LocalDiskType: LocalDiskType,
     AssociateInstancesKeyPairsResponse: AssociateInstancesKeyPairsResponse,
     RenewInstancesRequest: RenewInstancesRequest,
@@ -7653,6 +8421,7 @@ module.exports = {
     AllocateHostsRequest: AllocateHostsRequest,
     LoginSettings: LoginSettings,
     DescribeRegionsResponse: DescribeRegionsResponse,
+    PurchaseReservedInstancesOfferingRequest: PurchaseReservedInstancesOfferingRequest,
     RebootInstancesRequest: RebootInstancesRequest,
     AssociateInstancesKeyPairsRequest: AssociateInstancesKeyPairsRequest,
     ImportKeyPairResponse: ImportKeyPairResponse,
@@ -7664,7 +8433,7 @@ module.exports = {
     InternetChargeTypeConfig: InternetChargeTypeConfig,
     DescribeImagesResponse: DescribeImagesResponse,
     ModifyInstancesVpcAttributeResponse: ModifyInstancesVpcAttributeResponse,
-    CreateKeyPairResponse: CreateKeyPairResponse,
+    InquiryPriceResetInstancesTypeRequest: InquiryPriceResetInstancesTypeRequest,
     DescribeInstancesOperationLimitRequest: DescribeInstancesOperationLimitRequest,
     ModifyInstancesChargeTypeRequest: ModifyInstancesChargeTypeRequest,
     DescribeInstanceVncUrlRequest: DescribeInstanceVncUrlRequest,
@@ -7700,6 +8469,7 @@ module.exports = {
     DescribeDisasterRecoverGroupQuotaResponse: DescribeDisasterRecoverGroupQuotaResponse,
     DescribeRegionsRequest: DescribeRegionsRequest,
     CreateDisasterRecoverGroupRequest: CreateDisasterRecoverGroupRequest,
+    DescribeReservedInstancesResponse: DescribeReservedInstancesResponse,
     DescribeImportImageOsResponse: DescribeImportImageOsResponse,
     ModifyKeyPairAttributeResponse: ModifyKeyPairAttributeResponse,
     DataDisk: DataDisk,
@@ -7712,8 +8482,9 @@ module.exports = {
     CreateImageRequest: CreateImageRequest,
     Instance: Instance,
     EnhancedService: EnhancedService,
-    InquiryPriceResetInstancesTypeRequest: InquiryPriceResetInstancesTypeRequest,
+    CreateKeyPairResponse: CreateKeyPairResponse,
     DescribeInstanceVncUrlResponse: DescribeInstanceVncUrlResponse,
+    DescribeReservedInstancesOfferingsRequest: DescribeReservedInstancesOfferingsRequest,
     DescribeDisasterRecoverGroupsResponse: DescribeDisasterRecoverGroupsResponse,
     RunSecurityServiceEnabled: RunSecurityServiceEnabled,
     ActionTimer: ActionTimer,
@@ -7737,7 +8508,7 @@ module.exports = {
     DescribeDisasterRecoverGroupQuotaRequest: DescribeDisasterRecoverGroupQuotaRequest,
     StartInstancesResponse: StartInstancesResponse,
     ModifyInstancesVpcAttributeRequest: ModifyInstancesVpcAttributeRequest,
-    ChargePrepaid: ChargePrepaid,
+    DescribeReservedInstancesRequest: DescribeReservedInstancesRequest,
     DescribeInternetChargeTypeConfigsResponse: DescribeInternetChargeTypeConfigsResponse,
     DescribeZoneInstanceConfigInfosRequest: DescribeZoneInstanceConfigInfosRequest,
     DescribeZonesResponse: DescribeZonesResponse,
@@ -7751,11 +8522,13 @@ module.exports = {
     InquiryPriceResizeInstanceDisksResponse: InquiryPriceResizeInstanceDisksResponse,
     TerminateInstancesRequest: TerminateInstancesRequest,
     SharePermission: SharePermission,
+    ReservedInstances: ReservedInstances,
     DeleteImagesResponse: DeleteImagesResponse,
     ImportImageResponse: ImportImageResponse,
     ModifyDisasterRecoverGroupAttributeRequest: ModifyDisasterRecoverGroupAttributeRequest,
     RebootInstancesResponse: RebootInstancesResponse,
     InquiryPriceResetInstancesTypeResponse: InquiryPriceResetInstancesTypeResponse,
+    ReservedInstancesOffering: ReservedInstancesOffering,
     OsVersion: OsVersion,
     ModifyImageAttributeResponse: ModifyImageAttributeResponse,
     InquiryPriceRenewInstancesRequest: InquiryPriceRenewInstancesRequest,
@@ -7771,6 +8544,7 @@ module.exports = {
     ModifyHostsAttributeRequest: ModifyHostsAttributeRequest,
     ImportKeyPairRequest: ImportKeyPairRequest,
     KeyPair: KeyPair,
+    DescribeReservedInstancesOfferingsResponse: DescribeReservedInstancesOfferingsResponse,
     RenewInstancesResponse: RenewInstancesResponse,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,
     ResetInstanceResponse: ResetInstanceResponse,
@@ -7782,6 +8556,7 @@ module.exports = {
     ResizeInstanceDisksRequest: ResizeInstanceDisksRequest,
     DescribeInstanceFamilyConfigsRequest: DescribeInstanceFamilyConfigsRequest,
     DescribeInstanceInternetBandwidthConfigsRequest: DescribeInstanceInternetBandwidthConfigsRequest,
+    PurchaseReservedInstancesOfferingResponse: PurchaseReservedInstancesOfferingResponse,
     StorageBlock: StorageBlock,
     InternetAccessible: InternetAccessible,
     RenewHostsResponse: RenewHostsResponse,

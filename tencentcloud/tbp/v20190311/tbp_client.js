@@ -21,7 +21,9 @@ const SlotInfo = models.SlotInfo;
 const TextResetRequest = models.TextResetRequest;
 const ResetRequest = models.ResetRequest;
 const TextResetResponse = models.TextResetResponse;
+const CreateBotResponse = models.CreateBotResponse;
 const ResetResponse = models.ResetResponse;
+const CreateBotRequest = models.CreateBotRequest;
 const TextProcessRequest = models.TextProcessRequest;
 
 
@@ -47,7 +49,18 @@ class TbpClient extends AbstractClient {
     }
 
     /**
-     * 会话重置接口
+     * 创建机器人
+     * @param {CreateBotRequest} req
+     * @param {function(string, CreateBotResponse):void} cb
+     * @public
+     */
+    CreateBot(req, cb) {
+        let resp = new CreateBotResponse();
+        this.request("CreateBot", req, resp, cb);
+    }
+
+    /**
+     * 会话重置接口。已废弃，推荐使用最新版TextReset接口。
      * @param {TextResetRequest} req
      * @param {function(string, TextResetResponse):void} cb
      * @public
@@ -58,7 +71,7 @@ class TbpClient extends AbstractClient {
     }
 
     /**
-     * 接收调用侧的文本输入，返回应答文本。
+     * 接收调用侧的文本输入，返回应答文本。已废弃，推荐使用最新版TextProcess接口。
      * @param {TextProcessRequest} req
      * @param {function(string, TextProcessResponse):void} cb
      * @public

@@ -71,6 +71,48 @@ class AssumeRoleWithSAMLResponse extends  AbstractModel {
 }
 
 /**
+ * API密钥数据列表
+ * @class
+ */
+class ApiKey extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 密钥ID
+         * @type {string || null}
+         */
+        this.SecretId = null;
+
+        /**
+         * 创建时间(时间戳)
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 状态(2:有效, 3:禁用, 4:已删除)
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecretId = 'SecretId' in params ? params.SecretId : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
  * AssumeRoleWithSAML请求参数结构体
  * @class
  */
@@ -147,6 +189,13 @@ class GetFederationTokenResponse extends  AbstractModel {
         this.ExpiredTime = null;
 
         /**
+         * 证书有效的时间，以 iso8601 格式的 UTC 时间表示
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Expiration = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -168,6 +217,50 @@ class GetFederationTokenResponse extends  AbstractModel {
             this.Credentials = obj;
         }
         this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
+        this.Expiration = 'Expiration' in params ? params.Expiration : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * QueryApiKey返回参数结构体
+ * @class
+ */
+class QueryApiKeyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 密钥ID列表
+         * @type {Array.<ApiKey> || null}
+         */
+        this.IdKeys = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.IdKeys) {
+            this.IdKeys = new Array();
+            for (let z in params.IdKeys) {
+                let obj = new ApiKey();
+                obj.deserialize(params.IdKeys[z]);
+                this.IdKeys.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -228,6 +321,34 @@ class AssumeRoleResponse extends  AbstractModel {
 }
 
 /**
+ * QueryApiKey请求参数结构体
+ * @class
+ */
+class QueryApiKeyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待查询的账号(不填默认查当前账号)
+         * @type {number || null}
+         */
+        this.TargetUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetUin = 'TargetUin' in params ? params.TargetUin : null;
+
+    }
+}
+
+/**
  * GetFederationToken请求参数结构体
  * @class
  */
@@ -236,23 +357,23 @@ class GetFederationTokenRequest extends  AbstractModel {
         super();
 
         /**
-         * 联合身份用户昵称
+         * 您可以自定义调用方英文名称，由字母组成。
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 策略描述
+         * 授予该临时证书权限的CAM策略
 注意：
-1、policy 需要做 urlencode（如果通过 GET 方法请求云 API，发送请求前，所有参数都需要按照云 API 规范再 urlencode 一次）。
-2、策略语法参照 CAM 策略语法。
-3、策略中不能包含 principal 元素。
+1、策略语法参照[ CAM 策略语法](https://cloud.tencent.com/document/product/598/10603)。
+2、策略中不能包含 principal 元素。
+3、该参数需要做urlencode。
          * @type {string || null}
          */
         this.Policy = null;
 
         /**
-         * 指定临时证书的有效期，单位：秒，默认1800秒，最长可设定有效期为7200秒
+         * 指定临时证书的有效期，单位：秒，默认1800秒，最长可设定有效期为7200秒。
          * @type {number || null}
          */
         this.DurationSeconds = null;
@@ -344,8 +465,8 @@ class AssumeRoleRequest extends  AbstractModel {
         /**
          * 策略描述
 注意：
-1、policy 需要做 urlencode（如果通过 GET 方法请求云 API，发送请求前，所有参数都需要按照云 API 规范再 urlencode 一次）。
-2、策略语法参照 CAM 策略语法。
+1、policy 需要做 urlencode（如果通过 GET 方法请求云 API，发送请求前，所有参数都需要按照[云 API 规范](https://cloud.tencent.com/document/api/598/33159#1.-.E6.8B.BC.E6.8E.A5.E8.A7.84.E8.8C.83.E8.AF.B7.E6.B1.82.E4.B8.B2)再 urlencode 一次）。
+2、策略语法参照[ CAM 策略语法](https://cloud.tencent.com/document/product/598/10603)。
 3、策略中不能包含 principal 元素。
          * @type {string || null}
          */
@@ -370,9 +491,12 @@ class AssumeRoleRequest extends  AbstractModel {
 
 module.exports = {
     AssumeRoleWithSAMLResponse: AssumeRoleWithSAMLResponse,
+    ApiKey: ApiKey,
     AssumeRoleWithSAMLRequest: AssumeRoleWithSAMLRequest,
     GetFederationTokenResponse: GetFederationTokenResponse,
+    QueryApiKeyResponse: QueryApiKeyResponse,
     AssumeRoleResponse: AssumeRoleResponse,
+    QueryApiKeyRequest: QueryApiKeyRequest,
     GetFederationTokenRequest: GetFederationTokenRequest,
     Credentials: Credentials,
     AssumeRoleRequest: AssumeRoleRequest,

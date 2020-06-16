@@ -17,24 +17,33 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * 识别出人脸对应的候选人。
+ * DetectProductBeta返回参数结构体
  * @class
  */
-class Candidate extends  AbstractModel {
+class DetectProductBetaResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 识别出人脸对应的候选人数组。当前返回相似度最高的候选人。
-         * @type {string || null}
+         * 检测到的图片中的商品位置和品类预测。 
+当图片中存在多个商品时，输出多组坐标，按照__显著性__排序（综合考虑面积、是否在中心、检测算法置信度）。 
+最多可以输出__3组__检测结果。
+         * @type {Array.<RegionDetected> || null}
          */
-        this.Name = null;
+        this.RegionDetected = null;
 
         /**
-         * 相似度，0-100之间。
-         * @type {number || null}
+         * 图像识别出的商品的详细信息。 
+当图像中检测到多个物品时，会对显著性最高的进行识别。
+         * @type {ProductInfo || null}
          */
-        this.Confidence = null;
+        this.ProductInfo = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -45,76 +54,53 @@ class Candidate extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+
+        if (params.RegionDetected) {
+            this.RegionDetected = new Array();
+            for (let z in params.RegionDetected) {
+                let obj = new RegionDetected();
+                obj.deserialize(params.RegionDetected[z]);
+                this.RegionDetected.push(obj);
+            }
+        }
+
+        if (params.ProductInfo) {
+            let obj = new ProductInfo();
+            obj.deserialize(params.ProductInfo)
+            this.ProductInfo = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
 
 /**
- * 暴恐识别结果。
+ * DetectDisgust请求参数结构体
  * @class
  */
-class TerrorismResult extends  AbstractModel {
+class DetectDisgustRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 该识别场景的错误码：
-0表示成功，
--1表示系统错误，
--2表示引擎错误，
--1400表示图片解码失败。
-         * @type {number || null}
-         */
-        this.Code = null;
-
-        /**
-         * 错误码描述信息。
+         * 图片URL地址。 
+图片限制： 
+• 图片格式：PNG、JPG、JPEG。 
+• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 
+建议：
+• 图片像素：大于50*50像素，否则影响识别效果； 
+• 长宽比：长边：短边<5； 
+接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
          * @type {string || null}
          */
-        this.Msg = null;
+        this.ImageUrl = null;
 
         /**
-         * 识别场景的审核结论：
-PASS：正常
-REVIEW：疑似
-BLOCK：违规
+         * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+**注意：图片需要base64编码，并且要去掉编码头部。**
          * @type {string || null}
          */
-        this.Suggestion = null;
-
-        /**
-         * 图像涉恐的分数，0-100之间，分数越高涉恐几率越大。
-Type为LABEL时：
-0到86，Suggestion建议为PASS
-86到91，Suggestion建议为REVIEW
-91到100，Suggestion建议为BLOCK
-Type为FACE时：
-0到55，Suggestion建议为PASS
-55到60，Suggestion建议为REVIEW
-60到100，Suggestion建议为BLOCK
-         * @type {number || null}
-         */
-        this.Confidence = null;
-
-        /**
-         * Type取值为‘FACE’时，人脸识别的结果列表。基于图片中实际检测到的人脸数，返回数组最大值不超过5个。
-         * @type {Array.<FaceResult> || null}
-         */
-        this.FaceResults = null;
-
-        /**
-         * 暴恐识别返回的详细标签后期开放。
-         * @type {string || null}
-         */
-        this.AdvancedInfo = null;
-
-        /**
-         * 取值'LABEL' 或‘FACE’，LABEL表示结论和置信度来自标签分类，FACE表示结论和置信度来自人脸识别。
-         * @type {string || null}
-         */
-        this.Type = null;
+        this.ImageBase64 = null;
 
     }
 
@@ -125,21 +111,8 @@ Type为FACE时：
         if (!params) {
             return;
         }
-        this.Code = 'Code' in params ? params.Code : null;
-        this.Msg = 'Msg' in params ? params.Msg : null;
-        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
-
-        if (params.FaceResults) {
-            this.FaceResults = new Array();
-            for (let z in params.FaceResults) {
-                let obj = new FaceResult();
-                obj.deserialize(params.FaceResults[z]);
-                this.FaceResults.push(obj);
-            }
-        }
-        this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
-        this.Type = 'Type' in params ? params.Type : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
 
     }
 }
@@ -157,6 +130,16 @@ class DetectCelebrityResponse extends  AbstractModel {
          * @type {Array.<Face> || null}
          */
         this.Faces = null;
+
+        /**
+         * 本服务在不同误识率水平下（将图片中的人物识别错误的比例）的推荐阈值，可以用于控制识别结果的精度。 
+FalseRate1Percent, FalseRate5Permil, FalseRate1Permil分别代表误识率在百分之一、千分之五、千分之一情况下的推荐阈值。 
+因为阈值会存在变动，请勿将此处输出的固定值处理，而是每次取值与confidence对比，来判断本次的识别结果是否可信。
+ 例如，如果您业务中可以接受的误识率是1%，则可以将所有confidence>=FalseRate1Percent的结论认为是正确的。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Threshold || null}
+         */
+        this.Threshold = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -182,7 +165,74 @@ class DetectCelebrityResponse extends  AbstractModel {
                 this.Faces.push(obj);
             }
         }
+
+        if (params.Threshold) {
+            let obj = new Threshold();
+            obj.deserialize(params.Threshold)
+            this.Threshold = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CropImage请求参数结构体
+ * @class
+ */
+class CropImageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要裁剪区域的宽度，与Height共同组成所需裁剪的图片宽高比例；
+输入数字请大于0、小于图片宽度的像素值；
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 需要裁剪区域的高度，与Width共同组成所需裁剪的图片宽高比例；
+输入数字请请大于0、小于图片高度的像素值；
+宽高比例（Width : Height）会简化为最简分数，即如果Width输入10、Height输入20，会简化为1：2。
+Width : Height建议取值在[1, 2.5]之间，超过这个范围可能会影响效果；
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * 图片URL地址。 
+图片限制： 
+• 图片格式：PNG、JPG、JPEG。 
+• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 
+建议：
+• 图片像素：大于50*50像素，否则影响识别效果； 
+• 长宽比：长边：短边<5； 
+接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+**注意：图片需要base64编码，并且要去掉编码头部。**
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
 
     }
 }
@@ -210,6 +260,7 @@ class DetectProductRequest extends  AbstractModel {
 
         /**
          * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+**注意：图片需要base64编码，并且要去掉编码头部。**
          * @type {string || null}
          */
         this.ImageBase64 = null;
@@ -224,170 +275,6 @@ class DetectProductRequest extends  AbstractModel {
             return;
         }
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
-        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
-
-    }
-}
-
-/**
- * ImageModeration返回参数结构体
- * @class
- */
-class ImageModerationResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 识别场景的审核结论：
-PASS：正常
-REVIEW：疑似
-BLOCK：违规
-         * @type {string || null}
-         */
-        this.Suggestion = null;
-
-        /**
-         * 色情识别结果。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {PornResult || null}
-         */
-        this.PornResult = null;
-
-        /**
-         * 暴恐识别结果。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {TerrorismResult || null}
-         */
-        this.TerrorismResult = null;
-
-        /**
-         * 政治敏感识别结果。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {PoliticsResult || null}
-         */
-        this.PoliticsResult = null;
-
-        /**
-         * 透传字段，透传简单信息。
-         * @type {string || null}
-         */
-        this.Extra = null;
-
-        /**
-         * 恶心内容识别结果。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {DisgustResult || null}
-         */
-        this.DisgustResult = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
-
-        if (params.PornResult) {
-            let obj = new PornResult();
-            obj.deserialize(params.PornResult)
-            this.PornResult = obj;
-        }
-
-        if (params.TerrorismResult) {
-            let obj = new TerrorismResult();
-            obj.deserialize(params.TerrorismResult)
-            this.TerrorismResult = obj;
-        }
-
-        if (params.PoliticsResult) {
-            let obj = new PoliticsResult();
-            obj.deserialize(params.PoliticsResult)
-            this.PoliticsResult = obj;
-        }
-        this.Extra = 'Extra' in params ? params.Extra : null;
-
-        if (params.DisgustResult) {
-            let obj = new DisgustResult();
-            obj.deserialize(params.DisgustResult)
-            this.DisgustResult = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ImageModeration请求参数结构体
- * @class
- */
-class ImageModerationRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 本次调用支持的识别场景，可选值如下：
-1. PORN，即色情识别
-2. TERRORISM，即暴恐识别
-3. POLITICS，即政治敏感识别
-
-支持多场景（Scenes）一起检测。例如，使用 Scenes=["PORN", "TERRORISM"]，即对一张图片同时进行色情识别和暴恐识别。
-         * @type {Array.<string> || null}
-         */
-        this.Scenes = null;
-
-        /**
-         * 图片URL地址。 
-图片限制： 
- • 图片格式：PNG、JPG、JPEG。 
- • 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 
- • 图片像素：大于50*50像素，否则影响识别效果； 
- • 长宽比：长边：短边<5； 
-接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
-         * @type {string || null}
-         */
-        this.ImageUrl = null;
-
-        /**
-         * 预留字段，后期用于展示更多识别信息。
-         * @type {string || null}
-         */
-        this.Config = null;
-
-        /**
-         * 透传字段，透传简单信息。
-         * @type {string || null}
-         */
-        this.Extra = null;
-
-        /**
-         * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
-         * @type {string || null}
-         */
-        this.ImageBase64 = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Scenes = 'Scenes' in params ? params.Scenes : null;
-        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
-        this.Config = 'Config' in params ? params.Config : null;
-        this.Extra = 'Extra' in params ? params.Extra : null;
         this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
 
     }
@@ -471,6 +358,963 @@ class AssessQualityResponse extends  AbstractModel {
 }
 
 /**
+ * DetectDisgust返回参数结构体
+ * @class
+ */
+class DetectDisgustResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 对于图片中包含恶心内容的置信度，取值[0,1]，一般超过0.5则表明可能是恶心图片。
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * 与图像内容最相似的恶心内容的类别，包含腐烂、密集、畸形、血腥、蛇、虫子、牙齿等。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DetectLabel请求参数结构体
+ * @class
+ */
+class DetectLabelRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片URL地址。 
+图片限制： 
+• 图片格式：PNG、JPG、JPEG。 
+• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 
+建议：
+• 图片像素：大于50*50像素，否则影响识别效果； 
+• 长宽比：长边：短边<5； 
+接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+**注意：图片需要base64编码，并且要去掉编码头部。**
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * 本次调用支持的识别场景，可选值如下：
+WEB，针对网络图片优化;
+CAMERA，针对手机摄像头拍摄图片优化;
+ALBUM，针对手机相册、网盘产品优化;
+NEWS，针对新闻、资讯、广电等行业优化；
+如果不传此参数，则默认为WEB。
+
+支持多场景（Scenes）一起检测。例如，使用 Scenes=["WEB", "CAMERA"]，即对一张图片使用两个模型同时检测，输出两套识别结果。
+         * @type {Array.<string> || null}
+         */
+        this.Scenes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.Scenes = 'Scenes' in params ? params.Scenes : null;
+
+    }
+}
+
+/**
+ * DetectLabel返回参数结构体
+ * @class
+ */
+class DetectLabelResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Web网络版标签结果数组。如未选择WEB场景，则为空。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DetectLabelItem> || null}
+         */
+        this.Labels = null;
+
+        /**
+         * Camera摄像头版标签结果数组。如未选择CAMERA场景，则为空。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DetectLabelItem> || null}
+         */
+        this.CameraLabels = null;
+
+        /**
+         * Album相册版标签结果数组。如未选择ALBUM场景，则为空。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DetectLabelItem> || null}
+         */
+        this.AlbumLabels = null;
+
+        /**
+         * News新闻版标签结果数组。如未选择NEWS场景，则为空。
+新闻版目前为测试阶段，暂不提供每个标签的一级、二级分类信息的输出。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DetectLabelItem> || null}
+         */
+        this.NewsLabels = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Labels) {
+            this.Labels = new Array();
+            for (let z in params.Labels) {
+                let obj = new DetectLabelItem();
+                obj.deserialize(params.Labels[z]);
+                this.Labels.push(obj);
+            }
+        }
+
+        if (params.CameraLabels) {
+            this.CameraLabels = new Array();
+            for (let z in params.CameraLabels) {
+                let obj = new DetectLabelItem();
+                obj.deserialize(params.CameraLabels[z]);
+                this.CameraLabels.push(obj);
+            }
+        }
+
+        if (params.AlbumLabels) {
+            this.AlbumLabels = new Array();
+            for (let z in params.AlbumLabels) {
+                let obj = new DetectLabelItem();
+                obj.deserialize(params.AlbumLabels[z]);
+                this.AlbumLabels.push(obj);
+            }
+        }
+
+        if (params.NewsLabels) {
+            this.NewsLabels = new Array();
+            for (let z in params.NewsLabels) {
+                let obj = new DetectLabelItem();
+                obj.deserialize(params.NewsLabels[z]);
+                this.NewsLabels.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * EnhanceImage返回参数结构体
+ * @class
+ */
+class EnhanceImageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 增强后图片的base64编码。
+         * @type {string || null}
+         */
+        this.EnhancedImage = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnhancedImage = 'EnhancedImage' in params ? params.EnhancedImage : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 图像识别出的商品的详细信息。 
+当图像中检测到多个物品时，会对显著性最高的物品进行识别。
+ * @class
+ */
+class ProductInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 1表示找到同款商品，以下字段为同款商品信息； 
+0表示未找到同款商品， 具体商品信息为空（参考价格、名称、品牌等），仅提供商品类目。  
+是否找到同款的判断依据为Score分值，分值越大则同款的可能性越大。
+         * @type {number || null}
+         */
+        this.FindSKU = null;
+
+        /**
+         * 本商品在图片中的坐标，表示为矩形框的四个顶点坐标。
+         * @type {Location || null}
+         */
+        this.Location = null;
+
+        /**
+         * 商品名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 商品品牌
+         * @type {string || null}
+         */
+        this.Brand = null;
+
+        /**
+         * 参考价格，综合多个信息源，仅供参考。
+         * @type {string || null}
+         */
+        this.Price = null;
+
+        /**
+         * 识别结果的商品类目。 
+包含：鞋、图书音像、箱包、美妆个护、服饰、家电数码、玩具乐器、食品饮料、珠宝、家居家装、药品、酒水、绿植园艺、其他商品、非商品等。 
+当类别为“非商品”时，除Location、Score和本字段之外的商品信息为空。
+         * @type {string || null}
+         */
+        this.ProductCategory = null;
+
+        /**
+         * 输入图片中的主体物品和输出结果的相似度。分值越大，输出结果与输入图片是同款的可能性越高。
+         * @type {number || null}
+         */
+        this.Score = null;
+
+        /**
+         * 搜索到的商品配图URL
+         * @type {string || null}
+         */
+        this.Image = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FindSKU = 'FindSKU' in params ? params.FindSKU : null;
+
+        if (params.Location) {
+            let obj = new Location();
+            obj.deserialize(params.Location)
+            this.Location = obj;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Brand = 'Brand' in params ? params.Brand : null;
+        this.Price = 'Price' in params ? params.Price : null;
+        this.ProductCategory = 'ProductCategory' in params ? params.ProductCategory : null;
+        this.Score = 'Score' in params ? params.Score : null;
+        this.Image = 'Image' in params ? params.Image : null;
+
+    }
+}
+
+/**
+ * AssessQuality请求参数结构体
+ * @class
+ */
+class AssessQualityRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片URL地址。 
+图片限制： 
+• 图片格式：PNG、JPG、JPEG。 
+• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 
+建议：
+• 图片像素：大于50*50像素，否则影响识别效果； 
+• 长宽比：长边：短边<5； 
+接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+**注意：图片需要base64编码，并且要去掉编码头部。**
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+
+    }
+}
+
+/**
+ * DetectProductBeta请求参数结构体
+ * @class
+ */
+class DetectProductBetaRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片限制：内测版仅支持jpg、jpeg，图片大小不超过1M，分辨率在25万到100万之间。 
+建议先对图片进行压缩，以便提升处理速度。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * 图片经过base64编码的内容。最大不超过1M，分辨率在25万到100万之间。 
+与ImageUrl同时存在时优先使用ImageUrl字段。
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+
+    }
+}
+
+/**
+ * DetectMisbehavior返回参数结构体
+ * @class
+ */
+class DetectMisbehaviorResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 对于图片中包含不良行为的置信度，取值[0,1]，一般超过0.5则表明可能包含不良行为内容；
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * 图像中最可能包含的不良行为类别，包括赌博、打架斗殴、吸毒等。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RecognizeCar请求参数结构体
+ * @class
+ */
+class RecognizeCarRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片URL地址。 
+图片限制： 
+• 图片格式：PNG、JPG、JPEG。 
+• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 
+建议：
+• 图片像素：大于50*50像素，否则影响识别效果； 
+• 长宽比：长边：短边<5； 
+接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+**注意：图片需要base64编码，并且要去掉编码头部。**
+支持的图片格式：PNG、JPG、JPEG、BMP，暂不支持GIF格式。支持的图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+
+    }
+}
+
+/**
+ * EnhanceImage请求参数结构体
+ * @class
+ */
+class EnhanceImageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片URL地址。 
+图片限制： 
+• 图片格式：PNG、JPG、JPEG。 
+• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 
+建议：
+• 图片像素：大于50*50像素，否则影响识别效果； 
+• 长宽比：长边：短边<5； 
+接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+**注意：图片需要base64编码，并且要去掉编码头部。**
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+
+    }
+}
+
+/**
+ * CropImage返回参数结构体
+ * @class
+ */
+class CropImageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 裁剪区域左上角X坐标值
+         * @type {number || null}
+         */
+        this.X = null;
+
+        /**
+         * 裁剪区域左上角Y坐标值
+         * @type {number || null}
+         */
+        this.Y = null;
+
+        /**
+         * 裁剪区域的宽度，单位为像素
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 裁剪区域的高度，单位为像素
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * 原图宽度，单位为像素
+         * @type {number || null}
+         */
+        this.OriginalWidth = null;
+
+        /**
+         * 原图高度，单位为像素
+         * @type {number || null}
+         */
+        this.OriginalHeight = null;
+
+        /**
+         * 0：抠图正常；
+1：原图过长，指原图的高度是宽度的1.8倍以上；
+2：原图过宽，指原图的宽度是高度的1.8倍以上；
+3：抠图区域过长，指抠图的高度是主体备选框高度的1.6倍以上；
+4：抠图区域过宽，指当没有检测到人脸时，抠图区域宽度是检测出的原图主体区域宽度的1.6倍以上；
+5：纯色图，指裁剪区域视觉较为单一、缺乏主体部分 ；
+6：宽高比异常，指Width : Height取值超出[1, 2.5]的范围；
+
+以上是辅助决策的参考建议，可以根据业务需求选择采纳或忽视。
+         * @type {number || null}
+         */
+        this.CropResult = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.X = 'X' in params ? params.X : null;
+        this.Y = 'Y' in params ? params.Y : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.OriginalWidth = 'OriginalWidth' in params ? params.OriginalWidth : null;
+        this.OriginalHeight = 'OriginalHeight' in params ? params.OriginalHeight : null;
+        this.CropResult = 'CropResult' in params ? params.CropResult : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DetectCelebrity请求参数结构体
+ * @class
+ */
+class DetectCelebrityRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片URL地址。 
+图片限制： 
+• 图片格式：PNG、JPG、JPEG。 
+• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 
+建议：
+• 图片像素：大于50*50像素，否则影响识别效果； 
+• 长宽比：长边：短边<5； 
+接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+**注意：图片需要base64编码，并且要去掉编码头部。**
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+
+    }
+}
+
+/**
+ * 汽车坐标信息
+ * @class
+ */
+class Coord extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 横坐标x
+         * @type {number || null}
+         */
+        this.X = null;
+
+        /**
+         * 纵坐标y
+         * @type {number || null}
+         */
+        this.Y = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.X = 'X' in params ? params.X : null;
+        this.Y = 'Y' in params ? params.Y : null;
+
+    }
+}
+
+/**
+ * 公众人物识别人脸信息
+ * @class
+ */
+class Face extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 与图片中人脸最相似的公众人物的名字。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 公众人物身份标签的数组，一个公众人物可能有多个身份标签。
+         * @type {Array.<Labels> || null}
+         */
+        this.Labels = null;
+
+        /**
+         * 对人物的简介。
+         * @type {string || null}
+         */
+        this.BasicInfo = null;
+
+        /**
+         * 算法对于Name的置信度（图像中人脸与公众人物的相似度），0-100之间，值越高，表示对于Name越确定。
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * 人脸区域左上角横坐标。
+         * @type {number || null}
+         */
+        this.X = null;
+
+        /**
+         * 人脸区域左上角纵坐标。
+         * @type {number || null}
+         */
+        this.Y = null;
+
+        /**
+         * 人脸区域宽度。
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 人脸区域高度。
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * 公众人物的唯一编号，可以用于区分同名人物、一个人物不同称呼等情况。唯一编号为8个字符构成的字符串。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ID = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.Labels) {
+            this.Labels = new Array();
+            for (let z in params.Labels) {
+                let obj = new Labels();
+                obj.deserialize(params.Labels[z]);
+                this.Labels.push(obj);
+            }
+        }
+        this.BasicInfo = 'BasicInfo' in params ? params.BasicInfo : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.X = 'X' in params ? params.X : null;
+        this.Y = 'Y' in params ? params.Y : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.ID = 'ID' in params ? params.ID : null;
+
+    }
+}
+
+/**
+ * DetectProduct返回参数结构体
+ * @class
+ */
+class DetectProductResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 商品识别结果数组
+         * @type {Array.<Product> || null}
+         */
+        this.Products = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Products) {
+            this.Products = new Array();
+            for (let z in params.Products) {
+                let obj = new Product();
+                obj.deserialize(params.Products[z]);
+                this.Products.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 图像标签检测结果。
+ * @class
+ */
+class DetectLabelItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片中的物体名称。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 算法对于Name的置信度，0-100之间，值越高，表示对于Name越确定。
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * 标签的一级分类
+         * @type {string || null}
+         */
+        this.FirstCategory = null;
+
+        /**
+         * 标签的二级分类
+         * @type {string || null}
+         */
+        this.SecondCategory = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.FirstCategory = 'FirstCategory' in params ? params.FirstCategory : null;
+        this.SecondCategory = 'SecondCategory' in params ? params.SecondCategory : null;
+
+    }
+}
+
+/**
+ * 检测到的主体在图片中的矩形框位置（四个顶点坐标）
+ * @class
+ */
+class Location extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 位置矩形框的左上角横坐标
+         * @type {number || null}
+         */
+        this.XMin = null;
+
+        /**
+         * 位置矩形框的左上角纵坐标
+         * @type {number || null}
+         */
+        this.YMin = null;
+
+        /**
+         * 位置矩形框的右下角横坐标
+         * @type {number || null}
+         */
+        this.XMax = null;
+
+        /**
+         * 位置矩形框的右下角纵坐标
+         * @type {number || null}
+         */
+        this.YMax = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.XMin = 'XMin' in params ? params.XMin : null;
+        this.YMin = 'YMin' in params ? params.YMin : null;
+        this.XMax = 'XMax' in params ? params.XMax : null;
+        this.YMax = 'YMax' in params ? params.YMax : null;
+
+    }
+}
+
+/**
+ * 名人识别的标签
+ * @class
+ */
+class Labels extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 公众人物身份标签的一级分类，例如体育明星、娱乐明星、政治人物等；
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FirstLabel = null;
+
+        /**
+         * 公众人物身份标签的二级分类，例如歌手（对应一级标签为“娱乐明星”）；
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SecondLabel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FirstLabel = 'FirstLabel' in params ? params.FirstLabel : null;
+        this.SecondLabel = 'SecondLabel' in params ? params.SecondLabel : null;
+
+    }
+}
+
+/**
  * 检测到的单个商品结构体
  * @class
  */
@@ -541,157 +1385,33 @@ class Product extends  AbstractModel {
 }
 
 /**
- * DetectLabel请求参数结构体
+ * 检测到的图片中的商品位置和品类预测。 
+当图片中存在多个商品时，输出多组坐标，按照__显著性__排序（综合考虑面积、是否在中心、检测算法置信度）。 
+最多可以输出__3组__检测结果。
  * @class
  */
-class DetectLabelRequest extends  AbstractModel {
+class RegionDetected extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 图片的URL地址。
+         * 商品的品类预测结果。 
+包含：鞋、图书音像、箱包、美妆个护、服饰、家电数码、玩具乐器、食品饮料、珠宝、家居家装、药品、酒水、绿植园艺、其他商品、非商品等。
          * @type {string || null}
          */
-        this.ImageUrl = null;
+        this.Category = null;
 
         /**
-         * 图片经过base64编码的内容。与ImageUrl同时存在时优先使用ImageUrl字段。 
-图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
-非腾讯云存储的Url速度和稳定性可能受一定影响。
-         * @type {string || null}
-         */
-        this.ImageBase64 = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
-        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
-
-    }
-}
-
-/**
- * DetectLabel返回参数结构体
- * @class
- */
-class DetectLabelResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 标签结果数组。
-         * @type {Array.<DetectLabelItem> || null}
-         */
-        this.Labels = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Labels) {
-            this.Labels = new Array();
-            for (let z in params.Labels) {
-                let obj = new DetectLabelItem();
-                obj.deserialize(params.Labels[z]);
-                this.Labels.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * EnhanceImage返回参数结构体
- * @class
- */
-class EnhanceImageResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 增强后图片的base64编码。
-         * @type {string || null}
-         */
-        this.EnhancedImage = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.EnhancedImage = 'EnhancedImage' in params ? params.EnhancedImage : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * 恶心识别结果。
- * @class
- */
-class DisgustResult extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 该识别场景的错误码：
-0表示成功，
--1表示系统错误，
--2表示引擎错误。
+         * 商品品类预测的置信度
          * @type {number || null}
          */
-        this.Code = null;
+        this.CategoryScore = null;
 
         /**
-         * 错误码描述信息。
-         * @type {string || null}
+         * 检测到的主体在图片中的坐标，表示为矩形框的四个顶点坐标
+         * @type {Location || null}
          */
-        this.Msg = null;
-
-        /**
-         * 识别场景的审核结论：
-PASS：正常
-REVIEW：疑似
-BLOCK：违规
-         * @type {string || null}
-         */
-        this.Suggestion = null;
-
-        /**
-         * 图像恶心的分数，0-100之间，分数越高恶心几率越大。
-         * @type {number || null}
-         */
-        this.Confidence = null;
+        this.Location = null;
 
     }
 
@@ -702,676 +1422,14 @@ BLOCK：违规
         if (!params) {
             return;
         }
-        this.Code = 'Code' in params ? params.Code : null;
-        this.Msg = 'Msg' in params ? params.Msg : null;
-        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Category = 'Category' in params ? params.Category : null;
+        this.CategoryScore = 'CategoryScore' in params ? params.CategoryScore : null;
 
-    }
-}
-
-/**
- * AssessQuality请求参数结构体
- * @class
- */
-class AssessQualityRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 图片URL地址。 
-图片限制： 
-• 图片格式：PNG、JPG、JPEG。 
-• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 
-建议：
-• 图片像素：大于50*50像素，否则影响识别效果； 
-• 长宽比：长边：短边<5； 
-接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
-         * @type {string || null}
-         */
-        this.ImageUrl = null;
-
-        /**
-         * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
-         * @type {string || null}
-         */
-        this.ImageBase64 = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
+        if (params.Location) {
+            let obj = new Location();
+            obj.deserialize(params.Location)
+            this.Location = obj;
         }
-        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
-        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
-
-    }
-}
-
-/**
- * RecognizeCar返回参数结构体
- * @class
- */
-class RecognizeCarResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 汽车的四个矩形顶点坐标
-         * @type {Array.<Coord> || null}
-         */
-        this.CarCoords = null;
-
-        /**
-         * 车辆属性识别的结果数组
-         * @type {Array.<CarTagItem> || null}
-         */
-        this.CarTags = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.CarCoords) {
-            this.CarCoords = new Array();
-            for (let z in params.CarCoords) {
-                let obj = new Coord();
-                obj.deserialize(params.CarCoords[z]);
-                this.CarCoords.push(obj);
-            }
-        }
-
-        if (params.CarTags) {
-            this.CarTags = new Array();
-            for (let z in params.CarTags) {
-                let obj = new CarTagItem();
-                obj.deserialize(params.CarTags[z]);
-                this.CarTags.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * RecognizeCar请求参数结构体
- * @class
- */
-class RecognizeCarRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 图片的BASE64值；
-BASE64编码后的图片数据大小不超过3M，支持PNG、JPG、JPEG、BMP格式，暂不支持GIF格式。
-         * @type {string || null}
-         */
-        this.ImageBase64 = null;
-
-        /**
-         * 图片的 ImageUrl、ImageBase64必须提供一个，如果都提供，只使用ImageUrl。
-
-图片URL地址。支持的图片格式：PNG、JPG、JPEG、BMP，暂不支持GIF格式。支持的图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。
-         * @type {string || null}
-         */
-        this.ImageUrl = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
-        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
-
-    }
-}
-
-/**
- * EnhanceImage请求参数结构体
- * @class
- */
-class EnhanceImageRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 图片URL地址。 
-图片限制： 
-• 图片格式：PNG、JPG、JPEG。 
-• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 
-建议：
-• 图片像素：大于50*50像素，否则影响识别效果； 
-• 长宽比：长边：短边<5； 
-接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
-         * @type {string || null}
-         */
-        this.ImageUrl = null;
-
-        /**
-         * 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段
-         * @type {string || null}
-         */
-        this.ImageBase64 = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
-        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
-
-    }
-}
-
-/**
- * DetectCelebrity请求参数结构体
- * @class
- */
-class DetectCelebrityRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 图片的URL地址。支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
-         * @type {string || null}
-         */
-        this.ImageUrl = null;
-
-        /**
-         * 图片经过base64编码的内容。与ImageUrl同时存在时优先使用ImageUrl字段。 
-图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
-非腾讯云存储的Url速度和稳定性可能受一定影响。
-支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
-         * @type {string || null}
-         */
-        this.ImageBase64 = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
-        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
-
-    }
-}
-
-/**
- * DetectProduct返回参数结构体
- * @class
- */
-class DetectProductResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 商品识别结果数组
-         * @type {Array.<Product> || null}
-         */
-        this.Products = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Products) {
-            this.Products = new Array();
-            for (let z in params.Products) {
-                let obj = new Product();
-                obj.deserialize(params.Products[z]);
-                this.Products.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * 公众人物识别人脸信息
- * @class
- */
-class Face extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 与图片中人脸最相似的公众人物的名字。
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 公众人物身份标签的数组，一个公众人物可能有多个身份标签。
-         * @type {Array.<Labels> || null}
-         */
-        this.Labels = null;
-
-        /**
-         * 对人物的简介。
-         * @type {string || null}
-         */
-        this.BasicInfo = null;
-
-        /**
-         * 算法对于Name的置信度（图像中人脸与公众人物的相似度），0-100之间，值越高，表示对于Name越确定。
-当Confidence低于70分时，Name仅供参考。您可以根据业务实际情况调整阈值。
-         * @type {number || null}
-         */
-        this.Confidence = null;
-
-        /**
-         * 人脸区域左上角横坐标。
-         * @type {number || null}
-         */
-        this.X = null;
-
-        /**
-         * 人脸区域左上角纵坐标。
-         * @type {number || null}
-         */
-        this.Y = null;
-
-        /**
-         * 人脸区域宽度。
-         * @type {number || null}
-         */
-        this.Width = null;
-
-        /**
-         * 人脸区域高度。
-         * @type {number || null}
-         */
-        this.Height = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Name = 'Name' in params ? params.Name : null;
-
-        if (params.Labels) {
-            this.Labels = new Array();
-            for (let z in params.Labels) {
-                let obj = new Labels();
-                obj.deserialize(params.Labels[z]);
-                this.Labels.push(obj);
-            }
-        }
-        this.BasicInfo = 'BasicInfo' in params ? params.BasicInfo : null;
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
-        this.X = 'X' in params ? params.X : null;
-        this.Y = 'Y' in params ? params.Y : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
-
-    }
-}
-
-/**
- * 政治敏感识别结果。
- * @class
- */
-class PoliticsResult extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 该识别场景的错误码：
-0表示成功，
--1表示系统错误，
--2表示引擎错误，
--1400表示图片解码失败，
--1401表示图片不符合规范。
-         * @type {number || null}
-         */
-        this.Code = null;
-
-        /**
-         * 错误码描述信息。
-         * @type {string || null}
-         */
-        this.Msg = null;
-
-        /**
-         * 识别场景的审核结论：
-PASS：正常
-REVIEW：疑似
-BLOCK：违规
-         * @type {string || null}
-         */
-        this.Suggestion = null;
-
-        /**
-         * 图像涉政的分数，0-100之间，分数越高涉政几率越大。
-Type为DNA时：
-0到75，Suggestion建议为PASS
-75到90，Suggestion建议为REVIEW
-90到100，Suggestion建议为BLOCK
-Type为FACE时：
-0到55，Suggestion建议为PASS
-55到60，Suggestion建议为REVIEW
-60到100，Suggestion建议为BLOCK
-         * @type {number || null}
-         */
-        this.Confidence = null;
-
-        /**
-         * Type取值为‘FACE’时，人脸识别的结果列表。基于图片中实际检测到的人脸数，返回数组最大值不超过5个。
-         * @type {Array.<FaceResult> || null}
-         */
-        this.FaceResults = null;
-
-        /**
-         * 取值'DNA' 或‘FACE’。DNA表示结论和置信度来自图像指纹，FACE表示结论和置信度来自人脸识别。
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * 鉴政识别返回的详细标签后期开放。
-         * @type {string || null}
-         */
-        this.AdvancedInfo = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Code = 'Code' in params ? params.Code : null;
-        this.Msg = 'Msg' in params ? params.Msg : null;
-        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
-
-        if (params.FaceResults) {
-            this.FaceResults = new Array();
-            for (let z in params.FaceResults) {
-                let obj = new FaceResult();
-                obj.deserialize(params.FaceResults[z]);
-                this.FaceResults.push(obj);
-            }
-        }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
-
-    }
-}
-
-/**
- * 色情识别结果。
- * @class
- */
-class PornResult extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 该识别场景的错误码：
-0表示成功，
--1表示系统错误，
--2表示引擎错误，
--1400表示图片解码失败。
-         * @type {number || null}
-         */
-        this.Code = null;
-
-        /**
-         * 错误码描述信息。
-         * @type {string || null}
-         */
-        this.Msg = null;
-
-        /**
-         * 识别场景的审核结论：
-PASS：正常
-REVIEW：疑似
-BLOCK：违规
-         * @type {string || null}
-         */
-        this.Suggestion = null;
-
-        /**
-         * 算法对于Suggestion的置信度，0-100之间，值越高，表示对于Suggestion越确定。
-         * @type {number || null}
-         */
-        this.Confidence = null;
-
-        /**
-         * 预留字段，后期用于展示更多识别信息。
-         * @type {string || null}
-         */
-        this.AdvancedInfo = null;
-
-        /**
-         * 取值'LABEL‘，LABEL表示结论和置信度来自标签分类。
-         * @type {string || null}
-         */
-        this.Type = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Code = 'Code' in params ? params.Code : null;
-        this.Msg = 'Msg' in params ? params.Msg : null;
-        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
-        this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
-        this.Type = 'Type' in params ? params.Type : null;
-
-    }
-}
-
-/**
- * 汽车坐标信息
- * @class
- */
-class Coord extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 横坐标x
-         * @type {number || null}
-         */
-        this.X = null;
-
-        /**
-         * 纵坐标y
-         * @type {number || null}
-         */
-        this.Y = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.X = 'X' in params ? params.X : null;
-        this.Y = 'Y' in params ? params.Y : null;
-
-    }
-}
-
-/**
- * 人脸识别结果。
- * @class
- */
-class FaceResult extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 检测出的人脸框位置。
-         * @type {FaceRect || null}
-         */
-        this.FaceRect = null;
-
-        /**
-         * 候选人列表。当前返回相似度最高的候选人。
-         * @type {Array.<Candidate> || null}
-         */
-        this.Candidates = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.FaceRect) {
-            let obj = new FaceRect();
-            obj.deserialize(params.FaceRect)
-            this.FaceRect = obj;
-        }
-
-        if (params.Candidates) {
-            this.Candidates = new Array();
-            for (let z in params.Candidates) {
-                let obj = new Candidate();
-                obj.deserialize(params.Candidates[z]);
-                this.Candidates.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * 图像标签检测结果。
- * @class
- */
-class DetectLabelItem extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 图片中的物体名称。
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 算法对于Name的置信度，0-100之间，值越高，表示对于Name越确定。
-         * @type {number || null}
-         */
-        this.Confidence = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
-
-    }
-}
-
-/**
- * 名人识别的标签
- * @class
- */
-class Labels extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 公众人物身份标签的一级分类，例如体育明星、娱乐明星、政治人物等；
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.FirstLabel = null;
-
-        /**
-         * 公众人物身份标签的二级分类，例如歌手（对应一级标签为“娱乐明星”）；
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.SecondLabel = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FirstLabel = 'FirstLabel' in params ? params.FirstLabel : null;
-        this.SecondLabel = 'SecondLabel' in params ? params.SecondLabel : null;
 
     }
 }
@@ -1420,6 +1478,12 @@ class CarTagItem extends  AbstractModel {
          */
         this.Year = null;
 
+        /**
+         * 车辆在图片中的坐标信息
+         * @type {Array.<Coord> || null}
+         */
+        this.CarLocation = null;
+
     }
 
     /**
@@ -1436,41 +1500,46 @@ class CarTagItem extends  AbstractModel {
         this.Confidence = 'Confidence' in params ? params.Confidence : null;
         this.Year = 'Year' in params ? params.Year : null;
 
+        if (params.CarLocation) {
+            this.CarLocation = new Array();
+            for (let z in params.CarLocation) {
+                let obj = new Coord();
+                obj.deserialize(params.CarLocation[z]);
+                this.CarLocation.push(obj);
+            }
+        }
+
     }
 }
 
 /**
- * 识别出的人脸在图片中的位置。
-
+ * 本服务在不同误识率水平下（将图片中的人物识别错误的比例）的推荐阈值，可以用于控制识别结果的精度。
+{FalseRate1Percent, FalseRate5Permil, FalseRate1Permil}分别代表误识率在百分之一、千分之五、千分之一情况下的推荐阈值。
+因为阈值会存在变动，请勿将此处输出的固定值处理，而是每次取值与confidence对比，来判断本次的识别结果是否可信。
+例如，如果您业务中可以接受的误识率是1%，则可以将所有confidence>=FalseRate1Percent的结论认为是正确的。
  * @class
  */
-class FaceRect extends  AbstractModel {
+class Threshold extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 人脸区域左上角横坐标。
+         * 误识率在百分之一时的推荐阈值。
          * @type {number || null}
          */
-        this.X = null;
+        this.FalseRate1Percent = null;
 
         /**
-         * 人脸区域左上角纵坐标。
+         * 误识率在千分之五时的推荐阈值。
          * @type {number || null}
          */
-        this.Y = null;
+        this.FalseRate5Permil = null;
 
         /**
-         * 人脸区域宽度。
+         * 误识率在千分之一时的推荐阈值。
          * @type {number || null}
          */
-        this.Width = null;
-
-        /**
-         * 人脸区域高度。
-         * @type {number || null}
-         */
-        this.Height = null;
+        this.FalseRate1Permil = null;
 
     }
 
@@ -1481,41 +1550,144 @@ class FaceRect extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.X = 'X' in params ? params.X : null;
-        this.Y = 'Y' in params ? params.Y : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
+        this.FalseRate1Percent = 'FalseRate1Percent' in params ? params.FalseRate1Percent : null;
+        this.FalseRate5Permil = 'FalseRate5Permil' in params ? params.FalseRate5Permil : null;
+        this.FalseRate1Permil = 'FalseRate1Permil' in params ? params.FalseRate1Permil : null;
+
+    }
+}
+
+/**
+ * RecognizeCar返回参数结构体
+ * @class
+ */
+class RecognizeCarResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 汽车的四个矩形顶点坐标，如果图片中存在多辆车，则输出最大车辆的坐标。
+         * @type {Array.<Coord> || null}
+         */
+        this.CarCoords = null;
+
+        /**
+         * 车辆属性识别的结果数组，如果识别到多辆车，则会输出每辆车的top1结果。
+         * @type {Array.<CarTagItem> || null}
+         */
+        this.CarTags = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.CarCoords) {
+            this.CarCoords = new Array();
+            for (let z in params.CarCoords) {
+                let obj = new Coord();
+                obj.deserialize(params.CarCoords[z]);
+                this.CarCoords.push(obj);
+            }
+        }
+
+        if (params.CarTags) {
+            this.CarTags = new Array();
+            for (let z in params.CarTags) {
+                let obj = new CarTagItem();
+                obj.deserialize(params.CarTags[z]);
+                this.CarTags.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DetectMisbehavior请求参数结构体
+ * @class
+ */
+class DetectMisbehaviorRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片URL地址。 
+图片限制： 
+• 图片格式：PNG、JPG、JPEG。 
+• 图片大小：所下载图片经Base64编码后不超过4M。图片下载时间不超过3秒。 
+建议：
+• 图片像素：大于50*50像素，否则影响识别效果； 
+• 长宽比：长边：短边<5； 
+接口响应时间会受到图片下载时间的影响，建议使用更可靠的存储服务，推荐将图片存储在腾讯云COS。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * 图片经过base64编码的内容。最大不超过4M。与ImageUrl同时存在时优先使用ImageUrl字段。
+**注意：图片需要base64编码，并且要去掉编码头部。**
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
 
     }
 }
 
 module.exports = {
-    Candidate: Candidate,
-    TerrorismResult: TerrorismResult,
+    DetectProductBetaResponse: DetectProductBetaResponse,
+    DetectDisgustRequest: DetectDisgustRequest,
     DetectCelebrityResponse: DetectCelebrityResponse,
+    CropImageRequest: CropImageRequest,
     DetectProductRequest: DetectProductRequest,
-    ImageModerationResponse: ImageModerationResponse,
-    ImageModerationRequest: ImageModerationRequest,
     AssessQualityResponse: AssessQualityResponse,
-    Product: Product,
+    DetectDisgustResponse: DetectDisgustResponse,
     DetectLabelRequest: DetectLabelRequest,
     DetectLabelResponse: DetectLabelResponse,
     EnhanceImageResponse: EnhanceImageResponse,
-    DisgustResult: DisgustResult,
+    ProductInfo: ProductInfo,
     AssessQualityRequest: AssessQualityRequest,
-    RecognizeCarResponse: RecognizeCarResponse,
+    DetectProductBetaRequest: DetectProductBetaRequest,
+    DetectMisbehaviorResponse: DetectMisbehaviorResponse,
     RecognizeCarRequest: RecognizeCarRequest,
     EnhanceImageRequest: EnhanceImageRequest,
+    CropImageResponse: CropImageResponse,
     DetectCelebrityRequest: DetectCelebrityRequest,
-    DetectProductResponse: DetectProductResponse,
-    Face: Face,
-    PoliticsResult: PoliticsResult,
-    PornResult: PornResult,
     Coord: Coord,
-    FaceResult: FaceResult,
+    Face: Face,
+    DetectProductResponse: DetectProductResponse,
     DetectLabelItem: DetectLabelItem,
+    Location: Location,
     Labels: Labels,
+    Product: Product,
+    RegionDetected: RegionDetected,
     CarTagItem: CarTagItem,
-    FaceRect: FaceRect,
+    Threshold: Threshold,
+    RecognizeCarResponse: RecognizeCarResponse,
+    DetectMisbehaviorRequest: DetectMisbehaviorRequest,
 
 }

@@ -395,6 +395,41 @@ class AssignProjectRequest extends  AbstractModel {
 }
 
 /**
+ * 客户端连接信息，包括客户端IP和连接数
+ * @class
+ */
+class ClientConnection extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 连接的客户端IP
+         * @type {string || null}
+         */
+        this.IP = null;
+
+        /**
+         * 对应客户端IP的连接数
+         * @type {number || null}
+         */
+        this.Count = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IP = 'IP' in params ? params.IP : null;
+        this.Count = 'Count' in params ? params.Count : null;
+
+    }
+}
+
+/**
  * DescribeDBInstances请求参数结构体
  * @class
  */
@@ -551,7 +586,7 @@ class SpecificationInfo extends  AbstractModel {
          * 售卖规格信息
          * @type {Array.<SpecItem> || null}
          */
-        this.SpecItem = null;
+        this.SpecItems = null;
 
     }
 
@@ -565,12 +600,12 @@ class SpecificationInfo extends  AbstractModel {
         this.Region = 'Region' in params ? params.Region : null;
         this.Zone = 'Zone' in params ? params.Zone : null;
 
-        if (params.SpecItem) {
-            this.SpecItem = new Array();
-            for (let z in params.SpecItem) {
+        if (params.SpecItems) {
+            this.SpecItems = new Array();
+            for (let z in params.SpecItems) {
                 let obj = new SpecItem();
-                obj.deserialize(params.SpecItem[z]);
-                this.SpecItem.push(obj);
+                obj.deserialize(params.SpecItems[z]);
+                this.SpecItems.push(obj);
             }
         }
 
@@ -813,7 +848,7 @@ class MongoDBInstanceDetail extends  AbstractModel {
         this.InstanceStatusDesc = null;
 
         /**
-         * 实例对应的物理实例id，回档并替换过的实例有不同的InstanceId和RealInstanceId，从barad获取监控数据等场景下需要用物理id获取
+         * 实例对应的物理实例ID，回档并替换过的实例有不同的InstanceId和RealInstanceId，从barad获取监控数据等场景下需要用物理id获取
          * @type {string || null}
          */
         this.RealInstanceId = null;
@@ -1267,6 +1302,34 @@ class DescribeSlowLogRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeClientConnections请求参数结构体
+ * @class
+ */
+class DescribeClientConnectionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * SetAutoRenew返回参数结构体
  * @class
  */
@@ -1295,7 +1358,7 @@ class SetAutoRenewResponse extends  AbstractModel {
 }
 
 /**
- * 关联实例信息实例信息
+ * 实例信息
  * @class
  */
 class MongoDBInstance extends  AbstractModel {
@@ -1456,6 +1519,50 @@ class RenameInstanceResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeClientConnections返回参数结构体
+ * @class
+ */
+class DescribeClientConnectionsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 客户端连接信息，包括客户端IP和对应IP的连接数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ClientConnection> || null}
+         */
+        this.Clients = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Clients) {
+            this.Clients = new Array();
+            for (let z in params.Clients) {
+                let obj = new ClientConnection();
+                obj.deserialize(params.Clients[z]);
+                this.Clients.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1674,7 +1781,7 @@ class MongodbShardInfo extends  AbstractModel {
         this.SecondaryNum = null;
 
         /**
-         * 分片物理id
+         * 分片物理ID
          * @type {string || null}
          */
         this.RealReplicaSetId = null;
@@ -1875,6 +1982,7 @@ module.exports = {
     UpgradeDBInstanceHourRequest: UpgradeDBInstanceHourRequest,
     CreateDBInstanceHourRequest: CreateDBInstanceHourRequest,
     AssignProjectRequest: AssignProjectRequest,
+    ClientConnection: ClientConnection,
     DescribeDBInstancesRequest: DescribeDBInstancesRequest,
     SetPasswordResponse: SetPasswordResponse,
     SpecificationInfo: SpecificationInfo,
@@ -1887,12 +1995,14 @@ module.exports = {
     SetPasswordRequest: SetPasswordRequest,
     AssignProjectResponse: AssignProjectResponse,
     DescribeSlowLogRequest: DescribeSlowLogRequest,
+    DescribeClientConnectionsRequest: DescribeClientConnectionsRequest,
     SetAutoRenewResponse: SetAutoRenewResponse,
     MongoDBInstance: MongoDBInstance,
     RenameInstanceRequest: RenameInstanceRequest,
     UpgradeDBInstanceResponse: UpgradeDBInstanceResponse,
     SetAutoRenewRequest: SetAutoRenewRequest,
     RenameInstanceResponse: RenameInstanceResponse,
+    DescribeClientConnectionsResponse: DescribeClientConnectionsResponse,
     UpgradeDBInstanceHourResponse: UpgradeDBInstanceHourResponse,
     UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
     CreateDBInstanceHourResponse: CreateDBInstanceHourResponse,

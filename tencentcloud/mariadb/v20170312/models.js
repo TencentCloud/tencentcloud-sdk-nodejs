@@ -99,6 +99,24 @@ class CreateDBInstanceRequest extends  AbstractModel {
          */
         this.DbVersionId = null;
 
+        /**
+         * 实例名称， 可以通过该字段自主的设置实例的名字
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 安全组ID列表
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+        /**
+         * 自动续费标志，1:自动续费，2:不自动续费
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
     }
 
     /**
@@ -120,6 +138,9 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.DbVersionId = 'DbVersionId' in params ? params.DbVersionId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
 
     }
 }
@@ -133,7 +154,7 @@ class DescribeAccountPrivilegesResponse extends  AbstractModel {
         super();
 
         /**
-         * 实例Id
+         * 实例ID
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -181,6 +202,34 @@ class DescribeAccountPrivilegesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDatabases请求参数结构体
+ * @class
+ */
+class DescribeDatabasesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID，形如：dcdbt-ow7t8lmc。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * CreateAccount返回参数结构体
  * @class
  */
@@ -189,7 +238,7 @@ class CreateAccountResponse extends  AbstractModel {
         super();
 
         /**
-         * 实例Id，透传入参。
+         * 实例ID，透传入参。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -329,6 +378,76 @@ class DescribeRenewalPriceResponse extends  AbstractModel {
         }
         this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
         this.Price = 'Price' in params ? params.Price : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateTmpInstances请求参数结构体
+ * @class
+ */
+class CreateTmpInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 回档实例的ID列表，形如：tdsql-ow728lmc。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * 回档时间点
+         * @type {string || null}
+         */
+        this.RollbackTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.RollbackTime = 'RollbackTime' in params ? params.RollbackTime : null;
+
+    }
+}
+
+/**
+ * RestartDBInstances返回参数结构体
+ * @class
+ */
+class RestartDBInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步任务ID
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -586,7 +705,7 @@ class CreateAccountRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 登录用户名，由字幕、数字、下划线和连字符组成，长度为1~32位。
+         * 登录用户名，由字母、数字、下划线和连字符组成，长度为1~32位。
          * @type {string || null}
          */
         this.UserName = null;
@@ -650,7 +769,7 @@ class InitDBInstancesResponse extends  AbstractModel {
         super();
 
         /**
-         * 异步任务Id，可通过 DescribeFlow 查询任务状态。
+         * 异步任务ID，可通过 DescribeFlow 查询任务状态。
          * @type {number || null}
          */
         this.FlowId = null;
@@ -1265,7 +1384,7 @@ class DBBackupTimeConfig extends  AbstractModel {
         super();
 
         /**
-         * 实例 Id
+         * 实例 ID
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -1727,7 +1846,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.ExclusterType = null;
 
         /**
-         * 按独享集群Id过滤实例，独享集群Id形如dbdc-4ih6uct9
+         * 按独享集群ID过滤实例，独享集群ID形如dbdc-4ih6uct9
          * @type {Array.<string> || null}
          */
         this.ExclusterIds = null;
@@ -1901,6 +2020,27 @@ class ResetAccountPasswordResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDBInstanceSpecs请求参数结构体
+ * @class
+ */
+class DescribeDBInstanceSpecsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * DescribePrice请求参数结构体
  * @class
  */
@@ -1947,6 +2087,12 @@ class DescribePriceRequest extends  AbstractModel {
          */
         this.Count = null;
 
+        /**
+         * 付费类型。postpaid：按量付费   prepaid：预付费
+         * @type {string || null}
+         */
+        this.Paymode = null;
+
     }
 
     /**
@@ -1962,6 +2108,7 @@ class DescribePriceRequest extends  AbstractModel {
         this.Storage = 'Storage' in params ? params.Storage : null;
         this.Period = 'Period' in params ? params.Period : null;
         this.Count = 'Count' in params ? params.Count : null;
+        this.Paymode = 'Paymode' in params ? params.Paymode : null;
 
     }
 }
@@ -2194,7 +2341,7 @@ class GrantAccountPrivilegesRequest extends  AbstractModel {
         this.Type = null;
 
         /**
-         * 具体的 Type 的名称，比如 Type 为 table 时就是具体的表名。DbName 和 Type 都为具体名称，则 Object 表示具体对象名，不能为 \* 或者为空
+         * 具体的 Type 的名称，例如 Type 为 table 时就是具体的表名。DbName 和 Type 都为具体名称，则 Object 表示具体对象名，不能为 \* 或者为空
          * @type {string || null}
          */
         this.Object = null;
@@ -2317,6 +2464,12 @@ class SpecConfigInfo extends  AbstractModel {
          */
         this.NodeCount = null;
 
+        /**
+         * Cpu核数
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
     }
 
     /**
@@ -2334,6 +2487,7 @@ class SpecConfigInfo extends  AbstractModel {
         this.Qps = 'Qps' in params ? params.Qps : null;
         this.Pid = 'Pid' in params ? params.Pid : null;
         this.NodeCount = 'NodeCount' in params ? params.NodeCount : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
 
     }
 }
@@ -2552,7 +2706,7 @@ class OpenDBExtranetAccessResponse extends  AbstractModel {
         super();
 
         /**
-         * 异步任务Id，可通过 DescribeFlow 查询任务状态。
+         * 异步任务ID，可通过 DescribeFlow 查询任务状态。
          * @type {number || null}
          */
         this.FlowId = null;
@@ -2651,6 +2805,41 @@ class ModifyBackupTimeRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.StartBackupTime = 'StartBackupTime' in params ? params.StartBackupTime : null;
         this.EndBackupTime = 'EndBackupTime' in params ? params.EndBackupTime : null;
+
+    }
+}
+
+/**
+ * CreateTmpInstances返回参数结构体
+ * @class
+ */
+class CreateTmpInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步任务流程ID。
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2764,7 +2953,7 @@ class DBInstance extends  AbstractModel {
         super();
 
         /**
-         * 实例 Id，唯一标识一个 TDSQL 实例
+         * 实例 ID，唯一标识一个 TDSQL 实例
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -2776,13 +2965,13 @@ class DBInstance extends  AbstractModel {
         this.InstanceName = null;
 
         /**
-         * 实例所属应用 Id
+         * 实例所属应用 ID
          * @type {number || null}
          */
         this.AppId = null;
 
         /**
-         * 实例所属项目 Id
+         * 实例所属项目 ID
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -2800,13 +2989,13 @@ class DBInstance extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * 私有网络 Id，基础网络时为 0
+         * 私有网络 ID，基础网络时为 0
          * @type {number || null}
          */
         this.VpcId = null;
 
         /**
-         * 子网 Id，基础网络时为 0
+         * 子网 ID，基础网络时为 0
          * @type {number || null}
          */
         this.SubnetId = null;
@@ -2896,13 +3085,13 @@ class DBInstance extends  AbstractModel {
         this.Storage = null;
 
         /**
-         * 字符串型的私有网络Id
+         * 字符串型的私有网络ID
          * @type {string || null}
          */
         this.UniqueVpcId = null;
 
         /**
-         * 字符串型的私有网络子网Id
+         * 字符串型的私有网络子网ID
          * @type {string || null}
          */
         this.UniqueSubnetId = null;
@@ -2926,19 +3115,19 @@ class DBInstance extends  AbstractModel {
         this.IsTmp = null;
 
         /**
-         * 独享集群Id，为空表示为普通实例
+         * 独享集群ID，为空表示为普通实例
          * @type {string || null}
          */
         this.ExclusterId = null;
 
         /**
-         * 数字实例Id（过时字段，请勿依赖该值）
+         * 数字实例ID（过时字段，请勿依赖该值）
          * @type {number || null}
          */
         this.Id = null;
 
         /**
-         * 产品类型 Id
+         * 产品类型 ID
          * @type {number || null}
          */
         this.Pid = null;
@@ -2994,6 +3183,12 @@ class DBInstance extends  AbstractModel {
          */
         this.IsEncryptSupported = null;
 
+        /**
+         * 实例CPU核数
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
     }
 
     /**
@@ -3041,6 +3236,7 @@ class DBInstance extends  AbstractModel {
         this.IsAuditSupported = 'IsAuditSupported' in params ? params.IsAuditSupported : null;
         this.Machine = 'Machine' in params ? params.Machine : null;
         this.IsEncryptSupported = 'IsEncryptSupported' in params ? params.IsEncryptSupported : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
 
     }
 }
@@ -3096,7 +3292,7 @@ class InitDBInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * 待初始化的实例Id列表，形如：tdsql-ow728lmc，可以通过 DescribeDBInstances 查询实例详情获得。
+         * 待初始化的实例ID列表，形如：tdsql-ow728lmc，可以通过 DescribeDBInstances 查询实例详情获得。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -3166,12 +3362,18 @@ class ModifyBackupTimeResponse extends  AbstractModel {
 }
 
 /**
- * DescribeDBInstanceSpecs请求参数结构体
+ * 数据库信息
  * @class
  */
-class DescribeDBInstanceSpecsRequest extends  AbstractModel {
+class Database extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 数据库名称
+         * @type {string || null}
+         */
+        this.DbName = null;
 
     }
 
@@ -3182,6 +3384,7 @@ class DescribeDBInstanceSpecsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.DbName = 'DbName' in params ? params.DbName : null;
 
     }
 }
@@ -3251,6 +3454,12 @@ class ModifyDBInstanceNameResponse extends  AbstractModel {
         super();
 
         /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -3265,6 +3474,7 @@ class ModifyDBInstanceNameResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3279,7 +3489,7 @@ class CloseDBExtranetAccessResponse extends  AbstractModel {
         super();
 
         /**
-         * 异步任务Id，可通过 DescribeFlow 查询任务状态。
+         * 异步任务ID，可通过 DescribeFlow 查询任务状态。
          * @type {number || null}
          */
         this.FlowId = null;
@@ -3564,6 +3774,13 @@ class SlowLogData extends  AbstractModel {
          */
         this.User = null;
 
+        /**
+         * 样例Sql
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ExampleSql = null;
+
     }
 
     /**
@@ -3590,6 +3807,7 @@ class SlowLogData extends  AbstractModel {
         this.TsMax = 'TsMax' in params ? params.TsMax : null;
         this.TsMin = 'TsMin' in params ? params.TsMin : null;
         this.User = 'User' in params ? params.User : null;
+        this.ExampleSql = 'ExampleSql' in params ? params.ExampleSql : null;
 
     }
 }
@@ -3625,6 +3843,56 @@ class RenewDBInstanceResponse extends  AbstractModel {
             return;
         }
         this.DealName = 'DealName' in params ? params.DealName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDatabases返回参数结构体
+ * @class
+ */
+class DescribeDatabasesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 该实例上的数据库列表。
+         * @type {Array.<Database> || null}
+         */
+        this.Databases = null;
+
+        /**
+         * 透传入参。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Databases) {
+            this.Databases = new Array();
+            for (let z in params.Databases) {
+                let obj = new Database();
+                obj.deserialize(params.Databases[z]);
+                this.Databases.push(obj);
+            }
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4456,6 +4724,34 @@ class LogFileInfo extends  AbstractModel {
 }
 
 /**
+ * RestartDBInstances请求参数结构体
+ * @class
+ */
+class RestartDBInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID的数组
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
  * DescribeDBResourceUsageDetails请求参数结构体
  * @class
  */
@@ -4614,7 +4910,7 @@ class DescribeAccountPrivilegesRequest extends  AbstractModel {
         this.Type = null;
 
         /**
-         * 具体的 Type 的名称，比如 Type 为 table 时就是具体的表名。DbName 和 Type 都为具体名称，则 Object 表示具体对象名，不能为 \* 或者为空
+         * 具体的 Type 的名称，例如 Type 为 table 时就是具体的表名。DbName 和 Type 都为具体名称，则 Object 表示具体对象名，不能为 \* 或者为空
          * @type {string || null}
          */
         this.Object = null;
@@ -5179,10 +5475,13 @@ class DeleteAccountResponse extends  AbstractModel {
 module.exports = {
     CreateDBInstanceRequest: CreateDBInstanceRequest,
     DescribeAccountPrivilegesResponse: DescribeAccountPrivilegesResponse,
+    DescribeDatabasesRequest: DescribeDatabasesRequest,
     CreateAccountResponse: CreateAccountResponse,
     DescribeDBParametersRequest: DescribeDBParametersRequest,
     DescribeAccountsRequest: DescribeAccountsRequest,
     DescribeRenewalPriceResponse: DescribeRenewalPriceResponse,
+    CreateTmpInstancesRequest: CreateTmpInstancesRequest,
+    RestartDBInstancesResponse: RestartDBInstancesResponse,
     DescribeUpgradePriceRequest: DescribeUpgradePriceRequest,
     DescribeDBResourceUsageDetailsResponse: DescribeDBResourceUsageDetailsResponse,
     DescribeDBInstanceSpecsResponse: DescribeDBInstanceSpecsResponse,
@@ -5213,6 +5512,7 @@ module.exports = {
     RenewDBInstanceRequest: RenewDBInstanceRequest,
     DescribeSqlLogsRequest: DescribeSqlLogsRequest,
     ResetAccountPasswordResponse: ResetAccountPasswordResponse,
+    DescribeDBInstanceSpecsRequest: DescribeDBInstanceSpecsRequest,
     DescribePriceRequest: DescribePriceRequest,
     CreateDBInstanceResponse: CreateDBInstanceResponse,
     DescribeBackupTimeRequest: DescribeBackupTimeRequest,
@@ -5228,13 +5528,14 @@ module.exports = {
     OpenDBExtranetAccessResponse: OpenDBExtranetAccessResponse,
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
     ModifyBackupTimeRequest: ModifyBackupTimeRequest,
+    CreateTmpInstancesResponse: CreateTmpInstancesResponse,
     UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
     DescribeUpgradePriceResponse: DescribeUpgradePriceResponse,
     DBInstance: DBInstance,
     DescribePriceResponse: DescribePriceResponse,
     InitDBInstancesRequest: InitDBInstancesRequest,
     ModifyBackupTimeResponse: ModifyBackupTimeResponse,
-    DescribeDBInstanceSpecsRequest: DescribeDBInstanceSpecsRequest,
+    Database: Database,
     GrantAccountPrivilegesResponse: GrantAccountPrivilegesResponse,
     OpenDBExtranetAccessRequest: OpenDBExtranetAccessRequest,
     ModifyDBInstanceNameResponse: ModifyDBInstanceNameResponse,
@@ -5244,6 +5545,7 @@ module.exports = {
     DescribeBackupTimeResponse: DescribeBackupTimeResponse,
     SlowLogData: SlowLogData,
     RenewDBInstanceResponse: RenewDBInstanceResponse,
+    DescribeDatabasesResponse: DescribeDatabasesResponse,
     DescribeOrdersRequest: DescribeOrdersRequest,
     DescribeDBLogFilesResponse: DescribeDBLogFilesResponse,
     CloseDBExtranetAccessRequest: CloseDBExtranetAccessRequest,
@@ -5259,6 +5561,7 @@ module.exports = {
     ConstraintRange: ConstraintRange,
     DescribeRenewalPriceRequest: DescribeRenewalPriceRequest,
     LogFileInfo: LogFileInfo,
+    RestartDBInstancesRequest: RestartDBInstancesRequest,
     DescribeDBResourceUsageDetailsRequest: DescribeDBResourceUsageDetailsRequest,
     DBAccount: DBAccount,
     DescribeAccountPrivilegesRequest: DescribeAccountPrivilegesRequest,

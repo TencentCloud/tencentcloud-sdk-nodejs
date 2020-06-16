@@ -73,6 +73,126 @@ class DayStreamPlayInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeWorkers返回参数结构体
+ * @class
+ */
+class DescribeWorkersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 各个区域的机器情况
+         * @type {Array.<WorkerRegionInfo> || null}
+         */
+        this.RegionDetail = null;
+
+        /**
+         * 空闲机器总数量
+         * @type {number || null}
+         */
+        this.Idle = null;
+
+        /**
+         * 区域个数
+         * @type {number || null}
+         */
+        this.RegionNum = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.RegionDetail) {
+            this.RegionDetail = new Array();
+            for (let z in params.RegionDetail) {
+                let obj = new WorkerRegionInfo();
+                obj.deserialize(params.RegionDetail[z]);
+                this.RegionDetail.push(obj);
+            }
+        }
+        this.Idle = 'Idle' in params ? params.Idle : null;
+        this.RegionNum = 'RegionNum' in params ? params.RegionNum : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ForbidLiveStream返回参数结构体
+ * @class
+ */
+class ForbidLiveStreamResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * worker的区域信息
+ * @class
+ */
+class WorkerRegionInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 该区域空闲机器数量
+         * @type {number || null}
+         */
+        this.Idle = null;
+
+        /**
+         * 区域
+         * @type {string || null}
+         */
+        this.Region = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Idle = 'Idle' in params ? params.Idle : null;
+        this.Region = 'Region' in params ? params.Region : null;
+
+    }
+}
+
+/**
  * RegisterIM请求参数结构体
  * @class
  */
@@ -122,6 +242,34 @@ class RegisterIMRequest extends  AbstractModel {
 }
 
 /**
+ * StopGame返回参数结构体
+ * @class
+ */
+class StopGameResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ForbidLiveStream请求参数结构体
  * @class
  */
@@ -136,7 +284,7 @@ class ForbidLiveStreamRequest extends  AbstractModel {
         this.AppName = null;
 
         /**
-         * 您的加速域名。
+         * 您的推流域名。
          * @type {string || null}
          */
         this.DomainName = null;
@@ -167,6 +315,34 @@ class ForbidLiveStreamRequest extends  AbstractModel {
         this.DomainName = 'DomainName' in params ? params.DomainName : null;
         this.StreamName = 'StreamName' in params ? params.StreamName : null;
         this.ResumeTime = 'ResumeTime' in params ? params.ResumeTime : null;
+
+    }
+}
+
+/**
+ * StopGame请求参数结构体
+ * @class
+ */
+class StopGameRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 游戏用户ID
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserId = 'UserId' in params ? params.UserId : null;
 
     }
 }
@@ -207,12 +383,39 @@ class RegisterIMResponse extends  AbstractModel {
 }
 
 /**
- * ForbidLiveStream返回参数结构体
+ * DescribeWorkers请求参数结构体
  * @class
  */
-class ForbidLiveStreamResponse extends  AbstractModel {
+class DescribeWorkersRequest extends  AbstractModel {
     constructor(){
         super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * CreateSession返回参数结构体
+ * @class
+ */
+class CreateSessionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务端session信息，返回给JSSDK
+         * @type {string || null}
+         */
+        this.ServerSession = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -229,6 +432,7 @@ class ForbidLiveStreamResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ServerSession = 'ServerSession' in params ? params.ServerSession : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -278,6 +482,76 @@ class DescribeStreamPlayInfoListResponse extends  AbstractModel {
 }
 
 /**
+ * CreateSession请求参数结构体
+ * @class
+ */
+class CreateSessionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 客户端session信息，从JSSDK请求中获得
+         * @type {string || null}
+         */
+        this.ClientSession = null;
+
+        /**
+         * 游戏ID
+         * @type {string || null}
+         */
+        this.GameId = null;
+
+        /**
+         * 游戏用户ID
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * 游戏参数
+         * @type {string || null}
+         */
+        this.GameParas = null;
+
+        /**
+         * 游戏区域
+         * @type {string || null}
+         */
+        this.GameRegion = null;
+
+        /**
+         * 背景图url
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * 分辨率
+         * @type {string || null}
+         */
+        this.Resolution = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClientSession = 'ClientSession' in params ? params.ClientSession : null;
+        this.GameId = 'GameId' in params ? params.GameId : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.GameParas = 'GameParas' in params ? params.GameParas : null;
+        this.GameRegion = 'GameRegion' in params ? params.GameRegion : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.Resolution = 'Resolution' in params ? params.Resolution : null;
+
+    }
+}
+
+/**
  * DescribeStreamPlayInfoList请求参数结构体
  * @class
  */
@@ -286,7 +560,7 @@ class DescribeStreamPlayInfoListRequest extends  AbstractModel {
         super();
 
         /**
-         * 结束时间，北京时间，
+         * 结束时间，北京时间，格式：2019-04-28 10:36:00
 结束时间 和 开始时间  必须在同一天内。
          * @type {string || null}
          */
@@ -299,7 +573,7 @@ class DescribeStreamPlayInfoListRequest extends  AbstractModel {
         this.PlayDomain = null;
 
         /**
-         * 开始时间，北京时间，
+         * 开始时间，北京时间，格式：2019-04-28 10:36:00
 当前时间 和 开始时间 间隔不超过30天。
          * @type {string || null}
          */
@@ -331,11 +605,18 @@ class DescribeStreamPlayInfoListRequest extends  AbstractModel {
 
 module.exports = {
     DayStreamPlayInfo: DayStreamPlayInfo,
-    RegisterIMRequest: RegisterIMRequest,
-    ForbidLiveStreamRequest: ForbidLiveStreamRequest,
-    RegisterIMResponse: RegisterIMResponse,
+    DescribeWorkersResponse: DescribeWorkersResponse,
     ForbidLiveStreamResponse: ForbidLiveStreamResponse,
+    WorkerRegionInfo: WorkerRegionInfo,
+    RegisterIMRequest: RegisterIMRequest,
+    StopGameResponse: StopGameResponse,
+    ForbidLiveStreamRequest: ForbidLiveStreamRequest,
+    StopGameRequest: StopGameRequest,
+    RegisterIMResponse: RegisterIMResponse,
+    DescribeWorkersRequest: DescribeWorkersRequest,
+    CreateSessionResponse: CreateSessionResponse,
     DescribeStreamPlayInfoListResponse: DescribeStreamPlayInfoListResponse,
+    CreateSessionRequest: CreateSessionRequest,
     DescribeStreamPlayInfoListRequest: DescribeStreamPlayInfoListRequest,
 
 }

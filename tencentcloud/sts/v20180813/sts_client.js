@@ -17,9 +17,12 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const AssumeRoleWithSAMLResponse = models.AssumeRoleWithSAMLResponse;
+const ApiKey = models.ApiKey;
 const AssumeRoleWithSAMLRequest = models.AssumeRoleWithSAMLRequest;
 const GetFederationTokenResponse = models.GetFederationTokenResponse;
+const QueryApiKeyResponse = models.QueryApiKeyResponse;
 const AssumeRoleResponse = models.AssumeRoleResponse;
+const QueryApiKeyRequest = models.QueryApiKeyRequest;
 const GetFederationTokenRequest = models.GetFederationTokenRequest;
 const Credentials = models.Credentials;
 const AssumeRoleRequest = models.AssumeRoleRequest;
@@ -44,6 +47,17 @@ class StsClient extends AbstractClient {
     GetFederationToken(req, cb) {
         let resp = new GetFederationTokenResponse();
         this.request("GetFederationToken", req, resp, cb);
+    }
+
+    /**
+     * 拉取API密钥列表
+     * @param {QueryApiKeyRequest} req
+     * @param {function(string, QueryApiKeyResponse):void} cb
+     * @public
+     */
+    QueryApiKey(req, cb) {
+        let resp = new QueryApiKeyResponse();
+        this.request("QueryApiKey", req, resp, cb);
     }
 
     /**

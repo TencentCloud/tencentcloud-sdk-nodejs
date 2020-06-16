@@ -16,39 +16,70 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const CostComponentSet = models.CostComponentSet;
+const DescribeCostSummaryByProductRequest = models.DescribeCostSummaryByProductRequest;
+const DescribeCostSummaryByProjectResponse = models.DescribeCostSummaryByProjectResponse;
 const DescribeDosageDetailByDateRequest = models.DescribeDosageDetailByDateRequest;
+const ProjectSummaryOverviewItem = models.ProjectSummaryOverviewItem;
+const ConditionRegion = models.ConditionRegion;
+const DescribeBillSummaryByProductRequest = models.DescribeBillSummaryByProductRequest;
+const ConsumptionBusinessSummaryDataItem = models.ConsumptionBusinessSummaryDataItem;
 const DetailPoint = models.DetailPoint;
+const CostDetail = models.CostDetail;
 const DescribeBillSummaryByPayModeResponse = models.DescribeBillSummaryByPayModeResponse;
 const BillResourceSummary = models.BillResourceSummary;
+const DescribeBillSummaryByTagRequest = models.DescribeBillSummaryByTagRequest;
+const Conditions = models.Conditions;
 const DescribeBillSummaryByProductResponse = models.DescribeBillSummaryByProductResponse;
+const BillTagInfo = models.BillTagInfo;
 const DescribeBillSummaryByRegionResponse = models.DescribeBillSummaryByRegionResponse;
 const DetailSet = models.DetailSet;
+const BillTransactionInfo = models.BillTransactionInfo;
+const RegionSummaryOverviewItem = models.RegionSummaryOverviewItem;
+const ConsumptionResourceSummaryDataItem = models.ConsumptionResourceSummaryDataItem;
 const DescribeAccountBalanceRequest = models.DescribeAccountBalanceRequest;
 const DescribeBillDetailRequest = models.DescribeBillDetailRequest;
-const RegionSummaryOverviewItem = models.RegionSummaryOverviewItem;
+const ConsumptionProjectSummaryDataItem = models.ConsumptionProjectSummaryDataItem;
+const DescribeCostSummaryByProductResponse = models.DescribeCostSummaryByProductResponse;
 const ProductInfo = models.ProductInfo;
 const DescribeDosageDetailByDateResponse = models.DescribeDosageDetailByDateResponse;
+const DescribeBillListResponse = models.DescribeBillListResponse;
 const DescribeAccountBalanceResponse = models.DescribeAccountBalanceResponse;
+const DescribeCostSummaryByRegionRequest = models.DescribeCostSummaryByRegionRequest;
 const BusinessSummaryOverviewItem = models.BusinessSummaryOverviewItem;
 const BillDetailComponent = models.BillDetailComponent;
+const ConsumptionSummaryTrend = models.ConsumptionSummaryTrend;
 const DescribeBillSummaryByRegionRequest = models.DescribeBillSummaryByRegionRequest;
 const DescribeBillSummaryByPayModeRequest = models.DescribeBillSummaryByPayModeRequest;
+const DescribeCostSummaryByProjectRequest = models.DescribeCostSummaryByProjectRequest;
+const ConsumptionRegionSummaryDataItem = models.ConsumptionRegionSummaryDataItem;
 const DescribeBillResourceSummaryResponse = models.DescribeBillResourceSummaryResponse;
 const ActionSummaryOverviewItem = models.ActionSummaryOverviewItem;
-const DescribeBillSummaryByProjectRequest = models.DescribeBillSummaryByProjectRequest;
+const ConditionPayMode = models.ConditionPayMode;
 const DescribeDealsByCondRequest = models.DescribeDealsByCondRequest;
 const DescribeBillResourceSummaryRequest = models.DescribeBillResourceSummaryRequest;
-const DescribeBillSummaryByProductRequest = models.DescribeBillSummaryByProductRequest;
+const DescribeBillListRequest = models.DescribeBillListRequest;
 const PayDealsResponse = models.PayDealsResponse;
 const BillDetail = models.BillDetail;
-const ProjectSummaryOverviewItem = models.ProjectSummaryOverviewItem;
+const DescribeBillSummaryByTagResponse = models.DescribeBillSummaryByTagResponse;
+const TagSummaryOverviewItem = models.TagSummaryOverviewItem;
+const DescribeCostSummaryByResourceResponse = models.DescribeCostSummaryByResourceResponse;
 const DescribeBillDetailResponse = models.DescribeBillDetailResponse;
+const ConsumptionResourceSummaryConditionValue = models.ConsumptionResourceSummaryConditionValue;
 const Deal = models.Deal;
+const DescribeCostDetailRequest = models.DescribeCostDetailRequest;
 const DescribeDealsByCondResponse = models.DescribeDealsByCondResponse;
+const ConditionProject = models.ConditionProject;
+const ConsumptionSummaryTotal = models.ConsumptionSummaryTotal;
+const DescribeBillSummaryByProjectRequest = models.DescribeBillSummaryByProjectRequest;
 const DescribeBillSummaryByProjectResponse = models.DescribeBillSummaryByProjectResponse;
+const ConditionBusiness = models.ConditionBusiness;
+const DescribeCostSummaryByResourceRequest = models.DescribeCostSummaryByResourceRequest;
+const DescribeCostDetailResponse = models.DescribeCostDetailResponse;
 const PayDealsRequest = models.PayDealsRequest;
 const PayModeSummaryOverviewItem = models.PayModeSummaryOverviewItem;
 const BusinessSummaryTotal = models.BusinessSummaryTotal;
+const DescribeCostSummaryByRegionResponse = models.DescribeCostSummaryByRegionResponse;
 
 
 /**
@@ -84,6 +115,28 @@ class BillingClient extends AbstractClient {
     }
 
     /**
+     * 获取按资源汇总消耗详情
+     * @param {DescribeCostSummaryByResourceRequest} req
+     * @param {function(string, DescribeCostSummaryByResourceResponse):void} cb
+     * @public
+     */
+    DescribeCostSummaryByResource(req, cb) {
+        let resp = new DescribeCostSummaryByResourceResponse();
+        this.request("DescribeCostSummaryByResource", req, resp, cb);
+    }
+
+    /**
+     * 获取收支明细列表，支持翻页和参数过滤
+     * @param {DescribeBillListRequest} req
+     * @param {function(string, DescribeBillListResponse):void} cb
+     * @public
+     */
+    DescribeBillList(req, cb) {
+        let resp = new DescribeBillListResponse();
+        this.request("DescribeBillList", req, resp, cb);
+    }
+
+    /**
      * 查询账单明细数据
      * @param {DescribeBillDetailRequest} req
      * @param {function(string, DescribeBillDetailResponse):void} cb
@@ -106,6 +159,17 @@ class BillingClient extends AbstractClient {
     }
 
     /**
+     * 获取按项目汇总消耗详情
+     * @param {DescribeCostSummaryByProjectRequest} req
+     * @param {function(string, DescribeCostSummaryByProjectResponse):void} cb
+     * @public
+     */
+    DescribeCostSummaryByProject(req, cb) {
+        let resp = new DescribeCostSummaryByProjectResponse();
+        this.request("DescribeCostSummaryByProject", req, resp, cb);
+    }
+
+    /**
      * 获取按付费模式汇总费用分布
      * @param {DescribeBillSummaryByPayModeRequest} req
      * @param {function(string, DescribeBillSummaryByPayModeResponse):void} cb
@@ -125,6 +189,17 @@ class BillingClient extends AbstractClient {
     DescribeBillResourceSummary(req, cb) {
         let resp = new DescribeBillResourceSummaryResponse();
         this.request("DescribeBillResourceSummary", req, resp, cb);
+    }
+
+    /**
+     * 获取按地域汇总消耗详情
+     * @param {DescribeCostSummaryByRegionRequest} req
+     * @param {function(string, DescribeCostSummaryByRegionResponse):void} cb
+     * @public
+     */
+    DescribeCostSummaryByRegion(req, cb) {
+        let resp = new DescribeCostSummaryByRegionResponse();
+        this.request("DescribeCostSummaryByRegion", req, resp, cb);
     }
 
     /**
@@ -158,6 +233,39 @@ class BillingClient extends AbstractClient {
     DescribeBillSummaryByProduct(req, cb) {
         let resp = new DescribeBillSummaryByProductResponse();
         this.request("DescribeBillSummaryByProduct", req, resp, cb);
+    }
+
+    /**
+     * 获取按标签汇总费用分布
+     * @param {DescribeBillSummaryByTagRequest} req
+     * @param {function(string, DescribeBillSummaryByTagResponse):void} cb
+     * @public
+     */
+    DescribeBillSummaryByTag(req, cb) {
+        let resp = new DescribeBillSummaryByTagResponse();
+        this.request("DescribeBillSummaryByTag", req, resp, cb);
+    }
+
+    /**
+     * 获取按产品汇总消耗详情
+     * @param {DescribeCostSummaryByProductRequest} req
+     * @param {function(string, DescribeCostSummaryByProductResponse):void} cb
+     * @public
+     */
+    DescribeCostSummaryByProduct(req, cb) {
+        let resp = new DescribeCostSummaryByProductResponse();
+        this.request("DescribeCostSummaryByProduct", req, resp, cb);
+    }
+
+    /**
+     * 查询消耗明细
+     * @param {DescribeCostDetailRequest} req
+     * @param {function(string, DescribeCostDetailResponse):void} cb
+     * @public
+     */
+    DescribeCostDetail(req, cb) {
+        let resp = new DescribeCostDetailResponse();
+        this.request("DescribeCostDetail", req, resp, cb);
     }
 
     /**

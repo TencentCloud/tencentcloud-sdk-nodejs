@@ -23,13 +23,13 @@ const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
 const ParamDesc = models.ParamDesc;
 const DescribeDBParametersRequest = models.DescribeDBParametersRequest;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
-const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
+const SpecConfig = models.SpecConfig;
 const DescribeDCDBPriceResponse = models.DescribeDCDBPriceResponse;
 const RenewDCDBInstanceResponse = models.RenewDCDBInstanceResponse;
 const DescribeDBSyncModeResponse = models.DescribeDBSyncModeResponse;
 const DescribeDCDBUpgradePriceResponse = models.DescribeDCDBUpgradePriceResponse;
 const CreateAccountRequest = models.CreateAccountRequest;
-const DescribeDBParametersResponse = models.DescribeDBParametersResponse;
+const Project = models.Project;
 const CloneAccountResponse = models.CloneAccountResponse;
 const ModifyAccountDescriptionResponse = models.ModifyAccountDescriptionResponse;
 const CreateDCDBInstanceResponse = models.CreateDCDBInstanceResponse;
@@ -75,11 +75,12 @@ const DescribeDCDBShardsResponse = models.DescribeDCDBShardsResponse;
 const Database = models.Database;
 const GrantAccountPrivilegesResponse = models.GrantAccountPrivilegesResponse;
 const ShardInfo = models.ShardInfo;
-const SpecConfig = models.SpecConfig;
+const OpenDBExtranetAccessRequest = models.OpenDBExtranetAccessRequest;
 const DescribeDCDBSaleInfoResponse = models.DescribeDCDBSaleInfoResponse;
 const DescribeDBSyncModeRequest = models.DescribeDBSyncModeRequest;
 const CloseDBExtranetAccessResponse = models.CloseDBExtranetAccessResponse;
 const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
+const DescribeProjectsRequest = models.DescribeProjectsRequest;
 const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
 const DescribeOrdersRequest = models.DescribeOrdersRequest;
 const DescribeDBLogFilesResponse = models.DescribeDBLogFilesResponse;
@@ -93,6 +94,7 @@ const DescribeDCDBUpgradePriceRequest = models.DescribeDCDBUpgradePriceRequest;
 const DatabaseProcedure = models.DatabaseProcedure;
 const AddShardConfig = models.AddShardConfig;
 const ModifyDBSyncModeRequest = models.ModifyDBSyncModeRequest;
+const DescribeProjectsResponse = models.DescribeProjectsResponse;
 const CreateAccountResponse = models.CreateAccountResponse;
 const RegionInfo = models.RegionInfo;
 const DescribeDatabaseObjectsRequest = models.DescribeDatabaseObjectsRequest;
@@ -105,6 +107,7 @@ const DescribeAccountPrivilegesRequest = models.DescribeAccountPrivilegesRequest
 const SqlLogItem = models.SqlLogItem;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const DescribeDCDBInstancesRequest = models.DescribeDCDBInstancesRequest;
+const DescribeDBParametersResponse = models.DescribeDBParametersResponse;
 const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
 const ModifyDBSyncModeResponse = models.ModifyDBSyncModeResponse;
 const DeleteAccountResponse = models.DeleteAccountResponse;
@@ -133,7 +136,7 @@ class DcdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeOrders）用于查询分布式数据库订单信息。传入订单Id来查询订单关联的分布式数据库实例，和对应的任务流程ID。
+     * 本接口（DescribeOrders）用于查询分布式数据库订单信息。传入订单ID来查询订单关联的分布式数据库实例，和对应的任务流程ID。
      * @param {DescribeOrdersRequest} req
      * @param {function(string, DescribeOrdersResponse):void} cb
      * @public
@@ -389,6 +392,17 @@ class DcdbClient extends AbstractClient {
     }
 
     /**
+     * 本接口（DescribeProjects）用于查询项目列表
+     * @param {DescribeProjectsRequest} req
+     * @param {function(string, DescribeProjectsResponse):void} cb
+     * @public
+     */
+    DescribeProjects(req, cb) {
+        let resp = new DescribeProjectsResponse();
+        this.request("DescribeProjects", req, resp, cb);
+    }
+
+    /**
      * 本接口(CloseDBExtranetAccess)用于关闭云数据库实例的外网访问。关闭外网访问后，外网地址将不可访问，查询实例列表接口将不返回对应实例的外网域名和端口信息。
      * @param {CloseDBExtranetAccessRequest} req
      * @param {function(string, CloseDBExtranetAccessResponse):void} cb
@@ -457,7 +471,7 @@ class DcdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeDatabaseObjects）用于查询云数据库实例的表信息。
+     * 本接口（DescribeDatabaseTable）用于查询云数据库实例的表信息。
      * @param {DescribeDatabaseTableRequest} req
      * @param {function(string, DescribeDatabaseTableResponse):void} cb
      * @public

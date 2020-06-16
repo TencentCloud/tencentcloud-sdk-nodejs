@@ -17,6 +17,93 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * TextTranslateBatch请求参数结构体
+ * @class
+ */
+class TextTranslateBatchRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 源语言，支持： 
+auto：自动识别（识别为一种语言）
+zh：简体中文
+zh-TW：繁体中文
+en：英语
+ja：日语
+ko：韩语
+fr：法语
+es：西班牙语
+it：意大利语
+de：德语
+tr：土耳其语
+ru：俄语
+pt：葡萄牙语
+vi：越南语
+id：印尼语
+th：泰语
+ms：马来西亚语
+ar：阿拉伯语
+hi：印地语
+         * @type {string || null}
+         */
+        this.Source = null;
+
+        /**
+         * 目标语言，各源语言的目标语言支持列表如下
+
+<li> zh（简体中文）：en（英语）、ja（日语）、ko（韩语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）、vi（越南语）、id（印尼语）、th（泰语）、ms（马来语）</li>
+<li>zh-TW（繁体中文）：en（英语）、ja（日语）、ko（韩语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）、vi（越南语）、id（印尼语）、th（泰语）、ms（马来语）</li>
+<li>en（英语）：zh（中文）、ja（日语）、ko（韩语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）、vi（越南语）、id（印尼语）、th（泰语）、ms（马来语）、ar（阿拉伯语）、hi（印地语）</li>
+<li>ja（日语）：zh（中文）、en（英语）、ko（韩语）</li>
+<li>ko（韩语）：zh（中文）、en（英语）、ja（日语）</li>
+<li>fr（法语）：zh（中文）、en（英语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）</li>
+<li>es（西班牙语）：zh（中文）、en（英语）、fr（法语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）</li>
+<li>it（意大利语）：zh（中文）、en（英语）、fr（法语）、es（西班牙语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）</li>
+<li>de（德语）：zh（中文）、en（英语）、fr（法语）、es（西班牙语）、it（意大利语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）</li>
+<li>tr（土耳其语）：zh（中文）、en（英语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、ru（俄语）、pt（葡萄牙语）</li>
+<li>ru（俄语）：zh（中文）、en（英语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、pt（葡萄牙语）</li>
+<li>pt（葡萄牙语）：zh（中文）、en（英语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）</li>
+<li>vi（越南语）：zh（中文）、en（英语）</li>
+<li>id（印尼语）：zh（中文）、en（英语）</li>
+<li>th（泰语）：zh（中文）、en（英语）</li>
+<li>ms（马来语）：zh（中文）、en（英语）</li>
+<li>ar（阿拉伯语）：en（英语）</li>
+<li>hi（印地语）：en（英语）</li>
+         * @type {string || null}
+         */
+        this.Target = null;
+
+        /**
+         * 项目ID，可以根据控制台-账号中心-项目管理中的配置填写，如无配置请填写默认项目ID:0
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 待翻译的文本列表，批量接口可以以数组方式在一次请求中填写多个待翻译文本。文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败，请传入有效文本，html标记等非常规翻译文本可能会翻译失败。单次请求的文本长度总和需要低于2000。
+         * @type {Array.<string> || null}
+         */
+        this.SourceTextList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Source = 'Source' in params ? params.Source : null;
+        this.Target = 'Target' in params ? params.Target : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.SourceTextList = 'SourceTextList' in params ? params.SourceTextList : null;
+
+    }
+}
+
+/**
  * ImageTranslate返回参数结构体
  * @class
  */
@@ -98,7 +185,7 @@ class SpeechTranslateResponse extends  AbstractModel {
         this.RecognizeStatus = null;
 
         /**
-         * 识别出的源文
+         * 识别出的原文
          * @type {string || null}
          */
         this.SourceText = null;
@@ -116,7 +203,7 @@ class SpeechTranslateResponse extends  AbstractModel {
         this.Seq = null;
 
         /**
-         * 源语言
+         * 原语言
          * @type {string || null}
          */
         this.Source = null;
@@ -228,6 +315,55 @@ class LanguageDetectRequest extends  AbstractModel {
         }
         this.Text = 'Text' in params ? params.Text : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
+ * TextTranslateBatch返回参数结构体
+ * @class
+ */
+class TextTranslateBatchResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 源语言，详见入参Target
+         * @type {string || null}
+         */
+        this.Source = null;
+
+        /**
+         * 目标语言，详见入参Target
+         * @type {string || null}
+         */
+        this.Target = null;
+
+        /**
+         * 翻译后的文本列表
+         * @type {Array.<string> || null}
+         */
+        this.TargetTextList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Source = 'Source' in params ? params.Source : null;
+        this.Target = 'Target' in params ? params.Target : null;
+        this.TargetTextList = 'TargetTextList' in params ? params.TargetTextList : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -401,13 +537,13 @@ class SpeechTranslateRequest extends  AbstractModel {
         this.Source = null;
 
         /**
-         * 翻译目标语⾔言类型 ，支持的语言列表<li> zh : 中文 </li> <li> en : 英文 </li>
+         * 翻译目标语言类型，支持的语言列表<li> zh : 中文 </li> <li> en : 英文 </li>
          * @type {string || null}
          */
         this.Target = null;
 
         /**
-         * pcm : 146   amr : 33554432   mp3 : 83886080
+         * pcm : 146   speex : 16779154   mp3 : 83886080
          * @type {number || null}
          */
         this.AudioFormat = null;
@@ -425,7 +561,7 @@ class SpeechTranslateRequest extends  AbstractModel {
         this.IsEnd = null;
 
         /**
-         * 语音分片内容的base64字符串，音频内容应含有效并可识别的文本
+         * 语音分片内容进行 Base64 编码后的字符串。音频内容需包含有效并可识别的文本信息。
          * @type {string || null}
          */
         this.Data = null;
@@ -536,20 +672,57 @@ class TextTranslateRequest extends  AbstractModel {
         super();
 
         /**
-         * 待翻译的文本，文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败，请传入有效文本，html标记等非常规翻译文本会翻译失败。单次请求的文本长度需要低于2000。
+         * 待翻译的文本，文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败，请传入有效文本，html标记等非常规翻译文本可能会翻译失败。单次请求的文本长度需要低于2000。
          * @type {string || null}
          */
         this.SourceText = null;
 
         /**
-         * 源语言，参照Target支持语言列表
+         * 源语言，支持：
+auto：自动识别（识别为一种语言）
+zh：简体中文
+zh-TW：繁体中文
+en：英语
+ja：日语
+ko：韩语
+fr：法语
+es：西班牙语
+it：意大利语
+de：德语
+tr：土耳其语
+ru：俄语
+pt：葡萄牙语
+vi：越南语
+id：印尼语
+th：泰语
+ms：马来西亚语
+ar：阿拉伯语
+hi：印地语
          * @type {string || null}
          */
         this.Source = null;
 
         /**
-         * 目标语言，参照支持语言列表
-<li> zh : 简体中文 </li> <li> zh-TW : 繁体中文 </li><li> en : 英文 </li><li> jp : 日语 </li> <li> kr : 韩语 </li><li> de : 德语 </li><li> fr : 法语 </li><li> es : 西班牙文 </li> <li> it : 意大利文 </li><li> tr : 土耳其文 </li><li> ru : 俄文 </li><li> pt : 葡萄牙文 </li><li> vi : 越南文 </li><li> id : 印度尼西亚文 </li><li> ms : 马来西亚文 </li><li> th : 泰文 </li><li> auto : 自动识别源语言，只能用于source字段 </li>
+         * 目标语言，各源语言的目标语言支持列表如下
+
+<li> zh（简体中文）：en（英语）、ja（日语）、ko（韩语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）、vi（越南语）、id（印尼语）、th（泰语）、ms（马来语）</li>
+<li>zh-TW（繁体中文）：en（英语）、ja（日语）、ko（韩语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）、vi（越南语）、id（印尼语）、th（泰语）、ms（马来语）</li>
+<li>en（英语）：zh（中文）、ja（日语）、ko（韩语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）、vi（越南语）、id（印尼语）、th（泰语）、ms（马来语）、ar（阿拉伯语）、hi（印地语）</li>
+<li>ja（日语）：zh（中文）、en（英语）、ko（韩语）</li>
+<li>ko（韩语）：zh（中文）、en（英语）、ja（日语）</li>
+<li>fr（法语）：zh（中文）、en（英语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）</li>
+<li>es（西班牙语）：zh（中文）、en（英语）、fr（法语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）</li>
+<li>it（意大利语）：zh（中文）、en（英语）、fr（法语）、es（西班牙语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）</li>
+<li>de（德语）：zh（中文）、en（英语）、fr（法语）、es（西班牙语）、it（意大利语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）</li>
+<li>tr（土耳其语）：zh（中文）、en（英语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、ru（俄语）、pt（葡萄牙语）</li>
+<li>ru（俄语）：zh（中文）、en（英语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、pt（葡萄牙语）</li>
+<li>pt（葡萄牙语）：zh（中文）、en（英语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）</li>
+<li>vi（越南语）：zh（中文）、en（英语）</li>
+<li>id（印尼语）：zh（中文）、en（英语）</li>
+<li>th（泰语）：zh（中文）、en（英语）</li>
+<li>ms（马来语）：zh（中文）、en（英语）</li>
+<li>ar（阿拉伯语）：en（英语）</li>
+<li>hi（印地语）：en（英语）</li>
          * @type {string || null}
          */
         this.Target = null;
@@ -559,6 +732,12 @@ class TextTranslateRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.ProjectId = null;
+
+        /**
+         * 用来标记不希望被翻译的文本内容，如句子中的特殊符号、人名、地名等；每次请求只支持配置一个不被翻译的单词；仅支持配置人名、地名等名词，不要配置动词或短语，否则会影响翻译结果。
+         * @type {string || null}
+         */
+        this.UntranslatedText = null;
 
     }
 
@@ -573,15 +752,18 @@ class TextTranslateRequest extends  AbstractModel {
         this.Source = 'Source' in params ? params.Source : null;
         this.Target = 'Target' in params ? params.Target : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.UntranslatedText = 'UntranslatedText' in params ? params.UntranslatedText : null;
 
     }
 }
 
 module.exports = {
+    TextTranslateBatchRequest: TextTranslateBatchRequest,
     ImageTranslateResponse: ImageTranslateResponse,
     SpeechTranslateResponse: SpeechTranslateResponse,
     ImageRecord: ImageRecord,
     LanguageDetectRequest: LanguageDetectRequest,
+    TextTranslateBatchResponse: TextTranslateBatchResponse,
     LanguageDetectResponse: LanguageDetectResponse,
     ItemValue: ItemValue,
     TextTranslateResponse: TextTranslateResponse,

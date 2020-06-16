@@ -17,10 +17,14 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const GetPersonGroupInfoResponse = models.GetPersonGroupInfoResponse;
+const SearchFacesReturnsByGroupResponse = models.SearchFacesReturnsByGroupResponse;
 const Candidate = models.Candidate;
 const ModifyGroupResponse = models.ModifyGroupResponse;
+const VerifyFaceResponse = models.VerifyFaceResponse;
 const DeletePersonRequest = models.DeletePersonRequest;
 const DetectLiveFaceResponse = models.DetectLiveFaceResponse;
+const GetSimilarPersonResultResponse = models.GetSimilarPersonResultResponse;
+const SearchPersonsReturnsByGroupResponse = models.SearchPersonsReturnsByGroupResponse;
 const DeleteFaceRequest = models.DeleteFaceRequest;
 const ModifyPersonBaseInfoResponse = models.ModifyPersonBaseInfoResponse;
 const GetGroupListResponse = models.GetGroupListResponse;
@@ -31,32 +35,48 @@ const FaceAttributesInfo = models.FaceAttributesInfo;
 const PersonGroupInfo = models.PersonGroupInfo;
 const ModifyGroupRequest = models.ModifyGroupRequest;
 const CreatePersonRequest = models.CreatePersonRequest;
+const GetGroupListRequest = models.GetGroupListRequest;
 const DeleteGroupRequest = models.DeleteGroupRequest;
 const CreateFaceResponse = models.CreateFaceResponse;
 const ModifyPersonBaseInfoRequest = models.ModifyPersonBaseInfoRequest;
+const GetSimilarPersonResultRequest = models.GetSimilarPersonResultRequest;
+const GetGroupInfoResponse = models.GetGroupInfoResponse;
+const GroupCandidate = models.GroupCandidate;
+const SearchPersonsResponse = models.SearchPersonsResponse;
+const FaceQualityInfo = models.FaceQualityInfo;
 const CompareFaceResponse = models.CompareFaceResponse;
 const PersonExDescriptionInfo = models.PersonExDescriptionInfo;
 const DetectLiveFaceRequest = models.DetectLiveFaceRequest;
-const VerifyFaceResponse = models.VerifyFaceResponse;
+const JobIdInfo = models.JobIdInfo;
 const GetPersonBaseInfoResponse = models.GetPersonBaseInfoResponse;
+const ResultsReturnsByGroup = models.ResultsReturnsByGroup;
 const CreateFaceRequest = models.CreateFaceRequest;
+const SearchFacesReturnsByGroupRequest = models.SearchFacesReturnsByGroupRequest;
 const CreateGroupRequest = models.CreateGroupRequest;
 const ModifyPersonGroupInfoRequest = models.ModifyPersonGroupInfoRequest;
 const GetPersonGroupInfoRequest = models.GetPersonGroupInfoRequest;
 const Result = models.Result;
+const GetCheckSimilarPersonJobIdListRequest = models.GetCheckSimilarPersonJobIdListRequest;
+const VerifyPersonRequest = models.VerifyPersonRequest;
 const FaceInfo = models.FaceInfo;
 const DeleteGroupResponse = models.DeleteGroupResponse;
-const FaceQualityInfo = models.FaceQualityInfo;
+const SearchPersonsRequest = models.SearchPersonsRequest;
+const EstimateCheckSimilarPersonCostTimeResponse = models.EstimateCheckSimilarPersonCostTimeResponse;
 const CompareFaceRequest = models.CompareFaceRequest;
 const PersonInfo = models.PersonInfo;
+const CheckSimilarPersonRequest = models.CheckSimilarPersonRequest;
 const FaceShape = models.FaceShape;
 const DetectFaceResponse = models.DetectFaceResponse;
 const CopyPersonRequest = models.CopyPersonRequest;
-const GetPersonListNumRequest = models.GetPersonListNumRequest;
+const CheckSimilarPersonResponse = models.CheckSimilarPersonResponse;
+const SearchPersonsReturnsByGroupRequest = models.SearchPersonsReturnsByGroupRequest;
 const DeletePersonFromGroupResponse = models.DeletePersonFromGroupResponse;
+const VerifyPersonResponse = models.VerifyPersonResponse;
 const AnalyzeFaceResponse = models.AnalyzeFaceResponse;
-const GetGroupListRequest = models.GetGroupListRequest;
+const GetGroupInfoRequest = models.GetGroupInfoRequest;
+const GetPersonListNumResponse = models.GetPersonListNumResponse;
 const FaceHairAttributesInfo = models.FaceHairAttributesInfo;
+const GetCheckSimilarPersonJobIdListResponse = models.GetCheckSimilarPersonJobIdListResponse;
 const AnalyzeFaceRequest = models.AnalyzeFaceRequest;
 const Point = models.Point;
 const DetectFaceRequest = models.DetectFaceRequest;
@@ -66,8 +86,9 @@ const SearchFacesResponse = models.SearchFacesResponse;
 const GroupExDescriptionInfo = models.GroupExDescriptionInfo;
 const VerifyFaceRequest = models.VerifyFaceRequest;
 const CopyPersonResponse = models.CopyPersonResponse;
-const GetPersonListNumResponse = models.GetPersonListNumResponse;
+const EstimateCheckSimilarPersonCostTimeRequest = models.EstimateCheckSimilarPersonCostTimeRequest;
 const GetPersonListRequest = models.GetPersonListRequest;
+const GetPersonListNumRequest = models.GetPersonListNumRequest;
 const DeleteFaceResponse = models.DeleteFaceResponse;
 const DeletePersonResponse = models.DeletePersonResponse;
 const FaceRect = models.FaceRect;
@@ -99,7 +120,36 @@ class IaiClient extends AbstractClient {
     }
 
     /**
-     * 用于创建一个空的人员库，如果人员库已存在返回错误。可根据需要创建自定义描述字段，用于辅助描述该人员库下的人员信息。1个APPID下最多创建2万个人员库（Group）、最多包含1000万张人脸（Face），单个人员库（Group）最多包含100万张人脸（Face）。
+     * 用于对一张待识别的人脸图片，在一个或多个人员库中识别出最相似的 TopK 人员，按照**人员库的维度**以人员相似度从大到小顺序排列。
+
+支持一次性识别图片中的最多 10 张人脸，支持跨人员库（Group）搜索。
+
+单次搜索的人员库人脸总数量和人员库的算法模型版本（FaceModelVersion）相关。算法模型版本为2.0的人员库，单次搜索人员库人脸总数量不得超过 100 万张；算法模型版本为3.0的人员库，单次搜索人员库人脸总数量不得超过 300 万张。
+
+与[人员搜索](https://cloud.tencent.com/document/product/867/38881)及[人员搜索按库返回](https://cloud.tencent.com/document/product/867/38880)接口不同的是，本接口将该人员（Person）下的每个人脸（Face）都作为单独个体进行验证，而[人员搜索](https://cloud.tencent.com/document/product/867/38881)及[人员搜索按库返回](https://cloud.tencent.com/document/product/867/38880)接口 会将该人员（Person）下的所有人脸（Face）进行融合特征处理，即若某个Person下有4张 Face，本接口会将4张 Face 的特征进行融合处理，生成对应这个 Person 的特征，使搜索更加准确。
+
+本接口需与[人员库管理相关接口](https://cloud.tencent.com/document/product/867/32794)结合使用。
+
+>     
+- 公共参数中的签名方式请使用V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+
+
+     * @param {SearchFacesReturnsByGroupRequest} req
+     * @param {function(string, SearchFacesReturnsByGroupResponse):void} cb
+     * @public
+     */
+    SearchFacesReturnsByGroup(req, cb) {
+        let resp = new SearchFacesReturnsByGroupResponse();
+        this.request("SearchFacesReturnsByGroup", req, resp, cb);
+    }
+
+    /**
+     * 用于创建一个空的人员库，如果人员库已存在返回错误。
+可根据需要创建自定义描述字段，用于辅助描述该人员库下的人员信息。
+
+1个APPID下最多创建10万个人员库（Group）、最多包含5000万张人脸（Face）。
+
+不同算法模型版本（FaceModelVersion）的人员库（Group）最多可包含人脸（Face）数不同。算法模型版本为2.0的人员库最多包含100万张人脸，算法模型版本为3.0的人员库最多可包含300万张人脸。
      * @param {CreateGroupRequest} req
      * @param {function(string, CreateGroupResponse):void} cb
      * @public
@@ -107,6 +157,19 @@ class IaiClient extends AbstractClient {
     CreateGroup(req, cb) {
         let resp = new CreateGroupResponse();
         this.request("CreateGroup", req, resp, cb);
+    }
+
+    /**
+     * 获取人员查重任务列表，按任务创建时间逆序（最新的在前面）。
+
+只保留最近1年的数据。
+     * @param {GetCheckSimilarPersonJobIdListRequest} req
+     * @param {function(string, GetCheckSimilarPersonJobIdListResponse):void} cb
+     * @public
+     */
+    GetCheckSimilarPersonJobIdList(req, cb) {
+        let resp = new GetCheckSimilarPersonJobIdListResponse();
+        this.request("GetCheckSimilarPersonJobIdList", req, resp, cb);
     }
 
     /**
@@ -201,7 +264,32 @@ class IaiClient extends AbstractClient {
     }
 
     /**
+     * 用于对一张待识别的人脸图片，在一个或多个人员库中识别出最相似的 TopK 人员，识别结果按照相似度从大到小排序。
+
+支持一次性识别图片中的最多 10 张人脸，支持一次性跨 100 个人员库（Group）搜索。
+
+单次搜索的人员库人脸总数量和人员库的算法模型版本（FaceModelVersion）相关。算法模型版本为2.0的人员库，单次搜索人员库人脸总数量不得超过 100 万张；算法模型版本为3.0的人员库，单次搜索人员库人脸总数量不得超过 300 万张。
+
+与[人员搜索](https://cloud.tencent.com/document/product/867/38881)及[人员搜索按库返回](https://cloud.tencent.com/document/product/867/38880)接口不同的是，本接口将该人员（Person）下的每个人脸（Face）都作为单独个体进行验证，而人员搜索及人员搜索按库返回接口 会将该人员（Person）下的所有人脸（Face）进行融合特征处理，即若某个Person下有4张 Face，本接口会将4张 Face 的特征进行融合处理，生成对应这个 Person 的特征，使搜索更加准确。
+
+
+本接口需与[人员库管理相关接口](https://cloud.tencent.com/document/product/867/32794)结合使用。
+
+>     
+- 公共参数中的签名方式请使用V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+     * @param {SearchFacesRequest} req
+     * @param {function(string, SearchFacesResponse):void} cb
+     * @public
+     */
+    SearchFaces(req, cb) {
+        let resp = new SearchFacesResponse();
+        this.request("SearchFaces", req, resp, cb);
+    }
+
+    /**
      * 将已存在于某人员库的人员复制到其他人员库，该人员的描述信息不会被复制。单个人员最多只能同时存在100个人员库中。
+>     
+- 注：若该人员创建时算法模型版本为2.0，复制到非2.0算法模型版本的Group中时，复制操作将会失败。
      * @param {CopyPersonRequest} req
      * @param {function(string, CopyPersonResponse):void} cb
      * @public
@@ -212,23 +300,29 @@ class IaiClient extends AbstractClient {
     }
 
     /**
-     * 给定一张人脸图片和一个 PersonId，判断图片中的人和 PersonId 对应的人是否为同一人。PersonId 请参考[人员库管理相关接口](https://cloud.tencent.com/document/product/867/32794)。 和[人脸比对](https://cloud.tencent.com/document/product/867/32802)接口不同的是，[人脸验证](https://cloud.tencent.com/document/product/867/32806)用于判断 “此人是否是此人”，“此人”的信息已存于人员库中，“此人”可能存在多张人脸图片；而[人脸比对](https://cloud.tencent.com/document/product/867/32802)用于判断两张人脸的相似度。
+     * 对指定的人员库进行人员查重，给出疑似相同人的信息。
+
+可以使用本接口对已有的单个人员库进行人员查重，避免同一人在单个人员库中拥有多个身份；也可以使用本接口对已有的多个人员库进行人员查重，查询同一人是否同时存在多个人员库中。
+
+不支持跨算法模型版本查重，且目前仅支持算法模型为3.0的人员库使用查重功能。
 
 >     
-- 公共参数中的签名方式请使用V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
-     * @param {VerifyFaceRequest} req
-     * @param {function(string, VerifyFaceResponse):void} cb
+- 若对完全相同的指定人员库进行查重操作，需等待上次操作完成才可。即，若两次请求输入的 GroupIds 相同，第一次请求若未完成，第二次请求将返回失败。
+
+>     
+- 查重的人员库状态为腾讯云开始进行查重任务的那一刻，即您可以理解为当您发起查重请求后，若您的查重任务需要排队，在排队期间您对人员库的增删操作均会会影响查重的结果。腾讯云将以开始进行查重任务的那一刻人员库的状态进行查重。查重任务开始后，您对人员库的任何操作均不影响查重任务的进行。但建议查重任务开始后，请不要对人员库中人员和人脸进行增删操作。
+     * @param {CheckSimilarPersonRequest} req
+     * @param {function(string, CheckSimilarPersonResponse):void} cb
      * @public
      */
-    VerifyFace(req, cb) {
-        let resp = new VerifyFaceResponse();
-        this.request("VerifyFace", req, resp, cb);
+    CheckSimilarPerson(req, cb) {
+        let resp = new CheckSimilarPersonResponse();
+        this.request("CheckSimilarPerson", req, resp, cb);
     }
 
     /**
-     * 删除该人员库及包含的所有的人员。同时，人员对应的所有人脸信息将被删除。若某人员同时存在多个人员库中，该人员不会被删除，但属于该人员库中的自定义描述字段信息会被删除。
+     * 删除该人员库及包含的所有的人员。同时，人员对应的所有人脸信息将被删除。若某人员同时存在多个人员库中，该人员不会被删除，但属于该人员库中的自定义描述字段信息会被删除，属于其他人员库的自定义描述字段信息不受影响。
 
-注：删除人员库的操作为异步执行，删除单张人脸时间约为10ms，即一小时内可以删除36万张。删除期间，无法向该人员库添加人员。
      * @param {DeleteGroupRequest} req
      * @param {function(string, DeleteGroupResponse):void} cb
      * @public
@@ -261,6 +355,17 @@ class IaiClient extends AbstractClient {
     }
 
     /**
+     * 获取人员查重接口（CheckSimilarPerson）结果。
+     * @param {GetSimilarPersonResultRequest} req
+     * @param {function(string, GetSimilarPersonResultResponse):void} cb
+     * @public
+     */
+    GetSimilarPersonResult(req, cb) {
+        let resp = new GetSimilarPersonResultResponse();
+        this.request("GetSimilarPersonResult", req, resp, cb);
+    }
+
+    /**
      * 创建人员，添加人脸、姓名、性别及其他相关信息。
 
 >     
@@ -275,18 +380,14 @@ class IaiClient extends AbstractClient {
     }
 
     /**
-     * 用于对一张待识别的人脸图片，在一个或多个人员库中识别出最相似的 TopN 人员，识别结果按照相似度从大到小排序。单次搜索的人员库人脸总数量不得超过 100 万张。
-此接口需与[人员库管理相关接口](https://cloud.tencent.com/document/product/867/32794)结合使用。
-
->     
-- 公共参数中的签名方式请使用V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
-     * @param {SearchFacesRequest} req
-     * @param {function(string, SearchFacesResponse):void} cb
+     * 获取人员库信息。
+     * @param {GetGroupInfoRequest} req
+     * @param {function(string, GetGroupInfoResponse):void} cb
      * @public
      */
-    SearchFaces(req, cb) {
-        let resp = new SearchFacesResponse();
-        this.request("SearchFaces", req, resp, cb);
+    GetGroupInfo(req, cb) {
+        let resp = new GetGroupInfoResponse();
+        this.request("GetGroupInfo", req, resp, cb);
     }
 
     /**
@@ -328,6 +429,25 @@ class IaiClient extends AbstractClient {
     }
 
     /**
+     * 给定一张人脸图片和一个 PersonId，判断图片中的人和 PersonId 对应的人是否为同一人。PersonId 请参考[人员库管理相关接口](https://cloud.tencent.com/document/product/867/32794)。
+本接口会将该人员（Person）下的所有人脸（Face）进行融合特征处理，即若某个Person下有4张 Face，本接口会将4张 Face 的特征进行融合处理，生成对应这个 Person 的特征，使人员验证（确定待识别的人脸图片是某人员）更加准确。
+
+ 和人脸比对相关接口不同的是，人脸验证相关接口用于判断 “此人是否是此人”，“此人”的信息已存于人员库中，“此人”可能存在多张人脸图片；而人脸比对相关接口用于判断两张人脸的相似度。
+
+
+>     
+- 公共参数中的签名方式请使用V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+- 仅支持算法模型版本（FaceModelVersion）为3.0的人员库。
+     * @param {VerifyPersonRequest} req
+     * @param {function(string, VerifyPersonResponse):void} cb
+     * @public
+     */
+    VerifyPerson(req, cb) {
+        let resp = new VerifyPersonResponse();
+        this.request("VerifyPerson", req, resp, cb);
+    }
+
+    /**
      * 修改指定人员库人员描述内容。
      * @param {ModifyPersonGroupInfoRequest} req
      * @param {function(string, ModifyPersonGroupInfoResponse):void} cb
@@ -339,11 +459,48 @@ class IaiClient extends AbstractClient {
     }
 
     /**
+     * 给定一张人脸图片和一个 PersonId，判断图片中的人和 PersonId 对应的人是否为同一人。PersonId 请参考[人员库管理相关接口](https://cloud.tencent.com/document/product/867/32794)。 
+
+与[人脸比对](https://cloud.tencent.com/document/product/867/32802)接口不同的是，人脸验证用于判断 “此人是否是此人”，“此人”的信息已存于人员库中，“此人”可能存在多张人脸图片；而[人脸比对](https://cloud.tencent.com/document/product/867/32802)用于判断两张人脸的相似度。
+
+与[人员验证](https://cloud.tencent.com/document/product/867/38879)接口不同的是，人脸验证将该人员（Person）下的每个人脸（Face）都作为单独个体进行验证，而[人员验证](https://cloud.tencent.com/document/product/867/38879)会将该人员（Person）下的所有人脸（Face）进行融合特征处理，即若某个 Person下有4张 Face，本接口会将4张 Face 的特征进行融合处理，生成对应这个 Person 的特征，使人员验证（确定待识别的人脸图片是某人员）更加准确。
+
+>     
+- 公共参数中的签名方式请使用V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+     * @param {VerifyFaceRequest} req
+     * @param {function(string, VerifyFaceResponse):void} cb
+     * @public
+     */
+    VerifyFace(req, cb) {
+        let resp = new VerifyFaceResponse();
+        this.request("VerifyFace", req, resp, cb);
+    }
+
+    /**
+     * 用于对一张待识别的人脸图片，在一个或多个人员库中识别出最相似的 TopK 人员，按照相似度从大到小排列。
+
+支持一次性识别图片中的最多 10 张人脸，支持一次性跨 100 个人员库（Group）搜索。
+
+单次搜索的人员库人脸总数量和人员库的算法模型版本（FaceModelVersion）相关。算法模型版本为2.0的人员库，单次搜索人员库人脸总数量不得超过 100 万张；算法模型版本为3.0的人员库，单次搜索人员库人脸总数量不得超过 300 万张。
+
+本接口会将该人员（Person）下的所有人脸（Face）进行融合特征处理，即若某个 Person 下有4张 Face ，本接口会将4张 Face 的特征进行融合处理，生成对应这个 Person 的特征，使人员搜索（确定待识别的人脸图片是某人）更加准确。而[人脸搜索](https://cloud.tencent.com/document/product/867/32798)及[人脸搜索按库返回接口](https://cloud.tencent.com/document/product/867/38882)将该人员（Person）下的每个人脸（Face）都作为单独个体进行搜索。
+
+>     
+- 公共参数中的签名方式请使用V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+- 仅支持算法模型版本（FaceModelVersion）为3.0的人员库。
+     * @param {SearchPersonsRequest} req
+     * @param {function(string, SearchPersonsResponse):void} cb
+     * @public
+     */
+    SearchPersons(req, cb) {
+        let resp = new SearchPersonsResponse();
+        this.request("SearchPersons", req, resp, cb);
+    }
+
+    /**
      * 对两张图片中的人脸进行相似度比对，返回人脸相似度分数。
 
-若您需要判断 “此人是否是某人”，即验证某张图片中的人是否是已知身份的某人，如常见的人脸登录场景，建议使用[人脸验证](https://cloud.tencent.com/document/product/867/32806)接口。
-
-若您需要判断图片中人脸的具体身份信息，如是否是身份证上对应的人，建议使用[人脸核身·云智慧眼](https://cloud.tencent.com/product/facein)产品。
+若您需要判断 “此人是否是某人”，即验证某张图片中的人是否是已知身份的某人，如常见的人脸登录场景，建议使用[人脸验证](https://cloud.tencent.com/document/product/867/32806)或[人员验证](https://cloud.tencent.com/document/product/867/38879)接口。
 
 >     
 - 公共参数中的签名方式请使用V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
@@ -357,6 +514,26 @@ class IaiClient extends AbstractClient {
     }
 
     /**
+     * 用于对一张待识别的人脸图片，在一个或多个人员库中识别出最相似的 TopK 人员，按照**人员库的维度**以人员相似度从大到小顺序排列。
+
+支持一次性识别图片中的最多 10 张人脸，支持跨人员库（Group）搜索。
+
+单次搜索的人员库人脸总数量和人员库的算法模型版本（FaceModelVersion）相关。算法模型版本为2.0的人员库，单次搜索人员库人脸总数量不得超过 100 万张；算法模型版本为3.0的人员库，单次搜索人员库人脸总数量不得超过 300 万张。
+
+本接口会将该人员（Person）下的所有人脸（Face）进行融合特征处理，即若某个 Person 下有4张 Face ，本接口会将4张 Face 的特征进行融合处理，生成对应这个 Person 的特征，使人员搜索（确定待识别的人脸图片是某人）更加准确。而[人脸搜索](https://cloud.tencent.com/document/product/867/32798)及[人脸搜索按库返回接口](https://cloud.tencent.com/document/product/867/38882)将该人员（Person）下的每个人脸（Face）都作为单独个体进行搜索。
+>     
+- 公共参数中的签名方式请使用V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+- 仅支持算法模型版本（FaceModelVersion）为3.0的人员库。
+     * @param {SearchPersonsReturnsByGroupRequest} req
+     * @param {function(string, SearchPersonsReturnsByGroupResponse):void} cb
+     * @public
+     */
+    SearchPersonsReturnsByGroup(req, cb) {
+        let resp = new SearchPersonsReturnsByGroupResponse();
+        this.request("SearchPersonsReturnsByGroup", req, resp, cb);
+    }
+
+    /**
      * 获取人员库列表。
      * @param {GetGroupListRequest} req
      * @param {function(string, GetGroupListResponse):void} cb
@@ -365,6 +542,21 @@ class IaiClient extends AbstractClient {
     GetGroupList(req, cb) {
         let resp = new GetGroupListResponse();
         this.request("GetGroupList", req, resp, cb);
+    }
+
+    /**
+     * 获取若要开始一个人员查重任务，这个任务结束的预估时间。
+
+若EndTimestamp符合您预期，请您尽快发起人员查重请求，否则导致可能需要更多处理时间。
+
+若预估时间超过5小时，则无法使用人员查重功能。
+     * @param {EstimateCheckSimilarPersonCostTimeRequest} req
+     * @param {function(string, EstimateCheckSimilarPersonCostTimeResponse):void} cb
+     * @public
+     */
+    EstimateCheckSimilarPersonCostTime(req, cb) {
+        let resp = new EstimateCheckSimilarPersonCostTimeResponse();
+        this.request("EstimateCheckSimilarPersonCostTime", req, resp, cb);
     }
 
     /**

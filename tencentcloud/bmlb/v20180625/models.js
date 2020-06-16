@@ -1704,6 +1704,12 @@ class TrafficMirrorReceiver extends  AbstractModel {
          */
         this.HealthStatus = null;
 
+        /**
+         * 接收机的可以执行的操作集合。
+         * @type {Array.<string> || null}
+         */
+        this.Operates = null;
+
     }
 
     /**
@@ -1726,6 +1732,7 @@ class TrafficMirrorReceiver extends  AbstractModel {
         this.VpcName = 'VpcName' in params ? params.VpcName : null;
         this.VpcCidrBlock = 'VpcCidrBlock' in params ? params.VpcCidrBlock : null;
         this.HealthStatus = 'HealthStatus' in params ? params.HealthStatus : null;
+        this.Operates = 'Operates' in params ? params.Operates : null;
 
     }
 }
@@ -1986,6 +1993,24 @@ class DescribeTrafficMirrorsRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * 排序字段。trafficMirrorId或者createTime。
+         * @type {string || null}
+         */
+        this.OrderField = null;
+
+        /**
+         * 排序方式，取值：0:增序(默认)，1:降序
+         * @type {number || null}
+         */
+        this.Order = null;
+
+        /**
+         * 模糊匹配trafficMirrorId或者alias字段。
+         * @type {string || null}
+         */
+        this.SearchKey = null;
+
     }
 
     /**
@@ -2000,6 +2025,9 @@ class DescribeTrafficMirrorsRequest extends  AbstractModel {
         this.VpcIds = 'VpcIds' in params ? params.VpcIds : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.SearchKey = 'SearchKey' in params ? params.SearchKey : null;
 
     }
 }
@@ -2552,7 +2580,7 @@ class DescribeL7BackendsRequest extends  AbstractModel {
         this.LocationId = null;
 
         /**
-         * 查询条件，传'all'则查询所有与规则绑定的主机信息。
+         * 查询条件，传'all'则查询所有与规则绑定的主机信息。如果为all时，DomainId和LocationId参数没有意义不必传入，否则DomainId和LocationId参数必须传入。
          * @type {string || null}
          */
         this.QueryType = null;
@@ -2650,7 +2678,7 @@ class L7Listener extends  AbstractModel {
         this.AddTimestamp = null;
 
         /**
-         * https转发类型。0：关闭。1：spdy。2：http2。3：spdy+http2。
+         * https转发类型。0：https。1：spdy。2：http2。3：spdy+http2。
          * @type {number || null}
          */
         this.ForwardProtocol = null;
@@ -3931,6 +3959,12 @@ class ModifyL7ListenerRequest extends  AbstractModel {
          */
         this.Bandwidth = null;
 
+        /**
+         * 转发协议。当监听器Protocol为https时并且SslMode为1或2时，有意义。可选的值为0：https，1：spdy，2：http2，3：spdy+http2。
+         * @type {number || null}
+         */
+        this.ForwardProtocol = null;
+
     }
 
     /**
@@ -3952,6 +3986,7 @@ class ModifyL7ListenerRequest extends  AbstractModel {
         this.CertCaName = 'CertCaName' in params ? params.CertCaName : null;
         this.CertCaContent = 'CertCaContent' in params ? params.CertCaContent : null;
         this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
+        this.ForwardProtocol = 'ForwardProtocol' in params ? params.ForwardProtocol : null;
 
     }
 }
@@ -4225,6 +4260,12 @@ class L7ListenerInfo extends  AbstractModel {
          */
         this.RuleSet = null;
 
+        /**
+         * https转发类型。0：https。1：spdy。2：http2。3：spdy+http2。
+         * @type {number || null}
+         */
+        this.ForwardProtocol = null;
+
     }
 
     /**
@@ -4254,6 +4295,7 @@ class L7ListenerInfo extends  AbstractModel {
                 this.RuleSet.push(obj);
             }
         }
+        this.ForwardProtocol = 'ForwardProtocol' in params ? params.ForwardProtocol : null;
 
     }
 }
@@ -5050,6 +5092,12 @@ class CreateL7Listener extends  AbstractModel {
          */
         this.Bandwidth = null;
 
+        /**
+         * 转发协议。当Protocol为https时并且SslMode为1或2时，有意义。可选的值为0：https，1：spdy，2：http2，3：spdy+http2。
+         * @type {number || null}
+         */
+        this.ForwardProtocol = null;
+
     }
 
     /**
@@ -5071,6 +5119,7 @@ class CreateL7Listener extends  AbstractModel {
         this.CertCaName = 'CertCaName' in params ? params.CertCaName : null;
         this.CertCaContent = 'CertCaContent' in params ? params.CertCaContent : null;
         this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
+        this.ForwardProtocol = 'ForwardProtocol' in params ? params.ForwardProtocol : null;
 
     }
 }
@@ -5868,7 +5917,7 @@ class CreateLoadBalancersRequest extends  AbstractModel {
         this.PayMode = null;
 
         /**
-         * 负载均衡对应的TGW集群类别，取值为tunnel、fullnat或dnat。tunnel表示隧道集群，fullnat表示FULLNAT集群，dnat表示DNAT集群。默认值为fullnat。如需获取client IP，可以选择 tunnel 模式，fullnat 模式（tcp 通过toa 获取），dnat 模式。
+         * 负载均衡对应的TGW集群类别，取值为tunnel、fullnat或dnat。tunnel表示隧道集群，fullnat表示FULLNAT集群（普通外网负载均衡），dnat表示DNAT集群（增强型外网负载均衡）。默认值为fullnat。如需获取client IP，可以选择 tunnel 模式，fullnat 模式（tcp 通过toa 获取），dnat 模式。
          * @type {string || null}
          */
         this.TgwSetType = null;
@@ -7889,7 +7938,7 @@ class LoadBalancer extends  AbstractModel {
         this.VpcCidrBlock = null;
 
         /**
-         * 负载均衡获得的公网IP地址,支持多个
+         * 负载均衡的IPV4的VIP。
          * @type {Array.<string> || null}
          */
         this.LoadBalancerVips = null;
@@ -7948,6 +7997,19 @@ class LoadBalancer extends  AbstractModel {
          */
         this.BzL7Metrics = null;
 
+        /**
+         * 该负载均衡对应的所在的整形类型的VpcId
+         * @type {number || null}
+         */
+        this.IntVpcId = null;
+
+        /**
+         * 负载均衡的IPV6或者IPV4的VIP。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.CurVips = null;
+
     }
 
     /**
@@ -7983,6 +8045,8 @@ class LoadBalancer extends  AbstractModel {
         this.BzPayMode = 'BzPayMode' in params ? params.BzPayMode : null;
         this.BzL4Metrics = 'BzL4Metrics' in params ? params.BzL4Metrics : null;
         this.BzL7Metrics = 'BzL7Metrics' in params ? params.BzL7Metrics : null;
+        this.IntVpcId = 'IntVpcId' in params ? params.IntVpcId : null;
+        this.CurVips = 'CurVips' in params ? params.CurVips : null;
 
     }
 }

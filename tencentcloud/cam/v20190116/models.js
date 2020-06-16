@@ -17,60 +17,24 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * GetUser返回参数结构体
+ * ListAttachedRolePolicies返回参数结构体
  * @class
  */
-class GetUserResponse extends  AbstractModel {
+class ListAttachedRolePoliciesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 子用户用户 ID
+         * 角色关联的策略列表
+         * @type {Array.<AttachedPolicyOfRole> || null}
+         */
+        this.List = null;
+
+        /**
+         * 角色关联的策略总数
          * @type {number || null}
          */
-        this.Uin = null;
-
-        /**
-         * 子用户用户名
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 子用户 UID
-         * @type {number || null}
-         */
-        this.Uid = null;
-
-        /**
-         * 子用户备注
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * 子用户能否登录控制台
-         * @type {number || null}
-         */
-        this.ConsoleLogin = null;
-
-        /**
-         * 手机号
-         * @type {string || null}
-         */
-        this.PhoneNum = null;
-
-        /**
-         * 区号
-         * @type {string || null}
-         */
-        this.CountryCode = null;
-
-        /**
-         * 邮箱
-         * @type {string || null}
-         */
-        this.Email = null;
+        this.TotalNum = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -87,14 +51,72 @@ class GetUserResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uin = 'Uin' in params ? params.Uin : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Uid = 'Uid' in params ? params.Uid : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.ConsoleLogin = 'ConsoleLogin' in params ? params.ConsoleLogin : null;
-        this.PhoneNum = 'PhoneNum' in params ? params.PhoneNum : null;
-        this.CountryCode = 'CountryCode' in params ? params.CountryCode : null;
-        this.Email = 'Email' in params ? params.Email : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new AttachedPolicyOfRole();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ListAccessKeys请求参数结构体
+ * @class
+ */
+class ListAccessKeysRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 指定用户Uin，不填默认列出当前用户访问密钥
+         * @type {number || null}
+         */
+        this.TargetUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetUin = 'TargetUin' in params ? params.TargetUin : null;
+
+    }
+}
+
+/**
+ * SetMfaFlag返回参数结构体
+ * @class
+ */
+class SetMfaFlagResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -114,6 +136,12 @@ class DeleteUserRequest extends  AbstractModel {
          */
         this.Name = null;
 
+        /**
+         * 是否强制删除该子用户，默认入参为0。0：若该用户存在未删除API密钥，则不删除用户；1：若该用户存在未删除API密钥，则先删除密钥后删除用户。删除密钥需要您拥有cam:DeleteApiKey权限，您将可以删除该用户下启用或禁用状态的所有密钥，无权限则删除密钥和用户失败
+         * @type {number || null}
+         */
+        this.Force = null;
+
     }
 
     /**
@@ -124,6 +152,7 @@ class DeleteUserRequest extends  AbstractModel {
             return;
         }
         this.Name = 'Name' in params ? params.Name : null;
+        this.Force = 'Force' in params ? params.Force : null;
 
     }
 }
@@ -223,7 +252,7 @@ class CreatePolicyResponse extends  AbstractModel {
         super();
 
         /**
-         * 新增策略id
+         * 新增策略ID
          * @type {number || null}
          */
         this.PolicyId = null;
@@ -285,6 +314,48 @@ class GetRoleRequest extends  AbstractModel {
 }
 
 /**
+ * CreateServiceLinkedRole请求参数结构体
+ * @class
+ */
+class CreateServiceLinkedRoleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 授权服务，附加了此角色的腾讯云服务主体。
+         * @type {Array.<string> || null}
+         */
+        this.QCSServiceName = null;
+
+        /**
+         * 自定义后缀，根据您提供的字符串，与服务提供的前缀组合在一起以形成完整的角色名称。
+         * @type {string || null}
+         */
+        this.CustomSuffix = null;
+
+        /**
+         * 角色说明。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.QCSServiceName = 'QCSServiceName' in params ? params.QCSServiceName : null;
+        this.CustomSuffix = 'CustomSuffix' in params ? params.CustomSuffix : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
  * ListAttachedGroupPolicies请求参数结构体
  * @class
  */
@@ -293,7 +364,7 @@ class ListAttachedGroupPoliciesRequest extends  AbstractModel {
         super();
 
         /**
-         * 用户组 id
+         * 用户组ID
          * @type {number || null}
          */
         this.TargetGroupId = null;
@@ -352,6 +423,12 @@ class ListGroupsForUserRequest extends  AbstractModel {
          */
         this.Page = null;
 
+        /**
+         * 子账号UIN
+         * @type {number || null}
+         */
+        this.SubUin = null;
+
     }
 
     /**
@@ -364,6 +441,7 @@ class ListGroupsForUserRequest extends  AbstractModel {
         this.Uid = 'Uid' in params ? params.Uid : null;
         this.Rp = 'Rp' in params ? params.Rp : null;
         this.Page = 'Page' in params ? params.Page : null;
+        this.SubUin = 'SubUin' in params ? params.SubUin : null;
 
     }
 }
@@ -391,6 +469,64 @@ class AttachRolePolicyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GetServiceLinkedRoleDeletionStatus返回参数结构体
+ * @class
+ */
+class GetServiceLinkedRoleDeletionStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 状态：NOT_STARTED，IN_PROGRESS，SUCCEEDED，FAILED
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 失败原因
+         * @type {string || null}
+         */
+        this.Reason = null;
+
+        /**
+         * 服务类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceType = null;
+
+        /**
+         * 服务名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceName = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Reason = 'Reason' in params ? params.Reason : null;
+        this.ServiceType = 'ServiceType' in params ? params.ServiceType : null;
+        this.ServiceName = 'ServiceName' in params ? params.ServiceName : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -581,6 +717,34 @@ class ListGroupsResponse extends  AbstractModel {
 }
 
 /**
+ * ListPolicyVersions请求参数结构体
+ * @class
+ */
+class ListPolicyVersionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 策略ID
+         * @type {number || null}
+         */
+        this.PolicyId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+
+    }
+}
+
+/**
  * GetCustomMFATokenInfo请求参数结构体
  * @class
  */
@@ -700,6 +864,51 @@ class DeleteRoleResponse extends  AbstractModel {
 }
 
 /**
+ * 策略版本列表元素结构
+ * @class
+ */
+class PolicyVersionItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 策略版本号
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.VersionId = null;
+
+        /**
+         * 策略版本创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateDate = null;
+
+        /**
+         * 是否是正在生效的版本。0表示不是，1表示是
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IsDefaultVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VersionId = 'VersionId' in params ? params.VersionId : null;
+        this.CreateDate = 'CreateDate' in params ? params.CreateDate : null;
+        this.IsDefaultVersion = 'IsDefaultVersion' in params ? params.IsDefaultVersion : null;
+
+    }
+}
+
+/**
  * ListSAMLProviders请求参数结构体
  * @class
  */
@@ -763,6 +972,34 @@ class ListGroupsRequest extends  AbstractModel {
 }
 
 /**
+ * DeletePolicyVersion返回参数结构体
+ * @class
+ */
+class DeletePolicyVersionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * UpdateSAMLProvider请求参数结构体
  * @class
  */
@@ -813,7 +1050,7 @@ class UpdateAssumeRolePolicyRequest extends  AbstractModel {
         super();
 
         /**
-         * 策略文档
+         * 策略文档，示例：{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}，principal用于指定角色的授权对象。获取该参数可参阅 获取角色详情（https://cloud.tencent.com/document/product/598/36221） 输出参数RoleInfo
          * @type {string || null}
          */
         this.PolicyDocument = null;
@@ -975,6 +1212,42 @@ class RemoveUserFromGroupRequest extends  AbstractModel {
 }
 
 /**
+ * CreatePolicyVersion返回参数结构体
+ * @class
+ */
+class CreatePolicyVersionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 策略版本号
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.VersionId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VersionId = 'VersionId' in params ? params.VersionId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ListPolicies返回参数结构体
  * @class
  */
@@ -996,6 +1269,9 @@ addTime：策略创建时间
 type：1 表示自定义策略，2 表示预设策略 
 description：策略描述 
 createMode：1 表示按业务权限创建的策略，其他值表示可以查看策略语法和通过策略语法更新策略
+Attachments: 关联的用户数
+ServiceType: 策略关联的产品
+IsAttached: 当需要查询标记实体是否已经关联策略时不为null。0表示未关联策略，1表示已关联策略
          * @type {Array.<StrategyInfo> || null}
          */
         this.List = null;
@@ -1034,55 +1310,6 @@ createMode：1 表示按业务权限创建的策略，其他值表示可以查�
         }
         this.ServiceTypeList = 'ServiceTypeList' in params ? params.ServiceTypeList : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * 异地登录设置
- * @class
- */
-class OffsiteFlag extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 验证标识
-         * @type {number || null}
-         */
-        this.VerifyFlag = null;
-
-        /**
-         * 手机通知
-         * @type {number || null}
-         */
-        this.NotifyPhone = null;
-
-        /**
-         * 邮箱通知
-         * @type {number || null}
-         */
-        this.NotifyEmail = null;
-
-        /**
-         * 微信通知
-         * @type {number || null}
-         */
-        this.NotifyWechat = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.VerifyFlag = 'VerifyFlag' in params ? params.VerifyFlag : null;
-        this.NotifyPhone = 'NotifyPhone' in params ? params.NotifyPhone : null;
-        this.NotifyEmail = 'NotifyEmail' in params ? params.NotifyEmail : null;
-        this.NotifyWechat = 'NotifyWechat' in params ? params.NotifyWechat : null;
 
     }
 }
@@ -1165,6 +1392,41 @@ class UpdateRoleDescriptionRequest extends  AbstractModel {
 }
 
 /**
+ * SetDefaultPolicyVersion请求参数结构体
+ * @class
+ */
+class SetDefaultPolicyVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 策略ID
+         * @type {number || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * 策略版本号
+         * @type {number || null}
+         */
+        this.VersionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.VersionId = 'VersionId' in params ? params.VersionId : null;
+
+    }
+}
+
+/**
  * 角色详细信息
  * @class
  */
@@ -1214,6 +1476,27 @@ class RoleInfo extends  AbstractModel {
          */
         this.ConsoleLogin = null;
 
+        /**
+         * 角色类型，取user、system或service_linked
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RoleType = null;
+
+        /**
+         * 有效时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SessionDuration = null;
+
+        /**
+         * 服务相关角色删除TaskId
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DeletionTaskId = null;
+
     }
 
     /**
@@ -1230,6 +1513,51 @@ class RoleInfo extends  AbstractModel {
         this.AddTime = 'AddTime' in params ? params.AddTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.ConsoleLogin = 'ConsoleLogin' in params ? params.ConsoleLogin : null;
+        this.RoleType = 'RoleType' in params ? params.RoleType : null;
+        this.SessionDuration = 'SessionDuration' in params ? params.SessionDuration : null;
+        this.DeletionTaskId = 'DeletionTaskId' in params ? params.DeletionTaskId : null;
+
+    }
+}
+
+/**
+ * CreatePolicyVersion请求参数结构体
+ * @class
+ */
+class CreatePolicyVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 策略ID
+         * @type {number || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * 策略文本信息
+         * @type {string || null}
+         */
+        this.PolicyDocument = null;
+
+        /**
+         * 是否设置为当前策略的版本
+         * @type {boolean || null}
+         */
+        this.SetAsDefault = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.PolicyDocument = 'PolicyDocument' in params ? params.PolicyDocument : null;
+        this.SetAsDefault = 'SetAsDefault' in params ? params.SetAsDefault : null;
 
     }
 }
@@ -1263,24 +1591,60 @@ class DeleteGroupRequest extends  AbstractModel {
 }
 
 /**
- * ListAttachedRolePolicies返回参数结构体
+ * GetUser返回参数结构体
  * @class
  */
-class ListAttachedRolePoliciesResponse extends  AbstractModel {
+class GetUserResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 角色关联的策略列表
-         * @type {Array.<AttachedPolicyOfRole> || null}
-         */
-        this.List = null;
-
-        /**
-         * 角色关联的策略总数
+         * 子用户用户 UIN
          * @type {number || null}
          */
-        this.TotalNum = null;
+        this.Uin = null;
+
+        /**
+         * 子用户用户名
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 子用户 UID
+         * @type {number || null}
+         */
+        this.Uid = null;
+
+        /**
+         * 子用户备注
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 子用户能否登录控制台
+         * @type {number || null}
+         */
+        this.ConsoleLogin = null;
+
+        /**
+         * 手机号
+         * @type {string || null}
+         */
+        this.PhoneNum = null;
+
+        /**
+         * 区号
+         * @type {string || null}
+         */
+        this.CountryCode = null;
+
+        /**
+         * 邮箱
+         * @type {string || null}
+         */
+        this.Email = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1297,16 +1661,14 @@ class ListAttachedRolePoliciesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.List) {
-            this.List = new Array();
-            for (let z in params.List) {
-                let obj = new AttachedPolicyOfRole();
-                obj.deserialize(params.List[z]);
-                this.List.push(obj);
-            }
-        }
-        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Uid = 'Uid' in params ? params.Uid : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.ConsoleLogin = 'ConsoleLogin' in params ? params.ConsoleLogin : null;
+        this.PhoneNum = 'PhoneNum' in params ? params.PhoneNum : null;
+        this.CountryCode = 'CountryCode' in params ? params.CountryCode : null;
+        this.Email = 'Email' in params ? params.Email : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1349,7 +1711,7 @@ class DetachRolePolicyRequest extends  AbstractModel {
         super();
 
         /**
-         * 策略ID
+         * 策略ID，入参PolicyId与PolicyName二选一
          * @type {number || null}
          */
         this.PolicyId = null;
@@ -1366,6 +1728,12 @@ class DetachRolePolicyRequest extends  AbstractModel {
          */
         this.DetachRoleName = null;
 
+        /**
+         * 策略名，入参PolicyId与PolicyName二选一
+         * @type {string || null}
+         */
+        this.PolicyName = null;
+
     }
 
     /**
@@ -1378,6 +1746,7 @@ class DetachRolePolicyRequest extends  AbstractModel {
         this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
         this.DetachRoleId = 'DetachRoleId' in params ? params.DetachRoleId : null;
         this.DetachRoleName = 'DetachRoleName' in params ? params.DetachRoleName : null;
+        this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
 
     }
 }
@@ -1441,6 +1810,34 @@ class StrategyInfo extends  AbstractModel {
          */
         this.ServiceType = null;
 
+        /**
+         * 当需要查询标记实体是否已经关联策略时不为null。0表示未关联策略，1表示已关联策略
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IsAttached = null;
+
+        /**
+         * 是否已下线
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Deactived = null;
+
+        /**
+         * 已下线产品列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.DeactivedDetail = null;
+
+        /**
+         * 是否是服务相关角色策略
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IsServiceLinkedPolicy = null;
+
     }
 
     /**
@@ -1458,6 +1855,10 @@ class StrategyInfo extends  AbstractModel {
         this.CreateMode = 'CreateMode' in params ? params.CreateMode : null;
         this.Attachments = 'Attachments' in params ? params.Attachments : null;
         this.ServiceType = 'ServiceType' in params ? params.ServiceType : null;
+        this.IsAttached = 'IsAttached' in params ? params.IsAttached : null;
+        this.Deactived = 'Deactived' in params ? params.Deactived : null;
+        this.DeactivedDetail = 'DeactivedDetail' in params ? params.DeactivedDetail : null;
+        this.IsServiceLinkedPolicy = 'IsServiceLinkedPolicy' in params ? params.IsServiceLinkedPolicy : null;
 
     }
 }
@@ -1572,7 +1973,7 @@ class AddUserRequest extends  AbstractModel {
         this.UseApi = null;
 
         /**
-         * 子用户控制台登录密码，若未进行密码规则设置则默认密码规则为8位以上同时包含大写小字母、数字和特殊字符。只有可以登录控制台时才有效，如果传空并且上面指定允许登录控制台，则自动生成随机密码，随机密码规则为32位包含大写小字母、数字和特殊字符。
+         * 子用户控制台登录密码，若未进行密码规则设置则默认密码规则为8位以上同时包含大小写字母、数字和特殊字符。只有可以登录控制台时才有效，如果传空并且上面指定允许登录控制台，则自动生成随机密码，随机密码规则为32位包含大小写字母、数字和特殊字符。
          * @type {string || null}
          */
         this.Password = null;
@@ -1624,62 +2025,6 @@ class AddUserRequest extends  AbstractModel {
 }
 
 /**
- * 登录和敏感操作flag
- * @class
- */
-class LoginActionFlag extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 手机
-         * @type {number || null}
-         */
-        this.Phone = null;
-
-        /**
-         * 硬token
-         * @type {number || null}
-         */
-        this.Token = null;
-
-        /**
-         * 软token
-         * @type {number || null}
-         */
-        this.Stoken = null;
-
-        /**
-         * 微信
-         * @type {number || null}
-         */
-        this.Wechat = null;
-
-        /**
-         * 自定义
-         * @type {number || null}
-         */
-        this.Custom = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Phone = 'Phone' in params ? params.Phone : null;
-        this.Token = 'Token' in params ? params.Token : null;
-        this.Stoken = 'Stoken' in params ? params.Stoken : null;
-        this.Wechat = 'Wechat' in params ? params.Wechat : null;
-        this.Custom = 'Custom' in params ? params.Custom : null;
-
-    }
-}
-
-/**
  * DeleteRole请求参数结构体
  * @class
  */
@@ -1708,6 +2053,48 @@ class DeleteRoleRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RoleId = 'RoleId' in params ? params.RoleId : null;
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+
+    }
+}
+
+/**
+ * UpdateRoleConsoleLogin请求参数结构体
+ * @class
+ */
+class UpdateRoleConsoleLoginRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否可登录，可登录：1，不可登录：0
+         * @type {number || null}
+         */
+        this.ConsoleLogin = null;
+
+        /**
+         * 角色ID
+         * @type {number || null}
+         */
+        this.RoleId = null;
+
+        /**
+         * 角色名
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConsoleLogin = 'ConsoleLogin' in params ? params.ConsoleLogin : null;
         this.RoleId = 'RoleId' in params ? params.RoleId : null;
         this.RoleName = 'RoleName' in params ? params.RoleName : null;
 
@@ -1886,6 +2273,48 @@ class GetUserRequest extends  AbstractModel {
             return;
         }
         this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
+ * 登录和敏感操作flag
+ * @class
+ */
+class LoginActionMfaFlag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 手机
+         * @type {number || null}
+         */
+        this.Phone = null;
+
+        /**
+         * 软token
+         * @type {number || null}
+         */
+        this.Stoken = null;
+
+        /**
+         * 微信
+         * @type {number || null}
+         */
+        this.Wechat = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Phone = 'Phone' in params ? params.Phone : null;
+        this.Stoken = 'Stoken' in params ? params.Stoken : null;
+        this.Wechat = 'Wechat' in params ? params.Wechat : null;
 
     }
 }
@@ -2071,7 +2500,7 @@ class UpdateUserRequest extends  AbstractModel {
         this.ConsoleLogin = null;
 
         /**
-         * 子用户控制台登录密码，若未进行密码规则设置则默认密码规则为8位以上同时包含大写小字母、数字和特殊字符。只有可以登录控制台时才有效，如果传空并且上面指定允许登录控制台，则自动生成随机密码，随机密码规则为32位包含大写小字母、数字和特殊字符。
+         * 子用户控制台登录密码，若未进行密码规则设置则默认密码规则为8位以上同时包含大小写字母、数字和特殊字符。只有可以登录控制台时才有效，如果传空并且上面指定允许登录控制台，则自动生成随机密码，随机密码规则为32位包含大小写字母、数字和特殊字符。
          * @type {string || null}
          */
         this.Password = null;
@@ -2205,6 +2634,48 @@ class AttachPolicyInfo extends  AbstractModel {
          */
         this.PolicyType = null;
 
+        /**
+         * 策略备注
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 策略关联操作者主张号
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OperateOwnerUin = null;
+
+        /**
+         * 策略关联操作者ID，如果UinType为0表示子帐号Uin，如果UinType为1表示角色ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OperateUin = null;
+
+        /**
+         * UinType为0表示OperateUin字段是子帐号Uin，如果UinType为1表示OperateUin字段是角色ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.OperateUinType = null;
+
+        /**
+         * 是否已下线
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Deactived = null;
+
+        /**
+         * 已下线的产品列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.DeactivedDetail = null;
+
     }
 
     /**
@@ -2219,6 +2690,40 @@ class AttachPolicyInfo extends  AbstractModel {
         this.AddTime = 'AddTime' in params ? params.AddTime : null;
         this.CreateMode = 'CreateMode' in params ? params.CreateMode : null;
         this.PolicyType = 'PolicyType' in params ? params.PolicyType : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.OperateOwnerUin = 'OperateOwnerUin' in params ? params.OperateOwnerUin : null;
+        this.OperateUin = 'OperateUin' in params ? params.OperateUin : null;
+        this.OperateUinType = 'OperateUinType' in params ? params.OperateUinType : null;
+        this.Deactived = 'Deactived' in params ? params.Deactived : null;
+        this.DeactivedDetail = 'DeactivedDetail' in params ? params.DeactivedDetail : null;
+
+    }
+}
+
+/**
+ * UpdateRoleConsoleLogin返回参数结构体
+ * @class
+ */
+class UpdateRoleConsoleLoginResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2232,7 +2737,7 @@ class AttachRolePolicyRequest extends  AbstractModel {
         super();
 
         /**
-         * 策略ID
+         * 策略ID，入参PolicyId与PolicyName二选一
          * @type {number || null}
          */
         this.PolicyId = null;
@@ -2249,6 +2754,12 @@ class AttachRolePolicyRequest extends  AbstractModel {
          */
         this.AttachRoleName = null;
 
+        /**
+         * 策略名，入参PolicyId与PolicyName二选一
+         * @type {string || null}
+         */
+        this.PolicyName = null;
+
     }
 
     /**
@@ -2261,6 +2772,7 @@ class AttachRolePolicyRequest extends  AbstractModel {
         this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
         this.AttachRoleId = 'AttachRoleId' in params ? params.AttachRoleId : null;
         this.AttachRoleName = 'AttachRoleName' in params ? params.AttachRoleName : null;
+        this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
 
     }
 }
@@ -2379,42 +2891,24 @@ class ListAttachedGroupPoliciesResponse extends  AbstractModel {
 }
 
 /**
- * SetFlag请求参数结构体
+ * GetPolicyVersion请求参数结构体
  * @class
  */
-class SetFlagRequest extends  AbstractModel {
+class GetPolicyVersionRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 设置用户的uin
+         * 策略ID
          * @type {number || null}
          */
-        this.OpUin = null;
+        this.PolicyId = null;
 
         /**
-         * 登录设置
-         * @type {LoginActionFlag || null}
-         */
-        this.LoginFlag = null;
-
-        /**
-         * 敏感操作设置
-         * @type {LoginActionFlag || null}
-         */
-        this.ActionFlag = null;
-
-        /**
-         * 异地登录设置
-         * @type {OffsiteFlag || null}
-         */
-        this.OffsiteFlag = null;
-
-        /**
-         * 是否需要充值mfa
+         * 策略版本号
          * @type {number || null}
          */
-        this.NeedResetMfa = null;
+        this.VersionId = null;
 
     }
 
@@ -2425,26 +2919,8 @@ class SetFlagRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.OpUin = 'OpUin' in params ? params.OpUin : null;
-
-        if (params.LoginFlag) {
-            let obj = new LoginActionFlag();
-            obj.deserialize(params.LoginFlag)
-            this.LoginFlag = obj;
-        }
-
-        if (params.ActionFlag) {
-            let obj = new LoginActionFlag();
-            obj.deserialize(params.ActionFlag)
-            this.ActionFlag = obj;
-        }
-
-        if (params.OffsiteFlag) {
-            let obj = new OffsiteFlag();
-            obj.deserialize(params.OffsiteFlag)
-            this.OffsiteFlag = obj;
-        }
-        this.NeedResetMfa = 'NeedResetMfa' in params ? params.NeedResetMfa : null;
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.VersionId = 'VersionId' in params ? params.VersionId : null;
 
     }
 }
@@ -2501,6 +2977,48 @@ class ConsumeCustomMFATokenRequest extends  AbstractModel {
             return;
         }
         this.MFAToken = 'MFAToken' in params ? params.MFAToken : null;
+
+    }
+}
+
+/**
+ * 访问密钥列表
+ * @class
+ */
+class AccessKey extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 访问密钥标识
+         * @type {string || null}
+         */
+        this.AccessKeyId = null;
+
+        /**
+         * 密钥状态，激活（Active）或未激活（Inactive）
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccessKeyId = 'AccessKeyId' in params ? params.AccessKeyId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
 
     }
 }
@@ -2668,12 +3186,18 @@ class UpdateUserResponse extends  AbstractModel {
 }
 
 /**
- * AddUserToGroup返回参数结构体
+ * CreateServiceLinkedRole返回参数结构体
  * @class
  */
-class AddUserToGroupResponse extends  AbstractModel {
+class CreateServiceLinkedRoleResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 角色ID
+         * @type {string || null}
+         */
+        this.RoleId = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2690,7 +3214,64 @@ class AddUserToGroupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RoleId = 'RoleId' in params ? params.RoleId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ListUsers请求参数结构体
+ * @class
+ */
+class ListUsersRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * ListCollaborators请求参数结构体
+ * @class
+ */
+class ListCollaboratorsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 分页条数，缺省为20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 分页起始值，缺省为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -2704,6 +3285,13 @@ class UpdatePolicyResponse extends  AbstractModel {
         super();
 
         /**
+         * 策略id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.PolicyId = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -2718,6 +3306,7 @@ class UpdatePolicyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2885,6 +3474,34 @@ class ListPoliciesRequest extends  AbstractModel {
 }
 
 /**
+ * GetServiceLinkedRoleDeletionStatus请求参数结构体
+ * @class
+ */
+class GetServiceLinkedRoleDeletionStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 删除任务ID
+         * @type {string || null}
+         */
+        this.DeletionTaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeletionTaskId = 'DeletionTaskId' in params ? params.DeletionTaskId : null;
+
+    }
+}
+
+/**
  * DetachGroupPolicy返回参数结构体
  * @class
  */
@@ -2927,7 +3544,7 @@ class CreatePolicyRequest extends  AbstractModel {
         this.PolicyName = null;
 
         /**
-         * 策略文档
+         * 策略文档，示例：{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}，principal用于指定角色的授权对象。获取该参数可参阅 获取角色详情（https://cloud.tencent.com/document/product/598/36221） 输出参数RoleInfo
          * @type {string || null}
          */
         this.PolicyDocument = null;
@@ -2950,6 +3567,41 @@ class CreatePolicyRequest extends  AbstractModel {
         this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
         this.PolicyDocument = 'PolicyDocument' in params ? params.PolicyDocument : null;
         this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
+ * DeletePolicyVersion请求参数结构体
+ * @class
+ */
+class DeletePolicyVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 策略ID
+         * @type {number || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * 策略版本号
+         * @type {Array.<number> || null}
+         */
+        this.VersionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.VersionId = 'VersionId' in params ? params.VersionId : null;
 
     }
 }
@@ -2997,47 +3649,19 @@ class UpdateGroupRequest extends  AbstractModel {
 }
 
 /**
- * AttachGroupPolicy请求参数结构体
+ * GetPolicyVersion返回参数结构体
  * @class
  */
-class AttachGroupPolicyRequest extends  AbstractModel {
+class GetPolicyVersionResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 策略 id
-         * @type {number || null}
+         * 策略版本详情
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {PolicyVersionDetail || null}
          */
-        this.PolicyId = null;
-
-        /**
-         * 用户组 id
-         * @type {number || null}
-         */
-        this.AttachGroupId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
-        this.AttachGroupId = 'AttachGroupId' in params ? params.AttachGroupId : null;
-
-    }
-}
-
-/**
- * SetFlag返回参数结构体
- * @class
- */
-class SetFlagResponse extends  AbstractModel {
-    constructor(){
-        super();
+        this.PolicyVersion = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3053,6 +3677,12 @@ class SetFlagResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+
+        if (params.PolicyVersion) {
+            let obj = new PolicyVersionDetail();
+            obj.deserialize(params.PolicyVersion)
+            this.PolicyVersion = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -3153,6 +3783,50 @@ class GetSAMLProviderResponse extends  AbstractModel {
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
         this.SAMLMetadata = 'SAMLMetadata' in params ? params.SAMLMetadata : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ListPolicyVersions返回参数结构体
+ * @class
+ */
+class ListPolicyVersionsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 策略版本列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<PolicyVersionItem> || null}
+         */
+        this.Versions = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Versions) {
+            this.Versions = new Array();
+            for (let z in params.Versions) {
+                let obj = new PolicyVersionItem();
+                obj.deserialize(params.Versions[z]);
+                this.Versions.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3317,6 +3991,27 @@ class AttachedPolicyOfRole extends  AbstractModel {
          */
         this.CreateMode = null;
 
+        /**
+         * 是否已下线(0:否 1:是)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Deactived = null;
+
+        /**
+         * 已下线的产品列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.DeactivedDetail = null;
+
+        /**
+         * 策略描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Description = null;
+
     }
 
     /**
@@ -3331,6 +4026,9 @@ class AttachedPolicyOfRole extends  AbstractModel {
         this.AddTime = 'AddTime' in params ? params.AddTime : null;
         this.PolicyType = 'PolicyType' in params ? params.PolicyType : null;
         this.CreateMode = 'CreateMode' in params ? params.CreateMode : null;
+        this.Deactived = 'Deactived' in params ? params.Deactived : null;
+        this.DeactivedDetail = 'DeactivedDetail' in params ? params.DeactivedDetail : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -3379,6 +4077,34 @@ class ListSAMLProvidersResponse extends  AbstractModel {
                 obj.deserialize(params.SAMLProviderSet[z]);
                 this.SAMLProviderSet.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SetDefaultPolicyVersion返回参数结构体
+ * @class
+ */
+class SetDefaultPolicyVersionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -3552,7 +4278,7 @@ class CreateRoleRequest extends  AbstractModel {
         this.RoleName = null;
 
         /**
-         * 策略文档
+         * 策略文档，示例：{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}，principal用于指定角色的授权对象。获取该参数可参阅 获取角色详情（https://cloud.tencent.com/document/product/598/36221） 输出参数RoleInfo
          * @type {string || null}
          */
         this.PolicyDocument = null;
@@ -3564,10 +4290,16 @@ class CreateRoleRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * 是否允许登录
+         * 是否允许登录 1 为允许 0 为不允许
          * @type {number || null}
          */
         this.ConsoleLogin = null;
+
+        /**
+         * 申请角色临时密钥的最长有效期限制(范围：0~43200)
+         * @type {number || null}
+         */
+        this.SessionDuration = null;
 
     }
 
@@ -3582,6 +4314,42 @@ class CreateRoleRequest extends  AbstractModel {
         this.PolicyDocument = 'PolicyDocument' in params ? params.PolicyDocument : null;
         this.Description = 'Description' in params ? params.Description : null;
         this.ConsoleLogin = 'ConsoleLogin' in params ? params.ConsoleLogin : null;
+        this.SessionDuration = 'SessionDuration' in params ? params.SessionDuration : null;
+
+    }
+}
+
+/**
+ * DeleteServiceLinkedRole返回参数结构体
+ * @class
+ */
+class DeleteServiceLinkedRoleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 删除任务ID，可用于检查删除服务相关角色状态。
+         * @type {string || null}
+         */
+        this.DeletionTaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeletionTaskId = 'DeletionTaskId' in params ? params.DeletionTaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3637,6 +4405,20 @@ class GetPolicyResponse extends  AbstractModel {
         this.PolicyDocument = null;
 
         /**
+         * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PresetAlias = null;
+
+        /**
+         * 是否服务相关策略
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IsServiceLinkedRolePolicy = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -3657,6 +4439,8 @@ class GetPolicyResponse extends  AbstractModel {
         this.AddTime = 'AddTime' in params ? params.AddTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.PolicyDocument = 'PolicyDocument' in params ? params.PolicyDocument : null;
+        this.PresetAlias = 'PresetAlias' in params ? params.PresetAlias : null;
+        this.IsServiceLinkedRolePolicy = 'IsServiceLinkedRolePolicy' in params ? params.IsServiceLinkedRolePolicy : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3686,6 +4470,69 @@ class DeleteGroupResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AttachGroupPolicy请求参数结构体
+ * @class
+ */
+class AttachGroupPolicyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 策略 id
+         * @type {number || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * 用户组 id
+         * @type {number || null}
+         */
+        this.AttachGroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.AttachGroupId = 'AttachGroupId' in params ? params.AttachGroupId : null;
+
+    }
+}
+
+/**
+ * DeleteServiceLinkedRole请求参数结构体
+ * @class
+ */
+class DeleteServiceLinkedRoleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 要删除的服务相关角色的名称。
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
 
     }
 }
@@ -3787,6 +4634,59 @@ class ListUsersForGroupResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 策略版本详情
+ * @class
+ */
+class PolicyVersionDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 策略版本号
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.VersionId = null;
+
+        /**
+         * 策略版本创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateDate = null;
+
+        /**
+         * 是否是正在生效的版本。0表示不是，1表示是
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.IsDefaultVersion = null;
+
+        /**
+         * 策略语法文本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Document = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VersionId = 'VersionId' in params ? params.VersionId : null;
+        this.CreateDate = 'CreateDate' in params ? params.CreateDate : null;
+        this.IsDefaultVersion = 'IsDefaultVersion' in params ? params.IsDefaultVersion : null;
+        this.Document = 'Document' in params ? params.Document : null;
 
     }
 }
@@ -3914,12 +4814,18 @@ class ListEntitiesForPolicyResponse extends  AbstractModel {
 }
 
 /**
- * ListUsers请求参数结构体
+ * AddUserToGroup返回参数结构体
  * @class
  */
-class ListUsersRequest extends  AbstractModel {
+class AddUserToGroupResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -3930,6 +4836,7 @@ class ListUsersRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3956,6 +4863,152 @@ class AttachUserPolicyResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SetMfaFlag请求参数结构体
+ * @class
+ */
+class SetMfaFlagRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设置用户的uin
+         * @type {number || null}
+         */
+        this.OpUin = null;
+
+        /**
+         * 登录保护设置
+         * @type {LoginActionMfaFlag || null}
+         */
+        this.LoginFlag = null;
+
+        /**
+         * 操作保护设置
+         * @type {LoginActionMfaFlag || null}
+         */
+        this.ActionFlag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OpUin = 'OpUin' in params ? params.OpUin : null;
+
+        if (params.LoginFlag) {
+            let obj = new LoginActionMfaFlag();
+            obj.deserialize(params.LoginFlag)
+            this.LoginFlag = obj;
+        }
+
+        if (params.ActionFlag) {
+            let obj = new LoginActionMfaFlag();
+            obj.deserialize(params.ActionFlag)
+            this.ActionFlag = obj;
+        }
+
+    }
+}
+
+/**
+ * ListCollaborators返回参数结构体
+ * @class
+ */
+class ListCollaboratorsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数
+         * @type {number || null}
+         */
+        this.TotalNum = null;
+
+        /**
+         * 协作者信息
+         * @type {Array.<SubAccountInfo> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new SubAccountInfo();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ListAccessKeys返回参数结构体
+ * @class
+ */
+class ListAccessKeysResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 访问密钥列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<AccessKey> || null}
+         */
+        this.AccessKeys = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AccessKeys) {
+            this.AccessKeys = new Array();
+            for (let z in params.AccessKeys) {
+                let obj = new AccessKey();
+                obj.deserialize(params.AccessKeys[z]);
+                this.AccessKeys.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -4013,7 +5066,7 @@ class UpdatePolicyRequest extends  AbstractModel {
         super();
 
         /**
-         * 策略 id
+         * 策略ID
          * @type {number || null}
          */
         this.PolicyId = null;
@@ -4031,10 +5084,16 @@ class UpdatePolicyRequest extends  AbstractModel {
         this.Description = null;
 
         /**
-         * 策略文档
+         * 策略文档，示例：{"version":"2.0","statement":[{"action":"name/sts:AssumeRole","effect":"allow","principal":{"service":["cloudaudit.cloud.tencent.com","cls.cloud.tencent.com"]}}]}，principal用于指定角色的授权对象。获取该参数可参阅 获取角色详情（https://cloud.tencent.com/document/product/598/36221） 输出参数RoleInfo
          * @type {string || null}
          */
         this.PolicyDocument = null;
+
+        /**
+         * 预设策略备注
+         * @type {string || null}
+         */
+        this.Alias = null;
 
     }
 
@@ -4049,6 +5108,7 @@ class UpdatePolicyRequest extends  AbstractModel {
         this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
         this.Description = 'Description' in params ? params.Description : null;
         this.PolicyDocument = 'PolicyDocument' in params ? params.PolicyDocument : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
 
     }
 }
@@ -4187,100 +5247,124 @@ class CreateGroupResponse extends  AbstractModel {
 }
 
 module.exports = {
-    GetUserResponse: GetUserResponse,
+    ListAttachedRolePoliciesResponse: ListAttachedRolePoliciesResponse,
+    ListAccessKeysRequest: ListAccessKeysRequest,
+    SetMfaFlagResponse: SetMfaFlagResponse,
     DeleteUserRequest: DeleteUserRequest,
     DetachGroupPolicyRequest: DetachGroupPolicyRequest,
     DescribeRoleListResponse: DescribeRoleListResponse,
     CreatePolicyResponse: CreatePolicyResponse,
     GetRoleRequest: GetRoleRequest,
+    CreateServiceLinkedRoleRequest: CreateServiceLinkedRoleRequest,
     ListAttachedGroupPoliciesRequest: ListAttachedGroupPoliciesRequest,
     ListGroupsForUserRequest: ListGroupsForUserRequest,
     AttachRolePolicyResponse: AttachRolePolicyResponse,
+    GetServiceLinkedRoleDeletionStatusResponse: GetServiceLinkedRoleDeletionStatusResponse,
     AttachGroupPolicyResponse: AttachGroupPolicyResponse,
     ListUsersResponse: ListUsersResponse,
     UpdateRoleDescriptionResponse: UpdateRoleDescriptionResponse,
     DetachUserPolicyRequest: DetachUserPolicyRequest,
     ListGroupsResponse: ListGroupsResponse,
+    ListPolicyVersionsRequest: ListPolicyVersionsRequest,
     GetCustomMFATokenInfoRequest: GetCustomMFATokenInfoRequest,
     DescribeRoleListRequest: DescribeRoleListRequest,
     GetGroupRequest: GetGroupRequest,
     DeleteRoleResponse: DeleteRoleResponse,
+    PolicyVersionItem: PolicyVersionItem,
     ListSAMLProvidersRequest: ListSAMLProvidersRequest,
     ListGroupsRequest: ListGroupsRequest,
+    DeletePolicyVersionResponse: DeletePolicyVersionResponse,
     UpdateSAMLProviderRequest: UpdateSAMLProviderRequest,
     UpdateAssumeRolePolicyRequest: UpdateAssumeRolePolicyRequest,
     ListGroupsForUserResponse: ListGroupsForUserResponse,
     ListUsersForGroupRequest: ListUsersForGroupRequest,
     RemoveUserFromGroupRequest: RemoveUserFromGroupRequest,
+    CreatePolicyVersionResponse: CreatePolicyVersionResponse,
     ListPoliciesResponse: ListPoliciesResponse,
-    OffsiteFlag: OffsiteFlag,
     GroupIdOfUidInfo: GroupIdOfUidInfo,
     UpdateRoleDescriptionRequest: UpdateRoleDescriptionRequest,
+    SetDefaultPolicyVersionRequest: SetDefaultPolicyVersionRequest,
     RoleInfo: RoleInfo,
+    CreatePolicyVersionRequest: CreatePolicyVersionRequest,
     DeleteGroupRequest: DeleteGroupRequest,
-    ListAttachedRolePoliciesResponse: ListAttachedRolePoliciesResponse,
+    GetUserResponse: GetUserResponse,
     DeleteUserResponse: DeleteUserResponse,
     DetachRolePolicyRequest: DetachRolePolicyRequest,
     StrategyInfo: StrategyInfo,
     DeletePolicyRequest: DeletePolicyRequest,
     GroupInfo: GroupInfo,
     AddUserRequest: AddUserRequest,
-    LoginActionFlag: LoginActionFlag,
     DeleteRoleRequest: DeleteRoleRequest,
+    UpdateRoleConsoleLoginRequest: UpdateRoleConsoleLoginRequest,
     GetCustomMFATokenInfoResponse: GetCustomMFATokenInfoResponse,
     UpdateAssumeRolePolicyResponse: UpdateAssumeRolePolicyResponse,
     ListAttachedUserPoliciesResponse: ListAttachedUserPoliciesResponse,
     CreateSAMLProviderResponse: CreateSAMLProviderResponse,
     GetUserRequest: GetUserRequest,
+    LoginActionMfaFlag: LoginActionMfaFlag,
     SubAccountInfo: SubAccountInfo,
     SAMLProviderInfo: SAMLProviderInfo,
     UpdateSAMLProviderResponse: UpdateSAMLProviderResponse,
     UpdateUserRequest: UpdateUserRequest,
     CreateSAMLProviderRequest: CreateSAMLProviderRequest,
     AttachPolicyInfo: AttachPolicyInfo,
+    UpdateRoleConsoleLoginResponse: UpdateRoleConsoleLoginResponse,
     AttachRolePolicyRequest: AttachRolePolicyRequest,
     ConsumeCustomMFATokenResponse: ConsumeCustomMFATokenResponse,
     AttachUserPolicyRequest: AttachUserPolicyRequest,
     ListAttachedGroupPoliciesResponse: ListAttachedGroupPoliciesResponse,
-    SetFlagRequest: SetFlagRequest,
+    GetPolicyVersionRequest: GetPolicyVersionRequest,
     DeletePolicyResponse: DeletePolicyResponse,
     ConsumeCustomMFATokenRequest: ConsumeCustomMFATokenRequest,
+    AccessKey: AccessKey,
     GetGroupResponse: GetGroupResponse,
     DeleteSAMLProviderRequest: DeleteSAMLProviderRequest,
     DeleteSAMLProviderResponse: DeleteSAMLProviderResponse,
     UpdateUserResponse: UpdateUserResponse,
-    AddUserToGroupResponse: AddUserToGroupResponse,
+    CreateServiceLinkedRoleResponse: CreateServiceLinkedRoleResponse,
+    ListUsersRequest: ListUsersRequest,
+    ListCollaboratorsRequest: ListCollaboratorsRequest,
     UpdatePolicyResponse: UpdatePolicyResponse,
     CreateGroupRequest: CreateGroupRequest,
     UpdateGroupResponse: UpdateGroupResponse,
     ListEntitiesForPolicyRequest: ListEntitiesForPolicyRequest,
     ListPoliciesRequest: ListPoliciesRequest,
+    GetServiceLinkedRoleDeletionStatusRequest: GetServiceLinkedRoleDeletionStatusRequest,
     DetachGroupPolicyResponse: DetachGroupPolicyResponse,
     CreatePolicyRequest: CreatePolicyRequest,
+    DeletePolicyVersionRequest: DeletePolicyVersionRequest,
     UpdateGroupRequest: UpdateGroupRequest,
-    AttachGroupPolicyRequest: AttachGroupPolicyRequest,
-    SetFlagResponse: SetFlagResponse,
+    GetPolicyVersionResponse: GetPolicyVersionResponse,
     CreateRoleResponse: CreateRoleResponse,
     GetSAMLProviderResponse: GetSAMLProviderResponse,
+    ListPolicyVersionsResponse: ListPolicyVersionsResponse,
     GetPolicyRequest: GetPolicyRequest,
     AddUserToGroupRequest: AddUserToGroupRequest,
     RemoveUserFromGroupResponse: RemoveUserFromGroupResponse,
     DetachRolePolicyResponse: DetachRolePolicyResponse,
     AttachedPolicyOfRole: AttachedPolicyOfRole,
     ListSAMLProvidersResponse: ListSAMLProvidersResponse,
+    SetDefaultPolicyVersionResponse: SetDefaultPolicyVersionResponse,
     ListAttachedRolePoliciesRequest: ListAttachedRolePoliciesRequest,
     GetSAMLProviderRequest: GetSAMLProviderRequest,
     DetachUserPolicyResponse: DetachUserPolicyResponse,
     GetRoleResponse: GetRoleResponse,
     CreateRoleRequest: CreateRoleRequest,
+    DeleteServiceLinkedRoleResponse: DeleteServiceLinkedRoleResponse,
     GetPolicyResponse: GetPolicyResponse,
     DeleteGroupResponse: DeleteGroupResponse,
+    AttachGroupPolicyRequest: AttachGroupPolicyRequest,
+    DeleteServiceLinkedRoleRequest: DeleteServiceLinkedRoleRequest,
     AttachEntityOfPolicy: AttachEntityOfPolicy,
     ListUsersForGroupResponse: ListUsersForGroupResponse,
+    PolicyVersionDetail: PolicyVersionDetail,
     AddUserResponse: AddUserResponse,
     ListEntitiesForPolicyResponse: ListEntitiesForPolicyResponse,
-    ListUsersRequest: ListUsersRequest,
+    AddUserToGroupResponse: AddUserToGroupResponse,
     AttachUserPolicyResponse: AttachUserPolicyResponse,
+    SetMfaFlagRequest: SetMfaFlagRequest,
+    ListCollaboratorsResponse: ListCollaboratorsResponse,
+    ListAccessKeysResponse: ListAccessKeysResponse,
     ListAttachedUserPoliciesRequest: ListAttachedUserPoliciesRequest,
     UpdatePolicyRequest: UpdatePolicyRequest,
     GroupMemberInfo: GroupMemberInfo,

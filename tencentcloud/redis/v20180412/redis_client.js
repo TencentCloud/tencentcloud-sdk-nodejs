@@ -16,83 +16,147 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const ModifyInstanceResponse = models.ModifyInstanceResponse;
-const DescribeInstanceShardsRequest = models.DescribeInstanceShardsRequest;
-const ResetPasswordRequest = models.ResetPasswordRequest;
-const DescribeAutoBackupConfigResponse = models.DescribeAutoBackupConfigResponse;
 const ModifyInstanceParamsResponse = models.ModifyInstanceParamsResponse;
-const DestroyPrepaidInstanceResponse = models.DestroyPrepaidInstanceResponse;
 const RedisBackupSet = models.RedisBackupSet;
-const ModfiyInstancePasswordRequest = models.ModfiyInstancePasswordRequest;
+const DescribeInstanceMonitorTopNCmdResponse = models.DescribeInstanceMonitorTopNCmdResponse;
 const ModifyAutoBackupConfigResponse = models.ModifyAutoBackupConfigResponse;
 const RestoreInstanceRequest = models.RestoreInstanceRequest;
-const EnableReplicaReadonlyResponse = models.EnableReplicaReadonlyResponse;
+const TaskInfoDetail = models.TaskInfoDetail;
+const SwitchInstanceVipRequest = models.SwitchInstanceVipRequest;
 const CreateInstancesRequest = models.CreateInstancesRequest;
-const DescribeProductInfoResponse = models.DescribeProductInfoResponse;
-const ModifyInstanceParamsRequest = models.ModifyInstanceParamsRequest;
-const InstanceSecurityGroupDetail = models.InstanceSecurityGroupDetail;
-const DescribeInstanceSecurityGroupResponse = models.DescribeInstanceSecurityGroupResponse;
-const DescribeBackupUrlResponse = models.DescribeBackupUrlResponse;
-const ManualBackupInstanceResponse = models.ManualBackupInstanceResponse;
 const ModifyNetworkConfigResponse = models.ModifyNetworkConfigResponse;
-const InstanceNode = models.InstanceNode;
-const InstanceClusterShard = models.InstanceClusterShard;
-const TradeDealDetail = models.TradeDealDetail;
-const EnableReplicaReadonlyRequest = models.EnableReplicaReadonlyRequest;
-const RenewInstanceResponse = models.RenewInstanceResponse;
-const InstanceMultiParam = models.InstanceMultiParam;
-const ProductConf = models.ProductConf;
-const InstanceClusterNode = models.InstanceClusterNode;
-const RestoreInstanceResponse = models.RestoreInstanceResponse;
-const DescribeInstanceBackupsResponse = models.DescribeInstanceBackupsResponse;
-const DescribeBackupUrlRequest = models.DescribeBackupUrlRequest;
-const DisableReplicaReadonlyRequest = models.DisableReplicaReadonlyRequest;
-const DescribeInstancesResponse = models.DescribeInstancesResponse;
-const CleanUpInstanceRequest = models.CleanUpInstanceRequest;
-const ModfiyInstancePasswordResponse = models.ModfiyInstancePasswordResponse;
-const DescribeInstanceDealDetailResponse = models.DescribeInstanceDealDetailResponse;
-const InstanceEnumParam = models.InstanceEnumParam;
-const SecurityGroupsInboundAndOutbound = models.SecurityGroupsInboundAndOutbound;
-const DescribeProductInfoRequest = models.DescribeProductInfoRequest;
-const ResetPasswordResponse = models.ResetPasswordResponse;
-const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
-const DescribeInstancesRequest = models.DescribeInstancesRequest;
-const ClearInstanceRequest = models.ClearInstanceRequest;
-const ModifyAutoBackupConfigRequest = models.ModifyAutoBackupConfigRequest;
-const InstanceTextParam = models.InstanceTextParam;
-const InstanceSet = models.InstanceSet;
-const ZoneCapacityConf = models.ZoneCapacityConf;
-const DescribeInstanceBackupsRequest = models.DescribeInstanceBackupsRequest;
-const DescribeTaskInfoResponse = models.DescribeTaskInfoResponse;
-const DescribeInstanceParamRecordsResponse = models.DescribeInstanceParamRecordsResponse;
-const DescribeAutoBackupConfigRequest = models.DescribeAutoBackupConfigRequest;
-const DescribeInstanceParamRecordsRequest = models.DescribeInstanceParamRecordsRequest;
-const RegionConf = models.RegionConf;
-const ClearInstanceResponse = models.ClearInstanceResponse;
-const SecurityGroupDetail = models.SecurityGroupDetail;
-const DescribeInstanceDealDetailRequest = models.DescribeInstanceDealDetailRequest;
-const DestroyPostpaidInstanceRequest = models.DestroyPostpaidInstanceRequest;
-const DescribeProjectSecurityGroupRequest = models.DescribeProjectSecurityGroupRequest;
-const CreateInstancesResponse = models.CreateInstancesResponse;
-const DescribeInstanceShardsResponse = models.DescribeInstanceShardsResponse;
-const RenewInstanceRequest = models.RenewInstanceRequest;
-const DescribeTaskInfoRequest = models.DescribeTaskInfoRequest;
-const InstanceIntegerParam = models.InstanceIntegerParam;
+const CommandTake = models.CommandTake;
+const DescribeInstanceMonitorBigKeyResponse = models.DescribeInstanceMonitorBigKeyResponse;
+const Inbound = models.Inbound;
+const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
+const DescribeTaskListResponse = models.DescribeTaskListResponse;
 const ModifyInstanceRequest = models.ModifyInstanceRequest;
-const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
-const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
-const ManualBackupInstanceRequest = models.ManualBackupInstanceRequest;
-const DescribeProjectSecurityGroupResponse = models.DescribeProjectSecurityGroupResponse;
+const RenewInstanceResponse = models.RenewInstanceResponse;
+const DescribeSlowLogResponse = models.DescribeSlowLogResponse;
+const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
+const DescribeBackupUrlRequest = models.DescribeBackupUrlRequest;
+const DescribeInstancesResponse = models.DescribeInstancesResponse;
+const InstanceEnumParam = models.InstanceEnumParam;
+const Account = models.Account;
+const SecurityGroupsInboundAndOutbound = models.SecurityGroupsInboundAndOutbound;
+const ResetPasswordResponse = models.ResetPasswordResponse;
+const ClearInstanceRequest = models.ClearInstanceRequest;
+const RegionConf = models.RegionConf;
+const BigKeyInfo = models.BigKeyInfo;
+const RenewInstanceRequest = models.RenewInstanceRequest;
+const DescribeInstanceParamRecordsResponse = models.DescribeInstanceParamRecordsResponse;
+const ModifyAutoBackupConfigRequest = models.ModifyAutoBackupConfigRequest;
+const InstanceMultiParam = models.InstanceMultiParam;
+const DescribeInstanceDealDetailRequest = models.DescribeInstanceDealDetailRequest;
+const DescribeProjectSecurityGroupRequest = models.DescribeProjectSecurityGroupRequest;
+const RestoreInstanceResponse = models.RestoreInstanceResponse;
+const DescribeInstanceShardsResponse = models.DescribeInstanceShardsResponse;
 const DestroyPrepaidInstanceRequest = models.DestroyPrepaidInstanceRequest;
-const DisableReplicaReadonlyResponse = models.DisableReplicaReadonlyResponse;
+const ManualBackupInstanceResponse = models.ManualBackupInstanceResponse;
 const InstanceTagInfo = models.InstanceTagInfo;
-const InstanceParam = models.InstanceParam;
+const DescribeInstanceDTSInfoResponse = models.DescribeInstanceDTSInfoResponse;
+const DestroyPostpaidInstanceResponse = models.DestroyPostpaidInstanceResponse;
+const ModifyInstanceResponse = models.ModifyInstanceResponse;
+const TradeDealDetail = models.TradeDealDetail;
+const SourceInfo = models.SourceInfo;
+const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
+const DescribeInstanceMonitorHotKeyRequest = models.DescribeInstanceMonitorHotKeyRequest;
+const DescribeInstanceDTSInfoRequest = models.DescribeInstanceDTSInfoRequest;
+const DescribeProductInfoResponse = models.DescribeProductInfoResponse;
+const ModifyInstanceAccountRequest = models.ModifyInstanceAccountRequest;
+const DescribeBackupUrlResponse = models.DescribeBackupUrlResponse;
+const InquiryPriceRenewInstanceResponse = models.InquiryPriceRenewInstanceResponse;
+const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
+const InquiryPriceCreateInstanceResponse = models.InquiryPriceCreateInstanceResponse;
+const ResetPasswordRequest = models.ResetPasswordRequest;
+const ModifyInstanceAccountResponse = models.ModifyInstanceAccountResponse;
+const DelayDistribution = models.DelayDistribution;
+const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
+const DescribeInstanceMonitorTookDistResponse = models.DescribeInstanceMonitorTookDistResponse;
+const DescribeInstanceBackupsResponse = models.DescribeInstanceBackupsResponse;
+const InstanceIntegerParam = models.InstanceIntegerParam;
+const DescribeInstanceMonitorTookDistRequest = models.DescribeInstanceMonitorTookDistRequest;
+const InstanceTextParam = models.InstanceTextParam;
+const DescribeInstanceMonitorTopNCmdTookResponse = models.DescribeInstanceMonitorTopNCmdTookResponse;
+const DescribeInstanceMonitorBigKeySizeDistRequest = models.DescribeInstanceMonitorBigKeySizeDistRequest;
+const DescribeInstanceAccountRequest = models.DescribeInstanceAccountRequest;
+const DescribeInstanceParamRecordsRequest = models.DescribeInstanceParamRecordsRequest;
+const DescribeTaskListRequest = models.DescribeTaskListRequest;
+const DisableReplicaReadonlyResponse = models.DisableReplicaReadonlyResponse;
+const CreateInstancesResponse = models.CreateInstancesResponse;
+const DescribeTaskInfoRequest = models.DescribeTaskInfoRequest;
+const DescribeInstanceMonitorTopNCmdRequest = models.DescribeInstanceMonitorTopNCmdRequest;
 const ModifyNetworkConfigRequest = models.ModifyNetworkConfigRequest;
 const DescribeInstanceSecurityGroupRequest = models.DescribeInstanceSecurityGroupRequest;
 const InstanceParamHistory = models.InstanceParamHistory;
 const DescribeInstanceParamsRequest = models.DescribeInstanceParamsRequest;
 const CleanUpInstanceResponse = models.CleanUpInstanceResponse;
-const DestroyPostpaidInstanceResponse = models.DestroyPostpaidInstanceResponse;
+const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
+const DescribeInstanceShardsRequest = models.DescribeInstanceShardsRequest;
+const Outbound = models.Outbound;
+const DescribeAutoBackupConfigResponse = models.DescribeAutoBackupConfigResponse;
+const InquiryPriceUpgradeInstanceRequest = models.InquiryPriceUpgradeInstanceRequest;
+const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
+const DescribeInstanceMonitorBigKeySizeDistResponse = models.DescribeInstanceMonitorBigKeySizeDistResponse;
+const SecurityGroup = models.SecurityGroup;
+const CreateInstanceAccountRequest = models.CreateInstanceAccountRequest;
+const EnableReplicaReadonlyResponse = models.EnableReplicaReadonlyResponse;
+const InstanceSecurityGroupDetail = models.InstanceSecurityGroupDetail;
+const DescribeInstanceSecurityGroupResponse = models.DescribeInstanceSecurityGroupResponse;
+const ProductConf = models.ProductConf;
+const InstanceNode = models.InstanceNode;
+const StartupInstanceResponse = models.StartupInstanceResponse;
+const DescribeInstanceDTSInstanceInfo = models.DescribeInstanceDTSInstanceInfo;
+const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
+const DescribeTaskInfoResponse = models.DescribeTaskInfoResponse;
+const DescribeInstanceMonitorBigKeyTypeDistResponse = models.DescribeInstanceMonitorBigKeyTypeDistResponse;
+const CleanUpInstanceRequest = models.CleanUpInstanceRequest;
+const DescribeInstanceDealDetailResponse = models.DescribeInstanceDealDetailResponse;
+const DescribeInstancesRequest = models.DescribeInstancesRequest;
+const SourceCommand = models.SourceCommand;
+const ModfiyInstancePasswordRequest = models.ModfiyInstancePasswordRequest;
+const DescribeSlowLogRequest = models.DescribeSlowLogRequest;
+const DescribeAutoBackupConfigRequest = models.DescribeAutoBackupConfigRequest;
+const DescribeInstanceMonitorSIPResponse = models.DescribeInstanceMonitorSIPResponse;
+const DestroyPostpaidInstanceRequest = models.DestroyPostpaidInstanceRequest;
+const DeleteInstanceAccountRequest = models.DeleteInstanceAccountRequest;
+const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
+const ManualBackupInstanceRequest = models.ManualBackupInstanceRequest;
+const ModfiyInstancePasswordResponse = models.ModfiyInstancePasswordResponse;
+const InstanceSet = models.InstanceSet;
+const InquiryPriceRenewInstanceRequest = models.InquiryPriceRenewInstanceRequest;
+const DescribeInstanceMonitorTopNCmdTookRequest = models.DescribeInstanceMonitorTopNCmdTookRequest;
+const DestroyPrepaidInstanceResponse = models.DestroyPrepaidInstanceResponse;
+const DescribeInstanceMonitorBigKeyTypeDistRequest = models.DescribeInstanceMonitorBigKeyTypeDistRequest;
+const InquiryPriceCreateInstanceRequest = models.InquiryPriceCreateInstanceRequest;
+const ModifyInstanceParamsRequest = models.ModifyInstanceParamsRequest;
+const BigKeyTypeInfo = models.BigKeyTypeInfo;
+const InstanceClusterNode = models.InstanceClusterNode;
+const EnableReplicaReadonlyRequest = models.EnableReplicaReadonlyRequest;
+const DescribeInstanceAccountResponse = models.DescribeInstanceAccountResponse;
+const DescribeInstanceMonitorBigKeyRequest = models.DescribeInstanceMonitorBigKeyRequest;
+const DisableReplicaReadonlyRequest = models.DisableReplicaReadonlyRequest;
+const DescribeProductInfoRequest = models.DescribeProductInfoRequest;
+const SwitchInstanceVipResponse = models.SwitchInstanceVipResponse;
+const DescribeInstanceParamsResponse = models.DescribeInstanceParamsResponse;
+const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
+const StartupInstanceRequest = models.StartupInstanceRequest;
+const HotKeyInfo = models.HotKeyInfo;
+const CreateInstanceAccountResponse = models.CreateInstanceAccountResponse;
+const DescribeInstanceBackupsRequest = models.DescribeInstanceBackupsRequest;
+const SecurityGroupDetail = models.SecurityGroupDetail;
+const InquiryPriceUpgradeInstanceResponse = models.InquiryPriceUpgradeInstanceResponse;
+const DeleteInstanceAccountResponse = models.DeleteInstanceAccountResponse;
+const DescribeInstanceMonitorSIPRequest = models.DescribeInstanceMonitorSIPRequest;
+const InstanceClusterShard = models.InstanceClusterShard;
+const ZoneCapacityConf = models.ZoneCapacityConf;
+const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
+const DescribeProjectSecurityGroupResponse = models.DescribeProjectSecurityGroupResponse;
+const DescribeInstanceMonitorHotKeyResponse = models.DescribeInstanceMonitorHotKeyResponse;
+const InstanceParam = models.InstanceParam;
+const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
+const ClearInstanceResponse = models.ClearInstanceResponse;
+const InstanceSlowlogDetail = models.InstanceSlowlogDetail;
 
 
 /**
@@ -106,6 +170,61 @@ class RedisClient extends AbstractClient {
     }
     
     /**
+     * 查询实例大Key大小分布
+     * @param {DescribeInstanceMonitorBigKeySizeDistRequest} req
+     * @param {function(string, DescribeInstanceMonitorBigKeySizeDistResponse):void} cb
+     * @public
+     */
+    DescribeInstanceMonitorBigKeySizeDist(req, cb) {
+        let resp = new DescribeInstanceMonitorBigKeySizeDistResponse();
+        this.request("DescribeInstanceMonitorBigKeySizeDist", req, resp, cb);
+    }
+
+    /**
+     * 创建实例子账号
+     * @param {CreateInstanceAccountRequest} req
+     * @param {function(string, CreateInstanceAccountResponse):void} cb
+     * @public
+     */
+    CreateInstanceAccount(req, cb) {
+        let resp = new CreateInstanceAccountResponse();
+        this.request("CreateInstanceAccount", req, resp, cb);
+    }
+
+    /**
+     * 修改实例子账号
+     * @param {ModifyInstanceAccountRequest} req
+     * @param {function(string, ModifyInstanceAccountResponse):void} cb
+     * @public
+     */
+    ModifyInstanceAccount(req, cb) {
+        let resp = new ModifyInstanceAccountResponse();
+        this.request("ModifyInstanceAccount", req, resp, cb);
+    }
+
+    /**
+     * 查询实例慢查询记录
+     * @param {DescribeSlowLogRequest} req
+     * @param {function(string, DescribeSlowLogResponse):void} cb
+     * @public
+     */
+    DescribeSlowLog(req, cb) {
+        let resp = new DescribeSlowLogResponse();
+        this.request("DescribeSlowLog", req, resp, cb);
+    }
+
+    /**
+     * 查询任务列表信息
+     * @param {DescribeTaskListRequest} req
+     * @param {function(string, DescribeTaskListResponse):void} cb
+     * @public
+     */
+    DescribeTaskList(req, cb) {
+        let resp = new DescribeTaskListResponse();
+        this.request("DescribeTaskList", req, resp, cb);
+    }
+
+    /**
      * 回收站实例立即下线
      * @param {CleanUpInstanceRequest} req
      * @param {function(string, CleanUpInstanceResponse):void} cb
@@ -117,14 +236,36 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * 查询 CRS 实例备份列表
-     * @param {DescribeInstanceBackupsRequest} req
-     * @param {function(string, DescribeInstanceBackupsResponse):void} cb
+     * 查看实例子账号信息
+     * @param {DescribeInstanceAccountRequest} req
+     * @param {function(string, DescribeInstanceAccountResponse):void} cb
      * @public
      */
-    DescribeInstanceBackups(req, cb) {
-        let resp = new DescribeInstanceBackupsResponse();
-        this.request("DescribeInstanceBackups", req, resp, cb);
+    DescribeInstanceAccount(req, cb) {
+        let resp = new DescribeInstanceAccountResponse();
+        this.request("DescribeInstanceAccount", req, resp, cb);
+    }
+
+    /**
+     * 获取备份配置
+     * @param {DescribeAutoBackupConfigRequest} req
+     * @param {function(string, DescribeAutoBackupConfigResponse):void} cb
+     * @public
+     */
+    DescribeAutoBackupConfig(req, cb) {
+        let resp = new DescribeAutoBackupConfigResponse();
+        this.request("DescribeAutoBackupConfig", req, resp, cb);
+    }
+
+    /**
+     * 查询实例CPU耗时
+     * @param {DescribeInstanceMonitorTopNCmdTookRequest} req
+     * @param {function(string, DescribeInstanceMonitorTopNCmdTookResponse):void} cb
+     * @public
+     */
+    DescribeInstanceMonitorTopNCmdTook(req, cb) {
+        let resp = new DescribeInstanceMonitorTopNCmdTookResponse();
+        this.request("DescribeInstanceMonitorTopNCmdTook", req, resp, cb);
     }
 
     /**
@@ -172,6 +313,17 @@ class RedisClient extends AbstractClient {
     }
 
     /**
+     * 重置密码
+     * @param {ResetPasswordRequest} req
+     * @param {function(string, ResetPasswordResponse):void} cb
+     * @public
+     */
+    ResetPassword(req, cb) {
+        let resp = new ResetPasswordResponse();
+        this.request("ResetPassword", req, resp, cb);
+    }
+
+    /**
      * 修改实例参数
      * @param {ModifyInstanceParamsRequest} req
      * @param {function(string, ModifyInstanceParamsResponse):void} cb
@@ -183,14 +335,14 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * 重置密码
-     * @param {ResetPasswordRequest} req
-     * @param {function(string, ResetPasswordResponse):void} cb
+     * 查询实例访问命令
+     * @param {DescribeInstanceMonitorTopNCmdRequest} req
+     * @param {function(string, DescribeInstanceMonitorTopNCmdResponse):void} cb
      * @public
      */
-    ResetPassword(req, cb) {
-        let resp = new ResetPasswordResponse();
-        this.request("ResetPassword", req, resp, cb);
+    DescribeInstanceMonitorTopNCmd(req, cb) {
+        let resp = new DescribeInstanceMonitorTopNCmdResponse();
+        this.request("DescribeInstanceMonitorTopNCmd", req, resp, cb);
     }
 
     /**
@@ -205,14 +357,14 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * 获取备份配置
-     * @param {DescribeAutoBackupConfigRequest} req
-     * @param {function(string, DescribeAutoBackupConfigResponse):void} cb
+     * 查询实例DTS信息
+     * @param {DescribeInstanceDTSInfoRequest} req
+     * @param {function(string, DescribeInstanceDTSInfoResponse):void} cb
      * @public
      */
-    DescribeAutoBackupConfig(req, cb) {
-        let resp = new DescribeAutoBackupConfigResponse();
-        this.request("DescribeAutoBackupConfig", req, resp, cb);
+    DescribeInstanceDTSInfo(req, cb) {
+        let resp = new DescribeInstanceDTSInfoResponse();
+        this.request("DescribeInstanceDTSInfo", req, resp, cb);
     }
 
     /**
@@ -227,6 +379,17 @@ class RedisClient extends AbstractClient {
     }
 
     /**
+     * 查询实例访问来源信息
+     * @param {DescribeInstanceMonitorSIPRequest} req
+     * @param {function(string, DescribeInstanceMonitorSIPResponse):void} cb
+     * @public
+     */
+    DescribeInstanceMonitorSIP(req, cb) {
+        let resp = new DescribeInstanceMonitorSIPResponse();
+        this.request("DescribeInstanceMonitorSIP", req, resp, cb);
+    }
+
+    /**
      * 创建redis实例
      * @param {CreateInstancesRequest} req
      * @param {function(string, CreateInstancesResponse):void} cb
@@ -235,6 +398,28 @@ class RedisClient extends AbstractClient {
     CreateInstances(req, cb) {
         let resp = new CreateInstancesResponse();
         this.request("CreateInstances", req, resp, cb);
+    }
+
+    /**
+     * 查询实例续费价格（包年包月）
+     * @param {InquiryPriceRenewInstanceRequest} req
+     * @param {function(string, InquiryPriceRenewInstanceResponse):void} cb
+     * @public
+     */
+    InquiryPriceRenewInstance(req, cb) {
+        let resp = new InquiryPriceRenewInstanceResponse();
+        this.request("InquiryPriceRenewInstance", req, resp, cb);
+    }
+
+    /**
+     * 查询实例扩容价格
+     * @param {InquiryPriceUpgradeInstanceRequest} req
+     * @param {function(string, InquiryPriceUpgradeInstanceResponse):void} cb
+     * @public
+     */
+    InquiryPriceUpgradeInstance(req, cb) {
+        let resp = new InquiryPriceUpgradeInstanceResponse();
+        this.request("InquiryPriceUpgradeInstance", req, resp, cb);
     }
 
     /**
@@ -249,25 +434,25 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * 续费实例
-     * @param {RenewInstanceRequest} req
-     * @param {function(string, RenewInstanceResponse):void} cb
+     * 查询实例热Key
+     * @param {DescribeInstanceMonitorHotKeyRequest} req
+     * @param {function(string, DescribeInstanceMonitorHotKeyResponse):void} cb
      * @public
      */
-    RenewInstance(req, cb) {
-        let resp = new RenewInstanceResponse();
-        this.request("RenewInstance", req, resp, cb);
+    DescribeInstanceMonitorHotKey(req, cb) {
+        let resp = new DescribeInstanceMonitorHotKeyResponse();
+        this.request("DescribeInstanceMonitorHotKey", req, resp, cb);
     }
 
     /**
-     * 修改redis密码
-     * @param {ModfiyInstancePasswordRequest} req
-     * @param {function(string, ModfiyInstancePasswordResponse):void} cb
+     * 用于查询任务结果
+     * @param {DescribeTaskInfoRequest} req
+     * @param {function(string, DescribeTaskInfoResponse):void} cb
      * @public
      */
-    ModfiyInstancePassword(req, cb) {
-        let resp = new ModfiyInstancePasswordResponse();
-        this.request("ModfiyInstancePassword", req, resp, cb);
+    DescribeTaskInfo(req, cb) {
+        let resp = new DescribeTaskInfoResponse();
+        this.request("DescribeTaskInfo", req, resp, cb);
     }
 
     /**
@@ -293,14 +478,69 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * 查询实例参数列表
-     * @param {DescribeInstanceParamsRequest} req
-     * @param {function(string, DescribeInstanceParamsResponse):void} cb
+     * 本接口(DescribeProjectSecurityGroups)用于查询项目的安全组详情。
+     * @param {DescribeProjectSecurityGroupsRequest} req
+     * @param {function(string, DescribeProjectSecurityGroupsResponse):void} cb
      * @public
      */
-    DescribeInstanceParams(req, cb) {
-        let resp = new DescribeInstanceParamsResponse();
-        this.request("DescribeInstanceParams", req, resp, cb);
+    DescribeProjectSecurityGroups(req, cb) {
+        let resp = new DescribeProjectSecurityGroupsResponse();
+        this.request("DescribeProjectSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * 本接口 (AssociateSecurityGroups) 用于绑定安全组到指定实例。
+     * @param {AssociateSecurityGroupsRequest} req
+     * @param {function(string, AssociateSecurityGroupsResponse):void} cb
+     * @public
+     */
+    AssociateSecurityGroups(req, cb) {
+        let resp = new AssociateSecurityGroupsResponse();
+        this.request("AssociateSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * 查询新购实例价格
+     * @param {InquiryPriceCreateInstanceRequest} req
+     * @param {function(string, InquiryPriceCreateInstanceResponse):void} cb
+     * @public
+     */
+    InquiryPriceCreateInstance(req, cb) {
+        let resp = new InquiryPriceCreateInstanceResponse();
+        this.request("InquiryPriceCreateInstance", req, resp, cb);
+    }
+
+    /**
+     * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组
+     * @param {ModifyDBInstanceSecurityGroupsRequest} req
+     * @param {function(string, ModifyDBInstanceSecurityGroupsResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceSecurityGroups(req, cb) {
+        let resp = new ModifyDBInstanceSecurityGroupsResponse();
+        this.request("ModifyDBInstanceSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * 按量计费实例销毁
+     * @param {DestroyPostpaidInstanceRequest} req
+     * @param {function(string, DestroyPostpaidInstanceResponse):void} cb
+     * @public
+     */
+    DestroyPostpaidInstance(req, cb) {
+        let resp = new DestroyPostpaidInstanceResponse();
+        this.request("DestroyPostpaidInstance", req, resp, cb);
+    }
+
+    /**
+     * 查询实例大Key
+     * @param {DescribeInstanceMonitorBigKeyRequest} req
+     * @param {function(string, DescribeInstanceMonitorBigKeyResponse):void} cb
+     * @public
+     */
+    DescribeInstanceMonitorBigKey(req, cb) {
+        let resp = new DescribeInstanceMonitorBigKeyResponse();
+        this.request("DescribeInstanceMonitorBigKey", req, resp, cb);
     }
 
     /**
@@ -312,6 +552,17 @@ class RedisClient extends AbstractClient {
     DescribeInstanceSecurityGroup(req, cb) {
         let resp = new DescribeInstanceSecurityGroupResponse();
         this.request("DescribeInstanceSecurityGroup", req, resp, cb);
+    }
+
+    /**
+     * 查询实例大Key类型分布
+     * @param {DescribeInstanceMonitorBigKeyTypeDistRequest} req
+     * @param {function(string, DescribeInstanceMonitorBigKeyTypeDistResponse):void} cb
+     * @public
+     */
+    DescribeInstanceMonitorBigKeyTypeDist(req, cb) {
+        let resp = new DescribeInstanceMonitorBigKeyTypeDistResponse();
+        this.request("DescribeInstanceMonitorBigKeyTypeDist", req, resp, cb);
     }
 
     /**
@@ -337,6 +588,17 @@ class RedisClient extends AbstractClient {
     }
 
     /**
+     * 续费实例
+     * @param {RenewInstanceRequest} req
+     * @param {function(string, RenewInstanceResponse):void} cb
+     * @public
+     */
+    RenewInstance(req, cb) {
+        let resp = new RenewInstanceResponse();
+        this.request("RenewInstance", req, resp, cb);
+    }
+
+    /**
      * 手动备份Redis实例
      * @param {ManualBackupInstanceRequest} req
      * @param {function(string, ManualBackupInstanceResponse):void} cb
@@ -348,14 +610,36 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * 用于查询任务结果
-     * @param {DescribeTaskInfoRequest} req
-     * @param {function(string, DescribeTaskInfoResponse):void} cb
+     * 修改redis密码
+     * @param {ModfiyInstancePasswordRequest} req
+     * @param {function(string, ModfiyInstancePasswordResponse):void} cb
      * @public
      */
-    DescribeTaskInfo(req, cb) {
-        let resp = new DescribeTaskInfoResponse();
-        this.request("DescribeTaskInfo", req, resp, cb);
+    ModfiyInstancePassword(req, cb) {
+        let resp = new ModfiyInstancePasswordResponse();
+        this.request("ModfiyInstancePassword", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeDBSecurityGroups)用于查询实例的安全组详情。
+     * @param {DescribeDBSecurityGroupsRequest} req
+     * @param {function(string, DescribeDBSecurityGroupsResponse):void} cb
+     * @public
+     */
+    DescribeDBSecurityGroups(req, cb) {
+        let resp = new DescribeDBSecurityGroupsResponse();
+        this.request("DescribeDBSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * 查询实例参数列表
+     * @param {DescribeInstanceParamsRequest} req
+     * @param {function(string, DescribeInstanceParamsResponse):void} cb
+     * @public
+     */
+    DescribeInstanceParams(req, cb) {
+        let resp = new DescribeInstanceParamsResponse();
+        this.request("DescribeInstanceParams", req, resp, cb);
     }
 
     /**
@@ -403,18 +687,51 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * 按量计费实例销毁
-     * @param {DestroyPostpaidInstanceRequest} req
-     * @param {function(string, DestroyPostpaidInstanceResponse):void} cb
+     * 删除实例子账号
+     * @param {DeleteInstanceAccountRequest} req
+     * @param {function(string, DeleteInstanceAccountResponse):void} cb
      * @public
      */
-    DestroyPostpaidInstance(req, cb) {
-        let resp = new DestroyPostpaidInstanceResponse();
-        this.request("DestroyPostpaidInstance", req, resp, cb);
+    DeleteInstanceAccount(req, cb) {
+        let resp = new DeleteInstanceAccountResponse();
+        this.request("DeleteInstanceAccount", req, resp, cb);
     }
 
     /**
-     * 修改实例相关信息（目前支持：实例重命名）
+     * 查询 CRS 实例备份列表
+     * @param {DescribeInstanceBackupsRequest} req
+     * @param {function(string, DescribeInstanceBackupsResponse):void} cb
+     * @public
+     */
+    DescribeInstanceBackups(req, cb) {
+        let resp = new DescribeInstanceBackupsResponse();
+        this.request("DescribeInstanceBackups", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DisassociateSecurityGroups)用于安全组批量解绑实例。
+     * @param {DisassociateSecurityGroupsRequest} req
+     * @param {function(string, DisassociateSecurityGroupsResponse):void} cb
+     * @public
+     */
+    DisassociateSecurityGroups(req, cb) {
+        let resp = new DisassociateSecurityGroupsResponse();
+        this.request("DisassociateSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * 实例解隔离
+     * @param {StartupInstanceRequest} req
+     * @param {function(string, StartupInstanceResponse):void} cb
+     * @public
+     */
+    StartupInstance(req, cb) {
+        let resp = new StartupInstanceResponse();
+        this.request("StartupInstance", req, resp, cb);
+    }
+
+    /**
+     * 修改实例相关信息
      * @param {ModifyInstanceRequest} req
      * @param {function(string, ModifyInstanceResponse):void} cb
      * @public
@@ -422,6 +739,28 @@ class RedisClient extends AbstractClient {
     ModifyInstance(req, cb) {
         let resp = new ModifyInstanceResponse();
         this.request("ModifyInstance", req, resp, cb);
+    }
+
+    /**
+     * 查询实例访问的耗时分布
+     * @param {DescribeInstanceMonitorTookDistRequest} req
+     * @param {function(string, DescribeInstanceMonitorTookDistResponse):void} cb
+     * @public
+     */
+    DescribeInstanceMonitorTookDist(req, cb) {
+        let resp = new DescribeInstanceMonitorTookDistResponse();
+        this.request("DescribeInstanceMonitorTookDist", req, resp, cb);
+    }
+
+    /**
+     * 在通过DTS支持跨可用区灾备的场景中，通过该接口交换实例VIP完成实例灾备切换。交换VIP后目标实例可写，源和目标实例VIP互换，同时源与目标实例间DTS同步任务断开
+     * @param {SwitchInstanceVipRequest} req
+     * @param {function(string, SwitchInstanceVipResponse):void} cb
+     * @public
+     */
+    SwitchInstanceVip(req, cb) {
+        let resp = new SwitchInstanceVipResponse();
+        this.request("SwitchInstanceVip", req, resp, cb);
     }
 
 

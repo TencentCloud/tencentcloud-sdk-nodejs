@@ -269,6 +269,34 @@ class Authentication extends  AbstractModel {
 }
 
 /**
+ * RetryJobs返回参数结构体
+ * @class
+ */
+class RetryJobsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * TerminateComputeNode请求参数结构体
  * @class
  */
@@ -594,7 +622,7 @@ class DescribeTaskTemplatesRequest extends  AbstractModel {
         super();
 
         /**
-         * 任务模板ID
+         * 任务模板ID列表，与Filters参数不能同时指定。
          * @type {Array.<string> || null}
          */
         this.TaskTemplateIds = null;
@@ -602,6 +630,7 @@ class DescribeTaskTemplatesRequest extends  AbstractModel {
         /**
          * 过滤条件
 <li> task-template-name - String - 是否必填：否 -（过滤条件）按照任务模板名称过滤。</li>
+与TaskTemplateIds参数不能同时指定。
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -695,7 +724,7 @@ class SystemDisk extends  AbstractModel {
         super();
 
         /**
-         * 系统盘类型。系统盘类型限制详见[CVM实例配置](/document/product/213/2177)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><br>默认取值：CLOUD_BASIC。
+         * 系统盘类型。系统盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><br>默认取值：CLOUD_BASIC。
          * @type {string || null}
          */
         this.DiskType = null;
@@ -838,6 +867,12 @@ class Task extends  AbstractModel {
          */
         this.RestartComputeNode = null;
 
+        /**
+         * 启动任务过程中，创建计算资源如CVM失败后的最大重试次数，默认为0。
+         * @type {number || null}
+         */
+        this.ResourceMaxRetryCount = null;
+
     }
 
     /**
@@ -924,6 +959,7 @@ class Task extends  AbstractModel {
         this.Timeout = 'Timeout' in params ? params.Timeout : null;
         this.MaxConcurrentNum = 'MaxConcurrentNum' in params ? params.MaxConcurrentNum : null;
         this.RestartComputeNode = 'RestartComputeNode' in params ? params.RestartComputeNode : null;
+        this.ResourceMaxRetryCount = 'ResourceMaxRetryCount' in params ? params.ResourceMaxRetryCount : null;
 
     }
 }
@@ -993,22 +1029,19 @@ class LoginSettings extends  AbstractModel {
         super();
 
         /**
-         * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到16位，至少包括两项[a-z，A-Z]、[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。<br><li>Windows实例密码必须12到16位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = { } [ ] : ; ' , . ? /]中的特殊符号。<br><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
-注意：此字段可能返回 null，表示取不到有效值。
+         * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到16位，至少包括两项[a-z，A-Z]、[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? \/ ]中的特殊符号。<br><li>Windows实例密码必须12到16位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) ` ~ ! @ # $ % ^ & * - + = { } [ ] : ; ' , . ? \/]中的特殊符号。<br><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
          * @type {string || null}
          */
         this.Password = null;
 
         /**
          * 密钥ID列表。关联密钥后，就可以通过对应的私钥来访问实例；KeyId可通过接口DescribeKeyPairs获取，密钥与密码不能同时指定，同时Windows操作系统不支持指定密钥。当前仅支持购买的时候指定一个密钥。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.KeyIds = null;
 
         /**
          * 保持镜像的原始设置。该参数与Password或KeyIds.N不能同时指定。只有使用自定义镜像、共享镜像或外部导入镜像创建实例时才能指定该参数为TRUE。取值范围：<br><li>TRUE：表示保持镜像的登录设置<br><li>FALSE：表示不保持镜像的登录设置<br><br>默认取值：FALSE。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.KeepImageLogin = null;
@@ -1199,14 +1232,14 @@ class TaskInstanceLog extends  AbstractModel {
         this.TaskInstanceIndex = null;
 
         /**
-         * 标准输出日志（Base64编码）
+         * 标准输出日志（Base64编码，解码后最大日志长度2048字节）
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.StdoutLog = null;
 
         /**
-         * 标准错误日志（Base64编码）
+         * 标准错误日志（Base64编码，解码后最大日志长度2048字节）
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -1346,6 +1379,126 @@ class TaskView extends  AbstractModel {
 }
 
 /**
+ * 扩展数据
+ * @class
+ */
+class Externals extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 释放地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.ReleaseAddress = null;
+
+        /**
+         * 不支持的网络类型，取值范围：<br><li>BASIC：基础网络<br><li>VPC1.0：私有网络VPC1.0
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.UnsupportNetworks = null;
+
+        /**
+         * HDD本地存储属性
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {StorageBlock || null}
+         */
+        this.StorageBlockAttr = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReleaseAddress = 'ReleaseAddress' in params ? params.ReleaseAddress : null;
+        this.UnsupportNetworks = 'UnsupportNetworks' in params ? params.UnsupportNetworks : null;
+
+        if (params.StorageBlockAttr) {
+            let obj = new StorageBlock();
+            obj.deserialize(params.StorageBlockAttr)
+            this.StorageBlockAttr = obj;
+        }
+
+    }
+}
+
+/**
+ * 操作系统类型
+ * @class
+ */
+class OsInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 操作系统ID。
+         * @type {number || null}
+         */
+        this.OsTypeId = null;
+
+        /**
+         * 操作系统名称。
+         * @type {string || null}
+         */
+        this.OsName = null;
+
+        /**
+         * 操作系统名称描述。
+         * @type {string || null}
+         */
+        this.OsDescription = null;
+
+        /**
+         * 操作系统英文名称。
+         * @type {string || null}
+         */
+        this.OsEnglishDescription = null;
+
+        /**
+         * 操作系统的分类，如CentOs Debian。
+         * @type {string || null}
+         */
+        this.OsClass = null;
+
+        /**
+         * 标识镜像分类。public:公共镜像; private: 专属镜像。
+         * @type {string || null}
+         */
+        this.ImageTag = null;
+
+        /**
+         * 操作系统，ext4文件下所支持的最大的磁盘大小。单位为T。
+         * @type {number || null}
+         */
+        this.MaxPartitionSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OsTypeId = 'OsTypeId' in params ? params.OsTypeId : null;
+        this.OsName = 'OsName' in params ? params.OsName : null;
+        this.OsDescription = 'OsDescription' in params ? params.OsDescription : null;
+        this.OsEnglishDescription = 'OsEnglishDescription' in params ? params.OsEnglishDescription : null;
+        this.OsClass = 'OsClass' in params ? params.OsClass : null;
+        this.ImageTag = 'ImageTag' in params ? params.ImageTag : null;
+        this.MaxPartitionSize = 'MaxPartitionSize' in params ? params.MaxPartitionSize : null;
+
+    }
+}
+
+/**
  * DescribeComputeEnv返回参数结构体
  * @class
  */
@@ -1402,6 +1555,24 @@ class DescribeComputeEnvResponse extends  AbstractModel {
         this.EnvType = null;
 
         /**
+         * 计算环境资源类型，当前为CVM和CPM（黑石）
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * 下一步动作
+         * @type {string || null}
+         */
+        this.NextAction = null;
+
+        /**
+         * 用户添加到计算环境中的计算节点个数
+         * @type {number || null}
+         */
+        this.AttachedComputeNodeCount = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1442,6 +1613,52 @@ class DescribeComputeEnvResponse extends  AbstractModel {
         }
         this.DesiredComputeNodeCount = 'DesiredComputeNodeCount' in params ? params.DesiredComputeNodeCount : null;
         this.EnvType = 'EnvType' in params ? params.EnvType : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.NextAction = 'NextAction' in params ? params.NextAction : null;
+        this.AttachedComputeNodeCount = 'AttachedComputeNodeCount' in params ? params.AttachedComputeNodeCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeCpmOsInfo返回参数结构体
+ * @class
+ */
+class DescribeCpmOsInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 操作系统信息列表。
+         * @type {Array.<OsInfo> || null}
+         */
+        this.OsInfoSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.OsInfoSet) {
+            this.OsInfoSet = new Array();
+            for (let z in params.OsInfoSet) {
+                let obj = new OsInfo();
+                obj.deserialize(params.OsInfoSet[z]);
+                this.OsInfoSet.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1471,6 +1688,34 @@ class TerminateJobRequest extends  AbstractModel {
             return;
         }
         this.JobId = 'JobId' in params ? params.JobId : null;
+
+    }
+}
+
+/**
+ * DetachInstances返回参数结构体
+ * @class
+ */
+class DetachInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1530,6 +1775,182 @@ class Application extends  AbstractModel {
 }
 
 /**
+ * 黑石计算环境数据
+ * @class
+ */
+class EnvDataCpm extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 黑石可用区名称列表。如ap-guangzhou-bls-1, 可通过黑石接口[DescribeRegions]( https://cloud.tencent.com/document/api/386/33564)接口获取。不是Batch可用区名称。目前仅支持一个可用区名称。
+         * @type {Array.<string> || null}
+         */
+        this.Zones = null;
+
+        /**
+         * 购买的机型ID。通过黑石接口[DescribeDeviceClass]( https://cloud.tencent.com/document/api/386/32911)查询设备型号，获取机型信息。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceTypes = null;
+
+        /**
+         * 购买时长单位，取值：m(月)。
+         * @type {string || null}
+         */
+        this.TimeUnit = null;
+
+        /**
+         * 购买时长。
+         * @type {number || null}
+         */
+        this.TimeSpan = null;
+
+        /**
+         * RAID类型ID。通过黑石接口[DescribeDeviceClassPartition]( https://cloud.tencent.com/document/api/386/32910)查询机型RAID方式以及系统盘大小，获取RAID信息。
+         * @type {number || null}
+         */
+        this.RaidId = null;
+
+        /**
+         * 部署服务器的操作系统ID。通过批量计算接口DescribeCpmOsInfo查询操作系统信息。
+         * @type {number || null}
+         */
+        this.OsTypeId = null;
+
+        /**
+         * 黑石VPC列表，目前仅支持一个VPC。
+         * @type {Array.<CpmVirtualPrivateCloud> || null}
+         */
+        this.VirtualPrivateClouds = null;
+
+        /**
+         * 是否安装安全Agent，取值：1(安装) 0(不安装)，默认取值0。
+         * @type {number || null}
+         */
+        this.NeedSecurityAgent = null;
+
+        /**
+         * 是否安装监控Agent，取值：1(安装) 0(不安装)，默认取值0。
+         * @type {number || null}
+         */
+        this.NeedMonitorAgent = null;
+
+        /**
+         * 自动续费标志位，取值：1(自动续费) 0(不自动续费)，默认取值0。
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * 数据盘是否格式化，取值：1(格式化) 0(不格式化)，默认取值为1。
+         * @type {number || null}
+         */
+        this.IsZoning = null;
+
+        /**
+         * 指定数据盘的文件系统格式，当前支持 ext4和xfs选项， 默认为ext4。 参数适用于数据盘和Linux， 且在IsZoning为1时生效。
+         * @type {string || null}
+         */
+        this.FileSystem = null;
+
+        /**
+         * 设置Linux root或Windows Administrator的密码。若不设置此参数，默认情况下会随机生成密码，并以站内信方式通知到用户。
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * 是否分配弹性公网IP，取值：1(分配) 0(不分配)，默认取值0。
+         * @type {number || null}
+         */
+        this.ApplyEip = null;
+
+        /**
+         * 弹性公网IP计费模式，取值：flow(按流量计费) bandwidth(按带宽计费)，默认取值flow。
+         * @type {string || null}
+         */
+        this.EipPayMode = null;
+
+        /**
+         * 弹性公网IP带宽限制，单位Mb。
+         * @type {number || null}
+         */
+        this.EipBandwidth = null;
+
+        /**
+         * 自定义镜像ID，取值生效时用自定义镜像部署物理机。
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * 系统盘根分区大小，单位为G，默认取值10G。通过黑石接口[DescribeDeviceClassPartition]( https://cloud.tencent.com/document/api/386/32910)查询机型RAID方式以及系统盘大小，获取根分区信息。
+         * @type {number || null}
+         */
+        this.SysRootSpace = null;
+
+        /**
+         * /data分区大小，单位为G。如果系统盘还有剩余大小，会分配给/data分区。（特殊情况：如果剩余空间不足10G，并且没有指定/data分区，则剩余空间会分配给Root分区）。
+         * @type {number || null}
+         */
+        this.SysDataSpace = null;
+
+        /**
+         * 是否开启超线程，取值：1(开启) 0(关闭)，默认取值1。
+         * @type {number || null}
+         */
+        this.HyperThreading = null;
+
+        /**
+         * 指定的内网IP列表，不指定时自动分配。
+         * @type {Array.<string> || null}
+         */
+        this.LanIps = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zones = 'Zones' in params ? params.Zones : null;
+        this.InstanceTypes = 'InstanceTypes' in params ? params.InstanceTypes : null;
+        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.RaidId = 'RaidId' in params ? params.RaidId : null;
+        this.OsTypeId = 'OsTypeId' in params ? params.OsTypeId : null;
+
+        if (params.VirtualPrivateClouds) {
+            this.VirtualPrivateClouds = new Array();
+            for (let z in params.VirtualPrivateClouds) {
+                let obj = new CpmVirtualPrivateCloud();
+                obj.deserialize(params.VirtualPrivateClouds[z]);
+                this.VirtualPrivateClouds.push(obj);
+            }
+        }
+        this.NeedSecurityAgent = 'NeedSecurityAgent' in params ? params.NeedSecurityAgent : null;
+        this.NeedMonitorAgent = 'NeedMonitorAgent' in params ? params.NeedMonitorAgent : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.IsZoning = 'IsZoning' in params ? params.IsZoning : null;
+        this.FileSystem = 'FileSystem' in params ? params.FileSystem : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.ApplyEip = 'ApplyEip' in params ? params.ApplyEip : null;
+        this.EipPayMode = 'EipPayMode' in params ? params.EipPayMode : null;
+        this.EipBandwidth = 'EipBandwidth' in params ? params.EipBandwidth : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.SysRootSpace = 'SysRootSpace' in params ? params.SysRootSpace : null;
+        this.SysDataSpace = 'SysDataSpace' in params ? params.SysDataSpace : null;
+        this.HyperThreading = 'HyperThreading' in params ? params.HyperThreading : null;
+        this.LanIps = 'LanIps' in params ? params.LanIps : null;
+
+    }
+}
+
+/**
  * 输出映射配置
  * @class
  */
@@ -1550,7 +1971,7 @@ class OutputMappingConfig extends  AbstractModel {
         this.WorkerNum = null;
 
         /**
-         * worker分块大小
+         * worker分块大小，单位MB
          * @type {number || null}
          */
         this.WorkerPartSize = null;
@@ -1567,6 +1988,34 @@ class OutputMappingConfig extends  AbstractModel {
         this.Scene = 'Scene' in params ? params.Scene : null;
         this.WorkerNum = 'WorkerNum' in params ? params.WorkerNum : null;
         this.WorkerPartSize = 'WorkerPartSize' in params ? params.WorkerPartSize : null;
+
+    }
+}
+
+/**
+ * AttachInstances返回参数结构体
+ * @class
+ */
+class AttachInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1785,6 +2234,12 @@ class LocalDiskType extends  AbstractModel {
          */
         this.MaxSize = null;
 
+        /**
+         * 购买时本地盘是否为必选。取值范围：<br><li>REQUIRED：表示必选<br><li>OPTIONAL：表示可选。
+         * @type {string || null}
+         */
+        this.Required = null;
+
     }
 
     /**
@@ -1798,6 +2253,7 @@ class LocalDiskType extends  AbstractModel {
         this.PartitionType = 'PartitionType' in params ? params.PartitionType : null;
         this.MinSize = 'MinSize' in params ? params.MinSize : null;
         this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
+        this.Required = 'Required' in params ? params.Required : null;
 
     }
 }
@@ -2392,7 +2848,7 @@ class DescribeComputeEnvCreateInfosRequest extends  AbstractModel {
         super();
 
         /**
-         * 计算环境ID
+         * 计算环境ID列表，与Filters参数不能同时指定。
          * @type {Array.<string> || null}
          */
         this.EnvIds = null;
@@ -2402,6 +2858,7 @@ class DescribeComputeEnvCreateInfosRequest extends  AbstractModel {
 <li> zone - String - 是否必填：否 -（过滤条件）按照可用区过滤。</li>
 <li> env-id - String - 是否必填：否 -（过滤条件）按照计算环境ID过滤。</li>
 <li> env-name - String - 是否必填：否 -（过滤条件）按照计算环境名称过滤。</li>
+与EnvIds参数不能同时指定。
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -2562,6 +3019,41 @@ class DescribeTaskTemplatesResponse extends  AbstractModel {
 }
 
 /**
+ * CreateCpmComputeEnv返回参数结构体
+ * @class
+ */
+class CreateCpmComputeEnvResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计算环境ID
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteJob请求参数结构体
  * @class
  */
@@ -2585,6 +3077,58 @@ class DeleteJobRequest extends  AbstractModel {
             return;
         }
         this.JobId = 'JobId' in params ? params.JobId : null;
+
+    }
+}
+
+/**
+ * CreateCpmComputeEnv请求参数结构体
+ * @class
+ */
+class CreateCpmComputeEnvRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计算环境信息
+         * @type {NamedCpmComputeEnv || null}
+         */
+        this.ComputeEnv = null;
+
+        /**
+         * 位置信息
+         * @type {Placement || null}
+         */
+        this.Placement = null;
+
+        /**
+         * 用于保证请求幂等性的字符串。该字符串由用户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
+         * @type {string || null}
+         */
+        this.ClientToken = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ComputeEnv) {
+            let obj = new NamedCpmComputeEnv();
+            obj.deserialize(params.ComputeEnv)
+            this.ComputeEnv = obj;
+        }
+
+        if (params.Placement) {
+            let obj = new Placement();
+            obj.deserialize(params.Placement)
+            this.Placement = obj;
+        }
+        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
 
     }
 }
@@ -2635,6 +3179,123 @@ class DescribeTaskLogsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 黑石计算环境
+ * @class
+ */
+class NamedCpmComputeEnv extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计算环境名称
+         * @type {string || null}
+         */
+        this.EnvName = null;
+
+        /**
+         * 计算环境具体参数
+         * @type {EnvDataCpm || null}
+         */
+        this.EnvData = null;
+
+        /**
+         * 计算节点期望个数
+         * @type {number || null}
+         */
+        this.DesiredComputeNodeCount = null;
+
+        /**
+         * 计算环境描述
+         * @type {string || null}
+         */
+        this.EnvDescription = null;
+
+        /**
+         * 计算环境管理类型， 取值MANAGED。
+         * @type {string || null}
+         */
+        this.EnvType = null;
+
+        /**
+         * 授权信息
+         * @type {Array.<Authentication> || null}
+         */
+        this.Authentications = null;
+
+        /**
+         * 输入映射信息
+         * @type {Array.<InputMapping> || null}
+         */
+        this.InputMappings = null;
+
+        /**
+         * 通知信息
+         * @type {Notification || null}
+         */
+        this.Notifications = null;
+
+        /**
+         * 非活跃节点处理策略，默认“RECREATE”，即对于实例创建失败或异常退还的计算节点，定期重新创建实例资源。
+         * @type {string || null}
+         */
+        this.ActionIfComputeNodeInactive = null;
+
+        /**
+         * 对于实例创建失败或异常退还的计算节点，定期重新创建实例资源的最大重试次数，最大值11，如果不设置的话，系统会设置一个默认值，当前为7
+         * @type {number || null}
+         */
+        this.ResourceMaxRetryCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvName = 'EnvName' in params ? params.EnvName : null;
+
+        if (params.EnvData) {
+            let obj = new EnvDataCpm();
+            obj.deserialize(params.EnvData)
+            this.EnvData = obj;
+        }
+        this.DesiredComputeNodeCount = 'DesiredComputeNodeCount' in params ? params.DesiredComputeNodeCount : null;
+        this.EnvDescription = 'EnvDescription' in params ? params.EnvDescription : null;
+        this.EnvType = 'EnvType' in params ? params.EnvType : null;
+
+        if (params.Authentications) {
+            this.Authentications = new Array();
+            for (let z in params.Authentications) {
+                let obj = new Authentication();
+                obj.deserialize(params.Authentications[z]);
+                this.Authentications.push(obj);
+            }
+        }
+
+        if (params.InputMappings) {
+            this.InputMappings = new Array();
+            for (let z in params.InputMappings) {
+                let obj = new InputMapping();
+                obj.deserialize(params.InputMappings[z]);
+                this.InputMappings.push(obj);
+            }
+        }
+
+        if (params.Notifications) {
+            let obj = new Notification();
+            obj.deserialize(params.Notifications)
+            this.Notifications = obj;
+        }
+        this.ActionIfComputeNodeInactive = 'ActionIfComputeNodeInactive' in params ? params.ActionIfComputeNodeInactive : null;
+        this.ResourceMaxRetryCount = 'ResourceMaxRetryCount' in params ? params.ResourceMaxRetryCount : null;
 
     }
 }
@@ -2888,6 +3549,34 @@ class ModifyTaskTemplateRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeCpmOsInfo请求参数结构体
+ * @class
+ */
+class DescribeCpmOsInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 黑石设备类型代号。 可以从[DescribeDeviceClass](https://cloud.tencent.com/document/api/386/32911)查询设备类型列表。
+         * @type {string || null}
+         */
+        this.DeviceClassCode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeviceClassCode = 'DeviceClassCode' in params ? params.DeviceClassCode : null;
+
+    }
+}
+
+/**
  * 描述了数据盘的信息
  * @class
  */
@@ -2896,19 +3585,19 @@ class DataDisk extends  AbstractModel {
         super();
 
         /**
-         * 数据盘大小，单位：GB。最小调整步长为10G，不同数据盘类型取值范围不同，具体限制详见：[CVM实例配置](/document/product/213/2177)。默认值为0，表示不购买数据盘。更多限制详见产品文档。
+         * 数据盘大小，单位：GB。最小调整步长为10G，不同数据盘类型取值范围不同，具体限制详见：[存储概述](https://cloud.tencent.com/document/product/213/4952)。默认值为0，表示不购买数据盘。更多限制详见产品文档。
          * @type {number || null}
          */
         this.DiskSize = null;
 
         /**
-         * 数据盘类型。数据盘类型限制详见[CVM实例配置](/document/product/213/2177)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><br>默认取值：LOCAL_BASIC。<br><br>该参数对`ResizeInstanceDisk`接口无效。
+         * 数据盘类型。数据盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><br>默认取值：LOCAL_BASIC。<br><br>该参数对`ResizeInstanceDisk`接口无效。
          * @type {string || null}
          */
         this.DiskType = null;
 
         /**
-         * 数据盘ID。LOCAL_BASIC 和 LOCAL_SSD 类型没有ID。暂时不支持该参数。
+         * 数据盘ID。LOCAL_BASIC 和 LOCAL_SSD 类型没有ID，暂时不支持该参数。
          * @type {string || null}
          */
         this.DiskId = null;
@@ -2931,6 +3620,17 @@ class DataDisk extends  AbstractModel {
          */
         this.SnapshotId = null;
 
+        /**
+         * 数据盘是加密。取值范围：
+<li>TRUE：加密
+<li>FALSE：不加密<br>
+默认取值：FALSE<br>
+该参数目前仅用于 `RunInstances` 接口。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Encrypt = null;
+
     }
 
     /**
@@ -2945,6 +3645,7 @@ class DataDisk extends  AbstractModel {
         this.DiskId = 'DiskId' in params ? params.DiskId : null;
         this.DeleteWithInstance = 'DeleteWithInstance' in params ? params.DeleteWithInstance : null;
         this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
+        this.Encrypt = 'Encrypt' in params ? params.Encrypt : null;
 
     }
 }
@@ -3023,6 +3724,12 @@ class NamedComputeEnv extends  AbstractModel {
          */
         this.ActionIfComputeNodeInactive = null;
 
+        /**
+         * 对于实例创建失败或异常退还的计算节点，定期重新创建实例资源的最大重试次数，最大值11，如果不设置的话，系统会设置一个默认值，当前为7
+         * @type {number || null}
+         */
+        this.ResourceMaxRetryCount = null;
+
     }
 
     /**
@@ -3082,6 +3789,7 @@ class NamedComputeEnv extends  AbstractModel {
             this.Notifications = obj;
         }
         this.ActionIfComputeNodeInactive = 'ActionIfComputeNodeInactive' in params ? params.ActionIfComputeNodeInactive : null;
+        this.ResourceMaxRetryCount = 'ResourceMaxRetryCount' in params ? params.ResourceMaxRetryCount : null;
 
     }
 }
@@ -3193,33 +3901,24 @@ class SpotMarketOptions extends  AbstractModel {
 }
 
 /**
- * 扩展数据
+ * 黑石私有网络
  * @class
  */
-class Externals extends  AbstractModel {
+class CpmVirtualPrivateCloud extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 释放地址
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {boolean || null}
+         * 黑石私有网络ID
+         * @type {string || null}
          */
-        this.ReleaseAddress = null;
+        this.VpcId = null;
 
         /**
-         * 不支持的网络类型
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<string> || null}
+         * 黑石子网ID
+         * @type {string || null}
          */
-        this.UnsupportNetworks = null;
-
-        /**
-         * HDD本地存储属性
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {StorageBlock || null}
-         */
-        this.StorageBlockAttr = null;
+        this.SubnetId = null;
 
     }
 
@@ -3230,13 +3929,89 @@ class Externals extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ReleaseAddress = 'ReleaseAddress' in params ? params.ReleaseAddress : null;
-        this.UnsupportNetworks = 'UnsupportNetworks' in params ? params.UnsupportNetworks : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
-        if (params.StorageBlockAttr) {
-            let obj = new StorageBlock();
-            obj.deserialize(params.StorageBlockAttr)
-            this.StorageBlockAttr = obj;
+    }
+}
+
+/**
+ * DetachInstances请求参数结构体
+ * @class
+ */
+class DetachInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计算环境ID
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 实例ID列表
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * 描述实例的信息
+ * @class
+ */
+class Instance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 镜像ID
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * 实例登录设置。
+         * @type {LoginSettings || null}
+         */
+        this.LoginSettings = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+
+        if (params.LoginSettings) {
+            let obj = new LoginSettings();
+            obj.deserialize(params.LoginSettings)
+            this.LoginSettings = obj;
         }
 
     }
@@ -3482,41 +4257,6 @@ class RunSecurityServiceEnabled extends  AbstractModel {
             return;
         }
         this.Enabled = 'Enabled' in params ? params.Enabled : null;
-
-    }
-}
-
-/**
- * CreateTaskTemplate返回参数结构体
- * @class
- */
-class CreateTaskTemplateResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 任务模板ID
-         * @type {string || null}
-         */
-        this.TaskTemplateId = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TaskTemplateId = 'TaskTemplateId' in params ? params.TaskTemplateId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4026,7 +4766,7 @@ class Placement extends  AbstractModel {
         super();
 
         /**
-         * 实例所属的[可用区](/document/product/213/9452#zone)ID。该参数也可以通过调用  [DescribeZones](/document/api/213/9455) 的返回值中的Zone字段来获取。
+         * 实例所属的[可用区](https://cloud.tencent.com/document/product/213/15753#ZoneInfo)ID。该参数也可以通过调用  [DescribeZones](https://cloud.tencent.com/document/product/213/15707) 的返回值中的Zone字段来获取。
          * @type {string || null}
          */
         this.Zone = null;
@@ -4038,7 +4778,7 @@ class Placement extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * 实例所属的专用宿主机ID列表。如果您有购买专用宿主机并且指定了该参数，则您购买的实例就会随机的部署在这些专用宿主机上。
+         * 实例所属的专用宿主机ID列表，仅用于入参。如果您有购买专用宿主机并且指定了该参数，则您购买的实例就会随机的部署在这些专用宿主机上。
          * @type {Array.<string> || null}
          */
         this.HostIds = null;
@@ -4048,6 +4788,12 @@ class Placement extends  AbstractModel {
          * @type {Array.<string> || null}
          */
         this.HostIps = null;
+
+        /**
+         * 实例所属的专用宿主机ID，仅用于出参。
+         * @type {string || null}
+         */
+        this.HostId = null;
 
     }
 
@@ -4062,6 +4808,7 @@ class Placement extends  AbstractModel {
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.HostIds = 'HostIds' in params ? params.HostIds : null;
         this.HostIps = 'HostIps' in params ? params.HostIps : null;
+        this.HostId = 'HostId' in params ? params.HostId : null;
 
     }
 }
@@ -4134,6 +4881,19 @@ class ComputeNode extends  AbstractModel {
          */
         this.PublicIpAddresses = null;
 
+        /**
+         * 计算环境资源类型，当前为CVM和CPM（黑石）
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * 计算环境资源来源。<br>BATCH_CREATED：由批量计算创建的实例资源。<br>
+USER_ATTACHED：用户添加到计算环境中的实例资源。
+         * @type {string || null}
+         */
+        this.ResourceOrigin = null;
+
     }
 
     /**
@@ -4153,6 +4913,8 @@ class ComputeNode extends  AbstractModel {
         this.AgentVersion = 'AgentVersion' in params ? params.AgentVersion : null;
         this.PrivateIpAddresses = 'PrivateIpAddresses' in params ? params.PrivateIpAddresses : null;
         this.PublicIpAddresses = 'PublicIpAddresses' in params ? params.PublicIpAddresses : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.ResourceOrigin = 'ResourceOrigin' in params ? params.ResourceOrigin : null;
 
     }
 }
@@ -4166,32 +4928,74 @@ class ItemPrice extends  AbstractModel {
         super();
 
         /**
-         * 后续单价，单位：元。
+         * 后续合计费用的原价，后付费模式使用，单位：元。<br><li>如返回了其他时间区间项，如UnitPriceSecondStep，则本项代表时间区间在(0, 96)小时；若未返回其他时间区间项，则本项代表全时段，即(0, ∞)小时
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.UnitPrice = null;
 
         /**
-         * 后续计价单元，可取值范围： <br><li>HOUR：表示计价单元是按每小时来计算。当前涉及该计价单元的场景有：实例按小时后付费（POSTPAID_BY_HOUR）、带宽按小时后付费（BANDWIDTH_POSTPAID_BY_HOUR）：<br><li>GB：表示计价单元是按每GB来计算。当前涉及该计价单元的场景有：流量按小时后付费（TRAFFIC_POSTPAID_BY_HOUR）。
+         * 后续计价单元，后付费模式使用，可取值范围： <br><li>HOUR：表示计价单元是按每小时来计算。当前涉及该计价单元的场景有：实例按小时后付费（POSTPAID_BY_HOUR）、带宽按小时后付费（BANDWIDTH_POSTPAID_BY_HOUR）：<br><li>GB：表示计价单元是按每GB来计算。当前涉及该计价单元的场景有：流量按小时后付费（TRAFFIC_POSTPAID_BY_HOUR）。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ChargeUnit = null;
 
         /**
-         * 预支费用的原价，单位：元。
+         * 预支合计费用的原价，预付费模式使用，单位：元。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.OriginalPrice = null;
 
         /**
-         * 预支费用的折扣价，单位：元。
+         * 预支合计费用的折扣价，预付费模式使用，单位：元。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.DiscountPrice = null;
+
+        /**
+         * 折扣，如20.0代表2折
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Discount = null;
+
+        /**
+         * 后续合计费用的折扣价，后付费模式使用，单位：元<br><li>如返回了其他时间区间项，如UnitPriceDiscountSecondStep，则本项代表时间区间在(0, 96)小时；若未返回其他时间区间项，则本项代表全时段，即(0, ∞)小时
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UnitPriceDiscount = null;
+
+        /**
+         * 使用时间区间在(96, 360)小时的后续合计费用的原价，后付费模式使用，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UnitPriceSecondStep = null;
+
+        /**
+         * 使用时间区间在(96, 360)小时的后续合计费用的折扣价，后付费模式使用，单位：元
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UnitPriceDiscountSecondStep = null;
+
+        /**
+         * 使用时间区间在(360, ∞)小时的后续合计费用的原价，后付费模式使用，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UnitPriceThirdStep = null;
+
+        /**
+         * 使用时间区间在(360, ∞)小时的后续合计费用的折扣价，后付费模式使用，单位：元
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UnitPriceDiscountThirdStep = null;
 
     }
 
@@ -4206,6 +5010,12 @@ class ItemPrice extends  AbstractModel {
         this.ChargeUnit = 'ChargeUnit' in params ? params.ChargeUnit : null;
         this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
         this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+        this.Discount = 'Discount' in params ? params.Discount : null;
+        this.UnitPriceDiscount = 'UnitPriceDiscount' in params ? params.UnitPriceDiscount : null;
+        this.UnitPriceSecondStep = 'UnitPriceSecondStep' in params ? params.UnitPriceSecondStep : null;
+        this.UnitPriceDiscountSecondStep = 'UnitPriceDiscountSecondStep' in params ? params.UnitPriceDiscountSecondStep : null;
+        this.UnitPriceThirdStep = 'UnitPriceThirdStep' in params ? params.UnitPriceThirdStep : null;
+        this.UnitPriceDiscountThirdStep = 'UnitPriceDiscountThirdStep' in params ? params.UnitPriceDiscountThirdStep : null;
 
     }
 }
@@ -4291,6 +5101,37 @@ class InstanceTypeQuotaItem extends  AbstractModel {
          */
         this.Price = null;
 
+        /**
+         * 售罄原因。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SoldOutReason = null;
+
+        /**
+         * 内网带宽，单位Gbps。
+         * @type {number || null}
+         */
+        this.InstanceBandwidth = null;
+
+        /**
+         * 网络收发包能力，单位万PPS。
+         * @type {number || null}
+         */
+        this.InstancePps = null;
+
+        /**
+         * 本地存储块数量。
+         * @type {number || null}
+         */
+        this.StorageBlockAmount = null;
+
+        /**
+         * 处理器型号。
+         * @type {string || null}
+         */
+        this.CpuType = null;
+
     }
 
     /**
@@ -4330,17 +5171,28 @@ class InstanceTypeQuotaItem extends  AbstractModel {
             obj.deserialize(params.Price)
             this.Price = obj;
         }
+        this.SoldOutReason = 'SoldOutReason' in params ? params.SoldOutReason : null;
+        this.InstanceBandwidth = 'InstanceBandwidth' in params ? params.InstanceBandwidth : null;
+        this.InstancePps = 'InstancePps' in params ? params.InstancePps : null;
+        this.StorageBlockAmount = 'StorageBlockAmount' in params ? params.StorageBlockAmount : null;
+        this.CpuType = 'CpuType' in params ? params.CpuType : null;
 
     }
 }
 
 /**
- * RetryJobs返回参数结构体
+ * CreateTaskTemplate返回参数结构体
  * @class
  */
-class RetryJobsResponse extends  AbstractModel {
+class CreateTaskTemplateResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 任务模板ID
+         * @type {string || null}
+         */
+        this.TaskTemplateId = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4357,6 +5209,7 @@ class RetryJobsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TaskTemplateId = 'TaskTemplateId' in params ? params.TaskTemplateId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4416,7 +5269,7 @@ class DescribeJobsRequest extends  AbstractModel {
         super();
 
         /**
-         * 作业ID
+         * 作业ID列表，与Filters参数不能同时指定。
          * @type {Array.<string> || null}
          */
         this.JobIds = null;
@@ -4427,6 +5280,7 @@ class DescribeJobsRequest extends  AbstractModel {
 <li> job-name - String - 是否必填：否 -（过滤条件）按照作业名称过滤。</li>
 <li> job-state - String - 是否必填：否 -（过滤条件）按照作业状态过滤。</li>
 <li> zone - String - 是否必填：否 -（过滤条件）按照可用区过滤。</li>
+与JobIds参数不能同时指定。
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -5070,6 +5924,24 @@ class ComputeEnvView extends  AbstractModel {
          */
         this.DesiredComputeNodeCount = null;
 
+        /**
+         * 计算环境资源类型，当前为CVM和CPM（黑石）
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * 下一步动作
+         * @type {string || null}
+         */
+        this.NextAction = null;
+
+        /**
+         * 用户添加到计算环境中的计算节点个数
+         * @type {number || null}
+         */
+        this.AttachedComputeNodeCount = null;
+
     }
 
     /**
@@ -5096,6 +5968,9 @@ class ComputeEnvView extends  AbstractModel {
         }
         this.EnvType = 'EnvType' in params ? params.EnvType : null;
         this.DesiredComputeNodeCount = 'DesiredComputeNodeCount' in params ? params.DesiredComputeNodeCount : null;
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.NextAction = 'NextAction' in params ? params.NextAction : null;
+        this.AttachedComputeNodeCount = 'AttachedComputeNodeCount' in params ? params.AttachedComputeNodeCount : null;
 
     }
 }
@@ -5216,6 +6091,49 @@ class DescribeTaskRequest extends  AbstractModel {
 }
 
 /**
+ * AttachInstances请求参数结构体
+ * @class
+ */
+class AttachInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 计算环境ID
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 加入计算环境实例列表
+         * @type {Array.<Instance> || null}
+         */
+        this.Instances = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+
+        if (params.Instances) {
+            this.Instances = new Array();
+            for (let z in params.Instances) {
+                let obj = new Instance();
+                obj.deserialize(params.Instances[z]);
+                this.Instances.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeComputeEnvs请求参数结构体
  * @class
  */
@@ -5224,7 +6142,7 @@ class DescribeComputeEnvsRequest extends  AbstractModel {
         super();
 
         /**
-         * 计算环境ID
+         * 计算环境ID列表，与Filters参数不能同时指定。
          * @type {Array.<string> || null}
          */
         this.EnvIds = null;
@@ -5234,6 +6152,8 @@ class DescribeComputeEnvsRequest extends  AbstractModel {
 <li> zone - String - 是否必填：否 -（过滤条件）按照可用区过滤。</li>
 <li> env-id - String - 是否必填：否 -（过滤条件）按照计算环境ID过滤。</li>
 <li> env-name - String - 是否必填：否 -（过滤条件）按照计算环境名称过滤。</li>
+<li> resource-type - String - 是否必填：否 -（过滤条件）按照计算资源类型过滤，取值CVM或者CPM(黑石)。</li>
+与EnvIds参数不能同时指定。
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -5549,6 +6469,12 @@ class VirtualPrivateCloud extends  AbstractModel {
          */
         this.PrivateIpAddresses = null;
 
+        /**
+         * 为弹性网卡指定随机生成的 IPv6 地址数量。
+         * @type {number || null}
+         */
+        this.Ipv6AddressCount = null;
+
     }
 
     /**
@@ -5562,6 +6488,7 @@ class VirtualPrivateCloud extends  AbstractModel {
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
         this.AsVpcGateway = 'AsVpcGateway' in params ? params.AsVpcGateway : null;
         this.PrivateIpAddresses = 'PrivateIpAddresses' in params ? params.PrivateIpAddresses : null;
+        this.Ipv6AddressCount = 'Ipv6AddressCount' in params ? params.Ipv6AddressCount : null;
 
     }
 }
@@ -5701,19 +6628,19 @@ class InternetAccessible extends  AbstractModel {
         this.InternetChargeType = null;
 
         /**
-         * 公网出带宽上限，单位：Mbps。默认值：0Mbps。不同机型带宽上限范围不一致，具体限制详见[购买网络带宽](/document/product/213/509)。
+         * 公网出带宽上限，单位：Mbps。默认值：0Mbps。不同机型带宽上限范围不一致，具体限制详见[购买网络带宽](https://cloud.tencent.com/document/product/213/12523)。
          * @type {number || null}
          */
         this.InternetMaxBandwidthOut = null;
 
         /**
-         * 是否分配公网IP。取值范围：<br><li>TRUE：表示分配公网IP<br><li>FALSE：表示不分配公网IP<br><br>当公网带宽大于0Mbps时，可自由选择开通与否，默认开通公网IP；当公网带宽为0，则不允许分配公网IP。
+         * 是否分配公网IP。取值范围：<br><li>TRUE：表示分配公网IP<br><li>FALSE：表示不分配公网IP<br><br>当公网带宽大于0Mbps时，可自由选择开通与否，默认开通公网IP；当公网带宽为0，则不允许分配公网IP。该参数仅在RunInstances接口中作为入参使用。
          * @type {boolean || null}
          */
         this.PublicIpAssigned = null;
 
         /**
-         * 带宽包ID。可通过[`DescribeBandwidthPackages`](https://cloud.tencent.com/document/api/215/19209)接口返回值中的`BandwidthPackageId`获取。
+         * 带宽包ID。可通过[`DescribeBandwidthPackages`](https://cloud.tencent.com/document/api/215/19209)接口返回值中的`BandwidthPackageId`获取。该参数仅在RunInstances接口中作为入参使用。
          * @type {string || null}
          */
         this.BandwidthPackageId = null;
@@ -5866,6 +6793,7 @@ module.exports = {
     SubmitJobRequest: SubmitJobRequest,
     ComputeEnvData: ComputeEnvData,
     Authentication: Authentication,
+    RetryJobsResponse: RetryJobsResponse,
     TerminateComputeNodeRequest: TerminateComputeNodeRequest,
     DescribeTaskLogsRequest: DescribeTaskLogsRequest,
     AgentRunningMode: AgentRunningMode,
@@ -5882,10 +6810,16 @@ module.exports = {
     TaskInstanceLog: TaskInstanceLog,
     MountDataDisk: MountDataDisk,
     TaskView: TaskView,
+    Externals: Externals,
+    OsInfo: OsInfo,
     DescribeComputeEnvResponse: DescribeComputeEnvResponse,
+    DescribeCpmOsInfoResponse: DescribeCpmOsInfoResponse,
     TerminateJobRequest: TerminateJobRequest,
+    DetachInstancesResponse: DetachInstancesResponse,
     Application: Application,
+    EnvDataCpm: EnvDataCpm,
     OutputMappingConfig: OutputMappingConfig,
+    AttachInstancesResponse: AttachInstancesResponse,
     ComputeNodeMetrics: ComputeNodeMetrics,
     TaskMetrics: TaskMetrics,
     TerminateComputeNodesRequest: TerminateComputeNodesRequest,
@@ -5902,24 +6836,29 @@ module.exports = {
     DescribeComputeEnvRequest: DescribeComputeEnvRequest,
     InstanceMarketOptionsRequest: InstanceMarketOptionsRequest,
     DescribeTaskTemplatesResponse: DescribeTaskTemplatesResponse,
+    CreateCpmComputeEnvResponse: CreateCpmComputeEnvResponse,
     DeleteJobRequest: DeleteJobRequest,
+    CreateCpmComputeEnvRequest: CreateCpmComputeEnvRequest,
     DescribeTaskLogsResponse: DescribeTaskLogsResponse,
+    NamedCpmComputeEnv: NamedCpmComputeEnv,
     DeleteTaskTemplatesRequest: DeleteTaskTemplatesRequest,
     DescribeJobResponse: DescribeJobResponse,
     DescribeComputeEnvCreateInfoRequest: DescribeComputeEnvCreateInfoRequest,
     ModifyTaskTemplateRequest: ModifyTaskTemplateRequest,
+    DescribeCpmOsInfoRequest: DescribeCpmOsInfoRequest,
     DataDisk: DataDisk,
     NamedComputeEnv: NamedComputeEnv,
     DeleteJobResponse: DeleteJobResponse,
     EventConfig: EventConfig,
     SpotMarketOptions: SpotMarketOptions,
-    Externals: Externals,
+    CpmVirtualPrivateCloud: CpmVirtualPrivateCloud,
+    DetachInstancesRequest: DetachInstancesRequest,
+    Instance: Instance,
     OutputMapping: OutputMapping,
     EnhancedService: EnhancedService,
     DescribeJobSubmitInfoResponse: DescribeJobSubmitInfoResponse,
     DescribeComputeEnvCreateInfosResponse: DescribeComputeEnvCreateInfosResponse,
     RunSecurityServiceEnabled: RunSecurityServiceEnabled,
-    CreateTaskTemplateResponse: CreateTaskTemplateResponse,
     DescribeJobRequest: DescribeJobRequest,
     RedirectInfo: RedirectInfo,
     DescribeInstanceCategoriesResponse: DescribeInstanceCategoriesResponse,
@@ -5937,7 +6876,7 @@ module.exports = {
     ComputeNode: ComputeNode,
     ItemPrice: ItemPrice,
     InstanceTypeQuotaItem: InstanceTypeQuotaItem,
-    RetryJobsResponse: RetryJobsResponse,
+    CreateTaskTemplateResponse: CreateTaskTemplateResponse,
     StorageBlock: StorageBlock,
     DescribeJobsRequest: DescribeJobsRequest,
     TaskTemplateView: TaskTemplateView,
@@ -5954,6 +6893,7 @@ module.exports = {
     ComputeEnvView: ComputeEnvView,
     DescribeComputeEnvsResponse: DescribeComputeEnvsResponse,
     DescribeTaskRequest: DescribeTaskRequest,
+    AttachInstancesRequest: AttachInstancesRequest,
     DescribeComputeEnvsRequest: DescribeComputeEnvsRequest,
     DescribeCvmZoneInstanceConfigInfosResponse: DescribeCvmZoneInstanceConfigInfosResponse,
     DescribeJobsResponse: DescribeJobsResponse,

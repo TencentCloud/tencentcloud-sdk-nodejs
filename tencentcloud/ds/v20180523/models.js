@@ -493,13 +493,13 @@ class SignInfo extends  AbstractModel {
         this.AccountResId = null;
 
         /**
-         * 授权时间，格式为年月日时分秒，例20160801095509
+         * 授权时间（上传合同可不传该参数）
          * @type {string || null}
          */
         this.AuthorizationTime = null;
 
         /**
-         * 授权IP地址
+         * 授权IP地址（上传合同可不传该参数）
          * @type {string || null}
          */
         this.Location = null;
@@ -736,7 +736,7 @@ class CreateEnterpriseAccountRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 企业用户证件类型，8代表营业执照
+         * 企业用户证件类型，8代表营业执照，详情请见常见问题
          * @type {number || null}
          */
         this.IdentType = null;
@@ -777,6 +777,12 @@ class CreateEnterpriseAccountRequest extends  AbstractModel {
          */
         this.TransactorPhone = null;
 
+        /**
+         * 企业联系人邮箱
+         * @type {string || null}
+         */
+        this.Email = null;
+
     }
 
     /**
@@ -796,6 +802,7 @@ class CreateEnterpriseAccountRequest extends  AbstractModel {
         this.TransactorIdentType = 'TransactorIdentType' in params ? params.TransactorIdentType : null;
         this.TransactorIdentNo = 'TransactorIdentNo' in params ? params.TransactorIdentNo : null;
         this.TransactorPhone = 'TransactorPhone' in params ? params.TransactorPhone : null;
+        this.Email = 'Email' in params ? params.Email : null;
 
     }
 }
@@ -839,19 +846,19 @@ class CreateContractByUploadRequest extends  AbstractModel {
         this.ContractName = null;
 
         /**
-         * 合同发起方帐号ID
-         * @type {string || null}
-         */
-        this.Initiator = null;
-
-        /**
          * 备注
          * @type {string || null}
          */
         this.Remarks = null;
 
         /**
-         * 过期时间
+         * 合同发起方腾讯云帐号ID（由平台自动填写）
+         * @type {string || null}
+         */
+        this.Initiator = null;
+
+        /**
+         * 合同长时间未签署的过期时间
          * @type {string || null}
          */
         this.ExpireTime = null;
@@ -878,8 +885,8 @@ class CreateContractByUploadRequest extends  AbstractModel {
         }
         this.ContractFile = 'ContractFile' in params ? params.ContractFile : null;
         this.ContractName = 'ContractName' in params ? params.ContractName : null;
-        this.Initiator = 'Initiator' in params ? params.Initiator : null;
         this.Remarks = 'Remarks' in params ? params.Remarks : null;
+        this.Initiator = 'Initiator' in params ? params.Initiator : null;
         this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
 
     }
@@ -982,7 +989,7 @@ class CreatePersonalAccountRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 个人用户证件类型。0代表身份证
+         * 个人用户证件类型，0代表身份证，详情请见常见问题
          * @type {number || null}
          */
         this.IdentType = null;
@@ -1093,22 +1100,22 @@ class SignContractByKeywordRequest extends  AbstractModel {
         this.AccountResId = null;
 
         /**
-         * 授权时间，格式为年月日时分秒，例20160801095509
+         * 签署关键字，偏移坐标原点为关键字中心
+         * @type {SignKeyword || null}
+         */
+        this.SignKeyword = null;
+
+        /**
+         * 授权时间（由平台自动填充）
          * @type {string || null}
          */
         this.AuthorizationTime = null;
 
         /**
-         * 授权IP地址
+         * 授权IP地址（由平台自动填充）
          * @type {string || null}
          */
         this.Position = null;
-
-        /**
-         * 签署关键字，偏移坐标原点为关键字中心
-         * @type {SignKeyword || null}
-         */
-        this.SignKeyword = null;
 
         /**
          * 签章ID
@@ -1141,14 +1148,14 @@ class SignContractByKeywordRequest extends  AbstractModel {
         this.Operation = 'Operation' in params ? params.Operation : null;
         this.ContractResId = 'ContractResId' in params ? params.ContractResId : null;
         this.AccountResId = 'AccountResId' in params ? params.AccountResId : null;
-        this.AuthorizationTime = 'AuthorizationTime' in params ? params.AuthorizationTime : null;
-        this.Position = 'Position' in params ? params.Position : null;
 
         if (params.SignKeyword) {
             let obj = new SignKeyword();
             obj.deserialize(params.SignKeyword)
             this.SignKeyword = obj;
         }
+        this.AuthorizationTime = 'AuthorizationTime' in params ? params.AuthorizationTime : null;
+        this.Position = 'Position' in params ? params.Position : null;
         this.SealResId = 'SealResId' in params ? params.SealResId : null;
         this.CertType = 'CertType' in params ? params.CertType : null;
         this.ImageData = 'ImageData' in params ? params.ImageData : null;
@@ -1238,25 +1245,25 @@ class SignContractByCoordinateRequest extends  AbstractModel {
         this.AccountResId = null;
 
         /**
-         * 授权时间，格式为年月日时分秒，例20160801095509
-         * @type {string || null}
-         */
-        this.AuthorizationTime = null;
-
-        /**
-         * 授权IP地址
-         * @type {string || null}
-         */
-        this.Position = null;
-
-        /**
          * 签署坐标，坐标原点在文件左下角，坐标单位为磅，坐标不得超过合同文件边界
          * @type {Array.<SignLocation> || null}
          */
         this.SignLocations = null;
 
         /**
-         * 印章ID
+         * 授权时间（由平台自动填充）
+         * @type {string || null}
+         */
+        this.AuthorizationTime = null;
+
+        /**
+         * 授权IP地址（由平台自动填充）
+         * @type {string || null}
+         */
+        this.Position = null;
+
+        /**
+         * 签章ID
          * @type {string || null}
          */
         this.SealResId = null;
@@ -1286,8 +1293,6 @@ class SignContractByCoordinateRequest extends  AbstractModel {
         this.Operation = 'Operation' in params ? params.Operation : null;
         this.ContractResId = 'ContractResId' in params ? params.ContractResId : null;
         this.AccountResId = 'AccountResId' in params ? params.AccountResId : null;
-        this.AuthorizationTime = 'AuthorizationTime' in params ? params.AuthorizationTime : null;
-        this.Position = 'Position' in params ? params.Position : null;
 
         if (params.SignLocations) {
             this.SignLocations = new Array();
@@ -1297,6 +1302,8 @@ class SignContractByCoordinateRequest extends  AbstractModel {
                 this.SignLocations.push(obj);
             }
         }
+        this.AuthorizationTime = 'AuthorizationTime' in params ? params.AuthorizationTime : null;
+        this.Position = 'Position' in params ? params.Position : null;
         this.SealResId = 'SealResId' in params ? params.SealResId : null;
         this.CertType = 'CertType' in params ? params.CertType : null;
         this.ImageData = 'ImageData' in params ? params.ImageData : null;

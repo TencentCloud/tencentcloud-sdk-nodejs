@@ -72,6 +72,7 @@ const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const DescribeFlowStatusResponse = models.DescribeFlowStatusResponse;
 const DeleteMigrationRequest = models.DeleteMigrationRequest;
 const DBPrivilegeModifyInfo = models.DBPrivilegeModifyInfo;
+const TerminateDBInstanceRequest = models.TerminateDBInstanceRequest;
 const CreateDBRequest = models.CreateDBRequest;
 const InquiryPriceUpgradeDBInstanceRequest = models.InquiryPriceUpgradeDBInstanceRequest;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
@@ -113,6 +114,7 @@ const DBDetail = models.DBDetail;
 const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
 const DescribeSlowlogsRequest = models.DescribeSlowlogsRequest;
 const ModifyDBInstanceProjectRequest = models.ModifyDBInstanceProjectRequest;
+const TerminateDBInstanceResponse = models.TerminateDBInstanceResponse;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const RollbackInstanceRequest = models.RollbackInstanceRequest;
 const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
@@ -295,6 +297,17 @@ class SqlserverClient extends AbstractClient {
     ModifyDBInstanceName(req, cb) {
         let resp = new ModifyDBInstanceNameResponse();
         this.request("ModifyDBInstanceName", req, resp, cb);
+    }
+
+    /**
+     * 本接口(TerminateDBInstance)用于主动销毁按量计费实例。
+     * @param {TerminateDBInstanceRequest} req
+     * @param {function(string, TerminateDBInstanceResponse):void} cb
+     * @public
+     */
+    TerminateDBInstance(req, cb) {
+        let resp = new TerminateDBInstanceResponse();
+        this.request("TerminateDBInstance", req, resp, cb);
     }
 
     /**

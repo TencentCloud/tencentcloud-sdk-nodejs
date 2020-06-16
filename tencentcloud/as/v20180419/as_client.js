@@ -32,11 +32,15 @@ const DescribeAutoScalingGroupsResponse = models.DescribeAutoScalingGroupsRespon
 const CreatePaiInstanceRequest = models.CreatePaiInstanceRequest;
 const SystemDisk = models.SystemDisk;
 const SpotMarketOptions = models.SpotMarketOptions;
+const StopAutoScalingInstancesResponse = models.StopAutoScalingInstancesResponse;
 const DescribeScalingPoliciesRequest = models.DescribeScalingPoliciesRequest;
+const InstanceNameSettings = models.InstanceNameSettings;
 const ModifyScheduledActionResponse = models.ModifyScheduledActionResponse;
+const CreateAutoScalingGroupFromInstanceRequest = models.CreateAutoScalingGroupFromInstanceRequest;
 const ExecuteScalingPolicyResponse = models.ExecuteScalingPolicyResponse;
 const ModifyLaunchConfigurationAttributesResponse = models.ModifyLaunchConfigurationAttributesResponse;
 const SetInstancesProtectionResponse = models.SetInstancesProtectionResponse;
+const StartAutoScalingInstancesResponse = models.StartAutoScalingInstancesResponse;
 const CompleteLifecycleActionRequest = models.CompleteLifecycleActionRequest;
 const CreateScalingPolicyResponse = models.CreateScalingPolicyResponse;
 const CreateNotificationConfigurationResponse = models.CreateNotificationConfigurationResponse;
@@ -45,7 +49,7 @@ const DeleteScalingPolicyResponse = models.DeleteScalingPolicyResponse;
 const Tag = models.Tag;
 const DescribeAutoScalingInstancesRequest = models.DescribeAutoScalingInstancesRequest;
 const LimitedLoginSettings = models.LimitedLoginSettings;
-const ModifyAutoScalingGroupResponse = models.ModifyAutoScalingGroupResponse;
+const ModifyLoadBalancersRequest = models.ModifyLoadBalancersRequest;
 const RemoveInstancesResponse = models.RemoveInstancesResponse;
 const ModifyScalingPolicyResponse = models.ModifyScalingPolicyResponse;
 const SetInstancesProtectionRequest = models.SetInstancesProtectionRequest;
@@ -54,17 +58,19 @@ const DetachInstancesResponse = models.DetachInstancesResponse;
 const CreateLaunchConfigurationRequest = models.CreateLaunchConfigurationRequest;
 const AutoScalingGroup = models.AutoScalingGroup;
 const AttachInstancesResponse = models.AttachInstancesResponse;
-const DeleteLifecycleHookResponse = models.DeleteLifecycleHookResponse;
-const PreviewPaiDomainNameResponse = models.PreviewPaiDomainNameResponse;
+const DescribeAutoScalingGroupLastActivitiesResponse = models.DescribeAutoScalingGroupLastActivitiesResponse;
 const DescribeAccountLimitsRequest = models.DescribeAccountLimitsRequest;
 const UpgradeLifecycleHookRequest = models.UpgradeLifecycleHookRequest;
 const ScalingPolicy = models.ScalingPolicy;
+const DescribeAutoScalingGroupLastActivitiesRequest = models.DescribeAutoScalingGroupLastActivitiesRequest;
+const HostNameSettings = models.HostNameSettings;
 const ModifyLoadBalancersResponse = models.ModifyLoadBalancersResponse;
 const DescribePaiInstancesRequest = models.DescribePaiInstancesRequest;
 const CreateNotificationConfigurationRequest = models.CreateNotificationConfigurationRequest;
 const DescribeScheduledActionsResponse = models.DescribeScheduledActionsResponse;
+const ModifyNotificationConfigurationRequest = models.ModifyNotificationConfigurationRequest;
 const DeleteLifecycleHookRequest = models.DeleteLifecycleHookRequest;
-const ModifyLoadBalancersRequest = models.ModifyLoadBalancersRequest;
+const ModifyAutoScalingGroupResponse = models.ModifyAutoScalingGroupResponse;
 const DeleteLaunchConfigurationRequest = models.DeleteLaunchConfigurationRequest;
 const ModifyScalingPolicyRequest = models.ModifyScalingPolicyRequest;
 const InstanceMarketOptionsRequest = models.InstanceMarketOptionsRequest;
@@ -75,11 +81,12 @@ const CreateAutoScalingGroupRequest = models.CreateAutoScalingGroupRequest;
 const DeleteScheduledActionResponse = models.DeleteScheduledActionResponse;
 const UpgradeLaunchConfigurationRequest = models.UpgradeLaunchConfigurationRequest;
 const DescribeAutoScalingActivitiesResponse = models.DescribeAutoScalingActivitiesResponse;
-const ModifyNotificationConfigurationRequest = models.ModifyNotificationConfigurationRequest;
+const DescribeNotificationConfigurationsResponse = models.DescribeNotificationConfigurationsResponse;
 const DataDisk = models.DataDisk;
 const PreviewPaiDomainNameRequest = models.PreviewPaiDomainNameRequest;
 const DeleteScalingPolicyRequest = models.DeleteScalingPolicyRequest;
 const LoginSettings = models.LoginSettings;
+const CreateAutoScalingGroupFromInstanceResponse = models.CreateAutoScalingGroupFromInstanceResponse;
 const DetachInstancesRequest = models.DetachInstancesRequest;
 const Instance = models.Instance;
 const CreateScheduledActionRequest = models.CreateScheduledActionRequest;
@@ -107,20 +114,24 @@ const DeleteNotificationConfigurationRequest = models.DeleteNotificationConfigur
 const DescribeLaunchConfigurationsRequest = models.DescribeLaunchConfigurationsRequest;
 const NotificationTarget = models.NotificationTarget;
 const DeleteAutoScalingGroupResponse = models.DeleteAutoScalingGroupResponse;
+const LifecycleActionResultInfo = models.LifecycleActionResultInfo;
 const AutoScalingGroupAbstract = models.AutoScalingGroupAbstract;
 const EnableAutoScalingGroupRequest = models.EnableAutoScalingGroupRequest;
 const MetricAlarm = models.MetricAlarm;
 const DescribeNotificationConfigurationsRequest = models.DescribeNotificationConfigurationsRequest;
 const LifecycleHook = models.LifecycleHook;
 const ForwardLoadBalancer = models.ForwardLoadBalancer;
+const PreviewPaiDomainNameResponse = models.PreviewPaiDomainNameResponse;
 const DeleteAutoScalingGroupRequest = models.DeleteAutoScalingGroupRequest;
 const RemoveInstancesRequest = models.RemoveInstancesRequest;
+const StartAutoScalingInstancesRequest = models.StartAutoScalingInstancesRequest;
 const AttachInstancesRequest = models.AttachInstancesRequest;
 const DescribeScalingPoliciesResponse = models.DescribeScalingPoliciesResponse;
 const Activity = models.Activity;
 const ModifyDesiredCapacityResponse = models.ModifyDesiredCapacityResponse;
+const StopAutoScalingInstancesRequest = models.StopAutoScalingInstancesRequest;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
-const DescribeNotificationConfigurationsResponse = models.DescribeNotificationConfigurationsResponse;
+const DeleteLifecycleHookResponse = models.DeleteLifecycleHookResponse;
 const ActivtyRelatedInstance = models.ActivtyRelatedInstance;
 const InternetAccessible = models.InternetAccessible;
 const EnableAutoScalingGroupResponse = models.EnableAutoScalingGroupResponse;
@@ -211,6 +222,19 @@ class AsClient extends AbstractClient {
     DeleteAutoScalingGroup(req, cb) {
         let resp = new DeleteAutoScalingGroupResponse();
         this.request("DeleteAutoScalingGroup", req, resp, cb);
+    }
+
+    /**
+     * 本接口（StartAutoScalingInstances）用于开启伸缩组内 CVM 实例。
+* 开机成功，实例转为`IN_SERVICE`状态后，会增加期望实例数，期望实例数不可超过设置的最大值
+* 本接口支持批量操作，每次请求开机实例的上限为100
+     * @param {StartAutoScalingInstancesRequest} req
+     * @param {function(string, StartAutoScalingInstancesResponse):void} cb
+     * @public
+     */
+    StartAutoScalingInstances(req, cb) {
+        let resp = new StartAutoScalingInstancesResponse();
+        this.request("StartAutoScalingInstances", req, resp, cb);
     }
 
     /**
@@ -380,6 +404,21 @@ class AsClient extends AbstractClient {
     }
 
     /**
+     * 本接口（StopAutoScalingInstances）用于关闭伸缩组内 CVM 实例。
+* 关机方式采用`SOFT_FIRST`方式，表示在正常关闭失败后进行强制关闭
+* 关闭`IN_SERVICE`状态的实例，会减少期望实例数，期望实例数不可低于设置的最小值
+* 使用`STOP_CHARGING`选项关机，待关机的实例需要满足[关机不收费条件](https://cloud.tencent.com/document/product/213/19918)
+* 本接口支持批量操作，每次请求关机实例的上限为100
+     * @param {StopAutoScalingInstancesRequest} req
+     * @param {function(string, StopAutoScalingInstancesResponse):void} cb
+     * @public
+     */
+    StopAutoScalingInstances(req, cb) {
+        let resp = new StopAutoScalingInstancesResponse();
+        this.request("StopAutoScalingInstances", req, resp, cb);
+    }
+
+    /**
      * 本接口（CreateLaunchConfiguration）用于创建新的启动配置。
 
 * 启动配置，可以通过 `ModifyLaunchConfigurationAttributes` 修改少量字段。如需使用新的启动配置，建议重新创建启动配置。
@@ -429,6 +468,19 @@ class AsClient extends AbstractClient {
     DescribeAutoScalingInstances(req, cb) {
         let resp = new DescribeAutoScalingInstancesResponse();
         this.request("DescribeAutoScalingInstances", req, resp, cb);
+    }
+
+    /**
+     * 本接口（CreateAutoScalingGroupFromInstance）用于根据实例创建启动配置及伸缩组。
+
+说明：根据按包年包月计费的实例所创建的伸缩组，其扩容的实例为按量计费实例。
+     * @param {CreateAutoScalingGroupFromInstanceRequest} req
+     * @param {function(string, CreateAutoScalingGroupFromInstanceResponse):void} cb
+     * @public
+     */
+    CreateAutoScalingGroupFromInstance(req, cb) {
+        let resp = new CreateAutoScalingGroupFromInstanceResponse();
+        this.request("CreateAutoScalingGroupFromInstance", req, resp, cb);
     }
 
     /**
@@ -547,6 +599,17 @@ class AsClient extends AbstractClient {
     DeleteLifecycleHook(req, cb) {
         let resp = new DeleteLifecycleHookResponse();
         this.request("DeleteLifecycleHook", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeAutoScalingGroupLastActivities）用于查询伸缩组的最新一次伸缩活动记录。
+     * @param {DescribeAutoScalingGroupLastActivitiesRequest} req
+     * @param {function(string, DescribeAutoScalingGroupLastActivitiesResponse):void} cb
+     * @public
+     */
+    DescribeAutoScalingGroupLastActivities(req, cb) {
+        let resp = new DescribeAutoScalingGroupLastActivitiesResponse();
+        this.request("DescribeAutoScalingGroupLastActivities", req, resp, cb);
     }
 
     /**

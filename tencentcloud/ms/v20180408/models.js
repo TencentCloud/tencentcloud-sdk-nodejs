@@ -1483,7 +1483,7 @@ class AppInfo extends  AbstractModel {
         this.AppSize = null;
 
         /**
-         * app的文件名，指定后加固后的文件名是{FileName}_legu.apk
+         * app的文件名
          * @type {string || null}
          */
         this.FileName = null;
@@ -2769,7 +2769,7 @@ class DescribeShieldResultResponse extends  AbstractModel {
         super();
 
         /**
-         * 任务状态: 1-已完成,2-处理中,3-处理出错,4-处理超时
+         * 任务状态: 0-请返回,1-已完成,2-处理中,3-处理出错,4-处理超时
          * @type {number || null}
          */
         this.TaskStatus = null;

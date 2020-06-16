@@ -653,24 +653,28 @@ class DeviceClass extends  AbstractModel {
 
         /**
          * 单价折扣
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.Discount = null;
 
         /**
          * 用户刊例价格
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.UnitPrice = null;
 
         /**
          * 实际价格
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.RealPrice = null;
 
         /**
          * 官网刊例价格
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.NormalPrice = null;
@@ -686,6 +690,18 @@ class DeviceClass extends  AbstractModel {
          * @type {number || null}
          */
         this.Series = null;
+
+        /**
+         * cpu的核心数。仅是物理服务器未开启超线程的核心数， 超线程的核心数为Cpu*2
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * 内存容量。单位G
+         * @type {number || null}
+         */
+        this.Mem = null;
 
     }
 
@@ -709,6 +725,8 @@ class DeviceClass extends  AbstractModel {
         this.NormalPrice = 'NormalPrice' in params ? params.NormalPrice : null;
         this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
         this.Series = 'Series' in params ? params.Series : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Mem = 'Mem' in params ? params.Mem : null;
 
     }
 }
@@ -1320,16 +1338,58 @@ class DescribeDeviceClassPartitionRequest extends  AbstractModel {
         super();
 
         /**
-         * 设备类型代号。代号通过接口[查询设备型号(DescribeDeviceClass)](https://cloud.tencent.com/document/api/386/32911)查询。标准机型需要传入此参数
+         * 设备类型代号。代号通过接口[查询设备型号(DescribeDeviceClass)](https://cloud.tencent.com/document/api/386/32911)查询。标准机型需要传入此参数。虽是可选参数，但DeviceClassCode和InstanceId参数，必须要填写一个。
          * @type {string || null}
          */
         this.DeviceClassCode = null;
 
         /**
-         * 需要查询自定义机型RAID信息时，传入自定义机型实例ID。InstanceId存在时DeviceClassCode失效
+         * 需要查询自定义机型RAID信息时，传入自定义机型实例ID。InstanceId存在时其余参数失效。
          * @type {string || null}
          */
         this.InstanceId = null;
+
+        /**
+         * CPU型号ID，查询自定义机型时需要传入
+         * @type {number || null}
+         */
+        this.CpuId = null;
+
+        /**
+         * 内存大小，单位为G，查询自定义机型时需要传入
+         * @type {number || null}
+         */
+        this.MemSize = null;
+
+        /**
+         * 是否有RAID卡，取值：1(有) 0(无)。查询自定义机型时需要传入
+         * @type {number || null}
+         */
+        this.ContainRaidCard = null;
+
+        /**
+         * 系统盘类型ID，查询自定义机型时需要传入
+         * @type {number || null}
+         */
+        this.SystemDiskTypeId = null;
+
+        /**
+         * 系统盘数量，查询自定义机型时需要传入
+         * @type {number || null}
+         */
+        this.SystemDiskCount = null;
+
+        /**
+         * 数据盘类型ID，查询自定义机型时可传入
+         * @type {number || null}
+         */
+        this.DataDiskTypeId = null;
+
+        /**
+         * 数据盘数量，查询自定义机型时可传入
+         * @type {number || null}
+         */
+        this.DataDiskCount = null;
 
     }
 
@@ -1342,6 +1402,13 @@ class DescribeDeviceClassPartitionRequest extends  AbstractModel {
         }
         this.DeviceClassCode = 'DeviceClassCode' in params ? params.DeviceClassCode : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.CpuId = 'CpuId' in params ? params.CpuId : null;
+        this.MemSize = 'MemSize' in params ? params.MemSize : null;
+        this.ContainRaidCard = 'ContainRaidCard' in params ? params.ContainRaidCard : null;
+        this.SystemDiskTypeId = 'SystemDiskTypeId' in params ? params.SystemDiskTypeId : null;
+        this.SystemDiskCount = 'SystemDiskCount' in params ? params.SystemDiskCount : null;
+        this.DataDiskTypeId = 'DataDiskTypeId' in params ? params.DataDiskTypeId : null;
+        this.DataDiskCount = 'DataDiskCount' in params ? params.DataDiskCount : null;
 
     }
 }
@@ -1445,7 +1512,7 @@ class BuyDevicesRequest extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * 部署服务器的操作系统ID。通过接口[查询操作系统信息(DescribeOsInfo)](https://cloud.tencent.com/document/api/386/31964)获取操作系统信息
+         * 部署服务器的操作系统ID。通过接口[查询操作系统信息(DescribeOsInfo)](https://cloud.tencent.com/document/product/386/32902)获取操作系统信息
          * @type {number || null}
          */
         this.OsTypeId = null;
@@ -1661,6 +1728,24 @@ class BuyDevicesRequest extends  AbstractModel {
          */
         this.FileSystem = null;
 
+        /**
+         * 此参数是为了防止重复发货。如果两次调用传入相同的BuySession，只会发货一次。 不要以设备别名作为BuySession，这样只会第一次购买成功。参数长度为128位，合法字符为大小字母，数字，下划线，横线。
+         * @type {string || null}
+         */
+        this.BuySession = null;
+
+        /**
+         * 绑定已有的安全组ID。仅在NeedSecurityAgent为1时生效
+         * @type {string || null}
+         */
+        this.SgId = null;
+
+        /**
+         * 安全组模板ID，由模板创建新安全组并绑定。TemplateId和SgId不能同时传入
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
     }
 
     /**
@@ -1715,6 +1800,9 @@ class BuyDevicesRequest extends  AbstractModel {
             }
         }
         this.FileSystem = 'FileSystem' in params ? params.FileSystem : null;
+        this.BuySession = 'BuySession' in params ? params.BuySession : null;
+        this.SgId = 'SgId' in params ? params.SgId : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
 
     }
 }
@@ -1883,6 +1971,34 @@ class ReturnDevicesRequest extends  AbstractModel {
             return;
         }
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * ModifyDeviceAliases返回参数结构体
+ * @class
+ */
+class ModifyDeviceAliasesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2206,40 +2322,46 @@ class DescribeDeviceInventoryRequest extends  AbstractModel {
         this.SubnetId = null;
 
         /**
-         * CpuId，自定义机型时需传入
+         * CPU型号ID，查询自定义机型时必填
          * @type {number || null}
          */
         this.CpuId = null;
 
         /**
-         * 硬盘类型，自定义机型时需传入
-         * @type {string || null}
-         */
-        this.DiskType = null;
-
-        /**
-         * 单块硬盘大小，自定义机型时需传入
+         * 内存大小，单位为G，查询自定义机型时必填
          * @type {number || null}
          */
-        this.DiskSize = null;
+        this.MemSize = null;
 
         /**
-         * 硬盘数量，自定义机型时需传入
+         * 是否有RAID卡，取值：1(有) 0(无)，查询自定义机型时必填
          * @type {number || null}
          */
-        this.DiskNum = null;
+        this.ContainRaidCard = null;
 
         /**
-         * 内存总大小，自定义机型时需传入
+         * 系统盘类型ID，查询自定义机型时必填
          * @type {number || null}
          */
-        this.Mem = null;
+        this.SystemDiskTypeId = null;
 
         /**
-         * 是否支持raid，自定义机型时需传入
+         * 系统盘数量，查询自定义机型时必填
          * @type {number || null}
          */
-        this.HaveRaidCard = null;
+        this.SystemDiskCount = null;
+
+        /**
+         * 数据盘类型ID，查询自定义机型时可填
+         * @type {number || null}
+         */
+        this.DataDiskTypeId = null;
+
+        /**
+         * 数据盘数量，查询自定义机型时可填
+         * @type {number || null}
+         */
+        this.DataDiskCount = null;
 
     }
 
@@ -2255,11 +2377,12 @@ class DescribeDeviceInventoryRequest extends  AbstractModel {
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
         this.CpuId = 'CpuId' in params ? params.CpuId : null;
-        this.DiskType = 'DiskType' in params ? params.DiskType : null;
-        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
-        this.DiskNum = 'DiskNum' in params ? params.DiskNum : null;
-        this.Mem = 'Mem' in params ? params.Mem : null;
-        this.HaveRaidCard = 'HaveRaidCard' in params ? params.HaveRaidCard : null;
+        this.MemSize = 'MemSize' in params ? params.MemSize : null;
+        this.ContainRaidCard = 'ContainRaidCard' in params ? params.ContainRaidCard : null;
+        this.SystemDiskTypeId = 'SystemDiskTypeId' in params ? params.SystemDiskTypeId : null;
+        this.SystemDiskCount = 'SystemDiskCount' in params ? params.SystemDiskCount : null;
+        this.DataDiskTypeId = 'DataDiskTypeId' in params ? params.DataDiskTypeId : null;
+        this.DataDiskCount = 'DataDiskCount' in params ? params.DataDiskCount : null;
 
     }
 }
@@ -2770,6 +2893,41 @@ class DeviceDiskSizeInfo extends  AbstractModel {
 }
 
 /**
+ * AttachCamRole请求参数结构体
+ * @class
+ */
+class AttachCamRoleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务器ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 角色名称。
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+
+    }
+}
+
+/**
  * DescribeDeviceClass返回参数结构体
  * @class
  */
@@ -2948,6 +3106,41 @@ class DescribeDevicePriceInfoResponse extends  AbstractModel {
 }
 
 /**
+ * ReloadDeviceOs返回参数结构体
+ * @class
+ */
+class ReloadDeviceOsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 黑石异步任务ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * RunUserCmd返回参数结构体
  * @class
  */
@@ -3001,6 +3194,167 @@ class RunUserCmdResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ReloadDeviceOs请求参数结构体
+ * @class
+ */
+class ReloadDeviceOsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设备的唯一ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 密码。 用户设置的linux root或Windows Administrator密码。密码校验规则: <li> Windows机器密码需12到16位，至少包括三项 `[a-z]`,`[A-Z]`,`[0-9]`和`[()`'`~!@#$%^&*-+=_`|`{}[]:;'<>,.?/]`的特殊符号, 密码不能包含Administrator(不区分大小写); <li> Linux机器密码需8到16位，至少包括两项`[a-z,A-Z]`,`[0-9]`和`[()`'`~!@#$%^&*-+=_`|`{}[]:;'<>,.?/]`的特殊符号
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * 操作系统类型ID。通过接口[查询操作系统信息(DescribeOsInfo)](https://cloud.tencent.com/document/api/386/32902)获取操作系统信息
+         * @type {number || null}
+         */
+        this.OsTypeId = null;
+
+        /**
+         * RAID类型ID。通过接口[查询机型RAID方式以及系统盘大小(DescribeDeviceClassPartition)](https://cloud.tencent.com/document/api/386/32910)获取RAID信息
+         * @type {number || null}
+         */
+        this.RaidId = null;
+
+        /**
+         * 是否格式化数据盘。0: 不格式化（默认值）；1：格式化
+         * @type {number || null}
+         */
+        this.IsZoning = null;
+
+        /**
+         * 系统盘根分区大小，默认是10G。系统盘的大小参考接口[查询机型RAID方式以及系统盘大小(DescribeDeviceClassPartition)](https://cloud.tencent.com/document/api/386/32910)
+         * @type {number || null}
+         */
+        this.SysRootSpace = null;
+
+        /**
+         * 系统盘swap分区或/boot/efi分区的大小。若是uefi启动的机器，分区为/boot/efi ,且此值是默认是2G。普通机器为swap分区，可以不指定此分区。机型是否是uefi启动，参考接口[查询设备型号(DescribeDeviceClass)](https://cloud.tencent.com/document/api/386/32911)
+         * @type {number || null}
+         */
+        this.SysSwaporuefiSpace = null;
+
+        /**
+         * /usr/local分区大小
+         * @type {number || null}
+         */
+        this.SysUsrlocalSpace = null;
+
+        /**
+         * 重装到新的私有网络的ID。如果改变VPC子网，则要求与SubnetId同时传参，否则可不填
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 重装到新的子网的ID。如果改变VPC子网，则要求与VpcId同时传参，否则可不填
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 重装指定IP地址
+         * @type {string || null}
+         */
+        this.LanIp = null;
+
+        /**
+         * 指定是否开启超线程。 0：关闭超线程；1：开启超线程（默认值）
+         * @type {number || null}
+         */
+        this.HyperThreading = null;
+
+        /**
+         * 自定义镜像ID。传此字段则用自定义镜像重装
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * 指定数据盘的文件系统格式，当前支持 EXT4和XFS选项， 默认为EXT4。 参数适用于数据盘和Linux， 且在IsZoning为1时生效
+         * @type {string || null}
+         */
+        this.FileSystem = null;
+
+        /**
+         * 是否安装安全Agent，取值：1(安装) 0(不安装)，默认取值0
+         * @type {number || null}
+         */
+        this.NeedSecurityAgent = null;
+
+        /**
+         * 是否安装监控Agent，取值：1(安装) 0(不安装)，默认取值0
+         * @type {number || null}
+         */
+        this.NeedMonitorAgent = null;
+
+        /**
+         * 是否安装EMR Agent，取值：1(安装) 0(不安装)，默认取值0
+         * @type {number || null}
+         */
+        this.NeedEMRAgent = null;
+
+        /**
+         * 是否安装EMR软件包，取值：1(安装) 0(不安装)，默认取值0
+         * @type {number || null}
+         */
+        this.NeedEMRSoftware = null;
+
+        /**
+         * 是否保留安全组配置，取值：1(保留) 0(不保留)，默认取值0
+         * @type {number || null}
+         */
+        this.ReserveSgConfig = null;
+
+        /**
+         * /data分区大小，可不填。除root、swap、usr/local的剩余空间会自动分配到data分区
+         * @type {number || null}
+         */
+        this.SysDataSpace = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.OsTypeId = 'OsTypeId' in params ? params.OsTypeId : null;
+        this.RaidId = 'RaidId' in params ? params.RaidId : null;
+        this.IsZoning = 'IsZoning' in params ? params.IsZoning : null;
+        this.SysRootSpace = 'SysRootSpace' in params ? params.SysRootSpace : null;
+        this.SysSwaporuefiSpace = 'SysSwaporuefiSpace' in params ? params.SysSwaporuefiSpace : null;
+        this.SysUsrlocalSpace = 'SysUsrlocalSpace' in params ? params.SysUsrlocalSpace : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.LanIp = 'LanIp' in params ? params.LanIp : null;
+        this.HyperThreading = 'HyperThreading' in params ? params.HyperThreading : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.FileSystem = 'FileSystem' in params ? params.FileSystem : null;
+        this.NeedSecurityAgent = 'NeedSecurityAgent' in params ? params.NeedSecurityAgent : null;
+        this.NeedMonitorAgent = 'NeedMonitorAgent' in params ? params.NeedMonitorAgent : null;
+        this.NeedEMRAgent = 'NeedEMRAgent' in params ? params.NeedEMRAgent : null;
+        this.NeedEMRSoftware = 'NeedEMRSoftware' in params ? params.NeedEMRSoftware : null;
+        this.ReserveSgConfig = 'ReserveSgConfig' in params ? params.ReserveSgConfig : null;
+        this.SysDataSpace = 'SysDataSpace' in params ? params.SysDataSpace : null;
 
     }
 }
@@ -3546,6 +3900,20 @@ class TaskInfo extends  AbstractModel {
          */
         this.MgtIp = null;
 
+        /**
+         * 故障类中文名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TaskTypeName = null;
+
+        /**
+         * 故障类型，取值：unconfirmed (不明确故障)；redundancy (有冗余故障)；nonredundancy (无冗余故障)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TaskSubType = null;
+
     }
 
     /**
@@ -3577,6 +3945,8 @@ class TaskInfo extends  AbstractModel {
         this.WanIp = 'WanIp' in params ? params.WanIp : null;
         this.LanIp = 'LanIp' in params ? params.LanIp : null;
         this.MgtIp = 'MgtIp' in params ? params.MgtIp : null;
+        this.TaskTypeName = 'TaskTypeName' in params ? params.TaskTypeName : null;
+        this.TaskSubType = 'TaskSubType' in params ? params.TaskSubType : null;
 
     }
 }
@@ -4122,6 +4492,12 @@ class DeviceHardwareInfo extends  AbstractModel {
          */
         this.RaidDescription = null;
 
+        /**
+         * cpu的核心数。仅是物理服务器未开启超线程的核心数， 超线程的核心数为Cpu*2
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
     }
 
     /**
@@ -4146,6 +4522,7 @@ class DeviceHardwareInfo extends  AbstractModel {
         this.DiskDescription = 'DiskDescription' in params ? params.DiskDescription : null;
         this.NicDescription = 'NicDescription' in params ? params.NicDescription : null;
         this.RaidDescription = 'RaidDescription' in params ? params.RaidDescription : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
 
     }
 }
@@ -4849,6 +5226,18 @@ class DescribeDeviceClassRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * 是否仅查询在售标准机型配置信息。取值0：查询所有机型；1：查询在售机型。默认为1
+         * @type {number || null}
+         */
+        this.OnSale = null;
+
+        /**
+         * 是否返回价格信息。取值0：不返回价格信息，接口返回速度更快；1：返回价格信息。默认为1
+         * @type {number || null}
+         */
+        this.NeedPriceInfo = null;
+
     }
 
     /**
@@ -4858,6 +5247,8 @@ class DescribeDeviceClassRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.OnSale = 'OnSale' in params ? params.OnSale : null;
+        this.NeedPriceInfo = 'NeedPriceInfo' in params ? params.NeedPriceInfo : null;
 
     }
 }
@@ -4928,6 +5319,112 @@ class DeletePsaRegulationResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RAID和设备分区结构
+ * @class
+ */
+class DeviceClassPartitionInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * RAID类型ID
+         * @type {number || null}
+         */
+        this.RaidId = null;
+
+        /**
+         * RAID名称
+         * @type {string || null}
+         */
+        this.Raid = null;
+
+        /**
+         * RAID名称（前台展示用）
+         * @type {string || null}
+         */
+        this.RaidDisplay = null;
+
+        /**
+         * 系统盘总大小（单位GiB）
+         * @type {number || null}
+         */
+        this.SystemDiskSize = null;
+
+        /**
+         * 系统盘/分区默认大小（单位GiB）
+         * @type {number || null}
+         */
+        this.SysRootSpace = null;
+
+        /**
+         * 系统盘swap分区默认大小（单位GiB）
+         * @type {number || null}
+         */
+        this.SysSwaporuefiSpace = null;
+
+        /**
+         * 系统盘/usr/local分区默认大小（单位GiB）
+         * @type {number || null}
+         */
+        this.SysUsrlocalSpace = null;
+
+        /**
+         * 系统盘/data分区默认大小（单位GiB）
+         * @type {number || null}
+         */
+        this.SysDataSpace = null;
+
+        /**
+         * 设备是否是uefi启动方式。0:legacy启动; 1:uefi启动
+         * @type {number || null}
+         */
+        this.SysIsUefiType = null;
+
+        /**
+         * 数据盘总大小
+         * @type {number || null}
+         */
+        this.DataDiskSize = null;
+
+        /**
+         * 硬盘列表
+         * @type {Array.<DeviceDiskSizeInfo> || null}
+         */
+        this.DeviceDiskSizeInfoSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RaidId = 'RaidId' in params ? params.RaidId : null;
+        this.Raid = 'Raid' in params ? params.Raid : null;
+        this.RaidDisplay = 'RaidDisplay' in params ? params.RaidDisplay : null;
+        this.SystemDiskSize = 'SystemDiskSize' in params ? params.SystemDiskSize : null;
+        this.SysRootSpace = 'SysRootSpace' in params ? params.SysRootSpace : null;
+        this.SysSwaporuefiSpace = 'SysSwaporuefiSpace' in params ? params.SysSwaporuefiSpace : null;
+        this.SysUsrlocalSpace = 'SysUsrlocalSpace' in params ? params.SysUsrlocalSpace : null;
+        this.SysDataSpace = 'SysDataSpace' in params ? params.SysDataSpace : null;
+        this.SysIsUefiType = 'SysIsUefiType' in params ? params.SysIsUefiType : null;
+        this.DataDiskSize = 'DataDiskSize' in params ? params.DataDiskSize : null;
+
+        if (params.DeviceDiskSizeInfoSet) {
+            this.DeviceDiskSizeInfoSet = new Array();
+            for (let z in params.DeviceDiskSizeInfoSet) {
+                let obj = new DeviceDiskSizeInfo();
+                obj.deserialize(params.DeviceDiskSizeInfoSet[z]);
+                this.DeviceDiskSizeInfoSet.push(obj);
+            }
+        }
 
     }
 }
@@ -5059,78 +5556,18 @@ class DescribeOperationResultRequest extends  AbstractModel {
 }
 
 /**
- * RAID和设备分区结构
+ * AttachCamRole返回参数结构体
  * @class
  */
-class DeviceClassPartitionInfo extends  AbstractModel {
+class AttachCamRoleResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * RAID类型ID
-         * @type {number || null}
-         */
-        this.RaidId = null;
-
-        /**
-         * RAID名称
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Raid = null;
-
-        /**
-         * RAID名称（前台展示用）
-         * @type {string || null}
-         */
-        this.RaidDisplay = null;
-
-        /**
-         * 系统盘总大小（单位GiB）
-         * @type {number || null}
-         */
-        this.SystemDiskSize = null;
-
-        /**
-         * 系统盘/分区默认大小（单位GiB）
-         * @type {number || null}
-         */
-        this.SysRootSpace = null;
-
-        /**
-         * 系统盘swap分区默认大小（单位GiB）
-         * @type {number || null}
-         */
-        this.SysSwaporuefiSpace = null;
-
-        /**
-         * 系统盘/usr/local分区默认大小（单位GiB）
-         * @type {number || null}
-         */
-        this.SysUsrlocalSpace = null;
-
-        /**
-         * 系统盘/data分区默认大小（单位GiB）
-         * @type {number || null}
-         */
-        this.SysDataSpace = null;
-
-        /**
-         * 设备是否是uefi启动方式。0:legacy启动; 1:uefi启动
-         * @type {number || null}
-         */
-        this.SysIsUefiType = null;
-
-        /**
-         * 数据盘总大小
-         * @type {number || null}
-         */
-        this.DataDiskSize = null;
-
-        /**
-         * 硬盘列表
-         * @type {Array.<DeviceDiskSizeInfo> || null}
-         */
-        this.DeviceDiskSizeInfoSet = null;
+        this.RequestId = null;
 
     }
 
@@ -5141,25 +5578,7 @@ class DeviceClassPartitionInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RaidId = 'RaidId' in params ? params.RaidId : null;
-        this.Raid = 'Raid' in params ? params.Raid : null;
-        this.RaidDisplay = 'RaidDisplay' in params ? params.RaidDisplay : null;
-        this.SystemDiskSize = 'SystemDiskSize' in params ? params.SystemDiskSize : null;
-        this.SysRootSpace = 'SysRootSpace' in params ? params.SysRootSpace : null;
-        this.SysSwaporuefiSpace = 'SysSwaporuefiSpace' in params ? params.SysSwaporuefiSpace : null;
-        this.SysUsrlocalSpace = 'SysUsrlocalSpace' in params ? params.SysUsrlocalSpace : null;
-        this.SysDataSpace = 'SysDataSpace' in params ? params.SysDataSpace : null;
-        this.SysIsUefiType = 'SysIsUefiType' in params ? params.SysIsUefiType : null;
-        this.DataDiskSize = 'DataDiskSize' in params ? params.DataDiskSize : null;
-
-        if (params.DeviceDiskSizeInfoSet) {
-            this.DeviceDiskSizeInfoSet = new Array();
-            for (let z in params.DeviceDiskSizeInfoSet) {
-                let obj = new DeviceDiskSizeInfo();
-                obj.deserialize(params.DeviceDiskSizeInfoSet[z]);
-                this.DeviceDiskSizeInfoSet.push(obj);
-            }
-        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5200,10 +5619,10 @@ class RecoverDevicesResponse extends  AbstractModel {
 }
 
 /**
- * ModifyDeviceAliases返回参数结构体
+ * DetachCamRole返回参数结构体
  * @class
  */
-class ModifyDeviceAliasesResponse extends  AbstractModel {
+class DetachCamRoleResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -5635,6 +6054,20 @@ class OsInfo extends  AbstractModel {
          */
         this.MaxPartitionSize = null;
 
+        /**
+         * 黑石版本号
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OsMinorVersion = null;
+
+        /**
+         * 黑石版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OsMinorClass = null;
+
     }
 
     /**
@@ -5651,6 +6084,8 @@ class OsInfo extends  AbstractModel {
         this.OsClass = 'OsClass' in params ? params.OsClass : null;
         this.ImageTag = 'ImageTag' in params ? params.ImageTag : null;
         this.MaxPartitionSize = 'MaxPartitionSize' in params ? params.MaxPartitionSize : null;
+        this.OsMinorVersion = 'OsMinorVersion' in params ? params.OsMinorVersion : null;
+        this.OsMinorClass = 'OsMinorClass' in params ? params.OsMinorClass : null;
 
     }
 }
@@ -5902,7 +6337,7 @@ class DevicePriceInfo extends  AbstractModel {
         this.TimeSpan = null;
 
         /**
-         * 计费时长单位, m:按月计费; d:按天计费
+         * 计费时长单位, M:按月计费; D:按天计费
          * @type {string || null}
          */
         this.TimeUnit = null;
@@ -6027,7 +6462,7 @@ class DescribeDevicesRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 机型ID，通过接口[查询设备型号(DescribeDeviceClass)](https://cloud.tencent.com/document/api/386/31968)查询
+         * 机型ID，通过接口[查询设备型号(DescribeDeviceClass)](https://cloud.tencent.com/document/api/386/32911)查询
          * @type {string || null}
          */
         this.DeviceClassCode = null;
@@ -6798,6 +7233,34 @@ class DescribeUserCmdTasksRequest extends  AbstractModel {
 }
 
 /**
+ * DetachCamRole请求参数结构体
+ * @class
+ */
+class DetachCamRoleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务器ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * DescribeDeviceClassPartition返回参数结构体
  * @class
  */
@@ -6876,6 +7339,7 @@ module.exports = {
     CreateCustomImageResponse: CreateCustomImageResponse,
     HostedDeviceOutBandInfo: HostedDeviceOutBandInfo,
     ReturnDevicesRequest: ReturnDevicesRequest,
+    ModifyDeviceAliasesResponse: ModifyDeviceAliasesResponse,
     PsaRegulation: PsaRegulation,
     DescribeDevicePartitionResponse: DescribeDevicePartitionResponse,
     DescribeHostedDeviceOutBandInfoRequest: DescribeHostedDeviceOutBandInfoRequest,
@@ -6893,11 +7357,14 @@ module.exports = {
     TaskType: TaskType,
     DeleteUserCmdsRequest: DeleteUserCmdsRequest,
     DeviceDiskSizeInfo: DeviceDiskSizeInfo,
+    AttachCamRoleRequest: AttachCamRoleRequest,
     DescribeDeviceClassResponse: DescribeDeviceClassResponse,
     DescribeDeviceHardwareInfoResponse: DescribeDeviceHardwareInfoResponse,
     ModifyUserCmdRequest: ModifyUserCmdRequest,
     DescribeDevicePriceInfoResponse: DescribeDevicePriceInfoResponse,
+    ReloadDeviceOsResponse: ReloadDeviceOsResponse,
     RunUserCmdResponse: RunUserCmdResponse,
+    ReloadDeviceOsRequest: ReloadDeviceOsRequest,
     DescribeUserCmdsRequest: DescribeUserCmdsRequest,
     DescribeTaskInfoRequest: DescribeTaskInfoRequest,
     RepairTaskControlResponse: RepairTaskControlResponse,
@@ -6938,12 +7405,13 @@ module.exports = {
     DescribeDeviceClassRequest: DescribeDeviceClassRequest,
     ModifyCustomImageAttributeRequest: ModifyCustomImageAttributeRequest,
     DeletePsaRegulationResponse: DeletePsaRegulationResponse,
+    DeviceClassPartitionInfo: DeviceClassPartitionInfo,
     DescribeTaskOperationLogRequest: DescribeTaskOperationLogRequest,
     DescribeDeviceOperationLogRequest: DescribeDeviceOperationLogRequest,
     DescribeOperationResultRequest: DescribeOperationResultRequest,
-    DeviceClassPartitionInfo: DeviceClassPartitionInfo,
+    AttachCamRoleResponse: AttachCamRoleResponse,
     RecoverDevicesResponse: RecoverDevicesResponse,
-    ModifyDeviceAliasesResponse: ModifyDeviceAliasesResponse,
+    DetachCamRoleResponse: DetachCamRoleResponse,
     ShutdownDevicesRequest: ShutdownDevicesRequest,
     UnbindPsaTagRequest: UnbindPsaTagRequest,
     ModifyCustomImageAttributeResponse: ModifyCustomImageAttributeResponse,
@@ -6970,6 +7438,7 @@ module.exports = {
     DeviceInfo: DeviceInfo,
     ResetDevicePasswordResponse: ResetDevicePasswordResponse,
     DescribeUserCmdTasksRequest: DescribeUserCmdTasksRequest,
+    DetachCamRoleRequest: DetachCamRoleRequest,
     DescribeDeviceClassPartitionResponse: DescribeDeviceClassPartitionResponse,
 
 }

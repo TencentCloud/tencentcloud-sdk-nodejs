@@ -47,6 +47,7 @@ const Vul = models.Vul;
 const VulsTimeline = models.VulsTimeline;
 const CreateVulsMisinformationResponse = models.CreateVulsMisinformationResponse;
 const VerifySitesRequest = models.VerifySitesRequest;
+const MiniSite = models.MiniSite;
 const ModifyMonitorAttributeRequest = models.ModifyMonitorAttributeRequest;
 const DescribeVulsNumberTimelineResponse = models.DescribeVulsNumberTimelineResponse;
 const CreateVulsReportResponse = models.CreateVulsReportResponse;
@@ -130,7 +131,7 @@ class CwsClient extends AbstractClient {
     }
 
     /**
-     * 本接口（CreateVulsMisinformation）用于新增一个或多个漏洞误报信息。
+     * 本接口（CreateVulsMisinformation）可以用于新增一个或多个漏洞误报信息。
      * @param {CreateVulsMisinformationRequest} req
      * @param {function(string, CreateVulsMisinformationResponse):void} cb
      * @public
@@ -218,7 +219,7 @@ class CwsClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (DeleteMonitors) 用于删除监控任务。
+     * 本接口 (DeleteMonitors) 用于删除用户监控任务。
      * @param {DeleteMonitorsRequest} req
      * @param {function(string, DeleteMonitorsResponse):void} cb
      * @public

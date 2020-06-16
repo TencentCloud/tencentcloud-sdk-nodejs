@@ -25,7 +25,7 @@ class InitDCDBInstancesResponse extends  AbstractModel {
         super();
 
         /**
-         * 异步任务Id，可通过 DescribeFlow 查询任务状态。
+         * 异步任务ID，可通过 DescribeFlow 查询任务状态。
          * @type {Array.<number> || null}
          */
         this.FlowIds = null;
@@ -103,7 +103,7 @@ class DescribeAccountPrivilegesResponse extends  AbstractModel {
         super();
 
         /**
-         * 实例Id
+         * 实例ID
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -217,6 +217,12 @@ class ParamDesc extends  AbstractModel {
          */
         this.Constraint = null;
 
+        /**
+         * 是否有设置过值，false:没有设置过值，true:有设置过值。
+         * @type {boolean || null}
+         */
+        this.HaveSetValue = null;
+
     }
 
     /**
@@ -236,6 +242,7 @@ class ParamDesc extends  AbstractModel {
             obj.deserialize(params.Constraint)
             this.Constraint = obj;
         }
+        this.HaveSetValue = 'HaveSetValue' in params ? params.HaveSetValue : null;
 
     }
 }
@@ -297,18 +304,24 @@ class DescribeAccountsRequest extends  AbstractModel {
 }
 
 /**
- * OpenDBExtranetAccess请求参数结构体
+ * 按机型分类的规格配置
  * @class
  */
-class OpenDBExtranetAccessRequest extends  AbstractModel {
+class SpecConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 待开放外网访问的实例ID。形如：dcdbt-ow728lmc。
+         * 规格机型
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.Machine = null;
+
+        /**
+         * 规格列表
+         * @type {Array.<SpecConfigInfo> || null}
+         */
+        this.SpecConfigInfos = null;
 
     }
 
@@ -319,7 +332,16 @@ class OpenDBExtranetAccessRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Machine = 'Machine' in params ? params.Machine : null;
+
+        if (params.SpecConfigInfos) {
+            this.SpecConfigInfos = new Array();
+            for (let z in params.SpecConfigInfos) {
+                let obj = new SpecConfigInfo();
+                obj.deserialize(params.SpecConfigInfos[z]);
+                this.SpecConfigInfos.push(obj);
+            }
+        }
 
     }
 }
@@ -558,30 +580,78 @@ class CreateAccountRequest extends  AbstractModel {
 }
 
 /**
- * DescribeDBParameters返回参数结构体
+ * 项目信息描述
  * @class
  */
-class DescribeDBParametersResponse extends  AbstractModel {
+class Project extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例 ID，形如：dcdbt-ow7t8lmc。
-         * @type {string || null}
+         * 项目ID
+         * @type {number || null}
          */
-        this.InstanceId = null;
+        this.ProjectId = null;
 
         /**
-         * 请求DB的当前参数值
-         * @type {Array.<ParamDesc> || null}
+         * 资源拥有者（主账号）uin
+         * @type {number || null}
          */
-        this.Params = null;
+        this.OwnerUin = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 应用Id
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * 项目名称
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Name = null;
+
+        /**
+         * 创建者uin
+         * @type {number || null}
+         */
+        this.CreatorUin = null;
+
+        /**
+         * 来源平台
+         * @type {string || null}
+         */
+        this.SrcPlat = null;
+
+        /**
+         * 来源AppId
+         * @type {number || null}
+         */
+        this.SrcAppId = null;
+
+        /**
+         * 项目状态,0正常，-1关闭。默认项目为3
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 是否默认项目，1 是，0 不是
+         * @type {number || null}
+         */
+        this.IsDefault = null;
+
+        /**
+         * 描述信息
+         * @type {string || null}
+         */
+        this.Info = null;
 
     }
 
@@ -592,17 +662,17 @@ class DescribeDBParametersResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-
-        if (params.Params) {
-            this.Params = new Array();
-            for (let z in params.Params) {
-                let obj = new ParamDesc();
-                obj.deserialize(params.Params[z]);
-                this.Params.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.OwnerUin = 'OwnerUin' in params ? params.OwnerUin : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.CreatorUin = 'CreatorUin' in params ? params.CreatorUin : null;
+        this.SrcPlat = 'SrcPlat' in params ? params.SrcPlat : null;
+        this.SrcAppId = 'SrcAppId' in params ? params.SrcAppId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
+        this.Info = 'Info' in params ? params.Info : null;
 
     }
 }
@@ -1142,7 +1212,7 @@ class DescribeDCDBPriceRequest extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * 欲购买实例的数量，目前只支持购买1个实例
+         * 欲购买实例的数量，目前支持购买1-10个实例
          * @type {number || null}
          */
         this.Count = null;
@@ -1180,6 +1250,12 @@ class DescribeDCDBPriceRequest extends  AbstractModel {
          */
         this.ShardCount = null;
 
+        /**
+         * 付费类型。postpaid：按量付费   prepaid：预付费
+         * @type {string || null}
+         */
+        this.Paymode = null;
+
     }
 
     /**
@@ -1196,6 +1272,7 @@ class DescribeDCDBPriceRequest extends  AbstractModel {
         this.ShardMemory = 'ShardMemory' in params ? params.ShardMemory : null;
         this.ShardStorage = 'ShardStorage' in params ? params.ShardStorage : null;
         this.ShardCount = 'ShardCount' in params ? params.ShardCount : null;
+        this.Paymode = 'Paymode' in params ? params.Paymode : null;
 
     }
 }
@@ -1599,7 +1676,7 @@ class GrantAccountPrivilegesRequest extends  AbstractModel {
         this.Type = null;
 
         /**
-         * 具体的 Type 的名称，比如 Type 为 table 时就是具体的表名。DbName 和 Type 都为具体名称，则 Object 表示具体对象名，不能为 \* 或者为空
+         * 具体的 Type 的名称，例如 Type 为 table 时就是具体的表名。DbName 和 Type 都为具体名称，则 Object 表示具体对象名，不能为 \* 或者为空
          * @type {string || null}
          */
         this.Object = null;
@@ -1667,7 +1744,7 @@ class DescribeDCDBShardsRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 分片Id列表。
+         * 分片ID列表。
          * @type {Array.<string> || null}
          */
         this.ShardInstanceIds = null;
@@ -1800,6 +1877,12 @@ class SpecConfigInfo extends  AbstractModel {
          */
         this.Qps = null;
 
+        /**
+         * CPU核数
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
     }
 
     /**
@@ -1816,6 +1899,7 @@ class SpecConfigInfo extends  AbstractModel {
         this.SuitInfo = 'SuitInfo' in params ? params.SuitInfo : null;
         this.Pid = 'Pid' in params ? params.Pid : null;
         this.Qps = 'Qps' in params ? params.Qps : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
 
     }
 }
@@ -1884,7 +1968,7 @@ class DCDBInstanceInfo extends  AbstractModel {
         this.InstanceName = null;
 
         /**
-         * APPID
+         * AppID
          * @type {number || null}
          */
         this.AppId = null;
@@ -2010,25 +2094,25 @@ class DCDBInstanceInfo extends  AbstractModel {
         this.IsTmp = null;
 
         /**
-         * 独享集群Id，为空表示非独享集群实例
+         * 独享集群ID，为空表示非独享集群实例
          * @type {string || null}
          */
         this.ExclusterId = null;
 
         /**
-         * 字符串型的私有网络Id
+         * 字符串型的私有网络ID
          * @type {string || null}
          */
         this.UniqueVpcId = null;
 
         /**
-         * 字符串型的私有网络子网Id
+         * 字符串型的私有网络子网ID
          * @type {string || null}
          */
         this.UniqueSubnetId = null;
 
         /**
-         * 数字实例Id（过时字段，请勿依赖该值）
+         * 数字实例ID（过时字段，请勿依赖该值）
          * @type {number || null}
          */
         this.Id = null;
@@ -2052,7 +2136,7 @@ class DCDBInstanceInfo extends  AbstractModel {
         this.WanPort = null;
 
         /**
-         * 产品类型 Id（过时字段，请勿依赖该值）
+         * 产品类型 ID（过时字段，请勿依赖该值）
          * @type {number || null}
          */
         this.Pid = null;
@@ -2099,6 +2183,12 @@ class DCDBInstanceInfo extends  AbstractModel {
          * @type {number || null}
          */
         this.IsAuditSupported = null;
+
+        /**
+         * Cpu核数
+         * @type {number || null}
+         */
+        this.Cpu = null;
 
     }
 
@@ -2155,6 +2245,7 @@ class DCDBInstanceInfo extends  AbstractModel {
         this.Locker = 'Locker' in params ? params.Locker : null;
         this.WanStatus = 'WanStatus' in params ? params.WanStatus : null;
         this.IsAuditSupported = 'IsAuditSupported' in params ? params.IsAuditSupported : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
 
     }
 }
@@ -2367,6 +2458,45 @@ class DCDBShardInfo extends  AbstractModel {
          */
         this.ShardId = null;
 
+        /**
+         * 产品ProductID
+         * @type {number || null}
+         */
+        this.Pid = null;
+
+        /**
+         * Proxy版本
+         * @type {string || null}
+         */
+        this.ProxyVersion = null;
+
+        /**
+         * 付费模型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Paymode = null;
+
+        /**
+         * 分片的主可用区
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ShardMasterZone = null;
+
+        /**
+         * 分片的从可用区列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.ShardSlaveZones = null;
+
+        /**
+         * CPU核数
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
     }
 
     /**
@@ -2394,6 +2524,12 @@ class DCDBShardInfo extends  AbstractModel {
         this.StorageUsage = 'StorageUsage' in params ? params.StorageUsage : null;
         this.MemoryUsage = 'MemoryUsage' in params ? params.MemoryUsage : null;
         this.ShardId = 'ShardId' in params ? params.ShardId : null;
+        this.Pid = 'Pid' in params ? params.Pid : null;
+        this.ProxyVersion = 'ProxyVersion' in params ? params.ProxyVersion : null;
+        this.Paymode = 'Paymode' in params ? params.Paymode : null;
+        this.ShardMasterZone = 'ShardMasterZone' in params ? params.ShardMasterZone : null;
+        this.ShardSlaveZones = 'ShardSlaveZones' in params ? params.ShardSlaveZones : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
 
     }
 }
@@ -2519,7 +2655,7 @@ class OpenDBExtranetAccessResponse extends  AbstractModel {
         super();
 
         /**
-         * 异步任务Id，可通过 DescribeFlow 查询任务状态。
+         * 异步任务ID，可通过 DescribeFlow 查询任务状态。
          * @type {number || null}
          */
         this.FlowId = null;
@@ -2984,6 +3120,12 @@ class ShardInfo extends  AbstractModel {
          */
         this.Pid = null;
 
+        /**
+         * Cpu核数
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
     }
 
     /**
@@ -3002,29 +3144,24 @@ class ShardInfo extends  AbstractModel {
         this.ShardId = 'ShardId' in params ? params.ShardId : null;
         this.NodeCount = 'NodeCount' in params ? params.NodeCount : null;
         this.Pid = 'Pid' in params ? params.Pid : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
 
     }
 }
 
 /**
- * 按机型分类的规格配置
+ * OpenDBExtranetAccess请求参数结构体
  * @class
  */
-class SpecConfig extends  AbstractModel {
+class OpenDBExtranetAccessRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 规格机型
+         * 待开放外网访问的实例ID。形如：dcdbt-ow728lmc。
          * @type {string || null}
          */
-        this.Machine = null;
-
-        /**
-         * 规格列表
-         * @type {Array.<SpecConfigInfo> || null}
-         */
-        this.SpecConfigInfos = null;
+        this.InstanceId = null;
 
     }
 
@@ -3035,16 +3172,7 @@ class SpecConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Machine = 'Machine' in params ? params.Machine : null;
-
-        if (params.SpecConfigInfos) {
-            this.SpecConfigInfos = new Array();
-            for (let z in params.SpecConfigInfos) {
-                let obj = new SpecConfigInfo();
-                obj.deserialize(params.SpecConfigInfos[z]);
-                this.SpecConfigInfos.push(obj);
-            }
-        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -3129,7 +3257,7 @@ class CloseDBExtranetAccessResponse extends  AbstractModel {
         super();
 
         /**
-         * 异步任务Id，可通过 DescribeFlow 查询任务状态。
+         * 异步任务ID，可通过 DescribeFlow 查询任务状态。
          * @type {number || null}
          */
         this.FlowId = null;
@@ -3200,6 +3328,27 @@ class ModifyAccountDescriptionRequest extends  AbstractModel {
         this.UserName = 'UserName' in params ? params.UserName : null;
         this.Host = 'Host' in params ? params.Host : null;
         this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
+ * DescribeProjects请求参数结构体
+ * @class
+ */
+class DescribeProjectsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -3404,7 +3553,7 @@ class InitDCDBInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * 待初始化的实例Id列表，形如：dcdbt-ow728lmc，可以通过 DescribeDCDBInstances 查询实例详情获得。
+         * 待初始化的实例ID列表，形如：dcdbt-ow728lmc，可以通过 DescribeDCDBInstances 查询实例详情获得。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -3618,6 +3767,7 @@ class CreateDCDBInstanceRequest extends  AbstractModel {
 
         /**
          * 分片节点可用区分布，最多可填两个可用区。当分片规格为一主两从时，其中两个节点在第一个可用区。
+注意当前可售卖的可用区需要通过DescribeDCDBSaleInfo接口拉取。
          * @type {Array.<string> || null}
          */
         this.Zones = null;
@@ -3656,7 +3806,7 @@ class CreateDCDBInstanceRequest extends  AbstractModel {
         this.ShardCount = null;
 
         /**
-         * 欲购买实例的数量，目前只支持购买1个实例
+         * 欲购买实例的数量
          * @type {number || null}
          */
         this.Count = null;
@@ -3701,6 +3851,18 @@ class CreateDCDBInstanceRequest extends  AbstractModel {
          */
         this.VoucherIds = null;
 
+        /**
+         * 安全组id
+         * @type {string || null}
+         */
+        this.SecurityGroupId = null;
+
+        /**
+         * 实例名称， 可以通过该字段自主的设置实例的名字
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
     }
 
     /**
@@ -3723,6 +3885,8 @@ class CreateDCDBInstanceRequest extends  AbstractModel {
         this.DbVersionId = 'DbVersionId' in params ? params.DbVersionId : null;
         this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
         this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
 
     }
 }
@@ -3907,6 +4071,49 @@ class ModifyDBSyncModeRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeProjects返回参数结构体
+ * @class
+ */
+class DescribeProjectsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 项目列表
+         * @type {Array.<Project> || null}
+         */
+        this.Projects = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Projects) {
+            this.Projects = new Array();
+            for (let z in params.Projects) {
+                let obj = new Project();
+                obj.deserialize(params.Projects[z]);
+                this.Projects.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateAccount返回参数结构体
  * @class
  */
@@ -3915,7 +4122,7 @@ class CreateAccountResponse extends  AbstractModel {
         super();
 
         /**
-         * 实例Id，透传入参。
+         * 实例ID，透传入参。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -4415,7 +4622,7 @@ class DescribeAccountPrivilegesRequest extends  AbstractModel {
         this.Type = null;
 
         /**
-         * 具体的 Type 的名称，比如 Type 为 table 时就是具体的表名。DbName 和 Type 都为具体名称，则 Object 表示具体对象名，不能为 \* 或者为空
+         * 具体的 Type 的名称，例如 Type 为 table 时就是具体的表名。DbName 和 Type 都为具体名称，则 Object 表示具体对象名，不能为 \* 或者为空
          * @type {string || null}
          */
         this.Object = null;
@@ -4674,6 +4881,12 @@ class DescribeDCDBInstancesRequest extends  AbstractModel {
          */
         this.IsFilterExcluster = null;
 
+        /**
+         * 独享集群ID
+         * @type {Array.<string> || null}
+         */
+        this.ExclusterIds = null;
+
     }
 
     /**
@@ -4696,6 +4909,57 @@ class DescribeDCDBInstancesRequest extends  AbstractModel {
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.ExclusterType = 'ExclusterType' in params ? params.ExclusterType : null;
         this.IsFilterExcluster = 'IsFilterExcluster' in params ? params.IsFilterExcluster : null;
+        this.ExclusterIds = 'ExclusterIds' in params ? params.ExclusterIds : null;
+
+    }
+}
+
+/**
+ * DescribeDBParameters返回参数结构体
+ * @class
+ */
+class DescribeDBParametersResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID，形如：dcdbt-ow7t8lmc。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 请求DB的当前参数值
+         * @type {Array.<ParamDesc> || null}
+         */
+        this.Params = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.Params) {
+            this.Params = new Array();
+            for (let z in params.Params) {
+                let obj = new ParamDesc();
+                obj.deserialize(params.Params[z]);
+                this.Params.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4806,13 +5070,13 @@ module.exports = {
     ParamDesc: ParamDesc,
     DescribeDBParametersRequest: DescribeDBParametersRequest,
     DescribeAccountsRequest: DescribeAccountsRequest,
-    OpenDBExtranetAccessRequest: OpenDBExtranetAccessRequest,
+    SpecConfig: SpecConfig,
     DescribeDCDBPriceResponse: DescribeDCDBPriceResponse,
     RenewDCDBInstanceResponse: RenewDCDBInstanceResponse,
     DescribeDBSyncModeResponse: DescribeDBSyncModeResponse,
     DescribeDCDBUpgradePriceResponse: DescribeDCDBUpgradePriceResponse,
     CreateAccountRequest: CreateAccountRequest,
-    DescribeDBParametersResponse: DescribeDBParametersResponse,
+    Project: Project,
     CloneAccountResponse: CloneAccountResponse,
     ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
     CreateDCDBInstanceResponse: CreateDCDBInstanceResponse,
@@ -4858,11 +5122,12 @@ module.exports = {
     Database: Database,
     GrantAccountPrivilegesResponse: GrantAccountPrivilegesResponse,
     ShardInfo: ShardInfo,
-    SpecConfig: SpecConfig,
+    OpenDBExtranetAccessRequest: OpenDBExtranetAccessRequest,
     DescribeDCDBSaleInfoResponse: DescribeDCDBSaleInfoResponse,
     DescribeDBSyncModeRequest: DescribeDBSyncModeRequest,
     CloseDBExtranetAccessResponse: CloseDBExtranetAccessResponse,
     ModifyAccountDescriptionRequest: ModifyAccountDescriptionRequest,
+    DescribeProjectsRequest: DescribeProjectsRequest,
     DescribeDatabasesResponse: DescribeDatabasesResponse,
     DescribeOrdersRequest: DescribeOrdersRequest,
     DescribeDBLogFilesResponse: DescribeDBLogFilesResponse,
@@ -4876,6 +5141,7 @@ module.exports = {
     DatabaseProcedure: DatabaseProcedure,
     AddShardConfig: AddShardConfig,
     ModifyDBSyncModeRequest: ModifyDBSyncModeRequest,
+    DescribeProjectsResponse: DescribeProjectsResponse,
     CreateAccountResponse: CreateAccountResponse,
     RegionInfo: RegionInfo,
     DescribeDatabaseObjectsRequest: DescribeDatabaseObjectsRequest,
@@ -4888,6 +5154,7 @@ module.exports = {
     SqlLogItem: SqlLogItem,
     DescribeAccountsResponse: DescribeAccountsResponse,
     DescribeDCDBInstancesRequest: DescribeDCDBInstancesRequest,
+    DescribeDBParametersResponse: DescribeDBParametersResponse,
     ModifyDBInstancesProjectRequest: ModifyDBInstancesProjectRequest,
     ModifyDBSyncModeResponse: ModifyDBSyncModeResponse,
     DeleteAccountResponse: DeleteAccountResponse,

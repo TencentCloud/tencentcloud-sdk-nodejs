@@ -16,21 +16,37 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const DetectInfoVideoData = models.DetectInfoVideoData;
+const GetDetectInfoEnhancedRequest = models.GetDetectInfoEnhancedRequest;
 const LivenessRequest = models.LivenessRequest;
 const LivenessCompareResponse = models.LivenessCompareResponse;
+const MobileNetworkTimeVerificationResponse = models.MobileNetworkTimeVerificationResponse;
 const GetLiveCodeRequest = models.GetLiveCodeRequest;
 const IdCardVerificationRequest = models.IdCardVerificationRequest;
 const BankCardVerificationRequest = models.BankCardVerificationRequest;
+const DetectInfoBestFrame = models.DetectInfoBestFrame;
+const GetDetectInfoEnhancedResponse = models.GetDetectInfoEnhancedResponse;
+const PhoneVerificationRequest = models.PhoneVerificationRequest;
 const DetectAuthResponse = models.DetectAuthResponse;
+const PhoneVerificationResponse = models.PhoneVerificationResponse;
+const IdCardOCRVerificationRequest = models.IdCardOCRVerificationRequest;
 const BankCard4EVerificationResponse = models.BankCard4EVerificationResponse;
+const MobileStatusRequest = models.MobileStatusRequest;
+const LivenessRecognitionResponse = models.LivenessRecognitionResponse;
 const BankCard2EVerificationRequest = models.BankCard2EVerificationRequest;
 const LivenessRecognitionRequest = models.LivenessRecognitionRequest;
-const LivenessRecognitionResponse = models.LivenessRecognitionResponse;
+const MobileNetworkTimeVerificationRequest = models.MobileNetworkTimeVerificationRequest;
+const IdCardOCRVerificationResponse = models.IdCardOCRVerificationResponse;
+const MobileStatusResponse = models.MobileStatusResponse;
+const LivenessResponse = models.LivenessResponse;
+const DetectInfoText = models.DetectInfoText;
 const DetectAuthRequest = models.DetectAuthRequest;
+const MinorsVerificationResponse = models.MinorsVerificationResponse;
 const BankCardVerificationResponse = models.BankCardVerificationResponse;
 const ImageRecognitionRequest = models.ImageRecognitionRequest;
 const BankCard4EVerificationRequest = models.BankCard4EVerificationRequest;
 const GetActionSequenceResponse = models.GetActionSequenceResponse;
+const MinorsVerificationRequest = models.MinorsVerificationRequest;
 const ImageRecognitionResponse = models.ImageRecognitionResponse;
 const GetActionSequenceRequest = models.GetActionSequenceRequest;
 const GetDetectInfoResponse = models.GetDetectInfoResponse;
@@ -38,8 +54,9 @@ const GetLiveCodeResponse = models.GetLiveCodeResponse;
 const GetDetectInfoRequest = models.GetDetectInfoRequest;
 const BankCard2EVerificationResponse = models.BankCard2EVerificationResponse;
 const IdCardVerificationResponse = models.IdCardVerificationResponse;
+const DetectInfoIdCardData = models.DetectInfoIdCardData;
 const LivenessCompareRequest = models.LivenessCompareRequest;
-const LivenessResponse = models.LivenessResponse;
+const DetectDetail = models.DetectDetail;
 
 
 /**
@@ -64,6 +81,17 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
+     * 未成年人守护接口是通过传入手机号或姓名和身份证号，结合权威数据源和腾讯健康守护可信模型，判断该信息是否真实且年满18周岁。腾讯健康守护可信模型覆盖了上十亿手机库源，覆盖率高、准确率高，如果不在库中的手机号，还可以通过姓名+身份证进行兜底验证。
+     * @param {MinorsVerificationRequest} req
+     * @param {function(string, MinorsVerificationResponse):void} cb
+     * @public
+     */
+    MinorsVerification(req, cb) {
+        let resp = new MinorsVerificationResponse();
+        this.request("MinorsVerification", req, resp, cb);
+    }
+
+    /**
      * 使用数字活体检测模式前，需调用本接口获取数字验证码。
      * @param {GetLiveCodeRequest} req
      * @param {function(string, GetLiveCodeResponse):void} cb
@@ -72,6 +100,17 @@ class FaceidClient extends AbstractClient {
     GetLiveCode(req, cb) {
         let resp = new GetLiveCodeResponse();
         this.request("GetLiveCode", req, resp, cb);
+    }
+
+    /**
+     * 本接口用于查询手机号在网时长，输入手机号进行查询。
+     * @param {MobileNetworkTimeVerificationRequest} req
+     * @param {function(string, MobileNetworkTimeVerificationResponse):void} cb
+     * @public
+     */
+    MobileNetworkTimeVerification(req, cb) {
+        let resp = new MobileNetworkTimeVerificationResponse();
+        this.request("MobileNetworkTimeVerification", req, resp, cb);
     }
 
     /**
@@ -97,7 +136,7 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * 银行卡三要素核验，输入银行卡号、姓名、开户证件号，校验信息的真实性和一致性。
+     * 本接口用于银行卡号、姓名、开户证件号信息的真实性和一致性。
      * @param {BankCardVerificationRequest} req
      * @param {function(string, BankCardVerificationResponse):void} cb
      * @public
@@ -130,6 +169,17 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
+     * 本接口用于验证手机号的状态，您可以输入手机号进行查询。
+     * @param {MobileStatusRequest} req
+     * @param {function(string, MobileStatusResponse):void} cb
+     * @public
+     */
+    MobileStatus(req, cb) {
+        let resp = new MobileStatusResponse();
+        this.request("MobileStatus", req, resp, cb);
+    }
+
+    /**
      * 传入姓名和身份证号，校验两者的真实性和一致性。
      * @param {IdCardVerificationRequest} req
      * @param {function(string, IdCardVerificationResponse):void} cb
@@ -141,7 +191,18 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * 输入银行卡号、姓名、开户证件号、开户手机号，校验信息的真实性和一致性。
+     * 本接口用于校验姓名和身份证号的真实性和一致性，您可以通过输入姓名和身份证号或传入身份证人像面照片提供所需验证信息。
+     * @param {IdCardOCRVerificationRequest} req
+     * @param {function(string, IdCardOCRVerificationResponse):void} cb
+     * @public
+     */
+    IdCardOCRVerification(req, cb) {
+        let resp = new IdCardOCRVerificationResponse();
+        this.request("IdCardOCRVerification", req, resp, cb);
+    }
+
+    /**
+     * 本接口用于输入银行卡号、姓名、开户证件号、开户手机号，校验信息的真实性和一致性。
      * @param {BankCard4EVerificationRequest} req
      * @param {function(string, BankCard4EVerificationResponse):void} cb
      * @public
@@ -174,7 +235,7 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * 输入银行卡号、姓名，校验信息的真实性和一致性。
+     * 本接口用于校验姓名和银行卡号的真实性和一致性。
      * @param {BankCard2EVerificationRequest} req
      * @param {function(string, BankCard2EVerificationResponse):void} cb
      * @public
@@ -182,6 +243,28 @@ class FaceidClient extends AbstractClient {
     BankCard2EVerification(req, cb) {
         let resp = new BankCard2EVerificationResponse();
         this.request("BankCard2EVerification", req, resp, cb);
+    }
+
+    /**
+     * 完成验证后，用BizToken调用本接口获取结果信息，BizToken生成后三天内（3\*24\*3,600秒）可多次拉取。
+     * @param {GetDetectInfoEnhancedRequest} req
+     * @param {function(string, GetDetectInfoEnhancedResponse):void} cb
+     * @public
+     */
+    GetDetectInfoEnhanced(req, cb) {
+        let resp = new GetDetectInfoEnhancedResponse();
+        this.request("GetDetectInfoEnhanced", req, resp, cb);
+    }
+
+    /**
+     * 本接口用于校验手机号、姓名和身份证号的真实性和一致性。
+     * @param {PhoneVerificationRequest} req
+     * @param {function(string, PhoneVerificationResponse):void} cb
+     * @public
+     */
+    PhoneVerification(req, cb) {
+        let resp = new PhoneVerificationResponse();
+        this.request("PhoneVerification", req, resp, cb);
     }
 
 

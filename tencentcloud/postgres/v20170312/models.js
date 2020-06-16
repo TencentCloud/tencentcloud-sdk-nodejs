@@ -31,7 +31,7 @@ class CreateDBInstancesRequest extends  AbstractModel {
         this.SpecCode = null;
 
         /**
-         * PostgreSQL内核版本，目前只支持：9.3.5、9.5.4两种版本。
+         * PostgreSQL内核版本，目前支持：9.3.5、9.5.4、10.4三种版本。
          * @type {string || null}
          */
         this.DBVersion = null;
@@ -49,7 +49,7 @@ class CreateDBInstancesRequest extends  AbstractModel {
         this.InstanceCount = null;
 
         /**
-         * 购买时长，单位：月。目前只支持1,2,3,4,5,6,7,8,9,10,11,12,24,36这些值。
+         * 购买时长，单位：月。目前只支持1,2,3,4,5,6,7,8,9,10,11,12,24,36这些值，按量计费模式下该参数传1。
          * @type {number || null}
          */
         this.Period = null;
@@ -67,7 +67,7 @@ class CreateDBInstancesRequest extends  AbstractModel {
         this.ProjectId = null;
 
         /**
-         * 实例计费类型。目前只支持：PREPAID（预付费，即包年包月）。
+         * 实例计费类型。目前支持：PREPAID（预付费，即包年包月），POSTPAID_BY_HOUR（后付费，即按量计费）。
          * @type {string || null}
          */
         this.InstanceChargeType = null;
@@ -96,6 +96,24 @@ class CreateDBInstancesRequest extends  AbstractModel {
          */
         this.SubnetId = null;
 
+        /**
+         * 续费标记：0-正常续费（默认）；1-自动续费；
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
+         * 活动ID
+         * @type {number || null}
+         */
+        this.ActivityId = null;
+
+        /**
+         * 实例名(后续支持)
+         * @type {string || null}
+         */
+        this.Name = null;
+
     }
 
     /**
@@ -117,20 +135,51 @@ class CreateDBInstancesRequest extends  AbstractModel {
         this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
+        this.Name = 'Name' in params ? params.Name : null;
 
     }
 }
 
 /**
- * RestartDBInstance请求参数结构体
+ * CloseServerlessDBExtranetAccess返回参数结构体
  * @class
  */
-class RestartDBInstanceRequest extends  AbstractModel {
+class CloseServerlessDBExtranetAccessResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例ID，形如postgres-6r233v55
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DestroyDBInstance请求参数结构体
+ * @class
+ */
+class DestroyDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待删除实例标识符
          * @type {string || null}
          */
         this.DBInstanceId = null;
@@ -145,6 +194,76 @@ class RestartDBInstanceRequest extends  AbstractModel {
             return;
         }
         this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+
+    }
+}
+
+/**
+ * CreateServerlessDBInstance请求参数结构体
+ * @class
+ */
+class CreateServerlessDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 可用区ID。公测阶段仅支持ap-shanghai-2、ap-beijing-1,ap-guangzhou-2.
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * DB实例名称，同一个账号下该值必须唯一。
+         * @type {string || null}
+         */
+        this.DBInstanceName = null;
+
+        /**
+         * PostgreSQL内核版本，目前只支持：10.4。
+         * @type {string || null}
+         */
+        this.DBVersion = null;
+
+        /**
+         * PostgreSQL数据库字符集，目前支持UTF8。
+         * @type {string || null}
+         */
+        this.DBCharset = null;
+
+        /**
+         * 项目ID。
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 私有网络ID。
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 私有网络子网ID。
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.DBInstanceName = 'DBInstanceName' in params ? params.DBInstanceName : null;
+        this.DBVersion = 'DBVersion' in params ? params.DBVersion : null;
+        this.DBCharset = 'DBCharset' in params ? params.DBCharset : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
     }
 }
@@ -265,6 +384,41 @@ class DescribeOrdersResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteServerlessDBInstance请求参数结构体
+ * @class
+ */
+class DeleteServerlessDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * DB实例名称，实例名和实例ID必须至少传一个，如果同时存在，将只以实例ID为准。
+         * @type {string || null}
+         */
+        this.DBInstanceName = null;
+
+        /**
+         * DB实例ID，实例名和实例ID必须至少传一个，如果同时存在，将只以实例ID为准。
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceName = 'DBInstanceName' in params ? params.DBInstanceName : null;
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
 
     }
 }
@@ -691,24 +845,149 @@ class ModifyDBInstanceNameRequest extends  AbstractModel {
 }
 
 /**
- * InquiryPriceUpgradeDBInstance返回参数结构体
+ * 描述一种规格的信息信息
  * @class
  */
-class InquiryPriceUpgradeDBInstanceResponse extends  AbstractModel {
+class SpecItemInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 总费用，打折前的
-         * @type {number || null}
+         * 规格ID
+         * @type {string || null}
          */
-        this.OriginalPrice = null;
+        this.SpecCode = null;
 
         /**
-         * 实际需要付款金额
+         * PostgreSQL的内核版本编号
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * 内核编号对应的完整版本名称
+         * @type {string || null}
+         */
+        this.VersionName = null;
+
+        /**
+         * CPU核数
          * @type {number || null}
          */
-        this.Price = null;
+        this.Cpu = null;
+
+        /**
+         * 内存大小，单位：MB
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * 该规格所支持最大存储容量，单位：GB
+         * @type {number || null}
+         */
+        this.MaxStorage = null;
+
+        /**
+         * 该规格所支持最小存储容量，单位：GB
+         * @type {number || null}
+         */
+        this.MinStorage = null;
+
+        /**
+         * 该规格的预估QPS
+         * @type {number || null}
+         */
+        this.Qps = null;
+
+        /**
+         * 该规格对应的计费ID
+         * @type {number || null}
+         */
+        this.Pid = null;
+
+        /**
+         * 机器类型
+         * @type {string || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SpecCode = 'SpecCode' in params ? params.SpecCode : null;
+        this.Version = 'Version' in params ? params.Version : null;
+        this.VersionName = 'VersionName' in params ? params.VersionName : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.MaxStorage = 'MaxStorage' in params ? params.MaxStorage : null;
+        this.MinStorage = 'MinStorage' in params ? params.MinStorage : null;
+        this.Qps = 'Qps' in params ? params.Qps : null;
+        this.Pid = 'Pid' in params ? params.Pid : null;
+        this.Type = 'Type' in params ? params.Type : null;
+
+    }
+}
+
+/**
+ * DescribeProductConfig请求参数结构体
+ * @class
+ */
+class DescribeProductConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 可用区名称
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+
+    }
+}
+
+/**
+ * CreateDBInstances返回参数结构体
+ * @class
+ */
+class CreateDBInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 订单号列表。每个实例对应一个订单号。
+         * @type {Array.<string> || null}
+         */
+        this.DealNames = null;
+
+        /**
+         * 冻结流水号
+         * @type {string || null}
+         */
+        this.BillId = null;
+
+        /**
+         * 创建成功的实例ID集合，只在后付费情景下有返回值
+         * @type {Array.<string> || null}
+         */
+        this.DBInstanceIdSet = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -725,9 +1004,38 @@ class InquiryPriceUpgradeDBInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
-        this.Price = 'Price' in params ? params.Price : null;
+        this.DealNames = 'DealNames' in params ? params.DealNames : null;
+        this.BillId = 'BillId' in params ? params.BillId : null;
+        this.DBInstanceIdSet = 'DBInstanceIdSet' in params ? params.DBInstanceIdSet : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RestartDBInstance请求参数结构体
+ * @class
+ */
+class RestartDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID，形如postgres-6r233v55
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
 
     }
 }
@@ -741,7 +1049,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * 过滤条件，目前支持：db-instance-id、db-instance-name两种。
+         * 过滤条件，目前支持：db-instance-id、db-instance-name、db-project-id、db-pay-mode。
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -757,6 +1065,18 @@ class DescribeDBInstancesRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.Offset = null;
+
+        /**
+         * 排序指标，如实例名、创建时间等，支持DBInstanceId,CreateTime,Name,EndTime
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * 排序方式，包括升序、降序
+         * @type {string || null}
+         */
+        this.OrderByType = null;
 
     }
 
@@ -778,6 +1098,8 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         }
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
 
     }
 }
@@ -832,12 +1154,174 @@ class ErrLogDetail extends  AbstractModel {
 }
 
 /**
- * ModifyAccountRemark返回参数结构体
+ * serverless实例描述
  * @class
  */
-class ModifyAccountRemarkResponse extends  AbstractModel {
+class ServerlessDBInstance extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 实例id，唯一标识符
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+        /**
+         * 实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DBInstanceName = null;
+
+        /**
+         * 实例状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DBInstanceStatus = null;
+
+        /**
+         * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 可用区
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * projectId
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * VpcId
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 子网id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 字符集
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DBCharset = null;
+
+        /**
+         * 数据库版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DBVersion = null;
+
+        /**
+         * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 实例网络信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ServerlessDBInstanceNetInfo> || null}
+         */
+        this.DBInstanceNetInfo = null;
+
+        /**
+         * 实例账户信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ServerlessDBAccount> || null}
+         */
+        this.DBAccountSet = null;
+
+        /**
+         * 实例下的db信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.DBDatabaseList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.DBInstanceName = 'DBInstanceName' in params ? params.DBInstanceName : null;
+        this.DBInstanceStatus = 'DBInstanceStatus' in params ? params.DBInstanceStatus : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.DBCharset = 'DBCharset' in params ? params.DBCharset : null;
+        this.DBVersion = 'DBVersion' in params ? params.DBVersion : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+        if (params.DBInstanceNetInfo) {
+            this.DBInstanceNetInfo = new Array();
+            for (let z in params.DBInstanceNetInfo) {
+                let obj = new ServerlessDBInstanceNetInfo();
+                obj.deserialize(params.DBInstanceNetInfo[z]);
+                this.DBInstanceNetInfo.push(obj);
+            }
+        }
+
+        if (params.DBAccountSet) {
+            this.DBAccountSet = new Array();
+            for (let z in params.DBAccountSet) {
+                let obj = new ServerlessDBAccount();
+                obj.deserialize(params.DBAccountSet[z]);
+                this.DBAccountSet.push(obj);
+            }
+        }
+        this.DBDatabaseList = 'DBDatabaseList' in params ? params.DBDatabaseList : null;
+
+    }
+}
+
+/**
+ * DescribeServerlessDBInstances返回参数结构体
+ * @class
+ */
+class DescribeServerlessDBInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询结果数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 查询结果
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ServerlessDBInstance> || null}
+         */
+        this.DBInstanceSet = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -853,6 +1337,16 @@ class ModifyAccountRemarkResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.DBInstanceSet) {
+            this.DBInstanceSet = new Array();
+            for (let z in params.DBInstanceSet) {
+                let obj = new ServerlessDBInstance();
+                obj.deserialize(params.DBInstanceSet[z]);
+                this.DBInstanceSet.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -951,30 +1445,48 @@ class DescribeZonesRequest extends  AbstractModel {
 }
 
 /**
- * 描述某个地域下某个可用区的可售卖规格详细信息。
+ * UpgradeDBInstance请求参数结构体
  * @class
  */
-class SpecInfo extends  AbstractModel {
+class UpgradeDBInstanceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 地域英文编码，对应RegionSet的Region字段
-         * @type {string || null}
+         * 升级后的实例内存大小，单位GB
+         * @type {number || null}
          */
-        this.Region = null;
+        this.Memory = null;
 
         /**
-         * 区域英文编码，对应ZoneSet的Zone字段
-         * @type {string || null}
+         * 升级后的实例磁盘大小，单位GB
+         * @type {number || null}
          */
-        this.Zone = null;
+        this.Storage = null;
 
         /**
-         * 规格详细信息列表
-         * @type {Array.<SpecItemInfo> || null}
+         * 实例ID，形如postgres-lnp6j617
+         * @type {string || null}
          */
-        this.SpecItemInfoList = null;
+        this.DBInstanceId = null;
+
+        /**
+         * 是否自动使用代金券,1是,0否，默认不使用
+         * @type {number || null}
+         */
+        this.AutoVoucher = null;
+
+        /**
+         * 代金券ID列表，目前仅支持指定一张代金券
+         * @type {Array.<string> || null}
+         */
+        this.VoucherIds = null;
+
+        /**
+         * 活动ID
+         * @type {number || null}
+         */
+        this.ActivityId = null;
 
     }
 
@@ -985,17 +1497,47 @@ class SpecInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Region = 'Region' in params ? params.Region : null;
-        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
+        this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
+        this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
 
-        if (params.SpecItemInfoList) {
-            this.SpecItemInfoList = new Array();
-            for (let z in params.SpecItemInfoList) {
-                let obj = new SpecItemInfo();
-                obj.deserialize(params.SpecItemInfoList[z]);
-                this.SpecItemInfoList.push(obj);
-            }
+    }
+}
+
+/**
+ * OpenServerlessDBExtranetAccess请求参数结构体
+ * @class
+ */
+class OpenServerlessDBExtranetAccessRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例的唯一标识符
+         * @type {string || null}
+         */
+        this.DBInstanceId = null;
+
+        /**
+         * 实例名称
+         * @type {string || null}
+         */
+        this.DBInstanceName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.DBInstanceName = 'DBInstanceName' in params ? params.DBInstanceName : null;
 
     }
 }
@@ -1045,6 +1587,84 @@ class RegionInfo extends  AbstractModel {
         this.RegionName = 'RegionName' in params ? params.RegionName : null;
         this.RegionId = 'RegionId' in params ? params.RegionId : null;
         this.RegionState = 'RegionState' in params ? params.RegionState : null;
+
+    }
+}
+
+/**
+ * DeleteServerlessDBInstance返回参数结构体
+ * @class
+ */
+class DeleteServerlessDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 慢查询详情
+ * @class
+ */
+class SlowlogDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 花费总时间
+         * @type {number || null}
+         */
+        this.TotalTime = null;
+
+        /**
+         * 调用总次数
+         * @type {number || null}
+         */
+        this.TotalCalls = null;
+
+        /**
+         * 脱敏后的慢SQL列表
+         * @type {Array.<NormalQueryItem> || null}
+         */
+        this.NormalQueries = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalTime = 'TotalTime' in params ? params.TotalTime : null;
+        this.TotalCalls = 'TotalCalls' in params ? params.TotalCalls : null;
+
+        if (params.NormalQueries) {
+            this.NormalQueries = new Array();
+            for (let z in params.NormalQueries) {
+                let obj = new NormalQueryItem();
+                obj.deserialize(params.NormalQueries[z]);
+                this.NormalQueries.push(obj);
+            }
+        }
 
     }
 }
@@ -1219,24 +1839,30 @@ class DescribeDBInstancesResponse extends  AbstractModel {
 }
 
 /**
- * UpgradeDBInstance返回参数结构体
+ * 描述某个地域下某个可用区的可售卖规格详细信息。
  * @class
  */
-class UpgradeDBInstanceResponse extends  AbstractModel {
+class SpecInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 交易名字。
+         * 地域英文编码，对应RegionSet的Region字段
          * @type {string || null}
          */
-        this.DealName = null;
+        this.Region = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 区域英文编码，对应ZoneSet的Zone字段
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Zone = null;
+
+        /**
+         * 规格详细信息列表
+         * @type {Array.<SpecItemInfo> || null}
+         */
+        this.SpecItemInfoList = null;
 
     }
 
@@ -1247,8 +1873,17 @@ class UpgradeDBInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DealName = 'DealName' in params ? params.DealName : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+
+        if (params.SpecItemInfoList) {
+            this.SpecItemInfoList = new Array();
+            for (let z in params.SpecItemInfoList) {
+                let obj = new SpecItemInfo();
+                obj.deserialize(params.SpecItemInfoList[z]);
+                this.SpecItemInfoList.push(obj);
+            }
+        }
 
     }
 }
@@ -1399,6 +2034,24 @@ class DBInstance extends  AbstractModel {
          */
         this.DBInstanceNetInfo = null;
 
+        /**
+         * 机器类型
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 用户的AppId
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * 实例的Uid
+         * @type {number || null}
+         */
+        this.Uid = null;
+
     }
 
     /**
@@ -1439,6 +2092,9 @@ class DBInstance extends  AbstractModel {
                 this.DBInstanceNetInfo.push(obj);
             }
         }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.Uid = 'Uid' in params ? params.Uid : null;
 
     }
 }
@@ -1557,18 +2213,18 @@ class ResetAccountPasswordRequest extends  AbstractModel {
 }
 
 /**
- * DescribeProductConfig请求参数结构体
+ * DescribeOrders请求参数结构体
  * @class
  */
-class DescribeProductConfigRequest extends  AbstractModel {
+class DescribeOrdersRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 可用区名称
-         * @type {string || null}
+         * 订单名集合
+         * @type {Array.<string> || null}
          */
-        this.Zone = null;
+        this.DealNames = null;
 
     }
 
@@ -1579,24 +2235,36 @@ class DescribeProductConfigRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.DealNames = 'DealNames' in params ? params.DealNames : null;
 
     }
 }
 
 /**
- * CloseDBExtranetAccess请求参数结构体
+ * InquiryPriceUpgradeDBInstance返回参数结构体
  * @class
  */
-class CloseDBExtranetAccessRequest extends  AbstractModel {
+class InquiryPriceUpgradeDBInstanceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例ID，形如postgres-6r233v55
+         * 总费用，打折前的
+         * @type {number || null}
+         */
+        this.OriginalPrice = null;
+
+        /**
+         * 实际需要付款金额
+         * @type {number || null}
+         */
+        this.Price = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.DBInstanceId = null;
+        this.RequestId = null;
 
     }
 
@@ -1607,7 +2275,9 @@ class CloseDBExtranetAccessRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.Price = 'Price' in params ? params.Price : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1680,7 +2350,7 @@ class DescribeDBBackupsRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * 备份列表分页返回，每页返回数量，默认为 20，最小为1，最大值为 100。
+         * 备份列表分页返回，每页返回数量，默认为 20，最小为1，最大值为 100。（当该参数不传或者传0时按默认值处理）
          * @type {number || null}
          */
         this.Limit = null;
@@ -1711,66 +2381,33 @@ class DescribeDBBackupsRequest extends  AbstractModel {
 }
 
 /**
- * 描述一种规格的信息信息
+ * serverless账号描述
  * @class
  */
-class SpecItemInfo extends  AbstractModel {
+class ServerlessDBAccount extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 规格ID
+         * 用户名
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.SpecCode = null;
+        this.DBUser = null;
 
         /**
-         * PostgreSQL的内核版本编号
+         * 密码
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Version = null;
+        this.DBPassword = null;
 
         /**
-         * 内核编号对应的完整版本名称
-         * @type {string || null}
-         */
-        this.VersionName = null;
-
-        /**
-         * CPU核数
+         * 连接数限制
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.Cpu = null;
-
-        /**
-         * 内存大小，单位：MB
-         * @type {number || null}
-         */
-        this.Memory = null;
-
-        /**
-         * 该规格所支持最大存储容量，单位：GB
-         * @type {number || null}
-         */
-        this.MaxStorage = null;
-
-        /**
-         * 该规格所支持最小存储容量，单位：GB
-         * @type {number || null}
-         */
-        this.MinStorage = null;
-
-        /**
-         * 该规格的预估QPS
-         * @type {number || null}
-         */
-        this.Qps = null;
-
-        /**
-         * 该规格对应的计费ID
-         * @type {number || null}
-         */
-        this.Pid = null;
+        this.DBConnLimit = null;
 
     }
 
@@ -1781,15 +2418,9 @@ class SpecItemInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SpecCode = 'SpecCode' in params ? params.SpecCode : null;
-        this.Version = 'Version' in params ? params.Version : null;
-        this.VersionName = 'VersionName' in params ? params.VersionName : null;
-        this.Cpu = 'Cpu' in params ? params.Cpu : null;
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.MaxStorage = 'MaxStorage' in params ? params.MaxStorage : null;
-        this.MinStorage = 'MinStorage' in params ? params.MinStorage : null;
-        this.Qps = 'Qps' in params ? params.Qps : null;
-        this.Pid = 'Pid' in params ? params.Pid : null;
+        this.DBUser = 'DBUser' in params ? params.DBUser : null;
+        this.DBPassword = 'DBPassword' in params ? params.DBPassword : null;
+        this.DBConnLimit = 'DBConnLimit' in params ? params.DBConnLimit : null;
 
     }
 }
@@ -2029,36 +2660,18 @@ class DescribeRegionsResponse extends  AbstractModel {
 }
 
 /**
- * 描述可用区的编码和状态信息
+ * DescribeDatabases请求参数结构体
  * @class
  */
-class ZoneInfo extends  AbstractModel {
+class DescribeDatabasesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 该可用区的英文名称
+         * 实例ID
          * @type {string || null}
          */
-        this.Zone = null;
-
-        /**
-         * 该可用区的中文名称
-         * @type {string || null}
-         */
-        this.ZoneName = null;
-
-        /**
-         * 该可用区对应的数字编号
-         * @type {number || null}
-         */
-        this.ZoneId = null;
-
-        /**
-         * 可用状态，UNAVAILABLE表示不可用，AVAILABLE表示可用
-         * @type {string || null}
-         */
-        this.ZoneState = null;
+        this.DBInstanceId = null;
 
     }
 
@@ -2069,10 +2682,7 @@ class ZoneInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Zone = 'Zone' in params ? params.Zone : null;
-        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.ZoneState = 'ZoneState' in params ? params.ZoneState : null;
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
 
     }
 }
@@ -2235,6 +2845,55 @@ class DescribeDBErrlogsRequest extends  AbstractModel {
         this.SearchKeys = 'SearchKeys' in params ? params.SearchKeys : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * 描述可用区的编码和状态信息
+ * @class
+ */
+class ZoneInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 该可用区的英文名称
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 该可用区的中文名称
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+        /**
+         * 该可用区对应的数字编号
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * 可用状态，UNAVAILABLE表示不可用，AVAILABLE表示可用
+         * @type {string || null}
+         */
+        this.ZoneState = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.ZoneState = 'ZoneState' in params ? params.ZoneState : null;
 
     }
 }
@@ -2429,10 +3088,141 @@ class ModifyDBInstancesProjectRequest extends  AbstractModel {
 }
 
 /**
+ * serverless实例网络信息描述
+ * @class
+ */
+class ServerlessDBInstanceNetInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * ip地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * 端口号
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 网络类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NetType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Address = 'Address' in params ? params.Address : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.NetType = 'NetType' in params ? params.NetType : null;
+
+    }
+}
+
+/**
+ * UpgradeDBInstance返回参数结构体
+ * @class
+ */
+class UpgradeDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 交易名字。
+         * @type {string || null}
+         */
+        this.DealName = null;
+
+        /**
+         * 冻结流水号
+         * @type {string || null}
+         */
+        this.BillId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealName = 'DealName' in params ? params.DealName : null;
+        this.BillId = 'BillId' in params ? params.BillId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyDBInstanceName返回参数结构体
  * @class
  */
 class ModifyDBInstanceNameResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * OpenServerlessDBExtranetAccess返回参数结构体
+ * @class
+ */
+class OpenServerlessDBExtranetAccessResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -2492,30 +3282,18 @@ class CloseDBExtranetAccessResponse extends  AbstractModel {
 }
 
 /**
- * 慢查询详情
+ * DestroyDBInstance返回参数结构体
  * @class
  */
-class SlowlogDetail extends  AbstractModel {
+class DestroyDBInstanceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 花费总时间
-         * @type {number || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.TotalTime = null;
-
-        /**
-         * 调用总次数
-         * @type {number || null}
-         */
-        this.TotalCalls = null;
-
-        /**
-         * 脱敏后的慢SQL列表
-         * @type {Array.<NormalQueryItem> || null}
-         */
-        this.NormalQueries = null;
+        this.RequestId = null;
 
     }
 
@@ -2526,17 +3304,7 @@ class SlowlogDetail extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalTime = 'TotalTime' in params ? params.TotalTime : null;
-        this.TotalCalls = 'TotalCalls' in params ? params.TotalCalls : null;
-
-        if (params.NormalQueries) {
-            this.NormalQueries = new Array();
-            for (let z in params.NormalQueries) {
-                let obj = new NormalQueryItem();
-                obj.deserialize(params.NormalQueries[z]);
-                this.NormalQueries.push(obj);
-            }
-        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2652,6 +3420,56 @@ class DescribeDBSlowlogsRequest extends  AbstractModel {
         this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
         this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
         this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * DescribeServerlessDBInstances请求参数结构体
+ * @class
+ */
+class DescribeServerlessDBInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询条件
+         * @type {Array.<Filter> || null}
+         */
+        this.Filter = null;
+
+        /**
+         * 查询个数
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filter) {
+            this.Filter = new Array();
+            for (let z in params.Filter) {
+                let obj = new Filter();
+                obj.deserialize(params.Filter[z]);
+                this.Filter.push(obj);
+            }
+        }
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
 
@@ -2934,42 +3752,24 @@ class NormalQueryItem extends  AbstractModel {
 }
 
 /**
- * UpgradeDBInstance请求参数结构体
+ * CreateServerlessDBInstance返回参数结构体
  * @class
  */
-class UpgradeDBInstanceRequest extends  AbstractModel {
+class CreateServerlessDBInstanceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 升级后的实例内存大小，单位GB
-         * @type {number || null}
-         */
-        this.Memory = null;
-
-        /**
-         * 升级后的实例磁盘大小，单位GB
-         * @type {number || null}
-         */
-        this.Storage = null;
-
-        /**
-         * 实例ID，形如postgres-lnp6j617
+         * 实例ID，该ID全局唯一，如：postgres-xxxxx
          * @type {string || null}
          */
         this.DBInstanceId = null;
 
         /**
-         * 是否自动使用代金券,1是,0否，默认不使用
-         * @type {number || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.AutoVoucher = null;
-
-        /**
-         * 代金券ID列表，目前仅支持指定一张代金券
-         * @type {Array.<string> || null}
-         */
-        this.VoucherIds = null;
+        this.RequestId = null;
 
     }
 
@@ -2980,11 +3780,43 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.Storage = 'Storage' in params ? params.Storage : null;
         this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
-        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
-        this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDatabases返回参数结构体
+ * @class
+ */
+class DescribeDatabasesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据库信息
+         * @type {Array.<string> || null}
+         */
+        this.Items = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Items = 'Items' in params ? params.Items : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3068,18 +3900,24 @@ class DescribeDBInstanceAttributeRequest extends  AbstractModel {
 }
 
 /**
- * DescribeOrders请求参数结构体
+ * CloseServerlessDBExtranetAccess请求参数结构体
  * @class
  */
-class DescribeOrdersRequest extends  AbstractModel {
+class CloseServerlessDBExtranetAccessRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 订单名集合
-         * @type {Array.<string> || null}
+         * 实例唯一标识符
+         * @type {string || null}
          */
-        this.DealNames = null;
+        this.DBInstanceId = null;
+
+        /**
+         * 实例名称
+         * @type {string || null}
+         */
+        this.DBInstanceName = null;
 
     }
 
@@ -3090,7 +3928,36 @@ class DescribeOrdersRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DealNames = 'DealNames' in params ? params.DealNames : null;
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.DBInstanceName = 'DBInstanceName' in params ? params.DBInstanceName : null;
+
+    }
+}
+
+/**
+ * ModifyAccountRemark返回参数结构体
+ * @class
+ */
+class ModifyAccountRemarkResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3185,24 +4052,18 @@ class ModifyAccountRemarkRequest extends  AbstractModel {
 }
 
 /**
- * CreateDBInstances返回参数结构体
+ * CloseDBExtranetAccess请求参数结构体
  * @class
  */
-class CreateDBInstancesResponse extends  AbstractModel {
+class CloseDBExtranetAccessRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 订单号列表。每个实例对应一个订单号。
-         * @type {Array.<string> || null}
-         */
-        this.DealNames = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 实例ID，形如postgres-6r233v55
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.DBInstanceId = null;
 
     }
 
@@ -3213,8 +4074,7 @@ class CreateDBInstancesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DealNames = 'DealNames' in params ? params.DealNames : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
 
     }
 }
@@ -3257,6 +4117,12 @@ class Xlog extends  AbstractModel {
          */
         this.ExternalAddr = null;
 
+        /**
+         * 备份文件大小
+         * @type {number || null}
+         */
+        this.Size = null;
+
     }
 
     /**
@@ -3271,16 +4137,20 @@ class Xlog extends  AbstractModel {
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.InternalAddr = 'InternalAddr' in params ? params.InternalAddr : null;
         this.ExternalAddr = 'ExternalAddr' in params ? params.ExternalAddr : null;
+        this.Size = 'Size' in params ? params.Size : null;
 
     }
 }
 
 module.exports = {
     CreateDBInstancesRequest: CreateDBInstancesRequest,
-    RestartDBInstanceRequest: RestartDBInstanceRequest,
+    CloseServerlessDBExtranetAccessResponse: CloseServerlessDBExtranetAccessResponse,
+    DestroyDBInstanceRequest: DestroyDBInstanceRequest,
+    CreateServerlessDBInstanceRequest: CreateServerlessDBInstanceRequest,
     InquiryPriceRenewDBInstanceRequest: InquiryPriceRenewDBInstanceRequest,
     SetAutoRenewFlagRequest: SetAutoRenewFlagRequest,
     DescribeOrdersResponse: DescribeOrdersResponse,
+    DeleteServerlessDBInstanceRequest: DeleteServerlessDBInstanceRequest,
     DescribeDBXlogsRequest: DescribeDBXlogsRequest,
     InquiryPriceCreateDBInstancesResponse: InquiryPriceCreateDBInstancesResponse,
     AccountInfo: AccountInfo,
@@ -3289,58 +4159,72 @@ module.exports = {
     DescribeDBErrlogsResponse: DescribeDBErrlogsResponse,
     InquiryPriceCreateDBInstancesRequest: InquiryPriceCreateDBInstancesRequest,
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
-    InquiryPriceUpgradeDBInstanceResponse: InquiryPriceUpgradeDBInstanceResponse,
+    SpecItemInfo: SpecItemInfo,
+    DescribeProductConfigRequest: DescribeProductConfigRequest,
+    CreateDBInstancesResponse: CreateDBInstancesResponse,
+    RestartDBInstanceRequest: RestartDBInstanceRequest,
     DescribeDBInstancesRequest: DescribeDBInstancesRequest,
     ErrLogDetail: ErrLogDetail,
-    ModifyAccountRemarkResponse: ModifyAccountRemarkResponse,
+    ServerlessDBInstance: ServerlessDBInstance,
+    DescribeServerlessDBInstancesResponse: DescribeServerlessDBInstancesResponse,
     ModifyDBInstancesProjectResponse: ModifyDBInstancesProjectResponse,
     RenewInstanceResponse: RenewInstanceResponse,
     DescribeZonesRequest: DescribeZonesRequest,
-    SpecInfo: SpecInfo,
+    UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
+    OpenServerlessDBExtranetAccessRequest: OpenServerlessDBExtranetAccessRequest,
     RegionInfo: RegionInfo,
+    DeleteServerlessDBInstanceResponse: DeleteServerlessDBInstanceResponse,
+    SlowlogDetail: SlowlogDetail,
     InitDBInstancesRequest: InitDBInstancesRequest,
     RestartDBInstanceResponse: RestartDBInstanceResponse,
     SetAutoRenewFlagResponse: SetAutoRenewFlagResponse,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
-    UpgradeDBInstanceResponse: UpgradeDBInstanceResponse,
+    SpecInfo: SpecInfo,
     DBInstance: DBInstance,
     DescribeProductConfigResponse: DescribeProductConfigResponse,
     ResetAccountPasswordResponse: ResetAccountPasswordResponse,
     ResetAccountPasswordRequest: ResetAccountPasswordRequest,
-    DescribeProductConfigRequest: DescribeProductConfigRequest,
-    CloseDBExtranetAccessRequest: CloseDBExtranetAccessRequest,
+    DescribeOrdersRequest: DescribeOrdersRequest,
+    InquiryPriceUpgradeDBInstanceResponse: InquiryPriceUpgradeDBInstanceResponse,
     InitDBInstancesResponse: InitDBInstancesResponse,
     DescribeDBBackupsRequest: DescribeDBBackupsRequest,
-    SpecItemInfo: SpecItemInfo,
+    ServerlessDBAccount: ServerlessDBAccount,
     OpenDBExtranetAccessResponse: OpenDBExtranetAccessResponse,
     Filter: Filter,
     RenewInstanceRequest: RenewInstanceRequest,
     PgDeal: PgDeal,
     DescribeRegionsResponse: DescribeRegionsResponse,
-    ZoneInfo: ZoneInfo,
+    DescribeDatabasesRequest: DescribeDatabasesRequest,
     DescribeAccountsResponse: DescribeAccountsResponse,
     InquiryPriceRenewDBInstanceResponse: InquiryPriceRenewDBInstanceResponse,
     DescribeDBErrlogsRequest: DescribeDBErrlogsRequest,
+    ZoneInfo: ZoneInfo,
     DBBackup: DBBackup,
     DBInstanceNetInfo: DBInstanceNetInfo,
     ModifyDBInstancesProjectRequest: ModifyDBInstancesProjectRequest,
+    ServerlessDBInstanceNetInfo: ServerlessDBInstanceNetInfo,
+    UpgradeDBInstanceResponse: UpgradeDBInstanceResponse,
     ModifyDBInstanceNameResponse: ModifyDBInstanceNameResponse,
+    OpenServerlessDBExtranetAccessResponse: OpenServerlessDBExtranetAccessResponse,
     CloseDBExtranetAccessResponse: CloseDBExtranetAccessResponse,
-    SlowlogDetail: SlowlogDetail,
+    DestroyDBInstanceResponse: DestroyDBInstanceResponse,
     DescribeDBInstanceAttributeResponse: DescribeDBInstanceAttributeResponse,
     DescribeDBSlowlogsRequest: DescribeDBSlowlogsRequest,
+    DescribeServerlessDBInstancesRequest: DescribeServerlessDBInstancesRequest,
     OpenDBExtranetAccessRequest: OpenDBExtranetAccessRequest,
     DescribeDBBackupsResponse: DescribeDBBackupsResponse,
     DescribeRegionsRequest: DescribeRegionsRequest,
     DescribeZonesResponse: DescribeZonesResponse,
     NormalQueryItem: NormalQueryItem,
-    UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
+    CreateServerlessDBInstanceResponse: CreateServerlessDBInstanceResponse,
+    DescribeDatabasesResponse: DescribeDatabasesResponse,
     DescribeDBXlogsResponse: DescribeDBXlogsResponse,
     DescribeDBInstanceAttributeRequest: DescribeDBInstanceAttributeRequest,
-    DescribeOrdersRequest: DescribeOrdersRequest,
+    CloseServerlessDBExtranetAccessRequest: CloseServerlessDBExtranetAccessRequest,
+    ModifyAccountRemarkResponse: ModifyAccountRemarkResponse,
     DescribeDBSlowlogsResponse: DescribeDBSlowlogsResponse,
     ModifyAccountRemarkRequest: ModifyAccountRemarkRequest,
-    CreateDBInstancesResponse: CreateDBInstancesResponse,
+    CloseDBExtranetAccessRequest: CloseDBExtranetAccessRequest,
     Xlog: Xlog,
 
 }

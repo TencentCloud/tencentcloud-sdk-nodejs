@@ -71,6 +71,14 @@ class ControlDeviceDataResponse extends  AbstractModel {
         this.Data = null;
 
         /**
+         * JSON字符串， 返回下发控制的结果信息, 
+Sent = 1 表示设备已经在线并且订阅了控制下发的mqtt topic
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -86,6 +94,7 @@ class ControlDeviceDataResponse extends  AbstractModel {
             return;
         }
         this.Data = 'Data' in params ? params.Data : null;
+        this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -100,13 +109,13 @@ class DescribeDeviceDataHistoryRequest extends  AbstractModel {
         super();
 
         /**
-         * 区间开始时间
+         * 区间开始时间（Unix 时间戳，毫秒级）
          * @type {number || null}
          */
         this.MinTime = null;
 
         /**
-         * 区间结束时间
+         * 区间结束时间（Unix 时间戳，毫秒级）
          * @type {number || null}
          */
         this.MaxTime = null;
@@ -124,7 +133,7 @@ class DescribeDeviceDataHistoryRequest extends  AbstractModel {
         this.DeviceName = null;
 
         /**
-         * 属性字段名称
+         * 属性字段名称，对应数据模板中功能属性的标识符
          * @type {string || null}
          */
         this.FieldName = null;
@@ -157,6 +166,109 @@ class DescribeDeviceDataHistoryRequest extends  AbstractModel {
         this.FieldName = 'FieldName' in params ? params.FieldName : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Context = 'Context' in params ? params.Context : null;
+
+    }
+}
+
+/**
+ * SearchStudioProduct返回参数结构体
+ * @class
+ */
+class SearchStudioProductResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品列表
+         * @type {Array.<ProductEntry> || null}
+         */
+        this.Products = null;
+
+        /**
+         * 产品数量
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Products) {
+            this.Products = new Array();
+            for (let z in params.Products) {
+                let obj = new ProductEntry();
+                obj.deserialize(params.Products[z]);
+                this.Products.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeviceData
+ * @class
+ */
+class DeviceData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设备证书，用于 TLS 建立链接时校验客户端身份。采用非对称加密时返回该参数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DeviceCert = null;
+
+        /**
+         * 设备名称。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 设备私钥，用于 TLS 建立链接时校验客户端身份，腾讯云后台不保存，请妥善保管。采用非对称加密时返回该参数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DevicePrivateKey = null;
+
+        /**
+         * 对称加密密钥，base64编码。采用对称加密时返回该参数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DevicePsk = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeviceCert = 'DeviceCert' in params ? params.DeviceCert : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.DevicePrivateKey = 'DevicePrivateKey' in params ? params.DevicePrivateKey : null;
+        this.DevicePsk = 'DevicePsk' in params ? params.DevicePsk : null;
 
     }
 }
@@ -199,7 +311,7 @@ class DeleteProjectRequest extends  AbstractModel {
 
         /**
          * 项目ID
-         * @type {number || null}
+         * @type {string || null}
          */
         this.ProjectId = null;
 
@@ -213,6 +325,144 @@ class DeleteProjectRequest extends  AbstractModel {
             return;
         }
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
+ * ListEventHistory请求参数结构体
+ * @class
+ */
+class ListEventHistoryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 搜索的事件类型：alert 表示告警，fault 表示故障，info 表示信息，为空则表示查询上述所有类型事件
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 起始时间（Unix 时间戳，秒级）, 为0 表示 当前时间 - 24h
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间（Unix 时间戳，秒级）, 为0 表示当前时间
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 搜索上下文, 用作查询游标
+         * @type {string || null}
+         */
+        this.Context = null;
+
+        /**
+         * 单次获取的历史数据项目的最大数量
+         * @type {number || null}
+         */
+        this.Size = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Context = 'Context' in params ? params.Context : null;
+        this.Size = 'Size' in params ? params.Size : null;
+
+    }
+}
+
+/**
+ * ListEventHistory返回参数结构体
+ * @class
+ */
+class ListEventHistoryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 搜索上下文, 用作查询游标
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Context = null;
+
+        /**
+         * 搜索结果数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 搜索结果是否已经结束
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Listover = null;
+
+        /**
+         * 搜集结果集
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<EventHistoryItem> || null}
+         */
+        this.EventHistory = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Context = 'Context' in params ? params.Context : null;
+        this.Total = 'Total' in params ? params.Total : null;
+        this.Listover = 'Listover' in params ? params.Listover : null;
+
+        if (params.EventHistory) {
+            this.EventHistory = new Array();
+            for (let z in params.EventHistory) {
+                let obj = new EventHistoryItem();
+                obj.deserialize(params.EventHistory[z]);
+                this.EventHistory.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -344,6 +594,13 @@ class ProductEntry extends  AbstractModel {
          */
         this.ModuleId = null;
 
+        /**
+         * 是否使用脚本进行二进制转json功能 可以取值 true / false
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EnableProductScript = null;
+
     }
 
     /**
@@ -367,6 +624,7 @@ class ProductEntry extends  AbstractModel {
         this.ProductType = 'ProductType' in params ? params.ProductType : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.ModuleId = 'ModuleId' in params ? params.ModuleId : null;
+        this.EnableProductScript = 'EnableProductScript' in params ? params.EnableProductScript : null;
 
     }
 }
@@ -471,7 +729,7 @@ class ProjectEntryEx extends  AbstractModel {
 
         /**
          * 项目ID
-         * @type {number || null}
+         * @type {string || null}
          */
         this.ProjectId = null;
 
@@ -602,6 +860,162 @@ class DeleteStudioProductResponse extends  AbstractModel {
 }
 
 /**
+ * 设备事件的搜索结果项
+ * @class
+ */
+class EventHistoryItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 事件的时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TimeStamp = null;
+
+        /**
+         * 事件的产品ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 事件的设备名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 事件的标识符ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EventId = null;
+
+        /**
+         * 事件的类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 事件的数据
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Data = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TimeStamp = 'TimeStamp' in params ? params.TimeStamp : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.EventId = 'EventId' in params ? params.EventId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Data = 'Data' in params ? params.Data : null;
+
+    }
+}
+
+/**
+ * DeleteDevice请求参数结构体
+ * @class
+ */
+class DeleteDeviceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID。
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名称。
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+
+    }
+}
+
+/**
+ * GetDeviceList返回参数结构体
+ * @class
+ */
+class GetDeviceListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回的设备列表, 注意列表设备的 DevicePsk 为空, 要获取设备的 DevicePsk 请使用 DescribeDevice
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DeviceInfo> || null}
+         */
+        this.Devices = null;
+
+        /**
+         * 产品下的设备总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Devices) {
+            this.Devices = new Array();
+            for (let z in params.Devices) {
+                let obj = new DeviceInfo();
+                obj.deserialize(params.Devices[z]);
+                this.Devices.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyStudioProduct返回参数结构体
  * @class
  */
@@ -662,10 +1076,28 @@ class ControlDeviceDataRequest extends  AbstractModel {
         this.DeviceName = null;
 
         /**
-         * 属性数据
+         * 属性数据, JSON格式字符串, 注意字段需要在物模型属性里定义
          * @type {string || null}
          */
         this.Data = null;
+
+        /**
+         * 请求类型 , 不填该参数或者 desired 表示下发属性给设备,  reported 表示模拟设备上报属性
+         * @type {string || null}
+         */
+        this.Method = null;
+
+        /**
+         * 设备ID，该字段有值将代替 ProductId/DeviceName , 通常情况不需要填写
+         * @type {string || null}
+         */
+        this.DeviceId = null;
+
+        /**
+         * 上报数据UNIX时间戳(毫秒), 仅对Method:reported有效
+         * @type {number || null}
+         */
+        this.DataTimestamp = null;
 
     }
 
@@ -679,6 +1111,9 @@ class ControlDeviceDataRequest extends  AbstractModel {
         this.ProductId = 'ProductId' in params ? params.ProductId : null;
         this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
         this.Data = 'Data' in params ? params.Data : null;
+        this.Method = 'Method' in params ? params.Method : null;
+        this.DeviceId = 'DeviceId' in params ? params.DeviceId : null;
+        this.DataTimestamp = 'DataTimestamp' in params ? params.DataTimestamp : null;
 
     }
 }
@@ -715,6 +1150,12 @@ class SearchStudioProductRequest extends  AbstractModel {
          */
         this.Offset = null;
 
+        /**
+         * 产品Status
+         * @type {string || null}
+         */
+        this.DevStatus = null;
+
     }
 
     /**
@@ -728,6 +1169,7 @@ class SearchStudioProductRequest extends  AbstractModel {
         this.ProductName = 'ProductName' in params ? params.ProductName : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+        this.DevStatus = 'DevStatus' in params ? params.DevStatus : null;
 
     }
 }
@@ -770,7 +1212,7 @@ class ProjectEntry extends  AbstractModel {
 
         /**
          * 项目ID
-         * @type {number || null}
+         * @type {string || null}
          */
         this.ProjectId = null;
 
@@ -932,6 +1374,55 @@ class CreateStudioProductResponse extends  AbstractModel {
 }
 
 /**
+ * CallDeviceActionSync请求参数结构体
+ * @class
+ */
+class CallDeviceActionSyncRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品Id
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 产品数据模板中行为功能的标识符，由开发者自行根据设备的应用场景定义
+         * @type {string || null}
+         */
+        this.ActionId = null;
+
+        /**
+         * 输入参数
+         * @type {string || null}
+         */
+        this.InputParams = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.ActionId = 'ActionId' in params ? params.ActionId : null;
+        this.InputParams = 'InputParams' in params ? params.InputParams : null;
+
+    }
+}
+
+/**
  * DeleteStudioProduct请求参数结构体
  * @class
  */
@@ -969,7 +1460,7 @@ class ModifyProjectRequest extends  AbstractModel {
 
         /**
          * 项目ID
-         * @type {number || null}
+         * @type {string || null}
          */
         this.ProjectId = null;
 
@@ -997,6 +1488,56 @@ class ModifyProjectRequest extends  AbstractModel {
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
         this.ProjectDesc = 'ProjectDesc' in params ? params.ProjectDesc : null;
+
+    }
+}
+
+/**
+ * CallDeviceActionSync返回参数结构体
+ * @class
+ */
+class CallDeviceActionSyncResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 调用Id
+         * @type {string || null}
+         */
+        this.ClientToken = null;
+
+        /**
+         * 输出参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OutputParams = null;
+
+        /**
+         * 返回状态
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
+        this.OutputParams = 'OutputParams' in params ? params.OutputParams : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1033,6 +1574,12 @@ class ModifyStudioProductRequest extends  AbstractModel {
          */
         this.ModuleId = null;
 
+        /**
+         * 是否打开二进制转Json功能, 取值为字符串 true/false
+         * @type {string || null}
+         */
+        this.EnableProductScript = null;
+
     }
 
     /**
@@ -1046,6 +1593,7 @@ class ModifyStudioProductRequest extends  AbstractModel {
         this.ProductName = 'ProductName' in params ? params.ProductName : null;
         this.ProductDesc = 'ProductDesc' in params ? params.ProductDesc : null;
         this.ModuleId = 'ModuleId' in params ? params.ModuleId : null;
+        this.EnableProductScript = 'EnableProductScript' in params ? params.EnableProductScript : null;
 
     }
 }
@@ -1059,7 +1607,7 @@ class DescribeDeviceDataHistoryResponse extends  AbstractModel {
         super();
 
         /**
-         * 属性字段名称
+         * 属性字段名称，对应数据模板中功能属性的标识符
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -1127,37 +1675,37 @@ class CreateStudioProductRequest extends  AbstractModel {
         super();
 
         /**
-         * 产品名称
+         * 产品名称，名称不能和已经存在的产品名称重复。命名规则：[a-zA-Z0-9:_-]{1,32}
          * @type {string || null}
          */
         this.ProductName = null;
 
         /**
-         * 产品分组模板ID
+         * 产品分组模板ID , ( 自定义模板填写1 , 控制台调用会使用预置的其他ID)
          * @type {number || null}
          */
         this.CategoryId = null;
 
         /**
-         * 产品类型
+         * 产品类型 填写 ( 0 普通产品 )
          * @type {number || null}
          */
         this.ProductType = null;
 
         /**
-         * 加密类型
+         * 加密类型 加密类型，1表示证书认证，2表示签名认证。
          * @type {string || null}
          */
         this.EncryptionType = null;
 
         /**
-         * 连接类型
+         * 连接类型 可以填写 wifi cellular else
          * @type {string || null}
          */
         this.NetType = null;
 
         /**
-         * 数据协议
+         * 数据协议 (1 使用物模型 2 为自定义)
          * @type {number || null}
          */
         this.DataProtocol = null;
@@ -1227,6 +1775,13 @@ class ProductModelDefinition extends  AbstractModel {
          */
         this.CreateTime = null;
 
+        /**
+         * 产品所属分类的模型快照（产品创建时刻的）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CategoryModel = null;
+
     }
 
     /**
@@ -1240,6 +1795,7 @@ class ProductModelDefinition extends  AbstractModel {
         this.ModelDefine = 'ModelDefine' in params ? params.ModelDefine : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.CategoryModel = 'CategoryModel' in params ? params.CategoryModel : null;
 
     }
 }
@@ -1376,24 +1932,24 @@ class DeleteProjectResponse extends  AbstractModel {
 }
 
 /**
- * GetProjectList返回参数结构体
+ * CallDeviceActionAsync返回参数结构体
  * @class
  */
-class GetProjectListResponse extends  AbstractModel {
+class CallDeviceActionAsyncResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 项目列表
-         * @type {Array.<ProjectEntryEx> || null}
+         * 调用Id
+         * @type {string || null}
          */
-        this.Projects = null;
+        this.ClientToken = null;
 
         /**
-         * 列表项个数
-         * @type {number || null}
+         * 异步调用状态
+         * @type {string || null}
          */
-        this.Total = null;
+        this.Status = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1410,17 +1966,58 @@ class GetProjectListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Projects) {
-            this.Projects = new Array();
-            for (let z in params.Projects) {
-                let obj = new ProjectEntryEx();
-                obj.deserialize(params.Projects[z]);
-                this.Projects.push(obj);
-            }
-        }
-        this.Total = 'Total' in params ? params.Total : null;
+        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
+        this.Status = 'Status' in params ? params.Status : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CallDeviceActionAsync请求参数结构体
+ * @class
+ */
+class CallDeviceActionAsyncRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品Id
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 产品数据模板中行为功能的标识符，由开发者自行根据设备的应用场景定义
+         * @type {string || null}
+         */
+        this.ActionId = null;
+
+        /**
+         * 输入参数
+         * @type {string || null}
+         */
+        this.InputParams = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.ActionId = 'ActionId' in params ? params.ActionId : null;
+        this.InputParams = 'InputParams' in params ? params.InputParams : null;
 
     }
 }
@@ -1461,24 +2058,18 @@ class DescribeDeviceDataResponse extends  AbstractModel {
 }
 
 /**
- * SearchStudioProduct返回参数结构体
+ * CreateDevice返回参数结构体
  * @class
  */
-class SearchStudioProductResponse extends  AbstractModel {
+class CreateDeviceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 产品列表
-         * @type {Array.<ProductEntry> || null}
+         * 设备参数描述。
+         * @type {DeviceData || null}
          */
-        this.Products = null;
-
-        /**
-         * 产品数量
-         * @type {number || null}
-         */
-        this.Total = null;
+        this.Data = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1496,16 +2087,82 @@ class SearchStudioProductResponse extends  AbstractModel {
             return;
         }
 
-        if (params.Products) {
-            this.Products = new Array();
-            for (let z in params.Products) {
-                let obj = new ProductEntry();
-                obj.deserialize(params.Products[z]);
-                this.Products.push(obj);
-            }
+        if (params.Data) {
+            let obj = new DeviceData();
+            obj.deserialize(params.Data)
+            this.Data = obj;
         }
-        this.Total = 'Total' in params ? params.Total : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateDevice请求参数结构体
+ * @class
+ */
+class CreateDeviceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID。
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名称。命名规则：[a-zA-Z0-9:_-]{1,48}。
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * LoRaWAN 设备地址
+         * @type {string || null}
+         */
+        this.DevAddr = null;
+
+        /**
+         * LoRaWAN 应用密钥
+         * @type {string || null}
+         */
+        this.AppKey = null;
+
+        /**
+         * LoRaWAN 设备唯一标识
+         * @type {string || null}
+         */
+        this.DevEUI = null;
+
+        /**
+         * LoRaWAN 应用会话密钥
+         * @type {string || null}
+         */
+        this.AppSKey = null;
+
+        /**
+         * LoRaWAN 网络会话密钥
+         * @type {string || null}
+         */
+        this.NwkSKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.DevAddr = 'DevAddr' in params ? params.DevAddr : null;
+        this.AppKey = 'AppKey' in params ? params.AppKey : null;
+        this.DevEUI = 'DevEUI' in params ? params.DevEUI : null;
+        this.AppSKey = 'AppSKey' in params ? params.AppSKey : null;
+        this.NwkSKey = 'NwkSKey' in params ? params.NwkSKey : null;
 
     }
 }
@@ -1520,7 +2177,7 @@ class DescribeProjectRequest extends  AbstractModel {
 
         /**
          * 项目ID
-         * @type {number || null}
+         * @type {string || null}
          */
         this.ProjectId = null;
 
@@ -1607,6 +2264,12 @@ class DescribeDeviceDataRequest extends  AbstractModel {
          */
         this.DeviceName = null;
 
+        /**
+         * 设备ID，该字段有值将代替 ProductId/DeviceName
+         * @type {string || null}
+         */
+        this.DeviceId = null;
+
     }
 
     /**
@@ -1618,6 +2281,166 @@ class DescribeDeviceDataRequest extends  AbstractModel {
         }
         this.ProductId = 'ProductId' in params ? params.ProductId : null;
         this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.DeviceId = 'DeviceId' in params ? params.DeviceId : null;
+
+    }
+}
+
+/**
+ * DeleteDevice返回参数结构体
+ * @class
+ */
+class DeleteDeviceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 设备详细信息
+ * @class
+ */
+class DeviceInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设备名
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 0: 离线, 1: 在线, 2: 获取失败, 3 未激活
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 设备密钥，密钥加密的设备返回
+         * @type {string || null}
+         */
+        this.DevicePsk = null;
+
+        /**
+         * 首次上线时间
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FirstOnlineTime = null;
+
+        /**
+         * 最后一次上线时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.LoginTime = null;
+
+        /**
+         * 设备创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 设备固件版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * 设备证书
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DeviceCert = null;
+
+        /**
+         * 日志级别
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.LogLevel = null;
+
+        /**
+         * LoRaWAN 设备地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DevAddr = null;
+
+        /**
+         * LoRaWAN 应用密钥
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AppKey = null;
+
+        /**
+         * LoRaWAN 设备唯一标识
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DevEUI = null;
+
+        /**
+         * LoRaWAN 应用会话密钥
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AppSKey = null;
+
+        /**
+         * LoRaWAN 网络会话密钥
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NwkSKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.DevicePsk = 'DevicePsk' in params ? params.DevicePsk : null;
+        this.FirstOnlineTime = 'FirstOnlineTime' in params ? params.FirstOnlineTime : null;
+        this.LoginTime = 'LoginTime' in params ? params.LoginTime : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Version = 'Version' in params ? params.Version : null;
+        this.DeviceCert = 'DeviceCert' in params ? params.DeviceCert : null;
+        this.LogLevel = 'LogLevel' in params ? params.LogLevel : null;
+        this.DevAddr = 'DevAddr' in params ? params.DevAddr : null;
+        this.AppKey = 'AppKey' in params ? params.AppKey : null;
+        this.DevEUI = 'DevEUI' in params ? params.DevEUI : null;
+        this.AppSKey = 'AppSKey' in params ? params.AppSKey : null;
+        this.NwkSKey = 'NwkSKey' in params ? params.NwkSKey : null;
 
     }
 }
@@ -1651,24 +2474,30 @@ class ModifyModelDefinitionResponse extends  AbstractModel {
 }
 
 /**
- * CreateProject请求参数结构体
+ * DescribeDevice请求参数结构体
  * @class
  */
-class CreateProjectRequest extends  AbstractModel {
+class DescribeDeviceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 项目名称
+         * 产品ID
          * @type {string || null}
          */
-        this.ProjectName = null;
+        this.ProductId = null;
 
         /**
-         * 项目描述
+         * 设备名
          * @type {string || null}
          */
-        this.ProjectDesc = null;
+        this.DeviceName = null;
+
+        /**
+         * 设备ID，该字段有值将代替 ProductId/DeviceName
+         * @type {string || null}
+         */
+        this.DeviceId = null;
 
     }
 
@@ -1679,8 +2508,51 @@ class CreateProjectRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
-        this.ProjectDesc = 'ProjectDesc' in params ? params.ProjectDesc : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.DeviceId = 'DeviceId' in params ? params.DeviceId : null;
+
+    }
+}
+
+/**
+ * GetDeviceList请求参数结构体
+ * @class
+ */
+class GetDeviceListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要查看设备列表的产品 ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 分页偏移
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 分页的大小，数值范围 10-100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -1725,12 +2597,143 @@ class DescribeStudioProductResponse extends  AbstractModel {
     }
 }
 
+/**
+ * DescribeDevice返回参数结构体
+ * @class
+ */
+class DescribeDeviceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设备信息
+         * @type {DeviceInfo || null}
+         */
+        this.Device = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Device) {
+            let obj = new DeviceInfo();
+            obj.deserialize(params.Device)
+            this.Device = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GetProjectList返回参数结构体
+ * @class
+ */
+class GetProjectListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 项目列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ProjectEntryEx> || null}
+         */
+        this.Projects = null;
+
+        /**
+         * 列表项个数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Projects) {
+            this.Projects = new Array();
+            for (let z in params.Projects) {
+                let obj = new ProjectEntryEx();
+                obj.deserialize(params.Projects[z]);
+                this.Projects.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateProject请求参数结构体
+ * @class
+ */
+class CreateProjectRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 项目名称
+         * @type {string || null}
+         */
+        this.ProjectName = null;
+
+        /**
+         * 项目描述
+         * @type {string || null}
+         */
+        this.ProjectDesc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
+        this.ProjectDesc = 'ProjectDesc' in params ? params.ProjectDesc : null;
+
+    }
+}
+
 module.exports = {
     DescribeProjectResponse: DescribeProjectResponse,
     ControlDeviceDataResponse: ControlDeviceDataResponse,
     DescribeDeviceDataHistoryRequest: DescribeDeviceDataHistoryRequest,
+    SearchStudioProductResponse: SearchStudioProductResponse,
+    DeviceData: DeviceData,
     DescribeStudioProductRequest: DescribeStudioProductRequest,
     DeleteProjectRequest: DeleteProjectRequest,
+    ListEventHistoryRequest: ListEventHistoryRequest,
+    ListEventHistoryResponse: ListEventHistoryResponse,
     DeviceDataHistoryItem: DeviceDataHistoryItem,
     ProductEntry: ProductEntry,
     GetStudioProductListResponse: GetStudioProductListResponse,
@@ -1738,6 +2741,9 @@ module.exports = {
     ProjectEntryEx: ProjectEntryEx,
     GetProjectListRequest: GetProjectListRequest,
     DeleteStudioProductResponse: DeleteStudioProductResponse,
+    EventHistoryItem: EventHistoryItem,
+    DeleteDeviceRequest: DeleteDeviceRequest,
+    GetDeviceListResponse: GetDeviceListResponse,
     ModifyStudioProductResponse: ModifyStudioProductResponse,
     ControlDeviceDataRequest: ControlDeviceDataRequest,
     SearchStudioProductRequest: SearchStudioProductRequest,
@@ -1746,8 +2752,10 @@ module.exports = {
     ModifyProjectResponse: ModifyProjectResponse,
     ModifyModelDefinitionRequest: ModifyModelDefinitionRequest,
     CreateStudioProductResponse: CreateStudioProductResponse,
+    CallDeviceActionSyncRequest: CallDeviceActionSyncRequest,
     DeleteStudioProductRequest: DeleteStudioProductRequest,
     ModifyProjectRequest: ModifyProjectRequest,
+    CallDeviceActionSyncResponse: CallDeviceActionSyncResponse,
     ModifyStudioProductRequest: ModifyStudioProductRequest,
     DescribeDeviceDataHistoryResponse: DescribeDeviceDataHistoryResponse,
     CreateStudioProductRequest: CreateStudioProductRequest,
@@ -1756,14 +2764,22 @@ module.exports = {
     ReleaseStudioProductRequest: ReleaseStudioProductRequest,
     DescribeModelDefinitionRequest: DescribeModelDefinitionRequest,
     DeleteProjectResponse: DeleteProjectResponse,
-    GetProjectListResponse: GetProjectListResponse,
+    CallDeviceActionAsyncResponse: CallDeviceActionAsyncResponse,
+    CallDeviceActionAsyncRequest: CallDeviceActionAsyncRequest,
     DescribeDeviceDataResponse: DescribeDeviceDataResponse,
-    SearchStudioProductResponse: SearchStudioProductResponse,
+    CreateDeviceResponse: CreateDeviceResponse,
+    CreateDeviceRequest: CreateDeviceRequest,
     DescribeProjectRequest: DescribeProjectRequest,
     GetStudioProductListRequest: GetStudioProductListRequest,
     DescribeDeviceDataRequest: DescribeDeviceDataRequest,
+    DeleteDeviceResponse: DeleteDeviceResponse,
+    DeviceInfo: DeviceInfo,
     ModifyModelDefinitionResponse: ModifyModelDefinitionResponse,
-    CreateProjectRequest: CreateProjectRequest,
+    DescribeDeviceRequest: DescribeDeviceRequest,
+    GetDeviceListRequest: GetDeviceListRequest,
     DescribeStudioProductResponse: DescribeStudioProductResponse,
+    DescribeDeviceResponse: DescribeDeviceResponse,
+    GetProjectListResponse: GetProjectListResponse,
+    CreateProjectRequest: CreateProjectRequest,
 
 }

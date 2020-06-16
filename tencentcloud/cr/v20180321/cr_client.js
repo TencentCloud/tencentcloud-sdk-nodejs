@@ -16,24 +16,32 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DescribeCreditResultRequest = models.DescribeCreditResultRequest;
-const DescribeTaskStatusRequest = models.DescribeTaskStatusRequest;
-const ApplyBlackListRequest = models.ApplyBlackListRequest;
-const ApplyCreditAuditRequest = models.ApplyCreditAuditRequest;
-const DownloadReportResponse = models.DownloadReportResponse;
-const DescribeCreditResultResponse = models.DescribeCreditResultResponse;
 const UploadFileRequest = models.UploadFileRequest;
 const UploadFileResponse = models.UploadFileResponse;
-const ApplyBlackListResponse = models.ApplyBlackListResponse;
-const DescribeRecordsRequest = models.DescribeRecordsRequest;
+const UploadDataJsonResponse = models.UploadDataJsonResponse;
 const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
-const DescribeRecordsResponse = models.DescribeRecordsResponse;
 const DownloadReportRequest = models.DownloadReportRequest;
 const ApplyCreditAuditResponse = models.ApplyCreditAuditResponse;
 const UploadDataFileResponse = models.UploadDataFileResponse;
 const SingleBlackApply = models.SingleBlackApply;
-const UploadDataFileRequest = models.UploadDataFileRequest;
 const SingleRecord = models.SingleRecord;
+const QueryInstantDataResponse = models.QueryInstantDataResponse;
+const DownloadRecordListRequest = models.DownloadRecordListRequest;
+const UploadDataJsonRequest = models.UploadDataJsonRequest;
+const DescribeCreditResultResponse = models.DescribeCreditResultResponse;
+const DownloadDialogueTextResponse = models.DownloadDialogueTextResponse;
+const QueryInstantDataRequest = models.QueryInstantDataRequest;
+const ApplyBlackListResponse = models.ApplyBlackListResponse;
+const DescribeRecordsRequest = models.DescribeRecordsRequest;
+const DescribeCreditResultRequest = models.DescribeCreditResultRequest;
+const ApplyBlackListRequest = models.ApplyBlackListRequest;
+const ApplyCreditAuditRequest = models.ApplyCreditAuditRequest;
+const DownloadReportResponse = models.DownloadReportResponse;
+const DownloadRecordListResponse = models.DownloadRecordListResponse;
+const UploadDataFileRequest = models.UploadDataFileRequest;
+const DescribeTaskStatusRequest = models.DescribeTaskStatusRequest;
+const DescribeRecordsResponse = models.DescribeRecordsResponse;
+const DownloadDialogueTextRequest = models.DownloadDialogueTextRequest;
 
 
 /**
@@ -47,7 +55,7 @@ class CrClient extends AbstractClient {
     }
     
     /**
-     * 用于下载当日催收和回访结果报表。当日23:00后，可获取当日催收结果，次日00:30后，可获取昨日回访结果。
+     * 用于下载结果报表。当日23:00后，可获取当日到期/逾期提醒结果，次日00:30后，可获取昨日回访结果。
      * @param {DownloadReportRequest} req
      * @param {function(string, DownloadReportResponse):void} cb
      * @public
@@ -55,6 +63,28 @@ class CrClient extends AbstractClient {
     DownloadReport(req, cb) {
         let resp = new DownloadReportResponse();
         this.request("DownloadReport", req, resp, cb);
+    }
+
+    /**
+     * 客户通过调用该接口上传需催收文档，格式需为excel格式。接口返回任务ID。
+     * @param {UploadFileRequest} req
+     * @param {function(string, UploadFileResponse):void} cb
+     * @public
+     */
+    UploadFile(req, cb) {
+        let resp = new UploadFileResponse();
+        this.request("UploadFile", req, resp, cb);
+    }
+
+    /**
+     * 上传Json格式数据，接口返回数据任务ID
+     * @param {UploadDataJsonRequest} req
+     * @param {function(string, UploadDataJsonResponse):void} cb
+     * @public
+     */
+    UploadDataJson(req, cb) {
+        let resp = new UploadDataJsonResponse();
+        this.request("UploadDataJson", req, resp, cb);
     }
 
     /**
@@ -80,14 +110,14 @@ class CrClient extends AbstractClient {
     }
 
     /**
-     * 客户通过调用该接口上传需催收文档，格式需为excel格式。接口返回任务ID。
-     * @param {UploadFileRequest} req
-     * @param {function(string, UploadFileResponse):void} cb
+     * 用于获取指定案件的对话文本内容，次日早上8:00后可查询前日对话文本内容。
+     * @param {DownloadDialogueTextRequest} req
+     * @param {function(string, DownloadDialogueTextResponse):void} cb
      * @public
      */
-    UploadFile(req, cb) {
-        let resp = new UploadFileResponse();
-        this.request("UploadFile", req, resp, cb);
+    DownloadDialogueText(req, cb) {
+        let resp = new DownloadDialogueTextResponse();
+        this.request("DownloadDialogueText", req, resp, cb);
     }
 
     /**
@@ -102,13 +132,7 @@ class CrClient extends AbstractClient {
     }
 
     /**
-     * <p>该接口包含上传下列文件：</p>
-<ol style="margin-bottom:10px;">
-  <li>入催文件：用于每天入催文件的上传</li>
-  <li>回访文件：用于每天贷中回访文件的上传</li>
-  <li>还款文件：实时上传当前已还款客户，用于还款客户的实时停催</li>
-</ol>
-接口返回数据任务ID，支持xlsx、xls、csv、zip格式，文档大小不超过50MB。
+     * 上传文件，接口返回数据任务ID，支持xlsx、xls、csv、zip格式。
      * @param {UploadDataFileRequest} req
      * @param {function(string, UploadDataFileResponse):void} cb
      * @public
@@ -122,9 +146,30 @@ class CrClient extends AbstractClient {
     }
 
     /**
-     * 加入黑名单的客户，将停止拨打。用于：
-将客户进行黑名单的增加和移除，用于对某些客户阶段性停催。
+     * 实时数据查询
+     * @param {QueryInstantDataRequest} req
+     * @param {function(string, QueryInstantDataResponse):void} cb
+     * @public
+     */
+    QueryInstantData(req, cb) {
+        let resp = new QueryInstantDataResponse();
+        this.request("QueryInstantData", req, resp, cb);
+    }
 
+    /**
+     * <p>用于获取录音下载链接清单，次日早上8:00后可查询前日录音清单。</p>
+<p>注意：录音清单中的录音下载链接仅次日20:00之前有效，请及时下载。</p>
+     * @param {DownloadRecordListRequest} req
+     * @param {function(string, DownloadRecordListResponse):void} cb
+     * @public
+     */
+    DownloadRecordList(req, cb) {
+        let resp = new DownloadRecordListResponse();
+        this.request("DownloadRecordList", req, resp, cb);
+    }
+
+    /**
+     * 提交黑名单后，黑名单中有效期内的号码将停止拨打，适用于到期/逾期提醒、回访场景。
      * @param {ApplyBlackListRequest} req
      * @param {function(string, ApplyBlackListResponse):void} cb
      * @public

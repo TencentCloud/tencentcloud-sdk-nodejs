@@ -17,30 +17,36 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * 售卖实例类型
+ * ModifyAuditConfig请求参数结构体
  * @class
  */
-class SellType extends  AbstractModel {
+class ModifyAuditConfigRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 售卖实例名称
+         * 实例 ID。
          * @type {string || null}
          */
-        this.TypeName = null;
+        this.InstanceId = null;
 
         /**
-         * 内核版本号
-         * @type {Array.<string> || null}
+         * 审计日志保存时长。支持值包括：
+30 - 一个月；
+180 - 六个月；
+365 - 一年；
+1095 - 三年；
+1825 - 五年；
+         * @type {number || null}
          */
-        this.EngineVersion = null;
+        this.LogExpireDay = null;
 
         /**
-         * 售卖规格详细配置
-         * @type {Array.<SellConfig> || null}
+         * 是否关闭审计服务。可选值：true - 关闭审计服务；false - 不关闭审计服务。默认值为 false。
+当关闭审计服务时，会删除用户的审计日志和文件，并删除该实例的所有审计策略。
+         * @type {boolean || null}
          */
-        this.Configs = null;
+        this.CloseAudit = null;
 
     }
 
@@ -51,17 +57,9 @@ class SellType extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TypeName = 'TypeName' in params ? params.TypeName : null;
-        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
-
-        if (params.Configs) {
-            this.Configs = new Array();
-            for (let z in params.Configs) {
-                let obj = new SellConfig();
-                obj.deserialize(params.Configs[z]);
-                this.Configs.push(obj);
-            }
-        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.LogExpireDay = 'LogExpireDay' in params ? params.LogExpireDay : null;
+        this.CloseAudit = 'CloseAudit' in params ? params.CloseAudit : null;
 
     }
 }
@@ -218,6 +216,24 @@ class CreateDBInstanceRequest extends  AbstractModel {
          */
         this.ResourceTags = null;
 
+        /**
+         * 置放群组 ID。
+         * @type {string || null}
+         */
+        this.DeployGroupId = null;
+
+        /**
+         * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间在当天内唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
+         * @type {string || null}
+         */
+        this.ClientToken = null;
+
+        /**
+         * 实例类型。支持值包括： "HA" - 高可用版实例， "BASIC" - 基础版实例。 不指定则默认为高可用版。
+         * @type {string || null}
+         */
+        this.DeviceType = null;
+
     }
 
     /**
@@ -272,6 +288,121 @@ class CreateDBInstanceRequest extends  AbstractModel {
                 this.ResourceTags.push(obj);
             }
         }
+        this.DeployGroupId = 'DeployGroupId' in params ? params.DeployGroupId : null;
+        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
+
+    }
+}
+
+/**
+ * 实例任务详情
+ * @class
+ */
+class TaskDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 错误码。
+         * @type {number || null}
+         */
+        this.Code = null;
+
+        /**
+         * 错误信息。
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * 实例任务 ID。
+         * @type {number || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 实例任务进度。
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * 实例任务状态，可能的值包括：
+"UNDEFINED" - 未定义；
+"INITIAL" - 初始化；
+"RUNNING" - 运行中；
+"SUCCEED" - 执行成功；
+"FAILED" - 执行失败；
+"KILLED" - 已终止；
+"REMOVED" - 已删除；
+"PAUSED" - 已暂停。
+         * @type {string || null}
+         */
+        this.TaskStatus = null;
+
+        /**
+         * 实例任务类型，可能的值包括：
+"ROLLBACK" - 数据库回档；
+"SQL OPERATION" - SQL操作；
+"IMPORT DATA" - 数据导入；
+"MODIFY PARAM" - 参数设置；
+"INITIAL" - 初始化云数据库实例；
+"REBOOT" - 重启云数据库实例；
+"OPEN GTID" - 开启云数据库实例GTID；
+"UPGRADE RO" - 只读实例升级；
+"BATCH ROLLBACK" - 数据库批量回档；
+"UPGRADE MASTER" - 主实例升级；
+"DROP TABLES" - 删除云数据库库表；
+"SWITCH DR TO MASTER" - 灾备实例提升为主。
+         * @type {string || null}
+         */
+        this.TaskType = null;
+
+        /**
+         * 实例任务开始时间。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 实例任务结束时间。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 任务关联的实例 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * 异步任务的请求 ID。
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
+        this.TaskType = 'TaskType' in params ? params.TaskType : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
 
     }
 }
@@ -488,7 +619,7 @@ class DescribeDatabasesRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 匹配数据库库名的正则表达式，规则同 MySQL 官网
+         * 匹配数据库库名的正则表达式。
          * @type {string || null}
          */
         this.DatabaseRegexp = null;
@@ -519,7 +650,7 @@ class DescribeBackupConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例短实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
+         * 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -595,30 +726,24 @@ class RoVipInfo extends  AbstractModel {
 }
 
 /**
- * DescribeAccounts请求参数结构体
+ * CreateAuditRule返回参数结构体
  * @class
  */
-class DescribeAccountsRequest extends  AbstractModel {
+class CreateAuditRuleResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+         * 审计规则 ID。
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.RuleId = null;
 
         /**
-         * 记录偏移量，默认值为0。
-         * @type {number || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.Offset = null;
-
-        /**
-         * 单次请求返回的数量，默认值为20，最小值为1，最大值为100。
-         * @type {number || null}
-         */
-        this.Limit = null;
+        this.RequestId = null;
 
     }
 
@@ -629,9 +754,8 @@ class DescribeAccountsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -665,12 +789,60 @@ class StopDBImportJobRequest extends  AbstractModel {
 }
 
 /**
- * StopDBImportJob返回参数结构体
+ * RO 实例的权重值
  * @class
  */
-class StopDBImportJobResponse extends  AbstractModel {
+class RoWeightValue extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * RO 实例 ID。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 权重值。取值范围为 [0, 100]。
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
+
+    }
+}
+
+/**
+ * DescribeSlowLogData返回参数结构体
+ * @class
+ */
+class DescribeSlowLogDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合条件的记录总数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 查询到的记录。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<SlowLogItem> || null}
+         */
+        this.Items = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -687,7 +859,195 @@ class StopDBImportJobResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new SlowLogItem();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 售卖实例类型
+ * @class
+ */
+class SellType extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 售卖实例名称
+         * @type {string || null}
+         */
+        this.TypeName = null;
+
+        /**
+         * 内核版本号
+         * @type {Array.<string> || null}
+         */
+        this.EngineVersion = null;
+
+        /**
+         * 售卖规格详细配置
+         * @type {Array.<SellConfig> || null}
+         */
+        this.Configs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TypeName = 'TypeName' in params ? params.TypeName : null;
+        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
+
+        if (params.Configs) {
+            this.Configs = new Array();
+            for (let z in params.Configs) {
+                let obj = new SellConfig();
+                obj.deserialize(params.Configs[z]);
+                this.Configs.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeDBInstanceInfo返回参数结构体
+ * @class
+ */
+class DescribeDBInstanceInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID 。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 实例名称。
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 是否开通加密，YES 已开通，NO 未开通。
+         * @type {string || null}
+         */
+        this.Encryption = null;
+
+        /**
+         * 加密使用的密钥 ID 。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * 密钥所在地域。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.KeyRegion = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.Encryption = 'Encryption' in params ? params.Encryption : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.KeyRegion = 'KeyRegion' in params ? params.KeyRegion : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeErrorLogData请求参数结构体
+ * @class
+ */
+class DescribeErrorLogDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID 。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 开始时间戳。
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间戳。
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 要匹配的关键字列表，最多支持15个关键字。
+         * @type {Array.<string> || null}
+         */
+        this.KeyWords = null;
+
+        /**
+         * 分页的返回数量，最大为400。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.KeyWords = 'KeyWords' in params ? params.KeyWords : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -723,6 +1083,56 @@ class Parameter extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.CurrentValue = 'CurrentValue' in params ? params.CurrentValue : null;
+
+    }
+}
+
+/**
+ * DescribeAuditLogFiles返回参数结构体
+ * @class
+ */
+class DescribeAuditLogFilesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合条件的审计日志文件个数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 审计日志文件详情。
+         * @type {Array.<AuditLogFile> || null}
+         */
+        this.Items = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new AuditLogFile();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1113,6 +1523,41 @@ class SqlFileInfo extends  AbstractModel {
 }
 
 /**
+ * CreateDeployGroup返回参数结构体
+ * @class
+ */
+class CreateDeployGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 置放群组ID。
+         * @type {string || null}
+         */
+        this.DeployGroupId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeployGroupId = 'DeployGroupId' in params ? params.DeployGroupId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeTables返回参数结构体
  * @class
  */
@@ -1240,6 +1685,12 @@ class SellConfig extends  AbstractModel {
          */
         this.Status = null;
 
+        /**
+         * 标签值
+         * @type {number || null}
+         */
+        this.Tag = null;
+
     }
 
     /**
@@ -1262,6 +1713,7 @@ class SellConfig extends  AbstractModel {
         this.Iops = 'Iops' in params ? params.Iops : null;
         this.Info = 'Info' in params ? params.Info : null;
         this.Status = 'Status' in params ? params.Status : null;
+        this.Tag = 'Tag' in params ? params.Tag : null;
 
     }
 }
@@ -1457,30 +1909,18 @@ class MasterInfo extends  AbstractModel {
 }
 
 /**
- * DescribeBinlogs返回参数结构体
+ * DeleteAuditRule请求参数结构体
  * @class
  */
-class DescribeBinlogsResponse extends  AbstractModel {
+class DeleteAuditRuleRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 符合查询条件的日志文件总数。
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 符合查询条件的二进制日志文件详情。
-         * @type {Array.<BinlogInfo> || null}
-         */
-        this.Items = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 审计规则 ID。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.RuleId = null;
 
     }
 
@@ -1491,17 +1931,7 @@ class DescribeBinlogsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.Items) {
-            this.Items = new Array();
-            for (let z in params.Items) {
-                let obj = new BinlogInfo();
-                obj.deserialize(params.Items[z]);
-                this.Items.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
 
     }
 }
@@ -1530,6 +1960,41 @@ class DeleteParamTemplateResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 实例参数信息
+ * @class
+ */
+class ParamInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 参数名
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 参数值
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -1598,10 +2063,38 @@ class DBSwitchInfo extends  AbstractModel {
 }
 
 /**
- * ModifyTimeWindow返回参数结构体
+ * ModifyNameOrDescByDpId返回参数结构体
  * @class
  */
-class ModifyTimeWindowResponse extends  AbstractModel {
+class ModifyNameOrDescByDpIdResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StopDBImportJob返回参数结构体
+ * @class
+ */
+class StopDBImportJobResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -1683,7 +2176,7 @@ class DescribeTasksResponse extends  AbstractModel {
 
         /**
          * 返回的实例任务信息。
-         * @type {Array.<string> || null}
+         * @type {Array.<TaskDetail> || null}
          */
         this.Items = null;
 
@@ -1703,8 +2196,143 @@ class DescribeTasksResponse extends  AbstractModel {
             return;
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.Items = 'Items' in params ? params.Items : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new TaskDetail();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ReleaseIsolatedDBInstances返回参数结构体
+ * @class
+ */
+class ReleaseIsolatedDBInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 解隔离操作的结果集。
+         * @type {Array.<ReleaseResult> || null}
+         */
+        this.Items = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new ReleaseResult();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 审计日志过滤条件。查询审计日志时，用户过滤返回的审计日志。
+ * @class
+ */
+class AuditLogFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 客户端地址。
+         * @type {Array.<string> || null}
+         */
+        this.Host = null;
+
+        /**
+         * 用户名。
+         * @type {Array.<string> || null}
+         */
+        this.User = null;
+
+        /**
+         * 数据库名称。
+         * @type {Array.<string> || null}
+         */
+        this.DBName = null;
+
+        /**
+         * 表名称。
+         * @type {Array.<string> || null}
+         */
+        this.TableName = null;
+
+        /**
+         * 审计策略名称。
+         * @type {Array.<string> || null}
+         */
+        this.PolicyName = null;
+
+        /**
+         * SQL 语句。支持模糊匹配。
+         * @type {string || null}
+         */
+        this.Sql = null;
+
+        /**
+         * SQL 类型。目前支持："SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "DROP", "ALTER", "SET", "REPLACE", "EXECUTE"。
+         * @type {string || null}
+         */
+        this.SqlType = null;
+
+        /**
+         * 执行时间。单位为：ms。表示筛选执行时间大于该值的审计日志。
+         * @type {number || null}
+         */
+        this.ExecTime = null;
+
+        /**
+         * 影响行数。表示筛选影响行数大于该值的审计日志。
+         * @type {number || null}
+         */
+        this.AffectRows = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Host = 'Host' in params ? params.Host : null;
+        this.User = 'User' in params ? params.User : null;
+        this.DBName = 'DBName' in params ? params.DBName : null;
+        this.TableName = 'TableName' in params ? params.TableName : null;
+        this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
+        this.Sql = 'Sql' in params ? params.Sql : null;
+        this.SqlType = 'SqlType' in params ? params.SqlType : null;
+        this.ExecTime = 'ExecTime' in params ? params.ExecTime : null;
+        this.AffectRows = 'AffectRows' in params ? params.AffectRows : null;
 
     }
 }
@@ -1739,7 +2367,7 @@ class DescribeRollbackRangeTimeRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例 ID 列表，单个实例Id的格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
+         * 实例 ID 列表，单个实例 ID 的格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -1754,6 +2382,34 @@ class DescribeRollbackRangeTimeRequest extends  AbstractModel {
             return;
         }
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * DescribeBackupOverview请求参数结构体
+ * @class
+ */
+class DescribeBackupOverviewRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要查询的云数据库产品类型，目前仅支持 "mysql"。
+         * @type {string || null}
+         */
+        this.Product = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Product = 'Product' in params ? params.Product : null;
 
     }
 }
@@ -1801,12 +2457,25 @@ class DescribeBackupsRequest extends  AbstractModel {
 }
 
 /**
- * ModifyDBInstanceProject返回参数结构体
+ * DescribeAuditPolicies返回参数结构体
  * @class
  */
-class ModifyDBInstanceProjectResponse extends  AbstractModel {
+class DescribeAuditPoliciesResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 符合条件的审计策略个数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 审计策略详情。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<AuditPolicy> || null}
+         */
+        this.Items = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1822,6 +2491,16 @@ class ModifyDBInstanceProjectResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new AuditPolicy();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -2080,7 +2759,12 @@ class DrInfo extends  AbstractModel {
         this.Region = null;
 
         /**
-         * 实例同步状态
+         * 实例同步状态。可能的返回值为：
+0 - 灾备未同步；
+1 - 灾备同步中；
+2 - 灾备同步成功；
+3 - 灾备同步失败；
+4 - 灾备同步修复中。
          * @type {number || null}
          */
         this.SyncStatus = null;
@@ -2126,70 +2810,98 @@ class RoGroup extends  AbstractModel {
         super();
 
         /**
-         * 只读组模式，可选值为：alone-系统自动分配只读组；allinone-新建只读组；join-使用现有只读组
+         * 只读组模式，可选值为：alone-系统自动分配只读组；allinone-新建只读组；join-使用现有只读组。
          * @type {string || null}
          */
         this.RoGroupMode = null;
 
         /**
-         * 只读组ID
+         * 只读组 ID。
          * @type {string || null}
          */
         this.RoGroupId = null;
 
         /**
-         * 只读组名称
+         * 只读组名称。
          * @type {string || null}
          */
         this.RoGroupName = null;
 
         /**
-         * 是否启用延迟超限剔除功能，启用该功能后，只读实例与主实例的延迟超过延迟阈值，只读实例将被隔离。可选值：1-启用；0-不启用
+         * 是否启用延迟超限剔除功能，启用该功能后，只读实例与主实例的延迟超过延迟阈值，只读实例将被隔离。可选值：1-启用；0-不启用。
          * @type {number || null}
          */
         this.RoOfflineDelay = null;
 
         /**
-         * 延迟阈值
+         * 延迟阈值。
          * @type {number || null}
          */
         this.RoMaxDelayTime = null;
 
         /**
-         * 最少实例保留个数，若购买只读实例数量小于设置数量将不做剔除
+         * 最少实例保留个数，若购买只读实例数量小于设置数量将不做剔除。
          * @type {number || null}
          */
         this.MinRoInGroup = null;
 
         /**
-         * 读写权重分配模式，可选值：system-系统自动分配；custom-自定义
+         * 读写权重分配模式，可选值：system-系统自动分配；custom-自定义。
          * @type {string || null}
          */
         this.WeightMode = null;
 
         /**
-         * 权重值
+         * 权重值。
          * @type {number || null}
          */
         this.Weight = null;
 
         /**
-         * 只读组中的只读实例详情
+         * 只读组中的只读实例详情。
          * @type {Array.<RoInstanceInfo> || null}
          */
         this.RoInstances = null;
 
         /**
-         * 只读组的内网IP
+         * 只读组的内网 IP。
          * @type {string || null}
          */
         this.Vip = null;
 
         /**
-         * 只读组的内网端口号
+         * 只读组的内网端口号。
          * @type {number || null}
          */
         this.Vport = null;
+
+        /**
+         * 私有网络 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * 子网 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UniqSubnetId = null;
+
+        /**
+         * 只读组所在的地域。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RoGroupRegion = null;
+
+        /**
+         * 只读组所在的可用区。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RoGroupZone = null;
 
     }
 
@@ -2219,6 +2931,80 @@ class RoGroup extends  AbstractModel {
         }
         this.Vip = 'Vip' in params ? params.Vip : null;
         this.Vport = 'Vport' in params ? params.Vport : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
+        this.RoGroupRegion = 'RoGroupRegion' in params ? params.RoGroupRegion : null;
+        this.RoGroupZone = 'RoGroupZone' in params ? params.RoGroupZone : null;
+
+    }
+}
+
+/**
+ * DescribeDataBackupOverview返回参数结构体
+ * @class
+ */
+class DescribeDataBackupOverviewResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 当前地域的数据备份总容量（包含自动备份和手动备份，单位为字节）。
+         * @type {number || null}
+         */
+        this.DataBackupVolume = null;
+
+        /**
+         * 当前地域的数据备份总个数。
+         * @type {number || null}
+         */
+        this.DataBackupCount = null;
+
+        /**
+         * 当前地域的自动备份总容量。
+         * @type {number || null}
+         */
+        this.AutoBackupVolume = null;
+
+        /**
+         * 当前地域的自动备份总个数。
+         * @type {number || null}
+         */
+        this.AutoBackupCount = null;
+
+        /**
+         * 当前地域的手动备份总容量。
+         * @type {number || null}
+         */
+        this.ManualBackupVolume = null;
+
+        /**
+         * 当前地域的手动备份总个数。
+         * @type {number || null}
+         */
+        this.ManualBackupCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DataBackupVolume = 'DataBackupVolume' in params ? params.DataBackupVolume : null;
+        this.DataBackupCount = 'DataBackupCount' in params ? params.DataBackupCount : null;
+        this.AutoBackupVolume = 'AutoBackupVolume' in params ? params.AutoBackupVolume : null;
+        this.AutoBackupCount = 'AutoBackupCount' in params ? params.AutoBackupCount : null;
+        this.ManualBackupVolume = 'ManualBackupVolume' in params ? params.ManualBackupVolume : null;
+        this.ManualBackupCount = 'ManualBackupCount' in params ? params.ManualBackupCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2308,24 +3094,18 @@ class ParameterDetail extends  AbstractModel {
 }
 
 /**
- * ModifyAccountDescription返回参数结构体
+ * DeleteAuditPolicy请求参数结构体
  * @class
  */
-class ModifyAccountDescriptionResponse extends  AbstractModel {
+class DeleteAuditPolicyRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
+         * 审计策略 ID。
          * @type {string || null}
          */
-        this.AsyncRequestId = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.PolicyId = null;
 
     }
 
@@ -2336,8 +3116,98 @@ class ModifyAccountDescriptionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+
+    }
+}
+
+/**
+ * 实例备份统计项
+ * @class
+ */
+class BackupSummaryItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 该实例自动数据备份的个数。
+         * @type {number || null}
+         */
+        this.AutoBackupCount = null;
+
+        /**
+         * 该实例自动数据备份的容量。
+         * @type {number || null}
+         */
+        this.AutoBackupVolume = null;
+
+        /**
+         * 该实例手动数据备份的个数。
+         * @type {number || null}
+         */
+        this.ManualBackupCount = null;
+
+        /**
+         * 该实例手动数据备份的容量。
+         * @type {number || null}
+         */
+        this.ManualBackupVolume = null;
+
+        /**
+         * 该实例总的数据备份（包含自动备份和手动备份）个数。
+         * @type {number || null}
+         */
+        this.DataBackupCount = null;
+
+        /**
+         * 该实例总的数据备份容量。
+         * @type {number || null}
+         */
+        this.DataBackupVolume = null;
+
+        /**
+         * 该实例日志备份的个数。
+         * @type {number || null}
+         */
+        this.BinlogBackupCount = null;
+
+        /**
+         * 该实例日志备份的容量。
+         * @type {number || null}
+         */
+        this.BinlogBackupVolume = null;
+
+        /**
+         * 该实例的总备份（包含数据备份和日志备份）占用容量。
+         * @type {number || null}
+         */
+        this.BackupVolume = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.AutoBackupCount = 'AutoBackupCount' in params ? params.AutoBackupCount : null;
+        this.AutoBackupVolume = 'AutoBackupVolume' in params ? params.AutoBackupVolume : null;
+        this.ManualBackupCount = 'ManualBackupCount' in params ? params.ManualBackupCount : null;
+        this.ManualBackupVolume = 'ManualBackupVolume' in params ? params.ManualBackupVolume : null;
+        this.DataBackupCount = 'DataBackupCount' in params ? params.DataBackupCount : null;
+        this.DataBackupVolume = 'DataBackupVolume' in params ? params.DataBackupVolume : null;
+        this.BinlogBackupCount = 'BinlogBackupCount' in params ? params.BinlogBackupCount : null;
+        this.BinlogBackupVolume = 'BinlogBackupVolume' in params ? params.BinlogBackupVolume : null;
+        this.BackupVolume = 'BackupVolume' in params ? params.BackupVolume : null;
 
     }
 }
@@ -2366,6 +3236,34 @@ class SwitchForUpgradeRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * ModifyInstanceTag返回参数结构体
+ * @class
+ */
+class ModifyInstanceTagResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2448,6 +3346,34 @@ class CreateDBInstanceHourResponse extends  AbstractModel {
 }
 
 /**
+ * ReleaseIsolatedDBInstances请求参数结构体
+ * @class
+ */
+class ReleaseIsolatedDBInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID 数组，单个实例 ID 格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
  * 二进制日志信息
  * @class
  */
@@ -2456,7 +3382,7 @@ class BinlogInfo extends  AbstractModel {
         super();
 
         /**
-         * 备份文件名
+         * binlog 日志备份文件名
          * @type {string || null}
          */
         this.Name = null;
@@ -2468,7 +3394,7 @@ class BinlogInfo extends  AbstractModel {
         this.Size = null;
 
         /**
-         * 备份快照时间，时间格式：2016-03-17 02:10:37
+         * 文件存储时间，时间格式：2016-03-17 02:10:37
          * @type {string || null}
          */
         this.Date = null;
@@ -2491,6 +3417,18 @@ class BinlogInfo extends  AbstractModel {
          */
         this.Type = null;
 
+        /**
+         * binlog 文件起始时间
+         * @type {string || null}
+         */
+        this.BinlogStartTime = null;
+
+        /**
+         * binlog 文件截止时间
+         * @type {string || null}
+         */
+        this.BinlogFinishTime = null;
+
     }
 
     /**
@@ -2506,6 +3444,57 @@ class BinlogInfo extends  AbstractModel {
         this.IntranetUrl = 'IntranetUrl' in params ? params.IntranetUrl : null;
         this.InternetUrl = 'InternetUrl' in params ? params.InternetUrl : null;
         this.Type = 'Type' in params ? params.Type : null;
+        this.BinlogStartTime = 'BinlogStartTime' in params ? params.BinlogStartTime : null;
+        this.BinlogFinishTime = 'BinlogFinishTime' in params ? params.BinlogFinishTime : null;
+
+    }
+}
+
+/**
+ * DescribeAccounts请求参数结构体
+ * @class
+ */
+class DescribeAccountsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 记录偏移量，默认值为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 单次请求返回的数量，默认值为20，最小值为1，最大值为100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 匹配账号名的正则表达式，规则同 MySQL 官网。
+         * @type {string || null}
+         */
+        this.AccountRegexp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.AccountRegexp = 'AccountRegexp' in params ? params.AccountRegexp : null;
 
     }
 }
@@ -2525,19 +3514,39 @@ class DescribeTasksRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 异步任务请求 ID，执行 CDB 相关操作返回的 AsyncRequestId。
+         * 异步任务请求 ID，执行云数据库相关操作返回的 AsyncRequestId。
          * @type {string || null}
          */
         this.AsyncRequestId = null;
 
         /**
-         * 任务类型，不传值则查询所有任务类型，可能的值：1-数据库回档；2-SQL操作；3-数据导入；5-参数设置；6-初始化；7-重启；8-开启GTID；9-只读实例升级；10-数据库批量回档；11-主实例升级；12-删除库表；13-切换为主实例。
+         * 任务类型，不传值则查询所有任务类型，支持的值包括：
+1 - 数据库回档；
+2 - SQL操作；
+3 - 数据导入；
+5 - 参数设置；
+6 - 初始化云数据库实例；
+7 - 重启云数据库实例；
+8 - 开启云数据库实例GTID；
+9 - 只读实例升级；
+10 - 数据库批量回档；
+11 - 主实例升级；
+12 - 删除云数据库库表；
+13 - 灾备实例提升为主。
          * @type {Array.<number> || null}
          */
         this.TaskTypes = null;
 
         /**
-         * 任务状态，不传值则查询所有任务状态，可能的值：-1-未定义；0-初始化; 1-运行中；2-执行成功；3-执行失败；4-已终止；5-已删除；6-已暂停。
+         * 任务状态，不传值则查询所有任务状态，支持的值包括：
+-1 - 未定义；
+0 - 初始化；
+1 - 运行中；
+2 - 执行成功；
+3 - 执行失败；
+4 - 已终止；
+5 - 已删除；
+6 - 已暂停。
          * @type {Array.<number> || null}
          */
         this.TaskStatus = null;
@@ -2596,7 +3605,8 @@ class IsolateDBInstanceResponse extends  AbstractModel {
         super();
 
         /**
-         * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
+         * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。(该返回字段目前已废弃，可以通过 DescribeDBInstances 接口查询实例的隔离状态)
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.AsyncRequestId = null;
@@ -2653,6 +3663,57 @@ class SlaveConfig extends  AbstractModel {
         }
         this.ReplicationMode = 'ReplicationMode' in params ? params.ReplicationMode : null;
         this.Zone = 'Zone' in params ? params.Zone : null;
+
+    }
+}
+
+/**
+ * DescribeErrorLogData返回参数结构体
+ * @class
+ */
+class DescribeErrorLogDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合条件的记录总数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 返回的记录。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ErrlogItem> || null}
+         */
+        this.Items = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new ErrlogItem();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2842,6 +3903,85 @@ class ImportRecord extends  AbstractModel {
         this.JobId = 'JobId' in params ? params.JobId : null;
         this.DbName = 'DbName' in params ? params.DbName : null;
         this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+
+    }
+}
+
+/**
+ * DeleteAuditLogFile返回参数结构体
+ * @class
+ */
+class DeleteAuditLogFileResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeRollbackTaskDetail返回参数结构体
+ * @class
+ */
+class DescribeRollbackTaskDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合条件的记录总数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 回档任务详情。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<RollbackTask> || null}
+         */
+        this.Items = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new RollbackTask();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3049,6 +4189,24 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
          */
         this.ResourceTags = null;
 
+        /**
+         * 置放群组 ID。
+         * @type {string || null}
+         */
+        this.DeployGroupId = null;
+
+        /**
+         * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间在当天内唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
+         * @type {string || null}
+         */
+        this.ClientToken = null;
+
+        /**
+         * 实例类型。支持值包括： "HA" - 高可用版实例， "BASIC" - 基础版实例。 不指定则默认为高可用版。
+         * @type {string || null}
+         */
+        this.DeviceType = null;
+
     }
 
     /**
@@ -3102,35 +4260,44 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
                 this.ResourceTags.push(obj);
             }
         }
+        this.DeployGroupId = 'DeployGroupId' in params ? params.DeployGroupId : null;
+        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
 
     }
 }
 
 /**
- * DescribeSlowLogs返回参数结构体
+ * DescribeDeployGroupList请求参数结构体
  * @class
  */
-class DescribeSlowLogsResponse extends  AbstractModel {
+class DescribeDeployGroupListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 符合查询条件的慢查询日志总数。
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 符合查询条件的慢查询日志详情。
-         * @type {Array.<SlowLogInfo> || null}
-         */
-        this.Items = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 置放群组 ID。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.DeployGroupId = null;
+
+        /**
+         * 置放群组名称。
+         * @type {string || null}
+         */
+        this.DeployGroupName = null;
+
+        /**
+         * 返回数量，默认为20，最大值为100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
 
     }
 
@@ -3141,17 +4308,10 @@ class DescribeSlowLogsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.Items) {
-            this.Items = new Array();
-            for (let z in params.Items) {
-                let obj = new SlowLogInfo();
-                obj.deserialize(params.Items[z]);
-                this.Items.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.DeployGroupId = 'DeployGroupId' in params ? params.DeployGroupId : null;
+        this.DeployGroupName = 'DeployGroupName' in params ? params.DeployGroupName : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -3166,6 +4326,7 @@ class RollbackInstancesInfo extends  AbstractModel {
 
         /**
          * 云数据库实例ID
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -3184,12 +4345,14 @@ class RollbackInstancesInfo extends  AbstractModel {
 
         /**
          * 待回档的数据库信息，表示整库回档
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<RollbackDBName> || null}
          */
         this.Databases = null;
 
         /**
          * 待回档的数据库表信息，表示按表回档
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<RollbackTables> || null}
          */
         this.Tables = null;
@@ -3295,7 +4458,7 @@ class BackupInfo extends  AbstractModel {
         this.InternetUrl = null;
 
         /**
-         * 日志具体类型，可能的值有：logic - 逻辑冷备，physical - 物理冷备
+         * 日志具体类型。可能的值有 "logical": 逻辑冷备， "physical": 物理冷备。
          * @type {string || null}
          */
         this.Type = null;
@@ -3307,7 +4470,7 @@ class BackupInfo extends  AbstractModel {
         this.BackupId = null;
 
         /**
-         * 备份任务状态
+         * 备份任务状态。可能的值有 "SUCCESS": 备份成功， "FAILED": 备份失败， "RUNNING": 备份进行中。
          * @type {string || null}
          */
         this.Status = null;
@@ -3319,10 +4482,28 @@ class BackupInfo extends  AbstractModel {
         this.FinishTime = null;
 
         /**
-         * 备份的创建者，可能的值：SYSTEM - 系统创建，Uin - 发起者Uin值
+         * （该值将废弃，不建议使用）备份的创建者，可能的值：SYSTEM - 系统创建，Uin - 发起者Uin值。
          * @type {string || null}
          */
         this.Creator = null;
+
+        /**
+         * 备份任务的开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 备份方法。可能的值有 "full": 全量备份， "partial": 部分备份。
+         * @type {string || null}
+         */
+        this.Method = null;
+
+        /**
+         * 备份方式。可能的值有 "manual": 手动备份， "automatic": 自动备份。
+         * @type {string || null}
+         */
+        this.Way = null;
 
     }
 
@@ -3343,6 +4524,9 @@ class BackupInfo extends  AbstractModel {
         this.Status = 'Status' in params ? params.Status : null;
         this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
         this.Creator = 'Creator' in params ? params.Creator : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Method = 'Method' in params ? params.Method : null;
+        this.Way = 'Way' in params ? params.Way : null;
 
     }
 }
@@ -3523,22 +4707,28 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.InitFlag = null;
 
         /**
-         * 是否包含灾备实例，可取值：0 - 不包含，1 - 包含。
+         * 是否包含灾备关系对应的实例，可取值：0 - 不包含，1 - 包含。默认取值为1。如果拉取主实例，则灾备关系的数据在DrInfo字段中， 如果拉取灾备实例， 则灾备关系的数据在MasterInfo字段中。灾备关系中只包含部分基本的数据，详细的数据需要自行调接口拉取。
          * @type {number || null}
          */
         this.WithDr = null;
 
         /**
-         * 是否包含只读实例，可取值：0 - 不包含，1 - 包含。
+         * 是否包含只读实例，可取值：0 - 不包含，1 - 包含。默认取值为1。
          * @type {number || null}
          */
         this.WithRo = null;
 
         /**
-         * 是否包含主实例，可取值：0 - 不包含，1 - 包含。
+         * 是否包含主实例，可取值：0 - 不包含，1 - 包含。默认取值为1。
          * @type {number || null}
          */
         this.WithMaster = null;
+
+        /**
+         * 置放群组ID列表。
+         * @type {Array.<string> || null}
+         */
+        this.DeployGroupIds = null;
 
     }
 
@@ -3574,6 +4764,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.WithDr = 'WithDr' in params ? params.WithDr : null;
         this.WithRo = 'WithRo' in params ? params.WithRo : null;
         this.WithMaster = 'WithMaster' in params ? params.WithMaster : null;
+        this.DeployGroupIds = 'DeployGroupIds' in params ? params.DeployGroupIds : null;
 
     }
 }
@@ -3615,7 +4806,8 @@ class ModifyDBInstanceVipVportResponse extends  AbstractModel {
         super();
 
         /**
-         * 异步任务ID。
+         * 异步任务ID。(该返回字段目前已废弃)
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.AsyncRequestId = null;
@@ -3739,6 +4931,12 @@ class RenewDBInstanceRequest extends  AbstractModel {
          */
         this.TimeSpan = null;
 
+        /**
+         * 如果需要将按量计费实例续费为包年包月的实例，该入参的值需要指定为 "PREPAID" 。
+         * @type {string || null}
+         */
+        this.ModifyPayType = null;
+
     }
 
     /**
@@ -3750,6 +4948,7 @@ class RenewDBInstanceRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+        this.ModifyPayType = 'ModifyPayType' in params ? params.ModifyPayType : null;
 
     }
 }
@@ -3764,12 +4963,14 @@ class RollbackTableName extends  AbstractModel {
 
         /**
          * 回档前的原数据库表名
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.TableName = null;
 
         /**
          * 回档后的新数据库表名
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.NewTableName = null;
@@ -3904,24 +5105,24 @@ class DescribeProjectSecurityGroupsResponse extends  AbstractModel {
 }
 
 /**
- * 文件上传描述
+ * ModifyDBInstanceProject请求参数结构体
  * @class
  */
-class UploadInfo extends  AbstractModel {
+class ModifyDBInstanceProjectRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 文件所有分片数
-         * @type {number || null}
+         * 实例 ID 数组，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
+         * @type {Array.<string> || null}
          */
-        this.AllSliceNum = null;
+        this.InstanceIds = null;
 
         /**
-         * 已完成分片数
+         * 项目的 ID。
          * @type {number || null}
          */
-        this.CompleteNum = null;
+        this.NewProjectId = null;
 
     }
 
@@ -3932,17 +5133,108 @@ class UploadInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AllSliceNum = 'AllSliceNum' in params ? params.AllSliceNum : null;
-        this.CompleteNum = 'CompleteNum' in params ? params.CompleteNum : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.NewProjectId = 'NewProjectId' in params ? params.NewProjectId : null;
 
     }
 }
 
 /**
- * ModifyAccountPassword返回参数结构体
+ * CreateAuditLogFile返回参数结构体
  * @class
  */
-class ModifyAccountPasswordResponse extends  AbstractModel {
+class CreateAuditLogFileResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 审计日志文件名称。
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeBackupSummaries请求参数结构体
+ * @class
+ */
+class DescribeBackupSummariesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要查询的云数据库产品类型，目前仅支持 "mysql"。
+         * @type {string || null}
+         */
+        this.Product = null;
+
+        /**
+         * 分页查询数据的偏移量。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 分页查询数据的条目限制，默认值为20。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 指定按某一项排序，可选值包括： BackupVolume: 备份容量， DataBackupVolume: 数据备份容量， BinlogBackupVolume: 日志备份容量， AutoBackupVolume: 自动备份容量， ManualBackupVolume: 手动备份容量。
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * 指定排序方向，可选值包括： ASC: 正序， DESC: 逆序。
+         * @type {string || null}
+         */
+        this.OrderDirection = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Product = 'Product' in params ? params.Product : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
+
+    }
+}
+
+/**
+ * StartBatchRollback返回参数结构体
+ * @class
+ */
+class StartBatchRollbackResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -3974,18 +5266,18 @@ class ModifyAccountPasswordResponse extends  AbstractModel {
 }
 
 /**
- * ModifyInstanceTag返回参数结构体
+ * DescribeRoGroups请求参数结构体
  * @class
  */
-class ModifyInstanceTagResponse extends  AbstractModel {
+class DescribeRoGroupsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 实例ID，格式如：cdb-c1nl9rpv或者cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.InstanceId = null;
 
     }
 
@@ -3996,7 +5288,7 @@ class ModifyInstanceTagResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -4044,6 +5336,34 @@ class DescribeDBSwitchRecordsRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyBackupConfig返回参数结构体
+ * @class
+ */
+class ModifyBackupConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeSupportedPrivileges请求参数结构体
  * @class
  */
@@ -4081,12 +5401,14 @@ class DescribeAsyncRequestInfoResponse extends  AbstractModel {
 
         /**
          * 任务执行结果。可能的取值：INITIAL - 初始化，RUNNING - 运行中，SUCCESS - 执行成功，FAILED - 执行失败，KILLED - 已终止，REMOVED - 已删除，PAUSED - 终止中。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Status = null;
 
         /**
          * 任务执行信息描述。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Info = null;
@@ -4214,18 +5536,24 @@ class ModifyInstanceTagRequest extends  AbstractModel {
 }
 
 /**
- * CloseWanService请求参数结构体
+ * DescribeDBInstanceCharset返回参数结构体
  * @class
  */
-class CloseWanServiceRequest extends  AbstractModel {
+class DescribeDBInstanceCharsetResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
+         * 实例的默认字符集，如 "latin1"，"utf8" 等。
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.Charset = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -4236,7 +5564,8 @@ class CloseWanServiceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Charset = 'Charset' in params ? params.Charset : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4277,18 +5606,18 @@ class DeleteAccountsResponse extends  AbstractModel {
 }
 
 /**
- * DescribeDBInstanceCharset返回参数结构体
+ * DescribeRoGroups返回参数结构体
  * @class
  */
-class DescribeDBInstanceCharsetResponse extends  AbstractModel {
+class DescribeRoGroupsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例的默认字符集，如 "latin1"，"utf8" 等。
-         * @type {string || null}
+         * RO组信息数组，一个实例可关联多个RO组。
+         * @type {Array.<RoGroup> || null}
          */
-        this.Charset = null;
+        this.RoGroups = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4305,8 +5634,44 @@ class DescribeDBInstanceCharsetResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Charset = 'Charset' in params ? params.Charset : null;
+
+        if (params.RoGroups) {
+            this.RoGroups = new Array();
+            for (let z in params.RoGroups) {
+                let obj = new RoGroup();
+                obj.deserialize(params.RoGroups[z]);
+                this.RoGroups.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CloseWanService请求参数结构体
+ * @class
+ */
+class CloseWanServiceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -4446,6 +5811,56 @@ class DescribeBackupDatabasesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeBackupSummaries返回参数结构体
+ * @class
+ */
+class DescribeBackupSummariesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例备份统计条目。
+         * @type {Array.<BackupSummaryItem> || null}
+         */
+        this.Items = null;
+
+        /**
+         * 实例备份统计总条目数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new BackupSummaryItem();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeInstanceParamRecords请求参数结构体
  * @class
  */
@@ -4544,6 +5959,106 @@ class DeleteTimeWindowResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeBinlogBackupOverview请求参数结构体
+ * @class
+ */
+class DescribeBinlogBackupOverviewRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要查询的云数据库产品类型，目前仅支持 "mysql"。
+         * @type {string || null}
+         */
+        this.Product = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Product = 'Product' in params ? params.Product : null;
+
+    }
+}
+
+/**
+ * 回档任务详情
+ * @class
+ */
+class RollbackTask extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务执行信息描述。
+         * @type {string || null}
+         */
+        this.Info = null;
+
+        /**
+         * 任务执行结果。可能的取值：INITIAL - 初始化，RUNNING - 运行中，SUCCESS - 执行成功，FAILED - 执行失败，KILLED - 已终止，REMOVED - 已删除，PAUSED - 终止中。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 任务执行进度。取值范围为[0, 100]。
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * 任务开始时间。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 任务结束时间。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 回档任务详情。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<RollbackInstancesInfo> || null}
+         */
+        this.Detail = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Info = 'Info' in params ? params.Info : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+        if (params.Detail) {
+            this.Detail = new Array();
+            for (let z in params.Detail) {
+                let obj = new RollbackInstancesInfo();
+                obj.deserialize(params.Detail[z]);
+                this.Detail.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeBackups返回参数结构体
  * @class
  */
@@ -4594,18 +6109,42 @@ class DescribeBackupsResponse extends  AbstractModel {
 }
 
 /**
- * DescribeTimeWindow请求参数结构体
+ * CreateAuditPolicy请求参数结构体
  * @class
  */
-class DescribeTimeWindowRequest extends  AbstractModel {
+class CreateAuditPolicyRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例ID，格式如：cdb-c1nl9rpv或者cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
+         * 审计策略名称。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 审计规则 ID。
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
         this.InstanceId = null;
+
+        /**
+         * 审计日志保存时长。支持值包括：
+30 - 一个月；
+180 - 六个月；
+365 - 一年；
+1095 - 三年；
+1825 - 五年；
+实例首次开通审计策略时，可传该值，用于设置存储日志保存天数，默认为 30 天。若实例已存在审计策略，则此参数无效，可使用 更改审计服务配置 接口修改日志存储时长。
+         * @type {number || null}
+         */
+        this.LogExpireDay = null;
 
     }
 
@@ -4616,7 +6155,45 @@ class DescribeTimeWindowRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.LogExpireDay = 'LogExpireDay' in params ? params.LogExpireDay : null;
+
+    }
+}
+
+/**
+ * ModifyInstanceParam返回参数结构体
+ * @class
+ */
+class ModifyInstanceParamResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步任务 ID，可用于查询任务进度。
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4672,54 +6249,18 @@ class DescribeDBImportRecordsResponse extends  AbstractModel {
 }
 
 /**
- * DescribeTimeWindow返回参数结构体
+ * CreateAuditPolicy返回参数结构体
  * @class
  */
-class DescribeTimeWindowResponse extends  AbstractModel {
+class CreateAuditPolicyResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 星期一的可维护时间列表。
-         * @type {Array.<string> || null}
+         * 审计策略 ID。
+         * @type {string || null}
          */
-        this.Monday = null;
-
-        /**
-         * 星期二的可维护时间列表。
-         * @type {Array.<string> || null}
-         */
-        this.Tuesday = null;
-
-        /**
-         * 星期三的可维护时间列表。
-         * @type {Array.<string> || null}
-         */
-        this.Wednesday = null;
-
-        /**
-         * 星期四的可维护时间列表。
-         * @type {Array.<string> || null}
-         */
-        this.Thursday = null;
-
-        /**
-         * 星期五的可维护时间列表。
-         * @type {Array.<string> || null}
-         */
-        this.Friday = null;
-
-        /**
-         * 星期六的可维护时间列表。
-         * @type {Array.<string> || null}
-         */
-        this.Saturday = null;
-
-        /**
-         * 星期日的可维护时间列表。
-         * @type {Array.<string> || null}
-         */
-        this.Sunday = null;
+        this.PolicyId = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4736,13 +6277,7 @@ class DescribeTimeWindowResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Monday = 'Monday' in params ? params.Monday : null;
-        this.Tuesday = 'Tuesday' in params ? params.Tuesday : null;
-        this.Wednesday = 'Wednesday' in params ? params.Wednesday : null;
-        this.Thursday = 'Thursday' in params ? params.Thursday : null;
-        this.Friday = 'Friday' in params ? params.Friday : null;
-        this.Saturday = 'Saturday' in params ? params.Saturday : null;
-        this.Sunday = 'Sunday' in params ? params.Sunday : null;
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4812,18 +6347,37 @@ class DatabaseName extends  AbstractModel {
 }
 
 /**
- * DescribeInstanceParams请求参数结构体
+ * 审计规则过滤条件
  * @class
  */
-class DescribeInstanceParamsRequest extends  AbstractModel {
+class AuditFilter extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
+         * 过滤条件参数名称。目前支持：
+SrcIp – 客户端 IP；
+User – 数据库账户；
+DB – 数据库名称；
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.Type = null;
+
+        /**
+         * 过滤条件匹配类型。目前支持：
+INC – 包含；
+EXC – 不包含；
+EQ – 等于；
+NEQ – 不等于；
+         * @type {string || null}
+         */
+        this.Compare = null;
+
+        /**
+         * 过滤条件匹配值。
+         * @type {string || null}
+         */
+        this.Value = null;
 
     }
 
@@ -4834,7 +6388,112 @@ class DescribeInstanceParamsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Compare = 'Compare' in params ? params.Compare : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * DescribeBackupConfig返回参数结构体
+ * @class
+ */
+class DescribeBackupConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 自动备份开始的最早时间点，单位为时刻。例如，2 - 凌晨 2:00。（该字段已废弃，建议使用 BackupTimeWindow 字段）
+         * @type {number || null}
+         */
+        this.StartTimeMin = null;
+
+        /**
+         * 自动备份开始的最晚时间点，单位为时刻。例如，6 - 凌晨 6:00。（该字段已废弃，建议使用 BackupTimeWindow 字段）
+         * @type {number || null}
+         */
+        this.StartTimeMax = null;
+
+        /**
+         * 备份文件保留时间，单位为天。
+         * @type {number || null}
+         */
+        this.BackupExpireDays = null;
+
+        /**
+         * 备份方式，可能的值为：physical - 物理备份，logical - 逻辑备份。
+         * @type {string || null}
+         */
+        this.BackupMethod = null;
+
+        /**
+         * Binlog 文件保留时间，单位为天。
+         * @type {number || null}
+         */
+        this.BinlogExpireDays = null;
+
+        /**
+         * 实例自动备份的时间窗。
+         * @type {CommonTimeWindow || null}
+         */
+        this.BackupTimeWindow = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTimeMin = 'StartTimeMin' in params ? params.StartTimeMin : null;
+        this.StartTimeMax = 'StartTimeMax' in params ? params.StartTimeMax : null;
+        this.BackupExpireDays = 'BackupExpireDays' in params ? params.BackupExpireDays : null;
+        this.BackupMethod = 'BackupMethod' in params ? params.BackupMethod : null;
+        this.BinlogExpireDays = 'BinlogExpireDays' in params ? params.BinlogExpireDays : null;
+
+        if (params.BackupTimeWindow) {
+            let obj = new CommonTimeWindow();
+            obj.deserialize(params.BackupTimeWindow)
+            this.BackupTimeWindow = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteDeployGroups返回参数结构体
+ * @class
+ */
+class DeleteDeployGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5080,6 +6739,69 @@ class SlaveInstanceInfo extends  AbstractModel {
 }
 
 /**
+ * ModifyDBInstanceVipVport请求参数结构体
+ * @class
+ */
+class ModifyDBInstanceVipVportRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 目标 IP。该参数和 DstPort 参数，两者必传一个。
+         * @type {string || null}
+         */
+        this.DstIp = null;
+
+        /**
+         * 目标端口，支持范围为：[1024-65535]。该参数和 DstIp 参数，两者必传一个。
+         * @type {number || null}
+         */
+        this.DstPort = null;
+
+        /**
+         * 私有网络统一 ID。
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * 子网统一 ID。
+         * @type {string || null}
+         */
+        this.UniqSubnetId = null;
+
+        /**
+         * 进行基础网络转 VPC 网络和 VPC 网络下的子网变更时，原网络中旧IP的回收时间，单位为小时，取值范围为0-168，默认值为24小时。
+         * @type {number || null}
+         */
+        this.ReleaseDuration = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.DstIp = 'DstIp' in params ? params.DstIp : null;
+        this.DstPort = 'DstPort' in params ? params.DstPort : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
+        this.ReleaseDuration = 'ReleaseDuration' in params ? params.ReleaseDuration : null;
+
+    }
+}
+
+/**
  * ModifyParamTemplate返回参数结构体
  * @class
  */
@@ -5108,24 +6830,18 @@ class ModifyParamTemplateResponse extends  AbstractModel {
 }
 
 /**
- * 实例参数信息
+ * ModifyDBInstanceSecurityGroups返回参数结构体
  * @class
  */
-class ParamInfo extends  AbstractModel {
+class ModifyDBInstanceSecurityGroupsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 参数名
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Name = null;
-
-        /**
-         * 参数值
-         * @type {string || null}
-         */
-        this.Value = null;
+        this.RequestId = null;
 
     }
 
@@ -5136,8 +6852,7 @@ class ParamInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Value = 'Value' in params ? params.Value : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5342,6 +7057,34 @@ class ZoneConf extends  AbstractModel {
 }
 
 /**
+ * BalanceRoGroupLoad返回参数结构体
+ * @class
+ */
+class BalanceRoGroupLoadResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 实例所在物理机网络监控信息
  * @class
  */
@@ -5356,25 +7099,25 @@ class DeviceNetInfo extends  AbstractModel {
         this.Conn = null;
 
         /**
-         * 网卡入包量
+         * 网卡入包量，单位：个/秒
          * @type {Array.<number> || null}
          */
         this.PackageIn = null;
 
         /**
-         * 网卡出包量
+         * 网卡出包量，单位：个/秒
          * @type {Array.<number> || null}
          */
         this.PackageOut = null;
 
         /**
-         * 入流量，单位：KB
+         * 入流量，单位：kbps
          * @type {Array.<number> || null}
          */
         this.FlowIn = null;
 
         /**
-         * 出流量，单位：KB
+         * 出流量，单位：kbps
          * @type {Array.<number> || null}
          */
         this.FlowOut = null;
@@ -5413,6 +7156,7 @@ class SlaveInfo extends  AbstractModel {
 
         /**
          * 第二备机信息
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {SlaveInstanceInfo || null}
          */
         this.Second = null;
@@ -5473,6 +7217,41 @@ class TagInfo extends  AbstractModel {
         }
         this.TagKey = 'TagKey' in params ? params.TagKey : null;
         this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
+ * 可回档时间范围
+ * @class
+ */
+class RollbackTimeRange extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例可回档开始时间，时间格式：2016-10-29 01:06:04
+         * @type {string || null}
+         */
+        this.Begin = null;
+
+        /**
+         * 实例可回档结束时间，时间格式：2016-11-02 11:44:47
+         * @type {string || null}
+         */
+        this.End = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Begin = 'Begin' in params ? params.Begin : null;
+        this.End = 'End' in params ? params.End : null;
 
     }
 }
@@ -5557,6 +7336,34 @@ class OfflineIsolatedInstancesRequest extends  AbstractModel {
             return;
         }
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * ModifyDBInstanceProject返回参数结构体
+ * @class
+ */
+class ModifyDBInstanceProjectResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5751,6 +7558,34 @@ class InquiryPriceUpgradeInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyAuditRule返回参数结构体
+ * @class
+ */
+class ModifyAuditRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeAsyncRequestInfo请求参数结构体
  * @class
  */
@@ -5779,18 +7614,148 @@ class DescribeAsyncRequestInfoRequest extends  AbstractModel {
 }
 
 /**
- * ModifyInstanceParam返回参数结构体
+ * VerifyRootAccount请求参数结构体
  * @class
  */
-class ModifyInstanceParamResponse extends  AbstractModel {
+class VerifyRootAccountRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 异步任务 ID，可用于查询任务进度。
+         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
-        this.AsyncRequestId = null;
+        this.InstanceId = null;
+
+        /**
+         * 实例 ROOT 账号的密码。
+         * @type {string || null}
+         */
+        this.Password = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Password = 'Password' in params ? params.Password : null;
+
+    }
+}
+
+/**
+ * BalanceRoGroupLoad请求参数结构体
+ * @class
+ */
+class BalanceRoGroupLoadRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * RO 组的 ID，格式如：cdbrg-c1nl9rpv。
+         * @type {string || null}
+         */
+        this.RoGroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoGroupId = 'RoGroupId' in params ? params.RoGroupId : null;
+
+    }
+}
+
+/**
+ * DescribeAuditRules请求参数结构体
+ * @class
+ */
+class DescribeAuditRulesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 审计规则 ID。
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * 审计规则名称。支持按审计规则名称进行模糊匹配查询。
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * 分页大小参数。默认值为 20，最小值为 1，最大值为 100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 分页偏移量。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
+ * DescribeBackupOverview返回参数结构体
+ * @class
+ */
+class DescribeBackupOverviewResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用户在当前地域备份的总个数（包含数据备份和日志备份）。
+         * @type {number || null}
+         */
+        this.BackupCount = null;
+
+        /**
+         * 用户在当前地域备份的总容量
+         * @type {number || null}
+         */
+        this.BackupVolume = null;
+
+        /**
+         * 用户在当前地域备份的计费容量，即超出赠送容量的部分。
+         * @type {number || null}
+         */
+        this.BillingVolume = null;
+
+        /**
+         * 用户在当前地域获得的赠送备份容量。
+         * @type {number || null}
+         */
+        this.FreeVolume = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5807,99 +7772,11 @@ class ModifyInstanceParamResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.BackupCount = 'BackupCount' in params ? params.BackupCount : null;
+        this.BackupVolume = 'BackupVolume' in params ? params.BackupVolume : null;
+        this.BillingVolume = 'BillingVolume' in params ? params.BillingVolume : null;
+        this.FreeVolume = 'FreeVolume' in params ? params.FreeVolume : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * UpgradeDBInstance请求参数结构体
- * @class
- */
-class UpgradeDBInstanceRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * 升级后的内存大小，单位：MB，为保证传入 Memory 值有效，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229) 接口获取可升级的内存规格。
-         * @type {number || null}
-         */
-        this.Memory = null;
-
-        /**
-         * 升级后的硬盘大小，单位：GB，为保证传入 Volume 值有效，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229) 接口获取可升级的硬盘范围。
-         * @type {number || null}
-         */
-        this.Volume = null;
-
-        /**
-         * 数据复制方式，支持值包括：0 - 异步复制，1 - 半同步复制，2 - 强同步复制，升级主实例时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义。
-         * @type {number || null}
-         */
-        this.ProtectMode = null;
-
-        /**
-         * 部署模式，默认为 0，支持值包括：0 - 单可用区部署，1 - 多可用区部署，升级主实例时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义。
-         * @type {number || null}
-         */
-        this.DeployMode = null;
-
-        /**
-         * 备库1的可用区信息，默认和实例的 Zone 参数一致，升级主实例为多可用区部署时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义。可通过 [获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229) 接口查询支持的可用区。
-         * @type {string || null}
-         */
-        this.SlaveZone = null;
-
-        /**
-         * 主实例数据库引擎版本，支持值包括：5.5、5.6 和 5.7。
-         * @type {string || null}
-         */
-        this.EngineVersion = null;
-
-        /**
-         * 切换访问新实例的方式，默认为 0。支持值包括：0 - 立刻切换，1 - 时间窗切换；当该值为 1 时，升级中过程中，切换访问新实例的流程将会在时间窗内进行，或者用户主动调用接口 [切换访问新实例](https://cloud.tencent.com/document/product/236/15864) 触发该流程。
-         * @type {number || null}
-         */
-        this.WaitSwitch = null;
-
-        /**
-         * 备库 2 的可用区信息，默认为空，升级主实例时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义。
-         * @type {string || null}
-         */
-        this.BackupZone = null;
-
-        /**
-         * 实例类型，默认为 master，支持值包括：master - 表示主实例，dr - 表示灾备实例，ro - 表示只读实例。
-         * @type {string || null}
-         */
-        this.InstanceRole = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.Volume = 'Volume' in params ? params.Volume : null;
-        this.ProtectMode = 'ProtectMode' in params ? params.ProtectMode : null;
-        this.DeployMode = 'DeployMode' in params ? params.DeployMode : null;
-        this.SlaveZone = 'SlaveZone' in params ? params.SlaveZone : null;
-        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
-        this.WaitSwitch = 'WaitSwitch' in params ? params.WaitSwitch : null;
-        this.BackupZone = 'BackupZone' in params ? params.BackupZone : null;
-        this.InstanceRole = 'InstanceRole' in params ? params.InstanceRole : null;
 
     }
 }
@@ -5991,6 +7868,43 @@ class DescribeUploadedFilesRequest extends  AbstractModel {
         this.Path = 'Path' in params ? params.Path : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * 结构化的错误日志详情
+ * @class
+ */
+class ErrlogItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 错误发生时间。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Timestamp = null;
+
+        /**
+         * 错误详情
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.Content = 'Content' in params ? params.Content : null;
 
     }
 }
@@ -6422,6 +8336,41 @@ class ModifyAccountPrivilegesResponse extends  AbstractModel {
 }
 
 /**
+ * 实例CPU平均使用率
+ * @class
+ */
+class DeviceCpuRateInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Cpu核编号
+         * @type {number || null}
+         */
+        this.CpuCore = null;
+
+        /**
+         * Cpu使用率
+         * @type {Array.<number> || null}
+         */
+        this.Rate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CpuCore = 'CpuCore' in params ? params.CpuCore : null;
+        this.Rate = 'Rate' in params ? params.Rate : null;
+
+    }
+}
+
+/**
  * ECDB第二个从库的配置信息，只有ECDB实例才有这个字段
  * @class
  */
@@ -6471,6 +8420,105 @@ class BackupConfig extends  AbstractModel {
 }
 
 /**
+ * ModifyAuditRule请求参数结构体
+ * @class
+ */
+class ModifyAuditRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 审计规则 ID。
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * 审计规则名称。
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * 审计规则描述。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 审计规则过滤条件。若设置了过滤条件，则不会开启全审计。
+         * @type {Array.<AuditFilter> || null}
+         */
+        this.RuleFilters = null;
+
+        /**
+         * 是否开启全审计。支持值包括：false – 不开启全审计，true – 开启全审计。用户未设置审计规则过滤条件时，默认开启全审计。
+         * @type {boolean || null}
+         */
+        this.AuditAll = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.RuleFilters) {
+            this.RuleFilters = new Array();
+            for (let z in params.RuleFilters) {
+                let obj = new AuditFilter();
+                obj.deserialize(params.RuleFilters[z]);
+                this.RuleFilters.push(obj);
+            }
+        }
+        this.AuditAll = 'AuditAll' in params ? params.AuditAll : null;
+
+    }
+}
+
+/**
+ * VerifyRootAccount返回参数结构体
+ * @class
+ */
+class VerifyRootAccountResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  *  CPU负载
  * @class
  */
@@ -6514,36 +8562,65 @@ class DeviceCpuInfo extends  AbstractModel {
 }
 
 /**
- * DescribeTagsOfInstanceIds返回参数结构体
+ * 审计策略
  * @class
  */
-class DescribeTagsOfInstanceIdsResponse extends  AbstractModel {
+class AuditPolicy extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 偏移量。
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 每页返回多少个标签。
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 实例标签信息。
-         * @type {Array.<TagsInfoOfInstance> || null}
-         */
-        this.Rows = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 审计策略 ID。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.PolicyId = null;
+
+        /**
+         * 审计策略的状态。可能返回的值为：
+"creating" - 创建中;
+"running" - 运行中;
+"paused" - 暂停中;
+"failed" - 创建失败。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 数据库实例 ID。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 审计策略创建时间。格式为 : "2019-03-20 17:09:13"。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 审计策略最后修改时间。格式为 : "2019-03-20 17:09:13"。
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+        /**
+         * 审计策略名称。
+         * @type {string || null}
+         */
+        this.PolicyName = null;
+
+        /**
+         * 审计规则 ID。
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * 审计规则名称。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RuleName = null;
 
     }
 
@@ -6554,35 +8631,38 @@ class DescribeTagsOfInstanceIdsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-
-        if (params.Rows) {
-            this.Rows = new Array();
-            for (let z in params.Rows) {
-                let obj = new TagsInfoOfInstance();
-                obj.deserialize(params.Rows[z]);
-                this.Rows.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
 
     }
 }
 
 /**
- * VerifyRootAccount返回参数结构体
+ * DescribeDeployGroupList返回参数结构体
  * @class
  */
-class VerifyRootAccountResponse extends  AbstractModel {
+class DescribeDeployGroupListResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果
-         * @type {string || null}
+         * 符合条件的记录总数。
+         * @type {number || null}
          */
-        this.AsyncRequestId = null;
+        this.Total = null;
+
+        /**
+         * 返回列表。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DeployGroupInfo> || null}
+         */
+        this.Items = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6599,7 +8679,16 @@ class VerifyRootAccountResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new DeployGroupInfo();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6697,247 +8786,30 @@ class DescribeBackupTablesRequest extends  AbstractModel {
 }
 
 /**
- * 实例详细信息
+ * DescribeBinlogs返回参数结构体
  * @class
  */
-class InstanceInfo extends  AbstractModel {
+class DescribeBinlogsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 外网状态，可能的返回值为：0-未开通外网；1-已开通外网；2-已关闭外网
+         * 符合查询条件的日志文件总数。
          * @type {number || null}
          */
-        this.WanStatus = null;
+        this.TotalCount = null;
 
         /**
-         * 可用区信息
+         * 符合查询条件的二进制日志文件详情。
+         * @type {Array.<BinlogInfo> || null}
+         */
+        this.Items = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Zone = null;
-
-        /**
-         * 初始化标志，可能的返回值为：0-未初始化；1-已初始化
-         * @type {number || null}
-         */
-        this.InitFlag = null;
-
-        /**
-         * 只读vip信息。单独开通只读实例访问的只读实例才有该字段
-         * @type {RoVipInfo || null}
-         */
-        this.RoVipInfo = null;
-
-        /**
-         * 内存容量，单位为MB
-         * @type {number || null}
-         */
-        this.Memory = null;
-
-        /**
-         * 实例状态，可能的返回值：0-创建中；1-运行中；4-隔离中；5-已隔离
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * 私有网络ID，例如：51102
-         * @type {number || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * 备机信息
-         * @type {SlaveInfo || null}
-         */
-        this.SlaveInfo = null;
-
-        /**
-         * 实例ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * 硬盘容量，单位为GB
-         * @type {number || null}
-         */
-        this.Volume = null;
-
-        /**
-         * 自动续费标志，可能的返回值：0-未开通自动续费；1-已开通自动续费；2-已关闭自动续费
-         * @type {number || null}
-         */
-        this.AutoRenew = null;
-
-        /**
-         * 数据复制方式
-         * @type {number || null}
-         */
-        this.ProtectMode = null;
-
-        /**
-         * 只读组详细信息
-         * @type {Array.<RoGroup> || null}
-         */
-        this.RoGroups = null;
-
-        /**
-         * 子网ID，例如：2333
-         * @type {number || null}
-         */
-        this.SubnetId = null;
-
-        /**
-         * 实例类型，可能的返回值：1-主实例；2-灾备实例；3-只读实例
-         * @type {number || null}
-         */
-        this.InstanceType = null;
-
-        /**
-         * 项目ID
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-        /**
-         * 地域信息
-         * @type {string || null}
-         */
-        this.Region = null;
-
-        /**
-         * 实例到期时间
-         * @type {string || null}
-         */
-        this.DeadlineTime = null;
-
-        /**
-         * 可用区部署方式
-         * @type {number || null}
-         */
-        this.DeployMode = null;
-
-        /**
-         * 实例任务状态
-         * @type {number || null}
-         */
-        this.TaskStatus = null;
-
-        /**
-         * 主实例详细信息
-         * @type {MasterInfo || null}
-         */
-        this.MasterInfo = null;
-
-        /**
-         * 实例类型，可能的返回值：“HA”-高可用版；“BASIC”-基础版
-         * @type {string || null}
-         */
-        this.DeviceType = null;
-
-        /**
-         * 内核版本
-         * @type {string || null}
-         */
-        this.EngineVersion = null;
-
-        /**
-         * 实例名称
-         * @type {string || null}
-         */
-        this.InstanceName = null;
-
-        /**
-         * 灾备实例详细信息
-         * @type {Array.<DrInfo> || null}
-         */
-        this.DrInfo = null;
-
-        /**
-         * 外网域名
-         * @type {string || null}
-         */
-        this.WanDomain = null;
-
-        /**
-         * 外网端口号
-         * @type {number || null}
-         */
-        this.WanPort = null;
-
-        /**
-         * 付费类型，可能的返回值：0-包年包月；1-按量计费
-         * @type {number || null}
-         */
-        this.PayType = null;
-
-        /**
-         * 实例创建时间
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * 实例IP
-         * @type {string || null}
-         */
-        this.Vip = null;
-
-        /**
-         * 端口号
-         * @type {number || null}
-         */
-        this.Vport = null;
-
-        /**
-         * 是否锁定标记
-         * @type {number || null}
-         */
-        this.CdbError = null;
-
-        /**
-         * 私有网络描述符，例如：“vpc-5v8wn9mg”
-         * @type {string || null}
-         */
-        this.UniqVpcId = null;
-
-        /**
-         * 子网描述符，例如：“subnet-1typ0s7d”
-         * @type {string || null}
-         */
-        this.UniqSubnetId = null;
-
-        /**
-         * 物理ID
-         * @type {string || null}
-         */
-        this.PhysicalId = null;
-
-        /**
-         * 核心数
-         * @type {number || null}
-         */
-        this.Cpu = null;
-
-        /**
-         * 每秒查询数量
-         * @type {number || null}
-         */
-        this.Qps = null;
-
-        /**
-         * 可用区中文名称
-         * @type {string || null}
-         */
-        this.ZoneName = null;
-
-        /**
-         * 物理机型
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.DeviceClass = null;
+        this.RequestId = null;
 
     }
 
@@ -6948,76 +8820,17 @@ class InstanceInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.WanStatus = 'WanStatus' in params ? params.WanStatus : null;
-        this.Zone = 'Zone' in params ? params.Zone : null;
-        this.InitFlag = 'InitFlag' in params ? params.InitFlag : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.RoVipInfo) {
-            let obj = new RoVipInfo();
-            obj.deserialize(params.RoVipInfo)
-            this.RoVipInfo = obj;
-        }
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-
-        if (params.SlaveInfo) {
-            let obj = new SlaveInfo();
-            obj.deserialize(params.SlaveInfo)
-            this.SlaveInfo = obj;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Volume = 'Volume' in params ? params.Volume : null;
-        this.AutoRenew = 'AutoRenew' in params ? params.AutoRenew : null;
-        this.ProtectMode = 'ProtectMode' in params ? params.ProtectMode : null;
-
-        if (params.RoGroups) {
-            this.RoGroups = new Array();
-            for (let z in params.RoGroups) {
-                let obj = new RoGroup();
-                obj.deserialize(params.RoGroups[z]);
-                this.RoGroups.push(obj);
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new BinlogInfo();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
             }
         }
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
-        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.Region = 'Region' in params ? params.Region : null;
-        this.DeadlineTime = 'DeadlineTime' in params ? params.DeadlineTime : null;
-        this.DeployMode = 'DeployMode' in params ? params.DeployMode : null;
-        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
-
-        if (params.MasterInfo) {
-            let obj = new MasterInfo();
-            obj.deserialize(params.MasterInfo)
-            this.MasterInfo = obj;
-        }
-        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
-        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-
-        if (params.DrInfo) {
-            this.DrInfo = new Array();
-            for (let z in params.DrInfo) {
-                let obj = new DrInfo();
-                obj.deserialize(params.DrInfo[z]);
-                this.DrInfo.push(obj);
-            }
-        }
-        this.WanDomain = 'WanDomain' in params ? params.WanDomain : null;
-        this.WanPort = 'WanPort' in params ? params.WanPort : null;
-        this.PayType = 'PayType' in params ? params.PayType : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.Vip = 'Vip' in params ? params.Vip : null;
-        this.Vport = 'Vport' in params ? params.Vport : null;
-        this.CdbError = 'CdbError' in params ? params.CdbError : null;
-        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
-        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
-        this.PhysicalId = 'PhysicalId' in params ? params.PhysicalId : null;
-        this.Cpu = 'Cpu' in params ? params.Cpu : null;
-        this.Qps = 'Qps' in params ? params.Qps : null;
-        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
-        this.DeviceClass = 'DeviceClass' in params ? params.DeviceClass : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7086,10 +8899,66 @@ class DatabasePrivilege extends  AbstractModel {
 }
 
 /**
- * ModifyDBInstanceSecurityGroups返回参数结构体
+ * RO 组的配置信息
  * @class
  */
-class ModifyDBInstanceSecurityGroupsResponse extends  AbstractModel {
+class RoGroupAttr extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * RO 组名称。
+         * @type {string || null}
+         */
+        this.RoGroupName = null;
+
+        /**
+         * RO 实例最大延迟阈值。单位为秒，最小值为 1。注意，RO 组必须设置了开启实例延迟剔除策略，该值才有效。
+         * @type {number || null}
+         */
+        this.RoMaxDelayTime = null;
+
+        /**
+         * 是否开启实例延迟剔除。支持的值包括：1 - 开启；0 - 不开启。注意，若设置开启实例延迟剔除，则必须设置延迟阈值（RoMaxDelayTime）参数。
+         * @type {number || null}
+         */
+        this.RoOfflineDelay = null;
+
+        /**
+         * 最少保留实例数。可设置为小于或等于该 RO 组下 RO 实例个数的任意值。注意，若设置值大于 RO 实例数量将不做剔除；若设置为 0，所有实例延迟超限都会被剔除。
+         * @type {number || null}
+         */
+        this.MinRoInGroup = null;
+
+        /**
+         * 权重模式。支持值包括："system" - 系统自动分配； "custom" - 用户自定义设置。注意，若设置 "custom" 模式，则必须设置 RO 实例权重配置（RoWeightValues）参数。
+         * @type {string || null}
+         */
+        this.WeightMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoGroupName = 'RoGroupName' in params ? params.RoGroupName : null;
+        this.RoMaxDelayTime = 'RoMaxDelayTime' in params ? params.RoMaxDelayTime : null;
+        this.RoOfflineDelay = 'RoOfflineDelay' in params ? params.RoOfflineDelay : null;
+        this.MinRoInGroup = 'MinRoInGroup' in params ? params.MinRoInGroup : null;
+        this.WeightMode = 'WeightMode' in params ? params.WeightMode : null;
+
+    }
+}
+
+/**
+ * ModifyAuditConfig返回参数结构体
+ * @class
+ */
+class ModifyAuditConfigResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -7237,6 +9106,70 @@ class ModifyAccountPasswordRequest extends  AbstractModel {
                 this.Accounts.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DescribeAuditPolicies请求参数结构体
+ * @class
+ */
+class DescribeAuditPoliciesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 审计策略 ID。
+         * @type {string || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * 审计策略名称。支持按审计策略名称进行模糊匹配查询。
+         * @type {string || null}
+         */
+        this.PolicyName = null;
+
+        /**
+         * 分页大小参数。默认值为 20，最小值为 1，最大值为 100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 分页偏移量。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 审计规则 ID。可使用该审计规则 ID 查询到其关联的审计策略。
+注意，参数 RuleId，InstanceId，PolicyId，PolicyName 必须至少传一个。
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
 
     }
 }
@@ -7495,6 +9428,34 @@ class AddTimeWindowResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeAuditConfig请求参数结构体
+ * @class
+ */
+class DescribeAuditConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * 可用区售卖配置
  * @class
  */
@@ -7586,6 +9547,19 @@ class ZoneSellConf extends  AbstractModel {
          */
         this.DrZone = null;
 
+        /**
+         * 是否支持跨可用区只读
+         * @type {boolean || null}
+         */
+        this.IsSupportRemoteRo = null;
+
+        /**
+         * 可支持的跨可用区只读区信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.RemoteRoZone = null;
+
     }
 
     /**
@@ -7622,6 +9596,146 @@ class ZoneSellConf extends  AbstractModel {
             this.ZoneConf = obj;
         }
         this.DrZone = 'DrZone' in params ? params.DrZone : null;
+        this.IsSupportRemoteRo = 'IsSupportRemoteRo' in params ? params.IsSupportRemoteRo : null;
+        this.RemoteRoZone = 'RemoteRoZone' in params ? params.RemoteRoZone : null;
+
+    }
+}
+
+/**
+ * DescribeAuditRules返回参数结构体
+ * @class
+ */
+class DescribeAuditRulesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合条件的审计规则个数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 审计规则详情。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<AuditRule> || null}
+         */
+        this.Items = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new AuditRule();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeBinlogBackupOverview返回参数结构体
+ * @class
+ */
+class DescribeBinlogBackupOverviewResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总的日志备份容量（单位为字节）。
+         * @type {number || null}
+         */
+        this.BinlogBackupVolume = null;
+
+        /**
+         * 总的日志备份个数。
+         * @type {number || null}
+         */
+        this.BinlogBackupCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BinlogBackupVolume = 'BinlogBackupVolume' in params ? params.BinlogBackupVolume : null;
+        this.BinlogBackupCount = 'BinlogBackupCount' in params ? params.BinlogBackupCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 用于回档的数据库表详情
+ * @class
+ */
+class RollbackTables extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据库名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * 数据库表详情
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<RollbackTableName> || null}
+         */
+        this.Table = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Database = 'Database' in params ? params.Database : null;
+
+        if (params.Table) {
+            this.Table = new Array();
+            for (let z in params.Table) {
+                let obj = new RollbackTableName();
+                obj.deserialize(params.Table[z]);
+                this.Table.push(obj);
+            }
+        }
 
     }
 }
@@ -7866,6 +9980,43 @@ class RoInstanceInfo extends  AbstractModel {
 }
 
 /**
+ * 用于回档的数据库名
+ * @class
+ */
+class RollbackDBName extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 回档前的原数据库名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DatabaseName = null;
+
+        /**
+         * 回档后的新数据库名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NewDatabaseName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
+        this.NewDatabaseName = 'NewDatabaseName' in params ? params.NewDatabaseName : null;
+
+    }
+}
+
+/**
  * CreateParamTemplate请求参数结构体
  * @class
  */
@@ -7930,6 +10081,34 @@ class CreateParamTemplateRequest extends  AbstractModel {
 }
 
 /**
+ * DeleteAuditRule返回参数结构体
+ * @class
+ */
+class DeleteAuditRuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * IsolateDBInstance请求参数结构体
  * @class
  */
@@ -7958,24 +10137,36 @@ class IsolateDBInstanceRequest extends  AbstractModel {
 }
 
 /**
- * 实例CPU平均使用率
+ * CreateAuditRule请求参数结构体
  * @class
  */
-class DeviceCpuRateInfo extends  AbstractModel {
+class CreateAuditRuleRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * Cpu核编号
-         * @type {number || null}
+         * 审计规则名称。
+         * @type {string || null}
          */
-        this.CpuCore = null;
+        this.RuleName = null;
 
         /**
-         * Cpu使用率
-         * @type {Array.<number> || null}
+         * 审计规则描述。
+         * @type {string || null}
          */
-        this.Rate = null;
+        this.Description = null;
+
+        /**
+         * 审计规则过滤条件。若设置了过滤条件，则不会开启全审计。
+         * @type {Array.<AuditFilter> || null}
+         */
+        this.RuleFilters = null;
+
+        /**
+         * 是否开启全审计。支持值包括：false – 不开启全审计，true – 开启全审计。用户未设置审计规则过滤条件时，默认开启全审计。
+         * @type {boolean || null}
+         */
+        this.AuditAll = null;
 
     }
 
@@ -7986,8 +10177,129 @@ class DeviceCpuRateInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CpuCore = 'CpuCore' in params ? params.CpuCore : null;
-        this.Rate = 'Rate' in params ? params.Rate : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.RuleFilters) {
+            this.RuleFilters = new Array();
+            for (let z in params.RuleFilters) {
+                let obj = new AuditFilter();
+                obj.deserialize(params.RuleFilters[z]);
+                this.RuleFilters.push(obj);
+            }
+        }
+        this.AuditAll = 'AuditAll' in params ? params.AuditAll : null;
+
+    }
+}
+
+/**
+ * ModifyTimeWindow请求参数结构体
+ * @class
+ */
+class ModifyTimeWindowRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 修改后的可维护时间段，其中每一个时间段的格式形如：10:00-12:00；起止时间按半个小时对齐；最短半个小时，最长三个小时；最多设置两个时间段；起止时间范围为：[00:00, 24:00]。
+         * @type {Array.<string> || null}
+         */
+        this.TimeRanges = null;
+
+        /**
+         * 指定修改哪一天的客户时间段，可能的取值为：monday，tuesday，wednesday，thursday，friday，saturday，sunday。如果不指定该值或者为空，则默认一周七天都修改。
+         * @type {Array.<string> || null}
+         */
+        this.Weekdays = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.TimeRanges = 'TimeRanges' in params ? params.TimeRanges : null;
+        this.Weekdays = 'Weekdays' in params ? params.Weekdays : null;
+
+    }
+}
+
+/**
+ * 审计日志文件
+ * @class
+ */
+class AuditLogFile extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 审计日志文件名称
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * 审计日志文件创建时间。格式为 : "2019-03-20 17:09:13"。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 文件状态值。可能返回的值为：
+"creating" - 生成中;
+"failed" - 创建失败;
+"success" - 已生成;
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 文件大小，单位为 KB。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FileSize = null;
+
+        /**
+         * 审计日志下载地址。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DownloadUrl = null;
+
+        /**
+         * 错误信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ErrMsg = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.FileSize = 'FileSize' in params ? params.FileSize : null;
+        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.ErrMsg = 'ErrMsg' in params ? params.ErrMsg : null;
 
     }
 }
@@ -8013,25 +10325,29 @@ class ModifyAccountPrivilegesRequest extends  AbstractModel {
         this.Accounts = null;
 
         /**
-         * 全局权限。其中，GlobalPrivileges 中权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE",	"DROP","REFERENCES","INDEX","ALTER","SHOW DATABASES","CREATE TEMPORARY TABLES","LOCK TABLES","EXECUTE","CREATE VIEW","SHOW VIEW","CREATE ROUTINE","ALTER ROUTINE","EVENT","TRIGGER"。
+         * 全局权限。其中，GlobalPrivileges 中权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE", "PROCESS", "DROP","REFERENCES","INDEX","ALTER","SHOW DATABASES","CREATE TEMPORARY TABLES","LOCK TABLES","EXECUTE","CREATE VIEW","SHOW VIEW","CREATE ROUTINE","ALTER ROUTINE","EVENT","TRIGGER"。
+注意，不传该参数表示清除该权限。
          * @type {Array.<string> || null}
          */
         this.GlobalPrivileges = null;
 
         /**
          * 数据库的权限。Privileges 权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE",	"DROP","REFERENCES","INDEX","ALTER","CREATE TEMPORARY TABLES","LOCK TABLES","EXECUTE","CREATE VIEW","SHOW VIEW","CREATE ROUTINE","ALTER ROUTINE","EVENT","TRIGGER"。
+注意，不传该参数表示清除该权限。
          * @type {Array.<DatabasePrivilege> || null}
          */
         this.DatabasePrivileges = null;
 
         /**
          * 数据库中表的权限。Privileges 权限的可选值为：权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE",	"DROP","REFERENCES","INDEX","ALTER","CREATE VIEW","SHOW VIEW", "TRIGGER"。
+注意，不传该参数表示清除该权限。
          * @type {Array.<TablePrivilege> || null}
          */
         this.TablePrivileges = null;
 
         /**
          * 数据库表中列的权限。Privileges 权限的可选值为："SELECT","INSERT","UPDATE","REFERENCES"。
+注意，不传该参数表示清除该权限。
          * @type {Array.<ColumnPrivilege> || null}
          */
         this.ColumnPrivileges = null;
@@ -8174,6 +10490,104 @@ class CreateBackupRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyRoGroupInfo返回参数结构体
+ * @class
+ */
+class ModifyRoGroupInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 通用时间窗
+ * @class
+ */
+class CommonTimeWindow extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 周一的时间窗，格式如： 02:00-06:00
+         * @type {string || null}
+         */
+        this.Monday = null;
+
+        /**
+         * 周二的时间窗，格式如： 02:00-06:00
+         * @type {string || null}
+         */
+        this.Tuesday = null;
+
+        /**
+         * 周三的时间窗，格式如： 02:00-06:00
+         * @type {string || null}
+         */
+        this.Wednesday = null;
+
+        /**
+         * 周四的时间窗，格式如： 02:00-06:00
+         * @type {string || null}
+         */
+        this.Thursday = null;
+
+        /**
+         * 周五的时间窗，格式如： 02:00-06:00
+         * @type {string || null}
+         */
+        this.Friday = null;
+
+        /**
+         * 周六的时间窗，格式如： 02:00-06:00
+         * @type {string || null}
+         */
+        this.Saturday = null;
+
+        /**
+         * 周日的时间窗，格式如： 02:00-06:00
+         * @type {string || null}
+         */
+        this.Sunday = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Monday = 'Monday' in params ? params.Monday : null;
+        this.Tuesday = 'Tuesday' in params ? params.Tuesday : null;
+        this.Wednesday = 'Wednesday' in params ? params.Wednesday : null;
+        this.Thursday = 'Thursday' in params ? params.Thursday : null;
+        this.Friday = 'Friday' in params ? params.Friday : null;
+        this.Saturday = 'Saturday' in params ? params.Saturday : null;
+        this.Sunday = 'Sunday' in params ? params.Sunday : null;
+
+    }
+}
+
+/**
  * 账号详细信息
  * @class
  */
@@ -8265,24 +10679,18 @@ class DescribeDBInstanceCharsetRequest extends  AbstractModel {
 }
 
 /**
- * 用于回档的数据库表详情
+ * DescribeTimeWindow请求参数结构体
  * @class
  */
-class RollbackTables extends  AbstractModel {
+class DescribeTimeWindowRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 数据库名
+         * 实例ID，格式如：cdb-c1nl9rpv或者cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
          * @type {string || null}
          */
-        this.Database = null;
-
-        /**
-         * 数据库表详情
-         * @type {Array.<RollbackTableName> || null}
-         */
-        this.Table = null;
+        this.InstanceId = null;
 
     }
 
@@ -8293,16 +10701,7 @@ class RollbackTables extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Database = 'Database' in params ? params.Database : null;
-
-        if (params.Table) {
-            this.Table = new Array();
-            for (let z in params.Table) {
-                let obj = new RollbackTableName();
-                obj.deserialize(params.Table[z]);
-                this.Table.push(obj);
-            }
-        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -8359,6 +10758,34 @@ class DescribeBackupDatabasesRequest extends  AbstractModel {
         this.SearchDatabase = 'SearchDatabase' in params ? params.SearchDatabase : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * ModifyTimeWindow返回参数结构体
+ * @class
+ */
+class ModifyTimeWindowResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8459,6 +10886,12 @@ class UpgradeDBInstanceEngineVersionRequest extends  AbstractModel {
          */
         this.WaitSwitch = null;
 
+        /**
+         * 是否是内核子版本升级，支持的值：1 - 升级内核子版本；0 - 升级数据库引擎版本。
+         * @type {number || null}
+         */
+        this.UpgradeSubversion = null;
+
     }
 
     /**
@@ -8471,6 +10904,272 @@ class UpgradeDBInstanceEngineVersionRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
         this.WaitSwitch = 'WaitSwitch' in params ? params.WaitSwitch : null;
+        this.UpgradeSubversion = 'UpgradeSubversion' in params ? params.UpgradeSubversion : null;
+
+    }
+}
+
+/**
+ * ModifyBackupConfig请求参数结构体
+ * @class
+ */
+class ModifyBackupConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例ID相同。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 备份文件的保留时间，单位为天。最小值为7天，最大值为732天。
+         * @type {number || null}
+         */
+        this.ExpireDays = null;
+
+        /**
+         * (将废弃，建议使用 BackupTimeWindow 参数) 备份时间范围，格式为：02:00-06:00，起点和终点时间目前限制为整点，目前可以选择的范围为： 00:00-12:00，02:00-06:00，06：00-10：00，10:00-14:00，14:00-18:00，18:00-22:00，22:00-02:00。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 自动备份方式，仅支持：physical - 物理冷备
+         * @type {string || null}
+         */
+        this.BackupMethod = null;
+
+        /**
+         * binlog的保留时间，单位为天。最小值为7天，最大值为732天。该值的设置不能大于备份文件的保留时间。
+         * @type {number || null}
+         */
+        this.BinlogExpireDays = null;
+
+        /**
+         * 备份时间窗，比如要设置每周二和周日 10:00-14:00之间备份，该参数如下：{"Monday": "", "Tuesday": "10:00-14:00", "Wednesday": "", "Thursday": "", "Friday": "", "Saturday": "", "Sunday": "10:00-14:00"}    （注：可以设置一周的某几天备份，但是每天的备份时间需要设置为相同的时间段。 如果设置了该字段，将忽略StartTime字段的设置）
+         * @type {CommonTimeWindow || null}
+         */
+        this.BackupTimeWindow = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ExpireDays = 'ExpireDays' in params ? params.ExpireDays : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.BackupMethod = 'BackupMethod' in params ? params.BackupMethod : null;
+        this.BinlogExpireDays = 'BinlogExpireDays' in params ? params.BinlogExpireDays : null;
+
+        if (params.BackupTimeWindow) {
+            let obj = new CommonTimeWindow();
+            obj.deserialize(params.BackupTimeWindow)
+            this.BackupTimeWindow = obj;
+        }
+
+    }
+}
+
+/**
+ * DeleteDeployGroups请求参数结构体
+ * @class
+ */
+class DeleteDeployGroupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 要删除的置放群组 ID 列表。
+         * @type {Array.<string> || null}
+         */
+        this.DeployGroupIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeployGroupIds = 'DeployGroupIds' in params ? params.DeployGroupIds : null;
+
+    }
+}
+
+/**
+ * DescribeSlowLogData请求参数结构体
+ * @class
+ */
+class DescribeSlowLogDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 开始时间戳。
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间戳。
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 客户端 Host 列表。
+         * @type {Array.<string> || null}
+         */
+        this.UserHosts = null;
+
+        /**
+         * 客户端 用户名 列表。
+         * @type {Array.<string> || null}
+         */
+        this.UserNames = null;
+
+        /**
+         * 访问的 数据库 列表。
+         * @type {Array.<string> || null}
+         */
+        this.DataBases = null;
+
+        /**
+         * 排序字段。当前支持：Timestamp,QueryTime,LockTime,RowsExamined,RowsSent 。
+         * @type {string || null}
+         */
+        this.SortBy = null;
+
+        /**
+         * 升序还是降序排列。当前支持：ASC,DESC 。
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 一次性返回的记录数量，最大为400。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.UserHosts = 'UserHosts' in params ? params.UserHosts : null;
+        this.UserNames = 'UserNames' in params ? params.UserNames : null;
+        this.DataBases = 'DataBases' in params ? params.DataBases : null;
+        this.SortBy = 'SortBy' in params ? params.SortBy : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * DescribeAuditConfig返回参数结构体
+ * @class
+ */
+class DescribeAuditConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 审计日志保存时长。目前支持的值包括：[0，30，180，365，1095，1825]。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.LogExpireDay = null;
+
+        /**
+         * 审计日志存储类型。目前支持的值包括："storage" - 存储型。
+         * @type {string || null}
+         */
+        this.LogType = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogExpireDay = 'LogExpireDay' in params ? params.LogExpireDay : null;
+        this.LogType = 'LogType' in params ? params.LogType : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyAccountDescription返回参数结构体
+ * @class
+ */
+class ModifyAccountDescriptionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8518,42 +11217,51 @@ class UpgradeDBInstanceResponse extends  AbstractModel {
 }
 
 /**
- * ModifyDBInstanceVipVport请求参数结构体
+ * CreateAuditLogFile请求参数结构体
  * @class
  */
-class ModifyDBInstanceVipVportRequest extends  AbstractModel {
+class CreateAuditLogFileRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
+         * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 目标 IP。该参数和 DstPort 参数，两者必传一个。
+         * 开始时间，格式为："2017-07-12 10:29:20"。
          * @type {string || null}
          */
-        this.DstIp = null;
+        this.StartTime = null;
 
         /**
-         * 目标端口，支持范围为：[1024-65535]。该参数和 DstIp 参数，两者必传一个。
-         * @type {number || null}
-         */
-        this.DstPort = null;
-
-        /**
-         * 私有网络统一 ID。
+         * 结束时间，格式为："2017-07-12 10:29:20"。
          * @type {string || null}
          */
-        this.UniqVpcId = null;
+        this.EndTime = null;
 
         /**
-         * 子网统一 ID。
+         * 排序方式。支持值包括："ASC" - 升序，"DESC" - 降序。
          * @type {string || null}
          */
-        this.UniqSubnetId = null;
+        this.Order = null;
+
+        /**
+         * 排序字段。支持值包括：
+"timestamp" - 时间戳；
+"affectRows" - 影响行数；
+"execTime" - 执行时间。
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * 过滤条件。可按设置的过滤条件过滤日志。
+         * @type {AuditLogFilter || null}
+         */
+        this.Filter = null;
 
     }
 
@@ -8565,21 +11273,74 @@ class ModifyDBInstanceVipVportRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.DstIp = 'DstIp' in params ? params.DstIp : null;
-        this.DstPort = 'DstPort' in params ? params.DstPort : null;
-        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
-        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+
+        if (params.Filter) {
+            let obj = new AuditLogFilter();
+            obj.deserialize(params.Filter)
+            this.Filter = obj;
+        }
 
     }
 }
 
 /**
- * ModifyBackupConfig返回参数结构体
+ * DeleteAuditLogFile请求参数结构体
  * @class
  */
-class ModifyBackupConfigResponse extends  AbstractModel {
+class DeleteAuditLogFileRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 审计日志文件名称。
+         * @type {string || null}
+         */
+        this.FileName = null;
+
+        /**
+         * 实例 ID。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * DescribeSlowLogs返回参数结构体
+ * @class
+ */
+class DescribeSlowLogsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合查询条件的慢查询日志总数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 符合查询条件的慢查询日志详情。
+         * @type {Array.<SlowLogInfo> || null}
+         */
+        this.Items = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -8595,6 +11356,16 @@ class ModifyBackupConfigResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new SlowLogInfo();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -8707,13 +11478,13 @@ class DescribeTagsOfInstanceIdsRequest extends  AbstractModel {
         this.InstanceIds = null;
 
         /**
-         * 偏移量。
+         * 分页偏移量。
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * 每页返回多少个标签。
+         * 分页大小。
          * @type {number || null}
          */
         this.Limit = null;
@@ -8735,18 +11506,72 @@ class DescribeTagsOfInstanceIdsRequest extends  AbstractModel {
 }
 
 /**
- * OpenWanService请求参数结构体
+ * UpgradeDBInstance请求参数结构体
  * @class
  */
-class OpenWanServiceRequest extends  AbstractModel {
+class UpgradeDBInstanceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
+         * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
          * @type {string || null}
          */
         this.InstanceId = null;
+
+        /**
+         * 升级后的内存大小，单位：MB，为保证传入 Memory 值有效，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229) 接口获取可升级的内存规格。
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * 升级后的硬盘大小，单位：GB，为保证传入 Volume 值有效，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229) 接口获取可升级的硬盘范围。
+         * @type {number || null}
+         */
+        this.Volume = null;
+
+        /**
+         * 数据复制方式，支持值包括：0 - 异步复制，1 - 半同步复制，2 - 强同步复制，升级主实例时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义。
+         * @type {number || null}
+         */
+        this.ProtectMode = null;
+
+        /**
+         * 部署模式，默认为 0，支持值包括：0 - 单可用区部署，1 - 多可用区部署，升级主实例时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义。
+         * @type {number || null}
+         */
+        this.DeployMode = null;
+
+        /**
+         * 备库1的可用区信息，默认和实例的 Zone 参数一致，升级主实例为多可用区部署时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义。可通过 [获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229) 接口查询支持的可用区。
+         * @type {string || null}
+         */
+        this.SlaveZone = null;
+
+        /**
+         * 主实例数据库引擎版本，支持值包括：5.5、5.6 和 5.7。
+         * @type {string || null}
+         */
+        this.EngineVersion = null;
+
+        /**
+         * 切换访问新实例的方式，默认为 0。支持值包括：0 - 立刻切换，1 - 时间窗切换；当该值为 1 时，升级中过程中，切换访问新实例的流程将会在时间窗内进行，或者用户主动调用接口 [切换访问新实例](https://cloud.tencent.com/document/product/236/15864) 触发该流程。
+         * @type {number || null}
+         */
+        this.WaitSwitch = null;
+
+        /**
+         * 备库 2 的可用区信息，默认为空，升级主实例时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义。
+         * @type {string || null}
+         */
+        this.BackupZone = null;
+
+        /**
+         * 实例类型，默认为 master，支持值包括：master - 表示主实例，dr - 表示灾备实例，ro - 表示只读实例。
+         * @type {string || null}
+         */
+        this.InstanceRole = null;
 
     }
 
@@ -8758,6 +11583,92 @@ class OpenWanServiceRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+        this.ProtectMode = 'ProtectMode' in params ? params.ProtectMode : null;
+        this.DeployMode = 'DeployMode' in params ? params.DeployMode : null;
+        this.SlaveZone = 'SlaveZone' in params ? params.SlaveZone : null;
+        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
+        this.WaitSwitch = 'WaitSwitch' in params ? params.WaitSwitch : null;
+        this.BackupZone = 'BackupZone' in params ? params.BackupZone : null;
+        this.InstanceRole = 'InstanceRole' in params ? params.InstanceRole : null;
+
+    }
+}
+
+/**
+ * DescribeTimeWindow返回参数结构体
+ * @class
+ */
+class DescribeTimeWindowResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 星期一的可维护时间列表。
+         * @type {Array.<string> || null}
+         */
+        this.Monday = null;
+
+        /**
+         * 星期二的可维护时间列表。
+         * @type {Array.<string> || null}
+         */
+        this.Tuesday = null;
+
+        /**
+         * 星期三的可维护时间列表。
+         * @type {Array.<string> || null}
+         */
+        this.Wednesday = null;
+
+        /**
+         * 星期四的可维护时间列表。
+         * @type {Array.<string> || null}
+         */
+        this.Thursday = null;
+
+        /**
+         * 星期五的可维护时间列表。
+         * @type {Array.<string> || null}
+         */
+        this.Friday = null;
+
+        /**
+         * 星期六的可维护时间列表。
+         * @type {Array.<string> || null}
+         */
+        this.Saturday = null;
+
+        /**
+         * 星期日的可维护时间列表。
+         * @type {Array.<string> || null}
+         */
+        this.Sunday = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Monday = 'Monday' in params ? params.Monday : null;
+        this.Tuesday = 'Tuesday' in params ? params.Tuesday : null;
+        this.Wednesday = 'Wednesday' in params ? params.Wednesday : null;
+        this.Thursday = 'Thursday' in params ? params.Thursday : null;
+        this.Friday = 'Friday' in params ? params.Friday : null;
+        this.Saturday = 'Saturday' in params ? params.Saturday : null;
+        this.Sunday = 'Sunday' in params ? params.Sunday : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8786,6 +11697,34 @@ class DeleteTimeWindowRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * DeleteAuditPolicy返回参数结构体
+ * @class
+ */
+class DeleteAuditPolicyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8981,6 +11920,34 @@ class InitDBInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeDataBackupOverview请求参数结构体
+ * @class
+ */
+class DescribeDataBackupOverviewRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要查询的云数据库产品类型，目前仅支持 "mysql"。
+         * @type {string || null}
+         */
+        this.Product = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Product = 'Product' in params ? params.Product : null;
+
+    }
+}
+
+/**
  * DescribeParamTemplateInfo返回参数结构体
  * @class
  */
@@ -9143,6 +12110,34 @@ class RestartDBInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeDBInstanceInfo请求参数结构体
+ * @class
+ */
+class DescribeDBInstanceInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID 。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * DescribeInstanceParams返回参数结构体
  * @class
  */
@@ -9243,24 +12238,42 @@ class DescribeDBZoneConfigResponse extends  AbstractModel {
 }
 
 /**
- * ModifyDBInstanceProject请求参数结构体
+ * CreateDeployGroup请求参数结构体
  * @class
  */
-class ModifyDBInstanceProjectRequest extends  AbstractModel {
+class CreateDeployGroupRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例 ID 数组，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
-         * @type {Array.<string> || null}
+         * 置放群组名称，最长不能超过60个字符。
+         * @type {string || null}
          */
-        this.InstanceIds = null;
+        this.DeployGroupName = null;
 
         /**
-         * 项目的 ID。
+         * 置放群组描述，最长不能超过200个字符。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 置放群组的亲和性策略，目前仅支持取值为1，策略1表示同台物理机上限制实例的个数。
+         * @type {Array.<number> || null}
+         */
+        this.Affinity = null;
+
+        /**
+         * 置放群组亲和性策略1中同台物理机上实例的限制个数。
          * @type {number || null}
          */
-        this.NewProjectId = null;
+        this.LimitNum = null;
+
+        /**
+         * 置放群组机型属性，可选参数：SH12+SH02、TS85。
+         * @type {Array.<string> || null}
+         */
+        this.DevClass = null;
 
     }
 
@@ -9271,8 +12284,11 @@ class ModifyDBInstanceProjectRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
-        this.NewProjectId = 'NewProjectId' in params ? params.NewProjectId : null;
+        this.DeployGroupName = 'DeployGroupName' in params ? params.DeployGroupName : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Affinity = 'Affinity' in params ? params.Affinity : null;
+        this.LimitNum = 'LimitNum' in params ? params.LimitNum : null;
+        this.DevClass = 'DevClass' in params ? params.DevClass : null;
 
     }
 }
@@ -9476,24 +12492,18 @@ class DescribeAccountsResponse extends  AbstractModel {
 }
 
 /**
- * 可回档时间范围
+ * OpenWanService请求参数结构体
  * @class
  */
-class RollbackTimeRange extends  AbstractModel {
+class OpenWanServiceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例可回档开始时间，时间格式：2016-10-29 01:06:04
+         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
          * @type {string || null}
          */
-        this.Begin = null;
-
-        /**
-         * 实例可回档结束时间，时间格式：2016-11-02 11:44:47
-         * @type {string || null}
-         */
-        this.End = null;
+        this.InstanceId = null;
 
     }
 
@@ -9504,8 +12514,7 @@ class RollbackTimeRange extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Begin = 'Begin' in params ? params.Begin : null;
-        this.End = 'End' in params ? params.End : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -9546,30 +12555,60 @@ class DeleteBackupRequest extends  AbstractModel {
 }
 
 /**
- * ModifyTimeWindow请求参数结构体
+ * ModifyNameOrDescByDpId请求参数结构体
  * @class
  */
-class ModifyTimeWindowRequest extends  AbstractModel {
+class ModifyNameOrDescByDpIdRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+         * 置放群组 ID。
+         * @type {string || null}
+         */
+        this.DeployGroupId = null;
+
+        /**
+         * 置放群组名称，最长不能超过60个字符。置放群组名和置放群组描述不能都为空。
+         * @type {string || null}
+         */
+        this.DeployGroupName = null;
+
+        /**
+         * 置放群组描述，最长不能超过200个字符。置放群组名和置放群组描述不能都为空。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeployGroupId = 'DeployGroupId' in params ? params.DeployGroupId : null;
+        this.DeployGroupName = 'DeployGroupName' in params ? params.DeployGroupName : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
+ * DescribeInstanceParams请求参数结构体
+ * @class
+ */
+class DescribeInstanceParamsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
          * @type {string || null}
          */
         this.InstanceId = null;
-
-        /**
-         * 修改后的可维护时间段，其中每一个时间段的格式形如：10:00-12:00；起止时间按半个小时对齐；最短半个小时，最长三个小时；最多设置两个时间段；起止时间范围为：[00:00, 24:00]。
-         * @type {Array.<string> || null}
-         */
-        this.TimeRanges = null;
-
-        /**
-         * 指定修改哪一天的客户时间段，可能的取值为：monday，tuesday，wednesday，thursday，friday，saturday，sunday。如果不指定该值或者为空，则默认一周七天都修改。
-         * @type {Array.<string> || null}
-         */
-        this.Weekdays = null;
 
     }
 
@@ -9581,55 +12620,94 @@ class ModifyTimeWindowRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.TimeRanges = 'TimeRanges' in params ? params.TimeRanges : null;
-        this.Weekdays = 'Weekdays' in params ? params.Weekdays : null;
 
     }
 }
 
 /**
- * DescribeBackupConfig返回参数结构体
+ * 结构化的慢日志详情
  * @class
  */
-class DescribeBackupConfigResponse extends  AbstractModel {
+class SlowLogItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 备份开始的最早时间点，单位为时刻。例如，2 - 凌晨 2:00。
+         * Sql的执行时间。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.StartTimeMin = null;
+        this.Timestamp = null;
 
         /**
-         * 备份开始的最晚时间点，单位为时刻。例如，6 - 凌晨 6:00。
+         * Sql的执行时长。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.StartTimeMax = null;
+        this.QueryTime = null;
 
         /**
-         * 备份过期时间，单位为天。
-         * @type {number || null}
-         */
-        this.BackupExpireDays = null;
-
-        /**
-         * 备份方式，可能的值为：physical - 物理备份，logical - 逻辑备份。
+         * Sql语句。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.BackupMethod = null;
+        this.SqlText = null;
 
         /**
-         * Binlog 过期时间，单位为天。
-         * @type {number || null}
-         */
-        this.BinlogExpireDays = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 客户端地址。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.UserHost = null;
+
+        /**
+         * 用户名。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * 数据库名。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Database = null;
+
+        /**
+         * 锁时长。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.LockTime = null;
+
+        /**
+         * 扫描行数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RowsExamined = null;
+
+        /**
+         * 结果集行数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RowsSent = null;
+
+        /**
+         * Sql模板。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SqlTemplate = null;
+
+        /**
+         * Sql语句的md5。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Md5 = null;
 
     }
 
@@ -9640,47 +12718,17 @@ class DescribeBackupConfigResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StartTimeMin = 'StartTimeMin' in params ? params.StartTimeMin : null;
-        this.StartTimeMax = 'StartTimeMax' in params ? params.StartTimeMax : null;
-        this.BackupExpireDays = 'BackupExpireDays' in params ? params.BackupExpireDays : null;
-        this.BackupMethod = 'BackupMethod' in params ? params.BackupMethod : null;
-        this.BinlogExpireDays = 'BinlogExpireDays' in params ? params.BinlogExpireDays : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * StartBatchRollback返回参数结构体
- * @class
- */
-class StartBatchRollbackResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
-         * @type {string || null}
-         */
-        this.AsyncRequestId = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+        this.QueryTime = 'QueryTime' in params ? params.QueryTime : null;
+        this.SqlText = 'SqlText' in params ? params.SqlText : null;
+        this.UserHost = 'UserHost' in params ? params.UserHost : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Database = 'Database' in params ? params.Database : null;
+        this.LockTime = 'LockTime' in params ? params.LockTime : null;
+        this.RowsExamined = 'RowsExamined' in params ? params.RowsExamined : null;
+        this.RowsSent = 'RowsSent' in params ? params.RowsSent : null;
+        this.SqlTemplate = 'SqlTemplate' in params ? params.SqlTemplate : null;
+        this.Md5 = 'Md5' in params ? params.Md5 : null;
 
     }
 }
@@ -9762,6 +12810,90 @@ class DescribeDeviceMonitorInfoResponse extends  AbstractModel {
 }
 
 /**
+ * 文件上传描述
+ * @class
+ */
+class UploadInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 文件所有分片数
+         * @type {number || null}
+         */
+        this.AllSliceNum = null;
+
+        /**
+         * 已完成分片数
+         * @type {number || null}
+         */
+        this.CompleteNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AllSliceNum = 'AllSliceNum' in params ? params.AllSliceNum : null;
+        this.CompleteNum = 'CompleteNum' in params ? params.CompleteNum : null;
+
+    }
+}
+
+/**
+ * DescribeRollbackTaskDetail请求参数结构体
+ * @class
+ */
+class DescribeRollbackTaskDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID。与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872)。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 异步任务 ID。
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * 分页参数，每次请求返回的记录数。默认值为 20，最大值为 100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 分页偏移量。默认为 0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
  * DescribeRollbackRangeTime返回参数结构体
  * @class
  */
@@ -9812,24 +12944,92 @@ class DescribeRollbackRangeTimeResponse extends  AbstractModel {
 }
 
 /**
- * VerifyRootAccount请求参数结构体
+ * ModifyRoGroupInfo请求参数结构体
  * @class
  */
-class VerifyRootAccountRequest extends  AbstractModel {
+class ModifyRoGroupInfoRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+         * RO 组的 ID。
+         * @type {string || null}
+         */
+        this.RoGroupId = null;
+
+        /**
+         * RO 组的详细信息。
+         * @type {RoGroupAttr || null}
+         */
+        this.RoGroupInfo = null;
+
+        /**
+         * RO 组内实例的权重。若修改 RO 组的权重模式为用户自定义模式（custom），则必须设置该参数，且需要设置每个 RO 实例的权重值。
+         * @type {Array.<RoWeightValue> || null}
+         */
+        this.RoWeightValues = null;
+
+        /**
+         * 是否重新均衡 RO 组内的 RO 实例的负载。支持值包括：1 - 重新均衡负载；0 - 不重新均衡负载。默认值为 0。注意，设置为重新均衡负载是，RO 组内 RO 实例会有一次数据库连接瞬断，请确保应用程序能重连数据库。
+         * @type {number || null}
+         */
+        this.IsBalanceRoLoad = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoGroupId = 'RoGroupId' in params ? params.RoGroupId : null;
+
+        if (params.RoGroupInfo) {
+            let obj = new RoGroupAttr();
+            obj.deserialize(params.RoGroupInfo)
+            this.RoGroupInfo = obj;
+        }
+
+        if (params.RoWeightValues) {
+            this.RoWeightValues = new Array();
+            for (let z in params.RoWeightValues) {
+                let obj = new RoWeightValue();
+                obj.deserialize(params.RoWeightValues[z]);
+                this.RoWeightValues.push(obj);
+            }
+        }
+        this.IsBalanceRoLoad = 'IsBalanceRoLoad' in params ? params.IsBalanceRoLoad : null;
+
+    }
+}
+
+/**
+ * 解隔离任务结果
+ * @class
+ */
+class ReleaseResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID。
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 实例 ROOT 账号的密码。
+         * 实例解隔离操作的结果值。返回值为0表示成功。
+         * @type {number || null}
+         */
+        this.Code = null;
+
+        /**
+         * 实例解隔离操作的错误信息。
          * @type {string || null}
          */
-        this.Password = null;
+        this.Message = null;
 
     }
 
@@ -9841,7 +13041,355 @@ class VerifyRootAccountRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Password = 'Password' in params ? params.Password : null;
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+    }
+}
+
+/**
+ * 实例详细信息
+ * @class
+ */
+class InstanceInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 外网状态，可能的返回值为：0-未开通外网；1-已开通外网；2-已关闭外网
+         * @type {number || null}
+         */
+        this.WanStatus = null;
+
+        /**
+         * 可用区信息
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 初始化标志，可能的返回值为：0-未初始化；1-已初始化
+         * @type {number || null}
+         */
+        this.InitFlag = null;
+
+        /**
+         * 只读vip信息。单独开通只读实例访问的只读实例才有该字段
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {RoVipInfo || null}
+         */
+        this.RoVipInfo = null;
+
+        /**
+         * 内存容量，单位为 MB
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * 实例状态，可能的返回值：0-创建中；1-运行中；4-隔离中；5-已隔离
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 私有网络 ID，例如：51102
+         * @type {number || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 备机信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {SlaveInfo || null}
+         */
+        this.SlaveInfo = null;
+
+        /**
+         * 实例 ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 硬盘容量，单位为 GB
+         * @type {number || null}
+         */
+        this.Volume = null;
+
+        /**
+         * 自动续费标志，可能的返回值：0-未开通自动续费；1-已开通自动续费；2-已关闭自动续费
+         * @type {number || null}
+         */
+        this.AutoRenew = null;
+
+        /**
+         * 数据复制方式。0 - 异步复制；1 - 半同步复制；2 - 强同步复制
+         * @type {number || null}
+         */
+        this.ProtectMode = null;
+
+        /**
+         * 只读组详细信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<RoGroup> || null}
+         */
+        this.RoGroups = null;
+
+        /**
+         * 子网 ID，例如：2333
+         * @type {number || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 实例类型，可能的返回值：1-主实例；2-灾备实例；3-只读实例
+         * @type {number || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * 项目 ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 地域信息
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 实例到期时间
+         * @type {string || null}
+         */
+        this.DeadlineTime = null;
+
+        /**
+         * 可用区部署方式。可能的值为：0 - 单可用区；1 - 多可用区
+         * @type {number || null}
+         */
+        this.DeployMode = null;
+
+        /**
+         * 实例任务状态。0 - 没有任务 ,1 - 升级中,2 - 数据导入中,3 - 开放Slave中,4 - 外网访问开通中,5 - 批量操作执行中,6 - 回档中,7 - 外网访问关闭中,8 - 密码修改中,9 - 实例名修改中,10 - 重启中,12 - 自建迁移中,13 - 删除库表中,14 - 灾备实例创建同步中,15 - 升级待切换,16 - 升级切换中,17 - 升级切换完成
+         * @type {number || null}
+         */
+        this.TaskStatus = null;
+
+        /**
+         * 主实例详细信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MasterInfo || null}
+         */
+        this.MasterInfo = null;
+
+        /**
+         * 实例类型，可能的返回值：“HA”-高可用版；“FE”-金融版；“BASIC”-基础版
+         * @type {string || null}
+         */
+        this.DeviceType = null;
+
+        /**
+         * 内核版本
+         * @type {string || null}
+         */
+        this.EngineVersion = null;
+
+        /**
+         * 实例名称
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 灾备实例详细信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DrInfo> || null}
+         */
+        this.DrInfo = null;
+
+        /**
+         * 外网域名
+         * @type {string || null}
+         */
+        this.WanDomain = null;
+
+        /**
+         * 外网端口号
+         * @type {number || null}
+         */
+        this.WanPort = null;
+
+        /**
+         * 付费类型，可能的返回值：0-包年包月；1-按量计费
+         * @type {number || null}
+         */
+        this.PayType = null;
+
+        /**
+         * 实例创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 实例 IP
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * 端口号
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+        /**
+         * 是否锁定标记
+         * @type {number || null}
+         */
+        this.CdbError = null;
+
+        /**
+         * 私有网络描述符，例如：“vpc-5v8wn9mg”
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * 子网描述符，例如：“subnet-1typ0s7d”
+         * @type {string || null}
+         */
+        this.UniqSubnetId = null;
+
+        /**
+         * 物理 ID
+         * @type {string || null}
+         */
+        this.PhysicalId = null;
+
+        /**
+         * 核心数
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * 每秒查询数量
+         * @type {number || null}
+         */
+        this.Qps = null;
+
+        /**
+         * 可用区中文名称
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+        /**
+         * 物理机型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DeviceClass = null;
+
+        /**
+         * 置放群组 ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DeployGroupId = null;
+
+        /**
+         * 可用区 ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WanStatus = 'WanStatus' in params ? params.WanStatus : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.InitFlag = 'InitFlag' in params ? params.InitFlag : null;
+
+        if (params.RoVipInfo) {
+            let obj = new RoVipInfo();
+            obj.deserialize(params.RoVipInfo)
+            this.RoVipInfo = obj;
+        }
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+
+        if (params.SlaveInfo) {
+            let obj = new SlaveInfo();
+            obj.deserialize(params.SlaveInfo)
+            this.SlaveInfo = obj;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+        this.AutoRenew = 'AutoRenew' in params ? params.AutoRenew : null;
+        this.ProtectMode = 'ProtectMode' in params ? params.ProtectMode : null;
+
+        if (params.RoGroups) {
+            this.RoGroups = new Array();
+            for (let z in params.RoGroups) {
+                let obj = new RoGroup();
+                obj.deserialize(params.RoGroups[z]);
+                this.RoGroups.push(obj);
+            }
+        }
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.DeadlineTime = 'DeadlineTime' in params ? params.DeadlineTime : null;
+        this.DeployMode = 'DeployMode' in params ? params.DeployMode : null;
+        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
+
+        if (params.MasterInfo) {
+            let obj = new MasterInfo();
+            obj.deserialize(params.MasterInfo)
+            this.MasterInfo = obj;
+        }
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
+        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+
+        if (params.DrInfo) {
+            this.DrInfo = new Array();
+            for (let z in params.DrInfo) {
+                let obj = new DrInfo();
+                obj.deserialize(params.DrInfo[z]);
+                this.DrInfo.push(obj);
+            }
+        }
+        this.WanDomain = 'WanDomain' in params ? params.WanDomain : null;
+        this.WanPort = 'WanPort' in params ? params.WanPort : null;
+        this.PayType = 'PayType' in params ? params.PayType : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
+        this.CdbError = 'CdbError' in params ? params.CdbError : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
+        this.PhysicalId = 'PhysicalId' in params ? params.PhysicalId : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Qps = 'Qps' in params ? params.Qps : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.DeviceClass = 'DeviceClass' in params ? params.DeviceClass : null;
+        this.DeployGroupId = 'DeployGroupId' in params ? params.DeployGroupId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
 
     }
 }
@@ -9882,42 +13430,36 @@ class OpenWanServiceResponse extends  AbstractModel {
 }
 
 /**
- * ModifyBackupConfig请求参数结构体
+ * DescribeAuditLogFiles请求参数结构体
  * @class
  */
-class ModifyBackupConfigRequest extends  AbstractModel {
+class DescribeAuditLogFilesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例ID相同。
+         * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 备份文件的保留时间，单位为天。最小值为7天，最大值为732天。
+         * 分页大小参数。默认值为 20，最小值为 1，最大值为 100。
          * @type {number || null}
          */
-        this.ExpireDays = null;
+        this.Limit = null;
 
         /**
-         * 备份时间范围，格式为：02:00-06:00，起点和终点时间目前限制为整点，目前可以选择的范围为： 02:00-06:00，06：00-10：00，10:00-14:00，14:00-18:00，18:00-22:00，22:00-02:00。
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * 目标备份方法，可选的值：logical - 逻辑冷备，physical - 物理冷备；默认备份方法为 逻辑冷备。
-         * @type {string || null}
-         */
-        this.BackupMethod = null;
-
-        /**
-         * binlog的保留时间，单位为天。最小值为7天，最大值为732天。该值的设置不能大于备份文件的保留时间。
+         * 分页偏移量。
          * @type {number || null}
          */
-        this.BinlogExpireDays = null;
+        this.Offset = null;
+
+        /**
+         * 审计日志文件名。
+         * @type {string || null}
+         */
+        this.FileName = null;
 
     }
 
@@ -9929,10 +13471,182 @@ class ModifyBackupConfigRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.ExpireDays = 'ExpireDays' in params ? params.ExpireDays : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.BackupMethod = 'BackupMethod' in params ? params.BackupMethod : null;
-        this.BinlogExpireDays = 'BinlogExpireDays' in params ? params.BinlogExpireDays : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+
+    }
+}
+
+/**
+ * DescribeTagsOfInstanceIds返回参数结构体
+ * @class
+ */
+class DescribeTagsOfInstanceIdsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 分页偏移量。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 分页大小。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 实例标签信息。
+         * @type {Array.<TagsInfoOfInstance> || null}
+         */
+        this.Rows = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Rows) {
+            this.Rows = new Array();
+            for (let z in params.Rows) {
+                let obj = new TagsInfoOfInstance();
+                obj.deserialize(params.Rows[z]);
+                this.Rows.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyAccountPassword返回参数结构体
+ * @class
+ */
+class ModifyAccountPasswordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 审计规则
+ * @class
+ */
+class AuditRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 审计规则 Id。
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * 审计规则创建时间。格式为 : "2019-03-20 17:09:13"。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 审计规则最后修改时间。格式为 : "2019-03-20 17:09:13"。
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+        /**
+         * 审计规则名称。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * 审计规则描述。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 审计规则过滤条件。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<AuditFilter> || null}
+         */
+        this.RuleFilters = null;
+
+        /**
+         * 是否开启全审计。
+         * @type {boolean || null}
+         */
+        this.AuditAll = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.RuleFilters) {
+            this.RuleFilters = new Array();
+            for (let z in params.RuleFilters) {
+                let obj = new AuditFilter();
+                obj.deserialize(params.RuleFilters[z]);
+                this.RuleFilters.push(obj);
+            }
+        }
+        this.AuditAll = 'AuditAll' in params ? params.AuditAll : null;
 
     }
 }
@@ -10036,24 +13750,63 @@ class DescribeDBInstanceGTIDRequest extends  AbstractModel {
 }
 
 /**
- * 用于回档的数据库名
+ * 置放群组信息
  * @class
  */
-class RollbackDBName extends  AbstractModel {
+class DeployGroupInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 回档前的原数据库名
+         * 置放群组 ID。
          * @type {string || null}
          */
-        this.DatabaseName = null;
+        this.DeployGroupId = null;
 
         /**
-         * 回档后的新数据库名
+         * 置放群组名称。
          * @type {string || null}
          */
-        this.NewDatabaseName = null;
+        this.DeployGroupName = null;
+
+        /**
+         * 创建时间。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 置放群组实例配额，表示一个置放群组中可容纳的最大实例数目。
+         * @type {number || null}
+         */
+        this.Quota = null;
+
+        /**
+         * 置放群组亲和性策略，目前仅支持策略1，即在物理机纬度打散实例的分布。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Affinity = null;
+
+        /**
+         * 置放群组亲和性策略1中，同台物理机上同个置放群组实例的限制个数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.LimitNum = null;
+
+        /**
+         * 置放群组详细信息。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 置放群组物理机型属性。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DevClass = null;
 
     }
 
@@ -10064,8 +13817,14 @@ class RollbackDBName extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.DatabaseName = 'DatabaseName' in params ? params.DatabaseName : null;
-        this.NewDatabaseName = 'NewDatabaseName' in params ? params.NewDatabaseName : null;
+        this.DeployGroupId = 'DeployGroupId' in params ? params.DeployGroupId : null;
+        this.DeployGroupName = 'DeployGroupName' in params ? params.DeployGroupName : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Quota = 'Quota' in params ? params.Quota : null;
+        this.Affinity = 'Affinity' in params ? params.Affinity : null;
+        this.LimitNum = 'LimitNum' in params ? params.LimitNum : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.DevClass = 'DevClass' in params ? params.DevClass : null;
 
     }
 }
@@ -10113,18 +13872,24 @@ class InquiryPriceUpgradeInstancesResponse extends  AbstractModel {
 }
 
 module.exports = {
-    SellType: SellType,
+    ModifyAuditConfigRequest: ModifyAuditConfigRequest,
     CreateDBInstanceRequest: CreateDBInstanceRequest,
+    TaskDetail: TaskDetail,
     DeviceDiskInfo: DeviceDiskInfo,
     DescribeAccountPrivilegesResponse: DescribeAccountPrivilegesResponse,
     CreateDBImportJobRequest: CreateDBImportJobRequest,
     DescribeDatabasesRequest: DescribeDatabasesRequest,
     DescribeBackupConfigRequest: DescribeBackupConfigRequest,
     RoVipInfo: RoVipInfo,
-    DescribeAccountsRequest: DescribeAccountsRequest,
+    CreateAuditRuleResponse: CreateAuditRuleResponse,
     StopDBImportJobRequest: StopDBImportJobRequest,
-    StopDBImportJobResponse: StopDBImportJobResponse,
+    RoWeightValue: RoWeightValue,
+    DescribeSlowLogDataResponse: DescribeSlowLogDataResponse,
+    SellType: SellType,
+    DescribeDBInstanceInfoResponse: DescribeDBInstanceInfoResponse,
+    DescribeErrorLogDataRequest: DescribeErrorLogDataRequest,
     Parameter: Parameter,
+    DescribeAuditLogFilesResponse: DescribeAuditLogFilesResponse,
     DescribeDBInstanceRebootTimeRequest: DescribeDBInstanceRebootTimeRequest,
     DescribeSlowLogsRequest: DescribeSlowLogsRequest,
     Inbound: Inbound,
@@ -10133,21 +13898,27 @@ module.exports = {
     RegionSellConf: RegionSellConf,
     InstanceRollbackRangeTime: InstanceRollbackRangeTime,
     SqlFileInfo: SqlFileInfo,
+    CreateDeployGroupResponse: CreateDeployGroupResponse,
     DescribeTablesResponse: DescribeTablesResponse,
     SellConfig: SellConfig,
     DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
     MasterInfo: MasterInfo,
-    DescribeBinlogsResponse: DescribeBinlogsResponse,
+    DeleteAuditRuleRequest: DeleteAuditRuleRequest,
     DeleteParamTemplateResponse: DeleteParamTemplateResponse,
+    ParamInfo: ParamInfo,
     DescribeDefaultParamsRequest: DescribeDefaultParamsRequest,
     DBSwitchInfo: DBSwitchInfo,
-    ModifyTimeWindowResponse: ModifyTimeWindowResponse,
+    ModifyNameOrDescByDpIdResponse: ModifyNameOrDescByDpIdResponse,
+    StopDBImportJobResponse: StopDBImportJobResponse,
     DescribeDBPriceResponse: DescribeDBPriceResponse,
     DescribeTasksResponse: DescribeTasksResponse,
+    ReleaseIsolatedDBInstancesResponse: ReleaseIsolatedDBInstancesResponse,
+    AuditLogFilter: AuditLogFilter,
     DescribeParamTemplatesRequest: DescribeParamTemplatesRequest,
     DescribeRollbackRangeTimeRequest: DescribeRollbackRangeTimeRequest,
+    DescribeBackupOverviewRequest: DescribeBackupOverviewRequest,
     DescribeBackupsRequest: DescribeBackupsRequest,
-    ModifyDBInstanceProjectResponse: ModifyDBInstanceProjectResponse,
+    DescribeAuditPoliciesResponse: DescribeAuditPoliciesResponse,
     DescribeInstanceParamRecordsResponse: DescribeInstanceParamRecordsResponse,
     DescribeDBInstanceGTIDResponse: DescribeDBInstanceGTIDResponse,
     OpenDBInstanceGTIDResponse: OpenDBInstanceGTIDResponse,
@@ -10156,20 +13927,28 @@ module.exports = {
     DeleteParamTemplateRequest: DeleteParamTemplateRequest,
     DrInfo: DrInfo,
     RoGroup: RoGroup,
+    DescribeDataBackupOverviewResponse: DescribeDataBackupOverviewResponse,
     ParameterDetail: ParameterDetail,
-    ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
+    DeleteAuditPolicyRequest: DeleteAuditPolicyRequest,
+    BackupSummaryItem: BackupSummaryItem,
     SwitchForUpgradeRequest: SwitchForUpgradeRequest,
+    ModifyInstanceTagResponse: ModifyInstanceTagResponse,
     CreateParamTemplateResponse: CreateParamTemplateResponse,
     CreateDBInstanceHourResponse: CreateDBInstanceHourResponse,
+    ReleaseIsolatedDBInstancesRequest: ReleaseIsolatedDBInstancesRequest,
     BinlogInfo: BinlogInfo,
+    DescribeAccountsRequest: DescribeAccountsRequest,
     DescribeTasksRequest: DescribeTasksRequest,
     IsolateDBInstanceResponse: IsolateDBInstanceResponse,
     SlaveConfig: SlaveConfig,
+    DescribeErrorLogDataResponse: DescribeErrorLogDataResponse,
     AddTimeWindowRequest: AddTimeWindowRequest,
     ImportRecord: ImportRecord,
+    DeleteAuditLogFileResponse: DeleteAuditLogFileResponse,
+    DescribeRollbackTaskDetailResponse: DescribeRollbackTaskDetailResponse,
     CreateAccountsRequest: CreateAccountsRequest,
     CreateDBInstanceHourRequest: CreateDBInstanceHourRequest,
-    DescribeSlowLogsResponse: DescribeSlowLogsResponse,
+    DescribeDeployGroupListRequest: DescribeDeployGroupListRequest,
     RollbackInstancesInfo: RollbackInstancesInfo,
     DescribeParamTemplateInfoRequest: DescribeParamTemplateInfoRequest,
     BackupInfo: BackupInfo,
@@ -10184,56 +13963,74 @@ module.exports = {
     DeleteBackupResponse: DeleteBackupResponse,
     ModifyInstanceParamRequest: ModifyInstanceParamRequest,
     DescribeProjectSecurityGroupsResponse: DescribeProjectSecurityGroupsResponse,
-    UploadInfo: UploadInfo,
-    ModifyAccountPasswordResponse: ModifyAccountPasswordResponse,
-    ModifyInstanceTagResponse: ModifyInstanceTagResponse,
+    ModifyDBInstanceProjectRequest: ModifyDBInstanceProjectRequest,
+    CreateAuditLogFileResponse: CreateAuditLogFileResponse,
+    DescribeBackupSummariesRequest: DescribeBackupSummariesRequest,
+    StartBatchRollbackResponse: StartBatchRollbackResponse,
+    DescribeRoGroupsRequest: DescribeRoGroupsRequest,
     DescribeDBSwitchRecordsRequest: DescribeDBSwitchRecordsRequest,
+    ModifyBackupConfigResponse: ModifyBackupConfigResponse,
     DescribeSupportedPrivilegesRequest: DescribeSupportedPrivilegesRequest,
     DescribeAsyncRequestInfoResponse: DescribeAsyncRequestInfoResponse,
     CreateDBInstanceResponse: CreateDBInstanceResponse,
     ModifyInstanceTagRequest: ModifyInstanceTagRequest,
-    CloseWanServiceRequest: CloseWanServiceRequest,
-    DeleteAccountsResponse: DeleteAccountsResponse,
     DescribeDBInstanceCharsetResponse: DescribeDBInstanceCharsetResponse,
+    DeleteAccountsResponse: DeleteAccountsResponse,
+    DescribeRoGroupsResponse: DescribeRoGroupsResponse,
+    CloseWanServiceRequest: CloseWanServiceRequest,
     RestartDBInstancesResponse: RestartDBInstancesResponse,
     ParamTemplateInfo: ParamTemplateInfo,
     DescribeBackupDatabasesResponse: DescribeBackupDatabasesResponse,
+    DescribeBackupSummariesResponse: DescribeBackupSummariesResponse,
     DescribeInstanceParamRecordsRequest: DescribeInstanceParamRecordsRequest,
     ModifyAutoRenewFlagResponse: ModifyAutoRenewFlagResponse,
     DeleteTimeWindowResponse: DeleteTimeWindowResponse,
+    DescribeBinlogBackupOverviewRequest: DescribeBinlogBackupOverviewRequest,
+    RollbackTask: RollbackTask,
     DescribeBackupsResponse: DescribeBackupsResponse,
-    DescribeTimeWindowRequest: DescribeTimeWindowRequest,
+    CreateAuditPolicyRequest: CreateAuditPolicyRequest,
+    ModifyInstanceParamResponse: ModifyInstanceParamResponse,
     DescribeDBImportRecordsResponse: DescribeDBImportRecordsResponse,
-    DescribeTimeWindowResponse: DescribeTimeWindowResponse,
+    CreateAuditPolicyResponse: CreateAuditPolicyResponse,
     BackupItem: BackupItem,
     DatabaseName: DatabaseName,
-    DescribeInstanceParamsRequest: DescribeInstanceParamsRequest,
+    AuditFilter: AuditFilter,
+    DescribeBackupConfigResponse: DescribeBackupConfigResponse,
+    DeleteDeployGroupsResponse: DeleteDeployGroupsResponse,
     ModifyDBInstanceSecurityGroupsRequest: ModifyDBInstanceSecurityGroupsRequest,
     DescribeParamTemplatesResponse: DescribeParamTemplatesResponse,
     DescribeBackupTablesResponse: DescribeBackupTablesResponse,
     Outbound: Outbound,
     SlaveInstanceInfo: SlaveInstanceInfo,
+    ModifyDBInstanceVipVportRequest: ModifyDBInstanceVipVportRequest,
     ModifyParamTemplateResponse: ModifyParamTemplateResponse,
-    ParamInfo: ParamInfo,
+    ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
     DescribeProjectSecurityGroupsRequest: DescribeProjectSecurityGroupsRequest,
     StartBatchRollbackRequest: StartBatchRollbackRequest,
     SecurityGroup: SecurityGroup,
     ZoneConf: ZoneConf,
+    BalanceRoGroupLoadResponse: BalanceRoGroupLoadResponse,
     DeviceNetInfo: DeviceNetInfo,
     SlaveInfo: SlaveInfo,
     TagInfo: TagInfo,
+    RollbackTimeRange: RollbackTimeRange,
     DescribeSupportedPrivilegesResponse: DescribeSupportedPrivilegesResponse,
     OfflineIsolatedInstancesRequest: OfflineIsolatedInstancesRequest,
+    ModifyDBInstanceProjectResponse: ModifyDBInstanceProjectResponse,
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
     TagInfoUnit: TagInfoUnit,
     OpenDBInstanceGTIDRequest: OpenDBInstanceGTIDRequest,
     UpgradeDBInstanceEngineVersionResponse: UpgradeDBInstanceEngineVersionResponse,
     InquiryPriceUpgradeInstancesRequest: InquiryPriceUpgradeInstancesRequest,
+    ModifyAuditRuleResponse: ModifyAuditRuleResponse,
     DescribeAsyncRequestInfoRequest: DescribeAsyncRequestInfoRequest,
-    ModifyInstanceParamResponse: ModifyInstanceParamResponse,
-    UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
+    VerifyRootAccountRequest: VerifyRootAccountRequest,
+    BalanceRoGroupLoadRequest: BalanceRoGroupLoadRequest,
+    DescribeAuditRulesRequest: DescribeAuditRulesRequest,
+    DescribeBackupOverviewResponse: DescribeBackupOverviewResponse,
     ColumnPrivilege: ColumnPrivilege,
     DescribeUploadedFilesRequest: DescribeUploadedFilesRequest,
+    ErrlogItem: ErrlogItem,
     DescribeDeviceMonitorInfoRequest: DescribeDeviceMonitorInfoRequest,
     DescribeDBPriceRequest: DescribeDBPriceRequest,
     AssociateSecurityGroupsResponse: AssociateSecurityGroupsResponse,
@@ -10243,78 +14040,111 @@ module.exports = {
     DescribeDBInstanceConfigResponse: DescribeDBInstanceConfigResponse,
     DescribeDefaultParamsResponse: DescribeDefaultParamsResponse,
     ModifyAccountPrivilegesResponse: ModifyAccountPrivilegesResponse,
+    DeviceCpuRateInfo: DeviceCpuRateInfo,
     BackupConfig: BackupConfig,
-    DeviceCpuInfo: DeviceCpuInfo,
-    DescribeTagsOfInstanceIdsResponse: DescribeTagsOfInstanceIdsResponse,
+    ModifyAuditRuleRequest: ModifyAuditRuleRequest,
     VerifyRootAccountResponse: VerifyRootAccountResponse,
+    DeviceCpuInfo: DeviceCpuInfo,
+    AuditPolicy: AuditPolicy,
+    DescribeDeployGroupListResponse: DescribeDeployGroupListResponse,
     DescribeDBInstanceConfigRequest: DescribeDBInstanceConfigRequest,
     DescribeBackupTablesRequest: DescribeBackupTablesRequest,
-    InstanceInfo: InstanceInfo,
+    DescribeBinlogsResponse: DescribeBinlogsResponse,
     OfflineIsolatedInstancesResponse: OfflineIsolatedInstancesResponse,
     DatabasePrivilege: DatabasePrivilege,
-    ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
+    RoGroupAttr: RoGroupAttr,
+    ModifyAuditConfigResponse: ModifyAuditConfigResponse,
     ModifyDBInstanceNameResponse: ModifyDBInstanceNameResponse,
     ModifyAccountDescriptionRequest: ModifyAccountDescriptionRequest,
     ModifyAccountPasswordRequest: ModifyAccountPasswordRequest,
+    DescribeAuditPoliciesRequest: DescribeAuditPoliciesRequest,
     DescribeTablesRequest: DescribeTablesRequest,
     InstanceRebootTime: InstanceRebootTime,
     RenewDBInstanceResponse: RenewDBInstanceResponse,
     DescribeDatabasesResponse: DescribeDatabasesResponse,
     ModifyParamTemplateRequest: ModifyParamTemplateRequest,
     AddTimeWindowResponse: AddTimeWindowResponse,
+    DescribeAuditConfigRequest: DescribeAuditConfigRequest,
     ZoneSellConf: ZoneSellConf,
+    DescribeAuditRulesResponse: DescribeAuditRulesResponse,
+    DescribeBinlogBackupOverviewResponse: DescribeBinlogBackupOverviewResponse,
+    RollbackTables: RollbackTables,
     InitDBInstancesRequest: InitDBInstancesRequest,
     RoInstanceInfo: RoInstanceInfo,
+    RollbackDBName: RollbackDBName,
     CreateParamTemplateRequest: CreateParamTemplateRequest,
+    DeleteAuditRuleResponse: DeleteAuditRuleResponse,
     IsolateDBInstanceRequest: IsolateDBInstanceRequest,
-    DeviceCpuRateInfo: DeviceCpuRateInfo,
+    CreateAuditRuleRequest: CreateAuditRuleRequest,
+    ModifyTimeWindowRequest: ModifyTimeWindowRequest,
+    AuditLogFile: AuditLogFile,
     ModifyAccountPrivilegesRequest: ModifyAccountPrivilegesRequest,
     Account: Account,
     CreateBackupRequest: CreateBackupRequest,
+    ModifyRoGroupInfoResponse: ModifyRoGroupInfoResponse,
+    CommonTimeWindow: CommonTimeWindow,
     AccountInfo: AccountInfo,
     DescribeDBInstanceCharsetRequest: DescribeDBInstanceCharsetRequest,
-    RollbackTables: RollbackTables,
+    DescribeTimeWindowRequest: DescribeTimeWindowRequest,
     DescribeBackupDatabasesRequest: DescribeBackupDatabasesRequest,
+    ModifyTimeWindowResponse: ModifyTimeWindowResponse,
     DeviceMemInfo: DeviceMemInfo,
     ModifyAutoRenewFlagRequest: ModifyAutoRenewFlagRequest,
     UpgradeDBInstanceEngineVersionRequest: UpgradeDBInstanceEngineVersionRequest,
+    ModifyBackupConfigRequest: ModifyBackupConfigRequest,
+    DeleteDeployGroupsRequest: DeleteDeployGroupsRequest,
+    DescribeSlowLogDataRequest: DescribeSlowLogDataRequest,
+    DescribeAuditConfigResponse: DescribeAuditConfigResponse,
+    ModifyAccountDescriptionResponse: ModifyAccountDescriptionResponse,
     UpgradeDBInstanceResponse: UpgradeDBInstanceResponse,
-    ModifyDBInstanceVipVportRequest: ModifyDBInstanceVipVportRequest,
-    ModifyBackupConfigResponse: ModifyBackupConfigResponse,
+    CreateAuditLogFileRequest: CreateAuditLogFileRequest,
+    DeleteAuditLogFileRequest: DeleteAuditLogFileRequest,
+    DescribeSlowLogsResponse: DescribeSlowLogsResponse,
     DescribeDBImportRecordsRequest: DescribeDBImportRecordsRequest,
     CreateDBImportJobResponse: CreateDBImportJobResponse,
     DescribeTagsOfInstanceIdsRequest: DescribeTagsOfInstanceIdsRequest,
-    OpenWanServiceRequest: OpenWanServiceRequest,
+    UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
+    DescribeTimeWindowResponse: DescribeTimeWindowResponse,
     DeleteTimeWindowRequest: DeleteTimeWindowRequest,
+    DeleteAuditPolicyResponse: DeleteAuditPolicyResponse,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
     TablePrivilege: TablePrivilege,
     SlowLogInfo: SlowLogInfo,
     InitDBInstancesResponse: InitDBInstancesResponse,
+    DescribeDataBackupOverviewRequest: DescribeDataBackupOverviewRequest,
     DescribeParamTemplateInfoResponse: DescribeParamTemplateInfoResponse,
     ParamRecord: ParamRecord,
     RestartDBInstancesRequest: RestartDBInstancesRequest,
+    DescribeDBInstanceInfoRequest: DescribeDBInstanceInfoRequest,
     DescribeInstanceParamsResponse: DescribeInstanceParamsResponse,
     DescribeDBZoneConfigResponse: DescribeDBZoneConfigResponse,
-    ModifyDBInstanceProjectRequest: ModifyDBInstanceProjectRequest,
+    CreateDeployGroupRequest: CreateDeployGroupRequest,
     DisassociateSecurityGroupsRequest: DisassociateSecurityGroupsRequest,
     DeleteAccountsRequest: DeleteAccountsRequest,
     SwitchForUpgradeResponse: SwitchForUpgradeResponse,
     DescribeAccountPrivilegesRequest: DescribeAccountPrivilegesRequest,
     DescribeAccountsResponse: DescribeAccountsResponse,
-    RollbackTimeRange: RollbackTimeRange,
+    OpenWanServiceRequest: OpenWanServiceRequest,
     DeleteBackupRequest: DeleteBackupRequest,
-    ModifyTimeWindowRequest: ModifyTimeWindowRequest,
-    DescribeBackupConfigResponse: DescribeBackupConfigResponse,
-    StartBatchRollbackResponse: StartBatchRollbackResponse,
+    ModifyNameOrDescByDpIdRequest: ModifyNameOrDescByDpIdRequest,
+    DescribeInstanceParamsRequest: DescribeInstanceParamsRequest,
+    SlowLogItem: SlowLogItem,
     DescribeDeviceMonitorInfoResponse: DescribeDeviceMonitorInfoResponse,
+    UploadInfo: UploadInfo,
+    DescribeRollbackTaskDetailRequest: DescribeRollbackTaskDetailRequest,
     DescribeRollbackRangeTimeResponse: DescribeRollbackRangeTimeResponse,
-    VerifyRootAccountRequest: VerifyRootAccountRequest,
+    ModifyRoGroupInfoRequest: ModifyRoGroupInfoRequest,
+    ReleaseResult: ReleaseResult,
+    InstanceInfo: InstanceInfo,
     OpenWanServiceResponse: OpenWanServiceResponse,
-    ModifyBackupConfigRequest: ModifyBackupConfigRequest,
+    DescribeAuditLogFilesRequest: DescribeAuditLogFilesRequest,
+    DescribeTagsOfInstanceIdsResponse: DescribeTagsOfInstanceIdsResponse,
+    ModifyAccountPasswordResponse: ModifyAccountPasswordResponse,
+    AuditRule: AuditRule,
     DescribeBinlogsRequest: DescribeBinlogsRequest,
     DisassociateSecurityGroupsResponse: DisassociateSecurityGroupsResponse,
     DescribeDBInstanceGTIDRequest: DescribeDBInstanceGTIDRequest,
-    RollbackDBName: RollbackDBName,
+    DeployGroupInfo: DeployGroupInfo,
     InquiryPriceUpgradeInstancesResponse: InquiryPriceUpgradeInstancesResponse,
 
 }

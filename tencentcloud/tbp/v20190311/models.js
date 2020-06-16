@@ -25,7 +25,7 @@ class TextProcessResponse extends  AbstractModel {
         super();
 
         /**
-         * 当前会话状态，取值："START"/"COUTINUE"/"COMPLETE"。
+         * 当前会话状态{会话开始: START; 会话中: COUTINUE; 会话结束: COMPLETE}。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -60,18 +60,18 @@ class TextProcessResponse extends  AbstractModel {
         this.InputText = null;
 
         /**
-         * 机器人回答。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ResponseText = null;
-
-        /**
-         * 透传字段，由endpoint服务返回。
+         * 透传字段，由用户自定义的WebService服务返回。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.SessionAttributes = null;
+
+        /**
+         * 机器人对话的应答文本。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResponseText = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -101,8 +101,8 @@ class TextProcessResponse extends  AbstractModel {
             }
         }
         this.InputText = 'InputText' in params ? params.InputText : null;
-        this.ResponseText = 'ResponseText' in params ? params.ResponseText : null;
         this.SessionAttributes = 'SessionAttributes' in params ? params.SessionAttributes : null;
+        this.ResponseText = 'ResponseText' in params ? params.ResponseText : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -280,18 +280,18 @@ class TextResetResponse extends  AbstractModel {
         this.InputText = null;
 
         /**
-         * 机器人回答。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ResponseText = null;
-
-        /**
-         * 透传字段，由endpoint服务返回。
+         * 透传字段，由用户自定义的WebService服务返回。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.SessionAttributes = null;
+
+        /**
+         * 机器人对话的应答文本。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResponseText = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -321,8 +321,50 @@ class TextResetResponse extends  AbstractModel {
             }
         }
         this.InputText = 'InputText' in params ? params.InputText : null;
-        this.ResponseText = 'ResponseText' in params ? params.ResponseText : null;
         this.SessionAttributes = 'SessionAttributes' in params ? params.SessionAttributes : null;
+        this.ResponseText = 'ResponseText' in params ? params.ResponseText : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateBot返回参数结构体
+ * @class
+ */
+class CreateBotResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+         * @type {string || null}
+         */
+        this.TaskRequestId = null;
+
+        /**
+         * 任务信息
+         * @type {string || null}
+         */
+        this.Msg = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskRequestId = 'TaskRequestId' in params ? params.TaskRequestId : null;
+        this.Msg = 'Msg' in params ? params.Msg : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -436,6 +478,41 @@ class ResetResponse extends  AbstractModel {
 }
 
 /**
+ * CreateBot请求参数结构体
+ * @class
+ */
+class CreateBotRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 机器人名称
+         * @type {string || null}
+         */
+        this.BotName = null;
+
+        /**
+         * 机器人中文名称
+         * @type {string || null}
+         */
+        this.BotCnName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BotName = 'BotName' in params ? params.BotName : null;
+        this.BotCnName = 'BotCnName' in params ? params.BotCnName : null;
+
+    }
+}
+
+/**
  * TextProcess请求参数结构体
  * @class
  */
@@ -468,7 +545,7 @@ class TextProcessRequest extends  AbstractModel {
         this.BotEnv = null;
 
         /**
-         * 透传字段，透传给endpoint服务。
+         * 透传字段，透传给用户自定义的WebService服务。
          * @type {string || null}
          */
         this.SessionAttributes = null;
@@ -497,7 +574,9 @@ module.exports = {
     TextResetRequest: TextResetRequest,
     ResetRequest: ResetRequest,
     TextResetResponse: TextResetResponse,
+    CreateBotResponse: CreateBotResponse,
     ResetResponse: ResetResponse,
+    CreateBotRequest: CreateBotRequest,
     TextProcessRequest: TextProcessRequest,
 
 }

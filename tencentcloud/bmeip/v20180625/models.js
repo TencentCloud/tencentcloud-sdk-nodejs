@@ -165,6 +165,12 @@ class DescribeEipsResponse extends  AbstractModel {
         this.EipSet = null;
 
         /**
+         * 返回EIP数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -188,6 +194,7 @@ class DescribeEipsResponse extends  AbstractModel {
                 this.EipSet.push(obj);
             }
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -578,7 +585,7 @@ class EipInfo extends  AbstractModel {
         this.Eip = null;
 
         /**
-         * 运营商ID 0：电信； 1：联通； 2：移动； 3：教育网； 4：盈科； 5：BGP； 6：香港
+         * 运营商ID 0：电信； 1：联通； 2：移动； 3：教育网； 4：盈科； 5：BGP； 6：中国香港
          * @type {number || null}
          */
         this.IspId = null;
@@ -1050,6 +1057,41 @@ class UnbindHostedRequest extends  AbstractModel {
 }
 
 /**
+ * UnbindRsList返回参数结构体
+ * @class
+ */
+class UnbindRsListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 解绑操作的异步任务ID，可以通过查询EIP任务状态查询任务状态
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * BindVpcIp返回参数结构体
  * @class
  */
@@ -1172,7 +1214,7 @@ class DescribeEipsRequest extends  AbstractModel {
 
         /**
          * EIP ACL实例ID
-         * @type {number || null}
+         * @type {string || null}
          */
         this.AclId = null;
 
@@ -1682,6 +1724,77 @@ class DeleteEipRequest extends  AbstractModel {
 }
 
 /**
+ * EipId与InstanceId绑定关系
+ * @class
+ */
+class EipRsMap extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * EIP实例 ID
+         * @type {string || null}
+         */
+        this.EipId = null;
+
+        /**
+         * 黑石物理机实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EipId = 'EipId' in params ? params.EipId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * UnbindRsList请求参数结构体
+ * @class
+ */
+class UnbindRsListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 物理机绑定的EIP列表
+         * @type {Array.<EipRsMap> || null}
+         */
+        this.EipRsList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.EipRsList) {
+            this.EipRsList = new Array();
+            for (let z in params.EipRsList) {
+                let obj = new EipRsMap();
+                obj.deserialize(params.EipRsList[z]);
+                this.EipRsList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DeleteEipAcl返回参数结构体
  * @class
  */
@@ -1741,6 +1854,42 @@ class DescribeEipAclsRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * EIP实例ID列表
+         * @type {Array.<string> || null}
+         */
+        this.EipIds = null;
+
+        /**
+         * EIP IP地址列表
+         * @type {Array.<string> || null}
+         */
+        this.EipIps = null;
+
+        /**
+         * EIP名称列表
+         * @type {Array.<string> || null}
+         */
+        this.EipNames = null;
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.OrderField = null;
+
+        /**
+         * 排序方式，取值：0:增序(默认)，1:降序
+         * @type {number || null}
+         */
+        this.Order = null;
+
+        /**
+         * ACL名称列表，支持模糊查找
+         * @type {Array.<string> || null}
+         */
+        this.AclNames = null;
+
     }
 
     /**
@@ -1754,6 +1903,12 @@ class DescribeEipAclsRequest extends  AbstractModel {
         this.AclIds = 'AclIds' in params ? params.AclIds : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.EipIds = 'EipIds' in params ? params.EipIds : null;
+        this.EipIps = 'EipIps' in params ? params.EipIps : null;
+        this.EipNames = 'EipNames' in params ? params.EipNames : null;
+        this.OrderField = 'OrderField' in params ? params.OrderField : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.AclNames = 'AclNames' in params ? params.AclNames : null;
 
     }
 }
@@ -1970,6 +2125,7 @@ module.exports = {
     UnbindRsResponse: UnbindRsResponse,
     BindRsRequest: BindRsRequest,
     UnbindHostedRequest: UnbindHostedRequest,
+    UnbindRsListResponse: UnbindRsListResponse,
     BindVpcIpResponse: BindVpcIpResponse,
     DescribeEipsRequest: DescribeEipsRequest,
     ModifyEipNameRequest: ModifyEipNameRequest,
@@ -1984,6 +2140,8 @@ module.exports = {
     ModifyEipChargeRequest: ModifyEipChargeRequest,
     DescribeEipQuotaRequest: DescribeEipQuotaRequest,
     DeleteEipRequest: DeleteEipRequest,
+    EipRsMap: EipRsMap,
+    UnbindRsListRequest: UnbindRsListRequest,
     DeleteEipAclResponse: DeleteEipAclResponse,
     DescribeEipAclsRequest: DescribeEipAclsRequest,
     BindEipAclsRequest: BindEipAclsRequest,

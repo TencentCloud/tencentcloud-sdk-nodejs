@@ -22,6 +22,7 @@ const DeleteComputeEnvResponse = models.DeleteComputeEnvResponse;
 const SubmitJobRequest = models.SubmitJobRequest;
 const ComputeEnvData = models.ComputeEnvData;
 const Authentication = models.Authentication;
+const RetryJobsResponse = models.RetryJobsResponse;
 const TerminateComputeNodeRequest = models.TerminateComputeNodeRequest;
 const DescribeTaskLogsRequest = models.DescribeTaskLogsRequest;
 const AgentRunningMode = models.AgentRunningMode;
@@ -38,10 +39,16 @@ const TaskInstanceMetrics = models.TaskInstanceMetrics;
 const TaskInstanceLog = models.TaskInstanceLog;
 const MountDataDisk = models.MountDataDisk;
 const TaskView = models.TaskView;
+const Externals = models.Externals;
+const OsInfo = models.OsInfo;
 const DescribeComputeEnvResponse = models.DescribeComputeEnvResponse;
+const DescribeCpmOsInfoResponse = models.DescribeCpmOsInfoResponse;
 const TerminateJobRequest = models.TerminateJobRequest;
+const DetachInstancesResponse = models.DetachInstancesResponse;
 const Application = models.Application;
+const EnvDataCpm = models.EnvDataCpm;
 const OutputMappingConfig = models.OutputMappingConfig;
+const AttachInstancesResponse = models.AttachInstancesResponse;
 const ComputeNodeMetrics = models.ComputeNodeMetrics;
 const TaskMetrics = models.TaskMetrics;
 const TerminateComputeNodesRequest = models.TerminateComputeNodesRequest;
@@ -58,24 +65,29 @@ const DescribeComputeEnvCreateInfosRequest = models.DescribeComputeEnvCreateInfo
 const DescribeComputeEnvRequest = models.DescribeComputeEnvRequest;
 const InstanceMarketOptionsRequest = models.InstanceMarketOptionsRequest;
 const DescribeTaskTemplatesResponse = models.DescribeTaskTemplatesResponse;
+const CreateCpmComputeEnvResponse = models.CreateCpmComputeEnvResponse;
 const DeleteJobRequest = models.DeleteJobRequest;
+const CreateCpmComputeEnvRequest = models.CreateCpmComputeEnvRequest;
 const DescribeTaskLogsResponse = models.DescribeTaskLogsResponse;
+const NamedCpmComputeEnv = models.NamedCpmComputeEnv;
 const DeleteTaskTemplatesRequest = models.DeleteTaskTemplatesRequest;
 const DescribeJobResponse = models.DescribeJobResponse;
 const DescribeComputeEnvCreateInfoRequest = models.DescribeComputeEnvCreateInfoRequest;
 const ModifyTaskTemplateRequest = models.ModifyTaskTemplateRequest;
+const DescribeCpmOsInfoRequest = models.DescribeCpmOsInfoRequest;
 const DataDisk = models.DataDisk;
 const NamedComputeEnv = models.NamedComputeEnv;
 const DeleteJobResponse = models.DeleteJobResponse;
 const EventConfig = models.EventConfig;
 const SpotMarketOptions = models.SpotMarketOptions;
-const Externals = models.Externals;
+const CpmVirtualPrivateCloud = models.CpmVirtualPrivateCloud;
+const DetachInstancesRequest = models.DetachInstancesRequest;
+const Instance = models.Instance;
 const OutputMapping = models.OutputMapping;
 const EnhancedService = models.EnhancedService;
 const DescribeJobSubmitInfoResponse = models.DescribeJobSubmitInfoResponse;
 const DescribeComputeEnvCreateInfosResponse = models.DescribeComputeEnvCreateInfosResponse;
 const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
-const CreateTaskTemplateResponse = models.CreateTaskTemplateResponse;
 const DescribeJobRequest = models.DescribeJobRequest;
 const RedirectInfo = models.RedirectInfo;
 const DescribeInstanceCategoriesResponse = models.DescribeInstanceCategoriesResponse;
@@ -93,7 +105,7 @@ const Placement = models.Placement;
 const ComputeNode = models.ComputeNode;
 const ItemPrice = models.ItemPrice;
 const InstanceTypeQuotaItem = models.InstanceTypeQuotaItem;
-const RetryJobsResponse = models.RetryJobsResponse;
+const CreateTaskTemplateResponse = models.CreateTaskTemplateResponse;
 const StorageBlock = models.StorageBlock;
 const DescribeJobsRequest = models.DescribeJobsRequest;
 const TaskTemplateView = models.TaskTemplateView;
@@ -110,6 +122,7 @@ const InstanceCategoryItem = models.InstanceCategoryItem;
 const ComputeEnvView = models.ComputeEnvView;
 const DescribeComputeEnvsResponse = models.DescribeComputeEnvsResponse;
 const DescribeTaskRequest = models.DescribeTaskRequest;
+const AttachInstancesRequest = models.AttachInstancesRequest;
 const DescribeComputeEnvsRequest = models.DescribeComputeEnvsRequest;
 const DescribeCvmZoneInstanceConfigInfosResponse = models.DescribeCvmZoneInstanceConfigInfosResponse;
 const DescribeJobsResponse = models.DescribeJobsResponse;
@@ -158,6 +171,17 @@ class BatchClient extends AbstractClient {
     }
 
     /**
+     * 创建黑石计算环境
+     * @param {CreateCpmComputeEnvRequest} req
+     * @param {function(string, CreateCpmComputeEnvResponse):void} cb
+     * @public
+     */
+    CreateCpmComputeEnv(req, cb) {
+        let resp = new CreateCpmComputeEnvResponse();
+        this.request("CreateCpmComputeEnv", req, resp, cb);
+    }
+
+    /**
      * 用于销毁计算节点。
 对于状态为CREATED、CREATION_FAILED、RUNNING和ABNORMAL的节点，允许销毁处理。
      * @param {TerminateComputeNodeRequest} req
@@ -192,6 +216,23 @@ class BatchClient extends AbstractClient {
     }
 
     /**
+     * 此接口可将已存在实例添加到计算环境中。
+实例需要满足如下条件：<br/>
+1.实例不在批量计算系统中。<br/>
+2.实例状态要求处于运行中。<br/>
+3.支持预付费实例，按小时后付费实例，专享子机实例。不支持竞价实例。<br/>
+
+此接口会将加入到计算环境中的实例重设UserData和重装操作系统。
+     * @param {AttachInstancesRequest} req
+     * @param {function(string, AttachInstancesResponse):void} cb
+     * @public
+     */
+    AttachInstances(req, cb) {
+        let resp = new AttachInstancesResponse();
+        this.request("AttachInstances", req, resp, cb);
+    }
+
+    /**
      * 用于创建计算环境
      * @param {CreateComputeEnvRequest} req
      * @param {function(string, CreateComputeEnvResponse):void} cb
@@ -211,6 +252,17 @@ class BatchClient extends AbstractClient {
     DeleteComputeEnv(req, cb) {
         let resp = new DeleteComputeEnvResponse();
         this.request("DeleteComputeEnv", req, resp, cb);
+    }
+
+    /**
+     * 将添加到计算环境中的实例从计算环境中移出。若是由批量计算自动创建的计算节点实例则不允许移出。
+     * @param {DetachInstancesRequest} req
+     * @param {function(string, DetachInstancesResponse):void} cb
+     * @public
+     */
+    DetachInstances(req, cb) {
+        let resp = new DetachInstancesResponse();
+        this.request("DetachInstances", req, resp, cb);
     }
 
     /**
@@ -406,6 +458,17 @@ class BatchClient extends AbstractClient {
     DeleteJob(req, cb) {
         let resp = new DeleteJobResponse();
         this.request("DeleteJob", req, resp, cb);
+    }
+
+    /**
+     * 创建黑石计算环境时，查询批量计算环境支持的黑石操作系统信息
+     * @param {DescribeCpmOsInfoRequest} req
+     * @param {function(string, DescribeCpmOsInfoResponse):void} cb
+     * @public
+     */
+    DescribeCpmOsInfo(req, cb) {
+        let resp = new DescribeCpmOsInfoResponse();
+        this.request("DescribeCpmOsInfo", req, resp, cb);
     }
 
     /**

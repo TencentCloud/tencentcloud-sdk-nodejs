@@ -399,6 +399,40 @@ class DirectConnect extends  AbstractModel {
          */
         this.FaultReportContactNumber = null;
 
+        /**
+         * 标签键值对
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.TagSet = null;
+
+        /**
+         * 物理专线的接入点类型。
+         * @type {string || null}
+         */
+        this.AccessPointType = null;
+
+        /**
+         * IDC所在城市
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.IdcCity = null;
+
+        /**
+         * 计费状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ChargeState = null;
+
+        /**
+         * 物理专线开通时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
     }
 
     /**
@@ -430,6 +464,19 @@ class DirectConnect extends  AbstractModel {
         this.ChargeType = 'ChargeType' in params ? params.ChargeType : null;
         this.FaultReportContactPerson = 'FaultReportContactPerson' in params ? params.FaultReportContactPerson : null;
         this.FaultReportContactNumber = 'FaultReportContactNumber' in params ? params.FaultReportContactNumber : null;
+
+        if (params.TagSet) {
+            this.TagSet = new Array();
+            for (let z in params.TagSet) {
+                let obj = new Tag();
+                obj.deserialize(params.TagSet[z]);
+                this.TagSet.push(obj);
+            }
+        }
+        this.AccessPointType = 'AccessPointType' in params ? params.AccessPointType : null;
+        this.IdcCity = 'IdcCity' in params ? params.IdcCity : null;
+        this.ChargeState = 'ChargeState' in params ? params.ChargeState : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
 
     }
 }
@@ -758,6 +805,12 @@ STATIC：静态
          */
         this.CustomerAddress = null;
 
+        /**
+         * TencentBackupAddress，腾讯侧备用互联 IP
+         * @type {string || null}
+         */
+        this.TencentBackupAddress = null;
+
     }
 
     /**
@@ -794,6 +847,7 @@ STATIC：静态
         this.Vlan = 'Vlan' in params ? params.Vlan : null;
         this.TencentAddress = 'TencentAddress' in params ? params.TencentAddress : null;
         this.CustomerAddress = 'CustomerAddress' in params ? params.CustomerAddress : null;
+        this.TencentBackupAddress = 'TencentBackupAddress' in params ? params.TencentBackupAddress : null;
 
     }
 }
@@ -1027,6 +1081,12 @@ class ModifyDirectConnectTunnelAttributeRequest extends  AbstractModel {
          */
         this.Bandwidth = null;
 
+        /**
+         * 腾讯侧备用互联IP
+         * @type {string || null}
+         */
+        this.TencentBackupAddress = null;
+
     }
 
     /**
@@ -1056,6 +1116,7 @@ class ModifyDirectConnectTunnelAttributeRequest extends  AbstractModel {
         this.TencentAddress = 'TencentAddress' in params ? params.TencentAddress : null;
         this.CustomerAddress = 'CustomerAddress' in params ? params.CustomerAddress : null;
         this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
+        this.TencentBackupAddress = 'TencentBackupAddress' in params ? params.TencentBackupAddress : null;
 
     }
 }
@@ -1490,7 +1551,44 @@ class DescribeDirectConnectTunnelsResponse extends  AbstractModel {
 }
 
 /**
- * 专线通道信息列表
+ * 标签键值对
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签键
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * 专用通道信息列表
  * @class
  */
 class DirectConnectTunnel extends  AbstractModel {
@@ -1498,7 +1596,7 @@ class DirectConnectTunnel extends  AbstractModel {
         super();
 
         /**
-         * 专线通道ID
+         * 专用通道ID
          * @type {string || null}
          */
         this.DirectConnectTunnelId = null;
@@ -1510,7 +1608,7 @@ class DirectConnectTunnel extends  AbstractModel {
         this.DirectConnectId = null;
 
         /**
-         * 专线通道状态
+         * 专用通道状态
 AVAILABLE:就绪或者已连接
 PENDING:申请中
 ALLOCATING:配置中
@@ -1531,7 +1629,7 @@ REJECTED:拒绝
         this.DirectConnectOwnerAccount = null;
 
         /**
-         * 专线通道的拥有者，开发商账号 ID
+         * 专用通道的拥有者，开发商账号 ID
          * @type {string || null}
          */
         this.OwnerAccount = null;
@@ -1544,7 +1642,7 @@ REJECTED:拒绝
         this.NetworkType = null;
 
         /**
-         * VPC地域
+         * VPC地域对应的网络名，如ap-guangzhou
          * @type {string || null}
          */
         this.NetworkRegion = null;
@@ -1580,7 +1678,7 @@ REJECTED:拒绝
         this.RouteFilterPrefixes = null;
 
         /**
-         * 专线通道的Vlan
+         * 专用通道的Vlan
          * @type {number || null}
          */
         this.Vlan = null;
@@ -1598,22 +1696,91 @@ REJECTED:拒绝
         this.CustomerAddress = null;
 
         /**
-         * 专线通道名称
+         * 专用通道名称
          * @type {string || null}
          */
         this.DirectConnectTunnelName = null;
 
         /**
-         * 专线通道创建时间
+         * 专用通道创建时间
          * @type {string || null}
          */
         this.CreatedTime = null;
 
         /**
-         * 专线通道带宽值
+         * 专用通道带宽值
          * @type {number || null}
          */
         this.Bandwidth = null;
+
+        /**
+         * 专用通道标签值
+         * @type {Array.<Tag> || null}
+         */
+        this.TagSet = null;
+
+        /**
+         * 关联的网络自定义探测ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NetDetectId = null;
+
+        /**
+         * BGP community开关
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.EnableBGPCommunity = null;
+
+        /**
+         * 是否为Nat通道
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.NatType = null;
+
+        /**
+         * VPC地域简码，如gz、cd
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VpcRegion = null;
+
+        /**
+         * 是否开启BFD
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.BfdEnable = null;
+
+        /**
+         * 专用通道接入点类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AccessPointType = null;
+
+        /**
+         * 专线网关名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DirectConnectGatewayName = null;
+
+        /**
+         * VPC名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VpcName = null;
+
+        /**
+         * TencentBackupAddress，腾讯侧备用互联 IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TencentBackupAddress = null;
 
     }
 
@@ -1656,6 +1823,24 @@ REJECTED:拒绝
         this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
         this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
 
+        if (params.TagSet) {
+            this.TagSet = new Array();
+            for (let z in params.TagSet) {
+                let obj = new Tag();
+                obj.deserialize(params.TagSet[z]);
+                this.TagSet.push(obj);
+            }
+        }
+        this.NetDetectId = 'NetDetectId' in params ? params.NetDetectId : null;
+        this.EnableBGPCommunity = 'EnableBGPCommunity' in params ? params.EnableBGPCommunity : null;
+        this.NatType = 'NatType' in params ? params.NatType : null;
+        this.VpcRegion = 'VpcRegion' in params ? params.VpcRegion : null;
+        this.BfdEnable = 'BfdEnable' in params ? params.BfdEnable : null;
+        this.AccessPointType = 'AccessPointType' in params ? params.AccessPointType : null;
+        this.DirectConnectGatewayName = 'DirectConnectGatewayName' in params ? params.DirectConnectGatewayName : null;
+        this.VpcName = 'VpcName' in params ? params.VpcName : null;
+        this.TencentBackupAddress = 'TencentBackupAddress' in params ? params.TencentBackupAddress : null;
+
     }
 }
 
@@ -1687,6 +1872,7 @@ module.exports = {
     AccessPoint: AccessPoint,
     DeleteDirectConnectRequest: DeleteDirectConnectRequest,
     DescribeDirectConnectTunnelsResponse: DescribeDirectConnectTunnelsResponse,
+    Tag: Tag,
     DirectConnectTunnel: DirectConnectTunnel,
 
 }
