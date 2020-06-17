@@ -3285,7 +3285,7 @@ class UpdatePolicyResponse extends  AbstractModel {
         super();
 
         /**
-         * 策略id
+         * 策略id，入参是PolicyName时，才会返回
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -5066,13 +5066,13 @@ class UpdatePolicyRequest extends  AbstractModel {
         super();
 
         /**
-         * 策略ID
+         * 策略ID，与PolicyName二选一必填
          * @type {number || null}
          */
         this.PolicyId = null;
 
         /**
-         * 策略名
+         * 策略名，与PolicyId二选一必填
          * @type {string || null}
          */
         this.PolicyName = null;

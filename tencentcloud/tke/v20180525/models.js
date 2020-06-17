@@ -3226,6 +3226,12 @@ class ClusterAdvancedSettings extends  AbstractModel {
          */
         this.DeletionProtection = null;
 
+        /**
+         * 集群的网络代理模型
+         * @type {string || null}
+         */
+        this.KubeProxyMode = null;
+
     }
 
     /**
@@ -3248,6 +3254,7 @@ class ClusterAdvancedSettings extends  AbstractModel {
         this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
         this.IsNonStaticIpMode = 'IsNonStaticIpMode' in params ? params.IsNonStaticIpMode : null;
         this.DeletionProtection = 'DeletionProtection' in params ? params.DeletionProtection : null;
+        this.KubeProxyMode = 'KubeProxyMode' in params ? params.KubeProxyMode : null;
 
     }
 }

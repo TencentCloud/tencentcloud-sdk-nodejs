@@ -4175,7 +4175,7 @@ class CreateInstanceAccountRequest extends  AbstractModel {
         this.ReadonlyPolicy = null;
 
         /**
-         * 读写策略：填写r、w、rw，表示只读、只写、读写
+         * 读写策略：填写r、rw，表示只读、读写
          * @type {string || null}
          */
         this.Privilege = null;

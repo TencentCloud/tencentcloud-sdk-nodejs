@@ -944,7 +944,7 @@ class DeleteLiveRecordTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 模板 ID。
+         * DescribeRecordTemplates接口获取到的模板 ID。
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -1225,31 +1225,35 @@ class ModifyLivePlayAuthKeyRequest extends  AbstractModel {
         super();
 
         /**
-         * 域名。
+         * 播放域名。
          * @type {string || null}
          */
         this.DomainName = null;
 
         /**
          * 是否启用，0：关闭，1：启用。
+不传表示不修改当前值。
          * @type {number || null}
          */
         this.Enable = null;
 
         /**
          * 鉴权key。
+不传表示不修改当前值。
          * @type {string || null}
          */
         this.AuthKey = null;
 
         /**
          * 有效时间，单位：秒。
+不传表示不修改当前值。
          * @type {number || null}
          */
         this.AuthDelta = null;
 
         /**
-         * 鉴权backkey。
+         * 鉴权备用key。
+不传表示不修改当前值。
          * @type {string || null}
          */
         this.AuthBackKey = null;
@@ -1694,18 +1698,21 @@ class ModifyLivePushAuthKeyRequest extends  AbstractModel {
 
         /**
          * 是否启用，0：关闭，1：启用。
+不传表示不修改当前值。
          * @type {number || null}
          */
         this.Enable = null;
 
         /**
          * 主鉴权key。
+不传表示不修改当前值。
          * @type {string || null}
          */
         this.MasterAuthKey = null;
 
         /**
          * 备鉴权key。
+不传表示不修改当前值。
          * @type {string || null}
          */
         this.BackupAuthKey = null;
@@ -2713,7 +2720,7 @@ class DescribeLiveRecordTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 模板 ID。
+         * DescribeRecordTemplates接口获取到的模板 ID。
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -3146,7 +3153,7 @@ class DescribeLiveWatermarkRequest extends  AbstractModel {
         super();
 
         /**
-         * 水印 ID。
+         * DescribeLiveWatermarks接口返回的水印 ID。
          * @type {number || null}
          */
         this.WatermarkId = null;
@@ -4475,18 +4482,19 @@ class AddLiveWatermarkRequest extends  AbstractModel {
 
         /**
          * 水印名称。
+最长16字节。
          * @type {string || null}
          */
         this.WatermarkName = null;
 
         /**
-         * 显示位置，X轴偏移，默认 0。
+         * 显示位置，X轴偏移，单位是百分比，默认 0。
          * @type {number || null}
          */
         this.XPosition = null;
 
         /**
-         * 显示位置，Y轴偏移，默认 0。
+         * 显示位置，Y轴偏移，单位是百分比，默认 0。
          * @type {number || null}
          */
         this.YPosition = null;
@@ -4719,7 +4727,7 @@ class DescribeLiveCertRequest extends  AbstractModel {
         super();
 
         /**
-         * 证书Id。
+         * DescribeLiveCerts接口获取到的证书Id。
          * @type {number || null}
          */
         this.CertId = null;
@@ -6865,7 +6873,7 @@ class ModifyLiveRecordTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 模板 ID。
+         * DescribeRecordTemplates接口获取到的模板 ID。
          * @type {number || null}
          */
         this.TemplateId = null;
@@ -7436,7 +7444,7 @@ class BindLiveDomainCertRequest extends  AbstractModel {
         this.DomainName = null;
 
         /**
-         * 状态，0： 关闭  1：打开。
+         * HTTPS开启状态，0： 关闭  1：打开。
          * @type {number || null}
          */
         this.Status = null;
@@ -7891,6 +7899,7 @@ class DeleteLiveWatermarkRequest extends  AbstractModel {
         /**
          * 水印 ID。
 在添加水印接口 [AddLiveWatermark](/document/product/267/30154) 调用返回值中获取水印 ID。
+或DescribeLiveWatermarks接口返回的水印ID。
          * @type {number || null}
          */
         this.WatermarkId = null;
@@ -8397,6 +8406,7 @@ class CancelCommonMixStreamRequest extends  AbstractModel {
 
         /**
          * 混流会话（申请混流开始到取消混流结束）标识 ID。
+该值与CreateCommonMixStream中的MixStreamSessionId保持一致。
          * @type {string || null}
          */
         this.MixStreamSessionId = null;
@@ -8437,19 +8447,20 @@ class UpdateLiveWatermarkRequest extends  AbstractModel {
         this.PictureUrl = null;
 
         /**
-         * 显示位置，X轴偏移，默认 0。
+         * 显示位置，X轴偏移，单位是百分比，默认 0。
          * @type {number || null}
          */
         this.XPosition = null;
 
         /**
-         * 显示位置，Y轴偏移，默认 0。
+         * 显示位置，Y轴偏移，单位是百分比，默认 0。
          * @type {number || null}
          */
         this.YPosition = null;
 
         /**
          * 水印名称。
+最长16字节。
          * @type {string || null}
          */
         this.WatermarkName = null;
@@ -12641,7 +12652,7 @@ class DeleteLiveCertRequest extends  AbstractModel {
         super();
 
         /**
-         * 证书Id。
+         * DescribeLiveCerts接口获取到的证书Id。
          * @type {number || null}
          */
         this.CertId = null;
