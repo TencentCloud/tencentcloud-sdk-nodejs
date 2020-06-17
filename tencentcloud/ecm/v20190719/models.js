@@ -394,6 +394,56 @@ class DescribeModuleResponse extends  AbstractModel {
 }
 
 /**
+ * 镜像任务
+ * @class
+ */
+class ImageTask extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 镜像导入状态， PENDING, PROCESSING, SUCCESS, FAILED
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * 导入失败(FAILED)时， 说明失败原因
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * 镜像名称
+         * @type {string || null}
+         */
+        this.ImageName = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.State = 'State' in params ? params.State : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.ImageName = 'ImageName' in params ? params.ImageName : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+    }
+}
+
+/**
  * 省份信息
  * @class
  */
@@ -424,6 +474,48 @@ class Province extends  AbstractModel {
         }
         this.ProvinceId = 'ProvinceId' in params ? params.ProvinceId : null;
         this.ProvinceName = 'ProvinceName' in params ? params.ProvinceName : null;
+
+    }
+}
+
+/**
+ * ImportCustomImage返回参数结构体
+ * @class
+ */
+class ImportCustomImageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 镜像ID
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * 异步任务ID，可根据DescribeCustomImageTask查询任务信息
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1501,6 +1593,57 @@ class VpcInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeCustomImageTask返回参数结构体
+ * @class
+ */
+class DescribeCustomImageTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 导入任务详情
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ImageTask> || null}
+         */
+        this.ImageTaskSet = null;
+
+        /**
+         * 总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ImageTaskSet) {
+            this.ImageTaskSet = new Array();
+            for (let z in params.ImageTaskSet) {
+                let obj = new ImageTask();
+                obj.deserialize(params.ImageTaskSet[z]);
+                this.ImageTaskSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 安全组对象
  * @class
  */
@@ -1854,48 +1997,6 @@ SOFT_FIRST：表示优先软关机，失败再执行硬关机
         this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
         this.ForceReboot = 'ForceReboot' in params ? params.ForceReboot : null;
         this.StopType = 'StopType' in params ? params.StopType : null;
-
-    }
-}
-
-/**
- * 磁盘信息
- * @class
- */
-class DiskInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 磁盘类型：LOCAL_BASIC
-         * @type {string || null}
-         */
-        this.DiskType = null;
-
-        /**
-         * 磁盘ID
-         * @type {string || null}
-         */
-        this.DiskId = null;
-
-        /**
-         * 磁盘大小（GB）
-         * @type {number || null}
-         */
-        this.DiskSize = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DiskType = 'DiskType' in params ? params.DiskType : null;
-        this.DiskId = 'DiskId' in params ? params.DiskId : null;
-        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
 
     }
 }
@@ -3808,6 +3909,48 @@ class DescribeAddressesResponse extends  AbstractModel {
 }
 
 /**
+ * ImportImage请求参数结构体
+ * @class
+ */
+class ImportImageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 镜像的Id。
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * 镜像的描述。
+         * @type {string || null}
+         */
+        this.ImageDescription = null;
+
+        /**
+         * 源地域
+         * @type {string || null}
+         */
+        this.SourceRegion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.ImageDescription = 'ImageDescription' in params ? params.ImageDescription : null;
+        this.SourceRegion = 'SourceRegion' in params ? params.SourceRegion : null;
+
+    }
+}
+
+/**
  * DetachNetworkInterface返回参数结构体
  * @class
  */
@@ -3907,6 +4050,12 @@ class DescribeVpcsRequest extends  AbstractModel {
         super();
 
         /**
+         * 地域
+         * @type {string || null}
+         */
+        this.EcmRegion = null;
+
+        /**
          * VPC实例ID。形如：vpc-f49l6u0z。每次请求的实例的上限为100。参数不支持同时指定VpcIds和Filters。
          * @type {Array.<string> || null}
          */
@@ -3936,12 +4085,6 @@ tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值
          */
         this.Limit = null;
 
-        /**
-         * 地域
-         * @type {string || null}
-         */
-        this.EcmRegion = null;
-
     }
 
     /**
@@ -3951,6 +4094,7 @@ tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值
         if (!params) {
             return;
         }
+        this.EcmRegion = 'EcmRegion' in params ? params.EcmRegion : null;
         this.VpcIds = 'VpcIds' in params ? params.VpcIds : null;
 
         if (params.Filters) {
@@ -3963,7 +4107,6 @@ tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
-        this.EcmRegion = 'EcmRegion' in params ? params.EcmRegion : null;
 
     }
 }
@@ -3999,6 +4142,50 @@ class ResetInstancesMaxBandwidthRequest extends  AbstractModel {
         }
         this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
         this.MaxBandwidthOut = 'MaxBandwidthOut' in params ? params.MaxBandwidthOut : null;
+
+    }
+}
+
+/**
+ * 操作系统支持的类型。
+ * @class
+ */
+class OsVersion extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 操作系统类型
+         * @type {string || null}
+         */
+        this.OsName = null;
+
+        /**
+         * 支持的操作系统版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.OsVersions = null;
+
+        /**
+         * 支持的操作系统架构
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Architecture = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OsName = 'OsName' in params ? params.OsName : null;
+        this.OsVersions = 'OsVersions' in params ? params.OsVersions : null;
+        this.Architecture = 'Architecture' in params ? params.Architecture : null;
 
     }
 }
@@ -4373,6 +4560,61 @@ class ModifyDefaultSubnetResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeImportImageOs返回参数结构体
+ * @class
+ */
+class DescribeImportImageOsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 支持的导入镜像的操作系统类型
+         * @type {ImageOsList || null}
+         */
+        this.ImportImageOsListSupported = null;
+
+        /**
+         * 支持的导入镜像的操作系统版本
+         * @type {Array.<OsVersion> || null}
+         */
+        this.ImportImageOsVersionSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ImportImageOsListSupported) {
+            let obj = new ImageOsList();
+            obj.deserialize(params.ImportImageOsListSupported)
+            this.ImportImageOsListSupported = obj;
+        }
+
+        if (params.ImportImageOsVersionSet) {
+            this.ImportImageOsVersionSet = new Array();
+            for (let z in params.ImportImageOsVersionSet) {
+                let obj = new OsVersion();
+                obj.deserialize(params.ImportImageOsVersionSet[z]);
+                this.ImportImageOsVersionSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeModuleDetail返回参数结构体
  * @class
  */
@@ -4652,6 +4894,34 @@ class DeleteVpcResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 镜像文件信息
+ * @class
+ */
+class ImageUrl extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 镜像文件COS链接，如设置私有读写，需授权腾讯云ECM运营账号访问权限。
+         * @type {string || null}
+         */
+        this.ImageFile = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageFile = 'ImageFile' in params ? params.ImageFile : null;
 
     }
 }
@@ -5273,6 +5543,84 @@ class DescribeInstanceTypeConfigRequest extends  AbstractModel {
 }
 
 /**
+ * ImportCustomImage请求参数结构体
+ * @class
+ */
+class ImportCustomImageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 镜像名称
+         * @type {string || null}
+         */
+        this.ImageName = null;
+
+        /**
+         * 导入镜像的操作系统架构，x86_64 或 i386
+         * @type {string || null}
+         */
+        this.Architecture = null;
+
+        /**
+         * 导入镜像的操作系统类型，通过DescribeImportImageOs获取
+         * @type {string || null}
+         */
+        this.OsType = null;
+
+        /**
+         * 导入镜像的操作系统版本，通过DescribeImportImageOs获取
+         * @type {string || null}
+         */
+        this.OsVersion = null;
+
+        /**
+         * 镜像描述
+         * @type {string || null}
+         */
+        this.ImageDescription = null;
+
+        /**
+         * 镜像启动方式，cloudinit或nbd， 默认cloudinit
+         * @type {string || null}
+         */
+        this.InitFlag = null;
+
+        /**
+         * 镜像描述，多层镜像按顺序传入
+         * @type {Array.<ImageUrl> || null}
+         */
+        this.ImageUrls = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageName = 'ImageName' in params ? params.ImageName : null;
+        this.Architecture = 'Architecture' in params ? params.Architecture : null;
+        this.OsType = 'OsType' in params ? params.OsType : null;
+        this.OsVersion = 'OsVersion' in params ? params.OsVersion : null;
+        this.ImageDescription = 'ImageDescription' in params ? params.ImageDescription : null;
+        this.InitFlag = 'InitFlag' in params ? params.InitFlag : null;
+
+        if (params.ImageUrls) {
+            this.ImageUrls = new Array();
+            for (let z in params.ImageUrls) {
+                let obj = new ImageUrl();
+                obj.deserialize(params.ImageUrls[z]);
+                this.ImageUrls.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeModuleDetail请求参数结构体
  * @class
  */
@@ -5520,30 +5868,30 @@ class ModifyModuleNetworkResponse extends  AbstractModel {
 }
 
 /**
- * ImportImage请求参数结构体
+ * 磁盘信息
  * @class
  */
-class ImportImageRequest extends  AbstractModel {
+class DiskInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 镜像的Id。
+         * 磁盘类型：LOCAL_BASIC
          * @type {string || null}
          */
-        this.ImageId = null;
+        this.DiskType = null;
 
         /**
-         * 镜像的描述。
+         * 磁盘ID
          * @type {string || null}
          */
-        this.ImageDescription = null;
+        this.DiskId = null;
 
         /**
-         * 源地域
-         * @type {string || null}
+         * 磁盘大小（GB）
+         * @type {number || null}
          */
-        this.SourceRegion = null;
+        this.DiskSize = null;
 
     }
 
@@ -5554,9 +5902,30 @@ class ImportImageRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ImageId = 'ImageId' in params ? params.ImageId : null;
-        this.ImageDescription = 'ImageDescription' in params ? params.ImageDescription : null;
-        this.SourceRegion = 'SourceRegion' in params ? params.SourceRegion : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+
+    }
+}
+
+/**
+ * DescribeImportImageOs请求参数结构体
+ * @class
+ */
+class DescribeImportImageOsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -6413,6 +6782,82 @@ class PeakNetwork extends  AbstractModel {
 }
 
 /**
+ * DescribeCustomImageTask请求参数结构体
+ * @class
+ */
+class DescribeCustomImageTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 支持key,value查询
+task-id: 异步任务ID
+image-id: 镜像ID
+image-name: 镜像名称
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 支持的操作系统类型，根据windows和Linux分类。
+ * @class
+ */
+class ImageOsList extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 支持的windows操作系统
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Windows = null;
+
+        /**
+         * 支持的linux操作系统
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Linux = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Windows = 'Windows' in params ? params.Windows : null;
+        this.Linux = 'Linux' in params ? params.Linux : null;
+
+    }
+}
+
+/**
  * 实例可执行操作
  * @class
  */
@@ -7086,7 +7531,6 @@ class DescribeImageResponse extends  AbstractModel {
 
         /**
          * 镜像总数
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -8171,7 +8615,9 @@ module.exports = {
     DescribeInstancesDeniedActionsRequest: DescribeInstancesDeniedActionsRequest,
     Internet: Internet,
     DescribeModuleResponse: DescribeModuleResponse,
+    ImageTask: ImageTask,
     Province: Province,
+    ImportCustomImageResponse: ImportCustomImageResponse,
     ModifyModuleNameResponse: ModifyModuleNameResponse,
     DescribeNetworkInterfacesRequest: DescribeNetworkInterfacesRequest,
     DescribeSubnetsRequest: DescribeSubnetsRequest,
@@ -8190,13 +8636,13 @@ module.exports = {
     RemovePrivateIpAddressesResponse: RemovePrivateIpAddressesResponse,
     DescribeDefaultSubnetResponse: DescribeDefaultSubnetResponse,
     VpcInfo: VpcInfo,
+    DescribeCustomImageTaskResponse: DescribeCustomImageTaskResponse,
     SecurityGroup: SecurityGroup,
     DeleteSubnetRequest: DeleteSubnetRequest,
     DescribeModuleRequest: DescribeModuleRequest,
     Position: Position,
     CreateModuleResponse: CreateModuleResponse,
     RebootInstancesRequest: RebootInstancesRequest,
-    DiskInfo: DiskInfo,
     AllocateAddressesRequest: AllocateAddressesRequest,
     DeleteNetworkInterfaceRequest: DeleteNetworkInterfaceRequest,
     RemovePrivateIpAddressesRequest: RemovePrivateIpAddressesRequest,
@@ -8237,11 +8683,13 @@ module.exports = {
     DescribeInstanceTypeConfigResponse: DescribeInstanceTypeConfigResponse,
     NodeInstanceNum: NodeInstanceNum,
     DescribeAddressesResponse: DescribeAddressesResponse,
+    ImportImageRequest: ImportImageRequest,
     DetachNetworkInterfaceResponse: DetachNetworkInterfaceResponse,
     InstanceFamilyConfig: InstanceFamilyConfig,
     DeleteModuleRequest: DeleteModuleRequest,
     DescribeVpcsRequest: DescribeVpcsRequest,
     ResetInstancesMaxBandwidthRequest: ResetInstancesMaxBandwidthRequest,
+    OsVersion: OsVersion,
     PeakBase: PeakBase,
     ModifyModuleNetworkRequest: ModifyModuleNetworkRequest,
     Image: Image,
@@ -8249,11 +8697,13 @@ module.exports = {
     DetachNetworkInterfaceRequest: DetachNetworkInterfaceRequest,
     DescribeConfigResponse: DescribeConfigResponse,
     ModifyDefaultSubnetResponse: ModifyDefaultSubnetResponse,
+    DescribeImportImageOsResponse: DescribeImportImageOsResponse,
     DescribeModuleDetailResponse: DescribeModuleDetailResponse,
     StopInstancesRequest: StopInstancesRequest,
     Subnet: Subnet,
     ModifyVpcAttributeResponse: ModifyVpcAttributeResponse,
     DeleteVpcResponse: DeleteVpcResponse,
+    ImageUrl: ImageUrl,
     ISP: ISP,
     PrivateIpAddressSpecification: PrivateIpAddressSpecification,
     ISPCounter: ISPCounter,
@@ -8263,6 +8713,7 @@ module.exports = {
     DescribeInstanceVncUrlResponse: DescribeInstanceVncUrlResponse,
     DisassociateAddressResponse: DisassociateAddressResponse,
     DescribeInstanceTypeConfigRequest: DescribeInstanceTypeConfigRequest,
+    ImportCustomImageRequest: ImportCustomImageRequest,
     DescribeModuleDetailRequest: DescribeModuleDetailRequest,
     AssociateAddressRequest: AssociateAddressRequest,
     ModifyVpcAttributeRequest: ModifyVpcAttributeRequest,
@@ -8270,7 +8721,8 @@ module.exports = {
     AttachNetworkInterfaceResponse: AttachNetworkInterfaceResponse,
     DescribeBaseOverviewRequest: DescribeBaseOverviewRequest,
     ModifyModuleNetworkResponse: ModifyModuleNetworkResponse,
-    ImportImageRequest: ImportImageRequest,
+    DiskInfo: DiskInfo,
+    DescribeImportImageOsRequest: DescribeImportImageOsRequest,
     NetworkInterfaceAttachment: NetworkInterfaceAttachment,
     StopInstancesResponse: StopInstancesResponse,
     ModifyModuleNameRequest: ModifyModuleNameRequest,
@@ -8290,6 +8742,8 @@ module.exports = {
     ModifyModuleImageResponse: ModifyModuleImageResponse,
     ResetInstancesRequest: ResetInstancesRequest,
     PeakNetwork: PeakNetwork,
+    DescribeCustomImageTaskRequest: DescribeCustomImageTaskRequest,
+    ImageOsList: ImageOsList,
     InstanceOperator: InstanceOperator,
     ModifyAddressAttributeResponse: ModifyAddressAttributeResponse,
     ImportImageResponse: ImportImageResponse,

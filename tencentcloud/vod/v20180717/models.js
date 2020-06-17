@@ -7527,14 +7527,12 @@ class DescribeMediaInfosResponse extends  AbstractModel {
 
         /**
          * 媒体文件信息列表。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<MediaInfo> || null}
          */
         this.MediaInfoSet = null;
 
         /**
          * 不存在的文件 ID 列表。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.NotExistFileIdSet = null;
@@ -9958,7 +9956,6 @@ class ModifyMediaInfoResponse extends  AbstractModel {
         /**
          * 新的视频封面 URL。
 * 注意：仅当请求携带 CoverData 时此返回值有效。 *
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.CoverUrl = null;

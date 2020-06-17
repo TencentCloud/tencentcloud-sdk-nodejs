@@ -23,7 +23,9 @@ const CreateNetworkInterfaceRequest = models.CreateNetworkInterfaceRequest;
 const DescribeInstancesDeniedActionsRequest = models.DescribeInstancesDeniedActionsRequest;
 const Internet = models.Internet;
 const DescribeModuleResponse = models.DescribeModuleResponse;
+const ImageTask = models.ImageTask;
 const Province = models.Province;
+const ImportCustomImageResponse = models.ImportCustomImageResponse;
 const ModifyModuleNameResponse = models.ModifyModuleNameResponse;
 const DescribeNetworkInterfacesRequest = models.DescribeNetworkInterfacesRequest;
 const DescribeSubnetsRequest = models.DescribeSubnetsRequest;
@@ -42,13 +44,13 @@ const DescribeNodeResponse = models.DescribeNodeResponse;
 const RemovePrivateIpAddressesResponse = models.RemovePrivateIpAddressesResponse;
 const DescribeDefaultSubnetResponse = models.DescribeDefaultSubnetResponse;
 const VpcInfo = models.VpcInfo;
+const DescribeCustomImageTaskResponse = models.DescribeCustomImageTaskResponse;
 const SecurityGroup = models.SecurityGroup;
 const DeleteSubnetRequest = models.DeleteSubnetRequest;
 const DescribeModuleRequest = models.DescribeModuleRequest;
 const Position = models.Position;
 const CreateModuleResponse = models.CreateModuleResponse;
 const RebootInstancesRequest = models.RebootInstancesRequest;
-const DiskInfo = models.DiskInfo;
 const AllocateAddressesRequest = models.AllocateAddressesRequest;
 const DeleteNetworkInterfaceRequest = models.DeleteNetworkInterfaceRequest;
 const RemovePrivateIpAddressesRequest = models.RemovePrivateIpAddressesRequest;
@@ -89,11 +91,13 @@ const DescribeAddressQuotaRequest = models.DescribeAddressQuotaRequest;
 const DescribeInstanceTypeConfigResponse = models.DescribeInstanceTypeConfigResponse;
 const NodeInstanceNum = models.NodeInstanceNum;
 const DescribeAddressesResponse = models.DescribeAddressesResponse;
+const ImportImageRequest = models.ImportImageRequest;
 const DetachNetworkInterfaceResponse = models.DetachNetworkInterfaceResponse;
 const InstanceFamilyConfig = models.InstanceFamilyConfig;
 const DeleteModuleRequest = models.DeleteModuleRequest;
 const DescribeVpcsRequest = models.DescribeVpcsRequest;
 const ResetInstancesMaxBandwidthRequest = models.ResetInstancesMaxBandwidthRequest;
+const OsVersion = models.OsVersion;
 const PeakBase = models.PeakBase;
 const ModifyModuleNetworkRequest = models.ModifyModuleNetworkRequest;
 const Image = models.Image;
@@ -101,11 +105,13 @@ const TagSpecification = models.TagSpecification;
 const DetachNetworkInterfaceRequest = models.DetachNetworkInterfaceRequest;
 const DescribeConfigResponse = models.DescribeConfigResponse;
 const ModifyDefaultSubnetResponse = models.ModifyDefaultSubnetResponse;
+const DescribeImportImageOsResponse = models.DescribeImportImageOsResponse;
 const DescribeModuleDetailResponse = models.DescribeModuleDetailResponse;
 const StopInstancesRequest = models.StopInstancesRequest;
 const Subnet = models.Subnet;
 const ModifyVpcAttributeResponse = models.ModifyVpcAttributeResponse;
 const DeleteVpcResponse = models.DeleteVpcResponse;
+const ImageUrl = models.ImageUrl;
 const ISP = models.ISP;
 const PrivateIpAddressSpecification = models.PrivateIpAddressSpecification;
 const ISPCounter = models.ISPCounter;
@@ -115,6 +121,7 @@ const EnhancedService = models.EnhancedService;
 const DescribeInstanceVncUrlResponse = models.DescribeInstanceVncUrlResponse;
 const DisassociateAddressResponse = models.DisassociateAddressResponse;
 const DescribeInstanceTypeConfigRequest = models.DescribeInstanceTypeConfigRequest;
+const ImportCustomImageRequest = models.ImportCustomImageRequest;
 const DescribeModuleDetailRequest = models.DescribeModuleDetailRequest;
 const AssociateAddressRequest = models.AssociateAddressRequest;
 const ModifyVpcAttributeRequest = models.ModifyVpcAttributeRequest;
@@ -122,7 +129,8 @@ const DescribePeakNetworkOverviewResponse = models.DescribePeakNetworkOverviewRe
 const AttachNetworkInterfaceResponse = models.AttachNetworkInterfaceResponse;
 const DescribeBaseOverviewRequest = models.DescribeBaseOverviewRequest;
 const ModifyModuleNetworkResponse = models.ModifyModuleNetworkResponse;
-const ImportImageRequest = models.ImportImageRequest;
+const DiskInfo = models.DiskInfo;
+const DescribeImportImageOsRequest = models.DescribeImportImageOsRequest;
 const NetworkInterfaceAttachment = models.NetworkInterfaceAttachment;
 const StopInstancesResponse = models.StopInstancesResponse;
 const ModifyModuleNameRequest = models.ModifyModuleNameRequest;
@@ -142,6 +150,8 @@ const ModifyAddressAttributeRequest = models.ModifyAddressAttributeRequest;
 const ModifyModuleImageResponse = models.ModifyModuleImageResponse;
 const ResetInstancesRequest = models.ResetInstancesRequest;
 const PeakNetwork = models.PeakNetwork;
+const DescribeCustomImageTaskRequest = models.DescribeCustomImageTaskRequest;
+const ImageOsList = models.ImageOsList;
 const InstanceOperator = models.InstanceOperator;
 const ModifyAddressAttributeResponse = models.ModifyAddressAttributeResponse;
 const ImportImageResponse = models.ImportImageResponse;
@@ -267,6 +277,17 @@ class EcmClient extends AbstractClient {
     ModifyModuleName(req, cb) {
         let resp = new ModifyModuleNameResponse();
         this.request("ModifyModuleName", req, resp, cb);
+    }
+
+    /**
+     * 从CVM产品导入镜像到ECM
+     * @param {ImportImageRequest} req
+     * @param {function(string, ImportImageResponse):void} cb
+     * @public
+     */
+    ImportImage(req, cb) {
+        let resp = new ImportImageResponse();
+        this.request("ImportImage", req, resp, cb);
     }
 
     /**
@@ -406,14 +427,14 @@ EIP 如果被封堵，则不能进行解绑定操作。
     }
 
     /**
-     * 从CVM产品导入镜像到ECM
-     * @param {ImportImageRequest} req
-     * @param {function(string, ImportImageResponse):void} cb
+     * 弹性网卡申请内网 IP
+     * @param {AssignPrivateIpAddressesRequest} req
+     * @param {function(string, AssignPrivateIpAddressesResponse):void} cb
      * @public
      */
-    ImportImage(req, cb) {
-        let resp = new ImportImageResponse();
-        this.request("ImportImage", req, resp, cb);
+    AssignPrivateIpAddresses(req, cb) {
+        let resp = new AssignPrivateIpAddressesResponse();
+        this.request("AssignPrivateIpAddresses", req, resp, cb);
     }
 
     /**
@@ -590,6 +611,17 @@ EIP 如果欠费或被封堵，则不能被绑定。
     }
 
     /**
+     * 查询外部导入镜像支持的OS列表
+     * @param {DescribeImportImageOsRequest} req
+     * @param {function(string, DescribeImportImageOsResponse):void} cb
+     * @public
+     */
+    DescribeImportImageOs(req, cb) {
+        let resp = new DescribeImportImageOsResponse();
+        this.request("DescribeImportImageOs", req, resp, cb);
+    }
+
+    /**
      * 创建安全组
      * @param {CreateSecurityGroupRequest} req
      * @param {function(string, CreateSecurityGroupResponse):void} cb
@@ -609,6 +641,17 @@ EIP 如果欠费或被封堵，则不能被绑定。
     DescribeNode(req, cb) {
         let resp = new DescribeNodeResponse();
         this.request("DescribeNode", req, resp, cb);
+    }
+
+    /**
+     * 从腾讯云COS导入自定义镜像
+     * @param {ImportCustomImageRequest} req
+     * @param {function(string, ImportCustomImageResponse):void} cb
+     * @public
+     */
+    ImportCustomImage(req, cb) {
+        let resp = new ImportCustomImageResponse();
+        this.request("ImportCustomImage", req, resp, cb);
     }
 
     /**
@@ -634,14 +677,14 @@ EIP 如果欠费或被封堵，则不能被绑定。
     }
 
     /**
-     * 弹性网卡申请内网 IP
-     * @param {AssignPrivateIpAddressesRequest} req
-     * @param {function(string, AssignPrivateIpAddressesResponse):void} cb
+     * 查询导入镜像任务
+     * @param {DescribeCustomImageTaskRequest} req
+     * @param {function(string, DescribeCustomImageTaskResponse):void} cb
      * @public
      */
-    AssignPrivateIpAddresses(req, cb) {
-        let resp = new AssignPrivateIpAddressesResponse();
-        this.request("AssignPrivateIpAddresses", req, resp, cb);
+    DescribeCustomImageTask(req, cb) {
+        let resp = new DescribeCustomImageTaskResponse();
+        this.request("DescribeCustomImageTask", req, resp, cb);
     }
 
     /**
