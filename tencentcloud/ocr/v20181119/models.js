@@ -767,18 +767,12 @@ WARN_DRIVER_LICENSE_PS_CARD ps告警
 }
 
 /**
- * 英文识别结果
+ * 识别出来的单词信息包括单词（包括单词Character和单词置信度confidence）
  * @class
  */
-class TextDetectionEn extends  AbstractModel {
+class Words extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 识别出的文本行内容
-         * @type {string || null}
-         */
-        this.DetectedText = null;
 
         /**
          * 置信度 0 ~100
@@ -787,7 +781,48 @@ class TextDetectionEn extends  AbstractModel {
         this.Confidence = null;
 
         /**
-         * 文本行坐标，以四个顶点坐标表示
+         * 候选字Character
+         * @type {string || null}
+         */
+        this.Character = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Character = 'Character' in params ? params.Character : null;
+
+    }
+}
+
+/**
+ * 英文识别结果
+ * @class
+ */
+class TextDetectionEn extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 识别出的文本行内容。
+         * @type {string || null}
+         */
+        this.DetectedText = null;
+
+        /**
+         * 置信度 0 ~100。
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * 文本行坐标，以四个顶点坐标表示。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<Coord> || null}
          */
@@ -798,6 +833,24 @@ class TextDetectionEn extends  AbstractModel {
          * @type {string || null}
          */
         this.AdvancedInfo = null;
+
+        /**
+         * 单词在原图中的四点坐标。
+         * @type {Array.<WordCoordPoint> || null}
+         */
+        this.WordCoordPoint = null;
+
+        /**
+         * 候选字符集(包含候选字Character以及置信度Confidence)。
+         * @type {Array.<CandWord> || null}
+         */
+        this.CandWord = null;
+
+        /**
+         * 识别出来的单词信息（包括单词Character和单词置信度confidence）
+         * @type {Array.<Words> || null}
+         */
+        this.Words = null;
 
     }
 
@@ -820,6 +873,33 @@ class TextDetectionEn extends  AbstractModel {
             }
         }
         this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
+
+        if (params.WordCoordPoint) {
+            this.WordCoordPoint = new Array();
+            for (let z in params.WordCoordPoint) {
+                let obj = new WordCoordPoint();
+                obj.deserialize(params.WordCoordPoint[z]);
+                this.WordCoordPoint.push(obj);
+            }
+        }
+
+        if (params.CandWord) {
+            this.CandWord = new Array();
+            for (let z in params.CandWord) {
+                let obj = new CandWord();
+                obj.deserialize(params.CandWord[z]);
+                this.CandWord.push(obj);
+            }
+        }
+
+        if (params.Words) {
+            this.Words = new Array();
+            for (let z in params.Words) {
+                let obj = new Words();
+                obj.deserialize(params.Words[z]);
+                this.Words.push(obj);
+            }
+        }
 
     }
 }
@@ -1406,6 +1486,42 @@ class InvoiceGeneralInfo extends  AbstractModel {
             let obj = new Rect();
             obj.deserialize(params.Rect)
             this.Rect = obj;
+        }
+
+    }
+}
+
+/**
+ * 英文OCR识别出的单词在原图中的四点坐标数组
+ * @class
+ */
+class WordCoordPoint extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 英文OCR识别出的每个单词在原图中的四点坐标。
+         * @type {Array.<Coord> || null}
+         */
+        this.WordCoordinate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.WordCoordinate) {
+            this.WordCoordinate = new Array();
+            for (let z in params.WordCoordinate) {
+                let obj = new Coord();
+                obj.deserialize(params.WordCoordinate[z]);
+                this.WordCoordinate.push(obj);
+            }
         }
 
     }
@@ -4313,6 +4429,20 @@ class EnglishOCRRequest extends  AbstractModel {
          */
         this.ImageUrl = null;
 
+        /**
+         * 单词四点坐标开关，开启可返回图片中单词的四点坐标。
+该参数默认值为false。
+         * @type {boolean || null}
+         */
+        this.EnableCoordPoint = null;
+
+        /**
+         * 候选字开关，开启可返回识别时多个可能的候选字（每个候选字对应其置信度）。
+该参数默认值为false。
+         * @type {boolean || null}
+         */
+        this.EnableCandWord = null;
+
     }
 
     /**
@@ -4324,6 +4454,8 @@ class EnglishOCRRequest extends  AbstractModel {
         }
         this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.EnableCoordPoint = 'EnableCoordPoint' in params ? params.EnableCoordPoint : null;
+        this.EnableCandWord = 'EnableCandWord' in params ? params.EnableCandWord : null;
 
     }
 }
@@ -4892,10 +5024,10 @@ class QueryBarCodeResponse extends  AbstractModel {
 }
 
 /**
- * EduPaperOCR请求参数结构体
+ * ArithmeticOCR请求参数结构体
  * @class
  */
-class EduPaperOCRRequest extends  AbstractModel {
+class ArithmeticOCRRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -4918,20 +5050,6 @@ class EduPaperOCRRequest extends  AbstractModel {
          */
         this.ImageUrl = null;
 
-        /**
-         * 扩展配置信息。
-配置格式：{"option1":value1,"option2":value2}
-可配置信息：
-      参数名称  是否必选   类型   可选值  默认值  描述
-      task_type  否  Int32  [0,1]  1  用于选择任务类型: 0: 关闭版式分析与处理 1: 开启版式分析处理
-      is_structuralization 否 Bool false\true true  用于选择是否结构化输出：false：返回包体返回通用输出 true：返回包体同时返回通用和结构化输出
-      if_readable_format 否 Bool false\true false 是否按照版式整合通用文本/公式输出结果
-例子：
-{"task_type": 1,"is_structuralization": true,"if_readable_format": true}
-         * @type {string || null}
-         */
-        this.Config = null;
-
     }
 
     /**
@@ -4943,7 +5061,6 @@ class EduPaperOCRRequest extends  AbstractModel {
         }
         this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
-        this.Config = 'Config' in params ? params.Config : null;
 
     }
 }
@@ -5466,10 +5583,10 @@ class VinOCRResponse extends  AbstractModel {
 }
 
 /**
- * ArithmeticOCR请求参数结构体
+ * EduPaperOCR请求参数结构体
  * @class
  */
-class ArithmeticOCRRequest extends  AbstractModel {
+class EduPaperOCRRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -5492,6 +5609,20 @@ class ArithmeticOCRRequest extends  AbstractModel {
          */
         this.ImageUrl = null;
 
+        /**
+         * 扩展配置信息。
+配置格式：{"option1":value1,"option2":value2}
+可配置信息：
+      参数名称  是否必选   类型   可选值  默认值  描述
+      task_type  否  Int32  [0,1]  1  用于选择任务类型: 0: 关闭版式分析与处理 1: 开启版式分析处理
+      is_structuralization 否 Bool false\true true  用于选择是否结构化输出：false：返回包体返回通用输出 true：返回包体同时返回通用和结构化输出
+      if_readable_format 否 Bool false\true false 是否按照版式整合通用文本/公式输出结果
+例子：
+{"task_type": 1,"is_structuralization": true,"if_readable_format": true}
+         * @type {string || null}
+         */
+        this.Config = null;
+
     }
 
     /**
@@ -5503,6 +5634,7 @@ class ArithmeticOCRRequest extends  AbstractModel {
         }
         this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.Config = 'Config' in params ? params.Config : null;
 
     }
 }
@@ -6798,6 +6930,42 @@ class QuotaInvoiceOCRResponse extends  AbstractModel {
 }
 
 /**
+ * 候选字符集(包含候选字Character以及置信度Confidence)
+ * @class
+ */
+class CandWord extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 候选字符集的单词信息（包括单词Character和单词置信度confidence）
+         * @type {Array.<Words> || null}
+         */
+        this.CandWords = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.CandWords) {
+            this.CandWords = new Array();
+            for (let z in params.CandWords) {
+                let obj = new Words();
+                obj.deserialize(params.CandWords[z]);
+                this.CandWords.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * 企业证照单个字段的内容
  * @class
  */
@@ -7885,6 +8053,7 @@ module.exports = {
     TextDetectResponse: TextDetectResponse,
     FinanBillSliceOCRResponse: FinanBillSliceOCRResponse,
     DriverLicenseOCRResponse: DriverLicenseOCRResponse,
+    Words: Words,
     TextDetectionEn: TextDetectionEn,
     PermitOCRResponse: PermitOCRResponse,
     InvoiceGeneralOCRRequest: InvoiceGeneralOCRRequest,
@@ -7898,6 +8067,7 @@ module.exports = {
     VehicleLicenseOCRRequest: VehicleLicenseOCRRequest,
     EnterpriseLicenseOCRResponse: EnterpriseLicenseOCRResponse,
     InvoiceGeneralInfo: InvoiceGeneralInfo,
+    WordCoordPoint: WordCoordPoint,
     InstitutionOCRResponse: InstitutionOCRResponse,
     DriverLicenseOCRRequest: DriverLicenseOCRRequest,
     TextDetection: TextDetection,
@@ -7962,7 +8132,7 @@ module.exports = {
     TextVehicleFront: TextVehicleFront,
     FinanBillSliceInfo: FinanBillSliceInfo,
     QueryBarCodeResponse: QueryBarCodeResponse,
-    EduPaperOCRRequest: EduPaperOCRRequest,
+    ArithmeticOCRRequest: ArithmeticOCRRequest,
     FinanBillSliceOCRRequest: FinanBillSliceOCRRequest,
     MLIDPassportOCRResponse: MLIDPassportOCRResponse,
     VatRollInvoiceOCRRequest: VatRollInvoiceOCRRequest,
@@ -7972,7 +8142,7 @@ module.exports = {
     TextWaybill: TextWaybill,
     QuestionObj: QuestionObj,
     VinOCRResponse: VinOCRResponse,
-    ArithmeticOCRRequest: ArithmeticOCRRequest,
+    EduPaperOCRRequest: EduPaperOCRRequest,
     FormulaOCRRequest: FormulaOCRRequest,
     PassportOCRRequest: PassportOCRRequest,
     DutyPaidProofOCRRequest: DutyPaidProofOCRRequest,
@@ -7996,6 +8166,7 @@ module.exports = {
     EnglishOCRResponse: EnglishOCRResponse,
     BusInvoiceOCRRequest: BusInvoiceOCRRequest,
     QuotaInvoiceOCRResponse: QuotaInvoiceOCRResponse,
+    CandWord: CandWord,
     EnterpriseLicenseInfo: EnterpriseLicenseInfo,
     InsuranceBillOCRRequest: InsuranceBillOCRRequest,
     GeneralHandwritingOCRResponse: GeneralHandwritingOCRResponse,
