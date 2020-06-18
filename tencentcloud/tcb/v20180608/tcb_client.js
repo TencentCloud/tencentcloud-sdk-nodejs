@@ -24,6 +24,7 @@ const CheckTcbServiceResponse = models.CheckTcbServiceResponse;
 const DescribeEndUserLoginStatisticRequest = models.DescribeEndUserLoginStatisticRequest;
 const StorageInfo = models.StorageInfo;
 const LoginStatistic = models.LoginStatistic;
+const PostpayEnvQuota = models.PostpayEnvQuota;
 const FunctionInfo = models.FunctionInfo;
 const CreatePostpayPackageResponse = models.CreatePostpayPackageResponse;
 const CommonServiceAPIRequest = models.CommonServiceAPIRequest;
@@ -61,13 +62,14 @@ const DestroyStaticStoreResponse = models.DestroyStaticStoreResponse;
 const DeleteEndUserResponse = models.DeleteEndUserResponse;
 const EnvBillingInfoItem = models.EnvBillingInfoItem;
 const PlatformStatistic = models.PlatformStatistic;
+const ModifyEndUserRequest = models.ModifyEndUserRequest;
 const DescribeDatabaseACLResponse = models.DescribeDatabaseACLResponse;
 const EnvInfo = models.EnvInfo;
 const DestroyEnvRequest = models.DestroyEnvRequest;
 const DestroyEnvResponse = models.DestroyEnvResponse;
 const ModifyDatabaseACLRequest = models.ModifyDatabaseACLRequest;
 const DestroyStaticStoreRequest = models.DestroyStaticStoreRequest;
-const PostpayEnvQuota = models.PostpayEnvQuota;
+const ModifyEndUserResponse = models.ModifyEndUserResponse;
 const EndUserInfo = models.EndUserInfo;
 const DescribeEnvLimitResponse = models.DescribeEnvLimitResponse;
 const DescribePostpayPackageFreeQuotasResponse = models.DescribePostpayPackageFreeQuotasResponse;
@@ -163,6 +165,17 @@ class TcbClient extends AbstractClient {
     DescribeEndUserStatistic(req, cb) {
         let resp = new DescribeEndUserStatisticResponse();
         this.request("DescribeEndUserStatistic", req, resp, cb);
+    }
+
+    /**
+     * 管理终端用户
+     * @param {ModifyEndUserRequest} req
+     * @param {function(string, ModifyEndUserResponse):void} cb
+     * @public
+     */
+    ModifyEndUser(req, cb) {
+        let resp = new ModifyEndUserResponse();
+        this.request("ModifyEndUser", req, resp, cb);
     }
 
     /**

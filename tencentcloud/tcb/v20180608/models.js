@@ -319,6 +319,64 @@ class LoginStatistic extends  AbstractModel {
 }
 
 /**
+ * 按量付费免费配额信息
+ * @class
+ */
+class PostpayEnvQuota extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源类型
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * 指标名
+         * @type {string || null}
+         */
+        this.MetricName = null;
+
+        /**
+         * 配额值
+         * @type {number || null}
+         */
+        this.Value = null;
+
+        /**
+         * 配额生效时间
+为空表示没有时间限制
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 配额失效时间
+为空表示没有时间限制
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
  * 函数的信息
  * @class
  */
@@ -1932,6 +1990,48 @@ class PlatformStatistic extends  AbstractModel {
 }
 
 /**
+ * ModifyEndUser请求参数结构体
+ * @class
+ */
+class ModifyEndUserRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 环境ID
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * C端用户端的唯一ID
+         * @type {string || null}
+         */
+        this.UUId = null;
+
+        /**
+         * 帐号的状态
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.UUId = 'UUId' in params ? params.UUId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
  * DescribeDatabaseACL返回参数结构体
  * @class
  */
@@ -2291,44 +2391,18 @@ class DestroyStaticStoreRequest extends  AbstractModel {
 }
 
 /**
- * 按量付费免费配额信息
+ * ModifyEndUser返回参数结构体
  * @class
  */
-class PostpayEnvQuota extends  AbstractModel {
+class ModifyEndUserResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 资源类型
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.ResourceType = null;
-
-        /**
-         * 指标名
-         * @type {string || null}
-         */
-        this.MetricName = null;
-
-        /**
-         * 配额值
-         * @type {number || null}
-         */
-        this.Value = null;
-
-        /**
-         * 配额生效时间
-为空表示没有时间限制
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * 配额失效时间
-为空表示没有时间限制
-         * @type {string || null}
-         */
-        this.EndTime = null;
+        this.RequestId = null;
 
     }
 
@@ -2339,11 +2413,7 @@ class PostpayEnvQuota extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
-        this.MetricName = 'MetricName' in params ? params.MetricName : null;
-        this.Value = 'Value' in params ? params.Value : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2823,6 +2893,7 @@ module.exports = {
     DescribeEndUserLoginStatisticRequest: DescribeEndUserLoginStatisticRequest,
     StorageInfo: StorageInfo,
     LoginStatistic: LoginStatistic,
+    PostpayEnvQuota: PostpayEnvQuota,
     FunctionInfo: FunctionInfo,
     CreatePostpayPackageResponse: CreatePostpayPackageResponse,
     CommonServiceAPIRequest: CommonServiceAPIRequest,
@@ -2860,13 +2931,14 @@ module.exports = {
     DeleteEndUserResponse: DeleteEndUserResponse,
     EnvBillingInfoItem: EnvBillingInfoItem,
     PlatformStatistic: PlatformStatistic,
+    ModifyEndUserRequest: ModifyEndUserRequest,
     DescribeDatabaseACLResponse: DescribeDatabaseACLResponse,
     EnvInfo: EnvInfo,
     DestroyEnvRequest: DestroyEnvRequest,
     DestroyEnvResponse: DestroyEnvResponse,
     ModifyDatabaseACLRequest: ModifyDatabaseACLRequest,
     DestroyStaticStoreRequest: DestroyStaticStoreRequest,
-    PostpayEnvQuota: PostpayEnvQuota,
+    ModifyEndUserResponse: ModifyEndUserResponse,
     EndUserInfo: EndUserInfo,
     DescribeEnvLimitResponse: DescribeEnvLimitResponse,
     DescribePostpayPackageFreeQuotasResponse: DescribePostpayPackageFreeQuotasResponse,

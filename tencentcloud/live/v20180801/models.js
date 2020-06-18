@@ -5063,7 +5063,7 @@ class StopLiveRecordRequest extends  AbstractModel {
         this.StreamName = null;
 
         /**
-         * 任务ID，全局唯一标识录制任务。
+         * 任务ID，由CreateLiveRecord接口返回。
          * @type {number || null}
          */
         this.TaskId = null;
@@ -9398,8 +9398,7 @@ class DeleteLiveRecordRequest extends  AbstractModel {
         this.StreamName = null;
 
         /**
-         * 任务ID，全局唯一标识录制任务。
-从接口 [CreateLiveRecord](/document/product/267/30148) 的返回值中获取TaskId。
+         * 任务ID，由CreateLiveRecord接口返回。
          * @type {number || null}
          */
         this.TaskId = null;
