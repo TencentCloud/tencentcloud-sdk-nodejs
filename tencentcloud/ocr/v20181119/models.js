@@ -1935,7 +1935,7 @@ class MainlandPermitOCRRequest extends  AbstractModel {
         this.ImageUrl = null;
 
         /**
-         * 是非返回头像。默认不返回。
+         * 是否返回头像。默认不返回。
          * @type {boolean || null}
          */
         this.RetProfile = null;
