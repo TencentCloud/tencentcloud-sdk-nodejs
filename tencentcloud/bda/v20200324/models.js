@@ -134,6 +134,174 @@ class DeletePersonRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyGroup返回参数结构体
+ * @class
+ */
+class ModifyGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 上衣衣袖信息。
+ * @class
+ */
+class UpperBodyClothSleeve extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 上衣衣袖信息, 返回值为以下集合中的一个 {长袖, 短袖}。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Type识别概率值，[0.0,1.0],代表判断正确的概率。如0.8则代表有Type值有80%概率正确。
+         * @type {number || null}
+         */
+        this.Probability = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Probability = 'Probability' in params ? params.Probability : null;
+
+    }
+}
+
+/**
+ * 图中检测出的人体属性信息。
+ * @class
+ */
+class BodyAttributeInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 人体年龄信息。 
+AttributesType 不含 Age 或检测超过 5 个人体时，此参数仍返回，但不具备参考意义。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Age || null}
+         */
+        this.Age = null;
+
+        /**
+         * 人体是否挎包。 
+AttributesType 不含 Bag 或检测超过 5 个人体时，此参数仍返回，但不具备参考意义。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Bag || null}
+         */
+        this.Bag = null;
+
+        /**
+         * 人体性别信息。 
+AttributesType 不含 Gender 或检测超过 5 个人体时，此参数仍返回，但不具备参考意义。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Gender || null}
+         */
+        this.Gender = null;
+
+        /**
+         * 人体朝向信息。   
+AttributesType 不含 UpperBodyCloth 或检测超过 5 个人体时，此参数仍返回，但不具备参考意义。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Orientation || null}
+         */
+        this.Orientation = null;
+
+        /**
+         * 人体上衣属性信息。
+AttributesType 不含 Orientation 或检测超过 5 个人体时，此参数仍返回，但不具备参考意义。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {UpperBodyCloth || null}
+         */
+        this.UpperBodyCloth = null;
+
+        /**
+         * 人体下衣属性信息。  
+AttributesType 不含 LowerBodyCloth 或检测超过 5 个人体时，此参数仍返回，但不具备参考意义。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {LowerBodyCloth || null}
+         */
+        this.LowerBodyCloth = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Age) {
+            let obj = new Age();
+            obj.deserialize(params.Age)
+            this.Age = obj;
+        }
+
+        if (params.Bag) {
+            let obj = new Bag();
+            obj.deserialize(params.Bag)
+            this.Bag = obj;
+        }
+
+        if (params.Gender) {
+            let obj = new Gender();
+            obj.deserialize(params.Gender)
+            this.Gender = obj;
+        }
+
+        if (params.Orientation) {
+            let obj = new Orientation();
+            obj.deserialize(params.Orientation)
+            this.Orientation = obj;
+        }
+
+        if (params.UpperBodyCloth) {
+            let obj = new UpperBodyCloth();
+            obj.deserialize(params.UpperBodyCloth)
+            this.UpperBodyCloth = obj;
+        }
+
+        if (params.LowerBodyCloth) {
+            let obj = new LowerBodyCloth();
+            obj.deserialize(params.LowerBodyCloth)
+            this.LowerBodyCloth = obj;
+        }
+
+    }
+}
+
+/**
  * GetGroupList返回参数结构体
  * @class
  */
@@ -491,6 +659,42 @@ class ModifyPersonInfoRequest extends  AbstractModel {
 }
 
 /**
+ * 人体性别信息。 
+AttributesType 不含 Gender 或检测超过 5 个人体时，此参数仍返回，但不具备参考意义。
+ * @class
+ */
+class Gender extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 性别信息，返回值为以下集合中的一个 {男性, 女性}
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Type识别概率值，[0.0,1.0],代表判断正确的概率。如0.8则代表有Type值有80%概率正确。
+         * @type {number || null}
+         */
+        this.Probability = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Probability = 'Probability' in params ? params.Probability : null;
+
+    }
+}
+
+/**
  * CreateGroup请求参数结构体
  * @class
  */
@@ -688,6 +892,17 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
          */
         this.MaxBodyNum = null;
 
+        /**
+         * 是否返回年龄、性别、朝向等属性。 
+可选项有 Age、Bag、Gender、UpperBodyCloth、LowerBodyCloth、Orientation。  
+如果此参数为空则为不需要返回。 
+需要将属性组成一个用逗号分隔的字符串，属性之间的顺序没有要求。 
+关于各属性的详细描述，参见下文出参。 
+最多返回面积最大的 5 个人体属性信息，超过 5 个人体（第 6 个及以后的人体）的 BodyAttributesInfo 不具备参考意义。
+         * @type {AttributesOptions || null}
+         */
+        this.AttributesOptions = null;
+
     }
 
     /**
@@ -700,6 +915,48 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
         this.Image = 'Image' in params ? params.Image : null;
         this.Url = 'Url' in params ? params.Url : null;
         this.MaxBodyNum = 'MaxBodyNum' in params ? params.MaxBodyNum : null;
+
+        if (params.AttributesOptions) {
+            let obj = new AttributesOptions();
+            obj.deserialize(params.AttributesOptions)
+            this.AttributesOptions = obj;
+        }
+
+    }
+}
+
+/**
+ * 人体年龄信息。 
+AttributesType 不含 Age 或检测超过 5 个人体时，此参数仍返回，但不具备参考意义。
+ * @class
+ */
+class Age extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 人体年龄信息，返回值为以下集合中的一个{小孩,青年,中年,老年}。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Type识别概率值，[0.0,1.0],代表判断正确的概率。如0.8则代表有Type值有80%概率正确。
+         * @type {number || null}
+         */
+        this.Probability = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Probability = 'Probability' in params ? params.Probability : null;
 
     }
 }
@@ -862,6 +1119,371 @@ class DetectBodyResponse extends  AbstractModel {
 }
 
 /**
+ * 人体是否挎包。 
+AttributesType 不含 Bag 或检测超过 5 个人体时，此参数仍返回，但不具备参考意义。
+ * @class
+ */
+class Bag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 挎包信息，返回值为以下集合中的一个{双肩包, 斜挎包, 手拎包, 无包}。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Type识别概率值，[0.0,1.0],代表判断正确的概率。如0.8则代表有Type值有80%概率正确。
+         * @type {number || null}
+         */
+        this.Probability = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Probability = 'Probability' in params ? params.Probability : null;
+
+    }
+}
+
+/**
+ * SegmentPortraitPic请求参数结构体
+ * @class
+ */
+class SegmentPortraitPicRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片 base64 数据，base64 编码后大小不可超过5M。
+图片分辨率须小于2000*2000。 
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+         * @type {string || null}
+         */
+        this.Image = null;
+
+        /**
+         * 图片的 Url 。
+Url、Image必须提供一个，如果都提供，只使用 Url。
+图片分辨率须小于2000*2000 ，图片 base64 编码后大小不可超过5M。 
+图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。  
+非腾讯云存储的Url速度和稳定性可能受一定影响。 
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Image = 'Image' in params ? params.Image : null;
+        this.Url = 'Url' in params ? params.Url : null;
+
+    }
+}
+
+/**
+ * 上衣颜色信息。
+ * @class
+ */
+class UpperBodyClothColor extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 上衣颜色信息，返回值为以下集合中的一个 {红色系, 黄色系, 绿色系, 蓝色系, 黑色系, 灰白色系。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Type识别概率值，[0.0,1.0],代表判断正确的概率。如0.8则代表有Type值有80%概率正确。
+         * @type {number || null}
+         */
+        this.Probability = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Probability = 'Probability' in params ? params.Probability : null;
+
+    }
+}
+
+/**
+ * GetGroupList请求参数结构体
+ * @class
+ */
+class GetGroupListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 起始序号，默认值为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认值为10，最大值为1000。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * 图中检测出来的人体框。
+ * @class
+ */
+class BodyDetectResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 检测出的人体置信度。 
+误识率百分之十对应的阈值是0.14；误识率百分之五对应的阈值是0.32；误识率百分之二对应的阈值是0.62；误识率百分之一对应的阈值是0.81。 
+通常情况建议使用阈值0.32，可适用大多数情况。
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * 图中检测出来的人体框
+         * @type {BodyRect || null}
+         */
+        this.BodyRect = null;
+
+        /**
+         * 图中检测出的人体属性信息。
+         * @type {BodyAttributeInfo || null}
+         */
+        this.BodyAttributeInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+
+        if (params.BodyRect) {
+            let obj = new BodyRect();
+            obj.deserialize(params.BodyRect)
+            this.BodyRect = obj;
+        }
+
+        if (params.BodyAttributeInfo) {
+            let obj = new BodyAttributeInfo();
+            obj.deserialize(params.BodyAttributeInfo)
+            this.BodyAttributeInfo = obj;
+        }
+
+    }
+}
+
+/**
+ * 人体朝向信息。  
+AttributesType 不含 Orientation 或检测超过 5 个人体时，此参数仍返回，但不具备参考意义。
+ * @class
+ */
+class Orientation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 人体朝向信息，返回值为以下集合中的一个 {正向, 背向, 左, 右}。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Type识别概率值，[0.0,1.0],代表判断正确的概率。如0.8则代表有Type值有80%概率正确。
+         * @type {number || null}
+         */
+        this.Probability = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Probability = 'Probability' in params ? params.Probability : null;
+
+    }
+}
+
+/**
+ * 上衣纹理信息。
+ * @class
+ */
+class UpperBodyClothTexture extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 上衣纹理信息，返回值为以下集合中的一个, {纯色, 格子, 大色块}。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Type识别概率值，[0.0,1.0], 代表判断正确的概率。如0.8则代表有Type值有80%概率正确。
+         * @type {number || null}
+         */
+        this.Probability = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Probability = 'Probability' in params ? params.Probability : null;
+
+    }
+}
+
+/**
+ * 上衣属性信息
+ * @class
+ */
+class UpperBodyCloth extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 上衣纹理信息。
+         * @type {UpperBodyClothTexture || null}
+         */
+        this.Texture = null;
+
+        /**
+         * 上衣颜色信息。
+         * @type {UpperBodyClothColor || null}
+         */
+        this.Color = null;
+
+        /**
+         * 上衣衣袖信息。
+         * @type {UpperBodyClothSleeve || null}
+         */
+        this.Sleeve = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Texture) {
+            let obj = new UpperBodyClothTexture();
+            obj.deserialize(params.Texture)
+            this.Texture = obj;
+        }
+
+        if (params.Color) {
+            let obj = new UpperBodyClothColor();
+            obj.deserialize(params.Color)
+            this.Color = obj;
+        }
+
+        if (params.Sleeve) {
+            let obj = new UpperBodyClothSleeve();
+            obj.deserialize(params.Sleeve)
+            this.Sleeve = obj;
+        }
+
+    }
+}
+
+/**
+ * 下衣长度信息
+ * @class
+ */
+class LowerBodyClothLength extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 下衣长度信息，返回值为以下集合中的一个，{长, 短} 。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Type识别概率值，[0.0,1.0],代表判断正确的概率。如0.8则代表有Type值有80%概率正确。
+         * @type {number || null}
+         */
+        this.Probability = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Probability = 'Probability' in params ? params.Probability : null;
+
+    }
+}
+
+/**
  * SearchTrace返回参数结构体
  * @class
  */
@@ -924,125 +1546,6 @@ class SearchTraceResponse extends  AbstractModel {
         this.InputRetCodeDetails = 'InputRetCodeDetails' in params ? params.InputRetCodeDetails : null;
         this.BodyModelVersion = 'BodyModelVersion' in params ? params.BodyModelVersion : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * SegmentPortraitPic请求参数结构体
- * @class
- */
-class SegmentPortraitPicRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 图片 base64 数据，base64 编码后大小不可超过5M。
-图片分辨率须小于2000*2000。 
-支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
-         * @type {string || null}
-         */
-        this.Image = null;
-
-        /**
-         * 图片的 Url 。
-Url、Image必须提供一个，如果都提供，只使用 Url。
-图片分辨率须小于2000*2000 ，图片 base64 编码后大小不可超过5M。 
-图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。  
-非腾讯云存储的Url速度和稳定性可能受一定影响。 
-支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
-         * @type {string || null}
-         */
-        this.Url = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Image = 'Image' in params ? params.Image : null;
-        this.Url = 'Url' in params ? params.Url : null;
-
-    }
-}
-
-/**
- * GetGroupList请求参数结构体
- * @class
- */
-class GetGroupListRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 起始序号，默认值为0。
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 返回数量，默认值为10，最大值为1000。
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-
-    }
-}
-
-/**
- * 图中检测出来的人体框。
- * @class
- */
-class BodyDetectResult extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 检测出的人体置信度。 
-误识率百分之十对应的阈值是0.14；误识率百分之五对应的阈值是0.32；误识率百分之二对应的阈值是0.62；误识率百分之一对应的阈值是0.81。 
-通常情况建议使用阈值0.32，可适用大多数情况。
-         * @type {number || null}
-         */
-        this.Confidence = null;
-
-        /**
-         * 图中检测出来的人体框
-         * @type {BodyRect || null}
-         */
-        this.BodyRect = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
-
-        if (params.BodyRect) {
-            let obj = new BodyRect();
-            obj.deserialize(params.BodyRect)
-            this.BodyRect = obj;
-        }
 
     }
 }
@@ -1167,18 +1670,30 @@ RetCode 的顺序和入参中Images 或 Urls 的顺序一致。
 }
 
 /**
- * ModifyGroup返回参数结构体
+ * 下衣属性信息
  * @class
  */
-class ModifyGroupResponse extends  AbstractModel {
+class LowerBodyCloth extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
+         * 下衣颜色信息。
+         * @type {LowerBodyClothColor || null}
          */
-        this.RequestId = null;
+        this.Color = null;
+
+        /**
+         * 下衣长度信息 。
+         * @type {LowerBodyClothLength || null}
+         */
+        this.Length = null;
+
+        /**
+         * 下衣类型信息。
+         * @type {LowerBodyClothType || null}
+         */
+        this.Type = null;
 
     }
 
@@ -1189,7 +1704,59 @@ class ModifyGroupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+        if (params.Color) {
+            let obj = new LowerBodyClothColor();
+            obj.deserialize(params.Color)
+            this.Color = obj;
+        }
+
+        if (params.Length) {
+            let obj = new LowerBodyClothLength();
+            obj.deserialize(params.Length)
+            this.Length = obj;
+        }
+
+        if (params.Type) {
+            let obj = new LowerBodyClothType();
+            obj.deserialize(params.Type)
+            this.Type = obj;
+        }
+
+    }
+}
+
+/**
+ * 下衣颜色信息
+ * @class
+ */
+class LowerBodyClothColor extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 下衣颜色信息，返回值为以下集合中的一个{ 黑色系, 灰白色系, 彩色} 。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Type识别概率值，[0.0,1.0],代表判断正确的概率。如0.8则代表有Type值有80%概率正确。
+         * @type {number || null}
+         */
+        this.Probability = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Probability = 'Probability' in params ? params.Probability : null;
 
     }
 }
@@ -1294,6 +1861,41 @@ class GetPersonListRequest extends  AbstractModel {
 }
 
 /**
+ * 下衣类型信息
+ * @class
+ */
+class LowerBodyClothType extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 下衣类型，返回值为以下集合中的一个 {裤子,裙子} 。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Type识别概率值，[0.0,1.0],代表判断正确的概率。如0.8则代表有Type值有80%概率正确。
+         * @type {number || null}
+         */
+        this.Probability = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Probability = 'Probability' in params ? params.Probability : null;
+
+    }
+}
+
+/**
  * CreateTrace请求参数结构体
  * @class
  */
@@ -1362,6 +1964,71 @@ class DeletePersonResponse extends  AbstractModel {
 }
 
 /**
+ * 返回人体属性选项，此值不填则为不需要返回，可以选择的值为以下六个。
+Age、Bag、Gender、Orientation、UpperBodyCloth、LowerBodyCloth，详细的解释请看对象描述
+需注意本接口最多返回面积最大的 5 个人体属性信息，超过 5 个人体（第 6 个及以后的人体）的人体属性不具备参考意义。
+ * @class
+ */
+class AttributesOptions extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回年龄信息
+         * @type {boolean || null}
+         */
+        this.Age = null;
+
+        /**
+         * 返回随身挎包信息
+         * @type {boolean || null}
+         */
+        this.Bag = null;
+
+        /**
+         * 返回性别信息
+         * @type {boolean || null}
+         */
+        this.Gender = null;
+
+        /**
+         * 返回朝向信息
+         * @type {boolean || null}
+         */
+        this.Orientation = null;
+
+        /**
+         * 返回上装信息
+         * @type {boolean || null}
+         */
+        this.UpperBodyCloth = null;
+
+        /**
+         * 返回下装信息
+         * @type {boolean || null}
+         */
+        this.LowerBodyCloth = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Age = 'Age' in params ? params.Age : null;
+        this.Bag = 'Bag' in params ? params.Bag : null;
+        this.Gender = 'Gender' in params ? params.Gender : null;
+        this.Orientation = 'Orientation' in params ? params.Orientation : null;
+        this.UpperBodyCloth = 'UpperBodyCloth' in params ? params.UpperBodyCloth : null;
+        this.LowerBodyCloth = 'LowerBodyCloth' in params ? params.LowerBodyCloth : null;
+
+    }
+}
+
+/**
  * CreateGroup返回参数结构体
  * @class
  */
@@ -1393,6 +2060,9 @@ module.exports = {
     SegmentPortraitPicResponse: SegmentPortraitPicResponse,
     Candidate: Candidate,
     DeletePersonRequest: DeletePersonRequest,
+    ModifyGroupResponse: ModifyGroupResponse,
+    UpperBodyClothSleeve: UpperBodyClothSleeve,
+    BodyAttributeInfo: BodyAttributeInfo,
     GetGroupListResponse: GetGroupListResponse,
     GroupInfo: GroupInfo,
     ModifyGroupRequest: ModifyGroupRequest,
@@ -1401,25 +2071,36 @@ module.exports = {
     Trace: Trace,
     DeleteGroupRequest: DeleteGroupRequest,
     ModifyPersonInfoRequest: ModifyPersonInfoRequest,
+    Gender: Gender,
     CreateGroupRequest: CreateGroupRequest,
     TraceInfo: TraceInfo,
     DeleteGroupResponse: DeleteGroupResponse,
     BodyRect: BodyRect,
     DetectBodyRequest: DetectBodyRequest,
+    Age: Age,
     SearchTraceRequest: SearchTraceRequest,
     PersonInfo: PersonInfo,
     DetectBodyResponse: DetectBodyResponse,
-    SearchTraceResponse: SearchTraceResponse,
+    Bag: Bag,
     SegmentPortraitPicRequest: SegmentPortraitPicRequest,
+    UpperBodyClothColor: UpperBodyClothColor,
     GetGroupListRequest: GetGroupListRequest,
     BodyDetectResult: BodyDetectResult,
+    Orientation: Orientation,
+    UpperBodyClothTexture: UpperBodyClothTexture,
+    UpperBodyCloth: UpperBodyCloth,
+    LowerBodyClothLength: LowerBodyClothLength,
+    SearchTraceResponse: SearchTraceResponse,
     CreateTraceResponse: CreateTraceResponse,
     CreatePersonResponse: CreatePersonResponse,
-    ModifyGroupResponse: ModifyGroupResponse,
+    LowerBodyCloth: LowerBodyCloth,
+    LowerBodyClothColor: LowerBodyClothColor,
     GetPersonListResponse: GetPersonListResponse,
     GetPersonListRequest: GetPersonListRequest,
+    LowerBodyClothType: LowerBodyClothType,
     CreateTraceRequest: CreateTraceRequest,
     DeletePersonResponse: DeletePersonResponse,
+    AttributesOptions: AttributesOptions,
     CreateGroupResponse: CreateGroupResponse,
 
 }
