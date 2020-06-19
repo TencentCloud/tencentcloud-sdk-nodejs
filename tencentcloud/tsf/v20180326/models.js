@@ -10087,6 +10087,12 @@ class ModifyContainerGroupRequest extends  AbstractModel {
          */
         this.UpdateIvl = null;
 
+        /**
+         * 子网ID
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
     }
 
     /**
@@ -10109,6 +10115,7 @@ class ModifyContainerGroupRequest extends  AbstractModel {
         }
         this.UpdateType = 'UpdateType' in params ? params.UpdateType : null;
         this.UpdateIvl = 'UpdateIvl' in params ? params.UpdateIvl : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
     }
 }

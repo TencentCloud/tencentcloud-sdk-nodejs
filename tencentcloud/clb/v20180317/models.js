@@ -4830,6 +4830,12 @@ class CreateListenerRequest extends  AbstractModel {
          */
         this.SniSwitch = null;
 
+        /**
+         * 后端目标类型，NODE表示绑定普通节点，TARGETGROUP表示绑定目标组。
+         * @type {string || null}
+         */
+        this.TargetType = null;
+
     }
 
     /**
@@ -4858,6 +4864,7 @@ class CreateListenerRequest extends  AbstractModel {
         this.SessionExpireTime = 'SessionExpireTime' in params ? params.SessionExpireTime : null;
         this.Scheduler = 'Scheduler' in params ? params.Scheduler : null;
         this.SniSwitch = 'SniSwitch' in params ? params.SniSwitch : null;
+        this.TargetType = 'TargetType' in params ? params.TargetType : null;
 
     }
 }
