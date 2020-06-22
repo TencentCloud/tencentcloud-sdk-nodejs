@@ -53,7 +53,7 @@ class TafClient extends AbstractClient {
     }
     
     /**
-     * EnhanceTaDegree
+     * 流量反欺诈-虚假TA识别
      * @param {EnhanceTaDegreeRequest} req
      * @param {function(string, EnhanceTaDegreeResponse):void} cb
      * @public
@@ -97,7 +97,7 @@ class TafClient extends AbstractClient {
     }
 
     /**
-     * RecognizePreciseTargetAudience
+     * 流量反欺诈-流量验准高级版
      * @param {RecognizePreciseTargetAudienceRequest} req
      * @param {function(string, RecognizePreciseTargetAudienceResponse):void} cb
      * @public

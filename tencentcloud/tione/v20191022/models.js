@@ -172,7 +172,7 @@ class CreateNotebookInstanceRequest extends  AbstractModel {
 
         /**
          * Notebook实例名称，不能超过63个字符
-规则：^[a-zA-Z0-9](-*[a-zA-Z0-9])*$
+规则：“^\[a-zA-Z0-9\](-\*\[a-zA-Z0-9\])\*$”
          * @type {string || null}
          */
         this.NotebookInstanceName = null;
@@ -371,7 +371,7 @@ class DescribeNotebookInstanceRequest extends  AbstractModel {
 
         /**
          * Notebook实例名称
-规则：^[a-zA-Z0-9](-*[a-zA-Z0-9])*$
+规则：“^\[a-zA-Z0-9\](-\*\[a-zA-Z0-9\])\*$”
          * @type {string || null}
          */
         this.NotebookInstanceName = null;
@@ -1283,7 +1283,7 @@ class UpdateNotebookInstanceRequest extends  AbstractModel {
 
         /**
          * Notebook实例名称
-规则：^[a-zA-Z0-9](-*[a-zA-Z0-9])*$
+规则：“^\[a-zA-Z0-9\](-\*\[a-zA-Z0-9\])\*$”
          * @type {string || null}
          */
         this.NotebookInstanceName = null;
@@ -1415,7 +1415,7 @@ class CreatePresignedNotebookInstanceUrlRequest extends  AbstractModel {
 
         /**
          * Notebook实例名称
-规则：^[a-zA-Z0-9](-*[a-zA-Z0-9])*$
+规则：“^\[a-zA-Z0-9\](-\*\[a-zA-Z0-9\])\*$”
          * @type {string || null}
          */
         this.NotebookInstanceName = null;
