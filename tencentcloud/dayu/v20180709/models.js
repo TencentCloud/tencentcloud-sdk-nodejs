@@ -1878,7 +1878,7 @@ class CreateL7RuleCertRequest extends  AbstractModel {
         this.Business = null;
 
         /**
-         * 资源实例ID，比如高防IP实例的ID，高防IP专业版实例的ID
+         * 资源实例ID，例如高防IP实例的ID，高防IP专业版实例的ID
          * @type {string || null}
          */
         this.Id = null;

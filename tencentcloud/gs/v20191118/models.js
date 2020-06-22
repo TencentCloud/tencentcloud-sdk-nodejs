@@ -428,6 +428,12 @@ class EnterQueueRequest extends  AbstractModel {
          */
         this.SetNumber = null;
 
+        /**
+         * 游戏用户IP，用于就近调度，例如125.127.178.228
+         * @type {string || null}
+         */
+        this.UserIp = null;
+
     }
 
     /**
@@ -441,6 +447,7 @@ class EnterQueueRequest extends  AbstractModel {
         this.GameId = 'GameId' in params ? params.GameId : null;
         this.UserId = 'UserId' in params ? params.UserId : null;
         this.SetNumber = 'SetNumber' in params ? params.SetNumber : null;
+        this.UserIp = 'UserIp' in params ? params.UserIp : null;
 
     }
 }

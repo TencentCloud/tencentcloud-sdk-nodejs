@@ -2431,6 +2431,12 @@ class DescribeNodeRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * 过滤条件，name取值为： InstanceFamily-实例系列
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
     }
 
     /**
@@ -2439,6 +2445,15 @@ class DescribeNodeRequest extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
         }
 
     }
