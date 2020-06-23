@@ -17,6 +17,56 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * DescribeAbnormalEvent返回参数结构体
+ * @class
+ */
+class DescribeAbnormalEventResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回的数据总条数
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 异常体验列表
+         * @type {Array.<AbnormalExperience> || null}
+         */
+        this.AbnormalExperienceList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.AbnormalExperienceList) {
+            this.AbnormalExperienceList = new Array();
+            for (let z in params.AbnormalExperienceList) {
+                let obj = new AbnormalExperience();
+                obj.deserialize(params.AbnormalExperienceList[z]);
+                this.AbnormalExperienceList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 查询秒级监控返回的数据
  * @class
  */
@@ -56,6 +106,55 @@ class RealtimeData extends  AbstractModel {
             }
         }
         this.DataType = 'DataType' in params ? params.DataType : null;
+
+    }
+}
+
+/**
+ * DescribeAbnormalEvent请求参数结构体
+ * @class
+ */
+class DescribeAbnormalEventRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用户SDKAppID，查询SDKAppID下任意20条异常体验事件（可能不同房间）
+         * @type {string || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * 查询开始时间
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 查询结束时间
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 房间号，查询房间内任意20条以内异常体验事件
+         * @type {string || null}
+         */
+        this.RoomId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
 
     }
 }
@@ -237,100 +336,24 @@ class DismissRoomResponse extends  AbstractModel {
 }
 
 /**
- * 事件信息，包括，事件时间戳，事件ID,
+ * DescribeRealtimeNetwork返回参数结构体
  * @class
  */
-class EventMessage extends  AbstractModel {
+class DescribeRealtimeNetworkResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 视频流类型：
-0：与视频无关的事件；
-2：视频为大画面；
-3：视频为小画面；
-7：视频为旁路画面；
-         * @type {number || null}
+         * 查询返回的数据
+         * @type {Array.<RealtimeData> || null}
          */
-        this.Type = null;
+        this.Data = null;
 
         /**
-         * 事件上报的时间戳，unix时间（1589891188801ms)
-         * @type {number || null}
-         */
-        this.Time = null;
-
-        /**
-         * 事件Id：分为sdk的事件和webrtc的事件，详情见：附录/事件 ID 映射表：https://cloud.tencent.com/document/product/647/44916
-         * @type {number || null}
-         */
-        this.EventId = null;
-
-        /**
-         * 事件的第一个参数，如视频分辨率宽
-         * @type {number || null}
-         */
-        this.ParamOne = null;
-
-        /**
-         * 事件的第二个参数，如视频分辨率高
-         * @type {number || null}
-         */
-        this.ParamTwo = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Time = 'Time' in params ? params.Time : null;
-        this.EventId = 'EventId' in params ? params.EventId : null;
-        this.ParamOne = 'ParamOne' in params ? params.ParamOne : null;
-        this.ParamTwo = 'ParamTwo' in params ? params.ParamTwo : null;
-
-    }
-}
-
-/**
- * DescribeRealtimeQuality请求参数结构体
- * @class
- */
-class DescribeRealtimeQualityRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 查询开始时间，24小时内。本地unix时间戳（1588031999s）
-         * @type {number || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * 查询结束时间，本地unix时间戳（1588031999s）
-         * @type {number || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * 用户sdkappid
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.SdkAppId = null;
-
-        /**
-         * 查询的数据类型
-enterTotalSuccPercent：进房成功率
-fistFreamInSecRate：首帧秒开率
-blockPercent：视频卡顿率
-audioBlockPercent：音频卡顿率
-         * @type {Array.<string> || null}
-         */
-        this.DataType = null;
+        this.RequestId = null;
 
     }
 
@@ -341,10 +364,16 @@ audioBlockPercent：音频卡顿率
         if (!params) {
             return;
         }
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.DataType = 'DataType' in params ? params.DataType : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new RealtimeData();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -787,6 +816,83 @@ class StopMCUMixTranscodeRequest extends  AbstractModel {
 }
 
 /**
+ * 用户信息，包括用户进房时间，退房时间等
+ * @class
+ */
+class UserInformation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 房间号
+         * @type {string || null}
+         */
+        this.RoomStr = null;
+
+        /**
+         * 用户Id
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * 用户进房时间
+         * @type {number || null}
+         */
+        this.JoinTs = null;
+
+        /**
+         * 用户退房时间
+         * @type {number || null}
+         */
+        this.LeaveTs = null;
+
+        /**
+         * 终端类型
+         * @type {string || null}
+         */
+        this.DeviceType = null;
+
+        /**
+         * Sdk版本号
+         * @type {string || null}
+         */
+        this.SdkVersion = null;
+
+        /**
+         * 客户端IP地址
+         * @type {string || null}
+         */
+        this.ClientIp = null;
+
+        /**
+         * 判断用户是否已经离开房间
+         * @type {boolean || null}
+         */
+        this.Finished = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoomStr = 'RoomStr' in params ? params.RoomStr : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.JoinTs = 'JoinTs' in params ? params.JoinTs : null;
+        this.LeaveTs = 'LeaveTs' in params ? params.LeaveTs : null;
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
+        this.SdkVersion = 'SdkVersion' in params ? params.SdkVersion : null;
+        this.ClientIp = 'ClientIp' in params ? params.ClientIp : null;
+        this.Finished = 'Finished' in params ? params.Finished : null;
+
+    }
+}
+
+/**
  * DescribeHistoryScale请求参数结构体
  * @class
  */
@@ -928,6 +1034,66 @@ class OutputParams extends  AbstractModel {
 }
 
 /**
+ * 事件信息，包括，事件时间戳，事件ID,
+ * @class
+ */
+class EventMessage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 视频流类型：
+0：与视频无关的事件；
+2：视频为大画面；
+3：视频为小画面；
+7：视频为旁路画面；
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * 事件上报的时间戳，unix时间（1589891188801ms)
+         * @type {number || null}
+         */
+        this.Time = null;
+
+        /**
+         * 事件Id：分为sdk的事件和webrtc的事件，详情见：附录/事件 ID 映射表：https://cloud.tencent.com/document/product/647/44916
+         * @type {number || null}
+         */
+        this.EventId = null;
+
+        /**
+         * 事件的第一个参数，如视频分辨率宽
+         * @type {number || null}
+         */
+        this.ParamOne = null;
+
+        /**
+         * 事件的第二个参数，如视频分辨率高
+         * @type {number || null}
+         */
+        this.ParamTwo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Time = 'Time' in params ? params.Time : null;
+        this.EventId = 'EventId' in params ? params.EventId : null;
+        this.ParamOne = 'ParamOne' in params ? params.ParamOne : null;
+        this.ParamTwo = 'ParamTwo' in params ? params.ParamTwo : null;
+
+    }
+}
+
+/**
  * CreateTroubleInfo返回参数结构体
  * @class
  */
@@ -1014,24 +1180,25 @@ class QualityData extends  AbstractModel {
 }
 
 /**
- * DescribeRealtimeNetwork返回参数结构体
+ * 造成异常体验可能的异常事件类型
  * @class
  */
-class DescribeRealtimeNetworkResponse extends  AbstractModel {
+class AbnormalEvent extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 查询返回的数据
-         * @type {Array.<RealtimeData> || null}
+         * 异常事件ID，具体值查看附录：异常体验ID映射表：https://cloud.tencent.com/document/product/647/44916
+         * @type {number || null}
          */
-        this.Data = null;
+        this.AbnormalEventId = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 远端用户ID,""：表示异常事件不是由远端用户产生
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.PeerId = null;
 
     }
 
@@ -1042,16 +1209,61 @@ class DescribeRealtimeNetworkResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.AbnormalEventId = 'AbnormalEventId' in params ? params.AbnormalEventId : null;
+        this.PeerId = 'PeerId' in params ? params.PeerId : null;
 
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new RealtimeData();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
+    }
+}
+
+/**
+ * DescribeRealtimeQuality请求参数结构体
+ * @class
+ */
+class DescribeRealtimeQualityRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询开始时间，24小时内。本地unix时间戳（1588031999s）
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 查询结束时间，本地unix时间戳（1588031999s）
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 用户sdkappid
+         * @type {string || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * 查询的数据类型
+enterTotalSuccPercent：进房成功率
+fistFreamInSecRate：首帧秒开率
+blockPercent：视频卡顿率
+audioBlockPercent：音频卡顿率
+         * @type {Array.<string> || null}
+         */
+        this.DataType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.DataType = 'DataType' in params ? params.DataType : null;
 
     }
 }
@@ -1545,60 +1757,42 @@ class DescribeDetailEventRequest extends  AbstractModel {
 }
 
 /**
- * 用户信息，包括用户进房时间，退房时间等
+ * 用户的异常体验及可能的原因
  * @class
  */
-class UserInformation extends  AbstractModel {
+class AbnormalExperience extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 房间号
-         * @type {string || null}
-         */
-        this.RoomStr = null;
-
-        /**
-         * 用户Id
+         * 用户ID
          * @type {string || null}
          */
         this.UserId = null;
 
         /**
-         * 用户进房时间
+         * 异常体验ID
          * @type {number || null}
          */
-        this.JoinTs = null;
+        this.ExperienceId = null;
 
         /**
-         * 用户退房时间
+         * 字符串房间号
+         * @type {string || null}
+         */
+        this.RoomId = null;
+
+        /**
+         * 异常事件数组
+         * @type {Array.<AbnormalEvent> || null}
+         */
+        this.AbnormalEventList = null;
+
+        /**
+         * 异常事件的上报时间
          * @type {number || null}
          */
-        this.LeaveTs = null;
-
-        /**
-         * 终端类型
-         * @type {string || null}
-         */
-        this.DeviceType = null;
-
-        /**
-         * Sdk版本号
-         * @type {string || null}
-         */
-        this.SdkVersion = null;
-
-        /**
-         * 客户端IP地址
-         * @type {string || null}
-         */
-        this.ClientIp = null;
-
-        /**
-         * 判断用户是否已经离开房间
-         * @type {boolean || null}
-         */
-        this.Finished = null;
+        this.EventTime = null;
 
     }
 
@@ -1609,14 +1803,19 @@ class UserInformation extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RoomStr = 'RoomStr' in params ? params.RoomStr : null;
         this.UserId = 'UserId' in params ? params.UserId : null;
-        this.JoinTs = 'JoinTs' in params ? params.JoinTs : null;
-        this.LeaveTs = 'LeaveTs' in params ? params.LeaveTs : null;
-        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
-        this.SdkVersion = 'SdkVersion' in params ? params.SdkVersion : null;
-        this.ClientIp = 'ClientIp' in params ? params.ClientIp : null;
-        this.Finished = 'Finished' in params ? params.Finished : null;
+        this.ExperienceId = 'ExperienceId' in params ? params.ExperienceId : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+
+        if (params.AbnormalEventList) {
+            this.AbnormalEventList = new Array();
+            for (let z in params.AbnormalEventList) {
+                let obj = new AbnormalEvent();
+                obj.deserialize(params.AbnormalEventList[z]);
+                this.AbnormalEventList.push(obj);
+            }
+        }
+        this.EventTime = 'EventTime' in params ? params.EventTime : null;
 
     }
 }
@@ -1764,14 +1963,15 @@ class DescribeHistoryScaleResponse extends  AbstractModel {
 }
 
 module.exports = {
+    DescribeAbnormalEventResponse: DescribeAbnormalEventResponse,
     RealtimeData: RealtimeData,
+    DescribeAbnormalEventRequest: DescribeAbnormalEventRequest,
     LayoutParams: LayoutParams,
     TimeValue: TimeValue,
     StopMCUMixTranscodeResponse: StopMCUMixTranscodeResponse,
     DescribeRealtimeScaleResponse: DescribeRealtimeScaleResponse,
     DismissRoomResponse: DismissRoomResponse,
-    EventMessage: EventMessage,
-    DescribeRealtimeQualityRequest: DescribeRealtimeQualityRequest,
+    DescribeRealtimeNetworkResponse: DescribeRealtimeNetworkResponse,
     RemoveUserRequest: RemoveUserRequest,
     DescribeCallDetailRequest: DescribeCallDetailRequest,
     DescribeRealtimeNetworkRequest: DescribeRealtimeNetworkRequest,
@@ -1780,12 +1980,15 @@ module.exports = {
     StartMCUMixTranscodeRequest: StartMCUMixTranscodeRequest,
     DescribeRealtimeQualityResponse: DescribeRealtimeQualityResponse,
     StopMCUMixTranscodeRequest: StopMCUMixTranscodeRequest,
+    UserInformation: UserInformation,
     DescribeHistoryScaleRequest: DescribeHistoryScaleRequest,
     DescribeRoomInformationResponse: DescribeRoomInformationResponse,
     OutputParams: OutputParams,
+    EventMessage: EventMessage,
     CreateTroubleInfoResponse: CreateTroubleInfoResponse,
     QualityData: QualityData,
-    DescribeRealtimeNetworkResponse: DescribeRealtimeNetworkResponse,
+    AbnormalEvent: AbnormalEvent,
+    DescribeRealtimeQualityRequest: DescribeRealtimeQualityRequest,
     ScaleInfomation: ScaleInfomation,
     CreateTroubleInfoRequest: CreateTroubleInfoRequest,
     EventList: EventList,
@@ -1795,7 +1998,7 @@ module.exports = {
     DescribeCallDetailResponse: DescribeCallDetailResponse,
     DescribeRoomInformationRequest: DescribeRoomInformationRequest,
     DescribeDetailEventRequest: DescribeDetailEventRequest,
-    UserInformation: UserInformation,
+    AbnormalExperience: AbnormalExperience,
     RoomState: RoomState,
     RemoveUserResponse: RemoveUserResponse,
     DescribeHistoryScaleResponse: DescribeHistoryScaleResponse,
