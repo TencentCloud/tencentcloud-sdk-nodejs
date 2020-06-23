@@ -2498,6 +2498,12 @@ class EndUserInfo extends  AbstractModel {
          */
         this.IsDisabled = null;
 
+        /**
+         * 是否设置过密码
+         * @type {boolean || null}
+         */
+        this.HasPassword = null;
+
     }
 
     /**
@@ -2519,6 +2525,7 @@ class EndUserInfo extends  AbstractModel {
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.IsAnonymous = 'IsAnonymous' in params ? params.IsAnonymous : null;
         this.IsDisabled = 'IsDisabled' in params ? params.IsDisabled : null;
+        this.HasPassword = 'HasPassword' in params ? params.HasPassword : null;
 
     }
 }

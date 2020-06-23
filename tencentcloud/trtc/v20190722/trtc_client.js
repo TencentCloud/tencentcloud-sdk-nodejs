@@ -16,14 +16,15 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const DescribeAbnormalEventResponse = models.DescribeAbnormalEventResponse;
 const RealtimeData = models.RealtimeData;
+const DescribeAbnormalEventRequest = models.DescribeAbnormalEventRequest;
 const LayoutParams = models.LayoutParams;
 const TimeValue = models.TimeValue;
 const StopMCUMixTranscodeResponse = models.StopMCUMixTranscodeResponse;
 const DescribeRealtimeScaleResponse = models.DescribeRealtimeScaleResponse;
 const DismissRoomResponse = models.DismissRoomResponse;
-const EventMessage = models.EventMessage;
-const DescribeRealtimeQualityRequest = models.DescribeRealtimeQualityRequest;
+const DescribeRealtimeNetworkResponse = models.DescribeRealtimeNetworkResponse;
 const RemoveUserRequest = models.RemoveUserRequest;
 const DescribeCallDetailRequest = models.DescribeCallDetailRequest;
 const DescribeRealtimeNetworkRequest = models.DescribeRealtimeNetworkRequest;
@@ -32,12 +33,15 @@ const EncodeParams = models.EncodeParams;
 const StartMCUMixTranscodeRequest = models.StartMCUMixTranscodeRequest;
 const DescribeRealtimeQualityResponse = models.DescribeRealtimeQualityResponse;
 const StopMCUMixTranscodeRequest = models.StopMCUMixTranscodeRequest;
+const UserInformation = models.UserInformation;
 const DescribeHistoryScaleRequest = models.DescribeHistoryScaleRequest;
 const DescribeRoomInformationResponse = models.DescribeRoomInformationResponse;
 const OutputParams = models.OutputParams;
+const EventMessage = models.EventMessage;
 const CreateTroubleInfoResponse = models.CreateTroubleInfoResponse;
 const QualityData = models.QualityData;
-const DescribeRealtimeNetworkResponse = models.DescribeRealtimeNetworkResponse;
+const AbnormalEvent = models.AbnormalEvent;
+const DescribeRealtimeQualityRequest = models.DescribeRealtimeQualityRequest;
 const ScaleInfomation = models.ScaleInfomation;
 const CreateTroubleInfoRequest = models.CreateTroubleInfoRequest;
 const EventList = models.EventList;
@@ -47,7 +51,7 @@ const DescribeRealtimeScaleRequest = models.DescribeRealtimeScaleRequest;
 const DescribeCallDetailResponse = models.DescribeCallDetailResponse;
 const DescribeRoomInformationRequest = models.DescribeRoomInformationRequest;
 const DescribeDetailEventRequest = models.DescribeDetailEventRequest;
-const UserInformation = models.UserInformation;
+const AbnormalExperience = models.AbnormalExperience;
 const RoomState = models.RoomState;
 const RemoveUserResponse = models.RemoveUserResponse;
 const DescribeHistoryScaleResponse = models.DescribeHistoryScaleResponse;
@@ -75,14 +79,14 @@ class TrtcClient extends AbstractClient {
     }
 
     /**
-     * 查询sdkappid维度下实时质量数据，包括：进房成功率，首帧秒开率，音频卡顿率，视频卡顿率。可查询24小时内数据，查询起止时间不超过1个小时。
-     * @param {DescribeRealtimeQualityRequest} req
-     * @param {function(string, DescribeRealtimeQualityResponse):void} cb
+     * 创建异常信息
+     * @param {CreateTroubleInfoRequest} req
+     * @param {function(string, CreateTroubleInfoResponse):void} cb
      * @public
      */
-    DescribeRealtimeQuality(req, cb) {
-        let resp = new DescribeRealtimeQualityResponse();
-        this.request("DescribeRealtimeQuality", req, resp, cb);
+    CreateTroubleInfo(req, cb) {
+        let resp = new CreateTroubleInfoResponse();
+        this.request("CreateTroubleInfo", req, resp, cb);
     }
 
     /**
@@ -187,14 +191,25 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     }
 
     /**
-     * 创建异常信息
-     * @param {CreateTroubleInfoRequest} req
-     * @param {function(string, CreateTroubleInfoResponse):void} cb
+     * 查询SDKAppID下用户的异常体验事件，返回异常体验ID与可能产生异常体验的原因。可查询24小时内数据，查询起止时间不超过1个小时。支持跨天查询。异常体验ID映射见：https://cloud.tencent.com/document/product/647/44916
+     * @param {DescribeAbnormalEventRequest} req
+     * @param {function(string, DescribeAbnormalEventResponse):void} cb
      * @public
      */
-    CreateTroubleInfo(req, cb) {
-        let resp = new CreateTroubleInfoResponse();
-        this.request("CreateTroubleInfo", req, resp, cb);
+    DescribeAbnormalEvent(req, cb) {
+        let resp = new DescribeAbnormalEventResponse();
+        this.request("DescribeAbnormalEvent", req, resp, cb);
+    }
+
+    /**
+     * 查询sdkappid维度下实时质量数据，包括：进房成功率，首帧秒开率，音频卡顿率，视频卡顿率。可查询24小时内数据，查询起止时间不超过1个小时。
+     * @param {DescribeRealtimeQualityRequest} req
+     * @param {function(string, DescribeRealtimeQualityResponse):void} cb
+     * @public
+     */
+    DescribeRealtimeQuality(req, cb) {
+        let resp = new DescribeRealtimeQualityResponse();
+        this.request("DescribeRealtimeQuality", req, resp, cb);
     }
 
     /**
