@@ -29,6 +29,8 @@ const DeviceDataHistoryItem = models.DeviceDataHistoryItem;
 const ProductEntry = models.ProductEntry;
 const GetStudioProductListResponse = models.GetStudioProductListResponse;
 const DescribeModelDefinitionResponse = models.DescribeModelDefinitionResponse;
+const ModifyModelDefinitionResponse = models.ModifyModelDefinitionResponse;
+const GetLoRaGatewayListResponse = models.GetLoRaGatewayListResponse;
 const ProjectEntryEx = models.ProjectEntryEx;
 const GetProjectListRequest = models.GetProjectListRequest;
 const DeleteStudioProductResponse = models.DeleteStudioProductResponse;
@@ -42,11 +44,13 @@ const ReleaseStudioProductResponse = models.ReleaseStudioProductResponse;
 const ProjectEntry = models.ProjectEntry;
 const ModifyProjectResponse = models.ModifyProjectResponse;
 const ModifyModelDefinitionRequest = models.ModifyModelDefinitionRequest;
+const LoRaGatewayLocation = models.LoRaGatewayLocation;
 const CreateStudioProductResponse = models.CreateStudioProductResponse;
 const CallDeviceActionSyncRequest = models.CallDeviceActionSyncRequest;
 const DeleteStudioProductRequest = models.DeleteStudioProductRequest;
 const ModifyProjectRequest = models.ModifyProjectRequest;
 const CallDeviceActionSyncResponse = models.CallDeviceActionSyncResponse;
+const CreateLoRaGatewayRequest = models.CreateLoRaGatewayRequest;
 const ModifyStudioProductRequest = models.ModifyStudioProductRequest;
 const DescribeDeviceDataHistoryResponse = models.DescribeDeviceDataHistoryResponse;
 const CreateStudioProductRequest = models.CreateStudioProductRequest;
@@ -59,16 +63,18 @@ const CallDeviceActionAsyncResponse = models.CallDeviceActionAsyncResponse;
 const CallDeviceActionAsyncRequest = models.CallDeviceActionAsyncRequest;
 const DescribeDeviceDataResponse = models.DescribeDeviceDataResponse;
 const CreateDeviceResponse = models.CreateDeviceResponse;
+const GetLoRaGatewayListRequest = models.GetLoRaGatewayListRequest;
 const CreateDeviceRequest = models.CreateDeviceRequest;
 const DescribeProjectRequest = models.DescribeProjectRequest;
 const GetStudioProductListRequest = models.GetStudioProductListRequest;
 const DescribeDeviceDataRequest = models.DescribeDeviceDataRequest;
 const DeleteDeviceResponse = models.DeleteDeviceResponse;
 const DeviceInfo = models.DeviceInfo;
-const ModifyModelDefinitionResponse = models.ModifyModelDefinitionResponse;
+const CreateLoRaGatewayResponse = models.CreateLoRaGatewayResponse;
 const DescribeDeviceRequest = models.DescribeDeviceRequest;
 const GetDeviceListRequest = models.GetDeviceListRequest;
 const DescribeStudioProductResponse = models.DescribeStudioProductResponse;
+const LoRaGatewayItem = models.LoRaGatewayItem;
 const DescribeDeviceResponse = models.DescribeDeviceResponse;
 const GetProjectListResponse = models.GetProjectListResponse;
 const CreateProjectRequest = models.CreateProjectRequest;
@@ -137,6 +143,17 @@ class IotexplorerClient extends AbstractClient {
     DescribeDevice(req, cb) {
         let resp = new DescribeDeviceResponse();
         this.request("DescribeDevice", req, resp, cb);
+    }
+
+    /**
+     * 创建新 LoRa 网关设备接口
+     * @param {CreateLoRaGatewayRequest} req
+     * @param {function(string, CreateLoRaGatewayResponse):void} cb
+     * @public
+     */
+    CreateLoRaGateway(req, cb) {
+        let resp = new CreateLoRaGatewayResponse();
+        this.request("CreateLoRaGateway", req, resp, cb);
     }
 
     /**
@@ -247,6 +264,17 @@ class IotexplorerClient extends AbstractClient {
     DeleteDevice(req, cb) {
         let resp = new DeleteDeviceResponse();
         this.request("DeleteDevice", req, resp, cb);
+    }
+
+    /**
+     * 获取 LoRa 网关列表接口
+     * @param {GetLoRaGatewayListRequest} req
+     * @param {function(string, GetLoRaGatewayListResponse):void} cb
+     * @public
+     */
+    GetLoRaGatewayList(req, cb) {
+        let resp = new GetLoRaGatewayListResponse();
+        this.request("GetLoRaGatewayList", req, resp, cb);
     }
 
     /**
