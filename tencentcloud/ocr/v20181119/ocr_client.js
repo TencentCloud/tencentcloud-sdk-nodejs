@@ -112,6 +112,7 @@ const FinanBillSliceOCRRequest = models.FinanBillSliceOCRRequest;
 const MLIDPassportOCRResponse = models.MLIDPassportOCRResponse;
 const VatRollInvoiceOCRRequest = models.VatRollInvoiceOCRRequest;
 const Coord = models.Coord;
+const SealOCRResponse = models.SealOCRResponse;
 const DutyPaidProofInfo = models.DutyPaidProofInfo;
 const FinanBillOCRResponse = models.FinanBillOCRResponse;
 const TextWaybill = models.TextWaybill;
@@ -132,6 +133,7 @@ const ShipInvoiceOCRResponse = models.ShipInvoiceOCRResponse;
 const InsuranceBillInfo = models.InsuranceBillInfo;
 const VehicleRegCertOCRResponse = models.VehicleRegCertOCRResponse;
 const GeneralAccurateOCRResponse = models.GeneralAccurateOCRResponse;
+const SealOCRRequest = models.SealOCRRequest;
 const TextTable = models.TextTable;
 const ResidenceBookletOCRRequest = models.ResidenceBookletOCRRequest;
 const BusInvoiceOCRResponse = models.BusInvoiceOCRResponse;
@@ -721,6 +723,17 @@ class OcrClient extends AbstractClient {
     EstateCertOCR(req, cb) {
         let resp = new EstateCertOCRResponse();
         this.request("EstateCertOCR", req, resp, cb);
+    }
+
+    /**
+     * 印章识别已支持各类印章，包括发票章，财务章等，适用于公文，票据等场景。
+     * @param {SealOCRRequest} req
+     * @param {function(string, SealOCRResponse):void} cb
+     * @public
+     */
+    SealOCR(req, cb) {
+        let resp = new SealOCRResponse();
+        this.request("SealOCR", req, resp, cb);
     }
 
     /**

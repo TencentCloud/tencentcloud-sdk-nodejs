@@ -16,90 +16,95 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const UpdateKeyDescriptionResponse = models.UpdateKeyDescriptionResponse;
-const DisableKeysRequest = models.DisableKeysRequest;
-const AlgorithmInfo = models.AlgorithmInfo;
-const EnableWhiteBoxKeysResponse = models.EnableWhiteBoxKeysResponse;
 const UpdateAliasRequest = models.UpdateAliasRequest;
-const DisableWhiteBoxKeyRequest = models.DisableWhiteBoxKeyRequest;
-const WhiteboxKeyInfo = models.WhiteboxKeyInfo;
-const GenerateDataKeyRequest = models.GenerateDataKeyRequest;
 const EnableWhiteBoxKeyRequest = models.EnableWhiteBoxKeyRequest;
-const GenerateDataKeyResponse = models.GenerateDataKeyResponse;
 const AsymmetricRsaDecryptRequest = models.AsymmetricRsaDecryptRequest;
-const CreateWhiteBoxKeyRequest = models.CreateWhiteBoxKeyRequest;
 const EnableKeyRotationRequest = models.EnableKeyRotationRequest;
-const EnableKeyRotationResponse = models.EnableKeyRotationResponse;
 const DescribeWhiteBoxKeyDetailsResponse = models.DescribeWhiteBoxKeyDetailsResponse;
 const CreateKeyRequest = models.CreateKeyRequest;
-const UpdateKeyDescriptionRequest = models.UpdateKeyDescriptionRequest;
-const EnableKeysResponse = models.EnableKeysResponse;
-const ListKeysResponse = models.ListKeysResponse;
 const DisableWhiteBoxKeyResponse = models.DisableWhiteBoxKeyResponse;
-const EncryptRequest = models.EncryptRequest;
 const DisableKeyResponse = models.DisableKeyResponse;
-const DescribeWhiteBoxKeyRequest = models.DescribeWhiteBoxKeyRequest;
-const GetParametersForImportRequest = models.GetParametersForImportRequest;
-const DisableWhiteBoxKeysResponse = models.DisableWhiteBoxKeysResponse;
-const DeleteImportedKeyMaterialResponse = models.DeleteImportedKeyMaterialResponse;
-const CreateKeyResponse = models.CreateKeyResponse;
-const ReEncryptResponse = models.ReEncryptResponse;
 const DescribeWhiteBoxServiceStatusRequest = models.DescribeWhiteBoxServiceStatusRequest;
 const DescribeKeyRequest = models.DescribeKeyRequest;
-const CancelKeyDeletionRequest = models.CancelKeyDeletionRequest;
-const EncryptByWhiteBoxRequest = models.EncryptByWhiteBoxRequest;
-const GenerateRandomRequest = models.GenerateRandomRequest;
-const Key = models.Key;
-const DeleteImportedKeyMaterialRequest = models.DeleteImportedKeyMaterialRequest;
+const WhiteboxKeyInfo = models.WhiteboxKeyInfo;
 const ListAlgorithmsResponse = models.ListAlgorithmsResponse;
-const EnableKeyResponse = models.EnableKeyResponse;
-const GenerateRandomResponse = models.GenerateRandomResponse;
-const DescribeWhiteBoxDecryptKeyResponse = models.DescribeWhiteBoxDecryptKeyResponse;
+const DescribeWhiteBoxKeyResponse = models.DescribeWhiteBoxKeyResponse;
+const UpdateKeyDescriptionResponse = models.UpdateKeyDescriptionResponse;
+const DescribeWhiteBoxServiceStatusResponse = models.DescribeWhiteBoxServiceStatusResponse;
 const ImportKeyMaterialRequest = models.ImportKeyMaterialRequest;
 const EnableKeyRequest = models.EnableKeyRequest;
-const GetKeyRotationStatusResponse = models.GetKeyRotationStatusResponse;
 const ImportKeyMaterialResponse = models.ImportKeyMaterialResponse;
-const DisableKeyRequest = models.DisableKeyRequest;
-const DescribeWhiteBoxKeyResponse = models.DescribeWhiteBoxKeyResponse;
-const GetKeyRotationStatusRequest = models.GetKeyRotationStatusRequest;
-const DescribeWhiteBoxServiceStatusResponse = models.DescribeWhiteBoxServiceStatusResponse;
-const AsymmetricSm2DecryptRequest = models.AsymmetricSm2DecryptRequest;
-const DecryptResponse = models.DecryptResponse;
-const DeleteWhiteBoxKeyResponse = models.DeleteWhiteBoxKeyResponse;
-const DescribeKeyResponse = models.DescribeKeyResponse;
-const EnableWhiteBoxKeysRequest = models.EnableWhiteBoxKeysRequest;
-const EncryptByWhiteBoxResponse = models.EncryptByWhiteBoxResponse;
-const GetServiceStatusResponse = models.GetServiceStatusResponse;
-const DescribeKeysResponse = models.DescribeKeysResponse;
-const EnableWhiteBoxKeyResponse = models.EnableWhiteBoxKeyResponse;
-const GetPublicKeyResponse = models.GetPublicKeyResponse;
-const ListKeyDetailResponse = models.ListKeyDetailResponse;
-const CancelKeyDeletionResponse = models.CancelKeyDeletionResponse;
-const ListKeysRequest = models.ListKeysRequest;
-const DescribeWhiteBoxDecryptKeyRequest = models.DescribeWhiteBoxDecryptKeyRequest;
-const EncryptResponse = models.EncryptResponse;
-const AsymmetricSm2DecryptResponse = models.AsymmetricSm2DecryptResponse;
-const DisableKeyRotationResponse = models.DisableKeyRotationResponse;
 const ListAlgorithmsRequest = models.ListAlgorithmsRequest;
-const DisableKeysResponse = models.DisableKeysResponse;
+const Tag = models.Tag;
+const ListKeyDetailResponse = models.ListKeyDetailResponse;
+const GenerateDataKeyRequest = models.GenerateDataKeyRequest;
 const UpdateAliasResponse = models.UpdateAliasResponse;
-const KeyMetadata = models.KeyMetadata;
-const DisableWhiteBoxKeysRequest = models.DisableWhiteBoxKeysRequest;
 const ScheduleKeyDeletionResponse = models.ScheduleKeyDeletionResponse;
-const GetParametersForImportResponse = models.GetParametersForImportResponse;
-const DecryptRequest = models.DecryptRequest;
-const ListKeyDetailRequest = models.ListKeyDetailRequest;
-const DescribeWhiteBoxKeyDetailsRequest = models.DescribeWhiteBoxKeyDetailsRequest;
-const EnableKeysRequest = models.EnableKeysRequest;
-const ScheduleKeyDeletionRequest = models.ScheduleKeyDeletionRequest;
-const CreateWhiteBoxKeyResponse = models.CreateWhiteBoxKeyResponse;
-const AsymmetricRsaDecryptResponse = models.AsymmetricRsaDecryptResponse;
-const DeleteWhiteBoxKeyRequest = models.DeleteWhiteBoxKeyRequest;
+const GenerateRandomResponse = models.GenerateRandomResponse;
 const DescribeKeysRequest = models.DescribeKeysRequest;
-const ReEncryptRequest = models.ReEncryptRequest;
 const GetPublicKeyRequest = models.GetPublicKeyRequest;
 const GetServiceStatusRequest = models.GetServiceStatusRequest;
-const Tag = models.Tag;
+const EnableWhiteBoxKeysResponse = models.EnableWhiteBoxKeysResponse;
+const DescribeWhiteBoxKeyRequest = models.DescribeWhiteBoxKeyRequest;
+const GetParametersForImportResponse = models.GetParametersForImportResponse;
+const DecryptResponse = models.DecryptResponse;
+const CreateWhiteBoxKeyResponse = models.CreateWhiteBoxKeyResponse;
+const Key = models.Key;
+const DeleteImportedKeyMaterialResponse = models.DeleteImportedKeyMaterialResponse;
+const EnableKeysRequest = models.EnableKeysRequest;
+const EnableWhiteBoxKeysRequest = models.EnableWhiteBoxKeysRequest;
+const EncryptByWhiteBoxResponse = models.EncryptByWhiteBoxResponse;
+const DescribeKeysResponse = models.DescribeKeysResponse;
+const EnableWhiteBoxKeyResponse = models.EnableWhiteBoxKeyResponse;
+const ReEncryptRequest = models.ReEncryptRequest;
+const ListKeysResponse = models.ListKeysResponse;
+const GetServiceStatusResponse = models.GetServiceStatusResponse;
+const DisableKeyRotationResponse = models.DisableKeyRotationResponse;
+const DisableWhiteBoxKeysRequest = models.DisableWhiteBoxKeysRequest;
+const OverwriteWhiteBoxDeviceFingerprintsRequest = models.OverwriteWhiteBoxDeviceFingerprintsRequest;
+const DeleteWhiteBoxKeyRequest = models.DeleteWhiteBoxKeyRequest;
+const AlgorithmInfo = models.AlgorithmInfo;
+const GenerateDataKeyResponse = models.GenerateDataKeyResponse;
+const CreateWhiteBoxKeyRequest = models.CreateWhiteBoxKeyRequest;
+const OverwriteWhiteBoxDeviceFingerprintsResponse = models.OverwriteWhiteBoxDeviceFingerprintsResponse;
+const DisableWhiteBoxKeysResponse = models.DisableWhiteBoxKeysResponse;
+const GetParametersForImportRequest = models.GetParametersForImportRequest;
+const CreateKeyResponse = models.CreateKeyResponse;
+const ReEncryptResponse = models.ReEncryptResponse;
+const EncryptResponse = models.EncryptResponse;
+const CancelKeyDeletionRequest = models.CancelKeyDeletionRequest;
+const DeleteImportedKeyMaterialRequest = models.DeleteImportedKeyMaterialRequest;
+const EnableKeyResponse = models.EnableKeyResponse;
+const AsymmetricSm2DecryptResponse = models.AsymmetricSm2DecryptResponse;
+const DeviceFingerprint = models.DeviceFingerprint;
+const GetKeyRotationStatusResponse = models.GetKeyRotationStatusResponse;
+const EncryptRequest = models.EncryptRequest;
+const AsymmetricSm2DecryptRequest = models.AsymmetricSm2DecryptRequest;
+const DeleteWhiteBoxKeyResponse = models.DeleteWhiteBoxKeyResponse;
+const ListKeysRequest = models.ListKeysRequest;
+const DescribeWhiteBoxDecryptKeyRequest = models.DescribeWhiteBoxDecryptKeyRequest;
+const KeyMetadata = models.KeyMetadata;
+const DisableKeysResponse = models.DisableKeysResponse;
+const DecryptRequest = models.DecryptRequest;
+const DescribeWhiteBoxKeyDetailsRequest = models.DescribeWhiteBoxKeyDetailsRequest;
+const AsymmetricRsaDecryptResponse = models.AsymmetricRsaDecryptResponse;
+const CancelKeyDeletionResponse = models.CancelKeyDeletionResponse;
+const DisableKeysRequest = models.DisableKeysRequest;
+const DisableWhiteBoxKeyRequest = models.DisableWhiteBoxKeyRequest;
+const ListKeyDetailRequest = models.ListKeyDetailRequest;
+const EnableKeyRotationResponse = models.EnableKeyRotationResponse;
+const EnableKeysResponse = models.EnableKeysResponse;
+const DescribeWhiteBoxDeviceFingerprintsRequest = models.DescribeWhiteBoxDeviceFingerprintsRequest;
+const EncryptByWhiteBoxRequest = models.EncryptByWhiteBoxRequest;
+const GenerateRandomRequest = models.GenerateRandomRequest;
+const ScheduleKeyDeletionRequest = models.ScheduleKeyDeletionRequest;
+const DisableKeyRequest = models.DisableKeyRequest;
+const GetKeyRotationStatusRequest = models.GetKeyRotationStatusRequest;
+const GetPublicKeyResponse = models.GetPublicKeyResponse;
+const DescribeWhiteBoxDecryptKeyResponse = models.DescribeWhiteBoxDecryptKeyResponse;
+const DescribeWhiteBoxDeviceFingerprintsResponse = models.DescribeWhiteBoxDeviceFingerprintsResponse;
+const UpdateKeyDescriptionRequest = models.UpdateKeyDescriptionRequest;
+const DescribeKeyResponse = models.DescribeKeyResponse;
 const DisableKeyRotationRequest = models.DisableKeyRotationRequest;
 
 
@@ -324,6 +329,17 @@ class KmsClient extends AbstractClient {
     }
 
     /**
+     * 覆盖指定密钥的设备指纹信息
+     * @param {OverwriteWhiteBoxDeviceFingerprintsRequest} req
+     * @param {function(string, OverwriteWhiteBoxDeviceFingerprintsResponse):void} cb
+     * @public
+     */
+    OverwriteWhiteBoxDeviceFingerprints(req, cb) {
+        let resp = new OverwriteWhiteBoxDeviceFingerprintsResponse();
+        this.request("OverwriteWhiteBoxDeviceFingerprints", req, resp, cb);
+    }
+
+    /**
      * 创建用户管理数据密钥的主密钥CMK（Custom Master Key）。
      * @param {CreateKeyRequest} req
      * @param {function(string, CreateKeyResponse):void} cb
@@ -431,6 +447,17 @@ class KmsClient extends AbstractClient {
     ScheduleKeyDeletion(req, cb) {
         let resp = new ScheduleKeyDeletionResponse();
         this.request("ScheduleKeyDeletion", req, resp, cb);
+    }
+
+    /**
+     * 获取指定密钥的设备指纹列表
+     * @param {DescribeWhiteBoxDeviceFingerprintsRequest} req
+     * @param {function(string, DescribeWhiteBoxDeviceFingerprintsResponse):void} cb
+     * @public
+     */
+    DescribeWhiteBoxDeviceFingerprints(req, cb) {
+        let resp = new DescribeWhiteBoxDeviceFingerprintsResponse();
+        this.request("DescribeWhiteBoxDeviceFingerprints", req, resp, cb);
     }
 
     /**

@@ -34,11 +34,13 @@ const ScalingPolicy = models.ScalingPolicy;
 const GetInstanceAccessRequest = models.GetInstanceAccessRequest;
 const DescribeGameServerSessionsRequest = models.DescribeGameServerSessionsRequest;
 const UpdateGameServerSessionRequest = models.UpdateGameServerSessionRequest;
+const StartMatchPlacementResponse = models.StartMatchPlacementResponse;
 const DescribePlayerSessionsRequest = models.DescribePlayerSessionsRequest;
 const StartGameServerSessionPlacementResponse = models.StartGameServerSessionPlacementResponse;
 const Credentials = models.Credentials;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const GetGameServerSessionLogUrlRequest = models.GetGameServerSessionLogUrlRequest;
+const StartMatchPlacementRequest = models.StartMatchPlacementRequest;
 const CreateGameServerSessionResponse = models.CreateGameServerSessionResponse;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const DescribeScalingPoliciesRequest = models.DescribeScalingPoliciesRequest;
@@ -80,6 +82,17 @@ class GseClient extends AbstractClient {
         super("gse.tencentcloudapi.com", "2019-11-12", credential, region, profile);
     }
     
+    /**
+     * 本接口（UpdateGameServerSession）用于更新游戏服务器会话
+     * @param {UpdateGameServerSessionRequest} req
+     * @param {function(string, UpdateGameServerSessionResponse):void} cb
+     * @public
+     */
+    UpdateGameServerSession(req, cb) {
+        let resp = new UpdateGameServerSessionResponse();
+        this.request("UpdateGameServerSession", req, resp, cb);
+    }
+
     /**
      * 用于查询服务部署的动态扩缩容配置
      * @param {DescribeScalingPoliciesRequest} req
@@ -191,14 +204,14 @@ class GseClient extends AbstractClient {
     }
 
     /**
-     * 本接口（UpdateGameServerSession）用于更新游戏服务器会话
-     * @param {UpdateGameServerSessionRequest} req
-     * @param {function(string, UpdateGameServerSessionResponse):void} cb
+     * 本接口（StartMatchPlacement）用于开始匹配放置游戏服务器会话
+     * @param {StartMatchPlacementRequest} req
+     * @param {function(string, StartMatchPlacementResponse):void} cb
      * @public
      */
-    UpdateGameServerSession(req, cb) {
-        let resp = new UpdateGameServerSessionResponse();
-        this.request("UpdateGameServerSession", req, resp, cb);
+    StartMatchPlacement(req, cb) {
+        let resp = new StartMatchPlacementResponse();
+        this.request("StartMatchPlacement", req, resp, cb);
     }
 
     /**

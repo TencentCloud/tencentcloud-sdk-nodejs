@@ -881,6 +881,46 @@ class UpdateGameServerSessionRequest extends  AbstractModel {
 }
 
 /**
+ * StartMatchPlacement返回参数结构体
+ * @class
+ */
+class StartMatchPlacementResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 游戏服务器会话放置
+         * @type {GameServerSessionPlacement || null}
+         */
+        this.GameServerSessionPlacement = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.GameServerSessionPlacement) {
+            let obj = new GameServerSessionPlacement();
+            obj.deserialize(params.GameServerSessionPlacement)
+            this.GameServerSessionPlacement = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribePlayerSessions请求参数结构体
  * @class
  */
@@ -1094,6 +1134,114 @@ class GetGameServerSessionLogUrlRequest extends  AbstractModel {
             return;
         }
         this.GameServerSessionId = 'GameServerSessionId' in params ? params.GameServerSessionId : null;
+
+    }
+}
+
+/**
+ * StartMatchPlacement请求参数结构体
+ * @class
+ */
+class StartMatchPlacementRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 开始部署游戏服务器会话的唯一标识符
+         * @type {string || null}
+         */
+        this.PlacementId = null;
+
+        /**
+         * 游戏服务器会话队列名称
+         * @type {string || null}
+         */
+        this.GameServerSessionQueueName = null;
+
+        /**
+         * 游戏服务器允许同时连接到游戏会话的最大玩家数量
+         * @type {number || null}
+         */
+        this.MaximumPlayerSessionCount = null;
+
+        /**
+         * 玩家游戏会话信息
+         * @type {Array.<DesiredPlayerSession> || null}
+         */
+        this.DesiredPlayerSessions = null;
+
+        /**
+         * 玩家游戏会话属性
+         * @type {Array.<GameProperty> || null}
+         */
+        this.GameProperties = null;
+
+        /**
+         * 游戏服务器会话数据
+         * @type {string || null}
+         */
+        this.GameServerSessionData = null;
+
+        /**
+         * 游戏服务器会话名称
+         * @type {string || null}
+         */
+        this.GameServerSessionName = null;
+
+        /**
+         * 玩家延迟
+         * @type {Array.<PlayerLatency> || null}
+         */
+        this.PlayerLatencies = null;
+
+        /**
+         * 游戏匹配数据
+         * @type {string || null}
+         */
+        this.MatchmakerData = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PlacementId = 'PlacementId' in params ? params.PlacementId : null;
+        this.GameServerSessionQueueName = 'GameServerSessionQueueName' in params ? params.GameServerSessionQueueName : null;
+        this.MaximumPlayerSessionCount = 'MaximumPlayerSessionCount' in params ? params.MaximumPlayerSessionCount : null;
+
+        if (params.DesiredPlayerSessions) {
+            this.DesiredPlayerSessions = new Array();
+            for (let z in params.DesiredPlayerSessions) {
+                let obj = new DesiredPlayerSession();
+                obj.deserialize(params.DesiredPlayerSessions[z]);
+                this.DesiredPlayerSessions.push(obj);
+            }
+        }
+
+        if (params.GameProperties) {
+            this.GameProperties = new Array();
+            for (let z in params.GameProperties) {
+                let obj = new GameProperty();
+                obj.deserialize(params.GameProperties[z]);
+                this.GameProperties.push(obj);
+            }
+        }
+        this.GameServerSessionData = 'GameServerSessionData' in params ? params.GameServerSessionData : null;
+        this.GameServerSessionName = 'GameServerSessionName' in params ? params.GameServerSessionName : null;
+
+        if (params.PlayerLatencies) {
+            this.PlayerLatencies = new Array();
+            for (let z in params.PlayerLatencies) {
+                let obj = new PlayerLatency();
+                obj.deserialize(params.PlayerLatencies[z]);
+                this.PlayerLatencies.push(obj);
+            }
+        }
+        this.MatchmakerData = 'MatchmakerData' in params ? params.MatchmakerData : null;
 
     }
 }
@@ -2928,11 +3076,13 @@ module.exports = {
     GetInstanceAccessRequest: GetInstanceAccessRequest,
     DescribeGameServerSessionsRequest: DescribeGameServerSessionsRequest,
     UpdateGameServerSessionRequest: UpdateGameServerSessionRequest,
+    StartMatchPlacementResponse: StartMatchPlacementResponse,
     DescribePlayerSessionsRequest: DescribePlayerSessionsRequest,
     StartGameServerSessionPlacementResponse: StartGameServerSessionPlacementResponse,
     Credentials: Credentials,
     DescribeInstancesResponse: DescribeInstancesResponse,
     GetGameServerSessionLogUrlRequest: GetGameServerSessionLogUrlRequest,
+    StartMatchPlacementRequest: StartMatchPlacementRequest,
     CreateGameServerSessionResponse: CreateGameServerSessionResponse,
     DescribeInstancesRequest: DescribeInstancesRequest,
     DescribeScalingPoliciesRequest: DescribeScalingPoliciesRequest,

@@ -5294,6 +5294,60 @@ class Coord extends  AbstractModel {
 }
 
 /**
+ * SealOCR返回参数结构体
+ * @class
+ */
+class SealOCRResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 印章内容
+         * @type {string || null}
+         */
+        this.SealBody = null;
+
+        /**
+         * 印章坐标
+         * @type {Rect || null}
+         */
+        this.Location = null;
+
+        /**
+         * 其它文本内容
+         * @type {Array.<string> || null}
+         */
+        this.OtherTexts = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SealBody = 'SealBody' in params ? params.SealBody : null;
+
+        if (params.Location) {
+            let obj = new Rect();
+            obj.deserialize(params.Location)
+            this.Location = obj;
+        }
+        this.OtherTexts = 'OtherTexts' in params ? params.OtherTexts : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 识别出的字段
  * @class
  */
@@ -6332,6 +6386,43 @@ class GeneralAccurateOCRResponse extends  AbstractModel {
         }
         this.Angel = 'Angel' in params ? params.Angel : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SealOCR请求参数结构体
+ * @class
+ */
+class SealOCRRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片下载时间不超过 3 秒。
+建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
 
     }
 }
@@ -8137,6 +8228,7 @@ module.exports = {
     MLIDPassportOCRResponse: MLIDPassportOCRResponse,
     VatRollInvoiceOCRRequest: VatRollInvoiceOCRRequest,
     Coord: Coord,
+    SealOCRResponse: SealOCRResponse,
     DutyPaidProofInfo: DutyPaidProofInfo,
     FinanBillOCRResponse: FinanBillOCRResponse,
     TextWaybill: TextWaybill,
@@ -8157,6 +8249,7 @@ module.exports = {
     InsuranceBillInfo: InsuranceBillInfo,
     VehicleRegCertOCRResponse: VehicleRegCertOCRResponse,
     GeneralAccurateOCRResponse: GeneralAccurateOCRResponse,
+    SealOCRRequest: SealOCRRequest,
     TextTable: TextTable,
     ResidenceBookletOCRRequest: ResidenceBookletOCRRequest,
     BusInvoiceOCRResponse: BusInvoiceOCRResponse,
