@@ -591,55 +591,55 @@ class EncodeParams extends  AbstractModel {
         super();
 
         /**
-         * 混流-输出流音频采样率
+         * 混流-输出流音频采样率。取值为[96000, 88200, 64000, 48000, 44100, 32000,24000, 22050, 16000, 12000, 11025, 8000]。
          * @type {number || null}
          */
         this.AudioSampleRate = null;
 
         /**
-         * 混流-输出流音频码率，单位Kbps
+         * 混流-输出流音频码率。取值范围[8,500]，单位为Kbps。
          * @type {number || null}
          */
         this.AudioBitrate = null;
 
         /**
-         * 混流-输出流音频声道数
+         * 混流-输出流音频声道数，取值范围[1,2]。
          * @type {number || null}
          */
         this.AudioChannels = null;
 
         /**
-         * 混流-输出流宽，音视频输出时必填
+         * 混流-输出流宽，音视频输出时必填。取值范围[0,1920]，单位为像素值。
          * @type {number || null}
          */
         this.VideoWidth = null;
 
         /**
-         * 混流-输出流高，音视频输出时必填
+         * 混流-输出流高，音视频输出时必填。取值范围[0,1080]，单位为像素值。
          * @type {number || null}
          */
         this.VideoHeight = null;
 
         /**
-         * 混流-输出流码率，单位Kbps，音视频输出时必填
+         * 混流-输出流码率，音视频输出时必填。取值范围[1,10000]，单位为Kbps。
          * @type {number || null}
          */
         this.VideoBitrate = null;
 
         /**
-         * 混流-输出流帧率，音视频输出时必填
+         * 混流-输出流帧率，音视频输出时必填。取值为[6,12,15,24,30,48,60]，不在上述帧率值内系统会自动调整。
          * @type {number || null}
          */
         this.VideoFramerate = null;
 
         /**
-         * 混流-输出流gop，音视频输出时必填
+         * 混流-输出流gop，音视频输出时必填。取值范围[1,5]，单位为秒。
          * @type {number || null}
          */
         this.VideoGop = null;
 
         /**
-         * 混流-输出流背景色
+         * 混流-输出流背景色。
          * @type {number || null}
          */
         this.BackgroundColor = null;
@@ -999,7 +999,7 @@ class OutputParams extends  AbstractModel {
         this.StreamId = null;
 
         /**
-         * 填0：直播流为音视频(默认); 填1：直播流为纯音频
+         * 取值范围[0,1]， 填0：直播流为音视频(默认); 填1：直播流为纯音频
          * @type {number || null}
          */
         this.PureAudioStream = null;
@@ -1011,7 +1011,7 @@ class OutputParams extends  AbstractModel {
         this.RecordId = null;
 
         /**
-         * 填1：纯音频录制为mp3
+         * 取值范围[0,1]，填1：指定录制文件格式为mp3
          * @type {number || null}
          */
         this.RecordAudioOnly = null;

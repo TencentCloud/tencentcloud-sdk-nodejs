@@ -16,89 +16,95 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DescribeUinInWhitelistResponse = models.DescribeUinInWhitelistResponse;
-const DescribeTasksRequest = models.DescribeTasksRequest;
-const IdlFileInfo = models.IdlFileInfo;
-const ClearTablesRequest = models.ClearTablesRequest;
-const DescribeClustersRequest = models.DescribeClustersRequest;
-const ModifyTableQuotasResponse = models.ModifyTableQuotasResponse;
-const DescribeIdlFileInfosResponse = models.DescribeIdlFileInfosResponse;
-const CreateBackupRequest = models.CreateBackupRequest;
+const ModifyClusterNameRequest = models.ModifyClusterNameRequest;
 const ModifyTableGroupNameResponse = models.ModifyTableGroupNameResponse;
 const DescribeTableTagsRequest = models.DescribeTableTagsRequest;
 const ModifyClusterPasswordResponse = models.ModifyClusterPasswordResponse;
-const CreateClusterRequest = models.CreateClusterRequest;
-const VerifyIdlFilesRequest = models.VerifyIdlFilesRequest;
-const ModifyClusterNameRequest = models.ModifyClusterNameRequest;
-const ClearTablesResponse = models.ClearTablesResponse;
-const DescribeIdlFileInfosRequest = models.DescribeIdlFileInfosRequest;
-const TableResultNew = models.TableResultNew;
-const CreateClusterResponse = models.CreateClusterResponse;
-const ErrorInfo = models.ErrorInfo;
-const CreateTablesRequest = models.CreateTablesRequest;
-const DescribeClusterTagsRequest = models.DescribeClusterTagsRequest;
-const RecoverRecycleTablesResponse = models.RecoverRecycleTablesResponse;
-const ParsedTableInfoNew = models.ParsedTableInfoNew;
-const RegionInfo = models.RegionInfo;
-const TableInfoNew = models.TableInfoNew;
-const TagInfoUnit = models.TagInfoUnit;
-const ModifyTableTagsResponse = models.ModifyTableTagsResponse;
-const RollbackTablesResponse = models.RollbackTablesResponse;
-const DescribeTablesInRecycleResponse = models.DescribeTablesInRecycleResponse;
-const DescribeTableGroupsResponse = models.DescribeTableGroupsResponse;
-const ModifyTablesResponse = models.ModifyTablesResponse;
-const ModifyTableMemosResponse = models.ModifyTableMemosResponse;
-const RollbackTablesRequest = models.RollbackTablesRequest;
-const DeleteIdlFilesRequest = models.DeleteIdlFilesRequest;
-const DeleteTableGroupResponse = models.DeleteTableGroupResponse;
-const ModifyClusterTagsRequest = models.ModifyClusterTagsRequest;
-const CreateBackupResponse = models.CreateBackupResponse;
+const DeleteClusterResponse = models.DeleteClusterResponse;
+const DeleteTableIndexResponse = models.DeleteTableIndexResponse;
 const TableRollbackResultNew = models.TableRollbackResultNew;
-const DescribeTableGroupTagsResponse = models.DescribeTableGroupTagsResponse;
-const DeleteClusterRequest = models.DeleteClusterRequest;
 const DescribeTablesResponse = models.DescribeTablesResponse;
-const TaskInfoNew = models.TaskInfoNew;
-const TagsInfoOfCluster = models.TagsInfoOfCluster;
-const ModifyClusterNameResponse = models.ModifyClusterNameResponse;
-const RecoverRecycleTablesRequest = models.RecoverRecycleTablesRequest;
-const DescribeTableTagsResponse = models.DescribeTableTagsResponse;
+const DeleteClusterRequest = models.DeleteClusterRequest;
+const SelectedTableWithField = models.SelectedTableWithField;
+const DeleteTableIndexRequest = models.DeleteTableIndexRequest;
 const DescribeTasksResponse = models.DescribeTasksResponse;
 const DeleteTablesRequest = models.DeleteTablesRequest;
-const DescribeUinInWhitelistRequest = models.DescribeUinInWhitelistRequest;
-const CreateTableGroupResponse = models.CreateTableGroupResponse;
-const ModifyTableGroupNameRequest = models.ModifyTableGroupNameRequest;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
-const ModifyTableTagsRequest = models.ModifyTableTagsRequest;
-const DescribeTableGroupsRequest = models.DescribeTableGroupsRequest;
-const ModifyTableGroupTagsResponse = models.ModifyTableGroupTagsResponse;
-const CompareIdlFilesRequest = models.CompareIdlFilesRequest;
 const SelectedTableInfoNew = models.SelectedTableInfoNew;
-const IdlFileInfoWithoutContent = models.IdlFileInfoWithoutContent;
 const ModifyClusterPasswordRequest = models.ModifyClusterPasswordRequest;
+const DeleteTableGroupRequest = models.DeleteTableGroupRequest;
+const TagsInfoOfTableGroup = models.TagsInfoOfTableGroup;
+const CreateTableGroupRequest = models.CreateTableGroupRequest;
+const TagsInfoOfTable = models.TagsInfoOfTable;
+const DeleteIdlFilesResponse = models.DeleteIdlFilesResponse;
+const FieldInfo = models.FieldInfo;
+const ModifyTableTagsRequest = models.ModifyTableTagsRequest;
+const IdlFileInfo = models.IdlFileInfo;
+const DescribeTasksRequest = models.DescribeTasksRequest;
+const RecoverRecycleTablesResponse = models.RecoverRecycleTablesResponse;
+const ClearTablesResponse = models.ClearTablesResponse;
+const DescribeIdlFileInfosRequest = models.DescribeIdlFileInfosRequest;
 const ClusterInfo = models.ClusterInfo;
+const DescribeTablesInRecycleResponse = models.DescribeTablesInRecycleResponse;
+const ModifyTablesResponse = models.ModifyTablesResponse;
+const ModifyTableGroupTagsResponse = models.ModifyTableGroupTagsResponse;
+const ModifyClusterTagsRequest = models.ModifyClusterTagsRequest;
+const DescribeTableGroupTagsResponse = models.DescribeTableGroupTagsResponse;
+const SetTableIndexRequest = models.SetTableIndexRequest;
+const ModifyTableQuotasResponse = models.ModifyTableQuotasResponse;
+const RecoverRecycleTablesRequest = models.RecoverRecycleTablesRequest;
+const ModifyTableGroupNameRequest = models.ModifyTableGroupNameRequest;
+const DescribeTableGroupsRequest = models.DescribeTableGroupsRequest;
+const ModifyTableTagsResponse = models.ModifyTableTagsResponse;
 const ModifyTableGroupTagsRequest = models.ModifyTableGroupTagsRequest;
-const Filter = models.Filter;
-const DeleteTablesResponse = models.DeleteTablesResponse;
 const ModifyTableQuotasRequest = models.ModifyTableQuotasRequest;
 const CompareIdlFilesResponse = models.CompareIdlFilesResponse;
-const ModifyTablesRequest = models.ModifyTablesRequest;
-const DeleteTableGroupRequest = models.DeleteTableGroupRequest;
-const DescribeTableGroupTagsRequest = models.DescribeTableGroupTagsRequest;
 const CreateTablesResponse = models.CreateTablesResponse;
-const TagsInfoOfTableGroup = models.TagsInfoOfTableGroup;
+const DescribeRegionsRequest = models.DescribeRegionsRequest;
+const DescribeClustersResponse = models.DescribeClustersResponse;
+const ModifyClusterTagsResponse = models.ModifyClusterTagsResponse;
+const DescribeClusterTagsResponse = models.DescribeClusterTagsResponse;
+const TagsInfoOfCluster = models.TagsInfoOfCluster;
+const SetTableIndexResponse = models.SetTableIndexResponse;
+const ClearTablesRequest = models.ClearTablesRequest;
+const DescribeIdlFileInfosResponse = models.DescribeIdlFileInfosResponse;
+const TagInfoUnit = models.TagInfoUnit;
+const CreateClusterResponse = models.CreateClusterResponse;
+const DescribeClustersRequest = models.DescribeClustersRequest;
+const TableInfoNew = models.TableInfoNew;
+const TaskInfoNew = models.TaskInfoNew;
+const DeleteIdlFilesRequest = models.DeleteIdlFilesRequest;
+const CreateBackupResponse = models.CreateBackupResponse;
+const VerifyIdlFilesResponse = models.VerifyIdlFilesResponse;
+const DescribeTableTagsResponse = models.DescribeTableTagsResponse;
+const CreateTableGroupResponse = models.CreateTableGroupResponse;
+const VerifyIdlFilesRequest = models.VerifyIdlFilesRequest;
+const ModifyClusterNameResponse = models.ModifyClusterNameResponse;
+const ModifyTablesRequest = models.ModifyTablesRequest;
+const DescribeTableGroupTagsRequest = models.DescribeTableGroupTagsRequest;
 const DescribeTablesInRecycleRequest = models.DescribeTablesInRecycleRequest;
 const DescribeTablesRequest = models.DescribeTablesRequest;
-const DescribeRegionsRequest = models.DescribeRegionsRequest;
-const TableGroupInfo = models.TableGroupInfo;
-const DescribeClustersResponse = models.DescribeClustersResponse;
-const VerifyIdlFilesResponse = models.VerifyIdlFilesResponse;
-const ModifyClusterTagsResponse = models.ModifyClusterTagsResponse;
-const DeleteIdlFilesResponse = models.DeleteIdlFilesResponse;
-const DescribeClusterTagsResponse = models.DescribeClusterTagsResponse;
-const CreateTableGroupRequest = models.CreateTableGroupRequest;
 const ModifyTableMemosRequest = models.ModifyTableMemosRequest;
-const TagsInfoOfTable = models.TagsInfoOfTable;
-const DeleteClusterResponse = models.DeleteClusterResponse;
+const DescribeUinInWhitelistResponse = models.DescribeUinInWhitelistResponse;
+const ParsedTableInfoNew = models.ParsedTableInfoNew;
+const RollbackTablesResponse = models.RollbackTablesResponse;
+const CreateBackupRequest = models.CreateBackupRequest;
+const CreateClusterRequest = models.CreateClusterRequest;
+const TableResultNew = models.TableResultNew;
+const CreateTablesRequest = models.CreateTablesRequest;
+const DescribeClusterTagsRequest = models.DescribeClusterTagsRequest;
+const RegionInfo = models.RegionInfo;
+const DescribeTableGroupsResponse = models.DescribeTableGroupsResponse;
+const DeleteTableGroupResponse = models.DeleteTableGroupResponse;
+const RollbackTablesRequest = models.RollbackTablesRequest;
+const DescribeUinInWhitelistRequest = models.DescribeUinInWhitelistRequest;
+const CompareIdlFilesRequest = models.CompareIdlFilesRequest;
+const IdlFileInfoWithoutContent = models.IdlFileInfoWithoutContent;
+const ModifyTableMemosResponse = models.ModifyTableMemosResponse;
+const Filter = models.Filter;
+const DeleteTablesResponse = models.DeleteTablesResponse;
+const ErrorInfo = models.ErrorInfo;
+const TableGroupInfo = models.TableGroupInfo;
 
 
 /**
@@ -111,6 +117,17 @@ class TcaplusdbClient extends AbstractClient {
         super("tcaplusdb.tencentcloudapi.com", "2019-08-23", credential, region, profile);
     }
     
+    /**
+     * 删除表格的分布式索引
+     * @param {DeleteTableIndexRequest} req
+     * @param {function(string, DeleteTableIndexResponse):void} cb
+     * @public
+     */
+    DeleteTableIndex(req, cb) {
+        let resp = new DeleteTableIndexResponse();
+        this.request("DeleteTableIndex", req, resp, cb);
+    }
+
     /**
      * 获取表格标签
      * @param {DescribeTableTagsRequest} req
@@ -230,6 +247,17 @@ class TcaplusdbClient extends AbstractClient {
     RecoverRecycleTables(req, cb) {
         let resp = new RecoverRecycleTablesResponse();
         this.request("RecoverRecycleTables", req, resp, cb);
+    }
+
+    /**
+     * 设置表格分布式索引
+     * @param {SetTableIndexRequest} req
+     * @param {function(string, SetTableIndexResponse):void} cb
+     * @public
+     */
+    SetTableIndex(req, cb) {
+        let resp = new SetTableIndexResponse();
+        this.request("SetTableIndex", req, resp, cb);
     }
 
     /**
