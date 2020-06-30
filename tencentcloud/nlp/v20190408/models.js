@@ -1157,13 +1157,13 @@ class SentenceSimilarityRequest extends  AbstractModel {
         super();
 
         /**
-         * 计算相似度的源句子（仅支持UTF-8格式，不超过500字）
+         * 计算相似度的源句子（仅支持UTF-8格式，不超过500字符）
          * @type {string || null}
          */
         this.SrcText = null;
 
         /**
-         * 计算相似度的目标句子（仅支持UTF-8格式，不超过500字）
+         * 计算相似度的目标句子（仅支持UTF-8格式，不超过500字符）
          * @type {string || null}
          */
         this.TargetText = null;
@@ -1427,13 +1427,13 @@ class TextSimilarityRequest extends  AbstractModel {
         super();
 
         /**
-         * 需要与目标句子计算相似度的源句子（仅支持UTF-8格式，不超过500字）
+         * 需要与目标句子计算相似度的源句子（仅支持UTF-8格式，不超过500字符）
          * @type {string || null}
          */
         this.SrcText = null;
 
         /**
-         * 需要与源句子计算相似度的一个或多个目标句子（仅支持UTF-8格式，目标句子的数量不超过100个，每个句子不超过500字）
+         * 需要与源句子计算相似度的一个或多个目标句子（仅支持UTF-8格式，目标句子的数量不超过100个，每个句子不超过500字符）
 注意：每成功计算1个目标句子与源句子的相似度算1次调用
          * @type {Array.<string> || null}
          */

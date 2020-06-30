@@ -775,6 +775,43 @@ class DescribeInstancesDetailResponse extends  AbstractModel {
 }
 
 /**
+ * 创建预付费接口返回的Data
+ * @class
+ */
+class CreateInstancePreData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CreateInstancePre返回固定为0，不能作为CheckTaskStatus的查询条件。只是为了保证和后台数据结构对齐。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * 订单号列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.DealNames = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.DealNames = 'DealNames' in params ? params.DealNames : null;
+
+    }
+}
+
+/**
  * DescribeACL返回参数结构体
  * @class
  */
@@ -1214,24 +1251,25 @@ class CreateUserResponse extends  AbstractModel {
 }
 
 /**
- * ModifyInstanceAttributes返回参数结构体
+ * 消费分组主题对象
  * @class
  */
-class ModifyInstanceAttributesResponse extends  AbstractModel {
+class GroupOffsetTopic extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 返回结果
-         * @type {JgwOperateResponse || null}
-         */
-        this.Result = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 主题名称
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Topic = null;
+
+        /**
+         * 该主题分区数组，其中每个元素为一个 json object
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<GroupOffsetPartition> || null}
+         */
+        this.Partitions = null;
 
     }
 
@@ -1242,13 +1280,16 @@ class ModifyInstanceAttributesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Topic = 'Topic' in params ? params.Topic : null;
 
-        if (params.Result) {
-            let obj = new JgwOperateResponse();
-            obj.deserialize(params.Result)
-            this.Result = obj;
+        if (params.Partitions) {
+            this.Partitions = new Array();
+            for (let z in params.Partitions) {
+                let obj = new GroupOffsetPartition();
+                obj.deserialize(params.Partitions[z]);
+                this.Partitions.push(obj);
+            }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1644,25 +1685,24 @@ class CreateTopicIpWhiteListResponse extends  AbstractModel {
 }
 
 /**
- * 消费分组主题对象
+ * ModifyInstanceAttributes返回参数结构体
  * @class
  */
-class GroupOffsetTopic extends  AbstractModel {
+class ModifyInstanceAttributesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 主题名称
-         * @type {string || null}
+         * 返回结果
+         * @type {JgwOperateResponse || null}
          */
-        this.Topic = null;
+        this.Result = null;
 
         /**
-         * 该主题分区数组，其中每个元素为一个 json object
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<GroupOffsetPartition> || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.Partitions = null;
+        this.RequestId = null;
 
     }
 
@@ -1673,16 +1713,13 @@ class GroupOffsetTopic extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Topic = 'Topic' in params ? params.Topic : null;
 
-        if (params.Partitions) {
-            this.Partitions = new Array();
-            for (let z in params.Partitions) {
-                let obj = new GroupOffsetPartition();
-                obj.deserialize(params.Partitions[z]);
-                this.Partitions.push(obj);
-            }
+        if (params.Result) {
+            let obj = new JgwOperateResponse();
+            obj.deserialize(params.Result)
+            this.Result = obj;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3555,6 +3592,54 @@ class DeleteTopicIpWhiteListResponse extends  AbstractModel {
 }
 
 /**
+ * 创建预付费实例返回结构
+ * @class
+ */
+class CreateInstancePreResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回的code，0为正常，非0为错误
+         * @type {string || null}
+         */
+        this.ReturnCode = null;
+
+        /**
+         * 成功消息
+         * @type {string || null}
+         */
+        this.ReturnMessage = null;
+
+        /**
+         * 操作型返回的Data数据
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {CreateInstancePreData || null}
+         */
+        this.Data = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReturnCode = 'ReturnCode' in params ? params.ReturnCode : null;
+        this.ReturnMessage = 'ReturnMessage' in params ? params.ReturnMessage : null;
+
+        if (params.Data) {
+            let obj = new CreateInstancePreData();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+
+    }
+}
+
+/**
  * DescribeInstancesDetail请求参数结构体
  * @class
  */
@@ -4554,6 +4639,90 @@ class CreateTopicResponse extends  AbstractModel {
 }
 
 /**
+ * CreateInstancePre请求参数结构体
+ * @class
+ */
+class CreateInstancePreRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例名称，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 可用区
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * 预付费购买时长，例如 "1m",就是一个月
+         * @type {string || null}
+         */
+        this.Period = null;
+
+        /**
+         * 实例规格，1：入门型 ，2： 标准型，3 ：进阶型，4 ：容量型，5： 高阶型1，6：高阶性2, 7： 高阶型3,8： 高阶型4， 9 ：独占型。
+         * @type {number || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * vpcId，不填默认基础网络
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 子网id，vpc网络需要传该参数，基础网络可以不传
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 可选。实例日志的最长保留时间，单位分钟，默认为10080（7天），最大30天，不填默认0，代表不开启日志保留时间回收策略
+         * @type {number || null}
+         */
+        this.MsgRetentionTime = null;
+
+        /**
+         * 创建实例时可以选择集群Id, 该入参表示集群Id
+         * @type {number || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 预付费自动续费标记，0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费(用户设置)
+         * @type {number || null}
+         */
+        this.RenewFlag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.MsgRetentionTime = 'MsgRetentionTime' in params ? params.MsgRetentionTime : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+
+    }
+}
+
+/**
  * DeleteTopicIpWhiteList请求参数结构体
  * @class
  */
@@ -5010,6 +5179,7 @@ module.exports = {
     GroupInfoTopics: GroupInfoTopics,
     TopicResult: TopicResult,
     DescribeInstancesDetailResponse: DescribeInstancesDetailResponse,
+    CreateInstancePreData: CreateInstancePreData,
     DescribeACLResponse: DescribeACLResponse,
     JgwOperateResponse: JgwOperateResponse,
     Topic: Topic,
@@ -5021,7 +5191,7 @@ module.exports = {
     ModifyInstanceAttributesConfig: ModifyInstanceAttributesConfig,
     OperateResponseData: OperateResponseData,
     CreateUserResponse: CreateUserResponse,
-    ModifyInstanceAttributesResponse: ModifyInstanceAttributesResponse,
+    GroupOffsetTopic: GroupOffsetTopic,
     CreatePartitionResponse: CreatePartitionResponse,
     DeleteUserResponse: DeleteUserResponse,
     CreateAclRequest: CreateAclRequest,
@@ -5029,7 +5199,7 @@ module.exports = {
     DescribeTopicResponse: DescribeTopicResponse,
     ConsumerGroupResponse: ConsumerGroupResponse,
     CreateTopicIpWhiteListResponse: CreateTopicIpWhiteListResponse,
-    GroupOffsetTopic: GroupOffsetTopic,
+    ModifyInstanceAttributesResponse: ModifyInstanceAttributesResponse,
     ModifyGroupOffsetsResponse: ModifyGroupOffsetsResponse,
     Partition: Partition,
     CreateAclResponse: CreateAclResponse,
@@ -5067,6 +5237,7 @@ module.exports = {
     GroupOffsetResponse: GroupOffsetResponse,
     CreateUserRequest: CreateUserRequest,
     DeleteTopicIpWhiteListResponse: DeleteTopicIpWhiteListResponse,
+    CreateInstancePreResponse: CreateInstancePreResponse,
     DescribeInstancesDetailRequest: DescribeInstancesDetailRequest,
     ModifyPasswordResponse: ModifyPasswordResponse,
     InstanceDetailResponse: InstanceDetailResponse,
@@ -5085,6 +5256,7 @@ module.exports = {
     Acl: Acl,
     ModifyTopicAttributesRequest: ModifyTopicAttributesRequest,
     CreateTopicResponse: CreateTopicResponse,
+    CreateInstancePreRequest: CreateInstancePreRequest,
     DeleteTopicIpWhiteListRequest: DeleteTopicIpWhiteListRequest,
     DescribeGroupOffsetsRequest: DescribeGroupOffsetsRequest,
     DescribeUserRequest: DescribeUserRequest,

@@ -2204,6 +2204,13 @@ class DescribeDeviceResponse extends  AbstractModel {
         this.ClientIP = null;
 
         /**
+         * 设备固件更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FirmwareUpdateTime = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -2257,6 +2264,7 @@ class DescribeDeviceResponse extends  AbstractModel {
             }
         }
         this.ClientIP = 'ClientIP' in params ? params.ClientIP : null;
+        this.FirmwareUpdateTime = 'FirmwareUpdateTime' in params ? params.FirmwareUpdateTime : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3891,10 +3899,16 @@ class DescribeDevicesRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 设备固件版本号，若不带此参数会返回所有固件版本的设备
+         * 设备固件版本号，若不带此参数会返回所有固件版本的设备。传"None-FirmwareVersion"查询无版本号的设备
          * @type {string || null}
          */
         this.FirmwareVersion = null;
+
+        /**
+         * 需要过滤的设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
 
     }
 
@@ -3909,6 +3923,7 @@ class DescribeDevicesRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.FirmwareVersion = 'FirmwareVersion' in params ? params.FirmwareVersion : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
 
     }
 }
@@ -4228,7 +4243,7 @@ class DeviceInfo extends  AbstractModel {
         this.DeviceType = null;
 
         /**
-         * IMEI
+         * 国际移动设备识别码 IMEI
          * @type {string || null}
          */
         this.Imei = null;
@@ -4318,6 +4333,20 @@ class DeviceInfo extends  AbstractModel {
          */
         this.Labels = null;
 
+        /**
+         * MQTT客户端IP地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClientIP = null;
+
+        /**
+         * ota最后更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FirmwareUpdateTime = null;
+
     }
 
     /**
@@ -4365,6 +4394,8 @@ class DeviceInfo extends  AbstractModel {
                 this.Labels.push(obj);
             }
         }
+        this.ClientIP = 'ClientIP' in params ? params.ClientIP : null;
+        this.FirmwareUpdateTime = 'FirmwareUpdateTime' in params ? params.FirmwareUpdateTime : null;
 
     }
 }
