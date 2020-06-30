@@ -59,6 +59,49 @@ class SegmentPortraitPicResponse extends  AbstractModel {
 }
 
 /**
+ * DetectBodyJoints返回参数结构体
+ * @class
+ */
+class DetectBodyJointsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图中检测出的人体框和人体关键点， 包含14个人体关键点的坐标，建议根据人体框置信度筛选出合格的人体；
+         * @type {Array.<BodyJointsResult> || null}
+         */
+        this.BodyJointsResults = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.BodyJointsResults) {
+            this.BodyJointsResults = new Array();
+            for (let z in params.BodyJointsResults) {
+                let obj = new BodyJointsResult();
+                obj.deserialize(params.BodyJointsResults[z]);
+                this.BodyJointsResults.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 识别出的最相似候选人。
  * @class
  */
@@ -746,6 +789,98 @@ class CreateGroupRequest extends  AbstractModel {
 }
 
 /**
+ * 下衣属性信息
+ * @class
+ */
+class LowerBodyCloth extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 下衣颜色信息。
+         * @type {LowerBodyClothColor || null}
+         */
+        this.Color = null;
+
+        /**
+         * 下衣长度信息 。
+         * @type {LowerBodyClothLength || null}
+         */
+        this.Length = null;
+
+        /**
+         * 下衣类型信息。
+         * @type {LowerBodyClothType || null}
+         */
+        this.Type = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Color) {
+            let obj = new LowerBodyClothColor();
+            obj.deserialize(params.Color)
+            this.Color = obj;
+        }
+
+        if (params.Length) {
+            let obj = new LowerBodyClothLength();
+            obj.deserialize(params.Length)
+            this.Length = obj;
+        }
+
+        if (params.Type) {
+            let obj = new LowerBodyClothType();
+            obj.deserialize(params.Type)
+            this.Type = obj;
+        }
+
+    }
+}
+
+/**
+ * 上衣纹理信息。
+ * @class
+ */
+class UpperBodyClothTexture extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 上衣纹理信息，返回值为以下集合中的一个, {纯色, 格子, 大色块}。
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * Type识别概率值，[0.0,1.0], 代表判断正确的概率。如0.8则代表有Type值有80%概率正确。
+         * @type {number || null}
+         */
+        this.Probability = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Probability = 'Probability' in params ? params.Probability : null;
+
+    }
+}
+
+/**
  * 人体轨迹信息。
  * @class
  */
@@ -1019,30 +1154,30 @@ class SearchTraceRequest extends  AbstractModel {
 }
 
 /**
- * 人员信息。
+ * 人体关键点信息
  * @class
  */
-class PersonInfo extends  AbstractModel {
+class KeyPointInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 人员名称。
+         * 代表不同位置的人体关键点信息，返回值为以下集合中的一个 [头部,颈部,右肩,右肘,右腕,左肩,左肘,左腕,右髋,右膝,右踝,左髋,左膝,左踝]
          * @type {string || null}
          */
-        this.PersonName = null;
+        this.KeyPointType = null;
 
         /**
-         * 人员ID。
-         * @type {string || null}
+         * 人体关键点横坐标
+         * @type {number || null}
          */
-        this.PersonId = null;
+        this.X = null;
 
         /**
-         * 包含的人体轨迹图片信息列表。
-         * @type {Array.<TraceInfo> || null}
+         * 人体关键点纵坐标
+         * @type {number || null}
          */
-        this.TraceInfos = null;
+        this.Y = null;
 
     }
 
@@ -1053,17 +1188,9 @@ class PersonInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PersonName = 'PersonName' in params ? params.PersonName : null;
-        this.PersonId = 'PersonId' in params ? params.PersonId : null;
-
-        if (params.TraceInfos) {
-            this.TraceInfos = new Array();
-            for (let z in params.TraceInfos) {
-                let obj = new TraceInfo();
-                obj.deserialize(params.TraceInfos[z]);
-                this.TraceInfos.push(obj);
-            }
-        }
+        this.KeyPointType = 'KeyPointType' in params ? params.KeyPointType : null;
+        this.X = 'X' in params ? params.X : null;
+        this.Y = 'Y' in params ? params.Y : null;
 
     }
 }
@@ -1119,6 +1246,56 @@ class DetectBodyResponse extends  AbstractModel {
 }
 
 /**
+ * 人员信息。
+ * @class
+ */
+class PersonInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 人员名称。
+         * @type {string || null}
+         */
+        this.PersonName = null;
+
+        /**
+         * 人员ID。
+         * @type {string || null}
+         */
+        this.PersonId = null;
+
+        /**
+         * 包含的人体轨迹图片信息列表。
+         * @type {Array.<TraceInfo> || null}
+         */
+        this.TraceInfos = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PersonName = 'PersonName' in params ? params.PersonName : null;
+        this.PersonId = 'PersonId' in params ? params.PersonId : null;
+
+        if (params.TraceInfos) {
+            this.TraceInfos = new Array();
+            for (let z in params.TraceInfos) {
+                let obj = new TraceInfo();
+                obj.deserialize(params.TraceInfos[z]);
+                this.TraceInfos.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * 人体是否挎包。 
 AttributesType 不含 Bag 或检测超过 5 个人体时，此参数仍返回，但不具备参考意义。
  * @class
@@ -1150,6 +1327,46 @@ class Bag extends  AbstractModel {
         }
         this.Type = 'Type' in params ? params.Type : null;
         this.Probability = 'Probability' in params ? params.Probability : null;
+
+    }
+}
+
+/**
+ * DetectBodyJoints请求参数结构体
+ * @class
+ */
+class DetectBodyJointsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片 base64 数据，base64 编码后大小不可超过5M。  
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+         * @type {string || null}
+         */
+        this.Image = null;
+
+        /**
+         * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。 
+Url、Image必须提供一个，如果都提供，只使用 Url。  
+图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
+非腾讯云存储的Url速度和稳定性可能受一定影响。  
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Image = 'Image' in params ? params.Image : null;
+        this.Url = 'Url' in params ? params.Url : null;
 
     }
 }
@@ -1357,24 +1574,30 @@ class Orientation extends  AbstractModel {
 }
 
 /**
- * 上衣纹理信息。
+ * 人体框和人体关键点信息。
  * @class
  */
-class UpperBodyClothTexture extends  AbstractModel {
+class BodyJointsResult extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 上衣纹理信息，返回值为以下集合中的一个, {纯色, 格子, 大色块}。
-         * @type {string || null}
+         * 图中检测出来的人体框。
+         * @type {BoundRect || null}
          */
-        this.Type = null;
+        this.BoundBox = null;
 
         /**
-         * Type识别概率值，[0.0,1.0], 代表判断正确的概率。如0.8则代表有Type值有80%概率正确。
+         * 14个人体关键点的坐标，人体关键点详见KeyPointInfo。
+         * @type {Array.<KeyPointInfo> || null}
+         */
+        this.BodyJoints = null;
+
+        /**
+         * 检测出的人体置信度，0-1之间，数值越高越准确。
          * @type {number || null}
          */
-        this.Probability = null;
+        this.Confidence = null;
 
     }
 
@@ -1385,8 +1608,22 @@ class UpperBodyClothTexture extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Probability = 'Probability' in params ? params.Probability : null;
+
+        if (params.BoundBox) {
+            let obj = new BoundRect();
+            obj.deserialize(params.BoundBox)
+            this.BoundBox = obj;
+        }
+
+        if (params.BodyJoints) {
+            this.BodyJoints = new Array();
+            for (let z in params.BodyJoints) {
+                let obj = new KeyPointInfo();
+                obj.deserialize(params.BodyJoints[z]);
+                this.BodyJoints.push(obj);
+            }
+        }
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
 
     }
 }
@@ -1670,30 +1907,36 @@ RetCode 的顺序和入参中Images 或 Urls 的顺序一致。
 }
 
 /**
- * 下衣属性信息
+ * 人体框
  * @class
  */
-class LowerBodyCloth extends  AbstractModel {
+class BoundRect extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 下衣颜色信息。
-         * @type {LowerBodyClothColor || null}
+         * 人体框左上角横坐标。
+         * @type {number || null}
          */
-        this.Color = null;
+        this.X = null;
 
         /**
-         * 下衣长度信息 。
-         * @type {LowerBodyClothLength || null}
+         * 人体框左上角纵坐标。
+         * @type {number || null}
          */
-        this.Length = null;
+        this.Y = null;
 
         /**
-         * 下衣类型信息。
-         * @type {LowerBodyClothType || null}
+         * 人体宽度。
+         * @type {number || null}
          */
-        this.Type = null;
+        this.Width = null;
+
+        /**
+         * 人体高度。
+         * @type {number || null}
+         */
+        this.Height = null;
 
     }
 
@@ -1704,24 +1947,10 @@ class LowerBodyCloth extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Color) {
-            let obj = new LowerBodyClothColor();
-            obj.deserialize(params.Color)
-            this.Color = obj;
-        }
-
-        if (params.Length) {
-            let obj = new LowerBodyClothLength();
-            obj.deserialize(params.Length)
-            this.Length = obj;
-        }
-
-        if (params.Type) {
-            let obj = new LowerBodyClothType();
-            obj.deserialize(params.Type)
-            this.Type = obj;
-        }
+        this.X = 'X' in params ? params.X : null;
+        this.Y = 'Y' in params ? params.Y : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
 
     }
 }
@@ -2058,6 +2287,7 @@ class CreateGroupResponse extends  AbstractModel {
 
 module.exports = {
     SegmentPortraitPicResponse: SegmentPortraitPicResponse,
+    DetectBodyJointsResponse: DetectBodyJointsResponse,
     Candidate: Candidate,
     DeletePersonRequest: DeletePersonRequest,
     ModifyGroupResponse: ModifyGroupResponse,
@@ -2073,27 +2303,31 @@ module.exports = {
     ModifyPersonInfoRequest: ModifyPersonInfoRequest,
     Gender: Gender,
     CreateGroupRequest: CreateGroupRequest,
+    LowerBodyCloth: LowerBodyCloth,
+    UpperBodyClothTexture: UpperBodyClothTexture,
     TraceInfo: TraceInfo,
     DeleteGroupResponse: DeleteGroupResponse,
     BodyRect: BodyRect,
     DetectBodyRequest: DetectBodyRequest,
     Age: Age,
     SearchTraceRequest: SearchTraceRequest,
-    PersonInfo: PersonInfo,
+    KeyPointInfo: KeyPointInfo,
     DetectBodyResponse: DetectBodyResponse,
+    PersonInfo: PersonInfo,
     Bag: Bag,
+    DetectBodyJointsRequest: DetectBodyJointsRequest,
     SegmentPortraitPicRequest: SegmentPortraitPicRequest,
     UpperBodyClothColor: UpperBodyClothColor,
     GetGroupListRequest: GetGroupListRequest,
     BodyDetectResult: BodyDetectResult,
     Orientation: Orientation,
-    UpperBodyClothTexture: UpperBodyClothTexture,
+    BodyJointsResult: BodyJointsResult,
     UpperBodyCloth: UpperBodyCloth,
     LowerBodyClothLength: LowerBodyClothLength,
     SearchTraceResponse: SearchTraceResponse,
     CreateTraceResponse: CreateTraceResponse,
     CreatePersonResponse: CreatePersonResponse,
-    LowerBodyCloth: LowerBodyCloth,
+    BoundRect: BoundRect,
     LowerBodyClothColor: LowerBodyClothColor,
     GetPersonListResponse: GetPersonListResponse,
     GetPersonListRequest: GetPersonListRequest,

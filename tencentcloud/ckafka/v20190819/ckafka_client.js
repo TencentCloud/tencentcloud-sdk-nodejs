@@ -32,6 +32,7 @@ const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const GroupInfoTopics = models.GroupInfoTopics;
 const TopicResult = models.TopicResult;
 const DescribeInstancesDetailResponse = models.DescribeInstancesDetailResponse;
+const CreateInstancePreData = models.CreateInstancePreData;
 const DescribeACLResponse = models.DescribeACLResponse;
 const JgwOperateResponse = models.JgwOperateResponse;
 const Topic = models.Topic;
@@ -43,7 +44,7 @@ const DescribeGroupResponse = models.DescribeGroupResponse;
 const ModifyInstanceAttributesConfig = models.ModifyInstanceAttributesConfig;
 const OperateResponseData = models.OperateResponseData;
 const CreateUserResponse = models.CreateUserResponse;
-const ModifyInstanceAttributesResponse = models.ModifyInstanceAttributesResponse;
+const GroupOffsetTopic = models.GroupOffsetTopic;
 const CreatePartitionResponse = models.CreatePartitionResponse;
 const DeleteUserResponse = models.DeleteUserResponse;
 const CreateAclRequest = models.CreateAclRequest;
@@ -51,7 +52,7 @@ const DescribeAppInfoRequest = models.DescribeAppInfoRequest;
 const DescribeTopicResponse = models.DescribeTopicResponse;
 const ConsumerGroupResponse = models.ConsumerGroupResponse;
 const CreateTopicIpWhiteListResponse = models.CreateTopicIpWhiteListResponse;
-const GroupOffsetTopic = models.GroupOffsetTopic;
+const ModifyInstanceAttributesResponse = models.ModifyInstanceAttributesResponse;
 const ModifyGroupOffsetsResponse = models.ModifyGroupOffsetsResponse;
 const Partition = models.Partition;
 const CreateAclResponse = models.CreateAclResponse;
@@ -89,6 +90,7 @@ const Filter = models.Filter;
 const GroupOffsetResponse = models.GroupOffsetResponse;
 const CreateUserRequest = models.CreateUserRequest;
 const DeleteTopicIpWhiteListResponse = models.DeleteTopicIpWhiteListResponse;
+const CreateInstancePreResponse = models.CreateInstancePreResponse;
 const DescribeInstancesDetailRequest = models.DescribeInstancesDetailRequest;
 const ModifyPasswordResponse = models.ModifyPasswordResponse;
 const InstanceDetailResponse = models.InstanceDetailResponse;
@@ -107,6 +109,7 @@ const Route = models.Route;
 const Acl = models.Acl;
 const ModifyTopicAttributesRequest = models.ModifyTopicAttributesRequest;
 const CreateTopicResponse = models.CreateTopicResponse;
+const CreateInstancePreRequest = models.CreateInstancePreRequest;
 const DeleteTopicIpWhiteListRequest = models.DeleteTopicIpWhiteListRequest;
 const DescribeGroupOffsetsRequest = models.DescribeGroupOffsetsRequest;
 const DescribeUserRequest = models.DescribeUserRequest;
@@ -255,6 +258,17 @@ class CkafkaClient extends AbstractClient {
     DescribeTopicDetail(req, cb) {
         let resp = new DescribeTopicDetailResponse();
         this.request("DescribeTopicDetail", req, resp, cb);
+    }
+
+    /**
+     * 创建实例(预付费包年包月)
+     * @param {CreateInstancePreRequest} req
+     * @param {function(string, CreateInstancePreResponse):void} cb
+     * @public
+     */
+    CreateInstancePre(req, cb) {
+        let resp = new CreateInstancePreResponse();
+        this.request("CreateInstancePre", req, resp, cb);
     }
 
     /**

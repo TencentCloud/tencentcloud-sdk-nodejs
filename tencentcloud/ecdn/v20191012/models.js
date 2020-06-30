@@ -277,6 +277,13 @@ class Https extends  AbstractModel {
          */
         this.SslStatus = null;
 
+        /**
+         * Hsts配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Hsts || null}
+         */
+        this.Hsts = null;
+
     }
 
     /**
@@ -304,6 +311,12 @@ class Https extends  AbstractModel {
         }
         this.Spdy = 'Spdy' in params ? params.Spdy : null;
         this.SslStatus = 'SslStatus' in params ? params.SslStatus : null;
+
+        if (params.Hsts) {
+            let obj = new Hsts();
+            obj.deserialize(params.Hsts)
+            this.Hsts = obj;
+        }
 
     }
 }
@@ -921,6 +934,50 @@ class DomainLogs extends  AbstractModel {
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.LogPath = 'LogPath' in params ? params.LogPath : null;
+
+    }
+}
+
+/**
+ * HSTS 配置。
+ * @class
+ */
+class Hsts extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否开启，on或off。
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * MaxAge数值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxAge = null;
+
+        /**
+         * 是否包含子域名，on或off。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.IncludeSubDomains = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.MaxAge = 'MaxAge' in params ? params.MaxAge : null;
+        this.IncludeSubDomains = 'IncludeSubDomains' in params ? params.IncludeSubDomains : null;
 
     }
 }
@@ -2842,6 +2899,7 @@ module.exports = {
     DescribePurgeTasksRequest: DescribePurgeTasksRequest,
     DomainFilter: DomainFilter,
     DomainLogs: DomainLogs,
+    Hsts: Hsts,
     HttpHeaderPathRule: HttpHeaderPathRule,
     UpdateDomainConfigResponse: UpdateDomainConfigResponse,
     DetailData: DetailData,

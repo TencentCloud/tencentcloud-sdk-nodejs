@@ -17,6 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const SegmentPortraitPicResponse = models.SegmentPortraitPicResponse;
+const DetectBodyJointsResponse = models.DetectBodyJointsResponse;
 const Candidate = models.Candidate;
 const DeletePersonRequest = models.DeletePersonRequest;
 const ModifyGroupResponse = models.ModifyGroupResponse;
@@ -32,27 +33,31 @@ const DeleteGroupRequest = models.DeleteGroupRequest;
 const ModifyPersonInfoRequest = models.ModifyPersonInfoRequest;
 const Gender = models.Gender;
 const CreateGroupRequest = models.CreateGroupRequest;
+const LowerBodyCloth = models.LowerBodyCloth;
+const UpperBodyClothTexture = models.UpperBodyClothTexture;
 const TraceInfo = models.TraceInfo;
 const DeleteGroupResponse = models.DeleteGroupResponse;
 const BodyRect = models.BodyRect;
 const DetectBodyRequest = models.DetectBodyRequest;
 const Age = models.Age;
 const SearchTraceRequest = models.SearchTraceRequest;
-const PersonInfo = models.PersonInfo;
+const KeyPointInfo = models.KeyPointInfo;
 const DetectBodyResponse = models.DetectBodyResponse;
+const PersonInfo = models.PersonInfo;
 const Bag = models.Bag;
+const DetectBodyJointsRequest = models.DetectBodyJointsRequest;
 const SegmentPortraitPicRequest = models.SegmentPortraitPicRequest;
 const UpperBodyClothColor = models.UpperBodyClothColor;
 const GetGroupListRequest = models.GetGroupListRequest;
 const BodyDetectResult = models.BodyDetectResult;
 const Orientation = models.Orientation;
-const UpperBodyClothTexture = models.UpperBodyClothTexture;
+const BodyJointsResult = models.BodyJointsResult;
 const UpperBodyCloth = models.UpperBodyCloth;
 const LowerBodyClothLength = models.LowerBodyClothLength;
 const SearchTraceResponse = models.SearchTraceResponse;
 const CreateTraceResponse = models.CreateTraceResponse;
 const CreatePersonResponse = models.CreatePersonResponse;
-const LowerBodyCloth = models.LowerBodyCloth;
+const BoundRect = models.BoundRect;
 const LowerBodyClothColor = models.LowerBodyClothColor;
 const GetPersonListResponse = models.GetPersonListResponse;
 const GetPersonListRequest = models.GetPersonListRequest;
@@ -116,14 +121,15 @@ class BdaClient extends AbstractClient {
     }
 
     /**
-     * 获取指定人体库中的人员列表。
-     * @param {GetPersonListRequest} req
-     * @param {function(string, GetPersonListResponse):void} cb
+     * 检测图片中人体的14个关键点。建议用于人体图像清晰、无遮挡的场景。支持一张图片中存在多个人体的识别。
+
+     * @param {DetectBodyJointsRequest} req
+     * @param {function(string, DetectBodyJointsResponse):void} cb
      * @public
      */
-    GetPersonList(req, cb) {
-        let resp = new GetPersonListResponse();
-        this.request("GetPersonList", req, resp, cb);
+    DetectBodyJoints(req, cb) {
+        let resp = new DetectBodyJointsResponse();
+        this.request("DetectBodyJoints", req, resp, cb);
     }
 
     /**
@@ -164,6 +170,17 @@ class BdaClient extends AbstractClient {
     DeletePerson(req, cb) {
         let resp = new DeletePersonResponse();
         this.request("DeletePerson", req, resp, cb);
+    }
+
+    /**
+     * 修改人员信息。
+     * @param {ModifyPersonInfoRequest} req
+     * @param {function(string, ModifyPersonInfoResponse):void} cb
+     * @public
+     */
+    ModifyPersonInfo(req, cb) {
+        let resp = new ModifyPersonInfoResponse();
+        this.request("ModifyPersonInfo", req, resp, cb);
     }
 
     /**
@@ -224,14 +241,14 @@ class BdaClient extends AbstractClient {
     }
 
     /**
-     * 修改人员信息。
-     * @param {ModifyPersonInfoRequest} req
-     * @param {function(string, ModifyPersonInfoResponse):void} cb
+     * 获取指定人体库中的人员列表。
+     * @param {GetPersonListRequest} req
+     * @param {function(string, GetPersonListResponse):void} cb
      * @public
      */
-    ModifyPersonInfo(req, cb) {
-        let resp = new ModifyPersonInfoResponse();
-        this.request("ModifyPersonInfo", req, resp, cb);
+    GetPersonList(req, cb) {
+        let resp = new GetPersonListResponse();
+        this.request("GetPersonList", req, resp, cb);
     }
 
 

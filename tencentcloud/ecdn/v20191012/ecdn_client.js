@@ -35,6 +35,7 @@ const IpFreqLimit = models.IpFreqLimit;
 const DescribePurgeTasksRequest = models.DescribePurgeTasksRequest;
 const DomainFilter = models.DomainFilter;
 const DomainLogs = models.DomainLogs;
+const Hsts = models.Hsts;
 const HttpHeaderPathRule = models.HttpHeaderPathRule;
 const UpdateDomainConfigResponse = models.UpdateDomainConfigResponse;
 const DetailData = models.DetailData;
