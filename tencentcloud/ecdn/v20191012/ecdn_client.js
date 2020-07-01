@@ -93,7 +93,7 @@ class EcdnClient extends AbstractClient {
     }
 
     /**
-     * PurgeUrlsCache 用于批量刷新目录缓存，一次提交将返回一个刷新任务id。
+     * PurgePathCache 用于批量刷新目录缓存，一次提交将返回一个刷新任务id。
      * @param {PurgePathCacheRequest} req
      * @param {function(string, PurgePathCacheResponse):void} cb
      * @public

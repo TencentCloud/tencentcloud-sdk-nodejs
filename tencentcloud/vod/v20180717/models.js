@@ -14022,7 +14022,6 @@ class ModifyContentReviewTemplateRequest extends  AbstractModel {
          * 违禁控制参数。违禁内容包括：
 <li>谩骂；</li>
 <li>涉毒违法。</li>
-注意：此参数尚未支持。
          * @type {ProhibitedConfigureInfoForUpdate || null}
          */
         this.ProhibitedConfigure = null;
@@ -14968,6 +14967,8 @@ class MediaBasicInfo extends  AbstractModel {
 
         /**
          * 文件状态：Normal：正常，Forbidden：封禁。
+
+*注意：此字段暂不支持。
          * @type {string || null}
          */
         this.Status = null;
@@ -19372,7 +19373,6 @@ class CreateContentReviewTemplateRequest extends  AbstractModel {
          * 违禁控制参数。违禁内容包括：
 <li>谩骂；</li>
 <li>涉毒违法。</li>
-注意：此参数尚未支持。
          * @type {ProhibitedConfigureInfo || null}
          */
         this.ProhibitedConfigure = null;

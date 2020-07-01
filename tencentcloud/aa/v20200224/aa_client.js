@@ -17,7 +17,18 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const QueryActivityAntiRushResponse = models.QueryActivityAntiRushResponse;
+const OutputActivityAntiRushAdvancedValue = models.OutputActivityAntiRushAdvancedValue;
+const QQAccountInfo = models.QQAccountInfo;
+const OnlineScamInfo = models.OnlineScamInfo;
+const WeChatAccountInfo = models.WeChatAccountInfo;
+const InputActivityAntiRushAdvanced = models.InputActivityAntiRushAdvanced;
+const OtherAccountInfo = models.OtherAccountInfo;
+const AccountInfo = models.AccountInfo;
+const QueryActivityAntiRushAdvancedResponse = models.QueryActivityAntiRushAdvancedResponse;
+const SponsorInfo = models.SponsorInfo;
 const QueryActivityAntiRushRequest = models.QueryActivityAntiRushRequest;
+const OutputActivityAntiRushAdvanced = models.OutputActivityAntiRushAdvanced;
+const QueryActivityAntiRushAdvancedRequest = models.QueryActivityAntiRushAdvancedRequest;
 
 
 /**
@@ -39,6 +50,17 @@ class AaClient extends AbstractClient {
     QueryActivityAntiRush(req, cb) {
         let resp = new QueryActivityAntiRushResponse();
         this.request("QueryActivityAntiRush", req, resp, cb);
+    }
+
+    /**
+     * 活动防刷高级版，支持对网赚众包、网赚防刷、引流反诈骗场景的检测识别
+     * @param {QueryActivityAntiRushAdvancedRequest} req
+     * @param {function(string, QueryActivityAntiRushAdvancedResponse):void} cb
+     * @public
+     */
+    QueryActivityAntiRushAdvanced(req, cb) {
+        let resp = new QueryActivityAntiRushAdvancedResponse();
+        this.request("QueryActivityAntiRushAdvanced", req, resp, cb);
     }
 
 

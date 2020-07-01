@@ -1011,7 +1011,7 @@ class OutputParams extends  AbstractModel {
         this.RecordId = null;
 
         /**
-         * 取值范围[0,1]，填1：指定录制文件格式为mp3
+         * 取值范围[0,1]，填0无实际含义; 填1：指定录制文件格式为mp3
          * @type {number || null}
          */
         this.RecordAudioOnly = null;
