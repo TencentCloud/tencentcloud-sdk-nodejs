@@ -114,6 +114,12 @@ class CreateDBInstancesRequest extends  AbstractModel {
          */
         this.Name = null;
 
+        /**
+         * 是否需要支持Ipv6，1：是，0：否
+         * @type {number || null}
+         */
+        this.NeedSupportIpv6 = null;
+
     }
 
     /**
@@ -138,6 +144,7 @@ class CreateDBInstancesRequest extends  AbstractModel {
         this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
         this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
         this.Name = 'Name' in params ? params.Name : null;
+        this.NeedSupportIpv6 = 'NeedSupportIpv6' in params ? params.NeedSupportIpv6 : null;
 
     }
 }
@@ -1921,7 +1928,7 @@ class DBInstance extends  AbstractModel {
         this.VpcId = null;
 
         /**
-         * SubnetId
+         * 子网ID
          * @type {string || null}
          */
         this.SubnetId = null;
@@ -1939,7 +1946,7 @@ class DBInstance extends  AbstractModel {
         this.DBInstanceName = null;
 
         /**
-         * 实例状态
+         * 实例状态，分别为：applying（申请中）、init(待初始化)、initing(初始化中)、running(运行中)、limited run（受限运行）、isolated（已隔离）、recycling（回收中）、recycled（已回收）、job running（任务执行中）、offline（下线）、migrating（迁移中）、expanding（扩容中）、readonly（只读）、restarting（重启中）
          * @type {string || null}
          */
         this.DBInstanceStatus = null;
@@ -2052,6 +2059,12 @@ class DBInstance extends  AbstractModel {
          */
         this.Uid = null;
 
+        /**
+         * 实例是否支持Ipv6，1：支持，0：不支持
+         * @type {number || null}
+         */
+        this.SupportIpv6 = null;
+
     }
 
     /**
@@ -2095,6 +2108,7 @@ class DBInstance extends  AbstractModel {
         this.Type = 'Type' in params ? params.Type : null;
         this.AppId = 'AppId' in params ? params.AppId : null;
         this.Uid = 'Uid' in params ? params.Uid : null;
+        this.SupportIpv6 = 'SupportIpv6' in params ? params.SupportIpv6 : null;
 
     }
 }
@@ -2997,7 +3011,7 @@ class DBBackup extends  AbstractModel {
 }
 
 /**
- * 描述实例的网络连接信息
+ * 描述实例的网络连接信息。
  * @class
  */
 class DBInstanceNetInfo extends  AbstractModel {
@@ -3011,7 +3025,7 @@ class DBInstanceNetInfo extends  AbstractModel {
         this.Address = null;
 
         /**
-         * Ip
+         * IP地址
          * @type {string || null}
          */
         this.Ip = null;
@@ -3023,7 +3037,7 @@ class DBInstanceNetInfo extends  AbstractModel {
         this.Port = null;
 
         /**
-         * 网络类型，1、inner（内网地址）；2、public（外网地址）
+         * 网络类型，1、inner（基础网络内网地址）；2、private（私有网络内网地址）；3、public（基础网络或私有网络的外网地址）；
          * @type {string || null}
          */
         this.NetType = null;
@@ -3490,6 +3504,12 @@ class OpenDBExtranetAccessRequest extends  AbstractModel {
          */
         this.DBInstanceId = null;
 
+        /**
+         * 是否开通Ipv6外网，1：是，0：否
+         * @type {number || null}
+         */
+        this.IsIpv6 = null;
+
     }
 
     /**
@@ -3500,6 +3520,7 @@ class OpenDBExtranetAccessRequest extends  AbstractModel {
             return;
         }
         this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.IsIpv6 = 'IsIpv6' in params ? params.IsIpv6 : null;
 
     }
 }
@@ -4065,6 +4086,12 @@ class CloseDBExtranetAccessRequest extends  AbstractModel {
          */
         this.DBInstanceId = null;
 
+        /**
+         * 是否关闭Ipv6外网，1：是，0：否
+         * @type {number || null}
+         */
+        this.IsIpv6 = null;
+
     }
 
     /**
@@ -4075,6 +4102,7 @@ class CloseDBExtranetAccessRequest extends  AbstractModel {
             return;
         }
         this.DBInstanceId = 'DBInstanceId' in params ? params.DBInstanceId : null;
+        this.IsIpv6 = 'IsIpv6' in params ? params.IsIpv6 : null;
 
     }
 }

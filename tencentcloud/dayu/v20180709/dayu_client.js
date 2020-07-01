@@ -34,6 +34,7 @@ const DescribeBasicDeviceThresholdResponse = models.DescribeBasicDeviceThreshold
 const DescribeCCAlarmThresholdResponse = models.DescribeCCAlarmThresholdResponse;
 const DescribeDDoSNetEvListRequest = models.DescribeDDoSNetEvListRequest;
 const DeleteNewL4RulesRequest = models.DeleteNewL4RulesRequest;
+const ModifyNewDomainRulesRequest = models.ModifyNewDomainRulesRequest;
 const DDoSAlarmThreshold = models.DDoSAlarmThreshold;
 const DescribePolicyCaseResponse = models.DescribePolicyCaseResponse;
 const DescribeResIpListRequest = models.DescribeResIpListRequest;
@@ -58,6 +59,8 @@ const DescribeDDoSCountRequest = models.DescribeDDoSCountRequest;
 const RegionInstanceCount = models.RegionInstanceCount;
 const WaterPrintKey = models.WaterPrintKey;
 const CreateNewL7RulesResponse = models.CreateNewL7RulesResponse;
+const ModifyNewL4RuleResponse = models.ModifyNewL4RuleResponse;
+const ModifyNewDomainRulesResponse = models.ModifyNewDomainRulesResponse;
 const CreateNewL4RulesResponse = models.CreateNewL4RulesResponse;
 const DescribeDDoSUsedStatisResponse = models.DescribeDDoSUsedStatisResponse;
 const DescribeBasicCCThresholdRequest = models.DescribeBasicCCThresholdRequest;
@@ -129,6 +132,7 @@ const CreateL4RulesRequest = models.CreateL4RulesRequest;
 const DescribeNewL7RulesErrHealthResponse = models.DescribeNewL7RulesErrHealthResponse;
 const DescribeDDoSNetEvListResponse = models.DescribeDDoSNetEvListResponse;
 const ModifyCCFrequencyRulesStatusResponse = models.ModifyCCFrequencyRulesStatusResponse;
+const ModifyNewL4RuleRequest = models.ModifyNewL4RuleRequest;
 const DescribeL4RulesErrHealthRequest = models.DescribeL4RulesErrHealthRequest;
 const L4RuleSource = models.L4RuleSource;
 const CreateBasicDDoSAlarmThresholdResponse = models.CreateBasicDDoSAlarmThresholdResponse;
@@ -755,6 +759,17 @@ class DayuClient extends AbstractClient {
     }
 
     /**
+     * 修改4层转发规则
+     * @param {ModifyNewL4RuleRequest} req
+     * @param {function(string, ModifyNewL4RuleResponse):void} cb
+     * @public
+     */
+    ModifyNewL4Rule(req, cb) {
+        let resp = new ModifyNewL4RuleResponse();
+        this.request("ModifyNewL4Rule", req, resp, cb);
+    }
+
+    /**
      * 获取资源列表
      * @param {DescribeResourceListRequest} req
      * @param {function(string, DescribeResourceListResponse):void} cb
@@ -1302,6 +1317,17 @@ class DayuClient extends AbstractClient {
     DescribleL4Rules(req, cb) {
         let resp = new DescribleL4RulesResponse();
         this.request("DescribleL4Rules", req, resp, cb);
+    }
+
+    /**
+     * 修改7层转发规则
+     * @param {ModifyNewDomainRulesRequest} req
+     * @param {function(string, ModifyNewDomainRulesResponse):void} cb
+     * @public
+     */
+    ModifyNewDomainRules(req, cb) {
+        let resp = new ModifyNewDomainRulesResponse();
+        this.request("ModifyNewDomainRules", req, resp, cb);
     }
 
     /**

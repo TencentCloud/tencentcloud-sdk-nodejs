@@ -1131,6 +1131,53 @@ class DeleteNewL4RulesRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyNewDomainRules请求参数结构体
+ * @class
+ */
+class ModifyNewDomainRulesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 大禹子产品代号（bgpip表示高防IP）
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * 资源ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 域名转发规则
+         * @type {NewL7RuleEntry || null}
+         */
+        this.Rule = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.Id = 'Id' in params ? params.Id : null;
+
+        if (params.Rule) {
+            let obj = new NewL7RuleEntry();
+            obj.deserialize(params.Rule)
+            this.Rule = obj;
+        }
+
+    }
+}
+
+/**
  * DDoS告警阈值
  * @class
  */
@@ -2288,6 +2335,86 @@ class WaterPrintKey extends  AbstractModel {
  * @class
  */
 class CreateNewL7RulesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 成功码
+         * @type {SuccessCode || null}
+         */
+        this.Success = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Success) {
+            let obj = new SuccessCode();
+            obj.deserialize(params.Success)
+            this.Success = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyNewL4Rule返回参数结构体
+ * @class
+ */
+class ModifyNewL4RuleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 成功码
+         * @type {SuccessCode || null}
+         */
+        this.Success = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Success) {
+            let obj = new SuccessCode();
+            obj.deserialize(params.Success)
+            this.Success = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyNewDomainRules返回参数结构体
+ * @class
+ */
+class ModifyNewDomainRulesResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -6106,6 +6233,53 @@ class ModifyCCFrequencyRulesStatusResponse extends  AbstractModel {
             this.Success = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyNewL4Rule请求参数结构体
+ * @class
+ */
+class ModifyNewL4RuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 大禹子产品代号（bgpip表示高防IP）
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * 资源ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 转发规则
+         * @type {L4RuleEntry || null}
+         */
+        this.Rule = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.Id = 'Id' in params ? params.Id : null;
+
+        if (params.Rule) {
+            let obj = new L4RuleEntry();
+            obj.deserialize(params.Rule)
+            this.Rule = obj;
+        }
 
     }
 }
@@ -10549,6 +10723,13 @@ class NewL7RuleEntry extends  AbstractModel {
          */
         this.HttpsToHttpEnable = null;
 
+        /**
+         * 接入端口值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.VirtualPort = null;
+
     }
 
     /**
@@ -10589,6 +10770,7 @@ class NewL7RuleEntry extends  AbstractModel {
         this.Ip = 'Ip' in params ? params.Ip : null;
         this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
         this.HttpsToHttpEnable = 'HttpsToHttpEnable' in params ? params.HttpsToHttpEnable : null;
+        this.VirtualPort = 'VirtualPort' in params ? params.VirtualPort : null;
 
     }
 }
@@ -13167,6 +13349,13 @@ class L7RuleEntry extends  AbstractModel {
          */
         this.HttpsToHttpEnable = null;
 
+        /**
+         * 接入端口值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.VirtualPort = null;
+
     }
 
     /**
@@ -13203,6 +13392,7 @@ class L7RuleEntry extends  AbstractModel {
         this.CCThreshold = 'CCThreshold' in params ? params.CCThreshold : null;
         this.CCLevel = 'CCLevel' in params ? params.CCLevel : null;
         this.HttpsToHttpEnable = 'HttpsToHttpEnable' in params ? params.HttpsToHttpEnable : null;
+        this.VirtualPort = 'VirtualPort' in params ? params.VirtualPort : null;
 
     }
 }
@@ -14404,6 +14594,7 @@ module.exports = {
     DescribeCCAlarmThresholdResponse: DescribeCCAlarmThresholdResponse,
     DescribeDDoSNetEvListRequest: DescribeDDoSNetEvListRequest,
     DeleteNewL4RulesRequest: DeleteNewL4RulesRequest,
+    ModifyNewDomainRulesRequest: ModifyNewDomainRulesRequest,
     DDoSAlarmThreshold: DDoSAlarmThreshold,
     DescribePolicyCaseResponse: DescribePolicyCaseResponse,
     DescribeResIpListRequest: DescribeResIpListRequest,
@@ -14428,6 +14619,8 @@ module.exports = {
     RegionInstanceCount: RegionInstanceCount,
     WaterPrintKey: WaterPrintKey,
     CreateNewL7RulesResponse: CreateNewL7RulesResponse,
+    ModifyNewL4RuleResponse: ModifyNewL4RuleResponse,
+    ModifyNewDomainRulesResponse: ModifyNewDomainRulesResponse,
     CreateNewL4RulesResponse: CreateNewL4RulesResponse,
     DescribeDDoSUsedStatisResponse: DescribeDDoSUsedStatisResponse,
     DescribeBasicCCThresholdRequest: DescribeBasicCCThresholdRequest,
@@ -14499,6 +14692,7 @@ module.exports = {
     DescribeNewL7RulesErrHealthResponse: DescribeNewL7RulesErrHealthResponse,
     DescribeDDoSNetEvListResponse: DescribeDDoSNetEvListResponse,
     ModifyCCFrequencyRulesStatusResponse: ModifyCCFrequencyRulesStatusResponse,
+    ModifyNewL4RuleRequest: ModifyNewL4RuleRequest,
     DescribeL4RulesErrHealthRequest: DescribeL4RulesErrHealthRequest,
     L4RuleSource: L4RuleSource,
     CreateBasicDDoSAlarmThresholdResponse: CreateBasicDDoSAlarmThresholdResponse,
