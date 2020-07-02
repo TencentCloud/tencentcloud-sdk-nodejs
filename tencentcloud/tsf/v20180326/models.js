@@ -211,6 +211,18 @@ class DescribeDownloadInfoRequest extends  AbstractModel {
          */
         this.PkgId = null;
 
+        /**
+         * 程序包仓库ID
+         * @type {string || null}
+         */
+        this.RepositoryId = null;
+
+        /**
+         * 程序包仓库类型
+         * @type {string || null}
+         */
+        this.RepositoryType = null;
+
     }
 
     /**
@@ -222,6 +234,8 @@ class DescribeDownloadInfoRequest extends  AbstractModel {
         }
         this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
         this.PkgId = 'PkgId' in params ? params.PkgId : null;
+        this.RepositoryId = 'RepositoryId' in params ? params.RepositoryId : null;
+        this.RepositoryType = 'RepositoryType' in params ? params.RepositoryType : null;
 
     }
 }
@@ -1143,6 +1157,47 @@ class VmGroup extends  AbstractModel {
 }
 
 /**
+ * DescribeRepository返回参数结构体
+ * @class
+ */
+class DescribeRepositoryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询的仓库信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {RepositoryInfo || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new RepositoryInfo();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * RevocationConfig请求参数结构体
  * @class
  */
@@ -1269,6 +1324,13 @@ class GroupPod extends  AbstractModel {
          */
         this.InstanceStatus = null;
 
+        /**
+         * 节点实例id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NodeInstanceId = null;
+
     }
 
     /**
@@ -1291,6 +1353,7 @@ class GroupPod extends  AbstractModel {
         this.ServiceInstanceStatus = 'ServiceInstanceStatus' in params ? params.ServiceInstanceStatus : null;
         this.InstanceAvailableStatus = 'InstanceAvailableStatus' in params ? params.InstanceAvailableStatus : null;
         this.InstanceStatus = 'InstanceStatus' in params ? params.InstanceStatus : null;
+        this.NodeInstanceId = 'NodeInstanceId' in params ? params.NodeInstanceId : null;
 
     }
 }
@@ -1333,6 +1396,18 @@ class ModifyUploadInfoRequest extends  AbstractModel {
          */
         this.Size = null;
 
+        /**
+         * 程序包仓库类型
+         * @type {string || null}
+         */
+        this.RepositoryType = null;
+
+        /**
+         * 程序包仓库id
+         * @type {string || null}
+         */
+        this.RepositoryId = null;
+
     }
 
     /**
@@ -1347,6 +1422,8 @@ class ModifyUploadInfoRequest extends  AbstractModel {
         this.Result = 'Result' in params ? params.Result : null;
         this.Md5 = 'Md5' in params ? params.Md5 : null;
         this.Size = 'Size' in params ? params.Size : null;
+        this.RepositoryType = 'RepositoryType' in params ? params.RepositoryType : null;
+        this.RepositoryId = 'RepositoryId' in params ? params.RepositoryId : null;
 
     }
 }
@@ -1463,6 +1540,46 @@ class DescribeApiVersionsResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeRepositories返回参数结构体
+ * @class
+ */
+class DescribeRepositoriesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合查询仓库信息列表
+         * @type {RepositoryList || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new RepositoryList();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * StopGroup返回参数结构体
  * @class
  */
@@ -1504,17 +1621,17 @@ class StopGroupResponse extends  AbstractModel {
 }
 
 /**
- * StopContainerGroup返回参数结构体
+ * StartContainerGroup返回参数结构体
  * @class
  */
-class StopContainerGroupResponse extends  AbstractModel {
+class StartContainerGroupResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 停止操作是否成功。
-true：停止成功
-flase：停止失败
+         * 启动操作是否成功。
+true：启动成功
+false：启动失败
          * @type {boolean || null}
          */
         this.Result = null;
@@ -2097,6 +2214,42 @@ class DescribeSimpleApplicationsResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteRepository返回参数结构体
+ * @class
+ */
+class DeleteRepositoryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 删除仓库是否成功
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribePublicConfigReleaseLogs请求参数结构体
  * @class
  */
@@ -2258,6 +2411,41 @@ false：操作失败。
         }
         this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateRepository请求参数结构体
+ * @class
+ */
+class UpdateRepositoryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 仓库ID
+         * @type {string || null}
+         */
+        this.RepositoryId = null;
+
+        /**
+         * 仓库描述
+         * @type {string || null}
+         */
+        this.RepositoryDesc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RepositoryId = 'RepositoryId' in params ? params.RepositoryId : null;
+        this.RepositoryDesc = 'RepositoryDesc' in params ? params.RepositoryDesc : null;
 
     }
 }
@@ -4457,6 +4645,20 @@ class ContainerGroupDetail extends  AbstractModel {
          */
         this.UpdatedTime = null;
 
+        /**
+         * kubernetes滚动更新策略的MaxSurge参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MaxSurge = null;
+
+        /**
+         * kubernetes滚动更新策略的MaxUnavailable参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MaxUnavailable = null;
+
     }
 
     /**
@@ -4516,6 +4718,8 @@ class ContainerGroupDetail extends  AbstractModel {
         this.GroupResourceType = 'GroupResourceType' in params ? params.GroupResourceType : null;
         this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
         this.UpdatedTime = 'UpdatedTime' in params ? params.UpdatedTime : null;
+        this.MaxSurge = 'MaxSurge' in params ? params.MaxSurge : null;
+        this.MaxUnavailable = 'MaxUnavailable' in params ? params.MaxUnavailable : null;
 
     }
 }
@@ -4671,6 +4875,18 @@ class DescribePkgsRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * 程序包仓库类型
+         * @type {string || null}
+         */
+        this.RepositoryType = null;
+
+        /**
+         * 程序包仓库id
+         * @type {string || null}
+         */
+        this.RepositoryId = null;
+
     }
 
     /**
@@ -4686,6 +4902,8 @@ class DescribePkgsRequest extends  AbstractModel {
         this.OrderType = 'OrderType' in params ? params.OrderType : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.RepositoryType = 'RepositoryType' in params ? params.RepositoryType : null;
+        this.RepositoryId = 'RepositoryId' in params ? params.RepositoryId : null;
 
     }
 }
@@ -4867,6 +5085,55 @@ class DeleteImageTagsRequest extends  AbstractModel {
                 this.ImageTags.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DescribeRepositories请求参数结构体
+ * @class
+ */
+class DescribeRepositoriesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询关键字（按照仓库名称搜索）
+         * @type {string || null}
+         */
+        this.SearchWord = null;
+
+        /**
+         * 查询起始偏移
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量限制
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 仓库类型（默认仓库：default，私有仓库：private）
+         * @type {string || null}
+         */
+        this.RepositoryType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.RepositoryType = 'RepositoryType' in params ? params.RepositoryType : null;
 
     }
 }
@@ -6964,6 +7231,12 @@ class CreateClusterRequest extends  AbstractModel {
          */
         this.SubnetId = null;
 
+        /**
+         * 集群版本
+         * @type {string || null}
+         */
+        this.ClusterVersion = null;
+
     }
 
     /**
@@ -6981,6 +7254,7 @@ class CreateClusterRequest extends  AbstractModel {
         this.TsfRegionId = 'TsfRegionId' in params ? params.TsfRegionId : null;
         this.TsfZoneId = 'TsfZoneId' in params ? params.TsfZoneId : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.ClusterVersion = 'ClusterVersion' in params ? params.ClusterVersion : null;
 
     }
 }
@@ -7769,6 +8043,18 @@ class DescribeUploadInfoRequest extends  AbstractModel {
          */
         this.PkgDesc = null;
 
+        /**
+         * 程序包仓库类型
+         * @type {string || null}
+         */
+        this.RepositoryType = null;
+
+        /**
+         * 程序包仓库id
+         * @type {string || null}
+         */
+        this.RepositoryId = null;
+
     }
 
     /**
@@ -7783,6 +8069,8 @@ class DescribeUploadInfoRequest extends  AbstractModel {
         this.PkgVersion = 'PkgVersion' in params ? params.PkgVersion : null;
         this.PkgType = 'PkgType' in params ? params.PkgType : null;
         this.PkgDesc = 'PkgDesc' in params ? params.PkgDesc : null;
+        this.RepositoryType = 'RepositoryType' in params ? params.RepositoryType : null;
+        this.RepositoryId = 'RepositoryId' in params ? params.RepositoryId : null;
 
     }
 }
@@ -7874,6 +8162,34 @@ class StopContainerGroupRequest extends  AbstractModel {
             return;
         }
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+    }
+}
+
+/**
+ * DescribeRepository请求参数结构体
+ * @class
+ */
+class DescribeRepositoryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 仓库ID
+         * @type {string || null}
+         */
+        this.RepositoryId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RepositoryId = 'RepositoryId' in params ? params.RepositoryId : null;
 
     }
 }
@@ -8047,6 +8363,135 @@ class ImageTagsResult extends  AbstractModel {
                 this.Content.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * 仓库信息
+ * @class
+ */
+class RepositoryInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 仓库ID
+         * @type {string || null}
+         */
+        this.RepositoryId = null;
+
+        /**
+         * 仓库名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RepositoryName = null;
+
+        /**
+         * 仓库类型（默认仓库：default，私有仓库：private）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RepositoryType = null;
+
+        /**
+         * 仓库描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RepositoryDesc = null;
+
+        /**
+         * 仓库是否正在被使用
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsUsed = null;
+
+        /**
+         * 仓库创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 仓库桶名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.BucketName = null;
+
+        /**
+         * 仓库桶所在地域
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.BucketRegion = null;
+
+        /**
+         * 仓库目录
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Directory = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RepositoryId = 'RepositoryId' in params ? params.RepositoryId : null;
+        this.RepositoryName = 'RepositoryName' in params ? params.RepositoryName : null;
+        this.RepositoryType = 'RepositoryType' in params ? params.RepositoryType : null;
+        this.RepositoryDesc = 'RepositoryDesc' in params ? params.RepositoryDesc : null;
+        this.IsUsed = 'IsUsed' in params ? params.IsUsed : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.BucketName = 'BucketName' in params ? params.BucketName : null;
+        this.BucketRegion = 'BucketRegion' in params ? params.BucketRegion : null;
+        this.Directory = 'Directory' in params ? params.Directory : null;
+
+    }
+}
+
+/**
+ * StopContainerGroup返回参数结构体
+ * @class
+ */
+class StopContainerGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 停止操作是否成功。
+true：停止成功
+flase：停止失败
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9769,6 +10214,13 @@ class PkgInfo extends  AbstractModel {
          */
         this.PkgPubStatus = null;
 
+        /**
+         * 程序包关联关系
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<PkgBind> || null}
+         */
+        this.PkgBindInfo = null;
+
     }
 
     /**
@@ -9787,29 +10239,38 @@ class PkgInfo extends  AbstractModel {
         this.Md5 = 'Md5' in params ? params.Md5 : null;
         this.PkgPubStatus = 'PkgPubStatus' in params ? params.PkgPubStatus : null;
 
+        if (params.PkgBindInfo) {
+            this.PkgBindInfo = new Array();
+            for (let z in params.PkgBindInfo) {
+                let obj = new PkgBind();
+                obj.deserialize(params.PkgBindInfo[z]);
+                this.PkgBindInfo.push(obj);
+            }
+        }
+
     }
 }
 
 /**
- * RevocationPublicConfig返回参数结构体
+ * 仓库列表
  * @class
  */
-class RevocationPublicConfigResponse extends  AbstractModel {
+class RepositoryList extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * true：撤销成功；false：撤销失败
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {boolean || null}
+         * 仓库总量
+         * @type {number || null}
          */
-        this.Result = null;
+        this.TotalCount = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
+         * 仓库信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<RepositoryInfo> || null}
          */
-        this.RequestId = null;
+        this.Content = null;
 
     }
 
@@ -9820,8 +10281,16 @@ class RevocationPublicConfigResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Result = 'Result' in params ? params.Result : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Content) {
+            this.Content = new Array();
+            for (let z in params.Content) {
+                let obj = new RepositoryInfo();
+                obj.deserialize(params.Content[z]);
+                this.Content.push(obj);
+            }
+        }
 
     }
 }
@@ -10116,6 +10585,42 @@ class ModifyContainerGroupRequest extends  AbstractModel {
         this.UpdateType = 'UpdateType' in params ? params.UpdateType : null;
         this.UpdateIvl = 'UpdateIvl' in params ? params.UpdateIvl : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+
+    }
+}
+
+/**
+ * UpdateRepository返回参数结构体
+ * @class
+ */
+class UpdateRepositoryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 更新仓库是否成功
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10568,26 +11073,48 @@ class OperationInfoDetail extends  AbstractModel {
 }
 
 /**
- * StartContainerGroup返回参数结构体
+ * CreateRepository请求参数结构体
  * @class
  */
-class StartContainerGroupResponse extends  AbstractModel {
+class CreateRepositoryRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 启动操作是否成功。
-true：启动成功
-false：启动失败
-         * @type {boolean || null}
-         */
-        this.Result = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 仓库名称
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.RepositoryName = null;
+
+        /**
+         * 仓库类型
+         * @type {string || null}
+         */
+        this.RepositoryType = null;
+
+        /**
+         * 仓库所在桶名称
+         * @type {string || null}
+         */
+        this.BucketName = null;
+
+        /**
+         * 仓库所在桶地域
+         * @type {string || null}
+         */
+        this.BucketRegion = null;
+
+        /**
+         * 目录
+         * @type {string || null}
+         */
+        this.Directory = null;
+
+        /**
+         * 仓库描述
+         * @type {string || null}
+         */
+        this.RepositoryDesc = null;
 
     }
 
@@ -10598,8 +11125,12 @@ false：启动失败
         if (!params) {
             return;
         }
-        this.Result = 'Result' in params ? params.Result : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.RepositoryName = 'RepositoryName' in params ? params.RepositoryName : null;
+        this.RepositoryType = 'RepositoryType' in params ? params.RepositoryType : null;
+        this.BucketName = 'BucketName' in params ? params.BucketName : null;
+        this.BucketRegion = 'BucketRegion' in params ? params.BucketRegion : null;
+        this.Directory = 'Directory' in params ? params.Directory : null;
+        this.RepositoryDesc = 'RepositoryDesc' in params ? params.RepositoryDesc : null;
 
     }
 }
@@ -10891,6 +11422,43 @@ class DeleteNamespaceRequest extends  AbstractModel {
 }
 
 /**
+ * 描述程序包关联信息
+ * @class
+ */
+class PkgBind extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * 部署组id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+    }
+}
+
+/**
  * DescribeLaneRules请求参数结构体
  * @class
  */
@@ -11128,6 +11696,42 @@ class DeleteGroupResponse extends  AbstractModel {
          * 删除部署组操作是否成功。
 true：操作成功。
 false：操作失败。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateRepository返回参数结构体
+ * @class
+ */
+class CreateRepositoryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 创建仓库是否成功
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {boolean || null}
          */
@@ -11435,6 +12039,18 @@ class DeployContainerGroupRequest extends  AbstractModel {
          */
         this.IstioMemLimit = null;
 
+        /**
+         * kubernetes滚动更新策略的MaxSurge参数
+         * @type {string || null}
+         */
+        this.MaxSurge = null;
+
+        /**
+         * kubernetes滚动更新策略的MaxUnavailable参数
+         * @type {string || null}
+         */
+        this.MaxUnavailable = null;
+
     }
 
     /**
@@ -11466,6 +12082,8 @@ class DeployContainerGroupRequest extends  AbstractModel {
         this.IstioCpuLimit = 'IstioCpuLimit' in params ? params.IstioCpuLimit : null;
         this.IstioMemRequest = 'IstioMemRequest' in params ? params.IstioMemRequest : null;
         this.IstioMemLimit = 'IstioMemLimit' in params ? params.IstioMemLimit : null;
+        this.MaxSurge = 'MaxSurge' in params ? params.MaxSurge : null;
+        this.MaxUnavailable = 'MaxUnavailable' in params ? params.MaxUnavailable : null;
 
     }
 }
@@ -11548,6 +12166,18 @@ class DeletePkgsRequest extends  AbstractModel {
          */
         this.PkgIds = null;
 
+        /**
+         * 程序包仓库类型
+         * @type {string || null}
+         */
+        this.RepositoryType = null;
+
+        /**
+         * 程序包仓库id
+         * @type {string || null}
+         */
+        this.RepositoryId = null;
+
     }
 
     /**
@@ -11559,6 +12189,8 @@ class DeletePkgsRequest extends  AbstractModel {
         }
         this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
         this.PkgIds = 'PkgIds' in params ? params.PkgIds : null;
+        this.RepositoryType = 'RepositoryType' in params ? params.RepositoryType : null;
+        this.RepositoryId = 'RepositoryId' in params ? params.RepositoryId : null;
 
     }
 }
@@ -12126,6 +12758,27 @@ class PkgList extends  AbstractModel {
          */
         this.Content = null;
 
+        /**
+         * 程序包仓库id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RepositoryId = null;
+
+        /**
+         * 程序包仓库类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RepositoryType = null;
+
+        /**
+         * 程序包仓库名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RepositoryName = null;
+
     }
 
     /**
@@ -12145,6 +12798,9 @@ class PkgList extends  AbstractModel {
                 this.Content.push(obj);
             }
         }
+        this.RepositoryId = 'RepositoryId' in params ? params.RepositoryId : null;
+        this.RepositoryType = 'RepositoryType' in params ? params.RepositoryType : null;
+        this.RepositoryName = 'RepositoryName' in params ? params.RepositoryName : null;
 
     }
 }
@@ -12181,6 +12837,34 @@ class CreateApplicationResponse extends  AbstractModel {
         }
         this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteRepository请求参数结构体
+ * @class
+ */
+class DeleteRepositoryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 仓库ID
+         * @type {string || null}
+         */
+        this.RepositoryId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RepositoryId = 'RepositoryId' in params ? params.RepositoryId : null;
 
     }
 }
@@ -12650,6 +13334,42 @@ class TsfPageConfig extends  AbstractModel {
 }
 
 /**
+ * RevocationPublicConfig返回参数结构体
+ * @class
+ */
+class RevocationPublicConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * true：撤销成功；false：撤销失败
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeGroupInstances请求参数结构体
  * @class
  */
@@ -12768,14 +13488,16 @@ module.exports = {
     DescribeSimpleClustersResponse: DescribeSimpleClustersResponse,
     DescribePodInstancesResponse: DescribePodInstancesResponse,
     VmGroup: VmGroup,
+    DescribeRepositoryResponse: DescribeRepositoryResponse,
     RevocationConfigRequest: RevocationConfigRequest,
     GroupPod: GroupPod,
     ModifyUploadInfoRequest: ModifyUploadInfoRequest,
     DescribeUploadInfoResponse: DescribeUploadInfoResponse,
     DescribeReleasedConfigRequest: DescribeReleasedConfigRequest,
     DescribeApiVersionsResponse: DescribeApiVersionsResponse,
+    DescribeRepositoriesResponse: DescribeRepositoriesResponse,
     StopGroupResponse: StopGroupResponse,
-    StopContainerGroupResponse: StopContainerGroupResponse,
+    StartContainerGroupResponse: StartContainerGroupResponse,
     CreateGroupRequest: CreateGroupRequest,
     ModifyMicroserviceRequest: ModifyMicroserviceRequest,
     DescribeConfigReleasesRequest: DescribeConfigReleasesRequest,
@@ -12787,10 +13509,12 @@ module.exports = {
     SimpleApplication: SimpleApplication,
     DescribePublicConfigSummaryResponse: DescribePublicConfigSummaryResponse,
     DescribeSimpleApplicationsResponse: DescribeSimpleApplicationsResponse,
+    DeleteRepositoryResponse: DeleteRepositoryResponse,
     DescribePublicConfigReleaseLogsRequest: DescribePublicConfigReleaseLogsRequest,
     CreateServerlessGroupResponse: CreateServerlessGroupResponse,
     CreateLaneRequest: CreateLaneRequest,
     DeleteApplicationResponse: DeleteApplicationResponse,
+    UpdateRepositoryRequest: UpdateRepositoryRequest,
     Instance: Instance,
     DeployServerlessGroupResponse: DeployServerlessGroupResponse,
     DescribeConfigsResponse: DescribeConfigsResponse,
@@ -12836,6 +13560,7 @@ module.exports = {
     ShrinkInstancesRequest: ShrinkInstancesRequest,
     ShrinkInstancesResponse: ShrinkInstancesResponse,
     DeleteImageTagsRequest: DeleteImageTagsRequest,
+    DescribeRepositoriesRequest: DescribeRepositoriesRequest,
     DescribeApplicationAttributeRequest: DescribeApplicationAttributeRequest,
     DescribePodInstancesRequest: DescribePodInstancesRequest,
     TsfPageSimpleGroup: TsfPageSimpleGroup,
@@ -12888,10 +13613,13 @@ module.exports = {
     DescribeUploadInfoRequest: DescribeUploadInfoRequest,
     DescribeClusterInstancesRequest: DescribeClusterInstancesRequest,
     StopContainerGroupRequest: StopContainerGroupRequest,
+    DescribeRepositoryRequest: DescribeRepositoryRequest,
     PropertyField: PropertyField,
     TsfPageApplication: TsfPageApplication,
     DescribeGroupRequest: DescribeGroupRequest,
     ImageTagsResult: ImageTagsResult,
+    RepositoryInfo: RepositoryInfo,
+    StopContainerGroupResponse: StopContainerGroupResponse,
     CreateLaneResponse: CreateLaneResponse,
     DescribeServerlessGroupRequest: DescribeServerlessGroupRequest,
     TsfPageVmGroup: TsfPageVmGroup,
@@ -12927,12 +13655,13 @@ module.exports = {
     CreateConfigResponse: CreateConfigResponse,
     AddClusterInstancesResponse: AddClusterInstancesResponse,
     PkgInfo: PkgInfo,
-    RevocationPublicConfigResponse: RevocationPublicConfigResponse,
+    RepositoryList: RepositoryList,
     CreateLaneRuleResponse: CreateLaneRuleResponse,
     DescribeConfigReleaseLogsRequest: DescribeConfigReleaseLogsRequest,
     DescribeApiDetailResponse: DescribeApiDetailResponse,
     DescribeGroupsRequest: DescribeGroupsRequest,
     ModifyContainerGroupRequest: ModifyContainerGroupRequest,
+    UpdateRepositoryResponse: UpdateRepositoryResponse,
     TsfPageMicroservice: TsfPageMicroservice,
     DescribePublicConfigsRequest: DescribePublicConfigsRequest,
     AddInstancesRequest: AddInstancesRequest,
@@ -12941,17 +13670,19 @@ module.exports = {
     RollbackConfigResponse: RollbackConfigResponse,
     DescribeApplicationsRequest: DescribeApplicationsRequest,
     OperationInfoDetail: OperationInfoDetail,
-    StartContainerGroupResponse: StartContainerGroupResponse,
+    CreateRepositoryRequest: CreateRepositoryRequest,
     CreateApplicationRequest: CreateApplicationRequest,
     DescribePublicConfigReleasesRequest: DescribePublicConfigReleasesRequest,
     SimpleGroup: SimpleGroup,
     DeleteNamespaceRequest: DeleteNamespaceRequest,
+    PkgBind: PkgBind,
     DescribeLaneRulesRequest: DescribeLaneRulesRequest,
     DeployGroupRequest: DeployGroupRequest,
     LaneInfos: LaneInfos,
     CreateServerlessGroupRequest: CreateServerlessGroupRequest,
     DescribeMicroserviceResponse: DescribeMicroserviceResponse,
     DeleteGroupResponse: DeleteGroupResponse,
+    CreateRepositoryResponse: CreateRepositoryResponse,
     CreateLaneRuleRequest: CreateLaneRuleRequest,
     DescribeServerlessGroupsRequest: DescribeServerlessGroupsRequest,
     DeployContainerGroupRequest: DeployContainerGroupRequest,
@@ -12966,6 +13697,7 @@ module.exports = {
     DescribeLaneRulesResponse: DescribeLaneRulesResponse,
     PkgList: PkgList,
     CreateApplicationResponse: CreateApplicationResponse,
+    DeleteRepositoryRequest: DeleteRepositoryRequest,
     DescribeConfigSummaryRequest: DescribeConfigSummaryRequest,
     DeleteLaneRequest: DeleteLaneRequest,
     DeployGroupResponse: DeployGroupResponse,
@@ -12976,6 +13708,7 @@ module.exports = {
     LaneGroup: LaneGroup,
     TaskId: TaskId,
     TsfPageConfig: TsfPageConfig,
+    RevocationPublicConfigResponse: RevocationPublicConfigResponse,
     DescribeGroupInstancesRequest: DescribeGroupInstancesRequest,
     CreateGroupResponse: CreateGroupResponse,
 

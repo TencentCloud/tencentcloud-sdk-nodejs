@@ -18,6 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const SendMultiSmsResponse = models.SendMultiSmsResponse;
 const AppInfo = models.AppInfo;
+const RenewCardsResponse = models.RenewCardsResponse;
 const CardList = models.CardList;
 const DescribeCardsResponse = models.DescribeCardsResponse;
 const DescribeCardResponse = models.DescribeCardResponse;
@@ -29,8 +30,10 @@ const SendSmsResponse = models.SendSmsResponse;
 const SendSmsRequest = models.SendSmsRequest;
 const DescribeCardsRequest = models.DescribeCardsRequest;
 const SendMultiSmsRequest = models.SendMultiSmsRequest;
+const ResRenew = models.ResRenew;
 const SmsRet = models.SmsRet;
 const SmsSid = models.SmsSid;
+const RenewCardsRequest = models.RenewCardsRequest;
 
 
 /**
@@ -44,17 +47,6 @@ class IcClient extends AbstractClient {
     }
     
     /**
-     * 发送短信息接口
-     * @param {SendSmsRequest} req
-     * @param {function(string, SendSmsResponse):void} cb
-     * @public
-     */
-    SendSms(req, cb) {
-        let resp = new SendSmsResponse();
-        this.request("SendSms", req, resp, cb);
-    }
-
-    /**
      * 根据应用id查询物联卡应用详情
      * @param {DescribeAppRequest} req
      * @param {function(string, DescribeAppResponse):void} cb
@@ -63,6 +55,28 @@ class IcClient extends AbstractClient {
     DescribeApp(req, cb) {
         let resp = new DescribeAppResponse();
         this.request("DescribeApp", req, resp, cb);
+    }
+
+    /**
+     * 查询卡片详细信息
+     * @param {DescribeCardRequest} req
+     * @param {function(string, DescribeCardResponse):void} cb
+     * @public
+     */
+    DescribeCard(req, cb) {
+        let resp = new DescribeCardResponse();
+        this.request("DescribeCard", req, resp, cb);
+    }
+
+    /**
+     * 发送短信息接口
+     * @param {SendSmsRequest} req
+     * @param {function(string, SendSmsResponse):void} cb
+     * @public
+     */
+    SendSms(req, cb) {
+        let resp = new SendSmsResponse();
+        this.request("SendSms", req, resp, cb);
     }
 
     /**
@@ -77,14 +91,18 @@ class IcClient extends AbstractClient {
     }
 
     /**
-     * 查询卡片详细信息
-     * @param {DescribeCardRequest} req
-     * @param {function(string, DescribeCardResponse):void} cb
+     * 批量为卡片续费，此接口建议调用至少间隔10s,如果出现返回deal lock failed相关的错误，请过10s再重试。
+续费的必要条件：
+1、单次续费的卡片不可以超过 100张。
+2、只对单卡续费，不支持池卡
+3、销户和未激活的卡片不支持续费。
+     * @param {RenewCardsRequest} req
+     * @param {function(string, RenewCardsResponse):void} cb
      * @public
      */
-    DescribeCard(req, cb) {
-        let resp = new DescribeCardResponse();
-        this.request("DescribeCard", req, resp, cb);
+    RenewCards(req, cb) {
+        let resp = new RenewCardsResponse();
+        this.request("RenewCards", req, resp, cb);
     }
 
     /**

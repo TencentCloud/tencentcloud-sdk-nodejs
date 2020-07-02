@@ -1875,6 +1875,12 @@ class SendStatus extends  AbstractModel {
          */
         this.Message = null;
 
+        /**
+         * 国家码或地区码，例如CN,US等，对于未识别出国家码或者地区码，默认返回DEF,具体支持列表请参考国际/港澳台计费总览。
+         * @type {string || null}
+         */
+        this.IsoCode = null;
+
     }
 
     /**
@@ -1890,6 +1896,7 @@ class SendStatus extends  AbstractModel {
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
         this.Code = 'Code' in params ? params.Code : null;
         this.Message = 'Message' in params ? params.Message : null;
+        this.IsoCode = 'IsoCode' in params ? params.IsoCode : null;
 
     }
 }

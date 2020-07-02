@@ -1878,6 +1878,13 @@ ip：IP 列表作为源站
          */
         this.BackupServerName = null;
 
+        /**
+         * 回源路径
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.BasePath = null;
+
     }
 
     /**
@@ -1895,6 +1902,7 @@ ip：IP 列表作为源站
         this.BackupOrigins = 'BackupOrigins' in params ? params.BackupOrigins : null;
         this.BackupOriginType = 'BackupOriginType' in params ? params.BackupOriginType : null;
         this.BackupServerName = 'BackupServerName' in params ? params.BackupServerName : null;
+        this.BasePath = 'BasePath' in params ? params.BasePath : null;
 
     }
 }

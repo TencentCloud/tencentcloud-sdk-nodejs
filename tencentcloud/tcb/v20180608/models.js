@@ -890,6 +890,18 @@ class DescribeEndUsersRequest extends  AbstractModel {
         this.EnvId = null;
 
         /**
+         * 可选参数，偏移量，默认 0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 可选参数，拉取数量，默认 20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
          * 按照 uuid 列表过滤，最大个数为100
          * @type {Array.<string> || null}
          */
@@ -905,6 +917,8 @@ class DescribeEndUsersRequest extends  AbstractModel {
             return;
         }
         this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
         this.UUIds = 'UUIds' in params ? params.UUIds : null;
 
     }
@@ -2504,6 +2518,12 @@ class EndUserInfo extends  AbstractModel {
          */
         this.HasPassword = null;
 
+        /**
+         * 用户名
+         * @type {string || null}
+         */
+        this.UserName = null;
+
     }
 
     /**
@@ -2526,6 +2546,7 @@ class EndUserInfo extends  AbstractModel {
         this.IsAnonymous = 'IsAnonymous' in params ? params.IsAnonymous : null;
         this.IsDisabled = 'IsDisabled' in params ? params.IsDisabled : null;
         this.HasPassword = 'HasPassword' in params ? params.HasPassword : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
 
     }
 }

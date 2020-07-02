@@ -76,6 +76,12 @@ class TryLipstickPicRequest extends  AbstractModel {
          */
         this.Url = null;
 
+        /**
+         * 返回图像方式（base64 或 url ) ，二选一。url有效期为1天。
+         * @type {string || null}
+         */
+        this.RspImgType = null;
+
     }
 
     /**
@@ -96,6 +102,7 @@ class TryLipstickPicRequest extends  AbstractModel {
         }
         this.Image = 'Image' in params ? params.Image : null;
         this.Url = 'Url' in params ? params.Url : null;
+        this.RspImgType = 'RspImgType' in params ? params.RspImgType : null;
 
     }
 }
@@ -144,10 +151,16 @@ class TryLipstickPicResponse extends  AbstractModel {
         super();
 
         /**
-         * 结果图片Base64信息。
+         * RspImgType 为 base64 时，返回处理后的图片 base64 数据。默认返回base64
          * @type {string || null}
          */
         this.ResultImage = null;
+
+        /**
+         * RspImgType 为 url 时，返回处理后的图片 url 数据。
+         * @type {string || null}
+         */
+        this.ResultUrl = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -165,6 +178,7 @@ class TryLipstickPicResponse extends  AbstractModel {
             return;
         }
         this.ResultImage = 'ResultImage' in params ? params.ResultImage : null;
+        this.ResultUrl = 'ResultUrl' in params ? params.ResultUrl : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -506,6 +520,12 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
          */
         this.EyeEnlarging = null;
 
+        /**
+         * 返回图像方式（base64 或 url ) ，二选一。url有效期为1天。
+         * @type {string || null}
+         */
+        this.RspImgType = null;
+
     }
 
     /**
@@ -521,6 +541,7 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
         this.Smoothing = 'Smoothing' in params ? params.Smoothing : null;
         this.FaceLifting = 'FaceLifting' in params ? params.FaceLifting : null;
         this.EyeEnlarging = 'EyeEnlarging' in params ? params.EyeEnlarging : null;
+        this.RspImgType = 'RspImgType' in params ? params.RspImgType : null;
 
     }
 }
@@ -597,10 +618,16 @@ class BeautifyPicResponse extends  AbstractModel {
         super();
 
         /**
-         * 处理后的图片 base64 数据。
+         * RspImgType 为 base64 时，返回处理后的图片 base64 数据。默认返回base64
          * @type {string || null}
          */
         this.ResultImage = null;
+
+        /**
+         * RspImgType 为 url 时，返回处理后的图片 url 数据。
+         * @type {string || null}
+         */
+        this.ResultUrl = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -618,6 +645,7 @@ class BeautifyPicResponse extends  AbstractModel {
             return;
         }
         this.ResultImage = 'ResultImage' in params ? params.ResultImage : null;
+        this.ResultUrl = 'ResultUrl' in params ? params.ResultUrl : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

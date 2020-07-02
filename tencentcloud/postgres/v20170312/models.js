@@ -2895,6 +2895,12 @@ class ZoneInfo extends  AbstractModel {
          */
         this.ZoneState = null;
 
+        /**
+         * 该可用区是否支持Ipv6
+         * @type {number || null}
+         */
+        this.ZoneSupportIpv6 = null;
+
     }
 
     /**
@@ -2908,6 +2914,7 @@ class ZoneInfo extends  AbstractModel {
         this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
         this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
         this.ZoneState = 'ZoneState' in params ? params.ZoneState : null;
+        this.ZoneSupportIpv6 = 'ZoneSupportIpv6' in params ? params.ZoneSupportIpv6 : null;
 
     }
 }

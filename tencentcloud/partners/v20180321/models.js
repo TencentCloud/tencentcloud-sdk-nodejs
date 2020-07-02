@@ -458,6 +458,12 @@ class DescribeAgentClientGradeResponse extends  AbstractModel {
         this.ClientGrade = null;
 
         /**
+         * 客户类型：1，个人；2，企业；3，其他
+         * @type {number || null}
+         */
+        this.ClientType = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -475,6 +481,7 @@ class DescribeAgentClientGradeResponse extends  AbstractModel {
         this.AuditStatus = 'AuditStatus' in params ? params.AuditStatus : null;
         this.AuthState = 'AuthState' in params ? params.AuthState : null;
         this.ClientGrade = 'ClientGrade' in params ? params.ClientGrade : null;
+        this.ClientType = 'ClientType' in params ? params.ClientType : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
