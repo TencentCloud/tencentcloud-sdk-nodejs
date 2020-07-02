@@ -48,6 +48,12 @@ class SwapGenderPicRequest extends  AbstractModel {
          */
         this.Url = null;
 
+        /**
+         * 返回图像方式（base64 或 url ) ，二选一。url有效期为1天。
+         * @type {string || null}
+         */
+        this.RspImgType = null;
+
     }
 
     /**
@@ -68,6 +74,7 @@ class SwapGenderPicRequest extends  AbstractModel {
         }
         this.Image = 'Image' in params ? params.Image : null;
         this.Url = 'Url' in params ? params.Url : null;
+        this.RspImgType = 'RspImgType' in params ? params.RspImgType : null;
 
     }
 }
@@ -163,10 +170,16 @@ class SwapGenderPicResponse extends  AbstractModel {
         super();
 
         /**
-         * 结果图片Base64信息。
+         * RspImgType 为 base64 时，返回处理后的图片 base64 数据。默认返回base64
          * @type {string || null}
          */
         this.ResultImage = null;
+
+        /**
+         * RspImgType 为 url 时，返回处理后的图片 url 数据。
+         * @type {string || null}
+         */
+        this.ResultUrl = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -184,6 +197,7 @@ class SwapGenderPicResponse extends  AbstractModel {
             return;
         }
         this.ResultImage = 'ResultImage' in params ? params.ResultImage : null;
+        this.ResultUrl = 'ResultUrl' in params ? params.ResultUrl : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -198,10 +212,16 @@ class ChangeAgePicResponse extends  AbstractModel {
         super();
 
         /**
-         * base64编码图片
+         * RspImgType 为 base64 时，返回处理后的图片 base64 数据。默认返回base64
          * @type {string || null}
          */
         this.ResultImage = null;
+
+        /**
+         * RspImgType 为 url 时，返回处理后的图片 url 数据。
+         * @type {string || null}
+         */
+        this.ResultUrl = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -219,6 +239,7 @@ class ChangeAgePicResponse extends  AbstractModel {
             return;
         }
         this.ResultImage = 'ResultImage' in params ? params.ResultImage : null;
+        this.ResultUrl = 'ResultUrl' in params ? params.ResultUrl : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -305,6 +326,12 @@ class ChangeAgePicRequest extends  AbstractModel {
          */
         this.Url = null;
 
+        /**
+         * 返回图像方式（base64 或 url ) ，二选一。url有效期为1天。
+         * @type {string || null}
+         */
+        this.RspImgType = null;
+
     }
 
     /**
@@ -325,6 +352,7 @@ class ChangeAgePicRequest extends  AbstractModel {
         }
         this.Image = 'Image' in params ? params.Image : null;
         this.Url = 'Url' in params ? params.Url : null;
+        this.RspImgType = 'RspImgType' in params ? params.RspImgType : null;
 
     }
 }

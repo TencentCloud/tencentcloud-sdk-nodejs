@@ -4169,7 +4169,7 @@ class GetMonitorDataRequest extends  AbstractModel {
         super();
 
         /**
-         * 命名空间，每个云产品会有一个命名空间
+         * 命名空间，各个云产品的详细命名空间说明请参阅各个产品[监控指标](https://cloud.tencent.com/document/product/248/6140)文档
          * @type {string || null}
          */
         this.Namespace = null;

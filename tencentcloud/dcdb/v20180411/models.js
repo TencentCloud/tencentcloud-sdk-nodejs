@@ -3163,6 +3163,12 @@ class OpenDBExtranetAccessRequest extends  AbstractModel {
          */
         this.InstanceId = null;
 
+        /**
+         * 是否IPv6，默认0
+         * @type {number || null}
+         */
+        this.Ipv6Flag = null;
+
     }
 
     /**
@@ -3173,6 +3179,7 @@ class OpenDBExtranetAccessRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Ipv6Flag = 'Ipv6Flag' in params ? params.Ipv6Flag : null;
 
     }
 }
@@ -3530,6 +3537,12 @@ class CloseDBExtranetAccessRequest extends  AbstractModel {
          */
         this.InstanceId = null;
 
+        /**
+         * 是否IPv6，默认0
+         * @type {number || null}
+         */
+        this.Ipv6Flag = null;
+
     }
 
     /**
@@ -3540,6 +3553,7 @@ class CloseDBExtranetAccessRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Ipv6Flag = 'Ipv6Flag' in params ? params.Ipv6Flag : null;
 
     }
 }
@@ -3863,6 +3877,12 @@ class CreateDCDBInstanceRequest extends  AbstractModel {
          */
         this.InstanceName = null;
 
+        /**
+         * 是否支持IPv6
+         * @type {number || null}
+         */
+        this.Ipv6Flag = null;
+
     }
 
     /**
@@ -3887,6 +3907,7 @@ class CreateDCDBInstanceRequest extends  AbstractModel {
         this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
         this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
         this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.Ipv6Flag = 'Ipv6Flag' in params ? params.Ipv6Flag : null;
 
     }
 }

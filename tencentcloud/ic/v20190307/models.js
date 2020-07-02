@@ -139,6 +139,47 @@ class AppInfo extends  AbstractModel {
 }
 
 /**
+ * RenewCards返回参数结构体
+ * @class
+ */
+class RenewCardsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 续费成功的订单id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ResRenew || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new ResRenew();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 卡片列表数据
  * @class
  */
@@ -763,6 +804,35 @@ class SendMultiSmsRequest extends  AbstractModel {
 }
 
 /**
+ * 云api 卡片续费
+ * @class
+ */
+class ResRenew extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 每一张续费卡片的订单ID数组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.OrderIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OrderIds = 'OrderIds' in params ? params.OrderIds : null;
+
+    }
+}
+
+/**
  * 短信流水信息
  * @class
  */
@@ -847,9 +917,52 @@ class SmsSid extends  AbstractModel {
     }
 }
 
+/**
+ * RenewCards请求参数结构体
+ * @class
+ */
+class RenewCardsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用ID
+         * @type {number || null}
+         */
+        this.Sdkappid = null;
+
+        /**
+         * 续费的iccid
+         * @type {Array.<string> || null}
+         */
+        this.Iccids = null;
+
+        /**
+         * 续费的周期
+         * @type {number || null}
+         */
+        this.RenewNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Sdkappid = 'Sdkappid' in params ? params.Sdkappid : null;
+        this.Iccids = 'Iccids' in params ? params.Iccids : null;
+        this.RenewNum = 'RenewNum' in params ? params.RenewNum : null;
+
+    }
+}
+
 module.exports = {
     SendMultiSmsResponse: SendMultiSmsResponse,
     AppInfo: AppInfo,
+    RenewCardsResponse: RenewCardsResponse,
     CardList: CardList,
     DescribeCardsResponse: DescribeCardsResponse,
     DescribeCardResponse: DescribeCardResponse,
@@ -861,7 +974,9 @@ module.exports = {
     SendSmsRequest: SendSmsRequest,
     DescribeCardsRequest: DescribeCardsRequest,
     SendMultiSmsRequest: SendMultiSmsRequest,
+    ResRenew: ResRenew,
     SmsRet: SmsRet,
     SmsSid: SmsSid,
+    RenewCardsRequest: RenewCardsRequest,
 
 }

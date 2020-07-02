@@ -48,6 +48,7 @@ const CreatePresignedNotebookInstanceUrlRequest = models.CreatePresignedNotebook
 const CreateNotebookLifecycleScriptRequest = models.CreateNotebookLifecycleScriptRequest;
 const CreateCodeRepositoryRequest = models.CreateCodeRepositoryRequest;
 const DescribeNotebookInstancesRequest = models.DescribeNotebookInstancesRequest;
+const DescribeTrainingJobsResponse = models.DescribeTrainingJobsResponse;
 const StoppingCondition = models.StoppingCondition;
 const DescribeCodeRepositoriesResponse = models.DescribeCodeRepositoriesResponse;
 const DescribeNotebookInstancesResponse = models.DescribeNotebookInstancesResponse;
@@ -55,6 +56,7 @@ const DescribeCodeRepositoryRequest = models.DescribeCodeRepositoryRequest;
 const CreateTrainingJobResponse = models.CreateTrainingJobResponse;
 const DescribeNotebookInstanceResponse = models.DescribeNotebookInstanceResponse;
 const DescribeTrainingJobRequest = models.DescribeTrainingJobRequest;
+const TrainingJobSummary = models.TrainingJobSummary;
 const AlgorithmSpecification = models.AlgorithmSpecification;
 const CosDataSource = models.CosDataSource;
 const DescribeNotebookLifecycleScriptsResponse = models.DescribeNotebookLifecycleScriptsResponse;
@@ -73,6 +75,7 @@ const VpcConfig = models.VpcConfig;
 const CreateNotebookLifecycleScriptResponse = models.CreateNotebookLifecycleScriptResponse;
 const CreatePresignedNotebookInstanceUrlResponse = models.CreatePresignedNotebookInstanceUrlResponse;
 const UpdateNotebookLifecycleScriptResponse = models.UpdateNotebookLifecycleScriptResponse;
+const DescribeTrainingJobsRequest = models.DescribeTrainingJobsRequest;
 const StartNotebookInstanceRequest = models.StartNotebookInstanceRequest;
 const CreateCodeRepositoryResponse = models.CreateCodeRepositoryResponse;
 const DescribeCodeRepositoriesRequest = models.DescribeCodeRepositoriesRequest;
@@ -221,6 +224,17 @@ class TioneClient extends AbstractClient {
     DescribeCodeRepository(req, cb) {
         let resp = new DescribeCodeRepositoryResponse();
         this.request("DescribeCodeRepository", req, resp, cb);
+    }
+
+    /**
+     * 查询训练任务列表
+     * @param {DescribeTrainingJobsRequest} req
+     * @param {function(string, DescribeTrainingJobsResponse):void} cb
+     * @public
+     */
+    DescribeTrainingJobs(req, cb) {
+        let resp = new DescribeTrainingJobsResponse();
+        this.request("DescribeTrainingJobs", req, resp, cb);
     }
 
     /**

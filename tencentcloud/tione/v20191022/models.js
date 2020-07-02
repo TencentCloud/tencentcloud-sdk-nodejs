@@ -1612,6 +1612,56 @@ billing-status - String - 是否必填：否 - （过滤条件）按照计费状
 }
 
 /**
+ * DescribeTrainingJobs返回参数结构体
+ * @class
+ */
+class DescribeTrainingJobsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 训练任务列表
+         * @type {Array.<TrainingJobSummary> || null}
+         */
+        this.TrainingJobSet = null;
+
+        /**
+         * 训练任务总数目
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TrainingJobSet) {
+            this.TrainingJobSet = new Array();
+            for (let z in params.TrainingJobSet) {
+                let obj = new TrainingJobSummary();
+                obj.deserialize(params.TrainingJobSet[z]);
+                this.TrainingJobSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 终止条件
  * @class
  */
@@ -2028,6 +2078,93 @@ class DescribeTrainingJobRequest extends  AbstractModel {
             return;
         }
         this.TrainingJobName = 'TrainingJobName' in params ? params.TrainingJobName : null;
+
+    }
+}
+
+/**
+ * 训练任务概要
+ * @class
+ */
+class TrainingJobSummary extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreationTime = null;
+
+        /**
+         * 最近修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LastModifiedTime = null;
+
+        /**
+         * 训练任务名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TrainingJobName = null;
+
+        /**
+         * 训练任务状态，取值范围
+InProgress：运行中
+Completed: 已完成
+Failed: 失败
+Stopping: 停止中
+Stopped：已停止
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TrainingJobStatus = null;
+
+        /**
+         * 完成时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TrainingEndTime = null;
+
+        /**
+         * 算了实例Id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 资源配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ResourceConfig || null}
+         */
+        this.ResourceConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CreationTime = 'CreationTime' in params ? params.CreationTime : null;
+        this.LastModifiedTime = 'LastModifiedTime' in params ? params.LastModifiedTime : null;
+        this.TrainingJobName = 'TrainingJobName' in params ? params.TrainingJobName : null;
+        this.TrainingJobStatus = 'TrainingJobStatus' in params ? params.TrainingJobStatus : null;
+        this.TrainingEndTime = 'TrainingEndTime' in params ? params.TrainingEndTime : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.ResourceConfig) {
+            let obj = new ResourceConfig();
+            obj.deserialize(params.ResourceConfig)
+            this.ResourceConfig = obj;
+        }
 
     }
 }
@@ -2533,6 +2670,19 @@ Stopped：已停止
         this.TrainingJobStatus = null;
 
         /**
+         * 训练任务日志链接
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LogUrl = null;
+
+        /**
+         * 训练任务实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -2610,6 +2760,8 @@ Stopped：已停止
         }
         this.RoleName = 'RoleName' in params ? params.RoleName : null;
         this.TrainingJobStatus = 'TrainingJobStatus' in params ? params.TrainingJobStatus : null;
+        this.LogUrl = 'LogUrl' in params ? params.LogUrl : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3007,6 +3159,86 @@ class UpdateNotebookLifecycleScriptResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeTrainingJobs请求参数结构体
+ * @class
+ */
+class DescribeTrainingJobsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 限制数目
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 创建时间晚于
+         * @type {string || null}
+         */
+        this.CreationTimeAfter = null;
+
+        /**
+         * 创建时间早于
+         * @type {string || null}
+         */
+        this.CreationTimeBefore = null;
+
+        /**
+         * 根据名称过滤
+         * @type {string || null}
+         */
+        this.NameContains = null;
+
+        /**
+         * 根据状态过滤
+         * @type {string || null}
+         */
+        this.StatusEquals = null;
+
+        /**
+         * 过滤条件。
+instance-name - String - 是否必填：否 -（过滤条件）按照名称过滤。
+search-by-name - String - 是否必填：否 -（过滤条件）按照名称检索，模糊匹配。
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.CreationTimeAfter = 'CreationTimeAfter' in params ? params.CreationTimeAfter : null;
+        this.CreationTimeBefore = 'CreationTimeBefore' in params ? params.CreationTimeBefore : null;
+        this.NameContains = 'NameContains' in params ? params.NameContains : null;
+        this.StatusEquals = 'StatusEquals' in params ? params.StatusEquals : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * StartNotebookInstance请求参数结构体
  * @class
  */
@@ -3295,6 +3527,7 @@ module.exports = {
     CreateNotebookLifecycleScriptRequest: CreateNotebookLifecycleScriptRequest,
     CreateCodeRepositoryRequest: CreateCodeRepositoryRequest,
     DescribeNotebookInstancesRequest: DescribeNotebookInstancesRequest,
+    DescribeTrainingJobsResponse: DescribeTrainingJobsResponse,
     StoppingCondition: StoppingCondition,
     DescribeCodeRepositoriesResponse: DescribeCodeRepositoriesResponse,
     DescribeNotebookInstancesResponse: DescribeNotebookInstancesResponse,
@@ -3302,6 +3535,7 @@ module.exports = {
     CreateTrainingJobResponse: CreateTrainingJobResponse,
     DescribeNotebookInstanceResponse: DescribeNotebookInstanceResponse,
     DescribeTrainingJobRequest: DescribeTrainingJobRequest,
+    TrainingJobSummary: TrainingJobSummary,
     AlgorithmSpecification: AlgorithmSpecification,
     CosDataSource: CosDataSource,
     DescribeNotebookLifecycleScriptsResponse: DescribeNotebookLifecycleScriptsResponse,
@@ -3320,6 +3554,7 @@ module.exports = {
     CreateNotebookLifecycleScriptResponse: CreateNotebookLifecycleScriptResponse,
     CreatePresignedNotebookInstanceUrlResponse: CreatePresignedNotebookInstanceUrlResponse,
     UpdateNotebookLifecycleScriptResponse: UpdateNotebookLifecycleScriptResponse,
+    DescribeTrainingJobsRequest: DescribeTrainingJobsRequest,
     StartNotebookInstanceRequest: StartNotebookInstanceRequest,
     CreateCodeRepositoryResponse: CreateCodeRepositoryResponse,
     DescribeCodeRepositoriesRequest: DescribeCodeRepositoriesRequest,

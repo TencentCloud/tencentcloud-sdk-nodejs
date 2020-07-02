@@ -644,6 +644,12 @@ class EncodeParams extends  AbstractModel {
          */
         this.BackgroundColor = null;
 
+        /**
+         * 混流-输出流背景图片，取值为实时音视频控制台上传的图片ID。
+         * @type {number || null}
+         */
+        this.BackgroundImageId = null;
+
     }
 
     /**
@@ -662,6 +668,7 @@ class EncodeParams extends  AbstractModel {
         this.VideoFramerate = 'VideoFramerate' in params ? params.VideoFramerate : null;
         this.VideoGop = 'VideoGop' in params ? params.VideoGop : null;
         this.BackgroundColor = 'BackgroundColor' in params ? params.BackgroundColor : null;
+        this.BackgroundImageId = 'BackgroundImageId' in params ? params.BackgroundImageId : null;
 
     }
 }
@@ -993,7 +1000,7 @@ class OutputParams extends  AbstractModel {
         super();
 
         /**
-         * 直播流ID，该流ID不能与用户旁路的流ID相同。
+         * 直播流 ID，由用户自定义设置，该流 ID 不能与用户旁路的流 ID 相同。
          * @type {string || null}
          */
         this.StreamId = null;
