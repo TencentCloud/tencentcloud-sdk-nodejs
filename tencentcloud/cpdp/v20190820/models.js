@@ -4365,24 +4365,108 @@ class CreateInvoiceResult extends  AbstractModel {
 }
 
 /**
- * QueryApplicationMaterial返回参数结构体
+ * DescribeOrderStatus请求参数结构体
  * @class
  */
-class QueryApplicationMaterialResponse extends  AbstractModel {
+class DescribeOrderStatusRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 成功申报材料查询结果
-         * @type {QueryDeclareResult || null}
-         */
-        this.Result = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 请求类型，此接口固定填：QueryOrderStatusReq
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.RequestType = null;
+
+        /**
+         * 商户号
+         * @type {string || null}
+         */
+        this.MerchantCode = null;
+
+        /**
+         * 支付渠道
+         * @type {string || null}
+         */
+        this.PayChannel = null;
+
+        /**
+         * 子渠道
+         * @type {number || null}
+         */
+        this.PayChannelSubId = null;
+
+        /**
+         * 交易订单号或流水号，提现，充值或会员交易请求时的CnsmrSeqNo值
+         * @type {string || null}
+         */
+        this.OrderId = null;
+
+        /**
+         * 父账户账号，资金汇总账号
+         * @type {string || null}
+         */
+        this.BankAccountNumber = null;
+
+        /**
+         * 平台短号(银行分配)
+         * @type {string || null}
+         */
+        this.PlatformShortNumber = null;
+
+        /**
+         * 功能标志 0：会员间交易 1：提现 2：充值
+         * @type {string || null}
+         */
+        this.QueryType = null;
+
+        /**
+         * 银行流水号
+         * @type {string || null}
+         */
+        this.TransSequenceNumber = null;
+
+        /**
+         * 计费签名
+         * @type {string || null}
+         */
+        this.MidasSignature = null;
+
+        /**
+         * 聚鑫分配的支付主MidasAppId
+         * @type {string || null}
+         */
+        this.MidasAppId = null;
+
+        /**
+         * 聚鑫分配的安全ID
+         * @type {string || null}
+         */
+        this.MidasSecretId = null;
+
+        /**
+         * Midas环境参数
+         * @type {string || null}
+         */
+        this.MidasEnvironment = null;
+
+        /**
+         * 保留字段
+         * @type {string || null}
+         */
+        this.ReservedMessage = null;
+
+        /**
+         * 子账户账号 暂未使用
+         * @type {string || null}
+         */
+        this.BankSubAccountNumber = null;
+
+        /**
+         * 交易日期 暂未使用
+         * @type {string || null}
+         */
+        this.TransDate = null;
 
     }
 
@@ -4393,13 +4477,22 @@ class QueryApplicationMaterialResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Result) {
-            let obj = new QueryDeclareResult();
-            obj.deserialize(params.Result)
-            this.Result = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.RequestType = 'RequestType' in params ? params.RequestType : null;
+        this.MerchantCode = 'MerchantCode' in params ? params.MerchantCode : null;
+        this.PayChannel = 'PayChannel' in params ? params.PayChannel : null;
+        this.PayChannelSubId = 'PayChannelSubId' in params ? params.PayChannelSubId : null;
+        this.OrderId = 'OrderId' in params ? params.OrderId : null;
+        this.BankAccountNumber = 'BankAccountNumber' in params ? params.BankAccountNumber : null;
+        this.PlatformShortNumber = 'PlatformShortNumber' in params ? params.PlatformShortNumber : null;
+        this.QueryType = 'QueryType' in params ? params.QueryType : null;
+        this.TransSequenceNumber = 'TransSequenceNumber' in params ? params.TransSequenceNumber : null;
+        this.MidasSignature = 'MidasSignature' in params ? params.MidasSignature : null;
+        this.MidasAppId = 'MidasAppId' in params ? params.MidasAppId : null;
+        this.MidasSecretId = 'MidasSecretId' in params ? params.MidasSecretId : null;
+        this.MidasEnvironment = 'MidasEnvironment' in params ? params.MidasEnvironment : null;
+        this.ReservedMessage = 'ReservedMessage' in params ? params.ReservedMessage : null;
+        this.BankSubAccountNumber = 'BankSubAccountNumber' in params ? params.BankSubAccountNumber : null;
+        this.TransDate = 'TransDate' in params ? params.TransDate : null;
 
     }
 }
@@ -5387,7 +5480,7 @@ class RechargeByThirdPayRequest extends  AbstractModel {
         super();
 
         /**
-         * 请求类型
+         * 请求类型 此接口固定填：MemberRechargeThirdPayReq
          * @type {string || null}
          */
         this.RequestType = null;
@@ -10109,6 +10202,46 @@ class QueryReconciliationDocumentResponse extends  AbstractModel {
 }
 
 /**
+ * QueryApplicationMaterial返回参数结构体
+ * @class
+ */
+class QueryApplicationMaterialResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 成功申报材料查询结果
+         * @type {QueryDeclareResult || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new QueryDeclareResult();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 创建商户结果数据
  * @class
  */
@@ -11421,6 +11554,97 @@ class ApplyOutwardOrderResponse extends  AbstractModel {
             obj.deserialize(params.Result)
             this.Result = obj;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeOrderStatus返回参数结构体
+ * @class
+ */
+class DescribeOrderStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 交易状态 （（0：成功，1：失败，2：待确认, 5：待处理，6：处理中）
+         * @type {string || null}
+         */
+        this.OrderStatus = null;
+
+        /**
+         * 交易金额
+         * @type {string || null}
+         */
+        this.OrderAmount = null;
+
+        /**
+         * 交易日期
+         * @type {string || null}
+         */
+        this.OrderDate = null;
+
+        /**
+         * 交易时间
+         * @type {string || null}
+         */
+        this.OrderTime = null;
+
+        /**
+         * 转出子账户账号
+         * @type {string || null}
+         */
+        this.OutSubAccountNumber = null;
+
+        /**
+         * 转入子账户账号
+         * @type {string || null}
+         */
+        this.InSubAccountNumber = null;
+
+        /**
+         * 记账标志（1：登记挂账 2：支付 3：提现 4：清分5:下单预支付 6：确认并付款 7：退款 8：支付到平台 N:其他）
+         * @type {string || null}
+         */
+        this.BookingFlag = null;
+
+        /**
+         * 当交易失败时，返回交易失败原因
+         * @type {string || null}
+         */
+        this.FailMessage = null;
+
+        /**
+         * 请求类型
+         * @type {string || null}
+         */
+        this.RequestType = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OrderStatus = 'OrderStatus' in params ? params.OrderStatus : null;
+        this.OrderAmount = 'OrderAmount' in params ? params.OrderAmount : null;
+        this.OrderDate = 'OrderDate' in params ? params.OrderDate : null;
+        this.OrderTime = 'OrderTime' in params ? params.OrderTime : null;
+        this.OutSubAccountNumber = 'OutSubAccountNumber' in params ? params.OutSubAccountNumber : null;
+        this.InSubAccountNumber = 'InSubAccountNumber' in params ? params.InSubAccountNumber : null;
+        this.BookingFlag = 'BookingFlag' in params ? params.BookingFlag : null;
+        this.FailMessage = 'FailMessage' in params ? params.FailMessage : null;
+        this.RequestType = 'RequestType' in params ? params.RequestType : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -13643,7 +13867,7 @@ module.exports = {
     QuerySingleTransactionStatusRequest: QuerySingleTransactionStatusRequest,
     MerchantManagementList: MerchantManagementList,
     CreateInvoiceResult: CreateInvoiceResult,
-    QueryApplicationMaterialResponse: QueryApplicationMaterialResponse,
+    DescribeOrderStatusRequest: DescribeOrderStatusRequest,
     QueryMerchantBalanceResult: QueryMerchantBalanceResult,
     QueryCustAcctIdBalanceResponse: QueryCustAcctIdBalanceResponse,
     QueryTradeResponse: QueryTradeResponse,
@@ -13717,6 +13941,7 @@ module.exports = {
     TransactionItem: TransactionItem,
     CheckAcctResponse: CheckAcctResponse,
     QueryReconciliationDocumentResponse: QueryReconciliationDocumentResponse,
+    QueryApplicationMaterialResponse: QueryApplicationMaterialResponse,
     CreateMerchantResultData: CreateMerchantResultData,
     QueryExchangeRateRequest: QueryExchangeRateRequest,
     QueryMerchantInfoForManagementRequest: QueryMerchantInfoForManagementRequest,
@@ -13736,6 +13961,7 @@ module.exports = {
     ApplyTradeResponse: ApplyTradeResponse,
     QueryBankClearResponse: QueryBankClearResponse,
     ApplyOutwardOrderResponse: ApplyOutwardOrderResponse,
+    DescribeOrderStatusResponse: DescribeOrderStatusResponse,
     WithdrawCashMembershipResponse: WithdrawCashMembershipResponse,
     QueryApplicationMaterialRequest: QueryApplicationMaterialRequest,
     CreateMerchantResponse: CreateMerchantResponse,

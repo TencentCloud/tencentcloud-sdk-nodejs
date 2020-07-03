@@ -15384,10 +15384,16 @@ class DisableRoutesRequest extends  AbstractModel {
         this.RouteTableId = null;
 
         /**
-         * 路由策略唯一ID。
+         * 路由策略ID。不能和RouteItemIds同时使用。
          * @type {Array.<number> || null}
          */
         this.RouteIds = null;
+
+        /**
+         * 路由策略唯一ID。不能和RouteIds同时使用。
+         * @type {Array.<string> || null}
+         */
+        this.RouteItemIds = null;
 
     }
 
@@ -15400,6 +15406,7 @@ class DisableRoutesRequest extends  AbstractModel {
         }
         this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
         this.RouteIds = 'RouteIds' in params ? params.RouteIds : null;
+        this.RouteItemIds = 'RouteItemIds' in params ? params.RouteItemIds : null;
 
     }
 }
@@ -15419,10 +15426,16 @@ class EnableRoutesRequest extends  AbstractModel {
         this.RouteTableId = null;
 
         /**
-         * 路由策略唯一ID。
+         * 路由策略ID。不能和RouteItemIds同时使用。
          * @type {Array.<number> || null}
          */
         this.RouteIds = null;
+
+        /**
+         * 路由策略唯一ID。不能和RouteIds同时使用。
+         * @type {Array.<string> || null}
+         */
+        this.RouteItemIds = null;
 
     }
 
@@ -15435,6 +15448,7 @@ class EnableRoutesRequest extends  AbstractModel {
         }
         this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
         this.RouteIds = 'RouteIds' in params ? params.RouteIds : null;
+        this.RouteItemIds = 'RouteItemIds' in params ? params.RouteItemIds : null;
 
     }
 }
@@ -22856,6 +22870,18 @@ CCN：云联网路由，系统默认下发，不可编辑与删除。
          */
         this.RouteTableId = null;
 
+        /**
+         * 目的IPv6网段，取值不能在私有网络网段内，例如：2402:4e00:1000:810b::/64。
+         * @type {string || null}
+         */
+        this.DestinationIpv6CidrBlock = null;
+
+        /**
+         * 路由唯一策略ID。
+         * @type {string || null}
+         */
+        this.RouteItemId = null;
+
     }
 
     /**
@@ -22873,6 +22899,8 @@ CCN：云联网路由，系统默认下发，不可编辑与删除。
         this.Enabled = 'Enabled' in params ? params.Enabled : null;
         this.RouteType = 'RouteType' in params ? params.RouteType : null;
         this.RouteTableId = 'RouteTableId' in params ? params.RouteTableId : null;
+        this.DestinationIpv6CidrBlock = 'DestinationIpv6CidrBlock' in params ? params.DestinationIpv6CidrBlock : null;
+        this.RouteItemId = 'RouteItemId' in params ? params.RouteItemId : null;
 
     }
 }

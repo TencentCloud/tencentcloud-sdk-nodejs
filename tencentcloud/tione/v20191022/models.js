@@ -25,18 +25,25 @@ class OutputDataConfig extends  AbstractModel {
         super();
 
         /**
-         * cos桶
+         * cos输出桶
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.CosOutputBucket = null;
 
         /**
-         * cos文件key
+         * cos输出key前缀
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.CosOutputKeyPrefix = null;
+
+        /**
+         * 文件系统输出，如果指定了文件系统，那么Cos输出会被忽略
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {FileSystemDataSource || null}
+         */
+        this.FileSystemDataSource = null;
 
     }
 
@@ -49,6 +56,12 @@ class OutputDataConfig extends  AbstractModel {
         }
         this.CosOutputBucket = 'CosOutputBucket' in params ? params.CosOutputBucket : null;
         this.CosOutputKeyPrefix = 'CosOutputKeyPrefix' in params ? params.CosOutputKeyPrefix : null;
+
+        if (params.FileSystemDataSource) {
+            let obj = new FileSystemDataSource();
+            obj.deserialize(params.FileSystemDataSource)
+            this.FileSystemDataSource = obj;
+        }
 
     }
 }

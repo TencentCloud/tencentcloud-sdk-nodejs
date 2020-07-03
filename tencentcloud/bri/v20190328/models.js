@@ -65,7 +65,7 @@ class BRIRequest extends  AbstractModel {
         super();
 
         /**
-         * 业务名, 必须是以下五个业务名之一(bri_num,bri_dev,bri_ip_bri_apk,bri_url)
+         * 业务名, 必须是以下六个业务名之一(bri_num,bri_dev,bri_ip_bri_apk,bri_url,bri_social)
          * @type {string || null}
          */
         this.Service = null;
@@ -113,10 +113,40 @@ class BRIRequest extends  AbstractModel {
         this.PhoneNumber = null;
 
         /**
+         * QQ号 (业务名为bri_social时必填, 除非已填Wechat)
+         * @type {string || null}
+         */
+        this.QQ = null;
+
+        /**
+         * QQ号的可疑标签
+         * @type {string || null}
+         */
+        this.QQTag = null;
+
+        /**
+         * 业务场景 (1-注册, 2-登录, 3-发消息)
+         * @type {string || null}
+         */
+        this.Scene = null;
+
+        /**
          * 网址 (业务名为bri_url时必填)
          * @type {string || null}
          */
         this.Url = null;
+
+        /**
+         * 微信号 (业务名为bri_social时必填, 除非已填QQ)
+         * @type {string || null}
+         */
+        this.Wechat = null;
+
+        /**
+         * 微信号的可疑标签
+         * @type {string || null}
+         */
+        this.WechatTag = null;
 
     }
 
@@ -135,7 +165,12 @@ class BRIRequest extends  AbstractModel {
         this.Ip = 'Ip' in params ? params.Ip : null;
         this.PackageName = 'PackageName' in params ? params.PackageName : null;
         this.PhoneNumber = 'PhoneNumber' in params ? params.PhoneNumber : null;
+        this.QQ = 'QQ' in params ? params.QQ : null;
+        this.QQTag = 'QQTag' in params ? params.QQTag : null;
+        this.Scene = 'Scene' in params ? params.Scene : null;
         this.Url = 'Url' in params ? params.Url : null;
+        this.Wechat = 'Wechat' in params ? params.Wechat : null;
+        this.WechatTag = 'WechatTag' in params ? params.WechatTag : null;
 
     }
 }
@@ -219,7 +254,7 @@ class BRIResponse extends  AbstractModel {
 1) 安全   说明: APK为正规应用
 2) 一般   说明: APK为未发现问题的正常应用
 3) 风险   说明: APK为外挂或色情等风险应用
-4) 病毒   说明: APK为包含恶意代码的恶意软件吗,可能破坏系统或者其他app正常使用
+4) 病毒   说明: APK为包含恶意代码的恶意软件,可能破坏系统或者其他app正常使用
          * @type {Array.<string> || null}
          */
         this.Tags = null;

@@ -1778,7 +1778,7 @@ class DescribeBillDetailRequest extends  AbstractModel {
         this.NeedRecordNum = null;
 
         /**
-         * 查询指定产品信息
+         * 查询指定产品信息（暂时未开放获取）
          * @type {string || null}
          */
         this.ProductCode = null;
