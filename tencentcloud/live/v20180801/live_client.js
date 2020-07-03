@@ -20,6 +20,7 @@ const CreateLiveSnapshotRuleRequest = models.CreateLiveSnapshotRuleRequest;
 const BillDataInfo = models.BillDataInfo;
 const EnableLiveDomainResponse = models.EnableLiveDomainResponse;
 const CreateLiveCertRequest = models.CreateLiveCertRequest;
+const StopRecordTaskResponse = models.StopRecordTaskResponse;
 const DescribeLiveCallbackTemplatesRequest = models.DescribeLiveCallbackTemplatesRequest;
 const DeleteLiveRecordRuleRequest = models.DeleteLiveRecordRuleRequest;
 const ResumeLiveStreamRequest = models.ResumeLiveStreamRequest;
@@ -73,7 +74,7 @@ const StreamOnlineInfo = models.StreamOnlineInfo;
 const CreateLiveWatermarkRuleResponse = models.CreateLiveWatermarkRuleResponse;
 const DescribeProIspPlaySumInfoListRequest = models.DescribeProIspPlaySumInfoListRequest;
 const PlayCodeTotalInfo = models.PlayCodeTotalInfo;
-const DescribeConcurrentRecordStreamNumResponse = models.DescribeConcurrentRecordStreamNumResponse;
+const AddLiveWatermarkRequest = models.AddLiveWatermarkRequest;
 const ModifyLiveTranscodeTemplateResponse = models.ModifyLiveTranscodeTemplateResponse;
 const ModifyLiveRecordTemplateResponse = models.ModifyLiveRecordTemplateResponse;
 const ModifyLivePlayDomainRequest = models.ModifyLivePlayDomainRequest;
@@ -98,12 +99,13 @@ const RuleInfo = models.RuleInfo;
 const UpdateLiveWatermarkResponse = models.UpdateLiveWatermarkResponse;
 const LivePackageInfo = models.LivePackageInfo;
 const CreateLiveTranscodeTemplateResponse = models.CreateLiveTranscodeTemplateResponse;
+const PlayDataInfoByStream = models.PlayDataInfoByStream;
 const DescribeVisitTopSumInfoListRequest = models.DescribeVisitTopSumInfoListRequest;
 const DayStreamPlayInfo = models.DayStreamPlayInfo;
 const ModifyPullStreamStatusResponse = models.ModifyPullStreamStatusResponse;
 const ModifyLivePlayDomainResponse = models.ModifyLivePlayDomainResponse;
 const CancelCommonMixStreamResponse = models.CancelCommonMixStreamResponse;
-const AddLiveWatermarkRequest = models.AddLiveWatermarkRequest;
+const DescribeConcurrentRecordStreamNumResponse = models.DescribeConcurrentRecordStreamNumResponse;
 const DescribeLiveCertsResponse = models.DescribeLiveCertsResponse;
 const CommonMixInputParam = models.CommonMixInputParam;
 const DescribeProvinceIspPlayInfoListResponse = models.DescribeProvinceIspPlayInfoListResponse;
@@ -119,6 +121,7 @@ const StopLiveRecordRequest = models.StopLiveRecordRequest;
 const DeletePullStreamConfigResponse = models.DeletePullStreamConfigResponse;
 const DeleteLiveWatermarkRuleRequest = models.DeleteLiveWatermarkRuleRequest;
 const StreamEventInfo = models.StreamEventInfo;
+const DeleteRecordTaskResponse = models.DeleteRecordTaskResponse;
 const DescribeLiveWatermarksRequest = models.DescribeLiveWatermarksRequest;
 const DescribeLivePackageInfoResponse = models.DescribeLivePackageInfoResponse;
 const CreateLiveTranscodeRuleRequest = models.CreateLiveTranscodeRuleRequest;
@@ -201,6 +204,7 @@ const DomainDetailInfo = models.DomainDetailInfo;
 const HttpStatusInfo = models.HttpStatusInfo;
 const DeleteLiveRecordRequest = models.DeleteLiveRecordRequest;
 const DescribeLiveStreamPushInfoListResponse = models.DescribeLiveStreamPushInfoListResponse;
+const StopRecordTaskRequest = models.StopRecordTaskRequest;
 const HttpStatusData = models.HttpStatusData;
 const HttpCodeInfo = models.HttpCodeInfo;
 const DescribeStreamPlayInfoListRequest = models.DescribeStreamPlayInfoListRequest;
@@ -218,6 +222,7 @@ const EnableLiveDomainRequest = models.EnableLiveDomainRequest;
 const DescribeAllStreamPlayInfoListResponse = models.DescribeAllStreamPlayInfoListResponse;
 const ForbidLiveDomainResponse = models.ForbidLiveDomainResponse;
 const DescribeLiveSnapshotRulesRequest = models.DescribeLiveSnapshotRulesRequest;
+const CreateRecordTaskRequest = models.CreateRecordTaskRequest;
 const CreateLiveTranscodeRuleResponse = models.CreateLiveTranscodeRuleResponse;
 const CreateLiveCallbackRuleResponse = models.CreateLiveCallbackRuleResponse;
 const DescribeLiveRecordTemplateResponse = models.DescribeLiveRecordTemplateResponse;
@@ -251,7 +256,7 @@ const CreateLiveWatermarkRuleRequest = models.CreateLiveWatermarkRuleRequest;
 const DescribeLiveRecordTemplatesRequest = models.DescribeLiveRecordTemplatesRequest;
 const DescribeAllStreamPlayInfoListRequest = models.DescribeAllStreamPlayInfoListRequest;
 const DescribeLiveDomainResponse = models.DescribeLiveDomainResponse;
-const PlayDataInfoByStream = models.PlayDataInfoByStream;
+const DeleteRecordTaskRequest = models.DeleteRecordTaskRequest;
 const StopLiveRecordResponse = models.StopLiveRecordResponse;
 const DescribeStreamDayPlayInfoListResponse = models.DescribeStreamDayPlayInfoListResponse;
 const CreateLiveSnapshotRuleResponse = models.CreateLiveSnapshotRuleResponse;
@@ -259,6 +264,7 @@ const DelayInfo = models.DelayInfo;
 const DescribeLiveStreamEventListResponse = models.DescribeLiveStreamEventListResponse;
 const DescribePullStreamConfigsResponse = models.DescribePullStreamConfigsResponse;
 const DescribeLiveCallbackRulesResponse = models.DescribeLiveCallbackRulesResponse;
+const CreateRecordTaskResponse = models.CreateRecordTaskResponse;
 const ForbidStreamInfo = models.ForbidStreamInfo;
 const ResumeDelayLiveStreamResponse = models.ResumeDelayLiveStreamResponse;
 const GroupProIspDataInfo = models.GroupProIspDataInfo;
@@ -690,6 +696,7 @@ class LiveClient extends AbstractClient {
      * 对流设置延播时间
 注意：如果在推流前设置延播，需要提前5分钟设置。
 目前该接口只支持流粒度的，域名及应用粒度功能支持当前开发中。
+使用场景：对重要直播，避免出现突发状况，可通过设置延迟播放，提前做好把控。
 
      * @param {AddDelayLiveStreamRequest} req
      * @param {function(string, AddDelayLiveStreamResponse):void} cb
@@ -935,6 +942,17 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     }
 
     /**
+     * 提前结束录制，并中止运行中的录制任务。任务被成功中止后将不再启动。
+     * @param {StopRecordTaskRequest} req
+     * @param {function(string, StopRecordTaskResponse):void} cb
+     * @public
+     */
+    StopRecordTask(req, cb) {
+        let resp = new StopRecordTaskResponse();
+        this.request("StopRecordTask", req, resp, cb);
+    }
+
+    /**
      * 获取截图模板列表。
      * @param {DescribeLiveSnapshotTemplatesRequest} req
      * @param {function(string, DescribeLiveSnapshotTemplatesResponse):void} cb
@@ -998,6 +1016,17 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     UnBindLiveDomainCert(req, cb) {
         let resp = new UnBindLiveDomainCertResponse();
         this.request("UnBindLiveDomainCert", req, resp, cb);
+    }
+
+    /**
+     * 删除录制任务配置。删除操作不影响正在运行当中的任务，仅对删除之后新的推流有效。
+     * @param {DeleteRecordTaskRequest} req
+     * @param {function(string, DeleteRecordTaskResponse):void} cb
+     * @public
+     */
+    DeleteRecordTask(req, cb) {
+        let resp = new DeleteRecordTaskResponse();
+        this.request("DeleteRecordTask", req, resp, cb);
     }
 
     /**
@@ -1338,6 +1367,25 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     ResumeDelayLiveStream(req, cb) {
         let resp = new ResumeDelayLiveStreamResponse();
         this.request("ResumeDelayLiveStream", req, resp, cb);
+    }
+
+    /**
+     * 创建一个在指定时间启动、结束的录制任务，并使用指定录制模板ID对应的配置进行录制。
+- 使用前提
+1. 录制文件存放于点播平台，所以用户如需使用录制功能，需首先自行开通点播服务。
+2. 录制文件存放后相关费用（含存储以及下行播放流量）按照点播平台计费方式收取，具体请参考 对应文档。
+- 注意事项
+1. 断流会结束当前录制并生成录制文件。在结束时间到达之前任务仍然有效，期间只要正常推流都会正常录制，与是否多次推、断流无关。
+2. 使用上避免创建时间段相互重叠的录制任务。若同一条流当前存在多个时段重叠的任务，为避免重复录制系统将启动最多3个录制任务。
+3. 创建的录制任务记录在平台侧只保留3个月。
+4. 当前录制任务管理API（CreateRecordTask/StopRecordTask/DeleteRecordTask）与旧API（CreateLiveRecord/StopLiveRecord/DeleteLiveRecord）不兼容，两套接口不能混用。
+     * @param {CreateRecordTaskRequest} req
+     * @param {function(string, CreateRecordTaskResponse):void} cb
+     * @public
+     */
+    CreateRecordTask(req, cb) {
+        let resp = new CreateRecordTaskResponse();
+        this.request("CreateRecordTask", req, resp, cb);
     }
 
     /**

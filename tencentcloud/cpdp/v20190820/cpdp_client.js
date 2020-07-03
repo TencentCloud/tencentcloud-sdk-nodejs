@@ -78,7 +78,7 @@ const QueryMerchantInfoForManagementResponse = models.QueryMerchantInfoForManage
 const QuerySingleTransactionStatusRequest = models.QuerySingleTransactionStatusRequest;
 const MerchantManagementList = models.MerchantManagementList;
 const CreateInvoiceResult = models.CreateInvoiceResult;
-const QueryApplicationMaterialResponse = models.QueryApplicationMaterialResponse;
+const DescribeOrderStatusRequest = models.DescribeOrderStatusRequest;
 const QueryMerchantBalanceResult = models.QueryMerchantBalanceResult;
 const QueryCustAcctIdBalanceResponse = models.QueryCustAcctIdBalanceResponse;
 const QueryTradeResponse = models.QueryTradeResponse;
@@ -152,6 +152,7 @@ const QueryOutwardOrderData = models.QueryOutwardOrderData;
 const TransactionItem = models.TransactionItem;
 const CheckAcctResponse = models.CheckAcctResponse;
 const QueryReconciliationDocumentResponse = models.QueryReconciliationDocumentResponse;
+const QueryApplicationMaterialResponse = models.QueryApplicationMaterialResponse;
 const CreateMerchantResultData = models.CreateMerchantResultData;
 const QueryExchangeRateRequest = models.QueryExchangeRateRequest;
 const QueryMerchantInfoForManagementRequest = models.QueryMerchantInfoForManagementRequest;
@@ -171,6 +172,7 @@ const RefundResponse = models.RefundResponse;
 const ApplyTradeResponse = models.ApplyTradeResponse;
 const QueryBankClearResponse = models.QueryBankClearResponse;
 const ApplyOutwardOrderResponse = models.ApplyOutwardOrderResponse;
+const DescribeOrderStatusResponse = models.DescribeOrderStatusResponse;
 const WithdrawCashMembershipResponse = models.WithdrawCashMembershipResponse;
 const QueryApplicationMaterialRequest = models.QueryApplicationMaterialRequest;
 const CreateMerchantResponse = models.CreateMerchantResponse;
@@ -235,14 +237,14 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
-     * 查询银行时间段内交易明细。查询时间段的会员成功交易。
-     * @param {QueryBankTransactionDetailsRequest} req
-     * @param {function(string, QueryBankTransactionDetailsResponse):void} cb
+     * 查询单笔订单交易状态
+     * @param {DescribeOrderStatusRequest} req
+     * @param {function(string, DescribeOrderStatusResponse):void} cb
      * @public
      */
-    QueryBankTransactionDetails(req, cb) {
-        let resp = new QueryBankTransactionDetailsResponse();
-        this.request("QueryBankTransactionDetails", req, resp, cb);
+    DescribeOrderStatus(req, cb) {
+        let resp = new DescribeOrderStatusResponse();
+        this.request("DescribeOrderStatus", req, resp, cb);
     }
 
     /**
@@ -725,6 +727,17 @@ class CpdpClient extends AbstractClient {
     RevokeMemberRechargeThirdPay(req, cb) {
         let resp = new RevokeMemberRechargeThirdPayResponse();
         this.request("RevokeMemberRechargeThirdPay", req, resp, cb);
+    }
+
+    /**
+     * 查询银行时间段内交易明细。查询时间段的会员成功交易。
+     * @param {QueryBankTransactionDetailsRequest} req
+     * @param {function(string, QueryBankTransactionDetailsResponse):void} cb
+     * @public
+     */
+    QueryBankTransactionDetails(req, cb) {
+        let resp = new QueryBankTransactionDetailsResponse();
+        this.request("QueryBankTransactionDetails", req, resp, cb);
     }
 
     /**

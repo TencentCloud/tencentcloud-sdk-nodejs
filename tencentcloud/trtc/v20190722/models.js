@@ -429,7 +429,7 @@ class DescribeCallDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * 通话 ID（唯一标识一次通话）： sdkappid_roomgString（房间号_createTime（房间创建时间，unix时间戳，单位为s）。通过 DescribeRoomInformation（查询房间列表）接口获取。
+         * 通话 ID（唯一标识一次通话）： sdkappid_roomgString（房间号_createTime（房间创建时间，unix时间戳，单位为s）例：1400353843_218695_1590065777。通过 DescribeRoomInformation（查询房间列表）接口获取（链接：https://cloud.tencent.com/document/product/647/44050）
          * @type {string || null}
          */
         this.CommId = null;
@@ -447,7 +447,7 @@ class DescribeCallDetailRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * 用户sdkappid
+         * 用户sdkappid（1400188366）
          * @type {string || null}
          */
         this.SdkAppId = null;
@@ -505,7 +505,7 @@ class DescribeRealtimeNetworkRequest extends  AbstractModel {
         super();
 
         /**
-         * 查询开始时间，24小时内，，本地unix时间戳（1588031999s）
+         * 查询开始时间，24小时内，本地unix时间戳（1588031999s）
          * @type {number || null}
          */
         this.StartTime = null;
@@ -524,7 +524,7 @@ class DescribeRealtimeNetworkRequest extends  AbstractModel {
 
         /**
          * 需查询的数据类型
-sendLossRateRaw：上行丢包率；
+sendLossRateRaw：上行丢包率
 recvLossRateRaw：下行丢包率
          * @type {Array.<string> || null}
          */
@@ -1716,7 +1716,7 @@ class DescribeDetailEventRequest extends  AbstractModel {
         super();
 
         /**
-         * 通话 ID（唯一标识一次通话）： sdkappid_roomgString（房间号_createTime（房间创建时间，unix时间戳，单位s）。通过 DescribeRoomInformation（查询房间列表）接口获取。
+         * 通话 ID（唯一标识一次通话）： sdkappid_roomgString（房间号_createTime（房间创建时间，unix时间戳，单位s）。通过 DescribeRoomInformation（查询房间列表）接口获取。（链接：https://cloud.tencent.com/document/product/647/44050）
          * @type {string || null}
          */
         this.CommId = null;

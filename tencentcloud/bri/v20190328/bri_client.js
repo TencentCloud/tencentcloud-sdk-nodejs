@@ -44,6 +44,8 @@ class BriClient extends AbstractClient {
 当业务名为bri_apk时，必须填 (PackageName,CertMd5,FileSize) 三个字段 或者 FileMd5一个字段.
 
 当业务名为bri_url时，必须填Url字段.
+
+当业务名为bri_social时，必须填QQ和Wechat字段两者其中一个或者两个.
      * @param {DescribeBRIRequest} req
      * @param {function(string, DescribeBRIResponse):void} cb
      * @public
