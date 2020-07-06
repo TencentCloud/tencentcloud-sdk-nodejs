@@ -15045,7 +15045,7 @@ class PullUploadRequest extends  AbstractModel {
         super();
 
         /**
-         * 要拉取的媒体 URL，暂不支持拉取 HLS 和 Dash 格式。
+         * 要拉取的媒体 URL，暂不支持拉取 Dash 格式（可以支持 HLS）。
 支持的扩展名详见[媒体类型](https://cloud.tencent.com/document/product/266/9760#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B)。
          * @type {string || null}
          */
@@ -15111,6 +15111,12 @@ class PullUploadRequest extends  AbstractModel {
          */
         this.SubAppId = null;
 
+        /**
+         * 来源上下文，用于透传用户请求信息，[上传完成回调](/document/product/266/7830) 将返回该字段值，最长 250 个字符。
+         * @type {string || null}
+         */
+        this.SourceContext = null;
+
     }
 
     /**
@@ -15131,6 +15137,7 @@ class PullUploadRequest extends  AbstractModel {
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.SourceContext = 'SourceContext' in params ? params.SourceContext : null;
 
     }
 }

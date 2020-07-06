@@ -128,6 +128,30 @@ class EvaluationRequest extends  AbstractModel {
          */
         this.IsAsync = null;
 
+        /**
+         * 是否展开耦合算式中的竖式计算
+         * @type {boolean || null}
+         */
+        this.EnableDispRelatedVertical = null;
+
+        /**
+         * 是否展示竖式算式的中间结果和格式控制字符
+         * @type {boolean || null}
+         */
+        this.EnableDispMidresult = null;
+
+        /**
+         * 是否开启pdf识别，默认开启
+         * @type {boolean || null}
+         */
+        this.EnablePdfRecognize = null;
+
+        /**
+         * pdf页码，从0开始，默认为0
+         * @type {number || null}
+         */
+        this.PdfPageIndex = null;
+
     }
 
     /**
@@ -144,6 +168,10 @@ class EvaluationRequest extends  AbstractModel {
         this.SupportHorizontalImage = 'SupportHorizontalImage' in params ? params.SupportHorizontalImage : null;
         this.RejectNonArithmeticImage = 'RejectNonArithmeticImage' in params ? params.RejectNonArithmeticImage : null;
         this.IsAsync = 'IsAsync' in params ? params.IsAsync : null;
+        this.EnableDispRelatedVertical = 'EnableDispRelatedVertical' in params ? params.EnableDispRelatedVertical : null;
+        this.EnableDispMidresult = 'EnableDispMidresult' in params ? params.EnableDispMidresult : null;
+        this.EnablePdfRecognize = 'EnablePdfRecognize' in params ? params.EnablePdfRecognize : null;
+        this.PdfPageIndex = 'PdfPageIndex' in params ? params.PdfPageIndex : null;
 
     }
 }
