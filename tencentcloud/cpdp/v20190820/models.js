@@ -12527,6 +12527,12 @@ development: 开发环境
          */
         this.CommissionAmount = null;
 
+        /**
+         * 提现单号，长度32字节
+         * @type {string || null}
+         */
+        this.WithdrawOrderId = null;
+
     }
 
     /**
@@ -12551,6 +12557,7 @@ development: 开发环境
         this.EncryptType = 'EncryptType' in params ? params.EncryptType : null;
         this.MidasEnvironment = 'MidasEnvironment' in params ? params.MidasEnvironment : null;
         this.CommissionAmount = 'CommissionAmount' in params ? params.CommissionAmount : null;
+        this.WithdrawOrderId = 'WithdrawOrderId' in params ? params.WithdrawOrderId : null;
 
     }
 }

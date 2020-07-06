@@ -188,6 +188,43 @@ off：关闭
 }
 
 /**
+ * 是否回源站校验
+ * @class
+ */
+class Revalidate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * on | off 是否总是回源校验
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 只在特定请求路径回源站校验
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Path = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Path = 'Path' in params ? params.Path : null;
+
+    }
+}
+
+/**
  * 查询对象及其对应的访问明细数据
  * @class
  */
@@ -1172,30 +1209,30 @@ default 时填充 "no max-age"
 }
 
 /**
- * DescribeIpStatus返回参数结构体
+ * EnableClsLogTopic请求参数结构体
  * @class
  */
-class DescribeIpStatusResponse extends  AbstractModel {
+class EnableClsLogTopicRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 节点列表
-         * @type {Array.<IpStatus> || null}
-         */
-        this.Ips = null;
-
-        /**
-         * 节点总个数
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 日志集ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.LogsetId = null;
+
+        /**
+         * 日志主题ID
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+        /**
+         * 接入渠道，默认值为cdn
+         * @type {string || null}
+         */
+        this.Channel = null;
 
     }
 
@@ -1206,17 +1243,9 @@ class DescribeIpStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Ips) {
-            this.Ips = new Array();
-            for (let z in params.Ips) {
-                let obj = new IpStatus();
-                obj.deserialize(params.Ips[z]);
-                this.Ips.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
 
     }
 }
@@ -1908,6 +1937,53 @@ ip：IP 列表作为源站
 }
 
 /**
+ * 排序类型数据结构
+ * @class
+ */
+class TopData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源名称，根据查询条件不同分为以下几类：
+具体域名：表示该域名明细数据
+multiDomains：表示多域名汇总明细数据
+项目 ID：指定项目查询时，显示为项目 ID
+all：账号维度明细数据
+         * @type {string || null}
+         */
+        this.Resource = null;
+
+        /**
+         * 排序结果详情
+         * @type {Array.<TopDetailData> || null}
+         */
+        this.DetailData = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Resource = 'Resource' in params ? params.Resource : null;
+
+        if (params.DetailData) {
+            this.DetailData = new Array();
+            for (let z in params.DetailData) {
+                let obj = new TopDetailData();
+                obj.deserialize(params.DetailData[z]);
+                this.DetailData.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * EnableCaches请求参数结构体
  * @class
  */
@@ -1980,6 +2056,43 @@ class Quota extends  AbstractModel {
         this.Total = 'Total' in params ? params.Total : null;
         this.Available = 'Available' in params ? params.Available : null;
         this.Area = 'Area' in params ? params.Area : null;
+
+    }
+}
+
+/**
+ * 组成CacheKey
+ * @class
+ */
+class HeaderKey extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否组成Cachekey
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 组成CacheKey的header数组，';' 分割
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -2139,6 +2252,13 @@ off：关闭
          */
         this.CompareMaxAge = null;
 
+        /**
+         * 总是回源站校验
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Revalidate || null}
+         */
+        this.Revalidate = null;
+
     }
 
     /**
@@ -2161,6 +2281,12 @@ off：关闭
         this.IgnoreCacheControl = 'IgnoreCacheControl' in params ? params.IgnoreCacheControl : null;
         this.IgnoreSetCookie = 'IgnoreSetCookie' in params ? params.IgnoreSetCookie : null;
         this.CompareMaxAge = 'CompareMaxAge' in params ? params.CompareMaxAge : null;
+
+        if (params.Revalidate) {
+            let obj = new Revalidate();
+            obj.deserialize(params.Revalidate)
+            this.Revalidate = obj;
+        }
 
     }
 }
@@ -4854,6 +4980,61 @@ class ServerCert extends  AbstractModel {
 }
 
 /**
+ * 访问控制规则
+ * @class
+ */
+class AccessControlRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * requestHeader ：对请求头部进行访问控制
+url ： 对访问url进行访问控制
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * 封禁内容
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RuleContent = null;
+
+        /**
+         * on ：正则匹配
+off ：字面匹配
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Regex = null;
+
+        /**
+         * RuleType为requestHeader时必填，否则不需要填
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RuleHeader = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.RuleContent = 'RuleContent' in params ? params.RuleContent : null;
+        this.Regex = 'Regex' in params ? params.Regex : null;
+        this.RuleHeader = 'RuleHeader' in params ? params.RuleHeader : null;
+
+    }
+}
+
+/**
  * Http 头部设置规则，最多可设置 100 条
  * @class
  */
@@ -5441,6 +5622,13 @@ global：全球锁定
          */
         this.UserAgentFilter = null;
 
+        /**
+         * 访问控制
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {AccessControl || null}
+         */
+        this.AccessControl = null;
+
     }
 
     /**
@@ -5647,6 +5835,12 @@ global：全球锁定
             let obj = new UserAgentFilter();
             obj.deserialize(params.UserAgentFilter)
             this.UserAgentFilter = obj;
+        }
+
+        if (params.AccessControl) {
+            let obj = new AccessControl();
+            obj.deserialize(params.AccessControl)
+            this.AccessControl = obj;
         }
 
     }
@@ -7657,6 +7851,35 @@ class DisableCachesResponse extends  AbstractModel {
 }
 
 /**
+ * 作为CacheKey的一部分
+ * @class
+ */
+class SchemeKey extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * on | off 是否使用scheme作为cache key的一部分
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
  * DescribeImageConfig请求参数结构体
  * @class
  */
@@ -7782,30 +8005,30 @@ day：天粒度
 }
 
 /**
- * EnableClsLogTopic请求参数结构体
+ * DescribeIpStatus返回参数结构体
  * @class
  */
-class EnableClsLogTopicRequest extends  AbstractModel {
+class DescribeIpStatusResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 日志集ID
-         * @type {string || null}
+         * 节点列表
+         * @type {Array.<IpStatus> || null}
          */
-        this.LogsetId = null;
+        this.Ips = null;
 
         /**
-         * 日志主题ID
-         * @type {string || null}
+         * 节点总个数
+         * @type {number || null}
          */
-        this.TopicId = null;
+        this.TotalCount = null;
 
         /**
-         * 接入渠道，默认值为cdn
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Channel = null;
+        this.RequestId = null;
 
     }
 
@@ -7816,9 +8039,69 @@ class EnableClsLogTopicRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
-        this.TopicId = 'TopicId' in params ? params.TopicId : null;
-        this.Channel = 'Channel' in params ? params.Channel : null;
+
+        if (params.Ips) {
+            this.Ips = new Array();
+            for (let z in params.Ips) {
+                let obj = new IpStatus();
+                obj.deserialize(params.Ips[z]);
+                this.Ips.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 请求头部及请求url访问控制
+ * @class
+ */
+class AccessControl extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * on | off 是否启用请求头部及请求url访问控制
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 请求头部及请求url访问规则
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<AccessControlRule> || null}
+         */
+        this.AccessControlRules = null;
+
+        /**
+         * 返回状态码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ReturnCode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.AccessControlRules) {
+            this.AccessControlRules = new Array();
+            for (let z in params.AccessControlRules) {
+                let obj = new AccessControlRule();
+                obj.deserialize(params.AccessControlRules[z]);
+                this.AccessControlRules.push(obj);
+            }
+        }
+        this.ReturnCode = 'ReturnCode' in params ? params.ReturnCode : null;
 
     }
 }
@@ -7846,6 +8129,41 @@ off：关闭全路径缓存（即开启参数过滤）
          */
         this.IgnoreCase = null;
 
+        /**
+         * CacheKey中包含请求参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {QueryStringKey || null}
+         */
+        this.QueryString = null;
+
+        /**
+         * CacheKey中包含Cookie
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {CookieKey || null}
+         */
+        this.Cookie = null;
+
+        /**
+         * CacheKey中包含请求头部
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {HeaderKey || null}
+         */
+        this.Header = null;
+
+        /**
+         * CacheKey中包含自定义字符串
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {CacheTagKey || null}
+         */
+        this.CacheTag = null;
+
+        /**
+         * CacheKey中包含请求协议
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {SchemeKey || null}
+         */
+        this.Scheme = null;
+
     }
 
     /**
@@ -7858,32 +8176,60 @@ off：关闭全路径缓存（即开启参数过滤）
         this.FullUrlCache = 'FullUrlCache' in params ? params.FullUrlCache : null;
         this.IgnoreCase = 'IgnoreCase' in params ? params.IgnoreCase : null;
 
+        if (params.QueryString) {
+            let obj = new QueryStringKey();
+            obj.deserialize(params.QueryString)
+            this.QueryString = obj;
+        }
+
+        if (params.Cookie) {
+            let obj = new CookieKey();
+            obj.deserialize(params.Cookie)
+            this.Cookie = obj;
+        }
+
+        if (params.Header) {
+            let obj = new HeaderKey();
+            obj.deserialize(params.Header)
+            this.Header = obj;
+        }
+
+        if (params.CacheTag) {
+            let obj = new CacheTagKey();
+            obj.deserialize(params.CacheTag)
+            this.CacheTag = obj;
+        }
+
+        if (params.Scheme) {
+            let obj = new SchemeKey();
+            obj.deserialize(params.Scheme)
+            this.Scheme = obj;
+        }
+
     }
 }
 
 /**
- * 排序类型数据结构
+ * 组成CacheKey的一部分
  * @class
  */
-class TopData extends  AbstractModel {
+class CookieKey extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 资源名称，根据查询条件不同分为以下几类：
-具体域名：表示该域名明细数据
-multiDomains：表示多域名汇总明细数据
-项目 ID：指定项目查询时，显示为项目 ID
-all：账号维度明细数据
+         * on | off 是否使用Cookie作为Cache的一部分
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Resource = null;
+        this.Switch = null;
 
         /**
-         * 排序结果详情
-         * @type {Array.<TopDetailData> || null}
+         * 使用的cookie，';' 分割
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
          */
-        this.DetailData = null;
+        this.Value = null;
 
     }
 
@@ -7894,16 +8240,8 @@ all：账号维度明细数据
         if (!params) {
             return;
         }
-        this.Resource = 'Resource' in params ? params.Resource : null;
-
-        if (params.DetailData) {
-            this.DetailData = new Array();
-            for (let z in params.DetailData) {
-                let obj = new TopDetailData();
-                obj.deserialize(params.DetailData[z]);
-                this.DetailData.push(obj);
-            }
-        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -8770,6 +9108,59 @@ class StopCdnDomainResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 组成CacheKey的一部分
+ * @class
+ */
+class QueryStringKey extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * on | off CacheKey是否由QueryString组成
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 是否重新排序
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Reorder = null;
+
+        /**
+         * includeAll | excludeAll | includeCustom | excludeAll 使用/排除部分url参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Action = null;
+
+        /**
+         * 使用/排除的url参数数组，';' 分割
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Reorder = 'Reorder' in params ? params.Reorder : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -10321,6 +10712,43 @@ class DescribeImageConfigResponse extends  AbstractModel {
 }
 
 /**
+ * 组成CacheKey的一部分
+ * @class
+ */
+class CacheTagKey extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否使用CacheTag作为CacheKey的一部分
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 自定义CacheTag的值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * DescribeDomains请求参数结构体
  * @class
  */
@@ -10374,6 +10802,7 @@ module.exports = {
     DescribeCdnDomainLogsResponse: DescribeCdnDomainLogsResponse,
     DescribeCdnDomainLogsRequest: DescribeCdnDomainLogsRequest,
     Compression: Compression,
+    Revalidate: Revalidate,
     ResourceData: ResourceData,
     UrlRecord: UrlRecord,
     DescribePushQuotaResponse: DescribePushQuotaResponse,
@@ -10393,7 +10822,7 @@ module.exports = {
     Referer: Referer,
     UserAgentFilter: UserAgentFilter,
     AdvanceCacheRule: AdvanceCacheRule,
-    DescribeIpStatusResponse: DescribeIpStatusResponse,
+    EnableClsLogTopicRequest: EnableClsLogTopicRequest,
     UpdateImageConfigResponse: UpdateImageConfigResponse,
     DeleteCdnDomainRequest: DeleteCdnDomainRequest,
     DescribePayTypeResponse: DescribePayTypeResponse,
@@ -10405,8 +10834,10 @@ module.exports = {
     CompressionRule: CompressionRule,
     GuetzliAdapter: GuetzliAdapter,
     Origin: Origin,
+    TopData: TopData,
     EnableCachesRequest: EnableCachesRequest,
     Quota: Quota,
+    HeaderKey: HeaderKey,
     DescribeBillingDataRequest: DescribeBillingDataRequest,
     SimpleCache: SimpleCache,
     DeleteClsLogTopicRequest: DeleteClsLogTopicRequest,
@@ -10450,6 +10881,7 @@ module.exports = {
     AddCdnDomainResponse: AddCdnDomainResponse,
     DownstreamCapping: DownstreamCapping,
     ServerCert: ServerCert,
+    AccessControlRule: AccessControlRule,
     HttpHeaderPathRule: HttpHeaderPathRule,
     DisableCachesRequest: DisableCachesRequest,
     SimpleCacheRule: SimpleCacheRule,
@@ -10491,12 +10923,14 @@ module.exports = {
     DeleteClsLogTopicResponse: DeleteClsLogTopicResponse,
     DescribeBillingDataResponse: DescribeBillingDataResponse,
     DisableCachesResponse: DisableCachesResponse,
+    SchemeKey: SchemeKey,
     DescribeImageConfigRequest: DescribeImageConfigRequest,
     DescribeCdnIpResponse: DescribeCdnIpResponse,
     DescribeCdnDataResponse: DescribeCdnDataResponse,
-    EnableClsLogTopicRequest: EnableClsLogTopicRequest,
+    DescribeIpStatusResponse: DescribeIpStatusResponse,
+    AccessControl: AccessControl,
     CacheKey: CacheKey,
-    TopData: TopData,
+    CookieKey: CookieKey,
     CappingRule: CappingRule,
     ListClsLogTopicsRequest: ListClsLogTopicsRequest,
     Seo: Seo,
@@ -10517,6 +10951,7 @@ module.exports = {
     DescribePurgeTasksRequest: DescribePurgeTasksRequest,
     PushUrlsCacheResponse: PushUrlsCacheResponse,
     StopCdnDomainResponse: StopCdnDomainResponse,
+    QueryStringKey: QueryStringKey,
     ListTopDataResponse: ListTopDataResponse,
     MaxAge: MaxAge,
     UpdateDomainConfigResponse: UpdateDomainConfigResponse,
@@ -10540,6 +10975,7 @@ module.exports = {
     CdnIp: CdnIp,
     DescribeCdnDataRequest: DescribeCdnDataRequest,
     DescribeImageConfigResponse: DescribeImageConfigResponse,
+    CacheTagKey: CacheTagKey,
     DescribeDomainsRequest: DescribeDomainsRequest,
 
 }

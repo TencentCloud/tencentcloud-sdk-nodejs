@@ -64,7 +64,7 @@ class TiwClient extends AbstractClient {
     }
     
     /**
-     * 设置实时录制回调地址
+     * 设置实时录制回调地址，回调数据格式请参考文档：https://cloud.tencent.com/document/product/1137/40258
      * @param {SetOnlineRecordCallbackRequest} req
      * @param {function(string, SetOnlineRecordCallbackResponse):void} cb
      * @public
@@ -75,7 +75,7 @@ class TiwClient extends AbstractClient {
     }
 
     /**
-     * 设置文档转码回调鉴权密钥
+     * 设置文档转码回调鉴权密钥，回调鉴权方式请参考文档：https://cloud.tencent.com/document/product/1137/40257
      * @param {SetTranscodeCallbackKeyRequest} req
      * @param {function(string, SetTranscodeCallbackKeyResponse):void} cb
      * @public
@@ -119,7 +119,7 @@ class TiwClient extends AbstractClient {
     }
 
     /**
-     * 设置文档转码回调地址
+     * 设置文档转码回调地址，回调数据格式请参考文档：https://cloud.tencent.com/document/product/1137/40260
      * @param {SetTranscodeCallbackRequest} req
      * @param {function(string, SetTranscodeCallbackResponse):void} cb
      * @public
@@ -141,7 +141,7 @@ class TiwClient extends AbstractClient {
     }
 
     /**
-     * 设置实时录制回调鉴权密钥
+     * 设置实时录制回调鉴权密钥，回调鉴权方式请参考文档：https://cloud.tencent.com/document/product/1137/40257
      * @param {SetOnlineRecordCallbackKeyRequest} req
      * @param {function(string, SetOnlineRecordCallbackKeyResponse):void} cb
      * @public

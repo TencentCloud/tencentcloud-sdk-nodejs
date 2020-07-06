@@ -97,7 +97,7 @@ class BdaClient extends AbstractClient {
     }
 
     /**
-     * 检测给定图片中的人体（Body）的位置信息（属性信息将在后续开放）。
+     * 检测给定图片中的人体（Body）的位置信息及属性信息。
 
      * @param {DetectBodyRequest} req
      * @param {function(string, DetectBodyResponse):void} cb
