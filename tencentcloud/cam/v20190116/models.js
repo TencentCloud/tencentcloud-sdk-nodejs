@@ -2642,7 +2642,7 @@ class AttachPolicyInfo extends  AbstractModel {
         this.Remark = null;
 
         /**
-         * 策略关联操作者主张号
+         * 策略关联操作者主帐号
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */

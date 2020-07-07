@@ -670,42 +670,30 @@ class DescribeBackupConfigRequest extends  AbstractModel {
 }
 
 /**
- * 只读vip信息
+ * DescribeRoMinScale返回参数结构体
  * @class
  */
-class RoVipInfo extends  AbstractModel {
+class DescribeRoMinScaleResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 只读vip状态
+         * 内存规格大小, 单位为：MB。
          * @type {number || null}
          */
-        this.RoVipStatus = null;
+        this.Memory = null;
 
         /**
-         * 只读vip的子网
+         * 磁盘规格大小, 单位为：GB。
          * @type {number || null}
          */
-        this.RoSubnetId = null;
+        this.Volume = null;
 
         /**
-         * 只读vip的私有网络
-         * @type {number || null}
-         */
-        this.RoVpcId = null;
-
-        /**
-         * 只读vip的端口号
-         * @type {number || null}
-         */
-        this.RoVport = null;
-
-        /**
-         * 只读vip
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.RoVip = null;
+        this.RequestId = null;
 
     }
 
@@ -716,11 +704,9 @@ class RoVipInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RoVipStatus = 'RoVipStatus' in params ? params.RoVipStatus : null;
-        this.RoSubnetId = 'RoSubnetId' in params ? params.RoSubnetId : null;
-        this.RoVpcId = 'RoVpcId' in params ? params.RoVpcId : null;
-        this.RoVport = 'RoVport' in params ? params.RoVport : null;
-        this.RoVip = 'RoVip' in params ? params.RoVip : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1995,6 +1981,41 @@ class ParamInfo extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * DescribeRoMinScale请求参数结构体
+ * @class
+ */
+class DescribeRoMinScaleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 只读实例ID，格式如：cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同，该参数与MasterInstanceId参数不能同时为空。
+         * @type {string || null}
+         */
+        this.RoInstanceId = null;
+
+        /**
+         * 主实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同，该参数与RoInstanceId参数不能同时为空。注意，当传入参数包含RoInstanceId时，返回值为只读实例升级时的最小规格；当传入参数只包含MasterInstanceId时，返回值为只读实例购买时的最小规格。
+         * @type {string || null}
+         */
+        this.MasterInstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoInstanceId = 'RoInstanceId' in params ? params.RoInstanceId : null;
+        this.MasterInstanceId = 'MasterInstanceId' in params ? params.MasterInstanceId : null;
 
     }
 }
@@ -8983,6 +9004,62 @@ class ModifyAuditConfigResponse extends  AbstractModel {
 }
 
 /**
+ * 只读vip信息
+ * @class
+ */
+class RoVipInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 只读vip状态
+         * @type {number || null}
+         */
+        this.RoVipStatus = null;
+
+        /**
+         * 只读vip的子网
+         * @type {number || null}
+         */
+        this.RoSubnetId = null;
+
+        /**
+         * 只读vip的私有网络
+         * @type {number || null}
+         */
+        this.RoVpcId = null;
+
+        /**
+         * 只读vip的端口号
+         * @type {number || null}
+         */
+        this.RoVport = null;
+
+        /**
+         * 只读vip
+         * @type {string || null}
+         */
+        this.RoVip = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoVipStatus = 'RoVipStatus' in params ? params.RoVipStatus : null;
+        this.RoSubnetId = 'RoSubnetId' in params ? params.RoSubnetId : null;
+        this.RoVpcId = 'RoVpcId' in params ? params.RoVpcId : null;
+        this.RoVport = 'RoVport' in params ? params.RoVport : null;
+        this.RoVip = 'RoVip' in params ? params.RoVip : null;
+
+    }
+}
+
+/**
  * ModifyDBInstanceName返回参数结构体
  * @class
  */
@@ -13880,7 +13957,7 @@ module.exports = {
     CreateDBImportJobRequest: CreateDBImportJobRequest,
     DescribeDatabasesRequest: DescribeDatabasesRequest,
     DescribeBackupConfigRequest: DescribeBackupConfigRequest,
-    RoVipInfo: RoVipInfo,
+    DescribeRoMinScaleResponse: DescribeRoMinScaleResponse,
     CreateAuditRuleResponse: CreateAuditRuleResponse,
     StopDBImportJobRequest: StopDBImportJobRequest,
     RoWeightValue: RoWeightValue,
@@ -13906,6 +13983,7 @@ module.exports = {
     DeleteAuditRuleRequest: DeleteAuditRuleRequest,
     DeleteParamTemplateResponse: DeleteParamTemplateResponse,
     ParamInfo: ParamInfo,
+    DescribeRoMinScaleRequest: DescribeRoMinScaleRequest,
     DescribeDefaultParamsRequest: DescribeDefaultParamsRequest,
     DBSwitchInfo: DBSwitchInfo,
     ModifyNameOrDescByDpIdResponse: ModifyNameOrDescByDpIdResponse,
@@ -14054,6 +14132,7 @@ module.exports = {
     DatabasePrivilege: DatabasePrivilege,
     RoGroupAttr: RoGroupAttr,
     ModifyAuditConfigResponse: ModifyAuditConfigResponse,
+    RoVipInfo: RoVipInfo,
     ModifyDBInstanceNameResponse: ModifyDBInstanceNameResponse,
     ModifyAccountDescriptionRequest: ModifyAccountDescriptionRequest,
     ModifyAccountPasswordRequest: ModifyAccountPasswordRequest,

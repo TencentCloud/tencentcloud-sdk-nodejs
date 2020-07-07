@@ -802,7 +802,7 @@ class GetLoRaGatewayListResponse extends  AbstractModel {
  * 项目详情
  * @class
  */
-class ProjectEntryEx extends  AbstractModel {
+class ProjectEntry extends  AbstractModel {
     constructor(){
         super();
 
@@ -825,34 +825,16 @@ class ProjectEntryEx extends  AbstractModel {
         this.ProjectDesc = null;
 
         /**
-         * 项目创建时间，unix时间戳
+         * 创建时间，unix时间戳
          * @type {number || null}
          */
         this.CreateTime = null;
 
         /**
-         * 项目更新时间，unix时间戳
+         * 更新时间，unix时间戳
          * @type {number || null}
          */
         this.UpdateTime = null;
-
-        /**
-         * 产品数量
-         * @type {number || null}
-         */
-        this.ProductCount = null;
-
-        /**
-         * NativeApp数量
-         * @type {number || null}
-         */
-        this.NativeAppCount = null;
-
-        /**
-         * WebApp数量
-         * @type {number || null}
-         */
-        this.WebAppCount = null;
 
     }
 
@@ -868,9 +850,6 @@ class ProjectEntryEx extends  AbstractModel {
         this.ProjectDesc = 'ProjectDesc' in params ? params.ProjectDesc : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.ProductCount = 'ProductCount' in params ? params.ProductCount : null;
-        this.NativeAppCount = 'NativeAppCount' in params ? params.NativeAppCount : null;
-        this.WebAppCount = 'WebAppCount' in params ? params.WebAppCount : null;
 
     }
 }
@@ -1282,42 +1261,24 @@ class ReleaseStudioProductResponse extends  AbstractModel {
 }
 
 /**
- * 项目详情
+ * DescribeStudioProduct返回参数结构体
  * @class
  */
-class ProjectEntry extends  AbstractModel {
+class DescribeStudioProductResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 项目ID
+         * 产品详情
+         * @type {ProductEntry || null}
+         */
+        this.Product = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.ProjectId = null;
-
-        /**
-         * 项目名称
-         * @type {string || null}
-         */
-        this.ProjectName = null;
-
-        /**
-         * 项目描述
-         * @type {string || null}
-         */
-        this.ProjectDesc = null;
-
-        /**
-         * 创建时间，unix时间戳
-         * @type {number || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * 更新时间，unix时间戳
-         * @type {number || null}
-         */
-        this.UpdateTime = null;
+        this.RequestId = null;
 
     }
 
@@ -1328,11 +1289,41 @@ class ProjectEntry extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
-        this.ProjectDesc = 'ProjectDesc' in params ? params.ProjectDesc : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+        if (params.Product) {
+            let obj = new ProductEntry();
+            obj.deserialize(params.Product)
+            this.Product = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteLoRaGateway请求参数结构体
+ * @class
+ */
+class DeleteLoRaGatewayRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * LoRa 网关 Id
+         * @type {string || null}
+         */
+        this.GatewayId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GatewayId = 'GatewayId' in params ? params.GatewayId : null;
 
     }
 }
@@ -1616,6 +1607,46 @@ class ModifyProjectRequest extends  AbstractModel {
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
         this.ProjectDesc = 'ProjectDesc' in params ? params.ProjectDesc : null;
+
+    }
+}
+
+/**
+ * ModifyLoRaGateway返回参数结构体
+ * @class
+ */
+class ModifyLoRaGatewayResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回网关数据
+         * @type {LoRaGatewayItem || null}
+         */
+        this.Gateway = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Gateway) {
+            let obj = new LoRaGatewayItem();
+            obj.deserialize(params.Gateway)
+            this.Gateway = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2226,6 +2257,83 @@ class CallDeviceActionAsyncRequest extends  AbstractModel {
 }
 
 /**
+ * 项目详情
+ * @class
+ */
+class ProjectEntryEx extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 项目ID
+         * @type {string || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 项目名称
+         * @type {string || null}
+         */
+        this.ProjectName = null;
+
+        /**
+         * 项目描述
+         * @type {string || null}
+         */
+        this.ProjectDesc = null;
+
+        /**
+         * 项目创建时间，unix时间戳
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 项目更新时间，unix时间戳
+         * @type {number || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 产品数量
+         * @type {number || null}
+         */
+        this.ProductCount = null;
+
+        /**
+         * NativeApp数量
+         * @type {number || null}
+         */
+        this.NativeAppCount = null;
+
+        /**
+         * WebApp数量
+         * @type {number || null}
+         */
+        this.WebAppCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
+        this.ProjectDesc = 'ProjectDesc' in params ? params.ProjectDesc : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.ProductCount = 'ProductCount' in params ? params.ProductCount : null;
+        this.NativeAppCount = 'NativeAppCount' in params ? params.NativeAppCount : null;
+        this.WebAppCount = 'WebAppCount' in params ? params.WebAppCount : null;
+
+    }
+}
+
+/**
  * DescribeDeviceData返回参数结构体
  * @class
  */
@@ -2815,18 +2923,87 @@ class GetDeviceListRequest extends  AbstractModel {
 }
 
 /**
- * DescribeStudioProduct返回参数结构体
+ * ModifyLoRaGateway请求参数结构体
  * @class
  */
-class DescribeStudioProductResponse extends  AbstractModel {
+class ModifyLoRaGatewayRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 产品详情
-         * @type {ProductEntry || null}
+         * 描述信息
+         * @type {string || null}
          */
-        this.Product = null;
+        this.Description = null;
+
+        /**
+         * LoRa网关Id
+         * @type {string || null}
+         */
+        this.GatewayId = null;
+
+        /**
+         * LoRa网关位置坐标
+         * @type {LoRaGatewayLocation || null}
+         */
+        this.Location = null;
+
+        /**
+         * LoRa网关名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 是否公开可见
+         * @type {boolean || null}
+         */
+        this.IsPublic = null;
+
+        /**
+         * 位置信息
+         * @type {string || null}
+         */
+        this.Position = null;
+
+        /**
+         * 位置详情
+         * @type {string || null}
+         */
+        this.PositionDetails = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Description = 'Description' in params ? params.Description : null;
+        this.GatewayId = 'GatewayId' in params ? params.GatewayId : null;
+
+        if (params.Location) {
+            let obj = new LoRaGatewayLocation();
+            obj.deserialize(params.Location)
+            this.Location = obj;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.IsPublic = 'IsPublic' in params ? params.IsPublic : null;
+        this.Position = 'Position' in params ? params.Position : null;
+        this.PositionDetails = 'PositionDetails' in params ? params.PositionDetails : null;
+
+    }
+}
+
+/**
+ * DeleteLoRaGateway返回参数结构体
+ * @class
+ */
+class DeleteLoRaGatewayResponse extends  AbstractModel {
+    constructor(){
+        super();
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2842,12 +3019,6 @@ class DescribeStudioProductResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
-        }
-
-        if (params.Product) {
-            let obj = new ProductEntry();
-            obj.deserialize(params.Product)
-            this.Product = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -3093,7 +3264,7 @@ module.exports = {
     DescribeModelDefinitionResponse: DescribeModelDefinitionResponse,
     ModifyModelDefinitionResponse: ModifyModelDefinitionResponse,
     GetLoRaGatewayListResponse: GetLoRaGatewayListResponse,
-    ProjectEntryEx: ProjectEntryEx,
+    ProjectEntry: ProjectEntry,
     GetProjectListRequest: GetProjectListRequest,
     DeleteStudioProductResponse: DeleteStudioProductResponse,
     EventHistoryItem: EventHistoryItem,
@@ -3103,7 +3274,8 @@ module.exports = {
     ControlDeviceDataRequest: ControlDeviceDataRequest,
     SearchStudioProductRequest: SearchStudioProductRequest,
     ReleaseStudioProductResponse: ReleaseStudioProductResponse,
-    ProjectEntry: ProjectEntry,
+    DescribeStudioProductResponse: DescribeStudioProductResponse,
+    DeleteLoRaGatewayRequest: DeleteLoRaGatewayRequest,
     ModifyProjectResponse: ModifyProjectResponse,
     ModifyModelDefinitionRequest: ModifyModelDefinitionRequest,
     LoRaGatewayLocation: LoRaGatewayLocation,
@@ -3111,6 +3283,7 @@ module.exports = {
     CallDeviceActionSyncRequest: CallDeviceActionSyncRequest,
     DeleteStudioProductRequest: DeleteStudioProductRequest,
     ModifyProjectRequest: ModifyProjectRequest,
+    ModifyLoRaGatewayResponse: ModifyLoRaGatewayResponse,
     CallDeviceActionSyncResponse: CallDeviceActionSyncResponse,
     CreateLoRaGatewayRequest: CreateLoRaGatewayRequest,
     ModifyStudioProductRequest: ModifyStudioProductRequest,
@@ -3123,6 +3296,7 @@ module.exports = {
     DeleteProjectResponse: DeleteProjectResponse,
     CallDeviceActionAsyncResponse: CallDeviceActionAsyncResponse,
     CallDeviceActionAsyncRequest: CallDeviceActionAsyncRequest,
+    ProjectEntryEx: ProjectEntryEx,
     DescribeDeviceDataResponse: DescribeDeviceDataResponse,
     CreateDeviceResponse: CreateDeviceResponse,
     GetLoRaGatewayListRequest: GetLoRaGatewayListRequest,
@@ -3135,7 +3309,8 @@ module.exports = {
     CreateLoRaGatewayResponse: CreateLoRaGatewayResponse,
     DescribeDeviceRequest: DescribeDeviceRequest,
     GetDeviceListRequest: GetDeviceListRequest,
-    DescribeStudioProductResponse: DescribeStudioProductResponse,
+    ModifyLoRaGatewayRequest: ModifyLoRaGatewayRequest,
+    DeleteLoRaGatewayResponse: DeleteLoRaGatewayResponse,
     LoRaGatewayItem: LoRaGatewayItem,
     DescribeDeviceResponse: DescribeDeviceResponse,
     GetProjectListResponse: GetProjectListResponse,

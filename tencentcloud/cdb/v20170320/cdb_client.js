@@ -24,7 +24,7 @@ const DescribeAccountPrivilegesResponse = models.DescribeAccountPrivilegesRespon
 const CreateDBImportJobRequest = models.CreateDBImportJobRequest;
 const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
 const DescribeBackupConfigRequest = models.DescribeBackupConfigRequest;
-const RoVipInfo = models.RoVipInfo;
+const DescribeRoMinScaleResponse = models.DescribeRoMinScaleResponse;
 const CreateAuditRuleResponse = models.CreateAuditRuleResponse;
 const StopDBImportJobRequest = models.StopDBImportJobRequest;
 const RoWeightValue = models.RoWeightValue;
@@ -50,6 +50,7 @@ const MasterInfo = models.MasterInfo;
 const DeleteAuditRuleRequest = models.DeleteAuditRuleRequest;
 const DeleteParamTemplateResponse = models.DeleteParamTemplateResponse;
 const ParamInfo = models.ParamInfo;
+const DescribeRoMinScaleRequest = models.DescribeRoMinScaleRequest;
 const DescribeDefaultParamsRequest = models.DescribeDefaultParamsRequest;
 const DBSwitchInfo = models.DBSwitchInfo;
 const ModifyNameOrDescByDpIdResponse = models.ModifyNameOrDescByDpIdResponse;
@@ -198,6 +199,7 @@ const OfflineIsolatedInstancesResponse = models.OfflineIsolatedInstancesResponse
 const DatabasePrivilege = models.DatabasePrivilege;
 const RoGroupAttr = models.RoGroupAttr;
 const ModifyAuditConfigResponse = models.ModifyAuditConfigResponse;
+const RoVipInfo = models.RoVipInfo;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
 const ModifyAccountDescriptionRequest = models.ModifyAccountDescriptionRequest;
 const ModifyAccountPasswordRequest = models.ModifyAccountPasswordRequest;
@@ -1008,6 +1010,17 @@ class CdbClient extends AbstractClient {
     DeleteBackup(req, cb) {
         let resp = new DeleteBackupResponse();
         this.request("DeleteBackup", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeRoMinScale)用于获取只读实例购买、升级时的最小规格。
+     * @param {DescribeRoMinScaleRequest} req
+     * @param {function(string, DescribeRoMinScaleResponse):void} cb
+     * @public
+     */
+    DescribeRoMinScale(req, cb) {
+        let resp = new DescribeRoMinScaleResponse();
+        this.request("DescribeRoMinScale", req, resp, cb);
     }
 
     /**
