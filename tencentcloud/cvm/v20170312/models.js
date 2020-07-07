@@ -6194,6 +6194,24 @@ class InstanceTypeQuotaItem extends  AbstractModel {
          */
         this.CpuType = null;
 
+        /**
+         * 实例的GPU数量。
+         * @type {number || null}
+         */
+        this.Gpu = null;
+
+        /**
+         * 实例的FPGA数量。
+         * @type {number || null}
+         */
+        this.Fpga = null;
+
+        /**
+         * 实例备注信息。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
     }
 
     /**
@@ -6238,6 +6256,9 @@ class InstanceTypeQuotaItem extends  AbstractModel {
         this.InstancePps = 'InstancePps' in params ? params.InstancePps : null;
         this.StorageBlockAmount = 'StorageBlockAmount' in params ? params.StorageBlockAmount : null;
         this.CpuType = 'CpuType' in params ? params.CpuType : null;
+        this.Gpu = 'Gpu' in params ? params.Gpu : null;
+        this.Fpga = 'Fpga' in params ? params.Fpga : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
 
     }
 }

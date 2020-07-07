@@ -31,7 +31,7 @@ const GetStudioProductListResponse = models.GetStudioProductListResponse;
 const DescribeModelDefinitionResponse = models.DescribeModelDefinitionResponse;
 const ModifyModelDefinitionResponse = models.ModifyModelDefinitionResponse;
 const GetLoRaGatewayListResponse = models.GetLoRaGatewayListResponse;
-const ProjectEntryEx = models.ProjectEntryEx;
+const ProjectEntry = models.ProjectEntry;
 const GetProjectListRequest = models.GetProjectListRequest;
 const DeleteStudioProductResponse = models.DeleteStudioProductResponse;
 const EventHistoryItem = models.EventHistoryItem;
@@ -41,7 +41,8 @@ const ModifyStudioProductResponse = models.ModifyStudioProductResponse;
 const ControlDeviceDataRequest = models.ControlDeviceDataRequest;
 const SearchStudioProductRequest = models.SearchStudioProductRequest;
 const ReleaseStudioProductResponse = models.ReleaseStudioProductResponse;
-const ProjectEntry = models.ProjectEntry;
+const DescribeStudioProductResponse = models.DescribeStudioProductResponse;
+const DeleteLoRaGatewayRequest = models.DeleteLoRaGatewayRequest;
 const ModifyProjectResponse = models.ModifyProjectResponse;
 const ModifyModelDefinitionRequest = models.ModifyModelDefinitionRequest;
 const LoRaGatewayLocation = models.LoRaGatewayLocation;
@@ -49,6 +50,7 @@ const CreateStudioProductResponse = models.CreateStudioProductResponse;
 const CallDeviceActionSyncRequest = models.CallDeviceActionSyncRequest;
 const DeleteStudioProductRequest = models.DeleteStudioProductRequest;
 const ModifyProjectRequest = models.ModifyProjectRequest;
+const ModifyLoRaGatewayResponse = models.ModifyLoRaGatewayResponse;
 const CallDeviceActionSyncResponse = models.CallDeviceActionSyncResponse;
 const CreateLoRaGatewayRequest = models.CreateLoRaGatewayRequest;
 const ModifyStudioProductRequest = models.ModifyStudioProductRequest;
@@ -61,6 +63,7 @@ const DescribeModelDefinitionRequest = models.DescribeModelDefinitionRequest;
 const DeleteProjectResponse = models.DeleteProjectResponse;
 const CallDeviceActionAsyncResponse = models.CallDeviceActionAsyncResponse;
 const CallDeviceActionAsyncRequest = models.CallDeviceActionAsyncRequest;
+const ProjectEntryEx = models.ProjectEntryEx;
 const DescribeDeviceDataResponse = models.DescribeDeviceDataResponse;
 const CreateDeviceResponse = models.CreateDeviceResponse;
 const GetLoRaGatewayListRequest = models.GetLoRaGatewayListRequest;
@@ -73,7 +76,8 @@ const DeviceInfo = models.DeviceInfo;
 const CreateLoRaGatewayResponse = models.CreateLoRaGatewayResponse;
 const DescribeDeviceRequest = models.DescribeDeviceRequest;
 const GetDeviceListRequest = models.GetDeviceListRequest;
-const DescribeStudioProductResponse = models.DescribeStudioProductResponse;
+const ModifyLoRaGatewayRequest = models.ModifyLoRaGatewayRequest;
+const DeleteLoRaGatewayResponse = models.DeleteLoRaGatewayResponse;
 const LoRaGatewayItem = models.LoRaGatewayItem;
 const DescribeDeviceResponse = models.DescribeDeviceResponse;
 const GetProjectListResponse = models.GetProjectListResponse;
@@ -124,6 +128,17 @@ class IotexplorerClient extends AbstractClient {
     }
 
     /**
+     * 删除  LoRa 网关的接口
+     * @param {DeleteLoRaGatewayRequest} req
+     * @param {function(string, DeleteLoRaGatewayResponse):void} cb
+     * @public
+     */
+    DeleteLoRaGateway(req, cb) {
+        let resp = new DeleteLoRaGatewayResponse();
+        this.request("DeleteLoRaGateway", req, resp, cb);
+    }
+
+    /**
      * 为用户提供新建产品的能力，用于管理用户的设备
      * @param {CreateStudioProductRequest} req
      * @param {function(string, CreateStudioProductResponse):void} cb
@@ -154,6 +169,17 @@ class IotexplorerClient extends AbstractClient {
     CreateLoRaGateway(req, cb) {
         let resp = new CreateLoRaGatewayResponse();
         this.request("CreateLoRaGateway", req, resp, cb);
+    }
+
+    /**
+     * 修改 LoRa 网关信息
+     * @param {ModifyLoRaGatewayRequest} req
+     * @param {function(string, ModifyLoRaGatewayResponse):void} cb
+     * @public
+     */
+    ModifyLoRaGateway(req, cb) {
+        let resp = new ModifyLoRaGatewayResponse();
+        this.request("ModifyLoRaGateway", req, resp, cb);
     }
 
     /**

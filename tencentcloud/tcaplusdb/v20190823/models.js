@@ -1648,6 +1648,13 @@ class ClusterInfo extends  AbstractModel {
          */
         this.OldPasswordExpireTime = null;
 
+        /**
+         * TcaplusDB SDK连接参数，接入ipv6地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApiAccessIpv6 = null;
+
     }
 
     /**
@@ -1671,6 +1678,7 @@ class ClusterInfo extends  AbstractModel {
         this.ApiAccessIp = 'ApiAccessIp' in params ? params.ApiAccessIp : null;
         this.ApiAccessPort = 'ApiAccessPort' in params ? params.ApiAccessPort : null;
         this.OldPasswordExpireTime = 'OldPasswordExpireTime' in params ? params.OldPasswordExpireTime : null;
+        this.ApiAccessIpv6 = 'ApiAccessIpv6' in params ? params.ApiAccessIpv6 : null;
 
     }
 }
@@ -2899,6 +2907,12 @@ class DescribeClustersRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * 是否启用Ipv6
+         * @type {number || null}
+         */
+        this.Ipv6Enable = null;
+
     }
 
     /**
@@ -2920,6 +2934,7 @@ class DescribeClustersRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Ipv6Enable = 'Ipv6Enable' in params ? params.Ipv6Enable : null;
 
     }
 }
@@ -4214,6 +4229,12 @@ class CreateClusterRequest extends  AbstractModel {
          */
         this.ResourceTags = null;
 
+        /**
+         * 集群是否开启IPv6功能
+         * @type {number || null}
+         */
+        this.Ipv6Enable = null;
+
     }
 
     /**
@@ -4237,6 +4258,7 @@ class CreateClusterRequest extends  AbstractModel {
                 this.ResourceTags.push(obj);
             }
         }
+        this.Ipv6Enable = 'Ipv6Enable' in params ? params.Ipv6Enable : null;
 
     }
 }
@@ -4458,6 +4480,12 @@ class RegionInfo extends  AbstractModel {
          */
         this.RegionId = null;
 
+        /**
+         * 是否支持ipv6，0:不支持，1:支持
+         * @type {number || null}
+         */
+        this.Ipv6Enable = null;
+
     }
 
     /**
@@ -4470,6 +4498,7 @@ class RegionInfo extends  AbstractModel {
         this.RegionName = 'RegionName' in params ? params.RegionName : null;
         this.RegionAbbr = 'RegionAbbr' in params ? params.RegionAbbr : null;
         this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.Ipv6Enable = 'Ipv6Enable' in params ? params.Ipv6Enable : null;
 
     }
 }
