@@ -210,13 +210,13 @@ class TimeValue extends  AbstractModel {
         super();
 
         /**
-         * 时间
+         * 时间，unix时间戳（1590065877s)
          * @type {number || null}
          */
         this.Time = null;
 
         /**
-         * 当前时间取值，unix时间戳
+         * 当前时间返回参数取值，如（bigvCapFps在1590065877取值为0，则Value：0 ）
          * @type {number || null}
          */
         this.Value = null;

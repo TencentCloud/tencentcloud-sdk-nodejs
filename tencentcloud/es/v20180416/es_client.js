@@ -36,12 +36,14 @@ const InstanceInfo = models.InstanceInfo;
 const DeleteInstanceResponse = models.DeleteInstanceResponse;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const DescribeInstanceLogsResponse = models.DescribeInstanceLogsResponse;
+const UpdatePluginsResponse = models.UpdatePluginsResponse;
 const RestartInstanceRequest = models.RestartInstanceRequest;
 const ZoneDetail = models.ZoneDetail;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const UpdateInstanceRequest = models.UpdateInstanceRequest;
 const EsDictionaryInfo = models.EsDictionaryInfo;
 const DescribeInstanceOperationsResponse = models.DescribeInstanceOperationsResponse;
+const UpdatePluginsRequest = models.UpdatePluginsRequest;
 const UpgradeLicenseResponse = models.UpgradeLicenseResponse;
 const EsAcl = models.EsAcl;
 const MasterNodeInfo = models.MasterNodeInfo;
@@ -83,6 +85,17 @@ class EsClient extends AbstractClient {
     DescribeInstances(req, cb) {
         let resp = new DescribeInstancesResponse();
         this.request("DescribeInstances", req, resp, cb);
+    }
+
+    /**
+     * 变更插件列表
+     * @param {UpdatePluginsRequest} req
+     * @param {function(string, UpdatePluginsResponse):void} cb
+     * @public
+     */
+    UpdatePlugins(req, cb) {
+        let resp = new UpdatePluginsResponse();
+        this.request("UpdatePlugins", req, resp, cb);
     }
 
     /**

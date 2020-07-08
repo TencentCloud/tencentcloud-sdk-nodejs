@@ -218,6 +218,12 @@ class NodeInfo extends  AbstractModel {
          */
         this.DiskCount = null;
 
+        /**
+         * 节点磁盘是否加密 0: 不加密，1: 加密；默认不加密
+         * @type {number || null}
+         */
+        this.DiskEncrypt = null;
+
     }
 
     /**
@@ -239,6 +245,7 @@ class NodeInfo extends  AbstractModel {
             this.LocalDiskInfo = obj;
         }
         this.DiskCount = 'DiskCount' in params ? params.DiskCount : null;
+        this.DiskEncrypt = 'DiskEncrypt' in params ? params.DiskEncrypt : null;
 
     }
 }
@@ -1562,6 +1569,34 @@ class DescribeInstanceLogsResponse extends  AbstractModel {
 }
 
 /**
+ * UpdatePlugins返回参数结构体
+ * @class
+ */
+class UpdatePluginsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * RestartInstance请求参数结构体
  * @class
  */
@@ -1857,6 +1892,12 @@ class UpdateInstanceRequest extends  AbstractModel {
          */
         this.KibanaPrivatePort = null;
 
+        /**
+         * 0: 蓝绿变更方式扩容，集群不重启 （默认） 1: 磁盘解挂载扩容，集群滚动重启
+         * @type {number || null}
+         */
+        this.ScaleType = null;
+
     }
 
     /**
@@ -1909,12 +1950,13 @@ class UpdateInstanceRequest extends  AbstractModel {
         this.KibanaPrivateAccess = 'KibanaPrivateAccess' in params ? params.KibanaPrivateAccess : null;
         this.BasicSecurityType = 'BasicSecurityType' in params ? params.BasicSecurityType : null;
         this.KibanaPrivatePort = 'KibanaPrivatePort' in params ? params.KibanaPrivatePort : null;
+        this.ScaleType = 'ScaleType' in params ? params.ScaleType : null;
 
     }
 }
 
 /**
- * ES IK词库信息
+ * ES 词库信息
  * @class
  */
 class EsDictionaryInfo extends  AbstractModel {
@@ -1932,6 +1974,24 @@ class EsDictionaryInfo extends  AbstractModel {
          * @type {Array.<DictInfo> || null}
          */
         this.Stopwords = null;
+
+        /**
+         * QQ分词词典列表
+         * @type {Array.<DictInfo> || null}
+         */
+        this.QQDict = null;
+
+        /**
+         * 同义词词典列表
+         * @type {Array.<DictInfo> || null}
+         */
+        this.Synonym = null;
+
+        /**
+         * 更新词典类型
+         * @type {string || null}
+         */
+        this.UpdateType = null;
 
     }
 
@@ -1960,6 +2020,25 @@ class EsDictionaryInfo extends  AbstractModel {
                 this.Stopwords.push(obj);
             }
         }
+
+        if (params.QQDict) {
+            this.QQDict = new Array();
+            for (let z in params.QQDict) {
+                let obj = new DictInfo();
+                obj.deserialize(params.QQDict[z]);
+                this.QQDict.push(obj);
+            }
+        }
+
+        if (params.Synonym) {
+            this.Synonym = new Array();
+            for (let z in params.Synonym) {
+                let obj = new DictInfo();
+                obj.deserialize(params.Synonym[z]);
+                this.Synonym.push(obj);
+            }
+        }
+        this.UpdateType = 'UpdateType' in params ? params.UpdateType : null;
 
     }
 }
@@ -2010,6 +2089,55 @@ class DescribeInstanceOperationsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdatePlugins请求参数结构体
+ * @class
+ */
+class UpdatePluginsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 需要安装的插件名列表
+         * @type {Array.<string> || null}
+         */
+        this.InstallPluginList = null;
+
+        /**
+         * 需要卸载的插件名列表
+         * @type {Array.<string> || null}
+         */
+        this.RemovePluginList = null;
+
+        /**
+         * 是否强制重启
+         * @type {boolean || null}
+         */
+        this.ForceRestart = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstallPluginList = 'InstallPluginList' in params ? params.InstallPluginList : null;
+        this.RemovePluginList = 'RemovePluginList' in params ? params.RemovePluginList : null;
+        this.ForceRestart = 'ForceRestart' in params ? params.ForceRestart : null;
 
     }
 }
@@ -2468,12 +2596,14 @@ module.exports = {
     DeleteInstanceResponse: DeleteInstanceResponse,
     DescribeInstancesResponse: DescribeInstancesResponse,
     DescribeInstanceLogsResponse: DescribeInstanceLogsResponse,
+    UpdatePluginsResponse: UpdatePluginsResponse,
     RestartInstanceRequest: RestartInstanceRequest,
     ZoneDetail: ZoneDetail,
     DescribeInstancesRequest: DescribeInstancesRequest,
     UpdateInstanceRequest: UpdateInstanceRequest,
     EsDictionaryInfo: EsDictionaryInfo,
     DescribeInstanceOperationsResponse: DescribeInstanceOperationsResponse,
+    UpdatePluginsRequest: UpdatePluginsRequest,
     UpgradeLicenseResponse: UpgradeLicenseResponse,
     EsAcl: EsAcl,
     MasterNodeInfo: MasterNodeInfo,

@@ -16,16 +16,21 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const TableSpaceData = models.TableSpaceData;
 const DescribeSlowLogTopSqlsResponse = models.DescribeSlowLogTopSqlsResponse;
 const MonitorMetricSeriesData = models.MonitorMetricSeriesData;
+const DescribeDBSpaceStatusRequest = models.DescribeDBSpaceStatusRequest;
 const DiagHistoryEventItem = models.DiagHistoryEventItem;
+const DescribeTopSpaceTablesRequest = models.DescribeTopSpaceTablesRequest;
 const DescribeSlowLogTimeSeriesStatsRequest = models.DescribeSlowLogTimeSeriesStatsRequest;
 const DescribeDBDiagHistoryResponse = models.DescribeDBDiagHistoryResponse;
 const DescribeDBDiagEventRequest = models.DescribeDBDiagEventRequest;
+const DescribeDBSpaceStatusResponse = models.DescribeDBSpaceStatusResponse;
 const SlowLogTopSqlItem = models.SlowLogTopSqlItem;
 const DescribeDBDiagEventResponse = models.DescribeDBDiagEventResponse;
 const DescribeDBDiagHistoryRequest = models.DescribeDBDiagHistoryRequest;
 const DescribeSlowLogTimeSeriesStatsResponse = models.DescribeSlowLogTimeSeriesStatsResponse;
+const DescribeTopSpaceTablesResponse = models.DescribeTopSpaceTablesResponse;
 const TimeSlice = models.TimeSlice;
 const MonitorMetric = models.MonitorMetric;
 const DescribeSlowLogTopSqlsRequest = models.DescribeSlowLogTopSqlsRequest;
@@ -42,17 +47,6 @@ class DbbrainClient extends AbstractClient {
     }
     
     /**
-     * 获取实例诊断事件的列表。
-     * @param {DescribeDBDiagHistoryRequest} req
-     * @param {function(string, DescribeDBDiagHistoryResponse):void} cb
-     * @public
-     */
-    DescribeDBDiagHistory(req, cb) {
-        let resp = new DescribeDBDiagHistoryResponse();
-        this.request("DescribeDBDiagHistory", req, resp, cb);
-    }
-
-    /**
      * 获取慢日志统计柱状图
      * @param {DescribeSlowLogTimeSeriesStatsRequest} req
      * @param {function(string, DescribeSlowLogTimeSeriesStatsResponse):void} cb
@@ -64,14 +58,36 @@ class DbbrainClient extends AbstractClient {
     }
 
     /**
-     * 按照Sql模板+schema的聚合方式，统计排序指定时间段内的top慢sql。
-     * @param {DescribeSlowLogTopSqlsRequest} req
-     * @param {function(string, DescribeSlowLogTopSqlsResponse):void} cb
+     * 获取实例Top表的实时空间统计信息，默认返回按大小排序。
+     * @param {DescribeTopSpaceTablesRequest} req
+     * @param {function(string, DescribeTopSpaceTablesResponse):void} cb
      * @public
      */
-    DescribeSlowLogTopSqls(req, cb) {
-        let resp = new DescribeSlowLogTopSqlsResponse();
-        this.request("DescribeSlowLogTopSqls", req, resp, cb);
+    DescribeTopSpaceTables(req, cb) {
+        let resp = new DescribeTopSpaceTablesResponse();
+        this.request("DescribeTopSpaceTables", req, resp, cb);
+    }
+
+    /**
+     * 获取实例诊断事件的列表。
+     * @param {DescribeDBDiagHistoryRequest} req
+     * @param {function(string, DescribeDBDiagHistoryResponse):void} cb
+     * @public
+     */
+    DescribeDBDiagHistory(req, cb) {
+        let resp = new DescribeDBDiagHistoryResponse();
+        this.request("DescribeDBDiagHistory", req, resp, cb);
+    }
+
+    /**
+     * 获取指定时间段内的实例空间使用概览，包括磁盘增长量(MB)、磁盘剩余(MB)、磁盘总量(MB)及预计可用天数。
+     * @param {DescribeDBSpaceStatusRequest} req
+     * @param {function(string, DescribeDBSpaceStatusResponse):void} cb
+     * @public
+     */
+    DescribeDBSpaceStatus(req, cb) {
+        let resp = new DescribeDBSpaceStatusResponse();
+        this.request("DescribeDBSpaceStatus", req, resp, cb);
     }
 
     /**
@@ -83,6 +99,17 @@ class DbbrainClient extends AbstractClient {
     DescribeDBDiagEvent(req, cb) {
         let resp = new DescribeDBDiagEventResponse();
         this.request("DescribeDBDiagEvent", req, resp, cb);
+    }
+
+    /**
+     * 按照Sql模板+schema的聚合方式，统计排序指定时间段内的top慢sql。
+     * @param {DescribeSlowLogTopSqlsRequest} req
+     * @param {function(string, DescribeSlowLogTopSqlsResponse):void} cb
+     * @public
+     */
+    DescribeSlowLogTopSqls(req, cb) {
+        let resp = new DescribeSlowLogTopSqlsResponse();
+        this.request("DescribeSlowLogTopSqls", req, resp, cb);
     }
 
 

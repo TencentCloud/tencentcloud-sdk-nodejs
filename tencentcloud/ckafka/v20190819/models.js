@@ -3116,7 +3116,7 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 返回数量，不填则默认10，最大值20
+         * 返回数量，不填则默认10，最大值100
          * @type {number || null}
          */
         this.Limit = null;
