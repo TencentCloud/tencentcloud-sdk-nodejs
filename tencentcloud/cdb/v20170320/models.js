@@ -4650,7 +4650,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.InstanceNames = null;
 
         /**
-         * 实例任务状态，可能取值：<br>0 - 没有任务<br>1 - 升级中<br>2 - 数据导入中<br>3 - 开放Slave中<br>4 - 外网访问开通中<br>5 - 批量操作执行中<br>6 - 回档中<br>7 - 外网访问关闭中<br>8 - 密码修改中<br>9 - 实例名修改中<br>10 - 重启中<br>12 - 自建迁移中<br>13 - 删除库表中<br>14 - 灾备实例创建同步中<br>15 - 升级待切换<br>16 - 升级切换中<br>17 - 升级切换完成
+         * 实例任务状态，可能取值：<br>0 - 没有任务<br>1 - 升级中<br>2 - 数据导入中<br>3 - 开放Slave中<br>4 - 外网访问开通中<br>5 - 批量操作执行中<br>6 - 回档中<br>7 - 外网访问关闭中<br>8 - 密码修改中<br>9 - 实例名修改中<br>10 - 重启中<br>12 - 自建迁移中<br>13 - 删除库表中<br>14 - 灾备实例创建同步中<br>15 - 升级待切换<br>16 - 升级切换中<br>17 - 升级切换完成<br>19 - 参数设置待执行
          * @type {Array.<number> || null}
          */
         this.TaskStatus = null;
@@ -5059,6 +5059,18 @@ class ModifyInstanceParamRequest extends  AbstractModel {
          */
         this.ParamList = null;
 
+        /**
+         * 模板id，ParamList和TemplateId必须至少传其中之一
+         * @type {number || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * 执行参数调整任务的方式，默认为 0。支持值包括：0 - 立刻执行，1 - 时间窗执行；当该值为 1 时，每次只能传一个实例（InstanceIds数量为1）
+         * @type {number || null}
+         */
+        this.WaitSwitch = null;
+
     }
 
     /**
@@ -5078,6 +5090,8 @@ class ModifyInstanceParamRequest extends  AbstractModel {
                 this.ParamList.push(obj);
             }
         }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.WaitSwitch = 'WaitSwitch' in params ? params.WaitSwitch : null;
 
     }
 }

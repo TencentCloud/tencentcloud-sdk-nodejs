@@ -17,6 +17,97 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * 库表空间统计数据。
+ * @class
+ */
+class TableSpaceData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 表名。
+         * @type {string || null}
+         */
+        this.TableName = null;
+
+        /**
+         * 库名。
+         * @type {string || null}
+         */
+        this.TableSchema = null;
+
+        /**
+         * 库表的存储引擎。
+         * @type {string || null}
+         */
+        this.Engine = null;
+
+        /**
+         * 数据空间（MB）。
+         * @type {number || null}
+         */
+        this.DataLength = null;
+
+        /**
+         * 索引空间（MB）。
+         * @type {number || null}
+         */
+        this.IndexLength = null;
+
+        /**
+         * 碎片空间（MB）。
+         * @type {number || null}
+         */
+        this.DataFree = null;
+
+        /**
+         * 总使用空间（MB）。
+         * @type {number || null}
+         */
+        this.TotalLength = null;
+
+        /**
+         * 碎片率（%）。
+         * @type {number || null}
+         */
+        this.FragRatio = null;
+
+        /**
+         * 行数。
+         * @type {number || null}
+         */
+        this.TableRows = null;
+
+        /**
+         * 表对应的独立物理文件大小（MB）。
+         * @type {number || null}
+         */
+        this.PhysicalFileSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TableName = 'TableName' in params ? params.TableName : null;
+        this.TableSchema = 'TableSchema' in params ? params.TableSchema : null;
+        this.Engine = 'Engine' in params ? params.Engine : null;
+        this.DataLength = 'DataLength' in params ? params.DataLength : null;
+        this.IndexLength = 'IndexLength' in params ? params.IndexLength : null;
+        this.DataFree = 'DataFree' in params ? params.DataFree : null;
+        this.TotalLength = 'TotalLength' in params ? params.TotalLength : null;
+        this.FragRatio = 'FragRatio' in params ? params.FragRatio : null;
+        this.TableRows = 'TableRows' in params ? params.TableRows : null;
+        this.PhysicalFileSize = 'PhysicalFileSize' in params ? params.PhysicalFileSize : null;
+
+    }
+}
+
+/**
  * DescribeSlowLogTopSqls返回参数结构体
  * @class
  */
@@ -105,6 +196,41 @@ class MonitorMetricSeriesData extends  AbstractModel {
             }
         }
         this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
+
+    }
+}
+
+/**
+ * DescribeDBSpaceStatus请求参数结构体
+ * @class
+ */
+class DescribeDBSpaceStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID 。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 时间段天数，截止日期为当日，默认为7天。
+         * @type {number || null}
+         */
+        this.RangeDays = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RangeDays = 'RangeDays' in params ? params.RangeDays : null;
 
     }
 }
@@ -199,6 +325,48 @@ class DiagHistoryEventItem extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Metric = 'Metric' in params ? params.Metric : null;
         this.Region = 'Region' in params ? params.Region : null;
+
+    }
+}
+
+/**
+ * DescribeTopSpaceTables请求参数结构体
+ * @class
+ */
+class DescribeTopSpaceTablesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID 。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 返回的Top表数量，最大值为20，默认为最大值。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 筛选Top表所用的排序字段，可选字段包含DataLength、IndexLength、TotalLength、DataFree、FragRatio、TableRows、PhysicalFileSize，默认为 PhysicalFileSize。
+         * @type {string || null}
+         */
+        this.SortBy = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SortBy = 'SortBy' in params ? params.SortBy : null;
 
     }
 }
@@ -319,6 +487,62 @@ class DescribeDBDiagEventRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.EventId = 'EventId' in params ? params.EventId : null;
+
+    }
+}
+
+/**
+ * DescribeDBSpaceStatus返回参数结构体
+ * @class
+ */
+class DescribeDBSpaceStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 磁盘增长量(MB)。
+         * @type {number || null}
+         */
+        this.Growth = null;
+
+        /**
+         * 磁盘剩余(MB)。
+         * @type {number || null}
+         */
+        this.Remain = null;
+
+        /**
+         * 磁盘总量(MB)。
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 预计可用天数。
+         * @type {number || null}
+         */
+        this.AvailableDays = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Growth = 'Growth' in params ? params.Growth : null;
+        this.Remain = 'Remain' in params ? params.Remain : null;
+        this.Total = 'Total' in params ? params.Total : null;
+        this.AvailableDays = 'AvailableDays' in params ? params.AvailableDays : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -695,6 +919,49 @@ class DescribeSlowLogTimeSeriesStatsResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeTopSpaceTables返回参数结构体
+ * @class
+ */
+class DescribeTopSpaceTablesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回的Top表空间统计信息列表。
+         * @type {Array.<TableSpaceData> || null}
+         */
+        this.TopSpaceTables = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TopSpaceTables) {
+            this.TopSpaceTables = new Array();
+            for (let z in params.TopSpaceTables) {
+                let obj = new TableSpaceData();
+                obj.deserialize(params.TopSpaceTables[z]);
+                this.TopSpaceTables.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 单位时间间隔内的慢日志统计
  * @class
  */
@@ -843,16 +1110,21 @@ class DescribeSlowLogTopSqlsRequest extends  AbstractModel {
 }
 
 module.exports = {
+    TableSpaceData: TableSpaceData,
     DescribeSlowLogTopSqlsResponse: DescribeSlowLogTopSqlsResponse,
     MonitorMetricSeriesData: MonitorMetricSeriesData,
+    DescribeDBSpaceStatusRequest: DescribeDBSpaceStatusRequest,
     DiagHistoryEventItem: DiagHistoryEventItem,
+    DescribeTopSpaceTablesRequest: DescribeTopSpaceTablesRequest,
     DescribeSlowLogTimeSeriesStatsRequest: DescribeSlowLogTimeSeriesStatsRequest,
     DescribeDBDiagHistoryResponse: DescribeDBDiagHistoryResponse,
     DescribeDBDiagEventRequest: DescribeDBDiagEventRequest,
+    DescribeDBSpaceStatusResponse: DescribeDBSpaceStatusResponse,
     SlowLogTopSqlItem: SlowLogTopSqlItem,
     DescribeDBDiagEventResponse: DescribeDBDiagEventResponse,
     DescribeDBDiagHistoryRequest: DescribeDBDiagHistoryRequest,
     DescribeSlowLogTimeSeriesStatsResponse: DescribeSlowLogTimeSeriesStatsResponse,
+    DescribeTopSpaceTablesResponse: DescribeTopSpaceTablesResponse,
     TimeSlice: TimeSlice,
     MonitorMetric: MonitorMetric,
     DescribeSlowLogTopSqlsRequest: DescribeSlowLogTopSqlsRequest,
