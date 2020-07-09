@@ -1149,41 +1149,6 @@ class UpdateDictRequest extends  AbstractModel {
 }
 
 /**
- * SentenceSimilarity请求参数结构体
- * @class
- */
-class SentenceSimilarityRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 计算相似度的源句子（仅支持UTF-8格式，不超过500字符）
-         * @type {string || null}
-         */
-        this.SrcText = null;
-
-        /**
-         * 计算相似度的目标句子（仅支持UTF-8格式，不超过500字符）
-         * @type {string || null}
-         */
-        this.TargetText = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SrcText = 'SrcText' in params ? params.SrcText : null;
-        this.TargetText = 'TargetText' in params ? params.TargetText : null;
-
-    }
-}
-
-/**
  * TextClassification返回参数结构体
  * @class
  */
@@ -2045,41 +2010,6 @@ class DeleteDictRequest extends  AbstractModel {
 }
 
 /**
- * SentenceSimilarity返回参数结构体
- * @class
- */
-class SentenceSimilarityResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 两个文本的相似度
-         * @type {number || null}
-         */
-        this.Similarity = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Similarity = 'Similarity' in params ? params.Similarity : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * 命名实体识别结果
  * @class
  */
@@ -2709,7 +2639,6 @@ module.exports = {
     DeleteWordItemsResponse: DeleteWordItemsResponse,
     SentenceEmbeddingResponse: SentenceEmbeddingResponse,
     UpdateDictRequest: UpdateDictRequest,
-    SentenceSimilarityRequest: SentenceSimilarityRequest,
     TextClassificationResponse: TextClassificationResponse,
     DeleteDictResponse: DeleteDictResponse,
     DescribeWordItemsRequest: DescribeWordItemsRequest,
@@ -2731,7 +2660,6 @@ module.exports = {
     DescribeDictsResponse: DescribeDictsResponse,
     DependencyParsingRequest: DependencyParsingRequest,
     DeleteDictRequest: DeleteDictRequest,
-    SentenceSimilarityResponse: SentenceSimilarityResponse,
     NerToken: NerToken,
     SimilarWordsResponse: SimilarWordsResponse,
     EntityRelationObject: EntityRelationObject,

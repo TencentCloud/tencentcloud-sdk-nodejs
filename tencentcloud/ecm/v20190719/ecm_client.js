@@ -644,7 +644,7 @@ EIP 如果欠费或被封堵，则不能被绑定。
     }
 
     /**
-     * 从腾讯云COS导入自定义镜像
+     * 导入自定义镜像，支持 RAW、VHD、QCOW2、VMDK 镜像格式
      * @param {ImportCustomImageRequest} req
      * @param {function(string, ImportCustomImageResponse):void} cb
      * @public

@@ -658,7 +658,7 @@ class RevokeRechargeByThirdPayRequest extends  AbstractModel {
         this.TransSequenceNumber = null;
 
         /**
-         * 申请撤销的手续费金额
+         * 申请撤销的手续费金额,以元为单位
          * @type {string || null}
          */
         this.TransFee = null;
@@ -2974,7 +2974,7 @@ class RegisterBillRequest extends  AbstractModel {
         this.TranFee = null;
 
         /**
-         * 挂账金额
+         * 挂账金额，以元为单位
          * @type {string || null}
          */
         this.OrderAmt = null;
@@ -5552,7 +5552,7 @@ class RechargeByThirdPayRequest extends  AbstractModel {
         this.BankSubAccountNumber = null;
 
         /**
-         * 交易手续费
+         * 交易手续费，以元为单位
          * @type {string || null}
          */
         this.TransFee = null;
@@ -7796,7 +7796,7 @@ class RefundMemberTransactionRequest extends  AbstractModel {
         this.InSubAccountNumber = null;
 
         /**
-         * 计费秘钥
+         * 聚鑫分配的安全ID
          * @type {string || null}
          */
         this.MidasSecretId = null;
@@ -11267,7 +11267,9 @@ class ExecuteMemberTransactionRequest extends  AbstractModel {
         this.MidasSignature = null;
 
         /**
-         * 交易流水号
+         * 交易流水号 
+生成方式：用户短号+日期（6位）+ 随机编号（10位）例如：F088722005120904930798
+短号：F08872  日期： 200512   随机编号：0904930798
          * @type {string || null}
          */
         this.TransSequenceNumber = null;
@@ -11292,7 +11294,11 @@ development 开发环境
         this.PlatformShortNumber = null;
 
         /**
-         * 0,登记挂账，1，撤销挂账
+         * 1：下单预支付 
+2：确认并付款
+3：退款
+6：直接支付T+1
+9：直接支付T+0
          * @type {string || null}
          */
         this.TransType = null;
@@ -11568,7 +11574,7 @@ class DescribeOrderStatusResponse extends  AbstractModel {
         super();
 
         /**
-         * 交易状态 （（0：成功，1：失败，2：待确认, 5：待处理，6：处理中）
+         * 交易状态 （0：成功，1：失败，2：待确认, 5：待处理，6：处理中）
          * @type {string || null}
          */
         this.OrderStatus = null;

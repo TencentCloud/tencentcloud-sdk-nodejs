@@ -42,6 +42,12 @@ class CustomResult extends  AbstractModel {
          */
         this.LibName = null;
 
+        /**
+         * 命中的自定义关键词的类型
+         * @type {string || null}
+         */
+        this.Type = null;
+
     }
 
     /**
@@ -54,6 +60,7 @@ class CustomResult extends  AbstractModel {
         this.Keywords = 'Keywords' in params ? params.Keywords : null;
         this.LibId = 'LibId' in params ? params.LibId : null;
         this.LibName = 'LibName' in params ? params.LibName : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -216,6 +223,18 @@ class TextModerationRequest extends  AbstractModel {
         this.Content = null;
 
         /**
+         * 设备相关信息
+         * @type {Device || null}
+         */
+        this.Device = null;
+
+        /**
+         * 用户相关信息
+         * @type {User || null}
+         */
+        this.User = null;
+
+        /**
          * 该字段用于标识业务场景。您可以在内容安全控制台创建对应的ID，配置不同的内容审核策略，通过接口调用，默认不填为0，后端使用默认策略
          * @type {number || null}
          */
@@ -243,6 +262,18 @@ class TextModerationRequest extends  AbstractModel {
             return;
         }
         this.Content = 'Content' in params ? params.Content : null;
+
+        if (params.Device) {
+            let obj = new Device();
+            obj.deserialize(params.Device)
+            this.Device = obj;
+        }
+
+        if (params.User) {
+            let obj = new User();
+            obj.deserialize(params.User)
+            this.User = obj;
+        }
         this.BizType = 'BizType' in params ? params.BizType : null;
         this.DataId = 'DataId' in params ? params.DataId : null;
         this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
@@ -926,6 +957,76 @@ class TextOutputID extends  AbstractModel {
 }
 
 /**
+ * 用户相关信息
+ * @class
+ */
+class User extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 账号类别，"1-微信uin 2-QQ号 3-微信群uin 4-qq群号 5-微信openid 6-QQopenid 7-其它string"
+         * @type {number || null}
+         */
+        this.AccountType = null;
+
+        /**
+         * 年龄 默认0 未知
+         * @type {number || null}
+         */
+        this.Age = null;
+
+        /**
+         * 性别 默认0 未知 1 男性 2 女性
+         * @type {number || null}
+         */
+        this.Gender = null;
+
+        /**
+         * 用户等级，默认0 未知 1 低 2 中 3 高
+         * @type {number || null}
+         */
+        this.Level = null;
+
+        /**
+         * 用户昵称
+         * @type {string || null}
+         */
+        this.Nickname = null;
+
+        /**
+         * 手机号
+         * @type {string || null}
+         */
+        this.Phone = null;
+
+        /**
+         * 用户账号ID，如填写，会根据账号历史恶意情况，判定消息有害结果，特别是有利于可疑恶意情况下的辅助判断。账号可以填写微信uin、QQ号、微信openid、QQopenid、字符串等。该字段和账号类别确定唯一账号。
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccountType = 'AccountType' in params ? params.AccountType : null;
+        this.Age = 'Age' in params ? params.Age : null;
+        this.Gender = 'Gender' in params ? params.Gender : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.Nickname = 'Nickname' in params ? params.Nickname : null;
+        this.Phone = 'Phone' in params ? params.Phone : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
+
+    }
+}
+
+/**
  * 文件样本返回信息
  * @class
  */
@@ -1093,6 +1194,76 @@ class DescribeFileSampleRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
         this.OrderField = 'OrderField' in params ? params.OrderField : null;
+
+    }
+}
+
+/**
+ * 设备信息
+ * @class
+ */
+class Device extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设备指纹ID
+         * @type {string || null}
+         */
+        this.DeviceId = null;
+
+        /**
+         * IOS设备，Identifier For Advertising（广告标识符）
+         * @type {string || null}
+         */
+        this.IDFA = null;
+
+        /**
+         * IOS设备，IDFV - Identifier For Vendor（应用开发商标识符）
+         * @type {string || null}
+         */
+        this.IDFV = null;
+
+        /**
+         * 设备序列号
+         * @type {string || null}
+         */
+        this.IMEI = null;
+
+        /**
+         * 用户IP
+         * @type {string || null}
+         */
+        this.IP = null;
+
+        /**
+         * Mac地址
+         * @type {string || null}
+         */
+        this.Mac = null;
+
+        /**
+         * 设备指纹Token
+         * @type {string || null}
+         */
+        this.TokenId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeviceId = 'DeviceId' in params ? params.DeviceId : null;
+        this.IDFA = 'IDFA' in params ? params.IDFA : null;
+        this.IDFV = 'IDFV' in params ? params.IDFV : null;
+        this.IMEI = 'IMEI' in params ? params.IMEI : null;
+        this.IP = 'IP' in params ? params.IP : null;
+        this.Mac = 'Mac' in params ? params.Mac : null;
+        this.TokenId = 'TokenId' in params ? params.TokenId : null;
 
     }
 }
@@ -2434,8 +2605,10 @@ module.exports = {
     TextSample: TextSample,
     CreateTextSampleResponse: CreateTextSampleResponse,
     TextOutputID: TextOutputID,
+    User: User,
     FileSampleInfo: FileSampleInfo,
     DescribeFileSampleRequest: DescribeFileSampleRequest,
+    Device: Device,
     CodeDetect: CodeDetect,
     ImageTerrorDetect: ImageTerrorDetect,
     DescribeTextSampleResponse: DescribeTextSampleResponse,

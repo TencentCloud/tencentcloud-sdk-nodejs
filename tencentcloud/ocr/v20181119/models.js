@@ -1209,7 +1209,7 @@ class MLIDCardOCRRequest extends  AbstractModel {
         this.ImageUrl = null;
 
         /**
-         * 是否返回图片
+         * 是否返回图片，默认false
          * @type {boolean || null}
          */
         this.RetImage = null;

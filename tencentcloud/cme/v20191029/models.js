@@ -3120,14 +3120,14 @@ class MaterialBasicInfo extends  AbstractModel {
         this.ClassPath = null;
 
         /**
-         * 素材绑定的标签信息列表。
+         * 素材绑定的标签信息列表 。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<MaterialTagInfo> || null}
          */
         this.TagInfoSet = null;
 
         /**
          * 素材媒体文件的预览图。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.PreviewUrl = null;
