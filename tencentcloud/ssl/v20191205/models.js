@@ -710,7 +710,7 @@ class DescribeCertificateResponse extends  AbstractModel {
         this.PackageType = null;
 
         /**
-         * 证书办法者名称。
+         * 证书颁发者名称。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */

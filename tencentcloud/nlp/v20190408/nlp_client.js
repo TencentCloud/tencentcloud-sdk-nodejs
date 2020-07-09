@@ -45,7 +45,6 @@ const TextCorrectionRequest = models.TextCorrectionRequest;
 const DeleteWordItemsResponse = models.DeleteWordItemsResponse;
 const SentenceEmbeddingResponse = models.SentenceEmbeddingResponse;
 const UpdateDictRequest = models.UpdateDictRequest;
-const SentenceSimilarityRequest = models.SentenceSimilarityRequest;
 const TextClassificationResponse = models.TextClassificationResponse;
 const DeleteDictResponse = models.DeleteDictResponse;
 const DescribeWordItemsRequest = models.DescribeWordItemsRequest;
@@ -67,7 +66,6 @@ const TextCorrectionResponse = models.TextCorrectionResponse;
 const DescribeDictsResponse = models.DescribeDictsResponse;
 const DependencyParsingRequest = models.DependencyParsingRequest;
 const DeleteDictRequest = models.DeleteDictRequest;
-const SentenceSimilarityResponse = models.SentenceSimilarityResponse;
 const NerToken = models.NerToken;
 const SimilarWordsResponse = models.SimilarWordsResponse;
 const EntityRelationObject = models.EntityRelationObject;
@@ -242,19 +240,6 @@ https://ai.tencent.com/ailab/nlp/zh/embedding.html
     WordSimilarity(req, cb) {
         let resp = new WordSimilarityResponse();
         this.request("WordSimilarity", req, resp, cb);
-    }
-
-    /**
-     * 文本相似度接口能够基于深度学习技术来计算两个输入文本的相似度，相似度数值越大的两个文本在语义上越相似。目前仅支持短文本（不超过500字符）的相似度计算，长文本的相似度计算也即将推出。
-
-鉴于文本相似度是一个应用非常广泛的功能，腾讯知文自然语言处理团队在深度神经网络模型的基础上，专门针对文本相似任务进行了优化，并持续迭代更新。基于文本相似度，可以轻松实现诸如文本去重、相似推荐等功能。
-     * @param {SentenceSimilarityRequest} req
-     * @param {function(string, SentenceSimilarityResponse):void} cb
-     * @public
-     */
-    SentenceSimilarity(req, cb) {
-        let resp = new SentenceSimilarityResponse();
-        this.request("SentenceSimilarity", req, resp, cb);
     }
 
     /**

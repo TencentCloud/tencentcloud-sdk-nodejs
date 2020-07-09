@@ -109,6 +109,7 @@ module.exports = {
     tcb: require("./tcb"),
     tci: require("./tci"),
     tcr: require("./tcr"),
+    tdmq: require("./tdmq"),
     tia: require("./tia"),
     ticm: require("./ticm"),
     tics: require("./tics"),
