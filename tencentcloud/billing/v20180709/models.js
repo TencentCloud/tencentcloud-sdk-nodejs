@@ -3805,6 +3805,20 @@ class Deal extends  AbstractModel {
          */
         this.BigDealId = null;
 
+        /**
+         * 退费公式
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Formula = null;
+
+        /**
+         * 退费涉及订单信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RefReturnDeals = null;
+
     }
 
     /**
@@ -3841,6 +3855,8 @@ class Deal extends  AbstractModel {
         this.ProductCode = 'ProductCode' in params ? params.ProductCode : null;
         this.SubProductCode = 'SubProductCode' in params ? params.SubProductCode : null;
         this.BigDealId = 'BigDealId' in params ? params.BigDealId : null;
+        this.Formula = 'Formula' in params ? params.Formula : null;
+        this.RefReturnDeals = 'RefReturnDeals' in params ? params.RefReturnDeals : null;
 
     }
 }
