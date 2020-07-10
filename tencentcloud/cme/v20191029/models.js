@@ -1020,7 +1020,7 @@ class AudioMaterial extends  AbstractModel {
         this.MetaData = null;
 
         /**
-         * 素材媒体文件的 URL 地址。
+         * 素材媒体文件的播放 URL 地址。
          * @type {string || null}
          */
         this.MaterialUrl = null;
@@ -1037,6 +1037,18 @@ class AudioMaterial extends  AbstractModel {
          * @type {MaterialStatus || null}
          */
         this.MaterialStatus = null;
+
+        /**
+         * 素材媒体文件的原始 URL 地址。
+         * @type {string || null}
+         */
+        this.OriginalUrl = null;
+
+        /**
+         * 云点播媒资 FileId。
+         * @type {string || null}
+         */
+        this.VodFileId = null;
 
     }
 
@@ -1061,6 +1073,8 @@ class AudioMaterial extends  AbstractModel {
             obj.deserialize(params.MaterialStatus)
             this.MaterialStatus = obj;
         }
+        this.OriginalUrl = 'OriginalUrl' in params ? params.OriginalUrl : null;
+        this.VodFileId = 'VodFileId' in params ? params.VodFileId : null;
 
     }
 }
@@ -2524,7 +2538,7 @@ class ImageMaterial extends  AbstractModel {
         this.Width = null;
 
         /**
-         * 素材媒体文件的 URL 地址。
+         * 素材媒体文件的展示 URL 地址。
          * @type {string || null}
          */
         this.MaterialUrl = null;
@@ -2534,6 +2548,18 @@ class ImageMaterial extends  AbstractModel {
          * @type {number || null}
          */
         this.Size = null;
+
+        /**
+         * 素材媒体文件的原始 URL 地址。
+         * @type {string || null}
+         */
+        this.OriginalUrl = null;
+
+        /**
+         * 云点播媒资 FileId。
+         * @type {string || null}
+         */
+        this.VodFileId = null;
 
     }
 
@@ -2548,6 +2574,8 @@ class ImageMaterial extends  AbstractModel {
         this.Width = 'Width' in params ? params.Width : null;
         this.MaterialUrl = 'MaterialUrl' in params ? params.MaterialUrl : null;
         this.Size = 'Size' in params ? params.Size : null;
+        this.OriginalUrl = 'OriginalUrl' in params ? params.OriginalUrl : null;
+        this.VodFileId = 'VodFileId' in params ? params.VodFileId : null;
 
     }
 }
@@ -3746,7 +3774,7 @@ class VideoMaterial extends  AbstractModel {
         this.ImageSpriteInfo = null;
 
         /**
-         * 素材媒体文件的 URL 地址
+         * 素材媒体文件的播放 URL 地址。
          * @type {string || null}
          */
         this.MaterialUrl = null;
@@ -3769,6 +3797,18 @@ class VideoMaterial extends  AbstractModel {
          * @type {MaterialStatus || null}
          */
         this.MaterialStatus = null;
+
+        /**
+         * 素材媒体文件的原始 URL 地址。
+         * @type {string || null}
+         */
+        this.OriginalUrl = null;
+
+        /**
+         * 云点播媒资 FileId。
+         * @type {string || null}
+         */
+        this.VodFileId = null;
 
     }
 
@@ -3800,6 +3840,8 @@ class VideoMaterial extends  AbstractModel {
             obj.deserialize(params.MaterialStatus)
             this.MaterialStatus = obj;
         }
+        this.OriginalUrl = 'OriginalUrl' in params ? params.OriginalUrl : null;
+        this.VodFileId = 'VodFileId' in params ? params.VodFileId : null;
 
     }
 }

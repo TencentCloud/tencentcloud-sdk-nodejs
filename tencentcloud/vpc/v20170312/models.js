@@ -18593,7 +18593,7 @@ class RouteTable extends  AbstractModel {
         this.AssociationSet = null;
 
         /**
-         * 路由表策略集合。
+         * IPv4路由策略集合。
          * @type {Array.<Route> || null}
          */
         this.RouteSet = null;
