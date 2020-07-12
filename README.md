@@ -10,9 +10,11 @@
 安装 NODEJS SDK 前，先获取安全凭证。在第一次使用云API之前，用户首先需要在腾讯云控制台上申请安全凭证，安全凭证包括 SecretID 和 SecretKey， SecretID 是用于标识 API 调用者的身份，SecretKey是用于加密签名字符串和服务器端验证签名字符串的密钥。SecretKey 必须严格保管，避免泄露。
 ## 通过 Npm 安装
 通过 npm 获取安装是使用 NODEJS SDK 的推荐方法，npm 是 NODEJS 的包管理工具。关于 npm 详细可参考[ npm 官网](https://www.npmjs.com/) 。
-1. 执行以下安装命令：
+1. 中国大陆地区的用户可以使用国内镜像源提高下载速度，例如：
+    > npm config set registry https://mirrors.tencent.com/npm/
+2. 执行以下安装命令：
     > npm install tencentcloud-sdk-nodejs --save
-2. 在您的代码中引用对应模块代码，可参考示例。
+3. 在您的代码中引用对应模块代码，可参考示例。
 
 ## 通过源码包安装
 1. 前往 [Github 代码托管地址](https://github.com/tencentcloud/tencentcloud-sdk-nodejs) 下载源码压缩包。
