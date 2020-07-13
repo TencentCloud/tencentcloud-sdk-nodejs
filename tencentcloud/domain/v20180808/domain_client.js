@@ -45,7 +45,7 @@ class DomainClient extends AbstractClient {
     }
 
     /**
-     * 检查域名是否可以注册
+     * 检查域名是否可以注册。
      * @param {CheckDomainRequest} req
      * @param {function(string, CheckDomainResponse):void} cb
      * @public
