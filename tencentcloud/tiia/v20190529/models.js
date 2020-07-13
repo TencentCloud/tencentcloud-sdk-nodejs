@@ -595,7 +595,7 @@ class ProductInfo extends  AbstractModel {
 
         /**
          * 1表示找到同款商品，以下字段为同款商品信息； 
-0表示未找到同款商品， 具体商品信息为空（参考价格、名称、品牌等），仅提供商品类目。  
+0表示未找到同款商品， 具体商品信息为空（参考价格、名称、品牌等），仅提供商品类目和参考图片（商品库中找到的最相似图片，供参考）。  
 是否找到同款的判断依据为Score分值，分值越大则同款的可能性越大。
          * @type {number || null}
          */
@@ -640,7 +640,7 @@ class ProductInfo extends  AbstractModel {
         this.Score = null;
 
         /**
-         * 搜索到的商品配图URL
+         * 搜索到的商品配图URL。
          * @type {string || null}
          */
         this.Image = null;

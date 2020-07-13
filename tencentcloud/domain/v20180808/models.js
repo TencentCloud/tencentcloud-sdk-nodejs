@@ -101,6 +101,12 @@ class CheckDomainResponse extends  AbstractModel {
         this.Period = null;
 
         /**
+         * 是否支持北京备案  true 支持  false 不支持
+         * @type {boolean || null}
+         */
+        this.RecordSupport = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -127,6 +133,7 @@ class CheckDomainResponse extends  AbstractModel {
         this.FeeTransfer = 'FeeTransfer' in params ? params.FeeTransfer : null;
         this.FeeRestore = 'FeeRestore' in params ? params.FeeRestore : null;
         this.Period = 'Period' in params ? params.Period : null;
+        this.RecordSupport = 'RecordSupport' in params ? params.RecordSupport : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

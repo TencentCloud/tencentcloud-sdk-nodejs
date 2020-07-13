@@ -518,6 +518,12 @@ class TrylockWorkerRequest extends  AbstractModel {
          */
         this.UserIp = null;
 
+        /**
+         * 分组ID
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
     }
 
     /**
@@ -532,6 +538,7 @@ class TrylockWorkerRequest extends  AbstractModel {
         this.GameRegion = 'GameRegion' in params ? params.GameRegion : null;
         this.SetNo = 'SetNo' in params ? params.SetNo : null;
         this.UserIp = 'UserIp' in params ? params.UserIp : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
