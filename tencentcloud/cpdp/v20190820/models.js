@@ -11034,6 +11034,16 @@ class DownloadBillRequest extends  AbstractModel {
          */
         this.MidasSignature = null;
 
+        /**
+         * 环境名:
+release: 现网环境
+sandbox: 沙箱环境
+development: 开发环境
+缺省: release
+         * @type {string || null}
+         */
+        this.MidasEnvironment = null;
+
     }
 
     /**
@@ -11047,6 +11057,7 @@ class DownloadBillRequest extends  AbstractModel {
         this.MidasAppId = 'MidasAppId' in params ? params.MidasAppId : null;
         this.MidasSecretId = 'MidasSecretId' in params ? params.MidasSecretId : null;
         this.MidasSignature = 'MidasSignature' in params ? params.MidasSignature : null;
+        this.MidasEnvironment = 'MidasEnvironment' in params ? params.MidasEnvironment : null;
 
     }
 }
