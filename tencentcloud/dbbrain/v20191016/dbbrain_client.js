@@ -16,24 +16,29 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const TableSpaceData = models.TableSpaceData;
-const DescribeSlowLogTopSqlsResponse = models.DescribeSlowLogTopSqlsResponse;
-const MonitorMetricSeriesData = models.MonitorMetricSeriesData;
+const DescribeTopSpaceTableTimeSeriesResponse = models.DescribeTopSpaceTableTimeSeriesResponse;
+const DescribeDBDiagHistoryResponse = models.DescribeDBDiagHistoryResponse;
 const DescribeDBSpaceStatusRequest = models.DescribeDBSpaceStatusRequest;
-const DiagHistoryEventItem = models.DiagHistoryEventItem;
+const DescribeSlowLogTimeSeriesStatsResponse = models.DescribeSlowLogTimeSeriesStatsResponse;
+const TimeSlice = models.TimeSlice;
+const MonitorFloatMetric = models.MonitorFloatMetric;
+const MonitorMetric = models.MonitorMetric;
+const TableSpaceTimeSeries = models.TableSpaceTimeSeries;
 const DescribeTopSpaceTablesRequest = models.DescribeTopSpaceTablesRequest;
 const DescribeSlowLogTimeSeriesStatsRequest = models.DescribeSlowLogTimeSeriesStatsRequest;
-const DescribeDBDiagHistoryResponse = models.DescribeDBDiagHistoryResponse;
 const DescribeDBDiagEventRequest = models.DescribeDBDiagEventRequest;
 const DescribeDBSpaceStatusResponse = models.DescribeDBSpaceStatusResponse;
-const SlowLogTopSqlItem = models.SlowLogTopSqlItem;
 const DescribeDBDiagEventResponse = models.DescribeDBDiagEventResponse;
 const DescribeDBDiagHistoryRequest = models.DescribeDBDiagHistoryRequest;
-const DescribeSlowLogTimeSeriesStatsResponse = models.DescribeSlowLogTimeSeriesStatsResponse;
-const DescribeTopSpaceTablesResponse = models.DescribeTopSpaceTablesResponse;
-const TimeSlice = models.TimeSlice;
-const MonitorMetric = models.MonitorMetric;
+const DescribeTopSpaceTableTimeSeriesRequest = models.DescribeTopSpaceTableTimeSeriesRequest;
+const MonitorMetricSeriesData = models.MonitorMetricSeriesData;
+const DiagHistoryEventItem = models.DiagHistoryEventItem;
+const SlowLogTopSqlItem = models.SlowLogTopSqlItem;
+const MonitorFloatMetricSeriesData = models.MonitorFloatMetricSeriesData;
 const DescribeSlowLogTopSqlsRequest = models.DescribeSlowLogTopSqlsRequest;
+const TableSpaceData = models.TableSpaceData;
+const DescribeSlowLogTopSqlsResponse = models.DescribeSlowLogTopSqlsResponse;
+const DescribeTopSpaceTablesResponse = models.DescribeTopSpaceTablesResponse;
 
 
 /**
@@ -47,6 +52,17 @@ class DbbrainClient extends AbstractClient {
     }
     
     /**
+     * 获取实例占用空间最大的前几张表在指定时间段内的每日由DBbrain定时采集的空间数据，默认返回按大小排序。
+     * @param {DescribeTopSpaceTableTimeSeriesRequest} req
+     * @param {function(string, DescribeTopSpaceTableTimeSeriesResponse):void} cb
+     * @public
+     */
+    DescribeTopSpaceTableTimeSeries(req, cb) {
+        let resp = new DescribeTopSpaceTableTimeSeriesResponse();
+        this.request("DescribeTopSpaceTableTimeSeries", req, resp, cb);
+    }
+
+    /**
      * 获取慢日志统计柱状图
      * @param {DescribeSlowLogTimeSeriesStatsRequest} req
      * @param {function(string, DescribeSlowLogTimeSeriesStatsResponse):void} cb
@@ -55,17 +71,6 @@ class DbbrainClient extends AbstractClient {
     DescribeSlowLogTimeSeriesStats(req, cb) {
         let resp = new DescribeSlowLogTimeSeriesStatsResponse();
         this.request("DescribeSlowLogTimeSeriesStats", req, resp, cb);
-    }
-
-    /**
-     * 获取实例Top表的实时空间统计信息，默认返回按大小排序。
-     * @param {DescribeTopSpaceTablesRequest} req
-     * @param {function(string, DescribeTopSpaceTablesResponse):void} cb
-     * @public
-     */
-    DescribeTopSpaceTables(req, cb) {
-        let resp = new DescribeTopSpaceTablesResponse();
-        this.request("DescribeTopSpaceTables", req, resp, cb);
     }
 
     /**
@@ -99,6 +104,17 @@ class DbbrainClient extends AbstractClient {
     DescribeDBDiagEvent(req, cb) {
         let resp = new DescribeDBDiagEventResponse();
         this.request("DescribeDBDiagEvent", req, resp, cb);
+    }
+
+    /**
+     * 获取实例Top表的实时空间统计信息，默认返回按大小排序。
+     * @param {DescribeTopSpaceTablesRequest} req
+     * @param {function(string, DescribeTopSpaceTablesResponse):void} cb
+     * @public
+     */
+    DescribeTopSpaceTables(req, cb) {
+        let resp = new DescribeTopSpaceTablesResponse();
+        this.request("DescribeTopSpaceTables", req, resp, cb);
     }
 
     /**
