@@ -17,30 +17,18 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * DescribeWorkersInfo返回参数结构体
+ * StopGame请求参数结构体
  * @class
  */
-class DescribeWorkersInfoResponse extends  AbstractModel {
+class StopGameRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 机器数量
-         * @type {number || null}
-         */
-        this.WorkerNum = null;
-
-        /**
-         * 机器详细信息
-         * @type {Array.<WorkerDetail> || null}
-         */
-        this.WorkerDetail = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 游戏用户ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.UserId = null;
 
     }
 
@@ -51,26 +39,16 @@ class DescribeWorkersInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.WorkerNum = 'WorkerNum' in params ? params.WorkerNum : null;
-
-        if (params.WorkerDetail) {
-            this.WorkerDetail = new Array();
-            for (let z in params.WorkerDetail) {
-                let obj = new WorkerDetail();
-                obj.deserialize(params.WorkerDetail[z]);
-                this.WorkerDetail.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.UserId = 'UserId' in params ? params.UserId : null;
 
     }
 }
 
 /**
- * ModifyWorkers返回参数结构体
+ * TrylockWorker返回参数结构体
  * @class
  */
-class ModifyWorkersResponse extends  AbstractModel {
+class TrylockWorkerResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -123,217 +101,6 @@ class StopGameResponse extends  AbstractModel {
 }
 
 /**
- * worker的区域信息
- * @class
- */
-class WorkerRegionInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 区域
-         * @type {string || null}
-         */
-        this.Region = null;
-
-        /**
-         * 该区域空闲机器数量
-         * @type {number || null}
-         */
-        this.Idle = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Region = 'Region' in params ? params.Region : null;
-        this.Idle = 'Idle' in params ? params.Idle : null;
-
-    }
-}
-
-/**
- * TrylockWorker返回参数结构体
- * @class
- */
-class TrylockWorkerResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * QuitQueue请求参数结构体
- * @class
- */
-class QuitQueueRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 用户ID
-         * @type {string || null}
-         */
-        this.UserId = null;
-
-        /**
-         * 资源池编号
-         * @type {number || null}
-         */
-        this.SetNumber = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.UserId = 'UserId' in params ? params.UserId : null;
-        this.SetNumber = 'SetNumber' in params ? params.SetNumber : null;
-
-    }
-}
-
-/**
- * DescribeWorkers返回参数结构体
- * @class
- */
-class DescribeWorkersResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 空闲机器总数量
-         * @type {number || null}
-         */
-        this.Idle = null;
-
-        /**
-         * 区域个数
-         * @type {number || null}
-         */
-        this.RegionNum = null;
-
-        /**
-         * 各个区域的机器情况
-         * @type {Array.<WorkerRegionInfo> || null}
-         */
-        this.RegionDetail = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Idle = 'Idle' in params ? params.Idle : null;
-        this.RegionNum = 'RegionNum' in params ? params.RegionNum : null;
-
-        if (params.RegionDetail) {
-            this.RegionDetail = new Array();
-            for (let z in params.RegionDetail) {
-                let obj = new WorkerRegionInfo();
-                obj.deserialize(params.RegionDetail[z]);
-                this.RegionDetail.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * ModifyWorkers请求参数结构体
- * @class
- */
-class ModifyWorkersRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 批量机器ID，最多不超过100个
-         * @type {Array.<string> || null}
-         */
-        this.InstanceIds = null;
-
-        /**
-         * 资源池编号，修改有效范围为[1,100]，在idle状态下才能修改成功
-         * @type {number || null}
-         */
-        this.SetNo = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
-        this.SetNo = 'SetNo' in params ? params.SetNo : null;
-
-    }
-}
-
-/**
- * DescribeWorkersInfo请求参数结构体
- * @class
- */
-class DescribeWorkersInfoRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-    }
-}
-
-/**
  * CreateSession返回参数结构体
  * @class
  */
@@ -364,118 +131,6 @@ class CreateSessionResponse extends  AbstractModel {
         }
         this.ServerSession = 'ServerSession' in params ? params.ServerSession : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * QuitQueue返回参数结构体
- * @class
- */
-class QuitQueueResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * EnterQueue请求参数结构体
- * @class
- */
-class EnterQueueRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * true：第一次请求排队 false：已在排队中，查询当前排名
-         * @type {boolean || null}
-         */
-        this.First = null;
-
-        /**
-         * 游戏ID
-         * @type {string || null}
-         */
-        this.GameId = null;
-
-        /**
-         * 用户ID
-         * @type {string || null}
-         */
-        this.UserId = null;
-
-        /**
-         * 资源池编号
-         * @type {number || null}
-         */
-        this.SetNumber = null;
-
-        /**
-         * 游戏用户IP，用于就近调度，例如125.127.178.228
-         * @type {string || null}
-         */
-        this.UserIp = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.First = 'First' in params ? params.First : null;
-        this.GameId = 'GameId' in params ? params.GameId : null;
-        this.UserId = 'UserId' in params ? params.UserId : null;
-        this.SetNumber = 'SetNumber' in params ? params.SetNumber : null;
-        this.UserIp = 'UserIp' in params ? params.UserIp : null;
-
-    }
-}
-
-/**
- * StopGame请求参数结构体
- * @class
- */
-class StopGameRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 游戏用户ID
-         * @type {string || null}
-         */
-        this.UserId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.UserId = 'UserId' in params ? params.UserId : null;
 
     }
 }
@@ -539,102 +194,6 @@ class TrylockWorkerRequest extends  AbstractModel {
         this.SetNo = 'SetNo' in params ? params.SetNo : null;
         this.UserIp = 'UserIp' in params ? params.UserIp : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
-
-    }
-}
-
-/**
- * 机器详细信息
- * @class
- */
-class WorkerDetail extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 客户appid
-         * @type {number || null}
-         */
-        this.AppId = null;
-
-        /**
-         * 资源池编号
-         * @type {number || null}
-         */
-        this.SetNo = null;
-
-        /**
-         * 机器所属区域
-         * @type {string || null}
-         */
-        this.Region = null;
-
-        /**
-         * 机器ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * 机器类型：
-LARGE-大型
-MEDIUM-中型
-SMALL-小型
-         * @type {string || null}
-         */
-        this.InstanceType = null;
-
-        /**
-         * 机器IP
-         * @type {string || null}
-         */
-        this.Ip = null;
-
-        /**
-         * 服务状态：
-IDLE-空闲
-LOCK-锁定
-ESTABLISHED-游戏中
-RECONNECT-等待重连
-RECOVERY-清理恢复
-FORBID-禁用
-UNAVAILABLE-不可用
-         * @type {string || null}
-         */
-        this.ServiceState = null;
-
-        /**
-         * 用户ID
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.UserId = null;
-
-        /**
-         * 游戏ID
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.GameId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.AppId = 'AppId' in params ? params.AppId : null;
-        this.SetNo = 'SetNo' in params ? params.SetNo : null;
-        this.Region = 'Region' in params ? params.Region : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
-        this.Ip = 'Ip' in params ? params.Ip : null;
-        this.ServiceState = 'ServiceState' in params ? params.ServiceState : null;
-        this.UserId = 'UserId' in params ? params.UserId : null;
-        this.GameId = 'GameId' in params ? params.GameId : null;
 
     }
 }
@@ -758,94 +317,12 @@ class CreateSessionRequest extends  AbstractModel {
     }
 }
 
-/**
- * EnterQueue返回参数结构体
- * @class
- */
-class EnterQueueResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 排名
-         * @type {number || null}
-         */
-        this.Rank = null;
-
-        /**
-         * 机器锁定成功
-         * @type {boolean || null}
-         */
-        this.LockSuccess = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Rank = 'Rank' in params ? params.Rank : null;
-        this.LockSuccess = 'LockSuccess' in params ? params.LockSuccess : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeWorkers请求参数结构体
- * @class
- */
-class DescribeWorkersRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 资源池编号，1表示正式，2表示测试
-         * @type {number || null}
-         */
-        this.SetNo = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SetNo = 'SetNo' in params ? params.SetNo : null;
-
-    }
-}
-
 module.exports = {
-    DescribeWorkersInfoResponse: DescribeWorkersInfoResponse,
-    ModifyWorkersResponse: ModifyWorkersResponse,
-    StopGameResponse: StopGameResponse,
-    WorkerRegionInfo: WorkerRegionInfo,
-    TrylockWorkerResponse: TrylockWorkerResponse,
-    QuitQueueRequest: QuitQueueRequest,
-    DescribeWorkersResponse: DescribeWorkersResponse,
-    ModifyWorkersRequest: ModifyWorkersRequest,
-    DescribeWorkersInfoRequest: DescribeWorkersInfoRequest,
-    CreateSessionResponse: CreateSessionResponse,
-    QuitQueueResponse: QuitQueueResponse,
-    EnterQueueRequest: EnterQueueRequest,
     StopGameRequest: StopGameRequest,
+    TrylockWorkerResponse: TrylockWorkerResponse,
+    StopGameResponse: StopGameResponse,
+    CreateSessionResponse: CreateSessionResponse,
     TrylockWorkerRequest: TrylockWorkerRequest,
-    WorkerDetail: WorkerDetail,
     CreateSessionRequest: CreateSessionRequest,
-    EnterQueueResponse: EnterQueueResponse,
-    DescribeWorkersRequest: DescribeWorkersRequest,
 
 }

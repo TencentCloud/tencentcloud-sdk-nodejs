@@ -16,24 +16,12 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DescribeWorkersInfoResponse = models.DescribeWorkersInfoResponse;
-const ModifyWorkersResponse = models.ModifyWorkersResponse;
-const StopGameResponse = models.StopGameResponse;
-const WorkerRegionInfo = models.WorkerRegionInfo;
-const TrylockWorkerResponse = models.TrylockWorkerResponse;
-const QuitQueueRequest = models.QuitQueueRequest;
-const DescribeWorkersResponse = models.DescribeWorkersResponse;
-const ModifyWorkersRequest = models.ModifyWorkersRequest;
-const DescribeWorkersInfoRequest = models.DescribeWorkersInfoRequest;
-const CreateSessionResponse = models.CreateSessionResponse;
-const QuitQueueResponse = models.QuitQueueResponse;
-const EnterQueueRequest = models.EnterQueueRequest;
 const StopGameRequest = models.StopGameRequest;
+const TrylockWorkerResponse = models.TrylockWorkerResponse;
+const StopGameResponse = models.StopGameResponse;
+const CreateSessionResponse = models.CreateSessionResponse;
 const TrylockWorkerRequest = models.TrylockWorkerRequest;
-const WorkerDetail = models.WorkerDetail;
 const CreateSessionRequest = models.CreateSessionRequest;
-const EnterQueueResponse = models.EnterQueueResponse;
-const DescribeWorkersRequest = models.DescribeWorkersRequest;
 
 
 /**
@@ -47,25 +35,14 @@ class GsClient extends AbstractClient {
     }
     
     /**
-     * 进入排队锁定机器
-     * @param {EnterQueueRequest} req
-     * @param {function(string, EnterQueueResponse):void} cb
+     * 创建会话
+     * @param {CreateSessionRequest} req
+     * @param {function(string, CreateSessionResponse):void} cb
      * @public
      */
-    EnterQueue(req, cb) {
-        let resp = new EnterQueueResponse();
-        this.request("EnterQueue", req, resp, cb);
-    }
-
-    /**
-     * 尝试锁定机器
-     * @param {TrylockWorkerRequest} req
-     * @param {function(string, TrylockWorkerResponse):void} cb
-     * @public
-     */
-    TrylockWorker(req, cb) {
-        let resp = new TrylockWorkerResponse();
-        this.request("TrylockWorker", req, resp, cb);
+    CreateSession(req, cb) {
+        let resp = new CreateSessionResponse();
+        this.request("CreateSession", req, resp, cb);
     }
 
     /**
@@ -80,58 +57,14 @@ class GsClient extends AbstractClient {
     }
 
     /**
-     * 退出排队
-     * @param {QuitQueueRequest} req
-     * @param {function(string, QuitQueueResponse):void} cb
+     * 尝试锁定机器
+     * @param {TrylockWorkerRequest} req
+     * @param {function(string, TrylockWorkerResponse):void} cb
      * @public
      */
-    QuitQueue(req, cb) {
-        let resp = new QuitQueueResponse();
-        this.request("QuitQueue", req, resp, cb);
-    }
-
-    /**
-     * 查询空闲机器数量
-     * @param {DescribeWorkersRequest} req
-     * @param {function(string, DescribeWorkersResponse):void} cb
-     * @public
-     */
-    DescribeWorkers(req, cb) {
-        let resp = new DescribeWorkersResponse();
-        this.request("DescribeWorkers", req, resp, cb);
-    }
-
-    /**
-     * 获取机器信息
-     * @param {DescribeWorkersInfoRequest} req
-     * @param {function(string, DescribeWorkersInfoResponse):void} cb
-     * @public
-     */
-    DescribeWorkersInfo(req, cb) {
-        let resp = new DescribeWorkersInfoResponse();
-        this.request("DescribeWorkersInfo", req, resp, cb);
-    }
-
-    /**
-     * 创建会话
-     * @param {CreateSessionRequest} req
-     * @param {function(string, CreateSessionResponse):void} cb
-     * @public
-     */
-    CreateSession(req, cb) {
-        let resp = new CreateSessionResponse();
-        this.request("CreateSession", req, resp, cb);
-    }
-
-    /**
-     * 修改机器信息
-     * @param {ModifyWorkersRequest} req
-     * @param {function(string, ModifyWorkersResponse):void} cb
-     * @public
-     */
-    ModifyWorkers(req, cb) {
-        let resp = new ModifyWorkersResponse();
-        this.request("ModifyWorkers", req, resp, cb);
+    TrylockWorker(req, cb) {
+        let resp = new TrylockWorkerResponse();
+        this.request("TrylockWorker", req, resp, cb);
     }
 
 
