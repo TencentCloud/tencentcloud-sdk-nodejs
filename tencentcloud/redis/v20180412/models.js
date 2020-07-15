@@ -405,6 +405,41 @@ class SwitchInstanceVipRequest extends  AbstractModel {
 }
 
 /**
+ * UpgradeInstanceVersion返回参数结构体
+ * @class
+ */
+class UpgradeInstanceVersionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 订单ID
+         * @type {string || null}
+         */
+        this.DealId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DealId = 'DealId' in params ? params.DealId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateInstances请求参数结构体
  * @class
  */
@@ -2652,6 +2687,49 @@ class InquiryPriceCreateInstanceResponse extends  AbstractModel {
 }
 
 /**
+ * 实例安全组信息
+ * @class
+ */
+class InstanceSecurityGroupDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例Id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 安全组信息
+         * @type {Array.<SecurityGroupDetail> || null}
+         */
+        this.SecurityGroupDetails = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.SecurityGroupDetails) {
+            this.SecurityGroupDetails = new Array();
+            for (let z in params.SecurityGroupDetails) {
+                let obj = new SecurityGroupDetail();
+                obj.deserialize(params.SecurityGroupDetails[z]);
+                this.SecurityGroupDetails.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ResetPassword请求参数结构体
  * @class
  */
@@ -3035,6 +3113,48 @@ class DescribeInstanceMonitorTookDistRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Date = 'Date' in params ? params.Date : null;
         this.SpanType = 'SpanType' in params ? params.SpanType : null;
+
+    }
+}
+
+/**
+ * ModifyMaintenanceWindow请求参数结构体
+ * @class
+ */
+class ModifyMaintenanceWindowRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 维护时间窗起始时间，如：17:00
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 维护时间窗结束时间，如：19:00
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -4241,24 +4361,30 @@ class EnableReplicaReadonlyResponse extends  AbstractModel {
 }
 
 /**
- * 实例安全组信息
+ * DescribeMaintenanceWindow返回参数结构体
  * @class
  */
-class InstanceSecurityGroupDetail extends  AbstractModel {
+class DescribeMaintenanceWindowResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例Id
+         * 维护时间窗起始时间，如：17:00
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.StartTime = null;
 
         /**
-         * 安全组信息
-         * @type {Array.<SecurityGroupDetail> || null}
+         * 维护时间窗结束时间，如：19:00
+         * @type {string || null}
          */
-        this.SecurityGroupDetails = null;
+        this.EndTime = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -4269,16 +4395,9 @@ class InstanceSecurityGroupDetail extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-
-        if (params.SecurityGroupDetails) {
-            this.SecurityGroupDetails = new Array();
-            for (let z in params.SecurityGroupDetails) {
-                let obj = new SecurityGroupDetail();
-                obj.deserialize(params.SecurityGroupDetails[z]);
-                this.SecurityGroupDetails.push(obj);
-            }
-        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5737,6 +5856,41 @@ class InquiryPriceRenewInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyMaintenanceWindow返回参数结构体
+ * @class
+ */
+class ModifyMaintenanceWindowResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 修改状态：success 或者 failed
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeInstanceMonitorTopNCmdTook请求参数结构体
  * @class
  */
@@ -6018,6 +6172,34 @@ class BigKeyTypeInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeMaintenanceWindow请求参数结构体
+ * @class
+ */
+class DescribeMaintenanceWindowRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * 实例节点类型
  * @class
  */
@@ -6160,6 +6342,48 @@ class EnableReplicaReadonlyRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.ReadonlyPolicy = 'ReadonlyPolicy' in params ? params.ReadonlyPolicy : null;
+
+    }
+}
+
+/**
+ * UpgradeInstanceVersion请求参数结构体
+ * @class
+ */
+class UpgradeInstanceVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 目标实例类型，同CreateInstances接口的Type，即实例要变更的目标类型
+         * @type {string || null}
+         */
+        this.TargetInstanceType = null;
+
+        /**
+         * 切换模式：1-维护时间窗切换，2-立即切换
+         * @type {number || null}
+         */
+        this.SwitchOption = null;
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetInstanceType = 'TargetInstanceType' in params ? params.TargetInstanceType : null;
+        this.SwitchOption = 'SwitchOption' in params ? params.SwitchOption : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -7291,6 +7515,7 @@ module.exports = {
     RestoreInstanceRequest: RestoreInstanceRequest,
     TaskInfoDetail: TaskInfoDetail,
     SwitchInstanceVipRequest: SwitchInstanceVipRequest,
+    UpgradeInstanceVersionResponse: UpgradeInstanceVersionResponse,
     CreateInstancesRequest: CreateInstancesRequest,
     ModifyNetworkConfigResponse: ModifyNetworkConfigResponse,
     CommandTake: CommandTake,
@@ -7336,6 +7561,7 @@ module.exports = {
     InquiryPriceRenewInstanceResponse: InquiryPriceRenewInstanceResponse,
     DescribeDBSecurityGroupsRequest: DescribeDBSecurityGroupsRequest,
     InquiryPriceCreateInstanceResponse: InquiryPriceCreateInstanceResponse,
+    InstanceSecurityGroupDetail: InstanceSecurityGroupDetail,
     ResetPasswordRequest: ResetPasswordRequest,
     ModifyInstanceAccountResponse: ModifyInstanceAccountResponse,
     DelayDistribution: DelayDistribution,
@@ -7344,6 +7570,7 @@ module.exports = {
     DescribeInstanceBackupsResponse: DescribeInstanceBackupsResponse,
     InstanceIntegerParam: InstanceIntegerParam,
     DescribeInstanceMonitorTookDistRequest: DescribeInstanceMonitorTookDistRequest,
+    ModifyMaintenanceWindowRequest: ModifyMaintenanceWindowRequest,
     InstanceTextParam: InstanceTextParam,
     DescribeInstanceMonitorTopNCmdTookResponse: DescribeInstanceMonitorTopNCmdTookResponse,
     DescribeInstanceMonitorBigKeySizeDistRequest: DescribeInstanceMonitorBigKeySizeDistRequest,
@@ -7369,7 +7596,7 @@ module.exports = {
     SecurityGroup: SecurityGroup,
     CreateInstanceAccountRequest: CreateInstanceAccountRequest,
     EnableReplicaReadonlyResponse: EnableReplicaReadonlyResponse,
-    InstanceSecurityGroupDetail: InstanceSecurityGroupDetail,
+    DescribeMaintenanceWindowResponse: DescribeMaintenanceWindowResponse,
     DescribeInstanceSecurityGroupResponse: DescribeInstanceSecurityGroupResponse,
     ProductConf: ProductConf,
     InstanceNode: InstanceNode,
@@ -7393,14 +7620,17 @@ module.exports = {
     ModfiyInstancePasswordResponse: ModfiyInstancePasswordResponse,
     InstanceSet: InstanceSet,
     InquiryPriceRenewInstanceRequest: InquiryPriceRenewInstanceRequest,
+    ModifyMaintenanceWindowResponse: ModifyMaintenanceWindowResponse,
     DescribeInstanceMonitorTopNCmdTookRequest: DescribeInstanceMonitorTopNCmdTookRequest,
     DestroyPrepaidInstanceResponse: DestroyPrepaidInstanceResponse,
     DescribeInstanceMonitorBigKeyTypeDistRequest: DescribeInstanceMonitorBigKeyTypeDistRequest,
     InquiryPriceCreateInstanceRequest: InquiryPriceCreateInstanceRequest,
     ModifyInstanceParamsRequest: ModifyInstanceParamsRequest,
     BigKeyTypeInfo: BigKeyTypeInfo,
+    DescribeMaintenanceWindowRequest: DescribeMaintenanceWindowRequest,
     InstanceClusterNode: InstanceClusterNode,
     EnableReplicaReadonlyRequest: EnableReplicaReadonlyRequest,
+    UpgradeInstanceVersionRequest: UpgradeInstanceVersionRequest,
     DescribeInstanceAccountResponse: DescribeInstanceAccountResponse,
     DescribeInstanceMonitorBigKeyRequest: DescribeInstanceMonitorBigKeyRequest,
     DisableReplicaReadonlyRequest: DisableReplicaReadonlyRequest,

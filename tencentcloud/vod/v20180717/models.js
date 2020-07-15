@@ -10420,12 +10420,6 @@ class CreateSuperPlayerConfigRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 模板描述信息，长度限制：256 个字符。
-         * @type {string || null}
-         */
-        this.Comment = null;
-
-        /**
          * 播放 DRM 保护的自适应码流开关：
 <li>ON：开启，表示仅播放 DRM  保护的自适应码流输出；</li>
 <li>OFF：关闭，表示播放未加密的自适应码流输出。</li>
@@ -10466,6 +10460,26 @@ class CreateSuperPlayerConfigRequest extends  AbstractModel {
         this.ResolutionNames = null;
 
         /**
+         * 播放时使用的域名。不填或者填 Default，表示使用[默认分发配置](https://cloud.tencent.com/document/product/266/33373)中的域名。
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 播放时使用的 Scheme。不填或者填 Default，表示使用[默认分发配置](https://cloud.tencent.com/document/product/266/33373)中的 Scheme。其他可选值：
+<li>HTTP；</li>
+<li>HTTPS。</li>
+         * @type {string || null}
+         */
+        this.Scheme = null;
+
+        /**
+         * 模板描述信息，长度限制：256 个字符。
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
          * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
          * @type {number || null}
          */
@@ -10481,7 +10495,6 @@ class CreateSuperPlayerConfigRequest extends  AbstractModel {
             return;
         }
         this.Name = 'Name' in params ? params.Name : null;
-        this.Comment = 'Comment' in params ? params.Comment : null;
         this.DrmSwitch = 'DrmSwitch' in params ? params.DrmSwitch : null;
         this.AdaptiveDynamicStreamingDefinition = 'AdaptiveDynamicStreamingDefinition' in params ? params.AdaptiveDynamicStreamingDefinition : null;
 
@@ -10500,6 +10513,9 @@ class CreateSuperPlayerConfigRequest extends  AbstractModel {
                 this.ResolutionNames.push(obj);
             }
         }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Scheme = 'Scheme' in params ? params.Scheme : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
@@ -12445,6 +12461,21 @@ class PlayerConfig extends  AbstractModel {
         this.UpdateTime = null;
 
         /**
+         * 播放时使用的域名。值为 Default，表示使用[默认分发配置](https://cloud.tencent.com/document/product/266/33373)中的域名。
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 播放时使用的 Scheme。取值范围：
+<li>Default：使用[默认分发配置](https://cloud.tencent.com/document/product/266/33373)中的 Scheme；</li>
+<li>HTTP；</li>
+<li>HTTPS。</li>
+         * @type {string || null}
+         */
+        this.Scheme = null;
+
+        /**
          * 模板描述信息。
          * @type {string || null}
          */
@@ -12481,6 +12512,8 @@ class PlayerConfig extends  AbstractModel {
         }
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Scheme = 'Scheme' in params ? params.Scheme : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
 
     }
@@ -20928,6 +20961,21 @@ class ModifySuperPlayerConfigRequest extends  AbstractModel {
         this.ResolutionNames = null;
 
         /**
+         * 播放时使用的域名。填 Default 表示使用[默认分发配置](https://cloud.tencent.com/document/product/266/33373)中的域名。
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 播放时使用的 Scheme。取值范围：
+<li>Default：使用[默认分发配置](https://cloud.tencent.com/document/product/266/33373)中的 Scheme；</li>
+<li>HTTP；</li>
+<li>HTTPS。</li>
+         * @type {string || null}
+         */
+        this.Scheme = null;
+
+        /**
          * 模板描述信息，长度限制：256 个字符。
          * @type {string || null}
          */
@@ -20967,6 +21015,8 @@ class ModifySuperPlayerConfigRequest extends  AbstractModel {
                 this.ResolutionNames.push(obj);
             }
         }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Scheme = 'Scheme' in params ? params.Scheme : null;
         this.Comment = 'Comment' in params ? params.Comment : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 

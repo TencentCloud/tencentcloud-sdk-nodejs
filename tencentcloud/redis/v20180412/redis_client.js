@@ -23,6 +23,7 @@ const ModifyAutoBackupConfigResponse = models.ModifyAutoBackupConfigResponse;
 const RestoreInstanceRequest = models.RestoreInstanceRequest;
 const TaskInfoDetail = models.TaskInfoDetail;
 const SwitchInstanceVipRequest = models.SwitchInstanceVipRequest;
+const UpgradeInstanceVersionResponse = models.UpgradeInstanceVersionResponse;
 const CreateInstancesRequest = models.CreateInstancesRequest;
 const ModifyNetworkConfigResponse = models.ModifyNetworkConfigResponse;
 const CommandTake = models.CommandTake;
@@ -68,6 +69,7 @@ const DescribeBackupUrlResponse = models.DescribeBackupUrlResponse;
 const InquiryPriceRenewInstanceResponse = models.InquiryPriceRenewInstanceResponse;
 const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
 const InquiryPriceCreateInstanceResponse = models.InquiryPriceCreateInstanceResponse;
+const InstanceSecurityGroupDetail = models.InstanceSecurityGroupDetail;
 const ResetPasswordRequest = models.ResetPasswordRequest;
 const ModifyInstanceAccountResponse = models.ModifyInstanceAccountResponse;
 const DelayDistribution = models.DelayDistribution;
@@ -76,6 +78,7 @@ const DescribeInstanceMonitorTookDistResponse = models.DescribeInstanceMonitorTo
 const DescribeInstanceBackupsResponse = models.DescribeInstanceBackupsResponse;
 const InstanceIntegerParam = models.InstanceIntegerParam;
 const DescribeInstanceMonitorTookDistRequest = models.DescribeInstanceMonitorTookDistRequest;
+const ModifyMaintenanceWindowRequest = models.ModifyMaintenanceWindowRequest;
 const InstanceTextParam = models.InstanceTextParam;
 const DescribeInstanceMonitorTopNCmdTookResponse = models.DescribeInstanceMonitorTopNCmdTookResponse;
 const DescribeInstanceMonitorBigKeySizeDistRequest = models.DescribeInstanceMonitorBigKeySizeDistRequest;
@@ -101,7 +104,7 @@ const DescribeInstanceMonitorBigKeySizeDistResponse = models.DescribeInstanceMon
 const SecurityGroup = models.SecurityGroup;
 const CreateInstanceAccountRequest = models.CreateInstanceAccountRequest;
 const EnableReplicaReadonlyResponse = models.EnableReplicaReadonlyResponse;
-const InstanceSecurityGroupDetail = models.InstanceSecurityGroupDetail;
+const DescribeMaintenanceWindowResponse = models.DescribeMaintenanceWindowResponse;
 const DescribeInstanceSecurityGroupResponse = models.DescribeInstanceSecurityGroupResponse;
 const ProductConf = models.ProductConf;
 const InstanceNode = models.InstanceNode;
@@ -125,14 +128,17 @@ const ManualBackupInstanceRequest = models.ManualBackupInstanceRequest;
 const ModfiyInstancePasswordResponse = models.ModfiyInstancePasswordResponse;
 const InstanceSet = models.InstanceSet;
 const InquiryPriceRenewInstanceRequest = models.InquiryPriceRenewInstanceRequest;
+const ModifyMaintenanceWindowResponse = models.ModifyMaintenanceWindowResponse;
 const DescribeInstanceMonitorTopNCmdTookRequest = models.DescribeInstanceMonitorTopNCmdTookRequest;
 const DestroyPrepaidInstanceResponse = models.DestroyPrepaidInstanceResponse;
 const DescribeInstanceMonitorBigKeyTypeDistRequest = models.DescribeInstanceMonitorBigKeyTypeDistRequest;
 const InquiryPriceCreateInstanceRequest = models.InquiryPriceCreateInstanceRequest;
 const ModifyInstanceParamsRequest = models.ModifyInstanceParamsRequest;
 const BigKeyTypeInfo = models.BigKeyTypeInfo;
+const DescribeMaintenanceWindowRequest = models.DescribeMaintenanceWindowRequest;
 const InstanceClusterNode = models.InstanceClusterNode;
 const EnableReplicaReadonlyRequest = models.EnableReplicaReadonlyRequest;
+const UpgradeInstanceVersionRequest = models.UpgradeInstanceVersionRequest;
 const DescribeInstanceAccountResponse = models.DescribeInstanceAccountResponse;
 const DescribeInstanceMonitorBigKeyRequest = models.DescribeInstanceMonitorBigKeyRequest;
 const DisableReplicaReadonlyRequest = models.DisableReplicaReadonlyRequest;
@@ -189,6 +195,17 @@ class RedisClient extends AbstractClient {
     CreateInstanceAccount(req, cb) {
         let resp = new CreateInstanceAccountResponse();
         this.request("CreateInstanceAccount", req, resp, cb);
+    }
+
+    /**
+     * 修改实例维护时间窗时间，需要进行版本升级或者架构升级的实例，会在维护时间窗内进行时间切换。注意：已经发起版本升级或者架构升级的实例，无法修改维护时间窗。
+     * @param {ModifyMaintenanceWindowRequest} req
+     * @param {function(string, ModifyMaintenanceWindowResponse):void} cb
+     * @public
+     */
+    ModifyMaintenanceWindow(req, cb) {
+        let resp = new ModifyMaintenanceWindowResponse();
+        this.request("ModifyMaintenanceWindow", req, resp, cb);
     }
 
     /**
@@ -324,14 +341,14 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * 修改实例参数
-     * @param {ModifyInstanceParamsRequest} req
-     * @param {function(string, ModifyInstanceParamsResponse):void} cb
+     * 查询实例维护时间窗，在实例需要进行版本升级或者架构升级的时候，会在维护时间窗时间内进行切换
+     * @param {DescribeMaintenanceWindowRequest} req
+     * @param {function(string, DescribeMaintenanceWindowResponse):void} cb
      * @public
      */
-    ModifyInstanceParams(req, cb) {
-        let resp = new ModifyInstanceParamsResponse();
-        this.request("ModifyInstanceParams", req, resp, cb);
+    DescribeMaintenanceWindow(req, cb) {
+        let resp = new DescribeMaintenanceWindowResponse();
+        this.request("DescribeMaintenanceWindow", req, resp, cb);
     }
 
     /**
@@ -398,6 +415,17 @@ class RedisClient extends AbstractClient {
     CreateInstances(req, cb) {
         let resp = new CreateInstancesResponse();
         this.request("CreateInstances", req, resp, cb);
+    }
+
+    /**
+     * 将原本实例升级到高版本实例，或者将主从版实例升级到集群版实例
+     * @param {UpgradeInstanceVersionRequest} req
+     * @param {function(string, UpgradeInstanceVersionResponse):void} cb
+     * @public
+     */
+    UpgradeInstanceVersion(req, cb) {
+        let resp = new UpgradeInstanceVersionResponse();
+        this.request("UpgradeInstanceVersion", req, resp, cb);
     }
 
     /**
@@ -497,6 +525,17 @@ class RedisClient extends AbstractClient {
     AssociateSecurityGroups(req, cb) {
         let resp = new AssociateSecurityGroupsResponse();
         this.request("AssociateSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * 修改实例参数
+     * @param {ModifyInstanceParamsRequest} req
+     * @param {function(string, ModifyInstanceParamsResponse):void} cb
+     * @public
+     */
+    ModifyInstanceParams(req, cb) {
+        let resp = new ModifyInstanceParamsResponse();
+        this.request("ModifyInstanceParams", req, resp, cb);
     }
 
     /**
