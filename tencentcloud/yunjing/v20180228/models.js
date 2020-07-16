@@ -417,6 +417,27 @@ class DescribeAgentVulsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeTags请求参数结构体
+ * @class
+ */
+class DescribeTagsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * AddMachineTag返回参数结构体
  * @class
  */
@@ -1331,38 +1352,60 @@ class WeeklyReportMalware extends  AbstractModel {
 }
 
 /**
- * DescribeBruteAttacks请求参数结构体
+ * CreateBaselineStrategy请求参数结构体
  * @class
  */
-class DescribeBruteAttacksRequest extends  AbstractModel {
+class CreateBaselineStrategyRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 客户端唯一Uuid。
+         * 策略名称
          * @type {string || null}
          */
-        this.Uuid = null;
+        this.StrategyName = null;
 
         /**
-         * 偏移量，默认为0。
+         * 检测周期
          * @type {number || null}
          */
-        this.Offset = null;
+        this.ScanCycle = null;
 
         /**
-         * 过滤条件。
-<li>Keywords - String - 是否必填：否 -  查询关键字</li>
-<li>Status - String - 是否必填：否 -  查询状态（FAILED：破解失败 |SUCCESS：破解成功）</li>
-         * @type {Array.<Filter> || null}
+         * 定期检测时间，该时间下发扫描
+         * @type {string || null}
          */
-        this.Filters = null;
+        this.ScanAt = null;
 
         /**
-         * 返回数量，默认为10，最大值为100。
+         * 该策略下选择的基线id数组
+         * @type {Array.<number> || null}
+         */
+        this.CategoryIds = null;
+
+        /**
+         * 扫描范围是否全部服务器, 1:是  0:否, 为1则为全部专业版主机
          * @type {number || null}
          */
-        this.Limit = null;
+        this.IsGlobal = null;
+
+        /**
+         * 云主机类型：cvm：虚拟主机，bms：裸金属，ecm：边缘计算主机
+         * @type {string || null}
+         */
+        this.MachineType = null;
+
+        /**
+         * 主机地域
+         * @type {string || null}
+         */
+        this.RegionCode = null;
+
+        /**
+         * 主机id数组
+         * @type {Array.<string> || null}
+         */
+        this.Quuids = null;
 
     }
 
@@ -1373,18 +1416,14 @@ class DescribeBruteAttacksRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uuid = 'Uuid' in params ? params.Uuid : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
-        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.StrategyName = 'StrategyName' in params ? params.StrategyName : null;
+        this.ScanCycle = 'ScanCycle' in params ? params.ScanCycle : null;
+        this.ScanAt = 'ScanAt' in params ? params.ScanAt : null;
+        this.CategoryIds = 'CategoryIds' in params ? params.CategoryIds : null;
+        this.IsGlobal = 'IsGlobal' in params ? params.IsGlobal : null;
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+        this.RegionCode = 'RegionCode' in params ? params.RegionCode : null;
+        this.Quuids = 'Quuids' in params ? params.Quuids : null;
 
     }
 }
@@ -2286,6 +2325,34 @@ class DeleteMachineTagRequest extends  AbstractModel {
             return;
         }
         this.Rid = 'Rid' in params ? params.Rid : null;
+
+    }
+}
+
+/**
+ * CreateBaselineStrategy返回参数结构体
+ * @class
+ */
+class CreateBaselineStrategyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5486,122 +5553,19 @@ class InquiryPriceOpenProVersionPrepaidResponse extends  AbstractModel {
 }
 
 /**
- * DescribeMachineInfo返回参数结构体
+ * CloseProVersion请求参数结构体
  * @class
  */
-class DescribeMachineInfoResponse extends  AbstractModel {
+class CloseProVersionRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 机器ip。
-         * @type {string || null}
-         */
-        this.MachineIp = null;
-
-        /**
-         * 受云镜保护天数。
-         * @type {number || null}
-         */
-        this.ProtectDays = null;
-
-        /**
-         * 操作系统。
-         * @type {string || null}
-         */
-        this.MachineOs = null;
-
-        /**
-         * 主机名称。
-         * @type {string || null}
-         */
-        this.MachineName = null;
-
-        /**
-         * 在线状态。
-<li>ONLINE： 在线</li>
-<li>OFFLINE：离线</li>
-         * @type {string || null}
-         */
-        this.MachineStatus = null;
-
-        /**
-         * CVM或BM主机唯一标识。
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * 主机外网IP。
-         * @type {string || null}
-         */
-        this.MachineWanIp = null;
-
-        /**
-         * CVM或BM主机唯一Uuid。
+         * 主机唯一标识Uuid。
+黑石的InstanceId，CVM的Uuid
          * @type {string || null}
          */
         this.Quuid = null;
-
-        /**
-         * 云镜客户端唯一Uuid。
-         * @type {string || null}
-         */
-        this.Uuid = null;
-
-        /**
-         * 是否开通专业版。
-<li>true：是</li>
-<li>false：否</li>
-         * @type {boolean || null}
-         */
-        this.IsProVersion = null;
-
-        /**
-         * 专业版开通时间。
-         * @type {string || null}
-         */
-        this.ProVersionOpenDate = null;
-
-        /**
-         * 云主机类型。
-<li>CVM: 虚拟主机</li>
-<li>BM: 黑石物理机</li>
-         * @type {string || null}
-         */
-        this.MachineType = null;
-
-        /**
-         * 机器所属地域。如：ap-guangzhou，ap-shanghai
-         * @type {string || null}
-         */
-        this.MachineRegion = null;
-
-        /**
-         * 主机状态。
-<li>POSTPAY: 表示后付费，即按量计费  </li>
-<li>PREPAY: 表示预付费，即包年包月</li>
-         * @type {string || null}
-         */
-        this.PayMode = null;
-
-        /**
-         * 免费木马剩余检测数量。
-         * @type {number || null}
-         */
-        this.FreeMalwaresLeft = null;
-
-        /**
-         * 免费漏洞剩余检测数量。
-         * @type {number || null}
-         */
-        this.FreeVulsLeft = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
 
     }
 
@@ -5612,23 +5576,7 @@ class DescribeMachineInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
-        this.ProtectDays = 'ProtectDays' in params ? params.ProtectDays : null;
-        this.MachineOs = 'MachineOs' in params ? params.MachineOs : null;
-        this.MachineName = 'MachineName' in params ? params.MachineName : null;
-        this.MachineStatus = 'MachineStatus' in params ? params.MachineStatus : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.MachineWanIp = 'MachineWanIp' in params ? params.MachineWanIp : null;
         this.Quuid = 'Quuid' in params ? params.Quuid : null;
-        this.Uuid = 'Uuid' in params ? params.Uuid : null;
-        this.IsProVersion = 'IsProVersion' in params ? params.IsProVersion : null;
-        this.ProVersionOpenDate = 'ProVersionOpenDate' in params ? params.ProVersionOpenDate : null;
-        this.MachineType = 'MachineType' in params ? params.MachineType : null;
-        this.MachineRegion = 'MachineRegion' in params ? params.MachineRegion : null;
-        this.PayMode = 'PayMode' in params ? params.PayMode : null;
-        this.FreeMalwaresLeft = 'FreeMalwaresLeft' in params ? params.FreeMalwaresLeft : null;
-        this.FreeVulsLeft = 'FreeVulsLeft' in params ? params.FreeVulsLeft : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8293,12 +8241,38 @@ class Process extends  AbstractModel {
 }
 
 /**
- * DescribeTags请求参数结构体
+ * DescribeBruteAttacks请求参数结构体
  * @class
  */
-class DescribeTagsRequest extends  AbstractModel {
+class DescribeBruteAttacksRequest extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 客户端唯一Uuid。
+         * @type {string || null}
+         */
+        this.Uuid = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 过滤条件。
+<li>Keywords - String - 是否必填：否 -  查询关键字</li>
+<li>Status - String - 是否必填：否 -  查询状态（FAILED：破解失败 |SUCCESS：破解成功）</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 返回数量，默认为10，最大值为100。
+         * @type {number || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -8309,6 +8283,18 @@ class DescribeTagsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -10055,19 +10041,122 @@ class DescribeHistoryAccountsRequest extends  AbstractModel {
 }
 
 /**
- * CloseProVersion请求参数结构体
+ * DescribeMachineInfo返回参数结构体
  * @class
  */
-class CloseProVersionRequest extends  AbstractModel {
+class DescribeMachineInfoResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 主机唯一标识Uuid。
-黑石的InstanceId，CVM的Uuid
+         * 机器ip。
+         * @type {string || null}
+         */
+        this.MachineIp = null;
+
+        /**
+         * 受云镜保护天数。
+         * @type {number || null}
+         */
+        this.ProtectDays = null;
+
+        /**
+         * 操作系统。
+         * @type {string || null}
+         */
+        this.MachineOs = null;
+
+        /**
+         * 主机名称。
+         * @type {string || null}
+         */
+        this.MachineName = null;
+
+        /**
+         * 在线状态。
+<li>ONLINE： 在线</li>
+<li>OFFLINE：离线</li>
+         * @type {string || null}
+         */
+        this.MachineStatus = null;
+
+        /**
+         * CVM或BM主机唯一标识。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 主机外网IP。
+         * @type {string || null}
+         */
+        this.MachineWanIp = null;
+
+        /**
+         * CVM或BM主机唯一Uuid。
          * @type {string || null}
          */
         this.Quuid = null;
+
+        /**
+         * 云镜客户端唯一Uuid。
+         * @type {string || null}
+         */
+        this.Uuid = null;
+
+        /**
+         * 是否开通专业版。
+<li>true：是</li>
+<li>false：否</li>
+         * @type {boolean || null}
+         */
+        this.IsProVersion = null;
+
+        /**
+         * 专业版开通时间。
+         * @type {string || null}
+         */
+        this.ProVersionOpenDate = null;
+
+        /**
+         * 云主机类型。
+<li>CVM: 虚拟主机</li>
+<li>BM: 黑石物理机</li>
+         * @type {string || null}
+         */
+        this.MachineType = null;
+
+        /**
+         * 机器所属地域。如：ap-guangzhou，ap-shanghai
+         * @type {string || null}
+         */
+        this.MachineRegion = null;
+
+        /**
+         * 主机状态。
+<li>POSTPAY: 表示后付费，即按量计费  </li>
+<li>PREPAY: 表示预付费，即包年包月</li>
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * 免费木马剩余检测数量。
+         * @type {number || null}
+         */
+        this.FreeMalwaresLeft = null;
+
+        /**
+         * 免费漏洞剩余检测数量。
+         * @type {number || null}
+         */
+        this.FreeVulsLeft = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -10078,7 +10167,23 @@ class CloseProVersionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.MachineIp = 'MachineIp' in params ? params.MachineIp : null;
+        this.ProtectDays = 'ProtectDays' in params ? params.ProtectDays : null;
+        this.MachineOs = 'MachineOs' in params ? params.MachineOs : null;
+        this.MachineName = 'MachineName' in params ? params.MachineName : null;
+        this.MachineStatus = 'MachineStatus' in params ? params.MachineStatus : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.MachineWanIp = 'MachineWanIp' in params ? params.MachineWanIp : null;
         this.Quuid = 'Quuid' in params ? params.Quuid : null;
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.IsProVersion = 'IsProVersion' in params ? params.IsProVersion : null;
+        this.ProVersionOpenDate = 'ProVersionOpenDate' in params ? params.ProVersionOpenDate : null;
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+        this.MachineRegion = 'MachineRegion' in params ? params.MachineRegion : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.FreeMalwaresLeft = 'FreeMalwaresLeft' in params ? params.FreeMalwaresLeft : null;
+        this.FreeVulsLeft = 'FreeVulsLeft' in params ? params.FreeVulsLeft : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11231,6 +11336,7 @@ module.exports = {
     DescribeAlarmAttributeResponse: DescribeAlarmAttributeResponse,
     DescribeWeeklyReportBruteAttacksResponse: DescribeWeeklyReportBruteAttacksResponse,
     DescribeAgentVulsRequest: DescribeAgentVulsRequest,
+    DescribeTagsRequest: DescribeTagsRequest,
     AddMachineTagResponse: AddMachineTagResponse,
     UsualPlace: UsualPlace,
     DescribeReverseShellRulesRequest: DescribeReverseShellRulesRequest,
@@ -11251,7 +11357,7 @@ module.exports = {
     DeleteBashEventsResponse: DeleteBashEventsResponse,
     ExportPrivilegeEventsRequest: ExportPrivilegeEventsRequest,
     WeeklyReportMalware: WeeklyReportMalware,
-    DescribeBruteAttacksRequest: DescribeBruteAttacksRequest,
+    CreateBaselineStrategyRequest: CreateBaselineStrategyRequest,
     DescribeSecurityTrendsRequest: DescribeSecurityTrendsRequest,
     Account: Account,
     DescribeReverseShellEventsResponse: DescribeReverseShellEventsResponse,
@@ -11267,6 +11373,7 @@ module.exports = {
     DescribeComponentsRequest: DescribeComponentsRequest,
     DescribeNonlocalLoginPlacesRequest: DescribeNonlocalLoginPlacesRequest,
     DeleteMachineTagRequest: DeleteMachineTagRequest,
+    CreateBaselineStrategyResponse: CreateBaselineStrategyResponse,
     ReverseShellRule: ReverseShellRule,
     OpenPortStatistics: OpenPortStatistics,
     EditPrivilegeRuleResponse: EditPrivilegeRuleResponse,
@@ -11335,7 +11442,7 @@ module.exports = {
     EditBashRuleRequest: EditBashRuleRequest,
     DeletePrivilegeEventsResponse: DeletePrivilegeEventsResponse,
     InquiryPriceOpenProVersionPrepaidResponse: InquiryPriceOpenProVersionPrepaidResponse,
-    DescribeMachineInfoResponse: DescribeMachineInfoResponse,
+    CloseProVersionRequest: CloseProVersionRequest,
     SetBashEventsStatusResponse: SetBashEventsStatusResponse,
     DescribeUsualLoginPlacesResponse: DescribeUsualLoginPlacesResponse,
     DescribeProcessStatisticsResponse: DescribeProcessStatisticsResponse,
@@ -11397,7 +11504,7 @@ module.exports = {
     SeparateMalwaresResponse: SeparateMalwaresResponse,
     ProcessStatistics: ProcessStatistics,
     Process: Process,
-    DescribeTagsRequest: DescribeTagsRequest,
+    DescribeBruteAttacksRequest: DescribeBruteAttacksRequest,
     DescribeVulScanResultRequest: DescribeVulScanResultRequest,
     DescribePrivilegeEventsRequest: DescribePrivilegeEventsRequest,
     DescribeWeeklyReportMalwaresResponse: DescribeWeeklyReportMalwaresResponse,
@@ -11432,7 +11539,7 @@ module.exports = {
     DescribeProcessStatisticsRequest: DescribeProcessStatisticsRequest,
     DeleteMachineTagResponse: DeleteMachineTagResponse,
     DescribeHistoryAccountsRequest: DescribeHistoryAccountsRequest,
-    CloseProVersionRequest: CloseProVersionRequest,
+    DescribeMachineInfoResponse: DescribeMachineInfoResponse,
     OpenProVersionRequest: OpenProVersionRequest,
     DeleteBashRulesResponse: DeleteBashRulesResponse,
     IgnoreImpactedHostsResponse: IgnoreImpactedHostsResponse,

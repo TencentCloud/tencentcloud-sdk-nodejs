@@ -11322,7 +11322,7 @@ class ModifyLiveCallbackTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * 模板 ID。
+         * DescribeLiveCallbackTemplates接口返回的模板 ID。
          * @type {number || null}
          */
         this.TemplateId = null;
