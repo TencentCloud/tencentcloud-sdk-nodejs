@@ -487,7 +487,7 @@ class ModifyResourceTagsRequest extends  AbstractModel {
         super();
 
         /**
-         * 资源的六段式描述
+         * [ 资源六段式描述 ](https://cloud.tencent.com/document/product/598/10606)
          * @type {string || null}
          */
         this.Resource = null;
@@ -1181,7 +1181,7 @@ class AddResourceTagRequest extends  AbstractModel {
         this.TagValue = null;
 
         /**
-         * 资源六段式描述
+         * [ 资源六段式描述 ](https://cloud.tencent.com/document/product/598/10606)
          * @type {string || null}
          */
         this.Resource = null;
@@ -1888,7 +1888,7 @@ class UpdateResourceTagValueRequest extends  AbstractModel {
         this.TagValue = null;
 
         /**
-         * 资源的六段式描述
+         * [ 资源六段式描述 ](https://cloud.tencent.com/document/product/598/10606)
          * @type {string || null}
          */
         this.Resource = null;
@@ -2009,7 +2009,7 @@ class DeleteResourceTagRequest extends  AbstractModel {
         this.TagKey = null;
 
         /**
-         * 资源六段式描述
+         * [ 资源六段式描述 ](https://cloud.tencent.com/document/product/598/10606)
          * @type {string || null}
          */
         this.Resource = null;

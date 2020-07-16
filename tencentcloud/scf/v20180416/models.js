@@ -461,34 +461,6 @@ class PublishLayerVersionResponse extends  AbstractModel {
 }
 
 /**
- * CreateFunction返回参数结构体
- * @class
- */
-class CreateFunctionResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * 公网访问配置
  * @class
  */
@@ -1607,6 +1579,12 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
          */
         this.PublicNetConfig = null;
 
+        /**
+         * 文件系统配置入参，用于云函数绑定文件系统
+         * @type {CfsConfig || null}
+         */
+        this.CfsConfig = null;
+
     }
 
     /**
@@ -1659,6 +1637,12 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
             let obj = new PublicNetConfigIn();
             obj.deserialize(params.PublicNetConfig)
             this.PublicNetConfig = obj;
+        }
+
+        if (params.CfsConfig) {
+            let obj = new CfsConfig();
+            obj.deserialize(params.CfsConfig)
+            this.CfsConfig = obj;
         }
 
     }
@@ -1932,6 +1916,70 @@ class LayerVersionSimple extends  AbstractModel {
         }
         this.LayerName = 'LayerName' in params ? params.LayerName : null;
         this.LayerVersion = 'LayerVersion' in params ? params.LayerVersion : null;
+
+    }
+}
+
+/**
+ * 文件系统(cfs)配置描述
+ * @class
+ */
+class CfsConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 文件系统信息列表
+         * @type {Array.<CfsInsInfo> || null}
+         */
+        this.CfsInsList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.CfsInsList) {
+            this.CfsInsList = new Array();
+            for (let z in params.CfsInsList) {
+                let obj = new CfsInsInfo();
+                obj.deserialize(params.CfsInsList[z]);
+                this.CfsInsList.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DeleteNamespace请求参数结构体
+ * @class
+ */
+class DeleteNamespaceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 命名空间名称
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
 
     }
 }
@@ -2527,6 +2575,12 @@ class CreateFunctionRequest extends  AbstractModel {
          */
         this.PublicNetConfig = null;
 
+        /**
+         * 文件系统配置参数，用于云函数挂载文件系统
+         * @type {CfsConfig || null}
+         */
+        this.CfsConfig = null;
+
     }
 
     /**
@@ -2586,6 +2640,12 @@ class CreateFunctionRequest extends  AbstractModel {
             let obj = new PublicNetConfigIn();
             obj.deserialize(params.PublicNetConfig)
             this.PublicNetConfig = obj;
+        }
+
+        if (params.CfsConfig) {
+            let obj = new CfsConfig();
+            obj.deserialize(params.CfsConfig)
+            this.CfsConfig = obj;
         }
 
     }
@@ -3514,6 +3574,27 @@ class GetFunctionResponse extends  AbstractModel {
         this.OnsEnable = null;
 
         /**
+         * 文件系统配置参数，用于云函数挂载文件系统
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {CfsConfig || null}
+         */
+        this.CfsConfig = null;
+
+        /**
+         * 函数的计费状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AvailableStatus = null;
+
+        /**
+         * 函数版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Qualifier = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -3617,6 +3698,14 @@ class GetFunctionResponse extends  AbstractModel {
             this.PublicNetConfig = obj;
         }
         this.OnsEnable = 'OnsEnable' in params ? params.OnsEnable : null;
+
+        if (params.CfsConfig) {
+            let obj = new CfsConfig();
+            obj.deserialize(params.CfsConfig)
+            this.CfsConfig = obj;
+        }
+        this.AvailableStatus = 'AvailableStatus' in params ? params.AvailableStatus : null;
+        this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3979,6 +4068,93 @@ class FunctionLog extends  AbstractModel {
         this.Level = 'Level' in params ? params.Level : null;
         this.Source = 'Source' in params ? params.Source : null;
         this.RetryNum = 'RetryNum' in params ? params.RetryNum : null;
+
+    }
+}
+
+/**
+ * 云函数关联的cfs配置信息
+ * @class
+ */
+class CfsInsInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用户id
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * 用户组id
+         * @type {string || null}
+         */
+        this.UserGroupId = null;
+
+        /**
+         * 文件系统实例id
+         * @type {string || null}
+         */
+        this.CfsId = null;
+
+        /**
+         * 文件系统挂载点id
+         * @type {string || null}
+         */
+        this.MountInsId = null;
+
+        /**
+         * 本地挂载点
+         * @type {string || null}
+         */
+        this.LocalMountDir = null;
+
+        /**
+         * 远程挂载点
+         * @type {string || null}
+         */
+        this.RemoteMountDir = null;
+
+        /**
+         * 文件系统ip
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.IpAddress = null;
+
+        /**
+         * 文件系统所在的私有网络id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MountVpcId = null;
+
+        /**
+         * 文件系统所在私有网络的子网id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MountSubnetId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.UserGroupId = 'UserGroupId' in params ? params.UserGroupId : null;
+        this.CfsId = 'CfsId' in params ? params.CfsId : null;
+        this.MountInsId = 'MountInsId' in params ? params.MountInsId : null;
+        this.LocalMountDir = 'LocalMountDir' in params ? params.LocalMountDir : null;
+        this.RemoteMountDir = 'RemoteMountDir' in params ? params.RemoteMountDir : null;
+        this.IpAddress = 'IpAddress' in params ? params.IpAddress : null;
+        this.MountVpcId = 'MountVpcId' in params ? params.MountVpcId : null;
+        this.MountSubnetId = 'MountSubnetId' in params ? params.MountSubnetId : null;
 
     }
 }
@@ -4376,18 +4552,18 @@ class ListTriggersRequest extends  AbstractModel {
 }
 
 /**
- * DeleteNamespace请求参数结构体
+ * CreateFunction返回参数结构体
  * @class
  */
-class DeleteNamespaceRequest extends  AbstractModel {
+class CreateFunctionResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 命名空间名称
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Namespace = null;
+        this.RequestId = null;
 
     }
 
@@ -4398,7 +4574,7 @@ class DeleteNamespaceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4955,7 +5131,6 @@ module.exports = {
     LayerVersionInfo: LayerVersionInfo,
     UpdateFunctionConfigurationResponse: UpdateFunctionConfigurationResponse,
     PublishLayerVersionResponse: PublishLayerVersionResponse,
-    CreateFunctionResponse: CreateFunctionResponse,
     PublicNetConfigIn: PublicNetConfigIn,
     UpdateAliasRequest: UpdateAliasRequest,
     RoutingConfig: RoutingConfig,
@@ -4984,6 +5159,8 @@ module.exports = {
     CopyFunctionRequest: CopyFunctionRequest,
     DeleteNamespaceResponse: DeleteNamespaceResponse,
     LayerVersionSimple: LayerVersionSimple,
+    CfsConfig: CfsConfig,
+    DeleteNamespaceRequest: DeleteNamespaceRequest,
     ListFunctionsRequest: ListFunctionsRequest,
     CreateTriggerRequest: CreateTriggerRequest,
     ListLayersResponse: ListLayersResponse,
@@ -5013,13 +5190,14 @@ module.exports = {
     UpdateNamespaceRequest: UpdateNamespaceRequest,
     GetLayerVersionResponse: GetLayerVersionResponse,
     FunctionLog: FunctionLog,
+    CfsInsInfo: CfsInsInfo,
     FunctionVersion: FunctionVersion,
     Function: Function,
     DeadLetterConfig: DeadLetterConfig,
     ListVersionByFunctionRequest: ListVersionByFunctionRequest,
     ListFunctionsResponse: ListFunctionsResponse,
     ListTriggersRequest: ListTriggersRequest,
-    DeleteNamespaceRequest: DeleteNamespaceRequest,
+    CreateFunctionResponse: CreateFunctionResponse,
     ListAliasesRequest: ListAliasesRequest,
     EipOutConfig: EipOutConfig,
     Alias: Alias,

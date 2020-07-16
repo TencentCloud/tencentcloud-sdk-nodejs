@@ -885,6 +885,69 @@ class CreateInstanceResponse extends  AbstractModel {
 }
 
 /**
+ * 扩容容器资源时的资源描述
+ * @class
+ */
+class PodSpec extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 外部资源提供者的标识符，例如"cls-a1cd23fa"。
+         * @type {string || null}
+         */
+        this.ResourceProviderIdentifier = null;
+
+        /**
+         * 外部资源提供者类型，例如"tke",当前仅支持"tke"。
+         * @type {string || null}
+         */
+        this.ResourceProviderType = null;
+
+        /**
+         * 资源的用途，即节点类型，当前仅支持"TASK"。
+         * @type {string || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * CPU核数。
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * 内存大小，单位为GB。
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * 资源对宿主机的挂载点，指定的挂载点对应了宿主机的路径，该挂载点在Pod中作为数据存储目录使用。
+         * @type {Array.<string> || null}
+         */
+        this.DataVolumes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceProviderIdentifier = 'ResourceProviderIdentifier' in params ? params.ResourceProviderIdentifier : null;
+        this.ResourceProviderType = 'ResourceProviderType' in params ? params.ResourceProviderType : null;
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.DataVolumes = 'DataVolumes' in params ? params.DataVolumes : null;
+
+    }
+}
+
+/**
  * InquiryPriceRenewInstance返回参数结构体
  * @class
  */
@@ -1084,6 +1147,18 @@ class DescribeClusterNodesRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * 资源类型:支持all/host/pod，默认为all
+         * @type {string || null}
+         */
+        this.HardwareResourceType = null;
+
+        /**
+         * 支持搜索的字段
+         * @type {Array.<SearchItem> || null}
+         */
+        this.SearchFields = null;
+
     }
 
     /**
@@ -1097,6 +1172,16 @@ class DescribeClusterNodesRequest extends  AbstractModel {
         this.NodeFlag = 'NodeFlag' in params ? params.NodeFlag : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.HardwareResourceType = 'HardwareResourceType' in params ? params.HardwareResourceType : null;
+
+        if (params.SearchFields) {
+            this.SearchFields = new Array();
+            for (let z in params.SearchFields) {
+                let obj = new SearchItem();
+                obj.deserialize(params.SearchFields[z]);
+                this.SearchFields.push(obj);
+            }
+        }
 
     }
 }
@@ -2282,6 +2367,41 @@ class MultiDisk extends  AbstractModel {
 }
 
 /**
+ * 搜索字段
+ * @class
+ */
+class SearchItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 支持搜索的类型
+         * @type {string || null}
+         */
+        this.SearchType = null;
+
+        /**
+         * 支持搜索的值
+         * @type {string || null}
+         */
+        this.SearchValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SearchType = 'SearchType' in params ? params.SearchType : null;
+        this.SearchValue = 'SearchValue' in params ? params.SearchValue : null;
+
+    }
+}
+
+/**
  * InquiryPriceScaleOutInstance返回参数结构体
  * @class
  */
@@ -2547,6 +2667,13 @@ class DescribeClusterNodesResponse extends  AbstractModel {
         this.TagKeys = null;
 
         /**
+         * 资源类型列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.HardwareResourceTypeList = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -2572,6 +2699,7 @@ class DescribeClusterNodesResponse extends  AbstractModel {
             }
         }
         this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
+        this.HardwareResourceTypeList = 'HardwareResourceTypeList' in params ? params.HardwareResourceTypeList : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2837,6 +2965,13 @@ class NodeHardwareInfo extends  AbstractModel {
          */
         this.AutoFlag = null;
 
+        /**
+         * 资源类型, host/pod
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HardwareResourceType = null;
+
     }
 
     /**
@@ -2903,6 +3038,7 @@ class NodeHardwareInfo extends  AbstractModel {
             }
         }
         this.AutoFlag = 'AutoFlag' in params ? params.AutoFlag : null;
+        this.HardwareResourceType = 'HardwareResourceType' in params ? params.HardwareResourceType : null;
 
     }
 }
@@ -3377,6 +3513,18 @@ class ScaleOutInstanceRequest extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * 扩容所选资源类型，可选范围为"host","pod"，host为普通的CVM资源，Pod为TKE集群提供的资源
+         * @type {string || null}
+         */
+        this.HardwareResourceType = null;
+
+        /**
+         * 使用Pod资源扩容时，指定的Pod规格以及来源等信息
+         * @type {PodSpec || null}
+         */
+        this.PodSpec = null;
+
     }
 
     /**
@@ -3416,6 +3564,13 @@ class ScaleOutInstanceRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.HardwareResourceType = 'HardwareResourceType' in params ? params.HardwareResourceType : null;
+
+        if (params.PodSpec) {
+            let obj = new PodSpec();
+            obj.deserialize(params.PodSpec)
+            this.PodSpec = obj;
+        }
 
     }
 }
@@ -3432,6 +3587,7 @@ module.exports = {
     TerminateInstanceRequest: TerminateInstanceRequest,
     TerminateInstanceResponse: TerminateInstanceResponse,
     CreateInstanceResponse: CreateInstanceResponse,
+    PodSpec: PodSpec,
     InquiryPriceRenewInstanceResponse: InquiryPriceRenewInstanceResponse,
     TerminateTasksRequest: TerminateTasksRequest,
     InquiryPriceCreateInstanceResponse: InquiryPriceCreateInstanceResponse,
@@ -3448,6 +3604,7 @@ module.exports = {
     COSSettings: COSSettings,
     ClusterInstancesInfo: ClusterInstancesInfo,
     MultiDisk: MultiDisk,
+    SearchItem: SearchItem,
     InquiryPriceScaleOutInstanceResponse: InquiryPriceScaleOutInstanceResponse,
     OutterResource: OutterResource,
     UpdateInstanceSettings: UpdateInstanceSettings,

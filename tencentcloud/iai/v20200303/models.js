@@ -302,7 +302,7 @@ class DeletePersonRequest extends  AbstractModel {
         super();
 
         /**
-         * 人员ID
+         * 人员ID，取值为创建人员接口中的PersonId
          * @type {string || null}
          */
         this.PersonId = null;
@@ -481,13 +481,13 @@ class DeleteFaceRequest extends  AbstractModel {
         super();
 
         /**
-         * 人员ID
+         * 人员ID，取值为创建人员接口中的PersonId
          * @type {string || null}
          */
         this.PersonId = null;
 
         /**
-         * 待删除的人脸ID列表
+         * 待删除的人脸ID列表，数组元素取值为增加人脸接口返回的FaceId
          * @type {Array.<string> || null}
          */
         this.FaceIds = null;
@@ -958,7 +958,7 @@ class ModifyGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * 人员库ID
+         * 人员库ID，取值为创建人员库接口中的GroupId
          * @type {string || null}
          */
         this.GroupId = null;
@@ -1015,7 +1015,7 @@ class CreatePersonRequest extends  AbstractModel {
         super();
 
         /**
-         * 待加入的人员库ID。
+         * 待加入的人员库ID，取值为创建人员库接口中的GroupId
          * @type {string || null}
          */
         this.GroupId = null;
@@ -1170,7 +1170,7 @@ class DeleteGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * 人员库ID。
+         * 人员库ID，取值为创建人员库接口中的GroupId
          * @type {string || null}
          */
         this.GroupId = null;
@@ -1280,7 +1280,7 @@ class ModifyPersonBaseInfoRequest extends  AbstractModel {
         super();
 
         /**
-         * 人员ID
+         * 人员ID，取值为创建人员接口中的PersonId
          * @type {string || null}
          */
         this.PersonId = null;
@@ -1292,7 +1292,7 @@ class ModifyPersonBaseInfoRequest extends  AbstractModel {
         this.PersonName = null;
 
         /**
-         * 需要修改的人员性别
+         * 需要修改的人员性别，1代表男性，2代表女性
          * @type {number || null}
          */
         this.Gender = null;
@@ -1769,7 +1769,7 @@ class GetPersonBaseInfoResponse extends  AbstractModel {
         this.PersonName = null;
 
         /**
-         * 人员性别
+         * 人员性别，0代表未填写，1代表男性，2代表女性
          * @type {number || null}
          */
         this.Gender = null;
@@ -1869,7 +1869,7 @@ class CreateFaceRequest extends  AbstractModel {
         super();
 
         /**
-         * 人员ID。
+         * 人员ID，取值为创建人员接口中的PersonId
          * @type {string || null}
          */
         this.PersonId = null;
@@ -1949,7 +1949,7 @@ class SearchFacesReturnsByGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * 希望搜索的人员库列表，上限60个。
+         * 希望搜索的人员库列表，上限60个。数组元素取值为创建人员库接口中的GroupId
          * @type {Array.<string> || null}
          */
         this.GroupIds = null;
@@ -2121,13 +2121,13 @@ class ModifyPersonGroupInfoRequest extends  AbstractModel {
         super();
 
         /**
-         * 人员库ID
+         * 人员库ID，取值为创建人员库接口中的GroupId
          * @type {string || null}
          */
         this.GroupId = null;
 
         /**
-         * 人员ID
+         * 人员ID，取值为创建人员接口中的PersonId
          * @type {string || null}
          */
         this.PersonId = null;
@@ -2171,7 +2171,7 @@ class GetPersonGroupInfoRequest extends  AbstractModel {
         super();
 
         /**
-         * 人员ID
+         * 人员ID，取值为创建人员接口中的PersonId
          * @type {string || null}
          */
         this.PersonId = null;
@@ -2480,7 +2480,7 @@ class SearchPersonsRequest extends  AbstractModel {
         super();
 
         /**
-         * 希望搜索的人员库列表，上限100个。
+         * 希望搜索的人员库列表，上限100个。数组元素取值为创建人员库接口中的GroupId
          * @type {Array.<string> || null}
          */
         this.GroupIds = null;
@@ -3038,13 +3038,13 @@ class CopyPersonRequest extends  AbstractModel {
         super();
 
         /**
-         * 人员ID
+         * 人员ID，取值为创建人员接口中的PersonId
          * @type {string || null}
          */
         this.PersonId = null;
 
         /**
-         * 待加入的人员库列表
+         * 待加入的人员库列表，数组元素取值为创建人员库接口中的GroupId
          * @type {Array.<string> || null}
          */
         this.GroupIds = null;
@@ -3355,7 +3355,7 @@ class GetGroupInfoRequest extends  AbstractModel {
         super();
 
         /**
-         * 人员库 ID。
+         * 人员库 ID，取值为创建人员库接口中的GroupId
          * @type {string || null}
          */
         this.GroupId = null;
@@ -3774,7 +3774,7 @@ class GetPersonBaseInfoRequest extends  AbstractModel {
         super();
 
         /**
-         * 人员ID
+         * 人员ID，创建人员接口中的PersonId
          * @type {string || null}
          */
         this.PersonId = null;
@@ -4078,7 +4078,7 @@ class GetPersonListNumRequest extends  AbstractModel {
         super();
 
         /**
-         * 人员库ID
+         * 人员库ID，取值为创建人员库接口中的GroupId
          * @type {string || null}
          */
         this.GroupId = null;
@@ -4257,7 +4257,7 @@ class SearchFacesRequest extends  AbstractModel {
         super();
 
         /**
-         * 希望搜索的人员库列表，上限100个。
+         * 希望搜索的人员库列表，上限100个。数组元素取值为创建人员库接口中的GroupId
          * @type {Array.<string> || null}
          */
         this.GroupIds = null;
@@ -4364,13 +4364,13 @@ class DeletePersonFromGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * 人员ID
+         * 人员ID，取值为创建人员接口中的PersonId
          * @type {string || null}
          */
         this.PersonId = null;
 
         /**
-         * 人员库ID
+         * 人员库ID，取值为创建人员库接口中的GroupId
          * @type {string || null}
          */
         this.GroupId = null;

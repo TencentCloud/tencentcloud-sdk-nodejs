@@ -19405,7 +19405,7 @@ class ModifyHaVipAttributeResponse extends  AbstractModel {
 }
 
 /**
- * 用于描述云联网地域间限速带宽实例的信息
+ * 用于描述云联网地域间限速带宽实例的信息。
  * @class
  */
 class CcnBandwidthInfo extends  AbstractModel {
@@ -19448,7 +19448,7 @@ class CcnBandwidthInfo extends  AbstractModel {
         this.RenewFlag = null;
 
         /**
-         * 描述带宽的地域和限速上限信息。
+         * 描述带宽的地域和限速上限信息。在地域间限速的情况下才会返回参数，出口限速模式不返回。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {CcnRegionBandwidthLimit || null}
          */

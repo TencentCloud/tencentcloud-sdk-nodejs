@@ -25,6 +25,7 @@ const ExportPrivilegeEventsResponse = models.ExportPrivilegeEventsResponse;
 const DescribeAlarmAttributeResponse = models.DescribeAlarmAttributeResponse;
 const DescribeWeeklyReportBruteAttacksResponse = models.DescribeWeeklyReportBruteAttacksResponse;
 const DescribeAgentVulsRequest = models.DescribeAgentVulsRequest;
+const DescribeTagsRequest = models.DescribeTagsRequest;
 const AddMachineTagResponse = models.AddMachineTagResponse;
 const UsualPlace = models.UsualPlace;
 const DescribeReverseShellRulesRequest = models.DescribeReverseShellRulesRequest;
@@ -45,7 +46,7 @@ const DescribeProcessesResponse = models.DescribeProcessesResponse;
 const DeleteBashEventsResponse = models.DeleteBashEventsResponse;
 const ExportPrivilegeEventsRequest = models.ExportPrivilegeEventsRequest;
 const WeeklyReportMalware = models.WeeklyReportMalware;
-const DescribeBruteAttacksRequest = models.DescribeBruteAttacksRequest;
+const CreateBaselineStrategyRequest = models.CreateBaselineStrategyRequest;
 const DescribeSecurityTrendsRequest = models.DescribeSecurityTrendsRequest;
 const Account = models.Account;
 const DescribeReverseShellEventsResponse = models.DescribeReverseShellEventsResponse;
@@ -61,6 +62,7 @@ const RenewProVersionRequest = models.RenewProVersionRequest;
 const DescribeComponentsRequest = models.DescribeComponentsRequest;
 const DescribeNonlocalLoginPlacesRequest = models.DescribeNonlocalLoginPlacesRequest;
 const DeleteMachineTagRequest = models.DeleteMachineTagRequest;
+const CreateBaselineStrategyResponse = models.CreateBaselineStrategyResponse;
 const ReverseShellRule = models.ReverseShellRule;
 const OpenPortStatistics = models.OpenPortStatistics;
 const EditPrivilegeRuleResponse = models.EditPrivilegeRuleResponse;
@@ -129,7 +131,7 @@ const CreateOpenPortTaskResponse = models.CreateOpenPortTaskResponse;
 const EditBashRuleRequest = models.EditBashRuleRequest;
 const DeletePrivilegeEventsResponse = models.DeletePrivilegeEventsResponse;
 const InquiryPriceOpenProVersionPrepaidResponse = models.InquiryPriceOpenProVersionPrepaidResponse;
-const DescribeMachineInfoResponse = models.DescribeMachineInfoResponse;
+const CloseProVersionRequest = models.CloseProVersionRequest;
 const SetBashEventsStatusResponse = models.SetBashEventsStatusResponse;
 const DescribeUsualLoginPlacesResponse = models.DescribeUsualLoginPlacesResponse;
 const DescribeProcessStatisticsResponse = models.DescribeProcessStatisticsResponse;
@@ -191,7 +193,7 @@ const DescribeWeeklyReportNonlocalLoginPlacesRequest = models.DescribeWeeklyRepo
 const SeparateMalwaresResponse = models.SeparateMalwaresResponse;
 const ProcessStatistics = models.ProcessStatistics;
 const Process = models.Process;
-const DescribeTagsRequest = models.DescribeTagsRequest;
+const DescribeBruteAttacksRequest = models.DescribeBruteAttacksRequest;
 const DescribeVulScanResultRequest = models.DescribeVulScanResultRequest;
 const DescribePrivilegeEventsRequest = models.DescribePrivilegeEventsRequest;
 const DescribeWeeklyReportMalwaresResponse = models.DescribeWeeklyReportMalwaresResponse;
@@ -226,7 +228,7 @@ const SwitchBashRulesRequest = models.SwitchBashRulesRequest;
 const DescribeProcessStatisticsRequest = models.DescribeProcessStatisticsRequest;
 const DeleteMachineTagResponse = models.DeleteMachineTagResponse;
 const DescribeHistoryAccountsRequest = models.DescribeHistoryAccountsRequest;
-const CloseProVersionRequest = models.CloseProVersionRequest;
+const DescribeMachineInfoResponse = models.DescribeMachineInfoResponse;
 const OpenProVersionRequest = models.OpenProVersionRequest;
 const DeleteBashRulesResponse = models.DeleteBashRulesResponse;
 const IgnoreImpactedHostsResponse = models.IgnoreImpactedHostsResponse;
@@ -397,6 +399,17 @@ class YunjingClient extends AbstractClient {
     MisAlarmNonlocalLoginPlaces(req, cb) {
         let resp = new MisAlarmNonlocalLoginPlacesResponse();
         this.request("MisAlarmNonlocalLoginPlaces", req, resp, cb);
+    }
+
+    /**
+     * 根据策略信息创建基线策略
+     * @param {CreateBaselineStrategyRequest} req
+     * @param {function(string, CreateBaselineStrategyResponse):void} cb
+     * @public
+     */
+    CreateBaselineStrategy(req, cb) {
+        let resp = new CreateBaselineStrategyResponse();
+        this.request("CreateBaselineStrategy", req, resp, cb);
     }
 
     /**
