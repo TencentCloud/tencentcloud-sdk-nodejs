@@ -791,6 +791,41 @@ class DDosPolicy extends  AbstractModel {
 }
 
 /**
+ * Protocol、Port参数
+ * @class
+ */
+class ProtocolPort extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 协议（tcp；udp）
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * 端口
+         * @type {number || null}
+         */
+        this.Port = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Port = 'Port' in params ? params.Port : null;
+
+    }
+}
+
+/**
  * DescribeDDoSNetTrend请求参数结构体
  * @class
  */
@@ -9519,24 +9554,36 @@ class WaterPrintPolicy extends  AbstractModel {
 }
 
 /**
- * Protocol、Port参数
+ * CreateNewL7RulesUpload请求参数结构体
  * @class
  */
-class ProtocolPort extends  AbstractModel {
+class CreateNewL7RulesUploadRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 协议（tcp；udp）
+         * 大禹子产品代号（bgpip表示高防IP）
          * @type {string || null}
          */
-        this.Protocol = null;
+        this.Business = null;
 
         /**
-         * 端口
-         * @type {number || null}
+         * 资源ID列表
+         * @type {Array.<string> || null}
          */
-        this.Port = null;
+        this.IdList = null;
+
+        /**
+         * 资源IP列表
+         * @type {Array.<string> || null}
+         */
+        this.VipList = null;
+
+        /**
+         * 规则列表
+         * @type {Array.<L7RuleEntry> || null}
+         */
+        this.Rules = null;
 
     }
 
@@ -9547,8 +9594,18 @@ class ProtocolPort extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
-        this.Port = 'Port' in params ? params.Port : null;
+        this.Business = 'Business' in params ? params.Business : null;
+        this.IdList = 'IdList' in params ? params.IdList : null;
+        this.VipList = 'VipList' in params ? params.VipList : null;
+
+        if (params.Rules) {
+            this.Rules = new Array();
+            for (let z in params.Rules) {
+                let obj = new L7RuleEntry();
+                obj.deserialize(params.Rules[z]);
+                this.Rules.push(obj);
+            }
+        }
 
     }
 }
@@ -9905,6 +9962,46 @@ class ModifyL7RulesRequest extends  AbstractModel {
  * @class
  */
 class ModifyElasticLimitResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 成功码
+         * @type {SuccessCode || null}
+         */
+        this.Success = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Success) {
+            let obj = new SuccessCode();
+            obj.deserialize(params.Success)
+            this.Success = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateNewL7RulesUpload返回参数结构体
+ * @class
+ */
+class CreateNewL7RulesUploadResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -14586,6 +14683,7 @@ module.exports = {
     DescribeCCEvListRequest: DescribeCCEvListRequest,
     DescribeTransmitStatisResponse: DescribeTransmitStatisResponse,
     DDosPolicy: DDosPolicy,
+    ProtocolPort: ProtocolPort,
     DescribeDDoSNetTrendRequest: DescribeDDoSNetTrendRequest,
     DescribePolicyCaseRequest: DescribePolicyCaseRequest,
     DescribeUnBlockStatisRequest: DescribeUnBlockStatisRequest,
@@ -14748,7 +14846,7 @@ module.exports = {
     DescribeDDoSAlarmThresholdRequest: DescribeDDoSAlarmThresholdRequest,
     DeleteNewL4RulesResponse: DeleteNewL4RulesResponse,
     WaterPrintPolicy: WaterPrintPolicy,
-    ProtocolPort: ProtocolPort,
+    CreateNewL7RulesUploadRequest: CreateNewL7RulesUploadRequest,
     DeleteNewL7RulesResponse: DeleteNewL7RulesResponse,
     DeleteCCSelfDefinePolicyResponse: DeleteCCSelfDefinePolicyResponse,
     DescribeDDoSPolicyResponse: DescribeDDoSPolicyResponse,
@@ -14758,6 +14856,7 @@ module.exports = {
     CreateNewL7RulesRequest: CreateNewL7RulesRequest,
     ModifyL7RulesRequest: ModifyL7RulesRequest,
     ModifyElasticLimitResponse: ModifyElasticLimitResponse,
+    CreateNewL7RulesUploadResponse: CreateNewL7RulesUploadResponse,
     DDoSAttackSourceRecord: DDoSAttackSourceRecord,
     CreateUnblockIpResponse: CreateUnblockIpResponse,
     DescribePackIndexRequest: DescribePackIndexRequest,

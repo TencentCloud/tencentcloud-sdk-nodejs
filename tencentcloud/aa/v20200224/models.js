@@ -290,7 +290,7 @@ class QQAccountInfo extends  AbstractModel {
 
         /**
          * 用户设备号。
-         * @type {boolean || null}
+         * @type {string || null}
          */
         this.DeviceId = null;
 

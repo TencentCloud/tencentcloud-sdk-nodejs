@@ -123,6 +123,12 @@ class TextData extends  AbstractModel {
         this.Res = null;
 
         /**
+         * 账号风险检测结果
+         * @type {Array.<RiskDetails> || null}
+         */
+        this.RiskDetails = null;
+
+        /**
          * 最终使用的BizType
          * @type {number || null}
          */
@@ -198,6 +204,15 @@ class TextData extends  AbstractModel {
             let obj = new TextOutputRes();
             obj.deserialize(params.Res)
             this.Res = obj;
+        }
+
+        if (params.RiskDetails) {
+            this.RiskDetails = new Array();
+            for (let z in params.RiskDetails) {
+                let obj = new RiskDetails();
+                obj.deserialize(params.RiskDetails[z]);
+                this.RiskDetails.push(obj);
+            }
         }
         this.BizType = 'BizType' in params ? params.BizType : null;
         this.EvilLabel = 'EvilLabel' in params ? params.EvilLabel : null;
@@ -1641,6 +1656,48 @@ class TextOutputRes extends  AbstractModel {
 }
 
 /**
+ * 账号风险检测结果
+ * @class
+ */
+class RiskDetails extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 风险关键词
+         * @type {Array.<string> || null}
+         */
+        this.Keywords = null;
+
+        /**
+         * 风险类别，RiskAccount，RiskIP, RiskIMEI
+         * @type {string || null}
+         */
+        this.Lable = null;
+
+        /**
+         * 风险等级，1:疑似，2：恶意
+         * @type {number || null}
+         */
+        this.Level = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Keywords = 'Keywords' in params ? params.Keywords : null;
+        this.Lable = 'Lable' in params ? params.Lable : null;
+        this.Level = 'Level' in params ? params.Level : null;
+
+    }
+}
+
+/**
  * CreateTextSample请求参数结构体
  * @class
  */
@@ -2617,6 +2674,7 @@ module.exports = {
     FileSample: FileSample,
     DescribeFileSampleResponse: DescribeFileSampleResponse,
     TextOutputRes: TextOutputRes,
+    RiskDetails: RiskDetails,
     CreateTextSampleRequest: CreateTextSampleRequest,
     DeleteFileSampleRequest: DeleteFileSampleRequest,
     Filter: Filter,

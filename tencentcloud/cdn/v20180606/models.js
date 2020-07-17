@@ -8625,6 +8625,16 @@ class PurgeUrlsCacheRequest extends  AbstractModel {
          */
         this.Urls = null;
 
+        /**
+         * 刷新区域
+无此参数时，默认刷新加速域名所在加速区域
+填充 mainland 时，仅刷新中国境内加速节点上缓存内容
+填充 overseas 时，仅刷新中国境外加速节点上缓存内容
+指定刷新区域时，需要与域名加速区域匹配
+         * @type {string || null}
+         */
+        this.Area = null;
+
     }
 
     /**
@@ -8635,6 +8645,7 @@ class PurgeUrlsCacheRequest extends  AbstractModel {
             return;
         }
         this.Urls = 'Urls' in params ? params.Urls : null;
+        this.Area = 'Area' in params ? params.Area : null;
 
     }
 }

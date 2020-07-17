@@ -1322,7 +1322,7 @@ class GetSimilarPersonResultRequest extends  AbstractModel {
         super();
 
         /**
-         * 查重任务ID，用于查询、获取查重的进度和结果。
+         * 查重任务ID，用于查询、获取查重的进度和结果。取值为人员查重接口返回的JobId
          * @type {string || null}
          */
         this.JobId = null;
@@ -2782,6 +2782,7 @@ class CheckSimilarPersonRequest extends  AbstractModel {
         /**
          * 待整理的人员库列表。 
 人员库总人数不可超过200万，人员库个数不可超过10个。
+数组元素取值为创建人员库接口中的GroupId
          * @type {Array.<string> || null}
          */
         this.GroupIds = null;
@@ -3108,7 +3109,7 @@ class SearchPersonsReturnsByGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * 希望搜索的人员库列表，上限60个。
+         * 希望搜索的人员库列表，上限60个。数组元素取值为创建人员库接口中的GroupId
          * @type {Array.<string> || null}
          */
         this.GroupIds = null;
@@ -4009,6 +4010,7 @@ class EstimateCheckSimilarPersonCostTimeRequest extends  AbstractModel {
         /**
          * 待整理的人员库列表。 
 人员库总人数不可超过200万，人员库个数不可超过10个。
+数组元素取值为创建人员库接口中的GroupId
          * @type {Array.<string> || null}
          */
         this.GroupIds = null;
@@ -4036,7 +4038,7 @@ class GetPersonListRequest extends  AbstractModel {
         super();
 
         /**
-         * 人员库ID
+         * 人员库ID，取值为创建人员库接口中的GroupId
          * @type {string || null}
          */
         this.GroupId = null;
