@@ -42,6 +42,7 @@ const DeleteFileSampleResponse = models.DeleteFileSampleResponse;
 const FileSample = models.FileSample;
 const DescribeFileSampleResponse = models.DescribeFileSampleResponse;
 const TextOutputRes = models.TextOutputRes;
+const RiskDetails = models.RiskDetails;
 const CreateTextSampleRequest = models.CreateTextSampleRequest;
 const DeleteFileSampleRequest = models.DeleteFileSampleRequest;
 const Filter = models.Filter;

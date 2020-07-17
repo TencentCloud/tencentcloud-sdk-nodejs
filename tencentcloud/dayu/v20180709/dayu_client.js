@@ -26,6 +26,7 @@ const DescribeNewL4RulesErrHealthResponse = models.DescribeNewL4RulesErrHealthRe
 const DescribeCCEvListRequest = models.DescribeCCEvListRequest;
 const DescribeTransmitStatisResponse = models.DescribeTransmitStatisResponse;
 const DDosPolicy = models.DDosPolicy;
+const ProtocolPort = models.ProtocolPort;
 const DescribeDDoSNetTrendRequest = models.DescribeDDoSNetTrendRequest;
 const DescribePolicyCaseRequest = models.DescribePolicyCaseRequest;
 const DescribeUnBlockStatisRequest = models.DescribeUnBlockStatisRequest;
@@ -188,7 +189,7 @@ const DescribeDDoSIpLogRequest = models.DescribeDDoSIpLogRequest;
 const DescribeDDoSAlarmThresholdRequest = models.DescribeDDoSAlarmThresholdRequest;
 const DeleteNewL4RulesResponse = models.DeleteNewL4RulesResponse;
 const WaterPrintPolicy = models.WaterPrintPolicy;
-const ProtocolPort = models.ProtocolPort;
+const CreateNewL7RulesUploadRequest = models.CreateNewL7RulesUploadRequest;
 const DeleteNewL7RulesResponse = models.DeleteNewL7RulesResponse;
 const DeleteCCSelfDefinePolicyResponse = models.DeleteCCSelfDefinePolicyResponse;
 const DescribeDDoSPolicyResponse = models.DescribeDDoSPolicyResponse;
@@ -198,6 +199,7 @@ const CreateL4HealthConfigResponse = models.CreateL4HealthConfigResponse;
 const CreateNewL7RulesRequest = models.CreateNewL7RulesRequest;
 const ModifyL7RulesRequest = models.ModifyL7RulesRequest;
 const ModifyElasticLimitResponse = models.ModifyElasticLimitResponse;
+const CreateNewL7RulesUploadResponse = models.CreateNewL7RulesUploadResponse;
 const DDoSAttackSourceRecord = models.DDoSAttackSourceRecord;
 const CreateUnblockIpResponse = models.CreateUnblockIpResponse;
 const DescribePackIndexRequest = models.DescribePackIndexRequest;
@@ -327,6 +329,17 @@ class DayuClient extends AbstractClient {
     DescribeRuleSets(req, cb) {
         let resp = new DescribeRuleSetsResponse();
         this.request("DescribeRuleSets", req, resp, cb);
+    }
+
+    /**
+     * 批量上传7层转发规则
+     * @param {CreateNewL7RulesUploadRequest} req
+     * @param {function(string, CreateNewL7RulesUploadResponse):void} cb
+     * @public
+     */
+    CreateNewL7RulesUpload(req, cb) {
+        let resp = new CreateNewL7RulesUploadResponse();
+        this.request("CreateNewL7RulesUpload", req, resp, cb);
     }
 
     /**

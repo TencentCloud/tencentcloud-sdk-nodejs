@@ -5128,6 +5128,18 @@ class LoginWhiteLists extends  AbstractModel {
          */
         this.HostIp = null;
 
+        /**
+         * 起始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
     }
 
     /**
@@ -5155,6 +5167,8 @@ class LoginWhiteLists extends  AbstractModel {
         this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
         this.MachineName = 'MachineName' in params ? params.MachineName : null;
         this.HostIp = 'HostIp' in params ? params.HostIp : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -6799,6 +6813,18 @@ class LoginWhiteListsRule extends  AbstractModel {
          */
         this.Id = null;
 
+        /**
+         * 起始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
     }
 
     /**
@@ -6822,6 +6848,8 @@ class LoginWhiteListsRule extends  AbstractModel {
         this.IsGlobal = 'IsGlobal' in params ? params.IsGlobal : null;
         this.HostIp = 'HostIp' in params ? params.HostIp : null;
         this.Id = 'Id' in params ? params.Id : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }

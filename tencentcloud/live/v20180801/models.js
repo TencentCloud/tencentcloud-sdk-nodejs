@@ -9824,6 +9824,7 @@ class CreateLiveTranscodeTemplateRequest extends  AbstractModel {
 
         /**
          * 宽，默认0。
+范围[0-3000]
          * @type {number || null}
          */
         this.Width = null;
@@ -9842,6 +9843,7 @@ class CreateLiveTranscodeTemplateRequest extends  AbstractModel {
 
         /**
          * 高，默认0。
+范围[0-3000]
          * @type {number || null}
          */
         this.Height = null;
