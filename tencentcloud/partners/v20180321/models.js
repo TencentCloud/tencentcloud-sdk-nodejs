@@ -1966,6 +1966,13 @@ class AgentDealElem extends  AbstractModel {
          */
         this.ActivityId = null;
 
+        /**
+         * 订单过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OverdueTime = null;
+
     }
 
     /**
@@ -2004,6 +2011,7 @@ class AgentDealElem extends  AbstractModel {
         this.SalesUin = 'SalesUin' in params ? params.SalesUin : null;
         this.PayerMode = 'PayerMode' in params ? params.PayerMode : null;
         this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
+        this.OverdueTime = 'OverdueTime' in params ? params.OverdueTime : null;
 
     }
 }

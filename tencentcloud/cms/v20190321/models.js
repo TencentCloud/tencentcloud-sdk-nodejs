@@ -1664,7 +1664,7 @@ class RiskDetails extends  AbstractModel {
         super();
 
         /**
-         * 风险关键词
+         * 预留字段，暂时不使用
          * @type {Array.<string> || null}
          */
         this.Keywords = null;

@@ -71,7 +71,7 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.Volume = null;
 
         /**
-         * 版本号，具体支持的售卖版本请参照查询云数据库的售卖规格（DescribeSpecInfo）返回结果。参数与版本对应关系是MONGO_3_WT：MongoDB 3.2 WiredTiger存储引擎版本，MONGO_3_ROCKS：MongoDB 3.2 RocksDB存储引擎版本，MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本
+         * 版本号，具体支持的售卖版本请参照查询云数据库的售卖规格（DescribeSpecInfo）返回结果。参数与版本对应关系是MONGO_3_WT：MongoDB 3.2 WiredTiger存储引擎版本，MONGO_3_ROCKS：MongoDB 3.2 RocksDB存储引擎版本，MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本，MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本
          * @type {string || null}
          */
         this.MongoVersion = null;
@@ -95,19 +95,19 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.Period = null;
 
         /**
-         * 机器类型，HIO：高IO型；HIO10G：高IO万兆型
+         * 机器类型，HIO：高IO型；HIO10G：高IO万兆型；STDS5：标准型
          * @type {string || null}
          */
         this.MachineCode = null;
 
         /**
-         * 实例类型，REPLSET-副本集，SHARD-分片集群
+         * 实例类型，REPLSET-副本集，SHARD-分片集群，STANDALONE-单节点
          * @type {string || null}
          */
         this.ClusterType = null;
 
         /**
-         * 副本集个数，创建副本集实例时，该参数必须设置为1；创建分片实例时，具体参照查询云数据库的售卖规格返回参数
+         * 副本集个数，创建副本集实例时，该参数必须设置为1；创建分片实例时，具体参照查询云数据库的售卖规格返回参数；若为单节点实例，该参数设置为0
          * @type {number || null}
          */
         this.ReplicateSetNum = null;
@@ -148,6 +148,30 @@ class CreateDBInstanceRequest extends  AbstractModel {
          */
         this.AutoRenewFlag = null;
 
+        /**
+         * 是否自动选择代金券，可选值为：1 - 是；0 - 否； 默认为0
+         * @type {number || null}
+         */
+        this.AutoVoucher = null;
+
+        /**
+         * 1:正式实例,2:临时实例,3:只读实例，4：灾备实例
+         * @type {number || null}
+         */
+        this.Clone = null;
+
+        /**
+         * 若是只读，灾备实例，Father必须填写，即主实例ID
+         * @type {string || null}
+         */
+        this.Father = null;
+
+        /**
+         * 安全组
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroup = null;
+
     }
 
     /**
@@ -181,6 +205,10 @@ class CreateDBInstanceRequest extends  AbstractModel {
             }
         }
         this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
+        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
+        this.Clone = 'Clone' in params ? params.Clone : null;
+        this.Father = 'Father' in params ? params.Father : null;
+        this.SecurityGroup = 'SecurityGroup' in params ? params.SecurityGroup : null;
 
     }
 }
@@ -504,6 +532,24 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * 1:正式实例,2:临时实例,3:只读实例，4：灾备实例
+         * @type {number || null}
+         */
+        this.Clone = null;
+
+        /**
+         * 父实例Id，当Clone为3或者4时，这个必须填
+         * @type {string || null}
+         */
+        this.Father = null;
+
+        /**
+         * 安全组
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroup = null;
+
     }
 
     /**
@@ -535,6 +581,9 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.Clone = 'Clone' in params ? params.Clone : null;
+        this.Father = 'Father' in params ? params.Father : null;
+        this.SecurityGroup = 'SecurityGroup' in params ? params.SecurityGroup : null;
 
     }
 }

@@ -424,6 +424,20 @@ class DescribeTagsRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * 云主机类型。
+<li>CVM：表示虚拟主机</li>
+<li>BM:  表示黑石物理机</li>
+         * @type {string || null}
+         */
+        this.MachineType = null;
+
+        /**
+         * 机器所属地域。如：ap-guangzhou，ap-shanghai
+         * @type {string || null}
+         */
+        this.MachineRegion = null;
+
     }
 
     /**
@@ -433,6 +447,8 @@ class DescribeTagsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.MachineType = 'MachineType' in params ? params.MachineType : null;
+        this.MachineRegion = 'MachineRegion' in params ? params.MachineRegion : null;
 
     }
 }
@@ -1040,6 +1056,18 @@ class DescribeAttackLogsRequest extends  AbstractModel {
          */
         this.Filters = null;
 
+        /**
+         * 主机安全客户端ID
+         * @type {string || null}
+         */
+        this.Uuid = null;
+
+        /**
+         * 云主机机器ID
+         * @type {string || null}
+         */
+        this.Quuid = null;
+
     }
 
     /**
@@ -1060,6 +1088,8 @@ class DescribeAttackLogsRequest extends  AbstractModel {
                 this.Filters.push(obj);
             }
         }
+        this.Uuid = 'Uuid' in params ? params.Uuid : null;
+        this.Quuid = 'Quuid' in params ? params.Quuid : null;
 
     }
 }
@@ -2119,6 +2149,16 @@ class SecurityDynamic extends  AbstractModel {
          */
         this.Message = null;
 
+        /**
+         * 安全事件等级。
+<li>RISK: 严重</li>
+<li>HIGH: 高危</li>
+<li>NORMAL: 中危</li>
+<li>LOW: 低危</li>
+         * @type {string || null}
+         */
+        this.SecurityLevel = null;
+
     }
 
     /**
@@ -2132,6 +2172,7 @@ class SecurityDynamic extends  AbstractModel {
         this.EventTime = 'EventTime' in params ? params.EventTime : null;
         this.EventType = 'EventType' in params ? params.EventType : null;
         this.Message = 'Message' in params ? params.Message : null;
+        this.SecurityLevel = 'SecurityLevel' in params ? params.SecurityLevel : null;
 
     }
 }
@@ -3573,6 +3614,12 @@ class MachineTag extends  AbstractModel {
          */
         this.Name = null;
 
+        /**
+         * 标签ID
+         * @type {number || null}
+         */
+        this.TagId = null;
+
     }
 
     /**
@@ -3584,6 +3631,7 @@ class MachineTag extends  AbstractModel {
         }
         this.Rid = 'Rid' in params ? params.Rid : null;
         this.Name = 'Name' in params ? params.Name : null;
+        this.TagId = 'TagId' in params ? params.TagId : null;
 
     }
 }
@@ -6936,6 +6984,36 @@ class DescribeSecurityTrendsResponse extends  AbstractModel {
         this.BaseLines = null;
 
         /**
+         * 恶意请求统计数据数组。
+         * @type {Array.<SecurityTrend> || null}
+         */
+        this.MaliciousRequests = null;
+
+        /**
+         * 高危命令统计数据数组。
+         * @type {Array.<SecurityTrend> || null}
+         */
+        this.HighRiskBashs = null;
+
+        /**
+         * 反弹shell统计数据数组。
+         * @type {Array.<SecurityTrend> || null}
+         */
+        this.ReverseShells = null;
+
+        /**
+         * 本地提权统计数据数组。
+         * @type {Array.<SecurityTrend> || null}
+         */
+        this.PrivilegeEscalations = null;
+
+        /**
+         * 网络攻击统计数据数组。
+         * @type {Array.<SecurityTrend> || null}
+         */
+        this.CyberAttacks = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -6993,6 +7071,51 @@ class DescribeSecurityTrendsResponse extends  AbstractModel {
                 let obj = new SecurityTrend();
                 obj.deserialize(params.BaseLines[z]);
                 this.BaseLines.push(obj);
+            }
+        }
+
+        if (params.MaliciousRequests) {
+            this.MaliciousRequests = new Array();
+            for (let z in params.MaliciousRequests) {
+                let obj = new SecurityTrend();
+                obj.deserialize(params.MaliciousRequests[z]);
+                this.MaliciousRequests.push(obj);
+            }
+        }
+
+        if (params.HighRiskBashs) {
+            this.HighRiskBashs = new Array();
+            for (let z in params.HighRiskBashs) {
+                let obj = new SecurityTrend();
+                obj.deserialize(params.HighRiskBashs[z]);
+                this.HighRiskBashs.push(obj);
+            }
+        }
+
+        if (params.ReverseShells) {
+            this.ReverseShells = new Array();
+            for (let z in params.ReverseShells) {
+                let obj = new SecurityTrend();
+                obj.deserialize(params.ReverseShells[z]);
+                this.ReverseShells.push(obj);
+            }
+        }
+
+        if (params.PrivilegeEscalations) {
+            this.PrivilegeEscalations = new Array();
+            for (let z in params.PrivilegeEscalations) {
+                let obj = new SecurityTrend();
+                obj.deserialize(params.PrivilegeEscalations[z]);
+                this.PrivilegeEscalations.push(obj);
+            }
+        }
+
+        if (params.CyberAttacks) {
+            this.CyberAttacks = new Array();
+            for (let z in params.CyberAttacks) {
+                let obj = new SecurityTrend();
+                obj.deserialize(params.CyberAttacks[z]);
+                this.CyberAttacks.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -9074,6 +9197,33 @@ class Machine extends  AbstractModel {
          */
         this.Tag = null;
 
+        /**
+         * 基线风险数。
+         * @type {number || null}
+         */
+        this.BaselineNum = null;
+
+        /**
+         * 网络风险数。
+         * @type {number || null}
+         */
+        this.CyberAttackNum = null;
+
+        /**
+         * 风险状态。
+<li>SAFE：安全</li>
+<li>RISK：风险</li>
+<li>UNKNOWN：未知</li>
+         * @type {string || null}
+         */
+        this.SecurityStatus = null;
+
+        /**
+         * 入侵事件数
+         * @type {number || null}
+         */
+        this.InvasionNum = null;
+
     }
 
     /**
@@ -9103,6 +9253,10 @@ class Machine extends  AbstractModel {
                 this.Tag.push(obj);
             }
         }
+        this.BaselineNum = 'BaselineNum' in params ? params.BaselineNum : null;
+        this.CyberAttackNum = 'CyberAttackNum' in params ? params.CyberAttackNum : null;
+        this.SecurityStatus = 'SecurityStatus' in params ? params.SecurityStatus : null;
+        this.InvasionNum = 'InvasionNum' in params ? params.InvasionNum : null;
 
     }
 }
@@ -11075,7 +11229,7 @@ class DescribeMachinesRequest extends  AbstractModel {
         /**
          * 过滤条件。
 <li>Keywords - String - 是否必填：否 - 查询关键字 </li>
-<li>Status - String - 是否必填：否 - 客户端在线状态（OFFLINE: 离线 | ONLINE: 在线）</li>
+<li>Status - String - 是否必填：否 - 客户端在线状态（OFFLINE: 离线 | ONLINE: 在线 | UNINSTALLED：未安装）</li>
 <li>Version - String  是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版）</li>
 每个过滤条件只支持一个值，暂不支持多个值“或”关系查询
          * @type {Array.<Filter> || null}
