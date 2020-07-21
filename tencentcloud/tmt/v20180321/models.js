@@ -578,6 +578,12 @@ class SpeechTranslateRequest extends  AbstractModel {
          */
         this.Mode = null;
 
+        /**
+         * 该参数已废弃
+         * @type {number || null}
+         */
+        this.TransType = null;
+
     }
 
     /**
@@ -596,6 +602,7 @@ class SpeechTranslateRequest extends  AbstractModel {
         this.Data = 'Data' in params ? params.Data : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.Mode = 'Mode' in params ? params.Mode : null;
+        this.TransType = 'TransType' in params ? params.TransType : null;
 
     }
 }

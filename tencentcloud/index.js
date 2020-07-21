@@ -4,6 +4,7 @@ module.exports = {
     af: require("./af"),
     afc: require("./afc"),
     ame: require("./ame"),
+    ams: require("./ams"),
     apigateway: require("./apigateway"),
     as: require("./as"),
     asr: require("./asr"),
