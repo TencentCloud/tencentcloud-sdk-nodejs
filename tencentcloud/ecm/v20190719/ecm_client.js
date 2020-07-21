@@ -71,14 +71,17 @@ const NetworkStorageRange = models.NetworkStorageRange;
 const StartInstancesResponse = models.StartInstancesResponse;
 const CreateVpcResponse = models.CreateVpcResponse;
 const AssistantCidr = models.AssistantCidr;
+const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
 const NetworkInterface = models.NetworkInterface;
 const CreateModuleRequest = models.CreateModuleRequest;
 const ModifyInstancesAttributeResponse = models.ModifyInstancesAttributeResponse;
 const ReleaseAddressesResponse = models.ReleaseAddressesResponse;
 const DescribeInstancesDeniedActionsResponse = models.DescribeInstancesDeniedActionsResponse;
 const DisassociateAddressRequest = models.DisassociateAddressRequest;
+const TaskOutput = models.TaskOutput;
 const ModuleCounter = models.ModuleCounter;
 const ZoneInstanceCountISP = models.ZoneInstanceCountISP;
+const TaskInput = models.TaskInput;
 const StartInstancesRequest = models.StartInstancesRequest;
 const Tag = models.Tag;
 const DescribeDefaultSubnetRequest = models.DescribeDefaultSubnetRequest;
@@ -116,6 +119,7 @@ const ISP = models.ISP;
 const PrivateIpAddressSpecification = models.PrivateIpAddressSpecification;
 const ISPCounter = models.ISPCounter;
 const MigratePrivateIpAddressResponse = models.MigratePrivateIpAddressResponse;
+const CreateImageRequest = models.CreateImageRequest;
 const Instance = models.Instance;
 const EnhancedService = models.EnhancedService;
 const DescribeInstanceVncUrlResponse = models.DescribeInstanceVncUrlResponse;
@@ -127,6 +131,7 @@ const AssociateAddressRequest = models.AssociateAddressRequest;
 const ModifyVpcAttributeRequest = models.ModifyVpcAttributeRequest;
 const DescribePeakNetworkOverviewResponse = models.DescribePeakNetworkOverviewResponse;
 const AttachNetworkInterfaceResponse = models.AttachNetworkInterfaceResponse;
+const CreateImageResponse = models.CreateImageResponse;
 const DescribeBaseOverviewRequest = models.DescribeBaseOverviewRequest;
 const ModifyModuleNetworkResponse = models.ModifyModuleNetworkResponse;
 const DiskInfo = models.DiskInfo;
@@ -146,6 +151,7 @@ const MigrateNetworkInterfaceRequest = models.MigrateNetworkInterfaceRequest;
 const DescribeAddressQuotaResponse = models.DescribeAddressQuotaResponse;
 const CreateSecurityGroupResponse = models.CreateSecurityGroupResponse;
 const ZoneInstanceInfo = models.ZoneInstanceInfo;
+const DescribeTaskStatusRequest = models.DescribeTaskStatusRequest;
 const ModifyAddressAttributeRequest = models.ModifyAddressAttributeRequest;
 const ModifyModuleImageResponse = models.ModifyModuleImageResponse;
 const ResetInstancesRequest = models.ResetInstancesRequest;
@@ -169,12 +175,14 @@ const ModifyAddressesBandwidthRequest = models.ModifyAddressesBandwidthRequest;
 const OperatorAction = models.OperatorAction;
 const PeakFamilyInfo = models.PeakFamilyInfo;
 const DescribePeakBaseOverviewResponse = models.DescribePeakBaseOverviewResponse;
+const ModifyImageAttributeResponse = models.ModifyImageAttributeResponse;
 const DescribeImageResponse = models.DescribeImageResponse;
 const RegionInfo = models.RegionInfo;
 const DeleteImageResponse = models.DeleteImageResponse;
 const Address = models.Address;
 const DescribeNetworkInterfacesResponse = models.DescribeNetworkInterfacesResponse;
 const AssignPrivateIpAddressesRequest = models.AssignPrivateIpAddressesRequest;
+const ModifyImageAttributeRequest = models.ModifyImageAttributeRequest;
 const ReleaseAddressesRequest = models.ReleaseAddressesRequest;
 const CreateVpcRequest = models.CreateVpcRequest;
 const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
@@ -543,6 +551,17 @@ EIP 如果欠费或被封堵，则不能被绑定。
     }
 
     /**
+     * 本接口(CreateImage)用于将实例的系统盘制作为新镜像，创建后的镜像可以用于创建实例。
+     * @param {CreateImageRequest} req
+     * @param {function(string, CreateImageResponse):void} cb
+     * @public
+     */
+    CreateImage(req, cb) {
+        let resp = new CreateImageResponse();
+        this.request("CreateImage", req, resp, cb);
+    }
+
+    /**
      * 修改模块默认带宽上限
      * @param {ModifyModuleNetworkRequest} req
      * @param {function(string, ModifyModuleNetworkResponse):void} cb
@@ -565,6 +584,17 @@ EIP 如果欠费或被封堵，则不能被绑定。
     }
 
     /**
+     * 本接口（ModifyImageAttribute）用于修改镜像属性。
+     * @param {ModifyImageAttributeRequest} req
+     * @param {function(string, ModifyImageAttributeResponse):void} cb
+     * @public
+     */
+    ModifyImageAttribute(req, cb) {
+        let resp = new ModifyImageAttributeResponse();
+        this.request("ModifyImageAttribute", req, resp, cb);
+    }
+
+    /**
      * 通过实例id获取当前禁止的操作
      * @param {DescribeInstancesDeniedActionsRequest} req
      * @param {function(string, DescribeInstancesDeniedActionsResponse):void} cb
@@ -573,6 +603,17 @@ EIP 如果欠费或被封堵，则不能被绑定。
     DescribeInstancesDeniedActions(req, cb) {
         let resp = new DescribeInstancesDeniedActionsResponse();
         this.request("DescribeInstancesDeniedActions", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeTaskStatus)用于获取异步任务状态
+     * @param {DescribeTaskStatusRequest} req
+     * @param {function(string, DescribeTaskStatusResponse):void} cb
+     * @public
+     */
+    DescribeTaskStatus(req, cb) {
+        let resp = new DescribeTaskStatusResponse();
+        this.request("DescribeTaskStatus", req, resp, cb);
     }
 
     /**

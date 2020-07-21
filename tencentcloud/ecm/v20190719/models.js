@@ -1056,6 +1056,12 @@ Windows 实例：名字符长度为[2, 15]，允许字母（不限制大小写�
          */
         this.SecurityGroupIds = null;
 
+        /**
+         * 系统盘大小，单位是G。如果未传该参数或者传的值为0，则使用模块下的默认值
+         * @type {number || null}
+         */
+        this.SystemDiskSize = null;
+
     }
 
     /**
@@ -1100,6 +1106,7 @@ Windows 实例：名字符长度为[2, 15]，允许字母（不限制大小写�
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
         this.DataDiskSize = 'DataDiskSize' in params ? params.DataDiskSize : null;
         this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+        this.SystemDiskSize = 'SystemDiskSize' in params ? params.SystemDiskSize : null;
 
     }
 }
@@ -1233,6 +1240,24 @@ class SrcImage extends  AbstractModel {
          */
         this.RegionName = null;
 
+        /**
+         * 来源实例名称
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 来源实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 来源镜像类型
+         * @type {string || null}
+         */
+        this.ImageType = null;
+
     }
 
     /**
@@ -1249,6 +1274,9 @@ class SrcImage extends  AbstractModel {
         this.Region = 'Region' in params ? params.Region : null;
         this.RegionID = 'RegionID' in params ? params.RegionID : null;
         this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ImageType = 'ImageType' in params ? params.ImageType : null;
 
     }
 }
@@ -2888,6 +2916,49 @@ class AssistantCidr extends  AbstractModel {
 }
 
 /**
+ * DescribeTaskStatus返回参数结构体
+ * @class
+ */
+class DescribeTaskStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务描述
+         * @type {Array.<TaskOutput> || null}
+         */
+        this.TaskSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TaskSet) {
+            this.TaskSet = new Array();
+            for (let z in params.TaskSet) {
+                let obj = new TaskOutput();
+                obj.deserialize(params.TaskSet[z]);
+                this.TaskSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 弹性网卡
  * @class
  */
@@ -3279,6 +3350,69 @@ FALSE：表示解绑 EIP 之后不分配普通公网 IP。
 }
 
 /**
+ * 任务查询出参
+ * @class
+ */
+class TaskOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务id
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 状态描述
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * 状态值，SUCCESS/FAILED/OPERATING
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 任务提交时间
+         * @type {string || null}
+         */
+        this.AddTime = null;
+
+        /**
+         * 任务结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 操作名
+         * @type {string || null}
+         */
+        this.Operation = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.AddTime = 'AddTime' in params ? params.AddTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+
+    }
+}
+
+/**
  * 节点统计数据
  * @class
  */
@@ -3401,6 +3535,41 @@ class ZoneInstanceCountISP extends  AbstractModel {
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
         this.PrivateIpAddresses = 'PrivateIpAddresses' in params ? params.PrivateIpAddresses : null;
+
+    }
+}
+
+/**
+ * 任务查询
+ * @class
+ */
+class TaskInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 操作名，即API名称，比如：CreateImage
+         * @type {string || null}
+         */
+        this.Operation = null;
+
+        /**
+         * 任务id
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -4381,6 +4550,12 @@ class Image extends  AbstractModel {
          */
         this.SrcImage = null;
 
+        /**
+         * 镜像来源类型
+         * @type {string || null}
+         */
+        this.ImageSource = null;
+
     }
 
     /**
@@ -4409,12 +4584,13 @@ class Image extends  AbstractModel {
             obj.deserialize(params.SrcImage)
             this.SrcImage = obj;
         }
+        this.ImageSource = 'ImageSource' in params ? params.ImageSource : null;
 
     }
 }
 
 /**
- * TagSpecification
+ * 资源类型的Tag
  * @class
  */
 class TagSpecification extends  AbstractModel {
@@ -5138,6 +5314,58 @@ class MigratePrivateIpAddressResponse extends  AbstractModel {
 }
 
 /**
+ * CreateImage请求参数结构体
+ * @class
+ */
+class CreateImageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 镜像名称
+         * @type {string || null}
+         */
+        this.ImageName = null;
+
+        /**
+         * 需要制作镜像的实例ID。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 镜像描述
+         * @type {string || null}
+         */
+        this.ImageDescription = null;
+
+        /**
+         * 是否执行强制关机以制作镜像。取值范围：
+TRUE：表示自动关机后制作镜像
+FALSE：表示开机状态制作，目前不支持，需要先手动关机
+默认取值：FALSE。
+         * @type {string || null}
+         */
+        this.ForcePoweroff = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageName = 'ImageName' in params ? params.ImageName : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ImageDescription = 'ImageDescription' in params ? params.ImageDescription : null;
+        this.ForcePoweroff = 'ForcePoweroff' in params ? params.ForcePoweroff : null;
+
+    }
+}
+
+/**
  * 用于描述实例相关的信息。
  * @class
  */
@@ -5828,6 +6056,41 @@ class AttachNetworkInterfaceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateImage返回参数结构体
+ * @class
+ */
+class CreateImageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务id
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6612,6 +6875,42 @@ class ZoneInstanceInfo extends  AbstractModel {
         }
         this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
         this.InstanceNum = 'InstanceNum' in params ? params.InstanceNum : null;
+
+    }
+}
+
+/**
+ * DescribeTaskStatus请求参数结构体
+ * @class
+ */
+class DescribeTaskStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务描述
+         * @type {Array.<TaskInput> || null}
+         */
+        this.TaskSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TaskSet) {
+            this.TaskSet = new Array();
+            for (let z in params.TaskSet) {
+                let obj = new TaskInput();
+                obj.deserialize(params.TaskSet[z]);
+                this.TaskSet.push(obj);
+            }
+        }
 
     }
 }
@@ -7537,6 +7836,34 @@ class DescribePeakBaseOverviewResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyImageAttribute返回参数结构体
+ * @class
+ */
+class ModifyImageAttributeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeImage返回参数结构体
  * @class
  */
@@ -7753,6 +8080,20 @@ class Address extends  AbstractModel {
          */
         this.InternetServiceProvider = null;
 
+        /**
+         * 带宽上限
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Bandwidth = null;
+
+        /**
+         * 计费模式
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
     }
 
     /**
@@ -7776,6 +8117,8 @@ class Address extends  AbstractModel {
         this.AddressType = 'AddressType' in params ? params.AddressType : null;
         this.CascadeRelease = 'CascadeRelease' in params ? params.CascadeRelease : null;
         this.InternetServiceProvider = 'InternetServiceProvider' in params ? params.InternetServiceProvider : null;
+        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
 
     }
 }
@@ -7884,6 +8227,51 @@ class AssignPrivateIpAddressesRequest extends  AbstractModel {
             }
         }
         this.SecondaryPrivateIpAddressCount = 'SecondaryPrivateIpAddressCount' in params ? params.SecondaryPrivateIpAddressCount : null;
+
+    }
+}
+
+/**
+ * ModifyImageAttribute请求参数结构体
+ * @class
+ */
+class ModifyImageAttributeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 镜像ID，形如img-gvbnzy6f
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * 设置新的镜像名称；必须满足下列限制：
+不得超过20个字符。
+- 镜像名称不能与已有镜像重复。
+         * @type {string || null}
+         */
+        this.ImageName = null;
+
+        /**
+         * 设置新的镜像描述；必须满足下列限制：
+- 不得超过60个字符。
+         * @type {string || null}
+         */
+        this.ImageDescription = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.ImageName = 'ImageName' in params ? params.ImageName : null;
+        this.ImageDescription = 'ImageDescription' in params ? params.ImageDescription : null;
 
     }
 }
@@ -8678,14 +9066,17 @@ module.exports = {
     StartInstancesResponse: StartInstancesResponse,
     CreateVpcResponse: CreateVpcResponse,
     AssistantCidr: AssistantCidr,
+    DescribeTaskStatusResponse: DescribeTaskStatusResponse,
     NetworkInterface: NetworkInterface,
     CreateModuleRequest: CreateModuleRequest,
     ModifyInstancesAttributeResponse: ModifyInstancesAttributeResponse,
     ReleaseAddressesResponse: ReleaseAddressesResponse,
     DescribeInstancesDeniedActionsResponse: DescribeInstancesDeniedActionsResponse,
     DisassociateAddressRequest: DisassociateAddressRequest,
+    TaskOutput: TaskOutput,
     ModuleCounter: ModuleCounter,
     ZoneInstanceCountISP: ZoneInstanceCountISP,
+    TaskInput: TaskInput,
     StartInstancesRequest: StartInstancesRequest,
     Tag: Tag,
     DescribeDefaultSubnetRequest: DescribeDefaultSubnetRequest,
@@ -8723,6 +9114,7 @@ module.exports = {
     PrivateIpAddressSpecification: PrivateIpAddressSpecification,
     ISPCounter: ISPCounter,
     MigratePrivateIpAddressResponse: MigratePrivateIpAddressResponse,
+    CreateImageRequest: CreateImageRequest,
     Instance: Instance,
     EnhancedService: EnhancedService,
     DescribeInstanceVncUrlResponse: DescribeInstanceVncUrlResponse,
@@ -8734,6 +9126,7 @@ module.exports = {
     ModifyVpcAttributeRequest: ModifyVpcAttributeRequest,
     DescribePeakNetworkOverviewResponse: DescribePeakNetworkOverviewResponse,
     AttachNetworkInterfaceResponse: AttachNetworkInterfaceResponse,
+    CreateImageResponse: CreateImageResponse,
     DescribeBaseOverviewRequest: DescribeBaseOverviewRequest,
     ModifyModuleNetworkResponse: ModifyModuleNetworkResponse,
     DiskInfo: DiskInfo,
@@ -8753,6 +9146,7 @@ module.exports = {
     DescribeAddressQuotaResponse: DescribeAddressQuotaResponse,
     CreateSecurityGroupResponse: CreateSecurityGroupResponse,
     ZoneInstanceInfo: ZoneInstanceInfo,
+    DescribeTaskStatusRequest: DescribeTaskStatusRequest,
     ModifyAddressAttributeRequest: ModifyAddressAttributeRequest,
     ModifyModuleImageResponse: ModifyModuleImageResponse,
     ResetInstancesRequest: ResetInstancesRequest,
@@ -8776,12 +9170,14 @@ module.exports = {
     OperatorAction: OperatorAction,
     PeakFamilyInfo: PeakFamilyInfo,
     DescribePeakBaseOverviewResponse: DescribePeakBaseOverviewResponse,
+    ModifyImageAttributeResponse: ModifyImageAttributeResponse,
     DescribeImageResponse: DescribeImageResponse,
     RegionInfo: RegionInfo,
     DeleteImageResponse: DeleteImageResponse,
     Address: Address,
     DescribeNetworkInterfacesResponse: DescribeNetworkInterfacesResponse,
     AssignPrivateIpAddressesRequest: AssignPrivateIpAddressesRequest,
+    ModifyImageAttributeRequest: ModifyImageAttributeRequest,
     ReleaseAddressesRequest: ReleaseAddressesRequest,
     CreateVpcRequest: CreateVpcRequest,
     RunSecurityServiceEnabled: RunSecurityServiceEnabled,
