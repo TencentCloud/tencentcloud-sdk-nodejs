@@ -124,16 +124,18 @@ const DeleteAccountsResponse = models.DeleteAccountsResponse;
 const DescribeRoGroupsResponse = models.DescribeRoGroupsResponse;
 const CloseWanServiceRequest = models.CloseWanServiceRequest;
 const RestartDBInstancesResponse = models.RestartDBInstancesResponse;
-const ParamTemplateInfo = models.ParamTemplateInfo;
+const CreateRoInstanceIpResponse = models.CreateRoInstanceIpResponse;
 const DescribeBackupDatabasesResponse = models.DescribeBackupDatabasesResponse;
 const DescribeBackupSummariesResponse = models.DescribeBackupSummariesResponse;
 const DescribeInstanceParamRecordsRequest = models.DescribeInstanceParamRecordsRequest;
+const ParamTemplateInfo = models.ParamTemplateInfo;
 const ModifyAutoRenewFlagResponse = models.ModifyAutoRenewFlagResponse;
 const DeleteTimeWindowResponse = models.DeleteTimeWindowResponse;
 const DescribeBinlogBackupOverviewRequest = models.DescribeBinlogBackupOverviewRequest;
 const RollbackTask = models.RollbackTask;
 const DescribeBackupsResponse = models.DescribeBackupsResponse;
 const CreateAuditPolicyRequest = models.CreateAuditPolicyRequest;
+const CreateRoInstanceIpRequest = models.CreateRoInstanceIpRequest;
 const ModifyInstanceParamResponse = models.ModifyInstanceParamResponse;
 const DescribeDBImportRecordsResponse = models.DescribeDBImportRecordsResponse;
 const CreateAuditPolicyResponse = models.CreateAuditPolicyResponse;
@@ -313,6 +315,17 @@ class CdbClient extends AbstractClient {
     DescribeDBInstanceGTID(req, cb) {
         let resp = new DescribeDBInstanceGTIDResponse();
         this.request("DescribeDBInstanceGTID", req, resp, cb);
+    }
+
+    /**
+     * 本接口(CreateRoInstanceIp)用于创建云数据库只读实例的独立VIP。
+     * @param {CreateRoInstanceIpRequest} req
+     * @param {function(string, CreateRoInstanceIpResponse):void} cb
+     * @public
+     */
+    CreateRoInstanceIp(req, cb) {
+        let resp = new CreateRoInstanceIpResponse();
+        this.request("CreateRoInstanceIp", req, resp, cb);
     }
 
     /**

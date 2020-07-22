@@ -3128,6 +3128,12 @@ class DeleteAuditPolicyRequest extends  AbstractModel {
          */
         this.PolicyId = null;
 
+        /**
+         * 实例 ID。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
     }
 
     /**
@@ -3138,6 +3144,7 @@ class DeleteAuditPolicyRequest extends  AbstractModel {
             return;
         }
         this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -5747,36 +5754,42 @@ class RestartDBInstancesResponse extends  AbstractModel {
 }
 
 /**
- * 参数模板信息
+ * CreateRoInstanceIp返回参数结构体
  * @class
  */
-class ParamTemplateInfo extends  AbstractModel {
+class CreateRoInstanceIpResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 参数模板ID
+         * 只读实例的私有网络的ID。
          * @type {number || null}
          */
-        this.TemplateId = null;
+        this.RoVpcId = null;
 
         /**
-         * 参数模板名称
-         * @type {string || null}
+         * 只读实例的子网ID。
+         * @type {number || null}
          */
-        this.Name = null;
+        this.RoSubnetId = null;
 
         /**
-         * 参数模板描述
+         * 只读实例的内网IP地址。
          * @type {string || null}
          */
-        this.Description = null;
+        this.RoVip = null;
 
         /**
-         * 实例引擎版本
+         * 只读实例的内网端口号。
+         * @type {number || null}
+         */
+        this.RoVport = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.EngineVersion = null;
+        this.RequestId = null;
 
     }
 
@@ -5787,10 +5800,11 @@ class ParamTemplateInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
+        this.RoVpcId = 'RoVpcId' in params ? params.RoVpcId : null;
+        this.RoSubnetId = 'RoSubnetId' in params ? params.RoSubnetId : null;
+        this.RoVip = 'RoVip' in params ? params.RoVip : null;
+        this.RoVport = 'RoVport' in params ? params.RoVport : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5933,6 +5947,55 @@ class DescribeInstanceParamRecordsRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * 参数模板信息
+ * @class
+ */
+class ParamTemplateInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 参数模板ID
+         * @type {number || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * 参数模板名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 参数模板描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 实例引擎版本
+         * @type {string || null}
+         */
+        this.EngineVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.EngineVersion = 'EngineVersion' in params ? params.EngineVersion : null;
 
     }
 }
@@ -6194,6 +6257,48 @@ class CreateAuditPolicyRequest extends  AbstractModel {
         this.RuleId = 'RuleId' in params ? params.RuleId : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.LogExpireDay = 'LogExpireDay' in params ? params.LogExpireDay : null;
+
+    }
+}
+
+/**
+ * CreateRoInstanceIp请求参数结构体
+ * @class
+ */
+class CreateRoInstanceIpRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 只读实例ID，格式如：cdbro-3i70uj0k，与云数据库控制台页面中显示的只读实例ID相同。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 子网描述符，例如：subnet-1typ0s7d。
+         * @type {string || null}
+         */
+        this.UniqSubnetId = null;
+
+        /**
+         * vpc描述符，例如：vpc-xxx,如果传了该字段则UniqSubnetId必传
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
 
     }
 }
@@ -14071,16 +14176,18 @@ module.exports = {
     DescribeRoGroupsResponse: DescribeRoGroupsResponse,
     CloseWanServiceRequest: CloseWanServiceRequest,
     RestartDBInstancesResponse: RestartDBInstancesResponse,
-    ParamTemplateInfo: ParamTemplateInfo,
+    CreateRoInstanceIpResponse: CreateRoInstanceIpResponse,
     DescribeBackupDatabasesResponse: DescribeBackupDatabasesResponse,
     DescribeBackupSummariesResponse: DescribeBackupSummariesResponse,
     DescribeInstanceParamRecordsRequest: DescribeInstanceParamRecordsRequest,
+    ParamTemplateInfo: ParamTemplateInfo,
     ModifyAutoRenewFlagResponse: ModifyAutoRenewFlagResponse,
     DeleteTimeWindowResponse: DeleteTimeWindowResponse,
     DescribeBinlogBackupOverviewRequest: DescribeBinlogBackupOverviewRequest,
     RollbackTask: RollbackTask,
     DescribeBackupsResponse: DescribeBackupsResponse,
     CreateAuditPolicyRequest: CreateAuditPolicyRequest,
+    CreateRoInstanceIpRequest: CreateRoInstanceIpRequest,
     ModifyInstanceParamResponse: ModifyInstanceParamResponse,
     DescribeDBImportRecordsResponse: DescribeDBImportRecordsResponse,
     CreateAuditPolicyResponse: CreateAuditPolicyResponse,

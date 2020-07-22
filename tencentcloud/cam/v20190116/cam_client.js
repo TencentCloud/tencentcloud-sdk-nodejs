@@ -16,7 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const ListAttachedRolePoliciesResponse = models.ListAttachedRolePoliciesResponse;
+const GetUserResponse = models.GetUserResponse;
 const ListAccessKeysRequest = models.ListAccessKeysRequest;
 const SetMfaFlagResponse = models.SetMfaFlagResponse;
 const DeleteUserRequest = models.DeleteUserRequest;
@@ -29,7 +29,7 @@ const ListAttachedGroupPoliciesRequest = models.ListAttachedGroupPoliciesRequest
 const ListGroupsForUserRequest = models.ListGroupsForUserRequest;
 const AttachRolePolicyResponse = models.AttachRolePolicyResponse;
 const GetServiceLinkedRoleDeletionStatusResponse = models.GetServiceLinkedRoleDeletionStatusResponse;
-const AttachGroupPolicyResponse = models.AttachGroupPolicyResponse;
+const DeleteUserPermissionsBoundaryResponse = models.DeleteUserPermissionsBoundaryResponse;
 const ListUsersResponse = models.ListUsersResponse;
 const UpdateRoleDescriptionResponse = models.UpdateRoleDescriptionResponse;
 const DetachUserPolicyRequest = models.DetachUserPolicyRequest;
@@ -40,6 +40,7 @@ const DescribeRoleListRequest = models.DescribeRoleListRequest;
 const GetGroupRequest = models.GetGroupRequest;
 const DeleteRoleResponse = models.DeleteRoleResponse;
 const PolicyVersionItem = models.PolicyVersionItem;
+const DeleteUserPermissionsBoundaryRequest = models.DeleteUserPermissionsBoundaryRequest;
 const ListSAMLProvidersRequest = models.ListSAMLProvidersRequest;
 const ListGroupsRequest = models.ListGroupsRequest;
 const DeletePolicyVersionResponse = models.DeletePolicyVersionResponse;
@@ -56,9 +57,10 @@ const SetDefaultPolicyVersionRequest = models.SetDefaultPolicyVersionRequest;
 const RoleInfo = models.RoleInfo;
 const CreatePolicyVersionRequest = models.CreatePolicyVersionRequest;
 const DeleteGroupRequest = models.DeleteGroupRequest;
-const GetUserResponse = models.GetUserResponse;
+const ListAttachedRolePoliciesResponse = models.ListAttachedRolePoliciesResponse;
 const DeleteUserResponse = models.DeleteUserResponse;
 const DetachRolePolicyRequest = models.DetachRolePolicyRequest;
+const DeleteRolePermissionsBoundaryRequest = models.DeleteRolePermissionsBoundaryRequest;
 const StrategyInfo = models.StrategyInfo;
 const DeletePolicyRequest = models.DeletePolicyRequest;
 const GroupInfo = models.GroupInfo;
@@ -69,20 +71,24 @@ const GetCustomMFATokenInfoResponse = models.GetCustomMFATokenInfoResponse;
 const UpdateAssumeRolePolicyResponse = models.UpdateAssumeRolePolicyResponse;
 const ListAttachedUserPoliciesResponse = models.ListAttachedUserPoliciesResponse;
 const CreateSAMLProviderResponse = models.CreateSAMLProviderResponse;
+const DeleteRolePermissionsBoundaryResponse = models.DeleteRolePermissionsBoundaryResponse;
 const GetUserRequest = models.GetUserRequest;
 const LoginActionMfaFlag = models.LoginActionMfaFlag;
 const SubAccountInfo = models.SubAccountInfo;
+const CreateGroupRequest = models.CreateGroupRequest;
 const SAMLProviderInfo = models.SAMLProviderInfo;
 const UpdateSAMLProviderResponse = models.UpdateSAMLProviderResponse;
 const UpdateUserRequest = models.UpdateUserRequest;
 const CreateSAMLProviderRequest = models.CreateSAMLProviderRequest;
 const AttachPolicyInfo = models.AttachPolicyInfo;
+const PutRolePermissionsBoundaryRequest = models.PutRolePermissionsBoundaryRequest;
 const UpdateRoleConsoleLoginResponse = models.UpdateRoleConsoleLoginResponse;
 const AttachRolePolicyRequest = models.AttachRolePolicyRequest;
 const ConsumeCustomMFATokenResponse = models.ConsumeCustomMFATokenResponse;
 const AttachUserPolicyRequest = models.AttachUserPolicyRequest;
 const ListAttachedGroupPoliciesResponse = models.ListAttachedGroupPoliciesResponse;
 const GetPolicyVersionRequest = models.GetPolicyVersionRequest;
+const PutUserPermissionsBoundaryResponse = models.PutUserPermissionsBoundaryResponse;
 const DeletePolicyResponse = models.DeletePolicyResponse;
 const ConsumeCustomMFATokenRequest = models.ConsumeCustomMFATokenRequest;
 const AccessKey = models.AccessKey;
@@ -94,7 +100,7 @@ const CreateServiceLinkedRoleResponse = models.CreateServiceLinkedRoleResponse;
 const ListUsersRequest = models.ListUsersRequest;
 const ListCollaboratorsRequest = models.ListCollaboratorsRequest;
 const UpdatePolicyResponse = models.UpdatePolicyResponse;
-const CreateGroupRequest = models.CreateGroupRequest;
+const AttachGroupPolicyResponse = models.AttachGroupPolicyResponse;
 const UpdateGroupResponse = models.UpdateGroupResponse;
 const ListEntitiesForPolicyRequest = models.ListEntitiesForPolicyRequest;
 const ListPoliciesRequest = models.ListPoliciesRequest;
@@ -112,6 +118,7 @@ const AddUserToGroupRequest = models.AddUserToGroupRequest;
 const RemoveUserFromGroupResponse = models.RemoveUserFromGroupResponse;
 const DetachRolePolicyResponse = models.DetachRolePolicyResponse;
 const AttachedPolicyOfRole = models.AttachedPolicyOfRole;
+const PutUserPermissionsBoundaryRequest = models.PutUserPermissionsBoundaryRequest;
 const ListSAMLProvidersResponse = models.ListSAMLProvidersResponse;
 const SetDefaultPolicyVersionResponse = models.SetDefaultPolicyVersionResponse;
 const ListAttachedRolePoliciesRequest = models.ListAttachedRolePoliciesRequest;
@@ -131,6 +138,7 @@ const AddUserResponse = models.AddUserResponse;
 const ListEntitiesForPolicyResponse = models.ListEntitiesForPolicyResponse;
 const AddUserToGroupResponse = models.AddUserToGroupResponse;
 const AttachUserPolicyResponse = models.AttachUserPolicyResponse;
+const PutRolePermissionsBoundaryResponse = models.PutRolePermissionsBoundaryResponse;
 const SetMfaFlagRequest = models.SetMfaFlagRequest;
 const ListCollaboratorsResponse = models.ListCollaboratorsResponse;
 const ListAccessKeysResponse = models.ListAccessKeysResponse;
@@ -250,6 +258,17 @@ class CamClient extends AbstractClient {
     }
 
     /**
+     * 设置角色权限边界
+     * @param {PutRolePermissionsBoundaryRequest} req
+     * @param {function(string, PutRolePermissionsBoundaryResponse):void} cb
+     * @public
+     */
+    PutRolePermissionsBoundary(req, cb) {
+        let resp = new PutRolePermissionsBoundaryResponse();
+        this.request("PutRolePermissionsBoundary", req, resp, cb);
+    }
+
+    /**
      * 拉取子用户
      * @param {ListUsersRequest} req
      * @param {function(string, ListUsersResponse):void} cb
@@ -280,6 +299,17 @@ class CamClient extends AbstractClient {
     DeletePolicy(req, cb) {
         let resp = new DeletePolicyResponse();
         this.request("DeletePolicy", req, resp, cb);
+    }
+
+    /**
+     * 删除角色权限边界
+     * @param {DeleteRolePermissionsBoundaryRequest} req
+     * @param {function(string, DeleteRolePermissionsBoundaryResponse):void} cb
+     * @public
+     */
+    DeleteRolePermissionsBoundary(req, cb) {
+        let resp = new DeleteRolePermissionsBoundaryResponse();
+        this.request("DeleteRolePermissionsBoundary", req, resp, cb);
     }
 
     /**
@@ -426,14 +456,14 @@ class CamClient extends AbstractClient {
     }
 
     /**
-     * 更新用户组
-     * @param {UpdateGroupRequest} req
-     * @param {function(string, UpdateGroupResponse):void} cb
+     * 删除用户权限边界
+     * @param {DeleteUserPermissionsBoundaryRequest} req
+     * @param {function(string, DeleteUserPermissionsBoundaryResponse):void} cb
      * @public
      */
-    UpdateGroup(req, cb) {
-        let resp = new UpdateGroupResponse();
-        this.request("UpdateGroup", req, resp, cb);
+    DeleteUserPermissionsBoundary(req, cb) {
+        let resp = new DeleteUserPermissionsBoundaryResponse();
+        this.request("DeleteUserPermissionsBoundary", req, resp, cb);
     }
 
     /**
@@ -489,6 +519,17 @@ class CamClient extends AbstractClient {
     GetPolicyVersion(req, cb) {
         let resp = new GetPolicyVersionResponse();
         this.request("GetPolicyVersion", req, resp, cb);
+    }
+
+    /**
+     * 本接口（UpdateAssumeRolePolicy）用于修改角色信任策略的策略文档。
+     * @param {UpdateAssumeRolePolicyRequest} req
+     * @param {function(string, UpdateAssumeRolePolicyResponse):void} cb
+     * @public
+     */
+    UpdateAssumeRolePolicy(req, cb) {
+        let resp = new UpdateAssumeRolePolicyResponse();
+        this.request("UpdateAssumeRolePolicy", req, resp, cb);
     }
 
     /**
@@ -702,14 +743,25 @@ class CamClient extends AbstractClient {
     }
 
     /**
-     * 本接口（UpdateAssumeRolePolicy）用于修改角色信任策略的策略文档。
-     * @param {UpdateAssumeRolePolicyRequest} req
-     * @param {function(string, UpdateAssumeRolePolicyResponse):void} cb
+     * 更新用户组
+     * @param {UpdateGroupRequest} req
+     * @param {function(string, UpdateGroupResponse):void} cb
      * @public
      */
-    UpdateAssumeRolePolicy(req, cb) {
-        let resp = new UpdateAssumeRolePolicyResponse();
-        this.request("UpdateAssumeRolePolicy", req, resp, cb);
+    UpdateGroup(req, cb) {
+        let resp = new UpdateGroupResponse();
+        this.request("UpdateGroup", req, resp, cb);
+    }
+
+    /**
+     * 设置用户权限边界
+     * @param {PutUserPermissionsBoundaryRequest} req
+     * @param {function(string, PutUserPermissionsBoundaryResponse):void} cb
+     * @public
+     */
+    PutUserPermissionsBoundary(req, cb) {
+        let resp = new PutUserPermissionsBoundaryResponse();
+        this.request("PutUserPermissionsBoundary", req, resp, cb);
     }
 
     /**
