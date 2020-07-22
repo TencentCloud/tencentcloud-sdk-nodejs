@@ -2863,12 +2863,6 @@ class CreateTrainingJobRequest extends  AbstractModel {
         this.AlgorithmSpecification = null;
 
         /**
-         * 输入数据配置
-         * @type {Array.<InputDataConfig> || null}
-         */
-        this.InputDataConfig = null;
-
-        /**
          * 输出数据配置
          * @type {OutputDataConfig || null}
          */
@@ -2885,6 +2879,12 @@ class CreateTrainingJobRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.TrainingJobName = null;
+
+        /**
+         * 输入数据配置
+         * @type {Array.<InputDataConfig> || null}
+         */
+        this.InputDataConfig = null;
 
         /**
          * 中止条件
@@ -2932,15 +2932,6 @@ class CreateTrainingJobRequest extends  AbstractModel {
             this.AlgorithmSpecification = obj;
         }
 
-        if (params.InputDataConfig) {
-            this.InputDataConfig = new Array();
-            for (let z in params.InputDataConfig) {
-                let obj = new InputDataConfig();
-                obj.deserialize(params.InputDataConfig[z]);
-                this.InputDataConfig.push(obj);
-            }
-        }
-
         if (params.OutputDataConfig) {
             let obj = new OutputDataConfig();
             obj.deserialize(params.OutputDataConfig)
@@ -2953,6 +2944,15 @@ class CreateTrainingJobRequest extends  AbstractModel {
             this.ResourceConfig = obj;
         }
         this.TrainingJobName = 'TrainingJobName' in params ? params.TrainingJobName : null;
+
+        if (params.InputDataConfig) {
+            this.InputDataConfig = new Array();
+            for (let z in params.InputDataConfig) {
+                let obj = new InputDataConfig();
+                obj.deserialize(params.InputDataConfig[z]);
+                this.InputDataConfig.push(obj);
+            }
+        }
 
         if (params.StoppingCondition) {
             let obj = new StoppingCondition();

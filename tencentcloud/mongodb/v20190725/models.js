@@ -242,6 +242,76 @@ class IsolateDBInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * ResetDBInstancePassword返回参数结构体
+ * @class
+ */
+class ResetDBInstancePasswordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步请求Id，用户查询该流程的运行状态
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateBackupDBInstance返回参数结构体
+ * @class
+ */
+class CreateBackupDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询备份流程的状态
+         * @type {string || null}
+         */
+        this.AsyncRequestId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 数据库实例价格
  * @class
  */
@@ -285,36 +355,24 @@ class DBInstancePrice extends  AbstractModel {
 }
 
 /**
- * DescribeBackupAccess返回参数结构体
+ * 备份文件存储信息
  * @class
  */
-class DescribeBackupAccessResponse extends  AbstractModel {
+class BackupFile extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例所属地域
+         * 备份文件所属的副本集/分片ID
          * @type {string || null}
          */
-        this.Region = null;
+        this.ReplicateSetId = null;
 
         /**
-         * 备份文件所在存储桶
+         * 备份文件保存路径
          * @type {string || null}
          */
-        this.Bucket = null;
-
-        /**
-         * 备份文件的存储信息
-         * @type {Array.<BackupFile> || null}
-         */
-        this.Files = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.File = null;
 
     }
 
@@ -325,18 +383,99 @@ class DescribeBackupAccessResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Region = 'Region' in params ? params.Region : null;
-        this.Bucket = 'Bucket' in params ? params.Bucket : null;
+        this.ReplicateSetId = 'ReplicateSetId' in params ? params.ReplicateSetId : null;
+        this.File = 'File' in params ? params.File : null;
 
-        if (params.Files) {
-            this.Files = new Array();
-            for (let z in params.Files) {
-                let obj = new BackupFile();
-                obj.deserialize(params.Files[z]);
-                this.Files.push(obj);
-            }
+    }
+}
+
+/**
+ * InquirePriceCreateDBInstances请求参数结构体
+ * @class
+ */
+class InquirePriceCreateDBInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例所属区域名称，格式如：ap-guangzhou-2
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 每个副本集内节点个数，当前副本集节点数固定为3，分片从节点数可选，具体参照查询云数据库的售卖规格返回参数
+         * @type {number || null}
+         */
+        this.NodeNum = null;
+
+        /**
+         * 实例内存大小，单位：GB
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * 实例硬盘大小，单位：GB
+         * @type {number || null}
+         */
+        this.Volume = null;
+
+        /**
+         * 版本号，具体支持的售卖版本请参照查询云数据库的售卖规格（DescribeSpecInfo）返回结果。参数与版本对应关系是MONGO_3_WT：MongoDB 3.2 WiredTiger存储引擎版本，MONGO_3_ROCKS：MongoDB 3.2 RocksDB存储引擎版本，MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本，MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本
+         * @type {string || null}
+         */
+        this.MongoVersion = null;
+
+        /**
+         * 机器类型，HIO：高IO型；HIO10G：高IO万兆型；STDS5：标准型
+         * @type {string || null}
+         */
+        this.MachineCode = null;
+
+        /**
+         * 实例数量, 最小值1，最大值为10
+         * @type {number || null}
+         */
+        this.GoodsNum = null;
+
+        /**
+         * 实例时长，单位：月，可选值包括[1,2,3,4,5,6,7,8,9,10,11,12,24,36]
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * 实例类型，REPLSET-副本集，SHARD-分片集群，STANDALONE-单节点
+         * @type {string || null}
+         */
+        this.ClusterType = null;
+
+        /**
+         * 副本集个数，创建副本集实例时，该参数必须设置为1；创建分片实例时，具体参照查询云数据库的售卖规格返回参数；若为单节点实例，该参数设置为0
+         * @type {number || null}
+         */
+        this.ReplicateSetNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.NodeNum = 'NodeNum' in params ? params.NodeNum : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Volume = 'Volume' in params ? params.Volume : null;
+        this.MongoVersion = 'MongoVersion' in params ? params.MongoVersion : null;
+        this.MachineCode = 'MachineCode' in params ? params.MachineCode : null;
+        this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
+        this.ReplicateSetNum = 'ReplicateSetNum' in params ? params.ReplicateSetNum : null;
 
     }
 }
@@ -872,90 +1011,18 @@ class InquirePriceRenewDBInstancesRequest extends  AbstractModel {
 }
 
 /**
- * DescribeDBInstances请求参数结构体
+ * DescribeAsyncRequestInfo请求参数结构体
  * @class
  */
-class DescribeDBInstancesRequest extends  AbstractModel {
+class DescribeAsyncRequestInfoRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例ID列表，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
-         * @type {Array.<string> || null}
-         */
-        this.InstanceIds = null;
-
-        /**
-         * 实例类型，取值范围：0-所有实例,1-正式实例，2-临时实例, 3-只读实例，-1-正式实例+只读+灾备实例
-         * @type {number || null}
-         */
-        this.InstanceType = null;
-
-        /**
-         * 集群类型，取值范围：0-副本集实例，1-分片实例，-1-所有实例
-         * @type {number || null}
-         */
-        this.ClusterType = null;
-
-        /**
-         * 实例状态，取值范围：0-待初始化，1-流程执行中，2-实例有效，-2-实例已过期
-         * @type {Array.<number> || null}
-         */
-        this.Status = null;
-
-        /**
-         * 私有网络的ID，基础网络则不传该参数
+         * 异步请求Id
          * @type {string || null}
          */
-        this.VpcId = null;
-
-        /**
-         * 私有网络的子网ID，基础网络则不传该参数。入参设置该参数的同时，必须设置相应的VpcId
-         * @type {string || null}
-         */
-        this.SubnetId = null;
-
-        /**
-         * 付费类型，取值范围：0-按量计费，1-包年包月，-1-按量计费+包年包月
-         * @type {number || null}
-         */
-        this.PayMode = null;
-
-        /**
-         * 单次请求返回的数量，最小值为1，最大值为100，默认值为20
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 偏移量，默认值为0
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 返回结果集排序的字段，目前支持："ProjectId", "InstanceName", "CreateTime"，默认为升序排序
-         * @type {string || null}
-         */
-        this.OrderBy = null;
-
-        /**
-         * 返回结果集排序方式，目前支持："ASC"或者"DESC"
-         * @type {string || null}
-         */
-        this.OrderByType = null;
-
-        /**
-         * 项目 ID
-         * @type {Array.<number> || null}
-         */
-        this.ProjectIds = null;
-
-        /**
-         * 搜索关键词，支持实例Id、实例名称、完整IP
-         * @type {string || null}
-         */
-        this.SearchKey = null;
+        this.AsyncRequestId = null;
 
     }
 
@@ -966,19 +1033,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
-        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
-        this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
-        this.PayMode = 'PayMode' in params ? params.PayMode : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
-        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
-        this.ProjectIds = 'ProjectIds' in params ? params.ProjectIds : null;
-        this.SearchKey = 'SearchKey' in params ? params.SearchKey : null;
+        this.AsyncRequestId = 'AsyncRequestId' in params ? params.AsyncRequestId : null;
 
     }
 }
@@ -1479,6 +1534,48 @@ class InquirePriceRenewDBInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * ResetDBInstancePassword请求参数结构体
+ * @class
+ */
+class ResetDBInstancePasswordRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例Id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 实例账号名
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * 新密码
+         * @type {string || null}
+         */
+        this.Password = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
+
+    }
+}
+
+/**
  * 实例标签信息
  * @class
  */
@@ -1620,72 +1717,90 @@ class DescribeDBInstanceDealRequest extends  AbstractModel {
 }
 
 /**
- * InquirePriceCreateDBInstances请求参数结构体
+ * DescribeDBInstances请求参数结构体
  * @class
  */
-class InquirePriceCreateDBInstancesRequest extends  AbstractModel {
+class DescribeDBInstancesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例所属区域名称，格式如：ap-guangzhou-2
-         * @type {string || null}
+         * 实例ID列表，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+         * @type {Array.<string> || null}
          */
-        this.Zone = null;
+        this.InstanceIds = null;
 
         /**
-         * 每个副本集内节点个数，当前副本集节点数固定为3，分片从节点数可选，具体参照查询云数据库的售卖规格返回参数
+         * 实例类型，取值范围：0-所有实例,1-正式实例，2-临时实例, 3-只读实例，-1-正式实例+只读+灾备实例
          * @type {number || null}
          */
-        this.NodeNum = null;
+        this.InstanceType = null;
 
         /**
-         * 实例内存大小，单位：GB
+         * 集群类型，取值范围：0-副本集实例，1-分片实例，-1-所有实例
          * @type {number || null}
-         */
-        this.Memory = null;
-
-        /**
-         * 实例硬盘大小，单位：GB
-         * @type {number || null}
-         */
-        this.Volume = null;
-
-        /**
-         * 版本号，具体支持的售卖版本请参照查询云数据库的售卖规格（DescribeSpecInfo）返回结果。参数与版本对应关系是MONGO_3_WT：MongoDB 3.2 WiredTiger存储引擎版本，MONGO_3_ROCKS：MongoDB 3.2 RocksDB存储引擎版本，MONGO_36_WT：MongoDB 3.6 WiredTiger存储引擎版本，MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本
-         * @type {string || null}
-         */
-        this.MongoVersion = null;
-
-        /**
-         * 机器类型，HIO：高IO型；HIO10G：高IO万兆型；STDS5：标准型
-         * @type {string || null}
-         */
-        this.MachineCode = null;
-
-        /**
-         * 实例数量, 最小值1，最大值为10
-         * @type {number || null}
-         */
-        this.GoodsNum = null;
-
-        /**
-         * 实例时长，单位：月，可选值包括[1,2,3,4,5,6,7,8,9,10,11,12,24,36]
-         * @type {number || null}
-         */
-        this.Period = null;
-
-        /**
-         * 实例类型，REPLSET-副本集，SHARD-分片集群，STANDALONE-单节点
-         * @type {string || null}
          */
         this.ClusterType = null;
 
         /**
-         * 副本集个数，创建副本集实例时，该参数必须设置为1；创建分片实例时，具体参照查询云数据库的售卖规格返回参数；若为单节点实例，该参数设置为0
+         * 实例状态，取值范围：0-待初始化，1-流程执行中，2-实例有效，-2-实例已过期
+         * @type {Array.<number> || null}
+         */
+        this.Status = null;
+
+        /**
+         * 私有网络的ID，基础网络则不传该参数
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 私有网络的子网ID，基础网络则不传该参数。入参设置该参数的同时，必须设置相应的VpcId
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 付费类型，取值范围：0-按量计费，1-包年包月，-1-按量计费+包年包月
          * @type {number || null}
          */
-        this.ReplicateSetNum = null;
+        this.PayMode = null;
+
+        /**
+         * 单次请求返回的数量，最小值为1，最大值为100，默认值为20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认值为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回结果集排序的字段，目前支持："ProjectId", "InstanceName", "CreateTime"，默认为升序排序
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * 返回结果集排序方式，目前支持："ASC"或者"DESC"
+         * @type {string || null}
+         */
+        this.OrderByType = null;
+
+        /**
+         * 项目 ID
+         * @type {Array.<number> || null}
+         */
+        this.ProjectIds = null;
+
+        /**
+         * 搜索关键词，支持实例Id、实例名称、完整IP
+         * @type {string || null}
+         */
+        this.SearchKey = null;
 
     }
 
@@ -1696,16 +1811,54 @@ class InquirePriceCreateDBInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Zone = 'Zone' in params ? params.Zone : null;
-        this.NodeNum = 'NodeNum' in params ? params.NodeNum : null;
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.Volume = 'Volume' in params ? params.Volume : null;
-        this.MongoVersion = 'MongoVersion' in params ? params.MongoVersion : null;
-        this.MachineCode = 'MachineCode' in params ? params.MachineCode : null;
-        this.GoodsNum = 'GoodsNum' in params ? params.GoodsNum : null;
-        this.Period = 'Period' in params ? params.Period : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
         this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
-        this.ReplicateSetNum = 'ReplicateSetNum' in params ? params.ReplicateSetNum : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+        this.ProjectIds = 'ProjectIds' in params ? params.ProjectIds : null;
+        this.SearchKey = 'SearchKey' in params ? params.SearchKey : null;
+
+    }
+}
+
+/**
+ * DescribeAsyncRequestInfo返回参数结构体
+ * @class
+ */
+class DescribeAsyncRequestInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 状态
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2335,24 +2488,36 @@ class DBInstanceInfo extends  AbstractModel {
 }
 
 /**
- * 备份文件存储信息
+ * DescribeBackupAccess返回参数结构体
  * @class
  */
-class BackupFile extends  AbstractModel {
+class DescribeBackupAccessResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 备份文件所属的副本集/分片ID
+         * 实例所属地域
          * @type {string || null}
          */
-        this.ReplicateSetId = null;
+        this.Region = null;
 
         /**
-         * 备份文件保存路径
+         * 备份文件所在存储桶
          * @type {string || null}
          */
-        this.File = null;
+        this.Bucket = null;
+
+        /**
+         * 备份文件的存储信息
+         * @type {Array.<BackupFile> || null}
+         */
+        this.Files = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -2363,8 +2528,18 @@ class BackupFile extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ReplicateSetId = 'ReplicateSetId' in params ? params.ReplicateSetId : null;
-        this.File = 'File' in params ? params.File : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Bucket = 'Bucket' in params ? params.Bucket : null;
+
+        if (params.Files) {
+            this.Files = new Array();
+            for (let z in params.Files) {
+                let obj = new BackupFile();
+                obj.deserialize(params.Files[z]);
+                this.Files.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2843,6 +3018,48 @@ class CreateDBInstanceHourResponse extends  AbstractModel {
 }
 
 /**
+ * CreateBackupDBInstance请求参数结构体
+ * @class
+ */
+class CreateBackupDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 0-逻辑备份，1-物理备份
+         * @type {number || null}
+         */
+        this.BackupMethod = null;
+
+        /**
+         * 备份备注
+         * @type {string || null}
+         */
+        this.BackupRemark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.BackupMethod = 'BackupMethod' in params ? params.BackupMethod : null;
+        this.BackupRemark = 'BackupRemark' in params ? params.BackupRemark : null;
+
+    }
+}
+
+/**
  * 描述了实例的计费模式
  * @class
  */
@@ -2966,8 +3183,11 @@ module.exports = {
     DescribeSpecInfoRequest: DescribeSpecInfoRequest,
     CreateDBInstanceRequest: CreateDBInstanceRequest,
     IsolateDBInstanceRequest: IsolateDBInstanceRequest,
+    ResetDBInstancePasswordResponse: ResetDBInstancePasswordResponse,
+    CreateBackupDBInstanceResponse: CreateBackupDBInstanceResponse,
     DBInstancePrice: DBInstancePrice,
-    DescribeBackupAccessResponse: DescribeBackupAccessResponse,
+    BackupFile: BackupFile,
+    InquirePriceCreateDBInstancesRequest: InquirePriceCreateDBInstancesRequest,
     DescribeSlowLogPatternsResponse: DescribeSlowLogPatternsResponse,
     SlowLogPattern: SlowLogPattern,
     CreateDBInstanceHourRequest: CreateDBInstanceHourRequest,
@@ -2977,7 +3197,7 @@ module.exports = {
     InquirePriceModifyDBInstanceSpecRequest: InquirePriceModifyDBInstanceSpecRequest,
     BackupInfo: BackupInfo,
     InquirePriceRenewDBInstancesRequest: InquirePriceRenewDBInstancesRequest,
-    DescribeDBInstancesRequest: DescribeDBInstancesRequest,
+    DescribeAsyncRequestInfoRequest: DescribeAsyncRequestInfoRequest,
     SpecificationInfo: SpecificationInfo,
     DescribeSlowLogsRequest: DescribeSlowLogsRequest,
     DescribeSlowLogPatternsRequest: DescribeSlowLogPatternsRequest,
@@ -2986,11 +3206,13 @@ module.exports = {
     SpecItem: SpecItem,
     DescribeSpecInfoResponse: DescribeSpecInfoResponse,
     InquirePriceRenewDBInstancesResponse: InquirePriceRenewDBInstancesResponse,
+    ResetDBInstancePasswordRequest: ResetDBInstancePasswordRequest,
     TagInfo: TagInfo,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
     OfflineIsolatedDBInstanceRequest: OfflineIsolatedDBInstanceRequest,
     DescribeDBInstanceDealRequest: DescribeDBInstanceDealRequest,
-    InquirePriceCreateDBInstancesRequest: InquirePriceCreateDBInstancesRequest,
+    DescribeDBInstancesRequest: DescribeDBInstancesRequest,
+    DescribeAsyncRequestInfoResponse: DescribeAsyncRequestInfoResponse,
     CreateDBInstanceResponse: CreateDBInstanceResponse,
     AssignProjectResponse: AssignProjectResponse,
     DescribeDBBackupsRequest: DescribeDBBackupsRequest,
@@ -3007,11 +3229,12 @@ module.exports = {
     DescribeClientConnectionsResponse: DescribeClientConnectionsResponse,
     FlushInstanceRouterConfigRequest: FlushInstanceRouterConfigRequest,
     DBInstanceInfo: DBInstanceInfo,
-    BackupFile: BackupFile,
+    DescribeBackupAccessResponse: DescribeBackupAccessResponse,
     DescribeDBBackupsResponse: DescribeDBBackupsResponse,
     InstanceDetail: InstanceDetail,
     ModifyDBInstanceSpecRequest: ModifyDBInstanceSpecRequest,
     CreateDBInstanceHourResponse: CreateDBInstanceHourResponse,
+    CreateBackupDBInstanceRequest: CreateBackupDBInstanceRequest,
     InstanceChargePrepaid: InstanceChargePrepaid,
     InquirePriceCreateDBInstancesResponse: InquirePriceCreateDBInstancesResponse,
     RenewDBInstancesRequest: RenewDBInstancesRequest,

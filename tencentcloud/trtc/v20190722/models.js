@@ -168,22 +168,28 @@ class LayoutParams extends  AbstractModel {
         super();
 
         /**
-         * 混流布局模板ID，0为悬浮模板(默认);1为九宫格模板;2为屏幕分享模板
+         * 混流布局模板ID，0为悬浮模板(默认);1为九宫格模板;2为屏幕分享模板;3为画中画模板。
          * @type {number || null}
          */
         this.Template = null;
 
         /**
-         * 屏幕分享模板中有效，代表左侧大画面对应的用户ID
+         * 屏幕分享模板、悬浮模板、画中画模板中有效，代表大画面对应的用户ID。
          * @type {string || null}
          */
         this.MainVideoUserId = null;
 
         /**
-         * 屏幕分享模板中有效，代表左侧大画面对应的流类型，0为摄像头，1为屏幕分享。左侧大画面为web用户时此值填0
+         * 屏幕分享模板、悬浮模板、画中画模板中有效，代表大画面对应的流类型，0为摄像头，1为屏幕分享。左侧大画面为web用户时此值填0。
          * @type {number || null}
          */
         this.MainVideoStreamType = null;
+
+        /**
+         * 画中画模板中有效，代表小画面的布局参数。
+         * @type {SmallVideoLayoutParams || null}
+         */
+        this.SmallVideoLayoutParams = null;
 
     }
 
@@ -197,6 +203,12 @@ class LayoutParams extends  AbstractModel {
         this.Template = 'Template' in params ? params.Template : null;
         this.MainVideoUserId = 'MainVideoUserId' in params ? params.MainVideoUserId : null;
         this.MainVideoStreamType = 'MainVideoStreamType' in params ? params.MainVideoStreamType : null;
+
+        if (params.SmallVideoLayoutParams) {
+            let obj = new SmallVideoLayoutParams();
+            obj.deserialize(params.SmallVideoLayoutParams)
+            this.SmallVideoLayoutParams = obj;
+        }
 
     }
 }
@@ -1527,6 +1539,69 @@ class StartMCUMixTranscodeResponse extends  AbstractModel {
 }
 
 /**
+ * 画中画模板中有效，代表小画面的布局参数
+ * @class
+ */
+class SmallVideoLayoutParams extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 代表小画面对应的用户ID。
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * 代表小画面对应的流类型，0为摄像头，1为屏幕分享。小画面为web用户时此值填0。
+         * @type {number || null}
+         */
+        this.StreamType = null;
+
+        /**
+         * 小画面在输出时的宽度，单位为像素值，不填默认为0。
+         * @type {number || null}
+         */
+        this.ImageWidth = null;
+
+        /**
+         * 小画面在输出时的高度，单位为像素值，不填默认为0。
+         * @type {number || null}
+         */
+        this.ImageHeight = null;
+
+        /**
+         * 小画面在输出时的X偏移，单位为像素值，LocationX与ImageWidth之和不能超过混流输出的总宽度，不填默认为0。
+         * @type {number || null}
+         */
+        this.LocationX = null;
+
+        /**
+         * 小画面在输出时的Y偏移，单位为像素值，LocationY与ImageHeight之和不能超过混流输出的总高度，不填默认为0。
+         * @type {number || null}
+         */
+        this.LocationY = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.StreamType = 'StreamType' in params ? params.StreamType : null;
+        this.ImageWidth = 'ImageWidth' in params ? params.ImageWidth : null;
+        this.ImageHeight = 'ImageHeight' in params ? params.ImageHeight : null;
+        this.LocationX = 'LocationX' in params ? params.LocationX : null;
+        this.LocationY = 'LocationY' in params ? params.LocationY : null;
+
+    }
+}
+
+/**
  * DescribeRealtimeScale请求参数结构体
  * @class
  */
@@ -2001,6 +2076,7 @@ module.exports = {
     EventList: EventList,
     DescribeDetailEventResponse: DescribeDetailEventResponse,
     StartMCUMixTranscodeResponse: StartMCUMixTranscodeResponse,
+    SmallVideoLayoutParams: SmallVideoLayoutParams,
     DescribeRealtimeScaleRequest: DescribeRealtimeScaleRequest,
     DescribeCallDetailResponse: DescribeCallDetailResponse,
     DescribeRoomInformationRequest: DescribeRoomInformationRequest,

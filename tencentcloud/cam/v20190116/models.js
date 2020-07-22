@@ -17,24 +17,60 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * ListAttachedRolePolicies返回参数结构体
+ * GetUser返回参数结构体
  * @class
  */
-class ListAttachedRolePoliciesResponse extends  AbstractModel {
+class GetUserResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 角色关联的策略列表
-         * @type {Array.<AttachedPolicyOfRole> || null}
-         */
-        this.List = null;
-
-        /**
-         * 角色关联的策略总数
+         * 子用户用户 UIN
          * @type {number || null}
          */
-        this.TotalNum = null;
+        this.Uin = null;
+
+        /**
+         * 子用户用户名
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 子用户 UID
+         * @type {number || null}
+         */
+        this.Uid = null;
+
+        /**
+         * 子用户备注
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 子用户能否登录控制台
+         * @type {number || null}
+         */
+        this.ConsoleLogin = null;
+
+        /**
+         * 手机号
+         * @type {string || null}
+         */
+        this.PhoneNum = null;
+
+        /**
+         * 区号
+         * @type {string || null}
+         */
+        this.CountryCode = null;
+
+        /**
+         * 邮箱
+         * @type {string || null}
+         */
+        this.Email = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -51,16 +87,14 @@ class ListAttachedRolePoliciesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.List) {
-            this.List = new Array();
-            for (let z in params.List) {
-                let obj = new AttachedPolicyOfRole();
-                obj.deserialize(params.List[z]);
-                this.List.push(obj);
-            }
-        }
-        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Uid = 'Uid' in params ? params.Uid : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.ConsoleLogin = 'ConsoleLogin' in params ? params.ConsoleLogin : null;
+        this.PhoneNum = 'PhoneNum' in params ? params.PhoneNum : null;
+        this.CountryCode = 'CountryCode' in params ? params.CountryCode : null;
+        this.Email = 'Email' in params ? params.Email : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -533,10 +567,10 @@ class GetServiceLinkedRoleDeletionStatusResponse extends  AbstractModel {
 }
 
 /**
- * AttachGroupPolicy返回参数结构体
+ * DeleteUserPermissionsBoundary返回参数结构体
  * @class
  */
-class AttachGroupPolicyResponse extends  AbstractModel {
+class DeleteUserPermissionsBoundaryResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -904,6 +938,34 @@ class PolicyVersionItem extends  AbstractModel {
         this.VersionId = 'VersionId' in params ? params.VersionId : null;
         this.CreateDate = 'CreateDate' in params ? params.CreateDate : null;
         this.IsDefaultVersion = 'IsDefaultVersion' in params ? params.IsDefaultVersion : null;
+
+    }
+}
+
+/**
+ * DeleteUserPermissionsBoundary请求参数结构体
+ * @class
+ */
+class DeleteUserPermissionsBoundaryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 子账号Uin
+         * @type {number || null}
+         */
+        this.TargetUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetUin = 'TargetUin' in params ? params.TargetUin : null;
 
     }
 }
@@ -1591,60 +1653,24 @@ class DeleteGroupRequest extends  AbstractModel {
 }
 
 /**
- * GetUser返回参数结构体
+ * ListAttachedRolePolicies返回参数结构体
  * @class
  */
-class GetUserResponse extends  AbstractModel {
+class ListAttachedRolePoliciesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 子用户用户 UIN
+         * 角色关联的策略列表
+         * @type {Array.<AttachedPolicyOfRole> || null}
+         */
+        this.List = null;
+
+        /**
+         * 角色关联的策略总数
          * @type {number || null}
          */
-        this.Uin = null;
-
-        /**
-         * 子用户用户名
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 子用户 UID
-         * @type {number || null}
-         */
-        this.Uid = null;
-
-        /**
-         * 子用户备注
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * 子用户能否登录控制台
-         * @type {number || null}
-         */
-        this.ConsoleLogin = null;
-
-        /**
-         * 手机号
-         * @type {string || null}
-         */
-        this.PhoneNum = null;
-
-        /**
-         * 区号
-         * @type {string || null}
-         */
-        this.CountryCode = null;
-
-        /**
-         * 邮箱
-         * @type {string || null}
-         */
-        this.Email = null;
+        this.TotalNum = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1661,14 +1687,16 @@ class GetUserResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Uin = 'Uin' in params ? params.Uin : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Uid = 'Uid' in params ? params.Uid : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.ConsoleLogin = 'ConsoleLogin' in params ? params.ConsoleLogin : null;
-        this.PhoneNum = 'PhoneNum' in params ? params.PhoneNum : null;
-        this.CountryCode = 'CountryCode' in params ? params.CountryCode : null;
-        this.Email = 'Email' in params ? params.Email : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new AttachedPolicyOfRole();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1747,6 +1775,41 @@ class DetachRolePolicyRequest extends  AbstractModel {
         this.DetachRoleId = 'DetachRoleId' in params ? params.DetachRoleId : null;
         this.DetachRoleName = 'DetachRoleName' in params ? params.DetachRoleName : null;
         this.PolicyName = 'PolicyName' in params ? params.PolicyName : null;
+
+    }
+}
+
+/**
+ * DeleteRolePermissionsBoundary请求参数结构体
+ * @class
+ */
+class DeleteRolePermissionsBoundaryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 角色ID（与角色名至少填一个）
+         * @type {string || null}
+         */
+        this.RoleId = null;
+
+        /**
+         * 角色名（与角色ID至少填一个）
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RoleId = 'RoleId' in params ? params.RoleId : null;
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
 
     }
 }
@@ -2250,6 +2313,34 @@ class CreateSAMLProviderResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteRolePermissionsBoundary返回参数结构体
+ * @class
+ */
+class DeleteRolePermissionsBoundaryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * GetUser请求参数结构体
  * @class
  */
@@ -2392,6 +2483,41 @@ class SubAccountInfo extends  AbstractModel {
         this.PhoneNum = 'PhoneNum' in params ? params.PhoneNum : null;
         this.CountryCode = 'CountryCode' in params ? params.CountryCode : null;
         this.Email = 'Email' in params ? params.Email : null;
+
+    }
+}
+
+/**
+ * CreateGroup请求参数结构体
+ * @class
+ */
+class CreateGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用户组名
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * 用户组描述
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
 
     }
 }
@@ -2701,6 +2827,48 @@ class AttachPolicyInfo extends  AbstractModel {
 }
 
 /**
+ * PutRolePermissionsBoundary请求参数结构体
+ * @class
+ */
+class PutRolePermissionsBoundaryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 策略ID
+         * @type {number || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * 角色ID（与角色名至少填一个）
+         * @type {string || null}
+         */
+        this.RoleId = null;
+
+        /**
+         * 角色名（与角色ID至少填一个）
+         * @type {string || null}
+         */
+        this.RoleName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.RoleId = 'RoleId' in params ? params.RoleId : null;
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+
+    }
+}
+
+/**
  * UpdateRoleConsoleLogin返回参数结构体
  * @class
  */
@@ -2921,6 +3089,34 @@ class GetPolicyVersionRequest extends  AbstractModel {
         }
         this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
         this.VersionId = 'VersionId' in params ? params.VersionId : null;
+
+    }
+}
+
+/**
+ * PutUserPermissionsBoundary返回参数结构体
+ * @class
+ */
+class PutUserPermissionsBoundaryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3313,24 +3509,18 @@ class UpdatePolicyResponse extends  AbstractModel {
 }
 
 /**
- * CreateGroup请求参数结构体
+ * AttachGroupPolicy返回参数结构体
  * @class
  */
-class CreateGroupRequest extends  AbstractModel {
+class AttachGroupPolicyResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 用户组名
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.GroupName = null;
-
-        /**
-         * 用户组描述
-         * @type {string || null}
-         */
-        this.Remark = null;
+        this.RequestId = null;
 
     }
 
@@ -3341,8 +3531,7 @@ class CreateGroupRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.GroupName = 'GroupName' in params ? params.GroupName : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4029,6 +4218,41 @@ class AttachedPolicyOfRole extends  AbstractModel {
         this.Deactived = 'Deactived' in params ? params.Deactived : null;
         this.DeactivedDetail = 'DeactivedDetail' in params ? params.DeactivedDetail : null;
         this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
+ * PutUserPermissionsBoundary请求参数结构体
+ * @class
+ */
+class PutUserPermissionsBoundaryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 子账号Uin
+         * @type {number || null}
+         */
+        this.TargetUin = null;
+
+        /**
+         * 策略ID
+         * @type {number || null}
+         */
+        this.PolicyId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TargetUin = 'TargetUin' in params ? params.TargetUin : null;
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
 
     }
 }
@@ -4870,6 +5094,34 @@ class AttachUserPolicyResponse extends  AbstractModel {
 }
 
 /**
+ * PutRolePermissionsBoundary返回参数结构体
+ * @class
+ */
+class PutRolePermissionsBoundaryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * SetMfaFlag请求参数结构体
  * @class
  */
@@ -5247,7 +5499,7 @@ class CreateGroupResponse extends  AbstractModel {
 }
 
 module.exports = {
-    ListAttachedRolePoliciesResponse: ListAttachedRolePoliciesResponse,
+    GetUserResponse: GetUserResponse,
     ListAccessKeysRequest: ListAccessKeysRequest,
     SetMfaFlagResponse: SetMfaFlagResponse,
     DeleteUserRequest: DeleteUserRequest,
@@ -5260,7 +5512,7 @@ module.exports = {
     ListGroupsForUserRequest: ListGroupsForUserRequest,
     AttachRolePolicyResponse: AttachRolePolicyResponse,
     GetServiceLinkedRoleDeletionStatusResponse: GetServiceLinkedRoleDeletionStatusResponse,
-    AttachGroupPolicyResponse: AttachGroupPolicyResponse,
+    DeleteUserPermissionsBoundaryResponse: DeleteUserPermissionsBoundaryResponse,
     ListUsersResponse: ListUsersResponse,
     UpdateRoleDescriptionResponse: UpdateRoleDescriptionResponse,
     DetachUserPolicyRequest: DetachUserPolicyRequest,
@@ -5271,6 +5523,7 @@ module.exports = {
     GetGroupRequest: GetGroupRequest,
     DeleteRoleResponse: DeleteRoleResponse,
     PolicyVersionItem: PolicyVersionItem,
+    DeleteUserPermissionsBoundaryRequest: DeleteUserPermissionsBoundaryRequest,
     ListSAMLProvidersRequest: ListSAMLProvidersRequest,
     ListGroupsRequest: ListGroupsRequest,
     DeletePolicyVersionResponse: DeletePolicyVersionResponse,
@@ -5287,9 +5540,10 @@ module.exports = {
     RoleInfo: RoleInfo,
     CreatePolicyVersionRequest: CreatePolicyVersionRequest,
     DeleteGroupRequest: DeleteGroupRequest,
-    GetUserResponse: GetUserResponse,
+    ListAttachedRolePoliciesResponse: ListAttachedRolePoliciesResponse,
     DeleteUserResponse: DeleteUserResponse,
     DetachRolePolicyRequest: DetachRolePolicyRequest,
+    DeleteRolePermissionsBoundaryRequest: DeleteRolePermissionsBoundaryRequest,
     StrategyInfo: StrategyInfo,
     DeletePolicyRequest: DeletePolicyRequest,
     GroupInfo: GroupInfo,
@@ -5300,20 +5554,24 @@ module.exports = {
     UpdateAssumeRolePolicyResponse: UpdateAssumeRolePolicyResponse,
     ListAttachedUserPoliciesResponse: ListAttachedUserPoliciesResponse,
     CreateSAMLProviderResponse: CreateSAMLProviderResponse,
+    DeleteRolePermissionsBoundaryResponse: DeleteRolePermissionsBoundaryResponse,
     GetUserRequest: GetUserRequest,
     LoginActionMfaFlag: LoginActionMfaFlag,
     SubAccountInfo: SubAccountInfo,
+    CreateGroupRequest: CreateGroupRequest,
     SAMLProviderInfo: SAMLProviderInfo,
     UpdateSAMLProviderResponse: UpdateSAMLProviderResponse,
     UpdateUserRequest: UpdateUserRequest,
     CreateSAMLProviderRequest: CreateSAMLProviderRequest,
     AttachPolicyInfo: AttachPolicyInfo,
+    PutRolePermissionsBoundaryRequest: PutRolePermissionsBoundaryRequest,
     UpdateRoleConsoleLoginResponse: UpdateRoleConsoleLoginResponse,
     AttachRolePolicyRequest: AttachRolePolicyRequest,
     ConsumeCustomMFATokenResponse: ConsumeCustomMFATokenResponse,
     AttachUserPolicyRequest: AttachUserPolicyRequest,
     ListAttachedGroupPoliciesResponse: ListAttachedGroupPoliciesResponse,
     GetPolicyVersionRequest: GetPolicyVersionRequest,
+    PutUserPermissionsBoundaryResponse: PutUserPermissionsBoundaryResponse,
     DeletePolicyResponse: DeletePolicyResponse,
     ConsumeCustomMFATokenRequest: ConsumeCustomMFATokenRequest,
     AccessKey: AccessKey,
@@ -5325,7 +5583,7 @@ module.exports = {
     ListUsersRequest: ListUsersRequest,
     ListCollaboratorsRequest: ListCollaboratorsRequest,
     UpdatePolicyResponse: UpdatePolicyResponse,
-    CreateGroupRequest: CreateGroupRequest,
+    AttachGroupPolicyResponse: AttachGroupPolicyResponse,
     UpdateGroupResponse: UpdateGroupResponse,
     ListEntitiesForPolicyRequest: ListEntitiesForPolicyRequest,
     ListPoliciesRequest: ListPoliciesRequest,
@@ -5343,6 +5601,7 @@ module.exports = {
     RemoveUserFromGroupResponse: RemoveUserFromGroupResponse,
     DetachRolePolicyResponse: DetachRolePolicyResponse,
     AttachedPolicyOfRole: AttachedPolicyOfRole,
+    PutUserPermissionsBoundaryRequest: PutUserPermissionsBoundaryRequest,
     ListSAMLProvidersResponse: ListSAMLProvidersResponse,
     SetDefaultPolicyVersionResponse: SetDefaultPolicyVersionResponse,
     ListAttachedRolePoliciesRequest: ListAttachedRolePoliciesRequest,
@@ -5362,6 +5621,7 @@ module.exports = {
     ListEntitiesForPolicyResponse: ListEntitiesForPolicyResponse,
     AddUserToGroupResponse: AddUserToGroupResponse,
     AttachUserPolicyResponse: AttachUserPolicyResponse,
+    PutRolePermissionsBoundaryResponse: PutRolePermissionsBoundaryResponse,
     SetMfaFlagRequest: SetMfaFlagRequest,
     ListCollaboratorsResponse: ListCollaboratorsResponse,
     ListAccessKeysResponse: ListAccessKeysResponse,
