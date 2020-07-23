@@ -1117,13 +1117,13 @@ class CreateAutoScalingGroupFromInstanceRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 最大实例数，取值范围为0-2000。
+         * 最小实例数，取值范围为0-2000。
          * @type {number || null}
          */
         this.MinSize = null;
 
         /**
-         * 最小实例数，取值范围为0-2000。
+         * 最大实例数，取值范围为0-2000。
          * @type {number || null}
          */
         this.MaxSize = null;

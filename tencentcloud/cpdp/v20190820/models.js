@@ -2498,6 +2498,13 @@ class QueryInvoiceResult extends  AbstractModel {
          */
         this.Data = null;
 
+        /**
+         * 订单数据
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Order || null}
+         */
+        this.Order = null;
+
     }
 
     /**
@@ -2514,6 +2521,12 @@ class QueryInvoiceResult extends  AbstractModel {
             let obj = new QueryInvoiceResultData();
             obj.deserialize(params.Data)
             this.Data = obj;
+        }
+
+        if (params.Order) {
+            let obj = new Order();
+            obj.deserialize(params.Order)
+            this.Order = obj;
         }
 
     }
@@ -3068,7 +3081,7 @@ class CreateInvoiceItem extends  AbstractModel {
         this.TaxCode = null;
 
         /**
-         * 不含税商品总价（商品含税价总额/（1+税率））。单位为分
+         * 不含税商品总价（商品含税价总额/（1+税率））。InvoicePlatformId 为1时，该金额为含税总金额。单位为分。
          * @type {number || null}
          */
         this.TotalPrice = null;
@@ -3110,7 +3123,7 @@ class CreateInvoiceItem extends  AbstractModel {
         this.Total = null;
 
         /**
-         * 不含税商品单价
+         * 不含税商品单价。InvoicePlatformId 为1时，该金额为含税单价。
          * @type {string || null}
          */
         this.Price = null;
@@ -5432,24 +5445,90 @@ class CreateRedInvoiceResponse extends  AbstractModel {
 }
 
 /**
- * QueryMerchantBalance返回参数结构体
+ * 查询发票结果数据
  * @class
  */
-class QueryMerchantBalanceResponse extends  AbstractModel {
+class QueryInvoiceResultData extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 对接方账户余额查询结果
-         * @type {QueryMerchantBalanceResult || null}
-         */
-        this.Result = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 订单号
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.OrderId = null;
+
+        /**
+         * 业务开票号
+         * @type {string || null}
+         */
+        this.OrderSn = null;
+
+        /**
+         * 发票状态
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 开票描述
+         * @type {string || null}
+         */
+        this.Message = null;
+
+        /**
+         * 开票日期
+         * @type {string || null}
+         */
+        this.TicketDate = null;
+
+        /**
+         * 发票号码
+         * @type {string || null}
+         */
+        this.TicketSn = null;
+
+        /**
+         * 发票代码
+         * @type {string || null}
+         */
+        this.TicketCode = null;
+
+        /**
+         * 检验码
+         * @type {string || null}
+         */
+        this.CheckCode = null;
+
+        /**
+         * 含税金额(元)
+         * @type {string || null}
+         */
+        this.AmountWithTax = null;
+
+        /**
+         * 不含税金额(元)
+         * @type {string || null}
+         */
+        this.AmountWithoutTax = null;
+
+        /**
+         * 税额(元)
+         * @type {string || null}
+         */
+        this.TaxAmount = null;
+
+        /**
+         * 是否被红冲
+         * @type {number || null}
+         */
+        this.IsRedWashed = null;
+
+        /**
+         * pdf地址
+         * @type {string || null}
+         */
+        this.PdfUrl = null;
 
     }
 
@@ -5460,13 +5539,19 @@ class QueryMerchantBalanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Result) {
-            let obj = new QueryMerchantBalanceResult();
-            obj.deserialize(params.Result)
-            this.Result = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.OrderId = 'OrderId' in params ? params.OrderId : null;
+        this.OrderSn = 'OrderSn' in params ? params.OrderSn : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Message = 'Message' in params ? params.Message : null;
+        this.TicketDate = 'TicketDate' in params ? params.TicketDate : null;
+        this.TicketSn = 'TicketSn' in params ? params.TicketSn : null;
+        this.TicketCode = 'TicketCode' in params ? params.TicketCode : null;
+        this.CheckCode = 'CheckCode' in params ? params.CheckCode : null;
+        this.AmountWithTax = 'AmountWithTax' in params ? params.AmountWithTax : null;
+        this.AmountWithoutTax = 'AmountWithoutTax' in params ? params.AmountWithoutTax : null;
+        this.TaxAmount = 'TaxAmount' in params ? params.TaxAmount : null;
+        this.IsRedWashed = 'IsRedWashed' in params ? params.IsRedWashed : null;
+        this.PdfUrl = 'PdfUrl' in params ? params.PdfUrl : null;
 
     }
 }
@@ -7341,6 +7426,46 @@ class CreateCustAcctIdResponse extends  AbstractModel {
 }
 
 /**
+ * QueryMerchantBalance返回参数结构体
+ * @class
+ */
+class QueryMerchantBalanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 对接方账户余额查询结果
+         * @type {QueryMerchantBalanceResult || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new QueryMerchantBalanceResult();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * QueryAcctInfo返回参数结构体
  * @class
  */
@@ -7640,90 +7765,75 @@ class TransferItem extends  AbstractModel {
 }
 
 /**
- * 查询发票结果数据
+ * 线下查票-订单明细
  * @class
  */
-class QueryInvoiceResultData extends  AbstractModel {
+class OrderItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 订单号
-         * @type {string || null}
-         */
-        this.OrderId = null;
-
-        /**
-         * 业务开票号
-         * @type {string || null}
-         */
-        this.OrderSn = null;
-
-        /**
-         * 发票状态
+         * 明细金额
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
+         */
+        this.AmountHasTax = null;
+
+        /**
+         * 优惠金额
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Discount = null;
+
+        /**
+         * 商品名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 型号
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Models = null;
+
+        /**
+         * 数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 数量单位
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Unit = null;
+
+        /**
+         * 默认“0”
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
          */
         this.Status = null;
 
         /**
-         * 开票描述
-         * @type {string || null}
-         */
-        this.Message = null;
-
-        /**
-         * 开票日期
-         * @type {string || null}
-         */
-        this.TicketDate = null;
-
-        /**
-         * 发票号码
-         * @type {string || null}
-         */
-        this.TicketSn = null;
-
-        /**
-         * 发票代码
-         * @type {string || null}
-         */
-        this.TicketCode = null;
-
-        /**
-         * 检验码
-         * @type {string || null}
-         */
-        this.CheckCode = null;
-
-        /**
-         * 含税金额(元)
-         * @type {string || null}
-         */
-        this.AmountWithTax = null;
-
-        /**
-         * 不含税金额(元)
-         * @type {string || null}
-         */
-        this.AmountWithoutTax = null;
-
-        /**
-         * 税额(元)
-         * @type {string || null}
-         */
-        this.TaxAmount = null;
-
-        /**
-         * 是否被红冲
+         * 单价
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.IsRedWashed = null;
+        this.Price = null;
 
         /**
-         * pdf地址
+         * 商品编码
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.PdfUrl = null;
+        this.TaxCode = null;
 
     }
 
@@ -7734,19 +7844,15 @@ class QueryInvoiceResultData extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.OrderId = 'OrderId' in params ? params.OrderId : null;
-        this.OrderSn = 'OrderSn' in params ? params.OrderSn : null;
+        this.AmountHasTax = 'AmountHasTax' in params ? params.AmountHasTax : null;
+        this.Discount = 'Discount' in params ? params.Discount : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Models = 'Models' in params ? params.Models : null;
+        this.Total = 'Total' in params ? params.Total : null;
+        this.Unit = 'Unit' in params ? params.Unit : null;
         this.Status = 'Status' in params ? params.Status : null;
-        this.Message = 'Message' in params ? params.Message : null;
-        this.TicketDate = 'TicketDate' in params ? params.TicketDate : null;
-        this.TicketSn = 'TicketSn' in params ? params.TicketSn : null;
-        this.TicketCode = 'TicketCode' in params ? params.TicketCode : null;
-        this.CheckCode = 'CheckCode' in params ? params.CheckCode : null;
-        this.AmountWithTax = 'AmountWithTax' in params ? params.AmountWithTax : null;
-        this.AmountWithoutTax = 'AmountWithoutTax' in params ? params.AmountWithoutTax : null;
-        this.TaxAmount = 'TaxAmount' in params ? params.TaxAmount : null;
-        this.IsRedWashed = 'IsRedWashed' in params ? params.IsRedWashed : null;
-        this.PdfUrl = 'PdfUrl' in params ? params.PdfUrl : null;
+        this.Price = 'Price' in params ? params.Price : null;
+        this.TaxCode = 'TaxCode' in params ? params.TaxCode : null;
 
     }
 }
@@ -7937,6 +8043,111 @@ development 开发环境
         this.PlatformShortNumber = 'PlatformShortNumber' in params ? params.PlatformShortNumber : null;
         this.TransType = 'TransType' in params ? params.TransType : null;
         this.TransFee = 'TransFee' in params ? params.TransFee : null;
+
+    }
+}
+
+/**
+ * QueryMemberBind返回参数结构体
+ * @class
+ */
+class QueryMemberBindResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * STRING (10)，本次交易返回查询结果记录数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResultNum = null;
+
+        /**
+         * STRING(30)，起始记录号
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.StartRecordNo = null;
+
+        /**
+         * STRING(2)，结束标志（0: 否; 1: 是）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EndFlag = null;
+
+        /**
+         * STRING (10)，符合业务查询条件的记录总数（重复次数，一次最多返回20条记录）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TotalNum = null;
+
+        /**
+         * 交易信息数组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<TranItem> || null}
+         */
+        this.TranItemArray = null;
+
+        /**
+         * STRING(1027)，保留域
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ReservedMsg = null;
+
+        /**
+         * String(20)，返回码
+         * @type {string || null}
+         */
+        this.TxnReturnCode = null;
+
+        /**
+         * String(100)，返回信息
+         * @type {string || null}
+         */
+        this.TxnReturnMsg = null;
+
+        /**
+         * String(22)，交易流水号
+         * @type {string || null}
+         */
+        this.CnsmrSeqNo = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResultNum = 'ResultNum' in params ? params.ResultNum : null;
+        this.StartRecordNo = 'StartRecordNo' in params ? params.StartRecordNo : null;
+        this.EndFlag = 'EndFlag' in params ? params.EndFlag : null;
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+
+        if (params.TranItemArray) {
+            this.TranItemArray = new Array();
+            for (let z in params.TranItemArray) {
+                let obj = new TranItem();
+                obj.deserialize(params.TranItemArray[z]);
+                this.TranItemArray.push(obj);
+            }
+        }
+        this.ReservedMsg = 'ReservedMsg' in params ? params.ReservedMsg : null;
+        this.TxnReturnCode = 'TxnReturnCode' in params ? params.TxnReturnCode : null;
+        this.TxnReturnMsg = 'TxnReturnMsg' in params ? params.TxnReturnMsg : null;
+        this.CnsmrSeqNo = 'CnsmrSeqNo' in params ? params.CnsmrSeqNo : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8504,7 +8715,7 @@ class CreateInvoiceRequest extends  AbstractModel {
         super();
 
         /**
-         * 开票平台ID。0：高灯
+         * 开票平台ID。0：高灯，1：票易通
          * @type {number || null}
          */
         this.InvoicePlatformId = null;
@@ -8540,7 +8751,7 @@ class CreateInvoiceRequest extends  AbstractModel {
         this.TaxAmount = null;
 
         /**
-         * 不含税总金额（单位为分）
+         * 不含税总金额（单位为分）。InvoicePlatformId 为1时，传默认值-1
          * @type {number || null}
          */
         this.AmountWithoutTax = null;
@@ -12776,78 +12987,82 @@ class QueryRefundResponse extends  AbstractModel {
 }
 
 /**
- * QueryMemberBind返回参数结构体
+ * 线下查票-订单信息
  * @class
  */
-class QueryMemberBindResponse extends  AbstractModel {
+class Order extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * STRING (10)，本次交易返回查询结果记录数
+         * 含税金额
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.AmountHasTax = null;
+
+        /**
+         * 优惠金额
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Discount = null;
+
+        /**
+         * 销方名称
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.ResultNum = null;
+        this.SellerName = null;
 
         /**
-         * STRING(30)，起始记录号
+         * 发票类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.InvoiceType = null;
+
+        /**
+         * 默认“”
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.StartRecordNo = null;
+        this.Name = null;
 
         /**
-         * STRING(2)，结束标志（0: 否; 1: 是）
+         * 支付金额
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Amount = null;
+
+        /**
+         * 下单日期
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.EndFlag = null;
+        this.OrderDate = null;
 
         /**
-         * STRING (10)，符合业务查询条件的记录总数（重复次数，一次最多返回20条记录）
+         * 订单号
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.TotalNum = null;
+        this.OrderId = null;
 
         /**
-         * 交易信息数组
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<TranItem> || null}
-         */
-        this.TranItemArray = null;
-
-        /**
-         * STRING(1027)，保留域
+         * 门店号
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.ReservedMsg = null;
+        this.StoreNo = null;
 
         /**
-         * String(20)，返回码
-         * @type {string || null}
+         * 明细
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<OrderItem> || null}
          */
-        this.TxnReturnCode = null;
-
-        /**
-         * String(100)，返回信息
-         * @type {string || null}
-         */
-        this.TxnReturnMsg = null;
-
-        /**
-         * String(22)，交易流水号
-         * @type {string || null}
-         */
-        this.CnsmrSeqNo = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.Items = null;
 
     }
 
@@ -12858,24 +13073,24 @@ class QueryMemberBindResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ResultNum = 'ResultNum' in params ? params.ResultNum : null;
-        this.StartRecordNo = 'StartRecordNo' in params ? params.StartRecordNo : null;
-        this.EndFlag = 'EndFlag' in params ? params.EndFlag : null;
-        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+        this.AmountHasTax = 'AmountHasTax' in params ? params.AmountHasTax : null;
+        this.Discount = 'Discount' in params ? params.Discount : null;
+        this.SellerName = 'SellerName' in params ? params.SellerName : null;
+        this.InvoiceType = 'InvoiceType' in params ? params.InvoiceType : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Amount = 'Amount' in params ? params.Amount : null;
+        this.OrderDate = 'OrderDate' in params ? params.OrderDate : null;
+        this.OrderId = 'OrderId' in params ? params.OrderId : null;
+        this.StoreNo = 'StoreNo' in params ? params.StoreNo : null;
 
-        if (params.TranItemArray) {
-            this.TranItemArray = new Array();
-            for (let z in params.TranItemArray) {
-                let obj = new TranItem();
-                obj.deserialize(params.TranItemArray[z]);
-                this.TranItemArray.push(obj);
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new OrderItem();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
             }
         }
-        this.ReservedMsg = 'ReservedMsg' in params ? params.ReservedMsg : null;
-        this.TxnReturnCode = 'TxnReturnCode' in params ? params.TxnReturnCode : null;
-        this.TxnReturnMsg = 'TxnReturnMsg' in params ? params.TxnReturnMsg : null;
-        this.CnsmrSeqNo = 'CnsmrSeqNo' in params ? params.CnsmrSeqNo : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -13908,7 +14123,7 @@ module.exports = {
     RegisterBillSupportWithdrawResponse: RegisterBillSupportWithdrawResponse,
     QuerySmallAmountTransferResponse: QuerySmallAmountTransferResponse,
     CreateRedInvoiceResponse: CreateRedInvoiceResponse,
-    QueryMerchantBalanceResponse: QueryMerchantBalanceResponse,
+    QueryInvoiceResultData: QueryInvoiceResultData,
     RechargeByThirdPayRequest: RechargeByThirdPayRequest,
     QuerySingleTransactionStatusResponse: QuerySingleTransactionStatusResponse,
     QueryAcctInfoRequest: QueryAcctInfoRequest,
@@ -13933,12 +14148,14 @@ module.exports = {
     QueryRefundRequest: QueryRefundRequest,
     BindRelateAccReUnionPayRequest: BindRelateAccReUnionPayRequest,
     CreateCustAcctIdResponse: CreateCustAcctIdResponse,
+    QueryMerchantBalanceResponse: QueryMerchantBalanceResponse,
     QueryAcctInfoResponse: QueryAcctInfoResponse,
     QueryAgentTaxPaymentBatchRequest: QueryAgentTaxPaymentBatchRequest,
     QueryPayerinfoResult: QueryPayerinfoResult,
     TransferItem: TransferItem,
-    QueryInvoiceResultData: QueryInvoiceResultData,
+    OrderItem: OrderItem,
     RefundMemberTransactionRequest: RefundMemberTransactionRequest,
+    QueryMemberBindResponse: QueryMemberBindResponse,
     RegisterBillResponse: RegisterBillResponse,
     ApplyOutwardOrderRequest: ApplyOutwardOrderRequest,
     UnbindRelateAcctResponse: UnbindRelateAcctResponse,
@@ -14002,7 +14219,7 @@ module.exports = {
     CreateRedInvoiceResultData: CreateRedInvoiceResultData,
     BindRelateAcctSmallAmountRequest: BindRelateAcctSmallAmountRequest,
     QueryRefundResponse: QueryRefundResponse,
-    QueryMemberBindResponse: QueryMemberBindResponse,
+    Order: Order,
     QueryDeclareData: QueryDeclareData,
     QueryMemberBindRequest: QueryMemberBindRequest,
     QueryAgentStatementsRequest: QueryAgentStatementsRequest,

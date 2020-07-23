@@ -237,12 +237,24 @@ class StopRecordTaskResponse extends  AbstractModel {
 }
 
 /**
- * DescribeLiveCallbackTemplates请求参数结构体
+ * DescribeDeliverBandwidthList返回参数结构体
  * @class
  */
-class DescribeLiveCallbackTemplatesRequest extends  AbstractModel {
+class DescribeDeliverBandwidthListResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 转推计费带宽数据
+         * @type {Array.<BandwidthInfo> || null}
+         */
+        this.DataInfoList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -253,6 +265,16 @@ class DescribeLiveCallbackTemplatesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+        if (params.DataInfoList) {
+            this.DataInfoList = new Array();
+            for (let z in params.DataInfoList) {
+                let obj = new BandwidthInfo();
+                obj.deserialize(params.DataInfoList[z]);
+                this.DataInfoList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -373,83 +395,54 @@ class DeleteLiveTranscodeTemplateResponse extends  AbstractModel {
 }
 
 /**
- * CreateLiveSnapshotTemplate请求参数结构体
+ * DescribeBillBandwidthAndFluxList返回参数结构体
  * @class
  */
-class CreateLiveSnapshotTemplateRequest extends  AbstractModel {
+class DescribeBillBandwidthAndFluxListResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 模板名称。
-长度上限：255字节。
-仅支持中文、英文、数字、_、-。
+         * 峰值带宽所在时间点，格式为yyyy-mm-dd HH:MM:SS。
          * @type {string || null}
          */
-        this.TemplateName = null;
+        this.PeakBandwidthTime = null;
 
         /**
-         * Cos 应用 ID。
+         * 峰值带宽，单位是Mbps。
          * @type {number || null}
          */
-        this.CosAppId = null;
+        this.PeakBandwidth = null;
 
         /**
-         * Cos Bucket名称。
+         * 95峰值带宽所在时间点，格式为yyyy-mm-dd HH:MM:SS。
          * @type {string || null}
          */
-        this.CosBucket = null;
+        this.P95PeakBandwidthTime = null;
 
         /**
-         * Cos地区。
-         * @type {string || null}
-         */
-        this.CosRegion = null;
-
-        /**
-         * 描述信息。
-长度上限：1024字节。
-仅支持中文、英文、数字、_、-。
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * 截图间隔，单位s，默认10s。
-范围： 5s ~ 600s。
+         * 95峰值带宽，单位是Mbps。
          * @type {number || null}
          */
-        this.SnapshotInterval = null;
+        this.P95PeakBandwidth = null;
 
         /**
-         * 截图宽度。默认：0（原始宽）。
+         * 总流量，单位是MB。
          * @type {number || null}
          */
-        this.Width = null;
+        this.SumFlux = null;
 
         /**
-         * 截图高度。默认：0（原始高）。
-         * @type {number || null}
+         * 明细数据信息。
+         * @type {Array.<BillDataInfo> || null}
          */
-        this.Height = null;
+        this.DataInfoList = null;
 
         /**
-         * 是否开启鉴黄，0：不开启，1：开启。默认：0。
-         * @type {number || null}
-         */
-        this.PornFlag = null;
-
-        /**
-         * Cos Bucket文件夹前缀。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.CosPrefix = null;
-
-        /**
-         * Cos 文件名称。
-         * @type {string || null}
-         */
-        this.CosFileName = null;
+        this.RequestId = null;
 
     }
 
@@ -460,17 +453,21 @@ class CreateLiveSnapshotTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
-        this.CosAppId = 'CosAppId' in params ? params.CosAppId : null;
-        this.CosBucket = 'CosBucket' in params ? params.CosBucket : null;
-        this.CosRegion = 'CosRegion' in params ? params.CosRegion : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.SnapshotInterval = 'SnapshotInterval' in params ? params.SnapshotInterval : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
-        this.PornFlag = 'PornFlag' in params ? params.PornFlag : null;
-        this.CosPrefix = 'CosPrefix' in params ? params.CosPrefix : null;
-        this.CosFileName = 'CosFileName' in params ? params.CosFileName : null;
+        this.PeakBandwidthTime = 'PeakBandwidthTime' in params ? params.PeakBandwidthTime : null;
+        this.PeakBandwidth = 'PeakBandwidth' in params ? params.PeakBandwidth : null;
+        this.P95PeakBandwidthTime = 'P95PeakBandwidthTime' in params ? params.P95PeakBandwidthTime : null;
+        this.P95PeakBandwidth = 'P95PeakBandwidth' in params ? params.P95PeakBandwidth : null;
+        this.SumFlux = 'SumFlux' in params ? params.SumFlux : null;
+
+        if (params.DataInfoList) {
+            this.DataInfoList = new Array();
+            for (let z in params.DataInfoList) {
+                let obj = new BillDataInfo();
+                obj.deserialize(params.DataInfoList[z]);
+                this.DataInfoList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1882,19 +1879,12 @@ class DescribeLivePlayAuthKeyResponse extends  AbstractModel {
 }
 
 /**
- * DescribeLiveSnapshotTemplate请求参数结构体
+ * DescribeLiveCallbackTemplates请求参数结构体
  * @class
  */
-class DescribeLiveSnapshotTemplateRequest extends  AbstractModel {
+class DescribeLiveCallbackTemplatesRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 模板 ID。
-调用 [CreateLiveSnapshotTemplate](/document/product/267/32624) 时返回的模板 ID。
-         * @type {number || null}
-         */
-        this.TemplateId = null;
 
     }
 
@@ -1905,7 +1895,6 @@ class DescribeLiveSnapshotTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
 
     }
 }
@@ -2700,6 +2689,77 @@ class AddLiveWatermarkResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeLiveStreamPushInfoList返回参数结构体
+ * @class
+ */
+class DescribeLiveStreamPushInfoListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 直播流的统计信息列表。
+         * @type {Array.<PushDataInfo> || null}
+         */
+        this.DataInfoList = null;
+
+        /**
+         * 所有在线流的总数量。
+         * @type {number || null}
+         */
+        this.TotalNum = null;
+
+        /**
+         * 总页数。
+         * @type {number || null}
+         */
+        this.TotalPage = null;
+
+        /**
+         * 当前数据所在页码。
+         * @type {number || null}
+         */
+        this.PageNum = null;
+
+        /**
+         * 每页的在线流的个数。
+         * @type {number || null}
+         */
+        this.PageSize = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DataInfoList) {
+            this.DataInfoList = new Array();
+            for (let z in params.DataInfoList) {
+                let obj = new PushDataInfo();
+                obj.deserialize(params.DataInfoList[z]);
+                this.DataInfoList.push(obj);
+            }
+        }
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+        this.TotalPage = 'TotalPage' in params ? params.TotalPage : null;
+        this.PageNum = 'PageNum' in params ? params.PageNum : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeLiveDomainCert返回参数结构体
  * @class
  */
@@ -2970,6 +3030,41 @@ class DescribeProIspPlaySumInfoListRequest extends  AbstractModel {
         this.PageSize = 'PageSize' in params ? params.PageSize : null;
         this.MainlandOrOversea = 'MainlandOrOversea' in params ? params.MainlandOrOversea : null;
         this.OutLanguage = 'OutLanguage' in params ? params.OutLanguage : null;
+
+    }
+}
+
+/**
+ * DescribeDeliverBandwidthList请求参数结构体
+ * @class
+ */
+class DescribeDeliverBandwidthListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 起始时间，格式为%Y-%m-%d %H:%M:%S。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间，格式为%Y-%m-%d %H:%M:%S，支持最近三个月的数据查询，时间跨度最大是1个月。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -6647,6 +6742,91 @@ class ModifyPullStreamConfigResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyLiveCallbackTemplate请求参数结构体
+ * @class
+ */
+class ModifyLiveCallbackTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * DescribeLiveCallbackTemplates接口返回的模板 ID。
+         * @type {number || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * 模板名称。
+         * @type {string || null}
+         */
+        this.TemplateName = null;
+
+        /**
+         * 描述信息。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 开播回调 URL。
+         * @type {string || null}
+         */
+        this.StreamBeginNotifyUrl = null;
+
+        /**
+         * 断流回调 URL。
+         * @type {string || null}
+         */
+        this.StreamEndNotifyUrl = null;
+
+        /**
+         * 录制回调 URL。
+         * @type {string || null}
+         */
+        this.RecordNotifyUrl = null;
+
+        /**
+         * 截图回调 URL。
+         * @type {string || null}
+         */
+        this.SnapshotNotifyUrl = null;
+
+        /**
+         * 鉴黄回调 URL。
+         * @type {string || null}
+         */
+        this.PornCensorshipNotifyUrl = null;
+
+        /**
+         * 回调 Key，回调 URL 公用，回调签名详见事件消息通知文档。
+[事件消息通知](/document/product/267/32744)。
+         * @type {string || null}
+         */
+        this.CallbackKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.StreamBeginNotifyUrl = 'StreamBeginNotifyUrl' in params ? params.StreamBeginNotifyUrl : null;
+        this.StreamEndNotifyUrl = 'StreamEndNotifyUrl' in params ? params.StreamEndNotifyUrl : null;
+        this.RecordNotifyUrl = 'RecordNotifyUrl' in params ? params.RecordNotifyUrl : null;
+        this.SnapshotNotifyUrl = 'SnapshotNotifyUrl' in params ? params.SnapshotNotifyUrl : null;
+        this.PornCensorshipNotifyUrl = 'PornCensorshipNotifyUrl' in params ? params.PornCensorshipNotifyUrl : null;
+        this.CallbackKey = 'CallbackKey' in params ? params.CallbackKey : null;
+
+    }
+}
+
+/**
  * DescribeProvinceIspPlayInfoList请求参数结构体
  * @class
  */
@@ -8395,24 +8575,26 @@ class ForbidLiveStreamResponse extends  AbstractModel {
 }
 
 /**
- * DescribeLiveSnapshotTemplates返回参数结构体
+ * 带宽信息
  * @class
  */
-class DescribeLiveSnapshotTemplatesResponse extends  AbstractModel {
+class BandwidthInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 截图模板列表。
-         * @type {Array.<SnapshotTemplateInfo> || null}
-         */
-        this.Templates = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 返回格式：
+yyyy-mm-dd HH:MM:SS
+根据粒度会有不同程度的缩减。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Time = null;
+
+        /**
+         * 带宽。
+         * @type {number || null}
+         */
+        this.Bandwidth = null;
 
     }
 
@@ -8423,16 +8605,8 @@ class DescribeLiveSnapshotTemplatesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Templates) {
-            this.Templates = new Array();
-            for (let z in params.Templates) {
-                let obj = new SnapshotTemplateInfo();
-                obj.deserialize(params.Templates[z]);
-                this.Templates.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Time = 'Time' in params ? params.Time : null;
+        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
 
     }
 }
@@ -9528,42 +9702,18 @@ class DeleteLiveRecordRequest extends  AbstractModel {
 }
 
 /**
- * DescribeLiveStreamPushInfoList返回参数结构体
+ * DescribeLiveSnapshotTemplates返回参数结构体
  * @class
  */
-class DescribeLiveStreamPushInfoListResponse extends  AbstractModel {
+class DescribeLiveSnapshotTemplatesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 直播流的统计信息列表。
-         * @type {Array.<PushDataInfo> || null}
+         * 截图模板列表。
+         * @type {Array.<SnapshotTemplateInfo> || null}
          */
-        this.DataInfoList = null;
-
-        /**
-         * 所有在线流的总数量。
-         * @type {number || null}
-         */
-        this.TotalNum = null;
-
-        /**
-         * 总页数。
-         * @type {number || null}
-         */
-        this.TotalPage = null;
-
-        /**
-         * 当前数据所在页码。
-         * @type {number || null}
-         */
-        this.PageNum = null;
-
-        /**
-         * 每页的在线流的个数。
-         * @type {number || null}
-         */
-        this.PageSize = null;
+        this.Templates = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -9581,18 +9731,14 @@ class DescribeLiveStreamPushInfoListResponse extends  AbstractModel {
             return;
         }
 
-        if (params.DataInfoList) {
-            this.DataInfoList = new Array();
-            for (let z in params.DataInfoList) {
-                let obj = new PushDataInfo();
-                obj.deserialize(params.DataInfoList[z]);
-                this.DataInfoList.push(obj);
+        if (params.Templates) {
+            this.Templates = new Array();
+            for (let z in params.Templates) {
+                let obj = new SnapshotTemplateInfo();
+                obj.deserialize(params.Templates[z]);
+                this.Templates.push(obj);
             }
         }
-        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
-        this.TotalPage = 'TotalPage' in params ? params.TotalPage : null;
-        this.PageNum = 'PageNum' in params ? params.PageNum : null;
-        this.PageSize = 'PageSize' in params ? params.PageSize : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -11032,54 +11178,83 @@ class DescribeLiveRecordRulesResponse extends  AbstractModel {
 }
 
 /**
- * DescribeBillBandwidthAndFluxList返回参数结构体
+ * CreateLiveSnapshotTemplate请求参数结构体
  * @class
  */
-class DescribeBillBandwidthAndFluxListResponse extends  AbstractModel {
+class CreateLiveSnapshotTemplateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 峰值带宽所在时间点，格式为yyyy-mm-dd HH:MM:SS。
+         * 模板名称。
+长度上限：255字节。
+仅支持中文、英文、数字、_、-。
          * @type {string || null}
          */
-        this.PeakBandwidthTime = null;
+        this.TemplateName = null;
 
         /**
-         * 峰值带宽，单位是Mbps。
+         * Cos 应用 ID。
          * @type {number || null}
          */
-        this.PeakBandwidth = null;
+        this.CosAppId = null;
 
         /**
-         * 95峰值带宽所在时间点，格式为yyyy-mm-dd HH:MM:SS。
+         * Cos Bucket名称。
          * @type {string || null}
          */
-        this.P95PeakBandwidthTime = null;
+        this.CosBucket = null;
 
         /**
-         * 95峰值带宽，单位是Mbps。
-         * @type {number || null}
-         */
-        this.P95PeakBandwidth = null;
-
-        /**
-         * 总流量，单位是MB。
-         * @type {number || null}
-         */
-        this.SumFlux = null;
-
-        /**
-         * 明细数据信息。
-         * @type {Array.<BillDataInfo> || null}
-         */
-        this.DataInfoList = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * Cos地区。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.CosRegion = null;
+
+        /**
+         * 描述信息。
+长度上限：1024字节。
+仅支持中文、英文、数字、_、-。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 截图间隔，单位s，默认10s。
+范围： 5s ~ 600s。
+         * @type {number || null}
+         */
+        this.SnapshotInterval = null;
+
+        /**
+         * 截图宽度。默认：0（原始宽）。
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 截图高度。默认：0（原始高）。
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * 是否开启鉴黄，0：不开启，1：开启。默认：0。
+         * @type {number || null}
+         */
+        this.PornFlag = null;
+
+        /**
+         * Cos Bucket文件夹前缀。
+         * @type {string || null}
+         */
+        this.CosPrefix = null;
+
+        /**
+         * Cos 文件名称。
+         * @type {string || null}
+         */
+        this.CosFileName = null;
 
     }
 
@@ -11090,21 +11265,17 @@ class DescribeBillBandwidthAndFluxListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PeakBandwidthTime = 'PeakBandwidthTime' in params ? params.PeakBandwidthTime : null;
-        this.PeakBandwidth = 'PeakBandwidth' in params ? params.PeakBandwidth : null;
-        this.P95PeakBandwidthTime = 'P95PeakBandwidthTime' in params ? params.P95PeakBandwidthTime : null;
-        this.P95PeakBandwidth = 'P95PeakBandwidth' in params ? params.P95PeakBandwidth : null;
-        this.SumFlux = 'SumFlux' in params ? params.SumFlux : null;
-
-        if (params.DataInfoList) {
-            this.DataInfoList = new Array();
-            for (let z in params.DataInfoList) {
-                let obj = new BillDataInfo();
-                obj.deserialize(params.DataInfoList[z]);
-                this.DataInfoList.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
+        this.CosAppId = 'CosAppId' in params ? params.CosAppId : null;
+        this.CosBucket = 'CosBucket' in params ? params.CosBucket : null;
+        this.CosRegion = 'CosRegion' in params ? params.CosRegion : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.SnapshotInterval = 'SnapshotInterval' in params ? params.SnapshotInterval : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.PornFlag = 'PornFlag' in params ? params.PornFlag : null;
+        this.CosPrefix = 'CosPrefix' in params ? params.CosPrefix : null;
+        this.CosFileName = 'CosFileName' in params ? params.CosFileName : null;
 
     }
 }
@@ -11316,67 +11487,19 @@ class DeleteLiveSnapshotTemplateResponse extends  AbstractModel {
 }
 
 /**
- * ModifyLiveCallbackTemplate请求参数结构体
+ * DescribeLiveSnapshotTemplate请求参数结构体
  * @class
  */
-class ModifyLiveCallbackTemplateRequest extends  AbstractModel {
+class DescribeLiveSnapshotTemplateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * DescribeLiveCallbackTemplates接口返回的模板 ID。
+         * 模板 ID。
+调用 [CreateLiveSnapshotTemplate](/document/product/267/32624) 时返回的模板 ID。
          * @type {number || null}
          */
         this.TemplateId = null;
-
-        /**
-         * 模板名称。
-         * @type {string || null}
-         */
-        this.TemplateName = null;
-
-        /**
-         * 描述信息。
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * 开播回调 URL。
-         * @type {string || null}
-         */
-        this.StreamBeginNotifyUrl = null;
-
-        /**
-         * 断流回调 URL。
-         * @type {string || null}
-         */
-        this.StreamEndNotifyUrl = null;
-
-        /**
-         * 录制回调 URL。
-         * @type {string || null}
-         */
-        this.RecordNotifyUrl = null;
-
-        /**
-         * 截图回调 URL。
-         * @type {string || null}
-         */
-        this.SnapshotNotifyUrl = null;
-
-        /**
-         * 鉴黄回调 URL。
-         * @type {string || null}
-         */
-        this.PornCensorshipNotifyUrl = null;
-
-        /**
-         * 回调 Key，回调 URL 公用，回调签名详见事件消息通知文档。
-[事件消息通知](/document/product/267/32744)。
-         * @type {string || null}
-         */
-        this.CallbackKey = null;
 
     }
 
@@ -11388,14 +11511,6 @@ class ModifyLiveCallbackTemplateRequest extends  AbstractModel {
             return;
         }
         this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
-        this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.StreamBeginNotifyUrl = 'StreamBeginNotifyUrl' in params ? params.StreamBeginNotifyUrl : null;
-        this.StreamEndNotifyUrl = 'StreamEndNotifyUrl' in params ? params.StreamEndNotifyUrl : null;
-        this.RecordNotifyUrl = 'RecordNotifyUrl' in params ? params.RecordNotifyUrl : null;
-        this.SnapshotNotifyUrl = 'SnapshotNotifyUrl' in params ? params.SnapshotNotifyUrl : null;
-        this.PornCensorshipNotifyUrl = 'PornCensorshipNotifyUrl' in params ? params.PornCensorshipNotifyUrl : null;
-        this.CallbackKey = 'CallbackKey' in params ? params.CallbackKey : null;
 
     }
 }
@@ -12993,11 +13108,11 @@ module.exports = {
     EnableLiveDomainResponse: EnableLiveDomainResponse,
     CreateLiveCertRequest: CreateLiveCertRequest,
     StopRecordTaskResponse: StopRecordTaskResponse,
-    DescribeLiveCallbackTemplatesRequest: DescribeLiveCallbackTemplatesRequest,
+    DescribeDeliverBandwidthListResponse: DescribeDeliverBandwidthListResponse,
     DeleteLiveRecordRuleRequest: DeleteLiveRecordRuleRequest,
     ResumeLiveStreamRequest: ResumeLiveStreamRequest,
     DeleteLiveTranscodeTemplateResponse: DeleteLiveTranscodeTemplateResponse,
-    CreateLiveSnapshotTemplateRequest: CreateLiveSnapshotTemplateRequest,
+    DescribeBillBandwidthAndFluxListResponse: DescribeBillBandwidthAndFluxListResponse,
     TemplateInfo: TemplateInfo,
     DeleteLiveCallbackRuleResponse: DeleteLiveCallbackRuleResponse,
     ResumeDelayLiveStreamRequest: ResumeDelayLiveStreamRequest,
@@ -13024,7 +13139,7 @@ module.exports = {
     DeleteLiveCallbackTemplateRequest: DeleteLiveCallbackTemplateRequest,
     DescribeLiveStreamStateRequest: DescribeLiveStreamStateRequest,
     DescribeLivePlayAuthKeyResponse: DescribeLivePlayAuthKeyResponse,
-    DescribeLiveSnapshotTemplateRequest: DescribeLiveSnapshotTemplateRequest,
+    DescribeLiveCallbackTemplatesRequest: DescribeLiveCallbackTemplatesRequest,
     DomainInfo: DomainInfo,
     DescribeLiveTranscodeRulesRequest: DescribeLiveTranscodeRulesRequest,
     DeleteLiveSnapshotRuleRequest: DeleteLiveSnapshotRuleRequest,
@@ -13039,12 +13154,14 @@ module.exports = {
     CreateLiveRecordRuleRequest: CreateLiveRecordRuleRequest,
     DescribeLiveSnapshotTemplatesRequest: DescribeLiveSnapshotTemplatesRequest,
     AddLiveWatermarkResponse: AddLiveWatermarkResponse,
+    DescribeLiveStreamPushInfoListResponse: DescribeLiveStreamPushInfoListResponse,
     DescribeLiveDomainCertResponse: DescribeLiveDomainCertResponse,
     DescribeLiveRecordTemplateRequest: DescribeLiveRecordTemplateRequest,
     ModifyLiveDomainCertRequest: ModifyLiveDomainCertRequest,
     StreamOnlineInfo: StreamOnlineInfo,
     CreateLiveWatermarkRuleResponse: CreateLiveWatermarkRuleResponse,
     DescribeProIspPlaySumInfoListRequest: DescribeProIspPlaySumInfoListRequest,
+    DescribeDeliverBandwidthListRequest: DescribeDeliverBandwidthListRequest,
     PlayCodeTotalInfo: PlayCodeTotalInfo,
     AddLiveWatermarkRequest: AddLiveWatermarkRequest,
     ModifyLiveTranscodeTemplateResponse: ModifyLiveTranscodeTemplateResponse,
@@ -13118,6 +13235,7 @@ module.exports = {
     AddLiveDomainResponse: AddLiveDomainResponse,
     DescribeHttpStatusInfoListRequest: DescribeHttpStatusInfoListRequest,
     ModifyPullStreamConfigResponse: ModifyPullStreamConfigResponse,
+    ModifyLiveCallbackTemplateRequest: ModifyLiveCallbackTemplateRequest,
     DescribeProvinceIspPlayInfoListRequest: DescribeProvinceIspPlayInfoListRequest,
     DescribeLivePlayAuthKeyRequest: DescribeLivePlayAuthKeyRequest,
     DescribeLiveForbidStreamListResponse: DescribeLiveForbidStreamListResponse,
@@ -13150,7 +13268,7 @@ module.exports = {
     DeleteLiveSnapshotRuleResponse: DeleteLiveSnapshotRuleResponse,
     CreateLiveRecordRequest: CreateLiveRecordRequest,
     ForbidLiveStreamResponse: ForbidLiveStreamResponse,
-    DescribeLiveSnapshotTemplatesResponse: DescribeLiveSnapshotTemplatesResponse,
+    BandwidthInfo: BandwidthInfo,
     DescribeLogDownloadListResponse: DescribeLogDownloadListResponse,
     CancelCommonMixStreamRequest: CancelCommonMixStreamRequest,
     UpdateLiveWatermarkRequest: UpdateLiveWatermarkRequest,
@@ -13175,7 +13293,7 @@ module.exports = {
     DomainDetailInfo: DomainDetailInfo,
     HttpStatusInfo: HttpStatusInfo,
     DeleteLiveRecordRequest: DeleteLiveRecordRequest,
-    DescribeLiveStreamPushInfoListResponse: DescribeLiveStreamPushInfoListResponse,
+    DescribeLiveSnapshotTemplatesResponse: DescribeLiveSnapshotTemplatesResponse,
     StopRecordTaskRequest: StopRecordTaskRequest,
     HttpStatusData: HttpStatusData,
     HttpCodeInfo: HttpCodeInfo,
@@ -13205,12 +13323,12 @@ module.exports = {
     DescribeLiveTranscodeTemplatesRequest: DescribeLiveTranscodeTemplatesRequest,
     HlsSpecialParam: HlsSpecialParam,
     DescribeLiveRecordRulesResponse: DescribeLiveRecordRulesResponse,
-    DescribeBillBandwidthAndFluxListResponse: DescribeBillBandwidthAndFluxListResponse,
+    CreateLiveSnapshotTemplateRequest: CreateLiveSnapshotTemplateRequest,
     DescribeLiveDomainPlayInfoListResponse: DescribeLiveDomainPlayInfoListResponse,
     HttpCodeValue: HttpCodeValue,
     DescribeLiveStreamOnlineListRequest: DescribeLiveStreamOnlineListRequest,
     DeleteLiveSnapshotTemplateResponse: DeleteLiveSnapshotTemplateResponse,
-    ModifyLiveCallbackTemplateRequest: ModifyLiveCallbackTemplateRequest,
+    DescribeLiveSnapshotTemplateRequest: DescribeLiveSnapshotTemplateRequest,
     DeleteLiveCertResponse: DeleteLiveCertResponse,
     CreateCommonMixStreamResponse: CreateCommonMixStreamResponse,
     CreateLiveCallbackTemplateResponse: CreateLiveCallbackTemplateResponse,

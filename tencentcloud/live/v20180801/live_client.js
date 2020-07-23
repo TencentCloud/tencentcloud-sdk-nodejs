@@ -21,11 +21,11 @@ const BillDataInfo = models.BillDataInfo;
 const EnableLiveDomainResponse = models.EnableLiveDomainResponse;
 const CreateLiveCertRequest = models.CreateLiveCertRequest;
 const StopRecordTaskResponse = models.StopRecordTaskResponse;
-const DescribeLiveCallbackTemplatesRequest = models.DescribeLiveCallbackTemplatesRequest;
+const DescribeDeliverBandwidthListResponse = models.DescribeDeliverBandwidthListResponse;
 const DeleteLiveRecordRuleRequest = models.DeleteLiveRecordRuleRequest;
 const ResumeLiveStreamRequest = models.ResumeLiveStreamRequest;
 const DeleteLiveTranscodeTemplateResponse = models.DeleteLiveTranscodeTemplateResponse;
-const CreateLiveSnapshotTemplateRequest = models.CreateLiveSnapshotTemplateRequest;
+const DescribeBillBandwidthAndFluxListResponse = models.DescribeBillBandwidthAndFluxListResponse;
 const TemplateInfo = models.TemplateInfo;
 const DeleteLiveCallbackRuleResponse = models.DeleteLiveCallbackRuleResponse;
 const ResumeDelayLiveStreamRequest = models.ResumeDelayLiveStreamRequest;
@@ -52,7 +52,7 @@ const ModifyLivePushAuthKeyRequest = models.ModifyLivePushAuthKeyRequest;
 const DeleteLiveCallbackTemplateRequest = models.DeleteLiveCallbackTemplateRequest;
 const DescribeLiveStreamStateRequest = models.DescribeLiveStreamStateRequest;
 const DescribeLivePlayAuthKeyResponse = models.DescribeLivePlayAuthKeyResponse;
-const DescribeLiveSnapshotTemplateRequest = models.DescribeLiveSnapshotTemplateRequest;
+const DescribeLiveCallbackTemplatesRequest = models.DescribeLiveCallbackTemplatesRequest;
 const DomainInfo = models.DomainInfo;
 const DescribeLiveTranscodeRulesRequest = models.DescribeLiveTranscodeRulesRequest;
 const DeleteLiveSnapshotRuleRequest = models.DeleteLiveSnapshotRuleRequest;
@@ -67,12 +67,14 @@ const DeleteLiveTranscodeRuleRequest = models.DeleteLiveTranscodeRuleRequest;
 const CreateLiveRecordRuleRequest = models.CreateLiveRecordRuleRequest;
 const DescribeLiveSnapshotTemplatesRequest = models.DescribeLiveSnapshotTemplatesRequest;
 const AddLiveWatermarkResponse = models.AddLiveWatermarkResponse;
+const DescribeLiveStreamPushInfoListResponse = models.DescribeLiveStreamPushInfoListResponse;
 const DescribeLiveDomainCertResponse = models.DescribeLiveDomainCertResponse;
 const DescribeLiveRecordTemplateRequest = models.DescribeLiveRecordTemplateRequest;
 const ModifyLiveDomainCertRequest = models.ModifyLiveDomainCertRequest;
 const StreamOnlineInfo = models.StreamOnlineInfo;
 const CreateLiveWatermarkRuleResponse = models.CreateLiveWatermarkRuleResponse;
 const DescribeProIspPlaySumInfoListRequest = models.DescribeProIspPlaySumInfoListRequest;
+const DescribeDeliverBandwidthListRequest = models.DescribeDeliverBandwidthListRequest;
 const PlayCodeTotalInfo = models.PlayCodeTotalInfo;
 const AddLiveWatermarkRequest = models.AddLiveWatermarkRequest;
 const ModifyLiveTranscodeTemplateResponse = models.ModifyLiveTranscodeTemplateResponse;
@@ -146,6 +148,7 @@ const CdnPlayStatData = models.CdnPlayStatData;
 const AddLiveDomainResponse = models.AddLiveDomainResponse;
 const DescribeHttpStatusInfoListRequest = models.DescribeHttpStatusInfoListRequest;
 const ModifyPullStreamConfigResponse = models.ModifyPullStreamConfigResponse;
+const ModifyLiveCallbackTemplateRequest = models.ModifyLiveCallbackTemplateRequest;
 const DescribeProvinceIspPlayInfoListRequest = models.DescribeProvinceIspPlayInfoListRequest;
 const DescribeLivePlayAuthKeyRequest = models.DescribeLivePlayAuthKeyRequest;
 const DescribeLiveForbidStreamListResponse = models.DescribeLiveForbidStreamListResponse;
@@ -178,7 +181,7 @@ const SnapshotTemplateInfo = models.SnapshotTemplateInfo;
 const DeleteLiveSnapshotRuleResponse = models.DeleteLiveSnapshotRuleResponse;
 const CreateLiveRecordRequest = models.CreateLiveRecordRequest;
 const ForbidLiveStreamResponse = models.ForbidLiveStreamResponse;
-const DescribeLiveSnapshotTemplatesResponse = models.DescribeLiveSnapshotTemplatesResponse;
+const BandwidthInfo = models.BandwidthInfo;
 const DescribeLogDownloadListResponse = models.DescribeLogDownloadListResponse;
 const CancelCommonMixStreamRequest = models.CancelCommonMixStreamRequest;
 const UpdateLiveWatermarkRequest = models.UpdateLiveWatermarkRequest;
@@ -203,7 +206,7 @@ const RecordParam = models.RecordParam;
 const DomainDetailInfo = models.DomainDetailInfo;
 const HttpStatusInfo = models.HttpStatusInfo;
 const DeleteLiveRecordRequest = models.DeleteLiveRecordRequest;
-const DescribeLiveStreamPushInfoListResponse = models.DescribeLiveStreamPushInfoListResponse;
+const DescribeLiveSnapshotTemplatesResponse = models.DescribeLiveSnapshotTemplatesResponse;
 const StopRecordTaskRequest = models.StopRecordTaskRequest;
 const HttpStatusData = models.HttpStatusData;
 const HttpCodeInfo = models.HttpCodeInfo;
@@ -233,12 +236,12 @@ const PlaySumStatInfo = models.PlaySumStatInfo;
 const DescribeLiveTranscodeTemplatesRequest = models.DescribeLiveTranscodeTemplatesRequest;
 const HlsSpecialParam = models.HlsSpecialParam;
 const DescribeLiveRecordRulesResponse = models.DescribeLiveRecordRulesResponse;
-const DescribeBillBandwidthAndFluxListResponse = models.DescribeBillBandwidthAndFluxListResponse;
+const CreateLiveSnapshotTemplateRequest = models.CreateLiveSnapshotTemplateRequest;
 const DescribeLiveDomainPlayInfoListResponse = models.DescribeLiveDomainPlayInfoListResponse;
 const HttpCodeValue = models.HttpCodeValue;
 const DescribeLiveStreamOnlineListRequest = models.DescribeLiveStreamOnlineListRequest;
 const DeleteLiveSnapshotTemplateResponse = models.DeleteLiveSnapshotTemplateResponse;
-const ModifyLiveCallbackTemplateRequest = models.ModifyLiveCallbackTemplateRequest;
+const DescribeLiveSnapshotTemplateRequest = models.DescribeLiveSnapshotTemplateRequest;
 const DeleteLiveCertResponse = models.DeleteLiveCertResponse;
 const CreateCommonMixStreamResponse = models.CreateCommonMixStreamResponse;
 const CreateLiveCallbackTemplateResponse = models.CreateLiveCallbackTemplateResponse;
@@ -1176,6 +1179,17 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     AddLiveDomain(req, cb) {
         let resp = new AddLiveDomainResponse();
         this.request("AddLiveDomain", req, resp, cb);
+    }
+
+    /**
+     * 查询直播转推计费带宽，查询时间范围最大支持3个月内的数据，时间跨度最长31天。
+     * @param {DescribeDeliverBandwidthListRequest} req
+     * @param {function(string, DescribeDeliverBandwidthListResponse):void} cb
+     * @public
+     */
+    DescribeDeliverBandwidthList(req, cb) {
+        let resp = new DescribeDeliverBandwidthListResponse();
+        this.request("DescribeDeliverBandwidthList", req, resp, cb);
     }
 
     /**
