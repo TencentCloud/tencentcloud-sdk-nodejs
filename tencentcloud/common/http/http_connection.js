@@ -90,10 +90,7 @@ class HttpConnection {
                 form.append(key, data[key])
             }
             config.body = form
-            config.headers = {
-                ...config.headers,
-                ...form.getHeaders()
-            }
+            config.headers = Object.assign({}, config.headers, form.getHeaders())
         }
 
         const signature = Sign.sign3({
