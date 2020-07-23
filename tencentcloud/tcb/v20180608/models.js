@@ -1455,6 +1455,12 @@ class CreatePostpayPackageRequest extends  AbstractModel {
          */
         this.Channel = null;
 
+        /**
+         * 扩展ID
+         * @type {string || null}
+         */
+        this.ExtensionId = null;
+
     }
 
     /**
@@ -1471,6 +1477,7 @@ class CreatePostpayPackageRequest extends  AbstractModel {
         this.Alias = 'Alias' in params ? params.Alias : null;
         this.EnvSource = 'EnvSource' in params ? params.EnvSource : null;
         this.Channel = 'Channel' in params ? params.Channel : null;
+        this.ExtensionId = 'ExtensionId' in params ? params.ExtensionId : null;
 
     }
 }

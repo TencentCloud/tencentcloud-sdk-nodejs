@@ -17,6 +17,41 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * DescribeReadOnlyGroupDetails请求参数结构体
+ * @class
+ */
+class DescribeReadOnlyGroupDetailsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 主实例ID，格式如：mssql-3l3fgqn7
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 只读组ID，格式如：mssqlrg-3l3fgqn7
+         * @type {string || null}
+         */
+        this.ReadOnlyGroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ReadOnlyGroupId = 'ReadOnlyGroupId' in params ? params.ReadOnlyGroupId : null;
+
+    }
+}
+
+/**
  * CreateDBInstances请求参数结构体
  * @class
  */
@@ -487,18 +522,36 @@ class DatabaseTuple extends  AbstractModel {
 }
 
 /**
- * RestartDBInstance请求参数结构体
+ * 地域信息
  * @class
  */
-class RestartDBInstanceRequest extends  AbstractModel {
+class RegionInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 数据库实例ID，形如mssql-njj2mtpl
+         * 地域英文ID，类似ap-guanghou
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.Region = null;
+
+        /**
+         * 地域中文名称
+         * @type {string || null}
+         */
+        this.RegionName = null;
+
+        /**
+         * 地域数字ID
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * 该地域目前是否可以售卖，UNAVAILABLE-不可售卖；AVAILABLE-可售卖
+         * @type {string || null}
+         */
+        this.RegionState = null;
 
     }
 
@@ -509,7 +562,10 @@ class RestartDBInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.RegionState = 'RegionState' in params ? params.RegionState : null;
 
     }
 }
@@ -607,36 +663,18 @@ class DatabaseTupleStatus extends  AbstractModel {
 }
 
 /**
- * 地域信息
+ * ModifyReadOnlyGroupDetails返回参数结构体
  * @class
  */
-class RegionInfo extends  AbstractModel {
+class ModifyReadOnlyGroupDetailsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 地域英文ID，类似ap-guanghou
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Region = null;
-
-        /**
-         * 地域中文名称
-         * @type {string || null}
-         */
-        this.RegionName = null;
-
-        /**
-         * 地域数字ID
-         * @type {number || null}
-         */
-        this.RegionId = null;
-
-        /**
-         * 该地域目前是否可以售卖，UNAVAILABLE-不可售卖；AVAILABLE-可售卖
-         * @type {string || null}
-         */
-        this.RegionState = null;
+        this.RequestId = null;
 
     }
 
@@ -647,10 +685,7 @@ class RegionInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Region = 'Region' in params ? params.Region : null;
-        this.RegionName = 'RegionName' in params ? params.RegionName : null;
-        this.RegionId = 'RegionId' in params ? params.RegionId : null;
-        this.RegionState = 'RegionState' in params ? params.RegionState : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -965,6 +1000,77 @@ class MigrateDB extends  AbstractModel {
 }
 
 /**
+ * RestartDBInstance请求参数结构体
+ * @class
+ */
+class RestartDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据库实例ID，形如mssql-njj2mtpl
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * DescribeReadOnlyGroupList返回参数结构体
+ * @class
+ */
+class DescribeReadOnlyGroupListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 只读组列表
+         * @type {Array.<ReadOnlyGroup> || null}
+         */
+        this.ReadOnlyGroupSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ReadOnlyGroupSet) {
+            this.ReadOnlyGroupSet = new Array();
+            for (let z in params.ReadOnlyGroupSet) {
+                let obj = new ReadOnlyGroup();
+                obj.deserialize(params.ReadOnlyGroupSet[z]);
+                this.ReadOnlyGroupSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeRegions返回参数结构体
  * @class
  */
@@ -1179,6 +1285,118 @@ class RestoreInstanceRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.BackupId = 'BackupId' in params ? params.BackupId : null;
+
+    }
+}
+
+/**
+ * DescribeReadOnlyGroupByReadOnlyInstance返回参数结构体
+ * @class
+ */
+class DescribeReadOnlyGroupByReadOnlyInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 只读组ID
+         * @type {string || null}
+         */
+        this.ReadOnlyGroupId = null;
+
+        /**
+         * 只读组名称
+         * @type {string || null}
+         */
+        this.ReadOnlyGroupName = null;
+
+        /**
+         * 只读组的地域ID
+         * @type {string || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * 只读组的可用区ID
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * 是否启动超时剔除功能 ,0-不开启剔除功能，1-开启剔除功能
+         * @type {number || null}
+         */
+        this.IsOfflineDelay = null;
+
+        /**
+         * 启动超时剔除功能后，使用的超时阈值，单位是秒
+         * @type {number || null}
+         */
+        this.ReadOnlyMaxDelayTime = null;
+
+        /**
+         * 启动超时剔除功能后，只读组至少保留的只读副本数
+         * @type {number || null}
+         */
+        this.MinReadOnlyInGroup = null;
+
+        /**
+         * 只读组vip
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * 只读组vport
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+        /**
+         * 只读组在私有网络ID
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 只读组在私有网络子网ID
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 主实例ID，形如mssql-sgeshe3th
+         * @type {string || null}
+         */
+        this.MasterInstanceId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReadOnlyGroupId = 'ReadOnlyGroupId' in params ? params.ReadOnlyGroupId : null;
+        this.ReadOnlyGroupName = 'ReadOnlyGroupName' in params ? params.ReadOnlyGroupName : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.IsOfflineDelay = 'IsOfflineDelay' in params ? params.IsOfflineDelay : null;
+        this.ReadOnlyMaxDelayTime = 'ReadOnlyMaxDelayTime' in params ? params.ReadOnlyMaxDelayTime : null;
+        this.MinReadOnlyInGroup = 'MinReadOnlyInGroup' in params ? params.MinReadOnlyInGroup : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.MasterInstanceId = 'MasterInstanceId' in params ? params.MasterInstanceId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2734,6 +2952,133 @@ class ResetAccountPasswordResponse extends  AbstractModel {
 }
 
 /**
+ * 只读组对象
+ * @class
+ */
+class ReadOnlyGroup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 只读组ID
+         * @type {string || null}
+         */
+        this.ReadOnlyGroupId = null;
+
+        /**
+         * 只读组名称
+         * @type {string || null}
+         */
+        this.ReadOnlyGroupName = null;
+
+        /**
+         * 只读组的地域ID，与主实例相同
+         * @type {string || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * 只读组的可用区ID，与主实例相同
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * 是否启动超时剔除功能，0-不开启剔除功能，1-开启剔除功能
+         * @type {number || null}
+         */
+        this.IsOfflineDelay = null;
+
+        /**
+         * 启动超时剔除功能后，使用的超时阈值
+         * @type {number || null}
+         */
+        this.ReadOnlyMaxDelayTime = null;
+
+        /**
+         * 启动超时剔除功能后，只读组至少保留的只读副本数
+         * @type {number || null}
+         */
+        this.MinReadOnlyInGroup = null;
+
+        /**
+         * 只读组vip
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * 只读组vport
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+        /**
+         * 只读组私有网络ID
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 只读组私有网络子网ID
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 只读组状态: 1-申请成功运行中，5-申请中
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 主实例ID，形如mssql-sgeshe3th
+         * @type {string || null}
+         */
+        this.MasterInstanceId = null;
+
+        /**
+         * 只读实例副本集合
+         * @type {Array.<ReadOnlyInstance> || null}
+         */
+        this.ReadOnlyInstanceSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReadOnlyGroupId = 'ReadOnlyGroupId' in params ? params.ReadOnlyGroupId : null;
+        this.ReadOnlyGroupName = 'ReadOnlyGroupName' in params ? params.ReadOnlyGroupName : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.IsOfflineDelay = 'IsOfflineDelay' in params ? params.IsOfflineDelay : null;
+        this.ReadOnlyMaxDelayTime = 'ReadOnlyMaxDelayTime' in params ? params.ReadOnlyMaxDelayTime : null;
+        this.MinReadOnlyInGroup = 'MinReadOnlyInGroup' in params ? params.MinReadOnlyInGroup : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.MasterInstanceId = 'MasterInstanceId' in params ? params.MasterInstanceId : null;
+
+        if (params.ReadOnlyInstanceSet) {
+            this.ReadOnlyInstanceSet = new Array();
+            for (let z in params.ReadOnlyInstanceSet) {
+                let obj = new ReadOnlyInstance();
+                obj.deserialize(params.ReadOnlyInstanceSet[z]);
+                this.ReadOnlyInstanceSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ModifyAccountPrivilege请求参数结构体
  * @class
  */
@@ -3248,6 +3593,195 @@ class CreateDBRequest extends  AbstractModel {
 }
 
 /**
+ * 只读副本实例
+ * @class
+ */
+class ReadOnlyInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 只读副本ID，格式如：mssqlro-3l3fgqn7
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 只读副本名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 只读副本唯一UID
+         * @type {string || null}
+         */
+        this.Uid = null;
+
+        /**
+         * 只读副本所在项目ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 只读副本状态。1：申请中 2：运行中 3：被延迟剔除 4：已隔离 5：回收中 6：已回收 7：任务执行中 8：已下线 9：实例扩容中 10：实例迁移中  12：重启中
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 只读副本创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 只读副本更新时间
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 只读副本内存大小，单位G
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * 只读副本存储空间大小，单位G
+         * @type {number || null}
+         */
+        this.Storage = null;
+
+        /**
+         * 只读副本cpu核心数
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * 只读副本版本代号
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * 宿主机代号
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 只读副本模式，2-单机
+         * @type {number || null}
+         */
+        this.Model = null;
+
+        /**
+         * 只读副本计费模式，1-包年包月，0-按量计费
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * 只读副本权重
+         * @type {number || null}
+         */
+        this.Weight = null;
+
+        /**
+         * 只读副本延迟时间，单位秒
+         * @type {string || null}
+         */
+        this.DelayTime = null;
+
+        /**
+         * 只读副本与主实例的同步状态。
+Init:初始化
+DeployReadOnlyInPorgress:部署副本进行中
+DeployReadOnlySuccess:部署副本成功
+DeployReadOnlyFail:部署副本失败
+DeployMasterDBInPorgress:主节点上加入副本数据库进行中
+DeployMasterDBSuccess:主节点上加入副本数据库成功
+DeployMasterDBFail:主节点上加入副本数据库进失败
+DeployReadOnlyDBInPorgress:副本还原加入数据库开始
+DeployReadOnlyDBSuccess:副本还原加入数据库成功
+DeployReadOnlyDBFail:副本还原加入数据库失败
+SyncDelay:同步延迟
+SyncFail:同步故障
+SyncExcluded:已剔除只读组
+SyncNormal:正常
+         * @type {string || null}
+         */
+        this.SynStatus = null;
+
+        /**
+         * 只读副本与主实例没有同步的库
+         * @type {string || null}
+         */
+        this.DatabaseDifference = null;
+
+        /**
+         * 只读副本与主实例没有同步的账户
+         * @type {string || null}
+         */
+        this.AccountDifference = null;
+
+        /**
+         * 只读副本计费开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 只读副本计费结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 只读副本隔离时间
+         * @type {string || null}
+         */
+        this.IsolateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Uid = 'Uid' in params ? params.Uid : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Version = 'Version' in params ? params.Version : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Model = 'Model' in params ? params.Model : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.Weight = 'Weight' in params ? params.Weight : null;
+        this.DelayTime = 'DelayTime' in params ? params.DelayTime : null;
+        this.SynStatus = 'SynStatus' in params ? params.SynStatus : null;
+        this.DatabaseDifference = 'DatabaseDifference' in params ? params.DatabaseDifference : null;
+        this.AccountDifference = 'AccountDifference' in params ? params.AccountDifference : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.IsolateTime = 'IsolateTime' in params ? params.IsolateTime : null;
+
+    }
+}
+
+/**
  * InquiryPriceUpgradeDBInstance请求参数结构体
  * @class
  */
@@ -3335,6 +3869,41 @@ class ModifyDBRemarkRequest extends  AbstractModel {
                 this.DBRemarks.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * 只读实例与权重对应关系
+ * @class
+ */
+class ReadOnlyInstanceWeightPair extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 只读实例ID，格式如：mssqlro-3l3fgqn7
+         * @type {string || null}
+         */
+        this.ReadOnlyInstanceId = null;
+
+        /**
+         * 只读实例权重 ，范围是0-100
+         * @type {number || null}
+         */
+        this.ReadOnlyWeight = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReadOnlyInstanceId = 'ReadOnlyInstanceId' in params ? params.ReadOnlyInstanceId : null;
+        this.ReadOnlyWeight = 'ReadOnlyWeight' in params ? params.ReadOnlyWeight : null;
 
     }
 }
@@ -3481,66 +4050,30 @@ class InstanceDBDetail extends  AbstractModel {
 }
 
 /**
- * 发布订阅对象
+ * InquiryPriceRenewDBInstance请求参数结构体
  * @class
  */
-class PublishSubscribe extends  AbstractModel {
+class InquiryPriceRenewDBInstanceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 发布订阅ID
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 续费周期。按月续费最多48个月。默认查询续费一个月的价格
          * @type {number || null}
          */
-        this.Id = null;
+        this.Period = null;
 
         /**
-         * 发布订阅名称
+         * 续费周期单位。month表示按月续费，当前只支持按月付费查询价格
          * @type {string || null}
          */
-        this.Name = null;
-
-        /**
-         * 发布实例ID
-         * @type {string || null}
-         */
-        this.PublishInstanceId = null;
-
-        /**
-         * 发布实例名称
-         * @type {string || null}
-         */
-        this.PublishInstanceName = null;
-
-        /**
-         * 发布实例IP
-         * @type {string || null}
-         */
-        this.PublishInstanceIp = null;
-
-        /**
-         * 订阅实例ID
-         * @type {string || null}
-         */
-        this.SubscribeInstanceId = null;
-
-        /**
-         * 订阅实例名称
-         * @type {string || null}
-         */
-        this.SubscribeInstanceName = null;
-
-        /**
-         * 订阅实例IP
-         * @type {string || null}
-         */
-        this.SubscribeInstanceIp = null;
-
-        /**
-         * 数据库的订阅发布关系集合
-         * @type {Array.<DatabaseTupleStatus> || null}
-         */
-        this.DatabaseTupleSet = null;
+        this.TimeUnit = null;
 
     }
 
@@ -3551,23 +4084,9 @@ class PublishSubscribe extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.PublishInstanceId = 'PublishInstanceId' in params ? params.PublishInstanceId : null;
-        this.PublishInstanceName = 'PublishInstanceName' in params ? params.PublishInstanceName : null;
-        this.PublishInstanceIp = 'PublishInstanceIp' in params ? params.PublishInstanceIp : null;
-        this.SubscribeInstanceId = 'SubscribeInstanceId' in params ? params.SubscribeInstanceId : null;
-        this.SubscribeInstanceName = 'SubscribeInstanceName' in params ? params.SubscribeInstanceName : null;
-        this.SubscribeInstanceIp = 'SubscribeInstanceIp' in params ? params.SubscribeInstanceIp : null;
-
-        if (params.DatabaseTupleSet) {
-            this.DatabaseTupleSet = new Array();
-            for (let z in params.DatabaseTupleSet) {
-                let obj = new DatabaseTupleStatus();
-                obj.deserialize(params.DatabaseTupleSet[z]);
-                this.DatabaseTupleSet.push(obj);
-            }
-        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
 
     }
 }
@@ -3643,60 +4162,18 @@ class DbRollbackTimeInfo extends  AbstractModel {
 }
 
 /**
- * 账户信息详情
+ * DescribeReadOnlyGroupList请求参数结构体
  * @class
  */
-class AccountDetail extends  AbstractModel {
+class DescribeReadOnlyGroupListRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 账户名
+         * 主实例ID，格式如：mssql-3l3fgqn7
          * @type {string || null}
          */
-        this.Name = null;
-
-        /**
-         * 账户备注
-         * @type {string || null}
-         */
-        this.Remark = null;
-
-        /**
-         * 账户创建时间
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * 账户状态，1-创建中，2-正常，3-修改中，4-密码重置中，-1-删除中
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * 账户更新时间
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
-
-        /**
-         * 密码更新时间
-         * @type {string || null}
-         */
-        this.PassTime = null;
-
-        /**
-         * 账户内部状态，正常为enable
-         * @type {string || null}
-         */
-        this.InternalStatus = null;
-
-        /**
-         * 该账户对相关db的读写权限信息
-         * @type {Array.<DBPrivilege> || null}
-         */
-        this.Dbs = null;
+        this.InstanceId = null;
 
     }
 
@@ -3707,22 +4184,7 @@ class AccountDetail extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.PassTime = 'PassTime' in params ? params.PassTime : null;
-        this.InternalStatus = 'InternalStatus' in params ? params.InternalStatus : null;
-
-        if (params.Dbs) {
-            this.Dbs = new Array();
-            for (let z in params.Dbs) {
-                let obj = new DBPrivilege();
-                obj.deserialize(params.Dbs[z]);
-                this.Dbs.push(obj);
-            }
-        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -3763,30 +4225,232 @@ class CreateBackupResponse extends  AbstractModel {
 }
 
 /**
- * 迁移任务的目标类型
+ * 实例详细信息
  * @class
  */
-class MigrateTarget extends  AbstractModel {
+class DBInstance extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 迁移目标实例的ID，格式如：mssql-si2823jyl
+         * 实例ID
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 迁移目标实例的用户名
+         * 实例名称
          * @type {string || null}
          */
-        this.UserName = null;
+        this.Name = null;
 
         /**
-         * 迁移目标实例的密码
+         * 实例所在项目ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 实例所在地域ID
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * 实例所在可用区ID
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * 实例所在私有网络ID，基础网络时为 0
+         * @type {number || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 实例所在私有网络子网ID，基础网络时为 0
+         * @type {number || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 实例状态。取值范围： <li>1：申请中</li> <li>2：运行中</li> <li>3：受限运行中 (主备切换中)</li> <li>4：已隔离</li> <li>5：回收中</li> <li>6：已回收</li> <li>7：任务执行中 (实例做备份、回档等操作)</li> <li>8：已下线</li> <li>9：实例扩容中</li> <li>10：实例迁移中</li> <li>11：只读</li> <li>12：重启中</li>
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 实例访问IP
          * @type {string || null}
          */
-        this.Password = null;
+        this.Vip = null;
+
+        /**
+         * 实例访问端口
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+        /**
+         * 实例创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 实例更新时间
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 实例计费开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 实例计费结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 实例隔离时间
+         * @type {string || null}
+         */
+        this.IsolateTime = null;
+
+        /**
+         * 实例内存大小，单位G
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * 实例已经使用存储空间大小，单位G
+         * @type {number || null}
+         */
+        this.UsedStorage = null;
+
+        /**
+         * 实例存储空间大小，单位G
+         * @type {number || null}
+         */
+        this.Storage = null;
+
+        /**
+         * 实例版本
+         * @type {string || null}
+         */
+        this.VersionName = null;
+
+        /**
+         * 实例续费标记，0-正常续费，1-自动续费，2-到期不续费
+         * @type {number || null}
+         */
+        this.RenewFlag = null;
+
+        /**
+         * 实例高可用， 1-双机高可用，2-单机
+         * @type {number || null}
+         */
+        this.Model = null;
+
+        /**
+         * 实例所在地域名称，如 ap-guangzhou
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 实例所在可用区名称，如 ap-guangzhou-1
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 备份时间点
+         * @type {string || null}
+         */
+        this.BackupTime = null;
+
+        /**
+         * 实例付费模式， 0-按量计费，1-包年包月
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * 实例唯一UID
+         * @type {string || null}
+         */
+        this.Uid = null;
+
+        /**
+         * 实例cpu核心数
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * 实例版本代号
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * 物理机代号
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 计费ID
+         * @type {number || null}
+         */
+        this.Pid = null;
+
+        /**
+         * 实例所属VPC的唯一字符串ID，格式如：vpc-xxx，基础网络时为空字符串
+         * @type {string || null}
+         */
+        this.UniqVpcId = null;
+
+        /**
+         * 实例所属子网的唯一字符串ID，格式如： subnet-xxx，基础网络时为空字符串
+         * @type {string || null}
+         */
+        this.UniqSubnetId = null;
+
+        /**
+         * 实例隔离操作
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.IsolateOperator = null;
+
+        /**
+         * 发布订阅标识，SUB-订阅实例，PUB-发布实例，空值-没有发布订阅的普通实例
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubFlag = null;
+
+        /**
+         * 只读标识，RO-只读实例，MASTER-有RO实例的主实例，空值-没有只读组的非RO实例
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ROFlag = null;
+
+        /**
+         * 容灾类型，MIRROR-镜像，ALWAYSON-AlwaysOn, SINGLE-单例
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HAFlag = null;
 
     }
 
@@ -3798,8 +4462,41 @@ class MigrateTarget extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.UserName = 'UserName' in params ? params.UserName : null;
-        this.Password = 'Password' in params ? params.Password : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.IsolateTime = 'IsolateTime' in params ? params.IsolateTime : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.UsedStorage = 'UsedStorage' in params ? params.UsedStorage : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
+        this.VersionName = 'VersionName' in params ? params.VersionName : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+        this.Model = 'Model' in params ? params.Model : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.BackupTime = 'BackupTime' in params ? params.BackupTime : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.Uid = 'Uid' in params ? params.Uid : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Version = 'Version' in params ? params.Version : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Pid = 'Pid' in params ? params.Pid : null;
+        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
+        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
+        this.IsolateOperator = 'IsolateOperator' in params ? params.IsolateOperator : null;
+        this.SubFlag = 'SubFlag' in params ? params.SubFlag : null;
+        this.ROFlag = 'ROFlag' in params ? params.ROFlag : null;
+        this.HAFlag = 'HAFlag' in params ? params.HAFlag : null;
 
     }
 }
@@ -3929,6 +4626,91 @@ class CreateMigrationRequest extends  AbstractModel {
                 let obj = new MigrateDB();
                 obj.deserialize(params.MigrateDBSet[z]);
                 this.MigrateDBSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 账户信息详情
+ * @class
+ */
+class AccountDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 账户名
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 账户备注
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 账户创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 账户状态，1-创建中，2-正常，3-修改中，4-密码重置中，-1-删除中
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 账户更新时间
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 密码更新时间
+         * @type {string || null}
+         */
+        this.PassTime = null;
+
+        /**
+         * 账户内部状态，正常为enable
+         * @type {string || null}
+         */
+        this.InternalStatus = null;
+
+        /**
+         * 该账户对相关db的读写权限信息
+         * @type {Array.<DBPrivilege> || null}
+         */
+        this.Dbs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.PassTime = 'PassTime' in params ? params.PassTime : null;
+        this.InternalStatus = 'InternalStatus' in params ? params.InternalStatus : null;
+
+        if (params.Dbs) {
+            this.Dbs = new Array();
+            for (let z in params.Dbs) {
+                let obj = new DBPrivilege();
+                obj.deserialize(params.Dbs[z]);
+                this.Dbs.push(obj);
             }
         }
 
@@ -4303,232 +5085,30 @@ class AccountPrivilegeModifyInfo extends  AbstractModel {
 }
 
 /**
- * 实例详细信息
+ * 迁移任务的目标类型
  * @class
  */
-class DBInstance extends  AbstractModel {
+class MigrateTarget extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例ID
+         * 迁移目标实例的ID，格式如：mssql-si2823jyl
          * @type {string || null}
          */
         this.InstanceId = null;
 
         /**
-         * 实例名称
+         * 迁移目标实例的用户名
          * @type {string || null}
          */
-        this.Name = null;
+        this.UserName = null;
 
         /**
-         * 实例所在项目ID
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-        /**
-         * 实例所在地域ID
-         * @type {number || null}
-         */
-        this.RegionId = null;
-
-        /**
-         * 实例所在可用区ID
-         * @type {number || null}
-         */
-        this.ZoneId = null;
-
-        /**
-         * 实例所在私有网络ID，基础网络时为 0
-         * @type {number || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * 实例所在私有网络子网ID，基础网络时为 0
-         * @type {number || null}
-         */
-        this.SubnetId = null;
-
-        /**
-         * 实例状态。取值范围： <li>1：申请中</li> <li>2：运行中</li> <li>3：受限运行中 (主备切换中)</li> <li>4：已隔离</li> <li>5：回收中</li> <li>6：已回收</li> <li>7：任务执行中 (实例做备份、回档等操作)</li> <li>8：已下线</li> <li>9：实例扩容中</li> <li>10：实例迁移中</li> <li>11：只读</li> <li>12：重启中</li>
-         * @type {number || null}
-         */
-        this.Status = null;
-
-        /**
-         * 实例访问IP
+         * 迁移目标实例的密码
          * @type {string || null}
          */
-        this.Vip = null;
-
-        /**
-         * 实例访问端口
-         * @type {number || null}
-         */
-        this.Vport = null;
-
-        /**
-         * 实例创建时间
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * 实例更新时间
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
-
-        /**
-         * 实例计费开始时间
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * 实例计费结束时间
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * 实例隔离时间
-         * @type {string || null}
-         */
-        this.IsolateTime = null;
-
-        /**
-         * 实例内存大小，单位G
-         * @type {number || null}
-         */
-        this.Memory = null;
-
-        /**
-         * 实例已经使用存储空间大小，单位G
-         * @type {number || null}
-         */
-        this.UsedStorage = null;
-
-        /**
-         * 实例存储空间大小，单位G
-         * @type {number || null}
-         */
-        this.Storage = null;
-
-        /**
-         * 实例版本
-         * @type {string || null}
-         */
-        this.VersionName = null;
-
-        /**
-         * 实例续费标记，0-正常续费，1-自动续费，2-到期不续费
-         * @type {number || null}
-         */
-        this.RenewFlag = null;
-
-        /**
-         * 实例高可用， 1-双机高可用，2-单机
-         * @type {number || null}
-         */
-        this.Model = null;
-
-        /**
-         * 实例所在地域名称，如 ap-guangzhou
-         * @type {string || null}
-         */
-        this.Region = null;
-
-        /**
-         * 实例所在可用区名称，如 ap-guangzhou-1
-         * @type {string || null}
-         */
-        this.Zone = null;
-
-        /**
-         * 备份时间点
-         * @type {string || null}
-         */
-        this.BackupTime = null;
-
-        /**
-         * 实例付费模式， 0-按量计费，1-包年包月
-         * @type {number || null}
-         */
-        this.PayMode = null;
-
-        /**
-         * 实例唯一UID
-         * @type {string || null}
-         */
-        this.Uid = null;
-
-        /**
-         * 实例cpu核心数
-         * @type {number || null}
-         */
-        this.Cpu = null;
-
-        /**
-         * 实例版本代号
-         * @type {string || null}
-         */
-        this.Version = null;
-
-        /**
-         * 物理机代号
-         * @type {string || null}
-         */
-        this.Type = null;
-
-        /**
-         * 计费ID
-         * @type {number || null}
-         */
-        this.Pid = null;
-
-        /**
-         * 实例所属VPC的唯一字符串ID，格式如：vpc-xxx，基础网络时为空字符串
-         * @type {string || null}
-         */
-        this.UniqVpcId = null;
-
-        /**
-         * 实例所属子网的唯一字符串ID，格式如： subnet-xxx，基础网络时为空字符串
-         * @type {string || null}
-         */
-        this.UniqSubnetId = null;
-
-        /**
-         * 实例隔离操作
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.IsolateOperator = null;
-
-        /**
-         * 发布订阅标识，SUB-订阅实例，PUB-发布实例，空值-没有发布订阅的普通实例
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.SubFlag = null;
-
-        /**
-         * 只读标识，RO-只读实例，MASTER-有RO实例的主实例，空值-没有只读组的非RO实例
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ROFlag = null;
-
-        /**
-         * 容灾类型，MIRROR-镜像，ALWAYSON-AlwaysOn, SINGLE-单例
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.HAFlag = null;
+        this.Password = null;
 
     }
 
@@ -4540,41 +5120,8 @@ class DBInstance extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.RegionId = 'RegionId' in params ? params.RegionId : null;
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.Vip = 'Vip' in params ? params.Vip : null;
-        this.Vport = 'Vport' in params ? params.Vport : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.IsolateTime = 'IsolateTime' in params ? params.IsolateTime : null;
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.UsedStorage = 'UsedStorage' in params ? params.UsedStorage : null;
-        this.Storage = 'Storage' in params ? params.Storage : null;
-        this.VersionName = 'VersionName' in params ? params.VersionName : null;
-        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
-        this.Model = 'Model' in params ? params.Model : null;
-        this.Region = 'Region' in params ? params.Region : null;
-        this.Zone = 'Zone' in params ? params.Zone : null;
-        this.BackupTime = 'BackupTime' in params ? params.BackupTime : null;
-        this.PayMode = 'PayMode' in params ? params.PayMode : null;
-        this.Uid = 'Uid' in params ? params.Uid : null;
-        this.Cpu = 'Cpu' in params ? params.Cpu : null;
-        this.Version = 'Version' in params ? params.Version : null;
-        this.Type = 'Type' in params ? params.Type : null;
-        this.Pid = 'Pid' in params ? params.Pid : null;
-        this.UniqVpcId = 'UniqVpcId' in params ? params.UniqVpcId : null;
-        this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
-        this.IsolateOperator = 'IsolateOperator' in params ? params.IsolateOperator : null;
-        this.SubFlag = 'SubFlag' in params ? params.SubFlag : null;
-        this.ROFlag = 'ROFlag' in params ? params.ROFlag : null;
-        this.HAFlag = 'HAFlag' in params ? params.HAFlag : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
 
     }
 }
@@ -4728,6 +5275,140 @@ class DescribeOrdersRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeReadOnlyGroupDetails返回参数结构体
+ * @class
+ */
+class DescribeReadOnlyGroupDetailsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 只读组ID
+         * @type {string || null}
+         */
+        this.ReadOnlyGroupId = null;
+
+        /**
+         * 只读组名称
+         * @type {string || null}
+         */
+        this.ReadOnlyGroupName = null;
+
+        /**
+         * 只读组的地域ID，与主实例相同
+         * @type {string || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * 只读组的可用区ID，与主实例相同
+         * @type {string || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * 是否启动超时剔除功能，0-不开启剔除功能，1-开启剔除功能
+         * @type {number || null}
+         */
+        this.IsOfflineDelay = null;
+
+        /**
+         * 启动超时剔除功能后，使用的超时阈值
+         * @type {number || null}
+         */
+        this.ReadOnlyMaxDelayTime = null;
+
+        /**
+         * 启动超时剔除功能后，至少只读组保留的只读副本数
+         * @type {number || null}
+         */
+        this.MinReadOnlyInGroup = null;
+
+        /**
+         * 只读组vip
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * 只读组vport
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+        /**
+         * 只读组私有网络ID
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 只读组私有网络子网ID
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 只读实例副本集合
+         * @type {Array.<ReadOnlyInstance> || null}
+         */
+        this.ReadOnlyInstanceSet = null;
+
+        /**
+         * 只读组状态: 1-申请成功运行中，5-申请中
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 主实例ID，形如mssql-sgeshe3th
+         * @type {string || null}
+         */
+        this.MasterInstanceId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReadOnlyGroupId = 'ReadOnlyGroupId' in params ? params.ReadOnlyGroupId : null;
+        this.ReadOnlyGroupName = 'ReadOnlyGroupName' in params ? params.ReadOnlyGroupName : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.IsOfflineDelay = 'IsOfflineDelay' in params ? params.IsOfflineDelay : null;
+        this.ReadOnlyMaxDelayTime = 'ReadOnlyMaxDelayTime' in params ? params.ReadOnlyMaxDelayTime : null;
+        this.MinReadOnlyInGroup = 'MinReadOnlyInGroup' in params ? params.MinReadOnlyInGroup : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+
+        if (params.ReadOnlyInstanceSet) {
+            this.ReadOnlyInstanceSet = new Array();
+            for (let z in params.ReadOnlyInstanceSet) {
+                let obj = new ReadOnlyInstance();
+                obj.deserialize(params.ReadOnlyInstanceSet[z]);
+                this.ReadOnlyInstanceSet.push(obj);
+            }
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.MasterInstanceId = 'MasterInstanceId' in params ? params.MasterInstanceId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteAccount请求参数结构体
  * @class
  */
@@ -4763,30 +5444,18 @@ class DeleteAccountRequest extends  AbstractModel {
 }
 
 /**
- * InquiryPriceRenewDBInstance请求参数结构体
+ * DescribeReadOnlyGroupByReadOnlyInstance请求参数结构体
  * @class
  */
-class InquiryPriceRenewDBInstanceRequest extends  AbstractModel {
+class DescribeReadOnlyGroupByReadOnlyInstanceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例ID
+         * 实例ID，格式如：mssqlro-3l3fgqn7
          * @type {string || null}
          */
         this.InstanceId = null;
-
-        /**
-         * 续费周期。按月续费最多48个月。默认查询续费一个月的价格
-         * @type {number || null}
-         */
-        this.Period = null;
-
-        /**
-         * 续费周期单位。month表示按月续费，当前只支持按月付费查询价格
-         * @type {string || null}
-         */
-        this.TimeUnit = null;
 
     }
 
@@ -4798,8 +5467,6 @@ class InquiryPriceRenewDBInstanceRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Period = 'Period' in params ? params.Period : null;
-        this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
 
     }
 }
@@ -4828,6 +5495,98 @@ class DescribeMaintenanceSpanRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * 发布订阅对象
+ * @class
+ */
+class PublishSubscribe extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 发布订阅ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 发布订阅名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 发布实例ID
+         * @type {string || null}
+         */
+        this.PublishInstanceId = null;
+
+        /**
+         * 发布实例名称
+         * @type {string || null}
+         */
+        this.PublishInstanceName = null;
+
+        /**
+         * 发布实例IP
+         * @type {string || null}
+         */
+        this.PublishInstanceIp = null;
+
+        /**
+         * 订阅实例ID
+         * @type {string || null}
+         */
+        this.SubscribeInstanceId = null;
+
+        /**
+         * 订阅实例名称
+         * @type {string || null}
+         */
+        this.SubscribeInstanceName = null;
+
+        /**
+         * 订阅实例IP
+         * @type {string || null}
+         */
+        this.SubscribeInstanceIp = null;
+
+        /**
+         * 数据库的订阅发布关系集合
+         * @type {Array.<DatabaseTupleStatus> || null}
+         */
+        this.DatabaseTupleSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.PublishInstanceId = 'PublishInstanceId' in params ? params.PublishInstanceId : null;
+        this.PublishInstanceName = 'PublishInstanceName' in params ? params.PublishInstanceName : null;
+        this.PublishInstanceIp = 'PublishInstanceIp' in params ? params.PublishInstanceIp : null;
+        this.SubscribeInstanceId = 'SubscribeInstanceId' in params ? params.SubscribeInstanceId : null;
+        this.SubscribeInstanceName = 'SubscribeInstanceName' in params ? params.SubscribeInstanceName : null;
+        this.SubscribeInstanceIp = 'SubscribeInstanceIp' in params ? params.SubscribeInstanceIp : null;
+
+        if (params.DatabaseTupleSet) {
+            this.DatabaseTupleSet = new Array();
+            for (let z in params.DatabaseTupleSet) {
+                let obj = new DatabaseTupleStatus();
+                obj.deserialize(params.DatabaseTupleSet[z]);
+                this.DatabaseTupleSet.push(obj);
+            }
+        }
 
     }
 }
@@ -5763,6 +6522,98 @@ class ResetAccountPasswordRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyReadOnlyGroupDetails请求参数结构体
+ * @class
+ */
+class ModifyReadOnlyGroupDetailsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 主实例ID，格式如：mssql-3l3fgqn7
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 只读组ID
+         * @type {string || null}
+         */
+        this.ReadOnlyGroupId = null;
+
+        /**
+         * 只读组名称，不填此参数，则不修改
+         * @type {string || null}
+         */
+        this.ReadOnlyGroupName = null;
+
+        /**
+         * 是否启动超时剔除功能,0-不开启剔除功能，1-开启剔除功能，不填此参数，则不修改
+         * @type {number || null}
+         */
+        this.IsOfflineDelay = null;
+
+        /**
+         * 启动超时剔除功能后，使用的超时阈值，不填此参数，则不修改
+         * @type {number || null}
+         */
+        this.ReadOnlyMaxDelayTime = null;
+
+        /**
+         * 启动超时剔除功能后，只读组至少保留的只读副本数，不填此参数，则不修改
+         * @type {number || null}
+         */
+        this.MinReadOnlyInGroup = null;
+
+        /**
+         * 只读组实例权重修改集合，不填此参数，则不修改
+         * @type {Array.<ReadOnlyInstanceWeightPair> || null}
+         */
+        this.WeightPairs = null;
+
+        /**
+         * 0-用户自定义权重（根据WeightPairs调整）,1-系统自动分配权重(WeightPairs无效)， 默认为0
+         * @type {number || null}
+         */
+        this.AutoWeight = null;
+
+        /**
+         * 0-不重新均衡负载，1-重新均衡负载，默认为0
+         * @type {number || null}
+         */
+        this.BalanceWeight = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.ReadOnlyGroupId = 'ReadOnlyGroupId' in params ? params.ReadOnlyGroupId : null;
+        this.ReadOnlyGroupName = 'ReadOnlyGroupName' in params ? params.ReadOnlyGroupName : null;
+        this.IsOfflineDelay = 'IsOfflineDelay' in params ? params.IsOfflineDelay : null;
+        this.ReadOnlyMaxDelayTime = 'ReadOnlyMaxDelayTime' in params ? params.ReadOnlyMaxDelayTime : null;
+        this.MinReadOnlyInGroup = 'MinReadOnlyInGroup' in params ? params.MinReadOnlyInGroup : null;
+
+        if (params.WeightPairs) {
+            this.WeightPairs = new Array();
+            for (let z in params.WeightPairs) {
+                let obj = new ReadOnlyInstanceWeightPair();
+                obj.deserialize(params.WeightPairs[z]);
+                this.WeightPairs.push(obj);
+            }
+        }
+        this.AutoWeight = 'AutoWeight' in params ? params.AutoWeight : null;
+        this.BalanceWeight = 'BalanceWeight' in params ? params.BalanceWeight : null;
+
+    }
+}
+
+/**
  * DescribeSlowlogs请求参数结构体
  * @class
  */
@@ -6170,6 +7021,7 @@ class DeleteAccountResponse extends  AbstractModel {
 }
 
 module.exports = {
+    DescribeReadOnlyGroupDetailsRequest: DescribeReadOnlyGroupDetailsRequest,
     CreateDBInstancesRequest: CreateDBInstancesRequest,
     InstanceRenewInfo: InstanceRenewInfo,
     DealInfo: DealInfo,
@@ -6178,10 +7030,10 @@ module.exports = {
     CreatePublishSubscribeRequest: CreatePublishSubscribeRequest,
     CreateMigrationResponse: CreateMigrationResponse,
     DatabaseTuple: DatabaseTuple,
-    RestartDBInstanceRequest: RestartDBInstanceRequest,
+    RegionInfo: RegionInfo,
     DeletePublishSubscribeRequest: DeletePublishSubscribeRequest,
     DatabaseTupleStatus: DatabaseTupleStatus,
-    RegionInfo: RegionInfo,
+    ModifyReadOnlyGroupDetailsResponse: ModifyReadOnlyGroupDetailsResponse,
     ModifyBackupStrategyResponse: ModifyBackupStrategyResponse,
     MigrateDetail: MigrateDetail,
     RunMigrationResponse: RunMigrationResponse,
@@ -6191,11 +7043,14 @@ module.exports = {
     RollbackInstanceResponse: RollbackInstanceResponse,
     DBRemark: DBRemark,
     MigrateDB: MigrateDB,
+    RestartDBInstanceRequest: RestartDBInstanceRequest,
+    DescribeReadOnlyGroupListResponse: DescribeReadOnlyGroupListResponse,
     DescribeRegionsResponse: DescribeRegionsResponse,
     DescribeBackupsRequest: DescribeBackupsRequest,
     ModifyDBInstanceProjectResponse: ModifyDBInstanceProjectResponse,
     DescribeRollbackTimeResponse: DescribeRollbackTimeResponse,
     RestoreInstanceRequest: RestoreInstanceRequest,
+    DescribeReadOnlyGroupByReadOnlyInstanceResponse: DescribeReadOnlyGroupByReadOnlyInstanceResponse,
     RunMigrationRequest: RunMigrationRequest,
     RestoreInstanceResponse: RestoreInstanceResponse,
     ModifyMaintenanceSpanResponse: ModifyMaintenanceSpanResponse,
@@ -6226,6 +7081,7 @@ module.exports = {
     CompleteExpansionResponse: CompleteExpansionResponse,
     MigrateSource: MigrateSource,
     ResetAccountPasswordResponse: ResetAccountPasswordResponse,
+    ReadOnlyGroup: ReadOnlyGroup,
     ModifyAccountPrivilegeRequest: ModifyAccountPrivilegeRequest,
     DescribeMigrationsRequest: DescribeMigrationsRequest,
     InquiryPriceRenewDBInstanceResponse: InquiryPriceRenewDBInstanceResponse,
@@ -6240,20 +7096,23 @@ module.exports = {
     RemoveBackupsResponse: RemoveBackupsResponse,
     TerminateDBInstanceRequest: TerminateDBInstanceRequest,
     CreateDBRequest: CreateDBRequest,
+    ReadOnlyInstance: ReadOnlyInstance,
     InquiryPriceUpgradeDBInstanceRequest: InquiryPriceUpgradeDBInstanceRequest,
     ModifyDBRemarkRequest: ModifyDBRemarkRequest,
+    ReadOnlyInstanceWeightPair: ReadOnlyInstanceWeightPair,
     ModifyDBInstanceNameRequest: ModifyDBInstanceNameRequest,
     AccountPassword: AccountPassword,
     DeleteMigrationResponse: DeleteMigrationResponse,
     InstanceDBDetail: InstanceDBDetail,
-    PublishSubscribe: PublishSubscribe,
+    InquiryPriceRenewDBInstanceRequest: InquiryPriceRenewDBInstanceRequest,
     TerminateDBInstanceResponse: TerminateDBInstanceResponse,
     DbRollbackTimeInfo: DbRollbackTimeInfo,
-    AccountDetail: AccountDetail,
+    DescribeReadOnlyGroupListRequest: DescribeReadOnlyGroupListRequest,
     CreateBackupResponse: CreateBackupResponse,
-    MigrateTarget: MigrateTarget,
+    DBInstance: DBInstance,
     DescribeProductConfigResponse: DescribeProductConfigResponse,
     CreateMigrationRequest: CreateMigrationRequest,
+    AccountDetail: AccountDetail,
     ModifyDBNameResponse: ModifyDBNameResponse,
     DescribePublishSubscribeResponse: DescribePublishSubscribeResponse,
     ModifyDBNameRequest: ModifyDBNameRequest,
@@ -6262,14 +7121,16 @@ module.exports = {
     AccountRemark: AccountRemark,
     ModifyDBInstanceNameResponse: ModifyDBInstanceNameResponse,
     AccountPrivilegeModifyInfo: AccountPrivilegeModifyInfo,
-    DBInstance: DBInstance,
+    MigrateTarget: MigrateTarget,
     DescribeZonesResponse: DescribeZonesResponse,
     RenewDBInstanceResponse: RenewDBInstanceResponse,
     DBPrivilege: DBPrivilege,
     DescribeOrdersRequest: DescribeOrdersRequest,
+    DescribeReadOnlyGroupDetailsResponse: DescribeReadOnlyGroupDetailsResponse,
     DeleteAccountRequest: DeleteAccountRequest,
-    InquiryPriceRenewDBInstanceRequest: InquiryPriceRenewDBInstanceRequest,
+    DescribeReadOnlyGroupByReadOnlyInstanceRequest: DescribeReadOnlyGroupByReadOnlyInstanceRequest,
     DescribeMaintenanceSpanRequest: DescribeMaintenanceSpanRequest,
+    PublishSubscribe: PublishSubscribe,
     CreateBackupRequest: CreateBackupRequest,
     DescribePublishSubscribeRequest: DescribePublishSubscribeRequest,
     ModifyAccountRemarkRequest: ModifyAccountRemarkRequest,
@@ -6287,6 +7148,7 @@ module.exports = {
     DescribeSlowlogsResponse: DescribeSlowlogsResponse,
     DBDetail: DBDetail,
     ResetAccountPasswordRequest: ResetAccountPasswordRequest,
+    ModifyReadOnlyGroupDetailsRequest: ModifyReadOnlyGroupDetailsRequest,
     DescribeSlowlogsRequest: DescribeSlowlogsRequest,
     ModifyDBInstanceProjectRequest: ModifyDBInstanceProjectRequest,
     CreatePublishSubscribeResponse: CreatePublishSubscribeResponse,

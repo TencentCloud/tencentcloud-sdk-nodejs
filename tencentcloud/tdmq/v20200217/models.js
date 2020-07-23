@@ -553,7 +553,7 @@ class ModifyTopicResponse extends  AbstractModel {
         super();
 
         /**
-         * 分区数，必须比原分区数大，不填则不修复分区数，修改分区数仅对非全局顺序消息起效果。
+         * 分区数
          * @type {number || null}
          */
         this.Partitions = null;
@@ -1430,7 +1430,7 @@ class ModifyTopicRequest extends  AbstractModel {
         this.TopicName = null;
 
         /**
-         * 分区数，必须>=原分区数大，不填则不修改分区数，修改分区数仅对非全局顺序消息起效果，不允许超过128个分区。
+         * 分区数，必须大于或者等于原分区数，若想维持原分区数请输入原数目，修改分区数仅对非全局顺序消息起效果，不允许超过128个分区。
          * @type {number || null}
          */
         this.Partitions = null;
@@ -1520,7 +1520,7 @@ class FilterSubscription extends  AbstractModel {
         super();
 
         /**
-         * 是否仅展示包含真实消费者的订。
+         * 是否仅展示包含真实消费者的订阅。
          * @type {boolean || null}
          */
         this.ConsumerHasCount = null;

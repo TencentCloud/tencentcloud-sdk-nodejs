@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const DescribeReadOnlyGroupDetailsRequest = models.DescribeReadOnlyGroupDetailsRequest;
 const CreateDBInstancesRequest = models.CreateDBInstancesRequest;
 const InstanceRenewInfo = models.InstanceRenewInfo;
 const DealInfo = models.DealInfo;
@@ -24,10 +25,10 @@ const DescribeMaintenanceSpanResponse = models.DescribeMaintenanceSpanResponse;
 const CreatePublishSubscribeRequest = models.CreatePublishSubscribeRequest;
 const CreateMigrationResponse = models.CreateMigrationResponse;
 const DatabaseTuple = models.DatabaseTuple;
-const RestartDBInstanceRequest = models.RestartDBInstanceRequest;
+const RegionInfo = models.RegionInfo;
 const DeletePublishSubscribeRequest = models.DeletePublishSubscribeRequest;
 const DatabaseTupleStatus = models.DatabaseTupleStatus;
-const RegionInfo = models.RegionInfo;
+const ModifyReadOnlyGroupDetailsResponse = models.ModifyReadOnlyGroupDetailsResponse;
 const ModifyBackupStrategyResponse = models.ModifyBackupStrategyResponse;
 const MigrateDetail = models.MigrateDetail;
 const RunMigrationResponse = models.RunMigrationResponse;
@@ -37,11 +38,14 @@ const CreateAccountRequest = models.CreateAccountRequest;
 const RollbackInstanceResponse = models.RollbackInstanceResponse;
 const DBRemark = models.DBRemark;
 const MigrateDB = models.MigrateDB;
+const RestartDBInstanceRequest = models.RestartDBInstanceRequest;
+const DescribeReadOnlyGroupListResponse = models.DescribeReadOnlyGroupListResponse;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
 const DescribeBackupsRequest = models.DescribeBackupsRequest;
 const ModifyDBInstanceProjectResponse = models.ModifyDBInstanceProjectResponse;
 const DescribeRollbackTimeResponse = models.DescribeRollbackTimeResponse;
 const RestoreInstanceRequest = models.RestoreInstanceRequest;
+const DescribeReadOnlyGroupByReadOnlyInstanceResponse = models.DescribeReadOnlyGroupByReadOnlyInstanceResponse;
 const RunMigrationRequest = models.RunMigrationRequest;
 const RestoreInstanceResponse = models.RestoreInstanceResponse;
 const ModifyMaintenanceSpanResponse = models.ModifyMaintenanceSpanResponse;
@@ -72,6 +76,7 @@ const ModifyDBInstanceRenewFlagResponse = models.ModifyDBInstanceRenewFlagRespon
 const CompleteExpansionResponse = models.CompleteExpansionResponse;
 const MigrateSource = models.MigrateSource;
 const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
+const ReadOnlyGroup = models.ReadOnlyGroup;
 const ModifyAccountPrivilegeRequest = models.ModifyAccountPrivilegeRequest;
 const DescribeMigrationsRequest = models.DescribeMigrationsRequest;
 const InquiryPriceRenewDBInstanceResponse = models.InquiryPriceRenewDBInstanceResponse;
@@ -86,20 +91,23 @@ const DBPrivilegeModifyInfo = models.DBPrivilegeModifyInfo;
 const RemoveBackupsResponse = models.RemoveBackupsResponse;
 const TerminateDBInstanceRequest = models.TerminateDBInstanceRequest;
 const CreateDBRequest = models.CreateDBRequest;
+const ReadOnlyInstance = models.ReadOnlyInstance;
 const InquiryPriceUpgradeDBInstanceRequest = models.InquiryPriceUpgradeDBInstanceRequest;
 const ModifyDBRemarkRequest = models.ModifyDBRemarkRequest;
+const ReadOnlyInstanceWeightPair = models.ReadOnlyInstanceWeightPair;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const AccountPassword = models.AccountPassword;
 const DeleteMigrationResponse = models.DeleteMigrationResponse;
 const InstanceDBDetail = models.InstanceDBDetail;
-const PublishSubscribe = models.PublishSubscribe;
+const InquiryPriceRenewDBInstanceRequest = models.InquiryPriceRenewDBInstanceRequest;
 const TerminateDBInstanceResponse = models.TerminateDBInstanceResponse;
 const DbRollbackTimeInfo = models.DbRollbackTimeInfo;
-const AccountDetail = models.AccountDetail;
+const DescribeReadOnlyGroupListRequest = models.DescribeReadOnlyGroupListRequest;
 const CreateBackupResponse = models.CreateBackupResponse;
-const MigrateTarget = models.MigrateTarget;
+const DBInstance = models.DBInstance;
 const DescribeProductConfigResponse = models.DescribeProductConfigResponse;
 const CreateMigrationRequest = models.CreateMigrationRequest;
+const AccountDetail = models.AccountDetail;
 const ModifyDBNameResponse = models.ModifyDBNameResponse;
 const DescribePublishSubscribeResponse = models.DescribePublishSubscribeResponse;
 const ModifyDBNameRequest = models.ModifyDBNameRequest;
@@ -108,14 +116,16 @@ const Backup = models.Backup;
 const AccountRemark = models.AccountRemark;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
 const AccountPrivilegeModifyInfo = models.AccountPrivilegeModifyInfo;
-const DBInstance = models.DBInstance;
+const MigrateTarget = models.MigrateTarget;
 const DescribeZonesResponse = models.DescribeZonesResponse;
 const RenewDBInstanceResponse = models.RenewDBInstanceResponse;
 const DBPrivilege = models.DBPrivilege;
 const DescribeOrdersRequest = models.DescribeOrdersRequest;
+const DescribeReadOnlyGroupDetailsResponse = models.DescribeReadOnlyGroupDetailsResponse;
 const DeleteAccountRequest = models.DeleteAccountRequest;
-const InquiryPriceRenewDBInstanceRequest = models.InquiryPriceRenewDBInstanceRequest;
+const DescribeReadOnlyGroupByReadOnlyInstanceRequest = models.DescribeReadOnlyGroupByReadOnlyInstanceRequest;
 const DescribeMaintenanceSpanRequest = models.DescribeMaintenanceSpanRequest;
+const PublishSubscribe = models.PublishSubscribe;
 const CreateBackupRequest = models.CreateBackupRequest;
 const DescribePublishSubscribeRequest = models.DescribePublishSubscribeRequest;
 const ModifyAccountRemarkRequest = models.ModifyAccountRemarkRequest;
@@ -133,6 +143,7 @@ const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const DescribeSlowlogsResponse = models.DescribeSlowlogsResponse;
 const DBDetail = models.DBDetail;
 const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
+const ModifyReadOnlyGroupDetailsRequest = models.ModifyReadOnlyGroupDetailsRequest;
 const DescribeSlowlogsRequest = models.DescribeSlowlogsRequest;
 const ModifyDBInstanceProjectRequest = models.ModifyDBInstanceProjectRequest;
 const CreatePublishSubscribeResponse = models.CreatePublishSubscribeResponse;
@@ -156,14 +167,14 @@ class SqlserverClient extends AbstractClient {
     }
     
     /**
-     * 本接口（ModifyBackupStrategy）用于修改备份策略
-     * @param {ModifyBackupStrategyRequest} req
-     * @param {function(string, ModifyBackupStrategyResponse):void} cb
+     * 本接口（DescribeReadOnlyGroupList）用于查询只读组列表。
+     * @param {DescribeReadOnlyGroupListRequest} req
+     * @param {function(string, DescribeReadOnlyGroupListResponse):void} cb
      * @public
      */
-    ModifyBackupStrategy(req, cb) {
-        let resp = new ModifyBackupStrategyResponse();
-        this.request("ModifyBackupStrategy", req, resp, cb);
+    DescribeReadOnlyGroupList(req, cb) {
+        let resp = new DescribeReadOnlyGroupListResponse();
+        this.request("DescribeReadOnlyGroupList", req, resp, cb);
     }
 
     /**
@@ -186,6 +197,17 @@ class SqlserverClient extends AbstractClient {
     DescribeOrders(req, cb) {
         let resp = new DescribeOrdersResponse();
         this.request("DescribeOrders", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ModifyBackupStrategy）用于修改备份策略
+     * @param {ModifyBackupStrategyRequest} req
+     * @param {function(string, ModifyBackupStrategyResponse):void} cb
+     * @public
+     */
+    ModifyBackupStrategy(req, cb) {
+        let resp = new ModifyBackupStrategyResponse();
+        this.request("ModifyBackupStrategy", req, resp, cb);
     }
 
     /**
@@ -530,6 +552,17 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
+     * 本接口（DescribeReadOnlyGroupDetails）用于查询只读组详情。
+     * @param {DescribeReadOnlyGroupDetailsRequest} req
+     * @param {function(string, DescribeReadOnlyGroupDetailsResponse):void} cb
+     * @public
+     */
+    DescribeReadOnlyGroupDetails(req, cb) {
+        let resp = new DescribeReadOnlyGroupDetailsResponse();
+        this.request("DescribeReadOnlyGroupDetails", req, resp, cb);
+    }
+
+    /**
      * 本接口（CreatePublishSubscribe）用于创建两个数据库之间的发布订阅关系。作为订阅者，不能再充当发布者，作为发布者可以有多个订阅者实例。
      * @param {CreatePublishSubscribeRequest} req
      * @param {function(string, CreatePublishSubscribeResponse):void} cb
@@ -640,6 +673,17 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
+     * 本接口（ModifyReadOnlyGroupDetails）用于修改只读组详情。
+     * @param {ModifyReadOnlyGroupDetailsRequest} req
+     * @param {function(string, ModifyReadOnlyGroupDetailsResponse):void} cb
+     * @public
+     */
+    ModifyReadOnlyGroupDetails(req, cb) {
+        let resp = new ModifyReadOnlyGroupDetailsResponse();
+        this.request("ModifyReadOnlyGroupDetails", req, resp, cb);
+    }
+
+    /**
      * 本接口（RestoreInstance）用于根据备份文件恢复实例。
      * @param {RestoreInstanceRequest} req
      * @param {function(string, RestoreInstanceResponse):void} cb
@@ -692,6 +736,17 @@ class SqlserverClient extends AbstractClient {
     ModifyDBInstanceRenewFlag(req, cb) {
         let resp = new ModifyDBInstanceRenewFlagResponse();
         this.request("ModifyDBInstanceRenewFlag", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeReadOnlyGroupByReadOnlyInstance）用于通过只读副本实例ID查询其所在的只读组。
+     * @param {DescribeReadOnlyGroupByReadOnlyInstanceRequest} req
+     * @param {function(string, DescribeReadOnlyGroupByReadOnlyInstanceResponse):void} cb
+     * @public
+     */
+    DescribeReadOnlyGroupByReadOnlyInstance(req, cb) {
+        let resp = new DescribeReadOnlyGroupByReadOnlyInstanceResponse();
+        this.request("DescribeReadOnlyGroupByReadOnlyInstance", req, resp, cb);
     }
 
 

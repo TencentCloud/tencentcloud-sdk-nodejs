@@ -18,7 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const BusinessCardOCRResponse = models.BusinessCardOCRResponse;
 const TextArithmetic = models.TextArithmetic;
-const QrcodeImgSize = models.QrcodeImgSize;
+const BankCardOCRRequest = models.BankCardOCRRequest;
 const CarInvoiceOCRRequest = models.CarInvoiceOCRRequest;
 const MixedInvoiceItem = models.MixedInvoiceItem;
 const TrainTicketOCRRequest = models.TrainTicketOCRRequest;
@@ -72,10 +72,11 @@ const GeneralBasicOCRResponse = models.GeneralBasicOCRResponse;
 const VinOCRRequest = models.VinOCRRequest;
 const QuotaInvoiceOCRRequest = models.QuotaInvoiceOCRRequest;
 const MixedInvoiceOCRResponse = models.MixedInvoiceOCRResponse;
-const BankCardOCRRequest = models.BankCardOCRRequest;
+const ClassifyDetectOCRResponse = models.ClassifyDetectOCRResponse;
 const VehicleLicenseOCRResponse = models.VehicleLicenseOCRResponse;
 const VatInvoiceOCRRequest = models.VatInvoiceOCRRequest;
 const IDCardOCRResponse = models.IDCardOCRResponse;
+const ClassifyDetectOCRRequest = models.ClassifyDetectOCRRequest;
 const DutyPaidProofOCRResponse = models.DutyPaidProofOCRResponse;
 const TollInvoiceOCRRequest = models.TollInvoiceOCRRequest;
 const LicensePlateOCRResponse = models.LicensePlateOCRResponse;
@@ -89,6 +90,7 @@ const EduPaperOCRResponse = models.EduPaperOCRResponse;
 const BusinessCardInfo = models.BusinessCardInfo;
 const TextGeneralHandwriting = models.TextGeneralHandwriting;
 const TableOCRRequest = models.TableOCRRequest;
+const QrcodeImgSize = models.QrcodeImgSize;
 const VehicleRegCertOCRRequest = models.VehicleRegCertOCRRequest;
 const ProductDataRecord = models.ProductDataRecord;
 const LicensePlateOCRRequest = models.LicensePlateOCRRequest;
@@ -132,6 +134,7 @@ const GeneralFastOCRRequest = models.GeneralFastOCRRequest;
 const ShipInvoiceOCRResponse = models.ShipInvoiceOCRResponse;
 const InsuranceBillInfo = models.InsuranceBillInfo;
 const VehicleRegCertOCRResponse = models.VehicleRegCertOCRResponse;
+const ClassifyDetectInfo = models.ClassifyDetectInfo;
 const GeneralAccurateOCRResponse = models.GeneralAccurateOCRResponse;
 const SealOCRRequest = models.SealOCRRequest;
 const TextTable = models.TextTable;
@@ -723,6 +726,18 @@ class OcrClient extends AbstractClient {
     EstateCertOCR(req, cb) {
         let resp = new EstateCertOCRResponse();
         this.request("EstateCertOCR", req, resp, cb);
+    }
+
+    /**
+     * 支持身份证、护照、名片、银行卡、行驶证、驾驶证、港澳台通行证、户口本、港澳台来往内地通行证、港澳台居住证、不动产证、营业执照的智能分类。
+
+     * @param {ClassifyDetectOCRRequest} req
+     * @param {function(string, ClassifyDetectOCRResponse):void} cb
+     * @public
+     */
+    ClassifyDetectOCR(req, cb) {
+        let resp = new ClassifyDetectOCRResponse();
+        this.request("ClassifyDetectOCR", req, resp, cb);
     }
 
     /**
