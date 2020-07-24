@@ -26,6 +26,7 @@ const ExtraInfo = models.ExtraInfo;
 const BatchModifyTargetWeightResponse = models.BatchModifyTargetWeightResponse;
 const SetSecurityGroupForLoadbalancersRequest = models.SetSecurityGroupForLoadbalancersRequest;
 const CreateLoadBalancerRequest = models.CreateLoadBalancerRequest;
+const RuleHealth = models.RuleHealth;
 const DeleteRuleRequest = models.DeleteRuleRequest;
 const ModifyLoadBalancerAttributesRequest = models.ModifyLoadBalancerAttributesRequest;
 const SetLoadBalancerClsLogResponse = models.SetLoadBalancerClsLogResponse;
@@ -52,6 +53,7 @@ const ZoneInfo = models.ZoneInfo;
 const RegisterTargetsWithClassicalLBResponse = models.RegisterTargetsWithClassicalLBResponse;
 const DescribeTargetGroupsResponse = models.DescribeTargetGroupsResponse;
 const LoadBalancerHealth = models.LoadBalancerHealth;
+const SetLoadBalancerClsLogRequest = models.SetLoadBalancerClsLogRequest;
 const DeleteLoadBalancerListenersRequest = models.DeleteLoadBalancerListenersRequest;
 const BlockedIP = models.BlockedIP;
 const ModifyRuleResponse = models.ModifyRuleResponse;
@@ -62,12 +64,12 @@ const DescribeLoadBalancerListByCertIdResponse = models.DescribeLoadBalancerList
 const ModifyTargetGroupInstancesWeightResponse = models.ModifyTargetGroupInstancesWeightResponse;
 const DescribeTargetGroupsRequest = models.DescribeTargetGroupsRequest;
 const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
-const DescribeTargetHealthRequest = models.DescribeTargetHealthRequest;
+const BatchRegisterTargetsResponse = models.BatchRegisterTargetsResponse;
 const Target = models.Target;
 const DescribeBlockIPListRequest = models.DescribeBlockIPListRequest;
 const CertIdRelatedWithLoadBalancers = models.CertIdRelatedWithLoadBalancers;
 const DescribeClassicalLBHealthStatusResponse = models.DescribeClassicalLBHealthStatusResponse;
-const RuleHealth = models.RuleHealth;
+const DescribeClsLogSetRequest = models.DescribeClsLogSetRequest;
 const Listener = models.Listener;
 const ModifyLoadBalancerAttributesResponse = models.ModifyLoadBalancerAttributesResponse;
 const RegisterTargetsWithClassicalLBRequest = models.RegisterTargetsWithClassicalLBRequest;
@@ -78,6 +80,7 @@ const DeregisterTargetGroupInstancesResponse = models.DeregisterTargetGroupInsta
 const RegisterTargetsRequest = models.RegisterTargetsRequest;
 const HealthCheck = models.HealthCheck;
 const AssociateTargetGroupsResponse = models.AssociateTargetGroupsResponse;
+const CreateTopicRequest = models.CreateTopicRequest;
 const DeleteListenerRequest = models.DeleteListenerRequest;
 const ClassicalHealth = models.ClassicalHealth;
 const ModifyTargetPortResponse = models.ModifyTargetPortResponse;
@@ -89,16 +92,18 @@ const ModifyBlockIPListResponse = models.ModifyBlockIPListResponse;
 const ExclusiveCluster = models.ExclusiveCluster;
 const DescribeClassicalLBHealthStatusRequest = models.DescribeClassicalLBHealthStatusRequest;
 const ModifyDomainRequest = models.ModifyDomainRequest;
+const CreateClsLogSetResponse = models.CreateClsLogSetResponse;
 const Backend = models.Backend;
 const LBChargePrepaid = models.LBChargePrepaid;
 const ClassicalListener = models.ClassicalListener;
+const DeleteLoadBalancerRequest = models.DeleteLoadBalancerRequest;
 const CertificateInput = models.CertificateInput;
 const CreateListenerResponse = models.CreateListenerResponse;
 const CreateTargetGroupResponse = models.CreateTargetGroupResponse;
 const CreateLoadBalancerSnatIpsResponse = models.CreateLoadBalancerSnatIpsResponse;
 const ClassicalLoadBalancerInfo = models.ClassicalLoadBalancerInfo;
 const RuleOutput = models.RuleOutput;
-const DeleteLoadBalancerRequest = models.DeleteLoadBalancerRequest;
+const CreateTopicResponse = models.CreateTopicResponse;
 const CreateRuleRequest = models.CreateRuleRequest;
 const ModifyTargetGroupInstancesPortResponse = models.ModifyTargetGroupInstancesPortResponse;
 const RuleTargets = models.RuleTargets;
@@ -111,6 +116,7 @@ const DescribeTargetGroupInstancesResponse = models.DescribeTargetGroupInstances
 const CreateTargetGroupRequest = models.CreateTargetGroupRequest;
 const ClusterItem = models.ClusterItem;
 const CreateListenerRequest = models.CreateListenerRequest;
+const CreateClsLogSetRequest = models.CreateClsLogSetRequest;
 const DisassociateTargetGroupsRequest = models.DisassociateTargetGroupsRequest;
 const Filter = models.Filter;
 const ModifyDomainResponse = models.ModifyDomainResponse;
@@ -128,10 +134,10 @@ const DeleteRewriteResponse = models.DeleteRewriteResponse;
 const BatchTarget = models.BatchTarget;
 const DescribeLoadBalancerListByCertIdRequest = models.DescribeLoadBalancerListByCertIdRequest;
 const TargetRegionInfo = models.TargetRegionInfo;
-const BatchRegisterTargetsResponse = models.BatchRegisterTargetsResponse;
+const DescribeTargetHealthRequest = models.DescribeTargetHealthRequest;
 const ReplaceCertForLoadBalancersRequest = models.ReplaceCertForLoadBalancersRequest;
 const DeleteRuleResponse = models.DeleteRuleResponse;
-const SetLoadBalancerClsLogRequest = models.SetLoadBalancerClsLogRequest;
+const DescribeClsLogSetResponse = models.DescribeClsLogSetResponse;
 const ModifyTargetGroupAttributeRequest = models.ModifyTargetGroupAttributeRequest;
 const ModifyDomainAttributesRequest = models.ModifyDomainAttributesRequest;
 const DeregisterTargetsRequest = models.DeregisterTargetsRequest;
@@ -214,6 +220,17 @@ class ClbClient extends AbstractClient {
     DescribeClassicalLBListeners(req, cb) {
         let resp = new DescribeClassicalLBListenersResponse();
         this.request("DescribeClassicalLBListeners", req, resp, cb);
+    }
+
+    /**
+     * 创建主题，默认开启全文索引和键值索引。如果不存在clb专有日志集，则创建失败。
+     * @param {CreateTopicRequest} req
+     * @param {function(string, CreateTopicResponse):void} cb
+     * @public
+     */
+    CreateTopic(req, cb) {
+        let resp = new CreateTopicResponse();
+        this.request("CreateTopic", req, resp, cb);
     }
 
     /**
@@ -357,6 +374,18 @@ class ClbClient extends AbstractClient {
     }
 
     /**
+     * 修改负载均衡的IP（client IP）封禁黑名单列表，一个转发规则最多支持封禁 2000000 个IP，及黑名单容量为 2000000。
+（接口灰度中，如需使用请提工单）
+     * @param {ModifyBlockIPListRequest} req
+     * @param {function(string, ModifyBlockIPListResponse):void} cb
+     * @public
+     */
+    ModifyBlockIPList(req, cb) {
+        let resp = new ModifyBlockIPListResponse();
+        this.request("ModifyBlockIPList", req, resp, cb);
+    }
+
+    /**
      * DeregisterTargetsFromClassicalLB 接口用于解绑负载均衡后端服务。
 本接口为异步接口，接口返回成功后，需以返回的 RequestId 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
      * @param {DeregisterTargetsFromClassicalLBRequest} req
@@ -369,14 +398,14 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * 针对SnatPro负载均衡，这个接口用于添加SnatIp，如果负载均衡没有开启SnatPro，添加SnatIp后会自动开启
-     * @param {CreateLoadBalancerSnatIpsRequest} req
-     * @param {function(string, CreateLoadBalancerSnatIpsResponse):void} cb
+     * 创建clb专有日志集，此日志集用于存储clb的日志。
+     * @param {CreateClsLogSetRequest} req
+     * @param {function(string, CreateClsLogSetResponse):void} cb
      * @public
      */
-    CreateLoadBalancerSnatIps(req, cb) {
-        let resp = new CreateLoadBalancerSnatIpsResponse();
-        this.request("CreateLoadBalancerSnatIps", req, resp, cb);
+    CreateClsLogSet(req, cb) {
+        let resp = new CreateClsLogSetResponse();
+        this.request("CreateClsLogSet", req, resp, cb);
     }
 
     /**
@@ -534,6 +563,17 @@ class ClbClient extends AbstractClient {
     }
 
     /**
+     * 获取用户的clb独占日志集。
+     * @param {DescribeClsLogSetRequest} req
+     * @param {function(string, DescribeClsLogSetResponse):void} cb
+     * @public
+     */
+    DescribeClsLogSet(req, cb) {
+        let resp = new DescribeClsLogSetResponse();
+        this.request("DescribeClsLogSet", req, resp, cb);
+    }
+
+    /**
      * ModifyTargetPort接口用于修改监听器绑定的后端服务的端口。
 本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
      * @param {ModifyTargetPortRequest} req
@@ -603,15 +643,14 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * 修改负载均衡的IP（client IP）封禁黑名单列表，一个转发规则最多支持封禁 2000000 个IP，及黑名单容量为 2000000。
-（接口灰度中，如需使用请提工单）
-     * @param {ModifyBlockIPListRequest} req
-     * @param {function(string, ModifyBlockIPListResponse):void} cb
+     * 根据 ModifyBlockIPList 接口返回的异步任务的ID，查询封禁IP（黑名单）异步任务的执行状态。（接口灰度中，如需使用请提工单）
+     * @param {DescribeBlockIPTaskRequest} req
+     * @param {function(string, DescribeBlockIPTaskResponse):void} cb
      * @public
      */
-    ModifyBlockIPList(req, cb) {
-        let resp = new ModifyBlockIPListResponse();
-        this.request("ModifyBlockIPList", req, resp, cb);
+    DescribeBlockIPTask(req, cb) {
+        let resp = new DescribeBlockIPTaskResponse();
+        this.request("DescribeBlockIPTask", req, resp, cb);
     }
 
     /**
@@ -740,14 +779,14 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * 根据 ModifyBlockIPList 接口返回的异步任务的ID，查询封禁IP（黑名单）异步任务的执行状态。（接口灰度中，如需使用请提工单）
-     * @param {DescribeBlockIPTaskRequest} req
-     * @param {function(string, DescribeBlockIPTaskResponse):void} cb
+     * 针对SnatPro负载均衡，这个接口用于添加SnatIp，如果负载均衡没有开启SnatPro，添加SnatIp后会自动开启
+     * @param {CreateLoadBalancerSnatIpsRequest} req
+     * @param {function(string, CreateLoadBalancerSnatIpsResponse):void} cb
      * @public
      */
-    DescribeBlockIPTask(req, cb) {
-        let resp = new DescribeBlockIPTaskResponse();
-        this.request("DescribeBlockIPTask", req, resp, cb);
+    CreateLoadBalancerSnatIps(req, cb) {
+        let resp = new CreateLoadBalancerSnatIpsResponse();
+        this.request("CreateLoadBalancerSnatIps", req, resp, cb);
     }
 
     /**

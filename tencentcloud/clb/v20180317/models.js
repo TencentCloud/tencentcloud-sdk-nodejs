@@ -508,6 +508,66 @@ OPEN：公网属性， INTERNAL：内网属性。
 }
 
 /**
+ * 一条转发规则的健康检查状态
+ * @class
+ */
+class RuleHealth extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 转发规则ID
+         * @type {string || null}
+         */
+        this.LocationId = null;
+
+        /**
+         * 转发规则的域名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 转发规则的Url
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 本规则上绑定的后端的健康检查状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<TargetHealth> || null}
+         */
+        this.Targets = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LocationId = 'LocationId' in params ? params.LocationId : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Url = 'Url' in params ? params.Url : null;
+
+        if (params.Targets) {
+            this.Targets = new Array();
+            for (let z in params.Targets) {
+                let obj = new TargetHealth();
+                obj.deserialize(params.Targets[z]);
+                this.Targets.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DeleteRule请求参数结构体
  * @class
  */
@@ -1711,6 +1771,48 @@ class LoadBalancerHealth extends  AbstractModel {
 }
 
 /**
+ * SetLoadBalancerClsLog请求参数结构体
+ * @class
+ */
+class SetLoadBalancerClsLogRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 负载均衡实例 ID
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * 日志服务(CLS)的日志集ID
+         * @type {string || null}
+         */
+        this.LogSetId = null;
+
+        /**
+         * 日志服务(CLS)的日志主题ID
+         * @type {string || null}
+         */
+        this.LogTopicId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.LogSetId = 'LogSetId' in params ? params.LogSetId : null;
+        this.LogTopicId = 'LogTopicId' in params ? params.LogTopicId : null;
+
+    }
+}
+
+/**
  * DeleteLoadBalancerListeners请求参数结构体
  * @class
  */
@@ -2100,18 +2202,25 @@ class DescribeTaskStatusResponse extends  AbstractModel {
 }
 
 /**
- * DescribeTargetHealth请求参数结构体
+ * BatchRegisterTargets返回参数结构体
  * @class
  */
-class DescribeTargetHealthRequest extends  AbstractModel {
+class BatchRegisterTargetsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 要查询的负载均衡实例 ID列表
+         * 绑定失败的监听器ID，如为空表示全部绑定成功。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
-        this.LoadBalancerIds = null;
+        this.FailListenerIdSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -2122,7 +2231,8 @@ class DescribeTargetHealthRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerIds = 'LoadBalancerIds' in params ? params.LoadBalancerIds : null;
+        this.FailListenerIdSet = 'FailListenerIdSet' in params ? params.FailListenerIdSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2319,39 +2429,12 @@ class DescribeClassicalLBHealthStatusResponse extends  AbstractModel {
 }
 
 /**
- * 一条转发规则的健康检查状态
+ * DescribeClsLogSet请求参数结构体
  * @class
  */
-class RuleHealth extends  AbstractModel {
+class DescribeClsLogSetRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 转发规则ID
-         * @type {string || null}
-         */
-        this.LocationId = null;
-
-        /**
-         * 转发规则的域名
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Domain = null;
-
-        /**
-         * 转发规则的Url
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Url = null;
-
-        /**
-         * 本规则上绑定的后端的健康检查状态
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<TargetHealth> || null}
-         */
-        this.Targets = null;
 
     }
 
@@ -2361,18 +2444,6 @@ class RuleHealth extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
-        }
-        this.LocationId = 'LocationId' in params ? params.LocationId : null;
-        this.Domain = 'Domain' in params ? params.Domain : null;
-        this.Url = 'Url' in params ? params.Url : null;
-
-        if (params.Targets) {
-            this.Targets = new Array();
-            for (let z in params.Targets) {
-                let obj = new TargetHealth();
-                obj.deserialize(params.Targets[z]);
-                this.Targets.push(obj);
-            }
         }
 
     }
@@ -3024,6 +3095,41 @@ class AssociateTargetGroupsResponse extends  AbstractModel {
 }
 
 /**
+ * CreateTopic请求参数结构体
+ * @class
+ */
+class CreateTopicRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志主题的名字
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * 主题分区 partition个数，不传参默认创建1个，最大创建允许10个，分裂/合并操作会改变分区数量，整体上限50个。
+         * @type {number || null}
+         */
+        this.PartitionCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.PartitionCount = 'PartitionCount' in params ? params.PartitionCount : null;
+
+    }
+}
+
+/**
  * DeleteListener请求参数结构体
  * @class
  */
@@ -3549,6 +3655,41 @@ class ModifyDomainRequest extends  AbstractModel {
 }
 
 /**
+ * CreateClsLogSet返回参数结构体
+ * @class
+ */
+class CreateClsLogSetResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志集的 ID。
+         * @type {string || null}
+         */
+        this.LogsetId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 监听器绑定的后端服务的详细信息
  * @class
  */
@@ -3817,6 +3958,34 @@ class ClassicalListener extends  AbstractModel {
         this.CertId = 'CertId' in params ? params.CertId : null;
         this.CertCaId = 'CertCaId' in params ? params.CertCaId : null;
         this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * DeleteLoadBalancer请求参数结构体
+ * @class
+ */
+class DeleteLoadBalancerRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 要删除的负载均衡实例 ID数组，数组大小最大支持20
+         * @type {Array.<string> || null}
+         */
+        this.LoadBalancerIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerIds = 'LoadBalancerIds' in params ? params.LoadBalancerIds : null;
 
     }
 }
@@ -4231,18 +4400,24 @@ class RuleOutput extends  AbstractModel {
 }
 
 /**
- * DeleteLoadBalancer请求参数结构体
+ * CreateTopic返回参数结构体
  * @class
  */
-class DeleteLoadBalancerRequest extends  AbstractModel {
+class CreateTopicResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 要删除的负载均衡实例 ID数组，数组大小最大支持20
-         * @type {Array.<string> || null}
+         * 日志主题的 ID
+         * @type {string || null}
          */
-        this.LoadBalancerIds = null;
+        this.TopicId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -4253,7 +4428,8 @@ class DeleteLoadBalancerRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerIds = 'LoadBalancerIds' in params ? params.LoadBalancerIds : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4865,6 +5041,41 @@ class CreateListenerRequest extends  AbstractModel {
         this.Scheduler = 'Scheduler' in params ? params.Scheduler : null;
         this.SniSwitch = 'SniSwitch' in params ? params.SniSwitch : null;
         this.TargetType = 'TargetType' in params ? params.TargetType : null;
+
+    }
+}
+
+/**
+ * CreateClsLogSet请求参数结构体
+ * @class
+ */
+class CreateClsLogSetRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志集的保存周期，单位：天，最大 90。
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * 日志集的名字，不能和cls其他日志集重名。不填默认为clb_logset。
+         * @type {string || null}
+         */
+        this.LogsetName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Period = 'Period' in params ? params.Period : null;
+        this.LogsetName = 'LogsetName' in params ? params.LogsetName : null;
 
     }
 }
@@ -5634,25 +5845,18 @@ class TargetRegionInfo extends  AbstractModel {
 }
 
 /**
- * BatchRegisterTargets返回参数结构体
+ * DescribeTargetHealth请求参数结构体
  * @class
  */
-class BatchRegisterTargetsResponse extends  AbstractModel {
+class DescribeTargetHealthRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 绑定失败的监听器ID，如为空表示全部绑定成功。
-注意：此字段可能返回 null，表示取不到有效值。
+         * 要查询的负载均衡实例 ID列表
          * @type {Array.<string> || null}
          */
-        this.FailListenerIdSet = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.LoadBalancerIds = null;
 
     }
 
@@ -5663,8 +5867,7 @@ class BatchRegisterTargetsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FailListenerIdSet = 'FailListenerIdSet' in params ? params.FailListenerIdSet : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.LoadBalancerIds = 'LoadBalancerIds' in params ? params.LoadBalancerIds : null;
 
     }
 }
@@ -5738,30 +5941,24 @@ class DeleteRuleResponse extends  AbstractModel {
 }
 
 /**
- * SetLoadBalancerClsLog请求参数结构体
+ * DescribeClsLogSet返回参数结构体
  * @class
  */
-class SetLoadBalancerClsLogRequest extends  AbstractModel {
+class DescribeClsLogSetResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 负载均衡实例 ID
+         * 日志集的 ID。
          * @type {string || null}
          */
-        this.LoadBalancerId = null;
+        this.LogsetId = null;
 
         /**
-         * 日志服务(CLS)的日志集ID
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.LogSetId = null;
-
-        /**
-         * 日志服务(CLS)的日志主题ID
-         * @type {string || null}
-         */
-        this.LogTopicId = null;
+        this.RequestId = null;
 
     }
 
@@ -5772,9 +5969,8 @@ class SetLoadBalancerClsLogRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
-        this.LogSetId = 'LogSetId' in params ? params.LogSetId : null;
-        this.LogTopicId = 'LogTopicId' in params ? params.LogTopicId : null;
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8026,6 +8222,7 @@ module.exports = {
     BatchModifyTargetWeightResponse: BatchModifyTargetWeightResponse,
     SetSecurityGroupForLoadbalancersRequest: SetSecurityGroupForLoadbalancersRequest,
     CreateLoadBalancerRequest: CreateLoadBalancerRequest,
+    RuleHealth: RuleHealth,
     DeleteRuleRequest: DeleteRuleRequest,
     ModifyLoadBalancerAttributesRequest: ModifyLoadBalancerAttributesRequest,
     SetLoadBalancerClsLogResponse: SetLoadBalancerClsLogResponse,
@@ -8052,6 +8249,7 @@ module.exports = {
     RegisterTargetsWithClassicalLBResponse: RegisterTargetsWithClassicalLBResponse,
     DescribeTargetGroupsResponse: DescribeTargetGroupsResponse,
     LoadBalancerHealth: LoadBalancerHealth,
+    SetLoadBalancerClsLogRequest: SetLoadBalancerClsLogRequest,
     DeleteLoadBalancerListenersRequest: DeleteLoadBalancerListenersRequest,
     BlockedIP: BlockedIP,
     ModifyRuleResponse: ModifyRuleResponse,
@@ -8062,12 +8260,12 @@ module.exports = {
     ModifyTargetGroupInstancesWeightResponse: ModifyTargetGroupInstancesWeightResponse,
     DescribeTargetGroupsRequest: DescribeTargetGroupsRequest,
     DescribeTaskStatusResponse: DescribeTaskStatusResponse,
-    DescribeTargetHealthRequest: DescribeTargetHealthRequest,
+    BatchRegisterTargetsResponse: BatchRegisterTargetsResponse,
     Target: Target,
     DescribeBlockIPListRequest: DescribeBlockIPListRequest,
     CertIdRelatedWithLoadBalancers: CertIdRelatedWithLoadBalancers,
     DescribeClassicalLBHealthStatusResponse: DescribeClassicalLBHealthStatusResponse,
-    RuleHealth: RuleHealth,
+    DescribeClsLogSetRequest: DescribeClsLogSetRequest,
     Listener: Listener,
     ModifyLoadBalancerAttributesResponse: ModifyLoadBalancerAttributesResponse,
     RegisterTargetsWithClassicalLBRequest: RegisterTargetsWithClassicalLBRequest,
@@ -8078,6 +8276,7 @@ module.exports = {
     RegisterTargetsRequest: RegisterTargetsRequest,
     HealthCheck: HealthCheck,
     AssociateTargetGroupsResponse: AssociateTargetGroupsResponse,
+    CreateTopicRequest: CreateTopicRequest,
     DeleteListenerRequest: DeleteListenerRequest,
     ClassicalHealth: ClassicalHealth,
     ModifyTargetPortResponse: ModifyTargetPortResponse,
@@ -8089,16 +8288,18 @@ module.exports = {
     ExclusiveCluster: ExclusiveCluster,
     DescribeClassicalLBHealthStatusRequest: DescribeClassicalLBHealthStatusRequest,
     ModifyDomainRequest: ModifyDomainRequest,
+    CreateClsLogSetResponse: CreateClsLogSetResponse,
     Backend: Backend,
     LBChargePrepaid: LBChargePrepaid,
     ClassicalListener: ClassicalListener,
+    DeleteLoadBalancerRequest: DeleteLoadBalancerRequest,
     CertificateInput: CertificateInput,
     CreateListenerResponse: CreateListenerResponse,
     CreateTargetGroupResponse: CreateTargetGroupResponse,
     CreateLoadBalancerSnatIpsResponse: CreateLoadBalancerSnatIpsResponse,
     ClassicalLoadBalancerInfo: ClassicalLoadBalancerInfo,
     RuleOutput: RuleOutput,
-    DeleteLoadBalancerRequest: DeleteLoadBalancerRequest,
+    CreateTopicResponse: CreateTopicResponse,
     CreateRuleRequest: CreateRuleRequest,
     ModifyTargetGroupInstancesPortResponse: ModifyTargetGroupInstancesPortResponse,
     RuleTargets: RuleTargets,
@@ -8111,6 +8312,7 @@ module.exports = {
     CreateTargetGroupRequest: CreateTargetGroupRequest,
     ClusterItem: ClusterItem,
     CreateListenerRequest: CreateListenerRequest,
+    CreateClsLogSetRequest: CreateClsLogSetRequest,
     DisassociateTargetGroupsRequest: DisassociateTargetGroupsRequest,
     Filter: Filter,
     ModifyDomainResponse: ModifyDomainResponse,
@@ -8128,10 +8330,10 @@ module.exports = {
     BatchTarget: BatchTarget,
     DescribeLoadBalancerListByCertIdRequest: DescribeLoadBalancerListByCertIdRequest,
     TargetRegionInfo: TargetRegionInfo,
-    BatchRegisterTargetsResponse: BatchRegisterTargetsResponse,
+    DescribeTargetHealthRequest: DescribeTargetHealthRequest,
     ReplaceCertForLoadBalancersRequest: ReplaceCertForLoadBalancersRequest,
     DeleteRuleResponse: DeleteRuleResponse,
-    SetLoadBalancerClsLogRequest: SetLoadBalancerClsLogRequest,
+    DescribeClsLogSetResponse: DescribeClsLogSetResponse,
     ModifyTargetGroupAttributeRequest: ModifyTargetGroupAttributeRequest,
     ModifyDomainAttributesRequest: ModifyDomainAttributesRequest,
     DeregisterTargetsRequest: DeregisterTargetsRequest,

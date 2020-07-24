@@ -972,6 +972,39 @@ class TextOutputID extends  AbstractModel {
 }
 
 /**
+ * ManualReview请求参数结构体
+ * @class
+ */
+class ManualReviewRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 人工审核信息
+         * @type {ManualReviewContent || null}
+         */
+        this.ReviewContent = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ReviewContent) {
+            let obj = new ManualReviewContent();
+            obj.deserialize(params.ReviewContent)
+            this.ReviewContent = obj;
+        }
+
+    }
+}
+
+/**
  * 用户相关信息
  * @class
  */
@@ -1673,6 +1706,12 @@ class RiskDetails extends  AbstractModel {
          * 风险类别，RiskAccount，RiskIP, RiskIMEI
          * @type {string || null}
          */
+        this.Label = null;
+
+        /**
+         * 预留字段，暂时不用
+         * @type {string || null}
+         */
         this.Lable = null;
 
         /**
@@ -1691,6 +1730,7 @@ class RiskDetails extends  AbstractModel {
             return;
         }
         this.Keywords = 'Keywords' in params ? params.Keywords : null;
+        this.Label = 'Label' in params ? params.Label : null;
         this.Lable = 'Lable' in params ? params.Lable : null;
         this.Level = 'Level' in params ? params.Level : null;
 
@@ -1819,6 +1859,41 @@ class Filter extends  AbstractModel {
 }
 
 /**
+ * 人工审核接口返回结果，由ContentId和BatchId组成
+ * @class
+ */
+class ManualReviewData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 人审内容批次号
+         * @type {string || null}
+         */
+        this.BatchId = null;
+
+        /**
+         * 人审内容ID
+         * @type {string || null}
+         */
+        this.ContentId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BatchId = 'BatchId' in params ? params.BatchId : null;
+        this.ContentId = 'ContentId' in params ? params.ContentId : null;
+
+    }
+}
+
+/**
  * OCR识别结果详情
  * @class
  */
@@ -1857,6 +1932,117 @@ class OCRDetect extends  AbstractModel {
             }
         }
         this.TextInfo = 'TextInfo' in params ? params.TextInfo : null;
+
+    }
+}
+
+/**
+ * 人审审核数据相关信息
+ * @class
+ */
+class ManualReviewContent extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 审核批次号
+         * @type {string || null}
+         */
+        this.BatchId = null;
+
+        /**
+         * 审核内容
+         * @type {string || null}
+         */
+        this.Content = null;
+
+        /**
+         * 消息Id
+         * @type {string || null}
+         */
+        this.ContentId = null;
+
+        /**
+         * 审核内容类型 1 图片 2 视频 3 文本 4 音频
+         * @type {number || null}
+         */
+        this.ContentType = null;
+
+        /**
+         * 用户信息
+         * @type {User || null}
+         */
+        this.UserInfo = null;
+
+        /**
+         * 机器审核类型，与腾讯机器审核定义一致
+100 正常
+20001 政治
+20002 色情
+20006 违法
+20007 谩骂
+24001 暴恐
+20105 广告
+20103 性感
+         * @type {number || null}
+         */
+        this.AutoDetailCode = null;
+
+        /**
+         * 机器审核结果 0 放过 1 拦截
+         * @type {number || null}
+         */
+        this.AutoResult = null;
+
+        /**
+         * 回调信息标识，回传数据时原样返回
+         * @type {string || null}
+         */
+        this.CallBackInfo = null;
+
+        /**
+         * 创建时间 格式“2020-01-01 00:00:12”
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 审核优先级，可选值 [1,2,3,4]，其中 1 最高，4 最低
+         * @type {number || null}
+         */
+        this.Priority = null;
+
+        /**
+         * 标题
+         * @type {string || null}
+         */
+        this.Title = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BatchId = 'BatchId' in params ? params.BatchId : null;
+        this.Content = 'Content' in params ? params.Content : null;
+        this.ContentId = 'ContentId' in params ? params.ContentId : null;
+        this.ContentType = 'ContentType' in params ? params.ContentType : null;
+
+        if (params.UserInfo) {
+            let obj = new User();
+            obj.deserialize(params.UserInfo)
+            this.UserInfo = obj;
+        }
+        this.AutoDetailCode = 'AutoDetailCode' in params ? params.AutoDetailCode : null;
+        this.AutoResult = 'AutoResult' in params ? params.AutoResult : null;
+        this.CallBackInfo = 'CallBackInfo' in params ? params.CallBackInfo : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Priority = 'Priority' in params ? params.Priority : null;
+        this.Title = 'Title' in params ? params.Title : null;
 
     }
 }
@@ -2486,6 +2672,46 @@ class CreateFileSampleResponse extends  AbstractModel {
 }
 
 /**
+ * ManualReview返回参数结构体
+ * @class
+ */
+class ManualReviewResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 人审接口同步响应结果
+         * @type {ManualReviewData || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new ManualReviewData();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * LogoDetail
  * @class
  */
@@ -2662,6 +2888,7 @@ module.exports = {
     TextSample: TextSample,
     CreateTextSampleResponse: CreateTextSampleResponse,
     TextOutputID: TextOutputID,
+    ManualReviewRequest: ManualReviewRequest,
     User: User,
     FileSampleInfo: FileSampleInfo,
     DescribeFileSampleRequest: DescribeFileSampleRequest,
@@ -2678,7 +2905,9 @@ module.exports = {
     CreateTextSampleRequest: CreateTextSampleRequest,
     DeleteFileSampleRequest: DeleteFileSampleRequest,
     Filter: Filter,
+    ManualReviewData: ManualReviewData,
     OCRDetect: OCRDetect,
+    ManualReviewContent: ManualReviewContent,
     Coordinate: Coordinate,
     Similar: Similar,
     ImageHotDetect: ImageHotDetect,
@@ -2690,6 +2919,7 @@ module.exports = {
     ImageIllegalDetect: ImageIllegalDetect,
     RrectF: RrectF,
     CreateFileSampleResponse: CreateFileSampleResponse,
+    ManualReviewResponse: ManualReviewResponse,
     LogoDetail: LogoDetail,
     Logo: Logo,
     PhoneDetect: PhoneDetect,

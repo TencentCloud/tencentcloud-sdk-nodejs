@@ -4586,6 +4586,12 @@ class DescribePolicyGroupListRequest extends  AbstractModel {
          */
         this.ReceiverType = null;
 
+        /**
+         * 过滤条件，告警策略是否已启动或停止
+         * @type {boolean || null}
+         */
+        this.IsOpen = null;
+
     }
 
     /**
@@ -4609,6 +4615,7 @@ class DescribePolicyGroupListRequest extends  AbstractModel {
         this.Dimensions = 'Dimensions' in params ? params.Dimensions : null;
         this.ConditionTempGroupId = 'ConditionTempGroupId' in params ? params.ConditionTempGroupId : null;
         this.ReceiverType = 'ReceiverType' in params ? params.ReceiverType : null;
+        this.IsOpen = 'IsOpen' in params ? params.IsOpen : null;
 
     }
 }

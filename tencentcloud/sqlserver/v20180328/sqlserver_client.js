@@ -20,16 +20,19 @@ const DescribeReadOnlyGroupDetailsRequest = models.DescribeReadOnlyGroupDetailsR
 const CreateDBInstancesRequest = models.CreateDBInstancesRequest;
 const InstanceRenewInfo = models.InstanceRenewInfo;
 const DealInfo = models.DealInfo;
-const DescribeAccountsRequest = models.DescribeAccountsRequest;
+const CreateBasicDBInstancesResponse = models.CreateBasicDBInstancesResponse;
+const DescribeFlowStatusRequest = models.DescribeFlowStatusRequest;
 const DescribeMaintenanceSpanResponse = models.DescribeMaintenanceSpanResponse;
 const CreatePublishSubscribeRequest = models.CreatePublishSubscribeRequest;
 const CreateMigrationResponse = models.CreateMigrationResponse;
 const DatabaseTuple = models.DatabaseTuple;
 const RegionInfo = models.RegionInfo;
 const DeletePublishSubscribeRequest = models.DeletePublishSubscribeRequest;
+const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
 const DatabaseTupleStatus = models.DatabaseTupleStatus;
 const ModifyReadOnlyGroupDetailsResponse = models.ModifyReadOnlyGroupDetailsResponse;
 const ModifyBackupStrategyResponse = models.ModifyBackupStrategyResponse;
+const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
 const MigrateDetail = models.MigrateDetail;
 const RunMigrationResponse = models.RunMigrationResponse;
 const DescribeProductConfigRequest = models.DescribeProductConfigRequest;
@@ -47,12 +50,13 @@ const DescribeRollbackTimeResponse = models.DescribeRollbackTimeResponse;
 const RestoreInstanceRequest = models.RestoreInstanceRequest;
 const DescribeReadOnlyGroupByReadOnlyInstanceResponse = models.DescribeReadOnlyGroupByReadOnlyInstanceResponse;
 const RunMigrationRequest = models.RunMigrationRequest;
+const SecurityGroupPolicy = models.SecurityGroupPolicy;
 const RestoreInstanceResponse = models.RestoreInstanceResponse;
 const ModifyMaintenanceSpanResponse = models.ModifyMaintenanceSpanResponse;
 const ZoneInfo = models.ZoneInfo;
 const InquiryPriceCreateDBInstancesRequest = models.InquiryPriceCreateDBInstancesRequest;
 const ModifyMaintenanceSpanRequest = models.ModifyMaintenanceSpanRequest;
-const DescribeMigrationDetailRequest = models.DescribeMigrationDetailRequest;
+const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const MigrateTask = models.MigrateTask;
 const SpecInfo = models.SpecInfo;
 const DescribeOrdersResponse = models.DescribeOrdersResponse;
@@ -62,9 +66,10 @@ const RemoveBackupsRequest = models.RemoveBackupsRequest;
 const DBCreateInfo = models.DBCreateInfo;
 const AccountPrivilege = models.AccountPrivilege;
 const ModifyMigrationResponse = models.ModifyMigrationResponse;
-const AccountCreateInfo = models.AccountCreateInfo;
+const DescribeZonesResponse = models.DescribeZonesResponse;
 const DescribeDBsResponse = models.DescribeDBsResponse;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
+const DescribeDBSecurityGroupsRequest = models.DescribeDBSecurityGroupsRequest;
 const SlowlogInfo = models.SlowlogInfo;
 const ModifyAccountRemarkResponse = models.ModifyAccountRemarkResponse;
 const DescribeMigrationsResponse = models.DescribeMigrationsResponse;
@@ -72,25 +77,32 @@ const ModifyBackupStrategyRequest = models.ModifyBackupStrategyRequest;
 const RenewDBInstanceRequest = models.RenewDBInstanceRequest;
 const DescribeZonesRequest = models.DescribeZonesRequest;
 const DeleteDBRequest = models.DeleteDBRequest;
+const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
 const ModifyDBInstanceRenewFlagResponse = models.ModifyDBInstanceRenewFlagResponse;
 const CompleteExpansionResponse = models.CompleteExpansionResponse;
 const MigrateSource = models.MigrateSource;
 const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
 const ReadOnlyGroup = models.ReadOnlyGroup;
+const CreateReadOnlyDBInstancesRequest = models.CreateReadOnlyDBInstancesRequest;
 const ModifyAccountPrivilegeRequest = models.ModifyAccountPrivilegeRequest;
 const DescribeMigrationsRequest = models.DescribeMigrationsRequest;
-const InquiryPriceRenewDBInstanceResponse = models.InquiryPriceRenewDBInstanceResponse;
-const DescribeFlowStatusRequest = models.DescribeFlowStatusRequest;
+const InstanceDBDetail = models.InstanceDBDetail;
 const DescribeDBsRequest = models.DescribeDBsRequest;
 const CompleteExpansionRequest = models.CompleteExpansionRequest;
+const RenewPostpaidDBInstanceRequest = models.RenewPostpaidDBInstanceRequest;
 const DescribeBackupsResponse = models.DescribeBackupsResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const DescribeFlowStatusResponse = models.DescribeFlowStatusResponse;
+const CreateReadOnlyDBInstancesResponse = models.CreateReadOnlyDBInstancesResponse;
 const DeleteMigrationRequest = models.DeleteMigrationRequest;
+const DescribeMigrationDetailRequest = models.DescribeMigrationDetailRequest;
+const ModifyDBInstanceSecurityGroupsRequest = models.ModifyDBInstanceSecurityGroupsRequest;
 const DBPrivilegeModifyInfo = models.DBPrivilegeModifyInfo;
 const RemoveBackupsResponse = models.RemoveBackupsResponse;
 const TerminateDBInstanceRequest = models.TerminateDBInstanceRequest;
 const CreateDBRequest = models.CreateDBRequest;
+const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
+const SecurityGroup = models.SecurityGroup;
 const ReadOnlyInstance = models.ReadOnlyInstance;
 const InquiryPriceUpgradeDBInstanceRequest = models.InquiryPriceUpgradeDBInstanceRequest;
 const ModifyDBRemarkRequest = models.ModifyDBRemarkRequest;
@@ -98,26 +110,29 @@ const ReadOnlyInstanceWeightPair = models.ReadOnlyInstanceWeightPair;
 const ModifyDBInstanceNameRequest = models.ModifyDBInstanceNameRequest;
 const AccountPassword = models.AccountPassword;
 const DeleteMigrationResponse = models.DeleteMigrationResponse;
-const InstanceDBDetail = models.InstanceDBDetail;
+const InquiryPriceRenewDBInstanceResponse = models.InquiryPriceRenewDBInstanceResponse;
 const InquiryPriceRenewDBInstanceRequest = models.InquiryPriceRenewDBInstanceRequest;
 const TerminateDBInstanceResponse = models.TerminateDBInstanceResponse;
 const DbRollbackTimeInfo = models.DbRollbackTimeInfo;
+const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
 const DescribeReadOnlyGroupListRequest = models.DescribeReadOnlyGroupListRequest;
 const CreateBackupResponse = models.CreateBackupResponse;
 const DBInstance = models.DBInstance;
 const DescribeProductConfigResponse = models.DescribeProductConfigResponse;
 const CreateMigrationRequest = models.CreateMigrationRequest;
 const AccountDetail = models.AccountDetail;
+const CreateBasicDBInstancesRequest = models.CreateBasicDBInstancesRequest;
 const ModifyDBNameResponse = models.ModifyDBNameResponse;
 const DescribePublishSubscribeResponse = models.DescribePublishSubscribeResponse;
 const ModifyDBNameRequest = models.ModifyDBNameRequest;
 const ModifyDBInstanceRenewFlagRequest = models.ModifyDBInstanceRenewFlagRequest;
 const Backup = models.Backup;
 const AccountRemark = models.AccountRemark;
+const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
 const ModifyDBInstanceNameResponse = models.ModifyDBInstanceNameResponse;
 const AccountPrivilegeModifyInfo = models.AccountPrivilegeModifyInfo;
 const MigrateTarget = models.MigrateTarget;
-const DescribeZonesResponse = models.DescribeZonesResponse;
+const AccountCreateInfo = models.AccountCreateInfo;
 const RenewDBInstanceResponse = models.RenewDBInstanceResponse;
 const DBPrivilege = models.DBPrivilege;
 const DescribeOrdersRequest = models.DescribeOrdersRequest;
@@ -134,7 +149,9 @@ const DeletePublishSubscribeResponse = models.DeletePublishSubscribeResponse;
 const InquiryPriceUpgradeDBInstanceResponse = models.InquiryPriceUpgradeDBInstanceResponse;
 const DescribeMigrationDetailResponse = models.DescribeMigrationDetailResponse;
 const ModifyMigrationRequest = models.ModifyMigrationRequest;
+const DeleteDBInstanceRequest = models.DeleteDBInstanceRequest;
 const CreateAccountResponse = models.CreateAccountResponse;
+const RenewPostpaidDBInstanceResponse = models.RenewPostpaidDBInstanceResponse;
 const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
 const DeleteDBResponse = models.DeleteDBResponse;
 const CreateDBResponse = models.CreateDBResponse;
@@ -144,14 +161,17 @@ const DescribeSlowlogsResponse = models.DescribeSlowlogsResponse;
 const DBDetail = models.DBDetail;
 const ResetAccountPasswordRequest = models.ResetAccountPasswordRequest;
 const ModifyReadOnlyGroupDetailsRequest = models.ModifyReadOnlyGroupDetailsRequest;
+const RollbackInstanceRequest = models.RollbackInstanceRequest;
 const DescribeSlowlogsRequest = models.DescribeSlowlogsRequest;
 const ModifyDBInstanceProjectRequest = models.ModifyDBInstanceProjectRequest;
+const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
 const CreatePublishSubscribeResponse = models.CreatePublishSubscribeResponse;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
-const RollbackInstanceRequest = models.RollbackInstanceRequest;
+const DeleteDBInstanceResponse = models.DeleteDBInstanceResponse;
 const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
 const DescribeRollbackTimeRequest = models.DescribeRollbackTimeRequest;
 const ModifyDBRemarkResponse = models.ModifyDBRemarkResponse;
+const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
 const CreateDBInstancesResponse = models.CreateDBInstancesResponse;
 const DeleteAccountResponse = models.DeleteAccountResponse;
 
@@ -167,14 +187,14 @@ class SqlserverClient extends AbstractClient {
     }
     
     /**
-     * 本接口（DescribeReadOnlyGroupList）用于查询只读组列表。
-     * @param {DescribeReadOnlyGroupListRequest} req
-     * @param {function(string, DescribeReadOnlyGroupListResponse):void} cb
+     * 本接口(DescribeDBSecurityGroups)用于查询实例的安全组详情。
+     * @param {DescribeDBSecurityGroupsRequest} req
+     * @param {function(string, DescribeDBSecurityGroupsResponse):void} cb
      * @public
      */
-    DescribeReadOnlyGroupList(req, cb) {
-        let resp = new DescribeReadOnlyGroupListResponse();
-        this.request("DescribeReadOnlyGroupList", req, resp, cb);
+    DescribeDBSecurityGroups(req, cb) {
+        let resp = new DescribeDBSecurityGroupsResponse();
+        this.request("DescribeDBSecurityGroups", req, resp, cb);
     }
 
     /**
@@ -200,6 +220,17 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
+     * 本接口（ModifyAccountPrivilege）用于修改实例账户权限。
+     * @param {ModifyAccountPrivilegeRequest} req
+     * @param {function(string, ModifyAccountPrivilegeResponse):void} cb
+     * @public
+     */
+    ModifyAccountPrivilege(req, cb) {
+        let resp = new ModifyAccountPrivilegeResponse();
+        this.request("ModifyAccountPrivilege", req, resp, cb);
+    }
+
+    /**
      * 本接口（ModifyBackupStrategy）用于修改备份策略
      * @param {ModifyBackupStrategyRequest} req
      * @param {function(string, ModifyBackupStrategyResponse):void} cb
@@ -222,6 +253,17 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
+     * 本接口（DeleteDBInstance）用于释放回收站中的SQL server实例。释放后的实例将保存一段时间后物理销毁。其发布订阅将自动解除，其ro副本将自动释放。
+     * @param {DeleteDBInstanceRequest} req
+     * @param {function(string, DeleteDBInstanceResponse):void} cb
+     * @public
+     */
+    DeleteDBInstance(req, cb) {
+        let resp = new DeleteDBInstanceResponse();
+        this.request("DeleteDBInstance", req, resp, cb);
+    }
+
+    /**
      * 本接口（DeletePublishSubscribe）用于删除两个数据库间的发布订阅关系。
      * @param {DeletePublishSubscribeRequest} req
      * @param {function(string, DeletePublishSubscribeResponse):void} cb
@@ -233,14 +275,14 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
-     * 本接口（ModifyAccountPrivilege）用于修改实例账户权限。
-     * @param {ModifyAccountPrivilegeRequest} req
-     * @param {function(string, ModifyAccountPrivilegeResponse):void} cb
+     * 本接口（DescribeMigrations）根据输入的限定条件，查询符合条件的迁移任务列表
+     * @param {DescribeMigrationsRequest} req
+     * @param {function(string, DescribeMigrationsResponse):void} cb
      * @public
      */
-    ModifyAccountPrivilege(req, cb) {
-        let resp = new ModifyAccountPrivilegeResponse();
-        this.request("ModifyAccountPrivilege", req, resp, cb);
+    DescribeMigrations(req, cb) {
+        let resp = new DescribeMigrationsResponse();
+        this.request("DescribeMigrations", req, resp, cb);
     }
 
     /**
@@ -343,14 +385,14 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeMigrations）根据输入的限定条件，查询符合条件的迁移任务列表
-     * @param {DescribeMigrationsRequest} req
-     * @param {function(string, DescribeMigrationsResponse):void} cb
+     * 本接口（CreateBasicDBInstances）用于创建SQL server基础版实例。
+     * @param {CreateBasicDBInstancesRequest} req
+     * @param {function(string, CreateBasicDBInstancesResponse):void} cb
      * @public
      */
-    DescribeMigrations(req, cb) {
-        let resp = new DescribeMigrationsResponse();
-        this.request("DescribeMigrations", req, resp, cb);
+    CreateBasicDBInstances(req, cb) {
+        let resp = new CreateBasicDBInstancesResponse();
+        this.request("CreateBasicDBInstances", req, resp, cb);
     }
 
     /**
@@ -475,6 +517,39 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
+     * 本接口（DescribeReadOnlyGroupList）用于查询只读组列表。
+     * @param {DescribeReadOnlyGroupListRequest} req
+     * @param {function(string, DescribeReadOnlyGroupListResponse):void} cb
+     * @public
+     */
+    DescribeReadOnlyGroupList(req, cb) {
+        let resp = new DescribeReadOnlyGroupListResponse();
+        this.request("DescribeReadOnlyGroupList", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeProjectSecurityGroups)用于查询项目的安全组详情。
+     * @param {DescribeProjectSecurityGroupsRequest} req
+     * @param {function(string, DescribeProjectSecurityGroupsResponse):void} cb
+     * @public
+     */
+    DescribeProjectSecurityGroups(req, cb) {
+        let resp = new DescribeProjectSecurityGroupsResponse();
+        this.request("DescribeProjectSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * 本接口(AssociateSecurityGroups)用于安全组批量绑定实例。
+     * @param {AssociateSecurityGroupsRequest} req
+     * @param {function(string, AssociateSecurityGroupsResponse):void} cb
+     * @public
+     */
+    AssociateSecurityGroups(req, cb) {
+        let resp = new AssociateSecurityGroupsResponse();
+        this.request("AssociateSecurityGroups", req, resp, cb);
+    }
+
+    /**
      * 本接口（CreateAccount）用于创建实例账号
      * @param {CreateAccountRequest} req
      * @param {function(string, CreateAccountResponse):void} cb
@@ -494,6 +569,17 @@ class SqlserverClient extends AbstractClient {
     InquiryPriceUpgradeDBInstance(req, cb) {
         let resp = new InquiryPriceUpgradeDBInstanceResponse();
         this.request("InquiryPriceUpgradeDBInstance", req, resp, cb);
+    }
+
+    /**
+     * 本接口（RunMigration）用于启动迁移任务，开始迁移
+     * @param {RunMigrationRequest} req
+     * @param {function(string, RunMigrationResponse):void} cb
+     * @public
+     */
+    RunMigration(req, cb) {
+        let resp = new RunMigrationResponse();
+        this.request("RunMigration", req, resp, cb);
     }
 
     /**
@@ -706,14 +792,14 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
-     * 本接口（RunMigration）用于启动迁移任务，开始迁移
-     * @param {RunMigrationRequest} req
-     * @param {function(string, RunMigrationResponse):void} cb
+     * 本接口（RenewPostpaidDBInstance）用于将通过接口TerminateDBInstance手动隔离的按量计费实例从回收站中恢复。
+     * @param {RenewPostpaidDBInstanceRequest} req
+     * @param {function(string, RenewPostpaidDBInstanceResponse):void} cb
      * @public
      */
-    RunMigration(req, cb) {
-        let resp = new RunMigrationResponse();
-        this.request("RunMigration", req, resp, cb);
+    RenewPostpaidDBInstance(req, cb) {
+        let resp = new RenewPostpaidDBInstanceResponse();
+        this.request("RenewPostpaidDBInstance", req, resp, cb);
     }
 
     /**
@@ -728,6 +814,28 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
+     * 本接口（CreateReadOnlyDBInstances）用于添加只读副本实例。
+     * @param {CreateReadOnlyDBInstancesRequest} req
+     * @param {function(string, CreateReadOnlyDBInstancesResponse):void} cb
+     * @public
+     */
+    CreateReadOnlyDBInstances(req, cb) {
+        let resp = new CreateReadOnlyDBInstancesResponse();
+        this.request("CreateReadOnlyDBInstances", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DisassociateSecurityGroups)用于安全组批量解绑实例。
+     * @param {DisassociateSecurityGroupsRequest} req
+     * @param {function(string, DisassociateSecurityGroupsResponse):void} cb
+     * @public
+     */
+    DisassociateSecurityGroups(req, cb) {
+        let resp = new DisassociateSecurityGroupsResponse();
+        this.request("DisassociateSecurityGroups", req, resp, cb);
+    }
+
+    /**
      * 本接口（ModifyDBInstanceRenewFlag）用于修改实例续费标记
      * @param {ModifyDBInstanceRenewFlagRequest} req
      * @param {function(string, ModifyDBInstanceRenewFlagResponse):void} cb
@@ -736,6 +844,17 @@ class SqlserverClient extends AbstractClient {
     ModifyDBInstanceRenewFlag(req, cb) {
         let resp = new ModifyDBInstanceRenewFlagResponse();
         this.request("ModifyDBInstanceRenewFlag", req, resp, cb);
+    }
+
+    /**
+     * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
+     * @param {ModifyDBInstanceSecurityGroupsRequest} req
+     * @param {function(string, ModifyDBInstanceSecurityGroupsResponse):void} cb
+     * @public
+     */
+    ModifyDBInstanceSecurityGroups(req, cb) {
+        let resp = new ModifyDBInstanceSecurityGroupsResponse();
+        this.request("ModifyDBInstanceSecurityGroups", req, resp, cb);
     }
 
     /**
