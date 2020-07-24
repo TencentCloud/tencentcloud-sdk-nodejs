@@ -30,6 +30,7 @@ const DeleteTextSampleResponse = models.DeleteTextSampleResponse;
 const TextSample = models.TextSample;
 const CreateTextSampleResponse = models.CreateTextSampleResponse;
 const TextOutputID = models.TextOutputID;
+const ManualReviewRequest = models.ManualReviewRequest;
 const User = models.User;
 const FileSampleInfo = models.FileSampleInfo;
 const DescribeFileSampleRequest = models.DescribeFileSampleRequest;
@@ -46,7 +47,9 @@ const RiskDetails = models.RiskDetails;
 const CreateTextSampleRequest = models.CreateTextSampleRequest;
 const DeleteFileSampleRequest = models.DeleteFileSampleRequest;
 const Filter = models.Filter;
+const ManualReviewData = models.ManualReviewData;
 const OCRDetect = models.OCRDetect;
+const ManualReviewContent = models.ManualReviewContent;
 const Coordinate = models.Coordinate;
 const Similar = models.Similar;
 const ImageHotDetect = models.ImageHotDetect;
@@ -58,6 +61,7 @@ const OCRItem = models.OCRItem;
 const ImageIllegalDetect = models.ImageIllegalDetect;
 const RrectF = models.RrectF;
 const CreateFileSampleResponse = models.CreateFileSampleResponse;
+const ManualReviewResponse = models.ManualReviewResponse;
 const LogoDetail = models.LogoDetail;
 const Logo = models.Logo;
 const PhoneDetect = models.PhoneDetect;
@@ -124,6 +128,17 @@ class CmsClient extends AbstractClient {
     DescribeTextSample(req, cb) {
         let resp = new DescribeTextSampleResponse();
         this.request("DescribeTextSample", req, resp, cb);
+    }
+
+    /**
+     * 人工审核对外接口
+     * @param {ManualReviewRequest} req
+     * @param {function(string, ManualReviewResponse):void} cb
+     * @public
+     */
+    ManualReview(req, cb) {
+        let resp = new ManualReviewResponse();
+        this.request("ManualReview", req, resp, cb);
     }
 
     /**

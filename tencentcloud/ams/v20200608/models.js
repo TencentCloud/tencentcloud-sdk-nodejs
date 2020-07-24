@@ -199,13 +199,13 @@ class CreateAudioModerationTaskRequest extends  AbstractModel {
         this.BizType = null;
 
         /**
-         * 回调签名key，具体可以查看签名文档。
+         * 异步检测结果回调通知接收URL。支持HTTP和HTTPS
          * @type {string || null}
          */
         this.Type = null;
 
         /**
-         * 异步检测结果回调通知接收URL。支持HTTP和HTTPS
+         * 回调签名key，具体可以查看签名文档。
          * @type {string || null}
          */
         this.Seed = null;

@@ -861,7 +861,7 @@ class UserInformation extends  AbstractModel {
         this.JoinTs = null;
 
         /**
-         * 用户退房时间
+         * 用户退房时间，用户没有退房则返回当前时间
          * @type {number || null}
          */
         this.LeaveTs = null;
@@ -1752,13 +1752,13 @@ class DescribeRoomInformationRequest extends  AbstractModel {
         this.RoomId = null;
 
         /**
-         * 分页index（不填默认只返回10个）
+         * 分页index，从0开始（PageNumber和PageSize 其中一个不填均默认返回10条数据）
          * @type {string || null}
          */
         this.PageNumber = null;
 
         /**
-         * 分页大小（不填默认返回10个,最多不超过100条）
+         * 分页大小（PageNumber和PageSize 其中一个不填均默认返回10条数据,最大不超过100）
          * @type {string || null}
          */
         this.PageSize = null;
