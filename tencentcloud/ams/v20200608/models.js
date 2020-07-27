@@ -684,6 +684,12 @@ class AudioResultDetailMoanResult extends  AbstractModel {
          */
         this.EndTime = null;
 
+        /**
+         * 子标签码
+         * @type {string || null}
+         */
+        this.SubLabelCode = null;
+
     }
 
     /**
@@ -697,6 +703,7 @@ class AudioResultDetailMoanResult extends  AbstractModel {
         this.Score = 'Score' in params ? params.Score : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SubLabelCode = 'SubLabelCode' in params ? params.SubLabelCode : null;
 
     }
 }
@@ -737,6 +744,13 @@ class AudioResultDetailLanguageResult extends  AbstractModel {
          */
         this.EndTime = null;
 
+        /**
+         * 子标签码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubLabelCode = null;
+
     }
 
     /**
@@ -750,6 +764,7 @@ class AudioResultDetailLanguageResult extends  AbstractModel {
         this.Score = 'Score' in params ? params.Score : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SubLabelCode = 'SubLabelCode' in params ? params.SubLabelCode : null;
 
     }
 }
@@ -1045,6 +1060,13 @@ class ImageResultsResultDetail extends  AbstractModel {
          */
         this.Score = null;
 
+        /**
+         * 子标签码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubLabelCode = null;
+
     }
 
     /**
@@ -1071,6 +1093,7 @@ class ImageResultsResultDetail extends  AbstractModel {
         this.Keywords = 'Keywords' in params ? params.Keywords : null;
         this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
         this.Score = 'Score' in params ? params.Score : null;
+        this.SubLabelCode = 'SubLabelCode' in params ? params.SubLabelCode : null;
 
     }
 }

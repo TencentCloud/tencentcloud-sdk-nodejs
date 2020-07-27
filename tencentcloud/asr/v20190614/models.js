@@ -452,7 +452,7 @@ class CreateRecTaskRequest extends  AbstractModel {
         this.CallbackUrl = null;
 
         /**
-         * 语音的URL地址，需要公网可下载。长度小于2048字节，当 SourceType 值为 0 时须填写该字段，为 1 时不需要填写。注意：请确保录音文件时长在一个小时之内，否则可能识别失败。请保证文件的下载速度，否则可能下载失败。
+         * 语音的URL地址，需要公网可下载。长度小于2048字节，当 SourceType 值为 0 时须填写该字段，为 1 时不需要填写。注意：请确保录音文件时长在5个小时之内，否则可能识别失败。请保证文件的下载速度，否则可能下载失败。
          * @type {string || null}
          */
         this.Url = null;
@@ -493,6 +493,25 @@ class CreateRecTaskRequest extends  AbstractModel {
          */
         this.ConvertNumMode = null;
 
+        /**
+         * 附加参数
+         * @type {string || null}
+         */
+        this.Extra = null;
+
+        /**
+         * 是否开启话者分离，0：不开启，1：开启(仅支持8k_zh/16k_zh引擎模型，单声道音频)
+         * @type {number || null}
+         */
+        this.SpeakerDiarization = null;
+
+        /**
+         * 话者分离人数（需配合开启话者分离使用），支持2-10（8k_zh仅支持2， 16k_zh支持2-10）
+注：话者分离目前是beta版本，请根据您的需要谨慎使用
+         * @type {number || null}
+         */
+        this.SpeakerNumber = null;
+
     }
 
     /**
@@ -514,6 +533,9 @@ class CreateRecTaskRequest extends  AbstractModel {
         this.FilterDirty = 'FilterDirty' in params ? params.FilterDirty : null;
         this.FilterModal = 'FilterModal' in params ? params.FilterModal : null;
         this.ConvertNumMode = 'ConvertNumMode' in params ? params.ConvertNumMode : null;
+        this.Extra = 'Extra' in params ? params.Extra : null;
+        this.SpeakerDiarization = 'SpeakerDiarization' in params ? params.SpeakerDiarization : null;
+        this.SpeakerNumber = 'SpeakerNumber' in params ? params.SpeakerNumber : null;
 
     }
 }
@@ -1160,6 +1182,12 @@ class SentenceRecognitionResponse extends  AbstractModel {
         this.Result = null;
 
         /**
+         * 请求的音频时长，单位为ms
+         * @type {number || null}
+         */
+        this.AudioDuration = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1175,6 +1203,7 @@ class SentenceRecognitionResponse extends  AbstractModel {
             return;
         }
         this.Result = 'Result' in params ? params.Result : null;
+        this.AudioDuration = 'AudioDuration' in params ? params.AudioDuration : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

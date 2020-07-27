@@ -281,7 +281,7 @@ FailedOperation.UnKnowError：表示识别失败；
         this.Type = null;
 
         /**
-         * 识别出的图片在混贴票据图片中的位置信息。与Angel结合可以得出原图位置，组成RotatedRect((X+0.5*Width,Y+0.5*Height), (Width, Height), Angle)，详情可参考OpenCV文档。
+         * 识别出的图片在混贴票据图片中的位置信息。与Angel结合可以得出原图位置，组成RotatedRect((X+0.5\*Width,Y+0.5\*Height), (Width, Height), Angle)，详情可参考OpenCV文档。
          * @type {Rect || null}
          */
         this.Rect = null;
@@ -1880,7 +1880,7 @@ class InvoiceDetectInfo extends  AbstractModel {
         this.Type = null;
 
         /**
-         * 识别出的图片在混贴票据图片中的位置信息。与Angel结合可以得出原图位置，组成RotatedRect((X+0.5*Width,Y+0.5*Height), (Width, Height), Angle)，详情可参考OpenCV文档。
+         * 识别出的图片在混贴票据图片中的位置信息。与Angel结合可以得出原图位置，组成RotatedRect((X+0.5\*Width,Y+0.5\*Height), (Width, Height), Angle)，详情可参考OpenCV文档。
          * @type {Rect || null}
          */
         this.Rect = null;
