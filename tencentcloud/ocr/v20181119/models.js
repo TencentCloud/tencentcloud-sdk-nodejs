@@ -162,18 +162,29 @@ class TextArithmetic extends  AbstractModel {
 }
 
 /**
- * BankCardOCR请求参数结构体
+ * HKIDCardOCR请求参数结构体
  * @class
  */
-class BankCardOCRRequest extends  AbstractModel {
+class HKIDCardOCRRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
+         * 是否鉴伪。
+         * @type {boolean || null}
+         */
+        this.DetectFake = null;
+
+        /**
+         * 是否返回人像照片。
+         * @type {boolean || null}
+         */
+        this.ReturnHeadImage = null;
+
+        /**
          * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
          * @type {string || null}
          */
         this.ImageBase64 = null;
@@ -181,7 +192,7 @@ class BankCardOCRRequest extends  AbstractModel {
         /**
          * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
          * @type {string || null}
@@ -197,6 +208,8 @@ class BankCardOCRRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.DetectFake = 'DetectFake' in params ? params.DetectFake : null;
+        this.ReturnHeadImage = 'ReturnHeadImage' in params ? params.ReturnHeadImage : null;
         this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
 
@@ -2006,6 +2019,48 @@ class EnterpriseLicenseOCRRequest extends  AbstractModel {
 }
 
 /**
+ * BankCardOCR请求参数结构体
+ * @class
+ */
+class BankCardOCRRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+
+    }
+}
+
+/**
  * PropOwnerCertOCR返回参数结构体
  * @class
  */
@@ -3520,6 +3575,137 @@ class LicensePlateOCRResponse extends  AbstractModel {
         }
         this.Number = 'Number' in params ? params.Number : null;
         this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * HKIDCardOCR返回参数结构体
+ * @class
+ */
+class HKIDCardOCRResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 中文姓名
+         * @type {string || null}
+         */
+        this.CnName = null;
+
+        /**
+         * 英文姓名
+         * @type {string || null}
+         */
+        this.EnName = null;
+
+        /**
+         * 中文姓名对应电码
+         * @type {string || null}
+         */
+        this.TelexCode = null;
+
+        /**
+         * 性别 ：“男M”或“女F”
+         * @type {string || null}
+         */
+        this.Sex = null;
+
+        /**
+         * 出生日期
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+        /**
+         * 永久性居民身份证。
+0：非永久；
+1：永久；
+-1：未知。
+         * @type {number || null}
+         */
+        this.Permanent = null;
+
+        /**
+         * 身份证号码
+         * @type {string || null}
+         */
+        this.IdNum = null;
+
+        /**
+         * 证件符号，出生日期下的符号，例如"***AZ"
+         * @type {string || null}
+         */
+        this.Symbol = null;
+
+        /**
+         * 首次签发日期
+         * @type {string || null}
+         */
+        this.FirstIssueDate = null;
+
+        /**
+         * 最近领用日期
+         * @type {string || null}
+         */
+        this.CurrentIssueDate = null;
+
+        /**
+         * 真假判断。
+0：无法判断（图像模糊、不完整、反光、过暗等导致无法判断）；
+1：假；
+2：真。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FakeDetectResult = null;
+
+        /**
+         * 人像照片Base64后的结果
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HeadImage = null;
+
+        /**
+         * 多重告警码，当身份证是翻拍、复印、PS件时返回对应告警码。
+-9102：证照复印件告警
+-9103：证照翻拍告警
+-9104：证照PS告警
+-9105：证照防伪告警
+         * @type {Array.<number> || null}
+         */
+        this.WarningCode = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CnName = 'CnName' in params ? params.CnName : null;
+        this.EnName = 'EnName' in params ? params.EnName : null;
+        this.TelexCode = 'TelexCode' in params ? params.TelexCode : null;
+        this.Sex = 'Sex' in params ? params.Sex : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
+        this.Permanent = 'Permanent' in params ? params.Permanent : null;
+        this.IdNum = 'IdNum' in params ? params.IdNum : null;
+        this.Symbol = 'Symbol' in params ? params.Symbol : null;
+        this.FirstIssueDate = 'FirstIssueDate' in params ? params.FirstIssueDate : null;
+        this.CurrentIssueDate = 'CurrentIssueDate' in params ? params.CurrentIssueDate : null;
+        this.FakeDetectResult = 'FakeDetectResult' in params ? params.FakeDetectResult : null;
+        this.HeadImage = 'HeadImage' in params ? params.HeadImage : null;
+        this.WarningCode = 'WarningCode' in params ? params.WarningCode : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -8295,7 +8481,7 @@ class QrcodePositionObj extends  AbstractModel {
 module.exports = {
     BusinessCardOCRResponse: BusinessCardOCRResponse,
     TextArithmetic: TextArithmetic,
-    BankCardOCRRequest: BankCardOCRRequest,
+    HKIDCardOCRRequest: HKIDCardOCRRequest,
     CarInvoiceOCRRequest: CarInvoiceOCRRequest,
     MixedInvoiceItem: MixedInvoiceItem,
     TrainTicketOCRRequest: TrainTicketOCRRequest,
@@ -8329,6 +8515,7 @@ module.exports = {
     InvoiceDetectInfo: InvoiceDetectInfo,
     MainlandPermitOCRRequest: MainlandPermitOCRRequest,
     EnterpriseLicenseOCRRequest: EnterpriseLicenseOCRRequest,
+    BankCardOCRRequest: BankCardOCRRequest,
     PropOwnerCertOCRResponse: PropOwnerCertOCRResponse,
     FinanBillInfo: FinanBillInfo,
     TrainTicketOCRResponse: TrainTicketOCRResponse,
@@ -8357,6 +8544,7 @@ module.exports = {
     DutyPaidProofOCRResponse: DutyPaidProofOCRResponse,
     TollInvoiceOCRRequest: TollInvoiceOCRRequest,
     LicensePlateOCRResponse: LicensePlateOCRResponse,
+    HKIDCardOCRResponse: HKIDCardOCRResponse,
     PermitOCRRequest: PermitOCRRequest,
     InvoiceGeneralOCRResponse: InvoiceGeneralOCRResponse,
     TaxiInvoiceOCRRequest: TaxiInvoiceOCRRequest,

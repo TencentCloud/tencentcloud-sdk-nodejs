@@ -2738,6 +2738,50 @@ class ReplaceCertForLoadBalancersResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeTargets返回参数结构体
+ * @class
+ */
+class DescribeTargetsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 监听器后端绑定的机器信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ListenerBackend> || null}
+         */
+        this.Listeners = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Listeners) {
+            this.Listeners = new Array();
+            for (let z in params.Listeners) {
+                let obj = new ListenerBackend();
+                obj.deserialize(params.Listeners[z]);
+                this.Listeners.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyListener请求参数结构体
  * @class
  */
@@ -3244,6 +3288,80 @@ class ModifyTargetPortResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeLoadBalancersDetail请求参数结构体
+ * @class
+ */
+class DescribeLoadBalancersDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回负载均衡列表数目，默认20，最大值1000。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 返回负载均衡列表起始偏移量，默认0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 选择返回的Fields列表，默认添加LoadBalancerId和LoadBalancerName。
+         * @type {Array.<string> || null}
+         */
+        this.Fields = null;
+
+        /**
+         * 当Fields包含TargetId、TargetAddress、TargetPort、TargetWeight等Fields时，必选选择导出目标组的Target或者非目标组Target，值范围NODE、GROUP。
+         * @type {string || null}
+         */
+        this.TargetType = null;
+
+        /**
+         * 查询负载均衡详细信息列表条件，详细的过滤条件如下：
+<li> loadbalancer-id - String - 是否必填：否 - （过滤条件）按照 负载均衡ID 过滤，如："lb-12345678"。</li>
+<li> project-id - String - 是否必填：否 - （过滤条件）按照 项目ID 过滤，如："0","123"。</li>
+<li> network - String - 是否必填：否 - （过滤条件）按照 负载均衡网络类型 过滤，如："Public","Private"。</li>
+<li> vip - String - 是否必填：否 - （过滤条件）按照 负载均衡Vip 过滤，如："1.1.1.1","2204::22:3"。</li>
+<li> target-ip - String - 是否必填：否 - （过滤条件）按照 后端目标内网Ip 过滤，如："1.1.1.1","2203::214:4"。</li>
+<li> vpcid - String - 是否必填：否 - （过滤条件）按照 负载均衡所属vpcId 过滤，如："vpc-12345678"。</li>
+<li> zone - String - 是否必填：否 - （过滤条件）按照 负载均衡所属的可用区 过滤，如："ap-guangzhou-1"。</li>
+<li> tag-key - String - 是否必填：否 - （过滤条件）按照 负载均衡标签的标签键 过滤，如："name"。</li>
+<li> tag:* - String - 是否必填：否 - （过滤条件）按照 负载均衡的标签 过滤，':' 后面跟的是标签键。如：过滤标签键name，标签值zhangsan,lisi，{"Name": "tag:name","Values": ["zhangsan", "lisi"]}。</li>
+<li> fuzzy-search - String - 是否必填：否 - （过滤条件）按照 负载均衡Vip，负载均衡名称 模糊搜索，如："1.1"。</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Fields = 'Fields' in params ? params.Fields : null;
+        this.TargetType = 'TargetType' in params ? params.TargetType : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -5604,19 +5722,25 @@ class ModifyTargetWeightRequest extends  AbstractModel {
 }
 
 /**
- * DescribeTargets返回参数结构体
+ * DescribeLoadBalancersDetail返回参数结构体
  * @class
  */
-class DescribeTargetsResponse extends  AbstractModel {
+class DescribeLoadBalancersDetailResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 监听器后端绑定的机器信息
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<ListenerBackend> || null}
+         * 负载均衡详情列表总数。
+         * @type {number || null}
          */
-        this.Listeners = null;
+        this.TotalCount = null;
+
+        /**
+         * 负载均衡详情列表。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<LoadBalancerDetail> || null}
+         */
+        this.LoadBalancerDetailSet = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5633,16 +5757,301 @@ class DescribeTargetsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
-        if (params.Listeners) {
-            this.Listeners = new Array();
-            for (let z in params.Listeners) {
-                let obj = new ListenerBackend();
-                obj.deserialize(params.Listeners[z]);
-                this.Listeners.push(obj);
+        if (params.LoadBalancerDetailSet) {
+            this.LoadBalancerDetailSet = new Array();
+            for (let z in params.LoadBalancerDetailSet) {
+                let obj = new LoadBalancerDetail();
+                obj.deserialize(params.LoadBalancerDetailSet[z]);
+                this.LoadBalancerDetailSet.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 负载均衡详细信息
+ * @class
+ */
+class LoadBalancerDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 负载均衡实例 ID。
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * 负载均衡实例的名称。
+         * @type {string || null}
+         */
+        this.LoadBalancerName = null;
+
+        /**
+         * 负载均衡实例的网络类型：
+Public：公网属性， Private：内网属性。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LoadBalancerType = null;
+
+        /**
+         * 负载均衡实例的状态，包括
+0：创建中，1：正常运行。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 负载均衡实例的 VIP 。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * 负载均衡实例 VIP 的IPv6地址。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AddressIPv6 = null;
+
+        /**
+         * 负载均衡实例IP版本，IPv4 | IPv6。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AddressIPVersion = null;
+
+        /**
+         * 负载均衡实例IPv6地址类型，IPv6Nat64 | IPv6FullChain。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.IPv6Mode = null;
+
+        /**
+         * 负载均衡实例所在可用区。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 负载均衡实例IP地址所属的ISP。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AddressIsp = null;
+
+        /**
+         * 负载均衡实例所属私有网络的 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 负载均衡实例所属的项目 ID， 0 表示默认项目。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 负载均衡实例的创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 负载均衡实例的计费类型。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ChargeType = null;
+
+        /**
+         * 负载均衡实例的网络属性。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {InternetAccessible || null}
+         */
+        this.NetworkAttributes = null;
+
+        /**
+         * 负载均衡实例的预付费相关属性。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {LBChargePrepaid || null}
+         */
+        this.PrepaidAttributes = null;
+
+        /**
+         * 暂做保留，一般用户无需关注。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ExtraInfo || null}
+         */
+        this.ExtraInfo = null;
+
+        /**
+         * 负载均衡维度的个性化配置ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConfigId = null;
+
+        /**
+         * 负载均衡实例的标签信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<TagInfo> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 负载均衡监听器 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ListenerId = null;
+
+        /**
+         * 监听器协议。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * 监听器端口。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * 转发规则的 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LocationId = null;
+
+        /**
+         * 转发规则的域名。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 转发规则的路径。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 后端目标ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TargetId = null;
+
+        /**
+         * 后端目标的IP地址。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TargetAddress = null;
+
+        /**
+         * 后端目标监听端口。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TargetPort = null;
+
+        /**
+         * 后端目标转发权重。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TargetWeight = null;
+
+        /**
+         * 0：表示未被隔离，1：表示被隔离。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Isolation = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.LoadBalancerName = 'LoadBalancerName' in params ? params.LoadBalancerName : null;
+        this.LoadBalancerType = 'LoadBalancerType' in params ? params.LoadBalancerType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.AddressIPv6 = 'AddressIPv6' in params ? params.AddressIPv6 : null;
+        this.AddressIPVersion = 'AddressIPVersion' in params ? params.AddressIPVersion : null;
+        this.IPv6Mode = 'IPv6Mode' in params ? params.IPv6Mode : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.AddressIsp = 'AddressIsp' in params ? params.AddressIsp : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ChargeType = 'ChargeType' in params ? params.ChargeType : null;
+
+        if (params.NetworkAttributes) {
+            let obj = new InternetAccessible();
+            obj.deserialize(params.NetworkAttributes)
+            this.NetworkAttributes = obj;
+        }
+
+        if (params.PrepaidAttributes) {
+            let obj = new LBChargePrepaid();
+            obj.deserialize(params.PrepaidAttributes)
+            this.PrepaidAttributes = obj;
+        }
+
+        if (params.ExtraInfo) {
+            let obj = new ExtraInfo();
+            obj.deserialize(params.ExtraInfo)
+            this.ExtraInfo = obj;
+        }
+        this.ConfigId = 'ConfigId' in params ? params.ConfigId : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new TagInfo();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.LocationId = 'LocationId' in params ? params.LocationId : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.TargetId = 'TargetId' in params ? params.TargetId : null;
+        this.TargetAddress = 'TargetAddress' in params ? params.TargetAddress : null;
+        this.TargetPort = 'TargetPort' in params ? params.TargetPort : null;
+        this.TargetWeight = 'TargetWeight' in params ? params.TargetWeight : null;
+        this.Isolation = 'Isolation' in params ? params.Isolation : null;
 
     }
 }
@@ -8271,6 +8680,7 @@ module.exports = {
     RegisterTargetsWithClassicalLBRequest: RegisterTargetsWithClassicalLBRequest,
     ModifyDomainAttributesResponse: ModifyDomainAttributesResponse,
     ReplaceCertForLoadBalancersResponse: ReplaceCertForLoadBalancersResponse,
+    DescribeTargetsResponse: DescribeTargetsResponse,
     ModifyListenerRequest: ModifyListenerRequest,
     DeregisterTargetGroupInstancesResponse: DeregisterTargetGroupInstancesResponse,
     RegisterTargetsRequest: RegisterTargetsRequest,
@@ -8280,6 +8690,7 @@ module.exports = {
     DeleteListenerRequest: DeleteListenerRequest,
     ClassicalHealth: ClassicalHealth,
     ModifyTargetPortResponse: ModifyTargetPortResponse,
+    DescribeLoadBalancersDetailRequest: DescribeLoadBalancersDetailRequest,
     TargetGroupBackend: TargetGroupBackend,
     DescribeClassicalLBByInstanceIdRequest: DescribeClassicalLBByInstanceIdRequest,
     ManualRewriteResponse: ManualRewriteResponse,
@@ -8324,7 +8735,8 @@ module.exports = {
     DeregisterTargetsResponse: DeregisterTargetsResponse,
     RewriteTarget: RewriteTarget,
     ModifyTargetWeightRequest: ModifyTargetWeightRequest,
-    DescribeTargetsResponse: DescribeTargetsResponse,
+    DescribeLoadBalancersDetailResponse: DescribeLoadBalancersDetailResponse,
+    LoadBalancerDetail: LoadBalancerDetail,
     BatchModifyTargetWeightRequest: BatchModifyTargetWeightRequest,
     DeleteRewriteResponse: DeleteRewriteResponse,
     BatchTarget: BatchTarget,
