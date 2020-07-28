@@ -11,8 +11,10 @@
 ## 通过 Npm 安装
 通过 npm 获取安装是使用 NODEJS SDK 的推荐方法，npm 是 NODEJS 的包管理工具。关于 npm 详细可参考[ npm 官网](https://www.npmjs.com/) 。
 1. 中国大陆地区的用户可以使用国内镜像源提高下载速度，例如：
+    
     > npm config set registry https://mirrors.tencent.com/npm/
 2. 执行以下安装命令：
+    
     > npm install tencentcloud-sdk-nodejs --save
 3. 在您的代码中引用对应模块代码，可参考示例。
 
@@ -22,26 +24,82 @@
 3. 在您的代码中引用对应模块代码，可参考示例。
 
 # 示例
+
+下文以DescribeInstances接口为例。
+
+注意这里需要将导包路径改为真实包路径。
+
+### 简化版
+
 ```js
-const tencentcloud = require("../../../../tencentcloud-sdk-nodejs");
+const tencentcloud = require("tencentcloud-sdk-nodejs");
+const CvmClient = tencentcloud.cvm.v20170312.Client;
+const models = tencentcloud.cvm.v20170312.Models;
+const Credential = tencentcloud.common.Credential;
+
+let cred = new Credential("secretId", "secretKey");
+let client = new CvmClient(cred, "ap-shanghai");
+let req = new models.DescribeZonesRequest();
+
+client.DescribeZones(req, function(err, response) {
+    if (err) {
+        console.log(err);
+        return;
+    }
+    console.log(response.to_json_string());
+});
+```
+
+### 详细版
+
+```js
+const tencentcloud = require("tencentcloud-sdk-nodejs");
 
 // 导入对应产品模块的client models。
 const CvmClient = tencentcloud.cvm.v20170312.Client;
 const models = tencentcloud.cvm.v20170312.Models;
 
 const Credential = tencentcloud.common.Credential;
+const ClientProfile = tencentcloud.common.ClientProfile;
+const HttpProfile = tencentcloud.common.HttpProfile;
+
 
 // 实例化一个认证对象，入参需要传入腾讯云账户secretId，secretKey
 let cred = new Credential("secretId", "secretKey");
 
-// 实例化要请求产品(以cvm为例)的client对象
-let client = new CvmClient(cred, "ap-shanghai");
+// 实例化一个http选项，可选的，没有特殊需求可以跳过。
+let httpProfile = new HttpProfile();
+httpProfile.reqMethod = "POST";  // post请求(默认为post请求)(POST or GET)
+httpProfile.reqTimeout = 30;  // 请求超时时间，单位为秒(默认60秒)
+httpProfile.endpoint = "cvm.ap-shanghai.tencentcloudapi.com";  // 指定接入地域域名(默认就近接入)
 
-// 实例化一个请求对象
-let req = new models.DescribeZonesRequest();
+// 实例化一个client选项，可选的，没有特殊需求可以跳过。
+let clientProfile = new ClientProfile();
+clientProfile.signMethod = "HmacSHA256";  // 指定签名算法(默认为HmacSHA256)(HmacSHA1, HmacSHA256)
+clientProfile.httpProfile = httpProfile;
+
+// 实例化要请求产品(以cvm为例)的client对象。clientProfile可选。
+let client = new CvmClient(cred, "ap-shanghai", clientProfile);
+
+// 实例化一个请求对象,并填充参数
+let req = new models.DescribeInstancesRequest();
+let filters = {
+    Filters: [
+        {
+            Name: "zone",
+            Values: ["ap-shanghai-1", "ap-shanghai-2"]
+        },
+        {
+            Name: "instance-charge-type",
+            Values: ["POSTPAID_BY_HOUR"]
+        }
+    ]
+};
+// 传入json参数
+req.from_json_string(JSON.stringify(filters));
 
 // 通过client对象调用想要访问的接口，需要传入请求对象以及响应回调函数
-client.DescribeZones(req, function(err, response) {
+client.DescribeInstances(req, function (err, response) {
     // 请求异常返回，打印异常信息
     if (err) {
         console.log(err);
