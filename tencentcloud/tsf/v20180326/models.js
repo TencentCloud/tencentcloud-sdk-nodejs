@@ -8470,7 +8470,7 @@ class StopContainerGroupResponse extends  AbstractModel {
         /**
          * 停止操作是否成功。
 true：停止成功
-flase：停止失败
+false：停止失败
          * @type {boolean || null}
          */
         this.Result = null;

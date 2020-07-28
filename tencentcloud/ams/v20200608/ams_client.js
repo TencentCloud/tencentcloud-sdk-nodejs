@@ -17,25 +17,31 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const ImageSegments = models.ImageSegments;
-const InputInfo = models.InputInfo;
-const AudioResultDetailTextResult = models.AudioResultDetailTextResult;
-const CreateAudioModerationTaskRequest = models.CreateAudioModerationTaskRequest;
-const TaskResult = models.TaskResult;
 const ImageResultResult = models.ImageResultResult;
-const MediaInfo = models.MediaInfo;
 const StorageInfo = models.StorageInfo;
-const AudioResult = models.AudioResult;
-const AudioResultDetailMoanResult = models.AudioResultDetailMoanResult;
-const AudioResultDetailLanguageResult = models.AudioResultDetailLanguageResult;
 const BucketInfo = models.BucketInfo;
 const CreateAudioModerationTaskResponse = models.CreateAudioModerationTaskResponse;
+const CreateBizConfigRequest = models.CreateBizConfigRequest;
+const DescribeBizConfigRequest = models.DescribeBizConfigRequest;
+const TaskResult = models.TaskResult;
+const DescribeTaskDetailResponse = models.DescribeTaskDetailResponse;
+const CreateAudioModerationTaskRequest = models.CreateAudioModerationTaskRequest;
+const CreateBizConfigResponse = models.CreateBizConfigResponse;
+const TaskInput = models.TaskInput;
 const DescribeTaskDetailRequest = models.DescribeTaskDetailRequest;
-const AudioSegments = models.AudioSegments;
 const TaskLabel = models.TaskLabel;
 const ImageResultsResultDetail = models.ImageResultsResultDetail;
+const InputInfo = models.InputInfo;
+const AudioResultDetailLanguageResult = models.AudioResultDetailLanguageResult;
+const FileOutput = models.FileOutput;
+const AudioResultDetailTextResult = models.AudioResultDetailTextResult;
+const AudioResult = models.AudioResult;
+const AudioResultDetailMoanResult = models.AudioResultDetailMoanResult;
+const DescribeBizConfigResponse = models.DescribeBizConfigResponse;
+const MediaInfo = models.MediaInfo;
+const MediaModerationConfig = models.MediaModerationConfig;
+const AudioSegments = models.AudioSegments;
 const ImageResultsResultDetailLocation = models.ImageResultsResultDetailLocation;
-const TaskInput = models.TaskInput;
-const DescribeTaskDetailResponse = models.DescribeTaskDetailResponse;
 const ImageResult = models.ImageResult;
 
 
@@ -81,6 +87,31 @@ class AmsClient extends AbstractClient {
     CreateAudioModerationTask(req, cb) {
         let resp = new CreateAudioModerationTaskResponse();
         this.request("CreateAudioModerationTask", req, resp, cb);
+    }
+
+    /**
+     * 查看单个配置
+     * @param {DescribeBizConfigRequest} req
+     * @param {function(string, DescribeBizConfigResponse):void} cb
+     * @public
+     */
+    DescribeBizConfig(req, cb) {
+        let resp = new DescribeBizConfigResponse();
+        this.request("DescribeBizConfig", req, resp, cb);
+    }
+
+    /**
+     * 创建业务配置，1个账号最多可以创建20个配置。在创建业务配置之前，你需要以下步骤：
+1. 开通COS存储捅功能，新建存储桶，cms_segments
+2. 授权天御对 cms_segments存储桶对读写权限。
+这个存储桶用来存储 视频转换过程中生成对音频和图片。
+     * @param {CreateBizConfigRequest} req
+     * @param {function(string, CreateBizConfigResponse):void} cb
+     * @public
+     */
+    CreateBizConfig(req, cb) {
+        let resp = new CreateBizConfigResponse();
+        this.request("CreateBizConfig", req, resp, cb);
     }
 
     /**

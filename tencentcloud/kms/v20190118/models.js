@@ -2928,6 +2928,48 @@ class DisableWhiteBoxKeyRequest extends  AbstractModel {
 }
 
 /**
+ * UnbindCloudResource请求参数结构体
+ * @class
+ */
+class UnbindCloudResourceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * cmk的ID
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * 云产品的唯一性标识符
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 资源/实例ID，由调用方根据自己的云产品特征来定义，以字符串形式做存储。
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+
+    }
+}
+
+/**
  * ListKeyDetail请求参数结构体
  * @class
  */
@@ -3009,6 +3051,34 @@ class ListKeyDetailRequest extends  AbstractModel {
  * @class
  */
 class EnableKeyRotationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * BindCloudResource返回参数结构体
+ * @class
+ */
+class BindCloudResourceResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -3299,6 +3369,48 @@ class GetPublicKeyResponse extends  AbstractModel {
 }
 
 /**
+ * BindCloudResource请求参数结构体
+ * @class
+ */
+class BindCloudResourceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * cmk的ID
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+        /**
+         * 云产品的唯一性标识符
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 资源/实例ID，由调用方根据自己的云产品特征来定义，以字符串形式做存储。
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+
+    }
+}
+
+/**
  * DescribeWhiteBoxDecryptKey返回参数结构体
  * @class
  */
@@ -3407,6 +3519,34 @@ class UpdateKeyDescriptionRequest extends  AbstractModel {
         }
         this.Description = 'Description' in params ? params.Description : null;
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
+
+    }
+}
+
+/**
+ * UnbindCloudResource返回参数结构体
+ * @class
+ */
+class UnbindCloudResourceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3556,8 +3696,10 @@ module.exports = {
     CancelKeyDeletionResponse: CancelKeyDeletionResponse,
     DisableKeysRequest: DisableKeysRequest,
     DisableWhiteBoxKeyRequest: DisableWhiteBoxKeyRequest,
+    UnbindCloudResourceRequest: UnbindCloudResourceRequest,
     ListKeyDetailRequest: ListKeyDetailRequest,
     EnableKeyRotationResponse: EnableKeyRotationResponse,
+    BindCloudResourceResponse: BindCloudResourceResponse,
     EnableKeysResponse: EnableKeysResponse,
     DescribeWhiteBoxDeviceFingerprintsRequest: DescribeWhiteBoxDeviceFingerprintsRequest,
     EncryptByWhiteBoxRequest: EncryptByWhiteBoxRequest,
@@ -3566,9 +3708,11 @@ module.exports = {
     DisableKeyRequest: DisableKeyRequest,
     GetKeyRotationStatusRequest: GetKeyRotationStatusRequest,
     GetPublicKeyResponse: GetPublicKeyResponse,
+    BindCloudResourceRequest: BindCloudResourceRequest,
     DescribeWhiteBoxDecryptKeyResponse: DescribeWhiteBoxDecryptKeyResponse,
     DescribeWhiteBoxDeviceFingerprintsResponse: DescribeWhiteBoxDeviceFingerprintsResponse,
     UpdateKeyDescriptionRequest: UpdateKeyDescriptionRequest,
+    UnbindCloudResourceResponse: UnbindCloudResourceResponse,
     DescribeKeyResponse: DescribeKeyResponse,
     DisableKeyRotationRequest: DisableKeyRotationRequest,
 

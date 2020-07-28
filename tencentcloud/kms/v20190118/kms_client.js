@@ -91,8 +91,10 @@ const AsymmetricRsaDecryptResponse = models.AsymmetricRsaDecryptResponse;
 const CancelKeyDeletionResponse = models.CancelKeyDeletionResponse;
 const DisableKeysRequest = models.DisableKeysRequest;
 const DisableWhiteBoxKeyRequest = models.DisableWhiteBoxKeyRequest;
+const UnbindCloudResourceRequest = models.UnbindCloudResourceRequest;
 const ListKeyDetailRequest = models.ListKeyDetailRequest;
 const EnableKeyRotationResponse = models.EnableKeyRotationResponse;
+const BindCloudResourceResponse = models.BindCloudResourceResponse;
 const EnableKeysResponse = models.EnableKeysResponse;
 const DescribeWhiteBoxDeviceFingerprintsRequest = models.DescribeWhiteBoxDeviceFingerprintsRequest;
 const EncryptByWhiteBoxRequest = models.EncryptByWhiteBoxRequest;
@@ -101,9 +103,11 @@ const ScheduleKeyDeletionRequest = models.ScheduleKeyDeletionRequest;
 const DisableKeyRequest = models.DisableKeyRequest;
 const GetKeyRotationStatusRequest = models.GetKeyRotationStatusRequest;
 const GetPublicKeyResponse = models.GetPublicKeyResponse;
+const BindCloudResourceRequest = models.BindCloudResourceRequest;
 const DescribeWhiteBoxDecryptKeyResponse = models.DescribeWhiteBoxDecryptKeyResponse;
 const DescribeWhiteBoxDeviceFingerprintsResponse = models.DescribeWhiteBoxDeviceFingerprintsResponse;
 const UpdateKeyDescriptionRequest = models.UpdateKeyDescriptionRequest;
+const UnbindCloudResourceResponse = models.UnbindCloudResourceResponse;
 const DescribeKeyResponse = models.DescribeKeyResponse;
 const DisableKeyRotationRequest = models.DisableKeyRotationRequest;
 
@@ -249,6 +253,17 @@ class KmsClient extends AbstractClient {
     DescribeWhiteBoxKeyDetails(req, cb) {
         let resp = new DescribeWhiteBoxKeyDetailsResponse();
         this.request("DescribeWhiteBoxKeyDetails", req, resp, cb);
+    }
+
+    /**
+     * 记录当前key被哪个云产品的那个资源所使用。如果当前key设置了自动过期，则取消该设置，确保当前key不会自动失效。如果当前关联关系已经创建，也返回成功。
+     * @param {BindCloudResourceRequest} req
+     * @param {function(string, BindCloudResourceResponse):void} cb
+     * @public
+     */
+    BindCloudResource(req, cb) {
+        let resp = new BindCloudResourceResponse();
+        this.request("BindCloudResource", req, resp, cb);
     }
 
     /**
@@ -469,6 +484,17 @@ class KmsClient extends AbstractClient {
     AsymmetricRsaDecrypt(req, cb) {
         let resp = new AsymmetricRsaDecryptResponse();
         this.request("AsymmetricRsaDecrypt", req, resp, cb);
+    }
+
+    /**
+     * 删除指定（key, 资源，云产品）的记录，以表明：指定的云产品的资源已不再使用当前的key。
+     * @param {UnbindCloudResourceRequest} req
+     * @param {function(string, UnbindCloudResourceResponse):void} cb
+     * @public
+     */
+    UnbindCloudResource(req, cb) {
+        let resp = new UnbindCloudResourceResponse();
+        this.request("UnbindCloudResource", req, resp, cb);
     }
 
     /**

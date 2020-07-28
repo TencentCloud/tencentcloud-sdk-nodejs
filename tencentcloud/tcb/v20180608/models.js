@@ -2865,6 +2865,20 @@ class OrderInfo extends  AbstractModel {
          */
         this.PayMode = null;
 
+        /**
+         * 订单绑定的扩展ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ExtensionId = null;
+
+        /**
+         * 资源初始化结果(仅当ExtensionId不为空时有效): successful(初始化成功), failed(初始化失败), doing(初始化进行中), init(准备初始化)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResourceReady = null;
+
     }
 
     /**
@@ -2881,6 +2895,8 @@ class OrderInfo extends  AbstractModel {
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.ExtensionId = 'ExtensionId' in params ? params.ExtensionId : null;
+        this.ResourceReady = 'ResourceReady' in params ? params.ResourceReady : null;
 
     }
 }

@@ -75,6 +75,7 @@ const ModifyLoadBalancerAttributesResponse = models.ModifyLoadBalancerAttributes
 const RegisterTargetsWithClassicalLBRequest = models.RegisterTargetsWithClassicalLBRequest;
 const ModifyDomainAttributesResponse = models.ModifyDomainAttributesResponse;
 const ReplaceCertForLoadBalancersResponse = models.ReplaceCertForLoadBalancersResponse;
+const DescribeTargetsResponse = models.DescribeTargetsResponse;
 const ModifyListenerRequest = models.ModifyListenerRequest;
 const DeregisterTargetGroupInstancesResponse = models.DeregisterTargetGroupInstancesResponse;
 const RegisterTargetsRequest = models.RegisterTargetsRequest;
@@ -84,6 +85,7 @@ const CreateTopicRequest = models.CreateTopicRequest;
 const DeleteListenerRequest = models.DeleteListenerRequest;
 const ClassicalHealth = models.ClassicalHealth;
 const ModifyTargetPortResponse = models.ModifyTargetPortResponse;
+const DescribeLoadBalancersDetailRequest = models.DescribeLoadBalancersDetailRequest;
 const TargetGroupBackend = models.TargetGroupBackend;
 const DescribeClassicalLBByInstanceIdRequest = models.DescribeClassicalLBByInstanceIdRequest;
 const ManualRewriteResponse = models.ManualRewriteResponse;
@@ -128,7 +130,8 @@ const AutoRewriteResponse = models.AutoRewriteResponse;
 const DeregisterTargetsResponse = models.DeregisterTargetsResponse;
 const RewriteTarget = models.RewriteTarget;
 const ModifyTargetWeightRequest = models.ModifyTargetWeightRequest;
-const DescribeTargetsResponse = models.DescribeTargetsResponse;
+const DescribeLoadBalancersDetailResponse = models.DescribeLoadBalancersDetailResponse;
+const LoadBalancerDetail = models.LoadBalancerDetail;
 const BatchModifyTargetWeightRequest = models.BatchModifyTargetWeightRequest;
 const DeleteRewriteResponse = models.DeleteRewriteResponse;
 const BatchTarget = models.BatchTarget;
@@ -338,6 +341,18 @@ class ClbClient extends AbstractClient {
     }
 
     /**
+     * ModifyListener接口用来修改负载均衡监听器的属性，包括监听器名称、健康检查参数、证书信息、转发策略等。本接口不支持传统型负载均衡。
+本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
+     * @param {ModifyListenerRequest} req
+     * @param {function(string, ModifyListenerResponse):void} cb
+     * @public
+     */
+    ModifyListener(req, cb) {
+        let resp = new ModifyListenerResponse();
+        this.request("ModifyListener", req, resp, cb);
+    }
+
+    /**
      * 该接口支持删除负载均衡的多个监听器。
 本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
      * @param {DeleteLoadBalancerListenersRequest} req
@@ -409,15 +424,14 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * ModifyListener接口用来修改负载均衡监听器的属性，包括监听器名称、健康检查参数、证书信息、转发策略等。本接口不支持传统型负载均衡。
-本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
-     * @param {ModifyListenerRequest} req
-     * @param {function(string, ModifyListenerResponse):void} cb
+     * 查询负载均衡的详细信息，包括监听器，规则及后端目标。
+     * @param {DescribeLoadBalancersDetailRequest} req
+     * @param {function(string, DescribeLoadBalancersDetailResponse):void} cb
      * @public
      */
-    ModifyListener(req, cb) {
-        let resp = new ModifyListenerResponse();
-        this.request("ModifyListener", req, resp, cb);
+    DescribeLoadBalancersDetail(req, cb) {
+        let resp = new DescribeLoadBalancersDetailResponse();
+        this.request("DescribeLoadBalancersDetail", req, resp, cb);
     }
 
     /**
