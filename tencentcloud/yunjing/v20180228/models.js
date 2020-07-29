@@ -1396,19 +1396,19 @@ class CreateBaselineStrategyRequest extends  AbstractModel {
         this.StrategyName = null;
 
         /**
-         * 检测周期
+         * 检测周期, 表示每隔多少天进行检测.示例: 2, 表示每2天进行检测一次.
          * @type {number || null}
          */
         this.ScanCycle = null;
 
         /**
-         * 定期检测时间，该时间下发扫描
+         * 定期检测时间，该时间下发扫描. 示例:“22:00”, 表示在22:00下发检测
          * @type {string || null}
          */
         this.ScanAt = null;
 
         /**
-         * 该策略下选择的基线id数组
+         * 该策略下选择的基线id数组. 示例: [1,3,5,7]
          * @type {Array.<number> || null}
          */
         this.CategoryIds = null;
@@ -1420,19 +1420,19 @@ class CreateBaselineStrategyRequest extends  AbstractModel {
         this.IsGlobal = null;
 
         /**
-         * 云主机类型：cvm：虚拟主机，bms：裸金属，ecm：边缘计算主机
+         * 云主机类型：“CVM”：虚拟主机，"BMS"：裸金属，"ECM"：边缘计算主机
          * @type {string || null}
          */
         this.MachineType = null;
 
         /**
-         * 主机地域
+         * 主机地域. 示例: "ap-bj"
          * @type {string || null}
          */
         this.RegionCode = null;
 
         /**
-         * 主机id数组
+         * 主机id数组. 示例: ["quuid1","quuid2"]
          * @type {Array.<string> || null}
          */
         this.Quuids = null;
