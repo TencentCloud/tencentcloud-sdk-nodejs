@@ -941,6 +941,13 @@ class Registry extends  AbstractModel {
          */
         this.InternalEndpoint = null;
 
+        /**
+         * 实例云标签
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TagSpecification || null}
+         */
+        this.TagSpecification = null;
+
     }
 
     /**
@@ -961,6 +968,12 @@ class Registry extends  AbstractModel {
         this.EnableAnonymous = 'EnableAnonymous' in params ? params.EnableAnonymous : null;
         this.TokenValidTime = 'TokenValidTime' in params ? params.TokenValidTime : null;
         this.InternalEndpoint = 'InternalEndpoint' in params ? params.InternalEndpoint : null;
+
+        if (params.TagSpecification) {
+            let obj = new TagSpecification();
+            obj.deserialize(params.TagSpecification)
+            this.TagSpecification = obj;
+        }
 
     }
 }
@@ -1558,6 +1571,41 @@ class DuplicateImagePersonalResponse extends  AbstractModel {
             this.Data = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 云标签Tag
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云标签的key
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 云标签的值
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -3727,6 +3775,51 @@ class ModifyRepositoryAccessPersonalRequest extends  AbstractModel {
 }
 
 /**
+ * 云标签
+ * @class
+ */
+class TagSpecification extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 默认值为instance
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * 云标签数组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeImageLifecycleGlobalPersonal请求参数结构体
  * @class
  */
@@ -3887,6 +3980,12 @@ class CreateInstanceRequest extends  AbstractModel {
          */
         this.RegistryType = null;
 
+        /**
+         * 云标签描述
+         * @type {TagSpecification || null}
+         */
+        this.TagSpecification = null;
+
     }
 
     /**
@@ -3898,6 +3997,12 @@ class CreateInstanceRequest extends  AbstractModel {
         }
         this.RegistryName = 'RegistryName' in params ? params.RegistryName : null;
         this.RegistryType = 'RegistryType' in params ? params.RegistryType : null;
+
+        if (params.TagSpecification) {
+            let obj = new TagSpecification();
+            obj.deserialize(params.TagSpecification)
+            this.TagSpecification = obj;
+        }
 
     }
 }
@@ -6405,6 +6510,7 @@ module.exports = {
     DeleteWebhookTriggerResponse: DeleteWebhookTriggerResponse,
     DeleteImageLifecycleGlobalPersonalResponse: DeleteImageLifecycleGlobalPersonalResponse,
     DuplicateImagePersonalResponse: DuplicateImagePersonalResponse,
+    Tag: Tag,
     DupImageTagResp: DupImageTagResp,
     DescribeImagesResponse: DescribeImagesResponse,
     DescribeRepositoryFilterPersonalRequest: DescribeRepositoryFilterPersonalRequest,
@@ -6460,6 +6566,7 @@ module.exports = {
     DescribeImageManifestsRequest: DescribeImageManifestsRequest,
     ModifyNamespaceRequest: ModifyNamespaceRequest,
     ModifyRepositoryAccessPersonalRequest: ModifyRepositoryAccessPersonalRequest,
+    TagSpecification: TagSpecification,
     DescribeImageLifecycleGlobalPersonalRequest: DescribeImageLifecycleGlobalPersonalRequest,
     DescribeImageLifecyclePersonalRequest: DescribeImageLifecyclePersonalRequest,
     RepositoryInfoResp: RepositoryInfoResp,

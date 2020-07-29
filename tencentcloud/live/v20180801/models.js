@@ -11221,7 +11221,7 @@ class CreateLiveSnapshotTemplateRequest extends  AbstractModel {
 
         /**
          * 截图间隔，单位s，默认10s。
-范围： 5s ~ 600s。
+范围： 5s ~ 300s。
          * @type {number || null}
          */
         this.SnapshotInterval = null;
@@ -11730,7 +11730,7 @@ class ModifyLiveSnapshotTemplateRequest extends  AbstractModel {
 
         /**
          * 截图间隔，单位s，默认10s。
-范围： 5s ~ 600s。
+范围： 5s ~ 300s。
          * @type {number || null}
          */
         this.SnapshotInterval = null;
