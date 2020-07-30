@@ -11087,7 +11087,7 @@ class CreateRepositoryRequest extends  AbstractModel {
         this.RepositoryName = null;
 
         /**
-         * 仓库类型
+         * 仓库类型（默认仓库：default，私有仓库：private）
          * @type {string || null}
          */
         this.RepositoryType = null;

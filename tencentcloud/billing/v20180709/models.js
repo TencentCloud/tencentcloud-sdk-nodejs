@@ -1493,6 +1493,18 @@ class BillTransactionInfo extends  AbstractModel {
          */
         this.Freezing = null;
 
+        /**
+         * 交易渠道
+         * @type {string || null}
+         */
+        this.PayChannel = null;
+
+        /**
+         * 扣费模式：trade 包年包月(预付费)，hourh  按量-小时结，hourd 按量-日结，hourm 按量-月结，month 按量-月结
+         * @type {string || null}
+         */
+        this.DeductMode = null;
+
     }
 
     /**
@@ -1511,6 +1523,8 @@ class BillTransactionInfo extends  AbstractModel {
         this.Cash = 'Cash' in params ? params.Cash : null;
         this.Incentive = 'Incentive' in params ? params.Incentive : null;
         this.Freezing = 'Freezing' in params ? params.Freezing : null;
+        this.PayChannel = 'PayChannel' in params ? params.PayChannel : null;
+        this.DeductMode = 'DeductMode' in params ? params.DeductMode : null;
 
     }
 }

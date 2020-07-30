@@ -135,10 +135,22 @@ class TextData extends  AbstractModel {
         this.BizType = null;
 
         /**
+         * 和请求中的DataId一致，原样返回
+         * @type {string || null}
+         */
+        this.DataId = null;
+
+        /**
          * 恶意标签，Normal：正常，Polity：涉政，Porn：色情，Illegal：违法，Abuse：谩骂，Terror：暴恐，Ad：广告，Custom：自定义关键词
          * @type {string || null}
          */
         this.EvilLabel = null;
+
+        /**
+         * 输出的其他信息，不同客户内容不同
+         * @type {string || null}
+         */
+        this.Extra = null;
 
         /**
          * 命中的关键词
@@ -215,7 +227,9 @@ class TextData extends  AbstractModel {
             }
         }
         this.BizType = 'BizType' in params ? params.BizType : null;
+        this.DataId = 'DataId' in params ? params.DataId : null;
         this.EvilLabel = 'EvilLabel' in params ? params.EvilLabel : null;
+        this.Extra = 'Extra' in params ? params.Extra : null;
         this.Keywords = 'Keywords' in params ? params.Keywords : null;
         this.Score = 'Score' in params ? params.Score : null;
         this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;

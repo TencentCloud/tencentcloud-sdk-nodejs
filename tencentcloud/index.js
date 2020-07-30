@@ -120,6 +120,7 @@ module.exports = {
     tiw: require("./tiw"),
     tke: require("./tke"),
     tkgdq: require("./tkgdq"),
+    tms: require("./tms"),
     tmt: require("./tmt"),
     trtc: require("./trtc"),
     tsf: require("./tsf"),

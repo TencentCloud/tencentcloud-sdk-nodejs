@@ -25,6 +25,7 @@ const UpperBodyClothSleeve = models.UpperBodyClothSleeve;
 const BodyAttributeInfo = models.BodyAttributeInfo;
 const GetGroupListResponse = models.GetGroupListResponse;
 const GroupInfo = models.GroupInfo;
+const SegmentationOptions = models.SegmentationOptions;
 const ModifyGroupRequest = models.ModifyGroupRequest;
 const CreatePersonRequest = models.CreatePersonRequest;
 const ModifyPersonInfoResponse = models.ModifyPersonInfoResponse;
@@ -32,6 +33,7 @@ const Trace = models.Trace;
 const DeleteGroupRequest = models.DeleteGroupRequest;
 const ModifyPersonInfoRequest = models.ModifyPersonInfoRequest;
 const Gender = models.Gender;
+const SegmentCustomizedPortraitPicRequest = models.SegmentCustomizedPortraitPicRequest;
 const CreateGroupRequest = models.CreateGroupRequest;
 const LowerBodyCloth = models.LowerBodyCloth;
 const UpperBodyClothTexture = models.UpperBodyClothTexture;
@@ -45,6 +47,7 @@ const KeyPointInfo = models.KeyPointInfo;
 const DetectBodyResponse = models.DetectBodyResponse;
 const PersonInfo = models.PersonInfo;
 const Bag = models.Bag;
+const SegmentCustomizedPortraitPicResponse = models.SegmentCustomizedPortraitPicResponse;
 const DetectBodyJointsRequest = models.DetectBodyJointsRequest;
 const SegmentPortraitPicRequest = models.SegmentPortraitPicRequest;
 const UpperBodyClothColor = models.UpperBodyClothColor;
@@ -238,6 +241,17 @@ class BdaClient extends AbstractClient {
     CreatePerson(req, cb) {
         let resp = new CreatePersonResponse();
         this.request("CreatePerson", req, resp, cb);
+    }
+
+    /**
+     * 在前后景分割的基础上优化多分类分割，支持对头发、五官等的分割，既作为换发型、挂件等底层技术，也可用于扣人头、扣人脸等玩法
+     * @param {SegmentCustomizedPortraitPicRequest} req
+     * @param {function(string, SegmentCustomizedPortraitPicResponse):void} cb
+     * @public
+     */
+    SegmentCustomizedPortraitPic(req, cb) {
+        let resp = new SegmentCustomizedPortraitPicResponse();
+        this.request("SegmentCustomizedPortraitPic", req, resp, cb);
     }
 
     /**

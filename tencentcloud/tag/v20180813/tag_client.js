@@ -27,14 +27,16 @@ const DescribeTagsRequest = models.DescribeTagsRequest;
 const DescribeTagKeysResponse = models.DescribeTagKeysResponse;
 const DescribeTagValuesRequest = models.DescribeTagValuesRequest;
 const ModifyResourceTagsRequest = models.ModifyResourceTagsRequest;
+const DescribeResourcesByTagsUnionRequest = models.DescribeResourcesByTagsUnionRequest;
 const DescribeTagsResponse = models.DescribeTagsResponse;
 const DescribeResourcesByTagsResponse = models.DescribeResourcesByTagsResponse;
 const DescribeTagKeysRequest = models.DescribeTagKeysRequest;
 const DescribeTagsSeqResponse = models.DescribeTagsSeqResponse;
 const DescribeResourceTagsResponse = models.DescribeResourceTagsResponse;
 const DescribeResourceTagsByResourceIdsRequest = models.DescribeResourceTagsByResourceIdsRequest;
-const DescribeTagsSeqRequest = models.DescribeTagsSeqRequest;
+const DescribeResourcesByTagsUnionResponse = models.DescribeResourcesByTagsUnionResponse;
 const DescribeResourceTagsByResourceIdsResponse = models.DescribeResourceTagsByResourceIdsResponse;
+const ModifyResourcesTagValueRequest = models.ModifyResourcesTagValueRequest;
 const TagResource = models.TagResource;
 const AddResourceTagResponse = models.AddResourceTagResponse;
 const ModifyResourcesTagValueResponse = models.ModifyResourcesTagValueResponse;
@@ -42,7 +44,7 @@ const AddResourceTagRequest = models.AddResourceTagRequest;
 const DescribeTagValuesSeqResponse = models.DescribeTagValuesSeqResponse;
 const CreateTagRequest = models.CreateTagRequest;
 const DescribeResourceTagsByTagKeysResponse = models.DescribeResourceTagsByTagKeysResponse;
-const ModifyResourcesTagValueRequest = models.ModifyResourcesTagValueRequest;
+const DescribeTagsSeqRequest = models.DescribeTagsSeqRequest;
 const DescribeTagValuesResponse = models.DescribeTagValuesResponse;
 const TagFilter = models.TagFilter;
 const Tag = models.Tag;
@@ -182,6 +184,17 @@ class TagClient extends AbstractClient {
     DeleteResourceTag(req, cb) {
         let resp = new DeleteResourceTagResponse();
         this.request("DeleteResourceTag", req, resp, cb);
+    }
+
+    /**
+     * 通过标签查询资源列表并集
+     * @param {DescribeResourcesByTagsUnionRequest} req
+     * @param {function(string, DescribeResourcesByTagsUnionResponse):void} cb
+     * @public
+     */
+    DescribeResourcesByTagsUnion(req, cb) {
+        let resp = new DescribeResourcesByTagsUnionResponse();
+        this.request("DescribeResourcesByTagsUnion", req, resp, cb);
     }
 
     /**
