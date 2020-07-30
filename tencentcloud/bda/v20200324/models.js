@@ -452,6 +452,174 @@ Unix 纪元时间是 1970 年 1 月 1 日星期四，协调世界时 (UTC) 。
 }
 
 /**
+ * 此参数为分割选项，请根据需要选择自己所想从图片中分割的部分。注意所有选项均为非必选，如未选择则值默认为false, 但是必须要保证多于一个选项的描述为true。
+ * @class
+ */
+class SegmentationOptions extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 分割选项-背景
+         * @type {boolean || null}
+         */
+        this.Background = null;
+
+        /**
+         * 分割选项-头发
+         * @type {boolean || null}
+         */
+        this.Hair = null;
+
+        /**
+         * 分割选项-左眉
+         * @type {boolean || null}
+         */
+        this.LeftEyebrow = null;
+
+        /**
+         * 分割选项-右眉
+         * @type {boolean || null}
+         */
+        this.RightEyebrow = null;
+
+        /**
+         * 分割选项-左眼
+         * @type {boolean || null}
+         */
+        this.LeftEye = null;
+
+        /**
+         * 分割选项-右眼
+         * @type {boolean || null}
+         */
+        this.RightEye = null;
+
+        /**
+         * 分割选项-鼻子
+         * @type {boolean || null}
+         */
+        this.Nose = null;
+
+        /**
+         * 分割选项-上唇
+         * @type {boolean || null}
+         */
+        this.UpperLip = null;
+
+        /**
+         * 分割选项-下唇
+         * @type {boolean || null}
+         */
+        this.LowerLip = null;
+
+        /**
+         * 分割选项-牙齿
+         * @type {boolean || null}
+         */
+        this.Tooth = null;
+
+        /**
+         * 分割选项-口腔（不包含牙齿）
+         * @type {boolean || null}
+         */
+        this.Mouth = null;
+
+        /**
+         * 分割选项-左耳
+         * @type {boolean || null}
+         */
+        this.LeftEar = null;
+
+        /**
+         * 分割选项-右耳
+         * @type {boolean || null}
+         */
+        this.RightEar = null;
+
+        /**
+         * 分割选项-面部(不包含眼、耳、口、鼻等五官及头发。)
+         * @type {boolean || null}
+         */
+        this.Face = null;
+
+        /**
+         * 复合分割选项-头部(包含所有的头部元素，相关装饰除外)
+         * @type {boolean || null}
+         */
+        this.Head = null;
+
+        /**
+         * 分割选项-身体（包含脖子）
+         * @type {boolean || null}
+         */
+        this.Body = null;
+
+        /**
+         * 分割选项-帽子
+         * @type {boolean || null}
+         */
+        this.Hat = null;
+
+        /**
+         * 分割选项-头饰
+         * @type {boolean || null}
+         */
+        this.Headdress = null;
+
+        /**
+         * 分割选项-耳环
+         * @type {boolean || null}
+         */
+        this.Earrings = null;
+
+        /**
+         * 分割选项-项链
+         * @type {boolean || null}
+         */
+        this.Necklace = null;
+
+        /**
+         * 分割选项-随身物品（ 例如伞、包、手机等。 ）
+         * @type {boolean || null}
+         */
+        this.Belongings = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Background = 'Background' in params ? params.Background : null;
+        this.Hair = 'Hair' in params ? params.Hair : null;
+        this.LeftEyebrow = 'LeftEyebrow' in params ? params.LeftEyebrow : null;
+        this.RightEyebrow = 'RightEyebrow' in params ? params.RightEyebrow : null;
+        this.LeftEye = 'LeftEye' in params ? params.LeftEye : null;
+        this.RightEye = 'RightEye' in params ? params.RightEye : null;
+        this.Nose = 'Nose' in params ? params.Nose : null;
+        this.UpperLip = 'UpperLip' in params ? params.UpperLip : null;
+        this.LowerLip = 'LowerLip' in params ? params.LowerLip : null;
+        this.Tooth = 'Tooth' in params ? params.Tooth : null;
+        this.Mouth = 'Mouth' in params ? params.Mouth : null;
+        this.LeftEar = 'LeftEar' in params ? params.LeftEar : null;
+        this.RightEar = 'RightEar' in params ? params.RightEar : null;
+        this.Face = 'Face' in params ? params.Face : null;
+        this.Head = 'Head' in params ? params.Head : null;
+        this.Body = 'Body' in params ? params.Body : null;
+        this.Hat = 'Hat' in params ? params.Hat : null;
+        this.Headdress = 'Headdress' in params ? params.Headdress : null;
+        this.Earrings = 'Earrings' in params ? params.Earrings : null;
+        this.Necklace = 'Necklace' in params ? params.Necklace : null;
+        this.Belongings = 'Belongings' in params ? params.Belongings : null;
+
+    }
+}
+
+/**
  * ModifyGroup请求参数结构体
  * @class
  */
@@ -733,6 +901,60 @@ class Gender extends  AbstractModel {
         }
         this.Type = 'Type' in params ? params.Type : null;
         this.Probability = 'Probability' in params ? params.Probability : null;
+
+    }
+}
+
+/**
+ * SegmentCustomizedPortraitPic请求参数结构体
+ * @class
+ */
+class SegmentCustomizedPortraitPicRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 此参数为分割选项，请根据需要选择自己所想从图片中分割的部分。注意所有选项均为非必选，如未选择则值默认为false, 但是必须要保证多于一个选项的描述为true。
+         * @type {SegmentationOptions || null}
+         */
+        this.SegmentationOptions = null;
+
+        /**
+         * 图片 base64 数据，base64 编码后大小不可超过5M。
+图片分辨率须小于2000*2000。 
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+         * @type {string || null}
+         */
+        this.Image = null;
+
+        /**
+         * 图片的 Url 。
+Url、Image必须提供一个，如果都提供，只使用 Url。
+图片分辨率须小于2000*2000 ，图片 base64 编码后大小不可超过5M。 
+图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。  
+非腾讯云存储的Url速度和稳定性可能受一定影响。 
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SegmentationOptions) {
+            let obj = new SegmentationOptions();
+            obj.deserialize(params.SegmentationOptions)
+            this.SegmentationOptions = obj;
+        }
+        this.Image = 'Image' in params ? params.Image : null;
+        this.Url = 'Url' in params ? params.Url : null;
 
     }
 }
@@ -1327,6 +1549,48 @@ class Bag extends  AbstractModel {
         }
         this.Type = 'Type' in params ? params.Type : null;
         this.Probability = 'Probability' in params ? params.Probability : null;
+
+    }
+}
+
+/**
+ * SegmentCustomizedPortraitPic返回参数结构体
+ * @class
+ */
+class SegmentCustomizedPortraitPicResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 根据指定标签分割输出的透明背景人像图片的 base64 数据。
+         * @type {string || null}
+         */
+        this.PortraitImage = null;
+
+        /**
+         * 指定标签处理后的Mask。一个通过 Base64 编码的文件，解码后文件由 Float 型浮点数组成。这些浮点数代表原图从左上角开始的每一行的每一个像素点，每一个浮点数的值是原图相应像素点位于人体轮廓内的置信度（0-1）转化的灰度值（0-255）
+         * @type {string || null}
+         */
+        this.MaskImage = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PortraitImage = 'PortraitImage' in params ? params.PortraitImage : null;
+        this.MaskImage = 'MaskImage' in params ? params.MaskImage : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2295,6 +2559,7 @@ module.exports = {
     BodyAttributeInfo: BodyAttributeInfo,
     GetGroupListResponse: GetGroupListResponse,
     GroupInfo: GroupInfo,
+    SegmentationOptions: SegmentationOptions,
     ModifyGroupRequest: ModifyGroupRequest,
     CreatePersonRequest: CreatePersonRequest,
     ModifyPersonInfoResponse: ModifyPersonInfoResponse,
@@ -2302,6 +2567,7 @@ module.exports = {
     DeleteGroupRequest: DeleteGroupRequest,
     ModifyPersonInfoRequest: ModifyPersonInfoRequest,
     Gender: Gender,
+    SegmentCustomizedPortraitPicRequest: SegmentCustomizedPortraitPicRequest,
     CreateGroupRequest: CreateGroupRequest,
     LowerBodyCloth: LowerBodyCloth,
     UpperBodyClothTexture: UpperBodyClothTexture,
@@ -2315,6 +2581,7 @@ module.exports = {
     DetectBodyResponse: DetectBodyResponse,
     PersonInfo: PersonInfo,
     Bag: Bag,
+    SegmentCustomizedPortraitPicResponse: SegmentCustomizedPortraitPicResponse,
     DetectBodyJointsRequest: DetectBodyJointsRequest,
     SegmentPortraitPicRequest: SegmentPortraitPicRequest,
     UpperBodyClothColor: UpperBodyClothColor,
