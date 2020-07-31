@@ -1368,40 +1368,49 @@ class ReviseMbrPropertyRequest extends  AbstractModel {
 }
 
 /**
- * 银企直连-查询单笔支付状态条目
+ * MigrateOrderRefundQuery返回参数结构体
  * @class
  */
-class QuerySinglePayItem extends  AbstractModel {
+class MigrateOrderRefundQueryResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 付款状态（S：支付成功；P：支付处理中；F：支付失败）
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * 请求成功状态
+         * @type {boolean || null}
          */
-        this.PayStatus = null;
+        this.IsSuccess = null;
 
         /**
-         * 平台信息
-注意：此字段可能返回 null，表示取不到有效值。
+         * 交易流水号
          * @type {string || null}
          */
-        this.PlatformMsg = null;
+        this.TradeSerialNo = null;
 
         /**
-         * 银行原始返回码
-注意：此字段可能返回 null，表示取不到有效值。
+         * 交易备注
          * @type {string || null}
          */
-        this.BankRetCode = null;
+        this.TradeMsg = null;
 
         /**
-         * 银行原始返回
+         * 交易状态：0=交易待处理；1=交易处理中；2=交易处理成功；3=交易失败；4=状态未知
+         * @type {number || null}
+         */
+        this.TradeStatus = null;
+
+        /**
+         * 第三方支付机构支付交易号
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.BankRetMsg = null;
+        this.ThirdChannelOrderId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -1412,10 +1421,12 @@ class QuerySinglePayItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PayStatus = 'PayStatus' in params ? params.PayStatus : null;
-        this.PlatformMsg = 'PlatformMsg' in params ? params.PlatformMsg : null;
-        this.BankRetCode = 'BankRetCode' in params ? params.BankRetCode : null;
-        this.BankRetMsg = 'BankRetMsg' in params ? params.BankRetMsg : null;
+        this.IsSuccess = 'IsSuccess' in params ? params.IsSuccess : null;
+        this.TradeSerialNo = 'TradeSerialNo' in params ? params.TradeSerialNo : null;
+        this.TradeMsg = 'TradeMsg' in params ? params.TradeMsg : null;
+        this.TradeStatus = 'TradeStatus' in params ? params.TradeStatus : null;
+        this.ThirdChannelOrderId = 'ThirdChannelOrderId' in params ? params.ThirdChannelOrderId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8023,6 +8034,62 @@ merchant:商户子账户
 }
 
 /**
+ * MigrateOrderRefundQuery请求参数结构体
+ * @class
+ */
+class MigrateOrderRefundQueryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 商户号
+         * @type {string || null}
+         */
+        this.MerchantId = null;
+
+        /**
+         * 支付渠道，ALIPAY对应支付宝渠道；UNIONPAY对应银联渠道
+         * @type {string || null}
+         */
+        this.PayChannel = null;
+
+        /**
+         * 退款订单号，最长64位，仅支持数字、 字母
+         * @type {string || null}
+         */
+        this.RefundOrderId = null;
+
+        /**
+         * 退款流水号
+         * @type {string || null}
+         */
+        this.TradeSerialNo = null;
+
+        /**
+         * 接入环境。沙箱环境填 sandbox。
+         * @type {string || null}
+         */
+        this.Profile = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MerchantId = 'MerchantId' in params ? params.MerchantId : null;
+        this.PayChannel = 'PayChannel' in params ? params.PayChannel : null;
+        this.RefundOrderId = 'RefundOrderId' in params ? params.RefundOrderId : null;
+        this.TradeSerialNo = 'TradeSerialNo' in params ? params.TradeSerialNo : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
+
+    }
+}
+
+/**
  * QueryAgentTaxPaymentBatch请求参数结构体
  * @class
  */
@@ -11349,6 +11416,83 @@ class RefundMemberTransactionResponse extends  AbstractModel {
 }
 
 /**
+ * MigrateOrderRefund请求参数结构体
+ * @class
+ */
+class MigrateOrderRefundRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 商户代码
+         * @type {string || null}
+         */
+        this.MerchantId = null;
+
+        /**
+         * 支付渠道，ALIPAY对应支付宝渠道；UNIONPAY对应银联渠道
+         * @type {string || null}
+         */
+        this.PayChannel = null;
+
+        /**
+         * 正向支付商户订单号
+         * @type {string || null}
+         */
+        this.PayOrderId = null;
+
+        /**
+         * 退款订单号，最长64位，仅支持数字、 字母
+         * @type {string || null}
+         */
+        this.RefundOrderId = null;
+
+        /**
+         * 退款金额，单位：分。备注：改字段必须大于0 和小于10000000000的整数。
+         * @type {number || null}
+         */
+        this.RefundAmt = null;
+
+        /**
+         * 第三方支付机构支付交易号
+         * @type {string || null}
+         */
+        this.ThirdChannelOrderId = null;
+
+        /**
+         * 原始支付金额，单位：分。备注：当该字段为空或者为0 时，系统会默认使用订单当 实付金额作为退款金额
+         * @type {number || null}
+         */
+        this.PayAmt = null;
+
+        /**
+         * 接入环境。沙箱环境填 sandbox。
+         * @type {string || null}
+         */
+        this.Profile = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MerchantId = 'MerchantId' in params ? params.MerchantId : null;
+        this.PayChannel = 'PayChannel' in params ? params.PayChannel : null;
+        this.PayOrderId = 'PayOrderId' in params ? params.PayOrderId : null;
+        this.RefundOrderId = 'RefundOrderId' in params ? params.RefundOrderId : null;
+        this.RefundAmt = 'RefundAmt' in params ? params.RefundAmt : null;
+        this.ThirdChannelOrderId = 'ThirdChannelOrderId' in params ? params.ThirdChannelOrderId : null;
+        this.PayAmt = 'PayAmt' in params ? params.PayAmt : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
+
+    }
+}
+
+/**
  * QueryBankClear请求参数结构体
  * @class
  */
@@ -12599,6 +12743,59 @@ class ApplyTradeData extends  AbstractModel {
         this.TradeAmount = 'TradeAmount' in params ? params.TradeAmount : null;
         this.PayerId = 'PayerId' in params ? params.PayerId : null;
         this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * 银企直连-查询单笔支付状态条目
+ * @class
+ */
+class QuerySinglePayItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 付款状态（S：支付成功；P：支付处理中；F：支付失败）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PayStatus = null;
+
+        /**
+         * 平台信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PlatformMsg = null;
+
+        /**
+         * 银行原始返回码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.BankRetCode = null;
+
+        /**
+         * 银行原始返回
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.BankRetMsg = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PayStatus = 'PayStatus' in params ? params.PayStatus : null;
+        this.PlatformMsg = 'PlatformMsg' in params ? params.PlatformMsg : null;
+        this.BankRetCode = 'BankRetCode' in params ? params.BankRetCode : null;
+        this.BankRetMsg = 'BankRetMsg' in params ? params.BankRetMsg : null;
 
     }
 }
@@ -14133,6 +14330,55 @@ development: 开发环境
 }
 
 /**
+ * MigrateOrderRefund返回参数结构体
+ * @class
+ */
+class MigrateOrderRefundResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 请求成功状态
+         * @type {boolean || null}
+         */
+        this.IsSuccess = null;
+
+        /**
+         * 退款流水号
+         * @type {string || null}
+         */
+        this.TradeSerialNo = null;
+
+        /**
+         * 交易备注
+         * @type {string || null}
+         */
+        this.TradeMsg = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IsSuccess = 'IsSuccess' in params ? params.IsSuccess : null;
+        this.TradeSerialNo = 'TradeSerialNo' in params ? params.TradeSerialNo : null;
+        this.TradeMsg = 'TradeMsg' in params ? params.TradeMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * QueryAnchorContractInfo返回参数结构体
  * @class
  */
@@ -14512,7 +14758,7 @@ module.exports = {
     WithdrawItem: WithdrawItem,
     BindAcctRequest: BindAcctRequest,
     ReviseMbrPropertyRequest: ReviseMbrPropertyRequest,
-    QuerySinglePayItem: QuerySinglePayItem,
+    MigrateOrderRefundQueryResponse: MigrateOrderRefundQueryResponse,
     RevResigterBillSupportWithdrawRequest: RevResigterBillSupportWithdrawRequest,
     CreateInvoiceResponse: CreateInvoiceResponse,
     AgentTaxPayment: AgentTaxPayment,
@@ -14606,6 +14852,7 @@ module.exports = {
     QueryMerchantBalanceResponse: QueryMerchantBalanceResponse,
     CreateSinglePayResult: CreateSinglePayResult,
     QueryAcctInfoResponse: QueryAcctInfoResponse,
+    MigrateOrderRefundQueryRequest: MigrateOrderRefundQueryRequest,
     QueryAgentTaxPaymentBatchRequest: QueryAgentTaxPaymentBatchRequest,
     QueryPayerinfoResult: QueryPayerinfoResult,
     TransferItem: TransferItem,
@@ -14647,6 +14894,7 @@ module.exports = {
     ApplyPayerInfoRequest: ApplyPayerInfoRequest,
     CreateSinglePayResponse: CreateSinglePayResponse,
     RefundMemberTransactionResponse: RefundMemberTransactionResponse,
+    MigrateOrderRefundRequest: MigrateOrderRefundRequest,
     QueryBankClearRequest: QueryBankClearRequest,
     QueryInvoiceRequest: QueryInvoiceRequest,
     ApplyApplicationMaterialResponse: ApplyApplicationMaterialResponse,
@@ -14664,6 +14912,7 @@ module.exports = {
     CreateMerchantResponse: CreateMerchantResponse,
     QueryMemberTransactionResponse: QueryMemberTransactionResponse,
     ApplyTradeData: ApplyTradeData,
+    QuerySinglePayItem: QuerySinglePayItem,
     ApplyApplicationMaterialRequest: ApplyApplicationMaterialRequest,
     QueryAcctItem: QueryAcctItem,
     ModifyAgentTaxPaymentInfoRequest: ModifyAgentTaxPaymentInfoRequest,
@@ -14683,6 +14932,7 @@ module.exports = {
     QueryReconciliationDocumentRequest: QueryReconciliationDocumentRequest,
     UnifiedOrderRequest: UnifiedOrderRequest,
     UnBindAcctRequest: UnBindAcctRequest,
+    MigrateOrderRefundResponse: MigrateOrderRefundResponse,
     QueryAnchorContractInfoResponse: QueryAnchorContractInfoResponse,
     DeleteAgentTaxPaymentInfoResponse: DeleteAgentTaxPaymentInfoResponse,
     RefundRequest: RefundRequest,

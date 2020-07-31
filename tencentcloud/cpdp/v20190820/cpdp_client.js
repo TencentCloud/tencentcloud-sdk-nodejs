@@ -35,7 +35,7 @@ const QueryPayerInfoResponse = models.QueryPayerInfoResponse;
 const WithdrawItem = models.WithdrawItem;
 const BindAcctRequest = models.BindAcctRequest;
 const ReviseMbrPropertyRequest = models.ReviseMbrPropertyRequest;
-const QuerySinglePayItem = models.QuerySinglePayItem;
+const MigrateOrderRefundQueryResponse = models.MigrateOrderRefundQueryResponse;
 const RevResigterBillSupportWithdrawRequest = models.RevResigterBillSupportWithdrawRequest;
 const CreateInvoiceResponse = models.CreateInvoiceResponse;
 const AgentTaxPayment = models.AgentTaxPayment;
@@ -129,6 +129,7 @@ const CreateCustAcctIdResponse = models.CreateCustAcctIdResponse;
 const QueryMerchantBalanceResponse = models.QueryMerchantBalanceResponse;
 const CreateSinglePayResult = models.CreateSinglePayResult;
 const QueryAcctInfoResponse = models.QueryAcctInfoResponse;
+const MigrateOrderRefundQueryRequest = models.MigrateOrderRefundQueryRequest;
 const QueryAgentTaxPaymentBatchRequest = models.QueryAgentTaxPaymentBatchRequest;
 const QueryPayerinfoResult = models.QueryPayerinfoResult;
 const TransferItem = models.TransferItem;
@@ -170,6 +171,7 @@ const ApplyOutwardOrderResult = models.ApplyOutwardOrderResult;
 const ApplyPayerInfoRequest = models.ApplyPayerInfoRequest;
 const CreateSinglePayResponse = models.CreateSinglePayResponse;
 const RefundMemberTransactionResponse = models.RefundMemberTransactionResponse;
+const MigrateOrderRefundRequest = models.MigrateOrderRefundRequest;
 const QueryBankClearRequest = models.QueryBankClearRequest;
 const QueryInvoiceRequest = models.QueryInvoiceRequest;
 const ApplyApplicationMaterialResponse = models.ApplyApplicationMaterialResponse;
@@ -187,6 +189,7 @@ const QueryApplicationMaterialRequest = models.QueryApplicationMaterialRequest;
 const CreateMerchantResponse = models.CreateMerchantResponse;
 const QueryMemberTransactionResponse = models.QueryMemberTransactionResponse;
 const ApplyTradeData = models.ApplyTradeData;
+const QuerySinglePayItem = models.QuerySinglePayItem;
 const ApplyApplicationMaterialRequest = models.ApplyApplicationMaterialRequest;
 const QueryAcctItem = models.QueryAcctItem;
 const ModifyAgentTaxPaymentInfoRequest = models.ModifyAgentTaxPaymentInfoRequest;
@@ -206,6 +209,7 @@ const BindRelateAcctUnionPayResponse = models.BindRelateAcctUnionPayResponse;
 const QueryReconciliationDocumentRequest = models.QueryReconciliationDocumentRequest;
 const UnifiedOrderRequest = models.UnifiedOrderRequest;
 const UnBindAcctRequest = models.UnBindAcctRequest;
+const MigrateOrderRefundResponse = models.MigrateOrderRefundResponse;
 const QueryAnchorContractInfoResponse = models.QueryAnchorContractInfoResponse;
 const DeleteAgentTaxPaymentInfoResponse = models.DeleteAgentTaxPaymentInfoResponse;
 const RefundRequest = models.RefundRequest;
@@ -728,6 +732,17 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
+     * 提交退款申请后，通过调用该接口查询退款状态。退款可能有一定延时。
+     * @param {MigrateOrderRefundQueryRequest} req
+     * @param {function(string, MigrateOrderRefundQueryResponse):void} cb
+     * @public
+     */
+    MigrateOrderRefundQuery(req, cb) {
+        let resp = new MigrateOrderRefundQueryResponse();
+        this.request("MigrateOrderRefundQuery", req, resp, cb);
+    }
+
+    /**
      * 验证鉴权金额。此接口可受理BindRelateAcctSmallAmount接口发起的转账金额（往账鉴权方式）的验证处理。若所回填的验证金额验证通过，则会绑定原申请中的银行账户作为提现账户。通过此接口也可以查得BindRelateAcctSmallAmount接口发起的来账鉴权方式的申请的当前状态。
      * @param {CheckAmountRequest} req
      * @param {function(string, CheckAmountResponse):void} cb
@@ -824,6 +839,17 @@ class CpdpClient extends AbstractClient {
     QuerySmallAmountTransfer(req, cb) {
         let resp = new QuerySmallAmountTransferResponse();
         this.request("QuerySmallAmountTransfer", req, resp, cb);
+    }
+
+    /**
+     * 山姆聚合支付项目-存量订单退款接口。可以通过本接口将支付款全部或部分退还给付款方，在收到用户退款请求并且验证成功之后，按照退款规则将支付款按原路退回到支付帐号。
+     * @param {MigrateOrderRefundRequest} req
+     * @param {function(string, MigrateOrderRefundResponse):void} cb
+     * @public
+     */
+    MigrateOrderRefund(req, cb) {
+        let resp = new MigrateOrderRefundResponse();
+        this.request("MigrateOrderRefund", req, resp, cb);
     }
 
     /**
