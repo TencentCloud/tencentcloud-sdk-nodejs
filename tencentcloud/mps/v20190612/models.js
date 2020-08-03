@@ -3702,7 +3702,7 @@ class ModifyTranscodeTemplateRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 模板描述信息，长度限制：256 个字节。
+         * 模板描述信息，长度限制：256 个字符。
          * @type {string || null}
          */
         this.Comment = null;
@@ -7960,7 +7960,7 @@ class ImageWatermarkTemplate extends  AbstractModel {
         /**
          * 水印的高度。支持 %、px 两种格式：
 <li>当字符串以 % 结尾，表示水印 Height 为视频高度的百分比大小，如 10% 表示 Height 为视频高度的 10%；</li>
-<li>当字符串以 px 结尾，表示水印 Width 单位为像素，如 100px 表示 Width 为 100 像素；</li>
+<li>当字符串以 px 结尾，表示水印 Height 单位为像素，如 100px 表示 Height 为 100 像素；</li>
 0px：表示 Height 按照 Width 对视频宽度的比例缩放。
          * @type {string || null}
          */
@@ -10344,7 +10344,7 @@ class ImageWatermarkInputForUpdate extends  AbstractModel {
         /**
          * 水印的高度。支持 %、px 两种格式：
 <li>当字符串以 % 结尾，表示水印 Height 为视频高度的百分比大小，如 10% 表示 Height 为视频高度的 10%；</li>
-<li>当字符串以 px 结尾，表示水印 Width 单位为像素，如 100px 表示 Width 为 100 像素。取值范围为0或[8, 4096]。</li>
+<li>当字符串以 px 结尾，表示水印 Height 单位为像素，如 100px 表示 Height 为 100 像素。取值范围为0或[8, 4096]。</li>
 默认值：0px，表示 Height 按照原始水印图片的宽高比缩放。
          * @type {string || null}
          */
@@ -14697,6 +14697,12 @@ class DescribeTaskDetailResponse extends  AbstractModel {
         this.SessionContext = null;
 
         /**
+         * 扩展信息字段，仅用于特定场景。
+         * @type {string || null}
+         */
+        this.ExtInfo = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -14743,6 +14749,7 @@ class DescribeTaskDetailResponse extends  AbstractModel {
         this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
+        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

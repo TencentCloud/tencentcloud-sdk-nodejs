@@ -907,6 +907,12 @@ false（默认）：发送正常请求，通过检查后直接创建实例
          */
         this.DryRun = null;
 
+        /**
+         * 高性能计算集群ID。若创建的实例为高性能计算实例，需指定实例放置的集群，否则不可指定。
+         * @type {string || null}
+         */
+        this.HpcClusterId = null;
+
     }
 
     /**
@@ -999,6 +1005,7 @@ false（默认）：发送正常请求，通过检查后直接创建实例
         }
         this.UserData = 'UserData' in params ? params.UserData : null;
         this.DryRun = 'DryRun' in params ? params.DryRun : null;
+        this.HpcClusterId = 'HpcClusterId' in params ? params.HpcClusterId : null;
 
     }
 }
@@ -3349,6 +3356,12 @@ class InquiryPriceRunInstancesRequest extends  AbstractModel {
          */
         this.InstanceMarketOptions = null;
 
+        /**
+         * 高性能计算集群ID。
+         * @type {string || null}
+         */
+        this.HpcClusterId = null;
+
     }
 
     /**
@@ -3432,6 +3445,7 @@ class InquiryPriceRunInstancesRequest extends  AbstractModel {
             obj.deserialize(params.InstanceMarketOptions)
             this.InstanceMarketOptions = obj;
         }
+        this.HpcClusterId = 'HpcClusterId' in params ? params.HpcClusterId : null;
 
     }
 }
@@ -4560,6 +4574,20 @@ class Instance extends  AbstractModel {
          */
         this.CamRoleName = null;
 
+        /**
+         * 高性能计算集群`ID`。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HpcClusterId = null;
+
+        /**
+         * 高性能计算集群`IP`列表。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.RdmaIpAddresses = null;
+
     }
 
     /**
@@ -4641,6 +4669,8 @@ class Instance extends  AbstractModel {
         this.DisasterRecoverGroupId = 'DisasterRecoverGroupId' in params ? params.DisasterRecoverGroupId : null;
         this.IPv6Addresses = 'IPv6Addresses' in params ? params.IPv6Addresses : null;
         this.CamRoleName = 'CamRoleName' in params ? params.CamRoleName : null;
+        this.HpcClusterId = 'HpcClusterId' in params ? params.HpcClusterId : null;
+        this.RdmaIpAddresses = 'RdmaIpAddresses' in params ? params.RdmaIpAddresses : null;
 
     }
 }

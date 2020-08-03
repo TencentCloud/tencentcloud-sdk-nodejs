@@ -433,6 +433,13 @@ class DirectConnect extends  AbstractModel {
          */
         this.StartTime = null;
 
+        /**
+         * 物理专线是否已签署用户协议
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.SignLaw = null;
+
     }
 
     /**
@@ -477,6 +484,7 @@ class DirectConnect extends  AbstractModel {
         this.IdcCity = 'IdcCity' in params ? params.IdcCity : null;
         this.ChargeState = 'ChargeState' in params ? params.ChargeState : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.SignLaw = 'SignLaw' in params ? params.SignLaw : null;
 
     }
 }
@@ -1453,6 +1461,13 @@ class AccessPoint extends  AbstractModel {
          */
         this.RegionId = null;
 
+        /**
+         * 接入点可用的端口类型列表。1000BASE-T代表千兆电口，1000BASE-LX代表千兆单模光口10km，1000BASE-ZX代表千兆单模光口80km,10GBASE-LR代表万兆单模光口10km,10GBASE-ZR代表万兆单模光口80km,10GBASE-LH代表万兆单模光口40km,100GBASE-LR4代表100G单模光口10km
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.AvailablePortType = null;
+
     }
 
     /**
@@ -1468,6 +1483,7 @@ class AccessPoint extends  AbstractModel {
         this.Location = 'Location' in params ? params.Location : null;
         this.LineOperator = 'LineOperator' in params ? params.LineOperator : null;
         this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.AvailablePortType = 'AvailablePortType' in params ? params.AvailablePortType : null;
 
     }
 }
@@ -1782,6 +1798,13 @@ REJECTED:拒绝
          */
         this.TencentBackupAddress = null;
 
+        /**
+         * 专用通道关联的物理专线是否签署了用户协议
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.SignLaw = null;
+
     }
 
     /**
@@ -1840,6 +1863,7 @@ REJECTED:拒绝
         this.DirectConnectGatewayName = 'DirectConnectGatewayName' in params ? params.DirectConnectGatewayName : null;
         this.VpcName = 'VpcName' in params ? params.VpcName : null;
         this.TencentBackupAddress = 'TencentBackupAddress' in params ? params.TencentBackupAddress : null;
+        this.SignLaw = 'SignLaw' in params ? params.SignLaw : null;
 
     }
 }

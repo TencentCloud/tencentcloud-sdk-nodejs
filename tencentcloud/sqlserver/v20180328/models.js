@@ -5728,6 +5728,12 @@ class Backup extends  AbstractModel {
          */
         this.BackupWay = null;
 
+        /**
+         * 备份名称，可自定义
+         * @type {string || null}
+         */
+        this.BackupName = null;
+
     }
 
     /**
@@ -5748,6 +5754,7 @@ class Backup extends  AbstractModel {
         this.DBs = 'DBs' in params ? params.DBs : null;
         this.Strategy = 'Strategy' in params ? params.Strategy : null;
         this.BackupWay = 'BackupWay' in params ? params.BackupWay : null;
+        this.BackupName = 'BackupName' in params ? params.BackupName : null;
 
     }
 }

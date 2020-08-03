@@ -29,6 +29,7 @@ const DescribeMultiDevTaskRequest = models.DescribeMultiDevTaskRequest;
 const DescribeProductsResponse = models.DescribeProductsResponse;
 const DescribeDeviceShadowResponse = models.DescribeDeviceShadowResponse;
 const CreateMultiDeviceResponse = models.CreateMultiDeviceResponse;
+const PublishRRPCMessageRequest = models.PublishRRPCMessageRequest;
 const ProductProperties = models.ProductProperties;
 const UpdateTopicPolicyResponse = models.UpdateTopicPolicyResponse;
 const TaskInfo = models.TaskInfo;
@@ -46,7 +47,7 @@ const CreateLoraDeviceRequest = models.CreateLoraDeviceRequest;
 const CreateProductResponse = models.CreateProductResponse;
 const DeleteLoraDeviceResponse = models.DeleteLoraDeviceResponse;
 const CreateTaskRequest = models.CreateTaskRequest;
-const TopicRulePayload = models.TopicRulePayload;
+const CreateTopicPolicyResponse = models.CreateTopicPolicyResponse;
 const DescribeMultiDevicesResponse = models.DescribeMultiDevicesResponse;
 const CreateDeviceResponse = models.CreateDeviceResponse;
 const DeleteLoraDeviceRequest = models.DeleteLoraDeviceRequest;
@@ -57,21 +58,24 @@ const DisableTopicRuleResponse = models.DisableTopicRuleResponse;
 const BrokerSubscribe = models.BrokerSubscribe;
 const DescribeProductTaskResponse = models.DescribeProductTaskResponse;
 const DescribeDeviceResponse = models.DescribeDeviceResponse;
+const PublishBroadcastMessageRequest = models.PublishBroadcastMessageRequest;
 const PublishMessageRequest = models.PublishMessageRequest;
 const DeviceLabel = models.DeviceLabel;
 const UpdateDeviceAvailableStateResponse = models.UpdateDeviceAvailableStateResponse;
 const CancelTaskRequest = models.CancelTaskRequest;
 const UpdateDeviceAvailableStateRequest = models.UpdateDeviceAvailableStateRequest;
 const DeleteProductResponse = models.DeleteProductResponse;
-const CreateTopicPolicyResponse = models.CreateTopicPolicyResponse;
+const TopicRulePayload = models.TopicRulePayload;
 const PublishToDeviceRequest = models.PublishToDeviceRequest;
 const DeleteTopicRuleResponse = models.DeleteTopicRuleResponse;
+const PublishBroadcastMessageResponse = models.PublishBroadcastMessageResponse;
 const DescribeDeviceRequest = models.DescribeDeviceRequest;
 const CreateMultiDevicesTaskResponse = models.CreateMultiDevicesTaskResponse;
 const CreateTopicPolicyRequest = models.CreateTopicPolicyRequest;
 const ProductMetadata = models.ProductMetadata;
 const DescribeLoraDeviceResponse = models.DescribeLoraDeviceResponse;
 const ProductTaskInfo = models.ProductTaskInfo;
+const PublishRRPCMessageResponse = models.PublishRRPCMessageResponse;
 const CancelTaskResponse = models.CancelTaskResponse;
 const Attribute = models.Attribute;
 const CreateLoraDeviceResponse = models.CreateLoraDeviceResponse;
@@ -140,6 +144,17 @@ class IotcloudClient extends AbstractClient {
     ReplaceTopicRule(req, cb) {
         let resp = new ReplaceTopicRuleResponse();
         this.request("ReplaceTopicRule", req, resp, cb);
+    }
+
+    /**
+     * 发布RRPC消息
+     * @param {PublishRRPCMessageRequest} req
+     * @param {function(string, PublishRRPCMessageResponse):void} cb
+     * @public
+     */
+    PublishRRPCMessage(req, cb) {
+        let resp = new PublishRRPCMessageResponse();
+        this.request("PublishRRPCMessage", req, resp, cb);
     }
 
     /**
@@ -459,6 +474,17 @@ class IotcloudClient extends AbstractClient {
     UnbindDevices(req, cb) {
         let resp = new UnbindDevicesResponse();
         this.request("UnbindDevices", req, resp, cb);
+    }
+
+    /**
+     * 发布广播消息
+     * @param {PublishBroadcastMessageRequest} req
+     * @param {function(string, PublishBroadcastMessageResponse):void} cb
+     * @public
+     */
+    PublishBroadcastMessage(req, cb) {
+        let resp = new PublishBroadcastMessageResponse();
+        this.request("PublishBroadcastMessage", req, resp, cb);
     }
 
     /**
