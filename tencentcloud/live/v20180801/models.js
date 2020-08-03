@@ -10060,7 +10060,10 @@ baseline/main/high。默认baseline
         this.AiTransCode = null;
 
         /**
-         * 极速高清相比VideoBitrate少多少码率，0.1到0.5
+         * 极速高清视频码率压缩比。
+极速高清目标码率=VideoBitrate * (1-AdaptBitratePercent)
+
+取值范围：0.0到0.5
          * @type {number || null}
          */
         this.AdaptBitratePercent = null;
@@ -10484,7 +10487,10 @@ baseline/main/high。
         this.FpsToOrig = null;
 
         /**
-         * 极速高清相比 VideoBitrate 少多少码率，0.1到0.5。
+         * 极速高清视频码率压缩比。
+极速高清目标码率=VideoBitrate * (1-AdaptBitratePercent)
+
+取值范围：0.0到0.5
          * @type {number || null}
          */
         this.AdaptBitratePercent = null;
@@ -11132,6 +11138,7 @@ class HlsSpecialParam extends  AbstractModel {
 
         /**
          * HLS续流超时时间。
+取值范围[0，1800]。
          * @type {number || null}
          */
         this.FlowContinueDuration = null;

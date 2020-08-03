@@ -941,7 +941,7 @@ class SentenceRecognitionRequest extends  AbstractModel {
         this.Url = null;
 
         /**
-         * 语音数据，当SourceType 值为1（本地语音数据上传）时必须填写，当SourceType 值为0（语音 URL上传）可不写。要使用base64编码(采用python语言时注意读取文件应该为string而不是byte，以byte格式读取后要decode()。编码后的数据不可带有回车换行符)。音频数据要小于600KB。
+         * 语音数据，当SourceType 值为1（本地语音数据上传）时必须填写，当SourceType 值为0（语音 URL上传）可不写。要使用base64编码(采用python语言时注意读取文件应该为string而不是byte，以byte格式读取后要decode()。编码后的数据不可带有回车换行符)。数据长度要小于3MB（Base64后）。
          * @type {string || null}
          */
         this.Data = null;
@@ -971,7 +971,7 @@ class SentenceRecognitionRequest extends  AbstractModel {
         this.FilterModal = null;
 
         /**
-         * 是否过滤句末的句号（目前支持中文普通话引擎）。0：不过滤句末的句号；1：过滤句末的句号。
+         * 是否过滤标点符号（目前支持中文普通话引擎）。 0：不过滤，1：过滤句末标点，2：过滤所有标点。默认为0。（该功能灰度上线中）
          * @type {number || null}
          */
         this.FilterPunc = null;

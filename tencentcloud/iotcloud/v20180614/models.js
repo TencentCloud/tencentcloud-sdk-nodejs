@@ -607,6 +607,48 @@ class CreateMultiDeviceResponse extends  AbstractModel {
 }
 
 /**
+ * PublishRRPCMessage请求参数结构体
+ * @class
+ */
+class PublishRRPCMessageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 消息内容，utf8编码
+         * @type {string || null}
+         */
+        this.Payload = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.Payload = 'Payload' in params ? params.Payload : null;
+
+    }
+}
+
+/**
  * 产品属性
  * @class
  */
@@ -1496,84 +1538,18 @@ class CreateTaskRequest extends  AbstractModel {
 }
 
 /**
- * 创建规则请求包体
+ * CreateTopicPolicy返回参数结构体
  * @class
  */
-class TopicRulePayload extends  AbstractModel {
+class CreateTopicPolicyResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 规则的SQL语句，如： SELECT * FROM 'pid/dname/event'，然后对其进行base64编码，得：U0VMRUNUICogRlJPTSAncGlkL2RuYW1lL2V2ZW50Jw==
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Sql = null;
-
-        /**
-         * 行为的JSON字符串，大部分种类举例如下：
-[
-    {
-        "republish": {
-            "topic": "TEST/test"
-        }
-    },
-    {
-        "forward": {
-            "api": "http://127.0.0.1:8080"
-        }
-    },
-    {
-        "ckafka": {
-            "instance": {
-                "id": "ckafka-test",
-                "name": ""
-            },
-            "topic": {
-                "id": "topic-test",
-                "name": "test"
-            },
-            "region": "gz"
-        }
-    },
-    {
-        "cmqqueue": {
-            "queuename": "queue-test-TEST",
-            "region": "gz"
-        }
-    },
-    {
-        "mysql": {
-            "instanceid": "cdb-test",
-            "region": "gz",
-            "username": "test",
-            "userpwd": "*****",
-            "dbname": "d_mqtt",
-            "tablename": "t_test",
-            "fieldpairs": [
-                {
-                    "field": "test",
-                    "value": "test"
-                }
-            ],
-            "devicetype": "CUSTOM"
-        }
-    }
-]
-         * @type {string || null}
-         */
-        this.Actions = null;
-
-        /**
-         * 规则描述
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * 是否禁用规则
-         * @type {boolean || null}
-         */
-        this.RuleDisabled = null;
+        this.RequestId = null;
 
     }
 
@@ -1584,10 +1560,7 @@ class TopicRulePayload extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Sql = 'Sql' in params ? params.Sql : null;
-        this.Actions = 'Actions' in params ? params.Actions : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.RuleDisabled = 'RuleDisabled' in params ? params.RuleDisabled : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2271,6 +2244,48 @@ class DescribeDeviceResponse extends  AbstractModel {
 }
 
 /**
+ * PublishBroadcastMessage请求参数结构体
+ * @class
+ */
+class PublishBroadcastMessageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 消息内容
+         * @type {string || null}
+         */
+        this.Payload = null;
+
+        /**
+         * 消息质量等级
+         * @type {number || null}
+         */
+        this.Qos = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.Payload = 'Payload' in params ? params.Payload : null;
+        this.Qos = 'Qos' in params ? params.Qos : null;
+
+    }
+}
+
+/**
  * PublishMessage请求参数结构体
  * @class
  */
@@ -2488,18 +2503,84 @@ class DeleteProductResponse extends  AbstractModel {
 }
 
 /**
- * CreateTopicPolicy返回参数结构体
+ * 创建规则请求包体
  * @class
  */
-class CreateTopicPolicyResponse extends  AbstractModel {
+class TopicRulePayload extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 规则的SQL语句，如： SELECT * FROM 'pid/dname/event'，然后对其进行base64编码，得：U0VMRUNUICogRlJPTSAncGlkL2RuYW1lL2V2ZW50Jw==
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Sql = null;
+
+        /**
+         * 行为的JSON字符串，大部分种类举例如下：
+[
+    {
+        "republish": {
+            "topic": "TEST/test"
+        }
+    },
+    {
+        "forward": {
+            "api": "http://127.0.0.1:8080"
+        }
+    },
+    {
+        "ckafka": {
+            "instance": {
+                "id": "ckafka-test",
+                "name": ""
+            },
+            "topic": {
+                "id": "topic-test",
+                "name": "test"
+            },
+            "region": "gz"
+        }
+    },
+    {
+        "cmqqueue": {
+            "queuename": "queue-test-TEST",
+            "region": "gz"
+        }
+    },
+    {
+        "mysql": {
+            "instanceid": "cdb-test",
+            "region": "gz",
+            "username": "test",
+            "userpwd": "*****",
+            "dbname": "d_mqtt",
+            "tablename": "t_test",
+            "fieldpairs": [
+                {
+                    "field": "test",
+                    "value": "test"
+                }
+            ],
+            "devicetype": "CUSTOM"
+        }
+    }
+]
+         * @type {string || null}
+         */
+        this.Actions = null;
+
+        /**
+         * 规则描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 是否禁用规则
+         * @type {boolean || null}
+         */
+        this.RuleDisabled = null;
 
     }
 
@@ -2510,7 +2591,10 @@ class CreateTopicPolicyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Sql = 'Sql' in params ? params.Sql : null;
+        this.Actions = 'Actions' in params ? params.Actions : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.RuleDisabled = 'RuleDisabled' in params ? params.RuleDisabled : null;
 
     }
 }
@@ -2587,6 +2671,41 @@ class DeleteTopicRuleResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * PublishBroadcastMessage返回参数结构体
+ * @class
+ */
+class PublishBroadcastMessageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 广播消息任务ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2920,6 +3039,48 @@ class ProductTaskInfo extends  AbstractModel {
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.CompleteTime = 'CompleteTime' in params ? params.CompleteTime : null;
+
+    }
+}
+
+/**
+ * PublishRRPCMessage返回参数结构体
+ * @class
+ */
+class PublishRRPCMessageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * RRPC消息ID
+         * @type {number || null}
+         */
+        this.MessageId = null;
+
+        /**
+         * 设备回复的的消息内容，采用base64编码
+         * @type {string || null}
+         */
+        this.PayloadBase64 = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MessageId = 'MessageId' in params ? params.MessageId : null;
+        this.PayloadBase64 = 'PayloadBase64' in params ? params.PayloadBase64 : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4520,6 +4681,7 @@ module.exports = {
     DescribeProductsResponse: DescribeProductsResponse,
     DescribeDeviceShadowResponse: DescribeDeviceShadowResponse,
     CreateMultiDeviceResponse: CreateMultiDeviceResponse,
+    PublishRRPCMessageRequest: PublishRRPCMessageRequest,
     ProductProperties: ProductProperties,
     UpdateTopicPolicyResponse: UpdateTopicPolicyResponse,
     TaskInfo: TaskInfo,
@@ -4537,7 +4699,7 @@ module.exports = {
     CreateProductResponse: CreateProductResponse,
     DeleteLoraDeviceResponse: DeleteLoraDeviceResponse,
     CreateTaskRequest: CreateTaskRequest,
-    TopicRulePayload: TopicRulePayload,
+    CreateTopicPolicyResponse: CreateTopicPolicyResponse,
     DescribeMultiDevicesResponse: DescribeMultiDevicesResponse,
     CreateDeviceResponse: CreateDeviceResponse,
     DeleteLoraDeviceRequest: DeleteLoraDeviceRequest,
@@ -4548,21 +4710,24 @@ module.exports = {
     BrokerSubscribe: BrokerSubscribe,
     DescribeProductTaskResponse: DescribeProductTaskResponse,
     DescribeDeviceResponse: DescribeDeviceResponse,
+    PublishBroadcastMessageRequest: PublishBroadcastMessageRequest,
     PublishMessageRequest: PublishMessageRequest,
     DeviceLabel: DeviceLabel,
     UpdateDeviceAvailableStateResponse: UpdateDeviceAvailableStateResponse,
     CancelTaskRequest: CancelTaskRequest,
     UpdateDeviceAvailableStateRequest: UpdateDeviceAvailableStateRequest,
     DeleteProductResponse: DeleteProductResponse,
-    CreateTopicPolicyResponse: CreateTopicPolicyResponse,
+    TopicRulePayload: TopicRulePayload,
     PublishToDeviceRequest: PublishToDeviceRequest,
     DeleteTopicRuleResponse: DeleteTopicRuleResponse,
+    PublishBroadcastMessageResponse: PublishBroadcastMessageResponse,
     DescribeDeviceRequest: DescribeDeviceRequest,
     CreateMultiDevicesTaskResponse: CreateMultiDevicesTaskResponse,
     CreateTopicPolicyRequest: CreateTopicPolicyRequest,
     ProductMetadata: ProductMetadata,
     DescribeLoraDeviceResponse: DescribeLoraDeviceResponse,
     ProductTaskInfo: ProductTaskInfo,
+    PublishRRPCMessageResponse: PublishRRPCMessageResponse,
     CancelTaskResponse: CancelTaskResponse,
     Attribute: Attribute,
     CreateLoraDeviceResponse: CreateLoraDeviceResponse,

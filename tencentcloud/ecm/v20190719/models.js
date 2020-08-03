@@ -5322,7 +5322,7 @@ class CreateImageRequest extends  AbstractModel {
         super();
 
         /**
-         * 镜像名称
+         * 镜像名称。
          * @type {string || null}
          */
         this.ImageName = null;
@@ -5334,7 +5334,7 @@ class CreateImageRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 镜像描述
+         * 镜像描述。
          * @type {string || null}
          */
         this.ImageDescription = null;
