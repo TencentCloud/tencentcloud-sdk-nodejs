@@ -255,7 +255,9 @@ const DirectConnectGateway = models.DirectConnectGateway;
 const Price = models.Price;
 const HaVipDisassociateAddressIpRequest = models.HaVipDisassociateAddressIpRequest;
 const ModifyVpnGatewayAttributeResponse = models.ModifyVpnGatewayAttributeResponse;
+const AssociateDirectConnectGatewayNatGatewayResponse = models.AssociateDirectConnectGatewayNatGatewayResponse;
 const DescribeVpnGatewayCcnRoutesRequest = models.DescribeVpnGatewayCcnRoutesRequest;
+const DisassociateDirectConnectGatewayNatGatewayResponse = models.DisassociateDirectConnectGatewayNatGatewayResponse;
 const CreateServiceTemplateGroupRequest = models.CreateServiceTemplateGroupRequest;
 const DescribeClassicLinkInstancesResponse = models.DescribeClassicLinkInstancesResponse;
 const DescribeVpnGatewayCcnRoutesResponse = models.DescribeVpnGatewayCcnRoutesResponse;
@@ -297,6 +299,7 @@ const CreateIp6TranslatorsRequest = models.CreateIp6TranslatorsRequest;
 const AssociateDhcpIpWithAddressIpResponse = models.AssociateDhcpIpWithAddressIpResponse;
 const ModifyGatewayFlowQosResponse = models.ModifyGatewayFlowQosResponse;
 const ModifySecurityGroupAttributeResponse = models.ModifySecurityGroupAttributeResponse;
+const AssociateDirectConnectGatewayNatGatewayRequest = models.AssociateDirectConnectGatewayNatGatewayRequest;
 const AddressTemplateItem = models.AddressTemplateItem;
 const ModifyAddressAttributeResponse = models.ModifyAddressAttributeResponse;
 const AttachClassicLinkVpcRequest = models.AttachClassicLinkVpcRequest;
@@ -347,6 +350,7 @@ const DescribeSecurityGroupReferencesRequest = models.DescribeSecurityGroupRefer
 const DescribeTemplateLimitsResponse = models.DescribeTemplateLimitsResponse;
 const CheckDefaultSubnetResponse = models.CheckDefaultSubnetResponse;
 const DisableRoutesRequest = models.DisableRoutesRequest;
+const DisassociateDirectConnectGatewayNatGatewayRequest = models.DisassociateDirectConnectGatewayNatGatewayRequest;
 const EnableRoutesRequest = models.EnableRoutesRequest;
 const DescribeAddressTemplateGroupsResponse = models.DescribeAddressTemplateGroupsResponse;
 const ReleaseAddressesRequest = models.ReleaseAddressesRequest;
@@ -849,14 +853,14 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeNetworkAcls）用于查询网络ACL列表。
-     * @param {DescribeNetworkAclsRequest} req
-     * @param {function(string, DescribeNetworkAclsResponse):void} cb
+     * 将专线网关与NAT网关绑定，专线网关默认路由指向NAT网关
+     * @param {AssociateDirectConnectGatewayNatGatewayRequest} req
+     * @param {function(string, AssociateDirectConnectGatewayNatGatewayResponse):void} cb
      * @public
      */
-    DescribeNetworkAcls(req, cb) {
-        let resp = new DescribeNetworkAclsResponse();
-        this.request("DescribeNetworkAcls", req, resp, cb);
+    AssociateDirectConnectGatewayNatGateway(req, cb) {
+        let resp = new AssociateDirectConnectGatewayNatGatewayResponse();
+        this.request("AssociateDirectConnectGatewayNatGateway", req, resp, cb);
     }
 
     /**
@@ -1233,6 +1237,17 @@ class VpcClient extends AbstractClient {
     DescribeGatewayFlowQos(req, cb) {
         let resp = new DescribeGatewayFlowQosResponse();
         this.request("DescribeGatewayFlowQos", req, resp, cb);
+    }
+
+    /**
+     * 将专线网关与NAT网关解绑，解绑之后，专线网关将不能通过NAT网关访问公网
+     * @param {DisassociateDirectConnectGatewayNatGatewayRequest} req
+     * @param {function(string, DisassociateDirectConnectGatewayNatGatewayResponse):void} cb
+     * @public
+     */
+    DisassociateDirectConnectGatewayNatGateway(req, cb) {
+        let resp = new DisassociateDirectConnectGatewayNatGatewayResponse();
+        this.request("DisassociateDirectConnectGatewayNatGateway", req, resp, cb);
     }
 
     /**
@@ -1860,14 +1875,14 @@ class VpcClient extends AbstractClient {
     }
 
     /**
-     * 本接口(CreateNetDetect)用于创建网络探测。
-     * @param {CreateNetDetectRequest} req
-     * @param {function(string, CreateNetDetectResponse):void} cb
+     * 接口用于查询账户在当前地域的带宽包上限数量以及使用数量
+     * @param {DescribeBandwidthPackageQuotaRequest} req
+     * @param {function(string, DescribeBandwidthPackageQuotaResponse):void} cb
      * @public
      */
-    CreateNetDetect(req, cb) {
-        let resp = new CreateNetDetectResponse();
-        this.request("CreateNetDetect", req, resp, cb);
+    DescribeBandwidthPackageQuota(req, cb) {
+        let resp = new DescribeBandwidthPackageQuotaResponse();
+        this.request("DescribeBandwidthPackageQuota", req, resp, cb);
     }
 
     /**
@@ -2565,6 +2580,17 @@ LimitTypes取值范围：
     }
 
     /**
+     * 本接口（DescribeNetworkAcls）用于查询网络ACL列表。
+     * @param {DescribeNetworkAclsRequest} req
+     * @param {function(string, DescribeNetworkAclsResponse):void} cb
+     * @public
+     */
+    DescribeNetworkAcls(req, cb) {
+        let resp = new DescribeNetworkAclsResponse();
+        this.request("DescribeNetworkAcls", req, resp, cb);
+    }
+
+    /**
      * 本接口（ModifyVpnConnectionAttribute）用于修改VPN通道。
      * @param {ModifyVpnConnectionAttributeRequest} req
      * @param {function(string, ModifyVpnConnectionAttributeResponse):void} cb
@@ -2792,14 +2818,14 @@ LimitTypes取值范围：
     }
 
     /**
-     * 接口用于查询账户在当前地域的带宽包上限数量以及使用数量
-     * @param {DescribeBandwidthPackageQuotaRequest} req
-     * @param {function(string, DescribeBandwidthPackageQuotaResponse):void} cb
+     * 本接口(CreateNetDetect)用于创建网络探测。
+     * @param {CreateNetDetectRequest} req
+     * @param {function(string, CreateNetDetectResponse):void} cb
      * @public
      */
-    DescribeBandwidthPackageQuota(req, cb) {
-        let resp = new DescribeBandwidthPackageQuotaResponse();
-        this.request("DescribeBandwidthPackageQuota", req, resp, cb);
+    CreateNetDetect(req, cb) {
+        let resp = new CreateNetDetectResponse();
+        this.request("CreateNetDetect", req, resp, cb);
     }
 
     /**

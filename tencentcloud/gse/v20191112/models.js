@@ -166,7 +166,7 @@ class DescribeGameServerSessionsResponse extends  AbstractModel {
         this.GameServerSessions = null;
 
         /**
-         * 页便宜，用于查询下一页
+         * 页偏移，用于查询下一页
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -2156,7 +2156,7 @@ class CreateGameServerSessionRequest extends  AbstractModel {
         this.MaximumPlayerSessionCount = null;
 
         /**
-         * 别名ID
+         * 别名ID。每个请求需要指定别名ID 或者舰队 ID，如果两个同时指定时，优先选择舰队 ID
          * @type {string || null}
          */
         this.AliasId = null;
@@ -2168,7 +2168,7 @@ class CreateGameServerSessionRequest extends  AbstractModel {
         this.CreatorId = null;
 
         /**
-         * 舰队ID
+         * 舰队ID。每个请求需要指定别名ID 或者舰队 ID，如果两个同时指定时，优先选择舰队 ID
          * @type {string || null}
          */
         this.FleetId = null;

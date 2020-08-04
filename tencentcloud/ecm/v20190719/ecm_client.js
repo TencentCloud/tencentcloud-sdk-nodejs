@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const RunEIPDirectServiceEnabled = models.RunEIPDirectServiceEnabled;
 const DescribeTaskResultResponse = models.DescribeTaskResultResponse;
 const Ipv6Address = models.Ipv6Address;
 const DescribePeakBaseOverviewRequest = models.DescribePeakBaseOverviewRequest;

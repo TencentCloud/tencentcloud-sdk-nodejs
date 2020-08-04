@@ -9114,6 +9114,20 @@ class NatGateway extends  AbstractModel {
          */
         this.Zone = null;
 
+        /**
+         * 绑定的专线网关ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.DirectConnectGatewayIds = null;
+
+        /**
+         * 所属子网ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
     }
 
     /**
@@ -9150,6 +9164,8 @@ class NatGateway extends  AbstractModel {
         }
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.Zone = 'Zone' in params ? params.Zone : null;
+        this.DirectConnectGatewayIds = 'DirectConnectGatewayIds' in params ? params.DirectConnectGatewayIds : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
     }
 }
@@ -11175,6 +11191,13 @@ NAT类型支持网络地址转换配置，类型确定后不能修改；一个�
          */
         this.EnableBGPCommunity = null;
 
+        /**
+         * 绑定的NAT网关ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NatGatewayId = null;
+
     }
 
     /**
@@ -11196,6 +11219,7 @@ NAT类型支持网络地址转换配置，类型确定后不能修改；一个�
         this.CcnRouteType = 'CcnRouteType' in params ? params.CcnRouteType : null;
         this.EnableBGP = 'EnableBGP' in params ? params.EnableBGP : null;
         this.EnableBGPCommunity = 'EnableBGPCommunity' in params ? params.EnableBGPCommunity : null;
+        this.NatGatewayId = 'NatGatewayId' in params ? params.NatGatewayId : null;
 
     }
 }
@@ -11302,6 +11326,34 @@ class ModifyVpnGatewayAttributeResponse extends  AbstractModel {
 }
 
 /**
+ * AssociateDirectConnectGatewayNatGateway返回参数结构体
+ * @class
+ */
+class AssociateDirectConnectGatewayNatGatewayResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeVpnGatewayCcnRoutes请求参数结构体
  * @class
  */
@@ -11339,6 +11391,34 @@ class DescribeVpnGatewayCcnRoutesRequest extends  AbstractModel {
         this.VpnGatewayId = 'VpnGatewayId' in params ? params.VpnGatewayId : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * DisassociateDirectConnectGatewayNatGateway返回参数结构体
+ * @class
+ */
+class DisassociateDirectConnectGatewayNatGatewayResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -13469,6 +13549,48 @@ class ModifySecurityGroupAttributeResponse extends  AbstractModel {
 }
 
 /**
+ * AssociateDirectConnectGatewayNatGateway请求参数结构体
+ * @class
+ */
+class AssociateDirectConnectGatewayNatGatewayRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 专线网关ID。
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * NAT网关ID。
+         * @type {string || null}
+         */
+        this.NatGatewayId = null;
+
+        /**
+         * VPC实例ID。可通过DescribeVpcs接口返回值中的VpcId获取。
+         * @type {string || null}
+         */
+        this.DirectConnectGatewayId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.NatGatewayId = 'NatGatewayId' in params ? params.NatGatewayId : null;
+        this.DirectConnectGatewayId = 'DirectConnectGatewayId' in params ? params.DirectConnectGatewayId : null;
+
+    }
+}
+
+/**
  * 地址信息
  * @class
  */
@@ -15413,6 +15535,48 @@ class DisableRoutesRequest extends  AbstractModel {
 }
 
 /**
+ * DisassociateDirectConnectGatewayNatGateway请求参数结构体
+ * @class
+ */
+class DisassociateDirectConnectGatewayNatGatewayRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 专线网关ID。
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * NAT网关ID。
+         * @type {string || null}
+         */
+        this.NatGatewayId = null;
+
+        /**
+         * VPC实例ID。可通过DescribeVpcs接口返回值中的VpcId获取。
+         * @type {string || null}
+         */
+        this.DirectConnectGatewayId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.NatGatewayId = 'NatGatewayId' in params ? params.NatGatewayId : null;
+        this.DirectConnectGatewayId = 'DirectConnectGatewayId' in params ? params.DirectConnectGatewayId : null;
+
+    }
+}
+
+/**
  * EnableRoutes请求参数结构体
  * @class
  */
@@ -16171,6 +16335,12 @@ class CreateNatGatewayRequest extends  AbstractModel {
          */
         this.Tags = null;
 
+        /**
+         * NAT网关所属子网
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
     }
 
     /**
@@ -16196,6 +16366,7 @@ class CreateNatGatewayRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
     }
 }
@@ -23374,7 +23545,9 @@ module.exports = {
     Price: Price,
     HaVipDisassociateAddressIpRequest: HaVipDisassociateAddressIpRequest,
     ModifyVpnGatewayAttributeResponse: ModifyVpnGatewayAttributeResponse,
+    AssociateDirectConnectGatewayNatGatewayResponse: AssociateDirectConnectGatewayNatGatewayResponse,
     DescribeVpnGatewayCcnRoutesRequest: DescribeVpnGatewayCcnRoutesRequest,
+    DisassociateDirectConnectGatewayNatGatewayResponse: DisassociateDirectConnectGatewayNatGatewayResponse,
     CreateServiceTemplateGroupRequest: CreateServiceTemplateGroupRequest,
     DescribeClassicLinkInstancesResponse: DescribeClassicLinkInstancesResponse,
     DescribeVpnGatewayCcnRoutesResponse: DescribeVpnGatewayCcnRoutesResponse,
@@ -23416,6 +23589,7 @@ module.exports = {
     AssociateDhcpIpWithAddressIpResponse: AssociateDhcpIpWithAddressIpResponse,
     ModifyGatewayFlowQosResponse: ModifyGatewayFlowQosResponse,
     ModifySecurityGroupAttributeResponse: ModifySecurityGroupAttributeResponse,
+    AssociateDirectConnectGatewayNatGatewayRequest: AssociateDirectConnectGatewayNatGatewayRequest,
     AddressTemplateItem: AddressTemplateItem,
     ModifyAddressAttributeResponse: ModifyAddressAttributeResponse,
     AttachClassicLinkVpcRequest: AttachClassicLinkVpcRequest,
@@ -23466,6 +23640,7 @@ module.exports = {
     DescribeTemplateLimitsResponse: DescribeTemplateLimitsResponse,
     CheckDefaultSubnetResponse: CheckDefaultSubnetResponse,
     DisableRoutesRequest: DisableRoutesRequest,
+    DisassociateDirectConnectGatewayNatGatewayRequest: DisassociateDirectConnectGatewayNatGatewayRequest,
     EnableRoutesRequest: EnableRoutesRequest,
     DescribeAddressTemplateGroupsResponse: DescribeAddressTemplateGroupsResponse,
     ReleaseAddressesRequest: ReleaseAddressesRequest,
