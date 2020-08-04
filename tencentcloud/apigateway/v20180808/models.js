@@ -199,6 +199,13 @@ class Service extends  AbstractModel {
          */
         this.TradeIsolateStatus = null;
 
+        /**
+         * 服务绑定的标签
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -223,6 +230,15 @@ class Service extends  AbstractModel {
         this.InnerHttpPort = 'InnerHttpPort' in params ? params.InnerHttpPort : null;
         this.InnerSubDomain = 'InnerSubDomain' in params ? params.InnerSubDomain : null;
         this.TradeIsolateStatus = 'TradeIsolateStatus' in params ? params.TradeIsolateStatus : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }

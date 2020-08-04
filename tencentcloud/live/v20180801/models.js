@@ -2978,13 +2978,13 @@ class DescribeProIspPlaySumInfoListRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * 统计的类型，可选值：”Province”，”Isp”，“CountryOrArea”。
+         * 统计的类型，可选值：”Province”(省份)，”Isp”(运营商)，“CountryOrArea”(国家或地区)。
          * @type {string || null}
          */
         this.StatType = null;
 
         /**
-         * 不填则为总体数据。
+         * 播放域名列表，不填则为全部。
          * @type {Array.<string> || null}
          */
         this.PlayDomains = null;
@@ -6679,7 +6679,6 @@ class DescribeHttpStatusInfoListRequest extends  AbstractModel {
         /**
          * 起始时间，北京时间，
 格式：yyyy-mm-dd HH:MM:SS。
-StartTime不能为3个月前。
          * @type {string || null}
          */
         this.StartTime = null;
@@ -6687,7 +6686,7 @@ StartTime不能为3个月前。
         /**
          * 结束时间，北京时间，
 格式：yyyy-mm-dd HH:MM:SS。
-注：EndTime 和 StartTime 只支持最近1天的数据查询。
+注：最大时间跨度支持1天，支持最近3个月的数据查询。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -9915,7 +9914,7 @@ class DescribeStreamPlayInfoListRequest extends  AbstractModel {
         /**
          * 推流路径，与播放地址中的AppName保持一致，会精确匹配，在同时传递了StreamName时生效。
 若不填，则为查询总体播放数据。
-注意：按AppName查询，需要联系客服同学提单支持。
+注意：按AppName查询请先联系工单申请，开通后配置生效预计需要5个工作日左右，具体时间以最终回复为准。
          * @type {string || null}
          */
         this.AppName = null;
@@ -10914,7 +10913,7 @@ class DescribeVisitTopSumInfoListResponse extends  AbstractModel {
         this.TopIndex = null;
 
         /**
-         * 排序指标，可选值包括” AvgFluxPerSecond”，”TotalRequest”（默认）,“TotalFlux”。
+         * 排序指标，可选值包括” AvgFluxPerSecond”(按每秒平均流量排序)，”TotalRequest”（默认，按总请求数排序）,“TotalFlux”（按总流量排序）。
          * @type {string || null}
          */
         this.OrderParam = null;

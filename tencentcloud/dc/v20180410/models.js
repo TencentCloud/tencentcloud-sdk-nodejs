@@ -153,6 +153,12 @@ class ModifyDirectConnectAttributeRequest extends  AbstractModel {
          */
         this.FaultReportContactNumber = null;
 
+        /**
+         * 物理专线申请者补签用户使用协议
+         * @type {boolean || null}
+         */
+        this.SignLaw = null;
+
     }
 
     /**
@@ -173,6 +179,7 @@ class ModifyDirectConnectAttributeRequest extends  AbstractModel {
         this.CustomerContactNumber = 'CustomerContactNumber' in params ? params.CustomerContactNumber : null;
         this.FaultReportContactPerson = 'FaultReportContactPerson' in params ? params.FaultReportContactPerson : null;
         this.FaultReportContactNumber = 'FaultReportContactNumber' in params ? params.FaultReportContactNumber : null;
+        this.SignLaw = 'SignLaw' in params ? params.SignLaw : null;
 
     }
 }
@@ -909,6 +916,13 @@ class DescribeDirectConnectsResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
+         * 用户名下物理专线是否都签署了用户协议
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.AllSignLaw = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -933,6 +947,7 @@ class DescribeDirectConnectsResponse extends  AbstractModel {
             }
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.AllSignLaw = 'AllSignLaw' in params ? params.AllSignLaw : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1192,12 +1207,6 @@ class CreateDirectConnectRequest extends  AbstractModel {
         this.LineOperator = null;
 
         /**
-         * 本地数据中心的地理位置。
-         * @type {string || null}
-         */
-        this.Location = null;
-
-        /**
          * 物理专线接入端口类型,取值：100Base-T：百兆电口,1000Base-T（默认值）：千兆电口,1000Base-LX：千兆单模光口（10千米）,10GBase-T：万兆电口10GBase-LR：万兆单模光口（10千米），默认值，千兆单模光口（10千米）。
          * @type {string || null}
          */
@@ -1208,6 +1217,12 @@ class CreateDirectConnectRequest extends  AbstractModel {
          * @type {string || null}
          */
         this.CircuitCode = null;
+
+        /**
+         * 本地数据中心的地理位置。
+         * @type {string || null}
+         */
+        this.Location = null;
 
         /**
          * 物理专线接入接口带宽，单位为Mbps，默认值为1000，取值范围为 [2, 10240]。
@@ -1269,6 +1284,12 @@ class CreateDirectConnectRequest extends  AbstractModel {
          */
         this.FaultReportContactNumber = null;
 
+        /**
+         * 物理专线申请者是否签署了用户使用协议。默认已签署
+         * @type {boolean || null}
+         */
+        this.SignLaw = null;
+
     }
 
     /**
@@ -1281,9 +1302,9 @@ class CreateDirectConnectRequest extends  AbstractModel {
         this.DirectConnectName = 'DirectConnectName' in params ? params.DirectConnectName : null;
         this.AccessPointId = 'AccessPointId' in params ? params.AccessPointId : null;
         this.LineOperator = 'LineOperator' in params ? params.LineOperator : null;
-        this.Location = 'Location' in params ? params.Location : null;
         this.PortType = 'PortType' in params ? params.PortType : null;
         this.CircuitCode = 'CircuitCode' in params ? params.CircuitCode : null;
+        this.Location = 'Location' in params ? params.Location : null;
         this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
         this.RedundantDirectConnectId = 'RedundantDirectConnectId' in params ? params.RedundantDirectConnectId : null;
         this.Vlan = 'Vlan' in params ? params.Vlan : null;
@@ -1294,6 +1315,7 @@ class CreateDirectConnectRequest extends  AbstractModel {
         this.CustomerContactNumber = 'CustomerContactNumber' in params ? params.CustomerContactNumber : null;
         this.FaultReportContactPerson = 'FaultReportContactPerson' in params ? params.FaultReportContactPerson : null;
         this.FaultReportContactNumber = 'FaultReportContactNumber' in params ? params.FaultReportContactNumber : null;
+        this.SignLaw = 'SignLaw' in params ? params.SignLaw : null;
 
     }
 }

@@ -17,6 +17,38 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * IP直通相关的信息
+ * @class
+ */
+class RunEIPDirectServiceEnabled extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否开通IP直通。取值范围：
+TRUE：表示开通IP直通
+FALSE：表示不开通IP直通
+默认取值：TRUE。
+windows镜像目前不支持IP直通。
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+
+    }
+}
+
+/**
  * DescribeTaskResult返回参数结构体
  * @class
  */
@@ -5669,6 +5701,12 @@ class EnhancedService extends  AbstractModel {
          */
         this.MonitorService = null;
 
+        /**
+         * 是否开通IP直通。若不指定该参数，则Linux镜像默认开通，windows镜像暂不支持IP直通。
+         * @type {RunEIPDirectServiceEnabled || null}
+         */
+        this.EIPDirectService = null;
+
     }
 
     /**
@@ -5689,6 +5727,12 @@ class EnhancedService extends  AbstractModel {
             let obj = new RunMonitorServiceEnabled();
             obj.deserialize(params.MonitorService)
             this.MonitorService = obj;
+        }
+
+        if (params.EIPDirectService) {
+            let obj = new RunEIPDirectServiceEnabled();
+            obj.deserialize(params.EIPDirectService)
+            this.EIPDirectService = obj;
         }
 
     }
@@ -9011,6 +9055,7 @@ class DescribeBaseOverviewResponse extends  AbstractModel {
 }
 
 module.exports = {
+    RunEIPDirectServiceEnabled: RunEIPDirectServiceEnabled,
     DescribeTaskResultResponse: DescribeTaskResultResponse,
     Ipv6Address: Ipv6Address,
     DescribePeakBaseOverviewRequest: DescribePeakBaseOverviewRequest,
