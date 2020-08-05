@@ -3058,7 +3058,7 @@ class PublishRRPCMessageResponse extends  AbstractModel {
         this.MessageId = null;
 
         /**
-         * 设备回复的的消息内容，采用base64编码
+         * 设备回复的消息内容，采用base64编码
          * @type {string || null}
          */
         this.PayloadBase64 = null;

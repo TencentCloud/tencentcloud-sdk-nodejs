@@ -4498,6 +4498,12 @@ class DeviceHardwareInfo extends  AbstractModel {
          */
         this.Cpu = null;
 
+        /**
+         * 机型外部代号
+         * @type {string || null}
+         */
+        this.DeviceClassCode = null;
+
     }
 
     /**
@@ -4523,6 +4529,7 @@ class DeviceHardwareInfo extends  AbstractModel {
         this.NicDescription = 'NicDescription' in params ? params.NicDescription : null;
         this.RaidDescription = 'RaidDescription' in params ? params.RaidDescription : null;
         this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.DeviceClassCode = 'DeviceClassCode' in params ? params.DeviceClassCode : null;
 
     }
 }

@@ -2611,6 +2611,48 @@ Windows实例密码必须12到16位，至少包括三项[a-z]，[A-Z]，[0-9]和
 }
 
 /**
+ * ModifyModuleConfig请求参数结构体
+ * @class
+ */
+class ModifyModuleConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模块ID。
+         * @type {string || null}
+         */
+        this.ModuleId = null;
+
+        /**
+         * 机型ID。
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * 默认数据盘大小，单位：G。范围不得超过数据盘范围大小，详看DescribeConfig。
+         * @type {number || null}
+         */
+        this.DefaultDataDiskSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ModuleId = 'ModuleId' in params ? params.ModuleId : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.DefaultDataDiskSize = 'DefaultDataDiskSize' in params ? params.DefaultDataDiskSize : null;
+
+    }
+}
+
+/**
  * 区域信息
  * @class
  */
@@ -6757,6 +6799,34 @@ is-arrears - String - 是否必填：否 - （过滤条件）按照 EIP 是否�
 }
 
 /**
+ * ModifyModuleConfig返回参数结构体
+ * @class
+ */
+class ModifyModuleConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * MigrateNetworkInterface请求参数结构体
  * @class
  */
@@ -9104,6 +9174,7 @@ module.exports = {
     DescribeNodeRequest: DescribeNodeRequest,
     CreateSubnetResponse: CreateSubnetResponse,
     ResetInstancesPasswordRequest: ResetInstancesPasswordRequest,
+    ModifyModuleConfigRequest: ModifyModuleConfigRequest,
     Area: Area,
     DescribeConfigRequest: DescribeConfigRequest,
     DescribeInstanceVncUrlRequest: DescribeInstanceVncUrlRequest,
@@ -9187,6 +9258,7 @@ module.exports = {
     PublicIPAddressInfo: PublicIPAddressInfo,
     TerminateInstancesResponse: TerminateInstancesResponse,
     DescribeAddressesRequest: DescribeAddressesRequest,
+    ModifyModuleConfigResponse: ModifyModuleConfigResponse,
     MigrateNetworkInterfaceRequest: MigrateNetworkInterfaceRequest,
     DescribeAddressQuotaResponse: DescribeAddressQuotaResponse,
     CreateSecurityGroupResponse: CreateSecurityGroupResponse,

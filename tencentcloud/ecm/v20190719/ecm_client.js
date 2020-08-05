@@ -65,6 +65,7 @@ const ZoneInfo = models.ZoneInfo;
 const DescribeNodeRequest = models.DescribeNodeRequest;
 const CreateSubnetResponse = models.CreateSubnetResponse;
 const ResetInstancesPasswordRequest = models.ResetInstancesPasswordRequest;
+const ModifyModuleConfigRequest = models.ModifyModuleConfigRequest;
 const Area = models.Area;
 const DescribeConfigRequest = models.DescribeConfigRequest;
 const DescribeInstanceVncUrlRequest = models.DescribeInstanceVncUrlRequest;
@@ -148,6 +149,7 @@ const Filter = models.Filter;
 const PublicIPAddressInfo = models.PublicIPAddressInfo;
 const TerminateInstancesResponse = models.TerminateInstancesResponse;
 const DescribeAddressesRequest = models.DescribeAddressesRequest;
+const ModifyModuleConfigResponse = models.ModifyModuleConfigResponse;
 const MigrateNetworkInterfaceRequest = models.MigrateNetworkInterfaceRequest;
 const DescribeAddressQuotaResponse = models.DescribeAddressQuotaResponse;
 const CreateSecurityGroupResponse = models.CreateSecurityGroupResponse;
@@ -356,6 +358,17 @@ EIP 如果被封堵，则不能进行解绑定操作。
     DescribeAddressQuota(req, cb) {
         let resp = new DescribeAddressQuotaResponse();
         this.request("DescribeAddressQuota", req, resp, cb);
+    }
+
+    /**
+     * 修改模块配置，已关联实例的模块不支持调整配置。
+     * @param {ModifyModuleConfigRequest} req
+     * @param {function(string, ModifyModuleConfigResponse):void} cb
+     * @public
+     */
+    ModifyModuleConfig(req, cb) {
+        let resp = new ModifyModuleConfigResponse();
+        this.request("ModifyModuleConfig", req, resp, cb);
     }
 
     /**
