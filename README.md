@@ -75,7 +75,7 @@ httpProfile.endpoint = "cvm.ap-shanghai.tencentcloudapi.com";  // 指定接入�
 
 // 实例化一个client选项，可选的，没有特殊需求可以跳过。
 let clientProfile = new ClientProfile();
-clientProfile.signMethod = "HmacSHA256";  // 指定签名算法(默认为HmacSHA256)(HmacSHA1, HmacSHA256)
+clientProfile.signMethod = "TC3-HMAC-SHA256";  // 指定签名算法(默认为HmacSHA256)(HmacSHA1, HmacSHA256)
 clientProfile.httpProfile = httpProfile;
 
 // 实例化要请求产品(以cvm为例)的client对象。clientProfile可选。
@@ -119,6 +119,10 @@ client.DescribeInstances(req, function (err, response) {
 ## 代理
 
 如果是有代理的环境下，需要设置系统环境变量 `https_proxy` ，否则可能无法正常调用，抛出连接超时的异常。
+
+## 签名方法 v3
+
+从3.0.224版本开始，支持签名方法 v3。
 
 # 旧版SDK
 我们推荐使用新版NODEJS SDK，如果一定要用旧版SDK，请前往[github仓库](https://github.com/CFETeam/qcloudapi-sdk)下载。
