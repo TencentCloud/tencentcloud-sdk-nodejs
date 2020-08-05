@@ -3301,7 +3301,7 @@ class DescribeLoadBalancersDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * 返回负载均衡列表数目，默认20，最大值1000。
+         * 返回负载均衡列表数目，默认20，最大值100。
          * @type {number || null}
          */
         this.Limit = null;

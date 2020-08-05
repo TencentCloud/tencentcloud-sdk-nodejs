@@ -1573,6 +1573,13 @@ class DescribeServiceResponse extends  AbstractModel {
         this.SetId = null;
 
         /**
+         * 服务绑定的标签。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1623,6 +1630,15 @@ class DescribeServiceResponse extends  AbstractModel {
         this.IpVersion = 'IpVersion' in params ? params.IpVersion : null;
         this.UserType = 'UserType' in params ? params.UserType : null;
         this.SetId = 'SetId' in params ? params.SetId : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

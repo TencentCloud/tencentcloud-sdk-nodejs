@@ -665,16 +665,16 @@ class WordItem extends  AbstractModel {
         super();
 
         /**
-         * 词条创建时间。
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
          * 词条文本内容。
          * @type {string || null}
          */
         this.Text = null;
+
+        /**
+         * 词条创建时间。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
 
         /**
          * 词条的词性。
@@ -691,8 +691,8 @@ class WordItem extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.Text = 'Text' in params ? params.Text : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.Pos = 'Pos' in params ? params.Pos : null;
 
     }
