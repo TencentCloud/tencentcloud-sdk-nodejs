@@ -100,6 +100,7 @@ const GeneralBasicOCRRequest = models.GeneralBasicOCRRequest;
 const TextVehicleBack = models.TextVehicleBack;
 const GeneralEfficientOCRRequest = models.GeneralEfficientOCRRequest;
 const TollInvoiceOCRResponse = models.TollInvoiceOCRResponse;
+const RideHailingDriverLicenseOCRResponse = models.RideHailingDriverLicenseOCRResponse;
 const EnglishOCRRequest = models.EnglishOCRRequest;
 const PassportOCRResponse = models.PassportOCRResponse;
 const GeneralAccurateOCRRequest = models.GeneralAccurateOCRRequest;
@@ -126,6 +127,7 @@ const EduPaperOCRRequest = models.EduPaperOCRRequest;
 const FormulaOCRRequest = models.FormulaOCRRequest;
 const PassportOCRRequest = models.PassportOCRRequest;
 const DutyPaidProofOCRRequest = models.DutyPaidProofOCRRequest;
+const RideHailingDriverLicenseOCRRequest = models.RideHailingDriverLicenseOCRRequest;
 const QueryBarCodeRequest = models.QueryBarCodeRequest;
 const ItemCoord = models.ItemCoord;
 const OrgCodeCertOCRResponse = models.OrgCodeCertOCRResponse;
@@ -325,7 +327,7 @@ class OcrClient extends AbstractClient {
 
 适用于文字较多、版式复杂、对识别准召率要求较高的场景，如试卷试题、网络图片、街景店招牌、法律卷宗等场景。
 
-产品优势：与通用印刷体识别的基础上，提供更高精度的文字识别服务，在文字较多、长串数字、小字、模糊字、倾斜文本等困难场景下，高精度版的准确率和召回率更高。
+产品优势：与通用印刷体识别相比，提供更高精度的文字识别服务，在文字较多、长串数字、小字、模糊字、倾斜文本等困难场景下，高精度版的准确率和召回率更高。
 
 通用印刷体识别不同版本的差异如下：
 <table style="width:715px">
@@ -694,6 +696,19 @@ class OcrClient extends AbstractClient {
     TableOCR(req, cb) {
         let resp = new TableOCRResponse();
         this.request("TableOCR", req, resp, cb);
+    }
+
+    /**
+     * 本接口支持网约车驾驶证重要字段的自动定位与识别，重点字段的识别准确度达到99%以上。
+
+网约车驾驶证：包括姓名、证号、起始日期、截止日期、发证日期。
+     * @param {RideHailingDriverLicenseOCRRequest} req
+     * @param {function(string, RideHailingDriverLicenseOCRResponse):void} cb
+     * @public
+     */
+    RideHailingDriverLicenseOCR(req, cb) {
+        let resp = new RideHailingDriverLicenseOCRResponse();
+        this.request("RideHailingDriverLicenseOCR", req, resp, cb);
     }
 
     /**

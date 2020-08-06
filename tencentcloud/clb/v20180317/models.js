@@ -468,6 +468,12 @@ OPEN：公网属性， INTERNAL：内网属性。
          */
         this.Tags = null;
 
+        /**
+         * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
+         * @type {string || null}
+         */
+        this.ClientToken = null;
+
     }
 
     /**
@@ -503,6 +509,7 @@ OPEN：公网属性， INTERNAL：内网属性。
                 this.Tags.push(obj);
             }
         }
+        this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
 
     }
 }

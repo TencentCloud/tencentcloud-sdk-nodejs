@@ -17,6 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const Candidate = models.Candidate;
+const VerifyFaceResponse = models.VerifyFaceResponse;
 const SearchPersonsReturnsByGroupResponse = models.SearchPersonsReturnsByGroupResponse;
 const CreatePersonRequest = models.CreatePersonRequest;
 const CreateFaceResponse = models.CreateFaceResponse;
@@ -51,7 +52,6 @@ const SearchPersonsResponse = models.SearchPersonsResponse;
 const GetUpgradeGroupFaceModelVersionResultRequest = models.GetUpgradeGroupFaceModelVersionResultRequest;
 const GroupInfo = models.GroupInfo;
 const FaceQualityInfo = models.FaceQualityInfo;
-const JobIdInfo = models.JobIdInfo;
 const SearchFacesReturnsByGroupResponse = models.SearchFacesReturnsByGroupResponse;
 const CopyPersonRequest = models.CopyPersonRequest;
 const SearchPersonsReturnsByGroupRequest = models.SearchPersonsReturnsByGroupRequest;
@@ -71,11 +71,12 @@ const SearchFacesReturnsByGroupRequest = models.SearchFacesReturnsByGroupRequest
 const ModifyPersonBaseInfoResponse = models.ModifyPersonBaseInfoResponse;
 const GetSimilarPersonResultResponse = models.GetSimilarPersonResultResponse;
 const ModifyPersonGroupInfoRequest = models.ModifyPersonGroupInfoRequest;
+const RevertGroupFaceModelVersionRequest = models.RevertGroupFaceModelVersionRequest;
 const UpgradeGroupFaceModelVersionRequest = models.UpgradeGroupFaceModelVersionRequest;
 const FaceAttributesInfo = models.FaceAttributesInfo;
 const VerifyPersonRequest = models.VerifyPersonRequest;
 const ModifyPersonBaseInfoRequest = models.ModifyPersonBaseInfoRequest;
-const VerifyFaceResponse = models.VerifyFaceResponse;
+const JobIdInfo = models.JobIdInfo;
 const SearchFacesRequest = models.SearchFacesRequest;
 const GetCheckSimilarPersonJobIdListRequest = models.GetCheckSimilarPersonJobIdListRequest;
 const SearchPersonsRequest = models.SearchPersonsRequest;
@@ -91,6 +92,7 @@ const GetGroupListResponse = models.GetGroupListResponse;
 const PersonGroupInfo = models.PersonGroupInfo;
 const GetGroupInfoResponse = models.GetGroupInfoResponse;
 const CompareFaceResponse = models.CompareFaceResponse;
+const RevertGroupFaceModelVersionResponse = models.RevertGroupFaceModelVersionResponse;
 const DeleteGroupResponse = models.DeleteGroupResponse;
 const CompareFaceRequest = models.CompareFaceRequest;
 const VerifyPersonResponse = models.VerifyPersonResponse;
@@ -383,6 +385,21 @@ class IaiClient extends AbstractClient {
     GetSimilarPersonResult(req, cb) {
         let resp = new GetSimilarPersonResultResponse();
         this.request("GetSimilarPersonResult", req, resp, cb);
+    }
+
+    /**
+     * 本接口用于回滚人员库的人脸识别算法模型版本。单个人员库有且仅有一次回滚机会。
+
+回滚操作会在10s内生效，回滚操作中，您对人员库的操作可能会失效。
+
+注：给客户我会写10s内生效，我们实际上越快越好。待讨论。
+     * @param {RevertGroupFaceModelVersionRequest} req
+     * @param {function(string, RevertGroupFaceModelVersionResponse):void} cb
+     * @public
+     */
+    RevertGroupFaceModelVersion(req, cb) {
+        let resp = new RevertGroupFaceModelVersionResponse();
+        this.request("RevertGroupFaceModelVersion", req, resp, cb);
     }
 
     /**

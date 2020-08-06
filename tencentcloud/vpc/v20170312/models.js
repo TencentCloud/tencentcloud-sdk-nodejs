@@ -5907,6 +5907,30 @@ class CcnRoute extends  AbstractModel {
          */
         this.InstanceUin = null;
 
+        /**
+         * 路由的扩展状态
+         * @type {string || null}
+         */
+        this.ExtraState = null;
+
+        /**
+         * 是否动态路由
+         * @type {boolean || null}
+         */
+        this.IsBgp = null;
+
+        /**
+         * 路由优先级
+         * @type {number || null}
+         */
+        this.RoutePriority = null;
+
+        /**
+         * 下一跳扩展名称（关联实例的扩展名称）
+         * @type {string || null}
+         */
+        this.InstanceExtraName = null;
+
     }
 
     /**
@@ -5925,6 +5949,10 @@ class CcnRoute extends  AbstractModel {
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.Enabled = 'Enabled' in params ? params.Enabled : null;
         this.InstanceUin = 'InstanceUin' in params ? params.InstanceUin : null;
+        this.ExtraState = 'ExtraState' in params ? params.ExtraState : null;
+        this.IsBgp = 'IsBgp' in params ? params.IsBgp : null;
+        this.RoutePriority = 'RoutePriority' in params ? params.RoutePriority : null;
+        this.InstanceExtraName = 'InstanceExtraName' in params ? params.InstanceExtraName : null;
 
     }
 }
@@ -7055,13 +7083,13 @@ class SecurityGroupPolicy extends  AbstractModel {
         super();
 
         /**
-         * 安全组规则索引号。
+         * 安全组规则索引号，值会随着安全组规则的变更动态变化。使用PolicyIndex时，请先调用`DescribeSecurityGroupPolicies`获取到规则的PolicyIndex，并且结合返回值中的Version一起使用处理规则。
          * @type {number || null}
          */
         this.PolicyIndex = null;
 
         /**
-         * 协议, 取值: TCP,UDP, ICMP。
+         * 协议, 取值: TCP,UDP,ICMP,ICMPv6,ALL。
          * @type {string || null}
          */
         this.Protocol = null;
@@ -11833,6 +11861,12 @@ class CcnAttachedInstance extends  AbstractModel {
          */
         this.CcnUin = null;
 
+        /**
+         * 关联实例所属的大地域，如: CHINA_MAINLAND
+         * @type {string || null}
+         */
+        this.InstanceArea = null;
+
     }
 
     /**
@@ -11852,6 +11886,7 @@ class CcnAttachedInstance extends  AbstractModel {
         this.State = 'State' in params ? params.State : null;
         this.AttachedTime = 'AttachedTime' in params ? params.AttachedTime : null;
         this.CcnUin = 'CcnUin' in params ? params.CcnUin : null;
+        this.InstanceArea = 'InstanceArea' in params ? params.InstanceArea : null;
 
     }
 }
@@ -17967,6 +18002,12 @@ class CCN extends  AbstractModel {
          */
         this.TagSet = null;
 
+        /**
+         * 是否支持云联网路由优先级的功能。False：不支持，True：支持。
+         * @type {boolean || null}
+         */
+        this.RoutePriorityFlag = null;
+
     }
 
     /**
@@ -17994,6 +18035,7 @@ class CCN extends  AbstractModel {
                 this.TagSet.push(obj);
             }
         }
+        this.RoutePriorityFlag = 'RoutePriorityFlag' in params ? params.RoutePriorityFlag : null;
 
     }
 }

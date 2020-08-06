@@ -4702,6 +4702,69 @@ class TollInvoiceOCRResponse extends  AbstractModel {
 }
 
 /**
+ * RideHailingDriverLicenseOCR返回参数结构体
+ * @class
+ */
+class RideHailingDriverLicenseOCRResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 姓名
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 证号，对应网约车驾驶证字段：证号、从业资格证号、驾驶员证号、身份证号
+         * @type {string || null}
+         */
+        this.LicenseNumber = null;
+
+        /**
+         * 有效起始日期
+         * @type {string || null}
+         */
+        this.StartDate = null;
+
+        /**
+         * 有效期截止时间，对应网约车驾驶证字段：有效期至、营运期限止
+         * @type {string || null}
+         */
+        this.EndDate = null;
+
+        /**
+         * 初始发证日期，对应网约车驾驶证字段：初始领证日期、发证日期
+         * @type {string || null}
+         */
+        this.ReleaseDate = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.LicenseNumber = 'LicenseNumber' in params ? params.LicenseNumber : null;
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
+        this.ReleaseDate = 'ReleaseDate' in params ? params.ReleaseDate : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * EnglishOCR请求参数结构体
  * @class
  */
@@ -6102,6 +6165,43 @@ class DutyPaidProofOCRRequest extends  AbstractModel {
 支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+
+    }
+}
+
+/**
+ * RideHailingDriverLicenseOCR请求参数结构体
+ * @class
+ */
+class RideHailingDriverLicenseOCRRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片下载时间不超过 3 秒。
+建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
          * @type {string || null}
          */
         this.ImageUrl = null;
@@ -8563,6 +8663,7 @@ module.exports = {
     TextVehicleBack: TextVehicleBack,
     GeneralEfficientOCRRequest: GeneralEfficientOCRRequest,
     TollInvoiceOCRResponse: TollInvoiceOCRResponse,
+    RideHailingDriverLicenseOCRResponse: RideHailingDriverLicenseOCRResponse,
     EnglishOCRRequest: EnglishOCRRequest,
     PassportOCRResponse: PassportOCRResponse,
     GeneralAccurateOCRRequest: GeneralAccurateOCRRequest,
@@ -8589,6 +8690,7 @@ module.exports = {
     FormulaOCRRequest: FormulaOCRRequest,
     PassportOCRRequest: PassportOCRRequest,
     DutyPaidProofOCRRequest: DutyPaidProofOCRRequest,
+    RideHailingDriverLicenseOCRRequest: RideHailingDriverLicenseOCRRequest,
     QueryBarCodeRequest: QueryBarCodeRequest,
     ItemCoord: ItemCoord,
     OrgCodeCertOCRResponse: OrgCodeCertOCRResponse,

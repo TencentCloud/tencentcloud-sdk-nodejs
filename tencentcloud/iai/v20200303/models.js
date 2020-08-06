@@ -97,6 +97,59 @@ class Candidate extends  AbstractModel {
 }
 
 /**
+ * VerifyFace返回参数结构体
+ * @class
+ */
+class VerifyFaceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 给定的人脸图片与 PersonId 对应人脸的相似度。若 PersonId 下有多张人脸（Face），返回相似度最大的分数。
+
+不同算法版本返回的相似度分数不同。
+若需要验证两张图片中人脸是否为同一人，3.0版本误识率千分之一对应分数为40分，误识率万分之一对应分数为50分，误识率十万分之一对应分数为60分。 一般超过50分则可认定为同一人。
+2.0版本误识率千分之一对应分数为70分，误识率万分之一对应分数为80分，误识率十万分之一对应分数为90分。 一般超过80分则可认定为同一人。
+         * @type {number || null}
+         */
+        this.Score = null;
+
+        /**
+         * 是否为同一人的判断。
+         * @type {boolean || null}
+         */
+        this.IsMatch = null;
+
+        /**
+         * 人脸识别所用的算法模型版本，是该 Person 所在的人员库的算法模型版本。在创建人员库时设置，详情可参考[算法模型版本](https://cloud.tencent.com/document/product/867/40042)
+         * @type {string || null}
+         */
+        this.FaceModelVersion = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Score = 'Score' in params ? params.Score : null;
+        this.IsMatch = 'IsMatch' in params ? params.IsMatch : null;
+        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * SearchPersonsReturnsByGroup返回参数结构体
  * @class
  */
@@ -2015,51 +2068,6 @@ class FaceQualityInfo extends  AbstractModel {
 }
 
 /**
- * 查重任务信息
- * @class
- */
-class JobIdInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 查重任务ID，用于查询、获取查重的进度和结果。
-         * @type {string || null}
-         */
-        this.JobId = null;
-
-        /**
-         * 查重起始时间。 
-StartTime的值是自 Unix 纪元时间到Group创建时间的毫秒数。 
-Unix 纪元时间是 1970 年 1 月 1 日星期四，协调世界时 (UTC) 00:00:00。 
-有关更多信息，请参阅 Unix 时间。
-         * @type {number || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * 查重任务是否已完成。0: 成功 1: 未完成 2: 失败
-         * @type {number || null}
-         */
-        this.JobStatus = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.JobId = 'JobId' in params ? params.JobId : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.JobStatus = 'JobStatus' in params ? params.JobStatus : null;
-
-    }
-}
-
-/**
  * SearchFacesReturnsByGroup返回参数结构体
  * @class
  */
@@ -3049,6 +3057,34 @@ class ModifyPersonGroupInfoRequest extends  AbstractModel {
 }
 
 /**
+ * RevertGroupFaceModelVersion请求参数结构体
+ * @class
+ */
+class RevertGroupFaceModelVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要回滚的升级任务ID。
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+
+    }
+}
+
+/**
  * UpgradeGroupFaceModelVersion请求参数结构体
  * @class
  */
@@ -3313,40 +3349,33 @@ class ModifyPersonBaseInfoRequest extends  AbstractModel {
 }
 
 /**
- * VerifyFace返回参数结构体
+ * 查重任务信息
  * @class
  */
-class VerifyFaceResponse extends  AbstractModel {
+class JobIdInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 给定的人脸图片与 PersonId 对应人脸的相似度。若 PersonId 下有多张人脸（Face），返回相似度最大的分数。
+         * 查重任务ID，用于查询、获取查重的进度和结果。
+         * @type {string || null}
+         */
+        this.JobId = null;
 
-不同算法版本返回的相似度分数不同。
-若需要验证两张图片中人脸是否为同一人，3.0版本误识率千分之一对应分数为40分，误识率万分之一对应分数为50分，误识率十万分之一对应分数为60分。 一般超过50分则可认定为同一人。
-2.0版本误识率千分之一对应分数为70分，误识率万分之一对应分数为80分，误识率十万分之一对应分数为90分。 一般超过80分则可认定为同一人。
+        /**
+         * 查重起始时间。 
+StartTime的值是自 Unix 纪元时间到Group创建时间的毫秒数。 
+Unix 纪元时间是 1970 年 1 月 1 日星期四，协调世界时 (UTC) 00:00:00。 
+有关更多信息，请参阅 Unix 时间。
          * @type {number || null}
          */
-        this.Score = null;
+        this.StartTime = null;
 
         /**
-         * 是否为同一人的判断。
-         * @type {boolean || null}
+         * 查重任务是否已完成。0: 成功 1: 未完成 2: 失败
+         * @type {number || null}
          */
-        this.IsMatch = null;
-
-        /**
-         * 人脸识别所用的算法模型版本，是该 Person 所在的人员库的算法模型版本。在创建人员库时设置，详情可参考[算法模型版本](https://cloud.tencent.com/document/product/867/40042)
-         * @type {string || null}
-         */
-        this.FaceModelVersion = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.JobStatus = null;
 
     }
 
@@ -3357,10 +3386,9 @@ class VerifyFaceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Score = 'Score' in params ? params.Score : null;
-        this.IsMatch = 'IsMatch' in params ? params.IsMatch : null;
-        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.JobStatus = 'JobStatus' in params ? params.JobStatus : null;
 
     }
 }
@@ -4217,6 +4245,34 @@ class CompareFaceResponse extends  AbstractModel {
 }
 
 /**
+ * RevertGroupFaceModelVersion返回参数结构体
+ * @class
+ */
+class RevertGroupFaceModelVersionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteGroup返回参数结构体
  * @class
  */
@@ -4767,6 +4823,7 @@ class CreateGroupResponse extends  AbstractModel {
 
 module.exports = {
     Candidate: Candidate,
+    VerifyFaceResponse: VerifyFaceResponse,
     SearchPersonsReturnsByGroupResponse: SearchPersonsReturnsByGroupResponse,
     CreatePersonRequest: CreatePersonRequest,
     CreateFaceResponse: CreateFaceResponse,
@@ -4801,7 +4858,6 @@ module.exports = {
     GetUpgradeGroupFaceModelVersionResultRequest: GetUpgradeGroupFaceModelVersionResultRequest,
     GroupInfo: GroupInfo,
     FaceQualityInfo: FaceQualityInfo,
-    JobIdInfo: JobIdInfo,
     SearchFacesReturnsByGroupResponse: SearchFacesReturnsByGroupResponse,
     CopyPersonRequest: CopyPersonRequest,
     SearchPersonsReturnsByGroupRequest: SearchPersonsReturnsByGroupRequest,
@@ -4821,11 +4877,12 @@ module.exports = {
     ModifyPersonBaseInfoResponse: ModifyPersonBaseInfoResponse,
     GetSimilarPersonResultResponse: GetSimilarPersonResultResponse,
     ModifyPersonGroupInfoRequest: ModifyPersonGroupInfoRequest,
+    RevertGroupFaceModelVersionRequest: RevertGroupFaceModelVersionRequest,
     UpgradeGroupFaceModelVersionRequest: UpgradeGroupFaceModelVersionRequest,
     FaceAttributesInfo: FaceAttributesInfo,
     VerifyPersonRequest: VerifyPersonRequest,
     ModifyPersonBaseInfoRequest: ModifyPersonBaseInfoRequest,
-    VerifyFaceResponse: VerifyFaceResponse,
+    JobIdInfo: JobIdInfo,
     SearchFacesRequest: SearchFacesRequest,
     GetCheckSimilarPersonJobIdListRequest: GetCheckSimilarPersonJobIdListRequest,
     SearchPersonsRequest: SearchPersonsRequest,
@@ -4841,6 +4898,7 @@ module.exports = {
     PersonGroupInfo: PersonGroupInfo,
     GetGroupInfoResponse: GetGroupInfoResponse,
     CompareFaceResponse: CompareFaceResponse,
+    RevertGroupFaceModelVersionResponse: RevertGroupFaceModelVersionResponse,
     DeleteGroupResponse: DeleteGroupResponse,
     CompareFaceRequest: CompareFaceRequest,
     VerifyPersonResponse: VerifyPersonResponse,

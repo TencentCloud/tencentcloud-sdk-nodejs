@@ -4024,6 +4024,12 @@ class DescribeClusterRoutesRequest extends  AbstractModel {
          */
         this.RouteTableName = null;
 
+        /**
+         * 过滤条件,当前只支持按照单个条件GatewayIP进行过滤（可选）
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
     }
 
     /**
@@ -4034,6 +4040,15 @@ class DescribeClusterRoutesRequest extends  AbstractModel {
             return;
         }
         this.RouteTableName = 'RouteTableName' in params ? params.RouteTableName : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }

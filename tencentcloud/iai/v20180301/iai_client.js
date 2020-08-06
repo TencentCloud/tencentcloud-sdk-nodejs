@@ -16,85 +16,94 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const GetPersonGroupInfoResponse = models.GetPersonGroupInfoResponse;
-const SearchFacesReturnsByGroupResponse = models.SearchFacesReturnsByGroupResponse;
 const Candidate = models.Candidate;
-const ModifyGroupResponse = models.ModifyGroupResponse;
 const VerifyFaceResponse = models.VerifyFaceResponse;
-const DeletePersonRequest = models.DeletePersonRequest;
-const DetectLiveFaceResponse = models.DetectLiveFaceResponse;
-const GetSimilarPersonResultResponse = models.GetSimilarPersonResultResponse;
 const SearchPersonsReturnsByGroupResponse = models.SearchPersonsReturnsByGroupResponse;
-const DeleteFaceRequest = models.DeleteFaceRequest;
-const ModifyPersonBaseInfoResponse = models.ModifyPersonBaseInfoResponse;
-const GetGroupListResponse = models.GetGroupListResponse;
-const GroupInfo = models.GroupInfo;
-const GetPersonListResponse = models.GetPersonListResponse;
-const FaceQualityCompleteness = models.FaceQualityCompleteness;
-const FaceAttributesInfo = models.FaceAttributesInfo;
-const PersonGroupInfo = models.PersonGroupInfo;
-const ModifyGroupRequest = models.ModifyGroupRequest;
 const CreatePersonRequest = models.CreatePersonRequest;
-const GetGroupListRequest = models.GetGroupListRequest;
-const DeleteGroupRequest = models.DeleteGroupRequest;
 const CreateFaceResponse = models.CreateFaceResponse;
-const ModifyPersonBaseInfoRequest = models.ModifyPersonBaseInfoRequest;
-const GetSimilarPersonResultRequest = models.GetSimilarPersonResultRequest;
-const GetGroupInfoResponse = models.GetGroupInfoResponse;
-const GroupCandidate = models.GroupCandidate;
-const SearchPersonsResponse = models.SearchPersonsResponse;
-const FaceQualityInfo = models.FaceQualityInfo;
-const CompareFaceResponse = models.CompareFaceResponse;
-const PersonExDescriptionInfo = models.PersonExDescriptionInfo;
-const DetectLiveFaceRequest = models.DetectLiveFaceRequest;
-const JobIdInfo = models.JobIdInfo;
-const GetPersonBaseInfoResponse = models.GetPersonBaseInfoResponse;
-const ResultsReturnsByGroup = models.ResultsReturnsByGroup;
+const FaceHairAttributesInfo = models.FaceHairAttributesInfo;
 const CreateFaceRequest = models.CreateFaceRequest;
-const SearchFacesReturnsByGroupRequest = models.SearchFacesReturnsByGroupRequest;
 const CreateGroupRequest = models.CreateGroupRequest;
-const ModifyPersonGroupInfoRequest = models.ModifyPersonGroupInfoRequest;
 const GetPersonGroupInfoRequest = models.GetPersonGroupInfoRequest;
-const Result = models.Result;
-const GetCheckSimilarPersonJobIdListRequest = models.GetCheckSimilarPersonJobIdListRequest;
-const VerifyPersonRequest = models.VerifyPersonRequest;
 const FaceInfo = models.FaceInfo;
-const DeleteGroupResponse = models.DeleteGroupResponse;
-const SearchPersonsRequest = models.SearchPersonsRequest;
-const EstimateCheckSimilarPersonCostTimeResponse = models.EstimateCheckSimilarPersonCostTimeResponse;
-const CompareFaceRequest = models.CompareFaceRequest;
-const PersonInfo = models.PersonInfo;
 const CheckSimilarPersonRequest = models.CheckSimilarPersonRequest;
 const FaceShape = models.FaceShape;
-const DetectFaceResponse = models.DetectFaceResponse;
+const GetGroupListRequest = models.GetGroupListRequest;
+const GetUpgradeGroupFaceModelVersionJobListRequest = models.GetUpgradeGroupFaceModelVersionJobListRequest;
+const GetUpgradeGroupFaceModelVersionResultResponse = models.GetUpgradeGroupFaceModelVersionResultResponse;
+const AnalyzeFaceRequest = models.AnalyzeFaceRequest;
+const CreatePersonResponse = models.CreatePersonResponse;
+const SearchFacesResponse = models.SearchFacesResponse;
+const CopyPersonResponse = models.CopyPersonResponse;
+const EstimateCheckSimilarPersonCostTimeResponse = models.EstimateCheckSimilarPersonCostTimeResponse;
+const GroupCandidate = models.GroupCandidate;
+const DeleteFaceResponse = models.DeleteFaceResponse;
+const DeletePersonRequest = models.DeletePersonRequest;
+const DetectLiveFaceResponse = models.DetectLiveFaceResponse;
+const DeleteFaceRequest = models.DeleteFaceRequest;
+const ModifyGroupRequest = models.ModifyGroupRequest;
+const DeleteGroupRequest = models.DeleteGroupRequest;
+const EstimateCheckSimilarPersonCostTimeRequest = models.EstimateCheckSimilarPersonCostTimeRequest;
+const FaceQualityCompleteness = models.FaceQualityCompleteness;
+const DetectLiveFaceRequest = models.DetectLiveFaceRequest;
+const GetPersonBaseInfoResponse = models.GetPersonBaseInfoResponse;
+const GetSimilarPersonResultRequest = models.GetSimilarPersonResultRequest;
+const SearchPersonsResponse = models.SearchPersonsResponse;
+const GetUpgradeGroupFaceModelVersionResultRequest = models.GetUpgradeGroupFaceModelVersionResultRequest;
+const GroupInfo = models.GroupInfo;
+const FaceQualityInfo = models.FaceQualityInfo;
+const SearchFacesReturnsByGroupResponse = models.SearchFacesReturnsByGroupResponse;
 const CopyPersonRequest = models.CopyPersonRequest;
-const CheckSimilarPersonResponse = models.CheckSimilarPersonResponse;
 const SearchPersonsReturnsByGroupRequest = models.SearchPersonsReturnsByGroupRequest;
 const DeletePersonFromGroupResponse = models.DeletePersonFromGroupResponse;
-const VerifyPersonResponse = models.VerifyPersonResponse;
-const AnalyzeFaceResponse = models.AnalyzeFaceResponse;
-const GetGroupInfoRequest = models.GetGroupInfoRequest;
-const GetPersonListNumResponse = models.GetPersonListNumResponse;
-const FaceHairAttributesInfo = models.FaceHairAttributesInfo;
 const GetCheckSimilarPersonJobIdListResponse = models.GetCheckSimilarPersonJobIdListResponse;
-const AnalyzeFaceRequest = models.AnalyzeFaceRequest;
+const ResultsReturnsByGroup = models.ResultsReturnsByGroup;
 const Point = models.Point;
-const DetectFaceRequest = models.DetectFaceRequest;
-const CreatePersonResponse = models.CreatePersonResponse;
-const GetPersonBaseInfoRequest = models.GetPersonBaseInfoRequest;
-const SearchFacesResponse = models.SearchFacesResponse;
-const GroupExDescriptionInfo = models.GroupExDescriptionInfo;
+const GetPersonListNumResponse = models.GetPersonListNumResponse;
+const DeletePersonFromGroupRequest = models.DeletePersonFromGroupRequest;
 const VerifyFaceRequest = models.VerifyFaceRequest;
-const CopyPersonResponse = models.CopyPersonResponse;
-const EstimateCheckSimilarPersonCostTimeRequest = models.EstimateCheckSimilarPersonCostTimeRequest;
-const GetPersonListRequest = models.GetPersonListRequest;
+const GetPersonListResponse = models.GetPersonListResponse;
 const GetPersonListNumRequest = models.GetPersonListNumRequest;
-const DeleteFaceResponse = models.DeleteFaceResponse;
+const Result = models.Result;
+const GetPersonGroupInfoResponse = models.GetPersonGroupInfoResponse;
+const UpgradeGroupFaceModelVersionResponse = models.UpgradeGroupFaceModelVersionResponse;
+const SearchFacesReturnsByGroupRequest = models.SearchFacesReturnsByGroupRequest;
+const ModifyPersonBaseInfoResponse = models.ModifyPersonBaseInfoResponse;
+const GetSimilarPersonResultResponse = models.GetSimilarPersonResultResponse;
+const ModifyPersonGroupInfoRequest = models.ModifyPersonGroupInfoRequest;
+const RevertGroupFaceModelVersionRequest = models.RevertGroupFaceModelVersionRequest;
+const UpgradeGroupFaceModelVersionRequest = models.UpgradeGroupFaceModelVersionRequest;
+const FaceAttributesInfo = models.FaceAttributesInfo;
+const VerifyPersonRequest = models.VerifyPersonRequest;
+const ModifyPersonBaseInfoRequest = models.ModifyPersonBaseInfoRequest;
+const JobIdInfo = models.JobIdInfo;
+const SearchFacesRequest = models.SearchFacesRequest;
+const GetCheckSimilarPersonJobIdListRequest = models.GetCheckSimilarPersonJobIdListRequest;
+const SearchPersonsRequest = models.SearchPersonsRequest;
+const PersonInfo = models.PersonInfo;
+const GroupExDescriptionInfo = models.GroupExDescriptionInfo;
+const AnalyzeFaceResponse = models.AnalyzeFaceResponse;
+const DetectFaceRequest = models.DetectFaceRequest;
+const GetPersonBaseInfoRequest = models.GetPersonBaseInfoRequest;
 const DeletePersonResponse = models.DeletePersonResponse;
+const PersonExDescriptionInfo = models.PersonExDescriptionInfo;
+const GetUpgradeGroupFaceModelVersionJobListResponse = models.GetUpgradeGroupFaceModelVersionJobListResponse;
+const GetGroupListResponse = models.GetGroupListResponse;
+const PersonGroupInfo = models.PersonGroupInfo;
+const GetGroupInfoResponse = models.GetGroupInfoResponse;
+const CompareFaceResponse = models.CompareFaceResponse;
+const RevertGroupFaceModelVersionResponse = models.RevertGroupFaceModelVersionResponse;
+const DeleteGroupResponse = models.DeleteGroupResponse;
+const CompareFaceRequest = models.CompareFaceRequest;
+const VerifyPersonResponse = models.VerifyPersonResponse;
+const DetectFaceResponse = models.DetectFaceResponse;
+const CheckSimilarPersonResponse = models.CheckSimilarPersonResponse;
+const GetGroupInfoRequest = models.GetGroupInfoRequest;
+const UpgradeJobInfo = models.UpgradeJobInfo;
+const ModifyGroupResponse = models.ModifyGroupResponse;
+const GetPersonListRequest = models.GetPersonListRequest;
 const FaceRect = models.FaceRect;
 const ModifyPersonGroupInfoResponse = models.ModifyPersonGroupInfoResponse;
-const SearchFacesRequest = models.SearchFacesRequest;
-const DeletePersonFromGroupRequest = models.DeletePersonFromGroupRequest;
 const CreateGroupResponse = models.CreateGroupResponse;
 
 
@@ -355,6 +364,19 @@ class IaiClient extends AbstractClient {
     }
 
     /**
+     * 升级人员库。升级过程中，人员库仍然为原算法版本，人员库相关操作仍然支持。升级完成后，人员库为新算法版本。
+单个人员库有且仅支持一次回滚操作。
+注：此处QPS限制为10。
+     * @param {UpgradeGroupFaceModelVersionRequest} req
+     * @param {function(string, UpgradeGroupFaceModelVersionResponse):void} cb
+     * @public
+     */
+    UpgradeGroupFaceModelVersion(req, cb) {
+        let resp = new UpgradeGroupFaceModelVersionResponse();
+        this.request("UpgradeGroupFaceModelVersion", req, resp, cb);
+    }
+
+    /**
      * 获取人员查重接口（CheckSimilarPerson）结果。
      * @param {GetSimilarPersonResultRequest} req
      * @param {function(string, GetSimilarPersonResultResponse):void} cb
@@ -363,6 +385,21 @@ class IaiClient extends AbstractClient {
     GetSimilarPersonResult(req, cb) {
         let resp = new GetSimilarPersonResultResponse();
         this.request("GetSimilarPersonResult", req, resp, cb);
+    }
+
+    /**
+     * 本接口用于回滚人员库的人脸识别算法模型版本。单个人员库有且仅有一次回滚机会。
+
+回滚操作会在10s内生效，回滚操作中，您对人员库的操作可能会失效。
+
+注：给客户我会写10s内生效，我们实际上越快越好。待讨论。
+     * @param {RevertGroupFaceModelVersionRequest} req
+     * @param {function(string, RevertGroupFaceModelVersionResponse):void} cb
+     * @public
+     */
+    RevertGroupFaceModelVersion(req, cb) {
+        let resp = new RevertGroupFaceModelVersionResponse();
+        this.request("RevertGroupFaceModelVersion", req, resp, cb);
     }
 
     /**
@@ -377,6 +414,18 @@ class IaiClient extends AbstractClient {
     CreatePerson(req, cb) {
         let resp = new CreatePersonResponse();
         this.request("CreatePerson", req, resp, cb);
+    }
+
+    /**
+     * 获取人员库升级任务列表
+
+     * @param {GetUpgradeGroupFaceModelVersionJobListRequest} req
+     * @param {function(string, GetUpgradeGroupFaceModelVersionJobListResponse):void} cb
+     * @public
+     */
+    GetUpgradeGroupFaceModelVersionJobList(req, cb) {
+        let resp = new GetUpgradeGroupFaceModelVersionJobListResponse();
+        this.request("GetUpgradeGroupFaceModelVersionJobList", req, resp, cb);
     }
 
     /**
@@ -445,6 +494,18 @@ class IaiClient extends AbstractClient {
     VerifyPerson(req, cb) {
         let resp = new VerifyPersonResponse();
         this.request("VerifyPerson", req, resp, cb);
+    }
+
+    /**
+     * 人员库升级结果查询
+
+     * @param {GetUpgradeGroupFaceModelVersionResultRequest} req
+     * @param {function(string, GetUpgradeGroupFaceModelVersionResultResponse):void} cb
+     * @public
+     */
+    GetUpgradeGroupFaceModelVersionResult(req, cb) {
+        let resp = new GetUpgradeGroupFaceModelVersionResultResponse();
+        this.request("GetUpgradeGroupFaceModelVersionResult", req, resp, cb);
     }
 
     /**
