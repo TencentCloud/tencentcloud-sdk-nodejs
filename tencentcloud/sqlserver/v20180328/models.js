@@ -1942,7 +1942,7 @@ class MigrateTask extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * 迁移任务的状态（1:初始化,4:迁移中,5.迁移失败,6.迁移成功）
+         * 迁移任务的状态（1:初始化,4:迁移中,5.迁移失败,6.迁移成功,7已中止,8已删除,9中止中,10完成中,11中止失败,12完成失败）
          * @type {number || null}
          */
         this.Status = null;

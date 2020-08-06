@@ -42,6 +42,7 @@ const FileSystemDataSource = models.FileSystemDataSource;
 const NotebookLifecycleScriptsSummary = models.NotebookLifecycleScriptsSummary;
 const StopTrainingJobRequest = models.StopTrainingJobRequest;
 const UpdateNotebookInstanceResponse = models.UpdateNotebookInstanceResponse;
+const ClsConfig = models.ClsConfig;
 const UpdateNotebookLifecycleScriptRequest = models.UpdateNotebookLifecycleScriptRequest;
 const UpdateNotebookInstanceRequest = models.UpdateNotebookInstanceRequest;
 const CreatePresignedNotebookInstanceUrlRequest = models.CreatePresignedNotebookInstanceUrlRequest;

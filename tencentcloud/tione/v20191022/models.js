@@ -270,6 +270,12 @@ class CreateNotebookInstanceRequest extends  AbstractModel {
          */
         this.AutoStopping = null;
 
+        /**
+         * 接入日志的配置
+         * @type {ClsConfig || null}
+         */
+        this.ClsConfig = null;
+
     }
 
     /**
@@ -296,6 +302,12 @@ class CreateNotebookInstanceRequest extends  AbstractModel {
             this.StoppingCondition = obj;
         }
         this.AutoStopping = 'AutoStopping' in params ? params.AutoStopping : null;
+
+        if (params.ClsConfig) {
+            let obj = new ClsConfig();
+            obj.deserialize(params.ClsConfig)
+            this.ClsConfig = obj;
+        }
 
     }
 }
@@ -1243,6 +1255,48 @@ class UpdateNotebookInstanceResponse extends  AbstractModel {
 }
 
 /**
+ * 接入CLS服务的配置
+ * @class
+ */
+class ClsConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 接入类型，可选项为free、customer
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 自定义CLS的日志集ID，只有当Type为customer时生效
+         * @type {string || null}
+         */
+        this.LogSetId = null;
+
+        /**
+         * 自定义CLS的日志主题ID，只有当Type为customer时生效
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.LogSetId = 'LogSetId' in params ? params.LogSetId : null;
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
+
+    }
+}
+
+/**
  * UpdateNotebookLifecycleScript请求参数结构体
  * @class
  */
@@ -1386,6 +1440,12 @@ class UpdateNotebookInstanceRequest extends  AbstractModel {
          */
         this.StoppingCondition = null;
 
+        /**
+         * 接入日志的配置
+         * @type {ClsConfig || null}
+         */
+        this.ClsConfig = null;
+
     }
 
     /**
@@ -1413,6 +1473,12 @@ class UpdateNotebookInstanceRequest extends  AbstractModel {
             let obj = new StoppingCondition();
             obj.deserialize(params.StoppingCondition)
             this.StoppingCondition = obj;
+        }
+
+        if (params.ClsConfig) {
+            let obj = new ClsConfig();
+            obj.deserialize(params.ClsConfig)
+            this.ClsConfig = obj;
         }
 
     }
@@ -2023,6 +2089,13 @@ Failed: 失败
         this.StoppingCondition = null;
 
         /**
+         * Cls配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ClsConfig || null}
+         */
+        this.ClsConfig = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -2061,6 +2134,12 @@ Failed: 失败
             let obj = new StoppingCondition();
             obj.deserialize(params.StoppingCondition)
             this.StoppingCondition = obj;
+        }
+
+        if (params.ClsConfig) {
+            let obj = new ClsConfig();
+            obj.deserialize(params.ClsConfig)
+            this.ClsConfig = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -3534,6 +3613,7 @@ module.exports = {
     NotebookLifecycleScriptsSummary: NotebookLifecycleScriptsSummary,
     StopTrainingJobRequest: StopTrainingJobRequest,
     UpdateNotebookInstanceResponse: UpdateNotebookInstanceResponse,
+    ClsConfig: ClsConfig,
     UpdateNotebookLifecycleScriptRequest: UpdateNotebookLifecycleScriptRequest,
     UpdateNotebookInstanceRequest: UpdateNotebookInstanceRequest,
     CreatePresignedNotebookInstanceUrlRequest: CreatePresignedNotebookInstanceUrlRequest,
