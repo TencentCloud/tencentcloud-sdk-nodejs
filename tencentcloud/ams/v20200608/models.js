@@ -564,6 +564,13 @@ Block 建议屏蔽；
         this.ImageSegments = null;
 
         /**
+         * 音频识别总文本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AudioText = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -627,6 +634,7 @@ Block 建议屏蔽；
                 this.ImageSegments.push(obj);
             }
         }
+        this.AudioText = 'AudioText' in params ? params.AudioText : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

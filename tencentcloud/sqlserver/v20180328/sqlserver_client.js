@@ -27,7 +27,9 @@ const CreatePublishSubscribeRequest = models.CreatePublishSubscribeRequest;
 const CreateMigrationResponse = models.CreateMigrationResponse;
 const DatabaseTuple = models.DatabaseTuple;
 const RegionInfo = models.RegionInfo;
+const ModifyBackupNameResponse = models.ModifyBackupNameResponse;
 const DeletePublishSubscribeRequest = models.DeletePublishSubscribeRequest;
+const ModifyMaintenanceSpanRequest = models.ModifyMaintenanceSpanRequest;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
 const DatabaseTupleStatus = models.DatabaseTupleStatus;
 const ModifyReadOnlyGroupDetailsResponse = models.ModifyReadOnlyGroupDetailsResponse;
@@ -37,7 +39,7 @@ const MigrateDetail = models.MigrateDetail;
 const RunMigrationResponse = models.RunMigrationResponse;
 const DescribeProductConfigRequest = models.DescribeProductConfigRequest;
 const ModifyPublishSubscribeNameResponse = models.ModifyPublishSubscribeNameResponse;
-const CreateAccountRequest = models.CreateAccountRequest;
+const DescribeCrossRegionZoneRequest = models.DescribeCrossRegionZoneRequest;
 const RollbackInstanceResponse = models.RollbackInstanceResponse;
 const DBRemark = models.DBRemark;
 const MigrateDB = models.MigrateDB;
@@ -55,7 +57,7 @@ const RestoreInstanceResponse = models.RestoreInstanceResponse;
 const ModifyMaintenanceSpanResponse = models.ModifyMaintenanceSpanResponse;
 const ZoneInfo = models.ZoneInfo;
 const InquiryPriceCreateDBInstancesRequest = models.InquiryPriceCreateDBInstancesRequest;
-const ModifyMaintenanceSpanRequest = models.ModifyMaintenanceSpanRequest;
+const DescribeBackupByFlowIdResponse = models.DescribeBackupByFlowIdResponse;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const MigrateTask = models.MigrateTask;
 const SpecInfo = models.SpecInfo;
@@ -78,6 +80,7 @@ const RenewDBInstanceRequest = models.RenewDBInstanceRequest;
 const DescribeZonesRequest = models.DescribeZonesRequest;
 const DeleteDBRequest = models.DeleteDBRequest;
 const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
+const DescribeCrossRegionZoneResponse = models.DescribeCrossRegionZoneResponse;
 const ModifyDBInstanceRenewFlagResponse = models.ModifyDBInstanceRenewFlagResponse;
 const CompleteExpansionResponse = models.CompleteExpansionResponse;
 const MigrateSource = models.MigrateSource;
@@ -141,6 +144,7 @@ const DeleteAccountRequest = models.DeleteAccountRequest;
 const DescribeReadOnlyGroupByReadOnlyInstanceRequest = models.DescribeReadOnlyGroupByReadOnlyInstanceRequest;
 const DescribeMaintenanceSpanRequest = models.DescribeMaintenanceSpanRequest;
 const PublishSubscribe = models.PublishSubscribe;
+const DescribeBackupByFlowIdRequest = models.DescribeBackupByFlowIdRequest;
 const CreateBackupRequest = models.CreateBackupRequest;
 const DescribePublishSubscribeRequest = models.DescribePublishSubscribeRequest;
 const ModifyAccountRemarkRequest = models.ModifyAccountRemarkRequest;
@@ -153,6 +157,7 @@ const DeleteDBInstanceRequest = models.DeleteDBInstanceRequest;
 const CreateAccountResponse = models.CreateAccountResponse;
 const RenewPostpaidDBInstanceResponse = models.RenewPostpaidDBInstanceResponse;
 const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
+const CreateAccountRequest = models.CreateAccountRequest;
 const DeleteDBResponse = models.DeleteDBResponse;
 const CreateDBResponse = models.CreateDBResponse;
 const RestartDBInstanceResponse = models.RestartDBInstanceResponse;
@@ -165,6 +170,7 @@ const RollbackInstanceRequest = models.RollbackInstanceRequest;
 const DescribeSlowlogsRequest = models.DescribeSlowlogsRequest;
 const ModifyDBInstanceProjectRequest = models.ModifyDBInstanceProjectRequest;
 const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
+const ModifyBackupNameRequest = models.ModifyBackupNameRequest;
 const CreatePublishSubscribeResponse = models.CreatePublishSubscribeResponse;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const DeleteDBInstanceResponse = models.DeleteDBInstanceResponse;
@@ -187,14 +193,14 @@ class SqlserverClient extends AbstractClient {
     }
     
     /**
-     * 本接口(DescribeDBSecurityGroups)用于查询实例的安全组详情。
-     * @param {DescribeDBSecurityGroupsRequest} req
-     * @param {function(string, DescribeDBSecurityGroupsResponse):void} cb
+     * 本接口（DescribeReadOnlyGroupList）用于查询只读组列表。
+     * @param {DescribeReadOnlyGroupListRequest} req
+     * @param {function(string, DescribeReadOnlyGroupListResponse):void} cb
      * @public
      */
-    DescribeDBSecurityGroups(req, cb) {
-        let resp = new DescribeDBSecurityGroupsResponse();
-        this.request("DescribeDBSecurityGroups", req, resp, cb);
+    DescribeReadOnlyGroupList(req, cb) {
+        let resp = new DescribeReadOnlyGroupListResponse();
+        this.request("DescribeReadOnlyGroupList", req, resp, cb);
     }
 
     /**
@@ -286,14 +292,25 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
-     * 本接口（ResetAccountPassword）用于重置实例的账户密码。
-     * @param {ResetAccountPasswordRequest} req
-     * @param {function(string, ResetAccountPasswordResponse):void} cb
+     * 本接口(ModifyBackupName)用于修改备份名称。
+     * @param {ModifyBackupNameRequest} req
+     * @param {function(string, ModifyBackupNameResponse):void} cb
      * @public
      */
-    ResetAccountPassword(req, cb) {
-        let resp = new ResetAccountPasswordResponse();
-        this.request("ResetAccountPassword", req, resp, cb);
+    ModifyBackupName(req, cb) {
+        let resp = new ModifyBackupNameResponse();
+        this.request("ModifyBackupName", req, resp, cb);
+    }
+
+    /**
+     * 本接口（RunMigration）用于启动迁移任务，开始迁移
+     * @param {RunMigrationRequest} req
+     * @param {function(string, RunMigrationResponse):void} cb
+     * @public
+     */
+    RunMigration(req, cb) {
+        let resp = new RunMigrationResponse();
+        this.request("RunMigration", req, resp, cb);
     }
 
     /**
@@ -316,6 +333,17 @@ class SqlserverClient extends AbstractClient {
     InquiryPriceCreateDBInstances(req, cb) {
         let resp = new InquiryPriceCreateDBInstancesResponse();
         this.request("InquiryPriceCreateDBInstances", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeCrossRegionZone)根据主实例查询备机的容灾地域和可用区。
+     * @param {DescribeCrossRegionZoneRequest} req
+     * @param {function(string, DescribeCrossRegionZoneResponse):void} cb
+     * @public
+     */
+    DescribeCrossRegionZone(req, cb) {
+        let resp = new DescribeCrossRegionZoneResponse();
+        this.request("DescribeCrossRegionZone", req, resp, cb);
     }
 
     /**
@@ -418,14 +446,14 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
-     * 本接口(TerminateDBInstance)用于主动销毁按量计费实例。
-     * @param {TerminateDBInstanceRequest} req
-     * @param {function(string, TerminateDBInstanceResponse):void} cb
+     * 本接口(DeleteDB)用于删除数据库。
+     * @param {DeleteDBRequest} req
+     * @param {function(string, DeleteDBResponse):void} cb
      * @public
      */
-    TerminateDBInstance(req, cb) {
-        let resp = new TerminateDBInstanceResponse();
-        this.request("TerminateDBInstance", req, resp, cb);
+    DeleteDB(req, cb) {
+        let resp = new DeleteDBResponse();
+        this.request("DeleteDB", req, resp, cb);
     }
 
     /**
@@ -462,14 +490,14 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeDBs）用于查询数据库列表。
-     * @param {DescribeDBsRequest} req
-     * @param {function(string, DescribeDBsResponse):void} cb
+     * 本接口（CreateMigration）作用是创建一个迁移任务
+     * @param {CreateMigrationRequest} req
+     * @param {function(string, CreateMigrationResponse):void} cb
      * @public
      */
-    DescribeDBs(req, cb) {
-        let resp = new DescribeDBsResponse();
-        this.request("DescribeDBs", req, resp, cb);
+    CreateMigration(req, cb) {
+        let resp = new CreateMigrationResponse();
+        this.request("CreateMigration", req, resp, cb);
     }
 
     /**
@@ -517,14 +545,14 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeReadOnlyGroupList）用于查询只读组列表。
-     * @param {DescribeReadOnlyGroupListRequest} req
-     * @param {function(string, DescribeReadOnlyGroupListResponse):void} cb
+     * 本接口(TerminateDBInstance)用于主动销毁按量计费实例。
+     * @param {TerminateDBInstanceRequest} req
+     * @param {function(string, TerminateDBInstanceResponse):void} cb
      * @public
      */
-    DescribeReadOnlyGroupList(req, cb) {
-        let resp = new DescribeReadOnlyGroupListResponse();
-        this.request("DescribeReadOnlyGroupList", req, resp, cb);
+    TerminateDBInstance(req, cb) {
+        let resp = new TerminateDBInstanceResponse();
+        this.request("TerminateDBInstance", req, resp, cb);
     }
 
     /**
@@ -572,25 +600,25 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
-     * 本接口（RunMigration）用于启动迁移任务，开始迁移
-     * @param {RunMigrationRequest} req
-     * @param {function(string, RunMigrationResponse):void} cb
+     * 本接口（ResetAccountPassword）用于重置实例的账户密码。
+     * @param {ResetAccountPasswordRequest} req
+     * @param {function(string, ResetAccountPasswordResponse):void} cb
      * @public
      */
-    RunMigration(req, cb) {
-        let resp = new RunMigrationResponse();
-        this.request("RunMigration", req, resp, cb);
+    ResetAccountPassword(req, cb) {
+        let resp = new ResetAccountPasswordResponse();
+        this.request("ResetAccountPassword", req, resp, cb);
     }
 
     /**
-     * 本接口（CreateMigration）作用是创建一个迁移任务
-     * @param {CreateMigrationRequest} req
-     * @param {function(string, CreateMigrationResponse):void} cb
+     * 本接口（DescribeDBs）用于查询数据库列表。
+     * @param {DescribeDBsRequest} req
+     * @param {function(string, DescribeDBsResponse):void} cb
      * @public
      */
-    CreateMigration(req, cb) {
-        let resp = new CreateMigrationResponse();
-        this.request("CreateMigration", req, resp, cb);
+    DescribeDBs(req, cb) {
+        let resp = new DescribeDBsResponse();
+        this.request("DescribeDBs", req, resp, cb);
     }
 
     /**
@@ -635,6 +663,17 @@ class SqlserverClient extends AbstractClient {
     ModifyMaintenanceSpan(req, cb) {
         let resp = new ModifyMaintenanceSpanResponse();
         this.request("ModifyMaintenanceSpan", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeMaintenanceSpan）根据实例ID查询该实例的可维护时间窗。
+     * @param {DescribeMaintenanceSpanRequest} req
+     * @param {function(string, DescribeMaintenanceSpanResponse):void} cb
+     * @public
+     */
+    DescribeMaintenanceSpan(req, cb) {
+        let resp = new DescribeMaintenanceSpanResponse();
+        this.request("DescribeMaintenanceSpan", req, resp, cb);
     }
 
     /**
@@ -693,14 +732,14 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeMaintenanceSpan）根据实例ID查询该实例的可维护时间窗。
-     * @param {DescribeMaintenanceSpanRequest} req
-     * @param {function(string, DescribeMaintenanceSpanResponse):void} cb
+     * 本接口(DescribeBackupByFlowId)用于通过备份创建流程的ID查询创建的备份详情，流程ID可从接口CreateBackup中获得。
+     * @param {DescribeBackupByFlowIdRequest} req
+     * @param {function(string, DescribeBackupByFlowIdResponse):void} cb
      * @public
      */
-    DescribeMaintenanceSpan(req, cb) {
-        let resp = new DescribeMaintenanceSpanResponse();
-        this.request("DescribeMaintenanceSpan", req, resp, cb);
+    DescribeBackupByFlowId(req, cb) {
+        let resp = new DescribeBackupByFlowIdResponse();
+        this.request("DescribeBackupByFlowId", req, resp, cb);
     }
 
     /**
@@ -737,14 +776,14 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
-     * 本接口(DeleteDB)用于删除数据库。
-     * @param {DeleteDBRequest} req
-     * @param {function(string, DeleteDBResponse):void} cb
+     * 本接口(DescribeDBSecurityGroups)用于查询实例的安全组详情。
+     * @param {DescribeDBSecurityGroupsRequest} req
+     * @param {function(string, DescribeDBSecurityGroupsResponse):void} cb
      * @public
      */
-    DeleteDB(req, cb) {
-        let resp = new DeleteDBResponse();
-        this.request("DeleteDB", req, resp, cb);
+    DescribeDBSecurityGroups(req, cb) {
+        let resp = new DescribeDBSecurityGroupsResponse();
+        this.request("DescribeDBSecurityGroups", req, resp, cb);
     }
 
     /**
