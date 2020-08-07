@@ -592,6 +592,34 @@ class RegionInfo extends  AbstractModel {
 }
 
 /**
+ * ModifyBackupName返回参数结构体
+ * @class
+ */
+class ModifyBackupNameResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeletePublishSubscribe请求参数结构体
  * @class
  */
@@ -630,6 +658,55 @@ class DeletePublishSubscribeRequest extends  AbstractModel {
                 this.DatabaseTupleSet.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * ModifyMaintenanceSpan请求参数结构体
+ * @class
+ */
+class ModifyMaintenanceSpanRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID，形如mssql-k8voqdlz
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 以周为单位，表示允许周几维护，例如：[1,2,3,4,5,6,7]表示周一到周日均为可维护日，本参数不填，则不修改此值。
+         * @type {Array.<number> || null}
+         */
+        this.Weekly = null;
+
+        /**
+         * 每天可维护的开始时间，例如：10:24标识可维护时间窗10点24分开始，本参数不填，则不修改此值。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 每天可维护的持续时间，单位是h，例如：1 表示从可维护的开始时间起持续1小时，本参数不填，则不修改此值。
+         * @type {number || null}
+         */
+        this.Span = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Weekly = 'Weekly' in params ? params.Weekly : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.Span = 'Span' in params ? params.Span : null;
 
     }
 }
@@ -958,24 +1035,18 @@ class ModifyPublishSubscribeNameResponse extends  AbstractModel {
 }
 
 /**
- * CreateAccount请求参数结构体
+ * DescribeCrossRegionZone请求参数结构体
  * @class
  */
-class CreateAccountRequest extends  AbstractModel {
+class DescribeCrossRegionZoneRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 数据库实例ID，形如mssql-njj2mtpl
+         * 实例ID，格式如：mssql-3l3fgqn7
          * @type {string || null}
          */
         this.InstanceId = null;
-
-        /**
-         * 数据库实例账户信息
-         * @type {Array.<AccountCreateInfo> || null}
-         */
-        this.Accounts = null;
 
     }
 
@@ -987,15 +1058,6 @@ class CreateAccountRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-
-        if (params.Accounts) {
-            this.Accounts = new Array();
-            for (let z in params.Accounts) {
-                let obj = new AccountCreateInfo();
-                obj.deserialize(params.Accounts[z]);
-                this.Accounts.push(obj);
-            }
-        }
 
     }
 }
@@ -1257,6 +1319,24 @@ class DescribeBackupsRequest extends  AbstractModel {
          */
         this.Offset = null;
 
+        /**
+         * 按照备份名称筛选，不填则不筛选此项
+         * @type {string || null}
+         */
+        this.BackupName = null;
+
+        /**
+         * 按照备份策略筛选，0-实例备份，1-多库备份，不填则不筛选此项
+         * @type {number || null}
+         */
+        this.Strategy = null;
+
+        /**
+         * 按照备份方式筛选，0-后台自动定时备份，1-用户手动临时备份，不填则不筛选此项
+         * @type {number || null}
+         */
+        this.BackupWay = null;
+
     }
 
     /**
@@ -1271,6 +1351,9 @@ class DescribeBackupsRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+        this.BackupName = 'BackupName' in params ? params.BackupName : null;
+        this.Strategy = 'Strategy' in params ? params.Strategy : null;
+        this.BackupWay = 'BackupWay' in params ? params.BackupWay : null;
 
     }
 }
@@ -1795,36 +1878,90 @@ class InquiryPriceCreateDBInstancesRequest extends  AbstractModel {
 }
 
 /**
- * ModifyMaintenanceSpan请求参数结构体
+ * DescribeBackupByFlowId返回参数结构体
  * @class
  */
-class ModifyMaintenanceSpanRequest extends  AbstractModel {
+class DescribeBackupByFlowIdResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例ID，形如mssql-k8voqdlz
+         * 备份文件唯一标识，RestoreInstance接口会用到该字段
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 存储文件名
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.FileName = null;
 
         /**
-         * 以周为单位，表示允许周几维护，例如：[1,2,3,4,5,6,7]表示周一到周日均为可维护日，本参数不填，则不修改此值。
-         * @type {Array.<number> || null}
+         * 备份名称，可自定义
+         * @type {string || null}
          */
-        this.Weekly = null;
+        this.BackupName = null;
 
         /**
-         * 每天可维护的开始时间，例如：10:24标识可维护时间窗10点24分开始，本参数不填，则不修改此值。
+         * 备份开始时间
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 每天可维护的持续时间，单位是h，例如：1 表示从可维护的开始时间起持续1小时，本参数不填，则不修改此值。
+         * 备份结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 文件大小，单位 KB
          * @type {number || null}
          */
-        this.Span = null;
+        this.Size = null;
+
+        /**
+         * 备份策略，0-实例备份；1-多库备份；实例状态是0-创建中时，该字段为默认值0，无实际意义
+         * @type {number || null}
+         */
+        this.Strategy = null;
+
+        /**
+         * 备份方式，0-定时备份；1-手动临时备份；实例状态是0-创建中时，该字段为默认值0，无实际意义
+         * @type {number || null}
+         */
+        this.BackupWay = null;
+
+        /**
+         * 备份文件状态，0-创建中；1-成功；2-失败
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 多库备份时的DB列表
+         * @type {Array.<string> || null}
+         */
+        this.DBs = null;
+
+        /**
+         * 内网下载地址
+         * @type {string || null}
+         */
+        this.InternalAddr = null;
+
+        /**
+         * 外网下载地址
+         * @type {string || null}
+         */
+        this.ExternalAddr = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -1835,10 +1972,19 @@ class ModifyMaintenanceSpanRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Weekly = 'Weekly' in params ? params.Weekly : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.FileName = 'FileName' in params ? params.FileName : null;
+        this.BackupName = 'BackupName' in params ? params.BackupName : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.Span = 'Span' in params ? params.Span : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Size = 'Size' in params ? params.Size : null;
+        this.Strategy = 'Strategy' in params ? params.Strategy : null;
+        this.BackupWay = 'BackupWay' in params ? params.BackupWay : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.DBs = 'DBs' in params ? params.DBs : null;
+        this.InternalAddr = 'InternalAddr' in params ? params.InternalAddr : null;
+        this.ExternalAddr = 'ExternalAddr' in params ? params.ExternalAddr : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2976,6 +3122,48 @@ class DescribeProjectSecurityGroupsResponse extends  AbstractModel {
                 this.SecurityGroupSet.push(obj);
             }
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeCrossRegionZone返回参数结构体
+ * @class
+ */
+class DescribeCrossRegionZoneResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 备机所在地域的字符串ID，形如：ap-guangzhou
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 备机所在可用区的字符串ID，形如：ap-guangzhou-1
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6415,6 +6603,41 @@ class PublishSubscribe extends  AbstractModel {
 }
 
 /**
+ * DescribeBackupByFlowId请求参数结构体
+ * @class
+ */
+class DescribeBackupByFlowIdRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID，格式如：mssql-3l3fgqn7
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 创建备份流程ID
+         * @type {string || null}
+         */
+        this.FlowId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+
+    }
+}
+
+/**
  * CreateBackup请求参数结构体
  * @class
  */
@@ -6440,6 +6663,12 @@ class CreateBackupRequest extends  AbstractModel {
          */
         this.InstanceId = null;
 
+        /**
+         * 备份名称，若不填则自动生成“实例ID_备份开始时间戳”
+         * @type {string || null}
+         */
+        this.BackupName = null;
+
     }
 
     /**
@@ -6452,6 +6681,7 @@ class CreateBackupRequest extends  AbstractModel {
         this.Strategy = 'Strategy' in params ? params.Strategy : null;
         this.DBNames = 'DBNames' in params ? params.DBNames : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.BackupName = 'BackupName' in params ? params.BackupName : null;
 
     }
 }
@@ -7075,6 +7305,49 @@ class UpgradeDBInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * CreateAccount请求参数结构体
+ * @class
+ */
+class CreateAccountRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据库实例ID，形如mssql-njj2mtpl
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 数据库实例账户信息
+         * @type {Array.<AccountCreateInfo> || null}
+         */
+        this.Accounts = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.Accounts) {
+            this.Accounts = new Array();
+            for (let z in params.Accounts) {
+                let obj = new AccountCreateInfo();
+                obj.deserialize(params.Accounts[z]);
+                this.Accounts.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DeleteDB返回参数结构体
  * @class
  */
@@ -7668,6 +7941,48 @@ class DisassociateSecurityGroupsRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyBackupName请求参数结构体
+ * @class
+ */
+class ModifyBackupNameRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID，格式如：mssql-3l3fgqn7
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 要修改名称的备份ID，可通过DescribeBackups 接口获取。
+         * @type {number || null}
+         */
+        this.BackupId = null;
+
+        /**
+         * 修改的备份名称
+         * @type {string || null}
+         */
+        this.BackupName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.BackupId = 'BackupId' in params ? params.BackupId : null;
+        this.BackupName = 'BackupName' in params ? params.BackupName : null;
+
+    }
+}
+
+/**
  * CreatePublishSubscribe返回参数结构体
  * @class
  */
@@ -8002,7 +8317,9 @@ module.exports = {
     CreateMigrationResponse: CreateMigrationResponse,
     DatabaseTuple: DatabaseTuple,
     RegionInfo: RegionInfo,
+    ModifyBackupNameResponse: ModifyBackupNameResponse,
     DeletePublishSubscribeRequest: DeletePublishSubscribeRequest,
+    ModifyMaintenanceSpanRequest: ModifyMaintenanceSpanRequest,
     AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
     DatabaseTupleStatus: DatabaseTupleStatus,
     ModifyReadOnlyGroupDetailsResponse: ModifyReadOnlyGroupDetailsResponse,
@@ -8012,7 +8329,7 @@ module.exports = {
     RunMigrationResponse: RunMigrationResponse,
     DescribeProductConfigRequest: DescribeProductConfigRequest,
     ModifyPublishSubscribeNameResponse: ModifyPublishSubscribeNameResponse,
-    CreateAccountRequest: CreateAccountRequest,
+    DescribeCrossRegionZoneRequest: DescribeCrossRegionZoneRequest,
     RollbackInstanceResponse: RollbackInstanceResponse,
     DBRemark: DBRemark,
     MigrateDB: MigrateDB,
@@ -8030,7 +8347,7 @@ module.exports = {
     ModifyMaintenanceSpanResponse: ModifyMaintenanceSpanResponse,
     ZoneInfo: ZoneInfo,
     InquiryPriceCreateDBInstancesRequest: InquiryPriceCreateDBInstancesRequest,
-    ModifyMaintenanceSpanRequest: ModifyMaintenanceSpanRequest,
+    DescribeBackupByFlowIdResponse: DescribeBackupByFlowIdResponse,
     DescribeAccountsRequest: DescribeAccountsRequest,
     MigrateTask: MigrateTask,
     SpecInfo: SpecInfo,
@@ -8053,6 +8370,7 @@ module.exports = {
     DescribeZonesRequest: DescribeZonesRequest,
     DeleteDBRequest: DeleteDBRequest,
     DescribeProjectSecurityGroupsResponse: DescribeProjectSecurityGroupsResponse,
+    DescribeCrossRegionZoneResponse: DescribeCrossRegionZoneResponse,
     ModifyDBInstanceRenewFlagResponse: ModifyDBInstanceRenewFlagResponse,
     CompleteExpansionResponse: CompleteExpansionResponse,
     MigrateSource: MigrateSource,
@@ -8116,6 +8434,7 @@ module.exports = {
     DescribeReadOnlyGroupByReadOnlyInstanceRequest: DescribeReadOnlyGroupByReadOnlyInstanceRequest,
     DescribeMaintenanceSpanRequest: DescribeMaintenanceSpanRequest,
     PublishSubscribe: PublishSubscribe,
+    DescribeBackupByFlowIdRequest: DescribeBackupByFlowIdRequest,
     CreateBackupRequest: CreateBackupRequest,
     DescribePublishSubscribeRequest: DescribePublishSubscribeRequest,
     ModifyAccountRemarkRequest: ModifyAccountRemarkRequest,
@@ -8128,6 +8447,7 @@ module.exports = {
     CreateAccountResponse: CreateAccountResponse,
     RenewPostpaidDBInstanceResponse: RenewPostpaidDBInstanceResponse,
     UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
+    CreateAccountRequest: CreateAccountRequest,
     DeleteDBResponse: DeleteDBResponse,
     CreateDBResponse: CreateDBResponse,
     RestartDBInstanceResponse: RestartDBInstanceResponse,
@@ -8140,6 +8460,7 @@ module.exports = {
     DescribeSlowlogsRequest: DescribeSlowlogsRequest,
     ModifyDBInstanceProjectRequest: ModifyDBInstanceProjectRequest,
     DisassociateSecurityGroupsRequest: DisassociateSecurityGroupsRequest,
+    ModifyBackupNameRequest: ModifyBackupNameRequest,
     CreatePublishSubscribeResponse: CreatePublishSubscribeResponse,
     DescribeAccountsResponse: DescribeAccountsResponse,
     DeleteDBInstanceResponse: DeleteDBInstanceResponse,

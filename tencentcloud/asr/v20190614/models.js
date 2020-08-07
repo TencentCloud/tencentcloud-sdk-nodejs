@@ -423,7 +423,7 @@ class CreateRecTaskRequest extends  AbstractModel {
 • 16k_zh_video：16k 音视频领域；
 • 16k_en：16k 英语；
 • 16k_ca：16k 粤语；
-• 16k_jp：16k 日语；
+• 16k_ja：16k 日语；
          * @type {string || null}
          */
         this.EngineModelType = null;
@@ -915,7 +915,7 @@ class SentenceRecognitionRequest extends  AbstractModel {
 • 16k_zh：16k 中文普通话通用；
 • 16k_en：16k 英语；
 • 16k_ca：16k 粤语；
-• 16k_jp：16k 日语；
+• 16k_ja：16k 日语；
          * @type {string || null}
          */
         this.EngSerViceType = null;

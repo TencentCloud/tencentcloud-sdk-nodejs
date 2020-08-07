@@ -90,6 +90,7 @@ module.exports = {
     partners: require("./partners"),
     postgres: require("./postgres"),
     redis: require("./redis"),
+    rkp: require("./rkp"),
     rp: require("./rp"),
     scf: require("./scf"),
     smpn: require("./smpn"),
