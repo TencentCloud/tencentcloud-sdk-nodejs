@@ -368,11 +368,7 @@ class LayerVersionInfo extends  AbstractModel {
         this.LayerName = null;
 
         /**
-         * 层的具体版本当前状态，可能取值：
-Active 正常
-Publishing  发布中
-PublishFailed  发布失败
-Deleted 已删除
+         * 层的具体版本当前状态，状态值[参考此处](https://cloud.tencent.com/document/product/583/47175#.E5.B1.82.EF.BC.88layer.EF.BC.89.E7.8A.B6.E6.80.81)
          * @type {string || null}
          */
         this.Status = null;
@@ -1585,6 +1581,12 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
          */
         this.CfsConfig = null;
 
+        /**
+         * 函数初始化执行超时时间，默认15秒
+         * @type {number || null}
+         */
+        this.InitTimeout = null;
+
     }
 
     /**
@@ -1644,6 +1646,7 @@ class UpdateFunctionConfigurationRequest extends  AbstractModel {
             obj.deserialize(params.CfsConfig)
             this.CfsConfig = obj;
         }
+        this.InitTimeout = 'InitTimeout' in params ? params.InitTimeout : null;
 
     }
 }
@@ -2581,6 +2584,12 @@ class CreateFunctionRequest extends  AbstractModel {
          */
         this.CfsConfig = null;
 
+        /**
+         * 函数初始化超时时间
+         * @type {number || null}
+         */
+        this.InitTimeout = null;
+
     }
 
     /**
@@ -2647,6 +2656,7 @@ class CreateFunctionRequest extends  AbstractModel {
             obj.deserialize(params.CfsConfig)
             this.CfsConfig = obj;
         }
+        this.InitTimeout = 'InitTimeout' in params ? params.InitTimeout : null;
 
     }
 }
@@ -3482,7 +3492,7 @@ class GetFunctionResponse extends  AbstractModel {
         this.InstallDependency = null;
 
         /**
-         * 函数状态
+         * 函数状态，状态值及流转[参考说明](https://cloud.tencent.com/document/product/583/47175)
          * @type {string || null}
          */
         this.Status = null;
@@ -3581,7 +3591,7 @@ class GetFunctionResponse extends  AbstractModel {
         this.CfsConfig = null;
 
         /**
-         * 函数的计费状态
+         * 函数的计费状态，状态值[参考此处](https://cloud.tencent.com/document/product/583/47175#.E5.87.BD.E6.95.B0.E8.AE.A1.E8.B4.B9.E7.8A.B6.E6.80.81)
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -3593,6 +3603,12 @@ class GetFunctionResponse extends  AbstractModel {
          * @type {string || null}
          */
         this.Qualifier = null;
+
+        /**
+         * 函数初始化超时时间
+         * @type {number || null}
+         */
+        this.InitTimeout = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3706,6 +3722,7 @@ class GetFunctionResponse extends  AbstractModel {
         }
         this.AvailableStatus = 'AvailableStatus' in params ? params.AvailableStatus : null;
         this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
+        this.InitTimeout = 'InitTimeout' in params ? params.InitTimeout : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

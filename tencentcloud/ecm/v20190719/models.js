@@ -1195,6 +1195,179 @@ class DescribeInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * 弹性网卡
+ * @class
+ */
+class NetworkInterface extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 弹性网卡实例ID，例如：eni-f1xjkw1b。
+         * @type {string || null}
+         */
+        this.NetworkInterfaceId = null;
+
+        /**
+         * 弹性网卡名称。
+         * @type {string || null}
+         */
+        this.NetworkInterfaceName = null;
+
+        /**
+         * 弹性网卡描述。
+         * @type {string || null}
+         */
+        this.NetworkInterfaceDescription = null;
+
+        /**
+         * 子网实例ID。
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * VPC实例ID。
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 绑定的安全组。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.GroupSet = null;
+
+        /**
+         * 是否是主网卡。
+         * @type {boolean || null}
+         */
+        this.Primary = null;
+
+        /**
+         * MAC地址。
+         * @type {string || null}
+         */
+        this.MacAddress = null;
+
+        /**
+         * 弹性网卡状态：
+PENDING：创建中
+AVAILABLE：可用的
+ATTACHING：绑定中
+DETACHING：解绑中
+DELETING：删除中
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * 内网IP信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<PrivateIpAddressSpecification> || null}
+         */
+        this.PrivateIpAddressSet = null;
+
+        /**
+         * 绑定的云服务器对象。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {NetworkInterfaceAttachment || null}
+         */
+        this.Attachment = null;
+
+        /**
+         * 可用区。
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 创建时间。
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * IPv6地址列表。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Ipv6Address> || null}
+         */
+        this.Ipv6AddressSet = null;
+
+        /**
+         * 标签键值对。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.TagSet = null;
+
+        /**
+         * 网卡类型。0 - 弹性网卡；1 - evm弹性网卡。
+         * @type {number || null}
+         */
+        this.EniType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NetworkInterfaceId = 'NetworkInterfaceId' in params ? params.NetworkInterfaceId : null;
+        this.NetworkInterfaceName = 'NetworkInterfaceName' in params ? params.NetworkInterfaceName : null;
+        this.NetworkInterfaceDescription = 'NetworkInterfaceDescription' in params ? params.NetworkInterfaceDescription : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.GroupSet = 'GroupSet' in params ? params.GroupSet : null;
+        this.Primary = 'Primary' in params ? params.Primary : null;
+        this.MacAddress = 'MacAddress' in params ? params.MacAddress : null;
+        this.State = 'State' in params ? params.State : null;
+
+        if (params.PrivateIpAddressSet) {
+            this.PrivateIpAddressSet = new Array();
+            for (let z in params.PrivateIpAddressSet) {
+                let obj = new PrivateIpAddressSpecification();
+                obj.deserialize(params.PrivateIpAddressSet[z]);
+                this.PrivateIpAddressSet.push(obj);
+            }
+        }
+
+        if (params.Attachment) {
+            let obj = new NetworkInterfaceAttachment();
+            obj.deserialize(params.Attachment)
+            this.Attachment = obj;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+
+        if (params.Ipv6AddressSet) {
+            this.Ipv6AddressSet = new Array();
+            for (let z in params.Ipv6AddressSet) {
+                let obj = new Ipv6Address();
+                obj.deserialize(params.Ipv6AddressSet[z]);
+                this.Ipv6AddressSet.push(obj);
+            }
+        }
+
+        if (params.TagSet) {
+            this.TagSet = new Array();
+            for (let z in params.TagSet) {
+                let obj = new Tag();
+                obj.deserialize(params.TagSet[z]);
+                this.TagSet.push(obj);
+            }
+        }
+        this.EniType = 'EniType' in params ? params.EniType : null;
+
+    }
+}
+
+/**
  * ResetInstancesPassword返回参数结构体
  * @class
  */
@@ -1364,7 +1537,7 @@ class InstanceTypeConfig extends  AbstractModel {
         this.InstanceFamilyTypeConfig = null;
 
         /**
-         * 机型额外信息
+         * 机型额外信息 是一个json字符串，如果存在则表示特殊机型，格式如下：{"dataDiskSize":3200,"systemDiskSize":60, "systemDiskSizeShow":"系统盘默认60G","dataDiskSizeShow":"本地NVMe SSD 硬盘3200 GB"}
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -1823,7 +1996,7 @@ module-name - string - 是否必填：否 - （过滤条件）按照模块名称
 module-id - string - 是否必填：否 - （过滤条件）按照模块ID过滤。
 image-id      String      是否必填：否      （过滤条件）按照镜像ID过滤。
 instance-family      String      是否必填：否      （过滤条件）按照机型family过滤。
-
+security-group-id - string 是否必填：否 - （过滤条件）按照模块绑定的安全组id过滤。
 每次请求的Filters的上限为10，Filter.Values的上限为5。
          * @type {Array.<Filter> || null}
          */
@@ -3033,119 +3206,26 @@ class DescribeTaskStatusResponse extends  AbstractModel {
 }
 
 /**
- * 弹性网卡
+ * ModifyModuleIpDirect请求参数结构体
  * @class
  */
-class NetworkInterface extends  AbstractModel {
+class ModifyModuleIpDirectRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 弹性网卡实例ID，例如：eni-f1xjkw1b。
+         * 模块ID。
          * @type {string || null}
          */
-        this.NetworkInterfaceId = null;
+        this.ModuleId = null;
 
         /**
-         * 弹性网卡名称。
-         * @type {string || null}
-         */
-        this.NetworkInterfaceName = null;
-
-        /**
-         * 弹性网卡描述。
-         * @type {string || null}
-         */
-        this.NetworkInterfaceDescription = null;
-
-        /**
-         * 子网实例ID。
-         * @type {string || null}
-         */
-        this.SubnetId = null;
-
-        /**
-         * VPC实例ID。
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * 绑定的安全组。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<string> || null}
-         */
-        this.GroupSet = null;
-
-        /**
-         * 是否是主网卡。
+         * 是否关闭IP直通。取值范围：
+1：表示关闭IP直通
+0：表示开通IP直通
          * @type {boolean || null}
          */
-        this.Primary = null;
-
-        /**
-         * MAC地址。
-         * @type {string || null}
-         */
-        this.MacAddress = null;
-
-        /**
-         * 弹性网卡状态：
-PENDING：创建中
-AVAILABLE：可用的
-ATTACHING：绑定中
-DETACHING：解绑中
-DELETING：删除中
-         * @type {string || null}
-         */
-        this.State = null;
-
-        /**
-         * 内网IP信息。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<PrivateIpAddressSpecification> || null}
-         */
-        this.PrivateIpAddressSet = null;
-
-        /**
-         * 绑定的云服务器对象。
-注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {NetworkInterfaceAttachment || null}
-         */
-        this.Attachment = null;
-
-        /**
-         * 可用区。
-         * @type {string || null}
-         */
-        this.Zone = null;
-
-        /**
-         * 创建时间。
-         * @type {string || null}
-         */
-        this.CreatedTime = null;
-
-        /**
-         * IPv6地址列表。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<Ipv6Address> || null}
-         */
-        this.Ipv6AddressSet = null;
-
-        /**
-         * 标签键值对。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<Tag> || null}
-         */
-        this.TagSet = null;
-
-        /**
-         * 网卡类型。0 - 弹性网卡；1 - evm弹性网卡。
-         * @type {number || null}
-         */
-        this.EniType = null;
+        this.CloseIpDirect = null;
 
     }
 
@@ -3156,51 +3236,8 @@ DELETING：删除中
         if (!params) {
             return;
         }
-        this.NetworkInterfaceId = 'NetworkInterfaceId' in params ? params.NetworkInterfaceId : null;
-        this.NetworkInterfaceName = 'NetworkInterfaceName' in params ? params.NetworkInterfaceName : null;
-        this.NetworkInterfaceDescription = 'NetworkInterfaceDescription' in params ? params.NetworkInterfaceDescription : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.GroupSet = 'GroupSet' in params ? params.GroupSet : null;
-        this.Primary = 'Primary' in params ? params.Primary : null;
-        this.MacAddress = 'MacAddress' in params ? params.MacAddress : null;
-        this.State = 'State' in params ? params.State : null;
-
-        if (params.PrivateIpAddressSet) {
-            this.PrivateIpAddressSet = new Array();
-            for (let z in params.PrivateIpAddressSet) {
-                let obj = new PrivateIpAddressSpecification();
-                obj.deserialize(params.PrivateIpAddressSet[z]);
-                this.PrivateIpAddressSet.push(obj);
-            }
-        }
-
-        if (params.Attachment) {
-            let obj = new NetworkInterfaceAttachment();
-            obj.deserialize(params.Attachment)
-            this.Attachment = obj;
-        }
-        this.Zone = 'Zone' in params ? params.Zone : null;
-        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
-
-        if (params.Ipv6AddressSet) {
-            this.Ipv6AddressSet = new Array();
-            for (let z in params.Ipv6AddressSet) {
-                let obj = new Ipv6Address();
-                obj.deserialize(params.Ipv6AddressSet[z]);
-                this.Ipv6AddressSet.push(obj);
-            }
-        }
-
-        if (params.TagSet) {
-            this.TagSet = new Array();
-            for (let z in params.TagSet) {
-                let obj = new Tag();
-                obj.deserialize(params.TagSet[z]);
-                this.TagSet.push(obj);
-            }
-        }
-        this.EniType = 'EniType' in params ? params.EniType : null;
+        this.ModuleId = 'ModuleId' in params ? params.ModuleId : null;
+        this.CloseIpDirect = 'CloseIpDirect' in params ? params.CloseIpDirect : null;
 
     }
 }
@@ -3249,6 +3286,20 @@ class CreateModuleRequest extends  AbstractModel {
          */
         this.DefaultDataDiskSize = null;
 
+        /**
+         * 是否关闭IP直通。取值范围：
+1：表示关闭IP直通
+0：表示开通IP直通
+         * @type {boolean || null}
+         */
+        this.CloseIpDirect = null;
+
+        /**
+         * 标签列表。
+         * @type {Array.<TagSpecification> || null}
+         */
+        this.TagSpecification = null;
+
     }
 
     /**
@@ -3264,6 +3315,16 @@ class CreateModuleRequest extends  AbstractModel {
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
         this.DefaultSystemDiskSize = 'DefaultSystemDiskSize' in params ? params.DefaultSystemDiskSize : null;
         this.DefaultDataDiskSize = 'DefaultDataDiskSize' in params ? params.DefaultDataDiskSize : null;
+        this.CloseIpDirect = 'CloseIpDirect' in params ? params.CloseIpDirect : null;
+
+        if (params.TagSpecification) {
+            this.TagSpecification = new Array();
+            for (let z in params.TagSpecification) {
+                let obj = new TagSpecification();
+                obj.deserialize(params.TagSpecification[z]);
+                this.TagSpecification.push(obj);
+            }
+        }
 
     }
 }
@@ -4672,7 +4733,7 @@ class TagSpecification extends  AbstractModel {
         super();
 
         /**
-         * 资源类型，目前仅支持"instance"
+         * 资源类型，目前仅支持"instance"、"module"
          * @type {string || null}
          */
         this.ResourceType = null;
@@ -6348,6 +6409,34 @@ class NetworkInterfaceAttachment extends  AbstractModel {
  * @class
  */
 class StopInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyModuleIpDirect返回参数结构体
+ * @class
+ */
+class ModifyModuleIpDirectResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -8987,6 +9076,19 @@ DELETEFAILED：删除失败
          */
         this.DefaultBandwidth = null;
 
+        /**
+         * 标签集合
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.TagSet = null;
+
+        /**
+         * 是否关闭IP直通
+         * @type {number || null}
+         */
+        this.CloseIpDirect = null;
+
     }
 
     /**
@@ -9015,6 +9117,16 @@ DELETEFAILED：删除失败
         }
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.DefaultBandwidth = 'DefaultBandwidth' in params ? params.DefaultBandwidth : null;
+
+        if (params.TagSet) {
+            this.TagSet = new Array();
+            for (let z in params.TagSet) {
+                let obj = new Tag();
+                obj.deserialize(params.TagSet[z]);
+                this.TagSet.push(obj);
+            }
+        }
+        this.CloseIpDirect = 'CloseIpDirect' in params ? params.CloseIpDirect : null;
 
     }
 }
@@ -9147,6 +9259,7 @@ module.exports = {
     DescribeSubnetsResponse: DescribeSubnetsResponse,
     RunInstancesRequest: RunInstancesRequest,
     DescribeInstancesResponse: DescribeInstancesResponse,
+    NetworkInterface: NetworkInterface,
     ResetInstancesPasswordResponse: ResetInstancesPasswordResponse,
     SrcImage: SrcImage,
     InstanceTypeConfig: InstanceTypeConfig,
@@ -9183,7 +9296,7 @@ module.exports = {
     CreateVpcResponse: CreateVpcResponse,
     AssistantCidr: AssistantCidr,
     DescribeTaskStatusResponse: DescribeTaskStatusResponse,
-    NetworkInterface: NetworkInterface,
+    ModifyModuleIpDirectRequest: ModifyModuleIpDirectRequest,
     CreateModuleRequest: CreateModuleRequest,
     ModifyInstancesAttributeResponse: ModifyInstancesAttributeResponse,
     ReleaseAddressesResponse: ReleaseAddressesResponse,
@@ -9249,6 +9362,7 @@ module.exports = {
     DescribeImportImageOsRequest: DescribeImportImageOsRequest,
     NetworkInterfaceAttachment: NetworkInterfaceAttachment,
     StopInstancesResponse: StopInstancesResponse,
+    ModifyModuleIpDirectResponse: ModifyModuleIpDirectResponse,
     ModifyModuleNameRequest: ModifyModuleNameRequest,
     ModifyDefaultSubnetRequest: ModifyDefaultSubnetRequest,
     DescribeInstancesRequest: DescribeInstancesRequest,

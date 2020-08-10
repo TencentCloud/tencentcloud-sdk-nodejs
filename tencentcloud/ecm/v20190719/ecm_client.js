@@ -38,6 +38,7 @@ const ModifyAddressesBandwidthResponse = models.ModifyAddressesBandwidthResponse
 const DescribeSubnetsResponse = models.DescribeSubnetsResponse;
 const RunInstancesRequest = models.RunInstancesRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
+const NetworkInterface = models.NetworkInterface;
 const ResetInstancesPasswordResponse = models.ResetInstancesPasswordResponse;
 const SrcImage = models.SrcImage;
 const InstanceTypeConfig = models.InstanceTypeConfig;
@@ -74,7 +75,7 @@ const StartInstancesResponse = models.StartInstancesResponse;
 const CreateVpcResponse = models.CreateVpcResponse;
 const AssistantCidr = models.AssistantCidr;
 const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
-const NetworkInterface = models.NetworkInterface;
+const ModifyModuleIpDirectRequest = models.ModifyModuleIpDirectRequest;
 const CreateModuleRequest = models.CreateModuleRequest;
 const ModifyInstancesAttributeResponse = models.ModifyInstancesAttributeResponse;
 const ReleaseAddressesResponse = models.ReleaseAddressesResponse;
@@ -140,6 +141,7 @@ const DiskInfo = models.DiskInfo;
 const DescribeImportImageOsRequest = models.DescribeImportImageOsRequest;
 const NetworkInterfaceAttachment = models.NetworkInterfaceAttachment;
 const StopInstancesResponse = models.StopInstancesResponse;
+const ModifyModuleIpDirectResponse = models.ModifyModuleIpDirectResponse;
 const ModifyModuleNameRequest = models.ModifyModuleNameRequest;
 const ModifyDefaultSubnetRequest = models.ModifyDefaultSubnetRequest;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
@@ -776,7 +778,7 @@ EIP 如果欠费或被封堵，则不能被绑定。
     }
 
     /**
-     * ModifyModuleImage
+     * 修改模块的默认镜像
      * @param {ModifyModuleImageRequest} req
      * @param {function(string, ModifyModuleImageResponse):void} cb
      * @public
@@ -885,6 +887,17 @@ EIP 如果欠费或被封堵，则不能被绑定。
     DescribeImage(req, cb) {
         let resp = new DescribeImageResponse();
         this.request("DescribeImage", req, resp, cb);
+    }
+
+    /**
+     * 修改模块IP直通。
+     * @param {ModifyModuleIpDirectRequest} req
+     * @param {function(string, ModifyModuleIpDirectResponse):void} cb
+     * @public
+     */
+    ModifyModuleIpDirect(req, cb) {
+        let resp = new ModifyModuleIpDirectResponse();
+        this.request("ModifyModuleIpDirect", req, resp, cb);
     }
 
     /**

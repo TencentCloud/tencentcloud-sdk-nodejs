@@ -16,6 +16,7 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const VerifyBizLicenseRequest = models.VerifyBizLicenseRequest;
 const BusinessCardOCRResponse = models.BusinessCardOCRResponse;
 const TextArithmetic = models.TextArithmetic;
 const HKIDCardOCRRequest = models.HKIDCardOCRRequest;
@@ -26,6 +27,7 @@ const EstateCertOCRResponse = models.EstateCertOCRResponse;
 const FlightInvoiceOCRRequest = models.FlightInvoiceOCRRequest;
 const MLIDPassportOCRRequest = models.MLIDPassportOCRRequest;
 const TextDetectResponse = models.TextDetectResponse;
+const VerifyBizLicenseResponse = models.VerifyBizLicenseResponse;
 const FinanBillSliceOCRResponse = models.FinanBillSliceOCRResponse;
 const DriverLicenseOCRResponse = models.DriverLicenseOCRResponse;
 const Words = models.Words;
@@ -45,6 +47,7 @@ const InvoiceGeneralInfo = models.InvoiceGeneralInfo;
 const WordCoordPoint = models.WordCoordPoint;
 const InstitutionOCRResponse = models.InstitutionOCRResponse;
 const DriverLicenseOCRRequest = models.DriverLicenseOCRRequest;
+const BizLicenseVerifyResult = models.BizLicenseVerifyResult;
 const TextDetection = models.TextDetection;
 const TextEduPaper = models.TextEduPaper;
 const QrcodeOCRResponse = models.QrcodeOCRResponse;
@@ -93,6 +96,7 @@ const BusinessCardInfo = models.BusinessCardInfo;
 const TextGeneralHandwriting = models.TextGeneralHandwriting;
 const TableOCRRequest = models.TableOCRRequest;
 const QrcodeImgSize = models.QrcodeImgSize;
+const VerifyBasicBizLicenseResponse = models.VerifyBasicBizLicenseResponse;
 const VehicleRegCertOCRRequest = models.VehicleRegCertOCRRequest;
 const ProductDataRecord = models.ProductDataRecord;
 const LicensePlateOCRRequest = models.LicensePlateOCRRequest;
@@ -163,6 +167,7 @@ const IDCardOCRRequest = models.IDCardOCRRequest;
 const MixedInvoiceDetectRequest = models.MixedInvoiceDetectRequest;
 const MLIDCardOCRResponse = models.MLIDCardOCRResponse;
 const EstateCertOCRRequest = models.EstateCertOCRRequest;
+const VerifyBasicBizLicenseRequest = models.VerifyBasicBizLicenseRequest;
 const BizLicenseOCRResponse = models.BizLicenseOCRResponse;
 const VatInvoiceOCRResponse = models.VatInvoiceOCRResponse;
 const ShipInvoiceOCRRequest = models.ShipInvoiceOCRRequest;
@@ -192,6 +197,17 @@ class OcrClient extends AbstractClient {
     InsuranceBillOCR(req, cb) {
         let resp = new InsuranceBillOCRResponse();
         this.request("InsuranceBillOCR", req, resp, cb);
+    }
+
+    /**
+     * 本接口支持营业执照信息的识别与准确性核验。您可以通过输入营业执照关键字段或传入营业执照图片提供所需的验证信息，接口返回真实的企业工商照面信息及核验结果，包括统一社会信用代码、经营期限、法人姓名、经营状态、经营业务范围、状态信息、原注册号、要核验的工商注册号、工商注册号、要核验的企业名称、企业名称、要核验的注册住址、注册住址、核验结果、注册资本共16个基础字段。
+     * @param {VerifyBasicBizLicenseRequest} req
+     * @param {function(string, VerifyBasicBizLicenseResponse):void} cb
+     * @public
+     */
+    VerifyBasicBizLicense(req, cb) {
+        let resp = new VerifyBasicBizLicenseResponse();
+        this.request("VerifyBasicBizLicense", req, resp, cb);
     }
 
     /**
@@ -562,6 +578,18 @@ class OcrClient extends AbstractClient {
     }
 
     /**
+     * 本接口支持营业执照信息的识别与准确性核验，返回的营业执照信息比营业执照识别及核验（基础版）接口更详细。
+您可以通过输入营业执照关键字段或传入营业执照图片提供所需的验证信息，接口返回真实的企业工商照面信息及核验结果，包括统一社会信用代码、组织机构代码、经营期限、法人姓名、经营状态、经营业务范围及方式、注册资金、注册币种、登记机关、开业日期、企业（机构）类型、注销日期、吊销日期、许可经营项目、一般经营项目、核准时间、省、地级市、区/县、住所所在行政区划代码、行业门类代码、行业门类名称、国民经济行业代码、国民经济行业名称、经营（业务）范围、要核验的工商注册号、工商注册号、要核验的企业名称、企业名称、要核验的注册住址、注册住址、核验结果共33个详细字段。
+     * @param {VerifyBizLicenseRequest} req
+     * @param {function(string, VerifyBizLicenseResponse):void} cb
+     * @public
+     */
+    VerifyBizLicense(req, cb) {
+        let resp = new VerifyBizLicenseResponse();
+        this.request("VerifyBizLicense", req, resp, cb);
+    }
+
+    /**
      * 本接口支持对完税证明的税号、纳税人识别号、纳税人名称、金额合计大写、金额合计小写、填发日期、税务机关、填票人等关键字段的识别。
      * @param {DutyPaidProofOCRRequest} req
      * @param {function(string, DutyPaidProofOCRResponse):void} cb
@@ -699,9 +727,7 @@ class OcrClient extends AbstractClient {
     }
 
     /**
-     * 本接口支持网约车驾驶证重要字段的自动定位与识别，重点字段的识别准确度达到99%以上。
-
-网约车驾驶证：包括姓名、证号、起始日期、截止日期、发证日期。
+     * 本接口支持网约车驾驶证关键字段的识别，包括姓名、证号、起始日期、截止日期、发证日期。
      * @param {RideHailingDriverLicenseOCRRequest} req
      * @param {function(string, RideHailingDriverLicenseOCRResponse):void} cb
      * @public

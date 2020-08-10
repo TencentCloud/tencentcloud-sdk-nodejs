@@ -975,7 +975,7 @@ class SentenceRecognitionRequest extends  AbstractModel {
         this.FilterModal = null;
 
         /**
-         * 是否过滤标点符号（目前支持中文普通话引擎）。 0：不过滤，1：过滤句末标点，2：过滤所有标点。默认为0。（该功能灰度上线中）
+         * 是否过滤标点符号（目前支持中文普通话引擎）。 0：不过滤，1：过滤句末标点，2：过滤所有标点。默认为0。
          * @type {number || null}
          */
         this.FilterPunc = null;

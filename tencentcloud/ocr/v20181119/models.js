@@ -17,6 +17,81 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * VerifyBizLicense请求参数结构体
+ * @class
+ */
+class VerifyBizLicenseRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用于入参是营业执照图片的场景，ImageBase64和ImageUrl必选一个输入。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * 用于入参是营业执照图片的场景，ImageBase64和ImageUrl必选一个输入。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * 用于入参是营业执照图片的场景，表示需要校验的参数：RegNum（注册号或者统一社会信用代码），Name（企业名称），Address（经营地址）。选择后会返回相关参数校验结果。RegNum为必选，Name和Address可选。
+格式为{RegNum: true, Name:true/false, Address:true/false}
+
+设置方式参考：
+Config = Json.stringify({"Name":true,"Address":true})
+API 3.0 Explorer 设置方式参考：
+Config = {"Name":true,"Address":true}
+         * @type {string || null}
+         */
+        this.ImageConfig = null;
+
+        /**
+         * 用于入参是文本的场景，RegNum表示注册号或者统一社会信用代码。RegNum为必选项。
+         * @type {string || null}
+         */
+        this.RegNum = null;
+
+        /**
+         * 用于入参是文本的场景，Name表示企业名称。Name为可选项，填写后会返回Name的校验结果。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 用于入参是文本的场景，Address表示经营地址，填写后会返回Name的校验结果。
+         * @type {string || null}
+         */
+        this.Address = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.ImageConfig = 'ImageConfig' in params ? params.ImageConfig : null;
+        this.RegNum = 'RegNum' in params ? params.RegNum : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Address = 'Address' in params ? params.Address : null;
+
+    }
+}
+
+/**
  * BusinessCardOCR返回参数结构体
  * @class
  */
@@ -604,6 +679,277 @@ class TextDetectResponse extends  AbstractModel {
             return;
         }
         this.HasText = 'HasText' in params ? params.HasText : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * VerifyBizLicense返回参数结构体
+ * @class
+ */
+class VerifyBizLicenseResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 状态码
+         * @type {number || null}
+         */
+        this.ErrorCode = null;
+
+        /**
+         * 统一社会信用代码
+         * @type {string || null}
+         */
+        this.CreditCode = null;
+
+        /**
+         * 组织机构代码
+         * @type {string || null}
+         */
+        this.OrgCode = null;
+
+        /**
+         * 经营期限自（YYYY-MM-DD）
+         * @type {string || null}
+         */
+        this.OpenFrom = null;
+
+        /**
+         * 经营期限至（YYYY-MM-DD）
+         * @type {string || null}
+         */
+        this.OpenTo = null;
+
+        /**
+         * 法人姓名
+         * @type {string || null}
+         */
+        this.FrName = null;
+
+        /**
+         * 经营状态（在营、注销、吊销、其他）
+         * @type {string || null}
+         */
+        this.EnterpriseStatus = null;
+
+        /**
+         * 经营（业务）范围及方式
+         * @type {string || null}
+         */
+        this.OperateScopeAndForm = null;
+
+        /**
+         * 注册资金（单位:万元）
+         * @type {string || null}
+         */
+        this.RegCap = null;
+
+        /**
+         * 注册币种
+         * @type {string || null}
+         */
+        this.RegCapCur = null;
+
+        /**
+         * 登记机关
+         * @type {string || null}
+         */
+        this.RegOrg = null;
+
+        /**
+         * 开业日期（YYYY-MM-DD）
+         * @type {string || null}
+         */
+        this.EsDate = null;
+
+        /**
+         * 企业（机构）类型
+         * @type {string || null}
+         */
+        this.EnterpriseType = null;
+
+        /**
+         * 注销日期
+         * @type {string || null}
+         */
+        this.CancelDate = null;
+
+        /**
+         * 吊销日期
+         * @type {string || null}
+         */
+        this.RevokeDate = null;
+
+        /**
+         * 许可经营项目
+         * @type {string || null}
+         */
+        this.AbuItem = null;
+
+        /**
+         * 一般经营项目
+         * @type {string || null}
+         */
+        this.CbuItem = null;
+
+        /**
+         * 核准时间
+         * @type {string || null}
+         */
+        this.ApprDate = null;
+
+        /**
+         * 省
+         * @type {string || null}
+         */
+        this.Province = null;
+
+        /**
+         * 地级市
+         * @type {string || null}
+         */
+        this.City = null;
+
+        /**
+         * 区\县
+         * @type {string || null}
+         */
+        this.County = null;
+
+        /**
+         * 住所所在行政区划代码
+         * @type {string || null}
+         */
+        this.AreaCode = null;
+
+        /**
+         * 行业门类代码
+         * @type {string || null}
+         */
+        this.IndustryPhyCode = null;
+
+        /**
+         * 行业门类名称
+         * @type {string || null}
+         */
+        this.IndustryPhyName = null;
+
+        /**
+         * 国民经济行业代码
+         * @type {string || null}
+         */
+        this.IndustryCode = null;
+
+        /**
+         * 国民经济行业名称
+         * @type {string || null}
+         */
+        this.IndustryName = null;
+
+        /**
+         * 经营（业务）范围
+         * @type {string || null}
+         */
+        this.OperateScope = null;
+
+        /**
+         * 要核验的工商注册号
+         * @type {string || null}
+         */
+        this.VerifyRegNo = null;
+
+        /**
+         * 工商注册号
+         * @type {string || null}
+         */
+        this.RegNo = null;
+
+        /**
+         * 要核验的企业名称
+         * @type {string || null}
+         */
+        this.VerifyEnterpriseName = null;
+
+        /**
+         * 企业名称
+         * @type {string || null}
+         */
+        this.EnterpriseName = null;
+
+        /**
+         * 要核验的注册地址
+         * @type {string || null}
+         */
+        this.VerifyAddress = null;
+
+        /**
+         * 注册地址
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * 验证结果
+         * @type {BizLicenseVerifyResult || null}
+         */
+        this.RegNumResult = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
+        this.CreditCode = 'CreditCode' in params ? params.CreditCode : null;
+        this.OrgCode = 'OrgCode' in params ? params.OrgCode : null;
+        this.OpenFrom = 'OpenFrom' in params ? params.OpenFrom : null;
+        this.OpenTo = 'OpenTo' in params ? params.OpenTo : null;
+        this.FrName = 'FrName' in params ? params.FrName : null;
+        this.EnterpriseStatus = 'EnterpriseStatus' in params ? params.EnterpriseStatus : null;
+        this.OperateScopeAndForm = 'OperateScopeAndForm' in params ? params.OperateScopeAndForm : null;
+        this.RegCap = 'RegCap' in params ? params.RegCap : null;
+        this.RegCapCur = 'RegCapCur' in params ? params.RegCapCur : null;
+        this.RegOrg = 'RegOrg' in params ? params.RegOrg : null;
+        this.EsDate = 'EsDate' in params ? params.EsDate : null;
+        this.EnterpriseType = 'EnterpriseType' in params ? params.EnterpriseType : null;
+        this.CancelDate = 'CancelDate' in params ? params.CancelDate : null;
+        this.RevokeDate = 'RevokeDate' in params ? params.RevokeDate : null;
+        this.AbuItem = 'AbuItem' in params ? params.AbuItem : null;
+        this.CbuItem = 'CbuItem' in params ? params.CbuItem : null;
+        this.ApprDate = 'ApprDate' in params ? params.ApprDate : null;
+        this.Province = 'Province' in params ? params.Province : null;
+        this.City = 'City' in params ? params.City : null;
+        this.County = 'County' in params ? params.County : null;
+        this.AreaCode = 'AreaCode' in params ? params.AreaCode : null;
+        this.IndustryPhyCode = 'IndustryPhyCode' in params ? params.IndustryPhyCode : null;
+        this.IndustryPhyName = 'IndustryPhyName' in params ? params.IndustryPhyName : null;
+        this.IndustryCode = 'IndustryCode' in params ? params.IndustryCode : null;
+        this.IndustryName = 'IndustryName' in params ? params.IndustryName : null;
+        this.OperateScope = 'OperateScope' in params ? params.OperateScope : null;
+        this.VerifyRegNo = 'VerifyRegNo' in params ? params.VerifyRegNo : null;
+        this.RegNo = 'RegNo' in params ? params.RegNo : null;
+        this.VerifyEnterpriseName = 'VerifyEnterpriseName' in params ? params.VerifyEnterpriseName : null;
+        this.EnterpriseName = 'EnterpriseName' in params ? params.EnterpriseName : null;
+        this.VerifyAddress = 'VerifyAddress' in params ? params.VerifyAddress : null;
+        this.Address = 'Address' in params ? params.Address : null;
+
+        if (params.RegNumResult) {
+            let obj = new BizLicenseVerifyResult();
+            obj.deserialize(params.RegNumResult)
+            this.RegNumResult = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1651,6 +1997,53 @@ BACK 为驾驶证副页正面（有档案编号的一面）。
         this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
         this.CardSide = 'CardSide' in params ? params.CardSide : null;
+
+    }
+}
+
+/**
+ * 验真接口
+ * @class
+ */
+class BizLicenseVerifyResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * “0“：一致
+“-1”：此号未查询到结果
+         * @type {string || null}
+         */
+        this.RegNum = null;
+
+        /**
+         * “0“：一致
+“-1”：不一致
+“”：不验真
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * “0“：一致
+“-1”：不一致
+“”：不验真
+         * @type {string || null}
+         */
+        this.Address = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegNum = 'RegNum' in params ? params.RegNum : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Address = 'Address' in params ? params.Address : null;
 
     }
 }
@@ -4217,6 +4610,158 @@ class QrcodeImgSize extends  AbstractModel {
 }
 
 /**
+ * VerifyBasicBizLicense返回参数结构体
+ * @class
+ */
+class VerifyBasicBizLicenseResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 状态码，成功时返回0
+         * @type {number || null}
+         */
+        this.ErrorCode = null;
+
+        /**
+         * 统一社会信用代码
+         * @type {string || null}
+         */
+        this.CreditCode = null;
+
+        /**
+         * 经营期限自（YYYY-MM-DD）
+         * @type {string || null}
+         */
+        this.Opfrom = null;
+
+        /**
+         * 经营期限至（YYYY-MM-DD）
+         * @type {string || null}
+         */
+        this.Opto = null;
+
+        /**
+         * 法人姓名
+         * @type {string || null}
+         */
+        this.Frname = null;
+
+        /**
+         * 经营状态（在营、注销、吊销、其他）
+         * @type {string || null}
+         */
+        this.Entstatus = null;
+
+        /**
+         * 经营业务范围
+         * @type {string || null}
+         */
+        this.Zsopscope = null;
+
+        /**
+         * 状态信息
+         * @type {string || null}
+         */
+        this.Reason = null;
+
+        /**
+         * 原注册号
+         * @type {string || null}
+         */
+        this.Oriregno = null;
+
+        /**
+         * 要核验的工商注册号
+         * @type {string || null}
+         */
+        this.VerifyRegno = null;
+
+        /**
+         * 工商注册号
+         * @type {string || null}
+         */
+        this.Regno = null;
+
+        /**
+         * 要核验的企业名称
+         * @type {string || null}
+         */
+        this.VerifyEntname = null;
+
+        /**
+         * 企业名称
+         * @type {string || null}
+         */
+        this.Entname = null;
+
+        /**
+         * 要核验的住址
+         * @type {string || null}
+         */
+        this.VerifyDom = null;
+
+        /**
+         * 住址
+         * @type {string || null}
+         */
+        this.Dom = null;
+
+        /**
+         * 验证结果
+         * @type {BizLicenseVerifyResult || null}
+         */
+        this.RegNumResult = null;
+
+        /**
+         * 注册资本（单位：万元）,只有输入参数regCapital为1的时候才输出
+         * @type {string || null}
+         */
+        this.RegCapital = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ErrorCode = 'ErrorCode' in params ? params.ErrorCode : null;
+        this.CreditCode = 'CreditCode' in params ? params.CreditCode : null;
+        this.Opfrom = 'Opfrom' in params ? params.Opfrom : null;
+        this.Opto = 'Opto' in params ? params.Opto : null;
+        this.Frname = 'Frname' in params ? params.Frname : null;
+        this.Entstatus = 'Entstatus' in params ? params.Entstatus : null;
+        this.Zsopscope = 'Zsopscope' in params ? params.Zsopscope : null;
+        this.Reason = 'Reason' in params ? params.Reason : null;
+        this.Oriregno = 'Oriregno' in params ? params.Oriregno : null;
+        this.VerifyRegno = 'VerifyRegno' in params ? params.VerifyRegno : null;
+        this.Regno = 'Regno' in params ? params.Regno : null;
+        this.VerifyEntname = 'VerifyEntname' in params ? params.VerifyEntname : null;
+        this.Entname = 'Entname' in params ? params.Entname : null;
+        this.VerifyDom = 'VerifyDom' in params ? params.VerifyDom : null;
+        this.Dom = 'Dom' in params ? params.Dom : null;
+
+        if (params.RegNumResult) {
+            let obj = new BizLicenseVerifyResult();
+            obj.deserialize(params.RegNumResult)
+            this.RegNumResult = obj;
+        }
+        this.RegCapital = 'RegCapital' in params ? params.RegCapital : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * VehicleRegCertOCR请求参数结构体
  * @class
  */
@@ -4716,7 +5261,7 @@ class RideHailingDriverLicenseOCRResponse extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 证号，对应网约车驾驶证字段：证号、从业资格证号、驾驶员证号、身份证号
+         * 证号，对应网约车驾驶证字段：证号/从业资格证号/驾驶员证号/身份证号
          * @type {string || null}
          */
         this.LicenseNumber = null;
@@ -4728,13 +5273,13 @@ class RideHailingDriverLicenseOCRResponse extends  AbstractModel {
         this.StartDate = null;
 
         /**
-         * 有效期截止时间，对应网约车驾驶证字段：有效期至、营运期限止
+         * 有效期截止时间，对应网约车驾驶证字段：有效期至/营运期限止
          * @type {string || null}
          */
         this.EndDate = null;
 
         /**
-         * 初始发证日期，对应网约车驾驶证字段：初始领证日期、发证日期
+         * 初始发证日期，对应网约车驾驶证字段：初始领证日期/发证日期
          * @type {string || null}
          */
         this.ReleaseDate = null;
@@ -8106,6 +8651,88 @@ class EstateCertOCRRequest extends  AbstractModel {
 }
 
 /**
+ * VerifyBasicBizLicense请求参数结构体
+ * @class
+ */
+class VerifyBasicBizLicenseRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用于入参是营业执照图片的场景，ImageBase64和ImageUrl必选一个输入。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * 用于入参是营业执照图片的场景，ImageBase64和ImageUrl必选一个输入。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * 用于入参是营业执照图片的场景，表示需要校验的参数：RegNum（注册号或者统一社会信用代码），Name（企业名称），Address（经营地址）。选择后会返回相关参数校验结果。RegNum为必选，Name和Address可选。
+格式为{RegNum: true, Name:true/false, Address:true/false}
+
+设置方式参考：
+Config = Json.stringify({"Name":true,"Address":true})
+API 3.0 Explorer 设置方式参考：
+Config = {"Name":true,"Address":true}
+         * @type {string || null}
+         */
+        this.ImageConfig = null;
+
+        /**
+         * 用于入参是文本的场景，RegNum表示注册号或者统一社会信用代码。RegNum为必选项。
+         * @type {string || null}
+         */
+        this.RegNum = null;
+
+        /**
+         * 用于入参是文本的场景，Name表示企业名称。Name为可选项，填写后会返回Name的校验结果。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 用于入参是文本的场景，Address表示经营地址，填写后会返回Name的校验结果。
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * 1表示输出注册资本字段（单位：万元），其他值表示不输出。默认不输出。
+         * @type {number || null}
+         */
+        this.RegCapital = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.ImageConfig = 'ImageConfig' in params ? params.ImageConfig : null;
+        this.RegNum = 'RegNum' in params ? params.RegNum : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.RegCapital = 'RegCapital' in params ? params.RegCapital : null;
+
+    }
+}
+
+/**
  * BizLicenseOCR返回参数结构体
  * @class
  */
@@ -8579,6 +9206,7 @@ class QrcodePositionObj extends  AbstractModel {
 }
 
 module.exports = {
+    VerifyBizLicenseRequest: VerifyBizLicenseRequest,
     BusinessCardOCRResponse: BusinessCardOCRResponse,
     TextArithmetic: TextArithmetic,
     HKIDCardOCRRequest: HKIDCardOCRRequest,
@@ -8589,6 +9217,7 @@ module.exports = {
     FlightInvoiceOCRRequest: FlightInvoiceOCRRequest,
     MLIDPassportOCRRequest: MLIDPassportOCRRequest,
     TextDetectResponse: TextDetectResponse,
+    VerifyBizLicenseResponse: VerifyBizLicenseResponse,
     FinanBillSliceOCRResponse: FinanBillSliceOCRResponse,
     DriverLicenseOCRResponse: DriverLicenseOCRResponse,
     Words: Words,
@@ -8608,6 +9237,7 @@ module.exports = {
     WordCoordPoint: WordCoordPoint,
     InstitutionOCRResponse: InstitutionOCRResponse,
     DriverLicenseOCRRequest: DriverLicenseOCRRequest,
+    BizLicenseVerifyResult: BizLicenseVerifyResult,
     TextDetection: TextDetection,
     TextEduPaper: TextEduPaper,
     QrcodeOCRResponse: QrcodeOCRResponse,
@@ -8656,6 +9286,7 @@ module.exports = {
     TextGeneralHandwriting: TextGeneralHandwriting,
     TableOCRRequest: TableOCRRequest,
     QrcodeImgSize: QrcodeImgSize,
+    VerifyBasicBizLicenseResponse: VerifyBasicBizLicenseResponse,
     VehicleRegCertOCRRequest: VehicleRegCertOCRRequest,
     ProductDataRecord: ProductDataRecord,
     LicensePlateOCRRequest: LicensePlateOCRRequest,
@@ -8726,6 +9357,7 @@ module.exports = {
     MixedInvoiceDetectRequest: MixedInvoiceDetectRequest,
     MLIDCardOCRResponse: MLIDCardOCRResponse,
     EstateCertOCRRequest: EstateCertOCRRequest,
+    VerifyBasicBizLicenseRequest: VerifyBasicBizLicenseRequest,
     BizLicenseOCRResponse: BizLicenseOCRResponse,
     VatInvoiceOCRResponse: VatInvoiceOCRResponse,
     ShipInvoiceOCRRequest: ShipInvoiceOCRRequest,
