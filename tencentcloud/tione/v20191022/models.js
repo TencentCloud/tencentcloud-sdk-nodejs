@@ -249,7 +249,8 @@ class CreateNotebookInstanceRequest extends  AbstractModel {
         this.AdditionalCodeRepositories = null;
 
         /**
-         * 是否开启CLS日志服务，可取值Enabled/Disabled，默认为Disabled
+         * 已弃用，请使用ClsConfig配置。
+是否开启CLS日志服务，可取值Enabled/Disabled，默认为Disabled
 开启后，Notebook运行的日志会收集到CLS中，CLS会产生费用，请根据需要选择
          * @type {string || null}
          */
@@ -271,7 +272,7 @@ class CreateNotebookInstanceRequest extends  AbstractModel {
         this.AutoStopping = null;
 
         /**
-         * 接入日志的配置
+         * 接入日志的配置，默认接入免费日志
          * @type {ClsConfig || null}
          */
         this.ClsConfig = null;
@@ -1421,7 +1422,7 @@ class UpdateNotebookInstanceRequest extends  AbstractModel {
         this.DisassociateAdditionalCodeRepositories = null;
 
         /**
-         * 是否开启CLS日志服务，可取值Enabled/Disabled
+         * 已弃用，请使用ClsConfig配置。是否开启CLS日志服务，可取值Enabled/Disabled
          * @type {string || null}
          */
         this.ClsAccess = null;
@@ -1441,7 +1442,7 @@ class UpdateNotebookInstanceRequest extends  AbstractModel {
         this.StoppingCondition = null;
 
         /**
-         * 接入日志的配置
+         * 接入日志的配置，默认使用免费日志服务。
          * @type {ClsConfig || null}
          */
         this.ClsConfig = null;

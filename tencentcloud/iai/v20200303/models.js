@@ -246,6 +246,7 @@ class CreatePersonRequest extends  AbstractModel {
 
         /**
          * 图片 base64 数据，base64 编码后大小不可超过5M。
+jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {string || null}
          */
@@ -253,6 +254,7 @@ class CreatePersonRequest extends  AbstractModel {
 
         /**
          * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。
+jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
 Url、Image必须提供一个，如果都提供，只使用 Url。  
 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
 非腾讯云存储的Url速度和稳定性可能受一定影响。
@@ -469,6 +471,7 @@ class CreateFaceRequest extends  AbstractModel {
 
         /**
          * 图片 base64 数据，base64 编码后大小不可超过5M。
+jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
 人员人脸总数量不可超过5张。
 若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
@@ -478,6 +481,7 @@ class CreateFaceRequest extends  AbstractModel {
 
         /**
          * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。
+jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
 Url、Image必须提供一个，如果都提供，只使用 Url。  
 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
 非腾讯云存储的Url速度和稳定性可能受一定影响。
@@ -1088,6 +1092,7 @@ class AnalyzeFaceRequest extends  AbstractModel {
 
         /**
          * 图片 base64 数据，base64 编码后大小不可超过5M。
+jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {string || null}
          */
@@ -1095,6 +1100,7 @@ class AnalyzeFaceRequest extends  AbstractModel {
 
         /**
          * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。
+jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
 Url、Image必须提供一个，如果都提供，只使用 Url。  
 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
 非腾讯云存储的Url速度和稳定性可能受一定影响。
@@ -1730,7 +1736,8 @@ class DetectLiveFaceRequest extends  AbstractModel {
         super();
 
         /**
-         * 图片 base64 数据，base64 编码后大小不可超过5M（图片的宽高比请接近3:4，不符合宽高比的图片返回的分值不具备参考意义）。
+         * 图片 base64 数据，base64 编码后大小不可超过5M。
+jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。（图片的宽高比请接近3:4，不符合宽高比的图片返回的分值不具备参考意义）。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {string || null}
          */
@@ -1738,6 +1745,7 @@ class DetectLiveFaceRequest extends  AbstractModel {
 
         /**
          * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。
+jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
 Url、Image必须提供一个，如果都提供，只使用 Url。 
 （图片的宽高比请接近 3:4，不符合宽高比的图片返回的分值不具备参考意义） 
 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
@@ -2175,6 +2183,7 @@ class SearchPersonsReturnsByGroupRequest extends  AbstractModel {
 
         /**
          * 图片 base64 数据，base64 编码后大小不可超过5M。
+jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {string || null}
          */
@@ -2182,6 +2191,7 @@ class SearchPersonsReturnsByGroupRequest extends  AbstractModel {
 
         /**
          * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。
+jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
 Url、Image必须提供一个，如果都提供，只使用 Url。
 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的Url速度和稳定性可能受一定影响。
@@ -2528,6 +2538,7 @@ class VerifyFaceRequest extends  AbstractModel {
 
         /**
          * 图片 base64 数据，base64 编码后大小不可超过5M。
+jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
 若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {string || null}
@@ -2536,6 +2547,7 @@ class VerifyFaceRequest extends  AbstractModel {
 
         /**
          * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。
+jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
 Url、Image必须提供一个，如果都提供，只使用 Url。  
 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
 非腾讯云存储的Url速度和稳定性可能受一定影响。
@@ -2843,6 +2855,7 @@ class SearchFacesReturnsByGroupRequest extends  AbstractModel {
 
         /**
          * 图片 base64 数据，base64 编码后大小不可超过5M。
+jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {string || null}
          */
@@ -2850,6 +2863,7 @@ class SearchFacesReturnsByGroupRequest extends  AbstractModel {
 
         /**
          * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。
+jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
 Url、Image必须提供一个，如果都提供，只使用 Url。
 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的Url速度和稳定性可能受一定影响。
@@ -3247,6 +3261,7 @@ class VerifyPersonRequest extends  AbstractModel {
 
         /**
          * 图片 base64 数据。
+jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
 若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {string || null}
@@ -3254,7 +3269,9 @@ class VerifyPersonRequest extends  AbstractModel {
         this.Image = null;
 
         /**
-         * 图片的 Url 。 图片的 Url、Image必须提供一个，如果都提供，只使用 Url。 
+         * 图片的 Url 
+jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。。
+ 图片的 Url、Image必须提供一个，如果都提供，只使用 Url。 
 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
 非腾讯云存储的Url速度和稳定性可能受一定影响。
 若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
@@ -3409,6 +3426,7 @@ class SearchFacesRequest extends  AbstractModel {
 
         /**
          * 图片 base64 数据，base64 编码后大小不可超过5M。
+jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {string || null}
          */
@@ -3416,6 +3434,7 @@ class SearchFacesRequest extends  AbstractModel {
 
         /**
          * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。
+jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
 Url、Image必须提供一个，如果都提供，只使用 Url。  
 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
 非腾讯云存储的Url速度和稳定性可能受一定影响。
@@ -3551,6 +3570,7 @@ class SearchPersonsRequest extends  AbstractModel {
 
         /**
          * 图片 base64 数据，base64 编码后大小不可超过5M。
+jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
 若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {string || null}
@@ -3559,6 +3579,7 @@ class SearchPersonsRequest extends  AbstractModel {
 
         /**
          * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。
+jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
 Url、Image必须提供一个，如果都提供，只使用 Url。
 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的Url速度和稳定性可能受一定影响。
@@ -3832,6 +3853,7 @@ class DetectFaceRequest extends  AbstractModel {
 
         /**
          * 图片 base64 数据，base64 编码后大小不可超过5M。
+jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {string || null}
          */
@@ -3839,6 +3861,7 @@ class DetectFaceRequest extends  AbstractModel {
 
         /**
          * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。
+jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
 Url、Image必须提供一个，如果都提供，只使用 Url。  
 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
 非腾讯云存储的Url速度和稳定性可能受一定影响。
@@ -4310,6 +4333,7 @@ class CompareFaceRequest extends  AbstractModel {
 
         /**
          * A 图片 base64 数据，base64 编码后大小不可超过5M。
+jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
 若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {string || null}
@@ -4318,6 +4342,7 @@ class CompareFaceRequest extends  AbstractModel {
 
         /**
          * B 图片 base64 数据，base64 编码后大小不可超过5M。
+jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
 若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
          * @type {string || null}
@@ -4326,6 +4351,7 @@ class CompareFaceRequest extends  AbstractModel {
 
         /**
          * A 图片的 Url ，对应图片 base64 编码后大小不可超过5M。
+jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
 A 图片的 Url、Image必须提供一个，如果都提供，只使用 Url。 
 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
 非腾讯云存储的Url速度和稳定性可能受一定影响。
@@ -4337,6 +4363,7 @@ A 图片的 Url、Image必须提供一个，如果都提供，只使用 Url。
 
         /**
          * B 图片的 Url ，对应图片 base64 编码后大小不可超过5M。
+jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
 B 图片的 Url、Image必须提供一个，如果都提供，只使用 Url。 
 图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
 非腾讯云存储的Url速度和稳定性可能受一定影响。

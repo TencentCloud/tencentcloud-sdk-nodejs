@@ -432,6 +432,119 @@ class DetectInfoBestFrame extends  AbstractModel {
 }
 
 /**
+ * CheckIdCardInformation返回参数结构体
+ * @class
+ */
+class CheckIdCardInformationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 相似度，取值范围 [0.00, 100.00]。推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）
+         * @type {number || null}
+         */
+        this.Sim = null;
+
+        /**
+         * 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 业务结果描述。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 姓名
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 性别
+         * @type {string || null}
+         */
+        this.Sex = null;
+
+        /**
+         * 民族
+         * @type {string || null}
+         */
+        this.Nation = null;
+
+        /**
+         * 出生日期
+         * @type {string || null}
+         */
+        this.Birth = null;
+
+        /**
+         * 地址
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * 身份证号
+         * @type {string || null}
+         */
+        this.IdNum = null;
+
+        /**
+         * 身份证头像照片的base64编码，如果抠图失败会拿整张身份证做比对并返回空。
+         * @type {string || null}
+         */
+        this.Portrait = null;
+
+        /**
+         * 告警信息，当在Config中配置了告警信息会停止人像比对，Result返回错误（FailedOperation.OcrWarningOccurred）并有此告警信息，Code 告警码列表和释义：
+
+-9101 身份证边框不完整告警，
+-9102 身份证复印件告警，
+-9103 身份证翻拍告警，
+-9105 身份证框内遮挡告警，
+-9104 临时身份证告警，
+-9106 身份证 PS 告警。
+多个会 |  隔开如 "-9101|-9106|-9104"
+         * @type {string || null}
+         */
+        this.Warnings = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Sim = 'Sim' in params ? params.Sim : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Sex = 'Sex' in params ? params.Sex : null;
+        this.Nation = 'Nation' in params ? params.Nation : null;
+        this.Birth = 'Birth' in params ? params.Birth : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.IdNum = 'IdNum' in params ? params.IdNum : null;
+        this.Portrait = 'Portrait' in params ? params.Portrait : null;
+        this.Warnings = 'Warnings' in params ? params.Warnings : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * GetDetectInfoEnhanced返回参数结构体
  * @class
  */
@@ -1222,6 +1335,65 @@ class LivenessResponse extends  AbstractModel {
         this.Description = 'Description' in params ? params.Description : null;
         this.BestFrameList = 'BestFrameList' in params ? params.BestFrameList : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CheckIdCardInformation请求参数结构体
+ * @class
+ */
+class CheckIdCardInformationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 身份证人像面的 Base64 值
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+ImageBase64、ImageUrl二者必须提供其中之一。若都提供了，则按照ImageUrl>ImageBase64的优先级使用参数。
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * 身份证人像面的 Url 地址
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * 以下可选字段均为bool 类型，默认false：
+CopyWarn，复印件告警
+BorderCheckWarn，边框和框内遮挡告警
+ReshootWarn，翻拍告警
+DetectPsWarn，PS检测告警
+TempIdWarn，临时身份证告警
+
+SDK 设置方式参考：
+Config = Json.stringify({"CopyWarn":true,"ReshootWarn":true})
+API 3.0 Explorer 设置方式参考：
+Config = {"CopyWarn":true,"ReshootWarn":true}
+         * @type {string || null}
+         */
+        this.Config = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.Config = 'Config' in params ? params.Config : null;
 
     }
 }
@@ -2415,6 +2587,7 @@ module.exports = {
     IdCardVerificationRequest: IdCardVerificationRequest,
     BankCardVerificationRequest: BankCardVerificationRequest,
     DetectInfoBestFrame: DetectInfoBestFrame,
+    CheckIdCardInformationResponse: CheckIdCardInformationResponse,
     GetDetectInfoEnhancedResponse: GetDetectInfoEnhancedResponse,
     PhoneVerificationRequest: PhoneVerificationRequest,
     DetectAuthResponse: DetectAuthResponse,
@@ -2429,6 +2602,7 @@ module.exports = {
     IdCardOCRVerificationResponse: IdCardOCRVerificationResponse,
     MobileStatusResponse: MobileStatusResponse,
     LivenessResponse: LivenessResponse,
+    CheckIdCardInformationRequest: CheckIdCardInformationRequest,
     DetectInfoText: DetectInfoText,
     DetectAuthRequest: DetectAuthRequest,
     MinorsVerificationResponse: MinorsVerificationResponse,

@@ -25,6 +25,7 @@ const GetLiveCodeRequest = models.GetLiveCodeRequest;
 const IdCardVerificationRequest = models.IdCardVerificationRequest;
 const BankCardVerificationRequest = models.BankCardVerificationRequest;
 const DetectInfoBestFrame = models.DetectInfoBestFrame;
+const CheckIdCardInformationResponse = models.CheckIdCardInformationResponse;
 const GetDetectInfoEnhancedResponse = models.GetDetectInfoEnhancedResponse;
 const PhoneVerificationRequest = models.PhoneVerificationRequest;
 const DetectAuthResponse = models.DetectAuthResponse;
@@ -39,6 +40,7 @@ const MobileNetworkTimeVerificationRequest = models.MobileNetworkTimeVerificatio
 const IdCardOCRVerificationResponse = models.IdCardOCRVerificationResponse;
 const MobileStatusResponse = models.MobileStatusResponse;
 const LivenessResponse = models.LivenessResponse;
+const CheckIdCardInformationRequest = models.CheckIdCardInformationRequest;
 const DetectInfoText = models.DetectInfoText;
 const DetectAuthRequest = models.DetectAuthRequest;
 const MinorsVerificationResponse = models.MinorsVerificationResponse;
@@ -125,14 +127,14 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * 传入视频和照片，先判断视频中是否为真人，判断为真人后，再判断该视频中的人与上传照片是否属于同一个人。
-     * @param {LivenessCompareRequest} req
-     * @param {function(string, LivenessCompareResponse):void} cb
+     * 传入身份证人像面照片，识别身份证照片上的信息，并将姓名、身份证号、身份证人像照片与公安权威库的证件照进行比对，是否属于同一个人，从而验证身份证信息的真实性。
+     * @param {CheckIdCardInformationRequest} req
+     * @param {function(string, CheckIdCardInformationResponse):void} cb
      * @public
      */
-    LivenessCompare(req, cb) {
-        let resp = new LivenessCompareResponse();
-        this.request("LivenessCompare", req, resp, cb);
+    CheckIdCardInformation(req, cb) {
+        let resp = new CheckIdCardInformationResponse();
+        this.request("CheckIdCardInformation", req, resp, cb);
     }
 
     /**
@@ -169,14 +171,14 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * 本接口用于验证手机号的状态，您可以输入手机号进行查询。
-     * @param {MobileStatusRequest} req
-     * @param {function(string, MobileStatusResponse):void} cb
+     * 本接口用于校验姓名和银行卡号的真实性和一致性。
+     * @param {BankCard2EVerificationRequest} req
+     * @param {function(string, BankCard2EVerificationResponse):void} cb
      * @public
      */
-    MobileStatus(req, cb) {
-        let resp = new MobileStatusResponse();
-        this.request("MobileStatus", req, resp, cb);
+    BankCard2EVerification(req, cb) {
+        let resp = new BankCard2EVerificationResponse();
+        this.request("BankCard2EVerification", req, resp, cb);
     }
 
     /**
@@ -213,17 +215,6 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * 每次调用人脸核身SaaS化服务前，需先调用本接口获取BizToken，用来串联核身流程，在验证完成后，用于获取验证结果信息。
-     * @param {DetectAuthRequest} req
-     * @param {function(string, DetectAuthResponse):void} cb
-     * @public
-     */
-    DetectAuth(req, cb) {
-        let resp = new DetectAuthResponse();
-        this.request("DetectAuth", req, resp, cb);
-    }
-
-    /**
      * 传入照片和身份信息，判断该照片与公安权威库的证件照是否属于同一个人。
      * @param {ImageRecognitionRequest} req
      * @param {function(string, ImageRecognitionResponse):void} cb
@@ -235,14 +226,14 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * 本接口用于校验姓名和银行卡号的真实性和一致性。
-     * @param {BankCard2EVerificationRequest} req
-     * @param {function(string, BankCard2EVerificationResponse):void} cb
+     * 每次调用人脸核身SaaS化服务前，需先调用本接口获取BizToken，用来串联核身流程，在验证完成后，用于获取验证结果信息。
+     * @param {DetectAuthRequest} req
+     * @param {function(string, DetectAuthResponse):void} cb
      * @public
      */
-    BankCard2EVerification(req, cb) {
-        let resp = new BankCard2EVerificationResponse();
-        this.request("BankCard2EVerification", req, resp, cb);
+    DetectAuth(req, cb) {
+        let resp = new DetectAuthResponse();
+        this.request("DetectAuth", req, resp, cb);
     }
 
     /**
@@ -257,6 +248,17 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
+     * 本接口用于验证手机号的状态，您可以输入手机号进行查询。
+     * @param {MobileStatusRequest} req
+     * @param {function(string, MobileStatusResponse):void} cb
+     * @public
+     */
+    MobileStatus(req, cb) {
+        let resp = new MobileStatusResponse();
+        this.request("MobileStatus", req, resp, cb);
+    }
+
+    /**
      * 本接口用于校验手机号、姓名和身份证号的真实性和一致性。
      * @param {PhoneVerificationRequest} req
      * @param {function(string, PhoneVerificationResponse):void} cb
@@ -265,6 +267,17 @@ class FaceidClient extends AbstractClient {
     PhoneVerification(req, cb) {
         let resp = new PhoneVerificationResponse();
         this.request("PhoneVerification", req, resp, cb);
+    }
+
+    /**
+     * 传入视频和照片，先判断视频中是否为真人，判断为真人后，再判断该视频中的人与上传照片是否属于同一个人。
+     * @param {LivenessCompareRequest} req
+     * @param {function(string, LivenessCompareResponse):void} cb
+     * @public
+     */
+    LivenessCompare(req, cb) {
+        let resp = new LivenessCompareResponse();
+        this.request("LivenessCompare", req, resp, cb);
     }
 
 
