@@ -115,6 +115,7 @@ const BatchDeleteRepositoryPersonalResponse = models.BatchDeleteRepositoryPerson
 const CreateNamespaceRequest = models.CreateNamespaceRequest;
 const BatchDeleteRepositoryPersonalRequest = models.BatchDeleteRepositoryPersonalRequest;
 const TriggerInvokeCondition = models.TriggerInvokeCondition;
+const ValidateRepositoryExistPersonalResponse = models.ValidateRepositoryExistPersonalResponse;
 const NamespaceIsExistsResp = models.NamespaceIsExistsResp;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const Filter = models.Filter;
@@ -144,6 +145,7 @@ const ValidateNamespaceExistPersonalResponse = models.ValidateNamespaceExistPers
 const DescribeApplicationTriggerPersonalResp = models.DescribeApplicationTriggerPersonalResp;
 const TagInfo = models.TagInfo;
 const CreateRepositoryRequest = models.CreateRepositoryRequest;
+const DeleteImageResponse = models.DeleteImageResponse;
 const DescribeWebhookTriggerRequest = models.DescribeWebhookTriggerRequest;
 const DeleteNamespaceRequest = models.DeleteNamespaceRequest;
 const BatchDeleteImagePersonalRequest = models.BatchDeleteImagePersonalRequest;
@@ -160,7 +162,7 @@ const CreateWebhookTriggerResponse = models.CreateWebhookTriggerResponse;
 const TcrRepositoryInfo = models.TcrRepositoryInfo;
 const TcrInstanceToken = models.TcrInstanceToken;
 const DeleteRepositoryRequest = models.DeleteRepositoryRequest;
-const ValidateRepositoryExistPersonalResponse = models.ValidateRepositoryExistPersonalResponse;
+const DeleteImageRequest = models.DeleteImageRequest;
 const CreateRepositoryPersonalResponse = models.CreateRepositoryPersonalResponse;
 const CreateApplicationTriggerPersonalResponse = models.CreateApplicationTriggerPersonalResponse;
 const BatchDeleteImagePersonalResponse = models.BatchDeleteImagePersonalResponse;
@@ -197,6 +199,17 @@ class TcrClient extends AbstractClient {
     DescribeImageFilterPersonal(req, cb) {
         let resp = new DescribeImageFilterPersonalResponse();
         this.request("DescribeImageFilterPersonal", req, resp, cb);
+    }
+
+    /**
+     * 用于查询应用更新触发器
+     * @param {DescribeApplicationTriggerPersonalRequest} req
+     * @param {function(string, DescribeApplicationTriggerPersonalResponse):void} cb
+     * @public
+     */
+    DescribeApplicationTriggerPersonal(req, cb) {
+        let resp = new DescribeApplicationTriggerPersonalResponse();
+        this.request("DescribeApplicationTriggerPersonal", req, resp, cb);
     }
 
     /**
@@ -761,14 +774,14 @@ class TcrClient extends AbstractClient {
     }
 
     /**
-     * 用于查询应用更新触发器
-     * @param {DescribeApplicationTriggerPersonalRequest} req
-     * @param {function(string, DescribeApplicationTriggerPersonalResponse):void} cb
+     * 删除指定镜像
+     * @param {DeleteImageRequest} req
+     * @param {function(string, DeleteImageResponse):void} cb
      * @public
      */
-    DescribeApplicationTriggerPersonal(req, cb) {
-        let resp = new DescribeApplicationTriggerPersonalResponse();
-        this.request("DescribeApplicationTriggerPersonal", req, resp, cb);
+    DeleteImage(req, cb) {
+        let resp = new DeleteImageResponse();
+        this.request("DeleteImage", req, resp, cb);
     }
 
     /**

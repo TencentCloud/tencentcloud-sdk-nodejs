@@ -6447,6 +6447,12 @@ global：预热全球节点
          */
         this.Area = null;
 
+        /**
+         * 填写"middle"或不填充时预热至中间层节点
+         * @type {string || null}
+         */
+        this.Layer = null;
+
     }
 
     /**
@@ -6459,6 +6465,7 @@ global：预热全球节点
         this.Urls = 'Urls' in params ? params.Urls : null;
         this.UserAgent = 'UserAgent' in params ? params.UserAgent : null;
         this.Area = 'Area' in params ? params.Area : null;
+        this.Layer = 'Layer' in params ? params.Layer : null;
 
     }
 }

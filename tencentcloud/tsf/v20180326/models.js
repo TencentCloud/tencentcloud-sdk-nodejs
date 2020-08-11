@@ -1120,6 +1120,13 @@ class VmGroup extends  AbstractModel {
          */
         this.UpdatedTime = null;
 
+        /**
+         * 部署应用描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DeployDesc = null;
+
     }
 
     /**
@@ -1152,6 +1159,7 @@ class VmGroup extends  AbstractModel {
         this.ApplicationType = 'ApplicationType' in params ? params.ApplicationType : null;
         this.GroupResourceType = 'GroupResourceType' in params ? params.GroupResourceType : null;
         this.UpdatedTime = 'UpdatedTime' in params ? params.UpdatedTime : null;
+        this.DeployDesc = 'DeployDesc' in params ? params.DeployDesc : null;
 
     }
 }
@@ -2173,6 +2181,107 @@ class DescribePublicConfigSummaryResponse extends  AbstractModel {
 }
 
 /**
+ * 健康检查配置信息，若不指定该参数，则默认不设置健康检查。
+ * @class
+ */
+class HealthCheckSetting extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 健康检查方法。HTTP：通过 HTTP 接口检查；CMD：通过执行命令检查；TCP：通过建立 TCP 连接检查。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ActionType = null;
+
+        /**
+         * 容器延时启动健康检查的时间。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.InitialDelaySeconds = null;
+
+        /**
+         * 每次健康检查响应的最大超时时间。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TimeoutSeconds = null;
+
+        /**
+         * 进行健康检查的时间间隔。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.PeriodSeconds = null;
+
+        /**
+         * 表示后端容器从失败到成功的连续健康检查成功次数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SuccessThreshold = null;
+
+        /**
+         * 表示后端容器从成功到失败的连续健康检查成功次数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FailureThreshold = null;
+
+        /**
+         * HTTP 健康检查方法使用的检查协议。支持HTTP、HTTPS。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Scheme = null;
+
+        /**
+         * 健康检查端口，范围 1~65535 。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * HTTP 健康检查接口的请求路径。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Path = null;
+
+        /**
+         * 执行命令检查方式，执行的命令。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Command = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ActionType = 'ActionType' in params ? params.ActionType : null;
+        this.InitialDelaySeconds = 'InitialDelaySeconds' in params ? params.InitialDelaySeconds : null;
+        this.TimeoutSeconds = 'TimeoutSeconds' in params ? params.TimeoutSeconds : null;
+        this.PeriodSeconds = 'PeriodSeconds' in params ? params.PeriodSeconds : null;
+        this.SuccessThreshold = 'SuccessThreshold' in params ? params.SuccessThreshold : null;
+        this.FailureThreshold = 'FailureThreshold' in params ? params.FailureThreshold : null;
+        this.Scheme = 'Scheme' in params ? params.Scheme : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Path = 'Path' in params ? params.Path : null;
+        this.Command = 'Command' in params ? params.Command : null;
+
+    }
+}
+
+/**
  * DescribeSimpleApplications返回参数结构体
  * @class
  */
@@ -2912,6 +3021,163 @@ class DescribeApplicationsResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 虚拟机部署组列表简要字段
+ * @class
+ */
+class VmGroupSimple extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 部署组ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 部署组名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupName = null;
+
+        /**
+         * 应用类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationType = null;
+
+        /**
+         * 部署组描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupDesc = null;
+
+        /**
+         * 部署组更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 集群ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 部署组启动参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.StartupParameters = null;
+
+        /**
+         * 命名空间ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * 部署组创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 集群名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 应用ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
+
+        /**
+         * 应用名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ApplicationName = null;
+
+        /**
+         * 命名空间名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NamespaceName = null;
+
+        /**
+         * 应用微服务类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MicroserviceType = null;
+
+        /**
+         * 部署组资源类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.GroupResourceType = null;
+
+        /**
+         * 部署组更新时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UpdatedTime = null;
+
+        /**
+         * 部署应用描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DeployDesc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.ApplicationType = 'ApplicationType' in params ? params.ApplicationType : null;
+        this.GroupDesc = 'GroupDesc' in params ? params.GroupDesc : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.StartupParameters = 'StartupParameters' in params ? params.StartupParameters : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.ApplicationName = 'ApplicationName' in params ? params.ApplicationName : null;
+        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
+        this.MicroserviceType = 'MicroserviceType' in params ? params.MicroserviceType : null;
+        this.GroupResourceType = 'GroupResourceType' in params ? params.GroupResourceType : null;
+        this.UpdatedTime = 'UpdatedTime' in params ? params.UpdatedTime : null;
+        this.DeployDesc = 'DeployDesc' in params ? params.DeployDesc : null;
 
     }
 }
@@ -6595,124 +6861,26 @@ class DescribePublicConfigReleaseLogsResponse extends  AbstractModel {
 }
 
 /**
- * 虚拟机部署组列表简要字段
+ * 健康检查参数
  * @class
  */
-class VmGroupSimple extends  AbstractModel {
+class HealthCheckSettings extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 部署组ID
+         * 存活健康检查
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * @type {HealthCheckSetting || null}
          */
-        this.GroupId = null;
+        this.LivenessProbe = null;
 
         /**
-         * 部署组名称
+         * 就绪健康检查
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * @type {HealthCheckSetting || null}
          */
-        this.GroupName = null;
-
-        /**
-         * 应用类型
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ApplicationType = null;
-
-        /**
-         * 部署组描述
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.GroupDesc = null;
-
-        /**
-         * 部署组更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
-
-        /**
-         * 集群ID
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * 部署组启动参数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.StartupParameters = null;
-
-        /**
-         * 命名空间ID
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.NamespaceId = null;
-
-        /**
-         * 部署组创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * 集群名称
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ClusterName = null;
-
-        /**
-         * 应用ID
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ApplicationId = null;
-
-        /**
-         * 应用名称
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ApplicationName = null;
-
-        /**
-         * 命名空间名称
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.NamespaceName = null;
-
-        /**
-         * 应用微服务类型
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.MicroserviceType = null;
-
-        /**
-         * 部署组资源类型
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.GroupResourceType = null;
-
-        /**
-         * 部署组更新时间戳
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.UpdatedTime = null;
+        this.ReadinessProbe = null;
 
     }
 
@@ -6723,22 +6891,68 @@ class VmGroupSimple extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
-        this.GroupName = 'GroupName' in params ? params.GroupName : null;
-        this.ApplicationType = 'ApplicationType' in params ? params.ApplicationType : null;
-        this.GroupDesc = 'GroupDesc' in params ? params.GroupDesc : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.StartupParameters = 'StartupParameters' in params ? params.StartupParameters : null;
-        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
-        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
-        this.ApplicationName = 'ApplicationName' in params ? params.ApplicationName : null;
-        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
-        this.MicroserviceType = 'MicroserviceType' in params ? params.MicroserviceType : null;
-        this.GroupResourceType = 'GroupResourceType' in params ? params.GroupResourceType : null;
-        this.UpdatedTime = 'UpdatedTime' in params ? params.UpdatedTime : null;
+
+        if (params.LivenessProbe) {
+            let obj = new HealthCheckSetting();
+            obj.deserialize(params.LivenessProbe)
+            this.LivenessProbe = obj;
+        }
+
+        if (params.ReadinessProbe) {
+            let obj = new HealthCheckSetting();
+            obj.deserialize(params.ReadinessProbe)
+            this.ReadinessProbe = obj;
+        }
+
+    }
+}
+
+/**
+ * 容器网络设置。
+ * @class
+ */
+class ServiceSetting extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 0:公网 1:集群内访问 2：NodePort
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.AccessType = null;
+
+        /**
+         * 容器端口映射
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ProtocolPort || null}
+         */
+        this.ProtocolPorts = null;
+
+        /**
+         * 子网ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccessType = 'AccessType' in params ? params.AccessType : null;
+
+        if (params.ProtocolPorts) {
+            let obj = new ProtocolPort();
+            obj.deserialize(params.ProtocolPorts)
+            this.ProtocolPorts = obj;
+        }
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
     }
 }
@@ -11533,6 +11747,12 @@ class DeployGroupRequest extends  AbstractModel {
          */
         this.StartupParameters = null;
 
+        /**
+         * 部署应用描述信息
+         * @type {string || null}
+         */
+        this.DeployDesc = null;
+
     }
 
     /**
@@ -11545,6 +11765,7 @@ class DeployGroupRequest extends  AbstractModel {
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
         this.PkgId = 'PkgId' in params ? params.PkgId : null;
         this.StartupParameters = 'StartupParameters' in params ? params.StartupParameters : null;
+        this.DeployDesc = 'DeployDesc' in params ? params.DeployDesc : null;
 
     }
 }
@@ -12051,6 +12272,24 @@ class DeployContainerGroupRequest extends  AbstractModel {
          */
         this.MaxUnavailable = null;
 
+        /**
+         * 健康检查配置信息，若不指定该参数，则默认不设置健康检查。
+         * @type {HealthCheckSettings || null}
+         */
+        this.HealthCheckSettings = null;
+
+        /**
+         * 部署组应用运行的环境变量。若不指定该参数，则默认不设置额外的环境变量。
+         * @type {Array.<Env> || null}
+         */
+        this.Envs = null;
+
+        /**
+         * 容器部署组的网络设置。
+         * @type {ServiceSetting || null}
+         */
+        this.ServiceSetting = null;
+
     }
 
     /**
@@ -12084,6 +12323,27 @@ class DeployContainerGroupRequest extends  AbstractModel {
         this.IstioMemLimit = 'IstioMemLimit' in params ? params.IstioMemLimit : null;
         this.MaxSurge = 'MaxSurge' in params ? params.MaxSurge : null;
         this.MaxUnavailable = 'MaxUnavailable' in params ? params.MaxUnavailable : null;
+
+        if (params.HealthCheckSettings) {
+            let obj = new HealthCheckSettings();
+            obj.deserialize(params.HealthCheckSettings)
+            this.HealthCheckSettings = obj;
+        }
+
+        if (params.Envs) {
+            this.Envs = new Array();
+            for (let z in params.Envs) {
+                let obj = new Env();
+                obj.deserialize(params.Envs[z]);
+                this.Envs.push(obj);
+            }
+        }
+
+        if (params.ServiceSetting) {
+            let obj = new ServiceSetting();
+            obj.deserialize(params.ServiceSetting)
+            this.ServiceSetting = obj;
+        }
 
     }
 }
@@ -13508,6 +13768,7 @@ module.exports = {
     DescribeContainerGroupDetailResponse: DescribeContainerGroupDetailResponse,
     SimpleApplication: SimpleApplication,
     DescribePublicConfigSummaryResponse: DescribePublicConfigSummaryResponse,
+    HealthCheckSetting: HealthCheckSetting,
     DescribeSimpleApplicationsResponse: DescribeSimpleApplicationsResponse,
     DeleteRepositoryResponse: DeleteRepositoryResponse,
     DescribePublicConfigReleaseLogsRequest: DescribePublicConfigReleaseLogsRequest,
@@ -13520,6 +13781,7 @@ module.exports = {
     DescribeConfigsResponse: DescribeConfigsResponse,
     DescribeApplicationAttributeResponse: DescribeApplicationAttributeResponse,
     DescribeApplicationsResponse: DescribeApplicationsResponse,
+    VmGroupSimple: VmGroupSimple,
     ModifyContainerReplicasRequest: ModifyContainerReplicasRequest,
     ModifyLaneRequest: ModifyLaneRequest,
     DescribeLanesRequest: DescribeLanesRequest,
@@ -13588,7 +13850,8 @@ module.exports = {
     StartContainerGroupRequest: StartContainerGroupRequest,
     DeleteConfigRequest: DeleteConfigRequest,
     DescribePublicConfigReleaseLogsResponse: DescribePublicConfigReleaseLogsResponse,
-    VmGroupSimple: VmGroupSimple,
+    HealthCheckSettings: HealthCheckSettings,
+    ServiceSetting: ServiceSetting,
     ApiResponseDescr: ApiResponseDescr,
     DeployServerlessGroupRequest: DeployServerlessGroupRequest,
     Config: Config,

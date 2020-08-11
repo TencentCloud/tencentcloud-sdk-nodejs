@@ -4184,6 +4184,46 @@ class TriggerInvokeCondition extends  AbstractModel {
 }
 
 /**
+ * ValidateRepositoryExistPersonal返回参数结构体
+ * @class
+ */
+class ValidateRepositoryExistPersonalResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 仓库是否存在
+         * @type {RepoIsExistResp || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new RepoIsExistResp();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * NamespaceIsExists返回类型
  * @class
  */
@@ -5548,6 +5588,34 @@ class CreateRepositoryRequest extends  AbstractModel {
 }
 
 /**
+ * DeleteImage返回参数结构体
+ * @class
+ */
+class DeleteImageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeWebhookTrigger请求参数结构体
  * @class
  */
@@ -6325,24 +6393,36 @@ class DeleteRepositoryRequest extends  AbstractModel {
 }
 
 /**
- * ValidateRepositoryExistPersonal返回参数结构体
+ * DeleteImage请求参数结构体
  * @class
  */
-class ValidateRepositoryExistPersonalResponse extends  AbstractModel {
+class DeleteImageRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 仓库是否存在
-         * @type {RepoIsExistResp || null}
-         */
-        this.Data = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 实例Id
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.RegistryId = null;
+
+        /**
+         * 镜像仓库名称
+         * @type {string || null}
+         */
+        this.RepositoryName = null;
+
+        /**
+         * 镜像版本
+         * @type {string || null}
+         */
+        this.ImageVersion = null;
+
+        /**
+         * 命名空间名称
+         * @type {string || null}
+         */
+        this.NamespaceName = null;
 
     }
 
@@ -6353,13 +6433,10 @@ class ValidateRepositoryExistPersonalResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Data) {
-            let obj = new RepoIsExistResp();
-            obj.deserialize(params.Data)
-            this.Data = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.RepositoryName = 'RepositoryName' in params ? params.RepositoryName : null;
+        this.ImageVersion = 'ImageVersion' in params ? params.ImageVersion : null;
+        this.NamespaceName = 'NamespaceName' in params ? params.NamespaceName : null;
 
     }
 }
@@ -6576,6 +6653,7 @@ module.exports = {
     CreateNamespaceRequest: CreateNamespaceRequest,
     BatchDeleteRepositoryPersonalRequest: BatchDeleteRepositoryPersonalRequest,
     TriggerInvokeCondition: TriggerInvokeCondition,
+    ValidateRepositoryExistPersonalResponse: ValidateRepositoryExistPersonalResponse,
     NamespaceIsExistsResp: NamespaceIsExistsResp,
     DescribeInstancesRequest: DescribeInstancesRequest,
     Filter: Filter,
@@ -6605,6 +6683,7 @@ module.exports = {
     DescribeApplicationTriggerPersonalResp: DescribeApplicationTriggerPersonalResp,
     TagInfo: TagInfo,
     CreateRepositoryRequest: CreateRepositoryRequest,
+    DeleteImageResponse: DeleteImageResponse,
     DescribeWebhookTriggerRequest: DescribeWebhookTriggerRequest,
     DeleteNamespaceRequest: DeleteNamespaceRequest,
     BatchDeleteImagePersonalRequest: BatchDeleteImagePersonalRequest,
@@ -6621,7 +6700,7 @@ module.exports = {
     TcrRepositoryInfo: TcrRepositoryInfo,
     TcrInstanceToken: TcrInstanceToken,
     DeleteRepositoryRequest: DeleteRepositoryRequest,
-    ValidateRepositoryExistPersonalResponse: ValidateRepositoryExistPersonalResponse,
+    DeleteImageRequest: DeleteImageRequest,
     CreateRepositoryPersonalResponse: CreateRepositoryPersonalResponse,
     CreateApplicationTriggerPersonalResponse: CreateApplicationTriggerPersonalResponse,
     BatchDeleteImagePersonalResponse: BatchDeleteImagePersonalResponse,

@@ -11231,6 +11231,7 @@ class CreateLiveSnapshotTemplateRequest extends  AbstractModel {
 
         /**
          * Cos Bucket名称。
+注：CosBucket参数值不能包含-[appid] 部分。
          * @type {string || null}
          */
         this.CosBucket = null;
@@ -11793,6 +11794,7 @@ class ModifyLiveSnapshotTemplateRequest extends  AbstractModel {
 
         /**
          * Cos Bucket名称。
+注：CosBucket参数值不能包含-[appid] 部分。
          * @type {string || null}
          */
         this.CosBucket = null;

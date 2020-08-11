@@ -852,7 +852,7 @@ class ModifyDBInstanceNameRequest extends  AbstractModel {
 }
 
 /**
- * 描述一种规格的信息信息
+ * 描述一种规格的信息
  * @class
  */
 class SpecItemInfo extends  AbstractModel {
