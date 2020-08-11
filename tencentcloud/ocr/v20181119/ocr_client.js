@@ -91,6 +91,7 @@ const TaxiInvoiceOCRRequest = models.TaxiInvoiceOCRRequest;
 const PropOwnerCertOCRRequest = models.PropOwnerCertOCRRequest;
 const TextDetectRequest = models.TextDetectRequest;
 const VatRollInvoiceOCRResponse = models.VatRollInvoiceOCRResponse;
+const VatInvoiceVerifyRequest = models.VatInvoiceVerifyRequest;
 const EduPaperOCRResponse = models.EduPaperOCRResponse;
 const BusinessCardInfo = models.BusinessCardInfo;
 const TextGeneralHandwriting = models.TextGeneralHandwriting;
@@ -106,6 +107,7 @@ const GeneralEfficientOCRRequest = models.GeneralEfficientOCRRequest;
 const TollInvoiceOCRResponse = models.TollInvoiceOCRResponse;
 const RideHailingDriverLicenseOCRResponse = models.RideHailingDriverLicenseOCRResponse;
 const EnglishOCRRequest = models.EnglishOCRRequest;
+const VatInvoiceVerifyResponse = models.VatInvoiceVerifyResponse;
 const PassportOCRResponse = models.PassportOCRResponse;
 const GeneralAccurateOCRRequest = models.GeneralAccurateOCRRequest;
 const OrgCodeCertOCRRequest = models.OrgCodeCertOCRRequest;
@@ -150,10 +152,12 @@ const ResidenceBookletOCRRequest = models.ResidenceBookletOCRRequest;
 const BusInvoiceOCRResponse = models.BusInvoiceOCRResponse;
 const QrcodeResultsInfo = models.QrcodeResultsInfo;
 const MainlandPermitOCRResponse = models.MainlandPermitOCRResponse;
+const VatInvoice = models.VatInvoice;
 const HmtResidentPermitOCRResponse = models.HmtResidentPermitOCRResponse;
 const EnglishOCRResponse = models.EnglishOCRResponse;
 const BusInvoiceOCRRequest = models.BusInvoiceOCRRequest;
 const QuotaInvoiceOCRResponse = models.QuotaInvoiceOCRResponse;
+const RideHailingTransportLicenseOCRResponse = models.RideHailingTransportLicenseOCRResponse;
 const CandWord = models.CandWord;
 const EnterpriseLicenseInfo = models.EnterpriseLicenseInfo;
 const InsuranceBillOCRRequest = models.InsuranceBillOCRRequest;
@@ -165,6 +169,7 @@ const VatRollInvoiceInfo = models.VatRollInvoiceInfo;
 const ShipInvoiceInfo = models.ShipInvoiceInfo;
 const IDCardOCRRequest = models.IDCardOCRRequest;
 const MixedInvoiceDetectRequest = models.MixedInvoiceDetectRequest;
+const RideHailingTransportLicenseOCRRequest = models.RideHailingTransportLicenseOCRRequest;
 const MLIDCardOCRResponse = models.MLIDCardOCRResponse;
 const EstateCertOCRRequest = models.EstateCertOCRRequest;
 const VerifyBasicBizLicenseRequest = models.VerifyBasicBizLicenseRequest;
@@ -208,6 +213,17 @@ class OcrClient extends AbstractClient {
     VerifyBasicBizLicense(req, cb) {
         let resp = new VerifyBasicBizLicenseResponse();
         this.request("VerifyBasicBizLicense", req, resp, cb);
+    }
+
+    /**
+     * 本接口支持增值税发票的准确性核验，您可以通过输入增值税发票的关键字段提供所需的验证信息，接口返回真实的票面相关信息，包括发票代码、发票号码、开票日期、金额、消费类型、购方名称、购方税号、销方名称、销方税号等多个常用字段。支持多种发票类型核验，包括增值税专用发票、增值税普通发票（含电子普通发票、卷式发票、通行费发票）、机动车销售统一发票、货物运输业增值税专用发票、二手车销售统一发票。
+     * @param {VatInvoiceVerifyRequest} req
+     * @param {function(string, VatInvoiceVerifyResponse):void} cb
+     * @public
+     */
+    VatInvoiceVerify(req, cb) {
+        let resp = new VatInvoiceVerifyResponse();
+        this.request("VatInvoiceVerify", req, resp, cb);
     }
 
     /**
@@ -1073,6 +1089,18 @@ class OcrClient extends AbstractClient {
     EduPaperOCR(req, cb) {
         let resp = new EduPaperOCRResponse();
         this.request("EduPaperOCR", req, resp, cb);
+    }
+
+    /**
+     * 本接口支持网约车运输证关键字段的识别，包括交运管许可字号、车辆所有人、车辆号牌、起始日期、截止日期、发证日期。
+           
+     * @param {RideHailingTransportLicenseOCRRequest} req
+     * @param {function(string, RideHailingTransportLicenseOCRResponse):void} cb
+     * @public
+     */
+    RideHailingTransportLicenseOCR(req, cb) {
+        let resp = new RideHailingTransportLicenseOCRResponse();
+        this.request("RideHailingTransportLicenseOCR", req, resp, cb);
     }
 
     /**

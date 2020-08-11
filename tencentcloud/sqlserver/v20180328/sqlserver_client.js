@@ -21,10 +21,11 @@ const CreateDBInstancesRequest = models.CreateDBInstancesRequest;
 const InstanceRenewInfo = models.InstanceRenewInfo;
 const DealInfo = models.DealInfo;
 const CreateBasicDBInstancesResponse = models.CreateBasicDBInstancesResponse;
-const DescribeFlowStatusRequest = models.DescribeFlowStatusRequest;
+const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const DescribeMaintenanceSpanResponse = models.DescribeMaintenanceSpanResponse;
 const CreatePublishSubscribeRequest = models.CreatePublishSubscribeRequest;
 const CreateMigrationResponse = models.CreateMigrationResponse;
+const QueryMigrationCheckProcessRequest = models.QueryMigrationCheckProcessRequest;
 const DatabaseTuple = models.DatabaseTuple;
 const RegionInfo = models.RegionInfo;
 const ModifyBackupNameResponse = models.ModifyBackupNameResponse;
@@ -40,6 +41,7 @@ const RunMigrationResponse = models.RunMigrationResponse;
 const DescribeProductConfigRequest = models.DescribeProductConfigRequest;
 const ModifyPublishSubscribeNameResponse = models.ModifyPublishSubscribeNameResponse;
 const DescribeCrossRegionZoneRequest = models.DescribeCrossRegionZoneRequest;
+const CompleteMigrationResponse = models.CompleteMigrationResponse;
 const RollbackInstanceResponse = models.RollbackInstanceResponse;
 const DBRemark = models.DBRemark;
 const MigrateDB = models.MigrateDB;
@@ -58,11 +60,13 @@ const ModifyMaintenanceSpanResponse = models.ModifyMaintenanceSpanResponse;
 const ZoneInfo = models.ZoneInfo;
 const InquiryPriceCreateDBInstancesRequest = models.InquiryPriceCreateDBInstancesRequest;
 const DescribeBackupByFlowIdResponse = models.DescribeBackupByFlowIdResponse;
-const DescribeAccountsRequest = models.DescribeAccountsRequest;
+const DescribeFlowStatusRequest = models.DescribeFlowStatusRequest;
+const StartMigrationCheckResponse = models.StartMigrationCheckResponse;
 const MigrateTask = models.MigrateTask;
 const SpecInfo = models.SpecInfo;
 const DescribeOrdersResponse = models.DescribeOrdersResponse;
 const InquiryPriceCreateDBInstancesResponse = models.InquiryPriceCreateDBInstancesResponse;
+const CompleteMigrationRequest = models.CompleteMigrationRequest;
 const ModifyAccountPrivilegeResponse = models.ModifyAccountPrivilegeResponse;
 const RemoveBackupsRequest = models.RemoveBackupsRequest;
 const DBCreateInfo = models.DBCreateInfo;
@@ -82,20 +86,24 @@ const DeleteDBRequest = models.DeleteDBRequest;
 const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGroupsResponse;
 const DescribeCrossRegionZoneResponse = models.DescribeCrossRegionZoneResponse;
 const ModifyDBInstanceRenewFlagResponse = models.ModifyDBInstanceRenewFlagResponse;
+const DescribeMigrationDatabasesResponse = models.DescribeMigrationDatabasesResponse;
 const CompleteExpansionResponse = models.CompleteExpansionResponse;
 const MigrateSource = models.MigrateSource;
 const ResetAccountPasswordResponse = models.ResetAccountPasswordResponse;
 const ReadOnlyGroup = models.ReadOnlyGroup;
+const QueryMigrationCheckProcessResponse = models.QueryMigrationCheckProcessResponse;
 const CreateReadOnlyDBInstancesRequest = models.CreateReadOnlyDBInstancesRequest;
 const ModifyAccountPrivilegeRequest = models.ModifyAccountPrivilegeRequest;
 const DescribeMigrationsRequest = models.DescribeMigrationsRequest;
 const InstanceDBDetail = models.InstanceDBDetail;
+const StepDetail = models.StepDetail;
 const DescribeDBsRequest = models.DescribeDBsRequest;
 const CompleteExpansionRequest = models.CompleteExpansionRequest;
 const RenewPostpaidDBInstanceRequest = models.RenewPostpaidDBInstanceRequest;
 const DescribeBackupsResponse = models.DescribeBackupsResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const DescribeFlowStatusResponse = models.DescribeFlowStatusResponse;
+const StopMigrationRequest = models.StopMigrationRequest;
 const CreateReadOnlyDBInstancesResponse = models.CreateReadOnlyDBInstancesResponse;
 const DeleteMigrationRequest = models.DeleteMigrationRequest;
 const DescribeMigrationDetailRequest = models.DescribeMigrationDetailRequest;
@@ -123,6 +131,7 @@ const CreateBackupResponse = models.CreateBackupResponse;
 const DBInstance = models.DBInstance;
 const DescribeProductConfigResponse = models.DescribeProductConfigResponse;
 const CreateMigrationRequest = models.CreateMigrationRequest;
+const StartMigrationCheckRequest = models.StartMigrationCheckRequest;
 const AccountDetail = models.AccountDetail;
 const CreateBasicDBInstancesRequest = models.CreateBasicDBInstancesRequest;
 const ModifyDBNameResponse = models.ModifyDBNameResponse;
@@ -156,6 +165,7 @@ const ModifyMigrationRequest = models.ModifyMigrationRequest;
 const DeleteDBInstanceRequest = models.DeleteDBInstanceRequest;
 const CreateAccountResponse = models.CreateAccountResponse;
 const RenewPostpaidDBInstanceResponse = models.RenewPostpaidDBInstanceResponse;
+const DescribeMigrationDatabasesRequest = models.DescribeMigrationDatabasesRequest;
 const UpgradeDBInstanceRequest = models.UpgradeDBInstanceRequest;
 const CreateAccountRequest = models.CreateAccountRequest;
 const DeleteDBResponse = models.DeleteDBResponse;
@@ -171,6 +181,7 @@ const DescribeSlowlogsRequest = models.DescribeSlowlogsRequest;
 const ModifyDBInstanceProjectRequest = models.ModifyDBInstanceProjectRequest;
 const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
 const ModifyBackupNameRequest = models.ModifyBackupNameRequest;
+const StopMigrationResponse = models.StopMigrationResponse;
 const CreatePublishSubscribeResponse = models.CreatePublishSubscribeResponse;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const DeleteDBInstanceResponse = models.DeleteDBInstanceResponse;
@@ -655,14 +666,14 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
-     * 本接口（ModifyMaintenanceSpan）用于修改实例的可维护时间窗
-     * @param {ModifyMaintenanceSpanRequest} req
-     * @param {function(string, ModifyMaintenanceSpanResponse):void} cb
+     * 本接口（CompleteMigration）作用是完成一个迁移任务
+     * @param {CompleteMigrationRequest} req
+     * @param {function(string, CompleteMigrationResponse):void} cb
      * @public
      */
-    ModifyMaintenanceSpan(req, cb) {
-        let resp = new ModifyMaintenanceSpanResponse();
-        this.request("ModifyMaintenanceSpan", req, resp, cb);
+    CompleteMigration(req, cb) {
+        let resp = new CompleteMigrationResponse();
+        this.request("CompleteMigration", req, resp, cb);
     }
 
     /**
@@ -710,6 +721,17 @@ class SqlserverClient extends AbstractClient {
     }
 
     /**
+     * 本接口（StopMigration）作用是中止一个迁移任务
+     * @param {StopMigrationRequest} req
+     * @param {function(string, StopMigrationResponse):void} cb
+     * @public
+     */
+    StopMigration(req, cb) {
+        let resp = new StopMigrationResponse();
+        this.request("StopMigration", req, resp, cb);
+    }
+
+    /**
      * 本接口（DescribeAccounts）用于拉取实例账户列表。
      * @param {DescribeAccountsRequest} req
      * @param {function(string, DescribeAccountsResponse):void} cb
@@ -718,6 +740,17 @@ class SqlserverClient extends AbstractClient {
     DescribeAccounts(req, cb) {
         let resp = new DescribeAccountsResponse();
         this.request("DescribeAccounts", req, resp, cb);
+    }
+
+    /**
+     * 本接口（QueryMigrationCheckProcess）的作用是查询迁移检查任务的进度，适用于迁移源的类型为TencentDB for SQLServer 的迁移方式
+     * @param {QueryMigrationCheckProcessRequest} req
+     * @param {function(string, QueryMigrationCheckProcessResponse):void} cb
+     * @public
+     */
+    QueryMigrationCheckProcess(req, cb) {
+        let resp = new QueryMigrationCheckProcessResponse();
+        this.request("QueryMigrationCheckProcess", req, resp, cb);
     }
 
     /**
@@ -751,6 +784,17 @@ class SqlserverClient extends AbstractClient {
     DescribePublishSubscribe(req, cb) {
         let resp = new DescribePublishSubscribeResponse();
         this.request("DescribePublishSubscribe", req, resp, cb);
+    }
+
+    /**
+     * 本接口（StartMigrationCheck）的作用是启动一个迁移前的校验任务，适用于迁移源的类型为TencentDB for SQLServer 的迁移方式
+     * @param {StartMigrationCheckRequest} req
+     * @param {function(string, StartMigrationCheckResponse):void} cb
+     * @public
+     */
+    StartMigrationCheck(req, cb) {
+        let resp = new StartMigrationCheckResponse();
+        this.request("StartMigrationCheck", req, resp, cb);
     }
 
     /**
@@ -828,6 +872,28 @@ class SqlserverClient extends AbstractClient {
     UpgradeDBInstance(req, cb) {
         let resp = new UpgradeDBInstanceResponse();
         this.request("UpgradeDBInstance", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeMigrationDatabases）的作用是查询待迁移数据库列表
+     * @param {DescribeMigrationDatabasesRequest} req
+     * @param {function(string, DescribeMigrationDatabasesResponse):void} cb
+     * @public
+     */
+    DescribeMigrationDatabases(req, cb) {
+        let resp = new DescribeMigrationDatabasesResponse();
+        this.request("DescribeMigrationDatabases", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ModifyMaintenanceSpan）用于修改实例的可维护时间窗
+     * @param {ModifyMaintenanceSpanRequest} req
+     * @param {function(string, ModifyMaintenanceSpanResponse):void} cb
+     * @public
+     */
+    ModifyMaintenanceSpan(req, cb) {
+        let resp = new ModifyMaintenanceSpanResponse();
+        this.request("ModifyMaintenanceSpan", req, resp, cb);
     }
 
     /**

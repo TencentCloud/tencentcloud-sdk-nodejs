@@ -4373,6 +4373,60 @@ class VatRollInvoiceOCRResponse extends  AbstractModel {
 }
 
 /**
+ * VatInvoiceVerify请求参数结构体
+ * @class
+ */
+class VatInvoiceVerifyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 发票代码， 一张发票一天只能查询5次。
+         * @type {string || null}
+         */
+        this.InvoiceCode = null;
+
+        /**
+         * 发票号码（8位）。
+         * @type {string || null}
+         */
+        this.InvoiceNo = null;
+
+        /**
+         * 开票日期（不支持当天发票查询，只支持一年以内），如：2019-12-20。
+         * @type {string || null}
+         */
+        this.InvoiceDate = null;
+
+        /**
+         * 金额/发票校验码后6位（根据票种传递对应值，如果报参数错误，请仔细检查每个票种对应的值）
+增值税专用发票：开具金额（不含税）
+增值税普通发票、增值税电子普通发票（含通行费发票）、增值税普通发票（卷票）：校验码后6位
+机动车销售统一发票：不含税价
+货物运输业增值税专用发票：合计金额
+二手车销售统一发票：车价合计
+         * @type {string || null}
+         */
+        this.Additional = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InvoiceCode = 'InvoiceCode' in params ? params.InvoiceCode : null;
+        this.InvoiceNo = 'InvoiceNo' in params ? params.InvoiceNo : null;
+        this.InvoiceDate = 'InvoiceDate' in params ? params.InvoiceDate : null;
+        this.Additional = 'Additional' in params ? params.Additional : null;
+
+    }
+}
+
+/**
  * EduPaperOCR返回参数结构体
  * @class
  */
@@ -5368,6 +5422,46 @@ class EnglishOCRRequest extends  AbstractModel {
 }
 
 /**
+ * VatInvoiceVerify返回参数结构体
+ * @class
+ */
+class VatInvoiceVerifyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 增值税发票信息，详情请点击左侧链接。
+         * @type {VatInvoice || null}
+         */
+        this.Invoice = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Invoice) {
+            let obj = new VatInvoice();
+            obj.deserialize(params.Invoice)
+            this.Invoice = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * PassportOCR返回参数结构体
  * @class
  */
@@ -5686,6 +5780,12 @@ class CarInvoiceInfo extends  AbstractModel {
          */
         this.Value = null;
 
+        /**
+         * 文本行在旋转纠正之后的图像中的像素坐标。
+         * @type {Rect || null}
+         */
+        this.Rect = null;
+
     }
 
     /**
@@ -5697,6 +5797,12 @@ class CarInvoiceInfo extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+        if (params.Rect) {
+            let obj = new Rect();
+            obj.deserialize(params.Rect)
+            this.Rect = obj;
+        }
 
     }
 }
@@ -7756,6 +7862,207 @@ class MainlandPermitOCRResponse extends  AbstractModel {
 }
 
 /**
+ * 增值税发票信息
+ * @class
+ */
+class VatInvoice extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 发票代码
+         * @type {string || null}
+         */
+        this.Code = null;
+
+        /**
+         * 发票号码
+         * @type {string || null}
+         */
+        this.Number = null;
+
+        /**
+         * 开票日期
+         * @type {string || null}
+         */
+        this.Date = null;
+
+        /**
+         * 购方抬头
+         * @type {string || null}
+         */
+        this.BuyerName = null;
+
+        /**
+         * 购方税号
+         * @type {string || null}
+         */
+        this.BuyerTaxCode = null;
+
+        /**
+         * 购方地址电话
+         * @type {string || null}
+         */
+        this.BuyerAddressPhone = null;
+
+        /**
+         * 购方银行账号
+         * @type {string || null}
+         */
+        this.BuyerBankAccount = null;
+
+        /**
+         * 销方名称
+         * @type {string || null}
+         */
+        this.SellerName = null;
+
+        /**
+         * 销方税号
+         * @type {string || null}
+         */
+        this.SellerTaxCode = null;
+
+        /**
+         * 销方地址电话
+         * @type {string || null}
+         */
+        this.SellerAddressPhone = null;
+
+        /**
+         * 销方银行账号
+         * @type {string || null}
+         */
+        this.SellerBankAccount = null;
+
+        /**
+         * 备注
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 机器编码
+         * @type {string || null}
+         */
+        this.MachineNo = null;
+
+        /**
+         * 发票类型
+01：专用发票 
+02：货运发票
+03：机动车发票 
+04：普通发票 
+10：电子发票 
+11：卷式发票 
+14：通行费发票 
+15：二手车发票
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 检验码
+         * @type {string || null}
+         */
+        this.CheckCode = null;
+
+        /**
+         * 是否作废（红冲）是否作废（红冲）
+Y: 已作废 N：未作废 H：红冲
+         * @type {string || null}
+         */
+        this.IsAbandoned = null;
+
+        /**
+         * 是否有销货清单 
+Y: 有清单 N：无清单 
+卷票无
+         * @type {string || null}
+         */
+        this.HasSellerList = null;
+
+        /**
+         * 销货清单标题
+         * @type {string || null}
+         */
+        this.SellerListTitle = null;
+
+        /**
+         * 销货清单税额
+         * @type {string || null}
+         */
+        this.SellerListTax = null;
+
+        /**
+         * 不含税金额
+         * @type {string || null}
+         */
+        this.AmountWithoutTax = null;
+
+        /**
+         * 税额
+         * @type {string || null}
+         */
+        this.TaxAmount = null;
+
+        /**
+         * 含税金额
+         * @type {string || null}
+         */
+        this.AmountWithTax = null;
+
+        /**
+         * 项目明细
+         * @type {Array.<VatInvoiceItem> || null}
+         */
+        this.Items = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Number = 'Number' in params ? params.Number : null;
+        this.Date = 'Date' in params ? params.Date : null;
+        this.BuyerName = 'BuyerName' in params ? params.BuyerName : null;
+        this.BuyerTaxCode = 'BuyerTaxCode' in params ? params.BuyerTaxCode : null;
+        this.BuyerAddressPhone = 'BuyerAddressPhone' in params ? params.BuyerAddressPhone : null;
+        this.BuyerBankAccount = 'BuyerBankAccount' in params ? params.BuyerBankAccount : null;
+        this.SellerName = 'SellerName' in params ? params.SellerName : null;
+        this.SellerTaxCode = 'SellerTaxCode' in params ? params.SellerTaxCode : null;
+        this.SellerAddressPhone = 'SellerAddressPhone' in params ? params.SellerAddressPhone : null;
+        this.SellerBankAccount = 'SellerBankAccount' in params ? params.SellerBankAccount : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.MachineNo = 'MachineNo' in params ? params.MachineNo : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.CheckCode = 'CheckCode' in params ? params.CheckCode : null;
+        this.IsAbandoned = 'IsAbandoned' in params ? params.IsAbandoned : null;
+        this.HasSellerList = 'HasSellerList' in params ? params.HasSellerList : null;
+        this.SellerListTitle = 'SellerListTitle' in params ? params.SellerListTitle : null;
+        this.SellerListTax = 'SellerListTax' in params ? params.SellerListTax : null;
+        this.AmountWithoutTax = 'AmountWithoutTax' in params ? params.AmountWithoutTax : null;
+        this.TaxAmount = 'TaxAmount' in params ? params.TaxAmount : null;
+        this.AmountWithTax = 'AmountWithTax' in params ? params.AmountWithTax : null;
+
+        if (params.Items) {
+            this.Items = new Array();
+            for (let z in params.Items) {
+                let obj = new VatInvoiceItem();
+                obj.deserialize(params.Items[z]);
+                this.Items.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * HmtResidentPermitOCR返回参数结构体
  * @class
  */
@@ -8007,6 +8314,76 @@ class QuotaInvoiceOCRResponse extends  AbstractModel {
         this.Province = 'Province' in params ? params.Province : null;
         this.City = 'City' in params ? params.City : null;
         this.HasStamp = 'HasStamp' in params ? params.HasStamp : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RideHailingTransportLicenseOCR返回参数结构体
+ * @class
+ */
+class RideHailingTransportLicenseOCRResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 交运管许可字号。
+         * @type {string || null}
+         */
+        this.OperationLicenseNumber = null;
+
+        /**
+         * 车辆所有人，对应网约车运输证字段：车辆所有人/车主名称/业户名称。
+         * @type {string || null}
+         */
+        this.VehicleOwner = null;
+
+        /**
+         * 车牌号码，对应网约车运输证字段：车牌号码/车辆号牌。
+         * @type {string || null}
+         */
+        this.VehicleNumber = null;
+
+        /**
+         * 有效起始日期。
+         * @type {string || null}
+         */
+        this.StartDate = null;
+
+        /**
+         * 有效期截止时间，对应网约车运输证字段：有效期至/营运期限止。
+         * @type {string || null}
+         */
+        this.EndDate = null;
+
+        /**
+         * 初始发证日期，对应网约车运输证字段：初始领证日期/发证日期。
+         * @type {string || null}
+         */
+        this.ReleaseDate = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OperationLicenseNumber = 'OperationLicenseNumber' in params ? params.OperationLicenseNumber : null;
+        this.VehicleOwner = 'VehicleOwner' in params ? params.VehicleOwner : null;
+        this.VehicleNumber = 'VehicleNumber' in params ? params.VehicleNumber : null;
+        this.StartDate = 'StartDate' in params ? params.StartDate : null;
+        this.EndDate = 'EndDate' in params ? params.EndDate : null;
+        this.ReleaseDate = 'ReleaseDate' in params ? params.ReleaseDate : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -8501,6 +8878,43 @@ class MixedInvoiceDetectRequest extends  AbstractModel {
             return;
         }
         this.ReturnImage = 'ReturnImage' in params ? params.ReturnImage : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+
+    }
+}
+
+/**
+ * RideHailingTransportLicenseOCR请求参数结构体
+ * @class
+ */
+class RideHailingTransportLicenseOCRRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片下载时间不超过 3 秒。
+建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
 
@@ -9281,6 +9695,7 @@ module.exports = {
     PropOwnerCertOCRRequest: PropOwnerCertOCRRequest,
     TextDetectRequest: TextDetectRequest,
     VatRollInvoiceOCRResponse: VatRollInvoiceOCRResponse,
+    VatInvoiceVerifyRequest: VatInvoiceVerifyRequest,
     EduPaperOCRResponse: EduPaperOCRResponse,
     BusinessCardInfo: BusinessCardInfo,
     TextGeneralHandwriting: TextGeneralHandwriting,
@@ -9296,6 +9711,7 @@ module.exports = {
     TollInvoiceOCRResponse: TollInvoiceOCRResponse,
     RideHailingDriverLicenseOCRResponse: RideHailingDriverLicenseOCRResponse,
     EnglishOCRRequest: EnglishOCRRequest,
+    VatInvoiceVerifyResponse: VatInvoiceVerifyResponse,
     PassportOCRResponse: PassportOCRResponse,
     GeneralAccurateOCRRequest: GeneralAccurateOCRRequest,
     OrgCodeCertOCRRequest: OrgCodeCertOCRRequest,
@@ -9340,10 +9756,12 @@ module.exports = {
     BusInvoiceOCRResponse: BusInvoiceOCRResponse,
     QrcodeResultsInfo: QrcodeResultsInfo,
     MainlandPermitOCRResponse: MainlandPermitOCRResponse,
+    VatInvoice: VatInvoice,
     HmtResidentPermitOCRResponse: HmtResidentPermitOCRResponse,
     EnglishOCRResponse: EnglishOCRResponse,
     BusInvoiceOCRRequest: BusInvoiceOCRRequest,
     QuotaInvoiceOCRResponse: QuotaInvoiceOCRResponse,
+    RideHailingTransportLicenseOCRResponse: RideHailingTransportLicenseOCRResponse,
     CandWord: CandWord,
     EnterpriseLicenseInfo: EnterpriseLicenseInfo,
     InsuranceBillOCRRequest: InsuranceBillOCRRequest,
@@ -9355,6 +9773,7 @@ module.exports = {
     ShipInvoiceInfo: ShipInvoiceInfo,
     IDCardOCRRequest: IDCardOCRRequest,
     MixedInvoiceDetectRequest: MixedInvoiceDetectRequest,
+    RideHailingTransportLicenseOCRRequest: RideHailingTransportLicenseOCRRequest,
     MLIDCardOCRResponse: MLIDCardOCRResponse,
     EstateCertOCRRequest: EstateCertOCRRequest,
     VerifyBasicBizLicenseRequest: VerifyBasicBizLicenseRequest,

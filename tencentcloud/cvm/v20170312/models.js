@@ -814,7 +814,7 @@ class RunInstancesRequest extends  AbstractModel {
         this.DataDisks = null;
 
         /**
-         * 私有网络相关信息配置。通过该参数可以指定私有网络的ID，子网ID等信息。若不指定该参数，则默认使用基础网络。若在此参数中指定了私有网络IP，表示每个实例的主网卡IP，而且InstanceCount参数必须与私有网络IP的个数一致。
+         * 私有网络相关信息配置。通过该参数可以指定私有网络的ID，子网ID等信息。若不指定该参数，则默认使用基础网络。若在此参数中指定了私有网络IP，即表示每个实例的主网卡IP；同时，InstanceCount参数必须与私有网络IP的个数一致且不能大于20。
          * @type {VirtualPrivateCloud || null}
          */
         this.VirtualPrivateCloud = null;

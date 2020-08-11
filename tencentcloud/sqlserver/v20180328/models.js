@@ -339,18 +339,30 @@ class CreateBasicDBInstancesResponse extends  AbstractModel {
 }
 
 /**
- * DescribeFlowStatus请求参数结构体
+ * DescribeAccounts请求参数结构体
  * @class
  */
-class DescribeFlowStatusRequest extends  AbstractModel {
+class DescribeAccountsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 流程ID
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 分页返回，每页返回的数目，取值为1-100，默认值为20
          * @type {number || null}
          */
-        this.FlowId = null;
+        this.Limit = null;
+
+        /**
+         * 分页返回，页编号，默认值为第0页
+         * @type {number || null}
+         */
+        this.Offset = null;
 
     }
 
@@ -361,7 +373,9 @@ class DescribeFlowStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -503,6 +517,34 @@ class CreateMigrationResponse extends  AbstractModel {
         }
         this.MigrateId = 'MigrateId' in params ? params.MigrateId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * QueryMigrationCheckProcess请求参数结构体
+ * @class
+ */
+class QueryMigrationCheckProcessRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 迁移任务ID
+         * @type {number || null}
+         */
+        this.MigrateId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MigrateId = 'MigrateId' in params ? params.MigrateId : null;
 
     }
 }
@@ -1058,6 +1100,41 @@ class DescribeCrossRegionZoneRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * CompleteMigration返回参数结构体
+ * @class
+ */
+class CompleteMigrationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 完成迁移流程发起后，返回的流程id
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1990,30 +2067,18 @@ class DescribeBackupByFlowIdResponse extends  AbstractModel {
 }
 
 /**
- * DescribeAccounts请求参数结构体
+ * DescribeFlowStatus请求参数结构体
  * @class
  */
-class DescribeAccountsRequest extends  AbstractModel {
+class DescribeFlowStatusRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * 分页返回，每页返回的数目，取值为1-100，默认值为20
+         * 流程ID
          * @type {number || null}
          */
-        this.Limit = null;
-
-        /**
-         * 分页返回，页编号，默认值为第0页
-         * @type {number || null}
-         */
-        this.Offset = null;
+        this.FlowId = null;
 
     }
 
@@ -2024,9 +2089,42 @@ class DescribeAccountsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+
+    }
+}
+
+/**
+ * StartMigrationCheck返回参数结构体
+ * @class
+ */
+class StartMigrationCheckResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 迁移检查流程发起后，返回的流程id
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2356,6 +2454,34 @@ class InquiryPriceCreateDBInstancesResponse extends  AbstractModel {
         this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
         this.Price = 'Price' in params ? params.Price : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CompleteMigration请求参数结构体
+ * @class
+ */
+class CompleteMigrationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 迁移任务ID
+         * @type {number || null}
+         */
+        this.MigrateId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MigrateId = 'MigrateId' in params ? params.MigrateId : null;
 
     }
 }
@@ -3205,6 +3331,48 @@ class ModifyDBInstanceRenewFlagResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeMigrationDatabases返回参数结构体
+ * @class
+ */
+class DescribeMigrationDatabasesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据库数量
+         * @type {number || null}
+         */
+        this.Amount = null;
+
+        /**
+         * 数据库名称数组
+         * @type {Array.<string> || null}
+         */
+        this.MigrateDBSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Amount = 'Amount' in params ? params.Amount : null;
+        this.MigrateDBSet = 'MigrateDBSet' in params ? params.MigrateDBSet : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CompleteExpansion返回参数结构体
  * @class
  */
@@ -3488,6 +3656,63 @@ class ReadOnlyGroup extends  AbstractModel {
                 this.ReadOnlyInstanceSet.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * QueryMigrationCheckProcess返回参数结构体
+ * @class
+ */
+class QueryMigrationCheckProcessResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总步骤数量
+         * @type {number || null}
+         */
+        this.TotalStep = null;
+
+        /**
+         * 当前步骤编号，从1开始
+         * @type {number || null}
+         */
+        this.CurrentStep = null;
+
+        /**
+         * 所有步骤详情
+         * @type {Array.<StepDetail> || null}
+         */
+        this.StepDetails = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalStep = 'TotalStep' in params ? params.TotalStep : null;
+        this.CurrentStep = 'CurrentStep' in params ? params.CurrentStep : null;
+
+        if (params.StepDetails) {
+            this.StepDetails = new Array();
+            for (let z in params.StepDetails) {
+                let obj = new StepDetail();
+                obj.deserialize(params.StepDetails[z]);
+                this.StepDetails.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3796,6 +4021,48 @@ class InstanceDBDetail extends  AbstractModel {
 }
 
 /**
+ * 进度步骤详情
+ * @class
+ */
+class StepDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 具体步骤返回信息
+         * @type {string || null}
+         */
+        this.Msg = null;
+
+        /**
+         * 当前步骤状态，0成功，-2未开始
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 步骤名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Msg = 'Msg' in params ? params.Msg : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
  * DescribeDBs请求参数结构体
  * @class
  */
@@ -3995,6 +4262,34 @@ class DescribeFlowStatusResponse extends  AbstractModel {
         }
         this.Status = 'Status' in params ? params.Status : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StopMigration请求参数结构体
+ * @class
+ */
+class StopMigrationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 迁移任务ID
+         * @type {number || null}
+         */
+        this.MigrateId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MigrateId = 'MigrateId' in params ? params.MigrateId : null;
 
     }
 }
@@ -5436,6 +5731,34 @@ class CreateMigrationRequest extends  AbstractModel {
                 this.MigrateDBSet.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * StartMigrationCheck请求参数结构体
+ * @class
+ */
+class StartMigrationCheckRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 迁移任务id
+         * @type {number || null}
+         */
+        this.MigrateId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MigrateId = 'MigrateId' in params ? params.MigrateId : null;
 
     }
 }
@@ -7242,6 +7565,48 @@ class RenewPostpaidDBInstanceResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeMigrationDatabases请求参数结构体
+ * @class
+ */
+class DescribeMigrationDatabasesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 迁移源实例的ID，格式如：mssql-si2823jyl
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 迁移源实例用户名
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * 迁移源实例密码
+         * @type {string || null}
+         */
+        this.Password = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
+
+    }
+}
+
+/**
  * UpgradeDBInstance请求参数结构体
  * @class
  */
@@ -7983,6 +8348,41 @@ class ModifyBackupNameRequest extends  AbstractModel {
 }
 
 /**
+ * StopMigration返回参数结构体
+ * @class
+ */
+class StopMigrationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 中止迁移流程发起后，返回的流程id
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreatePublishSubscribe返回参数结构体
  * @class
  */
@@ -8311,10 +8711,11 @@ module.exports = {
     InstanceRenewInfo: InstanceRenewInfo,
     DealInfo: DealInfo,
     CreateBasicDBInstancesResponse: CreateBasicDBInstancesResponse,
-    DescribeFlowStatusRequest: DescribeFlowStatusRequest,
+    DescribeAccountsRequest: DescribeAccountsRequest,
     DescribeMaintenanceSpanResponse: DescribeMaintenanceSpanResponse,
     CreatePublishSubscribeRequest: CreatePublishSubscribeRequest,
     CreateMigrationResponse: CreateMigrationResponse,
+    QueryMigrationCheckProcessRequest: QueryMigrationCheckProcessRequest,
     DatabaseTuple: DatabaseTuple,
     RegionInfo: RegionInfo,
     ModifyBackupNameResponse: ModifyBackupNameResponse,
@@ -8330,6 +8731,7 @@ module.exports = {
     DescribeProductConfigRequest: DescribeProductConfigRequest,
     ModifyPublishSubscribeNameResponse: ModifyPublishSubscribeNameResponse,
     DescribeCrossRegionZoneRequest: DescribeCrossRegionZoneRequest,
+    CompleteMigrationResponse: CompleteMigrationResponse,
     RollbackInstanceResponse: RollbackInstanceResponse,
     DBRemark: DBRemark,
     MigrateDB: MigrateDB,
@@ -8348,11 +8750,13 @@ module.exports = {
     ZoneInfo: ZoneInfo,
     InquiryPriceCreateDBInstancesRequest: InquiryPriceCreateDBInstancesRequest,
     DescribeBackupByFlowIdResponse: DescribeBackupByFlowIdResponse,
-    DescribeAccountsRequest: DescribeAccountsRequest,
+    DescribeFlowStatusRequest: DescribeFlowStatusRequest,
+    StartMigrationCheckResponse: StartMigrationCheckResponse,
     MigrateTask: MigrateTask,
     SpecInfo: SpecInfo,
     DescribeOrdersResponse: DescribeOrdersResponse,
     InquiryPriceCreateDBInstancesResponse: InquiryPriceCreateDBInstancesResponse,
+    CompleteMigrationRequest: CompleteMigrationRequest,
     ModifyAccountPrivilegeResponse: ModifyAccountPrivilegeResponse,
     RemoveBackupsRequest: RemoveBackupsRequest,
     DBCreateInfo: DBCreateInfo,
@@ -8372,20 +8776,24 @@ module.exports = {
     DescribeProjectSecurityGroupsResponse: DescribeProjectSecurityGroupsResponse,
     DescribeCrossRegionZoneResponse: DescribeCrossRegionZoneResponse,
     ModifyDBInstanceRenewFlagResponse: ModifyDBInstanceRenewFlagResponse,
+    DescribeMigrationDatabasesResponse: DescribeMigrationDatabasesResponse,
     CompleteExpansionResponse: CompleteExpansionResponse,
     MigrateSource: MigrateSource,
     ResetAccountPasswordResponse: ResetAccountPasswordResponse,
     ReadOnlyGroup: ReadOnlyGroup,
+    QueryMigrationCheckProcessResponse: QueryMigrationCheckProcessResponse,
     CreateReadOnlyDBInstancesRequest: CreateReadOnlyDBInstancesRequest,
     ModifyAccountPrivilegeRequest: ModifyAccountPrivilegeRequest,
     DescribeMigrationsRequest: DescribeMigrationsRequest,
     InstanceDBDetail: InstanceDBDetail,
+    StepDetail: StepDetail,
     DescribeDBsRequest: DescribeDBsRequest,
     CompleteExpansionRequest: CompleteExpansionRequest,
     RenewPostpaidDBInstanceRequest: RenewPostpaidDBInstanceRequest,
     DescribeBackupsResponse: DescribeBackupsResponse,
     DescribeRegionsRequest: DescribeRegionsRequest,
     DescribeFlowStatusResponse: DescribeFlowStatusResponse,
+    StopMigrationRequest: StopMigrationRequest,
     CreateReadOnlyDBInstancesResponse: CreateReadOnlyDBInstancesResponse,
     DeleteMigrationRequest: DeleteMigrationRequest,
     DescribeMigrationDetailRequest: DescribeMigrationDetailRequest,
@@ -8413,6 +8821,7 @@ module.exports = {
     DBInstance: DBInstance,
     DescribeProductConfigResponse: DescribeProductConfigResponse,
     CreateMigrationRequest: CreateMigrationRequest,
+    StartMigrationCheckRequest: StartMigrationCheckRequest,
     AccountDetail: AccountDetail,
     CreateBasicDBInstancesRequest: CreateBasicDBInstancesRequest,
     ModifyDBNameResponse: ModifyDBNameResponse,
@@ -8446,6 +8855,7 @@ module.exports = {
     DeleteDBInstanceRequest: DeleteDBInstanceRequest,
     CreateAccountResponse: CreateAccountResponse,
     RenewPostpaidDBInstanceResponse: RenewPostpaidDBInstanceResponse,
+    DescribeMigrationDatabasesRequest: DescribeMigrationDatabasesRequest,
     UpgradeDBInstanceRequest: UpgradeDBInstanceRequest,
     CreateAccountRequest: CreateAccountRequest,
     DeleteDBResponse: DeleteDBResponse,
@@ -8461,6 +8871,7 @@ module.exports = {
     ModifyDBInstanceProjectRequest: ModifyDBInstanceProjectRequest,
     DisassociateSecurityGroupsRequest: DisassociateSecurityGroupsRequest,
     ModifyBackupNameRequest: ModifyBackupNameRequest,
+    StopMigrationResponse: StopMigrationResponse,
     CreatePublishSubscribeResponse: CreatePublishSubscribeResponse,
     DescribeAccountsResponse: DescribeAccountsResponse,
     DeleteDBInstanceResponse: DeleteDBInstanceResponse,

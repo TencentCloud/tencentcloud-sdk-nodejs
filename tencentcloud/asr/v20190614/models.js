@@ -465,7 +465,7 @@ class CreateRecTaskRequest extends  AbstractModel {
         this.Data = null;
 
         /**
-         * 数据长度，当 SourceType 值为1时必须填写，为0可不写（此数据长度为数据未进行base64编码时的数据长度）。
+         * 数据长度，非必填（此数据长度为数据未进行base64编码时的数据长度）。
          * @type {number || null}
          */
         this.DataLen = null;
@@ -513,6 +513,12 @@ class CreateRecTaskRequest extends  AbstractModel {
          */
         this.SpeakerNumber = null;
 
+        /**
+         * 是否过滤标点符号（目前支持中文普通话引擎）。 0：不过滤，1：过滤句末标点，2：过滤所有标点。默认为0。
+         * @type {number || null}
+         */
+        this.FilterPunc = null;
+
     }
 
     /**
@@ -537,6 +543,7 @@ class CreateRecTaskRequest extends  AbstractModel {
         this.Extra = 'Extra' in params ? params.Extra : null;
         this.SpeakerDiarization = 'SpeakerDiarization' in params ? params.SpeakerDiarization : null;
         this.SpeakerNumber = 'SpeakerNumber' in params ? params.SpeakerNumber : null;
+        this.FilterPunc = 'FilterPunc' in params ? params.FilterPunc : null;
 
     }
 }

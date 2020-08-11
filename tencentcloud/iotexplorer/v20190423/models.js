@@ -2648,6 +2648,20 @@ class DeleteDeviceResponse extends  AbstractModel {
         super();
 
         /**
+         * 删除的结果代码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResultCode = null;
+
+        /**
+         * 删除的结果信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResultMessage = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -2662,6 +2676,8 @@ class DeleteDeviceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.ResultCode = 'ResultCode' in params ? params.ResultCode : null;
+        this.ResultMessage = 'ResultMessage' in params ? params.ResultMessage : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
