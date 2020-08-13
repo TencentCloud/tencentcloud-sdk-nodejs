@@ -1279,6 +1279,58 @@ class UpdateImageConfigResponse extends  AbstractModel {
 }
 
 /**
+ * 请求头部及请求url访问控制
+ * @class
+ */
+class AccessControl extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * on | off 是否启用请求头部及请求url访问控制
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 请求头部及请求url访问规则
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<AccessControlRule> || null}
+         */
+        this.AccessControlRules = null;
+
+        /**
+         * 返回状态码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ReturnCode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.AccessControlRules) {
+            this.AccessControlRules = new Array();
+            for (let z in params.AccessControlRules) {
+                let obj = new AccessControlRule();
+                obj.deserialize(params.AccessControlRules[z]);
+                this.AccessControlRules.push(obj);
+            }
+        }
+        this.ReturnCode = 'ReturnCode' in params ? params.ReturnCode : null;
+
+    }
+}
+
+/**
  * DeleteCdnDomain请求参数结构体
  * @class
  */
@@ -2329,6 +2381,50 @@ class DeleteClsLogTopicRequest extends  AbstractModel {
         this.TopicId = 'TopicId' in params ? params.TopicId : null;
         this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
         this.Channel = 'Channel' in params ? params.Channel : null;
+
+    }
+}
+
+/**
+ * DescribeDistrictIspData返回参数结构体
+ * @class
+ */
+class DescribeDistrictIspDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 地区运营商数据明细
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DistrictIspInfo> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new DistrictIspInfo();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5133,6 +5229,111 @@ class DisableCachesRequest extends  AbstractModel {
             return;
         }
         this.Urls = 'Urls' in params ? params.Urls : null;
+
+    }
+}
+
+/**
+ * 地区运营商明细数据
+ * @class
+ */
+class DistrictIspInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 协议类型
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * IP协议类型
+         * @type {string || null}
+         */
+        this.IpProtocol = null;
+
+        /**
+         * 起始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 时间间隔，单位为分钟
+         * @type {number || null}
+         */
+        this.Interval = null;
+
+        /**
+         * 指标名称
+         * @type {string || null}
+         */
+        this.Metric = null;
+
+        /**
+         * 地区ID
+         * @type {number || null}
+         */
+        this.District = null;
+
+        /**
+         * 运营商ID
+         * @type {number || null}
+         */
+        this.Isp = null;
+
+        /**
+         * 指标数据点
+         * @type {Array.<number> || null}
+         */
+        this.DataPoints = null;
+
+        /**
+         * 地区名称
+         * @type {string || null}
+         */
+        this.DistrictName = null;
+
+        /**
+         * 运营商名称
+         * @type {string || null}
+         */
+        this.IspName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.IpProtocol = 'IpProtocol' in params ? params.IpProtocol : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Interval = 'Interval' in params ? params.Interval : null;
+        this.Metric = 'Metric' in params ? params.Metric : null;
+        this.District = 'District' in params ? params.District : null;
+        this.Isp = 'Isp' in params ? params.Isp : null;
+        this.DataPoints = 'DataPoints' in params ? params.DataPoints : null;
+        this.DistrictName = 'DistrictName' in params ? params.DistrictName : null;
+        this.IspName = 'IspName' in params ? params.IspName : null;
 
     }
 }
@@ -8062,32 +8263,73 @@ class DescribeIpStatusResponse extends  AbstractModel {
 }
 
 /**
- * 请求头部及请求url访问控制
+ * DescribeDistrictIspData请求参数结构体
  * @class
  */
-class AccessControl extends  AbstractModel {
+class DescribeDistrictIspDataRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * on | off 是否启用请求头部及请求url访问控制
+         * 域名列表，最多支持20个域名
+         * @type {Array.<string> || null}
+         */
+        this.Domains = null;
+
+        /**
+         * 查询起始时间，如：2018-09-04 10:40:00，返回结果大于等于指定时间
+支持近 60 天内的数据查询，每次查询时间区间为 3 小时
          * @type {string || null}
          */
-        this.Switch = null;
+        this.StartTime = null;
 
         /**
-         * 请求头部及请求url访问规则
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<AccessControlRule> || null}
+         * 查询结束时间，如：2018-09-04 10:40:00，返回结果小于等于指定时间
+结束时间与起始时间区间最大为 3 小时
+         * @type {string || null}
          */
-        this.AccessControlRules = null;
+        this.EndTime = null;
 
         /**
-         * 返回状态码
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
+         * 指定查询指标，支持:
+bandwidth：带宽，单位为 bps
+request：请求数，单位为 次
+         * @type {string || null}
          */
-        this.ReturnCode = null;
+        this.Metric = null;
+
+        /**
+         * 指定省份查询，不填充表示查询所有省份
+省份、国家/地区编码可以查看 [省份编码映射](https://cloud.tencent.com/document/product/228/6316#.E5.8C.BA.E5.9F.9F-.2F-.E8.BF.90.E8.90.A5.E5.95.86.E6.98.A0.E5.B0.84.E8.A1.A8)
+         * @type {Array.<number> || null}
+         */
+        this.Districts = null;
+
+        /**
+         * 指定运营商查询，不填充表示查询所有运营商
+运营商编码可以查看 [运营商编码映射](https://cloud.tencent.com/document/product/228/6316#.E5.8C.BA.E5.9F.9F-.2F-.E8.BF.90.E8.90.A5.E5.95.86.E6.98.A0.E5.B0.84.E8.A1.A8)
+         * @type {Array.<number> || null}
+         */
+        this.Isps = null;
+
+        /**
+         * 指定协议查询，不填充表示查询所有协议
+all：所有协议
+http：指定查询 HTTP 对应指标
+https：指定查询 HTTPS 对应指标
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * 指定IP协议查询，不填充表示查询所有协议
+all：所有协议
+ipv4：指定查询 ipv4 对应指标
+ipv6：指定查询 ipv6 对应指标
+指定IP协议查询时，不可同时指定省份、运营商查询
+         * @type {string || null}
+         */
+        this.IpProtocol = null;
 
     }
 
@@ -8098,17 +8340,14 @@ class AccessControl extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-
-        if (params.AccessControlRules) {
-            this.AccessControlRules = new Array();
-            for (let z in params.AccessControlRules) {
-                let obj = new AccessControlRule();
-                obj.deserialize(params.AccessControlRules[z]);
-                this.AccessControlRules.push(obj);
-            }
-        }
-        this.ReturnCode = 'ReturnCode' in params ? params.ReturnCode : null;
+        this.Domains = 'Domains' in params ? params.Domains : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Metric = 'Metric' in params ? params.Metric : null;
+        this.Districts = 'Districts' in params ? params.Districts : null;
+        this.Isps = 'Isps' in params ? params.Isps : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.IpProtocol = 'IpProtocol' in params ? params.IpProtocol : null;
 
     }
 }
@@ -10842,6 +11081,7 @@ module.exports = {
     AdvanceCacheRule: AdvanceCacheRule,
     EnableClsLogTopicRequest: EnableClsLogTopicRequest,
     UpdateImageConfigResponse: UpdateImageConfigResponse,
+    AccessControl: AccessControl,
     DeleteCdnDomainRequest: DeleteCdnDomainRequest,
     DescribePayTypeResponse: DescribePayTypeResponse,
     ListTopDataRequest: ListTopDataRequest,
@@ -10859,6 +11099,7 @@ module.exports = {
     DescribeBillingDataRequest: DescribeBillingDataRequest,
     SimpleCache: SimpleCache,
     DeleteClsLogTopicRequest: DeleteClsLogTopicRequest,
+    DescribeDistrictIspDataResponse: DescribeDistrictIspDataResponse,
     UpdatePayTypeResponse: UpdatePayTypeResponse,
     TopicInfo: TopicInfo,
     DescribeDomainsConfigResponse: DescribeDomainsConfigResponse,
@@ -10902,6 +11143,7 @@ module.exports = {
     AccessControlRule: AccessControlRule,
     HttpHeaderPathRule: HttpHeaderPathRule,
     DisableCachesRequest: DisableCachesRequest,
+    DistrictIspInfo: DistrictIspInfo,
     SimpleCacheRule: SimpleCacheRule,
     DisableClsLogTopicResponse: DisableClsLogTopicResponse,
     Hsts: Hsts,
@@ -10946,7 +11188,7 @@ module.exports = {
     DescribeCdnIpResponse: DescribeCdnIpResponse,
     DescribeCdnDataResponse: DescribeCdnDataResponse,
     DescribeIpStatusResponse: DescribeIpStatusResponse,
-    AccessControl: AccessControl,
+    DescribeDistrictIspDataRequest: DescribeDistrictIspDataRequest,
     CacheKey: CacheKey,
     CookieKey: CookieKey,
     CappingRule: CappingRule,

@@ -41,6 +41,7 @@ const UserAgentFilter = models.UserAgentFilter;
 const AdvanceCacheRule = models.AdvanceCacheRule;
 const EnableClsLogTopicRequest = models.EnableClsLogTopicRequest;
 const UpdateImageConfigResponse = models.UpdateImageConfigResponse;
+const AccessControl = models.AccessControl;
 const DeleteCdnDomainRequest = models.DeleteCdnDomainRequest;
 const DescribePayTypeResponse = models.DescribePayTypeResponse;
 const ListTopDataRequest = models.ListTopDataRequest;
@@ -58,6 +59,7 @@ const HeaderKey = models.HeaderKey;
 const DescribeBillingDataRequest = models.DescribeBillingDataRequest;
 const SimpleCache = models.SimpleCache;
 const DeleteClsLogTopicRequest = models.DeleteClsLogTopicRequest;
+const DescribeDistrictIspDataResponse = models.DescribeDistrictIspDataResponse;
 const UpdatePayTypeResponse = models.UpdatePayTypeResponse;
 const TopicInfo = models.TopicInfo;
 const DescribeDomainsConfigResponse = models.DescribeDomainsConfigResponse;
@@ -101,6 +103,7 @@ const ServerCert = models.ServerCert;
 const AccessControlRule = models.AccessControlRule;
 const HttpHeaderPathRule = models.HttpHeaderPathRule;
 const DisableCachesRequest = models.DisableCachesRequest;
+const DistrictIspInfo = models.DistrictIspInfo;
 const SimpleCacheRule = models.SimpleCacheRule;
 const DisableClsLogTopicResponse = models.DisableClsLogTopicResponse;
 const Hsts = models.Hsts;
@@ -145,7 +148,7 @@ const DescribeImageConfigRequest = models.DescribeImageConfigRequest;
 const DescribeCdnIpResponse = models.DescribeCdnIpResponse;
 const DescribeCdnDataResponse = models.DescribeCdnDataResponse;
 const DescribeIpStatusResponse = models.DescribeIpStatusResponse;
-const AccessControl = models.AccessControl;
+const DescribeDistrictIspDataRequest = models.DescribeDistrictIspDataRequest;
 const CacheKey = models.CacheKey;
 const CookieKey = models.CookieKey;
 const CappingRule = models.CappingRule;
@@ -684,6 +687,18 @@ class CdnClient extends AbstractClient {
     DescribeReportData(req, cb) {
         let resp = new DescribeReportDataResponse();
         this.request("DescribeReportData", req, resp, cb);
+    }
+
+    /**
+     * 查询指定域名的区域、运营商明细数据
+注意事项：接口尚未全量开放，未在内测名单中的账号不支持调用
+     * @param {DescribeDistrictIspDataRequest} req
+     * @param {function(string, DescribeDistrictIspDataResponse):void} cb
+     * @public
+     */
+    DescribeDistrictIspData(req, cb) {
+        let resp = new DescribeDistrictIspDataResponse();
+        this.request("DescribeDistrictIspData", req, resp, cb);
     }
 
     /**

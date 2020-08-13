@@ -3833,6 +3833,12 @@ class Deal extends  AbstractModel {
          */
         this.RefReturnDeals = null;
 
+        /**
+         * 付费模式：prePay 预付费 postPay后付费 riPay预留实例
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
     }
 
     /**
@@ -3871,6 +3877,7 @@ class Deal extends  AbstractModel {
         this.BigDealId = 'BigDealId' in params ? params.BigDealId : null;
         this.Formula = 'Formula' in params ? params.Formula : null;
         this.RefReturnDeals = 'RefReturnDeals' in params ? params.RefReturnDeals : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
 
     }
 }

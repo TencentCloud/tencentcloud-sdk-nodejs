@@ -2559,6 +2559,20 @@ class Listener extends  AbstractModel {
          */
         this.TargetGroup = null;
 
+        /**
+         * 会话保持类型。NORMAL表示默认会话保持类型。QUIC_CID 表示根据Quic Connection ID做会话保持。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SessionType = null;
+
+        /**
+         * 是否开启长连接（本参数仅对于HTTP/HTTPS监听器有意义）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.KeepaliveEnable = null;
+
     }
 
     /**
@@ -2605,6 +2619,8 @@ class Listener extends  AbstractModel {
             obj.deserialize(params.TargetGroup)
             this.TargetGroup = obj;
         }
+        this.SessionType = 'SessionType' in params ? params.SessionType : null;
+        this.KeepaliveEnable = 'KeepaliveEnable' in params ? params.KeepaliveEnable : null;
 
     }
 }
@@ -5137,6 +5153,12 @@ class CreateListenerRequest extends  AbstractModel {
          */
         this.TargetType = null;
 
+        /**
+         * 会话保持类型。不传或传NORMAL表示默认会话保持类型。QUIC_CID 表示根据Quic Connection ID做会话保持。QUIC_CID只支持UDP协议。
+         * @type {string || null}
+         */
+        this.SessionType = null;
+
     }
 
     /**
@@ -5166,6 +5188,7 @@ class CreateListenerRequest extends  AbstractModel {
         this.Scheduler = 'Scheduler' in params ? params.Scheduler : null;
         this.SniSwitch = 'SniSwitch' in params ? params.SniSwitch : null;
         this.TargetType = 'TargetType' in params ? params.TargetType : null;
+        this.SessionType = 'SessionType' in params ? params.SessionType : null;
 
     }
 }
