@@ -1406,7 +1406,7 @@ class CreatePostpayPackageRequest extends  AbstractModel {
         super();
 
         /**
-         * 环境ID
+         * 环境ID，需要系统自动创建环境时，此字段不传
          * @type {string || null}
          */
         this.EnvId = null;
@@ -1432,12 +1432,6 @@ class CreatePostpayPackageRequest extends  AbstractModel {
         this.FreeQuota = null;
 
         /**
-         * 环境别名，要以a-z开头，不能包含 a-zA-z0-9- 以外的字符
-         * @type {string || null}
-         */
-        this.Alias = null;
-
-        /**
          * 环境创建来源，取值：
 <li>miniapp</li>
 <li>qcloud</li>
@@ -1448,8 +1442,14 @@ class CreatePostpayPackageRequest extends  AbstractModel {
         this.EnvSource = null;
 
         /**
+         * 环境别名，要以a-z开头，不能包含 a-zA-z0-9- 以外的字符
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
          * 如果envsource为miniapp, channel可以为ide或api;
-如果envsource为qcloud, channel可以为qc_console,cocos, qq, cloudgame,dcloud
+如果envsource为qcloud, channel可以为qc_console,cocos, qq, cloudgame,dcloud,serverless_framework
 和 EnvSource 参数同时传，或者同时不传；EnvId 为空时必传。
          * @type {string || null}
          */
@@ -1474,8 +1474,8 @@ class CreatePostpayPackageRequest extends  AbstractModel {
         this.WxAppId = 'WxAppId' in params ? params.WxAppId : null;
         this.Source = 'Source' in params ? params.Source : null;
         this.FreeQuota = 'FreeQuota' in params ? params.FreeQuota : null;
-        this.Alias = 'Alias' in params ? params.Alias : null;
         this.EnvSource = 'EnvSource' in params ? params.EnvSource : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
         this.Channel = 'Channel' in params ? params.Channel : null;
         this.ExtensionId = 'ExtensionId' in params ? params.ExtensionId : null;
 

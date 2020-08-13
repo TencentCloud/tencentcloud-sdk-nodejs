@@ -17,6 +17,79 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * 眼睛信息
+ * @class
+ */
+class Eye extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 识别是否佩戴眼镜。
+AttributeItem对应的Type为 —— 0：无眼镜，1：普通眼镜，2：墨镜
+         * @type {AttributeItem || null}
+         */
+        this.Glass = null;
+
+        /**
+         * 识别眼睛的睁开、闭合状态。
+AttributeItem对应的Type为 —— 0：睁开，1：闭眼
+         * @type {AttributeItem || null}
+         */
+        this.EyeOpen = null;
+
+        /**
+         * 识别是否双眼皮。
+AttributeItem对应的Type为 —— 0：无，1：有。
+         * @type {AttributeItem || null}
+         */
+        this.EyelidType = null;
+
+        /**
+         * 眼睛大小。
+AttributeItem对应的Type为 —— 0：小眼睛，1：普通眼睛，2：大眼睛。
+         * @type {AttributeItem || null}
+         */
+        this.EyeSize = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Glass) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.Glass)
+            this.Glass = obj;
+        }
+
+        if (params.EyeOpen) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.EyeOpen)
+            this.EyeOpen = obj;
+        }
+
+        if (params.EyelidType) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.EyelidType)
+            this.EyelidType = obj;
+        }
+
+        if (params.EyeSize) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.EyeSize)
+            this.EyeSize = obj;
+        }
+
+    }
+}
+
+/**
  * 识别出的最相似候选人
  * @class
  */
@@ -97,31 +170,33 @@ class Candidate extends  AbstractModel {
 }
 
 /**
- * VerifyFace返回参数结构体
+ * DetectFaceAttributes返回参数结构体
  * @class
  */
-class VerifyFaceResponse extends  AbstractModel {
+class DetectFaceAttributesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 给定的人脸图片与 PersonId 对应人脸的相似度。若 PersonId 下有多张人脸（Face），返回相似度最大的分数。
-
-不同算法版本返回的相似度分数不同。
-若需要验证两张图片中人脸是否为同一人，3.0版本误识率千分之一对应分数为40分，误识率万分之一对应分数为50分，误识率十万分之一对应分数为60分。 一般超过50分则可认定为同一人。
-2.0版本误识率千分之一对应分数为70分，误识率万分之一对应分数为80分，误识率十万分之一对应分数为90分。 一般超过80分则可认定为同一人。
+         * 请求的图片宽度。
          * @type {number || null}
          */
-        this.Score = null;
+        this.ImageWidth = null;
 
         /**
-         * 是否为同一人的判断。
-         * @type {boolean || null}
+         * 请求的图片高度。
+         * @type {number || null}
          */
-        this.IsMatch = null;
+        this.ImageHeight = null;
 
         /**
-         * 人脸识别所用的算法模型版本，是该 Person 所在的人员库的算法模型版本。在创建人员库时设置，详情可参考[算法模型版本](https://cloud.tencent.com/document/product/867/40042)
+         * 人脸信息列表。
+         * @type {Array.<FaceDetailInfo> || null}
+         */
+        this.FaceDetailInfos = null;
+
+        /**
+         * 人脸识别所用的算法模型版本。
          * @type {string || null}
          */
         this.FaceModelVersion = null;
@@ -141,8 +216,17 @@ class VerifyFaceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Score = 'Score' in params ? params.Score : null;
-        this.IsMatch = 'IsMatch' in params ? params.IsMatch : null;
+        this.ImageWidth = 'ImageWidth' in params ? params.ImageWidth : null;
+        this.ImageHeight = 'ImageHeight' in params ? params.ImageHeight : null;
+
+        if (params.FaceDetailInfos) {
+            this.FaceDetailInfos = new Array();
+            for (let z in params.FaceDetailInfos) {
+                let obj = new FaceDetailInfo();
+                obj.deserialize(params.FaceDetailInfos[z]);
+                this.FaceDetailInfos.push(obj);
+            }
+        }
         this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -202,6 +286,53 @@ class SearchPersonsReturnsByGroupResponse extends  AbstractModel {
         }
         this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 帽子信息
+ * @class
+ */
+class Hat extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 帽子佩戴状态信息。
+AttributeItem对应的Type为 —— 0：不戴帽子，1：普通帽子，2：头盔，3：保安帽。
+         * @type {AttributeItem || null}
+         */
+        this.Style = null;
+
+        /**
+         * 帽子颜色。
+AttributeItem对应的Type为 —— 0：不戴帽子，1：红色系，2：黄色系，3：蓝色系，4：黑色系，5：灰白色系，6：混色系子。
+         * @type {AttributeItem || null}
+         */
+        this.Color = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Style) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.Style)
+            this.Style = obj;
+        }
+
+        if (params.Color) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.Color)
+            this.Color = obj;
+        }
 
     }
 }
@@ -762,66 +893,51 @@ class CheckSimilarPersonRequest extends  AbstractModel {
 }
 
 /**
- * 五官定位（人脸关键点）具体信息。
+ * AnalyzeDenseLandmarks请求参数结构体
  * @class
  */
-class FaceShape extends  AbstractModel {
+class AnalyzeDenseLandmarksRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 描述脸型轮廓的 21 点。
-         * @type {Array.<Point> || null}
+         * 检测模式。0 为检测所有出现的人脸， 1 为检测面积最大的人脸。 
+默认为 0。 
+最多返回 5 张人脸的五官定位（人脸关键点）具体信息。
+         * @type {number || null}
          */
-        this.FaceProfile = null;
+        this.Mode = null;
 
         /**
-         * 描述左侧眼睛轮廓的 8 点。
-         * @type {Array.<Point> || null}
+         * 图片 base64 数据，base64 编码后大小不可超过5M。  
+jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+         * @type {string || null}
          */
-        this.LeftEye = null;
+        this.Image = null;
 
         /**
-         * 描述右侧眼睛轮廓的 8 点。
-         * @type {Array.<Point> || null}
+         * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。  
+jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
+Url、Image必须提供一个，如果都提供，只使用 Url。  
+图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。  
+非腾讯云存储的Url速度和稳定性可能受一定影响。  
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+         * @type {string || null}
          */
-        this.RightEye = null;
+        this.Url = null;
 
         /**
-         * 描述左侧眉毛轮廓的 8 点。
-         * @type {Array.<Point> || null}
+         * 人脸识别服务所用的算法模型版本。本接口仅支持 “3.0“ 输入。
+         * @type {string || null}
          */
-        this.LeftEyeBrow = null;
+        this.FaceModelVersion = null;
 
         /**
-         * 描述右侧眉毛轮廓的 8 点。
-         * @type {Array.<Point> || null}
+         * 是否开启图片旋转识别支持。0为不开启，1为开启。默认为0。本参数的作用为，当图片中的人脸被旋转且图片没有exif信息时，如果不开启图片旋转识别支持则无法正确检测、识别图片中的人脸。若您确认图片包含exif信息或者您确认输入图中人脸不会出现被旋转情况，请不要开启本参数。开启后，整体耗时将可能增加数百毫秒。
+         * @type {number || null}
          */
-        this.RightEyeBrow = null;
-
-        /**
-         * 描述嘴巴轮廓的 22 点。
-         * @type {Array.<Point> || null}
-         */
-        this.Mouth = null;
-
-        /**
-         * 描述鼻子轮廓的 13 点。
-         * @type {Array.<Point> || null}
-         */
-        this.Nose = null;
-
-        /**
-         * 左瞳孔轮廓的 1 个点。
-         * @type {Array.<Point> || null}
-         */
-        this.LeftPupil = null;
-
-        /**
-         * 右瞳孔轮廓的 1 个点。
-         * @type {Array.<Point> || null}
-         */
-        this.RightPupil = null;
+        this.NeedRotateDetection = null;
 
     }
 
@@ -832,87 +948,11 @@ class FaceShape extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.FaceProfile) {
-            this.FaceProfile = new Array();
-            for (let z in params.FaceProfile) {
-                let obj = new Point();
-                obj.deserialize(params.FaceProfile[z]);
-                this.FaceProfile.push(obj);
-            }
-        }
-
-        if (params.LeftEye) {
-            this.LeftEye = new Array();
-            for (let z in params.LeftEye) {
-                let obj = new Point();
-                obj.deserialize(params.LeftEye[z]);
-                this.LeftEye.push(obj);
-            }
-        }
-
-        if (params.RightEye) {
-            this.RightEye = new Array();
-            for (let z in params.RightEye) {
-                let obj = new Point();
-                obj.deserialize(params.RightEye[z]);
-                this.RightEye.push(obj);
-            }
-        }
-
-        if (params.LeftEyeBrow) {
-            this.LeftEyeBrow = new Array();
-            for (let z in params.LeftEyeBrow) {
-                let obj = new Point();
-                obj.deserialize(params.LeftEyeBrow[z]);
-                this.LeftEyeBrow.push(obj);
-            }
-        }
-
-        if (params.RightEyeBrow) {
-            this.RightEyeBrow = new Array();
-            for (let z in params.RightEyeBrow) {
-                let obj = new Point();
-                obj.deserialize(params.RightEyeBrow[z]);
-                this.RightEyeBrow.push(obj);
-            }
-        }
-
-        if (params.Mouth) {
-            this.Mouth = new Array();
-            for (let z in params.Mouth) {
-                let obj = new Point();
-                obj.deserialize(params.Mouth[z]);
-                this.Mouth.push(obj);
-            }
-        }
-
-        if (params.Nose) {
-            this.Nose = new Array();
-            for (let z in params.Nose) {
-                let obj = new Point();
-                obj.deserialize(params.Nose[z]);
-                this.Nose.push(obj);
-            }
-        }
-
-        if (params.LeftPupil) {
-            this.LeftPupil = new Array();
-            for (let z in params.LeftPupil) {
-                let obj = new Point();
-                obj.deserialize(params.LeftPupil[z]);
-                this.LeftPupil.push(obj);
-            }
-        }
-
-        if (params.RightPupil) {
-            this.RightPupil = new Array();
-            for (let z in params.RightPupil) {
-                let obj = new Point();
-                obj.deserialize(params.RightPupil[z]);
-                this.RightPupil.push(obj);
-            }
-        }
+        this.Mode = 'Mode' in params ? params.Mode : null;
+        this.Image = 'Image' in params ? params.Image : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
+        this.NeedRotateDetection = 'NeedRotateDetection' in params ? params.NeedRotateDetection : null;
 
     }
 }
@@ -1653,60 +1693,18 @@ class EstimateCheckSimilarPersonCostTimeRequest extends  AbstractModel {
 }
 
 /**
- * 五官遮挡分，评价眉毛（Eyebrow）、眼睛（Eye）、鼻子（Nose）、脸颊（Cheek）、嘴巴（Mouth）、下巴（Chin）的被遮挡程度。
+ * RevertGroupFaceModelVersion返回参数结构体
  * @class
  */
-class FaceQualityCompleteness extends  AbstractModel {
+class RevertGroupFaceModelVersionResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 眉毛的遮挡分数[0,100]，分数越高遮挡越少。 
-参考范围：[0,80]表示发生遮挡。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.Eyebrow = null;
-
-        /**
-         * 眼睛的遮挡分数[0,100],分数越高遮挡越少。 
-参考范围：[0,80]表示发生遮挡。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Eye = null;
-
-        /**
-         * 鼻子的遮挡分数[0,100],分数越高遮挡越少。 
-参考范围：[0,60]表示发生遮挡。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Nose = null;
-
-        /**
-         * 脸颊的遮挡分数[0,100],分数越高遮挡越少。 
-参考范围：[0,70]表示发生遮挡。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Cheek = null;
-
-        /**
-         * 嘴巴的遮挡分数[0,100],分数越高遮挡越少。 
-参考范围：[0,50]表示发生遮挡。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Mouth = null;
-
-        /**
-         * 下巴的遮挡分数[0,100],分数越高遮挡越少。 
-参考范围：[0,70]表示发生遮挡。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Chin = null;
+        this.RequestId = null;
 
     }
 
@@ -1717,12 +1715,42 @@ class FaceQualityCompleteness extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Eyebrow = 'Eyebrow' in params ? params.Eyebrow : null;
-        this.Eye = 'Eye' in params ? params.Eye : null;
-        this.Nose = 'Nose' in params ? params.Nose : null;
-        this.Cheek = 'Cheek' in params ? params.Cheek : null;
-        this.Mouth = 'Mouth' in params ? params.Mouth : null;
-        this.Chin = 'Chin' in params ? params.Chin : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpgradeGroupFaceModelVersion请求参数结构体
+ * @class
+ */
+class UpgradeGroupFaceModelVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要升级的人员库ID。
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 需要升级至的算法模型版本。默认为最新版本。
+         * @type {string || null}
+         */
+        this.FaceModelVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
 
     }
 }
@@ -2354,6 +2382,265 @@ class GetCheckSimilarPersonJobIdListResponse extends  AbstractModel {
 }
 
 /**
+ * 稠密关键点详细信息
+ * @class
+ */
+class DenseFaceShape extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 人脸框左上角横坐标。
+         * @type {number || null}
+         */
+        this.X = null;
+
+        /**
+         * 人脸框左上角纵坐标。
+         * @type {number || null}
+         */
+        this.Y = null;
+
+        /**
+         * 人脸框宽度。
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 人脸框高度。
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * 描述左侧眼睛轮廓的 XX 点。
+         * @type {Array.<Point> || null}
+         */
+        this.LeftEye = null;
+
+        /**
+         * 描述右侧眼睛轮廓的 XX 点。
+         * @type {Array.<Point> || null}
+         */
+        this.RightEye = null;
+
+        /**
+         * 描述左侧眉毛轮廓的 XX 点。
+         * @type {Array.<Point> || null}
+         */
+        this.LeftEyeBrow = null;
+
+        /**
+         * 描述右侧眉毛轮廓的 XX 点。
+         * @type {Array.<Point> || null}
+         */
+        this.RightEyeBrow = null;
+
+        /**
+         * 描述外嘴巴轮廓的 XX 点， 从左侧开始逆时针返回。
+         * @type {Array.<Point> || null}
+         */
+        this.MouthOutside = null;
+
+        /**
+         * 描述内嘴巴轮廓的 XX 点，从左侧开始逆时针返回。
+         * @type {Array.<Point> || null}
+         */
+        this.MouthInside = null;
+
+        /**
+         * 描述鼻子轮廓的 XX 点。
+         * @type {Array.<Point> || null}
+         */
+        this.Nose = null;
+
+        /**
+         * 左瞳孔轮廓的 XX 个点。
+         * @type {Array.<Point> || null}
+         */
+        this.LeftPupil = null;
+
+        /**
+         * 右瞳孔轮廓的 XX 个点。
+         * @type {Array.<Point> || null}
+         */
+        this.RightPupil = null;
+
+        /**
+         * 中轴线轮廓的 XX 个点。
+         * @type {Array.<Point> || null}
+         */
+        this.CentralAxis = null;
+
+        /**
+         * 下轮廓的 XX 个点。
+         * @type {Array.<Point> || null}
+         */
+        this.Chin = null;
+
+        /**
+         * 左眼袋的 XX 个点。
+         * @type {Array.<Point> || null}
+         */
+        this.LeftEyeBags = null;
+
+        /**
+         * 右眼袋的 XX 个点。
+         * @type {Array.<Point> || null}
+         */
+        this.RightEyeBags = null;
+
+        /**
+         * 额头的 XX 个点。
+         * @type {Array.<Point> || null}
+         */
+        this.Forehead = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.X = 'X' in params ? params.X : null;
+        this.Y = 'Y' in params ? params.Y : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+
+        if (params.LeftEye) {
+            this.LeftEye = new Array();
+            for (let z in params.LeftEye) {
+                let obj = new Point();
+                obj.deserialize(params.LeftEye[z]);
+                this.LeftEye.push(obj);
+            }
+        }
+
+        if (params.RightEye) {
+            this.RightEye = new Array();
+            for (let z in params.RightEye) {
+                let obj = new Point();
+                obj.deserialize(params.RightEye[z]);
+                this.RightEye.push(obj);
+            }
+        }
+
+        if (params.LeftEyeBrow) {
+            this.LeftEyeBrow = new Array();
+            for (let z in params.LeftEyeBrow) {
+                let obj = new Point();
+                obj.deserialize(params.LeftEyeBrow[z]);
+                this.LeftEyeBrow.push(obj);
+            }
+        }
+
+        if (params.RightEyeBrow) {
+            this.RightEyeBrow = new Array();
+            for (let z in params.RightEyeBrow) {
+                let obj = new Point();
+                obj.deserialize(params.RightEyeBrow[z]);
+                this.RightEyeBrow.push(obj);
+            }
+        }
+
+        if (params.MouthOutside) {
+            this.MouthOutside = new Array();
+            for (let z in params.MouthOutside) {
+                let obj = new Point();
+                obj.deserialize(params.MouthOutside[z]);
+                this.MouthOutside.push(obj);
+            }
+        }
+
+        if (params.MouthInside) {
+            this.MouthInside = new Array();
+            for (let z in params.MouthInside) {
+                let obj = new Point();
+                obj.deserialize(params.MouthInside[z]);
+                this.MouthInside.push(obj);
+            }
+        }
+
+        if (params.Nose) {
+            this.Nose = new Array();
+            for (let z in params.Nose) {
+                let obj = new Point();
+                obj.deserialize(params.Nose[z]);
+                this.Nose.push(obj);
+            }
+        }
+
+        if (params.LeftPupil) {
+            this.LeftPupil = new Array();
+            for (let z in params.LeftPupil) {
+                let obj = new Point();
+                obj.deserialize(params.LeftPupil[z]);
+                this.LeftPupil.push(obj);
+            }
+        }
+
+        if (params.RightPupil) {
+            this.RightPupil = new Array();
+            for (let z in params.RightPupil) {
+                let obj = new Point();
+                obj.deserialize(params.RightPupil[z]);
+                this.RightPupil.push(obj);
+            }
+        }
+
+        if (params.CentralAxis) {
+            this.CentralAxis = new Array();
+            for (let z in params.CentralAxis) {
+                let obj = new Point();
+                obj.deserialize(params.CentralAxis[z]);
+                this.CentralAxis.push(obj);
+            }
+        }
+
+        if (params.Chin) {
+            this.Chin = new Array();
+            for (let z in params.Chin) {
+                let obj = new Point();
+                obj.deserialize(params.Chin[z]);
+                this.Chin.push(obj);
+            }
+        }
+
+        if (params.LeftEyeBags) {
+            this.LeftEyeBags = new Array();
+            for (let z in params.LeftEyeBags) {
+                let obj = new Point();
+                obj.deserialize(params.LeftEyeBags[z]);
+                this.LeftEyeBags.push(obj);
+            }
+        }
+
+        if (params.RightEyeBags) {
+            this.RightEyeBags = new Array();
+            for (let z in params.RightEyeBags) {
+                let obj = new Point();
+                obj.deserialize(params.RightEyeBags[z]);
+                this.RightEyeBags.push(obj);
+            }
+        }
+
+        if (params.Forehead) {
+            this.Forehead = new Array();
+            for (let z in params.Forehead) {
+                let obj = new Point();
+                obj.deserialize(params.Forehead[z]);
+                this.Forehead.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * 识别结果。
 
  * @class
@@ -2662,6 +2949,66 @@ class GetPersonListResponse extends  AbstractModel {
 }
 
 /**
+ * 头发信息
+ * @class
+ */
+class Hair extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 头发长度信息。
+AttributeItem对应的Type为 —— 0：光头，1：短发，2：中发，3：长发，4：绑发。
+         * @type {AttributeItem || null}
+         */
+        this.Length = null;
+
+        /**
+         * 刘海信息。
+AttributeItem对应的Type为 —— 0：无刘海，1：有刘海。
+         * @type {AttributeItem || null}
+         */
+        this.Bang = null;
+
+        /**
+         * 头发颜色信息。
+AttributeItem对应的Type为 —— 0：黑色，1：金色，2：棕色，3：灰白色。
+         * @type {AttributeItem || null}
+         */
+        this.Color = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Length) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.Length)
+            this.Length = obj;
+        }
+
+        if (params.Bang) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.Bang)
+            this.Bang = obj;
+        }
+
+        if (params.Color) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.Color)
+            this.Color = obj;
+        }
+
+    }
+}
+
+/**
  * GetPersonListNum请求参数结构体
  * @class
  */
@@ -2950,6 +3297,70 @@ MaxFaceNum用于，当输入的待识别图片包含多张人脸时，设定要�
 }
 
 /**
+ * AnalyzeDenseLandmarks返回参数结构体
+ * @class
+ */
+class AnalyzeDenseLandmarksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 请求的图片宽度。
+         * @type {number || null}
+         */
+        this.ImageWidth = null;
+
+        /**
+         * 请求的图片高度。
+         * @type {number || null}
+         */
+        this.ImageHeight = null;
+
+        /**
+         * 稠密人脸关键点具体信息。
+         * @type {Array.<DenseFaceShape> || null}
+         */
+        this.DenseFaceShapeSet = null;
+
+        /**
+         * 人脸识别服务所用的算法模型版本。本接口仅支持 “3.0“ 输入。
+         * @type {string || null}
+         */
+        this.FaceModelVersion = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageWidth = 'ImageWidth' in params ? params.ImageWidth : null;
+        this.ImageHeight = 'ImageHeight' in params ? params.ImageHeight : null;
+
+        if (params.DenseFaceShapeSet) {
+            this.DenseFaceShapeSet = new Array();
+            for (let z in params.DenseFaceShapeSet) {
+                let obj = new DenseFaceShape();
+                obj.deserialize(params.DenseFaceShapeSet[z]);
+                this.DenseFaceShapeSet.push(obj);
+            }
+        }
+        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyPersonBaseInfo返回参数结构体
  * @class
  */
@@ -3099,24 +3510,60 @@ class RevertGroupFaceModelVersionRequest extends  AbstractModel {
 }
 
 /**
- * UpgradeGroupFaceModelVersion请求参数结构体
+ * 五官遮挡分，评价眉毛（Eyebrow）、眼睛（Eye）、鼻子（Nose）、脸颊（Cheek）、嘴巴（Mouth）、下巴（Chin）的被遮挡程度。
  * @class
  */
-class UpgradeGroupFaceModelVersionRequest extends  AbstractModel {
+class FaceQualityCompleteness extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 需要升级的人员库ID。
-         * @type {string || null}
+         * 眉毛的遮挡分数[0,100]，分数越高遮挡越少。 
+参考范围：[0,80]表示发生遮挡。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
          */
-        this.GroupId = null;
+        this.Eyebrow = null;
 
         /**
-         * 需要升级至的算法模型版本。默认为最新版本。
-         * @type {string || null}
+         * 眼睛的遮挡分数[0,100],分数越高遮挡越少。 
+参考范围：[0,80]表示发生遮挡。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
          */
-        this.FaceModelVersion = null;
+        this.Eye = null;
+
+        /**
+         * 鼻子的遮挡分数[0,100],分数越高遮挡越少。 
+参考范围：[0,60]表示发生遮挡。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Nose = null;
+
+        /**
+         * 脸颊的遮挡分数[0,100],分数越高遮挡越少。 
+参考范围：[0,70]表示发生遮挡。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Cheek = null;
+
+        /**
+         * 嘴巴的遮挡分数[0,100],分数越高遮挡越少。 
+参考范围：[0,50]表示发生遮挡。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Mouth = null;
+
+        /**
+         * 下巴的遮挡分数[0,100],分数越高遮挡越少。 
+参考范围：[0,70]表示发生遮挡。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Chin = null;
 
     }
 
@@ -3127,8 +3574,12 @@ class UpgradeGroupFaceModelVersionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
-        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
+        this.Eyebrow = 'Eyebrow' in params ? params.Eyebrow : null;
+        this.Eye = 'Eye' in params ? params.Eye : null;
+        this.Nose = 'Nose' in params ? params.Nose : null;
+        this.Cheek = 'Cheek' in params ? params.Cheek : null;
+        this.Mouth = 'Mouth' in params ? params.Mouth : null;
+        this.Chin = 'Chin' in params ? params.Chin : null;
 
     }
 }
@@ -3406,6 +3857,55 @@ Unix 纪元时间是 1970 年 1 月 1 日星期四，协调世界时 (UTC) 00:00
         this.JobId = 'JobId' in params ? params.JobId : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.JobStatus = 'JobStatus' in params ? params.JobStatus : null;
+
+    }
+}
+
+/**
+ * 人脸信息列表。
+ * @class
+ */
+class FaceDetailInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 检测出的人脸框位置。
+         * @type {FaceRect || null}
+         */
+        this.FaceRect = null;
+
+        /**
+         * 人脸属性信息，根据 FaceAttributesType 输入的类型，返回年龄（Age）、颜值（Beauty） 
+情绪（Emotion）、眼睛信息（Eye）、眉毛（Eyebrow）、性别（Gender） 
+头发（Hair）、帽子（Hat）、姿态（Headpose）、口罩（Mask）、嘴巴（Mouse）、胡子（Moustache） 
+鼻子（Nose）、脸型（Shape）、肤色（Skin）、微笑（Smile）等人脸属性信息。  
+若 FaceAttributesType 没有输入相关类型，则FaceDetaiAttributesInfo返回的细项不具备参考意义。
+         * @type {FaceDetailAttributesInfo || null}
+         */
+        this.FaceDetailAttributesInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.FaceRect) {
+            let obj = new FaceRect();
+            obj.deserialize(params.FaceRect)
+            this.FaceRect = obj;
+        }
+
+        if (params.FaceDetailAttributesInfo) {
+            let obj = new FaceDetailAttributesInfo();
+            obj.deserialize(params.FaceDetailAttributesInfo)
+            this.FaceDetailAttributesInfo = obj;
+        }
 
     }
 }
@@ -4066,6 +4566,48 @@ class GetUpgradeGroupFaceModelVersionJobListResponse extends  AbstractModel {
 }
 
 /**
+ * 姿态信息
+ * @class
+ */
+class HeadPose extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 上下偏移[-30,30]。
+         * @type {number || null}
+         */
+        this.Pitch = null;
+
+        /**
+         * 左右偏移[-30,30]。
+         * @type {number || null}
+         */
+        this.Yaw = null;
+
+        /**
+         * 平面旋转[-180,180]。
+         * @type {number || null}
+         */
+        this.Roll = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Pitch = 'Pitch' in params ? params.Pitch : null;
+        this.Yaw = 'Yaw' in params ? params.Yaw : null;
+        this.Roll = 'Roll' in params ? params.Roll : null;
+
+    }
+}
+
+/**
  * GetGroupList返回参数结构体
  * @class
  */
@@ -4117,24 +4659,64 @@ class GetGroupListResponse extends  AbstractModel {
 }
 
 /**
- * 包含此人员的人员库及描述字段内容列表
+ * DetectFaceAttributes请求参数结构体
  * @class
  */
-class PersonGroupInfo extends  AbstractModel {
+class DetectFaceAttributesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 包含此人员的人员库ID
-         * @type {string || null}
+         * 最多处理的人脸数目。 
+默认值为1（仅检测图片中面积最大的那张人脸），最大值为120。 
+此参数用于控制处理待检测图片中的人脸个数，值越小，处理速度越快。
+         * @type {number || null}
          */
-        this.GroupId = null;
+        this.MaxFaceNum = null;
 
         /**
-         * 人员描述字段内容
-         * @type {Array.<string> || null}
+         * 图片 base64 数据，base64 编码后大小不可超过5M。
+jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。 
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+         * @type {string || null}
          */
-        this.PersonExDescriptions = null;
+        this.Image = null;
+
+        /**
+         * 图片的 Url 。 
+对应图片 base64 编码后大小不可超过5M。 
+jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
+Url、Image必须提供一个，如果都提供，只使用 Url。 
+图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
+非腾讯云存储的Url速度和稳定性可能受一定影响。 
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 是否返回年龄、性别、情绪等属性。 
+合法值为（大小写不敏感）：None、Age、Beauty、Emotion、Eye、Eyebrow 
+Gender、Hair、Hat、Headpose、Mask、Mouth、Moustache、Nose、Shape、Skin、Smile。 
+None为不需要返回。默认为 None。 
+需要将属性组成一个用逗号分隔的字符串，属性之间的顺序没有要求。 
+关于各属性的详细描述，参见下文出参。 
+最多返回面积最大的 5 张人脸属性信息，超过 5 张人脸（第 6 张及以后的人脸）的 AttributesInfo 不具备参考意义。
+         * @type {string || null}
+         */
+        this.FaceAttributesType = null;
+
+        /**
+         * 是否开启图片旋转识别支持。0为不开启，1为开启。默认为0。本参数的作用为，当图片中的人脸被旋转且图片没有exif信息时，如果不开启图片旋转识别支持则无法正确检测、识别图片中的人脸。若您确认图片包含exif信息或者您确认输入图中人脸不会出现被旋转情况，请不要开启本参数。开启后，整体耗时将可能增加数百毫秒。
+         * @type {number || null}
+         */
+        this.NeedRotateDetection = null;
+
+        /**
+         * 人脸识别服务所用的算法模型版本。本接口仅支持“3.0”输入
+         * @type {string || null}
+         */
+        this.FaceModelVersion = null;
 
     }
 
@@ -4145,8 +4727,12 @@ class PersonGroupInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
-        this.PersonExDescriptions = 'PersonExDescriptions' in params ? params.PersonExDescriptions : null;
+        this.MaxFaceNum = 'MaxFaceNum' in params ? params.MaxFaceNum : null;
+        this.Image = 'Image' in params ? params.Image : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.FaceAttributesType = 'FaceAttributesType' in params ? params.FaceAttributesType : null;
+        this.NeedRotateDetection = 'NeedRotateDetection' in params ? params.NeedRotateDetection : null;
+        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
 
     }
 }
@@ -4268,12 +4854,103 @@ class CompareFaceResponse extends  AbstractModel {
 }
 
 /**
- * RevertGroupFaceModelVersion返回参数结构体
+ * 嘴巴信息。
  * @class
  */
-class RevertGroupFaceModelVersionResponse extends  AbstractModel {
+class Mouth extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 是否张嘴信息。
+AttributeItem对应的Type为 —— 0：不张嘴，1：张嘴。
+         * @type {AttributeItem || null}
+         */
+        this.MouthOpen = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.MouthOpen) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.MouthOpen)
+            this.MouthOpen = obj;
+        }
+
+    }
+}
+
+/**
+ * 包含此人员的人员库及描述字段内容列表
+ * @class
+ */
+class PersonGroupInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 包含此人员的人员库ID
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 人员描述字段内容
+         * @type {Array.<string> || null}
+         */
+        this.PersonExDescriptions = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.PersonExDescriptions = 'PersonExDescriptions' in params ? params.PersonExDescriptions : null;
+
+    }
+}
+
+/**
+ * VerifyFace返回参数结构体
+ * @class
+ */
+class VerifyFaceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 给定的人脸图片与 PersonId 对应人脸的相似度。若 PersonId 下有多张人脸（Face），返回相似度最大的分数。
+
+不同算法版本返回的相似度分数不同。
+若需要验证两张图片中人脸是否为同一人，3.0版本误识率千分之一对应分数为40分，误识率万分之一对应分数为50分，误识率十万分之一对应分数为60分。 一般超过50分则可认定为同一人。
+2.0版本误识率千分之一对应分数为70分，误识率万分之一对应分数为80分，误识率十万分之一对应分数为90分。 一般超过80分则可认定为同一人。
+         * @type {number || null}
+         */
+        this.Score = null;
+
+        /**
+         * 是否为同一人的判断。
+         * @type {boolean || null}
+         */
+        this.IsMatch = null;
+
+        /**
+         * 人脸识别所用的算法模型版本，是该 Person 所在的人员库的算法模型版本。在创建人员库时设置，详情可参考[算法模型版本](https://cloud.tencent.com/document/product/867/40042)
+         * @type {string || null}
+         */
+        this.FaceModelVersion = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4290,6 +4967,9 @@ class RevertGroupFaceModelVersionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Score = 'Score' in params ? params.Score : null;
+        this.IsMatch = 'IsMatch' in params ? params.IsMatch : null;
+        this.FaceModelVersion = 'FaceModelVersion' in params ? params.FaceModelVersion : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4319,6 +4999,162 @@ class DeleteGroupResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 五官定位（人脸关键点）具体信息。
+ * @class
+ */
+class FaceShape extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 描述脸型轮廓的 21 点。
+         * @type {Array.<Point> || null}
+         */
+        this.FaceProfile = null;
+
+        /**
+         * 描述左侧眼睛轮廓的 8 点。
+         * @type {Array.<Point> || null}
+         */
+        this.LeftEye = null;
+
+        /**
+         * 描述右侧眼睛轮廓的 8 点。
+         * @type {Array.<Point> || null}
+         */
+        this.RightEye = null;
+
+        /**
+         * 描述左侧眉毛轮廓的 8 点。
+         * @type {Array.<Point> || null}
+         */
+        this.LeftEyeBrow = null;
+
+        /**
+         * 描述右侧眉毛轮廓的 8 点。
+         * @type {Array.<Point> || null}
+         */
+        this.RightEyeBrow = null;
+
+        /**
+         * 描述嘴巴轮廓的 22 点。
+         * @type {Array.<Point> || null}
+         */
+        this.Mouth = null;
+
+        /**
+         * 描述鼻子轮廓的 13 点。
+         * @type {Array.<Point> || null}
+         */
+        this.Nose = null;
+
+        /**
+         * 左瞳孔轮廓的 1 个点。
+         * @type {Array.<Point> || null}
+         */
+        this.LeftPupil = null;
+
+        /**
+         * 右瞳孔轮廓的 1 个点。
+         * @type {Array.<Point> || null}
+         */
+        this.RightPupil = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.FaceProfile) {
+            this.FaceProfile = new Array();
+            for (let z in params.FaceProfile) {
+                let obj = new Point();
+                obj.deserialize(params.FaceProfile[z]);
+                this.FaceProfile.push(obj);
+            }
+        }
+
+        if (params.LeftEye) {
+            this.LeftEye = new Array();
+            for (let z in params.LeftEye) {
+                let obj = new Point();
+                obj.deserialize(params.LeftEye[z]);
+                this.LeftEye.push(obj);
+            }
+        }
+
+        if (params.RightEye) {
+            this.RightEye = new Array();
+            for (let z in params.RightEye) {
+                let obj = new Point();
+                obj.deserialize(params.RightEye[z]);
+                this.RightEye.push(obj);
+            }
+        }
+
+        if (params.LeftEyeBrow) {
+            this.LeftEyeBrow = new Array();
+            for (let z in params.LeftEyeBrow) {
+                let obj = new Point();
+                obj.deserialize(params.LeftEyeBrow[z]);
+                this.LeftEyeBrow.push(obj);
+            }
+        }
+
+        if (params.RightEyeBrow) {
+            this.RightEyeBrow = new Array();
+            for (let z in params.RightEyeBrow) {
+                let obj = new Point();
+                obj.deserialize(params.RightEyeBrow[z]);
+                this.RightEyeBrow.push(obj);
+            }
+        }
+
+        if (params.Mouth) {
+            this.Mouth = new Array();
+            for (let z in params.Mouth) {
+                let obj = new Point();
+                obj.deserialize(params.Mouth[z]);
+                this.Mouth.push(obj);
+            }
+        }
+
+        if (params.Nose) {
+            this.Nose = new Array();
+            for (let z in params.Nose) {
+                let obj = new Point();
+                obj.deserialize(params.Nose[z]);
+                this.Nose.push(obj);
+            }
+        }
+
+        if (params.LeftPupil) {
+            this.LeftPupil = new Array();
+            for (let z in params.LeftPupil) {
+                let obj = new Point();
+                obj.deserialize(params.LeftPupil[z]);
+                this.LeftPupil.push(obj);
+            }
+        }
+
+        if (params.RightPupil) {
+            this.RightPupil = new Array();
+            for (let z in params.RightPupil) {
+                let obj = new Point();
+                obj.deserialize(params.RightPupil[z]);
+                this.RightPupil.push(obj);
+            }
+        }
 
     }
 }
@@ -4569,6 +5405,66 @@ class CheckSimilarPersonResponse extends  AbstractModel {
 }
 
 /**
+ * 眉毛信息
+ * @class
+ */
+class Eyebrow extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 眉毛浓密。
+AttributeItem对应的Type为 —— 0：淡眉，1：浓眉。
+         * @type {AttributeItem || null}
+         */
+        this.EyebrowDensity = null;
+
+        /**
+         * 眉毛弯曲。
+AttributeItem对应的Type为 —— 0：不弯，1：弯眉。
+         * @type {AttributeItem || null}
+         */
+        this.EyebrowCurve = null;
+
+        /**
+         * 眉毛长短。
+AttributeItem对应的Type为 —— 0：短眉毛，1：长眉毛。
+         * @type {AttributeItem || null}
+         */
+        this.EyebrowLength = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.EyebrowDensity) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.EyebrowDensity)
+            this.EyebrowDensity = obj;
+        }
+
+        if (params.EyebrowCurve) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.EyebrowCurve)
+            this.EyebrowCurve = obj;
+        }
+
+        if (params.EyebrowLength) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.EyebrowLength)
+            this.EyebrowLength = obj;
+        }
+
+    }
+}
+
+/**
  * GetGroupInfo请求参数结构体
  * @class
  */
@@ -4733,6 +5629,266 @@ class GetPersonListRequest extends  AbstractModel {
 }
 
 /**
+ * 人脸属性信息，根据 FaceAttributesType 输入的类型，返回年龄（Age）、颜值（Beauty） 
+情绪（Emotion）、眼睛信息（Eye）、眉毛（Eyebrow）、性别（Gender） 
+头发（Hair）、帽子（Hat）、姿态（Headpose）、口罩（Mask）、嘴巴（Mouse）、胡子（Moustache） 
+鼻子（Nose）、脸型（Shape）、肤色（Skin）、微笑（Smile）等人脸属性信息。  
+若 FaceAttributesType 没有输入相关类型，则FaceDetaiAttributesInfo返回的细项不具备参考意义。
+ * @class
+ */
+class FaceDetailAttributesInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 年龄 [0,65]，其中65代表“65岁及以上”。 
+FaceAttributesType 不为含Age 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+         * @type {number || null}
+         */
+        this.Age = null;
+
+        /**
+         * 美丑打分[0,100]。 
+FaceAttributesType 不含 Beauty 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+         * @type {number || null}
+         */
+        this.Beauty = null;
+
+        /**
+         * 情绪，可识别自然、高兴、惊讶、生气、悲伤、厌恶、害怕。 
+AttributeItem对应的Type为 —— 0：自然，1：高兴，2：惊讶，3：生气，4：悲伤，5：厌恶，6：害怕
+FaceAttributesType 不含Emotion 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+         * @type {AttributeItem || null}
+         */
+        this.Emotion = null;
+
+        /**
+         * 眼睛相关信息，可识别是否戴眼镜、是否闭眼、是否双眼皮和眼睛大小。 
+FaceAttributesType 不含Eye 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+         * @type {Eye || null}
+         */
+        this.Eye = null;
+
+        /**
+         * 眉毛相关信息，可识别眉毛浓密、弯曲、长短信息。 
+FaceAttributesType 不含Eyebrow 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+         * @type {Eyebrow || null}
+         */
+        this.Eyebrow = null;
+
+        /**
+         * 性别信息。 
+AttributeItem对应的Type为 —— 	0：男性，1：女性。
+FaceAttributesType 不含Gender 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+         * @type {AttributeItem || null}
+         */
+        this.Gender = null;
+
+        /**
+         * 头发信息，包含头发长度、有无刘海、头发颜色。 
+FaceAttributesType 不含Hair 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+         * @type {Hair || null}
+         */
+        this.Hair = null;
+
+        /**
+         * 帽子信息，可识别是否佩戴帽子、帽子款式、帽子颜色。 
+FaceAttributesType 不含Hat 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+         * @type {Hat || null}
+         */
+        this.Hat = null;
+
+        /**
+         * 姿态信息，包含人脸的上下偏移、左右偏移、平面旋转信息。 
+FaceAttributesType 不含Headpose 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+         * @type {HeadPose || null}
+         */
+        this.HeadPose = null;
+
+        /**
+         * 口罩佩戴信息。 
+AttributeItem对应的Type为 —— 0: 无口罩， 1: 有口罩不遮脸，2: 有口罩遮下巴，3: 有口罩遮嘴，4: 正确佩戴口罩。
+FaceAttributesType 不含Mask 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+         * @type {AttributeItem || null}
+         */
+        this.Mask = null;
+
+        /**
+         * 嘴巴信息，可识别是否张嘴、嘴唇厚度。 
+FaceAttributesType 不含 Mouth 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+         * @type {Mouth || null}
+         */
+        this.Mouth = null;
+
+        /**
+         * 胡子信息。
+AttributeItem对应的Type为 —— 0：无胡子，1：有胡子。 
+FaceAttributesType 不含 Moustache 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+         * @type {AttributeItem || null}
+         */
+        this.Moustache = null;
+
+        /**
+         * 鼻子信息。 
+AttributeItem对应的Type为 —— 0：朝天鼻，1：鹰钩鼻，2：普通，3：圆鼻头
+FaceAttributesType 不含 Nose 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+         * @type {AttributeItem || null}
+         */
+        this.Nose = null;
+
+        /**
+         * 脸型信息。 
+AttributeItem对应的Type为 —— 0：方脸，1：三角脸，2：鹅蛋脸，3：心形脸，4：圆脸。
+FaceAttributesType 不含 Shape 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+         * @type {AttributeItem || null}
+         */
+        this.Shape = null;
+
+        /**
+         * 肤色信息。 
+AttributeItem对应的Type为 —— 0：黄色皮肤，1：棕色皮肤，2：黑色皮肤，3：白色皮肤。
+FaceAttributesType 不含 Skin 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+         * @type {AttributeItem || null}
+         */
+        this.Skin = null;
+
+        /**
+         * 微笑程度，[0,100]。 
+FaceAttributesType 不含 Smile 或检测超过 5 张人脸时，此参数仍返回，但不具备参考意义。
+         * @type {number || null}
+         */
+        this.Smile = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Age = 'Age' in params ? params.Age : null;
+        this.Beauty = 'Beauty' in params ? params.Beauty : null;
+
+        if (params.Emotion) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.Emotion)
+            this.Emotion = obj;
+        }
+
+        if (params.Eye) {
+            let obj = new Eye();
+            obj.deserialize(params.Eye)
+            this.Eye = obj;
+        }
+
+        if (params.Eyebrow) {
+            let obj = new Eyebrow();
+            obj.deserialize(params.Eyebrow)
+            this.Eyebrow = obj;
+        }
+
+        if (params.Gender) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.Gender)
+            this.Gender = obj;
+        }
+
+        if (params.Hair) {
+            let obj = new Hair();
+            obj.deserialize(params.Hair)
+            this.Hair = obj;
+        }
+
+        if (params.Hat) {
+            let obj = new Hat();
+            obj.deserialize(params.Hat)
+            this.Hat = obj;
+        }
+
+        if (params.HeadPose) {
+            let obj = new HeadPose();
+            obj.deserialize(params.HeadPose)
+            this.HeadPose = obj;
+        }
+
+        if (params.Mask) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.Mask)
+            this.Mask = obj;
+        }
+
+        if (params.Mouth) {
+            let obj = new Mouth();
+            obj.deserialize(params.Mouth)
+            this.Mouth = obj;
+        }
+
+        if (params.Moustache) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.Moustache)
+            this.Moustache = obj;
+        }
+
+        if (params.Nose) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.Nose)
+            this.Nose = obj;
+        }
+
+        if (params.Shape) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.Shape)
+            this.Shape = obj;
+        }
+
+        if (params.Skin) {
+            let obj = new AttributeItem();
+            obj.deserialize(params.Skin)
+            this.Skin = obj;
+        }
+        this.Smile = 'Smile' in params ? params.Smile : null;
+
+    }
+}
+
+/**
+ * 人脸属性信息
+ * @class
+ */
+class AttributeItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 属性值
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * Type识别概率值，【0,1】,代表判断正确的概率。
+         * @type {number || null}
+         */
+        this.Probability = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Probability = 'Probability' in params ? params.Probability : null;
+
+    }
+}
+
+/**
  * 检测出的人脸框的位置
  * @class
  */
@@ -4849,9 +6005,11 @@ class CreateGroupResponse extends  AbstractModel {
 }
 
 module.exports = {
+    Eye: Eye,
     Candidate: Candidate,
-    VerifyFaceResponse: VerifyFaceResponse,
+    DetectFaceAttributesResponse: DetectFaceAttributesResponse,
     SearchPersonsReturnsByGroupResponse: SearchPersonsReturnsByGroupResponse,
+    Hat: Hat,
     CreatePersonRequest: CreatePersonRequest,
     CreateFaceResponse: CreateFaceResponse,
     FaceHairAttributesInfo: FaceHairAttributesInfo,
@@ -4860,7 +6018,7 @@ module.exports = {
     GetPersonGroupInfoRequest: GetPersonGroupInfoRequest,
     FaceInfo: FaceInfo,
     CheckSimilarPersonRequest: CheckSimilarPersonRequest,
-    FaceShape: FaceShape,
+    AnalyzeDenseLandmarksRequest: AnalyzeDenseLandmarksRequest,
     GetGroupListRequest: GetGroupListRequest,
     GetUpgradeGroupFaceModelVersionJobListRequest: GetUpgradeGroupFaceModelVersionJobListRequest,
     GetUpgradeGroupFaceModelVersionResultResponse: GetUpgradeGroupFaceModelVersionResultResponse,
@@ -4877,7 +6035,8 @@ module.exports = {
     ModifyGroupRequest: ModifyGroupRequest,
     DeleteGroupRequest: DeleteGroupRequest,
     EstimateCheckSimilarPersonCostTimeRequest: EstimateCheckSimilarPersonCostTimeRequest,
-    FaceQualityCompleteness: FaceQualityCompleteness,
+    RevertGroupFaceModelVersionResponse: RevertGroupFaceModelVersionResponse,
+    UpgradeGroupFaceModelVersionRequest: UpgradeGroupFaceModelVersionRequest,
     DetectLiveFaceRequest: DetectLiveFaceRequest,
     GetPersonBaseInfoResponse: GetPersonBaseInfoResponse,
     GetSimilarPersonResultRequest: GetSimilarPersonResultRequest,
@@ -4890,26 +6049,30 @@ module.exports = {
     SearchPersonsReturnsByGroupRequest: SearchPersonsReturnsByGroupRequest,
     DeletePersonFromGroupResponse: DeletePersonFromGroupResponse,
     GetCheckSimilarPersonJobIdListResponse: GetCheckSimilarPersonJobIdListResponse,
+    DenseFaceShape: DenseFaceShape,
     ResultsReturnsByGroup: ResultsReturnsByGroup,
     Point: Point,
     GetPersonListNumResponse: GetPersonListNumResponse,
     DeletePersonFromGroupRequest: DeletePersonFromGroupRequest,
     VerifyFaceRequest: VerifyFaceRequest,
     GetPersonListResponse: GetPersonListResponse,
+    Hair: Hair,
     GetPersonListNumRequest: GetPersonListNumRequest,
     Result: Result,
     GetPersonGroupInfoResponse: GetPersonGroupInfoResponse,
     UpgradeGroupFaceModelVersionResponse: UpgradeGroupFaceModelVersionResponse,
     SearchFacesReturnsByGroupRequest: SearchFacesReturnsByGroupRequest,
+    AnalyzeDenseLandmarksResponse: AnalyzeDenseLandmarksResponse,
     ModifyPersonBaseInfoResponse: ModifyPersonBaseInfoResponse,
     GetSimilarPersonResultResponse: GetSimilarPersonResultResponse,
     ModifyPersonGroupInfoRequest: ModifyPersonGroupInfoRequest,
     RevertGroupFaceModelVersionRequest: RevertGroupFaceModelVersionRequest,
-    UpgradeGroupFaceModelVersionRequest: UpgradeGroupFaceModelVersionRequest,
+    FaceQualityCompleteness: FaceQualityCompleteness,
     FaceAttributesInfo: FaceAttributesInfo,
     VerifyPersonRequest: VerifyPersonRequest,
     ModifyPersonBaseInfoRequest: ModifyPersonBaseInfoRequest,
     JobIdInfo: JobIdInfo,
+    FaceDetailInfo: FaceDetailInfo,
     SearchFacesRequest: SearchFacesRequest,
     GetCheckSimilarPersonJobIdListRequest: GetCheckSimilarPersonJobIdListRequest,
     SearchPersonsRequest: SearchPersonsRequest,
@@ -4921,20 +6084,27 @@ module.exports = {
     DeletePersonResponse: DeletePersonResponse,
     PersonExDescriptionInfo: PersonExDescriptionInfo,
     GetUpgradeGroupFaceModelVersionJobListResponse: GetUpgradeGroupFaceModelVersionJobListResponse,
+    HeadPose: HeadPose,
     GetGroupListResponse: GetGroupListResponse,
-    PersonGroupInfo: PersonGroupInfo,
+    DetectFaceAttributesRequest: DetectFaceAttributesRequest,
     GetGroupInfoResponse: GetGroupInfoResponse,
     CompareFaceResponse: CompareFaceResponse,
-    RevertGroupFaceModelVersionResponse: RevertGroupFaceModelVersionResponse,
+    Mouth: Mouth,
+    PersonGroupInfo: PersonGroupInfo,
+    VerifyFaceResponse: VerifyFaceResponse,
     DeleteGroupResponse: DeleteGroupResponse,
+    FaceShape: FaceShape,
     CompareFaceRequest: CompareFaceRequest,
     VerifyPersonResponse: VerifyPersonResponse,
     DetectFaceResponse: DetectFaceResponse,
     CheckSimilarPersonResponse: CheckSimilarPersonResponse,
+    Eyebrow: Eyebrow,
     GetGroupInfoRequest: GetGroupInfoRequest,
     UpgradeJobInfo: UpgradeJobInfo,
     ModifyGroupResponse: ModifyGroupResponse,
     GetPersonListRequest: GetPersonListRequest,
+    FaceDetailAttributesInfo: FaceDetailAttributesInfo,
+    AttributeItem: AttributeItem,
     FaceRect: FaceRect,
     ModifyPersonGroupInfoResponse: ModifyPersonGroupInfoResponse,
     CreateGroupResponse: CreateGroupResponse,

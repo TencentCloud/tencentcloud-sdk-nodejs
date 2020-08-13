@@ -18,24 +18,31 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const Album = models.Album;
 const DescribeMusicResponse = models.DescribeMusicResponse;
-const ImagePath = models.ImagePath;
-const DataInfo = models.DataInfo;
-const DescribeItemsResponse = models.DescribeItemsResponse;
-const Music = models.Music;
-const Artist = models.Artist;
 const DescribeLyricResponse = models.DescribeLyricResponse;
-const DescribeItemByIdResponse = models.DescribeItemByIdResponse;
-const ReportDataResponse = models.ReportDataResponse;
-const DescribeItemsRequest = models.DescribeItemsRequest;
-const DescribeStationsRequest = models.DescribeStationsRequest;
-const Item = models.Item;
 const Station = models.Station;
-const Lyric = models.Lyric;
-const DescribeLyricRequest = models.DescribeLyricRequest;
+const Music = models.Music;
 const DescribeStationsResponse = models.DescribeStationsResponse;
-const ReportDataRequest = models.ReportDataRequest;
+const DescribePackageItemsResponse = models.DescribePackageItemsResponse;
+const PackageItem = models.PackageItem;
+const DataInfo = models.DataInfo;
+const Package = models.Package;
+const ReportDataResponse = models.ReportDataResponse;
+const DescribePackageItemsRequest = models.DescribePackageItemsRequest;
 const DescribeItemByIdRequest = models.DescribeItemByIdRequest;
 const DescribeMusicRequest = models.DescribeMusicRequest;
+const UseRange = models.UseRange;
+const Artist = models.Artist;
+const DescribeStationsRequest = models.DescribeStationsRequest;
+const DescribeItemsRequest = models.DescribeItemsRequest;
+const Item = models.Item;
+const DescribePackagesRequest = models.DescribePackagesRequest;
+const ImagePath = models.ImagePath;
+const DescribeItemsResponse = models.DescribeItemsResponse;
+const DescribeItemByIdResponse = models.DescribeItemByIdResponse;
+const DescribePackagesResponse = models.DescribePackagesResponse;
+const Lyric = models.Lyric;
+const DescribeLyricRequest = models.DescribeLyricRequest;
+const ReportDataRequest = models.ReportDataRequest;
 
 
 /**
@@ -60,14 +67,14 @@ class AmeClient extends AbstractClient {
     }
 
     /**
-     * 客户上报用户数据功能，为了更好的为用户提供优质服务
-     * @param {ReportDataRequest} req
-     * @param {function(string, ReportDataResponse):void} cb
+     * 查询已购曲库包列表接口
+     * @param {DescribePackagesRequest} req
+     * @param {function(string, DescribePackagesResponse):void} cb
      * @public
      */
-    ReportData(req, cb) {
-        let resp = new ReportDataResponse();
-        this.request("ReportData", req, resp, cb);
+    DescribePackages(req, cb) {
+        let resp = new DescribePackagesResponse();
+        this.request("DescribePackages", req, resp, cb);
     }
 
     /**
@@ -101,6 +108,28 @@ class AmeClient extends AbstractClient {
     DescribeMusic(req, cb) {
         let resp = new DescribeMusicResponse();
         this.request("DescribeMusic", req, resp, cb);
+    }
+
+    /**
+     * 查询曲库包已核验歌曲列表接口
+     * @param {DescribePackageItemsRequest} req
+     * @param {function(string, DescribePackageItemsResponse):void} cb
+     * @public
+     */
+    DescribePackageItems(req, cb) {
+        let resp = new DescribePackageItemsResponse();
+        this.request("DescribePackageItems", req, resp, cb);
+    }
+
+    /**
+     * 客户上报用户数据功能，为了更好的为用户提供优质服务
+     * @param {ReportDataRequest} req
+     * @param {function(string, ReportDataResponse):void} cb
+     * @public
+     */
+    ReportData(req, cb) {
+        let resp = new ReportDataResponse();
+        this.request("ReportData", req, resp, cb);
     }
 
     /**
