@@ -55,6 +55,13 @@ class Item extends  AbstractModel {
          */
         this.ExpressionType = null;
 
+        /**
+         * 文本行置信度
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ItemConf = null;
+
     }
 
     /**
@@ -74,6 +81,7 @@ class Item extends  AbstractModel {
         }
         this.Answer = 'Answer' in params ? params.Answer : null;
         this.ExpressionType = 'ExpressionType' in params ? params.ExpressionType : null;
+        this.ItemConf = 'ItemConf' in params ? params.ItemConf : null;
 
     }
 }
@@ -152,6 +160,12 @@ class EvaluationRequest extends  AbstractModel {
          */
         this.PdfPageIndex = null;
 
+        /**
+         * 是否返回LaTex，默认为0返回普通格式，设置成1返回LaTex格式
+         * @type {number || null}
+         */
+        this.LaTex = null;
+
     }
 
     /**
@@ -172,6 +186,7 @@ class EvaluationRequest extends  AbstractModel {
         this.EnableDispMidresult = 'EnableDispMidresult' in params ? params.EnableDispMidresult : null;
         this.EnablePdfRecognize = 'EnablePdfRecognize' in params ? params.EnablePdfRecognize : null;
         this.PdfPageIndex = 'PdfPageIndex' in params ? params.PdfPageIndex : null;
+        this.LaTex = 'LaTex' in params ? params.LaTex : null;
 
     }
 }

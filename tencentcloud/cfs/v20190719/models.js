@@ -992,7 +992,7 @@ class FileSystemInfo extends  AbstractModel {
         this.StorageType = null;
 
         /**
-         * 文件系统绑定的预付费存储包（暂未支持）
+         * 文件系统绑定的预付费存储包
          * @type {string || null}
          */
         this.StorageResourcePkg = null;
@@ -1033,6 +1033,12 @@ class FileSystemInfo extends  AbstractModel {
          */
         this.AppId = null;
 
+        /**
+         * 文件系统吞吐上限，吞吐上限是根据文件系统当前已使用存储量、绑定的存储资源包以及吞吐资源包一同确定
+         * @type {number || null}
+         */
+        this.BandwidthLimit = null;
+
     }
 
     /**
@@ -1064,6 +1070,7 @@ class FileSystemInfo extends  AbstractModel {
         this.Encrypted = 'Encrypted' in params ? params.Encrypted : null;
         this.KmsKeyId = 'KmsKeyId' in params ? params.KmsKeyId : null;
         this.AppId = 'AppId' in params ? params.AppId : null;
+        this.BandwidthLimit = 'BandwidthLimit' in params ? params.BandwidthLimit : null;
 
     }
 }

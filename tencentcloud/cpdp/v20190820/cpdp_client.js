@@ -76,6 +76,7 @@ const QueryOutwardOrderResult = models.QueryOutwardOrderResult;
 const CreateAgentTaxPaymentInfosResponse = models.CreateAgentTaxPaymentInfosResponse;
 const QueryPayerInfoRequest = models.QueryPayerInfoRequest;
 const QueryMerchantInfoForManagementResponse = models.QueryMerchantInfoForManagementResponse;
+const CreateTransferBatchResponse = models.CreateTransferBatchResponse;
 const QuerySingleTransactionStatusRequest = models.QuerySingleTransactionStatusRequest;
 const MerchantManagementList = models.MerchantManagementList;
 const CreateInvoiceResult = models.CreateInvoiceResult;
@@ -94,6 +95,8 @@ const WithdrawCashMembershipRequest = models.WithdrawCashMembershipRequest;
 const ExecuteMemberTransactionResponse = models.ExecuteMemberTransactionResponse;
 const BindRelateAcctUnionPayRequest = models.BindRelateAcctUnionPayRequest;
 const CreateInvoiceResultData = models.CreateInvoiceResultData;
+const TransferDetailRequest = models.TransferDetailRequest;
+const CreateTransferBatchRequest = models.CreateTransferBatchRequest;
 const RefundResponse = models.RefundResponse;
 const QueryAgentTaxPaymentBatchResponse = models.QueryAgentTaxPaymentBatchResponse;
 const DeleteAgentTaxPaymentInfosResponse = models.DeleteAgentTaxPaymentInfosResponse;
@@ -106,6 +109,7 @@ const QuerySingleTransactionStatusResponse = models.QuerySingleTransactionStatus
 const QueryAcctInfoRequest = models.QueryAcctInfoRequest;
 const DescribeChargeDetailResponse = models.DescribeChargeDetailResponse;
 const ApplyDeclareData = models.ApplyDeclareData;
+const TransferDetailResponse = models.TransferDetailResponse;
 const TranItem = models.TranItem;
 const ClearItem = models.ClearItem;
 const MerchantManagementResult = models.MerchantManagementResult;
@@ -124,6 +128,7 @@ const CreateSinglePayRequest = models.CreateSinglePayRequest;
 const QueryExchangerateData = models.QueryExchangerateData;
 const WithdrawBill = models.WithdrawBill;
 const QueryRefundRequest = models.QueryRefundRequest;
+const QueryTransferDetailResponse = models.QueryTransferDetailResponse;
 const BindRelateAccReUnionPayRequest = models.BindRelateAccReUnionPayRequest;
 const CreateCustAcctIdResponse = models.CreateCustAcctIdResponse;
 const QueryMerchantBalanceResponse = models.QueryMerchantBalanceResponse;
@@ -153,12 +158,14 @@ const UnBindAcctResponse = models.UnBindAcctResponse;
 const QueryOrderOutOrderList = models.QueryOrderOutOrderList;
 const QueryCommonTransferRechargeRequest = models.QueryCommonTransferRechargeRequest;
 const QueryAgentStatementsResponse = models.QueryAgentStatementsResponse;
+const QueryTransferDetailRequest = models.QueryTransferDetailRequest;
 const QueryOrderRequest = models.QueryOrderRequest;
 const CloseOrderRequest = models.CloseOrderRequest;
 const RevResigterBillSupportWithdrawResponse = models.RevResigterBillSupportWithdrawResponse;
 const QueryBalanceResponse = models.QueryBalanceResponse;
 const QueryOutwardOrderData = models.QueryOutwardOrderData;
 const TransactionItem = models.TransactionItem;
+const QueryTransferBatchRequest = models.QueryTransferBatchRequest;
 const CheckAcctResponse = models.CheckAcctResponse;
 const QueryReconciliationDocumentResponse = models.QueryReconciliationDocumentResponse;
 const QueryApplicationMaterialResponse = models.QueryApplicationMaterialResponse;
@@ -201,6 +208,7 @@ const ApplyWithdrawalRequest = models.ApplyWithdrawalRequest;
 const CreateRedInvoiceResultData = models.CreateRedInvoiceResultData;
 const BindRelateAcctSmallAmountRequest = models.BindRelateAcctSmallAmountRequest;
 const QueryRefundResponse = models.QueryRefundResponse;
+const QueryTransferBatchResponse = models.QueryTransferBatchResponse;
 const Order = models.Order;
 const QueryDeclareData = models.QueryDeclareData;
 const QueryMemberBindRequest = models.QueryMemberBindRequest;
@@ -475,6 +483,17 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
+     * 通过商家批次单号或者微信批次号查询批次单
+     * @param {QueryTransferBatchRequest} req
+     * @param {function(string, QueryTransferBatchResponse):void} cb
+     * @public
+     */
+    QueryTransferBatch(req, cb) {
+        let resp = new QueryTransferBatchResponse();
+        this.request("QueryTransferBatch", req, resp, cb);
+    }
+
+    /**
      * 直播平台-查询批次信息
      * @param {QueryAgentTaxPaymentBatchRequest} req
      * @param {function(string, QueryAgentTaxPaymentBatchResponse):void} cb
@@ -688,6 +707,17 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
+     * 通过商家或者微信批次明细单号查询明细单
+     * @param {QueryTransferDetailRequest} req
+     * @param {function(string, QueryTransferDetailResponse):void} cb
+     * @public
+     */
+    QueryTransferDetail(req, cb) {
+        let resp = new QueryTransferDetailResponse();
+        this.request("QueryTransferDetail", req, resp, cb);
+    }
+
+    /**
      * 查询银行单笔交易状态。查询单笔交易的状态。
      * @param {QuerySingleTransactionStatusRequest} req
      * @param {function(string, QuerySingleTransactionStatusResponse):void} cb
@@ -809,14 +839,14 @@ class CpdpClient extends AbstractClient {
     }
 
     /**
-     * 如交易订单需退款，可以通过本接口将支付款全部或部分退还给付款方，聚鑫将在收到退款请求并且验证成功之后，按照退款规则将支付款按原路退回到支付帐号。最长支持1年的订单退款。在订单包含多个子订单的情况下，如果使用本接口传入OutTradeNo或TransactionId退款，则只支持全单退款；如果需要部分退款，请通过传入子订单的方式来指定部分金额退款。 
-     * @param {RefundRequest} req
-     * @param {function(string, RefundResponse):void} cb
+     * 微信商户发起批量转账
+     * @param {CreateTransferBatchRequest} req
+     * @param {function(string, CreateTransferBatchResponse):void} cb
      * @public
      */
-    Refund(req, cb) {
-        let resp = new RefundResponse();
-        this.request("Refund", req, resp, cb);
+    CreateTransferBatch(req, cb) {
+        let resp = new CreateTransferBatchResponse();
+        this.request("CreateTransferBatch", req, resp, cb);
     }
 
     /**
@@ -1015,6 +1045,17 @@ class CpdpClient extends AbstractClient {
     CheckAcct(req, cb) {
         let resp = new CheckAcctResponse();
         this.request("CheckAcct", req, resp, cb);
+    }
+
+    /**
+     * 如交易订单需退款，可以通过本接口将支付款全部或部分退还给付款方，聚鑫将在收到退款请求并且验证成功之后，按照退款规则将支付款按原路退回到支付帐号。最长支持1年的订单退款。在订单包含多个子订单的情况下，如果使用本接口传入OutTradeNo或TransactionId退款，则只支持全单退款；如果需要部分退款，请通过传入子订单的方式来指定部分金额退款。 
+     * @param {RefundRequest} req
+     * @param {function(string, RefundResponse):void} cb
+     * @public
+     */
+    Refund(req, cb) {
+        let resp = new RefundResponse();
+        this.request("Refund", req, resp, cb);
     }
 
     /**

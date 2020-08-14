@@ -1105,7 +1105,7 @@ class MobileNetworkTimeVerificationRequest extends  AbstractModel {
         super();
 
         /**
-         * 手机号码。不支持电信手机号。
+         * 手机号码
          * @type {string || null}
          */
         this.Mobile = null;

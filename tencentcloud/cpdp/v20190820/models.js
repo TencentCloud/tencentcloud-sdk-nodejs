@@ -4247,6 +4247,60 @@ class QueryMerchantInfoForManagementResponse extends  AbstractModel {
 }
 
 /**
+ * CreateTransferBatch返回参数结构体
+ * @class
+ */
+class CreateTransferBatchResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 商家批次单号。
+商户系统内部的商家批次单号，此参数只能由数字、字母组成，商户系统内部唯一，UTF8编码，最多32个字符。
+示例值：plfk2020042013
+         * @type {string || null}
+         */
+        this.MerchantBatchNo = null;
+
+        /**
+         * 微信批次单号。
+微信商家转账系统返回的唯一标识。
+示例值：1030000071100999991182020050700019480001
+         * @type {string || null}
+         */
+        this.BatchId = null;
+
+        /**
+         * 批次受理成功时返回，遵循rfc3339标准格式。格式为YYYY-MM-DDTHH:mm:ss.sss+TIMEZONE，YYYY-MM-DD表示年月日，T出现在字符串中，表示time元素的开头，HH:mm:ss.sss表示时分秒毫秒，TIMEZONE表示时区（+08:00表示东八区时间，领先UTC 8小时，即北京时间）。例如：2015-05-20T13:29:35.120+08:00表示北京时间2015年05月20日13点29分35秒。
+示例值：2015-05-20T13:29:35.120+08:00
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MerchantBatchNo = 'MerchantBatchNo' in params ? params.MerchantBatchNo : null;
+        this.BatchId = 'BatchId' in params ? params.BatchId : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * QuerySingleTransactionStatus请求参数结构体
  * @class
  */
@@ -5401,6 +5455,181 @@ class CreateInvoiceResultData extends  AbstractModel {
 }
 
 /**
+ * 批量转账明细实体
+ * @class
+ */
+class TransferDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 商家明细单号。
+商户系统内部区分转账批次单下不同转账明细单的唯一标识，要求此参数只能由数字、大小写字母组成。
+示例值：x23zy545Bd5436
+         * @type {string || null}
+         */
+        this.MerchantDetailNo = null;
+
+        /**
+         * 转账金额。
+转账金额单位为分。
+示例值：200000
+         * @type {number || null}
+         */
+        this.TransferAmount = null;
+
+        /**
+         * 转账备注。
+单条转账备注（微信用户会收到该备注）。UTF8编码，最多32字符。
+示例值：2020年4月报销
+         * @type {string || null}
+         */
+        this.TransferRemark = null;
+
+        /**
+         * 用户在直连商户下的唯一标识。
+示例值：o-MYE42l80oelYMDE34nYD456Xoy
+         * @type {string || null}
+         */
+        this.OpenId = null;
+
+        /**
+         * 收款用户姓名。
+收款方姓名。
+示例值：张三
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MerchantDetailNo = 'MerchantDetailNo' in params ? params.MerchantDetailNo : null;
+        this.TransferAmount = 'TransferAmount' in params ? params.TransferAmount : null;
+        this.TransferRemark = 'TransferRemark' in params ? params.TransferRemark : null;
+        this.OpenId = 'OpenId' in params ? params.OpenId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+
+    }
+}
+
+/**
+ * CreateTransferBatch请求参数结构体
+ * @class
+ */
+class CreateTransferBatchRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 商户号。
+示例值：129284394
+         * @type {string || null}
+         */
+        this.MerchantId = null;
+
+        /**
+         * 转账明细列表。
+发起批量转账的明细列表，最多三千笔
+         * @type {Array.<TransferDetailRequest> || null}
+         */
+        this.TransferDetails = null;
+
+        /**
+         * 直连商户appId。
+即商户号绑定的appid。
+示例值：wxf636efh567hg4356
+         * @type {string || null}
+         */
+        this.MerchantAppId = null;
+
+        /**
+         * 商家批次单号。
+商户系统内部的商家批次单号，此参数只能由数字、字母组成，商户系统内部唯一，UTF8编码，最多32个字符。
+示例值：plfk2020042013
+         * @type {string || null}
+         */
+        this.MerchantBatchNo = null;
+
+        /**
+         * 批次名称。
+批量转账的名称。
+示例值：2019年1月深圳分部报销单
+         * @type {string || null}
+         */
+        this.BatchName = null;
+
+        /**
+         * 转账说明。
+UTF8编码，最多32个字符。
+示例值：2019年深圳分部报销单
+         * @type {string || null}
+         */
+        this.BatchRemark = null;
+
+        /**
+         * 转账总金额。
+转账金额，单位为分。
+示例值：4000000
+         * @type {number || null}
+         */
+        this.TotalAmount = null;
+
+        /**
+         * 转账总笔数。
+一个转账批次最多允许发起三千笔转账。
+示例值：200
+         * @type {number || null}
+         */
+        this.TotalNum = null;
+
+        /**
+         * 环境名。
+release: 现网环境
+sandbox: 沙箱环境
+development: 开发环境
+缺省: release
+         * @type {string || null}
+         */
+        this.Profile = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MerchantId = 'MerchantId' in params ? params.MerchantId : null;
+
+        if (params.TransferDetails) {
+            this.TransferDetails = new Array();
+            for (let z in params.TransferDetails) {
+                let obj = new TransferDetailRequest();
+                obj.deserialize(params.TransferDetails[z]);
+                this.TransferDetails.push(obj);
+            }
+        }
+        this.MerchantAppId = 'MerchantAppId' in params ? params.MerchantAppId : null;
+        this.MerchantBatchNo = 'MerchantBatchNo' in params ? params.MerchantBatchNo : null;
+        this.BatchName = 'BatchName' in params ? params.BatchName : null;
+        this.BatchRemark = 'BatchRemark' in params ? params.BatchRemark : null;
+        this.TotalAmount = 'TotalAmount' in params ? params.TotalAmount : null;
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
+
+    }
+}
+
+/**
  * Refund返回参数结构体
  * @class
  */
@@ -6339,6 +6568,56 @@ class ApplyDeclareData extends  AbstractModel {
         this.DeclareId = 'DeclareId' in params ? params.DeclareId : null;
         this.OriginalDeclareId = 'OriginalDeclareId' in params ? params.OriginalDeclareId : null;
         this.PayerId = 'PayerId' in params ? params.PayerId : null;
+
+    }
+}
+
+/**
+ * 批量转账查询返回批次明细实体
+ * @class
+ */
+class TransferDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 商家明细单号。
+商户系统内部的商家明细单号
+示例值：plfk2020042013
+         * @type {string || null}
+         */
+        this.MerchantDetailNo = null;
+
+        /**
+         * 微信明细单号。
+微信区分明细单返回的唯一标识。
+示例值：1030000071100999991182020050700019480001
+         * @type {string || null}
+         */
+        this.DetailId = null;
+
+        /**
+         * 明细状态。
+PROCESSING：转账中，正在处理，结果未明；
+SUCCESS：转账成功；
+FAIL：转账失败，需要确认失败原因以后，再决定是否重新发起地该笔明细的转账。
+示例值：SUCCESS
+         * @type {string || null}
+         */
+        this.DetailStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MerchantDetailNo = 'MerchantDetailNo' in params ? params.MerchantDetailNo : null;
+        this.DetailId = 'DetailId' in params ? params.DetailId : null;
+        this.DetailStatus = 'DetailStatus' in params ? params.DetailStatus : null;
 
     }
 }
@@ -7671,6 +7950,176 @@ development: 开发环境
         this.MidasSecretId = 'MidasSecretId' in params ? params.MidasSecretId : null;
         this.MidasSignature = 'MidasSignature' in params ? params.MidasSignature : null;
         this.MidasEnvironment = 'MidasEnvironment' in params ? params.MidasEnvironment : null;
+
+    }
+}
+
+/**
+ * QueryTransferDetail返回参数结构体
+ * @class
+ */
+class QueryTransferDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 商户号。
+示例值：19300009329
+         * @type {string || null}
+         */
+        this.MerchantId = null;
+
+        /**
+         * 商家批次单号。
+商户系统内部的商家批次单号，此参数只能由数字、字母组成，商户系统内部唯一，UTF8编码，最多32个字符。
+示例值：plfk2020042013
+         * @type {string || null}
+         */
+        this.MerchantBatchNo = null;
+
+        /**
+         * 微信批次单号。
+微信商家转账系统返回的唯一标识。
+示例值：1030000071100999991182020050700019480001
+         * @type {string || null}
+         */
+        this.BatchId = null;
+
+        /**
+         * 商家明细单号。
+商户系统内部的商家明细单号
+示例值：plfk2020042013
+         * @type {string || null}
+         */
+        this.MerchantDetailNo = null;
+
+        /**
+         * 微信明细单号。
+微信区分明细单返回的唯一标识。
+示例值：1030000071100999991182020050700019480001
+         * @type {string || null}
+         */
+        this.DetailId = null;
+
+        /**
+         * 明细状态。
+PROCESSING：转账中，正在处理，结果未明；
+SUCCESS：转账成功；
+FAIL：转账失败，需要确认失败原因以后，再决定是否重新发起地该笔明细的转账。
+示例值：SUCCESS
+         * @type {string || null}
+         */
+        this.DetailStatus = null;
+
+        /**
+         * 转账金额。
+单位为分。
+示例值：200
+         * @type {number || null}
+         */
+        this.TransferAmount = null;
+
+        /**
+         * 失败原因。
+如果转账失败则有失败原因
+ACCOUNT_FROZEN：账户冻结
+REAL_NAME_CHECK_FAIL：用户未实名
+NAME_NOT_CORRECT：用户姓名校验失败
+OPENID_INVALID：Openid校验失败
+TRANSFER_QUOTA_EXCEED：超过用户单笔收款额度
+DAY_RECEIVED_QUOTA_EXCEED：超过用户单日收款额度
+MONTH_RECEIVED_QUOTA_EXCEED：超过用户单月收款额度
+DAY_RECEIVED_COUNT_EXCEED：超过用户单日收款次数
+PRODUCT_AUTH_CHECK_FAIL：产品权限校验失败
+OVERDUE_CLOSE：转账关闭
+ID_CARD_NOT_CORRECT：用户身份证校验失败
+ACCOUNT_NOT_EXIST：用户账户不存在
+TRANSFER_RISK：转账存在风险
+示例值：ACCOUNT_FROZEN
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FailReason = null;
+
+        /**
+         * 转账发起时间。
+遵循rfc3339标准格式。格式为YYYY-MM-DDTHH:mm:ss.sss+TIMEZONE，YYYY-MM-DD表示年月日，T出现在字符串中，表示time元素的开头，HH:mm:ss.sss表示时分秒毫秒，TIMEZONE表示时区（+08:00表示东八区时间，领先UTC 8小时，即北京时间）。例如：2015-05-20T13:29:35.120+08:00表示北京时间2015年05月20日13点29分35秒。
+示例值：2015-05-20T13:29:35.120+08:00
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InitiateTime = null;
+
+        /**
+         * 转账更新时间。
+遵循rfc3339标准格式。格式为YYYY-MM-DDTHH:mm:ss.sss+TIMEZONE，YYYY-MM-DD表示年月日，T出现在字符串中，表示time元素的开头，HH:mm:ss.sss表示时分秒毫秒，TIMEZONE表示时区（+08:00表示东八区时间，领先UTC 8小时，即北京时间）。例如：2015-05-20T13:29:35.120+08:00表示北京时间2015年05月20日13点29分35秒。
+示例值：2015-05-20T13:29:35.120+08:00
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 用户名。
+示例值：张三
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+        /**
+         * 转账备注。
+单条转账备注（微信用户会收到该备注）。UTF8编码，最多32字符。
+示例值：2020年4月报销
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TransferRemark = null;
+
+        /**
+         * 商家绑定公众号APPID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MerchantAppId = null;
+
+        /**
+         * 用户openId。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OpenId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MerchantId = 'MerchantId' in params ? params.MerchantId : null;
+        this.MerchantBatchNo = 'MerchantBatchNo' in params ? params.MerchantBatchNo : null;
+        this.BatchId = 'BatchId' in params ? params.BatchId : null;
+        this.MerchantDetailNo = 'MerchantDetailNo' in params ? params.MerchantDetailNo : null;
+        this.DetailId = 'DetailId' in params ? params.DetailId : null;
+        this.DetailStatus = 'DetailStatus' in params ? params.DetailStatus : null;
+        this.TransferAmount = 'TransferAmount' in params ? params.TransferAmount : null;
+        this.FailReason = 'FailReason' in params ? params.FailReason : null;
+        this.InitiateTime = 'InitiateTime' in params ? params.InitiateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.TransferRemark = 'TransferRemark' in params ? params.TransferRemark : null;
+        this.MerchantAppId = 'MerchantAppId' in params ? params.MerchantAppId : null;
+        this.OpenId = 'OpenId' in params ? params.OpenId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10182,6 +10631,83 @@ class QueryAgentStatementsResponse extends  AbstractModel {
 }
 
 /**
+ * QueryTransferDetail请求参数结构体
+ * @class
+ */
+class QueryTransferDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 商户号。
+示例值：129284394
+         * @type {string || null}
+         */
+        this.MerchantId = null;
+
+        /**
+         * 商家批次单号。
+商户系统内部的商家批次单号，此参数只能由数字、字母组成，商户系统内部唯一，UTF8编码，最多32个字符。
+示例值：plfk2020042013
+         * @type {string || null}
+         */
+        this.MerchantBatchNo = null;
+
+        /**
+         * 商家明细单号。
+商户系统内部的商家明细单号
+示例值：plfk2020042013
+         * @type {string || null}
+         */
+        this.MerchantDetailNo = null;
+
+        /**
+         * 微信批次单号。
+微信商家转账系统返回的唯一标识。
+商家单号（包含批次号和明细单号）和微信单号（包含批次号和明细单号）二者必填其一。
+示例值：1030000071100999991182020050700019480001
+         * @type {string || null}
+         */
+        this.BatchId = null;
+
+        /**
+         * 微信明细单号。
+微信区分明细单返回的唯一标识。
+示例值：1030000071100999991182020050700019480001
+         * @type {string || null}
+         */
+        this.DetailId = null;
+
+        /**
+         * 环境名:
+release: 现网环境
+sandbox: 沙箱环境
+development: 开发环境
+缺省: release
+         * @type {string || null}
+         */
+        this.Profile = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MerchantId = 'MerchantId' in params ? params.MerchantId : null;
+        this.MerchantBatchNo = 'MerchantBatchNo' in params ? params.MerchantBatchNo : null;
+        this.MerchantDetailNo = 'MerchantDetailNo' in params ? params.MerchantDetailNo : null;
+        this.BatchId = 'BatchId' in params ? params.BatchId : null;
+        this.DetailId = 'DetailId' in params ? params.DetailId : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
+
+    }
+}
+
+/**
  * QueryOrder请求参数结构体
  * @class
  */
@@ -10720,6 +11246,104 @@ class TransactionItem extends  AbstractModel {
         this.InSubAcctNo = 'InSubAcctNo' in params ? params.InSubAcctNo : null;
         this.OutSubAcctNo = 'OutSubAcctNo' in params ? params.OutSubAcctNo : null;
         this.Remark = 'Remark' in params ? params.Remark : null;
+
+    }
+}
+
+/**
+ * QueryTransferBatch请求参数结构体
+ * @class
+ */
+class QueryTransferBatchRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 商户号。
+示例值：129284394
+         * @type {string || null}
+         */
+        this.MerchantId = null;
+
+        /**
+         * 微信明细单号。
+微信区分明细单返回的唯一标识。
+示例值：1030000071100999991182020050700019480101
+         * @type {boolean || null}
+         */
+        this.NeedQueryDetail = null;
+
+        /**
+         * 商家批次单号。
+商户系统内部的商家批次单号，此参数只能由数字、字母组成，商户系统内部唯一，UTF8编码，最多32个字符。
+示例值：plfk2020042013
+         * @type {string || null}
+         */
+        this.MerchantBatchNo = null;
+
+        /**
+         * 是否查询账单明细。
+true-是；
+false-否，默认否。
+商户可选择是否查询指定状态的转账明细单，当转账批次单状态为“FINISHED”（已完成）时，才会返回满足条件的转账明细单。
+示例值：true
+         * @type {string || null}
+         */
+        this.BatchId = null;
+
+        /**
+         * 环境名:
+release: 现网环境
+sandbox: 沙箱环境
+development: 开发环境
+缺省: release
+         * @type {string || null}
+         */
+        this.Profile = null;
+
+        /**
+         * 请求资源起始位置。
+从0开始，默认值为0。
+示例值：20
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 最大资源条数。
+该次请求可返回的最大资源（转账明细单）条数，最小20条，最大100条，不传则默认20条。不足20条按实际条数返回
+示例值：20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 明细状态。
+ALL：全部，需要同时查询转账成功喝失败的明细单；
+SUCCESS：转账成功，只查询成功的明细单；
+FAIL：转账失败，只查询转账失败的明细单。
+示例值：FAIL
+         * @type {string || null}
+         */
+        this.DetailStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MerchantId = 'MerchantId' in params ? params.MerchantId : null;
+        this.NeedQueryDetail = 'NeedQueryDetail' in params ? params.NeedQueryDetail : null;
+        this.MerchantBatchNo = 'MerchantBatchNo' in params ? params.MerchantBatchNo : null;
+        this.BatchId = 'BatchId' in params ? params.BatchId : null;
+        this.Profile = 'Profile' in params ? params.Profile : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.DetailStatus = 'DetailStatus' in params ? params.DetailStatus : null;
 
     }
 }
@@ -13633,6 +14257,210 @@ class QueryRefundResponse extends  AbstractModel {
 }
 
 /**
+ * QueryTransferBatch返回参数结构体
+ * @class
+ */
+class QueryTransferBatchResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 商户号。
+示例值：19300009329
+         * @type {string || null}
+         */
+        this.MerchantId = null;
+
+        /**
+         * 商家批次单号。
+商户系统内部的商家批次单号，此参数只能由数字、字母组成，商户系统内部唯一，UTF8编码，最多32个字符。
+示例值：plfk2020042013
+         * @type {string || null}
+         */
+        this.MerchantBatchNo = null;
+
+        /**
+         * 微信批次单号。
+微信商家转账系统返回的唯一标识。
+示例值：1030000071100999991182020050700019480001
+         * @type {string || null}
+         */
+        this.BatchId = null;
+
+        /**
+         * 直连商户appId。
+商户号绑定的appid。
+示例值：wxf636efh567hg4356
+         * @type {string || null}
+         */
+        this.MerchantAppId = null;
+
+        /**
+         * 批次状态。
+ACCEPTED:已受理，批次已受理成功，若发起批量转账的30分钟后，转账批次单仍处于该状态，可能原因是商户账户余额不足等。商户可查询账户资金流水，若该笔转账批次单的扣款已经发生，则表示批次已经进入转账中，请再次查单确认；
+PROCESSING:转账中，已开始处理批次内的转账明细单；
+FINISHED:已完成，批次内的所有转账明细单都已处理完成；
+CLOSED:已关闭，可查询具体的批次关闭原因确认；
+示例值：ACCEPTED
+         * @type {string || null}
+         */
+        this.BatchStatus = null;
+
+        /**
+         * 批次关闭原因。
+如果批次单状态为“CLOSED”（已关闭），则有关闭原因；
+MERCHANT_REVOCATION：商户主动撤销；
+OVERDUE_CLOSE：系统超时关闭。
+示例值：OVERDUE_CLOSE
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CloseReason = null;
+
+        /**
+         * 转账总金额。
+转账金额，单位为分。
+示例值：4000000
+         * @type {number || null}
+         */
+        this.TotalAmount = null;
+
+        /**
+         * 转账总笔数。
+一个转账批次最多允许发起三千笔转账。
+示例值：200
+         * @type {number || null}
+         */
+        this.TotalNum = null;
+
+        /**
+         * 批次受理成功时返回，遵循rfc3339标准格式。格式为YYYY-MM-DDTHH:mm:ss.sss+TIMEZONE，YYYY-MM-DD表示年月日，T出现在字符串中，表示time元素的开头，HH:mm:ss.sss表示时分秒毫秒，TIMEZONE表示时区（+08:00表示东八区时间，领先UTC 8小时，即北京时间）。例如：2015-05-20T13:29:35.120+08:00表示北京时间2015年05月20日13点29分35秒。
+示例值：2015-05-20T13:29:35.120+08:00
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 批次最近一次更新时间，遵循rfc3339标准格式。格式为YYYY-MM-DDTHH:mm:ss.sss+TIMEZONE，YYYY-MM-DD表示年月日，T出现在字符串中，表示time元素的开头，HH:mm:ss.sss表示时分秒毫秒，TIMEZONE表示时区（+08:00表示东八区时间，领先UTC 8小时，即北京时间）。例如：2015-05-20T13:29:35.120+08:00表示北京时间2015年05月20日13点29分35秒。
+示例值：2015-05-20T13:29:35.120+08:00
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 转账成功金额。
+转账成功的金额，单位为分，可能随时变化。
+示例值：4000000
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SuccessAmount = null;
+
+        /**
+         * 转账成功的笔数。
+可能随时变化。
+示例值：200
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SuccessNum = null;
+
+        /**
+         * 转账失败金额。
+转账失败的金额，单位为分，可能随时变化。
+示例值：4000000
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FailAmount = null;
+
+        /**
+         * 转账失败笔数。
+可能随时变化。
+示例值：200
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FailNum = null;
+
+        /**
+         * 转账明细列表。
+返回明细详情
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<TransferDetailResponse> || null}
+         */
+        this.TransferDetails = null;
+
+        /**
+         * 批次类型。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.BatchType = null;
+
+        /**
+         * 批次名称。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.BatchName = null;
+
+        /**
+         * 批次标注。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.BatchRemark = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MerchantId = 'MerchantId' in params ? params.MerchantId : null;
+        this.MerchantBatchNo = 'MerchantBatchNo' in params ? params.MerchantBatchNo : null;
+        this.BatchId = 'BatchId' in params ? params.BatchId : null;
+        this.MerchantAppId = 'MerchantAppId' in params ? params.MerchantAppId : null;
+        this.BatchStatus = 'BatchStatus' in params ? params.BatchStatus : null;
+        this.CloseReason = 'CloseReason' in params ? params.CloseReason : null;
+        this.TotalAmount = 'TotalAmount' in params ? params.TotalAmount : null;
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.SuccessAmount = 'SuccessAmount' in params ? params.SuccessAmount : null;
+        this.SuccessNum = 'SuccessNum' in params ? params.SuccessNum : null;
+        this.FailAmount = 'FailAmount' in params ? params.FailAmount : null;
+        this.FailNum = 'FailNum' in params ? params.FailNum : null;
+
+        if (params.TransferDetails) {
+            this.TransferDetails = new Array();
+            for (let z in params.TransferDetails) {
+                let obj = new TransferDetailResponse();
+                obj.deserialize(params.TransferDetails[z]);
+                this.TransferDetails.push(obj);
+            }
+        }
+        this.BatchType = 'BatchType' in params ? params.BatchType : null;
+        this.BatchName = 'BatchName' in params ? params.BatchName : null;
+        this.BatchRemark = 'BatchRemark' in params ? params.BatchRemark : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 线下查票-订单信息
  * @class
  */
@@ -14799,6 +15627,7 @@ module.exports = {
     CreateAgentTaxPaymentInfosResponse: CreateAgentTaxPaymentInfosResponse,
     QueryPayerInfoRequest: QueryPayerInfoRequest,
     QueryMerchantInfoForManagementResponse: QueryMerchantInfoForManagementResponse,
+    CreateTransferBatchResponse: CreateTransferBatchResponse,
     QuerySingleTransactionStatusRequest: QuerySingleTransactionStatusRequest,
     MerchantManagementList: MerchantManagementList,
     CreateInvoiceResult: CreateInvoiceResult,
@@ -14817,6 +15646,8 @@ module.exports = {
     ExecuteMemberTransactionResponse: ExecuteMemberTransactionResponse,
     BindRelateAcctUnionPayRequest: BindRelateAcctUnionPayRequest,
     CreateInvoiceResultData: CreateInvoiceResultData,
+    TransferDetailRequest: TransferDetailRequest,
+    CreateTransferBatchRequest: CreateTransferBatchRequest,
     RefundResponse: RefundResponse,
     QueryAgentTaxPaymentBatchResponse: QueryAgentTaxPaymentBatchResponse,
     DeleteAgentTaxPaymentInfosResponse: DeleteAgentTaxPaymentInfosResponse,
@@ -14829,6 +15660,7 @@ module.exports = {
     QueryAcctInfoRequest: QueryAcctInfoRequest,
     DescribeChargeDetailResponse: DescribeChargeDetailResponse,
     ApplyDeclareData: ApplyDeclareData,
+    TransferDetailResponse: TransferDetailResponse,
     TranItem: TranItem,
     ClearItem: ClearItem,
     MerchantManagementResult: MerchantManagementResult,
@@ -14847,6 +15679,7 @@ module.exports = {
     QueryExchangerateData: QueryExchangerateData,
     WithdrawBill: WithdrawBill,
     QueryRefundRequest: QueryRefundRequest,
+    QueryTransferDetailResponse: QueryTransferDetailResponse,
     BindRelateAccReUnionPayRequest: BindRelateAccReUnionPayRequest,
     CreateCustAcctIdResponse: CreateCustAcctIdResponse,
     QueryMerchantBalanceResponse: QueryMerchantBalanceResponse,
@@ -14876,12 +15709,14 @@ module.exports = {
     QueryOrderOutOrderList: QueryOrderOutOrderList,
     QueryCommonTransferRechargeRequest: QueryCommonTransferRechargeRequest,
     QueryAgentStatementsResponse: QueryAgentStatementsResponse,
+    QueryTransferDetailRequest: QueryTransferDetailRequest,
     QueryOrderRequest: QueryOrderRequest,
     CloseOrderRequest: CloseOrderRequest,
     RevResigterBillSupportWithdrawResponse: RevResigterBillSupportWithdrawResponse,
     QueryBalanceResponse: QueryBalanceResponse,
     QueryOutwardOrderData: QueryOutwardOrderData,
     TransactionItem: TransactionItem,
+    QueryTransferBatchRequest: QueryTransferBatchRequest,
     CheckAcctResponse: CheckAcctResponse,
     QueryReconciliationDocumentResponse: QueryReconciliationDocumentResponse,
     QueryApplicationMaterialResponse: QueryApplicationMaterialResponse,
@@ -14924,6 +15759,7 @@ module.exports = {
     CreateRedInvoiceResultData: CreateRedInvoiceResultData,
     BindRelateAcctSmallAmountRequest: BindRelateAcctSmallAmountRequest,
     QueryRefundResponse: QueryRefundResponse,
+    QueryTransferBatchResponse: QueryTransferBatchResponse,
     Order: Order,
     QueryDeclareData: QueryDeclareData,
     QueryMemberBindRequest: QueryMemberBindRequest,

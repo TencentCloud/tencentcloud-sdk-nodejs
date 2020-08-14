@@ -9157,6 +9157,12 @@ class NatGateway extends  AbstractModel {
          */
         this.SubnetId = null;
 
+        /**
+         * 标签键值对。
+         * @type {Array.<Tag> || null}
+         */
+        this.TagSet = null;
+
     }
 
     /**
@@ -9195,6 +9201,15 @@ class NatGateway extends  AbstractModel {
         this.Zone = 'Zone' in params ? params.Zone : null;
         this.DirectConnectGatewayIds = 'DirectConnectGatewayIds' in params ? params.DirectConnectGatewayIds : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+
+        if (params.TagSet) {
+            this.TagSet = new Array();
+            for (let z in params.TagSet) {
+                let obj = new Tag();
+                obj.deserialize(params.TagSet[z]);
+                this.TagSet.push(obj);
+            }
+        }
 
     }
 }

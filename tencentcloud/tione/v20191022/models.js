@@ -1756,6 +1756,13 @@ class StoppingCondition extends  AbstractModel {
          */
         this.MaxRuntimeInSeconds = null;
 
+        /**
+         * 最长等待运行时间（秒）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxWaitTimeInSeconds = null;
+
     }
 
     /**
@@ -1766,6 +1773,7 @@ class StoppingCondition extends  AbstractModel {
             return;
         }
         this.MaxRuntimeInSeconds = 'MaxRuntimeInSeconds' in params ? params.MaxRuntimeInSeconds : null;
+        this.MaxWaitTimeInSeconds = 'MaxWaitTimeInSeconds' in params ? params.MaxWaitTimeInSeconds : null;
 
     }
 }
@@ -2996,6 +3004,13 @@ class CreateTrainingJobRequest extends  AbstractModel {
          */
         this.RoleName = null;
 
+        /**
+         * 在资源不足（ResourceInsufficient）时后台不定时尝试重新创建训练任务。可取值Enabled/Disabled
+默认值为Disabled即不重新尝试。设为Enabled时重新尝试有一定的时间期限，定义在 StoppingCondition 中 MaxWaitTimeInSecond中 ，默认值为1天，超过该期限创建失败。
+         * @type {string || null}
+         */
+        this.RetryWhenResourceInsufficient = null;
+
     }
 
     /**
@@ -3056,6 +3071,7 @@ class CreateTrainingJobRequest extends  AbstractModel {
             }
         }
         this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.RetryWhenResourceInsufficient = 'RetryWhenResourceInsufficient' in params ? params.RetryWhenResourceInsufficient : null;
 
     }
 }
