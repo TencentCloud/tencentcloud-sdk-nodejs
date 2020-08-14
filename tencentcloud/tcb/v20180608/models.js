@@ -2288,6 +2288,12 @@ class DestroyEnvRequest extends  AbstractModel {
          */
         this.IsForce = null;
 
+        /**
+         * 是否绕过资源检查，资源包等额外资源，默认为false，如果为true，则不检查资源是否有数据，直接删除。
+         * @type {boolean || null}
+         */
+        this.BypassCheck = null;
+
     }
 
     /**
@@ -2299,6 +2305,7 @@ class DestroyEnvRequest extends  AbstractModel {
         }
         this.EnvId = 'EnvId' in params ? params.EnvId : null;
         this.IsForce = 'IsForce' in params ? params.IsForce : null;
+        this.BypassCheck = 'BypassCheck' in params ? params.BypassCheck : null;
 
     }
 }

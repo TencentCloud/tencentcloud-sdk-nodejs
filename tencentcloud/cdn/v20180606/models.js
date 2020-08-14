@@ -4246,7 +4246,7 @@ class DescribeDomainsConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * 分页查询偏移量，默认为 0 （第一页）
+         * 分页查询偏移量，默认为 0
          * @type {number || null}
          */
         this.Offset = null;
@@ -5830,6 +5830,29 @@ global：全球锁定
          */
         this.AccessControl = null;
 
+        /**
+         * 是否支持高级配置项
+on：支持
+off：不支持
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Advance = null;
+
+        /**
+         * URL重定向配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {UrlRedirect || null}
+         */
+        this.UrlRedirect = null;
+
+        /**
+         * 访问端口配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<number> || null}
+         */
+        this.AccessPort = null;
+
     }
 
     /**
@@ -6043,6 +6066,14 @@ global：全球锁定
             obj.deserialize(params.AccessControl)
             this.AccessControl = obj;
         }
+        this.Advance = 'Advance' in params ? params.Advance : null;
+
+        if (params.UrlRedirect) {
+            let obj = new UrlRedirect();
+            obj.deserialize(params.UrlRedirect)
+            this.UrlRedirect = obj;
+        }
+        this.AccessPort = 'AccessPort' in params ? params.AccessPort : null;
 
     }
 }
@@ -8456,6 +8487,52 @@ off：关闭全路径缓存（即开启参数过滤）
 }
 
 /**
+ * URL重定向配置
+ * @class
+ */
+class UrlRedirect extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * URL重定向配置开关
+on：开启
+off：关闭
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * URL重定向规则，当Switch为on时必填，规则数量最大为10个。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<UrlRedirectRule> || null}
+         */
+        this.PathRules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.PathRules) {
+            this.PathRules = new Array();
+            for (let z in params.PathRules) {
+                let obj = new UrlRedirectRule();
+                obj.deserialize(params.PathRules[z]);
+                this.PathRules.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * 组成CacheKey的一部分
  * @class
  */
@@ -9931,6 +10008,24 @@ global：全球加速
          */
         this.UserAgentFilter = null;
 
+        /**
+         * 访问控制
+         * @type {AccessControl || null}
+         */
+        this.AccessControl = null;
+
+        /**
+         * URL重定向配置
+         * @type {UrlRedirect || null}
+         */
+        this.UrlRedirect = null;
+
+        /**
+         * 访问端口配置
+         * @type {Array.<number> || null}
+         */
+        this.AccessPort = null;
+
     }
 
     /**
@@ -10106,6 +10201,19 @@ global：全球加速
             obj.deserialize(params.UserAgentFilter)
             this.UserAgentFilter = obj;
         }
+
+        if (params.AccessControl) {
+            let obj = new AccessControl();
+            obj.deserialize(params.AccessControl)
+            this.AccessControl = obj;
+        }
+
+        if (params.UrlRedirect) {
+            let obj = new UrlRedirect();
+            obj.deserialize(params.UrlRedirect)
+            this.UrlRedirect = obj;
+        }
+        this.AccessPort = 'AccessPort' in params ? params.AccessPort : null;
 
     }
 }
@@ -10440,6 +10548,48 @@ class DescribePurgeTasksResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Url重定向规则配置
+ * @class
+ */
+class UrlRedirectRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 重定向状态码，301 | 302
+         * @type {number || null}
+         */
+        this.RedirectStatusCode = null;
+
+        /**
+         * 待匹配的Url模式，支持完全路径匹配和正则匹配，最大长度1024字符。
+         * @type {string || null}
+         */
+        this.Pattern = null;
+
+        /**
+         * 目标URL，必须以“/”开头，最大长度1024字符。
+         * @type {string || null}
+         */
+        this.RedirectUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RedirectStatusCode = 'RedirectStatusCode' in params ? params.RedirectStatusCode : null;
+        this.Pattern = 'Pattern' in params ? params.Pattern : null;
+        this.RedirectUrl = 'RedirectUrl' in params ? params.RedirectUrl : null;
 
     }
 }
@@ -11190,6 +11340,7 @@ module.exports = {
     DescribeIpStatusResponse: DescribeIpStatusResponse,
     DescribeDistrictIspDataRequest: DescribeDistrictIspDataRequest,
     CacheKey: CacheKey,
+    UrlRedirect: UrlRedirect,
     CookieKey: CookieKey,
     CappingRule: CappingRule,
     ListClsLogTopicsRequest: ListClsLogTopicsRequest,
@@ -11227,6 +11378,7 @@ module.exports = {
     DescribeUrlViolationsResponse: DescribeUrlViolationsResponse,
     IpFilter: IpFilter,
     DescribePurgeTasksResponse: DescribePurgeTasksResponse,
+    UrlRedirectRule: UrlRedirectRule,
     ErrorPageRule: ErrorPageRule,
     DescribeOriginDataResponse: DescribeOriginDataResponse,
     PurgeTask: PurgeTask,

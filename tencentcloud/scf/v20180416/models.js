@@ -4134,21 +4134,24 @@ class CfsInsInfo extends  AbstractModel {
         this.RemoteMountDir = null;
 
         /**
-         * 文件系统ip
+         * 文件系统ip，配置 cfs 时无需填写。
+注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.IpAddress = null;
 
         /**
-         * 文件系统所在的私有网络id
+         * 文件系统所在的私有网络id，配置 cfs 时无需填写。
+注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.MountVpcId = null;
 
         /**
-         * 文件系统所在私有网络的子网id
+         * 文件系统所在私有网络的子网id，配置 cfs 时无需填写。
+注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
