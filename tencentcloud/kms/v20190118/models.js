@@ -164,6 +164,13 @@ class DescribeWhiteBoxKeyDetailsResponse extends  AbstractModel {
         this.KeyInfos = null;
 
         /**
+         * key总数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -187,6 +194,7 @@ class DescribeWhiteBoxKeyDetailsResponse extends  AbstractModel {
                 this.KeyInfos.push(obj);
             }
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -435,6 +443,13 @@ class WhiteboxKeyInfo extends  AbstractModel {
          */
         this.ResourceId = null;
 
+        /**
+         * 是否有设备指纹与当前密钥绑定
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.DeviceFingerprintBind = null;
+
     }
 
     /**
@@ -455,6 +470,7 @@ class WhiteboxKeyInfo extends  AbstractModel {
         this.EncryptKey = 'EncryptKey' in params ? params.EncryptKey : null;
         this.DecryptKey = 'DecryptKey' in params ? params.DecryptKey : null;
         this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
+        this.DeviceFingerprintBind = 'DeviceFingerprintBind' in params ? params.DeviceFingerprintBind : null;
 
     }
 }
@@ -2780,6 +2796,24 @@ class DescribeWhiteBoxKeyDetailsRequest extends  AbstractModel {
          */
         this.KeyStatus = null;
 
+        /**
+         * 含义跟 SQL 查询的 Offset 一致，表示本次获取从按一定顺序排列数组的第 Offset 个元素开始，缺省为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 含义跟 SQL 查询的 Limit 一致，表示本次最多获取 Limit 个元素。缺省值为0, 表示不分页
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 标签过滤条件
+         * @type {Array.<TagFilter> || null}
+         */
+        this.TagFilters = null;
+
     }
 
     /**
@@ -2790,6 +2824,17 @@ class DescribeWhiteBoxKeyDetailsRequest extends  AbstractModel {
             return;
         }
         this.KeyStatus = 'KeyStatus' in params ? params.KeyStatus : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.TagFilters) {
+            this.TagFilters = new Array();
+            for (let z in params.TagFilters) {
+                let obj = new TagFilter();
+                obj.deserialize(params.TagFilters[z]);
+                this.TagFilters.push(obj);
+            }
+        }
 
     }
 }
@@ -3025,6 +3070,12 @@ class ListKeyDetailRequest extends  AbstractModel {
          */
         this.KeyUsage = null;
 
+        /**
+         * 标签过滤条件
+         * @type {Array.<TagFilter> || null}
+         */
+        this.TagFilters = null;
+
     }
 
     /**
@@ -3042,6 +3093,15 @@ class ListKeyDetailRequest extends  AbstractModel {
         this.SearchKeyAlias = 'SearchKeyAlias' in params ? params.SearchKeyAlias : null;
         this.Origin = 'Origin' in params ? params.Origin : null;
         this.KeyUsage = 'KeyUsage' in params ? params.KeyUsage : null;
+
+        if (params.TagFilters) {
+            this.TagFilters = new Array();
+            for (let z in params.TagFilters) {
+                let obj = new TagFilter();
+                obj.deserialize(params.TagFilters[z]);
+                this.TagFilters.push(obj);
+            }
+        }
 
     }
 }
@@ -3411,6 +3471,41 @@ class BindCloudResourceRequest extends  AbstractModel {
 }
 
 /**
+ * 标签过滤器
+ * @class
+ */
+class TagFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签键
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * 标签值
+         * @type {Array.<string> || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
  * DescribeWhiteBoxDecryptKey返回参数结构体
  * @class
  */
@@ -3709,6 +3804,7 @@ module.exports = {
     GetKeyRotationStatusRequest: GetKeyRotationStatusRequest,
     GetPublicKeyResponse: GetPublicKeyResponse,
     BindCloudResourceRequest: BindCloudResourceRequest,
+    TagFilter: TagFilter,
     DescribeWhiteBoxDecryptKeyResponse: DescribeWhiteBoxDecryptKeyResponse,
     DescribeWhiteBoxDeviceFingerprintsResponse: DescribeWhiteBoxDeviceFingerprintsResponse,
     UpdateKeyDescriptionRequest: UpdateKeyDescriptionRequest,

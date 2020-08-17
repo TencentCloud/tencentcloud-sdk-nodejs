@@ -104,6 +104,7 @@ const DisableKeyRequest = models.DisableKeyRequest;
 const GetKeyRotationStatusRequest = models.GetKeyRotationStatusRequest;
 const GetPublicKeyResponse = models.GetPublicKeyResponse;
 const BindCloudResourceRequest = models.BindCloudResourceRequest;
+const TagFilter = models.TagFilter;
 const DescribeWhiteBoxDecryptKeyResponse = models.DescribeWhiteBoxDecryptKeyResponse;
 const DescribeWhiteBoxDeviceFingerprintsResponse = models.DescribeWhiteBoxDeviceFingerprintsResponse;
 const UpdateKeyDescriptionRequest = models.UpdateKeyDescriptionRequest;
