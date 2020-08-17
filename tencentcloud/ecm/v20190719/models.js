@@ -664,12 +664,6 @@ class DescribeSubnetsRequest extends  AbstractModel {
         super();
 
         /**
-         * ECM 地域
-         * @type {string || null}
-         */
-        this.EcmRegion = null;
-
-        /**
          * 子网实例ID查询。形如：subnet-pxir56ns。每次请求的实例的上限为100。参数不支持同时指定SubnetIds和Filters。
          * @type {Array.<string> || null}
          */
@@ -677,15 +671,15 @@ class DescribeSubnetsRequest extends  AbstractModel {
 
         /**
          * 过滤条件，参数不支持同时指定SubnetIds和Filters。
-subnet-id - String - （过滤条件）Subnet实例名称。
-vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。
-cidr-block - String - （过滤条件）子网网段，形如: 192.168.1.0 。
-is-default - Boolean - （过滤条件）是否是默认子网。
-is-remote-vpc-snat - Boolean - （过滤条件）是否为VPC SNAT地址池子网。
-subnet-name - String - （过滤条件）子网名称。
-zone - String - （过滤条件）可用区。
-tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。
-tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例
+subnet-id - String - Subnet实例名称。
+subnet-name - String - 子网名称。只支持单值的模糊查询。
+cidr-block - String - 子网网段，形如: 192.168.1.0 。只支持单值的模糊查询。
+vpc-id - String - VPC实例ID，形如：vpc-f49l6u0z。
+vpc-cidr-block  - String - vpc网段，形如: 192.168.1.0 。只支持单值的模糊查询。
+region - String - ECM地域
+zone - String - 可用区。
+tag-key - String -是否必填：否- 按照标签键进行过滤。
+tag:tag-key - String - 是否必填：否 - 按照标签键值对进行过滤。
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -702,6 +696,18 @@ tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值
          */
         this.Limit = null;
 
+        /**
+         * ECM 地域
+         * @type {string || null}
+         */
+        this.EcmRegion = null;
+
+        /**
+         * 排序方式：time时间倒序, default按照网络规划排序
+         * @type {string || null}
+         */
+        this.Sort = null;
+
     }
 
     /**
@@ -711,7 +717,6 @@ tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值
         if (!params) {
             return;
         }
-        this.EcmRegion = 'EcmRegion' in params ? params.EcmRegion : null;
         this.SubnetIds = 'SubnetIds' in params ? params.SubnetIds : null;
 
         if (params.Filters) {
@@ -724,6 +729,8 @@ tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.EcmRegion = 'EcmRegion' in params ? params.EcmRegion : null;
+        this.Sort = 'Sort' in params ? params.Sort : null;
 
     }
 }
@@ -1783,6 +1790,41 @@ class VpcInfo extends  AbstractModel {
          */
         this.AssistantCidrSet = null;
 
+        /**
+         * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 地域中文名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RegionName = null;
+
+        /**
+         * 包含子网数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SubnetCount = null;
+
+        /**
+         * 包含实例数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.InstanceCount = null;
+
     }
 
     /**
@@ -1821,6 +1863,11 @@ class VpcInfo extends  AbstractModel {
                 this.AssistantCidrSet.push(obj);
             }
         }
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.SubnetCount = 'SubnetCount' in params ? params.SubnetCount : null;
+        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
 
     }
 }
@@ -4369,12 +4416,6 @@ class DescribeVpcsRequest extends  AbstractModel {
         super();
 
         /**
-         * 地域
-         * @type {string || null}
-         */
-        this.EcmRegion = null;
-
-        /**
          * VPC实例ID。形如：vpc-f49l6u0z。每次请求的实例的上限为100。参数不支持同时指定VpcIds和Filters。
          * @type {Array.<string> || null}
          */
@@ -4382,12 +4423,12 @@ class DescribeVpcsRequest extends  AbstractModel {
 
         /**
          * 过滤条件，参数不支持同时指定VpcIds和Filters。
-vpc-name - String - （过滤条件）VPC实例名称。
-is-default - String - （过滤条件）是否默认VPC。
-vpc-id - String - （过滤条件）VPC实例ID形如：vpc-f49l6u0z。
-cidr-block - String - （过滤条件）vpc的cidr。
-tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。
-tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例
+vpc-name - String - VPC实例名称，只支持单值的模糊查询。
+vpc-id - String - VPC实例ID形如：vpc-f49l6u0z。
+cidr-block - String - vpc的cidr，只支持单值的模糊查询。
+region - String - vpc的region。
+tag-key - String -是否必填：否- 按照标签键进行过滤。
+tag:tag-key - String - 是否必填：否 - 按照标签键值对进行过滤。
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -4404,6 +4445,18 @@ tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值
          */
         this.Limit = null;
 
+        /**
+         * 地域
+         * @type {string || null}
+         */
+        this.EcmRegion = null;
+
+        /**
+         * 排序方式：time时间倒序, default按照网络规划排序
+         * @type {string || null}
+         */
+        this.Sort = null;
+
     }
 
     /**
@@ -4413,7 +4466,6 @@ tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值
         if (!params) {
             return;
         }
-        this.EcmRegion = 'EcmRegion' in params ? params.EcmRegion : null;
         this.VpcIds = 'VpcIds' in params ? params.VpcIds : null;
 
         if (params.Filters) {
@@ -4426,6 +4478,8 @@ tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.EcmRegion = 'EcmRegion' in params ? params.EcmRegion : null;
+        this.Sort = 'Sort' in params ? params.Sort : null;
 
     }
 }
@@ -5133,6 +5187,41 @@ class Subnet extends  AbstractModel {
          */
         this.Zone = null;
 
+        /**
+         * 可用区名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+        /**
+         * 实例数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.InstanceCount = null;
+
+        /**
+         * VPC的 IPv4 CIDR。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VpcCidrBlock = null;
+
+        /**
+         * VPC的 IPv6 CIDR。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VpcIpv6CidrBlock = null;
+
+        /**
+         * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Region = null;
+
     }
 
     /**
@@ -5164,6 +5253,11 @@ class Subnet extends  AbstractModel {
             }
         }
         this.Zone = 'Zone' in params ? params.Zone : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
+        this.VpcCidrBlock = 'VpcCidrBlock' in params ? params.VpcCidrBlock : null;
+        this.VpcIpv6CidrBlock = 'VpcIpv6CidrBlock' in params ? params.VpcIpv6CidrBlock : null;
+        this.Region = 'Region' in params ? params.Region : null;
 
     }
 }
@@ -5700,6 +5794,13 @@ PROTECTIVELY_ISOLATED：表示被安全隔离的实例。
          */
         this.SecurityGroupIds = null;
 
+        /**
+         * VPC属性
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {VirtualPrivateCloud || null}
+         */
+        this.VirtualPrivateCloud = null;
+
     }
 
     /**
@@ -5780,6 +5881,12 @@ PROTECTIVELY_ISOLATED：表示被安全隔离的实例。
         }
         this.NewFlag = 'NewFlag' in params ? params.NewFlag : null;
         this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+
+        if (params.VirtualPrivateCloud) {
+            let obj = new VirtualPrivateCloud();
+            obj.deserialize(params.VirtualPrivateCloud)
+            this.VirtualPrivateCloud = obj;
+        }
 
     }
 }
@@ -6120,6 +6227,18 @@ class ModifyVpcAttributeRequest extends  AbstractModel {
          */
         this.VpcName = null;
 
+        /**
+         * 标签
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 私有网络描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
     }
 
     /**
@@ -6132,6 +6251,16 @@ class ModifyVpcAttributeRequest extends  AbstractModel {
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.EcmRegion = 'EcmRegion' in params ? params.EcmRegion : null;
         this.VpcName = 'VpcName' in params ? params.VpcName : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -6568,6 +6697,8 @@ tag:tag-key      String      是否必填：否      （过滤条件）按照标
 instance-family      String      是否必填：否      （过滤条件）按照机型family过滤。
 module-name      String      是否必填：否      （过滤条件）按照模块名称过滤,支持模糊匹配。
 image-id      String      是否必填：否      （过滤条件）按照实例的镜像ID过滤。
+vpc-id String      是否必填：否      （过滤条件）按照实例的vpc id过滤。
+subnet-id String      是否必填：否      （过滤条件）按照实例的subnet id过滤。
 
 若不传Filters参数则表示查询所有相关的实例信息。
 单次请求的Filter.Values的上限为5。
@@ -6659,6 +6790,66 @@ class DescribeTaskResultRequest extends  AbstractModel {
         }
         this.EcmRegion = 'EcmRegion' in params ? params.EcmRegion : null;
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * 私有网络相关信息配置。
+ * @class
+ */
+class VirtualPrivateCloud extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 私有网络ID，形如vpc-xxx。
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 私有网络子网ID，形如subnet-xxx。
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 是否用作公网网关。公网网关只有在实例拥有公网IP以及处于私有网络下时才能正常使用。取值范围：
+TRUE：表示用作公网网关
+FALSE：表示不用作公网网关
+
+默认取值：FALSE。
+         * @type {boolean || null}
+         */
+        this.AsVpcGateway = null;
+
+        /**
+         * 私有网络子网 IP 数组，在创建实例、修改实例vpc属性操作中可使用此参数。
+         * @type {Array.<string> || null}
+         */
+        this.PrivateIpAddresses = null;
+
+        /**
+         * 为弹性网卡指定随机生成的 IPv6 地址数量。
+         * @type {number || null}
+         */
+        this.Ipv6AddressCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.AsVpcGateway = 'AsVpcGateway' in params ? params.AsVpcGateway : null;
+        this.PrivateIpAddresses = 'PrivateIpAddresses' in params ? params.PrivateIpAddresses : null;
+        this.Ipv6AddressCount = 'Ipv6AddressCount' in params ? params.Ipv6AddressCount : null;
 
     }
 }
@@ -8529,7 +8720,7 @@ class CreateVpcRequest extends  AbstractModel {
         this.VpcName = null;
 
         /**
-         * vpc的cidr，只能为10.0.0.0/16，172.16.0.0/16，192.168.0.0/16这三个内网网段内。
+         * vpc的cidr，只能为10.*.0.0/16，172.[16-31].0.0/16，192.168.0.0/16这三个内网网段内。
          * @type {string || null}
          */
         this.CidrBlock = null;
@@ -8541,19 +8732,19 @@ class CreateVpcRequest extends  AbstractModel {
         this.EcmRegion = null;
 
         /**
-         * 是否开启组播。true: 开启, false: 不开启。
+         * 是否开启组播。true: 开启, false: 不开启。暂不支持
          * @type {string || null}
          */
         this.EnableMulticast = null;
 
         /**
-         * DNS地址，最多支持4个
+         * DNS地址，最多支持4个，暂不支持
          * @type {Array.<string> || null}
          */
         this.DnsServers = null;
 
         /**
-         * 域名
+         * 域名，暂不支持
          * @type {string || null}
          */
         this.DomainName = null;
@@ -8563,6 +8754,12 @@ class CreateVpcRequest extends  AbstractModel {
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
+
+        /**
+         * 描述信息
+         * @type {string || null}
+         */
+        this.Description = null;
 
     }
 
@@ -8588,6 +8785,7 @@ class CreateVpcRequest extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -8694,6 +8892,12 @@ class ModifySubnetAttributeRequest extends  AbstractModel {
          */
         this.EnableBroadcast = null;
 
+        /**
+         * 子网的标签键值
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -8707,6 +8911,15 @@ class ModifySubnetAttributeRequest extends  AbstractModel {
         this.EcmRegion = 'EcmRegion' in params ? params.EcmRegion : null;
         this.SubnetName = 'SubnetName' in params ? params.SubnetName : null;
         this.EnableBroadcast = 'EnableBroadcast' in params ? params.EnableBroadcast : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -9367,6 +9580,7 @@ module.exports = {
     ModifyDefaultSubnetRequest: ModifyDefaultSubnetRequest,
     DescribeInstancesRequest: DescribeInstancesRequest,
     DescribeTaskResultRequest: DescribeTaskResultRequest,
+    VirtualPrivateCloud: VirtualPrivateCloud,
     AssociateAddressResponse: AssociateAddressResponse,
     Filter: Filter,
     PublicIPAddressInfo: PublicIPAddressInfo,

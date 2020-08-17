@@ -1696,6 +1696,26 @@ class ProductData extends  AbstractModel {
          */
         this.ChipId = null;
 
+        /**
+         * 产品类别，0：普通视频设备；1：NVR设备
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ProductCate = null;
+
+        /**
+         * 产品地区
+China-Mainland（中国大陆）
+China-Hong Kong, Macao and Taiwan（港澳台地区）
+America（美国）
+Europe（欧洲）
+India（印度）
+Other-Overseas（其他境外地区）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProductRegion = null;
+
     }
 
     /**
@@ -1715,6 +1735,8 @@ class ProductData extends  AbstractModel {
         this.ProductModel = 'ProductModel' in params ? params.ProductModel : null;
         this.ChipManufactureId = 'ChipManufactureId' in params ? params.ChipManufactureId : null;
         this.ChipId = 'ChipId' in params ? params.ChipId : null;
+        this.ProductCate = 'ProductCate' in params ? params.ProductCate : null;
+        this.ProductRegion = 'ProductRegion' in params ? params.ProductRegion : null;
 
     }
 }
@@ -2529,12 +2551,6 @@ class CreateProductRequest extends  AbstractModel {
         this.ProductModel = null;
 
         /**
-         * 设备功能码（ypsxth:音频双向通话 ，spdxth:视频单向通话）
-         * @type {Array.<string> || null}
-         */
-        this.Features = null;
-
-        /**
          * 产品名称
 仅支持中文、英文、数字、下划线，不超过32个字符
          * @type {string || null}
@@ -2549,6 +2565,12 @@ class CreateProductRequest extends  AbstractModel {
         this.ProductDescription = null;
 
         /**
+         * 设备功能码（ypsxth:音频双向通话 ，spdxth:视频单向通话）
+         * @type {Array.<string> || null}
+         */
+        this.Features = null;
+
+        /**
          * 主芯片产商ID
          * @type {string || null}
          */
@@ -2560,6 +2582,24 @@ class CreateProductRequest extends  AbstractModel {
          */
         this.ChipId = null;
 
+        /**
+         * 地域：
+China-Mainland（中国大陆）
+China-Hong Kong, Macao and Taiwan（港澳台地区）
+America（美国）
+Europe（欧洲）
+India（印度）
+Other-Overseas（其他境外地区）
+         * @type {string || null}
+         */
+        this.ProductRegion = null;
+
+        /**
+         * 设备类型, 0-普通视频设备，1-NVR设备
+         * @type {number || null}
+         */
+        this.ProductCate = null;
+
     }
 
     /**
@@ -2570,11 +2610,13 @@ class CreateProductRequest extends  AbstractModel {
             return;
         }
         this.ProductModel = 'ProductModel' in params ? params.ProductModel : null;
-        this.Features = 'Features' in params ? params.Features : null;
         this.ProductName = 'ProductName' in params ? params.ProductName : null;
         this.ProductDescription = 'ProductDescription' in params ? params.ProductDescription : null;
+        this.Features = 'Features' in params ? params.Features : null;
         this.ChipManufactureId = 'ChipManufactureId' in params ? params.ChipManufactureId : null;
         this.ChipId = 'ChipId' in params ? params.ChipId : null;
+        this.ProductRegion = 'ProductRegion' in params ? params.ProductRegion : null;
+        this.ProductCate = 'ProductCate' in params ? params.ProductCate : null;
 
     }
 }
@@ -3637,6 +3679,39 @@ class ProductBase extends  AbstractModel {
          */
         this.SecretKey = null;
 
+        /**
+         * 设备功能码
+ypsxth : 音频双向通话;	
+spdxth : 视频单向通话(监控);
+NVR0824 : NVR设备,大于8路，小于等于24路;
+WifiKeepalive : Wifi保活(低功耗产品);
+Alexa : Alexa接入;
+Google : Google接入;
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.FuncCode = null;
+
+        /**
+         * 产品类别，0 : 普通视频设备；1 : NVR设备
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ProductCate = null;
+
+        /**
+         * 产品地域
+China-Mainland（中国大陆）
+China-Hong Kong, Macao and Taiwan（港澳台地区）
+America（美国）
+Europe（欧洲）
+India（印度）
+Other-Overseas（其他境外地区）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProductRegion = null;
+
     }
 
     /**
@@ -3653,6 +3728,9 @@ class ProductBase extends  AbstractModel {
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.IotModelRevision = 'IotModelRevision' in params ? params.IotModelRevision : null;
         this.SecretKey = 'SecretKey' in params ? params.SecretKey : null;
+        this.FuncCode = 'FuncCode' in params ? params.FuncCode : null;
+        this.ProductCate = 'ProductCate' in params ? params.ProductCate : null;
+        this.ProductRegion = 'ProductRegion' in params ? params.ProductRegion : null;
 
     }
 }

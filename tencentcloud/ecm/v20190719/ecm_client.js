@@ -146,6 +146,7 @@ const ModifyModuleNameRequest = models.ModifyModuleNameRequest;
 const ModifyDefaultSubnetRequest = models.ModifyDefaultSubnetRequest;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const DescribeTaskResultRequest = models.DescribeTaskResultRequest;
+const VirtualPrivateCloud = models.VirtualPrivateCloud;
 const AssociateAddressResponse = models.AssociateAddressResponse;
 const Filter = models.Filter;
 const PublicIPAddressInfo = models.PublicIPAddressInfo;
