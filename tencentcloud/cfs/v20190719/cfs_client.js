@@ -16,9 +16,10 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DeleteCfsFileSystemRequest = models.DeleteCfsFileSystemRequest;
 const DeleteCfsFileSystemResponse = models.DeleteCfsFileSystemResponse;
+const AvailableZone = models.AvailableZone;
 const UpdateCfsRuleRequest = models.UpdateCfsRuleRequest;
+const DescribeCfsFileSystemsRequest = models.DescribeCfsFileSystemsRequest;
 const DeleteMountTargetRequest = models.DeleteMountTargetRequest;
 const CreateCfsRuleRequest = models.CreateCfsRuleRequest;
 const PGroup = models.PGroup;
@@ -26,19 +27,21 @@ const DescribeAvailableZoneInfoResponse = models.DescribeAvailableZoneInfoRespon
 const UpdateCfsFileSystemNameResponse = models.UpdateCfsFileSystemNameResponse;
 const UpdateCfsFileSystemNameRequest = models.UpdateCfsFileSystemNameRequest;
 const DescribeCfsPGroupsResponse = models.DescribeCfsPGroupsResponse;
-const UpdateCfsPGroupRequest = models.UpdateCfsPGroupRequest;
+const DescribeCfsFileSystemClientsResponse = models.DescribeCfsFileSystemClientsResponse;
 const DeleteMountTargetResponse = models.DeleteMountTargetResponse;
 const DescribeMountTargetsResponse = models.DescribeMountTargetsResponse;
 const DeleteCfsRuleResponse = models.DeleteCfsRuleResponse;
 const DeleteCfsRuleRequest = models.DeleteCfsRuleRequest;
+const UpdateCfsPGroupRequest = models.UpdateCfsPGroupRequest;
 const MountInfo = models.MountInfo;
 const UpdateCfsRuleResponse = models.UpdateCfsRuleResponse;
+const FileSystemClient = models.FileSystemClient;
 const DescribeCfsFileSystemsResponse = models.DescribeCfsFileSystemsResponse;
 const CreateCfsFileSystemResponse = models.CreateCfsFileSystemResponse;
 const FileSystemInfo = models.FileSystemInfo;
 const TagInfo = models.TagInfo;
 const DescribeCfsPGroupsRequest = models.DescribeCfsPGroupsRequest;
-const AvailableZone = models.AvailableZone;
+const DescribeCfsFileSystemClientsRequest = models.DescribeCfsFileSystemClientsRequest;
 const CreateCfsPGroupRequest = models.CreateCfsPGroupRequest;
 const DeleteCfsPGroupResponse = models.DeleteCfsPGroupResponse;
 const UpdateCfsFileSystemSizeLimitResponse = models.UpdateCfsFileSystemSizeLimitResponse;
@@ -60,7 +63,7 @@ const PGroupRuleInfo = models.PGroupRuleInfo;
 const DeleteCfsPGroupRequest = models.DeleteCfsPGroupRequest;
 const AvailableType = models.AvailableType;
 const UpdateCfsFileSystemSizeLimitRequest = models.UpdateCfsFileSystemSizeLimitRequest;
-const DescribeCfsFileSystemsRequest = models.DescribeCfsFileSystemsRequest;
+const DeleteCfsFileSystemRequest = models.DeleteCfsFileSystemRequest;
 const UpdateCfsPGroupResponse = models.UpdateCfsPGroupResponse;
 const DescribeCfsRulesResponse = models.DescribeCfsRulesResponse;
 const UpdateCfsFileSystemPGroupResponse = models.UpdateCfsFileSystemPGroupResponse;
@@ -272,6 +275,17 @@ class CfsClient extends AbstractClient {
     DeleteCfsRule(req, cb) {
         let resp = new DeleteCfsRuleResponse();
         this.request("DeleteCfsRule", req, resp, cb);
+    }
+
+    /**
+     * 查询挂载该文件系统的客户端。此功能需要客户端安装CFS监控插件。
+     * @param {DescribeCfsFileSystemClientsRequest} req
+     * @param {function(string, DescribeCfsFileSystemClientsResponse):void} cb
+     * @public
+     */
+    DescribeCfsFileSystemClients(req, cb) {
+        let resp = new DescribeCfsFileSystemClientsResponse();
+        this.request("DescribeCfsFileSystemClients", req, resp, cb);
     }
 
     /**

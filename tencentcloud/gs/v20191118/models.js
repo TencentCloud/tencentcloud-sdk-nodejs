@@ -30,6 +30,12 @@ class StopGameRequest extends  AbstractModel {
          */
         this.UserId = null;
 
+        /**
+         * 用于多人游戏，游戏主机用户ID
+         * @type {string || null}
+         */
+        this.HostUserId = null;
+
     }
 
     /**
@@ -40,6 +46,7 @@ class StopGameRequest extends  AbstractModel {
             return;
         }
         this.UserId = 'UserId' in params ? params.UserId : null;
+        this.HostUserId = 'HostUserId' in params ? params.HostUserId : null;
 
     }
 }
@@ -273,7 +280,7 @@ class CreateSessionRequest extends  AbstractModel {
         this.MinBitrate = null;
 
         /**
-         * 帧率，可设置为30、45或60
+         * 帧率，可设置为30、45、60、90、120、144
          * @type {number || null}
          */
         this.Fps = null;
@@ -289,6 +296,12 @@ class CreateSessionRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.Optimization = null;
+
+        /**
+         * 用于多人游戏，游戏主机用户ID
+         * @type {string || null}
+         */
+        this.HostUserId = null;
 
     }
 
@@ -313,6 +326,7 @@ class CreateSessionRequest extends  AbstractModel {
         this.Fps = 'Fps' in params ? params.Fps : null;
         this.UserIp = 'UserIp' in params ? params.UserIp : null;
         this.Optimization = 'Optimization' in params ? params.Optimization : null;
+        this.HostUserId = 'HostUserId' in params ? params.HostUserId : null;
 
     }
 }

@@ -69,6 +69,7 @@ const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
 const DescribeDatabaseObjectsResponse = models.DescribeDatabaseObjectsResponse;
 const TableColumn = models.TableColumn;
 const SplitShardConfig = models.SplitShardConfig;
+const FlushBinlogResponse = models.FlushBinlogResponse;
 const DescribeDCDBRenewalPriceResponse = models.DescribeDCDBRenewalPriceResponse;
 const DescribeShardSpecResponse = models.DescribeShardSpecResponse;
 const DescribeDCDBShardsResponse = models.DescribeDCDBShardsResponse;
@@ -86,6 +87,7 @@ const DescribeOrdersRequest = models.DescribeOrdersRequest;
 const DescribeDBLogFilesResponse = models.DescribeDBLogFilesResponse;
 const CloseDBExtranetAccessRequest = models.CloseDBExtranetAccessRequest;
 const InitDCDBInstancesRequest = models.InitDCDBInstancesRequest;
+const ResourceTag = models.ResourceTag;
 const DescribeSqlLogsResponse = models.DescribeSqlLogsResponse;
 const DeleteAccountRequest = models.DeleteAccountRequest;
 const DescribeDCDBInstancesResponse = models.DescribeDCDBInstancesResponse;
@@ -109,6 +111,7 @@ const DescribeAccountsResponse = models.DescribeAccountsResponse;
 const DescribeDCDBInstancesRequest = models.DescribeDCDBInstancesRequest;
 const DescribeDBParametersResponse = models.DescribeDBParametersResponse;
 const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
+const FlushBinlogRequest = models.FlushBinlogRequest;
 const ModifyDBSyncModeResponse = models.ModifyDBSyncModeResponse;
 const DeleteAccountResponse = models.DeleteAccountResponse;
 
@@ -490,6 +493,17 @@ class DcdbClient extends AbstractClient {
     CloneAccount(req, cb) {
         let resp = new CloneAccountResponse();
         this.request("CloneAccount", req, resp, cb);
+    }
+
+    /**
+     * 相当于在所有分片的mysqld中执行flush logs，完成切分的binlog将展示在各个分片控制台binlog列表里。
+     * @param {FlushBinlogRequest} req
+     * @param {function(string, FlushBinlogResponse):void} cb
+     * @public
+     */
+    FlushBinlog(req, cb) {
+        let resp = new FlushBinlogResponse();
+        this.request("FlushBinlog", req, resp, cb);
     }
 
     /**

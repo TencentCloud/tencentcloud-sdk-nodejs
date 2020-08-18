@@ -508,10 +508,17 @@ class CheckIdCardInformationResponse extends  AbstractModel {
 -9105 身份证框内遮挡告警，
 -9104 临时身份证告警，
 -9106 身份证 PS 告警。
+-8001 图片模糊告警
 多个会 |  隔开如 "-9101|-9106|-9104"
          * @type {string || null}
          */
         this.Warnings = null;
+
+        /**
+         * 图片质量分数，当请求Config中配置图片模糊告警该参数才有意义，取值范围（0～100），目前默认阈值是50分，低于50分会触发模糊告警。
+         * @type {number || null}
+         */
+        this.Quality = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -539,6 +546,7 @@ class CheckIdCardInformationResponse extends  AbstractModel {
         this.IdNum = 'IdNum' in params ? params.IdNum : null;
         this.Portrait = 'Portrait' in params ? params.Portrait : null;
         this.Warnings = 'Warnings' in params ? params.Warnings : null;
+        this.Quality = 'Quality' in params ? params.Quality : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1373,6 +1381,7 @@ BorderCheckWarn，边框和框内遮挡告警
 ReshootWarn，翻拍告警
 DetectPsWarn，PS检测告警
 TempIdWarn，临时身份证告警
+Quality，图片质量告警（评价图片模糊程度）
 
 SDK 设置方式参考：
 Config = Json.stringify({"CopyWarn":true,"ReshootWarn":true})

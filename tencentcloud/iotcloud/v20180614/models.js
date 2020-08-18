@@ -164,6 +164,103 @@ class DescribeProductsRequest extends  AbstractModel {
 }
 
 /**
+ * 创建规则请求包体
+ * @class
+ */
+class TopicRulePayload extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规则的SQL语句，如： SELECT * FROM 'pid/dname/event'，然后对其进行base64编码，得：U0VMRUNUICogRlJPTSAncGlkL2RuYW1lL2V2ZW50Jw==
+         * @type {string || null}
+         */
+        this.Sql = null;
+
+        /**
+         * 行为的JSON字符串，大部分种类举例如下：
+[
+    {
+        "republish": {
+            "topic": "TEST/test"
+        }
+    },
+    {
+        "forward": {
+            "api": "http://127.0.0.1:8080"
+        }
+    },
+    {
+        "ckafka": {
+            "instance": {
+                "id": "ckafka-test",
+                "name": ""
+            },
+            "topic": {
+                "id": "topic-test",
+                "name": "test"
+            },
+            "region": "gz"
+        }
+    },
+    {
+        "cmqqueue": {
+            "queuename": "queue-test-TEST",
+            "region": "gz"
+        }
+    },
+    {
+        "mysql": {
+            "instanceid": "cdb-test",
+            "region": "gz",
+            "username": "test",
+            "userpwd": "*****",
+            "dbname": "d_mqtt",
+            "tablename": "t_test",
+            "fieldpairs": [
+                {
+                    "field": "test",
+                    "value": "test"
+                }
+            ],
+            "devicetype": "CUSTOM"
+        }
+    }
+]
+         * @type {string || null}
+         */
+        this.Actions = null;
+
+        /**
+         * 规则描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 是否禁用规则
+         * @type {boolean || null}
+         */
+        this.RuleDisabled = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Sql = 'Sql' in params ? params.Sql : null;
+        this.Actions = 'Actions' in params ? params.Actions : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.RuleDisabled = 'RuleDisabled' in params ? params.RuleDisabled : null;
+
+    }
+}
+
+/**
  * DescribeDevices返回参数结构体
  * @class
  */
@@ -214,36 +311,18 @@ class DescribeDevicesResponse extends  AbstractModel {
 }
 
 /**
- * 产品详细信息
+ * DeleteTopicRule返回参数结构体
  * @class
  */
-class ProductInfo extends  AbstractModel {
+class DeleteTopicRuleResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 产品ID
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.ProductId = null;
-
-        /**
-         * 产品名
-         * @type {string || null}
-         */
-        this.ProductName = null;
-
-        /**
-         * 产品元数据
-         * @type {ProductMetadata || null}
-         */
-        this.ProductMetadata = null;
-
-        /**
-         * 产品属性
-         * @type {ProductProperties || null}
-         */
-        this.ProductProperties = null;
+        this.RequestId = null;
 
     }
 
@@ -254,20 +333,7 @@ class ProductInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProductId = 'ProductId' in params ? params.ProductId : null;
-        this.ProductName = 'ProductName' in params ? params.ProductName : null;
-
-        if (params.ProductMetadata) {
-            let obj = new ProductMetadata();
-            obj.deserialize(params.ProductMetadata)
-            this.ProductMetadata = obj;
-        }
-
-        if (params.ProductProperties) {
-            let obj = new ProductProperties();
-            obj.deserialize(params.ProductProperties)
-            this.ProductProperties = obj;
-        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1054,18 +1120,24 @@ class MultiDevicesInfo extends  AbstractModel {
 }
 
 /**
- * ReplaceTopicRule返回参数结构体
+ * ResetDeviceState请求参数结构体
  * @class
  */
-class ReplaceTopicRuleResponse extends  AbstractModel {
+class ResetDeviceStateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 产品ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ProductId = null;
+
+        /**
+         * 设备名称
+         * @type {Array.<string> || null}
+         */
+        this.DeviceNames = null;
 
     }
 
@@ -1076,7 +1148,8 @@ class ReplaceTopicRuleResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceNames = 'DeviceNames' in params ? params.DeviceNames : null;
 
     }
 }
@@ -1538,18 +1611,24 @@ class CreateTaskRequest extends  AbstractModel {
 }
 
 /**
- * CreateTopicPolicy返回参数结构体
+ * DescribeAllDevices请求参数结构体
  * @class
  */
-class CreateTopicPolicyResponse extends  AbstractModel {
+class DescribeAllDevicesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
+         * 查询偏移量。
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.Offset = null;
+
+        /**
+         * 查询设备数量。最大支持250个
+         * @type {number || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -1560,7 +1639,61 @@ class CreateTopicPolicyResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * 设备资源信息。
+ * @class
+ */
+class DeviceProperty extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 产品名称。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProductName = null;
+
+        /**
+         * 设备名称。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 设备资源ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResourceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.ProductName = 'ProductName' in params ? params.ProductName : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.ResourceId = 'ResourceId' in params ? params.ResourceId : null;
 
     }
 }
@@ -2503,84 +2636,18 @@ class DeleteProductResponse extends  AbstractModel {
 }
 
 /**
- * 创建规则请求包体
+ * CreateTopicPolicy返回参数结构体
  * @class
  */
-class TopicRulePayload extends  AbstractModel {
+class CreateTopicPolicyResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 规则的SQL语句，如： SELECT * FROM 'pid/dname/event'，然后对其进行base64编码，得：U0VMRUNUICogRlJPTSAncGlkL2RuYW1lL2V2ZW50Jw==
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Sql = null;
-
-        /**
-         * 行为的JSON字符串，大部分种类举例如下：
-[
-    {
-        "republish": {
-            "topic": "TEST/test"
-        }
-    },
-    {
-        "forward": {
-            "api": "http://127.0.0.1:8080"
-        }
-    },
-    {
-        "ckafka": {
-            "instance": {
-                "id": "ckafka-test",
-                "name": ""
-            },
-            "topic": {
-                "id": "topic-test",
-                "name": "test"
-            },
-            "region": "gz"
-        }
-    },
-    {
-        "cmqqueue": {
-            "queuename": "queue-test-TEST",
-            "region": "gz"
-        }
-    },
-    {
-        "mysql": {
-            "instanceid": "cdb-test",
-            "region": "gz",
-            "username": "test",
-            "userpwd": "*****",
-            "dbname": "d_mqtt",
-            "tablename": "t_test",
-            "fieldpairs": [
-                {
-                    "field": "test",
-                    "value": "test"
-                }
-            ],
-            "devicetype": "CUSTOM"
-        }
-    }
-]
-         * @type {string || null}
-         */
-        this.Actions = null;
-
-        /**
-         * 规则描述
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * 是否禁用规则
-         * @type {boolean || null}
-         */
-        this.RuleDisabled = null;
+        this.RequestId = null;
 
     }
 
@@ -2591,10 +2658,7 @@ class TopicRulePayload extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Sql = 'Sql' in params ? params.Sql : null;
-        this.Actions = 'Actions' in params ? params.Actions : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.RuleDisabled = 'RuleDisabled' in params ? params.RuleDisabled : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2649,18 +2713,36 @@ class PublishToDeviceRequest extends  AbstractModel {
 }
 
 /**
- * DeleteTopicRule返回参数结构体
+ * 产品详细信息
  * @class
  */
-class DeleteTopicRuleResponse extends  AbstractModel {
+class ProductInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 产品ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ProductId = null;
+
+        /**
+         * 产品名
+         * @type {string || null}
+         */
+        this.ProductName = null;
+
+        /**
+         * 产品元数据
+         * @type {ProductMetadata || null}
+         */
+        this.ProductMetadata = null;
+
+        /**
+         * 产品属性
+         * @type {ProductProperties || null}
+         */
+        this.ProductProperties = null;
 
     }
 
@@ -2671,7 +2753,20 @@ class DeleteTopicRuleResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.ProductName = 'ProductName' in params ? params.ProductName : null;
+
+        if (params.ProductMetadata) {
+            let obj = new ProductMetadata();
+            obj.deserialize(params.ProductMetadata)
+            this.ProductMetadata = obj;
+        }
+
+        if (params.ProductProperties) {
+            let obj = new ProductProperties();
+            obj.deserialize(params.ProductProperties)
+            this.ProductProperties = obj;
+        }
 
     }
 }
@@ -3234,24 +3329,18 @@ class DeleteTopicRuleRequest extends  AbstractModel {
 }
 
 /**
- * ResetDeviceState请求参数结构体
+ * ReplaceTopicRule返回参数结构体
  * @class
  */
-class ResetDeviceStateRequest extends  AbstractModel {
+class ReplaceTopicRuleResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 产品ID
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.ProductId = null;
-
-        /**
-         * 设备名称
-         * @type {Array.<string> || null}
-         */
-        this.DeviceNames = null;
+        this.RequestId = null;
 
     }
 
@@ -3262,8 +3351,7 @@ class ResetDeviceStateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProductId = 'ProductId' in params ? params.ProductId : null;
-        this.DeviceNames = 'DeviceNames' in params ? params.DeviceNames : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3872,6 +3960,56 @@ class DeviceTag extends  AbstractModel {
 }
 
 /**
+ * DescribeAllDevices返回参数结构体
+ * @class
+ */
+class DescribeAllDevicesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设备总数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 查询的设备列表信息。
+         * @type {Array.<DeviceProperty> || null}
+         */
+        this.Devices = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Devices) {
+            this.Devices = new Array();
+            for (let z in params.Devices) {
+                let obj = new DeviceProperty();
+                obj.deserialize(params.Devices[z]);
+                this.Devices.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeLoraDevice请求参数结构体
  * @class
  */
@@ -3880,7 +4018,7 @@ class DescribeLoraDeviceRequest extends  AbstractModel {
         super();
 
         /**
-         * 产品id
+         * 产品ID
          * @type {string || null}
          */
         this.ProductId = null;
@@ -4671,8 +4809,9 @@ module.exports = {
     UnbindDevicesRequest: UnbindDevicesRequest,
     BindDevicesRequest: BindDevicesRequest,
     DescribeProductsRequest: DescribeProductsRequest,
+    TopicRulePayload: TopicRulePayload,
     DescribeDevicesResponse: DescribeDevicesResponse,
-    ProductInfo: ProductInfo,
+    DeleteTopicRuleResponse: DeleteTopicRuleResponse,
     Task: Task,
     EnableTopicRuleResponse: EnableTopicRuleResponse,
     DescribeTasksResponse: DescribeTasksResponse,
@@ -4689,7 +4828,7 @@ module.exports = {
     DescribeTasksRequest: DescribeTasksRequest,
     ReplaceTopicRuleRequest: ReplaceTopicRuleRequest,
     MultiDevicesInfo: MultiDevicesInfo,
-    ReplaceTopicRuleResponse: ReplaceTopicRuleResponse,
+    ResetDeviceStateRequest: ResetDeviceStateRequest,
     DescribeDeviceClientKeyRequest: DescribeDeviceClientKeyRequest,
     UpdateTopicPolicyRequest: UpdateTopicPolicyRequest,
     BatchUpdateShadow: BatchUpdateShadow,
@@ -4699,7 +4838,8 @@ module.exports = {
     CreateProductResponse: CreateProductResponse,
     DeleteLoraDeviceResponse: DeleteLoraDeviceResponse,
     CreateTaskRequest: CreateTaskRequest,
-    CreateTopicPolicyResponse: CreateTopicPolicyResponse,
+    DescribeAllDevicesRequest: DescribeAllDevicesRequest,
+    DeviceProperty: DeviceProperty,
     DescribeMultiDevicesResponse: DescribeMultiDevicesResponse,
     CreateDeviceResponse: CreateDeviceResponse,
     DeleteLoraDeviceRequest: DeleteLoraDeviceRequest,
@@ -4717,9 +4857,9 @@ module.exports = {
     CancelTaskRequest: CancelTaskRequest,
     UpdateDeviceAvailableStateRequest: UpdateDeviceAvailableStateRequest,
     DeleteProductResponse: DeleteProductResponse,
-    TopicRulePayload: TopicRulePayload,
+    CreateTopicPolicyResponse: CreateTopicPolicyResponse,
     PublishToDeviceRequest: PublishToDeviceRequest,
-    DeleteTopicRuleResponse: DeleteTopicRuleResponse,
+    ProductInfo: ProductInfo,
     PublishBroadcastMessageResponse: PublishBroadcastMessageResponse,
     DescribeDeviceRequest: DescribeDeviceRequest,
     CreateMultiDevicesTaskResponse: CreateMultiDevicesTaskResponse,
@@ -4732,7 +4872,7 @@ module.exports = {
     Attribute: Attribute,
     CreateLoraDeviceResponse: CreateLoraDeviceResponse,
     DeleteTopicRuleRequest: DeleteTopicRuleRequest,
-    ResetDeviceStateRequest: ResetDeviceStateRequest,
+    ReplaceTopicRuleResponse: ReplaceTopicRuleResponse,
     CreateMultiDeviceRequest: CreateMultiDeviceRequest,
     PublishToDeviceResponse: PublishToDeviceResponse,
     DescribeDeviceShadowRequest: DescribeDeviceShadowRequest,
@@ -4747,6 +4887,7 @@ module.exports = {
     DescribeMultiDevTaskResponse: DescribeMultiDevTaskResponse,
     DescribeProductTasksRequest: DescribeProductTasksRequest,
     DeviceTag: DeviceTag,
+    DescribeAllDevicesResponse: DescribeAllDevicesResponse,
     DescribeLoraDeviceRequest: DescribeLoraDeviceRequest,
     DescribeTaskRequest: DescribeTaskRequest,
     PublishMessageResponse: PublishMessageResponse,

@@ -534,6 +534,18 @@ class VideoInfo extends  AbstractModel {
          */
         this.UserId = null;
 
+        /**
+         * 视频分辨率的宽
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 视频分辨率的高
+         * @type {number || null}
+         */
+        this.Height = null;
+
     }
 
     /**
@@ -551,6 +563,8 @@ class VideoInfo extends  AbstractModel {
         this.VideoId = 'VideoId' in params ? params.VideoId : null;
         this.VideoType = 'VideoType' in params ? params.VideoType : null;
         this.UserId = 'UserId' in params ? params.UserId : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
 
     }
 }

@@ -1968,7 +1968,7 @@ class DCDBInstanceInfo extends  AbstractModel {
         this.InstanceName = null;
 
         /**
-         * AppID
+         * 应用ID
          * @type {number || null}
          */
         this.AppId = null;
@@ -2070,7 +2070,7 @@ class DCDBInstanceInfo extends  AbstractModel {
         this.IsolatedTimestamp = null;
 
         /**
-         * UIN
+         * 账号ID
          * @type {string || null}
          */
         this.Uin = null;
@@ -2190,6 +2190,41 @@ class DCDBInstanceInfo extends  AbstractModel {
          */
         this.Cpu = null;
 
+        /**
+         * 实例IPv6标志
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Ipv6Flag = null;
+
+        /**
+         * 内网IPv6
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Vipv6 = null;
+
+        /**
+         * 外网IPv6
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.WanVipv6 = null;
+
+        /**
+         * 外网IPv6端口
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.WanPortIpv6 = null;
+
+        /**
+         * 外网IPv6状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.WanStatusIpv6 = null;
+
     }
 
     /**
@@ -2246,6 +2281,11 @@ class DCDBInstanceInfo extends  AbstractModel {
         this.WanStatus = 'WanStatus' in params ? params.WanStatus : null;
         this.IsAuditSupported = 'IsAuditSupported' in params ? params.IsAuditSupported : null;
         this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Ipv6Flag = 'Ipv6Flag' in params ? params.Ipv6Flag : null;
+        this.Vipv6 = 'Vipv6' in params ? params.Vipv6 : null;
+        this.WanVipv6 = 'WanVipv6' in params ? params.WanVipv6 : null;
+        this.WanPortIpv6 = 'WanPortIpv6' in params ? params.WanPortIpv6 : null;
+        this.WanStatusIpv6 = 'WanStatusIpv6' in params ? params.WanStatusIpv6 : null;
 
     }
 }
@@ -2863,6 +2903,34 @@ class SplitShardConfig extends  AbstractModel {
         this.SplitRate = 'SplitRate' in params ? params.SplitRate : null;
         this.ShardMemory = 'ShardMemory' in params ? params.ShardMemory : null;
         this.ShardStorage = 'ShardStorage' in params ? params.ShardStorage : null;
+
+    }
+}
+
+/**
+ * FlushBinlog返回参数结构体
+ * @class
+ */
+class FlushBinlogResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3602,6 +3670,41 @@ class InitDCDBInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * 标签对象，包含tagKey & tagValue
+ * @class
+ */
+class ResourceTag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签键key
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * 标签值value
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
  * DescribeSqlLogs返回参数结构体
  * @class
  */
@@ -3883,6 +3986,12 @@ class CreateDCDBInstanceRequest extends  AbstractModel {
          */
         this.Ipv6Flag = null;
 
+        /**
+         * 标签键值对数组
+         * @type {Array.<ResourceTag> || null}
+         */
+        this.ResourceTags = null;
+
     }
 
     /**
@@ -3908,6 +4017,15 @@ class CreateDCDBInstanceRequest extends  AbstractModel {
         this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
         this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
         this.Ipv6Flag = 'Ipv6Flag' in params ? params.Ipv6Flag : null;
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new ResourceTag();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
+            }
+        }
 
     }
 }
@@ -4908,6 +5026,12 @@ class DescribeDCDBInstancesRequest extends  AbstractModel {
          */
         this.ExclusterIds = null;
 
+        /**
+         * 按标签key查询
+         * @type {Array.<string> || null}
+         */
+        this.TagKeys = null;
+
     }
 
     /**
@@ -4931,6 +5055,7 @@ class DescribeDCDBInstancesRequest extends  AbstractModel {
         this.ExclusterType = 'ExclusterType' in params ? params.ExclusterType : null;
         this.IsFilterExcluster = 'IsFilterExcluster' in params ? params.IsFilterExcluster : null;
         this.ExclusterIds = 'ExclusterIds' in params ? params.ExclusterIds : null;
+        this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
 
     }
 }
@@ -5016,6 +5141,34 @@ class ModifyDBInstancesProjectRequest extends  AbstractModel {
         }
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
+ * FlushBinlog请求参数结构体
+ * @class
+ */
+class FlushBinlogRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 无
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -5137,6 +5290,7 @@ module.exports = {
     DescribeDatabaseObjectsResponse: DescribeDatabaseObjectsResponse,
     TableColumn: TableColumn,
     SplitShardConfig: SplitShardConfig,
+    FlushBinlogResponse: FlushBinlogResponse,
     DescribeDCDBRenewalPriceResponse: DescribeDCDBRenewalPriceResponse,
     DescribeShardSpecResponse: DescribeShardSpecResponse,
     DescribeDCDBShardsResponse: DescribeDCDBShardsResponse,
@@ -5154,6 +5308,7 @@ module.exports = {
     DescribeDBLogFilesResponse: DescribeDBLogFilesResponse,
     CloseDBExtranetAccessRequest: CloseDBExtranetAccessRequest,
     InitDCDBInstancesRequest: InitDCDBInstancesRequest,
+    ResourceTag: ResourceTag,
     DescribeSqlLogsResponse: DescribeSqlLogsResponse,
     DeleteAccountRequest: DeleteAccountRequest,
     DescribeDCDBInstancesResponse: DescribeDCDBInstancesResponse,
@@ -5177,6 +5332,7 @@ module.exports = {
     DescribeDCDBInstancesRequest: DescribeDCDBInstancesRequest,
     DescribeDBParametersResponse: DescribeDBParametersResponse,
     ModifyDBInstancesProjectRequest: ModifyDBInstancesProjectRequest,
+    FlushBinlogRequest: FlushBinlogRequest,
     ModifyDBSyncModeResponse: ModifyDBSyncModeResponse,
     DeleteAccountResponse: DeleteAccountResponse,
 
