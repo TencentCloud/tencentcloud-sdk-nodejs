@@ -19,13 +19,14 @@ const AbstractClient = require('../../common/abstract_client')
 const CreateDBInstanceRequest = models.CreateDBInstanceRequest;
 const DescribeAccountPrivilegesResponse = models.DescribeAccountPrivilegesResponse;
 const DescribeDatabasesRequest = models.DescribeDatabasesRequest;
-const CreateAccountResponse = models.CreateAccountResponse;
+const ParamDesc = models.ParamDesc;
 const DescribeDBParametersRequest = models.DescribeDBParametersRequest;
 const DescribeAccountsRequest = models.DescribeAccountsRequest;
 const DescribeRenewalPriceResponse = models.DescribeRenewalPriceResponse;
 const CreateTmpInstancesRequest = models.CreateTmpInstancesRequest;
 const RestartDBInstancesResponse = models.RestartDBInstancesResponse;
 const DescribeUpgradePriceRequest = models.DescribeUpgradePriceRequest;
+const FlushBinlogResponse = models.FlushBinlogResponse;
 const DescribeDBResourceUsageDetailsResponse = models.DescribeDBResourceUsageDetailsResponse;
 const DescribeDBInstanceSpecsResponse = models.DescribeDBInstanceSpecsResponse;
 const DescribeDBSlowLogsRequest = models.DescribeDBSlowLogsRequest;
@@ -92,12 +93,13 @@ const DescribeDatabasesResponse = models.DescribeDatabasesResponse;
 const DescribeOrdersRequest = models.DescribeOrdersRequest;
 const DescribeDBLogFilesResponse = models.DescribeDBLogFilesResponse;
 const CloseDBExtranetAccessRequest = models.CloseDBExtranetAccessRequest;
+const ResourceTag = models.ResourceTag;
 const DescribeSqlLogsResponse = models.DescribeSqlLogsResponse;
 const DeleteAccountRequest = models.DeleteAccountRequest;
 const InstanceSpec = models.InstanceSpec;
 const DescribeFlowRequest = models.DescribeFlowRequest;
 const DescribeDBPerformanceResponse = models.DescribeDBPerformanceResponse;
-const ParamDesc = models.ParamDesc;
+const CreateAccountResponse = models.CreateAccountResponse;
 const DescribeLogFileRetentionPeriodResponse = models.DescribeLogFileRetentionPeriodResponse;
 const RegionInfo = models.RegionInfo;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
@@ -115,6 +117,7 @@ const DescribeDBSlowLogsResponse = models.DescribeDBSlowLogsResponse;
 const UpgradeDBInstanceResponse = models.UpgradeDBInstanceResponse;
 const DescribeLogFileRetentionPeriodRequest = models.DescribeLogFileRetentionPeriodRequest;
 const ModifyDBInstancesProjectRequest = models.ModifyDBInstancesProjectRequest;
+const FlushBinlogRequest = models.FlushBinlogRequest;
 const MonitorData = models.MonitorData;
 const ModifyLogFileRetentionPeriodResponse = models.ModifyLogFileRetentionPeriodResponse;
 const DescribeDBPerformanceRequest = models.DescribeDBPerformanceRequest;
@@ -575,6 +578,17 @@ class MariadbClient extends AbstractClient {
     DescribeDBResourceUsage(req, cb) {
         let resp = new DescribeDBResourceUsageResponse();
         this.request("DescribeDBResourceUsage", req, resp, cb);
+    }
+
+    /**
+     * 相当于在mysqld中执行flush logs，完成切分的binlog将展示在实例控制台binlog列表里。
+     * @param {FlushBinlogRequest} req
+     * @param {function(string, FlushBinlogResponse):void} cb
+     * @public
+     */
+    FlushBinlog(req, cb) {
+        let resp = new FlushBinlogResponse();
+        this.request("FlushBinlog", req, resp, cb);
     }
 
     /**

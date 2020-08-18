@@ -12095,6 +12095,12 @@ class MigrateOrderRefundRequest extends  AbstractModel {
          */
         this.Profile = null;
 
+        /**
+         * 退款原因
+         * @type {string || null}
+         */
+        this.RefundReason = null;
+
     }
 
     /**
@@ -12112,6 +12118,7 @@ class MigrateOrderRefundRequest extends  AbstractModel {
         this.ThirdChannelOrderId = 'ThirdChannelOrderId' in params ? params.ThirdChannelOrderId : null;
         this.PayAmt = 'PayAmt' in params ? params.PayAmt : null;
         this.Profile = 'Profile' in params ? params.Profile : null;
+        this.RefundReason = 'RefundReason' in params ? params.RefundReason : null;
 
     }
 }

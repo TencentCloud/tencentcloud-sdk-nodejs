@@ -73,6 +73,7 @@ module.exports = {
     iottid: require("./iottid"),
     iotvideo: require("./iotvideo"),
     kms: require("./kms"),
+    lighthouse: require("./lighthouse"),
     live: require("./live"),
     lp: require("./lp"),
     mariadb: require("./mariadb"),

@@ -123,6 +123,12 @@ class CreateDBInstanceRequest extends  AbstractModel {
          */
         this.Ipv6Flag = null;
 
+        /**
+         * 标签键值对数组
+         * @type {Array.<ResourceTag> || null}
+         */
+        this.ResourceTags = null;
+
     }
 
     /**
@@ -148,6 +154,15 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
         this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
         this.Ipv6Flag = 'Ipv6Flag' in params ? params.Ipv6Flag : null;
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new ResourceTag();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
+            }
+        }
 
     }
 }
@@ -237,42 +252,49 @@ class DescribeDatabasesRequest extends  AbstractModel {
 }
 
 /**
- * CreateAccount返回参数结构体
+ * DB参数描述
  * @class
  */
-class CreateAccountResponse extends  AbstractModel {
+class ParamDesc extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例ID，透传入参。
+         * 参数名字
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.Param = null;
 
         /**
-         * 用户名，透传入参。
+         * 当前参数值
          * @type {string || null}
          */
-        this.UserName = null;
+        this.Value = null;
 
         /**
-         * 允许访问的 host，透传入参。
+         * 设置过的值，参数生效后，该值和value一样。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Host = null;
+        this.SetValue = null;
 
         /**
-         * 透传入参。
-         * @type {number || null}
-         */
-        this.ReadOnly = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 系统默认值
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Default = null;
+
+        /**
+         * 参数限制
+         * @type {ParamConstraint || null}
+         */
+        this.Constraint = null;
+
+        /**
+         * 是否有设置过值，false:没有设置过值，true:有设置过值。
+         * @type {boolean || null}
+         */
+        this.HaveSetValue = null;
 
     }
 
@@ -283,11 +305,17 @@ class CreateAccountResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.UserName = 'UserName' in params ? params.UserName : null;
-        this.Host = 'Host' in params ? params.Host : null;
-        this.ReadOnly = 'ReadOnly' in params ? params.ReadOnly : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Param = 'Param' in params ? params.Param : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.SetValue = 'SetValue' in params ? params.SetValue : null;
+        this.Default = 'Default' in params ? params.Default : null;
+
+        if (params.Constraint) {
+            let obj = new ParamConstraint();
+            obj.deserialize(params.Constraint)
+            this.Constraint = obj;
+        }
+        this.HaveSetValue = 'HaveSetValue' in params ? params.HaveSetValue : null;
 
     }
 }
@@ -500,6 +528,34 @@ class DescribeUpgradePriceRequest extends  AbstractModel {
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Memory = 'Memory' in params ? params.Memory : null;
         this.Storage = 'Storage' in params ? params.Storage : null;
+
+    }
+}
+
+/**
+ * FlushBinlog返回参数结构体
+ * @class
+ */
+class FlushBinlogResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1858,6 +1914,12 @@ class DescribeDBInstancesRequest extends  AbstractModel {
          */
         this.ExclusterIds = null;
 
+        /**
+         * 按标签key查询
+         * @type {Array.<string> || null}
+         */
+        this.TagKeys = null;
+
     }
 
     /**
@@ -1882,6 +1944,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.IsFilterExcluster = 'IsFilterExcluster' in params ? params.IsFilterExcluster : null;
         this.ExclusterType = 'ExclusterType' in params ? params.ExclusterType : null;
         this.ExclusterIds = 'ExclusterIds' in params ? params.ExclusterIds : null;
+        this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
 
     }
 }
@@ -3196,6 +3259,55 @@ class DBInstance extends  AbstractModel {
          */
         this.Cpu = null;
 
+        /**
+         * 实例IPv6标志
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Ipv6Flag = null;
+
+        /**
+         * 内网IPv6
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Vipv6 = null;
+
+        /**
+         * 外网IPv6
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.WanVipv6 = null;
+
+        /**
+         * 外网IPv6端口
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.WanPortIpv6 = null;
+
+        /**
+         * 外网IPv6状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.WanStatusIpv6 = null;
+
+        /**
+         * 数据库引擎
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DbEngine = null;
+
+        /**
+         * 数据库版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DbVersion = null;
+
     }
 
     /**
@@ -3244,6 +3356,13 @@ class DBInstance extends  AbstractModel {
         this.Machine = 'Machine' in params ? params.Machine : null;
         this.IsEncryptSupported = 'IsEncryptSupported' in params ? params.IsEncryptSupported : null;
         this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Ipv6Flag = 'Ipv6Flag' in params ? params.Ipv6Flag : null;
+        this.Vipv6 = 'Vipv6' in params ? params.Vipv6 : null;
+        this.WanVipv6 = 'WanVipv6' in params ? params.WanVipv6 : null;
+        this.WanPortIpv6 = 'WanPortIpv6' in params ? params.WanPortIpv6 : null;
+        this.WanStatusIpv6 = 'WanStatusIpv6' in params ? params.WanStatusIpv6 : null;
+        this.DbEngine = 'DbEngine' in params ? params.DbEngine : null;
+        this.DbVersion = 'DbVersion' in params ? params.DbVersion : null;
 
     }
 }
@@ -4054,6 +4173,41 @@ class CloseDBExtranetAccessRequest extends  AbstractModel {
 }
 
 /**
+ * 标签对象，包含tagKey & tagValue
+ * @class
+ */
+class ResourceTag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签键key
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * 标签值value
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
  * DescribeSqlLogs返回参数结构体
  * @class
  */
@@ -4393,49 +4547,42 @@ class DescribeDBPerformanceResponse extends  AbstractModel {
 }
 
 /**
- * DB参数描述
+ * CreateAccount返回参数结构体
  * @class
  */
-class ParamDesc extends  AbstractModel {
+class CreateAccountResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 参数名字
+         * 实例ID，透传入参。
          * @type {string || null}
          */
-        this.Param = null;
+        this.InstanceId = null;
 
         /**
-         * 当前参数值
+         * 用户名，透传入参。
          * @type {string || null}
          */
-        this.Value = null;
+        this.UserName = null;
 
         /**
-         * 设置过的值，参数生效后，该值和value一样。
-注意：此字段可能返回 null，表示取不到有效值。
+         * 允许访问的 host，透传入参。
          * @type {string || null}
          */
-        this.SetValue = null;
+        this.Host = null;
 
         /**
-         * 系统默认值
+         * 透传入参。
+         * @type {number || null}
+         */
+        this.ReadOnly = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Default = null;
-
-        /**
-         * 参数限制
-         * @type {ParamConstraint || null}
-         */
-        this.Constraint = null;
-
-        /**
-         * 是否有设置过值，false:没有设置过值，true:有设置过值。
-         * @type {boolean || null}
-         */
-        this.HaveSetValue = null;
+        this.RequestId = null;
 
     }
 
@@ -4446,17 +4593,11 @@ class ParamDesc extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Param = 'Param' in params ? params.Param : null;
-        this.Value = 'Value' in params ? params.Value : null;
-        this.SetValue = 'SetValue' in params ? params.SetValue : null;
-        this.Default = 'Default' in params ? params.Default : null;
-
-        if (params.Constraint) {
-            let obj = new ParamConstraint();
-            obj.deserialize(params.Constraint)
-            this.Constraint = obj;
-        }
-        this.HaveSetValue = 'HaveSetValue' in params ? params.HaveSetValue : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Host = 'Host' in params ? params.Host : null;
+        this.ReadOnly = 'ReadOnly' in params ? params.ReadOnly : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5340,6 +5481,34 @@ class ModifyDBInstancesProjectRequest extends  AbstractModel {
 }
 
 /**
+ * FlushBinlog请求参数结构体
+ * @class
+ */
+class FlushBinlogRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * 监控数据
  * @class
  */
@@ -5497,13 +5666,14 @@ module.exports = {
     CreateDBInstanceRequest: CreateDBInstanceRequest,
     DescribeAccountPrivilegesResponse: DescribeAccountPrivilegesResponse,
     DescribeDatabasesRequest: DescribeDatabasesRequest,
-    CreateAccountResponse: CreateAccountResponse,
+    ParamDesc: ParamDesc,
     DescribeDBParametersRequest: DescribeDBParametersRequest,
     DescribeAccountsRequest: DescribeAccountsRequest,
     DescribeRenewalPriceResponse: DescribeRenewalPriceResponse,
     CreateTmpInstancesRequest: CreateTmpInstancesRequest,
     RestartDBInstancesResponse: RestartDBInstancesResponse,
     DescribeUpgradePriceRequest: DescribeUpgradePriceRequest,
+    FlushBinlogResponse: FlushBinlogResponse,
     DescribeDBResourceUsageDetailsResponse: DescribeDBResourceUsageDetailsResponse,
     DescribeDBInstanceSpecsResponse: DescribeDBInstanceSpecsResponse,
     DescribeDBSlowLogsRequest: DescribeDBSlowLogsRequest,
@@ -5570,12 +5740,13 @@ module.exports = {
     DescribeOrdersRequest: DescribeOrdersRequest,
     DescribeDBLogFilesResponse: DescribeDBLogFilesResponse,
     CloseDBExtranetAccessRequest: CloseDBExtranetAccessRequest,
+    ResourceTag: ResourceTag,
     DescribeSqlLogsResponse: DescribeSqlLogsResponse,
     DeleteAccountRequest: DeleteAccountRequest,
     InstanceSpec: InstanceSpec,
     DescribeFlowRequest: DescribeFlowRequest,
     DescribeDBPerformanceResponse: DescribeDBPerformanceResponse,
-    ParamDesc: ParamDesc,
+    CreateAccountResponse: CreateAccountResponse,
     DescribeLogFileRetentionPeriodResponse: DescribeLogFileRetentionPeriodResponse,
     RegionInfo: RegionInfo,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
@@ -5593,6 +5764,7 @@ module.exports = {
     UpgradeDBInstanceResponse: UpgradeDBInstanceResponse,
     DescribeLogFileRetentionPeriodRequest: DescribeLogFileRetentionPeriodRequest,
     ModifyDBInstancesProjectRequest: ModifyDBInstancesProjectRequest,
+    FlushBinlogRequest: FlushBinlogRequest,
     MonitorData: MonitorData,
     ModifyLogFileRetentionPeriodResponse: ModifyLogFileRetentionPeriodResponse,
     DescribeDBPerformanceRequest: DescribeDBPerformanceRequest,

@@ -19,8 +19,9 @@ const AbstractClient = require('../../common/abstract_client')
 const UnbindDevicesRequest = models.UnbindDevicesRequest;
 const BindDevicesRequest = models.BindDevicesRequest;
 const DescribeProductsRequest = models.DescribeProductsRequest;
+const TopicRulePayload = models.TopicRulePayload;
 const DescribeDevicesResponse = models.DescribeDevicesResponse;
-const ProductInfo = models.ProductInfo;
+const DeleteTopicRuleResponse = models.DeleteTopicRuleResponse;
 const Task = models.Task;
 const EnableTopicRuleResponse = models.EnableTopicRuleResponse;
 const DescribeTasksResponse = models.DescribeTasksResponse;
@@ -37,7 +38,7 @@ const DeleteProductRequest = models.DeleteProductRequest;
 const DescribeTasksRequest = models.DescribeTasksRequest;
 const ReplaceTopicRuleRequest = models.ReplaceTopicRuleRequest;
 const MultiDevicesInfo = models.MultiDevicesInfo;
-const ReplaceTopicRuleResponse = models.ReplaceTopicRuleResponse;
+const ResetDeviceStateRequest = models.ResetDeviceStateRequest;
 const DescribeDeviceClientKeyRequest = models.DescribeDeviceClientKeyRequest;
 const UpdateTopicPolicyRequest = models.UpdateTopicPolicyRequest;
 const BatchUpdateShadow = models.BatchUpdateShadow;
@@ -47,7 +48,8 @@ const CreateLoraDeviceRequest = models.CreateLoraDeviceRequest;
 const CreateProductResponse = models.CreateProductResponse;
 const DeleteLoraDeviceResponse = models.DeleteLoraDeviceResponse;
 const CreateTaskRequest = models.CreateTaskRequest;
-const CreateTopicPolicyResponse = models.CreateTopicPolicyResponse;
+const DescribeAllDevicesRequest = models.DescribeAllDevicesRequest;
+const DeviceProperty = models.DeviceProperty;
 const DescribeMultiDevicesResponse = models.DescribeMultiDevicesResponse;
 const CreateDeviceResponse = models.CreateDeviceResponse;
 const DeleteLoraDeviceRequest = models.DeleteLoraDeviceRequest;
@@ -65,9 +67,9 @@ const UpdateDeviceAvailableStateResponse = models.UpdateDeviceAvailableStateResp
 const CancelTaskRequest = models.CancelTaskRequest;
 const UpdateDeviceAvailableStateRequest = models.UpdateDeviceAvailableStateRequest;
 const DeleteProductResponse = models.DeleteProductResponse;
-const TopicRulePayload = models.TopicRulePayload;
+const CreateTopicPolicyResponse = models.CreateTopicPolicyResponse;
 const PublishToDeviceRequest = models.PublishToDeviceRequest;
-const DeleteTopicRuleResponse = models.DeleteTopicRuleResponse;
+const ProductInfo = models.ProductInfo;
 const PublishBroadcastMessageResponse = models.PublishBroadcastMessageResponse;
 const DescribeDeviceRequest = models.DescribeDeviceRequest;
 const CreateMultiDevicesTaskResponse = models.CreateMultiDevicesTaskResponse;
@@ -80,7 +82,7 @@ const CancelTaskResponse = models.CancelTaskResponse;
 const Attribute = models.Attribute;
 const CreateLoraDeviceResponse = models.CreateLoraDeviceResponse;
 const DeleteTopicRuleRequest = models.DeleteTopicRuleRequest;
-const ResetDeviceStateRequest = models.ResetDeviceStateRequest;
+const ReplaceTopicRuleResponse = models.ReplaceTopicRuleResponse;
 const CreateMultiDeviceRequest = models.CreateMultiDeviceRequest;
 const PublishToDeviceResponse = models.PublishToDeviceResponse;
 const DescribeDeviceShadowRequest = models.DescribeDeviceShadowRequest;
@@ -95,6 +97,7 @@ const BatchPublishMessage = models.BatchPublishMessage;
 const DescribeMultiDevTaskResponse = models.DescribeMultiDevTaskResponse;
 const DescribeProductTasksRequest = models.DescribeProductTasksRequest;
 const DeviceTag = models.DeviceTag;
+const DescribeAllDevicesResponse = models.DescribeAllDevicesResponse;
 const DescribeLoraDeviceRequest = models.DescribeLoraDeviceRequest;
 const DescribeTaskRequest = models.DescribeTaskRequest;
 const PublishMessageResponse = models.PublishMessageResponse;
@@ -136,14 +139,14 @@ class IotcloudClient extends AbstractClient {
     }
 
     /**
-     * 本接口（ReplaceTopicRule）用于修改替换规则
-     * @param {ReplaceTopicRuleRequest} req
-     * @param {function(string, ReplaceTopicRuleResponse):void} cb
+     * 查询所有设备列表
+     * @param {DescribeAllDevicesRequest} req
+     * @param {function(string, DescribeAllDevicesResponse):void} cb
      * @public
      */
-    ReplaceTopicRule(req, cb) {
-        let resp = new ReplaceTopicRuleResponse();
-        this.request("ReplaceTopicRule", req, resp, cb);
+    DescribeAllDevices(req, cb) {
+        let resp = new DescribeAllDevicesResponse();
+        this.request("DescribeAllDevices", req, resp, cb);
     }
 
     /**
@@ -301,7 +304,7 @@ class IotcloudClient extends AbstractClient {
     }
 
     /**
-     * 获取lora类型设备的详细信息
+     * 获取lora类型设备的详细信息 
      * @param {DescribeLoraDeviceRequest} req
      * @param {function(string, DescribeLoraDeviceResponse):void} cb
      * @public
@@ -331,6 +334,17 @@ class IotcloudClient extends AbstractClient {
     DeleteDevice(req, cb) {
         let resp = new DeleteDeviceResponse();
         this.request("DeleteDevice", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ReplaceTopicRule）用于修改替换规则
+     * @param {ReplaceTopicRuleRequest} req
+     * @param {function(string, ReplaceTopicRuleResponse):void} cb
+     * @public
+     */
+    ReplaceTopicRule(req, cb) {
+        let resp = new ReplaceTopicRuleResponse();
+        this.request("ReplaceTopicRule", req, resp, cb);
     }
 
     /**

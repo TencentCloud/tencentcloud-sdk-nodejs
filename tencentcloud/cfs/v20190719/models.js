@@ -17,34 +17,6 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * DeleteCfsFileSystem请求参数结构体
- * @class
- */
-class DeleteCfsFileSystemRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 文件系统 ID。说明，进行删除文件系统操作前需要先调用 DeleteMountTarget 接口删除该文件系统的挂载点，否则会删除失败。
-         * @type {string || null}
-         */
-        this.FileSystemId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.FileSystemId = 'FileSystemId' in params ? params.FileSystemId : null;
-
-    }
-}
-
-/**
  * DeleteCfsFileSystem返回参数结构体
  * @class
  */
@@ -68,6 +40,70 @@ class DeleteCfsFileSystemResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 版本控制-可用区数组
+ * @class
+ */
+class AvailableZone extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 可用区名称
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 可用区ID
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * 可用区中文名称
+         * @type {string || null}
+         */
+        this.ZoneCnName = null;
+
+        /**
+         * Type数组
+         * @type {Array.<AvailableType> || null}
+         */
+        this.Types = null;
+
+        /**
+         * 可用区中英文名称
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.ZoneCnName = 'ZoneCnName' in params ? params.ZoneCnName : null;
+
+        if (params.Types) {
+            this.Types = new Array();
+            for (let z in params.Types) {
+                let obj = new AvailableType();
+                obj.deserialize(params.Types[z]);
+                this.Types.push(obj);
+            }
+        }
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
 
     }
 }
@@ -131,6 +167,48 @@ class UpdateCfsRuleRequest extends  AbstractModel {
         this.RWPermission = 'RWPermission' in params ? params.RWPermission : null;
         this.UserPermission = 'UserPermission' in params ? params.UserPermission : null;
         this.Priority = 'Priority' in params ? params.Priority : null;
+
+    }
+}
+
+/**
+ * DescribeCfsFileSystems请求参数结构体
+ * @class
+ */
+class DescribeCfsFileSystemsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 文件系统 ID
+         * @type {string || null}
+         */
+        this.FileSystemId = null;
+
+        /**
+         * 私有网络（VPC） ID
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 子网 ID
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FileSystemId = 'FileSystemId' in params ? params.FileSystemId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
     }
 }
@@ -432,30 +510,24 @@ class DescribeCfsPGroupsResponse extends  AbstractModel {
 }
 
 /**
- * UpdateCfsPGroup请求参数结构体
+ * DescribeCfsFileSystemClients返回参数结构体
  * @class
  */
-class UpdateCfsPGroupRequest extends  AbstractModel {
+class DescribeCfsFileSystemClientsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 权限组 ID
-         * @type {string || null}
+         * 客户端列表
+         * @type {Array.<FileSystemClient> || null}
          */
-        this.PGroupId = null;
+        this.ClientList = null;
 
         /**
-         * 权限组名称，1-64个字符且只能为中文，字母，数字，下划线或横线
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Name = null;
-
-        /**
-         * 权限组描述信息，1-255个字符
-         * @type {string || null}
-         */
-        this.DescInfo = null;
+        this.RequestId = null;
 
     }
 
@@ -466,9 +538,16 @@ class UpdateCfsPGroupRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PGroupId = 'PGroupId' in params ? params.PGroupId : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.DescInfo = 'DescInfo' in params ? params.DescInfo : null;
+
+        if (params.ClientList) {
+            this.ClientList = new Array();
+            for (let z in params.ClientList) {
+                let obj = new FileSystemClient();
+                obj.deserialize(params.ClientList[z]);
+                this.ClientList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -624,6 +703,48 @@ class DeleteCfsRuleRequest extends  AbstractModel {
         }
         this.PGroupId = 'PGroupId' in params ? params.PGroupId : null;
         this.RuleId = 'RuleId' in params ? params.RuleId : null;
+
+    }
+}
+
+/**
+ * UpdateCfsPGroup请求参数结构体
+ * @class
+ */
+class UpdateCfsPGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 权限组 ID
+         * @type {string || null}
+         */
+        this.PGroupId = null;
+
+        /**
+         * 权限组名称，1-64个字符且只能为中文，字母，数字，下划线或横线
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 权限组描述信息，1-255个字符
+         * @type {string || null}
+         */
+        this.DescInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PGroupId = 'PGroupId' in params ? params.PGroupId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.DescInfo = 'DescInfo' in params ? params.DescInfo : null;
 
     }
 }
@@ -785,6 +906,69 @@ class UpdateCfsRuleResponse extends  AbstractModel {
         this.UserPermission = 'UserPermission' in params ? params.UserPermission : null;
         this.Priority = 'Priority' in params ? params.Priority : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 文件系统客户端信息
+ * @class
+ */
+class FileSystemClient extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 文件系统IP地址
+         * @type {string || null}
+         */
+        this.CfsVip = null;
+
+        /**
+         * 客户端IP地址
+         * @type {string || null}
+         */
+        this.ClientIp = null;
+
+        /**
+         * 文件系统所属VPCID
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 可用区名称，例如ap-beijing-1，请参考 概览文档中的地域与可用区列表
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 可用区中文名称
+         * @type {string || null}
+         */
+        this.ZoneName = null;
+
+        /**
+         * 该文件系统被挂载到客户端上的路径信息
+         * @type {string || null}
+         */
+        this.MountDirectory = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CfsVip = 'CfsVip' in params ? params.CfsVip : null;
+        this.ClientIp = 'ClientIp' in params ? params.ClientIp : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.MountDirectory = 'MountDirectory' in params ? params.MountDirectory : null;
 
     }
 }
@@ -1132,42 +1316,18 @@ class DescribeCfsPGroupsRequest extends  AbstractModel {
 }
 
 /**
- * 版本控制-可用区数组
+ * DescribeCfsFileSystemClients请求参数结构体
  * @class
  */
-class AvailableZone extends  AbstractModel {
+class DescribeCfsFileSystemClientsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 可用区名称
+         * 文件系统 ID。
          * @type {string || null}
          */
-        this.Zone = null;
-
-        /**
-         * 可用区ID
-         * @type {number || null}
-         */
-        this.ZoneId = null;
-
-        /**
-         * 可用区中文名称
-         * @type {string || null}
-         */
-        this.ZoneCnName = null;
-
-        /**
-         * Type数组
-         * @type {Array.<AvailableType> || null}
-         */
-        this.Types = null;
-
-        /**
-         * 可用区中英文名称
-         * @type {string || null}
-         */
-        this.ZoneName = null;
+        this.FileSystemId = null;
 
     }
 
@@ -1178,19 +1338,7 @@ class AvailableZone extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Zone = 'Zone' in params ? params.Zone : null;
-        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
-        this.ZoneCnName = 'ZoneCnName' in params ? params.ZoneCnName : null;
-
-        if (params.Types) {
-            this.Types = new Array();
-            for (let z in params.Types) {
-                let obj = new AvailableType();
-                obj.deserialize(params.Types[z]);
-                this.Types.push(obj);
-            }
-        }
-        this.ZoneName = 'ZoneName' in params ? params.ZoneName : null;
+        this.FileSystemId = 'FileSystemId' in params ? params.FileSystemId : null;
 
     }
 }
@@ -2075,30 +2223,18 @@ class UpdateCfsFileSystemSizeLimitRequest extends  AbstractModel {
 }
 
 /**
- * DescribeCfsFileSystems请求参数结构体
+ * DeleteCfsFileSystem请求参数结构体
  * @class
  */
-class DescribeCfsFileSystemsRequest extends  AbstractModel {
+class DeleteCfsFileSystemRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 文件系统 ID
+         * 文件系统 ID。说明，进行删除文件系统操作前需要先调用 DeleteMountTarget 接口删除该文件系统的挂载点，否则会删除失败。
          * @type {string || null}
          */
         this.FileSystemId = null;
-
-        /**
-         * 私有网络（VPC） ID
-         * @type {string || null}
-         */
-        this.VpcId = null;
-
-        /**
-         * 子网 ID
-         * @type {string || null}
-         */
-        this.SubnetId = null;
 
     }
 
@@ -2110,8 +2246,6 @@ class DescribeCfsFileSystemsRequest extends  AbstractModel {
             return;
         }
         this.FileSystemId = 'FileSystemId' in params ? params.FileSystemId : null;
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
 
     }
 }
@@ -2251,9 +2385,10 @@ class UpdateCfsFileSystemPGroupResponse extends  AbstractModel {
 }
 
 module.exports = {
-    DeleteCfsFileSystemRequest: DeleteCfsFileSystemRequest,
     DeleteCfsFileSystemResponse: DeleteCfsFileSystemResponse,
+    AvailableZone: AvailableZone,
     UpdateCfsRuleRequest: UpdateCfsRuleRequest,
+    DescribeCfsFileSystemsRequest: DescribeCfsFileSystemsRequest,
     DeleteMountTargetRequest: DeleteMountTargetRequest,
     CreateCfsRuleRequest: CreateCfsRuleRequest,
     PGroup: PGroup,
@@ -2261,19 +2396,21 @@ module.exports = {
     UpdateCfsFileSystemNameResponse: UpdateCfsFileSystemNameResponse,
     UpdateCfsFileSystemNameRequest: UpdateCfsFileSystemNameRequest,
     DescribeCfsPGroupsResponse: DescribeCfsPGroupsResponse,
-    UpdateCfsPGroupRequest: UpdateCfsPGroupRequest,
+    DescribeCfsFileSystemClientsResponse: DescribeCfsFileSystemClientsResponse,
     DeleteMountTargetResponse: DeleteMountTargetResponse,
     DescribeMountTargetsResponse: DescribeMountTargetsResponse,
     DeleteCfsRuleResponse: DeleteCfsRuleResponse,
     DeleteCfsRuleRequest: DeleteCfsRuleRequest,
+    UpdateCfsPGroupRequest: UpdateCfsPGroupRequest,
     MountInfo: MountInfo,
     UpdateCfsRuleResponse: UpdateCfsRuleResponse,
+    FileSystemClient: FileSystemClient,
     DescribeCfsFileSystemsResponse: DescribeCfsFileSystemsResponse,
     CreateCfsFileSystemResponse: CreateCfsFileSystemResponse,
     FileSystemInfo: FileSystemInfo,
     TagInfo: TagInfo,
     DescribeCfsPGroupsRequest: DescribeCfsPGroupsRequest,
-    AvailableZone: AvailableZone,
+    DescribeCfsFileSystemClientsRequest: DescribeCfsFileSystemClientsRequest,
     CreateCfsPGroupRequest: CreateCfsPGroupRequest,
     DeleteCfsPGroupResponse: DeleteCfsPGroupResponse,
     UpdateCfsFileSystemSizeLimitResponse: UpdateCfsFileSystemSizeLimitResponse,
@@ -2295,7 +2432,7 @@ module.exports = {
     DeleteCfsPGroupRequest: DeleteCfsPGroupRequest,
     AvailableType: AvailableType,
     UpdateCfsFileSystemSizeLimitRequest: UpdateCfsFileSystemSizeLimitRequest,
-    DescribeCfsFileSystemsRequest: DescribeCfsFileSystemsRequest,
+    DeleteCfsFileSystemRequest: DeleteCfsFileSystemRequest,
     UpdateCfsPGroupResponse: UpdateCfsPGroupResponse,
     DescribeCfsRulesResponse: DescribeCfsRulesResponse,
     UpdateCfsFileSystemPGroupResponse: UpdateCfsFileSystemPGroupResponse,
