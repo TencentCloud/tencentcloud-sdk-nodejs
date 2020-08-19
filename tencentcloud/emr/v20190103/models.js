@@ -829,6 +829,61 @@ class TerminateInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * Pod的存储设备描述信息。
+ * @class
+ */
+class PodVolume extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 存储类型，可为"pvc"，"hostpath"。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VolumeType = null;
+
+        /**
+         * 当VolumeType为"pvc"时，该字段生效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {PersistentVolumeContext || null}
+         */
+        this.PVCVolume = null;
+
+        /**
+         * 当VolumeType为"hostpath"时，该字段生效。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {HostVolumeContext || null}
+         */
+        this.HostVolume = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VolumeType = 'VolumeType' in params ? params.VolumeType : null;
+
+        if (params.PVCVolume) {
+            let obj = new PersistentVolumeContext();
+            obj.deserialize(params.PVCVolume)
+            this.PVCVolume = obj;
+        }
+
+        if (params.HostVolume) {
+            let obj = new HostVolumeContext();
+            obj.deserialize(params.HostVolume)
+            this.HostVolume = obj;
+        }
+
+    }
+}
+
+/**
  * TerminateInstance返回参数结构体
  * @class
  */
@@ -923,10 +978,22 @@ class PodSpec extends  AbstractModel {
         this.Memory = null;
 
         /**
-         * 资源对宿主机的挂载点，指定的挂载点对应了宿主机的路径，该挂载点在Pod中作为数据存储目录使用。
+         * 资源对宿主机的挂载点，指定的挂载点对应了宿主机的路径，该挂载点在Pod中作为数据存储目录使用。弃用
          * @type {Array.<string> || null}
          */
         this.DataVolumes = null;
+
+        /**
+         * Eks集群-CPU类型，当前支持"intel"和"amd"
+         * @type {string || null}
+         */
+        this.CpuType = null;
+
+        /**
+         * Pod节点数据目录挂载信息。
+         * @type {Array.<PodVolume> || null}
+         */
+        this.PodVolumes = null;
 
     }
 
@@ -943,6 +1010,16 @@ class PodSpec extends  AbstractModel {
         this.Cpu = 'Cpu' in params ? params.Cpu : null;
         this.Memory = 'Memory' in params ? params.Memory : null;
         this.DataVolumes = 'DataVolumes' in params ? params.DataVolumes : null;
+        this.CpuType = 'CpuType' in params ? params.CpuType : null;
+
+        if (params.PodVolumes) {
+            this.PodVolumes = new Array();
+            for (let z in params.PodVolumes) {
+                let obj = new PodVolume();
+                obj.deserialize(params.PodVolumes[z]);
+                this.PodVolumes.push(obj);
+            }
+        }
 
     }
 }
@@ -1101,6 +1178,35 @@ class InquiryPriceCreateInstanceResponse extends  AbstractModel {
         this.TimeUnit = 'TimeUnit' in params ? params.TimeUnit : null;
         this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Pod HostPath挂载方式描述
+ * @class
+ */
+class HostVolumeContext extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Pod挂载宿主机的目录。资源对宿主机的挂载点，指定的挂载点对应了宿主机的路径，该挂载点在Pod中作为数据存储目录使用
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VolumePath = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VolumePath = 'VolumePath' in params ? params.VolumePath : null;
 
     }
 }
@@ -3204,6 +3310,43 @@ class NewResourceSpec extends  AbstractModel {
 }
 
 /**
+ * Pod PVC存储方式描述
+ * @class
+ */
+class PersistentVolumeContext extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 磁盘大小，单位为GB。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * 磁盘类型。CLOUD_PREMIUM;CLOUD_SSD
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+
+    }
+}
+
+/**
  * InquiryPriceRenewInstance请求参数结构体
  * @class
  */
@@ -3586,12 +3729,14 @@ module.exports = {
     InquiryPriceCreateInstanceRequest: InquiryPriceCreateInstanceRequest,
     Resource: Resource,
     TerminateInstanceRequest: TerminateInstanceRequest,
+    PodVolume: PodVolume,
     TerminateInstanceResponse: TerminateInstanceResponse,
     CreateInstanceResponse: CreateInstanceResponse,
     PodSpec: PodSpec,
     InquiryPriceRenewInstanceResponse: InquiryPriceRenewInstanceResponse,
     TerminateTasksRequest: TerminateTasksRequest,
     InquiryPriceCreateInstanceResponse: InquiryPriceCreateInstanceResponse,
+    HostVolumeContext: HostVolumeContext,
     DescribeClusterNodesRequest: DescribeClusterNodesRequest,
     PreExecuteFileSettings: PreExecuteFileSettings,
     CreateInstanceRequest: CreateInstanceRequest,
@@ -3614,6 +3759,7 @@ module.exports = {
     NodeHardwareInfo: NodeHardwareInfo,
     InquiryPriceUpdateInstanceResponse: InquiryPriceUpdateInstanceResponse,
     NewResourceSpec: NewResourceSpec,
+    PersistentVolumeContext: PersistentVolumeContext,
     InquiryPriceRenewInstanceRequest: InquiryPriceRenewInstanceRequest,
     CdbInfo: CdbInfo,
     ScaleOutInstanceRequest: ScaleOutInstanceRequest,

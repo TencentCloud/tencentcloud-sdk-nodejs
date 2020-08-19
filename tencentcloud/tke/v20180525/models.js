@@ -2233,7 +2233,7 @@ class ClusterExtraArgs extends  AbstractModel {
         super();
 
         /**
-         * kube-apiserver自定义参数
+         * kube-apiserver自定义参数，参数格式为["k1=v1", "k1=v2"]， 例如["max-requests-inflight=500","feature-gates=PodShareProcessNamespace=true,DynamicKubeletConfig=true"]
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
@@ -2897,7 +2897,7 @@ class InstanceExtraArgs extends  AbstractModel {
         super();
 
         /**
-         * kubelet自定义参数
+         * kubelet自定义参数，参数格式为["k1=v1", "k1=v2"]， 例如["root-dir=/var/lib/kubelet","feature-gates=PodShareProcessNamespace=true,DynamicKubeletConfig=true"]
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
@@ -3232,6 +3232,24 @@ class ClusterAdvancedSettings extends  AbstractModel {
          */
         this.KubeProxyMode = null;
 
+        /**
+         * 是否开启审计开关
+         * @type {boolean || null}
+         */
+        this.AuditEnabled = null;
+
+        /**
+         * 审计日志上传到的logset日志集
+         * @type {string || null}
+         */
+        this.AuditLogsetId = null;
+
+        /**
+         * 审计日志上传到的topic
+         * @type {string || null}
+         */
+        this.AuditLogTopicId = null;
+
     }
 
     /**
@@ -3255,6 +3273,9 @@ class ClusterAdvancedSettings extends  AbstractModel {
         this.IsNonStaticIpMode = 'IsNonStaticIpMode' in params ? params.IsNonStaticIpMode : null;
         this.DeletionProtection = 'DeletionProtection' in params ? params.DeletionProtection : null;
         this.KubeProxyMode = 'KubeProxyMode' in params ? params.KubeProxyMode : null;
+        this.AuditEnabled = 'AuditEnabled' in params ? params.AuditEnabled : null;
+        this.AuditLogsetId = 'AuditLogsetId' in params ? params.AuditLogsetId : null;
+        this.AuditLogTopicId = 'AuditLogTopicId' in params ? params.AuditLogTopicId : null;
 
     }
 }
