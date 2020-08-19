@@ -2808,7 +2808,7 @@ class ReqParameter extends  AbstractModel {
         this.Name = null;
 
         /**
-         * API 的前端参数位置，如 head。目前支持 head、query、path。
+         * API 的前端参数位置，如 header。目前支持 header、query、path。
          * @type {string || null}
          */
         this.Position = null;

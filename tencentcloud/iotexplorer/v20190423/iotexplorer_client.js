@@ -227,7 +227,7 @@ class IotexplorerClient extends AbstractClient {
     }
 
     /**
-     * 提供查看茶品详细信息的能力，包括产品的ID、数据协议、认证类型等重要参数
+     * 提供查看产品详细信息的能力，包括产品的ID、数据协议、认证类型等重要参数
      * @param {DescribeStudioProductRequest} req
      * @param {function(string, DescribeStudioProductResponse):void} cb
      * @public

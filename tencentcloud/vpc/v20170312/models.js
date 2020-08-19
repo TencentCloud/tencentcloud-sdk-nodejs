@@ -5806,6 +5806,12 @@ class CreateVpnConnectionRequest extends  AbstractModel {
          */
         this.IPSECOptionsSpecification = null;
 
+        /**
+         * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -5840,6 +5846,15 @@ class CreateVpnConnectionRequest extends  AbstractModel {
             let obj = new IPSECOptionsSpecification();
             obj.deserialize(params.IPSECOptionsSpecification)
             this.IPSECOptionsSpecification = obj;
+        }
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
         }
 
     }
@@ -19265,6 +19280,12 @@ class CreateVpnGatewayRequest extends  AbstractModel {
          */
         this.Type = null;
 
+        /**
+         * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -19286,6 +19307,15 @@ class CreateVpnGatewayRequest extends  AbstractModel {
         }
         this.Zone = 'Zone' in params ? params.Zone : null;
         this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -21617,6 +21647,12 @@ class CreateCustomerGatewayRequest extends  AbstractModel {
          */
         this.IpAddress = null;
 
+        /**
+         * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -21628,6 +21664,15 @@ class CreateCustomerGatewayRequest extends  AbstractModel {
         }
         this.CustomerGatewayName = 'CustomerGatewayName' in params ? params.CustomerGatewayName : null;
         this.IpAddress = 'IpAddress' in params ? params.IpAddress : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }

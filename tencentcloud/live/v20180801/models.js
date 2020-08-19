@@ -5042,6 +5042,13 @@ class CreateLiveCallbackTemplateRequest extends  AbstractModel {
          */
         this.CallbackKey = null;
 
+        /**
+         * 混流回调 URL，
+相关协议文档：[事件消息通知](/document/product/267/32744)。
+         * @type {string || null}
+         */
+        this.StreamMixNotifyUrl = null;
+
     }
 
     /**
@@ -5059,6 +5066,7 @@ class CreateLiveCallbackTemplateRequest extends  AbstractModel {
         this.SnapshotNotifyUrl = 'SnapshotNotifyUrl' in params ? params.SnapshotNotifyUrl : null;
         this.PornCensorshipNotifyUrl = 'PornCensorshipNotifyUrl' in params ? params.PornCensorshipNotifyUrl : null;
         this.CallbackKey = 'CallbackKey' in params ? params.CallbackKey : null;
+        this.StreamMixNotifyUrl = 'StreamMixNotifyUrl' in params ? params.StreamMixNotifyUrl : null;
 
     }
 }
@@ -11277,12 +11285,18 @@ class CreateLiveSnapshotTemplateRequest extends  AbstractModel {
 
         /**
          * Cos Bucket文件夹前缀。
+如不传，实际按默认值
+/{Year}-{Month}-{Day}
+生效
          * @type {string || null}
          */
         this.CosPrefix = null;
 
         /**
          * Cos 文件名称。
+如不传，实际按默认值
+{StreamID}-screenshot-{Hour}-{Minute}-{Second}-{Width}x{Height}{Ext}
+生效
          * @type {string || null}
          */
         this.CosFileName = null;

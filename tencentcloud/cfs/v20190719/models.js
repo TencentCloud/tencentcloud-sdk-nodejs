@@ -2159,10 +2159,16 @@ class AvailableType extends  AbstractModel {
         this.Protocols = null;
 
         /**
-         * 存储类型。可选值有 SD 标准型存储、HP性能型存储
+         * 存储类型。返回值中 SD 为标准型存储、HP 为性能型存储
          * @type {string || null}
          */
         this.Type = null;
+
+        /**
+         * 是否支持预付费。返回值中 true 为支持、false 为不支持
+         * @type {boolean || null}
+         */
+        this.Prepayment = null;
 
     }
 
@@ -2183,6 +2189,7 @@ class AvailableType extends  AbstractModel {
             }
         }
         this.Type = 'Type' in params ? params.Type : null;
+        this.Prepayment = 'Prepayment' in params ? params.Prepayment : null;
 
     }
 }
