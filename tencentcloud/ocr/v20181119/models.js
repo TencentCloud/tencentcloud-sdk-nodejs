@@ -112,6 +112,12 @@ class BusinessCardOCRResponse extends  AbstractModel {
         this.RetImageBase64 = null;
 
         /**
+         * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看<a href="https://cloud.tencent.com/document/product/866/45139">如何纠正倾斜文本</a>
+         * @type {number || null}
+         */
+        this.Angle = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -136,6 +142,7 @@ class BusinessCardOCRResponse extends  AbstractModel {
             }
         }
         this.RetImageBase64 = 'RetImageBase64' in params ? params.RetImageBase64 : null;
+        this.Angle = 'Angle' in params ? params.Angle : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3348,6 +3355,12 @@ class GeneralBasicOCRResponse extends  AbstractModel {
         this.Angel = null;
 
         /**
+         * 图片为PDF时，返回PDF的总页数，默认为0
+         * @type {number || null}
+         */
+        this.PdfPageSize = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -3373,6 +3386,7 @@ class GeneralBasicOCRResponse extends  AbstractModel {
         }
         this.Language = 'Language' in params ? params.Language : null;
         this.Angel = 'Angel' in params ? params.Angel : null;
+        this.PdfPageSize = 'PdfPageSize' in params ? params.PdfPageSize : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4511,6 +4525,12 @@ class BusinessCardInfo extends  AbstractModel {
          */
         this.Value = null;
 
+        /**
+         * 文本行在旋转纠正之后的图像中的像素坐标，表示为（左上角x, 左上角y，宽width，高height）
+         * @type {ItemCoord || null}
+         */
+        this.ItemCoord = null;
+
     }
 
     /**
@@ -4522,6 +4542,12 @@ class BusinessCardInfo extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+        if (params.ItemCoord) {
+            let obj = new ItemCoord();
+            obj.deserialize(params.ItemCoord)
+            this.ItemCoord = obj;
+        }
 
     }
 }
@@ -5052,16 +5078,16 @@ class GeneralBasicOCRRequest extends  AbstractModel {
         super();
 
         /**
-         * 图片的 Base64 值。
-要求图片经Base64编码后不超过 7M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP格式。
+         * 图片/PDF的 Base64 值。
+要求图片/PDF经Base64编码后不超过 7M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
          * @type {string || null}
          */
         this.ImageBase64 = null;
 
         /**
-         * 图片的 Url 地址。
-要求图片经Base64编码后不超过 7M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP格式。
+         * 图片/PDF的 Url 地址。
+要求图片/PDF经Base64编码后不超过 7M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
          * @type {string || null}
          */
@@ -5081,16 +5107,29 @@ zh\auto\jap\kor\
 spa\fre\ger\por\
 vie\may\rus\ita\
 hol\swe\fin\dan\
-nor\hun\tha\lat
+nor\hun\tha\lat\ara
 可选值分别表示：
 中英文混合、自动识别、日语、韩语、
 西班牙语、法语、德语、葡萄牙语、
 越南语、马来语、俄语、意大利语、
 荷兰语、瑞典语、芬兰语、丹麦语、
-挪威语、匈牙利语、泰语、拉丁语系。
+挪威语、匈牙利语、泰语、拉丁语系、
+阿拉伯语。
          * @type {string || null}
          */
         this.LanguageType = null;
+
+        /**
+         * 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。
+         * @type {boolean || null}
+         */
+        this.IsPdf = null;
+
+        /**
+         * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+         * @type {number || null}
+         */
+        this.PdfPageNumber = null;
 
     }
 
@@ -5105,6 +5144,8 @@ nor\hun\tha\lat
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
         this.Scene = 'Scene' in params ? params.Scene : null;
         this.LanguageType = 'LanguageType' in params ? params.LanguageType : null;
+        this.IsPdf = 'IsPdf' in params ? params.IsPdf : null;
+        this.PdfPageNumber = 'PdfPageNumber' in params ? params.PdfPageNumber : null;
 
     }
 }
@@ -8968,7 +9009,7 @@ class MLIDCardOCRResponse extends  AbstractModel {
         this.Image = null;
 
         /**
-         * 扩展字段:
+         * 扩展字段：
 {
     ID:{
         Confidence:0.9999
@@ -8994,6 +9035,12 @@ IKAD   劳工证
         this.Type = null;
 
         /**
+         * 出生日期（目前该字段仅支持IKAD劳工证）
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -9016,6 +9063,7 @@ IKAD   劳工证
         this.Image = 'Image' in params ? params.Image : null;
         this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
         this.Type = 'Type' in params ? params.Type : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

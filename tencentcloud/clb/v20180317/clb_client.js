@@ -577,7 +577,7 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * 获取用户的clb独占日志集。
+     * 获取用户的clb专有日志集
      * @param {DescribeClsLogSetRequest} req
      * @param {function(string, DescribeClsLogSetResponse):void} cb
      * @public

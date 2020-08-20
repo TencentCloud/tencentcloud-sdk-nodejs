@@ -8497,14 +8497,14 @@ OPEN：公网属性， INTERNAL：内网属性。
         this.IPv6Mode = null;
 
         /**
-         * 是否开启SnatPro
+         * 是否开启SnatPro。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {boolean || null}
          */
         this.SnatPro = null;
 
         /**
-         * 开启SnatPro负载均衡后，SnatIp列表
+         * 开启SnatPro负载均衡后，SnatIp列表。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<SnatIp> || null}
          */
@@ -8537,6 +8537,20 @@ OPEN：公网属性， INTERNAL：内网属性。
          * @type {boolean || null}
          */
         this.LocalBgp = null;
+
+        /**
+         * 7层独占标签。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterTag = null;
+
+        /**
+         * 开启IPv6FullChain负载均衡7层监听器支持混绑IPv4/IPv6目标功能。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.MixIpTarget = null;
 
     }
 
@@ -8646,6 +8660,8 @@ OPEN：公网属性， INTERNAL：内网属性。
         this.IsBlock = 'IsBlock' in params ? params.IsBlock : null;
         this.IsBlockTime = 'IsBlockTime' in params ? params.IsBlockTime : null;
         this.LocalBgp = 'LocalBgp' in params ? params.LocalBgp : null;
+        this.ClusterTag = 'ClusterTag' in params ? params.ClusterTag : null;
+        this.MixIpTarget = 'MixIpTarget' in params ? params.MixIpTarget : null;
 
     }
 }

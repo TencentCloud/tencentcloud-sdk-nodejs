@@ -918,6 +918,12 @@ class DeleteFunctionRequest extends  AbstractModel {
          */
         this.Namespace = null;
 
+        /**
+         * 函数版本
+         * @type {string || null}
+         */
+        this.Qualifier = null;
+
     }
 
     /**
@@ -929,6 +935,7 @@ class DeleteFunctionRequest extends  AbstractModel {
         }
         this.FunctionName = 'FunctionName' in params ? params.FunctionName : null;
         this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
 
     }
 }
@@ -1744,13 +1751,13 @@ class ListLayersRequest extends  AbstractModel {
         this.CompatibleRuntime = null;
 
         /**
-         * Offset
+         * 偏移位置
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * Limit
+         * 查询数目限制
          * @type {number || null}
          */
         this.Limit = null;
