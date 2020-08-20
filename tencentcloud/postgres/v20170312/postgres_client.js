@@ -65,6 +65,7 @@ const ServerlessDBAccount = models.ServerlessDBAccount;
 const OpenDBExtranetAccessResponse = models.OpenDBExtranetAccessResponse;
 const Filter = models.Filter;
 const RenewInstanceRequest = models.RenewInstanceRequest;
+const Tag = models.Tag;
 const PgDeal = models.PgDeal;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
 const DescribeDatabasesRequest = models.DescribeDatabasesRequest;

@@ -7716,6 +7716,43 @@ class ForbidMediaDistributionResponse extends  AbstractModel {
 }
 
 /**
+ * 用于描述一个时间段的通用数据类型。
+ * @class
+ */
+class TimeRange extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * <li>大于等于此时间（起始时间）。</li>
+<li>格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。</li>
+         * @type {string || null}
+         */
+        this.After = null;
+
+        /**
+         * <li>小于等于此时间（结束时间）。</li>
+<li>格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。</li>
+         * @type {string || null}
+         */
+        this.Before = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.After = 'After' in params ? params.After : null;
+        this.Before = 'Before' in params ? params.Before : null;
+
+    }
+}
+
+/**
  * DescribeAdaptiveDynamicStreamingTemplates请求参数结构体
  * @class
  */
@@ -9718,7 +9755,7 @@ class SearchMediaResponse extends  AbstractModel {
         this.TotalCount = null;
 
         /**
-         * 媒体文件信息列表，只包含基础信息（BasicInfo）。
+         * 媒体文件信息列表。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<MediaInfo> || null}
          */
@@ -24191,12 +24228,6 @@ class SearchMediaRequest extends  AbstractModel {
         super();
 
         /**
-         * 搜索文本，模糊匹配媒体文件名称或描述信息，匹配项越多，匹配度越高，排序越优先。长度限制：64个字符。
-         * @type {string || null}
-         */
-        this.Text = null;
-
-        /**
          * 标签集合，匹配集合中任意元素。
 <li>单个标签长度限制：8个字符。</li>
 <li>数组长度限制：10。</li>
@@ -24205,49 +24236,85 @@ class SearchMediaRequest extends  AbstractModel {
         this.Tags = null;
 
         /**
-         * 分类 ID 集合，匹配集合指定 ID 的分类及其所有子类。数组长度限制：10。
+         * 分类 ID 集合，匹配集合指定 ID 的分类及其所有子类。
+<li>数组长度限制：10。</li>
          * @type {Array.<number> || null}
          */
         this.ClassIds = null;
 
         /**
-         * 创建时间的开始时间。
-<li>大于等于开始时间。</li>
-<li>格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。</li>
-         * @type {string || null}
+         * 推流 [直播码](https://cloud.tencent.com/document/product/267/5959) 集合。匹配集合中的任意元素。
+<li>数组长度限制：10。</li>
+         * @type {Array.<string> || null}
          */
-        this.StartTime = null;
+        this.StreamIds = null;
 
         /**
-         * 创建时间的结束时间。
-<li>小于结束时间。</li>
-<li>格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。</li>
-         * @type {string || null}
+         * 直播录制文件的唯一标识。匹配集合中的任意元素。
+<li>数组长度限制：10。</li>
+         * @type {Array.<string> || null}
          */
-        this.EndTime = null;
+        this.Vids = null;
 
         /**
-         * 媒体文件来源，来源取值参见 [SourceType](https://cloud.tencent.com/document/product/266/31773#MediaSourceData)。
-         * @type {string || null}
+         * 媒体文件来源集合，来源取值参见 [SourceType](https://cloud.tencent.com/document/product/266/31773#MediaSourceData)。
+<li>数组长度限制：10。</li>
+         * @type {Array.<string> || null}
          */
-        this.SourceType = null;
+        this.SourceTypes = null;
 
         /**
-         * 推流 [直播码](https://cloud.tencent.com/document/product/267/5959)。
-         * @type {string || null}
+         * 文件类型。匹配集合中的任意元素：
+<li>Video: 视频文件</li>
+<li>Audio: 音频文件</li>
+<li>Image: 图片文件</li>
+         * @type {Array.<string> || null}
          */
-        this.StreamId = null;
+        this.Categories = null;
 
         /**
-         * 直播录制文件的唯一标识。
-         * @type {string || null}
+         * 匹配创建时间在此时间段内的文件。
+<li>包含所指定的头尾时间点。</li>
+         * @type {TimeRange || null}
          */
-        this.Vid = null;
+        this.CreateTime = null;
+
+        /**
+         * 文件 ID 集合，匹配集合中的任意元素。
+<li>数组长度限制：10。</li>
+<li>单个 ID 长度限制：40个字符。</li>
+         * @type {Array.<string> || null}
+         */
+        this.FileIds = null;
+
+        /**
+         * 文件名集合，模糊匹配媒体文件的文件名，匹配度越高，排序越优先。
+<li>单个文件名长度限制：40个字符。</li>
+<li>数组长度限制：10。</li>
+         * @type {Array.<string> || null}
+         */
+        this.Names = null;
+
+        /**
+         * 文件名前缀，前缀匹配媒体文件的文件名。
+<li>单个文件名前缀长度限制：20个字符。</li>
+<li>数组长度限制：10。</li>
+         * @type {Array.<string> || null}
+         */
+        this.NamePrefixes = null;
+
+        /**
+         * 文件描述集合，匹配集合中的任意元素。
+<li>单个描述长度限制：100个字符。</li>
+<li>数组长度限制：10。</li>
+         * @type {Array.<string> || null}
+         */
+        this.Descriptions = null;
 
         /**
          * 排序方式。
-<li>Sort.Field 可选值：CreateTime</li>
-<li>指定 Text 搜索时，将根据匹配度排序，该字段无效</li>
+<li>Sort.Field 可选 CreateTime 。</li>
+<li>当 Text、 Names 或 Descriptions 不为空时，Sort.Field 字段无效， 搜索结果将以匹配度排序。</li>
          * @type {SortBy || null}
          */
         this.Sort = null;
@@ -24267,19 +24334,74 @@ class SearchMediaRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 文件类型：
-<li>Video: 视频文件</li>
-<li>Audio: 音频文件</li>
-<li>Image: 图片文件</li>
+         * 指定所有媒体文件需要返回的信息，可同时指定多个信息，N 从 0 开始递增。如果未填写该字段，默认返回所有信息。选项有：
+<li>basicInfo（视频基础信息）。</li>
+<li>metaData（视频元信息）。</li>
+<li>transcodeInfo（视频转码结果信息）。</li>
+<li>animatedGraphicsInfo（视频转动图结果信息）。</li>
+<li>imageSpriteInfo（视频雪碧图信息）。</li>
+<li>snapshotByTimeOffsetInfo（视频指定时间点截图信息）。</li>
+<li>sampleSnapshotInfo（采样截图信息）。</li>
+<li>keyFrameDescInfo（打点信息）。</li>
+<li>adaptiveDynamicStreamingInfo（转自适应码流信息）。</li>
+<li>miniProgramReviewInfo（小程序审核信息）。</li>
          * @type {Array.<string> || null}
          */
-        this.Categories = null;
+        this.Filters = null;
 
         /**
          * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
          * @type {number || null}
          */
         this.SubAppId = null;
+
+        /**
+         * （不推荐：应使用 StreamIds 替代）
+推流 [直播码](https://cloud.tencent.com/document/product/267/5959)。
+         * @type {string || null}
+         */
+        this.StreamId = null;
+
+        /**
+         * （不推荐：应使用 Vids 替代）
+直播录制文件的唯一标识。
+         * @type {string || null}
+         */
+        this.Vid = null;
+
+        /**
+         * （不推荐：应使用 Names、NamePrefixes 或 Descriptions 替代）
+搜索文本，模糊匹配媒体文件名称或描述信息，匹配项越多，匹配度越高，排序越优先。长度限制：64个字符。
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * （不推荐：应使用 CreateTime 替代）
+创建时间的开始时间。
+<li>大于等于开始时间。</li>
+<li>当 CreateTime.After 也存在时，将优先使用 CreateTime.After。</li>
+<li>格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。</li>
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * （不推荐：应使用 CreateTime 替代）
+创建时间的结束时间。
+<li>小于结束时间。</li>
+<li>当 CreateTime.Before 也存在时，将优先使用 CreateTime.Before。</li>
+<li>格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。</li>
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * （不推荐：应使用 SourceTypes 替代）
+媒体文件来源，来源取值参见 [SourceType](https://cloud.tencent.com/document/product/266/31773#MediaSourceData)。
+         * @type {string || null}
+         */
+        this.SourceType = null;
 
     }
 
@@ -24290,14 +24412,22 @@ class SearchMediaRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Text = 'Text' in params ? params.Text : null;
         this.Tags = 'Tags' in params ? params.Tags : null;
         this.ClassIds = 'ClassIds' in params ? params.ClassIds : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.SourceType = 'SourceType' in params ? params.SourceType : null;
-        this.StreamId = 'StreamId' in params ? params.StreamId : null;
-        this.Vid = 'Vid' in params ? params.Vid : null;
+        this.StreamIds = 'StreamIds' in params ? params.StreamIds : null;
+        this.Vids = 'Vids' in params ? params.Vids : null;
+        this.SourceTypes = 'SourceTypes' in params ? params.SourceTypes : null;
+        this.Categories = 'Categories' in params ? params.Categories : null;
+
+        if (params.CreateTime) {
+            let obj = new TimeRange();
+            obj.deserialize(params.CreateTime)
+            this.CreateTime = obj;
+        }
+        this.FileIds = 'FileIds' in params ? params.FileIds : null;
+        this.Names = 'Names' in params ? params.Names : null;
+        this.NamePrefixes = 'NamePrefixes' in params ? params.NamePrefixes : null;
+        this.Descriptions = 'Descriptions' in params ? params.Descriptions : null;
 
         if (params.Sort) {
             let obj = new SortBy();
@@ -24306,8 +24436,14 @@ class SearchMediaRequest extends  AbstractModel {
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Categories = 'Categories' in params ? params.Categories : null;
+        this.Filters = 'Filters' in params ? params.Filters : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.StreamId = 'StreamId' in params ? params.StreamId : null;
+        this.Vid = 'Vid' in params ? params.Vid : null;
+        this.Text = 'Text' in params ? params.Text : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
 
     }
 }
@@ -27015,6 +27151,7 @@ module.exports = {
     DescribeAdaptiveDynamicStreamingTemplatesResponse: DescribeAdaptiveDynamicStreamingTemplatesResponse,
     MediaMiniProgramReviewInfo: MediaMiniProgramReviewInfo,
     ForbidMediaDistributionResponse: ForbidMediaDistributionResponse,
+    TimeRange: TimeRange,
     DescribeAdaptiveDynamicStreamingTemplatesRequest: DescribeAdaptiveDynamicStreamingTemplatesRequest,
     ImageWatermarkInput: ImageWatermarkInput,
     ObjectConfigureInfo: ObjectConfigureInfo,

@@ -1344,6 +1344,12 @@ class VideoEditProjectOutput extends  AbstractModel {
         super();
 
         /**
+         * 导出的云剪素材 MaterialId，仅当导出为云剪素材时有效。
+         * @type {string || null}
+         */
+        this.MaterialId = null;
+
+        /**
          * 云点播媒资 FileId。
          * @type {string || null}
          */
@@ -1371,6 +1377,7 @@ class VideoEditProjectOutput extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.MaterialId = 'MaterialId' in params ? params.MaterialId : null;
         this.VodFileId = 'VodFileId' in params ? params.VodFileId : null;
         this.URL = 'URL' in params ? params.URL : null;
 

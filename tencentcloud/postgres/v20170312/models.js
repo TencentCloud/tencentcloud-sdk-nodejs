@@ -120,6 +120,12 @@ class CreateDBInstancesRequest extends  AbstractModel {
          */
         this.NeedSupportIpv6 = null;
 
+        /**
+         * 实例需要绑定的Tag信息，默认为空
+         * @type {Array.<Tag> || null}
+         */
+        this.TagList = null;
+
     }
 
     /**
@@ -145,6 +151,15 @@ class CreateDBInstancesRequest extends  AbstractModel {
         this.ActivityId = 'ActivityId' in params ? params.ActivityId : null;
         this.Name = 'Name' in params ? params.Name : null;
         this.NeedSupportIpv6 = 'NeedSupportIpv6' in params ? params.NeedSupportIpv6 : null;
+
+        if (params.TagList) {
+            this.TagList = new Array();
+            for (let z in params.TagList) {
+                let obj = new Tag();
+                obj.deserialize(params.TagList[z]);
+                this.TagList.push(obj);
+            }
+        }
 
     }
 }
@@ -255,6 +270,12 @@ class CreateServerlessDBInstanceRequest extends  AbstractModel {
          */
         this.SubnetId = null;
 
+        /**
+         * 实例需要绑定的标签数组信息
+         * @type {Array.<Tag> || null}
+         */
+        this.TagList = null;
+
     }
 
     /**
@@ -271,6 +292,15 @@ class CreateServerlessDBInstanceRequest extends  AbstractModel {
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.VpcId = 'VpcId' in params ? params.VpcId : null;
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+
+        if (params.TagList) {
+            this.TagList = new Array();
+            for (let z in params.TagList) {
+                let obj = new Tag();
+                obj.deserialize(params.TagList[z]);
+                this.TagList.push(obj);
+            }
+        }
 
     }
 }
@@ -1056,7 +1086,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * 过滤条件，目前支持：db-instance-id、db-instance-name、db-project-id、db-pay-mode。
+         * 过滤条件，目前支持：db-instance-id、db-instance-name、db-project-id、db-pay-mode、db-tag-key。
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -1204,14 +1234,14 @@ class ServerlessDBInstance extends  AbstractModel {
         this.Zone = null;
 
         /**
-         * projectId
+         * 项目id
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
-         * VpcId
+         * 私有网络Id
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -1266,6 +1296,13 @@ class ServerlessDBInstance extends  AbstractModel {
          */
         this.DBDatabaseList = null;
 
+        /**
+         * 实例绑定的标签数组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.TagList = null;
+
     }
 
     /**
@@ -1305,6 +1342,15 @@ class ServerlessDBInstance extends  AbstractModel {
             }
         }
         this.DBDatabaseList = 'DBDatabaseList' in params ? params.DBDatabaseList : null;
+
+        if (params.TagList) {
+            this.TagList = new Array();
+            for (let z in params.TagList) {
+                let obj = new Tag();
+                obj.deserialize(params.TagList[z]);
+                this.TagList.push(obj);
+            }
+        }
 
     }
 }
@@ -2065,6 +2111,13 @@ class DBInstance extends  AbstractModel {
          */
         this.SupportIpv6 = null;
 
+        /**
+         * 实例绑定的标签信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.TagList = null;
+
     }
 
     /**
@@ -2109,6 +2162,15 @@ class DBInstance extends  AbstractModel {
         this.AppId = 'AppId' in params ? params.AppId : null;
         this.Uid = 'Uid' in params ? params.Uid : null;
         this.SupportIpv6 = 'SupportIpv6' in params ? params.SupportIpv6 : null;
+
+        if (params.TagList) {
+            this.TagList = new Array();
+            for (let z in params.TagList) {
+                let obj = new Tag();
+                obj.deserialize(params.TagList[z]);
+                this.TagList.push(obj);
+            }
+        }
 
     }
 }
@@ -2556,6 +2618,41 @@ class RenewInstanceRequest extends  AbstractModel {
         this.Period = 'Period' in params ? params.Period : null;
         this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
         this.VoucherIds = 'VoucherIds' in params ? params.VoucherIds : null;
+
+    }
+}
+
+/**
+ * 实例绑定的标签信息，包含标签键TagKey和标签值TagValue
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签键
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * 标签值
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
 
     }
 }
@@ -3473,6 +3570,18 @@ class DescribeServerlessDBInstancesRequest extends  AbstractModel {
          */
         this.Offset = null;
 
+        /**
+         * 排序指标，目前支持实例创建时间CreateTime
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * 排序方式，包括升序、降序
+         * @type {string || null}
+         */
+        this.OrderByType = null;
+
     }
 
     /**
@@ -3493,6 +3602,8 @@ class DescribeServerlessDBInstancesRequest extends  AbstractModel {
         }
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
 
     }
 }
@@ -4227,6 +4338,7 @@ module.exports = {
     OpenDBExtranetAccessResponse: OpenDBExtranetAccessResponse,
     Filter: Filter,
     RenewInstanceRequest: RenewInstanceRequest,
+    Tag: Tag,
     PgDeal: PgDeal,
     DescribeRegionsResponse: DescribeRegionsResponse,
     DescribeDatabasesRequest: DescribeDatabasesRequest,
