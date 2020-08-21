@@ -18,7 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DeleteRewriteRequest = models.DeleteRewriteRequest;
 const DescribeTargetGroupListResponse = models.DescribeTargetGroupListResponse;
-const DisassociateTargetGroupsResponse = models.DisassociateTargetGroupsResponse;
+const DescribeQuotaRequest = models.DescribeQuotaRequest;
 const DescribeTargetGroupListRequest = models.DescribeTargetGroupListRequest;
 const BatchDeregisterTargetsResponse = models.BatchDeregisterTargetsResponse;
 const SetLoadBalancerSecurityGroupsResponse = models.SetLoadBalancerSecurityGroupsResponse;
@@ -28,7 +28,7 @@ const SetSecurityGroupForLoadbalancersRequest = models.SetSecurityGroupForLoadba
 const CreateLoadBalancerRequest = models.CreateLoadBalancerRequest;
 const RuleHealth = models.RuleHealth;
 const DeleteRuleRequest = models.DeleteRuleRequest;
-const ModifyLoadBalancerAttributesRequest = models.ModifyLoadBalancerAttributesRequest;
+const DisassociateTargetGroupsResponse = models.DisassociateTargetGroupsResponse;
 const SetLoadBalancerClsLogResponse = models.SetLoadBalancerClsLogResponse;
 const ModifyRuleRequest = models.ModifyRuleRequest;
 const DescribeClassicalLBByInstanceIdResponse = models.DescribeClassicalLBByInstanceIdResponse;
@@ -65,6 +65,7 @@ const ModifyTargetGroupInstancesWeightResponse = models.ModifyTargetGroupInstanc
 const DescribeTargetGroupsRequest = models.DescribeTargetGroupsRequest;
 const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
 const BatchRegisterTargetsResponse = models.BatchRegisterTargetsResponse;
+const ModifyLoadBalancerAttributesRequest = models.ModifyLoadBalancerAttributesRequest;
 const Target = models.Target;
 const DescribeBlockIPListRequest = models.DescribeBlockIPListRequest;
 const CertIdRelatedWithLoadBalancers = models.CertIdRelatedWithLoadBalancers;
@@ -147,6 +148,7 @@ const DeregisterTargetsRequest = models.DeregisterTargetsRequest;
 const InternetAccessible = models.InternetAccessible;
 const CreateLoadBalancerSnatIpsRequest = models.CreateLoadBalancerSnatIpsRequest;
 const ModifyTargetGroupInstancesWeightRequest = models.ModifyTargetGroupInstancesWeightRequest;
+const DescribeClassicalLBListenersRequest = models.DescribeClassicalLBListenersRequest;
 const DeleteTargetGroupsResponse = models.DeleteTargetGroupsResponse;
 const ModifyTargetGroupInstancesPortRequest = models.ModifyTargetGroupInstancesPortRequest;
 const BatchRegisterTargetsRequest = models.BatchRegisterTargetsRequest;
@@ -159,6 +161,7 @@ const DescribeClassicalLBListenersResponse = models.DescribeClassicalLBListeners
 const ModifyTargetGroupAttributeResponse = models.ModifyTargetGroupAttributeResponse;
 const DescribeBlockIPTaskRequest = models.DescribeBlockIPTaskRequest;
 const CreateLoadBalancerResponse = models.CreateLoadBalancerResponse;
+const Quota = models.Quota;
 const DeleteLoadBalancerListenersResponse = models.DeleteLoadBalancerListenersResponse;
 const DescribeListenersRequest = models.DescribeListenersRequest;
 const DeleteLoadBalancerSnatIpsRequest = models.DeleteLoadBalancerSnatIpsRequest;
@@ -171,7 +174,7 @@ const DeleteListenerResponse = models.DeleteListenerResponse;
 const DeleteLoadBalancerSnatIpsResponse = models.DeleteLoadBalancerSnatIpsResponse;
 const CertificateOutput = models.CertificateOutput;
 const DeleteTargetGroupsRequest = models.DeleteTargetGroupsRequest;
-const DescribeClassicalLBListenersRequest = models.DescribeClassicalLBListenersRequest;
+const DescribeQuotaResponse = models.DescribeQuotaResponse;
 const TargetHealth = models.TargetHealth;
 const TargetGroupAssociation = models.TargetGroupAssociation;
 const ListenerHealth = models.ListenerHealth;
@@ -847,6 +850,17 @@ class ClbClient extends AbstractClient {
     BatchModifyTargetWeight(req, cb) {
         let resp = new BatchModifyTargetWeightResponse();
         this.request("BatchModifyTargetWeight", req, resp, cb);
+    }
+
+    /**
+     * 查询用户当前地域下的各项配额
+     * @param {DescribeQuotaRequest} req
+     * @param {function(string, DescribeQuotaResponse):void} cb
+     * @public
+     */
+    DescribeQuota(req, cb) {
+        let resp = new DescribeQuotaResponse();
+        this.request("DescribeQuota", req, resp, cb);
     }
 
     /**

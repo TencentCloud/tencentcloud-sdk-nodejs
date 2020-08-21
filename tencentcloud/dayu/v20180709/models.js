@@ -14097,7 +14097,7 @@ class DescribeDDoSTrendResponse extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * 值数组
+         * 值数组，攻击流量带宽单位为Mbps，包速率单位为pps
          * @type {Array.<number> || null}
          */
         this.Data = null;

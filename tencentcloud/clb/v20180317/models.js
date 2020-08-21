@@ -124,18 +124,12 @@ class DescribeTargetGroupListResponse extends  AbstractModel {
 }
 
 /**
- * DisassociateTargetGroups返回参数结构体
+ * DescribeQuota请求参数结构体
  * @class
  */
-class DisassociateTargetGroupsResponse extends  AbstractModel {
+class DescribeQuotaRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
 
     }
 
@@ -146,7 +140,6 @@ class DisassociateTargetGroupsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -638,48 +631,18 @@ class DeleteRuleRequest extends  AbstractModel {
 }
 
 /**
- * ModifyLoadBalancerAttributes请求参数结构体
+ * DisassociateTargetGroups返回参数结构体
  * @class
  */
-class ModifyLoadBalancerAttributesRequest extends  AbstractModel {
+class DisassociateTargetGroupsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 负载均衡的唯一ID
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.LoadBalancerId = null;
-
-        /**
-         * 负载均衡实例名称
-         * @type {string || null}
-         */
-        this.LoadBalancerName = null;
-
-        /**
-         * 负载均衡绑定的后端服务的地域信息
-         * @type {TargetRegionInfo || null}
-         */
-        this.TargetRegionInfo = null;
-
-        /**
-         * 网络计费相关参数
-         * @type {InternetAccessible || null}
-         */
-        this.InternetChargeInfo = null;
-
-        /**
-         * Target是否放通来自CLB的流量。开启放通（true）：只验证CLB上的安全组；不开启放通（false）：需同时验证CLB和后端实例上的安全组。
-         * @type {boolean || null}
-         */
-        this.LoadBalancerPassToTarget = null;
-
-        /**
-         * 是否开启SnatPro
-         * @type {boolean || null}
-         */
-        this.SnatPro = null;
+        this.RequestId = null;
 
     }
 
@@ -690,22 +653,7 @@ class ModifyLoadBalancerAttributesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
-        this.LoadBalancerName = 'LoadBalancerName' in params ? params.LoadBalancerName : null;
-
-        if (params.TargetRegionInfo) {
-            let obj = new TargetRegionInfo();
-            obj.deserialize(params.TargetRegionInfo)
-            this.TargetRegionInfo = obj;
-        }
-
-        if (params.InternetChargeInfo) {
-            let obj = new InternetAccessible();
-            obj.deserialize(params.InternetChargeInfo)
-            this.InternetChargeInfo = obj;
-        }
-        this.LoadBalancerPassToTarget = 'LoadBalancerPassToTarget' in params ? params.LoadBalancerPassToTarget : null;
-        this.SnatPro = 'SnatPro' in params ? params.SnatPro : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2240,6 +2188,79 @@ class BatchRegisterTargetsResponse extends  AbstractModel {
         }
         this.FailListenerIdSet = 'FailListenerIdSet' in params ? params.FailListenerIdSet : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyLoadBalancerAttributes请求参数结构体
+ * @class
+ */
+class ModifyLoadBalancerAttributesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 负载均衡的唯一ID
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * 负载均衡实例名称
+         * @type {string || null}
+         */
+        this.LoadBalancerName = null;
+
+        /**
+         * 负载均衡绑定的后端服务的地域信息
+         * @type {TargetRegionInfo || null}
+         */
+        this.TargetRegionInfo = null;
+
+        /**
+         * 网络计费相关参数
+         * @type {InternetAccessible || null}
+         */
+        this.InternetChargeInfo = null;
+
+        /**
+         * Target是否放通来自CLB的流量。开启放通（true）：只验证CLB上的安全组；不开启放通（false）：需同时验证CLB和后端实例上的安全组。
+         * @type {boolean || null}
+         */
+        this.LoadBalancerPassToTarget = null;
+
+        /**
+         * 是否开启SnatPro
+         * @type {boolean || null}
+         */
+        this.SnatPro = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.LoadBalancerName = 'LoadBalancerName' in params ? params.LoadBalancerName : null;
+
+        if (params.TargetRegionInfo) {
+            let obj = new TargetRegionInfo();
+            obj.deserialize(params.TargetRegionInfo)
+            this.TargetRegionInfo = obj;
+        }
+
+        if (params.InternetChargeInfo) {
+            let obj = new InternetAccessible();
+            obj.deserialize(params.InternetChargeInfo)
+            this.InternetChargeInfo = obj;
+        }
+        this.LoadBalancerPassToTarget = 'LoadBalancerPassToTarget' in params ? params.LoadBalancerPassToTarget : null;
+        this.SnatPro = 'SnatPro' in params ? params.SnatPro : null;
 
     }
 }
@@ -6742,6 +6763,62 @@ class ModifyTargetGroupInstancesWeightRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeClassicalLBListeners请求参数结构体
+ * @class
+ */
+class DescribeClassicalLBListenersRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 负载均衡实例 ID
+         * @type {string || null}
+         */
+        this.LoadBalancerId = null;
+
+        /**
+         * 负载均衡监听器ID列表
+         * @type {Array.<string> || null}
+         */
+        this.ListenerIds = null;
+
+        /**
+         * 负载均衡监听的协议, 'TCP', 'UDP', 'HTTP', 'HTTPS'
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * 负载均衡监听端口， 范围[1-65535]
+         * @type {number || null}
+         */
+        this.ListenerPort = null;
+
+        /**
+         * 监听器的状态，0 表示创建中，1 表示运行中
+         * @type {number || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
+        this.ListenerIds = 'ListenerIds' in params ? params.ListenerIds : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.ListenerPort = 'ListenerPort' in params ? params.ListenerPort : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
  * DeleteTargetGroups返回参数结构体
  * @class
  */
@@ -6964,7 +7041,7 @@ class RuleInput extends  AbstractModel {
         this.SessionExpireTime = null;
 
         /**
-         * 健康检查信息
+         * 健康检查信息。详情请参见：[健康检查](https://cloud.tencent.com/document/product/214/6097)
          * @type {HealthCheck || null}
          */
         this.HealthCheck = null;
@@ -7296,6 +7373,54 @@ class CreateLoadBalancerResponse extends  AbstractModel {
         }
         this.LoadBalancerIds = 'LoadBalancerIds' in params ? params.LoadBalancerIds : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 描述配额信息，所有配额均指当前地域下的配额。
+ * @class
+ */
+class Quota extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 配额名称，取值范围：
+<li> TOTAL_OPEN_CLB_QUOTA: 用户当前地域下的公网LB配额 </li>
+<li> TOTAL_INTERNAL_CLB_QUOTA: 用户当前地域下的内网LB配额 </li>
+<li> TOTAL_LISTENER_QUOTA: 一个CLB下的监听器配额 </li>
+<li> TOTAL_LISTENER_RULE_QUOTA: 一个监听器下的转发规则配额 </li>
+<li> TOTAL_TARGET_BIND_QUOTA: 一条转发规则下绑定设备配额 </li>
+         * @type {string || null}
+         */
+        this.QuotaId = null;
+
+        /**
+         * 当前使用数量，为 null 时表示无意义。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.QuotaCurrent = null;
+
+        /**
+         * 配额数量。
+         * @type {number || null}
+         */
+        this.QuotaLimit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.QuotaId = 'QuotaId' in params ? params.QuotaId : null;
+        this.QuotaCurrent = 'QuotaCurrent' in params ? params.QuotaCurrent : null;
+        this.QuotaLimit = 'QuotaLimit' in params ? params.QuotaLimit : null;
 
     }
 }
@@ -7782,42 +7907,24 @@ class DeleteTargetGroupsRequest extends  AbstractModel {
 }
 
 /**
- * DescribeClassicalLBListeners请求参数结构体
+ * DescribeQuota返回参数结构体
  * @class
  */
-class DescribeClassicalLBListenersRequest extends  AbstractModel {
+class DescribeQuotaResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 负载均衡实例 ID
+         * 配额列表
+         * @type {Array.<Quota> || null}
+         */
+        this.QuotaSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.LoadBalancerId = null;
-
-        /**
-         * 负载均衡监听器ID列表
-         * @type {Array.<string> || null}
-         */
-        this.ListenerIds = null;
-
-        /**
-         * 负载均衡监听的协议, 'TCP', 'UDP', 'HTTP', 'HTTPS'
-         * @type {string || null}
-         */
-        this.Protocol = null;
-
-        /**
-         * 负载均衡监听端口， 范围[1-65535]
-         * @type {number || null}
-         */
-        this.ListenerPort = null;
-
-        /**
-         * 监听器的状态，0 表示创建中，1 表示运行中
-         * @type {number || null}
-         */
-        this.Status = null;
+        this.RequestId = null;
 
     }
 
@@ -7828,11 +7935,16 @@ class DescribeClassicalLBListenersRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LoadBalancerId = 'LoadBalancerId' in params ? params.LoadBalancerId : null;
-        this.ListenerIds = 'ListenerIds' in params ? params.ListenerIds : null;
-        this.Protocol = 'Protocol' in params ? params.Protocol : null;
-        this.ListenerPort = 'ListenerPort' in params ? params.ListenerPort : null;
-        this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.QuotaSet) {
+            this.QuotaSet = new Array();
+            for (let z in params.QuotaSet) {
+                let obj = new Quota();
+                obj.deserialize(params.QuotaSet[z]);
+                this.QuotaSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8669,7 +8781,7 @@ OPEN：公网属性， INTERNAL：内网属性。
 module.exports = {
     DeleteRewriteRequest: DeleteRewriteRequest,
     DescribeTargetGroupListResponse: DescribeTargetGroupListResponse,
-    DisassociateTargetGroupsResponse: DisassociateTargetGroupsResponse,
+    DescribeQuotaRequest: DescribeQuotaRequest,
     DescribeTargetGroupListRequest: DescribeTargetGroupListRequest,
     BatchDeregisterTargetsResponse: BatchDeregisterTargetsResponse,
     SetLoadBalancerSecurityGroupsResponse: SetLoadBalancerSecurityGroupsResponse,
@@ -8679,7 +8791,7 @@ module.exports = {
     CreateLoadBalancerRequest: CreateLoadBalancerRequest,
     RuleHealth: RuleHealth,
     DeleteRuleRequest: DeleteRuleRequest,
-    ModifyLoadBalancerAttributesRequest: ModifyLoadBalancerAttributesRequest,
+    DisassociateTargetGroupsResponse: DisassociateTargetGroupsResponse,
     SetLoadBalancerClsLogResponse: SetLoadBalancerClsLogResponse,
     ModifyRuleRequest: ModifyRuleRequest,
     DescribeClassicalLBByInstanceIdResponse: DescribeClassicalLBByInstanceIdResponse,
@@ -8716,6 +8828,7 @@ module.exports = {
     DescribeTargetGroupsRequest: DescribeTargetGroupsRequest,
     DescribeTaskStatusResponse: DescribeTaskStatusResponse,
     BatchRegisterTargetsResponse: BatchRegisterTargetsResponse,
+    ModifyLoadBalancerAttributesRequest: ModifyLoadBalancerAttributesRequest,
     Target: Target,
     DescribeBlockIPListRequest: DescribeBlockIPListRequest,
     CertIdRelatedWithLoadBalancers: CertIdRelatedWithLoadBalancers,
@@ -8798,6 +8911,7 @@ module.exports = {
     InternetAccessible: InternetAccessible,
     CreateLoadBalancerSnatIpsRequest: CreateLoadBalancerSnatIpsRequest,
     ModifyTargetGroupInstancesWeightRequest: ModifyTargetGroupInstancesWeightRequest,
+    DescribeClassicalLBListenersRequest: DescribeClassicalLBListenersRequest,
     DeleteTargetGroupsResponse: DeleteTargetGroupsResponse,
     ModifyTargetGroupInstancesPortRequest: ModifyTargetGroupInstancesPortRequest,
     BatchRegisterTargetsRequest: BatchRegisterTargetsRequest,
@@ -8810,6 +8924,7 @@ module.exports = {
     ModifyTargetGroupAttributeResponse: ModifyTargetGroupAttributeResponse,
     DescribeBlockIPTaskRequest: DescribeBlockIPTaskRequest,
     CreateLoadBalancerResponse: CreateLoadBalancerResponse,
+    Quota: Quota,
     DeleteLoadBalancerListenersResponse: DeleteLoadBalancerListenersResponse,
     DescribeListenersRequest: DescribeListenersRequest,
     DeleteLoadBalancerSnatIpsRequest: DeleteLoadBalancerSnatIpsRequest,
@@ -8822,7 +8937,7 @@ module.exports = {
     DeleteLoadBalancerSnatIpsResponse: DeleteLoadBalancerSnatIpsResponse,
     CertificateOutput: CertificateOutput,
     DeleteTargetGroupsRequest: DeleteTargetGroupsRequest,
-    DescribeClassicalLBListenersRequest: DescribeClassicalLBListenersRequest,
+    DescribeQuotaResponse: DescribeQuotaResponse,
     TargetHealth: TargetHealth,
     TargetGroupAssociation: TargetGroupAssociation,
     ListenerHealth: ListenerHealth,

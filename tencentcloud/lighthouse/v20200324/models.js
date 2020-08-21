@@ -17,183 +17,26 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
- * StopInstances返回参数结构体
+ * DescribeBlueprints返回参数结构体
  * @class
  */
-class StopInstancesResponse extends  AbstractModel {
+class DescribeBlueprintsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * 关于Lighthouse Instance实例的价格信息
- * @class
- */
-class InstancePrice extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 套餐单价原价。
-         * @type {number || null}
-         */
-        this.OriginalBundlePrice = null;
-
-        /**
-         * 原价。
-         * @type {number || null}
-         */
-        this.OriginalPrice = null;
-
-        /**
-         * 折扣。
-         * @type {number || null}
-         */
-        this.Discount = null;
-
-        /**
-         * 折后价。
-         * @type {number || null}
-         */
-        this.DiscountPrice = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.OriginalBundlePrice = 'OriginalBundlePrice' in params ? params.OriginalBundlePrice : null;
-        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
-        this.Discount = 'Discount' in params ? params.Discount : null;
-        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
-
-    }
-}
-
-/**
- * 描述了操作系统所在块设备即系统盘的信息。
- * @class
- */
-class SystemDisk extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 系统盘类型。
-取值范围： 
-<li> LOCAL_BASIC：本地硬盘</li><li> LOCAL_SSD：本地 SSD 硬盘</li><li> CLOUD_BASIC：普通云硬盘</li><li> CLOUD_SSD：SSD 云硬盘</li><li> CLOUD_PREMIUM：高性能云硬盘</li>
-         * @type {string || null}
-         */
-        this.DiskType = null;
-
-        /**
-         * 系统盘大小，单位：GB。
-         * @type {number || null}
-         */
-        this.DiskSize = null;
-
-        /**
-         * 系统盘ID。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.DiskId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DiskType = 'DiskType' in params ? params.DiskType : null;
-        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
-        this.DiskId = 'DiskId' in params ? params.DiskId : null;
-
-    }
-}
-
-/**
- * ResetInstance请求参数结构体
- * @class
- */
-class ResetInstanceRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 实例 ID。
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * 镜像 ID。
-         * @type {string || null}
-         */
-        this.BlueprintId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.BlueprintId = 'BlueprintId' in params ? params.BlueprintId : null;
-
-    }
-}
-
-/**
- * DescribeBundles返回参数结构体
- * @class
- */
-class DescribeBundlesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 套餐详细信息列表。
-         * @type {Array.<Bundle> || null}
-         */
-        this.BundleSet = null;
-
-        /**
-         * 符合要求的套餐总数，用于分页展示。
+         * 符合条件的镜像数量。
          * @type {number || null}
          */
         this.TotalCount = null;
 
         /**
+         * 镜像详细信息列表。
+         * @type {Array.<Blueprint> || null}
+         */
+        this.BlueprintSet = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -207,141 +50,16 @@ class DescribeBundlesResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
-        }
-
-        if (params.BundleSet) {
-            this.BundleSet = new Array();
-            for (let z in params.BundleSet) {
-                let obj = new Bundle();
-                obj.deserialize(params.BundleSet[z]);
-                this.BundleSet.push(obj);
-            }
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
-    }
-}
-
-/**
- * DescribeInstances请求参数结构体
- * @class
- */
-class DescribeInstancesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 实例 ID 列表。每次请求批量实例的上限为 100。
-         * @type {Array.<string> || null}
-         */
-        this.InstanceIds = null;
-
-        /**
-         * 过滤器列表。
-<li>instance-name</li>按照【实例名称】进行过滤。
-类型：String
-必选：否
-<li>private-ip-address</li>按照【实例主网卡的内网 IP】进行过滤。
-类型：String
-必选：否
-每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 InstanceIds 和 Filters。
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * 偏移量，默认为 0。
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 返回数量，默认为 20，最大值为 100。
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
+        if (params.BlueprintSet) {
+            this.BlueprintSet = new Array();
+            for (let z in params.BlueprintSet) {
+                let obj = new Blueprint();
+                obj.deserialize(params.BlueprintSet[z]);
+                this.BlueprintSet.push(obj);
             }
-        }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-
-    }
-}
-
-/**
- * 价格信息
- * @class
- */
-class Price extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 实例价格。
-         * @type {InstancePrice || null}
-         */
-        this.InstancePrice = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.InstancePrice) {
-            let obj = new InstancePrice();
-            obj.deserialize(params.InstancePrice)
-            this.InstancePrice = obj;
-        }
-
-    }
-}
-
-/**
- * StartInstances返回参数结构体
- * @class
- */
-class StartInstancesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -377,84 +95,18 @@ class LoginSettings extends  AbstractModel {
 }
 
 /**
- * 套餐信息。
+ * StartInstances返回参数结构体
  * @class
  */
-class Bundle extends  AbstractModel {
+class StartInstancesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 套餐 ID。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.BundleId = null;
-
-        /**
-         * 内存大小，单位 GB。
-         * @type {number || null}
-         */
-        this.Memory = null;
-
-        /**
-         * 系统盘类型。
-         * @type {string || null}
-         */
-        this.SystemDiskType = null;
-
-        /**
-         * 系统盘大小。
-         * @type {number || null}
-         */
-        this.SystemDiskSize = null;
-
-        /**
-         * 每月网络流量，单位 Gb。
-         * @type {number || null}
-         */
-        this.MonthlyTraffic = null;
-
-        /**
-         * 是否支持 Linux/Unix 平台。
-         * @type {boolean || null}
-         */
-        this.SupportLinuxUnixPlatform = null;
-
-        /**
-         * 是否支持 Windows 平台。
-         * @type {boolean || null}
-         */
-        this.SupportWindowsPlatform = null;
-
-        /**
-         * 套餐当前单位价格信息。
-         * @type {Price || null}
-         */
-        this.Price = null;
-
-        /**
-         * CPU 核数。
-         * @type {number || null}
-         */
-        this.CPU = null;
-
-        /**
-         * 峰值带宽，单位 Mbps。
-         * @type {number || null}
-         */
-        this.InternetMaxBandwidthOut = null;
-
-        /**
-         * 网络计费类型。
-         * @type {string || null}
-         */
-        this.InternetChargeType = null;
-
-        /**
-         * 套餐售卖状态,取值:‘AVAILABLE’(可用) , ‘SOLD_OUT’(售罄)
-         * @type {string || null}
-         */
-        this.BundleSalesState = null;
+        this.RequestId = null;
 
     }
 
@@ -465,110 +117,7 @@ class Bundle extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BundleId = 'BundleId' in params ? params.BundleId : null;
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.SystemDiskType = 'SystemDiskType' in params ? params.SystemDiskType : null;
-        this.SystemDiskSize = 'SystemDiskSize' in params ? params.SystemDiskSize : null;
-        this.MonthlyTraffic = 'MonthlyTraffic' in params ? params.MonthlyTraffic : null;
-        this.SupportLinuxUnixPlatform = 'SupportLinuxUnixPlatform' in params ? params.SupportLinuxUnixPlatform : null;
-        this.SupportWindowsPlatform = 'SupportWindowsPlatform' in params ? params.SupportWindowsPlatform : null;
-
-        if (params.Price) {
-            let obj = new Price();
-            obj.deserialize(params.Price)
-            this.Price = obj;
-        }
-        this.CPU = 'CPU' in params ? params.CPU : null;
-        this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
-        this.InternetChargeType = 'InternetChargeType' in params ? params.InternetChargeType : null;
-        this.BundleSalesState = 'BundleSalesState' in params ? params.BundleSalesState : null;
-
-    }
-}
-
-/**
- * 描述了启动配置创建实例的公网可访问性，声明了实例的公网使用计费模式，最大带宽等。
- * @class
- */
-class InternetAccessible extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 网络计费类型。
-         * @type {string || null}
-         */
-        this.InternetChargeType = null;
-
-        /**
-         * 公网出带宽上限，单位：Mbps。
-         * @type {number || null}
-         */
-        this.InternetMaxBandwidthOut = null;
-
-        /**
-         * 是否分配公网 IP。
-         * @type {boolean || null}
-         */
-        this.PublicIpAssigned = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InternetChargeType = 'InternetChargeType' in params ? params.InternetChargeType : null;
-        this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
-        this.PublicIpAssigned = 'PublicIpAssigned' in params ? params.PublicIpAssigned : null;
-
-    }
-}
-
-/**
- * >描述键值对过滤器，用于条件过滤查询。例如过滤名称等
-> * 若存在多个`Filter`时，`Filter`间的关系为逻辑与（`AND`）关系。
-> * 若同一个`Filter`存在多个`Values`，同一`Filter`下`Values`间的关系为逻辑或（`OR`）关系。
->
-> 以DescribeInstances接口的`Filter`为例。若我们需要查询实例名称（`instance-name`）为test ***并且*** 实例内网IP（`private-ip-address`）为10.10.10.10的实例时，可如下实现：
-```
-Filters.0.Name=instance-name
-&Filters.0.Values.0=test
-&Filters.1.Name=private-ip-address
-&Filters.1.Values.0=10.10.10.10
-```
- * @class
- */
-class Filter extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 需要过滤的字段。
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 字段的过滤值。
-         * @type {Array.<string> || null}
-         */
-        this.Values = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Values = 'Values' in params ? params.Values : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -795,62 +344,6 @@ FAILED：表示操作失败
 }
 
 /**
- * StartInstances请求参数结构体
- * @class
- */
-class StartInstancesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 实例 ID 列表。每次请求批量实例的上限为 100。
-         * @type {Array.<string> || null}
-         */
-        this.InstanceIds = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
-
-    }
-}
-
-/**
- * StopInstances请求参数结构体
- * @class
- */
-class StopInstancesRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 实例 ID 列表。每次请求批量实例的上限为 100。
-         * @type {Array.<string> || null}
-         */
-        this.InstanceIds = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
-
-    }
-}
-
-/**
  * RebootInstances返回参数结构体
  * @class
  */
@@ -879,18 +372,18 @@ class RebootInstancesResponse extends  AbstractModel {
 }
 
 /**
- * ResetInstance返回参数结构体
+ * StopInstances请求参数结构体
  * @class
  */
-class ResetInstanceResponse extends  AbstractModel {
+class StopInstancesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
+         * 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
+         * @type {Array.<string> || null}
          */
-        this.RequestId = null;
+        this.InstanceIds = null;
 
     }
 
@@ -901,7 +394,333 @@ class ResetInstanceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * 描述了镜像信息。
+ * @class
+ */
+class Blueprint extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 镜像 ID  ，是 blueprint 的唯一标识。
+         * @type {string || null}
+         */
+        this.BlueprintId = null;
+
+        /**
+         * 镜像对外展示标题。
+         * @type {string || null}
+         */
+        this.DisplayTitle = null;
+
+        /**
+         * 镜像对外展示版本。
+         * @type {string || null}
+         */
+        this.DisplayVersion = null;
+
+        /**
+         * 镜像描述信息。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 操作系统名称。
+         * @type {string || null}
+         */
+        this.OsName = null;
+
+        /**
+         * 操作系统平台。
+         * @type {string || null}
+         */
+        this.Platform = null;
+
+        /**
+         * 操作系统平台类型，如 LINUX_UNIX、WINDOWS。
+         * @type {string || null}
+         */
+        this.PlatformType = null;
+
+        /**
+         * 镜像类型，如 APP_OS、PURE_OS。
+         * @type {string || null}
+         */
+        this.BlueprintType = null;
+
+        /**
+         * 镜像图片 URL。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BlueprintId = 'BlueprintId' in params ? params.BlueprintId : null;
+        this.DisplayTitle = 'DisplayTitle' in params ? params.DisplayTitle : null;
+        this.DisplayVersion = 'DisplayVersion' in params ? params.DisplayVersion : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.OsName = 'OsName' in params ? params.OsName : null;
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.PlatformType = 'PlatformType' in params ? params.PlatformType : null;
+        this.BlueprintType = 'BlueprintType' in params ? params.BlueprintType : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+
+    }
+}
+
+/**
+ * 价格信息
+ * @class
+ */
+class Price extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例价格。
+         * @type {InstancePrice || null}
+         */
+        this.InstancePrice = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InstancePrice) {
+            let obj = new InstancePrice();
+            obj.deserialize(params.InstancePrice)
+            this.InstancePrice = obj;
+        }
+
+    }
+}
+
+/**
+ * 套餐信息。
+ * @class
+ */
+class Bundle extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 套餐 ID。
+         * @type {string || null}
+         */
+        this.BundleId = null;
+
+        /**
+         * 内存大小，单位 GB。
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * 系统盘类型。
+取值范围： 
+<li> LOCAL_BASIC：本地硬盘</li><li> LOCAL_SSD：本地 SSD 硬盘</li><li> CLOUD_BASIC：普通云硬盘</li><li> CLOUD_SSD：SSD 云硬盘</li><li> CLOUD_PREMIUM：高性能云硬盘</li>
+         * @type {string || null}
+         */
+        this.SystemDiskType = null;
+
+        /**
+         * 系统盘大小。
+         * @type {number || null}
+         */
+        this.SystemDiskSize = null;
+
+        /**
+         * 每月网络流量，单位 Gb。
+         * @type {number || null}
+         */
+        this.MonthlyTraffic = null;
+
+        /**
+         * 是否支持 Linux/Unix 平台。
+         * @type {boolean || null}
+         */
+        this.SupportLinuxUnixPlatform = null;
+
+        /**
+         * 是否支持 Windows 平台。
+         * @type {boolean || null}
+         */
+        this.SupportWindowsPlatform = null;
+
+        /**
+         * 套餐当前单位价格信息。
+         * @type {Price || null}
+         */
+        this.Price = null;
+
+        /**
+         * CPU 核数。
+         * @type {number || null}
+         */
+        this.CPU = null;
+
+        /**
+         * 峰值带宽，单位 Mbps。
+         * @type {number || null}
+         */
+        this.InternetMaxBandwidthOut = null;
+
+        /**
+         * 网络计费类型。
+         * @type {string || null}
+         */
+        this.InternetChargeType = null;
+
+        /**
+         * 套餐售卖状态,取值:‘AVAILABLE’(可用) , ‘SOLD_OUT’(售罄)
+         * @type {string || null}
+         */
+        this.BundleSalesState = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BundleId = 'BundleId' in params ? params.BundleId : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.SystemDiskType = 'SystemDiskType' in params ? params.SystemDiskType : null;
+        this.SystemDiskSize = 'SystemDiskSize' in params ? params.SystemDiskSize : null;
+        this.MonthlyTraffic = 'MonthlyTraffic' in params ? params.MonthlyTraffic : null;
+        this.SupportLinuxUnixPlatform = 'SupportLinuxUnixPlatform' in params ? params.SupportLinuxUnixPlatform : null;
+        this.SupportWindowsPlatform = 'SupportWindowsPlatform' in params ? params.SupportWindowsPlatform : null;
+
+        if (params.Price) {
+            let obj = new Price();
+            obj.deserialize(params.Price)
+            this.Price = obj;
+        }
+        this.CPU = 'CPU' in params ? params.CPU : null;
+        this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
+        this.InternetChargeType = 'InternetChargeType' in params ? params.InternetChargeType : null;
+        this.BundleSalesState = 'BundleSalesState' in params ? params.BundleSalesState : null;
+
+    }
+}
+
+/**
+ * StartInstances请求参数结构体
+ * @class
+ */
+class StartInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * DescribeBlueprints请求参数结构体
+ * @class
+ */
+class DescribeBlueprintsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 镜像 ID 列表。
+         * @type {Array.<string> || null}
+         */
+        this.BlueprintIds = null;
+
+        /**
+         * 偏移量，默认为 0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为 20，最大值为 100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 过滤器列表。
+<li>blueprint-id</li>按照【镜像 ID】进行过滤。
+类型：String
+必选：否
+<li>blueprint-type</li>按照【镜像类型】进行过滤。
+取值： APP_OS（预置应用的系统 ）；PURE_OS（纯净的 OS 系统）。
+类型：String
+必选：否
+<li>platform-type</li>按照【镜像平台类型】进行过滤。
+取值： LINUX_UNIX（Linux/Unix系统）；WINDOWS（Windows 系统）。
+类型：String
+必选：否
+每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 BlueprintIds 和 Filters 。
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BlueprintIds = 'BlueprintIds' in params ? params.BlueprintIds : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -957,6 +776,325 @@ class DescribeInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * 关于Lighthouse Instance实例的价格信息
+ * @class
+ */
+class InstancePrice extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 套餐单价原价。
+         * @type {number || null}
+         */
+        this.OriginalBundlePrice = null;
+
+        /**
+         * 原价。
+         * @type {number || null}
+         */
+        this.OriginalPrice = null;
+
+        /**
+         * 折扣。
+         * @type {number || null}
+         */
+        this.Discount = null;
+
+        /**
+         * 折后价。
+         * @type {number || null}
+         */
+        this.DiscountPrice = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OriginalBundlePrice = 'OriginalBundlePrice' in params ? params.OriginalBundlePrice : null;
+        this.OriginalPrice = 'OriginalPrice' in params ? params.OriginalPrice : null;
+        this.Discount = 'Discount' in params ? params.Discount : null;
+        this.DiscountPrice = 'DiscountPrice' in params ? params.DiscountPrice : null;
+
+    }
+}
+
+/**
+ * 描述了操作系统所在块设备即系统盘的信息。
+ * @class
+ */
+class SystemDisk extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 系统盘类型。
+取值范围： 
+<li> LOCAL_BASIC：本地硬盘</li><li> LOCAL_SSD：本地 SSD 硬盘</li><li> CLOUD_BASIC：普通云硬盘</li><li> CLOUD_SSD：SSD 云硬盘</li><li> CLOUD_PREMIUM：高性能云硬盘</li>
+         * @type {string || null}
+         */
+        this.DiskType = null;
+
+        /**
+         * 系统盘大小，单位：GB。
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * 系统盘ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DiskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.DiskId = 'DiskId' in params ? params.DiskId : null;
+
+    }
+}
+
+/**
+ * ResetInstance请求参数结构体
+ * @class
+ */
+class ResetInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 镜像 ID。
+         * @type {string || null}
+         */
+        this.BlueprintId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.BlueprintId = 'BlueprintId' in params ? params.BlueprintId : null;
+
+    }
+}
+
+/**
+ * DescribeBundles返回参数结构体
+ * @class
+ */
+class DescribeBundlesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 套餐详细信息列表。
+         * @type {Array.<Bundle> || null}
+         */
+        this.BundleSet = null;
+
+        /**
+         * 符合要求的套餐总数，用于分页展示。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.BundleSet) {
+            this.BundleSet = new Array();
+            for (let z in params.BundleSet) {
+                let obj = new Bundle();
+                obj.deserialize(params.BundleSet[z]);
+                this.BundleSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeInstances请求参数结构体
+ * @class
+ */
+class DescribeInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID 列表。每次请求批量实例的上限为 100。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * 过滤器列表。
+<li>instance-name</li>按照【实例名称】进行过滤。
+类型：String
+必选：否
+<li>private-ip-address</li>按照【实例主网卡的内网 IP】进行过滤。
+类型：String
+必选：否
+<li>public-ip-address</li>按照【实例主网卡的公网 IP】进行过滤。
+类型：String
+必选：否
+每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 InstanceIds 和 Filters。
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 偏移量，默认为 0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为 20，最大值为 100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * >描述键值对过滤器，用于条件过滤查询。例如过滤名称等
+> * 若存在多个`Filter`时，`Filter`间的关系为逻辑与（`AND`）关系。
+> * 若同一个`Filter`存在多个`Values`，同一`Filter`下`Values`间的关系为逻辑或（`OR`）关系。
+>
+> 以DescribeInstances接口的`Filter`为例。若我们需要查询实例名称（`instance-name`）为test ***并且*** 实例内网IP（`private-ip-address`）为10.10.10.10的实例时，可如下实现：
+```
+Filters.0.Name=instance-name
+&Filters.0.Values.0=test
+&Filters.1.Name=private-ip-address
+&Filters.1.Values.0=10.10.10.10
+```
+ * @class
+ */
+class Filter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要过滤的字段。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 字段的过滤值。
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
+
+    }
+}
+
+/**
+ * ResetInstance返回参数结构体
+ * @class
+ */
+class ResetInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * RebootInstances请求参数结构体
  * @class
  */
@@ -965,7 +1103,7 @@ class RebootInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例 ID 列表。每次请求批量实例的上限为 100。
+         * 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
          * @type {Array.<string> || null}
          */
         this.InstanceIds = null;
@@ -980,6 +1118,76 @@ class RebootInstancesRequest extends  AbstractModel {
             return;
         }
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * StopInstances返回参数结构体
+ * @class
+ */
+class StopInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 描述了启动配置创建实例的公网可访问性，声明了实例的公网使用计费模式，最大带宽等。
+ * @class
+ */
+class InternetAccessible extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 网络计费类型。
+         * @type {string || null}
+         */
+        this.InternetChargeType = null;
+
+        /**
+         * 公网出带宽上限，单位：Mbps。
+         * @type {number || null}
+         */
+        this.InternetMaxBandwidthOut = null;
+
+        /**
+         * 是否分配公网 IP。
+         * @type {boolean || null}
+         */
+        this.PublicIpAssigned = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InternetChargeType = 'InternetChargeType' in params ? params.InternetChargeType : null;
+        this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
+        this.PublicIpAssigned = 'PublicIpAssigned' in params ? params.PublicIpAssigned : null;
 
     }
 }
@@ -1050,25 +1258,28 @@ class DescribeBundlesRequest extends  AbstractModel {
 }
 
 module.exports = {
-    StopInstancesResponse: StopInstancesResponse,
+    DescribeBlueprintsResponse: DescribeBlueprintsResponse,
+    LoginSettings: LoginSettings,
+    StartInstancesResponse: StartInstancesResponse,
+    Instance: Instance,
+    RebootInstancesResponse: RebootInstancesResponse,
+    StopInstancesRequest: StopInstancesRequest,
+    Blueprint: Blueprint,
+    Price: Price,
+    Bundle: Bundle,
+    StartInstancesRequest: StartInstancesRequest,
+    DescribeBlueprintsRequest: DescribeBlueprintsRequest,
+    DescribeInstancesResponse: DescribeInstancesResponse,
     InstancePrice: InstancePrice,
     SystemDisk: SystemDisk,
     ResetInstanceRequest: ResetInstanceRequest,
     DescribeBundlesResponse: DescribeBundlesResponse,
     DescribeInstancesRequest: DescribeInstancesRequest,
-    Price: Price,
-    StartInstancesResponse: StartInstancesResponse,
-    LoginSettings: LoginSettings,
-    Bundle: Bundle,
-    InternetAccessible: InternetAccessible,
     Filter: Filter,
-    Instance: Instance,
-    StartInstancesRequest: StartInstancesRequest,
-    StopInstancesRequest: StopInstancesRequest,
-    RebootInstancesResponse: RebootInstancesResponse,
     ResetInstanceResponse: ResetInstanceResponse,
-    DescribeInstancesResponse: DescribeInstancesResponse,
     RebootInstancesRequest: RebootInstancesRequest,
+    StopInstancesResponse: StopInstancesResponse,
+    InternetAccessible: InternetAccessible,
     DescribeBundlesRequest: DescribeBundlesRequest,
 
 }

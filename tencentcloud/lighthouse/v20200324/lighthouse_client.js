@@ -16,25 +16,28 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const StopInstancesResponse = models.StopInstancesResponse;
+const DescribeBlueprintsResponse = models.DescribeBlueprintsResponse;
+const LoginSettings = models.LoginSettings;
+const StartInstancesResponse = models.StartInstancesResponse;
+const Instance = models.Instance;
+const RebootInstancesResponse = models.RebootInstancesResponse;
+const StopInstancesRequest = models.StopInstancesRequest;
+const Blueprint = models.Blueprint;
+const Price = models.Price;
+const Bundle = models.Bundle;
+const StartInstancesRequest = models.StartInstancesRequest;
+const DescribeBlueprintsRequest = models.DescribeBlueprintsRequest;
+const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const InstancePrice = models.InstancePrice;
 const SystemDisk = models.SystemDisk;
 const ResetInstanceRequest = models.ResetInstanceRequest;
 const DescribeBundlesResponse = models.DescribeBundlesResponse;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
-const Price = models.Price;
-const StartInstancesResponse = models.StartInstancesResponse;
-const LoginSettings = models.LoginSettings;
-const Bundle = models.Bundle;
-const InternetAccessible = models.InternetAccessible;
 const Filter = models.Filter;
-const Instance = models.Instance;
-const StartInstancesRequest = models.StartInstancesRequest;
-const StopInstancesRequest = models.StopInstancesRequest;
-const RebootInstancesResponse = models.RebootInstancesResponse;
 const ResetInstanceResponse = models.ResetInstanceResponse;
-const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const RebootInstancesRequest = models.RebootInstancesRequest;
+const StopInstancesResponse = models.StopInstancesResponse;
+const InternetAccessible = models.InternetAccessible;
 const DescribeBundlesRequest = models.DescribeBundlesRequest;
 
 
@@ -52,7 +55,7 @@ class LighthouseClient extends AbstractClient {
      * 本接口（DescribeInstances）用于查询一个或多个实例的详细信息。
 
 * 可以根据实例 ID、实例名称或者实例的内网 IP 查询实例的详细信息。
-* 过滤信息详细请见过滤器 Filters 。
+* 过滤信息详细请见过滤器 [Filters](https://cloud.tencent.com/document/product/1207/47576#Filter) 。
 * 如果参数为空，返回当前用户一定数量（Limit 所指定的数量，默认为 20）的实例。
 * 支持查询实例的最新操作（LatestOperation）以及最新操作状态（LatestOperationState）。
      * @param {DescribeInstancesRequest} req
@@ -109,6 +112,17 @@ class LighthouseClient extends AbstractClient {
     RebootInstances(req, cb) {
         let resp = new RebootInstancesResponse();
         this.request("RebootInstances", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeBlueprints）用于查询镜像信息。
+     * @param {DescribeBlueprintsRequest} req
+     * @param {function(string, DescribeBlueprintsResponse):void} cb
+     * @public
+     */
+    DescribeBlueprints(req, cb) {
+        let resp = new DescribeBlueprintsResponse();
+        this.request("DescribeBlueprints", req, resp, cb);
     }
 
     /**

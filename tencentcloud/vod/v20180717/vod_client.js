@@ -118,6 +118,7 @@ const DeleteTranscodeTemplateRequest = models.DeleteTranscodeTemplateRequest;
 const PornAsrReviewTemplateInfoForUpdate = models.PornAsrReviewTemplateInfoForUpdate;
 const MediaAnimatedGraphicsInfo = models.MediaAnimatedGraphicsInfo;
 const DescribeSnapshotByTimeOffsetTemplatesRequest = models.DescribeSnapshotByTimeOffsetTemplatesRequest;
+const CdnLogInfo = models.CdnLogInfo;
 const AiRecognitionTaskAsrFullTextResultInput = models.AiRecognitionTaskAsrFullTextResultInput;
 const MediaMiniProgramReviewInfoItem = models.MediaMiniProgramReviewInfoItem;
 const TaskStatData = models.TaskStatData;
@@ -268,11 +269,13 @@ const MediaTrackItem = models.MediaTrackItem;
 const DescribeStorageDetailsResponse = models.DescribeStorageDetailsResponse;
 const PullEventsResponse = models.PullEventsResponse;
 const AiRecognitionTaskObjectResultInput = models.AiRecognitionTaskObjectResultInput;
+const DescribeCdnLogsRequest = models.DescribeCdnLogsRequest;
 const OutputVideoStream = models.OutputVideoStream;
 const ProcedureTemplate = models.ProcedureTemplate;
 const AiReviewTaskTerrorismResult = models.AiReviewTaskTerrorismResult;
 const ProcessMediaByUrlResponse = models.ProcessMediaByUrlResponse;
 const MediaContentReviewAsrTextSegmentItem = models.MediaContentReviewAsrTextSegmentItem;
+const DescribeCdnLogsResponse = models.DescribeCdnLogsResponse;
 const MediaContentReviewPoliticalSegmentItem = models.MediaContentReviewPoliticalSegmentItem;
 const DeletePersonSampleResponse = models.DeletePersonSampleResponse;
 const CreateSnapshotByTimeOffsetTemplateResponse = models.CreateSnapshotByTimeOffsetTemplateResponse;
@@ -731,6 +734,20 @@ class VodClient extends AbstractClient {
     DeleteSnapshotByTimeOffsetTemplate(req, cb) {
         let resp = new DeleteSnapshotByTimeOffsetTemplateResponse();
         this.request("DeleteSnapshotByTimeOffsetTemplate", req, resp, cb);
+    }
+
+    /**
+     * 查询点播域名的 CDN 访问日志的下载链接。
+    1. 可以查询最近30天内的 CDN 日志下载链接。
+    2. 默认情况下 CDN 每小时生成一个日志文件，如果某一个小时没有 CDN 访问，不会生成日志文件。    
+    3. CDN 日志下载链接的有效期为24小时。
+     * @param {DescribeCdnLogsRequest} req
+     * @param {function(string, DescribeCdnLogsResponse):void} cb
+     * @public
+     */
+    DescribeCdnLogs(req, cb) {
+        let resp = new DescribeCdnLogsResponse();
+        this.request("DescribeCdnLogs", req, resp, cb);
     }
 
     /**

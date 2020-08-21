@@ -114,6 +114,76 @@ z轴确定了重叠画面的遮盖顺序，z轴值大的画面处于顶层
 }
 
 /**
+ * 指定流录制的控制参数，比如是否禁用音频、视频是录制大画面还是录制小画面等
+ * @class
+ */
+class StreamControl extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 视频流ID
+视频流ID的取值含义如下：
+1. tic_record_user - 表示白板视频流
+2. tic_substream - 表示辅路视频流
+3. 特定用户ID - 表示指定用户的视频流
+
+在实际录制过程中，视频流ID的匹配规则为前缀匹配，只要真实流ID的前缀与指定的流ID一致就认为匹配成功。
+         * @type {string || null}
+         */
+        this.StreamId = null;
+
+        /**
+         * 设置是否对此路流开启录制。
+
+true - 表示不对这路流进行录制，录制结果将不包含这路流的视频。
+false - 表示需要对这路流进行录制，录制结果会包含这路流的视频。
+
+默认为 false。
+         * @type {boolean || null}
+         */
+        this.DisableRecord = null;
+
+        /**
+         * 设置是否禁用这路流的音频录制。
+
+true - 表示不对这路流的音频进行录制，录制结果里这路流的视频将会没有声音。
+false - 录制视频会保留音频，如果设置为true，则录制视频会丢弃这路流的音频。
+
+默认为 false。
+         * @type {boolean || null}
+         */
+        this.DisableAudio = null;
+
+        /**
+         * 设置当前流录制视频是否只录制小画面。
+
+true - 录制小画面。设置为true时，请确保上行端同时上行了小画面，否则录制视频可能是黑屏。
+false - 录制大画面。
+
+默认为 false。
+         * @type {boolean || null}
+         */
+        this.PullSmallVideo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StreamId = 'StreamId' in params ? params.StreamId : null;
+        this.DisableRecord = 'DisableRecord' in params ? params.DisableRecord : null;
+        this.DisableAudio = 'DisableAudio' in params ? params.DisableAudio : null;
+        this.PullSmallVideo = 'PullSmallVideo' in params ? params.PullSmallVideo : null;
+
+    }
+}
+
+/**
  * ResumeOnlineRecord返回参数结构体
  * @class
  */
@@ -175,7 +245,7 @@ class StartOnlineRecordRequest extends  AbstractModel {
         this.RecordUserSig = null;
 
         /**
-         * 白板的 IM 群组 Id，默认同房间号
+         * （已废弃，设置无效）白板的 IM 群组 Id，默认同房间号
          * @type {string || null}
          */
         this.GroupId = null;
@@ -215,6 +285,12 @@ MIX_STREAM - 混流功能
          */
         this.AudioFileNeeded = null;
 
+        /**
+         * 实时录制控制参数，用于更精细地指定需要录制哪些流，某一路流是否禁用音频，是否只录制小画面等
+         * @type {RecordControl || null}
+         */
+        this.RecordControl = null;
+
     }
 
     /**
@@ -249,6 +325,12 @@ MIX_STREAM - 混流功能
         }
         this.Extras = 'Extras' in params ? params.Extras : null;
         this.AudioFileNeeded = 'AudioFileNeeded' in params ? params.AudioFileNeeded : null;
+
+        if (params.RecordControl) {
+            let obj = new RecordControl();
+            obj.deserialize(params.RecordControl)
+            this.RecordControl = obj;
+        }
 
     }
 }
@@ -417,6 +499,15 @@ class StreamLayout extends  AbstractModel {
          */
         this.BackgroundColor = null;
 
+        /**
+         * 视频画面填充模式。
+
+0 - 自适应模式，对视频画面进行等比例缩放，在指定区域内显示完整的画面。此模式可能存在黑边。
+1 - 全屏模式，对视频画面进行等比例缩放，让画面填充满整个指定区域。此模式不会存在黑边，但会将超出区域的那一部分画面裁剪掉。
+         * @type {number || null}
+         */
+        this.FillMode = null;
+
     }
 
     /**
@@ -434,6 +525,7 @@ class StreamLayout extends  AbstractModel {
         }
         this.InputStreamId = 'InputStreamId' in params ? params.InputStreamId : null;
         this.BackgroundColor = 'BackgroundColor' in params ? params.BackgroundColor : null;
+        this.FillMode = 'FillMode' in params ? params.FillMode : null;
 
     }
 }
@@ -1466,6 +1558,85 @@ class SetTranscodeCallbackRequest extends  AbstractModel {
 }
 
 /**
+ * 录制控制参数， 用于指定全局录制控制及具体流录制控制参数，比如设置需要对哪些流进行录制，是否只录制小画面等
+ * @class
+ */
+class RecordControl extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设置是否开启录制控制参数，只有设置为true的时候，录制控制参数才生效。
+         * @type {boolean || null}
+         */
+        this.Enabled = null;
+
+        /**
+         * 设置是否禁用录制的全局控制参数。一般与`StreamControls`参数配合使用。
+
+true - 所有流都不录制。
+false - 所有流都录制。默认为false。
+
+这里的设置对所有流都生效，如果同时在 `StreamControls` 列表中针对指定流设置了控制参数，则优先采用`StreamControls`中设置的控制参数。
+         * @type {boolean || null}
+         */
+        this.DisableRecord = null;
+
+        /**
+         * 设置是否禁用所有流的音频录制的全局控制参数。一般与`StreamControls`参数配合使用。
+
+true - 所有流的录制都不对音频进行录制。
+false - 所有流的录制都需要对音频进行录制。默认为false。
+
+这里的设置对所有流都生效，如果同时在 `StreamControls` 列表中针对指定流设置了控制参数，则优先采用`StreamControls`中设置的控制参数。
+         * @type {boolean || null}
+         */
+        this.DisableAudio = null;
+
+        /**
+         * 设置是否所有流都只录制小画面的全局控制参数。一般与`StreamControls`参数配合使用。
+
+true - 所有流都只录制小画面。设置为true时，请确保上行端在推流的时候同时上行了小画面，否则录制视频可能是黑屏。
+false - 所有流都录制大画面，默认为false。
+
+这里的设置对所有流都生效，如果同时在 `StreamControls` 列表中针对指定流设置了控制参数，则优先采用`StreamControls`中设置的控制参数。
+         * @type {boolean || null}
+         */
+        this.PullSmallVideo = null;
+
+        /**
+         * 针对具体流指定控制参数，如果列表为空，则所有流采用全局配置的控制参数进行录制。列表不为空，则列表中指定的流将优先按此列表指定的控制参数进行录制。
+         * @type {Array.<StreamControl> || null}
+         */
+        this.StreamControls = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Enabled = 'Enabled' in params ? params.Enabled : null;
+        this.DisableRecord = 'DisableRecord' in params ? params.DisableRecord : null;
+        this.DisableAudio = 'DisableAudio' in params ? params.DisableAudio : null;
+        this.PullSmallVideo = 'PullSmallVideo' in params ? params.PullSmallVideo : null;
+
+        if (params.StreamControls) {
+            this.StreamControls = new Array();
+            for (let z in params.StreamControls) {
+                let obj = new StreamControl();
+                obj.deserialize(params.StreamControls[z]);
+                this.StreamControls.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * SetOnlineRecordCallback请求参数结构体
  * @class
  */
@@ -1645,6 +1816,7 @@ class PauseOnlineRecordRequest extends  AbstractModel {
 module.exports = {
     Canvas: Canvas,
     LayoutParams: LayoutParams,
+    StreamControl: StreamControl,
     ResumeOnlineRecordResponse: ResumeOnlineRecordResponse,
     StartOnlineRecordRequest: StartOnlineRecordRequest,
     DescribeOnlineRecordCallbackRequest: DescribeOnlineRecordCallbackRequest,
@@ -1674,6 +1846,7 @@ module.exports = {
     ResumeOnlineRecordRequest: ResumeOnlineRecordRequest,
     DescribeTranscodeCallbackResponse: DescribeTranscodeCallbackResponse,
     SetTranscodeCallbackRequest: SetTranscodeCallbackRequest,
+    RecordControl: RecordControl,
     SetOnlineRecordCallbackRequest: SetOnlineRecordCallbackRequest,
     MixStream: MixStream,
     OmittedDuration: OmittedDuration,

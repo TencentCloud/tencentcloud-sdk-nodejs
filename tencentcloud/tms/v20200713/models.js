@@ -194,54 +194,54 @@ class DetailResults extends  AbstractModel {
 }
 
 /**
- * 用户相关信息
+ * AccountTipoffAccess请求参数结构体
  * @class
  */
-class User extends  AbstractModel {
+class AccountTipoffAccessRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 用户账号ID，如填写，会根据账号历史恶意情况，判定消息有害结果，特别是有利于可疑恶意情况下的辅助判断。账号可以填写微信uin、QQ号、微信openid、QQopenid、字符串等。该字段和账号类别确定唯一账号。
+         * 被举报账号，长度低于 128 个字符
          * @type {string || null}
          */
-        this.UserId = null;
+        this.ReportedAccount = null;
 
         /**
-         * 用户昵称
+         * 被举报账号类型(1-微信uin 2-QQ号 3-微信群uin 4-qq群号 5-微信openid 6-QQopenid 7-手机号 8-微信号 0-其它string)
+         * @type {number || null}
+         */
+        this.ReportedAccountType = null;
+
+        /**
+         * 被举报账号所属恶意类型(1-诈骗，2-骚扰，3-广告，4-违法违规，5-赌博传销，0-其他)
+         * @type {number || null}
+         */
+        this.EvilType = null;
+
+        /**
+         * 举报者账号，长度低于 128 个字符
          * @type {string || null}
          */
-        this.Nickname = null;
+        this.SenderAccount = null;
 
         /**
-         * 账号类别，"1-微信uin 2-QQ号 3-微信群uin 4-qq群号 5-微信openid 6-QQopenid 7-其它string"
+         * 举报者账号类型(1-微信uin 2-QQ号 3-微信群uin 4-qq群号 5-微信openid 6-QQopenid 7-手机号 8-微信号 0-其它string)
          * @type {number || null}
          */
-        this.AccountType = null;
+        this.SenderAccountType = null;
 
         /**
-         * 性别 默认0 未知 1 男性 2 女性
-         * @type {number || null}
-         */
-        this.Gender = null;
-
-        /**
-         * 年龄 默认0 未知
-         * @type {number || null}
-         */
-        this.Age = null;
-
-        /**
-         * 用户等级，默认0 未知 1 低 2 中 3 高
-         * @type {number || null}
-         */
-        this.Level = null;
-
-        /**
-         * 手机号
+         * 举报者IP地址
          * @type {string || null}
          */
-        this.Phone = null;
+        this.SenderIP = null;
+
+        /**
+         * 包含被举报账号的恶意内容（比如文本、图片链接，长度低于1024个字符）
+         * @type {string || null}
+         */
+        this.EvilContent = null;
 
     }
 
@@ -252,13 +252,13 @@ class User extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.UserId = 'UserId' in params ? params.UserId : null;
-        this.Nickname = 'Nickname' in params ? params.Nickname : null;
-        this.AccountType = 'AccountType' in params ? params.AccountType : null;
-        this.Gender = 'Gender' in params ? params.Gender : null;
-        this.Age = 'Age' in params ? params.Age : null;
-        this.Level = 'Level' in params ? params.Level : null;
-        this.Phone = 'Phone' in params ? params.Phone : null;
+        this.ReportedAccount = 'ReportedAccount' in params ? params.ReportedAccount : null;
+        this.ReportedAccountType = 'ReportedAccountType' in params ? params.ReportedAccountType : null;
+        this.EvilType = 'EvilType' in params ? params.EvilType : null;
+        this.SenderAccount = 'SenderAccount' in params ? params.SenderAccount : null;
+        this.SenderAccountType = 'SenderAccountType' in params ? params.SenderAccountType : null;
+        this.SenderIP = 'SenderIP' in params ? params.SenderIP : null;
+        this.EvilContent = 'EvilContent' in params ? params.EvilContent : null;
 
     }
 }
@@ -329,6 +329,82 @@ class Device extends  AbstractModel {
         this.IMEI = 'IMEI' in params ? params.IMEI : null;
         this.IDFA = 'IDFA' in params ? params.IDFA : null;
         this.IDFV = 'IDFV' in params ? params.IDFV : null;
+
+    }
+}
+
+/**
+ * 举报接口响应数据
+ * @class
+ */
+class TipoffResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 举报结果， "0-举报数据提交成功  99-举报数据提交失败"
+         * @type {number || null}
+         */
+        this.ResultCode = null;
+
+        /**
+         * 结果描述
+         * @type {string || null}
+         */
+        this.ResultMsg = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResultCode = 'ResultCode' in params ? params.ResultCode : null;
+        this.ResultMsg = 'ResultMsg' in params ? params.ResultMsg : null;
+
+    }
+}
+
+/**
+ * AccountTipoffAccess返回参数结构体
+ * @class
+ */
+class AccountTipoffAccessResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 举报接口响应数据
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TipoffResponse || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            let obj = new TipoffResponse();
+            obj.deserialize(params.Data)
+            this.Data = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -444,12 +520,85 @@ class TextModerationResponse extends  AbstractModel {
     }
 }
 
+/**
+ * 用户相关信息
+ * @class
+ */
+class User extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用户账号ID，如填写，会根据账号历史恶意情况，判定消息有害结果，特别是有利于可疑恶意情况下的辅助判断。账号可以填写微信uin、QQ号、微信openid、QQopenid、字符串等。该字段和账号类别确定唯一账号。
+         * @type {string || null}
+         */
+        this.UserId = null;
+
+        /**
+         * 用户昵称
+         * @type {string || null}
+         */
+        this.Nickname = null;
+
+        /**
+         * 账号类别，"1-微信uin 2-QQ号 3-微信群uin 4-qq群号 5-微信openid 6-QQopenid 7-其它string"
+         * @type {number || null}
+         */
+        this.AccountType = null;
+
+        /**
+         * 性别 默认0 未知 1 男性 2 女性
+         * @type {number || null}
+         */
+        this.Gender = null;
+
+        /**
+         * 年龄 默认0 未知
+         * @type {number || null}
+         */
+        this.Age = null;
+
+        /**
+         * 用户等级，默认0 未知 1 低 2 中 3 高
+         * @type {number || null}
+         */
+        this.Level = null;
+
+        /**
+         * 手机号
+         * @type {string || null}
+         */
+        this.Phone = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UserId = 'UserId' in params ? params.UserId : null;
+        this.Nickname = 'Nickname' in params ? params.Nickname : null;
+        this.AccountType = 'AccountType' in params ? params.AccountType : null;
+        this.Gender = 'Gender' in params ? params.Gender : null;
+        this.Age = 'Age' in params ? params.Age : null;
+        this.Level = 'Level' in params ? params.Level : null;
+        this.Phone = 'Phone' in params ? params.Phone : null;
+
+    }
+}
+
 module.exports = {
     RiskDetails: RiskDetails,
     TextModerationRequest: TextModerationRequest,
     DetailResults: DetailResults,
-    User: User,
+    AccountTipoffAccessRequest: AccountTipoffAccessRequest,
     Device: Device,
+    TipoffResponse: TipoffResponse,
+    AccountTipoffAccessResponse: AccountTipoffAccessResponse,
     TextModerationResponse: TextModerationResponse,
+    User: User,
 
 }

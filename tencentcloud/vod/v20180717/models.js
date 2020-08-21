@@ -5704,6 +5704,49 @@ class DescribeSnapshotByTimeOffsetTemplatesRequest extends  AbstractModel {
 }
 
 /**
+ * CDN 日志信息
+ * @class
+ */
+class CdnLogInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志所属日期， 格式为：yyyy-MM-dd ，如2018-03-01。
+         * @type {string || null}
+         */
+        this.Date = null;
+
+        /**
+         * 日志名称，格式为：日期小时-域名
+如 2018120101-test.vod2.mqcloud.com。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 日志下载链接，24小时内下载有效。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Date = 'Date' in params ? params.Date : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Url = 'Url' in params ? params.Url : null;
+
+    }
+}
+
+/**
  * 语音全文识别的输入。
  * @class
  */
@@ -13541,6 +13584,55 @@ class AiRecognitionTaskObjectResultInput extends  AbstractModel {
 }
 
 /**
+ * DescribeCdnLogs请求参数结构体
+ * @class
+ */
+class DescribeCdnLogsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名。
+         * @type {string || null}
+         */
+        this.DomainName = null;
+
+        /**
+         * 获取日志起始时间点，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间需大于起始时间；使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+
+    }
+}
+
+/**
  * 输出的视频流信息
  * @class
  */
@@ -13861,6 +13953,66 @@ class MediaContentReviewAsrTextSegmentItem extends  AbstractModel {
         this.Confidence = 'Confidence' in params ? params.Confidence : null;
         this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
         this.KeywordSet = 'KeywordSet' in params ? params.KeywordSet : null;
+
+    }
+}
+
+/**
+ * DescribeCdnLogs返回参数结构体
+ * @class
+ */
+class DescribeCdnLogsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 国内CDN节点的日志下载列表。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<CdnLogInfo> || null}
+         */
+        this.DomesticCdnLogs = null;
+
+        /**
+         * 海外CDN节点的日志下载列表。如果域名没有开启海外加速，忽略该参数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<CdnLogInfo> || null}
+         */
+        this.OverseaCdnLogs = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DomesticCdnLogs) {
+            this.DomesticCdnLogs = new Array();
+            for (let z in params.DomesticCdnLogs) {
+                let obj = new CdnLogInfo();
+                obj.deserialize(params.DomesticCdnLogs[z]);
+                this.DomesticCdnLogs.push(obj);
+            }
+        }
+
+        if (params.OverseaCdnLogs) {
+            this.OverseaCdnLogs = new Array();
+            for (let z in params.OverseaCdnLogs) {
+                let obj = new CdnLogInfo();
+                obj.deserialize(params.OverseaCdnLogs[z]);
+                this.OverseaCdnLogs.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -27113,6 +27265,7 @@ module.exports = {
     PornAsrReviewTemplateInfoForUpdate: PornAsrReviewTemplateInfoForUpdate,
     MediaAnimatedGraphicsInfo: MediaAnimatedGraphicsInfo,
     DescribeSnapshotByTimeOffsetTemplatesRequest: DescribeSnapshotByTimeOffsetTemplatesRequest,
+    CdnLogInfo: CdnLogInfo,
     AiRecognitionTaskAsrFullTextResultInput: AiRecognitionTaskAsrFullTextResultInput,
     MediaMiniProgramReviewInfoItem: MediaMiniProgramReviewInfoItem,
     TaskStatData: TaskStatData,
@@ -27263,11 +27416,13 @@ module.exports = {
     DescribeStorageDetailsResponse: DescribeStorageDetailsResponse,
     PullEventsResponse: PullEventsResponse,
     AiRecognitionTaskObjectResultInput: AiRecognitionTaskObjectResultInput,
+    DescribeCdnLogsRequest: DescribeCdnLogsRequest,
     OutputVideoStream: OutputVideoStream,
     ProcedureTemplate: ProcedureTemplate,
     AiReviewTaskTerrorismResult: AiReviewTaskTerrorismResult,
     ProcessMediaByUrlResponse: ProcessMediaByUrlResponse,
     MediaContentReviewAsrTextSegmentItem: MediaContentReviewAsrTextSegmentItem,
+    DescribeCdnLogsResponse: DescribeCdnLogsResponse,
     MediaContentReviewPoliticalSegmentItem: MediaContentReviewPoliticalSegmentItem,
     DeletePersonSampleResponse: DeletePersonSampleResponse,
     CreateSnapshotByTimeOffsetTemplateResponse: CreateSnapshotByTimeOffsetTemplateResponse,

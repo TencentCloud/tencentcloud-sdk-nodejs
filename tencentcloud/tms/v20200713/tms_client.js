@@ -19,9 +19,12 @@ const AbstractClient = require('../../common/abstract_client')
 const RiskDetails = models.RiskDetails;
 const TextModerationRequest = models.TextModerationRequest;
 const DetailResults = models.DetailResults;
-const User = models.User;
+const AccountTipoffAccessRequest = models.AccountTipoffAccessRequest;
 const Device = models.Device;
+const TipoffResponse = models.TipoffResponse;
+const AccountTipoffAccessResponse = models.AccountTipoffAccessResponse;
 const TextModerationResponse = models.TextModerationResponse;
+const User = models.User;
 
 
 /**
@@ -34,6 +37,17 @@ class TmsClient extends AbstractClient {
         super("tms.tencentcloudapi.com", "2020-07-13", credential, region, profile);
     }
     
+    /**
+     * 举报恶意账号
+     * @param {AccountTipoffAccessRequest} req
+     * @param {function(string, AccountTipoffAccessResponse):void} cb
+     * @public
+     */
+    AccountTipoffAccess(req, cb) {
+        let resp = new AccountTipoffAccessResponse();
+        this.request("AccountTipoffAccess", req, resp, cb);
+    }
+
     /**
      * 文本内容检测（Text Moderation）服务使用了深度学习技术，识别涉黄、涉政、涉恐等有害内容，同时支持用户配置词库，打击自定义的违规文本。
      * @param {TextModerationRequest} req

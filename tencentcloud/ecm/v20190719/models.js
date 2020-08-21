@@ -193,6 +193,196 @@ class DescribePeakBaseOverviewRequest extends  AbstractModel {
 }
 
 /**
+ * 安全组关联的资源统计
+ * @class
+ */
+class SecurityGroupAssociationStatistics extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 安全组实例ID。
+         * @type {string || null}
+         */
+        this.SecurityGroupId = null;
+
+        /**
+         * ECM实例数。
+         * @type {number || null}
+         */
+        this.ECM = null;
+
+        /**
+         * ECM模块数。
+         * @type {number || null}
+         */
+        this.Module = null;
+
+        /**
+         * 弹性网卡实例数。
+         * @type {number || null}
+         */
+        this.ENI = null;
+
+        /**
+         * 被安全组引用数。
+         * @type {number || null}
+         */
+        this.SG = null;
+
+        /**
+         * 负载均衡实例数。
+         * @type {number || null}
+         */
+        this.CLB = null;
+
+        /**
+         * 全量实例的绑定统计。
+         * @type {Array.<InstanceStatistic> || null}
+         */
+        this.InstanceStatistics = null;
+
+        /**
+         * 所有资源的总计数（不包含被安全组引用数）。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+        this.ECM = 'ECM' in params ? params.ECM : null;
+        this.Module = 'Module' in params ? params.Module : null;
+        this.ENI = 'ENI' in params ? params.ENI : null;
+        this.SG = 'SG' in params ? params.SG : null;
+        this.CLB = 'CLB' in params ? params.CLB : null;
+
+        if (params.InstanceStatistics) {
+            this.InstanceStatistics = new Array();
+            for (let z in params.InstanceStatistics) {
+                let obj = new InstanceStatistic();
+                obj.deserialize(params.InstanceStatistics[z]);
+                this.InstanceStatistics.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+    }
+}
+
+/**
+ * 用户安全组配额限制
+ * @class
+ */
+class SecurityGroupLimitSet extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 可创建安全组总数
+         * @type {number || null}
+         */
+        this.SecurityGroupLimit = null;
+
+        /**
+         * 安全组下的最大规则数
+         * @type {number || null}
+         */
+        this.SecurityGroupPolicyLimit = null;
+
+        /**
+         * 安全组下嵌套安全组规则数
+         * @type {number || null}
+         */
+        this.ReferedSecurityGroupLimit = null;
+
+        /**
+         * 单安全组关联实例数
+         * @type {number || null}
+         */
+        this.SecurityGroupInstanceLimit = null;
+
+        /**
+         * 实例关联安全组数
+         * @type {number || null}
+         */
+        this.InstanceSecurityGroupLimit = null;
+
+        /**
+         * 单安全组关联的模块数
+         * @type {number || null}
+         */
+        this.SecurityGroupModuleLimit = null;
+
+        /**
+         * 模块关联的安全组数
+         * @type {number || null}
+         */
+        this.ModuleSecurityGroupLimit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecurityGroupLimit = 'SecurityGroupLimit' in params ? params.SecurityGroupLimit : null;
+        this.SecurityGroupPolicyLimit = 'SecurityGroupPolicyLimit' in params ? params.SecurityGroupPolicyLimit : null;
+        this.ReferedSecurityGroupLimit = 'ReferedSecurityGroupLimit' in params ? params.ReferedSecurityGroupLimit : null;
+        this.SecurityGroupInstanceLimit = 'SecurityGroupInstanceLimit' in params ? params.SecurityGroupInstanceLimit : null;
+        this.InstanceSecurityGroupLimit = 'InstanceSecurityGroupLimit' in params ? params.InstanceSecurityGroupLimit : null;
+        this.SecurityGroupModuleLimit = 'SecurityGroupModuleLimit' in params ? params.SecurityGroupModuleLimit : null;
+        this.ModuleSecurityGroupLimit = 'ModuleSecurityGroupLimit' in params ? params.ModuleSecurityGroupLimit : null;
+
+    }
+}
+
+/**
+ * DisassociateAddress返回参数结构体
+ * @class
+ */
+class DisassociateAddressResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 异步任务TaskId。可以使用DescribeTaskResult接口查询任务状态。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateNetworkInterface请求参数结构体
  * @class
  */
@@ -293,6 +483,41 @@ class CreateNetworkInterfaceRequest extends  AbstractModel {
 }
 
 /**
+ * 用于描述实例的统计信息
+ * @class
+ */
+class InstanceStatistic extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例的类型
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * 实例的个数
+         * @type {number || null}
+         */
+        this.InstanceCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
+
+    }
+}
+
+/**
  * DescribeInstancesDeniedActions请求参数结构体
  * @class
  */
@@ -316,6 +541,41 @@ class DescribeInstancesDeniedActionsRequest extends  AbstractModel {
             return;
         }
         this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
+
+    }
+}
+
+/**
+ * ModifyModuleSecurityGroups请求参数结构体
+ * @class
+ */
+class ModifyModuleSecurityGroupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 安全组列表。不超过5个。
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIdSet = null;
+
+        /**
+         * 模块id。
+         * @type {string || null}
+         */
+        this.ModuleId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecurityGroupIdSet = 'SecurityGroupIdSet' in params ? params.SecurityGroupIdSet : null;
+        this.ModuleId = 'ModuleId' in params ? params.ModuleId : null;
 
     }
 }
@@ -421,6 +681,46 @@ class DescribeModuleResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteSecurityGroupPolicies请求参数结构体
+ * @class
+ */
+class DeleteSecurityGroupPoliciesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 安全组实例ID，例如esg-33ocnj9n，可通过DescribeSecurityGroups获取。
+         * @type {string || null}
+         */
+        this.SecurityGroupId = null;
+
+        /**
+         * 安全组规则集合。一个请求中只能删除单个方向的一条或多条规则。支持指定索引（PolicyIndex） 匹配删除和安全组规则匹配删除两种方式，一个请求中只能使用一种匹配方式。
+         * @type {SecurityGroupPolicySet || null}
+         */
+        this.SecurityGroupPolicySet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+
+        if (params.SecurityGroupPolicySet) {
+            let obj = new SecurityGroupPolicySet();
+            obj.deserialize(params.SecurityGroupPolicySet)
+            this.SecurityGroupPolicySet = obj;
+        }
 
     }
 }
@@ -547,6 +847,34 @@ class ImportCustomImageResponse extends  AbstractModel {
         }
         this.ImageId = 'ImageId' in params ? params.ImageId : null;
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyModuleConfig返回参数结构体
+ * @class
+ */
+class ModifyModuleConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -736,83 +1064,24 @@ tag:tag-key - String - 是否必填：否 - 按照标签键值对进行过滤。
 }
 
 /**
- * CreateSubnet请求参数结构体
+ * DescribeImportImageOs返回参数结构体
  * @class
  */
-class CreateSubnetRequest extends  AbstractModel {
+class DescribeImportImageOsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 待操作的VPC实例ID。可通过DescribeVpcs接口返回值中的VpcId获取。
-         * @type {string || null}
+         * 支持的导入镜像的操作系统类型
+         * @type {ImageOsList || null}
          */
-        this.VpcId = null;
+        this.ImportImageOsListSupported = null;
 
         /**
-         * 子网名称，最大长度不能超过60个字节。
-         * @type {string || null}
+         * 支持的导入镜像的操作系统版本
+         * @type {Array.<OsVersion> || null}
          */
-        this.SubnetName = null;
-
-        /**
-         * 子网网段，子网网段必须在VPC网段内，相同VPC内子网网段不能重叠。
-         * @type {string || null}
-         */
-        this.CidrBlock = null;
-
-        /**
-         * 子网所在的可用区ID，不同子网选择不同可用区可以做跨可用区灾备。
-         * @type {string || null}
-         */
-        this.Zone = null;
-
-        /**
-         * ECM 地域
-         * @type {string || null}
-         */
-        this.EcmRegion = null;
-
-        /**
-         * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]
-         * @type {Array.<Tag> || null}
-         */
-        this.Tags = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.SubnetName = 'SubnetName' in params ? params.SubnetName : null;
-        this.CidrBlock = 'CidrBlock' in params ? params.CidrBlock : null;
-        this.Zone = 'Zone' in params ? params.Zone : null;
-        this.EcmRegion = 'EcmRegion' in params ? params.EcmRegion : null;
-
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * DeleteModule返回参数结构体
- * @class
- */
-class DeleteModuleResponse extends  AbstractModel {
-    constructor(){
-        super();
+        this.ImportImageOsVersionSet = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -828,6 +1097,21 @@ class DeleteModuleResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
+        }
+
+        if (params.ImportImageOsListSupported) {
+            let obj = new ImageOsList();
+            obj.deserialize(params.ImportImageOsListSupported)
+            this.ImportImageOsListSupported = obj;
+        }
+
+        if (params.ImportImageOsVersionSet) {
+            this.ImportImageOsVersionSet = new Array();
+            for (let z in params.ImportImageOsVersionSet) {
+                let obj = new OsVersion();
+                obj.deserialize(params.ImportImageOsVersionSet[z]);
+                this.ImportImageOsVersionSet.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1151,6 +1435,41 @@ Windows 实例：名字符长度为[2, 15]，允许字母（不限制大小写�
 }
 
 /**
+ * ReleaseAddresses请求参数结构体
+ * @class
+ */
+class ReleaseAddressesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ECM 地域
+         * @type {string || null}
+         */
+        this.EcmRegion = null;
+
+        /**
+         * 标识 EIP 的唯一 ID 列表。
+         * @type {Array.<string> || null}
+         */
+        this.AddressIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EcmRegion = 'EcmRegion' in params ? params.EcmRegion : null;
+        this.AddressIds = 'AddressIds' in params ? params.AddressIds : null;
+
+    }
+}
+
+/**
  * DescribeInstances返回参数结构体
  * @class
  */
@@ -1375,10 +1694,10 @@ DELETING：删除中
 }
 
 /**
- * ResetInstancesPassword返回参数结构体
+ * ModifyModuleSecurityGroups返回参数结构体
  * @class
  */
-class ResetInstancesPasswordResponse extends  AbstractModel {
+class ModifyModuleSecurityGroupsResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -1868,6 +2187,46 @@ class VpcInfo extends  AbstractModel {
         this.RegionName = 'RegionName' in params ? params.RegionName : null;
         this.SubnetCount = 'SubnetCount' in params ? params.SubnetCount : null;
         this.InstanceCount = 'InstanceCount' in params ? params.InstanceCount : null;
+
+    }
+}
+
+/**
+ * ReplaceSecurityGroupPolicy请求参数结构体
+ * @class
+ */
+class ReplaceSecurityGroupPolicyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 安全组实例ID，例如esg-33ocnj9n，可通过DescribeSecurityGroups获取
+         * @type {string || null}
+         */
+        this.SecurityGroupId = null;
+
+        /**
+         * 安全组规则集合对象。
+         * @type {SecurityGroupPolicySet || null}
+         */
+        this.SecurityGroupPolicySet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+
+        if (params.SecurityGroupPolicySet) {
+            let obj = new SecurityGroupPolicySet();
+            obj.deserialize(params.SecurityGroupPolicySet)
+            this.SecurityGroupPolicySet = obj;
+        }
 
     }
 }
@@ -2433,6 +2792,108 @@ class RemovePrivateIpAddressesRequest extends  AbstractModel {
 }
 
 /**
+ * 安全组规则对象
+ * @class
+ */
+class SecurityGroupPolicy extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 安全组规则索引号
+         * @type {number || null}
+         */
+        this.PolicyIndex = null;
+
+        /**
+         * 协议, 取值: TCP,UDP, ICMP。
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * 端口(all, 离散port, range)。
+         * @type {string || null}
+         */
+        this.Port = null;
+
+        /**
+         * 协议端口ID或者协议端口组ID。ServiceTemplate和Protocol+Port互斥。
+         * @type {ServiceTemplateSpecification || null}
+         */
+        this.ServiceTemplate = null;
+
+        /**
+         * 网段或IP(互斥)。
+         * @type {string || null}
+         */
+        this.CidrBlock = null;
+
+        /**
+         * 安全组实例ID，例如：esg-ohuuioma。
+         * @type {string || null}
+         */
+        this.SecurityGroupId = null;
+
+        /**
+         * IP地址ID或者ID地址组ID。
+         * @type {AddressTemplateSpecification || null}
+         */
+        this.AddressTemplate = null;
+
+        /**
+         * ACCEPT 或 DROP。
+         * @type {string || null}
+         */
+        this.Action = null;
+
+        /**
+         * 安全组规则描述。
+         * @type {string || null}
+         */
+        this.PolicyDescription = null;
+
+        /**
+         * 修改时间，例如 2020-07-22 19：27：23
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ModifyTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PolicyIndex = 'PolicyIndex' in params ? params.PolicyIndex : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Port = 'Port' in params ? params.Port : null;
+
+        if (params.ServiceTemplate) {
+            let obj = new ServiceTemplateSpecification();
+            obj.deserialize(params.ServiceTemplate)
+            this.ServiceTemplate = obj;
+        }
+        this.CidrBlock = 'CidrBlock' in params ? params.CidrBlock : null;
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+
+        if (params.AddressTemplate) {
+            let obj = new AddressTemplateSpecification();
+            obj.deserialize(params.AddressTemplate)
+            this.AddressTemplate = obj;
+        }
+        this.Action = 'Action' in params ? params.Action : null;
+        this.PolicyDescription = 'PolicyDescription' in params ? params.PolicyDescription : null;
+        this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
+
+    }
+}
+
+/**
  * ModifyInstancesAttribute请求参数结构体
  * @class
  */
@@ -2452,6 +2913,12 @@ class ModifyInstancesAttributeRequest extends  AbstractModel {
          */
         this.InstanceName = null;
 
+        /**
+         * 指定实例的安全组Id列表，子机将重新关联指定列表的安全组，原本关联的安全组会被解绑。限制不超过5个。
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroups = null;
+
     }
 
     /**
@@ -2463,6 +2930,7 @@ class ModifyInstancesAttributeRequest extends  AbstractModel {
         }
         this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
         this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.SecurityGroups = 'SecurityGroups' in params ? params.SecurityGroups : null;
 
     }
 }
@@ -2780,38 +3248,24 @@ class CreateSubnetResponse extends  AbstractModel {
 }
 
 /**
- * ResetInstancesPassword请求参数结构体
+ * DescribeSecurityGroupPolicies返回参数结构体
  * @class
  */
-class ResetInstancesPasswordRequest extends  AbstractModel {
+class DescribeSecurityGroupPoliciesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 待重置密码的实例ID列表。在单次请求的过程中，单个region下的请求实例数上限为100。
-         * @type {Array.<string> || null}
+         * 安全组规则集合。
+         * @type {SecurityGroupPolicySet || null}
          */
-        this.InstanceIdSet = null;
+        this.SecurityGroupPolicySet = null;
 
         /**
-         * 新密码，Linux实例密码必须8到16位，至少包括两项[a-z，A-Z]、[0-9]和[( ) ~ ~ ! @ # $ % ^ & * - + = _ | { } [ ] : ; ' < > , . ? /]中的符号。密码不允许以/符号开头。
-Windows实例密码必须12到16位，至少包括三项[a-z]，[A-Z]，[0-9]和[( ) ~ ~ ! @ # $ % ^ & * - + = _ | { } [ ] : ; ' < > , . ? /]中的符号。密码不允许以/符号开头。
-如果实例即包含Linux实例又包含Windows实例，则密码复杂度限制按照Windows实例的限制。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Password = null;
-
-        /**
-         * 是否强制关机，默认为false。
-         * @type {boolean || null}
-         */
-        this.ForceStop = null;
-
-        /**
-         * 待重置密码的实例的用户名，不得超过64个字符。若未指定用户名，则对于Linux而言，默认重置root用户的密码，对于Windows而言，默认重置administrator的密码。
-         * @type {string || null}
-         */
-        this.UserName = null;
+        this.RequestId = null;
 
     }
 
@@ -2822,10 +3276,13 @@ Windows实例密码必须12到16位，至少包括三项[a-z]，[A-Z]，[0-9]和
         if (!params) {
             return;
         }
-        this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
-        this.Password = 'Password' in params ? params.Password : null;
-        this.ForceStop = 'ForceStop' in params ? params.ForceStop : null;
-        this.UserName = 'UserName' in params ? params.UserName : null;
+
+        if (params.SecurityGroupPolicySet) {
+            let obj = new SecurityGroupPolicySet();
+            obj.deserialize(params.SecurityGroupPolicySet)
+            this.SecurityGroupPolicySet = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2903,6 +3360,53 @@ class Area extends  AbstractModel {
         }
         this.AreaId = 'AreaId' in params ? params.AreaId : null;
         this.AreaName = 'AreaName' in params ? params.AreaName : null;
+
+    }
+}
+
+/**
+ * ModifySecurityGroupPolicies请求参数结构体
+ * @class
+ */
+class ModifySecurityGroupPoliciesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 安全组实例ID，例如esg-33ocnj9n，可通过DescribeSecurityGroups获取。
+         * @type {string || null}
+         */
+        this.SecurityGroupId = null;
+
+        /**
+         * 安全组规则集合。 SecurityGroupPolicySet对象必须同时指定新的出（Egress）入（Ingress）站规则。 SecurityGroupPolicy对象不支持自定义索引（PolicyIndex）。
+         * @type {SecurityGroupPolicySet || null}
+         */
+        this.SecurityGroupPolicySet = null;
+
+        /**
+         * 排序安全组标识。值为True时，支持安全组排序；SortPolicys不存在或SortPolicys为False时，为修改安全组规则。
+         * @type {boolean || null}
+         */
+        this.SortPolicys = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+
+        if (params.SecurityGroupPolicySet) {
+            let obj = new SecurityGroupPolicySet();
+            obj.deserialize(params.SecurityGroupPolicySet)
+            this.SecurityGroupPolicySet = obj;
+        }
+        this.SortPolicys = 'SortPolicys' in params ? params.SortPolicys : null;
 
     }
 }
@@ -3347,6 +3851,12 @@ class CreateModuleRequest extends  AbstractModel {
          */
         this.TagSpecification = null;
 
+        /**
+         * 模块默认安全组列表
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroups = null;
+
     }
 
     /**
@@ -3372,6 +3882,7 @@ class CreateModuleRequest extends  AbstractModel {
                 this.TagSpecification.push(obj);
             }
         }
+        this.SecurityGroups = 'SecurityGroups' in params ? params.SecurityGroups : null;
 
     }
 }
@@ -3659,6 +4170,34 @@ class ModuleCounter extends  AbstractModel {
 }
 
 /**
+ * ReplaceSecurityGroupPolicy返回参数结构体
+ * @class
+ */
+class ReplaceSecurityGroupPolicyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 实例可用区及对应的实例创建数目及运营商的组合；
  * @class
  */
@@ -3822,6 +4361,77 @@ class Tag extends  AbstractModel {
 }
 
 /**
+ * CreateSubnet请求参数结构体
+ * @class
+ */
+class CreateSubnetRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待操作的VPC实例ID。可通过DescribeVpcs接口返回值中的VpcId获取。
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 子网名称，最大长度不能超过60个字节。
+         * @type {string || null}
+         */
+        this.SubnetName = null;
+
+        /**
+         * 子网网段，子网网段必须在VPC网段内，相同VPC内子网网段不能重叠。
+         * @type {string || null}
+         */
+        this.CidrBlock = null;
+
+        /**
+         * 子网所在的可用区ID，不同子网选择不同可用区可以做跨可用区灾备。
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * ECM 地域
+         * @type {string || null}
+         */
+        this.EcmRegion = null;
+
+        /**
+         * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetName = 'SubnetName' in params ? params.SubnetName : null;
+        this.CidrBlock = 'CidrBlock' in params ? params.CidrBlock : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.EcmRegion = 'EcmRegion' in params ? params.EcmRegion : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeDefaultSubnet请求参数结构体
  * @class
  */
@@ -3861,6 +4471,34 @@ class DescribeDefaultSubnetRequest extends  AbstractModel {
  * @class
  */
 class ResetInstancesMaxBandwidthResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteSecurityGroup返回参数结构体
+ * @class
+ */
+class DeleteSecurityGroupResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -4225,6 +4863,46 @@ class NodeInstanceNum extends  AbstractModel {
 }
 
 /**
+ * DescribeSecurityGroupLimits返回参数结构体
+ * @class
+ */
+class DescribeSecurityGroupLimitsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用户安全组配额限制。
+         * @type {SecurityGroupLimitSet || null}
+         */
+        this.SecurityGroupLimitSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SecurityGroupLimitSet) {
+            let obj = new SecurityGroupLimitSet();
+            obj.deserialize(params.SecurityGroupLimitSet)
+            this.SecurityGroupLimitSet = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeAddresses返回参数结构体
  * @class
  */
@@ -4267,6 +4945,114 @@ class DescribeAddressesResponse extends  AbstractModel {
                 let obj = new Address();
                 obj.deserialize(params.AddressSet[z]);
                 this.AddressSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 安全组规则集合
+ * @class
+ */
+class SecurityGroupPolicySet extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 安全组规则当前版本。用户每次更新安全规则版本会自动加1，防止更新的路由规则已过期，不填不考虑冲突。
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * 出站规则。
+         * @type {Array.<SecurityGroupPolicy> || null}
+         */
+        this.Egress = null;
+
+        /**
+         * 入站规则。
+         * @type {Array.<SecurityGroupPolicy> || null}
+         */
+        this.Ingress = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Version = 'Version' in params ? params.Version : null;
+
+        if (params.Egress) {
+            this.Egress = new Array();
+            for (let z in params.Egress) {
+                let obj = new SecurityGroupPolicy();
+                obj.deserialize(params.Egress[z]);
+                this.Egress.push(obj);
+            }
+        }
+
+        if (params.Ingress) {
+            this.Ingress = new Array();
+            for (let z in params.Ingress) {
+                let obj = new SecurityGroupPolicy();
+                obj.deserialize(params.Ingress[z]);
+                this.Ingress.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeSecurityGroups返回参数结构体
+ * @class
+ */
+class DescribeSecurityGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合条件的实例数量。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 安全组对象。
+         * @type {Array.<SecurityGroup> || null}
+         */
+        this.SecurityGroupSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.SecurityGroupSet) {
+            this.SecurityGroupSet = new Array();
+            for (let z in params.SecurityGroupSet) {
+                let obj = new SecurityGroup();
+                obj.deserialize(params.SecurityGroupSet[z]);
+                this.SecurityGroupSet.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -4408,54 +5194,24 @@ class DeleteModuleRequest extends  AbstractModel {
 }
 
 /**
- * DescribeVpcs请求参数结构体
+ * CreateImage返回参数结构体
  * @class
  */
-class DescribeVpcsRequest extends  AbstractModel {
+class CreateImageResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * VPC实例ID。形如：vpc-f49l6u0z。每次请求的实例的上限为100。参数不支持同时指定VpcIds和Filters。
-         * @type {Array.<string> || null}
-         */
-        this.VpcIds = null;
-
-        /**
-         * 过滤条件，参数不支持同时指定VpcIds和Filters。
-vpc-name - String - VPC实例名称，只支持单值的模糊查询。
-vpc-id - String - VPC实例ID形如：vpc-f49l6u0z。
-cidr-block - String - vpc的cidr，只支持单值的模糊查询。
-region - String - vpc的region。
-tag-key - String -是否必填：否- 按照标签键进行过滤。
-tag:tag-key - String - 是否必填：否 - 按照标签键值对进行过滤。
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
-
-        /**
-         * 偏移量
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 返回数量
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 地域
+         * 任务id
          * @type {string || null}
          */
-        this.EcmRegion = null;
+        this.TaskId = null;
 
         /**
-         * 排序方式：time时间倒序, default按照网络规划排序
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Sort = null;
+        this.RequestId = null;
 
     }
 
@@ -4466,20 +5222,72 @@ tag:tag-key - String - 是否必填：否 - 按照标签键值对进行过滤。
         if (!params) {
             return;
         }
-        this.VpcIds = 'VpcIds' in params ? params.VpcIds : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
+    }
+}
+
+/**
+ * ModifyVpcAttribute请求参数结构体
+ * @class
+ */
+class ModifyVpcAttributeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * VPC实例ID。形如：vpc-f49l6u0z。
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * ECM 地域
+         * @type {string || null}
+         */
+        this.EcmRegion = null;
+
+        /**
+         * 私有网络名称，可任意命名，但不得超过60个字符。
+         * @type {string || null}
+         */
+        this.VpcName = null;
+
+        /**
+         * 标签
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 私有网络描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.EcmRegion = 'EcmRegion' in params ? params.EcmRegion : null;
+        this.VpcName = 'VpcName' in params ? params.VpcName : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
             }
         }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.EcmRegion = 'EcmRegion' in params ? params.EcmRegion : null;
-        this.Sort = 'Sort' in params ? params.Sort : null;
+        this.Description = 'Description' in params ? params.Description : null;
 
     }
 }
@@ -4564,6 +5372,41 @@ class OsVersion extends  AbstractModel {
 }
 
 /**
+ * 协议端口模版
+ * @class
+ */
+class ServiceTemplateSpecification extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 协议端口ID，例如：eppm-f5n1f8da。
+         * @type {string || null}
+         */
+        this.ServiceId = null;
+
+        /**
+         * 协议端口组ID，例如：eppmg-f5n1f8da。
+         * @type {string || null}
+         */
+        this.ServiceGroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.ServiceGroupId = 'ServiceGroupId' in params ? params.ServiceGroupId : null;
+
+    }
+}
+
+/**
  * 峰值信息
  * @class
  */
@@ -4608,6 +5451,34 @@ class PeakBase extends  AbstractModel {
         this.PeakMemoryNum = 'PeakMemoryNum' in params ? params.PeakMemoryNum : null;
         this.PeakStorageNum = 'PeakStorageNum' in params ? params.PeakStorageNum : null;
         this.RecordTime = 'RecordTime' in params ? params.RecordTime : null;
+
+    }
+}
+
+/**
+ * ResetInstancesPassword返回参数结构体
+ * @class
+ */
+class ResetInstancesPasswordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4864,6 +5735,41 @@ class DetachNetworkInterfaceRequest extends  AbstractModel {
 }
 
 /**
+ * IP地址模版
+ * @class
+ */
+class AddressTemplateSpecification extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IP地址ID，例如：eipm-2uw6ujo6。
+         * @type {string || null}
+         */
+        this.AddressId = null;
+
+        /**
+         * IP地址组ID，例如：eipmg-2uw6ujo6。
+         * @type {string || null}
+         */
+        this.AddressGroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AddressId = 'AddressId' in params ? params.AddressId : null;
+        this.AddressGroupId = 'AddressGroupId' in params ? params.AddressGroupId : null;
+
+    }
+}
+
+/**
  * DescribeConfig返回参数结构体
  * @class
  */
@@ -4912,6 +5818,34 @@ class DescribeConfigResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyModuleNetwork返回参数结构体
+ * @class
+ */
+class ModifyModuleNetworkResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyDefaultSubnet返回参数结构体
  * @class
  */
@@ -4940,30 +5874,24 @@ class ModifyDefaultSubnetResponse extends  AbstractModel {
 }
 
 /**
- * DescribeImportImageOs返回参数结构体
+ * AssociateSecurityGroups请求参数结构体
  * @class
  */
-class DescribeImportImageOsResponse extends  AbstractModel {
+class AssociateSecurityGroupsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 支持的导入镜像的操作系统类型
-         * @type {ImageOsList || null}
+         * 要绑定的安全组ID，类似esg-efil73jd，只支持绑定单个安全组。
+         * @type {Array.<string> || null}
          */
-        this.ImportImageOsListSupported = null;
+        this.SecurityGroupIds = null;
 
         /**
-         * 支持的导入镜像的操作系统版本
-         * @type {Array.<OsVersion> || null}
+         * 被绑定的实例ID，类似ein-lesecurk，支持指定多个实例，每次请求批量实例的上限为100。
+         * @type {Array.<string> || null}
          */
-        this.ImportImageOsVersionSet = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.InstanceIds = null;
 
     }
 
@@ -4974,22 +5902,8 @@ class DescribeImportImageOsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.ImportImageOsListSupported) {
-            let obj = new ImageOsList();
-            obj.deserialize(params.ImportImageOsListSupported)
-            this.ImportImageOsListSupported = obj;
-        }
-
-        if (params.ImportImageOsVersionSet) {
-            this.ImportImageOsVersionSet = new Array();
-            for (let z in params.ImportImageOsVersionSet) {
-                let obj = new OsVersion();
-                obj.deserialize(params.ImportImageOsVersionSet[z]);
-                this.ImportImageOsVersionSet.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -5453,6 +6367,34 @@ AVAILABLE：可用的
         this.Description = 'Description' in params ? params.Description : null;
         this.IsWanIpBlocked = 'IsWanIpBlocked' in params ? params.IsWanIpBlocked : null;
         this.State = 'State' in params ? params.State : null;
+
+    }
+}
+
+/**
+ * ModifySecurityGroupAttribute返回参数结构体
+ * @class
+ */
+class ModifySecurityGroupAttributeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5984,18 +6926,12 @@ class DescribeInstanceVncUrlResponse extends  AbstractModel {
 }
 
 /**
- * DisassociateAddress返回参数结构体
+ * DeleteModule返回参数结构体
  * @class
  */
-class DisassociateAddressResponse extends  AbstractModel {
+class DeleteModuleResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 异步任务TaskId。可以使用DescribeTaskResult接口查询任务状态。
-         * @type {string || null}
-         */
-        this.TaskId = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6012,7 +6948,6 @@ class DisassociateAddressResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -6202,42 +7137,30 @@ class AssociateAddressRequest extends  AbstractModel {
 }
 
 /**
- * ModifyVpcAttribute请求参数结构体
+ * ModifySecurityGroupAttribute请求参数结构体
  * @class
  */
-class ModifyVpcAttributeRequest extends  AbstractModel {
+class ModifySecurityGroupAttributeRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * VPC实例ID。形如：vpc-f49l6u0z。
+         * 安全组实例ID，例如esg-33ocnj9n，可通过DescribeSecurityGroups获取。
          * @type {string || null}
          */
-        this.VpcId = null;
+        this.SecurityGroupId = null;
 
         /**
-         * ECM 地域
+         * 安全组名称，可任意命名，但不得超过60个字符。
          * @type {string || null}
          */
-        this.EcmRegion = null;
+        this.GroupName = null;
 
         /**
-         * 私有网络名称，可任意命名，但不得超过60个字符。
+         * 安全组备注，最多100个字符。
          * @type {string || null}
          */
-        this.VpcName = null;
-
-        /**
-         * 标签
-         * @type {Array.<Tag> || null}
-         */
-        this.Tags = null;
-
-        /**
-         * 私有网络描述
-         * @type {string || null}
-         */
-        this.Description = null;
+        this.GroupDescription = null;
 
     }
 
@@ -6248,19 +7171,37 @@ class ModifyVpcAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpcId = 'VpcId' in params ? params.VpcId : null;
-        this.EcmRegion = 'EcmRegion' in params ? params.EcmRegion : null;
-        this.VpcName = 'VpcName' in params ? params.VpcName : null;
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+        this.GroupName = 'GroupName' in params ? params.GroupName : null;
+        this.GroupDescription = 'GroupDescription' in params ? params.GroupDescription : null;
 
-        if (params.Tags) {
-            this.Tags = new Array();
-            for (let z in params.Tags) {
-                let obj = new Tag();
-                obj.deserialize(params.Tags[z]);
-                this.Tags.push(obj);
-            }
+    }
+}
+
+/**
+ * ModifySecurityGroupPolicies返回参数结构体
+ * @class
+ */
+class ModifySecurityGroupPoliciesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.Description = 'Description' in params ? params.Description : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -6338,24 +7279,54 @@ class AttachNetworkInterfaceResponse extends  AbstractModel {
 }
 
 /**
- * CreateImage返回参数结构体
+ * DescribeVpcs请求参数结构体
  * @class
  */
-class CreateImageResponse extends  AbstractModel {
+class DescribeVpcsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 任务id
-         * @type {string || null}
+         * VPC实例ID。形如：vpc-f49l6u0z。每次请求的实例的上限为100。参数不支持同时指定VpcIds和Filters。
+         * @type {Array.<string> || null}
          */
-        this.TaskId = null;
+        this.VpcIds = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 过滤条件，参数不支持同时指定VpcIds和Filters。
+vpc-name - String - VPC实例名称，只支持单值的模糊查询。
+vpc-id - String - VPC实例ID形如：vpc-f49l6u0z。
+cidr-block - String - vpc的cidr，只支持单值的模糊查询。
+region - String - vpc的region。
+tag-key - String -是否必填：否- 按照标签键进行过滤。
+tag:tag-key - String - 是否必填：否 - 按照标签键值对进行过滤。
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 地域
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.EcmRegion = null;
+
+        /**
+         * 排序方式：time时间倒序, default按照网络规划排序
+         * @type {string || null}
+         */
+        this.Sort = null;
 
     }
 
@@ -6366,8 +7337,20 @@ class CreateImageResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.VpcIds = 'VpcIds' in params ? params.VpcIds : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.EcmRegion = 'EcmRegion' in params ? params.EcmRegion : null;
+        this.Sort = 'Sort' in params ? params.Sort : null;
 
     }
 }
@@ -6394,10 +7377,10 @@ class DescribeBaseOverviewRequest extends  AbstractModel {
 }
 
 /**
- * ModifyModuleNetwork返回参数结构体
+ * AssociateSecurityGroups返回参数结构体
  * @class
  */
-class ModifyModuleNetworkResponse extends  AbstractModel {
+class AssociateSecurityGroupsResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -7079,18 +8062,18 @@ is-arrears - String - 是否必填：否 - （过滤条件）按照 EIP 是否�
 }
 
 /**
- * ModifyModuleConfig返回参数结构体
+ * DescribeSecurityGroupPolicies请求参数结构体
  * @class
  */
-class ModifyModuleConfigResponse extends  AbstractModel {
+class DescribeSecurityGroupPoliciesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 安全组实例ID，例如：esg-33ocnj9n，可通过DescribeSecurityGroups获取。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.SecurityGroupId = null;
 
     }
 
@@ -7101,7 +8084,7 @@ class ModifyModuleConfigResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
 
     }
 }
@@ -7192,6 +8175,34 @@ class DescribeAddressQuotaResponse extends  AbstractModel {
                 obj.deserialize(params.QuotaSet[z]);
                 this.QuotaSet.push(obj);
             }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateSecurityGroupPolicies返回参数结构体
+ * @class
+ */
+class CreateSecurityGroupPoliciesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -7305,6 +8316,34 @@ class DescribeTaskStatusRequest extends  AbstractModel {
                 this.TaskSet.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DeleteSecurityGroup请求参数结构体
+ * @class
+ */
+class DeleteSecurityGroupRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 安全组实例ID，例如esg-33ocnj9n，可通过DescribeSecurityGroups获取。
+         * @type {string || null}
+         */
+        this.SecurityGroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
 
     }
 }
@@ -7529,6 +8568,49 @@ image-name: 镜像名称
 }
 
 /**
+ * DescribeSecurityGroupAssociationStatistics返回参数结构体
+ * @class
+ */
+class DescribeSecurityGroupAssociationStatisticsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 安全组关联实例统计。
+         * @type {Array.<SecurityGroupAssociationStatistics> || null}
+         */
+        this.SecurityGroupAssociationStatisticsSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SecurityGroupAssociationStatisticsSet) {
+            this.SecurityGroupAssociationStatisticsSet = new Array();
+            for (let z in params.SecurityGroupAssociationStatisticsSet) {
+                let obj = new SecurityGroupAssociationStatistics();
+                obj.deserialize(params.SecurityGroupAssociationStatisticsSet[z]);
+                this.SecurityGroupAssociationStatisticsSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 支持的操作系统类型，根据windows和Linux分类。
  * @class
  */
@@ -7710,6 +8792,27 @@ class CreateSecurityGroupRequest extends  AbstractModel {
                 obj.deserialize(params.Tags[z]);
                 this.Tags.push(obj);
             }
+        }
+
+    }
+}
+
+/**
+ * DescribeSecurityGroupLimits请求参数结构体
+ * @class
+ */
+class DescribeSecurityGroupLimitsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
 
     }
@@ -7980,6 +9083,67 @@ class AssignPrivateIpAddressesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeSecurityGroups请求参数结构体
+ * @class
+ */
+class DescribeSecurityGroupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 安全组实例ID，例如：esg-33ocnj9n，可通过DescribeSecurityGroups获取。每次请求的实例的上限为100。参数不支持同时指定SecurityGroupIds和Filters。
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+        /**
+         * 过滤条件，参数不支持同时指定SecurityGroupIds和Filters。
+security-group-id - String - （过滤条件）安全组ID。
+security-group-name - String - （过滤条件）安全组名称。
+tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。
+tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为20，最大值为100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * region维度的网络峰值信息
  * @class
  */
@@ -8094,32 +9258,18 @@ class ModifyAddressesBandwidthRequest extends  AbstractModel {
 }
 
 /**
- * 操作Action
+ * DeleteSecurityGroupPolicies返回参数结构体
  * @class
  */
-class OperatorAction extends  AbstractModel {
+class DeleteSecurityGroupPoliciesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 可执行操作
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Action = null;
-
-        /**
-         * 编码Code
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Code = null;
-
-        /**
-         * 具体信息
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Message = null;
+        this.RequestId = null;
 
     }
 
@@ -8130,9 +9280,7 @@ class OperatorAction extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Action = 'Action' in params ? params.Action : null;
-        this.Code = 'Code' in params ? params.Code : null;
-        this.Message = 'Message' in params ? params.Message : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -8626,6 +9774,57 @@ class AssignPrivateIpAddressesRequest extends  AbstractModel {
 }
 
 /**
+ * ResetInstancesPassword请求参数结构体
+ * @class
+ */
+class ResetInstancesPasswordRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待重置密码的实例ID列表。在单次请求的过程中，单个region下的请求实例数上限为100。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIdSet = null;
+
+        /**
+         * 新密码，Linux实例密码必须8到16位，至少包括两项[a-z，A-Z]、[0-9]和[( ) ~ ~ ! @ # $ % ^ & * - + = _ | { } [ ] : ; ' < > , . ? /]中的符号。密码不允许以/符号开头。
+Windows实例密码必须12到16位，至少包括三项[a-z]，[A-Z]，[0-9]和[( ) ~ ~ ! @ # $ % ^ & * - + = _ | { } [ ] : ; ' < > , . ? /]中的符号。密码不允许以/符号开头。
+如果实例即包含Linux实例又包含Windows实例，则密码复杂度限制按照Windows实例的限制。
+         * @type {string || null}
+         */
+        this.Password = null;
+
+        /**
+         * 是否强制关机，默认为false。
+         * @type {boolean || null}
+         */
+        this.ForceStop = null;
+
+        /**
+         * 待重置密码的实例的用户名，不得超过64个字符。若未指定用户名，则对于Linux而言，默认重置root用户的密码，对于Windows而言，默认重置administrator的密码。
+         * @type {string || null}
+         */
+        this.UserName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.ForceStop = 'ForceStop' in params ? params.ForceStop : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+
+    }
+}
+
+/**
  * ModifyImageAttribute请求参数结构体
  * @class
  */
@@ -8671,24 +9870,32 @@ class ModifyImageAttributeRequest extends  AbstractModel {
 }
 
 /**
- * ReleaseAddresses请求参数结构体
+ * 操作Action
  * @class
  */
-class ReleaseAddressesRequest extends  AbstractModel {
+class OperatorAction extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ECM 地域
+         * 可执行操作
          * @type {string || null}
          */
-        this.EcmRegion = null;
+        this.Action = null;
 
         /**
-         * 标识 EIP 的唯一 ID 列表。
-         * @type {Array.<string> || null}
+         * 编码Code
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
          */
-        this.AddressIds = null;
+        this.Code = null;
+
+        /**
+         * 具体信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Message = null;
 
     }
 
@@ -8699,8 +9906,9 @@ class ReleaseAddressesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EcmRegion = 'EcmRegion' in params ? params.EcmRegion : null;
-        this.AddressIds = 'AddressIds' in params ? params.AddressIds : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Message = 'Message' in params ? params.Message : null;
 
     }
 }
@@ -8826,6 +10034,34 @@ class RunSecurityServiceEnabled extends  AbstractModel {
 }
 
 /**
+ * DescribeSecurityGroupAssociationStatistics请求参数结构体
+ * @class
+ */
+class DescribeSecurityGroupAssociationStatisticsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 安全实例ID，例如esg-33ocnj9n，可通过DescribeSecurityGroups获取。
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+
+    }
+}
+
+/**
  * 国家信息
  * @class
  */
@@ -8856,6 +10092,41 @@ class Country extends  AbstractModel {
         }
         this.CountryId = 'CountryId' in params ? params.CountryId : null;
         this.CountryName = 'CountryName' in params ? params.CountryName : null;
+
+    }
+}
+
+/**
+ * DisassociateSecurityGroups请求参数结构体
+ * @class
+ */
+class DisassociateSecurityGroupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 要解绑的安全组ID，类似esg-efil73jd，只支持解绑单个安全组。
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
+        /**
+         * 被解绑的实例ID，类似ein-lesecurk，支持指定多个实例 。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -9090,6 +10361,46 @@ class ModifyModuleImageRequest extends  AbstractModel {
 }
 
 /**
+ * CreateSecurityGroupPolicies请求参数结构体
+ * @class
+ */
+class CreateSecurityGroupPoliciesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 安全组实例ID，例如esg-33ocnj9n，可通过DescribeSecurityGroups获取。
+         * @type {string || null}
+         */
+        this.SecurityGroupId = null;
+
+        /**
+         * 安全组规则集合。
+         * @type {SecurityGroupPolicySet || null}
+         */
+        this.SecurityGroupPolicySet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+
+        if (params.SecurityGroupPolicySet) {
+            let obj = new SecurityGroupPolicySet();
+            obj.deserialize(params.SecurityGroupPolicySet)
+            this.SecurityGroupPolicySet = obj;
+        }
+
+    }
+}
+
+/**
  * 云监控服务
  * @class
  */
@@ -9302,6 +10613,12 @@ DELETEFAILED：删除失败
          */
         this.CloseIpDirect = null;
 
+        /**
+         * 默认安全组id列表
+         * @type {Array.<string> || null}
+         */
+        this.SecurityGroupIds = null;
+
     }
 
     /**
@@ -9340,6 +10657,7 @@ DELETEFAILED：删除失败
             }
         }
         this.CloseIpDirect = 'CloseIpDirect' in params ? params.CloseIpDirect : null;
+        this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
 
     }
 }
@@ -9449,37 +10767,73 @@ class DescribeBaseOverviewResponse extends  AbstractModel {
     }
 }
 
+/**
+ * DisassociateSecurityGroups返回参数结构体
+ * @class
+ */
+class DisassociateSecurityGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
 module.exports = {
     RunEIPDirectServiceEnabled: RunEIPDirectServiceEnabled,
     DescribeTaskResultResponse: DescribeTaskResultResponse,
     Ipv6Address: Ipv6Address,
     DescribePeakBaseOverviewRequest: DescribePeakBaseOverviewRequest,
+    SecurityGroupAssociationStatistics: SecurityGroupAssociationStatistics,
+    SecurityGroupLimitSet: SecurityGroupLimitSet,
+    DisassociateAddressResponse: DisassociateAddressResponse,
     CreateNetworkInterfaceRequest: CreateNetworkInterfaceRequest,
+    InstanceStatistic: InstanceStatistic,
     DescribeInstancesDeniedActionsRequest: DescribeInstancesDeniedActionsRequest,
+    ModifyModuleSecurityGroupsRequest: ModifyModuleSecurityGroupsRequest,
     Internet: Internet,
     DescribeModuleResponse: DescribeModuleResponse,
+    DeleteSecurityGroupPoliciesRequest: DeleteSecurityGroupPoliciesRequest,
     ImageTask: ImageTask,
     Province: Province,
     ImportCustomImageResponse: ImportCustomImageResponse,
+    ModifyModuleConfigResponse: ModifyModuleConfigResponse,
     ModifyModuleNameResponse: ModifyModuleNameResponse,
     DescribeNetworkInterfacesRequest: DescribeNetworkInterfacesRequest,
     DescribeSubnetsRequest: DescribeSubnetsRequest,
-    CreateSubnetRequest: CreateSubnetRequest,
-    DeleteModuleResponse: DeleteModuleResponse,
+    DescribeImportImageOsResponse: DescribeImportImageOsResponse,
     EipQuota: EipQuota,
     DeleteSubnetResponse: DeleteSubnetResponse,
     ModifyAddressesBandwidthResponse: ModifyAddressesBandwidthResponse,
     DescribeSubnetsResponse: DescribeSubnetsResponse,
     RunInstancesRequest: RunInstancesRequest,
+    ReleaseAddressesRequest: ReleaseAddressesRequest,
     DescribeInstancesResponse: DescribeInstancesResponse,
     NetworkInterface: NetworkInterface,
-    ResetInstancesPasswordResponse: ResetInstancesPasswordResponse,
+    ModifyModuleSecurityGroupsResponse: ModifyModuleSecurityGroupsResponse,
     SrcImage: SrcImage,
     InstanceTypeConfig: InstanceTypeConfig,
     DescribeNodeResponse: DescribeNodeResponse,
     RemovePrivateIpAddressesResponse: RemovePrivateIpAddressesResponse,
     DescribeDefaultSubnetResponse: DescribeDefaultSubnetResponse,
     VpcInfo: VpcInfo,
+    ReplaceSecurityGroupPolicyRequest: ReplaceSecurityGroupPolicyRequest,
     DescribeCustomImageTaskResponse: DescribeCustomImageTaskResponse,
     SecurityGroup: SecurityGroup,
     DeleteSubnetRequest: DeleteSubnetRequest,
@@ -9490,6 +10844,7 @@ module.exports = {
     AllocateAddressesRequest: AllocateAddressesRequest,
     DeleteNetworkInterfaceRequest: DeleteNetworkInterfaceRequest,
     RemovePrivateIpAddressesRequest: RemovePrivateIpAddressesRequest,
+    SecurityGroupPolicy: SecurityGroupPolicy,
     ModifyInstancesAttributeRequest: ModifyInstancesAttributeRequest,
     InstanceFamilyTypeConfig: InstanceFamilyTypeConfig,
     ResetInstancesResponse: ResetInstancesResponse,
@@ -9499,9 +10854,10 @@ module.exports = {
     ZoneInfo: ZoneInfo,
     DescribeNodeRequest: DescribeNodeRequest,
     CreateSubnetResponse: CreateSubnetResponse,
-    ResetInstancesPasswordRequest: ResetInstancesPasswordRequest,
+    DescribeSecurityGroupPoliciesResponse: DescribeSecurityGroupPoliciesResponse,
     ModifyModuleConfigRequest: ModifyModuleConfigRequest,
     Area: Area,
+    ModifySecurityGroupPoliciesRequest: ModifySecurityGroupPoliciesRequest,
     DescribeConfigRequest: DescribeConfigRequest,
     DescribeInstanceVncUrlRequest: DescribeInstanceVncUrlRequest,
     NetworkStorageRange: NetworkStorageRange,
@@ -9517,12 +10873,15 @@ module.exports = {
     DisassociateAddressRequest: DisassociateAddressRequest,
     TaskOutput: TaskOutput,
     ModuleCounter: ModuleCounter,
+    ReplaceSecurityGroupPolicyResponse: ReplaceSecurityGroupPolicyResponse,
     ZoneInstanceCountISP: ZoneInstanceCountISP,
     TaskInput: TaskInput,
     StartInstancesRequest: StartInstancesRequest,
     Tag: Tag,
+    CreateSubnetRequest: CreateSubnetRequest,
     DescribeDefaultSubnetRequest: DescribeDefaultSubnetRequest,
     ResetInstancesMaxBandwidthResponse: ResetInstancesMaxBandwidthResponse,
+    DeleteSecurityGroupResponse: DeleteSecurityGroupResponse,
     DeleteVpcRequest: DeleteVpcRequest,
     CreateNetworkInterfaceResponse: CreateNetworkInterfaceResponse,
     Node: Node,
@@ -9530,22 +10889,30 @@ module.exports = {
     DescribeAddressQuotaRequest: DescribeAddressQuotaRequest,
     DescribeInstanceTypeConfigResponse: DescribeInstanceTypeConfigResponse,
     NodeInstanceNum: NodeInstanceNum,
+    DescribeSecurityGroupLimitsResponse: DescribeSecurityGroupLimitsResponse,
     DescribeAddressesResponse: DescribeAddressesResponse,
+    SecurityGroupPolicySet: SecurityGroupPolicySet,
+    DescribeSecurityGroupsResponse: DescribeSecurityGroupsResponse,
     ImportImageRequest: ImportImageRequest,
     DetachNetworkInterfaceResponse: DetachNetworkInterfaceResponse,
     InstanceFamilyConfig: InstanceFamilyConfig,
     DeleteModuleRequest: DeleteModuleRequest,
-    DescribeVpcsRequest: DescribeVpcsRequest,
+    CreateImageResponse: CreateImageResponse,
+    ModifyVpcAttributeRequest: ModifyVpcAttributeRequest,
     ResetInstancesMaxBandwidthRequest: ResetInstancesMaxBandwidthRequest,
     OsVersion: OsVersion,
+    ServiceTemplateSpecification: ServiceTemplateSpecification,
     PeakBase: PeakBase,
+    ResetInstancesPasswordResponse: ResetInstancesPasswordResponse,
     ModifyModuleNetworkRequest: ModifyModuleNetworkRequest,
     Image: Image,
     TagSpecification: TagSpecification,
     DetachNetworkInterfaceRequest: DetachNetworkInterfaceRequest,
+    AddressTemplateSpecification: AddressTemplateSpecification,
     DescribeConfigResponse: DescribeConfigResponse,
+    ModifyModuleNetworkResponse: ModifyModuleNetworkResponse,
     ModifyDefaultSubnetResponse: ModifyDefaultSubnetResponse,
-    DescribeImportImageOsResponse: DescribeImportImageOsResponse,
+    AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
     DescribeModuleDetailResponse: DescribeModuleDetailResponse,
     StopInstancesRequest: StopInstancesRequest,
     Subnet: Subnet,
@@ -9554,23 +10921,25 @@ module.exports = {
     ImageUrl: ImageUrl,
     ISP: ISP,
     PrivateIpAddressSpecification: PrivateIpAddressSpecification,
+    ModifySecurityGroupAttributeResponse: ModifySecurityGroupAttributeResponse,
     ISPCounter: ISPCounter,
     MigratePrivateIpAddressResponse: MigratePrivateIpAddressResponse,
     CreateImageRequest: CreateImageRequest,
     Instance: Instance,
     EnhancedService: EnhancedService,
     DescribeInstanceVncUrlResponse: DescribeInstanceVncUrlResponse,
-    DisassociateAddressResponse: DisassociateAddressResponse,
+    DeleteModuleResponse: DeleteModuleResponse,
     DescribeInstanceTypeConfigRequest: DescribeInstanceTypeConfigRequest,
     ImportCustomImageRequest: ImportCustomImageRequest,
     DescribeModuleDetailRequest: DescribeModuleDetailRequest,
     AssociateAddressRequest: AssociateAddressRequest,
-    ModifyVpcAttributeRequest: ModifyVpcAttributeRequest,
+    ModifySecurityGroupAttributeRequest: ModifySecurityGroupAttributeRequest,
+    ModifySecurityGroupPoliciesResponse: ModifySecurityGroupPoliciesResponse,
     DescribePeakNetworkOverviewResponse: DescribePeakNetworkOverviewResponse,
     AttachNetworkInterfaceResponse: AttachNetworkInterfaceResponse,
-    CreateImageResponse: CreateImageResponse,
+    DescribeVpcsRequest: DescribeVpcsRequest,
     DescribeBaseOverviewRequest: DescribeBaseOverviewRequest,
-    ModifyModuleNetworkResponse: ModifyModuleNetworkResponse,
+    AssociateSecurityGroupsResponse: AssociateSecurityGroupsResponse,
     DiskInfo: DiskInfo,
     DescribeImportImageOsRequest: DescribeImportImageOsRequest,
     NetworkInterfaceAttachment: NetworkInterfaceAttachment,
@@ -9586,22 +10955,26 @@ module.exports = {
     PublicIPAddressInfo: PublicIPAddressInfo,
     TerminateInstancesResponse: TerminateInstancesResponse,
     DescribeAddressesRequest: DescribeAddressesRequest,
-    ModifyModuleConfigResponse: ModifyModuleConfigResponse,
+    DescribeSecurityGroupPoliciesRequest: DescribeSecurityGroupPoliciesRequest,
     MigrateNetworkInterfaceRequest: MigrateNetworkInterfaceRequest,
     DescribeAddressQuotaResponse: DescribeAddressQuotaResponse,
+    CreateSecurityGroupPoliciesResponse: CreateSecurityGroupPoliciesResponse,
     CreateSecurityGroupResponse: CreateSecurityGroupResponse,
     ZoneInstanceInfo: ZoneInstanceInfo,
     DescribeTaskStatusRequest: DescribeTaskStatusRequest,
+    DeleteSecurityGroupRequest: DeleteSecurityGroupRequest,
     ModifyAddressAttributeRequest: ModifyAddressAttributeRequest,
     ModifyModuleImageResponse: ModifyModuleImageResponse,
     ResetInstancesRequest: ResetInstancesRequest,
     PeakNetwork: PeakNetwork,
     DescribeCustomImageTaskRequest: DescribeCustomImageTaskRequest,
+    DescribeSecurityGroupAssociationStatisticsResponse: DescribeSecurityGroupAssociationStatisticsResponse,
     ImageOsList: ImageOsList,
     InstanceOperator: InstanceOperator,
     ModifyAddressAttributeResponse: ModifyAddressAttributeResponse,
     ImportImageResponse: ImportImageResponse,
     CreateSecurityGroupRequest: CreateSecurityGroupRequest,
+    DescribeSecurityGroupLimitsRequest: DescribeSecurityGroupLimitsRequest,
     City: City,
     PrivateIPAddressInfo: PrivateIPAddressInfo,
     TerminateInstancesRequest: TerminateInstancesRequest,
@@ -9609,10 +10982,11 @@ module.exports = {
     SimpleModule: SimpleModule,
     DescribePeakNetworkOverviewRequest: DescribePeakNetworkOverviewRequest,
     AssignPrivateIpAddressesResponse: AssignPrivateIpAddressesResponse,
+    DescribeSecurityGroupsRequest: DescribeSecurityGroupsRequest,
     PeakNetworkRegionInfo: PeakNetworkRegionInfo,
     RebootInstancesResponse: RebootInstancesResponse,
     ModifyAddressesBandwidthRequest: ModifyAddressesBandwidthRequest,
-    OperatorAction: OperatorAction,
+    DeleteSecurityGroupPoliciesResponse: DeleteSecurityGroupPoliciesResponse,
     PeakFamilyInfo: PeakFamilyInfo,
     DescribePeakBaseOverviewResponse: DescribePeakBaseOverviewResponse,
     ModifyImageAttributeResponse: ModifyImageAttributeResponse,
@@ -9622,21 +10996,26 @@ module.exports = {
     Address: Address,
     DescribeNetworkInterfacesResponse: DescribeNetworkInterfacesResponse,
     AssignPrivateIpAddressesRequest: AssignPrivateIpAddressesRequest,
+    ResetInstancesPasswordRequest: ResetInstancesPasswordRequest,
     ModifyImageAttributeRequest: ModifyImageAttributeRequest,
-    ReleaseAddressesRequest: ReleaseAddressesRequest,
+    OperatorAction: OperatorAction,
     CreateVpcRequest: CreateVpcRequest,
     RunSecurityServiceEnabled: RunSecurityServiceEnabled,
+    DescribeSecurityGroupAssociationStatisticsRequest: DescribeSecurityGroupAssociationStatisticsRequest,
     Country: Country,
+    DisassociateSecurityGroupsRequest: DisassociateSecurityGroupsRequest,
     ModifySubnetAttributeRequest: ModifySubnetAttributeRequest,
     AllocateAddressesResponse: AllocateAddressesResponse,
     AttachNetworkInterfaceRequest: AttachNetworkInterfaceRequest,
     ModuleItem: ModuleItem,
     ModifyModuleImageRequest: ModifyModuleImageRequest,
+    CreateSecurityGroupPoliciesRequest: CreateSecurityGroupPoliciesRequest,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,
     MigrateNetworkInterfaceResponse: MigrateNetworkInterfaceResponse,
     DescribeVpcsResponse: DescribeVpcsResponse,
     DeleteImageRequest: DeleteImageRequest,
     Module: Module,
     DescribeBaseOverviewResponse: DescribeBaseOverviewResponse,
+    DisassociateSecurityGroupsResponse: DisassociateSecurityGroupsResponse,
 
 }
