@@ -504,84 +504,25 @@ class CreateServiceTemplateRequest extends  AbstractModel {
 }
 
 /**
- * IKE配置（Internet Key Exchange，因特网密钥交换），IKE具有一套自我保护机制，用户配置网络安全协议
+ * DescribeIp6TranslatorQuota返回参数结构体
  * @class
  */
-class IKEOptionsSpecification extends  AbstractModel {
+class DescribeIp6TranslatorQuotaResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 加密算法，可选值：'3DES-CBC', 'AES-CBC-128', 'AES-CBS-192', 'AES-CBC-256', 'DES-CBC'，默认为3DES-CBC
-         * @type {string || null}
+         * 账户在指定地域的IPV6转换实例及规则配额信息
+QUOTAID属性是TOTAL_TRANSLATOR_QUOTA，表示账户在指定地域的IPV6转换实例配额信息；QUOTAID属性是IPV6转换实例唯一ID（形如ip6-xxxxxxxx），表示账户在该转换实例允许创建的转换规则配额
+         * @type {Array.<Quota> || null}
          */
-        this.PropoEncryAlgorithm = null;
+        this.QuotaSet = null;
 
         /**
-         * 认证算法：可选值：'MD5', 'SHA1'，默认为MD5
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.PropoAuthenAlgorithm = null;
-
-        /**
-         * 协商模式：可选值：'AGGRESSIVE', 'MAIN'，默认为MAIN
-         * @type {string || null}
-         */
-        this.ExchangeMode = null;
-
-        /**
-         * 本端标识类型：可选值：'ADDRESS', 'FQDN'，默认为ADDRESS
-         * @type {string || null}
-         */
-        this.LocalIdentity = null;
-
-        /**
-         * 对端标识类型：可选值：'ADDRESS', 'FQDN'，默认为ADDRESS
-         * @type {string || null}
-         */
-        this.RemoteIdentity = null;
-
-        /**
-         * 本端标识，当LocalIdentity选为ADDRESS时，LocalAddress必填。localAddress默认为vpn网关公网IP
-         * @type {string || null}
-         */
-        this.LocalAddress = null;
-
-        /**
-         * 对端标识，当RemoteIdentity选为ADDRESS时，RemoteAddress必填
-         * @type {string || null}
-         */
-        this.RemoteAddress = null;
-
-        /**
-         * 本端标识，当LocalIdentity选为FQDN时，LocalFqdnName必填
-         * @type {string || null}
-         */
-        this.LocalFqdnName = null;
-
-        /**
-         * 对端标识，当remoteIdentity选为FQDN时，RemoteFqdnName必填
-         * @type {string || null}
-         */
-        this.RemoteFqdnName = null;
-
-        /**
-         * DH group，指定IKE交换密钥时使用的DH组，可选值：'GROUP1', 'GROUP2', 'GROUP5', 'GROUP14', 'GROUP24'，
-         * @type {string || null}
-         */
-        this.DhGroupName = null;
-
-        /**
-         * IKE SA Lifetime，单位：秒，设置IKE SA的生存周期，取值范围：60-604800
-         * @type {number || null}
-         */
-        this.IKESaLifetimeSeconds = null;
-
-        /**
-         * IKE版本
-         * @type {string || null}
-         */
-        this.IKEVersion = null;
+        this.RequestId = null;
 
     }
 
@@ -592,18 +533,16 @@ class IKEOptionsSpecification extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PropoEncryAlgorithm = 'PropoEncryAlgorithm' in params ? params.PropoEncryAlgorithm : null;
-        this.PropoAuthenAlgorithm = 'PropoAuthenAlgorithm' in params ? params.PropoAuthenAlgorithm : null;
-        this.ExchangeMode = 'ExchangeMode' in params ? params.ExchangeMode : null;
-        this.LocalIdentity = 'LocalIdentity' in params ? params.LocalIdentity : null;
-        this.RemoteIdentity = 'RemoteIdentity' in params ? params.RemoteIdentity : null;
-        this.LocalAddress = 'LocalAddress' in params ? params.LocalAddress : null;
-        this.RemoteAddress = 'RemoteAddress' in params ? params.RemoteAddress : null;
-        this.LocalFqdnName = 'LocalFqdnName' in params ? params.LocalFqdnName : null;
-        this.RemoteFqdnName = 'RemoteFqdnName' in params ? params.RemoteFqdnName : null;
-        this.DhGroupName = 'DhGroupName' in params ? params.DhGroupName : null;
-        this.IKESaLifetimeSeconds = 'IKESaLifetimeSeconds' in params ? params.IKESaLifetimeSeconds : null;
-        this.IKEVersion = 'IKEVersion' in params ? params.IKEVersion : null;
+
+        if (params.QuotaSet) {
+            this.QuotaSet = new Array();
+            for (let z in params.QuotaSet) {
+                let obj = new Quota();
+                obj.deserialize(params.QuotaSet[z]);
+                this.QuotaSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1854,25 +1793,84 @@ class AddressTemplate extends  AbstractModel {
 }
 
 /**
- * DescribeIp6TranslatorQuota返回参数结构体
+ * IKE配置（Internet Key Exchange，因特网密钥交换），IKE具有一套自我保护机制，用户配置网络安全协议
  * @class
  */
-class DescribeIp6TranslatorQuotaResponse extends  AbstractModel {
+class IKEOptionsSpecification extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 账户在指定地域的IPV6转换实例及规则配额信息
-QUOTAID属性是TOTAL_TRANSLATOR_QUOTA，表示账户在指定地域的IPV6转换实例配额信息；QUOTAID属性是IPV6转换实例唯一ID（形如ip6-xxxxxxxx），表示账户在该转换实例允许创建的转换规则配额
-         * @type {Array.<Quota> || null}
-         */
-        this.QuotaSet = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 加密算法，可选值：'3DES-CBC', 'AES-CBC-128', 'AES-CBS-192', 'AES-CBC-256', 'DES-CBC'，默认为3DES-CBC
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.PropoEncryAlgorithm = null;
+
+        /**
+         * 认证算法：可选值：'MD5', 'SHA1'，默认为MD5
+         * @type {string || null}
+         */
+        this.PropoAuthenAlgorithm = null;
+
+        /**
+         * 协商模式：可选值：'AGGRESSIVE', 'MAIN'，默认为MAIN
+         * @type {string || null}
+         */
+        this.ExchangeMode = null;
+
+        /**
+         * 本端标识类型：可选值：'ADDRESS', 'FQDN'，默认为ADDRESS
+         * @type {string || null}
+         */
+        this.LocalIdentity = null;
+
+        /**
+         * 对端标识类型：可选值：'ADDRESS', 'FQDN'，默认为ADDRESS
+         * @type {string || null}
+         */
+        this.RemoteIdentity = null;
+
+        /**
+         * 本端标识，当LocalIdentity选为ADDRESS时，LocalAddress必填。localAddress默认为vpn网关公网IP
+         * @type {string || null}
+         */
+        this.LocalAddress = null;
+
+        /**
+         * 对端标识，当RemoteIdentity选为ADDRESS时，RemoteAddress必填
+         * @type {string || null}
+         */
+        this.RemoteAddress = null;
+
+        /**
+         * 本端标识，当LocalIdentity选为FQDN时，LocalFqdnName必填
+         * @type {string || null}
+         */
+        this.LocalFqdnName = null;
+
+        /**
+         * 对端标识，当remoteIdentity选为FQDN时，RemoteFqdnName必填
+         * @type {string || null}
+         */
+        this.RemoteFqdnName = null;
+
+        /**
+         * DH group，指定IKE交换密钥时使用的DH组，可选值：'GROUP1', 'GROUP2', 'GROUP5', 'GROUP14', 'GROUP24'，
+         * @type {string || null}
+         */
+        this.DhGroupName = null;
+
+        /**
+         * IKE SA Lifetime，单位：秒，设置IKE SA的生存周期，取值范围：60-604800
+         * @type {number || null}
+         */
+        this.IKESaLifetimeSeconds = null;
+
+        /**
+         * IKE版本
+         * @type {string || null}
+         */
+        this.IKEVersion = null;
 
     }
 
@@ -1883,16 +1881,18 @@ QUOTAID属性是TOTAL_TRANSLATOR_QUOTA，表示账户在指定地域的IPV6转�
         if (!params) {
             return;
         }
-
-        if (params.QuotaSet) {
-            this.QuotaSet = new Array();
-            for (let z in params.QuotaSet) {
-                let obj = new Quota();
-                obj.deserialize(params.QuotaSet[z]);
-                this.QuotaSet.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.PropoEncryAlgorithm = 'PropoEncryAlgorithm' in params ? params.PropoEncryAlgorithm : null;
+        this.PropoAuthenAlgorithm = 'PropoAuthenAlgorithm' in params ? params.PropoAuthenAlgorithm : null;
+        this.ExchangeMode = 'ExchangeMode' in params ? params.ExchangeMode : null;
+        this.LocalIdentity = 'LocalIdentity' in params ? params.LocalIdentity : null;
+        this.RemoteIdentity = 'RemoteIdentity' in params ? params.RemoteIdentity : null;
+        this.LocalAddress = 'LocalAddress' in params ? params.LocalAddress : null;
+        this.RemoteAddress = 'RemoteAddress' in params ? params.RemoteAddress : null;
+        this.LocalFqdnName = 'LocalFqdnName' in params ? params.LocalFqdnName : null;
+        this.RemoteFqdnName = 'RemoteFqdnName' in params ? params.RemoteFqdnName : null;
+        this.DhGroupName = 'DhGroupName' in params ? params.DhGroupName : null;
+        this.IKESaLifetimeSeconds = 'IKESaLifetimeSeconds' in params ? params.IKESaLifetimeSeconds : null;
+        this.IKEVersion = 'IKEVersion' in params ? params.IKEVersion : null;
 
     }
 }
@@ -2142,13 +2142,13 @@ class AssociateNatGatewayAddressRequest extends  AbstractModel {
         this.AddressCount = null;
 
         /**
-         * 绑定NAT网关的弹性IP数组，其中AddressCount和PublicAddresses至少传递一个。。
+         * 绑定NAT网关的弹性IP数组，其中AddressCount和PublicAddresses至少传递一个。
          * @type {Array.<string> || null}
          */
         this.PublicIpAddresses = null;
 
         /**
-         * 弹性IP可以区，自动分配弹性IP时传递。
+         * 弹性IP可用区，自动分配弹性IP时传递。
          * @type {string || null}
          */
         this.Zone = null;
@@ -3783,6 +3783,139 @@ class DeleteRoutesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeCrossBorderCompliance请求参数结构体
+ * @class
+ */
+class DescribeCrossBorderComplianceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * （精确匹配）服务商，可选值：`UNICOM`。
+         * @type {string || null}
+         */
+        this.ServiceProvider = null;
+
+        /**
+         * （精确匹配）合规化审批单`ID`。
+         * @type {number || null}
+         */
+        this.ComplianceId = null;
+
+        /**
+         * （模糊查询）公司名称。
+         * @type {string || null}
+         */
+        this.Company = null;
+
+        /**
+         * （精确匹配）统一社会信用代码。
+         * @type {string || null}
+         */
+        this.UniformSocialCreditCode = null;
+
+        /**
+         * （模糊查询）法人。
+         * @type {string || null}
+         */
+        this.LegalPerson = null;
+
+        /**
+         * （模糊查询）发证机关。
+         * @type {string || null}
+         */
+        this.IssuingAuthority = null;
+
+        /**
+         * （模糊查询）营业执照住所。
+         * @type {string || null}
+         */
+        this.BusinessAddress = null;
+
+        /**
+         * （精确匹配）邮编。
+         * @type {number || null}
+         */
+        this.PostCode = null;
+
+        /**
+         * （模糊查询）经办人。
+         * @type {string || null}
+         */
+        this.Manager = null;
+
+        /**
+         * （精确查询）经办人身份证号。
+         * @type {string || null}
+         */
+        this.ManagerId = null;
+
+        /**
+         * （模糊查询）经办人身份证地址。
+         * @type {string || null}
+         */
+        this.ManagerAddress = null;
+
+        /**
+         * （精确匹配）经办人联系电话。
+         * @type {string || null}
+         */
+        this.ManagerTelephone = null;
+
+        /**
+         * （精确匹配）电子邮箱。
+         * @type {string || null}
+         */
+        this.Email = null;
+
+        /**
+         * （精确匹配）服务开始时间。
+         * @type {string || null}
+         */
+        this.ServiceStartDate = null;
+
+        /**
+         * （精确匹配）服务开始时间。
+         * @type {string || null}
+         */
+        this.ServiceEndDate = null;
+
+        /**
+         * （精确匹配）状态。待审批：`PENDING`，通过：`APPROVED `，拒绝：`DENY`。
+         * @type {string || null}
+         */
+        this.State = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServiceProvider = 'ServiceProvider' in params ? params.ServiceProvider : null;
+        this.ComplianceId = 'ComplianceId' in params ? params.ComplianceId : null;
+        this.Company = 'Company' in params ? params.Company : null;
+        this.UniformSocialCreditCode = 'UniformSocialCreditCode' in params ? params.UniformSocialCreditCode : null;
+        this.LegalPerson = 'LegalPerson' in params ? params.LegalPerson : null;
+        this.IssuingAuthority = 'IssuingAuthority' in params ? params.IssuingAuthority : null;
+        this.BusinessAddress = 'BusinessAddress' in params ? params.BusinessAddress : null;
+        this.PostCode = 'PostCode' in params ? params.PostCode : null;
+        this.Manager = 'Manager' in params ? params.Manager : null;
+        this.ManagerId = 'ManagerId' in params ? params.ManagerId : null;
+        this.ManagerAddress = 'ManagerAddress' in params ? params.ManagerAddress : null;
+        this.ManagerTelephone = 'ManagerTelephone' in params ? params.ManagerTelephone : null;
+        this.Email = 'Email' in params ? params.Email : null;
+        this.ServiceStartDate = 'ServiceStartDate' in params ? params.ServiceStartDate : null;
+        this.ServiceEndDate = 'ServiceEndDate' in params ? params.ServiceEndDate : null;
+        this.State = 'State' in params ? params.State : null;
+
+    }
+}
+
+/**
  * DescribeSecurityGroupAssociationStatistics返回参数结构体
  * @class
  */
@@ -4537,6 +4670,87 @@ class DescribeDirectConnectGatewaysResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyVpnConnectionAttribute请求参数结构体
+ * @class
+ */
+class ModifyVpnConnectionAttributeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * VPN通道实例ID。形如：vpnx-f49l6u0z。
+         * @type {string || null}
+         */
+        this.VpnConnectionId = null;
+
+        /**
+         * VPN通道名称，可任意命名，但不得超过60个字符。
+         * @type {string || null}
+         */
+        this.VpnConnectionName = null;
+
+        /**
+         * 预共享密钥。
+         * @type {string || null}
+         */
+        this.PreShareKey = null;
+
+        /**
+         * SPD策略组，例如：{"10.0.0.5/24":["172.123.10.5/16"]}，10.0.0.5/24是vpc内网段172.123.10.5/16是IDC网段。用户指定VPC内哪些网段可以和您IDC中哪些网段通信。
+         * @type {Array.<SecurityPolicyDatabase> || null}
+         */
+        this.SecurityPolicyDatabases = null;
+
+        /**
+         * IKE配置（Internet Key Exchange，因特网密钥交换），IKE具有一套自我保护机制，用户配置网络安全协议。
+         * @type {IKEOptionsSpecification || null}
+         */
+        this.IKEOptionsSpecification = null;
+
+        /**
+         * IPSec配置，腾讯云提供IPSec安全会话设置。
+         * @type {IPSECOptionsSpecification || null}
+         */
+        this.IPSECOptionsSpecification = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpnConnectionId = 'VpnConnectionId' in params ? params.VpnConnectionId : null;
+        this.VpnConnectionName = 'VpnConnectionName' in params ? params.VpnConnectionName : null;
+        this.PreShareKey = 'PreShareKey' in params ? params.PreShareKey : null;
+
+        if (params.SecurityPolicyDatabases) {
+            this.SecurityPolicyDatabases = new Array();
+            for (let z in params.SecurityPolicyDatabases) {
+                let obj = new SecurityPolicyDatabase();
+                obj.deserialize(params.SecurityPolicyDatabases[z]);
+                this.SecurityPolicyDatabases.push(obj);
+            }
+        }
+
+        if (params.IKEOptionsSpecification) {
+            let obj = new IKEOptionsSpecification();
+            obj.deserialize(params.IKEOptionsSpecification)
+            this.IKEOptionsSpecification = obj;
+        }
+
+        if (params.IPSECOptionsSpecification) {
+            let obj = new IPSECOptionsSpecification();
+            obj.deserialize(params.IPSECOptionsSpecification)
+            this.IPSECOptionsSpecification = obj;
+        }
 
     }
 }
@@ -11357,6 +11571,56 @@ class HaVipDisassociateAddressIpRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeCrossBorderCompliance返回参数结构体
+ * @class
+ */
+class DescribeCrossBorderComplianceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 合规化审批单列表。
+         * @type {Array.<CrossBorderCompliance> || null}
+         */
+        this.CrossBorderComplianceSet = null;
+
+        /**
+         * 合规化审批单总数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.CrossBorderComplianceSet) {
+            this.CrossBorderComplianceSet = new Array();
+            for (let z in params.CrossBorderComplianceSet) {
+                let obj = new CrossBorderCompliance();
+                obj.deserialize(params.CrossBorderComplianceSet[z]);
+                this.CrossBorderComplianceSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyVpnGatewayAttribute返回参数结构体
  * @class
  */
@@ -13366,48 +13630,144 @@ AnycastEIP是否用于绑定负载均衡。
 }
 
 /**
- * ModifyVpnConnectionAttribute请求参数结构体
+ * 跨境专线合规化审批单
  * @class
  */
-class ModifyVpnConnectionAttributeRequest extends  AbstractModel {
+class CrossBorderCompliance extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * VPN通道实例ID。形如：vpnx-f49l6u0z。
+         * 服务商，可选值：`UNICOM`。
          * @type {string || null}
          */
-        this.VpnConnectionId = null;
+        this.ServiceProvider = null;
 
         /**
-         * VPN通道名称，可任意命名，但不得超过60个字符。
+         * 合规化审批单`ID`。
+         * @type {number || null}
+         */
+        this.ComplianceId = null;
+
+        /**
+         * 公司全称。
          * @type {string || null}
          */
-        this.VpnConnectionName = null;
+        this.Company = null;
 
         /**
-         * 预共享密钥。
+         * 统一社会信用代码。
          * @type {string || null}
          */
-        this.PreShareKey = null;
+        this.UniformSocialCreditCode = null;
 
         /**
-         * SPD策略组，例如：{"10.0.0.5/24":["172.123.10.5/16"]}，10.0.0.5/24是vpc内网段172.123.10.5/16是IDC网段。用户指定VPC内哪些网段可以和您IDC中哪些网段通信。
-         * @type {Array.<SecurityPolicyDatabase> || null}
+         * 法人。
+         * @type {string || null}
          */
-        this.SecurityPolicyDatabases = null;
+        this.LegalPerson = null;
 
         /**
-         * IKE配置（Internet Key Exchange，因特网密钥交换），IKE具有一套自我保护机制，用户配置网络安全协议。
-         * @type {IKEOptionsSpecification || null}
+         * 发证机关。
+         * @type {string || null}
          */
-        this.IKEOptionsSpecification = null;
+        this.IssuingAuthority = null;
 
         /**
-         * IPSec配置，腾讯云提供IPSec安全会话设置。
-         * @type {IPSECOptionsSpecification || null}
+         * 营业执照。
+         * @type {string || null}
          */
-        this.IPSECOptionsSpecification = null;
+        this.BusinessLicense = null;
+
+        /**
+         * 营业执照住所。
+         * @type {string || null}
+         */
+        this.BusinessAddress = null;
+
+        /**
+         * 邮编。
+         * @type {number || null}
+         */
+        this.PostCode = null;
+
+        /**
+         * 经办人。
+         * @type {string || null}
+         */
+        this.Manager = null;
+
+        /**
+         * 经办人身份证号。
+         * @type {string || null}
+         */
+        this.ManagerId = null;
+
+        /**
+         * 经办人身份证。
+         * @type {string || null}
+         */
+        this.ManagerIdCard = null;
+
+        /**
+         * 经办人身份证地址。
+         * @type {string || null}
+         */
+        this.ManagerAddress = null;
+
+        /**
+         * 经办人联系电话。
+         * @type {string || null}
+         */
+        this.ManagerTelephone = null;
+
+        /**
+         * 电子邮箱。
+         * @type {string || null}
+         */
+        this.Email = null;
+
+        /**
+         * 跨境专线服务受理单。
+         * @type {string || null}
+         */
+        this.ServiceHandlingForm = null;
+
+        /**
+         * 授权函。
+         * @type {string || null}
+         */
+        this.AuthorizationLetter = null;
+
+        /**
+         * 信息安全承诺书。
+         * @type {string || null}
+         */
+        this.SafetyCommitment = null;
+
+        /**
+         * 服务开始时间。
+         * @type {string || null}
+         */
+        this.ServiceStartDate = null;
+
+        /**
+         * 服务截止时间。
+         * @type {string || null}
+         */
+        this.ServiceEndDate = null;
+
+        /**
+         * 状态。待审批：`PENDING`，已通过：`APPROVED`，已拒绝：`DENY`。
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * 审批单创建时间。
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
 
     }
 
@@ -13418,30 +13778,28 @@ class ModifyVpnConnectionAttributeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VpnConnectionId = 'VpnConnectionId' in params ? params.VpnConnectionId : null;
-        this.VpnConnectionName = 'VpnConnectionName' in params ? params.VpnConnectionName : null;
-        this.PreShareKey = 'PreShareKey' in params ? params.PreShareKey : null;
-
-        if (params.SecurityPolicyDatabases) {
-            this.SecurityPolicyDatabases = new Array();
-            for (let z in params.SecurityPolicyDatabases) {
-                let obj = new SecurityPolicyDatabase();
-                obj.deserialize(params.SecurityPolicyDatabases[z]);
-                this.SecurityPolicyDatabases.push(obj);
-            }
-        }
-
-        if (params.IKEOptionsSpecification) {
-            let obj = new IKEOptionsSpecification();
-            obj.deserialize(params.IKEOptionsSpecification)
-            this.IKEOptionsSpecification = obj;
-        }
-
-        if (params.IPSECOptionsSpecification) {
-            let obj = new IPSECOptionsSpecification();
-            obj.deserialize(params.IPSECOptionsSpecification)
-            this.IPSECOptionsSpecification = obj;
-        }
+        this.ServiceProvider = 'ServiceProvider' in params ? params.ServiceProvider : null;
+        this.ComplianceId = 'ComplianceId' in params ? params.ComplianceId : null;
+        this.Company = 'Company' in params ? params.Company : null;
+        this.UniformSocialCreditCode = 'UniformSocialCreditCode' in params ? params.UniformSocialCreditCode : null;
+        this.LegalPerson = 'LegalPerson' in params ? params.LegalPerson : null;
+        this.IssuingAuthority = 'IssuingAuthority' in params ? params.IssuingAuthority : null;
+        this.BusinessLicense = 'BusinessLicense' in params ? params.BusinessLicense : null;
+        this.BusinessAddress = 'BusinessAddress' in params ? params.BusinessAddress : null;
+        this.PostCode = 'PostCode' in params ? params.PostCode : null;
+        this.Manager = 'Manager' in params ? params.Manager : null;
+        this.ManagerId = 'ManagerId' in params ? params.ManagerId : null;
+        this.ManagerIdCard = 'ManagerIdCard' in params ? params.ManagerIdCard : null;
+        this.ManagerAddress = 'ManagerAddress' in params ? params.ManagerAddress : null;
+        this.ManagerTelephone = 'ManagerTelephone' in params ? params.ManagerTelephone : null;
+        this.Email = 'Email' in params ? params.Email : null;
+        this.ServiceHandlingForm = 'ServiceHandlingForm' in params ? params.ServiceHandlingForm : null;
+        this.AuthorizationLetter = 'AuthorizationLetter' in params ? params.AuthorizationLetter : null;
+        this.SafetyCommitment = 'SafetyCommitment' in params ? params.SafetyCommitment : null;
+        this.ServiceStartDate = 'ServiceStartDate' in params ? params.ServiceStartDate : null;
+        this.ServiceEndDate = 'ServiceEndDate' in params ? params.ServiceEndDate : null;
+        this.State = 'State' in params ? params.State : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
 
     }
 }
@@ -15232,7 +15590,7 @@ class DisassociateNatGatewayAddressRequest extends  AbstractModel {
         this.NatGatewayId = null;
 
         /**
-         * 绑定NAT网关的弹性IP数组。
+         * 待解绑NAT网关的弹性IP数组。
          * @type {Array.<string> || null}
          */
         this.PublicIpAddresses = null;
@@ -19514,6 +19872,34 @@ class ReleaseAddressesResponse extends  AbstractModel {
 }
 
 /**
+ * AuditCrossBorderCompliance返回参数结构体
+ * @class
+ */
+class AuditCrossBorderComplianceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * InquiryPriceResetVpnGatewayInternetMaxBandwidth请求参数结构体
  * @class
  */
@@ -23357,6 +23743,48 @@ class InstanceChargePrepaid extends  AbstractModel {
 }
 
 /**
+ * AuditCrossBorderCompliance请求参数结构体
+ * @class
+ */
+class AuditCrossBorderComplianceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务商, 可选值：`UNICOM`。
+         * @type {string || null}
+         */
+        this.ServiceProvider = null;
+
+        /**
+         * 表单唯一`ID`。
+         * @type {number || null}
+         */
+        this.ComplianceId = null;
+
+        /**
+         * 通过：`APPROVED `，拒绝：`DENY`。
+         * @type {string || null}
+         */
+        this.AuditBehavior = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServiceProvider = 'ServiceProvider' in params ? params.ServiceProvider : null;
+        this.ComplianceId = 'ComplianceId' in params ? params.ComplianceId : null;
+        this.AuditBehavior = 'AuditBehavior' in params ? params.AuditBehavior : null;
+
+    }
+}
+
+/**
  * DescribeNetDetects返回参数结构体
  * @class
  */
@@ -23419,7 +23847,7 @@ module.exports = {
     SecurityGroupAssociationStatistics: SecurityGroupAssociationStatistics,
     DeleteServiceTemplateResponse: DeleteServiceTemplateResponse,
     CreateServiceTemplateRequest: CreateServiceTemplateRequest,
-    IKEOptionsSpecification: IKEOptionsSpecification,
+    DescribeIp6TranslatorQuotaResponse: DescribeIp6TranslatorQuotaResponse,
     TransformAddressResponse: TransformAddressResponse,
     DescribeVpnConnectionsRequest: DescribeVpnConnectionsRequest,
     CreateAssistantCidrRequest: CreateAssistantCidrRequest,
@@ -23448,7 +23876,7 @@ module.exports = {
     ModifyNetworkAclEntriesRequest: ModifyNetworkAclEntriesRequest,
     DescribeVpcPrivateIpAddressesRequest: DescribeVpcPrivateIpAddressesRequest,
     AddressTemplate: AddressTemplate,
-    DescribeIp6TranslatorQuotaResponse: DescribeIp6TranslatorQuotaResponse,
+    IKEOptionsSpecification: IKEOptionsSpecification,
     VpnGatewayQuota: VpnGatewayQuota,
     UnassignIpv6AddressesResponse: UnassignIpv6AddressesResponse,
     CreateIp6TranslatorsResponse: CreateIp6TranslatorsResponse,
@@ -23492,6 +23920,7 @@ module.exports = {
     HaVipAssociateAddressIpRequest: HaVipAssociateAddressIpRequest,
     DisassociateNatGatewayAddressResponse: DisassociateNatGatewayAddressResponse,
     DeleteRoutesResponse: DeleteRoutesResponse,
+    DescribeCrossBorderComplianceRequest: DescribeCrossBorderComplianceRequest,
     DescribeSecurityGroupAssociationStatisticsResponse: DescribeSecurityGroupAssociationStatisticsResponse,
     ModifyAssistantCidrResponse: ModifyAssistantCidrResponse,
     NatGatewayAddress: NatGatewayAddress,
@@ -23509,6 +23938,7 @@ module.exports = {
     ModifyAddressInternetChargeTypeRequest: ModifyAddressInternetChargeTypeRequest,
     ModifyIp6AddressesBandwidthRequest: ModifyIp6AddressesBandwidthRequest,
     DescribeDirectConnectGatewaysResponse: DescribeDirectConnectGatewaysResponse,
+    ModifyVpnConnectionAttributeRequest: ModifyVpnConnectionAttributeRequest,
     Ip6RuleInfo: Ip6RuleInfo,
     CreateSecurityGroupWithPoliciesResponse: CreateSecurityGroupWithPoliciesResponse,
     DeleteAddressTemplateResponse: DeleteAddressTemplateResponse,
@@ -23647,6 +24077,7 @@ module.exports = {
     DirectConnectGateway: DirectConnectGateway,
     Price: Price,
     HaVipDisassociateAddressIpRequest: HaVipDisassociateAddressIpRequest,
+    DescribeCrossBorderComplianceResponse: DescribeCrossBorderComplianceResponse,
     ModifyVpnGatewayAttributeResponse: ModifyVpnGatewayAttributeResponse,
     AssociateDirectConnectGatewayNatGatewayResponse: AssociateDirectConnectGatewayNatGatewayResponse,
     DescribeVpnGatewayCcnRoutesRequest: DescribeVpnGatewayCcnRoutesRequest,
@@ -23686,7 +24117,7 @@ module.exports = {
     ModifyGatewayFlowQosRequest: ModifyGatewayFlowQosRequest,
     DeleteNetDetectResponse: DeleteNetDetectResponse,
     AllocateAddressesRequest: AllocateAddressesRequest,
-    ModifyVpnConnectionAttributeRequest: ModifyVpnConnectionAttributeRequest,
+    CrossBorderCompliance: CrossBorderCompliance,
     ModifyAssistantCidrRequest: ModifyAssistantCidrRequest,
     CreateIp6TranslatorsRequest: CreateIp6TranslatorsRequest,
     AssociateDhcpIpWithAddressIpResponse: AssociateDhcpIpWithAddressIpResponse,
@@ -23831,6 +24262,7 @@ module.exports = {
     CreateBandwidthPackageResponse: CreateBandwidthPackageResponse,
     ResetVpnConnectionRequest: ResetVpnConnectionRequest,
     ReleaseAddressesResponse: ReleaseAddressesResponse,
+    AuditCrossBorderComplianceResponse: AuditCrossBorderComplianceResponse,
     InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest: InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest,
     ReplaceSecurityGroupPolicyResponse: ReplaceSecurityGroupPolicyResponse,
     EnableGatewayFlowMonitorRequest: EnableGatewayFlowMonitorRequest,
@@ -23923,6 +24355,7 @@ module.exports = {
     DescribeTemplateLimitsRequest: DescribeTemplateLimitsRequest,
     AcceptAttachCcnInstancesResponse: AcceptAttachCcnInstancesResponse,
     InstanceChargePrepaid: InstanceChargePrepaid,
+    AuditCrossBorderComplianceRequest: AuditCrossBorderComplianceRequest,
     DescribeNetDetectsResponse: DescribeNetDetectsResponse,
 
 }

@@ -14532,6 +14532,12 @@ class DescribeCCTrendRequest extends  AbstractModel {
          */
         this.Id = null;
 
+        /**
+         * 域名，可选
+         * @type {string || null}
+         */
+        this.Domain = null;
+
     }
 
     /**
@@ -14548,6 +14554,7 @@ class DescribeCCTrendRequest extends  AbstractModel {
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.Id = 'Id' in params ? params.Id : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
 
     }
 }

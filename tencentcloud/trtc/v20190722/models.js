@@ -191,6 +191,12 @@ class LayoutParams extends  AbstractModel {
          */
         this.SmallVideoLayoutParams = null;
 
+        /**
+         * 屏幕分享模板有效。设置为1时代表大画面居右，小画面居左布局。默认为0。
+         * @type {number || null}
+         */
+        this.MainVideoRightAlign = null;
+
     }
 
     /**
@@ -209,6 +215,7 @@ class LayoutParams extends  AbstractModel {
             obj.deserialize(params.SmallVideoLayoutParams)
             this.SmallVideoLayoutParams = obj;
         }
+        this.MainVideoRightAlign = 'MainVideoRightAlign' in params ? params.MainVideoRightAlign : null;
 
     }
 }

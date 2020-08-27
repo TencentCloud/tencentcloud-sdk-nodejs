@@ -5990,6 +5990,12 @@ class ExportNonlocalLoginPlacesResponse extends  AbstractModel {
         this.DownloadUrl = null;
 
         /**
+         * 导出任务ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -6005,6 +6011,7 @@ class ExportNonlocalLoginPlacesResponse extends  AbstractModel {
             return;
         }
         this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

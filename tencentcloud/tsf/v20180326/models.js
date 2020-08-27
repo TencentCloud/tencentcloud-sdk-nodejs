@@ -5705,6 +5705,12 @@ class AddClusterInstancesRequest extends  AbstractModel {
          */
         this.InstanceImportMode = null;
 
+        /**
+         * 镜像定制类型
+         * @type {string || null}
+         */
+        this.OsCustomizeType = null;
+
     }
 
     /**
@@ -5722,6 +5728,7 @@ class AddClusterInstancesRequest extends  AbstractModel {
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
         this.SgId = 'SgId' in params ? params.SgId : null;
         this.InstanceImportMode = 'InstanceImportMode' in params ? params.InstanceImportMode : null;
+        this.OsCustomizeType = 'OsCustomizeType' in params ? params.OsCustomizeType : null;
 
     }
 }

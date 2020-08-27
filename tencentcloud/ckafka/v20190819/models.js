@@ -3316,6 +3316,13 @@ class InstanceAttributesResponse extends  AbstractModel {
          */
         this.Cvm = null;
 
+        /**
+         * 类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
     }
 
     /**
@@ -3372,6 +3379,7 @@ class InstanceAttributesResponse extends  AbstractModel {
         this.Version = 'Version' in params ? params.Version : null;
         this.MaxGroupNum = 'MaxGroupNum' in params ? params.MaxGroupNum : null;
         this.Cvm = 'Cvm' in params ? params.Cvm : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
 
     }
 }

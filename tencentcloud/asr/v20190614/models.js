@@ -424,6 +424,7 @@ class CreateRecTaskRequest extends  AbstractModel {
 • 16k_en：16k 英语；
 • 16k_ca：16k 粤语；
 • 16k_ja：16k 日语；
+• 16k_wuu-SH：16k 上海话方言；
          * @type {string || null}
          */
         this.EngineModelType = null;
@@ -435,7 +436,7 @@ class CreateRecTaskRequest extends  AbstractModel {
         this.ChannelNum = null;
 
         /**
-         * 识别结果返回形式。0： 识别结果文本(含分段时间戳)； 1：仅支持16k中文引擎，含识别结果详情(词时间戳列表，一般用于生成字幕场景)。
+         * 识别结果返回形式。0： 识别结果文本(含分段时间戳)； 1：仅支持16k中文引擎，含词级别粒度的[详细识别结果](https://cloud.tencent.com/document/api/1093/37824#SentenceDetail)(词时间戳列表，一般用于生成字幕场景)。
          * @type {number || null}
          */
         this.ResTextFormat = null;
@@ -923,6 +924,7 @@ class SentenceRecognitionRequest extends  AbstractModel {
 • 16k_en：16k 英语；
 • 16k_ca：16k 粤语；
 • 16k_ja：16k 日语；
+•16k_wuu-SH：16k 上海话方言。
          * @type {string || null}
          */
         this.EngSerViceType = null;

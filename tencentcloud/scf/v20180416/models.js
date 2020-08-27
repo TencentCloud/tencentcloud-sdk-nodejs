@@ -2103,7 +2103,7 @@ class CreateTriggerRequest extends  AbstractModel {
         this.TriggerName = null;
 
         /**
-         * 触发器类型，目前支持 cos 、cmq、 timer、 ckafka类型
+         * 触发器类型，目前支持 cos 、cmq、 timer、 ckafka、apigw类型
          * @type {string || null}
          */
         this.Type = null;

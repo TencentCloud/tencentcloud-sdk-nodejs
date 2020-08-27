@@ -1830,6 +1830,42 @@ class AlgorithmInfo extends  AbstractModel {
 }
 
 /**
+ * GetRegions返回参数结构体
+ * @class
+ */
+class GetRegionsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 可用region列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Regions = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Regions = 'Regions' in params ? params.Regions : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * GenerateDataKey返回参数结构体
  * @class
  */
@@ -3219,6 +3255,27 @@ class DescribeWhiteBoxDeviceFingerprintsRequest extends  AbstractModel {
 }
 
 /**
+ * GetRegions请求参数结构体
+ * @class
+ */
+class GetRegionsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * EncryptByWhiteBox请求参数结构体
  * @class
  */
@@ -3764,6 +3821,7 @@ module.exports = {
     OverwriteWhiteBoxDeviceFingerprintsRequest: OverwriteWhiteBoxDeviceFingerprintsRequest,
     DeleteWhiteBoxKeyRequest: DeleteWhiteBoxKeyRequest,
     AlgorithmInfo: AlgorithmInfo,
+    GetRegionsResponse: GetRegionsResponse,
     GenerateDataKeyResponse: GenerateDataKeyResponse,
     CreateWhiteBoxKeyRequest: CreateWhiteBoxKeyRequest,
     OverwriteWhiteBoxDeviceFingerprintsResponse: OverwriteWhiteBoxDeviceFingerprintsResponse,
@@ -3797,6 +3855,7 @@ module.exports = {
     BindCloudResourceResponse: BindCloudResourceResponse,
     EnableKeysResponse: EnableKeysResponse,
     DescribeWhiteBoxDeviceFingerprintsRequest: DescribeWhiteBoxDeviceFingerprintsRequest,
+    GetRegionsRequest: GetRegionsRequest,
     EncryptByWhiteBoxRequest: EncryptByWhiteBoxRequest,
     GenerateRandomRequest: GenerateRandomRequest,
     ScheduleKeyDeletionRequest: ScheduleKeyDeletionRequest,

@@ -17,19 +17,27 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DeleteModelRequest = models.DeleteModelRequest;
-const TryLipstickPicRequest = models.TryLipstickPicRequest;
-const GetModelListRequest = models.GetModelListRequest;
-const TryLipstickPicResponse = models.TryLipstickPicResponse;
-const LipColorInfo = models.LipColorInfo;
-const CreateModelRequest = models.CreateModelRequest;
+const BeautifyVideoRequest = models.BeautifyVideoRequest;
+const CancelBeautifyVideoJobResponse = models.CancelBeautifyVideoJobResponse;
 const RGBAInfo = models.RGBAInfo;
+const BeautifyVideoOutput = models.BeautifyVideoOutput;
+const LipColorInfo = models.LipColorInfo;
+const CreateModelResponse = models.CreateModelResponse;
 const GetModelListResponse = models.GetModelListResponse;
+const BeautifyPicResponse = models.BeautifyPicResponse;
+const GetModelListRequest = models.GetModelListRequest;
+const BeautifyVideoResponse = models.BeautifyVideoResponse;
 const ModelInfo = models.ModelInfo;
+const TryLipstickPicResponse = models.TryLipstickPicResponse;
+const DeleteModelResponse = models.DeleteModelResponse;
+const CancelBeautifyVideoJobRequest = models.CancelBeautifyVideoJobRequest;
+const BeautyParam = models.BeautyParam;
+const TryLipstickPicRequest = models.TryLipstickPicRequest;
+const QueryBeautifyVideoJobResponse = models.QueryBeautifyVideoJobResponse;
+const CreateModelRequest = models.CreateModelRequest;
 const FaceRect = models.FaceRect;
 const BeautifyPicRequest = models.BeautifyPicRequest;
-const CreateModelResponse = models.CreateModelResponse;
-const DeleteModelResponse = models.DeleteModelResponse;
-const BeautifyPicResponse = models.BeautifyPicResponse;
+const QueryBeautifyVideoJobRequest = models.QueryBeautifyVideoJobRequest;
 
 
 /**
@@ -57,28 +65,6 @@ class FmuClient extends AbstractClient {
     }
 
     /**
-     * 查询已注册的唇色素材。
-     * @param {GetModelListRequest} req
-     * @param {function(string, GetModelListResponse):void} cb
-     * @public
-     */
-    GetModelList(req, cb) {
-        let resp = new GetModelListResponse();
-        this.request("GetModelList", req, resp, cb);
-    }
-
-    /**
-     * 删除已注册的唇色素材。
-     * @param {DeleteModelRequest} req
-     * @param {function(string, DeleteModelResponse):void} cb
-     * @public
-     */
-    DeleteModel(req, cb) {
-        let resp = new DeleteModelResponse();
-        this.request("DeleteModel", req, resp, cb);
-    }
-
-    /**
      * 对图片中的人脸嘴唇进行着色，最多支持同时对一张图中的3张人脸进行试唇色。
 
 您可以通过事先注册在腾讯云的唇色素材（LUT文件）改变图片中的人脸唇色，也可以输入RGBA模型数值。
@@ -97,6 +83,39 @@ class FmuClient extends AbstractClient {
     }
 
     /**
+     * 撤销视频美颜任务请求
+     * @param {CancelBeautifyVideoJobRequest} req
+     * @param {function(string, CancelBeautifyVideoJobResponse):void} cb
+     * @public
+     */
+    CancelBeautifyVideoJob(req, cb) {
+        let resp = new CancelBeautifyVideoJobResponse();
+        this.request("CancelBeautifyVideoJob", req, resp, cb);
+    }
+
+    /**
+     * 查询视频美颜处理进度
+     * @param {QueryBeautifyVideoJobRequest} req
+     * @param {function(string, QueryBeautifyVideoJobResponse):void} cb
+     * @public
+     */
+    QueryBeautifyVideoJob(req, cb) {
+        let resp = new QueryBeautifyVideoJobResponse();
+        this.request("QueryBeautifyVideoJob", req, resp, cb);
+    }
+
+    /**
+     * 删除已注册的唇色素材。
+     * @param {DeleteModelRequest} req
+     * @param {function(string, DeleteModelResponse):void} cb
+     * @public
+     */
+    DeleteModel(req, cb) {
+        let resp = new DeleteModelResponse();
+        this.request("DeleteModel", req, resp, cb);
+    }
+
+    /**
      * 用户上传一张人脸图片，精准定位五官，实现美肤、亮肤、祛痘等美颜功能。
      * @param {BeautifyPicRequest} req
      * @param {function(string, BeautifyPicResponse):void} cb
@@ -105,6 +124,28 @@ class FmuClient extends AbstractClient {
     BeautifyPic(req, cb) {
         let resp = new BeautifyPicResponse();
         this.request("BeautifyPic", req, resp, cb);
+    }
+
+    /**
+     * 查询已注册的唇色素材。
+     * @param {GetModelListRequest} req
+     * @param {function(string, GetModelListResponse):void} cb
+     * @public
+     */
+    GetModelList(req, cb) {
+        let resp = new GetModelListResponse();
+        this.request("GetModelList", req, resp, cb);
+    }
+
+    /**
+     * 视频美颜
+     * @param {BeautifyVideoRequest} req
+     * @param {function(string, BeautifyVideoResponse):void} cb
+     * @public
+     */
+    BeautifyVideo(req, cb) {
+        let resp = new BeautifyVideoResponse();
+        this.request("BeautifyVideo", req, resp, cb);
     }
 
 

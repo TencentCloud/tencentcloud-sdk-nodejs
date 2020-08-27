@@ -884,7 +884,7 @@ class ResetInstanceRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 镜像 ID。
+         * 镜像 ID。可通过[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)接口返回值中的BlueprintId获取。
          * @type {string || null}
          */
         this.BlueprintId = null;

@@ -19,11 +19,12 @@ const AbstractClient = require('../../common/abstract_client')
 const DetectInfoVideoData = models.DetectInfoVideoData;
 const GetDetectInfoEnhancedRequest = models.GetDetectInfoEnhancedRequest;
 const LivenessRequest = models.LivenessRequest;
-const LivenessCompareResponse = models.LivenessCompareResponse;
+const CheckBankCardInformationRequest = models.CheckBankCardInformationRequest;
 const MobileNetworkTimeVerificationResponse = models.MobileNetworkTimeVerificationResponse;
 const GetLiveCodeRequest = models.GetLiveCodeRequest;
 const IdCardVerificationRequest = models.IdCardVerificationRequest;
 const BankCardVerificationRequest = models.BankCardVerificationRequest;
+const CheckBankCardInformationResponse = models.CheckBankCardInformationResponse;
 const DetectInfoBestFrame = models.DetectInfoBestFrame;
 const CheckIdCardInformationResponse = models.CheckIdCardInformationResponse;
 const GetDetectInfoEnhancedResponse = models.GetDetectInfoEnhancedResponse;
@@ -52,6 +53,7 @@ const MinorsVerificationRequest = models.MinorsVerificationRequest;
 const ImageRecognitionResponse = models.ImageRecognitionResponse;
 const GetActionSequenceRequest = models.GetActionSequenceRequest;
 const GetDetectInfoResponse = models.GetDetectInfoResponse;
+const LivenessCompareResponse = models.LivenessCompareResponse;
 const GetLiveCodeResponse = models.GetLiveCodeResponse;
 const GetDetectInfoRequest = models.GetDetectInfoRequest;
 const BankCard2EVerificationResponse = models.BankCard2EVerificationResponse;
@@ -105,25 +107,25 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * 本接口用于查询手机号在网时长，输入手机号进行查询。
-     * @param {MobileNetworkTimeVerificationRequest} req
-     * @param {function(string, MobileNetworkTimeVerificationResponse):void} cb
+     * 传入视频和照片，先判断视频中是否为真人，判断为真人后，再判断该视频中的人与上传照片是否属于同一个人。
+     * @param {LivenessCompareRequest} req
+     * @param {function(string, LivenessCompareResponse):void} cb
      * @public
      */
-    MobileNetworkTimeVerification(req, cb) {
-        let resp = new MobileNetworkTimeVerificationResponse();
-        this.request("MobileNetworkTimeVerification", req, resp, cb);
+    LivenessCompare(req, cb) {
+        let resp = new LivenessCompareResponse();
+        this.request("LivenessCompare", req, resp, cb);
     }
 
     /**
-     * 使用动作活体检测模式前，需调用本接口获取动作顺序。
-     * @param {GetActionSequenceRequest} req
-     * @param {function(string, GetActionSequenceResponse):void} cb
+     * 本接口用于校验姓名和银行卡号的真实性和一致性。
+     * @param {BankCard2EVerificationRequest} req
+     * @param {function(string, BankCard2EVerificationResponse):void} cb
      * @public
      */
-    GetActionSequence(req, cb) {
-        let resp = new GetActionSequenceResponse();
-        this.request("GetActionSequence", req, resp, cb);
+    BankCard2EVerification(req, cb) {
+        let resp = new BankCard2EVerificationResponse();
+        this.request("BankCard2EVerification", req, resp, cb);
     }
 
     /**
@@ -160,6 +162,17 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
+     * 本接口用于查询手机号在网时长，输入手机号进行查询。
+     * @param {MobileNetworkTimeVerificationRequest} req
+     * @param {function(string, MobileNetworkTimeVerificationResponse):void} cb
+     * @public
+     */
+    MobileNetworkTimeVerification(req, cb) {
+        let resp = new MobileNetworkTimeVerificationResponse();
+        this.request("MobileNetworkTimeVerification", req, resp, cb);
+    }
+
+    /**
      * 传入视频和身份信息，先判断视频中是否为真人，判断为真人后，再判断该视频中的人与公安权威库的证件照是否属于同一个人。
      * @param {LivenessRecognitionRequest} req
      * @param {function(string, LivenessRecognitionResponse):void} cb
@@ -171,14 +184,14 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * 本接口用于校验姓名和银行卡号的真实性和一致性。
-     * @param {BankCard2EVerificationRequest} req
-     * @param {function(string, BankCard2EVerificationResponse):void} cb
+     * 本接口用于验证手机号的状态，您可以输入手机号进行查询。
+     * @param {MobileStatusRequest} req
+     * @param {function(string, MobileStatusResponse):void} cb
      * @public
      */
-    BankCard2EVerification(req, cb) {
-        let resp = new BankCard2EVerificationResponse();
-        this.request("BankCard2EVerification", req, resp, cb);
+    MobileStatus(req, cb) {
+        let resp = new MobileStatusResponse();
+        this.request("MobileStatus", req, resp, cb);
     }
 
     /**
@@ -237,25 +250,14 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * 完成验证后，用BizToken调用本接口获取结果信息，BizToken生成后三天内（3\*24\*3,600秒）可多次拉取。
-     * @param {GetDetectInfoEnhancedRequest} req
-     * @param {function(string, GetDetectInfoEnhancedResponse):void} cb
+     * 使用动作活体检测模式前，需调用本接口获取动作顺序。
+     * @param {GetActionSequenceRequest} req
+     * @param {function(string, GetActionSequenceResponse):void} cb
      * @public
      */
-    GetDetectInfoEnhanced(req, cb) {
-        let resp = new GetDetectInfoEnhancedResponse();
-        this.request("GetDetectInfoEnhanced", req, resp, cb);
-    }
-
-    /**
-     * 本接口用于验证手机号的状态，您可以输入手机号进行查询。
-     * @param {MobileStatusRequest} req
-     * @param {function(string, MobileStatusResponse):void} cb
-     * @public
-     */
-    MobileStatus(req, cb) {
-        let resp = new MobileStatusResponse();
-        this.request("MobileStatus", req, resp, cb);
+    GetActionSequence(req, cb) {
+        let resp = new GetActionSequenceResponse();
+        this.request("GetActionSequence", req, resp, cb);
     }
 
     /**
@@ -270,14 +272,25 @@ class FaceidClient extends AbstractClient {
     }
 
     /**
-     * 传入视频和照片，先判断视频中是否为真人，判断为真人后，再判断该视频中的人与上传照片是否属于同一个人。
-     * @param {LivenessCompareRequest} req
-     * @param {function(string, LivenessCompareResponse):void} cb
+     * 完成验证后，用BizToken调用本接口获取结果信息，BizToken生成后三天内（3\*24\*3,600秒）可多次拉取。
+     * @param {GetDetectInfoEnhancedRequest} req
+     * @param {function(string, GetDetectInfoEnhancedResponse):void} cb
      * @public
      */
-    LivenessCompare(req, cb) {
-        let resp = new LivenessCompareResponse();
-        this.request("LivenessCompare", req, resp, cb);
+    GetDetectInfoEnhanced(req, cb) {
+        let resp = new GetDetectInfoEnhancedResponse();
+        this.request("GetDetectInfoEnhanced", req, resp, cb);
+    }
+
+    /**
+     * 银行卡基础信息查询
+     * @param {CheckBankCardInformationRequest} req
+     * @param {function(string, CheckBankCardInformationResponse):void} cb
+     * @public
+     */
+    CheckBankCardInformation(req, cb) {
+        let resp = new CheckBankCardInformationResponse();
+        this.request("CheckBankCardInformation", req, resp, cb);
     }
 
 

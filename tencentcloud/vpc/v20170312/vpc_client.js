@@ -26,7 +26,7 @@ const DescribeHaVipsResponse = models.DescribeHaVipsResponse;
 const SecurityGroupAssociationStatistics = models.SecurityGroupAssociationStatistics;
 const DeleteServiceTemplateResponse = models.DeleteServiceTemplateResponse;
 const CreateServiceTemplateRequest = models.CreateServiceTemplateRequest;
-const IKEOptionsSpecification = models.IKEOptionsSpecification;
+const DescribeIp6TranslatorQuotaResponse = models.DescribeIp6TranslatorQuotaResponse;
 const TransformAddressResponse = models.TransformAddressResponse;
 const DescribeVpnConnectionsRequest = models.DescribeVpnConnectionsRequest;
 const CreateAssistantCidrRequest = models.CreateAssistantCidrRequest;
@@ -55,7 +55,7 @@ const AssistantCidr = models.AssistantCidr;
 const ModifyNetworkAclEntriesRequest = models.ModifyNetworkAclEntriesRequest;
 const DescribeVpcPrivateIpAddressesRequest = models.DescribeVpcPrivateIpAddressesRequest;
 const AddressTemplate = models.AddressTemplate;
-const DescribeIp6TranslatorQuotaResponse = models.DescribeIp6TranslatorQuotaResponse;
+const IKEOptionsSpecification = models.IKEOptionsSpecification;
 const VpnGatewayQuota = models.VpnGatewayQuota;
 const UnassignIpv6AddressesResponse = models.UnassignIpv6AddressesResponse;
 const CreateIp6TranslatorsResponse = models.CreateIp6TranslatorsResponse;
@@ -99,6 +99,7 @@ const CreateSecurityGroupPoliciesResponse = models.CreateSecurityGroupPoliciesRe
 const HaVipAssociateAddressIpRequest = models.HaVipAssociateAddressIpRequest;
 const DisassociateNatGatewayAddressResponse = models.DisassociateNatGatewayAddressResponse;
 const DeleteRoutesResponse = models.DeleteRoutesResponse;
+const DescribeCrossBorderComplianceRequest = models.DescribeCrossBorderComplianceRequest;
 const DescribeSecurityGroupAssociationStatisticsResponse = models.DescribeSecurityGroupAssociationStatisticsResponse;
 const ModifyAssistantCidrResponse = models.ModifyAssistantCidrResponse;
 const NatGatewayAddress = models.NatGatewayAddress;
@@ -116,6 +117,7 @@ const SetCcnRegionBandwidthLimitsRequest = models.SetCcnRegionBandwidthLimitsReq
 const ModifyAddressInternetChargeTypeRequest = models.ModifyAddressInternetChargeTypeRequest;
 const ModifyIp6AddressesBandwidthRequest = models.ModifyIp6AddressesBandwidthRequest;
 const DescribeDirectConnectGatewaysResponse = models.DescribeDirectConnectGatewaysResponse;
+const ModifyVpnConnectionAttributeRequest = models.ModifyVpnConnectionAttributeRequest;
 const Ip6RuleInfo = models.Ip6RuleInfo;
 const CreateSecurityGroupWithPoliciesResponse = models.CreateSecurityGroupWithPoliciesResponse;
 const DeleteAddressTemplateResponse = models.DeleteAddressTemplateResponse;
@@ -254,6 +256,7 @@ const ResetVpnGatewayInternetMaxBandwidthRequest = models.ResetVpnGatewayInterne
 const DirectConnectGateway = models.DirectConnectGateway;
 const Price = models.Price;
 const HaVipDisassociateAddressIpRequest = models.HaVipDisassociateAddressIpRequest;
+const DescribeCrossBorderComplianceResponse = models.DescribeCrossBorderComplianceResponse;
 const ModifyVpnGatewayAttributeResponse = models.ModifyVpnGatewayAttributeResponse;
 const AssociateDirectConnectGatewayNatGatewayResponse = models.AssociateDirectConnectGatewayNatGatewayResponse;
 const DescribeVpnGatewayCcnRoutesRequest = models.DescribeVpnGatewayCcnRoutesRequest;
@@ -293,7 +296,7 @@ const DeleteDhcpIpResponse = models.DeleteDhcpIpResponse;
 const ModifyGatewayFlowQosRequest = models.ModifyGatewayFlowQosRequest;
 const DeleteNetDetectResponse = models.DeleteNetDetectResponse;
 const AllocateAddressesRequest = models.AllocateAddressesRequest;
-const ModifyVpnConnectionAttributeRequest = models.ModifyVpnConnectionAttributeRequest;
+const CrossBorderCompliance = models.CrossBorderCompliance;
 const ModifyAssistantCidrRequest = models.ModifyAssistantCidrRequest;
 const CreateIp6TranslatorsRequest = models.CreateIp6TranslatorsRequest;
 const AssociateDhcpIpWithAddressIpResponse = models.AssociateDhcpIpWithAddressIpResponse;
@@ -438,6 +441,7 @@ const UnassignIpv6CidrBlockResponse = models.UnassignIpv6CidrBlockResponse;
 const CreateBandwidthPackageResponse = models.CreateBandwidthPackageResponse;
 const ResetVpnConnectionRequest = models.ResetVpnConnectionRequest;
 const ReleaseAddressesResponse = models.ReleaseAddressesResponse;
+const AuditCrossBorderComplianceResponse = models.AuditCrossBorderComplianceResponse;
 const InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest = models.InquiryPriceResetVpnGatewayInternetMaxBandwidthRequest;
 const ReplaceSecurityGroupPolicyResponse = models.ReplaceSecurityGroupPolicyResponse;
 const EnableGatewayFlowMonitorRequest = models.EnableGatewayFlowMonitorRequest;
@@ -530,6 +534,7 @@ const DeleteVpcResponse = models.DeleteVpcResponse;
 const DescribeTemplateLimitsRequest = models.DescribeTemplateLimitsRequest;
 const AcceptAttachCcnInstancesResponse = models.AcceptAttachCcnInstancesResponse;
 const InstanceChargePrepaid = models.InstanceChargePrepaid;
+const AuditCrossBorderComplianceRequest = models.AuditCrossBorderComplianceRequest;
 const DescribeNetDetectsResponse = models.DescribeNetDetectsResponse;
 
 
@@ -2142,6 +2147,18 @@ class VpcClient extends AbstractClient {
     }
 
     /**
+     * 本接口用于查询用户创建跨境专线合规化资质审批单。
+服务商可以查询服务名下的任意 `APPID` 创建的审批单；非服务商，只能查询自己审批单。
+     * @param {DescribeCrossBorderComplianceRequest} req
+     * @param {function(string, DescribeCrossBorderComplianceResponse):void} cb
+     * @public
+     */
+    DescribeCrossBorderCompliance(req, cb) {
+        let resp = new DescribeCrossBorderComplianceResponse();
+        this.request("DescribeCrossBorderCompliance", req, resp, cb);
+    }
+
+    /**
      * 本接口（CreateAddressTemplateGroup）用于创建IP地址模版集合
      * @param {CreateAddressTemplateGroupRequest} req
      * @param {function(string, CreateAddressTemplateGroupResponse):void} cb
@@ -2175,6 +2192,20 @@ class VpcClient extends AbstractClient {
     CreateSecurityGroup(req, cb) {
         let resp = new CreateSecurityGroupResponse();
         this.request("CreateSecurityGroup", req, resp, cb);
+    }
+
+    /**
+     * 本接口用于服务商操作跨境专线合规化资质审批。
+* 服务商只能操作提交到本服务商的审批单，后台会校验身份。即只授权给服务商的`APPID` 调用本接口。
+* 只有当审批单为 `PENDING` 状态时，才能审批操作。
+* `APPROVED` 状态的审批单，可以再次操作为 `DENY`；`DENY` 状态的审批单，也可以再次操作为 `APPROVED`。
+     * @param {AuditCrossBorderComplianceRequest} req
+     * @param {function(string, AuditCrossBorderComplianceResponse):void} cb
+     * @public
+     */
+    AuditCrossBorderCompliance(req, cb) {
+        let resp = new AuditCrossBorderComplianceResponse();
+        this.request("AuditCrossBorderCompliance", req, resp, cb);
     }
 
     /**

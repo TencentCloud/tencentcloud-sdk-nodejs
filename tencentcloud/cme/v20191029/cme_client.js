@@ -34,6 +34,7 @@ const ProjectInfo = models.ProjectInfo;
 const DeleteTeamRequest = models.DeleteTeamRequest;
 const ModifyMaterialResponse = models.ModifyMaterialResponse;
 const LinkMaterial = models.LinkMaterial;
+const SwitcherProjectInput = models.SwitcherProjectInput;
 const FlattenListMediaRequest = models.FlattenListMediaRequest;
 const AudioMaterial = models.AudioMaterial;
 const AddMemberInfo = models.AddMemberInfo;
@@ -62,6 +63,7 @@ const CreateLinkRequest = models.CreateLinkRequest;
 const CreateClassRequest = models.CreateClassRequest;
 const DescribeMaterialsResponse = models.DescribeMaterialsResponse;
 const GrantResourceAuthorizationResponse = models.GrantResourceAuthorizationResponse;
+const SwitcherPgmOutputConfig = models.SwitcherPgmOutputConfig;
 const CMEExportInfo = models.CMEExportInfo;
 const ImportMediaToProjectRequest = models.ImportMediaToProjectRequest;
 const VODExportInfo = models.VODExportInfo;
@@ -482,7 +484,7 @@ class CmeClient extends AbstractClient {
     }
 
     /**
-     * 创建云剪的编辑项目，支持创建视频剪辑及直播剪辑两大类项目。
+     * 创建云剪的编辑项目，支持创建视频剪辑、直播剪辑及导播台项目。
 
      * @param {CreateProjectRequest} req
      * @param {function(string, CreateProjectResponse):void} cb

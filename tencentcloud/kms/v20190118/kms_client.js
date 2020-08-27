@@ -64,6 +64,7 @@ const DisableWhiteBoxKeysRequest = models.DisableWhiteBoxKeysRequest;
 const OverwriteWhiteBoxDeviceFingerprintsRequest = models.OverwriteWhiteBoxDeviceFingerprintsRequest;
 const DeleteWhiteBoxKeyRequest = models.DeleteWhiteBoxKeyRequest;
 const AlgorithmInfo = models.AlgorithmInfo;
+const GetRegionsResponse = models.GetRegionsResponse;
 const GenerateDataKeyResponse = models.GenerateDataKeyResponse;
 const CreateWhiteBoxKeyRequest = models.CreateWhiteBoxKeyRequest;
 const OverwriteWhiteBoxDeviceFingerprintsResponse = models.OverwriteWhiteBoxDeviceFingerprintsResponse;
@@ -97,6 +98,7 @@ const EnableKeyRotationResponse = models.EnableKeyRotationResponse;
 const BindCloudResourceResponse = models.BindCloudResourceResponse;
 const EnableKeysResponse = models.EnableKeysResponse;
 const DescribeWhiteBoxDeviceFingerprintsRequest = models.DescribeWhiteBoxDeviceFingerprintsRequest;
+const GetRegionsRequest = models.GetRegionsRequest;
 const EncryptByWhiteBoxRequest = models.EncryptByWhiteBoxRequest;
 const GenerateRandomRequest = models.GenerateRandomRequest;
 const ScheduleKeyDeletionRequest = models.ScheduleKeyDeletionRequest;
@@ -606,6 +608,17 @@ class KmsClient extends AbstractClient {
     DescribeWhiteBoxDecryptKey(req, cb) {
         let resp = new DescribeWhiteBoxDecryptKeyResponse();
         this.request("DescribeWhiteBoxDecryptKey", req, resp, cb);
+    }
+
+    /**
+     * 获取支持的地域列表
+     * @param {GetRegionsRequest} req
+     * @param {function(string, GetRegionsResponse):void} cb
+     * @public
+     */
+    GetRegions(req, cb) {
+        let resp = new GetRegionsResponse();
+        this.request("GetRegions", req, resp, cb);
     }
 
 

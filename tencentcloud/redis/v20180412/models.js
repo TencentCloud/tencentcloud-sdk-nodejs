@@ -5059,6 +5059,12 @@ class DescribeInstancesRequest extends  AbstractModel {
          */
         this.TypeList = null;
 
+        /**
+         * 内部参数，用户可忽略
+         * @type {string || null}
+         */
+        this.MonitorVersion = null;
+
     }
 
     /**
@@ -5089,6 +5095,7 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.Type = 'Type' in params ? params.Type : null;
         this.SearchKeys = 'SearchKeys' in params ? params.SearchKeys : null;
         this.TypeList = 'TypeList' in params ? params.TypeList : null;
+        this.MonitorVersion = 'MonitorVersion' in params ? params.MonitorVersion : null;
 
     }
 }
@@ -5748,6 +5755,20 @@ class InstanceSet extends  AbstractModel {
          */
         this.RemainBandwidthDuration = null;
 
+        /**
+         * Tendis实例的磁盘大小
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DiskSize = null;
+
+        /**
+         * 监控版本: 1m-分钟粒度监控，5s-5秒粒度监控
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MonitorVersion = null;
+
     }
 
     /**
@@ -5816,6 +5837,8 @@ class InstanceSet extends  AbstractModel {
         this.ReadOnly = 'ReadOnly' in params ? params.ReadOnly : null;
         this.Vip6 = 'Vip6' in params ? params.Vip6 : null;
         this.RemainBandwidthDuration = 'RemainBandwidthDuration' in params ? params.RemainBandwidthDuration : null;
+        this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
+        this.MonitorVersion = 'MonitorVersion' in params ? params.MonitorVersion : null;
 
     }
 }

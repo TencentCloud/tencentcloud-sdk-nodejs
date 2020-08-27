@@ -2431,7 +2431,7 @@ class UpgradeLifecycleHookRequest extends  AbstractModel {
         this.HeartbeatTimeout = null;
 
         /**
-         * 弹性伸缩向通知目标发送的附加信息，默认值为''
+         * 弹性伸缩向通知目标发送的附加信息，默认值为空字符串""
          * @type {string || null}
          */
         this.NotificationMetadata = null;
@@ -4507,7 +4507,7 @@ class CreateLifecycleHookRequest extends  AbstractModel {
         this.HeartbeatTimeout = null;
 
         /**
-         * 弹性伸缩向通知目标发送的附加信息，默认值为空字符串“”。最大长度不能超过1024个字节。
+         * 弹性伸缩向通知目标发送的附加信息，默认值为空字符串""。最大长度不能超过1024个字节。
          * @type {string || null}
          */
         this.NotificationMetadata = null;

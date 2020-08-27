@@ -18888,6 +18888,13 @@ class MediaAiAnalysisFrameTagItem extends  AbstractModel {
         this.Tag = null;
 
         /**
+         * 按帧标签名称的分类列表，CategorySet.N 表示第 N+1级分类。
+比如 Tag 为“塔楼”时，CategorySet 包含两个元素：CategorySet.0 为“场景”，CategorySet.1为 “建筑”，表示按帧标签为“塔楼”，且第1级分类是“场景”，第2级分类是“建筑”。
+         * @type {Array.<string> || null}
+         */
+        this.CategorySet = null;
+
+        /**
          * 按帧标签的可信度，取值范围是 0 到 100。
          * @type {number || null}
          */
@@ -18903,6 +18910,7 @@ class MediaAiAnalysisFrameTagItem extends  AbstractModel {
             return;
         }
         this.Tag = 'Tag' in params ? params.Tag : null;
+        this.CategorySet = 'CategorySet' in params ? params.CategorySet : null;
         this.Confidence = 'Confidence' in params ? params.Confidence : null;
 
     }

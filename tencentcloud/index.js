@@ -21,6 +21,7 @@ module.exports = {
     captcha: require("./captcha"),
     cat: require("./cat"),
     cbs: require("./cbs"),
+    ccc: require("./ccc"),
     cdb: require("./cdb"),
     cdn: require("./cdn"),
     cds: require("./cds"),

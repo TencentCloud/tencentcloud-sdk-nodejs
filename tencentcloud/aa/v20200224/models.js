@@ -472,16 +472,6 @@ class InputManageMarketingRisk extends  AbstractModel {
         this.Account = null;
 
         /**
-         * 场景类型。
-1：活动防刷
-2：登录保护
-3：注册保护
-4：活动防刷高级版（网赚）
-         * @type {number || null}
-         */
-        this.SceneType = null;
-
-        /**
          * 登录来源的外网IP
          * @type {string || null}
          */
@@ -492,6 +482,16 @@ class InputManageMarketingRisk extends  AbstractModel {
          * @type {number || null}
          */
         this.PostTime = null;
+
+        /**
+         * 场景类型。(后续不再支持，请使用SceneCode字段)
+1：活动防刷
+2：登录保护
+3：注册保护
+4：活动防刷高级版（网赚）
+         * @type {number || null}
+         */
+        this.SceneType = null;
 
         /**
          * 用户唯一标识。
@@ -579,6 +579,18 @@ class InputManageMarketingRisk extends  AbstractModel {
          */
         this.CrowdAntiRush = null;
 
+        /**
+         * 场景Code，控制台上获取
+         * @type {string || null}
+         */
+        this.SceneCode = null;
+
+        /**
+         * 详细信息
+         * @type {Array.<InputDetails> || null}
+         */
+        this.Details = null;
+
     }
 
     /**
@@ -594,9 +606,9 @@ class InputManageMarketingRisk extends  AbstractModel {
             obj.deserialize(params.Account)
             this.Account = obj;
         }
-        this.SceneType = 'SceneType' in params ? params.SceneType : null;
         this.UserIp = 'UserIp' in params ? params.UserIp : null;
         this.PostTime = 'PostTime' in params ? params.PostTime : null;
+        this.SceneType = 'SceneType' in params ? params.SceneType : null;
         this.UserId = 'UserId' in params ? params.UserId : null;
         this.DeviceToken = 'DeviceToken' in params ? params.DeviceToken : null;
         this.DeviceBusinessId = 'DeviceBusinessId' in params ? params.DeviceBusinessId : null;
@@ -615,6 +627,16 @@ class InputManageMarketingRisk extends  AbstractModel {
             let obj = new CrowdAntiRushInfo();
             obj.deserialize(params.CrowdAntiRush)
             this.CrowdAntiRush = obj;
+        }
+        this.SceneCode = 'SceneCode' in params ? params.SceneCode : null;
+
+        if (params.Details) {
+            this.Details = new Array();
+            for (let z in params.Details) {
+                let obj = new InputDetails();
+                obj.deserialize(params.Details[z]);
+                this.Details.push(obj);
+            }
         }
 
     }
@@ -962,6 +984,79 @@ class ManageMarketingRiskResponse extends  AbstractModel {
 }
 
 /**
+ * 微信账号信息。
+ * @class
+ */
+class WeChatAccountInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 微信的OpenID/UnionID 。
+         * @type {string || null}
+         */
+        this.WeChatOpenId = null;
+
+        /**
+         * 微信开放账号类型：
+1：微信公众号/微信第三方登录。
+2：微信小程序。
+         * @type {number || null}
+         */
+        this.WeChatSubType = null;
+
+        /**
+         * 随机串。如果WeChatSubType是2，该字段必填。Token签名随机数，建议16个字符。
+         * @type {string || null}
+         */
+        this.RandStr = null;
+
+        /**
+         * 如果WeChatSubType是1，填入授权的access_token（注意：不是普通access_token，详情请参阅官方说明文档。获取网页版本的access_token时，scope字段必需填写snsapi_userinfo。
+如果WeChatSubType是2，填入以session_key为密钥签名随机数RandStr（hmac_sha256签名算法）得到的字符串。
+         * @type {string || null}
+         */
+        this.WeChatAccessToken = null;
+
+        /**
+         * 用于标识微信用户登录后所关联业务自身的账号ID。
+         * @type {string || null}
+         */
+        this.AssociateAccount = null;
+
+        /**
+         * 账号绑定的手机号。
+         * @type {string || null}
+         */
+        this.MobilePhone = null;
+
+        /**
+         * 用户设备号。
+         * @type {string || null}
+         */
+        this.DeviceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WeChatOpenId = 'WeChatOpenId' in params ? params.WeChatOpenId : null;
+        this.WeChatSubType = 'WeChatSubType' in params ? params.WeChatSubType : null;
+        this.RandStr = 'RandStr' in params ? params.RandStr : null;
+        this.WeChatAccessToken = 'WeChatAccessToken' in params ? params.WeChatAccessToken : null;
+        this.AssociateAccount = 'AssociateAccount' in params ? params.AssociateAccount : null;
+        this.MobilePhone = 'MobilePhone' in params ? params.MobilePhone : null;
+        this.DeviceId = 'DeviceId' in params ? params.DeviceId : null;
+
+    }
+}
+
+/**
  * 助力场景信息
  * @class
  */
@@ -1278,30 +1373,24 @@ class QueryActivityAntiRushRequest extends  AbstractModel {
 }
 
 /**
- * 活动防刷高级版业务出参。
+ * 入参的详细参数信息
  * @class
  */
-class OutputActivityAntiRushAdvanced extends  AbstractModel {
+class InputDetails extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 返回码。0表示成功，非0标识失败错误码。
-         * @type {number || null}
-         */
-        this.Code = null;
-
-        /**
-         * UTF-8编码，出错消息。
+         * 字段名称
          * @type {string || null}
          */
-        this.Message = null;
+        this.FieldName = null;
 
         /**
-         * 服务调用结果。
-         * @type {OutputActivityAntiRushAdvancedValue || null}
+         * 字段值
+         * @type {string || null}
          */
-        this.Value = null;
+        this.FieldValue = null;
 
     }
 
@@ -1312,14 +1401,8 @@ class OutputActivityAntiRushAdvanced extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Code = 'Code' in params ? params.Code : null;
-        this.Message = 'Message' in params ? params.Message : null;
-
-        if (params.Value) {
-            let obj = new OutputActivityAntiRushAdvancedValue();
-            obj.deserialize(params.Value)
-            this.Value = obj;
-        }
+        this.FieldName = 'FieldName' in params ? params.FieldName : null;
+        this.FieldValue = 'FieldValue' in params ? params.FieldValue : null;
 
     }
 }
@@ -1403,57 +1486,30 @@ reject：拒绝，高风险恶意
 }
 
 /**
- * 微信账号信息。
+ * 活动防刷高级版业务出参。
  * @class
  */
-class WeChatAccountInfo extends  AbstractModel {
+class OutputActivityAntiRushAdvanced extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 微信的OpenID/UnionID 。
-         * @type {string || null}
-         */
-        this.WeChatOpenId = null;
-
-        /**
-         * 微信开放账号类型：
-1：微信公众号/微信第三方登录。
-2：微信小程序。
+         * 返回码。0表示成功，非0标识失败错误码。
          * @type {number || null}
          */
-        this.WeChatSubType = null;
+        this.Code = null;
 
         /**
-         * 随机串。如果WeChatSubType是2，该字段必填。Token签名随机数，建议16个字符。
+         * UTF-8编码，出错消息。
          * @type {string || null}
          */
-        this.RandStr = null;
+        this.Message = null;
 
         /**
-         * 如果WeChatSubType是1，填入授权的access_token（注意：不是普通access_token，详情请参阅官方说明文档。获取网页版本的access_token时，scope字段必需填写snsapi_userinfo。
-如果WeChatSubType是2，填入以session_key为密钥签名随机数RandStr（hmac_sha256签名算法）得到的字符串。
-         * @type {string || null}
+         * 服务调用结果。
+         * @type {OutputActivityAntiRushAdvancedValue || null}
          */
-        this.WeChatAccessToken = null;
-
-        /**
-         * 用于标识微信用户登录后所关联业务自身的账号ID。
-         * @type {string || null}
-         */
-        this.AssociateAccount = null;
-
-        /**
-         * 账号绑定的手机号。
-         * @type {string || null}
-         */
-        this.MobilePhone = null;
-
-        /**
-         * 用户设备号。
-         * @type {string || null}
-         */
-        this.DeviceId = null;
+        this.Value = null;
 
     }
 
@@ -1464,13 +1520,14 @@ class WeChatAccountInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.WeChatOpenId = 'WeChatOpenId' in params ? params.WeChatOpenId : null;
-        this.WeChatSubType = 'WeChatSubType' in params ? params.WeChatSubType : null;
-        this.RandStr = 'RandStr' in params ? params.RandStr : null;
-        this.WeChatAccessToken = 'WeChatAccessToken' in params ? params.WeChatAccessToken : null;
-        this.AssociateAccount = 'AssociateAccount' in params ? params.AssociateAccount : null;
-        this.MobilePhone = 'MobilePhone' in params ? params.MobilePhone : null;
-        this.DeviceId = 'DeviceId' in params ? params.DeviceId : null;
+        this.Code = 'Code' in params ? params.Code : null;
+        this.Message = 'Message' in params ? params.Message : null;
+
+        if (params.Value) {
+            let obj = new OutputActivityAntiRushAdvancedValue();
+            obj.deserialize(params.Value)
+            this.Value = obj;
+        }
 
     }
 }
@@ -1522,11 +1579,12 @@ module.exports = {
     AccountInfo: AccountInfo,
     QueryActivityAntiRushAdvancedResponse: QueryActivityAntiRushAdvancedResponse,
     ManageMarketingRiskResponse: ManageMarketingRiskResponse,
+    WeChatAccountInfo: WeChatAccountInfo,
     SponsorInfo: SponsorInfo,
     QueryActivityAntiRushRequest: QueryActivityAntiRushRequest,
-    OutputActivityAntiRushAdvanced: OutputActivityAntiRushAdvanced,
+    InputDetails: InputDetails,
     OutputManageMarketingRiskValue: OutputManageMarketingRiskValue,
-    WeChatAccountInfo: WeChatAccountInfo,
+    OutputActivityAntiRushAdvanced: OutputActivityAntiRushAdvanced,
     QueryActivityAntiRushAdvancedRequest: QueryActivityAntiRushAdvancedRequest,
 
 }

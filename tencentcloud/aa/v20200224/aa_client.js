@@ -29,11 +29,12 @@ const OtherAccountInfo = models.OtherAccountInfo;
 const AccountInfo = models.AccountInfo;
 const QueryActivityAntiRushAdvancedResponse = models.QueryActivityAntiRushAdvancedResponse;
 const ManageMarketingRiskResponse = models.ManageMarketingRiskResponse;
+const WeChatAccountInfo = models.WeChatAccountInfo;
 const SponsorInfo = models.SponsorInfo;
 const QueryActivityAntiRushRequest = models.QueryActivityAntiRushRequest;
-const OutputActivityAntiRushAdvanced = models.OutputActivityAntiRushAdvanced;
+const InputDetails = models.InputDetails;
 const OutputManageMarketingRiskValue = models.OutputManageMarketingRiskValue;
-const WeChatAccountInfo = models.WeChatAccountInfo;
+const OutputActivityAntiRushAdvanced = models.OutputActivityAntiRushAdvanced;
 const QueryActivityAntiRushAdvancedRequest = models.QueryActivityAntiRushAdvancedRequest;
 
 

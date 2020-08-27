@@ -2462,7 +2462,7 @@ class DenseFaceShape extends  AbstractModel {
         this.CentralAxis = null;
 
         /**
-         * 下轮廓的 XX 个点。
+         * 下巴轮廓的 XX 个点。
          * @type {Array.<Point> || null}
          */
         this.Chin = null;

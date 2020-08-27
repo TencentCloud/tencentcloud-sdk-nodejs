@@ -938,6 +938,46 @@ class LinkMaterial extends  AbstractModel {
 }
 
 /**
+ * 导播台项目输入信息
+ * @class
+ */
+class SwitcherProjectInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 导播台停止时间。
+         * @type {string || null}
+         */
+        this.StopTime = null;
+
+        /**
+         * 导播台主监输出配置信息。
+         * @type {SwitcherPgmOutputConfig || null}
+         */
+        this.PgmOutputConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StopTime = 'StopTime' in params ? params.StopTime : null;
+
+        if (params.PgmOutputConfig) {
+            let obj = new SwitcherPgmOutputConfig();
+            obj.deserialize(params.PgmOutputConfig)
+            this.PgmOutputConfig = obj;
+        }
+
+    }
+}
+
+/**
  * FlattenListMedia请求参数结构体
  * @class
  */
@@ -1407,6 +1447,7 @@ class CreateProjectRequest extends  AbstractModel {
         /**
          * 项目类别，取值有：
 <li>VIDEO_EDIT：视频编辑。</li>
+<li>SWITCHER：导播台。</li>
          * @type {string || null}
          */
         this.Category = null;
@@ -1431,6 +1472,18 @@ class CreateProjectRequest extends  AbstractModel {
          */
         this.Owner = null;
 
+        /**
+         * 项目描述信息。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 导播台信息，仅当项目类型为 SWITCHER 时有效。
+         * @type {SwitcherProjectInput || null}
+         */
+        this.SwitcherProjectInput = null;
+
     }
 
     /**
@@ -1449,6 +1502,13 @@ class CreateProjectRequest extends  AbstractModel {
             let obj = new Entity();
             obj.deserialize(params.Owner)
             this.Owner = obj;
+        }
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.SwitcherProjectInput) {
+            let obj = new SwitcherProjectInput();
+            obj.deserialize(params.SwitcherProjectInput)
+            this.SwitcherProjectInput = obj;
         }
 
     }
@@ -2331,6 +2391,65 @@ class GrantResourceAuthorizationResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 导播台主监输出配置信息
+ * @class
+ */
+class SwitcherPgmOutputConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 导播台输出模板 ID，可取值：
+<li>10001：分辨率为1080 P；</li>
+<li>10002：分辨率为720 P；</li>
+<li>10003：分辨率为480 P。</li>
+         * @type {number || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * 导播台输出宽。
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 导播台输出高。
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * 导播台输出帧率。
+         * @type {number || null}
+         */
+        this.Fps = null;
+
+        /**
+         * 导播台输出码率。
+         * @type {number || null}
+         */
+        this.BitRate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Fps = 'Fps' in params ? params.Fps : null;
+        this.BitRate = 'BitRate' in params ? params.BitRate : null;
 
     }
 }
@@ -5401,6 +5520,7 @@ module.exports = {
     DeleteTeamRequest: DeleteTeamRequest,
     ModifyMaterialResponse: ModifyMaterialResponse,
     LinkMaterial: LinkMaterial,
+    SwitcherProjectInput: SwitcherProjectInput,
     FlattenListMediaRequest: FlattenListMediaRequest,
     AudioMaterial: AudioMaterial,
     AddMemberInfo: AddMemberInfo,
@@ -5429,6 +5549,7 @@ module.exports = {
     CreateClassRequest: CreateClassRequest,
     DescribeMaterialsResponse: DescribeMaterialsResponse,
     GrantResourceAuthorizationResponse: GrantResourceAuthorizationResponse,
+    SwitcherPgmOutputConfig: SwitcherPgmOutputConfig,
     CMEExportInfo: CMEExportInfo,
     ImportMediaToProjectRequest: ImportMediaToProjectRequest,
     VODExportInfo: VODExportInfo,

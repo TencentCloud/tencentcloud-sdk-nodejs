@@ -167,50 +167,18 @@ LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模�
 }
 
 /**
- * LivenessCompare返回参数结构体
+ * CheckBankCardInformation请求参数结构体
  * @class
  */
-class LivenessCompareResponse extends  AbstractModel {
+class CheckBankCardInformationRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 验证通过后的视频最佳截图照片，照片为BASE64编码后的值，jpg格式。
-注意：此字段可能返回 null，表示取不到有效值。
+         * 银行卡号。
          * @type {string || null}
          */
-        this.BestFrameBase64 = null;
-
-        /**
-         * 相似度，取值范围 [0.00, 100.00]。推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）。
-         * @type {number || null}
-         */
-        this.Sim = null;
-
-        /**
-         * 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分
-         * @type {string || null}
-         */
-        this.Result = null;
-
-        /**
-         * 业务结果描述。
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * 最佳截图列表，仅在配置了返回多张最佳截图时返回。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<string> || null}
-         */
-        this.BestFrameList = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.BankCard = null;
 
     }
 
@@ -221,12 +189,7 @@ class LivenessCompareResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BestFrameBase64 = 'BestFrameBase64' in params ? params.BestFrameBase64 : null;
-        this.Sim = 'Sim' in params ? params.Sim : null;
-        this.Result = 'Result' in params ? params.Result : null;
-        this.Description = 'Description' in params ? params.Description : null;
-        this.BestFrameList = 'BestFrameList' in params ? params.BestFrameList : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.BankCard = 'BankCard' in params ? params.BankCard : null;
 
     }
 }
@@ -390,6 +353,68 @@ class BankCardVerificationRequest extends  AbstractModel {
         this.Name = 'Name' in params ? params.Name : null;
         this.BankCard = 'BankCard' in params ? params.BankCard : null;
         this.CertType = 'CertType' in params ? params.CertType : null;
+
+    }
+}
+
+/**
+ * CheckBankCardInformation返回参数结构体
+ * @class
+ */
+class CheckBankCardInformationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 认证结果码，收费情况如下。
+收费结果码：
+0: 查询成功
+-1: 未查到信息
+不收费结果码
+-2：验证中心服务繁忙
+-3：银行卡不存在
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 业务结果描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 开户行
+         * @type {string || null}
+         */
+        this.AccountBank = null;
+
+        /**
+         * 卡性质：1. 借记卡；2. 贷记卡
+         * @type {number || null}
+         */
+        this.AccountType = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.AccountBank = 'AccountBank' in params ? params.AccountBank : null;
+        this.AccountType = 'AccountType' in params ? params.AccountType : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2155,6 +2180,71 @@ class GetDetectInfoResponse extends  AbstractModel {
 }
 
 /**
+ * LivenessCompare返回参数结构体
+ * @class
+ */
+class LivenessCompareResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 验证通过后的视频最佳截图照片，照片为BASE64编码后的值，jpg格式。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.BestFrameBase64 = null;
+
+        /**
+         * 相似度，取值范围 [0.00, 100.00]。推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）。
+         * @type {number || null}
+         */
+        this.Sim = null;
+
+        /**
+         * 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 业务结果描述。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 最佳截图列表，仅在配置了返回多张最佳截图时返回。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.BestFrameList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BestFrameBase64 = 'BestFrameBase64' in params ? params.BestFrameBase64 : null;
+        this.Sim = 'Sim' in params ? params.Sim : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.BestFrameList = 'BestFrameList' in params ? params.BestFrameList : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * GetLiveCode返回参数结构体
  * @class
  */
@@ -2590,11 +2680,12 @@ module.exports = {
     DetectInfoVideoData: DetectInfoVideoData,
     GetDetectInfoEnhancedRequest: GetDetectInfoEnhancedRequest,
     LivenessRequest: LivenessRequest,
-    LivenessCompareResponse: LivenessCompareResponse,
+    CheckBankCardInformationRequest: CheckBankCardInformationRequest,
     MobileNetworkTimeVerificationResponse: MobileNetworkTimeVerificationResponse,
     GetLiveCodeRequest: GetLiveCodeRequest,
     IdCardVerificationRequest: IdCardVerificationRequest,
     BankCardVerificationRequest: BankCardVerificationRequest,
+    CheckBankCardInformationResponse: CheckBankCardInformationResponse,
     DetectInfoBestFrame: DetectInfoBestFrame,
     CheckIdCardInformationResponse: CheckIdCardInformationResponse,
     GetDetectInfoEnhancedResponse: GetDetectInfoEnhancedResponse,
@@ -2623,6 +2714,7 @@ module.exports = {
     ImageRecognitionResponse: ImageRecognitionResponse,
     GetActionSequenceRequest: GetActionSequenceRequest,
     GetDetectInfoResponse: GetDetectInfoResponse,
+    LivenessCompareResponse: LivenessCompareResponse,
     GetLiveCodeResponse: GetLiveCodeResponse,
     GetDetectInfoRequest: GetDetectInfoRequest,
     BankCard2EVerificationResponse: BankCard2EVerificationResponse,

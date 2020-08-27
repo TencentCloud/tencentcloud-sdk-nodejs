@@ -45,42 +45,30 @@ class DeleteModelRequest extends  AbstractModel {
 }
 
 /**
- * TryLipstickPic请求参数结构体
+ * BeautifyVideo请求参数结构体
  * @class
  */
-class TryLipstickPicRequest extends  AbstractModel {
+class BeautifyVideoRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唇色信息。 
-您可以输入最多3个 LipColorInfo 来实现给一张图中的最多3张人脸试唇色。
-         * @type {Array.<LipColorInfo> || null}
-         */
-        this.LipColorInfos = null;
-
-        /**
-         * 图片 base64 数据，base64 编码后大小不可超过6M。 
-支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
-         * @type {string || null}
-         */
-        this.Image = null;
-
-        /**
-         * 图片的 Url ，对应图片 base64 编码后大小不可超过6M。 
-图片的 Url、Image必须提供一个，如果都提供，只使用 Url。 
-图片存储于腾讯云的 Url 可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
-非腾讯云存储的Url速度和稳定性可能受一定影响。 
-支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+         * 视频url地址
          * @type {string || null}
          */
         this.Url = null;
 
         /**
-         * 返回图像方式（base64 或 url ) ，二选一。url有效期为1天。
+         * 美颜参数 - 美白、平滑、大眼和瘦脸。参数值范围[0, 100]。参数值为0，则不做美颜。参数默认值为0。目前默认取数组第一个元素是对所有人脸美颜。
+         * @type {Array.<BeautyParam> || null}
+         */
+        this.BeautyParam = null;
+
+        /**
+         * 目前只支持mp4
          * @type {string || null}
          */
-        this.RspImgType = null;
+        this.OutputVideoType = null;
 
     }
 
@@ -91,76 +79,28 @@ class TryLipstickPicRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Url = 'Url' in params ? params.Url : null;
 
-        if (params.LipColorInfos) {
-            this.LipColorInfos = new Array();
-            for (let z in params.LipColorInfos) {
-                let obj = new LipColorInfo();
-                obj.deserialize(params.LipColorInfos[z]);
-                this.LipColorInfos.push(obj);
+        if (params.BeautyParam) {
+            this.BeautyParam = new Array();
+            for (let z in params.BeautyParam) {
+                let obj = new BeautyParam();
+                obj.deserialize(params.BeautyParam[z]);
+                this.BeautyParam.push(obj);
             }
         }
-        this.Image = 'Image' in params ? params.Image : null;
-        this.Url = 'Url' in params ? params.Url : null;
-        this.RspImgType = 'RspImgType' in params ? params.RspImgType : null;
+        this.OutputVideoType = 'OutputVideoType' in params ? params.OutputVideoType : null;
 
     }
 }
 
 /**
- * GetModelList请求参数结构体
+ * CancelBeautifyVideoJob返回参数结构体
  * @class
  */
-class GetModelListRequest extends  AbstractModel {
+class CancelBeautifyVideoJobResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 起始序号，默认值为0。
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 返回数量，默认值为10，最大值为100。
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-
-    }
-}
-
-/**
- * TryLipstickPic返回参数结构体
- * @class
- */
-class TryLipstickPicResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * RspImgType 为 base64 时，返回处理后的图片 base64 数据。默认返回base64
-         * @type {string || null}
-         */
-        this.ResultImage = null;
-
-        /**
-         * RspImgType 为 url 时，返回处理后的图片 url 数据。
-         * @type {string || null}
-         */
-        this.ResultUrl = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -177,9 +117,133 @@ class TryLipstickPicResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ResultImage = 'ResultImage' in params ? params.ResultImage : null;
-        this.ResultUrl = 'ResultUrl' in params ? params.ResultUrl : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RGBA通道信息
+ * @class
+ */
+class RGBAInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * R通道数值。[0,255]。
+         * @type {number || null}
+         */
+        this.R = null;
+
+        /**
+         * G通道数值。[0,255]。
+         * @type {number || null}
+         */
+        this.G = null;
+
+        /**
+         * B通道数值。[0,255]。
+         * @type {number || null}
+         */
+        this.B = null;
+
+        /**
+         * A通道数值。[0,100]。建议取值50。
+         * @type {number || null}
+         */
+        this.A = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.R = 'R' in params ? params.R : null;
+        this.G = 'G' in params ? params.G : null;
+        this.B = 'B' in params ? params.B : null;
+        this.A = 'A' in params ? params.A : null;
+
+    }
+}
+
+/**
+ * 视频美颜返回结果
+ * @class
+ */
+class BeautifyVideoOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 视频美颜输出的url
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VideoUrl = null;
+
+        /**
+         * 视频美颜输出的视频MD5，用于校验
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VideoMD5 = null;
+
+        /**
+         * 美颜输出的视频封面图base64字符串
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CoverImage = null;
+
+        /**
+         * 视频宽度
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 视频高度
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * 每秒传输帧数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Fps = null;
+
+        /**
+         * 视频播放时长，单位为秒
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DurationInSec = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VideoUrl = 'VideoUrl' in params ? params.VideoUrl : null;
+        this.VideoMD5 = 'VideoMD5' in params ? params.VideoMD5 : null;
+        this.CoverImage = 'CoverImage' in params ? params.CoverImage : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Fps = 'Fps' in params ? params.Fps : null;
+        this.DurationInSec = 'DurationInSec' in params ? params.DurationInSec : null;
 
     }
 }
@@ -246,24 +310,24 @@ ModelId 和 RGBA 两个参数只需提供一个，若都提供只使用 ModelId�
 }
 
 /**
- * CreateModel请求参数结构体
+ * CreateModel返回参数结构体
  * @class
  */
-class CreateModelRequest extends  AbstractModel {
+class CreateModelResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 用于试唇色，要求必须是LUT 格式的cube文件转换成512*512的PNG图片。查看 [LUT文件的使用说明](https://cloud.tencent.com/document/product/1172/41701)。了解 [cube文件转png图片小工具](http://yyb.gtimg.com/aiplat/static/qcloud-cube-to-png.html)。
+         * 唇色素材ID。
          * @type {string || null}
          */
-        this.LUTFile = null;
+        this.ModelId = null;
 
         /**
-         * 文件描述信息，可用于备注。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Description = null;
+        this.RequestId = null;
 
     }
 
@@ -274,57 +338,8 @@ class CreateModelRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.LUTFile = 'LUTFile' in params ? params.LUTFile : null;
-        this.Description = 'Description' in params ? params.Description : null;
-
-    }
-}
-
-/**
- * RGBA通道信息
- * @class
- */
-class RGBAInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * R通道数值。[0,255]。
-         * @type {number || null}
-         */
-        this.R = null;
-
-        /**
-         * G通道数值。[0,255]。
-         * @type {number || null}
-         */
-        this.G = null;
-
-        /**
-         * B通道数值。[0,255]。
-         * @type {number || null}
-         */
-        this.B = null;
-
-        /**
-         * A通道数值。[0,100]。建议取值50。
-         * @type {number || null}
-         */
-        this.A = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.R = 'R' in params ? params.R : null;
-        this.G = 'G' in params ? params.G : null;
-        this.B = 'B' in params ? params.B : null;
-        this.A = 'A' in params ? params.A : null;
+        this.ModelId = 'ModelId' in params ? params.ModelId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -381,6 +396,125 @@ class GetModelListResponse extends  AbstractModel {
 }
 
 /**
+ * BeautifyPic返回参数结构体
+ * @class
+ */
+class BeautifyPicResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * RspImgType 为 base64 时，返回处理后的图片 base64 数据。默认返回base64
+         * @type {string || null}
+         */
+        this.ResultImage = null;
+
+        /**
+         * RspImgType 为 url 时，返回处理后的图片 url 数据。
+         * @type {string || null}
+         */
+        this.ResultUrl = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResultImage = 'ResultImage' in params ? params.ResultImage : null;
+        this.ResultUrl = 'ResultUrl' in params ? params.ResultUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GetModelList请求参数结构体
+ * @class
+ */
+class GetModelListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 起始序号，默认值为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认值为10，最大值为100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * BeautifyVideo返回参数结构体
+ * @class
+ */
+class BeautifyVideoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 视频美颜任务的Job id
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 预估处理时间，粒度为秒
+         * @type {number || null}
+         */
+        this.EstimatedProcessTime = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.EstimatedProcessTime = 'EstimatedProcessTime' in params ? params.EstimatedProcessTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * LUT素材信息
  * @class
  */
@@ -417,6 +551,299 @@ class ModelInfo extends  AbstractModel {
         }
         this.ModelId = 'ModelId' in params ? params.ModelId : null;
         this.LUTFileUrl = 'LUTFileUrl' in params ? params.LUTFileUrl : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+    }
+}
+
+/**
+ * TryLipstickPic返回参数结构体
+ * @class
+ */
+class TryLipstickPicResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * RspImgType 为 base64 时，返回处理后的图片 base64 数据。默认返回base64
+         * @type {string || null}
+         */
+        this.ResultImage = null;
+
+        /**
+         * RspImgType 为 url 时，返回处理后的图片 url 数据。
+         * @type {string || null}
+         */
+        this.ResultUrl = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResultImage = 'ResultImage' in params ? params.ResultImage : null;
+        this.ResultUrl = 'ResultUrl' in params ? params.ResultUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteModel返回参数结构体
+ * @class
+ */
+class DeleteModelResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CancelBeautifyVideoJob请求参数结构体
+ * @class
+ */
+class CancelBeautifyVideoJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 美颜视频的Job id
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+
+    }
+}
+
+/**
+ * 全局美颜参数，针对所有人脸做美颜。参数全部为0，则为不做美颜
+ * @class
+ */
+class BeautyParam extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 美白程度，取值范围[0,100]。0不美白，100代表最高程度。默认值30。
+         * @type {number || null}
+         */
+        this.WhitenLevel = null;
+
+        /**
+         * 磨皮程度，取值范围[0,100]。0不磨皮，100代表最高程度。默认值30。
+         * @type {number || null}
+         */
+        this.SmoothingLevel = null;
+
+        /**
+         * 大眼程度，取值范围[0,100]。0不大眼，100代表最高程度。默认值70。
+         * @type {number || null}
+         */
+        this.EyeEnlargeLevel = null;
+
+        /**
+         * 瘦脸程度，取值范围[0,100]。0不瘦脸，100代表最高程度。默认值70。
+         * @type {number || null}
+         */
+        this.FaceShrinkLevel = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.WhitenLevel = 'WhitenLevel' in params ? params.WhitenLevel : null;
+        this.SmoothingLevel = 'SmoothingLevel' in params ? params.SmoothingLevel : null;
+        this.EyeEnlargeLevel = 'EyeEnlargeLevel' in params ? params.EyeEnlargeLevel : null;
+        this.FaceShrinkLevel = 'FaceShrinkLevel' in params ? params.FaceShrinkLevel : null;
+
+    }
+}
+
+/**
+ * TryLipstickPic请求参数结构体
+ * @class
+ */
+class TryLipstickPicRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唇色信息。 
+您可以输入最多3个 LipColorInfo 来实现给一张图中的最多3张人脸试唇色。
+         * @type {Array.<LipColorInfo> || null}
+         */
+        this.LipColorInfos = null;
+
+        /**
+         * 图片 base64 数据，base64 编码后大小不可超过6M。 
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+         * @type {string || null}
+         */
+        this.Image = null;
+
+        /**
+         * 图片的 Url ，对应图片 base64 编码后大小不可超过6M。 
+图片的 Url、Image必须提供一个，如果都提供，只使用 Url。 
+图片存储于腾讯云的 Url 可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
+非腾讯云存储的Url速度和稳定性可能受一定影响。 
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 返回图像方式（base64 或 url ) ，二选一。url有效期为1天。
+         * @type {string || null}
+         */
+        this.RspImgType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.LipColorInfos) {
+            this.LipColorInfos = new Array();
+            for (let z in params.LipColorInfos) {
+                let obj = new LipColorInfo();
+                obj.deserialize(params.LipColorInfos[z]);
+                this.LipColorInfos.push(obj);
+            }
+        }
+        this.Image = 'Image' in params ? params.Image : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.RspImgType = 'RspImgType' in params ? params.RspImgType : null;
+
+    }
+}
+
+/**
+ * QueryBeautifyVideoJob返回参数结构体
+ * @class
+ */
+class QueryBeautifyVideoJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 当前任务状态：排队中、处理中、处理失败或者处理完成
+         * @type {string || null}
+         */
+        this.JobStatus = null;
+
+        /**
+         * 视频美颜输出的结果信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {BeautifyVideoOutput || null}
+         */
+        this.BeautifyVideoOutput = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobStatus = 'JobStatus' in params ? params.JobStatus : null;
+
+        if (params.BeautifyVideoOutput) {
+            let obj = new BeautifyVideoOutput();
+            obj.deserialize(params.BeautifyVideoOutput)
+            this.BeautifyVideoOutput = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateModel请求参数结构体
+ * @class
+ */
+class CreateModelRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用于试唇色，要求必须是LUT 格式的cube文件转换成512*512的PNG图片。查看 [LUT文件的使用说明](https://cloud.tencent.com/document/product/1172/41701)。了解 [cube文件转png图片小工具](http://yyb.gtimg.com/aiplat/static/qcloud-cube-to-png.html)。
+         * @type {string || null}
+         */
+        this.LUTFile = null;
+
+        /**
+         * 文件描述信息，可用于备注。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LUTFile = 'LUTFile' in params ? params.LUTFile : null;
         this.Description = 'Description' in params ? params.Description : null;
 
     }
@@ -547,24 +974,18 @@ Url、Image必须提供一个，如果都提供，只使用 Url。
 }
 
 /**
- * CreateModel返回参数结构体
+ * QueryBeautifyVideoJob请求参数结构体
  * @class
  */
-class CreateModelResponse extends  AbstractModel {
+class QueryBeautifyVideoJobRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唇色素材ID。
+         * 视频美颜Job id
          * @type {string || null}
          */
-        this.ModelId = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.JobId = null;
 
     }
 
@@ -575,96 +996,33 @@ class CreateModelResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ModelId = 'ModelId' in params ? params.ModelId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DeleteModel返回参数结构体
- * @class
- */
-class DeleteModelResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * BeautifyPic返回参数结构体
- * @class
- */
-class BeautifyPicResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * RspImgType 为 base64 时，返回处理后的图片 base64 数据。默认返回base64
-         * @type {string || null}
-         */
-        this.ResultImage = null;
-
-        /**
-         * RspImgType 为 url 时，返回处理后的图片 url 数据。
-         * @type {string || null}
-         */
-        this.ResultUrl = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ResultImage = 'ResultImage' in params ? params.ResultImage : null;
-        this.ResultUrl = 'ResultUrl' in params ? params.ResultUrl : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.JobId = 'JobId' in params ? params.JobId : null;
 
     }
 }
 
 module.exports = {
     DeleteModelRequest: DeleteModelRequest,
-    TryLipstickPicRequest: TryLipstickPicRequest,
-    GetModelListRequest: GetModelListRequest,
-    TryLipstickPicResponse: TryLipstickPicResponse,
-    LipColorInfo: LipColorInfo,
-    CreateModelRequest: CreateModelRequest,
+    BeautifyVideoRequest: BeautifyVideoRequest,
+    CancelBeautifyVideoJobResponse: CancelBeautifyVideoJobResponse,
     RGBAInfo: RGBAInfo,
+    BeautifyVideoOutput: BeautifyVideoOutput,
+    LipColorInfo: LipColorInfo,
+    CreateModelResponse: CreateModelResponse,
     GetModelListResponse: GetModelListResponse,
+    BeautifyPicResponse: BeautifyPicResponse,
+    GetModelListRequest: GetModelListRequest,
+    BeautifyVideoResponse: BeautifyVideoResponse,
     ModelInfo: ModelInfo,
+    TryLipstickPicResponse: TryLipstickPicResponse,
+    DeleteModelResponse: DeleteModelResponse,
+    CancelBeautifyVideoJobRequest: CancelBeautifyVideoJobRequest,
+    BeautyParam: BeautyParam,
+    TryLipstickPicRequest: TryLipstickPicRequest,
+    QueryBeautifyVideoJobResponse: QueryBeautifyVideoJobResponse,
+    CreateModelRequest: CreateModelRequest,
     FaceRect: FaceRect,
     BeautifyPicRequest: BeautifyPicRequest,
-    CreateModelResponse: CreateModelResponse,
-    DeleteModelResponse: DeleteModelResponse,
-    BeautifyPicResponse: BeautifyPicResponse,
+    QueryBeautifyVideoJobRequest: QueryBeautifyVideoJobRequest,
 
 }

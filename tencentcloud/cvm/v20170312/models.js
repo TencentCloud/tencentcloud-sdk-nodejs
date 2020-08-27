@@ -2172,6 +2172,34 @@ class DescribeInstancesOperationLimitRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeSpotTypeConfig返回参数结构体
+ * @class
+ */
+class DescribeSpotTypeConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyInstancesChargeType请求参数结构体
  * @class
  */
@@ -3159,36 +3187,24 @@ class InstanceMarketOptionsRequest extends  AbstractModel {
 }
 
 /**
- * InquiryPriceResetInstancesInternetMaxBandwidth请求参数结构体
+ * DescribeImageSharePermission返回参数结构体
  * @class
  */
-class InquiryPriceResetInstancesInternetMaxBandwidthRequest extends  AbstractModel {
+class DescribeImageSharePermissionResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。当调整 `BANDWIDTH_PREPAID` 和 `BANDWIDTH_POSTPAID_BY_HOUR` 计费方式的带宽时，只支持一个实例。
-         * @type {Array.<string> || null}
+         * 镜像共享信息
+         * @type {Array.<SharePermission> || null}
          */
-        this.InstanceIds = null;
+        this.SharePermissionSet = null;
 
         /**
-         * 公网出带宽配置。不同机型带宽上限范围不一致，具体限制详见带宽限制对账表。暂时只支持`InternetMaxBandwidthOut`参数。
-         * @type {InternetAccessible || null}
-         */
-        this.InternetAccessible = null;
-
-        /**
-         * 带宽生效的起始时间。格式：`YYYY-MM-DD`，例如：`2016-10-30`。起始时间不能早于当前时间。如果起始时间是今天则新设置的带宽立即生效。该参数只对包年包月带宽有效，其他模式带宽不支持该参数，否则接口会以相应错误码返回。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.StartTime = null;
-
-        /**
-         * 带宽生效的终止时间。格式：`YYYY-MM-DD`，例如：`2016-10-30`。新设置的带宽的有效期包含终止时间此日期。终止时间不能晚于包年包月实例的到期时间。实例的到期时间可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`ExpiredTime`获取。该参数只对包年包月带宽有效，其他模式带宽不支持该参数，否则接口会以相应错误码返回。
-         * @type {string || null}
-         */
-        this.EndTime = null;
+        this.RequestId = null;
 
     }
 
@@ -3199,15 +3215,16 @@ class InquiryPriceResetInstancesInternetMaxBandwidthRequest extends  AbstractMod
         if (!params) {
             return;
         }
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
-        if (params.InternetAccessible) {
-            let obj = new InternetAccessible();
-            obj.deserialize(params.InternetAccessible)
-            this.InternetAccessible = obj;
+        if (params.SharePermissionSet) {
+            this.SharePermissionSet = new Array();
+            for (let z in params.SharePermissionSet) {
+                let obj = new SharePermission();
+                obj.deserialize(params.SharePermissionSet[z]);
+                this.SharePermissionSet.push(obj);
+            }
         }
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3868,7 +3885,7 @@ class DataDisk extends  AbstractModel {
         this.DiskSize = null;
 
         /**
-         * 数据盘类型。数据盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><br>默认取值：LOCAL_BASIC。<br><br>该参数对`ResizeInstanceDisk`接口无效。
+         * 数据盘类型。数据盘类型限制详见[存储概述](https://cloud.tencent.com/document/product/213/4952)。取值范围：<br><li>LOCAL_BASIC：本地硬盘<br><li>LOCAL_SSD：本地SSD硬盘<br><li>CLOUD_BASIC：普通云硬盘<br><li>CLOUD_PREMIUM：高性能云硬盘<br><li>CLOUD_SSD：SSD云硬盘<br><li>CLOUD_HSSD：增强型SSD云硬盘<br><br>默认取值：LOCAL_BASIC。<br><br>该参数对`ResizeInstanceDisk`接口无效。
          * @type {string || null}
          */
         this.DiskType = null;
@@ -5630,24 +5647,36 @@ class DescribeInstanceTypeConfigsRequest extends  AbstractModel {
 }
 
 /**
- * DescribeImageSharePermission返回参数结构体
+ * InquiryPriceResetInstancesInternetMaxBandwidth请求参数结构体
  * @class
  */
-class DescribeImageSharePermissionResponse extends  AbstractModel {
+class InquiryPriceResetInstancesInternetMaxBandwidthRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 镜像共享信息
-         * @type {Array.<SharePermission> || null}
+         * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。当调整 `BANDWIDTH_PREPAID` 和 `BANDWIDTH_POSTPAID_BY_HOUR` 计费方式的带宽时，只支持一个实例。
+         * @type {Array.<string> || null}
          */
-        this.SharePermissionSet = null;
+        this.InstanceIds = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 公网出带宽配置。不同机型带宽上限范围不一致，具体限制详见带宽限制对账表。暂时只支持`InternetMaxBandwidthOut`参数。
+         * @type {InternetAccessible || null}
+         */
+        this.InternetAccessible = null;
+
+        /**
+         * 带宽生效的起始时间。格式：`YYYY-MM-DD`，例如：`2016-10-30`。起始时间不能早于当前时间。如果起始时间是今天则新设置的带宽立即生效。该参数只对包年包月带宽有效，其他模式带宽不支持该参数，否则接口会以相应错误码返回。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.StartTime = null;
+
+        /**
+         * 带宽生效的终止时间。格式：`YYYY-MM-DD`，例如：`2016-10-30`。新设置的带宽的有效期包含终止时间此日期。终止时间不能晚于包年包月实例的到期时间。实例的到期时间可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`ExpiredTime`获取。该参数只对包年包月带宽有效，其他模式带宽不支持该参数，否则接口会以相应错误码返回。
+         * @type {string || null}
+         */
+        this.EndTime = null;
 
     }
 
@@ -5658,16 +5687,15 @@ class DescribeImageSharePermissionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
-        if (params.SharePermissionSet) {
-            this.SharePermissionSet = new Array();
-            for (let z in params.SharePermissionSet) {
-                let obj = new SharePermission();
-                obj.deserialize(params.SharePermissionSet[z]);
-                this.SharePermissionSet.push(obj);
-            }
+        if (params.InternetAccessible) {
+            let obj = new InternetAccessible();
+            obj.deserialize(params.InternetAccessible)
+            this.InternetAccessible = obj;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -6823,6 +6851,27 @@ class RebootInstancesResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSpotTypeConfig请求参数结构体
+ * @class
+ */
+class DescribeSpotTypeConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
 
     }
 }
@@ -8496,6 +8545,7 @@ module.exports = {
     ModifyInstancesVpcAttributeResponse: ModifyInstancesVpcAttributeResponse,
     InquiryPriceResetInstancesTypeRequest: InquiryPriceResetInstancesTypeRequest,
     DescribeInstancesOperationLimitRequest: DescribeInstancesOperationLimitRequest,
+    DescribeSpotTypeConfigResponse: DescribeSpotTypeConfigResponse,
     ModifyInstancesChargeTypeRequest: ModifyInstancesChargeTypeRequest,
     DescribeInstanceVncUrlRequest: DescribeInstanceVncUrlRequest,
     ModifyImageSharePermissionRequest: ModifyImageSharePermissionRequest,
@@ -8523,7 +8573,7 @@ module.exports = {
     CreateImageResponse: CreateImageResponse,
     StopInstancesResponse: StopInstancesResponse,
     InstanceMarketOptionsRequest: InstanceMarketOptionsRequest,
-    InquiryPriceResetInstancesInternetMaxBandwidthRequest: InquiryPriceResetInstancesInternetMaxBandwidthRequest,
+    DescribeImageSharePermissionResponse: DescribeImageSharePermissionResponse,
     ResetInstancesPasswordResponse: ResetInstancesPasswordResponse,
     InquiryPriceRunInstancesRequest: InquiryPriceRunInstancesRequest,
     Image: Image,
@@ -8564,7 +8614,7 @@ module.exports = {
     DisasterRecoverGroup: DisasterRecoverGroup,
     InquiryPriceResetInstanceResponse: InquiryPriceResetInstanceResponse,
     DescribeInstanceTypeConfigsRequest: DescribeInstanceTypeConfigsRequest,
-    DescribeImageSharePermissionResponse: DescribeImageSharePermissionResponse,
+    InquiryPriceResetInstancesInternetMaxBandwidthRequest: InquiryPriceResetInstancesInternetMaxBandwidthRequest,
     ModifyHostsAttributeResponse: ModifyHostsAttributeResponse,
     DescribeDisasterRecoverGroupQuotaRequest: DescribeDisasterRecoverGroupQuotaRequest,
     StartInstancesResponse: StartInstancesResponse,
@@ -8588,6 +8638,7 @@ module.exports = {
     ImportImageResponse: ImportImageResponse,
     ModifyDisasterRecoverGroupAttributeRequest: ModifyDisasterRecoverGroupAttributeRequest,
     RebootInstancesResponse: RebootInstancesResponse,
+    DescribeSpotTypeConfigRequest: DescribeSpotTypeConfigRequest,
     InquiryPriceResetInstancesTypeResponse: InquiryPriceResetInstancesTypeResponse,
     ReservedInstancesOffering: ReservedInstancesOffering,
     OsVersion: OsVersion,

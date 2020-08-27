@@ -59,6 +59,7 @@ const DescribeImagesResponse = models.DescribeImagesResponse;
 const ModifyInstancesVpcAttributeResponse = models.ModifyInstancesVpcAttributeResponse;
 const InquiryPriceResetInstancesTypeRequest = models.InquiryPriceResetInstancesTypeRequest;
 const DescribeInstancesOperationLimitRequest = models.DescribeInstancesOperationLimitRequest;
+const DescribeSpotTypeConfigResponse = models.DescribeSpotTypeConfigResponse;
 const ModifyInstancesChargeTypeRequest = models.ModifyInstancesChargeTypeRequest;
 const DescribeInstanceVncUrlRequest = models.DescribeInstanceVncUrlRequest;
 const ModifyImageSharePermissionRequest = models.ModifyImageSharePermissionRequest;
@@ -86,7 +87,7 @@ const DescribeInstanceFamilyConfigsResponse = models.DescribeInstanceFamilyConfi
 const CreateImageResponse = models.CreateImageResponse;
 const StopInstancesResponse = models.StopInstancesResponse;
 const InstanceMarketOptionsRequest = models.InstanceMarketOptionsRequest;
-const InquiryPriceResetInstancesInternetMaxBandwidthRequest = models.InquiryPriceResetInstancesInternetMaxBandwidthRequest;
+const DescribeImageSharePermissionResponse = models.DescribeImageSharePermissionResponse;
 const ResetInstancesPasswordResponse = models.ResetInstancesPasswordResponse;
 const InquiryPriceRunInstancesRequest = models.InquiryPriceRunInstancesRequest;
 const Image = models.Image;
@@ -127,7 +128,7 @@ const DescribeImageSharePermissionRequest = models.DescribeImageSharePermissionR
 const DisasterRecoverGroup = models.DisasterRecoverGroup;
 const InquiryPriceResetInstanceResponse = models.InquiryPriceResetInstanceResponse;
 const DescribeInstanceTypeConfigsRequest = models.DescribeInstanceTypeConfigsRequest;
-const DescribeImageSharePermissionResponse = models.DescribeImageSharePermissionResponse;
+const InquiryPriceResetInstancesInternetMaxBandwidthRequest = models.InquiryPriceResetInstancesInternetMaxBandwidthRequest;
 const ModifyHostsAttributeResponse = models.ModifyHostsAttributeResponse;
 const DescribeDisasterRecoverGroupQuotaRequest = models.DescribeDisasterRecoverGroupQuotaRequest;
 const StartInstancesResponse = models.StartInstancesResponse;
@@ -151,6 +152,7 @@ const DeleteImagesResponse = models.DeleteImagesResponse;
 const ImportImageResponse = models.ImportImageResponse;
 const ModifyDisasterRecoverGroupAttributeRequest = models.ModifyDisasterRecoverGroupAttributeRequest;
 const RebootInstancesResponse = models.RebootInstancesResponse;
+const DescribeSpotTypeConfigRequest = models.DescribeSpotTypeConfigRequest;
 const InquiryPriceResetInstancesTypeResponse = models.InquiryPriceResetInstancesTypeResponse;
 const ReservedInstancesOffering = models.ReservedInstancesOffering;
 const OsVersion = models.OsVersion;
@@ -1102,6 +1104,17 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     DisassociateSecurityGroups(req, cb) {
         let resp = new DisassociateSecurityGroupsResponse();
         this.request("DisassociateSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * 查询用户可购买的竞价机型信息列表
+     * @param {DescribeSpotTypeConfigRequest} req
+     * @param {function(string, DescribeSpotTypeConfigResponse):void} cb
+     * @public
+     */
+    DescribeSpotTypeConfig(req, cb) {
+        let resp = new DescribeSpotTypeConfigResponse();
+        this.request("DescribeSpotTypeConfig", req, resp, cb);
     }
 
 
