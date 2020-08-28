@@ -62,6 +62,8 @@ const ModifySyncJobResponse = models.ModifySyncJobResponse;
 const DescribeAsyncRequestInfoResponse = models.DescribeAsyncRequestInfoResponse;
 const CompleteMigrateJobRequest = models.CompleteMigrateJobRequest;
 const ResetSubscribeRequest = models.ResetSubscribeRequest;
+const TagItem = models.TagItem;
+const TagFilter = models.TagFilter;
 const ModifySubscribeConsumeTimeRequest = models.ModifySubscribeConsumeTimeRequest;
 const SwitchDrToMasterResponse = models.SwitchDrToMasterResponse;
 const ModifyMigrateJobResponse = models.ModifyMigrateJobResponse;
@@ -69,11 +71,13 @@ const CreateSyncJobRequest = models.CreateSyncJobRequest;
 const DescribeSyncJobsRequest = models.DescribeSyncJobsRequest;
 const DescribeMigrateJobsRequest = models.DescribeMigrateJobsRequest;
 const SyncDetailInfo = models.SyncDetailInfo;
+const ModifySubscribeAutoRenewFlagResponse = models.ModifySubscribeAutoRenewFlagResponse;
 const StopMigrateJobResponse = models.StopMigrateJobResponse;
 const SyncOption = models.SyncOption;
 const OfflineIsolatedSubscribeResponse = models.OfflineIsolatedSubscribeResponse;
 const SyncStepDetailInfo = models.SyncStepDetailInfo;
 const IsolateSubscribeRequest = models.IsolateSubscribeRequest;
+const ModifySubscribeAutoRenewFlagRequest = models.ModifySubscribeAutoRenewFlagRequest;
 const DeleteSyncJobResponse = models.DeleteSyncJobResponse;
 const CreateSyncCheckJobRequest = models.CreateSyncCheckJobRequest;
 const ModifySyncJobRequest = models.ModifySyncJobRequest;
@@ -218,6 +222,17 @@ class DtsClient extends AbstractClient {
     SwitchDrToMaster(req, cb) {
         let resp = new SwitchDrToMasterResponse();
         this.request("SwitchDrToMaster", req, resp, cb);
+    }
+
+    /**
+     * 修改订阅实例自动续费标识
+     * @param {ModifySubscribeAutoRenewFlagRequest} req
+     * @param {function(string, ModifySubscribeAutoRenewFlagResponse):void} cb
+     * @public
+     */
+    ModifySubscribeAutoRenewFlag(req, cb) {
+        let resp = new ModifySubscribeAutoRenewFlagResponse();
+        this.request("ModifySubscribeAutoRenewFlag", req, resp, cb);
     }
 
     /**

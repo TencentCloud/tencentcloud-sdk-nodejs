@@ -924,6 +924,55 @@ class DescribeProcessTaskStatusRequest extends  AbstractModel {
 }
 
 /**
+ * 地域信息
+ * @class
+ */
+class RegionInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 地域标志，如 ap-guangzhou，ap-shanghai，ap-beijing
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 地域中文名，如华南地区（广州），华东地区（上海金融），华北地区（北京）
+         * @type {string || null}
+         */
+        this.RegionName = null;
+
+        /**
+         * 地域ID
+         * @type {number || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * 地域代码，如 gz，sh，bj
+         * @type {string || null}
+         */
+        this.RegionCode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Region = 'Region' in params ? params.Region : null;
+        this.RegionName = 'RegionName' in params ? params.RegionName : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.RegionCode = 'RegionCode' in params ? params.RegionCode : null;
+
+    }
+}
+
+/**
  * DescribeVulScanResult返回参数结构体
  * @class
  */
@@ -9231,6 +9280,12 @@ class Machine extends  AbstractModel {
          */
         this.InvasionNum = null;
 
+        /**
+         * 地域信息
+         * @type {RegionInfo || null}
+         */
+        this.RegionInfo = null;
+
     }
 
     /**
@@ -9264,6 +9319,12 @@ class Machine extends  AbstractModel {
         this.CyberAttackNum = 'CyberAttackNum' in params ? params.CyberAttackNum : null;
         this.SecurityStatus = 'SecurityStatus' in params ? params.SecurityStatus : null;
         this.InvasionNum = 'InvasionNum' in params ? params.InvasionNum : null;
+
+        if (params.RegionInfo) {
+            let obj = new RegionInfo();
+            obj.deserialize(params.RegionInfo)
+            this.RegionInfo = obj;
+        }
 
     }
 }
@@ -11536,6 +11597,7 @@ module.exports = {
     DescribeWeeklyReportBruteAttacksRequest: DescribeWeeklyReportBruteAttacksRequest,
     CreateUsualLoginPlacesRequest: CreateUsualLoginPlacesRequest,
     DescribeProcessTaskStatusRequest: DescribeProcessTaskStatusRequest,
+    RegionInfo: RegionInfo,
     DescribeVulScanResultResponse: DescribeVulScanResultResponse,
     ModifyAlarmAttributeRequest: ModifyAlarmAttributeRequest,
     DescribeAttackLogsRequest: DescribeAttackLogsRequest,

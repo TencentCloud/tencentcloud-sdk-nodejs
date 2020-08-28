@@ -357,6 +357,95 @@ class ChangeAgePicRequest extends  AbstractModel {
     }
 }
 
+/**
+ * FaceCartoonPic请求参数结构体
+ * @class
+ */
+class FaceCartoonPicRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片 base64 数据，base64 编码后大小不可超过5M。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+         * @type {string || null}
+         */
+        this.Image = null;
+
+        /**
+         * 图片的 Url ，对应图片 base64 编码后大小不可超过5M。
+图片的 Url、Image必须提供一个，如果都提供，只使用 Url。
+图片存储于腾讯云的 Url 可保障更高下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的Url速度和稳定性可能受一定影响。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 返回图像方式（base64 或 url ) ，二选一。url有效期为1天。
+         * @type {string || null}
+         */
+        this.RspImgType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Image = 'Image' in params ? params.Image : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.RspImgType = 'RspImgType' in params ? params.RspImgType : null;
+
+    }
+}
+
+/**
+ * FaceCartoonPic返回参数结构体
+ * @class
+ */
+class FaceCartoonPicResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 结果图片Base64信息。
+         * @type {string || null}
+         */
+        this.ResultImage = null;
+
+        /**
+         * RspImgType 为 url 时，返回处理后的图片 url 数据。(暂时不支持)
+         * @type {string || null}
+         */
+        this.ResultUrl = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResultImage = 'ResultImage' in params ? params.ResultImage : null;
+        this.ResultUrl = 'ResultUrl' in params ? params.ResultUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
 module.exports = {
     SwapGenderPicRequest: SwapGenderPicRequest,
     AgeInfo: AgeInfo,
@@ -365,5 +454,7 @@ module.exports = {
     ChangeAgePicResponse: ChangeAgePicResponse,
     FaceRect: FaceRect,
     ChangeAgePicRequest: ChangeAgePicRequest,
+    FaceCartoonPicRequest: FaceCartoonPicRequest,
+    FaceCartoonPicResponse: FaceCartoonPicResponse,
 
 }

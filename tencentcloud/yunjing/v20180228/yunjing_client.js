@@ -36,6 +36,7 @@ const WeeklyReportVul = models.WeeklyReportVul;
 const DescribeWeeklyReportBruteAttacksRequest = models.DescribeWeeklyReportBruteAttacksRequest;
 const CreateUsualLoginPlacesRequest = models.CreateUsualLoginPlacesRequest;
 const DescribeProcessTaskStatusRequest = models.DescribeProcessTaskStatusRequest;
+const RegionInfo = models.RegionInfo;
 const DescribeVulScanResultResponse = models.DescribeVulScanResultResponse;
 const ModifyAlarmAttributeRequest = models.ModifyAlarmAttributeRequest;
 const DescribeAttackLogsRequest = models.DescribeAttackLogsRequest;

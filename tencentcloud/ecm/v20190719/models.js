@@ -4967,13 +4967,13 @@ class SecurityGroupPolicySet extends  AbstractModel {
         this.Version = null;
 
         /**
-         * 出站规则。
+         * 出站规则。其中出站规则和入站规则必须选一个。
          * @type {Array.<SecurityGroupPolicy> || null}
          */
         this.Egress = null;
 
         /**
-         * 入站规则。
+         * 入站规则。其中出站规则和入站规则必须选一个。
          * @type {Array.<SecurityGroupPolicy> || null}
          */
         this.Ingress = null;

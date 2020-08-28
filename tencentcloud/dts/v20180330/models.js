@@ -797,6 +797,20 @@ class SubscribeInfo extends  AbstractModel {
          */
         this.SdkConsumedTime = null;
 
+        /**
+         * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<TagItem> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 自动续费标识。0-不自动续费，1-自动续费
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
     }
 
     /**
@@ -827,6 +841,16 @@ class SubscribeInfo extends  AbstractModel {
         this.UniqSubnetId = 'UniqSubnetId' in params ? params.UniqSubnetId : null;
         this.Status = 'Status' in params ? params.Status : null;
         this.SdkConsumedTime = 'SdkConsumedTime' in params ? params.SdkConsumedTime : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new TagItem();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
 
     }
 }
@@ -1263,6 +1287,20 @@ class DescribeSubscribeConfResponse extends  AbstractModel {
         this.Region = null;
 
         /**
+         * 订阅实例的标签
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<TagItem> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 自动续费标识,0-不自动续费，1-自动续费
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1309,6 +1347,16 @@ class DescribeSubscribeConfResponse extends  AbstractModel {
         }
         this.ModifyTime = 'ModifyTime' in params ? params.ModifyTime : null;
         this.Region = 'Region' in params ? params.Region : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new TagItem();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1655,6 +1703,12 @@ class CreateSubscribeRequest extends  AbstractModel {
          */
         this.AutoRenew = null;
 
+        /**
+         * 实例资源标签
+         * @type {Array.<TagItem> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -1669,6 +1723,15 @@ class CreateSubscribeRequest extends  AbstractModel {
         this.Duration = 'Duration' in params ? params.Duration : null;
         this.Count = 'Count' in params ? params.Count : null;
         this.AutoRenew = 'AutoRenew' in params ? params.AutoRenew : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new TagItem();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -2102,6 +2165,12 @@ class DescribeSubscribesRequest extends  AbstractModel {
          */
         this.OrderDirection = null;
 
+        /**
+         * 标签过滤条件
+         * @type {Array.<TagFilter> || null}
+         */
+        this.TagFilters = null;
+
     }
 
     /**
@@ -2122,6 +2191,15 @@ class DescribeSubscribesRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.OrderDirection = 'OrderDirection' in params ? params.OrderDirection : null;
+
+        if (params.TagFilters) {
+            this.TagFilters = new Array();
+            for (let z in params.TagFilters) {
+                let obj = new TagFilter();
+                obj.deserialize(params.TagFilters[z]);
+                this.TagFilters.push(obj);
+            }
+        }
 
     }
 }
@@ -2542,6 +2620,77 @@ class ResetSubscribeRequest extends  AbstractModel {
 }
 
 /**
+ * 标签
+ * @class
+ */
+class TagItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签键值
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
+ * 标签过滤
+ * @class
+ */
+class TagFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签键值
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * 标签值
+         * @type {Array.<string> || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
  * ModifySubscribeConsumeTime请求参数结构体
  * @class
  */
@@ -2945,6 +3094,34 @@ class SyncDetailInfo extends  AbstractModel {
 }
 
 /**
+ * ModifySubscribeAutoRenewFlag返回参数结构体
+ * @class
+ */
+class ModifySubscribeAutoRenewFlagResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * StopMigrateJob返回参数结构体
  * @class
  */
@@ -3122,6 +3299,41 @@ class IsolateSubscribeRequest extends  AbstractModel {
             return;
         }
         this.SubscribeId = 'SubscribeId' in params ? params.SubscribeId : null;
+
+    }
+}
+
+/**
+ * ModifySubscribeAutoRenewFlag请求参数结构体
+ * @class
+ */
+class ModifySubscribeAutoRenewFlagRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 订阅实例ID，例如：subs-8uey736k
+         * @type {string || null}
+         */
+        this.SubscribeId = null;
+
+        /**
+         * 自动续费标识。1-自动续费，0-不自动续费
+         * @type {number || null}
+         */
+        this.AutoRenewFlag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubscribeId = 'SubscribeId' in params ? params.SubscribeId : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
 
     }
 }
@@ -4017,6 +4229,8 @@ module.exports = {
     DescribeAsyncRequestInfoResponse: DescribeAsyncRequestInfoResponse,
     CompleteMigrateJobRequest: CompleteMigrateJobRequest,
     ResetSubscribeRequest: ResetSubscribeRequest,
+    TagItem: TagItem,
+    TagFilter: TagFilter,
     ModifySubscribeConsumeTimeRequest: ModifySubscribeConsumeTimeRequest,
     SwitchDrToMasterResponse: SwitchDrToMasterResponse,
     ModifyMigrateJobResponse: ModifyMigrateJobResponse,
@@ -4024,11 +4238,13 @@ module.exports = {
     DescribeSyncJobsRequest: DescribeSyncJobsRequest,
     DescribeMigrateJobsRequest: DescribeMigrateJobsRequest,
     SyncDetailInfo: SyncDetailInfo,
+    ModifySubscribeAutoRenewFlagResponse: ModifySubscribeAutoRenewFlagResponse,
     StopMigrateJobResponse: StopMigrateJobResponse,
     SyncOption: SyncOption,
     OfflineIsolatedSubscribeResponse: OfflineIsolatedSubscribeResponse,
     SyncStepDetailInfo: SyncStepDetailInfo,
     IsolateSubscribeRequest: IsolateSubscribeRequest,
+    ModifySubscribeAutoRenewFlagRequest: ModifySubscribeAutoRenewFlagRequest,
     DeleteSyncJobResponse: DeleteSyncJobResponse,
     CreateSyncCheckJobRequest: CreateSyncCheckJobRequest,
     ModifySyncJobRequest: ModifySyncJobRequest,

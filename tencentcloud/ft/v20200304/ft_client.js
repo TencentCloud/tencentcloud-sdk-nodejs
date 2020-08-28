@@ -23,6 +23,8 @@ const SwapGenderPicResponse = models.SwapGenderPicResponse;
 const ChangeAgePicResponse = models.ChangeAgePicResponse;
 const FaceRect = models.FaceRect;
 const ChangeAgePicRequest = models.ChangeAgePicRequest;
+const FaceCartoonPicRequest = models.FaceCartoonPicRequest;
+const FaceCartoonPicResponse = models.FaceCartoonPicResponse;
 
 
 /**
@@ -44,6 +46,17 @@ class FtClient extends AbstractClient {
     SwapGenderPic(req, cb) {
         let resp = new SwapGenderPicResponse();
         this.request("SwapGenderPic", req, resp, cb);
+    }
+
+    /**
+     * 人像动漫化
+     * @param {FaceCartoonPicRequest} req
+     * @param {function(string, FaceCartoonPicResponse):void} cb
+     * @public
+     */
+    FaceCartoonPic(req, cb) {
+        let resp = new FaceCartoonPicResponse();
+        this.request("FaceCartoonPic", req, resp, cb);
     }
 
     /**
