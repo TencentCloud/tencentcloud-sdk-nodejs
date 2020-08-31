@@ -3815,7 +3815,7 @@ class DescribeCrossBorderComplianceRequest extends  AbstractModel {
         this.UniformSocialCreditCode = null;
 
         /**
-         * （模糊查询）法人。
+         * （模糊查询）法定代表人。
          * @type {string || null}
          */
         this.LegalPerson = null;
@@ -3869,13 +3869,13 @@ class DescribeCrossBorderComplianceRequest extends  AbstractModel {
         this.Email = null;
 
         /**
-         * （精确匹配）服务开始时间。
+         * （精确匹配）服务开始日期，如：`2020-07-28`。
          * @type {string || null}
          */
         this.ServiceStartDate = null;
 
         /**
-         * （精确匹配）服务开始时间。
+         * （精确匹配）服务结束日期，如：`2021-07-28`。
          * @type {string || null}
          */
         this.ServiceEndDate = null;
@@ -13630,7 +13630,7 @@ AnycastEIP是否用于绑定负载均衡。
 }
 
 /**
- * 跨境专线合规化审批单
+ * 合规化审批单
  * @class
  */
 class CrossBorderCompliance extends  AbstractModel {
@@ -13662,7 +13662,7 @@ class CrossBorderCompliance extends  AbstractModel {
         this.UniformSocialCreditCode = null;
 
         /**
-         * 法人。
+         * 法定代表人。
          * @type {string || null}
          */
         this.LegalPerson = null;
@@ -13728,7 +13728,7 @@ class CrossBorderCompliance extends  AbstractModel {
         this.Email = null;
 
         /**
-         * 跨境专线服务受理单。
+         * 服务受理单。
          * @type {string || null}
          */
         this.ServiceHandlingForm = null;

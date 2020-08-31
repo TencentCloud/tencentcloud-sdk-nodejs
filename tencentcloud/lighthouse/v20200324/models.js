@@ -671,13 +671,13 @@ class DescribeBlueprintsRequest extends  AbstractModel {
         this.BlueprintIds = null;
 
         /**
-         * 偏移量，默认为 0。
+         * 偏移量，默认为 0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * 返回数量，默认为 20，最大值为 100。
+         * 返回数量，默认为 20，最大值为 100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
          * @type {number || null}
          */
         this.Limit = null;
@@ -985,13 +985,13 @@ class DescribeInstancesRequest extends  AbstractModel {
         this.Filters = null;
 
         /**
-         * 偏移量，默认为 0。
+         * 偏移量，默认为 0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * 返回数量，默认为 20，最大值为 100。
+         * 返回数量，默认为 20，最大值为 100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
          * @type {number || null}
          */
         this.Limit = null;
@@ -1207,13 +1207,13 @@ class DescribeBundlesRequest extends  AbstractModel {
         this.BundleIds = null;
 
         /**
-         * 偏移量，默认为 0。
+         * 偏移量，默认为 0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
          * @type {number || null}
          */
         this.Offset = null;
 
         /**
-         * 返回数量，默认为 20，最大值为 100。
+         * 返回数量，默认为 20，最大值为 100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
          * @type {number || null}
          */
         this.Limit = null;

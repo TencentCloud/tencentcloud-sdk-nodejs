@@ -16,15 +16,23 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const SwapGenderPicRequest = models.SwapGenderPicRequest;
+const QueryFaceMorphJobResponse = models.QueryFaceMorphJobResponse;
+const CancelFaceMorphJobResponse = models.CancelFaceMorphJobResponse;
 const AgeInfo = models.AgeInfo;
-const GenderInfo = models.GenderInfo;
-const SwapGenderPicResponse = models.SwapGenderPicResponse;
-const ChangeAgePicResponse = models.ChangeAgePicResponse;
 const FaceRect = models.FaceRect;
+const GenderInfo = models.GenderInfo;
+const SwapGenderPicRequest = models.SwapGenderPicRequest;
+const GradientInfo = models.GradientInfo;
+const SwapGenderPicResponse = models.SwapGenderPicResponse;
+const FaceMorphOutput = models.FaceMorphOutput;
+const MorphFaceRequest = models.MorphFaceRequest;
+const ChangeAgePicResponse = models.ChangeAgePicResponse;
 const ChangeAgePicRequest = models.ChangeAgePicRequest;
+const CancelFaceMorphJobRequest = models.CancelFaceMorphJobRequest;
 const FaceCartoonPicRequest = models.FaceCartoonPicRequest;
+const QueryFaceMorphJobRequest = models.QueryFaceMorphJobRequest;
 const FaceCartoonPicResponse = models.FaceCartoonPicResponse;
+const MorphFaceResponse = models.MorphFaceResponse;
 
 
 /**
@@ -38,6 +46,17 @@ class FtClient extends AbstractClient {
     }
     
     /**
+     * 撤销人像渐变任务请求
+     * @param {CancelFaceMorphJobRequest} req
+     * @param {function(string, CancelFaceMorphJobResponse):void} cb
+     * @public
+     */
+    CancelFaceMorphJob(req, cb) {
+        let resp = new CancelFaceMorphJobResponse();
+        this.request("CancelFaceMorphJob", req, resp, cb);
+    }
+
+    /**
      * 用户上传一张人脸图片，基于人脸编辑与生成算法，输出一张人脸性别转换的图片。男变女可实现美颜、淡妆、加刘海和长发的效果；女变男可实现加胡须、变短发的效果。 
      * @param {SwapGenderPicRequest} req
      * @param {function(string, SwapGenderPicResponse):void} cb
@@ -49,14 +68,14 @@ class FtClient extends AbstractClient {
     }
 
     /**
-     * 人像动漫化
-     * @param {FaceCartoonPicRequest} req
-     * @param {function(string, FaceCartoonPicResponse):void} cb
+     * 用户上传2-5张人脸照片，输出一段人脸变换特效视频
+     * @param {MorphFaceRequest} req
+     * @param {function(string, MorphFaceResponse):void} cb
      * @public
      */
-    FaceCartoonPic(req, cb) {
-        let resp = new FaceCartoonPicResponse();
-        this.request("FaceCartoonPic", req, resp, cb);
+    MorphFace(req, cb) {
+        let resp = new MorphFaceResponse();
+        this.request("MorphFace", req, resp, cb);
     }
 
     /**
@@ -68,6 +87,28 @@ class FtClient extends AbstractClient {
     ChangeAgePic(req, cb) {
         let resp = new ChangeAgePicResponse();
         this.request("ChangeAgePic", req, resp, cb);
+    }
+
+    /**
+     * 查询人像渐变处理进度
+     * @param {QueryFaceMorphJobRequest} req
+     * @param {function(string, QueryFaceMorphJobResponse):void} cb
+     * @public
+     */
+    QueryFaceMorphJob(req, cb) {
+        let resp = new QueryFaceMorphJobResponse();
+        this.request("QueryFaceMorphJob", req, resp, cb);
+    }
+
+    /**
+     * 人像动漫化
+     * @param {FaceCartoonPicRequest} req
+     * @param {function(string, FaceCartoonPicResponse):void} cb
+     * @public
+     */
+    FaceCartoonPic(req, cb) {
+        let resp = new FaceCartoonPicResponse();
+        this.request("FaceCartoonPic", req, resp, cb);
     }
 
 

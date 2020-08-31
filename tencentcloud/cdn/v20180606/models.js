@@ -67,6 +67,48 @@ class DescribeCdnDomainLogsResponse extends  AbstractModel {
 }
 
 /**
+ * SCDN攻击数据Top URL展示
+ * @class
+ */
+class ScdnTopUrlData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Top数据的URL
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 数值
+         * @type {number || null}
+         */
+        this.Value = null;
+
+        /**
+         * 时间
+         * @type {string || null}
+         */
+        this.Time = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Url = 'Url' in params ? params.Url : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.Time = 'Time' in params ? params.Time : null;
+
+    }
+}
+
+/**
  * DescribeCdnDomainLogs请求参数结构体
  * @class
  */
@@ -1153,44 +1195,45 @@ class UserAgentFilter extends  AbstractModel {
 }
 
 /**
- * 缓存配置高级版本规则
+ * DescribeScdnTopData返回参数结构体
  * @class
  */
-class AdvanceCacheRule extends  AbstractModel {
+class DescribeScdnTopDataResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 规则类型：
-all：所有文件生效
-file：指定文件后缀生效
-directory：指定路径生效
-path：指定绝对路径生效
-default：源站未返回 max-age 情况下的缓存规则
+         * WAF 攻击类型统计
 注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ScdnTypeData> || null}
+         */
+        this.TopTypeData = null;
+
+        /**
+         * TOP 攻击源 IP 统计
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ScdnTopData> || null}
+         */
+        this.TopIpData = null;
+
+        /**
+         * 查询的SCDN类型，当前仅支持 waf
          * @type {string || null}
          */
-        this.CacheType = null;
+        this.Mode = null;
 
         /**
-         * 对应类型下的匹配内容：
-all 时填充 *
-file 时填充后缀名，如 jpg、txt
-directory 时填充路径，如 /xxx/test/
-path 时填充绝对路径，如 /xxx/test.html
-default 时填充 "no max-age"
+         * TOP URL 统计
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<string> || null}
+         * @type {Array.<ScdnTopUrlData> || null}
          */
-        this.CacheContents = null;
+        this.TopUrlData = null;
 
         /**
-         * 缓存过期时间
-单位为秒，最大可设置为 365 天
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.CacheTime = null;
+        this.RequestId = null;
 
     }
 
@@ -1201,9 +1244,35 @@ default 时填充 "no max-age"
         if (!params) {
             return;
         }
-        this.CacheType = 'CacheType' in params ? params.CacheType : null;
-        this.CacheContents = 'CacheContents' in params ? params.CacheContents : null;
-        this.CacheTime = 'CacheTime' in params ? params.CacheTime : null;
+
+        if (params.TopTypeData) {
+            this.TopTypeData = new Array();
+            for (let z in params.TopTypeData) {
+                let obj = new ScdnTypeData();
+                obj.deserialize(params.TopTypeData[z]);
+                this.TopTypeData.push(obj);
+            }
+        }
+
+        if (params.TopIpData) {
+            this.TopIpData = new Array();
+            for (let z in params.TopIpData) {
+                let obj = new ScdnTopData();
+                obj.deserialize(params.TopIpData[z]);
+                this.TopIpData.push(obj);
+            }
+        }
+        this.Mode = 'Mode' in params ? params.Mode : null;
+
+        if (params.TopUrlData) {
+            this.TopUrlData = new Array();
+            for (let z in params.TopUrlData) {
+                let obj = new ScdnTopUrlData();
+                obj.deserialize(params.TopUrlData[z]);
+                this.TopUrlData.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1711,63 +1780,6 @@ class UpdateImageConfigRequest extends  AbstractModel {
             let obj = new GuetzliAdapter();
             obj.deserialize(params.GuetzliAdapter)
             this.GuetzliAdapter = obj;
-        }
-
-    }
-}
-
-/**
- * CreateClsLogTopic请求参数结构体
- * @class
- */
-class CreateClsLogTopicRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 日志主题名称
-         * @type {string || null}
-         */
-        this.TopicName = null;
-
-        /**
-         * 日志集ID
-         * @type {string || null}
-         */
-        this.LogsetId = null;
-
-        /**
-         * 接入渠道，默认值为cdn
-         * @type {string || null}
-         */
-        this.Channel = null;
-
-        /**
-         * 域名区域信息
-         * @type {Array.<DomainAreaConfig> || null}
-         */
-        this.DomainAreaConfigs = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
-        this.Channel = 'Channel' in params ? params.Channel : null;
-
-        if (params.DomainAreaConfigs) {
-            this.DomainAreaConfigs = new Array();
-            for (let z in params.DomainAreaConfigs) {
-                let obj = new DomainAreaConfig();
-                obj.deserialize(params.DomainAreaConfigs[z]);
-                this.DomainAreaConfigs.push(obj);
-            }
         }
 
     }
@@ -2554,6 +2566,105 @@ class DescribeDomainsConfigResponse extends  AbstractModel {
         }
         this.TotalNumber = 'TotalNumber' in params ? params.TotalNumber : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateScdnLogTask请求参数结构体
+ * @class
+ */
+class CreateScdnLogTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 防护类型
+Mode 映射如下：
+  waf = "Web攻击"
+  cc = "CC攻击"
+         * @type {string || null}
+         */
+        this.Mode = null;
+
+        /**
+         * 查询起始时间，如：2018-09-04 10:40:00，返回结果大于等于指定时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 查询结束时间，如：2018-09-04 10:40:00，返回结果小于等于指定时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 指定域名查询, 不填默认查询全部域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 指定攻击类型, 不填默认查询全部攻击类型
+AttackType 映射如下:
+  other = '未知类型'
+  malicious_scan = "恶意扫描"
+  sql_inject = "SQL注入攻击"
+  xss = "XSS攻击"
+  cmd_inject = "命令注入攻击"
+  ldap_inject = "LDAP注入攻击"
+  ssi_inject = "SSI注入攻击"
+  xml_inject = "XML注入攻击"
+  web_service = "WEB服务漏洞攻击"
+  web_app = "WEB应用漏洞攻击"
+  path_traversal = "路径跨越攻击"
+  illegal_access_core_file = "核心文件非法访问"
+  trojan_horse = "木马后门攻击"
+  csrf = "CSRF攻击"
+  malicious_file_upload= '恶意文件上传'
+         * @type {string || null}
+         */
+        this.AttackType = null;
+
+        /**
+         * 指定执行动作, 不填默认查询全部执行动作
+DefenceMode 映射如下：
+  observe = '观察模式'
+  intercept = '拦截模式'
+         * @type {string || null}
+         */
+        this.DefenceMode = null;
+
+        /**
+         * 不填为全部ip
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * 指定域名查询, 与 Domain 参数同时有值时使用 Domains 参数，不填默认查询全部域名，指定域名查询时最多支持同时选择 5 个域名查询
+         * @type {Array.<string> || null}
+         */
+        this.Domains = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Mode = 'Mode' in params ? params.Mode : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.AttackType = 'AttackType' in params ? params.AttackType : null;
+        this.DefenceMode = 'DefenceMode' in params ? params.DefenceMode : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Domains = 'Domains' in params ? params.Domains : null;
 
     }
 }
@@ -4390,19 +4501,25 @@ class WebpAdapter extends  AbstractModel {
 }
 
 /**
- * StartCdnDomain请求参数结构体
+ * CreateScdnLogTask返回参数结构体
  * @class
  */
-class StartCdnDomainRequest extends  AbstractModel {
+class CreateScdnLogTaskResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 域名
-域名状态需要为【已停用】
+         * 创建结果, 
+"0" -> 创建成功
          * @type {string || null}
          */
-        this.Domain = null;
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -4413,7 +4530,8 @@ class StartCdnDomainRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4944,27 +5062,24 @@ class AddCdnDomainResponse extends  AbstractModel {
 }
 
 /**
- * 单链接下行限速配置，默认为关闭状态
+ * 域名地区配置
  * @class
  */
-class DownstreamCapping extends  AbstractModel {
+class DomainAreaConfig extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 下行速度配置开关
-on：开启
-off：关闭
+         * 域名
          * @type {string || null}
          */
-        this.Switch = null;
+        this.Domain = null;
 
         /**
-         * 下行限速规则
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<CappingRule> || null}
+         * 地区列表，其中元素可为mainland/overseas
+         * @type {Array.<string> || null}
          */
-        this.CappingRules = null;
+        this.Area = null;
 
     }
 
@@ -4975,16 +5090,8 @@ off：关闭
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-
-        if (params.CappingRules) {
-            this.CappingRules = new Array();
-            for (let z in params.CappingRules) {
-                let obj = new CappingRule();
-                obj.deserialize(params.CappingRules[z]);
-                this.CappingRules.push(obj);
-            }
-        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Area = 'Area' in params ? params.Area : null;
 
     }
 }
@@ -7196,6 +7303,109 @@ process：预热中
 }
 
 /**
+ * DescribeScdnTopData请求参数结构体
+ * @class
+ */
+class DescribeScdnTopDataRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询起始时间，如：2018-09-04 10:40:00，返回结果大于等于指定时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 查询结束时间，如：2018-09-04 10:40:00，返回结果小于等于指定时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 查询的SCDN TOP攻击数据类型：
+waf：Web 攻击防护TOP数据
+         * @type {string || null}
+         */
+        this.Mode = null;
+
+        /**
+         * 排序对象，支持以下几种形式：
+url：攻击目标 url 排序
+ip：攻击源 IP 排序
+attackType：攻击类型排序
+         * @type {string || null}
+         */
+        this.Metric = null;
+
+        /**
+         * 排序使用的指标名称：
+request：请求次数
+         * @type {string || null}
+         */
+        this.Filter = null;
+
+        /**
+         * 指定域名查询
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 指定攻击类型, 仅 Mode=waf 时有效
+不填则查询所有攻击类型的数据总和
+AttackType 映射如下:
+  other = '未知类型'
+  malicious_scan = "恶意扫描"
+  sql_inject = "SQL注入攻击"
+  xss = "XSS攻击"
+  cmd_inject = "命令注入攻击"
+  ldap_inject = "LDAP注入攻击"
+  ssi_inject = "SSI注入攻击"
+  xml_inject = "XML注入攻击"
+  web_service = "WEB服务漏洞攻击"
+  web_app = "WEB应用漏洞攻击"
+  path_traversal = "路径跨越攻击"
+  illegal_access_core_file = "核心文件非法访问"
+  trojan_horse = "木马后门攻击"
+  csrf = "CSRF攻击"
+  malicious_file_upload= '恶意文件上传'
+         * @type {string || null}
+         */
+        this.AttackType = null;
+
+        /**
+         * 指定防御模式,仅 Mode=waf 时有效
+不填则查询所有防御模式的数据总和
+DefenceMode 映射如下：
+  observe = '观察模式'
+  intercept = '拦截模式'
+         * @type {string || null}
+         */
+        this.DefenceMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Mode = 'Mode' in params ? params.Mode : null;
+        this.Metric = 'Metric' in params ? params.Metric : null;
+        this.Filter = 'Filter' in params ? params.Filter : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.AttackType = 'AttackType' in params ? params.AttackType : null;
+        this.DefenceMode = 'DefenceMode' in params ? params.DefenceMode : null;
+
+    }
+}
+
+/**
  * DescribeUrlViolations请求参数结构体
  * @class
  */
@@ -7345,24 +7555,36 @@ off：关闭
 }
 
 /**
- * 域名地区配置
+ * CreateClsLogTopic请求参数结构体
  * @class
  */
-class DomainAreaConfig extends  AbstractModel {
+class CreateClsLogTopicRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 域名
+         * 日志主题名称
          * @type {string || null}
          */
-        this.Domain = null;
+        this.TopicName = null;
 
         /**
-         * 地区列表，其中元素可为mainland/overseas
-         * @type {Array.<string> || null}
+         * 日志集ID
+         * @type {string || null}
          */
-        this.Area = null;
+        this.LogsetId = null;
+
+        /**
+         * 接入渠道，默认值为cdn
+         * @type {string || null}
+         */
+        this.Channel = null;
+
+        /**
+         * 域名区域信息
+         * @type {Array.<DomainAreaConfig> || null}
+         */
+        this.DomainAreaConfigs = null;
 
     }
 
@@ -7373,8 +7595,18 @@ class DomainAreaConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Domain = 'Domain' in params ? params.Domain : null;
-        this.Area = 'Area' in params ? params.Area : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
+        this.Channel = 'Channel' in params ? params.Channel : null;
+
+        if (params.DomainAreaConfigs) {
+            this.DomainAreaConfigs = new Array();
+            for (let z in params.DomainAreaConfigs) {
+                let obj = new DomainAreaConfig();
+                obj.deserialize(params.DomainAreaConfigs[z]);
+                this.DomainAreaConfigs.push(obj);
+            }
+        }
 
     }
 }
@@ -7809,6 +8041,62 @@ PEM 格式，需要进行 Base 64 编码
 }
 
 /**
+ * SCDN攻击数据Top展示
+ * @class
+ */
+class ScdnTopData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 时间
+         * @type {string || null}
+         */
+        this.Time = null;
+
+        /**
+         * 数值
+         * @type {number || null}
+         */
+        this.Value = null;
+
+        /**
+         * 运营商
+         * @type {string || null}
+         */
+        this.Isp = null;
+
+        /**
+         * IP地址
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * 区域
+         * @type {string || null}
+         */
+        this.District = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Time = 'Time' in params ? params.Time : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.Isp = 'Isp' in params ? params.Isp : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.District = 'District' in params ? params.District : null;
+
+    }
+}
+
+/**
  * 日志包下载链接详情
  * @class
  */
@@ -8190,34 +8478,44 @@ class DescribeCdnIpResponse extends  AbstractModel {
 }
 
 /**
- * DescribeCdnData返回参数结构体
+ * 缓存配置高级版本规则
  * @class
  */
-class DescribeCdnDataResponse extends  AbstractModel {
+class AdvanceCacheRule extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 返回数据的时间粒度，查询时指定：
-min：1 分钟粒度
-5min：5 分钟粒度
-hour：1 小时粒度
-day：天粒度
+         * 规则类型：
+all：所有文件生效
+file：指定文件后缀生效
+directory：指定路径生效
+path：指定绝对路径生效
+default：源站未返回 max-age 情况下的缓存规则
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Interval = null;
+        this.CacheType = null;
 
         /**
-         * 指定条件查询得到的数据明细
-         * @type {Array.<ResourceData> || null}
+         * 对应类型下的匹配内容：
+all 时填充 *
+file 时填充后缀名，如 jpg、txt
+directory 时填充路径，如 /xxx/test/
+path 时填充绝对路径，如 /xxx/test.html
+default 时填充 "no max-age"
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
          */
-        this.Data = null;
+        this.CacheContents = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
+         * 缓存过期时间
+单位为秒，最大可设置为 365 天
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.CacheTime = null;
 
     }
 
@@ -8228,17 +8526,9 @@ day：天粒度
         if (!params) {
             return;
         }
-        this.Interval = 'Interval' in params ? params.Interval : null;
-
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new ResourceData();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.CacheType = 'CacheType' in params ? params.CacheType : null;
+        this.CacheContents = 'CacheContents' in params ? params.CacheContents : null;
+        this.CacheTime = 'CacheTime' in params ? params.CacheTime : null;
 
     }
 }
@@ -8526,6 +8816,52 @@ off：关闭
                 let obj = new UrlRedirectRule();
                 obj.deserialize(params.PathRules[z]);
                 this.PathRules.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 单链接下行限速配置，默认为关闭状态
+ * @class
+ */
+class DownstreamCapping extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 下行速度配置开关
+on：开启
+off：关闭
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 下行限速规则
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<CappingRule> || null}
+         */
+        this.CappingRules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.CappingRules) {
+            this.CappingRules = new Array();
+            for (let z in params.CappingRules) {
+                let obj = new CappingRule();
+                obj.deserialize(params.CappingRules[z]);
+                this.CappingRules.push(obj);
             }
         }
 
@@ -8969,6 +9305,35 @@ class PurgeUrlsCacheRequest extends  AbstractModel {
         }
         this.Urls = 'Urls' in params ? params.Urls : null;
         this.Area = 'Area' in params ? params.Area : null;
+
+    }
+}
+
+/**
+ * StartCdnDomain请求参数结构体
+ * @class
+ */
+class StartCdnDomainRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名
+域名状态需要为【已停用】
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
 
     }
 }
@@ -10350,6 +10715,60 @@ class Compatibility extends  AbstractModel {
 }
 
 /**
+ * DescribeCdnData返回参数结构体
+ * @class
+ */
+class DescribeCdnDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回数据的时间粒度，查询时指定：
+min：1 分钟粒度
+5min：5 分钟粒度
+hour：1 小时粒度
+day：天粒度
+         * @type {string || null}
+         */
+        this.Interval = null;
+
+        /**
+         * 指定条件查询得到的数据明细
+         * @type {Array.<ResourceData> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Interval = 'Interval' in params ? params.Interval : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new ResourceData();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * Cls日志搜索结果
  * @class
  */
@@ -11156,6 +11575,41 @@ class CacheTagKey extends  AbstractModel {
 }
 
 /**
+ * Scdn饼图数据，waf仅有
+ * @class
+ */
+class ScdnTypeData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 攻击类型
+         * @type {string || null}
+         */
+        this.AttackType = null;
+
+        /**
+         * 攻击值
+         * @type {number || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AttackType = 'AttackType' in params ? params.AttackType : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * DescribeDomains请求参数结构体
  * @class
  */
@@ -11207,6 +11661,7 @@ class DescribeDomainsRequest extends  AbstractModel {
 
 module.exports = {
     DescribeCdnDomainLogsResponse: DescribeCdnDomainLogsResponse,
+    ScdnTopUrlData: ScdnTopUrlData,
     DescribeCdnDomainLogsRequest: DescribeCdnDomainLogsRequest,
     Compression: Compression,
     Revalidate: Revalidate,
@@ -11228,7 +11683,7 @@ module.exports = {
     DescribePurgeQuotaRequest: DescribePurgeQuotaRequest,
     Referer: Referer,
     UserAgentFilter: UserAgentFilter,
-    AdvanceCacheRule: AdvanceCacheRule,
+    DescribeScdnTopDataResponse: DescribeScdnTopDataResponse,
     EnableClsLogTopicRequest: EnableClsLogTopicRequest,
     UpdateImageConfigResponse: UpdateImageConfigResponse,
     AccessControl: AccessControl,
@@ -11238,7 +11693,6 @@ module.exports = {
     ListClsTopicDomainsRequest: ListClsTopicDomainsRequest,
     DescribeDomainsResponse: DescribeDomainsResponse,
     UpdateImageConfigRequest: UpdateImageConfigRequest,
-    CreateClsLogTopicRequest: CreateClsLogTopicRequest,
     CompressionRule: CompressionRule,
     GuetzliAdapter: GuetzliAdapter,
     Origin: Origin,
@@ -11253,6 +11707,7 @@ module.exports = {
     UpdatePayTypeResponse: UpdatePayTypeResponse,
     TopicInfo: TopicInfo,
     DescribeDomainsConfigResponse: DescribeDomainsConfigResponse,
+    CreateScdnLogTaskRequest: CreateScdnLogTaskRequest,
     BriefDomain: BriefDomain,
     UpdatePayTypeRequest: UpdatePayTypeRequest,
     TpgAdapter: TpgAdapter,
@@ -11277,7 +11732,7 @@ module.exports = {
     DescribeDomainsConfigRequest: DescribeDomainsConfigRequest,
     AdvancedCache: AdvancedCache,
     WebpAdapter: WebpAdapter,
-    StartCdnDomainRequest: StartCdnDomainRequest,
+    CreateScdnLogTaskResponse: CreateScdnLogTaskResponse,
     MapInfo: MapInfo,
     DescribeCertDomainsResponse: DescribeCertDomainsResponse,
     AuthenticationTypeD: AuthenticationTypeD,
@@ -11288,7 +11743,7 @@ module.exports = {
     ResourceOriginData: ResourceOriginData,
     IpStatus: IpStatus,
     AddCdnDomainResponse: AddCdnDomainResponse,
-    DownstreamCapping: DownstreamCapping,
+    DomainAreaConfig: DomainAreaConfig,
     ServerCert: ServerCert,
     AccessControlRule: AccessControlRule,
     HttpHeaderPathRule: HttpHeaderPathRule,
@@ -11314,10 +11769,11 @@ module.exports = {
     MainlandConfig: MainlandConfig,
     DescribeReportDataRequest: DescribeReportDataRequest,
     DescribePushTasksRequest: DescribePushTasksRequest,
+    DescribeScdnTopDataRequest: DescribeScdnTopDataRequest,
     DescribeUrlViolationsRequest: DescribeUrlViolationsRequest,
     RefererRule: RefererRule,
     IpFreqLimit: IpFreqLimit,
-    DomainAreaConfig: DomainAreaConfig,
+    CreateClsLogTopicRequest: CreateClsLogTopicRequest,
     CacheOptResult: CacheOptResult,
     StopCdnDomainRequest: StopCdnDomainRequest,
     DescribeMapInfoResponse: DescribeMapInfoResponse,
@@ -11327,6 +11783,7 @@ module.exports = {
     DescribeIpVisitRequest: DescribeIpVisitRequest,
     StatusCodeCacheRule: StatusCodeCacheRule,
     ClientCert: ClientCert,
+    ScdnTopData: ScdnTopData,
     DomainLog: DomainLog,
     GetDisableRecordsRequest: GetDisableRecordsRequest,
     PurgeUrlsCacheResponse: PurgeUrlsCacheResponse,
@@ -11336,11 +11793,12 @@ module.exports = {
     SchemeKey: SchemeKey,
     DescribeImageConfigRequest: DescribeImageConfigRequest,
     DescribeCdnIpResponse: DescribeCdnIpResponse,
-    DescribeCdnDataResponse: DescribeCdnDataResponse,
+    AdvanceCacheRule: AdvanceCacheRule,
     DescribeIpStatusResponse: DescribeIpStatusResponse,
     DescribeDistrictIspDataRequest: DescribeDistrictIspDataRequest,
     CacheKey: CacheKey,
     UrlRedirect: UrlRedirect,
+    DownstreamCapping: DownstreamCapping,
     CookieKey: CookieKey,
     CappingRule: CappingRule,
     ListClsLogTopicsRequest: ListClsLogTopicsRequest,
@@ -11351,6 +11809,7 @@ module.exports = {
     PurgePathCacheRequest: PurgePathCacheRequest,
     CdnData: CdnData,
     PurgeUrlsCacheRequest: PurgeUrlsCacheRequest,
+    StartCdnDomainRequest: StartCdnDomainRequest,
     OriginPullOptimization: OriginPullOptimization,
     PushTask: PushTask,
     TimestampData: TimestampData,
@@ -11374,6 +11833,7 @@ module.exports = {
     ManageClsTopicDomainsResponse: ManageClsTopicDomainsResponse,
     VideoSeek: VideoSeek,
     Compatibility: Compatibility,
+    DescribeCdnDataResponse: DescribeCdnDataResponse,
     ClsSearchLogs: ClsSearchLogs,
     DescribeUrlViolationsResponse: DescribeUrlViolationsResponse,
     IpFilter: IpFilter,
@@ -11388,6 +11848,7 @@ module.exports = {
     DescribeCdnDataRequest: DescribeCdnDataRequest,
     DescribeImageConfigResponse: DescribeImageConfigResponse,
     CacheTagKey: CacheTagKey,
+    ScdnTypeData: ScdnTypeData,
     DescribeDomainsRequest: DescribeDomainsRequest,
 
 }

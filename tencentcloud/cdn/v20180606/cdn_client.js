@@ -17,6 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribeCdnDomainLogsResponse = models.DescribeCdnDomainLogsResponse;
+const ScdnTopUrlData = models.ScdnTopUrlData;
 const DescribeCdnDomainLogsRequest = models.DescribeCdnDomainLogsRequest;
 const Compression = models.Compression;
 const Revalidate = models.Revalidate;
@@ -38,7 +39,7 @@ const RequestHeader = models.RequestHeader;
 const DescribePurgeQuotaRequest = models.DescribePurgeQuotaRequest;
 const Referer = models.Referer;
 const UserAgentFilter = models.UserAgentFilter;
-const AdvanceCacheRule = models.AdvanceCacheRule;
+const DescribeScdnTopDataResponse = models.DescribeScdnTopDataResponse;
 const EnableClsLogTopicRequest = models.EnableClsLogTopicRequest;
 const UpdateImageConfigResponse = models.UpdateImageConfigResponse;
 const AccessControl = models.AccessControl;
@@ -48,7 +49,6 @@ const ListTopDataRequest = models.ListTopDataRequest;
 const ListClsTopicDomainsRequest = models.ListClsTopicDomainsRequest;
 const DescribeDomainsResponse = models.DescribeDomainsResponse;
 const UpdateImageConfigRequest = models.UpdateImageConfigRequest;
-const CreateClsLogTopicRequest = models.CreateClsLogTopicRequest;
 const CompressionRule = models.CompressionRule;
 const GuetzliAdapter = models.GuetzliAdapter;
 const Origin = models.Origin;
@@ -63,6 +63,7 @@ const DescribeDistrictIspDataResponse = models.DescribeDistrictIspDataResponse;
 const UpdatePayTypeResponse = models.UpdatePayTypeResponse;
 const TopicInfo = models.TopicInfo;
 const DescribeDomainsConfigResponse = models.DescribeDomainsConfigResponse;
+const CreateScdnLogTaskRequest = models.CreateScdnLogTaskRequest;
 const BriefDomain = models.BriefDomain;
 const UpdatePayTypeRequest = models.UpdatePayTypeRequest;
 const TpgAdapter = models.TpgAdapter;
@@ -87,7 +88,7 @@ const DescribeCertDomainsRequest = models.DescribeCertDomainsRequest;
 const DescribeDomainsConfigRequest = models.DescribeDomainsConfigRequest;
 const AdvancedCache = models.AdvancedCache;
 const WebpAdapter = models.WebpAdapter;
-const StartCdnDomainRequest = models.StartCdnDomainRequest;
+const CreateScdnLogTaskResponse = models.CreateScdnLogTaskResponse;
 const MapInfo = models.MapInfo;
 const DescribeCertDomainsResponse = models.DescribeCertDomainsResponse;
 const AuthenticationTypeD = models.AuthenticationTypeD;
@@ -98,7 +99,7 @@ const DescribePushTasksResponse = models.DescribePushTasksResponse;
 const ResourceOriginData = models.ResourceOriginData;
 const IpStatus = models.IpStatus;
 const AddCdnDomainResponse = models.AddCdnDomainResponse;
-const DownstreamCapping = models.DownstreamCapping;
+const DomainAreaConfig = models.DomainAreaConfig;
 const ServerCert = models.ServerCert;
 const AccessControlRule = models.AccessControlRule;
 const HttpHeaderPathRule = models.HttpHeaderPathRule;
@@ -124,10 +125,11 @@ const PushUrlsCacheRequest = models.PushUrlsCacheRequest;
 const MainlandConfig = models.MainlandConfig;
 const DescribeReportDataRequest = models.DescribeReportDataRequest;
 const DescribePushTasksRequest = models.DescribePushTasksRequest;
+const DescribeScdnTopDataRequest = models.DescribeScdnTopDataRequest;
 const DescribeUrlViolationsRequest = models.DescribeUrlViolationsRequest;
 const RefererRule = models.RefererRule;
 const IpFreqLimit = models.IpFreqLimit;
-const DomainAreaConfig = models.DomainAreaConfig;
+const CreateClsLogTopicRequest = models.CreateClsLogTopicRequest;
 const CacheOptResult = models.CacheOptResult;
 const StopCdnDomainRequest = models.StopCdnDomainRequest;
 const DescribeMapInfoResponse = models.DescribeMapInfoResponse;
@@ -137,6 +139,7 @@ const EnableCachesResponse = models.EnableCachesResponse;
 const DescribeIpVisitRequest = models.DescribeIpVisitRequest;
 const StatusCodeCacheRule = models.StatusCodeCacheRule;
 const ClientCert = models.ClientCert;
+const ScdnTopData = models.ScdnTopData;
 const DomainLog = models.DomainLog;
 const GetDisableRecordsRequest = models.GetDisableRecordsRequest;
 const PurgeUrlsCacheResponse = models.PurgeUrlsCacheResponse;
@@ -146,11 +149,12 @@ const DisableCachesResponse = models.DisableCachesResponse;
 const SchemeKey = models.SchemeKey;
 const DescribeImageConfigRequest = models.DescribeImageConfigRequest;
 const DescribeCdnIpResponse = models.DescribeCdnIpResponse;
-const DescribeCdnDataResponse = models.DescribeCdnDataResponse;
+const AdvanceCacheRule = models.AdvanceCacheRule;
 const DescribeIpStatusResponse = models.DescribeIpStatusResponse;
 const DescribeDistrictIspDataRequest = models.DescribeDistrictIspDataRequest;
 const CacheKey = models.CacheKey;
 const UrlRedirect = models.UrlRedirect;
+const DownstreamCapping = models.DownstreamCapping;
 const CookieKey = models.CookieKey;
 const CappingRule = models.CappingRule;
 const ListClsLogTopicsRequest = models.ListClsLogTopicsRequest;
@@ -161,6 +165,7 @@ const RegionMapRelation = models.RegionMapRelation;
 const PurgePathCacheRequest = models.PurgePathCacheRequest;
 const CdnData = models.CdnData;
 const PurgeUrlsCacheRequest = models.PurgeUrlsCacheRequest;
+const StartCdnDomainRequest = models.StartCdnDomainRequest;
 const OriginPullOptimization = models.OriginPullOptimization;
 const PushTask = models.PushTask;
 const TimestampData = models.TimestampData;
@@ -184,6 +189,7 @@ const AwsPrivateAccess = models.AwsPrivateAccess;
 const ManageClsTopicDomainsResponse = models.ManageClsTopicDomainsResponse;
 const VideoSeek = models.VideoSeek;
 const Compatibility = models.Compatibility;
+const DescribeCdnDataResponse = models.DescribeCdnDataResponse;
 const ClsSearchLogs = models.ClsSearchLogs;
 const DescribeUrlViolationsResponse = models.DescribeUrlViolationsResponse;
 const IpFilter = models.IpFilter;
@@ -198,6 +204,7 @@ const CdnIp = models.CdnIp;
 const DescribeCdnDataRequest = models.DescribeCdnDataRequest;
 const DescribeImageConfigResponse = models.DescribeImageConfigResponse;
 const CacheTagKey = models.CacheTagKey;
+const ScdnTypeData = models.ScdnTypeData;
 const DescribeDomainsRequest = models.DescribeDomainsRequest;
 
 
@@ -390,6 +397,17 @@ class CdnClient extends AbstractClient {
     }
 
     /**
+     * CreateScdnLogTask 用于创建事件日志任务
+     * @param {CreateScdnLogTaskRequest} req
+     * @param {function(string, CreateScdnLogTaskResponse):void} cb
+     * @public
+     */
+    CreateScdnLogTask(req, cb) {
+        let resp = new CreateScdnLogTaskResponse();
+        this.request("CreateScdnLogTask", req, resp, cb);
+    }
+
+    /**
      * DescribeImageConfig 用于获取域名图片优化的当前配置，支持Webp、TPG 和 Guetzli。 
      * @param {DescribeImageConfigRequest} req
      * @param {function(string, DescribeImageConfigResponse):void} cb
@@ -398,6 +416,17 @@ class CdnClient extends AbstractClient {
     DescribeImageConfig(req, cb) {
         let resp = new DescribeImageConfigResponse();
         this.request("DescribeImageConfig", req, resp, cb);
+    }
+
+    /**
+     * 获取SCDN的Top数据
+     * @param {DescribeScdnTopDataRequest} req
+     * @param {function(string, DescribeScdnTopDataResponse):void} cb
+     * @public
+     */
+    DescribeScdnTopData(req, cb) {
+        let resp = new DescribeScdnTopDataResponse();
+        this.request("DescribeScdnTopData", req, resp, cb);
     }
 
     /**

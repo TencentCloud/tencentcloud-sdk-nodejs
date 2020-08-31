@@ -17,6 +17,213 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * QueryFaceMorphJob返回参数结构体
+ * @class
+ */
+class QueryFaceMorphJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 当前任务状态：排队中、处理中、处理失败或者处理完成
+         * @type {string || null}
+         */
+        this.JobStatus = null;
+
+        /**
+         * 人像渐变输出的结果信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {FaceMorphOutput || null}
+         */
+        this.FaceMorphOutput = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobStatus = 'JobStatus' in params ? params.JobStatus : null;
+
+        if (params.FaceMorphOutput) {
+            let obj = new FaceMorphOutput();
+            obj.deserialize(params.FaceMorphOutput)
+            this.FaceMorphOutput = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CancelFaceMorphJob返回参数结构体
+ * @class
+ */
+class CancelFaceMorphJobResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 人脸变年龄信息
+ * @class
+ */
+class AgeInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 变化到的人脸年龄 [10,80]。
+         * @type {number || null}
+         */
+        this.Age = null;
+
+        /**
+         * 人脸框位置。若不输入则选择 Image 或 Url 中面积最大的人脸。  
+您可以通过 [人脸检测与分析](https://cloud.tencent.com/document/api/867/32800)  接口获取人脸框位置信息。
+         * @type {FaceRect || null}
+         */
+        this.FaceRect = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Age = 'Age' in params ? params.Age : null;
+
+        if (params.FaceRect) {
+            let obj = new FaceRect();
+            obj.deserialize(params.FaceRect)
+            this.FaceRect = obj;
+        }
+
+    }
+}
+
+/**
+ * 人脸框位置
+ * @class
+ */
+class FaceRect extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 人脸框左上角横坐标。
+         * @type {number || null}
+         */
+        this.X = null;
+
+        /**
+         * 人脸框左上角纵坐标。
+         * @type {number || null}
+         */
+        this.Y = null;
+
+        /**
+         * 人脸框宽度。
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 人脸框高度。
+         * @type {number || null}
+         */
+        this.Height = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.X = 'X' in params ? params.X : null;
+        this.Y = 'Y' in params ? params.Y : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+
+    }
+}
+
+/**
+ * 人脸转换性别信息
+ * @class
+ */
+class GenderInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 选择转换方向，0：男变女，1：女变男。
+         * @type {number || null}
+         */
+        this.Gender = null;
+
+        /**
+         * 人脸框位置。若不输入则选择 Image 或 Url 中面积最大的人脸。  
+您可以通过 [人脸检测与分析](https://cloud.tencent.com/document/api/867/32800)  接口获取人脸框位置信息。
+         * @type {FaceRect || null}
+         */
+        this.FaceRect = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Gender = 'Gender' in params ? params.Gender : null;
+
+        if (params.FaceRect) {
+            let obj = new FaceRect();
+            obj.deserialize(params.FaceRect)
+            this.FaceRect = obj;
+        }
+
+    }
+}
+
+/**
  * SwapGenderPic请求参数结构体
  * @class
  */
@@ -80,25 +287,24 @@ class SwapGenderPicRequest extends  AbstractModel {
 }
 
 /**
- * 人脸变年龄信息
+ * 渐变参数
  * @class
  */
-class AgeInfo extends  AbstractModel {
+class GradientInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 变化到的人脸年龄 [10,80]。
+         * 图片的展示时长，即单张图片静止不变的时间。GIF默认每张图片0.7s，视频默认每张图片2s
          * @type {number || null}
          */
-        this.Age = null;
+        this.Tempo = null;
 
         /**
-         * 人脸框位置。若不输入则选择 Image 或 Url 中面积最大的人脸。  
-您可以通过 [人脸检测与分析](https://cloud.tencent.com/document/api/867/32800)  接口获取人脸框位置信息。
-         * @type {FaceRect || null}
+         * 人像渐变的最长时间，即单张图片使用渐变特效的时间。 GIF默认值为0.5s，视频默值认为1s
+         * @type {number || null}
          */
-        this.FaceRect = null;
+        this.MorphTime = null;
 
     }
 
@@ -109,54 +315,8 @@ class AgeInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Age = 'Age' in params ? params.Age : null;
-
-        if (params.FaceRect) {
-            let obj = new FaceRect();
-            obj.deserialize(params.FaceRect)
-            this.FaceRect = obj;
-        }
-
-    }
-}
-
-/**
- * 人脸转换性别信息
- * @class
- */
-class GenderInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 选择转换方向，0：男变女，1：女变男。
-         * @type {number || null}
-         */
-        this.Gender = null;
-
-        /**
-         * 人脸框位置。若不输入则选择 Image 或 Url 中面积最大的人脸。  
-您可以通过 [人脸检测与分析](https://cloud.tencent.com/document/api/867/32800)  接口获取人脸框位置信息。
-         * @type {FaceRect || null}
-         */
-        this.FaceRect = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Gender = 'Gender' in params ? params.Gender : null;
-
-        if (params.FaceRect) {
-            let obj = new FaceRect();
-            obj.deserialize(params.FaceRect)
-            this.FaceRect = obj;
-        }
+        this.Tempo = 'Tempo' in params ? params.Tempo : null;
+        this.MorphTime = 'MorphTime' in params ? params.MorphTime : null;
 
     }
 }
@@ -204,6 +364,138 @@ class SwapGenderPicResponse extends  AbstractModel {
 }
 
 /**
+ * 人像渐变返回结果
+ * @class
+ */
+class FaceMorphOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 人像渐变输出的url
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MorphUrl = null;
+
+        /**
+         * 人像渐变输出的结果MD5，用于校验
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MorphMd5 = null;
+
+        /**
+         * 人像渐变输出的结果封面图base64字符串
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CoverImage = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MorphUrl = 'MorphUrl' in params ? params.MorphUrl : null;
+        this.MorphMd5 = 'MorphMd5' in params ? params.MorphMd5 : null;
+        this.CoverImage = 'CoverImage' in params ? params.CoverImage : null;
+
+    }
+}
+
+/**
+ * MorphFace请求参数结构体
+ * @class
+ */
+class MorphFaceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片 base64 数据，base64 编码后大小不可超过5M。 
+jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。 
+人员人脸总数量至少2张，不可超过5张。 
+若图片中包含多张人脸，只选取其中人脸面积最大的人脸。 
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+         * @type {Array.<string> || null}
+         */
+        this.Images = null;
+
+        /**
+         * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。 
+Url、Image必须提供一个，如果都提供，只使用 Url。图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
+非腾讯云存储的Url速度和稳定性可能受一定影响。 
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。 
+人员人脸总数量不可超过5张。 
+若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
+         * @type {Array.<string> || null}
+         */
+        this.Urls = null;
+
+        /**
+         * 人脸渐变参数。可调整每张图片的展示时长、人像渐变的最长时间
+         * @type {Array.<GradientInfo> || null}
+         */
+        this.GradientInfos = null;
+
+        /**
+         * 视频帧率，取值[1,60]。默认10
+         * @type {number || null}
+         */
+        this.Fps = null;
+
+        /**
+         * 视频类型，取值[0,2]，其中0为MP4，1为GIF，2为MOV。目前仅支持MP4格式，默认为MP4格式
+         * @type {number || null}
+         */
+        this.OutputType = null;
+
+        /**
+         * 视频宽度，取值[128,1280]。默认值720
+         * @type {number || null}
+         */
+        this.OutputWidth = null;
+
+        /**
+         * 视频高度，取值[128,1280]。默认值1280
+         * @type {number || null}
+         */
+        this.OutputHeight = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Images = 'Images' in params ? params.Images : null;
+        this.Urls = 'Urls' in params ? params.Urls : null;
+
+        if (params.GradientInfos) {
+            this.GradientInfos = new Array();
+            for (let z in params.GradientInfos) {
+                let obj = new GradientInfo();
+                obj.deserialize(params.GradientInfos[z]);
+                this.GradientInfos.push(obj);
+            }
+        }
+        this.Fps = 'Fps' in params ? params.Fps : null;
+        this.OutputType = 'OutputType' in params ? params.OutputType : null;
+        this.OutputWidth = 'OutputWidth' in params ? params.OutputWidth : null;
+        this.OutputHeight = 'OutputHeight' in params ? params.OutputHeight : null;
+
+    }
+}
+
+/**
  * ChangeAgePic返回参数结构体
  * @class
  */
@@ -241,55 +533,6 @@ class ChangeAgePicResponse extends  AbstractModel {
         this.ResultImage = 'ResultImage' in params ? params.ResultImage : null;
         this.ResultUrl = 'ResultUrl' in params ? params.ResultUrl : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * 人脸框位置
- * @class
- */
-class FaceRect extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 人脸框左上角横坐标。
-         * @type {number || null}
-         */
-        this.X = null;
-
-        /**
-         * 人脸框左上角纵坐标。
-         * @type {number || null}
-         */
-        this.Y = null;
-
-        /**
-         * 人脸框宽度。
-         * @type {number || null}
-         */
-        this.Width = null;
-
-        /**
-         * 人脸框高度。
-         * @type {number || null}
-         */
-        this.Height = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.X = 'X' in params ? params.X : null;
-        this.Y = 'Y' in params ? params.Y : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
 
     }
 }
@@ -358,6 +601,34 @@ class ChangeAgePicRequest extends  AbstractModel {
 }
 
 /**
+ * CancelFaceMorphJob请求参数结构体
+ * @class
+ */
+class CancelFaceMorphJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 人像渐变任务Job id
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+
+    }
+}
+
+/**
  * FaceCartoonPic请求参数结构体
  * @class
  */
@@ -405,6 +676,34 @@ class FaceCartoonPicRequest extends  AbstractModel {
 }
 
 /**
+ * QueryFaceMorphJob请求参数结构体
+ * @class
+ */
+class QueryFaceMorphJobRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 人像渐变任务Job id
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+
+    }
+}
+
+/**
  * FaceCartoonPic返回参数结构体
  * @class
  */
@@ -419,7 +718,7 @@ class FaceCartoonPicResponse extends  AbstractModel {
         this.ResultImage = null;
 
         /**
-         * RspImgType 为 url 时，返回处理后的图片 url 数据。(暂时不支持)
+         * RspImgType 为 url 时，返回处理后的图片 url 数据。(默认为base64)
          * @type {string || null}
          */
         this.ResultUrl = null;
@@ -446,15 +745,65 @@ class FaceCartoonPicResponse extends  AbstractModel {
     }
 }
 
+/**
+ * MorphFace返回参数结构体
+ * @class
+ */
+class MorphFaceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 人像渐变任务的Job id
+         * @type {string || null}
+         */
+        this.JobId = null;
+
+        /**
+         * 预估处理时间，粒度为秒
+         * @type {number || null}
+         */
+        this.EstimatedProcessTime = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.JobId = 'JobId' in params ? params.JobId : null;
+        this.EstimatedProcessTime = 'EstimatedProcessTime' in params ? params.EstimatedProcessTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
 module.exports = {
-    SwapGenderPicRequest: SwapGenderPicRequest,
+    QueryFaceMorphJobResponse: QueryFaceMorphJobResponse,
+    CancelFaceMorphJobResponse: CancelFaceMorphJobResponse,
     AgeInfo: AgeInfo,
-    GenderInfo: GenderInfo,
-    SwapGenderPicResponse: SwapGenderPicResponse,
-    ChangeAgePicResponse: ChangeAgePicResponse,
     FaceRect: FaceRect,
+    GenderInfo: GenderInfo,
+    SwapGenderPicRequest: SwapGenderPicRequest,
+    GradientInfo: GradientInfo,
+    SwapGenderPicResponse: SwapGenderPicResponse,
+    FaceMorphOutput: FaceMorphOutput,
+    MorphFaceRequest: MorphFaceRequest,
+    ChangeAgePicResponse: ChangeAgePicResponse,
     ChangeAgePicRequest: ChangeAgePicRequest,
+    CancelFaceMorphJobRequest: CancelFaceMorphJobRequest,
     FaceCartoonPicRequest: FaceCartoonPicRequest,
+    QueryFaceMorphJobRequest: QueryFaceMorphJobRequest,
     FaceCartoonPicResponse: FaceCartoonPicResponse,
+    MorphFaceResponse: MorphFaceResponse,
 
 }

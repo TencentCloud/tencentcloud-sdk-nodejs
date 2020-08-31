@@ -568,12 +568,6 @@ class InputManageMarketingRisk extends  AbstractModel {
         this.MacAddress = null;
 
         /**
-         * 手机制造商ID，如果手机注册，请带上此信息。
-         * @type {string || null}
-         */
-        this.VendorId = null;
-
-        /**
          * 网赚防刷相关信息。SceneType为4时填写。
          * @type {CrowdAntiRushInfo || null}
          */
@@ -590,6 +584,14 @@ class InputManageMarketingRisk extends  AbstractModel {
          * @type {Array.<InputDetails> || null}
          */
         this.Details = null;
+
+        /**
+         * 设备类型：
+1：Android
+2：IOS
+         * @type {number || null}
+         */
+        this.DeviceType = null;
 
     }
 
@@ -621,7 +623,6 @@ class InputManageMarketingRisk extends  AbstractModel {
         this.UserAgent = 'UserAgent' in params ? params.UserAgent : null;
         this.XForwardedFor = 'XForwardedFor' in params ? params.XForwardedFor : null;
         this.MacAddress = 'MacAddress' in params ? params.MacAddress : null;
-        this.VendorId = 'VendorId' in params ? params.VendorId : null;
 
         if (params.CrowdAntiRush) {
             let obj = new CrowdAntiRushInfo();
@@ -638,6 +639,7 @@ class InputManageMarketingRisk extends  AbstractModel {
                 this.Details.push(obj);
             }
         }
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
 
     }
 }
