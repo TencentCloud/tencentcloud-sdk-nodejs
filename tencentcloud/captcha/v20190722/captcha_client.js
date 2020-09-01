@@ -16,27 +16,33 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DescribeCaptchaResultResponse = models.DescribeCaptchaResultResponse;
 const DescribeCaptchaOperDataResponse = models.DescribeCaptchaOperDataResponse;
 const CaptchaOperDataInterceptUnit = models.CaptchaOperDataInterceptUnit;
 const CaptchaOperDataTryTimesDistributeUnit = models.CaptchaOperDataTryTimesDistributeUnit;
+const CaptchaOperDataTryTimesUnit = models.CaptchaOperDataTryTimesUnit;
+const CaptchaOperDataRes = models.CaptchaOperDataRes;
+const TicketInterceptUnit = models.TicketInterceptUnit;
+const DescribeCaptchaUserAllAppIdRequest = models.DescribeCaptchaUserAllAppIdRequest;
+const UpdateCaptchaAppIdInfoResponse = models.UpdateCaptchaAppIdInfoResponse;
+const CaptchaUserAllAppId = models.CaptchaUserAllAppId;
+const DescribeCaptchaDataSumResponse = models.DescribeCaptchaDataSumResponse;
+const DescribeCaptchaTicketDataRequest = models.DescribeCaptchaTicketDataRequest;
+const UpdateCaptchaAppIdInfoRequest = models.UpdateCaptchaAppIdInfoRequest;
+const DescribeCaptchaOperDataRequest = models.DescribeCaptchaOperDataRequest;
+const DescribeCaptchaDataSumRequest = models.DescribeCaptchaDataSumRequest;
+const TicketAmountUnit = models.TicketAmountUnit;
+const CaptchaQueryData = models.CaptchaQueryData;
+const TicketThroughUnit = models.TicketThroughUnit;
+const DescribeCaptchaDataResponse = models.DescribeCaptchaDataResponse;
+const DescribeCaptchaResultRequest = models.DescribeCaptchaResultRequest;
+const DescribeCaptchaResultResponse = models.DescribeCaptchaResultResponse;
 const CaptchaOperDataLoadTimeUnit = models.CaptchaOperDataLoadTimeUnit;
 const DescribeCaptchaAppIdInfoRequest = models.DescribeCaptchaAppIdInfoRequest;
 const DescribeCaptchaAppIdInfoResponse = models.DescribeCaptchaAppIdInfoResponse;
-const CaptchaOperDataTryTimesUnit = models.CaptchaOperDataTryTimesUnit;
-const CaptchaUserAllAppId = models.CaptchaUserAllAppId;
-const DescribeCaptchaDataResponse = models.DescribeCaptchaDataResponse;
-const DescribeCaptchaDataRequest = models.DescribeCaptchaDataRequest;
 const DescribeCaptchaUserAllAppIdResponse = models.DescribeCaptchaUserAllAppIdResponse;
-const DescribeCaptchaDataSumRequest = models.DescribeCaptchaDataSumRequest;
-const UpdateCaptchaAppIdInfoRequest = models.UpdateCaptchaAppIdInfoRequest;
-const UpdateCaptchaAppIdInfoResponse = models.UpdateCaptchaAppIdInfoResponse;
-const DescribeCaptchaUserAllAppIdRequest = models.DescribeCaptchaUserAllAppIdRequest;
-const CaptchaQueryData = models.CaptchaQueryData;
-const DescribeCaptchaDataSumResponse = models.DescribeCaptchaDataSumResponse;
-const DescribeCaptchaOperDataRequest = models.DescribeCaptchaOperDataRequest;
-const CaptchaOperDataRes = models.CaptchaOperDataRes;
-const DescribeCaptchaResultRequest = models.DescribeCaptchaResultRequest;
+const DescribeCaptchaDataRequest = models.DescribeCaptchaDataRequest;
+const CaptchaTicketDataRes = models.CaptchaTicketDataRes;
+const DescribeCaptchaTicketDataResponse = models.DescribeCaptchaTicketDataResponse;
 
 
 /**
@@ -58,6 +64,17 @@ class CaptchaClient extends AbstractClient {
     DescribeCaptchaUserAllAppId(req, cb) {
         let resp = new DescribeCaptchaUserAllAppIdResponse();
         this.request("DescribeCaptchaUserAllAppId", req, resp, cb);
+    }
+
+    /**
+     * 验证码控制台票据验证信息
+     * @param {DescribeCaptchaTicketDataRequest} req
+     * @param {function(string, DescribeCaptchaTicketDataResponse):void} cb
+     * @public
+     */
+    DescribeCaptchaTicketData(req, cb) {
+        let resp = new DescribeCaptchaTicketDataResponse();
+        this.request("DescribeCaptchaTicketData", req, resp, cb);
     }
 
     /**

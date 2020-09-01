@@ -359,7 +359,7 @@ Default-默认不修改
         this.SgIds = null;
 
         /**
-         * VpcId
+         * 虚拟专网Id
          * @type {string || null}
          */
         this.VpcId = null;

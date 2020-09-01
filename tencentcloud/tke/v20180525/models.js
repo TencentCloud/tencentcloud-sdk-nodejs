@@ -1370,6 +1370,41 @@ class DescribeClustersRequest extends  AbstractModel {
 }
 
 /**
+ * 创建集群时，选择安装的扩展组件的信息
+ * @class
+ */
+class ExtensionAddon extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 扩展组件名称
+         * @type {string || null}
+         */
+        this.AddonName = null;
+
+        /**
+         * 扩展组件信息(扩展组件资源对象的json字符串描述)
+         * @type {string || null}
+         */
+        this.AddonParam = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AddonName = 'AddonName' in params ? params.AddonName : null;
+        this.AddonParam = 'AddonParam' in params ? params.AddonParam : null;
+
+    }
+}
+
+/**
  * 地域属性信息
  * @class
  */
@@ -2823,6 +2858,12 @@ class CreateClusterRequest extends  AbstractModel {
          */
         this.InstanceDataDiskMountSettings = null;
 
+        /**
+         * 需要安装的扩展组件信息
+         * @type {Array.<ExtensionAddon> || null}
+         */
+        this.ExtensionAddons = null;
+
     }
 
     /**
@@ -2882,6 +2923,15 @@ class CreateClusterRequest extends  AbstractModel {
                 let obj = new InstanceDataDiskMountSetting();
                 obj.deserialize(params.InstanceDataDiskMountSettings[z]);
                 this.InstanceDataDiskMountSettings.push(obj);
+            }
+        }
+
+        if (params.ExtensionAddons) {
+            this.ExtensionAddons = new Array();
+            for (let z in params.ExtensionAddons) {
+                let obj = new ExtensionAddon();
+                obj.deserialize(params.ExtensionAddons[z]);
+                this.ExtensionAddons.push(obj);
             }
         }
 
@@ -4795,6 +4845,7 @@ module.exports = {
     CreateClusterEndpointVipResponse: CreateClusterEndpointVipResponse,
     DescribeClusterRoutesResponse: DescribeClusterRoutesResponse,
     DescribeClustersRequest: DescribeClustersRequest,
+    ExtensionAddon: ExtensionAddon,
     RegionInstance: RegionInstance,
     Label: Label,
     DeleteClusterEndpointVipResponse: DeleteClusterEndpointVipResponse,

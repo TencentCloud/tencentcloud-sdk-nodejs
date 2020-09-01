@@ -68,7 +68,7 @@ class FtClient extends AbstractClient {
     }
 
     /**
-     * 用户上传2-5张人脸照片，输出一段人脸变换特效视频
+     * 输入2-5张人脸照片，生成一段以人脸为焦点的渐变视频或GIF图，支持自定义图片播放速度、视频每秒传输帧数，可用于短视频、表情包、创意H5等应用场景，丰富静态图片的玩法。
      * @param {MorphFaceRequest} req
      * @param {function(string, MorphFaceResponse):void} cb
      * @public
@@ -101,7 +101,7 @@ class FtClient extends AbstractClient {
     }
 
     /**
-     * 人像动漫化
+     * 输入一张人脸照片，生成个性化的二次元动漫形象，可用于打造个性头像、趣味活动、特效类应用等场景，提升社交娱乐的体验。
      * @param {FaceCartoonPicRequest} req
      * @param {function(string, FaceCartoonPicResponse):void} cb
      * @public

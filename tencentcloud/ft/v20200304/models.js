@@ -659,6 +659,12 @@ class FaceCartoonPicRequest extends  AbstractModel {
          */
         this.RspImgType = null;
 
+        /**
+         * 是否取消全图动漫化效果。
+         * @type {string || null}
+         */
+        this.DisableGlobalEffect = null;
+
     }
 
     /**
@@ -671,6 +677,7 @@ class FaceCartoonPicRequest extends  AbstractModel {
         this.Image = 'Image' in params ? params.Image : null;
         this.Url = 'Url' in params ? params.Url : null;
         this.RspImgType = 'RspImgType' in params ? params.RspImgType : null;
+        this.DisableGlobalEffect = 'DisableGlobalEffect' in params ? params.DisableGlobalEffect : null;
 
     }
 }

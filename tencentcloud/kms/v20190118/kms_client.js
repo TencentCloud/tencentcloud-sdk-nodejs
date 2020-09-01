@@ -28,12 +28,13 @@ const DescribeWhiteBoxServiceStatusRequest = models.DescribeWhiteBoxServiceStatu
 const DescribeKeyRequest = models.DescribeKeyRequest;
 const WhiteboxKeyInfo = models.WhiteboxKeyInfo;
 const ListAlgorithmsResponse = models.ListAlgorithmsResponse;
+const DisableKeysResponse = models.DisableKeysResponse;
 const DescribeWhiteBoxKeyResponse = models.DescribeWhiteBoxKeyResponse;
 const UpdateKeyDescriptionResponse = models.UpdateKeyDescriptionResponse;
 const DescribeWhiteBoxServiceStatusResponse = models.DescribeWhiteBoxServiceStatusResponse;
 const ImportKeyMaterialRequest = models.ImportKeyMaterialRequest;
 const EnableKeyRequest = models.EnableKeyRequest;
-const ImportKeyMaterialResponse = models.ImportKeyMaterialResponse;
+const GetKeyRotationStatusRequest = models.GetKeyRotationStatusRequest;
 const ListAlgorithmsRequest = models.ListAlgorithmsRequest;
 const Tag = models.Tag;
 const ListKeyDetailResponse = models.ListKeyDetailResponse;
@@ -45,6 +46,7 @@ const DescribeKeysRequest = models.DescribeKeysRequest;
 const GetPublicKeyRequest = models.GetPublicKeyRequest;
 const GetServiceStatusRequest = models.GetServiceStatusRequest;
 const EnableWhiteBoxKeysResponse = models.EnableWhiteBoxKeysResponse;
+const ArchiveKeyResponse = models.ArchiveKeyResponse;
 const DescribeWhiteBoxKeyRequest = models.DescribeWhiteBoxKeyRequest;
 const GetParametersForImportResponse = models.GetParametersForImportResponse;
 const DecryptResponse = models.DecryptResponse;
@@ -58,10 +60,10 @@ const DescribeKeysResponse = models.DescribeKeysResponse;
 const EnableWhiteBoxKeyResponse = models.EnableWhiteBoxKeyResponse;
 const ReEncryptRequest = models.ReEncryptRequest;
 const ListKeysResponse = models.ListKeysResponse;
-const GetServiceStatusResponse = models.GetServiceStatusResponse;
+const AsymmetricSm2DecryptResponse = models.AsymmetricSm2DecryptResponse;
 const DisableKeyRotationResponse = models.DisableKeyRotationResponse;
 const DisableWhiteBoxKeysRequest = models.DisableWhiteBoxKeysRequest;
-const OverwriteWhiteBoxDeviceFingerprintsRequest = models.OverwriteWhiteBoxDeviceFingerprintsRequest;
+const ListKeyDetailRequest = models.ListKeyDetailRequest;
 const DeleteWhiteBoxKeyRequest = models.DeleteWhiteBoxKeyRequest;
 const AlgorithmInfo = models.AlgorithmInfo;
 const GetRegionsResponse = models.GetRegionsResponse;
@@ -69,6 +71,7 @@ const GenerateDataKeyResponse = models.GenerateDataKeyResponse;
 const CreateWhiteBoxKeyRequest = models.CreateWhiteBoxKeyRequest;
 const OverwriteWhiteBoxDeviceFingerprintsResponse = models.OverwriteWhiteBoxDeviceFingerprintsResponse;
 const DisableWhiteBoxKeysResponse = models.DisableWhiteBoxKeysResponse;
+const ArchiveKeyRequest = models.ArchiveKeyRequest;
 const GetParametersForImportRequest = models.GetParametersForImportRequest;
 const CreateKeyResponse = models.CreateKeyResponse;
 const ReEncryptResponse = models.ReEncryptResponse;
@@ -76,7 +79,7 @@ const EncryptResponse = models.EncryptResponse;
 const CancelKeyDeletionRequest = models.CancelKeyDeletionRequest;
 const DeleteImportedKeyMaterialRequest = models.DeleteImportedKeyMaterialRequest;
 const EnableKeyResponse = models.EnableKeyResponse;
-const AsymmetricSm2DecryptResponse = models.AsymmetricSm2DecryptResponse;
+const GetServiceStatusResponse = models.GetServiceStatusResponse;
 const DeviceFingerprint = models.DeviceFingerprint;
 const GetKeyRotationStatusResponse = models.GetKeyRotationStatusResponse;
 const EncryptRequest = models.EncryptRequest;
@@ -85,7 +88,7 @@ const DeleteWhiteBoxKeyResponse = models.DeleteWhiteBoxKeyResponse;
 const ListKeysRequest = models.ListKeysRequest;
 const DescribeWhiteBoxDecryptKeyRequest = models.DescribeWhiteBoxDecryptKeyRequest;
 const KeyMetadata = models.KeyMetadata;
-const DisableKeysResponse = models.DisableKeysResponse;
+const CancelKeyArchiveResponse = models.CancelKeyArchiveResponse;
 const DecryptRequest = models.DecryptRequest;
 const DescribeWhiteBoxKeyDetailsRequest = models.DescribeWhiteBoxKeyDetailsRequest;
 const AsymmetricRsaDecryptResponse = models.AsymmetricRsaDecryptResponse;
@@ -93,7 +96,7 @@ const CancelKeyDeletionResponse = models.CancelKeyDeletionResponse;
 const DisableKeysRequest = models.DisableKeysRequest;
 const DisableWhiteBoxKeyRequest = models.DisableWhiteBoxKeyRequest;
 const UnbindCloudResourceRequest = models.UnbindCloudResourceRequest;
-const ListKeyDetailRequest = models.ListKeyDetailRequest;
+const OverwriteWhiteBoxDeviceFingerprintsRequest = models.OverwriteWhiteBoxDeviceFingerprintsRequest;
 const EnableKeyRotationResponse = models.EnableKeyRotationResponse;
 const BindCloudResourceResponse = models.BindCloudResourceResponse;
 const EnableKeysResponse = models.EnableKeysResponse;
@@ -103,7 +106,7 @@ const EncryptByWhiteBoxRequest = models.EncryptByWhiteBoxRequest;
 const GenerateRandomRequest = models.GenerateRandomRequest;
 const ScheduleKeyDeletionRequest = models.ScheduleKeyDeletionRequest;
 const DisableKeyRequest = models.DisableKeyRequest;
-const GetKeyRotationStatusRequest = models.GetKeyRotationStatusRequest;
+const ImportKeyMaterialResponse = models.ImportKeyMaterialResponse;
 const GetPublicKeyResponse = models.GetPublicKeyResponse;
 const BindCloudResourceRequest = models.BindCloudResourceRequest;
 const TagFilter = models.TagFilter;
@@ -112,6 +115,7 @@ const DescribeWhiteBoxDeviceFingerprintsResponse = models.DescribeWhiteBoxDevice
 const UpdateKeyDescriptionRequest = models.UpdateKeyDescriptionRequest;
 const UnbindCloudResourceResponse = models.UnbindCloudResourceResponse;
 const DescribeKeyResponse = models.DescribeKeyResponse;
+const CancelKeyArchiveRequest = models.CancelKeyArchiveRequest;
 const DisableKeyRotationRequest = models.DisableKeyRotationRequest;
 
 
@@ -215,6 +219,17 @@ class KmsClient extends AbstractClient {
     }
 
     /**
+     * 用于查询该用户是否已开通KMS服务
+     * @param {GetServiceStatusRequest} req
+     * @param {function(string, GetServiceStatusResponse):void} cb
+     * @public
+     */
+    GetServiceStatus(req, cb) {
+        let resp = new GetServiceStatusResponse();
+        this.request("GetServiceStatus", req, resp, cb);
+    }
+
+    /**
      * 使用指定的SM2非对称密钥的私钥进行数据解密，密文必须是使用对应公钥加密的。处于Enabled 状态的非对称密钥才能进行解密操作。传入的密文的长度不能超过256字节。
      * @param {AsymmetricSm2DecryptRequest} req
      * @param {function(string, AsymmetricSm2DecryptResponse):void} cb
@@ -270,14 +285,25 @@ class KmsClient extends AbstractClient {
     }
 
     /**
-     * 用于查询该用户是否已开通KMS服务
-     * @param {GetServiceStatusRequest} req
-     * @param {function(string, GetServiceStatusResponse):void} cb
+     * 对密钥进行归档，被归档的密钥只能用于解密，不能加密
+     * @param {ArchiveKeyRequest} req
+     * @param {function(string, ArchiveKeyResponse):void} cb
      * @public
      */
-    GetServiceStatus(req, cb) {
-        let resp = new GetServiceStatusResponse();
-        this.request("GetServiceStatus", req, resp, cb);
+    ArchiveKey(req, cb) {
+        let resp = new ArchiveKeyResponse();
+        this.request("ArchiveKey", req, resp, cb);
+    }
+
+    /**
+     * 取消密钥归档，取消后密钥的状态变为Enabled。
+     * @param {CancelKeyArchiveRequest} req
+     * @param {function(string, CancelKeyArchiveResponse):void} cb
+     * @public
+     */
+    CancelKeyArchive(req, cb) {
+        let resp = new CancelKeyArchiveResponse();
+        this.request("CancelKeyArchive", req, resp, cb);
     }
 
     /**

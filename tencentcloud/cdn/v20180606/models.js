@@ -737,6 +737,68 @@ failed：部署失败
 }
 
 /**
+ * 缓存配置分路径版本。
+默认情况下所有文件缓存过期时间为 30 天 
+默认情况下静态加速类型的域名 .php;.jsp;.asp;.aspx 不缓存
+ * @class
+ */
+class RuleCache extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CacheType 对应类型下的匹配内容：
+all 时填充 *
+file 时填充后缀名，如 jpg、txt
+directory 时填充路径，如 /xxx/test
+path 时填充绝对路径，如 /xxx/test.html
+index 时填充 /
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.RulePaths = null;
+
+        /**
+         * 规则类型：
+all：所有文件生效
+file：指定文件后缀生效
+directory：指定路径生效
+path：指定绝对路径生效
+index：首页
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * 缓存配置。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {RuleCacheConfig || null}
+         */
+        this.CacheConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RulePaths = 'RulePaths' in params ? params.RulePaths : null;
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+
+        if (params.CacheConfig) {
+            let obj = new RuleCacheConfig();
+            obj.deserialize(params.CacheConfig)
+            this.CacheConfig = obj;
+        }
+
+    }
+}
+
+/**
  * CDN报表数据
  * @class
  */
@@ -1348,6 +1410,48 @@ class UpdateImageConfigResponse extends  AbstractModel {
 }
 
 /**
+ * 路径缓存不缓存配置
+ * @class
+ */
+class CacheConfigNoCache extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 不缓存配置开关
+on：开启
+off：关闭
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 总是回源站校验
+on：开启
+off：关闭
+默认为关闭状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Revalidate = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Revalidate = 'Revalidate' in params ? params.Revalidate : null;
+
+    }
+}
+
+/**
  * 请求头部及请求url访问控制
  * @class
  */
@@ -1781,6 +1885,35 @@ class UpdateImageConfigRequest extends  AbstractModel {
             obj.deserialize(params.GuetzliAdapter)
             this.GuetzliAdapter = obj;
         }
+
+    }
+}
+
+/**
+ * DisableCaches请求参数结构体
+ * @class
+ */
+class DisableCachesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要禁用的 URL 列表
+每次最多可提交 100 条，每日最多可提交 3000 条
+         * @type {Array.<string> || null}
+         */
+        this.Urls = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Urls = 'Urls' in params ? params.Urls : null;
 
     }
 }
@@ -2571,105 +2704,6 @@ class DescribeDomainsConfigResponse extends  AbstractModel {
 }
 
 /**
- * CreateScdnLogTask请求参数结构体
- * @class
- */
-class CreateScdnLogTaskRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 防护类型
-Mode 映射如下：
-  waf = "Web攻击"
-  cc = "CC攻击"
-         * @type {string || null}
-         */
-        this.Mode = null;
-
-        /**
-         * 查询起始时间，如：2018-09-04 10:40:00，返回结果大于等于指定时间
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * 查询结束时间，如：2018-09-04 10:40:00，返回结果小于等于指定时间
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * 指定域名查询, 不填默认查询全部域名
-         * @type {string || null}
-         */
-        this.Domain = null;
-
-        /**
-         * 指定攻击类型, 不填默认查询全部攻击类型
-AttackType 映射如下:
-  other = '未知类型'
-  malicious_scan = "恶意扫描"
-  sql_inject = "SQL注入攻击"
-  xss = "XSS攻击"
-  cmd_inject = "命令注入攻击"
-  ldap_inject = "LDAP注入攻击"
-  ssi_inject = "SSI注入攻击"
-  xml_inject = "XML注入攻击"
-  web_service = "WEB服务漏洞攻击"
-  web_app = "WEB应用漏洞攻击"
-  path_traversal = "路径跨越攻击"
-  illegal_access_core_file = "核心文件非法访问"
-  trojan_horse = "木马后门攻击"
-  csrf = "CSRF攻击"
-  malicious_file_upload= '恶意文件上传'
-         * @type {string || null}
-         */
-        this.AttackType = null;
-
-        /**
-         * 指定执行动作, 不填默认查询全部执行动作
-DefenceMode 映射如下：
-  observe = '观察模式'
-  intercept = '拦截模式'
-         * @type {string || null}
-         */
-        this.DefenceMode = null;
-
-        /**
-         * 不填为全部ip
-         * @type {string || null}
-         */
-        this.Ip = null;
-
-        /**
-         * 指定域名查询, 与 Domain 参数同时有值时使用 Domains 参数，不填默认查询全部域名，指定域名查询时最多支持同时选择 5 个域名查询
-         * @type {Array.<string> || null}
-         */
-        this.Domains = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Mode = 'Mode' in params ? params.Mode : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.Domain = 'Domain' in params ? params.Domain : null;
-        this.AttackType = 'AttackType' in params ? params.AttackType : null;
-        this.DefenceMode = 'DefenceMode' in params ? params.DefenceMode : null;
-        this.Ip = 'Ip' in params ? params.Ip : null;
-        this.Domains = 'Domains' in params ? params.Domains : null;
-
-    }
-}
-
-/**
  * 域名基础配置信息，含 CNAME、状态、业务类型、加速区域、创建时间、更新时间、源站配置等。
  * @class
  */
@@ -2873,6 +2907,79 @@ class TpgAdapter extends  AbstractModel {
 }
 
 /**
+ * 路径缓存缓存配置
+ * @class
+ */
+class CacheConfigCache extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 缓存配置开关
+on：开启
+off：关闭
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 缓存过期时间设置
+单位为秒，最大可设置为 365 天
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CacheTime = null;
+
+        /**
+         * 高级缓存过期配置，开启时会对比源站返回的 max-age 值与 CacheRules 中设置的缓存过期时间，取最小值在节点进行缓存
+on：开启
+off：关闭
+默认为关闭状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CompareMaxAge = null;
+
+        /**
+         * 强制缓存
+on：开启
+off：关闭
+默认为关闭状态，开启后，源站返回的 no-store、no-cache 资源，也将按照 CacheRules 规则进行缓存
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.IgnoreCacheControl = null;
+
+        /**
+         * 忽略源站的 Set-Cookie 头部
+on：开启
+off：关闭
+默认为关闭状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.IgnoreSetCookie = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.CacheTime = 'CacheTime' in params ? params.CacheTime : null;
+        this.CompareMaxAge = 'CompareMaxAge' in params ? params.CompareMaxAge : null;
+        this.IgnoreCacheControl = 'IgnoreCacheControl' in params ? params.IgnoreCacheControl : null;
+        this.IgnoreSetCookie = 'IgnoreSetCookie' in params ? params.IgnoreSetCookie : null;
+
+    }
+}
+
+/**
  * DescribeReportData返回参数结构体
  * @class
  */
@@ -2968,6 +3075,66 @@ class DisableClsLogTopicRequest extends  AbstractModel {
         this.LogsetId = 'LogsetId' in params ? params.LogsetId : null;
         this.TopicId = 'TopicId' in params ? params.TopicId : null;
         this.Channel = 'Channel' in params ? params.Channel : null;
+
+    }
+}
+
+/**
+ * 路径缓存缓存配置（三种缓存模式中选取一种）
+ * @class
+ */
+class RuleCacheConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 缓存配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {CacheConfigCache || null}
+         */
+        this.Cache = null;
+
+        /**
+         * 不缓存配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {CacheConfigNoCache || null}
+         */
+        this.NoCache = null;
+
+        /**
+         * 遵循源站配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {CacheConfigFollowOrigin || null}
+         */
+        this.FollowOrigin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Cache) {
+            let obj = new CacheConfigCache();
+            obj.deserialize(params.Cache)
+            this.Cache = obj;
+        }
+
+        if (params.NoCache) {
+            let obj = new CacheConfigNoCache();
+            obj.deserialize(params.NoCache)
+            this.NoCache = obj;
+        }
+
+        if (params.FollowOrigin) {
+            let obj = new CacheConfigFollowOrigin();
+            obj.deserialize(params.FollowOrigin)
+            this.FollowOrigin = obj;
+        }
 
     }
 }
@@ -4193,28 +4360,20 @@ class TopDetailData extends  AbstractModel {
 }
 
 /**
- * 状态码重定向配置，默认为关闭状态（功能灰度中，尚未全量）
+ * 路径缓存遵循源站配置
  * @class
  */
-class ErrorPage extends  AbstractModel {
+class CacheConfigFollowOrigin extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 状态码重定向配置开关
+         * 遵循源站配置开关
 on：开启
 off：关闭
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Switch = null;
-
-        /**
-         * 状态码重定向规则配置
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<ErrorPageRule> || null}
-         */
-        this.PageRules = null;
 
     }
 
@@ -4226,15 +4385,6 @@ off：关闭
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
-
-        if (params.PageRules) {
-            this.PageRules = new Array();
-            for (let z in params.PageRules) {
-                let obj = new ErrorPageRule();
-                obj.deserialize(params.PageRules[z]);
-                this.PageRules.push(obj);
-            }
-        }
 
     }
 }
@@ -5312,19 +5462,82 @@ path 时填充绝对路径，如 /xxx/test.html
 }
 
 /**
- * DisableCaches请求参数结构体
+ * CreateScdnLogTask请求参数结构体
  * @class
  */
-class DisableCachesRequest extends  AbstractModel {
+class CreateScdnLogTaskRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 需要禁用的 URL 列表
-每次最多可提交 100 条，每日最多可提交 3000 条
+         * 防护类型
+Mode 映射如下：
+  waf = "Web攻击"
+  cc = "CC攻击"
+         * @type {string || null}
+         */
+        this.Mode = null;
+
+        /**
+         * 查询起始时间，如：2018-09-04 10:40:00，返回结果大于等于指定时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 查询结束时间，如：2018-09-04 10:40:00，返回结果小于等于指定时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 指定域名查询, 不填默认查询全部域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 指定攻击类型, 不填默认查询全部攻击类型
+AttackType 映射如下:
+  other = '未知类型'
+  malicious_scan = "恶意扫描"
+  sql_inject = "SQL注入攻击"
+  xss = "XSS攻击"
+  cmd_inject = "命令注入攻击"
+  ldap_inject = "LDAP注入攻击"
+  ssi_inject = "SSI注入攻击"
+  xml_inject = "XML注入攻击"
+  web_service = "WEB服务漏洞攻击"
+  web_app = "WEB应用漏洞攻击"
+  path_traversal = "路径跨越攻击"
+  illegal_access_core_file = "核心文件非法访问"
+  trojan_horse = "木马后门攻击"
+  csrf = "CSRF攻击"
+  malicious_file_upload= '恶意文件上传'
+         * @type {string || null}
+         */
+        this.AttackType = null;
+
+        /**
+         * 指定执行动作, 不填默认查询全部执行动作
+DefenceMode 映射如下：
+  observe = '观察模式'
+  intercept = '拦截模式'
+         * @type {string || null}
+         */
+        this.DefenceMode = null;
+
+        /**
+         * 不填为全部ip
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * 指定域名查询, 与 Domain 参数同时有值时使用 Domains 参数，不填默认查询全部域名，指定域名查询时最多支持同时选择 5 个域名查询
          * @type {Array.<string> || null}
          */
-        this.Urls = null;
+        this.Domains = null;
 
     }
 
@@ -5335,7 +5548,14 @@ class DisableCachesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Urls = 'Urls' in params ? params.Urls : null;
+        this.Mode = 'Mode' in params ? params.Mode : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.AttackType = 'AttackType' in params ? params.AttackType : null;
+        this.DefenceMode = 'DefenceMode' in params ? params.DefenceMode : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Domains = 'Domains' in params ? params.Domains : null;
 
     }
 }
@@ -6441,6 +6661,13 @@ class Cache extends  AbstractModel {
          */
         this.AdvancedCache = null;
 
+        /**
+         * 高级路径缓存配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<RuleCache> || null}
+         */
+        this.RuleCache = null;
+
     }
 
     /**
@@ -6461,6 +6688,15 @@ class Cache extends  AbstractModel {
             let obj = new AdvancedCache();
             obj.deserialize(params.AdvancedCache)
             this.AdvancedCache = obj;
+        }
+
+        if (params.RuleCache) {
+            this.RuleCache = new Array();
+            for (let z in params.RuleCache) {
+                let obj = new RuleCache();
+                obj.deserialize(params.RuleCache[z]);
+                this.RuleCache.push(obj);
+            }
         }
 
     }
@@ -7888,6 +8124,51 @@ class EnableCachesResponse extends  AbstractModel {
 }
 
 /**
+ * 路径保留参数配置
+ * @class
+ */
+class RuleQueryString extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * on | off CacheKey是否由QueryString组成
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * includeCustom 包含部分url参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Action = null;
+
+        /**
+         * 使用/排除的url参数数组，';' 分割
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Action = 'Action' in params ? params.Action : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * DescribeIpVisit请求参数结构体
  * @class
  */
@@ -8731,6 +9012,13 @@ off：关闭全路径缓存（即开启参数过滤）
          */
         this.Scheme = null;
 
+        /**
+         * 分路径缓存键配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<KeyRule> || null}
+         */
+        this.KeyRules = null;
+
     }
 
     /**
@@ -8771,6 +9059,15 @@ off：关闭全路径缓存（即开启参数过滤）
             let obj = new SchemeKey();
             obj.deserialize(params.Scheme)
             this.Scheme = obj;
+        }
+
+        if (params.KeyRules) {
+            this.KeyRules = new Array();
+            for (let z in params.KeyRules) {
+                let obj = new KeyRule();
+                obj.deserialize(params.KeyRules[z]);
+                this.KeyRules.push(obj);
+            }
         }
 
     }
@@ -8901,6 +9198,90 @@ class CookieKey extends  AbstractModel {
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * 缓存键分路径配置
+ * @class
+ */
+class KeyRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CacheType 对应类型下的匹配内容：
+file 时填充后缀名，如 jpg、txt
+directory 时填充路径，如 /xxx/test
+path 时填充绝对路径，如 /xxx/test.html
+index 时填充 /
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.RulePaths = null;
+
+        /**
+         * 规则类型：
+file：指定文件后缀生效
+directory：指定路径生效
+path：指定绝对路径生效
+index：首页
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * 是否开启全路径缓存
+on：开启全路径缓存（即关闭参数过滤）
+off：关闭全路径缓存（即开启参数过滤）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FullUrlCache = null;
+
+        /**
+         * 是否忽略大小写缓存
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.IgnoreCase = null;
+
+        /**
+         * CacheKey中包含请求参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {RuleQueryString || null}
+         */
+        this.QueryString = null;
+
+        /**
+         * 路径缓存键标签，传 user
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RuleTag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RulePaths = 'RulePaths' in params ? params.RulePaths : null;
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.FullUrlCache = 'FullUrlCache' in params ? params.FullUrlCache : null;
+        this.IgnoreCase = 'IgnoreCase' in params ? params.IgnoreCase : null;
+
+        if (params.QueryString) {
+            let obj = new RuleQueryString();
+            obj.deserialize(params.QueryString)
+            this.QueryString = obj;
+        }
+        this.RuleTag = 'RuleTag' in params ? params.RuleTag : null;
 
     }
 }
@@ -9374,6 +9755,53 @@ CNToOV：境内回源境外
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.OptimizationType = 'OptimizationType' in params ? params.OptimizationType : null;
+
+    }
+}
+
+/**
+ * 状态码重定向配置，默认为关闭状态（功能灰度中，尚未全量）
+ * @class
+ */
+class ErrorPage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 状态码重定向配置开关
+on：开启
+off：关闭
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 状态码重定向规则配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ErrorPageRule> || null}
+         */
+        this.PageRules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.PageRules) {
+            this.PageRules = new Array();
+            for (let z in params.PageRules) {
+                let obj = new ErrorPageRule();
+                obj.deserialize(params.PageRules[z]);
+                this.PageRules.push(obj);
+            }
+        }
 
     }
 }
@@ -11672,6 +12100,7 @@ module.exports = {
     Authentication: Authentication,
     ImageOptimization: ImageOptimization,
     Https: Https,
+    RuleCache: RuleCache,
     ReportData: ReportData,
     DescribeTrafficPackagesRequest: DescribeTrafficPackagesRequest,
     CreateClsLogTopicResponse: CreateClsLogTopicResponse,
@@ -11686,6 +12115,7 @@ module.exports = {
     DescribeScdnTopDataResponse: DescribeScdnTopDataResponse,
     EnableClsLogTopicRequest: EnableClsLogTopicRequest,
     UpdateImageConfigResponse: UpdateImageConfigResponse,
+    CacheConfigNoCache: CacheConfigNoCache,
     AccessControl: AccessControl,
     DeleteCdnDomainRequest: DeleteCdnDomainRequest,
     DescribePayTypeResponse: DescribePayTypeResponse,
@@ -11693,6 +12123,7 @@ module.exports = {
     ListClsTopicDomainsRequest: ListClsTopicDomainsRequest,
     DescribeDomainsResponse: DescribeDomainsResponse,
     UpdateImageConfigRequest: UpdateImageConfigRequest,
+    DisableCachesRequest: DisableCachesRequest,
     CompressionRule: CompressionRule,
     GuetzliAdapter: GuetzliAdapter,
     Origin: Origin,
@@ -11707,12 +12138,13 @@ module.exports = {
     UpdatePayTypeResponse: UpdatePayTypeResponse,
     TopicInfo: TopicInfo,
     DescribeDomainsConfigResponse: DescribeDomainsConfigResponse,
-    CreateScdnLogTaskRequest: CreateScdnLogTaskRequest,
     BriefDomain: BriefDomain,
     UpdatePayTypeRequest: UpdatePayTypeRequest,
     TpgAdapter: TpgAdapter,
+    CacheConfigCache: CacheConfigCache,
     DescribeReportDataResponse: DescribeReportDataResponse,
     DisableClsLogTopicRequest: DisableClsLogTopicRequest,
+    RuleCacheConfig: RuleCacheConfig,
     ListClsTopicDomainsResponse: ListClsTopicDomainsResponse,
     TrafficPackage: TrafficPackage,
     DescribeCdnIpRequest: DescribeCdnIpRequest,
@@ -11725,7 +12157,7 @@ module.exports = {
     AddCdnDomainRequest: AddCdnDomainRequest,
     UserAgentFilterRule: UserAgentFilterRule,
     TopDetailData: TopDetailData,
-    ErrorPage: ErrorPage,
+    CacheConfigFollowOrigin: CacheConfigFollowOrigin,
     MaxAgeRule: MaxAgeRule,
     DescribePayTypeRequest: DescribePayTypeRequest,
     DescribeCertDomainsRequest: DescribeCertDomainsRequest,
@@ -11747,7 +12179,7 @@ module.exports = {
     ServerCert: ServerCert,
     AccessControlRule: AccessControlRule,
     HttpHeaderPathRule: HttpHeaderPathRule,
-    DisableCachesRequest: DisableCachesRequest,
+    CreateScdnLogTaskRequest: CreateScdnLogTaskRequest,
     DistrictIspInfo: DistrictIspInfo,
     SimpleCacheRule: SimpleCacheRule,
     DisableClsLogTopicResponse: DisableClsLogTopicResponse,
@@ -11780,6 +12212,7 @@ module.exports = {
     DescribeTrafficPackagesResponse: DescribeTrafficPackagesResponse,
     DescribeMapInfoRequest: DescribeMapInfoRequest,
     EnableCachesResponse: EnableCachesResponse,
+    RuleQueryString: RuleQueryString,
     DescribeIpVisitRequest: DescribeIpVisitRequest,
     StatusCodeCacheRule: StatusCodeCacheRule,
     ClientCert: ClientCert,
@@ -11800,6 +12233,7 @@ module.exports = {
     UrlRedirect: UrlRedirect,
     DownstreamCapping: DownstreamCapping,
     CookieKey: CookieKey,
+    KeyRule: KeyRule,
     CappingRule: CappingRule,
     ListClsLogTopicsRequest: ListClsLogTopicsRequest,
     Seo: Seo,
@@ -11811,6 +12245,7 @@ module.exports = {
     PurgeUrlsCacheRequest: PurgeUrlsCacheRequest,
     StartCdnDomainRequest: StartCdnDomainRequest,
     OriginPullOptimization: OriginPullOptimization,
+    ErrorPage: ErrorPage,
     PushTask: PushTask,
     TimestampData: TimestampData,
     StartCdnDomainResponse: StartCdnDomainResponse,

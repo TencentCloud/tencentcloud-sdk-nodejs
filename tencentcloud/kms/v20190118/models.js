@@ -534,6 +534,34 @@ class ListAlgorithmsResponse extends  AbstractModel {
 }
 
 /**
+ * DisableKeys返回参数结构体
+ * @class
+ */
+class DisableKeysResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeWhiteBoxKey返回参数结构体
  * @class
  */
@@ -714,18 +742,18 @@ class EnableKeyRequest extends  AbstractModel {
 }
 
 /**
- * ImportKeyMaterial返回参数结构体
+ * GetKeyRotationStatus请求参数结构体
  * @class
  */
-class ImportKeyMaterialResponse extends  AbstractModel {
+class GetKeyRotationStatusRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * CMK唯一标识符
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.KeyId = null;
 
     }
 
@@ -736,7 +764,7 @@ class ImportKeyMaterialResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
 
     }
 }
@@ -1084,6 +1112,34 @@ class GetServiceStatusRequest extends  AbstractModel {
  * @class
  */
 class EnableWhiteBoxKeysResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ArchiveKey返回参数结构体
+ * @class
+ */
+class ArchiveKeyResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -1625,25 +1681,24 @@ class ListKeysResponse extends  AbstractModel {
 }
 
 /**
- * GetServiceStatus返回参数结构体
+ * AsymmetricSm2Decrypt返回参数结构体
  * @class
  */
-class GetServiceStatusResponse extends  AbstractModel {
+class AsymmetricSm2DecryptResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * KMS服务是否开通， true 表示已开通
-         * @type {boolean || null}
+         * CMK的唯一标识
+         * @type {string || null}
          */
-        this.ServiceEnabled = null;
+        this.KeyId = null;
 
         /**
-         * 服务不可用类型： 0-未购买，1-正常， 2-欠费停服， 3-资源释放
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
+         * 解密后的明文，base64编码
+         * @type {string || null}
          */
-        this.InvalidType = null;
+        this.Plaintext = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1660,8 +1715,8 @@ class GetServiceStatusResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ServiceEnabled = 'ServiceEnabled' in params ? params.ServiceEnabled : null;
-        this.InvalidType = 'InvalidType' in params ? params.InvalidType : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.Plaintext = 'Plaintext' in params ? params.Plaintext : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1724,24 +1779,66 @@ class DisableWhiteBoxKeysRequest extends  AbstractModel {
 }
 
 /**
- * OverwriteWhiteBoxDeviceFingerprints请求参数结构体
+ * ListKeyDetail请求参数结构体
  * @class
  */
-class OverwriteWhiteBoxDeviceFingerprintsRequest extends  AbstractModel {
+class ListKeyDetailRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 白盒密钥ID
-         * @type {string || null}
+         * 含义跟 SQL 查询的 Offset 一致，表示本次获取从按一定顺序排列数组的第 Offset 个元素开始，缺省为0
+         * @type {number || null}
          */
-        this.KeyId = null;
+        this.Offset = null;
 
         /**
-         * 设备指纹列表，如果列表为空，则表示删除该密钥对应的所有指纹信息。列表最大长度不超过200。
-         * @type {Array.<DeviceFingerprint> || null}
+         * 含义跟 SQL 查询的 Limit 一致，表示本次最多获取 Limit 个元素。缺省值为10，最大值为200
+         * @type {number || null}
          */
-        this.DeviceFingerprints = null;
+        this.Limit = null;
+
+        /**
+         * 根据创建者角色筛选，默认 0 表示用户自己创建的cmk， 1 表示授权其它云产品自动创建的cmk
+         * @type {number || null}
+         */
+        this.Role = null;
+
+        /**
+         * 根据CMK创建时间排序， 0 表示按照降序排序，1表示按照升序排序
+         * @type {number || null}
+         */
+        this.OrderType = null;
+
+        /**
+         * 根据CMK状态筛选， 0表示全部CMK， 1 表示仅查询Enabled CMK， 2 表示仅查询Disabled CMK，3 表示查询PendingDelete 状态的CMK(处于计划删除状态的Key)，4 表示查询 PendingImport 状态的CMK，5 表示查询 Archived 状态的 CMK
+         * @type {number || null}
+         */
+        this.KeyState = null;
+
+        /**
+         * 根据KeyId或者Alias进行模糊匹配查询
+         * @type {string || null}
+         */
+        this.SearchKeyAlias = null;
+
+        /**
+         * 根据CMK类型筛选， "TENCENT_KMS" 表示筛选密钥材料由KMS创建的CMK， "EXTERNAL" 表示筛选密钥材料需要用户导入的 EXTERNAL类型CMK，"ALL" 或者不设置表示两种类型都查询，大小写敏感。
+         * @type {string || null}
+         */
+        this.Origin = null;
+
+        /**
+         * 根据CMK的KeyUsage筛选，ALL表示筛选全部，可使用的参数为：ALL 或 ENCRYPT_DECRYPT 或 ASYMMETRIC_DECRYPT_RSA_2048 或 ASYMMETRIC_DECRYPT_SM2，为空则默认筛选ENCRYPT_DECRYPT类型
+         * @type {string || null}
+         */
+        this.KeyUsage = null;
+
+        /**
+         * 标签过滤条件
+         * @type {Array.<TagFilter> || null}
+         */
+        this.TagFilters = null;
 
     }
 
@@ -1752,14 +1849,21 @@ class OverwriteWhiteBoxDeviceFingerprintsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Role = 'Role' in params ? params.Role : null;
+        this.OrderType = 'OrderType' in params ? params.OrderType : null;
+        this.KeyState = 'KeyState' in params ? params.KeyState : null;
+        this.SearchKeyAlias = 'SearchKeyAlias' in params ? params.SearchKeyAlias : null;
+        this.Origin = 'Origin' in params ? params.Origin : null;
+        this.KeyUsage = 'KeyUsage' in params ? params.KeyUsage : null;
 
-        if (params.DeviceFingerprints) {
-            this.DeviceFingerprints = new Array();
-            for (let z in params.DeviceFingerprints) {
-                let obj = new DeviceFingerprint();
-                obj.deserialize(params.DeviceFingerprints[z]);
-                this.DeviceFingerprints.push(obj);
+        if (params.TagFilters) {
+            this.TagFilters = new Array();
+            for (let z in params.TagFilters) {
+                let obj = new TagFilter();
+                obj.deserialize(params.TagFilters[z]);
+                this.TagFilters.push(obj);
             }
         }
 
@@ -2023,6 +2127,34 @@ class DisableWhiteBoxKeysResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ArchiveKey请求参数结构体
+ * @class
+ */
+class ArchiveKeyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CMK唯一标识符
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
 
     }
 }
@@ -2339,24 +2471,25 @@ class EnableKeyResponse extends  AbstractModel {
 }
 
 /**
- * AsymmetricSm2Decrypt返回参数结构体
+ * GetServiceStatus返回参数结构体
  * @class
  */
-class AsymmetricSm2DecryptResponse extends  AbstractModel {
+class GetServiceStatusResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * CMK的唯一标识
-         * @type {string || null}
+         * KMS服务是否开通， true 表示已开通
+         * @type {boolean || null}
          */
-        this.KeyId = null;
+        this.ServiceEnabled = null;
 
         /**
-         * 解密后的明文，base64编码
-         * @type {string || null}
+         * 服务不可用类型： 0-未购买，1-正常， 2-欠费停服， 3-资源释放
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
          */
-        this.Plaintext = null;
+        this.InvalidType = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2373,8 +2506,8 @@ class AsymmetricSm2DecryptResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.KeyId = 'KeyId' in params ? params.KeyId : null;
-        this.Plaintext = 'Plaintext' in params ? params.Plaintext : null;
+        this.ServiceEnabled = 'ServiceEnabled' in params ? params.ServiceEnabled : null;
+        this.InvalidType = 'InvalidType' in params ? params.InvalidType : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2659,7 +2792,7 @@ class KeyMetadata extends  AbstractModel {
         this.Description = null;
 
         /**
-         * CMK的状态， 取值为：Enabled | Disabled | PendingDelete | PendingImport
+         * CMK的状态， 取值为：Enabled | Disabled | PendingDelete | PendingImport | Archived
          * @type {string || null}
          */
         this.KeyState = null;
@@ -2756,10 +2889,10 @@ class KeyMetadata extends  AbstractModel {
 }
 
 /**
- * DisableKeys返回参数结构体
+ * CancelKeyArchive返回参数结构体
  * @class
  */
-class DisableKeysResponse extends  AbstractModel {
+class CancelKeyArchiveResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -3051,66 +3184,24 @@ class UnbindCloudResourceRequest extends  AbstractModel {
 }
 
 /**
- * ListKeyDetail请求参数结构体
+ * OverwriteWhiteBoxDeviceFingerprints请求参数结构体
  * @class
  */
-class ListKeyDetailRequest extends  AbstractModel {
+class OverwriteWhiteBoxDeviceFingerprintsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 含义跟 SQL 查询的 Offset 一致，表示本次获取从按一定顺序排列数组的第 Offset 个元素开始，缺省为0
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 含义跟 SQL 查询的 Limit 一致，表示本次最多获取 Limit 个元素。缺省值为10，最大值为200
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 根据创建者角色筛选，默认 0 表示用户自己创建的cmk， 1 表示授权其它云产品自动创建的cmk
-         * @type {number || null}
-         */
-        this.Role = null;
-
-        /**
-         * 根据CMK创建时间排序， 0 表示按照降序排序，1表示按照升序排序
-         * @type {number || null}
-         */
-        this.OrderType = null;
-
-        /**
-         * 根据CMK状态筛选， 0表示全部CMK， 1 表示仅查询Enabled CMK， 2 表示仅查询Disabled CMK，3 表示查询PendingDelete 状态的CMK(处于计划删除状态的Key)，4 表示查询 PendingImport 状态的CMK
-         * @type {number || null}
-         */
-        this.KeyState = null;
-
-        /**
-         * 根据KeyId或者Alias进行模糊匹配查询
+         * 白盒密钥ID
          * @type {string || null}
          */
-        this.SearchKeyAlias = null;
+        this.KeyId = null;
 
         /**
-         * 根据CMK类型筛选， "TENCENT_KMS" 表示筛选密钥材料由KMS创建的CMK， "EXTERNAL" 表示筛选密钥材料需要用户导入的 EXTERNAL类型CMK，"ALL" 或者不设置表示两种类型都查询，大小写敏感。
-         * @type {string || null}
+         * 设备指纹列表，如果列表为空，则表示删除该密钥对应的所有指纹信息。列表最大长度不超过200。
+         * @type {Array.<DeviceFingerprint> || null}
          */
-        this.Origin = null;
-
-        /**
-         * 根据CMK的KeyUsage筛选，ALL表示筛选全部，可使用的参数为：ALL 或 ENCRYPT_DECRYPT 或 ASYMMETRIC_DECRYPT_RSA_2048 或 ASYMMETRIC_DECRYPT_SM2，为空则默认筛选ENCRYPT_DECRYPT类型
-         * @type {string || null}
-         */
-        this.KeyUsage = null;
-
-        /**
-         * 标签过滤条件
-         * @type {Array.<TagFilter> || null}
-         */
-        this.TagFilters = null;
+        this.DeviceFingerprints = null;
 
     }
 
@@ -3121,21 +3212,14 @@ class ListKeyDetailRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Role = 'Role' in params ? params.Role : null;
-        this.OrderType = 'OrderType' in params ? params.OrderType : null;
-        this.KeyState = 'KeyState' in params ? params.KeyState : null;
-        this.SearchKeyAlias = 'SearchKeyAlias' in params ? params.SearchKeyAlias : null;
-        this.Origin = 'Origin' in params ? params.Origin : null;
-        this.KeyUsage = 'KeyUsage' in params ? params.KeyUsage : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
 
-        if (params.TagFilters) {
-            this.TagFilters = new Array();
-            for (let z in params.TagFilters) {
-                let obj = new TagFilter();
-                obj.deserialize(params.TagFilters[z]);
-                this.TagFilters.push(obj);
+        if (params.DeviceFingerprints) {
+            this.DeviceFingerprints = new Array();
+            for (let z in params.DeviceFingerprints) {
+                let obj = new DeviceFingerprint();
+                obj.deserialize(params.DeviceFingerprints[z]);
+                this.DeviceFingerprints.push(obj);
             }
         }
 
@@ -3409,18 +3493,18 @@ class DisableKeyRequest extends  AbstractModel {
 }
 
 /**
- * GetKeyRotationStatus请求参数结构体
+ * ImportKeyMaterial返回参数结构体
  * @class
  */
-class GetKeyRotationStatusRequest extends  AbstractModel {
+class ImportKeyMaterialResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * CMK唯一标识符
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.KeyId = null;
+        this.RequestId = null;
 
     }
 
@@ -3431,7 +3515,7 @@ class GetKeyRotationStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3745,6 +3829,34 @@ class DescribeKeyResponse extends  AbstractModel {
 }
 
 /**
+ * CancelKeyArchive请求参数结构体
+ * @class
+ */
+class CancelKeyArchiveRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * CMK唯一标识符
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+
+    }
+}
+
+/**
  * DisableKeyRotation请求参数结构体
  * @class
  */
@@ -3785,12 +3897,13 @@ module.exports = {
     DescribeKeyRequest: DescribeKeyRequest,
     WhiteboxKeyInfo: WhiteboxKeyInfo,
     ListAlgorithmsResponse: ListAlgorithmsResponse,
+    DisableKeysResponse: DisableKeysResponse,
     DescribeWhiteBoxKeyResponse: DescribeWhiteBoxKeyResponse,
     UpdateKeyDescriptionResponse: UpdateKeyDescriptionResponse,
     DescribeWhiteBoxServiceStatusResponse: DescribeWhiteBoxServiceStatusResponse,
     ImportKeyMaterialRequest: ImportKeyMaterialRequest,
     EnableKeyRequest: EnableKeyRequest,
-    ImportKeyMaterialResponse: ImportKeyMaterialResponse,
+    GetKeyRotationStatusRequest: GetKeyRotationStatusRequest,
     ListAlgorithmsRequest: ListAlgorithmsRequest,
     Tag: Tag,
     ListKeyDetailResponse: ListKeyDetailResponse,
@@ -3802,6 +3915,7 @@ module.exports = {
     GetPublicKeyRequest: GetPublicKeyRequest,
     GetServiceStatusRequest: GetServiceStatusRequest,
     EnableWhiteBoxKeysResponse: EnableWhiteBoxKeysResponse,
+    ArchiveKeyResponse: ArchiveKeyResponse,
     DescribeWhiteBoxKeyRequest: DescribeWhiteBoxKeyRequest,
     GetParametersForImportResponse: GetParametersForImportResponse,
     DecryptResponse: DecryptResponse,
@@ -3815,10 +3929,10 @@ module.exports = {
     EnableWhiteBoxKeyResponse: EnableWhiteBoxKeyResponse,
     ReEncryptRequest: ReEncryptRequest,
     ListKeysResponse: ListKeysResponse,
-    GetServiceStatusResponse: GetServiceStatusResponse,
+    AsymmetricSm2DecryptResponse: AsymmetricSm2DecryptResponse,
     DisableKeyRotationResponse: DisableKeyRotationResponse,
     DisableWhiteBoxKeysRequest: DisableWhiteBoxKeysRequest,
-    OverwriteWhiteBoxDeviceFingerprintsRequest: OverwriteWhiteBoxDeviceFingerprintsRequest,
+    ListKeyDetailRequest: ListKeyDetailRequest,
     DeleteWhiteBoxKeyRequest: DeleteWhiteBoxKeyRequest,
     AlgorithmInfo: AlgorithmInfo,
     GetRegionsResponse: GetRegionsResponse,
@@ -3826,6 +3940,7 @@ module.exports = {
     CreateWhiteBoxKeyRequest: CreateWhiteBoxKeyRequest,
     OverwriteWhiteBoxDeviceFingerprintsResponse: OverwriteWhiteBoxDeviceFingerprintsResponse,
     DisableWhiteBoxKeysResponse: DisableWhiteBoxKeysResponse,
+    ArchiveKeyRequest: ArchiveKeyRequest,
     GetParametersForImportRequest: GetParametersForImportRequest,
     CreateKeyResponse: CreateKeyResponse,
     ReEncryptResponse: ReEncryptResponse,
@@ -3833,7 +3948,7 @@ module.exports = {
     CancelKeyDeletionRequest: CancelKeyDeletionRequest,
     DeleteImportedKeyMaterialRequest: DeleteImportedKeyMaterialRequest,
     EnableKeyResponse: EnableKeyResponse,
-    AsymmetricSm2DecryptResponse: AsymmetricSm2DecryptResponse,
+    GetServiceStatusResponse: GetServiceStatusResponse,
     DeviceFingerprint: DeviceFingerprint,
     GetKeyRotationStatusResponse: GetKeyRotationStatusResponse,
     EncryptRequest: EncryptRequest,
@@ -3842,7 +3957,7 @@ module.exports = {
     ListKeysRequest: ListKeysRequest,
     DescribeWhiteBoxDecryptKeyRequest: DescribeWhiteBoxDecryptKeyRequest,
     KeyMetadata: KeyMetadata,
-    DisableKeysResponse: DisableKeysResponse,
+    CancelKeyArchiveResponse: CancelKeyArchiveResponse,
     DecryptRequest: DecryptRequest,
     DescribeWhiteBoxKeyDetailsRequest: DescribeWhiteBoxKeyDetailsRequest,
     AsymmetricRsaDecryptResponse: AsymmetricRsaDecryptResponse,
@@ -3850,7 +3965,7 @@ module.exports = {
     DisableKeysRequest: DisableKeysRequest,
     DisableWhiteBoxKeyRequest: DisableWhiteBoxKeyRequest,
     UnbindCloudResourceRequest: UnbindCloudResourceRequest,
-    ListKeyDetailRequest: ListKeyDetailRequest,
+    OverwriteWhiteBoxDeviceFingerprintsRequest: OverwriteWhiteBoxDeviceFingerprintsRequest,
     EnableKeyRotationResponse: EnableKeyRotationResponse,
     BindCloudResourceResponse: BindCloudResourceResponse,
     EnableKeysResponse: EnableKeysResponse,
@@ -3860,7 +3975,7 @@ module.exports = {
     GenerateRandomRequest: GenerateRandomRequest,
     ScheduleKeyDeletionRequest: ScheduleKeyDeletionRequest,
     DisableKeyRequest: DisableKeyRequest,
-    GetKeyRotationStatusRequest: GetKeyRotationStatusRequest,
+    ImportKeyMaterialResponse: ImportKeyMaterialResponse,
     GetPublicKeyResponse: GetPublicKeyResponse,
     BindCloudResourceRequest: BindCloudResourceRequest,
     TagFilter: TagFilter,
@@ -3869,6 +3984,7 @@ module.exports = {
     UpdateKeyDescriptionRequest: UpdateKeyDescriptionRequest,
     UnbindCloudResourceResponse: UnbindCloudResourceResponse,
     DescribeKeyResponse: DescribeKeyResponse,
+    CancelKeyArchiveRequest: CancelKeyArchiveRequest,
     DisableKeyRotationRequest: DisableKeyRotationRequest,
 
 }

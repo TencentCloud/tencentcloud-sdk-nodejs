@@ -46,6 +46,7 @@ const DeleteClusterRouteResponse = models.DeleteClusterRouteResponse;
 const CreateClusterEndpointVipResponse = models.CreateClusterEndpointVipResponse;
 const DescribeClusterRoutesResponse = models.DescribeClusterRoutesResponse;
 const DescribeClustersRequest = models.DescribeClustersRequest;
+const ExtensionAddon = models.ExtensionAddon;
 const RegionInstance = models.RegionInstance;
 const Label = models.Label;
 const DeleteClusterEndpointVipResponse = models.DeleteClusterEndpointVipResponse;

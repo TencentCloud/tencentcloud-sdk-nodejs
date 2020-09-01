@@ -9963,35 +9963,41 @@ class CreateLiveTranscodeTemplateRequest extends  AbstractModel {
 
         /**
          * 模板名称，例：900 900p 仅支持字母和数字的组合。
+长度限制：
+  标准转码：1-10个字符
+  极速高清转码：3-10个字符
          * @type {string || null}
          */
         this.TemplateName = null;
 
         /**
          * 视频码率。范围：100-8000。
-注意：码率必须是100的倍数。
+注: 转码模板有码率唯一要求，最终保存的码率可能与输入码率有所差别。
          * @type {number || null}
          */
         this.VideoBitrate = null;
 
         /**
-         * 视频编码：h264/h265，默认h264。
-         * @type {string || null}
-         */
-        this.Vcodec = null;
-
-        /**
-         * 音频编码：aac，默认原始音频格式。
+         * 音频编码：aac，默认aac。
 注意：当前该参数未生效，待后续支持！
          * @type {string || null}
          */
         this.Acodec = null;
 
         /**
-         * 音频码率：默认0。0-500。
+         * 音频码率，默认0。
+范围：0-500。
          * @type {number || null}
          */
         this.AudioBitrate = null;
+
+        /**
+         * 视频编码：h264/h265/origin，默认h264。
+
+origin: 保持原始编码格式
+         * @type {string || null}
+         */
+        this.Vcodec = null;
 
         /**
          * 模板描述。
@@ -10002,6 +10008,7 @@ class CreateLiveTranscodeTemplateRequest extends  AbstractModel {
         /**
          * 宽，默认0。
 范围[0-3000]
+数值必须是2的倍数，0是原始宽度
          * @type {number || null}
          */
         this.Width = null;
@@ -10021,24 +10028,28 @@ class CreateLiveTranscodeTemplateRequest extends  AbstractModel {
         /**
          * 高，默认0。
 范围[0-3000]
+数值必须是2的倍数，0是原始宽度
          * @type {number || null}
          */
         this.Height = null;
 
         /**
          * 帧率，默认0。
+范围0-60
          * @type {number || null}
          */
         this.Fps = null;
 
         /**
          * 关键帧间隔，单位：秒。默认原始的间隔
+范围2-6
          * @type {number || null}
          */
         this.Gop = null;
 
         /**
-         * 是否旋转，0：否，1：是。默认0。
+         * 旋转角度，默认0。
+可取值：0，90，180，270
          * @type {number || null}
          */
         this.Rotate = null;
@@ -10083,6 +10094,12 @@ baseline/main/high。默认baseline
          */
         this.AdaptBitratePercent = null;
 
+        /**
+         * 是否以短边作为高度，0：否，1：是。默认0。
+         * @type {number || null}
+         */
+        this.ShortEdgeAsHeight = null;
+
     }
 
     /**
@@ -10094,9 +10111,9 @@ baseline/main/high。默认baseline
         }
         this.TemplateName = 'TemplateName' in params ? params.TemplateName : null;
         this.VideoBitrate = 'VideoBitrate' in params ? params.VideoBitrate : null;
-        this.Vcodec = 'Vcodec' in params ? params.Vcodec : null;
         this.Acodec = 'Acodec' in params ? params.Acodec : null;
         this.AudioBitrate = 'AudioBitrate' in params ? params.AudioBitrate : null;
+        this.Vcodec = 'Vcodec' in params ? params.Vcodec : null;
         this.Description = 'Description' in params ? params.Description : null;
         this.Width = 'Width' in params ? params.Width : null;
         this.NeedVideo = 'NeedVideo' in params ? params.NeedVideo : null;
@@ -10111,6 +10128,7 @@ baseline/main/high。默认baseline
         this.FpsToOrig = 'FpsToOrig' in params ? params.FpsToOrig : null;
         this.AiTransCode = 'AiTransCode' in params ? params.AiTransCode : null;
         this.AdaptBitratePercent = 'AdaptBitratePercent' in params ? params.AdaptBitratePercent : null;
+        this.ShortEdgeAsHeight = 'ShortEdgeAsHeight' in params ? params.ShortEdgeAsHeight : null;
 
     }
 }
@@ -10400,15 +10418,16 @@ class ModifyLiveTranscodeTemplateRequest extends  AbstractModel {
         this.TemplateId = null;
 
         /**
-         * 视频编码：
-h264/h265。
+         * 视频编码：h264/h265/origin，默认h264。
+
+origin: 保持原始编码格式
          * @type {string || null}
          */
         this.Vcodec = null;
 
         /**
-         * 音频编码：
-aac/mp3。
+         * 音频编码：aac，默认aac。
+注意：当前该参数未生效，待后续支持！
          * @type {string || null}
          */
         this.Acodec = null;
@@ -10428,13 +10447,14 @@ aac/mp3。
 
         /**
          * 视频码率。范围：100kbps - 8000kbps。
-注意：码率必须是100的倍数。
+注: 转码模板有码率唯一要求，最终保存的码率可能与输入码率有所差别。
          * @type {number || null}
          */
         this.VideoBitrate = null;
 
         /**
          * 宽。0-3000。
+数值必须是2的倍数，0是原始宽度
          * @type {number || null}
          */
         this.Width = null;
@@ -10453,25 +10473,28 @@ aac/mp3。
 
         /**
          * 高。0-3000。
+数值必须是2的倍数，0是原始宽度
          * @type {number || null}
          */
         this.Height = null;
 
         /**
-         * 帧率。0-200。
+         * 帧率，默认0。
+范围0-60
          * @type {number || null}
          */
         this.Fps = null;
 
         /**
-         * 关键帧间隔，单位：秒。0-50。
+         * 关键帧间隔，单位：秒。
+范围2-6
          * @type {number || null}
          */
         this.Gop = null;
 
         /**
-         * 旋转角度。
-0 90 180 270。
+         * 旋转角度，默认0。
+可取值：0，90，180，270
          * @type {number || null}
          */
         this.Rotate = null;
@@ -10510,6 +10533,12 @@ baseline/main/high。
          */
         this.AdaptBitratePercent = null;
 
+        /**
+         * 是否以短边作为高度，0：否，1：是。默认0。
+         * @type {number || null}
+         */
+        this.ShortEdgeAsHeight = null;
+
     }
 
     /**
@@ -10537,6 +10566,7 @@ baseline/main/high。
         this.HeightToOrig = 'HeightToOrig' in params ? params.HeightToOrig : null;
         this.FpsToOrig = 'FpsToOrig' in params ? params.FpsToOrig : null;
         this.AdaptBitratePercent = 'AdaptBitratePercent' in params ? params.AdaptBitratePercent : null;
+        this.ShortEdgeAsHeight = 'ShortEdgeAsHeight' in params ? params.ShortEdgeAsHeight : null;
 
     }
 }
