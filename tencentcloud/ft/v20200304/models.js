@@ -660,7 +660,7 @@ class FaceCartoonPicRequest extends  AbstractModel {
         this.RspImgType = null;
 
         /**
-         * 是否取消全图动漫化效果。
+         * 关闭全图动漫化，传入true（不分大小写）即关闭全图动漫化。
          * @type {string || null}
          */
         this.DisableGlobalEffect = null;

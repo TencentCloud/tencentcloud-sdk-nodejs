@@ -5154,7 +5154,7 @@ class FlushBinlogRequest extends  AbstractModel {
         super();
 
         /**
-         * 无
+         * 实例ID
          * @type {string || null}
          */
         this.InstanceId = null;

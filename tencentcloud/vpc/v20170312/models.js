@@ -17340,6 +17340,26 @@ class Address extends  AbstractModel {
          */
         this.InternetServiceProvider = null;
 
+        /**
+         * 是否本地带宽EIP
+         * @type {boolean || null}
+         */
+        this.LocalBgp = null;
+
+        /**
+         * 弹性公网IP的带宽值。注意，非带宽上移账户的弹性公网IP没有带宽属性，值为空。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Bandwidth = null;
+
+        /**
+         * 弹性公网IP的网络计费模式。注意，非带宽上移账户的弹性公网IP没有网络计费模式属性，值为空。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InternetChargeType = null;
+
     }
 
     /**
@@ -17369,6 +17389,9 @@ class Address extends  AbstractModel {
             this.EipAlgType = obj;
         }
         this.InternetServiceProvider = 'InternetServiceProvider' in params ? params.InternetServiceProvider : null;
+        this.LocalBgp = 'LocalBgp' in params ? params.LocalBgp : null;
+        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
+        this.InternetChargeType = 'InternetChargeType' in params ? params.InternetChargeType : null;
 
     }
 }
