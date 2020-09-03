@@ -284,6 +284,12 @@ class CreateSecretRequest extends  AbstractModel {
          */
         this.SecretString = null;
 
+        /**
+         * 标签列表
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -299,6 +305,15 @@ class CreateSecretRequest extends  AbstractModel {
         this.KmsKeyId = 'KmsKeyId' in params ? params.KmsKeyId : null;
         this.SecretBinary = 'SecretBinary' in params ? params.SecretBinary : null;
         this.SecretString = 'SecretString' in params ? params.SecretString : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -555,6 +570,20 @@ class CreateSecretResponse extends  AbstractModel {
         this.VersionId = null;
 
         /**
+         * 标签操作的返回码. 0: 成功；1: 内部错误；2: 业务处理错误
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TagCode = null;
+
+        /**
+         * 标签操作的返回信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TagMsg = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -571,6 +600,8 @@ class CreateSecretResponse extends  AbstractModel {
         }
         this.SecretName = 'SecretName' in params ? params.SecretName : null;
         this.VersionId = 'VersionId' in params ? params.VersionId : null;
+        this.TagCode = 'TagCode' in params ? params.TagCode : null;
+        this.TagMsg = 'TagMsg' in params ? params.TagMsg : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -712,6 +743,12 @@ class ListSecretsRequest extends  AbstractModel {
          */
         this.SearchSecretName = null;
 
+        /**
+         * 标签过滤条件
+         * @type {Array.<TagFilter> || null}
+         */
+        this.TagFilters = null;
+
     }
 
     /**
@@ -726,6 +763,15 @@ class ListSecretsRequest extends  AbstractModel {
         this.OrderType = 'OrderType' in params ? params.OrderType : null;
         this.State = 'State' in params ? params.State : null;
         this.SearchSecretName = 'SearchSecretName' in params ? params.SearchSecretName : null;
+
+        if (params.TagFilters) {
+            this.TagFilters = new Array();
+            for (let z in params.TagFilters) {
+                let obj = new TagFilter();
+                obj.deserialize(params.TagFilters[z]);
+                this.TagFilters.push(obj);
+            }
+        }
 
     }
 }
@@ -880,6 +926,41 @@ class VersionInfo extends  AbstractModel {
         }
         this.VersionId = 'VersionId' in params ? params.VersionId : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+    }
+}
+
+/**
+ * 标签过滤器
+ * @class
+ */
+class TagFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签键
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * 标签值
+         * @type {Array.<string> || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
 
     }
 }
@@ -1179,6 +1260,41 @@ class DisableSecretRequest extends  AbstractModel {
 }
 
 /**
+ * 标签键和标签值
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签键
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * 标签值
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
  * ListSecrets返回参数结构体
  * @class
  */
@@ -1349,6 +1465,7 @@ module.exports = {
     EnableSecretResponse: EnableSecretResponse,
     UpdateSecretRequest: UpdateSecretRequest,
     VersionInfo: VersionInfo,
+    TagFilter: TagFilter,
     PutSecretValueRequest: PutSecretValueRequest,
     GetSecretValueRequest: GetSecretValueRequest,
     GetServiceStatusResponse: GetServiceStatusResponse,
@@ -1357,6 +1474,7 @@ module.exports = {
     PutSecretValueResponse: PutSecretValueResponse,
     DeleteSecretResponse: DeleteSecretResponse,
     DisableSecretRequest: DisableSecretRequest,
+    Tag: Tag,
     ListSecretsResponse: ListSecretsResponse,
     EnableSecretRequest: EnableSecretRequest,
     GetServiceStatusRequest: GetServiceStatusRequest,

@@ -407,7 +407,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * 创建redis实例
+     * 本接口(CreateInstances)用于创建redis实例。
      * @param {CreateInstancesRequest} req
      * @param {function(string, CreateInstancesResponse):void} cb
      * @public
@@ -528,7 +528,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * 修改实例参数
+     * 本接口(ModifyInstanceParams)用于修改实例参数。
      * @param {ModifyInstanceParamsRequest} req
      * @param {function(string, ModifyInstanceParamsResponse):void} cb
      * @public

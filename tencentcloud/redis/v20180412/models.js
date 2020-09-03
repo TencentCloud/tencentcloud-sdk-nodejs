@@ -448,31 +448,31 @@ class CreateInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * 实例所属的可用区ID
+         * 实例所属的可用区ID，可参考[地域和可用区](https://cloud.tencent.com/document/product/239/4106)  。
          * @type {number || null}
          */
         this.ZoneId = null;
 
         /**
-         * 实例类型：2 – Redis2.8内存版（标准架构），3 – Redis3.2内存版（标准架构），4 – CKV 3.2内存版(标准架构)，6 – Redis4.0内存版（标准架构），7 – Redis4.0内存版（集群架构），8 – Redis5.0内存版（标准架构），9 – Redis5.0内存版（集群架构），
+         * 实例类型：2 – Redis2.8内存版（标准架构），3 – CKV 3.2内存版(标准架构)，4 – CKV 3.2内存版(集群架构)，6 – Redis4.0内存版（标准架构），7 – Redis4.0内存版（集群架构），8 – Redis5.0内存版（标准架构），9 – Redis5.0内存版（集群架构）。
          * @type {number || null}
          */
         this.TypeId = null;
 
         /**
-         * 实例容量，单位MB， 取值大小以 查询售卖规格接口返回的规格为准
+         * 实例容量，单位MB， 数值需为1024的整数倍，取值大小以 [查询产品售卖规格](https://cloud.tencent.com/document/api/239/30600) 返回的规格为准。
          * @type {number || null}
          */
         this.MemSize = null;
 
         /**
-         * 实例数量，单次购买实例数量以 查询售卖规格接口返回的规格为准
+         * 实例数量，单次购买实例数量以 [查询产品售卖规格](https://cloud.tencent.com/document/api/239/30600) 返回的规格为准。
          * @type {number || null}
          */
         this.GoodsNum = null;
 
         /**
-         * 购买时长，在创建包年包月实例的时候需要填写，按量计费实例填1即可，单位：月，取值范围 [1,2,3,4,5,6,7,8,9,10,11,12,24,36]
+         * 购买时长，在创建包年包月实例的时候需要填写，按量计费实例填1即可，单位：月，取值范围 [1,2,3,4,5,6,7,8,9,10,11,12,24,36]。
          * @type {number || null}
          */
         this.Period = null;
@@ -490,43 +490,43 @@ class CreateInstancesRequest extends  AbstractModel {
         this.Password = null;
 
         /**
-         * 私有网络ID，如果不传则默认选择基础网络，请使用私有网络列表查询，如：vpc-sad23jfdfk
+         * 私有网络ID，如果不传则默认选择基础网络，请使用私有网络列表查询，如：vpc-sad23jfdfk。
          * @type {string || null}
          */
         this.VpcId = null;
 
         /**
-         * 基础网络下， subnetId无效； vpc子网下，取值以查询子网列表，如：subnet-fdj24n34j2
+         * 基础网络下， subnetId无效； vpc子网下，取值以查询子网列表，如：subnet-fdj24n34j2。
          * @type {string || null}
          */
         this.SubnetId = null;
 
         /**
-         * 项目id，取值以用户账户>用户账户相关接口查询>项目列表返回的projectId为准
+         * 项目id，取值以用户账户>用户账户相关接口查询>项目列表返回的projectId为准。
          * @type {number || null}
          */
         this.ProjectId = null;
 
         /**
-         * 自动续费标识。0 - 默认状态（手动续费）；1 - 自动续费；2 - 明确不自动续费
+         * 自动续费标识。0 - 默认状态（手动续费）；1 - 自动续费；2 - 明确不自动续费。
          * @type {number || null}
          */
         this.AutoRenew = null;
 
         /**
-         * 安全组id数组
+         * 安全组id数组。
          * @type {Array.<string> || null}
          */
         this.SecurityGroupIdList = null;
 
         /**
-         * 用户自定义的端口 不填则默认为6379，范围[1024,65535]
+         * 用户自定义的端口 不填则默认为6379，范围[1024,65535]。
          * @type {number || null}
          */
         this.VPort = null;
 
         /**
-         * 实例分片数量，购买标准版实例不需要填写，集群版分片数量范围[3,5,8,12,16,24,32,64,96,128]
+         * 实例分片数量，购买标准版实例不需要填写，集群版分片数量范围[3,5,8,12,16,24,32,64,96,128]。
          * @type {number || null}
          */
         this.RedisShardNum = null;
@@ -538,13 +538,13 @@ class CreateInstancesRequest extends  AbstractModel {
         this.RedisReplicasNum = null;
 
         /**
-         * 是否支持副本只读，Redis 2.8标准版、CKV标准版不支持副本只读，开启副本只读，实例将自动读写分离，写请求路由到主节点，读请求路由到副本节点，如需开启副本只读建议副本数>=2.
+         * 是否支持副本只读，Redis 2.8标准版、CKV标准版不支持副本只读，开启副本只读，实例将自动读写分离，写请求路由到主节点，读请求路由到副本节点，如需开启副本只读建议副本数>=2。
          * @type {boolean || null}
          */
         this.ReplicasReadonly = null;
 
         /**
-         * 实例名称，长度小于60的中文/英文/数字/"-"/"_"
+         * 实例名称，长度小于60的中文/英文/数字/"-"/"_"。
          * @type {string || null}
          */
         this.InstanceName = null;
@@ -1784,7 +1784,7 @@ class DescribeInstanceDealDetailRequest extends  AbstractModel {
         super();
 
         /**
-         * 订单ID数组
+         * 订单交易ID数组，即 [CreateInstances](https://cloud.tencent.com/document/api/239/20026) 的输出参数DealId。
          * @type {Array.<string> || null}
          */
         this.DealIds = null;
@@ -2624,7 +2624,7 @@ class DescribeDBSecurityGroupsRequest extends  AbstractModel {
         super();
 
         /**
-         * 数据库引擎名称：mariadb,cdb,cynosdb,dcdb,redis,mongodb 等。
+         * 数据库引擎名称，本接口取值：redis。
          * @type {string || null}
          */
         this.Product = null;
@@ -5572,7 +5572,7 @@ class InstanceSet extends  AbstractModel {
         this.SizeUsed = null;
 
         /**
-         * 实例类型，1：Redis2.8集群版；2：Redis2.8主从版；3：CKV主从版（Redis3.2）；4：CKV集群版（Redis3.2）；5：Redis2.8单机版；6：Redis4.0主从版；7：Redis4.0集群版；
+         * 实例类型：1 – Redis2.8内存版（集群架构），2 – Redis2.8内存版（标准架构），3 – CKV 3.2内存版(标准架构)，4 – CKV 3.2内存版(集群架构)，5 – Redis2.8内存版（单机），6 – Redis4.0内存版（标准架构），7 – Redis4.0内存版（集群架构），8 – Redis5.0内存版（标准架构），9 – Redis5.0内存版（集群架构）
          * @type {number || null}
          */
         this.Type = null;
@@ -6378,7 +6378,7 @@ class UpgradeInstanceVersionRequest extends  AbstractModel {
         super();
 
         /**
-         * 目标实例类型，同CreateInstances接口的Type，即实例要变更的目标类型
+         * 目标实例类型，同 [CreateInstances](https://cloud.tencent.com/document/api/239/20026) 的Type，即实例要变更的目标类型
          * @type {string || null}
          */
         this.TargetInstanceType = null;

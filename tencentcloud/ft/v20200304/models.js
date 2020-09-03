@@ -295,13 +295,13 @@ class GradientInfo extends  AbstractModel {
         super();
 
         /**
-         * 图片的展示时长，即单张图片静止不变的时间。GIF默认每张图片0.7s，视频默认每张图片2s
+         * 图片的展示时长，即单张图片静止不变的时间。GIF默认每张图片0.7s，视频默认每张图片0.5s。最大取值1s。
          * @type {number || null}
          */
         this.Tempo = null;
 
         /**
-         * 人像渐变的最长时间，即单张图片使用渐变特效的时间。 GIF默认值为0.5s，视频默值认为1s
+         * 人像渐变的最长时间，即单张图片使用渐变特效的时间。 GIF默认值为0.5s，视频默值认为1s。最大取值1s。
          * @type {number || null}
          */
         this.MorphTime = null;
@@ -444,7 +444,7 @@ Url、Image必须提供一个，如果都提供，只使用 Url。图片存储�
         this.GradientInfos = null;
 
         /**
-         * 视频帧率，取值[1,60]。默认10
+         * 视频帧率，取值[1,25]。默认10
          * @type {number || null}
          */
         this.Fps = null;
