@@ -17,6 +17,7 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const ModifyInstanceParamsResponse = models.ModifyInstanceParamsResponse;
+const EnableReplicaReadonlyRequest = models.EnableReplicaReadonlyRequest;
 const RedisBackupSet = models.RedisBackupSet;
 const DescribeInstanceMonitorTopNCmdResponse = models.DescribeInstanceMonitorTopNCmdResponse;
 const ModifyAutoBackupConfigResponse = models.ModifyAutoBackupConfigResponse;
@@ -39,6 +40,7 @@ const DescribeBackupUrlRequest = models.DescribeBackupUrlRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const InstanceEnumParam = models.InstanceEnumParam;
 const Account = models.Account;
+const InstanceProxySlowlogDetail = models.InstanceProxySlowlogDetail;
 const SecurityGroupsInboundAndOutbound = models.SecurityGroupsInboundAndOutbound;
 const ResetPasswordResponse = models.ResetPasswordResponse;
 const ClearInstanceRequest = models.ClearInstanceRequest;
@@ -137,7 +139,8 @@ const ModifyInstanceParamsRequest = models.ModifyInstanceParamsRequest;
 const BigKeyTypeInfo = models.BigKeyTypeInfo;
 const DescribeMaintenanceWindowRequest = models.DescribeMaintenanceWindowRequest;
 const InstanceClusterNode = models.InstanceClusterNode;
-const EnableReplicaReadonlyRequest = models.EnableReplicaReadonlyRequest;
+const DescribeProxySlowLogRequest = models.DescribeProxySlowLogRequest;
+const DescribeProxySlowLogResponse = models.DescribeProxySlowLogResponse;
 const UpgradeInstanceVersionRequest = models.UpgradeInstanceVersionRequest;
 const DescribeInstanceAccountResponse = models.DescribeInstanceAccountResponse;
 const DescribeInstanceMonitorBigKeyRequest = models.DescribeInstanceMonitorBigKeyRequest;
@@ -175,6 +178,17 @@ class RedisClient extends AbstractClient {
         super("redis.tencentcloudapi.com", "2018-04-12", credential, region, profile);
     }
     
+    /**
+     * 启用读写分离
+     * @param {EnableReplicaReadonlyRequest} req
+     * @param {function(string, EnableReplicaReadonlyResponse):void} cb
+     * @public
+     */
+    EnableReplicaReadonly(req, cb) {
+        let resp = new EnableReplicaReadonlyResponse();
+        this.request("EnableReplicaReadonly", req, resp, cb);
+    }
+
     /**
      * 查询实例大Key大小分布
      * @param {DescribeInstanceMonitorBigKeySizeDistRequest} req
@@ -495,14 +509,14 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * 启用读写分离
-     * @param {EnableReplicaReadonlyRequest} req
-     * @param {function(string, EnableReplicaReadonlyResponse):void} cb
+     * 本接口（DescribeProxySlowLog）用于查询代理慢查询。
+     * @param {DescribeProxySlowLogRequest} req
+     * @param {function(string, DescribeProxySlowLogResponse):void} cb
      * @public
      */
-    EnableReplicaReadonly(req, cb) {
-        let resp = new EnableReplicaReadonlyResponse();
-        this.request("EnableReplicaReadonly", req, resp, cb);
+    DescribeProxySlowLog(req, cb) {
+        let resp = new DescribeProxySlowLogResponse();
+        this.request("DescribeProxySlowLog", req, resp, cb);
     }
 
     /**

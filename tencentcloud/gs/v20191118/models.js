@@ -122,6 +122,12 @@ class CreateSessionResponse extends  AbstractModel {
         this.ServerSession = null;
 
         /**
+         * 【多人游戏】角色编号；比如Player1、Player2、Viewer1
+         * @type {string || null}
+         */
+        this.RoleNumber = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -137,6 +143,7 @@ class CreateSessionResponse extends  AbstractModel {
             return;
         }
         this.ServerSession = 'ServerSession' in params ? params.ServerSession : null;
+        this.RoleNumber = 'RoleNumber' in params ? params.RoleNumber : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -232,7 +239,7 @@ class CreateSessionRequest extends  AbstractModel {
         this.GameId = null;
 
         /**
-         * 游戏区域，ap-guangzhou、ap-shanghai、ap-beijing等
+         * 游戏区域，ap-guangzhou、ap-shanghai、ap-beijing、ap-chengdu、ap-chongqing、ap-nanjing等
          * @type {string || null}
          */
         this.GameRegion = null;
@@ -256,7 +263,7 @@ class CreateSessionRequest extends  AbstractModel {
         this.ImageUrl = null;
 
         /**
-         * 资源池编号，1表示正式，2表示测试
+         * 【将废弃】资源池编号，比如1表示正式，2表示测试
          * @type {number || null}
          */
         this.SetNo = null;
@@ -298,10 +305,16 @@ class CreateSessionRequest extends  AbstractModel {
         this.Optimization = null;
 
         /**
-         * 用于多人游戏，游戏主机用户ID
+         * 【多人云游】游戏主机用户ID
          * @type {string || null}
          */
         this.HostUserId = null;
+
+        /**
+         * 【多人云游】角色；Player表示玩家；Viewer表示观察者
+         * @type {string || null}
+         */
+        this.Role = null;
 
     }
 
@@ -327,6 +340,7 @@ class CreateSessionRequest extends  AbstractModel {
         this.UserIp = 'UserIp' in params ? params.UserIp : null;
         this.Optimization = 'Optimization' in params ? params.Optimization : null;
         this.HostUserId = 'HostUserId' in params ? params.HostUserId : null;
+        this.Role = 'Role' in params ? params.Role : null;
 
     }
 }

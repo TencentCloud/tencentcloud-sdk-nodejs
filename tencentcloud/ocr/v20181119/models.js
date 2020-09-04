@@ -3965,6 +3965,12 @@ class LicensePlateOCRResponse extends  AbstractModel {
         this.Confidence = null;
 
         /**
+         * 文本行在原图片中的像素坐标框。
+         * @type {Rect || null}
+         */
+        this.Rect = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -3981,6 +3987,12 @@ class LicensePlateOCRResponse extends  AbstractModel {
         }
         this.Number = 'Number' in params ? params.Number : null;
         this.Confidence = 'Confidence' in params ? params.Confidence : null;
+
+        if (params.Rect) {
+            let obj = new Rect();
+            obj.deserialize(params.Rect)
+            this.Rect = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -9262,6 +9274,22 @@ class BizLicenseOCRResponse extends  AbstractModel {
         this.SetDate = null;
 
         /**
+         * Code 告警码列表和释义：
+-20001 非营业执照
+注：告警码可以同时存在多个
+         * @type {Array.<number> || null}
+         */
+        this.RecognizeWarnCode = null;
+
+        /**
+         * 告警码说明：
+OCR_WARNING_TPYE_NOT_MATCH 非营业执照
+注：告警信息可以同时存在多个
+         * @type {Array.<string> || null}
+         */
+        this.RecognizeWarnMsg = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -9286,6 +9314,8 @@ class BizLicenseOCRResponse extends  AbstractModel {
         this.Period = 'Period' in params ? params.Period : null;
         this.ComposingForm = 'ComposingForm' in params ? params.ComposingForm : null;
         this.SetDate = 'SetDate' in params ? params.SetDate : null;
+        this.RecognizeWarnCode = 'RecognizeWarnCode' in params ? params.RecognizeWarnCode : null;
+        this.RecognizeWarnMsg = 'RecognizeWarnMsg' in params ? params.RecognizeWarnMsg : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

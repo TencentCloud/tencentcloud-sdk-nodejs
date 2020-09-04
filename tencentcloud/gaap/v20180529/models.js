@@ -907,6 +907,12 @@ class BandwidthPriceGradient extends  AbstractModel {
          */
         this.BandwidthUnitPrice = null;
 
+        /**
+         * 带宽折扣价，单位：元/Mbps/天。
+         * @type {number || null}
+         */
+        this.DiscountBandwidthUnitPrice = null;
+
     }
 
     /**
@@ -918,6 +924,7 @@ class BandwidthPriceGradient extends  AbstractModel {
         }
         this.BandwidthRange = 'BandwidthRange' in params ? params.BandwidthRange : null;
         this.BandwidthUnitPrice = 'BandwidthUnitPrice' in params ? params.BandwidthUnitPrice : null;
+        this.DiscountBandwidthUnitPrice = 'DiscountBandwidthUnitPrice' in params ? params.DiscountBandwidthUnitPrice : null;
 
     }
 }
@@ -3186,16 +3193,34 @@ class DescribeRealServerStatisticsRequest extends  AbstractModel {
         this.ListenerId = null;
 
         /**
+         * L7层规则ID
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+        /**
          * 统计时长，单位：小时。仅支持最近1,3,6,12,24小时的统计查询
          * @type {number || null}
          */
         this.WithinTime = null;
 
         /**
-         * 规则ID
+         * 统计开始时间(2020-08-19 00:00:00)
          * @type {string || null}
          */
-        this.RuleId = null;
+        this.StartTime = null;
+
+        /**
+         * 统计结束时间(2020-08-19 23:59:59)
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 统计的数据粒度，单位：秒，仅支持1分钟-60和5分钟-300粒度
+         * @type {number || null}
+         */
+        this.Granularity = null;
 
     }
 
@@ -3208,8 +3233,11 @@ class DescribeRealServerStatisticsRequest extends  AbstractModel {
         }
         this.RealServerId = 'RealServerId' in params ? params.RealServerId : null;
         this.ListenerId = 'ListenerId' in params ? params.ListenerId : null;
-        this.WithinTime = 'WithinTime' in params ? params.WithinTime : null;
         this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.WithinTime = 'WithinTime' in params ? params.WithinTime : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Granularity = 'Granularity' in params ? params.Granularity : null;
 
     }
 }
@@ -5368,6 +5396,13 @@ MOVING表示通道迁移中。
          */
         this.CreateTime = null;
 
+        /**
+         * 通道组是否包含微软通道
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ProxyType = null;
+
     }
 
     /**
@@ -5399,6 +5434,7 @@ MOVING表示通道迁移中。
         }
         this.Version = 'Version' in params ? params.Version : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ProxyType = 'ProxyType' in params ? params.ProxyType : null;
 
     }
 }
@@ -7246,10 +7282,16 @@ class DescribeRealServerStatisticsResponse extends  AbstractModel {
         super();
 
         /**
-         * 源站状态统计数据
+         * 指定监听器的源站状态统计数据
          * @type {Array.<StatisticsDataInfo> || null}
          */
         this.StatisticsData = null;
+
+        /**
+         * 多个源站状态统计数据
+         * @type {Array.<MetricStatisticsInfo> || null}
+         */
+        this.RsStatisticsData = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7273,6 +7315,15 @@ class DescribeRealServerStatisticsResponse extends  AbstractModel {
                 let obj = new StatisticsDataInfo();
                 obj.deserialize(params.StatisticsData[z]);
                 this.StatisticsData.push(obj);
+            }
+        }
+
+        if (params.RsStatisticsData) {
+            this.RsStatisticsData = new Array();
+            for (let z in params.RsStatisticsData) {
+                let obj = new MetricStatisticsInfo();
+                obj.deserialize(params.RsStatisticsData[z]);
+                this.RsStatisticsData.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -10088,6 +10139,13 @@ UNKNOWN表示未知状态。
          */
         this.ModifyConfigTime = null;
 
+        /**
+         * 通道类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ProxyType = null;
+
     }
 
     /**
@@ -10140,6 +10198,7 @@ UNKNOWN表示未知状态。
         this.BillingType = 'BillingType' in params ? params.BillingType : null;
         this.RelatedGlobalDomains = 'RelatedGlobalDomains' in params ? params.RelatedGlobalDomains : null;
         this.ModifyConfigTime = 'ModifyConfigTime' in params ? params.ModifyConfigTime : null;
+        this.ProxyType = 'ProxyType' in params ? params.ProxyType : null;
 
     }
 }

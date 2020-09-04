@@ -111,7 +111,7 @@ class CaptchaClient extends AbstractClient {
     }
 
     /**
-     * 安全验证码分类查询数据接口，请求量type=0、验证量type=1、通过量type=2、拦截量type=3  分钟级查询
+     * 安全验证码分类查询数据接口，请求量type=0、通过量type=1、验证量type=2、拦截量type=3  分钟级查询
      * @param {DescribeCaptchaDataRequest} req
      * @param {function(string, DescribeCaptchaDataResponse):void} cb
      * @public

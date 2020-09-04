@@ -47,6 +47,7 @@ const CacheConfigNoCache = models.CacheConfigNoCache;
 const AccessControl = models.AccessControl;
 const DeleteCdnDomainRequest = models.DeleteCdnDomainRequest;
 const DescribePayTypeResponse = models.DescribePayTypeResponse;
+const VerifyDomainRecordResponse = models.VerifyDomainRecordResponse;
 const ListTopDataRequest = models.ListTopDataRequest;
 const ListClsTopicDomainsRequest = models.ListClsTopicDomainsRequest;
 const DescribeDomainsResponse = models.DescribeDomainsResponse;
@@ -135,6 +136,7 @@ const RefererRule = models.RefererRule;
 const IpFreqLimit = models.IpFreqLimit;
 const CreateClsLogTopicRequest = models.CreateClsLogTopicRequest;
 const CacheOptResult = models.CacheOptResult;
+const CreateVerifyRecordResponse = models.CreateVerifyRecordResponse;
 const StopCdnDomainRequest = models.StopCdnDomainRequest;
 const DescribeMapInfoResponse = models.DescribeMapInfoResponse;
 const DescribeTrafficPackagesResponse = models.DescribeTrafficPackagesResponse;
@@ -161,11 +163,13 @@ const CacheKey = models.CacheKey;
 const UrlRedirect = models.UrlRedirect;
 const DownstreamCapping = models.DownstreamCapping;
 const CookieKey = models.CookieKey;
+const VerifyDomainRecordRequest = models.VerifyDomainRecordRequest;
 const KeyRule = models.KeyRule;
 const CappingRule = models.CappingRule;
 const ListClsLogTopicsRequest = models.ListClsLogTopicsRequest;
 const Seo = models.Seo;
 const BandwidthAlert = models.BandwidthAlert;
+const CreateVerifyRecordRequest = models.CreateVerifyRecordRequest;
 const ClsLogObject = models.ClsLogObject;
 const RegionMapRelation = models.RegionMapRelation;
 const PurgePathCacheRequest = models.PurgePathCacheRequest;
@@ -256,6 +260,17 @@ class CdnClient extends AbstractClient {
     DeleteCdnDomain(req, cb) {
         let resp = new DeleteCdnDomainResponse();
         this.request("DeleteCdnDomain", req, resp, cb);
+    }
+
+    /**
+     * 验证域名解析值
+     * @param {VerifyDomainRecordRequest} req
+     * @param {function(string, VerifyDomainRecordResponse):void} cb
+     * @public
+     */
+    VerifyDomainRecord(req, cb) {
+        let resp = new VerifyDomainRecordResponse();
+        this.request("VerifyDomainRecord", req, resp, cb);
     }
 
     /**
@@ -356,6 +371,17 @@ class CdnClient extends AbstractClient {
     DescribeDomains(req, cb) {
         let resp = new DescribeDomainsResponse();
         this.request("DescribeDomains", req, resp, cb);
+    }
+
+    /**
+     * 生成一条子域名解析，提示客户添加到域名解析上，用于泛域名及域名取回校验归属权
+     * @param {CreateVerifyRecordRequest} req
+     * @param {function(string, CreateVerifyRecordResponse):void} cb
+     * @public
+     */
+    CreateVerifyRecord(req, cb) {
+        let resp = new CreateVerifyRecordResponse();
+        this.request("CreateVerifyRecord", req, resp, cb);
     }
 
     /**

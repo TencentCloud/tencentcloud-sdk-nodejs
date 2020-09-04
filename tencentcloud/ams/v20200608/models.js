@@ -314,19 +314,19 @@ class CreateBizConfigRequest extends  AbstractModel {
         super();
 
         /**
-         * 业务ID
+         * 业务类型，仅限英文字母、数字和下划线（_）组成，长度不超过8位
          * @type {string || null}
          */
         this.BizType = null;
 
         /**
-         * 审核分类信息
+         * 配置信息，
          * @type {MediaModerationConfig || null}
          */
         this.MediaModeration = null;
 
         /**
-         * 页面名称
+         * 业务名称，用于标识业务场景，长度不超过32位
          * @type {string || null}
          */
         this.BizName = null;

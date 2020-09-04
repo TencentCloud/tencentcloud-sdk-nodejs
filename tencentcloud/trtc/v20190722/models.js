@@ -496,6 +496,18 @@ bigvHeight：上/下行分辨率高
          */
         this.DataType = null;
 
+        /**
+         * 只查询用户列表时，设置分页index，从0开始（PageNumber和PageSize 其中一个不填均默认返回10条数据）
+         * @type {string || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * 只查询用户列表时，设置分页大小（PageNumber和PageSize 其中一个不填均默认返回6条数据,最大不超过100）
+         * @type {string || null}
+         */
+        this.PageSize = null;
+
     }
 
     /**
@@ -511,6 +523,8 @@ bigvHeight：上/下行分辨率高
         this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
         this.UserIds = 'UserIds' in params ? params.UserIds : null;
         this.DataType = 'DataType' in params ? params.DataType : null;
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
 
     }
 }

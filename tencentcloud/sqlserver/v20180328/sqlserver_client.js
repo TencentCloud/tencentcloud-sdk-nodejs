@@ -114,6 +114,7 @@ const TerminateDBInstanceRequest = models.TerminateDBInstanceRequest;
 const CreateDBRequest = models.CreateDBRequest;
 const DescribeProjectSecurityGroupsRequest = models.DescribeProjectSecurityGroupsRequest;
 const SecurityGroup = models.SecurityGroup;
+const RenameRestoreDatabase = models.RenameRestoreDatabase;
 const ReadOnlyInstance = models.ReadOnlyInstance;
 const InquiryPriceUpgradeDBInstanceRequest = models.InquiryPriceUpgradeDBInstanceRequest;
 const ModifyDBRemarkRequest = models.ModifyDBRemarkRequest;

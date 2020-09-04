@@ -1610,6 +1610,41 @@ bandwidth：带宽计费
 }
 
 /**
+ * VerifyDomainRecord返回参数结构体
+ * @class
+ */
+class VerifyDomainRecordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否验证成功
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ListTopData请求参数结构体
  * @class
  */
@@ -7885,6 +7920,55 @@ class CacheOptResult extends  AbstractModel {
 }
 
 /**
+ * CreateVerifyRecord返回参数结构体
+ * @class
+ */
+class CreateVerifyRecordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 子解析
+         * @type {string || null}
+         */
+        this.SubDomain = null;
+
+        /**
+         * 解析值
+         * @type {string || null}
+         */
+        this.Record = null;
+
+        /**
+         * 解析类型
+         * @type {string || null}
+         */
+        this.RecordType = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubDomain = 'SubDomain' in params ? params.SubDomain : null;
+        this.Record = 'Record' in params ? params.Record : null;
+        this.RecordType = 'RecordType' in params ? params.RecordType : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * StopCdnDomain请求参数结构体
  * @class
  */
@@ -9203,6 +9287,34 @@ class CookieKey extends  AbstractModel {
 }
 
 /**
+ * VerifyDomainRecord请求参数结构体
+ * @class
+ */
+class VerifyDomainRecordRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+
+    }
+}
+
+/**
  * 缓存键分路径配置
  * @class
  */
@@ -9447,6 +9559,34 @@ RETURN_404：全部请求返回 404
         this.BpsThreshold = 'BpsThreshold' in params ? params.BpsThreshold : null;
         this.CounterMeasure = 'CounterMeasure' in params ? params.CounterMeasure : null;
         this.LastTriggerTime = 'LastTriggerTime' in params ? params.LastTriggerTime : null;
+
+    }
+}
+
+/**
+ * CreateVerifyRecord请求参数结构体
+ * @class
+ */
+class CreateVerifyRecordRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 要取回的域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
 
     }
 }
@@ -12119,6 +12259,7 @@ module.exports = {
     AccessControl: AccessControl,
     DeleteCdnDomainRequest: DeleteCdnDomainRequest,
     DescribePayTypeResponse: DescribePayTypeResponse,
+    VerifyDomainRecordResponse: VerifyDomainRecordResponse,
     ListTopDataRequest: ListTopDataRequest,
     ListClsTopicDomainsRequest: ListClsTopicDomainsRequest,
     DescribeDomainsResponse: DescribeDomainsResponse,
@@ -12207,6 +12348,7 @@ module.exports = {
     IpFreqLimit: IpFreqLimit,
     CreateClsLogTopicRequest: CreateClsLogTopicRequest,
     CacheOptResult: CacheOptResult,
+    CreateVerifyRecordResponse: CreateVerifyRecordResponse,
     StopCdnDomainRequest: StopCdnDomainRequest,
     DescribeMapInfoResponse: DescribeMapInfoResponse,
     DescribeTrafficPackagesResponse: DescribeTrafficPackagesResponse,
@@ -12233,11 +12375,13 @@ module.exports = {
     UrlRedirect: UrlRedirect,
     DownstreamCapping: DownstreamCapping,
     CookieKey: CookieKey,
+    VerifyDomainRecordRequest: VerifyDomainRecordRequest,
     KeyRule: KeyRule,
     CappingRule: CappingRule,
     ListClsLogTopicsRequest: ListClsLogTopicsRequest,
     Seo: Seo,
     BandwidthAlert: BandwidthAlert,
+    CreateVerifyRecordRequest: CreateVerifyRecordRequest,
     ClsLogObject: ClsLogObject,
     RegionMapRelation: RegionMapRelation,
     PurgePathCacheRequest: PurgePathCacheRequest,

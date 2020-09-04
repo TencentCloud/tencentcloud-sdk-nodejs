@@ -45,6 +45,49 @@ class DescribeSpecInfoRequest extends  AbstractModel {
 }
 
 /**
+ * KillOps请求参数结构体
+ * @class
+ */
+class KillOpsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 待终止的操作
+         * @type {Array.<Operation> || null}
+         */
+        this.Operations = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.Operations) {
+            this.Operations = new Array();
+            for (let z in params.Operations) {
+                let obj = new Operation();
+                obj.deserialize(params.Operations[z]);
+                this.Operations.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * CreateDBInstance请求参数结构体
  * @class
  */
@@ -214,18 +257,18 @@ class CreateDBInstanceRequest extends  AbstractModel {
 }
 
 /**
- * IsolateDBInstance请求参数结构体
+ * KillOps返回参数结构体
  * @class
  */
-class IsolateDBInstanceRequest extends  AbstractModel {
+class KillOpsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.RequestId = null;
 
     }
 
@@ -236,7 +279,57 @@ class IsolateDBInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeCurrentOp返回参数结构体
+ * @class
+ */
+class DescribeCurrentOpResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合查询条件的操作总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 当前操作列表
+         * @type {Array.<CurrentOp> || null}
+         */
+        this.CurrentOps = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.CurrentOps) {
+            this.CurrentOps = new Array();
+            for (let z in params.CurrentOps) {
+                let obj = new CurrentOp();
+                obj.deserialize(params.CurrentOps[z]);
+                this.CurrentOps.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -476,6 +569,34 @@ class InquirePriceCreateDBInstancesRequest extends  AbstractModel {
         this.Period = 'Period' in params ? params.Period : null;
         this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
         this.ReplicateSetNum = 'ReplicateSetNum' in params ? params.ReplicateSetNum : null;
+
+    }
+}
+
+/**
+ * IsolateDBInstance请求参数结构体
+ * @class
+ */
+class IsolateDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -1089,48 +1210,73 @@ class SpecificationInfo extends  AbstractModel {
 }
 
 /**
- * DescribeSlowLogs请求参数结构体
+ * 云数据库实例当前操作
  * @class
  */
-class DescribeSlowLogsRequest extends  AbstractModel {
+class CurrentOp extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * 慢日志起始时间，格式：yyyy-mm-dd hh:mm:ss，如：2019-06-01 10:00:00。查询起止时间间隔不能超过24小时，只允许查询最近7天内慢日志。
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * 慢日志终止时间，格式：yyyy-mm-dd hh:mm:ss，如：2019-06-02 12:00:00。查询起止时间间隔不能超过24小时，只允许查询最近7天内慢日志。
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-        /**
-         * 慢日志执行时间阈值，返回执行时间超过该阈值的慢日志，单位为毫秒(ms)，最小为100毫秒。
+         * 操作序号
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.SlowMS = null;
+        this.OpId = null;
 
         /**
-         * 偏移量，最小值为0，最大值为10000，默认值为0。
-         * @type {number || null}
+         * 操作所在的命名空间，形式如db.collection
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
          */
-        this.Offset = null;
+        this.Ns = null;
 
         /**
-         * 分页大小，最小值为1，最大值为100，默认值为20。
+         * 操作执行语句
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Query = null;
+
+        /**
+         * 操作类型，可能的取值：aggregate、count、delete、distinct、find、findAndModify、getMore、insert、mapReduce、update和command
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Op = null;
+
+        /**
+         * 操作所在的分片名称
+         * @type {string || null}
+         */
+        this.ReplicaSetName = null;
+
+        /**
+         * 筛选条件，节点状态，可能的取值为：Primary、Secondary
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * 操作详细信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Operation = null;
+
+        /**
+         * 操作所在的节点名称
+         * @type {string || null}
+         */
+        this.NodeName = null;
+
+        /**
+         * 操作已执行时间（ms）
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.Limit = null;
+        this.MicrosecsRunning = null;
 
     }
 
@@ -1141,12 +1287,15 @@ class DescribeSlowLogsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-        this.SlowMS = 'SlowMS' in params ? params.SlowMS : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.OpId = 'OpId' in params ? params.OpId : null;
+        this.Ns = 'Ns' in params ? params.Ns : null;
+        this.Query = 'Query' in params ? params.Query : null;
+        this.Op = 'Op' in params ? params.Op : null;
+        this.ReplicaSetName = 'ReplicaSetName' in params ? params.ReplicaSetName : null;
+        this.State = 'State' in params ? params.State : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.NodeName = 'NodeName' in params ? params.NodeName : null;
+        this.MicrosecsRunning = 'MicrosecsRunning' in params ? params.MicrosecsRunning : null;
 
     }
 }
@@ -1689,6 +1838,98 @@ class OfflineIsolatedDBInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeCurrentOp请求参数结构体
+ * @class
+ */
+class DescribeCurrentOpRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 筛选条件，操作所属的命名空间namespace，格式为db.collection
+         * @type {string || null}
+         */
+        this.Ns = null;
+
+        /**
+         * 筛选条件，操作已经执行的时间（单位：毫秒），结果将返回超过设置时间的操作，默认值为0，取值范围为[0, 3600000]
+         * @type {number || null}
+         */
+        this.MillisecondRunning = null;
+
+        /**
+         * 筛选条件，操作类型，可能的取值：none，update，insert，query，command，getmore，remove和killcursors
+         * @type {string || null}
+         */
+        this.Op = null;
+
+        /**
+         * 筛选条件，分片名称
+         * @type {string || null}
+         */
+        this.ReplicaSetName = null;
+
+        /**
+         * 筛选条件，节点状态，可能的取值为：primary
+secondary
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * 单次请求返回的数量，默认值为100，取值范围为[0,100]
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认值为0，取值范围为[0,10000]
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回结果集排序的字段，目前支持："MicrosecsRunning"/"microsecsrunning"，默认为升序排序
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * 返回结果集排序方式，可能的取值："ASC"/"asc"或"DESC"/"desc"
+         * @type {string || null}
+         */
+        this.OrderByType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Ns = 'Ns' in params ? params.Ns : null;
+        this.MillisecondRunning = 'MillisecondRunning' in params ? params.MillisecondRunning : null;
+        this.Op = 'Op' in params ? params.Op : null;
+        this.ReplicaSetName = 'ReplicaSetName' in params ? params.ReplicaSetName : null;
+        this.State = 'State' in params ? params.State : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+
+    }
+}
+
+/**
  * DescribeDBInstanceDeal请求参数结构体
  * @class
  */
@@ -1954,6 +2195,24 @@ class DescribeDBBackupsRequest extends  AbstractModel {
          */
         this.InstanceId = null;
 
+        /**
+         * 备份方式，当前支持：0-逻辑备份，1-物理备份，2-所有备份。默认为逻辑备份。
+         * @type {number || null}
+         */
+        this.BackupMethod = null;
+
+        /**
+         * 分页大小，最大值为100，不设置默认查询所有。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 分页偏移量，最小值为0，默认值为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
     }
 
     /**
@@ -1964,6 +2223,9 @@ class DescribeDBBackupsRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.BackupMethod = 'BackupMethod' in params ? params.BackupMethod : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -2483,6 +2745,69 @@ class DBInstanceInfo extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.Region = 'Region' in params ? params.Region : null;
+
+    }
+}
+
+/**
+ * DescribeSlowLogs请求参数结构体
+ * @class
+ */
+class DescribeSlowLogsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 慢日志起始时间，格式：yyyy-mm-dd hh:mm:ss，如：2019-06-01 10:00:00。查询起止时间间隔不能超过24小时，只允许查询最近7天内慢日志。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 慢日志终止时间，格式：yyyy-mm-dd hh:mm:ss，如：2019-06-02 12:00:00。查询起止时间间隔不能超过24小时，只允许查询最近7天内慢日志。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 慢日志执行时间阈值，返回执行时间超过该阈值的慢日志，单位为毫秒(ms)，最小为100毫秒。
+         * @type {number || null}
+         */
+        this.SlowMS = null;
+
+        /**
+         * 偏移量，最小值为0，最大值为10000，默认值为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 分页大小，最小值为1，最大值为100，默认值为20。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.SlowMS = 'SlowMS' in params ? params.SlowMS : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -3060,6 +3385,48 @@ class CreateBackupDBInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * 需要终止的操作
+ * @class
+ */
+class Operation extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 操作所在的分片名
+         * @type {string || null}
+         */
+        this.ReplicaSetName = null;
+
+        /**
+         * 操作所在的节点名
+         * @type {string || null}
+         */
+        this.NodeName = null;
+
+        /**
+         * 操作序号
+         * @type {number || null}
+         */
+        this.OpId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReplicaSetName = 'ReplicaSetName' in params ? params.ReplicaSetName : null;
+        this.NodeName = 'NodeName' in params ? params.NodeName : null;
+        this.OpId = 'OpId' in params ? params.OpId : null;
+
+    }
+}
+
+/**
  * 描述了实例的计费模式
  * @class
  */
@@ -3181,13 +3548,16 @@ class RenewDBInstancesRequest extends  AbstractModel {
 
 module.exports = {
     DescribeSpecInfoRequest: DescribeSpecInfoRequest,
+    KillOpsRequest: KillOpsRequest,
     CreateDBInstanceRequest: CreateDBInstanceRequest,
-    IsolateDBInstanceRequest: IsolateDBInstanceRequest,
+    KillOpsResponse: KillOpsResponse,
+    DescribeCurrentOpResponse: DescribeCurrentOpResponse,
     ResetDBInstancePasswordResponse: ResetDBInstancePasswordResponse,
     CreateBackupDBInstanceResponse: CreateBackupDBInstanceResponse,
     DBInstancePrice: DBInstancePrice,
     BackupFile: BackupFile,
     InquirePriceCreateDBInstancesRequest: InquirePriceCreateDBInstancesRequest,
+    IsolateDBInstanceRequest: IsolateDBInstanceRequest,
     DescribeSlowLogPatternsResponse: DescribeSlowLogPatternsResponse,
     SlowLogPattern: SlowLogPattern,
     CreateDBInstanceHourRequest: CreateDBInstanceHourRequest,
@@ -3199,7 +3569,7 @@ module.exports = {
     InquirePriceRenewDBInstancesRequest: InquirePriceRenewDBInstancesRequest,
     DescribeAsyncRequestInfoRequest: DescribeAsyncRequestInfoRequest,
     SpecificationInfo: SpecificationInfo,
-    DescribeSlowLogsRequest: DescribeSlowLogsRequest,
+    CurrentOp: CurrentOp,
     DescribeSlowLogPatternsRequest: DescribeSlowLogPatternsRequest,
     FlushInstanceRouterConfigResponse: FlushInstanceRouterConfigResponse,
     InquirePriceModifyDBInstanceSpecResponse: InquirePriceModifyDBInstanceSpecResponse,
@@ -3210,6 +3580,7 @@ module.exports = {
     TagInfo: TagInfo,
     DescribeDBInstancesResponse: DescribeDBInstancesResponse,
     OfflineIsolatedDBInstanceRequest: OfflineIsolatedDBInstanceRequest,
+    DescribeCurrentOpRequest: DescribeCurrentOpRequest,
     DescribeDBInstanceDealRequest: DescribeDBInstanceDealRequest,
     DescribeDBInstancesRequest: DescribeDBInstancesRequest,
     DescribeAsyncRequestInfoResponse: DescribeAsyncRequestInfoResponse,
@@ -3229,12 +3600,14 @@ module.exports = {
     DescribeClientConnectionsResponse: DescribeClientConnectionsResponse,
     FlushInstanceRouterConfigRequest: FlushInstanceRouterConfigRequest,
     DBInstanceInfo: DBInstanceInfo,
+    DescribeSlowLogsRequest: DescribeSlowLogsRequest,
     DescribeBackupAccessResponse: DescribeBackupAccessResponse,
     DescribeDBBackupsResponse: DescribeDBBackupsResponse,
     InstanceDetail: InstanceDetail,
     ModifyDBInstanceSpecRequest: ModifyDBInstanceSpecRequest,
     CreateDBInstanceHourResponse: CreateDBInstanceHourResponse,
     CreateBackupDBInstanceRequest: CreateBackupDBInstanceRequest,
+    Operation: Operation,
     InstanceChargePrepaid: InstanceChargePrepaid,
     InquirePriceCreateDBInstancesResponse: InquirePriceCreateDBInstancesResponse,
     RenewDBInstancesRequest: RenewDBInstancesRequest,

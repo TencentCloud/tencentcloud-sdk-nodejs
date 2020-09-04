@@ -17,13 +17,16 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribeSpecInfoRequest = models.DescribeSpecInfoRequest;
+const KillOpsRequest = models.KillOpsRequest;
 const CreateDBInstanceRequest = models.CreateDBInstanceRequest;
-const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
+const KillOpsResponse = models.KillOpsResponse;
+const DescribeCurrentOpResponse = models.DescribeCurrentOpResponse;
 const ResetDBInstancePasswordResponse = models.ResetDBInstancePasswordResponse;
 const CreateBackupDBInstanceResponse = models.CreateBackupDBInstanceResponse;
 const DBInstancePrice = models.DBInstancePrice;
 const BackupFile = models.BackupFile;
 const InquirePriceCreateDBInstancesRequest = models.InquirePriceCreateDBInstancesRequest;
+const IsolateDBInstanceRequest = models.IsolateDBInstanceRequest;
 const DescribeSlowLogPatternsResponse = models.DescribeSlowLogPatternsResponse;
 const SlowLogPattern = models.SlowLogPattern;
 const CreateDBInstanceHourRequest = models.CreateDBInstanceHourRequest;
@@ -35,7 +38,7 @@ const BackupInfo = models.BackupInfo;
 const InquirePriceRenewDBInstancesRequest = models.InquirePriceRenewDBInstancesRequest;
 const DescribeAsyncRequestInfoRequest = models.DescribeAsyncRequestInfoRequest;
 const SpecificationInfo = models.SpecificationInfo;
-const DescribeSlowLogsRequest = models.DescribeSlowLogsRequest;
+const CurrentOp = models.CurrentOp;
 const DescribeSlowLogPatternsRequest = models.DescribeSlowLogPatternsRequest;
 const FlushInstanceRouterConfigResponse = models.FlushInstanceRouterConfigResponse;
 const InquirePriceModifyDBInstanceSpecResponse = models.InquirePriceModifyDBInstanceSpecResponse;
@@ -46,6 +49,7 @@ const ResetDBInstancePasswordRequest = models.ResetDBInstancePasswordRequest;
 const TagInfo = models.TagInfo;
 const DescribeDBInstancesResponse = models.DescribeDBInstancesResponse;
 const OfflineIsolatedDBInstanceRequest = models.OfflineIsolatedDBInstanceRequest;
+const DescribeCurrentOpRequest = models.DescribeCurrentOpRequest;
 const DescribeDBInstanceDealRequest = models.DescribeDBInstanceDealRequest;
 const DescribeDBInstancesRequest = models.DescribeDBInstancesRequest;
 const DescribeAsyncRequestInfoResponse = models.DescribeAsyncRequestInfoResponse;
@@ -65,12 +69,14 @@ const RenameInstanceResponse = models.RenameInstanceResponse;
 const DescribeClientConnectionsResponse = models.DescribeClientConnectionsResponse;
 const FlushInstanceRouterConfigRequest = models.FlushInstanceRouterConfigRequest;
 const DBInstanceInfo = models.DBInstanceInfo;
+const DescribeSlowLogsRequest = models.DescribeSlowLogsRequest;
 const DescribeBackupAccessResponse = models.DescribeBackupAccessResponse;
 const DescribeDBBackupsResponse = models.DescribeDBBackupsResponse;
 const InstanceDetail = models.InstanceDetail;
 const ModifyDBInstanceSpecRequest = models.ModifyDBInstanceSpecRequest;
 const CreateDBInstanceHourResponse = models.CreateDBInstanceHourResponse;
 const CreateBackupDBInstanceRequest = models.CreateBackupDBInstanceRequest;
+const Operation = models.Operation;
 const InstanceChargePrepaid = models.InstanceChargePrepaid;
 const InquirePriceCreateDBInstancesResponse = models.InquirePriceCreateDBInstancesResponse;
 const RenewDBInstancesRequest = models.RenewDBInstancesRequest;
@@ -98,14 +104,14 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(OfflineIsolatedDBInstance)用于立即下线隔离状态的云数据库实例。进行操作的实例状态必须为隔离状态。
-     * @param {OfflineIsolatedDBInstanceRequest} req
-     * @param {function(string, OfflineIsolatedDBInstanceResponse):void} cb
+     * 本接口(DescribeCurrentOp)用于查询MongoDB云数据库实例的当前正在执行的操作。
+     * @param {DescribeCurrentOpRequest} req
+     * @param {function(string, DescribeCurrentOpResponse):void} cb
      * @public
      */
-    OfflineIsolatedDBInstance(req, cb) {
-        let resp = new OfflineIsolatedDBInstanceResponse();
-        this.request("OfflineIsolatedDBInstance", req, resp, cb);
+    DescribeCurrentOp(req, cb) {
+        let resp = new DescribeCurrentOpResponse();
+        this.request("DescribeCurrentOp", req, resp, cb);
     }
 
     /**
@@ -142,7 +148,7 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeDBBackups）用于查询实例备份列表，目前只支持7天内的备份查询。
+     * 本接口（DescribeDBBackups）用于查询实例备份列表，目前只支持查询7天内的备份记录。
      * @param {DescribeDBBackupsRequest} req
      * @param {function(string, DescribeDBBackupsResponse):void} cb
      * @public
@@ -208,6 +214,17 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
+     * 本接口(RenewDBInstance)用于续费云数据库实例，仅支持付费模式为包年包月的实例。按量计费实例不需要续费。
+     * @param {RenewDBInstancesRequest} req
+     * @param {function(string, RenewDBInstancesResponse):void} cb
+     * @public
+     */
+    RenewDBInstances(req, cb) {
+        let resp = new RenewDBInstancesResponse();
+        this.request("RenewDBInstances", req, resp, cb);
+    }
+
+    /**
      * 本接口(DescribeDBInstances)用于查询云数据库实例列表，支持通过项目ID、实例ID、实例状态等过滤条件来筛选实例。支持查询主实例、灾备实例和只读实例信息列表。
      * @param {DescribeDBInstancesRequest} req
      * @param {function(string, DescribeDBInstancesResponse):void} cb
@@ -216,6 +233,17 @@ class MongodbClient extends AbstractClient {
     DescribeDBInstances(req, cb) {
         let resp = new DescribeDBInstancesResponse();
         this.request("DescribeDBInstances", req, resp, cb);
+    }
+
+    /**
+     * 本接口(OfflineIsolatedDBInstance)用于立即下线隔离状态的云数据库实例。进行操作的实例状态必须为隔离状态。
+     * @param {OfflineIsolatedDBInstanceRequest} req
+     * @param {function(string, OfflineIsolatedDBInstanceResponse):void} cb
+     * @public
+     */
+    OfflineIsolatedDBInstance(req, cb) {
+        let resp = new OfflineIsolatedDBInstanceResponse();
+        this.request("OfflineIsolatedDBInstance", req, resp, cb);
     }
 
     /**
@@ -308,14 +336,14 @@ class MongodbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(RenewDBInstance)用于续费云数据库实例，仅支持付费模式为包年包月的实例。按量计费实例不需要续费。
-     * @param {RenewDBInstancesRequest} req
-     * @param {function(string, RenewDBInstancesResponse):void} cb
+     * 本接口(KillOps)用于终止MongoDB云数据库实例上执行的特定操作。
+     * @param {KillOpsRequest} req
+     * @param {function(string, KillOpsResponse):void} cb
      * @public
      */
-    RenewDBInstances(req, cb) {
-        let resp = new RenewDBInstancesResponse();
-        this.request("RenewDBInstances", req, resp, cb);
+    KillOps(req, cb) {
+        let resp = new KillOpsResponse();
+        this.request("KillOps", req, resp, cb);
     }
 
     /**

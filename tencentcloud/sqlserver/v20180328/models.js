@@ -1414,6 +1414,12 @@ class DescribeBackupsRequest extends  AbstractModel {
          */
         this.BackupWay = null;
 
+        /**
+         * 按照备份ID筛选，不填则不筛选此项
+         * @type {number || null}
+         */
+        this.BackupId = null;
+
     }
 
     /**
@@ -1431,6 +1437,7 @@ class DescribeBackupsRequest extends  AbstractModel {
         this.BackupName = 'BackupName' in params ? params.BackupName : null;
         this.Strategy = 'Strategy' in params ? params.Strategy : null;
         this.BackupWay = 'BackupWay' in params ? params.BackupWay : null;
+        this.BackupId = 'BackupId' in params ? params.BackupId : null;
 
     }
 }
@@ -1533,6 +1540,18 @@ class RestoreInstanceRequest extends  AbstractModel {
          */
         this.BackupId = null;
 
+        /**
+         * 备份恢复到的同一个APPID下的实例ID，不填则恢复到原实例ID
+         * @type {string || null}
+         */
+        this.TargetInstanceId = null;
+
+        /**
+         * 按照ReNameRestoreDatabase中的库进行恢复，并重命名，不填则按照默认方式命名恢复的库，且恢复所有的库。
+         * @type {Array.<RenameRestoreDatabase> || null}
+         */
+        this.RenameRestore = null;
+
     }
 
     /**
@@ -1544,6 +1563,16 @@ class RestoreInstanceRequest extends  AbstractModel {
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
         this.BackupId = 'BackupId' in params ? params.BackupId : null;
+        this.TargetInstanceId = 'TargetInstanceId' in params ? params.TargetInstanceId : null;
+
+        if (params.RenameRestore) {
+            this.RenameRestore = new Array();
+            for (let z in params.RenameRestore) {
+                let obj = new RenameRestoreDatabase();
+                obj.deserialize(params.RenameRestore[z]);
+                this.RenameRestore.push(obj);
+            }
+        }
 
     }
 }
@@ -4669,6 +4698,41 @@ class SecurityGroup extends  AbstractModel {
 }
 
 /**
+ * 用于RestoreInstance，RollbackInstance，CreateMigration 等接口；对恢复的库进行重命名，且支持选择要恢复的库。
+ * @class
+ */
+class RenameRestoreDatabase extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 库的名字，如果oldName不存在则返回失败。
+         * @type {string || null}
+         */
+        this.OldName = null;
+
+        /**
+         * 库的新名字，如果不填则按照系统默认方式命名恢复的库
+         * @type {string || null}
+         */
+        this.NewName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OldName = 'OldName' in params ? params.OldName : null;
+        this.NewName = 'NewName' in params ? params.NewName : null;
+
+    }
+}
+
+/**
  * 只读副本实例
  * @class
  */
@@ -5698,6 +5762,12 @@ class CreateMigrationRequest extends  AbstractModel {
          */
         this.MigrateDBSet = null;
 
+        /**
+         * 按照ReNameRestoreDatabase中的库进行恢复，并重命名，不填则按照默认方式命名恢复的库，且恢复所有的库。SourceType=5的情况下有效。
+         * @type {Array.<RenameRestoreDatabase> || null}
+         */
+        this.RenameRestore = null;
+
     }
 
     /**
@@ -5729,6 +5799,15 @@ class CreateMigrationRequest extends  AbstractModel {
                 let obj = new MigrateDB();
                 obj.deserialize(params.MigrateDBSet[z]);
                 this.MigrateDBSet.push(obj);
+            }
+        }
+
+        if (params.RenameRestore) {
+            this.RenameRestore = new Array();
+            for (let z in params.RenameRestore) {
+                let obj = new RenameRestoreDatabase();
+                obj.deserialize(params.RenameRestore[z]);
+                this.RenameRestore.push(obj);
             }
         }
 
@@ -8162,6 +8241,18 @@ class RollbackInstanceRequest extends  AbstractModel {
          */
         this.Time = null;
 
+        /**
+         * 备份恢复到的同一个APPID下的实例ID，不填则恢复到原实例ID
+         * @type {string || null}
+         */
+        this.TargetInstanceId = null;
+
+        /**
+         * 按照ReNameRestoreDatabase中的库进行重命名，仅在Type = 1重命名回档方式有效；不填则按照默认方式命名库，DBs参数确定要恢复的库
+         * @type {Array.<RenameRestoreDatabase> || null}
+         */
+        this.RenameRestore = null;
+
     }
 
     /**
@@ -8175,6 +8266,16 @@ class RollbackInstanceRequest extends  AbstractModel {
         this.Type = 'Type' in params ? params.Type : null;
         this.DBs = 'DBs' in params ? params.DBs : null;
         this.Time = 'Time' in params ? params.Time : null;
+        this.TargetInstanceId = 'TargetInstanceId' in params ? params.TargetInstanceId : null;
+
+        if (params.RenameRestore) {
+            this.RenameRestore = new Array();
+            for (let z in params.RenameRestore) {
+                let obj = new RenameRestoreDatabase();
+                obj.deserialize(params.RenameRestore[z]);
+                this.RenameRestore.push(obj);
+            }
+        }
 
     }
 }
@@ -8804,6 +8905,7 @@ module.exports = {
     CreateDBRequest: CreateDBRequest,
     DescribeProjectSecurityGroupsRequest: DescribeProjectSecurityGroupsRequest,
     SecurityGroup: SecurityGroup,
+    RenameRestoreDatabase: RenameRestoreDatabase,
     ReadOnlyInstance: ReadOnlyInstance,
     InquiryPriceUpgradeDBInstanceRequest: InquiryPriceUpgradeDBInstanceRequest,
     ModifyDBRemarkRequest: ModifyDBRemarkRequest,

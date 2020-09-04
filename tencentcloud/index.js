@@ -41,6 +41,7 @@ module.exports = {
     cr: require("./cr"),
     cvm: require("./cvm"),
     cws: require("./cws"),
+    cynosdb: require("./cynosdb"),
     dayu: require("./dayu"),
     dbbrain: require("./dbbrain"),
     dc: require("./dc"),
