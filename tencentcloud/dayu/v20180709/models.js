@@ -3315,13 +3315,13 @@ class BoundIpInfo extends  AbstractModel {
         super();
 
         /**
-         * IP
+         * IP地址
          * @type {string || null}
          */
         this.Ip = null;
 
         /**
-         * 绑定的产品分类，取值[public（CVM产品），bm（黑石产品），eni（弹性网卡），vpngw（VPN网关）， natgw（NAT网关），waf（Web应用安全产品），fpc（金融产品），gaap（GAAP产品）, other(托管IP)]
+         * 绑定的产品分类，取值[public（CVM、CLB产品），bm（黑石产品），eni（弹性网卡），vpngw（VPN网关）， natgw（NAT网关），waf（Web应用安全产品），fpc（金融产品），gaap（GAAP产品）, other(托管IP)]
          * @type {string || null}
          */
         this.BizType = null;

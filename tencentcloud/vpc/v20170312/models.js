@@ -15527,6 +15527,12 @@ class CreateFlowLogRequest extends  AbstractModel {
          */
         this.FlowLogDescription = null;
 
+        /**
+         * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -15543,6 +15549,15 @@ class CreateFlowLogRequest extends  AbstractModel {
         this.TrafficType = 'TrafficType' in params ? params.TrafficType : null;
         this.CloudLogId = 'CloudLogId' in params ? params.CloudLogId : null;
         this.FlowLogDescription = 'FlowLogDescription' in params ? params.FlowLogDescription : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }

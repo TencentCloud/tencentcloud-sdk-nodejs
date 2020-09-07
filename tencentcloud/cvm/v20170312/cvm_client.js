@@ -34,7 +34,7 @@ const ModifyKeyPairAttributeRequest = models.ModifyKeyPairAttributeRequest;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
 const ResetInstancesTypeRequest = models.ResetInstancesTypeRequest;
 const InquiryPriceResetInstanceRequest = models.InquiryPriceResetInstanceRequest;
-const RunInstancesRequest = models.RunInstancesRequest;
+const ModifyImageSharePermissionResponse = models.ModifyImageSharePermissionResponse;
 const DeleteImagesRequest = models.DeleteImagesRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const DescribeHostsResponse = models.DescribeHostsResponse;
@@ -51,7 +51,7 @@ const AssociateInstancesKeyPairsRequest = models.AssociateInstancesKeyPairsReque
 const ImportKeyPairResponse = models.ImportKeyPairResponse;
 const DescribeInstancesStatusResponse = models.DescribeInstancesStatusResponse;
 const ZoneInfo = models.ZoneInfo;
-const InquiryPriceModifyInstancesChargeTypeResponse = models.InquiryPriceModifyInstancesChargeTypeResponse;
+const DescribeInstanceTypeConfigsRequest = models.DescribeInstanceTypeConfigsRequest;
 const DescribeKeyPairsResponse = models.DescribeKeyPairsResponse;
 const ResetInstancesPasswordRequest = models.ResetInstancesPasswordRequest;
 const InternetChargeTypeConfig = models.InternetChargeTypeConfig;
@@ -66,9 +66,10 @@ const ModifyImageSharePermissionRequest = models.ModifyImageSharePermissionReque
 const DisassociateInstancesKeyPairsResponse = models.DisassociateInstancesKeyPairsResponse;
 const InquiryPriceResizeInstanceDisksRequest = models.InquiryPriceResizeInstanceDisksRequest;
 const RunInstancesResponse = models.RunInstancesResponse;
+const ReservedInstancePrice = models.ReservedInstancePrice;
 const ResetInstancesInternetMaxBandwidthResponse = models.ResetInstancesInternetMaxBandwidthResponse;
 const ModifyInstancesAttributeResponse = models.ModifyInstancesAttributeResponse;
-const ModifyImageSharePermissionResponse = models.ModifyImageSharePermissionResponse;
+const InquiryPriceModifyInstancesChargeTypeResponse = models.InquiryPriceModifyInstancesChargeTypeResponse;
 const DescribeInstancesOperationLimitResponse = models.DescribeInstancesOperationLimitResponse;
 const SyncImagesResponse = models.SyncImagesResponse;
 const DescribeZoneInstanceConfigInfosResponse = models.DescribeZoneInstanceConfigInfosResponse;
@@ -80,6 +81,8 @@ const Tag = models.Tag;
 const DescribeInstanceInternetBandwidthConfigsResponse = models.DescribeInstanceInternetBandwidthConfigsResponse;
 const Placement = models.Placement;
 const DescribeDisasterRecoverGroupsRequest = models.DescribeDisasterRecoverGroupsRequest;
+const ModifyKeyPairAttributeResponse = models.ModifyKeyPairAttributeResponse;
+const ModifyInstancesRenewFlagRequest = models.ModifyInstancesRenewFlagRequest;
 const SyncImagesRequest = models.SyncImagesRequest;
 const DisassociateInstancesKeyPairsRequest = models.DisassociateInstancesKeyPairsRequest;
 const DescribeImageQuotaRequest = models.DescribeImageQuotaRequest;
@@ -94,12 +97,14 @@ const Image = models.Image;
 const DescribeDisasterRecoverGroupQuotaResponse = models.DescribeDisasterRecoverGroupQuotaResponse;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const CreateDisasterRecoverGroupRequest = models.CreateDisasterRecoverGroupRequest;
+const DescribeReservedInstancesConfigInfosResponse = models.DescribeReservedInstancesConfigInfosResponse;
 const DescribeReservedInstancesResponse = models.DescribeReservedInstancesResponse;
 const DescribeImportImageOsResponse = models.DescribeImportImageOsResponse;
-const ModifyKeyPairAttributeResponse = models.ModifyKeyPairAttributeResponse;
+const InquirePricePurchaseReservedInstancesOfferingRequest = models.InquirePricePurchaseReservedInstancesOfferingRequest;
 const DataDisk = models.DataDisk;
 const DescribeKeyPairsRequest = models.DescribeKeyPairsRequest;
 const OperationCountLimit = models.OperationCountLimit;
+const ReservedInstanceConfigInfoItem = models.ReservedInstanceConfigInfoItem;
 const DeleteDisasterRecoverGroupsResponse = models.DeleteDisasterRecoverGroupsResponse;
 const HostItem = models.HostItem;
 const Externals = models.Externals;
@@ -110,9 +115,11 @@ const EnhancedService = models.EnhancedService;
 const CreateKeyPairResponse = models.CreateKeyPairResponse;
 const DescribeInstanceVncUrlResponse = models.DescribeInstanceVncUrlResponse;
 const DescribeReservedInstancesOfferingsRequest = models.DescribeReservedInstancesOfferingsRequest;
+const ReservedInstanceFamilyItem = models.ReservedInstanceFamilyItem;
 const DescribeDisasterRecoverGroupsResponse = models.DescribeDisasterRecoverGroupsResponse;
 const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
 const ActionTimer = models.ActionTimer;
+const DescribeReservedInstancesConfigInfosRequest = models.DescribeReservedInstancesConfigInfosRequest;
 const TagSpecification = models.TagSpecification;
 const ResetInstancesInternetMaxBandwidthRequest = models.ResetInstancesInternetMaxBandwidthRequest;
 const InstanceFamilyConfig = models.InstanceFamilyConfig;
@@ -127,7 +134,8 @@ const AllocateHostsResponse = models.AllocateHostsResponse;
 const DescribeImageSharePermissionRequest = models.DescribeImageSharePermissionRequest;
 const DisasterRecoverGroup = models.DisasterRecoverGroup;
 const InquiryPriceResetInstanceResponse = models.InquiryPriceResetInstanceResponse;
-const DescribeInstanceTypeConfigsRequest = models.DescribeInstanceTypeConfigsRequest;
+const RunInstancesRequest = models.RunInstancesRequest;
+const Filter = models.Filter;
 const InquiryPriceResetInstancesInternetMaxBandwidthRequest = models.InquiryPriceResetInstancesInternetMaxBandwidthRequest;
 const ModifyHostsAttributeResponse = models.ModifyHostsAttributeResponse;
 const DescribeDisasterRecoverGroupQuotaRequest = models.DescribeDisasterRecoverGroupQuotaRequest;
@@ -140,6 +148,7 @@ const DescribeZonesResponse = models.DescribeZonesResponse;
 const ItemPrice = models.ItemPrice;
 const InstanceTypeQuotaItem = models.InstanceTypeQuotaItem;
 const ImageOsList = models.ImageOsList;
+const ReservedInstanceTypeItem = models.ReservedInstanceTypeItem;
 const InquiryPriceRunInstancesResponse = models.InquiryPriceRunInstancesResponse;
 const DescribeHostsRequest = models.DescribeHostsRequest;
 const ModifyInstancesRenewFlagResponse = models.ModifyInstancesRenewFlagResponse;
@@ -151,6 +160,7 @@ const ReservedInstances = models.ReservedInstances;
 const DeleteImagesResponse = models.DeleteImagesResponse;
 const ImportImageResponse = models.ImportImageResponse;
 const ModifyDisasterRecoverGroupAttributeRequest = models.ModifyDisasterRecoverGroupAttributeRequest;
+const ReservedInstancePriceItem = models.ReservedInstancePriceItem;
 const RebootInstancesResponse = models.RebootInstancesResponse;
 const DescribeSpotTypeConfigRequest = models.DescribeSpotTypeConfigRequest;
 const InquiryPriceResetInstancesTypeResponse = models.InquiryPriceResetInstancesTypeResponse;
@@ -165,7 +175,7 @@ const DescribeInternetChargeTypeConfigsRequest = models.DescribeInternetChargeTy
 const DescribeImagesRequest = models.DescribeImagesRequest;
 const ModifyImageAttributeRequest = models.ModifyImageAttributeRequest;
 const ResizeInstanceDisksResponse = models.ResizeInstanceDisksResponse;
-const ModifyInstancesRenewFlagRequest = models.ModifyInstancesRenewFlagRequest;
+const InquirePricePurchaseReservedInstancesOfferingResponse = models.InquirePricePurchaseReservedInstancesOfferingResponse;
 const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
 const ModifyHostsAttributeRequest = models.ModifyHostsAttributeRequest;
 const ImportKeyPairRequest = models.ImportKeyPairRequest;
@@ -174,7 +184,6 @@ const DescribeReservedInstancesOfferingsResponse = models.DescribeReservedInstan
 const RenewInstancesResponse = models.RenewInstancesResponse;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
 const ResetInstanceResponse = models.ResetInstanceResponse;
-const Filter = models.Filter;
 const VirtualPrivateCloud = models.VirtualPrivateCloud;
 const InternetBandwidthConfig = models.InternetBandwidthConfig;
 const ModifyDisasterRecoverGroupAttributeResponse = models.ModifyDisasterRecoverGroupAttributeResponse;
@@ -686,14 +695,14 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * 本接口(DescribeZones)用于查询可用区信息。
-     * @param {DescribeZonesRequest} req
-     * @param {function(string, DescribeZonesResponse):void} cb
+     * 本接口(DescribeReservedInstancesConfigInfos)供用户列出可购买预留实例机型配置
+     * @param {DescribeReservedInstancesConfigInfosRequest} req
+     * @param {function(string, DescribeReservedInstancesConfigInfosResponse):void} cb
      * @public
      */
-    DescribeZones(req, cb) {
-        let resp = new DescribeZonesResponse();
-        this.request("DescribeZones", req, resp, cb);
+    DescribeReservedInstancesConfigInfos(req, cb) {
+        let resp = new DescribeReservedInstancesConfigInfosResponse();
+        this.request("DescribeReservedInstancesConfigInfos", req, resp, cb);
     }
 
     /**
@@ -744,6 +753,17 @@ class CvmClient extends AbstractClient {
     ModifyImageAttribute(req, cb) {
         let resp = new ModifyImageAttributeResponse();
         this.request("ModifyImageAttribute", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeZones)用于查询可用区信息。
+     * @param {DescribeZonesRequest} req
+     * @param {function(string, DescribeZonesResponse):void} cb
+     * @public
+     */
+    DescribeZones(req, cb) {
+        let resp = new DescribeZonesResponse();
+        this.request("DescribeZones", req, resp, cb);
     }
 
     /**
@@ -805,6 +825,17 @@ class CvmClient extends AbstractClient {
     DescribeImportImageOs(req, cb) {
         let resp = new DescribeImportImageOsResponse();
         this.request("DescribeImportImageOs", req, resp, cb);
+    }
+
+    /**
+     * 本接口(InquirePricePurchaseReservedInstancesOffering)用于创建预留实例询价。本接口仅允许针对购买限制范围内的预留实例配置进行询价,
+     * @param {InquirePricePurchaseReservedInstancesOfferingRequest} req
+     * @param {function(string, InquirePricePurchaseReservedInstancesOfferingResponse):void} cb
+     * @public
+     */
+    InquirePricePurchaseReservedInstancesOffering(req, cb) {
+        let resp = new InquirePricePurchaseReservedInstancesOfferingResponse();
+        this.request("InquirePricePurchaseReservedInstancesOffering", req, resp, cb);
     }
 
     /**
