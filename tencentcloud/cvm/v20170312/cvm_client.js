@@ -695,7 +695,7 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * 本接口(DescribeReservedInstancesConfigInfos)供用户列出可购买预留实例机型配置
+     * 本接口(DescribeReservedInstancesConfigInfos)供用户列出可购买预留实例机型配置。预留实例当前只针对国际站白名单用户开放。
      * @param {DescribeReservedInstancesConfigInfosRequest} req
      * @param {function(string, DescribeReservedInstancesConfigInfosResponse):void} cb
      * @public
@@ -828,7 +828,7 @@ class CvmClient extends AbstractClient {
     }
 
     /**
-     * 本接口(InquirePricePurchaseReservedInstancesOffering)用于创建预留实例询价。本接口仅允许针对购买限制范围内的预留实例配置进行询价,
+     * 本接口(InquirePricePurchaseReservedInstancesOffering)用于创建预留实例询价。本接口仅允许针对购买限制范围内的预留实例配置进行询价。预留实例当前只针对国际站白名单用户开放。
      * @param {InquirePricePurchaseReservedInstancesOfferingRequest} req
      * @param {function(string, InquirePricePurchaseReservedInstancesOfferingResponse):void} cb
      * @public

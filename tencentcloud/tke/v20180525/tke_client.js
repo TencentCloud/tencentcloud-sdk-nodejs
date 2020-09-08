@@ -20,6 +20,7 @@ const DescribeClusterEndpointVipStatusRequest = models.DescribeClusterEndpointVi
 const DescribeClusterSecurityResponse = models.DescribeClusterSecurityResponse;
 const DescribeClusterSecurityRequest = models.DescribeClusterSecurityRequest;
 const DeleteClusterInstancesResponse = models.DeleteClusterInstancesResponse;
+const DescribeClusterKubeconfigResponse = models.DescribeClusterKubeconfigResponse;
 const CreateClusterRouteRequest = models.CreateClusterRouteRequest;
 const DescribeClusterEndpointVipStatusResponse = models.DescribeClusterEndpointVipStatusResponse;
 const ModifyClusterEndpointSPRequest = models.ModifyClusterEndpointSPRequest;
@@ -56,6 +57,7 @@ const DeleteClusterInstancesRequest = models.DeleteClusterInstancesRequest;
 const ModifyClusterAsGroupAttributeResponse = models.ModifyClusterAsGroupAttributeResponse;
 const CreateClusterInstancesRequest = models.CreateClusterInstancesRequest;
 const DescribeClusterRouteTablesResponse = models.DescribeClusterRouteTablesResponse;
+const DescribeClusterKubeconfigRequest = models.DescribeClusterKubeconfigRequest;
 const ClusterCIDRSettings = models.ClusterCIDRSettings;
 const CreateClusterEndpointVipRequest = models.CreateClusterEndpointVipRequest;
 const ExistedInstance = models.ExistedInstance;
@@ -419,6 +421,17 @@ class TkeClient extends AbstractClient {
     DeleteClusterInstances(req, cb) {
         let resp = new DeleteClusterInstancesResponse();
         this.request("DeleteClusterInstances", req, resp, cb);
+    }
+
+    /**
+     * 获取集群的kubeconfig文件，不同子账户获取自己的kubeconfig文件，该文件中有每个子账户自己的kube-apiserver的客户端证书，默认首次调此接口时候创建客户端证书，时效20年，未授予任何权限，如果是集群所有者或者主账户，则默认是cluster-admin权限。
+     * @param {DescribeClusterKubeconfigRequest} req
+     * @param {function(string, DescribeClusterKubeconfigResponse):void} cb
+     * @public
+     */
+    DescribeClusterKubeconfig(req, cb) {
+        let resp = new DescribeClusterKubeconfigResponse();
+        this.request("DescribeClusterKubeconfig", req, resp, cb);
     }
 
     /**

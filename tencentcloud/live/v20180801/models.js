@@ -10781,13 +10781,13 @@ class CreateRecordTaskRequest extends  AbstractModel {
         this.AppName = null;
 
         /**
-         * 录制任务结束时间，Unix时间戳。设置时间必须大于StartTime，且不能超过从当前时刻开始24小时之内的时间。
+         * 录制任务结束时间，Unix时间戳。设置时间必须大于StartTime，且EndTime - StartTime不能超过24小时。
          * @type {number || null}
          */
         this.EndTime = null;
 
         /**
-         * 录制任务开始时间，Unix时间戳。如果不填表示立即启动录制。不超过从当前时间开始24小时之内的时间。
+         * 录制任务开始时间，Unix时间戳。如果不填表示立即启动录制。不超过从当前时间开始6天之内的时间。
          * @type {number || null}
          */
         this.StartTime = null;
@@ -10807,7 +10807,7 @@ class CreateRecordTaskRequest extends  AbstractModel {
         this.TemplateId = null;
 
         /**
-         * 扩展字段，默认空。
+         * 扩展字段，暂无定义。默认为空。
          * @type {string || null}
          */
         this.Extension = null;
@@ -12641,7 +12641,7 @@ class CreateRecordTaskResponse extends  AbstractModel {
         super();
 
         /**
-         * 任务ID，全局唯一标识录制任务。
+         * 任务ID，全局唯一标识录制任务。返回TaskId字段说明录制任务创建成功。
          * @type {string || null}
          */
         this.TaskId = null;

@@ -2217,7 +2217,7 @@ class RunInstancesResponse extends  AbstractModel {
 }
 
 /**
- * 预留实例相关价格信息
+ * 预留实例相关价格信息。预留实例当前只针对国际站白名单用户开放。
  * @class
  */
 class ReservedInstancePrice extends  AbstractModel {
@@ -4045,7 +4045,7 @@ class OperationCountLimit extends  AbstractModel {
 }
 
 /**
- * 预留实例静态配置信息。
+ * 预留实例静态配置信息。预留实例当前只针对国际站白名单用户开放。
  * @class
  */
 class ReservedInstanceConfigInfoItem extends  AbstractModel {
@@ -4939,7 +4939,7 @@ class DescribeReservedInstancesOfferingsRequest extends  AbstractModel {
 }
 
 /**
- * 预留实例相关实例族信息。
+ * 预留实例相关实例族信息。预留实例当前只针对国际站白名单用户开放。
  * @class
  */
 class ReservedInstanceFamilyItem extends  AbstractModel {
@@ -6758,7 +6758,7 @@ class ImageOsList extends  AbstractModel {
 }
 
 /**
- * 预留实例类型信息。
+ * 预留实例类型信息。预留实例当前只针对国际站白名单用户开放。
  * @class
  */
 class ReservedInstanceTypeItem extends  AbstractModel {
@@ -7367,7 +7367,7 @@ class ModifyDisasterRecoverGroupAttributeRequest extends  AbstractModel {
 }
 
 /**
- * 基于付费类型的预留实例相关价格信息
+ * 基于付费类型的预留实例相关价格信息。预留实例当前只针对国际站白名单用户开放。
  * @class
  */
 class ReservedInstancePriceItem extends  AbstractModel {

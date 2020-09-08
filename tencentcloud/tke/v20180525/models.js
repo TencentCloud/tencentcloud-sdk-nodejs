@@ -219,6 +219,41 @@ class DeleteClusterInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeClusterKubeconfig返回参数结构体
+ * @class
+ */
+class DescribeClusterKubeconfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 子账户kubeconfig文件，可用于直接访问集群kube-apiserver
+         * @type {string || null}
+         */
+        this.Kubeconfig = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Kubeconfig = 'Kubeconfig' in params ? params.Kubeconfig : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateClusterRoute请求参数结构体
  * @class
  */
@@ -1850,6 +1885,34 @@ class DescribeClusterRouteTablesResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeClusterKubeconfig请求参数结构体
+ * @class
+ */
+class DescribeClusterKubeconfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -4820,6 +4883,7 @@ module.exports = {
     DescribeClusterSecurityResponse: DescribeClusterSecurityResponse,
     DescribeClusterSecurityRequest: DescribeClusterSecurityRequest,
     DeleteClusterInstancesResponse: DeleteClusterInstancesResponse,
+    DescribeClusterKubeconfigResponse: DescribeClusterKubeconfigResponse,
     CreateClusterRouteRequest: CreateClusterRouteRequest,
     DescribeClusterEndpointVipStatusResponse: DescribeClusterEndpointVipStatusResponse,
     ModifyClusterEndpointSPRequest: ModifyClusterEndpointSPRequest,
@@ -4856,6 +4920,7 @@ module.exports = {
     ModifyClusterAsGroupAttributeResponse: ModifyClusterAsGroupAttributeResponse,
     CreateClusterInstancesRequest: CreateClusterInstancesRequest,
     DescribeClusterRouteTablesResponse: DescribeClusterRouteTablesResponse,
+    DescribeClusterKubeconfigRequest: DescribeClusterKubeconfigRequest,
     ClusterCIDRSettings: ClusterCIDRSettings,
     CreateClusterEndpointVipRequest: CreateClusterEndpointVipRequest,
     ExistedInstance: ExistedInstance,

@@ -78,13 +78,13 @@ class TextModerationRequest extends  AbstractModel {
         this.BizType = null;
 
         /**
-         * 用户相关信息
+         * 账号相关信息字段，填入后可识别违规风险账号。
          * @type {User || null}
          */
         this.User = null;
 
         /**
-         * 设备相关信息
+         * 设备相关信息字段，填入后可识别违规风险设备。
          * @type {Device || null}
          */
         this.Device = null;
@@ -418,58 +418,63 @@ class TextModerationResponse extends  AbstractModel {
         super();
 
         /**
-         * 最终使用的BizType
+         * 您在入参时所填入的Biztype参数。 -- 该字段暂未开放。
          * @type {string || null}
          */
         this.BizType = null;
 
         /**
-         * 是否恶意 0：正常 1：可疑
+         * 数据是否属于恶意类型。
+ 0：正常 1：可疑
          * @type {number || null}
          */
         this.EvilFlag = null;
 
         /**
-         * 恶意标签，Normal：正常，Polity：涉政，Porn：色情，Illegal：违法，Abuse：谩骂，Terror：暴恐，Ad：广告，Custom：自定义关键词
+         * 机器识别后判断违规所属类型。
+Normal：正常，Polity：涉政，Porn：色情，Illegal：违法，Abuse：谩骂，Terror：暴恐，Ad：广告，Custom：自定义关键词
          * @type {string || null}
          */
         this.Label = null;
 
         /**
-         * 建议值,Block：打击,Review：待复审,Normal：正常
+         * 建议您拿到判断结果后的执行操作。
+Block：建议打击，Review：建议复审，Normal：建议通过。
          * @type {string || null}
          */
         this.Suggestion = null;
 
         /**
-         * 命中的关键词
+         * 文本命中的关键词信息，用于提示您文本违规的具体原因，可能会返回多个命中的关键词。（如：加我微信）
+如返回值为空，Score不为空，即识别结果（Label）是来自于语义模型判断的返回值。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.Keywords = null;
 
         /**
-         * 命中的模型分值
+         * 机器判断当前分类的置信度，取值范围：0.00~100.00。分数越高，表示越有可能属于当前分类。
+（如：色情 99.99，则该样本属于色情的置信度非常高。）
          * @type {number || null}
          */
         this.Score = null;
 
         /**
-         * 返回的详细结果
+         * 接口识别样本后返回的详细结果。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<DetailResults> || null}
          */
         this.DetailResults = null;
 
         /**
-         * 账号风险检测结果
+         * 接口识别样本中存在违规账号风险的检测结果。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<RiskDetails> || null}
          */
         this.RiskDetails = null;
 
         /**
-         * 预留字段，不同客户返回结果不同
+         * 扩展字段，用于特定信息返回，不同客户/Biztype下返回信息不同。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
