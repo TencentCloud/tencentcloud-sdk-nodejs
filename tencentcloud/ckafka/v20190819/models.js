@@ -3522,6 +3522,13 @@ class InstanceAttributesResponse extends  AbstractModel {
          */
         this.InstanceType = null;
 
+        /**
+         * 表示该实例支持的特性。FEATURE_SUBNET_ACL:表示acl策略支持设置子网。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Features = null;
+
     }
 
     /**
@@ -3579,6 +3586,7 @@ class InstanceAttributesResponse extends  AbstractModel {
         this.MaxGroupNum = 'MaxGroupNum' in params ? params.MaxGroupNum : null;
         this.Cvm = 'Cvm' in params ? params.Cvm : null;
         this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.Features = 'Features' in params ? params.Features : null;
 
     }
 }

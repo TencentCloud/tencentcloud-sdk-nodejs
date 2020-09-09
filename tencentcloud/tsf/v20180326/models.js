@@ -12142,12 +12142,6 @@ class DeployContainerGroupRequest extends  AbstractModel {
         this.GroupId = null;
 
         /**
-         * 镜像server
-         * @type {string || null}
-         */
-        this.Server = null;
-
-        /**
          * 镜像版本名称,如v1
          * @type {string || null}
          */
@@ -12158,6 +12152,12 @@ class DeployContainerGroupRequest extends  AbstractModel {
          * @type {number || null}
          */
         this.InstanceNum = null;
+
+        /**
+         * 镜像server
+         * @type {string || null}
+         */
+        this.Server = null;
 
         /**
          * 旧版镜像名，如/tsf/nginx
@@ -12307,9 +12307,9 @@ class DeployContainerGroupRequest extends  AbstractModel {
             return;
         }
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
-        this.Server = 'Server' in params ? params.Server : null;
         this.TagName = 'TagName' in params ? params.TagName : null;
         this.InstanceNum = 'InstanceNum' in params ? params.InstanceNum : null;
+        this.Server = 'Server' in params ? params.Server : null;
         this.Reponame = 'Reponame' in params ? params.Reponame : null;
         this.CpuLimit = 'CpuLimit' in params ? params.CpuLimit : null;
         this.MemLimit = 'MemLimit' in params ? params.MemLimit : null;

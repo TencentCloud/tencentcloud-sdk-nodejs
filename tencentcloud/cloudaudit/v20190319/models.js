@@ -311,12 +311,24 @@ class InquireAuditCreditRequest extends  AbstractModel {
 }
 
 /**
- * ListAudits请求参数结构体
+ * ListCosEnableRegion返回参数结构体
  * @class
  */
-class ListAuditsRequest extends  AbstractModel {
+class ListCosEnableRegionResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 云审计支持的cos可用区
+         * @type {Array.<CosRegionInfo> || null}
+         */
+        this.EnableRegions = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -327,6 +339,16 @@ class ListAuditsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+        if (params.EnableRegions) {
+            this.EnableRegions = new Array();
+            for (let z in params.EnableRegions) {
+                let obj = new CosRegionInfo();
+                obj.deserialize(params.EnableRegions[z]);
+                this.EnableRegions.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -585,6 +607,56 @@ class ListCosEnableRegionRequest extends  AbstractModel {
 }
 
 /**
+ * ListKeyAliasByRegion返回参数结构体
+ * @class
+ */
+class ListKeyAliasByRegionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 密钥别名
+         * @type {Array.<KeyMetadata> || null}
+         */
+        this.KeyMetadatas = null;
+
+        /**
+         * CMK的总数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.KeyMetadatas) {
+            this.KeyMetadatas = new Array();
+            for (let z in params.KeyMetadatas) {
+                let obj = new KeyMetadata();
+                obj.deserialize(params.KeyMetadatas[z]);
+                this.KeyMetadatas.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 资源类型
  * @class
  */
@@ -620,24 +692,12 @@ class Resource extends  AbstractModel {
 }
 
 /**
- * ListCosEnableRegion返回参数结构体
+ * ListAudits请求参数结构体
  * @class
  */
-class ListCosEnableRegionResponse extends  AbstractModel {
+class ListAuditsRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 云审计支持的cos可用区
-         * @type {Array.<CosRegionInfo> || null}
-         */
-        this.EnableRegions = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
 
     }
 
@@ -648,16 +708,6 @@ class ListCosEnableRegionResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.EnableRegions) {
-            this.EnableRegions = new Array();
-            for (let z in params.EnableRegions) {
-                let obj = new CosRegionInfo();
-                obj.deserialize(params.EnableRegions[z]);
-                this.EnableRegions.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -776,6 +826,41 @@ class ListAuditsResponse extends  AbstractModel {
 }
 
 /**
+ * CMK属性
+ * @class
+ */
+class KeyMetadata extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 作为密钥更容易辨识，更容易被人看懂的别名
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+        /**
+         * CMK的全局唯一标识
+         * @type {string || null}
+         */
+        this.KeyId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Alias = 'Alias' in params ? params.Alias : null;
+        this.KeyId = 'KeyId' in params ? params.KeyId : null;
+
+    }
+}
+
+/**
  * UpdateAudit返回参数结构体
  * @class
  */
@@ -834,6 +919,48 @@ class DescribeAuditRequest extends  AbstractModel {
             return;
         }
         this.AuditName = 'AuditName' in params ? params.AuditName : null;
+
+    }
+}
+
+/**
+ * ListKeyAliasByRegion请求参数结构体
+ * @class
+ */
+class ListKeyAliasByRegionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Kms地域
+         * @type {string || null}
+         */
+        this.KmsRegion = null;
+
+        /**
+         * 含义跟 SQL 查询的 Limit 一致，表示本次获最多获取 Limit 个元素。缺省值为10，最大值为200
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 含义跟 SQL 查询的 Offset 一致，表示本次获取从按一定顺序排列数组的第 Offset 个元素开始，缺省为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KmsRegion = 'KmsRegion' in params ? params.KmsRegion : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -1498,20 +1625,23 @@ module.exports = {
     DeleteAuditResponse: DeleteAuditResponse,
     UpdateAuditRequest: UpdateAuditRequest,
     InquireAuditCreditRequest: InquireAuditCreditRequest,
-    ListAuditsRequest: ListAuditsRequest,
+    ListCosEnableRegionResponse: ListCosEnableRegionResponse,
     LookUpEventsRequest: LookUpEventsRequest,
     StartLoggingRequest: StartLoggingRequest,
     CreateAuditResponse: CreateAuditResponse,
     StartLoggingResponse: StartLoggingResponse,
     AttributeKeyDetail: AttributeKeyDetail,
     ListCosEnableRegionRequest: ListCosEnableRegionRequest,
+    ListKeyAliasByRegionResponse: ListKeyAliasByRegionResponse,
     Resource: Resource,
-    ListCosEnableRegionResponse: ListCosEnableRegionResponse,
+    ListAuditsRequest: ListAuditsRequest,
     StopLoggingResponse: StopLoggingResponse,
     LookupAttribute: LookupAttribute,
     ListAuditsResponse: ListAuditsResponse,
+    KeyMetadata: KeyMetadata,
     UpdateAuditResponse: UpdateAuditResponse,
     DescribeAuditRequest: DescribeAuditRequest,
+    ListKeyAliasByRegionRequest: ListKeyAliasByRegionRequest,
     CreateAuditRequest: CreateAuditRequest,
     DeleteAuditRequest: DeleteAuditRequest,
     ListCmqEnableRegionRequest: ListCmqEnableRegionRequest,

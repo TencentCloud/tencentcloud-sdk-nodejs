@@ -23,20 +23,23 @@ const GetAttributeKeyRequest = models.GetAttributeKeyRequest;
 const DeleteAuditResponse = models.DeleteAuditResponse;
 const UpdateAuditRequest = models.UpdateAuditRequest;
 const InquireAuditCreditRequest = models.InquireAuditCreditRequest;
-const ListAuditsRequest = models.ListAuditsRequest;
+const ListCosEnableRegionResponse = models.ListCosEnableRegionResponse;
 const LookUpEventsRequest = models.LookUpEventsRequest;
 const StartLoggingRequest = models.StartLoggingRequest;
 const CreateAuditResponse = models.CreateAuditResponse;
 const StartLoggingResponse = models.StartLoggingResponse;
 const AttributeKeyDetail = models.AttributeKeyDetail;
 const ListCosEnableRegionRequest = models.ListCosEnableRegionRequest;
+const ListKeyAliasByRegionResponse = models.ListKeyAliasByRegionResponse;
 const Resource = models.Resource;
-const ListCosEnableRegionResponse = models.ListCosEnableRegionResponse;
+const ListAuditsRequest = models.ListAuditsRequest;
 const StopLoggingResponse = models.StopLoggingResponse;
 const LookupAttribute = models.LookupAttribute;
 const ListAuditsResponse = models.ListAuditsResponse;
+const KeyMetadata = models.KeyMetadata;
 const UpdateAuditResponse = models.UpdateAuditResponse;
 const DescribeAuditRequest = models.DescribeAuditRequest;
+const ListKeyAliasByRegionRequest = models.ListKeyAliasByRegionRequest;
 const CreateAuditRequest = models.CreateAuditRequest;
 const DeleteAuditRequest = models.DeleteAuditRequest;
 const ListCmqEnableRegionRequest = models.ListCmqEnableRegionRequest;
@@ -138,6 +141,17 @@ class CloudauditClient extends AbstractClient {
     UpdateAudit(req, cb) {
         let resp = new UpdateAuditResponse();
         this.request("UpdateAudit", req, resp, cb);
+    }
+
+    /**
+     * 根据地域获取KMS密钥别名
+     * @param {ListKeyAliasByRegionRequest} req
+     * @param {function(string, ListKeyAliasByRegionResponse):void} cb
+     * @public
+     */
+    ListKeyAliasByRegion(req, cb) {
+        let resp = new ListKeyAliasByRegionResponse();
+        this.request("ListKeyAliasByRegion", req, resp, cb);
     }
 
     /**
