@@ -21,6 +21,7 @@ const UpgradeInstanceResponse = models.UpgradeInstanceResponse;
 const Addr = models.Addr;
 const DescribeClustersRequest = models.DescribeClustersRequest;
 const InstanceSpec = models.InstanceSpec;
+const SetRenewFlagResponse = models.SetRenewFlagResponse;
 const Account = models.Account;
 const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
 const DescribeBackupConfigRequest = models.DescribeBackupConfigRequest;
@@ -37,17 +38,21 @@ const IsolateClusterRequest = models.IsolateClusterRequest;
 const AddInstancesRequest = models.AddInstancesRequest;
 const DescribeClusterDetailRequest = models.DescribeClusterDetailRequest;
 const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
-const QueryFilter = models.QueryFilter;
+const CynosdbInstanceDetail = models.CynosdbInstanceDetail;
 const DescribeMaintainPeriodRequest = models.DescribeMaintainPeriodRequest;
 const OfflineClusterRequest = models.OfflineClusterRequest;
 const CynosdbClusterDetail = models.CynosdbClusterDetail;
 const ClusterInstanceDetail = models.ClusterInstanceDetail;
 const BackupFileInfo = models.BackupFileInfo;
 const DescribeRollbackTimeValidityResponse = models.DescribeRollbackTimeValidityResponse;
+const DescribeInstanceDetailRequest = models.DescribeInstanceDetailRequest;
 const ModifyMaintainPeriodConfigResponse = models.ModifyMaintainPeriodConfigResponse;
 const IsolateInstanceResponse = models.IsolateInstanceResponse;
 const DescribeBackupListRequest = models.DescribeBackupListRequest;
+const QueryFilter = models.QueryFilter;
 const DescribeAccountsResponse = models.DescribeAccountsResponse;
+const DescribeInstanceDetailResponse = models.DescribeInstanceDetailResponse;
+const OfflineInstanceRequest = models.OfflineInstanceRequest;
 const OfflineClusterResponse = models.OfflineClusterResponse;
 const DescribeInstanceSpecsResponse = models.DescribeInstanceSpecsResponse;
 const ObjectTask = models.ObjectTask;
@@ -58,7 +63,7 @@ const SetRenewFlagRequest = models.SetRenewFlagRequest;
 const CreateClustersRequest = models.CreateClustersRequest;
 const CynosdbCluster = models.CynosdbCluster;
 const DescribeClusterDetailResponse = models.DescribeClusterDetailResponse;
-const SetRenewFlagResponse = models.SetRenewFlagResponse;
+const OfflineInstanceResponse = models.OfflineInstanceResponse;
 const DescribeClustersResponse = models.DescribeClustersResponse;
 const ModifyBackupConfigResponse = models.ModifyBackupConfigResponse;
 const DescribeBackupConfigResponse = models.DescribeBackupConfigResponse;
@@ -131,7 +136,7 @@ class CynosdbClient extends AbstractClient {
     }
 
     /**
-     * 本接口(IsolateInstance)用于隔离实例访问。
+     * 本接口(IsolateInstance)用于隔离实例。
      * @param {IsolateInstanceRequest} req
      * @param {function(string, IsolateInstanceResponse):void} cb
      * @public
@@ -139,6 +144,17 @@ class CynosdbClient extends AbstractClient {
     IsolateInstance(req, cb) {
         let resp = new IsolateInstanceResponse();
         this.request("IsolateInstance", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeInstanceDetail)用于查询实例详情。
+     * @param {DescribeInstanceDetailRequest} req
+     * @param {function(string, DescribeInstanceDetailResponse):void} cb
+     * @public
+     */
+    DescribeInstanceDetail(req, cb) {
+        let resp = new DescribeInstanceDetailResponse();
+        this.request("DescribeInstanceDetail", req, resp, cb);
     }
 
     /**
@@ -227,6 +243,17 @@ class CynosdbClient extends AbstractClient {
     DescribeBackupConfig(req, cb) {
         let resp = new DescribeBackupConfigResponse();
         this.request("DescribeBackupConfig", req, resp, cb);
+    }
+
+    /**
+     * 下线实例
+     * @param {OfflineInstanceRequest} req
+     * @param {function(string, OfflineInstanceResponse):void} cb
+     * @public
+     */
+    OfflineInstance(req, cb) {
+        let resp = new OfflineInstanceResponse();
+        this.request("OfflineInstance", req, resp, cb);
     }
 
     /**

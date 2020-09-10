@@ -17,15 +17,18 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribeBlueprintsResponse = models.DescribeBlueprintsResponse;
+const DeleteFirewallRulesRequest = models.DeleteFirewallRulesRequest;
 const LoginSettings = models.LoginSettings;
 const StartInstancesResponse = models.StartInstancesResponse;
 const Instance = models.Instance;
 const RebootInstancesResponse = models.RebootInstancesResponse;
-const StopInstancesRequest = models.StopInstancesRequest;
+const DescribeBundlesRequest = models.DescribeBundlesRequest;
 const Blueprint = models.Blueprint;
 const Price = models.Price;
 const Bundle = models.Bundle;
 const StartInstancesRequest = models.StartInstancesRequest;
+const DeleteFirewallRulesResponse = models.DeleteFirewallRulesResponse;
+const RebootInstancesRequest = models.RebootInstancesRequest;
 const DescribeBlueprintsRequest = models.DescribeBlueprintsRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const InstancePrice = models.InstancePrice;
@@ -35,10 +38,15 @@ const DescribeBundlesResponse = models.DescribeBundlesResponse;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const Filter = models.Filter;
 const ResetInstanceResponse = models.ResetInstanceResponse;
-const RebootInstancesRequest = models.RebootInstancesRequest;
+const CreateFirewallRulesRequest = models.CreateFirewallRulesRequest;
+const DescribeFirewallRulesRequest = models.DescribeFirewallRulesRequest;
+const DescribeFirewallRulesResponse = models.DescribeFirewallRulesResponse;
+const FirewallRule = models.FirewallRule;
+const FirewallRuleInfo = models.FirewallRuleInfo;
+const CreateFirewallRulesResponse = models.CreateFirewallRulesResponse;
 const StopInstancesResponse = models.StopInstancesResponse;
 const InternetAccessible = models.InternetAccessible;
-const DescribeBundlesRequest = models.DescribeBundlesRequest;
+const StopInstancesRequest = models.StopInstancesRequest;
 
 
 /**
@@ -51,6 +59,21 @@ class LighthouseClient extends AbstractClient {
         super("lighthouse.tencentcloudapi.com", "2020-03-24", credential, region, profile);
     }
     
+    /**
+     * 本接口（StopInstances）用于关闭一个或多个实例。
+* 只有状态为 RUNNING 的实例才可以进行此操作。
+* 接口调用成功时，实例会进入 STOPPING 状态；关闭实例成功时，实例会进入 STOPPED 状态。
+* 支持批量操作。每次请求批量实例的上限为 100。
+* 本接口为异步接口，请求发送成功后会返回一个 RequestId，此时操作并未立即完成。实例操作结果可以通过调用 DescribeInstances 接口查询，如果实例的最新操作状态（LatestOperationState）为“SUCCESS”，则代表操作成功。
+     * @param {StopInstancesRequest} req
+     * @param {function(string, StopInstancesResponse):void} cb
+     * @public
+     */
+    StopInstances(req, cb) {
+        let resp = new StopInstancesResponse();
+        this.request("StopInstances", req, resp, cb);
+    }
+
     /**
      * 本接口（DescribeInstances）用于查询一个或多个实例的详细信息。
 
@@ -65,6 +88,22 @@ class LighthouseClient extends AbstractClient {
     DescribeInstances(req, cb) {
         let resp = new DescribeInstancesResponse();
         this.request("DescribeInstances", req, resp, cb);
+    }
+
+    /**
+     * 本接口（RebootInstances）用于重启实例。
+
+* 只有状态为 RUNNING 的实例才可以进行此操作。
+* 接口调用成功时，实例会进入 REBOOTING 状态；重启实例成功时，实例会进入 RUNNING 状态。
+* 支持批量操作，每次请求批量实例的上限为 100。
+* 本接口为异步接口，请求发送成功后会返回一个 RequestId，此时操作并未立即完成。实例操作结果可以通过调用 DescribeInstances 接口查询，如果实例的最新操作状态（LatestOperationState）为“SUCCESS”，则代表操作成功。
+     * @param {RebootInstancesRequest} req
+     * @param {function(string, RebootInstancesResponse):void} cb
+     * @public
+     */
+    RebootInstances(req, cb) {
+        let resp = new RebootInstancesResponse();
+        this.request("RebootInstances", req, resp, cb);
     }
 
     /**
@@ -84,34 +123,44 @@ class LighthouseClient extends AbstractClient {
     }
 
     /**
-     * 本接口（StopInstances）用于关闭一个或多个实例。
-* 只有状态为 RUNNING 的实例才可以进行此操作。
-* 接口调用成功时，实例会进入 STOPPING 状态；关闭实例成功时，实例会进入 STOPPED 状态。
-* 支持批量操作。每次请求批量实例的上限为 100。
-* 本接口为异步接口，请求发送成功后会返回一个 RequestId，此时操作并未立即完成。实例操作结果可以通过调用 DescribeInstances 接口查询，如果实例的最新操作状态（LatestOperationState）为“SUCCESS”，则代表操作成功。
-     * @param {StopInstancesRequest} req
-     * @param {function(string, StopInstancesResponse):void} cb
+     * 本接口（DeleteFirewallRules）用于删除实例的防火墙规则。
+
+* Protocol 字段支持输入 TCP，UDP，或 ALL。
+
+* Port 字段允许输入 ALL，或者一个单独的端口号，或者用逗号分隔的离散端口号，或者用减号分隔的两个端口号代表的端口范围。当 Port 为范围时，减号分隔的第一个端口号小于第二个端口号。当 Protocol 字段不是 TCP 或 UDP 时，Port 字段只能为空或 ALL。Port 字段长度不得超过 64。
+     * @param {DeleteFirewallRulesRequest} req
+     * @param {function(string, DeleteFirewallRulesResponse):void} cb
      * @public
      */
-    StopInstances(req, cb) {
-        let resp = new StopInstancesResponse();
-        this.request("StopInstances", req, resp, cb);
+    DeleteFirewallRules(req, cb) {
+        let resp = new DeleteFirewallRulesResponse();
+        this.request("DeleteFirewallRules", req, resp, cb);
     }
 
     /**
-     * 本接口（RebootInstances）用于重启实例。
-
-* 只有状态为 RUNNING 的实例才可以进行此操作。
-* 接口调用成功时，实例会进入 REBOOTING 状态；重启实例成功时，实例会进入 RUNNING 状态。
-* 支持批量操作，每次请求批量实例的上限为 100。
-* 本接口为异步接口，请求发送成功后会返回一个 RequestId，此时操作并未立即完成。实例操作结果可以通过调用 DescribeInstances 接口查询，如果实例的最新操作状态（LatestOperationState）为“SUCCESS”，则代表操作成功。
-     * @param {RebootInstancesRequest} req
-     * @param {function(string, RebootInstancesResponse):void} cb
+     * 本接口（DescribeBundles）用于查询套餐信息。
+     * @param {DescribeBundlesRequest} req
+     * @param {function(string, DescribeBundlesResponse):void} cb
      * @public
      */
-    RebootInstances(req, cb) {
-        let resp = new RebootInstancesResponse();
-        this.request("RebootInstances", req, resp, cb);
+    DescribeBundles(req, cb) {
+        let resp = new DescribeBundlesResponse();
+        this.request("DescribeBundles", req, resp, cb);
+    }
+
+    /**
+     * 本接口（CreateFirewallRules）用于在实例上添加防火墙规则。
+
+* Protocol 字段支持输入 TCP，UDP，或 ALL。
+
+* Port 字段允许输入 ALL，或者一个单独的端口号，或者用逗号分隔的离散端口号，或者用减号分隔的两个端口号代表的端口范围。当 Port 为范围时，减号分隔的第一个端口号小于第二个端口号。当 Protocol 字段不是 TCP 或 UDP 时，Port 字段只能为空或 ALL。Port 字段长度不得超过 64。
+     * @param {CreateFirewallRulesRequest} req
+     * @param {function(string, CreateFirewallRulesResponse):void} cb
+     * @public
+     */
+    CreateFirewallRules(req, cb) {
+        let resp = new CreateFirewallRulesResponse();
+        this.request("CreateFirewallRules", req, resp, cb);
     }
 
     /**
@@ -142,14 +191,14 @@ class LighthouseClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeBundles）用于查询套餐信息。
-     * @param {DescribeBundlesRequest} req
-     * @param {function(string, DescribeBundlesResponse):void} cb
+     * 本接口（DescribeFirewallRules）用于查询实例的防火墙规则。
+     * @param {DescribeFirewallRulesRequest} req
+     * @param {function(string, DescribeFirewallRulesResponse):void} cb
      * @public
      */
-    DescribeBundles(req, cb) {
-        let resp = new DescribeBundlesResponse();
-        this.request("DescribeBundles", req, resp, cb);
+    DescribeFirewallRules(req, cb) {
+        let resp = new DescribeFirewallRulesResponse();
+        this.request("DescribeFirewallRules", req, resp, cb);
     }
 
 

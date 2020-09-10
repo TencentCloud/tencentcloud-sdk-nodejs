@@ -145,7 +145,7 @@ class AssumeRoleWithSAMLRequest extends  AbstractModel {
         this.RoleSessionName = null;
 
         /**
-         * 指定临时证书的有效期，单位：秒，默认 7200 秒，最长可设定有效期为 7200 秒
+         * 指定临时证书的有效期，单位：秒，默认 7200 秒，最长可设定有效期为 43200 秒
          * @type {number || null}
          */
         this.DurationSeconds = null;
@@ -373,7 +373,7 @@ class GetFederationTokenRequest extends  AbstractModel {
         this.Policy = null;
 
         /**
-         * 指定临时证书的有效期，单位：秒，默认1800秒，最长可设定有效期为7200秒。
+         * 指定临时证书的有效期，单位：秒，默认1800秒，主账号最长可设定有效期为7200秒，子账号最长可设定有效期为129600秒。
          * @type {number || null}
          */
         this.DurationSeconds = null;
@@ -403,19 +403,19 @@ class Credentials extends  AbstractModel {
         super();
 
         /**
-         * token
+         * token。token长度和绑定的策略有关，最长不超过4096字节。
          * @type {string || null}
          */
         this.Token = null;
 
         /**
-         * 临时证书密钥ID
+         * 临时证书密钥ID。最长不超过1024字节。
          * @type {string || null}
          */
         this.TmpSecretId = null;
 
         /**
-         * 临时证书密钥Key
+         * 临时证书密钥Key。最长不超过1024字节。
          * @type {string || null}
          */
         this.TmpSecretKey = null;

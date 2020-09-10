@@ -67,6 +67,49 @@ class DescribeBlueprintsResponse extends  AbstractModel {
 }
 
 /**
+ * DeleteFirewallRules请求参数结构体
+ * @class
+ */
+class DeleteFirewallRulesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 防火墙规则列表。
+         * @type {Array.<FirewallRule> || null}
+         */
+        this.FirewallRules = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.FirewallRules) {
+            this.FirewallRules = new Array();
+            for (let z in params.FirewallRules) {
+                let obj = new FirewallRule();
+                obj.deserialize(params.FirewallRules[z]);
+                this.FirewallRules.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * 描述了实例登录相关配置与信息。
  * @class
  */
@@ -372,18 +415,44 @@ class RebootInstancesResponse extends  AbstractModel {
 }
 
 /**
- * StopInstances请求参数结构体
+ * DescribeBundles请求参数结构体
  * @class
  */
-class StopInstancesRequest extends  AbstractModel {
+class DescribeBundlesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
+         * 套餐 ID 列表。
          * @type {Array.<string> || null}
          */
-        this.InstanceIds = null;
+        this.BundleIds = null;
+
+        /**
+         * 偏移量，默认为 0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为 20，最大值为 100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 过滤器列表。
+<li>bundle-id</li>按照【镜像 ID】进行过滤。
+类型：String
+必选：否
+<li>support-platform-type</li>按照【系统类型】进行过滤。
+取值： LINUX_UNIX（Linux/Unix系统）；WINDOWS（Windows 系统）
+类型：String
+必选：否
+每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 BundleIds 和 Filters。
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
 
     }
 
@@ -394,7 +463,18 @@ class StopInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.BundleIds = 'BundleIds' in params ? params.BundleIds : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -633,6 +713,62 @@ class Bundle extends  AbstractModel {
  * @class
  */
 class StartInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * DeleteFirewallRules返回参数结构体
+ * @class
+ */
+class DeleteFirewallRulesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RebootInstances请求参数结构体
+ * @class
+ */
+class RebootInstancesRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -1095,18 +1231,24 @@ class ResetInstanceResponse extends  AbstractModel {
 }
 
 /**
- * RebootInstances请求参数结构体
+ * CreateFirewallRules请求参数结构体
  * @class
  */
-class RebootInstancesRequest extends  AbstractModel {
+class CreateFirewallRulesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
-         * @type {Array.<string> || null}
+         * 实例 ID。
+         * @type {string || null}
          */
-        this.InstanceIds = null;
+        this.InstanceId = null;
+
+        /**
+         * 防火墙规则列表。
+         * @type {Array.<FirewallRule> || null}
+         */
+        this.FirewallRules = null;
 
     }
 
@@ -1117,7 +1259,213 @@ class RebootInstancesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.FirewallRules) {
+            this.FirewallRules = new Array();
+            for (let z in params.FirewallRules) {
+                let obj = new FirewallRule();
+                obj.deserialize(params.FirewallRules[z]);
+                this.FirewallRules.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * DescribeFirewallRules请求参数结构体
+ * @class
+ */
+class DescribeFirewallRulesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 偏移量，默认为 0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为 20，最大值为 100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * DescribeFirewallRules返回参数结构体
+ * @class
+ */
+class DescribeFirewallRulesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合条件的防火墙规则数量。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 防火墙规则详细信息列表。
+         * @type {Array.<FirewallRuleInfo> || null}
+         */
+        this.FirewallRuleSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.FirewallRuleSet) {
+            this.FirewallRuleSet = new Array();
+            for (let z in params.FirewallRuleSet) {
+                let obj = new FirewallRuleInfo();
+                obj.deserialize(params.FirewallRuleSet[z]);
+                this.FirewallRuleSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 描述防火墙规则信息。
+ * @class
+ */
+class FirewallRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 协议，取值：TCP，UDP，ALL。
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * 端口，取值：ALL，单独的端口，逗号分隔的离散端口，减号分隔的端口范围。
+         * @type {string || null}
+         */
+        this.Port = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Port = 'Port' in params ? params.Port : null;
+
+    }
+}
+
+/**
+ * 描述防火墙规则详细信息。
+ * @class
+ */
+class FirewallRuleInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用类型，取值：自定义，HTTP(80)，HTTPS(443)，Linux登录(22)，Windows登录(3389)，MySQL(3306)，SQL Server(1433)，全部TCP，全部UDP，ALL。
+         * @type {string || null}
+         */
+        this.AppType = null;
+
+        /**
+         * 协议，取值：TCP，UDP，ALL。
+         * @type {string || null}
+         */
+        this.Protocol = null;
+
+        /**
+         * 端口，取值：ALL，单独的端口，逗号分隔的离散端口，减号分隔的端口范围。
+         * @type {string || null}
+         */
+        this.Port = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppType = 'AppType' in params ? params.AppType : null;
+        this.Protocol = 'Protocol' in params ? params.Protocol : null;
+        this.Port = 'Port' in params ? params.Port : null;
+
+    }
+}
+
+/**
+ * CreateFirewallRules返回参数结构体
+ * @class
+ */
+class CreateFirewallRulesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1193,44 +1541,18 @@ class InternetAccessible extends  AbstractModel {
 }
 
 /**
- * DescribeBundles请求参数结构体
+ * StopInstances请求参数结构体
  * @class
  */
-class DescribeBundlesRequest extends  AbstractModel {
+class StopInstancesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 套餐 ID 列表。
+         * 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
          * @type {Array.<string> || null}
          */
-        this.BundleIds = null;
-
-        /**
-         * 偏移量，默认为 0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 返回数量，默认为 20，最大值为 100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/product/1207/47578)中的相关小节。
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 过滤器列表。
-<li>bundle-id</li>按照【镜像 ID】进行过滤。
-类型：String
-必选：否
-<li>support-platform-type</li>按照【系统类型】进行过滤。
-取值： LINUX_UNIX（Linux/Unix系统）；WINDOWS（Windows 系统）
-类型：String
-必选：否
-每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 BundleIds 和 Filters。
-         * @type {Array.<Filter> || null}
-         */
-        this.Filters = null;
+        this.InstanceIds = null;
 
     }
 
@@ -1241,33 +1563,25 @@ class DescribeBundlesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BundleIds = 'BundleIds' in params ? params.BundleIds : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
-        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
 
 module.exports = {
     DescribeBlueprintsResponse: DescribeBlueprintsResponse,
+    DeleteFirewallRulesRequest: DeleteFirewallRulesRequest,
     LoginSettings: LoginSettings,
     StartInstancesResponse: StartInstancesResponse,
     Instance: Instance,
     RebootInstancesResponse: RebootInstancesResponse,
-    StopInstancesRequest: StopInstancesRequest,
+    DescribeBundlesRequest: DescribeBundlesRequest,
     Blueprint: Blueprint,
     Price: Price,
     Bundle: Bundle,
     StartInstancesRequest: StartInstancesRequest,
+    DeleteFirewallRulesResponse: DeleteFirewallRulesResponse,
+    RebootInstancesRequest: RebootInstancesRequest,
     DescribeBlueprintsRequest: DescribeBlueprintsRequest,
     DescribeInstancesResponse: DescribeInstancesResponse,
     InstancePrice: InstancePrice,
@@ -1277,9 +1591,14 @@ module.exports = {
     DescribeInstancesRequest: DescribeInstancesRequest,
     Filter: Filter,
     ResetInstanceResponse: ResetInstanceResponse,
-    RebootInstancesRequest: RebootInstancesRequest,
+    CreateFirewallRulesRequest: CreateFirewallRulesRequest,
+    DescribeFirewallRulesRequest: DescribeFirewallRulesRequest,
+    DescribeFirewallRulesResponse: DescribeFirewallRulesResponse,
+    FirewallRule: FirewallRule,
+    FirewallRuleInfo: FirewallRuleInfo,
+    CreateFirewallRulesResponse: CreateFirewallRulesResponse,
     StopInstancesResponse: StopInstancesResponse,
     InternetAccessible: InternetAccessible,
-    DescribeBundlesRequest: DescribeBundlesRequest,
+    StopInstancesRequest: StopInstancesRequest,
 
 }

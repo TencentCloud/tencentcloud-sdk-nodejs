@@ -287,6 +287,41 @@ class InstanceSpec extends  AbstractModel {
 }
 
 /**
+ * SetRenewFlag返回参数结构体
+ * @class
+ */
+class SetRenewFlagResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 操作成功实例数
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Count = 'Count' in params ? params.Count : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 数据库账号信息
  * @class
  */
@@ -1049,36 +1084,198 @@ class UpgradeInstanceRequest extends  AbstractModel {
 }
 
 /**
- * 查询过滤器
+ * 实例详情
  * @class
  */
-class QueryFilter extends  AbstractModel {
+class CynosdbInstanceDetail extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 搜索字段，目前支持："InstanceId", "ProjectId", "InstanceName", "Vip"
-         * @type {Array.<string> || null}
-         */
-        this.Names = null;
-
-        /**
-         * 搜索字符串
-         * @type {Array.<string> || null}
-         */
-        this.Values = null;
-
-        /**
-         * 是否精确匹配
-         * @type {boolean || null}
-         */
-        this.ExactMatch = null;
-
-        /**
-         * 搜索字段
+         * 用户Uin
          * @type {string || null}
          */
-        this.Name = null;
+        this.Uin = null;
+
+        /**
+         * 用户AppId
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 集群名称
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 实例名称
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 项目ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 地域
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 可用区
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 实例状态
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 实例状态中文描述
+         * @type {string || null}
+         */
+        this.StatusDesc = null;
+
+        /**
+         * 数据库类型
+         * @type {string || null}
+         */
+        this.DbType = null;
+
+        /**
+         * 数据库版本
+         * @type {string || null}
+         */
+        this.DbVersion = null;
+
+        /**
+         * Cpu，单位：核
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * 内存，单位：GB
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * 存储量，单位：GB
+         * @type {number || null}
+         */
+        this.Storage = null;
+
+        /**
+         * 实例类型
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * 实例当前角色
+         * @type {string || null}
+         */
+        this.InstanceRole = null;
+
+        /**
+         * 更新时间
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 付费模式
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * 实例过期时间
+         * @type {string || null}
+         */
+        this.PeriodEndTime = null;
+
+        /**
+         * 网络类型
+         * @type {number || null}
+         */
+        this.NetType = null;
+
+        /**
+         * VPC网络ID
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 子网ID
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 实例内网IP
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * 实例内网端口
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+        /**
+         * 实例外网域名
+         * @type {string || null}
+         */
+        this.WanDomain = null;
+
+        /**
+         * 字符集
+         * @type {string || null}
+         */
+        this.Charset = null;
+
+        /**
+         * Cynos内核版本
+         * @type {string || null}
+         */
+        this.CynosVersion = null;
+
+        /**
+         * 续费标志
+         * @type {number || null}
+         */
+        this.RenewFlag = null;
 
     }
 
@@ -1089,10 +1286,37 @@ class QueryFilter extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Names = 'Names' in params ? params.Names : null;
-        this.Values = 'Values' in params ? params.Values : null;
-        this.ExactMatch = 'ExactMatch' in params ? params.ExactMatch : null;
-        this.Name = 'Name' in params ? params.Name : null;
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
+        this.DbType = 'DbType' in params ? params.DbType : null;
+        this.DbVersion = 'DbVersion' in params ? params.DbVersion : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.InstanceRole = 'InstanceRole' in params ? params.InstanceRole : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.PeriodEndTime = 'PeriodEndTime' in params ? params.PeriodEndTime : null;
+        this.NetType = 'NetType' in params ? params.NetType : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
+        this.WanDomain = 'WanDomain' in params ? params.WanDomain : null;
+        this.Charset = 'Charset' in params ? params.Charset : null;
+        this.CynosVersion = 'CynosVersion' in params ? params.CynosVersion : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
 
     }
 }
@@ -1562,6 +1786,34 @@ class DescribeRollbackTimeValidityResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeInstanceDetail请求参数结构体
+ * @class
+ */
+class DescribeInstanceDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * ModifyMaintainPeriodConfig返回参数结构体
  * @class
  */
@@ -1675,6 +1927,55 @@ class DescribeBackupListRequest extends  AbstractModel {
 }
 
 /**
+ * 查询过滤器
+ * @class
+ */
+class QueryFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 搜索字段，目前支持："InstanceId", "ProjectId", "InstanceName", "Vip"
+         * @type {Array.<string> || null}
+         */
+        this.Names = null;
+
+        /**
+         * 搜索字符串
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+        /**
+         * 是否精确匹配
+         * @type {boolean || null}
+         */
+        this.ExactMatch = null;
+
+        /**
+         * 搜索字段
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Names = 'Names' in params ? params.Names : null;
+        this.Values = 'Values' in params ? params.Values : null;
+        this.ExactMatch = 'ExactMatch' in params ? params.ExactMatch : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
  * DescribeAccounts返回参数结构体
  * @class
  */
@@ -1713,6 +2014,81 @@ class DescribeAccountsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeInstanceDetail返回参数结构体
+ * @class
+ */
+class DescribeInstanceDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例详情
+         * @type {CynosdbInstanceDetail || null}
+         */
+        this.Detail = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Detail) {
+            let obj = new CynosdbInstanceDetail();
+            obj.deserialize(params.Detail)
+            this.Detail = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * OfflineInstance请求参数结构体
+ * @class
+ */
+class OfflineInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 实例ID数组
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIdList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.InstanceIdList = 'InstanceIdList' in params ? params.InstanceIdList : null;
 
     }
 }
@@ -2492,18 +2868,18 @@ class DescribeClusterDetailResponse extends  AbstractModel {
 }
 
 /**
- * SetRenewFlag返回参数结构体
+ * OfflineInstance返回参数结构体
  * @class
  */
-class SetRenewFlagResponse extends  AbstractModel {
+class OfflineInstanceResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 操作成功实例数
+         * 任务流ID
          * @type {number || null}
          */
-        this.Count = null;
+        this.FlowId = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2520,7 +2896,7 @@ class SetRenewFlagResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Count = 'Count' in params ? params.Count : null;
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2717,6 +3093,7 @@ module.exports = {
     Addr: Addr,
     DescribeClustersRequest: DescribeClustersRequest,
     InstanceSpec: InstanceSpec,
+    SetRenewFlagResponse: SetRenewFlagResponse,
     Account: Account,
     ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
     DescribeBackupConfigRequest: DescribeBackupConfigRequest,
@@ -2733,17 +3110,21 @@ module.exports = {
     AddInstancesRequest: AddInstancesRequest,
     DescribeClusterDetailRequest: DescribeClusterDetailRequest,
     UpgradeInstanceRequest: UpgradeInstanceRequest,
-    QueryFilter: QueryFilter,
+    CynosdbInstanceDetail: CynosdbInstanceDetail,
     DescribeMaintainPeriodRequest: DescribeMaintainPeriodRequest,
     OfflineClusterRequest: OfflineClusterRequest,
     CynosdbClusterDetail: CynosdbClusterDetail,
     ClusterInstanceDetail: ClusterInstanceDetail,
     BackupFileInfo: BackupFileInfo,
     DescribeRollbackTimeValidityResponse: DescribeRollbackTimeValidityResponse,
+    DescribeInstanceDetailRequest: DescribeInstanceDetailRequest,
     ModifyMaintainPeriodConfigResponse: ModifyMaintainPeriodConfigResponse,
     IsolateInstanceResponse: IsolateInstanceResponse,
     DescribeBackupListRequest: DescribeBackupListRequest,
+    QueryFilter: QueryFilter,
     DescribeAccountsResponse: DescribeAccountsResponse,
+    DescribeInstanceDetailResponse: DescribeInstanceDetailResponse,
+    OfflineInstanceRequest: OfflineInstanceRequest,
     OfflineClusterResponse: OfflineClusterResponse,
     DescribeInstanceSpecsResponse: DescribeInstanceSpecsResponse,
     ObjectTask: ObjectTask,
@@ -2754,7 +3135,7 @@ module.exports = {
     CreateClustersRequest: CreateClustersRequest,
     CynosdbCluster: CynosdbCluster,
     DescribeClusterDetailResponse: DescribeClusterDetailResponse,
-    SetRenewFlagResponse: SetRenewFlagResponse,
+    OfflineInstanceResponse: OfflineInstanceResponse,
     DescribeClustersResponse: DescribeClustersResponse,
     ModifyBackupConfigResponse: ModifyBackupConfigResponse,
     DescribeBackupConfigResponse: DescribeBackupConfigResponse,
