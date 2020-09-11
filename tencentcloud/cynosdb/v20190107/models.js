@@ -287,6 +287,34 @@ class InstanceSpec extends  AbstractModel {
 }
 
 /**
+ * DescribeProjectSecurityGroups请求参数结构体
+ * @class
+ */
+class DescribeProjectSecurityGroupsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 项目ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
  * SetRenewFlag返回参数结构体
  * @class
  */
@@ -378,6 +406,92 @@ class Account extends  AbstractModel {
 }
 
 /**
+ * 安全组详情
+ * @class
+ */
+class SecurityGroup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 项目ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 创建时间，时间格式：yyyy-mm-dd hh:mm:ss
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 入站规则
+         * @type {Array.<PolicyRule> || null}
+         */
+        this.Inbound = null;
+
+        /**
+         * 出站规则
+         * @type {Array.<PolicyRule> || null}
+         */
+        this.Outbound = null;
+
+        /**
+         * 安全组ID
+         * @type {string || null}
+         */
+        this.SecurityGroupId = null;
+
+        /**
+         * 安全组名称
+         * @type {string || null}
+         */
+        this.SecurityGroupName = null;
+
+        /**
+         * 安全组备注
+         * @type {string || null}
+         */
+        this.SecurityGroupRemark = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+        if (params.Inbound) {
+            this.Inbound = new Array();
+            for (let z in params.Inbound) {
+                let obj = new PolicyRule();
+                obj.deserialize(params.Inbound[z]);
+                this.Inbound.push(obj);
+            }
+        }
+
+        if (params.Outbound) {
+            this.Outbound = new Array();
+            for (let z in params.Outbound) {
+                let obj = new PolicyRule();
+                obj.deserialize(params.Outbound[z]);
+                this.Outbound.push(obj);
+            }
+        }
+        this.SecurityGroupId = 'SecurityGroupId' in params ? params.SecurityGroupId : null;
+        this.SecurityGroupName = 'SecurityGroupName' in params ? params.SecurityGroupName : null;
+        this.SecurityGroupRemark = 'SecurityGroupRemark' in params ? params.SecurityGroupRemark : null;
+
+    }
+}
+
+/**
  * ModifyDBInstanceSecurityGroups返回参数结构体
  * @class
  */
@@ -410,6 +524,34 @@ class ModifyDBInstanceSecurityGroupsResponse extends  AbstractModel {
  * @class
  */
 class DescribeBackupConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
+ * DescribeClusterInstanceGrps请求参数结构体
+ * @class
+ */
+class DescribeClusterInstanceGrpsRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -773,18 +915,18 @@ class ModifyBackupConfigRequest extends  AbstractModel {
 }
 
 /**
- * DescribeRollbackTimeRange请求参数结构体
+ * DescribeDBSecurityGroups请求参数结构体
  * @class
  */
-class DescribeRollbackTimeRangeRequest extends  AbstractModel {
+class DescribeDBSecurityGroupsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 集群ID
+         * 实例组ID
          * @type {string || null}
          */
-        this.ClusterId = null;
+        this.InstanceId = null;
 
     }
 
@@ -795,7 +937,7 @@ class DescribeRollbackTimeRangeRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
 
     }
 }
@@ -874,6 +1016,56 @@ class IsolateClusterRequest extends  AbstractModel {
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.DbType = 'DbType' in params ? params.DbType : null;
+
+    }
+}
+
+/**
+ * DescribeClusterInstanceGrps返回参数结构体
+ * @class
+ */
+class DescribeClusterInstanceGrpsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例组个数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 实例组列表
+         * @type {Array.<CynosdbInstanceGrp> || null}
+         */
+        this.InstanceGrpInfoList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.InstanceGrpInfoList) {
+            this.InstanceGrpInfoList = new Array();
+            for (let z in params.InstanceGrpInfoList) {
+                let obj = new CynosdbInstanceGrp();
+                obj.deserialize(params.InstanceGrpInfoList[z]);
+                this.InstanceGrpInfoList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1079,6 +1271,49 @@ class UpgradeInstanceRequest extends  AbstractModel {
         this.StorageLimit = 'StorageLimit' in params ? params.StorageLimit : null;
         this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
         this.DbType = 'DbType' in params ? params.DbType : null;
+
+    }
+}
+
+/**
+ * DescribeProjectSecurityGroups返回参数结构体
+ * @class
+ */
+class DescribeProjectSecurityGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 安全组详情
+         * @type {Array.<SecurityGroup> || null}
+         */
+        this.Groups = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Groups) {
+            this.Groups = new Array();
+            for (let z in params.Groups) {
+                let obj = new SecurityGroup();
+                obj.deserialize(params.Groups[z]);
+                this.Groups.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1317,6 +1552,49 @@ class CynosdbInstanceDetail extends  AbstractModel {
         this.Charset = 'Charset' in params ? params.Charset : null;
         this.CynosVersion = 'CynosVersion' in params ? params.CynosVersion : null;
         this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+
+    }
+}
+
+/**
+ * DescribeDBSecurityGroups返回参数结构体
+ * @class
+ */
+class DescribeDBSecurityGroupsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 安全组信息
+         * @type {Array.<SecurityGroup> || null}
+         */
+        this.Groups = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Groups) {
+            this.Groups = new Array();
+            for (let z in params.Groups) {
+                let obj = new SecurityGroup();
+                obj.deserialize(params.Groups[z]);
+                this.Groups.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1976,6 +2254,286 @@ class QueryFilter extends  AbstractModel {
 }
 
 /**
+ * 实例信息
+ * @class
+ */
+class CynosdbInstance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用户Uin
+         * @type {string || null}
+         */
+        this.Uin = null;
+
+        /**
+         * 用户AppId
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 集群名称
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 实例名称
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 项目ID
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 地域
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 可用区
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 实例状态
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 实例状态中文描述
+         * @type {string || null}
+         */
+        this.StatusDesc = null;
+
+        /**
+         * 数据库类型
+         * @type {string || null}
+         */
+        this.DbType = null;
+
+        /**
+         * 数据库版本
+         * @type {string || null}
+         */
+        this.DbVersion = null;
+
+        /**
+         * Cpu，单位：核
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * 内存，单位：GB
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * 存储量，单位：GB
+         * @type {number || null}
+         */
+        this.Storage = null;
+
+        /**
+         * 实例类型
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * 实例当前角色
+         * @type {string || null}
+         */
+        this.InstanceRole = null;
+
+        /**
+         * 更新时间
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * VPC网络ID
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 子网ID
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 实例内网IP
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * 实例内网端口
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+        /**
+         * 付费模式
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * 实例过期时间
+         * @type {string || null}
+         */
+        this.PeriodEndTime = null;
+
+        /**
+         * 销毁期限
+         * @type {string || null}
+         */
+        this.DestroyDeadlineText = null;
+
+        /**
+         * 隔离时间
+         * @type {string || null}
+         */
+        this.IsolateTime = null;
+
+        /**
+         * 网络类型
+         * @type {number || null}
+         */
+        this.NetType = null;
+
+        /**
+         * 外网域名
+         * @type {string || null}
+         */
+        this.WanDomain = null;
+
+        /**
+         * 外网IP
+         * @type {string || null}
+         */
+        this.WanIP = null;
+
+        /**
+         * 外网端口
+         * @type {number || null}
+         */
+        this.WanPort = null;
+
+        /**
+         * 外网状态
+         * @type {string || null}
+         */
+        this.WanStatus = null;
+
+        /**
+         * 实例销毁时间
+         * @type {string || null}
+         */
+        this.DestroyTime = null;
+
+        /**
+         * Cynos内核版本
+         * @type {string || null}
+         */
+        this.CynosVersion = null;
+
+        /**
+         * 正在处理的任务
+         * @type {string || null}
+         */
+        this.ProcessingTask = null;
+
+        /**
+         * 续费标志
+         * @type {number || null}
+         */
+        this.RenewFlag = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Uin = 'Uin' in params ? params.Uin : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StatusDesc = 'StatusDesc' in params ? params.StatusDesc : null;
+        this.DbType = 'DbType' in params ? params.DbType : null;
+        this.DbVersion = 'DbVersion' in params ? params.DbVersion : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.Storage = 'Storage' in params ? params.Storage : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.InstanceRole = 'InstanceRole' in params ? params.InstanceRole : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.PeriodEndTime = 'PeriodEndTime' in params ? params.PeriodEndTime : null;
+        this.DestroyDeadlineText = 'DestroyDeadlineText' in params ? params.DestroyDeadlineText : null;
+        this.IsolateTime = 'IsolateTime' in params ? params.IsolateTime : null;
+        this.NetType = 'NetType' in params ? params.NetType : null;
+        this.WanDomain = 'WanDomain' in params ? params.WanDomain : null;
+        this.WanIP = 'WanIP' in params ? params.WanIP : null;
+        this.WanPort = 'WanPort' in params ? params.WanPort : null;
+        this.WanStatus = 'WanStatus' in params ? params.WanStatus : null;
+        this.DestroyTime = 'DestroyTime' in params ? params.DestroyTime : null;
+        this.CynosVersion = 'CynosVersion' in params ? params.CynosVersion : null;
+        this.ProcessingTask = 'ProcessingTask' in params ? params.ProcessingTask : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+
+    }
+}
+
+/**
  * DescribeAccounts返回参数结构体
  * @class
  */
@@ -2089,6 +2647,34 @@ class OfflineInstanceRequest extends  AbstractModel {
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.InstanceIdList = 'InstanceIdList' in params ? params.InstanceIdList : null;
+
+    }
+}
+
+/**
+ * DescribeRollbackTimeRange请求参数结构体
+ * @class
+ */
+class DescribeRollbackTimeRangeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -2257,6 +2843,83 @@ class DescribeInstanceSpecsRequest extends  AbstractModel {
             return;
         }
         this.DbType = 'DbType' in params ? params.DbType : null;
+
+    }
+}
+
+/**
+ * 安全组规则
+ * @class
+ */
+class PolicyRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 策略，ACCEPT或者DROP
+         * @type {string || null}
+         */
+        this.Action = null;
+
+        /**
+         * 来源Ip或Ip段，例如192.168.0.0/16
+         * @type {string || null}
+         */
+        this.CidrIp = null;
+
+        /**
+         * 端口
+         * @type {string || null}
+         */
+        this.PortRange = null;
+
+        /**
+         * 网络协议，支持udp、tcp等
+         * @type {string || null}
+         */
+        this.IpProtocol = null;
+
+        /**
+         * 协议端口ID或者协议端口组ID。
+         * @type {string || null}
+         */
+        this.ServiceModule = null;
+
+        /**
+         * IP地址ID或者ID地址组ID。
+         * @type {string || null}
+         */
+        this.AddressModule = null;
+
+        /**
+         * id
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 描述
+         * @type {string || null}
+         */
+        this.Desc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Action = 'Action' in params ? params.Action : null;
+        this.CidrIp = 'CidrIp' in params ? params.CidrIp : null;
+        this.PortRange = 'PortRange' in params ? params.PortRange : null;
+        this.IpProtocol = 'IpProtocol' in params ? params.IpProtocol : null;
+        this.ServiceModule = 'ServiceModule' in params ? params.ServiceModule : null;
+        this.AddressModule = 'AddressModule' in params ? params.AddressModule : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Desc = 'Desc' in params ? params.Desc : null;
 
     }
 }
@@ -2903,6 +3566,140 @@ class OfflineInstanceResponse extends  AbstractModel {
 }
 
 /**
+ * 实例组信息
+ * @class
+ */
+class CynosdbInstanceGrp extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * appId
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * 删除时间
+         * @type {string || null}
+         */
+        this.DeletedTime = null;
+
+        /**
+         * 实例组ID
+         * @type {string || null}
+         */
+        this.InstanceGrpId = null;
+
+        /**
+         * 状态
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 实例组类型。ha-ha组；ro-只读组
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 更新时间
+         * @type {string || null}
+         */
+        this.UpdatedTime = null;
+
+        /**
+         * 内网IP
+         * @type {string || null}
+         */
+        this.Vip = null;
+
+        /**
+         * 内网端口
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+        /**
+         * 外网域名
+         * @type {string || null}
+         */
+        this.WanDomain = null;
+
+        /**
+         * 外网ip
+         * @type {string || null}
+         */
+        this.WanIP = null;
+
+        /**
+         * 外网端口
+         * @type {number || null}
+         */
+        this.WanPort = null;
+
+        /**
+         * 外网状态
+         * @type {string || null}
+         */
+        this.WanStatus = null;
+
+        /**
+         * 实例组包含实例信息
+         * @type {Array.<CynosdbInstance> || null}
+         */
+        this.InstanceSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.DeletedTime = 'DeletedTime' in params ? params.DeletedTime : null;
+        this.InstanceGrpId = 'InstanceGrpId' in params ? params.InstanceGrpId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.UpdatedTime = 'UpdatedTime' in params ? params.UpdatedTime : null;
+        this.Vip = 'Vip' in params ? params.Vip : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
+        this.WanDomain = 'WanDomain' in params ? params.WanDomain : null;
+        this.WanIP = 'WanIP' in params ? params.WanIP : null;
+        this.WanPort = 'WanPort' in params ? params.WanPort : null;
+        this.WanStatus = 'WanStatus' in params ? params.WanStatus : null;
+
+        if (params.InstanceSet) {
+            this.InstanceSet = new Array();
+            for (let z in params.InstanceSet) {
+                let obj = new CynosdbInstance();
+                obj.deserialize(params.InstanceSet[z]);
+                this.InstanceSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DescribeClusters返回参数结构体
  * @class
  */
@@ -3093,10 +3890,13 @@ module.exports = {
     Addr: Addr,
     DescribeClustersRequest: DescribeClustersRequest,
     InstanceSpec: InstanceSpec,
+    DescribeProjectSecurityGroupsRequest: DescribeProjectSecurityGroupsRequest,
     SetRenewFlagResponse: SetRenewFlagResponse,
     Account: Account,
+    SecurityGroup: SecurityGroup,
     ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
     DescribeBackupConfigRequest: DescribeBackupConfigRequest,
+    DescribeClusterInstanceGrpsRequest: DescribeClusterInstanceGrpsRequest,
     DescribeAccountsRequest: DescribeAccountsRequest,
     IsolateInstanceRequest: IsolateInstanceRequest,
     DescribeMaintainPeriodResponse: DescribeMaintainPeriodResponse,
@@ -3104,13 +3904,16 @@ module.exports = {
     DescribeRollbackTimeRangeResponse: DescribeRollbackTimeRangeResponse,
     ModifyMaintainPeriodConfigRequest: ModifyMaintainPeriodConfigRequest,
     ModifyBackupConfigRequest: ModifyBackupConfigRequest,
-    DescribeRollbackTimeRangeRequest: DescribeRollbackTimeRangeRequest,
+    DescribeDBSecurityGroupsRequest: DescribeDBSecurityGroupsRequest,
     DescribeRollbackTimeValidityRequest: DescribeRollbackTimeValidityRequest,
     IsolateClusterRequest: IsolateClusterRequest,
+    DescribeClusterInstanceGrpsResponse: DescribeClusterInstanceGrpsResponse,
     AddInstancesRequest: AddInstancesRequest,
     DescribeClusterDetailRequest: DescribeClusterDetailRequest,
     UpgradeInstanceRequest: UpgradeInstanceRequest,
+    DescribeProjectSecurityGroupsResponse: DescribeProjectSecurityGroupsResponse,
     CynosdbInstanceDetail: CynosdbInstanceDetail,
+    DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
     DescribeMaintainPeriodRequest: DescribeMaintainPeriodRequest,
     OfflineClusterRequest: OfflineClusterRequest,
     CynosdbClusterDetail: CynosdbClusterDetail,
@@ -3122,13 +3925,16 @@ module.exports = {
     IsolateInstanceResponse: IsolateInstanceResponse,
     DescribeBackupListRequest: DescribeBackupListRequest,
     QueryFilter: QueryFilter,
+    CynosdbInstance: CynosdbInstance,
     DescribeAccountsResponse: DescribeAccountsResponse,
     DescribeInstanceDetailResponse: DescribeInstanceDetailResponse,
     OfflineInstanceRequest: OfflineInstanceRequest,
+    DescribeRollbackTimeRangeRequest: DescribeRollbackTimeRangeRequest,
     OfflineClusterResponse: OfflineClusterResponse,
     DescribeInstanceSpecsResponse: DescribeInstanceSpecsResponse,
     ObjectTask: ObjectTask,
     DescribeInstanceSpecsRequest: DescribeInstanceSpecsRequest,
+    PolicyRule: PolicyRule,
     IsolateClusterResponse: IsolateClusterResponse,
     CreateClustersResponse: CreateClustersResponse,
     SetRenewFlagRequest: SetRenewFlagRequest,
@@ -3136,6 +3942,7 @@ module.exports = {
     CynosdbCluster: CynosdbCluster,
     DescribeClusterDetailResponse: DescribeClusterDetailResponse,
     OfflineInstanceResponse: OfflineInstanceResponse,
+    CynosdbInstanceGrp: CynosdbInstanceGrp,
     DescribeClustersResponse: DescribeClustersResponse,
     ModifyBackupConfigResponse: ModifyBackupConfigResponse,
     DescribeBackupConfigResponse: DescribeBackupConfigResponse,
