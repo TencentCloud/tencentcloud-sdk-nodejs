@@ -2162,7 +2162,7 @@ class DescribeBillBandwidthAndFluxListRequest extends  AbstractModel {
         this.StartTime = null;
 
         /**
-         * 结束时间点，格式为yyyy-mm-dd HH:MM:SS，起始和结束时间跨度不支持超过31天。
+         * 结束时间点，格式为yyyy-mm-dd HH:MM:SS，起始和结束时间跨度不支持超过31天。支持最近3年的数据查询
          * @type {string || null}
          */
         this.EndTime = null;
@@ -6088,7 +6088,7 @@ class DescribeStreamDayPlayInfoListRequest extends  AbstractModel {
 
         /**
          * 日期，格式：YYYY-mm-dd。
-第二天凌晨3点出昨天的数据，建议在这个时间点之后查询最新数据。
+第二天凌晨3点出昨天的数据，建议在这个时间点之后查询最新数据。支持最近3个月的数据查询。
          * @type {string || null}
          */
         this.DayTime = null;
@@ -9900,15 +9900,14 @@ class DescribeStreamPlayInfoListRequest extends  AbstractModel {
         super();
 
         /**
-         * 开始时间，北京时间，格式为yyyy-mm-dd HH:MM:SS，
-当前时间 和 开始时间 间隔不超过30天。
+         * 开始时间，北京时间，格式为yyyy-mm-dd HH:MM:SS
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
          * 结束时间，北京时间，格式为yyyy-mm-dd HH:MM:SS，
-结束时间 和 开始时间  必须在同一天内。
+结束时间 和 开始时间  必须在同一天内，支持距当前时间30天内的数据查询。
          * @type {string || null}
          */
         this.EndTime = null;

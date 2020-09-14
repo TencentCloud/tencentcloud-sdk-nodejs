@@ -4129,6 +4129,12 @@ global：全球加速
          */
         this.OriginPullTimeout = null;
 
+        /**
+         * 标签配置
+         * @type {Array.<Tag> || null}
+         */
+        this.Tag = null;
+
     }
 
     /**
@@ -4299,6 +4305,15 @@ global：全球加速
             this.OriginPullTimeout = obj;
         }
 
+        if (params.Tag) {
+            this.Tag = new Array();
+            for (let z in params.Tag) {
+                let obj = new Tag();
+                obj.deserialize(params.Tag[z]);
+                this.Tag.push(obj);
+            }
+        }
+
     }
 }
 
@@ -4360,24 +4375,26 @@ path: 根据完整访问路径生效
 }
 
 /**
- * 排序类型的数据结构
+ * 域名标签配置
  * @class
  */
-class TopDetailData extends  AbstractModel {
+class Tag extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 数据类型的名称
+         * 标签键
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Name = null;
+        this.TagKey = null;
 
         /**
-         * 数据值
-         * @type {number || null}
+         * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
          */
-        this.Value = null;
+        this.TagValue = null;
 
     }
 
@@ -4388,8 +4405,8 @@ class TopDetailData extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Value = 'Value' in params ? params.Value : null;
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
 
     }
 }
@@ -6215,6 +6232,13 @@ off：不支持
          */
         this.AccessPort = null;
 
+        /**
+         * 标签配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tag = null;
+
     }
 
     /**
@@ -6436,6 +6460,15 @@ off：不支持
             this.UrlRedirect = obj;
         }
         this.AccessPort = 'AccessPort' in params ? params.AccessPort : null;
+
+        if (params.Tag) {
+            this.Tag = new Array();
+            for (let z in params.Tag) {
+                let obj = new Tag();
+                obj.deserialize(params.Tag[z]);
+                this.Tag.push(obj);
+            }
+        }
 
     }
 }
@@ -10109,6 +10142,41 @@ class DescribePushQuotaRequest extends  AbstractModel {
 }
 
 /**
+ * 排序类型的数据结构
+ * @class
+ */
+class TopDetailData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据类型的名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 数据值
+         * @type {number || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * 源站头部缓存配置，默认为开启状态，缓存所有头部信息
  * @class
  */
@@ -12297,7 +12365,7 @@ module.exports = {
     OverseaConfig: OverseaConfig,
     AddCdnDomainRequest: AddCdnDomainRequest,
     UserAgentFilterRule: UserAgentFilterRule,
-    TopDetailData: TopDetailData,
+    Tag: Tag,
     CacheConfigFollowOrigin: CacheConfigFollowOrigin,
     MaxAgeRule: MaxAgeRule,
     DescribePayTypeRequest: DescribePayTypeRequest,
@@ -12394,6 +12462,7 @@ module.exports = {
     TimestampData: TimestampData,
     StartCdnDomainResponse: StartCdnDomainResponse,
     DescribePushQuotaRequest: DescribePushQuotaRequest,
+    TopDetailData: TopDetailData,
     ResponseHeaderCache: ResponseHeaderCache,
     ResourceBillingData: ResourceBillingData,
     Sort: Sort,

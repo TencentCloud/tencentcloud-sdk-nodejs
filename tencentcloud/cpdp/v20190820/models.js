@@ -15042,6 +15042,18 @@ development: 开发环境
          */
         this.MidasEnvironment = null;
 
+        /**
+         * 微信商户应用ID
+         * @type {string || null}
+         */
+        this.WxAppId = null;
+
+        /**
+         * 微信商户子应用ID
+         * @type {string || null}
+         */
+        this.WxSubAppId = null;
+
     }
 
     /**
@@ -15082,6 +15094,8 @@ development: 开发环境
         this.WxOpenId = 'WxOpenId' in params ? params.WxOpenId : null;
         this.WxSubOpenId = 'WxSubOpenId' in params ? params.WxSubOpenId : null;
         this.MidasEnvironment = 'MidasEnvironment' in params ? params.MidasEnvironment : null;
+        this.WxAppId = 'WxAppId' in params ? params.WxAppId : null;
+        this.WxSubAppId = 'WxSubAppId' in params ? params.WxSubAppId : null;
 
     }
 }

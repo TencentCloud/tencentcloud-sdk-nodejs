@@ -176,7 +176,7 @@ class TiwClient extends AbstractClient {
     }
 
     /**
-     * 查询实时录制任务状态与结果
+     * 查询录制任务状态与结果
      * @param {DescribeOnlineRecordRequest} req
      * @param {function(string, DescribeOnlineRecordResponse):void} cb
      * @public
