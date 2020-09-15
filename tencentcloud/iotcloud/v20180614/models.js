@@ -261,6 +261,41 @@ class TopicRulePayload extends  AbstractModel {
 }
 
 /**
+ * DescribeFirmware请求参数结构体
+ * @class
+ */
+class DescribeFirmwareRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductID = null;
+
+        /**
+         * 固件版本号
+         * @type {string || null}
+         */
+        this.FirmwareVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductID = 'ProductID' in params ? params.ProductID : null;
+        this.FirmwareVersion = 'FirmwareVersion' in params ? params.FirmwareVersion : null;
+
+    }
+}
+
+/**
  * DescribeDevices返回参数结构体
  * @class
  */
@@ -828,6 +863,93 @@ class ProductProperties extends  AbstractModel {
 }
 
 /**
+ * 设备固件更新状态
+ * @class
+ */
+class DeviceUpdateStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设备名
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 最后处理时间
+         * @type {number || null}
+         */
+        this.LastProcessTime = null;
+
+        /**
+         * 状态
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 错误消息
+         * @type {string || null}
+         */
+        this.ErrMsg = null;
+
+        /**
+         * 返回码
+         * @type {number || null}
+         */
+        this.Retcode = null;
+
+        /**
+         * 目标更新版本
+         * @type {string || null}
+         */
+        this.DstVersion = null;
+
+        /**
+         * 下载中状态时的下载进度
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Percent = null;
+
+        /**
+         * 原版本号
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OriVersion = null;
+
+        /**
+         * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.LastProcessTime = 'LastProcessTime' in params ? params.LastProcessTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ErrMsg = 'ErrMsg' in params ? params.ErrMsg : null;
+        this.Retcode = 'Retcode' in params ? params.Retcode : null;
+        this.DstVersion = 'DstVersion' in params ? params.DstVersion : null;
+        this.Percent = 'Percent' in params ? params.Percent : null;
+        this.OriVersion = 'OriVersion' in params ? params.OriVersion : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
  * UpdateTopicPolicy返回参数结构体
  * @class
  */
@@ -968,6 +1090,43 @@ class DeleteProductRequest extends  AbstractModel {
 }
 
 /**
+ * 状态统计信息
+ * @class
+ */
+class StatusStatistic extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 统计总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Total = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Total = 'Total' in params ? params.Total : null;
+
+    }
+}
+
+/**
  * DescribeTasks请求参数结构体
  * @class
  */
@@ -1003,36 +1162,36 @@ class DescribeTasksRequest extends  AbstractModel {
 }
 
 /**
- * ReplaceTopicRule请求参数结构体
+ * EditFirmware请求参数结构体
  * @class
  */
-class ReplaceTopicRuleRequest extends  AbstractModel {
+class EditFirmwareRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 规则名称
+         * 产品ID。
          * @type {string || null}
          */
-        this.RuleName = null;
+        this.ProductID = null;
 
         /**
-         * 替换的规则包体
-         * @type {TopicRulePayload || null}
+         * 固件版本号。
+         * @type {string || null}
          */
-        this.TopicRulePayload = null;
+        this.FirmwareVersion = null;
 
         /**
-         * 修改类型，0：其他，1：创建行为，2：更新行为，3：删除行为
-         * @type {number || null}
+         * 固件名称。
+         * @type {string || null}
          */
-        this.ModifyType = null;
+        this.FirmwareName = null;
 
         /**
-         * action增删改变更填对应topicRulePayload里面第几个action
-         * @type {number || null}
+         * 固件描述
+         * @type {string || null}
          */
-        this.ActionIndex = null;
+        this.FirmwareDescription = null;
 
     }
 
@@ -1043,15 +1202,10 @@ class ReplaceTopicRuleRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RuleName = 'RuleName' in params ? params.RuleName : null;
-
-        if (params.TopicRulePayload) {
-            let obj = new TopicRulePayload();
-            obj.deserialize(params.TopicRulePayload)
-            this.TopicRulePayload = obj;
-        }
-        this.ModifyType = 'ModifyType' in params ? params.ModifyType : null;
-        this.ActionIndex = 'ActionIndex' in params ? params.ActionIndex : null;
+        this.ProductID = 'ProductID' in params ? params.ProductID : null;
+        this.FirmwareVersion = 'FirmwareVersion' in params ? params.FirmwareVersion : null;
+        this.FirmwareName = 'FirmwareName' in params ? params.FirmwareName : null;
+        this.FirmwareDescription = 'FirmwareDescription' in params ? params.FirmwareDescription : null;
 
     }
 }
@@ -1321,6 +1475,151 @@ class DeleteDeviceRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeFirmwareTaskDevices请求参数结构体
+ * @class
+ */
+class DescribeFirmwareTaskDevicesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductID = null;
+
+        /**
+         * 固件版本
+         * @type {string || null}
+         */
+        this.FirmwareVersion = null;
+
+        /**
+         * 筛选条件
+         * @type {Array.<SearchKeyword> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 查询偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 查询的数量
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductID = 'ProductID' in params ? params.ProductID : null;
+        this.FirmwareVersion = 'FirmwareVersion' in params ? params.FirmwareVersion : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new SearchKeyword();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * DescribeFirmware返回参数结构体
+ * @class
+ */
+class DescribeFirmwareResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 固件版本号
+         * @type {string || null}
+         */
+        this.Version = null;
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 固件名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 固件描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 固件Md5值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Md5sum = null;
+
+        /**
+         * 固件上传的秒级时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Createtime = null;
+
+        /**
+         * 产品名称
+         * @type {string || null}
+         */
+        this.ProductName = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Version = 'Version' in params ? params.Version : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Md5sum = 'Md5sum' in params ? params.Md5sum : null;
+        this.Createtime = 'Createtime' in params ? params.Createtime : null;
+        this.ProductName = 'ProductName' in params ? params.ProductName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateMultiDevicesTask请求参数结构体
  * @class
  */
@@ -1379,6 +1678,58 @@ class CreateMultiDevicesTaskRequest extends  AbstractModel {
         this.FileSize = 'FileSize' in params ? params.FileSize : null;
         this.BatchCount = 'BatchCount' in params ? params.BatchCount : null;
         this.Hash = 'Hash' in params ? params.Hash : null;
+
+    }
+}
+
+/**
+ * DescribeFirmwareTaskStatistics返回参数结构体
+ * @class
+ */
+class DescribeFirmwareTaskStatisticsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 升级成功的设备总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SuccessTotal = null;
+
+        /**
+         * 升级失败的设备总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FailureTotal = null;
+
+        /**
+         * 正在升级的设备总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.UpgradingTotal = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SuccessTotal = 'SuccessTotal' in params ? params.SuccessTotal : null;
+        this.FailureTotal = 'FailureTotal' in params ? params.FailureTotal : null;
+        this.UpgradingTotal = 'UpgradingTotal' in params ? params.UpgradingTotal : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1515,6 +1866,41 @@ class CreateProductResponse extends  AbstractModel {
 }
 
 /**
+ * CreateMultiDevice请求参数结构体
+ * @class
+ */
+class CreateMultiDeviceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品 ID。创建产品时腾讯云为用户分配全局唯一的 ID
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 批量创建的设备名数组，单次最多创建 100 个设备。命名规则：[a-zA-Z0-9:_-]{1,48}
+         * @type {Array.<string> || null}
+         */
+        this.DeviceNames = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DeviceNames = 'DeviceNames' in params ? params.DeviceNames : null;
+
+    }
+}
+
+/**
  * DeleteLoraDevice返回参数结构体
  * @class
  */
@@ -1646,6 +2032,58 @@ class DescribeAllDevicesRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeFirmwareTaskDevices返回参数结构体
+ * @class
+ */
+class DescribeFirmwareTaskDevicesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 固件升级任务的设备总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 固件升级任务的设备列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DeviceUpdateStatus> || null}
+         */
+        this.Devices = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.Devices) {
+            this.Devices = new Array();
+            for (let z in params.Devices) {
+                let obj = new DeviceUpdateStatus();
+                obj.deserialize(params.Devices[z]);
+                this.Devices.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 设备资源信息。
  * @class
  */
@@ -1699,30 +2137,12 @@ class DeviceProperty extends  AbstractModel {
 }
 
 /**
- * DescribeMultiDevices返回参数结构体
+ * PublishToDevice返回参数结构体
  * @class
  */
-class DescribeMultiDevicesResponse extends  AbstractModel {
+class PublishToDeviceResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 任务 ID，由批量创建设备接口返回
-         * @type {string || null}
-         */
-        this.TaskId = null;
-
-        /**
-         * 设备详细信息列表
-         * @type {Array.<MultiDevicesInfo> || null}
-         */
-        this.DevicesInfo = null;
-
-        /**
-         * 该任务创建设备的总数
-         * @type {number || null}
-         */
-        this.TotalDevNum = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1739,17 +2159,34 @@ class DescribeMultiDevicesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
-        if (params.DevicesInfo) {
-            this.DevicesInfo = new Array();
-            for (let z in params.DevicesInfo) {
-                let obj = new MultiDevicesInfo();
-                obj.deserialize(params.DevicesInfo[z]);
-                this.DevicesInfo.push(obj);
-            }
+    }
+}
+
+/**
+ * RetryDeviceFirmwareTask返回参数结构体
+ * @class
+ */
+class RetryDeviceFirmwareTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
-        this.TotalDevNum = 'TotalDevNum' in params ? params.TotalDevNum : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2006,6 +2443,90 @@ class DescribeProductTaskRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeFirmwareTask返回参数结构体
+ * @class
+ */
+class DescribeFirmwareTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 固件任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 固件任务状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 固件任务创建时间，单位:秒
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 固件任务升级类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * 产品名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProductName = null;
+
+        /**
+         * 固件任务升级模式。originalVersion（按版本号升级）、filename（提交文件升级）、devicenames（按设备名称升级）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UpgradeMode = null;
+
+        /**
+         * 产品ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.ProductName = 'ProductName' in params ? params.ProductName : null;
+        this.UpgradeMode = 'UpgradeMode' in params ? params.UpgradeMode : null;
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateProduct请求参数结构体
  * @class
  */
@@ -2048,6 +2569,70 @@ class CreateProductRequest extends  AbstractModel {
             this.ProductProperties = obj;
         }
         this.Skey = 'Skey' in params ? params.Skey : null;
+
+    }
+}
+
+/**
+ * DescribeFirmwareTasks请求参数结构体
+ * @class
+ */
+class DescribeFirmwareTasksRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductID = null;
+
+        /**
+         * 固件版本号
+         * @type {string || null}
+         */
+        this.FirmwareVersion = null;
+
+        /**
+         * 查询偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回查询结果条数
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 搜索过滤条件
+         * @type {Array.<SearchKeyword> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductID = 'ProductID' in params ? params.ProductID : null;
+        this.FirmwareVersion = 'FirmwareVersion' in params ? params.FirmwareVersion : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new SearchKeyword();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -2475,6 +3060,107 @@ class PublishMessageRequest extends  AbstractModel {
 }
 
 /**
+ * RetryDeviceFirmwareTask请求参数结构体
+ * @class
+ */
+class RetryDeviceFirmwareTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductID = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 固件版本号
+         * @type {string || null}
+         */
+        this.FirmwareVersion = null;
+
+        /**
+         * 固件升级任务ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductID = 'ProductID' in params ? params.ProductID : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.FirmwareVersion = 'FirmwareVersion' in params ? params.FirmwareVersion : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * DescribeFirmwareTasks返回参数结构体
+ * @class
+ */
+class DescribeFirmwareTasksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 固件升级任务列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<FirmwareTaskInfo> || null}
+         */
+        this.TaskInfos = null;
+
+        /**
+         * 固件升级任务总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TaskInfos) {
+            this.TaskInfos = new Array();
+            for (let z in params.TaskInfos) {
+                let obj = new FirmwareTaskInfo();
+                obj.deserialize(params.TaskInfos[z]);
+                this.TaskInfos.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 设备标签
  * @class
  */
@@ -2538,6 +3224,34 @@ class UpdateDeviceAvailableStateResponse extends  AbstractModel {
 }
 
 /**
+ * EditFirmware返回参数结构体
+ * @class
+ */
+class EditFirmwareResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CancelTask请求参数结构体
  * @class
  */
@@ -2561,6 +3275,48 @@ class CancelTaskRequest extends  AbstractModel {
             return;
         }
         this.Id = 'Id' in params ? params.Id : null;
+
+    }
+}
+
+/**
+ * DescribeFirmwareTaskDistribution请求参数结构体
+ * @class
+ */
+class DescribeFirmwareTaskDistributionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductID = null;
+
+        /**
+         * 固件版本号
+         * @type {string || null}
+         */
+        this.FirmwareVersion = null;
+
+        /**
+         * 固件升级任务ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductID = 'ProductID' in params ? params.ProductID : null;
+        this.FirmwareVersion = 'FirmwareVersion' in params ? params.FirmwareVersion : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -2713,6 +3469,34 @@ class PublishToDeviceRequest extends  AbstractModel {
 }
 
 /**
+ * UploadFirmware返回参数结构体
+ * @class
+ */
+class UploadFirmwareResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 产品详细信息
  * @class
  */
@@ -2767,6 +3551,49 @@ class ProductInfo extends  AbstractModel {
             obj.deserialize(params.ProductProperties)
             this.ProductProperties = obj;
         }
+
+    }
+}
+
+/**
+ * DescribeFirmwareTaskDistribution返回参数结构体
+ * @class
+ */
+class DescribeFirmwareTaskDistributionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 固件升级任务状态分布信息
+         * @type {Array.<StatusStatistic> || null}
+         */
+        this.StatusInfos = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.StatusInfos) {
+            this.StatusInfos = new Array();
+            for (let z in params.StatusInfos) {
+                let obj = new StatusStatistic();
+                obj.deserialize(params.StatusInfos[z]);
+                this.StatusInfos.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3139,6 +3966,60 @@ class ProductTaskInfo extends  AbstractModel {
 }
 
 /**
+ * ReplaceTopicRule请求参数结构体
+ * @class
+ */
+class ReplaceTopicRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 规则名称
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * 替换的规则包体
+         * @type {TopicRulePayload || null}
+         */
+        this.TopicRulePayload = null;
+
+        /**
+         * 修改类型，0：其他，1：创建行为，2：更新行为，3：删除行为
+         * @type {number || null}
+         */
+        this.ModifyType = null;
+
+        /**
+         * action增删改变更填对应topicRulePayload里面第几个action
+         * @type {number || null}
+         */
+        this.ActionIndex = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+
+        if (params.TopicRulePayload) {
+            let obj = new TopicRulePayload();
+            obj.deserialize(params.TopicRulePayload)
+            this.TopicRulePayload = obj;
+        }
+        this.ModifyType = 'ModifyType' in params ? params.ModifyType : null;
+        this.ActionIndex = 'ActionIndex' in params ? params.ActionIndex : null;
+
+    }
+}
+
+/**
  * PublishRRPCMessage返回参数结构体
  * @class
  */
@@ -3357,24 +4238,36 @@ class ReplaceTopicRuleResponse extends  AbstractModel {
 }
 
 /**
- * CreateMultiDevice请求参数结构体
+ * PublishAsDevice请求参数结构体
  * @class
  */
-class CreateMultiDeviceRequest extends  AbstractModel {
+class PublishAsDeviceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 产品 ID。创建产品时腾讯云为用户分配全局唯一的 ID
+         * 产品ID
          * @type {string || null}
          */
         this.ProductId = null;
 
         /**
-         * 批量创建的设备名数组，单次最多创建 100 个设备。命名规则：[a-zA-Z0-9:_-]{1,48}
-         * @type {Array.<string> || null}
+         * 设备名称
+         * @type {string || null}
          */
-        this.DeviceNames = null;
+        this.DeviceName = null;
+
+        /**
+         * LoRa 设备端口
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * 消息内容
+         * @type {string || null}
+         */
+        this.Payload = null;
 
     }
 
@@ -3386,16 +4279,67 @@ class CreateMultiDeviceRequest extends  AbstractModel {
             return;
         }
         this.ProductId = 'ProductId' in params ? params.ProductId : null;
-        this.DeviceNames = 'DeviceNames' in params ? params.DeviceNames : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Payload = 'Payload' in params ? params.Payload : null;
 
     }
 }
 
 /**
- * PublishToDevice返回参数结构体
+ * CancelDeviceFirmwareTask请求参数结构体
  * @class
  */
-class PublishToDeviceResponse extends  AbstractModel {
+class CancelDeviceFirmwareTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductID = null;
+
+        /**
+         * 设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
+        /**
+         * 固件版本号
+         * @type {string || null}
+         */
+        this.FirmwareVersion = null;
+
+        /**
+         * 固件升级任务ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductID = 'ProductID' in params ? params.ProductID : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
+        this.FirmwareVersion = 'FirmwareVersion' in params ? params.FirmwareVersion : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * CancelDeviceFirmwareTask返回参数结构体
+ * @class
+ */
+class CancelDeviceFirmwareTaskResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -3414,6 +4358,63 @@ class PublishToDeviceResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeMultiDevices返回参数结构体
+ * @class
+ */
+class DescribeMultiDevicesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务 ID，由批量创建设备接口返回
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 设备详细信息列表
+         * @type {Array.<MultiDevicesInfo> || null}
+         */
+        this.DevicesInfo = null;
+
+        /**
+         * 该任务创建设备的总数
+         * @type {number || null}
+         */
+        this.TotalDevNum = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+        if (params.DevicesInfo) {
+            this.DevicesInfo = new Array();
+            for (let z in params.DevicesInfo) {
+                let obj = new MultiDevicesInfo();
+                obj.deserialize(params.DevicesInfo[z]);
+                this.DevicesInfo.push(obj);
+            }
+        }
+        this.TotalDevNum = 'TotalDevNum' in params ? params.TotalDevNum : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4172,6 +5173,41 @@ class ResetDeviceResult extends  AbstractModel {
 }
 
 /**
+ * 搜索关键词
+ * @class
+ */
+class SearchKeyword extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 搜索条件的Key
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 搜索条件的值
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * DescribeDevices请求参数结构体
  * @class
  */
@@ -4263,6 +5299,69 @@ class DescribeDeviceClientKeyResponse extends  AbstractModel {
 }
 
 /**
+ * UploadFirmware请求参数结构体
+ * @class
+ */
+class UploadFirmwareRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductID = null;
+
+        /**
+         * 固件版本号
+         * @type {string || null}
+         */
+        this.FirmwareVersion = null;
+
+        /**
+         * 固件的MD5值
+         * @type {string || null}
+         */
+        this.Md5sum = null;
+
+        /**
+         * 固件的大小
+         * @type {number || null}
+         */
+        this.FileSize = null;
+
+        /**
+         * 固件名称
+         * @type {string || null}
+         */
+        this.FirmwareName = null;
+
+        /**
+         * 固件描述
+         * @type {string || null}
+         */
+        this.FirmwareDescription = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductID = 'ProductID' in params ? params.ProductID : null;
+        this.FirmwareVersion = 'FirmwareVersion' in params ? params.FirmwareVersion : null;
+        this.Md5sum = 'Md5sum' in params ? params.Md5sum : null;
+        this.FileSize = 'FileSize' in params ? params.FileSize : null;
+        this.FirmwareName = 'FirmwareName' in params ? params.FirmwareName : null;
+        this.FirmwareDescription = 'FirmwareDescription' in params ? params.FirmwareDescription : null;
+
+    }
+}
+
+/**
  * DisableTopicRule请求参数结构体
  * @class
  */
@@ -4341,6 +5440,59 @@ class ResetDeviceStateResponse extends  AbstractModel {
 }
 
 /**
+ * 固件升级任务信息
+ * @class
+ */
+class FirmwareTaskInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 任务状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 任务类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * 任务创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CreateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+    }
+}
+
+/**
  * CreateTopicRule返回参数结构体
  * @class
  */
@@ -4409,10 +5561,10 @@ class CreateTopicRuleRequest extends  AbstractModel {
 }
 
 /**
- * PublishAsDevice请求参数结构体
+ * DescribeFirmwareTaskStatistics请求参数结构体
  * @class
  */
-class PublishAsDeviceRequest extends  AbstractModel {
+class DescribeFirmwareTaskStatisticsRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -4420,25 +5572,13 @@ class PublishAsDeviceRequest extends  AbstractModel {
          * 产品ID
          * @type {string || null}
          */
-        this.ProductId = null;
+        this.ProductID = null;
 
         /**
-         * 设备名称
+         * 固件版本号
          * @type {string || null}
          */
-        this.DeviceName = null;
-
-        /**
-         * LoRa 设备端口
-         * @type {number || null}
-         */
-        this.Port = null;
-
-        /**
-         * 消息内容
-         * @type {string || null}
-         */
-        this.Payload = null;
+        this.FirmwareVersion = null;
 
     }
 
@@ -4449,10 +5589,8 @@ class PublishAsDeviceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProductId = 'ProductId' in params ? params.ProductId : null;
-        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
-        this.Port = 'Port' in params ? params.Port : null;
-        this.Payload = 'Payload' in params ? params.Payload : null;
+        this.ProductID = 'ProductID' in params ? params.ProductID : null;
+        this.FirmwareVersion = 'FirmwareVersion' in params ? params.FirmwareVersion : null;
 
     }
 }
@@ -4805,11 +5943,54 @@ class EnableTopicRuleRequest extends  AbstractModel {
     }
 }
 
+/**
+ * DescribeFirmwareTask请求参数结构体
+ * @class
+ */
+class DescribeFirmwareTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品ID
+         * @type {string || null}
+         */
+        this.ProductID = null;
+
+        /**
+         * 固件版本号
+         * @type {string || null}
+         */
+        this.FirmwareVersion = null;
+
+        /**
+         * 固件任务ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductID = 'ProductID' in params ? params.ProductID : null;
+        this.FirmwareVersion = 'FirmwareVersion' in params ? params.FirmwareVersion : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
 module.exports = {
     UnbindDevicesRequest: UnbindDevicesRequest,
     BindDevicesRequest: BindDevicesRequest,
     DescribeProductsRequest: DescribeProductsRequest,
     TopicRulePayload: TopicRulePayload,
+    DescribeFirmwareRequest: DescribeFirmwareRequest,
     DescribeDevicesResponse: DescribeDevicesResponse,
     DeleteTopicRuleResponse: DeleteTopicRuleResponse,
     Task: Task,
@@ -4822,44 +6003,60 @@ module.exports = {
     CreateMultiDeviceResponse: CreateMultiDeviceResponse,
     PublishRRPCMessageRequest: PublishRRPCMessageRequest,
     ProductProperties: ProductProperties,
+    DeviceUpdateStatus: DeviceUpdateStatus,
     UpdateTopicPolicyResponse: UpdateTopicPolicyResponse,
     TaskInfo: TaskInfo,
     DeleteProductRequest: DeleteProductRequest,
+    StatusStatistic: StatusStatistic,
     DescribeTasksRequest: DescribeTasksRequest,
-    ReplaceTopicRuleRequest: ReplaceTopicRuleRequest,
+    EditFirmwareRequest: EditFirmwareRequest,
     MultiDevicesInfo: MultiDevicesInfo,
     ResetDeviceStateRequest: ResetDeviceStateRequest,
     DescribeDeviceClientKeyRequest: DescribeDeviceClientKeyRequest,
     UpdateTopicPolicyRequest: UpdateTopicPolicyRequest,
     BatchUpdateShadow: BatchUpdateShadow,
     DeleteDeviceRequest: DeleteDeviceRequest,
+    DescribeFirmwareTaskDevicesRequest: DescribeFirmwareTaskDevicesRequest,
+    DescribeFirmwareResponse: DescribeFirmwareResponse,
     CreateMultiDevicesTaskRequest: CreateMultiDevicesTaskRequest,
+    DescribeFirmwareTaskStatisticsResponse: DescribeFirmwareTaskStatisticsResponse,
     CreateLoraDeviceRequest: CreateLoraDeviceRequest,
     CreateProductResponse: CreateProductResponse,
+    CreateMultiDeviceRequest: CreateMultiDeviceRequest,
     DeleteLoraDeviceResponse: DeleteLoraDeviceResponse,
     CreateTaskRequest: CreateTaskRequest,
     DescribeAllDevicesRequest: DescribeAllDevicesRequest,
+    DescribeFirmwareTaskDevicesResponse: DescribeFirmwareTaskDevicesResponse,
     DeviceProperty: DeviceProperty,
-    DescribeMultiDevicesResponse: DescribeMultiDevicesResponse,
+    PublishToDeviceResponse: PublishToDeviceResponse,
+    RetryDeviceFirmwareTaskResponse: RetryDeviceFirmwareTaskResponse,
     CreateDeviceResponse: CreateDeviceResponse,
     DeleteLoraDeviceRequest: DeleteLoraDeviceRequest,
     CreateDeviceRequest: CreateDeviceRequest,
     DescribeProductTaskRequest: DescribeProductTaskRequest,
+    DescribeFirmwareTaskResponse: DescribeFirmwareTaskResponse,
     CreateProductRequest: CreateProductRequest,
+    DescribeFirmwareTasksRequest: DescribeFirmwareTasksRequest,
     DisableTopicRuleResponse: DisableTopicRuleResponse,
     BrokerSubscribe: BrokerSubscribe,
     DescribeProductTaskResponse: DescribeProductTaskResponse,
     DescribeDeviceResponse: DescribeDeviceResponse,
     PublishBroadcastMessageRequest: PublishBroadcastMessageRequest,
     PublishMessageRequest: PublishMessageRequest,
+    RetryDeviceFirmwareTaskRequest: RetryDeviceFirmwareTaskRequest,
+    DescribeFirmwareTasksResponse: DescribeFirmwareTasksResponse,
     DeviceLabel: DeviceLabel,
     UpdateDeviceAvailableStateResponse: UpdateDeviceAvailableStateResponse,
+    EditFirmwareResponse: EditFirmwareResponse,
     CancelTaskRequest: CancelTaskRequest,
+    DescribeFirmwareTaskDistributionRequest: DescribeFirmwareTaskDistributionRequest,
     UpdateDeviceAvailableStateRequest: UpdateDeviceAvailableStateRequest,
     DeleteProductResponse: DeleteProductResponse,
     CreateTopicPolicyResponse: CreateTopicPolicyResponse,
     PublishToDeviceRequest: PublishToDeviceRequest,
+    UploadFirmwareResponse: UploadFirmwareResponse,
     ProductInfo: ProductInfo,
+    DescribeFirmwareTaskDistributionResponse: DescribeFirmwareTaskDistributionResponse,
     PublishBroadcastMessageResponse: PublishBroadcastMessageResponse,
     DescribeDeviceRequest: DescribeDeviceRequest,
     CreateMultiDevicesTaskResponse: CreateMultiDevicesTaskResponse,
@@ -4867,14 +6064,17 @@ module.exports = {
     ProductMetadata: ProductMetadata,
     DescribeLoraDeviceResponse: DescribeLoraDeviceResponse,
     ProductTaskInfo: ProductTaskInfo,
+    ReplaceTopicRuleRequest: ReplaceTopicRuleRequest,
     PublishRRPCMessageResponse: PublishRRPCMessageResponse,
     CancelTaskResponse: CancelTaskResponse,
     Attribute: Attribute,
     CreateLoraDeviceResponse: CreateLoraDeviceResponse,
     DeleteTopicRuleRequest: DeleteTopicRuleRequest,
     ReplaceTopicRuleResponse: ReplaceTopicRuleResponse,
-    CreateMultiDeviceRequest: CreateMultiDeviceRequest,
-    PublishToDeviceResponse: PublishToDeviceResponse,
+    PublishAsDeviceRequest: PublishAsDeviceRequest,
+    CancelDeviceFirmwareTaskRequest: CancelDeviceFirmwareTaskRequest,
+    CancelDeviceFirmwareTaskResponse: CancelDeviceFirmwareTaskResponse,
+    DescribeMultiDevicesResponse: DescribeMultiDevicesResponse,
     DescribeDeviceShadowRequest: DescribeDeviceShadowRequest,
     UnbindDevicesResponse: UnbindDevicesResponse,
     CreateTaskFileUrlResponse: CreateTaskFileUrlResponse,
@@ -4893,17 +6093,21 @@ module.exports = {
     PublishMessageResponse: PublishMessageResponse,
     BindDevicesResponse: BindDevicesResponse,
     ResetDeviceResult: ResetDeviceResult,
+    SearchKeyword: SearchKeyword,
     DescribeDevicesRequest: DescribeDevicesRequest,
     DescribeDeviceClientKeyResponse: DescribeDeviceClientKeyResponse,
+    UploadFirmwareRequest: UploadFirmwareRequest,
     DisableTopicRuleRequest: DisableTopicRuleRequest,
     ResetDeviceStateResponse: ResetDeviceStateResponse,
+    FirmwareTaskInfo: FirmwareTaskInfo,
     CreateTopicRuleResponse: CreateTopicRuleResponse,
     CreateTopicRuleRequest: CreateTopicRuleRequest,
-    PublishAsDeviceRequest: PublishAsDeviceRequest,
+    DescribeFirmwareTaskStatisticsRequest: DescribeFirmwareTaskStatisticsRequest,
     DeleteDeviceResponse: DeleteDeviceResponse,
     DeviceInfo: DeviceInfo,
     DescribeProductTasksResponse: DescribeProductTasksResponse,
     PublishAsDeviceResponse: PublishAsDeviceResponse,
     EnableTopicRuleRequest: EnableTopicRuleRequest,
+    DescribeFirmwareTaskRequest: DescribeFirmwareTaskRequest,
 
 }

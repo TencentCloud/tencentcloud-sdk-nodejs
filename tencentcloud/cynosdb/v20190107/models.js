@@ -1628,18 +1628,30 @@ class DescribeMaintainPeriodRequest extends  AbstractModel {
 }
 
 /**
- * OfflineCluster请求参数结构体
+ * DescribeInstances返回参数结构体
  * @class
  */
-class OfflineClusterRequest extends  AbstractModel {
+class DescribeInstancesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 集群ID
+         * 实例个数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 实例列表
+         * @type {Array.<CynosdbInstance> || null}
+         */
+        this.InstanceSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.ClusterId = null;
+        this.RequestId = null;
 
     }
 
@@ -1650,7 +1662,17 @@ class OfflineClusterRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.InstanceSet) {
+            this.InstanceSet = new Array();
+            for (let z in params.InstanceSet) {
+                let obj = new CynosdbInstance();
+                obj.deserialize(params.InstanceSet[z]);
+                this.InstanceSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2115,6 +2137,95 @@ class ModifyMaintainPeriodConfigResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeInstances请求参数结构体
+ * @class
+ */
+class DescribeInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回数量，默认为 20，最大值为 100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 记录偏移量，默认值为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 排序字段，取值范围：
+<li> CREATETIME：创建时间</li>
+<li> PERIODENDTIME：过期时间</li>
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * 排序类型，取值范围：
+<li> ASC：升序排序 </li>
+<li> DESC：降序排序 </li>
+         * @type {string || null}
+         */
+        this.OrderByType = null;
+
+        /**
+         * 搜索条件，若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
+         * @type {Array.<QueryFilter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 引擎类型：目前支持“MYSQL”， “POSTGRESQL”
+         * @type {string || null}
+         */
+        this.DbType = null;
+
+        /**
+         * 实例状态
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 实例id列表
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new QueryFilter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.DbType = 'DbType' in params ? params.DbType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
 
     }
 }
@@ -3491,6 +3602,34 @@ class CynosdbCluster extends  AbstractModel {
 }
 
 /**
+ * OfflineCluster请求参数结构体
+ * @class
+ */
+class OfflineClusterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
  * DescribeClusterDetail返回参数结构体
  * @class
  */
@@ -3915,13 +4054,14 @@ module.exports = {
     CynosdbInstanceDetail: CynosdbInstanceDetail,
     DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
     DescribeMaintainPeriodRequest: DescribeMaintainPeriodRequest,
-    OfflineClusterRequest: OfflineClusterRequest,
+    DescribeInstancesResponse: DescribeInstancesResponse,
     CynosdbClusterDetail: CynosdbClusterDetail,
     ClusterInstanceDetail: ClusterInstanceDetail,
     BackupFileInfo: BackupFileInfo,
     DescribeRollbackTimeValidityResponse: DescribeRollbackTimeValidityResponse,
     DescribeInstanceDetailRequest: DescribeInstanceDetailRequest,
     ModifyMaintainPeriodConfigResponse: ModifyMaintainPeriodConfigResponse,
+    DescribeInstancesRequest: DescribeInstancesRequest,
     IsolateInstanceResponse: IsolateInstanceResponse,
     DescribeBackupListRequest: DescribeBackupListRequest,
     QueryFilter: QueryFilter,
@@ -3940,6 +4080,7 @@ module.exports = {
     SetRenewFlagRequest: SetRenewFlagRequest,
     CreateClustersRequest: CreateClustersRequest,
     CynosdbCluster: CynosdbCluster,
+    OfflineClusterRequest: OfflineClusterRequest,
     DescribeClusterDetailResponse: DescribeClusterDetailResponse,
     OfflineInstanceResponse: OfflineInstanceResponse,
     CynosdbInstanceGrp: CynosdbInstanceGrp,

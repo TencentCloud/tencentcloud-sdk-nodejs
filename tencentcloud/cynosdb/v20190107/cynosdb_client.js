@@ -46,13 +46,14 @@ const DescribeProjectSecurityGroupsResponse = models.DescribeProjectSecurityGrou
 const CynosdbInstanceDetail = models.CynosdbInstanceDetail;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
 const DescribeMaintainPeriodRequest = models.DescribeMaintainPeriodRequest;
-const OfflineClusterRequest = models.OfflineClusterRequest;
+const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const CynosdbClusterDetail = models.CynosdbClusterDetail;
 const ClusterInstanceDetail = models.ClusterInstanceDetail;
 const BackupFileInfo = models.BackupFileInfo;
 const DescribeRollbackTimeValidityResponse = models.DescribeRollbackTimeValidityResponse;
 const DescribeInstanceDetailRequest = models.DescribeInstanceDetailRequest;
 const ModifyMaintainPeriodConfigResponse = models.ModifyMaintainPeriodConfigResponse;
+const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const IsolateInstanceResponse = models.IsolateInstanceResponse;
 const DescribeBackupListRequest = models.DescribeBackupListRequest;
 const QueryFilter = models.QueryFilter;
@@ -71,6 +72,7 @@ const CreateClustersResponse = models.CreateClustersResponse;
 const SetRenewFlagRequest = models.SetRenewFlagRequest;
 const CreateClustersRequest = models.CreateClustersRequest;
 const CynosdbCluster = models.CynosdbCluster;
+const OfflineClusterRequest = models.OfflineClusterRequest;
 const DescribeClusterDetailResponse = models.DescribeClusterDetailResponse;
 const OfflineInstanceResponse = models.OfflineInstanceResponse;
 const CynosdbInstanceGrp = models.CynosdbInstanceGrp;
@@ -165,6 +167,17 @@ class CynosdbClient extends AbstractClient {
     ModifyBackupConfig(req, cb) {
         let resp = new ModifyBackupConfigResponse();
         this.request("ModifyBackupConfig", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeInstances)用于查询实例列表。
+     * @param {DescribeInstancesRequest} req
+     * @param {function(string, DescribeInstancesResponse):void} cb
+     * @public
+     */
+    DescribeInstances(req, cb) {
+        let resp = new DescribeInstancesResponse();
+        this.request("DescribeInstances", req, resp, cb);
     }
 
     /**

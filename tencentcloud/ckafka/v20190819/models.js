@@ -5507,6 +5507,13 @@ class SubscribedInfo extends  AbstractModel {
          */
         this.PartitionOffset = null;
 
+        /**
+         * 订阅的主题ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TopicId = null;
+
     }
 
     /**
@@ -5527,6 +5534,7 @@ class SubscribedInfo extends  AbstractModel {
                 this.PartitionOffset.push(obj);
             }
         }
+        this.TopicId = 'TopicId' in params ? params.TopicId : null;
 
     }
 }

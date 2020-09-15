@@ -319,44 +319,24 @@ class LoginStatistic extends  AbstractModel {
 }
 
 /**
- * 按量付费免费配额信息
+ * 键值对
  * @class
  */
-class PostpayEnvQuota extends  AbstractModel {
+class KVPair extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 资源类型
+         * 键
          * @type {string || null}
          */
-        this.ResourceType = null;
+        this.Key = null;
 
         /**
-         * 指标名
+         * 值
          * @type {string || null}
-         */
-        this.MetricName = null;
-
-        /**
-         * 配额值
-         * @type {number || null}
          */
         this.Value = null;
-
-        /**
-         * 配额生效时间
-为空表示没有时间限制
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * 配额失效时间
-为空表示没有时间限制
-         * @type {string || null}
-         */
-        this.EndTime = null;
 
     }
 
@@ -367,11 +347,8 @@ class PostpayEnvQuota extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
-        this.MetricName = 'MetricName' in params ? params.MetricName : null;
+        this.Key = 'Key' in params ? params.Key : null;
         this.Value = 'Value' in params ? params.Value : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -486,6 +463,64 @@ class CommonServiceAPIRequest extends  AbstractModel {
         }
         this.Service = 'Service' in params ? params.Service : null;
         this.JSONData = 'JSONData' in params ? params.JSONData : null;
+
+    }
+}
+
+/**
+ * 按量付费免费配额信息
+ * @class
+ */
+class PostpayEnvQuota extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源类型
+         * @type {string || null}
+         */
+        this.ResourceType = null;
+
+        /**
+         * 指标名
+         * @type {string || null}
+         */
+        this.MetricName = null;
+
+        /**
+         * 配额值
+         * @type {number || null}
+         */
+        this.Value = null;
+
+        /**
+         * 配额生效时间
+为空表示没有时间限制
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 配额失效时间
+为空表示没有时间限制
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
 
     }
 }
@@ -778,6 +813,34 @@ class DescribeEndUserStatisticResponse extends  AbstractModel {
 }
 
 /**
+ * ReinstateEnv返回参数结构体
+ * @class
+ */
+class ReinstateEnvResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribePostpayPackageFreeQuotas请求参数结构体
  * @class
  */
@@ -835,6 +898,70 @@ class CreateAuthDomainResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeCloudBaseBuildService返回参数结构体
+ * @class
+ */
+class DescribeCloudBaseBuildServiceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 上传url
+         * @type {string || null}
+         */
+        this.UploadUrl = null;
+
+        /**
+         * heder
+         * @type {Array.<KVPair> || null}
+         */
+        this.UploadHeaders = null;
+
+        /**
+         * 包名
+         * @type {string || null}
+         */
+        this.PackageName = null;
+
+        /**
+         * 包版本
+         * @type {string || null}
+         */
+        this.PackageVersion = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.UploadUrl = 'UploadUrl' in params ? params.UploadUrl : null;
+
+        if (params.UploadHeaders) {
+            this.UploadHeaders = new Array();
+            for (let z in params.UploadHeaders) {
+                let obj = new KVPair();
+                obj.deserialize(params.UploadHeaders[z]);
+                this.UploadHeaders.push(obj);
+            }
+        }
+        this.PackageName = 'PackageName' in params ? params.PackageName : null;
+        this.PackageVersion = 'PackageVersion' in params ? params.PackageVersion : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1033,18 +1160,30 @@ class DescribeQuotaDataRequest extends  AbstractModel {
 }
 
 /**
- * ReinstateEnv返回参数结构体
+ * DescribeCloudBaseBuildService请求参数结构体
  * @class
  */
-class ReinstateEnvResponse extends  AbstractModel {
+class DescribeCloudBaseBuildServiceRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 环境id
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.EnvId = null;
+
+        /**
+         * 服务名
+         * @type {string || null}
+         */
+        this.ServiceName = null;
+
+        /**
+         * build类型,枚举值有: cloudbaserun, framework-ci
+         * @type {string || null}
+         */
+        this.CIBusiness = null;
 
     }
 
@@ -1055,7 +1194,9 @@ class ReinstateEnvResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.ServiceName = 'ServiceName' in params ? params.ServiceName : null;
+        this.CIBusiness = 'CIBusiness' in params ? params.CIBusiness : null;
 
     }
 }
@@ -1594,24 +1735,25 @@ class DescribeAuthDomainsRequest extends  AbstractModel {
 }
 
 /**
- * DeleteEndUser请求参数结构体
+ * DescribeEndUserLoginStatistic返回参数结构体
  * @class
  */
-class DeleteEndUserRequest extends  AbstractModel {
+class DescribeEndUserLoginStatisticResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 环境ID
-         * @type {string || null}
+         * 环境终端用户新增与登录统计
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<LoginStatistic> || null}
          */
-        this.EnvId = null;
+        this.LoginStatistics = null;
 
         /**
-         * 用户列表，每一项都是uuid
-         * @type {Array.<string> || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.UserList = null;
+        this.RequestId = null;
 
     }
 
@@ -1622,8 +1764,16 @@ class DeleteEndUserRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnvId = 'EnvId' in params ? params.EnvId : null;
-        this.UserList = 'UserList' in params ? params.UserList : null;
+
+        if (params.LoginStatistics) {
+            this.LoginStatistics = new Array();
+            for (let z in params.LoginStatistics) {
+                let obj = new LoginStatistic();
+                obj.deserialize(params.LoginStatistics[z]);
+                this.LoginStatistics.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2695,25 +2845,24 @@ class DescribePostpayPackageFreeQuotasResponse extends  AbstractModel {
 }
 
 /**
- * DescribeEndUserLoginStatistic返回参数结构体
+ * DeleteEndUser请求参数结构体
  * @class
  */
-class DescribeEndUserLoginStatisticResponse extends  AbstractModel {
+class DeleteEndUserRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 环境终端用户新增与登录统计
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<LoginStatistic> || null}
-         */
-        this.LoginStatistics = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 环境ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.EnvId = null;
+
+        /**
+         * 用户列表，每一项都是uuid
+         * @type {Array.<string> || null}
+         */
+        this.UserList = null;
 
     }
 
@@ -2724,16 +2873,8 @@ class DescribeEndUserLoginStatisticResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.LoginStatistics) {
-            this.LoginStatistics = new Array();
-            for (let z in params.LoginStatistics) {
-                let obj = new LoginStatistic();
-                obj.deserialize(params.LoginStatistics[z]);
-                this.LoginStatistics.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.UserList = 'UserList' in params ? params.UserList : null;
 
     }
 }
@@ -2952,23 +3093,26 @@ module.exports = {
     DescribeEndUserLoginStatisticRequest: DescribeEndUserLoginStatisticRequest,
     StorageInfo: StorageInfo,
     LoginStatistic: LoginStatistic,
-    PostpayEnvQuota: PostpayEnvQuota,
+    KVPair: KVPair,
     FunctionInfo: FunctionInfo,
     CreatePostpayPackageResponse: CreatePostpayPackageResponse,
     CommonServiceAPIRequest: CommonServiceAPIRequest,
+    PostpayEnvQuota: PostpayEnvQuota,
     DescribeEndUsersResponse: DescribeEndUsersResponse,
     AuthDomain: AuthDomain,
     LogServiceInfo: LogServiceInfo,
     CreateStaticStoreRequest: CreateStaticStoreRequest,
     CommonServiceAPIResponse: CommonServiceAPIResponse,
     DescribeEndUserStatisticResponse: DescribeEndUserStatisticResponse,
+    ReinstateEnvResponse: ReinstateEnvResponse,
     DescribePostpayPackageFreeQuotasRequest: DescribePostpayPackageFreeQuotasRequest,
     CreateAuthDomainResponse: CreateAuthDomainResponse,
+    DescribeCloudBaseBuildServiceResponse: DescribeCloudBaseBuildServiceResponse,
     ModifyEnvRequest: ModifyEnvRequest,
     DescribeEndUsersRequest: DescribeEndUsersRequest,
     DescribeEnvsRequest: DescribeEnvsRequest,
     DescribeQuotaDataRequest: DescribeQuotaDataRequest,
-    ReinstateEnvResponse: ReinstateEnvResponse,
+    DescribeCloudBaseBuildServiceRequest: DescribeCloudBaseBuildServiceRequest,
     DescribeEndUserStatisticRequest: DescribeEndUserStatisticRequest,
     PackageFreeQuotaInfo: PackageFreeQuotaInfo,
     DescribeEnvFreeQuotaResponse: DescribeEnvFreeQuotaResponse,
@@ -2981,7 +3125,7 @@ module.exports = {
     DescribeEnvFreeQuotaRequest: DescribeEnvFreeQuotaRequest,
     DatabasesInfo: DatabasesInfo,
     DescribeAuthDomainsRequest: DescribeAuthDomainsRequest,
-    DeleteEndUserRequest: DeleteEndUserRequest,
+    DescribeEndUserLoginStatisticResponse: DescribeEndUserLoginStatisticResponse,
     DescribeAuthDomainsResponse: DescribeAuthDomainsResponse,
     ReinstateEnvRequest: ReinstateEnvRequest,
     DescribeDatabaseACLRequest: DescribeDatabaseACLRequest,
@@ -3001,7 +3145,7 @@ module.exports = {
     EndUserInfo: EndUserInfo,
     DescribeEnvLimitResponse: DescribeEnvLimitResponse,
     DescribePostpayPackageFreeQuotasResponse: DescribePostpayPackageFreeQuotasResponse,
-    DescribeEndUserLoginStatisticResponse: DescribeEndUserLoginStatisticResponse,
+    DeleteEndUserRequest: DeleteEndUserRequest,
     DescribeEnvsResponse: DescribeEnvsResponse,
     ModifyEnvResponse: ModifyEnvResponse,
     OrderInfo: OrderInfo,

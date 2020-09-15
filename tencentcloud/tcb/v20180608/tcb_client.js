@@ -24,23 +24,26 @@ const CheckTcbServiceResponse = models.CheckTcbServiceResponse;
 const DescribeEndUserLoginStatisticRequest = models.DescribeEndUserLoginStatisticRequest;
 const StorageInfo = models.StorageInfo;
 const LoginStatistic = models.LoginStatistic;
-const PostpayEnvQuota = models.PostpayEnvQuota;
+const KVPair = models.KVPair;
 const FunctionInfo = models.FunctionInfo;
 const CreatePostpayPackageResponse = models.CreatePostpayPackageResponse;
 const CommonServiceAPIRequest = models.CommonServiceAPIRequest;
+const PostpayEnvQuota = models.PostpayEnvQuota;
 const DescribeEndUsersResponse = models.DescribeEndUsersResponse;
 const AuthDomain = models.AuthDomain;
 const LogServiceInfo = models.LogServiceInfo;
 const CreateStaticStoreRequest = models.CreateStaticStoreRequest;
 const CommonServiceAPIResponse = models.CommonServiceAPIResponse;
 const DescribeEndUserStatisticResponse = models.DescribeEndUserStatisticResponse;
+const ReinstateEnvResponse = models.ReinstateEnvResponse;
 const DescribePostpayPackageFreeQuotasRequest = models.DescribePostpayPackageFreeQuotasRequest;
 const CreateAuthDomainResponse = models.CreateAuthDomainResponse;
+const DescribeCloudBaseBuildServiceResponse = models.DescribeCloudBaseBuildServiceResponse;
 const ModifyEnvRequest = models.ModifyEnvRequest;
 const DescribeEndUsersRequest = models.DescribeEndUsersRequest;
 const DescribeEnvsRequest = models.DescribeEnvsRequest;
 const DescribeQuotaDataRequest = models.DescribeQuotaDataRequest;
-const ReinstateEnvResponse = models.ReinstateEnvResponse;
+const DescribeCloudBaseBuildServiceRequest = models.DescribeCloudBaseBuildServiceRequest;
 const DescribeEndUserStatisticRequest = models.DescribeEndUserStatisticRequest;
 const PackageFreeQuotaInfo = models.PackageFreeQuotaInfo;
 const DescribeEnvFreeQuotaResponse = models.DescribeEnvFreeQuotaResponse;
@@ -53,7 +56,7 @@ const CreatePostpayPackageRequest = models.CreatePostpayPackageRequest;
 const DescribeEnvFreeQuotaRequest = models.DescribeEnvFreeQuotaRequest;
 const DatabasesInfo = models.DatabasesInfo;
 const DescribeAuthDomainsRequest = models.DescribeAuthDomainsRequest;
-const DeleteEndUserRequest = models.DeleteEndUserRequest;
+const DescribeEndUserLoginStatisticResponse = models.DescribeEndUserLoginStatisticResponse;
 const DescribeAuthDomainsResponse = models.DescribeAuthDomainsResponse;
 const ReinstateEnvRequest = models.ReinstateEnvRequest;
 const DescribeDatabaseACLRequest = models.DescribeDatabaseACLRequest;
@@ -73,7 +76,7 @@ const ModifyEndUserResponse = models.ModifyEndUserResponse;
 const EndUserInfo = models.EndUserInfo;
 const DescribeEnvLimitResponse = models.DescribeEnvLimitResponse;
 const DescribePostpayPackageFreeQuotasResponse = models.DescribePostpayPackageFreeQuotasResponse;
-const DescribeEndUserLoginStatisticResponse = models.DescribeEndUserLoginStatisticResponse;
+const DeleteEndUserRequest = models.DeleteEndUserRequest;
 const DescribeEnvsResponse = models.DescribeEnvsResponse;
 const ModifyEnvResponse = models.ModifyEnvResponse;
 const OrderInfo = models.OrderInfo;
@@ -286,6 +289,17 @@ class TcbClient extends AbstractClient {
     DestroyEnv(req, cb) {
         let resp = new DestroyEnvResponse();
         this.request("DestroyEnv", req, resp, cb);
+    }
+
+    /**
+     * 获取云托管代码上传url
+     * @param {DescribeCloudBaseBuildServiceRequest} req
+     * @param {function(string, DescribeCloudBaseBuildServiceResponse):void} cb
+     * @public
+     */
+    DescribeCloudBaseBuildService(req, cb) {
+        let resp = new DescribeCloudBaseBuildServiceResponse();
+        this.request("DescribeCloudBaseBuildService", req, resp, cb);
     }
 
     /**
