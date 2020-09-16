@@ -1984,7 +1984,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.ClusterType = null;
 
         /**
-         * 实例状态，取值范围：0-待初始化，1-流程执行中，2-实例有效，-2-实例已过期
+         * 实例状态，取值范围：0-待初始化，1-流程执行中，2-实例有效，-2-已隔离（包年包月实例），-3-已隔离（按量计费实例）
          * @type {Array.<number> || null}
          */
         this.Status = null;
@@ -2038,10 +2038,16 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.ProjectIds = null;
 
         /**
-         * 搜索关键词，支持实例Id、实例名称、完整IP
+         * 搜索关键词，支持实例ID、实例名称、完整IP
          * @type {string || null}
          */
         this.SearchKey = null;
+
+        /**
+         * Tag信息
+         * @type {TagInfo || null}
+         */
+        this.Tags = null;
 
     }
 
@@ -2065,6 +2071,12 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
         this.ProjectIds = 'ProjectIds' in params ? params.ProjectIds : null;
         this.SearchKey = 'SearchKey' in params ? params.SearchKey : null;
+
+        if (params.Tags) {
+            let obj = new TagInfo();
+            obj.deserialize(params.Tags)
+            this.Tags = obj;
+        }
 
     }
 }

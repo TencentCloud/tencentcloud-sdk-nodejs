@@ -643,7 +643,10 @@ class AudioTrackItem extends  AbstractModel {
         super();
 
         /**
-         * 音频素材的媒体文件来源。可以是点播的文件 ID，也可以是其它文件的 URL。
+         * 音频片段的媒体素材来源，可以是：
+<li>点播的媒体文件 ID；</li>
+<li>其他媒体文件的下载 URL。</li>
+注意：当使用其他媒体文件的下载 URL 作为素材来源，且开启了访问控制（如防盗链）时，需要在 URL 携带访问控制参数（如防盗链签名）。
          * @type {string || null}
          */
         this.SourceMedia = null;
@@ -2876,7 +2879,7 @@ class ComposeMediaRequest extends  AbstractModel {
         this.SessionContext = null;
 
         /**
-         * 用于任务去重的识别码，如果一天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+         * 用于任务去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
          * @type {string || null}
          */
         this.SessionId = null;
@@ -5349,7 +5352,7 @@ class ProcessMediaByUrlRequest extends  AbstractModel {
         this.SessionContext = null;
 
         /**
-         * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+         * 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
          * @type {string || null}
          */
         this.SessionId = null;
@@ -6009,7 +6012,7 @@ class ProcessMediaByProcedureRequest extends  AbstractModel {
         this.SessionContext = null;
 
         /**
-         * 用于去重的识别码，如果一天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+         * 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
          * @type {string || null}
          */
         this.SessionId = null;
@@ -7376,10 +7379,16 @@ class EditMediaRequest extends  AbstractModel {
         this.TasksPriority = null;
 
         /**
-         * 用于任务去重的识别码，如果一天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+         * 用于任务去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
          * @type {string || null}
          */
         this.SessionId = null;
+
+        /**
+         * 保留字段，特殊用途时使用。
+         * @type {string || null}
+         */
+        this.ExtInfo = null;
 
         /**
          * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
@@ -7426,6 +7435,7 @@ class EditMediaRequest extends  AbstractModel {
         this.SessionContext = 'SessionContext' in params ? params.SessionContext : null;
         this.TasksPriority = 'TasksPriority' in params ? params.TasksPriority : null;
         this.SessionId = 'SessionId' in params ? params.SessionId : null;
+        this.ExtInfo = 'ExtInfo' in params ? params.ExtInfo : null;
         this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
@@ -8459,7 +8469,10 @@ class StickerTrackItem extends  AbstractModel {
         super();
 
         /**
-         * 贴图素材的媒体文件来源。可以是点播的文件 ID，也可以是其它文件的 URL。
+         * 贴图片段的媒体素材来源，可以是：
+<li>点播的媒体文件 ID；</li>
+<li>其他媒体文件的下载 URL。</li>
+注意：当使用其他媒体文件的下载 URL 作为素材来源，且开启了访问控制（如防盗链）时，需要在 URL 携带访问控制参数（如防盗链签名）。
          * @type {string || null}
          */
         this.SourceMedia = null;
@@ -9963,7 +9976,7 @@ class ProcessMediaRequest extends  AbstractModel {
         this.SessionContext = null;
 
         /**
-         * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+         * 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
          * @type {string || null}
          */
         this.SessionId = null;
@@ -15319,7 +15332,7 @@ class PullUploadRequest extends  AbstractModel {
         this.SessionContext = null;
 
         /**
-         * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+         * 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
          * @type {string || null}
          */
         this.SessionId = null;
@@ -23557,7 +23570,10 @@ class VideoTrackItem extends  AbstractModel {
         super();
 
         /**
-         * 视频片段的媒体素材来源，可以是点播的文件 ID，或者是其它文件的 URL。
+         * 视频片段的媒体素材来源，可以是：
+<li>点播的媒体文件 ID；</li>
+<li>其他媒体文件的下载 URL。</li>
+注意：当使用其他媒体文件的下载 URL 作为素材来源，且开启了访问控制（如防盗链）时，需要在 URL 携带访问控制参数（如防盗链签名）。
          * @type {string || null}
          */
         this.SourceMedia = null;

@@ -1377,6 +1377,62 @@ IsAttached: 当需要查询标记实体是否已经关联策略时不为null。0
 }
 
 /**
+ * 异地登录设置
+ * @class
+ */
+class OffsiteFlag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 验证标识
+         * @type {number || null}
+         */
+        this.VerifyFlag = null;
+
+        /**
+         * 手机通知
+         * @type {number || null}
+         */
+        this.NotifyPhone = null;
+
+        /**
+         * 邮箱通知
+         * @type {number || null}
+         */
+        this.NotifyEmail = null;
+
+        /**
+         * 微信通知
+         * @type {number || null}
+         */
+        this.NotifyWechat = null;
+
+        /**
+         * 提示
+         * @type {number || null}
+         */
+        this.Tips = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VerifyFlag = 'VerifyFlag' in params ? params.VerifyFlag : null;
+        this.NotifyPhone = 'NotifyPhone' in params ? params.NotifyPhone : null;
+        this.NotifyEmail = 'NotifyEmail' in params ? params.NotifyEmail : null;
+        this.NotifyWechat = 'NotifyWechat' in params ? params.NotifyWechat : null;
+        this.Tips = 'Tips' in params ? params.Tips : null;
+
+    }
+}
+
+/**
  * 子用户和用户组关联信息
  * @class
  */
@@ -1454,24 +1510,18 @@ class UpdateRoleDescriptionRequest extends  AbstractModel {
 }
 
 /**
- * SetDefaultPolicyVersion请求参数结构体
+ * DeleteGroup返回参数结构体
  * @class
  */
-class SetDefaultPolicyVersionRequest extends  AbstractModel {
+class DeleteGroupResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 策略ID
-         * @type {number || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.PolicyId = null;
-
-        /**
-         * 策略版本号
-         * @type {number || null}
-         */
-        this.VersionId = null;
+        this.RequestId = null;
 
     }
 
@@ -1482,8 +1532,7 @@ class SetDefaultPolicyVersionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
-        this.VersionId = 'VersionId' in params ? params.VersionId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1578,6 +1627,70 @@ class RoleInfo extends  AbstractModel {
         this.RoleType = 'RoleType' in params ? params.RoleType : null;
         this.SessionDuration = 'SessionDuration' in params ? params.SessionDuration : null;
         this.DeletionTaskId = 'DeletionTaskId' in params ? params.DeletionTaskId : null;
+
+    }
+}
+
+/**
+ * DescribeSafeAuthFlag返回参数结构体
+ * @class
+ */
+class DescribeSafeAuthFlagResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 登录保护设置
+         * @type {LoginActionFlag || null}
+         */
+        this.LoginFlag = null;
+
+        /**
+         * 敏感操作保护设置
+         * @type {LoginActionFlag || null}
+         */
+        this.ActionFlag = null;
+
+        /**
+         * 异地登录保护设置
+         * @type {OffsiteFlag || null}
+         */
+        this.OffsiteFlag = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.LoginFlag) {
+            let obj = new LoginActionFlag();
+            obj.deserialize(params.LoginFlag)
+            this.LoginFlag = obj;
+        }
+
+        if (params.ActionFlag) {
+            let obj = new LoginActionFlag();
+            obj.deserialize(params.ActionFlag)
+            this.ActionFlag = obj;
+        }
+
+        if (params.OffsiteFlag) {
+            let obj = new OffsiteFlag();
+            obj.deserialize(params.OffsiteFlag)
+            this.OffsiteFlag = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2088,6 +2201,62 @@ class AddUserRequest extends  AbstractModel {
 }
 
 /**
+ * 登录和敏感操作flag
+ * @class
+ */
+class LoginActionFlag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 手机
+         * @type {number || null}
+         */
+        this.Phone = null;
+
+        /**
+         * 硬token
+         * @type {number || null}
+         */
+        this.Token = null;
+
+        /**
+         * 软token
+         * @type {number || null}
+         */
+        this.Stoken = null;
+
+        /**
+         * 微信
+         * @type {number || null}
+         */
+        this.Wechat = null;
+
+        /**
+         * 自定义
+         * @type {number || null}
+         */
+        this.Custom = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Phone = 'Phone' in params ? params.Phone : null;
+        this.Token = 'Token' in params ? params.Token : null;
+        this.Stoken = 'Stoken' in params ? params.Stoken : null;
+        this.Wechat = 'Wechat' in params ? params.Wechat : null;
+        this.Custom = 'Custom' in params ? params.Custom : null;
+
+    }
+}
+
+/**
  * DeleteRole请求参数结构体
  * @class
  */
@@ -2228,30 +2397,24 @@ class UpdateAssumeRolePolicyResponse extends  AbstractModel {
 }
 
 /**
- * ListAttachedUserPolicies返回参数结构体
+ * GetPolicyVersion请求参数结构体
  * @class
  */
-class ListAttachedUserPoliciesResponse extends  AbstractModel {
+class GetPolicyVersionRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 策略总数
+         * 策略ID
          * @type {number || null}
          */
-        this.TotalNum = null;
+        this.PolicyId = null;
 
         /**
-         * 策略列表
-         * @type {Array.<AttachPolicyInfo> || null}
+         * 策略版本号
+         * @type {number || null}
          */
-        this.List = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.VersionId = null;
 
     }
 
@@ -2262,17 +2425,8 @@ class ListAttachedUserPoliciesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
-
-        if (params.List) {
-            this.List = new Array();
-            for (let z in params.List) {
-                let obj = new AttachPolicyInfo();
-                obj.deserialize(params.List[z]);
-                this.List.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.VersionId = 'VersionId' in params ? params.VersionId : null;
 
     }
 }
@@ -3059,24 +3213,30 @@ class ListAttachedGroupPoliciesResponse extends  AbstractModel {
 }
 
 /**
- * GetPolicyVersion请求参数结构体
+ * ListAttachedUserPolicies返回参数结构体
  * @class
  */
-class GetPolicyVersionRequest extends  AbstractModel {
+class ListAttachedUserPoliciesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 策略ID
+         * 策略总数
          * @type {number || null}
          */
-        this.PolicyId = null;
+        this.TotalNum = null;
 
         /**
-         * 策略版本号
-         * @type {number || null}
+         * 策略列表
+         * @type {Array.<AttachPolicyInfo> || null}
          */
-        this.VersionId = null;
+        this.List = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -3087,8 +3247,17 @@ class GetPolicyVersionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
-        this.VersionId = 'VersionId' in params ? params.VersionId : null;
+        this.TotalNum = 'TotalNum' in params ? params.TotalNum : null;
+
+        if (params.List) {
+            this.List = new Array();
+            for (let z in params.List) {
+                let obj = new AttachPolicyInfo();
+                obj.deserialize(params.List[z]);
+                this.List.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4050,6 +4219,41 @@ class GetPolicyRequest extends  AbstractModel {
 }
 
 /**
+ * SetDefaultPolicyVersion请求参数结构体
+ * @class
+ */
+class SetDefaultPolicyVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 策略ID
+         * @type {number || null}
+         */
+        this.PolicyId = null;
+
+        /**
+         * 策略版本号
+         * @type {number || null}
+         */
+        this.VersionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PolicyId = 'PolicyId' in params ? params.PolicyId : null;
+        this.VersionId = 'VersionId' in params ? params.VersionId : null;
+
+    }
+}
+
+/**
  * AddUserToGroup请求参数结构体
  * @class
  */
@@ -4671,18 +4875,12 @@ class GetPolicyResponse extends  AbstractModel {
 }
 
 /**
- * DeleteGroup返回参数结构体
+ * DescribeSafeAuthFlag请求参数结构体
  * @class
  */
-class DeleteGroupResponse extends  AbstractModel {
+class DescribeSafeAuthFlagRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
 
     }
 
@@ -4693,7 +4891,6 @@ class DeleteGroupResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5534,10 +5731,12 @@ module.exports = {
     RemoveUserFromGroupRequest: RemoveUserFromGroupRequest,
     CreatePolicyVersionResponse: CreatePolicyVersionResponse,
     ListPoliciesResponse: ListPoliciesResponse,
+    OffsiteFlag: OffsiteFlag,
     GroupIdOfUidInfo: GroupIdOfUidInfo,
     UpdateRoleDescriptionRequest: UpdateRoleDescriptionRequest,
-    SetDefaultPolicyVersionRequest: SetDefaultPolicyVersionRequest,
+    DeleteGroupResponse: DeleteGroupResponse,
     RoleInfo: RoleInfo,
+    DescribeSafeAuthFlagResponse: DescribeSafeAuthFlagResponse,
     CreatePolicyVersionRequest: CreatePolicyVersionRequest,
     DeleteGroupRequest: DeleteGroupRequest,
     ListAttachedRolePoliciesResponse: ListAttachedRolePoliciesResponse,
@@ -5548,11 +5747,12 @@ module.exports = {
     DeletePolicyRequest: DeletePolicyRequest,
     GroupInfo: GroupInfo,
     AddUserRequest: AddUserRequest,
+    LoginActionFlag: LoginActionFlag,
     DeleteRoleRequest: DeleteRoleRequest,
     UpdateRoleConsoleLoginRequest: UpdateRoleConsoleLoginRequest,
     GetCustomMFATokenInfoResponse: GetCustomMFATokenInfoResponse,
     UpdateAssumeRolePolicyResponse: UpdateAssumeRolePolicyResponse,
-    ListAttachedUserPoliciesResponse: ListAttachedUserPoliciesResponse,
+    GetPolicyVersionRequest: GetPolicyVersionRequest,
     CreateSAMLProviderResponse: CreateSAMLProviderResponse,
     DeleteRolePermissionsBoundaryResponse: DeleteRolePermissionsBoundaryResponse,
     GetUserRequest: GetUserRequest,
@@ -5570,7 +5770,7 @@ module.exports = {
     ConsumeCustomMFATokenResponse: ConsumeCustomMFATokenResponse,
     AttachUserPolicyRequest: AttachUserPolicyRequest,
     ListAttachedGroupPoliciesResponse: ListAttachedGroupPoliciesResponse,
-    GetPolicyVersionRequest: GetPolicyVersionRequest,
+    ListAttachedUserPoliciesResponse: ListAttachedUserPoliciesResponse,
     PutUserPermissionsBoundaryResponse: PutUserPermissionsBoundaryResponse,
     DeletePolicyResponse: DeletePolicyResponse,
     ConsumeCustomMFATokenRequest: ConsumeCustomMFATokenRequest,
@@ -5597,6 +5797,7 @@ module.exports = {
     GetSAMLProviderResponse: GetSAMLProviderResponse,
     ListPolicyVersionsResponse: ListPolicyVersionsResponse,
     GetPolicyRequest: GetPolicyRequest,
+    SetDefaultPolicyVersionRequest: SetDefaultPolicyVersionRequest,
     AddUserToGroupRequest: AddUserToGroupRequest,
     RemoveUserFromGroupResponse: RemoveUserFromGroupResponse,
     DetachRolePolicyResponse: DetachRolePolicyResponse,
@@ -5611,7 +5812,7 @@ module.exports = {
     CreateRoleRequest: CreateRoleRequest,
     DeleteServiceLinkedRoleResponse: DeleteServiceLinkedRoleResponse,
     GetPolicyResponse: GetPolicyResponse,
-    DeleteGroupResponse: DeleteGroupResponse,
+    DescribeSafeAuthFlagRequest: DescribeSafeAuthFlagRequest,
     AttachGroupPolicyRequest: AttachGroupPolicyRequest,
     DeleteServiceLinkedRoleRequest: DeleteServiceLinkedRoleRequest,
     AttachEntityOfPolicy: AttachEntityOfPolicy,

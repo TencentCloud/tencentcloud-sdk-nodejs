@@ -2883,6 +2883,14 @@ class TextVatInvoice extends  AbstractModel {
          */
         this.Value = null;
 
+        /**
+         * 字段在原图中的中的四点坐标。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Polygon || null}
+         */
+        this.Polygon = null;
+
     }
 
     /**
@@ -2894,6 +2902,12 @@ class TextVatInvoice extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+        if (params.Polygon) {
+            let obj = new Polygon();
+            obj.deserialize(params.Polygon)
+            this.Polygon = obj;
+        }
 
     }
 }
@@ -2932,6 +2946,12 @@ class GeneralHandwritingOCRRequest extends  AbstractModel {
          */
         this.Scene = null;
 
+        /**
+         * 是否开启单字的四点定位坐标输出，默认值为false。
+         * @type {boolean || null}
+         */
+        this.EnableWordPolygon = null;
+
     }
 
     /**
@@ -2944,6 +2964,7 @@ class GeneralHandwritingOCRRequest extends  AbstractModel {
         this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
         this.Scene = 'Scene' in params ? params.Scene : null;
+        this.EnableWordPolygon = 'EnableWordPolygon' in params ? params.EnableWordPolygon : null;
 
     }
 }
@@ -3647,23 +3668,35 @@ class VatInvoiceOCRRequest extends  AbstractModel {
         super();
 
         /**
-         * 图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+         * 图片/PDF的 Base64 值。
+支持的文件格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。
+支持的图片/PDF大小：所下载文件经Base64编码后不超过 3M。文件下载时间不超过 3 秒。
+输入参数 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
          * @type {string || null}
          */
         this.ImageBase64 = null;
 
         /**
-         * 图片的 Url 地址。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+         * 图片/PDF的 Url 地址。
+支持的文件格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。
+支持的图片/PDF大小：所下载文件经 Base64 编码后不超过 3M。文件下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
          * @type {string || null}
          */
         this.ImageUrl = null;
+
+        /**
+         * 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。
+         * @type {boolean || null}
+         */
+        this.IsPdf = null;
+
+        /**
+         * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+         * @type {number || null}
+         */
+        this.PdfPageNumber = null;
 
     }
 
@@ -3676,6 +3709,8 @@ class VatInvoiceOCRRequest extends  AbstractModel {
         }
         this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.IsPdf = 'IsPdf' in params ? params.IsPdf : null;
+        this.PdfPageNumber = 'PdfPageNumber' in params ? params.PdfPageNumber : null;
 
     }
 }
@@ -4598,6 +4633,13 @@ class TextGeneralHandwriting extends  AbstractModel {
          */
         this.AdvancedInfo = null;
 
+        /**
+         * 字的坐标数组，以四个顶点坐标表示
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Polygon> || null}
+         */
+        this.WordPolygon = null;
+
     }
 
     /**
@@ -4619,6 +4661,15 @@ class TextGeneralHandwriting extends  AbstractModel {
             }
         }
         this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
+
+        if (params.WordPolygon) {
+            this.WordPolygon = new Array();
+            for (let z in params.WordPolygon) {
+                let obj = new Polygon();
+                obj.deserialize(params.WordPolygon[z]);
+                this.WordPolygon.push(obj);
+            }
+        }
 
     }
 }
@@ -5833,10 +5884,18 @@ class CarInvoiceInfo extends  AbstractModel {
         this.Value = null;
 
         /**
-         * 文本行在旋转纠正之后的图像中的像素坐标。
+         * 字段在旋转纠正之后的图像中的像素坐标。
          * @type {Rect || null}
          */
         this.Rect = null;
+
+        /**
+         * 字段在原图中的中的四点坐标。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Polygon || null}
+         */
+        this.Polygon = null;
 
     }
 
@@ -5854,6 +5913,12 @@ class CarInvoiceInfo extends  AbstractModel {
             let obj = new Rect();
             obj.deserialize(params.Rect)
             this.Rect = obj;
+        }
+
+        if (params.Polygon) {
+            let obj = new Polygon();
+            obj.deserialize(params.Polygon)
+            this.Polygon = obj;
         }
 
     }
@@ -7068,7 +7133,7 @@ class MixedInvoiceOCRRequest extends  AbstractModel {
         /**
          * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
          * @type {string || null}
          */
@@ -7077,7 +7142,7 @@ class MixedInvoiceOCRRequest extends  AbstractModel {
         /**
          * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
          * @type {string || null}
@@ -7310,6 +7375,76 @@ class GeneralFastOCRRequest extends  AbstractModel {
         }
         this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+
+    }
+}
+
+/**
+ * 文本的坐标，以四个顶点坐标表示
+注意：此字段可能返回 null，表示取不到有效值
+ * @class
+ */
+class Polygon extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 左上顶点坐标
+         * @type {Coord || null}
+         */
+        this.LeftTop = null;
+
+        /**
+         * 右上顶点坐标
+         * @type {Coord || null}
+         */
+        this.RightTop = null;
+
+        /**
+         * 右下顶点坐标
+         * @type {Coord || null}
+         */
+        this.RightBottom = null;
+
+        /**
+         * 左下顶点坐标
+         * @type {Coord || null}
+         */
+        this.LeftBottom = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.LeftTop) {
+            let obj = new Coord();
+            obj.deserialize(params.LeftTop)
+            this.LeftTop = obj;
+        }
+
+        if (params.RightTop) {
+            let obj = new Coord();
+            obj.deserialize(params.RightTop)
+            this.RightTop = obj;
+        }
+
+        if (params.RightBottom) {
+            let obj = new Coord();
+            obj.deserialize(params.RightBottom)
+            this.RightBottom = obj;
+        }
+
+        if (params.LeftBottom) {
+            let obj = new Coord();
+            obj.deserialize(params.LeftBottom)
+            this.LeftBottom = obj;
+        }
 
     }
 }
@@ -9342,6 +9477,12 @@ class VatInvoiceOCRResponse extends  AbstractModel {
         this.Items = null;
 
         /**
+         * 图片为PDF时，返回PDF的总页数，默认为0
+         * @type {number || null}
+         */
+        this.PdfPageSize = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -9374,6 +9515,7 @@ class VatInvoiceOCRResponse extends  AbstractModel {
                 this.Items.push(obj);
             }
         }
+        this.PdfPageSize = 'PdfPageSize' in params ? params.PdfPageSize : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -9822,6 +9964,7 @@ module.exports = {
     ResidenceBookletOCRResponse: ResidenceBookletOCRResponse,
     CarInvoiceOCRResponse: CarInvoiceOCRResponse,
     GeneralFastOCRRequest: GeneralFastOCRRequest,
+    Polygon: Polygon,
     ShipInvoiceOCRResponse: ShipInvoiceOCRResponse,
     InsuranceBillInfo: InsuranceBillInfo,
     VehicleRegCertOCRResponse: VehicleRegCertOCRResponse,

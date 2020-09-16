@@ -408,6 +408,12 @@ class CaptchaUserAllAppId extends  AbstractModel {
          */
         this.TcAppId = null;
 
+        /**
+         * 渠道信息
+         * @type {string || null}
+         */
+        this.ChannelInfo = null;
+
     }
 
     /**
@@ -420,6 +426,7 @@ class CaptchaUserAllAppId extends  AbstractModel {
         this.CaptchaAppId = 'CaptchaAppId' in params ? params.CaptchaAppId : null;
         this.AppName = 'AppName' in params ? params.AppName : null;
         this.TcAppId = 'TcAppId' in params ? params.TcAppId : null;
+        this.ChannelInfo = 'ChannelInfo' in params ? params.ChannelInfo : null;
 
     }
 }

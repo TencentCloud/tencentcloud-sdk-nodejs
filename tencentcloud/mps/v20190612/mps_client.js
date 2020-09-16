@@ -60,6 +60,7 @@ const MediaSampleSnapshotItem = models.MediaSampleSnapshotItem;
 const ParseLiveStreamProcessNotificationResponse = models.ParseLiveStreamProcessNotificationResponse;
 const AiRecognitionTaskInput = models.AiRecognitionTaskInput;
 const AudioTemplateInfo = models.AudioTemplateInfo;
+const ExecuteFunctionResponse = models.ExecuteFunctionResponse;
 const CoverConfigureInfo = models.CoverConfigureInfo;
 const AIRecognitionTemplateItem = models.AIRecognitionTemplateItem;
 const AiReviewPornAsrTaskInput = models.AiReviewPornAsrTaskInput;
@@ -326,6 +327,7 @@ const PoliticalConfigureInfoForUpdate = models.PoliticalConfigureInfoForUpdate;
 const DescribeWatermarkTemplatesResponse = models.DescribeWatermarkTemplatesResponse;
 const CreateAnimatedGraphicsTemplateRequest = models.CreateAnimatedGraphicsTemplateRequest;
 const FrameTagConfigureInfo = models.FrameTagConfigureInfo;
+const ExecuteFunctionRequest = models.ExecuteFunctionRequest;
 const ModifyPersonSampleResponse = models.ModifyPersonSampleResponse;
 const DeleteTranscodeTemplateResponse = models.DeleteTranscodeTemplateResponse;
 const MediaTranscodeItem = models.MediaTranscodeItem;
@@ -886,6 +888,17 @@ class MpsClient extends AbstractClient {
     CreatePersonSample(req, cb) {
         let resp = new CreatePersonSampleResponse();
         this.request("CreatePersonSample", req, resp, cb);
+    }
+
+    /**
+     * 本接口仅用于定制开发的特殊场景，除非云视频处理客服人员主动告知您需要使用本接口，其它情况请勿调用。
+     * @param {ExecuteFunctionRequest} req
+     * @param {function(string, ExecuteFunctionResponse):void} cb
+     * @public
+     */
+    ExecuteFunction(req, cb) {
+        let resp = new ExecuteFunctionResponse();
+        this.request("ExecuteFunction", req, resp, cb);
     }
 
     /**

@@ -51,10 +51,12 @@ const ListUsersForGroupRequest = models.ListUsersForGroupRequest;
 const RemoveUserFromGroupRequest = models.RemoveUserFromGroupRequest;
 const CreatePolicyVersionResponse = models.CreatePolicyVersionResponse;
 const ListPoliciesResponse = models.ListPoliciesResponse;
+const OffsiteFlag = models.OffsiteFlag;
 const GroupIdOfUidInfo = models.GroupIdOfUidInfo;
 const UpdateRoleDescriptionRequest = models.UpdateRoleDescriptionRequest;
-const SetDefaultPolicyVersionRequest = models.SetDefaultPolicyVersionRequest;
+const DeleteGroupResponse = models.DeleteGroupResponse;
 const RoleInfo = models.RoleInfo;
+const DescribeSafeAuthFlagResponse = models.DescribeSafeAuthFlagResponse;
 const CreatePolicyVersionRequest = models.CreatePolicyVersionRequest;
 const DeleteGroupRequest = models.DeleteGroupRequest;
 const ListAttachedRolePoliciesResponse = models.ListAttachedRolePoliciesResponse;
@@ -65,11 +67,12 @@ const StrategyInfo = models.StrategyInfo;
 const DeletePolicyRequest = models.DeletePolicyRequest;
 const GroupInfo = models.GroupInfo;
 const AddUserRequest = models.AddUserRequest;
+const LoginActionFlag = models.LoginActionFlag;
 const DeleteRoleRequest = models.DeleteRoleRequest;
 const UpdateRoleConsoleLoginRequest = models.UpdateRoleConsoleLoginRequest;
 const GetCustomMFATokenInfoResponse = models.GetCustomMFATokenInfoResponse;
 const UpdateAssumeRolePolicyResponse = models.UpdateAssumeRolePolicyResponse;
-const ListAttachedUserPoliciesResponse = models.ListAttachedUserPoliciesResponse;
+const GetPolicyVersionRequest = models.GetPolicyVersionRequest;
 const CreateSAMLProviderResponse = models.CreateSAMLProviderResponse;
 const DeleteRolePermissionsBoundaryResponse = models.DeleteRolePermissionsBoundaryResponse;
 const GetUserRequest = models.GetUserRequest;
@@ -87,7 +90,7 @@ const AttachRolePolicyRequest = models.AttachRolePolicyRequest;
 const ConsumeCustomMFATokenResponse = models.ConsumeCustomMFATokenResponse;
 const AttachUserPolicyRequest = models.AttachUserPolicyRequest;
 const ListAttachedGroupPoliciesResponse = models.ListAttachedGroupPoliciesResponse;
-const GetPolicyVersionRequest = models.GetPolicyVersionRequest;
+const ListAttachedUserPoliciesResponse = models.ListAttachedUserPoliciesResponse;
 const PutUserPermissionsBoundaryResponse = models.PutUserPermissionsBoundaryResponse;
 const DeletePolicyResponse = models.DeletePolicyResponse;
 const ConsumeCustomMFATokenRequest = models.ConsumeCustomMFATokenRequest;
@@ -114,6 +117,7 @@ const CreateRoleResponse = models.CreateRoleResponse;
 const GetSAMLProviderResponse = models.GetSAMLProviderResponse;
 const ListPolicyVersionsResponse = models.ListPolicyVersionsResponse;
 const GetPolicyRequest = models.GetPolicyRequest;
+const SetDefaultPolicyVersionRequest = models.SetDefaultPolicyVersionRequest;
 const AddUserToGroupRequest = models.AddUserToGroupRequest;
 const RemoveUserFromGroupResponse = models.RemoveUserFromGroupResponse;
 const DetachRolePolicyResponse = models.DetachRolePolicyResponse;
@@ -128,7 +132,7 @@ const GetRoleResponse = models.GetRoleResponse;
 const CreateRoleRequest = models.CreateRoleRequest;
 const DeleteServiceLinkedRoleResponse = models.DeleteServiceLinkedRoleResponse;
 const GetPolicyResponse = models.GetPolicyResponse;
-const DeleteGroupResponse = models.DeleteGroupResponse;
+const DescribeSafeAuthFlagRequest = models.DescribeSafeAuthFlagRequest;
 const AttachGroupPolicyRequest = models.AttachGroupPolicyRequest;
 const DeleteServiceLinkedRoleRequest = models.DeleteServiceLinkedRoleRequest;
 const AttachEntityOfPolicy = models.AttachEntityOfPolicy;
@@ -597,6 +601,17 @@ class CamClient extends AbstractClient {
     ListPolicyVersions(req, cb) {
         let resp = new ListPolicyVersionsResponse();
         this.request("ListPolicyVersions", req, resp, cb);
+    }
+
+    /**
+     * 查询安全设置
+     * @param {DescribeSafeAuthFlagRequest} req
+     * @param {function(string, DescribeSafeAuthFlagResponse):void} cb
+     * @public
+     */
+    DescribeSafeAuthFlag(req, cb) {
+        let resp = new DescribeSafeAuthFlagResponse();
+        this.request("DescribeSafeAuthFlag", req, resp, cb);
     }
 
     /**

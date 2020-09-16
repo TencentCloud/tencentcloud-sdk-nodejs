@@ -141,6 +141,7 @@ const MixedInvoiceOCRRequest = models.MixedInvoiceOCRRequest;
 const ResidenceBookletOCRResponse = models.ResidenceBookletOCRResponse;
 const CarInvoiceOCRResponse = models.CarInvoiceOCRResponse;
 const GeneralFastOCRRequest = models.GeneralFastOCRRequest;
+const Polygon = models.Polygon;
 const ShipInvoiceOCRResponse = models.ShipInvoiceOCRResponse;
 const InsuranceBillInfo = models.InsuranceBillInfo;
 const VehicleRegCertOCRResponse = models.VehicleRegCertOCRResponse;

@@ -987,7 +987,7 @@ class DeployDynamicContractHandlerRequest extends  AbstractModel {
         this.Module = null;
 
         /**
-         * 操作名，固定字段：deploy_by_dynamic_contract
+         * 操作名，固定字段：deploy_dynamic_contract
          * @type {string || null}
          */
         this.Operation = null;
@@ -1618,7 +1618,7 @@ class Block extends  AbstractModel {
         this.BlockNum = null;
 
         /**
-         * 区块Hash数值
+         * 区块数据Hash数值
          * @type {string || null}
          */
         this.DataHash = null;
@@ -1630,7 +1630,7 @@ class Block extends  AbstractModel {
         this.BlockId = null;
 
         /**
-         * 前一个区块Hash（未使用）,与区块Hash数值一致
+         * 前一个区块Hash
          * @type {string || null}
          */
         this.PreHash = null;
