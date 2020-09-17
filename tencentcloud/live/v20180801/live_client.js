@@ -39,6 +39,7 @@ const DeleteLiveRecordTemplateRequest = models.DeleteLiveRecordTemplateRequest;
 const DeleteLiveCallbackTemplateResponse = models.DeleteLiveCallbackTemplateResponse;
 const DescribeLiveStreamOnlineListResponse = models.DescribeLiveStreamOnlineListResponse;
 const PushQualityData = models.PushQualityData;
+const UnBindLiveDomainCertResponse = models.UnBindLiveDomainCertResponse;
 const ModifyLivePlayAuthKeyRequest = models.ModifyLivePlayAuthKeyRequest;
 const DescribeLiveDelayInfoListRequest = models.DescribeLiveDelayInfoListRequest;
 const DomainCertInfo = models.DomainCertInfo;
@@ -78,12 +79,13 @@ const DescribeDeliverBandwidthListRequest = models.DescribeDeliverBandwidthListR
 const PlayCodeTotalInfo = models.PlayCodeTotalInfo;
 const AddLiveWatermarkRequest = models.AddLiveWatermarkRequest;
 const ModifyLiveTranscodeTemplateResponse = models.ModifyLiveTranscodeTemplateResponse;
+const BillCountryInfo = models.BillCountryInfo;
 const ModifyLiveRecordTemplateResponse = models.ModifyLiveRecordTemplateResponse;
 const ModifyLivePlayDomainRequest = models.ModifyLivePlayDomainRequest;
 const DeleteLiveRecordTemplateResponse = models.DeleteLiveRecordTemplateResponse;
 const DescribeLiveWatermarkRequest = models.DescribeLiveWatermarkRequest;
 const LogInfo = models.LogInfo;
-const AddDelayLiveStreamRequest = models.AddDelayLiveStreamRequest;
+const CommonMixLayoutParams = models.CommonMixLayoutParams;
 const DescribeLiveDomainCertRequest = models.DescribeLiveDomainCertRequest;
 const DescribeLiveStreamEventListRequest = models.DescribeLiveStreamEventListRequest;
 const DescribePullStreamConfigsRequest = models.DescribePullStreamConfigsRequest;
@@ -101,6 +103,7 @@ const RuleInfo = models.RuleInfo;
 const UpdateLiveWatermarkResponse = models.UpdateLiveWatermarkResponse;
 const LivePackageInfo = models.LivePackageInfo;
 const CreateLiveTranscodeTemplateResponse = models.CreateLiveTranscodeTemplateResponse;
+const BillAreaInfo = models.BillAreaInfo;
 const PlayDataInfoByStream = models.PlayDataInfoByStream;
 const DescribeVisitTopSumInfoListRequest = models.DescribeVisitTopSumInfoListRequest;
 const DayStreamPlayInfo = models.DayStreamPlayInfo;
@@ -132,7 +135,7 @@ const DropLiveStreamRequest = models.DropLiveStreamRequest;
 const CreateCommonMixStreamRequest = models.CreateCommonMixStreamRequest;
 const CreateLiveCertResponse = models.CreateLiveCertResponse;
 const PushDataInfo = models.PushDataInfo;
-const CommonMixLayoutParams = models.CommonMixLayoutParams;
+const AddDelayLiveStreamRequest = models.AddDelayLiveStreamRequest;
 const DescribeGroupProIspPlayInfoListRequest = models.DescribeGroupProIspPlayInfoListRequest;
 const ModifyPullStreamStatusRequest = models.ModifyPullStreamStatusRequest;
 const DescribeStreamDayPlayInfoListRequest = models.DescribeStreamDayPlayInfoListRequest;
@@ -197,7 +200,7 @@ const DescribeConcurrentRecordStreamNumRequest = models.DescribeConcurrentRecord
 const DescribePlayErrorCodeSumInfoListRequest = models.DescribePlayErrorCodeSumInfoListRequest;
 const ModifyLiveCertRequest = models.ModifyLiveCertRequest;
 const CommonMixControlParams = models.CommonMixControlParams;
-const UnBindLiveDomainCertResponse = models.UnBindLiveDomainCertResponse;
+const DescribeAreaBillBandwidthAndFluxListResponse = models.DescribeAreaBillBandwidthAndFluxListResponse;
 const ForbidLiveDomainRequest = models.ForbidLiveDomainRequest;
 const DescribeLiveRecordRulesRequest = models.DescribeLiveRecordRulesRequest;
 const DescribePlayErrorCodeDetailInfoListResponse = models.DescribePlayErrorCodeDetailInfoListResponse;
@@ -229,7 +232,7 @@ const CreateRecordTaskRequest = models.CreateRecordTaskRequest;
 const CreateLiveTranscodeRuleResponse = models.CreateLiveTranscodeRuleResponse;
 const CreateLiveCallbackRuleResponse = models.CreateLiveCallbackRuleResponse;
 const DescribeLiveRecordTemplateResponse = models.DescribeLiveRecordTemplateResponse;
-const DescribeVisitTopSumInfoListResponse = models.DescribeVisitTopSumInfoListResponse;
+const DescribeAreaBillBandwidthAndFluxListRequest = models.DescribeAreaBillBandwidthAndFluxListRequest;
 const BindLiveDomainCertResponse = models.BindLiveDomainCertResponse;
 const CallBackRuleInfo = models.CallBackRuleInfo;
 const PlaySumStatInfo = models.PlaySumStatInfo;
@@ -262,6 +265,7 @@ const DescribeLiveDomainResponse = models.DescribeLiveDomainResponse;
 const DeleteRecordTaskRequest = models.DeleteRecordTaskRequest;
 const StopLiveRecordResponse = models.StopLiveRecordResponse;
 const DescribeStreamDayPlayInfoListResponse = models.DescribeStreamDayPlayInfoListResponse;
+const DescribeVisitTopSumInfoListResponse = models.DescribeVisitTopSumInfoListResponse;
 const CreateLiveSnapshotRuleResponse = models.CreateLiveSnapshotRuleResponse;
 const DelayInfo = models.DelayInfo;
 const DescribeLiveStreamEventListResponse = models.DescribeLiveStreamEventListResponse;
@@ -559,6 +563,17 @@ class LiveClient extends AbstractClient {
     AddLiveWatermark(req, cb) {
         let resp = new AddLiveWatermarkResponse();
         this.request("AddLiveWatermark", req, resp, cb);
+    }
+
+    /**
+     * 海外分区直播计费带宽和流量数据查询。
+     * @param {DescribeAreaBillBandwidthAndFluxListRequest} req
+     * @param {function(string, DescribeAreaBillBandwidthAndFluxListResponse):void} cb
+     * @public
+     */
+    DescribeAreaBillBandwidthAndFluxList(req, cb) {
+        let resp = new DescribeAreaBillBandwidthAndFluxListResponse();
+        this.request("DescribeAreaBillBandwidthAndFluxList", req, resp, cb);
     }
 
     /**

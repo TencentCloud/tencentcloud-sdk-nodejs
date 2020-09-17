@@ -17,35 +17,71 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const TagTaskResult = models.TagTaskResult;
+const TagEditingInfo = models.TagEditingInfo;
+const Sharp = models.Sharp;
 const TagTaskResultItem = models.TagTaskResultItem;
+const VideoEnhance = models.VideoEnhance;
 const CosInfo = models.CosInfo;
 const SaveInfo = models.SaveInfo;
-const StripTaskResultItem = models.StripTaskResultItem;
+const ScratchRepair = models.ScratchRepair;
+const ArtifactReduction = models.ArtifactReduction;
 const CosAuthMode = models.CosAuthMode;
-const TagEditingInfo = models.TagEditingInfo;
+const QualityControlInfo = models.QualityControlInfo;
 const OpeningEndingTaskResultItem = models.OpeningEndingTaskResultItem;
 const DownInfo = models.DownInfo;
 const ClassificationEditingInfo = models.ClassificationEditingInfo;
+const LowLightEnhance = models.LowLightEnhance;
 const DescribeEditingTaskResultRequest = models.DescribeEditingTaskResultRequest;
 const CoverTaskResultItem = models.CoverTaskResultItem;
+const TargetInfo = models.TargetInfo;
 const StripEditingInfo = models.StripEditingInfo;
 const EditingInfo = models.EditingInfo;
+const MediaQualityRestorationTaskResult = models.MediaQualityRestorationTaskResult;
+const CreateMediaQualityRestorationTaskRequest = models.CreateMediaQualityRestorationTaskRequest;
 const CreateEditingTaskRequest = models.CreateEditingTaskRequest;
+const AudioInfoResultItem = models.AudioInfoResultItem;
+const Denoising = models.Denoising;
+const FaceProtect = models.FaceProtect;
+const VideoInfoResultItem = models.VideoInfoResultItem;
 const HighlightsTaskResult = models.HighlightsTaskResult;
+const EditInfo = models.EditInfo;
+const MuxInfo = models.MuxInfo;
+const DescribeMediaQualityRestorationTaskRusultRequest = models.DescribeMediaQualityRestorationTaskRusultRequest;
+const VideoInfo = models.VideoInfo;
 const OpeningEndingTaskResult = models.OpeningEndingTaskResult;
+const DescribeQualityControlTaskResultRequest = models.DescribeQualityControlTaskResultRequest;
 const DescribeEditingTaskResultResponse = models.DescribeEditingTaskResultResponse;
 const CreateEditingTaskResponse = models.CreateEditingTaskResponse;
+const QualityControlInfoTaskResult = models.QualityControlInfoTaskResult;
+const StopMediaQualityRestorationTaskResponse = models.StopMediaQualityRestorationTaskResponse;
 const UrlInfo = models.UrlInfo;
+const StopMediaQualityRestorationTaskRequest = models.StopMediaQualityRestorationTaskRequest;
+const DescribeQualityControlTaskResultResponse = models.DescribeQualityControlTaskResultResponse;
+const DescribeMediaQualityRestorationTaskRusultResponse = models.DescribeMediaQualityRestorationTaskRusultResponse;
 const ClassificationTaskResultItem = models.ClassificationTaskResultItem;
+const DarInfo = models.DarInfo;
+const AudioInfo = models.AudioInfo;
+const CreateQualityControlTaskResponse = models.CreateQualityControlTaskResponse;
 const EditingTaskResult = models.EditingTaskResult;
-const StripTaskResult = models.StripTaskResult;
+const SubTaskTranscodeInfo = models.SubTaskTranscodeInfo;
+const QualityControlResultItems = models.QualityControlResultItems;
+const SubTaskResultItem = models.SubTaskResultItem;
+const QualityControlItem = models.QualityControlItem;
 const HighlightsEditingInfo = models.HighlightsEditingInfo;
+const FileInfo = models.FileInfo;
+const CreateQualityControlTaskRequest = models.CreateQualityControlTaskRequest;
 const ClassificationTaskResult = models.ClassificationTaskResult;
-const HighlightsTaskResultItem = models.HighlightsTaskResultItem;
+const StripTaskResultItem = models.StripTaskResultItem;
 const HighlightsTaskResultItemSegment = models.HighlightsTaskResultItemSegment;
+const HighlightsTaskResultItem = models.HighlightsTaskResultItem;
+const PicMarkInfoItem = models.PicMarkInfoItem;
 const CoverEditingInfo = models.CoverEditingInfo;
+const ColorEnhance = models.ColorEnhance;
+const CreateMediaQualityRestorationTaskResponse = models.CreateMediaQualityRestorationTaskResponse;
+const SegmentInfo = models.SegmentInfo;
 const CallbackInfo = models.CallbackInfo;
 const OpeningEndingEditingInfo = models.OpeningEndingEditingInfo;
+const StripTaskResult = models.StripTaskResult;
 const CoverTaskResult = models.CoverTaskResult;
 
 
@@ -60,6 +96,39 @@ class IeClient extends AbstractClient {
     }
     
     /**
+     * 获取画质重生任务结果，查看结束后的文件信息
+     * @param {DescribeMediaQualityRestorationTaskRusultRequest} req
+     * @param {function(string, DescribeMediaQualityRestorationTaskRusultResponse):void} cb
+     * @public
+     */
+    DescribeMediaQualityRestorationTaskRusult(req, cb) {
+        let resp = new DescribeMediaQualityRestorationTaskRusultResponse();
+        this.request("DescribeMediaQualityRestorationTaskRusult", req, resp, cb);
+    }
+
+    /**
+     * 删除正在进行的画质重生任务
+     * @param {StopMediaQualityRestorationTaskRequest} req
+     * @param {function(string, StopMediaQualityRestorationTaskResponse):void} cb
+     * @public
+     */
+    StopMediaQualityRestorationTask(req, cb) {
+        let resp = new StopMediaQualityRestorationTaskResponse();
+        this.request("StopMediaQualityRestorationTask", req, resp, cb);
+    }
+
+    /**
+     * 创建画质重生任务，对视频进行转码、去噪、去划痕、去毛刺、超分、细节增强和色彩增强。
+     * @param {CreateMediaQualityRestorationTaskRequest} req
+     * @param {function(string, CreateMediaQualityRestorationTaskResponse):void} cb
+     * @public
+     */
+    CreateMediaQualityRestorationTask(req, cb) {
+        let resp = new CreateMediaQualityRestorationTaskResponse();
+        this.request("CreateMediaQualityRestorationTask", req, resp, cb);
+    }
+
+    /**
      * 获取智能编辑任务结果。
      * @param {DescribeEditingTaskResultRequest} req
      * @param {function(string, DescribeEditingTaskResultResponse):void} cb
@@ -68,6 +137,28 @@ class IeClient extends AbstractClient {
     DescribeEditingTaskResult(req, cb) {
         let resp = new DescribeEditingTaskResultResponse();
         this.request("DescribeEditingTaskResult", req, resp, cb);
+    }
+
+    /**
+     * 获取质检任务结果
+     * @param {DescribeQualityControlTaskResultRequest} req
+     * @param {function(string, DescribeQualityControlTaskResultResponse):void} cb
+     * @public
+     */
+    DescribeQualityControlTaskResult(req, cb) {
+        let resp = new DescribeQualityControlTaskResultResponse();
+        this.request("DescribeQualityControlTaskResult", req, resp, cb);
+    }
+
+    /**
+     * 通过接口可以智能检测视频画面中抖动重影、模糊、低光照、过曝光、黑边、白边、黑屏、白屏、花屏、噪点、马赛克、二维码等在内的多个场景，还可以自动检测视频无音频异常、无声音片段。
+     * @param {CreateQualityControlTaskRequest} req
+     * @param {function(string, CreateQualityControlTaskResponse):void} cb
+     * @public
+     */
+    CreateQualityControlTask(req, cb) {
+        let resp = new CreateQualityControlTaskResponse();
+        this.request("CreateQualityControlTask", req, resp, cb);
     }
 
     /**

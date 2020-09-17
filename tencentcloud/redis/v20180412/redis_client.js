@@ -531,7 +531,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * 本接口 (AssociateSecurityGroups) 用于绑定安全组到指定实例。
+     * 本接口 (AssociateSecurityGroups) 用于安全组批量绑定多个指定实例。
      * @param {AssociateSecurityGroupsRequest} req
      * @param {function(string, AssociateSecurityGroupsResponse):void} cb
      * @public
@@ -564,7 +564,7 @@ class RedisClient extends AbstractClient {
     }
 
     /**
-     * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组
+     * 本接口(ModifyDBInstanceSecurityGroups)用于修改实例绑定的安全组。
      * @param {ModifyDBInstanceSecurityGroupsRequest} req
      * @param {function(string, ModifyDBInstanceSecurityGroupsResponse):void} cb
      * @public

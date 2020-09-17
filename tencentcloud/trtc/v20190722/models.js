@@ -197,6 +197,12 @@ class LayoutParams extends  AbstractModel {
          */
         this.MainVideoRightAlign = null;
 
+        /**
+         * 悬浮模板、九宫格、屏幕分享模板有效。设置此参数后，输出流混合此参数中包含用户的音视频，以及其他用户的纯音频。最多可设置16个用户。
+         * @type {Array.<string> || null}
+         */
+        this.MixVideoUids = null;
+
     }
 
     /**
@@ -216,6 +222,7 @@ class LayoutParams extends  AbstractModel {
             this.SmallVideoLayoutParams = obj;
         }
         this.MainVideoRightAlign = 'MainVideoRightAlign' in params ? params.MainVideoRightAlign : null;
+        this.MixVideoUids = 'MixVideoUids' in params ? params.MixVideoUids : null;
 
     }
 }
@@ -497,13 +504,13 @@ bigvHeight：上/下行分辨率高
         this.DataType = null;
 
         /**
-         * 只查询用户列表时，设置分页index，从0开始（PageNumber和PageSize 其中一个不填均默认返回10条数据）
+         * 只查询用户列表时，设置分页index，从0开始（PageNumber和PageSize 其中一个不填均默认返回6条数据）
          * @type {string || null}
          */
         this.PageNumber = null;
 
         /**
-         * 只查询用户列表时，设置分页大小（PageNumber和PageSize 其中一个不填均默认返回6条数据,最大不超过100）
+         * 只查询用户列表时，设置分页大小（PageNumber和PageSize 其中一个不填均默认返回6条数据,PageSize最大不超过100）
          * @type {string || null}
          */
         this.PageSize = null;

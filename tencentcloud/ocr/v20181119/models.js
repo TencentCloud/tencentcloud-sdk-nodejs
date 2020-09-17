@@ -3414,31 +3414,66 @@ class GeneralBasicOCRResponse extends  AbstractModel {
 }
 
 /**
- * VinOCR请求参数结构体
+ * RecognizeThaiIDCardOCR返回参数结构体
  * @class
  */
-class VinOCRRequest extends  AbstractModel {
+class RecognizeThaiIDCardOCRResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+         * 身份证号码
          * @type {string || null}
          */
-        this.ImageBase64 = null;
+        this.ID = null;
 
         /**
-         * 图片的 Url 地址。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+         * 泰文姓名
          * @type {string || null}
          */
-        this.ImageUrl = null;
+        this.ThaiName = null;
+
+        /**
+         * 英文姓名
+         * @type {string || null}
+         */
+        this.EnFirstName = null;
+
+        /**
+         * 地址
+         * @type {string || null}
+         */
+        this.Address = null;
+
+        /**
+         * 出生日期
+         * @type {string || null}
+         */
+        this.Birthday = null;
+
+        /**
+         * 首次领用日期
+         * @type {string || null}
+         */
+        this.IssueDate = null;
+
+        /**
+         * 签发日期
+         * @type {string || null}
+         */
+        this.ExpirationDate = null;
+
+        /**
+         * 英文姓名
+         * @type {string || null}
+         */
+        this.EnLastName = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -3449,8 +3484,15 @@ class VinOCRRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
-        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.ID = 'ID' in params ? params.ID : null;
+        this.ThaiName = 'ThaiName' in params ? params.ThaiName : null;
+        this.EnFirstName = 'EnFirstName' in params ? params.EnFirstName : null;
+        this.Address = 'Address' in params ? params.Address : null;
+        this.Birthday = 'Birthday' in params ? params.Birthday : null;
+        this.IssueDate = 'IssueDate' in params ? params.IssueDate : null;
+        this.ExpirationDate = 'ExpirationDate' in params ? params.ExpirationDate : null;
+        this.EnLastName = 'EnLastName' in params ? params.EnLastName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4547,6 +4589,43 @@ class EduPaperOCRResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RecognizeThaiIDCardOCR请求参数结构体
+ * @class
+ */
+class RecognizeThaiIDCardOCRRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片的 Base64 值。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * 图片的 Url 地址。要求图片经Base64编码后不超过 7M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。
+建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
 
     }
 }
@@ -9072,6 +9151,48 @@ class MixedInvoiceDetectRequest extends  AbstractModel {
 }
 
 /**
+ * VinOCR请求参数结构体
+ * @class
+ */
+class VinOCRRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+
+    }
+}
+
+/**
  * RideHailingTransportLicenseOCR请求参数结构体
  * @class
  */
@@ -9896,7 +10017,7 @@ module.exports = {
     QrcodeOCRRequest: QrcodeOCRRequest,
     TaxiInvoiceOCRResponse: TaxiInvoiceOCRResponse,
     GeneralBasicOCRResponse: GeneralBasicOCRResponse,
-    VinOCRRequest: VinOCRRequest,
+    RecognizeThaiIDCardOCRResponse: RecognizeThaiIDCardOCRResponse,
     QuotaInvoiceOCRRequest: QuotaInvoiceOCRRequest,
     MixedInvoiceOCRResponse: MixedInvoiceOCRResponse,
     ClassifyDetectOCRResponse: ClassifyDetectOCRResponse,
@@ -9916,6 +10037,7 @@ module.exports = {
     VatRollInvoiceOCRResponse: VatRollInvoiceOCRResponse,
     VatInvoiceVerifyRequest: VatInvoiceVerifyRequest,
     EduPaperOCRResponse: EduPaperOCRResponse,
+    RecognizeThaiIDCardOCRRequest: RecognizeThaiIDCardOCRRequest,
     BusinessCardInfo: BusinessCardInfo,
     TextGeneralHandwriting: TextGeneralHandwriting,
     TableOCRRequest: TableOCRRequest,
@@ -9993,6 +10115,7 @@ module.exports = {
     ShipInvoiceInfo: ShipInvoiceInfo,
     IDCardOCRRequest: IDCardOCRRequest,
     MixedInvoiceDetectRequest: MixedInvoiceDetectRequest,
+    VinOCRRequest: VinOCRRequest,
     RideHailingTransportLicenseOCRRequest: RideHailingTransportLicenseOCRRequest,
     MLIDCardOCRResponse: MLIDCardOCRResponse,
     EstateCertOCRRequest: EstateCertOCRRequest,

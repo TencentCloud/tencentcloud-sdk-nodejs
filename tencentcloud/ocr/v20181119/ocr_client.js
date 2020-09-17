@@ -73,7 +73,7 @@ const HmtResidentPermitOCRRequest = models.HmtResidentPermitOCRRequest;
 const QrcodeOCRRequest = models.QrcodeOCRRequest;
 const TaxiInvoiceOCRResponse = models.TaxiInvoiceOCRResponse;
 const GeneralBasicOCRResponse = models.GeneralBasicOCRResponse;
-const VinOCRRequest = models.VinOCRRequest;
+const RecognizeThaiIDCardOCRResponse = models.RecognizeThaiIDCardOCRResponse;
 const QuotaInvoiceOCRRequest = models.QuotaInvoiceOCRRequest;
 const MixedInvoiceOCRResponse = models.MixedInvoiceOCRResponse;
 const ClassifyDetectOCRResponse = models.ClassifyDetectOCRResponse;
@@ -93,6 +93,7 @@ const TextDetectRequest = models.TextDetectRequest;
 const VatRollInvoiceOCRResponse = models.VatRollInvoiceOCRResponse;
 const VatInvoiceVerifyRequest = models.VatInvoiceVerifyRequest;
 const EduPaperOCRResponse = models.EduPaperOCRResponse;
+const RecognizeThaiIDCardOCRRequest = models.RecognizeThaiIDCardOCRRequest;
 const BusinessCardInfo = models.BusinessCardInfo;
 const TextGeneralHandwriting = models.TextGeneralHandwriting;
 const TableOCRRequest = models.TableOCRRequest;
@@ -170,6 +171,7 @@ const VatRollInvoiceInfo = models.VatRollInvoiceInfo;
 const ShipInvoiceInfo = models.ShipInvoiceInfo;
 const IDCardOCRRequest = models.IDCardOCRRequest;
 const MixedInvoiceDetectRequest = models.MixedInvoiceDetectRequest;
+const VinOCRRequest = models.VinOCRRequest;
 const RideHailingTransportLicenseOCRRequest = models.RideHailingTransportLicenseOCRRequest;
 const MLIDCardOCRResponse = models.MLIDCardOCRResponse;
 const EstateCertOCRRequest = models.EstateCertOCRRequest;
@@ -1102,6 +1104,19 @@ class OcrClient extends AbstractClient {
     RideHailingTransportLicenseOCR(req, cb) {
         let resp = new RideHailingTransportLicenseOCRResponse();
         this.request("RideHailingTransportLicenseOCR", req, resp, cb);
+    }
+
+    /**
+     * 本接口支持泰国身份证识别，识别字段包括泰文姓名、英文姓名、地址、出生日期、身份证号码。
+本接口暂未完全对外开放，如需咨询，请[联系商务](https://cloud.tencent.com/about/connect)
+
+     * @param {RecognizeThaiIDCardOCRRequest} req
+     * @param {function(string, RecognizeThaiIDCardOCRResponse):void} cb
+     * @public
+     */
+    RecognizeThaiIDCardOCR(req, cb) {
+        let resp = new RecognizeThaiIDCardOCRResponse();
+        this.request("RecognizeThaiIDCardOCR", req, resp, cb);
     }
 
     /**

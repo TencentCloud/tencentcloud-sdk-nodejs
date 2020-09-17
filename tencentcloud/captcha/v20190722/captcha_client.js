@@ -19,15 +19,19 @@ const AbstractClient = require('../../common/abstract_client')
 const DescribeCaptchaOperDataResponse = models.DescribeCaptchaOperDataResponse;
 const CaptchaOperDataInterceptUnit = models.CaptchaOperDataInterceptUnit;
 const CaptchaOperDataTryTimesDistributeUnit = models.CaptchaOperDataTryTimesDistributeUnit;
-const CaptchaOperDataTryTimesUnit = models.CaptchaOperDataTryTimesUnit;
+const DescribeCaptchaMiniOperDataResponse = models.DescribeCaptchaMiniOperDataResponse;
+const DescribeCaptchaMiniDataSumResponse = models.DescribeCaptchaMiniDataSumResponse;
+const UpdateCaptchaAppIdInfoRequest = models.UpdateCaptchaAppIdInfoRequest;
 const CaptchaOperDataRes = models.CaptchaOperDataRes;
 const TicketInterceptUnit = models.TicketInterceptUnit;
 const DescribeCaptchaUserAllAppIdRequest = models.DescribeCaptchaUserAllAppIdRequest;
+const DescribeCaptchaMiniDataResponse = models.DescribeCaptchaMiniDataResponse;
 const UpdateCaptchaAppIdInfoResponse = models.UpdateCaptchaAppIdInfoResponse;
 const CaptchaUserAllAppId = models.CaptchaUserAllAppId;
 const DescribeCaptchaDataSumResponse = models.DescribeCaptchaDataSumResponse;
 const DescribeCaptchaTicketDataRequest = models.DescribeCaptchaTicketDataRequest;
-const UpdateCaptchaAppIdInfoRequest = models.UpdateCaptchaAppIdInfoRequest;
+const DescribeCaptchaMiniDataSumRequest = models.DescribeCaptchaMiniDataSumRequest;
+const CaptchaOperDataTryTimesUnit = models.CaptchaOperDataTryTimesUnit;
 const DescribeCaptchaOperDataRequest = models.DescribeCaptchaOperDataRequest;
 const DescribeCaptchaDataSumRequest = models.DescribeCaptchaDataSumRequest;
 const TicketAmountUnit = models.TicketAmountUnit;
@@ -37,12 +41,14 @@ const DescribeCaptchaDataResponse = models.DescribeCaptchaDataResponse;
 const DescribeCaptchaResultRequest = models.DescribeCaptchaResultRequest;
 const DescribeCaptchaResultResponse = models.DescribeCaptchaResultResponse;
 const CaptchaOperDataLoadTimeUnit = models.CaptchaOperDataLoadTimeUnit;
+const DescribeCaptchaMiniOperDataRequest = models.DescribeCaptchaMiniOperDataRequest;
 const DescribeCaptchaAppIdInfoRequest = models.DescribeCaptchaAppIdInfoRequest;
 const DescribeCaptchaAppIdInfoResponse = models.DescribeCaptchaAppIdInfoResponse;
 const DescribeCaptchaUserAllAppIdResponse = models.DescribeCaptchaUserAllAppIdResponse;
 const DescribeCaptchaDataRequest = models.DescribeCaptchaDataRequest;
-const CaptchaTicketDataRes = models.CaptchaTicketDataRes;
 const DescribeCaptchaTicketDataResponse = models.DescribeCaptchaTicketDataResponse;
+const CaptchaTicketDataRes = models.CaptchaTicketDataRes;
+const DescribeCaptchaMiniDataRequest = models.DescribeCaptchaMiniDataRequest;
 
 
 /**
@@ -67,7 +73,7 @@ class CaptchaClient extends AbstractClient {
     }
 
     /**
-     * 验证码控制台票据验证信息
+     * 安全验证码用户操作票据数据查询
      * @param {DescribeCaptchaTicketDataRequest} req
      * @param {function(string, DescribeCaptchaTicketDataResponse):void} cb
      * @public
@@ -100,14 +106,25 @@ class CaptchaClient extends AbstractClient {
     }
 
     /**
-     * 查询安全验证码应用APPId信息
-     * @param {DescribeCaptchaAppIdInfoRequest} req
-     * @param {function(string, DescribeCaptchaAppIdInfoResponse):void} cb
+     * 安全验证码小程序插件分类查询数据接口（内测中），请求量type=0、通过量type=1、验证量type=2、拦截量type=3 小时级查询（五小时左右延迟）
+     * @param {DescribeCaptchaMiniDataRequest} req
+     * @param {function(string, DescribeCaptchaMiniDataResponse):void} cb
      * @public
      */
-    DescribeCaptchaAppIdInfo(req, cb) {
-        let resp = new DescribeCaptchaAppIdInfoResponse();
-        this.request("DescribeCaptchaAppIdInfo", req, resp, cb);
+    DescribeCaptchaMiniData(req, cb) {
+        let resp = new DescribeCaptchaMiniDataResponse();
+        this.request("DescribeCaptchaMiniData", req, resp, cb);
+    }
+
+    /**
+     * 安全验证码小程序插件用户操作数据查询（内测中）
+     * @param {DescribeCaptchaMiniOperDataRequest} req
+     * @param {function(string, DescribeCaptchaMiniOperDataResponse):void} cb
+     * @public
+     */
+    DescribeCaptchaMiniOperData(req, cb) {
+        let resp = new DescribeCaptchaMiniOperDataResponse();
+        this.request("DescribeCaptchaMiniOperData", req, resp, cb);
     }
 
     /**
@@ -122,6 +139,17 @@ class CaptchaClient extends AbstractClient {
     }
 
     /**
+     * 安全验证码小程序插件查询请求数据概况（内测中）
+     * @param {DescribeCaptchaMiniDataSumRequest} req
+     * @param {function(string, DescribeCaptchaMiniDataSumResponse):void} cb
+     * @public
+     */
+    DescribeCaptchaMiniDataSum(req, cb) {
+        let resp = new DescribeCaptchaMiniDataSumResponse();
+        this.request("DescribeCaptchaMiniDataSum", req, resp, cb);
+    }
+
+    /**
      * 更新验证码应用APPId信息
      * @param {UpdateCaptchaAppIdInfoRequest} req
      * @param {function(string, UpdateCaptchaAppIdInfoResponse):void} cb
@@ -130,6 +158,17 @@ class CaptchaClient extends AbstractClient {
     UpdateCaptchaAppIdInfo(req, cb) {
         let resp = new UpdateCaptchaAppIdInfoResponse();
         this.request("UpdateCaptchaAppIdInfo", req, resp, cb);
+    }
+
+    /**
+     * 查询安全验证码应用APPId信息
+     * @param {DescribeCaptchaAppIdInfoRequest} req
+     * @param {function(string, DescribeCaptchaAppIdInfoResponse):void} cb
+     * @public
+     */
+    DescribeCaptchaAppIdInfo(req, cb) {
+        let resp = new DescribeCaptchaAppIdInfoResponse();
+        this.request("DescribeCaptchaAppIdInfo", req, resp, cb);
     }
 
     /**

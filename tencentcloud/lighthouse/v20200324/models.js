@@ -541,6 +541,12 @@ class Blueprint extends  AbstractModel {
          */
         this.ImageUrl = null;
 
+        /**
+         * 镜像所需系统盘大小
+         * @type {number || null}
+         */
+        this.RequiredSystemDiskSize = null;
+
     }
 
     /**
@@ -559,6 +565,7 @@ class Blueprint extends  AbstractModel {
         this.PlatformType = 'PlatformType' in params ? params.PlatformType : null;
         this.BlueprintType = 'BlueprintType' in params ? params.BlueprintType : null;
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.RequiredSystemDiskSize = 'RequiredSystemDiskSize' in params ? params.RequiredSystemDiskSize : null;
 
     }
 }

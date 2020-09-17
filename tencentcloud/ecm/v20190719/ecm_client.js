@@ -19,31 +19,37 @@ const AbstractClient = require('../../common/abstract_client')
 const RunEIPDirectServiceEnabled = models.RunEIPDirectServiceEnabled;
 const DescribeTaskResultResponse = models.DescribeTaskResultResponse;
 const Ipv6Address = models.Ipv6Address;
+const BatchDeregisterTargetsResponse = models.BatchDeregisterTargetsResponse;
 const DescribePeakBaseOverviewRequest = models.DescribePeakBaseOverviewRequest;
 const SecurityGroupAssociationStatistics = models.SecurityGroupAssociationStatistics;
 const SecurityGroupLimitSet = models.SecurityGroupLimitSet;
 const DisassociateAddressResponse = models.DisassociateAddressResponse;
-const CreateNetworkInterfaceRequest = models.CreateNetworkInterfaceRequest;
+const BatchModifyTargetWeightResponse = models.BatchModifyTargetWeightResponse;
 const InstanceStatistic = models.InstanceStatistic;
+const CreateLoadBalancerRequest = models.CreateLoadBalancerRequest;
 const DescribeInstancesDeniedActionsRequest = models.DescribeInstancesDeniedActionsRequest;
 const ModifyModuleSecurityGroupsRequest = models.ModifyModuleSecurityGroupsRequest;
 const Internet = models.Internet;
 const DescribeModuleResponse = models.DescribeModuleResponse;
+const ModifyLoadBalancerAttributesRequest = models.ModifyLoadBalancerAttributesRequest;
 const DeleteSecurityGroupPoliciesRequest = models.DeleteSecurityGroupPoliciesRequest;
 const ImageTask = models.ImageTask;
 const Province = models.Province;
 const ImportCustomImageResponse = models.ImportCustomImageResponse;
 const ModifyModuleConfigResponse = models.ModifyModuleConfigResponse;
+const NetworkStorageRange = models.NetworkStorageRange;
 const ModifyModuleNameResponse = models.ModifyModuleNameResponse;
 const DescribeNetworkInterfacesRequest = models.DescribeNetworkInterfacesRequest;
 const DescribeSubnetsRequest = models.DescribeSubnetsRequest;
-const DescribeImportImageOsResponse = models.DescribeImportImageOsResponse;
+const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
+const StartInstancesRequest = models.StartInstancesRequest;
 const EipQuota = models.EipQuota;
 const DeleteSubnetResponse = models.DeleteSubnetResponse;
 const ModifyAddressesBandwidthResponse = models.ModifyAddressesBandwidthResponse;
 const DescribeSubnetsResponse = models.DescribeSubnetsResponse;
 const RunInstancesRequest = models.RunInstancesRequest;
 const ReleaseAddressesRequest = models.ReleaseAddressesRequest;
+const DescribeLoadBalancersRequest = models.DescribeLoadBalancersRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const NetworkInterface = models.NetworkInterface;
 const ModifyModuleSecurityGroupsResponse = models.ModifyModuleSecurityGroupsResponse;
@@ -54,72 +60,84 @@ const RemovePrivateIpAddressesResponse = models.RemovePrivateIpAddressesResponse
 const DescribeDefaultSubnetResponse = models.DescribeDefaultSubnetResponse;
 const VpcInfo = models.VpcInfo;
 const ReplaceSecurityGroupPolicyRequest = models.ReplaceSecurityGroupPolicyRequest;
+const ModifyTargetWeightResponse = models.ModifyTargetWeightResponse;
+const Node = models.Node;
 const DescribeCustomImageTaskResponse = models.DescribeCustomImageTaskResponse;
 const SecurityGroup = models.SecurityGroup;
 const DeleteSubnetRequest = models.DeleteSubnetRequest;
 const DescribeModuleRequest = models.DescribeModuleRequest;
-const Position = models.Position;
+const DescribeTaskStatusRequest = models.DescribeTaskStatusRequest;
+const CreateNetworkInterfaceRequest = models.CreateNetworkInterfaceRequest;
 const CreateModuleResponse = models.CreateModuleResponse;
 const RebootInstancesRequest = models.RebootInstancesRequest;
 const AllocateAddressesRequest = models.AllocateAddressesRequest;
 const DeleteNetworkInterfaceRequest = models.DeleteNetworkInterfaceRequest;
 const RemovePrivateIpAddressesRequest = models.RemovePrivateIpAddressesRequest;
-const SecurityGroupPolicy = models.SecurityGroupPolicy;
+const ZoneInstanceCountISP = models.ZoneInstanceCountISP;
+const LoadBalancerHealth = models.LoadBalancerHealth;
+const DescribeTargetsRequest = models.DescribeTargetsRequest;
 const ModifyInstancesAttributeRequest = models.ModifyInstancesAttributeRequest;
 const InstanceFamilyTypeConfig = models.InstanceFamilyTypeConfig;
 const ResetInstancesResponse = models.ResetInstancesResponse;
 const DescribeImageRequest = models.DescribeImageRequest;
+const DeleteLoadBalancerListenersRequest = models.DeleteLoadBalancerListenersRequest;
 const MigratePrivateIpAddressRequest = models.MigratePrivateIpAddressRequest;
 const ModifySubnetAttributeResponse = models.ModifySubnetAttributeResponse;
 const ZoneInfo = models.ZoneInfo;
 const DescribeNodeRequest = models.DescribeNodeRequest;
 const CreateSubnetResponse = models.CreateSubnetResponse;
 const DescribeSecurityGroupPoliciesResponse = models.DescribeSecurityGroupPoliciesResponse;
-const ModifyModuleConfigRequest = models.ModifyModuleConfigRequest;
+const DescribeListenersResponse = models.DescribeListenersResponse;
 const Area = models.Area;
 const ModifySecurityGroupPoliciesRequest = models.ModifySecurityGroupPoliciesRequest;
 const DescribeConfigRequest = models.DescribeConfigRequest;
 const DescribeInstanceVncUrlRequest = models.DescribeInstanceVncUrlRequest;
-const NetworkStorageRange = models.NetworkStorageRange;
+const CreateListenerResponse = models.CreateListenerResponse;
+const TargetsWeightRule = models.TargetsWeightRule;
+const StopInstancesResponse = models.StopInstancesResponse;
 const StartInstancesResponse = models.StartInstancesResponse;
 const CreateVpcResponse = models.CreateVpcResponse;
+const ModifyTargetPortResponse = models.ModifyTargetPortResponse;
 const AssistantCidr = models.AssistantCidr;
 const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
-const ModifyModuleIpDirectRequest = models.ModifyModuleIpDirectRequest;
+const BatchRegisterTargetsResponse = models.BatchRegisterTargetsResponse;
 const CreateModuleRequest = models.CreateModuleRequest;
 const ModifyInstancesAttributeResponse = models.ModifyInstancesAttributeResponse;
 const ReleaseAddressesResponse = models.ReleaseAddressesResponse;
+const ModifyVpcAttributeRequest = models.ModifyVpcAttributeRequest;
 const DescribeInstancesDeniedActionsResponse = models.DescribeInstancesDeniedActionsResponse;
 const DisassociateAddressRequest = models.DisassociateAddressRequest;
 const TaskOutput = models.TaskOutput;
 const ModuleCounter = models.ModuleCounter;
 const ReplaceSecurityGroupPolicyResponse = models.ReplaceSecurityGroupPolicyResponse;
-const ZoneInstanceCountISP = models.ZoneInstanceCountISP;
-const TaskInput = models.TaskInput;
-const StartInstancesRequest = models.StartInstancesRequest;
+const RuleHealth = models.RuleHealth;
+const Listener = models.Listener;
+const ModifyLoadBalancerAttributesResponse = models.ModifyLoadBalancerAttributesResponse;
 const Tag = models.Tag;
-const CreateSubnetRequest = models.CreateSubnetRequest;
 const DescribeDefaultSubnetRequest = models.DescribeDefaultSubnetRequest;
 const ResetInstancesMaxBandwidthResponse = models.ResetInstancesMaxBandwidthResponse;
 const DeleteSecurityGroupResponse = models.DeleteSecurityGroupResponse;
 const DeleteVpcRequest = models.DeleteVpcRequest;
 const CreateNetworkInterfaceResponse = models.CreateNetworkInterfaceResponse;
-const Node = models.Node;
+const ModifyListenerRequest = models.ModifyListenerRequest;
 const RunInstancesResponse = models.RunInstancesResponse;
 const DescribeAddressQuotaRequest = models.DescribeAddressQuotaRequest;
 const DescribeInstanceTypeConfigResponse = models.DescribeInstanceTypeConfigResponse;
 const NodeInstanceNum = models.NodeInstanceNum;
+const HealthCheck = models.HealthCheck;
 const DescribeSecurityGroupLimitsResponse = models.DescribeSecurityGroupLimitsResponse;
 const DescribeAddressesResponse = models.DescribeAddressesResponse;
 const SecurityGroupPolicySet = models.SecurityGroupPolicySet;
+const DeleteListenerRequest = models.DeleteListenerRequest;
 const DescribeSecurityGroupsResponse = models.DescribeSecurityGroupsResponse;
 const ImportImageRequest = models.ImportImageRequest;
 const DetachNetworkInterfaceResponse = models.DetachNetworkInterfaceResponse;
 const InstanceFamilyConfig = models.InstanceFamilyConfig;
 const DeleteModuleRequest = models.DeleteModuleRequest;
 const CreateImageResponse = models.CreateImageResponse;
-const ModifyVpcAttributeRequest = models.ModifyVpcAttributeRequest;
+const ModifySecurityGroupPoliciesResponse = models.ModifySecurityGroupPoliciesResponse;
 const ResetInstancesMaxBandwidthRequest = models.ResetInstancesMaxBandwidthRequest;
+const LoadBalancerInternetAccessible = models.LoadBalancerInternetAccessible;
 const OsVersion = models.OsVersion;
 const ServiceTemplateSpecification = models.ServiceTemplateSpecification;
 const PeakBase = models.PeakBase;
@@ -132,12 +150,18 @@ const AddressTemplateSpecification = models.AddressTemplateSpecification;
 const DescribeConfigResponse = models.DescribeConfigResponse;
 const ModifyModuleNetworkResponse = models.ModifyModuleNetworkResponse;
 const ModifyDefaultSubnetResponse = models.ModifyDefaultSubnetResponse;
-const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
+const ModifyTargetWeightRequest = models.ModifyTargetWeightRequest;
+const CreateSubnetRequest = models.CreateSubnetRequest;
 const DescribeModuleDetailResponse = models.DescribeModuleDetailResponse;
+const TaskInput = models.TaskInput;
 const StopInstancesRequest = models.StopInstancesRequest;
+const Backend = models.Backend;
 const Subnet = models.Subnet;
 const ModifyVpcAttributeResponse = models.ModifyVpcAttributeResponse;
+const DeleteLoadBalancerRequest = models.DeleteLoadBalancerRequest;
 const DeleteVpcResponse = models.DeleteVpcResponse;
+const Target = models.Target;
+const DescribeVpcsResponse = models.DescribeVpcsResponse;
 const ImageUrl = models.ImageUrl;
 const ISP = models.ISP;
 const PrivateIpAddressSpecification = models.PrivateIpAddressSpecification;
@@ -150,24 +174,30 @@ const EnhancedService = models.EnhancedService;
 const DescribeInstanceVncUrlResponse = models.DescribeInstanceVncUrlResponse;
 const DeleteModuleResponse = models.DeleteModuleResponse;
 const DescribeInstanceTypeConfigRequest = models.DescribeInstanceTypeConfigRequest;
+const DescribeLoadBalanceTaskStatusRequest = models.DescribeLoadBalanceTaskStatusRequest;
 const ImportCustomImageRequest = models.ImportCustomImageRequest;
 const DescribeModuleDetailRequest = models.DescribeModuleDetailRequest;
 const AssociateAddressRequest = models.AssociateAddressRequest;
 const ModifySecurityGroupAttributeRequest = models.ModifySecurityGroupAttributeRequest;
-const ModifySecurityGroupPoliciesResponse = models.ModifySecurityGroupPoliciesResponse;
+const ModifyModuleConfigRequest = models.ModifyModuleConfigRequest;
+const Position = models.Position;
 const DescribePeakNetworkOverviewResponse = models.DescribePeakNetworkOverviewResponse;
 const AttachNetworkInterfaceResponse = models.AttachNetworkInterfaceResponse;
+const SecurityGroupPolicy = models.SecurityGroupPolicy;
 const DescribeVpcsRequest = models.DescribeVpcsRequest;
 const DescribeBaseOverviewRequest = models.DescribeBaseOverviewRequest;
 const AssociateSecurityGroupsResponse = models.AssociateSecurityGroupsResponse;
 const DiskInfo = models.DiskInfo;
+const BatchDeregisterTargetsRequest = models.BatchDeregisterTargetsRequest;
 const DescribeImportImageOsRequest = models.DescribeImportImageOsRequest;
 const NetworkInterfaceAttachment = models.NetworkInterfaceAttachment;
-const StopInstancesResponse = models.StopInstancesResponse;
-const ModifyModuleIpDirectResponse = models.ModifyModuleIpDirectResponse;
+const ModifyListenerResponse = models.ModifyListenerResponse;
+const DescribeTargetHealthResponse = models.DescribeTargetHealthResponse;
+const DescribeLoadBalanceTaskStatusResponse = models.DescribeLoadBalanceTaskStatusResponse;
 const ModifyModuleNameRequest = models.ModifyModuleNameRequest;
 const ModifyDefaultSubnetRequest = models.ModifyDefaultSubnetRequest;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
+const CreateListenerRequest = models.CreateListenerRequest;
 const DescribeTaskResultRequest = models.DescribeTaskResultRequest;
 const VirtualPrivateCloud = models.VirtualPrivateCloud;
 const AssociateAddressResponse = models.AssociateAddressResponse;
@@ -181,7 +211,7 @@ const DescribeAddressQuotaResponse = models.DescribeAddressQuotaResponse;
 const CreateSecurityGroupPoliciesResponse = models.CreateSecurityGroupPoliciesResponse;
 const CreateSecurityGroupResponse = models.CreateSecurityGroupResponse;
 const ZoneInstanceInfo = models.ZoneInstanceInfo;
-const DescribeTaskStatusRequest = models.DescribeTaskStatusRequest;
+const DeleteLoadBalancerResponse = models.DeleteLoadBalancerResponse;
 const DeleteSecurityGroupRequest = models.DeleteSecurityGroupRequest;
 const ModifyAddressAttributeRequest = models.ModifyAddressAttributeRequest;
 const ModifyModuleImageResponse = models.ModifyModuleImageResponse;
@@ -189,29 +219,38 @@ const ResetInstancesRequest = models.ResetInstancesRequest;
 const PeakNetwork = models.PeakNetwork;
 const DescribeCustomImageTaskRequest = models.DescribeCustomImageTaskRequest;
 const DescribeSecurityGroupAssociationStatisticsResponse = models.DescribeSecurityGroupAssociationStatisticsResponse;
+const DescribeTargetsResponse = models.DescribeTargetsResponse;
 const ImageOsList = models.ImageOsList;
 const InstanceOperator = models.InstanceOperator;
 const ModifyAddressAttributeResponse = models.ModifyAddressAttributeResponse;
 const ImportImageResponse = models.ImportImageResponse;
+const BatchModifyTargetWeightRequest = models.BatchModifyTargetWeightRequest;
 const CreateSecurityGroupRequest = models.CreateSecurityGroupRequest;
 const DescribeSecurityGroupLimitsRequest = models.DescribeSecurityGroupLimitsRequest;
+const BatchTarget = models.BatchTarget;
 const City = models.City;
 const PrivateIPAddressInfo = models.PrivateIPAddressInfo;
+const DescribeTargetHealthRequest = models.DescribeTargetHealthRequest;
 const TerminateInstancesRequest = models.TerminateInstancesRequest;
 const DeleteNetworkInterfaceResponse = models.DeleteNetworkInterfaceResponse;
 const SimpleModule = models.SimpleModule;
 const DescribePeakNetworkOverviewRequest = models.DescribePeakNetworkOverviewRequest;
+const ModifyModuleIpDirectResponse = models.ModifyModuleIpDirectResponse;
 const AssignPrivateIpAddressesResponse = models.AssignPrivateIpAddressesResponse;
 const DescribeSecurityGroupsRequest = models.DescribeSecurityGroupsRequest;
 const PeakNetworkRegionInfo = models.PeakNetworkRegionInfo;
 const RebootInstancesResponse = models.RebootInstancesResponse;
+const ModifyModuleIpDirectRequest = models.ModifyModuleIpDirectRequest;
 const ModifyAddressesBandwidthRequest = models.ModifyAddressesBandwidthRequest;
 const DeleteSecurityGroupPoliciesResponse = models.DeleteSecurityGroupPoliciesResponse;
 const PeakFamilyInfo = models.PeakFamilyInfo;
 const DescribePeakBaseOverviewResponse = models.DescribePeakBaseOverviewResponse;
 const ModifyImageAttributeResponse = models.ModifyImageAttributeResponse;
+const BatchRegisterTargetsRequest = models.BatchRegisterTargetsRequest;
 const DescribeImageResponse = models.DescribeImageResponse;
+const ListenerBackend = models.ListenerBackend;
 const RegionInfo = models.RegionInfo;
+const TagInfo = models.TagInfo;
 const DeleteImageResponse = models.DeleteImageResponse;
 const Address = models.Address;
 const DescribeNetworkInterfacesResponse = models.DescribeNetworkInterfacesResponse;
@@ -220,23 +259,32 @@ const ResetInstancesPasswordRequest = models.ResetInstancesPasswordRequest;
 const ModifyImageAttributeRequest = models.ModifyImageAttributeRequest;
 const OperatorAction = models.OperatorAction;
 const CreateVpcRequest = models.CreateVpcRequest;
+const CreateLoadBalancerResponse = models.CreateLoadBalancerResponse;
 const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
 const DescribeSecurityGroupAssociationStatisticsRequest = models.DescribeSecurityGroupAssociationStatisticsRequest;
 const Country = models.Country;
 const DisassociateSecurityGroupsRequest = models.DisassociateSecurityGroupsRequest;
 const ModifySubnetAttributeRequest = models.ModifySubnetAttributeRequest;
 const AllocateAddressesResponse = models.AllocateAddressesResponse;
+const DeleteLoadBalancerListenersResponse = models.DeleteLoadBalancerListenersResponse;
+const DescribeListenersRequest = models.DescribeListenersRequest;
 const AttachNetworkInterfaceRequest = models.AttachNetworkInterfaceRequest;
 const ModuleItem = models.ModuleItem;
 const ModifyModuleImageRequest = models.ModifyModuleImageRequest;
 const CreateSecurityGroupPoliciesRequest = models.CreateSecurityGroupPoliciesRequest;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
+const ModifyTargetPortRequest = models.ModifyTargetPortRequest;
+const DescribeImportImageOsResponse = models.DescribeImportImageOsResponse;
+const DescribeLoadBalancersResponse = models.DescribeLoadBalancersResponse;
 const MigrateNetworkInterfaceResponse = models.MigrateNetworkInterfaceResponse;
-const DescribeVpcsResponse = models.DescribeVpcsResponse;
+const DeleteListenerResponse = models.DeleteListenerResponse;
 const DeleteImageRequest = models.DeleteImageRequest;
 const Module = models.Module;
 const DescribeBaseOverviewResponse = models.DescribeBaseOverviewResponse;
+const TargetHealth = models.TargetHealth;
+const ListenerHealth = models.ListenerHealth;
 const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
+const LoadBalancer = models.LoadBalancer;
 
 
 /**
@@ -250,17 +298,6 @@ class EcmClient extends AbstractClient {
     }
     
     /**
-     * 重置实例的最大带宽上限。
-     * @param {ResetInstancesMaxBandwidthRequest} req
-     * @param {function(string, ResetInstancesMaxBandwidthResponse):void} cb
-     * @public
-     */
-    ResetInstancesMaxBandwidth(req, cb) {
-        let resp = new ResetInstancesMaxBandwidthResponse();
-        this.request("ResetInstancesMaxBandwidth", req, resp, cb);
-    }
-
-    /**
      * 替换单条安全组路由规则, 单个请求中只能替换单个方向的一条规则, 必须要指定索引（PolicyIndex）。
      * @param {ReplaceSecurityGroupPolicyRequest} req
      * @param {function(string, ReplaceSecurityGroupPolicyResponse):void} cb
@@ -269,28 +306,6 @@ class EcmClient extends AbstractClient {
     ReplaceSecurityGroupPolicy(req, cb) {
         let resp = new ReplaceSecurityGroupPolicyResponse();
         this.request("ReplaceSecurityGroupPolicy", req, resp, cb);
-    }
-
-    /**
-     * 销毁实例
-     * @param {TerminateInstancesRequest} req
-     * @param {function(string, TerminateInstancesResponse):void} cb
-     * @public
-     */
-    TerminateInstances(req, cb) {
-        let resp = new TerminateInstancesResponse();
-        this.request("TerminateInstances", req, resp, cb);
-    }
-
-    /**
-     * 获取模块列表
-     * @param {DescribeModuleRequest} req
-     * @param {function(string, DescribeModuleResponse):void} cb
-     * @public
-     */
-    DescribeModule(req, cb) {
-        let resp = new DescribeModuleResponse();
-        this.request("DescribeModule", req, resp, cb);
     }
 
     /**
@@ -305,25 +320,14 @@ class EcmClient extends AbstractClient {
     }
 
     /**
-     * 获取概览页统计的基本数据
-     * @param {DescribeBaseOverviewRequest} req
-     * @param {function(string, DescribeBaseOverviewResponse):void} cb
+     * 查询EIP异步任务执行结果
+     * @param {DescribeTaskResultRequest} req
+     * @param {function(string, DescribeTaskResultResponse):void} cb
      * @public
      */
-    DescribeBaseOverview(req, cb) {
-        let resp = new DescribeBaseOverviewResponse();
-        this.request("DescribeBaseOverview", req, resp, cb);
-    }
-
-    /**
-     * 只有状态为STOPPED的实例才可以进行此操作；接口调用成功时，实例会进入STARTING状态；启动实例成功时，实例会进入RUNNING状态。
-     * @param {StartInstancesRequest} req
-     * @param {function(string, StartInstancesResponse):void} cb
-     * @public
-     */
-    StartInstances(req, cb) {
-        let resp = new StartInstancesResponse();
-        this.request("StartInstances", req, resp, cb);
+    DescribeTaskResult(req, cb) {
+        let resp = new DescribeTaskResultResponse();
+        this.request("DescribeTaskResult", req, resp, cb);
     }
 
     /**
@@ -338,194 +342,25 @@ class EcmClient extends AbstractClient {
     }
 
     /**
-     * 从CVM产品导入镜像到ECM
-     * @param {ImportImageRequest} req
-     * @param {function(string, ImportImageResponse):void} cb
+     * 批量解绑后端服务。
+     * @param {BatchDeregisterTargetsRequest} req
+     * @param {function(string, BatchDeregisterTargetsResponse):void} cb
      * @public
      */
-    ImportImage(req, cb) {
-        let resp = new ImportImageResponse();
-        this.request("ImportImage", req, resp, cb);
+    BatchDeregisterTargets(req, cb) {
+        let resp = new BatchDeregisterTargetsResponse();
+        this.request("BatchDeregisterTargets", req, resp, cb);
     }
 
     /**
-     * 解绑弹性公网IP（简称 EIP）
-只有状态为 BIND 和 BIND_ENI 的 EIP 才能进行解绑定操作。
-EIP 如果被封堵，则不能进行解绑定操作。
-     * @param {DisassociateAddressRequest} req
-     * @param {function(string, DisassociateAddressResponse):void} cb
+     * 修改实例的属性。
+     * @param {ModifyInstancesAttributeRequest} req
+     * @param {function(string, ModifyInstancesAttributeResponse):void} cb
      * @public
      */
-    DisassociateAddress(req, cb) {
-        let resp = new DisassociateAddressResponse();
-        this.request("DisassociateAddress", req, resp, cb);
-    }
-
-    /**
-     * 弹性网卡绑定云主机
-     * @param {AttachNetworkInterfaceRequest} req
-     * @param {function(string, AttachNetworkInterfaceResponse):void} cb
-     * @public
-     */
-    AttachNetworkInterface(req, cb) {
-        let resp = new AttachNetworkInterfaceResponse();
-        this.request("AttachNetworkInterface", req, resp, cb);
-    }
-
-    /**
-     * 释放一个或多个弹性公网IP（简称 EIP）。
-该操作不可逆，释放后 EIP 关联的 IP 地址将不再属于您的名下。
-只有状态为 UNBIND 的 EIP 才能进行释放操作。
-     * @param {ReleaseAddressesRequest} req
-     * @param {function(string, ReleaseAddressesResponse):void} cb
-     * @public
-     */
-    ReleaseAddresses(req, cb) {
-        let resp = new ReleaseAddressesResponse();
-        this.request("ReleaseAddresses", req, resp, cb);
-    }
-
-    /**
-     * 创建私有网络
-     * @param {CreateVpcRequest} req
-     * @param {function(string, CreateVpcResponse):void} cb
-     * @public
-     */
-    CreateVpc(req, cb) {
-        let resp = new CreateVpcResponse();
-        this.request("CreateVpc", req, resp, cb);
-    }
-
-    /**
-     * SecurityGroupPolicySet.Version 用于指定要操作的安全组的版本。传入 Version 版本号若不等于当前安全组的最新版本，将返回失败；若不传 Version 则直接删除指定PolicyIndex的规则。
-     * @param {DeleteSecurityGroupPoliciesRequest} req
-     * @param {function(string, DeleteSecurityGroupPoliciesResponse):void} cb
-     * @public
-     */
-    DeleteSecurityGroupPolicies(req, cb) {
-        let resp = new DeleteSecurityGroupPoliciesResponse();
-        this.request("DeleteSecurityGroupPolicies", req, resp, cb);
-    }
-
-    /**
-     * 查询您账户的弹性公网IP（简称 EIP）在当前地域的配额信息
-     * @param {DescribeAddressQuotaRequest} req
-     * @param {function(string, DescribeAddressQuotaResponse):void} cb
-     * @public
-     */
-    DescribeAddressQuota(req, cb) {
-        let resp = new DescribeAddressQuotaResponse();
-        this.request("DescribeAddressQuota", req, resp, cb);
-    }
-
-    /**
-     * 修改模块配置，已关联实例的模块不支持调整配置。
-     * @param {ModifyModuleConfigRequest} req
-     * @param {function(string, ModifyModuleConfigResponse):void} cb
-     * @public
-     */
-    ModifyModuleConfig(req, cb) {
-        let resp = new ModifyModuleConfigResponse();
-        this.request("ModifyModuleConfig", req, resp, cb);
-    }
-
-    /**
-     * 删除私有网络
-     * @param {DeleteVpcRequest} req
-     * @param {function(string, DeleteVpcResponse):void} cb
-     * @public
-     */
-    DeleteVpc(req, cb) {
-        let resp = new DeleteVpcResponse();
-        this.request("DeleteVpc", req, resp, cb);
-    }
-
-    /**
-     * 查询子网列表
-     * @param {DescribeSubnetsRequest} req
-     * @param {function(string, DescribeSubnetsResponse):void} cb
-     * @public
-     */
-    DescribeSubnets(req, cb) {
-        let resp = new DescribeSubnetsResponse();
-        this.request("DescribeSubnets", req, resp, cb);
-    }
-
-    /**
-     * 修改弹性公网IP属性
-     * @param {ModifyAddressAttributeRequest} req
-     * @param {function(string, ModifyAddressAttributeResponse):void} cb
-     * @public
-     */
-    ModifyAddressAttribute(req, cb) {
-        let resp = new ModifyAddressAttributeResponse();
-        this.request("ModifyAddressAttribute", req, resp, cb);
-    }
-
-    /**
-     * 申请一个或多个弹性公网IP（简称 EIP）
-     * @param {AllocateAddressesRequest} req
-     * @param {function(string, AllocateAddressesResponse):void} cb
-     * @public
-     */
-    AllocateAddresses(req, cb) {
-        let resp = new AllocateAddressesResponse();
-        this.request("AllocateAddresses", req, resp, cb);
-    }
-
-    /**
-     * 获取实例的相关信息。
-     * @param {DescribeInstancesRequest} req
-     * @param {function(string, DescribeInstancesResponse):void} cb
-     * @public
-     */
-    DescribeInstances(req, cb) {
-        let resp = new DescribeInstancesResponse();
-        this.request("DescribeInstances", req, resp, cb);
-    }
-
-    /**
-     * 弹性网卡迁移
-     * @param {MigrateNetworkInterfaceRequest} req
-     * @param {function(string, MigrateNetworkInterfaceResponse):void} cb
-     * @public
-     */
-    MigrateNetworkInterface(req, cb) {
-        let resp = new MigrateNetworkInterfaceResponse();
-        this.request("MigrateNetworkInterface", req, resp, cb);
-    }
-
-    /**
-     * 修改模块IP直通。
-     * @param {ModifyModuleIpDirectRequest} req
-     * @param {function(string, ModifyModuleIpDirectResponse):void} cb
-     * @public
-     */
-    ModifyModuleIpDirect(req, cb) {
-        let resp = new ModifyModuleIpDirectResponse();
-        this.request("ModifyModuleIpDirect", req, resp, cb);
-    }
-
-    /**
-     * 获取机型配置列表
-     * @param {DescribeInstanceTypeConfigRequest} req
-     * @param {function(string, DescribeInstanceTypeConfigResponse):void} cb
-     * @public
-     */
-    DescribeInstanceTypeConfig(req, cb) {
-        let resp = new DescribeInstanceTypeConfigResponse();
-        this.request("DescribeInstanceTypeConfig", req, resp, cb);
-    }
-
-    /**
-     * 查看安全组
-     * @param {DescribeSecurityGroupsRequest} req
-     * @param {function(string, DescribeSecurityGroupsResponse):void} cb
-     * @public
-     */
-    DescribeSecurityGroups(req, cb) {
-        let resp = new DescribeSecurityGroupsResponse();
-        this.request("DescribeSecurityGroups", req, resp, cb);
+    ModifyInstancesAttribute(req, cb) {
+        let resp = new ModifyInstancesAttributeResponse();
+        this.request("ModifyInstancesAttribute", req, resp, cb);
     }
 
     /**
@@ -551,17 +386,6 @@ EIP 如果被封堵，则不能进行解绑定操作。
     }
 
     /**
-     * 查询安全组规则
-     * @param {DescribeSecurityGroupPoliciesRequest} req
-     * @param {function(string, DescribeSecurityGroupPoliciesResponse):void} cb
-     * @public
-     */
-    DescribeSecurityGroupPolicies(req, cb) {
-        let resp = new DescribeSecurityGroupPoliciesResponse();
-        this.request("DescribeSecurityGroupPolicies", req, resp, cb);
-    }
-
-    /**
      * 查询弹性公网IP列表
      * @param {DescribeAddressesRequest} req
      * @param {function(string, DescribeAddressesResponse):void} cb
@@ -570,6 +394,253 @@ EIP 如果被封堵，则不能进行解绑定操作。
     DescribeAddresses(req, cb) {
         let resp = new DescribeAddressesResponse();
         this.request("DescribeAddresses", req, resp, cb);
+    }
+
+    /**
+     * 修改模块的默认镜像
+     * @param {ModifyModuleImageRequest} req
+     * @param {function(string, ModifyModuleImageResponse):void} cb
+     * @public
+     */
+    ModifyModuleImage(req, cb) {
+        let resp = new ModifyModuleImageResponse();
+        this.request("ModifyModuleImage", req, resp, cb);
+    }
+
+    /**
+     * 查询负载均衡的监听器列表。
+     * @param {DescribeListenersRequest} req
+     * @param {function(string, DescribeListenersResponse):void} cb
+     * @public
+     */
+    DescribeListeners(req, cb) {
+        let resp = new DescribeListenersResponse();
+        this.request("DescribeListeners", req, resp, cb);
+    }
+
+    /**
+     * 本接口(CreateImage)用于将实例的系统盘制作为新镜像，创建后的镜像可以用于创建实例。
+     * @param {CreateImageRequest} req
+     * @param {function(string, CreateImageResponse):void} cb
+     * @public
+     */
+    CreateImage(req, cb) {
+        let resp = new CreateImageResponse();
+        this.request("CreateImage", req, resp, cb);
+    }
+
+    /**
+     * 获取节点列表
+     * @param {DescribeNodeRequest} req
+     * @param {function(string, DescribeNodeResponse):void} cb
+     * @public
+     */
+    DescribeNode(req, cb) {
+        let resp = new DescribeNodeResponse();
+        this.request("DescribeNode", req, resp, cb);
+    }
+
+    /**
+     * 从CVM产品导入镜像到ECM
+     * @param {ImportImageRequest} req
+     * @param {function(string, ImportImageResponse):void} cb
+     * @public
+     */
+    ImportImage(req, cb) {
+        let resp = new ImportImageResponse();
+        this.request("ImportImage", req, resp, cb);
+    }
+
+    /**
+     * 修改负载均衡实例的属性。
+     * @param {ModifyLoadBalancerAttributesRequest} req
+     * @param {function(string, ModifyLoadBalancerAttributesResponse):void} cb
+     * @public
+     */
+    ModifyLoadBalancerAttributes(req, cb) {
+        let resp = new ModifyLoadBalancerAttributesResponse();
+        this.request("ModifyLoadBalancerAttributes", req, resp, cb);
+    }
+
+    /**
+     * 查询负载均衡相关的任务状态
+     * @param {DescribeLoadBalanceTaskStatusRequest} req
+     * @param {function(string, DescribeLoadBalanceTaskStatusResponse):void} cb
+     * @public
+     */
+    DescribeLoadBalanceTaskStatus(req, cb) {
+        let resp = new DescribeLoadBalanceTaskStatusResponse();
+        this.request("DescribeLoadBalanceTaskStatus", req, resp, cb);
+    }
+
+    /**
+     * 查询私有网络列表
+     * @param {DescribeVpcsRequest} req
+     * @param {function(string, DescribeVpcsResponse):void} cb
+     * @public
+     */
+    DescribeVpcs(req, cb) {
+        let resp = new DescribeVpcsResponse();
+        this.request("DescribeVpcs", req, resp, cb);
+    }
+
+    /**
+     * 批量修改监听器绑定的后端机器的转发权重。
+     * @param {BatchModifyTargetWeightRequest} req
+     * @param {function(string, BatchModifyTargetWeightResponse):void} cb
+     * @public
+     */
+    BatchModifyTargetWeight(req, cb) {
+        let resp = new BatchModifyTargetWeightResponse();
+        this.request("BatchModifyTargetWeight", req, resp, cb);
+    }
+
+    /**
+     * 展示镜像列表
+     * @param {DescribeImageRequest} req
+     * @param {function(string, DescribeImageResponse):void} cb
+     * @public
+     */
+    DescribeImage(req, cb) {
+        let resp = new DescribeImageResponse();
+        this.request("DescribeImage", req, resp, cb);
+    }
+
+    /**
+     * 解绑安全组
+     * @param {DisassociateSecurityGroupsRequest} req
+     * @param {function(string, DisassociateSecurityGroupsResponse):void} cb
+     * @public
+     */
+    DisassociateSecurityGroups(req, cb) {
+        let resp = new DisassociateSecurityGroupsResponse();
+        this.request("DisassociateSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * 只有当前账号下的安全组允许被删除。
+安全组实例ID如果在其他安全组的规则中被引用，则无法直接删除。这种情况下，需要先进行规则修改，再删除安全组。
+删除的安全组无法再找回，请谨慎调用。
+     * @param {DeleteSecurityGroupRequest} req
+     * @param {function(string, DeleteSecurityGroupResponse):void} cb
+     * @public
+     */
+    DeleteSecurityGroup(req, cb) {
+        let resp = new DeleteSecurityGroupResponse();
+        this.request("DeleteSecurityGroup", req, resp, cb);
+    }
+
+    /**
+     * 调整弹性公网IP带宽
+
+     * @param {ModifyAddressesBandwidthRequest} req
+     * @param {function(string, ModifyAddressesBandwidthResponse):void} cb
+     * @public
+     */
+    ModifyAddressesBandwidth(req, cb) {
+        let resp = new ModifyAddressesBandwidthResponse();
+        this.request("ModifyAddressesBandwidth", req, resp, cb);
+    }
+
+    /**
+     * 创建子网，若创建成功，则此子网会成为此可用区的默认子网。
+     * @param {CreateSubnetRequest} req
+     * @param {function(string, CreateSubnetResponse):void} cb
+     * @public
+     */
+    CreateSubnet(req, cb) {
+        let resp = new CreateSubnetResponse();
+        this.request("CreateSubnet", req, resp, cb);
+    }
+
+    /**
+     * 重置实例的最大带宽上限。
+     * @param {ResetInstancesMaxBandwidthRequest} req
+     * @param {function(string, ResetInstancesMaxBandwidthResponse):void} cb
+     * @public
+     */
+    ResetInstancesMaxBandwidth(req, cb) {
+        let resp = new ResetInstancesMaxBandwidthResponse();
+        this.request("ResetInstancesMaxBandwidth", req, resp, cb);
+    }
+
+    /**
+     * 获取模块列表
+     * @param {DescribeModuleRequest} req
+     * @param {function(string, DescribeModuleResponse):void} cb
+     * @public
+     */
+    DescribeModule(req, cb) {
+        let resp = new DescribeModuleResponse();
+        this.request("DescribeModule", req, resp, cb);
+    }
+
+    /**
+     * 只有状态为STOPPED的实例才可以进行此操作；接口调用成功时，实例会进入STARTING状态；启动实例成功时，实例会进入RUNNING状态。
+     * @param {StartInstancesRequest} req
+     * @param {function(string, StartInstancesResponse):void} cb
+     * @public
+     */
+    StartInstances(req, cb) {
+        let resp = new StartInstancesResponse();
+        this.request("StartInstances", req, resp, cb);
+    }
+
+    /**
+     * 删除负载均衡监听器。
+     * @param {DeleteListenerRequest} req
+     * @param {function(string, DeleteListenerResponse):void} cb
+     * @public
+     */
+    DeleteListener(req, cb) {
+        let resp = new DeleteListenerResponse();
+        this.request("DeleteListener", req, resp, cb);
+    }
+
+    /**
+     * 解绑弹性公网IP（简称 EIP）
+只有状态为 BIND 和 BIND_ENI 的 EIP 才能进行解绑定操作。
+EIP 如果被封堵，则不能进行解绑定操作。
+     * @param {DisassociateAddressRequest} req
+     * @param {function(string, DisassociateAddressResponse):void} cb
+     * @public
+     */
+    DisassociateAddress(req, cb) {
+        let resp = new DisassociateAddressResponse();
+        this.request("DisassociateAddress", req, resp, cb);
+    }
+
+    /**
+     * 创建私有网络
+     * @param {CreateVpcRequest} req
+     * @param {function(string, CreateVpcResponse):void} cb
+     * @public
+     */
+    CreateVpc(req, cb) {
+        let resp = new CreateVpcResponse();
+        this.request("CreateVpc", req, resp, cb);
+    }
+
+    /**
+     * 申请一个或多个弹性公网IP（简称 EIP）
+     * @param {AllocateAddressesRequest} req
+     * @param {function(string, AllocateAddressesResponse):void} cb
+     * @public
+     */
+    AllocateAddresses(req, cb) {
+        let resp = new AllocateAddressesResponse();
+        this.request("AllocateAddresses", req, resp, cb);
+    }
+
+    /**
+     * 修改负载均衡监听器属性。
+     * @param {ModifyListenerRequest} req
+     * @param {function(string, ModifyListenerResponse):void} cb
+     * @public
+     */
+    ModifyListener(req, cb) {
+        let resp = new ModifyListenerResponse();
+        this.request("ModifyListener", req, resp, cb);
     }
 
     /**
@@ -590,39 +661,6 @@ EIP 如果欠费或被封堵，则不能被绑定。
     }
 
     /**
-     * 查询EIP异步任务执行结果
-     * @param {DescribeTaskResultRequest} req
-     * @param {function(string, DescribeTaskResultResponse):void} cb
-     * @public
-     */
-    DescribeTaskResult(req, cb) {
-        let resp = new DescribeTaskResultResponse();
-        this.request("DescribeTaskResult", req, resp, cb);
-    }
-
-    /**
-     * 创建模块
-     * @param {CreateModuleRequest} req
-     * @param {function(string, CreateModuleResponse):void} cb
-     * @public
-     */
-    CreateModule(req, cb) {
-        let resp = new CreateModuleResponse();
-        this.request("CreateModule", req, resp, cb);
-    }
-
-    /**
-     * 查询可用区的默认子网
-     * @param {DescribeDefaultSubnetRequest} req
-     * @param {function(string, DescribeDefaultSubnetResponse):void} cb
-     * @public
-     */
-    DescribeDefaultSubnet(req, cb) {
-        let resp = new DescribeDefaultSubnetResponse();
-        this.request("DescribeDefaultSubnet", req, resp, cb);
-    }
-
-    /**
      * 删除子网，若子网为可用区下的默认子网，则默认子网会回退到系统自动创建的默认子网，非用户最新创建的子网。若默认子网不满足需求，可调用设置默认子网接口设置。
      * @param {DeleteSubnetRequest} req
      * @param {function(string, DeleteSubnetResponse):void} cb
@@ -634,106 +672,14 @@ EIP 如果欠费或被封堵，则不能被绑定。
     }
 
     /**
-     * 修改安全组属性
-     * @param {ModifySecurityGroupAttributeRequest} req
-     * @param {function(string, ModifySecurityGroupAttributeResponse):void} cb
+     * 批量绑定后端目标。
+     * @param {BatchRegisterTargetsRequest} req
+     * @param {function(string, BatchRegisterTargetsResponse):void} cb
      * @public
      */
-    ModifySecurityGroupAttribute(req, cb) {
-        let resp = new ModifySecurityGroupAttributeResponse();
-        this.request("ModifySecurityGroupAttribute", req, resp, cb);
-    }
-
-    /**
-     * 修改模块默认带宽上限
-     * @param {ModifyModuleNetworkRequest} req
-     * @param {function(string, ModifyModuleNetworkResponse):void} cb
-     * @public
-     */
-    ModifyModuleNetwork(req, cb) {
-        let resp = new ModifyModuleNetworkResponse();
-        this.request("ModifyModuleNetwork", req, resp, cb);
-    }
-
-    /**
-     * 查询弹性网卡列表
-     * @param {DescribeNetworkInterfacesRequest} req
-     * @param {function(string, DescribeNetworkInterfacesResponse):void} cb
-     * @public
-     */
-    DescribeNetworkInterfaces(req, cb) {
-        let resp = new DescribeNetworkInterfacesResponse();
-        this.request("DescribeNetworkInterfaces", req, resp, cb);
-    }
-
-    /**
-     * 只有当前账号下的安全组允许被删除。
-安全组实例ID如果在其他安全组的规则中被引用，则无法直接删除。这种情况下，需要先进行规则修改，再删除安全组。
-删除的安全组无法再找回，请谨慎调用。
-     * @param {DeleteSecurityGroupRequest} req
-     * @param {function(string, DeleteSecurityGroupResponse):void} cb
-     * @public
-     */
-    DeleteSecurityGroup(req, cb) {
-        let resp = new DeleteSecurityGroupResponse();
-        this.request("DeleteSecurityGroup", req, resp, cb);
-    }
-
-    /**
-     * 本接口(CreateImage)用于将实例的系统盘制作为新镜像，创建后的镜像可以用于创建实例。
-     * @param {CreateImageRequest} req
-     * @param {function(string, CreateImageResponse):void} cb
-     * @public
-     */
-    CreateImage(req, cb) {
-        let resp = new CreateImageResponse();
-        this.request("CreateImage", req, resp, cb);
-    }
-
-    /**
-     * 绑定安全组
-     * @param {AssociateSecurityGroupsRequest} req
-     * @param {function(string, AssociateSecurityGroupsResponse):void} cb
-     * @public
-     */
-    AssociateSecurityGroups(req, cb) {
-        let resp = new AssociateSecurityGroupsResponse();
-        this.request("AssociateSecurityGroups", req, resp, cb);
-    }
-
-    /**
-     * 修改子网属性
-     * @param {ModifySubnetAttributeRequest} req
-     * @param {function(string, ModifySubnetAttributeResponse):void} cb
-     * @public
-     */
-    ModifySubnetAttribute(req, cb) {
-        let resp = new ModifySubnetAttributeResponse();
-        this.request("ModifySubnetAttribute", req, resp, cb);
-    }
-
-    /**
-     * 弹性网卡内网IP迁移。
-该接口用于将一个内网IP从一个弹性网卡上迁移到另外一个弹性网卡，主IP地址不支持迁移。
-迁移前后的弹性网卡必须在同一个子网内。
-     * @param {MigratePrivateIpAddressRequest} req
-     * @param {function(string, MigratePrivateIpAddressResponse):void} cb
-     * @public
-     */
-    MigratePrivateIpAddress(req, cb) {
-        let resp = new MigratePrivateIpAddressResponse();
-        this.request("MigratePrivateIpAddress", req, resp, cb);
-    }
-
-    /**
-     * 本接口（ModifyImageAttribute）用于修改镜像属性。
-     * @param {ModifyImageAttributeRequest} req
-     * @param {function(string, ModifyImageAttributeResponse):void} cb
-     * @public
-     */
-    ModifyImageAttribute(req, cb) {
-        let resp = new ModifyImageAttributeResponse();
-        this.request("ModifyImageAttribute", req, resp, cb);
+    BatchRegisterTargets(req, cb) {
+        let resp = new BatchRegisterTargetsResponse();
+        this.request("BatchRegisterTargets", req, resp, cb);
     }
 
     /**
@@ -748,17 +694,6 @@ EIP 如果欠费或被封堵，则不能被绑定。
     }
 
     /**
-     * 本接口(DescribeTaskStatus)用于获取异步任务状态
-     * @param {DescribeTaskStatusRequest} req
-     * @param {function(string, DescribeTaskStatusResponse):void} cb
-     * @public
-     */
-    DescribeTaskStatus(req, cb) {
-        let resp = new DescribeTaskStatusResponse();
-        this.request("DescribeTaskStatus", req, resp, cb);
-    }
-
-    /**
      * 创建弹性网卡
      * @param {CreateNetworkInterfaceRequest} req
      * @param {function(string, CreateNetworkInterfaceResponse):void} cb
@@ -767,17 +702,6 @@ EIP 如果欠费或被封堵，则不能被绑定。
     CreateNetworkInterface(req, cb) {
         let resp = new CreateNetworkInterfaceResponse();
         this.request("CreateNetworkInterface", req, resp, cb);
-    }
-
-    /**
-     * 获取网络峰值数据
-     * @param {DescribePeakNetworkOverviewRequest} req
-     * @param {function(string, DescribePeakNetworkOverviewResponse):void} cb
-     * @public
-     */
-    DescribePeakNetworkOverview(req, cb) {
-        let resp = new DescribePeakNetworkOverviewResponse();
-        this.request("DescribePeakNetworkOverview", req, resp, cb);
     }
 
     /**
@@ -805,72 +729,6 @@ EIP 如果欠费或被封堵，则不能被绑定。
     }
 
     /**
-     * 修改安全组出站和入站规则
-     * @param {ModifySecurityGroupPoliciesRequest} req
-     * @param {function(string, ModifySecurityGroupPoliciesResponse):void} cb
-     * @public
-     */
-    ModifySecurityGroupPolicies(req, cb) {
-        let resp = new ModifySecurityGroupPoliciesResponse();
-        this.request("ModifySecurityGroupPolicies", req, resp, cb);
-    }
-
-    /**
-     * 创建安全组
-     * @param {CreateSecurityGroupRequest} req
-     * @param {function(string, CreateSecurityGroupResponse):void} cb
-     * @public
-     */
-    CreateSecurityGroup(req, cb) {
-        let resp = new CreateSecurityGroupResponse();
-        this.request("CreateSecurityGroup", req, resp, cb);
-    }
-
-    /**
-     * 修改模块默认安全组
-     * @param {ModifyModuleSecurityGroupsRequest} req
-     * @param {function(string, ModifyModuleSecurityGroupsResponse):void} cb
-     * @public
-     */
-    ModifyModuleSecurityGroups(req, cb) {
-        let resp = new ModifyModuleSecurityGroupsResponse();
-        this.request("ModifyModuleSecurityGroups", req, resp, cb);
-    }
-
-    /**
-     * 获取节点列表
-     * @param {DescribeNodeRequest} req
-     * @param {function(string, DescribeNodeResponse):void} cb
-     * @public
-     */
-    DescribeNode(req, cb) {
-        let resp = new DescribeNodeResponse();
-        this.request("DescribeNode", req, resp, cb);
-    }
-
-    /**
-     * 导入自定义镜像，支持 RAW、VHD、QCOW2、VMDK 镜像格式
-     * @param {ImportCustomImageRequest} req
-     * @param {function(string, ImportCustomImageResponse):void} cb
-     * @public
-     */
-    ImportCustomImage(req, cb) {
-        let resp = new ImportCustomImageResponse();
-        this.request("ImportCustomImage", req, resp, cb);
-    }
-
-    /**
-     * 展示模块详细信息
-     * @param {DescribeModuleDetailRequest} req
-     * @param {function(string, DescribeModuleDetailResponse):void} cb
-     * @public
-     */
-    DescribeModuleDetail(req, cb) {
-        let resp = new DescribeModuleDetailResponse();
-        this.request("DescribeModuleDetail", req, resp, cb);
-    }
-
-    /**
      * 弹性网卡解绑云主机
      * @param {DetachNetworkInterfaceRequest} req
      * @param {function(string, DetachNetworkInterfaceResponse):void} cb
@@ -879,17 +737,6 @@ EIP 如果欠费或被封堵，则不能被绑定。
     DetachNetworkInterface(req, cb) {
         let resp = new DetachNetworkInterfaceResponse();
         this.request("DetachNetworkInterface", req, resp, cb);
-    }
-
-    /**
-     * 弹性网卡申请内网 IP
-     * @param {AssignPrivateIpAddressesRequest} req
-     * @param {function(string, AssignPrivateIpAddressesResponse):void} cb
-     * @public
-     */
-    AssignPrivateIpAddresses(req, cb) {
-        let resp = new AssignPrivateIpAddressesResponse();
-        this.request("AssignPrivateIpAddresses", req, resp, cb);
     }
 
     /**
@@ -904,102 +751,14 @@ EIP 如果欠费或被封堵，则不能被绑定。
     }
 
     /**
-     * 查询实例管理终端地址
-     * @param {DescribeInstanceVncUrlRequest} req
-     * @param {function(string, DescribeInstanceVncUrlResponse):void} cb
+     * 修改监听器绑定的后端机器的端口。
+     * @param {ModifyTargetPortRequest} req
+     * @param {function(string, ModifyTargetPortResponse):void} cb
      * @public
      */
-    DescribeInstanceVncUrl(req, cb) {
-        let resp = new DescribeInstanceVncUrlResponse();
-        this.request("DescribeInstanceVncUrl", req, resp, cb);
-    }
-
-    /**
-     * 修改私有网络（VPC）的相关属性
-     * @param {ModifyVpcAttributeRequest} req
-     * @param {function(string, ModifyVpcAttributeResponse):void} cb
-     * @public
-     */
-    ModifyVpcAttribute(req, cb) {
-        let resp = new ModifyVpcAttributeResponse();
-        this.request("ModifyVpcAttribute", req, resp, cb);
-    }
-
-    /**
-     * 查询用户安全组配额
-     * @param {DescribeSecurityGroupLimitsRequest} req
-     * @param {function(string, DescribeSecurityGroupLimitsResponse):void} cb
-     * @public
-     */
-    DescribeSecurityGroupLimits(req, cb) {
-        let resp = new DescribeSecurityGroupLimitsResponse();
-        this.request("DescribeSecurityGroupLimits", req, resp, cb);
-    }
-
-    /**
-     * 重置处于运行中状态的实例的密码，需要显式指定强制关机参数ForceStop。如果没有显式指定强制关机参数，则只有处于关机状态的实例才允许执行重置密码操作。
-     * @param {ResetInstancesPasswordRequest} req
-     * @param {function(string, ResetInstancesPasswordResponse):void} cb
-     * @public
-     */
-    ResetInstancesPassword(req, cb) {
-        let resp = new ResetInstancesPasswordResponse();
-        this.request("ResetInstancesPassword", req, resp, cb);
-    }
-
-    /**
-     * 查询安全组关联实例统计
-     * @param {DescribeSecurityGroupAssociationStatisticsRequest} req
-     * @param {function(string, DescribeSecurityGroupAssociationStatisticsResponse):void} cb
-     * @public
-     */
-    DescribeSecurityGroupAssociationStatistics(req, cb) {
-        let resp = new DescribeSecurityGroupAssociationStatisticsResponse();
-        this.request("DescribeSecurityGroupAssociationStatistics", req, resp, cb);
-    }
-
-    /**
-     * 修改模块的默认镜像
-     * @param {ModifyModuleImageRequest} req
-     * @param {function(string, ModifyModuleImageResponse):void} cb
-     * @public
-     */
-    ModifyModuleImage(req, cb) {
-        let resp = new ModifyModuleImageResponse();
-        this.request("ModifyModuleImage", req, resp, cb);
-    }
-
-    /**
-     * 修改实例的属性。
-     * @param {ModifyInstancesAttributeRequest} req
-     * @param {function(string, ModifyInstancesAttributeResponse):void} cb
-     * @public
-     */
-    ModifyInstancesAttribute(req, cb) {
-        let resp = new ModifyInstancesAttributeResponse();
-        this.request("ModifyInstancesAttribute", req, resp, cb);
-    }
-
-    /**
-     * CPU 内存 硬盘等基础信息峰值数据
-     * @param {DescribePeakBaseOverviewRequest} req
-     * @param {function(string, DescribePeakBaseOverviewResponse):void} cb
-     * @public
-     */
-    DescribePeakBaseOverview(req, cb) {
-        let resp = new DescribePeakBaseOverviewResponse();
-        this.request("DescribePeakBaseOverview", req, resp, cb);
-    }
-
-    /**
-     * 修改在一个可用区下创建实例时使用的默认子网（创建实例时，未填写VPC参数时使用的sunbetId）
-     * @param {ModifyDefaultSubnetRequest} req
-     * @param {function(string, ModifyDefaultSubnetResponse):void} cb
-     * @public
-     */
-    ModifyDefaultSubnet(req, cb) {
-        let resp = new ModifyDefaultSubnetResponse();
-        this.request("ModifyDefaultSubnet", req, resp, cb);
+    ModifyTargetPort(req, cb) {
+        let resp = new ModifyTargetPortResponse();
+        this.request("ModifyTargetPort", req, resp, cb);
     }
 
     /**
@@ -1025,6 +784,260 @@ EIP 如果欠费或被封堵，则不能被绑定。
     }
 
     /**
+     * 修改模块IP直通。
+     * @param {ModifyModuleIpDirectRequest} req
+     * @param {function(string, ModifyModuleIpDirectResponse):void} cb
+     * @public
+     */
+    ModifyModuleIpDirect(req, cb) {
+        let resp = new ModifyModuleIpDirectResponse();
+        this.request("ModifyModuleIpDirect", req, resp, cb);
+    }
+
+    /**
+     * 弹性网卡退还内网 IP。
+退还弹性网卡上的辅助内网IP，接口自动解关联弹性公网 IP。不能退还弹性网卡的主内网IP。
+     * @param {RemovePrivateIpAddressesRequest} req
+     * @param {function(string, RemovePrivateIpAddressesResponse):void} cb
+     * @public
+     */
+    RemovePrivateIpAddresses(req, cb) {
+        let resp = new RemovePrivateIpAddressesResponse();
+        this.request("RemovePrivateIpAddresses", req, resp, cb);
+    }
+
+    /**
+     * 获取概览页统计的基本数据
+     * @param {DescribeBaseOverviewRequest} req
+     * @param {function(string, DescribeBaseOverviewResponse):void} cb
+     * @public
+     */
+    DescribeBaseOverview(req, cb) {
+        let resp = new DescribeBaseOverviewResponse();
+        this.request("DescribeBaseOverview", req, resp, cb);
+    }
+
+    /**
+     * 弹性网卡绑定云主机
+     * @param {AttachNetworkInterfaceRequest} req
+     * @param {function(string, AttachNetworkInterfaceResponse):void} cb
+     * @public
+     */
+    AttachNetworkInterface(req, cb) {
+        let resp = new AttachNetworkInterfaceResponse();
+        this.request("AttachNetworkInterface", req, resp, cb);
+    }
+
+    /**
+     * SecurityGroupPolicySet.Version 用于指定要操作的安全组的版本。传入 Version 版本号若不等于当前安全组的最新版本，将返回失败；若不传 Version 则直接删除指定PolicyIndex的规则。
+     * @param {DeleteSecurityGroupPoliciesRequest} req
+     * @param {function(string, DeleteSecurityGroupPoliciesResponse):void} cb
+     * @public
+     */
+    DeleteSecurityGroupPolicies(req, cb) {
+        let resp = new DeleteSecurityGroupPoliciesResponse();
+        this.request("DeleteSecurityGroupPolicies", req, resp, cb);
+    }
+
+    /**
+     * 修改模块配置，已关联实例的模块不支持调整配置。
+     * @param {ModifyModuleConfigRequest} req
+     * @param {function(string, ModifyModuleConfigResponse):void} cb
+     * @public
+     */
+    ModifyModuleConfig(req, cb) {
+        let resp = new ModifyModuleConfigResponse();
+        this.request("ModifyModuleConfig", req, resp, cb);
+    }
+
+    /**
+     * 修改安全组属性
+     * @param {ModifySecurityGroupAttributeRequest} req
+     * @param {function(string, ModifySecurityGroupAttributeResponse):void} cb
+     * @public
+     */
+    ModifySecurityGroupAttribute(req, cb) {
+        let resp = new ModifySecurityGroupAttributeResponse();
+        this.request("ModifySecurityGroupAttribute", req, resp, cb);
+    }
+
+    /**
+     * 展示模块详细信息
+     * @param {DescribeModuleDetailRequest} req
+     * @param {function(string, DescribeModuleDetailResponse):void} cb
+     * @public
+     */
+    DescribeModuleDetail(req, cb) {
+        let resp = new DescribeModuleDetailResponse();
+        this.request("DescribeModuleDetail", req, resp, cb);
+    }
+
+    /**
+     * 删除负载均衡实例。
+     * @param {DeleteLoadBalancerRequest} req
+     * @param {function(string, DeleteLoadBalancerResponse):void} cb
+     * @public
+     */
+    DeleteLoadBalancer(req, cb) {
+        let resp = new DeleteLoadBalancerResponse();
+        this.request("DeleteLoadBalancer", req, resp, cb);
+    }
+
+    /**
+     * 获取机型配置列表
+     * @param {DescribeInstanceTypeConfigRequest} req
+     * @param {function(string, DescribeInstanceTypeConfigResponse):void} cb
+     * @public
+     */
+    DescribeInstanceTypeConfig(req, cb) {
+        let resp = new DescribeInstanceTypeConfigResponse();
+        this.request("DescribeInstanceTypeConfig", req, resp, cb);
+    }
+
+    /**
+     * 修改安全组出站和入站规则
+     * @param {ModifySecurityGroupPoliciesRequest} req
+     * @param {function(string, ModifySecurityGroupPoliciesResponse):void} cb
+     * @public
+     */
+    ModifySecurityGroupPolicies(req, cb) {
+        let resp = new ModifySecurityGroupPoliciesResponse();
+        this.request("ModifySecurityGroupPolicies", req, resp, cb);
+    }
+
+    /**
+     * 修改子网属性
+     * @param {ModifySubnetAttributeRequest} req
+     * @param {function(string, ModifySubnetAttributeResponse):void} cb
+     * @public
+     */
+    ModifySubnetAttribute(req, cb) {
+        let resp = new ModifySubnetAttributeResponse();
+        this.request("ModifySubnetAttribute", req, resp, cb);
+    }
+
+    /**
+     * 查询弹性网卡列表
+     * @param {DescribeNetworkInterfacesRequest} req
+     * @param {function(string, DescribeNetworkInterfacesResponse):void} cb
+     * @public
+     */
+    DescribeNetworkInterfaces(req, cb) {
+        let resp = new DescribeNetworkInterfacesResponse();
+        this.request("DescribeNetworkInterfaces", req, resp, cb);
+    }
+
+    /**
+     * 绑定安全组
+     * @param {AssociateSecurityGroupsRequest} req
+     * @param {function(string, AssociateSecurityGroupsResponse):void} cb
+     * @public
+     */
+    AssociateSecurityGroups(req, cb) {
+        let resp = new AssociateSecurityGroupsResponse();
+        this.request("AssociateSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ModifyImageAttribute）用于修改镜像属性。
+     * @param {ModifyImageAttributeRequest} req
+     * @param {function(string, ModifyImageAttributeResponse):void} cb
+     * @public
+     */
+    ModifyImageAttribute(req, cb) {
+        let resp = new ModifyImageAttributeResponse();
+        this.request("ModifyImageAttribute", req, resp, cb);
+    }
+
+    /**
+     * 本接口(DescribeTaskStatus)用于获取异步任务状态
+     * @param {DescribeTaskStatusRequest} req
+     * @param {function(string, DescribeTaskStatusResponse):void} cb
+     * @public
+     */
+    DescribeTaskStatus(req, cb) {
+        let resp = new DescribeTaskStatusResponse();
+        this.request("DescribeTaskStatus", req, resp, cb);
+    }
+
+    /**
+     * 获取网络峰值数据
+     * @param {DescribePeakNetworkOverviewRequest} req
+     * @param {function(string, DescribePeakNetworkOverviewResponse):void} cb
+     * @public
+     */
+    DescribePeakNetworkOverview(req, cb) {
+        let resp = new DescribePeakNetworkOverviewResponse();
+        this.request("DescribePeakNetworkOverview", req, resp, cb);
+    }
+
+    /**
+     * 创建安全组
+     * @param {CreateSecurityGroupRequest} req
+     * @param {function(string, CreateSecurityGroupResponse):void} cb
+     * @public
+     */
+    CreateSecurityGroup(req, cb) {
+        let resp = new CreateSecurityGroupResponse();
+        this.request("CreateSecurityGroup", req, resp, cb);
+    }
+
+    /**
+     * 导入自定义镜像，支持 RAW、VHD、QCOW2、VMDK 镜像格式
+     * @param {ImportCustomImageRequest} req
+     * @param {function(string, ImportCustomImageResponse):void} cb
+     * @public
+     */
+    ImportCustomImage(req, cb) {
+        let resp = new ImportCustomImageResponse();
+        this.request("ImportCustomImage", req, resp, cb);
+    }
+
+    /**
+     * 销毁实例
+     * @param {TerminateInstancesRequest} req
+     * @param {function(string, TerminateInstancesResponse):void} cb
+     * @public
+     */
+    TerminateInstances(req, cb) {
+        let resp = new TerminateInstancesResponse();
+        this.request("TerminateInstances", req, resp, cb);
+    }
+
+    /**
+     * 查询实例管理终端地址
+     * @param {DescribeInstanceVncUrlRequest} req
+     * @param {function(string, DescribeInstanceVncUrlResponse):void} cb
+     * @public
+     */
+    DescribeInstanceVncUrl(req, cb) {
+        let resp = new DescribeInstanceVncUrlResponse();
+        this.request("DescribeInstanceVncUrl", req, resp, cb);
+    }
+
+    /**
+     * 查询用户安全组配额
+     * @param {DescribeSecurityGroupLimitsRequest} req
+     * @param {function(string, DescribeSecurityGroupLimitsResponse):void} cb
+     * @public
+     */
+    DescribeSecurityGroupLimits(req, cb) {
+        let resp = new DescribeSecurityGroupLimitsResponse();
+        this.request("DescribeSecurityGroupLimits", req, resp, cb);
+    }
+
+    /**
+     * 修改在一个可用区下创建实例时使用的默认子网（创建实例时，未填写VPC参数时使用的sunbetId）
+     * @param {ModifyDefaultSubnetRequest} req
+     * @param {function(string, ModifyDefaultSubnetResponse):void} cb
+     * @public
+     */
+    ModifyDefaultSubnet(req, cb) {
+        let resp = new ModifyDefaultSubnetResponse();
+        this.request("ModifyDefaultSubnet", req, resp, cb);
+    }
+
+    /**
      * 只有状态为RUNNING的实例才可以进行此操作；接口调用成功时，实例会进入REBOOTING状态；重启实例成功时，实例会进入RUNNING状态；支持强制重启，强制重启的效果等同于关闭物理计算机的电源开关再重新启动。强制重启可能会导致数据丢失或文件系统损坏，请仅在服务器不能正常重启时使用。
      * @param {RebootInstancesRequest} req
      * @param {function(string, RebootInstancesResponse):void} cb
@@ -1036,14 +1049,293 @@ EIP 如果欠费或被封堵，则不能被绑定。
     }
 
     /**
-     * 查询私有网络列表
-     * @param {DescribeVpcsRequest} req
-     * @param {function(string, DescribeVpcsResponse):void} cb
+     * 弹性网卡内网IP迁移。
+该接口用于将一个内网IP从一个弹性网卡上迁移到另外一个弹性网卡，主IP地址不支持迁移。
+迁移前后的弹性网卡必须在同一个子网内。
+     * @param {MigratePrivateIpAddressRequest} req
+     * @param {function(string, MigratePrivateIpAddressResponse):void} cb
      * @public
      */
-    DescribeVpcs(req, cb) {
-        let resp = new DescribeVpcsResponse();
-        this.request("DescribeVpcs", req, resp, cb);
+    MigratePrivateIpAddress(req, cb) {
+        let resp = new MigratePrivateIpAddressResponse();
+        this.request("MigratePrivateIpAddress", req, resp, cb);
+    }
+
+    /**
+     * 购买负载均衡实例。
+     * @param {CreateLoadBalancerRequest} req
+     * @param {function(string, CreateLoadBalancerResponse):void} cb
+     * @public
+     */
+    CreateLoadBalancer(req, cb) {
+        let resp = new CreateLoadBalancerResponse();
+        this.request("CreateLoadBalancer", req, resp, cb);
+    }
+
+    /**
+     * 修改模块默认带宽上限
+     * @param {ModifyModuleNetworkRequest} req
+     * @param {function(string, ModifyModuleNetworkResponse):void} cb
+     * @public
+     */
+    ModifyModuleNetwork(req, cb) {
+        let resp = new ModifyModuleNetworkResponse();
+        this.request("ModifyModuleNetwork", req, resp, cb);
+    }
+
+    /**
+     * 弹性网卡申请内网 IP
+     * @param {AssignPrivateIpAddressesRequest} req
+     * @param {function(string, AssignPrivateIpAddressesResponse):void} cb
+     * @public
+     */
+    AssignPrivateIpAddresses(req, cb) {
+        let resp = new AssignPrivateIpAddressesResponse();
+        this.request("AssignPrivateIpAddresses", req, resp, cb);
+    }
+
+    /**
+     * 查询您账户的弹性公网IP（简称 EIP）在当前地域的配额信息
+     * @param {DescribeAddressQuotaRequest} req
+     * @param {function(string, DescribeAddressQuotaResponse):void} cb
+     * @public
+     */
+    DescribeAddressQuota(req, cb) {
+        let resp = new DescribeAddressQuotaResponse();
+        this.request("DescribeAddressQuota", req, resp, cb);
+    }
+
+    /**
+     * 删除负载均衡多个监听器
+     * @param {DeleteLoadBalancerListenersRequest} req
+     * @param {function(string, DeleteLoadBalancerListenersResponse):void} cb
+     * @public
+     */
+    DeleteLoadBalancerListeners(req, cb) {
+        let resp = new DeleteLoadBalancerListenersResponse();
+        this.request("DeleteLoadBalancerListeners", req, resp, cb);
+    }
+
+    /**
+     * 删除私有网络
+     * @param {DeleteVpcRequest} req
+     * @param {function(string, DeleteVpcResponse):void} cb
+     * @public
+     */
+    DeleteVpc(req, cb) {
+        let resp = new DeleteVpcResponse();
+        this.request("DeleteVpc", req, resp, cb);
+    }
+
+    /**
+     * 查询子网列表
+     * @param {DescribeSubnetsRequest} req
+     * @param {function(string, DescribeSubnetsResponse):void} cb
+     * @public
+     */
+    DescribeSubnets(req, cb) {
+        let resp = new DescribeSubnetsResponse();
+        this.request("DescribeSubnets", req, resp, cb);
+    }
+
+    /**
+     * 获取实例的相关信息。
+     * @param {DescribeInstancesRequest} req
+     * @param {function(string, DescribeInstancesResponse):void} cb
+     * @public
+     */
+    DescribeInstances(req, cb) {
+        let resp = new DescribeInstancesResponse();
+        this.request("DescribeInstances", req, resp, cb);
+    }
+
+    /**
+     * 查看安全组
+     * @param {DescribeSecurityGroupsRequest} req
+     * @param {function(string, DescribeSecurityGroupsResponse):void} cb
+     * @public
+     */
+    DescribeSecurityGroups(req, cb) {
+        let resp = new DescribeSecurityGroupsResponse();
+        this.request("DescribeSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * 查询安全组规则
+     * @param {DescribeSecurityGroupPoliciesRequest} req
+     * @param {function(string, DescribeSecurityGroupPoliciesResponse):void} cb
+     * @public
+     */
+    DescribeSecurityGroupPolicies(req, cb) {
+        let resp = new DescribeSecurityGroupPoliciesResponse();
+        this.request("DescribeSecurityGroupPolicies", req, resp, cb);
+    }
+
+    /**
+     * 查询可用区的默认子网
+     * @param {DescribeDefaultSubnetRequest} req
+     * @param {function(string, DescribeDefaultSubnetResponse):void} cb
+     * @public
+     */
+    DescribeDefaultSubnet(req, cb) {
+        let resp = new DescribeDefaultSubnetResponse();
+        this.request("DescribeDefaultSubnet", req, resp, cb);
+    }
+
+    /**
+     * 重置处于运行中状态的实例的密码，需要显式指定强制关机参数ForceStop。如果没有显式指定强制关机参数，则只有处于关机状态的实例才允许执行重置密码操作。
+     * @param {ResetInstancesPasswordRequest} req
+     * @param {function(string, ResetInstancesPasswordResponse):void} cb
+     * @public
+     */
+    ResetInstancesPassword(req, cb) {
+        let resp = new ResetInstancesPasswordResponse();
+        this.request("ResetInstancesPassword", req, resp, cb);
+    }
+
+    /**
+     * 创建模块
+     * @param {CreateModuleRequest} req
+     * @param {function(string, CreateModuleResponse):void} cb
+     * @public
+     */
+    CreateModule(req, cb) {
+        let resp = new CreateModuleResponse();
+        this.request("CreateModule", req, resp, cb);
+    }
+
+    /**
+     * 查询负载均衡实例列表。
+     * @param {DescribeLoadBalancersRequest} req
+     * @param {function(string, DescribeLoadBalancersResponse):void} cb
+     * @public
+     */
+    DescribeLoadBalancers(req, cb) {
+        let resp = new DescribeLoadBalancersResponse();
+        this.request("DescribeLoadBalancers", req, resp, cb);
+    }
+
+    /**
+     * 弹性网卡迁移
+     * @param {MigrateNetworkInterfaceRequest} req
+     * @param {function(string, MigrateNetworkInterfaceResponse):void} cb
+     * @public
+     */
+    MigrateNetworkInterface(req, cb) {
+        let resp = new MigrateNetworkInterfaceResponse();
+        this.request("MigrateNetworkInterface", req, resp, cb);
+    }
+
+    /**
+     * 创建负载均衡监听器。
+     * @param {CreateListenerRequest} req
+     * @param {function(string, CreateListenerResponse):void} cb
+     * @public
+     */
+    CreateListener(req, cb) {
+        let resp = new CreateListenerResponse();
+        this.request("CreateListener", req, resp, cb);
+    }
+
+    /**
+     * 修改监听器绑定的后端机器的转发权重。
+     * @param {ModifyTargetWeightRequest} req
+     * @param {function(string, ModifyTargetWeightResponse):void} cb
+     * @public
+     */
+    ModifyTargetWeight(req, cb) {
+        let resp = new ModifyTargetWeightResponse();
+        this.request("ModifyTargetWeight", req, resp, cb);
+    }
+
+    /**
+     * 修改模块默认安全组
+     * @param {ModifyModuleSecurityGroupsRequest} req
+     * @param {function(string, ModifyModuleSecurityGroupsResponse):void} cb
+     * @public
+     */
+    ModifyModuleSecurityGroups(req, cb) {
+        let resp = new ModifyModuleSecurityGroupsResponse();
+        this.request("ModifyModuleSecurityGroups", req, resp, cb);
+    }
+
+    /**
+     * 释放一个或多个弹性公网IP（简称 EIP）。
+该操作不可逆，释放后 EIP 关联的 IP 地址将不再属于您的名下。
+只有状态为 UNBIND 的 EIP 才能进行释放操作。
+     * @param {ReleaseAddressesRequest} req
+     * @param {function(string, ReleaseAddressesResponse):void} cb
+     * @public
+     */
+    ReleaseAddresses(req, cb) {
+        let resp = new ReleaseAddressesResponse();
+        this.request("ReleaseAddresses", req, resp, cb);
+    }
+
+    /**
+     * 获取负载均衡后端服务的健康检查状态。
+     * @param {DescribeTargetHealthRequest} req
+     * @param {function(string, DescribeTargetHealthResponse):void} cb
+     * @public
+     */
+    DescribeTargetHealth(req, cb) {
+        let resp = new DescribeTargetHealthResponse();
+        this.request("DescribeTargetHealth", req, resp, cb);
+    }
+
+    /**
+     * 查询负载均衡绑定的后端服务列表。
+     * @param {DescribeTargetsRequest} req
+     * @param {function(string, DescribeTargetsResponse):void} cb
+     * @public
+     */
+    DescribeTargets(req, cb) {
+        let resp = new DescribeTargetsResponse();
+        this.request("DescribeTargets", req, resp, cb);
+    }
+
+    /**
+     * 删除镜像
+     * @param {DeleteImageRequest} req
+     * @param {function(string, DeleteImageResponse):void} cb
+     * @public
+     */
+    DeleteImage(req, cb) {
+        let resp = new DeleteImageResponse();
+        this.request("DeleteImage", req, resp, cb);
+    }
+
+    /**
+     * 查询安全组关联实例统计
+     * @param {DescribeSecurityGroupAssociationStatisticsRequest} req
+     * @param {function(string, DescribeSecurityGroupAssociationStatisticsResponse):void} cb
+     * @public
+     */
+    DescribeSecurityGroupAssociationStatistics(req, cb) {
+        let resp = new DescribeSecurityGroupAssociationStatisticsResponse();
+        this.request("DescribeSecurityGroupAssociationStatistics", req, resp, cb);
+    }
+
+    /**
+     * CPU 内存 硬盘等基础信息峰值数据
+     * @param {DescribePeakBaseOverviewRequest} req
+     * @param {function(string, DescribePeakBaseOverviewResponse):void} cb
+     * @public
+     */
+    DescribePeakBaseOverview(req, cb) {
+        let resp = new DescribePeakBaseOverviewResponse();
+        this.request("DescribePeakBaseOverview", req, resp, cb);
+    }
+
+    /**
+     * 修改弹性公网IP属性
+     * @param {ModifyAddressAttributeRequest} req
+     * @param {function(string, ModifyAddressAttributeResponse):void} cb
+     * @public
+     */
+    ModifyAddressAttribute(req, cb) {
+        let resp = new ModifyAddressAttributeResponse();
+        this.request("ModifyAddressAttribute", req, resp, cb);
     }
 
     /**
@@ -1069,71 +1361,14 @@ CidrBlock, Ipv6CidrBlock, SecurityGroupId, AddressTemplate 四者是排他关系
     }
 
     /**
-     * 展示镜像列表
-     * @param {DescribeImageRequest} req
-     * @param {function(string, DescribeImageResponse):void} cb
+     * 修改私有网络（VPC）的相关属性
+     * @param {ModifyVpcAttributeRequest} req
+     * @param {function(string, ModifyVpcAttributeResponse):void} cb
      * @public
      */
-    DescribeImage(req, cb) {
-        let resp = new DescribeImageResponse();
-        this.request("DescribeImage", req, resp, cb);
-    }
-
-    /**
-     * 解绑安全组
-     * @param {DisassociateSecurityGroupsRequest} req
-     * @param {function(string, DisassociateSecurityGroupsResponse):void} cb
-     * @public
-     */
-    DisassociateSecurityGroups(req, cb) {
-        let resp = new DisassociateSecurityGroupsResponse();
-        this.request("DisassociateSecurityGroups", req, resp, cb);
-    }
-
-    /**
-     * 删除镜像
-     * @param {DeleteImageRequest} req
-     * @param {function(string, DeleteImageResponse):void} cb
-     * @public
-     */
-    DeleteImage(req, cb) {
-        let resp = new DeleteImageResponse();
-        this.request("DeleteImage", req, resp, cb);
-    }
-
-    /**
-     * 调整弹性公网IP带宽
-
-     * @param {ModifyAddressesBandwidthRequest} req
-     * @param {function(string, ModifyAddressesBandwidthResponse):void} cb
-     * @public
-     */
-    ModifyAddressesBandwidth(req, cb) {
-        let resp = new ModifyAddressesBandwidthResponse();
-        this.request("ModifyAddressesBandwidth", req, resp, cb);
-    }
-
-    /**
-     * 弹性网卡退还内网 IP。
-退还弹性网卡上的辅助内网IP，接口自动解关联弹性公网 IP。不能退还弹性网卡的主内网IP。
-     * @param {RemovePrivateIpAddressesRequest} req
-     * @param {function(string, RemovePrivateIpAddressesResponse):void} cb
-     * @public
-     */
-    RemovePrivateIpAddresses(req, cb) {
-        let resp = new RemovePrivateIpAddressesResponse();
-        this.request("RemovePrivateIpAddresses", req, resp, cb);
-    }
-
-    /**
-     * 创建子网，若创建成功，则此子网会成为此可用区的默认子网。
-     * @param {CreateSubnetRequest} req
-     * @param {function(string, CreateSubnetResponse):void} cb
-     * @public
-     */
-    CreateSubnet(req, cb) {
-        let resp = new CreateSubnetResponse();
-        this.request("CreateSubnet", req, resp, cb);
+    ModifyVpcAttribute(req, cb) {
+        let resp = new ModifyVpcAttributeResponse();
+        this.request("ModifyVpcAttribute", req, resp, cb);
     }
 
 

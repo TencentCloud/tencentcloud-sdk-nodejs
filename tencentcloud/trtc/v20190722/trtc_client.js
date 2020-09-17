@@ -171,7 +171,7 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     }
 
     /**
-     * 查询指定时间内的用户列表及用户通话质量数据，可查询14天内数据。DataType 不为null，查询实时数据时，查询起止时间不超过1个小时，查询用户不超过6个，支持跨天查询。DataType，UserIds为null时，不填PageSize，PageNumber默认查询6个用户，否则支持每页100内的用户数。
+     * 查询指定时间内的用户列表及用户通话质量数据，可查询14天内数据。DataType 不为null，查询实时数据时，查询起止时间不超过1个小时，查询用户不超过6个，支持跨天查询。DataType，UserIds为null时，默认查询6个用户，同时支持每页查询100以内用户个数（PageSize不超过100）。
      * @param {DescribeCallDetailRequest} req
      * @param {function(string, DescribeCallDetailResponse):void} cb
      * @public

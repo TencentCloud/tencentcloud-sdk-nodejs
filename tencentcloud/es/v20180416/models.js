@@ -926,6 +926,12 @@ class CreateInstanceRequest extends  AbstractModel {
          */
         this.BasicSecurityType = null;
 
+        /**
+         * 场景化模板类型 0：不启用 1：通用 2：日志 3：搜索
+         * @type {number || null}
+         */
+        this.SceneType = null;
+
     }
 
     /**
@@ -986,6 +992,7 @@ class CreateInstanceRequest extends  AbstractModel {
             }
         }
         this.BasicSecurityType = 'BasicSecurityType' in params ? params.BasicSecurityType : null;
+        this.SceneType = 'SceneType' in params ? params.SceneType : null;
 
     }
 }
@@ -1326,6 +1333,13 @@ class InstanceInfo extends  AbstractModel {
          */
         this.SecurityType = null;
 
+        /**
+         * 场景化模板类型：0、不开启；1、通用场景；2、日志场景；3、搜索场景
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SceneType = null;
+
     }
 
     /**
@@ -1436,6 +1450,7 @@ class InstanceInfo extends  AbstractModel {
         this.KibanaPublicAccess = 'KibanaPublicAccess' in params ? params.KibanaPublicAccess : null;
         this.KibanaPrivateAccess = 'KibanaPrivateAccess' in params ? params.KibanaPrivateAccess : null;
         this.SecurityType = 'SecurityType' in params ? params.SecurityType : null;
+        this.SceneType = 'SceneType' in params ? params.SceneType : null;
 
     }
 }
@@ -1898,6 +1913,18 @@ class UpdateInstanceRequest extends  AbstractModel {
          */
         this.ScaleType = null;
 
+        /**
+         * 多可用区部署
+         * @type {Array.<ZoneDetail> || null}
+         */
+        this.MultiZoneInfo = null;
+
+        /**
+         * 场景化模板类型 -1：不启用 1：通用 2：日志 3：搜索
+         * @type {number || null}
+         */
+        this.SceneType = null;
+
     }
 
     /**
@@ -1951,6 +1978,16 @@ class UpdateInstanceRequest extends  AbstractModel {
         this.BasicSecurityType = 'BasicSecurityType' in params ? params.BasicSecurityType : null;
         this.KibanaPrivatePort = 'KibanaPrivatePort' in params ? params.KibanaPrivatePort : null;
         this.ScaleType = 'ScaleType' in params ? params.ScaleType : null;
+
+        if (params.MultiZoneInfo) {
+            this.MultiZoneInfo = new Array();
+            for (let z in params.MultiZoneInfo) {
+                let obj = new ZoneDetail();
+                obj.deserialize(params.MultiZoneInfo[z]);
+                this.MultiZoneInfo.push(obj);
+            }
+        }
+        this.SceneType = 'SceneType' in params ? params.SceneType : null;
 
     }
 }
@@ -2089,6 +2126,48 @@ class DescribeInstanceOperationsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RestartNodes请求参数结构体
+ * @class
+ */
+class RestartNodesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 节点名称列表
+         * @type {Array.<string> || null}
+         */
+        this.NodeNames = null;
+
+        /**
+         * 是否强制重启
+         * @type {boolean || null}
+         */
+        this.ForceRestart = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.NodeNames = 'NodeNames' in params ? params.NodeNames : null;
+        this.ForceRestart = 'ForceRestart' in params ? params.ForceRestart : null;
 
     }
 }
@@ -2381,6 +2460,34 @@ class SubTaskDetail extends  AbstractModel {
 }
 
 /**
+ * RestartNodes返回参数结构体
+ * @class
+ */
+class RestartNodesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * UpgradeInstance返回参数结构体
  * @class
  */
@@ -2474,6 +2581,12 @@ class UpgradeInstanceRequest extends  AbstractModel {
          */
         this.BasicSecurityType = null;
 
+        /**
+         * 升级方式：<li>scale 蓝绿变更</li><li>restart 滚动重启</li>默认值为scale
+         * @type {string || null}
+         */
+        this.UpgradeMode = null;
+
     }
 
     /**
@@ -2488,6 +2601,7 @@ class UpgradeInstanceRequest extends  AbstractModel {
         this.CheckOnly = 'CheckOnly' in params ? params.CheckOnly : null;
         this.LicenseType = 'LicenseType' in params ? params.LicenseType : null;
         this.BasicSecurityType = 'BasicSecurityType' in params ? params.BasicSecurityType : null;
+        this.UpgradeMode = 'UpgradeMode' in params ? params.UpgradeMode : null;
 
     }
 }
@@ -2603,12 +2717,14 @@ module.exports = {
     UpdateInstanceRequest: UpdateInstanceRequest,
     EsDictionaryInfo: EsDictionaryInfo,
     DescribeInstanceOperationsResponse: DescribeInstanceOperationsResponse,
+    RestartNodesRequest: RestartNodesRequest,
     UpdatePluginsRequest: UpdatePluginsRequest,
     UpgradeLicenseResponse: UpgradeLicenseResponse,
     EsAcl: EsAcl,
     MasterNodeInfo: MasterNodeInfo,
     DeleteInstanceRequest: DeleteInstanceRequest,
     SubTaskDetail: SubTaskDetail,
+    RestartNodesResponse: RestartNodesResponse,
     UpgradeInstanceResponse: UpgradeInstanceResponse,
     UpdateInstanceResponse: UpdateInstanceResponse,
     UpgradeInstanceRequest: UpgradeInstanceRequest,
