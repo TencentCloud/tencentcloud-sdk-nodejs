@@ -2882,6 +2882,12 @@ class ModifyListenerRequest extends  AbstractModel {
          */
         this.SniSwitch = null;
 
+        /**
+         * 是否开启长连接，此参数仅适用于HTTP/HTTPS监听器
+         * @type {number || null}
+         */
+        this.KeepaliveEnable = null;
+
     }
 
     /**
@@ -2909,6 +2915,7 @@ class ModifyListenerRequest extends  AbstractModel {
         }
         this.Scheduler = 'Scheduler' in params ? params.Scheduler : null;
         this.SniSwitch = 'SniSwitch' in params ? params.SniSwitch : null;
+        this.KeepaliveEnable = 'KeepaliveEnable' in params ? params.KeepaliveEnable : null;
 
     }
 }
@@ -5180,6 +5187,12 @@ class CreateListenerRequest extends  AbstractModel {
          */
         this.SessionType = null;
 
+        /**
+         * 是否开启长连接，此参数仅适用于HTTP/HTTPS监听器
+         * @type {number || null}
+         */
+        this.KeepaliveEnable = null;
+
     }
 
     /**
@@ -5210,6 +5223,7 @@ class CreateListenerRequest extends  AbstractModel {
         this.SniSwitch = 'SniSwitch' in params ? params.SniSwitch : null;
         this.TargetType = 'TargetType' in params ? params.TargetType : null;
         this.SessionType = 'SessionType' in params ? params.SessionType : null;
+        this.KeepaliveEnable = 'KeepaliveEnable' in params ? params.KeepaliveEnable : null;
 
     }
 }

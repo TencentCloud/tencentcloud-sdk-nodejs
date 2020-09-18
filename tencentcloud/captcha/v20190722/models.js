@@ -1695,6 +1695,90 @@ class DescribeCaptchaDataRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeCaptchaMiniResult请求参数结构体
+ * @class
+ */
+class DescribeCaptchaMiniResultRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 验证码类型，9：滑块验证码
+         * @type {number || null}
+         */
+        this.CaptchaType = null;
+
+        /**
+         * 验证码返回给用户的票据
+         * @type {string || null}
+         */
+        this.Ticket = null;
+
+        /**
+         * 用户操作来源的外网 IP
+         * @type {string || null}
+         */
+        this.UserIp = null;
+
+        /**
+         * 验证码应用ID
+         * @type {number || null}
+         */
+        this.CaptchaAppId = null;
+
+        /**
+         * 用于服务器端校验验证码票据的验证密钥，请妥善保密，请勿泄露给第三方
+         * @type {string || null}
+         */
+        this.AppSecretKey = null;
+
+        /**
+         * 业务 ID，网站或应用在多个业务中使用此服务，通过此 ID 区分统计数据
+         * @type {number || null}
+         */
+        this.BusinessId = null;
+
+        /**
+         * 场景 ID，网站或应用的业务下有多个场景使用此服务，通过此 ID 区分统计数据
+         * @type {number || null}
+         */
+        this.SceneId = null;
+
+        /**
+         * mac 地址或设备唯一标识
+         * @type {string || null}
+         */
+        this.MacAddress = null;
+
+        /**
+         * 手机设备号
+         * @type {string || null}
+         */
+        this.Imei = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CaptchaType = 'CaptchaType' in params ? params.CaptchaType : null;
+        this.Ticket = 'Ticket' in params ? params.Ticket : null;
+        this.UserIp = 'UserIp' in params ? params.UserIp : null;
+        this.CaptchaAppId = 'CaptchaAppId' in params ? params.CaptchaAppId : null;
+        this.AppSecretKey = 'AppSecretKey' in params ? params.AppSecretKey : null;
+        this.BusinessId = 'BusinessId' in params ? params.BusinessId : null;
+        this.SceneId = 'SceneId' in params ? params.SceneId : null;
+        this.MacAddress = 'MacAddress' in params ? params.MacAddress : null;
+        this.Imei = 'Imei' in params ? params.Imei : null;
+
+    }
+}
+
+/**
  * DescribeCaptchaTicketData返回参数结构体
  * @class
  */
@@ -1817,6 +1901,56 @@ class CaptchaTicketDataRes extends  AbstractModel {
 }
 
 /**
+ * DescribeCaptchaMiniResult返回参数结构体
+ * @class
+ */
+class DescribeCaptchaMiniResultResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 1       ticket verification succeeded     票据验证成功
+8       ticket expired     票据超时
+10     ticket format error     票据格式不正确
+15     ticket decryption failed     验证码解密失败
+16     CaptchaAppId wrong format      检查CaptchaAppId错误
+26     system internal error     系统内部错误
+100    param err appsecretkey     参数校验错误
+21      ticket error     差别，票据验证错误
+         * @type {number || null}
+         */
+        this.CaptchaCode = null;
+
+        /**
+         * 状态描述及验证错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CaptchaMsg = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CaptchaCode = 'CaptchaCode' in params ? params.CaptchaCode : null;
+        this.CaptchaMsg = 'CaptchaMsg' in params ? params.CaptchaMsg : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeCaptchaMiniData请求参数结构体
  * @class
  */
@@ -1896,8 +2030,10 @@ module.exports = {
     DescribeCaptchaAppIdInfoResponse: DescribeCaptchaAppIdInfoResponse,
     DescribeCaptchaUserAllAppIdResponse: DescribeCaptchaUserAllAppIdResponse,
     DescribeCaptchaDataRequest: DescribeCaptchaDataRequest,
+    DescribeCaptchaMiniResultRequest: DescribeCaptchaMiniResultRequest,
     DescribeCaptchaTicketDataResponse: DescribeCaptchaTicketDataResponse,
     CaptchaTicketDataRes: CaptchaTicketDataRes,
+    DescribeCaptchaMiniResultResponse: DescribeCaptchaMiniResultResponse,
     DescribeCaptchaMiniDataRequest: DescribeCaptchaMiniDataRequest,
 
 }

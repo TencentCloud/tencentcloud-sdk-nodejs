@@ -240,6 +240,48 @@ class DescribeTaskStatusResponse extends  AbstractModel {
 }
 
 /**
+ * 一句话识别返回的词时间戳
+ * @class
+ */
+class SentenceWord extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 词结果
+         * @type {string || null}
+         */
+        this.Word = null;
+
+        /**
+         * 词在音频中的开始时间
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 词在音频中的结束时间
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Word = 'Word' in params ? params.Word : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
  * DownloadAsrVocab返回参数结构体
  * @class
  */
@@ -392,6 +434,24 @@ class GetAsrVocabListRequest extends  AbstractModel {
     constructor(){
         super();
 
+        /**
+         * 标签信息，格式为“$TagKey : $TagValue ”，中间分隔符为“空格”+“:”+“空格”
+         * @type {Array.<string> || null}
+         */
+        this.TagInfos = null;
+
+        /**
+         * 分页Offset
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 分页Limit
+         * @type {number || null}
+         */
+        this.Limit = null;
+
     }
 
     /**
@@ -401,6 +461,9 @@ class GetAsrVocabListRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.TagInfos = 'TagInfos' in params ? params.TagInfos : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -739,6 +802,13 @@ class Vocab extends  AbstractModel {
          */
         this.State = null;
 
+        /**
+         * 标签数组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.TagInfos = null;
+
     }
 
     /**
@@ -763,6 +833,7 @@ class Vocab extends  AbstractModel {
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.State = 'State' in params ? params.State : null;
+        this.TagInfos = 'TagInfos' in params ? params.TagInfos : null;
 
     }
 }
@@ -896,6 +967,48 @@ class DeleteAsrVocabRequest extends  AbstractModel {
 }
 
 /**
+ * GetCustomizationList请求参数结构体
+ * @class
+ */
+class GetCustomizationListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签信息，格式为“$TagKey : $TagValue ”，中间分隔符为“空格”+“:”+“空格”
+         * @type {Array.<string> || null}
+         */
+        this.TagInfos = null;
+
+        /**
+         * 分页大小
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 分页offset
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagInfos = 'TagInfos' in params ? params.TagInfos : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
  * SentenceRecognition请求参数结构体
  * @class
  */
@@ -918,10 +1031,14 @@ class SentenceRecognitionRequest extends  AbstractModel {
         /**
          * 引擎模型类型。
 电话场景：
+• 8k_en：电话 8k 英语；
 • 8k_zh：电话 8k 中文普通话通用；
 非电话场景：
 • 16k_zh：16k 中文普通话通用；
 • 16k_en：16k 英语；
+• 16k_ca：16k 粤语；
+• 16k_ja：16k 日语；
+•16k_wuu-SH：16k 上海话方言。
 • 16k_ca：16k 粤语；
 • 16k_ja：16k 日语；
 •16k_wuu-SH：16k 上海话方言。
@@ -995,6 +1112,12 @@ class SentenceRecognitionRequest extends  AbstractModel {
          */
         this.ConvertNumMode = null;
 
+        /**
+         * 是否显示词级别时间戳。0：不显示；1：显示，不包含标点时间戳，2：显示，包含标点时间戳。支持引擎8k_zh，16k_zh，16k_en，16k_ca，16k_ja，16k_wuu-SH
+         * @type {number || null}
+         */
+        this.WordInfo = null;
+
     }
 
     /**
@@ -1018,6 +1141,85 @@ class SentenceRecognitionRequest extends  AbstractModel {
         this.FilterModal = 'FilterModal' in params ? params.FilterModal : null;
         this.FilterPunc = 'FilterPunc' in params ? params.FilterPunc : null;
         this.ConvertNumMode = 'ConvertNumMode' in params ? params.ConvertNumMode : null;
+        this.WordInfo = 'WordInfo' in params ? params.WordInfo : null;
+
+    }
+}
+
+/**
+ * 自学习模型信息
+ * @class
+ */
+class Model extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模型名称
+         * @type {string || null}
+         */
+        this.ModelName = null;
+
+        /**
+         * 模型文件名称
+         * @type {string || null}
+         */
+        this.DictName = null;
+
+        /**
+         * 模型Id
+         * @type {string || null}
+         */
+        this.ModelId = null;
+
+        /**
+         * 模型类型，“8k”或者”16k“
+         * @type {string || null}
+         */
+        this.ModelType = null;
+
+        /**
+         * 服务类型
+         * @type {string || null}
+         */
+        this.ServiceType = null;
+
+        /**
+         * 模型状态，-1下线状态，1上线状态, 0训练中, -2 训练失败
+         * @type {number || null}
+         */
+        this.ModelState = null;
+
+        /**
+         * 最后更新时间
+         * @type {string || null}
+         */
+        this.AtUpdated = null;
+
+        /**
+         * 标签信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.TagInfos = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ModelName = 'ModelName' in params ? params.ModelName : null;
+        this.DictName = 'DictName' in params ? params.DictName : null;
+        this.ModelId = 'ModelId' in params ? params.ModelId : null;
+        this.ModelType = 'ModelType' in params ? params.ModelType : null;
+        this.ServiceType = 'ServiceType' in params ? params.ServiceType : null;
+        this.ModelState = 'ModelState' in params ? params.ModelState : null;
+        this.AtUpdated = 'AtUpdated' in params ? params.AtUpdated : null;
+        this.TagInfos = 'TagInfos' in params ? params.TagInfos : null;
 
     }
 }
@@ -1076,6 +1278,58 @@ class CreateAsrVocabRequest extends  AbstractModel {
             }
         }
         this.WordWeightStr = 'WordWeightStr' in params ? params.WordWeightStr : null;
+
+    }
+}
+
+/**
+ * GetCustomizationList返回参数结构体
+ * @class
+ */
+class GetCustomizationListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 自学习模型数组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Model> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 自学习模型总量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new Model();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1201,6 +1455,20 @@ class SentenceRecognitionResponse extends  AbstractModel {
         this.AudioDuration = null;
 
         /**
+         * 词时间戳列表的长度
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.WordSize = null;
+
+        /**
+         * 词时间戳列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<SentenceWord> || null}
+         */
+        this.WordList = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1217,6 +1485,16 @@ class SentenceRecognitionResponse extends  AbstractModel {
         }
         this.Result = 'Result' in params ? params.Result : null;
         this.AudioDuration = 'AudioDuration' in params ? params.AudioDuration : null;
+        this.WordSize = 'WordSize' in params ? params.WordSize : null;
+
+        if (params.WordList) {
+            this.WordList = new Array();
+            for (let z in params.WordList) {
+                let obj = new SentenceWord();
+                obj.deserialize(params.WordList[z]);
+                this.WordList.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1265,6 +1543,12 @@ class GetAsrVocabListResponse extends  AbstractModel {
         this.VocabList = null;
 
         /**
+         * 热词列表总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1288,6 +1572,7 @@ class GetAsrVocabListResponse extends  AbstractModel {
                 this.VocabList.push(obj);
             }
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1344,6 +1629,7 @@ module.exports = {
     HotWord: HotWord,
     GetAsrVocabRequest: GetAsrVocabRequest,
     DescribeTaskStatusResponse: DescribeTaskStatusResponse,
+    SentenceWord: SentenceWord,
     DownloadAsrVocabResponse: DownloadAsrVocabResponse,
     CreateRecTaskResponse: CreateRecTaskResponse,
     UpdateAsrVocabResponse: UpdateAsrVocabResponse,
@@ -1357,8 +1643,11 @@ module.exports = {
     Task: Task,
     TaskStatus: TaskStatus,
     DeleteAsrVocabRequest: DeleteAsrVocabRequest,
+    GetCustomizationListRequest: GetCustomizationListRequest,
     SentenceRecognitionRequest: SentenceRecognitionRequest,
+    Model: Model,
     CreateAsrVocabRequest: CreateAsrVocabRequest,
+    GetCustomizationListResponse: GetCustomizationListResponse,
     UpdateAsrVocabRequest: UpdateAsrVocabRequest,
     CreateAsrVocabResponse: CreateAsrVocabResponse,
     SentenceRecognitionResponse: SentenceRecognitionResponse,

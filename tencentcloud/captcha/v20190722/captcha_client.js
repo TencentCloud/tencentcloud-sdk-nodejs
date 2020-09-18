@@ -46,8 +46,10 @@ const DescribeCaptchaAppIdInfoRequest = models.DescribeCaptchaAppIdInfoRequest;
 const DescribeCaptchaAppIdInfoResponse = models.DescribeCaptchaAppIdInfoResponse;
 const DescribeCaptchaUserAllAppIdResponse = models.DescribeCaptchaUserAllAppIdResponse;
 const DescribeCaptchaDataRequest = models.DescribeCaptchaDataRequest;
+const DescribeCaptchaMiniResultRequest = models.DescribeCaptchaMiniResultRequest;
 const DescribeCaptchaTicketDataResponse = models.DescribeCaptchaTicketDataResponse;
 const CaptchaTicketDataRes = models.CaptchaTicketDataRes;
+const DescribeCaptchaMiniResultResponse = models.DescribeCaptchaMiniResultResponse;
 const DescribeCaptchaMiniDataRequest = models.DescribeCaptchaMiniDataRequest;
 
 
@@ -147,6 +149,17 @@ class CaptchaClient extends AbstractClient {
     DescribeCaptchaMiniDataSum(req, cb) {
         let resp = new DescribeCaptchaMiniDataSumResponse();
         this.request("DescribeCaptchaMiniDataSum", req, resp, cb);
+    }
+
+    /**
+     * 核查验证码小程序插件票据结果（内测中）
+     * @param {DescribeCaptchaMiniResultRequest} req
+     * @param {function(string, DescribeCaptchaMiniResultResponse):void} cb
+     * @public
+     */
+    DescribeCaptchaMiniResult(req, cb) {
+        let resp = new DescribeCaptchaMiniResultResponse();
+        this.request("DescribeCaptchaMiniResult", req, resp, cb);
     }
 
     /**

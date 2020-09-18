@@ -21,6 +21,7 @@ const GetAsrVocabResponse = models.GetAsrVocabResponse;
 const HotWord = models.HotWord;
 const GetAsrVocabRequest = models.GetAsrVocabRequest;
 const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
+const SentenceWord = models.SentenceWord;
 const DownloadAsrVocabResponse = models.DownloadAsrVocabResponse;
 const CreateRecTaskResponse = models.CreateRecTaskResponse;
 const UpdateAsrVocabResponse = models.UpdateAsrVocabResponse;
@@ -34,8 +35,11 @@ const Vocab = models.Vocab;
 const Task = models.Task;
 const TaskStatus = models.TaskStatus;
 const DeleteAsrVocabRequest = models.DeleteAsrVocabRequest;
+const GetCustomizationListRequest = models.GetCustomizationListRequest;
 const SentenceRecognitionRequest = models.SentenceRecognitionRequest;
+const Model = models.Model;
 const CreateAsrVocabRequest = models.CreateAsrVocabRequest;
+const GetCustomizationListResponse = models.GetCustomizationListResponse;
 const UpdateAsrVocabRequest = models.UpdateAsrVocabRequest;
 const CreateAsrVocabResponse = models.CreateAsrVocabResponse;
 const SentenceRecognitionResponse = models.SentenceRecognitionResponse;
@@ -159,6 +163,17 @@ class AsrClient extends AbstractClient {
     DownloadAsrVocab(req, cb) {
         let resp = new DownloadAsrVocabResponse();
         this.request("DownloadAsrVocab", req, resp, cb);
+    }
+
+    /**
+     * 查询自学习模型列表
+     * @param {GetCustomizationListRequest} req
+     * @param {function(string, GetCustomizationListResponse):void} cb
+     * @public
+     */
+    GetCustomizationList(req, cb) {
+        let resp = new GetCustomizationListResponse();
+        this.request("GetCustomizationList", req, resp, cb);
     }
 
     /**

@@ -473,7 +473,7 @@ class DescribeCallDetailRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * 用户sdkappid（1400188366）
+         * 用户SDKAppID（1400188366）
          * @type {string || null}
          */
         this.SdkAppId = null;
@@ -504,13 +504,13 @@ bigvHeight：上/下行分辨率高
         this.DataType = null;
 
         /**
-         * 只查询用户列表时，设置分页index，从0开始（PageNumber和PageSize 其中一个不填均默认返回6条数据）
+         * 设置分页index，从0开始（PageNumber和PageSize 其中一个不填均默认返回6条数据）
          * @type {string || null}
          */
         this.PageNumber = null;
 
         /**
-         * 只查询用户列表时，设置分页大小（PageNumber和PageSize 其中一个不填均默认返回6条数据,PageSize最大不超过100）
+         * 设置分页大小（PageNumber和PageSize 其中一个不填均默认返回6条数据,DataType，UserIds不为null，PageSize最大不超过6，DataType，UserIds为null，PageSize最大不超过100）
          * @type {string || null}
          */
         this.PageSize = null;

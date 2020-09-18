@@ -33,6 +33,7 @@ const AnalyzeDenseLandmarksRequest = models.AnalyzeDenseLandmarksRequest;
 const GetGroupListRequest = models.GetGroupListRequest;
 const GetUpgradeGroupFaceModelVersionJobListRequest = models.GetUpgradeGroupFaceModelVersionJobListRequest;
 const GetUpgradeGroupFaceModelVersionResultResponse = models.GetUpgradeGroupFaceModelVersionResultResponse;
+const DetectLiveFaceAccurateResponse = models.DetectLiveFaceAccurateResponse;
 const AnalyzeFaceRequest = models.AnalyzeFaceRequest;
 const CreatePersonResponse = models.CreatePersonResponse;
 const SearchFacesResponse = models.SearchFacesResponse;
@@ -82,6 +83,7 @@ const FaceQualityCompleteness = models.FaceQualityCompleteness;
 const FaceAttributesInfo = models.FaceAttributesInfo;
 const VerifyPersonRequest = models.VerifyPersonRequest;
 const ModifyPersonBaseInfoRequest = models.ModifyPersonBaseInfoRequest;
+const DetectLiveFaceAccurateRequest = models.DetectLiveFaceAccurateRequest;
 const JobIdInfo = models.JobIdInfo;
 const FaceDetailInfo = models.FaceDetailInfo;
 const SearchFacesRequest = models.SearchFacesRequest;
@@ -548,6 +550,19 @@ class IaiClient extends AbstractClient {
     DetectFaceAttributes(req, cb) {
         let resp = new DetectFaceAttributesResponse();
         this.request("DetectFaceAttributes", req, resp, cb);
+    }
+
+    /**
+     * 人脸静态活体检测（高精度版）可用于对用户上传的静态图片进行防翻拍活体检测，以判断是否是翻拍图片。
+
+相比现有静态活体检测服务，高精度版在维持高真人通过率的前提下，增强了对高清屏幕、裁剪纸片、3D面具等攻击的防御能力，攻击拦截率约为业内同类型产品形态4-5倍。同时支持多场景人脸核验，满足移动端、PC端各类型场景的图片活体检验需求，适用于各个行业不同的活体检验应用。
+     * @param {DetectLiveFaceAccurateRequest} req
+     * @param {function(string, DetectLiveFaceAccurateResponse):void} cb
+     * @public
+     */
+    DetectLiveFaceAccurate(req, cb) {
+        let resp = new DetectLiveFaceAccurateResponse();
+        this.request("DetectLiveFaceAccurate", req, resp, cb);
     }
 
     /**
