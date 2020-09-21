@@ -23,7 +23,7 @@ const DescribeQuotaDataResponse = models.DescribeQuotaDataResponse;
 const CheckTcbServiceResponse = models.CheckTcbServiceResponse;
 const DescribeEndUserLoginStatisticRequest = models.DescribeEndUserLoginStatisticRequest;
 const StorageInfo = models.StorageInfo;
-const LoginStatistic = models.LoginStatistic;
+const DescribeCloudBaseRunVersionSnapshotRequest = models.DescribeCloudBaseRunVersionSnapshotRequest;
 const KVPair = models.KVPair;
 const FunctionInfo = models.FunctionInfo;
 const CreatePostpayPackageResponse = models.CreatePostpayPackageResponse;
@@ -32,9 +32,11 @@ const PostpayEnvQuota = models.PostpayEnvQuota;
 const DescribeEndUsersResponse = models.DescribeEndUsersResponse;
 const AuthDomain = models.AuthDomain;
 const LogServiceInfo = models.LogServiceInfo;
+const DescribeEnvLimitResponse = models.DescribeEnvLimitResponse;
 const CreateStaticStoreRequest = models.CreateStaticStoreRequest;
 const CommonServiceAPIResponse = models.CommonServiceAPIResponse;
 const DescribeEndUserStatisticResponse = models.DescribeEndUserStatisticResponse;
+const DescribeExtraPkgBillingInfoResponse = models.DescribeExtraPkgBillingInfoResponse;
 const ReinstateEnvResponse = models.ReinstateEnvResponse;
 const DescribePostpayPackageFreeQuotasRequest = models.DescribePostpayPackageFreeQuotasRequest;
 const CreateAuthDomainResponse = models.CreateAuthDomainResponse;
@@ -46,41 +48,45 @@ const DescribeQuotaDataRequest = models.DescribeQuotaDataRequest;
 const DescribeCloudBaseBuildServiceRequest = models.DescribeCloudBaseBuildServiceRequest;
 const DescribeEndUserStatisticRequest = models.DescribeEndUserStatisticRequest;
 const PackageFreeQuotaInfo = models.PackageFreeQuotaInfo;
-const DescribeEnvFreeQuotaResponse = models.DescribeEnvFreeQuotaResponse;
+const CloudBaseCodeRepoDetail = models.CloudBaseCodeRepoDetail;
 const CheckTcbServiceRequest = models.CheckTcbServiceRequest;
 const ModifyDatabaseACLResponse = models.ModifyDatabaseACLResponse;
 const StaticStorageInfo = models.StaticStorageInfo;
-const DescribeExtraPkgBillingInfoResponse = models.DescribeExtraPkgBillingInfoResponse;
+const CloudRunServiceSimpleVersionSnapshot = models.CloudRunServiceSimpleVersionSnapshot;
 const DescribeExtraPkgBillingInfoRequest = models.DescribeExtraPkgBillingInfoRequest;
 const CreatePostpayPackageRequest = models.CreatePostpayPackageRequest;
 const DescribeEnvFreeQuotaRequest = models.DescribeEnvFreeQuotaRequest;
 const DatabasesInfo = models.DatabasesInfo;
+const LoginStatistic = models.LoginStatistic;
 const DescribeAuthDomainsRequest = models.DescribeAuthDomainsRequest;
 const DescribeEndUserLoginStatisticResponse = models.DescribeEndUserLoginStatisticResponse;
 const DescribeAuthDomainsResponse = models.DescribeAuthDomainsResponse;
 const ReinstateEnvRequest = models.ReinstateEnvRequest;
 const DescribeDatabaseACLRequest = models.DescribeDatabaseACLRequest;
+const PlatformStatistic = models.PlatformStatistic;
 const CreateHostingDomainRequest = models.CreateHostingDomainRequest;
 const DestroyStaticStoreResponse = models.DestroyStaticStoreResponse;
 const DeleteEndUserResponse = models.DeleteEndUserResponse;
 const EnvBillingInfoItem = models.EnvBillingInfoItem;
-const PlatformStatistic = models.PlatformStatistic;
+const DescribeEnvFreeQuotaResponse = models.DescribeEnvFreeQuotaResponse;
+const ModifyEnvResponse = models.ModifyEnvResponse;
 const ModifyEndUserRequest = models.ModifyEndUserRequest;
 const DescribeDatabaseACLResponse = models.DescribeDatabaseACLResponse;
 const EnvInfo = models.EnvInfo;
-const DestroyEnvRequest = models.DestroyEnvRequest;
+const CloudBaseRunImageInfo = models.CloudBaseRunImageInfo;
 const DestroyEnvResponse = models.DestroyEnvResponse;
 const ModifyDatabaseACLRequest = models.ModifyDatabaseACLRequest;
 const DestroyStaticStoreRequest = models.DestroyStaticStoreRequest;
 const ModifyEndUserResponse = models.ModifyEndUserResponse;
 const EndUserInfo = models.EndUserInfo;
-const DescribeEnvLimitResponse = models.DescribeEnvLimitResponse;
+const DescribeCloudBaseRunVersionSnapshotResponse = models.DescribeCloudBaseRunVersionSnapshotResponse;
 const DescribePostpayPackageFreeQuotasResponse = models.DescribePostpayPackageFreeQuotasResponse;
 const DeleteEndUserRequest = models.DeleteEndUserRequest;
 const DescribeEnvsResponse = models.DescribeEnvsResponse;
-const ModifyEnvResponse = models.ModifyEnvResponse;
+const CloudBaseCodeRepoName = models.CloudBaseCodeRepoName;
 const OrderInfo = models.OrderInfo;
 const CreateAuthDomainRequest = models.CreateAuthDomainRequest;
+const DestroyEnvRequest = models.DestroyEnvRequest;
 
 
 /**
@@ -113,6 +119,17 @@ class TcbClient extends AbstractClient {
     DescribeEndUsers(req, cb) {
         let resp = new DescribeEndUsersResponse();
         this.request("DescribeEndUsers", req, resp, cb);
+    }
+
+    /**
+     * 获取环境列表，含环境下的各个资源信息。尤其是各资源的唯一标识，是请求各资源的关键参数
+     * @param {DescribeEnvsRequest} req
+     * @param {function(string, DescribeEnvsResponse):void} cb
+     * @public
+     */
+    DescribeEnvs(req, cb) {
+        let resp = new DescribeEnvsResponse();
+        this.request("DescribeEnvs", req, resp, cb);
     }
 
     /**
@@ -303,14 +320,14 @@ class TcbClient extends AbstractClient {
     }
 
     /**
-     * 获取环境列表，含环境下的各个资源信息。尤其是各资源的唯一标识，是请求各资源的关键参数
-     * @param {DescribeEnvsRequest} req
-     * @param {function(string, DescribeEnvsResponse):void} cb
+     * 查询版本历史
+     * @param {DescribeCloudBaseRunVersionSnapshotRequest} req
+     * @param {function(string, DescribeCloudBaseRunVersionSnapshotResponse):void} cb
      * @public
      */
-    DescribeEnvs(req, cb) {
-        let resp = new DescribeEnvsResponse();
-        this.request("DescribeEnvs", req, resp, cb);
+    DescribeCloudBaseRunVersionSnapshot(req, cb) {
+        let resp = new DescribeCloudBaseRunVersionSnapshotResponse();
+        this.request("DescribeCloudBaseRunVersionSnapshot", req, resp, cb);
     }
 
     /**

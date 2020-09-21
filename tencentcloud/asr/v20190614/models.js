@@ -479,6 +479,7 @@ class CreateRecTaskRequest extends  AbstractModel {
         /**
          * 引擎模型类型。
 电话场景：
+• 8k_en：电话 8k 英语；
 • 8k_zh：电话 8k 中文普通话通用（可用于双声道音频）；
 • 8k_zh_s：电话 8k 中文普通话话者分离（仅适用于单声道音频）；
 非电话场景：
@@ -1036,9 +1037,6 @@ class SentenceRecognitionRequest extends  AbstractModel {
 非电话场景：
 • 16k_zh：16k 中文普通话通用；
 • 16k_en：16k 英语；
-• 16k_ca：16k 粤语；
-• 16k_ja：16k 日语；
-•16k_wuu-SH：16k 上海话方言。
 • 16k_ca：16k 粤语；
 • 16k_ja：16k 日语；
 •16k_wuu-SH：16k 上海话方言。

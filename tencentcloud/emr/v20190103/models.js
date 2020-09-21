@@ -3331,6 +3331,13 @@ class PersistentVolumeContext extends  AbstractModel {
          */
         this.DiskType = null;
 
+        /**
+         * 磁盘数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DiskNum = null;
+
     }
 
     /**
@@ -3342,6 +3349,7 @@ class PersistentVolumeContext extends  AbstractModel {
         }
         this.DiskSize = 'DiskSize' in params ? params.DiskSize : null;
         this.DiskType = 'DiskType' in params ? params.DiskType : null;
+        this.DiskNum = 'DiskNum' in params ? params.DiskNum : null;
 
     }
 }
@@ -3669,6 +3677,24 @@ class ScaleOutInstanceRequest extends  AbstractModel {
          */
         this.PodSpec = null;
 
+        /**
+         * 使用clickhouse集群扩容时，选择的机器分组名称
+         * @type {string || null}
+         */
+        this.ClickHouseClusterName = null;
+
+        /**
+         * 使用clickhouse集群扩容时，选择的机器分组类型。new为新增，old为选择旧分组
+         * @type {string || null}
+         */
+        this.ClickHouseClusterType = null;
+
+        /**
+         * 规则扩容指定 yarn node label
+         * @type {string || null}
+         */
+        this.YarnNodeLabel = null;
+
     }
 
     /**
@@ -3715,6 +3741,9 @@ class ScaleOutInstanceRequest extends  AbstractModel {
             obj.deserialize(params.PodSpec)
             this.PodSpec = obj;
         }
+        this.ClickHouseClusterName = 'ClickHouseClusterName' in params ? params.ClickHouseClusterName : null;
+        this.ClickHouseClusterType = 'ClickHouseClusterType' in params ? params.ClickHouseClusterType : null;
+        this.YarnNodeLabel = 'YarnNodeLabel' in params ? params.YarnNodeLabel : null;
 
     }
 }

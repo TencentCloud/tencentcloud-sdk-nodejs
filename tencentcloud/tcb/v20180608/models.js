@@ -266,40 +266,48 @@ class StorageInfo extends  AbstractModel {
 }
 
 /**
- * 终端用户登录新增统计
+ * DescribeCloudBaseRunVersionSnapshot请求参数结构体
  * @class
  */
-class LoginStatistic extends  AbstractModel {
+class DescribeCloudBaseRunVersionSnapshotRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 统计类型 新增NEWUSER 和登录 LOGIN
-注意：此字段可能返回 null，表示取不到有效值。
+         * 服务名
          * @type {string || null}
          */
-        this.StatisticalType = null;
+        this.ServerName = null;
 
         /**
-         * 统计周期：日DAY，周WEEK，月MONTH
-注意：此字段可能返回 null，表示取不到有效值。
+         * 版本名
          * @type {string || null}
          */
-        this.StatisticalCycle = null;
+        this.VersionName = null;
 
         /**
-         * 统计总量
-注意：此字段可能返回 null，表示取不到有效值。
+         * 环境id
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 版本历史名
+         * @type {string || null}
+         */
+        this.SnapshotName = null;
+
+        /**
+         * 偏移量
          * @type {number || null}
          */
-        this.Count = null;
+        this.Offset = null;
 
         /**
-         * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * 限制大小
+         * @type {number || null}
          */
-        this.UpdateTime = null;
+        this.Limit = null;
 
     }
 
@@ -310,10 +318,12 @@ class LoginStatistic extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.StatisticalType = 'StatisticalType' in params ? params.StatisticalType : null;
-        this.StatisticalCycle = 'StatisticalCycle' in params ? params.StatisticalCycle : null;
-        this.Count = 'Count' in params ? params.Count : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.ServerName = 'ServerName' in params ? params.ServerName : null;
+        this.VersionName = 'VersionName' in params ? params.VersionName : null;
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.SnapshotName = 'SnapshotName' in params ? params.SnapshotName : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -699,6 +709,90 @@ class LogServiceInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeEnvLimit返回参数结构体
+ * @class
+ */
+class DescribeEnvLimitResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 环境总数上限
+         * @type {number || null}
+         */
+        this.MaxEnvNum = null;
+
+        /**
+         * 目前环境总数
+         * @type {number || null}
+         */
+        this.CurrentEnvNum = null;
+
+        /**
+         * 免费环境数量上限
+         * @type {number || null}
+         */
+        this.MaxFreeEnvNum = null;
+
+        /**
+         * 目前免费环境数量
+         * @type {number || null}
+         */
+        this.CurrentFreeEnvNum = null;
+
+        /**
+         * 总计允许销毁环境次数上限
+         * @type {number || null}
+         */
+        this.MaxDeleteTotal = null;
+
+        /**
+         * 目前已销毁环境次数
+         * @type {number || null}
+         */
+        this.CurrentDeleteTotal = null;
+
+        /**
+         * 每月允许销毁环境次数上限
+         * @type {number || null}
+         */
+        this.MaxDeleteMonthly = null;
+
+        /**
+         * 本月已销毁环境次数
+         * @type {number || null}
+         */
+        this.CurrentDeleteMonthly = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MaxEnvNum = 'MaxEnvNum' in params ? params.MaxEnvNum : null;
+        this.CurrentEnvNum = 'CurrentEnvNum' in params ? params.CurrentEnvNum : null;
+        this.MaxFreeEnvNum = 'MaxFreeEnvNum' in params ? params.MaxFreeEnvNum : null;
+        this.CurrentFreeEnvNum = 'CurrentFreeEnvNum' in params ? params.CurrentFreeEnvNum : null;
+        this.MaxDeleteTotal = 'MaxDeleteTotal' in params ? params.MaxDeleteTotal : null;
+        this.CurrentDeleteTotal = 'CurrentDeleteTotal' in params ? params.CurrentDeleteTotal : null;
+        this.MaxDeleteMonthly = 'MaxDeleteMonthly' in params ? params.MaxDeleteMonthly : null;
+        this.CurrentDeleteMonthly = 'CurrentDeleteMonthly' in params ? params.CurrentDeleteMonthly : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateStaticStore请求参数结构体
  * @class
  */
@@ -807,6 +901,56 @@ class DescribeEndUserStatisticResponse extends  AbstractModel {
             }
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeExtraPkgBillingInfo返回参数结构体
+ * @class
+ */
+class DescribeExtraPkgBillingInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 增值包计费信息列表
+         * @type {Array.<EnvBillingInfoItem> || null}
+         */
+        this.EnvInfoList = null;
+
+        /**
+         * 增值包数目
+         * @type {number || null}
+         */
+        this.Total = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.EnvInfoList) {
+            this.EnvInfoList = new Array();
+            for (let z in params.EnvInfoList) {
+                let obj = new EnvBillingInfoItem();
+                obj.deserialize(params.EnvInfoList[z]);
+                this.EnvInfoList.push(obj);
+            }
+        }
+        this.Total = 'Total' in params ? params.Total : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1307,25 +1451,24 @@ class PackageFreeQuotaInfo extends  AbstractModel {
 }
 
 /**
- * DescribeEnvFreeQuota返回参数结构体
+ * 代码仓库里 Repo的信息描述
  * @class
  */
-class DescribeEnvFreeQuotaResponse extends  AbstractModel {
+class CloudBaseCodeRepoDetail extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 免费抵扣配额详情
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<PostpayEnvQuota> || null}
+         * repo的名字
+         * @type {CloudBaseCodeRepoName || null}
          */
-        this.QuotaItems = null;
+        this.Name = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * repo的url
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Url = null;
 
     }
 
@@ -1337,15 +1480,12 @@ class DescribeEnvFreeQuotaResponse extends  AbstractModel {
             return;
         }
 
-        if (params.QuotaItems) {
-            this.QuotaItems = new Array();
-            for (let z in params.QuotaItems) {
-                let obj = new PostpayEnvQuota();
-                obj.deserialize(params.QuotaItems[z]);
-                this.QuotaItems.push(obj);
-            }
+        if (params.Name) {
+            let obj = new CloudBaseCodeRepoName();
+            obj.deserialize(params.Name)
+            this.Name = obj;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Url = 'Url' in params ? params.Url : null;
 
     }
 }
@@ -1461,30 +1601,215 @@ class StaticStorageInfo extends  AbstractModel {
 }
 
 /**
- * DescribeExtraPkgBillingInfo返回参数结构体
+ * CloudRunServiceSimpleVersionSnapshot 信息
  * @class
  */
-class DescribeExtraPkgBillingInfoResponse extends  AbstractModel {
+class CloudRunServiceSimpleVersionSnapshot extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 增值包计费信息列表
-         * @type {Array.<EnvBillingInfoItem> || null}
-         */
-        this.EnvInfoList = null;
-
-        /**
-         * 增值包数目
-         * @type {number || null}
-         */
-        this.Total = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 版本名
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.VersionName = null;
+
+        /**
+         * 版本备注
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * cpu规格
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * 内存规格
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Mem = null;
+
+        /**
+         * 最小副本数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MinNum = null;
+
+        /**
+         * 最大副本数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxNum = null;
+
+        /**
+         * 镜像url
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * 扩容策略
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PolicyType = null;
+
+        /**
+         * 策略阈值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.PolicyThreshold = null;
+
+        /**
+         * 环境参数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EnvParams = null;
+
+        /**
+         * 容器端口
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ContainerPort = null;
+
+        /**
+         * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 更新类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UploadType = null;
+
+        /**
+         * dockerfile路径
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DockerfilePath = null;
+
+        /**
+         * 构建路径
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.BuildDir = null;
+
+        /**
+         * repo类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RepoType = null;
+
+        /**
+         * 仓库
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Repo = null;
+
+        /**
+         * 分支
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Branch = null;
+
+        /**
+         * 环境id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 服务名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServerName = null;
+
+        /**
+         * package名字
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PackageName = null;
+
+        /**
+         * package版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PackageVersion = null;
+
+        /**
+         * 自定义log路径
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CustomLogs = null;
+
+        /**
+         * 延时健康检查时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.InitialDelaySeconds = null;
+
+        /**
+         * snapshot名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SnapshotName = null;
+
+        /**
+         * 镜像信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {CloudBaseRunImageInfo || null}
+         */
+        this.ImageInfo = null;
+
+        /**
+         * 代码仓库信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {CloudBaseCodeRepoDetail || null}
+         */
+        this.CodeDetail = null;
+
+        /**
+         * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Status = null;
 
     }
 
@@ -1495,17 +1820,45 @@ class DescribeExtraPkgBillingInfoResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.VersionName = 'VersionName' in params ? params.VersionName : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Mem = 'Mem' in params ? params.Mem : null;
+        this.MinNum = 'MinNum' in params ? params.MinNum : null;
+        this.MaxNum = 'MaxNum' in params ? params.MaxNum : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.PolicyType = 'PolicyType' in params ? params.PolicyType : null;
+        this.PolicyThreshold = 'PolicyThreshold' in params ? params.PolicyThreshold : null;
+        this.EnvParams = 'EnvParams' in params ? params.EnvParams : null;
+        this.ContainerPort = 'ContainerPort' in params ? params.ContainerPort : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.UploadType = 'UploadType' in params ? params.UploadType : null;
+        this.DockerfilePath = 'DockerfilePath' in params ? params.DockerfilePath : null;
+        this.BuildDir = 'BuildDir' in params ? params.BuildDir : null;
+        this.RepoType = 'RepoType' in params ? params.RepoType : null;
+        this.Repo = 'Repo' in params ? params.Repo : null;
+        this.Branch = 'Branch' in params ? params.Branch : null;
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.ServerName = 'ServerName' in params ? params.ServerName : null;
+        this.PackageName = 'PackageName' in params ? params.PackageName : null;
+        this.PackageVersion = 'PackageVersion' in params ? params.PackageVersion : null;
+        this.CustomLogs = 'CustomLogs' in params ? params.CustomLogs : null;
+        this.InitialDelaySeconds = 'InitialDelaySeconds' in params ? params.InitialDelaySeconds : null;
+        this.SnapshotName = 'SnapshotName' in params ? params.SnapshotName : null;
 
-        if (params.EnvInfoList) {
-            this.EnvInfoList = new Array();
-            for (let z in params.EnvInfoList) {
-                let obj = new EnvBillingInfoItem();
-                obj.deserialize(params.EnvInfoList[z]);
-                this.EnvInfoList.push(obj);
-            }
+        if (params.ImageInfo) {
+            let obj = new CloudBaseRunImageInfo();
+            obj.deserialize(params.ImageInfo)
+            this.ImageInfo = obj;
         }
-        this.Total = 'Total' in params ? params.Total : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+        if (params.CodeDetail) {
+            let obj = new CloudBaseCodeRepoDetail();
+            obj.deserialize(params.CodeDetail)
+            this.CodeDetail = obj;
+        }
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -1707,6 +2060,59 @@ class DatabasesInfo extends  AbstractModel {
 }
 
 /**
+ * 终端用户登录新增统计
+ * @class
+ */
+class LoginStatistic extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 统计类型 新增NEWUSER 和登录 LOGIN
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.StatisticalType = null;
+
+        /**
+         * 统计周期：日DAY，周WEEK，月MONTH
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.StatisticalCycle = null;
+
+        /**
+         * 统计总量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.StatisticalType = 'StatisticalType' in params ? params.StatisticalType : null;
+        this.StatisticalCycle = 'StatisticalCycle' in params ? params.StatisticalCycle : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
  * DescribeAuthDomains请求参数结构体
  * @class
  */
@@ -1880,6 +2286,51 @@ class DescribeDatabaseACLRequest extends  AbstractModel {
         }
         this.EnvId = 'EnvId' in params ? params.EnvId : null;
         this.CollectionName = 'CollectionName' in params ? params.CollectionName : null;
+
+    }
+}
+
+/**
+ * 终端用户平台统计信息
+ * @class
+ */
+class PlatformStatistic extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 终端用户从属平台
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Platform = null;
+
+        /**
+         * 平台终端用户数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Count = null;
+
+        /**
+         * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Platform = 'Platform' in params ? params.Platform : null;
+        this.Count = 'Count' in params ? params.Count : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -2117,33 +2568,25 @@ class EnvBillingInfoItem extends  AbstractModel {
 }
 
 /**
- * 终端用户平台统计信息
+ * DescribeEnvFreeQuota返回参数结构体
  * @class
  */
-class PlatformStatistic extends  AbstractModel {
+class DescribeEnvFreeQuotaResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 终端用户从属平台
+         * 免费抵扣配额详情
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * @type {Array.<PostpayEnvQuota> || null}
          */
-        this.Platform = null;
+        this.QuotaItems = null;
 
         /**
-         * 平台终端用户数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Count = null;
-
-        /**
-         * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.UpdateTime = null;
+        this.RequestId = null;
 
     }
 
@@ -2154,9 +2597,44 @@ class PlatformStatistic extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Platform = 'Platform' in params ? params.Platform : null;
-        this.Count = 'Count' in params ? params.Count : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+        if (params.QuotaItems) {
+            this.QuotaItems = new Array();
+            for (let z in params.QuotaItems) {
+                let obj = new PostpayEnvQuota();
+                obj.deserialize(params.QuotaItems[z]);
+                this.QuotaItems.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyEnv返回参数结构体
+ * @class
+ */
+class ModifyEnvResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2419,30 +2897,42 @@ class EnvInfo extends  AbstractModel {
 }
 
 /**
- * DestroyEnv请求参数结构体
+ * CloudBaseRun 镜像信息
  * @class
  */
-class DestroyEnvRequest extends  AbstractModel {
+class CloudBaseRunImageInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 环境Id
+         * 镜像仓库名称
          * @type {string || null}
          */
-        this.EnvId = null;
+        this.RepositoryName = null;
 
         /**
-         * 针对预付费 删除隔离中的环境时要传true 正常环境直接跳过隔离期删除
+         * 是否公有
          * @type {boolean || null}
          */
-        this.IsForce = null;
+        this.IsPublic = null;
 
         /**
-         * 是否绕过资源检查，资源包等额外资源，默认为false，如果为true，则不检查资源是否有数据，直接删除。
-         * @type {boolean || null}
+         * 镜像tag名称
+         * @type {string || null}
          */
-        this.BypassCheck = null;
+        this.TagName = null;
+
+        /**
+         * 镜像server
+         * @type {string || null}
+         */
+        this.ServerAddr = null;
+
+        /**
+         * 镜像拉取地址
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
 
     }
 
@@ -2453,9 +2943,11 @@ class DestroyEnvRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.EnvId = 'EnvId' in params ? params.EnvId : null;
-        this.IsForce = 'IsForce' in params ? params.IsForce : null;
-        this.BypassCheck = 'BypassCheck' in params ? params.BypassCheck : null;
+        this.RepositoryName = 'RepositoryName' in params ? params.RepositoryName : null;
+        this.IsPublic = 'IsPublic' in params ? params.IsPublic : null;
+        this.TagName = 'TagName' in params ? params.TagName : null;
+        this.ServerAddr = 'ServerAddr' in params ? params.ServerAddr : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
 
     }
 }
@@ -2717,60 +3209,19 @@ class EndUserInfo extends  AbstractModel {
 }
 
 /**
- * DescribeEnvLimit返回参数结构体
+ * DescribeCloudBaseRunVersionSnapshot返回参数结构体
  * @class
  */
-class DescribeEnvLimitResponse extends  AbstractModel {
+class DescribeCloudBaseRunVersionSnapshotResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 环境总数上限
-         * @type {number || null}
+         * 版本历史
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<CloudRunServiceSimpleVersionSnapshot> || null}
          */
-        this.MaxEnvNum = null;
-
-        /**
-         * 目前环境总数
-         * @type {number || null}
-         */
-        this.CurrentEnvNum = null;
-
-        /**
-         * 免费环境数量上限
-         * @type {number || null}
-         */
-        this.MaxFreeEnvNum = null;
-
-        /**
-         * 目前免费环境数量
-         * @type {number || null}
-         */
-        this.CurrentFreeEnvNum = null;
-
-        /**
-         * 总计允许销毁环境次数上限
-         * @type {number || null}
-         */
-        this.MaxDeleteTotal = null;
-
-        /**
-         * 目前已销毁环境次数
-         * @type {number || null}
-         */
-        this.CurrentDeleteTotal = null;
-
-        /**
-         * 每月允许销毁环境次数上限
-         * @type {number || null}
-         */
-        this.MaxDeleteMonthly = null;
-
-        /**
-         * 本月已销毁环境次数
-         * @type {number || null}
-         */
-        this.CurrentDeleteMonthly = null;
+        this.Snapshots = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2787,14 +3238,15 @@ class DescribeEnvLimitResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MaxEnvNum = 'MaxEnvNum' in params ? params.MaxEnvNum : null;
-        this.CurrentEnvNum = 'CurrentEnvNum' in params ? params.CurrentEnvNum : null;
-        this.MaxFreeEnvNum = 'MaxFreeEnvNum' in params ? params.MaxFreeEnvNum : null;
-        this.CurrentFreeEnvNum = 'CurrentFreeEnvNum' in params ? params.CurrentFreeEnvNum : null;
-        this.MaxDeleteTotal = 'MaxDeleteTotal' in params ? params.MaxDeleteTotal : null;
-        this.CurrentDeleteTotal = 'CurrentDeleteTotal' in params ? params.CurrentDeleteTotal : null;
-        this.MaxDeleteMonthly = 'MaxDeleteMonthly' in params ? params.MaxDeleteMonthly : null;
-        this.CurrentDeleteMonthly = 'CurrentDeleteMonthly' in params ? params.CurrentDeleteMonthly : null;
+
+        if (params.Snapshots) {
+            this.Snapshots = new Array();
+            for (let z in params.Snapshots) {
+                let obj = new CloudRunServiceSimpleVersionSnapshot();
+                obj.deserialize(params.Snapshots[z]);
+                this.Snapshots.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2923,18 +3375,26 @@ class DescribeEnvsResponse extends  AbstractModel {
 }
 
 /**
- * ModifyEnv返回参数结构体
+ * 代码仓库 repo的名字
  * @class
  */
-class ModifyEnvResponse extends  AbstractModel {
+class CloudBaseCodeRepoName extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * repo的名字
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Name = null;
+
+        /**
+         * repo的完整全名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FullName = null;
 
     }
 
@@ -2945,7 +3405,8 @@ class ModifyEnvResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.FullName = 'FullName' in params ? params.FullName : null;
 
     }
 }
@@ -3084,6 +3545,48 @@ class CreateAuthDomainRequest extends  AbstractModel {
     }
 }
 
+/**
+ * DestroyEnv请求参数结构体
+ * @class
+ */
+class DestroyEnvRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 环境Id
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 针对预付费 删除隔离中的环境时要传true 正常环境直接跳过隔离期删除
+         * @type {boolean || null}
+         */
+        this.IsForce = null;
+
+        /**
+         * 是否绕过资源检查，资源包等额外资源，默认为false，如果为true，则不检查资源是否有数据，直接删除。
+         * @type {boolean || null}
+         */
+        this.BypassCheck = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.IsForce = 'IsForce' in params ? params.IsForce : null;
+        this.BypassCheck = 'BypassCheck' in params ? params.BypassCheck : null;
+
+    }
+}
+
 module.exports = {
     CreateHostingDomainResponse: CreateHostingDomainResponse,
     CreateStaticStoreResponse: CreateStaticStoreResponse,
@@ -3092,7 +3595,7 @@ module.exports = {
     CheckTcbServiceResponse: CheckTcbServiceResponse,
     DescribeEndUserLoginStatisticRequest: DescribeEndUserLoginStatisticRequest,
     StorageInfo: StorageInfo,
-    LoginStatistic: LoginStatistic,
+    DescribeCloudBaseRunVersionSnapshotRequest: DescribeCloudBaseRunVersionSnapshotRequest,
     KVPair: KVPair,
     FunctionInfo: FunctionInfo,
     CreatePostpayPackageResponse: CreatePostpayPackageResponse,
@@ -3101,9 +3604,11 @@ module.exports = {
     DescribeEndUsersResponse: DescribeEndUsersResponse,
     AuthDomain: AuthDomain,
     LogServiceInfo: LogServiceInfo,
+    DescribeEnvLimitResponse: DescribeEnvLimitResponse,
     CreateStaticStoreRequest: CreateStaticStoreRequest,
     CommonServiceAPIResponse: CommonServiceAPIResponse,
     DescribeEndUserStatisticResponse: DescribeEndUserStatisticResponse,
+    DescribeExtraPkgBillingInfoResponse: DescribeExtraPkgBillingInfoResponse,
     ReinstateEnvResponse: ReinstateEnvResponse,
     DescribePostpayPackageFreeQuotasRequest: DescribePostpayPackageFreeQuotasRequest,
     CreateAuthDomainResponse: CreateAuthDomainResponse,
@@ -3115,40 +3620,44 @@ module.exports = {
     DescribeCloudBaseBuildServiceRequest: DescribeCloudBaseBuildServiceRequest,
     DescribeEndUserStatisticRequest: DescribeEndUserStatisticRequest,
     PackageFreeQuotaInfo: PackageFreeQuotaInfo,
-    DescribeEnvFreeQuotaResponse: DescribeEnvFreeQuotaResponse,
+    CloudBaseCodeRepoDetail: CloudBaseCodeRepoDetail,
     CheckTcbServiceRequest: CheckTcbServiceRequest,
     ModifyDatabaseACLResponse: ModifyDatabaseACLResponse,
     StaticStorageInfo: StaticStorageInfo,
-    DescribeExtraPkgBillingInfoResponse: DescribeExtraPkgBillingInfoResponse,
+    CloudRunServiceSimpleVersionSnapshot: CloudRunServiceSimpleVersionSnapshot,
     DescribeExtraPkgBillingInfoRequest: DescribeExtraPkgBillingInfoRequest,
     CreatePostpayPackageRequest: CreatePostpayPackageRequest,
     DescribeEnvFreeQuotaRequest: DescribeEnvFreeQuotaRequest,
     DatabasesInfo: DatabasesInfo,
+    LoginStatistic: LoginStatistic,
     DescribeAuthDomainsRequest: DescribeAuthDomainsRequest,
     DescribeEndUserLoginStatisticResponse: DescribeEndUserLoginStatisticResponse,
     DescribeAuthDomainsResponse: DescribeAuthDomainsResponse,
     ReinstateEnvRequest: ReinstateEnvRequest,
     DescribeDatabaseACLRequest: DescribeDatabaseACLRequest,
+    PlatformStatistic: PlatformStatistic,
     CreateHostingDomainRequest: CreateHostingDomainRequest,
     DestroyStaticStoreResponse: DestroyStaticStoreResponse,
     DeleteEndUserResponse: DeleteEndUserResponse,
     EnvBillingInfoItem: EnvBillingInfoItem,
-    PlatformStatistic: PlatformStatistic,
+    DescribeEnvFreeQuotaResponse: DescribeEnvFreeQuotaResponse,
+    ModifyEnvResponse: ModifyEnvResponse,
     ModifyEndUserRequest: ModifyEndUserRequest,
     DescribeDatabaseACLResponse: DescribeDatabaseACLResponse,
     EnvInfo: EnvInfo,
-    DestroyEnvRequest: DestroyEnvRequest,
+    CloudBaseRunImageInfo: CloudBaseRunImageInfo,
     DestroyEnvResponse: DestroyEnvResponse,
     ModifyDatabaseACLRequest: ModifyDatabaseACLRequest,
     DestroyStaticStoreRequest: DestroyStaticStoreRequest,
     ModifyEndUserResponse: ModifyEndUserResponse,
     EndUserInfo: EndUserInfo,
-    DescribeEnvLimitResponse: DescribeEnvLimitResponse,
+    DescribeCloudBaseRunVersionSnapshotResponse: DescribeCloudBaseRunVersionSnapshotResponse,
     DescribePostpayPackageFreeQuotasResponse: DescribePostpayPackageFreeQuotasResponse,
     DeleteEndUserRequest: DeleteEndUserRequest,
     DescribeEnvsResponse: DescribeEnvsResponse,
-    ModifyEnvResponse: ModifyEnvResponse,
+    CloudBaseCodeRepoName: CloudBaseCodeRepoName,
     OrderInfo: OrderInfo,
     CreateAuthDomainRequest: CreateAuthDomainRequest,
+    DestroyEnvRequest: DestroyEnvRequest,
 
 }
