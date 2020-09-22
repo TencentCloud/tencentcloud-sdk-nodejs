@@ -4992,6 +4992,13 @@ class AttachEntityOfPolicy extends  AbstractModel {
          */
         this.RelatedType = null;
 
+        /**
+         * 策略关联时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AttachmentTime = null;
+
     }
 
     /**
@@ -5005,6 +5012,7 @@ class AttachEntityOfPolicy extends  AbstractModel {
         this.Name = 'Name' in params ? params.Name : null;
         this.Uin = 'Uin' in params ? params.Uin : null;
         this.RelatedType = 'RelatedType' in params ? params.RelatedType : null;
+        this.AttachmentTime = 'AttachmentTime' in params ? params.AttachmentTime : null;
 
     }
 }

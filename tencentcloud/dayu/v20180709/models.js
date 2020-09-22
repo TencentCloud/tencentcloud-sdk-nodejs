@@ -1737,7 +1737,7 @@ class CreateDDoSPolicyRequest extends  AbstractModel {
         this.PortLimits = null;
 
         /**
-         * IP黑白名单，当没有IP黑白名单时填空数组
+         * 请求源IP黑白名单，当没有IP黑白名单时填空数组
          * @type {Array.<IpBlackWhite> || null}
          */
         this.IpAllowDenys = null;

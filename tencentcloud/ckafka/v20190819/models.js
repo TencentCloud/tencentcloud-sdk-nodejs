@@ -654,46 +654,6 @@ class DescribeInstancesResponse extends  AbstractModel {
 }
 
 /**
- * FetchMessageByOffset返回参数结构体
- * @class
- */
-class FetchMessageByOffsetResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 返回结果
-         * @type {ConsumerRecord || null}
-         */
-        this.Result = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Result) {
-            let obj = new ConsumerRecord();
-            obj.deserialize(params.Result)
-            this.Result = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * GroupInfo内部topic对象
  * @class
  */
@@ -730,42 +690,26 @@ class GroupInfoTopics extends  AbstractModel {
 }
 
 /**
- * FetchMessageListByOffset请求参数结构体
+ * 统一返回的TopicResponse
  * @class
  */
-class FetchMessageListByOffsetRequest extends  AbstractModel {
+class TopicResult extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例Id
-         * @type {string || null}
+         * 返回的主题信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Topic> || null}
          */
-        this.InstanceId = null;
+        this.TopicList = null;
 
         /**
-         * 主题名
-         * @type {string || null}
-         */
-        this.Topic = null;
-
-        /**
-         * 分区id
+         * 符合条件的 topic 数量
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.Partition = null;
-
-        /**
-         * 位点信息
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 最大查询条数，默认20
-         * @type {number || null}
-         */
-        this.SinglePartitionRecordNumber = null;
+        this.TotalCount = null;
 
     }
 
@@ -776,11 +720,16 @@ class FetchMessageListByOffsetRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Topic = 'Topic' in params ? params.Topic : null;
-        this.Partition = 'Partition' in params ? params.Partition : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.SinglePartitionRecordNumber = 'SinglePartitionRecordNumber' in params ? params.SinglePartitionRecordNumber : null;
+
+        if (params.TopicList) {
+            this.TopicList = new Array();
+            for (let z in params.TopicList) {
+                let obj = new Topic();
+                obj.deserialize(params.TopicList[z]);
+                this.TopicList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
 
     }
 }
@@ -1074,62 +1023,6 @@ class GroupResponse extends  AbstractModel {
 }
 
 /**
- * FetchMessageListByTimestamp请求参数结构体
- * @class
- */
-class FetchMessageListByTimestampRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 实例Id
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * 主题名
-         * @type {string || null}
-         */
-        this.Topic = null;
-
-        /**
-         * 分区id
-         * @type {number || null}
-         */
-        this.Partition = null;
-
-        /**
-         * 查询开始时间，13位时间戳
-         * @type {number || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * 最大查询条数，默认20
-         * @type {number || null}
-         */
-        this.SinglePartitionRecordNumber = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Topic = 'Topic' in params ? params.Topic : null;
-        this.Partition = 'Partition' in params ? params.Partition : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.SinglePartitionRecordNumber = 'SinglePartitionRecordNumber' in params ? params.SinglePartitionRecordNumber : null;
-
-    }
-}
-
-/**
  * DescribeTopicAttributes返回参数结构体
  * @class
  */
@@ -1163,49 +1056,6 @@ class DescribeTopicAttributesResponse extends  AbstractModel {
             let obj = new TopicAttributesResponse();
             obj.deserialize(params.Result)
             this.Result = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * FetchMessageListByOffset返回参数结构体
- * @class
- */
-class FetchMessageListByOffsetResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 返回结果
-         * @type {Array.<ConsumerRecord> || null}
-         */
-        this.Result = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Result) {
-            this.Result = new Array();
-            for (let z in params.Result) {
-                let obj = new ConsumerRecord();
-                obj.deserialize(params.Result[z]);
-                this.Result.push(obj);
-            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -1401,24 +1251,25 @@ class CreateUserResponse extends  AbstractModel {
 }
 
 /**
- * ModifyInstanceAttributes返回参数结构体
+ * 消费分组主题对象
  * @class
  */
-class ModifyInstanceAttributesResponse extends  AbstractModel {
+class GroupOffsetTopic extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 返回结果
-         * @type {JgwOperateResponse || null}
-         */
-        this.Result = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 主题名称
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Topic = null;
+
+        /**
+         * 该主题分区数组，其中每个元素为一个 json object
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<GroupOffsetPartition> || null}
+         */
+        this.Partitions = null;
 
     }
 
@@ -1429,13 +1280,16 @@ class ModifyInstanceAttributesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Topic = 'Topic' in params ? params.Topic : null;
 
-        if (params.Result) {
-            let obj = new JgwOperateResponse();
-            obj.deserialize(params.Result)
-            this.Result = obj;
+        if (params.Partitions) {
+            this.Partitions = new Array();
+            for (let z in params.Partitions) {
+                let obj = new GroupOffsetPartition();
+                obj.deserialize(params.Partitions[z]);
+                this.Partitions.push(obj);
+            }
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1831,25 +1685,24 @@ class CreateTopicIpWhiteListResponse extends  AbstractModel {
 }
 
 /**
- * 消费分组主题对象
+ * ModifyInstanceAttributes返回参数结构体
  * @class
  */
-class GroupOffsetTopic extends  AbstractModel {
+class ModifyInstanceAttributesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 主题名称
-         * @type {string || null}
+         * 返回结果
+         * @type {JgwOperateResponse || null}
          */
-        this.Topic = null;
+        this.Result = null;
 
         /**
-         * 该主题分区数组，其中每个元素为一个 json object
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<GroupOffsetPartition> || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.Partitions = null;
+        this.RequestId = null;
 
     }
 
@@ -1860,16 +1713,13 @@ class GroupOffsetTopic extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Topic = 'Topic' in params ? params.Topic : null;
 
-        if (params.Partitions) {
-            this.Partitions = new Array();
-            for (let z in params.Partitions) {
-                let obj = new GroupOffsetPartition();
-                obj.deserialize(params.Partitions[z]);
-                this.Partitions.push(obj);
-            }
+        if (params.Result) {
+            let obj = new JgwOperateResponse();
+            obj.deserialize(params.Result)
+            this.Result = obj;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2151,55 +2001,6 @@ class DescribeRouteRequest extends  AbstractModel {
             return;
         }
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-
-    }
-}
-
-/**
- * FetchMessageByOffset请求参数结构体
- * @class
- */
-class FetchMessageByOffsetRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 实例Id
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * 主题名
-         * @type {string || null}
-         */
-        this.Topic = null;
-
-        /**
-         * 分区id
-         * @type {number || null}
-         */
-        this.Partition = null;
-
-        /**
-         * 位点信息
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Topic = 'Topic' in params ? params.Topic : null;
-        this.Partition = 'Partition' in params ? params.Partition : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -4380,51 +4181,6 @@ class DescribeRouteResponse extends  AbstractModel {
 }
 
 /**
- * 统一返回的TopicResponse
- * @class
- */
-class TopicResult extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 返回的主题信息列表
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<Topic> || null}
-         */
-        this.TopicList = null;
-
-        /**
-         * 符合条件的 topic 数量
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.TopicList) {
-            this.TopicList = new Array();
-            for (let z in params.TopicList) {
-                let obj = new Topic();
-                obj.deserialize(params.TopicList[z]);
-                this.TopicList.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-    }
-}
-
-/**
  * DescribeTopicDetail请求参数结构体
  * @class
  */
@@ -4509,72 +4265,6 @@ class DescribeGroupOffsetsResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * 消息记录
- * @class
- */
-class ConsumerRecord extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 主题名
-         * @type {string || null}
-         */
-        this.Topic = null;
-
-        /**
-         * 分区id
-         * @type {number || null}
-         */
-        this.Partition = null;
-
-        /**
-         * 位点
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 消息key
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Key = null;
-
-        /**
-         * 消息value
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Value = null;
-
-        /**
-         * 消息时间戳
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Timestamp = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Topic = 'Topic' in params ? params.Topic : null;
-        this.Partition = 'Partition' in params ? params.Partition : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Key = 'Key' in params ? params.Key : null;
-        this.Value = 'Value' in params ? params.Value : null;
-        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
 
     }
 }
@@ -4764,49 +4454,6 @@ class Route extends  AbstractModel {
         }
         this.Domain = 'Domain' in params ? params.Domain : null;
         this.DomainPort = 'DomainPort' in params ? params.DomainPort : null;
-
-    }
-}
-
-/**
- * FetchMessageListByTimestamp返回参数结构体
- * @class
- */
-class FetchMessageListByTimestampResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 返回结果
-         * @type {Array.<ConsumerRecord> || null}
-         */
-        this.Result = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.Result) {
-            this.Result = new Array();
-            for (let z in params.Result) {
-                let obj = new ConsumerRecord();
-                obj.deserialize(params.Result[z]);
-                this.Result.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5553,9 +5200,8 @@ module.exports = {
     DescribeConsumerGroupResponse: DescribeConsumerGroupResponse,
     DeleteTopicRequest: DeleteTopicRequest,
     DescribeInstancesResponse: DescribeInstancesResponse,
-    FetchMessageByOffsetResponse: FetchMessageByOffsetResponse,
     GroupInfoTopics: GroupInfoTopics,
-    FetchMessageListByOffsetRequest: FetchMessageListByOffsetRequest,
+    TopicResult: TopicResult,
     DescribeInstancesDetailResponse: DescribeInstancesDetailResponse,
     CreateInstancePreData: CreateInstancePreData,
     DescribeACLResponse: DescribeACLResponse,
@@ -5563,15 +5209,13 @@ module.exports = {
     Topic: Topic,
     Tag: Tag,
     GroupResponse: GroupResponse,
-    FetchMessageListByTimestampRequest: FetchMessageListByTimestampRequest,
     DescribeTopicAttributesResponse: DescribeTopicAttributesResponse,
-    FetchMessageListByOffsetResponse: FetchMessageListByOffsetResponse,
     RouteResponse: RouteResponse,
     DescribeGroupResponse: DescribeGroupResponse,
     ModifyInstanceAttributesConfig: ModifyInstanceAttributesConfig,
     OperateResponseData: OperateResponseData,
     CreateUserResponse: CreateUserResponse,
-    ModifyInstanceAttributesResponse: ModifyInstanceAttributesResponse,
+    GroupOffsetTopic: GroupOffsetTopic,
     CreatePartitionResponse: CreatePartitionResponse,
     DeleteUserResponse: DeleteUserResponse,
     CreateAclRequest: CreateAclRequest,
@@ -5579,14 +5223,13 @@ module.exports = {
     DescribeTopicResponse: DescribeTopicResponse,
     ConsumerGroupResponse: ConsumerGroupResponse,
     CreateTopicIpWhiteListResponse: CreateTopicIpWhiteListResponse,
-    GroupOffsetTopic: GroupOffsetTopic,
+    ModifyInstanceAttributesResponse: ModifyInstanceAttributesResponse,
     ModifyGroupOffsetsResponse: ModifyGroupOffsetsResponse,
     Partition: Partition,
     CreateAclResponse: CreateAclResponse,
     CreateTopicRequest: CreateTopicRequest,
     DeleteAclResponse: DeleteAclResponse,
     DescribeRouteRequest: DescribeRouteRequest,
-    FetchMessageByOffsetRequest: FetchMessageByOffsetRequest,
     InstanceConfigDO: InstanceConfigDO,
     UserResponse: UserResponse,
     DescribeGroupInfoRequest: DescribeGroupInfoRequest,
@@ -5629,14 +5272,11 @@ module.exports = {
     TopicPartitionDO: TopicPartitionDO,
     CreateTopicResp: CreateTopicResp,
     DescribeRouteResponse: DescribeRouteResponse,
-    TopicResult: TopicResult,
     DescribeTopicDetailRequest: DescribeTopicDetailRequest,
     DescribeGroupOffsetsResponse: DescribeGroupOffsetsResponse,
-    ConsumerRecord: ConsumerRecord,
     ModifyGroupOffsetsRequest: ModifyGroupOffsetsRequest,
     CreateTopicIpWhiteListRequest: CreateTopicIpWhiteListRequest,
     Route: Route,
-    FetchMessageListByTimestampResponse: FetchMessageListByTimestampResponse,
     Acl: Acl,
     ModifyTopicAttributesRequest: ModifyTopicAttributesRequest,
     CreateTopicResponse: CreateTopicResponse,

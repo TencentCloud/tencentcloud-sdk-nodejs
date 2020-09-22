@@ -5895,6 +5895,12 @@ false（默认）：发送正常请求，通过检查后直接创建实例
         this.DryRun = null;
 
         /**
+         * CAM角色名称。可通过[`DescribeRoleList`](https://cloud.tencent.com/document/product/598/13887)接口返回值中的`roleName`获取。
+         * @type {string || null}
+         */
+        this.CamRoleName = null;
+
+        /**
          * 高性能计算集群ID。若创建的实例为高性能计算实例，需指定实例放置的集群，否则不可指定。
          * @type {string || null}
          */
@@ -5992,6 +5998,7 @@ false（默认）：发送正常请求，通过检查后直接创建实例
         }
         this.UserData = 'UserData' in params ? params.UserData : null;
         this.DryRun = 'DryRun' in params ? params.DryRun : null;
+        this.CamRoleName = 'CamRoleName' in params ? params.CamRoleName : null;
         this.HpcClusterId = 'HpcClusterId' in params ? params.HpcClusterId : null;
 
     }

@@ -114,6 +114,41 @@ z轴确定了重叠画面的遮盖顺序，z轴值大的画面处于顶层
 }
 
 /**
+ * SetVideoGenerationTaskCallback请求参数结构体
+ * @class
+ */
+class SetVideoGenerationTaskCallbackRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 客户的SdkAppId
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * 课后录制任务结果回调地址，如果传空字符串会删除原来的回调地址配置，回调地址仅支持 http或https协议，即回调地址以http://或https://开头
+         * @type {string || null}
+         */
+        this.Callback = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.Callback = 'Callback' in params ? params.Callback : null;
+
+    }
+}
+
+/**
  * 指定流录制的控制参数，比如是否禁用音频、视频是录制大画面还是录制小画面等
  * @class
  */
@@ -184,10 +219,185 @@ false - 录制大画面。
 }
 
 /**
+ * StopOnlineRecord返回参数结构体
+ * @class
+ */
+class StopOnlineRecordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SetVideoGenerationTaskCallbackKey请求参数结构体
+ * @class
+ */
+class SetVideoGenerationTaskCallbackKeyRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用的SdkAppId
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * 设置视频生成回调鉴权密钥，最长64字符，如果传入空字符串，那么删除现有的鉴权回调密钥
+         * @type {string || null}
+         */
+        this.CallbackKey = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.CallbackKey = 'CallbackKey' in params ? params.CallbackKey : null;
+
+    }
+}
+
+/**
+ * 拼接视频中被忽略的时间段
+ * @class
+ */
+class OmittedDuration extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 录制暂停时间戳对应的视频播放时间(单位: 毫秒)
+         * @type {number || null}
+         */
+        this.VideoTime = null;
+
+        /**
+         * 录制暂停时间戳(单位: 毫秒)
+         * @type {number || null}
+         */
+        this.PauseTime = null;
+
+        /**
+         * 录制恢复时间戳(单位: 毫秒)
+         * @type {number || null}
+         */
+        this.ResumeTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VideoTime = 'VideoTime' in params ? params.VideoTime : null;
+        this.PauseTime = 'PauseTime' in params ? params.PauseTime : null;
+        this.ResumeTime = 'ResumeTime' in params ? params.ResumeTime : null;
+
+    }
+}
+
+/**
+ * DescribeVideoGenerationTaskCallback返回参数结构体
+ * @class
+ */
+class DescribeVideoGenerationTaskCallbackResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 录制视频生成回调地址
+         * @type {string || null}
+         */
+        this.Callback = null;
+
+        /**
+         * 录制视频生成回调鉴权密钥
+         * @type {string || null}
+         */
+        this.CallbackKey = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Callback = 'Callback' in params ? params.Callback : null;
+        this.CallbackKey = 'CallbackKey' in params ? params.CallbackKey : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ResumeOnlineRecord返回参数结构体
  * @class
  */
 class ResumeOnlineRecordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SetVideoGenerationTaskCallback返回参数结构体
+ * @class
+ */
+class SetVideoGenerationTaskCallbackResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -488,44 +698,18 @@ class StopOnlineRecordRequest extends  AbstractModel {
 }
 
 /**
- * 流布局参数
+ * SetVideoGenerationTaskCallbackKey返回参数结构体
  * @class
  */
-class StreamLayout extends  AbstractModel {
+class SetVideoGenerationTaskCallbackKeyResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 流布局配置参数
-         * @type {LayoutParams || null}
-         */
-        this.LayoutParams = null;
-
-        /**
-         * 视频流ID
-流ID的取值含义如下：
-1. tic_record_user - 表示当前画面用于显示白板视频流
-2. tic_substream - 表示当前画面用于显示辅路视频流
-3. 特定用户ID - 表示当前画面用于显示指定用户的视频流
-4. 不填 - 表示当前画面用于备选，当有新的视频流加入时，会从这些备选的空位中选择一个没有被占用的位置来显示新的视频流画面
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.InputStreamId = null;
-
-        /**
-         * 背景颜色，默认为黑色，格式为RGB格式，如红色为"#FF0000"
-         * @type {string || null}
-         */
-        this.BackgroundColor = null;
-
-        /**
-         * 视频画面填充模式。
-
-0 - 自适应模式，对视频画面进行等比例缩放，在指定区域内显示完整的画面。此模式可能存在黑边。
-1 - 全屏模式，对视频画面进行等比例缩放，让画面填充满整个指定区域。此模式不会存在黑边，但会将超出区域的那一部分画面裁剪掉。
-         * @type {number || null}
-         */
-        this.FillMode = null;
+        this.RequestId = null;
 
     }
 
@@ -536,15 +720,7 @@ class StreamLayout extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.LayoutParams) {
-            let obj = new LayoutParams();
-            obj.deserialize(params.LayoutParams)
-            this.LayoutParams = obj;
-        }
-        this.InputStreamId = 'InputStreamId' in params ? params.InputStreamId : null;
-        this.BackgroundColor = 'BackgroundColor' in params ? params.BackgroundColor : null;
-        this.FillMode = 'FillMode' in params ? params.FillMode : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -579,6 +755,91 @@ class CreateTranscodeResponse extends  AbstractModel {
             return;
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeVideoGenerationTask返回参数结构体
+ * @class
+ */
+class DescribeVideoGenerationTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务对应的群组Id
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 任务对应的房间号
+         * @type {number || null}
+         */
+        this.RoomId = null;
+
+        /**
+         * 任务的Id
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 录制视频生成进度（0-100，100表示视频生成完成 ）
+         * @type {number || null}
+         */
+        this.Progress = null;
+
+        /**
+         * 录制视频生成任务状态
+- QUEUED: 正在排队
+- PROCESSING: 正在生成视频
+- FINISHED: 生成视频结束（成功完成或失败结束，可以通过错误码和错误信息进一步判断）
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 回放视频总时长,单位：毫秒
+         * @type {number || null}
+         */
+        this.TotalTime = null;
+
+        /**
+         * 录制视频生成列表
+         * @type {VideoInfo || null}
+         */
+        this.VideoInfos = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.Progress = 'Progress' in params ? params.Progress : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.TotalTime = 'TotalTime' in params ? params.TotalTime : null;
+
+        if (params.VideoInfos) {
+            let obj = new VideoInfo();
+            obj.deserialize(params.VideoInfos)
+            this.VideoInfos = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -905,6 +1166,203 @@ class Whiteboard extends  AbstractModel {
 }
 
 /**
+ * DescribeVideoGenerationTask请求参数结构体
+ * @class
+ */
+class DescribeVideoGenerationTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 客户的SdkAppId
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * 录制视频生成的任务Id
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * CreateVideoGenerationTask返回参数结构体
+ * @class
+ */
+class CreateVideoGenerationTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 视频生成的任务Id
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * PauseOnlineRecord返回参数结构体
+ * @class
+ */
+class PauseOnlineRecordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateTranscode请求参数结构体
+ * @class
+ */
+class CreateTranscodeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 客户的SdkAppId
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * 需要进行转码文件地址
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 是否为静态PPT，默认为False；
+如果IsStaticPPT为False，后缀名为.ppt或.pptx的文档会动态转码成HTML5页面，其他格式的文档会静态转码成图片；如果IsStaticPPT为True，所有格式的文档会静态转码成图片；
+         * @type {boolean || null}
+         */
+        this.IsStaticPPT = null;
+
+        /**
+         * 转码后文档的最小分辨率，不传、传空字符串或分辨率格式错误则使用文档原分辨率
+
+注意分辨率宽高中间为英文字母"xyz"的"x"
+         * @type {string || null}
+         */
+        this.MinResolution = null;
+
+        /**
+         * 动态PPT转码可以为文件生成该分辨率的缩略图，不传、传空字符串或分辨率格式错误则不生成缩略图，分辨率格式同MinResolution
+
+静态转码这个参数不起作用
+         * @type {string || null}
+         */
+        this.ThumbnailResolution = null;
+
+        /**
+         * 转码文件压缩格式，不传、传空字符串或不是指定的格式则不生成压缩文件，目前支持如下压缩格式：
+
+zip： 生成`.zip`压缩包
+tar.gz： 生成`.tar.gz`压缩包
+         * @type {string || null}
+         */
+        this.CompressFileType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.IsStaticPPT = 'IsStaticPPT' in params ? params.IsStaticPPT : null;
+        this.MinResolution = 'MinResolution' in params ? params.MinResolution : null;
+        this.ThumbnailResolution = 'ThumbnailResolution' in params ? params.ThumbnailResolution : null;
+        this.CompressFileType = 'CompressFileType' in params ? params.CompressFileType : null;
+
+    }
+}
+
+/**
+ * SetOnlineRecordCallbackKey返回参数结构体
+ * @class
+ */
+class SetOnlineRecordCallbackKeyResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeOnlineRecord返回参数结构体
  * @class
  */
@@ -1043,133 +1501,6 @@ class DescribeOnlineRecordResponse extends  AbstractModel {
             }
         }
         this.ReplayUrl = 'ReplayUrl' in params ? params.ReplayUrl : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CreateTranscode请求参数结构体
- * @class
- */
-class CreateTranscodeRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 客户的SdkAppId
-         * @type {number || null}
-         */
-        this.SdkAppId = null;
-
-        /**
-         * 需要进行转码文件地址
-         * @type {string || null}
-         */
-        this.Url = null;
-
-        /**
-         * 是否为静态PPT，默认为False；
-如果IsStaticPPT为False，后缀名为.ppt或.pptx的文档会动态转码成HTML5页面，其他格式的文档会静态转码成图片；如果IsStaticPPT为True，所有格式的文档会静态转码成图片；
-         * @type {boolean || null}
-         */
-        this.IsStaticPPT = null;
-
-        /**
-         * 转码后文档的最小分辨率，不传、传空字符串或分辨率格式错误则使用文档原分辨率
-
-注意分辨率宽高中间为英文字母"xyz"的"x"
-         * @type {string || null}
-         */
-        this.MinResolution = null;
-
-        /**
-         * 动态PPT转码可以为文件生成该分辨率的缩略图，不传、传空字符串或分辨率格式错误则不生成缩略图，分辨率格式同MinResolution
-
-静态转码这个参数不起作用
-         * @type {string || null}
-         */
-        this.ThumbnailResolution = null;
-
-        /**
-         * 转码文件压缩格式，不传、传空字符串或不是指定的格式则不生成压缩文件，目前支持如下压缩格式：
-
-zip： 生成`.zip`压缩包
-tar.gz： 生成`.tar.gz`压缩包
-         * @type {string || null}
-         */
-        this.CompressFileType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.Url = 'Url' in params ? params.Url : null;
-        this.IsStaticPPT = 'IsStaticPPT' in params ? params.IsStaticPPT : null;
-        this.MinResolution = 'MinResolution' in params ? params.MinResolution : null;
-        this.ThumbnailResolution = 'ThumbnailResolution' in params ? params.ThumbnailResolution : null;
-        this.CompressFileType = 'CompressFileType' in params ? params.CompressFileType : null;
-
-    }
-}
-
-/**
- * SetOnlineRecordCallbackKey返回参数结构体
- * @class
- */
-class SetOnlineRecordCallbackKeyResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * PauseOnlineRecord返回参数结构体
- * @class
- */
-class PauseOnlineRecordResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1353,6 +1684,68 @@ class DescribeTranscodeResponse extends  AbstractModel {
 }
 
 /**
+ * 流布局参数
+ * @class
+ */
+class StreamLayout extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 流布局配置参数
+         * @type {LayoutParams || null}
+         */
+        this.LayoutParams = null;
+
+        /**
+         * 视频流ID
+流ID的取值含义如下：
+1. tic_record_user - 表示当前画面用于显示白板视频流
+2. tic_substream - 表示当前画面用于显示辅路视频流
+3. 特定用户ID - 表示当前画面用于显示指定用户的视频流
+4. 不填 - 表示当前画面用于备选，当有新的视频流加入时，会从这些备选的空位中选择一个没有被占用的位置来显示新的视频流画面
+         * @type {string || null}
+         */
+        this.InputStreamId = null;
+
+        /**
+         * 背景颜色，默认为黑色，格式为RGB格式，如红色为"#FF0000"
+         * @type {string || null}
+         */
+        this.BackgroundColor = null;
+
+        /**
+         * 视频画面填充模式。
+
+0 - 自适应模式，对视频画面进行等比例缩放，在指定区域内显示完整的画面。此模式可能存在黑边。
+1 - 全屏模式，对视频画面进行等比例缩放，让画面填充满整个指定区域。此模式不会存在黑边，但会将超出区域的那一部分画面裁剪掉。
+         * @type {number || null}
+         */
+        this.FillMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.LayoutParams) {
+            let obj = new LayoutParams();
+            obj.deserialize(params.LayoutParams)
+            this.LayoutParams = obj;
+        }
+        this.InputStreamId = 'InputStreamId' in params ? params.InputStreamId : null;
+        this.BackgroundColor = 'BackgroundColor' in params ? params.BackgroundColor : null;
+        this.FillMode = 'FillMode' in params ? params.FillMode : null;
+
+    }
+}
+
+/**
  * SetOnlineRecordCallback返回参数结构体
  * @class
  */
@@ -1416,18 +1809,56 @@ class SetOnlineRecordCallbackKeyRequest extends  AbstractModel {
 }
 
 /**
- * StopOnlineRecord返回参数结构体
+ * CreateVideoGenerationTask请求参数结构体
  * @class
  */
-class StopOnlineRecordResponse extends  AbstractModel {
+class CreateVideoGenerationTaskRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 录制任务的TaskId
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.OnlineRecordTaskId = null;
+
+        /**
+         * 客户的SdkAppId
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * 视频生成的白板参数，例如白板宽高等。
+
+此参数与开始录制接口提供的Whiteboard参数互斥，在本接口与开始录制接口都提供了Whiteboard参数时，优先使用本接口指定的Whiteboard参数进行视频生成，否则使用开始录制接口提供的Whiteboard参数进行视频生成。
+         * @type {Whiteboard || null}
+         */
+        this.Whiteboard = null;
+
+        /**
+         * 视频拼接参数
+
+此参数与开始录制接口提供的Concat参数互斥，在本接口与开始录制接口都提供了Concat参数时，优先使用本接口指定的Concat参数进行视频拼接，否则使用开始录制接口提供的Concat参数进行视频拼接。
+         * @type {Concat || null}
+         */
+        this.Concat = null;
+
+        /**
+         * 视频生成混流参数
+
+此参数与开始录制接口提供的MixStream参数互斥，在本接口与开始录制接口都提供了MixStream参数时，优先使用本接口指定的MixStream参数进行视频混流，否则使用开始录制接口提供的MixStream参数进行视频拼混流。
+         * @type {MixStream || null}
+         */
+        this.MixStream = null;
+
+        /**
+         * 视频生成控制参数，用于更精细地指定需要生成哪些流，某一路流是否禁用音频，是否只录制小画面等
+
+此参数与开始录制接口提供的RecordControl参数互斥，在本接口与开始录制接口都提供了RecordControl参数时，优先使用本接口指定的RecordControl参数进行视频生成控制，否则使用开始录制接口提供的RecordControl参数进行视频拼生成控制。
+         * @type {RecordControl || null}
+         */
+        this.RecordControl = null;
 
     }
 
@@ -1438,7 +1869,32 @@ class StopOnlineRecordResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.OnlineRecordTaskId = 'OnlineRecordTaskId' in params ? params.OnlineRecordTaskId : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+
+        if (params.Whiteboard) {
+            let obj = new Whiteboard();
+            obj.deserialize(params.Whiteboard)
+            this.Whiteboard = obj;
+        }
+
+        if (params.Concat) {
+            let obj = new Concat();
+            obj.deserialize(params.Concat)
+            this.Concat = obj;
+        }
+
+        if (params.MixStream) {
+            let obj = new MixStream();
+            obj.deserialize(params.MixStream)
+            this.MixStream = obj;
+        }
+
+        if (params.RecordControl) {
+            let obj = new RecordControl();
+            obj.deserialize(params.RecordControl)
+            this.RecordControl = obj;
+        }
 
     }
 }
@@ -1764,30 +2220,18 @@ class MixStream extends  AbstractModel {
 }
 
 /**
- * 拼接视频中被忽略的时间段
+ * DescribeVideoGenerationTaskCallback请求参数结构体
  * @class
  */
-class OmittedDuration extends  AbstractModel {
+class DescribeVideoGenerationTaskCallbackRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 录制暂停时间戳对应的视频播放时间(单位: 毫秒)
+         * 应用的SdkAppId
          * @type {number || null}
          */
-        this.VideoTime = null;
-
-        /**
-         * 录制暂停时间戳(单位: 毫秒)
-         * @type {number || null}
-         */
-        this.PauseTime = null;
-
-        /**
-         * 录制恢复时间戳(单位: 毫秒)
-         * @type {number || null}
-         */
-        this.ResumeTime = null;
+        this.SdkAppId = null;
 
     }
 
@@ -1798,9 +2242,7 @@ class OmittedDuration extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VideoTime = 'VideoTime' in params ? params.VideoTime : null;
-        this.PauseTime = 'PauseTime' in params ? params.PauseTime : null;
-        this.ResumeTime = 'ResumeTime' in params ? params.ResumeTime : null;
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
 
     }
 }
@@ -1843,15 +2285,22 @@ class PauseOnlineRecordRequest extends  AbstractModel {
 module.exports = {
     Canvas: Canvas,
     LayoutParams: LayoutParams,
+    SetVideoGenerationTaskCallbackRequest: SetVideoGenerationTaskCallbackRequest,
     StreamControl: StreamControl,
+    StopOnlineRecordResponse: StopOnlineRecordResponse,
+    SetVideoGenerationTaskCallbackKeyRequest: SetVideoGenerationTaskCallbackKeyRequest,
+    OmittedDuration: OmittedDuration,
+    DescribeVideoGenerationTaskCallbackResponse: DescribeVideoGenerationTaskCallbackResponse,
     ResumeOnlineRecordResponse: ResumeOnlineRecordResponse,
+    SetVideoGenerationTaskCallbackResponse: SetVideoGenerationTaskCallbackResponse,
     StartOnlineRecordRequest: StartOnlineRecordRequest,
     DescribeOnlineRecordCallbackRequest: DescribeOnlineRecordCallbackRequest,
     DescribeOnlineRecordCallbackResponse: DescribeOnlineRecordCallbackResponse,
     SetTranscodeCallbackResponse: SetTranscodeCallbackResponse,
     StopOnlineRecordRequest: StopOnlineRecordRequest,
-    StreamLayout: StreamLayout,
+    SetVideoGenerationTaskCallbackKeyResponse: SetVideoGenerationTaskCallbackKeyResponse,
     CreateTranscodeResponse: CreateTranscodeResponse,
+    DescribeVideoGenerationTaskResponse: DescribeVideoGenerationTaskResponse,
     VideoInfo: VideoInfo,
     CustomLayout: CustomLayout,
     SetTranscodeCallbackKeyResponse: SetTranscodeCallbackKeyResponse,
@@ -1859,16 +2308,19 @@ module.exports = {
     DescribeOnlineRecordRequest: DescribeOnlineRecordRequest,
     StartOnlineRecordResponse: StartOnlineRecordResponse,
     Whiteboard: Whiteboard,
-    DescribeOnlineRecordResponse: DescribeOnlineRecordResponse,
+    DescribeVideoGenerationTaskRequest: DescribeVideoGenerationTaskRequest,
+    CreateVideoGenerationTaskResponse: CreateVideoGenerationTaskResponse,
+    PauseOnlineRecordResponse: PauseOnlineRecordResponse,
     CreateTranscodeRequest: CreateTranscodeRequest,
     SetOnlineRecordCallbackKeyResponse: SetOnlineRecordCallbackKeyResponse,
-    PauseOnlineRecordResponse: PauseOnlineRecordResponse,
+    DescribeOnlineRecordResponse: DescribeOnlineRecordResponse,
     SetTranscodeCallbackKeyRequest: SetTranscodeCallbackKeyRequest,
     DescribeTranscodeRequest: DescribeTranscodeRequest,
     DescribeTranscodeResponse: DescribeTranscodeResponse,
+    StreamLayout: StreamLayout,
     SetOnlineRecordCallbackResponse: SetOnlineRecordCallbackResponse,
     SetOnlineRecordCallbackKeyRequest: SetOnlineRecordCallbackKeyRequest,
-    StopOnlineRecordResponse: StopOnlineRecordResponse,
+    CreateVideoGenerationTaskRequest: CreateVideoGenerationTaskRequest,
     DescribeTranscodeCallbackRequest: DescribeTranscodeCallbackRequest,
     ResumeOnlineRecordRequest: ResumeOnlineRecordRequest,
     DescribeTranscodeCallbackResponse: DescribeTranscodeCallbackResponse,
@@ -1876,7 +2328,7 @@ module.exports = {
     RecordControl: RecordControl,
     SetOnlineRecordCallbackRequest: SetOnlineRecordCallbackRequest,
     MixStream: MixStream,
-    OmittedDuration: OmittedDuration,
+    DescribeVideoGenerationTaskCallbackRequest: DescribeVideoGenerationTaskCallbackRequest,
     PauseOnlineRecordRequest: PauseOnlineRecordRequest,
 
 }

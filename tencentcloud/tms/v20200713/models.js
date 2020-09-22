@@ -208,7 +208,7 @@ class AccountTipoffAccessRequest extends  AbstractModel {
         this.ReportedAccount = null;
 
         /**
-         * 被举报账号类型(1-微信uin 2-QQ号 3-微信群uin 4-qq群号 5-微信openid 6-QQopenid 7-手机号 8-微信号 0-其它string)
+         * 被举报账号类型(1-手机号 2-QQ号 3-微信号 4-QQ群号 5-微信openid 6-QQopenid 0-其它)
          * @type {number || null}
          */
         this.ReportedAccountType = null;
@@ -226,7 +226,7 @@ class AccountTipoffAccessRequest extends  AbstractModel {
         this.SenderAccount = null;
 
         /**
-         * 举报者账号类型(1-微信uin 2-QQ号 3-微信群uin 4-qq群号 5-微信openid 6-QQopenid 7-手机号 8-微信号 0-其它string)
+         * 举报者账号类型(1-手机号 2-QQ号 3-微信号 4-QQ群号 5-微信openid 6-QQopenid 0-其它)
          * @type {number || null}
          */
         this.SenderAccountType = null;

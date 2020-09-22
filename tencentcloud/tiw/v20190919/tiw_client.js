@@ -18,15 +18,22 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const Canvas = models.Canvas;
 const LayoutParams = models.LayoutParams;
+const SetVideoGenerationTaskCallbackRequest = models.SetVideoGenerationTaskCallbackRequest;
 const StreamControl = models.StreamControl;
+const StopOnlineRecordResponse = models.StopOnlineRecordResponse;
+const SetVideoGenerationTaskCallbackKeyRequest = models.SetVideoGenerationTaskCallbackKeyRequest;
+const OmittedDuration = models.OmittedDuration;
+const DescribeVideoGenerationTaskCallbackResponse = models.DescribeVideoGenerationTaskCallbackResponse;
 const ResumeOnlineRecordResponse = models.ResumeOnlineRecordResponse;
+const SetVideoGenerationTaskCallbackResponse = models.SetVideoGenerationTaskCallbackResponse;
 const StartOnlineRecordRequest = models.StartOnlineRecordRequest;
 const DescribeOnlineRecordCallbackRequest = models.DescribeOnlineRecordCallbackRequest;
 const DescribeOnlineRecordCallbackResponse = models.DescribeOnlineRecordCallbackResponse;
 const SetTranscodeCallbackResponse = models.SetTranscodeCallbackResponse;
 const StopOnlineRecordRequest = models.StopOnlineRecordRequest;
-const StreamLayout = models.StreamLayout;
+const SetVideoGenerationTaskCallbackKeyResponse = models.SetVideoGenerationTaskCallbackKeyResponse;
 const CreateTranscodeResponse = models.CreateTranscodeResponse;
+const DescribeVideoGenerationTaskResponse = models.DescribeVideoGenerationTaskResponse;
 const VideoInfo = models.VideoInfo;
 const CustomLayout = models.CustomLayout;
 const SetTranscodeCallbackKeyResponse = models.SetTranscodeCallbackKeyResponse;
@@ -34,16 +41,19 @@ const Concat = models.Concat;
 const DescribeOnlineRecordRequest = models.DescribeOnlineRecordRequest;
 const StartOnlineRecordResponse = models.StartOnlineRecordResponse;
 const Whiteboard = models.Whiteboard;
-const DescribeOnlineRecordResponse = models.DescribeOnlineRecordResponse;
+const DescribeVideoGenerationTaskRequest = models.DescribeVideoGenerationTaskRequest;
+const CreateVideoGenerationTaskResponse = models.CreateVideoGenerationTaskResponse;
+const PauseOnlineRecordResponse = models.PauseOnlineRecordResponse;
 const CreateTranscodeRequest = models.CreateTranscodeRequest;
 const SetOnlineRecordCallbackKeyResponse = models.SetOnlineRecordCallbackKeyResponse;
-const PauseOnlineRecordResponse = models.PauseOnlineRecordResponse;
+const DescribeOnlineRecordResponse = models.DescribeOnlineRecordResponse;
 const SetTranscodeCallbackKeyRequest = models.SetTranscodeCallbackKeyRequest;
 const DescribeTranscodeRequest = models.DescribeTranscodeRequest;
 const DescribeTranscodeResponse = models.DescribeTranscodeResponse;
+const StreamLayout = models.StreamLayout;
 const SetOnlineRecordCallbackResponse = models.SetOnlineRecordCallbackResponse;
 const SetOnlineRecordCallbackKeyRequest = models.SetOnlineRecordCallbackKeyRequest;
-const StopOnlineRecordResponse = models.StopOnlineRecordResponse;
+const CreateVideoGenerationTaskRequest = models.CreateVideoGenerationTaskRequest;
 const DescribeTranscodeCallbackRequest = models.DescribeTranscodeCallbackRequest;
 const ResumeOnlineRecordRequest = models.ResumeOnlineRecordRequest;
 const DescribeTranscodeCallbackResponse = models.DescribeTranscodeCallbackResponse;
@@ -51,7 +61,7 @@ const SetTranscodeCallbackRequest = models.SetTranscodeCallbackRequest;
 const RecordControl = models.RecordControl;
 const SetOnlineRecordCallbackRequest = models.SetOnlineRecordCallbackRequest;
 const MixStream = models.MixStream;
-const OmittedDuration = models.OmittedDuration;
+const DescribeVideoGenerationTaskCallbackRequest = models.DescribeVideoGenerationTaskCallbackRequest;
 const PauseOnlineRecordRequest = models.PauseOnlineRecordRequest;
 
 
@@ -88,6 +98,17 @@ class TiwClient extends AbstractClient {
     }
 
     /**
+     * 发起一个实时录制任务
+     * @param {StartOnlineRecordRequest} req
+     * @param {function(string, StartOnlineRecordResponse):void} cb
+     * @public
+     */
+    StartOnlineRecord(req, cb) {
+        let resp = new StartOnlineRecordResponse();
+        this.request("StartOnlineRecord", req, resp, cb);
+    }
+
+    /**
      * 查询文档转码任务的执行进度与转码结果
      * @param {DescribeTranscodeRequest} req
      * @param {function(string, DescribeTranscodeResponse):void} cb
@@ -107,6 +128,17 @@ class TiwClient extends AbstractClient {
     CreateTranscode(req, cb) {
         let resp = new CreateTranscodeResponse();
         this.request("CreateTranscode", req, resp, cb);
+    }
+
+    /**
+     * 查询录制视频生成回调地址
+     * @param {DescribeVideoGenerationTaskCallbackRequest} req
+     * @param {function(string, DescribeVideoGenerationTaskCallbackResponse):void} cb
+     * @public
+     */
+    DescribeVideoGenerationTaskCallback(req, cb) {
+        let resp = new DescribeVideoGenerationTaskCallbackResponse();
+        this.request("DescribeVideoGenerationTaskCallback", req, resp, cb);
     }
 
     /**
@@ -132,14 +164,25 @@ class TiwClient extends AbstractClient {
     }
 
     /**
-     * 发起一个实时录制任务
-     * @param {StartOnlineRecordRequest} req
-     * @param {function(string, StartOnlineRecordResponse):void} cb
+     * 设置录制视频生成回调地址
+     * @param {SetVideoGenerationTaskCallbackRequest} req
+     * @param {function(string, SetVideoGenerationTaskCallbackResponse):void} cb
      * @public
      */
-    StartOnlineRecord(req, cb) {
-        let resp = new StartOnlineRecordResponse();
-        this.request("StartOnlineRecord", req, resp, cb);
+    SetVideoGenerationTaskCallback(req, cb) {
+        let resp = new SetVideoGenerationTaskCallbackResponse();
+        this.request("SetVideoGenerationTaskCallback", req, resp, cb);
+    }
+
+    /**
+     * 创建视频生成任务
+     * @param {CreateVideoGenerationTaskRequest} req
+     * @param {function(string, CreateVideoGenerationTaskResponse):void} cb
+     * @public
+     */
+    CreateVideoGenerationTask(req, cb) {
+        let resp = new CreateVideoGenerationTaskResponse();
+        this.request("CreateVideoGenerationTask", req, resp, cb);
     }
 
     /**
@@ -187,6 +230,17 @@ class TiwClient extends AbstractClient {
     }
 
     /**
+     * 设置视频生成回调鉴权密钥
+     * @param {SetVideoGenerationTaskCallbackKeyRequest} req
+     * @param {function(string, SetVideoGenerationTaskCallbackKeyResponse):void} cb
+     * @public
+     */
+    SetVideoGenerationTaskCallbackKey(req, cb) {
+        let resp = new SetVideoGenerationTaskCallbackKeyResponse();
+        this.request("SetVideoGenerationTaskCallbackKey", req, resp, cb);
+    }
+
+    /**
      * 查询实时录制回调地址
      * @param {DescribeOnlineRecordCallbackRequest} req
      * @param {function(string, DescribeOnlineRecordCallbackResponse):void} cb
@@ -206,6 +260,17 @@ class TiwClient extends AbstractClient {
     ResumeOnlineRecord(req, cb) {
         let resp = new ResumeOnlineRecordResponse();
         this.request("ResumeOnlineRecord", req, resp, cb);
+    }
+
+    /**
+     * 查询录制视频生成任务状态与结果
+     * @param {DescribeVideoGenerationTaskRequest} req
+     * @param {function(string, DescribeVideoGenerationTaskResponse):void} cb
+     * @public
+     */
+    DescribeVideoGenerationTask(req, cb) {
+        let resp = new DescribeVideoGenerationTaskResponse();
+        this.request("DescribeVideoGenerationTask", req, resp, cb);
     }
 
 
