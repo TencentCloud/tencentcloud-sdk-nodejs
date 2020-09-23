@@ -52,6 +52,76 @@ class SetVocabStateResponse extends  AbstractModel {
 }
 
 /**
+ * CreateCustomization返回参数结构体
+ * @class
+ */
+class CreateCustomizationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模型ID
+         * @type {string || null}
+         */
+        this.ModelId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ModelId = 'ModelId' in params ? params.ModelId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyCustomizationState请求参数结构体
+ * @class
+ */
+class ModifyCustomizationStateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 自学习模型ID
+         * @type {string || null}
+         */
+        this.ModelId = null;
+
+        /**
+         * 想要变换的模型状态，-1代表下线，1代表上线
+         * @type {number || null}
+         */
+        this.ToState = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ModelId = 'ModelId' in params ? params.ModelId : null;
+        this.ToState = 'ToState' in params ? params.ToState : null;
+
+    }
+}
+
+/**
  * GetAsrVocab返回参数结构体
  * @class
  */
@@ -240,6 +310,141 @@ class DescribeTaskStatusResponse extends  AbstractModel {
 }
 
 /**
+ * SentenceRecognition请求参数结构体
+ * @class
+ */
+class SentenceRecognitionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 腾讯云项目 ID，可填 0，总长度不超过 1024 字节。
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 子服务类型。2： 一句话识别。
+         * @type {number || null}
+         */
+        this.SubServiceType = null;
+
+        /**
+         * 引擎模型类型。
+电话场景：
+• 8k_en：电话 8k 英语；
+• 8k_zh：电话 8k 中文普通话通用；
+非电话场景：
+• 16k_zh：16k 中文普通话通用；
+• 16k_en：16k 英语；
+• 16k_ca：16k 粤语；
+• 16k_ja：16k 日语；
+•16k_wuu-SH：16k 上海话方言。
+         * @type {string || null}
+         */
+        this.EngSerViceType = null;
+
+        /**
+         * 语音数据来源。0：语音 URL；1：语音数据（post body）。
+         * @type {number || null}
+         */
+        this.SourceType = null;
+
+        /**
+         * 识别音频的音频格式。mp3、wav。
+         * @type {string || null}
+         */
+        this.VoiceFormat = null;
+
+        /**
+         * 用户端对此任务的唯一标识，用户自助生成，用于用户查找识别结果。
+         * @type {string || null}
+         */
+        this.UsrAudioKey = null;
+
+        /**
+         * 语音 URL，公网可下载。当 SourceType 值为 0（语音 URL上传） 时须填写该字段，为 1 时不填；URL 的长度大于 0，小于 2048，需进行urlencode编码。音频时间长度要小于60s。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 语音数据，当SourceType 值为1（本地语音数据上传）时必须填写，当SourceType 值为0（语音 URL上传）可不写。要使用base64编码(采用python语言时注意读取文件应该为string而不是byte，以byte格式读取后要decode()。编码后的数据不可带有回车换行符)。数据长度要小于3MB（Base64后）。
+         * @type {string || null}
+         */
+        this.Data = null;
+
+        /**
+         * 数据长度，单位为字节。当 SourceType 值为1（本地语音数据上传）时必须填写，当 SourceType 值为0（语音 URL上传）可不写（此数据长度为数据未进行base64编码时的数据长度）。
+         * @type {number || null}
+         */
+        this.DataLen = null;
+
+        /**
+         * 热词id。用于调用对应的热词表，如果在调用语音识别服务时，不进行单独的热词id设置，自动生效默认热词；如果进行了单独的热词id设置，那么将生效单独设置的热词id。
+         * @type {string || null}
+         */
+        this.HotwordId = null;
+
+        /**
+         * 是否过滤脏词（目前支持中文普通话引擎）。0：不过滤脏词；1：过滤脏词；2：将脏词替换为 * 。
+         * @type {number || null}
+         */
+        this.FilterDirty = null;
+
+        /**
+         * 是否过语气词（目前支持中文普通话引擎）。0：不过滤语气词；1：部分过滤；2：严格过滤 。
+         * @type {number || null}
+         */
+        this.FilterModal = null;
+
+        /**
+         * 是否过滤标点符号（目前支持中文普通话引擎）。 0：不过滤，1：过滤句末标点，2：过滤所有标点。默认为0。
+         * @type {number || null}
+         */
+        this.FilterPunc = null;
+
+        /**
+         * 是否进行阿拉伯数字智能转换。0：不转换，直接输出中文数字，1：根据场景智能转换为阿拉伯数字。默认值为1
+         * @type {number || null}
+         */
+        this.ConvertNumMode = null;
+
+        /**
+         * 是否显示词级别时间戳。0：不显示；1：显示，不包含标点时间戳，2：显示，包含标点时间戳。支持引擎8k_zh，16k_zh，16k_en，16k_ca，16k_ja，16k_wuu-SH
+         * @type {number || null}
+         */
+        this.WordInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.SubServiceType = 'SubServiceType' in params ? params.SubServiceType : null;
+        this.EngSerViceType = 'EngSerViceType' in params ? params.EngSerViceType : null;
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
+        this.VoiceFormat = 'VoiceFormat' in params ? params.VoiceFormat : null;
+        this.UsrAudioKey = 'UsrAudioKey' in params ? params.UsrAudioKey : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.Data = 'Data' in params ? params.Data : null;
+        this.DataLen = 'DataLen' in params ? params.DataLen : null;
+        this.HotwordId = 'HotwordId' in params ? params.HotwordId : null;
+        this.FilterDirty = 'FilterDirty' in params ? params.FilterDirty : null;
+        this.FilterModal = 'FilterModal' in params ? params.FilterModal : null;
+        this.FilterPunc = 'FilterPunc' in params ? params.FilterPunc : null;
+        this.ConvertNumMode = 'ConvertNumMode' in params ? params.ConvertNumMode : null;
+        this.WordInfo = 'WordInfo' in params ? params.WordInfo : null;
+
+    }
+}
+
+/**
  * 一句话识别返回的词时间戳
  * @class
  */
@@ -277,6 +482,55 @@ class SentenceWord extends  AbstractModel {
         this.Word = 'Word' in params ? params.Word : null;
         this.StartTime = 'StartTime' in params ? params.StartTime : null;
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
+ * CreateCustomization请求参数结构体
+ * @class
+ */
+class CreateCustomizationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 自学习模型名称，需在1-20字符之间
+         * @type {string || null}
+         */
+        this.ModelName = null;
+
+        /**
+         * 文本文件的下载地址，服务会从该地址下载文件， 以训练模型，目前仅支持腾讯云cos
+         * @type {string || null}
+         */
+        this.TextUrl = null;
+
+        /**
+         * 自学习模型类型，填写8k或者16k
+         * @type {string || null}
+         */
+        this.ModelType = null;
+
+        /**
+         * 标签信息
+         * @type {Array.<string> || null}
+         */
+        this.TagInfos = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ModelName = 'ModelName' in params ? params.ModelName : null;
+        this.TextUrl = 'TextUrl' in params ? params.TextUrl : null;
+        this.ModelType = 'ModelType' in params ? params.ModelType : null;
+        this.TagInfos = 'TagInfos' in params ? params.TagInfos : null;
 
     }
 }
@@ -364,18 +618,12 @@ class CreateRecTaskResponse extends  AbstractModel {
 }
 
 /**
- * UpdateAsrVocab返回参数结构体
+ * ModifyCustomization返回参数结构体
  * @class
  */
-class UpdateAsrVocabResponse extends  AbstractModel {
+class ModifyCustomizationResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 热词表ID
-         * @type {string || null}
-         */
-        this.VocabId = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -392,7 +640,41 @@ class UpdateAsrVocabResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.VocabId = 'VocabId' in params ? params.VocabId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyCustomizationState返回参数结构体
+ * @class
+ */
+class ModifyCustomizationStateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 自学习模型ID
+         * @type {string || null}
+         */
+        this.ModelId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ModelId = 'ModelId' in params ? params.ModelId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -421,6 +703,41 @@ class DeleteAsrVocabResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DownloadCustomization返回参数结构体
+ * @class
+ */
+class DownloadCustomizationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 下载地址
+         * @type {string || null}
+         */
+        this.DownloadUrl = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -614,54 +931,32 @@ class CreateRecTaskRequest extends  AbstractModel {
 }
 
 /**
- * 单句的详细识别结果，包含单个词的时间偏移，一般用于生成字幕的场景。
+ * GetCustomizationList返回参数结构体
  * @class
  */
-class SentenceDetail extends  AbstractModel {
+class GetCustomizationListResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 单句最终识别结果
+         * 自学习模型数组
 注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Model> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 自学习模型总量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.FinalSentence = null;
-
-        /**
-         * 单句中间识别结果，使用空格拆分为多个词
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.SliceSentence = null;
-
-        /**
-         * 单句开始时间（毫秒）
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.StartMs = null;
-
-        /**
-         * 单句结束时间（毫秒）
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.EndMs = null;
-
-        /**
-         * 单句中词个数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.WordsNum = null;
-
-        /**
-         * 单句中词详情
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<SentenceWords> || null}
-         */
-        this.Words = null;
+        this.RequestId = null;
 
     }
 
@@ -672,20 +967,17 @@ class SentenceDetail extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FinalSentence = 'FinalSentence' in params ? params.FinalSentence : null;
-        this.SliceSentence = 'SliceSentence' in params ? params.SliceSentence : null;
-        this.StartMs = 'StartMs' in params ? params.StartMs : null;
-        this.EndMs = 'EndMs' in params ? params.EndMs : null;
-        this.WordsNum = 'WordsNum' in params ? params.WordsNum : null;
 
-        if (params.Words) {
-            this.Words = new Array();
-            for (let z in params.Words) {
-                let obj = new SentenceWords();
-                obj.deserialize(params.Words[z]);
-                this.Words.push(obj);
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new Model();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
             }
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -868,6 +1160,83 @@ class Task extends  AbstractModel {
 }
 
 /**
+ * ModifyCustomization请求参数结构体
+ * @class
+ */
+class ModifyCustomizationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 要修改的模型ID
+         * @type {string || null}
+         */
+        this.ModelId = null;
+
+        /**
+         * 要修改的模型名称，长度需在1-20个字符之间
+         * @type {string || null}
+         */
+        this.ModelName = null;
+
+        /**
+         * 要修改的模型类型，为8k或者16k
+         * @type {string || null}
+         */
+        this.ModelType = null;
+
+        /**
+         * 要修改的模型语料的下载地址，目前仅支持腾讯云cos
+         * @type {string || null}
+         */
+        this.TextUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ModelId = 'ModelId' in params ? params.ModelId : null;
+        this.ModelName = 'ModelName' in params ? params.ModelName : null;
+        this.ModelType = 'ModelType' in params ? params.ModelType : null;
+        this.TextUrl = 'TextUrl' in params ? params.TextUrl : null;
+
+    }
+}
+
+/**
+ * DeleteCustomization返回参数结构体
+ * @class
+ */
+class DeleteCustomizationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 获取录音识别结果结果的返回参数
  * @class
  */
@@ -1010,111 +1379,24 @@ class GetCustomizationListRequest extends  AbstractModel {
 }
 
 /**
- * SentenceRecognition请求参数结构体
+ * UpdateAsrVocab返回参数结构体
  * @class
  */
-class SentenceRecognitionRequest extends  AbstractModel {
+class UpdateAsrVocabResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 腾讯云项目 ID，可填 0，总长度不超过 1024 字节。
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-        /**
-         * 子服务类型。2： 一句话识别。
-         * @type {number || null}
-         */
-        this.SubServiceType = null;
-
-        /**
-         * 引擎模型类型。
-电话场景：
-• 8k_en：电话 8k 英语；
-• 8k_zh：电话 8k 中文普通话通用；
-非电话场景：
-• 16k_zh：16k 中文普通话通用；
-• 16k_en：16k 英语；
-• 16k_ca：16k 粤语；
-• 16k_ja：16k 日语；
-•16k_wuu-SH：16k 上海话方言。
+         * 热词表ID
          * @type {string || null}
          */
-        this.EngSerViceType = null;
+        this.VocabId = null;
 
         /**
-         * 语音数据来源。0：语音 URL；1：语音数据（post body）。
-         * @type {number || null}
-         */
-        this.SourceType = null;
-
-        /**
-         * 识别音频的音频格式。mp3、wav。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.VoiceFormat = null;
-
-        /**
-         * 用户端对此任务的唯一标识，用户自助生成，用于用户查找识别结果。
-         * @type {string || null}
-         */
-        this.UsrAudioKey = null;
-
-        /**
-         * 语音 URL，公网可下载。当 SourceType 值为 0（语音 URL上传） 时须填写该字段，为 1 时不填；URL 的长度大于 0，小于 2048，需进行urlencode编码。音频时间长度要小于60s。
-         * @type {string || null}
-         */
-        this.Url = null;
-
-        /**
-         * 语音数据，当SourceType 值为1（本地语音数据上传）时必须填写，当SourceType 值为0（语音 URL上传）可不写。要使用base64编码(采用python语言时注意读取文件应该为string而不是byte，以byte格式读取后要decode()。编码后的数据不可带有回车换行符)。数据长度要小于3MB（Base64后）。
-         * @type {string || null}
-         */
-        this.Data = null;
-
-        /**
-         * 数据长度，单位为字节。当 SourceType 值为1（本地语音数据上传）时必须填写，当 SourceType 值为0（语音 URL上传）可不写（此数据长度为数据未进行base64编码时的数据长度）。
-         * @type {number || null}
-         */
-        this.DataLen = null;
-
-        /**
-         * 热词id。用于调用对应的热词表，如果在调用语音识别服务时，不进行单独的热词id设置，自动生效默认热词；如果进行了单独的热词id设置，那么将生效单独设置的热词id。
-         * @type {string || null}
-         */
-        this.HotwordId = null;
-
-        /**
-         * 是否过滤脏词（目前支持中文普通话引擎）。0：不过滤脏词；1：过滤脏词；2：将脏词替换为 * 。
-         * @type {number || null}
-         */
-        this.FilterDirty = null;
-
-        /**
-         * 是否过语气词（目前支持中文普通话引擎）。0：不过滤语气词；1：部分过滤；2：严格过滤 。
-         * @type {number || null}
-         */
-        this.FilterModal = null;
-
-        /**
-         * 是否过滤标点符号（目前支持中文普通话引擎）。 0：不过滤，1：过滤句末标点，2：过滤所有标点。默认为0。
-         * @type {number || null}
-         */
-        this.FilterPunc = null;
-
-        /**
-         * 是否进行阿拉伯数字智能转换。0：不转换，直接输出中文数字，1：根据场景智能转换为阿拉伯数字。默认值为1
-         * @type {number || null}
-         */
-        this.ConvertNumMode = null;
-
-        /**
-         * 是否显示词级别时间戳。0：不显示；1：显示，不包含标点时间戳，2：显示，包含标点时间戳。支持引擎8k_zh，16k_zh，16k_en，16k_ca，16k_ja，16k_wuu-SH
-         * @type {number || null}
-         */
-        this.WordInfo = null;
+        this.RequestId = null;
 
     }
 
@@ -1125,21 +1407,36 @@ class SentenceRecognitionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.SubServiceType = 'SubServiceType' in params ? params.SubServiceType : null;
-        this.EngSerViceType = 'EngSerViceType' in params ? params.EngSerViceType : null;
-        this.SourceType = 'SourceType' in params ? params.SourceType : null;
-        this.VoiceFormat = 'VoiceFormat' in params ? params.VoiceFormat : null;
-        this.UsrAudioKey = 'UsrAudioKey' in params ? params.UsrAudioKey : null;
-        this.Url = 'Url' in params ? params.Url : null;
-        this.Data = 'Data' in params ? params.Data : null;
-        this.DataLen = 'DataLen' in params ? params.DataLen : null;
-        this.HotwordId = 'HotwordId' in params ? params.HotwordId : null;
-        this.FilterDirty = 'FilterDirty' in params ? params.FilterDirty : null;
-        this.FilterModal = 'FilterModal' in params ? params.FilterModal : null;
-        this.FilterPunc = 'FilterPunc' in params ? params.FilterPunc : null;
-        this.ConvertNumMode = 'ConvertNumMode' in params ? params.ConvertNumMode : null;
-        this.WordInfo = 'WordInfo' in params ? params.WordInfo : null;
+        this.VocabId = 'VocabId' in params ? params.VocabId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeTaskStatus请求参数结构体
+ * @class
+ */
+class DescribeTaskStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 从CreateRecTask接口获取的TaskId，用于获取任务状态与结果。
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -1281,32 +1578,54 @@ class CreateAsrVocabRequest extends  AbstractModel {
 }
 
 /**
- * GetCustomizationList返回参数结构体
+ * 单句的详细识别结果，包含单个词的时间偏移，一般用于生成字幕的场景。
  * @class
  */
-class GetCustomizationListResponse extends  AbstractModel {
+class SentenceDetail extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 自学习模型数组
+         * 单句最终识别结果
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<Model> || null}
+         * @type {string || null}
          */
-        this.Data = null;
+        this.FinalSentence = null;
 
         /**
-         * 自学习模型总量
+         * 单句中间识别结果，使用空格拆分为多个词
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SliceSentence = null;
+
+        /**
+         * 单句开始时间（毫秒）
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.TotalCount = null;
+        this.StartMs = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
+         * 单句结束时间（毫秒）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.EndMs = null;
+
+        /**
+         * 单句中词个数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.WordsNum = null;
+
+        /**
+         * 单句中词详情
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<SentenceWords> || null}
+         */
+        this.Words = null;
 
     }
 
@@ -1317,17 +1636,20 @@ class GetCustomizationListResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.FinalSentence = 'FinalSentence' in params ? params.FinalSentence : null;
+        this.SliceSentence = 'SliceSentence' in params ? params.SliceSentence : null;
+        this.StartMs = 'StartMs' in params ? params.StartMs : null;
+        this.EndMs = 'EndMs' in params ? params.EndMs : null;
+        this.WordsNum = 'WordsNum' in params ? params.WordsNum : null;
 
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new Model();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
+        if (params.Words) {
+            this.Words = new Array();
+            for (let z in params.Words) {
+                let obj = new SentenceWords();
+                obj.deserialize(params.Words[z]);
+                this.Words.push(obj);
             }
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1499,18 +1821,18 @@ class SentenceRecognitionResponse extends  AbstractModel {
 }
 
 /**
- * DescribeTaskStatus请求参数结构体
+ * DeleteCustomization请求参数结构体
  * @class
  */
-class DescribeTaskStatusRequest extends  AbstractModel {
+class DeleteCustomizationRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 从CreateRecTask接口获取的TaskId，用于获取任务状态与结果。
-         * @type {number || null}
+         * 要删除的模型ID
+         * @type {string || null}
          */
-        this.TaskId = null;
+        this.ModelId = null;
 
     }
 
@@ -1521,7 +1843,7 @@ class DescribeTaskStatusRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.ModelId = 'ModelId' in params ? params.ModelId : null;
 
     }
 }
@@ -1621,36 +1943,74 @@ class SentenceWords extends  AbstractModel {
     }
 }
 
+/**
+ * DownloadCustomization请求参数结构体
+ * @class
+ */
+class DownloadCustomizationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 自学习模型ID
+         * @type {string || null}
+         */
+        this.ModelId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ModelId = 'ModelId' in params ? params.ModelId : null;
+
+    }
+}
+
 module.exports = {
     SetVocabStateResponse: SetVocabStateResponse,
+    CreateCustomizationResponse: CreateCustomizationResponse,
+    ModifyCustomizationStateRequest: ModifyCustomizationStateRequest,
     GetAsrVocabResponse: GetAsrVocabResponse,
     HotWord: HotWord,
     GetAsrVocabRequest: GetAsrVocabRequest,
     DescribeTaskStatusResponse: DescribeTaskStatusResponse,
+    SentenceRecognitionRequest: SentenceRecognitionRequest,
     SentenceWord: SentenceWord,
+    CreateCustomizationRequest: CreateCustomizationRequest,
     DownloadAsrVocabResponse: DownloadAsrVocabResponse,
     CreateRecTaskResponse: CreateRecTaskResponse,
-    UpdateAsrVocabResponse: UpdateAsrVocabResponse,
+    ModifyCustomizationResponse: ModifyCustomizationResponse,
+    ModifyCustomizationStateResponse: ModifyCustomizationStateResponse,
     DeleteAsrVocabResponse: DeleteAsrVocabResponse,
+    DownloadCustomizationResponse: DownloadCustomizationResponse,
     GetAsrVocabListRequest: GetAsrVocabListRequest,
     CreateRecTaskRequest: CreateRecTaskRequest,
-    SentenceDetail: SentenceDetail,
+    GetCustomizationListResponse: GetCustomizationListResponse,
     DownloadAsrVocabRequest: DownloadAsrVocabRequest,
     SetVocabStateRequest: SetVocabStateRequest,
     Vocab: Vocab,
     Task: Task,
+    ModifyCustomizationRequest: ModifyCustomizationRequest,
+    DeleteCustomizationResponse: DeleteCustomizationResponse,
     TaskStatus: TaskStatus,
     DeleteAsrVocabRequest: DeleteAsrVocabRequest,
     GetCustomizationListRequest: GetCustomizationListRequest,
-    SentenceRecognitionRequest: SentenceRecognitionRequest,
+    UpdateAsrVocabResponse: UpdateAsrVocabResponse,
+    DescribeTaskStatusRequest: DescribeTaskStatusRequest,
     Model: Model,
     CreateAsrVocabRequest: CreateAsrVocabRequest,
-    GetCustomizationListResponse: GetCustomizationListResponse,
+    SentenceDetail: SentenceDetail,
     UpdateAsrVocabRequest: UpdateAsrVocabRequest,
     CreateAsrVocabResponse: CreateAsrVocabResponse,
     SentenceRecognitionResponse: SentenceRecognitionResponse,
-    DescribeTaskStatusRequest: DescribeTaskStatusRequest,
+    DeleteCustomizationRequest: DeleteCustomizationRequest,
     GetAsrVocabListResponse: GetAsrVocabListResponse,
     SentenceWords: SentenceWords,
+    DownloadCustomizationRequest: DownloadCustomizationRequest,
 
 }

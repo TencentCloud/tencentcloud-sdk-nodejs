@@ -1205,55 +1205,24 @@ class DescribeClusterDetailRequest extends  AbstractModel {
 }
 
 /**
- * UpgradeInstance请求参数结构体
+ * 集群绑定的标签信息，包含标签键TagKey和标签值TagValue
  * @class
  */
-class UpgradeInstanceRequest extends  AbstractModel {
+class Tag extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例ID
+         * 标签键
          * @type {string || null}
          */
-        this.InstanceId = null;
+        this.TagKey = null;
 
         /**
-         * 数据库CPU
-         * @type {number || null}
-         */
-        this.Cpu = null;
-
-        /**
-         * 数据库内存
-         * @type {number || null}
-         */
-        this.Memory = null;
-
-        /**
-         * 升级类型：upgradeImmediate，upgradeInMaintain
+         * 标签值
          * @type {string || null}
          */
-        this.UpgradeType = null;
-
-        /**
-         * 存储上限，为0表示使用标准配置
-         * @type {number || null}
-         */
-        this.StorageLimit = null;
-
-        /**
-         * 是否自动选择代金券 1是 0否 默认为0
-         * @type {number || null}
-         */
-        this.AutoVoucher = null;
-
-        /**
-         * 数据库类型，取值范围: 
-<li> MYSQL </li>
-         * @type {string || null}
-         */
-        this.DbType = null;
+        this.TagValue = null;
 
     }
 
@@ -1264,13 +1233,8 @@ class UpgradeInstanceRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.Cpu = 'Cpu' in params ? params.Cpu : null;
-        this.Memory = 'Memory' in params ? params.Memory : null;
-        this.UpgradeType = 'UpgradeType' in params ? params.UpgradeType : null;
-        this.StorageLimit = 'StorageLimit' in params ? params.StorageLimit : null;
-        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
-        this.DbType = 'DbType' in params ? params.DbType : null;
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
 
     }
 }
@@ -1817,6 +1781,12 @@ class CynosdbClusterDetail extends  AbstractModel {
          */
         this.Zone = null;
 
+        /**
+         * 实例绑定的tag数组信息
+         * @type {Array.<Tag> || null}
+         */
+        this.ResourceTags = null;
+
     }
 
     /**
@@ -1864,6 +1834,15 @@ class CynosdbClusterDetail extends  AbstractModel {
         this.Vport = 'Vport' in params ? params.Vport : null;
         this.ProjectID = 'ProjectID' in params ? params.ProjectID : null;
         this.Zone = 'Zone' in params ? params.Zone : null;
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new Tag();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
+            }
+        }
 
     }
 }
@@ -2688,6 +2667,77 @@ class DescribeAccountsResponse extends  AbstractModel {
 }
 
 /**
+ * UpgradeInstance请求参数结构体
+ * @class
+ */
+class UpgradeInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 数据库CPU
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * 数据库内存
+         * @type {number || null}
+         */
+        this.Memory = null;
+
+        /**
+         * 升级类型：upgradeImmediate，upgradeInMaintain
+         * @type {string || null}
+         */
+        this.UpgradeType = null;
+
+        /**
+         * 存储上限，为0表示使用标准配置
+         * @type {number || null}
+         */
+        this.StorageLimit = null;
+
+        /**
+         * 是否自动选择代金券 1是 0否 默认为0
+         * @type {number || null}
+         */
+        this.AutoVoucher = null;
+
+        /**
+         * 数据库类型，取值范围: 
+<li> MYSQL </li>
+         * @type {string || null}
+         */
+        this.DbType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Memory = 'Memory' in params ? params.Memory : null;
+        this.UpgradeType = 'UpgradeType' in params ? params.UpgradeType : null;
+        this.StorageLimit = 'StorageLimit' in params ? params.StorageLimit : null;
+        this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
+        this.DbType = 'DbType' in params ? params.DbType : null;
+
+    }
+}
+
+/**
  * DescribeInstanceDetail返回参数结构体
  * @class
  */
@@ -3357,6 +3407,12 @@ timeRollback，时间点回档
          */
         this.OrderSource = null;
 
+        /**
+         * 集群创建需要绑定的tag数组信息
+         * @type {Array.<Tag> || null}
+         */
+        this.ResourceTags = null;
+
     }
 
     /**
@@ -3393,6 +3449,15 @@ timeRollback，时间点回档
         this.AutoVoucher = 'AutoVoucher' in params ? params.AutoVoucher : null;
         this.HaCount = 'HaCount' in params ? params.HaCount : null;
         this.OrderSource = 'OrderSource' in params ? params.OrderSource : null;
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new Tag();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
+            }
+        }
 
     }
 }
@@ -3555,6 +3620,12 @@ class CynosdbCluster extends  AbstractModel {
          */
         this.Tasks = null;
 
+        /**
+         * 集群绑定的tag数组
+         * @type {Array.<Tag> || null}
+         */
+        this.ResourceTags = null;
+
     }
 
     /**
@@ -3595,6 +3666,15 @@ class CynosdbCluster extends  AbstractModel {
                 let obj = new ObjectTask();
                 obj.deserialize(params.Tasks[z]);
                 this.Tasks.push(obj);
+            }
+        }
+
+        if (params.ResourceTags) {
+            this.ResourceTags = new Array();
+            for (let z in params.ResourceTags) {
+                let obj = new Tag();
+                obj.deserialize(params.ResourceTags[z]);
+                this.ResourceTags.push(obj);
             }
         }
 
@@ -4049,7 +4129,7 @@ module.exports = {
     DescribeClusterInstanceGrpsResponse: DescribeClusterInstanceGrpsResponse,
     AddInstancesRequest: AddInstancesRequest,
     DescribeClusterDetailRequest: DescribeClusterDetailRequest,
-    UpgradeInstanceRequest: UpgradeInstanceRequest,
+    Tag: Tag,
     DescribeProjectSecurityGroupsResponse: DescribeProjectSecurityGroupsResponse,
     CynosdbInstanceDetail: CynosdbInstanceDetail,
     DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
@@ -4067,6 +4147,7 @@ module.exports = {
     QueryFilter: QueryFilter,
     CynosdbInstance: CynosdbInstance,
     DescribeAccountsResponse: DescribeAccountsResponse,
+    UpgradeInstanceRequest: UpgradeInstanceRequest,
     DescribeInstanceDetailResponse: DescribeInstanceDetailResponse,
     OfflineInstanceRequest: OfflineInstanceRequest,
     DescribeRollbackTimeRangeRequest: DescribeRollbackTimeRangeRequest,

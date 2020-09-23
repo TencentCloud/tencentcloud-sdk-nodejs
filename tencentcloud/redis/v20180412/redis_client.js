@@ -33,6 +33,7 @@ const Inbound = models.Inbound;
 const AssociateSecurityGroupsRequest = models.AssociateSecurityGroupsRequest;
 const DescribeTaskListResponse = models.DescribeTaskListResponse;
 const ModifyInstanceRequest = models.ModifyInstanceRequest;
+const TendisNodes = models.TendisNodes;
 const RenewInstanceResponse = models.RenewInstanceResponse;
 const DescribeSlowLogResponse = models.DescribeSlowLogResponse;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
@@ -60,6 +61,7 @@ const InstanceTagInfo = models.InstanceTagInfo;
 const DescribeInstanceDTSInfoResponse = models.DescribeInstanceDTSInfoResponse;
 const DestroyPostpaidInstanceResponse = models.DestroyPostpaidInstanceResponse;
 const ModifyInstanceResponse = models.ModifyInstanceResponse;
+const ProxyNodes = models.ProxyNodes;
 const TradeDealDetail = models.TradeDealDetail;
 const SourceInfo = models.SourceInfo;
 const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
@@ -90,6 +92,7 @@ const DescribeTaskListRequest = models.DescribeTaskListRequest;
 const DisableReplicaReadonlyResponse = models.DisableReplicaReadonlyResponse;
 const CreateInstancesResponse = models.CreateInstancesResponse;
 const DescribeTaskInfoRequest = models.DescribeTaskInfoRequest;
+const RedisNodes = models.RedisNodes;
 const DescribeInstanceMonitorTopNCmdRequest = models.DescribeInstanceMonitorTopNCmdRequest;
 const ModifyNetworkConfigRequest = models.ModifyNetworkConfigRequest;
 const DescribeInstanceSecurityGroupRequest = models.DescribeInstanceSecurityGroupRequest;
@@ -137,6 +140,7 @@ const DescribeInstanceMonitorBigKeyTypeDistRequest = models.DescribeInstanceMoni
 const InquiryPriceCreateInstanceRequest = models.InquiryPriceCreateInstanceRequest;
 const ModifyInstanceParamsRequest = models.ModifyInstanceParamsRequest;
 const BigKeyTypeInfo = models.BigKeyTypeInfo;
+const DescribeInstanceNodeInfoRequest = models.DescribeInstanceNodeInfoRequest;
 const DescribeMaintenanceWindowRequest = models.DescribeMaintenanceWindowRequest;
 const InstanceClusterNode = models.InstanceClusterNode;
 const DescribeProxySlowLogRequest = models.DescribeProxySlowLogRequest;
@@ -160,6 +164,7 @@ const DescribeInstanceMonitorSIPRequest = models.DescribeInstanceMonitorSIPReque
 const InstanceClusterShard = models.InstanceClusterShard;
 const ZoneCapacityConf = models.ZoneCapacityConf;
 const UpgradeInstanceRequest = models.UpgradeInstanceRequest;
+const DescribeInstanceNodeInfoResponse = models.DescribeInstanceNodeInfoResponse;
 const DescribeProjectSecurityGroupResponse = models.DescribeProjectSecurityGroupResponse;
 const DescribeInstanceMonitorHotKeyResponse = models.DescribeInstanceMonitorHotKeyResponse;
 const InstanceParam = models.InstanceParam;
@@ -187,6 +192,17 @@ class RedisClient extends AbstractClient {
     EnableReplicaReadonly(req, cb) {
         let resp = new EnableReplicaReadonlyResponse();
         this.request("EnableReplicaReadonly", req, resp, cb);
+    }
+
+    /**
+     * 查询实例节点信息
+     * @param {DescribeInstanceNodeInfoRequest} req
+     * @param {function(string, DescribeInstanceNodeInfoResponse):void} cb
+     * @public
+     */
+    DescribeInstanceNodeInfo(req, cb) {
+        let resp = new DescribeInstanceNodeInfoResponse();
+        this.request("DescribeInstanceNodeInfo", req, resp, cb);
     }
 
     /**

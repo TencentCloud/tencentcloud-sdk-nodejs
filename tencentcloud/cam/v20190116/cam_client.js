@@ -142,6 +142,8 @@ const AddUserResponse = models.AddUserResponse;
 const ListEntitiesForPolicyResponse = models.ListEntitiesForPolicyResponse;
 const AddUserToGroupResponse = models.AddUserToGroupResponse;
 const AttachUserPolicyResponse = models.AttachUserPolicyResponse;
+const DescribeSafeAuthFlagCollResponse = models.DescribeSafeAuthFlagCollResponse;
+const DescribeSafeAuthFlagCollRequest = models.DescribeSafeAuthFlagCollRequest;
 const PutRolePermissionsBoundaryResponse = models.PutRolePermissionsBoundaryResponse;
 const SetMfaFlagRequest = models.SetMfaFlagRequest;
 const ListCollaboratorsResponse = models.ListCollaboratorsResponse;
@@ -578,6 +580,17 @@ class CamClient extends AbstractClient {
     AttachRolePolicy(req, cb) {
         let resp = new AttachRolePolicyResponse();
         this.request("AttachRolePolicy", req, resp, cb);
+    }
+
+    /**
+     * 查询安全设置
+     * @param {DescribeSafeAuthFlagCollRequest} req
+     * @param {function(string, DescribeSafeAuthFlagCollResponse):void} cb
+     * @public
+     */
+    DescribeSafeAuthFlagColl(req, cb) {
+        let resp = new DescribeSafeAuthFlagCollResponse();
+        this.request("DescribeSafeAuthFlagColl", req, resp, cb);
     }
 
     /**

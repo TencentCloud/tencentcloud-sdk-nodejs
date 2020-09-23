@@ -337,6 +337,7 @@ class TaskDetail extends  AbstractModel {
 "KILLED" - 已终止；
 "REMOVED" - 已删除；
 "PAUSED" - 已暂停。
+"WAITING" - 等待中（可撤销）
          * @type {string || null}
          */
         this.TaskStatus = null;

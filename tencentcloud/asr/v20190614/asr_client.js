@@ -17,35 +17,45 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const SetVocabStateResponse = models.SetVocabStateResponse;
+const CreateCustomizationResponse = models.CreateCustomizationResponse;
+const ModifyCustomizationStateRequest = models.ModifyCustomizationStateRequest;
 const GetAsrVocabResponse = models.GetAsrVocabResponse;
 const HotWord = models.HotWord;
 const GetAsrVocabRequest = models.GetAsrVocabRequest;
 const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
+const SentenceRecognitionRequest = models.SentenceRecognitionRequest;
 const SentenceWord = models.SentenceWord;
+const CreateCustomizationRequest = models.CreateCustomizationRequest;
 const DownloadAsrVocabResponse = models.DownloadAsrVocabResponse;
 const CreateRecTaskResponse = models.CreateRecTaskResponse;
-const UpdateAsrVocabResponse = models.UpdateAsrVocabResponse;
+const ModifyCustomizationResponse = models.ModifyCustomizationResponse;
+const ModifyCustomizationStateResponse = models.ModifyCustomizationStateResponse;
 const DeleteAsrVocabResponse = models.DeleteAsrVocabResponse;
+const DownloadCustomizationResponse = models.DownloadCustomizationResponse;
 const GetAsrVocabListRequest = models.GetAsrVocabListRequest;
 const CreateRecTaskRequest = models.CreateRecTaskRequest;
-const SentenceDetail = models.SentenceDetail;
+const GetCustomizationListResponse = models.GetCustomizationListResponse;
 const DownloadAsrVocabRequest = models.DownloadAsrVocabRequest;
 const SetVocabStateRequest = models.SetVocabStateRequest;
 const Vocab = models.Vocab;
 const Task = models.Task;
+const ModifyCustomizationRequest = models.ModifyCustomizationRequest;
+const DeleteCustomizationResponse = models.DeleteCustomizationResponse;
 const TaskStatus = models.TaskStatus;
 const DeleteAsrVocabRequest = models.DeleteAsrVocabRequest;
 const GetCustomizationListRequest = models.GetCustomizationListRequest;
-const SentenceRecognitionRequest = models.SentenceRecognitionRequest;
+const UpdateAsrVocabResponse = models.UpdateAsrVocabResponse;
+const DescribeTaskStatusRequest = models.DescribeTaskStatusRequest;
 const Model = models.Model;
 const CreateAsrVocabRequest = models.CreateAsrVocabRequest;
-const GetCustomizationListResponse = models.GetCustomizationListResponse;
+const SentenceDetail = models.SentenceDetail;
 const UpdateAsrVocabRequest = models.UpdateAsrVocabRequest;
 const CreateAsrVocabResponse = models.CreateAsrVocabResponse;
 const SentenceRecognitionResponse = models.SentenceRecognitionResponse;
-const DescribeTaskStatusRequest = models.DescribeTaskStatusRequest;
+const DeleteCustomizationRequest = models.DeleteCustomizationRequest;
 const GetAsrVocabListResponse = models.GetAsrVocabListResponse;
 const SentenceWords = models.SentenceWords;
+const DownloadCustomizationRequest = models.DownloadCustomizationRequest;
 
 
 /**
@@ -67,6 +77,17 @@ class AsrClient extends AbstractClient {
     GetAsrVocabList(req, cb) {
         let resp = new GetAsrVocabListResponse();
         this.request("GetAsrVocabList", req, resp, cb);
+    }
+
+    /**
+     * 用户通过本接口进行热词表的下载，获得词表权重文件形式的 base64 值，文件形式为通过 “|” 分割的词和权重，即 word|weight 的形式。
+     * @param {DownloadAsrVocabRequest} req
+     * @param {function(string, DownloadAsrVocabResponse):void} cb
+     * @public
+     */
+    DownloadAsrVocab(req, cb) {
+        let resp = new DownloadAsrVocabResponse();
+        this.request("DownloadAsrVocab", req, resp, cb);
     }
 
     /**
@@ -118,14 +139,14 @@ class AsrClient extends AbstractClient {
     }
 
     /**
-     * 用户通过该接口可以设置热词表的默认状态。初始状态为0，用户可设置状态为1，即为默认状态。默认状态表示用户在请求识别时，如不设置热词表ID，则默认使用状态为1的热词表。
-     * @param {SetVocabStateRequest} req
-     * @param {function(string, SetVocabStateResponse):void} cb
+     * 通过该接口，用户可以修改自学习模型状态，上下线自学习模型
+     * @param {ModifyCustomizationStateRequest} req
+     * @param {function(string, ModifyCustomizationStateResponse):void} cb
      * @public
      */
-    SetVocabState(req, cb) {
-        let resp = new SetVocabStateResponse();
-        this.request("SetVocabState", req, resp, cb);
+    ModifyCustomizationState(req, cb) {
+        let resp = new ModifyCustomizationStateResponse();
+        this.request("ModifyCustomizationState", req, resp, cb);
     }
 
     /**
@@ -137,6 +158,17 @@ class AsrClient extends AbstractClient {
     UpdateAsrVocab(req, cb) {
         let resp = new UpdateAsrVocabResponse();
         this.request("UpdateAsrVocab", req, resp, cb);
+    }
+
+    /**
+     * 用户通过该接口可以设置热词表的默认状态。初始状态为0，用户可设置状态为1，即为默认状态。默认状态表示用户在请求识别时，如不设置热词表ID，则默认使用状态为1的热词表。
+     * @param {SetVocabStateRequest} req
+     * @param {function(string, SetVocabStateResponse):void} cb
+     * @public
+     */
+    SetVocabState(req, cb) {
+        let resp = new SetVocabStateResponse();
+        this.request("SetVocabState", req, resp, cb);
     }
 
     /**
@@ -156,14 +188,25 @@ class AsrClient extends AbstractClient {
     }
 
     /**
-     * 用户通过本接口进行热词表的下载，获得词表权重文件形式的 base64 值，文件形式为通过 “|” 分割的词和权重，即 word|weight 的形式。
-     * @param {DownloadAsrVocabRequest} req
-     * @param {function(string, DownloadAsrVocabResponse):void} cb
+     * 用户通过该接口可以删除自学习模型
+     * @param {DeleteCustomizationRequest} req
+     * @param {function(string, DeleteCustomizationResponse):void} cb
      * @public
      */
-    DownloadAsrVocab(req, cb) {
-        let resp = new DownloadAsrVocabResponse();
-        this.request("DownloadAsrVocab", req, resp, cb);
+    DeleteCustomization(req, cb) {
+        let resp = new DeleteCustomizationResponse();
+        this.request("DeleteCustomization", req, resp, cb);
+    }
+
+    /**
+     * 用户使用该接口可以创建自学习模型，以供识别调用
+     * @param {CreateCustomizationRequest} req
+     * @param {function(string, CreateCustomizationResponse):void} cb
+     * @public
+     */
+    CreateCustomization(req, cb) {
+        let resp = new CreateCustomizationResponse();
+        this.request("CreateCustomization", req, resp, cb);
     }
 
     /**
@@ -189,6 +232,17 @@ class AsrClient extends AbstractClient {
     }
 
     /**
+     * 用户通过该接口可以更新自学习模型，如模型名称、模型类型、模型语料。
+     * @param {ModifyCustomizationRequest} req
+     * @param {function(string, ModifyCustomizationResponse):void} cb
+     * @public
+     */
+    ModifyCustomization(req, cb) {
+        let resp = new ModifyCustomizationResponse();
+        this.request("ModifyCustomization", req, resp, cb);
+    }
+
+    /**
      * 本接口用于对60秒之内的短音频文件进行识别。
 <br>•   支持中文普通话、英语、粤语、日语、上海话方言。
 <br>•   支持本地语音文件上传和语音URL上传两种请求方式，音频时长不能超过60s。
@@ -203,6 +257,17 @@ class AsrClient extends AbstractClient {
     SentenceRecognition(req, cb) {
         let resp = new SentenceRecognitionResponse();
         this.request("SentenceRecognition", req, resp, cb);
+    }
+
+    /**
+     * 用户通过该接口可以下载自学习模型的语料
+     * @param {DownloadCustomizationRequest} req
+     * @param {function(string, DownloadCustomizationResponse):void} cb
+     * @public
+     */
+    DownloadCustomization(req, cb) {
+        let resp = new DownloadCustomizationResponse();
+        this.request("DownloadCustomization", req, resp, cb);
     }
 
 

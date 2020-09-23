@@ -39,6 +39,7 @@ const TaskInstanceMetrics = models.TaskInstanceMetrics;
 const TaskInstanceLog = models.TaskInstanceLog;
 const MountDataDisk = models.MountDataDisk;
 const TaskView = models.TaskView;
+const Tag = models.Tag;
 const Externals = models.Externals;
 const OsInfo = models.OsInfo;
 const DescribeComputeEnvResponse = models.DescribeComputeEnvResponse;

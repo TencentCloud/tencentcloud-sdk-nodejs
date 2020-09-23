@@ -5299,6 +5299,98 @@ class AttachUserPolicyResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeSafeAuthFlagColl返回参数结构体
+ * @class
+ */
+class DescribeSafeAuthFlagCollResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 登录保护设置
+         * @type {LoginActionFlag || null}
+         */
+        this.LoginFlag = null;
+
+        /**
+         * 敏感操作保护设置
+         * @type {LoginActionFlag || null}
+         */
+        this.ActionFlag = null;
+
+        /**
+         * 异地登录保护设置
+         * @type {OffsiteFlag || null}
+         */
+        this.OffsiteFlag = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.LoginFlag) {
+            let obj = new LoginActionFlag();
+            obj.deserialize(params.LoginFlag)
+            this.LoginFlag = obj;
+        }
+
+        if (params.ActionFlag) {
+            let obj = new LoginActionFlag();
+            obj.deserialize(params.ActionFlag)
+            this.ActionFlag = obj;
+        }
+
+        if (params.OffsiteFlag) {
+            let obj = new OffsiteFlag();
+            obj.deserialize(params.OffsiteFlag)
+            this.OffsiteFlag = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSafeAuthFlagColl请求参数结构体
+ * @class
+ */
+class DescribeSafeAuthFlagCollRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 子账号
+         * @type {number || null}
+         */
+        this.SubUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubUin = 'SubUin' in params ? params.SubUin : null;
+
+    }
+}
+
+/**
  * PutRolePermissionsBoundary返回参数结构体
  * @class
  */
@@ -5830,6 +5922,8 @@ module.exports = {
     ListEntitiesForPolicyResponse: ListEntitiesForPolicyResponse,
     AddUserToGroupResponse: AddUserToGroupResponse,
     AttachUserPolicyResponse: AttachUserPolicyResponse,
+    DescribeSafeAuthFlagCollResponse: DescribeSafeAuthFlagCollResponse,
+    DescribeSafeAuthFlagCollRequest: DescribeSafeAuthFlagCollRequest,
     PutRolePermissionsBoundaryResponse: PutRolePermissionsBoundaryResponse,
     SetMfaFlagRequest: SetMfaFlagRequest,
     ListCollaboratorsResponse: ListCollaboratorsResponse,

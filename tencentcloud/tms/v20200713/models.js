@@ -132,7 +132,7 @@ class DetailResults extends  AbstractModel {
         this.Label = null;
 
         /**
-         * 建议值,Block：打击,Review：待复审,Normal：正常
+         * 建议值,Block：打击,Review：待复审,Pass：正常
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */

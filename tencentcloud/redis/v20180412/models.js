@@ -1002,6 +1002,41 @@ class ModifyInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * tendis节点信息
+ * @class
+ */
+class TendisNodes extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 节点ID
+         * @type {string || null}
+         */
+        this.NodeId = null;
+
+        /**
+         * 节点角色
+         * @type {string || null}
+         */
+        this.NodeRole = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.NodeRole = 'NodeRole' in params ? params.NodeRole : null;
+
+    }
+}
+
+/**
  * RenewInstance返回参数结构体
  * @class
  */
@@ -2273,6 +2308,35 @@ class ModifyInstanceResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * Proxy节点信息
+ * @class
+ */
+class ProxyNodes extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 节点ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NodeId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
 
     }
 }
@@ -3674,6 +3738,48 @@ class DescribeTaskInfoRequest extends  AbstractModel {
             return;
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * Redis节点信息
+ * @class
+ */
+class RedisNodes extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 节点ID
+         * @type {string || null}
+         */
+        this.NodeId = null;
+
+        /**
+         * 节点角色
+         * @type {string || null}
+         */
+        this.NodeRole = null;
+
+        /**
+         * 分片ID
+         * @type {number || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
+        this.NodeRole = 'NodeRole' in params ? params.NodeRole : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -6286,6 +6392,48 @@ class BigKeyTypeInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeInstanceNodeInfo请求参数结构体
+ * @class
+ */
+class DescribeInstanceNodeInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 列表大小
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
  * DescribeMaintenanceWindow请求参数结构体
  * @class
  */
@@ -7460,6 +7608,103 @@ class UpgradeInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeInstanceNodeInfo返回参数结构体
+ * @class
+ */
+class DescribeInstanceNodeInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * proxy节点数量
+         * @type {number || null}
+         */
+        this.ProxyCount = null;
+
+        /**
+         * proxy节点信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ProxyNodes> || null}
+         */
+        this.Proxy = null;
+
+        /**
+         * redis节点数量
+         * @type {number || null}
+         */
+        this.RedisCount = null;
+
+        /**
+         * redis节点信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<RedisNodes> || null}
+         */
+        this.Redis = null;
+
+        /**
+         * tendis节点数量
+         * @type {number || null}
+         */
+        this.TendisCount = null;
+
+        /**
+         * tendis节点信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<TendisNodes> || null}
+         */
+        this.Tendis = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProxyCount = 'ProxyCount' in params ? params.ProxyCount : null;
+
+        if (params.Proxy) {
+            this.Proxy = new Array();
+            for (let z in params.Proxy) {
+                let obj = new ProxyNodes();
+                obj.deserialize(params.Proxy[z]);
+                this.Proxy.push(obj);
+            }
+        }
+        this.RedisCount = 'RedisCount' in params ? params.RedisCount : null;
+
+        if (params.Redis) {
+            this.Redis = new Array();
+            for (let z in params.Redis) {
+                let obj = new RedisNodes();
+                obj.deserialize(params.Redis[z]);
+                this.Redis.push(obj);
+            }
+        }
+        this.TendisCount = 'TendisCount' in params ? params.TendisCount : null;
+
+        if (params.Tendis) {
+            this.Tendis = new Array();
+            for (let z in params.Tendis) {
+                let obj = new TendisNodes();
+                obj.deserialize(params.Tendis[z]);
+                this.Tendis.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeProjectSecurityGroup返回参数结构体
  * @class
  */
@@ -7717,6 +7962,7 @@ module.exports = {
     AssociateSecurityGroupsRequest: AssociateSecurityGroupsRequest,
     DescribeTaskListResponse: DescribeTaskListResponse,
     ModifyInstanceRequest: ModifyInstanceRequest,
+    TendisNodes: TendisNodes,
     RenewInstanceResponse: RenewInstanceResponse,
     DescribeSlowLogResponse: DescribeSlowLogResponse,
     DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
@@ -7744,6 +7990,7 @@ module.exports = {
     DescribeInstanceDTSInfoResponse: DescribeInstanceDTSInfoResponse,
     DestroyPostpaidInstanceResponse: DestroyPostpaidInstanceResponse,
     ModifyInstanceResponse: ModifyInstanceResponse,
+    ProxyNodes: ProxyNodes,
     TradeDealDetail: TradeDealDetail,
     SourceInfo: SourceInfo,
     ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
@@ -7774,6 +8021,7 @@ module.exports = {
     DisableReplicaReadonlyResponse: DisableReplicaReadonlyResponse,
     CreateInstancesResponse: CreateInstancesResponse,
     DescribeTaskInfoRequest: DescribeTaskInfoRequest,
+    RedisNodes: RedisNodes,
     DescribeInstanceMonitorTopNCmdRequest: DescribeInstanceMonitorTopNCmdRequest,
     ModifyNetworkConfigRequest: ModifyNetworkConfigRequest,
     DescribeInstanceSecurityGroupRequest: DescribeInstanceSecurityGroupRequest,
@@ -7821,6 +8069,7 @@ module.exports = {
     InquiryPriceCreateInstanceRequest: InquiryPriceCreateInstanceRequest,
     ModifyInstanceParamsRequest: ModifyInstanceParamsRequest,
     BigKeyTypeInfo: BigKeyTypeInfo,
+    DescribeInstanceNodeInfoRequest: DescribeInstanceNodeInfoRequest,
     DescribeMaintenanceWindowRequest: DescribeMaintenanceWindowRequest,
     InstanceClusterNode: InstanceClusterNode,
     DescribeProxySlowLogRequest: DescribeProxySlowLogRequest,
@@ -7844,6 +8093,7 @@ module.exports = {
     InstanceClusterShard: InstanceClusterShard,
     ZoneCapacityConf: ZoneCapacityConf,
     UpgradeInstanceRequest: UpgradeInstanceRequest,
+    DescribeInstanceNodeInfoResponse: DescribeInstanceNodeInfoResponse,
     DescribeProjectSecurityGroupResponse: DescribeProjectSecurityGroupResponse,
     DescribeInstanceMonitorHotKeyResponse: DescribeInstanceMonitorHotKeyResponse,
     InstanceParam: InstanceParam,

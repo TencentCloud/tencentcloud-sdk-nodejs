@@ -630,6 +630,9 @@ class DescribeTaskTemplatesRequest extends  AbstractModel {
         /**
          * 过滤条件
 <li> task-template-name - String - 是否必填：否 -（过滤条件）按照任务模板名称过滤。</li>
+<li> tag-key - String - 是否必填：否 -（过滤条件）按照标签键进行过滤。</li>
+<li> tag-value - String - 是否必填：否 -（过滤条件）按照标签值进行过滤。</li>
+<li> tag:tag-key - String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。</li>
 与TaskTemplateIds参数不能同时指定。
          * @type {Array.<Filter> || null}
          */
@@ -1379,6 +1382,43 @@ class TaskView extends  AbstractModel {
 }
 
 /**
+ * 标签。
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签键。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 标签值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * 扩展数据
  * @class
  */
@@ -1573,6 +1613,13 @@ class DescribeComputeEnvResponse extends  AbstractModel {
         this.AttachedComputeNodeCount = null;
 
         /**
+         * 计算环境绑定的标签列表。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1616,6 +1663,15 @@ class DescribeComputeEnvResponse extends  AbstractModel {
         this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
         this.NextAction = 'NextAction' in params ? params.NextAction : null;
         this.AttachedComputeNodeCount = 'AttachedComputeNodeCount' in params ? params.AttachedComputeNodeCount : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2339,6 +2395,12 @@ class CreateTaskTemplateRequest extends  AbstractModel {
          */
         this.TaskTemplateDescription = null;
 
+        /**
+         * 标签列表。通过指定该参数可以支持绑定标签到任务模板。每个任务模板最多绑定10个标签。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -2356,6 +2418,15 @@ class CreateTaskTemplateRequest extends  AbstractModel {
             this.TaskTemplateInfo = obj;
         }
         this.TaskTemplateDescription = 'TaskTemplateDescription' in params ? params.TaskTemplateDescription : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -2416,6 +2487,12 @@ class Job extends  AbstractModel {
          */
         this.StateIfCreateCvmFailed = null;
 
+        /**
+         * 标签列表。通过指定该参数可以支持绑定标签到作业。每个作业最多绑定10个标签。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -2457,6 +2534,15 @@ class Job extends  AbstractModel {
         }
         this.TaskExecutionDependOn = 'TaskExecutionDependOn' in params ? params.TaskExecutionDependOn : null;
         this.StateIfCreateCvmFailed = 'StateIfCreateCvmFailed' in params ? params.StateIfCreateCvmFailed : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -2611,6 +2697,13 @@ class DescribeComputeEnvCreateInfoResponse extends  AbstractModel {
         this.DesiredComputeNodeCount = null;
 
         /**
+         * 计算环境绑定的标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -2672,6 +2765,15 @@ class DescribeComputeEnvCreateInfoResponse extends  AbstractModel {
             }
         }
         this.DesiredComputeNodeCount = 'DesiredComputeNodeCount' in params ? params.DesiredComputeNodeCount : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2779,6 +2881,13 @@ class ComputeEnvCreateInfo extends  AbstractModel {
          */
         this.DesiredComputeNodeCount = null;
 
+        /**
+         * 计算环境标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -2835,6 +2944,15 @@ class ComputeEnvCreateInfo extends  AbstractModel {
             }
         }
         this.DesiredComputeNodeCount = 'DesiredComputeNodeCount' in params ? params.DesiredComputeNodeCount : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -3251,6 +3369,12 @@ class NamedCpmComputeEnv extends  AbstractModel {
          */
         this.ResourceMaxRetryCount = null;
 
+        /**
+         * 标签列表。通过指定该参数可以支持绑定标签到黑石计算环境。每个黑石计算环境最多绑定10个标签。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -3296,6 +3420,15 @@ class NamedCpmComputeEnv extends  AbstractModel {
         }
         this.ActionIfComputeNodeInactive = 'ActionIfComputeNodeInactive' in params ? params.ActionIfComputeNodeInactive : null;
         this.ResourceMaxRetryCount = 'ResourceMaxRetryCount' in params ? params.ResourceMaxRetryCount : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -3409,6 +3542,13 @@ class DescribeJobResponse extends  AbstractModel {
         this.StateReason = null;
 
         /**
+         * 作业绑定的标签列表。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -3461,6 +3601,15 @@ class DescribeJobResponse extends  AbstractModel {
             this.TaskInstanceMetrics = obj;
         }
         this.StateReason = 'StateReason' in params ? params.StateReason : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3740,6 +3889,12 @@ class NamedComputeEnv extends  AbstractModel {
          */
         this.ResourceMaxRetryCount = null;
 
+        /**
+         * 标签列表。通过指定该参数可以支持绑定标签到计算环境。每个计算环境最多绑定10个标签。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -3800,6 +3955,15 @@ class NamedComputeEnv extends  AbstractModel {
         }
         this.ActionIfComputeNodeInactive = 'ActionIfComputeNodeInactive' in params ? params.ActionIfComputeNodeInactive : null;
         this.ResourceMaxRetryCount = 'ResourceMaxRetryCount' in params ? params.ResourceMaxRetryCount : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -4152,6 +4316,13 @@ class DescribeJobSubmitInfoResponse extends  AbstractModel {
         this.Dependences = null;
 
         /**
+         * 作业绑定的标签列表。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -4186,6 +4357,15 @@ class DescribeJobSubmitInfoResponse extends  AbstractModel {
                 let obj = new Dependence();
                 obj.deserialize(params.Dependences[z]);
                 this.Dependences.push(obj);
+            }
+        }
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -5311,6 +5491,9 @@ class DescribeJobsRequest extends  AbstractModel {
 <li> job-name - String - 是否必填：否 -（过滤条件）按照作业名称过滤。</li>
 <li> job-state - String - 是否必填：否 -（过滤条件）按照作业状态过滤。</li>
 <li> zone - String - 是否必填：否 -（过滤条件）按照可用区过滤。</li>
+<li> tag-key - String - 是否必填：否 -（过滤条件）按照标签键进行过滤。</li>
+<li> tag-value - String - 是否必填：否 -（过滤条件）按照标签值进行过滤。</li>
+<li> tag:tag-key - String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。</li>
 与JobIds参数不能同时指定。
          * @type {Array.<Filter> || null}
          */
@@ -5391,6 +5574,13 @@ class TaskTemplateView extends  AbstractModel {
          */
         this.CreateTime = null;
 
+        /**
+         * 任务模板绑定的标签列表。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -5410,6 +5600,15 @@ class TaskTemplateView extends  AbstractModel {
             this.TaskTemplateInfo = obj;
         }
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -5973,6 +6172,13 @@ class ComputeEnvView extends  AbstractModel {
          */
         this.AttachedComputeNodeCount = null;
 
+        /**
+         * 计算环境绑定的标签列表。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -6002,6 +6208,15 @@ class ComputeEnvView extends  AbstractModel {
         this.ResourceType = 'ResourceType' in params ? params.ResourceType : null;
         this.NextAction = 'NextAction' in params ? params.NextAction : null;
         this.AttachedComputeNodeCount = 'AttachedComputeNodeCount' in params ? params.AttachedComputeNodeCount : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -6184,6 +6399,9 @@ class DescribeComputeEnvsRequest extends  AbstractModel {
 <li> env-id - String - 是否必填：否 -（过滤条件）按照计算环境ID过滤。</li>
 <li> env-name - String - 是否必填：否 -（过滤条件）按照计算环境名称过滤。</li>
 <li> resource-type - String - 是否必填：否 -（过滤条件）按照计算资源类型过滤，取值CVM或者CPM(黑石)。</li>
+<li> tag-key - String - 是否必填：否 -（过滤条件）按照标签键进行过滤。</li>
+<li>tag-value - String - 是否必填：否 -（过滤条件）按照标签值进行过滤。</li>
+<li>tag:tag-key - String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。</li>
 与EnvIds参数不能同时指定。
          * @type {Array.<Filter> || null}
          */
@@ -6751,6 +6969,13 @@ class JobView extends  AbstractModel {
          */
         this.TaskMetrics = null;
 
+        /**
+         * 作业绑定的标签列表。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -6777,6 +7002,15 @@ class JobView extends  AbstractModel {
             let obj = new TaskMetrics();
             obj.deserialize(params.TaskMetrics)
             this.TaskMetrics = obj;
+        }
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
         }
 
     }
@@ -6841,6 +7075,7 @@ module.exports = {
     TaskInstanceLog: TaskInstanceLog,
     MountDataDisk: MountDataDisk,
     TaskView: TaskView,
+    Tag: Tag,
     Externals: Externals,
     OsInfo: OsInfo,
     DescribeComputeEnvResponse: DescribeComputeEnvResponse,
