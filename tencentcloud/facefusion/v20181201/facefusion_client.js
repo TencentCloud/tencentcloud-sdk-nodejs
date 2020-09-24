@@ -17,13 +17,15 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const PublicMaterialInfos = models.PublicMaterialInfos;
-const FaceFusionRequest = models.FaceFusionRequest;
+const FaceInfo = models.FaceInfo;
 const FaceFusionResponse = models.FaceFusionResponse;
 const DescribeMaterialListResponse = models.DescribeMaterialListResponse;
 const MaterialFaceList = models.MaterialFaceList;
-const FaceInfo = models.FaceInfo;
+const FaceFusionRequest = models.FaceFusionRequest;
+const FaceFusionLiteResponse = models.FaceFusionLiteResponse;
 const FuseFaceReviewDetail = models.FuseFaceReviewDetail;
 const MergeInfo = models.MergeInfo;
+const FaceFusionLiteRequest = models.FaceFusionLiteRequest;
 const FuseFaceReviewResult = models.FuseFaceReviewResult;
 const FuseFaceResponse = models.FuseFaceResponse;
 const FuseFaceRequest = models.FuseFaceRequest;
@@ -78,6 +80,17 @@ class FacefusionClient extends AbstractClient {
     FuseFace(req, cb) {
         let resp = new FuseFaceResponse();
         this.request("FuseFace", req, resp, cb);
+    }
+
+    /**
+     * 人脸融合活动专用版
+     * @param {FaceFusionLiteRequest} req
+     * @param {function(string, FaceFusionLiteResponse):void} cb
+     * @public
+     */
+    FaceFusionLite(req, cb) {
+        let resp = new FaceFusionLiteResponse();
+        this.request("FaceFusionLite", req, resp, cb);
     }
 
 

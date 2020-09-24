@@ -6388,6 +6388,41 @@ class MsInstance extends  AbstractModel {
          */
         this.ApplicationType = null;
 
+        /**
+         * 服务状态，passing 在线，critical 离线
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServiceStatus = null;
+
+        /**
+         * 注册时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RegistrationTime = null;
+
+        /**
+         * 上次心跳时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.LastHeartbeatTime = null;
+
+        /**
+         * 实例注册id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RegistrationId = null;
+
+        /**
+         * 屏蔽状态，hidden 为屏蔽，unhidden 为未屏蔽
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.HiddenStatus = null;
+
     }
 
     /**
@@ -6417,6 +6452,11 @@ class MsInstance extends  AbstractModel {
         this.ClusterType = 'ClusterType' in params ? params.ClusterType : null;
         this.ApplicationPackageVersion = 'ApplicationPackageVersion' in params ? params.ApplicationPackageVersion : null;
         this.ApplicationType = 'ApplicationType' in params ? params.ApplicationType : null;
+        this.ServiceStatus = 'ServiceStatus' in params ? params.ServiceStatus : null;
+        this.RegistrationTime = 'RegistrationTime' in params ? params.RegistrationTime : null;
+        this.LastHeartbeatTime = 'LastHeartbeatTime' in params ? params.LastHeartbeatTime : null;
+        this.RegistrationId = 'RegistrationId' in params ? params.RegistrationId : null;
+        this.HiddenStatus = 'HiddenStatus' in params ? params.HiddenStatus : null;
 
     }
 }
@@ -9591,6 +9631,13 @@ class Microservice extends  AbstractModel {
          */
         this.RunInstanceCount = null;
 
+        /**
+         * 微服务的离线实例数目
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CriticalInstanceCount = null;
+
     }
 
     /**
@@ -9607,6 +9654,7 @@ class Microservice extends  AbstractModel {
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
         this.RunInstanceCount = 'RunInstanceCount' in params ? params.RunInstanceCount : null;
+        this.CriticalInstanceCount = 'CriticalInstanceCount' in params ? params.CriticalInstanceCount : null;
 
     }
 }
@@ -12297,6 +12345,12 @@ class DeployContainerGroupRequest extends  AbstractModel {
          */
         this.ServiceSetting = null;
 
+        /**
+         * 是否部署 agent 容器。若不指定该参数，则默认不部署 agent 容器。
+         * @type {boolean || null}
+         */
+        this.DeployAgent = null;
+
     }
 
     /**
@@ -12351,6 +12405,7 @@ class DeployContainerGroupRequest extends  AbstractModel {
             obj.deserialize(params.ServiceSetting)
             this.ServiceSetting = obj;
         }
+        this.DeployAgent = 'DeployAgent' in params ? params.DeployAgent : null;
 
     }
 }

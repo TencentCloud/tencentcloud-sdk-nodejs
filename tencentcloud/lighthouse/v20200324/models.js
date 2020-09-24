@@ -67,6 +67,48 @@ class DescribeBlueprintsResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeInstancesTrafficPackages请求参数结构体
+ * @class
+ */
+class DescribeInstancesTrafficPackagesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * 偏移量，默认为 0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为 20，最大值为 100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * DeleteFirewallRules请求参数结构体
  * @class
  */
@@ -133,6 +175,49 @@ class LoginSettings extends  AbstractModel {
             return;
         }
         this.KeyIds = 'KeyIds' in params ? params.KeyIds : null;
+
+    }
+}
+
+/**
+ * 实例流量包详情
+ * @class
+ */
+class InstanceTrafficPackage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 流量包详情列表。
+         * @type {Array.<TrafficPackage> || null}
+         */
+        this.TrafficPackageSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+        if (params.TrafficPackageSet) {
+            this.TrafficPackageSet = new Array();
+            for (let z in params.TrafficPackageSet) {
+                let obj = new TrafficPackage();
+                obj.deserialize(params.TrafficPackageSet[z]);
+                this.TrafficPackageSet.push(obj);
+            }
+        }
 
     }
 }
@@ -382,6 +467,148 @@ FAILED：表示操作失败
         this.PlatformType = 'PlatformType' in params ? params.PlatformType : null;
         this.Platform = 'Platform' in params ? params.Platform : null;
         this.OsName = 'OsName' in params ? params.OsName : null;
+
+    }
+}
+
+/**
+ * DescribeInstancesTrafficPackages返回参数结构体
+ * @class
+ */
+class DescribeInstancesTrafficPackagesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合条件的实例流量包详情数量。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 实例流量包详情列表。
+         * @type {Array.<InstanceTrafficPackage> || null}
+         */
+        this.InstanceTrafficPackageSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.InstanceTrafficPackageSet) {
+            this.InstanceTrafficPackageSet = new Array();
+            for (let z in params.InstanceTrafficPackageSet) {
+                let obj = new InstanceTrafficPackage();
+                obj.deserialize(params.InstanceTrafficPackageSet[z]);
+                this.InstanceTrafficPackageSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 流量包详情
+ * @class
+ */
+class TrafficPackage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 流量包ID。
+         * @type {string || null}
+         */
+        this.TrafficPackageId = null;
+
+        /**
+         * 流量包生效周期内的总流量，单位字节。
+         * @type {number || null}
+         */
+        this.TrafficUsed = null;
+
+        /**
+         * 流量包生效周期内的总流量，单位字节。
+         * @type {number || null}
+         */
+        this.TrafficPackageTotal = null;
+
+        /**
+         * 流量包生效周期内的剩余流量，单位字节。
+         * @type {number || null}
+         */
+        this.TrafficPackageRemaining = null;
+
+        /**
+         * 流量包生效周期内超出流量包额度的流量，单位字节。
+         * @type {number || null}
+         */
+        this.TrafficOverflow = null;
+
+        /**
+         * 流量包生效周期开始时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 
+格式为： YYYY-MM-DDThh:mm:ssZ。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 流量包生效周期结束时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 
+格式为： YYYY-MM-DDThh:mm:ssZ。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 流量包到期时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 
+格式为： YYYY-MM-DDThh:mm:ssZ。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Deadline = null;
+
+        /**
+         * 流量包状态：
+<li>NETWORK_NORMAL：正常</li>
+<li>OVERDUE_NETWORK_DISABLED：欠费断网</li>
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TrafficPackageId = 'TrafficPackageId' in params ? params.TrafficPackageId : null;
+        this.TrafficUsed = 'TrafficUsed' in params ? params.TrafficUsed : null;
+        this.TrafficPackageTotal = 'TrafficPackageTotal' in params ? params.TrafficPackageTotal : null;
+        this.TrafficPackageRemaining = 'TrafficPackageRemaining' in params ? params.TrafficPackageRemaining : null;
+        this.TrafficOverflow = 'TrafficOverflow' in params ? params.TrafficOverflow : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Deadline = 'Deadline' in params ? params.Deadline : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -1577,10 +1804,14 @@ class StopInstancesRequest extends  AbstractModel {
 
 module.exports = {
     DescribeBlueprintsResponse: DescribeBlueprintsResponse,
+    DescribeInstancesTrafficPackagesRequest: DescribeInstancesTrafficPackagesRequest,
     DeleteFirewallRulesRequest: DeleteFirewallRulesRequest,
     LoginSettings: LoginSettings,
+    InstanceTrafficPackage: InstanceTrafficPackage,
     StartInstancesResponse: StartInstancesResponse,
     Instance: Instance,
+    DescribeInstancesTrafficPackagesResponse: DescribeInstancesTrafficPackagesResponse,
+    TrafficPackage: TrafficPackage,
     RebootInstancesResponse: RebootInstancesResponse,
     DescribeBundlesRequest: DescribeBundlesRequest,
     Blueprint: Blueprint,

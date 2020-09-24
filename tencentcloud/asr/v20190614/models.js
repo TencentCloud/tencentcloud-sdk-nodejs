@@ -1627,6 +1627,13 @@ class SentenceDetail extends  AbstractModel {
          */
         this.Words = null;
 
+        /**
+         * 单句语速
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SpeechSpeed = null;
+
     }
 
     /**
@@ -1650,6 +1657,7 @@ class SentenceDetail extends  AbstractModel {
                 this.Words.push(obj);
             }
         }
+        this.SpeechSpeed = 'SpeechSpeed' in params ? params.SpeechSpeed : null;
 
     }
 }

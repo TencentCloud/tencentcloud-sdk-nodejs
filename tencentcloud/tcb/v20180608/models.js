@@ -1936,7 +1936,7 @@ class CreatePostpayPackageRequest extends  AbstractModel {
         this.EnvSource = null;
 
         /**
-         * 环境别名，要以a-z开头，不能包含 a-zA-z0-9- 以外的字符
+         * 环境别名，要以a-z开头，不能包含  a-z,0-9,-  以外的字符
          * @type {string || null}
          */
         this.Alias = null;
@@ -1955,6 +1955,14 @@ class CreatePostpayPackageRequest extends  AbstractModel {
          */
         this.ExtensionId = null;
 
+        /**
+         * 订单标记。建议使用方统一转大小写之后再判断。
+<li>QuickStart：快速启动来源</li>
+<li>Activity：活动来源</li>
+         * @type {string || null}
+         */
+        this.Flag = null;
+
     }
 
     /**
@@ -1972,6 +1980,7 @@ class CreatePostpayPackageRequest extends  AbstractModel {
         this.Alias = 'Alias' in params ? params.Alias : null;
         this.Channel = 'Channel' in params ? params.Channel : null;
         this.ExtensionId = 'ExtensionId' in params ? params.ExtensionId : null;
+        this.Flag = 'Flag' in params ? params.Flag : null;
 
     }
 }

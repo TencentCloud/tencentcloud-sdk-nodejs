@@ -17,85 +17,93 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribePolicyConditionListConfigManual = models.DescribePolicyConditionListConfigManual;
-const UnBindingPolicyObjectRequest = models.UnBindingPolicyObjectRequest;
-const DescribePolicyConditionListRequest = models.DescribePolicyConditionListRequest;
-const DeletePolicyGroupResponse = models.DeletePolicyGroupResponse;
-const DescribeAccidentEventListAlarms = models.DescribeAccidentEventListAlarms;
 const CreatePolicyGroupEventCondition = models.CreatePolicyGroupEventCondition;
 const DescribeProductEventListRequest = models.DescribeProductEventListRequest;
-const DescribeProductListResponse = models.DescribeProductListResponse;
-const UnBindingAllPolicyObjectRequest = models.UnBindingAllPolicyObjectRequest;
-const Instance = models.Instance;
-const DescribeProductEventListEvents = models.DescribeProductEventListEvents;
-const BindingPolicyObjectDimension = models.BindingPolicyObjectDimension;
 const DescribePolicyConditionListMetric = models.DescribePolicyConditionListMetric;
+const DescribePolicyGroupListResponse = models.DescribePolicyGroupListResponse;
+const BindingPolicyObjectRequest = models.BindingPolicyObjectRequest;
+const DescribePolicyGroupInfoRequest = models.DescribePolicyGroupInfoRequest;
+const DescribePolicyGroupInfoCallback = models.DescribePolicyGroupInfoCallback;
+const DescribeProductEventListDimensions = models.DescribeProductEventListDimensions;
+const DescribePolicyGroupInfoResponse = models.DescribePolicyGroupInfoResponse;
+const DescribeAllNamespacesRequest = models.DescribeAllNamespacesRequest;
+const CreatePolicyGroupResponse = models.CreatePolicyGroupResponse;
+const PutMonitorDataResponse = models.PutMonitorDataResponse;
+const DescribeBaseMetricsResponse = models.DescribeBaseMetricsResponse;
+const SendCustomAlarmMsgRequest = models.SendCustomAlarmMsgRequest;
+const DescribePolicyConditionListConfigManualContinueTime = models.DescribePolicyConditionListConfigManualContinueTime;
+const CommonNamespace = models.CommonNamespace;
+const GetMonitorDataRequest = models.GetMonitorDataRequest;
+const DataPoint = models.DataPoint;
+const DescribePolicyConditionListConfigManualPeriod = models.DescribePolicyConditionListConfigManualPeriod;
+const UnBindingPolicyObjectRequest = models.UnBindingPolicyObjectRequest;
+const DescribePolicyConditionListRequest = models.DescribePolicyConditionListRequest;
+const DescribeBindingPolicyObjectListInstance = models.DescribeBindingPolicyObjectListInstance;
+const DeletePolicyGroupResponse = models.DeletePolicyGroupResponse;
+const DimensionsDesc = models.DimensionsDesc;
+const DescribePolicyConditionListCondition = models.DescribePolicyConditionListCondition;
+const DescribeProductListRequest = models.DescribeProductListRequest;
+const PeriodsSt = models.PeriodsSt;
+const ModifyAlarmReceiversResponse = models.ModifyAlarmReceiversResponse;
+const DescribePolicyConditionListResponse = models.DescribePolicyConditionListResponse;
+const DescribeAllNamespacesResponse = models.DescribeAllNamespacesResponse;
+const DescribeBasicAlarmListResponse = models.DescribeBasicAlarmListResponse;
+const ProductSimple = models.ProductSimple;
+const ModifyAlarmReceiversRequest = models.ModifyAlarmReceiversRequest;
+const DescribeProductEventListEventsDimensions = models.DescribeProductEventListEventsDimensions;
+const MetricSet = models.MetricSet;
+const DescribeBindingPolicyObjectListResponse = models.DescribeBindingPolicyObjectListResponse;
+const ModifyPolicyGroupEventCondition = models.ModifyPolicyGroupEventCondition;
+const ModifyPolicyGroupRequest = models.ModifyPolicyGroupRequest;
+const DescribeProductEventListResponse = models.DescribeProductEventListResponse;
+const DescribeBaseMetricsRequest = models.DescribeBaseMetricsRequest;
+const Instance = models.Instance;
+const BindingPolicyObjectDimension = models.BindingPolicyObjectDimension;
+const Dimension = models.Dimension;
+const DescribeBasicAlarmListAlarms = models.DescribeBasicAlarmListAlarms;
+const UnBindingAllPolicyObjectResponse = models.UnBindingAllPolicyObjectResponse;
+const DescribeAlarmHistoriesRequest = models.DescribeAlarmHistoriesRequest;
+const MetricObjectMeaning = models.MetricObjectMeaning;
+const DeletePolicyGroupRequest = models.DeletePolicyGroupRequest;
+const ModifyPolicyGroupResponse = models.ModifyPolicyGroupResponse;
+const DescribePolicyConditionListConfigManualCalcType = models.DescribePolicyConditionListConfigManualCalcType;
+const DescribePolicyGroupInfoCondition = models.DescribePolicyGroupInfoCondition;
+const DescribeProductEventListEventsGroupInfo = models.DescribeProductEventListEventsGroupInfo;
+const DescribePolicyGroupInfoConditionTpl = models.DescribePolicyGroupInfoConditionTpl;
+const DescribeBindingPolicyObjectListRequest = models.DescribeBindingPolicyObjectListRequest;
+const UnBindingPolicyObjectResponse = models.UnBindingPolicyObjectResponse;
+const DescribeProductEventListEvents = models.DescribeProductEventListEvents;
+const DescribePolicyConditionListConfigManualPeriodNum = models.DescribePolicyConditionListConfigManualPeriodNum;
+const PutMonitorDataRequest = models.PutMonitorDataRequest;
+const DescribePolicyGroupListGroupInstanceGroup = models.DescribePolicyGroupListGroupInstanceGroup;
+const InstanceGroup = models.InstanceGroup;
+const DescribeAccidentEventListResponse = models.DescribeAccidentEventListResponse;
+const DescribePolicyConditionListConfigManualStatType = models.DescribePolicyConditionListConfigManualStatType;
+const DescribeAccidentEventListAlarms = models.DescribeAccidentEventListAlarms;
+const DescribeProductListResponse = models.DescribeProductListResponse;
+const DescribeAlarmHistoriesResponse = models.DescribeAlarmHistoriesResponse;
+const AlarmHistory = models.AlarmHistory;
+const MonitorTypeNamespace = models.MonitorTypeNamespace;
 const CreatePolicyGroupRequest = models.CreatePolicyGroupRequest;
 const CreatePolicyGroupCondition = models.CreatePolicyGroupCondition;
 const DescribePolicyGroupInfoReceiverInfo = models.DescribePolicyGroupInfoReceiverInfo;
-const BindingPolicyObjectRequest = models.BindingPolicyObjectRequest;
-const DescribeProductEventListEventsGroupInfo = models.DescribeProductEventListEventsGroupInfo;
-const ModifyPolicyGroupRequest = models.ModifyPolicyGroupRequest;
-const DescribePolicyConditionListConfigManualPeriod = models.DescribePolicyConditionListConfigManualPeriod;
 const DescribePolicyConditionListEventMetric = models.DescribePolicyConditionListEventMetric;
-const DescribePolicyConditionListCondition = models.DescribePolicyConditionListCondition;
-const DescribeBasicAlarmListRequest = models.DescribeBasicAlarmListRequest;
-const DescribePolicyGroupListResponse = models.DescribePolicyGroupListResponse;
-const DescribePolicyGroupInfoRequest = models.DescribePolicyGroupInfoRequest;
-const DimensionsDesc = models.DimensionsDesc;
-const DescribePolicyGroupListGroup = models.DescribePolicyGroupListGroup;
-const DescribeBasicAlarmListAlarms = models.DescribeBasicAlarmListAlarms;
-const DescribeProductListRequest = models.DescribeProductListRequest;
-const PeriodsSt = models.PeriodsSt;
-const DescribeAccidentEventListRequest = models.DescribeAccidentEventListRequest;
-const DescribeProductEventListOverView = models.DescribeProductEventListOverView;
-const MetricObjectMeaning = models.MetricObjectMeaning;
-const MetricDatum = models.MetricDatum;
-const DeletePolicyGroupRequest = models.DeletePolicyGroupRequest;
-const DescribePolicyGroupInfoCallback = models.DescribePolicyGroupInfoCallback;
-const DescribeBindingPolicyObjectListInstanceGroup = models.DescribeBindingPolicyObjectListInstanceGroup;
-const DescribePolicyConditionListResponse = models.DescribePolicyConditionListResponse;
-const DescribePolicyConditionListConfigManualCalcType = models.DescribePolicyConditionListConfigManualCalcType;
-const ModifyPolicyGroupResponse = models.ModifyPolicyGroupResponse;
-const PutMonitorDataResponse = models.PutMonitorDataResponse;
-const ReceiverInfo = models.ReceiverInfo;
-const ModifyAlarmReceiversRequest = models.ModifyAlarmReceiversRequest;
-const DescribeProductEventListDimensions = models.DescribeProductEventListDimensions;
-const DescribePolicyGroupInfoResponse = models.DescribePolicyGroupInfoResponse;
-const DescribeBasicAlarmListResponse = models.DescribeBasicAlarmListResponse;
-const ProductSimple = models.ProductSimple;
-const DescribeBindingPolicyObjectListDimension = models.DescribeBindingPolicyObjectListDimension;
-const DescribePolicyGroupInfoCondition = models.DescribePolicyGroupInfoCondition;
-const UnBindingPolicyObjectResponse = models.UnBindingPolicyObjectResponse;
-const GetMonitorDataResponse = models.GetMonitorDataResponse;
-const MetricSet = models.MetricSet;
-const DescribeBindingPolicyObjectListResponse = models.DescribeBindingPolicyObjectListResponse;
-const DescribePolicyGroupInfoConditionTpl = models.DescribePolicyGroupInfoConditionTpl;
-const DescribeBindingPolicyObjectListRequest = models.DescribeBindingPolicyObjectListRequest;
-const CreatePolicyGroupResponse = models.CreatePolicyGroupResponse;
-const PutMonitorDataRequest = models.PutMonitorDataRequest;
-const InstanceGroup = models.InstanceGroup;
-const DescribePolicyGroupInfoEventCondition = models.DescribePolicyGroupInfoEventCondition;
-const DescribeBaseMetricsResponse = models.DescribeBaseMetricsResponse;
-const SendCustomAlarmMsgResponse = models.SendCustomAlarmMsgResponse;
-const GetMonitorDataRequest = models.GetMonitorDataRequest;
-const DescribePolicyConditionListConfigManualPeriodNum = models.DescribePolicyConditionListConfigManualPeriodNum;
-const DescribeBindingPolicyObjectListInstance = models.DescribeBindingPolicyObjectListInstance;
-const ModifyPolicyGroupCondition = models.ModifyPolicyGroupCondition;
-const ModifyPolicyGroupEventCondition = models.ModifyPolicyGroupEventCondition;
-const DescribePolicyConditionListConfigManualContinueTime = models.DescribePolicyConditionListConfigManualContinueTime;
 const DescribePolicyGroupListRequest = models.DescribePolicyGroupListRequest;
-const DescribeAccidentEventListResponse = models.DescribeAccidentEventListResponse;
-const DescribeProductEventListResponse = models.DescribeProductEventListResponse;
-const DescribeBaseMetricsRequest = models.DescribeBaseMetricsRequest;
-const Dimension = models.Dimension;
-const DataPoint = models.DataPoint;
-const UnBindingAllPolicyObjectResponse = models.UnBindingAllPolicyObjectResponse;
-const DescribePolicyConditionListConfigManualStatType = models.DescribePolicyConditionListConfigManualStatType;
-const SendCustomAlarmMsgRequest = models.SendCustomAlarmMsgRequest;
-const DescribeProductEventListEventsDimensions = models.DescribeProductEventListEventsDimensions;
+const DescribeBasicAlarmListRequest = models.DescribeBasicAlarmListRequest;
+const DescribePolicyGroupListGroup = models.DescribePolicyGroupListGroup;
+const DescribeAccidentEventListRequest = models.DescribeAccidentEventListRequest;
+const MetricDatum = models.MetricDatum;
+const DescribeBindingPolicyObjectListInstanceGroup = models.DescribeBindingPolicyObjectListInstanceGroup;
+const DescribeBindingPolicyObjectListDimension = models.DescribeBindingPolicyObjectListDimension;
+const InstanceGroups = models.InstanceGroups;
+const GetMonitorDataResponse = models.GetMonitorDataResponse;
+const ReceiverInfo = models.ReceiverInfo;
+const UnBindingAllPolicyObjectRequest = models.UnBindingAllPolicyObjectRequest;
+const DescribePolicyGroupInfoEventCondition = models.DescribePolicyGroupInfoEventCondition;
+const SendCustomAlarmMsgResponse = models.SendCustomAlarmMsgResponse;
+const ModifyPolicyGroupCondition = models.ModifyPolicyGroupCondition;
+const DescribeProductEventListOverView = models.DescribeProductEventListOverView;
 const DescribePolicyConditionListConfigManualCalcValue = models.DescribePolicyConditionListConfigManualCalcValue;
-const ModifyAlarmReceiversResponse = models.ModifyAlarmReceiversResponse;
-const DescribePolicyGroupListGroupInstanceGroup = models.DescribePolicyGroupListGroupInstanceGroup;
 const BindingPolicyObjectResponse = models.BindingPolicyObjectResponse;
 
 
@@ -151,6 +159,17 @@ class MonitorClient extends AbstractClient {
     BindingPolicyObject(req, cb) {
         let resp = new BindingPolicyObjectResponse();
         this.request("BindingPolicyObject", req, resp, cb);
+    }
+
+    /**
+     * 告警2.0-告警历史列表
+     * @param {DescribeAlarmHistoriesRequest} req
+     * @param {function(string, DescribeAlarmHistoriesResponse):void} cb
+     * @public
+     */
+    DescribeAlarmHistories(req, cb) {
+        let resp = new DescribeAlarmHistoriesResponse();
+        this.request("DescribeAlarmHistories", req, resp, cb);
     }
 
     /**
@@ -220,6 +239,17 @@ class MonitorClient extends AbstractClient {
     }
 
     /**
+     * 更新策略组
+     * @param {ModifyPolicyGroupRequest} req
+     * @param {function(string, ModifyPolicyGroupResponse):void} cb
+     * @public
+     */
+    ModifyPolicyGroup(req, cb) {
+        let resp = new ModifyPolicyGroupResponse();
+        this.request("ModifyPolicyGroup", req, resp, cb);
+    }
+
+    /**
      * 查询云监控产品列表
      * @param {DescribeProductListRequest} req
      * @param {function(string, DescribeProductListResponse):void} cb
@@ -266,14 +296,14 @@ class MonitorClient extends AbstractClient {
     }
 
     /**
-     * 更新策略组
-     * @param {ModifyPolicyGroupRequest} req
-     * @param {function(string, ModifyPolicyGroupResponse):void} cb
+     * 拉取所有名字空间
+     * @param {DescribeAllNamespacesRequest} req
+     * @param {function(string, DescribeAllNamespacesResponse):void} cb
      * @public
      */
-    ModifyPolicyGroup(req, cb) {
-        let resp = new ModifyPolicyGroupResponse();
-        this.request("ModifyPolicyGroup", req, resp, cb);
+    DescribeAllNamespaces(req, cb) {
+        let resp = new DescribeAllNamespacesResponse();
+        this.request("DescribeAllNamespaces", req, resp, cb);
     }
 
     /**

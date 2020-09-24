@@ -116,49 +116,36 @@ class PublicMaterialInfos extends  AbstractModel {
 }
 
 /**
- * FaceFusion请求参数结构体
+ * 人脸信息
  * @class
  */
-class FaceFusionRequest extends  AbstractModel {
+class FaceInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 活动 ID，请在人脸融合控制台查看。
-         * @type {string || null}
-         */
-        this.ProjectId = null;
-
-        /**
-         * 素材 ID，请在人脸融合控制台查看。
-         * @type {string || null}
-         */
-        this.ModelId = null;
-
-        /**
-         * 图片 base64 数据。请确保人脸为正脸，无旋转。若某些手机拍摄后人脸被旋转，请使用图片的 EXIF 信息对图片进行旋转处理；请勿在 base64 数据中包含头部，如“data:image/jpeg;base64,”。
-         * @type {string || null}
-         */
-        this.Image = null;
-
-        /**
-         * 返回图像方式（url 或 base64) ，二选一。url有效期为30天。
-         * @type {string || null}
-         */
-        this.RspImgType = null;
-
-        /**
-         * 历史遗留字段，无需填写。因为融合只需提取人脸特征，不需要鉴黄。
+         * 人脸框的横坐标
          * @type {number || null}
          */
-        this.PornDetect = null;
+        this.X = null;
 
         /**
-         * 0表示不需要鉴政，1表示需要鉴政。默认值为0。
-请注意，鉴政服务开启后，您需要根据返回结果自行判断是否调整您的业务逻辑。例如提示您的用户图片非法，请更换图片。
+         * 人脸框的纵坐标
          * @type {number || null}
          */
-        this.CelebrityIdentify = null;
+        this.Y = null;
+
+        /**
+         * 人脸框的宽度
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 人脸框的高度
+         * @type {number || null}
+         */
+        this.Height = null;
 
     }
 
@@ -169,12 +156,10 @@ class FaceFusionRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.ModelId = 'ModelId' in params ? params.ModelId : null;
-        this.Image = 'Image' in params ? params.Image : null;
-        this.RspImgType = 'RspImgType' in params ? params.RspImgType : null;
-        this.PornDetect = 'PornDetect' in params ? params.PornDetect : null;
-        this.CelebrityIdentify = 'CelebrityIdentify' in params ? params.CelebrityIdentify : null;
+        this.X = 'X' in params ? params.X : null;
+        this.Y = 'Y' in params ? params.Y : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
 
     }
 }
@@ -320,36 +305,49 @@ class MaterialFaceList extends  AbstractModel {
 }
 
 /**
- * 人脸信息
+ * FaceFusion请求参数结构体
  * @class
  */
-class FaceInfo extends  AbstractModel {
+class FaceFusionRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 人脸框的横坐标
-         * @type {number || null}
+         * 活动 ID，请在人脸融合控制台查看。
+         * @type {string || null}
          */
-        this.X = null;
+        this.ProjectId = null;
 
         /**
-         * 人脸框的纵坐标
-         * @type {number || null}
+         * 素材 ID，请在人脸融合控制台查看。
+         * @type {string || null}
          */
-        this.Y = null;
+        this.ModelId = null;
 
         /**
-         * 人脸框的宽度
-         * @type {number || null}
+         * 图片 base64 数据。请确保人脸为正脸，无旋转。若某些手机拍摄后人脸被旋转，请使用图片的 EXIF 信息对图片进行旋转处理；请勿在 base64 数据中包含头部，如“data:image/jpeg;base64,”。
+         * @type {string || null}
          */
-        this.Width = null;
+        this.Image = null;
 
         /**
-         * 人脸框的高度
+         * 返回图像方式（url 或 base64) ，二选一。url有效期为30天。
+         * @type {string || null}
+         */
+        this.RspImgType = null;
+
+        /**
+         * 历史遗留字段，无需填写。因为融合只需提取人脸特征，不需要鉴黄。
          * @type {number || null}
          */
-        this.Height = null;
+        this.PornDetect = null;
+
+        /**
+         * 0表示不需要鉴政，1表示需要鉴政。默认值为0。
+请注意，鉴政服务开启后，您需要根据返回结果自行判断是否调整您的业务逻辑。例如提示您的用户图片非法，请更换图片。
+         * @type {number || null}
+         */
+        this.CelebrityIdentify = null;
 
     }
 
@@ -360,10 +358,63 @@ class FaceInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.X = 'X' in params ? params.X : null;
-        this.Y = 'Y' in params ? params.Y : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.ModelId = 'ModelId' in params ? params.ModelId : null;
+        this.Image = 'Image' in params ? params.Image : null;
+        this.RspImgType = 'RspImgType' in params ? params.RspImgType : null;
+        this.PornDetect = 'PornDetect' in params ? params.PornDetect : null;
+        this.CelebrityIdentify = 'CelebrityIdentify' in params ? params.CelebrityIdentify : null;
+
+    }
+}
+
+/**
+ * FaceFusionLite返回参数结构体
+ * @class
+ */
+class FaceFusionLiteResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * RspImgType 为 url 时，返回结果的 url， RspImgType 为 base64 时返回 base64 数据。
+         * @type {string || null}
+         */
+        this.Image = null;
+
+        /**
+         * 鉴政结果
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<FuseFaceReviewResult> || null}
+         */
+        this.ReviewResultSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Image = 'Image' in params ? params.Image : null;
+
+        if (params.ReviewResultSet) {
+            this.ReviewResultSet = new Array();
+            for (let z in params.ReviewResultSet) {
+                let obj = new FuseFaceReviewResult();
+                obj.deserialize(params.ReviewResultSet[z]);
+                this.ReviewResultSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -473,6 +524,77 @@ class MergeInfo extends  AbstractModel {
             this.InputImageFaceRect = obj;
         }
         this.TemplateFaceID = 'TemplateFaceID' in params ? params.TemplateFaceID : null;
+
+    }
+}
+
+/**
+ * FaceFusionLite请求参数结构体
+ * @class
+ */
+class FaceFusionLiteRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 活动 ID，请在人脸融合控制台查看。
+         * @type {string || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 素材 ID，请在人脸融合控制台查看。
+         * @type {string || null}
+         */
+        this.ModelId = null;
+
+        /**
+         * 用户人脸图片、素材模板图的人脸位置信息。
+         * @type {Array.<MergeInfo> || null}
+         */
+        this.MergeInfos = null;
+
+        /**
+         * 返回图像方式（url 或 base64) ，二选一。默认url, url有效期为30天。
+         * @type {string || null}
+         */
+        this.RspImgType = null;
+
+        /**
+         * 请注意，鉴政服务开启后，您需要根据返回结果自行判断是否调整您的业务逻辑。例如提示您的用户图片非法，请更换图片。
+         * @type {number || null}
+         */
+        this.CelebrityIdentify = null;
+
+        /**
+         * 算法引擎参数:  1）选脸版 - youturecreat; 2）优享版 - youtu1vN； 3）畅享版 - ptu； 4）随机 - ALL;  默认为活动选择的算法
+         * @type {string || null}
+         */
+        this.Engine = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.ModelId = 'ModelId' in params ? params.ModelId : null;
+
+        if (params.MergeInfos) {
+            this.MergeInfos = new Array();
+            for (let z in params.MergeInfos) {
+                let obj = new MergeInfo();
+                obj.deserialize(params.MergeInfos[z]);
+                this.MergeInfos.push(obj);
+            }
+        }
+        this.RspImgType = 'RspImgType' in params ? params.RspImgType : null;
+        this.CelebrityIdentify = 'CelebrityIdentify' in params ? params.CelebrityIdentify : null;
+        this.Engine = 'Engine' in params ? params.Engine : null;
 
     }
 }
@@ -780,13 +902,15 @@ class DescribeMaterialListRequest extends  AbstractModel {
 
 module.exports = {
     PublicMaterialInfos: PublicMaterialInfos,
-    FaceFusionRequest: FaceFusionRequest,
+    FaceInfo: FaceInfo,
     FaceFusionResponse: FaceFusionResponse,
     DescribeMaterialListResponse: DescribeMaterialListResponse,
     MaterialFaceList: MaterialFaceList,
-    FaceInfo: FaceInfo,
+    FaceFusionRequest: FaceFusionRequest,
+    FaceFusionLiteResponse: FaceFusionLiteResponse,
     FuseFaceReviewDetail: FuseFaceReviewDetail,
     MergeInfo: MergeInfo,
+    FaceFusionLiteRequest: FaceFusionLiteRequest,
     FuseFaceReviewResult: FuseFaceReviewResult,
     FuseFaceResponse: FuseFaceResponse,
     FuseFaceRequest: FuseFaceRequest,

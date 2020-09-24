@@ -17,10 +17,14 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribeBlueprintsResponse = models.DescribeBlueprintsResponse;
+const DescribeInstancesTrafficPackagesRequest = models.DescribeInstancesTrafficPackagesRequest;
 const DeleteFirewallRulesRequest = models.DeleteFirewallRulesRequest;
 const LoginSettings = models.LoginSettings;
+const InstanceTrafficPackage = models.InstanceTrafficPackage;
 const StartInstancesResponse = models.StartInstancesResponse;
 const Instance = models.Instance;
+const DescribeInstancesTrafficPackagesResponse = models.DescribeInstancesTrafficPackagesResponse;
+const TrafficPackage = models.TrafficPackage;
 const RebootInstancesResponse = models.RebootInstancesResponse;
 const DescribeBundlesRequest = models.DescribeBundlesRequest;
 const Blueprint = models.Blueprint;
@@ -88,6 +92,17 @@ class LighthouseClient extends AbstractClient {
     DescribeInstances(req, cb) {
         let resp = new DescribeInstancesResponse();
         this.request("DescribeInstances", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeInstancesTrafficPackages）用于查询一个或多个实例的流量包详情。
+     * @param {DescribeInstancesTrafficPackagesRequest} req
+     * @param {function(string, DescribeInstancesTrafficPackagesResponse):void} cb
+     * @public
+     */
+    DescribeInstancesTrafficPackages(req, cb) {
+        let resp = new DescribeInstancesTrafficPackagesResponse();
+        this.request("DescribeInstancesTrafficPackages", req, resp, cb);
     }
 
     /**

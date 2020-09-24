@@ -1703,7 +1703,7 @@ class DescribeCaptchaMiniResultRequest extends  AbstractModel {
         super();
 
         /**
-         * 验证码类型，9：滑块验证码
+         * 固定填值：9（滑块验证码）
          * @type {number || null}
          */
         this.CaptchaType = null;
@@ -1721,7 +1721,7 @@ class DescribeCaptchaMiniResultRequest extends  AbstractModel {
         this.UserIp = null;
 
         /**
-         * 验证码应用ID
+         * 验证码应用APPID
          * @type {number || null}
          */
         this.CaptchaAppId = null;
@@ -1910,13 +1910,14 @@ class DescribeCaptchaMiniResultResponse extends  AbstractModel {
 
         /**
          * 1       ticket verification succeeded     票据验证成功
+7       CaptchaAppId does not match     票据与验证码应用APPID不匹配
 8       ticket expired     票据超时
 10     ticket format error     票据格式不正确
-15     ticket decryption failed     验证码解密失败
-16     CaptchaAppId wrong format      检查CaptchaAppId错误
+15     ticket decryption failed     票据解密失败
+16     CaptchaAppId wrong format     检查验证码应用APPID错误
+21     ticket error     票据验证错误
 26     system internal error     系统内部错误
-100    param err appsecretkey     参数校验错误
-21      ticket error     差别，票据验证错误
+100   param err     参数校验错误
          * @type {number || null}
          */
         this.CaptchaCode = null;

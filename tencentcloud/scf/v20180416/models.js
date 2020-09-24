@@ -2632,6 +2632,12 @@ class CreateFunctionRequest extends  AbstractModel {
          */
         this.InitTimeout = null;
 
+        /**
+         * 函数 Tag 参数，以键值对数组形式传入
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -2699,6 +2705,15 @@ class CreateFunctionRequest extends  AbstractModel {
             this.CfsConfig = obj;
         }
         this.InitTimeout = 'InitTimeout' in params ? params.InitTimeout : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
