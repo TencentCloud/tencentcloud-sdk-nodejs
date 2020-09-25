@@ -2922,6 +2922,18 @@ class GetDeviceListRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * 设备固件版本号，若不带此参数会返回所有固件版本的设备。传"None-FirmwareVersion"查询无版本号的设备
+         * @type {string || null}
+         */
+        this.FirmwareVersion = null;
+
+        /**
+         * 需要过滤的设备名称
+         * @type {string || null}
+         */
+        this.DeviceName = null;
+
     }
 
     /**
@@ -2934,6 +2946,8 @@ class GetDeviceListRequest extends  AbstractModel {
         this.ProductId = 'ProductId' in params ? params.ProductId : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.FirmwareVersion = 'FirmwareVersion' in params ? params.FirmwareVersion : null;
+        this.DeviceName = 'DeviceName' in params ? params.DeviceName : null;
 
     }
 }

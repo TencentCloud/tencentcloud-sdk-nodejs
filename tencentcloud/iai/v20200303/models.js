@@ -3237,7 +3237,8 @@ class SearchFacesReturnsByGroupRequest extends  AbstractModel {
         super();
 
         /**
-         * 希望搜索的人员库列表，上限60个。数组元素取值为创建人员库接口中的GroupId
+         * 希望搜索的人员库列表，上限60个。数组元素取值为创建人员库接口中的GroupId。
+不可同时搜索不同算法模型版本（FaceModelVersion）的人员库。
          * @type {Array.<string> || null}
          */
         this.GroupIds = null;
@@ -4013,7 +4014,8 @@ class SearchFacesRequest extends  AbstractModel {
         super();
 
         /**
-         * 希望搜索的人员库列表，上限100个。数组元素取值为创建人员库接口中的GroupId
+         * 希望搜索的人员库列表，上限100个。数组元素取值为创建人员库接口中的GroupId。
+不可同时搜索不同算法模型版本（FaceModelVersion）的人员库。
          * @type {Array.<string> || null}
          */
         this.GroupIds = null;

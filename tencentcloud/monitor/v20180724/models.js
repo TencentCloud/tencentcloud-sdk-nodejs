@@ -1264,7 +1264,7 @@ class UnBindingPolicyObjectRequest extends  AbstractModel {
         this.GroupId = null;
 
         /**
-         * 待删除对象实例的唯一id列表
+         * 待删除对象实例的唯一id列表，UniqueId从调用[获取已绑定对象列表接口](https://cloud.tencent.com/document/api/248/40570)的出参的List中得到
          * @type {Array.<string> || null}
          */
         this.UniqueId = null;

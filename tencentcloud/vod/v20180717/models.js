@@ -8235,20 +8235,85 @@ class CreateContentReviewTemplateResponse extends  AbstractModel {
 }
 
 /**
- * 智能精彩片段任务控制参数
+ * ModifyAnimatedGraphicsTemplate请求参数结构体
  * @class
  */
-class HighlightsConfigureInfo extends  AbstractModel {
+class ModifyAnimatedGraphicsTemplateRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 智能精彩片段任务开关，可选值：
-<li>ON：开启智能精彩片段任务；</li>
-<li>OFF：关闭智能精彩片段任务。</li>
+         * 转动图模板唯一标识。
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * 转动图模板名称，长度限制：64 个字符。
          * @type {string || null}
          */
-        this.Switch = null;
+        this.Name = null;
+
+        /**
+         * 动图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 动图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * 分辨率自适应，可选值：
+<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
+<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
+默认值：open。
+         * @type {string || null}
+         */
+        this.ResolutionAdaptive = null;
+
+        /**
+         * 动图格式，取值为 gif 和 webp。
+         * @type {string || null}
+         */
+        this.Format = null;
+
+        /**
+         * 帧率，取值范围：[1, 30]，单位：Hz。
+         * @type {number || null}
+         */
+        this.Fps = null;
+
+        /**
+         * 图片质量，取值范围：[1, 100]，默认值为 75。
+         * @type {number || null}
+         */
+        this.Quality = null;
+
+        /**
+         * 模板描述信息，长度限制：256 个字符。
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
 
     }
 
@@ -8259,7 +8324,16 @@ class HighlightsConfigureInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
+        this.Format = 'Format' in params ? params.Format : null;
+        this.Fps = 'Fps' in params ? params.Fps : null;
+        this.Quality = 'Quality' in params ? params.Quality : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -11361,39 +11435,24 @@ class TerrorismOcrReviewTemplateInfoForUpdate extends  AbstractModel {
 }
 
 /**
- * 用户自定义语音审核任务控制参数
+ * DescribeEventsState返回参数结构体
  * @class
  */
-class UserDefineAsrTextReviewTemplateInfoForUpdate extends  AbstractModel {
+class DescribeEventsStateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 用户自定语音审核任务开关，可选值：
-<li>ON：开启自定义语音审核任务；</li>
-<li>OFF：关闭自定义语音审核任务。</li>
+         * 待进行拉取的事件通知数，为近似值，约5秒延迟。
+         * @type {number || null}
+         */
+        this.CountOfEventsToPull = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Switch = null;
-
-        /**
-         * 用户自定义语音过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回。如果要使用标签过滤功能，添加自定义语音关键词素材时需要添加对应标签。
-标签个数最多 10 个，每个标签长度最多 16 个字符。
-         * @type {Array.<string> || null}
-         */
-        this.LabelSet = null;
-
-        /**
-         * 判定涉嫌违规的分数阈值，当智能审核达到该分数以上，认为涉嫌违规。取值范围：0~100。
-         * @type {number || null}
-         */
-        this.BlockConfidence = null;
-
-        /**
-         * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核。取值范围：0~100。
-         * @type {number || null}
-         */
-        this.ReviewConfidence = null;
+        this.RequestId = null;
 
     }
 
@@ -11404,10 +11463,8 @@ class UserDefineAsrTextReviewTemplateInfoForUpdate extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-        this.LabelSet = 'LabelSet' in params ? params.LabelSet : null;
-        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
-        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+        this.CountOfEventsToPull = 'CountOfEventsToPull' in params ? params.CountOfEventsToPull : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11719,6 +11776,34 @@ class TerrorismConfigureInfoForUpdate extends  AbstractModel {
             obj.deserialize(params.OcrReviewInfo)
             this.OcrReviewInfo = obj;
         }
+
+    }
+}
+
+/**
+ * DescribeEventsState请求参数结构体
+ * @class
+ */
+class DescribeEventsStateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 点播 [子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -18543,85 +18628,20 @@ class PoliticalConfigureInfo extends  AbstractModel {
 }
 
 /**
- * ModifyAnimatedGraphicsTemplate请求参数结构体
+ * 智能精彩片段任务控制参数
  * @class
  */
-class ModifyAnimatedGraphicsTemplateRequest extends  AbstractModel {
+class HighlightsConfigureInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 转动图模板唯一标识。
-         * @type {number || null}
-         */
-        this.Definition = null;
-
-        /**
-         * 转动图模板名称，长度限制：64 个字符。
+         * 智能精彩片段任务开关，可选值：
+<li>ON：开启智能精彩片段任务；</li>
+<li>OFF：关闭智能精彩片段任务。</li>
          * @type {string || null}
          */
-        this.Name = null;
-
-        /**
-         * 动图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
-<li>当 Width、Height 均为 0，则分辨率同源；</li>
-<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
-<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
-<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
-默认值：0。
-         * @type {number || null}
-         */
-        this.Width = null;
-
-        /**
-         * 动图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
-<li>当 Width、Height 均为 0，则分辨率同源；</li>
-<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
-<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
-<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
-默认值：0。
-         * @type {number || null}
-         */
-        this.Height = null;
-
-        /**
-         * 分辨率自适应，可选值：
-<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
-<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
-默认值：open。
-         * @type {string || null}
-         */
-        this.ResolutionAdaptive = null;
-
-        /**
-         * 动图格式，取值为 gif 和 webp。
-         * @type {string || null}
-         */
-        this.Format = null;
-
-        /**
-         * 帧率，取值范围：[1, 30]，单位：Hz。
-         * @type {number || null}
-         */
-        this.Fps = null;
-
-        /**
-         * 图片质量，取值范围：[1, 100]，默认值为 75。
-         * @type {number || null}
-         */
-        this.Quality = null;
-
-        /**
-         * 模板描述信息，长度限制：256 个字符。
-         * @type {string || null}
-         */
-        this.Comment = null;
-
-        /**
-         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
-         * @type {number || null}
-         */
-        this.SubAppId = null;
+        this.Switch = null;
 
     }
 
@@ -18632,16 +18652,7 @@ class ModifyAnimatedGraphicsTemplateRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Width = 'Width' in params ? params.Width : null;
-        this.Height = 'Height' in params ? params.Height : null;
-        this.ResolutionAdaptive = 'ResolutionAdaptive' in params ? params.ResolutionAdaptive : null;
-        this.Format = 'Format' in params ? params.Format : null;
-        this.Fps = 'Fps' in params ? params.Fps : null;
-        this.Quality = 'Quality' in params ? params.Quality : null;
-        this.Comment = 'Comment' in params ? params.Comment : null;
-        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
+        this.Switch = 'Switch' in params ? params.Switch : null;
 
     }
 }
@@ -23091,6 +23102,58 @@ class DescribeTranscodeTemplatesRequest extends  AbstractModel {
 }
 
 /**
+ * 用户自定义语音审核任务控制参数
+ * @class
+ */
+class UserDefineAsrTextReviewTemplateInfoForUpdate extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用户自定语音审核任务开关，可选值：
+<li>ON：开启自定义语音审核任务；</li>
+<li>OFF：关闭自定义语音审核任务。</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 用户自定义语音过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回。如果要使用标签过滤功能，添加自定义语音关键词素材时需要添加对应标签。
+标签个数最多 10 个，每个标签长度最多 16 个字符。
+         * @type {Array.<string> || null}
+         */
+        this.LabelSet = null;
+
+        /**
+         * 判定涉嫌违规的分数阈值，当智能审核达到该分数以上，认为涉嫌违规。取值范围：0~100。
+         * @type {number || null}
+         */
+        this.BlockConfidence = null;
+
+        /**
+         * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核。取值范围：0~100。
+         * @type {number || null}
+         */
+        this.ReviewConfidence = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.LabelSet = 'LabelSet' in params ? params.LabelSet : null;
+        this.BlockConfidence = 'BlockConfidence' in params ? params.BlockConfidence : null;
+        this.ReviewConfidence = 'ReviewConfidence' in params ? params.ReviewConfidence : null;
+
+    }
+}
+
+/**
  * 鉴政任务控制参数。
  * @class
  */
@@ -27337,7 +27400,7 @@ module.exports = {
     TranscodeTask2017: TranscodeTask2017,
     CreatePersonSampleResponse: CreatePersonSampleResponse,
     CreateContentReviewTemplateResponse: CreateContentReviewTemplateResponse,
-    HighlightsConfigureInfo: HighlightsConfigureInfo,
+    ModifyAnimatedGraphicsTemplateRequest: ModifyAnimatedGraphicsTemplateRequest,
     DescribeProcedureTemplatesRequest: DescribeProcedureTemplatesRequest,
     ProhibitedConfigureInfoForUpdate: ProhibitedConfigureInfoForUpdate,
     TagConfigureInfoForUpdate: TagConfigureInfoForUpdate,
@@ -27398,12 +27461,13 @@ module.exports = {
     TEHDConfig: TEHDConfig,
     AnimatedGraphicsTemplate: AnimatedGraphicsTemplate,
     TerrorismOcrReviewTemplateInfoForUpdate: TerrorismOcrReviewTemplateInfoForUpdate,
-    UserDefineAsrTextReviewTemplateInfoForUpdate: UserDefineAsrTextReviewTemplateInfoForUpdate,
+    DescribeEventsStateResponse: DescribeEventsStateResponse,
     AiRecognitionTaskHeadTailResultOutput: AiRecognitionTaskHeadTailResultOutput,
     ModifyImageSpriteTemplateResponse: ModifyImageSpriteTemplateResponse,
     MediaProcessTaskCoverBySnapshotResult: MediaProcessTaskCoverBySnapshotResult,
     CreateWatermarkTemplateRequest: CreateWatermarkTemplateRequest,
     TerrorismConfigureInfoForUpdate: TerrorismConfigureInfoForUpdate,
+    DescribeEventsStateRequest: DescribeEventsStateRequest,
     WechatMiniProgramPublishTask: WechatMiniProgramPublishTask,
     ComposeMediaTask: ComposeMediaTask,
     HeadTailConfigureInfoForUpdate: HeadTailConfigureInfoForUpdate,
@@ -27524,7 +27588,7 @@ module.exports = {
     ModifyAIRecognitionTemplateResponse: ModifyAIRecognitionTemplateResponse,
     PoliticalImgReviewTemplateInfo: PoliticalImgReviewTemplateInfo,
     PoliticalConfigureInfo: PoliticalConfigureInfo,
-    ModifyAnimatedGraphicsTemplateRequest: ModifyAnimatedGraphicsTemplateRequest,
+    HighlightsConfigureInfo: HighlightsConfigureInfo,
     AiRecognitionTaskOcrWordsSegmentItem: AiRecognitionTaskOcrWordsSegmentItem,
     MediaProcessTaskResult: MediaProcessTaskResult,
     DeleteWordSamplesResponse: DeleteWordSamplesResponse,
@@ -27599,6 +27663,7 @@ module.exports = {
     DrmStreamingsInfoForUpdate: DrmStreamingsInfoForUpdate,
     DeleteClassRequest: DeleteClassRequest,
     DescribeTranscodeTemplatesRequest: DescribeTranscodeTemplatesRequest,
+    UserDefineAsrTextReviewTemplateInfoForUpdate: UserDefineAsrTextReviewTemplateInfoForUpdate,
     PoliticalConfigureInfoForUpdate: PoliticalConfigureInfoForUpdate,
     DescribeWatermarkTemplatesResponse: DescribeWatermarkTemplatesResponse,
     WeChatMiniProgramPublishResponse: WeChatMiniProgramPublishResponse,

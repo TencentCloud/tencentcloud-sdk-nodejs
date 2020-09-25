@@ -4319,6 +4319,12 @@ class ModifyGroupOffsetsRequest extends  AbstractModel {
          */
         this.Offset = null;
 
+        /**
+         * 需要重新设置的partition的列表，如果没有指定Topics参数。则重置全部topics的对应的Partition列表里的partition。指定Topics时则重置指定的topic列表的对应的Partitions列表的partition。
+         * @type {Array.<number> || null}
+         */
+        this.Partitions = null;
+
     }
 
     /**
@@ -4335,6 +4341,7 @@ class ModifyGroupOffsetsRequest extends  AbstractModel {
         this.Shift = 'Shift' in params ? params.Shift : null;
         this.ShiftTimestamp = 'ShiftTimestamp' in params ? params.ShiftTimestamp : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Partitions = 'Partitions' in params ? params.Partitions : null;
 
     }
 }

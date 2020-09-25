@@ -140,84 +140,6 @@ class CheckDomainResponse extends  AbstractModel {
 }
 
 /**
- * DescribeDomainPriceList返回参数结构体
- * @class
- */
-class DescribeDomainPriceListResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 域名价格列表
-         * @type {Array.<PriceInfo> || null}
-         */
-        this.PriceList = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.PriceList) {
-            this.PriceList = new Array();
-            for (let z in params.PriceList) {
-                let obj = new PriceInfo();
-                obj.deserialize(params.PriceList[z]);
-                this.PriceList.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * CheckDomain请求参数结构体
- * @class
- */
-class CheckDomainRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 所查询域名名称
-         * @type {string || null}
-         */
-        this.DomainName = null;
-
-        /**
-         * 年限
-         * @type {string || null}
-         */
-        this.Period = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DomainName = 'DomainName' in params ? params.DomainName : null;
-        this.Period = 'Period' in params ? params.Period : null;
-
-    }
-}
-
-/**
  * 域名价格信息
  * @class
  */
@@ -315,11 +237,296 @@ class DescribeDomainPriceListRequest extends  AbstractModel {
     }
 }
 
+/**
+ * DescribeDomainBaseInfo返回参数结构体
+ * @class
+ */
+class DescribeDomainBaseInfoResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名信息
+         * @type {DomainBaseInfo || null}
+         */
+        this.DomainInfo = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DomainInfo) {
+            let obj = new DomainBaseInfo();
+            obj.deserialize(params.DomainInfo)
+            this.DomainInfo = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDomainBaseInfo请求参数结构体
+ * @class
+ */
+class DescribeDomainBaseInfoRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+
+    }
+}
+
+/**
+ * 获取域名基础信息
+ * @class
+ */
+class DomainBaseInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名资源ID。
+         * @type {string || null}
+         */
+        this.DomainId = null;
+
+        /**
+         * 域名名称。
+         * @type {string || null}
+         */
+        this.DomainName = null;
+
+        /**
+         * 域名实名认证状态。
+NotUpload：未实名认证
+InAudit：实名审核中
+Approved：实名审核通过
+Reject：实名审核失败
+         * @type {string || null}
+         */
+        this.RealNameAuditStatus = null;
+
+        /**
+         * 域名实名认证不通过原因。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RealNameAuditUnpassReason = null;
+
+        /**
+         * 域名命名审核状态。
+NotAudit：命名审核未上传
+Pending：命名审核待上传
+Auditing：域名命名审核中
+Approved：域名命名审核通过
+Rejected：域名命名审核拒绝
+         * @type {string || null}
+         */
+        this.DomainNameAuditStatus = null;
+
+        /**
+         * 域名命名审核不通过原因。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DomainNameAuditUnpassReason = null;
+
+        /**
+         * 注册时间。
+         * @type {string || null}
+         */
+        this.CreationDate = null;
+
+        /**
+         * 到期时间
+         * @type {string || null}
+         */
+        this.ExpirationDate = null;
+
+        /**
+         * 域名状态。
+ok：正常
+serverHold：注册局暂停解析 
+clientHold：注册商暂停解析
+pendingTransfer：转移中
+renewingPeriod：续费期
+redemptionPeriod：偿还期
+pendingDelete：删除期
+serverTransferProhibited：注册局禁止转移
+serverUpdateProhibited：注册局禁止更新
+serverDeleteProhibited：注册局禁止删除
+clientTransferProhibited：注册商禁止转移
+clientUpdateProhibited：注册商禁止更新
+clientDeleteProhibited：注册商禁止删除
+         * @type {Array.<string> || null}
+         */
+        this.DomainStatus = null;
+
+        /**
+         * 域名购买状态。
+ok：正常
+RegisterPending：待注册
+RegisterDoing：注册中
+RegisterFailed：注册失败
+AboutToExpire: 即将过期
+RenewPending：已进入续费期，需要进行续费
+RenewDoing：续费中
+RedemptionPending：已进入赎回期，需要进行续费
+RedemptionDoing：赎回中
+TransferPending：待转入中
+TransferTransing：转入中
+TransferFailed：转入失败
+         * @type {string || null}
+         */
+        this.BuyStatus = null;
+
+        /**
+         * 注册类型
+epp （腾讯云自有域名）
+xinnet (新网域名)
+         * @type {string || null}
+         */
+        this.RegistrarType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.RealNameAuditStatus = 'RealNameAuditStatus' in params ? params.RealNameAuditStatus : null;
+        this.RealNameAuditUnpassReason = 'RealNameAuditUnpassReason' in params ? params.RealNameAuditUnpassReason : null;
+        this.DomainNameAuditStatus = 'DomainNameAuditStatus' in params ? params.DomainNameAuditStatus : null;
+        this.DomainNameAuditUnpassReason = 'DomainNameAuditUnpassReason' in params ? params.DomainNameAuditUnpassReason : null;
+        this.CreationDate = 'CreationDate' in params ? params.CreationDate : null;
+        this.ExpirationDate = 'ExpirationDate' in params ? params.ExpirationDate : null;
+        this.DomainStatus = 'DomainStatus' in params ? params.DomainStatus : null;
+        this.BuyStatus = 'BuyStatus' in params ? params.BuyStatus : null;
+        this.RegistrarType = 'RegistrarType' in params ? params.RegistrarType : null;
+
+    }
+}
+
+/**
+ * DescribeDomainPriceList返回参数结构体
+ * @class
+ */
+class DescribeDomainPriceListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名价格列表
+         * @type {Array.<PriceInfo> || null}
+         */
+        this.PriceList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.PriceList) {
+            this.PriceList = new Array();
+            for (let z in params.PriceList) {
+                let obj = new PriceInfo();
+                obj.deserialize(params.PriceList[z]);
+                this.PriceList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CheckDomain请求参数结构体
+ * @class
+ */
+class CheckDomainRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 所查询域名名称
+         * @type {string || null}
+         */
+        this.DomainName = null;
+
+        /**
+         * 年限
+         * @type {string || null}
+         */
+        this.Period = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.Period = 'Period' in params ? params.Period : null;
+
+    }
+}
+
 module.exports = {
     CheckDomainResponse: CheckDomainResponse,
-    DescribeDomainPriceListResponse: DescribeDomainPriceListResponse,
-    CheckDomainRequest: CheckDomainRequest,
     PriceInfo: PriceInfo,
     DescribeDomainPriceListRequest: DescribeDomainPriceListRequest,
+    DescribeDomainBaseInfoResponse: DescribeDomainBaseInfoResponse,
+    DescribeDomainBaseInfoRequest: DescribeDomainBaseInfoRequest,
+    DomainBaseInfo: DomainBaseInfo,
+    DescribeDomainPriceListResponse: DescribeDomainPriceListResponse,
+    CheckDomainRequest: CheckDomainRequest,
 
 }

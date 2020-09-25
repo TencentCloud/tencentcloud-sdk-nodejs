@@ -13549,6 +13549,7 @@ class AllocateAddressesRequest extends  AbstractModel {
 <ul style="margin:0"><li>已开通带宽上移白名单的用户，可选值：<ul><li>BANDWIDTH_PACKAGE：[共享带宽包](https://cloud.tencent.com/document/product/684/15255)付费（需额外开通共享带宽包白名单）</li>
 <li>BANDWIDTH_POSTPAID_BY_HOUR：带宽按小时后付费</li>
 <li>TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费</li></ul>默认值：TRAFFIC_POSTPAID_BY_HOUR。</li>
+<li>BANDWIDTH_PREPAID_BY_MONTH：包月按带宽预付费</li></ul>默认值：BANDWIDTH_PREPAID_BY_MONTH。</li>
 <li>未开通带宽上移白名单的用户，EIP计费方式与其绑定的实例的计费方式一致，无需传递此参数。</li></ul>
          * @type {string || null}
          */
@@ -13558,11 +13559,18 @@ class AllocateAddressesRequest extends  AbstractModel {
          * EIP出带宽上限，单位：Mbps。
 <ul style="margin:0"><li>已开通带宽上移白名单的用户，可选值范围取决于EIP计费方式：<ul><li>BANDWIDTH_PACKAGE：1 Mbps 至 1000 Mbps</li>
 <li>BANDWIDTH_POSTPAID_BY_HOUR：1 Mbps 至 100 Mbps</li>
+<li>BANDWIDTH_PREPAID_BY_MONTH：1 Mbps 至 200 Mbps</li>
 <li>TRAFFIC_POSTPAID_BY_HOUR：1 Mbps 至 100 Mbps</li></ul>默认值：1 Mbps。</li>
 <li>未开通带宽上移白名单的用户，EIP出带宽上限取决于与其绑定的实例的公网出带宽上限，无需传递此参数。</li></ul>
          * @type {number || null}
          */
         this.InternetMaxBandwidthOut = null;
+
+        /**
+         * 包月按带宽预付费EIP的计费参数。EIP为包月按带宽预付费时，该参数必传，其余场景不需传递
+         * @type {AddressChargePrepaid || null}
+         */
+        this.AddressChargePrepaid = null;
 
         /**
          * EIP类型。默认值：EIP。
@@ -13612,6 +13620,12 @@ AnycastEIP是否用于绑定负载均衡。
         this.InternetServiceProvider = 'InternetServiceProvider' in params ? params.InternetServiceProvider : null;
         this.InternetChargeType = 'InternetChargeType' in params ? params.InternetChargeType : null;
         this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
+
+        if (params.AddressChargePrepaid) {
+            let obj = new AddressChargePrepaid();
+            obj.deserialize(params.AddressChargePrepaid)
+            this.AddressChargePrepaid = obj;
+        }
         this.AddressType = 'AddressType' in params ? params.AddressType : null;
         this.AnycastZone = 'AnycastZone' in params ? params.AnycastZone : null;
         this.ApplicableForCLB = 'ApplicableForCLB' in params ? params.ApplicableForCLB : null;
@@ -14921,16 +14935,16 @@ class AddressChargePrepaid extends  AbstractModel {
         super();
 
         /**
-         * 购买实例的时长
+         * 购买实例的时长，单位是月。可支持时长：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36
          * @type {number || null}
          */
         this.Period = null;
 
         /**
-         * 自动续费标志
-         * @type {string || null}
+         * 自动续费标志。0表示手动续费，1表示自动续费，2表示到期不续费。默认缺省为0即手动续费
+         * @type {number || null}
          */
-        this.RenewFlag = null;
+        this.AutoRenewFlag = null;
 
     }
 
@@ -14942,7 +14956,7 @@ class AddressChargePrepaid extends  AbstractModel {
             return;
         }
         this.Period = 'Period' in params ? params.Period : null;
-        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+        this.AutoRenewFlag = 'AutoRenewFlag' in params ? params.AutoRenewFlag : null;
 
     }
 }

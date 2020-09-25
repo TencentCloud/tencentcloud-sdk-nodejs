@@ -17,10 +17,13 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const CheckDomainResponse = models.CheckDomainResponse;
-const DescribeDomainPriceListResponse = models.DescribeDomainPriceListResponse;
-const CheckDomainRequest = models.CheckDomainRequest;
 const PriceInfo = models.PriceInfo;
 const DescribeDomainPriceListRequest = models.DescribeDomainPriceListRequest;
+const DescribeDomainBaseInfoResponse = models.DescribeDomainBaseInfoResponse;
+const DescribeDomainBaseInfoRequest = models.DescribeDomainBaseInfoRequest;
+const DomainBaseInfo = models.DomainBaseInfo;
+const DescribeDomainPriceListResponse = models.DescribeDomainPriceListResponse;
+const CheckDomainRequest = models.CheckDomainRequest;
 
 
 /**
@@ -33,6 +36,20 @@ class DomainClient extends AbstractClient {
         super("domain.tencentcloudapi.com", "2018-08-08", credential, region, profile);
     }
     
+    /**
+     * 本接口 (  DescribeDomainBaseInfo) 获取域名基础信息。
+
+默认接口请求频率限制：20次/秒。
+
+     * @param {DescribeDomainBaseInfoRequest} req
+     * @param {function(string, DescribeDomainBaseInfoResponse):void} cb
+     * @public
+     */
+    DescribeDomainBaseInfo(req, cb) {
+        let resp = new DescribeDomainBaseInfoResponse();
+        this.request("DescribeDomainBaseInfo", req, resp, cb);
+    }
+
     /**
      * 按照域名后缀获取对应的价格列表
      * @param {DescribeDomainPriceListRequest} req

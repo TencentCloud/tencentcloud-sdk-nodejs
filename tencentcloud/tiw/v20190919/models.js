@@ -787,7 +787,7 @@ class DescribeVideoGenerationTaskResponse extends  AbstractModel {
         this.TaskId = null;
 
         /**
-         * 录制视频生成进度（0-100，100表示视频生成完成 ）
+         * 已废弃
          * @type {number || null}
          */
         this.Progress = null;
@@ -808,10 +808,16 @@ class DescribeVideoGenerationTaskResponse extends  AbstractModel {
         this.TotalTime = null;
 
         /**
-         * 录制视频生成列表
+         * 已废弃，请使用`VideoInfoList`参数
          * @type {VideoInfo || null}
          */
         this.VideoInfos = null;
+
+        /**
+         * 录制视频生成视频列表
+         * @type {Array.<VideoInfo> || null}
+         */
+        this.VideoInfoList = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -839,6 +845,15 @@ class DescribeVideoGenerationTaskResponse extends  AbstractModel {
             let obj = new VideoInfo();
             obj.deserialize(params.VideoInfos)
             this.VideoInfos = obj;
+        }
+
+        if (params.VideoInfoList) {
+            this.VideoInfoList = new Array();
+            for (let z in params.VideoInfoList) {
+                let obj = new VideoInfo();
+                obj.deserialize(params.VideoInfoList[z]);
+                this.VideoInfoList.push(obj);
+            }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 

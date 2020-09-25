@@ -348,6 +348,8 @@ class OcrClient extends AbstractClient {
 
     /**
      * 本接口支持条形码和二维码的识别（包括 DataMatrix 和 PDF417）。
+
+本接口目前处于公测阶段，2020年10月7日公测结束后，接口价格会进行相应的变更，请留意站内信通知。
      * @param {QrcodeOCRRequest} req
      * @param {function(string, QrcodeOCRResponse):void} cb
      * @public
@@ -840,6 +842,8 @@ class OcrClient extends AbstractClient {
 
     /**
      * 本接口通过检测图片中的文字信息特征，快速判断图片中有无文字并返回判断结果，帮助用户过滤无文字的图片。
+
+本接口目前处于公测阶段，2020年10月7日公测结束后，接口价格会进行相应的变更，请留意站内信通知。
      * @param {TextDetectRequest} req
      * @param {function(string, TextDetectResponse):void} cb
      * @public

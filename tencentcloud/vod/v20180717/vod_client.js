@@ -166,7 +166,7 @@ const AiRecognitionTaskHeadTailResult = models.AiRecognitionTaskHeadTailResult;
 const TranscodeTask2017 = models.TranscodeTask2017;
 const CreatePersonSampleResponse = models.CreatePersonSampleResponse;
 const CreateContentReviewTemplateResponse = models.CreateContentReviewTemplateResponse;
-const HighlightsConfigureInfo = models.HighlightsConfigureInfo;
+const ModifyAnimatedGraphicsTemplateRequest = models.ModifyAnimatedGraphicsTemplateRequest;
 const DescribeProcedureTemplatesRequest = models.DescribeProcedureTemplatesRequest;
 const ProhibitedConfigureInfoForUpdate = models.ProhibitedConfigureInfoForUpdate;
 const TagConfigureInfoForUpdate = models.TagConfigureInfoForUpdate;
@@ -227,12 +227,13 @@ const DescribeContentReviewTemplatesResponse = models.DescribeContentReviewTempl
 const TEHDConfig = models.TEHDConfig;
 const AnimatedGraphicsTemplate = models.AnimatedGraphicsTemplate;
 const TerrorismOcrReviewTemplateInfoForUpdate = models.TerrorismOcrReviewTemplateInfoForUpdate;
-const UserDefineAsrTextReviewTemplateInfoForUpdate = models.UserDefineAsrTextReviewTemplateInfoForUpdate;
+const DescribeEventsStateResponse = models.DescribeEventsStateResponse;
 const AiRecognitionTaskHeadTailResultOutput = models.AiRecognitionTaskHeadTailResultOutput;
 const ModifyImageSpriteTemplateResponse = models.ModifyImageSpriteTemplateResponse;
 const MediaProcessTaskCoverBySnapshotResult = models.MediaProcessTaskCoverBySnapshotResult;
 const CreateWatermarkTemplateRequest = models.CreateWatermarkTemplateRequest;
 const TerrorismConfigureInfoForUpdate = models.TerrorismConfigureInfoForUpdate;
+const DescribeEventsStateRequest = models.DescribeEventsStateRequest;
 const WechatMiniProgramPublishTask = models.WechatMiniProgramPublishTask;
 const ComposeMediaTask = models.ComposeMediaTask;
 const HeadTailConfigureInfoForUpdate = models.HeadTailConfigureInfoForUpdate;
@@ -353,7 +354,7 @@ const AiRecognitionTaskAsrFullTextResult = models.AiRecognitionTaskAsrFullTextRe
 const ModifyAIRecognitionTemplateResponse = models.ModifyAIRecognitionTemplateResponse;
 const PoliticalImgReviewTemplateInfo = models.PoliticalImgReviewTemplateInfo;
 const PoliticalConfigureInfo = models.PoliticalConfigureInfo;
-const ModifyAnimatedGraphicsTemplateRequest = models.ModifyAnimatedGraphicsTemplateRequest;
+const HighlightsConfigureInfo = models.HighlightsConfigureInfo;
 const AiRecognitionTaskOcrWordsSegmentItem = models.AiRecognitionTaskOcrWordsSegmentItem;
 const MediaProcessTaskResult = models.MediaProcessTaskResult;
 const DeleteWordSamplesResponse = models.DeleteWordSamplesResponse;
@@ -428,6 +429,7 @@ const TerrorismImgReviewTemplateInfo = models.TerrorismImgReviewTemplateInfo;
 const DrmStreamingsInfoForUpdate = models.DrmStreamingsInfoForUpdate;
 const DeleteClassRequest = models.DeleteClassRequest;
 const DescribeTranscodeTemplatesRequest = models.DescribeTranscodeTemplatesRequest;
+const UserDefineAsrTextReviewTemplateInfoForUpdate = models.UserDefineAsrTextReviewTemplateInfoForUpdate;
 const PoliticalConfigureInfoForUpdate = models.PoliticalConfigureInfoForUpdate;
 const DescribeWatermarkTemplatesResponse = models.DescribeWatermarkTemplatesResponse;
 const WeChatMiniProgramPublishResponse = models.WeChatMiniProgramPublishResponse;
@@ -1121,6 +1123,18 @@ class VodClient extends AbstractClient {
     CreateAIAnalysisTemplate(req, cb) {
         let resp = new CreateAIAnalysisTemplateResponse();
         this.request("CreateAIAnalysisTemplate", req, resp, cb);
+    }
+
+    /**
+     * * 该接口用于业务服务器获取 [可靠回调](https://cloud.tencent.com/document/product/266/33779#.E5.8F.AF.E9.9D.A0.E5.9B.9E.E8.B0.83) 事件通知的状态。
+
+     * @param {DescribeEventsStateRequest} req
+     * @param {function(string, DescribeEventsStateResponse):void} cb
+     * @public
+     */
+    DescribeEventsState(req, cb) {
+        let resp = new DescribeEventsStateResponse();
+        this.request("DescribeEventsState", req, resp, cb);
     }
 
     /**
