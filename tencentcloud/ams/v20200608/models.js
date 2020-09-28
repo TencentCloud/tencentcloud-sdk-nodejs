@@ -441,6 +441,34 @@ class TaskResult extends  AbstractModel {
 }
 
 /**
+ * CancelTask请求参数结构体
+ * @class
+ */
+class CancelTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
  * DescribeTaskDetail返回参数结构体
  * @class
  */
@@ -1131,6 +1159,34 @@ class FileOutput extends  AbstractModel {
 }
 
 /**
+ * CancelTask返回参数结构体
+ * @class
+ */
+class CancelTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 音频ASR文本审核结果
  * @class
  */
@@ -1804,6 +1860,7 @@ module.exports = {
     CreateBizConfigRequest: CreateBizConfigRequest,
     DescribeBizConfigRequest: DescribeBizConfigRequest,
     TaskResult: TaskResult,
+    CancelTaskRequest: CancelTaskRequest,
     DescribeTaskDetailResponse: DescribeTaskDetailResponse,
     CreateAudioModerationTaskRequest: CreateAudioModerationTaskRequest,
     CreateBizConfigResponse: CreateBizConfigResponse,
@@ -1814,6 +1871,7 @@ module.exports = {
     InputInfo: InputInfo,
     AudioResultDetailLanguageResult: AudioResultDetailLanguageResult,
     FileOutput: FileOutput,
+    CancelTaskResponse: CancelTaskResponse,
     AudioResultDetailTextResult: AudioResultDetailTextResult,
     AudioResult: AudioResult,
     AudioResultDetailMoanResult: AudioResultDetailMoanResult,

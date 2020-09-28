@@ -720,10 +720,16 @@ class ModifySnapshotAttributeRequest extends  AbstractModel {
         this.SnapshotName = null;
 
         /**
-         * 快照的保留时间，FALSE表示非永久保留，TRUE表示永久保留。仅支持将非永久快照修改为永久快照。
+         * 快照的保留方式，FALSE表示非永久保留，TRUE表示永久保留。
          * @type {boolean || null}
          */
         this.IsPermanent = null;
+
+        /**
+         * 快照的到期时间；设置好快照将会被同时设置为非永久保留方式；超过到期时间后快照将会被自动删除。
+         * @type {string || null}
+         */
+        this.Deadline = null;
 
     }
 
@@ -737,6 +743,7 @@ class ModifySnapshotAttributeRequest extends  AbstractModel {
         this.SnapshotId = 'SnapshotId' in params ? params.SnapshotId : null;
         this.SnapshotName = 'SnapshotName' in params ? params.SnapshotName : null;
         this.IsPermanent = 'IsPermanent' in params ? params.IsPermanent : null;
+        this.Deadline = 'Deadline' in params ? params.Deadline : null;
 
     }
 }
@@ -3057,6 +3064,12 @@ class CreateSnapshotRequest extends  AbstractModel {
          */
         this.SnapshotName = null;
 
+        /**
+         * 快照的到期时间，到期后该快照将会自动删除
+         * @type {string || null}
+         */
+        this.Deadline = null;
+
     }
 
     /**
@@ -3068,6 +3081,7 @@ class CreateSnapshotRequest extends  AbstractModel {
         }
         this.DiskId = 'DiskId' in params ? params.DiskId : null;
         this.SnapshotName = 'SnapshotName' in params ? params.SnapshotName : null;
+        this.Deadline = 'Deadline' in params ? params.Deadline : null;
 
     }
 }

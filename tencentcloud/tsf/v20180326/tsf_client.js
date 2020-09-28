@@ -27,6 +27,7 @@ const DescribePublicConfigSummaryRequest = models.DescribePublicConfigSummaryReq
 const DescribeClusterInstancesResponse = models.DescribeClusterInstancesResponse;
 const DescribeMicroserviceRequest = models.DescribeMicroserviceRequest;
 const CosCredentials = models.CosCredentials;
+const HealthCheckSetting = models.HealthCheckSetting;
 const DescribeContainerGroupsRequest = models.DescribeContainerGroupsRequest;
 const ExpandGroupRequest = models.ExpandGroupRequest;
 const DeleteServerlessGroupRequest = models.DeleteServerlessGroupRequest;
@@ -55,7 +56,7 @@ const CreateContainGroupResponse = models.CreateContainGroupResponse;
 const DescribeContainerGroupDetailResponse = models.DescribeContainerGroupDetailResponse;
 const SimpleApplication = models.SimpleApplication;
 const DescribePublicConfigSummaryResponse = models.DescribePublicConfigSummaryResponse;
-const HealthCheckSetting = models.HealthCheckSetting;
+const DescribeLaneRulesRequest = models.DescribeLaneRulesRequest;
 const DescribeSimpleApplicationsResponse = models.DescribeSimpleApplicationsResponse;
 const DeleteRepositoryResponse = models.DeleteRepositoryResponse;
 const DescribePublicConfigReleaseLogsRequest = models.DescribePublicConfigReleaseLogsRequest;
@@ -137,6 +138,7 @@ const DescribeSimpleClustersRequest = models.DescribeSimpleClustersRequest;
 const StartContainerGroupRequest = models.StartContainerGroupRequest;
 const DeleteConfigRequest = models.DeleteConfigRequest;
 const DescribePublicConfigReleaseLogsResponse = models.DescribePublicConfigReleaseLogsResponse;
+const DeleteTaskRequest = models.DeleteTaskRequest;
 const HealthCheckSettings = models.HealthCheckSettings;
 const ServiceSetting = models.ServiceSetting;
 const ApiResponseDescr = models.ApiResponseDescr;
@@ -226,7 +228,7 @@ const DescribePublicConfigReleasesRequest = models.DescribePublicConfigReleasesR
 const SimpleGroup = models.SimpleGroup;
 const DeleteNamespaceRequest = models.DeleteNamespaceRequest;
 const PkgBind = models.PkgBind;
-const DescribeLaneRulesRequest = models.DescribeLaneRulesRequest;
+const DeleteTaskResponse = models.DeleteTaskResponse;
 const DeployGroupRequest = models.DeployGroupRequest;
 const LaneInfos = models.LaneInfos;
 const CreateServerlessGroupRequest = models.CreateServerlessGroupRequest;
@@ -857,6 +859,17 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     ExpandGroup(req, cb) {
         let resp = new ExpandGroupResponse();
         this.request("ExpandGroup", req, resp, cb);
+    }
+
+    /**
+     * 删除任务
+     * @param {DeleteTaskRequest} req
+     * @param {function(string, DeleteTaskResponse):void} cb
+     * @public
+     */
+    DeleteTask(req, cb) {
+        let resp = new DeleteTaskResponse();
+        this.request("DeleteTask", req, resp, cb);
     }
 
     /**

@@ -4939,6 +4939,15 @@ blacklist：黑名单，表示仅对 FileExtensions 中的类型进行鉴权
          */
         this.FilterType = null;
 
+        /**
+         * 时间戳进制设置
+dec：十进制
+hex：十六进制
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TimeFormat = null;
+
     }
 
     /**
@@ -4952,6 +4961,7 @@ blacklist：黑名单，表示仅对 FileExtensions 中的类型进行鉴权
         this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
         this.FileExtensions = 'FileExtensions' in params ? params.FileExtensions : null;
         this.FilterType = 'FilterType' in params ? params.FilterType : null;
+        this.TimeFormat = 'TimeFormat' in params ? params.TimeFormat : null;
 
     }
 }

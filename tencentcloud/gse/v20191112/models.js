@@ -211,7 +211,7 @@ class InboundPermission extends  AbstractModel {
         super();
 
         /**
-         * 起始端口号
+         * 起始端口号，最小值1025
          * @type {number || null}
          */
         this.FromPort = null;
@@ -229,7 +229,7 @@ class InboundPermission extends  AbstractModel {
         this.Protocol = null;
 
         /**
-         * 终止端口号
+         * 终止端口号，最大值60000
          * @type {number || null}
          */
         this.ToPort = null;

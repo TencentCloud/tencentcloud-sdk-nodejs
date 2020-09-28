@@ -667,7 +667,7 @@ class EncodeParams extends  AbstractModel {
         this.VideoBitrate = null;
 
         /**
-         * 混流-输出流帧率，音视频输出时必填。取值为[6,12,15,24,30,48,60]，不在上述帧率值内系统会自动调整。
+         * 混流-输出流帧率，音视频输出时必填。取值范围[1,60]。
          * @type {number || null}
          */
         this.VideoFramerate = null;

@@ -40,6 +40,7 @@ module.exports = {
     cpdp: require("./cpdp"),
     cr: require("./cr"),
     cvm: require("./cvm"),
+    cwp: require("./cwp"),
     cws: require("./cws"),
     cynosdb: require("./cynosdb"),
     dayu: require("./dayu"),

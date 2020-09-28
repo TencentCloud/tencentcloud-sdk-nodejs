@@ -440,6 +440,12 @@ class DeviceDiskInfo extends  AbstractModel {
          */
         this.Write = null;
 
+        /**
+         * 磁盘空间容量，每两个一组，第一个为已使用容量，第二个为磁盘总容量
+         * @type {Array.<number> || null}
+         */
+        this.CapacityRatio = null;
+
     }
 
     /**
@@ -453,6 +459,7 @@ class DeviceDiskInfo extends  AbstractModel {
         this.IoWaitTime = 'IoWaitTime' in params ? params.IoWaitTime : null;
         this.Read = 'Read' in params ? params.Read : null;
         this.Write = 'Write' in params ? params.Write : null;
+        this.CapacityRatio = 'CapacityRatio' in params ? params.CapacityRatio : null;
 
     }
 }

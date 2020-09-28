@@ -1920,6 +1920,12 @@ class DescribeDBInstancesRequest extends  AbstractModel {
          */
         this.TagKeys = null;
 
+        /**
+         * 实例类型过滤，1-独享实例，2-主实例，3-灾备实例，多个按逗号分隔
+         * @type {string || null}
+         */
+        this.FilterInstanceType = null;
+
     }
 
     /**
@@ -1945,6 +1951,7 @@ class DescribeDBInstancesRequest extends  AbstractModel {
         this.ExclusterType = 'ExclusterType' in params ? params.ExclusterType : null;
         this.ExclusterIds = 'ExclusterIds' in params ? params.ExclusterIds : null;
         this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
+        this.FilterInstanceType = 'FilterInstanceType' in params ? params.FilterInstanceType : null;
 
     }
 }
@@ -3308,6 +3315,27 @@ class DBInstance extends  AbstractModel {
          */
         this.DbVersion = null;
 
+        /**
+         * DCN标志，0-无，1-主实例，2-灾备实例
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DcnFlag = null;
+
+        /**
+         * DCN状态，0-无，1-创建中，2-同步中，3-已断开
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DcnStatus = null;
+
+        /**
+         * DCN灾备实例数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DcnDstNum = null;
+
     }
 
     /**
@@ -3363,6 +3391,9 @@ class DBInstance extends  AbstractModel {
         this.WanStatusIpv6 = 'WanStatusIpv6' in params ? params.WanStatusIpv6 : null;
         this.DbEngine = 'DbEngine' in params ? params.DbEngine : null;
         this.DbVersion = 'DbVersion' in params ? params.DbVersion : null;
+        this.DcnFlag = 'DcnFlag' in params ? params.DcnFlag : null;
+        this.DcnStatus = 'DcnStatus' in params ? params.DcnStatus : null;
+        this.DcnDstNum = 'DcnDstNum' in params ? params.DcnDstNum : null;
 
     }
 }

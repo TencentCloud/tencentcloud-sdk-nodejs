@@ -2225,6 +2225,27 @@ class DCDBInstanceInfo extends  AbstractModel {
          */
         this.WanStatusIpv6 = null;
 
+        /**
+         * DCN标志，0-无，1-主实例，2-灾备实例
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DcnFlag = null;
+
+        /**
+         * DCN状态，0-无，1-创建中，2-同步中，3-已断开
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DcnStatus = null;
+
+        /**
+         * DCN灾备实例数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DcnDstNum = null;
+
     }
 
     /**
@@ -2286,6 +2307,9 @@ class DCDBInstanceInfo extends  AbstractModel {
         this.WanVipv6 = 'WanVipv6' in params ? params.WanVipv6 : null;
         this.WanPortIpv6 = 'WanPortIpv6' in params ? params.WanPortIpv6 : null;
         this.WanStatusIpv6 = 'WanStatusIpv6' in params ? params.WanStatusIpv6 : null;
+        this.DcnFlag = 'DcnFlag' in params ? params.DcnFlag : null;
+        this.DcnStatus = 'DcnStatus' in params ? params.DcnStatus : null;
+        this.DcnDstNum = 'DcnDstNum' in params ? params.DcnDstNum : null;
 
     }
 }
@@ -3041,6 +3065,13 @@ class DescribeDCDBShardsResponse extends  AbstractModel {
         this.Shards = null;
 
         /**
+         * 灾备标志，0-无，1-主实例，2-灾备实例
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DcnFlag = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -3065,6 +3096,7 @@ class DescribeDCDBShardsResponse extends  AbstractModel {
                 this.Shards.push(obj);
             }
         }
+        this.DcnFlag = 'DcnFlag' in params ? params.DcnFlag : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -5032,6 +5064,12 @@ class DescribeDCDBInstancesRequest extends  AbstractModel {
          */
         this.TagKeys = null;
 
+        /**
+         * 实例类型过滤，1-独享实例，2-主实例，3-灾备实例，多个按逗号分隔
+         * @type {string || null}
+         */
+        this.FilterInstanceType = null;
+
     }
 
     /**
@@ -5056,6 +5094,7 @@ class DescribeDCDBInstancesRequest extends  AbstractModel {
         this.IsFilterExcluster = 'IsFilterExcluster' in params ? params.IsFilterExcluster : null;
         this.ExclusterIds = 'ExclusterIds' in params ? params.ExclusterIds : null;
         this.TagKeys = 'TagKeys' in params ? params.TagKeys : null;
+        this.FilterInstanceType = 'FilterInstanceType' in params ? params.FilterInstanceType : null;
 
     }
 }

@@ -12354,6 +12354,7 @@ class DescribeLiveDomainResponse extends  AbstractModel {
 
         /**
          * 域名信息。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {DomainInfo || null}
          */
         this.DomainInfo = null;

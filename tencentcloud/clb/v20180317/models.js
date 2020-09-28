@@ -5188,7 +5188,7 @@ class CreateListenerRequest extends  AbstractModel {
         this.SessionType = null;
 
         /**
-         * 是否开启长连接，此参数仅适用于HTTP/HTTPS监听器
+         * 是否开启长连接，此参数仅适用于HTTP/HTTPS监听器，0:关闭；1:开启， 默认关闭
          * @type {number || null}
          */
         this.KeepaliveEnable = null;

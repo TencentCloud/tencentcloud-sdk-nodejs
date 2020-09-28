@@ -24,6 +24,7 @@ const CreateAudioModerationTaskResponse = models.CreateAudioModerationTaskRespon
 const CreateBizConfigRequest = models.CreateBizConfigRequest;
 const DescribeBizConfigRequest = models.DescribeBizConfigRequest;
 const TaskResult = models.TaskResult;
+const CancelTaskRequest = models.CancelTaskRequest;
 const DescribeTaskDetailResponse = models.DescribeTaskDetailResponse;
 const CreateAudioModerationTaskRequest = models.CreateAudioModerationTaskRequest;
 const CreateBizConfigResponse = models.CreateBizConfigResponse;
@@ -34,6 +35,7 @@ const ImageResultsResultDetail = models.ImageResultsResultDetail;
 const InputInfo = models.InputInfo;
 const AudioResultDetailLanguageResult = models.AudioResultDetailLanguageResult;
 const FileOutput = models.FileOutput;
+const CancelTaskResponse = models.CancelTaskResponse;
 const AudioResultDetailTextResult = models.AudioResultDetailTextResult;
 const AudioResult = models.AudioResult;
 const AudioResultDetailMoanResult = models.AudioResultDetailMoanResult;
@@ -101,10 +103,21 @@ class AmsClient extends AbstractClient {
     }
 
     /**
+     * 查看任务详情
+     * @param {DescribeTaskDetailRequest} req
+     * @param {function(string, DescribeTaskDetailResponse):void} cb
+     * @public
+     */
+    DescribeTaskDetail(req, cb) {
+        let resp = new DescribeTaskDetailResponse();
+        this.request("DescribeTaskDetail", req, resp, cb);
+    }
+
+    /**
      * 创建业务配置，1个账号最多可以创建20个配置，可定义音频审核的场景，如色情、谩骂等，
 
 在创建业务配置之前，你需要以下步骤：
-1. 开通COS存储捅功能，新建存储桶，例如 cms_segments，用来存储 视频转换过程中生成对音频和图片。
+1. 开通COS存储桶功能，新建存储桶，例如 cms_segments，用来存储 视频转换过程中生成对音频和图片。
 2. 然后在COS控制台，授权天御内容安全主账号 对 cms_segments 存储桶对读写权限。具体授权操作，参考https://cloud.tencent.com/document/product/436/38648
 
      * @param {CreateBizConfigRequest} req
@@ -117,14 +130,14 @@ class AmsClient extends AbstractClient {
     }
 
     /**
-     * 查看任务详情
-     * @param {DescribeTaskDetailRequest} req
-     * @param {function(string, DescribeTaskDetailResponse):void} cb
+     * 取消任务
+     * @param {CancelTaskRequest} req
+     * @param {function(string, CancelTaskResponse):void} cb
      * @public
      */
-    DescribeTaskDetail(req, cb) {
-        let resp = new DescribeTaskDetailResponse();
-        this.request("DescribeTaskDetail", req, resp, cb);
+    CancelTask(req, cb) {
+        let resp = new CancelTaskResponse();
+        this.request("CancelTask", req, resp, cb);
     }
 
 

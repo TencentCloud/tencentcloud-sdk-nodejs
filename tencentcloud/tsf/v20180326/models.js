@@ -639,6 +639,107 @@ class CosCredentials extends  AbstractModel {
 }
 
 /**
+ * 健康检查配置信息，若不指定该参数，则默认不设置健康检查。
+ * @class
+ */
+class HealthCheckSetting extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 健康检查方法。HTTP：通过 HTTP 接口检查；CMD：通过执行命令检查；TCP：通过建立 TCP 连接检查。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ActionType = null;
+
+        /**
+         * 容器延时启动健康检查的时间。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.InitialDelaySeconds = null;
+
+        /**
+         * 每次健康检查响应的最大超时时间。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TimeoutSeconds = null;
+
+        /**
+         * 进行健康检查的时间间隔。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.PeriodSeconds = null;
+
+        /**
+         * 表示后端容器从失败到成功的连续健康检查成功次数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.SuccessThreshold = null;
+
+        /**
+         * 表示后端容器从成功到失败的连续健康检查成功次数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FailureThreshold = null;
+
+        /**
+         * HTTP 健康检查方法使用的检查协议。支持HTTP、HTTPS。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Scheme = null;
+
+        /**
+         * 健康检查端口，范围 1~65535 。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * HTTP 健康检查接口的请求路径。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Path = null;
+
+        /**
+         * 执行命令检查方式，执行的命令。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Command = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ActionType = 'ActionType' in params ? params.ActionType : null;
+        this.InitialDelaySeconds = 'InitialDelaySeconds' in params ? params.InitialDelaySeconds : null;
+        this.TimeoutSeconds = 'TimeoutSeconds' in params ? params.TimeoutSeconds : null;
+        this.PeriodSeconds = 'PeriodSeconds' in params ? params.PeriodSeconds : null;
+        this.SuccessThreshold = 'SuccessThreshold' in params ? params.SuccessThreshold : null;
+        this.FailureThreshold = 'FailureThreshold' in params ? params.FailureThreshold : null;
+        this.Scheme = 'Scheme' in params ? params.Scheme : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Path = 'Path' in params ? params.Path : null;
+        this.Command = 'Command' in params ? params.Command : null;
+
+    }
+}
+
+/**
  * DescribeContainerGroups请求参数结构体
  * @class
  */
@@ -2181,82 +2282,36 @@ class DescribePublicConfigSummaryResponse extends  AbstractModel {
 }
 
 /**
- * 健康检查配置信息，若不指定该参数，则默认不设置健康检查。
+ * DescribeLaneRules请求参数结构体
  * @class
  */
-class HealthCheckSetting extends  AbstractModel {
+class DescribeLaneRulesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 健康检查方法。HTTP：通过 HTTP 接口检查；CMD：通过执行命令检查；TCP：通过建立 TCP 连接检查。
-注意：此字段可能返回 null，表示取不到有效值。
+         * 每页展示的条数
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 翻页偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 搜索关键词
          * @type {string || null}
          */
-        this.ActionType = null;
+        this.SearchWord = null;
 
         /**
-         * 容器延时启动健康检查的时间。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.InitialDelaySeconds = null;
-
-        /**
-         * 每次健康检查响应的最大超时时间。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.TimeoutSeconds = null;
-
-        /**
-         * 进行健康检查的时间间隔。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.PeriodSeconds = null;
-
-        /**
-         * 表示后端容器从失败到成功的连续健康检查成功次数。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.SuccessThreshold = null;
-
-        /**
-         * 表示后端容器从成功到失败的连续健康检查成功次数。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.FailureThreshold = null;
-
-        /**
-         * HTTP 健康检查方法使用的检查协议。支持HTTP、HTTPS。
-注意：此字段可能返回 null，表示取不到有效值。
+         * 泳道规则ID（用于精确搜索）
          * @type {string || null}
          */
-        this.Scheme = null;
-
-        /**
-         * 健康检查端口，范围 1~65535 。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Port = null;
-
-        /**
-         * HTTP 健康检查接口的请求路径。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Path = null;
-
-        /**
-         * 执行命令检查方式，执行的命令。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<string> || null}
-         */
-        this.Command = null;
+        this.RuleId = null;
 
     }
 
@@ -2267,16 +2322,10 @@ class HealthCheckSetting extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ActionType = 'ActionType' in params ? params.ActionType : null;
-        this.InitialDelaySeconds = 'InitialDelaySeconds' in params ? params.InitialDelaySeconds : null;
-        this.TimeoutSeconds = 'TimeoutSeconds' in params ? params.TimeoutSeconds : null;
-        this.PeriodSeconds = 'PeriodSeconds' in params ? params.PeriodSeconds : null;
-        this.SuccessThreshold = 'SuccessThreshold' in params ? params.SuccessThreshold : null;
-        this.FailureThreshold = 'FailureThreshold' in params ? params.FailureThreshold : null;
-        this.Scheme = 'Scheme' in params ? params.Scheme : null;
-        this.Port = 'Port' in params ? params.Port : null;
-        this.Path = 'Path' in params ? params.Path : null;
-        this.Command = 'Command' in params ? params.Command : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
 
     }
 }
@@ -6903,6 +6952,34 @@ class DescribePublicConfigReleaseLogsResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteTask请求参数结构体
+ * @class
+ */
+class DeleteTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -11728,36 +11805,24 @@ class PkgBind extends  AbstractModel {
 }
 
 /**
- * DescribeLaneRules请求参数结构体
+ * DeleteTask返回参数结构体
  * @class
  */
-class DescribeLaneRulesRequest extends  AbstractModel {
+class DeleteTaskResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 每页展示的条数
-         * @type {number || null}
+         * 删除成功or失败
+         * @type {boolean || null}
          */
-        this.Limit = null;
+        this.Result = null;
 
         /**
-         * 翻页偏移量
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 搜索关键词
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.SearchWord = null;
-
-        /**
-         * 泳道规则ID（用于精确搜索）
-         * @type {string || null}
-         */
-        this.RuleId = null;
+        this.RequestId = null;
 
     }
 
@@ -11768,10 +11833,8 @@ class DescribeLaneRulesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
-        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -13802,6 +13865,7 @@ module.exports = {
     DescribeClusterInstancesResponse: DescribeClusterInstancesResponse,
     DescribeMicroserviceRequest: DescribeMicroserviceRequest,
     CosCredentials: CosCredentials,
+    HealthCheckSetting: HealthCheckSetting,
     DescribeContainerGroupsRequest: DescribeContainerGroupsRequest,
     ExpandGroupRequest: ExpandGroupRequest,
     DeleteServerlessGroupRequest: DeleteServerlessGroupRequest,
@@ -13830,7 +13894,7 @@ module.exports = {
     DescribeContainerGroupDetailResponse: DescribeContainerGroupDetailResponse,
     SimpleApplication: SimpleApplication,
     DescribePublicConfigSummaryResponse: DescribePublicConfigSummaryResponse,
-    HealthCheckSetting: HealthCheckSetting,
+    DescribeLaneRulesRequest: DescribeLaneRulesRequest,
     DescribeSimpleApplicationsResponse: DescribeSimpleApplicationsResponse,
     DeleteRepositoryResponse: DeleteRepositoryResponse,
     DescribePublicConfigReleaseLogsRequest: DescribePublicConfigReleaseLogsRequest,
@@ -13912,6 +13976,7 @@ module.exports = {
     StartContainerGroupRequest: StartContainerGroupRequest,
     DeleteConfigRequest: DeleteConfigRequest,
     DescribePublicConfigReleaseLogsResponse: DescribePublicConfigReleaseLogsResponse,
+    DeleteTaskRequest: DeleteTaskRequest,
     HealthCheckSettings: HealthCheckSettings,
     ServiceSetting: ServiceSetting,
     ApiResponseDescr: ApiResponseDescr,
@@ -14001,7 +14066,7 @@ module.exports = {
     SimpleGroup: SimpleGroup,
     DeleteNamespaceRequest: DeleteNamespaceRequest,
     PkgBind: PkgBind,
-    DescribeLaneRulesRequest: DescribeLaneRulesRequest,
+    DeleteTaskResponse: DeleteTaskResponse,
     DeployGroupRequest: DeployGroupRequest,
     LaneInfos: LaneInfos,
     CreateServerlessGroupRequest: CreateServerlessGroupRequest,

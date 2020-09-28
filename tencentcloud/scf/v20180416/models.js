@@ -768,7 +768,7 @@ class GetFunctionLogsRequest extends  AbstractModel {
         this.EndTime = null;
 
         /**
-         * 服务日志相关参数，第一页日志 Offset 为空字符串，后续分页按响应字段里的SearchContext填写
+         * 该字段已下线
          * @type {LogSearchContext || null}
          */
         this.SearchContext = null;
@@ -4891,7 +4891,7 @@ class GetFunctionLogsResponse extends  AbstractModel {
         this.Data = null;
 
         /**
-         * 日志服务分页参数
+         * 该字段已下线
          * @type {LogSearchContext || null}
          */
         this.SearchContext = null;
