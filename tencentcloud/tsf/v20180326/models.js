@@ -192,6 +192,69 @@ class DescribeMsApiListResponse extends  AbstractModel {
 }
 
 /**
+ * EnableTask请求参数结构体
+ * @class
+ */
+class EnableTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 启用任务
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * DisableTaskFlow返回参数结构体
+ * @class
+ */
+class DisableTaskFlowResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * true成功，false: 失败
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDownloadInfo请求参数结构体
  * @class
  */
@@ -528,6 +591,41 @@ class DescribeClusterInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * DisableTask返回参数结构体
+ * @class
+ */
+class DisableTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 操作成功 or 失败
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeMicroservice请求参数结构体
  * @class
  */
@@ -817,6 +915,69 @@ class DescribeContainerGroupsRequest extends  AbstractModel {
 }
 
 /**
+ * RedoTaskBatch返回参数结构体
+ * @class
+ */
+class RedoTaskBatchResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 批次ID
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * TerminateTaskFlowBatch请求参数结构体
+ * @class
+ */
+class TerminateTaskFlowBatchRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 工作流批次 ID
+         * @type {string || null}
+         */
+        this.FlowBatchId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowBatchId = 'FlowBatchId' in params ? params.FlowBatchId : null;
+
+    }
+}
+
+/**
  * ExpandGroup请求参数结构体
  * @class
  */
@@ -1008,6 +1169,50 @@ class DescribeSimpleClustersResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 任务规则
+ * @class
+ */
+class TaskRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 触发规则类型, Cron/Repeat
+         * @type {string || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * Cron类型规则，cron表达式。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Expression = null;
+
+        /**
+         * 时间间隔， 单位毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RepeatInterval = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.Expression = 'Expression' in params ? params.Expression : null;
+        this.RepeatInterval = 'RepeatInterval' in params ? params.RepeatInterval : null;
 
     }
 }
@@ -1942,6 +2147,42 @@ class DescribeConfigReleasesRequest extends  AbstractModel {
 }
 
 /**
+ * 分片参数
+ * @class
+ */
+class ShardArgument extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 分片参数 KEY，整形
+         * @type {number || null}
+         */
+        this.ShardKey = null;
+
+        /**
+         * 分片参数 VALUE
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ShardValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ShardKey = 'ShardKey' in params ? params.ShardKey : null;
+        this.ShardValue = 'ShardValue' in params ? params.ShardValue : null;
+
+    }
+}
+
+/**
  * DeleteLane返回参数结构体
  * @class
  */
@@ -1971,6 +2212,82 @@ class DeleteLaneResponse extends  AbstractModel {
             return;
         }
         this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StopTaskBatch返回参数结构体
+ * @class
+ */
+class StopTaskBatchResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 操作成功 or 失败
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeSimpleNamespaces返回参数结构体
+ * @class
+ */
+class DescribeSimpleNamespacesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 命名空间分页列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TsfPageNamespace || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new TsfPageNamespace();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2123,6 +2440,74 @@ class DescribeContainerGroupDetailResponse extends  AbstractModel {
 
         if (params.Result) {
             let obj = new ContainerGroupDetail();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DisableTask请求参数结构体
+ * @class
+ */
+class DisableTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * DescribePkgs返回参数结构体
+ * @class
+ */
+class DescribePkgsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合查询程序包信息列表
+         * @type {PkgList || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new PkgList();
             obj.deserialize(params.Result)
             this.Result = obj;
         }
@@ -2568,6 +2953,47 @@ false：操作失败。
             return;
         }
         this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeBasicResourceUsage返回参数结构体
+ * @class
+ */
+class DescribeBasicResourceUsageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * TSF基本资源信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {OverviewBasicResourceUsage || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new OverviewBasicResourceUsage();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3267,6 +3693,69 @@ class ModifyContainerReplicasRequest extends  AbstractModel {
 }
 
 /**
+ * TerminateTaskFlowBatch返回参数结构体
+ * @class
+ */
+class TerminateTaskFlowBatchResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否停止成功
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ExecuteTaskFlow请求参数结构体
+ * @class
+ */
+class ExecuteTaskFlowRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 工作流 ID
+         * @type {string || null}
+         */
+        this.FlowId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+
+    }
+}
+
+/**
  * ModifyLane请求参数结构体
  * @class
  */
@@ -3452,6 +3941,43 @@ class RemoveInstancesResponse extends  AbstractModel {
         /**
          * 集群移除机器是否成功
 注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * StopContainerGroup返回参数结构体
+ * @class
+ */
+class StopContainerGroupResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 停止操作是否成功。
+true：停止成功
+false：停止失败
          * @type {boolean || null}
          */
         this.Result = null;
@@ -3838,6 +4364,35 @@ class DescribeGroupsResponse extends  AbstractModel {
             this.Result = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 任务id
+ * @class
+ */
+class TaskId extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -4246,6 +4801,62 @@ class ApiDefinitionDescr extends  AbstractModel {
 }
 
 /**
+ * ExecuteTask请求参数结构体
+ * @class
+ */
+class ExecuteTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务 ID。
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * RedoTaskFlowBatch请求参数结构体
+ * @class
+ */
+class RedoTaskFlowBatchRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 工作流批次 ID
+         * @type {string || null}
+         */
+        this.FlowBatchId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowBatchId = 'FlowBatchId' in params ? params.FlowBatchId : null;
+
+    }
+}
+
+/**
  * 微服务实例的分页内容
  * @class
  */
@@ -4286,6 +4897,41 @@ class TsfPageMsInstance extends  AbstractModel {
                 this.Content.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * StopTaskBatch请求参数结构体
+ * @class
+ */
+class StopTaskBatchRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 批次ID
+         * @type {string || null}
+         */
+        this.BatchId = null;
+
+        /**
+         * 参数ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BatchId = 'BatchId' in params ? params.BatchId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -4715,6 +5361,76 @@ class DescribeSimpleGroupsResponse extends  AbstractModel {
 }
 
 /**
+ * StopTaskExecute请求参数结构体
+ * @class
+ */
+class StopTaskExecuteRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务执行ID
+         * @type {string || null}
+         */
+        this.ExecuteId = null;
+
+        /**
+         * 任务批次ID
+         * @type {string || null}
+         */
+        this.BatchId = null;
+
+        /**
+         * 任务ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ExecuteId = 'ExecuteId' in params ? params.ExecuteId : null;
+        this.BatchId = 'BatchId' in params ? params.BatchId : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * DescribeFlowLastBatchState请求参数结构体
+ * @class
+ */
+class DescribeFlowLastBatchStateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 工作流 ID
+         * @type {string || null}
+         */
+        this.FlowId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+
+    }
+}
+
+/**
  *  容器部署组详情
  * @class
  */
@@ -5068,6 +5784,51 @@ class DeletePublicConfigRequest extends  AbstractModel {
 }
 
 /**
+ * 任务最近一次执行状态
+ * @class
+ */
+class TaskLastExecuteStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 批次ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.BatchId = null;
+
+        /**
+         * 运行状态，RUNNING/SUCCESS/FAIL/HALF/TERMINATED
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * 批次历史ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.BatchLogId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BatchId = 'BatchId' in params ? params.BatchId : null;
+        this.State = 'State' in params ? params.State : null;
+        this.BatchLogId = 'BatchLogId' in params ? params.BatchLogId : null;
+
+    }
+}
+
+/**
  * DeleteNamespace返回参数结构体
  * @class
  */
@@ -5289,6 +6050,34 @@ class RemoveInstancesRequest extends  AbstractModel {
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.InstanceIdList = 'InstanceIdList' in params ? params.InstanceIdList : null;
+
+    }
+}
+
+/**
+ * DisableTaskFlow请求参数结构体
+ * @class
+ */
+class DisableTaskFlowRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 工作流 ID
+         * @type {string || null}
+         */
+        this.FlowId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
 
     }
 }
@@ -5524,26 +6313,18 @@ class DescribePodInstancesRequest extends  AbstractModel {
 }
 
 /**
- * TSF简单部署组分页列表
+ * DescribeTaskLastStatus请求参数结构体
  * @class
  */
-class TsfPageSimpleGroup extends  AbstractModel {
+class DescribeTaskLastStatusRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 总条数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
+         * 任务ID
+         * @type {string || null}
          */
-        this.TotalCount = null;
-
-        /**
-         * 简单部署组列表
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<SimpleGroup> || null}
-         */
-        this.Content = null;
+        this.TaskId = null;
 
     }
 
@@ -5554,16 +6335,212 @@ class TsfPageSimpleGroup extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
-        if (params.Content) {
-            this.Content = new Array();
-            for (let z in params.Content) {
-                let obj = new SimpleGroup();
-                obj.deserialize(params.Content[z]);
-                this.Content.push(obj);
+    }
+}
+
+/**
+ * TSF基本资源信息概览
+ * @class
+ */
+class OverviewBasicResourceUsage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ApplicationCount = null;
+
+        /**
+         * 命名空间总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.NamespaceCount = null;
+
+        /**
+         * 部署组个数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.GroupCount = null;
+
+        /**
+         * 程序包存储空间用量，单位字节
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.PackageSpaceUsed = null;
+
+        /**
+         * 已注册实例数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ConsulInstanceCount = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ApplicationCount = 'ApplicationCount' in params ? params.ApplicationCount : null;
+        this.NamespaceCount = 'NamespaceCount' in params ? params.NamespaceCount : null;
+        this.GroupCount = 'GroupCount' in params ? params.GroupCount : null;
+        this.PackageSpaceUsed = 'PackageSpaceUsed' in params ? params.PackageSpaceUsed : null;
+        this.ConsulInstanceCount = 'ConsulInstanceCount' in params ? params.ConsulInstanceCount : null;
+
+    }
+}
+
+/**
+ * CreateTask请求参数结构体
+ * @class
+ */
+class CreateTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务名称，任务长度64字符
+         * @type {string || null}
+         */
+        this.TaskName = null;
+
+        /**
+         * 任务内容，长度限制65536个字节
+         * @type {string || null}
+         */
+        this.TaskContent = null;
+
+        /**
+         * 执行类型，UNICAST/BROADCAST
+         * @type {string || null}
+         */
+        this.ExecuteType = null;
+
+        /**
+         * 任务类型
+         * @type {string || null}
+         */
+        this.TaskType = null;
+
+        /**
+         * 任务超时时间， 时间单位 ms
+         * @type {number || null}
+         */
+        this.TimeOut = null;
+
+        /**
+         * 部署组ID
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+        /**
+         * 触发规则
+         * @type {TaskRule || null}
+         */
+        this.TaskRule = null;
+
+        /**
+         * 重试次数，0 <= RetryCount<= 10
+         * @type {number || null}
+         */
+        this.RetryCount = null;
+
+        /**
+         * 重试间隔， 0 <= RetryInterval <= 600000， 时间单位 ms
+         * @type {number || null}
+         */
+        this.RetryInterval = null;
+
+        /**
+         * 分片数量
+         * @type {number || null}
+         */
+        this.ShardCount = null;
+
+        /**
+         * 分片参数
+         * @type {Array.<ShardArgument> || null}
+         */
+        this.ShardArguments = null;
+
+        /**
+         * 判断任务成功的操作符
+         * @type {string || null}
+         */
+        this.SuccessOperator = null;
+
+        /**
+         * 判断任务成功率的阈值，如99.99
+         * @type {string || null}
+         */
+        this.SuccessRatio = null;
+
+        /**
+         * 高级设置
+         * @type {AdvanceSettings || null}
+         */
+        this.AdvanceSettings = null;
+
+        /**
+         * 任务参数，长度限制10000个字符
+         * @type {string || null}
+         */
+        this.TaskArgument = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskName = 'TaskName' in params ? params.TaskName : null;
+        this.TaskContent = 'TaskContent' in params ? params.TaskContent : null;
+        this.ExecuteType = 'ExecuteType' in params ? params.ExecuteType : null;
+        this.TaskType = 'TaskType' in params ? params.TaskType : null;
+        this.TimeOut = 'TimeOut' in params ? params.TimeOut : null;
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+        if (params.TaskRule) {
+            let obj = new TaskRule();
+            obj.deserialize(params.TaskRule)
+            this.TaskRule = obj;
+        }
+        this.RetryCount = 'RetryCount' in params ? params.RetryCount : null;
+        this.RetryInterval = 'RetryInterval' in params ? params.RetryInterval : null;
+        this.ShardCount = 'ShardCount' in params ? params.ShardCount : null;
+
+        if (params.ShardArguments) {
+            this.ShardArguments = new Array();
+            for (let z in params.ShardArguments) {
+                let obj = new ShardArgument();
+                obj.deserialize(params.ShardArguments[z]);
+                this.ShardArguments.push(obj);
             }
         }
+        this.SuccessOperator = 'SuccessOperator' in params ? params.SuccessOperator : null;
+        this.SuccessRatio = 'SuccessRatio' in params ? params.SuccessRatio : null;
+
+        if (params.AdvanceSettings) {
+            let obj = new AdvanceSettings();
+            obj.deserialize(params.AdvanceSettings)
+            this.AdvanceSettings = obj;
+        }
+        this.TaskArgument = 'TaskArgument' in params ? params.TaskArgument : null;
 
     }
 }
@@ -6181,6 +7158,41 @@ class DescribeSimpleNamespacesRequest extends  AbstractModel {
 }
 
 /**
+ * ExecuteTaskFlow返回参数结构体
+ * @class
+ */
+class ExecuteTaskFlowResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 工作流批次ID
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 泳道规则
  * @class
  */
@@ -6634,6 +7646,51 @@ class DescribePublicConfigsResponse extends  AbstractModel {
 }
 
 /**
+ * ServerlessGroup 翻页对象
+ * @class
+ */
+class ServerlessGroupPage extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总记录数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 列表信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ServerlessGroup> || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Content) {
+            this.Content = new Array();
+            for (let z in params.Content) {
+                let obj = new ServerlessGroup();
+                obj.deserialize(params.Content[z]);
+                this.Content.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ModifyLaneRule请求参数结构体
  * @class
  */
@@ -6776,18 +7833,24 @@ class DeleteApplicationRequest extends  AbstractModel {
 }
 
 /**
- * RevocationPublicConfig请求参数结构体
+ * ContinueRunFailedTaskBatch返回参数结构体
  * @class
  */
-class RevocationPublicConfigRequest extends  AbstractModel {
+class ContinueRunFailedTaskBatchResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 配置项发布ID
+         * 成功或失败
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.ConfigReleaseId = null;
+        this.RequestId = null;
 
     }
 
@@ -6798,7 +7861,8 @@ class RevocationPublicConfigRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ConfigReleaseId = 'ConfigReleaseId' in params ? params.ConfigReleaseId : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7077,6 +8141,41 @@ class ServiceSetting extends  AbstractModel {
             this.ProtocolPorts = obj;
         }
         this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+
+    }
+}
+
+/**
+ * ExecuteTask返回参数结构体
+ * @class
+ */
+class ExecuteTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 成功/失败
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7443,6 +8542,42 @@ class CreateMicroserviceResponse extends  AbstractModel {
          * 新增微服务是否成功。
 true：操作成功。
 false：操作失败。
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ReleasePublicConfig返回参数结构体
+ * @class
+ */
+class ReleasePublicConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * true：发布成功；false：发布失败
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {boolean || null}
          */
         this.Result = null;
@@ -8034,18 +9169,18 @@ class DeleteContainerGroupRequest extends  AbstractModel {
 }
 
 /**
- * DescribeContainerGroupDetail请求参数结构体
+ * 高级选项设置
  * @class
  */
-class DescribeContainerGroupDetailRequest extends  AbstractModel {
+class AdvanceSettings extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 分组ID
-         * @type {string || null}
+         * 子任务单机并发数限制，默认值为2
+         * @type {number || null}
          */
-        this.GroupId = null;
+        this.SubTaskConcurrency = null;
 
     }
 
@@ -8056,7 +9191,7 @@ class DescribeContainerGroupDetailRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.SubTaskConcurrency = 'SubTaskConcurrency' in params ? params.SubTaskConcurrency : null;
 
     }
 }
@@ -8283,6 +9418,34 @@ class CreateNamespaceRequest extends  AbstractModel {
         this.NamespaceResourceType = 'NamespaceResourceType' in params ? params.NamespaceResourceType : null;
         this.NamespaceType = 'NamespaceType' in params ? params.NamespaceType : null;
         this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+
+    }
+}
+
+/**
+ * DescribeContainerGroupDetail请求参数结构体
+ * @class
+ */
+class DescribeContainerGroupDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 分组ID
+         * @type {string || null}
+         */
+        this.GroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
 
     }
 }
@@ -8533,6 +9696,79 @@ class DescribeRepositoryRequest extends  AbstractModel {
 }
 
 /**
+ * RevocationPublicConfig请求参数结构体
+ * @class
+ */
+class RevocationPublicConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 配置项发布ID
+         * @type {string || null}
+         */
+        this.ConfigReleaseId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ConfigReleaseId = 'ConfigReleaseId' in params ? params.ConfigReleaseId : null;
+
+    }
+}
+
+/**
+ * 工作流最近批次的状态
+ * @class
+ */
+class TaskFlowLastBatchState extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 批次ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FlowBatchId = null;
+
+        /**
+         * 批次历史ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FlowBatchLogId = null;
+
+        /**
+         * 状态,WAITING/SUCCESS/FAILED/RUNNING/TERMINATING
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.State = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowBatchId = 'FlowBatchId' in params ? params.FlowBatchId : null;
+        this.FlowBatchLogId = 'FlowBatchLogId' in params ? params.FlowBatchLogId : null;
+        this.State = 'State' in params ? params.State : null;
+
+    }
+}
+
+/**
  * 属性字段
  * @class
  */
@@ -8644,6 +9880,34 @@ class DescribeGroupRequest extends  AbstractModel {
             return;
         }
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+    }
+}
+
+/**
+ * RedoTask请求参数结构体
+ * @class
+ */
+class RedoTaskRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -8798,26 +10062,18 @@ class RepositoryInfo extends  AbstractModel {
 }
 
 /**
- * StopContainerGroup返回参数结构体
+ * EnableTaskFlow请求参数结构体
  * @class
  */
-class StopContainerGroupResponse extends  AbstractModel {
+class EnableTaskFlowRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 停止操作是否成功。
-true：停止成功
-false：停止失败
-         * @type {boolean || null}
-         */
-        this.Result = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 工作流 ID
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.FlowId = null;
 
     }
 
@@ -8828,8 +10084,7 @@ false：停止失败
         if (!params) {
             return;
         }
-        this.Result = 'Result' in params ? params.Result : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
 
     }
 }
@@ -8989,16 +10244,16 @@ class AddInstanceResult extends  AbstractModel {
 }
 
 /**
- * DescribePkgs返回参数结构体
+ * DescribeFlowLastBatchState返回参数结构体
  * @class
  */
-class DescribePkgsResponse extends  AbstractModel {
+class DescribeFlowLastBatchStateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 符合查询程序包信息列表
-         * @type {PkgList || null}
+         * 工作流批次最新状态
+         * @type {TaskFlowLastBatchState || null}
          */
         this.Result = null;
 
@@ -9019,7 +10274,7 @@ class DescribePkgsResponse extends  AbstractModel {
         }
 
         if (params.Result) {
-            let obj = new PkgList();
+            let obj = new TaskFlowLastBatchState();
             obj.deserialize(params.Result)
             this.Result = obj;
         }
@@ -9029,17 +10284,44 @@ class DescribePkgsResponse extends  AbstractModel {
 }
 
 /**
- * DescribeSimpleNamespaces返回参数结构体
+ * ContinueRunFailedTaskBatch请求参数结构体
  * @class
  */
-class DescribeSimpleNamespacesResponse extends  AbstractModel {
+class ContinueRunFailedTaskBatchRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 命名空间分页列表
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {TsfPageNamespace || null}
+         * 批次ID。
+         * @type {string || null}
+         */
+        this.BatchId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BatchId = 'BatchId' in params ? params.BatchId : null;
+
+    }
+}
+
+/**
+ * StopTaskExecute返回参数结构体
+ * @class
+ */
+class StopTaskExecuteResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 操作成功 or 失败
+         * @type {boolean || null}
          */
         this.Result = null;
 
@@ -9058,12 +10340,42 @@ class DescribeSimpleNamespacesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
-        if (params.Result) {
-            let obj = new TsfPageNamespace();
-            obj.deserialize(params.Result)
-            this.Result = obj;
+    }
+}
+
+/**
+ * EnableTaskFlow返回参数结构体
+ * @class
+ */
+class EnableTaskFlowResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * true成功，false: 失败
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
+        this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -10678,48 +11990,24 @@ class CreateLaneRuleResponse extends  AbstractModel {
 }
 
 /**
- * DescribeConfigReleaseLogs请求参数结构体
+ * CreateTask返回参数结构体
  * @class
  */
-class DescribeConfigReleaseLogsRequest extends  AbstractModel {
+class CreateTaskResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 部署组ID，不传入时查询全量
+         * 任务ID
          * @type {string || null}
          */
-        this.GroupId = null;
+        this.Result = null;
 
         /**
-         * 偏移量，默认为0
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 每页条数，默认为20
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 命名空间ID，不传入时查询全量
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.NamespaceId = null;
-
-        /**
-         * 集群ID，不传入时查询全量
-         * @type {string || null}
-         */
-        this.ClusterId = null;
-
-        /**
-         * 应用ID，不传入时查询全量
-         * @type {string || null}
-         */
-        this.ApplicationId = null;
+        this.RequestId = null;
 
     }
 
@@ -10730,12 +12018,8 @@ class DescribeConfigReleaseLogsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.GroupId = 'GroupId' in params ? params.GroupId : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
-        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10860,6 +12144,46 @@ class DescribeGroupsRequest extends  AbstractModel {
         this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.GroupResourceTypeList = 'GroupResourceTypeList' in params ? params.GroupResourceTypeList : null;
+
+    }
+}
+
+/**
+ * DescribeTaskLastStatus返回参数结构体
+ * @class
+ */
+class DescribeTaskLastStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务上一次执行状态
+         * @type {TaskLastExecuteStatus || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new TaskLastExecuteStatus();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11152,6 +12476,41 @@ class AddInstancesRequest extends  AbstractModel {
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
         this.SgId = 'SgId' in params ? params.SgId : null;
         this.InstanceImportMode = 'InstanceImportMode' in params ? params.InstanceImportMode : null;
+
+    }
+}
+
+/**
+ * RedoTask返回参数结构体
+ * @class
+ */
+class RedoTaskResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 操作成功or失败
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11934,6 +13293,41 @@ class LaneInfos extends  AbstractModel {
 }
 
 /**
+ * RedoTaskBatch请求参数结构体
+ * @class
+ */
+class RedoTaskBatchRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 批次ID
+         * @type {string || null}
+         */
+        this.BatchId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.BatchId = 'BatchId' in params ? params.BatchId : null;
+
+    }
+}
+
+/**
  * CreateServerlessGroup请求参数结构体
  * @class
  */
@@ -12532,6 +13926,51 @@ class CosDownloadInfo extends  AbstractModel {
 }
 
 /**
+ * TSF简单部署组分页列表
+ * @class
+ */
+class TsfPageSimpleGroup extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总条数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 简单部署组列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<SimpleGroup> || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Content) {
+            this.Content = new Array();
+            for (let z in params.Content) {
+                let obj = new SimpleGroup();
+                obj.deserialize(params.Content[z]);
+                this.Content.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * DeletePkgs请求参数结构体
  * @class
  */
@@ -12626,26 +14065,48 @@ class TsfPageInstance extends  AbstractModel {
 }
 
 /**
- * ServerlessGroup 翻页对象
+ * DescribeConfigReleaseLogs请求参数结构体
  * @class
  */
-class ServerlessGroupPage extends  AbstractModel {
+class DescribeConfigReleaseLogsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 总记录数
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
+         * 部署组ID，不传入时查询全量
+         * @type {string || null}
          */
-        this.TotalCount = null;
+        this.GroupId = null;
 
         /**
-         * 列表信息
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<ServerlessGroup> || null}
+         * 偏移量，默认为0
+         * @type {number || null}
          */
-        this.Content = null;
+        this.Offset = null;
+
+        /**
+         * 每页条数，默认为20
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 命名空间ID，不传入时查询全量
+         * @type {string || null}
+         */
+        this.NamespaceId = null;
+
+        /**
+         * 集群ID，不传入时查询全量
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 应用ID，不传入时查询全量
+         * @type {string || null}
+         */
+        this.ApplicationId = null;
 
     }
 
@@ -12656,16 +14117,12 @@ class ServerlessGroupPage extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.Content) {
-            this.Content = new Array();
-            for (let z in params.Content) {
-                let obj = new ServerlessGroup();
-                obj.deserialize(params.Content[z]);
-                this.Content.push(obj);
-            }
-        }
+        this.GroupId = 'GroupId' in params ? params.GroupId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.ApplicationId = 'ApplicationId' in params ? params.ApplicationId : null;
 
     }
 }
@@ -13411,16 +14868,15 @@ false：失败。
 }
 
 /**
- * ReleasePublicConfig返回参数结构体
+ * EnableTask返回参数结构体
  * @class
  */
-class ReleasePublicConfigResponse extends  AbstractModel {
+class EnableTaskResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * true：发布成功；false：发布失败
-注意：此字段可能返回 null，表示取不到有效值。
+         * 操作成功or失败
          * @type {boolean || null}
          */
         this.Result = null;
@@ -13647,19 +15103,12 @@ class LaneGroup extends  AbstractModel {
 }
 
 /**
- * 任务id
+ * DescribeBasicResourceUsage请求参数结构体
  * @class
  */
-class TaskId extends  AbstractModel {
+class DescribeBasicResourceUsageRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 任务ID
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.TaskId = null;
 
     }
 
@@ -13670,7 +15119,6 @@ class TaskId extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }
@@ -13714,6 +15162,41 @@ class TsfPageConfig extends  AbstractModel {
                 this.Content.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * RedoTaskFlowBatch返回参数结构体
+ * @class
+ */
+class RedoTaskFlowBatchResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 工作流批次历史 ID
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -13858,20 +15341,26 @@ module.exports = {
     TsfApiListResponse: TsfApiListResponse,
     DescribeGroupInstancesResponse: DescribeGroupInstancesResponse,
     DescribeMsApiListResponse: DescribeMsApiListResponse,
+    EnableTaskRequest: EnableTaskRequest,
+    DisableTaskFlowResponse: DisableTaskFlowResponse,
     DescribeDownloadInfoRequest: DescribeDownloadInfoRequest,
     ApiDetailResponse: ApiDetailResponse,
     ImageTag: ImageTag,
     DescribePublicConfigSummaryRequest: DescribePublicConfigSummaryRequest,
     DescribeClusterInstancesResponse: DescribeClusterInstancesResponse,
+    DisableTaskResponse: DisableTaskResponse,
     DescribeMicroserviceRequest: DescribeMicroserviceRequest,
     CosCredentials: CosCredentials,
     HealthCheckSetting: HealthCheckSetting,
     DescribeContainerGroupsRequest: DescribeContainerGroupsRequest,
+    RedoTaskBatchResponse: RedoTaskBatchResponse,
+    TerminateTaskFlowBatchRequest: TerminateTaskFlowBatchRequest,
     ExpandGroupRequest: ExpandGroupRequest,
     DeleteServerlessGroupRequest: DeleteServerlessGroupRequest,
     DescribeImageTagsRequest: DescribeImageTagsRequest,
     ModifyLaneRuleResponse: ModifyLaneRuleResponse,
     DescribeSimpleClustersResponse: DescribeSimpleClustersResponse,
+    TaskRule: TaskRule,
     DescribePodInstancesResponse: DescribePodInstancesResponse,
     VmGroup: VmGroup,
     DescribeRepositoryResponse: DescribeRepositoryResponse,
@@ -13887,11 +15376,16 @@ module.exports = {
     CreateGroupRequest: CreateGroupRequest,
     ModifyMicroserviceRequest: ModifyMicroserviceRequest,
     DescribeConfigReleasesRequest: DescribeConfigReleasesRequest,
+    ShardArgument: ShardArgument,
     DeleteLaneResponse: DeleteLaneResponse,
+    StopTaskBatchResponse: StopTaskBatchResponse,
+    DescribeSimpleNamespacesResponse: DescribeSimpleNamespacesResponse,
     ModifyLaneResponse: ModifyLaneResponse,
     TsfPageConfigRelease: TsfPageConfigRelease,
     CreateContainGroupResponse: CreateContainGroupResponse,
     DescribeContainerGroupDetailResponse: DescribeContainerGroupDetailResponse,
+    DisableTaskRequest: DisableTaskRequest,
+    DescribePkgsResponse: DescribePkgsResponse,
     SimpleApplication: SimpleApplication,
     DescribePublicConfigSummaryResponse: DescribePublicConfigSummaryResponse,
     DescribeLaneRulesRequest: DescribeLaneRulesRequest,
@@ -13901,6 +15395,7 @@ module.exports = {
     CreateServerlessGroupResponse: CreateServerlessGroupResponse,
     CreateLaneRequest: CreateLaneRequest,
     DeleteApplicationResponse: DeleteApplicationResponse,
+    DescribeBasicResourceUsageResponse: DescribeBasicResourceUsageResponse,
     UpdateRepositoryRequest: UpdateRepositoryRequest,
     Instance: Instance,
     DeployServerlessGroupResponse: DeployServerlessGroupResponse,
@@ -13909,11 +15404,14 @@ module.exports = {
     DescribeApplicationsResponse: DescribeApplicationsResponse,
     VmGroupSimple: VmGroupSimple,
     ModifyContainerReplicasRequest: ModifyContainerReplicasRequest,
+    TerminateTaskFlowBatchResponse: TerminateTaskFlowBatchResponse,
+    ExecuteTaskFlowRequest: ExecuteTaskFlowRequest,
     ModifyLaneRequest: ModifyLaneRequest,
     DescribeLanesRequest: DescribeLanesRequest,
     DeleteMicroserviceRequest: DeleteMicroserviceRequest,
     CreatePublicConfigRequest: CreatePublicConfigRequest,
     RemoveInstancesResponse: RemoveInstancesResponse,
+    StopContainerGroupResponse: StopContainerGroupResponse,
     DescribeApiVersionsRequest: DescribeApiVersionsRequest,
     ModifyContainerReplicasResponse: ModifyContainerReplicasResponse,
     DescribeConfigRequest: DescribeConfigRequest,
@@ -13921,6 +15419,7 @@ module.exports = {
     TsfPageCluster: TsfPageCluster,
     DescribeGroupResponse: DescribeGroupResponse,
     DescribeGroupsResponse: DescribeGroupsResponse,
+    TaskId: TaskId,
     Env: Env,
     DeleteContainerGroupResponse: DeleteContainerGroupResponse,
     DescribeSimpleGroupsRequest: DescribeSimpleGroupsRequest,
@@ -13931,27 +15430,36 @@ module.exports = {
     DescribeImageTagsResponse: DescribeImageTagsResponse,
     DeleteGroupRequest: DeleteGroupRequest,
     ApiDefinitionDescr: ApiDefinitionDescr,
+    ExecuteTaskRequest: ExecuteTaskRequest,
+    RedoTaskFlowBatchRequest: RedoTaskFlowBatchRequest,
     TsfPageMsInstance: TsfPageMsInstance,
+    StopTaskBatchRequest: StopTaskBatchRequest,
     ServerlessGroup: ServerlessGroup,
     DescribeApplicationResponse: DescribeApplicationResponse,
     LaneInfo: LaneInfo,
     DescribeConfigReleaseLogsResponse: DescribeConfigReleaseLogsResponse,
     RevocationConfigResponse: RevocationConfigResponse,
     DescribeSimpleGroupsResponse: DescribeSimpleGroupsResponse,
+    StopTaskExecuteRequest: StopTaskExecuteRequest,
+    DescribeFlowLastBatchStateRequest: DescribeFlowLastBatchStateRequest,
     ContainerGroupDetail: ContainerGroupDetail,
     DeletePublicConfigRequest: DeletePublicConfigRequest,
+    TaskLastExecuteStatus: TaskLastExecuteStatus,
     DeleteNamespaceResponse: DeleteNamespaceResponse,
     CreateMicroserviceRequest: CreateMicroserviceRequest,
     DescribePkgsRequest: DescribePkgsRequest,
     ReleaseConfigResponse: ReleaseConfigResponse,
     RemoveInstancesRequest: RemoveInstancesRequest,
+    DisableTaskFlowRequest: DisableTaskFlowRequest,
     ShrinkInstancesRequest: ShrinkInstancesRequest,
     ShrinkInstancesResponse: ShrinkInstancesResponse,
     DeleteImageTagsRequest: DeleteImageTagsRequest,
     DescribeRepositoriesRequest: DescribeRepositoriesRequest,
     DescribeApplicationAttributeRequest: DescribeApplicationAttributeRequest,
     DescribePodInstancesRequest: DescribePodInstancesRequest,
-    TsfPageSimpleGroup: TsfPageSimpleGroup,
+    DescribeTaskLastStatusRequest: DescribeTaskLastStatusRequest,
+    OverviewBasicResourceUsage: OverviewBasicResourceUsage,
+    CreateTaskRequest: CreateTaskRequest,
     DescribeConfigsRequest: DescribeConfigsRequest,
     OperationInfo: OperationInfo,
     AddClusterInstancesRequest: AddClusterInstancesRequest,
@@ -13963,15 +15471,17 @@ module.exports = {
     DescribeSimpleApplicationsRequest: DescribeSimpleApplicationsRequest,
     DescribeConfigResponse: DescribeConfigResponse,
     DescribeSimpleNamespacesRequest: DescribeSimpleNamespacesRequest,
+    ExecuteTaskFlowResponse: ExecuteTaskFlowResponse,
     LaneRule: LaneRule,
     MsInstance: MsInstance,
     ExpandGroupResponse: ExpandGroupResponse,
     DescribeServerlessGroupsResponse: DescribeServerlessGroupsResponse,
     DescribePublicConfigsResponse: DescribePublicConfigsResponse,
+    ServerlessGroupPage: ServerlessGroupPage,
     ModifyLaneRuleRequest: ModifyLaneRuleRequest,
     AddInstancesResponse: AddInstancesResponse,
     DeleteApplicationRequest: DeleteApplicationRequest,
-    RevocationPublicConfigRequest: RevocationPublicConfigRequest,
+    ContinueRunFailedTaskBatchResponse: ContinueRunFailedTaskBatchResponse,
     DescribeSimpleClustersRequest: DescribeSimpleClustersRequest,
     StartContainerGroupRequest: StartContainerGroupRequest,
     DeleteConfigRequest: DeleteConfigRequest,
@@ -13979,6 +15489,7 @@ module.exports = {
     DeleteTaskRequest: DeleteTaskRequest,
     HealthCheckSettings: HealthCheckSettings,
     ServiceSetting: ServiceSetting,
+    ExecuteTaskResponse: ExecuteTaskResponse,
     ApiResponseDescr: ApiResponseDescr,
     DeployServerlessGroupRequest: DeployServerlessGroupRequest,
     Config: Config,
@@ -13986,6 +15497,7 @@ module.exports = {
     DeletePublicConfigResponse: DeletePublicConfigResponse,
     ApiRequestDescr: ApiRequestDescr,
     CreateMicroserviceResponse: CreateMicroserviceResponse,
+    ReleasePublicConfigResponse: ReleasePublicConfigResponse,
     ApiVersionArray: ApiVersionArray,
     CreateClusterRequest: CreateClusterRequest,
     StopGroupRequest: StopGroupRequest,
@@ -13994,28 +15506,34 @@ module.exports = {
     CosUploadInfo: CosUploadInfo,
     ConfigRelease: ConfigRelease,
     DeleteContainerGroupRequest: DeleteContainerGroupRequest,
-    DescribeContainerGroupDetailRequest: DescribeContainerGroupDetailRequest,
+    AdvanceSettings: AdvanceSettings,
     ReleaseConfigRequest: ReleaseConfigRequest,
     CreateConfigRequest: CreateConfigRequest,
     MsApiArray: MsApiArray,
     CreateNamespaceRequest: CreateNamespaceRequest,
+    DescribeContainerGroupDetailRequest: DescribeContainerGroupDetailRequest,
     DescribeApiDetailRequest: DescribeApiDetailRequest,
     DescribeUploadInfoRequest: DescribeUploadInfoRequest,
     DescribeClusterInstancesRequest: DescribeClusterInstancesRequest,
     StopContainerGroupRequest: StopContainerGroupRequest,
     DescribeRepositoryRequest: DescribeRepositoryRequest,
+    RevocationPublicConfigRequest: RevocationPublicConfigRequest,
+    TaskFlowLastBatchState: TaskFlowLastBatchState,
     PropertyField: PropertyField,
     TsfPageApplication: TsfPageApplication,
     DescribeGroupRequest: DescribeGroupRequest,
+    RedoTaskRequest: RedoTaskRequest,
     ImageTagsResult: ImageTagsResult,
     RepositoryInfo: RepositoryInfo,
-    StopContainerGroupResponse: StopContainerGroupResponse,
+    EnableTaskFlowRequest: EnableTaskFlowRequest,
     CreateLaneResponse: CreateLaneResponse,
     DescribeServerlessGroupRequest: DescribeServerlessGroupRequest,
     TsfPageVmGroup: TsfPageVmGroup,
     AddInstanceResult: AddInstanceResult,
-    DescribePkgsResponse: DescribePkgsResponse,
-    DescribeSimpleNamespacesResponse: DescribeSimpleNamespacesResponse,
+    DescribeFlowLastBatchStateResponse: DescribeFlowLastBatchStateResponse,
+    ContinueRunFailedTaskBatchRequest: ContinueRunFailedTaskBatchRequest,
+    StopTaskExecuteResponse: StopTaskExecuteResponse,
+    EnableTaskFlowResponse: EnableTaskFlowResponse,
     ApplicationAttribute: ApplicationAttribute,
     DeleteImageTag: DeleteImageTag,
     DeletePkgsResponse: DeletePkgsResponse,
@@ -14047,14 +15565,16 @@ module.exports = {
     PkgInfo: PkgInfo,
     RepositoryList: RepositoryList,
     CreateLaneRuleResponse: CreateLaneRuleResponse,
-    DescribeConfigReleaseLogsRequest: DescribeConfigReleaseLogsRequest,
+    CreateTaskResponse: CreateTaskResponse,
     DescribeApiDetailResponse: DescribeApiDetailResponse,
     DescribeGroupsRequest: DescribeGroupsRequest,
+    DescribeTaskLastStatusResponse: DescribeTaskLastStatusResponse,
     ModifyContainerGroupRequest: ModifyContainerGroupRequest,
     UpdateRepositoryResponse: UpdateRepositoryResponse,
     TsfPageMicroservice: TsfPageMicroservice,
     DescribePublicConfigsRequest: DescribePublicConfigsRequest,
     AddInstancesRequest: AddInstancesRequest,
+    RedoTaskResponse: RedoTaskResponse,
     StartGroupRequest: StartGroupRequest,
     LaneRuleTag: LaneRuleTag,
     RollbackConfigResponse: RollbackConfigResponse,
@@ -14069,6 +15589,7 @@ module.exports = {
     DeleteTaskResponse: DeleteTaskResponse,
     DeployGroupRequest: DeployGroupRequest,
     LaneInfos: LaneInfos,
+    RedoTaskBatchRequest: RedoTaskBatchRequest,
     CreateServerlessGroupRequest: CreateServerlessGroupRequest,
     DescribeMicroserviceResponse: DescribeMicroserviceResponse,
     DeleteGroupResponse: DeleteGroupResponse,
@@ -14077,9 +15598,10 @@ module.exports = {
     DescribeServerlessGroupsRequest: DescribeServerlessGroupsRequest,
     DeployContainerGroupRequest: DeployContainerGroupRequest,
     CosDownloadInfo: CosDownloadInfo,
+    TsfPageSimpleGroup: TsfPageSimpleGroup,
     DeletePkgsRequest: DeletePkgsRequest,
     TsfPageInstance: TsfPageInstance,
-    ServerlessGroupPage: ServerlessGroupPage,
+    DescribeConfigReleaseLogsRequest: DescribeConfigReleaseLogsRequest,
     DescribeConfigSummaryResponse: DescribeConfigSummaryResponse,
     CreateContainGroupRequest: CreateContainGroupRequest,
     ContainGroup: ContainGroup,
@@ -14092,12 +15614,13 @@ module.exports = {
     DeleteLaneRequest: DeleteLaneRequest,
     DeployGroupResponse: DeployGroupResponse,
     ModifyContainerGroupResponse: ModifyContainerGroupResponse,
-    ReleasePublicConfigResponse: ReleasePublicConfigResponse,
+    EnableTaskResponse: EnableTaskResponse,
     ReleasePublicConfigRequest: ReleasePublicConfigRequest,
     DescribeServerlessGroupResponse: DescribeServerlessGroupResponse,
     LaneGroup: LaneGroup,
-    TaskId: TaskId,
+    DescribeBasicResourceUsageRequest: DescribeBasicResourceUsageRequest,
     TsfPageConfig: TsfPageConfig,
+    RedoTaskFlowBatchResponse: RedoTaskFlowBatchResponse,
     RevocationPublicConfigResponse: RevocationPublicConfigResponse,
     DescribeGroupInstancesRequest: DescribeGroupInstancesRequest,
     CreateGroupResponse: CreateGroupResponse,

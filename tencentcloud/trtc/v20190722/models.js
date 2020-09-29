@@ -631,7 +631,7 @@ class EncodeParams extends  AbstractModel {
         super();
 
         /**
-         * 混流-输出流音频采样率。取值为[48000, 44100, 32000,24000,, 16000, 12000, 8000]。
+         * 混流-输出流音频采样率。取值为[48000, 44100, 32000,24000,, 16000, 12000, 8000]，单位是Hz。
          * @type {number || null}
          */
         this.AudioSampleRate = null;
@@ -643,7 +643,7 @@ class EncodeParams extends  AbstractModel {
         this.AudioBitrate = null;
 
         /**
-         * 混流-输出流音频声道数，取值范围[1,2]。
+         * 混流-输出流音频声道数，取值范围[1,2]，1表示混流输出音频为单声道，2表示混流输出音频为双声道。
          * @type {number || null}
          */
         this.AudioChannels = null;
@@ -667,7 +667,7 @@ class EncodeParams extends  AbstractModel {
         this.VideoBitrate = null;
 
         /**
-         * 混流-输出流帧率，音视频输出时必填。取值范围[1,60]。
+         * 混流-输出流帧率，音视频输出时必填。取值范围[1,60]，表示混流的输出帧率可选范围为1到60fps。
          * @type {number || null}
          */
         this.VideoFramerate = null;

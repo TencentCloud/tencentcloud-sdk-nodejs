@@ -817,6 +817,68 @@ class DescribeAnimatedGraphicsTemplatesRequest extends  AbstractModel {
 }
 
 /**
+ * LiveRealTimeClip返回参数结构体
+ * @class
+ */
+class LiveRealTimeClipResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 剪辑后的视频播放 URL。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * 剪辑固化后的视频的媒体文件的唯一标识。
+         * @type {string || null}
+         */
+        this.FileId = null;
+
+        /**
+         * 剪辑固化后的视频任务流 ID。
+         * @type {string || null}
+         */
+        this.VodTaskId = null;
+
+        /**
+         * 剪辑后的视频元信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {MediaMetaData || null}
+         */
+        this.MetaData = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Url = 'Url' in params ? params.Url : null;
+        this.FileId = 'FileId' in params ? params.FileId : null;
+        this.VodTaskId = 'VodTaskId' in params ? params.VodTaskId : null;
+
+        if (params.MetaData) {
+            let obj = new MediaMetaData();
+            obj.deserialize(params.MetaData)
+            this.MetaData = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 内容审核 Asr 文字鉴任违禁务结果类型
  * @class
  */
@@ -1245,6 +1307,64 @@ class MediaMiniProgramReviewElem extends  AbstractModel {
         this.Type = 'Type' in params ? params.Type : null;
         this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
         this.Confidence = 'Confidence' in params ? params.Confidence : null;
+
+    }
+}
+
+/**
+ * CreateImageProcessingTemplate请求参数结构体
+ * @class
+ */
+class CreateImageProcessingTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片处理操作数组，操作将以其在数组中的顺序执行。
+<li>长度限制：3。</li>
+         * @type {Array.<ImageOperation> || null}
+         */
+        this.Operations = null;
+
+        /**
+         * 图片处理模板名称，长度限制：64 个字符。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 模板描述信息，长度限制：256 个字符。
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Operations) {
+            this.Operations = new Array();
+            for (let z in params.Operations) {
+                let obj = new ImageOperation();
+                obj.deserialize(params.Operations[z]);
+                this.Operations.push(obj);
+            }
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -3670,6 +3790,41 @@ class DeleteAIAnalysisTemplateResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteImageProcessingTemplate请求参数结构体
+ * @class
+ */
+class DeleteImageProcessingTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片处理模板唯一标识。
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -10419,18 +10574,45 @@ class MediaProcessTaskTranscodeResult extends  AbstractModel {
 }
 
 /**
- * 视频拆条输出。
+ * 图片处理模板， 最多支持三次操作。例如：裁剪-缩略-裁剪。
  * @class
  */
-class AiRecognitionTaskSegmentResultOutput extends  AbstractModel {
+class ImageProcessingTemplate extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 视频拆条片段列表。
-         * @type {Array.<AiRecognitionTaskSegmentSegmentItem> || null}
+         * 图片处理模板唯一标识。
+         * @type {number || null}
          */
-        this.SegmentSet = null;
+        this.Definition = null;
+
+        /**
+         * 模板类型，取值范围：
+<li>Preset：系统预置模板；</li>
+<li>Custom：用户自定义模板。</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 图片处理模板名称。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 模板描述信息。
+         * @type {string || null}
+         */
+        this.Comment = null;
+
+        /**
+         * 图片处理操作数组，操作将以数组顺序执行。
+<li>长度限制：3。</li>
+         * @type {Array.<ImageOperation> || null}
+         */
+        this.Operations = null;
 
     }
 
@@ -10441,13 +10623,17 @@ class AiRecognitionTaskSegmentResultOutput extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Comment = 'Comment' in params ? params.Comment : null;
 
-        if (params.SegmentSet) {
-            this.SegmentSet = new Array();
-            for (let z in params.SegmentSet) {
-                let obj = new AiRecognitionTaskSegmentSegmentItem();
-                obj.deserialize(params.SegmentSet[z]);
-                this.SegmentSet.push(obj);
+        if (params.Operations) {
+            this.Operations = new Array();
+            for (let z in params.Operations) {
+                let obj = new ImageOperation();
+                obj.deserialize(params.Operations[z]);
+                this.Operations.push(obj);
             }
         }
 
@@ -11519,6 +11705,49 @@ class AiRecognitionTaskHeadTailResultOutput extends  AbstractModel {
 }
 
 /**
+ * 对视频转自适应码流的输入参数类型
+ * @class
+ */
+class AdaptiveDynamicStreamingTaskInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 转自适应码流模板 ID。
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * 水印列表，支持多张图片或文字水印，最大可支持 10 张。
+         * @type {Array.<WatermarkInput> || null}
+         */
+        this.WatermarkSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+
+        if (params.WatermarkSet) {
+            this.WatermarkSet = new Array();
+            for (let z in params.WatermarkSet) {
+                let obj = new WatermarkInput();
+                obj.deserialize(params.WatermarkSet[z]);
+                this.WatermarkSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ModifyImageSpriteTemplate返回参数结构体
  * @class
  */
@@ -11887,6 +12116,41 @@ FINISH：已完成。
 }
 
 /**
+ * CreateImageProcessingTemplate返回参数结构体
+ * @class
+ */
+class CreateImageProcessingTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片处理模板唯一标识。
+         * @type {number || null}
+         */
+        this.Definition = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 制作媒体文件任务信息
  * @class
  */
@@ -11991,6 +12255,67 @@ class HeadTailConfigureInfoForUpdate extends  AbstractModel {
             return;
         }
         this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
+ * 图片缩放处理。
+ * @class
+ */
+class ImageScale extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片缩放的操作类型。可选模式有：
+<li>WidthFirst : 指定图片的宽为 Width ，高度等比缩放。</li>
+<li>HeightFirst : 指定图片的高为 Height ，宽度等比缩放。</li>
+<li>LongEdgeFirst : 指定图片的长边为 LongEdge ，短边等比缩放。</li>
+<li>ShortEdgeFirst : 指定图片的短边为 ShortEdge ，长边等比缩放。</li>
+<li>Force : 忽略原图宽高比例，指定图片宽度为 Width，高度为 Height ，强行缩放图片，可能导致目标图片变形。</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 输出图片的高度，单位为像素。当 Type 取值为 HeightFirst 或 Force 时此字段有效。
+         * @type {number || null}
+         */
+        this.Height = null;
+
+        /**
+         * 输出图片的宽度，单位为像素。当 Type 取值为 WidthFirst 或 Force 时此字段有效。
+         * @type {number || null}
+         */
+        this.Width = null;
+
+        /**
+         * 输出图片的长边长度，单位为像素。当 Type 取值为 LongEdgeFirst 时此字段有效。
+         * @type {number || null}
+         */
+        this.LongEdge = null;
+
+        /**
+         * 输出图片的短边长度，单位为像素。当 Type 取值为 ShortEdgeFirst 时此字段有效。
+         * @type {number || null}
+         */
+        this.ShortEdge = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.LongEdge = 'LongEdge' in params ? params.LongEdge : null;
+        this.ShortEdge = 'ShortEdge' in params ? params.ShortEdge : null;
 
     }
 }
@@ -12953,6 +13278,64 @@ class AiReviewTerrorismTaskOutput extends  AbstractModel {
                 this.SegmentSet.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DescribeImageProcessingTemplates请求参数结构体
+ * @class
+ */
+class DescribeImageProcessingTemplatesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片处理模板标识列表。长度限制：100。
+         * @type {Array.<number> || null}
+         */
+        this.Definitions = null;
+
+        /**
+         * 模板类型过滤条件，可选值：
+<li>Preset：系统预置模板；</li>
+<li>Custom：用户自定义模板。</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 分页偏移量，默认值：0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回记录条数，默认值：10，最大值：100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+         * @type {number || null}
+         */
+        this.SubAppId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Definitions = 'Definitions' in params ? params.Definitions : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.SubAppId = 'SubAppId' in params ? params.SubAppId : null;
 
     }
 }
@@ -14116,99 +14499,141 @@ class DescribeCdnLogsResponse extends  AbstractModel {
 }
 
 /**
- * 内容审核涉政嫌疑片段
+ * DescribeTaskDetail返回参数结构体
  * @class
  */
-class MediaContentReviewPoliticalSegmentItem extends  AbstractModel {
+class DescribeTaskDetailResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 嫌疑片段起始的偏移时间，单位：秒。
-         * @type {number || null}
-         */
-        this.StartTimeOffset = null;
+         * 任务类型，取值：
+<li>Procedure：视频处理任务；</li>
+<li>EditMedia：视频编辑任务；</li>
+<li>WechatPublish：微信发布任务；</li>
+<li>WechatMiniProgramPublish：微信小程序视频发布任务；</li>
+<li>ComposeMedia：制作媒体文件任务；</li>
+<li>PullUpload：拉取上传媒体文件任务。</li>
 
-        /**
-         * 嫌疑片段结束的偏移时间，单位：秒。
-         * @type {number || null}
-         */
-        this.EndTimeOffset = null;
-
-        /**
-         * 嫌疑片段涉政分数。
-         * @type {number || null}
-         */
-        this.Confidence = null;
-
-        /**
-         * 嫌疑片段鉴政结果建议，取值范围：
-<li>pass。</li>
-<li>review。</li>
-<li>block。</li>
+兼容 2017 版的任务类型：
+<li>Transcode：视频转码任务；</li>
+<li>SnapshotByTimeOffset：视频截图任务；</li>
+<li>Concat：视频拼接任务；</li>
+<li>Clip：视频剪辑任务；</li>
+<li>ImageSprites：截取雪碧图任务。</li>
          * @type {string || null}
          */
-        this.Suggestion = null;
+        this.TaskType = null;
 
         /**
-         * 涉政人物、违规图标名字。
+         * 任务状态，取值：
+<li>WAITING：等待中；</li>
+<li>PROCESSING：处理中；</li>
+<li>FINISH：已完成。</li>
          * @type {string || null}
          */
-        this.Name = null;
+        this.Status = null;
 
         /**
-         * 嫌疑片段鉴政结果标签。内容审核模板[画面鉴政任务控制参数](https://cloud.tencent.com/document/api/266/31773#PoliticalImgReviewTemplateInfo)里 LabelSet 参数与此参数取值范围的对应关系：
-violation_photo：
-<li>violation_photo：违规图标。</li>
-politician：
-<li>nation_politician：国家领导人；</li>
-<li>province_politician: 省部级领导人；</li>
-<li>bureau_politician：厅局级领导人；</li>
-<li>county_politician：县处级领导人；</li>
-<li>rural_politician：乡科级领导人；</li>
-<li>sensitive_politician：敏感政治人物；</li>
-<li>foreign_politician：国外领导人。</li>
-entertainment：
-<li>sensitive_entertainment：敏感娱乐人物。</li>
-sport：
-<li>sensitive_sport：敏感体育人物。</li>
-entrepreneur：
-<li>sensitive_entrepreneur：敏感商业人物。</li>
-scholar：
-<li>sensitive_scholar：敏感教育学者。</li>
-celebrity：
-<li>sensitive_celebrity：敏感知名人物；</li>
-<li>historical_celebrity：历史知名人物。</li>
-military：
-<li>sensitive_military：敏感军事人物。</li>
+         * 任务的创建时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
-        this.Label = null;
+        this.CreateTime = null;
 
         /**
-         * 嫌疑图片 URL （图片不会永久存储，到达
- PicUrlExpireTime 时间点后图片将被删除）。
+         * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
-        this.Url = null;
+        this.BeginProcessTime = null;
 
         /**
-         * 涉政人物、违规图标出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
-         * @type {Array.<number> || null}
-         */
-        this.AreaCoordSet = null;
-
-        /**
-         * 该字段已废弃，请使用 PicUrlExpireTime。
-         * @type {number || null}
-         */
-        this.PicUrlExpireTimeStamp = null;
-
-        /**
-         * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+         * 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
-        this.PicUrlExpireTime = null;
+        this.FinishTime = null;
+
+        /**
+         * 视频处理任务信息，仅当 TaskType 为 Procedure，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ProcedureTask || null}
+         */
+        this.ProcedureTask = null;
+
+        /**
+         * 视频编辑任务信息，仅当 TaskType 为 EditMedia，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {EditMediaTask || null}
+         */
+        this.EditMediaTask = null;
+
+        /**
+         * 微信发布任务信息，仅当 TaskType 为 WechatPublish，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {WechatPublishTask || null}
+         */
+        this.WechatPublishTask = null;
+
+        /**
+         * 制作媒体文件任务信息，仅当 TaskType 为 ComposeMedia，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ComposeMediaTask || null}
+         */
+        this.ComposeMediaTask = null;
+
+        /**
+         * 拉取上传媒体文件任务信息，仅当 TaskType 为 PullUpload，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {PullUploadTask || null}
+         */
+        this.PullUploadTask = null;
+
+        /**
+         * 视频转码任务信息，仅当 TaskType 为 Transcode，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {TranscodeTask2017 || null}
+         */
+        this.TranscodeTask = null;
+
+        /**
+         * 视频指定时间点截图任务信息，仅当 TaskType 为 SnapshotByTimeOffset，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {SnapshotByTimeOffsetTask2017 || null}
+         */
+        this.SnapshotByTimeOffsetTask = null;
+
+        /**
+         * 视频拼接任务信息，仅当 TaskType 为 Concat，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ConcatTask2017 || null}
+         */
+        this.ConcatTask = null;
+
+        /**
+         * 视频剪辑任务信息，仅当 TaskType 为 Clip，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ClipTask2017 || null}
+         */
+        this.ClipTask = null;
+
+        /**
+         * 截取雪碧图任务信息，仅当 TaskType 为 ImageSprite，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {CreateImageSpriteTask2017 || null}
+         */
+        this.CreateImageSpriteTask = null;
+
+        /**
+         * 微信小程序发布任务信息，仅当 TaskType 为 WechatMiniProgramPublish，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {WechatMiniProgramPublishTask || null}
+         */
+        this.WechatMiniProgramPublishTask = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -14219,16 +14644,78 @@ military：
         if (!params) {
             return;
         }
-        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
-        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
-        this.Confidence = 'Confidence' in params ? params.Confidence : null;
-        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Label = 'Label' in params ? params.Label : null;
-        this.Url = 'Url' in params ? params.Url : null;
-        this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
-        this.PicUrlExpireTimeStamp = 'PicUrlExpireTimeStamp' in params ? params.PicUrlExpireTimeStamp : null;
-        this.PicUrlExpireTime = 'PicUrlExpireTime' in params ? params.PicUrlExpireTime : null;
+        this.TaskType = 'TaskType' in params ? params.TaskType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
+        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
+
+        if (params.ProcedureTask) {
+            let obj = new ProcedureTask();
+            obj.deserialize(params.ProcedureTask)
+            this.ProcedureTask = obj;
+        }
+
+        if (params.EditMediaTask) {
+            let obj = new EditMediaTask();
+            obj.deserialize(params.EditMediaTask)
+            this.EditMediaTask = obj;
+        }
+
+        if (params.WechatPublishTask) {
+            let obj = new WechatPublishTask();
+            obj.deserialize(params.WechatPublishTask)
+            this.WechatPublishTask = obj;
+        }
+
+        if (params.ComposeMediaTask) {
+            let obj = new ComposeMediaTask();
+            obj.deserialize(params.ComposeMediaTask)
+            this.ComposeMediaTask = obj;
+        }
+
+        if (params.PullUploadTask) {
+            let obj = new PullUploadTask();
+            obj.deserialize(params.PullUploadTask)
+            this.PullUploadTask = obj;
+        }
+
+        if (params.TranscodeTask) {
+            let obj = new TranscodeTask2017();
+            obj.deserialize(params.TranscodeTask)
+            this.TranscodeTask = obj;
+        }
+
+        if (params.SnapshotByTimeOffsetTask) {
+            let obj = new SnapshotByTimeOffsetTask2017();
+            obj.deserialize(params.SnapshotByTimeOffsetTask)
+            this.SnapshotByTimeOffsetTask = obj;
+        }
+
+        if (params.ConcatTask) {
+            let obj = new ConcatTask2017();
+            obj.deserialize(params.ConcatTask)
+            this.ConcatTask = obj;
+        }
+
+        if (params.ClipTask) {
+            let obj = new ClipTask2017();
+            obj.deserialize(params.ClipTask)
+            this.ClipTask = obj;
+        }
+
+        if (params.CreateImageSpriteTask) {
+            let obj = new CreateImageSpriteTask2017();
+            obj.deserialize(params.CreateImageSpriteTask)
+            this.CreateImageSpriteTask = obj;
+        }
+
+        if (params.WechatMiniProgramPublishTask) {
+            let obj = new WechatMiniProgramPublishTask();
+            obj.deserialize(params.WechatMiniProgramPublishTask)
+            this.WechatMiniProgramPublishTask = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -14770,6 +15257,72 @@ class AiRecognitionTaskOcrFullTextSegmentTextItem extends  AbstractModel {
 }
 
 /**
+ * 视频拆条输出。
+ * @class
+ */
+class AiRecognitionTaskSegmentResultOutput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 视频拆条片段列表。
+         * @type {Array.<AiRecognitionTaskSegmentSegmentItem> || null}
+         */
+        this.SegmentSet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.SegmentSet) {
+            this.SegmentSet = new Array();
+            for (let z in params.SegmentSet) {
+                let obj = new AiRecognitionTaskSegmentSegmentItem();
+                obj.deserialize(params.SegmentSet[z]);
+                this.SegmentSet.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 视频拆条任务识别控制参数
+ * @class
+ */
+class SegmentConfigureInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 视频拆条识别任务开关，可选值：
+<li>ON：开启智能视频拆条识别任务；</li>
+<li>OFF：关闭智能视频拆条识别任务。</li>
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+
+    }
+}
+
+/**
  * 对视频按指定时间点截图任务输入参数类型
  * @class
  */
@@ -14824,36 +15377,6 @@ class SnapshotByTimeOffsetTaskInput extends  AbstractModel {
                 this.WatermarkSet.push(obj);
             }
         }
-
-    }
-}
-
-/**
- * 视频拆条任务识别控制参数
- * @class
- */
-class SegmentConfigureInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 视频拆条识别任务开关，可选值：
-<li>ON：开启智能视频拆条识别任务；</li>
-<li>OFF：关闭智能视频拆条识别任务。</li>
-         * @type {string || null}
-         */
-        this.Switch = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Switch = 'Switch' in params ? params.Switch : null;
 
     }
 }
@@ -19749,24 +20272,32 @@ class DescribeContentReviewTemplatesRequest extends  AbstractModel {
 }
 
 /**
- * 对视频转自适应码流的输入参数类型
+ * 单个图片处理操作。
  * @class
  */
-class AdaptiveDynamicStreamingTaskInput extends  AbstractModel {
+class ImageOperation extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 转自适应码流模板 ID。
-         * @type {number || null}
+         * 图片处理类型。可选类型有：
+<li>Scale : 图片缩略处理。</li>
+<li>CenterCut : 图片裁剪处理。</li>
+         * @type {string || null}
          */
-        this.Definition = null;
+        this.Type = null;
 
         /**
-         * 水印列表，支持多张图片或文字水印，最大可支持 10 张。
-         * @type {Array.<WatermarkInput> || null}
+         * 图片缩略处理，仅当 Type 为 Scale 时有效。
+         * @type {ImageScale || null}
          */
-        this.WatermarkSet = null;
+        this.Scale = null;
+
+        /**
+         * 图片裁剪处理，仅当 Type 为 CenterCut 时有效。
+         * @type {ImageCenterCut || null}
+         */
+        this.CenterCut = null;
 
     }
 
@@ -19777,15 +20308,18 @@ class AdaptiveDynamicStreamingTaskInput extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Definition = 'Definition' in params ? params.Definition : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
-        if (params.WatermarkSet) {
-            this.WatermarkSet = new Array();
-            for (let z in params.WatermarkSet) {
-                let obj = new WatermarkInput();
-                obj.deserialize(params.WatermarkSet[z]);
-                this.WatermarkSet.push(obj);
-            }
+        if (params.Scale) {
+            let obj = new ImageScale();
+            obj.deserialize(params.Scale)
+            this.Scale = obj;
+        }
+
+        if (params.CenterCut) {
+            let obj = new ImageCenterCut();
+            obj.deserialize(params.CenterCut)
+            this.CenterCut = obj;
         }
 
     }
@@ -19998,141 +20532,99 @@ class MediaAiAnalysisTagItem extends  AbstractModel {
 }
 
 /**
- * DescribeTaskDetail返回参数结构体
+ * 内容审核涉政嫌疑片段
  * @class
  */
-class DescribeTaskDetailResponse extends  AbstractModel {
+class MediaContentReviewPoliticalSegmentItem extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 任务类型，取值：
-<li>Procedure：视频处理任务；</li>
-<li>EditMedia：视频编辑任务；</li>
-<li>WechatPublish：微信发布任务；</li>
-<li>WechatMiniProgramPublish：微信小程序视频发布任务；</li>
-<li>ComposeMedia：制作媒体文件任务；</li>
-<li>PullUpload：拉取上传媒体文件任务。</li>
+         * 嫌疑片段起始的偏移时间，单位：秒。
+         * @type {number || null}
+         */
+        this.StartTimeOffset = null;
 
-兼容 2017 版的任务类型：
-<li>Transcode：视频转码任务；</li>
-<li>SnapshotByTimeOffset：视频截图任务；</li>
-<li>Concat：视频拼接任务；</li>
-<li>Clip：视频剪辑任务；</li>
-<li>ImageSprites：截取雪碧图任务。</li>
+        /**
+         * 嫌疑片段结束的偏移时间，单位：秒。
+         * @type {number || null}
+         */
+        this.EndTimeOffset = null;
+
+        /**
+         * 嫌疑片段涉政分数。
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * 嫌疑片段鉴政结果建议，取值范围：
+<li>pass。</li>
+<li>review。</li>
+<li>block。</li>
          * @type {string || null}
          */
-        this.TaskType = null;
+        this.Suggestion = null;
 
         /**
-         * 任务状态，取值：
-<li>WAITING：等待中；</li>
-<li>PROCESSING：处理中；</li>
-<li>FINISH：已完成。</li>
+         * 涉政人物、违规图标名字。
          * @type {string || null}
          */
-        this.Status = null;
+        this.Name = null;
 
         /**
-         * 任务的创建时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+         * 嫌疑片段鉴政结果标签。内容审核模板[画面鉴政任务控制参数](https://cloud.tencent.com/document/api/266/31773#PoliticalImgReviewTemplateInfo)里 LabelSet 参数与此参数取值范围的对应关系：
+violation_photo：
+<li>violation_photo：违规图标。</li>
+politician：
+<li>nation_politician：国家领导人；</li>
+<li>province_politician: 省部级领导人；</li>
+<li>bureau_politician：厅局级领导人；</li>
+<li>county_politician：县处级领导人；</li>
+<li>rural_politician：乡科级领导人；</li>
+<li>sensitive_politician：敏感政治人物；</li>
+<li>foreign_politician：国外领导人。</li>
+entertainment：
+<li>sensitive_entertainment：敏感娱乐人物。</li>
+sport：
+<li>sensitive_sport：敏感体育人物。</li>
+entrepreneur：
+<li>sensitive_entrepreneur：敏感商业人物。</li>
+scholar：
+<li>sensitive_scholar：敏感教育学者。</li>
+celebrity：
+<li>sensitive_celebrity：敏感知名人物；</li>
+<li>historical_celebrity：历史知名人物。</li>
+military：
+<li>sensitive_military：敏感军事人物。</li>
          * @type {string || null}
          */
-        this.CreateTime = null;
+        this.Label = null;
 
         /**
-         * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+         * 嫌疑图片 URL （图片不会永久存储，到达
+ PicUrlExpireTime 时间点后图片将被删除）。
          * @type {string || null}
          */
-        this.BeginProcessTime = null;
+        this.Url = null;
 
         /**
-         * 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+         * 涉政人物、违规图标出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
+         * @type {Array.<number> || null}
+         */
+        this.AreaCoordSet = null;
+
+        /**
+         * 该字段已废弃，请使用 PicUrlExpireTime。
+         * @type {number || null}
+         */
+        this.PicUrlExpireTimeStamp = null;
+
+        /**
+         * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
          * @type {string || null}
          */
-        this.FinishTime = null;
-
-        /**
-         * 视频处理任务信息，仅当 TaskType 为 Procedure，该字段有值。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {ProcedureTask || null}
-         */
-        this.ProcedureTask = null;
-
-        /**
-         * 视频编辑任务信息，仅当 TaskType 为 EditMedia，该字段有值。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {EditMediaTask || null}
-         */
-        this.EditMediaTask = null;
-
-        /**
-         * 微信发布任务信息，仅当 TaskType 为 WechatPublish，该字段有值。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {WechatPublishTask || null}
-         */
-        this.WechatPublishTask = null;
-
-        /**
-         * 制作媒体文件任务信息，仅当 TaskType 为 ComposeMedia，该字段有值。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {ComposeMediaTask || null}
-         */
-        this.ComposeMediaTask = null;
-
-        /**
-         * 拉取上传媒体文件任务信息，仅当 TaskType 为 PullUpload，该字段有值。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {PullUploadTask || null}
-         */
-        this.PullUploadTask = null;
-
-        /**
-         * 视频转码任务信息，仅当 TaskType 为 Transcode，该字段有值。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {TranscodeTask2017 || null}
-         */
-        this.TranscodeTask = null;
-
-        /**
-         * 视频指定时间点截图任务信息，仅当 TaskType 为 SnapshotByTimeOffset，该字段有值。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {SnapshotByTimeOffsetTask2017 || null}
-         */
-        this.SnapshotByTimeOffsetTask = null;
-
-        /**
-         * 视频拼接任务信息，仅当 TaskType 为 Concat，该字段有值。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {ConcatTask2017 || null}
-         */
-        this.ConcatTask = null;
-
-        /**
-         * 视频剪辑任务信息，仅当 TaskType 为 Clip，该字段有值。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {ClipTask2017 || null}
-         */
-        this.ClipTask = null;
-
-        /**
-         * 截取雪碧图任务信息，仅当 TaskType 为 ImageSprite，该字段有值。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {CreateImageSpriteTask2017 || null}
-         */
-        this.CreateImageSpriteTask = null;
-
-        /**
-         * 微信小程序发布任务信息，仅当 TaskType 为 WechatMiniProgramPublish，该字段有值。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {WechatMiniProgramPublishTask || null}
-         */
-        this.WechatMiniProgramPublishTask = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.PicUrlExpireTime = null;
 
     }
 
@@ -20143,78 +20635,16 @@ class DescribeTaskDetailResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TaskType = 'TaskType' in params ? params.TaskType : null;
-        this.Status = 'Status' in params ? params.Status : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.BeginProcessTime = 'BeginProcessTime' in params ? params.BeginProcessTime : null;
-        this.FinishTime = 'FinishTime' in params ? params.FinishTime : null;
-
-        if (params.ProcedureTask) {
-            let obj = new ProcedureTask();
-            obj.deserialize(params.ProcedureTask)
-            this.ProcedureTask = obj;
-        }
-
-        if (params.EditMediaTask) {
-            let obj = new EditMediaTask();
-            obj.deserialize(params.EditMediaTask)
-            this.EditMediaTask = obj;
-        }
-
-        if (params.WechatPublishTask) {
-            let obj = new WechatPublishTask();
-            obj.deserialize(params.WechatPublishTask)
-            this.WechatPublishTask = obj;
-        }
-
-        if (params.ComposeMediaTask) {
-            let obj = new ComposeMediaTask();
-            obj.deserialize(params.ComposeMediaTask)
-            this.ComposeMediaTask = obj;
-        }
-
-        if (params.PullUploadTask) {
-            let obj = new PullUploadTask();
-            obj.deserialize(params.PullUploadTask)
-            this.PullUploadTask = obj;
-        }
-
-        if (params.TranscodeTask) {
-            let obj = new TranscodeTask2017();
-            obj.deserialize(params.TranscodeTask)
-            this.TranscodeTask = obj;
-        }
-
-        if (params.SnapshotByTimeOffsetTask) {
-            let obj = new SnapshotByTimeOffsetTask2017();
-            obj.deserialize(params.SnapshotByTimeOffsetTask)
-            this.SnapshotByTimeOffsetTask = obj;
-        }
-
-        if (params.ConcatTask) {
-            let obj = new ConcatTask2017();
-            obj.deserialize(params.ConcatTask)
-            this.ConcatTask = obj;
-        }
-
-        if (params.ClipTask) {
-            let obj = new ClipTask2017();
-            obj.deserialize(params.ClipTask)
-            this.ClipTask = obj;
-        }
-
-        if (params.CreateImageSpriteTask) {
-            let obj = new CreateImageSpriteTask2017();
-            obj.deserialize(params.CreateImageSpriteTask)
-            this.CreateImageSpriteTask = obj;
-        }
-
-        if (params.WechatMiniProgramPublishTask) {
-            let obj = new WechatMiniProgramPublishTask();
-            obj.deserialize(params.WechatMiniProgramPublishTask)
-            this.WechatMiniProgramPublishTask = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.StartTimeOffset = 'StartTimeOffset' in params ? params.StartTimeOffset : null;
+        this.EndTimeOffset = 'EndTimeOffset' in params ? params.EndTimeOffset : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+        this.Suggestion = 'Suggestion' in params ? params.Suggestion : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Label = 'Label' in params ? params.Label : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.AreaCoordSet = 'AreaCoordSet' in params ? params.AreaCoordSet : null;
+        this.PicUrlExpireTimeStamp = 'PicUrlExpireTimeStamp' in params ? params.PicUrlExpireTimeStamp : null;
+        this.PicUrlExpireTime = 'PicUrlExpireTime' in params ? params.PicUrlExpireTime : null;
 
     }
 }
@@ -22436,43 +22866,38 @@ class DescribeWordSamplesRequest extends  AbstractModel {
 }
 
 /**
- * LiveRealTimeClip返回参数结构体
+ * 图片中心裁剪处理。
  * @class
  */
-class LiveRealTimeClipResponse extends  AbstractModel {
+class ImageCenterCut extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 剪辑后的视频播放 URL。
+         * 图片的裁剪模式，可选 Circle 和 Rectangle。
+<li>Circle ： 内切圆裁剪，输出图片半径为 Radius。</li>
+<li>Rectangle ： 矩形裁剪，输出图片宽为 Width ， 高为 Height。</li>
          * @type {string || null}
          */
-        this.Url = null;
+        this.Type = null;
 
         /**
-         * 剪辑固化后的视频的媒体文件的唯一标识。
-         * @type {string || null}
+         * 输出图片的宽度，单位为像素，当 Type 取值为 Rectangle 时有效。
+         * @type {number || null}
          */
-        this.FileId = null;
+        this.Width = null;
 
         /**
-         * 剪辑固化后的视频任务流 ID。
-         * @type {string || null}
+         * 输出图片的高度，单位为像素，当 Type 取值为 Rectangle 时有效。
+         * @type {number || null}
          */
-        this.VodTaskId = null;
+        this.Height = null;
 
         /**
-         * 剪辑后的视频元信息。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {MediaMetaData || null}
+         * 输出图片的半径，单位为像素，当 Type 取值为 Circle 时有效。
+         * @type {number || null}
          */
-        this.MetaData = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
+        this.Radius = null;
 
     }
 
@@ -22483,16 +22908,10 @@ class LiveRealTimeClipResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Url = 'Url' in params ? params.Url : null;
-        this.FileId = 'FileId' in params ? params.FileId : null;
-        this.VodTaskId = 'VodTaskId' in params ? params.VodTaskId : null;
-
-        if (params.MetaData) {
-            let obj = new MediaMetaData();
-            obj.deserialize(params.MetaData)
-            this.MetaData = obj;
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Width = 'Width' in params ? params.Width : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Radius = 'Radius' in params ? params.Radius : null;
 
     }
 }
@@ -25228,6 +25647,34 @@ class AiRecognitionTaskFaceResultOutput extends  AbstractModel {
 }
 
 /**
+ * DeleteImageProcessingTemplate返回参数结构体
+ * @class
+ */
+class DeleteImageProcessingTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 画面鉴黄任务控制参数。
  * @class
  */
@@ -25922,6 +26369,56 @@ class MediaAiAnalysisFrameTagItem extends  AbstractModel {
         this.Tag = 'Tag' in params ? params.Tag : null;
         this.CategorySet = 'CategorySet' in params ? params.CategorySet : null;
         this.Confidence = 'Confidence' in params ? params.Confidence : null;
+
+    }
+}
+
+/**
+ * DescribeImageProcessingTemplates返回参数结构体
+ * @class
+ */
+class DescribeImageProcessingTemplatesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 符合过滤条件的记录总数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 图片处理模板详情列表。
+         * @type {Array.<ImageProcessingTemplate> || null}
+         */
+        this.ImageProcessingTemplateSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ImageProcessingTemplateSet) {
+            this.ImageProcessingTemplateSet = new Array();
+            for (let z in params.ImageProcessingTemplateSet) {
+                let obj = new ImageProcessingTemplate();
+                obj.deserialize(params.ImageProcessingTemplateSet[z]);
+                this.ImageProcessingTemplateSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -27264,6 +27761,7 @@ module.exports = {
     AudioTrackItem: AudioTrackItem,
     MediaAiAnalysisHighlightItem: MediaAiAnalysisHighlightItem,
     DescribeAnimatedGraphicsTemplatesRequest: DescribeAnimatedGraphicsTemplatesRequest,
+    LiveRealTimeClipResponse: LiveRealTimeClipResponse,
     AiReviewTaskProhibitedAsrResult: AiReviewTaskProhibitedAsrResult,
     AdaptiveDynamicStreamingTemplate: AdaptiveDynamicStreamingTemplate,
     DeleteAnimatedGraphicsTemplateResponse: DeleteAnimatedGraphicsTemplateResponse,
@@ -27271,6 +27769,7 @@ module.exports = {
     AiRecognitionTaskAsrFullTextResultOutput: AiRecognitionTaskAsrFullTextResultOutput,
     AiReviewProhibitedOcrTaskOutput: AiReviewProhibitedOcrTaskOutput,
     MediaMiniProgramReviewElem: MediaMiniProgramReviewElem,
+    CreateImageProcessingTemplateRequest: CreateImageProcessingTemplateRequest,
     AiAnalysisTaskCoverOutput: AiAnalysisTaskCoverOutput,
     MediaSnapshotByTimeOffsetItem: MediaSnapshotByTimeOffsetItem,
     ModifySampleSnapshotTemplateRequest: ModifySampleSnapshotTemplateRequest,
@@ -27312,6 +27811,7 @@ module.exports = {
     ModifyTranscodeTemplateRequest: ModifyTranscodeTemplateRequest,
     AiAnalysisTaskHighlightResult: AiAnalysisTaskHighlightResult,
     DeleteAIAnalysisTemplateResponse: DeleteAIAnalysisTemplateResponse,
+    DeleteImageProcessingTemplateRequest: DeleteImageProcessingTemplateRequest,
     ApplyUploadResponse: ApplyUploadResponse,
     TextWatermarkTemplateInputForUpdate: TextWatermarkTemplateInputForUpdate,
     DeleteSuperPlayerConfigRequest: DeleteSuperPlayerConfigRequest,
@@ -27440,7 +27940,7 @@ module.exports = {
     AiRecognitionTaskAsrWordsResultOutput: AiRecognitionTaskAsrWordsResultOutput,
     ModifyAdaptiveDynamicStreamingTemplateResponse: ModifyAdaptiveDynamicStreamingTemplateResponse,
     MediaProcessTaskTranscodeResult: MediaProcessTaskTranscodeResult,
-    AiRecognitionTaskSegmentResultOutput: AiRecognitionTaskSegmentResultOutput,
+    ImageProcessingTemplate: ImageProcessingTemplate,
     ImageSpriteTaskInput: ImageSpriteTaskInput,
     ObjectConfigureInfoForUpdate: ObjectConfigureInfoForUpdate,
     DeleteMediaRequest: DeleteMediaRequest,
@@ -27463,14 +27963,17 @@ module.exports = {
     TerrorismOcrReviewTemplateInfoForUpdate: TerrorismOcrReviewTemplateInfoForUpdate,
     DescribeEventsStateResponse: DescribeEventsStateResponse,
     AiRecognitionTaskHeadTailResultOutput: AiRecognitionTaskHeadTailResultOutput,
+    AdaptiveDynamicStreamingTaskInput: AdaptiveDynamicStreamingTaskInput,
     ModifyImageSpriteTemplateResponse: ModifyImageSpriteTemplateResponse,
     MediaProcessTaskCoverBySnapshotResult: MediaProcessTaskCoverBySnapshotResult,
     CreateWatermarkTemplateRequest: CreateWatermarkTemplateRequest,
     TerrorismConfigureInfoForUpdate: TerrorismConfigureInfoForUpdate,
     DescribeEventsStateRequest: DescribeEventsStateRequest,
     WechatMiniProgramPublishTask: WechatMiniProgramPublishTask,
+    CreateImageProcessingTemplateResponse: CreateImageProcessingTemplateResponse,
     ComposeMediaTask: ComposeMediaTask,
     HeadTailConfigureInfoForUpdate: HeadTailConfigureInfoForUpdate,
+    ImageScale: ImageScale,
     TranscodePlayInfo2017: TranscodePlayInfo2017,
     ComposeMediaTaskInput: ComposeMediaTaskInput,
     AnimatedGraphicTaskInput: AnimatedGraphicTaskInput,
@@ -27488,6 +27991,7 @@ module.exports = {
     CreateSubAppIdResponse: CreateSubAppIdResponse,
     CreateWatermarkTemplateResponse: CreateWatermarkTemplateResponse,
     AiReviewTerrorismTaskOutput: AiReviewTerrorismTaskOutput,
+    DescribeImageProcessingTemplatesRequest: DescribeImageProcessingTemplatesRequest,
     ResetProcedureTemplateResponse: ResetProcedureTemplateResponse,
     ProhibitedConfigureInfo: ProhibitedConfigureInfo,
     DrmStreamingsInfo: DrmStreamingsInfo,
@@ -27511,7 +28015,7 @@ module.exports = {
     ProcessMediaByUrlResponse: ProcessMediaByUrlResponse,
     MediaContentReviewAsrTextSegmentItem: MediaContentReviewAsrTextSegmentItem,
     DescribeCdnLogsResponse: DescribeCdnLogsResponse,
-    MediaContentReviewPoliticalSegmentItem: MediaContentReviewPoliticalSegmentItem,
+    DescribeTaskDetailResponse: DescribeTaskDetailResponse,
     DeletePersonSampleResponse: DeletePersonSampleResponse,
     CreateSnapshotByTimeOffsetTemplateResponse: CreateSnapshotByTimeOffsetTemplateResponse,
     ModifyContentReviewTemplateRequest: ModifyContentReviewTemplateRequest,
@@ -27522,8 +28026,9 @@ module.exports = {
     AiAnalysisTaskInput: AiAnalysisTaskInput,
     ImageSpriteTemplate: ImageSpriteTemplate,
     AiRecognitionTaskOcrFullTextSegmentTextItem: AiRecognitionTaskOcrFullTextSegmentTextItem,
-    SnapshotByTimeOffsetTaskInput: SnapshotByTimeOffsetTaskInput,
+    AiRecognitionTaskSegmentResultOutput: AiRecognitionTaskSegmentResultOutput,
     SegmentConfigureInfo: SegmentConfigureInfo,
+    SnapshotByTimeOffsetTaskInput: SnapshotByTimeOffsetTaskInput,
     TaskStatDataItem: TaskStatDataItem,
     ParseStreamingManifestResponse: ParseStreamingManifestResponse,
     AiReviewPornOcrTaskOutput: AiReviewPornOcrTaskOutput,
@@ -27606,13 +28111,13 @@ module.exports = {
     VideoTemplateInfoForUpdate: VideoTemplateInfoForUpdate,
     CreateContentReviewTemplateRequest: CreateContentReviewTemplateRequest,
     DescribeContentReviewTemplatesRequest: DescribeContentReviewTemplatesRequest,
-    AdaptiveDynamicStreamingTaskInput: AdaptiveDynamicStreamingTaskInput,
+    ImageOperation: ImageOperation,
     DescribeImageSpriteTemplatesResponse: DescribeImageSpriteTemplatesResponse,
     AiAnalysisTaskFrameTagInput: AiAnalysisTaskFrameTagInput,
     MediaAiAnalysisFrameTagSegmentItem: MediaAiAnalysisFrameTagSegmentItem,
     AiRecognitionTaskAsrWordsResultItem: AiRecognitionTaskAsrWordsResultItem,
     MediaAiAnalysisTagItem: MediaAiAnalysisTagItem,
-    DescribeTaskDetailResponse: DescribeTaskDetailResponse,
+    MediaContentReviewPoliticalSegmentItem: MediaContentReviewPoliticalSegmentItem,
     MediaKeyFrameDescInfo: MediaKeyFrameDescInfo,
     DeleteImageSpriteTemplateRequest: DeleteImageSpriteTemplateRequest,
     CreateClassRequest: CreateClassRequest,
@@ -27653,7 +28158,7 @@ module.exports = {
     DeleteWatermarkTemplateRequest: DeleteWatermarkTemplateRequest,
     EditMediaStreamInfo: EditMediaStreamInfo,
     DescribeWordSamplesRequest: DescribeWordSamplesRequest,
-    LiveRealTimeClipResponse: LiveRealTimeClipResponse,
+    ImageCenterCut: ImageCenterCut,
     ModifyAIAnalysisTemplateRequest: ModifyAIAnalysisTemplateRequest,
     CommitUploadResponse: CommitUploadResponse,
     DescribeSampleSnapshotTemplatesResponse: DescribeSampleSnapshotTemplatesResponse,
@@ -27697,6 +28202,7 @@ module.exports = {
     PullUploadResponse: PullUploadResponse,
     FaceConfigureInfo: FaceConfigureInfo,
     AiRecognitionTaskFaceResultOutput: AiRecognitionTaskFaceResultOutput,
+    DeleteImageProcessingTemplateResponse: DeleteImageProcessingTemplateResponse,
     PornImgReviewTemplateInfoForUpdate: PornImgReviewTemplateInfoForUpdate,
     EditMediaTask: EditMediaTask,
     PornImgReviewTemplateInfo: PornImgReviewTemplateInfo,
@@ -27711,6 +28217,7 @@ module.exports = {
     DeleteSnapshotByTimeOffsetTemplateRequest: DeleteSnapshotByTimeOffsetTemplateRequest,
     DescribeAnimatedGraphicsTemplatesResponse: DescribeAnimatedGraphicsTemplatesResponse,
     MediaAiAnalysisFrameTagItem: MediaAiAnalysisFrameTagItem,
+    DescribeImageProcessingTemplatesResponse: DescribeImageProcessingTemplatesResponse,
     SampleSnapshotTaskInput: SampleSnapshotTaskInput,
     TerrorismConfigureInfo: TerrorismConfigureInfo,
     PoliticalAsrReviewTemplateInfo: PoliticalAsrReviewTemplateInfo,

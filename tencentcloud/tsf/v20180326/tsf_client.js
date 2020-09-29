@@ -20,20 +20,26 @@ const DescribeMsApiListRequest = models.DescribeMsApiListRequest;
 const TsfApiListResponse = models.TsfApiListResponse;
 const DescribeGroupInstancesResponse = models.DescribeGroupInstancesResponse;
 const DescribeMsApiListResponse = models.DescribeMsApiListResponse;
+const EnableTaskRequest = models.EnableTaskRequest;
+const DisableTaskFlowResponse = models.DisableTaskFlowResponse;
 const DescribeDownloadInfoRequest = models.DescribeDownloadInfoRequest;
 const ApiDetailResponse = models.ApiDetailResponse;
 const ImageTag = models.ImageTag;
 const DescribePublicConfigSummaryRequest = models.DescribePublicConfigSummaryRequest;
 const DescribeClusterInstancesResponse = models.DescribeClusterInstancesResponse;
+const DisableTaskResponse = models.DisableTaskResponse;
 const DescribeMicroserviceRequest = models.DescribeMicroserviceRequest;
 const CosCredentials = models.CosCredentials;
 const HealthCheckSetting = models.HealthCheckSetting;
 const DescribeContainerGroupsRequest = models.DescribeContainerGroupsRequest;
+const RedoTaskBatchResponse = models.RedoTaskBatchResponse;
+const TerminateTaskFlowBatchRequest = models.TerminateTaskFlowBatchRequest;
 const ExpandGroupRequest = models.ExpandGroupRequest;
 const DeleteServerlessGroupRequest = models.DeleteServerlessGroupRequest;
 const DescribeImageTagsRequest = models.DescribeImageTagsRequest;
 const ModifyLaneRuleResponse = models.ModifyLaneRuleResponse;
 const DescribeSimpleClustersResponse = models.DescribeSimpleClustersResponse;
+const TaskRule = models.TaskRule;
 const DescribePodInstancesResponse = models.DescribePodInstancesResponse;
 const VmGroup = models.VmGroup;
 const DescribeRepositoryResponse = models.DescribeRepositoryResponse;
@@ -49,11 +55,16 @@ const StartContainerGroupResponse = models.StartContainerGroupResponse;
 const CreateGroupRequest = models.CreateGroupRequest;
 const ModifyMicroserviceRequest = models.ModifyMicroserviceRequest;
 const DescribeConfigReleasesRequest = models.DescribeConfigReleasesRequest;
+const ShardArgument = models.ShardArgument;
 const DeleteLaneResponse = models.DeleteLaneResponse;
+const StopTaskBatchResponse = models.StopTaskBatchResponse;
+const DescribeSimpleNamespacesResponse = models.DescribeSimpleNamespacesResponse;
 const ModifyLaneResponse = models.ModifyLaneResponse;
 const TsfPageConfigRelease = models.TsfPageConfigRelease;
 const CreateContainGroupResponse = models.CreateContainGroupResponse;
 const DescribeContainerGroupDetailResponse = models.DescribeContainerGroupDetailResponse;
+const DisableTaskRequest = models.DisableTaskRequest;
+const DescribePkgsResponse = models.DescribePkgsResponse;
 const SimpleApplication = models.SimpleApplication;
 const DescribePublicConfigSummaryResponse = models.DescribePublicConfigSummaryResponse;
 const DescribeLaneRulesRequest = models.DescribeLaneRulesRequest;
@@ -63,6 +74,7 @@ const DescribePublicConfigReleaseLogsRequest = models.DescribePublicConfigReleas
 const CreateServerlessGroupResponse = models.CreateServerlessGroupResponse;
 const CreateLaneRequest = models.CreateLaneRequest;
 const DeleteApplicationResponse = models.DeleteApplicationResponse;
+const DescribeBasicResourceUsageResponse = models.DescribeBasicResourceUsageResponse;
 const UpdateRepositoryRequest = models.UpdateRepositoryRequest;
 const Instance = models.Instance;
 const DeployServerlessGroupResponse = models.DeployServerlessGroupResponse;
@@ -71,11 +83,14 @@ const DescribeApplicationAttributeResponse = models.DescribeApplicationAttribute
 const DescribeApplicationsResponse = models.DescribeApplicationsResponse;
 const VmGroupSimple = models.VmGroupSimple;
 const ModifyContainerReplicasRequest = models.ModifyContainerReplicasRequest;
+const TerminateTaskFlowBatchResponse = models.TerminateTaskFlowBatchResponse;
+const ExecuteTaskFlowRequest = models.ExecuteTaskFlowRequest;
 const ModifyLaneRequest = models.ModifyLaneRequest;
 const DescribeLanesRequest = models.DescribeLanesRequest;
 const DeleteMicroserviceRequest = models.DeleteMicroserviceRequest;
 const CreatePublicConfigRequest = models.CreatePublicConfigRequest;
 const RemoveInstancesResponse = models.RemoveInstancesResponse;
+const StopContainerGroupResponse = models.StopContainerGroupResponse;
 const DescribeApiVersionsRequest = models.DescribeApiVersionsRequest;
 const ModifyContainerReplicasResponse = models.ModifyContainerReplicasResponse;
 const DescribeConfigRequest = models.DescribeConfigRequest;
@@ -83,6 +98,7 @@ const Namespace = models.Namespace;
 const TsfPageCluster = models.TsfPageCluster;
 const DescribeGroupResponse = models.DescribeGroupResponse;
 const DescribeGroupsResponse = models.DescribeGroupsResponse;
+const TaskId = models.TaskId;
 const Env = models.Env;
 const DeleteContainerGroupResponse = models.DeleteContainerGroupResponse;
 const DescribeSimpleGroupsRequest = models.DescribeSimpleGroupsRequest;
@@ -93,27 +109,36 @@ const ModifyUploadInfoResponse = models.ModifyUploadInfoResponse;
 const DescribeImageTagsResponse = models.DescribeImageTagsResponse;
 const DeleteGroupRequest = models.DeleteGroupRequest;
 const ApiDefinitionDescr = models.ApiDefinitionDescr;
+const ExecuteTaskRequest = models.ExecuteTaskRequest;
+const RedoTaskFlowBatchRequest = models.RedoTaskFlowBatchRequest;
 const TsfPageMsInstance = models.TsfPageMsInstance;
+const StopTaskBatchRequest = models.StopTaskBatchRequest;
 const ServerlessGroup = models.ServerlessGroup;
 const DescribeApplicationResponse = models.DescribeApplicationResponse;
 const LaneInfo = models.LaneInfo;
 const DescribeConfigReleaseLogsResponse = models.DescribeConfigReleaseLogsResponse;
 const RevocationConfigResponse = models.RevocationConfigResponse;
 const DescribeSimpleGroupsResponse = models.DescribeSimpleGroupsResponse;
+const StopTaskExecuteRequest = models.StopTaskExecuteRequest;
+const DescribeFlowLastBatchStateRequest = models.DescribeFlowLastBatchStateRequest;
 const ContainerGroupDetail = models.ContainerGroupDetail;
 const DeletePublicConfigRequest = models.DeletePublicConfigRequest;
+const TaskLastExecuteStatus = models.TaskLastExecuteStatus;
 const DeleteNamespaceResponse = models.DeleteNamespaceResponse;
 const CreateMicroserviceRequest = models.CreateMicroserviceRequest;
 const DescribePkgsRequest = models.DescribePkgsRequest;
 const ReleaseConfigResponse = models.ReleaseConfigResponse;
 const RemoveInstancesRequest = models.RemoveInstancesRequest;
+const DisableTaskFlowRequest = models.DisableTaskFlowRequest;
 const ShrinkInstancesRequest = models.ShrinkInstancesRequest;
 const ShrinkInstancesResponse = models.ShrinkInstancesResponse;
 const DeleteImageTagsRequest = models.DeleteImageTagsRequest;
 const DescribeRepositoriesRequest = models.DescribeRepositoriesRequest;
 const DescribeApplicationAttributeRequest = models.DescribeApplicationAttributeRequest;
 const DescribePodInstancesRequest = models.DescribePodInstancesRequest;
-const TsfPageSimpleGroup = models.TsfPageSimpleGroup;
+const DescribeTaskLastStatusRequest = models.DescribeTaskLastStatusRequest;
+const OverviewBasicResourceUsage = models.OverviewBasicResourceUsage;
+const CreateTaskRequest = models.CreateTaskRequest;
 const DescribeConfigsRequest = models.DescribeConfigsRequest;
 const OperationInfo = models.OperationInfo;
 const AddClusterInstancesRequest = models.AddClusterInstancesRequest;
@@ -125,15 +150,17 @@ const DescribeContainerGroupsResponse = models.DescribeContainerGroupsResponse;
 const DescribeSimpleApplicationsRequest = models.DescribeSimpleApplicationsRequest;
 const DescribeConfigResponse = models.DescribeConfigResponse;
 const DescribeSimpleNamespacesRequest = models.DescribeSimpleNamespacesRequest;
+const ExecuteTaskFlowResponse = models.ExecuteTaskFlowResponse;
 const LaneRule = models.LaneRule;
 const MsInstance = models.MsInstance;
 const ExpandGroupResponse = models.ExpandGroupResponse;
 const DescribeServerlessGroupsResponse = models.DescribeServerlessGroupsResponse;
 const DescribePublicConfigsResponse = models.DescribePublicConfigsResponse;
+const ServerlessGroupPage = models.ServerlessGroupPage;
 const ModifyLaneRuleRequest = models.ModifyLaneRuleRequest;
 const AddInstancesResponse = models.AddInstancesResponse;
 const DeleteApplicationRequest = models.DeleteApplicationRequest;
-const RevocationPublicConfigRequest = models.RevocationPublicConfigRequest;
+const ContinueRunFailedTaskBatchResponse = models.ContinueRunFailedTaskBatchResponse;
 const DescribeSimpleClustersRequest = models.DescribeSimpleClustersRequest;
 const StartContainerGroupRequest = models.StartContainerGroupRequest;
 const DeleteConfigRequest = models.DeleteConfigRequest;
@@ -141,6 +168,7 @@ const DescribePublicConfigReleaseLogsResponse = models.DescribePublicConfigRelea
 const DeleteTaskRequest = models.DeleteTaskRequest;
 const HealthCheckSettings = models.HealthCheckSettings;
 const ServiceSetting = models.ServiceSetting;
+const ExecuteTaskResponse = models.ExecuteTaskResponse;
 const ApiResponseDescr = models.ApiResponseDescr;
 const DeployServerlessGroupRequest = models.DeployServerlessGroupRequest;
 const Config = models.Config;
@@ -148,6 +176,7 @@ const CreateClusterResponse = models.CreateClusterResponse;
 const DeletePublicConfigResponse = models.DeletePublicConfigResponse;
 const ApiRequestDescr = models.ApiRequestDescr;
 const CreateMicroserviceResponse = models.CreateMicroserviceResponse;
+const ReleasePublicConfigResponse = models.ReleasePublicConfigResponse;
 const ApiVersionArray = models.ApiVersionArray;
 const CreateClusterRequest = models.CreateClusterRequest;
 const StopGroupRequest = models.StopGroupRequest;
@@ -156,28 +185,34 @@ const ShrinkGroupResponse = models.ShrinkGroupResponse;
 const CosUploadInfo = models.CosUploadInfo;
 const ConfigRelease = models.ConfigRelease;
 const DeleteContainerGroupRequest = models.DeleteContainerGroupRequest;
-const DescribeContainerGroupDetailRequest = models.DescribeContainerGroupDetailRequest;
+const AdvanceSettings = models.AdvanceSettings;
 const ReleaseConfigRequest = models.ReleaseConfigRequest;
 const CreateConfigRequest = models.CreateConfigRequest;
 const MsApiArray = models.MsApiArray;
 const CreateNamespaceRequest = models.CreateNamespaceRequest;
+const DescribeContainerGroupDetailRequest = models.DescribeContainerGroupDetailRequest;
 const DescribeApiDetailRequest = models.DescribeApiDetailRequest;
 const DescribeUploadInfoRequest = models.DescribeUploadInfoRequest;
 const DescribeClusterInstancesRequest = models.DescribeClusterInstancesRequest;
 const StopContainerGroupRequest = models.StopContainerGroupRequest;
 const DescribeRepositoryRequest = models.DescribeRepositoryRequest;
+const RevocationPublicConfigRequest = models.RevocationPublicConfigRequest;
+const TaskFlowLastBatchState = models.TaskFlowLastBatchState;
 const PropertyField = models.PropertyField;
 const TsfPageApplication = models.TsfPageApplication;
 const DescribeGroupRequest = models.DescribeGroupRequest;
+const RedoTaskRequest = models.RedoTaskRequest;
 const ImageTagsResult = models.ImageTagsResult;
 const RepositoryInfo = models.RepositoryInfo;
-const StopContainerGroupResponse = models.StopContainerGroupResponse;
+const EnableTaskFlowRequest = models.EnableTaskFlowRequest;
 const CreateLaneResponse = models.CreateLaneResponse;
 const DescribeServerlessGroupRequest = models.DescribeServerlessGroupRequest;
 const TsfPageVmGroup = models.TsfPageVmGroup;
 const AddInstanceResult = models.AddInstanceResult;
-const DescribePkgsResponse = models.DescribePkgsResponse;
-const DescribeSimpleNamespacesResponse = models.DescribeSimpleNamespacesResponse;
+const DescribeFlowLastBatchStateResponse = models.DescribeFlowLastBatchStateResponse;
+const ContinueRunFailedTaskBatchRequest = models.ContinueRunFailedTaskBatchRequest;
+const StopTaskExecuteResponse = models.StopTaskExecuteResponse;
+const EnableTaskFlowResponse = models.EnableTaskFlowResponse;
 const ApplicationAttribute = models.ApplicationAttribute;
 const DeleteImageTag = models.DeleteImageTag;
 const DeletePkgsResponse = models.DeletePkgsResponse;
@@ -209,14 +244,16 @@ const AddClusterInstancesResponse = models.AddClusterInstancesResponse;
 const PkgInfo = models.PkgInfo;
 const RepositoryList = models.RepositoryList;
 const CreateLaneRuleResponse = models.CreateLaneRuleResponse;
-const DescribeConfigReleaseLogsRequest = models.DescribeConfigReleaseLogsRequest;
+const CreateTaskResponse = models.CreateTaskResponse;
 const DescribeApiDetailResponse = models.DescribeApiDetailResponse;
 const DescribeGroupsRequest = models.DescribeGroupsRequest;
+const DescribeTaskLastStatusResponse = models.DescribeTaskLastStatusResponse;
 const ModifyContainerGroupRequest = models.ModifyContainerGroupRequest;
 const UpdateRepositoryResponse = models.UpdateRepositoryResponse;
 const TsfPageMicroservice = models.TsfPageMicroservice;
 const DescribePublicConfigsRequest = models.DescribePublicConfigsRequest;
 const AddInstancesRequest = models.AddInstancesRequest;
+const RedoTaskResponse = models.RedoTaskResponse;
 const StartGroupRequest = models.StartGroupRequest;
 const LaneRuleTag = models.LaneRuleTag;
 const RollbackConfigResponse = models.RollbackConfigResponse;
@@ -231,6 +268,7 @@ const PkgBind = models.PkgBind;
 const DeleteTaskResponse = models.DeleteTaskResponse;
 const DeployGroupRequest = models.DeployGroupRequest;
 const LaneInfos = models.LaneInfos;
+const RedoTaskBatchRequest = models.RedoTaskBatchRequest;
 const CreateServerlessGroupRequest = models.CreateServerlessGroupRequest;
 const DescribeMicroserviceResponse = models.DescribeMicroserviceResponse;
 const DeleteGroupResponse = models.DeleteGroupResponse;
@@ -239,9 +277,10 @@ const CreateLaneRuleRequest = models.CreateLaneRuleRequest;
 const DescribeServerlessGroupsRequest = models.DescribeServerlessGroupsRequest;
 const DeployContainerGroupRequest = models.DeployContainerGroupRequest;
 const CosDownloadInfo = models.CosDownloadInfo;
+const TsfPageSimpleGroup = models.TsfPageSimpleGroup;
 const DeletePkgsRequest = models.DeletePkgsRequest;
 const TsfPageInstance = models.TsfPageInstance;
-const ServerlessGroupPage = models.ServerlessGroupPage;
+const DescribeConfigReleaseLogsRequest = models.DescribeConfigReleaseLogsRequest;
 const DescribeConfigSummaryResponse = models.DescribeConfigSummaryResponse;
 const CreateContainGroupRequest = models.CreateContainGroupRequest;
 const ContainGroup = models.ContainGroup;
@@ -254,12 +293,13 @@ const DescribeConfigSummaryRequest = models.DescribeConfigSummaryRequest;
 const DeleteLaneRequest = models.DeleteLaneRequest;
 const DeployGroupResponse = models.DeployGroupResponse;
 const ModifyContainerGroupResponse = models.ModifyContainerGroupResponse;
-const ReleasePublicConfigResponse = models.ReleasePublicConfigResponse;
+const EnableTaskResponse = models.EnableTaskResponse;
 const ReleasePublicConfigRequest = models.ReleasePublicConfigRequest;
 const DescribeServerlessGroupResponse = models.DescribeServerlessGroupResponse;
 const LaneGroup = models.LaneGroup;
-const TaskId = models.TaskId;
+const DescribeBasicResourceUsageRequest = models.DescribeBasicResourceUsageRequest;
 const TsfPageConfig = models.TsfPageConfig;
+const RedoTaskFlowBatchResponse = models.RedoTaskFlowBatchResponse;
 const RevocationPublicConfigResponse = models.RevocationPublicConfigResponse;
 const DescribeGroupInstancesRequest = models.DescribeGroupInstancesRequest;
 const CreateGroupResponse = models.CreateGroupResponse;
@@ -275,6 +315,17 @@ class TsfClient extends AbstractClient {
         super("tsf.tencentcloudapi.com", "2018-03-26", credential, region, profile);
     }
     
+    /**
+     * 创建任务
+     * @param {CreateTaskRequest} req
+     * @param {function(string, CreateTaskResponse):void} cb
+     * @public
+     */
+    CreateTask(req, cb) {
+        let resp = new CreateTaskResponse();
+        this.request("CreateTask", req, resp, cb);
+    }
+
     /**
      * 删除公共配置项
      * @param {DeletePublicConfigRequest} req
@@ -295,6 +346,17 @@ class TsfClient extends AbstractClient {
     CreateCluster(req, cb) {
         let resp = new CreateClusterResponse();
         this.request("CreateCluster", req, resp, cb);
+    }
+
+    /**
+     * 对执行失败的任务批次执行续跑
+     * @param {ContinueRunFailedTaskBatchRequest} req
+     * @param {function(string, ContinueRunFailedTaskBatchResponse):void} cb
+     * @public
+     */
+    ContinueRunFailedTaskBatch(req, cb) {
+        let resp = new ContinueRunFailedTaskBatchResponse();
+        this.request("ContinueRunFailedTaskBatch", req, resp, cb);
     }
 
     /**
@@ -331,6 +393,17 @@ class TsfClient extends AbstractClient {
     }
 
     /**
+     * 撤回已发布的公共配置
+     * @param {RevocationPublicConfigRequest} req
+     * @param {function(string, RevocationPublicConfigResponse):void} cb
+     * @public
+     */
+    RevocationPublicConfig(req, cb) {
+        let resp = new RevocationPublicConfigResponse();
+        this.request("RevocationPublicConfig", req, resp, cb);
+    }
+
+    /**
      * 创建命名空间
      * @param {CreateNamespaceRequest} req
      * @param {function(string, CreateNamespaceResponse):void} cb
@@ -353,6 +426,17 @@ class TsfClient extends AbstractClient {
     }
 
     /**
+     * 重新执行工作流批次
+     * @param {RedoTaskFlowBatchRequest} req
+     * @param {function(string, RedoTaskFlowBatchResponse):void} cb
+     * @public
+     */
+    RedoTaskFlowBatch(req, cb) {
+        let resp = new RedoTaskFlowBatchResponse();
+        this.request("RedoTaskFlowBatch", req, resp, cb);
+    }
+
+    /**
      * 查询公共配置汇总列表
      * @param {DescribePublicConfigSummaryRequest} req
      * @param {function(string, DescribePublicConfigSummaryResponse):void} cb
@@ -364,14 +448,14 @@ class TsfClient extends AbstractClient {
     }
 
     /**
-     * 容器部署组列表
-     * @param {DescribeContainerGroupsRequest} req
-     * @param {function(string, DescribeContainerGroupsResponse):void} cb
+     * 查询仓库列表
+     * @param {DescribeRepositoriesRequest} req
+     * @param {function(string, DescribeRepositoriesResponse):void} cb
      * @public
      */
-    DescribeContainerGroups(req, cb) {
-        let resp = new DescribeContainerGroupsResponse();
-        this.request("DescribeContainerGroups", req, resp, cb);
+    DescribeRepositories(req, cb) {
+        let resp = new DescribeRepositoriesResponse();
+        this.request("DescribeRepositories", req, resp, cb);
     }
 
     /**
@@ -386,6 +470,28 @@ class TsfClient extends AbstractClient {
     }
 
     /**
+     * 停用任务
+     * @param {DisableTaskRequest} req
+     * @param {function(string, DisableTaskResponse):void} cb
+     * @public
+     */
+    DisableTask(req, cb) {
+        let resp = new DisableTaskResponse();
+        this.request("DisableTask", req, resp, cb);
+    }
+
+    /**
+     * 批量删除镜像版本
+     * @param {DeleteImageTagsRequest} req
+     * @param {function(string, DeleteImageTagsResponse):void} cb
+     * @public
+     */
+    DeleteImageTags(req, cb) {
+        let resp = new DeleteImageTagsResponse();
+        this.request("DeleteImageTags", req, resp, cb);
+    }
+
+    /**
      * 查询配置
      * @param {DescribeConfigRequest} req
      * @param {function(string, DescribeConfigResponse):void} cb
@@ -394,6 +500,17 @@ class TsfClient extends AbstractClient {
     DescribeConfig(req, cb) {
         let resp = new DescribeConfigResponse();
         this.request("DescribeConfig", req, resp, cb);
+    }
+
+    /**
+     * 停止正在某个节点上执行的任务
+     * @param {StopTaskExecuteRequest} req
+     * @param {function(string, StopTaskExecuteResponse):void} cb
+     * @public
+     */
+    StopTaskExecute(req, cb) {
+        let resp = new StopTaskExecuteResponse();
+        this.request("StopTaskExecute", req, resp, cb);
     }
 
     /**
@@ -486,25 +603,25 @@ class TsfClient extends AbstractClient {
     }
 
     /**
-     * 撤回已发布的公共配置
-     * @param {RevocationPublicConfigRequest} req
-     * @param {function(string, RevocationPublicConfigResponse):void} cb
+     * 容器部署组列表
+     * @param {DescribeContainerGroupsRequest} req
+     * @param {function(string, DescribeContainerGroupsResponse):void} cb
      * @public
      */
-    RevocationPublicConfig(req, cb) {
-        let resp = new RevocationPublicConfigResponse();
-        this.request("RevocationPublicConfig", req, resp, cb);
+    DescribeContainerGroups(req, cb) {
+        let resp = new DescribeContainerGroupsResponse();
+        this.request("DescribeContainerGroups", req, resp, cb);
     }
 
     /**
-     * 批量删除镜像版本
-     * @param {DeleteImageTagsRequest} req
-     * @param {function(string, DeleteImageTagsResponse):void} cb
+     * 停用工作流
+     * @param {DisableTaskFlowRequest} req
+     * @param {function(string, DisableTaskFlowResponse):void} cb
      * @public
      */
-    DeleteImageTags(req, cb) {
-        let resp = new DeleteImageTagsResponse();
-        this.request("DeleteImageTags", req, resp, cb);
+    DisableTaskFlow(req, cb) {
+        let resp = new DisableTaskFlowResponse();
+        this.request("DisableTaskFlow", req, resp, cb);
     }
 
     /**
@@ -553,14 +670,14 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     }
 
     /**
-     * 查询公共配置（单条）
-     * @param {DescribePublicConfigRequest} req
-     * @param {function(string, DescribePublicConfigResponse):void} cb
+     * 查询简单应用列表
+     * @param {DescribeSimpleApplicationsRequest} req
+     * @param {function(string, DescribeSimpleApplicationsResponse):void} cb
      * @public
      */
-    DescribePublicConfig(req, cb) {
-        let resp = new DescribePublicConfigResponse();
-        this.request("DescribePublicConfig", req, resp, cb);
+    DescribeSimpleApplications(req, cb) {
+        let resp = new DescribeSimpleApplicationsResponse();
+        this.request("DescribeSimpleApplications", req, resp, cb);
     }
 
     /**
@@ -575,6 +692,17 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     }
 
     /**
+     * 执行一次任务。
+     * @param {ExecuteTaskRequest} req
+     * @param {function(string, ExecuteTaskResponse):void} cb
+     * @public
+     */
+    ExecuteTask(req, cb) {
+        let resp = new ExecuteTaskResponse();
+        this.request("ExecuteTask", req, resp, cb);
+    }
+
+    /**
      * 查询简单命名空间列表 
      * @param {DescribeSimpleNamespacesRequest} req
      * @param {function(string, DescribeSimpleNamespacesResponse):void} cb
@@ -586,14 +714,14 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     }
 
     /**
-     * 删除微服务
-     * @param {DeleteMicroserviceRequest} req
-     * @param {function(string, DeleteMicroserviceResponse):void} cb
+     * 创建Serverless部署组
+     * @param {CreateServerlessGroupRequest} req
+     * @param {function(string, CreateServerlessGroupResponse):void} cb
      * @public
      */
-    DeleteMicroservice(req, cb) {
-        let resp = new DeleteMicroserviceResponse();
-        this.request("DeleteMicroservice", req, resp, cb);
+    CreateServerlessGroup(req, cb) {
+        let resp = new CreateServerlessGroupResponse();
+        this.request("CreateServerlessGroup", req, resp, cb);
     }
 
     /**
@@ -641,6 +769,17 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     }
 
     /**
+     * 停止一个工作流批次
+     * @param {TerminateTaskFlowBatchRequest} req
+     * @param {function(string, TerminateTaskFlowBatchResponse):void} cb
+     * @public
+     */
+    TerminateTaskFlowBatch(req, cb) {
+        let resp = new TerminateTaskFlowBatchResponse();
+        this.request("TerminateTaskFlowBatch", req, resp, cb);
+    }
+
+    /**
      * 获取虚拟机部署组列表
      * @param {DescribeGroupsRequest} req
      * @param {function(string, DescribeGroupsResponse):void} cb
@@ -649,17 +788,6 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     DescribeGroups(req, cb) {
         let resp = new DescribeGroupsResponse();
         this.request("DescribeGroups", req, resp, cb);
-    }
-
-    /**
-     * 查询仓库列表
-     * @param {DescribeRepositoriesRequest} req
-     * @param {function(string, DescribeRepositoriesResponse):void} cb
-     * @public
-     */
-    DescribeRepositories(req, cb) {
-        let resp = new DescribeRepositoriesResponse();
-        this.request("DescribeRepositories", req, resp, cb);
     }
 
     /**
@@ -707,17 +835,6 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     }
 
     /**
-     * 创建Serverless部署组
-     * @param {CreateServerlessGroupRequest} req
-     * @param {function(string, CreateServerlessGroupResponse):void} cb
-     * @public
-     */
-    CreateServerlessGroup(req, cb) {
-        let resp = new CreateServerlessGroupResponse();
-        this.request("CreateServerlessGroup", req, resp, cb);
-    }
-
-    /**
      * 添加云主机节点至TSF集群
      * @param {AddInstancesRequest} req
      * @param {function(string, AddInstancesResponse):void} cb
@@ -740,6 +857,17 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     }
 
     /**
+     * 重新执行任务
+     * @param {RedoTaskRequest} req
+     * @param {function(string, RedoTaskResponse):void} cb
+     * @public
+     */
+    RedoTask(req, cb) {
+        let resp = new RedoTaskResponse();
+        this.request("RedoTask", req, resp, cb);
+    }
+
+    /**
      * 无
      * @param {DescribePkgsRequest} req
      * @param {function(string, DescribePkgsResponse):void} cb
@@ -751,25 +879,25 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     }
 
     /**
-     * 查询简单应用列表
-     * @param {DescribeSimpleApplicationsRequest} req
-     * @param {function(string, DescribeSimpleApplicationsResponse):void} cb
+     * 查询公共配置（单条）
+     * @param {DescribePublicConfigRequest} req
+     * @param {function(string, DescribePublicConfigResponse):void} cb
      * @public
      */
-    DescribeSimpleApplications(req, cb) {
-        let resp = new DescribeSimpleApplicationsResponse();
-        this.request("DescribeSimpleApplications", req, resp, cb);
+    DescribePublicConfig(req, cb) {
+        let resp = new DescribePublicConfigResponse();
+        this.request("DescribePublicConfig", req, resp, cb);
     }
 
     /**
-     * 删除容器部署组
-     * @param {DeleteGroupRequest} req
-     * @param {function(string, DeleteGroupResponse):void} cb
+     * 启动容器部署组
+     * @param {StartContainerGroupRequest} req
+     * @param {function(string, StartContainerGroupResponse):void} cb
      * @public
      */
-    DeleteGroup(req, cb) {
-        let resp = new DeleteGroupResponse();
-        this.request("DeleteGroup", req, resp, cb);
+    StartContainerGroup(req, cb) {
+        let resp = new StartContainerGroupResponse();
+        this.request("StartContainerGroup", req, resp, cb);
     }
 
     /**
@@ -792,6 +920,17 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     CreateGroup(req, cb) {
         let resp = new CreateGroupResponse();
         this.request("CreateGroup", req, resp, cb);
+    }
+
+    /**
+     * 查询任务最近一次执行状态
+     * @param {DescribeTaskLastStatusRequest} req
+     * @param {function(string, DescribeTaskLastStatusResponse):void} cb
+     * @public
+     */
+    DescribeTaskLastStatus(req, cb) {
+        let resp = new DescribeTaskLastStatusResponse();
+        this.request("DescribeTaskLastStatus", req, resp, cb);
     }
 
     /**
@@ -829,14 +968,25 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     }
 
     /**
-     * 启动容器部署组
-     * @param {StartContainerGroupRequest} req
-     * @param {function(string, StartContainerGroupResponse):void} cb
+     * 启用任务
+     * @param {EnableTaskRequest} req
+     * @param {function(string, EnableTaskResponse):void} cb
      * @public
      */
-    StartContainerGroup(req, cb) {
-        let resp = new StartContainerGroupResponse();
-        this.request("StartContainerGroup", req, resp, cb);
+    EnableTask(req, cb) {
+        let resp = new EnableTaskResponse();
+        this.request("EnableTask", req, resp, cb);
+    }
+
+    /**
+     * 删除容器部署组
+     * @param {DeleteGroupRequest} req
+     * @param {function(string, DeleteGroupResponse):void} cb
+     * @public
+     */
+    DeleteGroup(req, cb) {
+        let resp = new DeleteGroupResponse();
+        this.request("DeleteGroup", req, resp, cb);
     }
 
     /**
@@ -950,6 +1100,17 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     }
 
     /**
+     * 启用工作流
+     * @param {EnableTaskFlowRequest} req
+     * @param {function(string, EnableTaskFlowResponse):void} cb
+     * @public
+     */
+    EnableTaskFlow(req, cb) {
+        let resp = new EnableTaskFlowResponse();
+        this.request("EnableTaskFlow", req, resp, cb);
+    }
+
+    /**
      * 查询服务API列表
      * @param {DescribeMsApiListRequest} req
      * @param {function(string, DescribeMsApiListResponse):void} cb
@@ -969,6 +1130,17 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     CreateApplication(req, cb) {
         let resp = new CreateApplicationResponse();
         this.request("CreateApplication", req, resp, cb);
+    }
+
+    /**
+     * 重新执行任务批次
+     * @param {RedoTaskBatchRequest} req
+     * @param {function(string, RedoTaskBatchResponse):void} cb
+     * @public
+     */
+    RedoTaskBatch(req, cb) {
+        let resp = new RedoTaskBatchResponse();
+        this.request("RedoTaskBatch", req, resp, cb);
     }
 
     /**
@@ -994,6 +1166,17 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     }
 
     /**
+     * 执行一次工作流
+     * @param {ExecuteTaskFlowRequest} req
+     * @param {function(string, ExecuteTaskFlowResponse):void} cb
+     * @public
+     */
+    ExecuteTaskFlow(req, cb) {
+        let resp = new ExecuteTaskFlowResponse();
+        this.request("ExecuteTaskFlow", req, resp, cb);
+    }
+
+    /**
      * 查询微服务详情
      * @param {DescribeMicroserviceRequest} req
      * @param {function(string, DescribeMicroserviceResponse):void} cb
@@ -1013,6 +1196,17 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     DeleteServerlessGroup(req, cb) {
         let resp = new DeleteServerlessGroupResponse();
         this.request("DeleteServerlessGroup", req, resp, cb);
+    }
+
+    /**
+     * 查询工作流最新一个批次的状态信息
+     * @param {DescribeFlowLastBatchStateRequest} req
+     * @param {function(string, DescribeFlowLastBatchStateResponse):void} cb
+     * @public
+     */
+    DescribeFlowLastBatchState(req, cb) {
+        let resp = new DescribeFlowLastBatchStateResponse();
+        this.request("DescribeFlowLastBatchState", req, resp, cb);
     }
 
     /**
@@ -1038,6 +1232,17 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     }
 
     /**
+     * 查询虚拟机部署组详情
+     * @param {DescribeGroupRequest} req
+     * @param {function(string, DescribeGroupResponse):void} cb
+     * @public
+     */
+    DescribeGroup(req, cb) {
+        let resp = new DescribeGroupResponse();
+        this.request("DescribeGroup", req, resp, cb);
+    }
+
+    /**
      * 删除应用
      * @param {DeleteApplicationRequest} req
      * @param {function(string, DeleteApplicationResponse):void} cb
@@ -1049,14 +1254,25 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     }
 
     /**
-     * 删除命名空间
-     * @param {DeleteNamespaceRequest} req
-     * @param {function(string, DeleteNamespaceResponse):void} cb
+     * 删除微服务
+     * @param {DeleteMicroserviceRequest} req
+     * @param {function(string, DeleteMicroserviceResponse):void} cb
      * @public
      */
-    DeleteNamespace(req, cb) {
-        let resp = new DeleteNamespaceResponse();
-        this.request("DeleteNamespace", req, resp, cb);
+    DeleteMicroservice(req, cb) {
+        let resp = new DeleteMicroserviceResponse();
+        this.request("DeleteMicroservice", req, resp, cb);
+    }
+
+    /**
+     * TSF基本资源信息概览接口
+     * @param {DescribeBasicResourceUsageRequest} req
+     * @param {function(string, DescribeBasicResourceUsageResponse):void} cb
+     * @public
+     */
+    DescribeBasicResourceUsage(req, cb) {
+        let resp = new DescribeBasicResourceUsageResponse();
+        this.request("DescribeBasicResourceUsage", req, resp, cb);
     }
 
     /**
@@ -1082,6 +1298,17 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     }
 
     /**
+     * 停止执行中的任务批次， 非运行中的任务不可调用。
+     * @param {StopTaskBatchRequest} req
+     * @param {function(string, StopTaskBatchResponse):void} cb
+     * @public
+     */
+    StopTaskBatch(req, cb) {
+        let resp = new StopTaskBatchResponse();
+        this.request("StopTaskBatch", req, resp, cb);
+    }
+
+    /**
      * 获取微服务列表
      * @param {DescribeMicroservicesRequest} req
      * @param {function(string, DescribeMicroservicesResponse):void} cb
@@ -1104,14 +1331,14 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     }
 
     /**
-     * 查询虚拟机部署组详情
-     * @param {DescribeGroupRequest} req
-     * @param {function(string, DescribeGroupResponse):void} cb
+     * 删除命名空间
+     * @param {DeleteNamespaceRequest} req
+     * @param {function(string, DeleteNamespaceResponse):void} cb
      * @public
      */
-    DescribeGroup(req, cb) {
-        let resp = new DescribeGroupResponse();
-        this.request("DescribeGroup", req, resp, cb);
+    DeleteNamespace(req, cb) {
+        let resp = new DeleteNamespaceResponse();
+        this.request("DeleteNamespace", req, resp, cb);
     }
 
     /**
