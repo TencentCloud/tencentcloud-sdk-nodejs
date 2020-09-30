@@ -2,12 +2,14 @@
   "name": "tencentcloud-sdk-nodejs",
   "version": "3.0.267",
   "description": "腾讯云 API NODEJS SDK",
-  "main": "index.js",
+  "main": "tencentcloud/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha -t 10000",
+    "build": "tsc",
+    "prettier": "prettier --config prettier.config.js --write 'src/**/*.{tsx,ts,jsx,js,css,json,vue}'"
   },
   "engines": {
-    "node": ">=7.10.0"
+    "node": ">=10"
   },
   "keywords": [
     "tencentcloudapi",
@@ -20,10 +22,12 @@
   "author": "tencentcloudapi",
   "license": "Apache-2.0",
   "dependencies": {
-    "form-data": "^2.3.3",
-    "get-stream": "^4.1.0",
+    "babel-eslint": "^10.0.2",
+    "eslint-plugin-react": "^7.17.0",
+    "form-data": "^3.0.0",
+    "get-stream": "^6.0.0",
     "https-proxy-agent": "^2.2.1",
-    "is-stream": "^1.1.0",
+    "is-stream": "^2.0.0",
     "node-fetch": "^2.2.0"
   },
   "directories": {
@@ -33,5 +37,17 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/tencentcloud/tencentcloud-sdk-nodejs"
+  },
+  "devDependencies": {
+    "@types/form-data": "^2.5.0",
+    "@types/node": "^14.0.26",
+    "@types/node-fetch": "^2.5.7",
+    "@typescript-eslint/eslint-plugin": "^2.34.0",
+    "@typescript-eslint/parser": "^2.34.0",
+    "chai": "^4.2.0",
+    "eslint": "^6.8.0",
+    "mocha": "^8.1.1",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.7"
   }
 }

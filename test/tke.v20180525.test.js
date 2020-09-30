@@ -1,0 +1,341 @@
+
+const expect = require("chai").expect
+const tencentcloud = require("../../tencentcloud-sdk-nodejs")
+const client = new tencentcloud.tke.v20180525.Client({
+  credential: {
+    secretId: process.env.secretId,
+    secretKey: process.env.secretKey,
+  },
+  region: "ap-shanghai",
+  profile: {
+    signMethod: "TC3-HMAC-SHA256",
+    httpProfile: {
+      reqMethod: "POST",
+      reqTimeout: 30,
+      endpoint: "cvm.ap-shanghai.tencentcloudapi.com",
+    },
+  },
+})
+describe("tke.v20180525.test.js", function () {
+
+it("tke.v20180525.CreateCluster", async function () {
+    try {
+       const data = await client.CreateCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DescribeImages", async function () {
+    try {
+       const data = await client.DescribeImages({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.ModifyClusterAsGroupAttribute", async function () {
+    try {
+       const data = await client.ModifyClusterAsGroupAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DeleteClusterEndpoint", async function () {
+    try {
+       const data = await client.DeleteClusterEndpoint({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DeleteCluster", async function () {
+    try {
+       const data = await client.DeleteCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.ModifyClusterAttribute", async function () {
+    try {
+       const data = await client.ModifyClusterAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DeleteClusterAsGroups", async function () {
+    try {
+       const data = await client.DeleteClusterAsGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DeleteClusterRoute", async function () {
+    try {
+       const data = await client.DeleteClusterRoute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DescribeClusterEndpointVipStatus", async function () {
+    try {
+       const data = await client.DescribeClusterEndpointVipStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.CreateClusterInstances", async function () {
+    try {
+       const data = await client.CreateClusterInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.CreateClusterAsGroup", async function () {
+    try {
+       const data = await client.CreateClusterAsGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DescribeExistedInstances", async function () {
+    try {
+       const data = await client.DescribeExistedInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.CreateClusterRoute", async function () {
+    try {
+       const data = await client.CreateClusterRoute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.CreateClusterRouteTable", async function () {
+    try {
+       const data = await client.CreateClusterRouteTable({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DescribeClusterRouteTables", async function () {
+    try {
+       const data = await client.DescribeClusterRouteTables({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DescribeClusters", async function () {
+    try {
+       const data = await client.DescribeClusters({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DescribeClusterEndpointStatus", async function () {
+    try {
+       const data = await client.DescribeClusterEndpointStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DescribeClusterAsGroups", async function () {
+    try {
+       const data = await client.DescribeClusterAsGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.CreateClusterEndpoint", async function () {
+    try {
+       const data = await client.CreateClusterEndpoint({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DescribeClusterAsGroupOption", async function () {
+    try {
+       const data = await client.DescribeClusterAsGroupOption({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DescribeRegions", async function () {
+    try {
+       const data = await client.DescribeRegions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.AddExistedInstances", async function () {
+    try {
+       const data = await client.AddExistedInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DescribeClusterSecurity", async function () {
+    try {
+       const data = await client.DescribeClusterSecurity({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DescribeRouteTableConflicts", async function () {
+    try {
+       const data = await client.DescribeRouteTableConflicts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DescribeClusterInstances", async function () {
+    try {
+       const data = await client.DescribeClusterInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DeleteClusterEndpointVip", async function () {
+    try {
+       const data = await client.DeleteClusterEndpointVip({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DeleteClusterInstances", async function () {
+    try {
+       const data = await client.DeleteClusterInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DescribeClusterKubeconfig", async function () {
+    try {
+       const data = await client.DescribeClusterKubeconfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.ModifyClusterEndpointSP", async function () {
+    try {
+       const data = await client.ModifyClusterEndpointSP({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.CreateClusterEndpointVip", async function () {
+    try {
+       const data = await client.CreateClusterEndpointVip({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DeleteClusterRouteTable", async function () {
+    try {
+       const data = await client.DeleteClusterRouteTable({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DescribeClusterRoutes", async function () {
+    try {
+       const data = await client.DescribeClusterRoutes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+})
