@@ -16,17 +16,20 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const DeleteGameServerSessionQueueRequest = models.DeleteGameServerSessionQueueRequest;
 const FleetAttributes = models.FleetAttributes;
 const CreateAssetResponse = models.CreateAssetResponse;
 const InboundPermission = models.InboundPermission;
 const GetInstanceAccessResponse = models.GetInstanceAccessResponse;
 const Asset = models.Asset;
 const ListAliasesResponse = models.ListAliasesResponse;
-const StartMatchPlacementResponse = models.StartMatchPlacementResponse;
+const DeleteGameServerSessionQueueResponse = models.DeleteGameServerSessionQueueResponse;
 const DescribeFleetAttributesRequest = models.DescribeFleetAttributesRequest;
 const ResolveAliasRequest = models.ResolveAliasRequest;
 const StartGameServerSessionPlacementResponse = models.StartGameServerSessionPlacementResponse;
+const DescribeFleetStatisticDetailsRequest = models.DescribeFleetStatisticDetailsRequest;
 const GetInstanceAccessRequest = models.GetInstanceAccessRequest;
+const CreateFleetRequest = models.CreateFleetRequest;
 const StartFleetActionsRequest = models.StartFleetActionsRequest;
 const UpdateFleetPortSettingsResponse = models.UpdateFleetPortSettingsResponse;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
@@ -41,54 +44,67 @@ const DescribeUserQuotasRequest = models.DescribeUserQuotasRequest;
 const UpdateAssetRequest = models.UpdateAssetRequest;
 const DesiredPlayerSession = models.DesiredPlayerSession;
 const UpdateFleetPortSettingsRequest = models.UpdateFleetPortSettingsRequest;
-const CcnInstanceSets = models.CcnInstanceSets;
+const DescribeFleetStatisticFlowsRequest = models.DescribeFleetStatisticFlowsRequest;
 const UpdateAliasRequest = models.UpdateAliasRequest;
 const GameServerSessionPlacement = models.GameServerSessionPlacement;
+const JoinGameServerSessionBatchRequest = models.JoinGameServerSessionBatchRequest;
 const GameServerSessionQueue = models.GameServerSessionQueue;
+const UpdateFleetCapacityResponse = models.UpdateFleetCapacityResponse;
 const DescribeRuntimeConfigurationResponse = models.DescribeRuntimeConfigurationResponse;
 const CreateGameServerSessionRequest = models.CreateGameServerSessionRequest;
 const UpdateAliasResponse = models.UpdateAliasResponse;
 const GameServerSessionDetail = models.GameServerSessionDetail;
+const UpdateGameServerSessionQueueResponse = models.UpdateGameServerSessionQueueResponse;
 const DescribeGameServerSessionQueuesRequest = models.DescribeGameServerSessionQueuesRequest;
 const GetUploadFederationTokenResponse = models.GetUploadFederationTokenResponse;
 const DeleteScalingPolicyResponse = models.DeleteScalingPolicyResponse;
+const DescribeFleetStatisticSummaryRequest = models.DescribeFleetStatisticSummaryRequest;
+const PlayerDataMap = models.PlayerDataMap;
 const ResolveAliasResponse = models.ResolveAliasResponse;
-const ListFleetsRequest = models.ListFleetsRequest;
+const DescribeInstancesExtendResponse = models.DescribeInstancesExtendResponse;
 const Event = models.Event;
 const UpdateRuntimeConfigurationResponse = models.UpdateRuntimeConfigurationResponse;
 const DescribeCcnInstancesResponse = models.DescribeCcnInstancesResponse;
-const UpdateRuntimeConfigurationRequest = models.UpdateRuntimeConfigurationRequest;
+const DescribeInstanceLimitResponse = models.DescribeInstanceLimitResponse;
 const DescribeAssetResponse = models.DescribeAssetResponse;
 const PlacedPlayerSession = models.PlacedPlayerSession;
+const DescribeFleetStatisticSummaryResponse = models.DescribeFleetStatisticSummaryResponse;
 const FleetUtilization = models.FleetUtilization;
 const DescribeGameServerSessionQueuesResponse = models.DescribeGameServerSessionQueuesResponse;
 const DeleteAliasRequest = models.DeleteAliasRequest;
+const DescribeFleetAttributesResponse = models.DescribeFleetAttributesResponse;
+const GetUploadCredentialsResponse = models.GetUploadCredentialsResponse;
 const AttachCcnInstancesRequest = models.AttachCcnInstancesRequest;
 const InboundPermissionRevocations = models.InboundPermissionRevocations;
 const DescribeAssetsRequest = models.DescribeAssetsRequest;
+const SetServerWeightResponse = models.SetServerWeightResponse;
 const ScalingPolicy = models.ScalingPolicy;
 const DescribeGameServerSessionsRequest = models.DescribeGameServerSessionsRequest;
 const GetUploadCredentialsRequest = models.GetUploadCredentialsRequest;
 const DescribePlayerSessionsRequest = models.DescribePlayerSessionsRequest;
 const DeleteAssetRequest = models.DeleteAssetRequest;
 const DescribeAssetsResponse = models.DescribeAssetsResponse;
-const DescribeFleetAttributesResponse = models.DescribeFleetAttributesResponse;
+const DescribeFleetCapacityRequest = models.DescribeFleetCapacityRequest;
 const DescribeCcnInstancesRequest = models.DescribeCcnInstancesRequest;
+const DescribeFleetStatisticDetailsResponse = models.DescribeFleetStatisticDetailsResponse;
+const UpdateGameServerSessionQueueRequest = models.UpdateGameServerSessionQueueRequest;
 const JoinGameServerSessionResponse = models.JoinGameServerSessionResponse;
 const AssetCredentials = models.AssetCredentials;
 const TargetConfiguration = models.TargetConfiguration;
-const InstanceAccess = models.InstanceAccess;
+const DescribeGameServerSessionPlacementRequest = models.DescribeGameServerSessionPlacementRequest;
 const GameServerSessionQueueDestination = models.GameServerSessionQueueDestination;
+const FleetCapacity = models.FleetCapacity;
 const SetServerWeightRequest = models.SetServerWeightRequest;
 const GetGameServerSessionLogUrlResponse = models.GetGameServerSessionLogUrlResponse;
-const Alias = models.Alias;
+const DeleteFleetResponse = models.DeleteFleetResponse;
 const StartGameServerSessionPlacementRequest = models.StartGameServerSessionPlacementRequest;
 const InstanceTypeInfo = models.InstanceTypeInfo;
 const DescribeGameServerSessionPlacementResponse = models.DescribeGameServerSessionPlacementResponse;
 const CreateAliasResponse = models.CreateAliasResponse;
 const ResourceCreationLimitPolicy = models.ResourceCreationLimitPolicy;
+const ListFleetsRequest = models.ListFleetsRequest;
 const UpdateFleetAttributesRequest = models.UpdateFleetAttributesRequest;
-const DescribeGameServerSessionPlacementRequest = models.DescribeGameServerSessionPlacementRequest;
+const ExtraInfos = models.ExtraInfos;
 const AttachCcnInstancesResponse = models.AttachCcnInstancesResponse;
 const DescribeFleetPortSettingsRequest = models.DescribeFleetPortSettingsRequest;
 const StopFleetActionsResponse = models.StopFleetActionsResponse;
@@ -100,8 +116,8 @@ const Instance = models.Instance;
 const SearchGameServerSessionsRequest = models.SearchGameServerSessionsRequest;
 const DescribePlayerSessionsResponse = models.DescribePlayerSessionsResponse;
 const DescribeUserQuotaRequest = models.DescribeUserQuotaRequest;
-const GetUploadCredentialsResponse = models.GetUploadCredentialsResponse;
-const SetServerWeightResponse = models.SetServerWeightResponse;
+const DescribeInstanceLimitRequest = models.DescribeInstanceLimitRequest;
+const CreateGameServerSessionQueueResponse = models.CreateGameServerSessionQueueResponse;
 const DescribeInstanceTypesRequest = models.DescribeInstanceTypesRequest;
 const PlayerLatency = models.PlayerLatency;
 const StopGameServerSessionPlacementRequest = models.StopGameServerSessionPlacementRequest;
@@ -116,38 +132,52 @@ const InboundPermissionAuthorization = models.InboundPermissionAuthorization;
 const CreateGameServerSessionResponse = models.CreateGameServerSessionResponse;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const QuotaResource = models.QuotaResource;
+const DescribeFleetStatisticFlowsResponse = models.DescribeFleetStatisticFlowsResponse;
+const InstanceCounts = models.InstanceCounts;
+const CreateFleetResponse = models.CreateFleetResponse;
 const UpdateFleetAttributesResponse = models.UpdateFleetAttributesResponse;
 const DescribeFleetUtilizationRequest = models.DescribeFleetUtilizationRequest;
 const DescribeGameServerSessionDetailsRequest = models.DescribeGameServerSessionDetailsRequest;
 const GameServerSession = models.GameServerSession;
 const PlayerLatencyPolicy = models.PlayerLatencyPolicy;
+const UpdateRuntimeConfigurationRequest = models.UpdateRuntimeConfigurationRequest;
 const GameProperty = models.GameProperty;
+const FleetStatisticTimes = models.FleetStatisticTimes;
+const FleetStatisticFlows = models.FleetStatisticFlows;
 const DescribeAssetRequest = models.DescribeAssetRequest;
+const DescribeInstancesExtendRequest = models.DescribeInstancesExtendRequest;
 const DescribeGameServerSessionsResponse = models.DescribeGameServerSessionsResponse;
 const StartFleetActionsResponse = models.StartFleetActionsResponse;
 const JoinGameServerSessionRequest = models.JoinGameServerSessionRequest;
 const DescribeUserQuotasResponse = models.DescribeUserQuotasResponse;
 const GetUploadFederationTokenRequest = models.GetUploadFederationTokenRequest;
 const DescribeInstanceTypesResponse = models.DescribeInstanceTypesResponse;
+const SearchGameServerSessionsResponse = models.SearchGameServerSessionsResponse;
 const DescribeFleetEventsResponse = models.DescribeFleetEventsResponse;
 const RoutingStrategy = models.RoutingStrategy;
-const StartMatchPlacementRequest = models.StartMatchPlacementRequest;
+const DescribeFleetCapacityResponse = models.DescribeFleetCapacityResponse;
 const DescribeUserQuotaResponse = models.DescribeUserQuotaResponse;
 const DescribeFleetEventsRequest = models.DescribeFleetEventsRequest;
 const UpdateAssetResponse = models.UpdateAssetResponse;
 const ListAliasesRequest = models.ListAliasesRequest;
 const PlayerSession = models.PlayerSession;
 const PutScalingPolicyResponse = models.PutScalingPolicyResponse;
-const DeleteFleetResponse = models.DeleteFleetResponse;
+const CreateGameServerSessionQueueRequest = models.CreateGameServerSessionQueueRequest;
+const Alias = models.Alias;
 const DescribeRuntimeConfigurationRequest = models.DescribeRuntimeConfigurationRequest;
 const RuntimeConfiguration = models.RuntimeConfiguration;
 const DescribeScalingPoliciesResponse = models.DescribeScalingPoliciesResponse;
 const DetachCcnInstancesRequest = models.DetachCcnInstancesRequest;
 const ServerProcesse = models.ServerProcesse;
 const UpdateGameServerSessionResponse = models.UpdateGameServerSessionResponse;
+const InstanceAccess = models.InstanceAccess;
+const UpdateFleetCapacityRequest = models.UpdateFleetCapacityRequest;
+const FleetStatisticDetail = models.FleetStatisticDetail;
+const JoinGameServerSessionBatchResponse = models.JoinGameServerSessionBatchResponse;
+const InstanceExtend = models.InstanceExtend;
 const PutScalingPolicyRequest = models.PutScalingPolicyRequest;
 const StopGameServerSessionPlacementResponse = models.StopGameServerSessionPlacementResponse;
-const SearchGameServerSessionsResponse = models.SearchGameServerSessionsResponse;
+const CcnInstanceSets = models.CcnInstanceSets;
 
 
 /**
@@ -161,17 +191,6 @@ class GseClient extends AbstractClient {
     }
     
     /**
-     * 本接口（StartMatchPlacement）用于开始匹配放置游戏服务器会话
-     * @param {StartMatchPlacementRequest} req
-     * @param {function(string, StartMatchPlacementResponse):void} cb
-     * @public
-     */
-    StartMatchPlacement(req, cb) {
-        let resp = new StartMatchPlacementResponse();
-        this.request("StartMatchPlacement", req, resp, cb);
-    }
-
-    /**
      * 本接口（DeleteFleet）用于删除服务器舰队
      * @param {DeleteFleetRequest} req
      * @param {function(string, DeleteFleetResponse):void} cb
@@ -180,6 +199,17 @@ class GseClient extends AbstractClient {
     DeleteFleet(req, cb) {
         let resp = new DeleteFleetResponse();
         this.request("DeleteFleet", req, resp, cb);
+    }
+
+    /**
+     * 用于更新服务部署容量配置
+     * @param {UpdateFleetCapacityRequest} req
+     * @param {function(string, UpdateFleetCapacityResponse):void} cb
+     * @public
+     */
+    UpdateFleetCapacity(req, cb) {
+        let resp = new UpdateFleetCapacityResponse();
+        this.request("UpdateFleetCapacity", req, resp, cb);
     }
 
     /**
@@ -260,6 +290,17 @@ class GseClient extends AbstractClient {
     }
 
     /**
+     * 本接口（CreateGameServerSessionQueue）用于创建游戏服务器会话队列
+     * @param {CreateGameServerSessionQueueRequest} req
+     * @param {function(string, CreateGameServerSessionQueueResponse):void} cb
+     * @public
+     */
+    CreateGameServerSessionQueue(req, cb) {
+        let resp = new CreateGameServerSessionQueueResponse();
+        this.request("CreateGameServerSessionQueue", req, resp, cb);
+    }
+
+    /**
      * 本接口（DeleteAsset）用于删除生成包
      * @param {DeleteAssetRequest} req
      * @param {function(string, DeleteAssetResponse):void} cb
@@ -304,14 +345,25 @@ class GseClient extends AbstractClient {
     }
 
     /**
-     * 本接口（ListAliases）用于检索帐户下的所有别名
-     * @param {ListAliasesRequest} req
-     * @param {function(string, ListAliasesResponse):void} cb
+     * 用于查询服务部署容量配置
+     * @param {DescribeFleetCapacityRequest} req
+     * @param {function(string, DescribeFleetCapacityResponse):void} cb
      * @public
      */
-    ListAliases(req, cb) {
-        let resp = new ListAliasesResponse();
-        this.request("ListAliases", req, resp, cb);
+    DescribeFleetCapacity(req, cb) {
+        let resp = new DescribeFleetCapacityResponse();
+        this.request("DescribeFleetCapacity", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DeleteGameServerSessionQueue）用于删除游戏服务器会话队列
+     * @param {DeleteGameServerSessionQueueRequest} req
+     * @param {function(string, DeleteGameServerSessionQueueResponse):void} cb
+     * @public
+     */
+    DeleteGameServerSessionQueue(req, cb) {
+        let resp = new DeleteGameServerSessionQueueResponse();
+        this.request("DeleteGameServerSessionQueue", req, resp, cb);
     }
 
     /**
@@ -348,14 +400,14 @@ class GseClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeInstances）用于查询服务器实例列表
-     * @param {DescribeInstancesRequest} req
-     * @param {function(string, DescribeInstancesResponse):void} cb
+     * 本接口（DescribeFleetStatisticDetails）用于查询服务部署统计详情
+     * @param {DescribeFleetStatisticDetailsRequest} req
+     * @param {function(string, DescribeFleetStatisticDetailsResponse):void} cb
      * @public
      */
-    DescribeInstances(req, cb) {
-        let resp = new DescribeInstancesResponse();
-        this.request("DescribeInstances", req, resp, cb);
+    DescribeFleetStatisticDetails(req, cb) {
+        let resp = new DescribeFleetStatisticDetailsResponse();
+        this.request("DescribeFleetStatisticDetails", req, resp, cb);
     }
 
     /**
@@ -381,6 +433,28 @@ class GseClient extends AbstractClient {
     }
 
     /**
+     * 本接口（JoinGameServerSessionBatch）用于加入游戏服务器会话
+     * @param {JoinGameServerSessionBatchRequest} req
+     * @param {function(string, JoinGameServerSessionBatchResponse):void} cb
+     * @public
+     */
+    JoinGameServerSessionBatch(req, cb) {
+        let resp = new JoinGameServerSessionBatchResponse();
+        this.request("JoinGameServerSessionBatch", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeFleetStatisticSummary）用于查询服务部署统计汇总信息
+     * @param {DescribeFleetStatisticSummaryRequest} req
+     * @param {function(string, DescribeFleetStatisticSummaryResponse):void} cb
+     * @public
+     */
+    DescribeFleetStatisticSummary(req, cb) {
+        let resp = new DescribeFleetStatisticSummaryResponse();
+        this.request("DescribeFleetStatisticSummary", req, resp, cb);
+    }
+
+    /**
      * 本接口（DeleteAlias）用于删除别名
      * @param {DeleteAliasRequest} req
      * @param {function(string, DeleteAliasResponse):void} cb
@@ -389,6 +463,17 @@ class GseClient extends AbstractClient {
     DeleteAlias(req, cb) {
         let resp = new DeleteAliasResponse();
         this.request("DeleteAlias", req, resp, cb);
+    }
+
+    /**
+     * 查询用户实例数限额
+     * @param {DescribeInstanceLimitRequest} req
+     * @param {function(string, DescribeInstanceLimitResponse):void} cb
+     * @public
+     */
+    DescribeInstanceLimit(req, cb) {
+        let resp = new DescribeInstanceLimitResponse();
+        this.request("DescribeInstanceLimit", req, resp, cb);
     }
 
     /**
@@ -469,6 +554,17 @@ class GseClient extends AbstractClient {
     }
 
     /**
+     * 本接口（DescribeFleetStatisticFlows）用于查询服务部署统计用量
+     * @param {DescribeFleetStatisticFlowsRequest} req
+     * @param {function(string, DescribeFleetStatisticFlowsResponse):void} cb
+     * @public
+     */
+    DescribeFleetStatisticFlows(req, cb) {
+        let resp = new DescribeFleetStatisticFlowsResponse();
+        this.request("DescribeFleetStatisticFlows", req, resp, cb);
+    }
+
+    /**
      * 本接口（CreateGameServerSession）用于创建游戏服务会话
      * @param {CreateGameServerSessionRequest} req
      * @param {function(string, CreateGameServerSessionResponse):void} cb
@@ -514,14 +610,14 @@ class GseClient extends AbstractClient {
     }
 
     /**
-     * 本接口（UpdateGameServerSession）用于更新游戏服务器会话
-     * @param {UpdateGameServerSessionRequest} req
-     * @param {function(string, UpdateGameServerSessionResponse):void} cb
+     * 本接口（CreateFleet）用于创建服务器舰队
+     * @param {CreateFleetRequest} req
+     * @param {function(string, CreateFleetResponse):void} cb
      * @public
      */
-    UpdateGameServerSession(req, cb) {
-        let resp = new UpdateGameServerSessionResponse();
-        this.request("UpdateGameServerSession", req, resp, cb);
+    CreateFleet(req, cb) {
+        let resp = new CreateFleetResponse();
+        this.request("CreateFleet", req, resp, cb);
     }
 
     /**
@@ -533,6 +629,17 @@ class GseClient extends AbstractClient {
     StopGameServerSessionPlacement(req, cb) {
         let resp = new StopGameServerSessionPlacementResponse();
         this.request("StopGameServerSessionPlacement", req, resp, cb);
+    }
+
+    /**
+     * 本接口（UpdateGameServerSessionQueue）用于修改游戏服务器会话队列
+     * @param {UpdateGameServerSessionQueueRequest} req
+     * @param {function(string, UpdateGameServerSessionQueueResponse):void} cb
+     * @public
+     */
+    UpdateGameServerSessionQueue(req, cb) {
+        let resp = new UpdateGameServerSessionQueueResponse();
+        this.request("UpdateGameServerSessionQueue", req, resp, cb);
     }
 
     /**
@@ -613,6 +720,17 @@ class GseClient extends AbstractClient {
     }
 
     /**
+     * 本接口（DescribeInstances）用于查询服务器实例列表
+     * @param {DescribeInstancesRequest} req
+     * @param {function(string, DescribeInstancesResponse):void} cb
+     * @public
+     */
+    DescribeInstances(req, cb) {
+        let resp = new DescribeInstancesResponse();
+        this.request("DescribeInstances", req, resp, cb);
+    }
+
+    /**
      * 本接口（DescribeAssets）用于获取生成包列表
      * @param {DescribeAssetsRequest} req
      * @param {function(string, DescribeAssetsResponse):void} cb
@@ -646,6 +764,17 @@ class GseClient extends AbstractClient {
     }
 
     /**
+     * 本接口（DescribeInstances）用于查询实例扩展信息列表
+     * @param {DescribeInstancesExtendRequest} req
+     * @param {function(string, DescribeInstancesExtendResponse):void} cb
+     * @public
+     */
+    DescribeInstancesExtend(req, cb) {
+        let resp = new DescribeInstancesExtendResponse();
+        this.request("DescribeInstancesExtend", req, resp, cb);
+    }
+
+    /**
      * 本接口（DescribeAlias）用于获取别名详情
      * @param {DescribeAliasRequest} req
      * @param {function(string, DescribeAliasResponse):void} cb
@@ -654,6 +783,17 @@ class GseClient extends AbstractClient {
     DescribeAlias(req, cb) {
         let resp = new DescribeAliasResponse();
         this.request("DescribeAlias", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ListAliases）用于检索帐户下的所有别名
+     * @param {ListAliasesRequest} req
+     * @param {function(string, ListAliasesResponse):void} cb
+     * @public
+     */
+    ListAliases(req, cb) {
+        let resp = new ListAliasesResponse();
+        this.request("ListAliases", req, resp, cb);
     }
 
     /**
@@ -709,6 +849,17 @@ class GseClient extends AbstractClient {
     DescribeFleetUtilization(req, cb) {
         let resp = new DescribeFleetUtilizationResponse();
         this.request("DescribeFleetUtilization", req, resp, cb);
+    }
+
+    /**
+     * 本接口（UpdateGameServerSession）用于更新游戏服务器会话
+     * @param {UpdateGameServerSessionRequest} req
+     * @param {function(string, UpdateGameServerSessionResponse):void} cb
+     * @public
+     */
+    UpdateGameServerSession(req, cb) {
+        let resp = new UpdateGameServerSessionResponse();
+        this.request("UpdateGameServerSession", req, resp, cb);
     }
 
     /**

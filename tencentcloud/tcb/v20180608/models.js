@@ -2837,6 +2837,29 @@ class EnvInfo extends  AbstractModel {
          */
         this.EnvChannel = null;
 
+        /**
+         * 支付方式。包含以下取值：
+<li> prepayment：预付费</li>
+<li> postpaid：后付费</li>
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * 是否为默认环境
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsDefault = null;
+
+        /**
+         * 环境所属地域
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Region = null;
+
     }
 
     /**
@@ -2901,6 +2924,9 @@ class EnvInfo extends  AbstractModel {
         }
         this.IsAutoDegrade = 'IsAutoDegrade' in params ? params.IsAutoDegrade : null;
         this.EnvChannel = 'EnvChannel' in params ? params.EnvChannel : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
+        this.Region = 'Region' in params ? params.Region : null;
 
     }
 }

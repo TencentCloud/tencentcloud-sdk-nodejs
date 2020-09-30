@@ -2880,7 +2880,7 @@ class DescribeLiveRecordTemplateRequest extends  AbstractModel {
         super();
 
         /**
-         * DescribeRecordTemplates接口获取到的模板 ID。
+         * [DescribeLiveRecordTemplates](/document/product/267/32609)接口获取到的模板 ID。
          * @type {number || null}
          */
         this.TemplateId = null;

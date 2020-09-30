@@ -5875,6 +5875,15 @@ last：表示回源层节点
          */
         this.Layer = null;
 
+        /**
+         * 查询区域：
+mainland: 国内节点
+overseas: 海外节点
+global: 全球节点
+         * @type {string || null}
+         */
+        this.Area = null;
+
     }
 
     /**
@@ -5886,6 +5895,7 @@ last：表示回源层节点
         }
         this.Domain = 'Domain' in params ? params.Domain : null;
         this.Layer = 'Layer' in params ? params.Layer : null;
+        this.Area = 'Area' in params ? params.Area : null;
 
     }
 }
@@ -11549,6 +11559,13 @@ blacklist：黑名单
          */
         this.Filters = null;
 
+        /**
+         * IP 黑白名单分路径配置，白名单功能
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<IpFilterPathRule> || null}
+         */
+        this.FilterRules = null;
+
     }
 
     /**
@@ -11561,6 +11578,15 @@ blacklist：黑名单
         this.Switch = 'Switch' in params ? params.Switch : null;
         this.FilterType = 'FilterType' in params ? params.FilterType : null;
         this.Filters = 'Filters' in params ? params.Filters : null;
+
+        if (params.FilterRules) {
+            this.FilterRules = new Array();
+            for (let z in params.FilterRules) {
+                let obj = new IpFilterPathRule();
+                obj.deserialize(params.FilterRules[z]);
+                this.FilterRules.push(obj);
+            }
+        }
 
     }
 }
@@ -12305,6 +12331,71 @@ class DescribeDomainsRequest extends  AbstractModel {
     }
 }
 
+/**
+ * IP黑白名单分路径配置
+ * @class
+ */
+class IpFilterPathRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * IP 黑白名单类型
+whitelist：白名单
+blacklist：黑名单
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FilterType = null;
+
+        /**
+         * IP 黑白名单列表
+支持 X.X.X.X 形式 IP，或 /8、 /16、/24 形式网段
+最多可填充 50 个白名单或 50 个黑名单
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 规则类型：
+all：所有文件生效
+file：指定文件后缀生效
+directory：指定路径生效
+path：指定绝对路径生效
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * RuleType 对应类型下的匹配内容：
+all 时填充 *
+file 时填充后缀名，如 jpg、txt
+directory 时填充路径，如 /xxx/test/
+path 时填充绝对路径，如 /xxx/test.html
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.RulePaths = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FilterType = 'FilterType' in params ? params.FilterType : null;
+        this.Filters = 'Filters' in params ? params.Filters : null;
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.RulePaths = 'RulePaths' in params ? params.RulePaths : null;
+
+    }
+}
+
 module.exports = {
     DescribeCdnDomainLogsResponse: DescribeCdnDomainLogsResponse,
     ScdnTopUrlData: ScdnTopUrlData,
@@ -12508,5 +12599,6 @@ module.exports = {
     CacheTagKey: CacheTagKey,
     ScdnTypeData: ScdnTypeData,
     DescribeDomainsRequest: DescribeDomainsRequest,
+    IpFilterPathRule: IpFilterPathRule,
 
 }

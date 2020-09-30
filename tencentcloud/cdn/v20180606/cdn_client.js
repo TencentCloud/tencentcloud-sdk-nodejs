@@ -218,6 +218,7 @@ const DescribeImageConfigResponse = models.DescribeImageConfigResponse;
 const CacheTagKey = models.CacheTagKey;
 const ScdnTypeData = models.ScdnTypeData;
 const DescribeDomainsRequest = models.DescribeDomainsRequest;
+const IpFilterPathRule = models.IpFilterPathRule;
 
 
 /**

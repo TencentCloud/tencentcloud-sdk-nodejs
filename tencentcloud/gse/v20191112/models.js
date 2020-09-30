@@ -17,6 +17,34 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * DeleteGameServerSessionQueue请求参数结构体
+ * @class
+ */
+class DeleteGameServerSessionQueueRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 游戏服务器会话队列名字，长度1~128
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
  * 服务部署属性
  * @class
  */
@@ -120,14 +148,14 @@ class FleetAttributes extends  AbstractModel {
         this.TerminationTime = null;
 
         /**
-         * 时限保护时间
+         * 时限保护超时时间，默认60分钟，最小值5，最大值1440
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
         this.GameServerSessionProtectionTimeLimit = null;
 
         /**
-         * 计费状态
+         * 计费状态：未开通、已开通、异常、欠费隔离、销毁、解冻
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -420,18 +448,12 @@ class ListAliasesResponse extends  AbstractModel {
 }
 
 /**
- * StartMatchPlacement返回参数结构体
+ * DeleteGameServerSessionQueue返回参数结构体
  * @class
  */
-class StartMatchPlacementResponse extends  AbstractModel {
+class DeleteGameServerSessionQueueResponse extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * 游戏服务器会话放置
-         * @type {GameServerSessionPlacement || null}
-         */
-        this.GameServerSessionPlacement = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -447,12 +469,6 @@ class StartMatchPlacementResponse extends  AbstractModel {
     deserialize(params) {
         if (!params) {
             return;
-        }
-
-        if (params.GameServerSessionPlacement) {
-            let obj = new GameServerSessionPlacement();
-            obj.deserialize(params.GameServerSessionPlacement)
-            this.GameServerSessionPlacement = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -570,6 +586,62 @@ class StartGameServerSessionPlacementResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeFleetStatisticDetails请求参数结构体
+ * @class
+ */
+class DescribeFleetStatisticDetailsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务部署ID
+         * @type {string || null}
+         */
+        this.FleetId = null;
+
+        /**
+         * 查询开始时间
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * 查询结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 结果返回最大数量，最小值0，最大值100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 返回结果偏移，最小值0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FleetId = 'FleetId' in params ? params.FleetId : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
  * GetInstanceAccess请求参数结构体
  * @class
  */
@@ -600,6 +672,129 @@ class GetInstanceAccessRequest extends  AbstractModel {
         }
         this.FleetId = 'FleetId' in params ? params.FleetId : null;
         this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
+ * CreateFleet请求参数结构体
+ * @class
+ */
+class CreateFleetRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 生成包 Id
+         * @type {string || null}
+         */
+        this.AssetId = null;
+
+        /**
+         * 描述，最小长度0，最大长度100
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 网络配置
+         * @type {Array.<InboundPermission> || null}
+         */
+        this.InboundPermissions = null;
+
+        /**
+         * 服务器类型，例如S5.LARGE8
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * 服务器舰队类型，目前只支持ON_DEMAND类型
+         * @type {string || null}
+         */
+        this.FleetType = null;
+
+        /**
+         * 服务器舰队名称，最小长度1，最大长度50
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 保护策略：不保护NoProtection、完全保护FullProtection、时限保护TimeLimitProtection
+         * @type {string || null}
+         */
+        this.NewGameServerSessionProtectionPolicy = null;
+
+        /**
+         * VPC 网络 Id，弃用，对等链接已不再使用
+         * @type {string || null}
+         */
+        this.PeerVpcId = null;
+
+        /**
+         * 资源创建限制策略
+         * @type {ResourceCreationLimitPolicy || null}
+         */
+        this.ResourceCreationLimitPolicy = null;
+
+        /**
+         * 进程配置
+         * @type {RuntimeConfiguration || null}
+         */
+        this.RuntimeConfiguration = null;
+
+        /**
+         * VPC 子网，弃用，对等链接已不再使用
+         * @type {string || null}
+         */
+        this.SubNetId = null;
+
+        /**
+         * 时限保护超时时间，默认60分钟，最小值5，最大值1440
+         * @type {number || null}
+         */
+        this.GameServerSessionProtectionTimeLimit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AssetId = 'AssetId' in params ? params.AssetId : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.InboundPermissions) {
+            this.InboundPermissions = new Array();
+            for (let z in params.InboundPermissions) {
+                let obj = new InboundPermission();
+                obj.deserialize(params.InboundPermissions[z]);
+                this.InboundPermissions.push(obj);
+            }
+        }
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.FleetType = 'FleetType' in params ? params.FleetType : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.NewGameServerSessionProtectionPolicy = 'NewGameServerSessionProtectionPolicy' in params ? params.NewGameServerSessionProtectionPolicy : null;
+        this.PeerVpcId = 'PeerVpcId' in params ? params.PeerVpcId : null;
+
+        if (params.ResourceCreationLimitPolicy) {
+            let obj = new ResourceCreationLimitPolicy();
+            obj.deserialize(params.ResourceCreationLimitPolicy)
+            this.ResourceCreationLimitPolicy = obj;
+        }
+
+        if (params.RuntimeConfiguration) {
+            let obj = new RuntimeConfiguration();
+            obj.deserialize(params.RuntimeConfiguration)
+            this.RuntimeConfiguration = obj;
+        }
+        this.SubNetId = 'SubNetId' in params ? params.SubNetId : null;
+        this.GameServerSessionProtectionTimeLimit = 'GameServerSessionProtectionTimeLimit' in params ? params.GameServerSessionProtectionTimeLimit : null;
 
     }
 }
@@ -1155,47 +1350,42 @@ class UpdateFleetPortSettingsRequest extends  AbstractModel {
 }
 
 /**
- * 云联网实例信息
+ * DescribeFleetStatisticFlows请求参数结构体
  * @class
  */
-class CcnInstanceSets extends  AbstractModel {
+class DescribeFleetStatisticFlowsRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 云联网账号 Uin
-注意：此字段可能返回 null，表示取不到有效值。
+         * 服务部署ID
          * @type {string || null}
          */
-        this.AccountId = null;
+        this.FleetId = null;
 
         /**
-         * 云联网 Id
-注意：此字段可能返回 null，表示取不到有效值。
+         * 查询开始时间
          * @type {string || null}
          */
-        this.CcnId = null;
+        this.BeginTime = null;
 
         /**
-         * 云联网关联时间
-注意：此字段可能返回 null，表示取不到有效值。
+         * 查询结束时间
          * @type {string || null}
          */
-        this.CreateTime = null;
+        this.EndTime = null;
 
         /**
-         * 云联网实例名称
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * 结果返回最大数量，最小值0，最大值100
+         * @type {number || null}
          */
-        this.InstanceName = null;
+        this.Limit = null;
 
         /**
-         * 云联网状态：申请中、已连接、已过期、已拒绝、已删除、失败的、关联中、解关联中、解关联失败
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * 返回结果偏移，最小值0
+         * @type {number || null}
          */
-        this.State = null;
+        this.Offset = null;
 
     }
 
@@ -1206,11 +1396,11 @@ class CcnInstanceSets extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AccountId = 'AccountId' in params ? params.AccountId : null;
-        this.CcnId = 'CcnId' in params ? params.CcnId : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
-        this.State = 'State' in params ? params.State : null;
+        this.FleetId = 'FleetId' in params ? params.FleetId : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -1446,6 +1636,53 @@ class GameServerSessionPlacement extends  AbstractModel {
 }
 
 /**
+ * JoinGameServerSessionBatch请求参数结构体
+ * @class
+ */
+class JoinGameServerSessionBatchRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 游戏服务器会话ID，最小长度1个ASCII字符，最大长度不超过256个ASCII字符
+         * @type {string || null}
+         */
+        this.GameServerSessionId = null;
+
+        /**
+         * 玩家ID列表，最小1组，最大25组
+         * @type {Array.<string> || null}
+         */
+        this.PlayerIds = null;
+
+        /**
+         * 玩家自定义数据
+         * @type {PlayerDataMap || null}
+         */
+        this.PlayerDataMap = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.GameServerSessionId = 'GameServerSessionId' in params ? params.GameServerSessionId : null;
+        this.PlayerIds = 'PlayerIds' in params ? params.PlayerIds : null;
+
+        if (params.PlayerDataMap) {
+            let obj = new PlayerDataMap();
+            obj.deserialize(params.PlayerDataMap)
+            this.PlayerDataMap = obj;
+        }
+
+    }
+}
+
+/**
  * 服务部署组对象
  * @class
  */
@@ -1515,6 +1752,42 @@ class GameServerSessionQueue extends  AbstractModel {
             }
         }
         this.TimeoutInSeconds = 'TimeoutInSeconds' in params ? params.TimeoutInSeconds : null;
+
+    }
+}
+
+/**
+ * UpdateFleetCapacity返回参数结构体
+ * @class
+ */
+class UpdateFleetCapacityResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务部署ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FleetId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FleetId = 'FleetId' in params ? params.FleetId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1735,6 +2008,46 @@ class GameServerSessionDetail extends  AbstractModel {
 }
 
 /**
+ * UpdateGameServerSessionQueue返回参数结构体
+ * @class
+ */
+class UpdateGameServerSessionQueueResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 部署服务组对象
+         * @type {GameServerSessionQueue || null}
+         */
+        this.GameServerSessionQueue = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.GameServerSessionQueue) {
+            let obj = new GameServerSessionQueue();
+            obj.deserialize(params.GameServerSessionQueue)
+            this.GameServerSessionQueue = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeGameServerSessionQueues请求参数结构体
  * @class
  */
@@ -1852,6 +2165,83 @@ class DeleteScalingPolicyResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeFleetStatisticSummary请求参数结构体
+ * @class
+ */
+class DescribeFleetStatisticSummaryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务部署 Id
+         * @type {string || null}
+         */
+        this.FleetId = null;
+
+        /**
+         * 查询开始时间
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * 查询结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FleetId = 'FleetId' in params ? params.FleetId : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
+ * 玩家自定义数据
+ * @class
+ */
+class PlayerDataMap extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 玩家自定义数据键，最小长度不小于1个ASCII字符，最大长度不超过1024个ASCII字符
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 玩家自定义数据值，最小长度不小于1个ASCII字符，最大长度不超过2048个ASCII字符
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
  * ResolveAlias返回参数结构体
  * @class
  */
@@ -1888,30 +2278,32 @@ class ResolveAliasResponse extends  AbstractModel {
 }
 
 /**
- * ListFleets请求参数结构体
+ * DescribeInstancesExtend返回参数结构体
  * @class
  */
-class ListFleetsRequest extends  AbstractModel {
+class DescribeInstancesExtendResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 生成包 Id
+         * 实例信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<InstanceExtend> || null}
+         */
+        this.Instances = null;
+
+        /**
+         * 梳理信息总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.AssetId = null;
-
-        /**
-         * 结果返回最大值，最小值0，最大值1000
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 结果返回偏移，最小值0
-         * @type {number || null}
-         */
-        this.Offset = null;
+        this.RequestId = null;
 
     }
 
@@ -1922,9 +2314,17 @@ class ListFleetsRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AssetId = 'AssetId' in params ? params.AssetId : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Instances) {
+            this.Instances = new Array();
+            for (let z in params.Instances) {
+                let obj = new InstanceExtend();
+                obj.deserialize(params.Instances[z]);
+                this.Instances.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2109,24 +2509,30 @@ class DescribeCcnInstancesResponse extends  AbstractModel {
 }
 
 /**
- * UpdateRuntimeConfiguration请求参数结构体
+ * DescribeInstanceLimit返回参数结构体
  * @class
  */
-class UpdateRuntimeConfigurationRequest extends  AbstractModel {
+class DescribeInstanceLimitResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 服务器舰队Id
-         * @type {string || null}
+         * 限额
+         * @type {number || null}
          */
-        this.FleetId = null;
+        this.Limit = null;
 
         /**
-         * 服务器舰队配置
-         * @type {RuntimeConfiguration || null}
+         * 详细信息
+         * @type {Array.<ExtraInfos> || null}
          */
-        this.RuntimeConfiguration = null;
+        this.ExtraInfos = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -2137,13 +2543,17 @@ class UpdateRuntimeConfigurationRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.FleetId = 'FleetId' in params ? params.FleetId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
-        if (params.RuntimeConfiguration) {
-            let obj = new RuntimeConfiguration();
-            obj.deserialize(params.RuntimeConfiguration)
-            this.RuntimeConfiguration = obj;
+        if (params.ExtraInfos) {
+            this.ExtraInfos = new Array();
+            for (let z in params.ExtraInfos) {
+                let obj = new ExtraInfos();
+                obj.deserialize(params.ExtraInfos[z]);
+                this.ExtraInfos.push(obj);
+            }
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2219,6 +2629,50 @@ class PlacedPlayerSession extends  AbstractModel {
         }
         this.PlayerId = 'PlayerId' in params ? params.PlayerId : null;
         this.PlayerSessionId = 'PlayerSessionId' in params ? params.PlayerSessionId : null;
+
+    }
+}
+
+/**
+ * DescribeFleetStatisticSummary返回参数结构体
+ * @class
+ */
+class DescribeFleetStatisticSummaryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总时长，单位秒
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TotalUsedTimeSeconds = null;
+
+        /**
+         * 总流量，单位MB
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalUsedFlowMegaBytes = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalUsedTimeSeconds = 'TotalUsedTimeSeconds' in params ? params.TotalUsedTimeSeconds : null;
+        this.TotalUsedFlowMegaBytes = 'TotalUsedFlowMegaBytes' in params ? params.TotalUsedFlowMegaBytes : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2364,6 +2818,106 @@ class DeleteAliasRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeFleetAttributes返回参数结构体
+ * @class
+ */
+class DescribeFleetAttributesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务器舰队属性
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<FleetAttributes> || null}
+         */
+        this.FleetAttributes = null;
+
+        /**
+         * 服务器舰队总数，最小值0
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.FleetAttributes) {
+            this.FleetAttributes = new Array();
+            for (let z in params.FleetAttributes) {
+                let obj = new FleetAttributes();
+                obj.deserialize(params.FleetAttributes[z]);
+                this.FleetAttributes.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GetUploadCredentials返回参数结构体
+ * @class
+ */
+class GetUploadCredentialsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 上传文件授权信息Auth
+         * @type {string || null}
+         */
+        this.BucketAuth = null;
+
+        /**
+         * Bucket名字
+         * @type {string || null}
+         */
+        this.BucketName = null;
+
+        /**
+         * 生成包所在地域
+         * @type {string || null}
+         */
+        this.AssetRegion = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BucketAuth = 'BucketAuth' in params ? params.BucketAuth : null;
+        this.BucketName = 'BucketName' in params ? params.BucketName : null;
+        this.AssetRegion = 'AssetRegion' in params ? params.AssetRegion : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * AttachCcnInstances请求参数结构体
  * @class
  */
@@ -2499,6 +3053,34 @@ class DescribeAssetsRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Filter = 'Filter' in params ? params.Filter : null;
+
+    }
+}
+
+/**
+ * SetServerWeight返回参数结构体
+ * @class
+ */
+class SetServerWeightResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2857,31 +3439,30 @@ class DescribeAssetsResponse extends  AbstractModel {
 }
 
 /**
- * DescribeFleetAttributes返回参数结构体
+ * DescribeFleetCapacity请求参数结构体
  * @class
  */
-class DescribeFleetAttributesResponse extends  AbstractModel {
+class DescribeFleetCapacityRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 服务器舰队属性
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<FleetAttributes> || null}
+         * 服务部署 Id列表
+         * @type {Array.<string> || null}
          */
-        this.FleetAttributes = null;
+        this.FleetIds = null;
 
         /**
-         * 服务器舰队总数，最小值0
+         * 结果返回最大数量
          * @type {number || null}
          */
-        this.TotalCount = null;
+        this.Limit = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
+         * 返回结果偏移
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.Offset = null;
 
     }
 
@@ -2892,17 +3473,9 @@ class DescribeFleetAttributesResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.FleetAttributes) {
-            this.FleetAttributes = new Array();
-            for (let z in params.FleetAttributes) {
-                let obj = new FleetAttributes();
-                obj.deserialize(params.FleetAttributes[z]);
-                this.FleetAttributes.push(obj);
-            }
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.FleetIds = 'FleetIds' in params ? params.FleetIds : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
 
     }
 }
@@ -2931,6 +3504,131 @@ class DescribeCcnInstancesRequest extends  AbstractModel {
             return;
         }
         this.FleetId = 'FleetId' in params ? params.FleetId : null;
+
+    }
+}
+
+/**
+ * DescribeFleetStatisticDetails返回参数结构体
+ * @class
+ */
+class DescribeFleetStatisticDetailsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务部署统计详情列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<FleetStatisticDetail> || null}
+         */
+        this.DetailList = null;
+
+        /**
+         * 记录总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 统计时间类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TimeType = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DetailList) {
+            this.DetailList = new Array();
+            for (let z in params.DetailList) {
+                let obj = new FleetStatisticDetail();
+                obj.deserialize(params.DetailList[z]);
+                this.DetailList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.TimeType = 'TimeType' in params ? params.TimeType : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UpdateGameServerSessionQueue请求参数结构体
+ * @class
+ */
+class UpdateGameServerSessionQueueRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 游戏服务器会话队列名字，长度1~128
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 目的服务部署（可为别名）列表
+         * @type {Array.<GameServerSessionQueueDestination> || null}
+         */
+        this.Destinations = null;
+
+        /**
+         * 延迟策略集合
+         * @type {Array.<PlayerLatencyPolicy> || null}
+         */
+        this.PlayerLatencyPolicies = null;
+
+        /**
+         * 超时时间
+         * @type {number || null}
+         */
+        this.TimeoutInSeconds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.Destinations) {
+            this.Destinations = new Array();
+            for (let z in params.Destinations) {
+                let obj = new GameServerSessionQueueDestination();
+                obj.deserialize(params.Destinations[z]);
+                this.Destinations.push(obj);
+            }
+        }
+
+        if (params.PlayerLatencyPolicies) {
+            this.PlayerLatencyPolicies = new Array();
+            for (let z in params.PlayerLatencyPolicies) {
+                let obj = new PlayerLatencyPolicy();
+                obj.deserialize(params.PlayerLatencyPolicies[z]);
+                this.PlayerLatencyPolicies.push(obj);
+            }
+        }
+        this.TimeoutInSeconds = 'TimeoutInSeconds' in params ? params.TimeoutInSeconds : null;
 
     }
 }
@@ -3048,42 +3746,18 @@ class TargetConfiguration extends  AbstractModel {
 }
 
 /**
- * 实例访问凭证信息
+ * DescribeGameServerSessionPlacement请求参数结构体
  * @class
  */
-class InstanceAccess extends  AbstractModel {
+class DescribeGameServerSessionPlacementRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 访问实例所需要的凭据
-         * @type {Credentials || null}
-         */
-        this.Credentials = null;
-
-        /**
-         * 服务部署Id
+         * 游戏服务器会话放置的唯一标识符
          * @type {string || null}
          */
-        this.FleetId = null;
-
-        /**
-         * 实例ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * 实例公网IP
-         * @type {string || null}
-         */
-        this.IpAddress = null;
-
-        /**
-         * 操作系统
-         * @type {string || null}
-         */
-        this.OperatingSystem = null;
+        this.PlacementId = null;
 
     }
 
@@ -3094,16 +3768,7 @@ class InstanceAccess extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Credentials) {
-            let obj = new Credentials();
-            obj.deserialize(params.Credentials)
-            this.Credentials = obj;
-        }
-        this.FleetId = 'FleetId' in params ? params.FleetId : null;
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.IpAddress = 'IpAddress' in params ? params.IpAddress : null;
-        this.OperatingSystem = 'OperatingSystem' in params ? params.OperatingSystem : null;
+        this.PlacementId = 'PlacementId' in params ? params.PlacementId : null;
 
     }
 }
@@ -3141,6 +3806,64 @@ class GameServerSessionQueueDestination extends  AbstractModel {
         }
         this.DestinationArn = 'DestinationArn' in params ? params.DestinationArn : null;
         this.FleetStatus = 'FleetStatus' in params ? params.FleetStatus : null;
+
+    }
+}
+
+/**
+ * 服务部署组容量配置
+ * @class
+ */
+class FleetCapacity extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务部署 Id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FleetId = null;
+
+        /**
+         * 服务器类型
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceType = null;
+
+        /**
+         * 服务器实例统计数据
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {InstanceCounts || null}
+         */
+        this.InstanceCounts = null;
+
+        /**
+         * 服务器伸缩容间隔
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ScalingInterval = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FleetId = 'FleetId' in params ? params.FleetId : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+
+        if (params.InstanceCounts) {
+            let obj = new InstanceCounts();
+            obj.deserialize(params.InstanceCounts)
+            this.InstanceCounts = obj;
+        }
+        this.ScalingInterval = 'ScalingInterval' in params ? params.ScalingInterval : null;
 
     }
 }
@@ -3224,55 +3947,18 @@ class GetGameServerSessionLogUrlResponse extends  AbstractModel {
 }
 
 /**
- * 别名对象
+ * DeleteFleet返回参数结构体
  * @class
  */
-class Alias extends  AbstractModel {
+class DeleteFleetResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 别名的唯一标识符
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.AliasId = null;
-
-        /**
-         * 别名的全局唯一资源标识符
-         * @type {string || null}
-         */
-        this.AliasArn = null;
-
-        /**
-         * 名字，长度不小于1字符不超过1024字符
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * 别名的可读说明，长度不小于1字符不超过1024字符
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Description = null;
-
-        /**
-         * 别名的路由配置
-         * @type {RoutingStrategy || null}
-         */
-        this.RoutingStrategy = null;
-
-        /**
-         * 创建时间
-         * @type {string || null}
-         */
-        this.CreationTime = null;
-
-        /**
-         * 上次修改此数据对象的时间
-         * @type {string || null}
-         */
-        this.LastUpdatedTime = null;
+        this.RequestId = null;
 
     }
 
@@ -3283,18 +3969,7 @@ class Alias extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AliasId = 'AliasId' in params ? params.AliasId : null;
-        this.AliasArn = 'AliasArn' in params ? params.AliasArn : null;
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Description = 'Description' in params ? params.Description : null;
-
-        if (params.RoutingStrategy) {
-            let obj = new RoutingStrategy();
-            obj.deserialize(params.RoutingStrategy)
-            this.RoutingStrategy = obj;
-        }
-        this.CreationTime = 'CreationTime' in params ? params.CreationTime : null;
-        this.LastUpdatedTime = 'LastUpdatedTime' in params ? params.LastUpdatedTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3572,6 +4247,48 @@ class ResourceCreationLimitPolicy extends  AbstractModel {
 }
 
 /**
+ * ListFleets请求参数结构体
+ * @class
+ */
+class ListFleetsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 生成包 Id
+         * @type {string || null}
+         */
+        this.AssetId = null;
+
+        /**
+         * 结果返回最大值，最小值0，最大值1000
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 结果返回偏移，最小值0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AssetId = 'AssetId' in params ? params.AssetId : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
  * UpdateFleetAttributes请求参数结构体
  * @class
  */
@@ -3640,18 +4357,26 @@ class UpdateFleetAttributesRequest extends  AbstractModel {
 }
 
 /**
- * DescribeGameServerSessionPlacement请求参数结构体
+ * 实例类型限额配置额外信息
  * @class
  */
-class DescribeGameServerSessionPlacementRequest extends  AbstractModel {
+class ExtraInfos extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 游戏服务器会话放置的唯一标识符
+         * 实例类型，例如S5.LARGE8
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.PlacementId = null;
+        this.InstanceType = null;
+
+        /**
+         * 实例限额数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalInstances = null;
 
     }
 
@@ -3662,7 +4387,8 @@ class DescribeGameServerSessionPlacementRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PlacementId = 'PlacementId' in params ? params.PlacementId : null;
+        this.InstanceType = 'InstanceType' in params ? params.InstanceType : null;
+        this.TotalInstances = 'TotalInstances' in params ? params.TotalInstances : null;
 
     }
 }
@@ -4143,30 +4869,39 @@ class DescribeUserQuotaRequest extends  AbstractModel {
 }
 
 /**
- * GetUploadCredentials返回参数结构体
+ * DescribeInstanceLimit请求参数结构体
  * @class
  */
-class GetUploadCredentialsResponse extends  AbstractModel {
+class DescribeInstanceLimitRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
+ * CreateGameServerSessionQueue返回参数结构体
+ * @class
+ */
+class CreateGameServerSessionQueueResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 上传文件授权信息Auth
-         * @type {string || null}
+         * 游戏服务器会话队列
+         * @type {GameServerSessionQueue || null}
          */
-        this.BucketAuth = null;
-
-        /**
-         * Bucket名字
-         * @type {string || null}
-         */
-        this.BucketName = null;
-
-        /**
-         * 生成包所在地域
-         * @type {string || null}
-         */
-        this.AssetRegion = null;
+        this.GameServerSessionQueue = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4183,36 +4918,11 @@ class GetUploadCredentialsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.BucketAuth = 'BucketAuth' in params ? params.BucketAuth : null;
-        this.BucketName = 'BucketName' in params ? params.BucketName : null;
-        this.AssetRegion = 'AssetRegion' in params ? params.AssetRegion : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
-    }
-}
-
-/**
- * SetServerWeight返回参数结构体
- * @class
- */
-class SetServerWeightResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
+        if (params.GameServerSessionQueue) {
+            let obj = new GameServerSessionQueue();
+            obj.deserialize(params.GameServerSessionQueue)
+            this.GameServerSessionQueue = obj;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -4807,6 +5517,200 @@ class QuotaResource extends  AbstractModel {
 }
 
 /**
+ * DescribeFleetStatisticFlows返回参数结构体
+ * @class
+ */
+class DescribeFleetStatisticFlowsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 流量统计列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<FleetStatisticFlows> || null}
+         */
+        this.UsedFlowList = null;
+
+        /**
+         * 时长统计列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<FleetStatisticTimes> || null}
+         */
+        this.UsedTimeList = null;
+
+        /**
+         * 记录总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 统计时间类型，取值：小时和天
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TimeType = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.UsedFlowList) {
+            this.UsedFlowList = new Array();
+            for (let z in params.UsedFlowList) {
+                let obj = new FleetStatisticFlows();
+                obj.deserialize(params.UsedFlowList[z]);
+                this.UsedFlowList.push(obj);
+            }
+        }
+
+        if (params.UsedTimeList) {
+            this.UsedTimeList = new Array();
+            for (let z in params.UsedTimeList) {
+                let obj = new FleetStatisticTimes();
+                obj.deserialize(params.UsedTimeList[z]);
+                this.UsedTimeList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.TimeType = 'TimeType' in params ? params.TimeType : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 服务器实例统计数据
+ * @class
+ */
+class InstanceCounts extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 活跃的服务器实例数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Active = null;
+
+        /**
+         * 期望的服务器实例数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Desired = null;
+
+        /**
+         * 空闲的服务器实例数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Idle = null;
+
+        /**
+         * 服务器实例数最大限制
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxiNum = null;
+
+        /**
+         * 服务器实例数最小限制
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MiniNum = null;
+
+        /**
+         * 已开始创建，但未激活的服务器实例数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Pending = null;
+
+        /**
+         * 结束中的服务器实例数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Terminating = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Active = 'Active' in params ? params.Active : null;
+        this.Desired = 'Desired' in params ? params.Desired : null;
+        this.Idle = 'Idle' in params ? params.Idle : null;
+        this.MaxiNum = 'MaxiNum' in params ? params.MaxiNum : null;
+        this.MiniNum = 'MiniNum' in params ? params.MiniNum : null;
+        this.Pending = 'Pending' in params ? params.Pending : null;
+        this.Terminating = 'Terminating' in params ? params.Terminating : null;
+
+    }
+}
+
+/**
+ * CreateFleet返回参数结构体
+ * @class
+ */
+class CreateFleetResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务器舰队属性
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {FleetAttributes || null}
+         */
+        this.FleetAttributes = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.FleetAttributes) {
+            let obj = new FleetAttributes();
+            obj.deserialize(params.FleetAttributes)
+            this.FleetAttributes = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * UpdateFleetAttributes返回参数结构体
  * @class
  */
@@ -5168,6 +6072,46 @@ class PlayerLatencyPolicy extends  AbstractModel {
 }
 
 /**
+ * UpdateRuntimeConfiguration请求参数结构体
+ * @class
+ */
+class UpdateRuntimeConfigurationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务器舰队Id
+         * @type {string || null}
+         */
+        this.FleetId = null;
+
+        /**
+         * 服务器舰队配置
+         * @type {RuntimeConfiguration || null}
+         */
+        this.RuntimeConfiguration = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FleetId = 'FleetId' in params ? params.FleetId : null;
+
+        if (params.RuntimeConfiguration) {
+            let obj = new RuntimeConfiguration();
+            obj.deserialize(params.RuntimeConfiguration)
+            this.RuntimeConfiguration = obj;
+        }
+
+    }
+}
+
+/**
  * 游戏属性详情
  * @class
  */
@@ -5203,6 +6147,80 @@ class GameProperty extends  AbstractModel {
 }
 
 /**
+ * 舰队统计总时长
+ * @class
+ */
+class FleetStatisticTimes extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 统计开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * 统计总时长，单位秒
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TotalUsedTimeSeconds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.TotalUsedTimeSeconds = 'TotalUsedTimeSeconds' in params ? params.TotalUsedTimeSeconds : null;
+
+    }
+}
+
+/**
+ * 舰队统计流量
+ * @class
+ */
+class FleetStatisticFlows extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总流量，单位MB
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalUsedFlowMegaBytes = null;
+
+        /**
+         * 统计开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalUsedFlowMegaBytes = 'TotalUsedFlowMegaBytes' in params ? params.TotalUsedFlowMegaBytes : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+
+    }
+}
+
+/**
  * DescribeAsset请求参数结构体
  * @class
  */
@@ -5226,6 +6244,48 @@ class DescribeAssetRequest extends  AbstractModel {
             return;
         }
         this.AssetId = 'AssetId' in params ? params.AssetId : null;
+
+    }
+}
+
+/**
+ * DescribeInstancesExtend请求参数结构体
+ * @class
+ */
+class DescribeInstancesExtendRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务部署ID
+         * @type {string || null}
+         */
+        this.FleetId = null;
+
+        /**
+         * 返回结果偏移，最小值0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 结果返回最大数量，最小值0，最大值100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FleetId = 'FleetId' in params ? params.FleetId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -5476,6 +6536,58 @@ class DescribeInstanceTypesResponse extends  AbstractModel {
 }
 
 /**
+ * SearchGameServerSessions返回参数结构体
+ * @class
+ */
+class SearchGameServerSessionsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 游戏服务器会话列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<GameServerSession> || null}
+         */
+        this.GameServerSessions = null;
+
+        /**
+         * 页偏移，用于查询下一页
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NextToken = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.GameServerSessions) {
+            this.GameServerSessions = new Array();
+            for (let z in params.GameServerSessions) {
+                let obj = new GameServerSession();
+                obj.deserialize(params.GameServerSessions[z]);
+                this.GameServerSessions.push(obj);
+            }
+        }
+        this.NextToken = 'NextToken' in params ? params.NextToken : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeFleetEvents返回参数结构体
  * @class
  */
@@ -5570,66 +6682,32 @@ class RoutingStrategy extends  AbstractModel {
 }
 
 /**
- * StartMatchPlacement请求参数结构体
+ * DescribeFleetCapacity返回参数结构体
  * @class
  */
-class StartMatchPlacementRequest extends  AbstractModel {
+class DescribeFleetCapacityResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 开始部署游戏服务器会话的唯一标识符
-         * @type {string || null}
+         * 服务部署容量配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<FleetCapacity> || null}
          */
-        this.PlacementId = null;
+        this.FleetCapacity = null;
 
         /**
-         * 游戏服务器会话队列名称
-         * @type {string || null}
-         */
-        this.GameServerSessionQueueName = null;
-
-        /**
-         * 游戏服务器允许同时连接到游戏会话的最大玩家数量
+         * 结果返回最大数量
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
-        this.MaximumPlayerSessionCount = null;
+        this.TotalCount = null;
 
         /**
-         * 玩家游戏会话信息
-         * @type {Array.<DesiredPlayerSession> || null}
-         */
-        this.DesiredPlayerSessions = null;
-
-        /**
-         * 玩家游戏会话属性
-         * @type {Array.<GameProperty> || null}
-         */
-        this.GameProperties = null;
-
-        /**
-         * 游戏服务器会话数据
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.GameServerSessionData = null;
-
-        /**
-         * 游戏服务器会话名称
-         * @type {string || null}
-         */
-        this.GameServerSessionName = null;
-
-        /**
-         * 玩家延迟
-         * @type {Array.<PlayerLatency> || null}
-         */
-        this.PlayerLatencies = null;
-
-        /**
-         * 游戏匹配数据
-         * @type {string || null}
-         */
-        this.MatchmakerData = null;
+        this.RequestId = null;
 
     }
 
@@ -5640,39 +6718,17 @@ class StartMatchPlacementRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.PlacementId = 'PlacementId' in params ? params.PlacementId : null;
-        this.GameServerSessionQueueName = 'GameServerSessionQueueName' in params ? params.GameServerSessionQueueName : null;
-        this.MaximumPlayerSessionCount = 'MaximumPlayerSessionCount' in params ? params.MaximumPlayerSessionCount : null;
 
-        if (params.DesiredPlayerSessions) {
-            this.DesiredPlayerSessions = new Array();
-            for (let z in params.DesiredPlayerSessions) {
-                let obj = new DesiredPlayerSession();
-                obj.deserialize(params.DesiredPlayerSessions[z]);
-                this.DesiredPlayerSessions.push(obj);
+        if (params.FleetCapacity) {
+            this.FleetCapacity = new Array();
+            for (let z in params.FleetCapacity) {
+                let obj = new FleetCapacity();
+                obj.deserialize(params.FleetCapacity[z]);
+                this.FleetCapacity.push(obj);
             }
         }
-
-        if (params.GameProperties) {
-            this.GameProperties = new Array();
-            for (let z in params.GameProperties) {
-                let obj = new GameProperty();
-                obj.deserialize(params.GameProperties[z]);
-                this.GameProperties.push(obj);
-            }
-        }
-        this.GameServerSessionData = 'GameServerSessionData' in params ? params.GameServerSessionData : null;
-        this.GameServerSessionName = 'GameServerSessionName' in params ? params.GameServerSessionName : null;
-
-        if (params.PlayerLatencies) {
-            this.PlayerLatencies = new Array();
-            for (let z in params.PlayerLatencies) {
-                let obj = new PlayerLatency();
-                obj.deserialize(params.PlayerLatencies[z]);
-                this.PlayerLatencies.push(obj);
-            }
-        }
-        this.MatchmakerData = 'MatchmakerData' in params ? params.MatchmakerData : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5990,18 +7046,36 @@ class PutScalingPolicyResponse extends  AbstractModel {
 }
 
 /**
- * DeleteFleet返回参数结构体
+ * CreateGameServerSessionQueue请求参数结构体
  * @class
  */
-class DeleteFleetResponse extends  AbstractModel {
+class CreateGameServerSessionQueueRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 游戏服务器会话队列名称，长度1~128
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Name = null;
+
+        /**
+         * 目的服务部署（可为别名）列表
+         * @type {Array.<GameServerSessionQueueDestination> || null}
+         */
+        this.Destinations = null;
+
+        /**
+         * 延迟策略集合
+         * @type {Array.<PlayerLatencyPolicy> || null}
+         */
+        this.PlayerLatencyPolicies = null;
+
+        /**
+         * 超时时间（单位秒，默认值为600秒）
+         * @type {number || null}
+         */
+        this.TimeoutInSeconds = null;
 
     }
 
@@ -6012,7 +7086,102 @@ class DeleteFleetResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.Destinations) {
+            this.Destinations = new Array();
+            for (let z in params.Destinations) {
+                let obj = new GameServerSessionQueueDestination();
+                obj.deserialize(params.Destinations[z]);
+                this.Destinations.push(obj);
+            }
+        }
+
+        if (params.PlayerLatencyPolicies) {
+            this.PlayerLatencyPolicies = new Array();
+            for (let z in params.PlayerLatencyPolicies) {
+                let obj = new PlayerLatencyPolicy();
+                obj.deserialize(params.PlayerLatencyPolicies[z]);
+                this.PlayerLatencyPolicies.push(obj);
+            }
+        }
+        this.TimeoutInSeconds = 'TimeoutInSeconds' in params ? params.TimeoutInSeconds : null;
+
+    }
+}
+
+/**
+ * 别名对象
+ * @class
+ */
+class Alias extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 别名的唯一标识符
+         * @type {string || null}
+         */
+        this.AliasId = null;
+
+        /**
+         * 别名的全局唯一资源标识符
+         * @type {string || null}
+         */
+        this.AliasArn = null;
+
+        /**
+         * 名字，长度不小于1字符不超过1024字符
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 别名的可读说明，长度不小于1字符不超过1024字符
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 别名的路由配置
+         * @type {RoutingStrategy || null}
+         */
+        this.RoutingStrategy = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreationTime = null;
+
+        /**
+         * 上次修改此数据对象的时间
+         * @type {string || null}
+         */
+        this.LastUpdatedTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AliasId = 'AliasId' in params ? params.AliasId : null;
+        this.AliasArn = 'AliasArn' in params ? params.AliasArn : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Description = 'Description' in params ? params.Description : null;
+
+        if (params.RoutingStrategy) {
+            let obj = new RoutingStrategy();
+            obj.deserialize(params.RoutingStrategy)
+            this.RoutingStrategy = obj;
+        }
+        this.CreationTime = 'CreationTime' in params ? params.CreationTime : null;
+        this.LastUpdatedTime = 'LastUpdatedTime' in params ? params.LastUpdatedTime : null;
 
     }
 }
@@ -6258,6 +7427,334 @@ class UpdateGameServerSessionResponse extends  AbstractModel {
 }
 
 /**
+ * 实例访问凭证信息
+ * @class
+ */
+class InstanceAccess extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 访问实例所需要的凭据
+         * @type {Credentials || null}
+         */
+        this.Credentials = null;
+
+        /**
+         * 服务部署Id
+         * @type {string || null}
+         */
+        this.FleetId = null;
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 实例公网IP
+         * @type {string || null}
+         */
+        this.IpAddress = null;
+
+        /**
+         * 操作系统
+         * @type {string || null}
+         */
+        this.OperatingSystem = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Credentials) {
+            let obj = new Credentials();
+            obj.deserialize(params.Credentials)
+            this.Credentials = obj;
+        }
+        this.FleetId = 'FleetId' in params ? params.FleetId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.IpAddress = 'IpAddress' in params ? params.IpAddress : null;
+        this.OperatingSystem = 'OperatingSystem' in params ? params.OperatingSystem : null;
+
+    }
+}
+
+/**
+ * UpdateFleetCapacity请求参数结构体
+ * @class
+ */
+class UpdateFleetCapacityRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务部署ID
+         * @type {string || null}
+         */
+        this.FleetId = null;
+
+        /**
+         * 期望的服务器实例数
+         * @type {number || null}
+         */
+        this.DesiredInstances = null;
+
+        /**
+         * 服务器实例数最小限制
+         * @type {number || null}
+         */
+        this.MinSize = null;
+
+        /**
+         * 服务器实例数最大限制
+         * @type {number || null}
+         */
+        this.MaxSize = null;
+
+        /**
+         * 服务器伸缩容间隔
+         * @type {number || null}
+         */
+        this.ScalingInterval = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FleetId = 'FleetId' in params ? params.FleetId : null;
+        this.DesiredInstances = 'DesiredInstances' in params ? params.DesiredInstances : null;
+        this.MinSize = 'MinSize' in params ? params.MinSize : null;
+        this.MaxSize = 'MaxSize' in params ? params.MaxSize : null;
+        this.ScalingInterval = 'ScalingInterval' in params ? params.ScalingInterval : null;
+
+    }
+}
+
+/**
+ * 舰队统计详情
+ * @class
+ */
+class FleetStatisticDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 舰队ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FleetId = null;
+
+        /**
+         * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 实例IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceIP = null;
+
+        /**
+         * 开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.BeginTime = null;
+
+        /**
+         * 结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 总时长，单位秒
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TotalUsedTimeSeconds = null;
+
+        /**
+         * 总流量，单位MB
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalUsedFlowMegaBytes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FleetId = 'FleetId' in params ? params.FleetId : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceIP = 'InstanceIP' in params ? params.InstanceIP : null;
+        this.BeginTime = 'BeginTime' in params ? params.BeginTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.TotalUsedTimeSeconds = 'TotalUsedTimeSeconds' in params ? params.TotalUsedTimeSeconds : null;
+        this.TotalUsedFlowMegaBytes = 'TotalUsedFlowMegaBytes' in params ? params.TotalUsedFlowMegaBytes : null;
+
+    }
+}
+
+/**
+ * JoinGameServerSessionBatch返回参数结构体
+ * @class
+ */
+class JoinGameServerSessionBatchResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 玩家会话列表，最大25组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<PlayerSession> || null}
+         */
+        this.PlayerSessions = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.PlayerSessions) {
+            this.PlayerSessions = new Array();
+            for (let z in params.PlayerSessions) {
+                let obj = new PlayerSession();
+                obj.deserialize(params.PlayerSessions[z]);
+                this.PlayerSessions.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 实例扩展信息
+ * @class
+ */
+class InstanceExtend extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Instance || null}
+         */
+        this.Instance = null;
+
+        /**
+         * 实例状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * 健康进程数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.HealthyProcessCnt = null;
+
+        /**
+         * 活跃进程数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ActiveProcessCnt = null;
+
+        /**
+         * 当前游戏会话总数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.GameSessionCnt = null;
+
+        /**
+         * 最大游戏会话数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxGameSessionCnt = null;
+
+        /**
+         * 当前玩家会话数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.PlayerSessionCnt = null;
+
+        /**
+         * 最大玩家会话数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxPlayerSessionCnt = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Instance) {
+            let obj = new Instance();
+            obj.deserialize(params.Instance)
+            this.Instance = obj;
+        }
+        this.State = 'State' in params ? params.State : null;
+        this.HealthyProcessCnt = 'HealthyProcessCnt' in params ? params.HealthyProcessCnt : null;
+        this.ActiveProcessCnt = 'ActiveProcessCnt' in params ? params.ActiveProcessCnt : null;
+        this.GameSessionCnt = 'GameSessionCnt' in params ? params.GameSessionCnt : null;
+        this.MaxGameSessionCnt = 'MaxGameSessionCnt' in params ? params.MaxGameSessionCnt : null;
+        this.PlayerSessionCnt = 'PlayerSessionCnt' in params ? params.PlayerSessionCnt : null;
+        this.MaxPlayerSessionCnt = 'MaxPlayerSessionCnt' in params ? params.MaxPlayerSessionCnt : null;
+
+    }
+}
+
+/**
  * PutScalingPolicy请求参数结构体
  * @class
  */
@@ -6394,32 +7891,47 @@ class StopGameServerSessionPlacementResponse extends  AbstractModel {
 }
 
 /**
- * SearchGameServerSessions返回参数结构体
+ * 云联网实例信息
  * @class
  */
-class SearchGameServerSessionsResponse extends  AbstractModel {
+class CcnInstanceSets extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 游戏服务器会话列表
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<GameServerSession> || null}
-         */
-        this.GameServerSessions = null;
-
-        /**
-         * 页偏移，用于查询下一页
+         * 云联网账号 Uin
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.NextToken = null;
+        this.AccountId = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 云联网 Id
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.CcnId = null;
+
+        /**
+         * 云联网关联时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 云联网实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 云联网状态：申请中、已连接、已过期、已拒绝、已删除、失败的、关联中、解关联中、解关联失败
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.State = null;
 
     }
 
@@ -6430,33 +7942,30 @@ class SearchGameServerSessionsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.GameServerSessions) {
-            this.GameServerSessions = new Array();
-            for (let z in params.GameServerSessions) {
-                let obj = new GameServerSession();
-                obj.deserialize(params.GameServerSessions[z]);
-                this.GameServerSessions.push(obj);
-            }
-        }
-        this.NextToken = 'NextToken' in params ? params.NextToken : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.AccountId = 'AccountId' in params ? params.AccountId : null;
+        this.CcnId = 'CcnId' in params ? params.CcnId : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.State = 'State' in params ? params.State : null;
 
     }
 }
 
 module.exports = {
+    DeleteGameServerSessionQueueRequest: DeleteGameServerSessionQueueRequest,
     FleetAttributes: FleetAttributes,
     CreateAssetResponse: CreateAssetResponse,
     InboundPermission: InboundPermission,
     GetInstanceAccessResponse: GetInstanceAccessResponse,
     Asset: Asset,
     ListAliasesResponse: ListAliasesResponse,
-    StartMatchPlacementResponse: StartMatchPlacementResponse,
+    DeleteGameServerSessionQueueResponse: DeleteGameServerSessionQueueResponse,
     DescribeFleetAttributesRequest: DescribeFleetAttributesRequest,
     ResolveAliasRequest: ResolveAliasRequest,
     StartGameServerSessionPlacementResponse: StartGameServerSessionPlacementResponse,
+    DescribeFleetStatisticDetailsRequest: DescribeFleetStatisticDetailsRequest,
     GetInstanceAccessRequest: GetInstanceAccessRequest,
+    CreateFleetRequest: CreateFleetRequest,
     StartFleetActionsRequest: StartFleetActionsRequest,
     UpdateFleetPortSettingsResponse: UpdateFleetPortSettingsResponse,
     DescribeInstancesResponse: DescribeInstancesResponse,
@@ -6471,54 +7980,67 @@ module.exports = {
     UpdateAssetRequest: UpdateAssetRequest,
     DesiredPlayerSession: DesiredPlayerSession,
     UpdateFleetPortSettingsRequest: UpdateFleetPortSettingsRequest,
-    CcnInstanceSets: CcnInstanceSets,
+    DescribeFleetStatisticFlowsRequest: DescribeFleetStatisticFlowsRequest,
     UpdateAliasRequest: UpdateAliasRequest,
     GameServerSessionPlacement: GameServerSessionPlacement,
+    JoinGameServerSessionBatchRequest: JoinGameServerSessionBatchRequest,
     GameServerSessionQueue: GameServerSessionQueue,
+    UpdateFleetCapacityResponse: UpdateFleetCapacityResponse,
     DescribeRuntimeConfigurationResponse: DescribeRuntimeConfigurationResponse,
     CreateGameServerSessionRequest: CreateGameServerSessionRequest,
     UpdateAliasResponse: UpdateAliasResponse,
     GameServerSessionDetail: GameServerSessionDetail,
+    UpdateGameServerSessionQueueResponse: UpdateGameServerSessionQueueResponse,
     DescribeGameServerSessionQueuesRequest: DescribeGameServerSessionQueuesRequest,
     GetUploadFederationTokenResponse: GetUploadFederationTokenResponse,
     DeleteScalingPolicyResponse: DeleteScalingPolicyResponse,
+    DescribeFleetStatisticSummaryRequest: DescribeFleetStatisticSummaryRequest,
+    PlayerDataMap: PlayerDataMap,
     ResolveAliasResponse: ResolveAliasResponse,
-    ListFleetsRequest: ListFleetsRequest,
+    DescribeInstancesExtendResponse: DescribeInstancesExtendResponse,
     Event: Event,
     UpdateRuntimeConfigurationResponse: UpdateRuntimeConfigurationResponse,
     DescribeCcnInstancesResponse: DescribeCcnInstancesResponse,
-    UpdateRuntimeConfigurationRequest: UpdateRuntimeConfigurationRequest,
+    DescribeInstanceLimitResponse: DescribeInstanceLimitResponse,
     DescribeAssetResponse: DescribeAssetResponse,
     PlacedPlayerSession: PlacedPlayerSession,
+    DescribeFleetStatisticSummaryResponse: DescribeFleetStatisticSummaryResponse,
     FleetUtilization: FleetUtilization,
     DescribeGameServerSessionQueuesResponse: DescribeGameServerSessionQueuesResponse,
     DeleteAliasRequest: DeleteAliasRequest,
+    DescribeFleetAttributesResponse: DescribeFleetAttributesResponse,
+    GetUploadCredentialsResponse: GetUploadCredentialsResponse,
     AttachCcnInstancesRequest: AttachCcnInstancesRequest,
     InboundPermissionRevocations: InboundPermissionRevocations,
     DescribeAssetsRequest: DescribeAssetsRequest,
+    SetServerWeightResponse: SetServerWeightResponse,
     ScalingPolicy: ScalingPolicy,
     DescribeGameServerSessionsRequest: DescribeGameServerSessionsRequest,
     GetUploadCredentialsRequest: GetUploadCredentialsRequest,
     DescribePlayerSessionsRequest: DescribePlayerSessionsRequest,
     DeleteAssetRequest: DeleteAssetRequest,
     DescribeAssetsResponse: DescribeAssetsResponse,
-    DescribeFleetAttributesResponse: DescribeFleetAttributesResponse,
+    DescribeFleetCapacityRequest: DescribeFleetCapacityRequest,
     DescribeCcnInstancesRequest: DescribeCcnInstancesRequest,
+    DescribeFleetStatisticDetailsResponse: DescribeFleetStatisticDetailsResponse,
+    UpdateGameServerSessionQueueRequest: UpdateGameServerSessionQueueRequest,
     JoinGameServerSessionResponse: JoinGameServerSessionResponse,
     AssetCredentials: AssetCredentials,
     TargetConfiguration: TargetConfiguration,
-    InstanceAccess: InstanceAccess,
+    DescribeGameServerSessionPlacementRequest: DescribeGameServerSessionPlacementRequest,
     GameServerSessionQueueDestination: GameServerSessionQueueDestination,
+    FleetCapacity: FleetCapacity,
     SetServerWeightRequest: SetServerWeightRequest,
     GetGameServerSessionLogUrlResponse: GetGameServerSessionLogUrlResponse,
-    Alias: Alias,
+    DeleteFleetResponse: DeleteFleetResponse,
     StartGameServerSessionPlacementRequest: StartGameServerSessionPlacementRequest,
     InstanceTypeInfo: InstanceTypeInfo,
     DescribeGameServerSessionPlacementResponse: DescribeGameServerSessionPlacementResponse,
     CreateAliasResponse: CreateAliasResponse,
     ResourceCreationLimitPolicy: ResourceCreationLimitPolicy,
+    ListFleetsRequest: ListFleetsRequest,
     UpdateFleetAttributesRequest: UpdateFleetAttributesRequest,
-    DescribeGameServerSessionPlacementRequest: DescribeGameServerSessionPlacementRequest,
+    ExtraInfos: ExtraInfos,
     AttachCcnInstancesResponse: AttachCcnInstancesResponse,
     DescribeFleetPortSettingsRequest: DescribeFleetPortSettingsRequest,
     StopFleetActionsResponse: StopFleetActionsResponse,
@@ -6530,8 +8052,8 @@ module.exports = {
     SearchGameServerSessionsRequest: SearchGameServerSessionsRequest,
     DescribePlayerSessionsResponse: DescribePlayerSessionsResponse,
     DescribeUserQuotaRequest: DescribeUserQuotaRequest,
-    GetUploadCredentialsResponse: GetUploadCredentialsResponse,
-    SetServerWeightResponse: SetServerWeightResponse,
+    DescribeInstanceLimitRequest: DescribeInstanceLimitRequest,
+    CreateGameServerSessionQueueResponse: CreateGameServerSessionQueueResponse,
     DescribeInstanceTypesRequest: DescribeInstanceTypesRequest,
     PlayerLatency: PlayerLatency,
     StopGameServerSessionPlacementRequest: StopGameServerSessionPlacementRequest,
@@ -6546,37 +8068,51 @@ module.exports = {
     CreateGameServerSessionResponse: CreateGameServerSessionResponse,
     DescribeInstancesRequest: DescribeInstancesRequest,
     QuotaResource: QuotaResource,
+    DescribeFleetStatisticFlowsResponse: DescribeFleetStatisticFlowsResponse,
+    InstanceCounts: InstanceCounts,
+    CreateFleetResponse: CreateFleetResponse,
     UpdateFleetAttributesResponse: UpdateFleetAttributesResponse,
     DescribeFleetUtilizationRequest: DescribeFleetUtilizationRequest,
     DescribeGameServerSessionDetailsRequest: DescribeGameServerSessionDetailsRequest,
     GameServerSession: GameServerSession,
     PlayerLatencyPolicy: PlayerLatencyPolicy,
+    UpdateRuntimeConfigurationRequest: UpdateRuntimeConfigurationRequest,
     GameProperty: GameProperty,
+    FleetStatisticTimes: FleetStatisticTimes,
+    FleetStatisticFlows: FleetStatisticFlows,
     DescribeAssetRequest: DescribeAssetRequest,
+    DescribeInstancesExtendRequest: DescribeInstancesExtendRequest,
     DescribeGameServerSessionsResponse: DescribeGameServerSessionsResponse,
     StartFleetActionsResponse: StartFleetActionsResponse,
     JoinGameServerSessionRequest: JoinGameServerSessionRequest,
     DescribeUserQuotasResponse: DescribeUserQuotasResponse,
     GetUploadFederationTokenRequest: GetUploadFederationTokenRequest,
     DescribeInstanceTypesResponse: DescribeInstanceTypesResponse,
+    SearchGameServerSessionsResponse: SearchGameServerSessionsResponse,
     DescribeFleetEventsResponse: DescribeFleetEventsResponse,
     RoutingStrategy: RoutingStrategy,
-    StartMatchPlacementRequest: StartMatchPlacementRequest,
+    DescribeFleetCapacityResponse: DescribeFleetCapacityResponse,
     DescribeUserQuotaResponse: DescribeUserQuotaResponse,
     DescribeFleetEventsRequest: DescribeFleetEventsRequest,
     UpdateAssetResponse: UpdateAssetResponse,
     ListAliasesRequest: ListAliasesRequest,
     PlayerSession: PlayerSession,
     PutScalingPolicyResponse: PutScalingPolicyResponse,
-    DeleteFleetResponse: DeleteFleetResponse,
+    CreateGameServerSessionQueueRequest: CreateGameServerSessionQueueRequest,
+    Alias: Alias,
     DescribeRuntimeConfigurationRequest: DescribeRuntimeConfigurationRequest,
     RuntimeConfiguration: RuntimeConfiguration,
     DescribeScalingPoliciesResponse: DescribeScalingPoliciesResponse,
     DetachCcnInstancesRequest: DetachCcnInstancesRequest,
     ServerProcesse: ServerProcesse,
     UpdateGameServerSessionResponse: UpdateGameServerSessionResponse,
+    InstanceAccess: InstanceAccess,
+    UpdateFleetCapacityRequest: UpdateFleetCapacityRequest,
+    FleetStatisticDetail: FleetStatisticDetail,
+    JoinGameServerSessionBatchResponse: JoinGameServerSessionBatchResponse,
+    InstanceExtend: InstanceExtend,
     PutScalingPolicyRequest: PutScalingPolicyRequest,
     StopGameServerSessionPlacementResponse: StopGameServerSessionPlacementResponse,
-    SearchGameServerSessionsResponse: SearchGameServerSessionsResponse,
+    CcnInstanceSets: CcnInstanceSets,
 
 }

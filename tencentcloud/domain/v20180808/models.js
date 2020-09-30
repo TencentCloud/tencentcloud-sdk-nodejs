@@ -140,42 +140,30 @@ class CheckDomainResponse extends  AbstractModel {
 }
 
 /**
- * 域名价格信息
+ * 批量任务状态
  * @class
  */
-class PriceInfo extends  AbstractModel {
+class BatchStatus extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 域名后缀，例如.com
+         * 批量任务id
+         * @type {number || null}
+         */
+        this.LogId = null;
+
+        /**
+         * 批量任务状态  doing：进行中  success：成功  failed：失败  partial_success：部分成功
          * @type {string || null}
          */
-        this.Tld = null;
+        this.Status = null;
 
         /**
-         * 购买年限，范围[1-10]
-         * @type {number || null}
-         */
-        this.Year = null;
-
-        /**
-         * 域名原价
-         * @type {number || null}
-         */
-        this.Price = null;
-
-        /**
-         * 域名现价
-         * @type {number || null}
-         */
-        this.RealPrice = null;
-
-        /**
-         * 商品的购买类型，新购，续费，赎回，转入，续费并转入
+         * 批量任务类型
          * @type {string || null}
          */
-        this.Operation = null;
+        this.BatchAction = null;
 
     }
 
@@ -186,11 +174,109 @@ class PriceInfo extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.LogId = 'LogId' in params ? params.LogId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.BatchAction = 'BatchAction' in params ? params.BatchAction : null;
+
+    }
+}
+
+/**
+ * 域名列表
+ * @class
+ */
+class DomainList extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否是溢价域名：
+ture 是    
+false 不是
+         * @type {boolean || null}
+         */
+        this.IsPremium = null;
+
+        /**
+         * 域名资源ID。
+         * @type {string || null}
+         */
+        this.DomainId = null;
+
+        /**
+         * 域名名称。
+         * @type {string || null}
+         */
+        this.DomainName = null;
+
+        /**
+         * 是否已设置自动续费 。
+0：未设置 
+1：已设置
+         * @type {number || null}
+         */
+        this.AutoRenew = null;
+
+        /**
+         * 注册时间。
+         * @type {string || null}
+         */
+        this.CreationDate = null;
+
+        /**
+         * 到期时间。
+         * @type {string || null}
+         */
+        this.ExpirationDate = null;
+
+        /**
+         * 域名后缀
+         * @type {string || null}
+         */
+        this.Tld = null;
+
+        /**
+         * 编码后的后缀（中文会进行编码）
+         * @type {string || null}
+         */
+        this.CodeTld = null;
+
+        /**
+         * 域名购买状态。
+ok：正常
+AboutToExpire: 即将到期
+RegisterPending：注册中
+RegisterDoing：注册中
+RegisterFailed：注册失败
+RenewPending：续费期
+RenewDoing：续费中
+RedemptionPending：赎回期
+RedemptionDoing：赎回中
+TransferPending：转入中
+TransferTransing：转入中
+TransferFailed：转入失败
+         * @type {string || null}
+         */
+        this.BuyStatus = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IsPremium = 'IsPremium' in params ? params.IsPremium : null;
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+        this.DomainName = 'DomainName' in params ? params.DomainName : null;
+        this.AutoRenew = 'AutoRenew' in params ? params.AutoRenew : null;
+        this.CreationDate = 'CreationDate' in params ? params.CreationDate : null;
+        this.ExpirationDate = 'ExpirationDate' in params ? params.ExpirationDate : null;
         this.Tld = 'Tld' in params ? params.Tld : null;
-        this.Year = 'Year' in params ? params.Year : null;
-        this.Price = 'Price' in params ? params.Price : null;
-        this.RealPrice = 'RealPrice' in params ? params.RealPrice : null;
-        this.Operation = 'Operation' in params ? params.Operation : null;
+        this.CodeTld = 'CodeTld' in params ? params.CodeTld : null;
+        this.BuyStatus = 'BuyStatus' in params ? params.BuyStatus : null;
 
     }
 }
@@ -278,6 +364,284 @@ class DescribeDomainBaseInfoResponse extends  AbstractModel {
 }
 
 /**
+ * Template数据
+ * @class
+ */
+class TemplateInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模板ID
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * 认证状态
+         * @type {string || null}
+         */
+        this.AuditStatus = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreatedOn = null;
+
+        /**
+         * 更新时间
+         * @type {string || null}
+         */
+        this.UpdatedOn = null;
+
+        /**
+         * 用户UIN
+         * @type {string || null}
+         */
+        this.UserUin = null;
+
+        /**
+         * 是否是默认模板
+         * @type {string || null}
+         */
+        this.IsDefault = null;
+
+        /**
+         * 认证失败原因
+         * @type {string || null}
+         */
+        this.AuditReason = null;
+
+        /**
+         * 认证信息
+         * @type {CertificateInfo || null}
+         */
+        this.CertificateInfo = null;
+
+        /**
+         * 联系人信息
+         * @type {ContactInfo || null}
+         */
+        this.ContactInfo = null;
+
+        /**
+         * 模板是否符合规范， 1是 0 否
+         * @type {number || null}
+         */
+        this.IsValidTemplate = null;
+
+        /**
+         * 不符合规范原因
+         * @type {string || null}
+         */
+        this.InvalidReason = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.AuditStatus = 'AuditStatus' in params ? params.AuditStatus : null;
+        this.CreatedOn = 'CreatedOn' in params ? params.CreatedOn : null;
+        this.UpdatedOn = 'UpdatedOn' in params ? params.UpdatedOn : null;
+        this.UserUin = 'UserUin' in params ? params.UserUin : null;
+        this.IsDefault = 'IsDefault' in params ? params.IsDefault : null;
+        this.AuditReason = 'AuditReason' in params ? params.AuditReason : null;
+
+        if (params.CertificateInfo) {
+            let obj = new CertificateInfo();
+            obj.deserialize(params.CertificateInfo)
+            this.CertificateInfo = obj;
+        }
+
+        if (params.ContactInfo) {
+            let obj = new ContactInfo();
+            obj.deserialize(params.ContactInfo)
+            this.ContactInfo = obj;
+        }
+        this.IsValidTemplate = 'IsValidTemplate' in params ? params.IsValidTemplate : null;
+        this.InvalidReason = 'InvalidReason' in params ? params.InvalidReason : null;
+
+    }
+}
+
+/**
+ * CreateDomainBatch请求参数结构体
+ * @class
+ */
+class CreateDomainBatchRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模板ID
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * 购买域名的年限，可选值：[1-10]
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * 批量购买的域名,最多为4000个
+         * @type {Array.<string> || null}
+         */
+        this.Domains = null;
+
+        /**
+         * 付费模式 0手动在线付费，1使用余额付费
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.Domains = 'Domains' in params ? params.Domains : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+
+    }
+}
+
+/**
+ * CheckBatchStatus请求参数结构体
+ * @class
+ */
+class CheckBatchStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 批量任务id数组，最多 200 个
+         * @type {Array.<number> || null}
+         */
+        this.LogIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogIds = 'LogIds' in params ? params.LogIds : null;
+
+    }
+}
+
+/**
+ * CheckBatchStatus返回参数结构体
+ * @class
+ */
+class CheckBatchStatusResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 批量任务状态集
+         * @type {Array.<BatchStatus> || null}
+         */
+        this.StatusSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.StatusSet) {
+            this.StatusSet = new Array();
+            for (let z in params.StatusSet) {
+                let obj = new BatchStatus();
+                obj.deserialize(params.StatusSet[z]);
+                this.StatusSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeTemplateList返回参数结构体
+ * @class
+ */
+class DescribeTemplateListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模板数量。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 模板详细信息列表。
+         * @type {Array.<TemplateInfo> || null}
+         */
+        this.TemplateSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.TemplateSet) {
+            this.TemplateSet = new Array();
+            for (let z in params.TemplateSet) {
+                let obj = new TemplateInfo();
+                obj.deserialize(params.TemplateSet[z]);
+                this.TemplateSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDomainBaseInfo请求参数结构体
  * @class
  */
@@ -301,6 +665,91 @@ class DescribeDomainBaseInfoRequest extends  AbstractModel {
             return;
         }
         this.Domain = 'Domain' in params ? params.Domain : null;
+
+    }
+}
+
+/**
+ * DescribeTemplateList请求参数结构体
+ * @class
+ */
+class DescribeTemplateListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为20，最大值为100。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 用户注册类型，默认:all , 个人：I ,企业: E
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 认证状态：未实名认证:NotUpload, 实名审核中:InAudit，已实名认证:Approved，实名审核失败:Reject
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
+ * CreateDomainBatch返回参数结构体
+ * @class
+ */
+class CreateDomainBatchResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 批量日志ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.LogId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogId = 'LogId' in params ? params.LogId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -442,6 +891,281 @@ xinnet (新网域名)
 }
 
 /**
+ * 域名价格信息
+ * @class
+ */
+class PriceInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名后缀，例如.com
+         * @type {string || null}
+         */
+        this.Tld = null;
+
+        /**
+         * 购买年限，范围[1-10]
+         * @type {number || null}
+         */
+        this.Year = null;
+
+        /**
+         * 域名原价
+         * @type {number || null}
+         */
+        this.Price = null;
+
+        /**
+         * 域名现价
+         * @type {number || null}
+         */
+        this.RealPrice = null;
+
+        /**
+         * 商品的购买类型，新购，续费，赎回，转入，续费并转入
+         * @type {string || null}
+         */
+        this.Operation = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Tld = 'Tld' in params ? params.Tld : null;
+        this.Year = 'Year' in params ? params.Year : null;
+        this.Price = 'Price' in params ? params.Price : null;
+        this.RealPrice = 'RealPrice' in params ? params.RealPrice : null;
+        this.Operation = 'Operation' in params ? params.Operation : null;
+
+    }
+}
+
+/**
+ * DescribeDomainNameList请求参数结构体
+ * @class
+ */
+class DescribeDomainNameListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 偏移量，默认为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为20，取值范围[1,100]
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * DescribeDomainNameList返回参数结构体
+ * @class
+ */
+class DescribeDomainNameListResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名信息集合
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DomainList> || null}
+         */
+        this.DomainSet = null;
+
+        /**
+         * 域名总数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.DomainSet) {
+            this.DomainSet = new Array();
+            for (let z in params.DomainSet) {
+                let obj = new DomainList();
+                obj.deserialize(params.DomainSet[z]);
+                this.DomainSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 域名联系人信息
+ * @class
+ */
+class ContactInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 注册人（中文）
+         * @type {string || null}
+         */
+        this.OrganizationNameCN = null;
+
+        /**
+         * 注册人（英文）
+         * @type {string || null}
+         */
+        this.OrganizationName = null;
+
+        /**
+         * 联系人（中文）
+         * @type {string || null}
+         */
+        this.RegistrantNameCN = null;
+
+        /**
+         * 联系人（英文）
+         * @type {string || null}
+         */
+        this.RegistrantName = null;
+
+        /**
+         * 省份（中文）
+         * @type {string || null}
+         */
+        this.ProvinceCN = null;
+
+        /**
+         * 城市（中文）
+         * @type {string || null}
+         */
+        this.CityCN = null;
+
+        /**
+         * 街道（中文）
+         * @type {string || null}
+         */
+        this.StreetCN = null;
+
+        /**
+         * 街道（英文）
+         * @type {string || null}
+         */
+        this.Street = null;
+
+        /**
+         * 国家（中文）
+         * @type {string || null}
+         */
+        this.CountryCN = null;
+
+        /**
+         * 联系人手机号
+         * @type {string || null}
+         */
+        this.Telephone = null;
+
+        /**
+         * 联系人邮箱
+         * @type {string || null}
+         */
+        this.Email = null;
+
+        /**
+         * 邮编
+         * @type {string || null}
+         */
+        this.ZipCode = null;
+
+        /**
+         * 用户类型 E:组织， I:个人
+         * @type {string || null}
+         */
+        this.RegistrantType = null;
+
+        /**
+         * 省份（英文）。作为入参时可以不填
+         * @type {string || null}
+         */
+        this.Province = null;
+
+        /**
+         * 城市（英文）。作为入参时可以不填
+         * @type {string || null}
+         */
+        this.City = null;
+
+        /**
+         * 国家（英文）。作为入参时可以不填
+         * @type {string || null}
+         */
+        this.Country = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OrganizationNameCN = 'OrganizationNameCN' in params ? params.OrganizationNameCN : null;
+        this.OrganizationName = 'OrganizationName' in params ? params.OrganizationName : null;
+        this.RegistrantNameCN = 'RegistrantNameCN' in params ? params.RegistrantNameCN : null;
+        this.RegistrantName = 'RegistrantName' in params ? params.RegistrantName : null;
+        this.ProvinceCN = 'ProvinceCN' in params ? params.ProvinceCN : null;
+        this.CityCN = 'CityCN' in params ? params.CityCN : null;
+        this.StreetCN = 'StreetCN' in params ? params.StreetCN : null;
+        this.Street = 'Street' in params ? params.Street : null;
+        this.CountryCN = 'CountryCN' in params ? params.CountryCN : null;
+        this.Telephone = 'Telephone' in params ? params.Telephone : null;
+        this.Email = 'Email' in params ? params.Email : null;
+        this.ZipCode = 'ZipCode' in params ? params.ZipCode : null;
+        this.RegistrantType = 'RegistrantType' in params ? params.RegistrantType : null;
+        this.Province = 'Province' in params ? params.Province : null;
+        this.City = 'City' in params ? params.City : null;
+        this.Country = 'Country' in params ? params.Country : null;
+
+    }
+}
+
+/**
  * DescribeDomainPriceList返回参数结构体
  * @class
  */
@@ -519,14 +1243,69 @@ class CheckDomainRequest extends  AbstractModel {
     }
 }
 
+/**
+ * 认证资料信息
+ * @class
+ */
+class CertificateInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 证件号码。
+         * @type {string || null}
+         */
+        this.CertificateCode = null;
+
+        /**
+         * 证件类型。
+         * @type {string || null}
+         */
+        this.CertificateType = null;
+
+        /**
+         * 证件照片地址。
+         * @type {string || null}
+         */
+        this.ImgUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateCode = 'CertificateCode' in params ? params.CertificateCode : null;
+        this.CertificateType = 'CertificateType' in params ? params.CertificateType : null;
+        this.ImgUrl = 'ImgUrl' in params ? params.ImgUrl : null;
+
+    }
+}
+
 module.exports = {
     CheckDomainResponse: CheckDomainResponse,
-    PriceInfo: PriceInfo,
+    BatchStatus: BatchStatus,
+    DomainList: DomainList,
     DescribeDomainPriceListRequest: DescribeDomainPriceListRequest,
     DescribeDomainBaseInfoResponse: DescribeDomainBaseInfoResponse,
+    TemplateInfo: TemplateInfo,
+    CreateDomainBatchRequest: CreateDomainBatchRequest,
+    CheckBatchStatusRequest: CheckBatchStatusRequest,
+    CheckBatchStatusResponse: CheckBatchStatusResponse,
+    DescribeTemplateListResponse: DescribeTemplateListResponse,
     DescribeDomainBaseInfoRequest: DescribeDomainBaseInfoRequest,
+    DescribeTemplateListRequest: DescribeTemplateListRequest,
+    CreateDomainBatchResponse: CreateDomainBatchResponse,
     DomainBaseInfo: DomainBaseInfo,
+    PriceInfo: PriceInfo,
+    DescribeDomainNameListRequest: DescribeDomainNameListRequest,
+    DescribeDomainNameListResponse: DescribeDomainNameListResponse,
+    ContactInfo: ContactInfo,
     DescribeDomainPriceListResponse: DescribeDomainPriceListResponse,
     CheckDomainRequest: CheckDomainRequest,
+    CertificateInfo: CertificateInfo,
 
 }
