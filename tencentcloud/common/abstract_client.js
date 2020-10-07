@@ -200,10 +200,10 @@ class AbstractClient {
     formatSignString(params) {
         let strParam = "";
         let keys = Object.keys(params);
-        keys.sort();
-        for (let k in keys) {
+        keys = keys.sort();
+        for (let k of keys) {
             //k = k.replace(/_/g, '.');
-            strParam += ("&" + keys[k] + "=" + params[keys[k]]);
+            strParam += ("&" + k + "=" + params[k]);
         }
         let strSign = this.profile.httpProfile.reqMethod.toLocaleUpperCase() + this.getEndpoint() +
             this.path + "?" + strParam.slice(1);
