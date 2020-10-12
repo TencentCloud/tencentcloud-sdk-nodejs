@@ -293,6 +293,7 @@ const ModifyCcnRegionBandwidthLimitsTypeResponse = models.ModifyCcnRegionBandwid
 const RejectAttachCcnInstancesResponse = models.RejectAttachCcnInstancesResponse;
 const SetCcnRegionBandwidthLimitsResponse = models.SetCcnRegionBandwidthLimitsResponse;
 const DescribeAccountAttributesRequest = models.DescribeAccountAttributesRequest;
+const RenewAddressesResponse = models.RenewAddressesResponse;
 const DescribeCcnRoutesRequest = models.DescribeCcnRoutesRequest;
 const ModifyDhcpIpAttributeResponse = models.ModifyDhcpIpAttributeResponse;
 const CreateAndAttachNetworkInterfaceRequest = models.CreateAndAttachNetworkInterfaceRequest;
@@ -367,6 +368,7 @@ const CreateDirectConnectGatewayCcnRoutesResponse = models.CreateDirectConnectGa
 const CreateRouteTableRequest = models.CreateRouteTableRequest;
 const MigrateNetworkInterfaceRequest = models.MigrateNetworkInterfaceRequest;
 const DisableCcnRoutesRequest = models.DisableCcnRoutesRequest;
+const RenewAddressesRequest = models.RenewAddressesRequest;
 const ModifyAddressAttributeRequest = models.ModifyAddressAttributeRequest;
 const DhcpIp = models.DhcpIp;
 const DeleteAssistantCidrRequest = models.DeleteAssistantCidrRequest;
@@ -1445,7 +1447,7 @@ class VpcClient extends AbstractClient {
 * 将 EIP 绑定到实例（CVM）上，其本质是将 EIP 绑定到实例上主网卡的主内网 IP 上。
 * 将 EIP 绑定到主网卡的主内网IP上，绑定过程会把其上绑定的普通公网 IP 自动解绑并释放。
 * 将 EIP 绑定到指定网卡的内网 IP上（非主网卡的主内网IP），则必须先解绑该 EIP，才能再绑定新的。
-* 将 EIP 绑定到NAT网关，请使用接口[EipBindNatGateway](https://cloud.tencent.com/document/product/215/4093)
+* 将 EIP 绑定到NAT网关，请使用接口[AssociateNatGatewayAddress](https://cloud.tencent.com/document/product/215/36722)
 * EIP 如果欠费或被封堵，则不能被绑定。
 * 只有状态为 UNBIND 的 EIP 才能够被绑定。
      * @param {AssociateAddressRequest} req
@@ -1767,6 +1769,17 @@ class VpcClient extends AbstractClient {
     DescribeVpnConnections(req, cb) {
         let resp = new DescribeVpnConnectionsResponse();
         this.request("DescribeVpnConnections", req, resp, cb);
+    }
+
+    /**
+     * 该接口用于续费包月带宽计费模式的弹性公网IP
+     * @param {RenewAddressesRequest} req
+     * @param {function(string, RenewAddressesResponse):void} cb
+     * @public
+     */
+    RenewAddresses(req, cb) {
+        let resp = new RenewAddressesResponse();
+        this.request("RenewAddresses", req, resp, cb);
     }
 
     /**
@@ -2305,7 +2318,7 @@ class VpcClient extends AbstractClient {
     /**
      * 本接口 (DisassociateAddress) 用于解绑[弹性公网IP](https://cloud.tencent.com/document/product/213/1941)（简称 EIP）。
 * 支持CVM实例，弹性网卡上的EIP解绑
-* 不支持NAT上的EIP解绑。NAT上的EIP解绑请参考[EipUnBindNatGateway](https://cloud.tencent.com/document/product/215/4092)
+* 不支持NAT上的EIP解绑。NAT上的EIP解绑请参考[DisassociateNatGatewayAddress](https://cloud.tencent.com/document/api/215/36716)
 * 只有状态为 BIND 和 BIND_ENI 的 EIP 才能进行解绑定操作。
 * EIP 如果被封堵，则不能进行解绑定操作。
      * @param {DisassociateAddressRequest} req

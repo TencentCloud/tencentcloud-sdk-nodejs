@@ -18,6 +18,7 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribeCdnDomainLogsResponse = models.DescribeCdnDomainLogsResponse;
 const ScdnTopUrlData = models.ScdnTopUrlData;
+const ScdnLogTaskDetail = models.ScdnLogTaskDetail;
 const DescribeCdnDomainLogsRequest = models.DescribeCdnDomainLogsRequest;
 const Compression = models.Compression;
 const Revalidate = models.Revalidate;
@@ -56,6 +57,7 @@ const DisableCachesRequest = models.DisableCachesRequest;
 const CompressionRule = models.CompressionRule;
 const GuetzliAdapter = models.GuetzliAdapter;
 const Origin = models.Origin;
+const ViolationUrl = models.ViolationUrl;
 const TopData = models.TopData;
 const EnableCachesRequest = models.EnableCachesRequest;
 const Quota = models.Quota;
@@ -92,6 +94,7 @@ const DescribePayTypeRequest = models.DescribePayTypeRequest;
 const DescribeCertDomainsRequest = models.DescribeCertDomainsRequest;
 const DescribeDomainsConfigRequest = models.DescribeDomainsConfigRequest;
 const AdvancedCache = models.AdvancedCache;
+const DeleteScdnDomainRequest = models.DeleteScdnDomainRequest;
 const WebpAdapter = models.WebpAdapter;
 const CreateScdnLogTaskResponse = models.CreateScdnLogTaskResponse;
 const MapInfo = models.MapInfo;
@@ -124,7 +127,7 @@ const Cache = models.Cache;
 const ForceRedirect = models.ForceRedirect;
 const DescribeOriginDataRequest = models.DescribeOriginDataRequest;
 const RangeOriginPull = models.RangeOriginPull;
-const ViolationUrl = models.ViolationUrl;
+const ListScdnLogTasksRequest = models.ListScdnLogTasksRequest;
 const SearchClsLogResponse = models.SearchClsLogResponse;
 const PushUrlsCacheRequest = models.PushUrlsCacheRequest;
 const MainlandConfig = models.MainlandConfig;
@@ -159,6 +162,7 @@ const DescribeCdnIpResponse = models.DescribeCdnIpResponse;
 const AdvanceCacheRule = models.AdvanceCacheRule;
 const DescribeIpStatusResponse = models.DescribeIpStatusResponse;
 const DescribeDistrictIspDataRequest = models.DescribeDistrictIspDataRequest;
+const ListScdnLogTasksResponse = models.ListScdnLogTasksResponse;
 const CacheKey = models.CacheKey;
 const UrlRedirect = models.UrlRedirect;
 const DownstreamCapping = models.DownstreamCapping;
@@ -166,6 +170,7 @@ const CookieKey = models.CookieKey;
 const VerifyDomainRecordRequest = models.VerifyDomainRecordRequest;
 const KeyRule = models.KeyRule;
 const CappingRule = models.CappingRule;
+const DeleteScdnDomainResponse = models.DeleteScdnDomainResponse;
 const ListClsLogTopicsRequest = models.ListClsLogTopicsRequest;
 const Seo = models.Seo;
 const BandwidthAlert = models.BandwidthAlert;
@@ -284,6 +289,17 @@ class CdnClient extends AbstractClient {
     DescribePurgeTasks(req, cb) {
         let resp = new DescribePurgeTasksResponse();
         this.request("DescribePurgeTasks", req, resp, cb);
+    }
+
+    /**
+     * 删除SCDN域名
+     * @param {DeleteScdnDomainRequest} req
+     * @param {function(string, DeleteScdnDomainResponse):void} cb
+     * @public
+     */
+    DeleteScdnDomain(req, cb) {
+        let resp = new DeleteScdnDomainResponse();
+        this.request("DeleteScdnDomain", req, resp, cb);
     }
 
     /**
@@ -432,6 +448,17 @@ class CdnClient extends AbstractClient {
     }
 
     /**
+     * ListScdnLogTasks 用于查询SCDN日志下载任务列表,以及展示下载任务基本信息
+     * @param {ListScdnLogTasksRequest} req
+     * @param {function(string, ListScdnLogTasksResponse):void} cb
+     * @public
+     */
+    ListScdnLogTasks(req, cb) {
+        let resp = new ListScdnLogTasksResponse();
+        this.request("ListScdnLogTasks", req, resp, cb);
+    }
+
+    /**
      * CreateScdnLogTask 用于创建事件日志任务
      * @param {CreateScdnLogTaskRequest} req
      * @param {function(string, CreateScdnLogTaskResponse):void} cb
@@ -517,7 +544,7 @@ class CdnClient extends AbstractClient {
 
     /**
      * DescribeCdnIp 用于查询 CDN IP 归属。
-（注意：此接口请求频率限制以 CDN 侧限制为准：200次/10分钟）
+（注意：此接口请求频率限制以 CDN 侧限制为准：200次/10分钟）  
      * @param {DescribeCdnIpRequest} req
      * @param {function(string, DescribeCdnIpResponse):void} cb
      * @public

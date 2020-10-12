@@ -78,6 +78,7 @@ const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
 const DeleteClusterRouteTableRequest = models.DeleteClusterRouteTableRequest;
 const CreateClusterRequest = models.CreateClusterRequest;
 const InstanceExtraArgs = models.InstanceExtraArgs;
+const AcquireClusterAdminRoleRequest = models.AcquireClusterAdminRoleRequest;
 const CreateClusterAsGroupResponse = models.CreateClusterAsGroupResponse;
 const DeleteClusterAsGroupsResponse = models.DeleteClusterAsGroupsResponse;
 const DescribeClusterInstancesRequest = models.DescribeClusterInstancesRequest;
@@ -85,6 +86,7 @@ const Filter = models.Filter;
 const ImageInstance = models.ImageInstance;
 const CreateClusterEndpointResponse = models.CreateClusterEndpointResponse;
 const ClusterAdvancedSettings = models.ClusterAdvancedSettings;
+const AcquireClusterAdminRoleResponse = models.AcquireClusterAdminRoleResponse;
 const DeleteClusterEndpointVipRequest = models.DeleteClusterEndpointVipRequest;
 const Cluster = models.Cluster;
 const DescribeClusterEndpointStatusResponse = models.DescribeClusterEndpointStatusResponse;
@@ -248,6 +250,17 @@ class TkeClient extends AbstractClient {
     }
 
     /**
+     * 通过此接口，可以获取集群的tke:admin的ClusterRole，即管理员角色，可以用于CAM侧高权限的用户，通过CAM策略给予子账户此接口权限，进而可以通过此接口直接获取到kubernetes集群内的管理员角色。
+     * @param {AcquireClusterAdminRoleRequest} req
+     * @param {function(string, AcquireClusterAdminRoleResponse):void} cb
+     * @public
+     */
+    AcquireClusterAdminRole(req, cb) {
+        let resp = new AcquireClusterAdminRoleResponse();
+        this.request("AcquireClusterAdminRole", req, resp, cb);
+    }
+
+    /**
      * 查询已经存在的节点，判断是否可以加入集群
      * @param {DescribeExistedInstancesRequest} req
      * @param {function(string, DescribeExistedInstancesResponse):void} cb
@@ -281,14 +294,14 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 查询集群路由表
-     * @param {DescribeClusterRouteTablesRequest} req
-     * @param {function(string, DescribeClusterRouteTablesResponse):void} cb
+     * 集群弹性伸缩配置
+     * @param {DescribeClusterAsGroupOptionRequest} req
+     * @param {function(string, DescribeClusterAsGroupOptionResponse):void} cb
      * @public
      */
-    DescribeClusterRouteTables(req, cb) {
-        let resp = new DescribeClusterRouteTablesResponse();
-        this.request("DescribeClusterRouteTables", req, resp, cb);
+    DescribeClusterAsGroupOption(req, cb) {
+        let resp = new DescribeClusterAsGroupOptionResponse();
+        this.request("DescribeClusterAsGroupOption", req, resp, cb);
     }
 
     /**
@@ -336,14 +349,14 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 集群弹性伸缩配置
-     * @param {DescribeClusterAsGroupOptionRequest} req
-     * @param {function(string, DescribeClusterAsGroupOptionResponse):void} cb
+     * 查询集群路由表
+     * @param {DescribeClusterRouteTablesRequest} req
+     * @param {function(string, DescribeClusterRouteTablesResponse):void} cb
      * @public
      */
-    DescribeClusterAsGroupOption(req, cb) {
-        let resp = new DescribeClusterAsGroupOptionResponse();
-        this.request("DescribeClusterAsGroupOption", req, resp, cb);
+    DescribeClusterRouteTables(req, cb) {
+        let resp = new DescribeClusterRouteTablesResponse();
+        this.request("DescribeClusterRouteTables", req, resp, cb);
     }
 
     /**

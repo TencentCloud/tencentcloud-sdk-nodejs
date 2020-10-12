@@ -5140,7 +5140,7 @@ duration
 类型：Integer
 计量单位：秒
 必选：否
-可选项：31536000 (1年) | 94608000（3年）
+可选项：31536000 (1年)
          * @type {Array.<Filter> || null}
          */
         this.Filters = null;
@@ -6792,19 +6792,19 @@ class ReservedInstanceTypeItem extends  AbstractModel {
         this.Memory = null;
 
         /**
-         * GPU核数。
+         * GPU数量。
          * @type {number || null}
          */
         this.Gpu = null;
 
         /**
-         * FPGA核数。
+         * FPGA数量。
          * @type {number || null}
          */
         this.Fpga = null;
 
         /**
-         * 存储块数。
+         * 本地存储块数量。
          * @type {number || null}
          */
         this.StorageBlock = null;

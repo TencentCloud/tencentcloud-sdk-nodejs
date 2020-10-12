@@ -109,6 +109,126 @@ class ScdnTopUrlData extends  AbstractModel {
 }
 
 /**
+ * SCDN日志事件详细信息
+ * @class
+ */
+class ScdnLogTaskDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * scdn域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 防护类型
+         * @type {string || null}
+         */
+        this.Mode = null;
+
+        /**
+         * 查询任务开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 查询任务结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 任务创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 日志包下载链接
+成功返回下载链接，其他情况返回'-'
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DownloadUrl = null;
+
+        /**
+         * 任务状态
+created->任务已经创建
+processing->任务正在执行
+done->任务执行成功
+failed->任务执行失败
+no-log->没有日志产生
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 日志任务唯一id
+         * @type {string || null}
+         */
+        this.TaskID = null;
+
+        /**
+         * 攻击类型, 可以为"all"
+AttackType映射如下:
+  other = '未知类型'
+  malicious_scan = "恶意扫描"
+  sql_inject = "SQL注入攻击"
+  xss = "XSS攻击"
+  cmd_inject = "命令注入攻击"
+  ldap_inject = "LDAP注入攻击"
+  ssi_inject = "SSI注入攻击"
+  xml_inject = "XML注入攻击"
+  web_service = "WEB服务漏洞攻击"
+  web_app = "WEB应用漏洞攻击"
+  path_traversal = "路径跨越攻击"
+  illegal_access_core_file = "核心文件非法访问"
+  file_upload = "文件上传攻击"
+  trojan_horse = "木马后门攻击"
+  csrf = "CSRF攻击"
+  custom_policy = "自定义策略"
+  ai_engine= 'AI引擎检出'
+  malicious_file_upload= '恶意文件上传'
+         * @type {string || null}
+         */
+        this.AttackType = null;
+
+        /**
+         * 防御模式,可以为"all"
+DefenceMode映射如下：
+  observe = '观察模式'
+  intercept = '防御模式'
+         * @type {string || null}
+         */
+        this.DefenceMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Mode = 'Mode' in params ? params.Mode : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.TaskID = 'TaskID' in params ? params.TaskID : null;
+        this.AttackType = 'AttackType' in params ? params.AttackType : null;
+        this.DefenceMode = 'DefenceMode' in params ? params.DefenceMode : null;
+
+    }
+}
+
+/**
  * DescribeCdnDomainLogs请求参数结构体
  * @class
  */
@@ -2164,6 +2284,74 @@ ip：IP 列表作为源站
         this.BackupOriginType = 'BackupOriginType' in params ? params.BackupOriginType : null;
         this.BackupServerName = 'BackupServerName' in params ? params.BackupServerName : null;
         this.BasePath = 'BasePath' in params ? params.BasePath : null;
+
+    }
+}
+
+/**
+ * 违规 URL 详情
+ * @class
+ */
+class ViolationUrl extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 违规资源原始访问 URL
+         * @type {string || null}
+         */
+        this.RealUrl = null;
+
+        /**
+         * 快照路径，用于控制台展示违规内容快照
+         * @type {string || null}
+         */
+        this.DownloadUrl = null;
+
+        /**
+         * 违规资源当前状态
+forbid：已封禁
+release：已解封
+delay ： 延迟处理
+reject ：申诉驳回，状态仍为封禁态
+complain：申诉进行中
+         * @type {string || null}
+         */
+        this.UrlStatus = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 更新时间
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.RealUrl = 'RealUrl' in params ? params.RealUrl : null;
+        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.UrlStatus = 'UrlStatus' in params ? params.UrlStatus : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -4674,6 +4862,34 @@ off：关闭
 }
 
 /**
+ * DeleteScdnDomain请求参数结构体
+ * @class
+ */
+class DeleteScdnDomainRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+
+    }
+}
+
+/**
  * 图片优化-WebpAdapter配置
  * @class
  */
@@ -5536,6 +5752,7 @@ class CreateScdnLogTaskRequest extends  AbstractModel {
 Mode 映射如下：
   waf = "Web攻击"
   cc = "CC攻击"
+  bot = "Bot攻击"
          * @type {string || null}
          */
         this.Mode = null;
@@ -5576,6 +5793,8 @@ AttackType 映射如下:
   trojan_horse = "木马后门攻击"
   csrf = "CSRF攻击"
   malicious_file_upload= '恶意文件上传'
+  js = "JS主动探测"
+  cookie = "Cookie指纹"
          * @type {string || null}
          */
         this.AttackType = null;
@@ -5585,6 +5804,8 @@ AttackType 映射如下:
 DefenceMode 映射如下：
   observe = '观察模式'
   intercept = '拦截模式'
+  captcha = "验证码"
+  redirect = "重定向"
          * @type {string || null}
          */
         this.DefenceMode = null;
@@ -6972,53 +7193,12 @@ off：关闭
 }
 
 /**
- * 违规 URL 详情
+ * ListScdnLogTasks请求参数结构体
  * @class
  */
-class ViolationUrl extends  AbstractModel {
+class ListScdnLogTasksRequest extends  AbstractModel {
     constructor(){
         super();
-
-        /**
-         * ID
-         * @type {number || null}
-         */
-        this.Id = null;
-
-        /**
-         * 违规资源原始访问 URL
-         * @type {string || null}
-         */
-        this.RealUrl = null;
-
-        /**
-         * 快照路径，用于控制台展示违规内容快照
-         * @type {string || null}
-         */
-        this.DownloadUrl = null;
-
-        /**
-         * 违规资源当前状态
-forbid：已封禁
-release：已解封
-delay ： 延迟处理
-reject ：申诉驳回，状态仍为封禁态
-complain：申诉进行中
-         * @type {string || null}
-         */
-        this.UrlStatus = null;
-
-        /**
-         * 创建时间
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * 更新时间
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
 
     }
 
@@ -7029,12 +7209,6 @@ complain：申诉进行中
         if (!params) {
             return;
         }
-        this.Id = 'Id' in params ? params.Id : null;
-        this.RealUrl = 'RealUrl' in params ? params.RealUrl : null;
-        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
-        this.UrlStatus = 'UrlStatus' in params ? params.UrlStatus : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -9092,6 +9266,56 @@ ipv6：指定查询 ipv6 对应指标
 }
 
 /**
+ * ListScdnLogTasks返回参数结构体
+ * @class
+ */
+class ListScdnLogTasksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志下载任务详情
+         * @type {Array.<ScdnLogTaskDetail> || null}
+         */
+        this.TaskList = null;
+
+        /**
+         * 查询到的下载任务的总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TaskList) {
+            this.TaskList = new Array();
+            for (let z in params.TaskList) {
+                let obj = new ScdnLogTaskDetail();
+                obj.deserialize(params.TaskList[z]);
+                this.TaskList.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 缓存键配置（过滤参数配置）
  * @class
  */
@@ -9497,6 +9721,41 @@ path 时填充绝对路径，如 /xxx/test.html
         this.RuleType = 'RuleType' in params ? params.RuleType : null;
         this.RulePaths = 'RulePaths' in params ? params.RulePaths : null;
         this.KBpsThreshold = 'KBpsThreshold' in params ? params.KBpsThreshold : null;
+
+    }
+}
+
+/**
+ * DeleteScdnDomain返回参数结构体
+ * @class
+ */
+class DeleteScdnDomainResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 创建结果，Success表示成功
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -12399,6 +12658,7 @@ path 时填充绝对路径，如 /xxx/test.html
 module.exports = {
     DescribeCdnDomainLogsResponse: DescribeCdnDomainLogsResponse,
     ScdnTopUrlData: ScdnTopUrlData,
+    ScdnLogTaskDetail: ScdnLogTaskDetail,
     DescribeCdnDomainLogsRequest: DescribeCdnDomainLogsRequest,
     Compression: Compression,
     Revalidate: Revalidate,
@@ -12437,6 +12697,7 @@ module.exports = {
     CompressionRule: CompressionRule,
     GuetzliAdapter: GuetzliAdapter,
     Origin: Origin,
+    ViolationUrl: ViolationUrl,
     TopData: TopData,
     EnableCachesRequest: EnableCachesRequest,
     Quota: Quota,
@@ -12473,6 +12734,7 @@ module.exports = {
     DescribeCertDomainsRequest: DescribeCertDomainsRequest,
     DescribeDomainsConfigRequest: DescribeDomainsConfigRequest,
     AdvancedCache: AdvancedCache,
+    DeleteScdnDomainRequest: DeleteScdnDomainRequest,
     WebpAdapter: WebpAdapter,
     CreateScdnLogTaskResponse: CreateScdnLogTaskResponse,
     MapInfo: MapInfo,
@@ -12505,7 +12767,7 @@ module.exports = {
     ForceRedirect: ForceRedirect,
     DescribeOriginDataRequest: DescribeOriginDataRequest,
     RangeOriginPull: RangeOriginPull,
-    ViolationUrl: ViolationUrl,
+    ListScdnLogTasksRequest: ListScdnLogTasksRequest,
     SearchClsLogResponse: SearchClsLogResponse,
     PushUrlsCacheRequest: PushUrlsCacheRequest,
     MainlandConfig: MainlandConfig,
@@ -12540,6 +12802,7 @@ module.exports = {
     AdvanceCacheRule: AdvanceCacheRule,
     DescribeIpStatusResponse: DescribeIpStatusResponse,
     DescribeDistrictIspDataRequest: DescribeDistrictIspDataRequest,
+    ListScdnLogTasksResponse: ListScdnLogTasksResponse,
     CacheKey: CacheKey,
     UrlRedirect: UrlRedirect,
     DownstreamCapping: DownstreamCapping,
@@ -12547,6 +12810,7 @@ module.exports = {
     VerifyDomainRecordRequest: VerifyDomainRecordRequest,
     KeyRule: KeyRule,
     CappingRule: CappingRule,
+    DeleteScdnDomainResponse: DeleteScdnDomainResponse,
     ListClsLogTopicsRequest: ListClsLogTopicsRequest,
     Seo: Seo,
     BandwidthAlert: BandwidthAlert,

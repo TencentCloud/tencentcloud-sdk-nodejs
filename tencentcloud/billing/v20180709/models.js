@@ -136,13 +136,13 @@ class DescribeCostSummaryByProductRequest extends  AbstractModel {
         this.PayerUin = null;
 
         /**
-         * 目前只支持传当月1号 00:00:00，且必须和EndTime为相同月份，不支持跨月查询，例 2018-09-01 00:00:00
+         * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09-03 03:01:45，EndTime 为 2018-09-25 12:01:45，查询结果是 2018 年 9 月数据。
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * 目前只支持传当月最后一天 23:59:59，且必须和BeginTime为相同月份，不支持跨月查询，例 2018-09-30 23:59:59
+         * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09-03 03:01:45，EndTime 为 2018-09-25 12:01:45，查询结果是 2018 年 9 月数据。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -2217,13 +2217,13 @@ class DescribeCostSummaryByRegionRequest extends  AbstractModel {
         this.PayerUin = null;
 
         /**
-         * 目前只支持传当月1号 00:00:00，且必须和EndTime为相同月份，不支持跨月查询，例 2018-09-01 00:00:00
+         * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09-03 03:01:45，EndTime 为 2018-09-25 12:01:45，查询结果是 2018 年 9 月数据。
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * 目前只支持传当月最后一天 23:59:59，且必须和BeginTime为相同月份，不支持跨月查询，例 2018-09-30 23:59:59
+         * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09-03 03:01:45，EndTime 为 2018-09-25 12:01:45，查询结果是 2018 年 9 月数据。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -2635,13 +2635,13 @@ class DescribeCostSummaryByProjectRequest extends  AbstractModel {
         this.PayerUin = null;
 
         /**
-         * 目前只支持传当月1号 00:00:00，且必须和EndTime为相同月份，不支持跨月查询，例 2018-09-01 00:00:00
+         * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09-03 03:01:45，EndTime 为 2018-09-25 12:01:45，查询结果是 2018 年 9 月数据。
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * 目前只支持传当月最后一天 23:59:59，且必须和BeginTime为相同月份，不支持跨月查询，例 2018-09-30 23:59:59
+         * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09-03 03:01:45，EndTime 为 2018-09-25 12:01:45，查询结果是 2018 年 9 月数据。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -3903,13 +3903,13 @@ class DescribeCostDetailRequest extends  AbstractModel {
         this.Offset = null;
 
         /**
-         * 周期开始时间，格式为Y-m-d H:i:s，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传。不能早于开通成本分析的月份，最多可拉取24个月内的数据。
+         * 周期开始时间，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为同一月份，暂不支持跨月拉取。可拉取的数据是开通成本分析后，且距今 24 个月内的数据。
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * 周期结束时间，格式为Y-m-d H:i:s，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传。不能早于开通成本分析的月份，最多可拉取24个月内的数据。
+         * 周期结束时间，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为同一月份，暂不支持跨月拉取。可拉取的数据是开通成本分析后，且距今 24 个月内的数据。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -3928,7 +3928,7 @@ class DescribeCostDetailRequest extends  AbstractModel {
         this.Month = null;
 
         /**
-         * 查询指定产品信息
+         * 查询指定产品信息（暂时未开放获取）
          * @type {string || null}
          */
         this.ProductCode = null;
@@ -4223,13 +4223,13 @@ class DescribeCostSummaryByResourceRequest extends  AbstractModel {
         this.PayerUin = null;
 
         /**
-         * 目前只支持传当月1号 00:00:00，且必须和EndTime为相同月份，不支持跨月查询，例 2018-09-01 00:00:00
+         * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09-03 03:01:45，EndTime 为 2018-09-25 12:01:45，查询结果是 2018 年 9 月数据。
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * 目前只支持传当月最后一天 23:59:59，且必须和BeginTime为相同月份，不支持跨月查询，例 2018-09-30 23:59:59
+         * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09-03 03:01:45，EndTime 为 2018-09-25 12:01:45，查询结果是 2018 年 9 月数据。
          * @type {string || null}
          */
         this.EndTime = null;

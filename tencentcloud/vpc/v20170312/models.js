@@ -11428,7 +11428,7 @@ class ModifyAddressesBandwidthRequest extends  AbstractModel {
         super();
 
         /**
-         * EIP唯一标识ID，形如'eip-xxxx'
+         * EIP唯一标识ID列表，形如'eip-xxxx'
          * @type {Array.<string> || null}
          */
         this.AddressIds = null;
@@ -13345,6 +13345,34 @@ class DescribeAccountAttributesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+
+    }
+}
+
+/**
+ * RenewAddresses返回参数结构体
+ * @class
+ */
+class RenewAddressesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -16504,6 +16532,46 @@ class DisableCcnRoutesRequest extends  AbstractModel {
         }
         this.CcnId = 'CcnId' in params ? params.CcnId : null;
         this.RouteIds = 'RouteIds' in params ? params.RouteIds : null;
+
+    }
+}
+
+/**
+ * RenewAddresses请求参数结构体
+ * @class
+ */
+class RenewAddressesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * EIP唯一标识ID列表，形如'eip-xxxx'
+         * @type {Array.<string> || null}
+         */
+        this.AddressIds = null;
+
+        /**
+         * 续费参数
+         * @type {AddressChargePrepaid || null}
+         */
+        this.AddressChargePrepaid = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AddressIds = 'AddressIds' in params ? params.AddressIds : null;
+
+        if (params.AddressChargePrepaid) {
+            let obj = new AddressChargePrepaid();
+            obj.deserialize(params.AddressChargePrepaid)
+            this.AddressChargePrepaid = obj;
+        }
 
     }
 }
@@ -24374,6 +24442,7 @@ module.exports = {
     RejectAttachCcnInstancesResponse: RejectAttachCcnInstancesResponse,
     SetCcnRegionBandwidthLimitsResponse: SetCcnRegionBandwidthLimitsResponse,
     DescribeAccountAttributesRequest: DescribeAccountAttributesRequest,
+    RenewAddressesResponse: RenewAddressesResponse,
     DescribeCcnRoutesRequest: DescribeCcnRoutesRequest,
     ModifyDhcpIpAttributeResponse: ModifyDhcpIpAttributeResponse,
     CreateAndAttachNetworkInterfaceRequest: CreateAndAttachNetworkInterfaceRequest,
@@ -24448,6 +24517,7 @@ module.exports = {
     CreateRouteTableRequest: CreateRouteTableRequest,
     MigrateNetworkInterfaceRequest: MigrateNetworkInterfaceRequest,
     DisableCcnRoutesRequest: DisableCcnRoutesRequest,
+    RenewAddressesRequest: RenewAddressesRequest,
     ModifyAddressAttributeRequest: ModifyAddressAttributeRequest,
     DhcpIp: DhcpIp,
     DeleteAssistantCidrRequest: DeleteAssistantCidrRequest,

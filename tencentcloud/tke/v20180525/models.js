@@ -3031,6 +3031,34 @@ class InstanceExtraArgs extends  AbstractModel {
 }
 
 /**
+ * AcquireClusterAdminRole请求参数结构体
+ * @class
+ */
+class AcquireClusterAdminRoleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
  * CreateClusterAsGroup返回参数结构体
  * @class
  */
@@ -3389,6 +3417,34 @@ class ClusterAdvancedSettings extends  AbstractModel {
         this.AuditEnabled = 'AuditEnabled' in params ? params.AuditEnabled : null;
         this.AuditLogsetId = 'AuditLogsetId' in params ? params.AuditLogsetId : null;
         this.AuditLogTopicId = 'AuditLogTopicId' in params ? params.AuditLogTopicId : null;
+
+    }
+}
+
+/**
+ * AcquireClusterAdminRole返回参数结构体
+ * @class
+ */
+class AcquireClusterAdminRoleResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4941,6 +4997,7 @@ module.exports = {
     DeleteClusterRouteTableRequest: DeleteClusterRouteTableRequest,
     CreateClusterRequest: CreateClusterRequest,
     InstanceExtraArgs: InstanceExtraArgs,
+    AcquireClusterAdminRoleRequest: AcquireClusterAdminRoleRequest,
     CreateClusterAsGroupResponse: CreateClusterAsGroupResponse,
     DeleteClusterAsGroupsResponse: DeleteClusterAsGroupsResponse,
     DescribeClusterInstancesRequest: DescribeClusterInstancesRequest,
@@ -4948,6 +5005,7 @@ module.exports = {
     ImageInstance: ImageInstance,
     CreateClusterEndpointResponse: CreateClusterEndpointResponse,
     ClusterAdvancedSettings: ClusterAdvancedSettings,
+    AcquireClusterAdminRoleResponse: AcquireClusterAdminRoleResponse,
     DeleteClusterEndpointVipRequest: DeleteClusterEndpointVipRequest,
     Cluster: Cluster,
     DescribeClusterEndpointStatusResponse: DescribeClusterEndpointStatusResponse,

@@ -113,6 +113,7 @@ module.exports = {
     tbp: require("./tbp"),
     tcaplusdb: require("./tcaplusdb"),
     tcb: require("./tcb"),
+    tcex: require("./tcex"),
     tci: require("./tci"),
     tcr: require("./tcr"),
     tdmq: require("./tdmq"),
