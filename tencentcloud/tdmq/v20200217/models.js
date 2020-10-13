@@ -425,6 +425,193 @@ class DescribeTopicsResponse extends  AbstractModel {
 }
 
 /**
+ * 主题实例
+ * @class
+ */
+class Topic extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 最后一次间隔内发布消息的平均byte大小。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AverageMsgSize = null;
+
+        /**
+         * 消费者数量。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ConsumerCount = null;
+
+        /**
+         * 被记录下来的消息总数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LastConfirmedEntry = null;
+
+        /**
+         * 最后一个ledger创建的时间。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LastLedgerCreatedTimestamp = null;
+
+        /**
+         * 本地和复制的发布者每秒发布消息的速率。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MsgRateIn = null;
+
+        /**
+         * 本地和复制的消费者每秒分发消息的数量之和。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MsgRateOut = null;
+
+        /**
+         * 本地和复制的发布者每秒发布消息的byte。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MsgThroughputIn = null;
+
+        /**
+         * 本地和复制的消费者每秒分发消息的byte。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MsgThroughputOut = null;
+
+        /**
+         * 被记录下来的消息总数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NumberOfEntries = null;
+
+        /**
+         * 分区数<=0：topic下无子分区。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Partitions = null;
+
+        /**
+         * 生产者数量。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProducerCount = null;
+
+        /**
+         * 以byte计算的所有消息存储总量。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TotalSize = null;
+
+        /**
+         * 分区topic里面的子分区。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<PartitionsTopic> || null}
+         */
+        this.SubTopicSets = null;
+
+        /**
+         * topic类型描述：
+0：普通消息；
+1：全局顺序消息；
+2：局部顺序消息；
+3：重试队列；
+4：死信队列；
+5：事务消息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TopicType = null;
+
+        /**
+         * 环境（命名空间）名称。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * 主题名称。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TopicName = null;
+
+        /**
+         * 说明，128个字符以内。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 最近修改时间。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AverageMsgSize = 'AverageMsgSize' in params ? params.AverageMsgSize : null;
+        this.ConsumerCount = 'ConsumerCount' in params ? params.ConsumerCount : null;
+        this.LastConfirmedEntry = 'LastConfirmedEntry' in params ? params.LastConfirmedEntry : null;
+        this.LastLedgerCreatedTimestamp = 'LastLedgerCreatedTimestamp' in params ? params.LastLedgerCreatedTimestamp : null;
+        this.MsgRateIn = 'MsgRateIn' in params ? params.MsgRateIn : null;
+        this.MsgRateOut = 'MsgRateOut' in params ? params.MsgRateOut : null;
+        this.MsgThroughputIn = 'MsgThroughputIn' in params ? params.MsgThroughputIn : null;
+        this.MsgThroughputOut = 'MsgThroughputOut' in params ? params.MsgThroughputOut : null;
+        this.NumberOfEntries = 'NumberOfEntries' in params ? params.NumberOfEntries : null;
+        this.Partitions = 'Partitions' in params ? params.Partitions : null;
+        this.ProducerCount = 'ProducerCount' in params ? params.ProducerCount : null;
+        this.TotalSize = 'TotalSize' in params ? params.TotalSize : null;
+
+        if (params.SubTopicSets) {
+            this.SubTopicSets = new Array();
+            for (let z in params.SubTopicSets) {
+                let obj = new PartitionsTopic();
+                obj.deserialize(params.SubTopicSets[z]);
+                this.SubTopicSets.push(obj);
+            }
+        }
+        this.TopicType = 'TopicType' in params ? params.TopicType : null;
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.TopicName = 'TopicName' in params ? params.TopicName : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
  * CreateTopic返回参数结构体
  * @class
  */
@@ -1354,6 +1541,56 @@ class DeleteTopicsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeEnvironmentRoles返回参数结构体
+ * @class
+ */
+class DescribeEnvironmentRolesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 记录数。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 环境角色集合。
+         * @type {Array.<EnvironmentRole> || null}
+         */
+        this.EnvironmentRoleSets = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.EnvironmentRoleSets) {
+            this.EnvironmentRoleSets = new Array();
+            for (let z in params.EnvironmentRoleSets) {
+                let obj = new EnvironmentRole();
+                obj.deserialize(params.EnvironmentRoleSets[z]);
+                this.EnvironmentRoleSets.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateSubscription请求参数结构体
  * @class
  */
@@ -1971,148 +2208,45 @@ class DeleteEnvironmentsRequest extends  AbstractModel {
 }
 
 /**
- * 主题实例
+ * 环境角色集合
  * @class
  */
-class Topic extends  AbstractModel {
+class EnvironmentRole extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 最后一次间隔内发布消息的平均byte大小。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.AverageMsgSize = null;
-
-        /**
-         * 消费者数量。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ConsumerCount = null;
-
-        /**
-         * 被记录下来的消息总数。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.LastConfirmedEntry = null;
-
-        /**
-         * 最后一个ledger创建的时间。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.LastLedgerCreatedTimestamp = null;
-
-        /**
-         * 本地和复制的发布者每秒发布消息的速率。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.MsgRateIn = null;
-
-        /**
-         * 本地和复制的消费者每秒分发消息的数量之和。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.MsgRateOut = null;
-
-        /**
-         * 本地和复制的发布者每秒发布消息的byte。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.MsgThroughputIn = null;
-
-        /**
-         * 本地和复制的消费者每秒分发消息的byte。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.MsgThroughputOut = null;
-
-        /**
-         * 被记录下来的消息总数。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.NumberOfEntries = null;
-
-        /**
-         * 分区数<=0：topic下无子分区。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.Partitions = null;
-
-        /**
-         * 生产者数量。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ProducerCount = null;
-
-        /**
-         * 以byte计算的所有消息存储总量。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.TotalSize = null;
-
-        /**
-         * 分区topic里面的子分区。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<PartitionsTopic> || null}
-         */
-        this.SubTopicSets = null;
-
-        /**
-         * topic类型描述：
-0：普通消息；
-1：全局顺序消息；
-2：局部顺序消息；
-3：重试队列；
-4：死信队列；
-5：事务消息。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.TopicType = null;
-
-        /**
-         * 环境（命名空间）名称。
-注意：此字段可能返回 null，表示取不到有效值。
+         * 环境（命名空间）。
          * @type {string || null}
          */
         this.EnvironmentId = null;
 
         /**
-         * 主题名称。
-注意：此字段可能返回 null，表示取不到有效值。
+         * 角色名称。
          * @type {string || null}
          */
-        this.TopicName = null;
+        this.RoleName = null;
 
         /**
-         * 说明，128个字符以内。
-注意：此字段可能返回 null，表示取不到有效值。
+         * 授权项，最多只能包含produce、consume两项的非空字符串数组。
+         * @type {Array.<string> || null}
+         */
+        this.Permissions = null;
+
+        /**
+         * 角色描述。
          * @type {string || null}
          */
-        this.Remark = null;
+        this.RoleDescribe = null;
 
         /**
          * 创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.CreateTime = null;
 
         /**
-         * 最近修改时间。
-注意：此字段可能返回 null，表示取不到有效值。
+         * 更新时间。
          * @type {string || null}
          */
         this.UpdateTime = null;
@@ -2126,31 +2260,10 @@ class Topic extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AverageMsgSize = 'AverageMsgSize' in params ? params.AverageMsgSize : null;
-        this.ConsumerCount = 'ConsumerCount' in params ? params.ConsumerCount : null;
-        this.LastConfirmedEntry = 'LastConfirmedEntry' in params ? params.LastConfirmedEntry : null;
-        this.LastLedgerCreatedTimestamp = 'LastLedgerCreatedTimestamp' in params ? params.LastLedgerCreatedTimestamp : null;
-        this.MsgRateIn = 'MsgRateIn' in params ? params.MsgRateIn : null;
-        this.MsgRateOut = 'MsgRateOut' in params ? params.MsgRateOut : null;
-        this.MsgThroughputIn = 'MsgThroughputIn' in params ? params.MsgThroughputIn : null;
-        this.MsgThroughputOut = 'MsgThroughputOut' in params ? params.MsgThroughputOut : null;
-        this.NumberOfEntries = 'NumberOfEntries' in params ? params.NumberOfEntries : null;
-        this.Partitions = 'Partitions' in params ? params.Partitions : null;
-        this.ProducerCount = 'ProducerCount' in params ? params.ProducerCount : null;
-        this.TotalSize = 'TotalSize' in params ? params.TotalSize : null;
-
-        if (params.SubTopicSets) {
-            this.SubTopicSets = new Array();
-            for (let z in params.SubTopicSets) {
-                let obj = new PartitionsTopic();
-                obj.deserialize(params.SubTopicSets[z]);
-                this.SubTopicSets.push(obj);
-            }
-        }
-        this.TopicType = 'TopicType' in params ? params.TopicType : null;
         this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
-        this.TopicName = 'TopicName' in params ? params.TopicName : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.RoleName = 'RoleName' in params ? params.RoleName : null;
+        this.Permissions = 'Permissions' in params ? params.Permissions : null;
+        this.RoleDescribe = 'RoleDescribe' in params ? params.RoleDescribe : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
@@ -2276,6 +2389,48 @@ class CreateEnvironmentRequest extends  AbstractModel {
     }
 }
 
+/**
+ * DescribeEnvironmentRoles请求参数结构体
+ * @class
+ */
+class DescribeEnvironmentRolesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 环境（命名空间）
+         * @type {string || null}
+         */
+        this.EnvironmentId = null;
+
+        /**
+         * 起始下标，不填默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，不填则默认为10，最大值为20。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvironmentId = 'EnvironmentId' in params ? params.EnvironmentId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
 module.exports = {
     ModifyEnvironmentAttributesRequest: ModifyEnvironmentAttributesRequest,
     DescribeSubscriptionsRequest: DescribeSubscriptionsRequest,
@@ -2284,6 +2439,7 @@ module.exports = {
     PartitionsTopic: PartitionsTopic,
     ResetMsgSubOffsetByTimestampResponse: ResetMsgSubOffsetByTimestampResponse,
     DescribeTopicsResponse: DescribeTopicsResponse,
+    Topic: Topic,
     CreateTopicResponse: CreateTopicResponse,
     DescribeEnvironmentsResponse: DescribeEnvironmentsResponse,
     ModifyTopicResponse: ModifyTopicResponse,
@@ -2299,6 +2455,7 @@ module.exports = {
     DeleteEnvironmentsResponse: DeleteEnvironmentsResponse,
     Connection: Connection,
     DeleteTopicsRequest: DeleteTopicsRequest,
+    DescribeEnvironmentRolesResponse: DescribeEnvironmentRolesResponse,
     CreateSubscriptionRequest: CreateSubscriptionRequest,
     ModifyTopicRequest: ModifyTopicRequest,
     Consumer: Consumer,
@@ -2312,9 +2469,10 @@ module.exports = {
     CreateSubscriptionResponse: CreateSubscriptionResponse,
     ConsumersSchedule: ConsumersSchedule,
     DeleteEnvironmentsRequest: DeleteEnvironmentsRequest,
-    Topic: Topic,
+    EnvironmentRole: EnvironmentRole,
     DescribeEnvironmentsRequest: DescribeEnvironmentsRequest,
     TopicRecord: TopicRecord,
     CreateEnvironmentRequest: CreateEnvironmentRequest,
+    DescribeEnvironmentRolesRequest: DescribeEnvironmentRolesRequest,
 
 }

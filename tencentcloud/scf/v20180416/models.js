@@ -2167,6 +2167,12 @@ class CreateTriggerRequest extends  AbstractModel {
          */
         this.Enable = null;
 
+        /**
+         * 用户自定义参数，仅支持timer触发器
+         * @type {string || null}
+         */
+        this.CustomArgument = null;
+
     }
 
     /**
@@ -2183,6 +2189,7 @@ class CreateTriggerRequest extends  AbstractModel {
         this.Namespace = 'Namespace' in params ? params.Namespace : null;
         this.Qualifier = 'Qualifier' in params ? params.Qualifier : null;
         this.Enable = 'Enable' in params ? params.Enable : null;
+        this.CustomArgument = 'CustomArgument' in params ? params.CustomArgument : null;
 
     }
 }

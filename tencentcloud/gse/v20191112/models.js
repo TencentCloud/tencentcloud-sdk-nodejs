@@ -210,6 +210,12 @@ class CreateAssetResponse extends  AbstractModel {
         this.AssetId = null;
 
         /**
+         * 生成包的全局唯一资源标识符
+         * @type {string || null}
+         */
+        this.AssetArn = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -225,6 +231,7 @@ class CreateAssetResponse extends  AbstractModel {
             return;
         }
         this.AssetId = 'AssetId' in params ? params.AssetId : null;
+        this.AssetArn = 'AssetArn' in params ? params.AssetArn : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -375,6 +382,24 @@ class Asset extends  AbstractModel {
          */
         this.BindFleetNum = null;
 
+        /**
+         * 生成包的全局唯一资源标识符
+         * @type {string || null}
+         */
+        this.AssetArn = null;
+
+        /**
+         * 生成包支持的操作系统镜像id
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * 生成包支持的操作系统类型
+         * @type {string || null}
+         */
+        this.OsType = null;
+
     }
 
     /**
@@ -392,6 +417,9 @@ class Asset extends  AbstractModel {
         this.Size = 'Size' in params ? params.Size : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.BindFleetNum = 'BindFleetNum' in params ? params.BindFleetNum : null;
+        this.AssetArn = 'AssetArn' in params ? params.AssetArn : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.OsType = 'OsType' in params ? params.OsType : null;
 
     }
 }
@@ -3035,7 +3063,7 @@ class DescribeAssetsRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 搜索条件，支持包ID或包名字过滤
+         * 搜索条件，支持包ID或包名字过滤，该字段会逐步废弃，建议使用 Filters 字段
          * @type {string || null}
          */
         this.Filter = null;
@@ -5191,6 +5219,12 @@ class CreateAssetRequest extends  AbstractModel {
          */
         this.OperateSystem = null;
 
+        /**
+         * 生成包支持的操作系统镜像id
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
     }
 
     /**
@@ -5205,6 +5239,7 @@ class CreateAssetRequest extends  AbstractModel {
         this.AssetVersion = 'AssetVersion' in params ? params.AssetVersion : null;
         this.AssetRegion = 'AssetRegion' in params ? params.AssetRegion : null;
         this.OperateSystem = 'OperateSystem' in params ? params.OperateSystem : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
 
     }
 }

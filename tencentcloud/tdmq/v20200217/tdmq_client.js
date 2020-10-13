@@ -23,6 +23,7 @@ const DescribeEnvironmentAttributesRequest = models.DescribeEnvironmentAttribute
 const PartitionsTopic = models.PartitionsTopic;
 const ResetMsgSubOffsetByTimestampResponse = models.ResetMsgSubOffsetByTimestampResponse;
 const DescribeTopicsResponse = models.DescribeTopicsResponse;
+const Topic = models.Topic;
 const CreateTopicResponse = models.CreateTopicResponse;
 const DescribeEnvironmentsResponse = models.DescribeEnvironmentsResponse;
 const ModifyTopicResponse = models.ModifyTopicResponse;
@@ -38,6 +39,7 @@ const DescribeTopicsRequest = models.DescribeTopicsRequest;
 const DeleteEnvironmentsResponse = models.DeleteEnvironmentsResponse;
 const Connection = models.Connection;
 const DeleteTopicsRequest = models.DeleteTopicsRequest;
+const DescribeEnvironmentRolesResponse = models.DescribeEnvironmentRolesResponse;
 const CreateSubscriptionRequest = models.CreateSubscriptionRequest;
 const ModifyTopicRequest = models.ModifyTopicRequest;
 const Consumer = models.Consumer;
@@ -51,10 +53,11 @@ const DeleteSubscriptionsResponse = models.DeleteSubscriptionsResponse;
 const CreateSubscriptionResponse = models.CreateSubscriptionResponse;
 const ConsumersSchedule = models.ConsumersSchedule;
 const DeleteEnvironmentsRequest = models.DeleteEnvironmentsRequest;
-const Topic = models.Topic;
+const EnvironmentRole = models.EnvironmentRole;
 const DescribeEnvironmentsRequest = models.DescribeEnvironmentsRequest;
 const TopicRecord = models.TopicRecord;
 const CreateEnvironmentRequest = models.CreateEnvironmentRequest;
+const DescribeEnvironmentRolesRequest = models.DescribeEnvironmentRolesRequest;
 
 
 /**
@@ -134,14 +137,14 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
-     * 修改指定环境的属性值
-     * @param {ModifyEnvironmentAttributesRequest} req
-     * @param {function(string, ModifyEnvironmentAttributesResponse):void} cb
+     * 获取环境下主题列表
+     * @param {DescribeTopicsRequest} req
+     * @param {function(string, DescribeTopicsResponse):void} cb
      * @public
      */
-    ModifyEnvironmentAttributes(req, cb) {
-        let resp = new ModifyEnvironmentAttributesResponse();
-        this.request("ModifyEnvironmentAttributes", req, resp, cb);
+    DescribeTopics(req, cb) {
+        let resp = new DescribeTopicsResponse();
+        this.request("DescribeTopics", req, resp, cb);
     }
 
     /**
@@ -153,6 +156,17 @@ class TdmqClient extends AbstractClient {
     DescribeEnvironmentAttributes(req, cb) {
         let resp = new DescribeEnvironmentAttributesResponse();
         this.request("DescribeEnvironmentAttributes", req, resp, cb);
+    }
+
+    /**
+     * 修改指定环境的属性值
+     * @param {ModifyEnvironmentAttributesRequest} req
+     * @param {function(string, ModifyEnvironmentAttributesResponse):void} cb
+     * @public
+     */
+    ModifyEnvironmentAttributes(req, cb) {
+        let resp = new ModifyEnvironmentAttributesResponse();
+        this.request("ModifyEnvironmentAttributes", req, resp, cb);
     }
 
     /**
@@ -200,14 +214,14 @@ class TdmqClient extends AbstractClient {
     }
 
     /**
-     * 获取环境下主题列表
-     * @param {DescribeTopicsRequest} req
-     * @param {function(string, DescribeTopicsResponse):void} cb
+     * 获取环境角色列表
+     * @param {DescribeEnvironmentRolesRequest} req
+     * @param {function(string, DescribeEnvironmentRolesResponse):void} cb
      * @public
      */
-    DescribeTopics(req, cb) {
-        let resp = new DescribeTopicsResponse();
-        this.request("DescribeTopics", req, resp, cb);
+    DescribeEnvironmentRoles(req, cb) {
+        let resp = new DescribeEnvironmentRolesResponse();
+        this.request("DescribeEnvironmentRoles", req, resp, cb);
     }
 
     /**

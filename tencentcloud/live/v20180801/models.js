@@ -8982,9 +8982,9 @@ class CertInfo extends  AbstractModel {
         this.HttpsCrt = null;
 
         /**
-         * 证书类型:
-0：腾讯云托管证书。
-1：用户添加证书。
+         * 证书类型。
+0：用户添加证书，
+1：腾讯云托管证书。
          * @type {number || null}
          */
         this.CertType = null;

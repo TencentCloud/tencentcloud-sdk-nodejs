@@ -1196,6 +1196,34 @@ class DescribeEndUsersRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeDownloadFile请求参数结构体
+ * @class
+ */
+class DescribeDownloadFileRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 代码uri
+         * @type {string || null}
+         */
+        this.CodeUri = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CodeUri = 'CodeUri' in params ? params.CodeUri : null;
+
+    }
+}
+
+/**
  * DescribeEnvs请求参数结构体
  * @class
  */
@@ -3367,86 +3395,6 @@ class DeleteEndUserRequest extends  AbstractModel {
 }
 
 /**
- * DescribeEnvs返回参数结构体
- * @class
- */
-class DescribeEnvsResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 环境信息列表
-         * @type {Array.<EnvInfo> || null}
-         */
-        this.EnvList = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-
-        if (params.EnvList) {
-            this.EnvList = new Array();
-            for (let z in params.EnvList) {
-                let obj = new EnvInfo();
-                obj.deserialize(params.EnvList[z]);
-                this.EnvList.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * 代码仓库 repo的名字
- * @class
- */
-class CloudBaseCodeRepoName extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * repo的名字
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.Name = null;
-
-        /**
-         * repo的完整全名
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.FullName = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.FullName = 'FullName' in params ? params.FullName : null;
-
-    }
-}
-
-/**
  * 订单信息
  * @class
  */
@@ -3541,6 +3489,138 @@ class OrderInfo extends  AbstractModel {
         this.PayMode = 'PayMode' in params ? params.PayMode : null;
         this.ExtensionId = 'ExtensionId' in params ? params.ExtensionId : null;
         this.ResourceReady = 'ResourceReady' in params ? params.ResourceReady : null;
+
+    }
+}
+
+/**
+ * DescribeEnvs返回参数结构体
+ * @class
+ */
+class DescribeEnvsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 环境信息列表
+         * @type {Array.<EnvInfo> || null}
+         */
+        this.EnvList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.EnvList) {
+            this.EnvList = new Array();
+            for (let z in params.EnvList) {
+                let obj = new EnvInfo();
+                obj.deserialize(params.EnvList[z]);
+                this.EnvList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 代码仓库 repo的名字
+ * @class
+ */
+class CloudBaseCodeRepoName extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * repo的名字
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * repo的完整全名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FullName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.FullName = 'FullName' in params ? params.FullName : null;
+
+    }
+}
+
+/**
+ * DescribeDownloadFile返回参数结构体
+ * @class
+ */
+class DescribeDownloadFileResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 文件路径
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FilePath = null;
+
+        /**
+         * 加密key
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CustomKey = null;
+
+        /**
+         * 下载链接
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DownloadUrl = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FilePath = 'FilePath' in params ? params.FilePath : null;
+        this.CustomKey = 'CustomKey' in params ? params.CustomKey : null;
+        this.DownloadUrl = 'DownloadUrl' in params ? params.DownloadUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3650,6 +3730,7 @@ module.exports = {
     DescribeCloudBaseBuildServiceResponse: DescribeCloudBaseBuildServiceResponse,
     ModifyEnvRequest: ModifyEnvRequest,
     DescribeEndUsersRequest: DescribeEndUsersRequest,
+    DescribeDownloadFileRequest: DescribeDownloadFileRequest,
     DescribeEnvsRequest: DescribeEnvsRequest,
     DescribeQuotaDataRequest: DescribeQuotaDataRequest,
     DescribeCloudBaseBuildServiceRequest: DescribeCloudBaseBuildServiceRequest,
@@ -3689,9 +3770,10 @@ module.exports = {
     DescribeCloudBaseRunVersionSnapshotResponse: DescribeCloudBaseRunVersionSnapshotResponse,
     DescribePostpayPackageFreeQuotasResponse: DescribePostpayPackageFreeQuotasResponse,
     DeleteEndUserRequest: DeleteEndUserRequest,
+    OrderInfo: OrderInfo,
     DescribeEnvsResponse: DescribeEnvsResponse,
     CloudBaseCodeRepoName: CloudBaseCodeRepoName,
-    OrderInfo: OrderInfo,
+    DescribeDownloadFileResponse: DescribeDownloadFileResponse,
     CreateAuthDomainRequest: CreateAuthDomainRequest,
     DestroyEnvRequest: DestroyEnvRequest,
 

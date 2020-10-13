@@ -43,6 +43,7 @@ const CreateAuthDomainResponse = models.CreateAuthDomainResponse;
 const DescribeCloudBaseBuildServiceResponse = models.DescribeCloudBaseBuildServiceResponse;
 const ModifyEnvRequest = models.ModifyEnvRequest;
 const DescribeEndUsersRequest = models.DescribeEndUsersRequest;
+const DescribeDownloadFileRequest = models.DescribeDownloadFileRequest;
 const DescribeEnvsRequest = models.DescribeEnvsRequest;
 const DescribeQuotaDataRequest = models.DescribeQuotaDataRequest;
 const DescribeCloudBaseBuildServiceRequest = models.DescribeCloudBaseBuildServiceRequest;
@@ -82,9 +83,10 @@ const EndUserInfo = models.EndUserInfo;
 const DescribeCloudBaseRunVersionSnapshotResponse = models.DescribeCloudBaseRunVersionSnapshotResponse;
 const DescribePostpayPackageFreeQuotasResponse = models.DescribePostpayPackageFreeQuotasResponse;
 const DeleteEndUserRequest = models.DeleteEndUserRequest;
+const OrderInfo = models.OrderInfo;
 const DescribeEnvsResponse = models.DescribeEnvsResponse;
 const CloudBaseCodeRepoName = models.CloudBaseCodeRepoName;
-const OrderInfo = models.OrderInfo;
+const DescribeDownloadFileResponse = models.DescribeDownloadFileResponse;
 const CreateAuthDomainRequest = models.CreateAuthDomainRequest;
 const DestroyEnvRequest = models.DestroyEnvRequest;
 
@@ -141,6 +143,17 @@ class TcbClient extends AbstractClient {
     CreateAuthDomain(req, cb) {
         let resp = new CreateAuthDomainResponse();
         this.request("CreateAuthDomain", req, resp, cb);
+    }
+
+    /**
+     * 获取下载文件信息
+     * @param {DescribeDownloadFileRequest} req
+     * @param {function(string, DescribeDownloadFileResponse):void} cb
+     * @public
+     */
+    DescribeDownloadFile(req, cb) {
+        let resp = new DescribeDownloadFileResponse();
+        this.request("DescribeDownloadFile", req, resp, cb);
     }
 
     /**

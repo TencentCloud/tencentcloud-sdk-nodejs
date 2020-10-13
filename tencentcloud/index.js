@@ -26,6 +26,7 @@ module.exports = {
     cdn: require("./cdn"),
     cds: require("./cds"),
     cfs: require("./cfs"),
+    cfw: require("./cfw"),
     chdfs: require("./chdfs"),
     cim: require("./cim"),
     cis: require("./cis"),

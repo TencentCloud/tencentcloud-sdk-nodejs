@@ -774,6 +774,12 @@ class Blueprint extends  AbstractModel {
          */
         this.RequiredSystemDiskSize = null;
 
+        /**
+         * 镜像状态，取值：ONLINE、OFFLINE
+         * @type {string || null}
+         */
+        this.BlueprintState = null;
+
     }
 
     /**
@@ -793,6 +799,7 @@ class Blueprint extends  AbstractModel {
         this.BlueprintType = 'BlueprintType' in params ? params.BlueprintType : null;
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
         this.RequiredSystemDiskSize = 'RequiredSystemDiskSize' in params ? params.RequiredSystemDiskSize : null;
+        this.BlueprintState = 'BlueprintState' in params ? params.BlueprintState : null;
 
     }
 }
