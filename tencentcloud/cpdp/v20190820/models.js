@@ -1191,14 +1191,14 @@ class BindAcctRequest extends  AbstractModel {
 
         /**
          * 用于提现
-<敏感信息>加密详见《商户端接口敏感信息加密说明》
+<敏感信息>加密详见<a href="https://cloud.tencent.com/document/product/1122/48979" target="_blank">《商户端接口敏感信息加密说明》</a>
          * @type {string || null}
          */
         this.SettleAcctNo = null;
 
         /**
          * 结算账户户名
-<敏感信息>加密详见《商户端接口敏感信息加密说明》
+<敏感信息>加密详见<a href="https://cloud.tencent.com/document/product/1122/48979" target="_blank">《商户端接口敏感信息加密说明》</a>
          * @type {string || null}
          */
         this.SettleAcctName = null;
@@ -1218,7 +1218,7 @@ class BindAcctRequest extends  AbstractModel {
 
         /**
          * 证件号码
-<敏感信息>加密详见《商户端接口敏感信息加密说明》
+<敏感信息>加密详见<a href="https://cloud.tencent.com/document/product/1122/48979" target="_blank">《商户端接口敏感信息加密说明》</a>
          * @type {string || null}
          */
         this.IdCode = null;
@@ -1244,7 +1244,7 @@ class BindAcctRequest extends  AbstractModel {
         /**
          * 用于短信验证
 BindType==2时必填
-<敏感信息>加密详见《商户端接口敏感信息加密说明》
+<敏感信息>加密详见<a href="https://cloud.tencent.com/document/product/1122/48979" target="_blank">《商户端接口敏感信息加密说明》</a>
          * @type {string || null}
          */
         this.Mobile = null;
@@ -3403,21 +3403,21 @@ class CreateAcctRequest extends  AbstractModel {
 
         /**
          * 子商户联系人
-<敏感信息>加密详见《商户端接口敏感信息加密说明》
+<敏感信息>加密详见<a href="https://cloud.tencent.com/document/product/1122/48979" target="_blank">《商户端接口敏感信息加密说明》</a>
          * @type {string || null}
          */
         this.Contact = null;
 
         /**
          * 联系人手机号
-<敏感信息>加密详见《商户端接口敏感信息加密说明》
+<敏感信息>加密详见<a href="https://cloud.tencent.com/document/product/1122/48979" target="_blank">《商户端接口敏感信息加密说明》</a>
          * @type {string || null}
          */
         this.Mobile = null;
 
         /**
          * 邮箱 
-<敏感信息>加密详见《商户端接口敏感信息加密说明》
+<敏感信息>加密详见<a href="https://cloud.tencent.com/document/product/1122/48979" target="_blank">《商户端接口敏感信息加密说明》</a>
          * @type {string || null}
          */
         this.Email = null;
@@ -3460,14 +3460,14 @@ merchant: 商户子账户
 
         /**
          * 子商户密钥
-<敏感信息>加密详见《商户端接口敏感信息加密说明》
+<敏感信息>加密详见<a href="https://cloud.tencent.com/document/product/1122/48979" target="_blank">《商户端接口敏感信息加密说明》</a>
          * @type {string || null}
          */
         this.SubMerchantKey = null;
 
         /**
          * 子商户私钥
-<敏感信息>加密详见《商户端接口敏感信息加密说明》
+<敏感信息>加密详见<a href="https://cloud.tencent.com/document/product/1122/48979" target="_blank">《商户端接口敏感信息加密说明》</a>
          * @type {string || null}
          */
         this.SubMerchantPrivateKey = null;
@@ -3846,7 +3846,7 @@ class CheckAcctRequest extends  AbstractModel {
 
         /**
          * 结算账户账号
-<敏感信息>加密详见《商户端接口敏感信息加密说明》
+<敏感信息>加密详见<a href="https://cloud.tencent.com/document/product/1122/48979" target="_blank">《商户端接口敏感信息加密说明》</a>
          * @type {string || null}
          */
         this.SettleAcctNo = null;
@@ -13946,14 +13946,14 @@ class ApplyWithdrawalRequest extends  AbstractModel {
 
         /**
          * 用于提现
-<敏感信息>加密详见《商户端接口敏感信息加密说明》
+<敏感信息>加密详见<a href="https://cloud.tencent.com/document/product/1122/48979" target="_blank">《商户端接口敏感信息加密说明》</a>
          * @type {string || null}
          */
         this.SettleAcctNo = null;
 
         /**
          * 结算账户户名
-<敏感信息>加密详见《商户端接口敏感信息加密说明》
+<敏感信息>加密详见<a href="https://cloud.tencent.com/document/product/1122/48979" target="_blank">《商户端接口敏感信息加密说明》</a>
          * @type {string || null}
          */
         this.SettleAcctName = null;
@@ -13990,7 +13990,7 @@ class ApplyWithdrawalRequest extends  AbstractModel {
 
         /**
          * 会员证件号码
-<敏感信息>加密详见《商户端接口敏感信息加密说明》
+<敏感信息>加密详见<a href="https://cloud.tencent.com/document/product/1122/48979" target="_blank">《商户端接口敏感信息加密说明》</a>
          * @type {string || null}
          */
         this.IdCode = null;
@@ -15122,7 +15122,7 @@ class UnBindAcctRequest extends  AbstractModel {
 
         /**
          * 用于提现
-<敏感信息>加密详见《商户端接口敏感信息加密说明》
+<敏感信息>加密详见<a href="https://cloud.tencent.com/document/product/1122/48979" target="_blank">《商户端接口敏感信息加密说明》</a>
          * @type {string || null}
          */
         this.SettleAcctNo = null;

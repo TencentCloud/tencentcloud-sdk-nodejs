@@ -462,10 +462,22 @@ OPEN：公网属性， INTERNAL：内网属性。
         this.Tags = null;
 
         /**
+         * 独占集群信息
+         * @type {ExclusiveCluster || null}
+         */
+        this.ExclusiveCluster = null;
+
+        /**
          * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
          * @type {string || null}
          */
         this.ClientToken = null;
+
+        /**
+         * Stgw独占集群的标签。
+         * @type {string || null}
+         */
+        this.ClusterTag = null;
 
     }
 
@@ -502,7 +514,14 @@ OPEN：公网属性， INTERNAL：内网属性。
                 this.Tags.push(obj);
             }
         }
+
+        if (params.ExclusiveCluster) {
+            let obj = new ExclusiveCluster();
+            obj.deserialize(params.ExclusiveCluster)
+            this.ExclusiveCluster = obj;
+        }
         this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
+        this.ClusterTag = 'ClusterTag' in params ? params.ClusterTag : null;
 
     }
 }

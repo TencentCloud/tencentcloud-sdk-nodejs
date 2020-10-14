@@ -52,6 +52,69 @@ class BgpPeer extends  AbstractModel {
 }
 
 /**
+ * 专线通道路由
+ * @class
+ */
+class DirectConnectTunnelRoute extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 专用通道路由ID
+         * @type {string || null}
+         */
+        this.RouteId = null;
+
+        /**
+         * 网段CIDR
+         * @type {string || null}
+         */
+        this.DestinationCidrBlock = null;
+
+        /**
+         * 路由类型：BGP/STATIC路由
+         * @type {string || null}
+         */
+        this.RouteType = null;
+
+        /**
+         * ENABLE：路由启用，DISABLE：路由禁用
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * ASPath信息
+         * @type {Array.<string> || null}
+         */
+        this.ASPath = null;
+
+        /**
+         * 路由下一跳IP
+         * @type {string || null}
+         */
+        this.NextHop = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RouteId = 'RouteId' in params ? params.RouteId : null;
+        this.DestinationCidrBlock = 'DestinationCidrBlock' in params ? params.DestinationCidrBlock : null;
+        this.RouteType = 'RouteType' in params ? params.RouteType : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.ASPath = 'ASPath' in params ? params.ASPath : null;
+        this.NextHop = 'NextHop' in params ? params.NextHop : null;
+
+    }
+}
+
+/**
  * RejectDirectConnectTunnel请求参数结构体
  * @class
  */
@@ -243,6 +306,93 @@ class CreateDirectConnectResponse extends  AbstractModel {
         }
         this.DirectConnectIdSet = 'DirectConnectIdSet' in params ? params.DirectConnectIdSet : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDirectConnectTunnelExtra请求参数结构体
+ * @class
+ */
+class DescribeDirectConnectTunnelExtraRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 专用通道ID
+         * @type {string || null}
+         */
+        this.DirectConnectTunnelId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DirectConnectTunnelId = 'DirectConnectTunnelId' in params ? params.DirectConnectTunnelId : null;
+
+    }
+}
+
+/**
+ * DescribePublicDirectConnectTunnelRoutes请求参数结构体
+ * @class
+ */
+class DescribePublicDirectConnectTunnelRoutesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 专用通道ID
+         * @type {string || null}
+         */
+        this.DirectConnectTunnelId = null;
+
+        /**
+         * 过滤条件：
+route-type：路由类型，取值：BGP/STATIC
+route-subnet：路由cidr，取值如：192.68.1.0/24
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 偏移量，默认为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为20，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DirectConnectTunnelId = 'DirectConnectTunnelId' in params ? params.DirectConnectTunnelId : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -575,40 +725,52 @@ class AcceptDirectConnectTunnelResponse extends  AbstractModel {
 }
 
 /**
- * DescribeDirectConnectTunnels请求参数结构体
+ * AcceptDirectConnectTunnel请求参数结构体
  * @class
  */
-class DescribeDirectConnectTunnelsRequest extends  AbstractModel {
+class AcceptDirectConnectTunnelRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 过滤条件:
-参数不支持同时指定DirectConnectTunnelIds和Filters。
-<li> direct-connect-tunnel-name, 专用通道名称。</li>
-<li> direct-connect-tunnel-id, 专用通道实例ID，如dcx-abcdefgh。</li>
-<li>direct-connect-id, 物理专线实例ID，如，dc-abcdefgh。</li>
-         * @type {Array.<Filter> || null}
+         * 物理专线拥有者接受共享专用通道申请
+         * @type {string || null}
          */
-        this.Filters = null;
+        this.DirectConnectTunnelId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DirectConnectTunnelId = 'DirectConnectTunnelId' in params ? params.DirectConnectTunnelId : null;
+
+    }
+}
+
+/**
+ * DescribeDirectConnectTunnelExtra返回参数结构体
+ * @class
+ */
+class DescribeDirectConnectTunnelExtraResponse extends  AbstractModel {
+    constructor(){
+        super();
 
         /**
-         * 专用通道 ID数组
-         * @type {Array.<string> || null}
+         * 专用通道扩展信息
+         * @type {DirectConnectTunnelExtra || null}
          */
-        this.DirectConnectTunnelIds = null;
+        this.DirectConnectTunnelExtra = null;
 
         /**
-         * 偏移量，默认为0
-         * @type {number || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.Offset = null;
-
-        /**
-         * 返回数量，默认为20，最大值为100
-         * @type {number || null}
-         */
-        this.Limit = null;
+        this.RequestId = null;
 
     }
 
@@ -620,17 +782,12 @@ class DescribeDirectConnectTunnelsRequest extends  AbstractModel {
             return;
         }
 
-        if (params.Filters) {
-            this.Filters = new Array();
-            for (let z in params.Filters) {
-                let obj = new Filter();
-                obj.deserialize(params.Filters[z]);
-                this.Filters.push(obj);
-            }
+        if (params.DirectConnectTunnelExtra) {
+            let obj = new DirectConnectTunnelExtra();
+            obj.deserialize(params.DirectConnectTunnelExtra)
+            this.DirectConnectTunnelExtra = obj;
         }
-        this.DirectConnectTunnelIds = 'DirectConnectTunnelIds' in params ? params.DirectConnectTunnelIds : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -692,18 +849,255 @@ class RouteFilterPrefix extends  AbstractModel {
 }
 
 /**
- * AcceptDirectConnectTunnel请求参数结构体
+ * bgp状态信息
  * @class
  */
-class AcceptDirectConnectTunnelRequest extends  AbstractModel {
+class BGPStatus extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 物理专线拥有者接受共享专用通道申请
+         * 腾讯侧主互联IP BGP状态
+         * @type {string || null}
+         */
+        this.TencentAddressBgpState = null;
+
+        /**
+         * 腾讯侧备互联IP BGP状态
+         * @type {string || null}
+         */
+        this.TencentBackupAddressBgpState = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TencentAddressBgpState = 'TencentAddressBgpState' in params ? params.TencentAddressBgpState : null;
+        this.TencentBackupAddressBgpState = 'TencentBackupAddressBgpState' in params ? params.TencentBackupAddressBgpState : null;
+
+    }
+}
+
+/**
+ * 专用通道扩展信息
+ * @class
+ */
+class DirectConnectTunnelExtra extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 专用通道ID
          * @type {string || null}
          */
         this.DirectConnectTunnelId = null;
+
+        /**
+         * 物理专线ID
+         * @type {string || null}
+         */
+        this.DirectConnectId = null;
+
+        /**
+         * 专用通道状态
+AVAILABLE:就绪或者已连接
+PENDING:申请中
+ALLOCATING:配置中
+ALLOCATED:配置完成
+ALTERING:修改中
+DELETING:删除中
+DELETED:删除完成
+COMFIRMING:待接受
+REJECTED:拒绝
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * 物理专线的拥有者，开发商账号 ID
+         * @type {string || null}
+         */
+        this.DirectConnectOwnerAccount = null;
+
+        /**
+         * 专用通道的拥有者，开发商账号 ID
+         * @type {string || null}
+         */
+        this.OwnerAccount = null;
+
+        /**
+         * 网络类型，分别为VPC、BMVPC、CCN
+ VPC：私有网络 ，BMVPC：黑石网络，CCN：云联网
+         * @type {string || null}
+         */
+        this.NetworkType = null;
+
+        /**
+         * VPC地域对应的网络名，如ap-guangzhou
+         * @type {string || null}
+         */
+        this.NetworkRegion = null;
+
+        /**
+         * 私有网络统一 ID 或者黑石网络统一 ID
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 专线网关 ID
+         * @type {string || null}
+         */
+        this.DirectConnectGatewayId = null;
+
+        /**
+         * BGP ：BGP路由 STATIC：静态 默认为 BGP 路由
+         * @type {string || null}
+         */
+        this.RouteType = null;
+
+        /**
+         * 用户侧BGP，Asn，AuthKey
+         * @type {BgpPeer || null}
+         */
+        this.BgpPeer = null;
+
+        /**
+         * 用户侧网段地址
+         * @type {Array.<RouteFilterPrefix> || null}
+         */
+        this.RouteFilterPrefixes = null;
+
+        /**
+         * 互联网通道公网网段地址
+         * @type {Array.<RouteFilterPrefix> || null}
+         */
+        this.PublicAddresses = null;
+
+        /**
+         * 专用通道的Vlan
+         * @type {number || null}
+         */
+        this.Vlan = null;
+
+        /**
+         * 腾讯侧互联 IP
+         * @type {string || null}
+         */
+        this.TencentAddress = null;
+
+        /**
+         * 腾讯侧备用互联IP
+         * @type {string || null}
+         */
+        this.TencentBackupAddress = null;
+
+        /**
+         * 用户侧互联 IP
+         * @type {string || null}
+         */
+        this.CustomerAddress = null;
+
+        /**
+         * 专用通道名称
+         * @type {string || null}
+         */
+        this.DirectConnectTunnelName = null;
+
+        /**
+         * 专用通道创建时间
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * 专用通道带宽值
+         * @type {number || null}
+         */
+        this.Bandwidth = null;
+
+        /**
+         * 关联的网络自定义探测ID
+         * @type {string || null}
+         */
+        this.NetDetectId = null;
+
+        /**
+         * BGP community开关
+         * @type {boolean || null}
+         */
+        this.EnableBGPCommunity = null;
+
+        /**
+         * 是否为Nat通道
+         * @type {number || null}
+         */
+        this.NatType = null;
+
+        /**
+         * VPC地域简码，如gz、cd
+         * @type {string || null}
+         */
+        this.VpcRegion = null;
+
+        /**
+         * 是否开启BFD
+         * @type {number || null}
+         */
+        this.BfdEnable = null;
+
+        /**
+         * 是否开启NQA
+         * @type {number || null}
+         */
+        this.NqaEnable = null;
+
+        /**
+         * 专用通道接入点类型
+         * @type {string || null}
+         */
+        this.AccessPointType = null;
+
+        /**
+         * 专线网关名称
+         * @type {string || null}
+         */
+        this.DirectConnectGatewayName = null;
+
+        /**
+         * VPC名称
+         * @type {string || null}
+         */
+        this.VpcName = null;
+
+        /**
+         * 专用通道关联的物理专线是否签署了用户协议
+         * @type {boolean || null}
+         */
+        this.SignLaw = null;
+
+        /**
+         * BFD配置信息
+         * @type {BFDInfo || null}
+         */
+        this.BfdInfo = null;
+
+        /**
+         * NQA配置信息
+         * @type {NQAInfo || null}
+         */
+        this.NqaInfo = null;
+
+        /**
+         * BGP状态
+         * @type {BGPStatus || null}
+         */
+        this.BgpStatus = null;
 
     }
 
@@ -715,6 +1109,111 @@ class AcceptDirectConnectTunnelRequest extends  AbstractModel {
             return;
         }
         this.DirectConnectTunnelId = 'DirectConnectTunnelId' in params ? params.DirectConnectTunnelId : null;
+        this.DirectConnectId = 'DirectConnectId' in params ? params.DirectConnectId : null;
+        this.State = 'State' in params ? params.State : null;
+        this.DirectConnectOwnerAccount = 'DirectConnectOwnerAccount' in params ? params.DirectConnectOwnerAccount : null;
+        this.OwnerAccount = 'OwnerAccount' in params ? params.OwnerAccount : null;
+        this.NetworkType = 'NetworkType' in params ? params.NetworkType : null;
+        this.NetworkRegion = 'NetworkRegion' in params ? params.NetworkRegion : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.DirectConnectGatewayId = 'DirectConnectGatewayId' in params ? params.DirectConnectGatewayId : null;
+        this.RouteType = 'RouteType' in params ? params.RouteType : null;
+
+        if (params.BgpPeer) {
+            let obj = new BgpPeer();
+            obj.deserialize(params.BgpPeer)
+            this.BgpPeer = obj;
+        }
+
+        if (params.RouteFilterPrefixes) {
+            this.RouteFilterPrefixes = new Array();
+            for (let z in params.RouteFilterPrefixes) {
+                let obj = new RouteFilterPrefix();
+                obj.deserialize(params.RouteFilterPrefixes[z]);
+                this.RouteFilterPrefixes.push(obj);
+            }
+        }
+
+        if (params.PublicAddresses) {
+            this.PublicAddresses = new Array();
+            for (let z in params.PublicAddresses) {
+                let obj = new RouteFilterPrefix();
+                obj.deserialize(params.PublicAddresses[z]);
+                this.PublicAddresses.push(obj);
+            }
+        }
+        this.Vlan = 'Vlan' in params ? params.Vlan : null;
+        this.TencentAddress = 'TencentAddress' in params ? params.TencentAddress : null;
+        this.TencentBackupAddress = 'TencentBackupAddress' in params ? params.TencentBackupAddress : null;
+        this.CustomerAddress = 'CustomerAddress' in params ? params.CustomerAddress : null;
+        this.DirectConnectTunnelName = 'DirectConnectTunnelName' in params ? params.DirectConnectTunnelName : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
+        this.NetDetectId = 'NetDetectId' in params ? params.NetDetectId : null;
+        this.EnableBGPCommunity = 'EnableBGPCommunity' in params ? params.EnableBGPCommunity : null;
+        this.NatType = 'NatType' in params ? params.NatType : null;
+        this.VpcRegion = 'VpcRegion' in params ? params.VpcRegion : null;
+        this.BfdEnable = 'BfdEnable' in params ? params.BfdEnable : null;
+        this.NqaEnable = 'NqaEnable' in params ? params.NqaEnable : null;
+        this.AccessPointType = 'AccessPointType' in params ? params.AccessPointType : null;
+        this.DirectConnectGatewayName = 'DirectConnectGatewayName' in params ? params.DirectConnectGatewayName : null;
+        this.VpcName = 'VpcName' in params ? params.VpcName : null;
+        this.SignLaw = 'SignLaw' in params ? params.SignLaw : null;
+
+        if (params.BfdInfo) {
+            let obj = new BFDInfo();
+            obj.deserialize(params.BfdInfo)
+            this.BfdInfo = obj;
+        }
+
+        if (params.NqaInfo) {
+            let obj = new NQAInfo();
+            obj.deserialize(params.NqaInfo)
+            this.NqaInfo = obj;
+        }
+
+        if (params.BgpStatus) {
+            let obj = new BGPStatus();
+            obj.deserialize(params.BgpStatus)
+            this.BgpStatus = obj;
+        }
+
+    }
+}
+
+/**
+ * 标签键值对
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签键
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Value = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
 
     }
 }
@@ -896,6 +1395,34 @@ class DeleteDirectConnectResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyDirectConnectTunnelExtra返回参数结构体
+ * @class
+ */
+class ModifyDirectConnectTunnelExtraResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDirectConnects返回参数结构体
  * @class
  */
@@ -1048,6 +1575,67 @@ class DescribeDirectConnectsRequest extends  AbstractModel {
             }
         }
         this.DirectConnectIds = 'DirectConnectIds' in params ? params.DirectConnectIds : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * DescribeDirectConnectTunnels请求参数结构体
+ * @class
+ */
+class DescribeDirectConnectTunnelsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤条件:
+参数不支持同时指定DirectConnectTunnelIds和Filters。
+<li> direct-connect-tunnel-name, 专用通道名称。</li>
+<li> direct-connect-tunnel-id, 专用通道实例ID，如dcx-abcdefgh。</li>
+<li>direct-connect-id, 物理专线实例ID，如，dc-abcdefgh。</li>
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+        /**
+         * 专用通道 ID数组
+         * @type {Array.<string> || null}
+         */
+        this.DirectConnectTunnelIds = null;
+
+        /**
+         * 偏移量，默认为0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为20，最大值为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+        this.DirectConnectTunnelIds = 'DirectConnectTunnelIds' in params ? params.DirectConnectTunnelIds : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
 
@@ -1349,6 +1937,138 @@ class ModifyDirectConnectAttributeResponse extends  AbstractModel {
 }
 
 /**
+ * ModifyDirectConnectTunnelExtra请求参数结构体
+ * @class
+ */
+class ModifyDirectConnectTunnelExtraRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 专用通道ID
+         * @type {string || null}
+         */
+        this.DirectConnectTunnelId = null;
+
+        /**
+         * 专用通道的Vlan
+         * @type {number || null}
+         */
+        this.Vlan = null;
+
+        /**
+         * 用户侧BGP，Asn，AuthKey
+         * @type {BgpPeer || null}
+         */
+        this.BgpPeer = null;
+
+        /**
+         * 用户侧网段地址
+         * @type {RouteFilterPrefix || null}
+         */
+        this.RouteFilterPrefixes = null;
+
+        /**
+         * 腾讯侧互联IP
+         * @type {string || null}
+         */
+        this.TencentAddress = null;
+
+        /**
+         * 腾讯侧备用互联IP
+         * @type {string || null}
+         */
+        this.TencentBackupAddress = null;
+
+        /**
+         * 用户侧互联IP
+         * @type {string || null}
+         */
+        this.CustomerAddress = null;
+
+        /**
+         * 专用通道带宽值
+         * @type {number || null}
+         */
+        this.Bandwidth = null;
+
+        /**
+         * BGP community开关
+         * @type {boolean || null}
+         */
+        this.EnableBGPCommunity = null;
+
+        /**
+         * 是否开启BFD
+         * @type {number || null}
+         */
+        this.BfdEnable = null;
+
+        /**
+         * 是否开启NQA
+         * @type {number || null}
+         */
+        this.NqaEnable = null;
+
+        /**
+         * BFD配置信息
+         * @type {BFDInfo || null}
+         */
+        this.BfdInfo = null;
+
+        /**
+         * NQA配置信息
+         * @type {NQAInfo || null}
+         */
+        this.NqaInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DirectConnectTunnelId = 'DirectConnectTunnelId' in params ? params.DirectConnectTunnelId : null;
+        this.Vlan = 'Vlan' in params ? params.Vlan : null;
+
+        if (params.BgpPeer) {
+            let obj = new BgpPeer();
+            obj.deserialize(params.BgpPeer)
+            this.BgpPeer = obj;
+        }
+
+        if (params.RouteFilterPrefixes) {
+            let obj = new RouteFilterPrefix();
+            obj.deserialize(params.RouteFilterPrefixes)
+            this.RouteFilterPrefixes = obj;
+        }
+        this.TencentAddress = 'TencentAddress' in params ? params.TencentAddress : null;
+        this.TencentBackupAddress = 'TencentBackupAddress' in params ? params.TencentBackupAddress : null;
+        this.CustomerAddress = 'CustomerAddress' in params ? params.CustomerAddress : null;
+        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
+        this.EnableBGPCommunity = 'EnableBGPCommunity' in params ? params.EnableBGPCommunity : null;
+        this.BfdEnable = 'BfdEnable' in params ? params.BfdEnable : null;
+        this.NqaEnable = 'NqaEnable' in params ? params.NqaEnable : null;
+
+        if (params.BfdInfo) {
+            let obj = new BFDInfo();
+            obj.deserialize(params.BfdInfo)
+            this.BfdInfo = obj;
+        }
+
+        if (params.NqaInfo) {
+            let obj = new NQAInfo();
+            obj.deserialize(params.NqaInfo)
+            this.NqaInfo = obj;
+        }
+
+    }
+}
+
+/**
  * RejectDirectConnectTunnel返回参数结构体
  * @class
  */
@@ -1440,55 +2160,24 @@ class DeleteDirectConnectTunnelResponse extends  AbstractModel {
 }
 
 /**
- * 接入点信息。
+ * BFD配置信息
  * @class
  */
-class AccessPoint extends  AbstractModel {
+class BFDInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 接入点的名称。
-         * @type {string || null}
+         * 健康检查次数
+         * @type {number || null}
          */
-        this.AccessPointName = null;
+        this.ProbeFailedTimes = null;
 
         /**
-         * 接入点唯一ID。
-         * @type {string || null}
+         * 健康检查间隔
+         * @type {number || null}
          */
-        this.AccessPointId = null;
-
-        /**
-         * 接入点的状态。可用，不可用。
-         * @type {string || null}
-         */
-        this.State = null;
-
-        /**
-         * 接入点的位置。
-         * @type {string || null}
-         */
-        this.Location = null;
-
-        /**
-         * 接入点支持的运营商列表。
-         * @type {Array.<string> || null}
-         */
-        this.LineOperator = null;
-
-        /**
-         * 接入点管理的大区ID。
-         * @type {string || null}
-         */
-        this.RegionId = null;
-
-        /**
-         * 接入点可用的端口类型列表。1000BASE-T代表千兆电口，1000BASE-LX代表千兆单模光口10km，1000BASE-ZX代表千兆单模光口80km,10GBASE-LR代表万兆单模光口10km,10GBASE-ZR代表万兆单模光口80km,10GBASE-LH代表万兆单模光口40km,100GBASE-LR4代表100G单模光口10km
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<string> || null}
-         */
-        this.AvailablePortType = null;
+        this.Interval = null;
 
     }
 
@@ -1499,13 +2188,8 @@ class AccessPoint extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.AccessPointName = 'AccessPointName' in params ? params.AccessPointName : null;
-        this.AccessPointId = 'AccessPointId' in params ? params.AccessPointId : null;
-        this.State = 'State' in params ? params.State : null;
-        this.Location = 'Location' in params ? params.Location : null;
-        this.LineOperator = 'LineOperator' in params ? params.LineOperator : null;
-        this.RegionId = 'RegionId' in params ? params.RegionId : null;
-        this.AvailablePortType = 'AvailablePortType' in params ? params.AvailablePortType : null;
+        this.ProbeFailedTimes = 'ProbeFailedTimes' in params ? params.ProbeFailedTimes : null;
+        this.Interval = 'Interval' in params ? params.Interval : null;
 
     }
 }
@@ -1589,26 +2273,55 @@ class DescribeDirectConnectTunnelsResponse extends  AbstractModel {
 }
 
 /**
- * 标签键值对
+ * 接入点信息。
  * @class
  */
-class Tag extends  AbstractModel {
+class AccessPoint extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 标签键
-注意：此字段可能返回 null，表示取不到有效值。
+         * 接入点的名称。
          * @type {string || null}
          */
-        this.Key = null;
+        this.AccessPointName = null;
 
         /**
-         * 标签值
-注意：此字段可能返回 null，表示取不到有效值。
+         * 接入点唯一ID。
          * @type {string || null}
          */
-        this.Value = null;
+        this.AccessPointId = null;
+
+        /**
+         * 接入点的状态。可用，不可用。
+         * @type {string || null}
+         */
+        this.State = null;
+
+        /**
+         * 接入点的位置。
+         * @type {string || null}
+         */
+        this.Location = null;
+
+        /**
+         * 接入点支持的运营商列表。
+         * @type {Array.<string> || null}
+         */
+        this.LineOperator = null;
+
+        /**
+         * 接入点管理的大区ID。
+         * @type {string || null}
+         */
+        this.RegionId = null;
+
+        /**
+         * 接入点可用的端口类型列表。1000BASE-T代表千兆电口，1000BASE-LX代表千兆单模光口10km，1000BASE-ZX代表千兆单模光口80km,10GBASE-LR代表万兆单模光口10km,10GBASE-ZR代表万兆单模光口80km,10GBASE-LH代表万兆单模光口40km,100GBASE-LR4代表100G单模光口10km
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.AvailablePortType = null;
 
     }
 
@@ -1619,8 +2332,105 @@ class Tag extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Key = 'Key' in params ? params.Key : null;
-        this.Value = 'Value' in params ? params.Value : null;
+        this.AccessPointName = 'AccessPointName' in params ? params.AccessPointName : null;
+        this.AccessPointId = 'AccessPointId' in params ? params.AccessPointId : null;
+        this.State = 'State' in params ? params.State : null;
+        this.Location = 'Location' in params ? params.Location : null;
+        this.LineOperator = 'LineOperator' in params ? params.LineOperator : null;
+        this.RegionId = 'RegionId' in params ? params.RegionId : null;
+        this.AvailablePortType = 'AvailablePortType' in params ? params.AvailablePortType : null;
+
+    }
+}
+
+/**
+ * nqa配置信息
+ * @class
+ */
+class NQAInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 健康检查次数
+         * @type {number || null}
+         */
+        this.ProbeFailedTimes = null;
+
+        /**
+         * 健康检查间隔
+         * @type {number || null}
+         */
+        this.Interval = null;
+
+        /**
+         * 健康检查地址
+         * @type {string || null}
+         */
+        this.DestinationIp = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProbeFailedTimes = 'ProbeFailedTimes' in params ? params.ProbeFailedTimes : null;
+        this.Interval = 'Interval' in params ? params.Interval : null;
+        this.DestinationIp = 'DestinationIp' in params ? params.DestinationIp : null;
+
+    }
+}
+
+/**
+ * DescribePublicDirectConnectTunnelRoutes返回参数结构体
+ * @class
+ */
+class DescribePublicDirectConnectTunnelRoutesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 互联网通道路由列表
+         * @type {Array.<DirectConnectTunnelRoute> || null}
+         */
+        this.Routes = null;
+
+        /**
+         * 记录总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Routes) {
+            this.Routes = new Array();
+            for (let z in params.Routes) {
+                let obj = new DirectConnectTunnelRoute();
+                obj.deserialize(params.Routes[z]);
+                this.Routes.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1892,33 +2702,44 @@ REJECTED:拒绝
 
 module.exports = {
     BgpPeer: BgpPeer,
+    DirectConnectTunnelRoute: DirectConnectTunnelRoute,
     RejectDirectConnectTunnelRequest: RejectDirectConnectTunnelRequest,
     ModifyDirectConnectAttributeRequest: ModifyDirectConnectAttributeRequest,
     DeleteDirectConnectTunnelRequest: DeleteDirectConnectTunnelRequest,
     CreateDirectConnectResponse: CreateDirectConnectResponse,
+    DescribeDirectConnectTunnelExtraRequest: DescribeDirectConnectTunnelExtraRequest,
+    DescribePublicDirectConnectTunnelRoutesRequest: DescribePublicDirectConnectTunnelRoutesRequest,
     DirectConnect: DirectConnect,
     DescribeAccessPointsResponse: DescribeAccessPointsResponse,
     AcceptDirectConnectTunnelResponse: AcceptDirectConnectTunnelResponse,
-    DescribeDirectConnectTunnelsRequest: DescribeDirectConnectTunnelsRequest,
+    AcceptDirectConnectTunnelRequest: AcceptDirectConnectTunnelRequest,
+    DescribeDirectConnectTunnelExtraResponse: DescribeDirectConnectTunnelExtraResponse,
     ModifyDirectConnectTunnelAttributeResponse: ModifyDirectConnectTunnelAttributeResponse,
     RouteFilterPrefix: RouteFilterPrefix,
-    AcceptDirectConnectTunnelRequest: AcceptDirectConnectTunnelRequest,
+    BGPStatus: BGPStatus,
+    DirectConnectTunnelExtra: DirectConnectTunnelExtra,
+    Tag: Tag,
     CreateDirectConnectTunnelRequest: CreateDirectConnectTunnelRequest,
     DeleteDirectConnectResponse: DeleteDirectConnectResponse,
+    ModifyDirectConnectTunnelExtraResponse: ModifyDirectConnectTunnelExtraResponse,
     DescribeDirectConnectsResponse: DescribeDirectConnectsResponse,
     DescribeAccessPointsRequest: DescribeAccessPointsRequest,
     DescribeDirectConnectsRequest: DescribeDirectConnectsRequest,
+    DescribeDirectConnectTunnelsRequest: DescribeDirectConnectTunnelsRequest,
     ModifyDirectConnectTunnelAttributeRequest: ModifyDirectConnectTunnelAttributeRequest,
     Filter: Filter,
     CreateDirectConnectRequest: CreateDirectConnectRequest,
     ModifyDirectConnectAttributeResponse: ModifyDirectConnectAttributeResponse,
+    ModifyDirectConnectTunnelExtraRequest: ModifyDirectConnectTunnelExtraRequest,
     RejectDirectConnectTunnelResponse: RejectDirectConnectTunnelResponse,
     CreateDirectConnectTunnelResponse: CreateDirectConnectTunnelResponse,
     DeleteDirectConnectTunnelResponse: DeleteDirectConnectTunnelResponse,
-    AccessPoint: AccessPoint,
+    BFDInfo: BFDInfo,
     DeleteDirectConnectRequest: DeleteDirectConnectRequest,
     DescribeDirectConnectTunnelsResponse: DescribeDirectConnectTunnelsResponse,
-    Tag: Tag,
+    AccessPoint: AccessPoint,
+    NQAInfo: NQAInfo,
+    DescribePublicDirectConnectTunnelRoutesResponse: DescribePublicDirectConnectTunnelRoutesResponse,
     DirectConnectTunnel: DirectConnectTunnel,
 
 }

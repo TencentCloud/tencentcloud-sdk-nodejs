@@ -586,6 +586,56 @@ class DescribeClientBalanceResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeAgentSelfPayDeals返回参数结构体
+ * @class
+ */
+class DescribeAgentSelfPayDealsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 订单数组
+         * @type {Array.<AgentDealElem> || null}
+         */
+        this.AgentPayDealSet = null;
+
+        /**
+         * 符合条件的订单总数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AgentPayDealSet) {
+            this.AgentPayDealSet = new Array();
+            for (let z in params.AgentPayDealSet) {
+                let obj = new AgentDealElem();
+                obj.deserialize(params.AgentPayDealSet[z]);
+                this.AgentPayDealSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * AgentTransferMoney请求参数结构体
  * @class
  */
@@ -1385,6 +1435,83 @@ class DealGoodsPriceElem extends  AbstractModel {
 }
 
 /**
+ * DescribeAgentSelfPayDeals请求参数结构体
+ * @class
+ */
+class DescribeAgentSelfPayDealsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 下单人账号ID
+         * @type {string || null}
+         */
+        this.OwnerUin = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 限制数目
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 下单时间范围起始点(不传时会默认查15天内订单，传值时需要传15天内的起始时间)
+         * @type {string || null}
+         */
+        this.CreatTimeRangeStart = null;
+
+        /**
+         * 下单时间范围终止点
+         * @type {string || null}
+         */
+        this.CreatTimeRangeEnd = null;
+
+        /**
+         * 0:下单时间降序；其他：下单时间升序
+         * @type {number || null}
+         */
+        this.Order = null;
+
+        /**
+         * 订单的状态(1：未支付;2：已支付;3：发货中;4：已发货;5：发货失败;6：已退款;7：已关单;8：订单过期;9：订单已失效;10：产品已失效;11：代付拒绝;12：支付中)
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 订单号列表
+         * @type {Array.<string> || null}
+         */
+        this.DealNames = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OwnerUin = 'OwnerUin' in params ? params.OwnerUin : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.CreatTimeRangeStart = 'CreatTimeRangeStart' in params ? params.CreatTimeRangeStart : null;
+        this.CreatTimeRangeEnd = 'CreatTimeRangeEnd' in params ? params.CreatTimeRangeEnd : null;
+        this.Order = 'Order' in params ? params.Order : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.DealNames = 'DealNames' in params ? params.DealNames : null;
+
+    }
+}
+
+/**
  * ModifyClientRemark请求参数结构体
  * @class
  */
@@ -2153,6 +2280,7 @@ module.exports = {
     DescribeAgentClientGradeResponse: DescribeAgentClientGradeResponse,
     RebateInfoElem: RebateInfoElem,
     DescribeClientBalanceResponse: DescribeClientBalanceResponse,
+    DescribeAgentSelfPayDealsResponse: DescribeAgentSelfPayDealsResponse,
     AgentTransferMoneyRequest: AgentTransferMoneyRequest,
     DescribeClientBalanceRequest: DescribeClientBalanceRequest,
     RemovePayRelationForClientResponse: RemovePayRelationForClientResponse,
@@ -2169,6 +2297,7 @@ module.exports = {
     AgentAuditedClient: AgentAuditedClient,
     DescribeAgentPayDealsResponse: DescribeAgentPayDealsResponse,
     DealGoodsPriceElem: DealGoodsPriceElem,
+    DescribeAgentSelfPayDealsRequest: DescribeAgentSelfPayDealsRequest,
     ModifyClientRemarkRequest: ModifyClientRemarkRequest,
     CreatePayRelationForClientRequest: CreatePayRelationForClientRequest,
     AgentTransferMoneyResponse: AgentTransferMoneyResponse,

@@ -17,33 +17,44 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const BgpPeer = models.BgpPeer;
+const DirectConnectTunnelRoute = models.DirectConnectTunnelRoute;
 const RejectDirectConnectTunnelRequest = models.RejectDirectConnectTunnelRequest;
 const ModifyDirectConnectAttributeRequest = models.ModifyDirectConnectAttributeRequest;
 const DeleteDirectConnectTunnelRequest = models.DeleteDirectConnectTunnelRequest;
 const CreateDirectConnectResponse = models.CreateDirectConnectResponse;
+const DescribeDirectConnectTunnelExtraRequest = models.DescribeDirectConnectTunnelExtraRequest;
+const DescribePublicDirectConnectTunnelRoutesRequest = models.DescribePublicDirectConnectTunnelRoutesRequest;
 const DirectConnect = models.DirectConnect;
 const DescribeAccessPointsResponse = models.DescribeAccessPointsResponse;
 const AcceptDirectConnectTunnelResponse = models.AcceptDirectConnectTunnelResponse;
-const DescribeDirectConnectTunnelsRequest = models.DescribeDirectConnectTunnelsRequest;
+const AcceptDirectConnectTunnelRequest = models.AcceptDirectConnectTunnelRequest;
+const DescribeDirectConnectTunnelExtraResponse = models.DescribeDirectConnectTunnelExtraResponse;
 const ModifyDirectConnectTunnelAttributeResponse = models.ModifyDirectConnectTunnelAttributeResponse;
 const RouteFilterPrefix = models.RouteFilterPrefix;
-const AcceptDirectConnectTunnelRequest = models.AcceptDirectConnectTunnelRequest;
+const BGPStatus = models.BGPStatus;
+const DirectConnectTunnelExtra = models.DirectConnectTunnelExtra;
+const Tag = models.Tag;
 const CreateDirectConnectTunnelRequest = models.CreateDirectConnectTunnelRequest;
 const DeleteDirectConnectResponse = models.DeleteDirectConnectResponse;
+const ModifyDirectConnectTunnelExtraResponse = models.ModifyDirectConnectTunnelExtraResponse;
 const DescribeDirectConnectsResponse = models.DescribeDirectConnectsResponse;
 const DescribeAccessPointsRequest = models.DescribeAccessPointsRequest;
 const DescribeDirectConnectsRequest = models.DescribeDirectConnectsRequest;
+const DescribeDirectConnectTunnelsRequest = models.DescribeDirectConnectTunnelsRequest;
 const ModifyDirectConnectTunnelAttributeRequest = models.ModifyDirectConnectTunnelAttributeRequest;
 const Filter = models.Filter;
 const CreateDirectConnectRequest = models.CreateDirectConnectRequest;
 const ModifyDirectConnectAttributeResponse = models.ModifyDirectConnectAttributeResponse;
+const ModifyDirectConnectTunnelExtraRequest = models.ModifyDirectConnectTunnelExtraRequest;
 const RejectDirectConnectTunnelResponse = models.RejectDirectConnectTunnelResponse;
 const CreateDirectConnectTunnelResponse = models.CreateDirectConnectTunnelResponse;
 const DeleteDirectConnectTunnelResponse = models.DeleteDirectConnectTunnelResponse;
-const AccessPoint = models.AccessPoint;
+const BFDInfo = models.BFDInfo;
 const DeleteDirectConnectRequest = models.DeleteDirectConnectRequest;
 const DescribeDirectConnectTunnelsResponse = models.DescribeDirectConnectTunnelsResponse;
-const Tag = models.Tag;
+const AccessPoint = models.AccessPoint;
+const NQAInfo = models.NQAInfo;
+const DescribePublicDirectConnectTunnelRoutesResponse = models.DescribePublicDirectConnectTunnelRoutesResponse;
 const DirectConnectTunnel = models.DirectConnectTunnel;
 
 
@@ -57,6 +68,28 @@ class DcClient extends AbstractClient {
         super("dc.tencentcloudapi.com", "2018-04-10", credential, region, profile);
     }
     
+    /**
+     * 本接口（DescribePublicDirectConnectTunnelRoutes）用于查询互联网通道路由列表
+     * @param {DescribePublicDirectConnectTunnelRoutesRequest} req
+     * @param {function(string, DescribePublicDirectConnectTunnelRoutesResponse):void} cb
+     * @public
+     */
+    DescribePublicDirectConnectTunnelRoutes(req, cb) {
+        let resp = new DescribePublicDirectConnectTunnelRoutesResponse();
+        this.request("DescribePublicDirectConnectTunnelRoutes", req, resp, cb);
+    }
+
+    /**
+     * 本接口（ModifyDirectConnectTunnelExtra）用于修改专用通道扩展信息
+     * @param {ModifyDirectConnectTunnelExtraRequest} req
+     * @param {function(string, ModifyDirectConnectTunnelExtraResponse):void} cb
+     * @public
+     */
+    ModifyDirectConnectTunnelExtra(req, cb) {
+        let resp = new ModifyDirectConnectTunnelExtraResponse();
+        this.request("ModifyDirectConnectTunnelExtra", req, resp, cb);
+    }
+
     /**
      * 修改物理专线的属性。
      * @param {ModifyDirectConnectAttributeRequest} req
@@ -77,6 +110,17 @@ class DcClient extends AbstractClient {
     CreateDirectConnectTunnel(req, cb) {
         let resp = new CreateDirectConnectTunnelResponse();
         this.request("CreateDirectConnectTunnel", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeDirectConnectTunnelExtra）用于查询专用通道扩展信息
+     * @param {DescribeDirectConnectTunnelExtraRequest} req
+     * @param {function(string, DescribeDirectConnectTunnelExtraResponse):void} cb
+     * @public
+     */
+    DescribeDirectConnectTunnelExtra(req, cb) {
+        let resp = new DescribeDirectConnectTunnelExtraResponse();
+        this.request("DescribeDirectConnectTunnelExtra", req, resp, cb);
     }
 
     /**

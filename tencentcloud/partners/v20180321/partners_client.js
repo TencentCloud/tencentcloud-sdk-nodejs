@@ -25,6 +25,7 @@ const AgentPayDealsRequest = models.AgentPayDealsRequest;
 const DescribeAgentClientGradeResponse = models.DescribeAgentClientGradeResponse;
 const RebateInfoElem = models.RebateInfoElem;
 const DescribeClientBalanceResponse = models.DescribeClientBalanceResponse;
+const DescribeAgentSelfPayDealsResponse = models.DescribeAgentSelfPayDealsResponse;
 const AgentTransferMoneyRequest = models.AgentTransferMoneyRequest;
 const DescribeClientBalanceRequest = models.DescribeClientBalanceRequest;
 const RemovePayRelationForClientResponse = models.RemovePayRelationForClientResponse;
@@ -41,6 +42,7 @@ const DescribeSalesmansResponse = models.DescribeSalesmansResponse;
 const AgentAuditedClient = models.AgentAuditedClient;
 const DescribeAgentPayDealsResponse = models.DescribeAgentPayDealsResponse;
 const DealGoodsPriceElem = models.DealGoodsPriceElem;
+const DescribeAgentSelfPayDealsRequest = models.DescribeAgentSelfPayDealsRequest;
 const ModifyClientRemarkRequest = models.ModifyClientRemarkRequest;
 const CreatePayRelationForClientRequest = models.CreatePayRelationForClientRequest;
 const AgentTransferMoneyResponse = models.AgentTransferMoneyResponse;
@@ -65,6 +67,17 @@ class PartnersClient extends AbstractClient {
         super("partners.tencentcloudapi.com", "2018-03-21", credential, region, profile);
     }
     
+    /**
+     * 可以查询代理商下指定客户的自付订单
+     * @param {DescribeAgentSelfPayDealsRequest} req
+     * @param {function(string, DescribeAgentSelfPayDealsResponse):void} cb
+     * @public
+     */
+    DescribeAgentSelfPayDeals(req, cb) {
+        let resp = new DescribeAgentSelfPayDealsResponse();
+        this.request("DescribeAgentSelfPayDeals", req, resp, cb);
+    }
+
     /**
      * 供超大型代理商（代客数量>=3000 ）拉取缓存的全量客户订单。
      * @param {DescribeAgentDealsCacheRequest} req

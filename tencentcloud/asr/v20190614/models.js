@@ -1628,7 +1628,7 @@ class SentenceDetail extends  AbstractModel {
         this.Words = null;
 
         /**
-         * 单句语速
+         * 单句语速，单位：字数/秒
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */

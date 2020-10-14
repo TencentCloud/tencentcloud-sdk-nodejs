@@ -252,7 +252,7 @@ class InboundPermission extends  AbstractModel {
         this.FromPort = null;
 
         /**
-         * IP 段范围，CIDR 方式划分
+         * IP 段范围，合法的 CIDR 地址类型，如所有IPv4来源：0.0.0.0/0
          * @type {string || null}
          */
         this.IpRange = null;
