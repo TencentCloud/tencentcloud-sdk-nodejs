@@ -82,6 +82,7 @@ module.exports = {
     lp: require("./lp"),
     mariadb: require("./mariadb"),
     memcached: require("./memcached"),
+    mgobe: require("./mgobe"),
     mongodb: require("./mongodb"),
     monitor: require("./monitor"),
     mps: require("./mps"),

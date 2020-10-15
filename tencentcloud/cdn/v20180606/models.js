@@ -1730,24 +1730,61 @@ bandwidth：带宽计费
 }
 
 /**
- * VerifyDomainRecord返回参数结构体
+ * 分路径回源配置规则。
  * @class
  */
-class VerifyDomainRecordResponse extends  AbstractModel {
+class PathRule extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 是否验证成功
+         * 是否是正则匹配。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {boolean || null}
          */
-        this.Result = null;
+        this.Regex = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * URL路径。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.Path = null;
+
+        /**
+         * 路径匹配时的回源源站。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Origin = null;
+
+        /**
+         * 路径匹配时的回源Host头部。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServerName = null;
+
+        /**
+         * 源站所属区域，支持CN，OV。分别表示国内或海外。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.OriginArea = null;
+
+        /**
+         * 路径匹配时的回源URI路径。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ForwardUri = null;
+
+        /**
+         * 路径匹配时的回源头部设置。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<HttpHeaderRule> || null}
+         */
+        this.RequestHeaders = null;
 
     }
 
@@ -1758,8 +1795,21 @@ class VerifyDomainRecordResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Result = 'Result' in params ? params.Result : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.Regex = 'Regex' in params ? params.Regex : null;
+        this.Path = 'Path' in params ? params.Path : null;
+        this.Origin = 'Origin' in params ? params.Origin : null;
+        this.ServerName = 'ServerName' in params ? params.ServerName : null;
+        this.OriginArea = 'OriginArea' in params ? params.OriginArea : null;
+        this.ForwardUri = 'ForwardUri' in params ? params.ForwardUri : null;
+
+        if (params.RequestHeaders) {
+            this.RequestHeaders = new Array();
+            for (let z in params.RequestHeaders) {
+                let obj = new HttpHeaderRule();
+                obj.deserialize(params.RequestHeaders[z]);
+                this.RequestHeaders.push(obj);
+            }
+        }
 
     }
 }
@@ -2266,6 +2316,13 @@ ip：IP 列表作为源站
          */
         this.BasePath = null;
 
+        /**
+         * 分路径回源配置规则
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<PathRule> || null}
+         */
+        this.PathRules = null;
+
     }
 
     /**
@@ -2284,6 +2341,15 @@ ip：IP 列表作为源站
         this.BackupOriginType = 'BackupOriginType' in params ? params.BackupOriginType : null;
         this.BackupServerName = 'BackupServerName' in params ? params.BackupServerName : null;
         this.BasePath = 'BasePath' in params ? params.BasePath : null;
+
+        if (params.PathRules) {
+            this.PathRules = new Array();
+            for (let z in params.PathRules) {
+                let obj = new PathRule();
+                obj.deserialize(params.PathRules[z]);
+                this.PathRules.push(obj);
+            }
+        }
 
     }
 }
@@ -6890,6 +6956,41 @@ avg：平均值
 }
 
 /**
+ * VerifyDomainRecord返回参数结构体
+ * @class
+ */
+class VerifyDomainRecordResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 是否验证成功
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ManageClsTopicDomains请求参数结构体
  * @class
  */
@@ -8536,6 +8637,48 @@ day：天粒度，查询时间区间大于 1 天时，默认返回天粒度活�
         this.Domains = 'Domains' in params ? params.Domains : null;
         this.Project = 'Project' in params ? params.Project : null;
         this.Interval = 'Interval' in params ? params.Interval : null;
+
+    }
+}
+
+/**
+ * http头部设置规则。
+ * @class
+ */
+class HttpHeaderRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * http头部设置方式，支持add，set或del，分别表示新增，设置或删除头部。
+         * @type {string || null}
+         */
+        this.HeaderMode = null;
+
+        /**
+         * http头部名称。
+         * @type {string || null}
+         */
+        this.HeaderName = null;
+
+        /**
+         * http头部值。
+         * @type {string || null}
+         */
+        this.HeaderValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HeaderMode = 'HeaderMode' in params ? params.HeaderMode : null;
+        this.HeaderName = 'HeaderName' in params ? params.HeaderName : null;
+        this.HeaderValue = 'HeaderValue' in params ? params.HeaderValue : null;
 
     }
 }
@@ -12688,7 +12831,7 @@ module.exports = {
     AccessControl: AccessControl,
     DeleteCdnDomainRequest: DeleteCdnDomainRequest,
     DescribePayTypeResponse: DescribePayTypeResponse,
-    VerifyDomainRecordResponse: VerifyDomainRecordResponse,
+    PathRule: PathRule,
     ListTopDataRequest: ListTopDataRequest,
     ListClsTopicDomainsRequest: ListClsTopicDomainsRequest,
     DescribeDomainsResponse: DescribeDomainsResponse,
@@ -12762,6 +12905,7 @@ module.exports = {
     ResponseHeader: ResponseHeader,
     CdnIpHistory: CdnIpHistory,
     SummarizedData: SummarizedData,
+    VerifyDomainRecordResponse: VerifyDomainRecordResponse,
     ManageClsTopicDomainsRequest: ManageClsTopicDomainsRequest,
     Cache: Cache,
     ForceRedirect: ForceRedirect,
@@ -12787,6 +12931,7 @@ module.exports = {
     EnableCachesResponse: EnableCachesResponse,
     RuleQueryString: RuleQueryString,
     DescribeIpVisitRequest: DescribeIpVisitRequest,
+    HttpHeaderRule: HttpHeaderRule,
     StatusCodeCacheRule: StatusCodeCacheRule,
     ClientCert: ClientCert,
     ScdnTopData: ScdnTopData,

@@ -657,6 +657,13 @@ class Internet extends  AbstractModel {
          */
         this.PublicIPAddressSet = null;
 
+        /**
+         * 实例网络相关信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<InstanceNetworkInfo> || null}
+         */
+        this.InstanceNetworkInfoSet = null;
+
     }
 
     /**
@@ -682,6 +689,15 @@ class Internet extends  AbstractModel {
                 let obj = new PublicIPAddressInfo();
                 obj.deserialize(params.PublicIPAddressSet[z]);
                 this.PublicIPAddressSet.push(obj);
+            }
+        }
+
+        if (params.InstanceNetworkInfoSet) {
+            this.InstanceNetworkInfoSet = new Array();
+            for (let z in params.InstanceNetworkInfoSet) {
+                let obj = new InstanceNetworkInfo();
+                obj.deserialize(params.InstanceNetworkInfoSet[z]);
+                this.InstanceNetworkInfoSet.push(obj);
             }
         }
 
@@ -1145,12 +1161,6 @@ class DescribeNetworkInterfacesRequest extends  AbstractModel {
         super();
 
         /**
-         * ECM 地域
-         * @type {string || null}
-         */
-        this.EcmRegion = null;
-
-        /**
          * 弹性网卡实例ID查询。形如：eni-pxir56ns。每次请求的实例的上限为100。参数不支持同时指定NetworkInterfaceIds和Filters。
          * @type {Array.<string> || null}
          */
@@ -1185,6 +1195,12 @@ is-primary - Boolean - 是否必填：否 - （过滤条件）按照是否主网
          */
         this.Limit = null;
 
+        /**
+         * ECM 地域
+         * @type {string || null}
+         */
+        this.EcmRegion = null;
+
     }
 
     /**
@@ -1194,7 +1210,6 @@ is-primary - Boolean - 是否必填：否 - （过滤条件）按照是否主网
         if (!params) {
             return;
         }
-        this.EcmRegion = 'EcmRegion' in params ? params.EcmRegion : null;
         this.NetworkInterfaceIds = 'NetworkInterfaceIds' in params ? params.NetworkInterfaceIds : null;
 
         if (params.Filters) {
@@ -1207,6 +1222,7 @@ is-primary - Boolean - 是否必填：否 - （过滤条件）按照是否主网
         }
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.EcmRegion = 'EcmRegion' in params ? params.EcmRegion : null;
 
     }
 }
@@ -1972,6 +1988,12 @@ DELETING：删除中
          */
         this.EniType = null;
 
+        /**
+         * EcmRegion ecm区域
+         * @type {string || null}
+         */
+        this.EcmRegion = null;
+
     }
 
     /**
@@ -2026,6 +2048,7 @@ DELETING：删除中
             }
         }
         this.EniType = 'EniType' in params ? params.EniType : null;
+        this.EcmRegion = 'EcmRegion' in params ? params.EcmRegion : null;
 
     }
 }
@@ -4532,6 +4555,65 @@ class CreateModuleRequest extends  AbstractModel {
             }
         }
         this.SecurityGroups = 'SecurityGroups' in params ? params.SecurityGroups : null;
+
+    }
+}
+
+/**
+ * 实例网卡ip网络信息数组
+ * @class
+ */
+class InstanceNetworkInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例内外网ip相关信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<AddressInfo> || null}
+         */
+        this.AddressInfoSet = null;
+
+        /**
+         * 网卡ID。
+         * @type {string || null}
+         */
+        this.NetworkInterfaceId = null;
+
+        /**
+         * 网卡名称。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NetworkInterfaceName = null;
+
+        /**
+         * 主网卡属性。true为主网卡，false为辅助网卡。
+         * @type {boolean || null}
+         */
+        this.Primary = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AddressInfoSet) {
+            this.AddressInfoSet = new Array();
+            for (let z in params.AddressInfoSet) {
+                let obj = new AddressInfo();
+                obj.deserialize(params.AddressInfoSet[z]);
+                this.AddressInfoSet.push(obj);
+            }
+        }
+        this.NetworkInterfaceId = 'NetworkInterfaceId' in params ? params.NetworkInterfaceId : null;
+        this.NetworkInterfaceName = 'NetworkInterfaceName' in params ? params.NetworkInterfaceName : null;
+        this.Primary = 'Primary' in params ? params.Primary : null;
 
     }
 }
@@ -7841,6 +7923,13 @@ PROTECTIVELY_ISOLATED：表示被安全隔离的实例。
          */
         this.VirtualPrivateCloud = null;
 
+        /**
+         * 实例运营商字段。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ISP = null;
+
     }
 
     /**
@@ -7927,6 +8016,7 @@ PROTECTIVELY_ISOLATED：表示被安全隔离的实例。
             obj.deserialize(params.VirtualPrivateCloud)
             this.VirtualPrivateCloud = obj;
         }
+        this.ISP = 'ISP' in params ? params.ISP : null;
 
     }
 }
@@ -9440,7 +9530,7 @@ class PublicIPAddressInfo extends  AbstractModel {
         this.ISP = null;
 
         /**
-         * 实例的最大出带宽上限。
+         * 实例的最大出带宽上限，单位为Mbps。
          * @type {number || null}
          */
         this.MaxBandwidthOut = null;
@@ -13206,6 +13296,53 @@ class LoadBalancer extends  AbstractModel {
     }
 }
 
+/**
+ * ip地址相关信息结构体。
+ * @class
+ */
+class AddressInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例的外网ip相关信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {PublicIPAddressInfo || null}
+         */
+        this.PublicIPAddressInfo = null;
+
+        /**
+         * 实例的内网ip相关信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {PrivateIPAddressInfo || null}
+         */
+        this.PrivateIPAddressInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.PublicIPAddressInfo) {
+            let obj = new PublicIPAddressInfo();
+            obj.deserialize(params.PublicIPAddressInfo)
+            this.PublicIPAddressInfo = obj;
+        }
+
+        if (params.PrivateIPAddressInfo) {
+            let obj = new PrivateIPAddressInfo();
+            obj.deserialize(params.PrivateIPAddressInfo)
+            this.PrivateIPAddressInfo = obj;
+        }
+
+    }
+}
+
 module.exports = {
     RunEIPDirectServiceEnabled: RunEIPDirectServiceEnabled,
     DescribeTaskResultResponse: DescribeTaskResultResponse,
@@ -13293,6 +13430,7 @@ module.exports = {
     DescribeTaskStatusResponse: DescribeTaskStatusResponse,
     BatchRegisterTargetsResponse: BatchRegisterTargetsResponse,
     CreateModuleRequest: CreateModuleRequest,
+    InstanceNetworkInfo: InstanceNetworkInfo,
     ModifyInstancesAttributeResponse: ModifyInstancesAttributeResponse,
     ReleaseAddressesResponse: ReleaseAddressesResponse,
     ModifyVpcAttributeRequest: ModifyVpcAttributeRequest,
@@ -13476,5 +13614,6 @@ module.exports = {
     ListenerHealth: ListenerHealth,
     DisassociateSecurityGroupsResponse: DisassociateSecurityGroupsResponse,
     LoadBalancer: LoadBalancer,
+    AddressInfo: AddressInfo,
 
 }

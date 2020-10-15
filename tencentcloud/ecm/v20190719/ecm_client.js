@@ -102,6 +102,7 @@ const AssistantCidr = models.AssistantCidr;
 const DescribeTaskStatusResponse = models.DescribeTaskStatusResponse;
 const BatchRegisterTargetsResponse = models.BatchRegisterTargetsResponse;
 const CreateModuleRequest = models.CreateModuleRequest;
+const InstanceNetworkInfo = models.InstanceNetworkInfo;
 const ModifyInstancesAttributeResponse = models.ModifyInstancesAttributeResponse;
 const ReleaseAddressesResponse = models.ReleaseAddressesResponse;
 const ModifyVpcAttributeRequest = models.ModifyVpcAttributeRequest;
@@ -285,6 +286,7 @@ const TargetHealth = models.TargetHealth;
 const ListenerHealth = models.ListenerHealth;
 const DisassociateSecurityGroupsResponse = models.DisassociateSecurityGroupsResponse;
 const LoadBalancer = models.LoadBalancer;
+const AddressInfo = models.AddressInfo;
 
 
 /**
