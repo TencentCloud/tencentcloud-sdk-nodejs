@@ -19,6 +19,8 @@ const AbstractClient = require('../../common/abstract_client')
 const DescribeImagePersonalResponse = models.DescribeImagePersonalResponse;
 const DescribeUserQuotaPersonalRequest = models.DescribeUserQuotaPersonalRequest;
 const WebhookTarget = models.WebhookTarget;
+const DescribeReplicationInstancesResponse = models.DescribeReplicationInstancesResponse;
+const DescribeReplicationInstanceCreateTasksResponse = models.DescribeReplicationInstanceCreateTasksResponse;
 const WebhookTriggerLog = models.WebhookTriggerLog;
 const ModifyRepositoryResponse = models.ModifyRepositoryResponse;
 const TriggerInvokePara = models.TriggerInvokePara;
@@ -27,6 +29,7 @@ const TriggerLogResp = models.TriggerLogResp;
 const TagInfoResp = models.TagInfoResp;
 const CreateInstanceResponse = models.CreateInstanceResponse;
 const DeleteInstanceTokenRequest = models.DeleteInstanceTokenRequest;
+const TaskDetail = models.TaskDetail;
 const ModifyRepositoryRequest = models.ModifyRepositoryRequest;
 const DescribeWebhookTriggerLogResponse = models.DescribeWebhookTriggerLogResponse;
 const CreateApplicationTriggerPersonalRequest = models.CreateApplicationTriggerPersonalRequest;
@@ -43,6 +46,7 @@ const DescribeApplicationTriggerPersonalRequest = models.DescribeApplicationTrig
 const DeleteNamespacePersonalRequest = models.DeleteNamespacePersonalRequest;
 const NamespaceInfo = models.NamespaceInfo;
 const Limit = models.Limit;
+const DescribeReplicationInstancesRequest = models.DescribeReplicationInstancesRequest;
 const DeleteRepositoryResponse = models.DeleteRepositoryResponse;
 const DeleteImagePersonalResponse = models.DeleteImagePersonalResponse;
 const RegistryCondition = models.RegistryCondition;
@@ -119,6 +123,7 @@ const ValidateRepositoryExistPersonalResponse = models.ValidateRepositoryExistPe
 const NamespaceIsExistsResp = models.NamespaceIsExistsResp;
 const DescribeInstancesRequest = models.DescribeInstancesRequest;
 const Filter = models.Filter;
+const DescribeReplicationInstanceCreateTasksRequest = models.DescribeReplicationInstanceCreateTasksRequest;
 const RepoInfo = models.RepoInfo;
 const ManageImageLifecycleGlobalPersonalRequest = models.ManageImageLifecycleGlobalPersonalRequest;
 const DescribeUserQuotaPersonalResponse = models.DescribeUserQuotaPersonalResponse;
@@ -141,6 +146,7 @@ const ModifyRepositoryAccessPersonalResponse = models.ModifyRepositoryAccessPers
 const ModifyApplicationTriggerPersonalRequest = models.ModifyApplicationTriggerPersonalRequest;
 const CreateInstanceTokenRequest = models.CreateInstanceTokenRequest;
 const ModifyUserPasswordPersonalRequest = models.ModifyUserPasswordPersonalRequest;
+const ReplicationRegistry = models.ReplicationRegistry;
 const ValidateNamespaceExistPersonalResponse = models.ValidateNamespaceExistPersonalResponse;
 const DescribeApplicationTriggerPersonalResp = models.DescribeApplicationTriggerPersonalResp;
 const TagInfo = models.TagInfo;
@@ -532,6 +538,17 @@ class TcrClient extends AbstractClient {
     }
 
     /**
+     * 查询从实例列表
+     * @param {DescribeReplicationInstancesRequest} req
+     * @param {function(string, DescribeReplicationInstancesResponse):void} cb
+     * @public
+     */
+    DescribeReplicationInstances(req, cb) {
+        let resp = new DescribeReplicationInstancesResponse();
+        this.request("DescribeReplicationInstances", req, resp, cb);
+    }
+
+    /**
      * 创建触发器
      * @param {CreateWebhookTriggerRequest} req
      * @param {function(string, CreateWebhookTriggerResponse):void} cb
@@ -584,6 +601,17 @@ class TcrClient extends AbstractClient {
     DeleteWebhookTrigger(req, cb) {
         let resp = new DeleteWebhookTriggerResponse();
         this.request("DeleteWebhookTrigger", req, resp, cb);
+    }
+
+    /**
+     * 查询创建从实例任务状态
+     * @param {DescribeReplicationInstanceCreateTasksRequest} req
+     * @param {function(string, DescribeReplicationInstanceCreateTasksResponse):void} cb
+     * @public
+     */
+    DescribeReplicationInstanceCreateTasks(req, cb) {
+        let resp = new DescribeReplicationInstanceCreateTasksResponse();
+        this.request("DescribeReplicationInstanceCreateTasks", req, resp, cb);
     }
 
     /**

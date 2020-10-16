@@ -16,27 +16,37 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const CheckDomainResponse = models.CheckDomainResponse;
-const BatchStatus = models.BatchStatus;
-const DomainList = models.DomainList;
-const DescribeDomainPriceListRequest = models.DescribeDomainPriceListRequest;
-const DescribeDomainBaseInfoResponse = models.DescribeDomainBaseInfoResponse;
+const BatchModifyDomainInfoRequest = models.BatchModifyDomainInfoRequest;
 const TemplateInfo = models.TemplateInfo;
-const CreateDomainBatchRequest = models.CreateDomainBatchRequest;
-const CheckBatchStatusRequest = models.CheckBatchStatusRequest;
-const CheckBatchStatusResponse = models.CheckBatchStatusResponse;
-const DescribeTemplateListResponse = models.DescribeTemplateListResponse;
-const DescribeDomainBaseInfoRequest = models.DescribeDomainBaseInfoRequest;
-const DescribeTemplateListRequest = models.DescribeTemplateListRequest;
+const UpdateProhibitionBatchRequest = models.UpdateProhibitionBatchRequest;
 const CreateDomainBatchResponse = models.CreateDomainBatchResponse;
-const DomainBaseInfo = models.DomainBaseInfo;
+const TransferInDomainBatchResponse = models.TransferInDomainBatchResponse;
+const UpdateProhibitionBatchResponse = models.UpdateProhibitionBatchResponse;
+const CheckDomainResponse = models.CheckDomainResponse;
 const PriceInfo = models.PriceInfo;
-const DescribeDomainNameListRequest = models.DescribeDomainNameListRequest;
+const BatchModifyDomainInfoResponse = models.BatchModifyDomainInfoResponse;
+const DescribeDomainBaseInfoResponse = models.DescribeDomainBaseInfoResponse;
+const DescribeTemplateListResponse = models.DescribeTemplateListResponse;
+const TransferProhibitionBatchRequest = models.TransferProhibitionBatchRequest;
 const DescribeDomainNameListResponse = models.DescribeDomainNameListResponse;
 const ContactInfo = models.ContactInfo;
 const DescribeDomainPriceListResponse = models.DescribeDomainPriceListResponse;
-const CheckDomainRequest = models.CheckDomainRequest;
 const CertificateInfo = models.CertificateInfo;
+const CheckBatchStatusRequest = models.CheckBatchStatusRequest;
+const TransferInDomainBatchRequest = models.TransferInDomainBatchRequest;
+const BatchStatus = models.BatchStatus;
+const DomainList = models.DomainList;
+const DescribeDomainPriceListRequest = models.DescribeDomainPriceListRequest;
+const CreateDomainBatchRequest = models.CreateDomainBatchRequest;
+const DescribeDomainBaseInfoRequest = models.DescribeDomainBaseInfoRequest;
+const DomainBaseInfo = models.DomainBaseInfo;
+const DescribeDomainNameListRequest = models.DescribeDomainNameListRequest;
+const CheckDomainRequest = models.CheckDomainRequest;
+const TransferProhibitionBatchResponse = models.TransferProhibitionBatchResponse;
+const ModifyDomainOwnerBatchRequest = models.ModifyDomainOwnerBatchRequest;
+const CheckBatchStatusResponse = models.CheckBatchStatusResponse;
+const DescribeTemplateListRequest = models.DescribeTemplateListRequest;
+const ModifyDomainOwnerBatchResponse = models.ModifyDomainOwnerBatchResponse;
 
 
 /**
@@ -61,6 +71,32 @@ class DomainClient extends AbstractClient {
     DescribeDomainNameList(req, cb) {
         let resp = new DescribeDomainNameListResponse();
         this.request("DescribeDomainNameList", req, resp, cb);
+    }
+
+    /**
+     * 本接口 ( TransferInDomainBatch ) 用于批量禁止域名转移 。
+
+默认接口请求频率限制：20次/秒。
+     * @param {TransferProhibitionBatchRequest} req
+     * @param {function(string, TransferProhibitionBatchResponse):void} cb
+     * @public
+     */
+    TransferProhibitionBatch(req, cb) {
+        let resp = new TransferProhibitionBatchResponse();
+        this.request("TransferProhibitionBatch", req, resp, cb);
+    }
+
+    /**
+     * 本接口 ( ModifyDomainOwnerBatch) 用于域名批量账号间转移 。
+
+默认接口请求频率限制：20次/秒。
+     * @param {ModifyDomainOwnerBatchRequest} req
+     * @param {function(string, ModifyDomainOwnerBatchResponse):void} cb
+     * @public
+     */
+    ModifyDomainOwnerBatch(req, cb) {
+        let resp = new ModifyDomainOwnerBatchResponse();
+        this.request("ModifyDomainOwnerBatch", req, resp, cb);
     }
 
     /**
@@ -105,6 +141,19 @@ class DomainClient extends AbstractClient {
     }
 
     /**
+     * 本接口 ( BatchModifyDomainInfo ) 用于批量域名信息修改 。
+
+默认接口请求频率限制：20次/秒。
+     * @param {BatchModifyDomainInfoRequest} req
+     * @param {function(string, BatchModifyDomainInfoResponse):void} cb
+     * @public
+     */
+    BatchModifyDomainInfo(req, cb) {
+        let resp = new BatchModifyDomainInfoResponse();
+        this.request("BatchModifyDomainInfo", req, resp, cb);
+    }
+
+    /**
      * 按照域名后缀获取对应的价格列表
      * @param {DescribeDomainPriceListRequest} req
      * @param {function(string, DescribeDomainPriceListResponse):void} cb
@@ -137,6 +186,32 @@ class DomainClient extends AbstractClient {
     CheckDomain(req, cb) {
         let resp = new CheckDomainResponse();
         this.request("CheckDomain", req, resp, cb);
+    }
+
+    /**
+     * 本接口 ( TransferInDomainBatch ) 用于批量转入域名 。
+
+默认接口请求频率限制：20次/秒。
+     * @param {TransferInDomainBatchRequest} req
+     * @param {function(string, TransferInDomainBatchResponse):void} cb
+     * @public
+     */
+    TransferInDomainBatch(req, cb) {
+        let resp = new TransferInDomainBatchResponse();
+        this.request("TransferInDomainBatch", req, resp, cb);
+    }
+
+    /**
+     * 本接口 ( UpdateProhibitionBatch ) 用于批量设置禁止域名更新 。
+
+默认接口请求频率限制：20次/秒。
+     * @param {UpdateProhibitionBatchRequest} req
+     * @param {function(string, UpdateProhibitionBatchResponse):void} cb
+     * @public
+     */
+    UpdateProhibitionBatch(req, cb) {
+        let resp = new UpdateProhibitionBatchResponse();
+        this.request("UpdateProhibitionBatch", req, resp, cb);
     }
 
 

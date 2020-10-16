@@ -949,7 +949,7 @@ class DescribeResourceTagsByResourceIdsRequest extends  AbstractModel {
         this.ResourcePrefix = null;
 
         /**
-         * 资源唯一标记
+         * 资源ID数组，大小不超过50
          * @type {Array.<string> || null}
          */
         this.ResourceIds = null;
@@ -2285,7 +2285,7 @@ class DescribeResourceTagsRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 是否是Cos的资源id
+         * 是否是cos的资源（0或者1），输入的ResourceId为cos资源时必填
          * @type {number || null}
          */
         this.CosResourceId = null;

@@ -33,7 +33,7 @@ const StopEcdnDomainRequest = models.StopEcdnDomainRequest;
 const Sort = models.Sort;
 const IpFreqLimit = models.IpFreqLimit;
 const DescribePurgeTasksRequest = models.DescribePurgeTasksRequest;
-const DomainFilter = models.DomainFilter;
+const DescribeEcdnStatisticsResponse = models.DescribeEcdnStatisticsResponse;
 const DomainLogs = models.DomainLogs;
 const Hsts = models.Hsts;
 const HttpHeaderPathRule = models.HttpHeaderPathRule;
@@ -58,16 +58,19 @@ const DescribeDomainsResponse = models.DescribeDomainsResponse;
 const DeleteEcdnDomainRequest = models.DeleteEcdnDomainRequest;
 const DescribePurgeTasksResponse = models.DescribePurgeTasksResponse;
 const AddEcdnDomainResponse = models.AddEcdnDomainResponse;
+const IpStatus = models.IpStatus;
 const PurgeTask = models.PurgeTask;
 const CacheRule = models.CacheRule;
-const DescribeEcdnStatisticsResponse = models.DescribeEcdnStatisticsResponse;
+const DescribeIpStatusResponse = models.DescribeIpStatusResponse;
 const Origin = models.Origin;
 const ServerCert = models.ServerCert;
 const CacheKey = models.CacheKey;
+const DomainFilter = models.DomainFilter;
 const DescribeEcdnDomainStatisticsRequest = models.DescribeEcdnDomainStatisticsRequest;
 const Quota = models.Quota;
 const DescribeEcdnDomainLogsRequest = models.DescribeEcdnDomainLogsRequest;
 const DomainDetailInfo = models.DomainDetailInfo;
+const DescribeIpStatusRequest = models.DescribeIpStatusRequest;
 const DescribeDomainsRequest = models.DescribeDomainsRequest;
 
 
@@ -90,6 +93,17 @@ class EcdnClient extends AbstractClient {
     AddEcdnDomain(req, cb) {
         let resp = new AddEcdnDomainResponse();
         this.request("AddEcdnDomain", req, resp, cb);
+    }
+
+    /**
+     * DescribeIpStatus 用于查询域名所在加速平台的所有节点明细。
+     * @param {DescribeIpStatusRequest} req
+     * @param {function(string, DescribeIpStatusResponse):void} cb
+     * @public
+     */
+    DescribeIpStatus(req, cb) {
+        let resp = new DescribeIpStatusResponse();
+        this.request("DescribeIpStatus", req, resp, cb);
     }
 
     /**

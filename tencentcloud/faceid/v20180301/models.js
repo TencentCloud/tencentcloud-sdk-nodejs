@@ -111,6 +111,69 @@ class GetDetectInfoEnhancedRequest extends  AbstractModel {
 }
 
 /**
+ * GetFaceIdToken请求参数结构体
+ * @class
+ */
+class GetFaceIdTokenRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 本地上传照片(LOCAL)、商业库(BUSINESS)
+         * @type {string || null}
+         */
+        this.CompareLib = null;
+
+        /**
+         * CompareLib为商业库时必传。
+         * @type {string || null}
+         */
+        this.IdCard = null;
+
+        /**
+         * CompareLib为商业库库时必传。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * CompareLib为上传照片比对时必传，base64后图片最大8MB。
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * SDK中生成的Meta字符串
+         * @type {string || null}
+         */
+        this.Meta = null;
+
+        /**
+         * 透传参数 1000长度字符串
+         * @type {string || null}
+         */
+        this.Extra = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CompareLib = 'CompareLib' in params ? params.CompareLib : null;
+        this.IdCard = 'IdCard' in params ? params.IdCard : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.Meta = 'Meta' in params ? params.Meta : null;
+        this.Extra = 'Extra' in params ? params.Extra : null;
+
+    }
+}
+
+/**
  * Liveness请求参数结构体
  * @class
  */
@@ -1134,18 +1197,24 @@ LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模�
 }
 
 /**
- * MobileNetworkTimeVerification请求参数结构体
+ * GetFaceIdToken返回参数结构体
  * @class
  */
-class MobileNetworkTimeVerificationRequest extends  AbstractModel {
+class GetFaceIdTokenResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 手机号码
+         * 有效期 10分钟。只能完成1次核身。
          * @type {string || null}
          */
-        this.Mobile = null;
+        this.FaceIdToken = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -1156,7 +1225,8 @@ class MobileNetworkTimeVerificationRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Mobile = 'Mobile' in params ? params.Mobile : null;
+        this.FaceIdToken = 'FaceIdToken' in params ? params.FaceIdToken : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1940,6 +2010,76 @@ class BankCard4EVerificationRequest extends  AbstractModel {
 }
 
 /**
+ * MobileNetworkTimeVerification请求参数结构体
+ * @class
+ */
+class MobileNetworkTimeVerificationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 手机号码
+         * @type {string || null}
+         */
+        this.Mobile = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Mobile = 'Mobile' in params ? params.Mobile : null;
+
+    }
+}
+
+/**
+ * GetFaceIdResult请求参数结构体
+ * @class
+ */
+class GetFaceIdResultRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * SDK人脸核身流程的标识，调用GetFaceIdToken接口时生成。
+         * @type {string || null}
+         */
+        this.FaceIdToken = null;
+
+        /**
+         * 是否需要拉取视频，默认false不需要
+         * @type {boolean || null}
+         */
+        this.IsNeedVideo = null;
+
+        /**
+         * 是否需要拉取截帧，默认false不需要
+         * @type {boolean || null}
+         */
+        this.IsNeedBestFrame = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FaceIdToken = 'FaceIdToken' in params ? params.FaceIdToken : null;
+        this.IsNeedVideo = 'IsNeedVideo' in params ? params.IsNeedVideo : null;
+        this.IsNeedBestFrame = 'IsNeedBestFrame' in params ? params.IsNeedBestFrame : null;
+
+    }
+}
+
+/**
  * GetActionSequence返回参数结构体
  * @class
  */
@@ -2684,9 +2824,97 @@ class DetectDetail extends  AbstractModel {
     }
 }
 
+/**
+ * GetFaceIdResult返回参数结构体
+ * @class
+ */
+class GetFaceIdResultResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 身份证
+         * @type {string || null}
+         */
+        this.IdCard = null;
+
+        /**
+         * 姓名
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 业务核验结果，如下几个结果码会计费
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 业务核验描述
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 相似度，0-100，数值越大相似度越高
+         * @type {number || null}
+         */
+        this.Similarity = null;
+
+        /**
+         * 用户核验的视频
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VideoBase64 = null;
+
+        /**
+         * 用户核验视频的截帧
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.BestFrameBase64 = null;
+
+        /**
+         * 获取token时透传的信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Extra = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IdCard = 'IdCard' in params ? params.IdCard : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Result = 'Result' in params ? params.Result : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.Similarity = 'Similarity' in params ? params.Similarity : null;
+        this.VideoBase64 = 'VideoBase64' in params ? params.VideoBase64 : null;
+        this.BestFrameBase64 = 'BestFrameBase64' in params ? params.BestFrameBase64 : null;
+        this.Extra = 'Extra' in params ? params.Extra : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
 module.exports = {
     DetectInfoVideoData: DetectInfoVideoData,
     GetDetectInfoEnhancedRequest: GetDetectInfoEnhancedRequest,
+    GetFaceIdTokenRequest: GetFaceIdTokenRequest,
     LivenessRequest: LivenessRequest,
     CheckBankCardInformationRequest: CheckBankCardInformationRequest,
     MobileNetworkTimeVerificationResponse: MobileNetworkTimeVerificationResponse,
@@ -2706,7 +2934,7 @@ module.exports = {
     LivenessRecognitionResponse: LivenessRecognitionResponse,
     BankCard2EVerificationRequest: BankCard2EVerificationRequest,
     LivenessRecognitionRequest: LivenessRecognitionRequest,
-    MobileNetworkTimeVerificationRequest: MobileNetworkTimeVerificationRequest,
+    GetFaceIdTokenResponse: GetFaceIdTokenResponse,
     IdCardOCRVerificationResponse: IdCardOCRVerificationResponse,
     MobileStatusResponse: MobileStatusResponse,
     LivenessResponse: LivenessResponse,
@@ -2717,6 +2945,8 @@ module.exports = {
     BankCardVerificationResponse: BankCardVerificationResponse,
     ImageRecognitionRequest: ImageRecognitionRequest,
     BankCard4EVerificationRequest: BankCard4EVerificationRequest,
+    MobileNetworkTimeVerificationRequest: MobileNetworkTimeVerificationRequest,
+    GetFaceIdResultRequest: GetFaceIdResultRequest,
     GetActionSequenceResponse: GetActionSequenceResponse,
     MinorsVerificationRequest: MinorsVerificationRequest,
     ImageRecognitionResponse: ImageRecognitionResponse,
@@ -2730,5 +2960,6 @@ module.exports = {
     DetectInfoIdCardData: DetectInfoIdCardData,
     LivenessCompareRequest: LivenessCompareRequest,
     DetectDetail: DetectDetail,
+    GetFaceIdResultResponse: GetFaceIdResultResponse,
 
 }

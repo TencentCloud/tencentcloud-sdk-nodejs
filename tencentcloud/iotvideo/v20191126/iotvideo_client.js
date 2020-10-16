@@ -21,12 +21,14 @@ const CreateGencodeResponse = models.CreateGencodeResponse;
 const DescribeLogsRequest = models.DescribeLogsRequest;
 const CreateIotDataTypeRequest = models.CreateIotDataTypeRequest;
 const DescribePubVersionsRequest = models.DescribePubVersionsRequest;
+const RefundStorageServiceResponse = models.RefundStorageServiceResponse;
 const DescribeIotModelResponse = models.DescribeIotModelResponse;
 const DisableDeviceResponse = models.DisableDeviceResponse;
 const DescribeRunLogRequest = models.DescribeRunLogRequest;
 const DescribeProductsRequest = models.DescribeProductsRequest;
 const DeleteTraceIdsRequest = models.DeleteTraceIdsRequest;
 const IotModelData = models.IotModelData;
+const CreateStorageServiceRequest = models.CreateStorageServiceRequest;
 const DescribeDevicesResponse = models.DescribeDevicesResponse;
 const ModifyProductResponse = models.ModifyProductResponse;
 const ModifyProductRequest = models.ModifyProductRequest;
@@ -35,17 +37,18 @@ const CreateIotModelRequest = models.CreateIotModelRequest;
 const DescribeTraceStatusResponse = models.DescribeTraceStatusResponse;
 const CreateUploadPathRequest = models.CreateUploadPathRequest;
 const CreateDevTokenRequest = models.CreateDevTokenRequest;
+const DescribeStorageServiceResponse = models.DescribeStorageServiceResponse;
 const DeleteIotDataTypeRequest = models.DeleteIotDataTypeRequest;
 const DescribeMessageQueueRequest = models.DescribeMessageQueueRequest;
 const DeleteAppUsrResponse = models.DeleteAppUsrResponse;
 const DescribeRegistrationStatusResponse = models.DescribeRegistrationStatusResponse;
 const DescribeProductRequest = models.DescribeProductRequest;
 const DescribeProductsResponse = models.DescribeProductsResponse;
-const CreateAppUsrRequest = models.CreateAppUsrRequest;
 const DeviceCertificate = models.DeviceCertificate;
 const UpgradeDeviceRequest = models.UpgradeDeviceRequest;
 const LogData = models.LogData;
 const DescribeModelDataRetResponse = models.DescribeModelDataRetResponse;
+const CreateDevTokenResponse = models.CreateDevTokenResponse;
 const RunIotModelResponse = models.RunIotModelResponse;
 const RunIotModelRequest = models.RunIotModelRequest;
 const OtaPubHistory = models.OtaPubHistory;
@@ -60,7 +63,7 @@ const ProductData = models.ProductData;
 const CreateBindingRequest = models.CreateBindingRequest;
 const DeleteDeviceRequest = models.DeleteDeviceRequest;
 const TraceStatus = models.TraceStatus;
-const CreateDevTokenResponse = models.CreateDevTokenResponse;
+const CreateAppUsrRequest = models.CreateAppUsrRequest;
 const ModifyDevicePropertyRequest = models.ModifyDevicePropertyRequest;
 const RunDeviceStreamRequest = models.RunDeviceStreamRequest;
 const RunDeviceResponse = models.RunDeviceResponse;
@@ -72,6 +75,7 @@ const CreateTraceIdsRequest = models.CreateTraceIdsRequest;
 const DeleteMessageQueueResponse = models.DeleteMessageQueueResponse;
 const DescribeOtaVersionsRequest = models.DescribeOtaVersionsRequest;
 const DescribeTraceIdsResponse = models.DescribeTraceIdsResponse;
+const ClearDeviceActiveCodeResponse = models.ClearDeviceActiveCodeResponse;
 const CreateProductResponse = models.CreateProductResponse;
 const DescribeRegistrationStatusRequest = models.DescribeRegistrationStatusRequest;
 const CreateStorageRequest = models.CreateStorageRequest;
@@ -94,10 +98,12 @@ const DeleteProductResponse = models.DeleteProductResponse;
 const RunOtaVersionRequest = models.RunOtaVersionRequest;
 const CreateDevicesResponse = models.CreateDevicesResponse;
 const DeviceModelData = models.DeviceModelData;
+const CreateStorageServiceResponse = models.CreateStorageServiceResponse;
 const DescribeIotDataTypeRequest = models.DescribeIotDataTypeRequest;
 const SendOnlineMsgRequest = models.SendOnlineMsgRequest;
 const DescribeDeviceRequest = models.DescribeDeviceRequest;
 const DescribeRunLogResponse = models.DescribeRunLogResponse;
+const DeliverStorageServiceResponse = models.DeliverStorageServiceResponse;
 const DescribeIotModelRequest = models.DescribeIotModelRequest;
 const DescribeTraceIdsRequest = models.DescribeTraceIdsRequest;
 const CreateAppUsrResponse = models.CreateAppUsrResponse;
@@ -106,15 +112,20 @@ const DeleteMessageQueueRequest = models.DeleteMessageQueueRequest;
 const CreateUsrTokenRequest = models.CreateUsrTokenRequest;
 const RunDeviceRequest = models.RunDeviceRequest;
 const DescribeDeviceModelResponse = models.DescribeDeviceModelResponse;
+const DescribeStorageServiceRequest = models.DescribeStorageServiceRequest;
 const ProductBase = models.ProductBase;
 const CreateGencodeRequest = models.CreateGencodeRequest;
 const DescribePubVersionsResponse = models.DescribePubVersionsResponse;
+const ClearDeviceActiveCodeRequest = models.ClearDeviceActiveCodeRequest;
 const ModifyDeviceActionRequest = models.ModifyDeviceActionRequest;
 const CreateIotModelResponse = models.CreateIotModelResponse;
 const BindDevInfo = models.BindDevInfo;
 const DescribeBindDevRequest = models.DescribeBindDevRequest;
+const StorageOrder = models.StorageOrder;
 const MsgQueueData = models.MsgQueueData;
 const RegisteredStatus = models.RegisteredStatus;
+const CreateAnonymousAccessTokenRequest = models.CreateAnonymousAccessTokenRequest;
+const DeliverStorageServiceRequest = models.DeliverStorageServiceRequest;
 const RunDeviceStreamResponse = models.RunDeviceStreamResponse;
 const RunOtaVersionResponse = models.RunOtaVersionResponse;
 const DescribeDeviceModelRequest = models.DescribeDeviceModelRequest;
@@ -126,6 +137,7 @@ const CreateDevicesRequest = models.CreateDevicesRequest;
 const DisableDeviceRequest = models.DisableDeviceRequest;
 const DisableOtaVersionRequest = models.DisableOtaVersionRequest;
 const DescribeProductResponse = models.DescribeProductResponse;
+const CreateAnonymousAccessTokenResponse = models.CreateAnonymousAccessTokenResponse;
 const DescribeBindUsrRequest = models.DescribeBindUsrRequest;
 const SendOnlineMsgResponse = models.SendOnlineMsgResponse;
 const DeleteAppUsrRequest = models.DeleteAppUsrRequest;
@@ -135,6 +147,7 @@ const DescribeDevicesRequest = models.DescribeDevicesRequest;
 const CreateIotDataTypeResponse = models.CreateIotDataTypeResponse;
 const ModifyDevicePropertyResponse = models.ModifyDevicePropertyResponse;
 const DeleteBindingResponse = models.DeleteBindingResponse;
+const RefundStorageServiceRequest = models.RefundStorageServiceRequest;
 const CreateStorageResponse = models.CreateStorageResponse;
 const DisableDeviceStreamResponse = models.DisableDeviceStreamResponse;
 const DeleteDeviceResponse = models.DeleteDeviceResponse;
@@ -175,14 +188,14 @@ class IotvideoClient extends AbstractClient {
     }
 
     /**
-     * 本接口（CreateGencode）用于生成设备物模型源代码
-     * @param {CreateGencodeRequest} req
-     * @param {function(string, CreateGencodeResponse):void} cb
+     * 清除设备激活码
+     * @param {ClearDeviceActiveCodeRequest} req
+     * @param {function(string, ClearDeviceActiveCodeResponse):void} cb
      * @public
      */
-    CreateGencode(req, cb) {
-        let resp = new CreateGencodeResponse();
-        this.request("CreateGencode", req, resp, cb);
+    ClearDeviceActiveCode(req, cb) {
+        let resp = new ClearDeviceActiveCodeResponse();
+        this.request("ClearDeviceActiveCode", req, resp, cb);
     }
 
     /**
@@ -313,6 +326,17 @@ class IotvideoClient extends AbstractClient {
     CreateIotDataType(req, cb) {
         let resp = new CreateIotDataTypeResponse();
         this.request("CreateIotDataType", req, resp, cb);
+    }
+
+    /**
+     * 创建匿名访问Token
+     * @param {CreateAnonymousAccessTokenRequest} req
+     * @param {function(string, CreateAnonymousAccessTokenResponse):void} cb
+     * @public
+     */
+    CreateAnonymousAccessToken(req, cb) {
+        let resp = new CreateAnonymousAccessTokenResponse();
+        this.request("CreateAnonymousAccessToken", req, resp, cb);
     }
 
     /**
@@ -499,6 +523,28 @@ class IotvideoClient extends AbstractClient {
     }
 
     /**
+     * 购买云存服务
+     * @param {CreateStorageServiceRequest} req
+     * @param {function(string, CreateStorageServiceResponse):void} cb
+     * @public
+     */
+    CreateStorageService(req, cb) {
+        let resp = new CreateStorageServiceResponse();
+        this.request("CreateStorageService", req, resp, cb);
+    }
+
+    /**
+     * 本接口（SetMessageQueue）用于配置物联网智能视频产品的转发消息队列。
+     * @param {SetMessageQueueRequest} req
+     * @param {function(string, SetMessageQueueResponse):void} cb
+     * @public
+     */
+    SetMessageQueue(req, cb) {
+        let resp = new SetMessageQueueResponse();
+        this.request("SetMessageQueue", req, resp, cb);
+    }
+
+    /**
      * 本接口（DeleteDevice）用于删除设备，可进行批量操作，每次操作最多100台设备。
      * @param {DeleteDeviceRequest} req
      * @param {function(string, DeleteDeviceResponse):void} cb
@@ -529,6 +575,17 @@ class IotvideoClient extends AbstractClient {
     DeleteProduct(req, cb) {
         let resp = new DeleteProductResponse();
         this.request("DeleteProduct", req, resp, cb);
+    }
+
+    /**
+     * 将已购买的云存服务转移到另一设备
+     * @param {DeliverStorageServiceRequest} req
+     * @param {function(string, DeliverStorageServiceResponse):void} cb
+     * @public
+     */
+    DeliverStorageService(req, cb) {
+        let resp = new DeliverStorageServiceResponse();
+        this.request("DeliverStorageService", req, resp, cb);
     }
 
     /**
@@ -565,14 +622,25 @@ class IotvideoClient extends AbstractClient {
     }
 
     /**
-     * 本接口（SetMessageQueue）用于配置物联网智能视频产品的转发消息队列。
-     * @param {SetMessageQueueRequest} req
-     * @param {function(string, SetMessageQueueResponse):void} cb
+     * 本接口（DescribeBindDev）用于查询终端用户绑定的设备列表。
+     * @param {DescribeBindDevRequest} req
+     * @param {function(string, DescribeBindDevResponse):void} cb
      * @public
      */
-    SetMessageQueue(req, cb) {
-        let resp = new SetMessageQueueResponse();
-        this.request("SetMessageQueue", req, resp, cb);
+    DescribeBindDev(req, cb) {
+        let resp = new DescribeBindDevResponse();
+        this.request("DescribeBindDev", req, resp, cb);
+    }
+
+    /**
+     * 查询云存服务
+     * @param {DescribeStorageServiceRequest} req
+     * @param {function(string, DescribeStorageServiceResponse):void} cb
+     * @public
+     */
+    DescribeStorageService(req, cb) {
+        let resp = new DescribeStorageServiceResponse();
+        this.request("DescribeStorageService", req, resp, cb);
     }
 
     /**
@@ -631,6 +699,17 @@ class IotvideoClient extends AbstractClient {
     }
 
     /**
+     * 退订已购买的云存服务
+     * @param {RefundStorageServiceRequest} req
+     * @param {function(string, RefundStorageServiceResponse):void} cb
+     * @public
+     */
+    RefundStorageService(req, cb) {
+        let resp = new RefundStorageServiceResponse();
+        this.request("RefundStorageService", req, resp, cb);
+    }
+
+    /**
      * 本接口（DescribeDevices）用于获取设备信息列表。
      * @param {DescribeDevicesRequest} req
      * @param {function(string, DescribeDevicesResponse):void} cb
@@ -642,14 +721,14 @@ class IotvideoClient extends AbstractClient {
     }
 
     /**
-     * 本接口（DescribeBindDev）用于查询终端用户绑定的设备列表。
-     * @param {DescribeBindDevRequest} req
-     * @param {function(string, DescribeBindDevResponse):void} cb
+     * 本接口（CreateGencode）用于生成设备物模型源代码
+     * @param {CreateGencodeRequest} req
+     * @param {function(string, CreateGencodeResponse):void} cb
      * @public
      */
-    DescribeBindDev(req, cb) {
-        let resp = new DescribeBindDevResponse();
-        this.request("DescribeBindDev", req, resp, cb);
+    CreateGencode(req, cb) {
+        let resp = new CreateGencodeResponse();
+        this.request("CreateGencode", req, resp, cb);
     }
 
     /**

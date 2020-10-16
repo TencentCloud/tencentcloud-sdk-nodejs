@@ -121,6 +121,107 @@ class WebhookTarget extends  AbstractModel {
 }
 
 /**
+ * DescribeReplicationInstances返回参数结构体
+ * @class
+ */
+class DescribeReplicationInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总实例个数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 同步实例列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ReplicationRegistry> || null}
+         */
+        this.ReplicationRegistries = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.ReplicationRegistries) {
+            this.ReplicationRegistries = new Array();
+            for (let z in params.ReplicationRegistries) {
+                let obj = new ReplicationRegistry();
+                obj.deserialize(params.ReplicationRegistries[z]);
+                this.ReplicationRegistries.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeReplicationInstanceCreateTasks返回参数结构体
+ * @class
+ */
+class DescribeReplicationInstanceCreateTasksResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务详情
+         * @type {Array.<TaskDetail> || null}
+         */
+        this.TaskDetail = null;
+
+        /**
+         * 整体任务状态
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TaskDetail) {
+            this.TaskDetail = new Array();
+            for (let z in params.TaskDetail) {
+                let obj = new TaskDetail();
+                obj.deserialize(params.TaskDetail[z]);
+                this.TaskDetail.push(obj);
+            }
+        }
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 触发器日志
  * @class
  */
@@ -575,6 +676,71 @@ class DeleteInstanceTokenRequest extends  AbstractModel {
         }
         this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
         this.TokenId = 'TokenId' in params ? params.TokenId : null;
+
+    }
+}
+
+/**
+ * 任务详情
+ * @class
+ */
+class TaskDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务
+         * @type {string || null}
+         */
+        this.TaskName = null;
+
+        /**
+         * 任务UUID
+         * @type {string || null}
+         */
+        this.TaskUUID = null;
+
+        /**
+         * 任务状态
+         * @type {string || null}
+         */
+        this.TaskStatus = null;
+
+        /**
+         * 任务的状态信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TaskMessage = null;
+
+        /**
+         * 任务开始时间
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * 任务结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.FinishedTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskName = 'TaskName' in params ? params.TaskName : null;
+        this.TaskUUID = 'TaskUUID' in params ? params.TaskUUID : null;
+        this.TaskStatus = 'TaskStatus' in params ? params.TaskStatus : null;
+        this.TaskMessage = 'TaskMessage' in params ? params.TaskMessage : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.FinishedTime = 'FinishedTime' in params ? params.FinishedTime : null;
 
     }
 }
@@ -1376,6 +1542,48 @@ class Limit extends  AbstractModel {
         this.Username = 'Username' in params ? params.Username : null;
         this.Type = 'Type' in params ? params.Type : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * DescribeReplicationInstances请求参数结构体
+ * @class
+ */
+class DescribeReplicationInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例Id
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+        /**
+         * 偏移量,默认0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 最大输出条数，默认20，最大为100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -4359,6 +4567,41 @@ class Filter extends  AbstractModel {
 }
 
 /**
+ * DescribeReplicationInstanceCreateTasks请求参数结构体
+ * @class
+ */
+class DescribeReplicationInstanceCreateTasksRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 同步实例Id
+         * @type {string || null}
+         */
+        this.ReplicationRegistryId = null;
+
+        /**
+         * 同步实例的地域ID
+         * @type {number || null}
+         */
+        this.ReplicationRegionId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReplicationRegistryId = 'ReplicationRegistryId' in params ? params.ReplicationRegistryId : null;
+        this.ReplicationRegionId = 'ReplicationRegionId' in params ? params.ReplicationRegionId : null;
+
+    }
+}
+
+/**
  * 仓库的信息
  * @class
  */
@@ -5324,6 +5567,69 @@ class ModifyUserPasswordPersonalRequest extends  AbstractModel {
             return;
         }
         this.Password = 'Password' in params ? params.Password : null;
+
+    }
+}
+
+/**
+ * 企业版复制实例
+ * @class
+ */
+class ReplicationRegistry extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 主实例ID
+         * @type {string || null}
+         */
+        this.RegistryId = null;
+
+        /**
+         * 复制实例ID
+         * @type {string || null}
+         */
+        this.ReplicationRegistryId = null;
+
+        /**
+         * 复制实例的地域ID
+         * @type {number || null}
+         */
+        this.ReplicationRegionId = null;
+
+        /**
+         * 复制实例的地域名称
+         * @type {string || null}
+         */
+        this.ReplicationRegionName = null;
+
+        /**
+         * 复制实例的状态
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreatedAt = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RegistryId = 'RegistryId' in params ? params.RegistryId : null;
+        this.ReplicationRegistryId = 'ReplicationRegistryId' in params ? params.ReplicationRegistryId : null;
+        this.ReplicationRegionId = 'ReplicationRegionId' in params ? params.ReplicationRegionId : null;
+        this.ReplicationRegionName = 'ReplicationRegionName' in params ? params.ReplicationRegionName : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreatedAt = 'CreatedAt' in params ? params.CreatedAt : null;
 
     }
 }
@@ -6557,6 +6863,8 @@ module.exports = {
     DescribeImagePersonalResponse: DescribeImagePersonalResponse,
     DescribeUserQuotaPersonalRequest: DescribeUserQuotaPersonalRequest,
     WebhookTarget: WebhookTarget,
+    DescribeReplicationInstancesResponse: DescribeReplicationInstancesResponse,
+    DescribeReplicationInstanceCreateTasksResponse: DescribeReplicationInstanceCreateTasksResponse,
     WebhookTriggerLog: WebhookTriggerLog,
     ModifyRepositoryResponse: ModifyRepositoryResponse,
     TriggerInvokePara: TriggerInvokePara,
@@ -6565,6 +6873,7 @@ module.exports = {
     TagInfoResp: TagInfoResp,
     CreateInstanceResponse: CreateInstanceResponse,
     DeleteInstanceTokenRequest: DeleteInstanceTokenRequest,
+    TaskDetail: TaskDetail,
     ModifyRepositoryRequest: ModifyRepositoryRequest,
     DescribeWebhookTriggerLogResponse: DescribeWebhookTriggerLogResponse,
     CreateApplicationTriggerPersonalRequest: CreateApplicationTriggerPersonalRequest,
@@ -6581,6 +6890,7 @@ module.exports = {
     DeleteNamespacePersonalRequest: DeleteNamespacePersonalRequest,
     NamespaceInfo: NamespaceInfo,
     Limit: Limit,
+    DescribeReplicationInstancesRequest: DescribeReplicationInstancesRequest,
     DeleteRepositoryResponse: DeleteRepositoryResponse,
     DeleteImagePersonalResponse: DeleteImagePersonalResponse,
     RegistryCondition: RegistryCondition,
@@ -6657,6 +6967,7 @@ module.exports = {
     NamespaceIsExistsResp: NamespaceIsExistsResp,
     DescribeInstancesRequest: DescribeInstancesRequest,
     Filter: Filter,
+    DescribeReplicationInstanceCreateTasksRequest: DescribeReplicationInstanceCreateTasksRequest,
     RepoInfo: RepoInfo,
     ManageImageLifecycleGlobalPersonalRequest: ManageImageLifecycleGlobalPersonalRequest,
     DescribeUserQuotaPersonalResponse: DescribeUserQuotaPersonalResponse,
@@ -6679,6 +6990,7 @@ module.exports = {
     ModifyApplicationTriggerPersonalRequest: ModifyApplicationTriggerPersonalRequest,
     CreateInstanceTokenRequest: CreateInstanceTokenRequest,
     ModifyUserPasswordPersonalRequest: ModifyUserPasswordPersonalRequest,
+    ReplicationRegistry: ReplicationRegistry,
     ValidateNamespaceExistPersonalResponse: ValidateNamespaceExistPersonalResponse,
     DescribeApplicationTriggerPersonalResp: DescribeApplicationTriggerPersonalResp,
     TagInfo: TagInfo,

@@ -207,6 +207,105 @@ class DescribePubVersionsRequest extends  AbstractModel {
 }
 
 /**
+ * RefundStorageService返回参数结构体
+ * @class
+ */
+class RefundStorageServiceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云存服务ID
+         * @type {string || null}
+         */
+        this.ServiceId = null;
+
+        /**
+         * 云存服务所在的区域
+         * @type {string || null}
+         */
+        this.StorageRegion = null;
+
+        /**
+         * 设备TID
+         * @type {string || null}
+         */
+        this.Tid = null;
+
+        /**
+         * 视频流通道号。(对于存在多路视频流的设备，如NVR设备，与设备实际视频流通道号对应)
+         * @type {number || null}
+         */
+        this.ChnNum = null;
+
+        /**
+         * 终端用户在IoT Video平台的注册ID
+         * @type {string || null}
+         */
+        this.AccessId = null;
+
+        /**
+         * 服务开始时间
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 服务失效时间
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 服务状态
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 有效云存定单列表
+         * @type {Array.<StorageOrder> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.StorageRegion = 'StorageRegion' in params ? params.StorageRegion : null;
+        this.Tid = 'Tid' in params ? params.Tid : null;
+        this.ChnNum = 'ChnNum' in params ? params.ChnNum : null;
+        this.AccessId = 'AccessId' in params ? params.AccessId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new StorageOrder();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeIotModel返回参数结构体
  * @class
  */
@@ -413,6 +512,76 @@ class IotModelData extends  AbstractModel {
         }
         this.Revision = 'Revision' in params ? params.Revision : null;
         this.ReleaseTime = 'ReleaseTime' in params ? params.ReleaseTime : null;
+
+    }
+}
+
+/**
+ * CreateStorageService请求参数结构体
+ * @class
+ */
+class CreateStorageServiceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云存套餐ID
+         * @type {string || null}
+         */
+        this.PkgId = null;
+
+        /**
+         * 设备TID
+         * @type {string || null}
+         */
+        this.Tid = null;
+
+        /**
+         * 订单数量,可一次性创建多个订单
+         * @type {number || null}
+         */
+        this.OrderCount = null;
+
+        /**
+         * 云存服务所在的区域,如ap-guangzhou,ap-singapore
+         * @type {string || null}
+         */
+        this.StorageRegion = null;
+
+        /**
+         * 视频流通道号。(对于存在多路视频流的设备，如NVR设备，与设备实际视频流通道号对应)
+         * @type {number || null}
+         */
+        this.ChnNum = null;
+
+        /**
+         * 设备主人用户在IoT Video平台的注册ID。该参数用于验证Paas/Saas平台的设备/用户关系链是否一致
+         * @type {string || null}
+         */
+        this.AccessId = null;
+
+        /**
+         * 服务生效时间,若不指定此参数，服务立即生效
+         * @type {number || null}
+         */
+        this.EnableTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.PkgId = 'PkgId' in params ? params.PkgId : null;
+        this.Tid = 'Tid' in params ? params.Tid : null;
+        this.OrderCount = 'OrderCount' in params ? params.OrderCount : null;
+        this.StorageRegion = 'StorageRegion' in params ? params.StorageRegion : null;
+        this.ChnNum = 'ChnNum' in params ? params.ChnNum : null;
+        this.AccessId = 'AccessId' in params ? params.AccessId : null;
+        this.EnableTime = 'EnableTime' in params ? params.EnableTime : null;
 
     }
 }
@@ -737,6 +906,105 @@ class CreateDevTokenRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeStorageService返回参数结构体
+ * @class
+ */
+class DescribeStorageServiceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云存服务ID
+         * @type {string || null}
+         */
+        this.ServiceId = null;
+
+        /**
+         * 云存服务所在的区域
+         * @type {string || null}
+         */
+        this.StorageRegion = null;
+
+        /**
+         * 设备TID
+         * @type {string || null}
+         */
+        this.Tid = null;
+
+        /**
+         * 视频流通道号。(对于存在多路视频流的设备，如NVR设备，与设备实际视频流通道号对应)
+         * @type {number || null}
+         */
+        this.ChnNum = null;
+
+        /**
+         * 终端用户在IoT Video平台的注册ID
+         * @type {string || null}
+         */
+        this.AccessId = null;
+
+        /**
+         * 服务开始时间
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 服务失效时间
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 服务状态
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 云存定单列表
+         * @type {Array.<StorageOrder> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.StorageRegion = 'StorageRegion' in params ? params.StorageRegion : null;
+        this.Tid = 'Tid' in params ? params.Tid : null;
+        this.ChnNum = 'ChnNum' in params ? params.ChnNum : null;
+        this.AccessId = 'AccessId' in params ? params.AccessId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new StorageOrder();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteIotDataType请求参数结构体
  * @class
  */
@@ -943,34 +1211,6 @@ class DescribeProductsResponse extends  AbstractModel {
 }
 
 /**
- * CreateAppUsr请求参数结构体
- * @class
- */
-class CreateAppUsrRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 标识用户的唯一ID，防止同一个用户多次注册
-         * @type {string || null}
-         */
-        this.CunionId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.CunionId = 'CunionId' in params ? params.CunionId : null;
-
-    }
-}
-
-/**
  * 设备证书及密钥
  * @class
  */
@@ -1144,6 +1384,50 @@ class DescribeModelDataRetResponse extends  AbstractModel {
             return;
         }
         this.Data = 'Data' in params ? params.Data : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateDevToken返回参数结构体
+ * @class
+ */
+class CreateDevTokenResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回的用户token列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DevTokenInfo> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new DevTokenInfo();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1854,25 +2138,18 @@ class TraceStatus extends  AbstractModel {
 }
 
 /**
- * CreateDevToken返回参数结构体
+ * CreateAppUsr请求参数结构体
  * @class
  */
-class CreateDevTokenResponse extends  AbstractModel {
+class CreateAppUsrRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 返回的用户token列表
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<DevTokenInfo> || null}
-         */
-        this.Data = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 标识用户的唯一ID，防止同一个用户多次注册
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.CunionId = null;
 
     }
 
@@ -1883,16 +2160,7 @@ class CreateDevTokenResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new DevTokenInfo();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.CunionId = 'CunionId' in params ? params.CunionId : null;
 
     }
 }
@@ -2313,6 +2581,34 @@ class DescribeTraceIdsResponse extends  AbstractModel {
             return;
         }
         this.Data = 'Data' in params ? params.Data : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ClearDeviceActiveCode返回参数结构体
+ * @class
+ */
+class ClearDeviceActiveCodeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3207,6 +3503,112 @@ class DeviceModelData extends  AbstractModel {
 }
 
 /**
+ * CreateStorageService返回参数结构体
+ * @class
+ */
+class CreateStorageServiceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标志是否为续订
+         * @type {boolean || null}
+         */
+        this.IsRenew = null;
+
+        /**
+         * 云存服务ID
+         * @type {string || null}
+         */
+        this.ServiceId = null;
+
+        /**
+         * 云存服务所在的区域
+         * @type {string || null}
+         */
+        this.StorageRegion = null;
+
+        /**
+         * 设备TID
+         * @type {string || null}
+         */
+        this.Tid = null;
+
+        /**
+         * 视频流通道号。(对于存在多路视频流的设备，如NVR设备，与设备实际视频流通道号对应)
+         * @type {number || null}
+         */
+        this.ChnNum = null;
+
+        /**
+         * 终端用户在IoT Video平台的注册ID
+         * @type {string || null}
+         */
+        this.AccessId = null;
+
+        /**
+         * 服务开始时间
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 服务失效时间
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 服务状态
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 新增的云存定单列表
+         * @type {Array.<StorageOrder> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IsRenew = 'IsRenew' in params ? params.IsRenew : null;
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.StorageRegion = 'StorageRegion' in params ? params.StorageRegion : null;
+        this.Tid = 'Tid' in params ? params.Tid : null;
+        this.ChnNum = 'ChnNum' in params ? params.ChnNum : null;
+        this.AccessId = 'AccessId' in params ? params.AccessId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new StorageOrder();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeIotDataType请求参数结构体
  * @class
  */
@@ -3352,6 +3754,112 @@ class DescribeRunLogResponse extends  AbstractModel {
             return;
         }
         this.Data = 'Data' in params ? params.Data : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeliverStorageService返回参数结构体
+ * @class
+ */
+class DeliverStorageServiceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 被转出的云存服务ID
+         * @type {string || null}
+         */
+        this.SrcServiceId = null;
+
+        /**
+         * 被转入的云存服务ID
+         * @type {string || null}
+         */
+        this.ServiceId = null;
+
+        /**
+         * 云存服务所在的区域
+         * @type {string || null}
+         */
+        this.StorageRegion = null;
+
+        /**
+         * 设备TID
+         * @type {string || null}
+         */
+        this.Tid = null;
+
+        /**
+         * 视频流通道号。(对于存在多路视频流的设备，如NVR设备，与设备实际视频流通道号对应)
+         * @type {number || null}
+         */
+        this.ChnNum = null;
+
+        /**
+         * 终端用户在IoT Video平台的注册ID
+         * @type {string || null}
+         */
+        this.AccessId = null;
+
+        /**
+         * 服务开始时间
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 服务失效时间
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 服务状态
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 新增的云存定单列表
+         * @type {Array.<StorageOrder> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SrcServiceId = 'SrcServiceId' in params ? params.SrcServiceId : null;
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.StorageRegion = 'StorageRegion' in params ? params.StorageRegion : null;
+        this.Tid = 'Tid' in params ? params.Tid : null;
+        this.ChnNum = 'ChnNum' in params ? params.ChnNum : null;
+        this.AccessId = 'AccessId' in params ? params.AccessId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new StorageOrder();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3630,6 +4138,41 @@ class DescribeDeviceModelResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeStorageService请求参数结构体
+ * @class
+ */
+class DescribeStorageServiceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云存服务ID
+         * @type {string || null}
+         */
+        this.ServiceId = null;
+
+        /**
+         * 是否返回已结束的订单信息(已过期/已退订/已转移)
+         * @type {boolean || null}
+         */
+        this.GetFinishedOrder = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.GetFinishedOrder = 'GetFinishedOrder' in params ? params.GetFinishedOrder : null;
+
+    }
+}
+
+/**
  * 产品信息摘要
  * @class
  */
@@ -3750,7 +4293,7 @@ class CreateGencodeRequest extends  AbstractModel {
         this.ProductId = null;
 
         /**
-         * 物模型发布版本号，-1代表最新编辑（未发布）的版本
+         * 物模型发布版本号,-1代表未发布的，保存的是草稿箱的版本。1代表已发布的物模型。
          * @type {number || null}
          */
         this.Revision = null;
@@ -3810,6 +4353,34 @@ class DescribePubVersionsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ClearDeviceActiveCode请求参数结构体
+ * @class
+ */
+class ClearDeviceActiveCodeRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设备TID列表，0<元素数量<=100
+         * @type {Array.<string> || null}
+         */
+        this.Tids = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Tids = 'Tids' in params ? params.Tids : null;
 
     }
 }
@@ -3977,6 +4548,62 @@ class DescribeBindDevRequest extends  AbstractModel {
 }
 
 /**
+ * 云存订单信息
+ * @class
+ */
+class StorageOrder extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 定单唯一性ID
+         * @type {string || null}
+         */
+        this.OrderId = null;
+
+        /**
+         * 云存套餐ID
+         * @type {string || null}
+         */
+        this.PkgId = null;
+
+        /**
+         * 定单服务状态
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 定单服务生效时间
+         * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 定单服务失效时间
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OrderId = 'OrderId' in params ? params.OrderId : null;
+        this.PkgId = 'PkgId' in params ? params.PkgId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
  * 产品转发消息队列配置
  * @class
  */
@@ -4063,6 +4690,97 @@ class RegisteredStatus extends  AbstractModel {
         }
         this.CunionId = 'CunionId' in params ? params.CunionId : null;
         this.IsRegisted = 'IsRegisted' in params ? params.IsRegisted : null;
+
+    }
+}
+
+/**
+ * CreateAnonymousAccessToken请求参数结构体
+ * @class
+ */
+class CreateAnonymousAccessTokenRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Token的TTL(time to alive)分钟数,最大值1440(即24小时)
+         * @type {number || null}
+         */
+        this.TtlMinutes = null;
+
+        /**
+         * 设备ID。创建Token时, 此参数为必须项
+         * @type {string || null}
+         */
+        this.Tid = null;
+
+        /**
+         * 旧的AccessToken。续期Token时，此参数为必须
+         * @type {string || null}
+         */
+        this.OldAccessToken = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TtlMinutes = 'TtlMinutes' in params ? params.TtlMinutes : null;
+        this.Tid = 'Tid' in params ? params.Tid : null;
+        this.OldAccessToken = 'OldAccessToken' in params ? params.OldAccessToken : null;
+
+    }
+}
+
+/**
+ * DeliverStorageService请求参数结构体
+ * @class
+ */
+class DeliverStorageServiceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待转移的源云存服务ID
+         * @type {string || null}
+         */
+        this.SrcServiceId = null;
+
+        /**
+         * 设备TID
+         * @type {string || null}
+         */
+        this.Tid = null;
+
+        /**
+         * 视频流通道号。(对于存在多路视频流的设备，如NVR设备，与设备实际视频流通道号对应)
+         * @type {number || null}
+         */
+        this.ChnNum = null;
+
+        /**
+         * 设备主人用户在IoT Video平台的注册ID。该参数用于验证Paas/Saas平台的设备/用户关系链是否一致
+         * @type {string || null}
+         */
+        this.AccessId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SrcServiceId = 'SrcServiceId' in params ? params.SrcServiceId : null;
+        this.Tid = 'Tid' in params ? params.Tid : null;
+        this.ChnNum = 'ChnNum' in params ? params.ChnNum : null;
+        this.AccessId = 'AccessId' in params ? params.AccessId : null;
 
     }
 }
@@ -4541,6 +5259,55 @@ class DescribeProductResponse extends  AbstractModel {
 }
 
 /**
+ * CreateAnonymousAccessToken返回参数结构体
+ * @class
+ */
+class CreateAnonymousAccessTokenResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 终端用户在IoT Video上的唯一标识ID
+         * @type {string || null}
+         */
+        this.AccessId = null;
+
+        /**
+         * IoT Video平台的AccessToken
+         * @type {string || null}
+         */
+        this.AccessToken = null;
+
+        /**
+         * Token的过期时间，单位秒(UTC时间)
+         * @type {number || null}
+         */
+        this.ExpireTime = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccessId = 'AccessId' in params ? params.AccessId : null;
+        this.AccessToken = 'AccessToken' in params ? params.AccessToken : null;
+        this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeBindUsr请求参数结构体
  * @class
  */
@@ -4879,6 +5646,41 @@ class DeleteBindingResponse extends  AbstractModel {
 }
 
 /**
+ * RefundStorageService请求参数结构体
+ * @class
+ */
+class RefundStorageServiceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 云存服务ID
+         * @type {string || null}
+         */
+        this.ServiceId = null;
+
+        /**
+         * 云存子订单ID。如果指定子订单ID,则仅退订该子订单，如果未指定子定单ID，则退订所有子订单
+         * @type {string || null}
+         */
+        this.OrderId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ServiceId = 'ServiceId' in params ? params.ServiceId : null;
+        this.OrderId = 'OrderId' in params ? params.OrderId : null;
+
+    }
+}
+
+/**
  * CreateStorage返回参数结构体
  * @class
  */
@@ -5145,12 +5947,14 @@ module.exports = {
     DescribeLogsRequest: DescribeLogsRequest,
     CreateIotDataTypeRequest: CreateIotDataTypeRequest,
     DescribePubVersionsRequest: DescribePubVersionsRequest,
+    RefundStorageServiceResponse: RefundStorageServiceResponse,
     DescribeIotModelResponse: DescribeIotModelResponse,
     DisableDeviceResponse: DisableDeviceResponse,
     DescribeRunLogRequest: DescribeRunLogRequest,
     DescribeProductsRequest: DescribeProductsRequest,
     DeleteTraceIdsRequest: DeleteTraceIdsRequest,
     IotModelData: IotModelData,
+    CreateStorageServiceRequest: CreateStorageServiceRequest,
     DescribeDevicesResponse: DescribeDevicesResponse,
     ModifyProductResponse: ModifyProductResponse,
     ModifyProductRequest: ModifyProductRequest,
@@ -5159,17 +5963,18 @@ module.exports = {
     DescribeTraceStatusResponse: DescribeTraceStatusResponse,
     CreateUploadPathRequest: CreateUploadPathRequest,
     CreateDevTokenRequest: CreateDevTokenRequest,
+    DescribeStorageServiceResponse: DescribeStorageServiceResponse,
     DeleteIotDataTypeRequest: DeleteIotDataTypeRequest,
     DescribeMessageQueueRequest: DescribeMessageQueueRequest,
     DeleteAppUsrResponse: DeleteAppUsrResponse,
     DescribeRegistrationStatusResponse: DescribeRegistrationStatusResponse,
     DescribeProductRequest: DescribeProductRequest,
     DescribeProductsResponse: DescribeProductsResponse,
-    CreateAppUsrRequest: CreateAppUsrRequest,
     DeviceCertificate: DeviceCertificate,
     UpgradeDeviceRequest: UpgradeDeviceRequest,
     LogData: LogData,
     DescribeModelDataRetResponse: DescribeModelDataRetResponse,
+    CreateDevTokenResponse: CreateDevTokenResponse,
     RunIotModelResponse: RunIotModelResponse,
     RunIotModelRequest: RunIotModelRequest,
     OtaPubHistory: OtaPubHistory,
@@ -5184,7 +5989,7 @@ module.exports = {
     CreateBindingRequest: CreateBindingRequest,
     DeleteDeviceRequest: DeleteDeviceRequest,
     TraceStatus: TraceStatus,
-    CreateDevTokenResponse: CreateDevTokenResponse,
+    CreateAppUsrRequest: CreateAppUsrRequest,
     ModifyDevicePropertyRequest: ModifyDevicePropertyRequest,
     RunDeviceStreamRequest: RunDeviceStreamRequest,
     RunDeviceResponse: RunDeviceResponse,
@@ -5196,6 +6001,7 @@ module.exports = {
     DeleteMessageQueueResponse: DeleteMessageQueueResponse,
     DescribeOtaVersionsRequest: DescribeOtaVersionsRequest,
     DescribeTraceIdsResponse: DescribeTraceIdsResponse,
+    ClearDeviceActiveCodeResponse: ClearDeviceActiveCodeResponse,
     CreateProductResponse: CreateProductResponse,
     DescribeRegistrationStatusRequest: DescribeRegistrationStatusRequest,
     CreateStorageRequest: CreateStorageRequest,
@@ -5218,10 +6024,12 @@ module.exports = {
     RunOtaVersionRequest: RunOtaVersionRequest,
     CreateDevicesResponse: CreateDevicesResponse,
     DeviceModelData: DeviceModelData,
+    CreateStorageServiceResponse: CreateStorageServiceResponse,
     DescribeIotDataTypeRequest: DescribeIotDataTypeRequest,
     SendOnlineMsgRequest: SendOnlineMsgRequest,
     DescribeDeviceRequest: DescribeDeviceRequest,
     DescribeRunLogResponse: DescribeRunLogResponse,
+    DeliverStorageServiceResponse: DeliverStorageServiceResponse,
     DescribeIotModelRequest: DescribeIotModelRequest,
     DescribeTraceIdsRequest: DescribeTraceIdsRequest,
     CreateAppUsrResponse: CreateAppUsrResponse,
@@ -5230,15 +6038,20 @@ module.exports = {
     CreateUsrTokenRequest: CreateUsrTokenRequest,
     RunDeviceRequest: RunDeviceRequest,
     DescribeDeviceModelResponse: DescribeDeviceModelResponse,
+    DescribeStorageServiceRequest: DescribeStorageServiceRequest,
     ProductBase: ProductBase,
     CreateGencodeRequest: CreateGencodeRequest,
     DescribePubVersionsResponse: DescribePubVersionsResponse,
+    ClearDeviceActiveCodeRequest: ClearDeviceActiveCodeRequest,
     ModifyDeviceActionRequest: ModifyDeviceActionRequest,
     CreateIotModelResponse: CreateIotModelResponse,
     BindDevInfo: BindDevInfo,
     DescribeBindDevRequest: DescribeBindDevRequest,
+    StorageOrder: StorageOrder,
     MsgQueueData: MsgQueueData,
     RegisteredStatus: RegisteredStatus,
+    CreateAnonymousAccessTokenRequest: CreateAnonymousAccessTokenRequest,
+    DeliverStorageServiceRequest: DeliverStorageServiceRequest,
     RunDeviceStreamResponse: RunDeviceStreamResponse,
     RunOtaVersionResponse: RunOtaVersionResponse,
     DescribeDeviceModelRequest: DescribeDeviceModelRequest,
@@ -5250,6 +6063,7 @@ module.exports = {
     DisableDeviceRequest: DisableDeviceRequest,
     DisableOtaVersionRequest: DisableOtaVersionRequest,
     DescribeProductResponse: DescribeProductResponse,
+    CreateAnonymousAccessTokenResponse: CreateAnonymousAccessTokenResponse,
     DescribeBindUsrRequest: DescribeBindUsrRequest,
     SendOnlineMsgResponse: SendOnlineMsgResponse,
     DeleteAppUsrRequest: DeleteAppUsrRequest,
@@ -5259,6 +6073,7 @@ module.exports = {
     CreateIotDataTypeResponse: CreateIotDataTypeResponse,
     ModifyDevicePropertyResponse: ModifyDevicePropertyResponse,
     DeleteBindingResponse: DeleteBindingResponse,
+    RefundStorageServiceRequest: RefundStorageServiceRequest,
     CreateStorageResponse: CreateStorageResponse,
     DisableDeviceStreamResponse: DisableDeviceStreamResponse,
     DeleteDeviceResponse: DeleteDeviceResponse,

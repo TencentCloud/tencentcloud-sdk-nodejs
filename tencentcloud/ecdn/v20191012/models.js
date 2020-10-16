@@ -845,40 +845,24 @@ class DescribePurgeTasksRequest extends  AbstractModel {
 }
 
 /**
- * 域名查询时过滤条件。
+ * DescribeEcdnStatistics返回参数结构体
  * @class
  */
-class DomainFilter extends  AbstractModel {
+class DescribeEcdnStatisticsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 过滤字段名，支持的列表如下：
-- origin：主源站。
-- domain：域名。
-- resourceId：域名id。
-- status：域名状态，online，offline，processing。
-- disable：域名封禁状态，normal，unlicensed。
-- projectId：项目ID。
-- fullUrlCache：全路径缓存，on或off。
-- https：是否配置https，on，off或processing。
-- originPullProtocol：回源协议类型，支持http，follow或https。
-- area：加速区域，支持mainland，overseas或global。
+         * 指定条件查询得到的数据明细
+         * @type {Array.<ResourceData> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Name = null;
-
-        /**
-         * 过滤字段值。
-         * @type {Array.<string> || null}
-         */
-        this.Value = null;
-
-        /**
-         * 是否启用模糊查询，仅支持过滤字段名为origin，domain。
-         * @type {boolean || null}
-         */
-        this.Fuzzy = null;
+        this.RequestId = null;
 
     }
 
@@ -889,9 +873,16 @@ class DomainFilter extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Value = 'Value' in params ? params.Value : null;
-        this.Fuzzy = 'Fuzzy' in params ? params.Fuzzy : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new ResourceData();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2122,6 +2113,64 @@ class AddEcdnDomainResponse extends  AbstractModel {
 }
 
 /**
+ * 节点 IP 信息
+ * @class
+ */
+class IpStatus extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 节点 IP
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * 节点所属区域
+         * @type {string || null}
+         */
+        this.District = null;
+
+        /**
+         * 节点所属运营商
+         * @type {string || null}
+         */
+        this.Isp = null;
+
+        /**
+         * 节点所在城市
+         * @type {string || null}
+         */
+        this.City = null;
+
+        /**
+         * 节点状态
+online：上线状态，正常调度服务中
+offline：下线状态
+         * @type {string || null}
+         */
+        this.Status = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.District = 'District' in params ? params.District : null;
+        this.Isp = 'Isp' in params ? params.Isp : null;
+        this.City = 'City' in params ? params.City : null;
+        this.Status = 'Status' in params ? params.Status : null;
+
+    }
+}
+
+/**
  * 刷新任务日志详情
  * @class
  */
@@ -2227,18 +2276,24 @@ class CacheRule extends  AbstractModel {
 }
 
 /**
- * DescribeEcdnStatistics返回参数结构体
+ * DescribeIpStatus返回参数结构体
  * @class
  */
-class DescribeEcdnStatisticsResponse extends  AbstractModel {
+class DescribeIpStatusResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 指定条件查询得到的数据明细
-         * @type {Array.<ResourceData> || null}
+         * 节点列表
+         * @type {Array.<IpStatus> || null}
          */
-        this.Data = null;
+        this.Ips = null;
+
+        /**
+         * 节点总个数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2256,14 +2311,15 @@ class DescribeEcdnStatisticsResponse extends  AbstractModel {
             return;
         }
 
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new ResourceData();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
+        if (params.Ips) {
+            this.Ips = new Array();
+            for (let z in params.Ips) {
+                let obj = new IpStatus();
+                obj.deserialize(params.Ips[z]);
+                this.Ips.push(obj);
             }
         }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2440,6 +2496,58 @@ class CacheKey extends  AbstractModel {
             return;
         }
         this.FullUrlCache = 'FullUrlCache' in params ? params.FullUrlCache : null;
+
+    }
+}
+
+/**
+ * 域名查询时过滤条件。
+ * @class
+ */
+class DomainFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤字段名，支持的列表如下：
+- origin：主源站。
+- domain：域名。
+- resourceId：域名id。
+- status：域名状态，online，offline，processing。
+- disable：域名封禁状态，normal，unlicensed。
+- projectId：项目ID。
+- fullUrlCache：全路径缓存，on或off。
+- https：是否配置https，on，off或processing。
+- originPullProtocol：回源协议类型，支持http，follow或https。
+- area：加速区域，支持mainland，overseas或global。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 过滤字段值。
+         * @type {Array.<string> || null}
+         */
+        this.Value = null;
+
+        /**
+         * 是否启用模糊查询，仅支持过滤字段名为origin，domain。
+         * @type {boolean || null}
+         */
+        this.Fuzzy = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.Fuzzy = 'Fuzzy' in params ? params.Fuzzy : null;
 
     }
 }
@@ -2830,6 +2938,44 @@ class DomainDetailInfo extends  AbstractModel {
 }
 
 /**
+ * DescribeIpStatus请求参数结构体
+ * @class
+ */
+class DescribeIpStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 加速域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 查询区域：
+mainland: 国内节点
+overseas: 海外节点
+global: 全球节点
+         * @type {string || null}
+         */
+        this.Area = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Area = 'Area' in params ? params.Area : null;
+
+    }
+}
+
+/**
  * DescribeDomains请求参数结构体
  * @class
  */
@@ -2897,7 +3043,7 @@ module.exports = {
     Sort: Sort,
     IpFreqLimit: IpFreqLimit,
     DescribePurgeTasksRequest: DescribePurgeTasksRequest,
-    DomainFilter: DomainFilter,
+    DescribeEcdnStatisticsResponse: DescribeEcdnStatisticsResponse,
     DomainLogs: DomainLogs,
     Hsts: Hsts,
     HttpHeaderPathRule: HttpHeaderPathRule,
@@ -2922,16 +3068,19 @@ module.exports = {
     DeleteEcdnDomainRequest: DeleteEcdnDomainRequest,
     DescribePurgeTasksResponse: DescribePurgeTasksResponse,
     AddEcdnDomainResponse: AddEcdnDomainResponse,
+    IpStatus: IpStatus,
     PurgeTask: PurgeTask,
     CacheRule: CacheRule,
-    DescribeEcdnStatisticsResponse: DescribeEcdnStatisticsResponse,
+    DescribeIpStatusResponse: DescribeIpStatusResponse,
     Origin: Origin,
     ServerCert: ServerCert,
     CacheKey: CacheKey,
+    DomainFilter: DomainFilter,
     DescribeEcdnDomainStatisticsRequest: DescribeEcdnDomainStatisticsRequest,
     Quota: Quota,
     DescribeEcdnDomainLogsRequest: DescribeEcdnDomainLogsRequest,
     DomainDetailInfo: DomainDetailInfo,
+    DescribeIpStatusRequest: DescribeIpStatusRequest,
     DescribeDomainsRequest: DescribeDomainsRequest,
 
 }

@@ -12361,6 +12361,13 @@ unknown：服务地域无法获取
          */
         this.Area = null;
 
+        /**
+         * 节点的所在城市
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.City = null;
+
     }
 
     /**
@@ -12383,6 +12390,7 @@ unknown：服务地域无法获取
             }
         }
         this.Area = 'Area' in params ? params.Area : null;
+        this.City = 'City' in params ? params.City : null;
 
     }
 }
