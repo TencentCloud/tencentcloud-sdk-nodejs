@@ -16,13 +16,19 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
+const UploadImageResponse = models.UploadImageResponse;
 const BatchModifyDomainInfoRequest = models.BatchModifyDomainInfoRequest;
 const TemplateInfo = models.TemplateInfo;
 const UpdateProhibitionBatchRequest = models.UpdateProhibitionBatchRequest;
+const DeleteTemplateResponse = models.DeleteTemplateResponse;
+const TransferInDomainBatchRequest = models.TransferInDomainBatchRequest;
 const CreateDomainBatchResponse = models.CreateDomainBatchResponse;
+const ModifyDomainDNSBatchResponse = models.ModifyDomainDNSBatchResponse;
+const RenewDomainBatchRequest = models.RenewDomainBatchRequest;
 const TransferInDomainBatchResponse = models.TransferInDomainBatchResponse;
 const UpdateProhibitionBatchResponse = models.UpdateProhibitionBatchResponse;
 const CheckDomainResponse = models.CheckDomainResponse;
+const RenewDomainBatchResponse = models.RenewDomainBatchResponse;
 const PriceInfo = models.PriceInfo;
 const BatchModifyDomainInfoResponse = models.BatchModifyDomainInfoResponse;
 const DescribeDomainBaseInfoResponse = models.DescribeDomainBaseInfoResponse;
@@ -31,9 +37,12 @@ const TransferProhibitionBatchRequest = models.TransferProhibitionBatchRequest;
 const DescribeDomainNameListResponse = models.DescribeDomainNameListResponse;
 const ContactInfo = models.ContactInfo;
 const DescribeDomainPriceListResponse = models.DescribeDomainPriceListResponse;
+const CreateTemplateResponse = models.CreateTemplateResponse;
 const CertificateInfo = models.CertificateInfo;
+const DeleteTemplateRequest = models.DeleteTemplateRequest;
 const CheckBatchStatusRequest = models.CheckBatchStatusRequest;
-const TransferInDomainBatchRequest = models.TransferInDomainBatchRequest;
+const SetDomainAutoRenewResponse = models.SetDomainAutoRenewResponse;
+const CreateTemplateRequest = models.CreateTemplateRequest;
 const BatchStatus = models.BatchStatus;
 const DomainList = models.DomainList;
 const DescribeDomainPriceListRequest = models.DescribeDomainPriceListRequest;
@@ -41,12 +50,15 @@ const CreateDomainBatchRequest = models.CreateDomainBatchRequest;
 const DescribeDomainBaseInfoRequest = models.DescribeDomainBaseInfoRequest;
 const DomainBaseInfo = models.DomainBaseInfo;
 const DescribeDomainNameListRequest = models.DescribeDomainNameListRequest;
+const UploadImageRequest = models.UploadImageRequest;
 const CheckDomainRequest = models.CheckDomainRequest;
 const TransferProhibitionBatchResponse = models.TransferProhibitionBatchResponse;
+const ModifyDomainDNSBatchRequest = models.ModifyDomainDNSBatchRequest;
 const ModifyDomainOwnerBatchRequest = models.ModifyDomainOwnerBatchRequest;
 const CheckBatchStatusResponse = models.CheckBatchStatusResponse;
 const DescribeTemplateListRequest = models.DescribeTemplateListRequest;
 const ModifyDomainOwnerBatchResponse = models.ModifyDomainOwnerBatchResponse;
+const SetDomainAutoRenewRequest = models.SetDomainAutoRenewRequest;
 
 
 /**
@@ -71,6 +83,32 @@ class DomainClient extends AbstractClient {
     DescribeDomainNameList(req, cb) {
         let resp = new DescribeDomainNameListResponse();
         this.request("DescribeDomainNameList", req, resp, cb);
+    }
+
+    /**
+     * 本接口 ( UploadImage ) 用于上传资质照片 。
+
+默认接口请求频率限制：20次/秒。
+     * @param {UploadImageRequest} req
+     * @param {function(string, UploadImageResponse):void} cb
+     * @public
+     */
+    UploadImage(req, cb) {
+        let resp = new UploadImageResponse();
+        this.request("UploadImage", req, resp, cb);
+    }
+
+    /**
+     * 本接口 ( CreateTemplate ) 用于添加域名信息模板 。
+
+默认接口请求频率限制：20次/秒。
+     * @param {CreateTemplateRequest} req
+     * @param {function(string, CreateTemplateResponse):void} cb
+     * @public
+     */
+    CreateTemplate(req, cb) {
+        let resp = new CreateTemplateResponse();
+        this.request("CreateTemplate", req, resp, cb);
     }
 
     /**
@@ -127,6 +165,19 @@ class DomainClient extends AbstractClient {
     }
 
     /**
+     * 本接口 ( DeleteTemplate ) 用于删除域名信息模板。
+
+默认接口请求频率限制：20次/秒。
+     * @param {DeleteTemplateRequest} req
+     * @param {function(string, DeleteTemplateResponse):void} cb
+     * @public
+     */
+    DeleteTemplate(req, cb) {
+        let resp = new DeleteTemplateResponse();
+        this.request("DeleteTemplate", req, resp, cb);
+    }
+
+    /**
      * 本接口 (DescribeTemplateList) 用于获取模板列表。
 
 默认接口请求频率限制：20次/秒。
@@ -138,6 +189,20 @@ class DomainClient extends AbstractClient {
     DescribeTemplateList(req, cb) {
         let resp = new DescribeTemplateListResponse();
         this.request("DescribeTemplateList", req, resp, cb);
+    }
+
+    /**
+     * 本接口 ( RenewDomainBatch ) 用于批量续费域名 。
+
+默认接口请求频率限制：20次/秒。
+
+     * @param {RenewDomainBatchRequest} req
+     * @param {function(string, RenewDomainBatchResponse):void} cb
+     * @public
+     */
+    RenewDomainBatch(req, cb) {
+        let resp = new RenewDomainBatchResponse();
+        this.request("RenewDomainBatch", req, resp, cb);
     }
 
     /**
@@ -165,7 +230,7 @@ class DomainClient extends AbstractClient {
     }
 
     /**
-     * 本接口 ( CheckBatchStatus ) 用于检查批量任务状态 。
+     * 本接口 ( CheckBatchStatus ) 用于查询批量操作日志状态 。
 
 默认接口请求频率限制：20次/秒。
      * @param {CheckBatchStatusRequest} req
@@ -212,6 +277,32 @@ class DomainClient extends AbstractClient {
     UpdateProhibitionBatch(req, cb) {
         let resp = new UpdateProhibitionBatchResponse();
         this.request("UpdateProhibitionBatch", req, resp, cb);
+    }
+
+    /**
+     * 本接口 ( ModifyDomainDNSBatch) 用于批量修改域名DNS信息 。
+
+默认接口请求频率限制：20次/秒。
+     * @param {ModifyDomainDNSBatchRequest} req
+     * @param {function(string, ModifyDomainDNSBatchResponse):void} cb
+     * @public
+     */
+    ModifyDomainDNSBatch(req, cb) {
+        let resp = new ModifyDomainDNSBatchResponse();
+        this.request("ModifyDomainDNSBatch", req, resp, cb);
+    }
+
+    /**
+     * 本接口 ( SetDomainAutoRenew ) 用于设置域名自动续费。
+
+默认接口请求频率限制：20次/秒。
+     * @param {SetDomainAutoRenewRequest} req
+     * @param {function(string, SetDomainAutoRenewResponse):void} cb
+     * @public
+     */
+    SetDomainAutoRenew(req, cb) {
+        let resp = new SetDomainAutoRenewResponse();
+        this.request("SetDomainAutoRenew", req, resp, cb);
     }
 
 

@@ -137,7 +137,8 @@ class GetFaceIdTokenRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * CompareLib为上传照片比对时必传，base64后图片最大8MB。
+         * CompareLib为上传照片比对时必传，Base64后图片最大8MB。
+请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
          * @type {string || null}
          */
         this.ImageBase64 = null;
@@ -903,7 +904,7 @@ class IdCardOCRVerificationRequest extends  AbstractModel {
         /**
          * 身份证人像面的 Base64 值
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
          * @type {string || null}
          */
         this.ImageBase64 = null;
@@ -1458,6 +1459,7 @@ class CheckIdCardInformationRequest extends  AbstractModel {
          * 身份证人像面的 Base64 值
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
 支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
 ImageBase64、ImageUrl二者必须提供其中之一。若都提供了，则按照ImageUrl>ImageBase64的优先级使用参数。
          * @type {string || null}
          */
@@ -1749,8 +1751,8 @@ class DetectAuthRequest extends  AbstractModel {
         this.Extra = null;
 
         /**
-         * 用于人脸比对的照片，图片的BASE64值；
-BASE64编码后的图片数据大小不超过3M，仅支持jpg、png格式。
+         * 用于人脸比对的照片，图片的Base64值；
+Base64编码后的图片数据大小不超过3M，仅支持jpg、png格式。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
          * @type {string || null}
          */
         this.ImageBase64 = null;
@@ -1923,8 +1925,9 @@ class ImageRecognitionRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 用于人脸比对的照片，图片的BASE64值；
-BASE64编码后的图片数据大小不超过3M，仅支持jpg、png格式。
+         * 用于人脸比对的照片，图片的Base64值；
+Base64编码后的图片数据大小不超过3M，仅支持jpg、png格式。
+请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
          * @type {string || null}
          */
         this.ImageBase64 = null;
@@ -2652,15 +2655,17 @@ class LivenessCompareRequest extends  AbstractModel {
         super();
 
         /**
-         * 用于人脸比对的照片，图片的BASE64值；
-BASE64编码后的图片数据大小不超过3M，仅支持jpg、png格式。
+         * 用于人脸比对的照片，图片的Base64值；
+Base64编码后的图片数据大小不超过3M，仅支持jpg、png格式。
+请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
          * @type {string || null}
          */
         this.ImageBase64 = null;
 
         /**
-         * 用于活体检测的视频，视频的BASE64值；
-BASE64编码后的大小不超过8M，支持mp4、avi、flv格式。
+         * 用于活体检测的视频，视频的Base64值；
+Base64编码后的大小不超过8M，支持mp4、avi、flv格式。
+请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
          * @type {string || null}
          */
         this.VideoBase64 = null;
@@ -2845,7 +2850,7 @@ class GetFaceIdResultResponse extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 业务核验结果，如下几个结果码会计费
+         * 业务核验结果，参考https://cloud.tencent.com/document/product/1007/47912
          * @type {string || null}
          */
         this.Result = null;

@@ -4529,6 +4529,12 @@ class CreateModuleRequest extends  AbstractModel {
          */
         this.SecurityGroups = null;
 
+        /**
+         * 默认入带宽，单位：M。范围不得超过带宽上下限，详看DescribeConfig。
+         * @type {number || null}
+         */
+        this.DefaultBandWidthIn = null;
+
     }
 
     /**
@@ -4555,6 +4561,7 @@ class CreateModuleRequest extends  AbstractModel {
             }
         }
         this.SecurityGroups = 'SecurityGroups' in params ? params.SecurityGroups : null;
+        this.DefaultBandWidthIn = 'DefaultBandWidthIn' in params ? params.DefaultBandWidthIn : null;
 
     }
 }
@@ -6114,10 +6121,16 @@ class ResetInstancesMaxBandwidthRequest extends  AbstractModel {
         this.InstanceIdSet = null;
 
         /**
-         * 修改后的最大带宽上限。
+         * 修改后的最大出带宽上限。
          * @type {number || null}
          */
         this.MaxBandwidthOut = null;
+
+        /**
+         * 修改后的最大入带宽上限。
+         * @type {number || null}
+         */
+        this.MaxBandwidthIn = null;
 
     }
 
@@ -6130,6 +6143,7 @@ class ResetInstancesMaxBandwidthRequest extends  AbstractModel {
         }
         this.InstanceIdSet = 'InstanceIdSet' in params ? params.InstanceIdSet : null;
         this.MaxBandwidthOut = 'MaxBandwidthOut' in params ? params.MaxBandwidthOut : null;
+        this.MaxBandwidthIn = 'MaxBandwidthIn' in params ? params.MaxBandwidthIn : null;
 
     }
 }
@@ -6333,10 +6347,16 @@ class ModifyModuleNetworkRequest extends  AbstractModel {
         this.ModuleId = null;
 
         /**
-         * 默认带宽上限
+         * 默认出带宽上限
          * @type {number || null}
          */
         this.DefaultBandwidth = null;
+
+        /**
+         * 默认入带宽上限
+         * @type {number || null}
+         */
+        this.DefaultBandwidthIn = null;
 
     }
 
@@ -6349,6 +6369,7 @@ class ModifyModuleNetworkRequest extends  AbstractModel {
         }
         this.ModuleId = 'ModuleId' in params ? params.ModuleId : null;
         this.DefaultBandwidth = 'DefaultBandwidth' in params ? params.DefaultBandwidth : null;
+        this.DefaultBandwidthIn = 'DefaultBandwidthIn' in params ? params.DefaultBandwidthIn : null;
 
     }
 }
@@ -9535,6 +9556,12 @@ class PublicIPAddressInfo extends  AbstractModel {
          */
         this.MaxBandwidthOut = null;
 
+        /**
+         * 实例的最大入带宽上限，单位为Mbps。
+         * @type {number || null}
+         */
+        this.MaxBandwidthIn = null;
+
     }
 
     /**
@@ -9553,6 +9580,7 @@ class PublicIPAddressInfo extends  AbstractModel {
             this.ISP = obj;
         }
         this.MaxBandwidthOut = 'MaxBandwidthOut' in params ? params.MaxBandwidthOut : null;
+        this.MaxBandwidthIn = 'MaxBandwidthIn' in params ? params.MaxBandwidthIn : null;
 
     }
 }
@@ -12822,7 +12850,7 @@ DELETEFAILED：删除失败
         this.CreateTime = null;
 
         /**
-         * 默认带宽
+         * 默认出带宽
          * @type {number || null}
          */
         this.DefaultBandwidth = null;
@@ -12845,6 +12873,12 @@ DELETEFAILED：删除失败
          * @type {Array.<string> || null}
          */
         this.SecurityGroupIds = null;
+
+        /**
+         * 默认入带宽
+         * @type {number || null}
+         */
+        this.DefaultBandwidthIn = null;
 
     }
 
@@ -12885,6 +12919,7 @@ DELETEFAILED：删除失败
         }
         this.CloseIpDirect = 'CloseIpDirect' in params ? params.CloseIpDirect : null;
         this.SecurityGroupIds = 'SecurityGroupIds' in params ? params.SecurityGroupIds : null;
+        this.DefaultBandwidthIn = 'DefaultBandwidthIn' in params ? params.DefaultBandwidthIn : null;
 
     }
 }

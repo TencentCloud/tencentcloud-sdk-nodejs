@@ -7838,6 +7838,48 @@ class DescribeCCFrequencyRulesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeBizTrend返回参数结构体
+ * @class
+ */
+class DescribeBizTrendResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 曲线图各个时间点的值
+         * @type {Array.<number> || null}
+         */
+        this.DataList = null;
+
+        /**
+         * 统计纬度
+         * @type {string || null}
+         */
+        this.MetricName = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DataList = 'DataList' in params ? params.DataList : null;
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeDDoSEvList请求参数结构体
  * @class
  */
@@ -12765,6 +12807,98 @@ class DescribleL7RulesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeBizTrend请求参数结构体
+ * @class
+ */
+class DescribeBizTrendRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 大禹子产品代号（bgpip表示高防IP）
+         * @type {string || null}
+         */
+        this.Business = null;
+
+        /**
+         * 资源实例ID
+         * @type {string || null}
+         */
+        this.Id = null;
+
+        /**
+         * 统计周期，可取值300，1800，3600，21600，86400，单位秒
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * 统计开始时间
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 统计结束时间
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 统计方式，可取值max, min, avg, sum, 如统计纬度是流量速率或包量速率，仅可取值max
+         * @type {string || null}
+         */
+        this.Statistics = null;
+
+        /**
+         * 统计纬度，可取值connum, new_conn, inactive_conn, intraffic, outtraffic, inpkg, outpkg, qps
+         * @type {string || null}
+         */
+        this.MetricName = null;
+
+        /**
+         * 协议及端口列表，协议可取值TCP, UDP, HTTP, HTTPS，仅统计纬度为连接数时有效
+         * @type {Array.<ProtocolPort> || null}
+         */
+        this.ProtoInfo = null;
+
+        /**
+         * 统计纬度为qps时，可选特定域名查询
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Business = 'Business' in params ? params.Business : null;
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Period = 'Period' in params ? params.Period : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+        this.Statistics = 'Statistics' in params ? params.Statistics : null;
+        this.MetricName = 'MetricName' in params ? params.MetricName : null;
+
+        if (params.ProtoInfo) {
+            this.ProtoInfo = new Array();
+            for (let z in params.ProtoInfo) {
+                let obj = new ProtocolPort();
+                obj.deserialize(params.ProtoInfo[z]);
+                this.ProtoInfo.push(obj);
+            }
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+
+    }
+}
+
+/**
  * CreateCCFrequencyRules返回参数结构体
  * @class
  */
@@ -14824,6 +14958,7 @@ module.exports = {
     ModifyCCIpAllowDenyResponse: ModifyCCIpAllowDenyResponse,
     ModifyCCAlarmThresholdRequest: ModifyCCAlarmThresholdRequest,
     DescribeCCFrequencyRulesResponse: DescribeCCFrequencyRulesResponse,
+    DescribeBizTrendResponse: DescribeBizTrendResponse,
     DescribeDDoSEvListRequest: DescribeDDoSEvListRequest,
     DescribeBasicCCThresholdResponse: DescribeBasicCCThresholdResponse,
     ModifyDDoSPolicyNameRequest: ModifyDDoSPolicyNameRequest,
@@ -14909,6 +15044,7 @@ module.exports = {
     DescribeRuleSetsRequest: DescribeRuleSetsRequest,
     DescribeSchedulingDomainListRequest: DescribeSchedulingDomainListRequest,
     DescribleL7RulesResponse: DescribleL7RulesResponse,
+    DescribeBizTrendRequest: DescribeBizTrendRequest,
     CreateCCFrequencyRulesResponse: CreateCCFrequencyRulesResponse,
     CreateNewL4RulesRequest: CreateNewL4RulesRequest,
     DDoSPolicyPortLimit: DDoSPolicyPortLimit,

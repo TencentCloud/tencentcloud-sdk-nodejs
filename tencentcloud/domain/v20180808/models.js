@@ -17,6 +17,41 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * UploadImage返回参数结构体
+ * @class
+ */
+class UploadImageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资质照片地址。
+         * @type {string || null}
+         */
+        this.AccessUrl = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AccessUrl = 'AccessUrl' in params ? params.AccessUrl : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * BatchModifyDomainInfo请求参数结构体
  * @class
  */
@@ -197,6 +232,83 @@ False：关闭禁止域名更新状态。
 }
 
 /**
+ * DeleteTemplate返回参数结构体
+ * @class
+ */
+class DeleteTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * TransferInDomainBatch请求参数结构体
+ * @class
+ */
+class TransferInDomainBatchRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 转入的域名名称数组。
+         * @type {Array.<string> || null}
+         */
+        this.Domains = null;
+
+        /**
+         * 域名转移码数组。
+         * @type {Array.<string> || null}
+         */
+        this.PassWords = null;
+
+        /**
+         * 模板ID。
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+        /**
+         * 付费模式 0手动在线付费，1使用余额付费。
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domains = 'Domains' in params ? params.Domains : null;
+        this.PassWords = 'PassWords' in params ? params.PassWords : null;
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+
+    }
+}
+
+/**
  * CreateDomainBatch返回参数结构体
  * @class
  */
@@ -228,6 +340,83 @@ class CreateDomainBatchResponse extends  AbstractModel {
         }
         this.LogId = 'LogId' in params ? params.LogId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyDomainDNSBatch返回参数结构体
+ * @class
+ */
+class ModifyDomainDNSBatchResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志ID。
+         * @type {number || null}
+         */
+        this.LogId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogId = 'LogId' in params ? params.LogId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RenewDomainBatch请求参数结构体
+ * @class
+ */
+class RenewDomainBatchRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名续费的年限。
+         * @type {number || null}
+         */
+        this.Period = null;
+
+        /**
+         * 批量续费的域名。
+         * @type {Array.<string> || null}
+         */
+        this.Domains = null;
+
+        /**
+         * 付费模式 0手动在线付费，1使用余额付费。
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Period = 'Period' in params ? params.Period : null;
+        this.Domains = 'Domains' in params ? params.Domains : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
 
     }
 }
@@ -420,6 +609,41 @@ class CheckDomainResponse extends  AbstractModel {
         this.FeeRestore = 'FeeRestore' in params ? params.FeeRestore : null;
         this.Period = 'Period' in params ? params.Period : null;
         this.RecordSupport = 'RecordSupport' in params ? params.RecordSupport : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RenewDomainBatch返回参数结构体
+ * @class
+ */
+class RenewDomainBatchResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 操作日志ID。
+         * @type {number || null}
+         */
+        this.LogId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogId = 'LogId' in params ? params.LogId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -871,6 +1095,46 @@ class DescribeDomainPriceListResponse extends  AbstractModel {
 }
 
 /**
+ * CreateTemplate返回参数结构体
+ * @class
+ */
+class CreateTemplateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模板信息
+         * @type {TemplateInfo || null}
+         */
+        this.Template = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Template) {
+            let obj = new TemplateInfo();
+            obj.deserialize(params.Template)
+            this.Template = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 认证资料信息
  * @class
  */
@@ -886,6 +1150,34 @@ class CertificateInfo extends  AbstractModel {
 
         /**
          * 证件类型。
+SFZ: 身份证。
+HZ: 护照。
+TXZ: 港澳居民来往内地通行证。
+TWSFZ: 台湾居民来往大陆通行证。
+GWSFZ: 外国人永久居留身份证。
+ORG: 组织机构代码证
+YYZZ: 工商营业执照。
+TYDMZ: 统一社会信用代码证书。
+BDDH: 部队代号
+JDXKZ: 军队单位对外有偿服务许可证。
+SYZS: 事业单位法人证书。
+GWCZDJZ: 外国企业常驻代表机构登记证。
+STDJZ: 社会团体法人登记证书。
+ZJDJZ: 宗教活动场所登记证。
+MBDJZ: 民办非企业单位登记证书。
+JJDJZ: 基金会法人登记证书。
+LSXKZ: 律师事务所执业许可证。
+GWZHDJZ: 外国在华文化中心登记证。
+GWLYDJZ: 外国政府旅游部门常驻代表机构批准登记证。
+SFXKZ: 司法鉴定许可证
+GWJGZJ: 外国机构证件。
+SHFWJGZ: 社会服务机构登记证书。
+MBXXXKZ: 民办学校办学许可证。
+YLJGXKZ: 医疗机构执业许可证。
+GAJZZ: 港澳居住证
+TWJZZ: 台湾居住证。
+QTTYDM: 其他-统一社会信用代码证书。
+GZJGZY: 公证机构执业证。
          * @type {string || null}
          */
         this.CertificateType = null;
@@ -913,6 +1205,34 @@ class CertificateInfo extends  AbstractModel {
 }
 
 /**
+ * DeleteTemplate请求参数结构体
+ * @class
+ */
+class DeleteTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 模板ID
+         * @type {string || null}
+         */
+        this.TemplateId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
+
+    }
+}
+
+/**
  * CheckBatchStatus请求参数结构体
  * @class
  */
@@ -921,7 +1241,7 @@ class CheckBatchStatusRequest extends  AbstractModel {
         super();
 
         /**
-         * 批量任务id数组，最多 200 个
+         * 操作日志 ID数组，最多 200 个
          * @type {Array.<number> || null}
          */
         this.LogIds = null;
@@ -941,36 +1261,18 @@ class CheckBatchStatusRequest extends  AbstractModel {
 }
 
 /**
- * TransferInDomainBatch请求参数结构体
+ * SetDomainAutoRenew返回参数结构体
  * @class
  */
-class TransferInDomainBatchRequest extends  AbstractModel {
+class SetDomainAutoRenewResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 转入的域名名称数组。
-         * @type {Array.<string> || null}
-         */
-        this.Domains = null;
-
-        /**
-         * 域名转移码数组。
-         * @type {Array.<string> || null}
-         */
-        this.PassWords = null;
-
-        /**
-         * 模板ID。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.TemplateId = null;
-
-        /**
-         * 付费模式 0手动在线付费，1使用余额付费。
-         * @type {number || null}
-         */
-        this.PayMode = null;
+        this.RequestId = null;
 
     }
 
@@ -981,10 +1283,52 @@ class TransferInDomainBatchRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Domains = 'Domains' in params ? params.Domains : null;
-        this.PassWords = 'PassWords' in params ? params.PassWords : null;
-        this.TemplateId = 'TemplateId' in params ? params.TemplateId : null;
-        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateTemplate请求参数结构体
+ * @class
+ */
+class CreateTemplateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 联系人信息
+         * @type {ContactInfo || null}
+         */
+        this.ContactInfo = null;
+
+        /**
+         * 证件信息
+         * @type {CertificateInfo || null}
+         */
+        this.CertificateInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ContactInfo) {
+            let obj = new ContactInfo();
+            obj.deserialize(params.ContactInfo)
+            this.ContactInfo = obj;
+        }
+
+        if (params.CertificateInfo) {
+            let obj = new CertificateInfo();
+            obj.deserialize(params.CertificateInfo)
+            this.CertificateInfo = obj;
+        }
 
     }
 }
@@ -1422,6 +1766,34 @@ class DescribeDomainNameListRequest extends  AbstractModel {
 }
 
 /**
+ * UploadImage请求参数结构体
+ * @class
+ */
+class UploadImageRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资质照片，照片的base64编码。
+         * @type {string || null}
+         */
+        this.ImageFile = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageFile = 'ImageFile' in params ? params.ImageFile : null;
+
+    }
+}
+
+/**
  * CheckDomain请求参数结构体
  * @class
  */
@@ -1487,6 +1859,41 @@ class TransferProhibitionBatchResponse extends  AbstractModel {
         }
         this.LogId = 'LogId' in params ? params.LogId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyDomainDNSBatch请求参数结构体
+ * @class
+ */
+class ModifyDomainDNSBatchRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 批量操作的域名。
+         * @type {Array.<string> || null}
+         */
+        this.Domains = null;
+
+        /**
+         * 域名DNS 数组。
+         * @type {Array.<string> || null}
+         */
+        this.Dns = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domains = 'Domains' in params ? params.Domains : null;
+        this.Dns = 'Dns' in params ? params.Dns : null;
 
     }
 }
@@ -1653,14 +2060,58 @@ class ModifyDomainOwnerBatchResponse extends  AbstractModel {
     }
 }
 
+/**
+ * SetDomainAutoRenew请求参数结构体
+ * @class
+ */
+class SetDomainAutoRenewRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 域名ID。
+         * @type {string || null}
+         */
+        this.DomainId = null;
+
+        /**
+         * AutoRenew 有三个可选值：
+ 0：不设置自动续费
+1：设置自动续费
+2：设置到期后不续费
+         * @type {number || null}
+         */
+        this.AutoRenew = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DomainId = 'DomainId' in params ? params.DomainId : null;
+        this.AutoRenew = 'AutoRenew' in params ? params.AutoRenew : null;
+
+    }
+}
+
 module.exports = {
+    UploadImageResponse: UploadImageResponse,
     BatchModifyDomainInfoRequest: BatchModifyDomainInfoRequest,
     TemplateInfo: TemplateInfo,
     UpdateProhibitionBatchRequest: UpdateProhibitionBatchRequest,
+    DeleteTemplateResponse: DeleteTemplateResponse,
+    TransferInDomainBatchRequest: TransferInDomainBatchRequest,
     CreateDomainBatchResponse: CreateDomainBatchResponse,
+    ModifyDomainDNSBatchResponse: ModifyDomainDNSBatchResponse,
+    RenewDomainBatchRequest: RenewDomainBatchRequest,
     TransferInDomainBatchResponse: TransferInDomainBatchResponse,
     UpdateProhibitionBatchResponse: UpdateProhibitionBatchResponse,
     CheckDomainResponse: CheckDomainResponse,
+    RenewDomainBatchResponse: RenewDomainBatchResponse,
     PriceInfo: PriceInfo,
     BatchModifyDomainInfoResponse: BatchModifyDomainInfoResponse,
     DescribeDomainBaseInfoResponse: DescribeDomainBaseInfoResponse,
@@ -1669,9 +2120,12 @@ module.exports = {
     DescribeDomainNameListResponse: DescribeDomainNameListResponse,
     ContactInfo: ContactInfo,
     DescribeDomainPriceListResponse: DescribeDomainPriceListResponse,
+    CreateTemplateResponse: CreateTemplateResponse,
     CertificateInfo: CertificateInfo,
+    DeleteTemplateRequest: DeleteTemplateRequest,
     CheckBatchStatusRequest: CheckBatchStatusRequest,
-    TransferInDomainBatchRequest: TransferInDomainBatchRequest,
+    SetDomainAutoRenewResponse: SetDomainAutoRenewResponse,
+    CreateTemplateRequest: CreateTemplateRequest,
     BatchStatus: BatchStatus,
     DomainList: DomainList,
     DescribeDomainPriceListRequest: DescribeDomainPriceListRequest,
@@ -1679,11 +2133,14 @@ module.exports = {
     DescribeDomainBaseInfoRequest: DescribeDomainBaseInfoRequest,
     DomainBaseInfo: DomainBaseInfo,
     DescribeDomainNameListRequest: DescribeDomainNameListRequest,
+    UploadImageRequest: UploadImageRequest,
     CheckDomainRequest: CheckDomainRequest,
     TransferProhibitionBatchResponse: TransferProhibitionBatchResponse,
+    ModifyDomainDNSBatchRequest: ModifyDomainDNSBatchRequest,
     ModifyDomainOwnerBatchRequest: ModifyDomainOwnerBatchRequest,
     CheckBatchStatusResponse: CheckBatchStatusResponse,
     DescribeTemplateListRequest: DescribeTemplateListRequest,
     ModifyDomainOwnerBatchResponse: ModifyDomainOwnerBatchResponse,
+    SetDomainAutoRenewRequest: SetDomainAutoRenewRequest,
 
 }

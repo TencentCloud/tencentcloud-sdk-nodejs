@@ -71,48 +71,6 @@ class BRIRequest extends  AbstractModel {
         this.Service = null;
 
         /**
-         * Apk证书Md5  (业务名为bri_apk时必填，除非已填FileMd5)
-         * @type {string || null}
-         */
-        this.CertMd5 = null;
-
-        /**
-         * Apk文件Md5 (业务名为bri_apk时必填，除非已填PackageName,CertMd5,FileSize)
-         * @type {string || null}
-         */
-        this.FileMd5 = null;
-
-        /**
-         * Apk文件大小  (业务名为bri_apk时必填，除非已填FileMd5)
-         * @type {number || null}
-         */
-        this.FileSize = null;
-
-        /**
-         * 安卓设备的Imei (业务名为bri_dev时必填)
-         * @type {string || null}
-         */
-        this.Imei = null;
-
-        /**
-         * 点分格式的IP (业务名为bri_ip时必填)
-         * @type {string || null}
-         */
-        this.Ip = null;
-
-        /**
-         * Apk安装包名 (业务名为bri_apk时必填，除非已填FileMd5)
-         * @type {string || null}
-         */
-        this.PackageName = null;
-
-        /**
-         * 电话号码 (业务名为bri_num时必填)
-         * @type {string || null}
-         */
-        this.PhoneNumber = null;
-
-        /**
          * QQ号 (业务名为bri_social时必填, 除非已填Wechat)
          * @type {string || null}
          */
@@ -125,16 +83,59 @@ class BRIRequest extends  AbstractModel {
         this.QQTag = null;
 
         /**
+         * 网址 (业务名为bri_url时必填)
+         * @type {string || null}
+         */
+        this.Url = null;
+
+        /**
+         * Apk证书Md5  (业务名为bri_apk时必填，除非已填FileMd5)
+         * @type {string || null}
+         */
+        this.CertMd5 = null;
+
+        /**
+         * Apk安装包名 (业务名为bri_apk时必填，除非已填FileMd5)
+         * @type {string || null}
+         */
+        this.PackageName = null;
+
+        /**
+         * Apk文件Md5 (业务名为bri_apk时必填，除非已填PackageName,CertMd5,FileSize)
+         * @type {string || null}
+         */
+        this.FileMd5 = null;
+
+        /**
          * 业务场景 (1-注册, 2-登录, 3-发消息)
          * @type {string || null}
          */
         this.Scene = null;
 
         /**
-         * 网址 (业务名为bri_url时必填)
+         * 电话号码 (业务名为bri_num时必填)
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Url = null;
+        this.PhoneNumber = null;
+
+        /**
+         * Apk文件大小  (业务名为bri_apk时必填，除非已填FileMd5)
+         * @type {number || null}
+         */
+        this.FileSize = null;
+
+        /**
+         * 点分格式的IP (业务名为bri_ip时必填)
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * 安卓设备的Imei (业务名为bri_dev时必填)
+         * @type {string || null}
+         */
+        this.Imei = null;
 
         /**
          * 微信号 (业务名为bri_social时必填, 除非已填QQ)
@@ -158,17 +159,17 @@ class BRIRequest extends  AbstractModel {
             return;
         }
         this.Service = 'Service' in params ? params.Service : null;
-        this.CertMd5 = 'CertMd5' in params ? params.CertMd5 : null;
-        this.FileMd5 = 'FileMd5' in params ? params.FileMd5 : null;
-        this.FileSize = 'FileSize' in params ? params.FileSize : null;
-        this.Imei = 'Imei' in params ? params.Imei : null;
-        this.Ip = 'Ip' in params ? params.Ip : null;
-        this.PackageName = 'PackageName' in params ? params.PackageName : null;
-        this.PhoneNumber = 'PhoneNumber' in params ? params.PhoneNumber : null;
         this.QQ = 'QQ' in params ? params.QQ : null;
         this.QQTag = 'QQTag' in params ? params.QQTag : null;
-        this.Scene = 'Scene' in params ? params.Scene : null;
         this.Url = 'Url' in params ? params.Url : null;
+        this.CertMd5 = 'CertMd5' in params ? params.CertMd5 : null;
+        this.PackageName = 'PackageName' in params ? params.PackageName : null;
+        this.FileMd5 = 'FileMd5' in params ? params.FileMd5 : null;
+        this.Scene = 'Scene' in params ? params.Scene : null;
+        this.PhoneNumber = 'PhoneNumber' in params ? params.PhoneNumber : null;
+        this.FileSize = 'FileSize' in params ? params.FileSize : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Imei = 'Imei' in params ? params.Imei : null;
         this.Wechat = 'Wechat' in params ? params.Wechat : null;
         this.WechatTag = 'WechatTag' in params ? params.WechatTag : null;
 

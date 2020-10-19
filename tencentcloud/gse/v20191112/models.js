@@ -134,7 +134,7 @@ class FleetAttributes extends  AbstractModel {
         this.Status = null;
 
         /**
-         * 服务器舰队停止状态
+         * 服务器舰队停止状态，为空时表示自动扩缩容
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
@@ -518,7 +518,7 @@ class DescribeFleetAttributesRequest extends  AbstractModel {
         this.FleetIds = null;
 
         /**
-         * 结果返回最大数量，最小值0，最大值1000
+         * 结果返回最大数量，默认值20，最大值100
          * @type {number || null}
          */
         this.Limit = null;
@@ -622,19 +622,19 @@ class DescribeFleetStatisticDetailsRequest extends  AbstractModel {
         super();
 
         /**
-         * 服务部署ID
+         * 服务器舰队ID
          * @type {string || null}
          */
         this.FleetId = null;
 
         /**
-         * 查询开始时间
+         * 查询开始时间，时间格式：YYYY-MM-DD hh:mm:ss
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * 查询结束时间
+         * 查询结束时间，时间格式：YYYY-MM-DD hh:mm:ss
          * @type {string || null}
          */
         this.EndTime = null;
@@ -670,6 +670,41 @@ class DescribeFleetStatisticDetailsRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeAssetSystems请求参数结构体
+ * @class
+ */
+class DescribeAssetSystemsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 生成包支持的操作系统类型
+         * @type {string || null}
+         */
+        this.OsType = null;
+
+        /**
+         * 生成包支持的操作系统位数
+         * @type {number || null}
+         */
+        this.OsBit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OsType = 'OsType' in params ? params.OsType : null;
+        this.OsBit = 'OsBit' in params ? params.OsBit : null;
+
+    }
+}
+
+/**
  * GetInstanceAccess请求参数结构体
  * @class
  */
@@ -678,7 +713,7 @@ class GetInstanceAccessRequest extends  AbstractModel {
         super();
 
         /**
-         * 服务部署Id
+         * 服务器舰队ID
          * @type {string || null}
          */
         this.FleetId = null;
@@ -731,7 +766,7 @@ class CreateFleetRequest extends  AbstractModel {
         this.InboundPermissions = null;
 
         /**
-         * 服务器类型，例如S5.LARGE8
+         * 服务器类型，参数根据[获取服务器实例类型列表](https://cloud.tencent.com/document/product/1165/48732)接口获取。
          * @type {string || null}
          */
         this.InstanceType = null;
@@ -755,7 +790,7 @@ class CreateFleetRequest extends  AbstractModel {
         this.NewGameServerSessionProtectionPolicy = null;
 
         /**
-         * VPC 网络 Id，弃用，对等链接已不再使用
+         * VPC 网络 Id，对等连接已不再使用
          * @type {string || null}
          */
         this.PeerVpcId = null;
@@ -773,13 +808,13 @@ class CreateFleetRequest extends  AbstractModel {
         this.RuntimeConfiguration = null;
 
         /**
-         * VPC 子网，弃用，对等链接已不再使用
+         * VPC 子网，对等连接已不再使用
          * @type {string || null}
          */
         this.SubNetId = null;
 
         /**
-         * 时限保护超时时间，默认60分钟，最小值5，最大值1440
+         * 时限保护超时时间，默认60分钟，最小值5，最大值1440；当NewGameSessionProtectionPolicy为TimeLimitProtection时参数有效
          * @type {number || null}
          */
         this.GameServerSessionProtectionTimeLimit = null;
@@ -842,7 +877,7 @@ class StartFleetActionsRequest extends  AbstractModel {
         this.FleetId = null;
 
         /**
-         * 扩展策略，为空或者AUTO_SCALING
+         * 服务器舰队扩展策略，值为["AUTO_SCALING"]
          * @type {Array.<string> || null}
          */
         this.Actions = null;
@@ -959,14 +994,14 @@ class ListFleetsResponse extends  AbstractModel {
         super();
 
         /**
-         * 服务部署 Id 列表
+         * 服务器舰队 Id 列表
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<string> || null}
          */
         this.FleetIds = null;
 
         /**
-         * 服务部署 Id 总数，最小值0
+         * 服务器舰队 Id 总数，最小值0
          * @type {number || null}
          */
         this.TotalCount = null;
@@ -1081,7 +1116,7 @@ class DescribeScalingPoliciesRequest extends  AbstractModel {
         super();
 
         /**
-         * 服务部署ID
+         * 服务器舰队ID
          * @type {string || null}
          */
         this.FleetId = null;
@@ -1386,19 +1421,19 @@ class DescribeFleetStatisticFlowsRequest extends  AbstractModel {
         super();
 
         /**
-         * 服务部署ID
+         * 服务器舰队ID
          * @type {string || null}
          */
         this.FleetId = null;
 
         /**
-         * 查询开始时间
+         * 查询开始时间，时间格式：YYYY-MM-DD hh:mm:ss
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * 查询结束时间
+         * 查询结束时间，时间格式：YYYY-MM-DD hh:mm:ss
          * @type {string || null}
          */
         this.EndTime = null;
@@ -1556,7 +1591,7 @@ class GameServerSessionPlacement extends  AbstractModel {
         this.GameProperties = null;
 
         /**
-         * 最大玩家数量
+         * 游戏服务器允许同时连接到游戏会话的最大玩家数量，最小值1，最大值为玩家会话最大限额
          * @type {number || null}
          */
         this.MaximumPlayerSessionCount = null;
@@ -1793,7 +1828,7 @@ class UpdateFleetCapacityResponse extends  AbstractModel {
         super();
 
         /**
-         * 服务部署ID
+         * 服务器舰队ID
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -1829,7 +1864,7 @@ class DescribeRuntimeConfigurationResponse extends  AbstractModel {
         super();
 
         /**
-         * 服务部署运行配置信息
+         * 服务器舰队运行配置信息
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {RuntimeConfiguration || null}
          */
@@ -2201,19 +2236,19 @@ class DescribeFleetStatisticSummaryRequest extends  AbstractModel {
         super();
 
         /**
-         * 服务部署 Id
+         * 服务器舰队ID
          * @type {string || null}
          */
         this.FleetId = null;
 
         /**
-         * 查询开始时间
+         * 查询开始时间，时间格式: YYYY-MM-DD hh:mm:ss
          * @type {string || null}
          */
         this.BeginTime = null;
 
         /**
-         * 查询结束时间
+         * 查询结束时间，时间格式: YYYY-MM-DD hh:mm:ss
          * @type {string || null}
          */
         this.EndTime = null;
@@ -2537,6 +2572,55 @@ class DescribeCcnInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * 生成包支持操作系统详细信息
+ * @class
+ */
+class AssetSupportSys extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 生成包操作系统的镜像Id
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * 生成包操作系统的类型
+         * @type {string || null}
+         */
+        this.OsType = null;
+
+        /**
+         * 生成包操作系统的位数
+         * @type {number || null}
+         */
+        this.OsBit = null;
+
+        /**
+         * 生成包操作系统的版本
+         * @type {string || null}
+         */
+        this.OsVersion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.OsType = 'OsType' in params ? params.OsType : null;
+        this.OsBit = 'OsBit' in params ? params.OsBit : null;
+        this.OsVersion = 'OsVersion' in params ? params.OsVersion : null;
+
+    }
+}
+
+/**
  * DescribeInstanceLimit返回参数结构体
  * @class
  */
@@ -2846,6 +2930,49 @@ class DeleteAliasRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeAssetSystems返回参数结构体
+ * @class
+ */
+class DescribeAssetSystemsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 生成包支持的操作系统类型列表
+         * @type {Array.<AssetSupportSys> || null}
+         */
+        this.AssetSupportSys = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.AssetSupportSys) {
+            this.AssetSupportSys = new Array();
+            for (let z in params.AssetSupportSys) {
+                let obj = new AssetSupportSys();
+                obj.deserialize(params.AssetSupportSys[z]);
+                this.AssetSupportSys.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeFleetAttributes返回参数结构体
  * @class
  */
@@ -3045,7 +3172,7 @@ class DescribeAssetsRequest extends  AbstractModel {
         super();
 
         /**
-         * 生成包可部署地域
+         * 生成包支持的可部署 [地域列表](https://cloud.tencent.com/document/api/1165/42053#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8)
          * @type {string || null}
          */
         this.AssetRegion = null;
@@ -3475,19 +3602,19 @@ class DescribeFleetCapacityRequest extends  AbstractModel {
         super();
 
         /**
-         * 服务部署 Id列表
+         * 服务器舰队ID列表
          * @type {Array.<string> || null}
          */
         this.FleetIds = null;
 
         /**
-         * 结果返回最大数量
+         * 结果返回最大数量，最大值 100
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 返回结果偏移
+         * 返回结果偏移，最小值 0
          * @type {number || null}
          */
         this.Offset = null;
@@ -3611,7 +3738,7 @@ class UpdateGameServerSessionQueueRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 目的服务部署（可为别名）列表
+         * 目的服务器舰队（可为别名）列表
          * @type {Array.<GameServerSessionQueueDestination> || null}
          */
         this.Destinations = null;
@@ -3854,7 +3981,7 @@ class FleetCapacity extends  AbstractModel {
         this.FleetId = null;
 
         /**
-         * 服务器类型
+         * 服务器类型，如S3.LARGE8,S2.LARGE8,S5.LARGE8等
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -3868,7 +3995,7 @@ class FleetCapacity extends  AbstractModel {
         this.InstanceCounts = null;
 
         /**
-         * 服务器伸缩容间隔
+         * 服务器伸缩容间隔，单位分钟，最小值3，最大值30，默认值10
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -3905,7 +4032,7 @@ class SetServerWeightRequest extends  AbstractModel {
         super();
 
         /**
-         * 服务舰队ID
+         * 服务器舰队ID
          * @type {string || null}
          */
         this.FleetId = null;
@@ -3917,7 +4044,7 @@ class SetServerWeightRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 权重
+         * 权重，最小值0，最大值10，默认值5
          * @type {number || null}
          */
         this.Weight = null;
@@ -4011,7 +4138,7 @@ class StartGameServerSessionPlacementRequest extends  AbstractModel {
         super();
 
         /**
-         * 开始部署游戏服务器会话的唯一标识符
+         * 开始部署游戏服务器会话的唯一标识符，最大值48个ASCII字符，模式：[a-zA-Z0-9-]+
          * @type {string || null}
          */
         this.PlacementId = null;
@@ -4023,7 +4150,7 @@ class StartGameServerSessionPlacementRequest extends  AbstractModel {
         this.GameServerSessionQueueName = null;
 
         /**
-         * 游戏服务器允许同时连接到游戏会话的最大玩家数量
+         * 游戏服务器允许同时连接到游戏会话的最大玩家数量，最小值1，最大值为玩家会话最大限额
          * @type {number || null}
          */
         this.MaximumPlayerSessionCount = null;
@@ -4041,13 +4168,13 @@ class StartGameServerSessionPlacementRequest extends  AbstractModel {
         this.GameProperties = null;
 
         /**
-         * 游戏服务器会话数据
+         * 游戏服务器会话数据，最大长度不超过4096个ASCII字符
          * @type {string || null}
          */
         this.GameServerSessionData = null;
 
         /**
-         * 游戏服务器会话名称
+         * 游戏服务器会话名称，最大长度不超过4096个ASCII字符
          * @type {string || null}
          */
         this.GameServerSessionName = null;
@@ -4254,7 +4381,7 @@ class ResourceCreationLimitPolicy extends  AbstractModel {
         this.NewGameServerSessionsPerCreator = null;
 
         /**
-         * 单位时间，最小值1，默认3
+         * 单位时间，最小值1，默认3，单位分钟
          * @type {number || null}
          */
         this.PolicyPeriodInMinutes = null;
@@ -4289,13 +4416,13 @@ class ListFleetsRequest extends  AbstractModel {
         this.AssetId = null;
 
         /**
-         * 结果返回最大值，最小值0，最大值1000
+         * 结果返回最大值，暂未使用
          * @type {number || null}
          */
         this.Limit = null;
 
         /**
-         * 结果返回偏移，最小值0
+         * 结果返回偏移，暂未使用
          * @type {number || null}
          */
         this.Offset = null;
@@ -4331,19 +4458,19 @@ class UpdateFleetAttributesRequest extends  AbstractModel {
         this.FleetId = null;
 
         /**
-         * 服务器舰队描述
+         * 服务器舰队描述，最小长度0，最大长度100
          * @type {string || null}
          */
         this.Description = null;
 
         /**
-         * 服务器舰队名称
+         * 服务器舰队名称，最小长度1，最大长度50
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 新建游戏会话保护策略
+         * 保护策略：不保护NoProtection、完全保护FullProtection、时限保护TimeLimitProtection
          * @type {string || null}
          */
         this.NewGameSessionProtectionPolicy = null;
@@ -4355,7 +4482,7 @@ class UpdateFleetAttributesRequest extends  AbstractModel {
         this.ResourceCreationLimitPolicy = null;
 
         /**
-         * 时限保护超时时间，默认60分钟
+         * 时限保护超时时间，默认60分钟，最小值5，最大值1440；当NewGameSessionProtectionPolicy为TimeLimitProtection时参数有效
          * @type {number || null}
          */
         this.GameServerSessionProtectionTimeLimit = null;
@@ -4550,13 +4677,13 @@ class DeleteScalingPolicyRequest extends  AbstractModel {
         super();
 
         /**
-         * 服务部署ID
+         * 服务器舰队ID
          * @type {string || null}
          */
         this.FleetId = null;
 
         /**
-         * 策略名称
+         * 扩缩容策略名称，最小长度为0，最大长度为1024
          * @type {string || null}
          */
         this.Name = null;
@@ -4632,7 +4759,7 @@ class StopFleetActionsRequest extends  AbstractModel {
         this.FleetId = null;
 
         /**
-         * 服务器舰队扩展策略，为空或者AUTO_SCALING
+         * 服务器舰队扩展策略，值为["AUTO_SCALING"]
          * @type {Array.<string> || null}
          */
         this.Actions = null;
@@ -4764,7 +4891,7 @@ class SearchGameServerSessionsRequest extends  AbstractModel {
         this.Limit = null;
 
         /**
-         * 页偏移，用于查询下一页
+         * 页偏移，用于查询下一页，最小长度不小于1个ASCII字符，最大长度不超过1024个ASCII字符
          * @type {string || null}
          */
         this.NextToken = null;
@@ -4781,6 +4908,32 @@ gameServerSessionProperties 游戏会话属性 String
 
 表达式String类型 等于=，不等于<>判断
 表示Number类型支持 =,<>,>,>=,<,<=
+
+例如：
+FilterExpression取值
+playerSessionCount>=2 AND hasAvailablePlayerSessions=true"
+表示查找至少有两个玩家，而且有可用玩家会话的游戏会话。
+FilterExpression取值
+gameServerSessionProperties.K1 = 'V1' AND gameServerSessionProperties.K2 = 'V2' OR gameServerSessionProperties.K3 = 'V3'
+
+表示
+查询满足如下游戏服务器会话属性的游戏会话
+{
+    "GameProperties":[
+        {
+            "Key":"K1",
+            "Value":"V1"
+        },
+        {
+            "Key":"K2",
+            "Value":"V2"
+        },
+        {
+            "Key":"K3",
+            "Value":"V3"
+        }
+    ]
+}
          * @type {string || null}
          */
         this.FilterExpression = null;
@@ -5051,6 +5204,34 @@ class StopGameServerSessionPlacementRequest extends  AbstractModel {
 }
 
 /**
+ * UpdateFleetName返回参数结构体
+ * @class
+ */
+class UpdateFleetNameResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeAlias请求参数结构体
  * @class
  */
@@ -5152,13 +5333,13 @@ class UpdateGameServerSessionRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 玩家会话创建策略（ACCEPT_ALL,DENY_ALL）
+         * 玩家会话创建策略，包括允许所有玩家加入和禁止所有玩家加入（ACCEPT_ALL,DENY_ALL）
          * @type {string || null}
          */
         this.PlayerSessionCreationPolicy = null;
 
         /**
-         * 保护策略(NoProtection,TimeLimitProtection,FullProtection)
+         * 保护策略，包括不保护、时限保护和完全保护(NoProtection,TimeLimitProtection,FullProtection)
          * @type {string || null}
          */
         this.ProtectionPolicy = null;
@@ -5214,13 +5395,13 @@ class CreateAssetRequest extends  AbstractModel {
         this.AssetRegion = null;
 
         /**
-         * 生成包可运行的操作系统，暂时只有CentOS7.16
+         * 生成包可运行的操作系统，若传入参数为CentOS7.16则不需要传入ImageId字段，否则，需要传入Imageid字段（该方式是为了兼容之前的版本，后续建议使用ImageId来替代该字段）
          * @type {string || null}
          */
         this.OperateSystem = null;
 
         /**
-         * 生成包支持的操作系统镜像id
+         * 生成包支持的操作系统镜像id，若传入OperateSystem字段的值是CentOS7.16，则不需要传入该值；如果不是，则需要通过DescribeAssetSystems接口获取asset支持的操作系统ImageId进行传入
          * @type {string || null}
          */
         this.ImageId = null;
@@ -5458,7 +5639,7 @@ class DescribeInstancesRequest extends  AbstractModel {
         super();
 
         /**
-         * 服务部署ID
+         * 服务器舰队ID
          * @type {string || null}
          */
         this.FleetId = null;
@@ -5705,6 +5886,41 @@ class InstanceCounts extends  AbstractModel {
 }
 
 /**
+ * UpdateFleetName请求参数结构体
+ * @class
+ */
+class UpdateFleetNameRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务器舰队 Id
+         * @type {string || null}
+         */
+        this.FleetId = null;
+
+        /**
+         * 服务器舰队名称，最小长度1，最大长度50
+         * @type {string || null}
+         */
+        this.Name = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FleetId = 'FleetId' in params ? params.FleetId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+    }
+}
+
+/**
  * CreateFleet返回参数结构体
  * @class
  */
@@ -5754,7 +5970,7 @@ class UpdateFleetAttributesResponse extends  AbstractModel {
         super();
 
         /**
-         * 服务部署Id
+         * 服务器舰队Id
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -6292,7 +6508,7 @@ class DescribeInstancesExtendRequest extends  AbstractModel {
         super();
 
         /**
-         * 服务部署ID
+         * 服务器舰队ID
          * @type {string || null}
          */
         this.FleetId = null;
@@ -6586,7 +6802,7 @@ class SearchGameServerSessionsResponse extends  AbstractModel {
         this.GameServerSessions = null;
 
         /**
-         * 页偏移，用于查询下一页
+         * 页偏移，用于查询下一页，最小长度不小于1个ASCII字符，最大长度不超过1024个ASCII字符
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -6681,7 +6897,7 @@ class RoutingStrategy extends  AbstractModel {
         super();
 
         /**
-         * 别名的路由策略的类型SIMPLE/TERMINAL
+         * 别名的路由策略的类型，有效值常规别名(SIMPLE)、终止别名(TERMINAL)
          * @type {string || null}
          */
         this.Type = null;
@@ -6694,7 +6910,7 @@ class RoutingStrategy extends  AbstractModel {
         this.FleetId = null;
 
         /**
-         * 与终端路由策略一起使用的消息文本
+         * 与终端路由策略一起使用的消息文本，长度不小于1字符不超过1024字符
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -6725,7 +6941,7 @@ class DescribeFleetCapacityResponse extends  AbstractModel {
         super();
 
         /**
-         * 服务部署容量配置
+         * 服务器舰队的容量配置
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<FleetCapacity> || null}
          */
@@ -6824,7 +7040,7 @@ class DescribeFleetEventsRequest extends  AbstractModel {
         this.FleetId = null;
 
         /**
-         * 分页时返回服务部署事件的数量，默认为20，最大值为100
+         * 分页时返回服务器舰队事件的数量，默认为20，最大值为100
          * @type {number || null}
          */
         this.Limit = null;
@@ -6894,7 +7110,7 @@ class ListAliasesRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 路由策略类型，有效值SIMPLE|TERMINAL
+         * 路由策略类型，有效值常规别名(SIMPLE)、终止别名(TERMINAL)
          * @type {string || null}
          */
         this.RoutingStrategyType = null;
@@ -7095,7 +7311,7 @@ class CreateGameServerSessionQueueRequest extends  AbstractModel {
         this.Name = null;
 
         /**
-         * 目的服务部署（可为别名）列表
+         * 目的服务器舰队（可为别名）列表
          * @type {Array.<GameServerSessionQueueDestination> || null}
          */
         this.Destinations = null;
@@ -7258,19 +7474,19 @@ class RuntimeConfiguration extends  AbstractModel {
         super();
 
         /**
-         * 游戏会话进程超时
+         * 游戏会话进程超时，最小值1，最大值600，单位秒
          * @type {number || null}
          */
         this.GameServerSessionActivationTimeoutSeconds = null;
 
         /**
-         * 最大游戏会话数
+         * 最大游戏会话数，最小值1，最大值2147483647
          * @type {number || null}
          */
         this.MaxConcurrentGameServerSessionActivations = null;
 
         /**
-         * 服务进程配置
+         * 服务进程配置，至少有一个进程配置
          * @type {Array.<ServerProcesse> || null}
          */
         this.ServerProcesses = null;
@@ -7388,19 +7604,19 @@ class ServerProcesse extends  AbstractModel {
         super();
 
         /**
-         * 并发执行数量
+         * 并发执行数量，所有进程并发执行总数最小值1，最大值50
          * @type {number || null}
          */
         this.ConcurrentExecutions = null;
 
         /**
-         * 启动路径：/local/game/ 或 C:\game\
+         * 启动路径：Linux路径/local/game/ 或WIndows路径C:\game\，最小长度1，最大长度1024
          * @type {string || null}
          */
         this.LaunchPath = null;
 
         /**
-         * 启动参数
+         * 启动参数，最小长度0，最大长度1024
          * @type {string || null}
          */
         this.Parameters = null;
@@ -7531,7 +7747,7 @@ class UpdateFleetCapacityRequest extends  AbstractModel {
         super();
 
         /**
-         * 服务部署ID
+         * 服务器舰队ID
          * @type {string || null}
          */
         this.FleetId = null;
@@ -7543,19 +7759,19 @@ class UpdateFleetCapacityRequest extends  AbstractModel {
         this.DesiredInstances = null;
 
         /**
-         * 服务器实例数最小限制
+         * 服务器实例数最小限制，最小值0，最大值不超过最高配额查看各地区最高配额减1
          * @type {number || null}
          */
         this.MinSize = null;
 
         /**
-         * 服务器实例数最大限制
+         * 服务器实例数最大限制，最小值1，最大值不超过最高配额查看各地区最高配额
          * @type {number || null}
          */
         this.MaxSize = null;
 
         /**
-         * 服务器伸缩容间隔
+         * 服务器伸缩容间隔，单位分钟，最小值3，最大值30，默认值10
          * @type {number || null}
          */
         this.ScalingInterval = null;
@@ -7798,25 +8014,26 @@ class PutScalingPolicyRequest extends  AbstractModel {
         super();
 
         /**
-         * 基于规则的扩缩容配置服务部署ID
+         * 扩缩容配置服务器舰队ID
          * @type {string || null}
          */
         this.FleetId = null;
 
         /**
-         * 策略名称
+         * 扩缩容策略名称，最小长度为1，最大长度为1024
          * @type {string || null}
          */
         this.Name = null;
 
         /**
-         * 扩缩容调整值
+         * 扩缩容调整值，ScalingAdjustmentType取值PercentChangeInCapacity时，取值范围-99~99
+ScalingAdjustmentType取值ChangeInCapacity或ExactCapacity时，最小值要缩容的最多CVM个数，最大值为实际最大的CVM个数限额
          * @type {number || null}
          */
         this.ScalingAdjustment = null;
 
         /**
-         * 扩缩容调整类型
+         * 扩缩容调整类型，取值（ChangeInCapacity，ExactCapacity，PercentChangeInCapacity）
          * @type {string || null}
          */
         this.ScalingAdjustmentType = null;
@@ -7828,19 +8045,21 @@ class PutScalingPolicyRequest extends  AbstractModel {
         this.Threshold = null;
 
         /**
-         * 策略比较符，取值：>,>=,<,<=
+         * 扩缩容策略比较符，取值：>,>=,<,<=
          * @type {string || null}
          */
         this.ComparisonOperator = null;
 
         /**
-         * 持续时间长度（分钟）
+         * 单个策略持续时间长度（分钟）
          * @type {number || null}
          */
         this.EvaluationPeriods = null;
 
         /**
-         * 指标名称
+         * 扩缩容参与计算的指标名称，PolicyType取值RuleBased，
+MetricName取值（AvailableGameServerSessions，AvailableCustomCount，PercentAvailableCustomCount，ActiveInstances，IdleInstances，CurrentPlayerSessions和PercentIdleInstances）；
+PolicyType取值TargetBased时，MetricName取值PercentAvailableGameSessions
          * @type {string || null}
          */
         this.MetricName = null;
@@ -7852,7 +8071,7 @@ class PutScalingPolicyRequest extends  AbstractModel {
         this.PolicyType = null;
 
         /**
-         * 扩缩容配置类型
+         * 扩缩容目标值配置，只有TargetBased类型的策略生效
          * @type {TargetConfiguration || null}
          */
         this.TargetConfiguration = null;
@@ -7999,6 +8218,7 @@ module.exports = {
     ResolveAliasRequest: ResolveAliasRequest,
     StartGameServerSessionPlacementResponse: StartGameServerSessionPlacementResponse,
     DescribeFleetStatisticDetailsRequest: DescribeFleetStatisticDetailsRequest,
+    DescribeAssetSystemsRequest: DescribeAssetSystemsRequest,
     GetInstanceAccessRequest: GetInstanceAccessRequest,
     CreateFleetRequest: CreateFleetRequest,
     StartFleetActionsRequest: StartFleetActionsRequest,
@@ -8036,6 +8256,7 @@ module.exports = {
     Event: Event,
     UpdateRuntimeConfigurationResponse: UpdateRuntimeConfigurationResponse,
     DescribeCcnInstancesResponse: DescribeCcnInstancesResponse,
+    AssetSupportSys: AssetSupportSys,
     DescribeInstanceLimitResponse: DescribeInstanceLimitResponse,
     DescribeAssetResponse: DescribeAssetResponse,
     PlacedPlayerSession: PlacedPlayerSession,
@@ -8043,6 +8264,7 @@ module.exports = {
     FleetUtilization: FleetUtilization,
     DescribeGameServerSessionQueuesResponse: DescribeGameServerSessionQueuesResponse,
     DeleteAliasRequest: DeleteAliasRequest,
+    DescribeAssetSystemsResponse: DescribeAssetSystemsResponse,
     DescribeFleetAttributesResponse: DescribeFleetAttributesResponse,
     GetUploadCredentialsResponse: GetUploadCredentialsResponse,
     AttachCcnInstancesRequest: AttachCcnInstancesRequest,
@@ -8092,6 +8314,7 @@ module.exports = {
     DescribeInstanceTypesRequest: DescribeInstanceTypesRequest,
     PlayerLatency: PlayerLatency,
     StopGameServerSessionPlacementRequest: StopGameServerSessionPlacementRequest,
+    UpdateFleetNameResponse: UpdateFleetNameResponse,
     DescribeAliasRequest: DescribeAliasRequest,
     CreateAliasRequest: CreateAliasRequest,
     UpdateGameServerSessionRequest: UpdateGameServerSessionRequest,
@@ -8105,6 +8328,7 @@ module.exports = {
     QuotaResource: QuotaResource,
     DescribeFleetStatisticFlowsResponse: DescribeFleetStatisticFlowsResponse,
     InstanceCounts: InstanceCounts,
+    UpdateFleetNameRequest: UpdateFleetNameRequest,
     CreateFleetResponse: CreateFleetResponse,
     UpdateFleetAttributesResponse: UpdateFleetAttributesResponse,
     DescribeFleetUtilizationRequest: DescribeFleetUtilizationRequest,

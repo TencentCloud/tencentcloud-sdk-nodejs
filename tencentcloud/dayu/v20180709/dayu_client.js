@@ -160,6 +160,7 @@ const CreateDDoSPolicyCaseRequest = models.CreateDDoSPolicyCaseRequest;
 const ModifyCCIpAllowDenyResponse = models.ModifyCCIpAllowDenyResponse;
 const ModifyCCAlarmThresholdRequest = models.ModifyCCAlarmThresholdRequest;
 const DescribeCCFrequencyRulesResponse = models.DescribeCCFrequencyRulesResponse;
+const DescribeBizTrendResponse = models.DescribeBizTrendResponse;
 const DescribeDDoSEvListRequest = models.DescribeDDoSEvListRequest;
 const DescribeBasicCCThresholdResponse = models.DescribeBasicCCThresholdResponse;
 const ModifyDDoSPolicyNameRequest = models.ModifyDDoSPolicyNameRequest;
@@ -245,6 +246,7 @@ const ModifyCCAlarmThresholdResponse = models.ModifyCCAlarmThresholdResponse;
 const DescribeRuleSetsRequest = models.DescribeRuleSetsRequest;
 const DescribeSchedulingDomainListRequest = models.DescribeSchedulingDomainListRequest;
 const DescribleL7RulesResponse = models.DescribleL7RulesResponse;
+const DescribeBizTrendRequest = models.DescribeBizTrendRequest;
 const CreateCCFrequencyRulesResponse = models.CreateCCFrequencyRulesResponse;
 const CreateNewL4RulesRequest = models.CreateNewL4RulesRequest;
 const DDoSPolicyPortLimit = models.DDoSPolicyPortLimit;
@@ -1242,6 +1244,17 @@ class DayuClient extends AbstractClient {
     ModifyCCHostProtection(req, cb) {
         let resp = new ModifyCCHostProtectionResponse();
         this.request("ModifyCCHostProtection", req, resp, cb);
+    }
+
+    /**
+     * 获取业务流量曲线
+     * @param {DescribeBizTrendRequest} req
+     * @param {function(string, DescribeBizTrendResponse):void} cb
+     * @public
+     */
+    DescribeBizTrend(req, cb) {
+        let resp = new DescribeBizTrendResponse();
+        this.request("DescribeBizTrend", req, resp, cb);
     }
 
     /**
