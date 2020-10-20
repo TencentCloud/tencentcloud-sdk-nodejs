@@ -17,6 +17,62 @@
 const AbstractModel = require("../../common/abstract_model");
 
 /**
+ * DescribeTelCdr请求参数结构体
+ * @class
+ */
+class DescribeTelCdrRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例 ID
+         * @type {number || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 起始时间戳，Unix 时间戳
+         * @type {number || null}
+         */
+        this.StartTimeStamp = null;
+
+        /**
+         * 结束时间戳，Unix 时间戳
+         * @type {number || null}
+         */
+        this.EndTimeStamp = null;
+
+        /**
+         * 返回记录条数
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.StartTimeStamp = 'StartTimeStamp' in params ? params.StartTimeStamp : null;
+        this.EndTimeStamp = 'EndTimeStamp' in params ? params.EndTimeStamp : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
  * DescribeTelCdr返回参数结构体
  * @class
  */
@@ -61,6 +117,48 @@ class DescribeTelCdrResponse extends  AbstractModel {
                 this.TelCdrs.push(obj);
             }
         }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateSDKLoginToken返回参数结构体
+ * @class
+ */
+class CreateSDKLoginTokenResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * SDK 登录 Token。
+         * @type {string || null}
+         */
+        this.Token = null;
+
+        /**
+         * 过期时间戳，Unix 时间戳。
+         * @type {number || null}
+         */
+        this.ExpiredTime = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Token = 'Token' in params ? params.Token : null;
+        this.ExpiredTime = 'ExpiredTime' in params ? params.ExpiredTime : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -163,6 +261,41 @@ class TelCdrInfo extends  AbstractModel {
 }
 
 /**
+ * CreateSDKLoginToken请求参数结构体
+ * @class
+ */
+class CreateSDKLoginTokenRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 应用ID。
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * 坐席账号。
+         * @type {string || null}
+         */
+        this.SeatUserId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.SeatUserId = 'SeatUserId' in params ? params.SeatUserId : null;
+
+    }
+}
+
+/**
  * 坐席用户信息
  * @class
  */
@@ -226,66 +359,12 @@ class SeatUserInfo extends  AbstractModel {
     }
 }
 
-/**
- * DescribeTelCdr请求参数结构体
- * @class
- */
-class DescribeTelCdrRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 实例 ID
-         * @type {number || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * 起始时间戳，Unix 时间戳
-         * @type {number || null}
-         */
-        this.StartTimeStamp = null;
-
-        /**
-         * 结束时间戳，Unix 时间戳
-         * @type {number || null}
-         */
-        this.EndTimeStamp = null;
-
-        /**
-         * 返回记录条数
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 偏移量
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.StartTimeStamp = 'StartTimeStamp' in params ? params.StartTimeStamp : null;
-        this.EndTimeStamp = 'EndTimeStamp' in params ? params.EndTimeStamp : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-
-    }
-}
-
 module.exports = {
-    DescribeTelCdrResponse: DescribeTelCdrResponse,
-    TelCdrInfo: TelCdrInfo,
-    SeatUserInfo: SeatUserInfo,
     DescribeTelCdrRequest: DescribeTelCdrRequest,
+    DescribeTelCdrResponse: DescribeTelCdrResponse,
+    CreateSDKLoginTokenResponse: CreateSDKLoginTokenResponse,
+    TelCdrInfo: TelCdrInfo,
+    CreateSDKLoginTokenRequest: CreateSDKLoginTokenRequest,
+    SeatUserInfo: SeatUserInfo,
 
 }

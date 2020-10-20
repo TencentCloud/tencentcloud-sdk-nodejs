@@ -60,6 +60,7 @@ const ModifyMaintenanceSpanResponse = models.ModifyMaintenanceSpanResponse;
 const ZoneInfo = models.ZoneInfo;
 const InquiryPriceCreateDBInstancesRequest = models.InquiryPriceCreateDBInstancesRequest;
 const DescribeBackupByFlowIdResponse = models.DescribeBackupByFlowIdResponse;
+const RecycleDBInstanceRequest = models.RecycleDBInstanceRequest;
 const DescribeFlowStatusRequest = models.DescribeFlowStatusRequest;
 const StartMigrationCheckResponse = models.StartMigrationCheckResponse;
 const MigrateTask = models.MigrateTask;
@@ -150,6 +151,7 @@ const RenewDBInstanceResponse = models.RenewDBInstanceResponse;
 const DBPrivilege = models.DBPrivilege;
 const DescribeOrdersRequest = models.DescribeOrdersRequest;
 const DescribeReadOnlyGroupDetailsResponse = models.DescribeReadOnlyGroupDetailsResponse;
+const RecycleDBInstanceResponse = models.RecycleDBInstanceResponse;
 const DeleteAccountRequest = models.DeleteAccountRequest;
 const DescribeReadOnlyGroupByReadOnlyInstanceRequest = models.DescribeReadOnlyGroupByReadOnlyInstanceRequest;
 const DescribeMaintenanceSpanRequest = models.DescribeMaintenanceSpanRequest;
@@ -917,6 +919,17 @@ class SqlserverClient extends AbstractClient {
     DescribeProductConfig(req, cb) {
         let resp = new DescribeProductConfigResponse();
         this.request("DescribeProductConfig", req, resp, cb);
+    }
+
+    /**
+     * 本接口（RecycleDBInstance）用于主动回收已下线的SQLSERVER实例
+     * @param {RecycleDBInstanceRequest} req
+     * @param {function(string, RecycleDBInstanceResponse):void} cb
+     * @public
+     */
+    RecycleDBInstance(req, cb) {
+        let resp = new RecycleDBInstanceResponse();
+        this.request("RecycleDBInstance", req, resp, cb);
     }
 
     /**

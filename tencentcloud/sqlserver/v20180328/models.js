@@ -2096,6 +2096,34 @@ class DescribeBackupByFlowIdResponse extends  AbstractModel {
 }
 
 /**
+ * RecycleDBInstance请求参数结构体
+ * @class
+ */
+class RecycleDBInstanceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+
+    }
+}
+
+/**
  * DescribeFlowStatus请求参数结构体
  * @class
  */
@@ -6823,6 +6851,41 @@ class DescribeReadOnlyGroupDetailsResponse extends  AbstractModel {
 }
 
 /**
+ * RecycleDBInstance返回参数结构体
+ * @class
+ */
+class RecycleDBInstanceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 流程id
+         * @type {number || null}
+         */
+        this.FlowId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.FlowId = 'FlowId' in params ? params.FlowId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DeleteAccount请求参数结构体
  * @class
  */
@@ -8852,6 +8915,7 @@ module.exports = {
     ZoneInfo: ZoneInfo,
     InquiryPriceCreateDBInstancesRequest: InquiryPriceCreateDBInstancesRequest,
     DescribeBackupByFlowIdResponse: DescribeBackupByFlowIdResponse,
+    RecycleDBInstanceRequest: RecycleDBInstanceRequest,
     DescribeFlowStatusRequest: DescribeFlowStatusRequest,
     StartMigrationCheckResponse: StartMigrationCheckResponse,
     MigrateTask: MigrateTask,
@@ -8942,6 +9006,7 @@ module.exports = {
     DBPrivilege: DBPrivilege,
     DescribeOrdersRequest: DescribeOrdersRequest,
     DescribeReadOnlyGroupDetailsResponse: DescribeReadOnlyGroupDetailsResponse,
+    RecycleDBInstanceResponse: RecycleDBInstanceResponse,
     DeleteAccountRequest: DeleteAccountRequest,
     DescribeReadOnlyGroupByReadOnlyInstanceRequest: DescribeReadOnlyGroupByReadOnlyInstanceRequest,
     DescribeMaintenanceSpanRequest: DescribeMaintenanceSpanRequest,

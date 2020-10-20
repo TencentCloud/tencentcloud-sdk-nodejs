@@ -16,10 +16,12 @@
  */
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
-const DescribeTelCdrResponse = models.DescribeTelCdrResponse;
-const TelCdrInfo = models.TelCdrInfo;
-const SeatUserInfo = models.SeatUserInfo;
 const DescribeTelCdrRequest = models.DescribeTelCdrRequest;
+const DescribeTelCdrResponse = models.DescribeTelCdrResponse;
+const CreateSDKLoginTokenResponse = models.CreateSDKLoginTokenResponse;
+const TelCdrInfo = models.TelCdrInfo;
+const CreateSDKLoginTokenRequest = models.CreateSDKLoginTokenRequest;
+const SeatUserInfo = models.SeatUserInfo;
 
 
 /**
@@ -32,6 +34,17 @@ class CccClient extends AbstractClient {
         super("ccc.tencentcloudapi.com", "2020-02-10", credential, region, profile);
     }
     
+    /**
+     * 创建 SDK 登录 Token。
+     * @param {CreateSDKLoginTokenRequest} req
+     * @param {function(string, CreateSDKLoginTokenResponse):void} cb
+     * @public
+     */
+    CreateSDKLoginToken(req, cb) {
+        let resp = new CreateSDKLoginTokenResponse();
+        this.request("CreateSDKLoginToken", req, resp, cb);
+    }
+
     /**
      * 获取电话服务记录与录音
      * @param {DescribeTelCdrRequest} req

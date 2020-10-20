@@ -3531,7 +3531,7 @@ class DescribeJobResponse extends  AbstractModel {
 
         /**
          * 任务实例统计指标
-         * @type {TaskInstanceView || null}
+         * @type {TaskInstanceMetrics || null}
          */
         this.TaskInstanceMetrics = null;
 
@@ -3547,6 +3547,13 @@ class DescribeJobResponse extends  AbstractModel {
          * @type {Array.<Tag> || null}
          */
         this.Tags = null;
+
+        /**
+         * 下一步动作
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NextAction = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3596,7 +3603,7 @@ class DescribeJobResponse extends  AbstractModel {
         }
 
         if (params.TaskInstanceMetrics) {
-            let obj = new TaskInstanceView();
+            let obj = new TaskInstanceMetrics();
             obj.deserialize(params.TaskInstanceMetrics)
             this.TaskInstanceMetrics = obj;
         }
@@ -3610,6 +3617,7 @@ class DescribeJobResponse extends  AbstractModel {
                 this.Tags.push(obj);
             }
         }
+        this.NextAction = 'NextAction' in params ? params.NextAction : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }

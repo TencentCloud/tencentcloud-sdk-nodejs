@@ -379,6 +379,12 @@ class ListEventHistoryRequest extends  AbstractModel {
          */
         this.Size = null;
 
+        /**
+         * 事件标识符，可以用来指定查询特定的事件，如果不指定，则查询所有事件。
+         * @type {string || null}
+         */
+        this.EventId = null;
+
     }
 
     /**
@@ -395,6 +401,7 @@ class ListEventHistoryRequest extends  AbstractModel {
         this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.Context = 'Context' in params ? params.Context : null;
         this.Size = 'Size' in params ? params.Size : null;
+        this.EventId = 'EventId' in params ? params.EventId : null;
 
     }
 }
