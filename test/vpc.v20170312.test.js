@@ -988,9 +988,29 @@ it("vpc.v20170312.DeleteAssistantCidr", async function () {
     }
 })
 
+it("vpc.v20170312.UnassignIpv6CidrBlock", async function () {
+    try {
+       const data = await client.UnassignIpv6CidrBlock({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.ModifyDhcpIpAttribute", async function () {
     try {
        const data = await client.ModifyDhcpIpAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.DescribeBandwidthPackageResources", async function () {
+    try {
+       const data = await client.DescribeBandwidthPackageResources({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1011,6 +1031,16 @@ it("vpc.v20170312.DeleteNetworkInterface", async function () {
 it("vpc.v20170312.DescribeVpnConnections", async function () {
     try {
        const data = await client.DescribeVpnConnections({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.RenewAddresses", async function () {
+    try {
+       const data = await client.RenewAddresses({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1568,9 +1598,9 @@ it("vpc.v20170312.DescribeServiceTemplates", async function () {
     }
 })
 
-it("vpc.v20170312.UnassignIpv6CidrBlock", async function () {
+it("vpc.v20170312.DescribeBandwidthPackageBillUsage", async function () {
     try {
-       const data = await client.UnassignIpv6CidrBlock({})
+       const data = await client.DescribeBandwidthPackageBillUsage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

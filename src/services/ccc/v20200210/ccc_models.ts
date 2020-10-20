@@ -16,6 +16,36 @@
  */
 
 /**
+ * DescribeTelCdr请求参数结构体
+ */
+export interface DescribeTelCdrRequest {
+  /**
+   * 实例 ID
+   */
+  InstanceId: number
+
+  /**
+   * 起始时间戳，Unix 时间戳
+   */
+  StartTimeStamp: number
+
+  /**
+   * 结束时间戳，Unix 时间戳
+   */
+  EndTimeStamp: number
+
+  /**
+   * 返回记录条数
+   */
+  Limit: number
+
+  /**
+   * 偏移量
+   */
+  Offset: number
+}
+
+/**
  * DescribeTelCdr返回参数结构体
  */
 export interface DescribeTelCdrResponse {
@@ -28,6 +58,26 @@ export interface DescribeTelCdrResponse {
    * 话单记录
    */
   TelCdrs?: Array<TelCdrInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateSDKLoginToken返回参数结构体
+ */
+export interface CreateSDKLoginTokenResponse {
+  /**
+   * SDK 登录 Token。
+   */
+  Token?: string
+
+  /**
+   * 过期时间戳，Unix 时间戳。
+   */
+  ExpiredTime?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -91,6 +141,21 @@ export interface TelCdrInfo {
 }
 
 /**
+ * CreateSDKLoginToken请求参数结构体
+ */
+export interface CreateSDKLoginTokenRequest {
+  /**
+   * 应用ID。
+   */
+  SdkAppId: number
+
+  /**
+   * 坐席账号。
+   */
+  SeatUserId: string
+}
+
+/**
  * 坐席用户信息
  */
 export interface SeatUserInfo {
@@ -124,34 +189,4 @@ export interface SeatUserInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SkillGroupNameList?: Array<string>
-}
-
-/**
- * DescribeTelCdr请求参数结构体
- */
-export interface DescribeTelCdrRequest {
-  /**
-   * 实例 ID
-   */
-  InstanceId: number
-
-  /**
-   * 起始时间戳，Unix 时间戳
-   */
-  StartTimeStamp: number
-
-  /**
-   * 结束时间戳，Unix 时间戳
-   */
-  EndTimeStamp: number
-
-  /**
-   * 返回记录条数
-   */
-  Limit: number
-
-  /**
-   * 偏移量
-   */
-  Offset: number
 }

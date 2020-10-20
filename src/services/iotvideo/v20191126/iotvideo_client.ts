@@ -23,12 +23,14 @@ import {
   DescribeLogsRequest,
   CreateIotDataTypeRequest,
   DescribePubVersionsRequest,
+  RefundStorageServiceResponse,
   DescribeIotModelResponse,
   DisableDeviceResponse,
   DescribeRunLogRequest,
   DescribeProductsRequest,
   DeleteTraceIdsRequest,
   IotModelData,
+  CreateStorageServiceRequest,
   DescribeDevicesResponse,
   ModifyProductResponse,
   ModifyProductRequest,
@@ -37,17 +39,18 @@ import {
   DescribeTraceStatusResponse,
   CreateUploadPathRequest,
   CreateDevTokenRequest,
+  DescribeStorageServiceResponse,
   DeleteIotDataTypeRequest,
   DescribeMessageQueueRequest,
   DeleteAppUsrResponse,
   DescribeRegistrationStatusResponse,
   DescribeProductRequest,
   DescribeProductsResponse,
-  CreateAppUsrRequest,
   DeviceCertificate,
   UpgradeDeviceRequest,
   LogData,
   DescribeModelDataRetResponse,
+  CreateDevTokenResponse,
   RunIotModelResponse,
   RunIotModelRequest,
   OtaPubHistory,
@@ -62,7 +65,7 @@ import {
   CreateBindingRequest,
   DeleteDeviceRequest,
   TraceStatus,
-  CreateDevTokenResponse,
+  CreateAppUsrRequest,
   ModifyDevicePropertyRequest,
   RunDeviceStreamRequest,
   RunDeviceResponse,
@@ -74,6 +77,7 @@ import {
   DeleteMessageQueueResponse,
   DescribeOtaVersionsRequest,
   DescribeTraceIdsResponse,
+  ClearDeviceActiveCodeResponse,
   CreateProductResponse,
   DescribeRegistrationStatusRequest,
   CreateStorageRequest,
@@ -96,10 +100,12 @@ import {
   RunOtaVersionRequest,
   CreateDevicesResponse,
   DeviceModelData,
+  CreateStorageServiceResponse,
   DescribeIotDataTypeRequest,
   SendOnlineMsgRequest,
   DescribeDeviceRequest,
   DescribeRunLogResponse,
+  DeliverStorageServiceResponse,
   DescribeIotModelRequest,
   DescribeTraceIdsRequest,
   CreateAppUsrResponse,
@@ -108,15 +114,20 @@ import {
   CreateUsrTokenRequest,
   RunDeviceRequest,
   DescribeDeviceModelResponse,
+  DescribeStorageServiceRequest,
   ProductBase,
   CreateGencodeRequest,
   DescribePubVersionsResponse,
+  ClearDeviceActiveCodeRequest,
   ModifyDeviceActionRequest,
   CreateIotModelResponse,
   BindDevInfo,
   DescribeBindDevRequest,
+  StorageOrder,
   MsgQueueData,
   RegisteredStatus,
+  CreateAnonymousAccessTokenRequest,
+  DeliverStorageServiceRequest,
   RunDeviceStreamResponse,
   RunOtaVersionResponse,
   DescribeDeviceModelRequest,
@@ -128,6 +139,7 @@ import {
   DisableDeviceRequest,
   DisableOtaVersionRequest,
   DescribeProductResponse,
+  CreateAnonymousAccessTokenResponse,
   DescribeBindUsrRequest,
   SendOnlineMsgResponse,
   DeleteAppUsrRequest,
@@ -137,6 +149,7 @@ import {
   CreateIotDataTypeResponse,
   ModifyDevicePropertyResponse,
   DeleteBindingResponse,
+  RefundStorageServiceRequest,
   CreateStorageResponse,
   DisableDeviceStreamResponse,
   DeleteDeviceResponse,
@@ -174,13 +187,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateGencode）用于生成设备物模型源代码
+   * 清除设备激活码
    */
-  async CreateGencode(
-    req: CreateGencodeRequest,
-    cb?: (error: string, rep: CreateGencodeResponse) => void
-  ): Promise<CreateGencodeResponse> {
-    return this.request("CreateGencode", req, cb)
+  async ClearDeviceActiveCode(
+    req: ClearDeviceActiveCodeRequest,
+    cb?: (error: string, rep: ClearDeviceActiveCodeResponse) => void
+  ): Promise<ClearDeviceActiveCodeResponse> {
+    return this.request("ClearDeviceActiveCode", req, cb)
   }
 
   /**
@@ -300,6 +313,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateIotDataTypeResponse) => void
   ): Promise<CreateIotDataTypeResponse> {
     return this.request("CreateIotDataType", req, cb)
+  }
+
+  /**
+   * 创建匿名访问Token
+   */
+  async CreateAnonymousAccessToken(
+    req: CreateAnonymousAccessTokenRequest,
+    cb?: (error: string, rep: CreateAnonymousAccessTokenResponse) => void
+  ): Promise<CreateAnonymousAccessTokenResponse> {
+    return this.request("CreateAnonymousAccessToken", req, cb)
   }
 
   /**
@@ -470,6 +493,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 购买云存服务
+   */
+  async CreateStorageService(
+    req: CreateStorageServiceRequest,
+    cb?: (error: string, rep: CreateStorageServiceResponse) => void
+  ): Promise<CreateStorageServiceResponse> {
+    return this.request("CreateStorageService", req, cb)
+  }
+
+  /**
+   * 本接口（SetMessageQueue）用于配置物联网智能视频产品的转发消息队列。
+   */
+  async SetMessageQueue(
+    req: SetMessageQueueRequest,
+    cb?: (error: string, rep: SetMessageQueueResponse) => void
+  ): Promise<SetMessageQueueResponse> {
+    return this.request("SetMessageQueue", req, cb)
+  }
+
+  /**
    * 本接口（DeleteDevice）用于删除设备，可进行批量操作，每次操作最多100台设备。
    */
   async DeleteDevice(
@@ -497,6 +540,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteProductResponse) => void
   ): Promise<DeleteProductResponse> {
     return this.request("DeleteProduct", req, cb)
+  }
+
+  /**
+   * 将已购买的云存服务转移到另一设备
+   */
+  async DeliverStorageService(
+    req: DeliverStorageServiceRequest,
+    cb?: (error: string, rep: DeliverStorageServiceResponse) => void
+  ): Promise<DeliverStorageServiceResponse> {
+    return this.request("DeliverStorageService", req, cb)
   }
 
   /**
@@ -530,13 +583,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（SetMessageQueue）用于配置物联网智能视频产品的转发消息队列。
+   * 本接口（DescribeBindDev）用于查询终端用户绑定的设备列表。
    */
-  async SetMessageQueue(
-    req: SetMessageQueueRequest,
-    cb?: (error: string, rep: SetMessageQueueResponse) => void
-  ): Promise<SetMessageQueueResponse> {
-    return this.request("SetMessageQueue", req, cb)
+  async DescribeBindDev(
+    req: DescribeBindDevRequest,
+    cb?: (error: string, rep: DescribeBindDevResponse) => void
+  ): Promise<DescribeBindDevResponse> {
+    return this.request("DescribeBindDev", req, cb)
+  }
+
+  /**
+   * 查询云存服务
+   */
+  async DescribeStorageService(
+    req: DescribeStorageServiceRequest,
+    cb?: (error: string, rep: DescribeStorageServiceResponse) => void
+  ): Promise<DescribeStorageServiceResponse> {
+    return this.request("DescribeStorageService", req, cb)
   }
 
   /**
@@ -590,6 +653,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 退订已购买的云存服务
+   */
+  async RefundStorageService(
+    req: RefundStorageServiceRequest,
+    cb?: (error: string, rep: RefundStorageServiceResponse) => void
+  ): Promise<RefundStorageServiceResponse> {
+    return this.request("RefundStorageService", req, cb)
+  }
+
+  /**
    * 本接口（DescribeDevices）用于获取设备信息列表。
    */
   async DescribeDevices(
@@ -600,13 +673,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeBindDev）用于查询终端用户绑定的设备列表。
+   * 本接口（CreateGencode）用于生成设备物模型源代码
    */
-  async DescribeBindDev(
-    req: DescribeBindDevRequest,
-    cb?: (error: string, rep: DescribeBindDevResponse) => void
-  ): Promise<DescribeBindDevResponse> {
-    return this.request("DescribeBindDev", req, cb)
+  async CreateGencode(
+    req: CreateGencodeRequest,
+    cb?: (error: string, rep: CreateGencodeResponse) => void
+  ): Promise<CreateGencodeResponse> {
+    return this.request("CreateGencode", req, cb)
   }
 
   /**

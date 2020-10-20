@@ -28,16 +28,16 @@ class Client extends abstract_client_1.AbstractClient {
         super("ecc.tencentcloudapi.com", "2018-12-13", clientConfig);
     }
     /**
-       * https://ecc.tencentcloudapi.com/?Action=EHOCR
-  图像识别批改接口
-       */
+     * https://ecc.tencentcloudapi.com/?Action=EHOCR
+图像识别批改接口
+     */
     async EHOCR(req, cb) {
         return this.request("EHOCR", req, cb);
     }
     /**
-       * 接口请求域名： ecc.tencentcloudapi.com
-  纯文本英语作文批改
-       */
+     * 接口请求域名： ecc.tencentcloudapi.com
+纯文本英语作文批改
+     */
     async ECC(req, cb) {
         return this.request("ECC", req, cb);
     }
@@ -48,9 +48,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTask", req, cb);
     }
     /**
-       * https://ecc.tencentcloudapi.com/?Action=CorrectMultiImage
-  多图像识别批改接口
-       */
+     * https://ecc.tencentcloudapi.com/?Action=CorrectMultiImage
+多图像识别批改接口
+     */
     async CorrectMultiImage(req, cb) {
         return this.request("CorrectMultiImage", req, cb);
     }

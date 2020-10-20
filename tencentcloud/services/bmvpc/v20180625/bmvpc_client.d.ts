@@ -28,9 +28,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeRouteTables(req: DescribeRouteTablesRequest, cb?: (error: string, rep: DescribeRouteTablesResponse) => void): Promise<DescribeRouteTablesResponse>;
     /**
-       * NAT网关解绑该EIP后，NAT网关将不会使用该EIP作为访问外网的源IP地址
-  
-       */
+     * NAT网关解绑该EIP后，NAT网关将不会使用该EIP作为访问外网的源IP地址
+
+     */
     UnbindEipsFromNatGateway(req: UnbindEipsFromNatGatewayRequest, cb?: (error: string, rep: UnbindEipsFromNatGatewayResponse) => void): Promise<UnbindEipsFromNatGatewayResponse>;
     /**
      * NAT网关绑定EIP接口，可将EIP绑定到NAT网关，该EIP作为访问外网的源IP地址，将流量发送到Internet
@@ -57,16 +57,16 @@ export declare class Client extends AbstractClient {
      */
     DescribeRoutePolicies(req: DescribeRoutePoliciesRequest, cb?: (error: string, rep: DescribeRoutePoliciesResponse) => void): Promise<DescribeRoutePoliciesResponse>;
     /**
-       * 本接口(DeleteVpc)用于删除黑石私有网络(VPC)。
-  
-  删除私有网络前，请清理该私有网络下所有资源，包括子网、负载均衡、弹性 IP、对等连接、NAT 网关、专线通道、SSLVPN 等资源。
-       */
+     * 本接口(DeleteVpc)用于删除黑石私有网络(VPC)。
+
+删除私有网络前，请清理该私有网络下所有资源，包括子网、负载均衡、弹性 IP、对等连接、NAT 网关、专线通道、SSLVPN 等资源。
+     */
     DeleteVpc(req: DeleteVpcRequest, cb?: (error: string, rep: DeleteVpcResponse) => void): Promise<DeleteVpcResponse>;
     /**
-       * 本接口用于托管机器从VLANID不为5的子网中移除。
-  1) 不能从vlanId 为5的子网中移除。
-  2) 每次调用最多能支持传入10台物理机。
-       */
+     * 本接口用于托管机器从VLANID不为5的子网中移除。
+1) 不能从vlanId 为5的子网中移除。
+2) 每次调用最多能支持传入10台物理机。
+     */
     DeleteHostedInterface(req: DeleteHostedInterfaceRequest, cb?: (error: string, rep: DeleteHostedInterfaceResponse) => void): Promise<DeleteHostedInterfaceResponse>;
     /**
      * 注销私有网络IP为空闲
@@ -117,9 +117,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteCustomerGateway(req: DeleteCustomerGatewayRequest, cb?: (error: string, rep: DeleteCustomerGatewayResponse) => void): Promise<DeleteCustomerGatewayResponse>;
     /**
-       * 本接口（DeleteSubnet）用于删除黑石私有网络子网。
-  删除子网前，请清理该子网下所有资源，包括物理机、负载均衡、黑石数据库、弹性IP、NAT网关等资源
-       */
+     * 本接口（DeleteSubnet）用于删除黑石私有网络子网。
+删除子网前，请清理该子网下所有资源，包括物理机、负载均衡、黑石数据库、弹性IP、NAT网关等资源
+     */
     DeleteSubnet(req: DeleteSubnetRequest, cb?: (error: string, rep: DeleteSubnetResponse) => void): Promise<DeleteSubnetResponse>;
     /**
      * 修改子网属性
@@ -170,9 +170,9 @@ export declare class Client extends AbstractClient {
      */
     CreateDockerSubnetWithVlan(req: CreateDockerSubnetWithVlanRequest, cb?: (error: string, rep: CreateDockerSubnetWithVlanResponse) => void): Promise<CreateDockerSubnetWithVlanResponse>;
     /**
-       * 升级NAT网关接口，可NAT网关修改为小型NAT网关、中型NAT网关、以及大型NAT网关
-  
-       */
+     * 升级NAT网关接口，可NAT网关修改为小型NAT网关、中型NAT网关、以及大型NAT网关
+
+     */
     UpgradeNatGateway(req: UpgradeNatGatewayRequest, cb?: (error: string, rep: UpgradeNatGatewayResponse) => void): Promise<UpgradeNatGatewayResponse>;
     /**
      * 创建黑石路由表的路由规则
@@ -219,12 +219,12 @@ export declare class Client extends AbstractClient {
      */
     DeleteInterfaces(req: DeleteInterfacesRequest, cb?: (error: string, rep: DeleteInterfacesResponse) => void): Promise<DeleteInterfacesResponse>;
     /**
-       * 本接口（CreateHostedInterface）用于黑石托管机器加入带VLANID不为5的子网。
-  
-  1) 不能加入vlanId 为5的子网，只能加入VLANID范围为2000-2999的子网。
-  2) 每台托管机器最多可以加入20个子网。
-  3) 每次调用最多能支持传入10台托管机器。
-       */
+     * 本接口（CreateHostedInterface）用于黑石托管机器加入带VLANID不为5的子网。
+
+1) 不能加入vlanId 为5的子网，只能加入VLANID范围为2000-2999的子网。
+2) 每台托管机器最多可以加入20个子网。
+3) 每次调用最多能支持传入10台托管机器。
+     */
     CreateHostedInterface(req: CreateHostedInterfaceRequest, cb?: (error: string, rep: CreateHostedInterfaceResponse) => void): Promise<CreateHostedInterfaceResponse>;
     /**
      *  本接口（DescribeVpnConnections）查询VPN通道列表。
@@ -239,9 +239,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeVpcPeerConnections(req: DescribeVpcPeerConnectionsRequest, cb?: (error: string, rep: DescribeVpcPeerConnectionsResponse) => void): Promise<DescribeVpcPeerConnectionsResponse>;
     /**
-       * 本接口（DescribeVpcs）用于查询私有网络列表。
-  本接口不传参数时，返回默认排序下的前20条VPC信息。
-       */
+     * 本接口（DescribeVpcs）用于查询私有网络列表。
+本接口不传参数时，返回默认排序下的前20条VPC信息。
+     */
     DescribeVpcs(req: DescribeVpcsRequest, cb?: (error: string, rep: DescribeVpcsResponse) => void): Promise<DescribeVpcsResponse>;
     /**
      * 删除黑石对等连接
@@ -260,8 +260,8 @@ export declare class Client extends AbstractClient {
      */
     CreateVirtualSubnetWithVlan(req: CreateVirtualSubnetWithVlanRequest, cb?: (error: string, rep: CreateVirtualSubnetWithVlanResponse) => void): Promise<CreateVirtualSubnetWithVlanResponse>;
     /**
-       * 创建黑石私有网络的子网
-  访问管理: 用户可以对VpcId进行授权操作。例如设置资源为["qcs::bmvpc:::unVpc/vpc-xxxxx"]
-       */
+     * 创建黑石私有网络的子网
+访问管理: 用户可以对VpcId进行授权操作。例如设置资源为["qcs::bmvpc:::unVpc/vpc-xxxxx"]
+     */
     CreateSubnet(req: CreateSubnetRequest, cb?: (error: string, rep: CreateSubnetResponse) => void): Promise<CreateSubnetResponse>;
 }

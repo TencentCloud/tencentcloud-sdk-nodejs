@@ -18,6 +18,26 @@ const client = new tencentcloud.dc.v20180410.Client({
 })
 describe("dc.v20180410.test.js", function () {
 
+it("dc.v20180410.DescribePublicDirectConnectTunnelRoutes", async function () {
+    try {
+       const data = await client.DescribePublicDirectConnectTunnelRoutes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dc.v20180410.ModifyDirectConnectTunnelExtra", async function () {
+    try {
+       const data = await client.ModifyDirectConnectTunnelExtra({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dc.v20180410.ModifyDirectConnectAttribute", async function () {
     try {
        const data = await client.ModifyDirectConnectAttribute({})
@@ -31,6 +51,16 @@ it("dc.v20180410.ModifyDirectConnectAttribute", async function () {
 it("dc.v20180410.CreateDirectConnectTunnel", async function () {
     try {
        const data = await client.CreateDirectConnectTunnel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dc.v20180410.DescribeDirectConnectTunnelExtra", async function () {
+    try {
+       const data = await client.DescribeDirectConnectTunnelExtra({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

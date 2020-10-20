@@ -18,9 +18,39 @@ const client = new tencentcloud.lighthouse.v20200324.Client({
 })
 describe("lighthouse.v20200324.test.js", function () {
 
+it("lighthouse.v20200324.StopInstances", async function () {
+    try {
+       const data = await client.StopInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lighthouse.v20200324.DescribeInstances", async function () {
     try {
        const data = await client.DescribeInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.DescribeInstancesTrafficPackages", async function () {
+    try {
+       const data = await client.DescribeInstancesTrafficPackages({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.RebootInstances", async function () {
+    try {
+       const data = await client.RebootInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -38,9 +68,9 @@ it("lighthouse.v20200324.StartInstances", async function () {
     }
 })
 
-it("lighthouse.v20200324.StopInstances", async function () {
+it("lighthouse.v20200324.DeleteFirewallRules", async function () {
     try {
-       const data = await client.StopInstances({})
+       const data = await client.DeleteFirewallRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,9 +78,19 @@ it("lighthouse.v20200324.StopInstances", async function () {
     }
 })
 
-it("lighthouse.v20200324.RebootInstances", async function () {
+it("lighthouse.v20200324.DescribeBundles", async function () {
     try {
-       const data = await client.RebootInstances({})
+       const data = await client.DescribeBundles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.CreateFirewallRules", async function () {
+    try {
+       const data = await client.CreateFirewallRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,9 +118,9 @@ it("lighthouse.v20200324.ResetInstance", async function () {
     }
 })
 
-it("lighthouse.v20200324.DescribeBundles", async function () {
+it("lighthouse.v20200324.DescribeFirewallRules", async function () {
     try {
-       const data = await client.DescribeBundles({})
+       const data = await client.DescribeFirewallRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

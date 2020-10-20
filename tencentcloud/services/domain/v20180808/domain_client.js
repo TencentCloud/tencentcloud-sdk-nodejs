@@ -28,39 +28,96 @@ class Client extends abstract_client_1.AbstractClient {
         super("domain.tencentcloudapi.com", "2018-08-08", clientConfig);
     }
     /**
-       * 本接口 (  DescribeDomainNameList ) 获取域名列表。
-  
-  默认接口请求频率限制：20次/秒。
-  
-       */
+     * 本接口 (  DescribeDomainNameList ) 获取域名列表。
+
+默认接口请求频率限制：20次/秒。
+
+     */
     async DescribeDomainNameList(req, cb) {
         return this.request("DescribeDomainNameList", req, cb);
     }
     /**
-       * 本接口 ( CreateDomainBatch ) 用于批量注册域名 。
-  
-  默认接口请求频率限制：20次/秒。
-       */
+     * 本接口 ( UploadImage ) 用于上传资质照片 。
+
+默认接口请求频率限制：20次/秒。
+     */
+    async UploadImage(req, cb) {
+        return this.request("UploadImage", req, cb);
+    }
+    /**
+     * 本接口 ( CreateTemplate ) 用于添加域名信息模板 。
+
+默认接口请求频率限制：20次/秒。
+     */
+    async CreateTemplate(req, cb) {
+        return this.request("CreateTemplate", req, cb);
+    }
+    /**
+     * 本接口 ( TransferInDomainBatch ) 用于批量禁止域名转移 。
+
+默认接口请求频率限制：20次/秒。
+     */
+    async TransferProhibitionBatch(req, cb) {
+        return this.request("TransferProhibitionBatch", req, cb);
+    }
+    /**
+     * 本接口 ( ModifyDomainOwnerBatch) 用于域名批量账号间转移 。
+
+默认接口请求频率限制：20次/秒。
+     */
+    async ModifyDomainOwnerBatch(req, cb) {
+        return this.request("ModifyDomainOwnerBatch", req, cb);
+    }
+    /**
+     * 本接口 ( CreateDomainBatch ) 用于批量注册域名 。
+
+默认接口请求频率限制：20次/秒。
+     */
     async CreateDomainBatch(req, cb) {
         return this.request("CreateDomainBatch", req, cb);
     }
     /**
-       * 本接口 (  DescribeDomainBaseInfo) 获取域名基础信息。
-  
-  默认接口请求频率限制：20次/秒。
-  
-       */
+     * 本接口 (  DescribeDomainBaseInfo) 获取域名基础信息。
+
+默认接口请求频率限制：20次/秒。
+
+     */
     async DescribeDomainBaseInfo(req, cb) {
         return this.request("DescribeDomainBaseInfo", req, cb);
     }
     /**
-       * 本接口 (DescribeTemplateList) 用于获取模板列表。
-  
-  默认接口请求频率限制：20次/秒。
-  
-       */
+     * 本接口 ( DeleteTemplate ) 用于删除域名信息模板。
+
+默认接口请求频率限制：20次/秒。
+     */
+    async DeleteTemplate(req, cb) {
+        return this.request("DeleteTemplate", req, cb);
+    }
+    /**
+     * 本接口 (DescribeTemplateList) 用于获取模板列表。
+
+默认接口请求频率限制：20次/秒。
+
+     */
     async DescribeTemplateList(req, cb) {
         return this.request("DescribeTemplateList", req, cb);
+    }
+    /**
+     * 本接口 ( RenewDomainBatch ) 用于批量续费域名 。
+
+默认接口请求频率限制：20次/秒。
+
+     */
+    async RenewDomainBatch(req, cb) {
+        return this.request("RenewDomainBatch", req, cb);
+    }
+    /**
+     * 本接口 ( BatchModifyDomainInfo ) 用于批量域名信息修改 。
+
+默认接口请求频率限制：20次/秒。
+     */
+    async BatchModifyDomainInfo(req, cb) {
+        return this.request("BatchModifyDomainInfo", req, cb);
     }
     /**
      * 按照域名后缀获取对应的价格列表
@@ -69,10 +126,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDomainPriceList", req, cb);
     }
     /**
-       * 本接口 ( CheckBatchStatus ) 用于检查批量任务状态 。
-  
-  默认接口请求频率限制：20次/秒。
-       */
+     * 本接口 ( CheckBatchStatus ) 用于查询批量操作日志状态 。
+
+默认接口请求频率限制：20次/秒。
+     */
     async CheckBatchStatus(req, cb) {
         return this.request("CheckBatchStatus", req, cb);
     }
@@ -81,6 +138,38 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CheckDomain(req, cb) {
         return this.request("CheckDomain", req, cb);
+    }
+    /**
+     * 本接口 ( TransferInDomainBatch ) 用于批量转入域名 。
+
+默认接口请求频率限制：20次/秒。
+     */
+    async TransferInDomainBatch(req, cb) {
+        return this.request("TransferInDomainBatch", req, cb);
+    }
+    /**
+     * 本接口 ( UpdateProhibitionBatch ) 用于批量设置禁止域名更新 。
+
+默认接口请求频率限制：20次/秒。
+     */
+    async UpdateProhibitionBatch(req, cb) {
+        return this.request("UpdateProhibitionBatch", req, cb);
+    }
+    /**
+     * 本接口 ( ModifyDomainDNSBatch) 用于批量修改域名DNS信息 。
+
+默认接口请求频率限制：20次/秒。
+     */
+    async ModifyDomainDNSBatch(req, cb) {
+        return this.request("ModifyDomainDNSBatch", req, cb);
+    }
+    /**
+     * 本接口 ( SetDomainAutoRenew ) 用于设置域名自动续费。
+
+默认接口请求频率限制：20次/秒。
+     */
+    async SetDomainAutoRenew(req, cb) {
+        return this.request("SetDomainAutoRenew", req, cb);
     }
 }
 exports.Client = Client;

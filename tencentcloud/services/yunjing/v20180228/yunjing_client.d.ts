@@ -144,9 +144,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteNonlocalLoginPlaces(req: DeleteNonlocalLoginPlacesRequest, cb?: (error: string, rep: DeleteNonlocalLoginPlacesResponse) => void): Promise<DeleteNonlocalLoginPlacesResponse>;
     /**
-       * 本接口 (DescribeOpenPorts) 用于获取端口列表数据。
-  
-       */
+     * 本接口 (DescribeOpenPorts) 用于获取端口列表数据。
+
+     */
     DescribeOpenPorts(req: DescribeOpenPortsRequest, cb?: (error: string, rep: DescribeOpenPortsResponse) => void): Promise<DescribeOpenPortsResponse>;
     /**
      * 本接口 (ExportMaliciousRequests) 用于导出下载恶意请求文件。
@@ -317,9 +317,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeLoginWhiteList(req: DescribeLoginWhiteListRequest, cb?: (error: string, rep: DescribeLoginWhiteListResponse) => void): Promise<DescribeLoginWhiteListResponse>;
     /**
-       * 本接口 (DescribeVulScanResult) 用于获取漏洞检测结果。
-  
-       */
+     * 本接口 (DescribeVulScanResult) 用于获取漏洞检测结果。
+
+     */
     DescribeVulScanResult(req?: DescribeVulScanResultRequest, cb?: (error: string, rep: DescribeVulScanResultResponse) => void): Promise<DescribeVulScanResultResponse>;
     /**
      * 本接口 (DescribeHistoryAccounts) 用于获取帐号变更历史列表数据。
@@ -338,9 +338,9 @@ export declare class Client extends AbstractClient {
      */
     UntrustMalwares(req: UntrustMalwaresRequest, cb?: (error: string, rep: UntrustMalwaresResponse) => void): Promise<UntrustMalwaresResponse>;
     /**
-       * 本接口 (DescribeWeeklyReportVuls) 用于专业版周报漏洞数据。
-  
-       */
+     * 本接口 (DescribeWeeklyReportVuls) 用于专业版周报漏洞数据。
+
+     */
     DescribeWeeklyReportVuls(req: DescribeWeeklyReportVulsRequest, cb?: (error: string, rep: DescribeWeeklyReportVulsResponse) => void): Promise<DescribeWeeklyReportVulsResponse>;
     /**
      * 本接口 (DescribeWeeklyReportInfo) 用于获取专业周报详情数据。

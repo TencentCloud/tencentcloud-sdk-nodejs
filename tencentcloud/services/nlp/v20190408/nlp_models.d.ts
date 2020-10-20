@@ -3,20 +3,20 @@
  */
 export interface LexicalAnalysisResponse {
     /**
-        * 命名实体识别结果。取值范围：
-  <li>PER：表示人名，如刘德华、贝克汉姆</li>
-  <li>LOC：表示地名，如北京、华山</li>
-  <li>ORG：表示机构团体名，如腾讯、最高人民法院、人大附中</li>
-  <li>PRODUCTION：表示产品名，如QQ、微信、iPhone</li>
-        */
+      * 命名实体识别结果。取值范围：
+<li>PER：表示人名，如刘德华、贝克汉姆</li>
+<li>LOC：表示地名，如北京、华山</li>
+<li>ORG：表示机构团体名，如腾讯、最高人民法院、人大附中</li>
+<li>PRODUCTION：表示产品名，如QQ、微信、iPhone</li>
+      */
     NerTokens?: Array<NerToken>;
     /**
-     * 分词&词性标注结果（词性表请参见附录）
-     */
+      * 分词&词性标注结果（词性表请参见附录）
+      */
     PosTokens?: Array<PosToken>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -24,8 +24,8 @@ export interface LexicalAnalysisResponse {
  */
 export interface SentenceEmbeddingRequest {
     /**
-     * 输入的文本（仅支持UTF-8格式，不超过500字）
-     */
+      * 输入的文本（仅支持UTF-8格式，不超过500字）
+      */
     Text: string;
 }
 /**
@@ -33,8 +33,8 @@ export interface SentenceEmbeddingRequest {
  */
 export interface DescribeTripleRequest {
     /**
-     * 三元组查询条件
-     */
+      * 三元组查询条件
+      */
     TripleCondition: string;
 }
 /**
@@ -42,12 +42,12 @@ export interface DescribeTripleRequest {
  */
 export interface WordSimilarityRequest {
     /**
-     * 计算相似度的源词（仅支持UTF-8格式，不超过20字）
-     */
+      * 计算相似度的源词（仅支持UTF-8格式，不超过20字）
+      */
     SrcWord: string;
     /**
-     * 计算相似度的目标词（仅支持UTF-8格式，不超过20字）
-     */
+      * 计算相似度的目标词（仅支持UTF-8格式，不超过20字）
+      */
     TargetWord: string;
 }
 /**
@@ -55,12 +55,12 @@ export interface WordSimilarityRequest {
  */
 export interface SearchWordItemsResponse {
     /**
-     * 词条检索结果集合。
-     */
+      * 词条检索结果集合。
+      */
     Results?: Array<SearchResult>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -68,20 +68,20 @@ export interface SearchWordItemsResponse {
  */
 export interface DpToken {
     /**
-     * 当前词父节点的序号
-     */
+      * 当前词父节点的序号
+      */
     HeadId?: number;
     /**
-     * 基础词的序号
-     */
+      * 基础词的序号
+      */
     Id?: number;
     /**
-     * 句法依存关系的类型
-     */
+      * 句法依存关系的类型
+      */
     Relation?: string;
     /**
-     * 基础词
-     */
+      * 基础词
+      */
     Word?: string;
 }
 /**
@@ -89,12 +89,12 @@ export interface DpToken {
  */
 export interface TextSimilarityResponse {
     /**
-     * 每个目标句子与源句子的相似度分值，按照分值降序排列
-     */
+      * 每个目标句子与源句子的相似度分值，按照分值降序排列
+      */
     Similarity?: Array<Similarity>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -102,8 +102,8 @@ export interface TextSimilarityResponse {
  */
 export interface WordEmbeddingRequest {
     /**
-     * 输入的词语（仅支持UTF-8格式，不超过20字）
-     */
+      * 输入的词语（仅支持UTF-8格式，不超过20字）
+      */
     Text: string;
 }
 /**
@@ -111,16 +111,16 @@ export interface WordEmbeddingRequest {
  */
 export interface ChatBotResponse {
     /**
-     * 对于当前输出回复的自信度
-     */
+      * 对于当前输出回复的自信度
+      */
     Confidence?: number;
     /**
-     * 闲聊回复
-     */
+      * 闲聊回复
+      */
     Reply?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -128,12 +128,12 @@ export interface ChatBotResponse {
  */
 export interface KeywordsExtractionResponse {
     /**
-     * 关键词提取结果
-     */
+      * 关键词提取结果
+      */
     Keywords?: Array<Keyword>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -141,13 +141,13 @@ export interface KeywordsExtractionResponse {
  */
 export interface AutoSummarizationRequest {
     /**
-     * 待处理的文本（仅支持UTF-8格式，不超过2000字）
-     */
+      * 待处理的文本（仅支持UTF-8格式，不超过2000字）
+      */
     Text: string;
     /**
-        * 指定摘要的长度上限（默认值为200）
-  注：为保证摘要的可读性，最终生成的摘要长度会低于指定的长度上限。
-        */
+      * 指定摘要的长度上限（默认值为200）
+注：为保证摘要的可读性，最终生成的摘要长度会低于指定的长度上限。
+      */
     Length?: number;
 }
 /**
@@ -155,16 +155,16 @@ export interface AutoSummarizationRequest {
  */
 export interface ChatBotRequest {
     /**
-     * 用户请求的query
-     */
+      * 用户请求的query
+      */
     Query: string;
     /**
-     * 0: 通用闲聊, 1:儿童闲聊, 默认是通用闲聊
-     */
+      * 0: 通用闲聊, 1:儿童闲聊, 默认是通用闲聊
+      */
     Flag?: number;
     /**
-     * 服务的id,  主要用于儿童闲聊接口，比如手Q的openid
-     */
+      * 服务的id,  主要用于儿童闲聊接口，比如手Q的openid
+      */
     OpenId?: string;
 }
 /**
@@ -172,12 +172,12 @@ export interface ChatBotRequest {
  */
 export interface DescribeRelationRequest {
     /**
-     * 输入第一个实体
-     */
+      * 输入第一个实体
+      */
     LeftEntityName: string;
     /**
-     * 输入第二个实体
-     */
+      * 输入第二个实体
+      */
     RightEntityName: string;
 }
 /**
@@ -185,12 +185,12 @@ export interface DescribeRelationRequest {
  */
 export interface KeywordsExtractionRequest {
     /**
-     * 待处理的文本（仅支持UTF-8格式，不超过10000字）
-     */
+      * 待处理的文本（仅支持UTF-8格式，不超过10000字）
+      */
     Text: string;
     /**
-     * 指定关键词个数上限（默认值为5）
-     */
+      * 指定关键词个数上限（默认值为5）
+      */
     Num?: number;
 }
 /**
@@ -198,24 +198,24 @@ export interface KeywordsExtractionRequest {
  */
 export interface DictInfo {
     /**
-     * 自定义词库ID。
-     */
+      * 自定义词库ID。
+      */
     Id: string;
     /**
-     * 自定义词库名称。
-     */
+      * 自定义词库名称。
+      */
     Name: string;
     /**
-     * 自定义词库创建时间，形式为:yyyy-mm-dd hh:mm:ss。
-     */
+      * 自定义词库创建时间，形式为:yyyy-mm-dd hh:mm:ss。
+      */
     CreateTime?: string;
     /**
-     * 自定义词库描述信息。
-     */
+      * 自定义词库描述信息。
+      */
     Description?: string;
     /**
-     * 自定义词库修改时间，形式为:yyyy-mm-dd hh:mm:ss。
-     */
+      * 自定义词库修改时间，形式为:yyyy-mm-dd hh:mm:ss。
+      */
     UpdateTime?: string;
 }
 /**
@@ -223,12 +223,12 @@ export interface DictInfo {
  */
 export interface DescribeEntityResponse {
     /**
-     * 返回查询实体相关信息
-     */
+      * 返回查询实体相关信息
+      */
     Content?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -236,16 +236,16 @@ export interface DescribeEntityResponse {
  */
 export interface WordItem {
     /**
-     * 词条文本内容。
-     */
+      * 词条文本内容。
+      */
     Text: string;
     /**
-     * 词条创建时间。
-     */
+      * 词条创建时间。
+      */
     CreateTime?: string;
     /**
-     * 词条的词性。
-     */
+      * 词条的词性。
+      */
     Pos?: string;
 }
 /**
@@ -253,20 +253,20 @@ export interface WordItem {
  */
 export interface ClassificationResult {
     /**
-     * 一级分类名称
-     */
+      * 一级分类名称
+      */
     FirstClassName?: string;
     /**
-     * 一级分类概率
-     */
+      * 一级分类概率
+      */
     FirstClassProbability?: number;
     /**
-     * 二级分类名称
-     */
+      * 二级分类名称
+      */
     SecondClassName?: string;
     /**
-     * 二级分类概率
-     */
+      * 二级分类概率
+      */
     SecondClassProbability?: number;
 }
 /**
@@ -274,8 +274,8 @@ export interface ClassificationResult {
  */
 export interface DescribeEntityRequest {
     /**
-     * 实体名称
-     */
+      * 实体名称
+      */
     EntityName: string;
 }
 /**
@@ -283,12 +283,12 @@ export interface DescribeEntityRequest {
  */
 export interface Keyword {
     /**
-     * 权重
-     */
+      * 权重
+      */
     Score?: number;
     /**
-     * 关键词
-     */
+      * 关键词
+      */
     Word?: string;
 }
 /**
@@ -296,8 +296,8 @@ export interface Keyword {
  */
 export interface UpdateDictResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -305,12 +305,12 @@ export interface UpdateDictResponse {
  */
 export interface DescribeDictsRequest {
     /**
-     * 每页数据量，范围为1~100，默认为10。
-     */
+      * 每页数据量，范围为1~100，默认为10。
+      */
     Limit?: number;
     /**
-     * 分页偏移量，从0开始，默认为0。
-     */
+      * 分页偏移量，从0开始，默认为0。
+      */
     Offset?: number;
 }
 /**
@@ -318,12 +318,12 @@ export interface DescribeDictsRequest {
  */
 export interface DescribeRelationResponse {
     /**
-     * 返回查询实体间的关系
-     */
+      * 返回查询实体间的关系
+      */
     Content?: Array<EntityRelationContent>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -331,20 +331,20 @@ export interface DescribeRelationResponse {
  */
 export interface SearchResult {
     /**
-     * 0表示词条不存在，1表示存在。
-     */
+      * 0表示词条不存在，1表示存在。
+      */
     IsExist: number;
     /**
-     * 匹配到的词条文本。
-     */
+      * 匹配到的词条文本。
+      */
     MatchText: string;
     /**
-     * 被搜索的词条文本。
-     */
+      * 被搜索的词条文本。
+      */
     Text: string;
     /**
-     * 词条的词性。
-     */
+      * 词条的词性。
+      */
     Pos?: string;
 }
 /**
@@ -352,12 +352,12 @@ export interface SearchResult {
  */
 export interface CreateWordItemsRequest {
     /**
-     * 待添加的词条集合。
-     */
+      * 待添加的词条集合。
+      */
     WordItems: Array<WordItem>;
     /**
-     * 自定义词库ID。
-     */
+      * 自定义词库ID。
+      */
     DictId: string;
 }
 /**
@@ -365,8 +365,8 @@ export interface CreateWordItemsRequest {
  */
 export interface TextCorrectionRequest {
     /**
-     * 待纠错的文本（仅支持UTF-8格式，不超过2000字）
-     */
+      * 待纠错的文本（仅支持UTF-8格式，不超过2000字）
+      */
     Text: string;
 }
 /**
@@ -374,8 +374,8 @@ export interface TextCorrectionRequest {
  */
 export interface DeleteWordItemsResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -383,16 +383,16 @@ export interface DeleteWordItemsResponse {
  */
 export interface SentenceEmbeddingResponse {
     /**
-     * 句向量的维度
-     */
+      * 句向量的维度
+      */
     Dimension?: number;
     /**
-     * 句向量数组
-     */
+      * 句向量数组
+      */
     Vector?: Array<number>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -400,16 +400,16 @@ export interface SentenceEmbeddingResponse {
  */
 export interface UpdateDictRequest {
     /**
-     * 自定义词库ID。
-     */
+      * 自定义词库ID。
+      */
     DictId: string;
     /**
-     * 词库描述，不超过100字。
-     */
+      * 词库描述，不超过100字。
+      */
     Description?: string;
     /**
-     * 词库名称，不超过20字。
-     */
+      * 词库名称，不超过20字。
+      */
     Name?: string;
 }
 /**
@@ -417,12 +417,12 @@ export interface UpdateDictRequest {
  */
 export interface TextClassificationResponse {
     /**
-     * 文本分类结果（文本分类映射表请参见附录）
-     */
+      * 文本分类结果（文本分类映射表请参见附录）
+      */
     Classes?: Array<ClassificationResult>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -430,8 +430,8 @@ export interface TextClassificationResponse {
  */
 export interface DeleteDictResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -439,20 +439,20 @@ export interface DeleteDictResponse {
  */
 export interface DescribeWordItemsRequest {
     /**
-     * 自定义词库ID。
-     */
+      * 自定义词库ID。
+      */
     DictId: string;
     /**
-     * 每页数据量，范围为1~100，默认为10。
-     */
+      * 每页数据量，范围为1~100，默认为10。
+      */
     Limit?: number;
     /**
-     * 分页偏移量，从0开始，默认为0。
-     */
+      * 分页偏移量，从0开始，默认为0。
+      */
     Offset?: number;
     /**
-     * 待检索的词条文本，支持模糊匹配。
-     */
+      * 待检索的词条文本，支持模糊匹配。
+      */
     Text?: string;
 }
 /**
@@ -460,12 +460,12 @@ export interface DescribeWordItemsRequest {
  */
 export interface SearchWordItemsRequest {
     /**
-     * 待检索的词条集合。
-     */
+      * 待检索的词条集合。
+      */
     WordItems: Array<WordItem>;
     /**
-     * 自定义词库ID。
-     */
+      * 自定义词库ID。
+      */
     DictId: string;
 }
 /**
@@ -473,14 +473,14 @@ export interface SearchWordItemsRequest {
  */
 export interface TextClassificationRequest {
     /**
-     * 待分类的文本（仅支持UTF-8格式，不超过10000字）
-     */
+      * 待分类的文本（仅支持UTF-8格式，不超过10000字）
+      */
     Text: string;
     /**
-        * 领域分类体系（默认取1值）：
-  1、通用领域
-  2、新闻领域
-        */
+      * 领域分类体系（默认取1值）：
+1、通用领域
+2、新闻领域
+      */
     Flag?: number;
 }
 /**
@@ -488,12 +488,12 @@ export interface TextClassificationRequest {
  */
 export interface CreateDictResponse {
     /**
-     * 创建的自定义词库ID。
-     */
+      * 创建的自定义词库ID。
+      */
     DictId?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -501,13 +501,13 @@ export interface CreateDictResponse {
  */
 export interface TextSimilarityRequest {
     /**
-     * 需要与目标句子计算相似度的源句子（仅支持UTF-8格式，不超过500字符）
-     */
+      * 需要与目标句子计算相似度的源句子（仅支持UTF-8格式，不超过500字符）
+      */
     SrcText: string;
     /**
-        * 需要与源句子计算相似度的一个或多个目标句子（仅支持UTF-8格式，目标句子的数量不超过100个，每个句子不超过500字符）
-  注意：每成功计算1个目标句子与源句子的相似度算1次调用
-        */
+      * 需要与源句子计算相似度的一个或多个目标句子（仅支持UTF-8格式，目标句子的数量不超过100个，每个句子不超过500字符）
+注意：每成功计算1个目标句子与源句子的相似度算1次调用
+      */
     TargetText: Array<string>;
 }
 /**
@@ -515,12 +515,12 @@ export interface TextSimilarityRequest {
  */
 export interface AutoSummarizationResponse {
     /**
-     * 文本摘要结果
-     */
+      * 文本摘要结果
+      */
     Summary?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -528,16 +528,16 @@ export interface AutoSummarizationResponse {
  */
 export interface WordEmbeddingResponse {
     /**
-     * 词向量的维度
-     */
+      * 词向量的维度
+      */
     Dimension?: number;
     /**
-     * 词向量数组
-     */
+      * 词向量数组
+      */
     Vector?: Array<number>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -545,12 +545,12 @@ export interface WordEmbeddingResponse {
  */
 export interface DescribeTripleResponse {
     /**
-     * 返回三元组信息
-     */
+      * 返回三元组信息
+      */
     Content?: Array<TripleContent>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -558,16 +558,16 @@ export interface DescribeTripleResponse {
  */
 export interface DescribeWordItemsResponse {
     /**
-     * 词条信息列表。
-     */
+      * 词条信息列表。
+      */
     WordItems?: Array<WordItem>;
     /**
-     * 词条记录总条数。
-     */
+      * 词条记录总条数。
+      */
     TotalCount?: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -575,12 +575,12 @@ export interface DescribeWordItemsResponse {
  */
 export interface SimilarWordsRequest {
     /**
-     * 输入的词语（仅支持UTF-8格式，不超过20字）
-     */
+      * 输入的词语（仅支持UTF-8格式，不超过20字）
+      */
     Text: string;
     /**
-     * 相似词个数；取值范围：1-200，默认为10；
-     */
+      * 相似词个数；取值范围：1-200，默认为10；
+      */
     WordNumber?: number;
 }
 /**
@@ -588,12 +588,12 @@ export interface SimilarWordsRequest {
  */
 export interface DescribeDictRequest {
     /**
-     * 自定义词库ID。
-     */
+      * 自定义词库ID。
+      */
     DictId?: string;
     /**
-     * 自定义词库名称，模糊搜索。
-     */
+      * 自定义词库名称，模糊搜索。
+      */
     Name?: string;
 }
 /**
@@ -601,20 +601,20 @@ export interface DescribeDictRequest {
  */
 export interface PosToken {
     /**
-     * 起始位置
-     */
+      * 起始位置
+      */
     BeginOffset?: number;
     /**
-     * 长度
-     */
+      * 长度
+      */
     Length?: number;
     /**
-     * 词性
-     */
+      * 词性
+      */
     Pos?: string;
     /**
-     * 基础词
-     */
+      * 基础词
+      */
     Word?: string;
 }
 /**
@@ -622,27 +622,27 @@ export interface PosToken {
  */
 export interface SentimentAnalysisResponse {
     /**
-     * 负面情感概率
-     */
+      * 负面情感概率
+      */
     Negative?: number;
     /**
-     * 中性情感概率，当输入参数Mode取值为3class时有效，否则值为空
-     */
+      * 中性情感概率，当输入参数Mode取值为3class时有效，否则值为空
+      */
     Neutral?: number;
     /**
-     * 正面情感概率
-     */
+      * 正面情感概率
+      */
     Positive?: number;
     /**
-        * 情感分类结果：
-  1、positive，表示正面情感
-  2、negative，表示负面情感
-  3、neutral，表示中性、无情感
-        */
+      * 情感分类结果：
+1、positive，表示正面情感
+2、negative，表示负面情感
+3、neutral，表示中性、无情感
+      */
     Sentiment?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -650,12 +650,12 @@ export interface SentimentAnalysisResponse {
  */
 export interface DeleteWordItemsRequest {
     /**
-     * 待删除的词条集合。
-     */
+      * 待删除的词条集合。
+      */
     WordItems: Array<WordItem>;
     /**
-     * 自定义词库ID。
-     */
+      * 自定义词库ID。
+      */
     DictId: string;
 }
 /**
@@ -663,12 +663,12 @@ export interface DeleteWordItemsRequest {
  */
 export interface DescribeDictResponse {
     /**
-     * 查询到的词库信息列表。
-     */
+      * 查询到的词库信息列表。
+      */
     Dicts?: Array<DictInfo>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -676,16 +676,16 @@ export interface DescribeDictResponse {
  */
 export interface TextCorrectionResponse {
     /**
-     * 纠错详情
-     */
+      * 纠错详情
+      */
     CCITokens?: Array<CCIToken>;
     /**
-     * 纠错后的文本
-     */
+      * 纠错后的文本
+      */
     ResultText?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -693,16 +693,16 @@ export interface TextCorrectionResponse {
  */
 export interface DescribeDictsResponse {
     /**
-     * 自定义词库信息列表。
-     */
+      * 自定义词库信息列表。
+      */
     Dicts?: Array<DictInfo>;
     /**
-     * 记录总条数。
-     */
+      * 记录总条数。
+      */
     TotalCount?: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -710,8 +710,8 @@ export interface DescribeDictsResponse {
  */
 export interface DependencyParsingRequest {
     /**
-     * 待分析的文本（仅支持UTF-8格式，不超过200字）
-     */
+      * 待分析的文本（仅支持UTF-8格式，不超过200字）
+      */
     Text: string;
 }
 /**
@@ -719,8 +719,8 @@ export interface DependencyParsingRequest {
  */
 export interface DeleteDictRequest {
     /**
-     * 要删除的自定义词库ID。
-     */
+      * 要删除的自定义词库ID。
+      */
     DictId: string;
 }
 /**
@@ -728,20 +728,20 @@ export interface DeleteDictRequest {
  */
 export interface NerToken {
     /**
-     * 起始位置
-     */
+      * 起始位置
+      */
     BeginOffset?: number;
     /**
-     * 长度
-     */
+      * 长度
+      */
     Length?: number;
     /**
-     * 命名实体类型
-     */
+      * 命名实体类型
+      */
     Type?: string;
     /**
-     * 基础词
-     */
+      * 基础词
+      */
     Word?: string;
 }
 /**
@@ -749,12 +749,12 @@ export interface NerToken {
  */
 export interface SimilarWordsResponse {
     /**
-     * 相似词数组
-     */
+      * 相似词数组
+      */
     SimilarWords?: Array<string>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -762,16 +762,16 @@ export interface SimilarWordsResponse {
  */
 export interface EntityRelationObject {
     /**
-     * object对应id
-     */
+      * object对应id
+      */
     Id?: Array<string>;
     /**
-     * object对应name
-     */
+      * object对应name
+      */
     Name?: Array<string>;
     /**
-     * object对应popular值
-     */
+      * object对应popular值
+      */
     Popular?: Array<number>;
 }
 /**
@@ -779,27 +779,27 @@ export interface EntityRelationObject {
  */
 export interface DependencyParsingResponse {
     /**
-        * 句法依存分析结果，其中句法依存关系的类型包括：
-  <li>主谓关系，eg: 我送她一束花 (我 <-- 送)
-  <li>动宾关系，eg: 我送她一束花 (送 --> 花)
-  <li>间宾关系，eg: 我送她一束花 (送 --> 她)
-  <li>前置宾语，eg: 他什么书都读 (书 <-- 读)
-  <li>兼语，eg: 他请我吃饭 (请 --> 我)
-  <li>定中关系，eg: 红苹果 (红 <-- 苹果)
-  <li>状中结构，eg: 非常美丽 (非常 <-- 美丽)
-  <li>动补结构，eg: 做完了作业 (做 --> 完)
-  <li>并列关系，eg: 大山和大海 (大山 --> 大海)
-  <li>介宾关系，eg: 在贸易区内 (在 --> 内)
-  <li>左附加关系，eg: 大山和大海 (和 <-- 大海)
-  <li>右附加关系，eg: 孩子们 (孩子 --> 们)
-  <li>独立结构，eg: 两个单句在结构上彼此独立
-  <li>标点符号，eg: 。
-  <li>核心关系，eg: 整个句子的核心
-        */
+      * 句法依存分析结果，其中句法依存关系的类型包括：
+<li>主谓关系，eg: 我送她一束花 (我 <-- 送)
+<li>动宾关系，eg: 我送她一束花 (送 --> 花)
+<li>间宾关系，eg: 我送她一束花 (送 --> 她)
+<li>前置宾语，eg: 他什么书都读 (书 <-- 读)
+<li>兼语，eg: 他请我吃饭 (请 --> 我)
+<li>定中关系，eg: 红苹果 (红 <-- 苹果)
+<li>状中结构，eg: 非常美丽 (非常 <-- 美丽)
+<li>动补结构，eg: 做完了作业 (做 --> 完)
+<li>并列关系，eg: 大山和大海 (大山 --> 大海)
+<li>介宾关系，eg: 在贸易区内 (在 --> 内)
+<li>左附加关系，eg: 大山和大海 (和 <-- 大海)
+<li>右附加关系，eg: 孩子们 (孩子 --> 们)
+<li>独立结构，eg: 两个单句在结构上彼此独立
+<li>标点符号，eg: 。
+<li>核心关系，eg: 整个句子的核心
+      */
     DpTokens?: Array<DpToken>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -807,12 +807,12 @@ export interface DependencyParsingResponse {
  */
 export interface Similarity {
     /**
-     * 相似度分数
-     */
+      * 相似度分数
+      */
     Score: number;
     /**
-     * 目标文本句子
-     */
+      * 目标文本句子
+      */
     Text: string;
 }
 /**
@@ -820,16 +820,16 @@ export interface Similarity {
  */
 export interface CCIToken {
     /**
-     * 错别字的起始位置，从0开始
-     */
+      * 错别字的起始位置，从0开始
+      */
     BeginOffset?: number;
     /**
-     * 错别字纠错结果
-     */
+      * 错别字纠错结果
+      */
     CorrectWord?: string;
     /**
-     * 错别字内容
-     */
+      * 错别字内容
+      */
     Word?: string;
 }
 /**
@@ -837,18 +837,18 @@ export interface CCIToken {
  */
 export interface LexicalAnalysisRequest {
     /**
-     * 待分析的文本（仅支持UTF-8格式，不超过500字）
-     */
+      * 待分析的文本（仅支持UTF-8格式，不超过500字）
+      */
     Text: string;
     /**
-     * 指定要加载的自定义词库ID。
-     */
+      * 指定要加载的自定义词库ID。
+      */
     DictId?: string;
     /**
-        * 词法分析模式（默认取2值）：
-  1、高精度（混合粒度分词能力）；
-  2、高性能（单粒度分词能力）；
-        */
+      * 词法分析模式（默认取2值）：
+1、高精度（混合粒度分词能力）；
+2、高性能（单粒度分词能力）；
+      */
     Flag?: number;
 }
 /**
@@ -856,8 +856,8 @@ export interface LexicalAnalysisRequest {
  */
 export interface CreateWordItemsResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -865,22 +865,22 @@ export interface CreateWordItemsResponse {
  */
 export interface SentimentAnalysisRequest {
     /**
-     * 待分析的文本（仅支持UTF-8格式，不超过200字）
-     */
+      * 待分析的文本（仅支持UTF-8格式，不超过200字）
+      */
     Text: string;
     /**
-        * 待分析文本所属的类型，仅当输入参数Mode取值为2class时有效（默认取4值）：
-  1、商品评论类
-  2、社交类
-  3、美食酒店类
-  4、通用领域类
-        */
+      * 待分析文本所属的类型，仅当输入参数Mode取值为2class时有效（默认取4值）：
+1、商品评论类
+2、社交类
+3、美食酒店类
+4、通用领域类
+      */
     Flag?: number;
     /**
-        * 情感分类模式选项，可取2class或3class（默认值为2class）
-  1、2class：返回正负面二分类情感结果
-  2、3class：返回正负面及中性三分类情感结果
-        */
+      * 情感分类模式选项，可取2class或3class（默认值为2class）
+1、2class：返回正负面二分类情感结果
+2、3class：返回正负面及中性三分类情感结果
+      */
     Mode?: string;
 }
 /**
@@ -888,16 +888,16 @@ export interface SentimentAnalysisRequest {
  */
 export interface EntityRelationSubject {
     /**
-     * Subject对应id
-     */
+      * Subject对应id
+      */
     Id?: Array<string>;
     /**
-     * Subject对应name
-     */
+      * Subject对应name
+      */
     Name?: Array<string>;
     /**
-     * Subject对应popular
-     */
+      * Subject对应popular
+      */
     Popular?: Array<number>;
 }
 /**
@@ -905,16 +905,16 @@ export interface EntityRelationSubject {
  */
 export interface EntityRelationContent {
     /**
-     * 实体关系查询返回关系的object
-     */
+      * 实体关系查询返回关系的object
+      */
     Object?: Array<EntityRelationObject>;
     /**
-     * 实体关系查询返回关系的subject
-     */
+      * 实体关系查询返回关系的subject
+      */
     Subject?: Array<EntityRelationSubject>;
     /**
-     * 实体关系查询返回的关系名称
-     */
+      * 实体关系查询返回的关系名称
+      */
     Relation?: string;
 }
 /**
@@ -922,12 +922,12 @@ export interface EntityRelationContent {
  */
 export interface WordSimilarityResponse {
     /**
-     * 两个词语的相似度
-     */
+      * 两个词语的相似度
+      */
     Similarity?: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -935,20 +935,20 @@ export interface WordSimilarityResponse {
  */
 export interface TripleContent {
     /**
-     * 实体id
-     */
+      * 实体id
+      */
     Id?: string;
     /**
-     * 实体名称
-     */
+      * 实体名称
+      */
     Name?: string;
     /**
-     * 实体order
-     */
+      * 实体order
+      */
     Order?: number;
     /**
-     * 实体流行度
-     */
+      * 实体流行度
+      */
     Popular?: number;
 }
 /**
@@ -956,11 +956,11 @@ export interface TripleContent {
  */
 export interface CreateDictRequest {
     /**
-     * 自定义词库名称，不超过20字。
-     */
+      * 自定义词库名称，不超过20字。
+      */
     Name: string;
     /**
-     * 自定义词库描述，不超过100字。
-     */
+      * 自定义词库描述，不超过100字。
+      */
     Description?: string;
 }

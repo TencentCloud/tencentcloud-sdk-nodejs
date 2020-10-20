@@ -3,8 +3,8 @@
  */
 export interface DeleteModelRequest {
     /**
-     * 素材ID。
-     */
+      * 素材ID。
+      */
     ModelId: string;
 }
 /**
@@ -12,16 +12,16 @@ export interface DeleteModelRequest {
  */
 export interface BeautifyVideoRequest {
     /**
-     * 视频url地址
-     */
+      * 视频url地址
+      */
     Url: string;
     /**
-     * 美颜参数 - 美白、平滑、大眼和瘦脸。参数值范围[0, 100]。参数值为0，则不做美颜。参数默认值为0。目前默认取数组第一个元素是对所有人脸美颜。
-     */
+      * 美颜参数 - 美白、平滑、大眼和瘦脸。参数值范围[0, 100]。参数值为0，则不做美颜。参数默认值为0。目前默认取数组第一个元素是对所有人脸美颜。
+      */
     BeautyParam?: Array<BeautyParam>;
     /**
-     * 目前只支持mp4
-     */
+      * 目前只支持mp4
+      */
     OutputVideoType?: string;
 }
 /**
@@ -29,8 +29,8 @@ export interface BeautifyVideoRequest {
  */
 export interface CancelBeautifyVideoJobResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -38,20 +38,20 @@ export interface CancelBeautifyVideoJobResponse {
  */
 export interface RGBAInfo {
     /**
-     * R通道数值。[0,255]。
-     */
+      * R通道数值。[0,255]。
+      */
     R: number;
     /**
-     * G通道数值。[0,255]。
-     */
+      * G通道数值。[0,255]。
+      */
     G: number;
     /**
-     * B通道数值。[0,255]。
-     */
+      * B通道数值。[0,255]。
+      */
     B: number;
     /**
-     * A通道数值。[0,100]。建议取值50。
-     */
+      * A通道数值。[0,100]。建议取值50。
+      */
     A: number;
 }
 /**
@@ -59,39 +59,39 @@ export interface RGBAInfo {
  */
 export interface BeautifyVideoOutput {
     /**
-        * 视频美颜输出的url
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 视频美颜输出的url
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     VideoUrl: string;
     /**
-        * 视频美颜输出的视频MD5，用于校验
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 视频美颜输出的视频MD5，用于校验
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     VideoMD5: string;
     /**
-        * 美颜输出的视频封面图base64字符串
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 美颜输出的视频封面图base64字符串
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     CoverImage: string;
     /**
-        * 视频宽度
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 视频宽度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     Width: number;
     /**
-        * 视频高度
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 视频高度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     Height: number;
     /**
-        * 每秒传输帧数
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 每秒传输帧数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     Fps: number;
     /**
-        * 视频播放时长，单位为秒
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 视频播放时长，单位为秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     DurationInSec: number;
 }
 /**
@@ -99,22 +99,22 @@ export interface BeautifyVideoOutput {
  */
 export interface LipColorInfo {
     /**
-     * 使用RGBA模型试唇色。
-     */
+      * 使用RGBA模型试唇色。
+      */
     RGBA?: RGBAInfo;
     /**
-        * 使用已注册的 LUT 文件试唇色。
-  ModelId 和 RGBA 两个参数只需提供一个，若都提供只使用 ModelId。
-        */
+      * 使用已注册的 LUT 文件试唇色。
+ModelId 和 RGBA 两个参数只需提供一个，若都提供只使用 ModelId。
+      */
     ModelId?: string;
     /**
-        * 人脸框位置。若不输入则选择 Image 或 Url 中面积最大的人脸。
-  您可以通过 [人脸检测与分析](https://cloud.tencent.com/document/api/867/32800)  接口获取人脸框位置信息。
-        */
+      * 人脸框位置。若不输入则选择 Image 或 Url 中面积最大的人脸。
+您可以通过 [人脸检测与分析](https://cloud.tencent.com/document/api/867/32800)  接口获取人脸框位置信息。
+      */
     FaceRect?: FaceRect;
     /**
-     * 涂妆浓淡[0,100]。建议取值50。本参数仅控制ModelId对应的涂妆浓淡。
-     */
+      * 涂妆浓淡[0,100]。建议取值50。本参数仅控制ModelId对应的涂妆浓淡。
+      */
     ModelAlpha?: number;
 }
 /**
@@ -122,12 +122,12 @@ export interface LipColorInfo {
  */
 export interface CreateModelResponse {
     /**
-     * 唇色素材ID。
-     */
+      * 唇色素材ID。
+      */
     ModelId?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -135,17 +135,17 @@ export interface CreateModelResponse {
  */
 export interface GetModelListResponse {
     /**
-     * 唇色素材总数量。
-     */
+      * 唇色素材总数量。
+      */
     ModelIdNum?: number;
     /**
-        * 素材数据
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 素材数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     ModelInfos?: Array<ModelInfo>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -153,16 +153,16 @@ export interface GetModelListResponse {
  */
 export interface BeautifyPicResponse {
     /**
-     * RspImgType 为 base64 时，返回处理后的图片 base64 数据。默认返回base64
-     */
+      * RspImgType 为 base64 时，返回处理后的图片 base64 数据。默认返回base64
+      */
     ResultImage?: string;
     /**
-     * RspImgType 为 url 时，返回处理后的图片 url 数据。
-     */
+      * RspImgType 为 url 时，返回处理后的图片 url 数据。
+      */
     ResultUrl?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -170,12 +170,12 @@ export interface BeautifyPicResponse {
  */
 export interface GetModelListRequest {
     /**
-     * 起始序号，默认值为0。
-     */
+      * 起始序号，默认值为0。
+      */
     Offset?: number;
     /**
-     * 返回数量，默认值为10，最大值为100。
-     */
+      * 返回数量，默认值为10，最大值为100。
+      */
     Limit?: number;
 }
 /**
@@ -183,16 +183,16 @@ export interface GetModelListRequest {
  */
 export interface BeautifyVideoResponse {
     /**
-     * 视频美颜任务的Job id
-     */
+      * 视频美颜任务的Job id
+      */
     JobId?: string;
     /**
-     * 预估处理时间，粒度为秒
-     */
+      * 预估处理时间，粒度为秒
+      */
     EstimatedProcessTime?: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -200,16 +200,16 @@ export interface BeautifyVideoResponse {
  */
 export interface ModelInfo {
     /**
-     * 唇色素材ID
-     */
+      * 唇色素材ID
+      */
     ModelId: string;
     /**
-     * 唇色素材 url 。 LUT 文件 url 5分钟有效。
-     */
+      * 唇色素材 url 。 LUT 文件 url 5分钟有效。
+      */
     LUTFileUrl: string;
     /**
-     * 文件描述信息。
-     */
+      * 文件描述信息。
+      */
     Description: string;
 }
 /**
@@ -217,16 +217,16 @@ export interface ModelInfo {
  */
 export interface TryLipstickPicResponse {
     /**
-     * RspImgType 为 base64 时，返回处理后的图片 base64 数据。默认返回base64
-     */
+      * RspImgType 为 base64 时，返回处理后的图片 base64 数据。默认返回base64
+      */
     ResultImage?: string;
     /**
-     * RspImgType 为 url 时，返回处理后的图片 url 数据。
-     */
+      * RspImgType 为 url 时，返回处理后的图片 url 数据。
+      */
     ResultUrl?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -234,8 +234,8 @@ export interface TryLipstickPicResponse {
  */
 export interface DeleteModelResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -243,8 +243,8 @@ export interface DeleteModelResponse {
  */
 export interface CancelBeautifyVideoJobRequest {
     /**
-     * 美颜视频的Job id
-     */
+      * 美颜视频的Job id
+      */
     JobId: string;
 }
 /**
@@ -252,20 +252,20 @@ export interface CancelBeautifyVideoJobRequest {
  */
 export interface BeautyParam {
     /**
-     * 美白程度，取值范围[0,100]。0不美白，100代表最高程度。默认值30。
-     */
+      * 美白程度，取值范围[0,100]。0不美白，100代表最高程度。默认值30。
+      */
     WhitenLevel?: number;
     /**
-     * 磨皮程度，取值范围[0,100]。0不磨皮，100代表最高程度。默认值30。
-     */
+      * 磨皮程度，取值范围[0,100]。0不磨皮，100代表最高程度。默认值30。
+      */
     SmoothingLevel?: number;
     /**
-     * 大眼程度，取值范围[0,100]。0不大眼，100代表最高程度。默认值70。
-     */
+      * 大眼程度，取值范围[0,100]。0不大眼，100代表最高程度。默认值70。
+      */
     EyeEnlargeLevel?: number;
     /**
-     * 瘦脸程度，取值范围[0,100]。0不瘦脸，100代表最高程度。默认值70。
-     */
+      * 瘦脸程度，取值范围[0,100]。0不瘦脸，100代表最高程度。默认值70。
+      */
     FaceShrinkLevel?: number;
 }
 /**
@@ -273,26 +273,26 @@ export interface BeautyParam {
  */
 export interface TryLipstickPicRequest {
     /**
-        * 唇色信息。
-  您可以输入最多3个 LipColorInfo 来实现给一张图中的最多3张人脸试唇色。
-        */
+      * 唇色信息。
+您可以输入最多3个 LipColorInfo 来实现给一张图中的最多3张人脸试唇色。
+      */
     LipColorInfos: Array<LipColorInfo>;
     /**
-        * 图片 base64 数据，base64 编码后大小不可超过6M。
-  支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
-        */
+      * 图片 base64 数据，base64 编码后大小不可超过6M。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+      */
     Image?: string;
     /**
-        * 图片的 Url ，对应图片 base64 编码后大小不可超过6M。
-  图片的 Url、Image必须提供一个，如果都提供，只使用 Url。
-  图片存储于腾讯云的 Url 可保障更高下载速度和稳定性，建议图片存储于腾讯云。
-  非腾讯云存储的Url速度和稳定性可能受一定影响。
-  支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
-        */
+      * 图片的 Url ，对应图片 base64 编码后大小不可超过6M。
+图片的 Url、Image必须提供一个，如果都提供，只使用 Url。
+图片存储于腾讯云的 Url 可保障更高下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的Url速度和稳定性可能受一定影响。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+      */
     Url?: string;
     /**
-     * 返回图像方式（base64 或 url ) ，二选一。url有效期为1天。
-     */
+      * 返回图像方式（base64 或 url ) ，二选一。url有效期为1天。
+      */
     RspImgType?: string;
 }
 /**
@@ -300,17 +300,17 @@ export interface TryLipstickPicRequest {
  */
 export interface QueryBeautifyVideoJobResponse {
     /**
-     * 当前任务状态：排队中、处理中、处理失败或者处理完成
-     */
+      * 当前任务状态：排队中、处理中、处理失败或者处理完成
+      */
     JobStatus?: string;
     /**
-        * 视频美颜输出的结果信息
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 视频美颜输出的结果信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     BeautifyVideoOutput?: BeautifyVideoOutput;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -318,12 +318,12 @@ export interface QueryBeautifyVideoJobResponse {
  */
 export interface CreateModelRequest {
     /**
-     * 用于试唇色，要求必须是LUT 格式的cube文件转换成512*512的PNG图片。查看 [LUT文件的使用说明](https://cloud.tencent.com/document/product/1172/41701)。了解 [cube文件转png图片小工具](http://yyb.gtimg.com/aiplat/static/qcloud-cube-to-png.html)。
-     */
+      * 用于试唇色，要求必须是LUT 格式的cube文件转换成512*512的PNG图片。查看 [LUT文件的使用说明](https://cloud.tencent.com/document/product/1172/41701)。了解 [cube文件转png图片小工具](http://yyb.gtimg.com/aiplat/static/qcloud-cube-to-png.html)。
+      */
     LUTFile: string;
     /**
-     * 文件描述信息，可用于备注。
-     */
+      * 文件描述信息，可用于备注。
+      */
     Description?: string;
 }
 /**
@@ -331,20 +331,20 @@ export interface CreateModelRequest {
  */
 export interface FaceRect {
     /**
-     * 人脸框左上角横坐标。
-     */
+      * 人脸框左上角横坐标。
+      */
     X: number;
     /**
-     * 人脸框左上角纵坐标。
-     */
+      * 人脸框左上角纵坐标。
+      */
     Y: number;
     /**
-     * 人脸框宽度。
-     */
+      * 人脸框宽度。
+      */
     Width: number;
     /**
-     * 人脸框高度。
-     */
+      * 人脸框高度。
+      */
     Height: number;
 }
 /**
@@ -352,37 +352,37 @@ export interface FaceRect {
  */
 export interface BeautifyPicRequest {
     /**
-        * 图片 base64 数据，base64 编码后大小不可超过5M。
-  支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
-        */
+      * 图片 base64 数据，base64 编码后大小不可超过5M。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+      */
     Image?: string;
     /**
-        * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。
-  Url、Image必须提供一个，如果都提供，只使用 Url。
-  图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。
-  非腾讯云存储的Url速度和稳定性可能受一定影响。
-  支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
-        */
+      * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。
+Url、Image必须提供一个，如果都提供，只使用 Url。
+图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的Url速度和稳定性可能受一定影响。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+      */
     Url?: string;
     /**
-     * 美白程度，取值范围[0,100]。0不美白，100代表最高程度。默认值30。
-     */
+      * 美白程度，取值范围[0,100]。0不美白，100代表最高程度。默认值30。
+      */
     Whitening?: number;
     /**
-     * 磨皮程度，取值范围[0,100]。0不磨皮，100代表最高程度。默认值10。
-     */
+      * 磨皮程度，取值范围[0,100]。0不磨皮，100代表最高程度。默认值10。
+      */
     Smoothing?: number;
     /**
-     * 瘦脸程度，取值范围[0,100]。0不瘦脸，100代表最高程度。默认值70。
-     */
+      * 瘦脸程度，取值范围[0,100]。0不瘦脸，100代表最高程度。默认值70。
+      */
     FaceLifting?: number;
     /**
-     * 大眼程度，取值范围[0,100]。0不大眼，100代表最高程度。默认值70。
-     */
+      * 大眼程度，取值范围[0,100]。0不大眼，100代表最高程度。默认值70。
+      */
     EyeEnlarging?: number;
     /**
-     * 返回图像方式（base64 或 url ) ，二选一。url有效期为1天。
-     */
+      * 返回图像方式（base64 或 url ) ，二选一。url有效期为1天。
+      */
     RspImgType?: string;
 }
 /**
@@ -390,7 +390,7 @@ export interface BeautifyPicRequest {
  */
 export interface QueryBeautifyVideoJobRequest {
     /**
-     * 视频美颜Job id
-     */
+      * 视频美颜Job id
+      */
     JobId: string;
 }

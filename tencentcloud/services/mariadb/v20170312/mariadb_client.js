@@ -28,9 +28,9 @@ class Client extends abstract_client_1.AbstractClient {
         super("mariadb.tencentcloudapi.com", "2017-03-12", clientConfig);
     }
     /**
-       * 本接口（DescribeAccountPrivileges）用于查询云数据库账号权限。
-  注意：注意：相同用户名，不同Host是不同的账号。
-       */
+     * 本接口（DescribeAccountPrivileges）用于查询云数据库账号权限。
+注意：注意：相同用户名，不同Host是不同的账号。
+     */
     async DescribeAccountPrivileges(req, cb) {
         return this.request("DescribeAccountPrivileges", req, cb);
     }
@@ -53,9 +53,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSaleInfo", req, cb);
     }
     /**
-       * 本接口（ModifyAccountDescription）用于修改云数据库账号备注。
-  注意：相同用户名，不同Host是不同的账号。
-       */
+     * 本接口（ModifyAccountDescription）用于修改云数据库账号备注。
+注意：相同用户名，不同Host是不同的账号。
+     */
     async ModifyAccountDescription(req, cb) {
         return this.request("ModifyAccountDescription", req, cb);
     }
@@ -72,9 +72,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBResourceUsageDetails", req, cb);
     }
     /**
-       * 本接口（ResetAccountPassword）用于重置云数据库账号的密码。
-  注意：相同用户名，不同Host是不同的账号。
-       */
+     * 本接口（ResetAccountPassword）用于重置云数据库账号的密码。
+注意：相同用户名，不同Host是不同的账号。
+     */
     async ResetAccountPassword(req, cb) {
         return this.request("ResetAccountPassword", req, cb);
     }
@@ -115,9 +115,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RestartDBInstances", req, cb);
     }
     /**
-       * 本接口（GrantAccountPrivileges）用于给云数据库账号赋权。
-  注意：相同用户名，不同Host是不同的账号。
-       */
+     * 本接口（GrantAccountPrivileges）用于给云数据库账号赋权。
+注意：相同用户名，不同Host是不同的账号。
+     */
     async GrantAccountPrivileges(req, cb) {
         return this.request("GrantAccountPrivileges", req, cb);
     }
@@ -158,9 +158,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBInstanceSpecs", req, cb);
     }
     /**
-       * 本接口（DescribeDBInstances）用于查询云数据库实例列表，支持通过项目ID、实例ID、内网地址、实例名称等来筛选实例。
-  如果不指定任何筛选条件，则默认返回20条实例记录，单次请求最多支持返回100条实例记录。
-       */
+     * 本接口（DescribeDBInstances）用于查询云数据库实例列表，支持通过项目ID、实例ID、内网地址、实例名称等来筛选实例。
+如果不指定任何筛选条件，则默认返回20条实例记录，单次请求最多支持返回100条实例记录。
+     */
     async DescribeDBInstances(req, cb) {
         return this.request("DescribeDBInstances", req, cb);
     }
@@ -225,9 +225,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAccounts", req, cb);
     }
     /**
-       * 本接口（CopyAccountPrivileges）用于复制云数据库账号的权限。
-  注意：相同用户名，不同Host是不同的账号，Readonly属性相同的账号之间才能复制权限。
-       */
+     * 本接口（CopyAccountPrivileges）用于复制云数据库账号的权限。
+注意：相同用户名，不同Host是不同的账号，Readonly属性相同的账号之间才能复制权限。
+     */
     async CopyAccountPrivileges(req, cb) {
         return this.request("CopyAccountPrivileges", req, cb);
     }

@@ -550,6 +550,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyCCHostProtection", req, cb);
     }
     /**
+     * 获取业务流量曲线
+     */
+    async DescribeBizTrend(req, cb) {
+        return this.request("DescribeBizTrend", req, cb);
+    }
+    /**
      * 获取地域的资源实例数
      */
     async DescribleRegionCount(req, cb) {
@@ -658,9 +664,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateInstanceName", req, cb);
     }
     /**
-       * 获取高防IP可添加的最多7层规则数量
-  
-       */
+     * 获取高防IP可添加的最多7层规则数量
+
+     */
     async DescribeBGPIPL7RuleMaxCnt(req, cb) {
         return this.request("DescribeBGPIPL7RuleMaxCnt", req, cb);
     }

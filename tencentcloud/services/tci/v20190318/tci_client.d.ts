@@ -8,15 +8,15 @@ import { CreateVocabLibResponse, SubmitImageTaskPlusRequest, DeleteVocabLibReque
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-       * **提交线下小班（无课桌）课任务**
-  线下小班课是指有学生无课桌的课堂，满座15人以下，全局画面且背景不动，能清晰看到。
+     * **提交线下小班（无课桌）课任务**
+线下小班课是指有学生无课桌的课堂，满座15人以下，全局画面且背景不动，能清晰看到。
+  
+**提供的功能接口有：**学生人脸识别、学生表情识别、学生肢体动作识别。  可分析的指标维度包括：身份识别、正脸、侧脸、抬头、低头、高兴、中性、高兴、中性、惊讶、厌恶、恐惧、愤怒、蔑视、悲伤、站立、举手、坐着等。
+  
+**对场景的要求为：**真实常规教室，满座15人以下，全局画面且背景不动；人脸上下角度在20度以内，左右角度在15度以内，歪头角度在15度以内；光照均匀，无遮挡，人脸清晰可见；像素最好在 100X100 像素以上但是图像整体质量不能超过1080p。
     
-  **提供的功能接口有：**学生人脸识别、学生表情识别、学生肢体动作识别。  可分析的指标维度包括：身份识别、正脸、侧脸、抬头、低头、高兴、中性、高兴、中性、惊讶、厌恶、恐惧、愤怒、蔑视、悲伤、站立、举手、坐着等。
-    
-  **对场景的要求为：**真实常规教室，满座15人以下，全局画面且背景不动；人脸上下角度在20度以内，左右角度在15度以内，歪头角度在15度以内；光照均匀，无遮挡，人脸清晰可见；像素最好在 100X100 像素以上但是图像整体质量不能超过1080p。
-      
-  **结果查询方式：**图像任务直接返回结果，点播及直播任务通过DescribeAITaskResult查询结果。
-       */
+**结果查询方式：**图像任务直接返回结果，点播及直播任务通过DescribeAITaskResult查询结果。
+     */
     SubmitOpenClassTask(req: SubmitOpenClassTaskRequest, cb?: (error: string, rep: SubmitOpenClassTaskResponse) => void): Promise<SubmitOpenClassTaskResponse>;
     /**
      * 支持多路视频流，提交高级人员考勤任务
@@ -51,9 +51,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyLibrary(req: ModifyLibraryRequest, cb?: (error: string, rep: ModifyLibraryResponse) => void): Promise<ModifyLibraryResponse>;
     /**
-       * 发起双路视频生成精彩集锦接口。该接口可以通过客户传入的学生音视频及老师视频两路Url，自动生成一堂课程的精彩集锦。需要通过DescribeHighlightResult
-  接口获取生成结果。
-       */
+     * 发起双路视频生成精彩集锦接口。该接口可以通过客户传入的学生音视频及老师视频两路Url，自动生成一堂课程的精彩集锦。需要通过DescribeHighlightResult
+接口获取生成结果。
+     */
     SubmitDoubleVideoHighlights(req: SubmitDoubleVideoHighlightsRequest, cb?: (error: string, rep: SubmitDoubleVideoHighlightsResponse) => void): Promise<SubmitDoubleVideoHighlightsResponse>;
     /**
      * 拉取人员列表
@@ -68,16 +68,16 @@ export declare class Client extends AbstractClient {
      */
     DescribeHighlightResult(req: DescribeHighlightResultRequest, cb?: (error: string, rep: DescribeHighlightResultResponse) => void): Promise<DescribeHighlightResultResponse>;
     /**
-       * **提交线下传统面授大班课（含课桌）任务。**
-  传统教室课堂是指有学生课堂有课桌的课堂，满座20-50人，全局画面且背景不动。
+     * **提交线下传统面授大班课（含课桌）任务。**
+传统教室课堂是指有学生课堂有课桌的课堂，满座20-50人，全局画面且背景不动。
+  
+**提供的功能接口有：**学生人脸识别、学生表情识别、学生肢体动作识别。可分析的指标维度包括：学生身份识别、正脸、侧脸、抬头、低头、高兴、中性、高兴、中性、惊讶、厌恶、恐惧、愤怒、蔑视、悲伤、举手、站立、坐着、趴桌子、玩手机等
+  
+**对场景的要求为：**传统的学生上课教室，满座20-50人，全局画面且背景不动；人脸上下角度在20度以内，左右角度在15度以内，歪头角度在15度以内；光照均匀，无遮挡，人脸清晰可见；像素最好在 100X100 像素以上，但是图像整体质量不能超过1080p。
     
-  **提供的功能接口有：**学生人脸识别、学生表情识别、学生肢体动作识别。可分析的指标维度包括：学生身份识别、正脸、侧脸、抬头、低头、高兴、中性、高兴、中性、惊讶、厌恶、恐惧、愤怒、蔑视、悲伤、举手、站立、坐着、趴桌子、玩手机等
-    
-  **对场景的要求为：**传统的学生上课教室，满座20-50人，全局画面且背景不动；人脸上下角度在20度以内，左右角度在15度以内，歪头角度在15度以内；光照均匀，无遮挡，人脸清晰可见；像素最好在 100X100 像素以上，但是图像整体质量不能超过1080p。
-      
-  **结果查询方式：**图像任务直接返回结果，点播及直播任务通过DescribeAITaskResult查询结果。
-    
-       */
+**结果查询方式：**图像任务直接返回结果，点播及直播任务通过DescribeAITaskResult查询结果。
+  
+     */
     SubmitTraditionalClassTask(req: SubmitTraditionalClassTaskRequest, cb?: (error: string, rep: SubmitTraditionalClassTaskResponse) => void): Promise<SubmitTraditionalClassTaskResponse>;
     /**
      * 获取标准化接口任务结果
@@ -108,42 +108,42 @@ export declare class Client extends AbstractClient {
      */
     CreateVocab(req: CreateVocabRequest, cb?: (error: string, rep: CreateVocabResponse) => void): Promise<CreateVocabResponse>;
     /**
-       * **提交在线1对1课堂任务**
-  对于在线1对1课堂，老师通过视频向学生授课，并且学生人数为1人。通过上传学生端的图像信息，可以获取学生的听课情况分析。 具体指一路全局画面且背景不动，有1位学生的头像或上半身的画面，要求画面稳定清晰。
+     * **提交在线1对1课堂任务**
+对于在线1对1课堂，老师通过视频向学生授课，并且学生人数为1人。通过上传学生端的图像信息，可以获取学生的听课情况分析。 具体指一路全局画面且背景不动，有1位学生的头像或上半身的画面，要求画面稳定清晰。
+  
+**提供的功能接口有：**学生人脸识别、学生表情识别、语音识别。可分析的指标维度包括：学生身份识别、正脸、侧脸、抬头、低头、人脸坐标、人脸尺寸、高兴、中性、高兴、中性、惊讶、厌恶、恐惧、愤怒、蔑视、悲伤、语音转文字、发音时长、非发音时长、音量、语速等。
+  
+**对场景的要求为：**真实常规1v1授课场景，学生2人以下，全局画面且背景不动；人脸上下角度在20度以内，左右角度在15度以内，歪头角度在15度以内；光照均匀，无遮挡，人脸清晰可见；像素最好在 100X100 像素以上，但是图像整体质量不能超过1080p。
     
-  **提供的功能接口有：**学生人脸识别、学生表情识别、语音识别。可分析的指标维度包括：学生身份识别、正脸、侧脸、抬头、低头、人脸坐标、人脸尺寸、高兴、中性、高兴、中性、惊讶、厌恶、恐惧、愤怒、蔑视、悲伤、语音转文字、发音时长、非发音时长、音量、语速等。
-    
-  **对场景的要求为：**真实常规1v1授课场景，学生2人以下，全局画面且背景不动；人脸上下角度在20度以内，左右角度在15度以内，歪头角度在15度以内；光照均匀，无遮挡，人脸清晰可见；像素最好在 100X100 像素以上，但是图像整体质量不能超过1080p。
-      
-  **结果查询方式：**图像任务直接返回结果，点播及直播任务通过DescribeAITaskResult查询结果。
-       */
+**结果查询方式：**图像任务直接返回结果，点播及直播任务通过DescribeAITaskResult查询结果。
+     */
     SubmitOneByOneClassTask(req: SubmitOneByOneClassTaskRequest, cb?: (error: string, rep: SubmitOneByOneClassTaskResponse) => void): Promise<SubmitOneByOneClassTaskResponse>;
     /**
-       * **在线小班课任务**：此场景是在线授课场景，老师一般为坐着授课，摄像头可以拍摄到老师的头部及上半身。拍摄视频为一路全局画面，且背景不动，要求画面稳定清晰。通过此接口可分析老师授课的行为及语音，以支持AI评教。
+     * **在线小班课任务**：此场景是在线授课场景，老师一般为坐着授课，摄像头可以拍摄到老师的头部及上半身。拍摄视频为一路全局画面，且背景不动，要求画面稳定清晰。通过此接口可分析老师授课的行为及语音，以支持AI评教。
+  
+**提供的功能接口有：**老师人脸识别、老师表情识别、老师手势识别、光线识别、语音识别。 可分析的指标维度包括：身份识别、正脸、侧脸、人脸坐标、人脸尺寸、高兴、中性、高兴、中性、惊讶、厌恶、恐惧、愤怒、蔑视、悲伤、点赞手势、听你说手势、听我说手势、拿教具行为、语音转文字、发音时长、非发音时长、音量、语速、指定关键词的使用等
+  
+**对场景的要求为：**在线常规授课场景，全局画面且背景不动；人脸上下角度在20度以内，左右角度在15度以内，歪头角度在15度以内；光照均匀，无遮挡，人脸清晰可见；像素最好在 100X100 像素以上，但是图像整体质量不能超过1080p。
     
-  **提供的功能接口有：**老师人脸识别、老师表情识别、老师手势识别、光线识别、语音识别。 可分析的指标维度包括：身份识别、正脸、侧脸、人脸坐标、人脸尺寸、高兴、中性、高兴、中性、惊讶、厌恶、恐惧、愤怒、蔑视、悲伤、点赞手势、听你说手势、听我说手势、拿教具行为、语音转文字、发音时长、非发音时长、音量、语速、指定关键词的使用等
-    
-  **对场景的要求为：**在线常规授课场景，全局画面且背景不动；人脸上下角度在20度以内，左右角度在15度以内，歪头角度在15度以内；光照均匀，无遮挡，人脸清晰可见；像素最好在 100X100 像素以上，但是图像整体质量不能超过1080p。
-      
-  **结果查询方式：**图像任务直接返回结果，点播及直播任务通过DescribeAITaskResult查询结果。
-       */
+**结果查询方式：**图像任务直接返回结果，点播及直播任务通过DescribeAITaskResult查询结果。
+     */
     SubmitPartialBodyClassTask(req: SubmitPartialBodyClassTaskRequest, cb?: (error: string, rep: SubmitPartialBodyClassTaskResponse) => void): Promise<SubmitPartialBodyClassTaskResponse>;
     /**
-       * 提交人员考勤任务，支持包括点播和直播资源；支持通过DescribeAttendanceResult查询结果，也支持通过NoticeUrl设置考勤回调结果，回调结果结构如下：
-  ##### 回调事件结构
-   | 参数名称 | 类型 | 描述 |
-   | ----  | ---  | ------  |
-   | jobid | Integer | 任务ID |
-   | person_info | array of PersonInfo | 识别到的人员列表 |
-  #####子结构PersonInfo
-   | 参数名称 | 类型 | 描述 |
-   | ----  | ---  | ------  |
-   | traceid | String | 可用于区分同一路视频流下的不同陌生人 |
-   | personid | String | 识别到的人员ID，如果是陌生人则返回空串 |
-   | libid | String | 识别到的人员所在的库ID，如果是陌生人则返回空串 |
-   | timestamp | uint64 | 识别到人脸的绝对时间戳，单位ms |
-   | image_url | string | 识别到人脸的事件抓图的下载地址，不长期保存，需要请及时下载 |
-       */
+     * 提交人员考勤任务，支持包括点播和直播资源；支持通过DescribeAttendanceResult查询结果，也支持通过NoticeUrl设置考勤回调结果，回调结果结构如下：
+##### 回调事件结构
+ | 参数名称 | 类型 | 描述 |
+ | ----  | ---  | ------  |
+ | jobid | Integer | 任务ID |
+ | person_info | array of PersonInfo | 识别到的人员列表 |
+#####子结构PersonInfo
+ | 参数名称 | 类型 | 描述 |
+ | ----  | ---  | ------  |
+ | traceid | String | 可用于区分同一路视频流下的不同陌生人 |
+ | personid | String | 识别到的人员ID，如果是陌生人则返回空串 |
+ | libid | String | 识别到的人员所在的库ID，如果是陌生人则返回空串 |
+ | timestamp | uint64 | 识别到人脸的绝对时间戳，单位ms |
+ | image_url | string | 识别到人脸的事件抓图的下载地址，不长期保存，需要请及时下载 |
+     */
     SubmitCheckAttendanceTask(req: SubmitCheckAttendanceTaskRequest, cb?: (error: string, rep: SubmitCheckAttendanceTaskResponse) => void): Promise<SubmitCheckAttendanceTaskResponse>;
     /**
      * 创建人员
@@ -182,14 +182,14 @@ export declare class Client extends AbstractClient {
      */
     DeleteVocab(req: DeleteVocabRequest, cb?: (error: string, rep: DeleteVocabResponse) => void): Promise<DeleteVocabResponse>;
     /**
-       * **传统课堂授课任务**：在此场景中，老师为站立授课，有白板或投影供老师展示课程内容，摄像头可以拍摄到老师的半身或者全身。拍摄视频为一路全局画面，且背景不动，要求画面稳定清晰。通过此接口可分析老师授课的行为及语音，以支持AI评教。
+     * **传统课堂授课任务**：在此场景中，老师为站立授课，有白板或投影供老师展示课程内容，摄像头可以拍摄到老师的半身或者全身。拍摄视频为一路全局画面，且背景不动，要求画面稳定清晰。通过此接口可分析老师授课的行为及语音，以支持AI评教。
+  
+**提供的功能接口有：**老师人脸识别、老师表情识别、老师肢体动作识别、语音识别。  可分析的指标维度包括：身份识别、正脸、侧脸、人脸坐标、人脸尺寸、高兴、中性、高兴、中性、惊讶、厌恶、恐惧、愤怒、蔑视、悲伤、正面讲解、写板书、指黑板、语音转文字、发音时长、非发音时长、音量、语速、指定关键词的使用等
+  
+**对场景的要求为：**真实场景老师1人出现在画面中，全局画面且背景不动；人脸上下角度在20度以内，左右角度在15度以内，歪头角度在15度以内；光照均匀，无遮挡，人脸清晰可见；像素最好在 100X100 像素以上，但是图像整体质量不能超过1080p。
     
-  **提供的功能接口有：**老师人脸识别、老师表情识别、老师肢体动作识别、语音识别。  可分析的指标维度包括：身份识别、正脸、侧脸、人脸坐标、人脸尺寸、高兴、中性、高兴、中性、惊讶、厌恶、恐惧、愤怒、蔑视、悲伤、正面讲解、写板书、指黑板、语音转文字、发音时长、非发音时长、音量、语速、指定关键词的使用等
-    
-  **对场景的要求为：**真实场景老师1人出现在画面中，全局画面且背景不动；人脸上下角度在20度以内，左右角度在15度以内，歪头角度在15度以内；光照均匀，无遮挡，人脸清晰可见；像素最好在 100X100 像素以上，但是图像整体质量不能超过1080p。
-      
-  **结果查询方式：**图像任务直接返回结果，点播及直播任务通过DescribeAITaskResult查询结果。
-       */
+**结果查询方式：**图像任务直接返回结果，点播及直播任务通过DescribeAITaskResult查询结果。
+     */
     SubmitFullBodyClassTask(req: SubmitFullBodyClassTaskRequest, cb?: (error: string, rep: SubmitFullBodyClassTaskResponse) => void): Promise<SubmitFullBodyClassTaskResponse>;
     /**
      * 检查人脸图片是否合法

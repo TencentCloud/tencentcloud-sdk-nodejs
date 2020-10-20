@@ -3,12 +3,12 @@
  */
 export interface DescribeSmpnChpRequest {
     /**
-     * 客户用于计费的资源Id
-     */
+      * 客户用于计费的资源Id
+      */
     ResourceId: string;
     /**
-     * 终端骚扰保护请求
-     */
+      * 终端骚扰保护请求
+      */
     RequestData: CHPRequest;
 }
 /**
@@ -16,12 +16,12 @@ export interface DescribeSmpnChpRequest {
  */
 export interface EPARequest {
     /**
-     * 电话号码
-     */
+      * 电话号码
+      */
     PhoneNumber: string;
     /**
-     * 黄页名称
-     */
+      * 黄页名称
+      */
     Name: string;
 }
 /**
@@ -29,8 +29,8 @@ export interface EPARequest {
  */
 export interface MHMRequest {
     /**
-     * 电话号码
-     */
+      * 电话号码
+      */
     PhoneNumber: string;
 }
 /**
@@ -38,8 +38,8 @@ export interface MHMRequest {
  */
 export interface MRLRequest {
     /**
-     * 电话号码
-     */
+      * 电话号码
+      */
     PhoneNumber: string;
 }
 /**
@@ -47,12 +47,12 @@ export interface MRLRequest {
  */
 export interface CreateSmpnEpaResponse {
     /**
-     * 业号码认证回应内容
-     */
+      * 业号码认证回应内容
+      */
     ResponseData?: EPAResponse;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -60,12 +60,12 @@ export interface CreateSmpnEpaResponse {
  */
 export interface DescribeSmpnFnrResponse {
     /**
-     * 虚假号码识别回应内容
-     */
+      * 虚假号码识别回应内容
+      */
     ResponseData?: FNRResponse;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -73,12 +73,12 @@ export interface DescribeSmpnFnrResponse {
  */
 export interface DescribeSmpnMhmResponse {
     /**
-     * 号码营销监控回应内容
-     */
+      * 号码营销监控回应内容
+      */
     ResponseData?: MHMResponse;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -86,12 +86,12 @@ export interface DescribeSmpnMhmResponse {
  */
 export interface DescribeSmpnFnrRequest {
     /**
-     * 虚假号码识别请求内容
-     */
+      * 虚假号码识别请求内容
+      */
     RequestData: FNRRequest;
     /**
-     * 用于计费的资源ID
-     */
+      * 用于计费的资源ID
+      */
     ResourceId: string;
 }
 /**
@@ -99,12 +99,12 @@ export interface DescribeSmpnFnrRequest {
  */
 export interface DescribeSmpnMrlRequest {
     /**
-     * 恶意标记等级请求内容
-     */
+      * 恶意标记等级请求内容
+      */
     RequestData: MRLRequest;
     /**
-     * 用于计费的资源ID
-     */
+      * 用于计费的资源ID
+      */
     ResourceId: string;
 }
 /**
@@ -112,8 +112,8 @@ export interface DescribeSmpnMrlRequest {
  */
 export interface CHPRequest {
     /**
-     * 电话号码
-     */
+      * 电话号码
+      */
     PhoneNumber: string;
 }
 /**
@@ -121,24 +121,24 @@ export interface CHPRequest {
  */
 export interface MRLResponse {
     /**
-     * 骚扰电话恶意标记等级
-     */
+      * 骚扰电话恶意标记等级
+      */
     DisturbLevel: number;
     /**
-     * 房产中介恶意标记等级
-     */
+      * 房产中介恶意标记等级
+      */
     HouseAgentLevel: number;
     /**
-     * 保险理财恶意标记等级
-     */
+      * 保险理财恶意标记等级
+      */
     InsuranceLevel: number;
     /**
-     * 广告推销恶意标记等级
-     */
+      * 广告推销恶意标记等级
+      */
     SalesLevel: number;
     /**
-     * 诈骗电话恶意标记等级
-     */
+      * 诈骗电话恶意标记等级
+      */
     CheatLevel: number;
 }
 /**
@@ -146,12 +146,12 @@ export interface MRLResponse {
  */
 export interface DescribeSmpnMrlResponse {
     /**
-     * 恶意标记等级回应内容
-     */
+      * 恶意标记等级回应内容
+      */
     ResponseData?: MRLResponse;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -159,12 +159,12 @@ export interface DescribeSmpnMrlResponse {
  */
 export interface DescribeSmpnMhmRequest {
     /**
-     * 号码营销监控请求内容
-     */
+      * 号码营销监控请求内容
+      */
     RequestData: MHMRequest;
     /**
-     * 用于计费的资源ID
-     */
+      * 用于计费的资源ID
+      */
     ResourceId: string;
 }
 /**
@@ -172,20 +172,20 @@ export interface DescribeSmpnMhmRequest {
  */
 export interface MHMResponse {
     /**
-        * 标记类型
-   0: 无标记
-   50:骚扰电话
-   51:房产中介
-   52:保险理财
-   53:广告推销
-   54:诈骗电话
-   55:快递电话
-   56:出租车专车
-        */
+      * 标记类型
+ 0: 无标记
+ 50:骚扰电话
+ 51:房产中介
+ 52:保险理财
+ 53:广告推销
+ 54:诈骗电话
+ 55:快递电话
+ 56:出租车专车
+      */
     TagType: number;
     /**
-     * 标记次数
-     */
+      * 标记次数
+      */
     TagCount: number;
 }
 /**
@@ -193,12 +193,12 @@ export interface MHMResponse {
  */
 export interface CreateSmpnEpaRequest {
     /**
-     * 企业号码认证请求内容
-     */
+      * 企业号码认证请求内容
+      */
     RequestData: EPARequest;
     /**
-     * 用于计费的资源ID
-     */
+      * 用于计费的资源ID
+      */
     ResourceId: string;
 }
 /**
@@ -206,8 +206,8 @@ export interface CreateSmpnEpaRequest {
  */
 export interface EPAResponse {
     /**
-     * 0成功 其他失败
-     */
+      * 0成功 其他失败
+      */
     RetCode: number;
 }
 /**
@@ -215,8 +215,8 @@ export interface EPAResponse {
  */
 export interface FNRResponse {
     /**
-     * 虚假号码描述
-     */
+      * 虚假号码描述
+      */
     Status: number;
 }
 /**
@@ -224,20 +224,20 @@ export interface FNRResponse {
  */
 export interface CHPResponse {
     /**
-        * 标记类型
-   0: 无标记
-   50:骚扰电话
-   51:房产中介
-   52:保险理财
-   53:广告推销
-   54:诈骗电话
-   55:快递电话
-   56:出租车专车
-        */
+      * 标记类型
+ 0: 无标记
+ 50:骚扰电话
+ 51:房产中介
+ 52:保险理财
+ 53:广告推销
+ 54:诈骗电话
+ 55:快递电话
+ 56:出租车专车
+      */
     TagType: number;
     /**
-     * 标记次数
-     */
+      * 标记次数
+      */
     TagCount: number;
 }
 /**
@@ -245,12 +245,12 @@ export interface CHPResponse {
  */
 export interface DescribeSmpnChpResponse {
     /**
-     * 终端骚扰保护回应
-     */
+      * 终端骚扰保护回应
+      */
     ResponseData?: CHPResponse;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -258,7 +258,7 @@ export interface DescribeSmpnChpResponse {
  */
 export interface FNRRequest {
     /**
-     * 电话号码
-     */
+      * 电话号码
+      */
     PhoneNumber: string;
 }

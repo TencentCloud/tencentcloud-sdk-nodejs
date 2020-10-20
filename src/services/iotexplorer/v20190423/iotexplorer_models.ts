@@ -199,6 +199,11 @@ export interface ListEventHistoryRequest {
    * 单次获取的历史数据项目的最大数量
    */
   Size?: number
+
+  /**
+   * 事件标识符，可以用来指定查询特定的事件，如果不指定，则查询所有事件。
+   */
+  EventId?: string
 }
 
 /**

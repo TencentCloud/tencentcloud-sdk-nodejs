@@ -1669,7 +1669,7 @@ export interface DescribeJobResponse {
   /**
    * 任务实例统计指标
    */
-  TaskInstanceMetrics?: TaskInstanceView
+  TaskInstanceMetrics?: TaskInstanceMetrics
 
   /**
    * 作业失败原因
@@ -1681,6 +1681,12 @@ export interface DescribeJobResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Tags?: Array<Tag>
+
+  /**
+      * 下一步动作
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NextAction?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

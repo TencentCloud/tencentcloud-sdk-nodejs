@@ -184,9 +184,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteSecurityRules", req, cb);
     }
     /**
-       * 该接口（ModifyHTTPListenerAttribute）用于修改通道的HTTP监听器配置信息，目前仅支持修改监听器的名称。
-  注意：通道组通道暂时不支持HTTP/HTTPS监听器。
-       */
+     * 该接口（ModifyHTTPListenerAttribute）用于修改通道的HTTP监听器配置信息，目前仅支持修改监听器的名称。
+注意：通道组通道暂时不支持HTTP/HTTPS监听器。
+     */
     async ModifyHTTPListenerAttribute(req, cb) {
         return this.request("ModifyHTTPListenerAttribute", req, cb);
     }
@@ -263,9 +263,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyHTTPSListenerAttribute", req, cb);
     }
     /**
-       * 本接口（CreateDomain）用于创建HTTP/HTTPS监听器的访问域名，客户端请求通过访问该域名来请求后端业务。
-  该接口仅支持version3.0的通道。
-       */
+     * 本接口（CreateDomain）用于创建HTTP/HTTPS监听器的访问域名，客户端请求通过访问该域名来请求后端业务。
+该接口仅支持version3.0的通道。
+     */
     async CreateDomain(req, cb) {
         return this.request("CreateDomain", req, cb);
     }
@@ -390,9 +390,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDestRegions", req, cb);
     }
     /**
-       * 本接口（BindListenerRealServers）用于TCP/UDP监听器绑定解绑源站。
-  注意：本接口会解绑之前绑定的源站，绑定本次调用所选择的源站。例如：原来绑定的源站为A，B，C，本次调用的选择绑定的源站为C，D，E，那么调用后所绑定的源站为C，D，E。
-       */
+     * 本接口（BindListenerRealServers）用于TCP/UDP监听器绑定解绑源站。
+注意：本接口会解绑之前绑定的源站，绑定本次调用所选择的源站。例如：原来绑定的源站为A，B，C，本次调用的选择绑定的源站为C，D，E，那么调用后所绑定的源站为C，D，E。
+     */
     async BindListenerRealServers(req, cb) {
         return this.request("BindListenerRealServers", req, cb);
     }

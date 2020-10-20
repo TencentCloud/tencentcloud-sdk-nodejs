@@ -6143,6 +6143,12 @@ overseas：中国境外加速节点
 unknown：服务地域无法获取
       */
   Area: string
+
+  /**
+      * 节点的所在城市
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  City: string
 }
 
 /**

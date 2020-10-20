@@ -21,6 +21,8 @@ import {
   DescribeImagePersonalResponse,
   DescribeUserQuotaPersonalRequest,
   WebhookTarget,
+  DescribeReplicationInstancesResponse,
+  DescribeReplicationInstanceCreateTasksResponse,
   WebhookTriggerLog,
   ModifyRepositoryResponse,
   TriggerInvokePara,
@@ -29,6 +31,7 @@ import {
   TagInfoResp,
   CreateInstanceResponse,
   DeleteInstanceTokenRequest,
+  TaskDetail,
   ModifyRepositoryRequest,
   DescribeWebhookTriggerLogResponse,
   CreateApplicationTriggerPersonalRequest,
@@ -45,6 +48,7 @@ import {
   DeleteNamespacePersonalRequest,
   NamespaceInfo,
   Limit,
+  DescribeReplicationInstancesRequest,
   DeleteRepositoryResponse,
   DeleteImagePersonalResponse,
   RegistryCondition,
@@ -121,6 +125,7 @@ import {
   NamespaceIsExistsResp,
   DescribeInstancesRequest,
   Filter,
+  DescribeReplicationInstanceCreateTasksRequest,
   RepoInfo,
   ManageImageLifecycleGlobalPersonalRequest,
   DescribeUserQuotaPersonalResponse,
@@ -143,6 +148,7 @@ import {
   ModifyApplicationTriggerPersonalRequest,
   CreateInstanceTokenRequest,
   ModifyUserPasswordPersonalRequest,
+  ReplicationRegistry,
   ValidateNamespaceExistPersonalResponse,
   DescribeApplicationTriggerPersonalResp,
   TagInfo,
@@ -501,6 +507,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询从实例列表
+   */
+  async DescribeReplicationInstances(
+    req: DescribeReplicationInstancesRequest,
+    cb?: (error: string, rep: DescribeReplicationInstancesResponse) => void
+  ): Promise<DescribeReplicationInstancesResponse> {
+    return this.request("DescribeReplicationInstances", req, cb)
+  }
+
+  /**
    * 创建触发器
    */
   async CreateWebhookTrigger(
@@ -548,6 +564,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteWebhookTriggerResponse) => void
   ): Promise<DeleteWebhookTriggerResponse> {
     return this.request("DeleteWebhookTrigger", req, cb)
+  }
+
+  /**
+   * 查询创建从实例任务状态
+   */
+  async DescribeReplicationInstanceCreateTasks(
+    req: DescribeReplicationInstanceCreateTasksRequest,
+    cb?: (error: string, rep: DescribeReplicationInstanceCreateTasksResponse) => void
+  ): Promise<DescribeReplicationInstanceCreateTasksResponse> {
+    return this.request("DescribeReplicationInstanceCreateTasks", req, cb)
   }
 
   /**

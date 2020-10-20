@@ -148,9 +148,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquirePriceCreateDBInstances", req, cb);
     }
     /**
-       * 本接口(AssignProject)用于指定云数据库实例的所属项目。
-  
-       */
+     * 本接口(AssignProject)用于指定云数据库实例的所属项目。
+
+     */
     async AssignProject(req, cb) {
         return this.request("AssignProject", req, cb);
     }

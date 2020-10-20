@@ -406,33 +406,18 @@ export interface DescribePurgeTasksRequest {
 }
 
 /**
- * 域名查询时过滤条件。
+ * DescribeEcdnStatistics返回参数结构体
  */
-export interface DomainFilter {
+export interface DescribeEcdnStatisticsResponse {
   /**
-      * 过滤字段名，支持的列表如下：
-- origin：主源站。
-- domain：域名。
-- resourceId：域名id。
-- status：域名状态，online，offline，processing。
-- disable：域名封禁状态，normal，unlicensed。
-- projectId：项目ID。
-- fullUrlCache：全路径缓存，on或off。
-- https：是否配置https，on，off或processing。
-- originPullProtocol：回源协议类型，支持http，follow或https。
-- area：加速区域，支持mainland，overseas或global。
-      */
-  Name: string
+   * 指定条件查询得到的数据明细
+   */
+  Data?: Array<ResourceData>
 
   /**
-   * 过滤字段值。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Value: Array<string>
-
-  /**
-   * 是否启用模糊查询，仅支持过滤字段名为origin，domain。
-   */
-  Fuzzy?: boolean
+  RequestId?: string
 }
 
 /**
@@ -977,6 +962,38 @@ export interface AddEcdnDomainResponse {
 }
 
 /**
+ * 节点 IP 信息
+ */
+export interface IpStatus {
+  /**
+   * 节点 IP
+   */
+  Ip: string
+
+  /**
+   * 节点所属区域
+   */
+  District: string
+
+  /**
+   * 节点所属运营商
+   */
+  Isp: string
+
+  /**
+   * 节点所在城市
+   */
+  City: string
+
+  /**
+      * 节点状态
+online：上线状态，正常调度服务中
+offline：下线状态
+      */
+  Status: string
+}
+
+/**
  * 刷新任务日志详情
  */
 export interface PurgeTask {
@@ -1032,13 +1049,18 @@ export interface CacheRule {
 }
 
 /**
- * DescribeEcdnStatistics返回参数结构体
+ * DescribeIpStatus返回参数结构体
  */
-export interface DescribeEcdnStatisticsResponse {
+export interface DescribeIpStatusResponse {
   /**
-   * 指定条件查询得到的数据明细
+   * 节点列表
    */
-  Data?: Array<ResourceData>
+  Ips?: Array<IpStatus>
+
+  /**
+   * 节点总个数
+   */
+  TotalCount?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1143,6 +1165,36 @@ export interface CacheKey {
    * 是否开启全路径缓存，on或off。
    */
   FullUrlCache?: string
+}
+
+/**
+ * 域名查询时过滤条件。
+ */
+export interface DomainFilter {
+  /**
+      * 过滤字段名，支持的列表如下：
+- origin：主源站。
+- domain：域名。
+- resourceId：域名id。
+- status：域名状态，online，offline，processing。
+- disable：域名封禁状态，normal，unlicensed。
+- projectId：项目ID。
+- fullUrlCache：全路径缓存，on或off。
+- https：是否配置https，on，off或processing。
+- originPullProtocol：回源协议类型，支持http，follow或https。
+- area：加速区域，支持mainland，overseas或global。
+      */
+  Name: string
+
+  /**
+   * 过滤字段值。
+   */
+  Value: Array<string>
+
+  /**
+   * 是否启用模糊查询，仅支持过滤字段名为origin，domain。
+   */
+  Fuzzy?: boolean
 }
 
 /**
@@ -1356,6 +1408,24 @@ export interface DomainDetailInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Readonly: string
+}
+
+/**
+ * DescribeIpStatus请求参数结构体
+ */
+export interface DescribeIpStatusRequest {
+  /**
+   * 加速域名
+   */
+  Domain: string
+
+  /**
+      * 查询区域：
+mainland: 国内节点
+overseas: 海外节点
+global: 全球节点
+      */
+  Area?: string
 }
 
 /**

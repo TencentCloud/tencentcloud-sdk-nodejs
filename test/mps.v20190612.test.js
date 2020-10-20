@@ -468,6 +468,16 @@ it("mps.v20190612.CreatePersonSample", async function () {
     }
 })
 
+it("mps.v20190612.ExecuteFunction", async function () {
+    try {
+       const data = await client.ExecuteFunction({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.ModifyPersonSample", async function () {
     try {
        const data = await client.ModifyPersonSample({})

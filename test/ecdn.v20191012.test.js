@@ -28,6 +28,16 @@ it("ecdn.v20191012.AddEcdnDomain", async function () {
     }
 })
 
+it("ecdn.v20191012.DescribeIpStatus", async function () {
+    try {
+       const data = await client.DescribeIpStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ecdn.v20191012.PurgePathCache", async function () {
     try {
        const data = await client.PurgePathCache({})

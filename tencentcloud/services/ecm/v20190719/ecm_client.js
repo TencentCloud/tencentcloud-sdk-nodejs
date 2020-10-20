@@ -148,17 +148,17 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DisassociateSecurityGroups", req, cb);
     }
     /**
-       * 只有当前账号下的安全组允许被删除。
-  安全组实例ID如果在其他安全组的规则中被引用，则无法直接删除。这种情况下，需要先进行规则修改，再删除安全组。
-  删除的安全组无法再找回，请谨慎调用。
-       */
+     * 只有当前账号下的安全组允许被删除。
+安全组实例ID如果在其他安全组的规则中被引用，则无法直接删除。这种情况下，需要先进行规则修改，再删除安全组。
+删除的安全组无法再找回，请谨慎调用。
+     */
     async DeleteSecurityGroup(req, cb) {
         return this.request("DeleteSecurityGroup", req, cb);
     }
     /**
-       * 调整弹性公网IP带宽
-  
-       */
+     * 调整弹性公网IP带宽
+
+     */
     async ModifyAddressesBandwidth(req, cb) {
         return this.request("ModifyAddressesBandwidth", req, cb);
     }
@@ -193,10 +193,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteListener", req, cb);
     }
     /**
-       * 解绑弹性公网IP（简称 EIP）
-  只有状态为 BIND 和 BIND_ENI 的 EIP 才能进行解绑定操作。
-  EIP 如果被封堵，则不能进行解绑定操作。
-       */
+     * 解绑弹性公网IP（简称 EIP）
+只有状态为 BIND 和 BIND_ENI 的 EIP 才能进行解绑定操作。
+EIP 如果被封堵，则不能进行解绑定操作。
+     */
     async DisassociateAddress(req, cb) {
         return this.request("DisassociateAddress", req, cb);
     }
@@ -219,14 +219,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyListener", req, cb);
     }
     /**
-       * 将弹性公网IP（简称 EIP）绑定到实例或弹性网卡的指定内网 IP 上。
-  将 EIP 绑定到实例（CVM）上，其本质是将 EIP 绑定到实例上主网卡的主内网 IP 上。
-  将 EIP 绑定到主网卡的主内网IP上，绑定过程会把其上绑定的普通公网 IP 自动解绑并释放。
-  将 EIP 绑定到指定网卡的内网 IP上（非主网卡的主内网IP），则必须先解绑该 EIP，才能再绑定新的。
-  将 EIP 绑定到NAT网关，请使用接口EipBindNatGateway
-  EIP 如果欠费或被封堵，则不能被绑定。
-  只有状态为 UNBIND 的 EIP 才能够被绑定。
-       */
+     * 将弹性公网IP（简称 EIP）绑定到实例或弹性网卡的指定内网 IP 上。
+将 EIP 绑定到实例（CVM）上，其本质是将 EIP 绑定到实例上主网卡的主内网 IP 上。
+将 EIP 绑定到主网卡的主内网IP上，绑定过程会把其上绑定的普通公网 IP 自动解绑并释放。
+将 EIP 绑定到指定网卡的内网 IP上（非主网卡的主内网IP），则必须先解绑该 EIP，才能再绑定新的。
+将 EIP 绑定到NAT网关，请使用接口EipBindNatGateway
+EIP 如果欠费或被封堵，则不能被绑定。
+只有状态为 UNBIND 的 EIP 才能够被绑定。
+     */
     async AssociateAddress(req, cb) {
         return this.request("AssociateAddress", req, cb);
     }
@@ -255,10 +255,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateNetworkInterface", req, cb);
     }
     /**
-       * 只有处于"RUNNING"状态的实例才能够进行关机操作；
-  调用成功时，实例会进入STOPPING状态；关闭实例成功时，实例会进入STOPPED状态；
-  支持强制关闭，强制关机的效果等同于关闭物理计算机的电源开关，强制关机可能会导致数据丢失或文件系统损坏，请仅在服务器不能正常关机时使用。
-       */
+     * 只有处于"RUNNING"状态的实例才能够进行关机操作；
+调用成功时，实例会进入STOPPING状态；关闭实例成功时，实例会进入STOPPED状态；
+支持强制关闭，强制关机的效果等同于关闭物理计算机的电源开关，强制关机可能会导致数据丢失或文件系统损坏，请仅在服务器不能正常关机时使用。
+     */
     async StopInstances(req, cb) {
         return this.request("StopInstances", req, cb);
     }
@@ -305,9 +305,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyModuleIpDirect", req, cb);
     }
     /**
-       * 弹性网卡退还内网 IP。
-  退还弹性网卡上的辅助内网IP，接口自动解关联弹性公网 IP。不能退还弹性网卡的主内网IP。
-       */
+     * 弹性网卡退还内网 IP。
+退还弹性网卡上的辅助内网IP，接口自动解关联弹性公网 IP。不能退还弹性网卡的主内网IP。
+     */
     async RemovePrivateIpAddresses(req, cb) {
         return this.request("RemovePrivateIpAddresses", req, cb);
     }
@@ -444,10 +444,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RebootInstances", req, cb);
     }
     /**
-       * 弹性网卡内网IP迁移。
-  该接口用于将一个内网IP从一个弹性网卡上迁移到另外一个弹性网卡，主IP地址不支持迁移。
-  迁移前后的弹性网卡必须在同一个子网内。
-       */
+     * 弹性网卡内网IP迁移。
+该接口用于将一个内网IP从一个弹性网卡上迁移到另外一个弹性网卡，主IP地址不支持迁移。
+迁移前后的弹性网卡必须在同一个子网内。
+     */
     async MigratePrivateIpAddress(req, cb) {
         return this.request("MigratePrivateIpAddress", req, cb);
     }
@@ -560,10 +560,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyModuleSecurityGroups", req, cb);
     }
     /**
-       * 释放一个或多个弹性公网IP（简称 EIP）。
-  该操作不可逆，释放后 EIP 关联的 IP 地址将不再属于您的名下。
-  只有状态为 UNBIND 的 EIP 才能进行释放操作。
-       */
+     * 释放一个或多个弹性公网IP（简称 EIP）。
+该操作不可逆，释放后 EIP 关联的 IP 地址将不再属于您的名下。
+只有状态为 UNBIND 的 EIP 才能进行释放操作。
+     */
     async ReleaseAddresses(req, cb) {
         return this.request("ReleaseAddresses", req, cb);
     }
@@ -604,19 +604,19 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAddressAttribute", req, cb);
     }
     /**
-       * 在 SecurityGroupPolicySet 参数中：
-  
-  Version 安全组规则版本号，用户每次更新安全规则版本会自动加1，防止您更新的路由规则已过期，不填不考虑冲突。
-  在创建出站和入站规则（Egress 和 Ingress）时：
-  Protocol 字段支持输入TCP, UDP, ICMP, ICMPV6, GRE, ALL。
-  CidrBlock 字段允许输入符合cidr格式标准的任意字符串。(展开)在基础网络中，如果 CidrBlock 包含您的账户内的云服务器之外的设备在腾讯云的内网 IP，并不代表此规则允许您访问这些设备，租户之间网络隔离规则优先于安全组中的内网规则。
-  Ipv6CidrBlock 字段允许输入符合IPv6 cidr格式标准的任意字符串。(展开)在基础网络中，如果Ipv6CidrBlock 包含您的账户内的云服务器之外的设备在腾讯云的内网 IPv6，并不代表此规则允许您访问这些设备，租户之间网络隔离规则优先于安全组中的内网规则。
-  SecurityGroupId 字段允许输入与待修改的安全组位于相同项目中的安全组 ID，包括这个安全组 ID 本身，代表安全组下所有云服务器的内网 IP。使用这个字段时，这条规则用来匹配网络报文的过程中会随着被使用的这个 ID 所关联的云服务器变化而变化，不需要重新修改。
-  Port 字段允许输入一个单独端口号，或者用减号分隔的两个端口号代表端口范围，例如80或8000-8010。只有当 Protocol 字段是 TCP 或 UDP 时，Port 字段才被接受，即 Protocol 字段不是 TCP 或 UDP 时，Protocol 和 Port 排他关系，不允许同时输入，否则会接口报错。
-  Action 字段只允许输入 ACCEPT 或 DROP。
-  CidrBlock, Ipv6CidrBlock, SecurityGroupId, AddressTemplate 四者是排他关系，不允许同时输入，Protocol + Port 和 ServiceTemplate 二者是排他关系，不允许同时输入。
-  一次请求中只能创建单个方向的规则, 如果需要指定索引（PolicyIndex）参数, 多条规则的索引必须一致。
-       */
+     * 在 SecurityGroupPolicySet 参数中：
+
+Version 安全组规则版本号，用户每次更新安全规则版本会自动加1，防止您更新的路由规则已过期，不填不考虑冲突。
+在创建出站和入站规则（Egress 和 Ingress）时：
+Protocol 字段支持输入TCP, UDP, ICMP, ICMPV6, GRE, ALL。
+CidrBlock 字段允许输入符合cidr格式标准的任意字符串。(展开)在基础网络中，如果 CidrBlock 包含您的账户内的云服务器之外的设备在腾讯云的内网 IP，并不代表此规则允许您访问这些设备，租户之间网络隔离规则优先于安全组中的内网规则。
+Ipv6CidrBlock 字段允许输入符合IPv6 cidr格式标准的任意字符串。(展开)在基础网络中，如果Ipv6CidrBlock 包含您的账户内的云服务器之外的设备在腾讯云的内网 IPv6，并不代表此规则允许您访问这些设备，租户之间网络隔离规则优先于安全组中的内网规则。
+SecurityGroupId 字段允许输入与待修改的安全组位于相同项目中的安全组 ID，包括这个安全组 ID 本身，代表安全组下所有云服务器的内网 IP。使用这个字段时，这条规则用来匹配网络报文的过程中会随着被使用的这个 ID 所关联的云服务器变化而变化，不需要重新修改。
+Port 字段允许输入一个单独端口号，或者用减号分隔的两个端口号代表端口范围，例如80或8000-8010。只有当 Protocol 字段是 TCP 或 UDP 时，Port 字段才被接受，即 Protocol 字段不是 TCP 或 UDP 时，Protocol 和 Port 排他关系，不允许同时输入，否则会接口报错。
+Action 字段只允许输入 ACCEPT 或 DROP。
+CidrBlock, Ipv6CidrBlock, SecurityGroupId, AddressTemplate 四者是排他关系，不允许同时输入，Protocol + Port 和 ServiceTemplate 二者是排他关系，不允许同时输入。
+一次请求中只能创建单个方向的规则, 如果需要指定索引（PolicyIndex）参数, 多条规则的索引必须一致。
+     */
     async CreateSecurityGroupPolicies(req, cb) {
         return this.request("CreateSecurityGroupPolicies", req, cb);
     }

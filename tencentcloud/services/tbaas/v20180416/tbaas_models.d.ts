@@ -3,40 +3,40 @@
  */
 export interface QueryRequest {
     /**
-     * 模块名，固定字段：transaction
-     */
+      * 模块名，固定字段：transaction
+      */
     Module: string;
     /**
-     * 操作名，固定字段：query
-     */
+      * 操作名，固定字段：query
+      */
     Operation: string;
     /**
-     * 区块链网络ID，可在区块链网络详情或列表中获取
-     */
+      * 区块链网络ID，可在区块链网络详情或列表中获取
+      */
     ClusterId: string;
     /**
-     * 业务所属智能合约名称，可在智能合约详情或列表中获取
-     */
+      * 业务所属智能合约名称，可在智能合约详情或列表中获取
+      */
     ChaincodeName: string;
     /**
-     * 业务所属通道名称，可在通道详情或列表中获取
-     */
+      * 业务所属通道名称，可在通道详情或列表中获取
+      */
     ChannelName: string;
     /**
-     * 执行该查询交易的节点列表（包括节点名称和节点所属组织名称，详见数据结构一节），可以在通道详情中获取该通道上的节点名称极其所属组织名称
-     */
+      * 执行该查询交易的节点列表（包括节点名称和节点所属组织名称，详见数据结构一节），可以在通道详情中获取该通道上的节点名称极其所属组织名称
+      */
     Peers: Array<PeerSet>;
     /**
-     * 该笔交易查询需要调用的智能合约中的函数名称
-     */
+      * 该笔交易查询需要调用的智能合约中的函数名称
+      */
     FuncName: string;
     /**
-     * 调用合约的组织名称，可以在组织管理列表中获取当前组织的名称
-     */
+      * 调用合约的组织名称，可以在组织管理列表中获取当前组织的名称
+      */
     GroupName: string;
     /**
-     * 被调用的函数参数列表
-     */
+      * 被调用的函数参数列表
+      */
     Args?: Array<string>;
 }
 /**
@@ -44,16 +44,16 @@ export interface QueryRequest {
  */
 export interface GetBlockTransactionListForUserResponse {
     /**
-     * 交易总数量
-     */
+      * 交易总数量
+      */
     TotalCount?: number;
     /**
-     * 交易列表
-     */
+      * 交易列表
+      */
     TransactionList?: Array<TransactionItem>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -61,12 +61,12 @@ export interface GetBlockTransactionListForUserResponse {
  */
 export interface SendTransactionHandlerResponse {
     /**
-     * 交易结果json字符串
-     */
+      * 交易结果json字符串
+      */
     TransactionRsp?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -74,40 +74,40 @@ export interface SendTransactionHandlerResponse {
  */
 export interface ApplyUserCertRequest {
     /**
-     * 模块名，固定字段：cert_mng
-     */
+      * 模块名，固定字段：cert_mng
+      */
     Module: string;
     /**
-     * 操作名，固定字段：cert_apply_for_user
-     */
+      * 操作名，固定字段：cert_apply_for_user
+      */
     Operation: string;
     /**
-     * 区块链网络ID，可在区块链网络详情或列表中获取
-     */
+      * 区块链网络ID，可在区块链网络详情或列表中获取
+      */
     ClusterId: string;
     /**
-     * 申请证书的组织名称，可以在组织管理列表中获取当前组织的名称
-     */
+      * 申请证书的组织名称，可以在组织管理列表中获取当前组织的名称
+      */
     GroupName: string;
     /**
-     * 用户证书标识，用于标识用户证书，要求由纯小写字母组成，长度小于10
-     */
+      * 用户证书标识，用于标识用户证书，要求由纯小写字母组成，长度小于10
+      */
     UserIdentity: string;
     /**
-     * 证书申请实体，使用腾讯云账号实名认证的名称
-     */
+      * 证书申请实体，使用腾讯云账号实名认证的名称
+      */
     Applicant: string;
     /**
-     * 证件号码。如果腾讯云账号对应的实名认证类型为企业认证，填入“0”；如果腾讯云账号对应的实名认证类型为个人认证，填入个人身份证号码
-     */
+      * 证件号码。如果腾讯云账号对应的实名认证类型为企业认证，填入“0”；如果腾讯云账号对应的实名认证类型为个人认证，填入个人身份证号码
+      */
     IdentityNum: string;
     /**
-     * csr p10证书文件。需要用户根据文档生成证书的CSR文件
-     */
+      * csr p10证书文件。需要用户根据文档生成证书的CSR文件
+      */
     CsrData: string;
     /**
-     * 证书备注信息
-     */
+      * 证书备注信息
+      */
     Notes?: string;
 }
 /**
@@ -115,36 +115,36 @@ export interface ApplyUserCertRequest {
  */
 export interface TransByDynamicContractHandlerRequest {
     /**
-     * 模块名，固定字段：transaction
-     */
+      * 模块名，固定字段：transaction
+      */
     Module: string;
     /**
-     * 操作名，固定字段：trans_by_dynamic_contract
-     */
+      * 操作名，固定字段：trans_by_dynamic_contract
+      */
     Operation: string;
     /**
-     * 群组编号
-     */
+      * 群组编号
+      */
     GroupPk: string;
     /**
-     * 合约地址（合约部署成功，可得到合约地址）
-     */
+      * 合约地址（合约部署成功，可得到合约地址）
+      */
     ContractAddress: string;
     /**
-     * 合约名
-     */
+      * 合约名
+      */
     ContractName: string;
     /**
-     * 合约编译后的abi
-     */
+      * 合约编译后的abi
+      */
     AbiInfo: string;
     /**
-     * 合约被调用方法名
-     */
+      * 合约被调用方法名
+      */
     FuncName: string;
     /**
-     * 合约被调用方法的入参
-     */
+      * 合约被调用方法的入参
+      */
     FuncParam?: Array<string>;
 }
 /**
@@ -152,20 +152,20 @@ export interface TransByDynamicContractHandlerRequest {
  */
 export interface GetTransListHandlerResponse {
     /**
-     * 总记录数
-     */
+      * 总记录数
+      */
     TotalCount?: number;
     /**
-     * 当前群组编号
-     */
+      * 当前群组编号
+      */
     GroupPk?: string;
     /**
-     * 返回数据列表
-     */
+      * 返回数据列表
+      */
     List?: Array<BcosTransInfo>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -173,12 +173,12 @@ export interface GetTransListHandlerResponse {
  */
 export interface DeployDynamicContractHandlerResponse {
     /**
-     * 部署成功返回的合约地址
-     */
+      * 部署成功返回的合约地址
+      */
     ContractAddress?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -186,16 +186,16 @@ export interface DeployDynamicContractHandlerResponse {
  */
 export interface ApplyUserCertResponse {
     /**
-     * 证书ID
-     */
+      * 证书ID
+      */
     CertId?: number;
     /**
-     * 证书DN
-     */
+      * 证书DN
+      */
     CertDn?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -203,36 +203,36 @@ export interface ApplyUserCertResponse {
  */
 export interface GetInvokeTxRequest {
     /**
-     * 模块名，固定字段：transaction
-     */
+      * 模块名，固定字段：transaction
+      */
     Module: string;
     /**
-     * 操作名，固定字段：query_txid
-     */
+      * 操作名，固定字段：query_txid
+      */
     Operation: string;
     /**
-     * 区块链网络ID，可在区块链网络详情或列表中获取
-     */
+      * 区块链网络ID，可在区块链网络详情或列表中获取
+      */
     ClusterId: string;
     /**
-     * 业务所属通道名称，可在通道详情或列表中获取
-     */
+      * 业务所属通道名称，可在通道详情或列表中获取
+      */
     ChannelName: string;
     /**
-     * 执行该查询交易的节点名称，可以在通道详情中获取该通道上的节点名称极其所属组织名称
-     */
+      * 执行该查询交易的节点名称，可以在通道详情中获取该通道上的节点名称极其所属组织名称
+      */
     PeerName: string;
     /**
-     * 执行该查询交易的节点所属组织名称，可以在通道详情中获取该通道上的节点名称极其所属组织名称
-     */
+      * 执行该查询交易的节点所属组织名称，可以在通道详情中获取该通道上的节点名称极其所属组织名称
+      */
     PeerGroup: string;
     /**
-     * 交易ID
-     */
+      * 交易ID
+      */
     TxId: string;
     /**
-     * 调用合约的组织名称，可以在组织管理列表中获取当前组织的名称
-     */
+      * 调用合约的组织名称，可以在组织管理列表中获取当前组织的名称
+      */
     GroupName: string;
 }
 /**
@@ -240,16 +240,16 @@ export interface GetInvokeTxRequest {
  */
 export interface InvokeResponse {
     /**
-     * 交易ID
-     */
+      * 交易ID
+      */
     Txid?: string;
     /**
-     * 交易执行结果
-     */
+      * 交易执行结果
+      */
     Events?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -257,16 +257,16 @@ export interface InvokeResponse {
  */
 export interface DownloadUserCertResponse {
     /**
-     * 证书名称
-     */
+      * 证书名称
+      */
     CertName?: string;
     /**
-     * 证书内容
-     */
+      * 证书内容
+      */
     CertCtx?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -274,44 +274,44 @@ export interface DownloadUserCertResponse {
  */
 export interface GetLatesdTransactionListRequest {
     /**
-     * 模块名称，固定字段：transaction
-     */
+      * 模块名称，固定字段：transaction
+      */
     Module: string;
     /**
-     * 操作名称，固定字段：latest_transaction_list
-     */
+      * 操作名称，固定字段：latest_transaction_list
+      */
     Operation: string;
     /**
-     * 组织ID，固定字段：0
-     */
+      * 组织ID，固定字段：0
+      */
     GroupId: number;
     /**
-     * 通道ID，固定字段：0
-     */
+      * 通道ID，固定字段：0
+      */
     ChannelId: number;
     /**
-     * 获取的最新交易的区块数量，取值范围1~5
-     */
+      * 获取的最新交易的区块数量，取值范围1~5
+      */
     LatestBlockNumber: number;
     /**
-     * 调用接口的组织名称，可以在组织管理列表中获取当前组织的名称
-     */
+      * 调用接口的组织名称，可以在组织管理列表中获取当前组织的名称
+      */
     GroupName: string;
     /**
-     * 需要查询的通道名称，可在通道详情或列表中获取
-     */
+      * 需要查询的通道名称，可在通道详情或列表中获取
+      */
     ChannelName: string;
     /**
-     * 区块链网络ID，可在区块链网络详情或列表中获取
-     */
+      * 区块链网络ID，可在区块链网络详情或列表中获取
+      */
     ClusterId: string;
     /**
-     * 需要获取的起始交易偏移
-     */
+      * 需要获取的起始交易偏移
+      */
     Offset?: number;
     /**
-     * 需要获取的交易数量
-     */
+      * 需要获取的交易数量
+      */
     Limit?: number;
 }
 /**
@@ -319,32 +319,32 @@ export interface GetLatesdTransactionListRequest {
  */
 export interface GetTransactionDetailForUserRequest {
     /**
-     * 模块名，固定字段：transaction
-     */
+      * 模块名，固定字段：transaction
+      */
     Module: string;
     /**
-     * 操作名，固定字段：transaction_detail_for_user
-     */
+      * 操作名，固定字段：transaction_detail_for_user
+      */
     Operation: string;
     /**
-     * 区块链网络ID，可在区块链网络详情或列表中获取
-     */
+      * 区块链网络ID，可在区块链网络详情或列表中获取
+      */
     ClusterId: string;
     /**
-     * 参与交易的组织名称，可以在组织管理列表中获取当前组织的名称
-     */
+      * 参与交易的组织名称，可以在组织管理列表中获取当前组织的名称
+      */
     GroupName: string;
     /**
-     * 业务所属通道名称，可在通道详情或列表中获取
-     */
+      * 业务所属通道名称，可在通道详情或列表中获取
+      */
     ChannelName: string;
     /**
-     * 区块ID，通过GetInvokeTx接口可以获取交易所在的区块ID
-     */
+      * 区块ID，通过GetInvokeTx接口可以获取交易所在的区块ID
+      */
     BlockId: number;
     /**
-     * 交易ID，需要查询的详情的交易ID
-     */
+      * 交易ID，需要查询的详情的交易ID
+      */
     TransactionId: string;
 }
 /**
@@ -352,16 +352,16 @@ export interface GetTransactionDetailForUserRequest {
  */
 export interface GetBlockListResponse {
     /**
-     * 区块数量
-     */
+      * 区块数量
+      */
     TotalCount?: number;
     /**
-     * 区块列表
-     */
+      * 区块列表
+      */
     BlockList?: Array<Block>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -369,16 +369,16 @@ export interface GetBlockListResponse {
  */
 export interface SrvInvokeRequest {
     /**
-     * 服务类型，iss或者dam
-     */
+      * 服务类型，iss或者dam
+      */
     Service: string;
     /**
-     * 服务接口，要调用的方法函数名
-     */
+      * 服务接口，要调用的方法函数名
+      */
     Method: string;
     /**
-     * 用户自定义json字符串
-     */
+      * 用户自定义json字符串
+      */
     Param: string;
 }
 /**
@@ -386,12 +386,12 @@ export interface SrvInvokeRequest {
  */
 export interface BlockByNumberHandlerResponse {
     /**
-     * 返回区块json字符串
-     */
+      * 返回区块json字符串
+      */
     BlockJson?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -399,12 +399,12 @@ export interface BlockByNumberHandlerResponse {
  */
 export interface GetTransByHashHandlerResponse {
     /**
-     * 交易信息json字符串
-     */
+      * 交易信息json字符串
+      */
     TransactionJson?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -412,32 +412,32 @@ export interface GetTransByHashHandlerResponse {
  */
 export interface DeployDynamicContractHandlerRequest {
     /**
-     * 模块名，固定字段：contract
-     */
+      * 模块名，固定字段：contract
+      */
     Module: string;
     /**
-     * 操作名，固定字段：deploy_dynamic_contract
-     */
+      * 操作名，固定字段：deploy_dynamic_contract
+      */
     Operation: string;
     /**
-     * 群组编号
-     */
+      * 群组编号
+      */
     GroupPk: string;
     /**
-     * 合约名称
-     */
+      * 合约名称
+      */
     ContractName: string;
     /**
-     * 合约编译后的abi
-     */
+      * 合约编译后的abi
+      */
     AbiInfo: string;
     /**
-     * 合约编译后的binary
-     */
+      * 合约编译后的binary
+      */
     ByteCodeBin: string;
     /**
-     * 构造函数入参
-     */
+      * 构造函数入参
+      */
     ConstructorParams?: Array<string>;
 }
 /**
@@ -445,16 +445,16 @@ export interface DeployDynamicContractHandlerRequest {
  */
 export interface GetLatesdTransactionListResponse {
     /**
-     * 交易总数量
-     */
+      * 交易总数量
+      */
     TotalCount?: number;
     /**
-     * 交易列表
-     */
+      * 交易列表
+      */
     TransactionList?: Array<TransactionItem>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -462,28 +462,28 @@ export interface GetLatesdTransactionListResponse {
  */
 export interface DownloadUserCertRequest {
     /**
-     * 模块名，固定字段：cert_mng
-     */
+      * 模块名，固定字段：cert_mng
+      */
     Module: string;
     /**
-     * 操作名，固定字段：cert_download_for_user
-     */
+      * 操作名，固定字段：cert_download_for_user
+      */
     Operation: string;
     /**
-     * 证书ID，可以在证书详情页面获取
-     */
+      * 证书ID，可以在证书详情页面获取
+      */
     CertId: number;
     /**
-     * 证书DN，可以在证书详情页面获取
-     */
+      * 证书DN，可以在证书详情页面获取
+      */
     CertDn: string;
     /**
-     * 区块链网络ID，可在区块链网络详情或列表中获取
-     */
+      * 区块链网络ID，可在区块链网络详情或列表中获取
+      */
     ClusterId: string;
     /**
-     * 下载证书的组织名称，可以在组织管理列表中获取当前组织的名称
-     */
+      * 下载证书的组织名称，可以在组织管理列表中获取当前组织的名称
+      */
     GroupName: string;
 }
 /**
@@ -491,68 +491,68 @@ export interface DownloadUserCertRequest {
  */
 export interface GetClusterSummaryResponse {
     /**
-     * 网络通道总数量
-     */
+      * 网络通道总数量
+      */
     TotalChannelCount?: number;
     /**
-     * 当前组织创建的通道数量
-     */
+      * 当前组织创建的通道数量
+      */
     MyChannelCount?: number;
     /**
-     * 当前组织加入的通道数量
-     */
+      * 当前组织加入的通道数量
+      */
     JoinChannelCount?: number;
     /**
-     * 网络节点总数量
-     */
+      * 网络节点总数量
+      */
     TotalPeerCount?: number;
     /**
-     * 当前组织创建的节点数量
-     */
+      * 当前组织创建的节点数量
+      */
     MyPeerCount?: number;
     /**
-     * 其他组织创建的节点数量
-     */
+      * 其他组织创建的节点数量
+      */
     OrderCount?: number;
     /**
-     * 网络组织总数量
-     */
+      * 网络组织总数量
+      */
     TotalGroupCount?: number;
     /**
-     * 当前组织创建的组织数量
-     */
+      * 当前组织创建的组织数量
+      */
     MyGroupCount?: number;
     /**
-     * 网络智能合约总数量
-     */
+      * 网络智能合约总数量
+      */
     TotalChaincodeCount?: number;
     /**
-     * 最近7天发起的智能合约数量
-     */
+      * 最近7天发起的智能合约数量
+      */
     RecentChaincodeCount?: number;
     /**
-     * 当前组织发起的智能合约数量
-     */
+      * 当前组织发起的智能合约数量
+      */
     MyChaincodeCount?: number;
     /**
-     * 当前组织的证书总数量
-     */
+      * 当前组织的证书总数量
+      */
     TotalCertCount?: number;
     /**
-     * 颁发给当前组织的证书数量
-     */
+      * 颁发给当前组织的证书数量
+      */
     TlsCertCount?: number;
     /**
-     * 网络背书节点证书数量
-     */
+      * 网络背书节点证书数量
+      */
     PeerCertCount?: number;
     /**
-     * 当前组织业务证书数量
-     */
+      * 当前组织业务证书数量
+      */
     ClientCertCount?: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -560,12 +560,12 @@ export interface GetClusterSummaryResponse {
  */
 export interface TransByDynamicContractHandlerResponse {
     /**
-     * 交易结果json字符串
-     */
+      * 交易结果json字符串
+      */
     TransactionRsp?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -573,12 +573,12 @@ export interface TransByDynamicContractHandlerResponse {
  */
 export interface PeerSet {
     /**
-     * 节点名称
-     */
+      * 节点名称
+      */
     PeerName: string;
     /**
-     * 组织名称
-     */
+      * 组织名称
+      */
     OrgName: string;
 }
 /**
@@ -586,36 +586,36 @@ export interface PeerSet {
  */
 export interface GetBlockTransactionListForUserRequest {
     /**
-     * 模块名，固定字段：transaction
-     */
+      * 模块名，固定字段：transaction
+      */
     Module: string;
     /**
-     * 操作名，固定字段：block_transaction_list_for_user
-     */
+      * 操作名，固定字段：block_transaction_list_for_user
+      */
     Operation: string;
     /**
-     * 区块链网络ID，可在区块链网络详情或列表中获取
-     */
+      * 区块链网络ID，可在区块链网络详情或列表中获取
+      */
     ClusterId: string;
     /**
-     * 参与交易的组织名称，可以在组织管理列表中获取当前组织的名称
-     */
+      * 参与交易的组织名称，可以在组织管理列表中获取当前组织的名称
+      */
     GroupName: string;
     /**
-     * 业务所属通道名称，可在通道详情或列表中获取
-     */
+      * 业务所属通道名称，可在通道详情或列表中获取
+      */
     ChannelName: string;
     /**
-     * 区块ID，通过GetInvokeTx接口可以获取交易所在的区块ID
-     */
+      * 区块ID，通过GetInvokeTx接口可以获取交易所在的区块ID
+      */
     BlockId: number;
     /**
-     * 查询的交易列表起始偏移地址
-     */
+      * 查询的交易列表起始偏移地址
+      */
     Offset?: number;
     /**
-     * 查询的交易列表数量
-     */
+      * 查询的交易列表数量
+      */
     Limit?: number;
 }
 /**
@@ -623,20 +623,20 @@ export interface GetBlockTransactionListForUserRequest {
  */
 export interface SrvInvokeResponse {
     /**
-     * 返回码
-     */
+      * 返回码
+      */
     RetCode?: number;
     /**
-     * 返回消息
-     */
+      * 返回消息
+      */
     RetMsg?: string;
     /**
-     * 返回数据
-     */
+      * 返回数据
+      */
     Data?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -644,28 +644,28 @@ export interface SrvInvokeResponse {
  */
 export interface GetBlockListHandlerRequest {
     /**
-     * 模块名，固定字段：block
-     */
+      * 模块名，固定字段：block
+      */
     Module: string;
     /**
-     * 操作名，固定字段：get_block_list
-     */
+      * 操作名，固定字段：get_block_list
+      */
     Operation: string;
     /**
-     * 记录偏移数
-     */
+      * 记录偏移数
+      */
     Offset: number;
     /**
-     * 每页记录数
-     */
+      * 每页记录数
+      */
     Limit: number;
     /**
-     * 当前群组编号
-     */
+      * 当前群组编号
+      */
     GroupPk: string;
     /**
-     * 区块哈希
-     */
+      * 区块哈希
+      */
     BlockHash: string;
 }
 /**
@@ -673,24 +673,24 @@ export interface GetBlockListHandlerRequest {
  */
 export interface GetClusterSummaryRequest {
     /**
-     * 模块名称，固定字段：cluster_mng
-     */
+      * 模块名称，固定字段：cluster_mng
+      */
     Module: string;
     /**
-     * 操作名称，固定字段：cluster_summary
-     */
+      * 操作名称，固定字段：cluster_summary
+      */
     Operation: string;
     /**
-     * 区块链网络ID，可在区块链网络详情或列表中获取
-     */
+      * 区块链网络ID，可在区块链网络详情或列表中获取
+      */
     ClusterId: string;
     /**
-     * 组织ID，固定字段：0
-     */
+      * 组织ID，固定字段：0
+      */
     GroupId: number;
     /**
-     * 调用接口的组织名称，可以在组织管理列表中获取当前组织的名称
-     */
+      * 调用接口的组织名称，可以在组织管理列表中获取当前组织的名称
+      */
     GroupName: string;
 }
 /**
@@ -698,24 +698,24 @@ export interface GetClusterSummaryRequest {
  */
 export interface Block {
     /**
-     * 区块编号
-     */
+      * 区块编号
+      */
     BlockNum: number;
     /**
-     * 区块数据Hash数值
-     */
+      * 区块数据Hash数值
+      */
     DataHash: string;
     /**
-     * 区块ID，与区块编号一致
-     */
+      * 区块ID，与区块编号一致
+      */
     BlockId: number;
     /**
-     * 前一个区块Hash
-     */
+      * 前一个区块Hash
+      */
     PreHash: string;
     /**
-     * 区块内的交易数量
-     */
+      * 区块内的交易数量
+      */
     TxCount: number;
 }
 /**
@@ -723,40 +723,40 @@ export interface Block {
  */
 export interface GetBlockListRequest {
     /**
-     * 模块名称，固定字段：block
-     */
+      * 模块名称，固定字段：block
+      */
     Module: string;
     /**
-     * 操作名称，固定字段：block_list
-     */
+      * 操作名称，固定字段：block_list
+      */
     Operation: string;
     /**
-     * 通道ID，固定字段：0
-     */
+      * 通道ID，固定字段：0
+      */
     ChannelId: number;
     /**
-     * 组织ID，固定字段：0
-     */
+      * 组织ID，固定字段：0
+      */
     GroupId: number;
     /**
-     * 需要查询的通道名称，可在通道详情或列表中获取
-     */
+      * 需要查询的通道名称，可在通道详情或列表中获取
+      */
     ChannelName: string;
     /**
-     * 调用接口的组织名称，可以在组织管理列表中获取当前组织的名称
-     */
+      * 调用接口的组织名称，可以在组织管理列表中获取当前组织的名称
+      */
     GroupName: string;
     /**
-     * 区块链网络ID，可在区块链网络详情或列表中获取
-     */
+      * 区块链网络ID，可在区块链网络详情或列表中获取
+      */
     ClusterId: string;
     /**
-     * 需要获取的起始交易偏移
-     */
+      * 需要获取的起始交易偏移
+      */
     Offset?: number;
     /**
-     * 需要获取的交易数量
-     */
+      * 需要获取的交易数量
+      */
     Limit?: number;
 }
 /**
@@ -764,32 +764,32 @@ export interface GetBlockListRequest {
  */
 export interface BcosTransInfo {
     /**
-     * 所属区块高度
-     */
+      * 所属区块高度
+      */
     BlockNumber: number;
     /**
-     * 区块时间戳
-     */
+      * 区块时间戳
+      */
     BlockTimestamp: string;
     /**
-     * 交易哈希
-     */
+      * 交易哈希
+      */
     TransHash: string;
     /**
-     * 交易发起者
-     */
+      * 交易发起者
+      */
     TransFrom: string;
     /**
-     * 交易接收者
-     */
+      * 交易接收者
+      */
     TransTo: string;
     /**
-     * 落库时间
-     */
+      * 落库时间
+      */
     CreateTime: string;
     /**
-     * 修改时间
-     */
+      * 修改时间
+      */
     ModifyTime: string;
 }
 /**
@@ -797,44 +797,44 @@ export interface BcosTransInfo {
  */
 export interface InvokeRequest {
     /**
-     * 模块名，固定字段：transaction
-     */
+      * 模块名，固定字段：transaction
+      */
     Module: string;
     /**
-     * 操作名，固定字段：invoke
-     */
+      * 操作名，固定字段：invoke
+      */
     Operation: string;
     /**
-     * 区块链网络ID，可在区块链网络详情或列表中获取
-     */
+      * 区块链网络ID，可在区块链网络详情或列表中获取
+      */
     ClusterId: string;
     /**
-     * 业务所属智能合约名称，可在智能合约详情或列表中获取
-     */
+      * 业务所属智能合约名称，可在智能合约详情或列表中获取
+      */
     ChaincodeName: string;
     /**
-     * 业务所属通道名称，可在通道详情或列表中获取
-     */
+      * 业务所属通道名称，可在通道详情或列表中获取
+      */
     ChannelName: string;
     /**
-     * 对该笔交易进行背书的节点列表（包括节点名称和节点所属组织名称，详见数据结构一节），可以在通道详情中获取该通道上的节点名称极其所属组织名称
-     */
+      * 对该笔交易进行背书的节点列表（包括节点名称和节点所属组织名称，详见数据结构一节），可以在通道详情中获取该通道上的节点名称极其所属组织名称
+      */
     Peers: Array<PeerSet>;
     /**
-     * 该笔交易需要调用的智能合约中的函数名称
-     */
+      * 该笔交易需要调用的智能合约中的函数名称
+      */
     FuncName: string;
     /**
-     * 调用合约的组织名称，可以在组织管理列表中获取当前组织的名称
-     */
+      * 调用合约的组织名称，可以在组织管理列表中获取当前组织的名称
+      */
     GroupName: string;
     /**
-     * 被调用的函数参数列表
-     */
+      * 被调用的函数参数列表
+      */
     Args?: Array<string>;
     /**
-     * 同步调用标识，可选参数，值为0或者不传表示使用同步方法调用，调用后会等待交易执行后再返回执行结果；值为1时表示使用异步方式调用Invoke，执行后会立即返回交易对应的Txid，后续需要通过GetInvokeTx这个API查询该交易的执行结果。（对于逻辑较为简单的交易，可以使用同步模式；对于逻辑较为复杂的交易，建议使用异步模式，否则容易导致API因等待时间过长，返回等待超时）
-     */
+      * 同步调用标识，可选参数，值为0或者不传表示使用同步方法调用，调用后会等待交易执行后再返回执行结果；值为1时表示使用异步方式调用Invoke，执行后会立即返回交易对应的Txid，后续需要通过GetInvokeTx这个API查询该交易的执行结果。（对于逻辑较为简单的交易，可以使用同步模式；对于逻辑较为复杂的交易，建议使用异步模式，否则容易导致API因等待时间过长，返回等待超时）
+      */
     AsyncFlag?: number;
 }
 /**
@@ -842,20 +842,20 @@ export interface InvokeRequest {
  */
 export interface GetInvokeTxResponse {
     /**
-     * 交易执行状态码
-     */
+      * 交易执行状态码
+      */
     TxValidationCode?: number;
     /**
-     * 交易执行消息
-     */
+      * 交易执行消息
+      */
     TxValidationMsg?: string;
     /**
-     * 交易所在区块ID
-     */
+      * 交易所在区块ID
+      */
     BlockId?: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -863,20 +863,20 @@ export interface GetInvokeTxResponse {
  */
 export interface GetBlockListHandlerResponse {
     /**
-     * 总记录数
-     */
+      * 总记录数
+      */
     TotalCount?: number;
     /**
-     * 当前群组编号
-     */
+      * 当前群组编号
+      */
     GroupPk?: string;
     /**
-     * 返回数据列表
-     */
+      * 返回数据列表
+      */
     List?: Array<BcosBlockObj>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -884,60 +884,60 @@ export interface GetBlockListHandlerResponse {
  */
 export interface GetTransactionDetailForUserResponse {
     /**
-     * 交易ID
-     */
+      * 交易ID
+      */
     TransactionId?: string;
     /**
-     * 交易hash
-     */
+      * 交易hash
+      */
     TransactionHash?: string;
     /**
-     * 创建交易的组织名
-     */
+      * 创建交易的组织名
+      */
     CreateOrgName?: string;
     /**
-     * 交易类型（普通交易和配置交易）
-     */
+      * 交易类型（普通交易和配置交易）
+      */
     TransactionType?: string;
     /**
-     * 交易状态
-     */
+      * 交易状态
+      */
     TransactionStatus?: string;
     /**
-     * 交易创建时间
-     */
+      * 交易创建时间
+      */
     CreateTime?: string;
     /**
-     * 交易数据
-     */
+      * 交易数据
+      */
     TransactionData?: string;
     /**
-     * 交易所在区块号
-     */
+      * 交易所在区块号
+      */
     BlockId?: number;
     /**
-     * 交易所在区块哈希
-     */
+      * 交易所在区块哈希
+      */
     BlockHash?: string;
     /**
-     * 交易所在区块高度
-     */
+      * 交易所在区块高度
+      */
     BlockHeight?: number;
     /**
-     * 通道名称
-     */
+      * 通道名称
+      */
     ChannelName?: string;
     /**
-     * 交易所在合约名称
-     */
+      * 交易所在合约名称
+      */
     ContractName?: string;
     /**
-     * 背书组织列表
-     */
+      * 背书组织列表
+      */
     EndorserOrgList?: Array<EndorserGroup>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -945,28 +945,28 @@ export interface GetTransactionDetailForUserResponse {
  */
 export interface GetTransListHandlerRequest {
     /**
-     * 模块名，固定字段：transaction
-     */
+      * 模块名，固定字段：transaction
+      */
     Module: string;
     /**
-     * 操作名，固定字段：get_trans_list
-     */
+      * 操作名，固定字段：get_trans_list
+      */
     Operation: string;
     /**
-     * 记录偏移量
-     */
+      * 记录偏移量
+      */
     Offset: number;
     /**
-     * 每页记录数
-     */
+      * 每页记录数
+      */
     Limit: number;
     /**
-     * 群组编号
-     */
+      * 群组编号
+      */
     GroupPk: string;
     /**
-     * 交易哈希
-     */
+      * 交易哈希
+      */
     TransHash?: string;
 }
 /**
@@ -974,28 +974,28 @@ export interface GetTransListHandlerRequest {
  */
 export interface SendTransactionHandlerRequest {
     /**
-     * 模块名，固定字段：transaction
-     */
+      * 模块名，固定字段：transaction
+      */
     Module: string;
     /**
-     * 操作名，固定字段：send_transaction
-     */
+      * 操作名，固定字段：send_transaction
+      */
     Operation: string;
     /**
-     * 群组编号
-     */
+      * 群组编号
+      */
     GroupPk: string;
     /**
-     * 合约编号
-     */
+      * 合约编号
+      */
     ContractId: number;
     /**
-     * 合约方法名
-     */
+      * 合约方法名
+      */
     FuncName: string;
     /**
-     * 合约方法入参
-     */
+      * 合约方法入参
+      */
     FuncParam?: Array<string>;
 }
 /**
@@ -1003,36 +1003,36 @@ export interface SendTransactionHandlerRequest {
  */
 export interface TransactionItem {
     /**
-     * 交易ID
-     */
+      * 交易ID
+      */
     TransactionId: string;
     /**
-     * 交易hash
-     */
+      * 交易hash
+      */
     TransactionHash: string;
     /**
-     * 创建交易的组织名
-     */
+      * 创建交易的组织名
+      */
     CreateOrgName: string;
     /**
-     * 交易所在区块号
-     */
+      * 交易所在区块号
+      */
     BlockId: number;
     /**
-     * 交易类型（普通交易和配置交易）
-     */
+      * 交易类型（普通交易和配置交易）
+      */
     TransactionType: string;
     /**
-     * 交易创建时间
-     */
+      * 交易创建时间
+      */
     CreateTime: string;
     /**
-     * 交易所在区块高度
-     */
+      * 交易所在区块高度
+      */
     BlockHeight: number;
     /**
-     * 交易状态
-     */
+      * 交易状态
+      */
     TransactionStatus: string;
 }
 /**
@@ -1040,20 +1040,20 @@ export interface TransactionItem {
  */
 export interface BlockByNumberHandlerRequest {
     /**
-     * 模块名，固定字段：block
-     */
+      * 模块名，固定字段：block
+      */
     Module: string;
     /**
-     * 操作名，固定字段：block_by_number
-     */
+      * 操作名，固定字段：block_by_number
+      */
     Operation: string;
     /**
-     * 当前群组编号
-     */
+      * 当前群组编号
+      */
     GroupPk: string;
     /**
-     * 区块高度
-     */
+      * 区块高度
+      */
     BlockNumber: number;
 }
 /**
@@ -1061,36 +1061,36 @@ export interface BlockByNumberHandlerRequest {
  */
 export interface BcosBlockObj {
     /**
-     * 区块哈希
-     */
+      * 区块哈希
+      */
     BlockHash: string;
     /**
-     * 区块高度
-     */
+      * 区块高度
+      */
     BlockNumber: number;
     /**
-     * 区块时间戳
-     */
+      * 区块时间戳
+      */
     BlockTimestamp: string;
     /**
-     * 打包节点ID
-     */
+      * 打包节点ID
+      */
     Sealer: string;
     /**
-     * 打包节点索引
-     */
+      * 打包节点索引
+      */
     SealerIndex: number;
     /**
-     * 记录保存时间
-     */
+      * 记录保存时间
+      */
     CreateTime: string;
     /**
-     * 交易数量
-     */
+      * 交易数量
+      */
     TransCount: number;
     /**
-     * 记录修改时间
-     */
+      * 记录修改时间
+      */
     ModifyTime: string;
 }
 /**
@@ -1098,20 +1098,20 @@ export interface BcosBlockObj {
  */
 export interface GetTransByHashHandlerRequest {
     /**
-     * 模块名，固定字段：transaction
-     */
+      * 模块名，固定字段：transaction
+      */
     Module: string;
     /**
-     * 操作名，固定字段：get_trans_by_hash
-     */
+      * 操作名，固定字段：get_trans_by_hash
+      */
     Operation: string;
     /**
-     * 群组编号
-     */
+      * 群组编号
+      */
     GroupPk: string;
     /**
-     * 交易哈希
-     */
+      * 交易哈希
+      */
     TransHash: string;
 }
 /**
@@ -1119,12 +1119,12 @@ export interface GetTransByHashHandlerRequest {
  */
 export interface QueryResponse {
     /**
-     * 查询结果数据
-     */
+      * 查询结果数据
+      */
     Data?: Array<string>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1132,11 +1132,11 @@ export interface QueryResponse {
  */
 export interface EndorserGroup {
     /**
-     * 背书组织名称
-     */
+      * 背书组织名称
+      */
     EndorserGroupName: string;
     /**
-     * 背书节点列表
-     */
+      * 背书节点列表
+      */
     EndorserPeerList: Array<string>;
 }

@@ -74,7 +74,7 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UploadDataFile(req, cb) {
         let options = {
-            multipart: true,
+            multipart: true
         };
         return this.request("UploadDataFile", req, cb);
     }
@@ -85,9 +85,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryInstantData", req, cb);
     }
     /**
-       * <p>用于获取录音下载链接清单，次日早上8:00后可查询前日录音清单。</p>
-  <p>注意：录音清单中的录音下载链接仅次日20:00之前有效，请及时下载。</p>
-       */
+     * <p>用于获取录音下载链接清单，次日早上8:00后可查询前日录音清单。</p>
+<p>注意：录音清单中的录音下载链接仅次日20:00之前有效，请及时下载。</p>
+     */
     async DownloadRecordList(req, cb) {
         return this.request("DownloadRecordList", req, cb);
     }

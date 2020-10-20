@@ -18,9 +18,59 @@ const client = new tencentcloud.ie.v20200304.Client({
 })
 describe("ie.v20200304.test.js", function () {
 
+it("ie.v20200304.DescribeMediaQualityRestorationTaskRusult", async function () {
+    try {
+       const data = await client.DescribeMediaQualityRestorationTaskRusult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ie.v20200304.StopMediaQualityRestorationTask", async function () {
+    try {
+       const data = await client.StopMediaQualityRestorationTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ie.v20200304.CreateMediaQualityRestorationTask", async function () {
+    try {
+       const data = await client.CreateMediaQualityRestorationTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ie.v20200304.DescribeEditingTaskResult", async function () {
     try {
        const data = await client.DescribeEditingTaskResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ie.v20200304.DescribeQualityControlTaskResult", async function () {
+    try {
+       const data = await client.DescribeQualityControlTaskResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ie.v20200304.CreateQualityControlTask", async function () {
+    try {
+       const data = await client.CreateQualityControlTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

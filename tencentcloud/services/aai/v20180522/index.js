@@ -5,5 +5,5 @@ const Models = require("./aai_models");
 const aai_client_1 = require("./aai_client");
 exports.v20180522 = {
     Client: aai_client_1.Client,
-    Models: Models,
+    Models: Models
 };

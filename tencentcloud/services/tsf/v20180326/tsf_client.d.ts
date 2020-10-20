@@ -92,9 +92,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeImageTags(req: DescribeImageTagsRequest, cb?: (error: string, rep: DescribeImageTagsResponse) => void): Promise<DescribeImageTagsResponse>;
     /**
-       * 调用该接口和COS的上传接口后，需要调用此接口更新TSF中保存的程序包状态。
-  调用此接口完成后，才标志上传包流程结束。
-       */
+     * 调用该接口和COS的上传接口后，需要调用此接口更新TSF中保存的程序包状态。
+调用此接口完成后，才标志上传包流程结束。
+     */
     ModifyUploadInfo(req: ModifyUploadInfoRequest, cb?: (error: string, rep: ModifyUploadInfoResponse) => void): Promise<ModifyUploadInfoResponse>;
     /**
      * 查询简单集群列表
@@ -121,9 +121,9 @@ export declare class Client extends AbstractClient {
      */
     DisableTaskFlow(req: DisableTaskFlowRequest, cb?: (error: string, rep: DisableTaskFlowResponse) => void): Promise<DisableTaskFlowResponse>;
     /**
-       * TSF上传的程序包存放在腾讯云对象存储（COS）中，通过该API可以获取从COS下载程序包需要的信息，包括包所在的桶、存储路径、鉴权信息等，之后使用COS API（或SDK）进行下载。
-  COS相关文档请查阅：https://cloud.tencent.com/document/product/436
-       */
+     * TSF上传的程序包存放在腾讯云对象存储（COS）中，通过该API可以获取从COS下载程序包需要的信息，包括包所在的桶、存储路径、鉴权信息等，之后使用COS API（或SDK）进行下载。
+COS相关文档请查阅：https://cloud.tencent.com/document/product/436
+     */
     DescribeDownloadInfo(req: DescribeDownloadInfoRequest, cb?: (error: string, rep: DescribeDownloadInfoResponse) => void): Promise<DescribeDownloadInfoResponse>;
     /**
      * 获取应用列表
@@ -238,9 +238,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeGroupInstances(req: DescribeGroupInstancesRequest, cb?: (error: string, rep: DescribeGroupInstancesResponse) => void): Promise<DescribeGroupInstancesResponse>;
     /**
-       * 从软件仓库批量删除程序包。
-  一次最多支持删除1000个包，数量超过1000，返回UpperDeleteLimit错误。
-       */
+     * 从软件仓库批量删除程序包。
+一次最多支持删除1000个包，数量超过1000，返回UpperDeleteLimit错误。
+     */
     DeletePkgs(req: DeletePkgsRequest, cb?: (error: string, rep: DeletePkgsResponse) => void): Promise<DeletePkgsResponse>;
     /**
      * 查询公共配置项列表
@@ -419,9 +419,9 @@ export declare class Client extends AbstractClient {
      */
     DescribePublicConfigReleases(req: DescribePublicConfigReleasesRequest, cb?: (error: string, rep: DescribePublicConfigReleasesResponse) => void): Promise<DescribePublicConfigReleasesResponse>;
     /**
-       * TSF会将软件包上传到腾讯云对象存储（COS）。调用此接口获取上传信息，如目标地域，桶，包Id，存储路径，鉴权信息等，之后请使用COS API（或SDK）进行上传。
-  COS相关文档请查阅：https://cloud.tencent.com/document/product/436
-       */
+     * TSF会将软件包上传到腾讯云对象存储（COS）。调用此接口获取上传信息，如目标地域，桶，包Id，存储路径，鉴权信息等，之后请使用COS API（或SDK）进行上传。
+COS相关文档请查阅：https://cloud.tencent.com/document/product/436
+     */
     DescribeUploadInfo(req: DescribeUploadInfoRequest, cb?: (error: string, rep: DescribeUploadInfoResponse) => void): Promise<DescribeUploadInfoResponse>;
     /**
      * 停止虚拟机部署组

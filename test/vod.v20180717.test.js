@@ -18,6 +18,16 @@ const client = new tencentcloud.vod.v20180717.Client({
 })
 describe("vod.v20180717.test.js", function () {
 
+it("vod.v20180717.CreateImageProcessingTemplate", async function () {
+    try {
+       const data = await client.CreateImageProcessingTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.CreateSnapshotByTimeOffsetTemplate", async function () {
     try {
        const data = await client.CreateSnapshotByTimeOffsetTemplate({})
@@ -498,6 +508,16 @@ it("vod.v20180717.CreateAIAnalysisTemplate", async function () {
     }
 })
 
+it("vod.v20180717.DescribeEventsState", async function () {
+    try {
+       const data = await client.DescribeEventsState({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.ConfirmEvents", async function () {
     try {
        const data = await client.ConfirmEvents({})
@@ -531,6 +551,16 @@ it("vod.v20180717.ModifyTranscodeTemplate", async function () {
 it("vod.v20180717.DescribeContentReviewTemplates", async function () {
     try {
        const data = await client.DescribeContentReviewTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.DeleteImageProcessingTemplate", async function () {
+    try {
+       const data = await client.DeleteImageProcessingTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -631,6 +661,16 @@ it("vod.v20180717.DescribeAnimatedGraphicsTemplates", async function () {
 it("vod.v20180717.ForbidMediaDistribution", async function () {
     try {
        const data = await client.ForbidMediaDistribution({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.DescribeImageProcessingTemplates", async function () {
+    try {
+       const data = await client.DescribeImageProcessingTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

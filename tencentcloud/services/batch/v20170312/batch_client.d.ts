@@ -20,9 +20,9 @@ export declare class Client extends AbstractClient {
      */
     CreateCpmComputeEnv(req: CreateCpmComputeEnvRequest, cb?: (error: string, rep: CreateCpmComputeEnvResponse) => void): Promise<CreateCpmComputeEnvResponse>;
     /**
-       * 用于销毁计算节点。
-  对于状态为CREATED、CREATION_FAILED、RUNNING和ABNORMAL的节点，允许销毁处理。
-       */
+     * 用于销毁计算节点。
+对于状态为CREATED、CREATION_FAILED、RUNNING和ABNORMAL的节点，允许销毁处理。
+     */
     TerminateComputeNode(req: TerminateComputeNodeRequest, cb?: (error: string, rep: TerminateComputeNodeResponse) => void): Promise<TerminateComputeNodeResponse>;
     /**
      * 用于查询若干个作业的概览信息
@@ -33,14 +33,14 @@ export declare class Client extends AbstractClient {
      */
     DescribeAvailableCvmInstanceTypes(req: DescribeAvailableCvmInstanceTypesRequest, cb?: (error: string, rep: DescribeAvailableCvmInstanceTypesResponse) => void): Promise<DescribeAvailableCvmInstanceTypesResponse>;
     /**
-       * 此接口可将已存在实例添加到计算环境中。
-  实例需要满足如下条件：<br/>
-  1.实例不在批量计算系统中。<br/>
-  2.实例状态要求处于运行中。<br/>
-  3.支持预付费实例，按小时后付费实例，专享子机实例。不支持竞价实例。<br/>
-  
-  此接口会将加入到计算环境中的实例重设UserData和重装操作系统。
-       */
+     * 此接口可将已存在实例添加到计算环境中。
+实例需要满足如下条件：<br/>
+1.实例不在批量计算系统中。<br/>
+2.实例状态要求处于运行中。<br/>
+3.支持预付费实例，按小时后付费实例，专享子机实例。不支持竞价实例。<br/>
+
+此接口会将加入到计算环境中的实例重设UserData和重装操作系统。
+     */
     AttachInstances(req: AttachInstancesRequest, cb?: (error: string, rep: AttachInstancesResponse) => void): Promise<AttachInstancesResponse>;
     /**
      * 用于创建计算环境
@@ -59,10 +59,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeTaskLogs(req: DescribeTaskLogsRequest, cb?: (error: string, rep: DescribeTaskLogsResponse) => void): Promise<DescribeTaskLogsResponse>;
     /**
-       * 用于终止作业。
-  当作业处于“SUBMITTED”状态时，禁止终止操作；当作业处于“SUCCEED”状态时，终止操作不会生效。
-  终止作业是一个异步过程。整个终止过程的耗时和任务总数成正比。终止的效果相当于所含的所有任务实例进行TerminateTaskInstance操作。具体效果和用法可参考TerminateTaskInstance。
-       */
+     * 用于终止作业。
+当作业处于“SUBMITTED”状态时，禁止终止操作；当作业处于“SUCCEED”状态时，终止操作不会生效。
+终止作业是一个异步过程。整个终止过程的耗时和任务总数成正比。终止的效果相当于所含的所有任务实例进行TerminateTaskInstance操作。具体效果和用法可参考TerminateTaskInstance。
+     */
     TerminateJob(req: TerminateJobRequest, cb?: (error: string, rep: TerminateJobResponse) => void): Promise<TerminateJobResponse>;
     /**
      * 用于查询指定任务的详细信息，包括任务内部的任务实例信息。
@@ -97,12 +97,12 @@ export declare class Client extends AbstractClient {
      */
     DeleteTaskTemplates(req: DeleteTaskTemplatesRequest, cb?: (error: string, rep: DeleteTaskTemplatesResponse) => void): Promise<DeleteTaskTemplatesResponse>;
     /**
-       * 用于终止任务实例。
-  对于状态已经为“SUCCEED”和“FAILED”的任务实例，不做处理。
-  对于状态为“SUBMITTED”、“PENDING”、“RUNNABLE”的任务实例，状态将置为“FAILED”状态。
-  对于状态为“STARTING”、“RUNNING”、“FAILED_INTERRUPTED”的任务实例，分区两种情况：如果未显示指定计算环境，会先销毁CVM服务器，然后将状态置为“FAILED”，具有一定耗时；如果指定了计算环境EnvId，任务实例状态置为“FAILED”，并重启执行该任务的CVM服务器，具有一定的耗时。
-  对于状态为“FAILED_INTERRUPTED”的任务实例，终止操作实际成功之后，相关资源和配额才会释放。
-       */
+     * 用于终止任务实例。
+对于状态已经为“SUCCEED”和“FAILED”的任务实例，不做处理。
+对于状态为“SUBMITTED”、“PENDING”、“RUNNABLE”的任务实例，状态将置为“FAILED”状态。
+对于状态为“STARTING”、“RUNNING”、“FAILED_INTERRUPTED”的任务实例，分区两种情况：如果未显示指定计算环境，会先销毁CVM服务器，然后将状态置为“FAILED”，具有一定耗时；如果指定了计算环境EnvId，任务实例状态置为“FAILED”，并重启执行该任务的CVM服务器，具有一定的耗时。
+对于状态为“FAILED_INTERRUPTED”的任务实例，终止操作实际成功之后，相关资源和配额才会释放。
+     */
     TerminateTaskInstance(req: TerminateTaskInstanceRequest, cb?: (error: string, rep: TerminateTaskInstanceResponse) => void): Promise<TerminateTaskInstanceResponse>;
     /**
      * 用于修改计算环境属性
@@ -125,10 +125,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeComputeEnvCreateInfos(req: DescribeComputeEnvCreateInfosRequest, cb?: (error: string, rep: DescribeComputeEnvCreateInfosResponse) => void): Promise<DescribeComputeEnvCreateInfosResponse>;
     /**
-       * 用于删除作业记录。
-  删除作业的效果相当于删除作业相关的所有信息。删除成功后，作业相关的所有信息都无法查询。
-  待删除的作业必须处于完结状态，且其内部包含的所有任务实例也必须处于完结状态，否则会禁止操作。完结状态，是指处于 SUCCEED 或 FAILED 状态。
-       */
+     * 用于删除作业记录。
+删除作业的效果相当于删除作业相关的所有信息。删除成功后，作业相关的所有信息都无法查询。
+待删除的作业必须处于完结状态，且其内部包含的所有任务实例也必须处于完结状态，否则会禁止操作。完结状态，是指处于 SUCCEED 或 FAILED 状态。
+     */
     DeleteJob(req: DeleteJobRequest, cb?: (error: string, rep: DeleteJobResponse) => void): Promise<DeleteJobResponse>;
     /**
      * 创建黑石计算环境时，查询批量计算环境支持的黑石操作系统信息
@@ -143,8 +143,8 @@ export declare class Client extends AbstractClient {
      */
     ModifyTaskTemplate(req: ModifyTaskTemplateRequest, cb?: (error: string, rep: ModifyTaskTemplateResponse) => void): Promise<ModifyTaskTemplateResponse>;
     /**
-       * 用于重试作业中失败的任务实例。
-  当且仅当作业处于“FAILED”状态，支持重试操作。重试操作成功后，作业会按照“DAG”中指定的任务依赖关系，依次重试各个任务中失败的任务实例。任务实例的历史信息将被重置，如同首次运行一样，参与后续的调度和执行。
-       */
+     * 用于重试作业中失败的任务实例。
+当且仅当作业处于“FAILED”状态，支持重试操作。重试操作成功后，作业会按照“DAG”中指定的任务依赖关系，依次重试各个任务中失败的任务实例。任务实例的历史信息将被重置，如同首次运行一样，参与后续的调度和执行。
+     */
     RetryJobs(req: RetryJobsRequest, cb?: (error: string, rep: RetryJobsResponse) => void): Promise<RetryJobsResponse>;
 }

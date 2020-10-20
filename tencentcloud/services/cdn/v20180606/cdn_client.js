@@ -82,26 +82,26 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddCdnDomain", req, cb);
     }
     /**
-       * DescribeIpVisit 用于查询 5 分钟活跃用户数，及日活跃用户数明细
-  
-  + 5 分钟活跃用户数：根据日志中客户端 IP，5 分钟粒度去重统计
-  + 日活跃用户数：根据日志中客户端 IP，按天粒度去重统计
-       */
+     * DescribeIpVisit 用于查询 5 分钟活跃用户数，及日活跃用户数明细
+
++ 5 分钟活跃用户数：根据日志中客户端 IP，5 分钟粒度去重统计
++ 日活跃用户数：根据日志中客户端 IP，按天粒度去重统计
+     */
     async DescribeIpVisit(req, cb) {
         return this.request("DescribeIpVisit", req, cb);
     }
     /**
-       * DescribeCdnData 用于查询 CDN 实时访问监控数据，支持以下指标查询：
-  
-  + 流量（单位为 byte）
-  + 带宽（单位为 bps）
-  + 请求数（单位为 次）
-  + 流量命中率（单位为 %，小数点后保留两位）
-  + 状态码 2xx 汇总及各 2 开头状态码明细（单位为 个）
-  + 状态码 3xx 汇总及各 3 开头状态码明细（单位为 个）
-  + 状态码 4xx 汇总及各 4 开头状态码明细（单位为 个）
-  + 状态码 5xx 汇总及各 5 开头状态码明细（单位为 个）
-       */
+     * DescribeCdnData 用于查询 CDN 实时访问监控数据，支持以下指标查询：
+
++ 流量（单位为 byte）
++ 带宽（单位为 bps）
++ 请求数（单位为 次）
++ 流量命中率（单位为 %，小数点后保留两位）
++ 状态码 2xx 汇总及各 2 开头状态码明细（单位为 个）
++ 状态码 3xx 汇总及各 3 开头状态码明细（单位为 个）
++ 状态码 4xx 汇总及各 4 开头状态码明细（单位为 个）
++ 状态码 5xx 汇总及各 5 开头状态码明细（单位为 个）
+     */
     async DescribeCdnData(req, cb) {
         return this.request("DescribeCdnData", req, cb);
     }
@@ -136,9 +136,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StartCdnDomain", req, cb);
     }
     /**
-       * StopCdnDomain 用于停止域名的加速服务。
-  注意：停止加速服务后，访问至加速节点的请求将会直接返回 404。为避免对您的业务造成影响，请在停止加速服务前将解析切走。
-       */
+     * StopCdnDomain 用于停止域名的加速服务。
+注意：停止加速服务后，访问至加速节点的请求将会直接返回 404。为避免对您的业务造成影响，请在停止加速服务前将解析切走。
+     */
     async StopCdnDomain(req, cb) {
         return this.request("StopCdnDomain", req, cb);
     }
@@ -179,60 +179,60 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SearchClsLog", req, cb);
     }
     /**
-       * ListTopData 通过入参 Metric 和 Filter 组合不同，可以查询以下排序数据：
-  
-  + 依据总流量、总请求数对访问 URL 排序，从大至小返回 TOP 1000 URL
-  + 依据总流量、总请求数对客户端省份排序，从大至小返回省份列表
-  + 依据总流量、总请求数对客户端运营商排序，从大至小返回运营商列表
-  + 依据总流量、峰值带宽、总请求数、平均命中率、2XX/3XX/4XX/5XX 状态码对域名排序，从大至小返回域名列表
-  + 依据总回源流量、回源峰值带宽、总回源请求数、平均回源失败率、2XX/3XX/4XX/5XX 回源状态码对域名排序，从大至小返回域名列表
-  
-  注意：仅支持 90 天内数据查询
-       */
+     * ListTopData 通过入参 Metric 和 Filter 组合不同，可以查询以下排序数据：
+
++ 依据总流量、总请求数对访问 URL 排序，从大至小返回 TOP 1000 URL
++ 依据总流量、总请求数对客户端省份排序，从大至小返回省份列表
++ 依据总流量、总请求数对客户端运营商排序，从大至小返回运营商列表
++ 依据总流量、峰值带宽、总请求数、平均命中率、2XX/3XX/4XX/5XX 状态码对域名排序，从大至小返回域名列表
++ 依据总回源流量、回源峰值带宽、总回源请求数、平均回源失败率、2XX/3XX/4XX/5XX 回源状态码对域名排序，从大至小返回域名列表
+
+注意：仅支持 90 天内数据查询
+     */
     async ListTopData(req, cb) {
         return this.request("ListTopData", req, cb);
     }
     /**
-       * DescribeOriginData 用于查询 CDN 实时回源监控数据，支持以下指标查询：
-  
-  + 回源流量（单位为 byte）
-  + 回源带宽（单位为 bps）
-  + 回源请求数（单位为 次）
-  + 回源失败请求数（单位为 次）
-  + 回源失败率（单位为 %，小数点后保留两位）
-  + 回源状态码 2xx 汇总及各 2 开头回源状态码明细（单位为 个）
-  + 回源状态码 3xx 汇总及各 3 开头回源状态码明细（单位为 个）
-  + 回源状态码 4xx 汇总及各 4 开头回源状态码明细（单位为 个）
-  + 回源状态码 5xx 汇总及各 5 开头回源状态码明细（单位为 个）
-       */
+     * DescribeOriginData 用于查询 CDN 实时回源监控数据，支持以下指标查询：
+
++ 回源流量（单位为 byte）
++ 回源带宽（单位为 bps）
++ 回源请求数（单位为 次）
++ 回源失败请求数（单位为 次）
++ 回源失败率（单位为 %，小数点后保留两位）
++ 回源状态码 2xx 汇总及各 2 开头回源状态码明细（单位为 个）
++ 回源状态码 3xx 汇总及各 3 开头回源状态码明细（单位为 个）
++ 回源状态码 4xx 汇总及各 4 开头回源状态码明细（单位为 个）
++ 回源状态码 5xx 汇总及各 5 开头回源状态码明细（单位为 个）
+     */
     async DescribeOriginData(req, cb) {
         return this.request("DescribeOriginData", req, cb);
     }
     /**
-       * DescribeCdnIp 用于查询 CDN IP 归属。
-  （注意：此接口请求频率限制以 CDN 侧限制为准：200次/10分钟）
-       */
+     * DescribeCdnIp 用于查询 CDN IP 归属。
+（注意：此接口请求频率限制以 CDN 侧限制为准：200次/10分钟）
+     */
     async DescribeCdnIp(req, cb) {
         return this.request("DescribeCdnIp", req, cb);
     }
     /**
-       * PurgePathCache 用于批量提交目录刷新，根据域名的加速区域进行对应区域的刷新。
-  默认情况下境内、境外加速区域每日目录刷新额度为各 100 条，每次最多可提交 20 条。
-       */
+     * PurgePathCache 用于批量提交目录刷新，根据域名的加速区域进行对应区域的刷新。
+默认情况下境内、境外加速区域每日目录刷新额度为各 100 条，每次最多可提交 20 条。
+     */
     async PurgePathCache(req, cb) {
         return this.request("PurgePathCache", req, cb);
     }
     /**
-       * DescribeUrlViolations 用于查询被 CDN 系统扫描到的域名违规 URL 列表及当前状态。
-  对应内容分发网络控制台【图片鉴黄】页面。
-       */
+     * DescribeUrlViolations 用于查询被 CDN 系统扫描到的域名违规 URL 列表及当前状态。
+对应内容分发网络控制台【图片鉴黄】页面。
+     */
     async DescribeUrlViolations(req, cb) {
         return this.request("DescribeUrlViolations", req, cb);
     }
     /**
-       * PurgeUrlsCache 用于批量提交 URL 进行刷新，根据 URL 中域名的当前加速区域进行对应区域的刷新。
-  默认情况下境内、境外加速区域每日 URL 刷新额度各为 10000 条，每次最多可提交 1000 条。
-       */
+     * PurgeUrlsCache 用于批量提交 URL 进行刷新，根据 URL 中域名的当前加速区域进行对应区域的刷新。
+默认情况下境内、境外加速区域每日 URL 刷新额度各为 10000 条，每次最多可提交 1000 条。
+     */
     async PurgeUrlsCache(req, cb) {
         return this.request("PurgeUrlsCache", req, cb);
     }
@@ -243,9 +243,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTrafficPackages", req, cb);
     }
     /**
-       * UpdateDomainConfig 用于修改内容分发网络加速域名配置信息
-  注意：如果需要更新复杂类型的配置项，必须传递整个对象的所有属性，未传递的属性将使用默认值，建议通过查询接口获取配置属性后，直接修改后传递给本接口。Https配置由于证书的特殊性，更新时不用传递证书和密钥字段。
-       */
+     * UpdateDomainConfig 用于修改内容分发网络加速域名配置信息
+注意：如果需要更新复杂类型的配置项，必须传递整个对象的所有属性，未传递的属性将使用默认值，建议通过查询接口获取配置属性后，直接修改后传递给本接口。Https配置由于证书的特殊性，更新时不用传递证书和密钥字段。
+     */
     async UpdateDomainConfig(req, cb) {
         return this.request("UpdateDomainConfig", req, cb);
     }
@@ -256,9 +256,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCdnDomainLogs", req, cb);
     }
     /**
-       * DescribePushTasks  用于查询预热任务提交历史记录及执行进度。
-  接口灰度中，暂未全量开放，敬请期待。
-       */
+     * DescribePushTasks  用于查询预热任务提交历史记录及执行进度。
+接口灰度中，暂未全量开放，敬请期待。
+     */
     async DescribePushTasks(req, cb) {
         return this.request("DescribePushTasks", req, cb);
     }
@@ -275,10 +275,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateClsLogTopic", req, cb);
     }
     /**
-       * PushUrlsCache 用于将指定 URL 资源列表加载至 CDN 节点，支持指定加速区域预热。
-  默认情况下境内、境外每日预热 URL 限额为各 1000 条，每次最多可提交 20 条。
-  接口灰度中，暂未全量开放，敬请期待。
-       */
+     * PushUrlsCache 用于将指定 URL 资源列表加载至 CDN 节点，支持指定加速区域预热。
+默认情况下境内、境外每日预热 URL 限额为各 1000 条，每次最多可提交 20 条。
+接口灰度中，暂未全量开放，敬请期待。
+     */
     async PushUrlsCache(req, cb) {
         return this.request("PushUrlsCache", req, cb);
     }
@@ -289,9 +289,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateImageConfig", req, cb);
     }
     /**
-       * DisableClsLogTopic 用于停止日志主题投递。注意：停止后，所有绑定该日志主题域名的日志将不再继续投递至该主题，已经投递的日志将会继续保留。生效时间约为 5~15 分钟。
-  
-       */
+     * DisableClsLogTopic 用于停止日志主题投递。注意：停止后，所有绑定该日志主题域名的日志将不再继续投递至该主题，已经投递的日志将会继续保留。生效时间约为 5~15 分钟。
+
+     */
     async DisableClsLogTopic(req, cb) {
         return this.request("DisableClsLogTopic", req, cb);
     }
@@ -344,9 +344,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeReportData", req, cb);
     }
     /**
-       * 查询指定域名的区域、运营商明细数据
-  注意事项：接口尚未全量开放，未在内测名单中的账号不支持调用
-       */
+     * 查询指定域名的区域、运营商明细数据
+注意事项：接口尚未全量开放，未在内测名单中的账号不支持调用
+     */
     async DescribeDistrictIspData(req, cb) {
         return this.request("DescribeDistrictIspData", req, cb);
     }

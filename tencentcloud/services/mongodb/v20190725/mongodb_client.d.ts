@@ -88,9 +88,9 @@ export declare class Client extends AbstractClient {
      */
     InquirePriceCreateDBInstances(req: InquirePriceCreateDBInstancesRequest, cb?: (error: string, rep: InquirePriceCreateDBInstancesResponse) => void): Promise<InquirePriceCreateDBInstancesResponse>;
     /**
-       * 本接口(AssignProject)用于指定云数据库实例的所属项目。
-  
-       */
+     * 本接口(AssignProject)用于指定云数据库实例的所属项目。
+
+     */
     AssignProject(req: AssignProjectRequest, cb?: (error: string, rep: AssignProjectResponse) => void): Promise<AssignProjectResponse>;
     /**
      * 本接口(RenameInstance)用于修改云数据库实例的名称。

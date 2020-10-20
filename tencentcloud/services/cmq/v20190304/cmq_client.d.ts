@@ -28,9 +28,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteSubscribe(req: DeleteSubscribeRequest, cb?: (error: string, rep: DeleteSubscribeResponse) => void): Promise<DeleteSubscribeResponse>;
     /**
-       * 创建队列接口
-  
-       */
+     * 创建队列接口
+
+     */
     CreateQueue(req: CreateQueueRequest, cb?: (error: string, rep: CreateQueueResponse) => void): Promise<CreateQueueResponse>;
     /**
      * 回溯队列

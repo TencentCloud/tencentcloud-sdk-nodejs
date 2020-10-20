@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { PurgePathCacheRequest, DescribeEcdnStatisticsRequest, StartEcdnDomainRequest, DescribeDomainsConfigResponse, PurgeUrlsCacheRequest, DescribePurgeQuotaResponse, DescribeEcdnDomainStatisticsResponse, StopEcdnDomainRequest, DescribePurgeTasksRequest, UpdateDomainConfigResponse, DescribePurgeQuotaRequest, DescribeEcdnDomainLogsResponse, UpdateDomainConfigRequest, DescribeDomainsConfigRequest, StartEcdnDomainResponse, DeleteEcdnDomainResponse, StopEcdnDomainResponse, PurgePathCacheResponse, PurgeUrlsCacheResponse, AddEcdnDomainRequest, DescribeDomainsResponse, DeleteEcdnDomainRequest, DescribePurgeTasksResponse, AddEcdnDomainResponse, DescribeEcdnStatisticsResponse, DescribeEcdnDomainStatisticsRequest, DescribeEcdnDomainLogsRequest, DescribeDomainsRequest } from "./ecdn_models";
+import { PurgePathCacheRequest, DescribeEcdnStatisticsRequest, StartEcdnDomainRequest, DescribeDomainsConfigResponse, PurgeUrlsCacheRequest, DescribePurgeQuotaResponse, DescribeEcdnDomainStatisticsResponse, StopEcdnDomainRequest, DescribePurgeTasksRequest, DescribeEcdnStatisticsResponse, UpdateDomainConfigResponse, DescribePurgeQuotaRequest, DescribeEcdnDomainLogsResponse, UpdateDomainConfigRequest, DescribeDomainsConfigRequest, StartEcdnDomainResponse, DeleteEcdnDomainResponse, StopEcdnDomainResponse, PurgePathCacheResponse, PurgeUrlsCacheResponse, AddEcdnDomainRequest, DescribeDomainsResponse, DeleteEcdnDomainRequest, DescribePurgeTasksResponse, AddEcdnDomainResponse, DescribeIpStatusResponse, DescribeEcdnDomainStatisticsRequest, DescribeEcdnDomainLogsRequest, DescribeIpStatusRequest, DescribeDomainsRequest } from "./ecdn_models";
 /**
  * ecdn client
  * @class
@@ -12,6 +12,10 @@ export declare class Client extends AbstractClient {
      */
     AddEcdnDomain(req: AddEcdnDomainRequest, cb?: (error: string, rep: AddEcdnDomainResponse) => void): Promise<AddEcdnDomainResponse>;
     /**
+     * DescribeIpStatus 用于查询域名所在加速平台的所有节点明细。
+     */
+    DescribeIpStatus(req: DescribeIpStatusRequest, cb?: (error: string, rep: DescribeIpStatusResponse) => void): Promise<DescribeIpStatusResponse>;
+    /**
      * PurgePathCache 用于批量刷新目录缓存，一次提交将返回一个刷新任务id。
      */
     PurgePathCache(req: PurgePathCacheRequest, cb?: (error: string, rep: PurgePathCacheResponse) => void): Promise<PurgePathCacheResponse>;
@@ -20,9 +24,9 @@ export declare class Client extends AbstractClient {
      */
     StartEcdnDomain(req: StartEcdnDomainRequest, cb?: (error: string, rep: StartEcdnDomainResponse) => void): Promise<StartEcdnDomainResponse>;
     /**
-       * 本接口（UpdateDomainConfig）用于更新ECDN加速域名配置信息。
-  注意：如果需要更新复杂类型的配置项，必须传递整个对象的所有属性，未传递的属性将使用默认值。建议通过查询接口获取配置属性后，直接修改后传递给本接口。Https配置由于证书的特殊性，更新时不用传递证书和密钥字段。
-       */
+     * 本接口（UpdateDomainConfig）用于更新ECDN加速域名配置信息。
+注意：如果需要更新复杂类型的配置项，必须传递整个对象的所有属性，未传递的属性将使用默认值。建议通过查询接口获取配置属性后，直接修改后传递给本接口。Https配置由于证书的特殊性，更新时不用传递证书和密钥字段。
+     */
     UpdateDomainConfig(req: UpdateDomainConfigRequest, cb?: (error: string, rep: UpdateDomainConfigResponse) => void): Promise<UpdateDomainConfigResponse>;
     /**
      * DescribePurgeTasks 用于查询刷新任务提交历史记录及执行进度。
@@ -57,17 +61,17 @@ export declare class Client extends AbstractClient {
      */
     DescribeDomains(req: DescribeDomainsRequest, cb?: (error: string, rep: DescribeDomainsResponse) => void): Promise<DescribeDomainsResponse>;
     /**
-       * DescribeEcdnStatistics用于查询 ECDN 实时访问监控数据，支持以下指标查询：
-  
-  + 流量（单位为 byte）
-  + 带宽（单位为 bps）
-  + 请求数（单位为 次）
-  + 响应时间（单位为ms）
-  + 状态码 2xx 汇总及各 2 开头状态码明细（单位为 个）
-  + 状态码 3xx 汇总及各 3 开头状态码明细（单位为 个）
-  + 状态码 4xx 汇总及各 4 开头状态码明细（单位为 个）
-  + 状态码 5xx 汇总及各 5 开头状态码明细（单位为 个）
-       */
+     * DescribeEcdnStatistics用于查询 ECDN 实时访问监控数据，支持以下指标查询：
+
++ 流量（单位为 byte）
++ 带宽（单位为 bps）
++ 请求数（单位为 次）
++ 响应时间（单位为ms）
++ 状态码 2xx 汇总及各 2 开头状态码明细（单位为 个）
++ 状态码 3xx 汇总及各 3 开头状态码明细（单位为 个）
++ 状态码 4xx 汇总及各 4 开头状态码明细（单位为 个）
++ 状态码 5xx 汇总及各 5 开头状态码明细（单位为 个）
+     */
     DescribeEcdnStatistics(req: DescribeEcdnStatisticsRequest, cb?: (error: string, rep: DescribeEcdnStatisticsResponse) => void): Promise<DescribeEcdnStatisticsResponse>;
     /**
      * 本接口（DescribeEcdnDomainStatistics）用于查询指定时间段内的域名访问统计指标

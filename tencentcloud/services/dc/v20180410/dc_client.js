@@ -58,9 +58,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDirectConnectTunnelExtra", req, cb);
     }
     /**
-       * 删除物理专线。
-  只能删除处于已连接状态的物理专线。
-       */
+     * 删除物理专线。
+只能删除处于已连接状态的物理专线。
+     */
     async DeleteDirectConnect(req, cb) {
         return this.request("DeleteDirectConnect", req, cb);
     }
@@ -77,9 +77,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteDirectConnectTunnel", req, cb);
     }
     /**
-       * 查询物理专线接入点
-  
-       */
+     * 查询物理专线接入点
+
+     */
     async DescribeAccessPoints(req, cb) {
         return this.request("DescribeAccessPoints", req, cb);
     }
@@ -90,11 +90,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDirectConnectTunnels", req, cb);
     }
     /**
-       * 申请物理专线接入。
-  调用该接口时，请注意：
-  账号要进行实名认证，否则不允许申请物理专线；
-  若账户下存在欠费状态的物理专线，则不能申请更多的物理专线。
-       */
+     * 申请物理专线接入。
+调用该接口时，请注意：
+账号要进行实名认证，否则不允许申请物理专线；
+若账户下存在欠费状态的物理专线，则不能申请更多的物理专线。
+     */
     async CreateDirectConnect(req, cb) {
         return this.request("CreateDirectConnect", req, cb);
     }

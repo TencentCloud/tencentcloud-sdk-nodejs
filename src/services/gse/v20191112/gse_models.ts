@@ -99,7 +99,7 @@ export interface FleetAttributes {
   Status: string
 
   /**
-      * 服务器舰队停止状态
+      * 服务器舰队停止状态，为空时表示自动扩缩容
 注意：此字段可能返回 null，表示取不到有效值。
       */
   StoppedActions: Array<string>
@@ -284,7 +284,7 @@ export interface DescribeFleetAttributesRequest {
   FleetIds?: Array<string>
 
   /**
-   * 结果返回最大数量，最小值0，最大值1000
+   * 结果返回最大数量，默认值20，最大值100
    */
   Limit?: number
 
@@ -324,17 +324,17 @@ export interface StartGameServerSessionPlacementResponse {
  */
 export interface DescribeFleetStatisticDetailsRequest {
   /**
-   * 服务部署ID
+   * 服务器舰队ID
    */
   FleetId?: string
 
   /**
-   * 查询开始时间
+   * 查询开始时间，时间格式：YYYY-MM-DD hh:mm:ss
    */
   BeginTime?: string
 
   /**
-   * 查询结束时间
+   * 查询结束时间，时间格式：YYYY-MM-DD hh:mm:ss
    */
   EndTime?: string
 
@@ -350,11 +350,26 @@ export interface DescribeFleetStatisticDetailsRequest {
 }
 
 /**
+ * DescribeAssetSystems请求参数结构体
+ */
+export interface DescribeAssetSystemsRequest {
+  /**
+   * 生成包支持的操作系统类型
+   */
+  OsType?: string
+
+  /**
+   * 生成包支持的操作系统位数
+   */
+  OsBit?: number
+}
+
+/**
  * GetInstanceAccess请求参数结构体
  */
 export interface GetInstanceAccessRequest {
   /**
-   * 服务部署Id
+   * 服务器舰队ID
    */
   FleetId: string
 
@@ -384,7 +399,7 @@ export interface CreateFleetRequest {
   InboundPermissions?: Array<InboundPermission>
 
   /**
-   * 服务器类型，例如S5.LARGE8
+   * 服务器类型，参数根据[获取服务器实例类型列表](https://cloud.tencent.com/document/product/1165/48732)接口获取。
    */
   InstanceType?: string
 
@@ -404,7 +419,7 @@ export interface CreateFleetRequest {
   NewGameServerSessionProtectionPolicy?: string
 
   /**
-   * VPC 网络 Id，弃用，对等链接已不再使用
+   * VPC 网络 Id，对等连接已不再使用
    */
   PeerVpcId?: string
 
@@ -419,12 +434,12 @@ export interface CreateFleetRequest {
   RuntimeConfiguration?: RuntimeConfiguration
 
   /**
-   * VPC 子网，弃用，对等链接已不再使用
+   * VPC 子网，对等连接已不再使用
    */
   SubNetId?: string
 
   /**
-   * 时限保护超时时间，默认60分钟，最小值5，最大值1440
+   * 时限保护超时时间，默认60分钟，最小值5，最大值1440；当NewGameSessionProtectionPolicy为TimeLimitProtection时参数有效
    */
   GameServerSessionProtectionTimeLimit?: number
 }
@@ -439,7 +454,7 @@ export interface StartFleetActionsRequest {
   FleetId: string
 
   /**
-   * 扩展策略，为空或者AUTO_SCALING
+   * 服务器舰队扩展策略，值为["AUTO_SCALING"]
    */
   Actions?: Array<string>
 }
@@ -487,13 +502,13 @@ export interface DescribeInstancesResponse {
  */
 export interface ListFleetsResponse {
   /**
-      * 服务部署 Id 列表
+      * 服务器舰队 Id 列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FleetIds?: Array<string>
 
   /**
-   * 服务部署 Id 总数，最小值0
+   * 服务器舰队 Id 总数，最小值0
    */
   TotalCount?: number
 
@@ -539,7 +554,7 @@ export interface DescribeFleetUtilizationResponse {
  */
 export interface DescribeScalingPoliciesRequest {
   /**
-   * 服务部署ID
+   * 服务器舰队ID
    */
   FleetId?: string
 
@@ -660,17 +675,17 @@ export interface UpdateFleetPortSettingsRequest {
  */
 export interface DescribeFleetStatisticFlowsRequest {
   /**
-   * 服务部署ID
+   * 服务器舰队ID
    */
   FleetId?: string
 
   /**
-   * 查询开始时间
+   * 查询开始时间，时间格式：YYYY-MM-DD hh:mm:ss
    */
   BeginTime?: string
 
   /**
-   * 查询结束时间
+   * 查询结束时间，时间格式：YYYY-MM-DD hh:mm:ss
    */
   EndTime?: string
 
@@ -766,7 +781,7 @@ export interface GameServerSessionPlacement {
   GameProperties: Array<GameProperty>
 
   /**
-   * 最大玩家数量
+   * 游戏服务器允许同时连接到游戏会话的最大玩家数量，最小值1，最大值为玩家会话最大限额
    */
   MaximumPlayerSessionCount: number
 
@@ -869,7 +884,7 @@ export interface GameServerSessionQueue {
  */
 export interface UpdateFleetCapacityResponse {
   /**
-      * 服务部署ID
+      * 服务器舰队ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FleetId?: string
@@ -885,7 +900,7 @@ export interface UpdateFleetCapacityResponse {
  */
 export interface DescribeRuntimeConfigurationResponse {
   /**
-      * 服务部署运行配置信息
+      * 服务器舰队运行配置信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RuntimeConfiguration?: RuntimeConfiguration
@@ -1048,17 +1063,17 @@ export interface DeleteScalingPolicyResponse {
  */
 export interface DescribeFleetStatisticSummaryRequest {
   /**
-   * 服务部署 Id
+   * 服务器舰队ID
    */
   FleetId?: string
 
   /**
-   * 查询开始时间
+   * 查询开始时间，时间格式: YYYY-MM-DD hh:mm:ss
    */
   BeginTime?: string
 
   /**
-   * 查询结束时间
+   * 查询结束时间，时间格式: YYYY-MM-DD hh:mm:ss
    */
   EndTime?: string
 }
@@ -1213,6 +1228,31 @@ export interface DescribeCcnInstancesResponse {
 }
 
 /**
+ * 生成包支持操作系统详细信息
+ */
+export interface AssetSupportSys {
+  /**
+   * 生成包操作系统的镜像Id
+   */
+  ImageId: string
+
+  /**
+   * 生成包操作系统的类型
+   */
+  OsType: string
+
+  /**
+   * 生成包操作系统的位数
+   */
+  OsBit: number
+
+  /**
+   * 生成包操作系统的版本
+   */
+  OsVersion: string
+}
+
+/**
  * DescribeInstanceLimit返回参数结构体
  */
 export interface DescribeInstanceLimitResponse {
@@ -1351,6 +1391,21 @@ export interface DeleteAliasRequest {
 }
 
 /**
+ * DescribeAssetSystems返回参数结构体
+ */
+export interface DescribeAssetSystemsResponse {
+  /**
+   * 生成包支持的操作系统类型列表
+   */
+  AssetSupportSys?: Array<AssetSupportSys>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeFleetAttributes返回参数结构体
  */
 export interface DescribeFleetAttributesResponse {
@@ -1446,7 +1501,7 @@ export interface InboundPermissionRevocations {
  */
 export interface DescribeAssetsRequest {
   /**
-   * 生成包可部署地域
+   * 生成包支持的可部署 [地域列表](https://cloud.tencent.com/document/api/1165/42053#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8)
    */
   AssetRegion: string
 
@@ -1667,17 +1722,17 @@ export interface DescribeAssetsResponse {
  */
 export interface DescribeFleetCapacityRequest {
   /**
-   * 服务部署 Id列表
+   * 服务器舰队ID列表
    */
   FleetIds: Array<string>
 
   /**
-   * 结果返回最大数量
+   * 结果返回最大数量，最大值 100
    */
   Limit?: number
 
   /**
-   * 返回结果偏移
+   * 返回结果偏移，最小值 0
    */
   Offset?: number
 }
@@ -1730,7 +1785,7 @@ export interface UpdateGameServerSessionQueueRequest {
   Name: string
 
   /**
-   * 目的服务部署（可为别名）列表
+   * 目的服务器舰队（可为别名）列表
    */
   Destinations?: Array<GameServerSessionQueueDestination>
 
@@ -1830,7 +1885,7 @@ export interface FleetCapacity {
   FleetId: string
 
   /**
-      * 服务器类型
+      * 服务器类型，如S3.LARGE8,S2.LARGE8,S5.LARGE8等
 注意：此字段可能返回 null，表示取不到有效值。
       */
   InstanceType: string
@@ -1842,7 +1897,7 @@ export interface FleetCapacity {
   InstanceCounts: InstanceCounts
 
   /**
-      * 服务器伸缩容间隔
+      * 服务器伸缩容间隔，单位分钟，最小值3，最大值30，默认值10
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ScalingInterval: number
@@ -1853,7 +1908,7 @@ export interface FleetCapacity {
  */
 export interface SetServerWeightRequest {
   /**
-   * 服务舰队ID
+   * 服务器舰队ID
    */
   FleetId: string
 
@@ -1863,7 +1918,7 @@ export interface SetServerWeightRequest {
   InstanceId: string
 
   /**
-   * 权重
+   * 权重，最小值0，最大值10，默认值5
    */
   Weight: number
 }
@@ -1899,7 +1954,7 @@ export interface DeleteFleetResponse {
  */
 export interface StartGameServerSessionPlacementRequest {
   /**
-   * 开始部署游戏服务器会话的唯一标识符
+   * 开始部署游戏服务器会话的唯一标识符，最大值48个ASCII字符，模式：[a-zA-Z0-9-]+
    */
   PlacementId: string
 
@@ -1909,7 +1964,7 @@ export interface StartGameServerSessionPlacementRequest {
   GameServerSessionQueueName: string
 
   /**
-   * 游戏服务器允许同时连接到游戏会话的最大玩家数量
+   * 游戏服务器允许同时连接到游戏会话的最大玩家数量，最小值1，最大值为玩家会话最大限额
    */
   MaximumPlayerSessionCount: number
 
@@ -1924,12 +1979,12 @@ export interface StartGameServerSessionPlacementRequest {
   GameProperties?: Array<GameProperty>
 
   /**
-   * 游戏服务器会话数据
+   * 游戏服务器会话数据，最大长度不超过4096个ASCII字符
    */
   GameServerSessionData?: string
 
   /**
-   * 游戏服务器会话名称
+   * 游戏服务器会话名称，最大长度不超过4096个ASCII字符
    */
   GameServerSessionName?: string
 
@@ -2009,7 +2064,7 @@ export interface ResourceCreationLimitPolicy {
   NewGameServerSessionsPerCreator?: number
 
   /**
-   * 单位时间，最小值1，默认3
+   * 单位时间，最小值1，默认3，单位分钟
    */
   PolicyPeriodInMinutes?: number
 }
@@ -2024,12 +2079,12 @@ export interface ListFleetsRequest {
   AssetId?: string
 
   /**
-   * 结果返回最大值，最小值0，最大值1000
+   * 结果返回最大值，暂未使用
    */
   Limit?: number
 
   /**
-   * 结果返回偏移，最小值0
+   * 结果返回偏移，暂未使用
    */
   Offset?: number
 }
@@ -2044,17 +2099,17 @@ export interface UpdateFleetAttributesRequest {
   FleetId: string
 
   /**
-   * 服务器舰队描述
+   * 服务器舰队描述，最小长度0，最大长度100
    */
   Description?: string
 
   /**
-   * 服务器舰队名称
+   * 服务器舰队名称，最小长度1，最大长度50
    */
   Name?: string
 
   /**
-   * 新建游戏会话保护策略
+   * 保护策略：不保护NoProtection、完全保护FullProtection、时限保护TimeLimitProtection
    */
   NewGameSessionProtectionPolicy?: string
 
@@ -2064,7 +2119,7 @@ export interface UpdateFleetAttributesRequest {
   ResourceCreationLimitPolicy?: ResourceCreationLimitPolicy
 
   /**
-   * 时限保护超时时间，默认60分钟
+   * 时限保护超时时间，默认60分钟，最小值5，最大值1440；当NewGameSessionProtectionPolicy为TimeLimitProtection时参数有效
    */
   GameServerSessionProtectionTimeLimit?: number
 }
@@ -2137,12 +2192,12 @@ export interface DeleteAliasResponse {
  */
 export interface DeleteScalingPolicyRequest {
   /**
-   * 服务部署ID
+   * 服务器舰队ID
    */
   FleetId: string
 
   /**
-   * 策略名称
+   * 扩缩容策略名称，最小长度为0，最大长度为1024
    */
   Name?: string
 }
@@ -2173,7 +2228,7 @@ export interface StopFleetActionsRequest {
   FleetId: string
 
   /**
-   * 服务器舰队扩展策略，为空或者AUTO_SCALING
+   * 服务器舰队扩展策略，值为["AUTO_SCALING"]
    */
   Actions?: Array<string>
 }
@@ -2251,7 +2306,7 @@ export interface SearchGameServerSessionsRequest {
   Limit?: number
 
   /**
-   * 页偏移，用于查询下一页
+   * 页偏移，用于查询下一页，最小长度不小于1个ASCII字符，最大长度不超过1024个ASCII字符
    */
   NextToken?: string
 
@@ -2267,6 +2322,32 @@ gameServerSessionProperties 游戏会话属性 String
 
 表达式String类型 等于=，不等于<>判断
 表示Number类型支持 =,<>,>,>=,<,<=
+
+例如：
+FilterExpression取值
+playerSessionCount>=2 AND hasAvailablePlayerSessions=true"
+表示查找至少有两个玩家，而且有可用玩家会话的游戏会话。
+FilterExpression取值
+gameServerSessionProperties.K1 = 'V1' AND gameServerSessionProperties.K2 = 'V2' OR gameServerSessionProperties.K3 = 'V3'
+
+表示
+查询满足如下游戏服务器会话属性的游戏会话
+{
+    "GameProperties":[
+        {
+            "Key":"K1",
+            "Value":"V1"
+        },
+        {
+            "Key":"K2",
+            "Value":"V2"
+        },
+        {
+            "Key":"K3",
+            "Value":"V3"
+        }
+    ]
+}
       */
   FilterExpression?: string
 
@@ -2372,6 +2453,16 @@ export interface StopGameServerSessionPlacementRequest {
 }
 
 /**
+ * UpdateFleetName返回参数结构体
+ */
+export interface UpdateFleetNameResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAlias请求参数结构体
  */
 export interface DescribeAliasRequest {
@@ -2421,12 +2512,12 @@ export interface UpdateGameServerSessionRequest {
   Name?: string
 
   /**
-   * 玩家会话创建策略（ACCEPT_ALL,DENY_ALL）
+   * 玩家会话创建策略，包括允许所有玩家加入和禁止所有玩家加入（ACCEPT_ALL,DENY_ALL）
    */
   PlayerSessionCreationPolicy?: string
 
   /**
-   * 保护策略(NoProtection,TimeLimitProtection,FullProtection)
+   * 保护策略，包括不保护、时限保护和完全保护(NoProtection,TimeLimitProtection,FullProtection)
    */
   ProtectionPolicy?: string
 }
@@ -2456,12 +2547,12 @@ export interface CreateAssetRequest {
   AssetRegion: string
 
   /**
-   * 生成包可运行的操作系统，暂时只有CentOS7.16
+   * 生成包可运行的操作系统，若传入参数为CentOS7.16则不需要传入ImageId字段，否则，需要传入Imageid字段（该方式是为了兼容之前的版本，后续建议使用ImageId来替代该字段）
    */
   OperateSystem: string
 
   /**
-   * 生成包支持的操作系统镜像id
+   * 生成包支持的操作系统镜像id，若传入OperateSystem字段的值是CentOS7.16，则不需要传入该值；如果不是，则需要通过DescribeAssetSystems接口获取asset支持的操作系统ImageId进行传入
    */
   ImageId?: string
 }
@@ -2559,7 +2650,7 @@ export interface CreateGameServerSessionResponse {
  */
 export interface DescribeInstancesRequest {
   /**
-   * 服务部署ID
+   * 服务器舰队ID
    */
   FleetId?: string
 
@@ -2690,6 +2781,21 @@ export interface InstanceCounts {
 }
 
 /**
+ * UpdateFleetName请求参数结构体
+ */
+export interface UpdateFleetNameRequest {
+  /**
+   * 服务器舰队 Id
+   */
+  FleetId: string
+
+  /**
+   * 服务器舰队名称，最小长度1，最大长度50
+   */
+  Name: string
+}
+
+/**
  * CreateFleet返回参数结构体
  */
 export interface CreateFleetResponse {
@@ -2710,7 +2816,7 @@ export interface CreateFleetResponse {
  */
 export interface UpdateFleetAttributesResponse {
   /**
-      * 服务部署Id
+      * 服务器舰队Id
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FleetId?: string
@@ -2991,7 +3097,7 @@ export interface DescribeAssetRequest {
  */
 export interface DescribeInstancesExtendRequest {
   /**
-   * 服务部署ID
+   * 服务器舰队ID
    */
   FleetId: string
 
@@ -3116,7 +3222,7 @@ export interface SearchGameServerSessionsResponse {
   GameServerSessions?: Array<GameServerSession>
 
   /**
-      * 页偏移，用于查询下一页
+      * 页偏移，用于查询下一页，最小长度不小于1个ASCII字符，最大长度不超过1024个ASCII字符
 注意：此字段可能返回 null，表示取不到有效值。
       */
   NextToken?: string
@@ -3152,7 +3258,7 @@ export interface DescribeFleetEventsResponse {
  */
 export interface RoutingStrategy {
   /**
-   * 别名的路由策略的类型SIMPLE/TERMINAL
+   * 别名的路由策略的类型，有效值常规别名(SIMPLE)、终止别名(TERMINAL)
    */
   Type: string
 
@@ -3163,7 +3269,7 @@ export interface RoutingStrategy {
   FleetId?: string
 
   /**
-      * 与终端路由策略一起使用的消息文本
+      * 与终端路由策略一起使用的消息文本，长度不小于1字符不超过1024字符
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Message?: string
@@ -3174,7 +3280,7 @@ export interface RoutingStrategy {
  */
 export interface DescribeFleetCapacityResponse {
   /**
-      * 服务部署容量配置
+      * 服务器舰队的容量配置
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FleetCapacity?: Array<FleetCapacity>
@@ -3217,7 +3323,7 @@ export interface DescribeFleetEventsRequest {
   FleetId: string
 
   /**
-   * 分页时返回服务部署事件的数量，默认为20，最大值为100
+   * 分页时返回服务器舰队事件的数量，默认为20，最大值为100
    */
   Limit?: number
 
@@ -3247,7 +3353,7 @@ export interface ListAliasesRequest {
   Name?: string
 
   /**
-   * 路由策略类型，有效值SIMPLE|TERMINAL
+   * 路由策略类型，有效值常规别名(SIMPLE)、终止别名(TERMINAL)
    */
   RoutingStrategyType?: string
 
@@ -3362,7 +3468,7 @@ export interface CreateGameServerSessionQueueRequest {
   Name: string
 
   /**
-   * 目的服务部署（可为别名）列表
+   * 目的服务器舰队（可为别名）列表
    */
   Destinations?: Array<GameServerSessionQueueDestination>
 
@@ -3433,17 +3539,17 @@ export interface DescribeRuntimeConfigurationRequest {
  */
 export interface RuntimeConfiguration {
   /**
-   * 游戏会话进程超时
+   * 游戏会话进程超时，最小值1，最大值600，单位秒
    */
   GameServerSessionActivationTimeoutSeconds?: number
 
   /**
-   * 最大游戏会话数
+   * 最大游戏会话数，最小值1，最大值2147483647
    */
   MaxConcurrentGameServerSessionActivations?: number
 
   /**
-   * 服务进程配置
+   * 服务进程配置，至少有一个进程配置
    */
   ServerProcesses?: Array<ServerProcesse>
 }
@@ -3485,17 +3591,17 @@ export interface DetachCcnInstancesRequest {
  */
 export interface ServerProcesse {
   /**
-   * 并发执行数量
+   * 并发执行数量，所有进程并发执行总数最小值1，最大值50
    */
   ConcurrentExecutions?: number
 
   /**
-   * 启动路径：/local/game/ 或 C:\game\
+   * 启动路径：Linux路径/local/game/ 或WIndows路径C:\game\，最小长度1，最大长度1024
    */
   LaunchPath?: string
 
   /**
-   * 启动参数
+   * 启动参数，最小长度0，最大长度1024
    */
   Parameters?: string
 }
@@ -3550,7 +3656,7 @@ export interface InstanceAccess {
  */
 export interface UpdateFleetCapacityRequest {
   /**
-   * 服务部署ID
+   * 服务器舰队ID
    */
   FleetId: string
 
@@ -3560,17 +3666,17 @@ export interface UpdateFleetCapacityRequest {
   DesiredInstances?: number
 
   /**
-   * 服务器实例数最小限制
+   * 服务器实例数最小限制，最小值0，最大值不超过最高配额查看各地区最高配额减1
    */
   MinSize?: number
 
   /**
-   * 服务器实例数最大限制
+   * 服务器实例数最大限制，最小值1，最大值不超过最高配额查看各地区最高配额
    */
   MaxSize?: number
 
   /**
-   * 服务器伸缩容间隔
+   * 服务器伸缩容间隔，单位分钟，最小值3，最大值30，默认值10
    */
   ScalingInterval?: number
 }
@@ -3696,22 +3802,23 @@ export interface InstanceExtend {
  */
 export interface PutScalingPolicyRequest {
   /**
-   * 基于规则的扩缩容配置服务部署ID
+   * 扩缩容配置服务器舰队ID
    */
   FleetId: string
 
   /**
-   * 策略名称
+   * 扩缩容策略名称，最小长度为1，最大长度为1024
    */
   Name?: string
 
   /**
-   * 扩缩容调整值
-   */
+      * 扩缩容调整值，ScalingAdjustmentType取值PercentChangeInCapacity时，取值范围-99~99
+ScalingAdjustmentType取值ChangeInCapacity或ExactCapacity时，最小值要缩容的最多CVM个数，最大值为实际最大的CVM个数限额
+      */
   ScalingAdjustment?: number
 
   /**
-   * 扩缩容调整类型
+   * 扩缩容调整类型，取值（ChangeInCapacity，ExactCapacity，PercentChangeInCapacity）
    */
   ScalingAdjustmentType?: string
 
@@ -3721,18 +3828,20 @@ export interface PutScalingPolicyRequest {
   Threshold?: number
 
   /**
-   * 策略比较符，取值：>,>=,<,<=
+   * 扩缩容策略比较符，取值：>,>=,<,<=
    */
   ComparisonOperator?: string
 
   /**
-   * 持续时间长度（分钟）
+   * 单个策略持续时间长度（分钟）
    */
   EvaluationPeriods?: number
 
   /**
-   * 指标名称
-   */
+      * 扩缩容参与计算的指标名称，PolicyType取值RuleBased，
+MetricName取值（AvailableGameServerSessions，AvailableCustomCount，PercentAvailableCustomCount，ActiveInstances，IdleInstances，CurrentPlayerSessions和PercentIdleInstances）；
+PolicyType取值TargetBased时，MetricName取值PercentAvailableGameSessions
+      */
   MetricName?: string
 
   /**
@@ -3741,7 +3850,7 @@ export interface PutScalingPolicyRequest {
   PolicyType?: string
 
   /**
-   * 扩缩容配置类型
+   * 扩缩容目标值配置，只有TargetBased类型的策略生效
    */
   TargetConfiguration?: TargetConfiguration
 }

@@ -48,10 +48,10 @@ export declare class Client extends AbstractClient {
      */
     SendVcode(req: SendVcodeRequest, cb?: (error: string, rep: SendVcodeResponse) => void): Promise<SendVcodeResponse>;
     /**
-       * 检测验证码接口。此接口用于企业电子合同平台通过给用户发送短信验证码，以短信授权方式签署合同。此接口配合发送验证码接口使用。
-  
-  用户在企业电子合同平台输入收到的验证码后，由企业电子合同平台调用该接口向腾讯云提交确认受托签署合同验证码命令。验证码验证正确时，本次合同签署的授权成功。
-       */
+     * 检测验证码接口。此接口用于企业电子合同平台通过给用户发送短信验证码，以短信授权方式签署合同。此接口配合发送验证码接口使用。
+
+用户在企业电子合同平台输入收到的验证码后，由企业电子合同平台调用该接口向腾讯云提交确认受托签署合同验证码命令。验证码验证正确时，本次合同签署的授权成功。
+     */
     CheckVcode(req: CheckVcodeRequest, cb?: (error: string, rep: CheckVcodeResponse) => void): Promise<CheckVcodeResponse>;
     /**
      * 此接口适用于：客户平台在创建好合同后，由合同签署方对创建的合同内容进行确认，无误后再进行签署。客户平台使用该接口提供详细的PDF文档签名坐标进行签署。

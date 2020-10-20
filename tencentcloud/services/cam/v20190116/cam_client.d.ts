@@ -164,9 +164,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeSafeAuthFlagColl(req: DescribeSafeAuthFlagCollRequest, cb?: (error: string, rep: DescribeSafeAuthFlagCollResponse) => void): Promise<DescribeSafeAuthFlagCollResponse>;
     /**
-       * 本接口（UpdatePolicy ）可用于更新策略。
-  如果已存在策略版本，本接口会直接更新策略的默认版本，不会创建新版本，如果不存在任何策略版本，则直接创建一个默认版本。
-       */
+     * 本接口（UpdatePolicy ）可用于更新策略。
+如果已存在策略版本，本接口会直接更新策略的默认版本，不会创建新版本，如果不存在任何策略版本，则直接创建一个默认版本。
+     */
     UpdatePolicy(req: UpdatePolicyRequest, cb?: (error: string, rep: UpdatePolicyResponse) => void): Promise<UpdatePolicyResponse>;
     /**
      * 该接口（ListPolicyVersions）用于获取策略版本列表

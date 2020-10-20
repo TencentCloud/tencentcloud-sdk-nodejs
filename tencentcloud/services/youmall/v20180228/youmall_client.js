@@ -142,10 +142,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeZoneFlowDailyByZoneId", req, cb);
     }
     /**
-       * 输出开始时间到结束时间段内的进出场数据。不做按天聚合的情况下，每次进出场，产生一条进出场数据。
-  
-  
-       */
+     * 输出开始时间到结束时间段内的进出场数据。不做按天聚合的情况下，每次进出场，产生一条进出场数据。
+
+
+     */
     async DescribePersonArrivedMall(req, cb) {
         return this.request("DescribePersonArrivedMall", req, cb);
     }
@@ -192,9 +192,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeletePersonFeature", req, cb);
     }
     /**
-       * 标记到店顾客的身份类型，例如黑名单、白名单等
-  
-       */
+     * 标记到店顾客的身份类型，例如黑名单、白名单等
+
+     */
     async ModifyPersonTagInfo(req, cb) {
         return this.request("ModifyPersonTagInfo", req, cb);
     }

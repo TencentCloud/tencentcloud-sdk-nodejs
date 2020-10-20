@@ -34,9 +34,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StartEncryption", req, cb);
     }
     /**
-       * 本接口用来设置fairplay方案所需的私钥、私钥密钥、ask等信息。
-  如需使用fairplay方案，请务必先设置私钥。
-       */
+     * 本接口用来设置fairplay方案所需的私钥、私钥密钥、ask等信息。
+如需使用fairplay方案，请务必先设置私钥。
+     */
     async AddFairPlayPem(req, cb) {
         return this.request("AddFairPlayPem", req, cb);
     }
@@ -47,39 +47,39 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateEncryptKeys", req, cb);
     }
     /**
-       * 本接口用来生成DRM方案对应的播放许可证，开发者需提供DRM方案类型、内容类型参数，后台将生成许可证后返回许可证数据
-  开发者需要转发终端设备发出的许可证请求信息。
-       */
+     * 本接口用来生成DRM方案对应的播放许可证，开发者需提供DRM方案类型、内容类型参数，后台将生成许可证后返回许可证数据
+开发者需要转发终端设备发出的许可证请求信息。
+     */
     async CreateLicense(req, cb) {
         return this.request("CreateLicense", req, cb);
     }
     /**
-       * 本接口用来设置fairplay方案所需的私钥、私钥密钥、ask等信息。
-  如需使用fairplay方案，请务必先设置私钥。
-       */
+     * 本接口用来设置fairplay方案所需的私钥、私钥密钥、ask等信息。
+如需使用fairplay方案，请务必先设置私钥。
+     */
     async ModifyFairPlayPem(req, cb) {
         return this.request("ModifyFairPlayPem", req, cb);
     }
     /**
-       * 开发者需要指定使用的DRM类型、和需要加密的Track类型，后台返回加密使用的密钥
-  如果加密使用的ContentID没有关联的密钥信息，后台会自动生成新的密钥返回
-  
-       */
+     * 开发者需要指定使用的DRM类型、和需要加密的Track类型，后台返回加密使用的密钥
+如果加密使用的ContentID没有关联的密钥信息，后台会自动生成新的密钥返回
+
+     */
     async DescribeKeys(req, cb) {
         return this.request("DescribeKeys", req, cb);
     }
     /**
-       * 本接口用来查询指定DRM类型、ContentType的所有加密密钥
-  
-       */
+     * 本接口用来查询指定DRM类型、ContentType的所有加密密钥
+
+     */
     async DescribeAllKeys(req, cb) {
         return this.request("DescribeAllKeys", req, cb);
     }
     /**
-       * 本接口用来删除fairplay方案的私钥、ask等信息
-  注：高风险操作，删除后，您将无法使用腾讯云DRM提供的fairplay服务。
-  由于缓存，删除操作需要约半小时生效
-       */
+     * 本接口用来删除fairplay方案的私钥、ask等信息
+注：高风险操作，删除后，您将无法使用腾讯云DRM提供的fairplay服务。
+由于缓存，删除操作需要约半小时生效
+     */
     async DeleteFairPlayPem(req, cb) {
         return this.request("DeleteFairPlayPem", req, cb);
     }

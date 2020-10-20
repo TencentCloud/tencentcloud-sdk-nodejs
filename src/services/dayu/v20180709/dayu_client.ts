@@ -162,6 +162,7 @@ import {
   ModifyCCIpAllowDenyResponse,
   ModifyCCAlarmThresholdRequest,
   DescribeCCFrequencyRulesResponse,
+  DescribeBizTrendResponse,
   DescribeDDoSEvListRequest,
   DescribeBasicCCThresholdResponse,
   ModifyDDoSPolicyNameRequest,
@@ -247,6 +248,7 @@ import {
   DescribeRuleSetsRequest,
   DescribeSchedulingDomainListRequest,
   DescribleL7RulesResponse,
+  DescribeBizTrendRequest,
   CreateCCFrequencyRulesResponse,
   CreateNewL4RulesRequest,
   DDoSPolicyPortLimit,
@@ -1156,6 +1158,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyCCHostProtectionResponse) => void
   ): Promise<ModifyCCHostProtectionResponse> {
     return this.request("ModifyCCHostProtection", req, cb)
+  }
+
+  /**
+   * 获取业务流量曲线
+   */
+  async DescribeBizTrend(
+    req: DescribeBizTrendRequest,
+    cb?: (error: string, rep: DescribeBizTrendResponse) => void
+  ): Promise<DescribeBizTrendResponse> {
+    return this.request("DescribeBizTrend", req, cb)
   }
 
   /**

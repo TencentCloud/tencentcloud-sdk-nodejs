@@ -46,12 +46,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("VatInvoiceVerify", req, cb);
     }
     /**
-       * 本接口支持条形码备案信息查询，返回条形码查询结果的相关信息，包括产品名称、产品英文名称、品牌名称、规格型号、宽度、高度、深度、关键字、产品描述、厂家名称、厂家地址、企业社会信用代码13个字段信息。
-  
-  产品优势：直联中国物品编码中心，查询结果更加准确、可靠。
-  
-  本接口目前为内测阶段，如需使用服务，请<a href="https://cloud.tencent.com/act/event/connect-service" target="_blank">联系商务</a>开通。
-       */
+     * 本接口支持条形码备案信息查询，返回条形码查询结果的相关信息，包括产品名称、产品英文名称、品牌名称、规格型号、宽度、高度、深度、关键字、产品描述、厂家名称、厂家地址、企业社会信用代码13个字段信息。
+
+产品优势：直联中国物品编码中心，查询结果更加准确、可靠。
+
+本接口目前为内测阶段，如需使用服务，请<a href="https://cloud.tencent.com/act/event/connect-service" target="_blank">联系商务</a>开通。
+     */
     async QueryBarCode(req, cb) {
         return this.request("QueryBarCode", req, cb);
     }
@@ -68,53 +68,53 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BusinessCardOCR", req, cb);
     }
     /**
-       * 本接口支持中国大陆居民二代身份证正反面所有字段的识别，包括姓名、性别、民族、出生日期、住址、公民身份证号、签发机关、有效期限，识别准确度达到99%以上。
-  
-  另外，本接口还支持多种增值能力，满足不同场景的需求。如身份证照片、人像照片的裁剪功能，同时具备9种告警功能，如下表所示。
-  
-  <table style="width:650px">
-        <thead>
+     * 本接口支持中国大陆居民二代身份证正反面所有字段的识别，包括姓名、性别、民族、出生日期、住址、公民身份证号、签发机关、有效期限，识别准确度达到99%以上。
+
+另外，本接口还支持多种增值能力，满足不同场景的需求。如身份证照片、人像照片的裁剪功能，同时具备9种告警功能，如下表所示。
+
+<table style="width:650px">
+      <thead>
+        <tr>
+       <th width="150">增值能力</th>
+          <th width="500">能力项</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td rowspan="2">裁剪功能</td>
+          <td>身份证照片裁剪（去掉证件外多余的边缘、自动矫正拍摄角度）</td>
+        </tr>
+        <tr>
+          <td>人像照片裁剪（自动抠取身份证头像区域）</td>
+        </tr>
+        <tr>
+          <td rowspan="9">告警功能</td>
+          <td>身份证有效日期不合法告警</td>
+        </tr>
+        <tr>
+          <td>身份证边框不完整告警</td>
+        </tr>
+        <tr>
+          <td>身份证复印件告警</td>
+        </tr>
+        <tr>
+          <td>身份证翻拍告警</td>
+        </tr>
           <tr>
-         <th width="150">增值能力</th>
-            <th width="500">能力项</th>
-          </tr>
-        </thead>
-        <tbody>
+          <td>身份证框内遮挡告警</td>
+        </tr>
+         <tr>
+          <td>临时身份证告警</td>
+        </tr>
           <tr>
-            <td rowspan="2">裁剪功能</td>
-            <td>身份证照片裁剪（去掉证件外多余的边缘、自动矫正拍摄角度）</td>
-          </tr>
+          <td>身份证 PS 告警</td>
+        </tr>
           <tr>
-            <td>人像照片裁剪（自动抠取身份证头像区域）</td>
-          </tr>
-          <tr>
-            <td rowspan="9">告警功能</td>
-            <td>身份证有效日期不合法告警</td>
-          </tr>
-          <tr>
-            <td>身份证边框不完整告警</td>
-          </tr>
-          <tr>
-            <td>身份证复印件告警</td>
-          </tr>
-          <tr>
-            <td>身份证翻拍告警</td>
-          </tr>
-            <tr>
-            <td>身份证框内遮挡告警</td>
-          </tr>
-           <tr>
-            <td>临时身份证告警</td>
-          </tr>
-            <tr>
-            <td>身份证 PS 告警</td>
-          </tr>
-            <tr>
-            <td>图片模糊告警（可根据图片质量分数判断）</td>
-          </tr>
-        </tbody>
-      </table>
-       */
+          <td>图片模糊告警（可根据图片质量分数判断）</td>
+        </tr>
+      </tbody>
+    </table>
+     */
     async IDCardOCR(req, cb) {
         return this.request("IDCardOCR", req, cb);
     }
@@ -125,84 +125,84 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("TollInvoiceOCR", req, cb);
     }
     /**
-       * 本接口支持马来西亚身份证识别，识别字段包括身份证号、姓名、性别、地址；具备身份证人像照片的裁剪功能和翻拍、复印件告警功能。
-  本接口暂未完全对外开放，如需咨询，请[联系商务](https://cloud.tencent.com/about/connect)
-  
-       */
+     * 本接口支持马来西亚身份证识别，识别字段包括身份证号、姓名、性别、地址；具备身份证人像照片的裁剪功能和翻拍、复印件告警功能。
+本接口暂未完全对外开放，如需咨询，请[联系商务](https://cloud.tencent.com/about/connect)
+
+     */
     async MLIDCardOCR(req, cb) {
         return this.request("MLIDCardOCR", req, cb);
     }
     /**
-       * 本接口支持条形码和二维码的识别（包括 DataMatrix 和 PDF417）。
-  
-  本接口目前处于公测阶段，2020年10月7日公测结束后，接口价格会进行相应的变更，请留意站内信通知。
-       */
+     * 本接口支持条形码和二维码的识别（包括 DataMatrix 和 PDF417）。
+
+本接口目前处于公测阶段，2020年10月7日公测结束后，接口价格会进行相应的变更，请留意站内信通知。
+     */
     async QrcodeOCR(req, cb) {
         return this.request("QrcodeOCR", req, cb);
     }
     /**
-       * 本接口支持图像整体文字的检测和识别。支持中文、英文、中英文、数字和特殊字符号的识别，并返回文字框位置和文字内容。
-  
-  适用于文字较多、版式复杂、对识别准召率要求较高的场景，如试卷试题、网络图片、街景店招牌、法律卷宗等场景。
-  
-  产品优势：与通用印刷体识别相比，提供更高精度的文字识别服务，在文字较多、长串数字、小字、模糊字、倾斜文本等困难场景下，高精度版的准确率和召回率更高。
-  
-  通用印刷体识别不同版本的差异如下：
-  <table style="width:715px">
-        <thead>
-          <tr>
-            <th style="width:150px"></th>
-            <th >【荐】通用印刷体识别（高精度版）</th>
-            <th style="width:200px"><a href="https://cloud.tencent.com/document/product/866/33526">【荐】通用印刷体识别</a></th>
-            <th><a href="https://cloud.tencent.com/document/product/866/37831">通用印刷体识别（精简版）</a></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td> 适用场景</td>
-            <td>适用于文字较多、长串数字、小字、模糊字、倾斜文本等困难场景</td>
-            <td>适用于所有通用场景的印刷体识别</td>
-            <td>适用于快速文本识别场景，准召率有一定损失，价格更优惠</td>
-          </tr>
-          <tr>
-            <td>识别准确率</td>
-            <td>99%</td>
-            <td>96%</td>
-            <td>91%</td>
-          </tr>
-          <tr>
-            <td>价格</td>
-            <td>高</td>
-            <td>中</td>
-            <td>低</td>
-          </tr>
-          <tr>
-            <td>支持的语言</td>
-            <td>中文、英文、中英文</td>
-            <td>中文、英文、中英文、日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语</td>
-            <td>中文、英文、中英文</td>
-          </tr>
-          <tr>
-            <td>自动语言检测</td>
-            <td>支持</td>
-            <td>支持</td>
-            <td>支持</td>
-          </tr>
-          <tr>
-            <td>返回文本行坐标</td>
-            <td>支持</td>
-            <td>支持</td>
-            <td>支持</td>
-          </tr>
-          <tr>
-            <td>自动旋转纠正</td>
-            <td>支持旋转识别，不支持角度返回</td>
-            <td>支持旋转识别，返回角度信息</td>
-            <td>支持旋转识别，返回角度信息</td>
-          </tr>
-        </tbody>
-      </table>
-       */
+     * 本接口支持图像整体文字的检测和识别。支持中文、英文、中英文、数字和特殊字符号的识别，并返回文字框位置和文字内容。
+
+适用于文字较多、版式复杂、对识别准召率要求较高的场景，如试卷试题、网络图片、街景店招牌、法律卷宗等场景。
+
+产品优势：与通用印刷体识别相比，提供更高精度的文字识别服务，在文字较多、长串数字、小字、模糊字、倾斜文本等困难场景下，高精度版的准确率和召回率更高。
+
+通用印刷体识别不同版本的差异如下：
+<table style="width:715px">
+      <thead>
+        <tr>
+          <th style="width:150px"></th>
+          <th >【荐】通用印刷体识别（高精度版）</th>
+          <th style="width:200px"><a href="https://cloud.tencent.com/document/product/866/33526">【荐】通用印刷体识别</a></th>
+          <th><a href="https://cloud.tencent.com/document/product/866/37831">通用印刷体识别（精简版）</a></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td> 适用场景</td>
+          <td>适用于文字较多、长串数字、小字、模糊字、倾斜文本等困难场景</td>
+          <td>适用于所有通用场景的印刷体识别</td>
+          <td>适用于快速文本识别场景，准召率有一定损失，价格更优惠</td>
+        </tr>
+        <tr>
+          <td>识别准确率</td>
+          <td>99%</td>
+          <td>96%</td>
+          <td>91%</td>
+        </tr>
+        <tr>
+          <td>价格</td>
+          <td>高</td>
+          <td>中</td>
+          <td>低</td>
+        </tr>
+        <tr>
+          <td>支持的语言</td>
+          <td>中文、英文、中英文</td>
+          <td>中文、英文、中英文、日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语</td>
+          <td>中文、英文、中英文</td>
+        </tr>
+        <tr>
+          <td>自动语言检测</td>
+          <td>支持</td>
+          <td>支持</td>
+          <td>支持</td>
+        </tr>
+        <tr>
+          <td>返回文本行坐标</td>
+          <td>支持</td>
+          <td>支持</td>
+          <td>支持</td>
+        </tr>
+        <tr>
+          <td>自动旋转纠正</td>
+          <td>支持旋转识别，不支持角度返回</td>
+          <td>支持旋转识别，返回角度信息</td>
+          <td>支持旋转识别，返回角度信息</td>
+        </tr>
+      </tbody>
+    </table>
+     */
     async GeneralAccurateOCR(req, cb) {
         return this.request("GeneralAccurateOCR", req, cb);
     }
@@ -225,9 +225,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ShipInvoiceOCR", req, cb);
     }
     /**
-       * 本接口支持中国港澳台地区以及其他国家、地区的护照识别。识别字段包括护照ID、姓名、出生日期、性别、有效期、发行国、国籍，具备护照人像照片的裁剪功能和翻拍、复印件告警功能。
-  
-       */
+     * 本接口支持中国港澳台地区以及其他国家、地区的护照识别。识别字段包括护照ID、姓名、出生日期、性别、有效期、发行国、国籍，具备护照人像照片的裁剪功能和翻拍、复印件告警功能。
+
+     */
     async MLIDPassportOCR(req, cb) {
         return this.request("MLIDPassportOCR", req, cb);
     }
@@ -286,10 +286,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InvoiceGeneralOCR", req, cb);
     }
     /**
-       * 本接口支持中国香港身份证人像面中关键字段的识别，包括中文姓名、英文姓名、姓名电码、出生日期、性别、证件符号、首次签发日期、最近领用日期、身份证号、是否是永久性居民身份证；具备防伪识别、人像照片裁剪等扩展功能。
-  本接口暂未完全对外开放，如需咨询，请[联系商务](https://cloud.tencent.com/about/connect)
-  
-       */
+     * 本接口支持中国香港身份证人像面中关键字段的识别，包括中文姓名、英文姓名、姓名电码、出生日期、性别、证件符号、首次签发日期、最近领用日期、身份证号、是否是永久性居民身份证；具备防伪识别、人像照片裁剪等扩展功能。
+本接口暂未完全对外开放，如需咨询，请[联系商务](https://cloud.tencent.com/about/connect)
+
+     */
     async HKIDCardOCR(req, cb) {
         return this.request("HKIDCardOCR", req, cb);
     }
@@ -300,9 +300,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("VatInvoiceOCR", req, cb);
     }
     /**
-       * 本接口支持营业执照信息的识别与准确性核验，返回的营业执照信息比营业执照识别及核验（基础版）接口更详细。
-  您可以通过输入营业执照关键字段或传入营业执照图片提供所需的验证信息，接口返回真实的企业工商照面信息及核验结果，包括统一社会信用代码、组织机构代码、经营期限、法人姓名、经营状态、经营业务范围及方式、注册资金、注册币种、登记机关、开业日期、企业（机构）类型、注销日期、吊销日期、许可经营项目、一般经营项目、核准时间、省、地级市、区/县、住所所在行政区划代码、行业门类代码、行业门类名称、国民经济行业代码、国民经济行业名称、经营（业务）范围、要核验的工商注册号、工商注册号、要核验的企业名称、企业名称、要核验的注册住址、注册住址、核验结果共33个详细字段。
-       */
+     * 本接口支持营业执照信息的识别与准确性核验，返回的营业执照信息比营业执照识别及核验（基础版）接口更详细。
+您可以通过输入营业执照关键字段或传入营业执照图片提供所需的验证信息，接口返回真实的企业工商照面信息及核验结果，包括统一社会信用代码、组织机构代码、经营期限、法人姓名、经营状态、经营业务范围及方式、注册资金、注册币种、登记机关、开业日期、企业（机构）类型、注销日期、吊销日期、许可经营项目、一般经营项目、核准时间、省、地级市、区/县、住所所在行政区划代码、行业门类代码、行业门类名称、国民经济行业代码、国民经济行业名称、经营（业务）范围、要核验的工商注册号、工商注册号、要核验的企业名称、企业名称、要核验的注册住址、注册住址、核验结果共33个详细字段。
+     */
     async VerifyBizLicense(req, cb) {
         return this.request("VerifyBizLicense", req, cb);
     }
@@ -313,68 +313,68 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DutyPaidProofOCR", req, cb);
     }
     /**
-       * 本接口支持图像整体文字的检测和识别。可以识别中文、英文、中英文、日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语，阿拉伯语20种语言，且各种语言均支持与英文混合的文字识别。
-  
-  适用于印刷文档识别、网络图片识别、广告图文字识别、街景店招牌识别、菜单识别、视频标题识别、头像文字识别等场景。
-  
-  产品优势：支持自动识别语言类型，可返回文本框坐标信息，对于倾斜文本支持自动旋转纠正。
-  
-  通用印刷体识别不同版本的差异如下：
-  <table style="width:715px">
-        <thead>
-          <tr>
-            <th style="width:150px"></th>
-            <th style="width:200px">【荐】通用印刷体识别</th>
-            <th ><a href="https://cloud.tencent.com/document/product/866/34937">【荐】通用印刷体识别（高精度版）</a></th>
-            <th><a href="https://cloud.tencent.com/document/product/866/37831">通用印刷体识别（精简版）</a></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td> 适用场景</td>
-            <td>适用于所有通用场景的印刷体识别</td>
-            <td>适用于文字较多、长串数字、小字、模糊字、倾斜文本等困难场景</td>
-            <td>适用于快速文本识别场景，准召率有一定损失，价格更优惠</td>
-          </tr>
-          <tr>
-            <td>识别准确率</td>
-            <td>96%</td>
-            <td>99%</td>
-            <td>91%</td>
-          </tr>
-          <tr>
-            <td>价格</td>
-            <td>中</td>
-            <td>高</td>
-            <td>低</td>
-          </tr>
-          <tr>
-            <td>支持的语言</td>
-            <td>中文、英文、中英文、日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语</td>
-            <td>中文、英文、中英文</td>
-            <td>中文、英文、中英文</td>
-          </tr>
-          <tr>
-            <td>自动语言检测</td>
-            <td>支持</td>
-            <td>支持</td>
-            <td>支持</td>
-          </tr>
-          <tr>
-            <td>返回文本行坐标</td>
-            <td>支持</td>
-            <td>支持</td>
-            <td>支持</td>
-          </tr>
-          <tr>
-            <td>自动旋转纠正</td>
-            <td>支持旋转识别，返回角度信息</td>
-            <td>支持旋转识别，不支持角度返回</td>
-            <td>支持旋转识别，返回角度信息</td>
-          </tr>
-        </tbody>
-      </table>
-       */
+     * 本接口支持图像整体文字的检测和识别。可以识别中文、英文、中英文、日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语，阿拉伯语20种语言，且各种语言均支持与英文混合的文字识别。
+
+适用于印刷文档识别、网络图片识别、广告图文字识别、街景店招牌识别、菜单识别、视频标题识别、头像文字识别等场景。
+
+产品优势：支持自动识别语言类型，可返回文本框坐标信息，对于倾斜文本支持自动旋转纠正。
+
+通用印刷体识别不同版本的差异如下：
+<table style="width:715px">
+      <thead>
+        <tr>
+          <th style="width:150px"></th>
+          <th style="width:200px">【荐】通用印刷体识别</th>
+          <th ><a href="https://cloud.tencent.com/document/product/866/34937">【荐】通用印刷体识别（高精度版）</a></th>
+          <th><a href="https://cloud.tencent.com/document/product/866/37831">通用印刷体识别（精简版）</a></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td> 适用场景</td>
+          <td>适用于所有通用场景的印刷体识别</td>
+          <td>适用于文字较多、长串数字、小字、模糊字、倾斜文本等困难场景</td>
+          <td>适用于快速文本识别场景，准召率有一定损失，价格更优惠</td>
+        </tr>
+        <tr>
+          <td>识别准确率</td>
+          <td>96%</td>
+          <td>99%</td>
+          <td>91%</td>
+        </tr>
+        <tr>
+          <td>价格</td>
+          <td>中</td>
+          <td>高</td>
+          <td>低</td>
+        </tr>
+        <tr>
+          <td>支持的语言</td>
+          <td>中文、英文、中英文、日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语</td>
+          <td>中文、英文、中英文</td>
+          <td>中文、英文、中英文</td>
+        </tr>
+        <tr>
+          <td>自动语言检测</td>
+          <td>支持</td>
+          <td>支持</td>
+          <td>支持</td>
+        </tr>
+        <tr>
+          <td>返回文本行坐标</td>
+          <td>支持</td>
+          <td>支持</td>
+          <td>支持</td>
+        </tr>
+        <tr>
+          <td>自动旋转纠正</td>
+          <td>支持旋转识别，返回角度信息</td>
+          <td>支持旋转识别，不支持角度返回</td>
+          <td>支持旋转识别，返回角度信息</td>
+        </tr>
+      </tbody>
+    </table>
+     */
     async GeneralBasicOCR(req, cb) {
         return this.request("GeneralBasicOCR", req, cb);
     }
@@ -433,18 +433,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("LicensePlateOCR", req, cb);
     }
     /**
-       * 本接口支持不动产权证关键字段的识别，包括使用期限、面积、用途、权利性质、权利类型、坐落、共有情况、权利人、权利其他状况等。
-  
-  
-  
-       */
+     * 本接口支持不动产权证关键字段的识别，包括使用期限、面积、用途、权利性质、权利类型、坐落、共有情况、权利人、权利其他状况等。
+
+
+
+     */
     async EstateCertOCR(req, cb) {
         return this.request("EstateCertOCR", req, cb);
     }
     /**
-       * 支持身份证、护照、名片、银行卡、行驶证、驾驶证、港澳台通行证、户口本、港澳台来往内地通行证、港澳台居住证、不动产证、营业执照的智能分类。
-  
-       */
+     * 支持身份证、护照、名片、银行卡、行驶证、驾驶证、港澳台通行证、户口本、港澳台来往内地通行证、港澳台居住证、不动产证、营业执照的智能分类。
+
+     */
     async ClassifyDetectOCR(req, cb) {
         return this.request("ClassifyDetectOCR", req, cb);
     }
@@ -455,97 +455,97 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SealOCR", req, cb);
     }
     /**
-       * 本接口支持火车票全字段的识别，包括编号、票价、姓名、座位号、出发时间、出发站、到达站、车次、席别、发票类型及序列号等。
-  
-       */
+     * 本接口支持火车票全字段的识别，包括编号、票价、姓名、座位号、出发时间、出发站、到达站、车次、席别、发票类型及序列号等。
+
+     */
     async TrainTicketOCR(req, cb) {
         return this.request("TrainTicketOCR", req, cb);
     }
     /**
-       * 本接口通过检测图片中的文字信息特征，快速判断图片中有无文字并返回判断结果，帮助用户过滤无文字的图片。
-  
-  本接口目前处于公测阶段，2020年10月7日公测结束后，接口价格会进行相应的变更，请留意站内信通知。
-       */
+     * 本接口通过检测图片中的文字信息特征，快速判断图片中有无文字并返回判断结果，帮助用户过滤无文字的图片。
+
+本接口目前处于公测阶段，2020年10月7日公测结束后，接口价格会进行相应的变更，请留意站内信通知。
+     */
     async TextDetect(req, cb) {
         return this.request("TextDetect", req, cb);
     }
     /**
-       * 本接口支持图像整体文字的检测和识别。支持中文、英文、中英文、数字和特殊字符号的识别，并返回文字框位置和文字内容。
-  
-  适用于快速文本识别场景。
-  
-  产品优势：与通用印刷体识别接口相比，精简版虽然在准确率和召回率上有一定损失，但价格更加优惠。
-  
-  通用印刷体识别不同版本的差异如下：
-  <table style="width:715px">
-        <thead>
-          <tr>
-            <th style="width:150px"></th>
-            <th >通用印刷体识别（精简版）</th>
-            <th style="width:200px"><a href="https://cloud.tencent.com/document/product/866/33526">【荐】通用印刷体识别</a></th>
-            <th><a href="https://cloud.tencent.com/document/product/866/34937">【荐】通用印刷体识别（高精度版）</a></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td> 适用场景</td>
-            <td>适用于快速文本识别场景，准召率有一定损失，价格更优惠</td>
-            <td>适用于所有通用场景的印刷体识别</td>
-            <td>适用于文字较多、长串数字、小字、模糊字、倾斜文本等困难场景</td>
-            
-            
-          </tr>
-          <tr>
-            <td>识别准确率</td>
-            <td>91%</td>
-            <td>96%</td>
-            <td>99%</td>
-            
-            
-          </tr>
-          <tr>
-            <td>价格</td>
-            <td>低</td>
-            <td>中</td>
-            <td>高</td>
-            
-            
-          </tr>
-          <tr>
-            <td>支持的语言</td>
-            <td>中文、英文、中英文</td>
-            <td>中文、英文、中英文、日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语</td>
-            <td>中文、英文、中英文</td>
-            
-            
-          </tr>
-          <tr>
-            <td>自动语言检测</td>
-            <td>支持</td>
-            <td>支持</td>
-            <td>支持</td>
-            
-            
-          </tr>
-          <tr>
-            <td>返回文本行坐标</td>
-            <td>支持</td>
-            <td>支持</td>
-            <td>支持</td>
-            
-            
-          </tr>
-          <tr>
-            <td>自动旋转纠正</td>
-            <td>支持旋转识别，返回角度信息</td>
-            <td>支持旋转识别，返回角度信息</td>
-            <td>支持旋转识别，不支持角度返回</td>
-            
-           
-          </tr>
-        </tbody>
-      </table>
-       */
+     * 本接口支持图像整体文字的检测和识别。支持中文、英文、中英文、数字和特殊字符号的识别，并返回文字框位置和文字内容。
+
+适用于快速文本识别场景。
+
+产品优势：与通用印刷体识别接口相比，精简版虽然在准确率和召回率上有一定损失，但价格更加优惠。
+
+通用印刷体识别不同版本的差异如下：
+<table style="width:715px">
+      <thead>
+        <tr>
+          <th style="width:150px"></th>
+          <th >通用印刷体识别（精简版）</th>
+          <th style="width:200px"><a href="https://cloud.tencent.com/document/product/866/33526">【荐】通用印刷体识别</a></th>
+          <th><a href="https://cloud.tencent.com/document/product/866/34937">【荐】通用印刷体识别（高精度版）</a></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td> 适用场景</td>
+          <td>适用于快速文本识别场景，准召率有一定损失，价格更优惠</td>
+          <td>适用于所有通用场景的印刷体识别</td>
+          <td>适用于文字较多、长串数字、小字、模糊字、倾斜文本等困难场景</td>
+          
+          
+        </tr>
+        <tr>
+          <td>识别准确率</td>
+          <td>91%</td>
+          <td>96%</td>
+          <td>99%</td>
+          
+          
+        </tr>
+        <tr>
+          <td>价格</td>
+          <td>低</td>
+          <td>中</td>
+          <td>高</td>
+          
+          
+        </tr>
+        <tr>
+          <td>支持的语言</td>
+          <td>中文、英文、中英文</td>
+          <td>中文、英文、中英文、日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语</td>
+          <td>中文、英文、中英文</td>
+          
+          
+        </tr>
+        <tr>
+          <td>自动语言检测</td>
+          <td>支持</td>
+          <td>支持</td>
+          <td>支持</td>
+          
+          
+        </tr>
+        <tr>
+          <td>返回文本行坐标</td>
+          <td>支持</td>
+          <td>支持</td>
+          <td>支持</td>
+          
+          
+        </tr>
+        <tr>
+          <td>自动旋转纠正</td>
+          <td>支持旋转识别，返回角度信息</td>
+          <td>支持旋转识别，返回角度信息</td>
+          <td>支持旋转识别，不支持角度返回</td>
+          
+         
+        </tr>
+      </tbody>
+    </table>
+     */
     async GeneralEfficientOCR(req, cb) {
         return this.request("GeneralEfficientOCR", req, cb);
     }
@@ -592,14 +592,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CarInvoiceOCR", req, cb);
     }
     /**
-       * 本接口支持驾驶证主页和副页所有字段的自动定位与识别，重点字段的识别准确度达到99%以上。
-  
-  驾驶证主页：包括证号、姓名、性别、国籍、住址、出生日期、初次领证日期、准驾车型、有效期限。
-  
-  驾驶证副页：包括证号、姓名、档案编号、记录。
-  
-  另外，本接口还支持复印件、翻拍和PS告警功能。
-       */
+     * 本接口支持驾驶证主页和副页所有字段的自动定位与识别，重点字段的识别准确度达到99%以上。
+
+驾驶证主页：包括证号、姓名、性别、国籍、住址、出生日期、初次领证日期、准驾车型、有效期限。
+
+驾驶证副页：包括证号、姓名、档案编号、记录。
+
+另外，本接口还支持复印件、翻拍和PS告警功能。
+     */
     async DriverLicenseOCR(req, cb) {
         return this.request("DriverLicenseOCR", req, cb);
     }
@@ -640,29 +640,29 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("EduPaperOCR", req, cb);
     }
     /**
-       * 本接口支持网约车运输证关键字段的识别，包括交运管许可字号、车辆所有人、车辆号牌、起始日期、截止日期、发证日期。
-             
-       */
+     * 本接口支持网约车运输证关键字段的识别，包括交运管许可字号、车辆所有人、车辆号牌、起始日期、截止日期、发证日期。
+           
+     */
     async RideHailingTransportLicenseOCR(req, cb) {
         return this.request("RideHailingTransportLicenseOCR", req, cb);
     }
     /**
-       * 本接口支持泰国身份证识别，识别字段包括泰文姓名、英文姓名、地址、出生日期、身份证号码。
-  本接口暂未完全对外开放，如需咨询，请[联系商务](https://cloud.tencent.com/about/connect)
-  
-       */
+     * 本接口支持泰国身份证识别，识别字段包括泰文姓名、英文姓名、地址、出生日期、身份证号码。
+本接口暂未完全对外开放，如需咨询，请[联系商务](https://cloud.tencent.com/about/connect)
+
+     */
     async RecognizeThaiIDCardOCR(req, cb) {
         return this.request("RecognizeThaiIDCardOCR", req, cb);
     }
     /**
-       * 本接口支持行驶证主页和副页所有字段的自动定位与识别。
-  
-  行驶证主页：车牌号码、车辆类型、所有人、住址、使用性质、品牌型号、识别代码、发动机号、注册日期、发证日期、发证单位。
-  
-  行驶证副页：号牌号码、档案编号、核定载人数、总质量、整备质量、核定载质量、外廓尺寸、准牵引总质量、备注、检验记录。
-  
-  另外，本接口还支持复印件、翻拍和PS告警功能。
-       */
+     * 本接口支持行驶证主页和副页所有字段的自动定位与识别。
+
+行驶证主页：车牌号码、车辆类型、所有人、住址、使用性质、品牌型号、识别代码、发动机号、注册日期、发证日期、发证单位。
+
+行驶证副页：号牌号码、档案编号、核定载人数、总质量、整备质量、核定载质量、外廓尺寸、准牵引总质量、备注、检验记录。
+
+另外，本接口还支持复印件、翻拍和PS告警功能。
+     */
     async VehicleLicenseOCR(req, cb) {
         return this.request("VehicleLicenseOCR", req, cb);
     }

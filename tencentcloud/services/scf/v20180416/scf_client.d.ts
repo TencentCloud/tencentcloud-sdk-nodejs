@@ -32,14 +32,14 @@ export declare class Client extends AbstractClient {
      */
     CreateNamespace(req: CreateNamespaceRequest, cb?: (error: string, rep: CreateNamespaceResponse) => void): Promise<CreateNamespaceResponse>;
     /**
-       * 复制一个函数，您可以选择将复制出的新函数放置在特定的Region和Namespace。
-  注：本接口**不会**复制函数的以下对象或属性：
-  1. 函数的触发器
-  2. 除了$LATEST以外的其它版本
-  3. 函数配置的日志投递到的CLS目标。
-  
-  如有需要，您可以在复制后手动配置新函数。
-       */
+     * 复制一个函数，您可以选择将复制出的新函数放置在特定的Region和Namespace。
+注：本接口**不会**复制函数的以下对象或属性：
+1. 函数的触发器
+2. 除了$LATEST以外的其它版本
+3. 函数配置的日志投递到的CLS目标。
+
+如有需要，您可以在复制后手动配置新函数。
+     */
     CopyFunction(req: CopyFunctionRequest, cb?: (error: string, rep: CopyFunctionResponse) => void): Promise<CopyFunctionResponse>;
     /**
      * 该接口根据参数传入删除已有的触发方式。
@@ -82,9 +82,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteNamespace(req: DeleteNamespaceRequest, cb?: (error: string, rep: DeleteNamespaceResponse) => void): Promise<DeleteNamespaceResponse>;
     /**
-       * 为某个函数版本创建一个别名，您可以使用别名来标记特定的函数版本，如DEV/RELEASE版本，也可以随时修改别名指向的版本。
-  一个别名必须指向一个主版本，此外还可以同时指向一个附加版本。调用函数时指定特定的别名，则请求会被发送到别名指向的版本上，您可以配置请求发送到主版本和附加版本的比例。
-       */
+     * 为某个函数版本创建一个别名，您可以使用别名来标记特定的函数版本，如DEV/RELEASE版本，也可以随时修改别名指向的版本。
+一个别名必须指向一个主版本，此外还可以同时指向一个附加版本。调用函数时指定特定的别名，则请求会被发送到别名指向的版本上，您可以配置请求发送到主版本和附加版本的比例。
+     */
     CreateAlias(req: CreateAliasRequest, cb?: (error: string, rep: CreateAliasResponse) => void): Promise<CreateAliasResponse>;
     /**
      * 该接口根据传入的参数查询函数的版本。

@@ -338,6 +338,16 @@ it("tcr.v20190924.CreateInstance", async function () {
     }
 })
 
+it("tcr.v20190924.DescribeReplicationInstances", async function () {
+    try {
+       const data = await client.DescribeReplicationInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.CreateWebhookTrigger", async function () {
     try {
        const data = await client.CreateWebhookTrigger({})
@@ -381,6 +391,16 @@ it("tcr.v20190924.DescribeUserQuotaPersonal", async function () {
 it("tcr.v20190924.DeleteWebhookTrigger", async function () {
     try {
        const data = await client.DeleteWebhookTrigger({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcr.v20190924.DescribeReplicationInstanceCreateTasks", async function () {
+    try {
+       const data = await client.DescribeReplicationInstanceCreateTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

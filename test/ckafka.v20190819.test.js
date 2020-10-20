@@ -118,16 +118,6 @@ it("ckafka.v20190819.DescribeUser", async function () {
     }
 })
 
-it("ckafka.v20190819.FetchMessageListByOffset", async function () {
-    try {
-       const data = await client.FetchMessageListByOffset({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("ckafka.v20190819.DescribeACL", async function () {
     try {
        const data = await client.DescribeACL({})
@@ -151,16 +141,6 @@ it("ckafka.v20190819.DescribeTopicDetail", async function () {
 it("ckafka.v20190819.CreateInstancePre", async function () {
     try {
        const data = await client.CreateInstancePre({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ckafka.v20190819.FetchMessageByOffset", async function () {
-    try {
-       const data = await client.FetchMessageByOffset({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -281,16 +261,6 @@ it("ckafka.v20190819.DeleteUser", async function () {
 it("ckafka.v20190819.DescribeGroupOffsets", async function () {
     try {
        const data = await client.DescribeGroupOffsets({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ckafka.v20190819.FetchMessageListByTimestamp", async function () {
-    try {
-       const data = await client.FetchMessageListByTimestamp({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

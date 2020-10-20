@@ -102,6 +102,61 @@ export interface DescribePubVersionsRequest {
 }
 
 /**
+ * RefundStorageService返回参数结构体
+ */
+export interface RefundStorageServiceResponse {
+  /**
+   * 云存服务ID
+   */
+  ServiceId?: string
+
+  /**
+   * 云存服务所在的区域
+   */
+  StorageRegion?: string
+
+  /**
+   * 设备TID
+   */
+  Tid?: string
+
+  /**
+   * 视频流通道号。(对于存在多路视频流的设备，如NVR设备，与设备实际视频流通道号对应)
+   */
+  ChnNum?: number
+
+  /**
+   * 终端用户在IoT Video平台的注册ID
+   */
+  AccessId?: string
+
+  /**
+   * 服务开始时间
+   */
+  StartTime?: number
+
+  /**
+   * 服务失效时间
+   */
+  EndTime?: number
+
+  /**
+   * 服务状态
+   */
+  Status?: number
+
+  /**
+   * 有效云存定单列表
+   */
+  Data?: Array<StorageOrder>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeIotModel返回参数结构体
  */
 export interface DescribeIotModelResponse {
@@ -190,6 +245,46 @@ export interface IotModelData {
    * 发布时间
    */
   ReleaseTime: number
+}
+
+/**
+ * CreateStorageService请求参数结构体
+ */
+export interface CreateStorageServiceRequest {
+  /**
+   * 云存套餐ID
+   */
+  PkgId: string
+
+  /**
+   * 设备TID
+   */
+  Tid: string
+
+  /**
+   * 订单数量,可一次性创建多个订单
+   */
+  OrderCount: number
+
+  /**
+   * 云存服务所在的区域,如ap-guangzhou,ap-singapore
+   */
+  StorageRegion: string
+
+  /**
+   * 视频流通道号。(对于存在多路视频流的设备，如NVR设备，与设备实际视频流通道号对应)
+   */
+  ChnNum?: number
+
+  /**
+   * 设备主人用户在IoT Video平台的注册ID。该参数用于验证Paas/Saas平台的设备/用户关系链是否一致
+   */
+  AccessId?: string
+
+  /**
+   * 服务生效时间,若不指定此参数，服务立即生效
+   */
+  EnableTime?: number
 }
 
 /**
@@ -330,6 +425,61 @@ export interface CreateDevTokenRequest {
 }
 
 /**
+ * DescribeStorageService返回参数结构体
+ */
+export interface DescribeStorageServiceResponse {
+  /**
+   * 云存服务ID
+   */
+  ServiceId?: string
+
+  /**
+   * 云存服务所在的区域
+   */
+  StorageRegion?: string
+
+  /**
+   * 设备TID
+   */
+  Tid?: string
+
+  /**
+   * 视频流通道号。(对于存在多路视频流的设备，如NVR设备，与设备实际视频流通道号对应)
+   */
+  ChnNum?: number
+
+  /**
+   * 终端用户在IoT Video平台的注册ID
+   */
+  AccessId?: string
+
+  /**
+   * 服务开始时间
+   */
+  StartTime?: number
+
+  /**
+   * 服务失效时间
+   */
+  EndTime?: number
+
+  /**
+   * 服务状态
+   */
+  Status?: number
+
+  /**
+   * 云存定单列表
+   */
+  Data?: Array<StorageOrder>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteIotDataType请求参数结构体
  */
 export interface DeleteIotDataTypeRequest {
@@ -403,16 +553,6 @@ export interface DescribeProductsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * CreateAppUsr请求参数结构体
- */
-export interface CreateAppUsrRequest {
-  /**
-   * 标识用户的唯一ID，防止同一个用户多次注册
-   */
-  CunionId: string
 }
 
 /**
@@ -497,6 +637,22 @@ export interface DescribeModelDataRetResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Data?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateDevToken返回参数结构体
+ */
+export interface CreateDevTokenResponse {
+  /**
+      * 返回的用户token列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data?: Array<DevTokenInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -873,19 +1029,13 @@ export interface TraceStatus {
 }
 
 /**
- * CreateDevToken返回参数结构体
+ * CreateAppUsr请求参数结构体
  */
-export interface CreateDevTokenResponse {
+export interface CreateAppUsrRequest {
   /**
-      * 返回的用户token列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Data?: Array<DevTokenInfo>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 标识用户的唯一ID，防止同一个用户多次注册
    */
-  RequestId?: string
+  CunionId: string
 }
 
 /**
@@ -1073,6 +1223,16 @@ export interface DescribeTraceIdsResponse {
       */
   Data?: string
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ClearDeviceActiveCode返回参数结构体
+ */
+export interface ClearDeviceActiveCodeResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1474,6 +1634,66 @@ export interface DeviceModelData {
 }
 
 /**
+ * CreateStorageService返回参数结构体
+ */
+export interface CreateStorageServiceResponse {
+  /**
+   * 标志是否为续订
+   */
+  IsRenew?: boolean
+
+  /**
+   * 云存服务ID
+   */
+  ServiceId?: string
+
+  /**
+   * 云存服务所在的区域
+   */
+  StorageRegion?: string
+
+  /**
+   * 设备TID
+   */
+  Tid?: string
+
+  /**
+   * 视频流通道号。(对于存在多路视频流的设备，如NVR设备，与设备实际视频流通道号对应)
+   */
+  ChnNum?: number
+
+  /**
+   * 终端用户在IoT Video平台的注册ID
+   */
+  AccessId?: string
+
+  /**
+   * 服务开始时间
+   */
+  StartTime?: number
+
+  /**
+   * 服务失效时间
+   */
+  EndTime?: number
+
+  /**
+   * 服务状态
+   */
+  Status?: number
+
+  /**
+   * 新增的云存定单列表
+   */
+  Data?: Array<StorageOrder>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeIotDataType请求参数结构体
  */
 export interface DescribeIotDataTypeRequest {
@@ -1535,6 +1755,66 @@ export interface DescribeRunLogResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Data?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeliverStorageService返回参数结构体
+ */
+export interface DeliverStorageServiceResponse {
+  /**
+   * 被转出的云存服务ID
+   */
+  SrcServiceId?: string
+
+  /**
+   * 被转入的云存服务ID
+   */
+  ServiceId?: string
+
+  /**
+   * 云存服务所在的区域
+   */
+  StorageRegion?: string
+
+  /**
+   * 设备TID
+   */
+  Tid?: string
+
+  /**
+   * 视频流通道号。(对于存在多路视频流的设备，如NVR设备，与设备实际视频流通道号对应)
+   */
+  ChnNum?: number
+
+  /**
+   * 终端用户在IoT Video平台的注册ID
+   */
+  AccessId?: string
+
+  /**
+   * 服务开始时间
+   */
+  StartTime?: number
+
+  /**
+   * 服务失效时间
+   */
+  EndTime?: number
+
+  /**
+   * 服务状态
+   */
+  Status?: number
+
+  /**
+   * 新增的云存定单列表
+   */
+  Data?: Array<StorageOrder>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1654,6 +1934,21 @@ export interface DescribeDeviceModelResponse {
 }
 
 /**
+ * DescribeStorageService请求参数结构体
+ */
+export interface DescribeStorageServiceRequest {
+  /**
+   * 云存服务ID
+   */
+  ServiceId: string
+
+  /**
+   * 是否返回已结束的订单信息(已过期/已退订/已转移)
+   */
+  GetFinishedOrder?: boolean
+}
+
+/**
  * 产品信息摘要
  */
 export interface ProductBase {
@@ -1733,7 +2028,7 @@ export interface CreateGencodeRequest {
   ProductId: string
 
   /**
-   * 物模型发布版本号，-1代表最新编辑（未发布）的版本
+   * 物模型发布版本号,-1代表未发布的，保存的是草稿箱的版本。1代表已发布的物模型。
    */
   Revision: number
 }
@@ -1752,6 +2047,16 @@ export interface DescribePubVersionsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ClearDeviceActiveCode请求参数结构体
+ */
+export interface ClearDeviceActiveCodeRequest {
+  /**
+   * 设备TID列表，0<元素数量<=100
+   */
+  Tids: Array<string>
 }
 
 /**
@@ -1831,6 +2136,36 @@ export interface DescribeBindDevRequest {
 }
 
 /**
+ * 云存订单信息
+ */
+export interface StorageOrder {
+  /**
+   * 定单唯一性ID
+   */
+  OrderId: string
+
+  /**
+   * 云存套餐ID
+   */
+  PkgId: string
+
+  /**
+   * 定单服务状态
+   */
+  Status: number
+
+  /**
+   * 定单服务生效时间
+   */
+  StartTime: number
+
+  /**
+   * 定单服务失效时间
+   */
+  EndTime: number
+}
+
+/**
  * 产品转发消息队列配置
  */
 export interface MsgQueueData {
@@ -1873,6 +2208,51 @@ export interface RegisteredStatus {
    * 注册状态
    */
   IsRegisted: boolean
+}
+
+/**
+ * CreateAnonymousAccessToken请求参数结构体
+ */
+export interface CreateAnonymousAccessTokenRequest {
+  /**
+   * Token的TTL(time to alive)分钟数,最大值1440(即24小时)
+   */
+  TtlMinutes: number
+
+  /**
+   * 设备ID。创建Token时, 此参数为必须项
+   */
+  Tid?: string
+
+  /**
+   * 旧的AccessToken。续期Token时，此参数为必须
+   */
+  OldAccessToken?: string
+}
+
+/**
+ * DeliverStorageService请求参数结构体
+ */
+export interface DeliverStorageServiceRequest {
+  /**
+   * 待转移的源云存服务ID
+   */
+  SrcServiceId: string
+
+  /**
+   * 设备TID
+   */
+  Tid: string
+
+  /**
+   * 视频流通道号。(对于存在多路视频流的设备，如NVR设备，与设备实际视频流通道号对应)
+   */
+  ChnNum?: number
+
+  /**
+   * 设备主人用户在IoT Video平台的注册ID。该参数用于验证Paas/Saas平台的设备/用户关系链是否一致
+   */
+  AccessId?: string
 }
 
 /**
@@ -2096,6 +2476,31 @@ export interface DescribeProductResponse {
 }
 
 /**
+ * CreateAnonymousAccessToken返回参数结构体
+ */
+export interface CreateAnonymousAccessTokenResponse {
+  /**
+   * 终端用户在IoT Video上的唯一标识ID
+   */
+  AccessId?: string
+
+  /**
+   * IoT Video平台的AccessToken
+   */
+  AccessToken?: string
+
+  /**
+   * Token的过期时间，单位秒(UTC时间)
+   */
+  ExpireTime?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeBindUsr请求参数结构体
  */
 export interface DescribeBindUsrRequest {
@@ -2236,6 +2641,21 @@ export interface DeleteBindingResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * RefundStorageService请求参数结构体
+ */
+export interface RefundStorageServiceRequest {
+  /**
+   * 云存服务ID
+   */
+  ServiceId: string
+
+  /**
+   * 云存子订单ID。如果指定子订单ID,则仅退订该子订单，如果未指定子定单ID，则退订所有子订单
+   */
+  OrderId?: string
 }
 
 /**

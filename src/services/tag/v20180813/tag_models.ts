@@ -472,7 +472,7 @@ export interface DescribeResourceTagsByResourceIdsRequest {
   ResourcePrefix: string
 
   /**
-   * 资源唯一标记
+   * 资源ID数组，大小不超过50
    */
   ResourceIds: Array<string>
 
@@ -1115,7 +1115,7 @@ export interface DescribeResourceTagsRequest {
   Limit?: number
 
   /**
-   * 是否是Cos的资源id
+   * 是否是cos的资源（0或者1），输入的ResourceId为cos资源时必填
    */
   CosResourceId?: number
 }

@@ -3772,6 +3772,26 @@ export interface DescribeCCFrequencyRulesResponse {
 }
 
 /**
+ * DescribeBizTrend返回参数结构体
+ */
+export interface DescribeBizTrendResponse {
+  /**
+   * 曲线图各个时间点的值
+   */
+  DataList?: Array<number>
+
+  /**
+   * 统计纬度
+   */
+  MetricName?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDDoSEvList请求参数结构体
  */
 export interface DescribeDDoSEvListRequest {
@@ -6268,6 +6288,56 @@ export interface DescribleL7RulesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeBizTrend请求参数结构体
+ */
+export interface DescribeBizTrendRequest {
+  /**
+   * 大禹子产品代号（bgpip表示高防IP）
+   */
+  Business: string
+
+  /**
+   * 资源实例ID
+   */
+  Id: string
+
+  /**
+   * 统计周期，可取值300，1800，3600，21600，86400，单位秒
+   */
+  Period: number
+
+  /**
+   * 统计开始时间
+   */
+  StartTime: string
+
+  /**
+   * 统计结束时间
+   */
+  EndTime: string
+
+  /**
+   * 统计方式，可取值max, min, avg, sum, 如统计纬度是流量速率或包量速率，仅可取值max
+   */
+  Statistics: string
+
+  /**
+   * 统计纬度，可取值connum, new_conn, inactive_conn, intraffic, outtraffic, inpkg, outpkg, qps
+   */
+  MetricName: string
+
+  /**
+   * 协议及端口列表，协议可取值TCP, UDP, HTTP, HTTPS，仅统计纬度为连接数时有效
+   */
+  ProtoInfo?: Array<ProtocolPort>
+
+  /**
+   * 统计纬度为qps时，可选特定域名查询
+   */
+  Domain?: string
 }
 
 /**

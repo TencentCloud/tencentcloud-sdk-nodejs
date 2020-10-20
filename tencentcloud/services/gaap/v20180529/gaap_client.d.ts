@@ -112,9 +112,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteSecurityRules(req: DeleteSecurityRulesRequest, cb?: (error: string, rep: DeleteSecurityRulesResponse) => void): Promise<DeleteSecurityRulesResponse>;
     /**
-       * 该接口（ModifyHTTPListenerAttribute）用于修改通道的HTTP监听器配置信息，目前仅支持修改监听器的名称。
-  注意：通道组通道暂时不支持HTTP/HTTPS监听器。
-       */
+     * 该接口（ModifyHTTPListenerAttribute）用于修改通道的HTTP监听器配置信息，目前仅支持修改监听器的名称。
+注意：通道组通道暂时不支持HTTP/HTTPS监听器。
+     */
     ModifyHTTPListenerAttribute(req: ModifyHTTPListenerAttributeRequest, cb?: (error: string, rep: ModifyHTTPListenerAttributeResponse) => void): Promise<ModifyHTTPListenerAttributeResponse>;
     /**
      * 该接口（DeleteRule）用于删除HTTP/HTTPS监听器的转发规则。
@@ -165,9 +165,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyHTTPSListenerAttribute(req: ModifyHTTPSListenerAttributeRequest, cb?: (error: string, rep: ModifyHTTPSListenerAttributeResponse) => void): Promise<ModifyHTTPSListenerAttributeResponse>;
     /**
-       * 本接口（CreateDomain）用于创建HTTP/HTTPS监听器的访问域名，客户端请求通过访问该域名来请求后端业务。
-  该接口仅支持version3.0的通道。
-       */
+     * 本接口（CreateDomain）用于创建HTTP/HTTPS监听器的访问域名，客户端请求通过访问该域名来请求后端业务。
+该接口仅支持version3.0的通道。
+     */
     CreateDomain(req: CreateDomainRequest, cb?: (error: string, rep: CreateDomainResponse) => void): Promise<CreateDomainResponse>;
     /**
      * 本接口（ModifyRuleAttribute）用于修改转发规则的信息，包括健康检查的配置以及转发策略。
@@ -250,9 +250,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeDestRegions(req?: DescribeDestRegionsRequest, cb?: (error: string, rep: DescribeDestRegionsResponse) => void): Promise<DescribeDestRegionsResponse>;
     /**
-       * 本接口（BindListenerRealServers）用于TCP/UDP监听器绑定解绑源站。
-  注意：本接口会解绑之前绑定的源站，绑定本次调用所选择的源站。例如：原来绑定的源站为A，B，C，本次调用的选择绑定的源站为C，D，E，那么调用后所绑定的源站为C，D，E。
-       */
+     * 本接口（BindListenerRealServers）用于TCP/UDP监听器绑定解绑源站。
+注意：本接口会解绑之前绑定的源站，绑定本次调用所选择的源站。例如：原来绑定的源站为A，B，C，本次调用的选择绑定的源站为C，D，E，那么调用后所绑定的源站为C，D，E。
+     */
     BindListenerRealServers(req: BindListenerRealServersRequest, cb?: (error: string, rep: BindListenerRealServersResponse) => void): Promise<BindListenerRealServersResponse>;
     /**
      * 该接口（DescribeHTTPListeners）用来查询HTTP监听器信息。

@@ -3,20 +3,20 @@
  */
 export interface InstanceLog {
     /**
-     * 日志时间
-     */
+      * 日志时间
+      */
     Time: string;
     /**
-     * 日志级别
-     */
+      * 日志级别
+      */
     Level: string;
     /**
-     * 集群节点ip
-     */
+      * 集群节点ip
+      */
     Ip: string;
     /**
-     * 日志内容
-     */
+      * 日志内容
+      */
     Message: string;
 }
 /**
@@ -24,16 +24,16 @@ export interface InstanceLog {
  */
 export interface LocalDiskInfo {
     /**
-     * 本地盘类型<li>LOCAL_SATA：大数据型</li><li>NVME_SSD：高IO型</li>
-     */
+      * 本地盘类型<li>LOCAL_SATA：大数据型</li><li>NVME_SSD：高IO型</li>
+      */
     LocalDiskType: string;
     /**
-     * 本地盘单盘大小
-     */
+      * 本地盘单盘大小
+      */
     LocalDiskSize: number;
     /**
-     * 本地盘块数
-     */
+      * 本地盘块数
+      */
     LocalDiskCount: number;
 }
 /**
@@ -41,20 +41,20 @@ export interface LocalDiskInfo {
  */
 export interface TaskDetail {
     /**
-     * 任务名
-     */
+      * 任务名
+      */
     Name: string;
     /**
-     * 任务进度
-     */
+      * 任务进度
+      */
     Progress: number;
     /**
-     * 任务完成时间
-     */
+      * 任务完成时间
+      */
     FinishTime: string;
     /**
-     * 子任务
-     */
+      * 子任务
+      */
     SubTasks: Array<SubTaskDetail>;
 }
 /**
@@ -62,40 +62,40 @@ export interface TaskDetail {
  */
 export interface NodeInfo {
     /**
-     * 节点数量
-     */
+      * 节点数量
+      */
     NodeNum: number;
     /**
-     * 节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
-     */
+      * 节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
+      */
     NodeType: string;
     /**
-        * 节点类型<li>hotData: 热数据节点</li>
-  <li>warmData: 冷数据节点</li>
-  <li>dedicatedMaster: 专用主节点</li>
-  默认值为hotData
-        */
+      * 节点类型<li>hotData: 热数据节点</li>
+<li>warmData: 冷数据节点</li>
+<li>dedicatedMaster: 专用主节点</li>
+默认值为hotData
+      */
     Type?: string;
     /**
-     * 节点磁盘类型<li>CLOUD_SSD：SSD云硬盘</li><li>CLOUD_PREMIUM：高硬能云硬盘</li>默认值CLOUD_SSD
-     */
+      * 节点磁盘类型<li>CLOUD_SSD：SSD云硬盘</li><li>CLOUD_PREMIUM：高硬能云硬盘</li>默认值CLOUD_SSD
+      */
     DiskType?: string;
     /**
-     * 节点磁盘容量（单位GB）
-     */
+      * 节点磁盘容量（单位GB）
+      */
     DiskSize?: number;
     /**
-        * 节点本地盘信息
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 节点本地盘信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     LocalDiskInfo?: LocalDiskInfo;
     /**
-     * 节点磁盘块数
-     */
+      * 节点磁盘块数
+      */
     DiskCount?: number;
     /**
-     * 节点磁盘是否加密 0: 不加密，1: 加密；默认不加密
-     */
+      * 节点磁盘是否加密 0: 不加密，1: 加密；默认不加密
+      */
     DiskEncrypt?: number;
 }
 /**
@@ -103,24 +103,24 @@ export interface NodeInfo {
  */
 export interface DescribeInstanceOperationsRequest {
     /**
-     * 集群实例ID
-     */
+      * 集群实例ID
+      */
     InstanceId: string;
     /**
-     * 起始时间, e.g. "2019-03-07 16:30:39"
-     */
+      * 起始时间, e.g. "2019-03-07 16:30:39"
+      */
     StartTime: string;
     /**
-     * 结束时间, e.g. "2019-03-30 20:18:03"
-     */
+      * 结束时间, e.g. "2019-03-30 20:18:03"
+      */
     EndTime: string;
     /**
-     * 分页起始值
-     */
+      * 分页起始值
+      */
     Offset: number;
     /**
-     * 分页大小
-     */
+      * 分页大小
+      */
     Limit: number;
 }
 /**
@@ -128,12 +128,12 @@ export interface DescribeInstanceOperationsRequest {
  */
 export interface OperationDetail {
     /**
-     * 实例原始配置信息
-     */
+      * 实例原始配置信息
+      */
     OldInfo: Array<KeyValue>;
     /**
-     * 实例更新后配置信息
-     */
+      * 实例更新后配置信息
+      */
     NewInfo: Array<KeyValue>;
 }
 /**
@@ -141,12 +141,12 @@ export interface OperationDetail {
  */
 export interface EsPublicAcl {
     /**
-     * 访问黑名单
-     */
+      * 访问黑名单
+      */
     BlackIpList?: Array<string>;
     /**
-     * 访问白名单
-     */
+      * 访问白名单
+      */
     WhiteIpList?: Array<string>;
 }
 /**
@@ -154,16 +154,16 @@ export interface EsPublicAcl {
  */
 export interface DictInfo {
     /**
-     * 词典键值
-     */
+      * 词典键值
+      */
     Key: string;
     /**
-     * 词典名称
-     */
+      * 词典名称
+      */
     Name: string;
     /**
-     * 词典大小，单位B
-     */
+      * 词典大小，单位B
+      */
     Size: number;
 }
 /**
@@ -171,8 +171,8 @@ export interface DictInfo {
  */
 export interface RestartInstanceResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -180,12 +180,12 @@ export interface RestartInstanceResponse {
  */
 export interface CreateInstanceResponse {
     /**
-     * 实例ID
-     */
+      * 实例ID
+      */
     InstanceId?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -193,42 +193,42 @@ export interface CreateInstanceResponse {
  */
 export interface DescribeInstanceLogsRequest {
     /**
-     * 集群实例ID
-     */
+      * 集群实例ID
+      */
     InstanceId: string;
     /**
-        * 日志类型，默认值为1
-  <li>1, 主日志</li>
-  <li>2, 搜索慢日志</li>
-  <li>3, 索引慢日志</li>
-  <li>4, GC日志</li>
-        */
+      * 日志类型，默认值为1
+<li>1, 主日志</li>
+<li>2, 搜索慢日志</li>
+<li>3, 索引慢日志</li>
+<li>4, GC日志</li>
+      */
     LogType?: number;
     /**
-     * 搜索词，支持LUCENE语法，如 level:WARN、ip:1.1.1.1、message:test-index等
-     */
+      * 搜索词，支持LUCENE语法，如 level:WARN、ip:1.1.1.1、message:test-index等
+      */
     SearchKey?: string;
     /**
-     * 日志开始时间，格式为YYYY-MM-DD HH:MM:SS, 如2019-01-22 20:15:53
-     */
+      * 日志开始时间，格式为YYYY-MM-DD HH:MM:SS, 如2019-01-22 20:15:53
+      */
     StartTime?: string;
     /**
-     * 日志结束时间，格式为YYYY-MM-DD HH:MM:SS, 如2019-01-22 20:15:53
-     */
+      * 日志结束时间，格式为YYYY-MM-DD HH:MM:SS, 如2019-01-22 20:15:53
+      */
     EndTime?: string;
     /**
-     * 分页起始值, 默认值为0
-     */
+      * 分页起始值, 默认值为0
+      */
     Offset?: number;
     /**
-     * 分页大小，默认值为100，最大值100
-     */
+      * 分页大小，默认值为100，最大值100
+      */
     Limit?: number;
     /**
-        * 时间排序方式，默认值为0
-  <li>0, 降序</li>
-  <li>1, 升序</li>
-        */
+      * 时间排序方式，默认值为0
+<li>0, 降序</li>
+<li>1, 升序</li>
+      */
     OrderByType?: number;
 }
 /**
@@ -236,28 +236,28 @@ export interface DescribeInstanceLogsRequest {
  */
 export interface UpgradeLicenseRequest {
     /**
-     * 实例ID
-     */
+      * 实例ID
+      */
     InstanceId: string;
     /**
-     * License类型<li>oss：开源版</li><li>basic：基础版</li><li>platinum：白金版</li>默认值platinum
-     */
+      * License类型<li>oss：开源版</li><li>basic：基础版</li><li>platinum：白金版</li>默认值platinum
+      */
     LicenseType: string;
     /**
-     * 是否自动使用代金券<li>0：不自动使用</li><li>1：自动使用</li>默认值0
-     */
+      * 是否自动使用代金券<li>0：不自动使用</li><li>1：自动使用</li>默认值0
+      */
     AutoVoucher?: number;
     /**
-     * 代金券ID列表（目前仅支持指定一张代金券）
-     */
+      * 代金券ID列表（目前仅支持指定一张代金券）
+      */
     VoucherIds?: Array<string>;
     /**
-     * 6.8（及以上版本）基础版是否开启xpack security认证<li>1：不开启</li><li>2：开启</li>
-     */
+      * 6.8（及以上版本）基础版是否开启xpack security认证<li>1：不开启</li><li>2：开启</li>
+      */
     BasicSecurityType?: number;
     /**
-     * 是否强制重启<li>true强制重启</li><li>false不强制重启</li> 默认值false
-     */
+      * 是否强制重启<li>true强制重启</li><li>false不强制重启</li> 默认值false
+      */
     ForceRestart?: boolean;
 }
 /**
@@ -265,12 +265,12 @@ export interface UpgradeLicenseRequest {
  */
 export interface CosBackup {
     /**
-     * 是否开启cos自动备份
-     */
+      * 是否开启cos自动备份
+      */
     IsAutoBackup: boolean;
     /**
-     * 自动备份执行时间（精确到小时）, e.g. "22:00"
-     */
+      * 自动备份执行时间（精确到小时）, e.g. "22:00"
+      */
     BackupTime: string;
 }
 /**
@@ -278,12 +278,12 @@ export interface CosBackup {
  */
 export interface TagInfo {
     /**
-     * 标签键
-     */
+      * 标签键
+      */
     TagKey: string;
     /**
-     * 标签值
-     */
+      * 标签值
+      */
     TagValue: string;
 }
 /**
@@ -291,12 +291,12 @@ export interface TagInfo {
  */
 export interface KeyValue {
     /**
-     * 键
-     */
+      * 键
+      */
     Key: string;
     /**
-     * 值
-     */
+      * 值
+      */
     Value: string;
 }
 /**
@@ -304,124 +304,124 @@ export interface KeyValue {
  */
 export interface CreateInstanceRequest {
     /**
-     * 可用区
-     */
+      * 可用区
+      */
     Zone: string;
     /**
-     * 实例版本（支持"5.6.4"、"6.4.3"、"6.8.2"、"7.5.1"）
-     */
+      * 实例版本（支持"5.6.4"、"6.4.3"、"6.8.2"、"7.5.1"）
+      */
     EsVersion: string;
     /**
-     * 私有网络ID
-     */
+      * 私有网络ID
+      */
     VpcId: string;
     /**
-     * 子网ID
-     */
+      * 子网ID
+      */
     SubnetId: string;
     /**
-     * 访问密码（密码需8到16位，至少包括两项（[a-z,A-Z],[0-9]和[-!@#$%&^*+=_:;,.?]的特殊符号）
-     */
+      * 访问密码（密码需8到16位，至少包括两项（[a-z,A-Z],[0-9]和[-!@#$%&^*+=_:;,.?]的特殊符号）
+      */
     Password: string;
     /**
-     * 实例名称（1-50 个英文、汉字、数字、连接线-或下划线_）
-     */
+      * 实例名称（1-50 个英文、汉字、数字、连接线-或下划线_）
+      */
     InstanceName?: string;
     /**
-        * 已废弃请使用NodeInfoList
-  节点数量（2-50个）
-        */
+      * 已废弃请使用NodeInfoList
+节点数量（2-50个）
+      */
     NodeNum?: number;
     /**
-     * 计费类型<li>PREPAID：预付费，即包年包月</li><li>POSTPAID_BY_HOUR：按小时后付费</li>默认值POSTPAID_BY_HOUR
-     */
+      * 计费类型<li>PREPAID：预付费，即包年包月</li><li>POSTPAID_BY_HOUR：按小时后付费</li>默认值POSTPAID_BY_HOUR
+      */
     ChargeType?: string;
     /**
-     * 包年包月购买时长（单位由参数TimeUnit决定）
-     */
+      * 包年包月购买时长（单位由参数TimeUnit决定）
+      */
     ChargePeriod?: number;
     /**
-     * 自动续费标识<li>RENEW_FLAG_AUTO：自动续费</li><li>RENEW_FLAG_MANUAL：不自动续费，用户手动续费</li>ChargeType为PREPAID时需要设置，如不传递该参数，普通用户默认不自动续费，SVIP用户自动续费
-     */
+      * 自动续费标识<li>RENEW_FLAG_AUTO：自动续费</li><li>RENEW_FLAG_MANUAL：不自动续费，用户手动续费</li>ChargeType为PREPAID时需要设置，如不传递该参数，普通用户默认不自动续费，SVIP用户自动续费
+      */
     RenewFlag?: string;
     /**
-        * 已废弃请使用NodeInfoList
-  节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
-        */
+      * 已废弃请使用NodeInfoList
+节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
+      */
     NodeType?: string;
     /**
-        * 已废弃请使用NodeInfoList
-  节点磁盘类型<li>CLOUD_SSD：SSD云硬盘</li><li>CLOUD_PREMIUM：高硬能云硬盘</li>默认值CLOUD_SSD
-        */
+      * 已废弃请使用NodeInfoList
+节点磁盘类型<li>CLOUD_SSD：SSD云硬盘</li><li>CLOUD_PREMIUM：高硬能云硬盘</li>默认值CLOUD_SSD
+      */
     DiskType?: string;
     /**
-        * 已废弃请使用NodeInfoList
-  节点磁盘容量（单位GB）
-        */
+      * 已废弃请使用NodeInfoList
+节点磁盘容量（单位GB）
+      */
     DiskSize?: number;
     /**
-     * 计费时长单位（ChargeType为PREPAID时需要设置，默认值为“m”，表示月，当前只支持“m”）
-     */
+      * 计费时长单位（ChargeType为PREPAID时需要设置，默认值为“m”，表示月，当前只支持“m”）
+      */
     TimeUnit?: string;
     /**
-     * 是否自动使用代金券<li>0：不自动使用</li><li>1：自动使用</li>默认值0
-     */
+      * 是否自动使用代金券<li>0：不自动使用</li><li>1：自动使用</li>默认值0
+      */
     AutoVoucher?: number;
     /**
-     * 代金券ID列表（目前仅支持指定一张代金券）
-     */
+      * 代金券ID列表（目前仅支持指定一张代金券）
+      */
     VoucherIds?: Array<string>;
     /**
-        * 已废弃请使用NodeInfoList
-  是否创建专用主节点<li>true：开启专用主节点</li><li>false：不开启专用主节点</li>默认值false
-        */
+      * 已废弃请使用NodeInfoList
+是否创建专用主节点<li>true：开启专用主节点</li><li>false：不开启专用主节点</li>默认值false
+      */
     EnableDedicatedMaster?: boolean;
     /**
-        * 已废弃请使用NodeInfoList
-  专用主节点个数（只支持3个和5个，EnableDedicatedMaster为true时该值必传）
-        */
+      * 已废弃请使用NodeInfoList
+专用主节点个数（只支持3个和5个，EnableDedicatedMaster为true时该值必传）
+      */
     MasterNodeNum?: number;
     /**
-        * 已废弃请使用NodeInfoList
-  专用主节点类型（EnableDedicatedMaster为true时必传）<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
-        */
+      * 已废弃请使用NodeInfoList
+专用主节点类型（EnableDedicatedMaster为true时必传）<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
+      */
     MasterNodeType?: string;
     /**
-        * 已废弃请使用NodeInfoList
-  专用主节点磁盘大小（单位GB，非必传，若传递则必须为50，暂不支持自定义）
-        */
+      * 已废弃请使用NodeInfoList
+专用主节点磁盘大小（单位GB，非必传，若传递则必须为50，暂不支持自定义）
+      */
     MasterNodeDiskSize?: number;
     /**
-     * 集群配置文件中的ClusterName（系统默认配置为实例ID，暂不支持自定义）
-     */
+      * 集群配置文件中的ClusterName（系统默认配置为实例ID，暂不支持自定义）
+      */
     ClusterNameInConf?: string;
     /**
-     * 集群部署方式<li>0：单可用区部署</li><li>1：多可用区部署</li>默认为0
-     */
+      * 集群部署方式<li>0：单可用区部署</li><li>1：多可用区部署</li>默认为0
+      */
     DeployMode?: number;
     /**
-     * 多可用区部署时可用区的详细信息(DeployMode为1时必传)
-     */
+      * 多可用区部署时可用区的详细信息(DeployMode为1时必传)
+      */
     MultiZoneInfo?: Array<ZoneDetail>;
     /**
-     * License类型<li>oss：开源版</li><li>basic：基础版</li><li>platinum：白金版</li>默认值platinum
-     */
+      * License类型<li>oss：开源版</li><li>basic：基础版</li><li>platinum：白金版</li>默认值platinum
+      */
     LicenseType?: string;
     /**
-     * 节点信息列表， 用于描述集群各类节点的规格信息如节点类型，节点个数，节点规格，磁盘类型，磁盘大小等
-     */
+      * 节点信息列表， 用于描述集群各类节点的规格信息如节点类型，节点个数，节点规格，磁盘类型，磁盘大小等
+      */
     NodeInfoList?: Array<NodeInfo>;
     /**
-     * 节点标签信息列表
-     */
+      * 节点标签信息列表
+      */
     TagList?: Array<TagInfo>;
     /**
-     * 6.8（及以上版本）基础版是否开启xpack security认证<li>1：不开启</li><li>2：开启</li>
-     */
+      * 6.8（及以上版本）基础版是否开启xpack security认证<li>1：不开启</li><li>2：开启</li>
+      */
     BasicSecurityType?: number;
     /**
-     * 场景化模板类型 0：不启用 1：通用 2：日志 3：搜索
-     */
+      * 场景化模板类型 0：不启用 1：通用 2：日志 3：搜索
+      */
     SceneType?: number;
 }
 /**
@@ -429,233 +429,233 @@ export interface CreateInstanceRequest {
  */
 export interface InstanceInfo {
     /**
-     * 实例ID
-     */
+      * 实例ID
+      */
     InstanceId: string;
     /**
-     * 实例名称
-     */
+      * 实例名称
+      */
     InstanceName: string;
     /**
-     * 地域
-     */
+      * 地域
+      */
     Region: string;
     /**
-     * 可用区
-     */
+      * 可用区
+      */
     Zone: string;
     /**
-     * 用户ID
-     */
+      * 用户ID
+      */
     AppId: number;
     /**
-     * 用户UIN
-     */
+      * 用户UIN
+      */
     Uin: string;
     /**
-     * 实例所属VPC的UID
-     */
+      * 实例所属VPC的UID
+      */
     VpcUid: string;
     /**
-     * 实例所属子网的UID
-     */
+      * 实例所属子网的UID
+      */
     SubnetUid: string;
     /**
-     * 实例状态，0:处理中,1:正常,-1停止,-2:销毁中,-3:已销毁
-     */
+      * 实例状态，0:处理中,1:正常,-1停止,-2:销毁中,-3:已销毁
+      */
     Status: number;
     /**
-     * 实例计费模式。取值范围：  PREPAID：表示预付费，即包年包月  POSTPAID_BY_HOUR：表示后付费，即按量计费  CDHPAID：CDH付费，即只对CDH计费，不对CDH上的实例计费。
-     */
+      * 实例计费模式。取值范围：  PREPAID：表示预付费，即包年包月  POSTPAID_BY_HOUR：表示后付费，即按量计费  CDHPAID：CDH付费，即只对CDH计费，不对CDH上的实例计费。
+      */
     ChargeType: string;
     /**
-     * 包年包月购买时长,单位:月
-     */
+      * 包年包月购买时长,单位:月
+      */
     ChargePeriod: number;
     /**
-     * 自动续费标识。取值范围：  NOTIFY_AND_AUTO_RENEW：通知过期且自动续费  NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费  DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费  默认取值：NOTIFY_AND_AUTO_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
-     */
+      * 自动续费标识。取值范围：  NOTIFY_AND_AUTO_RENEW：通知过期且自动续费  NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费  DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费  默认取值：NOTIFY_AND_AUTO_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW，在账户余额充足的情况下，实例到期后将按月自动续费。
+      */
     RenewFlag: string;
     /**
-     * 节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
-     */
+      * 节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
+      */
     NodeType: string;
     /**
-     * 节点个数
-     */
+      * 节点个数
+      */
     NodeNum: number;
     /**
-     * 节点CPU核数
-     */
+      * 节点CPU核数
+      */
     CpuNum: number;
     /**
-     * 节点内存大小，单位GB
-     */
+      * 节点内存大小，单位GB
+      */
     MemSize: number;
     /**
-     * 节点磁盘类型
-     */
+      * 节点磁盘类型
+      */
     DiskType: string;
     /**
-     * 节点磁盘大小，单位GB
-     */
+      * 节点磁盘大小，单位GB
+      */
     DiskSize: number;
     /**
-     * ES域名
-     */
+      * ES域名
+      */
     EsDomain: string;
     /**
-     * ES VIP
-     */
+      * ES VIP
+      */
     EsVip: string;
     /**
-     * ES端口
-     */
+      * ES端口
+      */
     EsPort: number;
     /**
-     * Kibana访问url
-     */
+      * Kibana访问url
+      */
     KibanaUrl: string;
     /**
-     * ES版本号
-     */
+      * ES版本号
+      */
     EsVersion: string;
     /**
-     * ES配置项
-     */
+      * ES配置项
+      */
     EsConfig: string;
     /**
-     * Kibana访问控制配置
-     */
+      * Kibana访问控制配置
+      */
     EsAcl: EsAcl;
     /**
-     * 实例创建时间
-     */
+      * 实例创建时间
+      */
     CreateTime: string;
     /**
-     * 实例最后修改操作时间
-     */
+      * 实例最后修改操作时间
+      */
     UpdateTime: string;
     /**
-     * 实例到期时间
-     */
+      * 实例到期时间
+      */
     Deadline: string;
     /**
-     * 实例类型（实例类型标识，当前只有1,2两种）
-     */
+      * 实例类型（实例类型标识，当前只有1,2两种）
+      */
     InstanceType: number;
     /**
-     * Ik分词器配置
-     */
+      * Ik分词器配置
+      */
     IkConfig: EsDictionaryInfo;
     /**
-     * 专用主节点配置
-     */
+      * 专用主节点配置
+      */
     MasterNodeInfo: MasterNodeInfo;
     /**
-     * cos自动备份配置
-     */
+      * cos自动备份配置
+      */
     CosBackup: CosBackup;
     /**
-     * 是否允许cos自动备份
-     */
+      * 是否允许cos自动备份
+      */
     AllowCosBackup: boolean;
     /**
-     * 实例拥有的标签列表
-     */
+      * 实例拥有的标签列表
+      */
     TagList: Array<TagInfo>;
     /**
-     * License类型<li>oss：开源版</li><li>basic：基础版</li><li>platinum：白金版</li>默认值platinum
-     */
+      * License类型<li>oss：开源版</li><li>basic：基础版</li><li>platinum：白金版</li>默认值platinum
+      */
     LicenseType: string;
     /**
-        * 是否为冷热集群<li>true: 冷热集群</li><li>false: 非冷热集群</li>
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 是否为冷热集群<li>true: 冷热集群</li><li>false: 非冷热集群</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     EnableHotWarmMode: boolean;
     /**
-        * 冷节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 冷节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     WarmNodeType: string;
     /**
-        * 冷节点个数
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 冷节点个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     WarmNodeNum: number;
     /**
-        * 冷节点CPU核数
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 冷节点CPU核数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     WarmCpuNum: number;
     /**
-        * 冷节点内存内存大小，单位GB
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 冷节点内存内存大小，单位GB
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     WarmMemSize: number;
     /**
-        * 冷节点磁盘类型
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 冷节点磁盘类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     WarmDiskType: string;
     /**
-        * 冷节点磁盘大小，单位GB
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 冷节点磁盘大小，单位GB
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     WarmDiskSize: number;
     /**
-        * 集群节点信息列表
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 集群节点信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     NodeInfoList: Array<NodeInfo>;
     /**
-        * Es公网地址
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * Es公网地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     EsPublicUrl: string;
     /**
-        * 多可用区网络信息
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 多可用区网络信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     MultiZoneInfo: Array<ZoneDetail>;
     /**
-        * 部署模式<li>0：单可用区</li><li>1：多可用区</li>
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 部署模式<li>0：单可用区</li><li>1：多可用区</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     DeployMode: number;
     /**
-        * ES公网访问状态<li>OPEN：开启</li><li>CLOSE：关闭
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * ES公网访问状态<li>OPEN：开启</li><li>CLOSE：关闭
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     PublicAccess: string;
     /**
-     * ES公网访问控制配置
-     */
+      * ES公网访问控制配置
+      */
     EsPublicAcl: EsAcl;
     /**
-        * Kibana内网地址
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * Kibana内网地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     KibanaPrivateUrl: string;
     /**
-        * Kibana公网访问状态<li>OPEN：开启</li><li>CLOSE：关闭
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * Kibana公网访问状态<li>OPEN：开启</li><li>CLOSE：关闭
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     KibanaPublicAccess: string;
     /**
-        * Kibana内网访问状态<li>OPEN：开启</li><li>CLOSE：关闭
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * Kibana内网访问状态<li>OPEN：开启</li><li>CLOSE：关闭
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     KibanaPrivateAccess: string;
     /**
-        * 6.8（及以上版本）基础版是否开启xpack security认证<li>1：不开启</li><li>2：开启</li>
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 6.8（及以上版本）基础版是否开启xpack security认证<li>1：不开启</li><li>2：开启</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     SecurityType: number;
     /**
-        * 场景化模板类型：0、不开启；1、通用场景；2、日志场景；3、搜索场景
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 场景化模板类型：0、不开启；1、通用场景；2、日志场景；3、搜索场景
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     SceneType: number;
 }
 /**
@@ -663,8 +663,8 @@ export interface InstanceInfo {
  */
 export interface DeleteInstanceResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -672,16 +672,16 @@ export interface DeleteInstanceResponse {
  */
 export interface DescribeInstancesResponse {
     /**
-     * 返回的实例个数
-     */
+      * 返回的实例个数
+      */
     TotalCount?: number;
     /**
-     * 实例详细信息列表
-     */
+      * 实例详细信息列表
+      */
     InstanceList?: Array<InstanceInfo>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -689,16 +689,16 @@ export interface DescribeInstancesResponse {
  */
 export interface DescribeInstanceLogsResponse {
     /**
-     * 返回的日志条数
-     */
+      * 返回的日志条数
+      */
     TotalCount?: number;
     /**
-     * 日志详细信息列表
-     */
+      * 日志详细信息列表
+      */
     InstanceLogList?: Array<InstanceLog>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -706,8 +706,8 @@ export interface DescribeInstanceLogsResponse {
  */
 export interface UpdatePluginsResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -715,12 +715,12 @@ export interface UpdatePluginsResponse {
  */
 export interface RestartInstanceRequest {
     /**
-     * 实例ID
-     */
+      * 实例ID
+      */
     InstanceId: string;
     /**
-     * 是否强制重启<li>true：强制重启</li><li>false：不强制重启</li>默认false
-     */
+      * 是否强制重启<li>true：强制重启</li><li>false：不强制重启</li>默认false
+      */
     ForceRestart?: boolean;
 }
 /**
@@ -728,12 +728,12 @@ export interface RestartInstanceRequest {
  */
 export interface ZoneDetail {
     /**
-     * 可用区
-     */
+      * 可用区
+      */
     Zone: string;
     /**
-     * 子网ID
-     */
+      * 子网ID
+      */
     SubnetId: string;
 }
 /**
@@ -741,40 +741,40 @@ export interface ZoneDetail {
  */
 export interface DescribeInstancesRequest {
     /**
-     * 集群实例所属可用区，不传则默认所有可用区
-     */
+      * 集群实例所属可用区，不传则默认所有可用区
+      */
     Zone?: string;
     /**
-     * 集群实例ID列表
-     */
+      * 集群实例ID列表
+      */
     InstanceIds?: Array<string>;
     /**
-     * 集群实例名称列表
-     */
+      * 集群实例名称列表
+      */
     InstanceNames?: Array<string>;
     /**
-     * 分页起始值, 默认值0
-     */
+      * 分页起始值, 默认值0
+      */
     Offset?: number;
     /**
-     * 分页大小，默认值20
-     */
+      * 分页大小，默认值20
+      */
     Limit?: number;
     /**
-     * 排序字段<li>1：实例ID</li><li>2：实例名称</li><li>3：可用区</li><li>4：创建时间</li>若orderKey未传递则按创建时间降序排序
-     */
+      * 排序字段<li>1：实例ID</li><li>2：实例名称</li><li>3：可用区</li><li>4：创建时间</li>若orderKey未传递则按创建时间降序排序
+      */
     OrderByKey?: number;
     /**
-     * 排序方式<li>0：升序</li><li>1：降序</li>若传递了orderByKey未传递orderByType, 则默认升序
-     */
+      * 排序方式<li>0：升序</li><li>1：降序</li>若传递了orderByKey未传递orderByType, 则默认升序
+      */
     OrderByType?: number;
     /**
-     * 节点标签信息列表
-     */
+      * 节点标签信息列表
+      */
     TagList?: Array<TagInfo>;
     /**
-     * 私有网络vip列表
-     */
+      * 私有网络vip列表
+      */
     IpList?: Array<string>;
 }
 /**
@@ -782,102 +782,102 @@ export interface DescribeInstancesRequest {
  */
 export interface UpdateInstanceRequest {
     /**
-     * 实例ID
-     */
+      * 实例ID
+      */
     InstanceId: string;
     /**
-     * 实例名称（1-50 个英文、汉字、数字、连接线-或下划线_）
-     */
+      * 实例名称（1-50 个英文、汉字、数字、连接线-或下划线_）
+      */
     InstanceName?: string;
     /**
-        * 已废弃请使用NodeInfoList
-  节点个数（2-50个）
-        */
+      * 已废弃请使用NodeInfoList
+节点个数（2-50个）
+      */
     NodeNum?: number;
     /**
-     * 配置项（JSON格式字符串）
-     */
+      * 配置项（JSON格式字符串）
+      */
     EsConfig?: string;
     /**
-     * 默认用户elastic的密码（8到16位，至少包括两项（[a-z,A-Z],[0-9]和[-!@#$%&^*+=_:;,.?]的特殊符号）
-     */
+      * 默认用户elastic的密码（8到16位，至少包括两项（[a-z,A-Z],[0-9]和[-!@#$%&^*+=_:;,.?]的特殊符号）
+      */
     Password?: string;
     /**
-     * 访问控制列表
-     */
+      * 访问控制列表
+      */
     EsAcl?: EsAcl;
     /**
-        * 已废弃请使用NodeInfoList
-  磁盘大小（单位GB）
-        */
+      * 已废弃请使用NodeInfoList
+磁盘大小（单位GB）
+      */
     DiskSize?: number;
     /**
-        * 已废弃请使用NodeInfoList
-  节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
-        */
+      * 已废弃请使用NodeInfoList
+节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
+      */
     NodeType?: string;
     /**
-        * 已废弃请使用NodeInfoList
-  专用主节点个数（只支持3个或5个）
-        */
+      * 已废弃请使用NodeInfoList
+专用主节点个数（只支持3个或5个）
+      */
     MasterNodeNum?: number;
     /**
-        * 已废弃请使用NodeInfoList
-  专用主节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
-        */
+      * 已废弃请使用NodeInfoList
+专用主节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
+      */
     MasterNodeType?: string;
     /**
-        * 已废弃请使用NodeInfoList
-  专用主节点磁盘大小（单位GB系统默认配置为50GB,暂不支持自定义）
-        */
+      * 已废弃请使用NodeInfoList
+专用主节点磁盘大小（单位GB系统默认配置为50GB,暂不支持自定义）
+      */
     MasterNodeDiskSize?: number;
     /**
-     * 更新配置时是否强制重启<li>true强制重启</li><li>false不强制重启</li>当前仅更新EsConfig时需要设置，默认值为false
-     */
+      * 更新配置时是否强制重启<li>true强制重启</li><li>false不强制重启</li>当前仅更新EsConfig时需要设置，默认值为false
+      */
     ForceRestart?: boolean;
     /**
-     * COS自动备份信息
-     */
+      * COS自动备份信息
+      */
     CosBackup?: CosBackup;
     /**
-     * 节点信息列表，可以只传递要更新的节点及其对应的规格信息。支持的操作包括<li>修改一种节点的个数</li><li>修改一种节点的节点规格及磁盘大小</li><li>增加一种节点类型（需要同时指定该节点的类型，个数，规格，磁盘等信息）</li>上述操作一次只能进行一种，且磁盘类型不支持修改
-     */
+      * 节点信息列表，可以只传递要更新的节点及其对应的规格信息。支持的操作包括<li>修改一种节点的个数</li><li>修改一种节点的节点规格及磁盘大小</li><li>增加一种节点类型（需要同时指定该节点的类型，个数，规格，磁盘等信息）</li>上述操作一次只能进行一种，且磁盘类型不支持修改
+      */
     NodeInfoList?: Array<NodeInfo>;
     /**
-     * 公网访问状态
-     */
+      * 公网访问状态
+      */
     PublicAccess?: string;
     /**
-     * 公网访问控制列表
-     */
+      * 公网访问控制列表
+      */
     EsPublicAcl?: EsPublicAcl;
     /**
-     * Kibana公网访问状态
-     */
+      * Kibana公网访问状态
+      */
     KibanaPublicAccess?: string;
     /**
-     * Kibana内网访问状态
-     */
+      * Kibana内网访问状态
+      */
     KibanaPrivateAccess?: string;
     /**
-     * ES 6.8及以上版本基础版开启或关闭用户认证
-     */
+      * ES 6.8及以上版本基础版开启或关闭用户认证
+      */
     BasicSecurityType?: number;
     /**
-     * Kibana内网端口
-     */
+      * Kibana内网端口
+      */
     KibanaPrivatePort?: number;
     /**
-     * 0: 蓝绿变更方式扩容，集群不重启 （默认） 1: 磁盘解挂载扩容，集群滚动重启
-     */
+      * 0: 蓝绿变更方式扩容，集群不重启 （默认） 1: 磁盘解挂载扩容，集群滚动重启
+      */
     ScaleType?: number;
     /**
-     * 多可用区部署
-     */
+      * 多可用区部署
+      */
     MultiZoneInfo?: Array<ZoneDetail>;
     /**
-     * 场景化模板类型 -1：不启用 1：通用 2：日志 3：搜索
-     */
+      * 场景化模板类型 -1：不启用 1：通用 2：日志 3：搜索
+      */
     SceneType?: number;
 }
 /**
@@ -885,24 +885,24 @@ export interface UpdateInstanceRequest {
  */
 export interface EsDictionaryInfo {
     /**
-     * 启用词词典列表
-     */
+      * 启用词词典列表
+      */
     MainDict: Array<DictInfo>;
     /**
-     * 停用词词典列表
-     */
+      * 停用词词典列表
+      */
     Stopwords: Array<DictInfo>;
     /**
-     * QQ分词词典列表
-     */
+      * QQ分词词典列表
+      */
     QQDict: Array<DictInfo>;
     /**
-     * 同义词词典列表
-     */
+      * 同义词词典列表
+      */
     Synonym: Array<DictInfo>;
     /**
-     * 更新词典类型
-     */
+      * 更新词典类型
+      */
     UpdateType: string;
 }
 /**
@@ -910,16 +910,16 @@ export interface EsDictionaryInfo {
  */
 export interface DescribeInstanceOperationsResponse {
     /**
-     * 操作记录总数
-     */
+      * 操作记录总数
+      */
     TotalCount?: number;
     /**
-     * 操作记录
-     */
+      * 操作记录
+      */
     Operations?: Array<Operation>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -927,16 +927,16 @@ export interface DescribeInstanceOperationsResponse {
  */
 export interface RestartNodesRequest {
     /**
-     * 集群实例ID
-     */
+      * 集群实例ID
+      */
     InstanceId: string;
     /**
-     * 节点名称列表
-     */
+      * 节点名称列表
+      */
     NodeNames: Array<string>;
     /**
-     * 是否强制重启
-     */
+      * 是否强制重启
+      */
     ForceRestart?: boolean;
 }
 /**
@@ -944,20 +944,20 @@ export interface RestartNodesRequest {
  */
 export interface UpdatePluginsRequest {
     /**
-     * 实例ID
-     */
+      * 实例ID
+      */
     InstanceId: string;
     /**
-     * 需要安装的插件名列表
-     */
+      * 需要安装的插件名列表
+      */
     InstallPluginList?: Array<string>;
     /**
-     * 需要卸载的插件名列表
-     */
+      * 需要卸载的插件名列表
+      */
     RemovePluginList?: Array<string>;
     /**
-     * 是否强制重启
-     */
+      * 是否强制重启
+      */
     ForceRestart?: boolean;
 }
 /**
@@ -965,8 +965,8 @@ export interface UpdatePluginsRequest {
  */
 export interface UpgradeLicenseResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -974,12 +974,12 @@ export interface UpgradeLicenseResponse {
  */
 export interface EsAcl {
     /**
-     * kibana访问黑名单
-     */
+      * kibana访问黑名单
+      */
     BlackIpList?: Array<string>;
     /**
-     * kibana访问白名单
-     */
+      * kibana访问白名单
+      */
     WhiteIpList?: Array<string>;
 }
 /**
@@ -987,32 +987,32 @@ export interface EsAcl {
  */
 export interface MasterNodeInfo {
     /**
-     * 是否启用了专用主节点
-     */
+      * 是否启用了专用主节点
+      */
     EnableDedicatedMaster: boolean;
     /**
-     * 专用主节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
-     */
+      * 专用主节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
+      */
     MasterNodeType: string;
     /**
-     * 专用主节点个数
-     */
+      * 专用主节点个数
+      */
     MasterNodeNum: number;
     /**
-     * 专用主节点CPU核数
-     */
+      * 专用主节点CPU核数
+      */
     MasterNodeCpuNum: number;
     /**
-     * 专用主节点内存大小，单位GB
-     */
+      * 专用主节点内存大小，单位GB
+      */
     MasterNodeMemSize: number;
     /**
-     * 专用主节点磁盘大小，单位GB
-     */
+      * 专用主节点磁盘大小，单位GB
+      */
     MasterNodeDiskSize: number;
     /**
-     * 专用主节点磁盘类型
-     */
+      * 专用主节点磁盘类型
+      */
     MasterNodeDiskType: string;
 }
 /**
@@ -1020,8 +1020,8 @@ export interface MasterNodeInfo {
  */
 export interface DeleteInstanceRequest {
     /**
-     * 实例ID
-     */
+      * 实例ID
+      */
     InstanceId: string;
 }
 /**
@@ -1029,36 +1029,36 @@ export interface DeleteInstanceRequest {
  */
 export interface SubTaskDetail {
     /**
-     * 子任务名
-     */
+      * 子任务名
+      */
     Name: string;
     /**
-     * 子任务结果
-     */
+      * 子任务结果
+      */
     Result: boolean;
     /**
-     * 子任务错误信息
-     */
+      * 子任务错误信息
+      */
     ErrMsg: string;
     /**
-     * 子任务类型
-     */
+      * 子任务类型
+      */
     Type: string;
     /**
-     * 子任务状态，0处理中 1成功 -1失败
-     */
+      * 子任务状态，0处理中 1成功 -1失败
+      */
     Status: number;
     /**
-     * 升级检查失败的索引名
-     */
+      * 升级检查失败的索引名
+      */
     FailedIndices: Array<string>;
     /**
-     * 子任务结束时间
-     */
+      * 子任务结束时间
+      */
     FinishTime: string;
     /**
-     * 子任务等级，1警告 2失败
-     */
+      * 子任务等级，1警告 2失败
+      */
     Level: number;
 }
 /**
@@ -1066,8 +1066,8 @@ export interface SubTaskDetail {
  */
 export interface RestartNodesResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1075,8 +1075,8 @@ export interface RestartNodesResponse {
  */
 export interface UpgradeInstanceResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1084,8 +1084,8 @@ export interface UpgradeInstanceResponse {
  */
 export interface UpdateInstanceResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1093,28 +1093,28 @@ export interface UpdateInstanceResponse {
  */
 export interface UpgradeInstanceRequest {
     /**
-     * 实例ID
-     */
+      * 实例ID
+      */
     InstanceId: string;
     /**
-     * 目标ES版本，支持：”6.4.3“, "6.8.2"，"7.5.1"
-     */
+      * 目标ES版本，支持：”6.4.3“, "6.8.2"，"7.5.1"
+      */
     EsVersion: string;
     /**
-     * 是否只做升级检查，默认值为false
-     */
+      * 是否只做升级检查，默认值为false
+      */
     CheckOnly?: boolean;
     /**
-     * 目标商业特性版本：<li>oss 开源版</li><li>basic 基础版</li>当前仅在5.6.4升级6.x版本时使用，默认值为basic
-     */
+      * 目标商业特性版本：<li>oss 开源版</li><li>basic 基础版</li>当前仅在5.6.4升级6.x版本时使用，默认值为basic
+      */
     LicenseType?: string;
     /**
-     * 6.8（及以上版本）基础版是否开启xpack security认证<li>1：不开启</li><li>2：开启</li>
-     */
+      * 6.8（及以上版本）基础版是否开启xpack security认证<li>1：不开启</li><li>2：开启</li>
+      */
     BasicSecurityType?: number;
     /**
-     * 升级方式：<li>scale 蓝绿变更</li><li>restart 滚动重启</li>默认值为scale
-     */
+      * 升级方式：<li>scale 蓝绿变更</li><li>restart 滚动重启</li>默认值为scale
+      */
     UpgradeMode?: string;
 }
 /**
@@ -1122,31 +1122,31 @@ export interface UpgradeInstanceRequest {
  */
 export interface Operation {
     /**
-     * 操作唯一id
-     */
+      * 操作唯一id
+      */
     Id: number;
     /**
-     * 操作开始时间
-     */
+      * 操作开始时间
+      */
     StartTime: string;
     /**
-     * 操作类型
-     */
+      * 操作类型
+      */
     Type: string;
     /**
-     * 操作详情
-     */
+      * 操作详情
+      */
     Detail: OperationDetail;
     /**
-     * 操作结果
-     */
+      * 操作结果
+      */
     Result: string;
     /**
-     * 流程任务信息
-     */
+      * 流程任务信息
+      */
     Tasks: Array<TaskDetail>;
     /**
-     * 操作进度
-     */
+      * 操作进度
+      */
     Progress: number;
 }

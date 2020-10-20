@@ -68,6 +68,16 @@ it("cdn.v20180606.DescribePurgeTasks", async function () {
     }
 })
 
+it("cdn.v20180606.DeleteScdnDomain", async function () {
+    try {
+       const data = await client.DeleteScdnDomain({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdn.v20180606.DescribePayType", async function () {
     try {
        const data = await client.DescribePayType({})
@@ -181,6 +191,16 @@ it("cdn.v20180606.StopCdnDomain", async function () {
 it("cdn.v20180606.DescribePurgeQuota", async function () {
     try {
        const data = await client.DescribePurgeQuota({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdn.v20180606.ListScdnLogTasks", async function () {
+    try {
+       const data = await client.ListScdnLogTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

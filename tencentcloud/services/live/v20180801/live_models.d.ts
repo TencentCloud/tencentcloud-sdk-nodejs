@@ -3,21 +3,21 @@
  */
 export interface CreateLiveSnapshotRuleRequest {
     /**
-     * 推流域名。
-     */
+      * 推流域名。
+      */
     DomainName: string;
     /**
-     * 模板 ID。
-     */
+      * 模板 ID。
+      */
     TemplateId: number;
     /**
-     * 推流路径，与推流和播放地址中的 AppName 保持一致，默认为 live。
-     */
+      * 推流路径，与推流和播放地址中的 AppName 保持一致，默认为 live。
+      */
     AppName?: string;
     /**
-        * 流名称。
-  注：如果本参数设置为非空字符串，规则将只对此推流起作用。
-        */
+      * 流名称。
+注：如果本参数设置为非空字符串，规则将只对此推流起作用。
+      */
     StreamName?: string;
 }
 /**
@@ -25,20 +25,20 @@ export interface CreateLiveSnapshotRuleRequest {
  */
 export interface BillDataInfo {
     /**
-     * 时间点，格式: yyyy-mm-dd HH:MM:SS。
-     */
+      * 时间点，格式: yyyy-mm-dd HH:MM:SS。
+      */
     Time: string;
     /**
-     * 带宽，单位是 Mbps。
-     */
+      * 带宽，单位是 Mbps。
+      */
     Bandwidth: number;
     /**
-     * 流量，单位是 MB。
-     */
+      * 流量，单位是 MB。
+      */
     Flux: number;
     /**
-     * 峰值时间点，格式: yyyy-mm-dd HH:MM:SS，原始数据为5分钟粒度，如果查询小时和天粒度数据，则返回对应粒度内的带宽峰值时间点。
-     */
+      * 峰值时间点，格式: yyyy-mm-dd HH:MM:SS，原始数据为5分钟粒度，如果查询小时和天粒度数据，则返回对应粒度内的带宽峰值时间点。
+      */
     PeakTime: string;
 }
 /**
@@ -46,8 +46,8 @@ export interface BillDataInfo {
  */
 export interface EnableLiveDomainResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -55,30 +55,30 @@ export interface EnableLiveDomainResponse {
  */
 export interface CreateLiveCertRequest {
     /**
-        * 证书类型。0-用户添加证书；1-腾讯云托管证书。
-  注意：当证书类型为0时，HttpsCrt和HttpsKey必选；
-  当证书类型为1时，优先使用CloudCertId对应证书，若CloudCertId为空则使用HttpsCrt和HttpsKey。
-        */
+      * 证书类型。0-用户添加证书；1-腾讯云托管证书。
+注意：当证书类型为0时，HttpsCrt和HttpsKey必选；
+当证书类型为1时，优先使用CloudCertId对应证书，若CloudCertId为空则使用HttpsCrt和HttpsKey。
+      */
     CertType: number;
     /**
-     * 证书名称。
-     */
+      * 证书名称。
+      */
     CertName?: string;
     /**
-     * 证书内容，即公钥。
-     */
+      * 证书内容，即公钥。
+      */
     HttpsCrt?: string;
     /**
-     * 私钥。
-     */
+      * 私钥。
+      */
     HttpsKey?: string;
     /**
-     * 描述。
-     */
+      * 描述。
+      */
     Description?: string;
     /**
-     * 腾讯云证书托管ID。
-     */
+      * 腾讯云证书托管ID。
+      */
     CloudCertId?: string;
 }
 /**
@@ -86,8 +86,8 @@ export interface CreateLiveCertRequest {
  */
 export interface StopRecordTaskResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -95,12 +95,12 @@ export interface StopRecordTaskResponse {
  */
 export interface DescribeDeliverBandwidthListResponse {
     /**
-     * 转推计费带宽数据
-     */
+      * 转推计费带宽数据
+      */
     DataInfoList?: Array<BandwidthInfo>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -108,19 +108,19 @@ export interface DescribeDeliverBandwidthListResponse {
  */
 export interface DeleteLiveRecordRuleRequest {
     /**
-        * 推流域名。
-  域名+AppName+StreamName唯一标识单个转码规则，如需删除需要强匹配，例如AppName为空也需要传空字符串进行强匹配。
-        */
+      * 推流域名。
+域名+AppName+StreamName唯一标识单个转码规则，如需删除需要强匹配，例如AppName为空也需要传空字符串进行强匹配。
+      */
     DomainName: string;
     /**
-        * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
-  域名+AppName+StreamName唯一标识单个转码规则，如需删除需要强匹配，例如AppName为空也需要传空字符串进行强匹配。
-        */
+      * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
+域名+AppName+StreamName唯一标识单个转码规则，如需删除需要强匹配，例如AppName为空也需要传空字符串进行强匹配。
+      */
     AppName?: string;
     /**
-        * 流名称。
-  域名+AppName+StreamName唯一标识单个转码规则，如需删除需要强匹配，例如AppName为空也需要传空字符串进行强匹配。
-        */
+      * 流名称。
+域名+AppName+StreamName唯一标识单个转码规则，如需删除需要强匹配，例如AppName为空也需要传空字符串进行强匹配。
+      */
     StreamName?: string;
 }
 /**
@@ -128,16 +128,16 @@ export interface DeleteLiveRecordRuleRequest {
  */
 export interface ResumeLiveStreamRequest {
     /**
-     * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
-     */
+      * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
+      */
     AppName: string;
     /**
-     * 您的推流域名。
-     */
+      * 您的推流域名。
+      */
     DomainName: string;
     /**
-     * 流名称。
-     */
+      * 流名称。
+      */
     StreamName: string;
 }
 /**
@@ -145,8 +145,8 @@ export interface ResumeLiveStreamRequest {
  */
 export interface DeleteLiveTranscodeTemplateResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -154,32 +154,32 @@ export interface DeleteLiveTranscodeTemplateResponse {
  */
 export interface DescribeBillBandwidthAndFluxListResponse {
     /**
-     * 峰值带宽所在时间点，格式为yyyy-mm-dd HH:MM:SS。
-     */
+      * 峰值带宽所在时间点，格式为yyyy-mm-dd HH:MM:SS。
+      */
     PeakBandwidthTime?: string;
     /**
-     * 峰值带宽，单位是Mbps。
-     */
+      * 峰值带宽，单位是Mbps。
+      */
     PeakBandwidth?: number;
     /**
-     * 95峰值带宽所在时间点，格式为yyyy-mm-dd HH:MM:SS。
-     */
+      * 95峰值带宽所在时间点，格式为yyyy-mm-dd HH:MM:SS。
+      */
     P95PeakBandwidthTime?: string;
     /**
-     * 95峰值带宽，单位是Mbps。
-     */
+      * 95峰值带宽，单位是Mbps。
+      */
     P95PeakBandwidth?: number;
     /**
-     * 总流量，单位是MB。
-     */
+      * 总流量，单位是MB。
+      */
     SumFlux?: number;
     /**
-     * 明细数据信息。
-     */
+      * 明细数据信息。
+      */
     DataInfoList?: Array<BillDataInfo>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -187,113 +187,113 @@ export interface DescribeBillBandwidthAndFluxListResponse {
  */
 export interface TemplateInfo {
     /**
-        * 视频编码：h264/h265/origin，默认h264。
-  
-  origin: 保持原始编码格式
-        */
+      * 视频编码：h264/h265/origin，默认h264。
+
+origin: 保持原始编码格式
+      */
     Vcodec: string;
     /**
-        * 视频码率。范围：0kbps - 8000kbps。
-  0为保持原始码率。
-  注: 转码模板有码率唯一要求，最终保存的码率可能与输入码率有所差别。
-        */
+      * 视频码率。范围：0kbps - 8000kbps。
+0为保持原始码率。
+注: 转码模板有码率唯一要求，最终保存的码率可能与输入码率有所差别。
+      */
     VideoBitrate: number;
     /**
-        * 音频编码：aac，默认aac。
-  注意：当前该参数未生效，待后续支持！
-        */
+      * 音频编码：aac，默认aac。
+注意：当前该参数未生效，待后续支持！
+      */
     Acodec: string;
     /**
-        * 音频码率。取值范围：0kbps - 500kbps。
-  默认0。
-        */
+      * 音频码率。取值范围：0kbps - 500kbps。
+默认0。
+      */
     AudioBitrate: number;
     /**
-        * 宽，默认0。
-  范围[0-3000]
-  数值必须是2的倍数，0是原始宽度
-        */
+      * 宽，默认0。
+范围[0-3000]
+数值必须是2的倍数，0是原始宽度
+      */
     Width: number;
     /**
-        * 高，默认0。
-  范围[0-3000]
-  数值必须是2的倍数，0是原始宽度
-        */
+      * 高，默认0。
+范围[0-3000]
+数值必须是2的倍数，0是原始宽度
+      */
     Height: number;
     /**
-        * 帧率，默认0。
-  范围0-60fps
-        */
+      * 帧率，默认0。
+范围0-60fps
+      */
     Fps: number;
     /**
-        * 关键帧间隔，单位：秒。
-  默认原始的间隔
-  范围2-6
-        */
+      * 关键帧间隔，单位：秒。
+默认原始的间隔
+范围2-6
+      */
     Gop: number;
     /**
-        * 旋转角度，默认0。
-  可取值：0，90，180，270
-        */
+      * 旋转角度，默认0。
+可取值：0，90，180，270
+      */
     Rotate: number;
     /**
-        * 编码质量：
-  baseline/main/high。默认baseline
-        */
+      * 编码质量：
+baseline/main/high。默认baseline
+      */
     Profile: string;
     /**
-        * 当设置的码率>原始码率时，是否以原始码率为准。
-  0：否， 1：是
-  默认 0。
-        */
+      * 当设置的码率>原始码率时，是否以原始码率为准。
+0：否， 1：是
+默认 0。
+      */
     BitrateToOrig: number;
     /**
-        * 当设置的高度>原始高度时，是否以原始高度为准。
-  0：否， 1：是
-  默认 0。
-        */
+      * 当设置的高度>原始高度时，是否以原始高度为准。
+0：否， 1：是
+默认 0。
+      */
     HeightToOrig: number;
     /**
-        * 当设置的帧率>原始帧率时，是否以原始帧率为准。
-  0：否， 1：是
-  默认 0。
-        */
+      * 当设置的帧率>原始帧率时，是否以原始帧率为准。
+0：否， 1：是
+默认 0。
+      */
     FpsToOrig: number;
     /**
-     * 是否保留视频。0：否，1：是。
-     */
+      * 是否保留视频。0：否，1：是。
+      */
     NeedVideo: number;
     /**
-     * 是否保留音频。0：否，1：是。
-     */
+      * 是否保留音频。0：否，1：是。
+      */
     NeedAudio: number;
     /**
-     * 模板 ID。
-     */
+      * 模板 ID。
+      */
     TemplateId: number;
     /**
-     * 模板名称。
-     */
+      * 模板名称。
+      */
     TemplateName: string;
     /**
-     * 模板描述。
-     */
+      * 模板描述。
+      */
     Description: string;
     /**
-     * 是否是极速高清模板，0：否，1：是。默认0。
-     */
+      * 是否是极速高清模板，0：否，1：是。默认0。
+      */
     AiTransCode: number;
     /**
-        * 极速高清视频码率压缩比。
-  极速高清目标码率=VideoBitrate * (1-AdaptBitratePercent)
-  
-  取值范围：0.0到0.5
-        */
+      * 极速高清视频码率压缩比。
+极速高清目标码率=VideoBitrate * (1-AdaptBitratePercent)
+
+取值范围：0.0到0.5
+      */
     AdaptBitratePercent: number;
     /**
-        * 是否以短边作为高度，0：否，1：是。默认0。
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 是否以短边作为高度，0：否，1：是。默认0。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     ShortEdgeAsHeight: number;
 }
 /**
@@ -301,8 +301,8 @@ export interface TemplateInfo {
  */
 export interface DeleteLiveCallbackRuleResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -310,16 +310,16 @@ export interface DeleteLiveCallbackRuleResponse {
  */
 export interface ResumeDelayLiveStreamRequest {
     /**
-     * 推流路径，与推流和播放地址中的AppName保持一致，默认为live。
-     */
+      * 推流路径，与推流和播放地址中的AppName保持一致，默认为live。
+      */
     AppName: string;
     /**
-     * 推流域名。
-     */
+      * 推流域名。
+      */
     DomainName: string;
     /**
-     * 流名称。
-     */
+      * 流名称。
+      */
     StreamName: string;
 }
 /**
@@ -327,12 +327,12 @@ export interface ResumeDelayLiveStreamRequest {
  */
 export interface DescribeLiveWatermarkRulesResponse {
     /**
-     * 水印规则列表。
-     */
+      * 水印规则列表。
+      */
     Rules?: Array<RuleInfo>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -340,12 +340,12 @@ export interface DescribeLiveWatermarkRulesResponse {
  */
 export interface DescribeLiveCallbackTemplateResponse {
     /**
-     * 回调模板信息。
-     */
+      * 回调模板信息。
+      */
     Template?: CallBackTemplateInfo;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -353,10 +353,10 @@ export interface DescribeLiveCallbackTemplateResponse {
  */
 export interface DeleteLiveSnapshotTemplateRequest {
     /**
-        * 模板 ID。
-  1. 在创建截图模板接口 [CreateLiveSnapshotTemplate](/document/product/267/32624) 调用的返回值中获取。
-  2. 可以从接口 [DescribeLiveSnapshotTemplates](/document/product/267/32619) 中查询已创建的截图模板列表。
-        */
+      * 模板 ID。
+1. 在创建截图模板接口 [CreateLiveSnapshotTemplate](/document/product/267/32624) 调用的返回值中获取。
+2. 可以从接口 [DescribeLiveSnapshotTemplates](/document/product/267/32619) 中查询已创建的截图模板列表。
+      */
     TemplateId: number;
 }
 /**
@@ -364,12 +364,12 @@ export interface DeleteLiveSnapshotTemplateRequest {
  */
 export interface DescribeGroupProIspPlayInfoListResponse {
     /**
-     * 数据内容。
-     */
+      * 数据内容。
+      */
     DataInfoList?: Array<GroupProIspDataInfo>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -377,24 +377,24 @@ export interface DescribeGroupProIspPlayInfoListResponse {
  */
 export interface PushAuthKeyInfo {
     /**
-     * 域名。
-     */
+      * 域名。
+      */
     DomainName: string;
     /**
-     * 是否启用，0：关闭，1：启用。
-     */
+      * 是否启用，0：关闭，1：启用。
+      */
     Enable: number;
     /**
-     * 主鉴权 Key。
-     */
+      * 主鉴权 Key。
+      */
     MasterAuthKey: string;
     /**
-     * 备鉴权 Key。
-     */
+      * 备鉴权 Key。
+      */
     BackupAuthKey: string;
     /**
-     * 有效时间，单位：秒。
-     */
+      * 有效时间，单位：秒。
+      */
     AuthDelta: number;
 }
 /**
@@ -402,12 +402,12 @@ export interface PushAuthKeyInfo {
  */
 export interface DomainInfoList {
     /**
-     * 域名。
-     */
+      * 域名。
+      */
     Domain: string;
     /**
-     * 明细信息。
-     */
+      * 明细信息。
+      */
     DetailInfoList: Array<DomainDetailInfo>;
 }
 /**
@@ -415,8 +415,8 @@ export interface DomainInfoList {
  */
 export interface DeleteLiveRecordTemplateRequest {
     /**
-     * DescribeRecordTemplates接口获取到的模板 ID。
-     */
+      * DescribeRecordTemplates接口获取到的模板 ID。
+      */
     TemplateId: number;
 }
 /**
@@ -424,8 +424,8 @@ export interface DeleteLiveRecordTemplateRequest {
  */
 export interface DeleteLiveCallbackTemplateResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -433,28 +433,28 @@ export interface DeleteLiveCallbackTemplateResponse {
  */
 export interface DescribeLiveStreamOnlineListResponse {
     /**
-     * 符合条件的总个数。
-     */
+      * 符合条件的总个数。
+      */
     TotalNum?: number;
     /**
-     * 总页数。
-     */
+      * 总页数。
+      */
     TotalPage?: number;
     /**
-     * 分页的页码。
-     */
+      * 分页的页码。
+      */
     PageNum?: number;
     /**
-     * 每页显示的条数。
-     */
+      * 每页显示的条数。
+      */
     PageSize?: number;
     /**
-     * 正在推送流的信息列表。
-     */
+      * 正在推送流的信息列表。
+      */
     OnlineInfo?: Array<StreamOnlineInfo>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -462,80 +462,80 @@ export interface DescribeLiveStreamOnlineListResponse {
  */
 export interface PushQualityData {
     /**
-     * 数据时间，格式: %Y-%m-%d %H:%M:%S.%ms，精确到毫秒级。
-     */
+      * 数据时间，格式: %Y-%m-%d %H:%M:%S.%ms，精确到毫秒级。
+      */
     Time: string;
     /**
-     * 推流域名。
-     */
+      * 推流域名。
+      */
     PushDomain: string;
     /**
-     * 推流路径。
-     */
+      * 推流路径。
+      */
     AppName: string;
     /**
-     * 推流客户端 IP。
-     */
+      * 推流客户端 IP。
+      */
     ClientIp: string;
     /**
-     * 开始推流时间，格式: %Y-%m-%d %H:%M:%S.%ms，精确到毫秒级。
-     */
+      * 开始推流时间，格式: %Y-%m-%d %H:%M:%S.%ms，精确到毫秒级。
+      */
     BeginPushTime: string;
     /**
-     * 分辨率信息。
-     */
+      * 分辨率信息。
+      */
     Resolution: string;
     /**
-     * 视频编码格式。
-     */
+      * 视频编码格式。
+      */
     VCodec: string;
     /**
-     * 音频编码格式。
-     */
+      * 音频编码格式。
+      */
     ACodec: string;
     /**
-     * 推流序列号，用来唯一的标志一次推流。
-     */
+      * 推流序列号，用来唯一的标志一次推流。
+      */
     Sequence: string;
     /**
-     * 视频帧率。
-     */
+      * 视频帧率。
+      */
     VideoFps: number;
     /**
-     * 视频码率，单位: bps。
-     */
+      * 视频码率，单位: bps。
+      */
     VideoRate: number;
     /**
-     * 音频帧率。
-     */
+      * 音频帧率。
+      */
     AudioFps: number;
     /**
-     * 音频码率，单位: bps。
-     */
+      * 音频码率，单位: bps。
+      */
     AudioRate: number;
     /**
-     * 本地流逝时间，单位: ms，音视频流逝时间与本地流逝时间的差距越大表示推流质量越差，上行卡顿越严重。
-     */
+      * 本地流逝时间，单位: ms，音视频流逝时间与本地流逝时间的差距越大表示推流质量越差，上行卡顿越严重。
+      */
     LocalTs: number;
     /**
-     * 视频流逝时间，单位: ms。
-     */
+      * 视频流逝时间，单位: ms。
+      */
     VideoTs: number;
     /**
-     * 音频流逝时间，单位: ms。
-     */
+      * 音频流逝时间，单位: ms。
+      */
     AudioTs: number;
     /**
-     * metadata 中的视频码率，单位: kbps。
-     */
+      * metadata 中的视频码率，单位: kbps。
+      */
     MetaVideoRate: number;
     /**
-     * metadata 中的音频码率，单位: kbps。
-     */
+      * metadata 中的音频码率，单位: kbps。
+      */
     MetaAudioRate: number;
     /**
-     * metadata 中的帧率。
-     */
+      * metadata 中的帧率。
+      */
     MateFps: number;
 }
 /**
@@ -543,8 +543,8 @@ export interface PushQualityData {
  */
 export interface UnBindLiveDomainCertResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -552,28 +552,28 @@ export interface UnBindLiveDomainCertResponse {
  */
 export interface ModifyLivePlayAuthKeyRequest {
     /**
-     * 播放域名。
-     */
+      * 播放域名。
+      */
     DomainName: string;
     /**
-        * 是否启用，0：关闭，1：启用。
-  不传表示不修改当前值。
-        */
+      * 是否启用，0：关闭，1：启用。
+不传表示不修改当前值。
+      */
     Enable?: number;
     /**
-        * 鉴权key。
-  不传表示不修改当前值。
-        */
+      * 鉴权key。
+不传表示不修改当前值。
+      */
     AuthKey?: string;
     /**
-        * 有效时间，单位：秒。
-  不传表示不修改当前值。
-        */
+      * 有效时间，单位：秒。
+不传表示不修改当前值。
+      */
     AuthDelta?: number;
     /**
-        * 鉴权备用key。
-  不传表示不修改当前值。
-        */
+      * 鉴权备用key。
+不传表示不修改当前值。
+      */
     AuthBackKey?: string;
 }
 /**
@@ -585,42 +585,42 @@ export declare type DescribeLiveDelayInfoListRequest = null;
  */
 export interface DomainCertInfo {
     /**
-     * 证书Id。
-     */
+      * 证书Id。
+      */
     CertId: number;
     /**
-     * 证书名称。
-     */
+      * 证书名称。
+      */
     CertName: string;
     /**
-     * 描述信息。
-     */
+      * 描述信息。
+      */
     Description: string;
     /**
-     * 创建时间，UTC格式。
-     */
+      * 创建时间，UTC格式。
+      */
     CreateTime: string;
     /**
-     * 证书内容。
-     */
+      * 证书内容。
+      */
     HttpsCrt: string;
     /**
-        * 证书类型。
-  0：用户添加证书，
-  1：腾讯云托管证书。
-        */
+      * 证书类型。
+0：用户添加证书，
+1：腾讯云托管证书。
+      */
     CertType: number;
     /**
-     * 证书过期时间，UTC格式。
-     */
+      * 证书过期时间，UTC格式。
+      */
     CertExpireTime: string;
     /**
-     * 使用此证书的域名名称。
-     */
+      * 使用此证书的域名名称。
+      */
     DomainName: string;
     /**
-     * 证书状态。
-     */
+      * 证书状态。
+      */
     Status: number;
 }
 /**
@@ -628,45 +628,45 @@ export interface DomainCertInfo {
  */
 export interface RecordTemplateInfo {
     /**
-     * 模板 ID。
-     */
+      * 模板 ID。
+      */
     TemplateId: number;
     /**
-     * 模板名称。
-     */
+      * 模板名称。
+      */
     TemplateName: string;
     /**
-     * 描述信息。
-     */
+      * 描述信息。
+      */
     Description: string;
     /**
-     * FLV 录制参数。
-     */
+      * FLV 录制参数。
+      */
     FlvParam: RecordParam;
     /**
-     * HLS 录制参数。
-     */
+      * HLS 录制参数。
+      */
     HlsParam: RecordParam;
     /**
-     * MP4 录制参数。
-     */
+      * MP4 录制参数。
+      */
     Mp4Param: RecordParam;
     /**
-     * AAC 录制参数。
-     */
+      * AAC 录制参数。
+      */
     AacParam: RecordParam;
     /**
-        * 0：普通直播，
-  1：慢直播。
-        */
+      * 0：普通直播，
+1：慢直播。
+      */
     IsDelayLive: number;
     /**
-     * HLS 录制定制参数
-     */
+      * HLS 录制定制参数
+      */
     HlsSpecialParam: HlsSpecialParam;
     /**
-     * MP3 录制参数。
-     */
+      * MP3 录制参数。
+      */
     Mp3Param: RecordParam;
 }
 /**
@@ -674,8 +674,8 @@ export interface RecordTemplateInfo {
  */
 export interface DeleteLiveTranscodeRuleResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -683,12 +683,12 @@ export interface DeleteLiveTranscodeRuleResponse {
  */
 export interface ConcurrentRecordStreamNum {
     /**
-     * 时间点。
-     */
+      * 时间点。
+      */
     Time: string;
     /**
-     * 路数。
-     */
+      * 路数。
+      */
     Num: number;
 }
 /**
@@ -696,12 +696,12 @@ export interface ConcurrentRecordStreamNum {
  */
 export interface DescribeStreamPlayInfoListResponse {
     /**
-     * 统计信息列表，时间粒度是1分钟。
-     */
+      * 统计信息列表，时间粒度是1分钟。
+      */
     DataInfoList?: Array<DayStreamPlayInfo>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -709,12 +709,12 @@ export interface DescribeStreamPlayInfoListResponse {
  */
 export interface DescribeScreenShotSheetNumListResponse {
     /**
-     * 数据信息列表。
-     */
+      * 数据信息列表。
+      */
     DataInfoList?: Array<TimeValue>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -722,8 +722,8 @@ export interface DescribeScreenShotSheetNumListResponse {
  */
 export interface ModifyLiveSnapshotTemplateResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -731,27 +731,27 @@ export interface ModifyLiveSnapshotTemplateResponse {
  */
 export interface ModifyLivePushAuthKeyRequest {
     /**
-     * 推流域名。
-     */
+      * 推流域名。
+      */
     DomainName: string;
     /**
-        * 是否启用，0：关闭，1：启用。
-  不传表示不修改当前值。
-        */
+      * 是否启用，0：关闭，1：启用。
+不传表示不修改当前值。
+      */
     Enable?: number;
     /**
-        * 主鉴权key。
-  不传表示不修改当前值。
-        */
+      * 主鉴权key。
+不传表示不修改当前值。
+      */
     MasterAuthKey?: string;
     /**
-        * 备鉴权key。
-  不传表示不修改当前值。
-        */
+      * 备鉴权key。
+不传表示不修改当前值。
+      */
     BackupAuthKey?: string;
     /**
-     * 有效时间，单位：秒。
-     */
+      * 有效时间，单位：秒。
+      */
     AuthDelta?: number;
 }
 /**
@@ -759,10 +759,10 @@ export interface ModifyLivePushAuthKeyRequest {
  */
 export interface DeleteLiveCallbackTemplateRequest {
     /**
-        * 模板 ID。
-  1. 在创建回调模板接口 [CreateLiveCallbackTemplate](/document/product/267/32637) 调用的返回值中获取模板 ID。
-  2. 可以从接口 [DescribeLiveCallbackTemplates](/document/product/267/32632) 查询已经创建的过的模板列表。
-        */
+      * 模板 ID。
+1. 在创建回调模板接口 [CreateLiveCallbackTemplate](/document/product/267/32637) 调用的返回值中获取模板 ID。
+2. 可以从接口 [DescribeLiveCallbackTemplates](/document/product/267/32632) 查询已经创建的过的模板列表。
+      */
     TemplateId: number;
 }
 /**
@@ -770,16 +770,16 @@ export interface DeleteLiveCallbackTemplateRequest {
  */
 export interface DescribeLiveStreamStateRequest {
     /**
-     * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
-     */
+      * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
+      */
     AppName: string;
     /**
-     * 您的推流域名。
-     */
+      * 您的推流域名。
+      */
     DomainName: string;
     /**
-     * 流名称。
-     */
+      * 流名称。
+      */
     StreamName: string;
 }
 /**
@@ -787,12 +787,12 @@ export interface DescribeLiveStreamStateRequest {
  */
 export interface DescribeLivePlayAuthKeyResponse {
     /**
-     * 播放鉴权key信息。
-     */
+      * 播放鉴权key信息。
+      */
     PlayAuthKeyInfo?: PlayAuthKeyInfo;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -804,65 +804,65 @@ export declare type DescribeLiveCallbackTemplatesRequest = null;
  */
 export interface DomainInfo {
     /**
-     * 直播域名。
-     */
+      * 直播域名。
+      */
     Name: string;
     /**
-        * 域名类型:
-  0: 推流。
-  1: 播放。
-        */
+      * 域名类型:
+0: 推流。
+1: 播放。
+      */
     Type: number;
     /**
-        * 域名状态:
-  0: 停用。
-  1: 启用。
-        */
+      * 域名状态:
+0: 停用。
+1: 启用。
+      */
     Status: number;
     /**
-     * 添加时间。
-     */
+      * 添加时间。
+      */
     CreateTime: string;
     /**
-        * 是否有 CName 到固定规则域名:
-  0: 否。
-  1: 是。
-        */
+      * 是否有 CName 到固定规则域名:
+0: 否。
+1: 是。
+      */
     BCName: number;
     /**
-     * cname 对应的域名。
-     */
+      * cname 对应的域名。
+      */
     TargetDomain: string;
     /**
-        * 播放区域，只在 Type=1 时该参数有意义。
-  1: 国内。
-  2: 全球。
-  3: 海外。
-        */
+      * 播放区域，只在 Type=1 时该参数有意义。
+1: 国内。
+2: 全球。
+3: 海外。
+      */
     PlayType: number;
     /**
-        * 是否慢直播:
-  0: 普通直播。
-  1: 慢直播。
-        */
+      * 是否慢直播:
+0: 普通直播。
+1: 慢直播。
+      */
     IsDelayLive: number;
     /**
-     * 当前客户使用的 cname 信息。
-     */
+      * 当前客户使用的 cname 信息。
+      */
     CurrentCName: string;
     /**
-     * 失效参数，可忽略。
-     */
+      * 失效参数，可忽略。
+      */
     RentTag: number;
     /**
-     * 失效参数，可忽略。
-     */
+      * 失效参数，可忽略。
+      */
     RentExpireTime: string;
     /**
-        * 0: 标准直播。
-  1: 小程序直播。
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 0: 标准直播。
+1: 小程序直播。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     IsMiniProgramLive: number;
 }
 /**
@@ -870,12 +870,12 @@ export interface DomainInfo {
  */
 export interface DescribeLiveTranscodeRulesRequest {
     /**
-     * 要筛选的模板ID数组。
-     */
+      * 要筛选的模板ID数组。
+      */
     TemplateIds?: Array<number>;
     /**
-     * 要筛选的域名数组。
-     */
+      * 要筛选的域名数组。
+      */
     DomainNames?: Array<string>;
 }
 /**
@@ -883,16 +883,16 @@ export interface DescribeLiveTranscodeRulesRequest {
  */
 export interface DeleteLiveSnapshotRuleRequest {
     /**
-     * 推流域名。
-     */
+      * 推流域名。
+      */
     DomainName: string;
     /**
-     * 推流路径，与推流和播放地址中的 AppName 保持一致，默认为 live。
-     */
+      * 推流路径，与推流和播放地址中的 AppName 保持一致，默认为 live。
+      */
     AppName?: string;
     /**
-     * 流名称。
-     */
+      * 流名称。
+      */
     StreamName?: string;
 }
 /**
@@ -900,32 +900,32 @@ export interface DeleteLiveSnapshotRuleRequest {
  */
 export interface DescribePlayErrorCodeDetailInfoListRequest {
     /**
-        * 起始时间，北京时间，
-  格式：yyyy-mm-dd HH:MM:SS。
-        */
+      * 起始时间，北京时间，
+格式：yyyy-mm-dd HH:MM:SS。
+      */
     StartTime: string;
     /**
-        * 结束时间，北京时间，
-  格式：yyyy-mm-dd HH:MM:SS。
-  注：EndTime 和 StartTime 只支持最近1天的数据查询。
-        */
+      * 结束时间，北京时间，
+格式：yyyy-mm-dd HH:MM:SS。
+注：EndTime 和 StartTime 只支持最近1天的数据查询。
+      */
     EndTime: string;
     /**
-        * 查询粒度：
-  1-1分钟粒度。
-        */
+      * 查询粒度：
+1-1分钟粒度。
+      */
     Granularity: number;
     /**
-     * 是，可选值包括”4xx”,”5xx”，支持”4xx,5xx”等这种混合模式。
-     */
+      * 是，可选值包括”4xx”,”5xx”，支持”4xx,5xx”等这种混合模式。
+      */
     StatType: string;
     /**
-     * 播放域名列表。
-     */
+      * 播放域名列表。
+      */
     PlayDomains?: Array<string>;
     /**
-     * 地域，可选值：Mainland，Oversea，China，Foreign，Global（默认值）；如果为空，查询总的数据；如果为“Mainland”，查询中国大陆的数据；如果为“Oversea”，则查询中国大陆以外的数据；如果为China，查询中国的数据（包括港澳台）；如果为Foreign，查询国外的数据（不包括港澳台）。
-     */
+      * 地域，可选值：Mainland，Oversea，China，Foreign，Global（默认值）；如果为空，查询总的数据；如果为“Mainland”，查询中国大陆的数据；如果为“Oversea”，则查询中国大陆以外的数据；如果为China，查询中国的数据（包括港澳台）；如果为Foreign，查询国外的数据（不包括港澳台）。
+      */
     MainlandOrOversea?: string;
 }
 /**
@@ -933,36 +933,36 @@ export interface DescribePlayErrorCodeDetailInfoListRequest {
  */
 export interface DescribeBillBandwidthAndFluxListRequest {
     /**
-     * 起始时间点，格式为yyyy-mm-dd HH:MM:SS。
-     */
+      * 起始时间点，格式为yyyy-mm-dd HH:MM:SS。
+      */
     StartTime: string;
     /**
-     * 结束时间点，格式为yyyy-mm-dd HH:MM:SS，起始和结束时间跨度不支持超过31天。支持最近3年的数据查询
-     */
+      * 结束时间点，格式为yyyy-mm-dd HH:MM:SS，起始和结束时间跨度不支持超过31天。支持最近3年的数据查询
+      */
     EndTime: string;
     /**
-     * 直播播放域名，若不填，表示总体数据。
-     */
+      * 直播播放域名，若不填，表示总体数据。
+      */
     PlayDomains?: Array<string>;
     /**
-        * 可选值：
-  Mainland：查询国内数据，
-  Oversea：则查询国外数据，
-  默认：查询国内+国外的数据。
-  注：LEB（快直播）只支持国内+国外数据查询。
-        */
+      * 可选值：
+Mainland：查询国内数据，
+Oversea：则查询国外数据，
+默认：查询国内+国外的数据。
+注：LEB（快直播）只支持国内+国外数据查询。
+      */
     MainlandOrOversea?: string;
     /**
-        * 数据粒度，支持如下粒度：
-  5：5分钟粒度，（跨度不支持超过1天），
-  60：1小时粒度（跨度不支持超过一个月），
-  1440：天粒度（跨度不支持超过一个月）。
-  默认值：5。
-        */
+      * 数据粒度，支持如下粒度：
+5：5分钟粒度，（跨度不支持超过1天），
+60：1小时粒度（跨度不支持超过一个月），
+1440：天粒度（跨度不支持超过一个月）。
+默认值：5。
+      */
     Granularity?: number;
     /**
-     * 服务名称，可选值包括LVB(标准直播)，LEB(快直播)，默认值是LVB。
-     */
+      * 服务名称，可选值包括LVB(标准直播)，LEB(快直播)，默认值是LVB。
+      */
     ServiceName?: string;
 }
 /**
@@ -970,50 +970,50 @@ export interface DescribeBillBandwidthAndFluxListRequest {
  */
 export interface CommonMixOutputParams {
     /**
-     * 输出流名称。
-     */
+      * 输出流名称。
+      */
     OutputStreamName: string;
     /**
-        * 输出流类型，取值范围[0,1]。
-  不填默认为0。
-  当输出流为输入流 list 中的一条时，填写0。
-  当期望生成的混流结果成为一条新流时，该值填为1。
-  该值为1时，output_stream_id 不能出现在 input_stram_list 中，且直播后台中，不能存在相同 ID 的流。
-        */
+      * 输出流类型，取值范围[0,1]。
+不填默认为0。
+当输出流为输入流 list 中的一条时，填写0。
+当期望生成的混流结果成为一条新流时，该值填为1。
+该值为1时，output_stream_id 不能出现在 input_stram_list 中，且直播后台中，不能存在相同 ID 的流。
+      */
     OutputStreamType?: number;
     /**
-        * 输出流比特率。取值范围[1，50000]。
-  不填的情况下，系统会自动判断。
-        */
+      * 输出流比特率。取值范围[1，50000]。
+不填的情况下，系统会自动判断。
+      */
     OutputStreamBitRate?: number;
     /**
-        * 输出流GOP大小。取值范围[1,10]。
-  不填的情况下，系统会自动判断。
-        */
+      * 输出流GOP大小。取值范围[1,10]。
+不填的情况下，系统会自动判断。
+      */
     OutputStreamGop?: number;
     /**
-        * 输出流帧率大小。取值范围[1,60]。
-  不填的情况下，系统会自动判断。
-        */
+      * 输出流帧率大小。取值范围[1,60]。
+不填的情况下，系统会自动判断。
+      */
     OutputStreamFrameRate?: number;
     /**
-        * 输出流音频比特率。取值范围[1,500]
-  不填的情况下，系统会自动判断。
-        */
+      * 输出流音频比特率。取值范围[1,500]
+不填的情况下，系统会自动判断。
+      */
     OutputAudioBitRate?: number;
     /**
-        * 输出流音频采样率。取值范围[96000, 88200, 64000, 48000, 44100, 32000,24000, 22050, 16000, 12000, 11025, 8000]。
-  不填的情况下，系统会自动判断。
-        */
+      * 输出流音频采样率。取值范围[96000, 88200, 64000, 48000, 44100, 32000,24000, 22050, 16000, 12000, 11025, 8000]。
+不填的情况下，系统会自动判断。
+      */
     OutputAudioSampleRate?: number;
     /**
-        * 输出流音频声道数。取值范围[1,2]。
-  不填的情况下，系统会自动判断。
-        */
+      * 输出流音频声道数。取值范围[1,2]。
+不填的情况下，系统会自动判断。
+      */
     OutputAudioChannels?: number;
     /**
-     * 输出流中的sei信息。如果无特殊需要，不填。
-     */
+      * 输出流中的sei信息。如果无特殊需要，不填。
+      */
     MixSei?: string;
 }
 /**
@@ -1021,12 +1021,12 @@ export interface CommonMixOutputParams {
  */
 export interface DescribeLiveSnapshotRulesResponse {
     /**
-     * 规则列表。
-     */
+      * 规则列表。
+      */
     Rules?: Array<RuleInfo>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1034,28 +1034,28 @@ export interface DescribeLiveSnapshotRulesResponse {
  */
 export interface DescribeLiveTranscodeDetailInfoResponse {
     /**
-     * 统计数据列表。
-     */
+      * 统计数据列表。
+      */
     DataInfoList?: Array<TranscodeDetailInfo>;
     /**
-     * 页码。
-     */
+      * 页码。
+      */
     PageNum?: number;
     /**
-     * 每页个数。
-     */
+      * 每页个数。
+      */
     PageSize?: number;
     /**
-     * 总个数。
-     */
+      * 总个数。
+      */
     TotalNum?: number;
     /**
-     * 总页数。
-     */
+      * 总页数。
+      */
     TotalPage?: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1063,8 +1063,8 @@ export interface DescribeLiveTranscodeDetailInfoResponse {
  */
 export interface DescribeLiveDomainRequest {
     /**
-     * 域名。
-     */
+      * 域名。
+      */
     DomainName: string;
 }
 /**
@@ -1072,41 +1072,41 @@ export interface DescribeLiveDomainRequest {
  */
 export interface DescribeLiveStreamPublishedListRequest {
     /**
-     * 您的推流域名。
-     */
+      * 您的推流域名。
+      */
     DomainName: string;
     /**
-        * 结束时间。
-  UTC 格式，例如：2016-06-30T19:00:00Z。
-  不超过当前时间。
-  注意：EndTime和StartTime相差不可超过30天。
-        */
+      * 结束时间。
+UTC 格式，例如：2016-06-30T19:00:00Z。
+不超过当前时间。
+注意：EndTime和StartTime相差不可超过30天。
+      */
     EndTime: string;
     /**
-        * 起始时间。
-  UTC 格式，例如：2016-06-29T19:00:00Z。
-  最长支持查询60天内数据。
-        */
+      * 起始时间。
+UTC 格式，例如：2016-06-29T19:00:00Z。
+最长支持查询60天内数据。
+      */
     StartTime: string;
     /**
-     * 推流路径，与推流和播放地址中的 AppName 保持一致，默认为 live。不支持模糊匹配。
-     */
+      * 推流路径，与推流和播放地址中的 AppName 保持一致，默认为 live。不支持模糊匹配。
+      */
     AppName?: string;
     /**
-        * 取得第几页。
-  默认值：1。
-        */
+      * 取得第几页。
+默认值：1。
+      */
     PageNum?: number;
     /**
-        * 分页大小。
-  最大值：100。
-  取值范围：1~100 之前的任意整数。
-  默认值：10。
-        */
+      * 分页大小。
+最大值：100。
+取值范围：1~100 之前的任意整数。
+默认值：10。
+      */
     PageSize?: number;
     /**
-     * 流名称，支持模糊匹配。
-     */
+      * 流名称，支持模糊匹配。
+      */
     StreamName?: string;
 }
 /**
@@ -1114,20 +1114,20 @@ export interface DescribeLiveStreamPublishedListRequest {
  */
 export interface DeleteLiveTranscodeRuleRequest {
     /**
-     * 播放域名。
-     */
+      * 播放域名。
+      */
     DomainName: string;
     /**
-     * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
-     */
+      * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
+      */
     AppName: string;
     /**
-     * 流名称。
-     */
+      * 流名称。
+      */
     StreamName: string;
     /**
-     * 模板ID。
-     */
+      * 模板ID。
+      */
     TemplateId: number;
 }
 /**
@@ -1135,21 +1135,21 @@ export interface DeleteLiveTranscodeRuleRequest {
  */
 export interface CreateLiveRecordRuleRequest {
     /**
-     * 推流域名。
-     */
+      * 推流域名。
+      */
     DomainName: string;
     /**
-     * 模板 ID。
-     */
+      * 模板 ID。
+      */
     TemplateId: number;
     /**
-     * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
-     */
+      * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
+      */
     AppName?: string;
     /**
-        * 流名称。
-  注：如果本参数设置为非空字符串，规则将只对此推流起作用。
-        */
+      * 流名称。
+注：如果本参数设置为非空字符串，规则将只对此推流起作用。
+      */
     StreamName?: string;
 }
 /**
@@ -1161,12 +1161,12 @@ export declare type DescribeLiveSnapshotTemplatesRequest = null;
  */
 export interface AddLiveWatermarkResponse {
     /**
-     * 水印ID。
-     */
+      * 水印ID。
+      */
     WatermarkId?: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1174,28 +1174,28 @@ export interface AddLiveWatermarkResponse {
  */
 export interface DescribeLiveStreamPushInfoListResponse {
     /**
-     * 直播流的统计信息列表。
-     */
+      * 直播流的统计信息列表。
+      */
     DataInfoList?: Array<PushDataInfo>;
     /**
-     * 所有在线流的总数量。
-     */
+      * 所有在线流的总数量。
+      */
     TotalNum?: number;
     /**
-     * 总页数。
-     */
+      * 总页数。
+      */
     TotalPage?: number;
     /**
-     * 当前数据所在页码。
-     */
+      * 当前数据所在页码。
+      */
     PageNum?: number;
     /**
-     * 每页的在线流的个数。
-     */
+      * 每页的在线流的个数。
+      */
     PageSize?: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1203,12 +1203,12 @@ export interface DescribeLiveStreamPushInfoListResponse {
  */
 export interface DescribeLiveDomainCertResponse {
     /**
-     * 证书信息。
-     */
+      * 证书信息。
+      */
     DomainCertInfo?: DomainCertInfo;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1216,8 +1216,8 @@ export interface DescribeLiveDomainCertResponse {
  */
 export interface DescribeLiveRecordTemplateRequest {
     /**
-     * [DescribeLiveRecordTemplates](/document/product/267/32609)接口获取到的模板 ID。
-     */
+      * [DescribeLiveRecordTemplates](/document/product/267/32609)接口获取到的模板 ID。
+      */
     TemplateId: number;
 }
 /**
@@ -1225,16 +1225,16 @@ export interface DescribeLiveRecordTemplateRequest {
  */
 export interface ModifyLiveDomainCertRequest {
     /**
-     * 播放域名。
-     */
+      * 播放域名。
+      */
     DomainName: string;
     /**
-     * 证书Id。
-     */
+      * 证书Id。
+      */
     CertId?: number;
     /**
-     * 状态，0：关闭  1：打开。
-     */
+      * 状态，0：关闭  1：打开。
+      */
     Status?: number;
 }
 /**
@@ -1242,20 +1242,20 @@ export interface ModifyLiveDomainCertRequest {
  */
 export interface StreamOnlineInfo {
     /**
-     * 流名称。
-     */
+      * 流名称。
+      */
     StreamName: string;
     /**
-     * 推流时间列表
-     */
+      * 推流时间列表
+      */
     PublishTimeList: Array<PublishTime>;
     /**
-     * 应用名称。
-     */
+      * 应用名称。
+      */
     AppName: string;
     /**
-     * 推流域名。
-     */
+      * 推流域名。
+      */
     DomainName: string;
 }
 /**
@@ -1263,8 +1263,8 @@ export interface StreamOnlineInfo {
  */
 export interface CreateLiveWatermarkRuleResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1272,39 +1272,39 @@ export interface CreateLiveWatermarkRuleResponse {
  */
 export interface DescribeProIspPlaySumInfoListRequest {
     /**
-        * 起始时间，北京时间，
-  格式：yyyy-mm-dd HH:MM:SS。
-        */
+      * 起始时间，北京时间，
+格式：yyyy-mm-dd HH:MM:SS。
+      */
     StartTime: string;
     /**
-        * 结束时间，北京时间，
-  格式：yyyy-mm-dd HH:MM:SS。
-  注：EndTime 和 StartTime 只支持最近1天的数据查询。
-        */
+      * 结束时间，北京时间，
+格式：yyyy-mm-dd HH:MM:SS。
+注：EndTime 和 StartTime 只支持最近1天的数据查询。
+      */
     EndTime: string;
     /**
-     * 统计的类型，可选值：”Province”(省份)，”Isp”(运营商)，“CountryOrArea”(国家或地区)。
-     */
+      * 统计的类型，可选值：”Province”(省份)，”Isp”(运营商)，“CountryOrArea”(国家或地区)。
+      */
     StatType: string;
     /**
-     * 播放域名列表，不填则为全部。
-     */
+      * 播放域名列表，不填则为全部。
+      */
     PlayDomains?: Array<string>;
     /**
-     * 页号，范围是[1,1000]，默认值是1。
-     */
+      * 页号，范围是[1,1000]，默认值是1。
+      */
     PageNum?: number;
     /**
-     * 每页个数，范围是[1,1000]，默认值是20。
-     */
+      * 每页个数，范围是[1,1000]，默认值是20。
+      */
     PageSize?: number;
     /**
-     * 地域，可选值：Mainland，Oversea，China，Foreign，Global（默认值）；如果为空，查询总的数据；如果为“Mainland”，查询中国大陆的数据；如果为“Oversea”，则查询中国大陆以外的数据；如果为China，查询中国的数据（包括港澳台）；如果为Foreign，查询国外的数据（不包括港澳台）。
-     */
+      * 地域，可选值：Mainland，Oversea，China，Foreign，Global（默认值）；如果为空，查询总的数据；如果为“Mainland”，查询中国大陆的数据；如果为“Oversea”，则查询中国大陆以外的数据；如果为China，查询中国的数据（包括港澳台）；如果为Foreign，查询国外的数据（不包括港澳台）。
+      */
     MainlandOrOversea?: string;
     /**
-     * 输出字段使用的语言，可选值：Chinese（默认值），English；目前国家，省份和运营商支持多语言。
-     */
+      * 输出字段使用的语言，可选值：Chinese（默认值），English；目前国家，省份和运营商支持多语言。
+      */
     OutLanguage?: string;
 }
 /**
@@ -1312,12 +1312,12 @@ export interface DescribeProIspPlaySumInfoListRequest {
  */
 export interface DescribeDeliverBandwidthListRequest {
     /**
-     * 起始时间，格式为%Y-%m-%d %H:%M:%S。
-     */
+      * 起始时间，格式为%Y-%m-%d %H:%M:%S。
+      */
     StartTime: string;
     /**
-     * 结束时间，格式为%Y-%m-%d %H:%M:%S，支持最近三个月的数据查询，时间跨度最大是1个月。
-     */
+      * 结束时间，格式为%Y-%m-%d %H:%M:%S，支持最近三个月的数据查询，时间跨度最大是1个月。
+      */
     EndTime: string;
 }
 /**
@@ -1325,13 +1325,13 @@ export interface DescribeDeliverBandwidthListRequest {
  */
 export interface PlayCodeTotalInfo {
     /**
-        * HTTP code，可选值包括:
-  400，403，404，500，502，503，504。
-        */
+      * HTTP code，可选值包括:
+400，403，404，500，502，503，504。
+      */
     Code: string;
     /**
-     * 总次数。
-     */
+      * 总次数。
+      */
     Num: number;
 }
 /**
@@ -1339,29 +1339,29 @@ export interface PlayCodeTotalInfo {
  */
 export interface AddLiveWatermarkRequest {
     /**
-     * 水印图片 URL。
-     */
+      * 水印图片 URL。
+      */
     PictureUrl: string;
     /**
-        * 水印名称。
-  最长16字节。
-        */
+      * 水印名称。
+最长16字节。
+      */
     WatermarkName: string;
     /**
-     * 显示位置，X轴偏移，单位是百分比，默认 0。
-     */
+      * 显示位置，X轴偏移，单位是百分比，默认 0。
+      */
     XPosition?: number;
     /**
-     * 显示位置，Y轴偏移，单位是百分比，默认 0。
-     */
+      * 显示位置，Y轴偏移，单位是百分比，默认 0。
+      */
     YPosition?: number;
     /**
-     * 水印宽度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始宽度。
-     */
+      * 水印宽度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始宽度。
+      */
     Width?: number;
     /**
-     * 水印高度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始高度。
-     */
+      * 水印高度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始高度。
+      */
     Height?: number;
 }
 /**
@@ -1369,8 +1369,8 @@ export interface AddLiveWatermarkRequest {
  */
 export interface ModifyLiveTranscodeTemplateResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1378,12 +1378,12 @@ export interface ModifyLiveTranscodeTemplateResponse {
  */
 export interface BillCountryInfo {
     /**
-     * 国家名称
-     */
+      * 国家名称
+      */
     Name: string;
     /**
-     * 带宽明细数据信息。
-     */
+      * 带宽明细数据信息。
+      */
     BandInfoList: Array<BillDataInfo>;
 }
 /**
@@ -1391,8 +1391,8 @@ export interface BillCountryInfo {
  */
 export interface ModifyLiveRecordTemplateResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1400,12 +1400,12 @@ export interface ModifyLiveRecordTemplateResponse {
  */
 export interface ModifyLivePlayDomainRequest {
     /**
-     * 播放域名。
-     */
+      * 播放域名。
+      */
     DomainName: string;
     /**
-     * 拉流域名类型。1-国内；2-全球；3-境外
-     */
+      * 拉流域名类型。1-国内；2-全球；3-境外
+      */
     PlayType: number;
 }
 /**
@@ -1413,8 +1413,8 @@ export interface ModifyLivePlayDomainRequest {
  */
 export interface DeleteLiveRecordTemplateResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1422,8 +1422,8 @@ export interface DeleteLiveRecordTemplateResponse {
  */
 export interface DescribeLiveWatermarkRequest {
     /**
-     * DescribeLiveWatermarks接口返回的水印 ID。
-     */
+      * DescribeLiveWatermarks接口返回的水印 ID。
+      */
     WatermarkId: number;
 }
 /**
@@ -1431,20 +1431,20 @@ export interface DescribeLiveWatermarkRequest {
  */
 export interface LogInfo {
     /**
-     * 日志名称。
-     */
+      * 日志名称。
+      */
     LogName: string;
     /**
-     * 日志 URL。
-     */
+      * 日志 URL。
+      */
     LogUrl: string;
     /**
-     * 日志生成时间。
-     */
+      * 日志生成时间。
+      */
     LogTime: string;
     /**
-     * 文件大小。
-     */
+      * 文件大小。
+      */
     FileSize: number;
 }
 /**
@@ -1452,70 +1452,70 @@ export interface LogInfo {
  */
 export interface CommonMixLayoutParams {
     /**
-        * 输入图层。取值范围[1，16]。
-  1)背景流（即大主播画面或画布）的 image_layer 填1。
-  2)纯音频混流，该参数也需填。
-        */
+      * 输入图层。取值范围[1，16]。
+1)背景流（即大主播画面或画布）的 image_layer 填1。
+2)纯音频混流，该参数也需填。
+      */
     ImageLayer: number;
     /**
-        * 输入类型。取值范围[0，5]。
-  不填默认为0。
-  0表示输入流为音视频。
-  2表示输入流为图片。
-  3表示输入流为画布。
-  4表示输入流为音频。
-  5表示输入流为纯视频。
-        */
+      * 输入类型。取值范围[0，5]。
+不填默认为0。
+0表示输入流为音视频。
+2表示输入流为图片。
+3表示输入流为画布。
+4表示输入流为音频。
+5表示输入流为纯视频。
+      */
     InputType?: number;
     /**
-        * 输入画面在输出时的宽度。取值范围：
-  像素：[0，2000]
-  百分比：[0.01，0.99]
-  不填默认为输入流的宽度。
-  使用百分比时，期望输出为（百分比 * 背景宽）。
-        */
+      * 输入画面在输出时的宽度。取值范围：
+像素：[0，2000]
+百分比：[0.01，0.99]
+不填默认为输入流的宽度。
+使用百分比时，期望输出为（百分比 * 背景宽）。
+      */
     ImageWidth?: number;
     /**
-        * 输入画面在输出时的高度。取值范围：
-  像素：[0，2000]
-  百分比：[0.01，0.99]
-  不填默认为输入流的高度。
-  使用百分比时，期望输出为（百分比 * 背景高）。
-        */
+      * 输入画面在输出时的高度。取值范围：
+像素：[0，2000]
+百分比：[0.01，0.99]
+不填默认为输入流的高度。
+使用百分比时，期望输出为（百分比 * 背景高）。
+      */
     ImageHeight?: number;
     /**
-        * 输入在输出画面的X偏移。取值范围：
-  像素：[0，2000]
-  百分比：[0.01，0.99]
-  不填默认为0。
-  相对于大主播背景画面左上角的横向偏移。
-  使用百分比时，期望输出为（百分比 * 背景宽）。
-        */
+      * 输入在输出画面的X偏移。取值范围：
+像素：[0，2000]
+百分比：[0.01，0.99]
+不填默认为0。
+相对于大主播背景画面左上角的横向偏移。
+使用百分比时，期望输出为（百分比 * 背景宽）。
+      */
     LocationX?: number;
     /**
-        * 输入在输出画面的Y偏移。取值范围：
-  像素：[0，2000]
-  百分比：[0.01，0.99]
-  不填默认为0。
-  相对于大主播背景画面左上角的纵向偏移。
-  使用百分比时，期望输出为（百分比 * 背景宽）
-        */
+      * 输入在输出画面的Y偏移。取值范围：
+像素：[0，2000]
+百分比：[0.01，0.99]
+不填默认为0。
+相对于大主播背景画面左上角的纵向偏移。
+使用百分比时，期望输出为（百分比 * 背景宽）
+      */
     LocationY?: number;
     /**
-        * 当InputType为3(画布)时，该值表示画布的颜色。
-  常用的颜色有：
-  红色：0xcc0033。
-  黄色：0xcc9900。
-  绿色：0xcccc33。
-  蓝色：0x99CCFF。
-  黑色：0x000000。
-  白色：0xFFFFFF。
-  灰色：0x999999。
-        */
+      * 当InputType为3(画布)时，该值表示画布的颜色。
+常用的颜色有：
+红色：0xcc0033。
+黄色：0xcc9900。
+绿色：0xcccc33。
+蓝色：0x99CCFF。
+黑色：0x000000。
+白色：0xFFFFFF。
+灰色：0x999999。
+      */
     Color?: string;
     /**
-     * 当InputType为2(图片)时，该值是水印ID。
-     */
+      * 当InputType为2(图片)时，该值是水印ID。
+      */
     WatermarkId?: number;
 }
 /**
@@ -1523,8 +1523,8 @@ export interface CommonMixLayoutParams {
  */
 export interface DescribeLiveDomainCertRequest {
     /**
-     * 播放域名。
-     */
+      * 播放域名。
+      */
     DomainName: string;
 }
 /**
@@ -1532,62 +1532,62 @@ export interface DescribeLiveDomainCertRequest {
  */
 export interface DescribeLiveStreamEventListRequest {
     /**
-        * 起始时间。
-  UTC 格式，例如：2018-12-29T19:00:00Z。
-  支持查询60天内的历史记录。
-        */
+      * 起始时间。
+UTC 格式，例如：2018-12-29T19:00:00Z。
+支持查询60天内的历史记录。
+      */
     StartTime: string;
     /**
-        * 结束时间。
-  UTC 格式，例如：2018-12-29T20:00:00Z。
-  不超过当前时间，且和起始时间相差不得超过30天。
-        */
+      * 结束时间。
+UTC 格式，例如：2018-12-29T20:00:00Z。
+不超过当前时间，且和起始时间相差不得超过30天。
+      */
     EndTime: string;
     /**
-     * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
-     */
+      * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
+      */
     AppName?: string;
     /**
-     * 推流域名。
-     */
+      * 推流域名。
+      */
     DomainName?: string;
     /**
-        * 流名称，不支持通配符（*）查询，默认模糊匹配。
-  可使用IsStrict字段改为精确查询。
-        */
+      * 流名称，不支持通配符（*）查询，默认模糊匹配。
+可使用IsStrict字段改为精确查询。
+      */
     StreamName?: string;
     /**
-        * 取得第几页。
-  默认值：1。
-  注： 目前只支持10000条内的查询。
-        */
+      * 取得第几页。
+默认值：1。
+注： 目前只支持10000条内的查询。
+      */
     PageNum?: number;
     /**
-        * 分页大小。
-  最大值：100。
-  取值范围：1~100 之间的任意整数。
-  默认值：10。
-  注： 目前只支持10000条内的查询。
-        */
+      * 分页大小。
+最大值：100。
+取值范围：1~100 之间的任意整数。
+默认值：10。
+注： 目前只支持10000条内的查询。
+      */
     PageSize?: number;
     /**
-        * 是否过滤，默认不过滤。
-  0：不进行任何过滤。
-  1：过滤掉开播失败的，只返回开播成功的。
-        */
+      * 是否过滤，默认不过滤。
+0：不进行任何过滤。
+1：过滤掉开播失败的，只返回开播成功的。
+      */
     IsFilter?: number;
     /**
-        * 是否精确查询，默认模糊匹配。
-  0：模糊匹配。
-  1：精确查询。
-  注：使用StreamName时该参数生效。
-        */
+      * 是否精确查询，默认模糊匹配。
+0：模糊匹配。
+1：精确查询。
+注：使用StreamName时该参数生效。
+      */
     IsStrict?: number;
     /**
-        * 是否按结束时间正序显示，默认逆序。
-  0：逆序。
-  1：正序。
-        */
+      * 是否按结束时间正序显示，默认逆序。
+0：逆序。
+1：正序。
+      */
     IsAsc?: number;
 }
 /**
@@ -1595,9 +1595,9 @@ export interface DescribeLiveStreamEventListRequest {
  */
 export interface DescribePullStreamConfigsRequest {
     /**
-        * 配置 ID。
-  获取途径：从 CreatePullStreamConfig 接口返回值获取。
-        */
+      * 配置 ID。
+获取途径：从 CreatePullStreamConfig 接口返回值获取。
+      */
     ConfigId?: string;
 }
 /**
@@ -1605,44 +1605,44 @@ export interface DescribePullStreamConfigsRequest {
  */
 export interface CallBackTemplateInfo {
     /**
-     * 模板 ID。
-     */
+      * 模板 ID。
+      */
     TemplateId: number;
     /**
-     * 模板名称。
-     */
+      * 模板名称。
+      */
     TemplateName: string;
     /**
-     * 描述信息。
-     */
+      * 描述信息。
+      */
     Description: string;
     /**
-     * 开播回调 URL。
-     */
+      * 开播回调 URL。
+      */
     StreamBeginNotifyUrl: string;
     /**
-     * 断流回调 URL。
-     */
+      * 断流回调 URL。
+      */
     StreamEndNotifyUrl: string;
     /**
-     * 混流回调 URL。
-     */
+      * 混流回调 URL。
+      */
     StreamMixNotifyUrl: string;
     /**
-     * 录制回调 URL。
-     */
+      * 录制回调 URL。
+      */
     RecordNotifyUrl: string;
     /**
-     * 截图回调 URL。
-     */
+      * 截图回调 URL。
+      */
     SnapshotNotifyUrl: string;
     /**
-     * 鉴黄回调 URL。
-     */
+      * 鉴黄回调 URL。
+      */
     PornCensorshipNotifyUrl: string;
     /**
-     * 回调的鉴权 key。
-     */
+      * 回调的鉴权 key。
+      */
     CallbackKey: string;
 }
 /**
@@ -1650,52 +1650,52 @@ export interface CallBackTemplateInfo {
  */
 export interface DescribePlayErrorCodeSumInfoListResponse {
     /**
-     * 分省份分运营商错误码为4或5开头的状态码数据信息。
-     */
+      * 分省份分运营商错误码为4或5开头的状态码数据信息。
+      */
     ProIspInfoList?: Array<ProIspPlayCodeDataInfo>;
     /**
-     * 所有状态码的加和的次数。
-     */
+      * 所有状态码的加和的次数。
+      */
     TotalCodeAll?: number;
     /**
-     * 状态码为4开头的总次数。
-     */
+      * 状态码为4开头的总次数。
+      */
     TotalCode4xx?: number;
     /**
-     * 状态码为5开头的总次数。
-     */
+      * 状态码为5开头的总次数。
+      */
     TotalCode5xx?: number;
     /**
-     * 各状态码的总次数。
-     */
+      * 各状态码的总次数。
+      */
     TotalCodeList?: Array<PlayCodeTotalInfo>;
     /**
-     * 页号。
-     */
+      * 页号。
+      */
     PageNum?: number;
     /**
-     * 每页大小。
-     */
+      * 每页大小。
+      */
     PageSize?: number;
     /**
-     * 总页数。
-     */
+      * 总页数。
+      */
     TotalPage?: number;
     /**
-     * 总记录数。
-     */
+      * 总记录数。
+      */
     TotalNum?: number;
     /**
-     * 状态码为2开头的总次数。
-     */
+      * 状态码为2开头的总次数。
+      */
     TotalCode2xx?: number;
     /**
-     * 状态码为3开头的总次数。
-     */
+      * 状态码为3开头的总次数。
+      */
     TotalCode3xx?: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1703,8 +1703,8 @@ export interface DescribePlayErrorCodeSumInfoListResponse {
  */
 export interface UnBindLiveDomainCertRequest {
     /**
-     * 播放域名。
-     */
+      * 播放域名。
+      */
     DomainName: string;
 }
 /**
@@ -1712,8 +1712,8 @@ export interface UnBindLiveDomainCertRequest {
  */
 export interface DeleteLiveRecordResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1721,24 +1721,24 @@ export interface DeleteLiveRecordResponse {
  */
 export interface DescribeScreenShotSheetNumListRequest {
     /**
-     * utc起始时间，格式为yyyy-mm-ddTHH:MM:SSZ
-     */
+      * utc起始时间，格式为yyyy-mm-ddTHH:MM:SSZ
+      */
     StartTime: string;
     /**
-     * utc结束时间，格式为yyyy-mm-ddTHH:MM:SSZ，支持查询最近1年数据。
-     */
+      * utc结束时间，格式为yyyy-mm-ddTHH:MM:SSZ，支持查询最近1年数据。
+      */
     EndTime: string;
     /**
-     * 地域信息，可选值包括Mainland，Oversea，前者是查询中国大陆范围内的数据，后者是除中国大陆范围之外的数据，若不传该参数，则查询所有地区的数据。
-     */
+      * 地域信息，可选值包括Mainland，Oversea，前者是查询中国大陆范围内的数据，后者是除中国大陆范围之外的数据，若不传该参数，则查询所有地区的数据。
+      */
     Zone?: string;
     /**
-     * 推流域名（支持查询2019年11 月1日之后的域名维度数据）。
-     */
+      * 推流域名（支持查询2019年11 月1日之后的域名维度数据）。
+      */
     PushDomains?: Array<string>;
     /**
-     * 数据维度，数据延迟1个半小时，可选值包括：1、Minute（5分钟粒度，最大支持查询时间范围是31天），2、Day（天粒度，默认值，最大支持查询时间范围是186天当天）。
-     */
+      * 数据维度，数据延迟1个半小时，可选值包括：1、Minute（5分钟粒度，最大支持查询时间范围是31天），2、Day（天粒度，默认值，最大支持查询时间范围是186天当天）。
+      */
     Granularity?: string;
 }
 /**
@@ -1746,29 +1746,29 @@ export interface DescribeScreenShotSheetNumListRequest {
  */
 export interface ForbidLiveStreamRequest {
     /**
-     * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
-     */
+      * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
+      */
     AppName: string;
     /**
-     * 您的推流域名。
-     */
+      * 您的推流域名。
+      */
     DomainName: string;
     /**
-     * 流名称。
-     */
+      * 流名称。
+      */
     StreamName: string;
     /**
-        * 恢复流的时间。UTC 格式，例如：2018-11-29T19:00:00Z。
-  注意：
-  1. 默认禁播7天，且最长支持禁播90天。
-  2. 北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
-        */
+      * 恢复流的时间。UTC 格式，例如：2018-11-29T19:00:00Z。
+注意：
+1. 默认禁播7天，且最长支持禁播90天。
+2. 北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
     ResumeTime?: string;
     /**
-        * 禁推原因。
-  注明：请务必填写禁推原因，防止误操作。
-  长度限制：2048字节。
-        */
+      * 禁推原因。
+注明：请务必填写禁推原因，防止误操作。
+长度限制：2048字节。
+      */
     Reason?: string;
 }
 /**
@@ -1776,16 +1776,16 @@ export interface ForbidLiveStreamRequest {
  */
 export interface DescribeLiveDomainsResponse {
     /**
-     * 总记录数。
-     */
+      * 总记录数。
+      */
     AllCount?: number;
     /**
-     * 域名详细信息列表。
-     */
+      * 域名详细信息列表。
+      */
     DomainList?: Array<DomainInfo>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1793,12 +1793,12 @@ export interface DescribeLiveDomainsResponse {
  */
 export interface TimeValue {
     /**
-     * UTC 时间，时间格式：yyyy-mm-ddTHH:MM:SSZ。
-     */
+      * UTC 时间，时间格式：yyyy-mm-ddTHH:MM:SSZ。
+      */
     Time: string;
     /**
-     * 数值。
-     */
+      * 数值。
+      */
     Num: number;
 }
 /**
@@ -1806,46 +1806,46 @@ export interface TimeValue {
  */
 export interface PullStreamConfig {
     /**
-     * 拉流配置 ID。
-     */
+      * 拉流配置 ID。
+      */
     ConfigId: string;
     /**
-     * 源 URL。
-     */
+      * 源 URL。
+      */
     FromUrl: string;
     /**
-     * 目的 URL。
-     */
+      * 目的 URL。
+      */
     ToUrl: string;
     /**
-     * 区域名。
-     */
+      * 区域名。
+      */
     AreaName: string;
     /**
-     * 运营商名。
-     */
+      * 运营商名。
+      */
     IspName: string;
     /**
-        * 开始时间。
-  UTC格式时间，例如: 2019-01-08T10:00:00Z。
-  注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
-        */
+      * 开始时间。
+UTC格式时间，例如: 2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
     StartTime: string;
     /**
-        * 结束时间。
-  
-  UTC格式时间，例如：2019-01-08T10:00:00Z。
-  注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
-        */
+      * 结束时间。
+
+UTC格式时间，例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
     EndTime: string;
     /**
-        * 状态:
-  0: 无效。
-  1: 初始状态。
-  2: 正在运行。
-  3: 拉起失败。
-  4: 暂停。
-        */
+      * 状态:
+0: 无效。
+1: 初始状态。
+2: 正在运行。
+3: 拉起失败。
+4: 暂停。
+      */
     Status: string;
 }
 /**
@@ -1853,12 +1853,12 @@ export interface PullStreamConfig {
  */
 export interface CreateLiveRecordResponse {
     /**
-     * 任务 ID，全局唯一标识录制任务。
-     */
+      * 任务 ID，全局唯一标识录制任务。
+      */
     TaskId?: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1866,28 +1866,28 @@ export interface CreateLiveRecordResponse {
  */
 export interface RuleInfo {
     /**
-     * 规则创建时间。
-     */
+      * 规则创建时间。
+      */
     CreateTime: string;
     /**
-     * 规则更新时间。
-     */
+      * 规则更新时间。
+      */
     UpdateTime: string;
     /**
-     * 模板 ID。
-     */
+      * 模板 ID。
+      */
     TemplateId: number;
     /**
-     * 推流域名。
-     */
+      * 推流域名。
+      */
     DomainName: string;
     /**
-     * 推流路径。
-     */
+      * 推流路径。
+      */
     AppName: string;
     /**
-     * 流名称。
-     */
+      * 流名称。
+      */
     StreamName: string;
 }
 /**
@@ -1895,8 +1895,8 @@ export interface RuleInfo {
  */
 export interface UpdateLiveWatermarkResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1904,48 +1904,48 @@ export interface UpdateLiveWatermarkResponse {
  */
 export interface LivePackageInfo {
     /**
-     * 包 ID。
-     */
+      * 包 ID。
+      */
     Id: string;
     /**
-        * 总量。
-  注意：当为流量包时单位为字节。
-  当为转码包时单位为分钟。
-        */
+      * 总量。
+注意：当为流量包时单位为字节。
+当为转码包时单位为分钟。
+      */
     Total: number;
     /**
-        * 使用量。
-  注意：当为流量包时单位为字节。
-  当为转码包时单位为分钟。
-        */
+      * 使用量。
+注意：当为流量包时单位为字节。
+当为转码包时单位为分钟。
+      */
     Used: number;
     /**
-        * 剩余量。
-  注意：当为流量包时单位为字节。
-  当为转码包时单位为分钟。
-        */
+      * 剩余量。
+注意：当为流量包时单位为字节。
+当为转码包时单位为分钟。
+      */
     Left: number;
     /**
-     * 购买时间。
-     */
+      * 购买时间。
+      */
     BuyTime: string;
     /**
-     * 过期时间。
-     */
+      * 过期时间。
+      */
     ExpireTime: string;
     /**
-        * 包类型，可选值:
-  0: 流量包。
-  1: 普通转码包。
-  2: 极速高清包。
-        */
+      * 包类型，可选值:
+0: 流量包。
+1: 普通转码包。
+2: 极速高清包。
+      */
     Type: number;
     /**
-        * 包状态，可选值:
-  0: 未使用。
-  1: 使用中。
-  2: 已过期。
-        */
+      * 包状态，可选值:
+0: 未使用。
+1: 使用中。
+2: 已过期。
+      */
     Status: number;
 }
 /**
@@ -1953,12 +1953,12 @@ export interface LivePackageInfo {
  */
 export interface CreateLiveTranscodeTemplateResponse {
     /**
-     * 模板Id。
-     */
+      * 模板Id。
+      */
     TemplateId?: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1966,12 +1966,12 @@ export interface CreateLiveTranscodeTemplateResponse {
  */
 export interface BillAreaInfo {
     /**
-     * 大区名称
-     */
+      * 大区名称
+      */
     Name: string;
     /**
-     * 国家明细数据
-     */
+      * 国家明细数据
+      */
     Countrys: Array<BillCountryInfo>;
 }
 /**
@@ -1979,12 +1979,12 @@ export interface BillAreaInfo {
  */
 export interface PlayDataInfoByStream {
     /**
-     * 流名称。
-     */
+      * 流名称。
+      */
     StreamName: string;
     /**
-     * 总流量，单位: MB。
-     */
+      * 总流量，单位: MB。
+      */
     TotalFlux: number;
 }
 /**
@@ -1992,36 +1992,36 @@ export interface PlayDataInfoByStream {
  */
 export interface DescribeVisitTopSumInfoListRequest {
     /**
-     * 起始时间点，格式为yyyy-mm-dd HH:MM:SS。
-     */
+      * 起始时间点，格式为yyyy-mm-dd HH:MM:SS。
+      */
     StartTime: string;
     /**
-        * 结束时间点，格式为yyyy-mm-dd HH:MM:SS
-  时间跨度在(0,4小时]，支持最近1天数据查询。
-        */
+      * 结束时间点，格式为yyyy-mm-dd HH:MM:SS
+时间跨度在(0,4小时]，支持最近1天数据查询。
+      */
     EndTime: string;
     /**
-     * 峰值指标，可选值包括”Domain”，”StreamId”。
-     */
+      * 峰值指标，可选值包括”Domain”，”StreamId”。
+      */
     TopIndex: string;
     /**
-     * 播放域名，默认为不填，表示求总体数据。
-     */
+      * 播放域名，默认为不填，表示求总体数据。
+      */
     PlayDomains?: Array<string>;
     /**
-        * 页号，
-  范围是[1,1000]，
-  默认值是1。
-        */
+      * 页号，
+范围是[1,1000]，
+默认值是1。
+      */
     PageNum?: number;
     /**
-        * 每页个数，范围是[1,1000]，
-  默认值是20。
-        */
+      * 每页个数，范围是[1,1000]，
+默认值是20。
+      */
     PageSize?: number;
     /**
-     * 排序指标，可选值包括” AvgFluxPerSecond”，”TotalRequest”（默认）,“TotalFlux”。
-     */
+      * 排序指标，可选值包括” AvgFluxPerSecond”，”TotalRequest”（默认）,“TotalFlux”。
+      */
     OrderParam?: string;
 }
 /**
@@ -2029,24 +2029,24 @@ export interface DescribeVisitTopSumInfoListRequest {
  */
 export interface DayStreamPlayInfo {
     /**
-     * 数据时间点，格式：yyyy-mm-dd HH:MM:SS。
-     */
+      * 数据时间点，格式：yyyy-mm-dd HH:MM:SS。
+      */
     Time: string;
     /**
-     * 带宽（单位Mbps）。
-     */
+      * 带宽（单位Mbps）。
+      */
     Bandwidth: number;
     /**
-     * 流量 （单位MB）。
-     */
+      * 流量 （单位MB）。
+      */
     Flux: number;
     /**
-     * 请求数。
-     */
+      * 请求数。
+      */
     Request: number;
     /**
-     * 在线人数。
-     */
+      * 在线人数。
+      */
     Online: number;
 }
 /**
@@ -2054,8 +2054,8 @@ export interface DayStreamPlayInfo {
  */
 export interface ModifyPullStreamStatusResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -2063,8 +2063,8 @@ export interface ModifyPullStreamStatusResponse {
  */
 export interface ModifyLivePlayDomainResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -2072,8 +2072,8 @@ export interface ModifyLivePlayDomainResponse {
  */
 export interface CancelCommonMixStreamResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -2081,12 +2081,12 @@ export interface CancelCommonMixStreamResponse {
  */
 export interface DescribeConcurrentRecordStreamNumResponse {
     /**
-     * 统计信息列表。
-     */
+      * 统计信息列表。
+      */
     DataInfoList?: Array<ConcurrentRecordStreamNum>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -2094,12 +2094,12 @@ export interface DescribeConcurrentRecordStreamNumResponse {
  */
 export interface DescribeLiveCertsResponse {
     /**
-     * 证书信息列表。
-     */
+      * 证书信息列表。
+      */
     CertInfoSet?: Array<CertInfo>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -2107,16 +2107,16 @@ export interface DescribeLiveCertsResponse {
  */
 export interface CommonMixInputParam {
     /**
-     * 输入流名称。80字节以内，仅含字母、数字以及下划线的字符串。
-     */
+      * 输入流名称。80字节以内，仅含字母、数字以及下划线的字符串。
+      */
     InputStreamName: string;
     /**
-     * 输入流布局参数。
-     */
+      * 输入流布局参数。
+      */
     LayoutParams: CommonMixLayoutParams;
     /**
-     * 输入流裁剪参数。
-     */
+      * 输入流裁剪参数。
+      */
     CropParams?: CommonMixCropParams;
 }
 /**
@@ -2124,16 +2124,16 @@ export interface CommonMixInputParam {
  */
 export interface DescribeProvinceIspPlayInfoListResponse {
     /**
-     * 播放信息列表。
-     */
+      * 播放信息列表。
+      */
     DataInfoList?: Array<PlayStatInfo>;
     /**
-     * 统计的类型，和输入参数保持一致。
-     */
+      * 统计的类型，和输入参数保持一致。
+      */
     StatType?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -2141,12 +2141,12 @@ export interface DescribeProvinceIspPlayInfoListResponse {
  */
 export interface DescribeLiveRecordTemplatesResponse {
     /**
-     * 录制模板信息列表。
-     */
+      * 录制模板信息列表。
+      */
     Templates?: Array<RecordTemplateInfo>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -2154,8 +2154,8 @@ export interface DescribeLiveRecordTemplatesResponse {
  */
 export interface DescribeLiveCertRequest {
     /**
-     * DescribeLiveCerts接口获取到的证书Id。
-     */
+      * DescribeLiveCerts接口获取到的证书Id。
+      */
     CertId: number;
 }
 /**
@@ -2163,12 +2163,12 @@ export interface DescribeLiveCertRequest {
  */
 export interface DescribeLiveCallbackTemplatesResponse {
     /**
-     * 模板信息列表。
-     */
+      * 模板信息列表。
+      */
     Templates?: Array<CallBackTemplateInfo>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -2176,8 +2176,8 @@ export interface DescribeLiveCallbackTemplatesResponse {
  */
 export interface ModifyLivePlayAuthKeyResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -2185,51 +2185,51 @@ export interface ModifyLivePlayAuthKeyResponse {
  */
 export interface CreateLiveCallbackTemplateRequest {
     /**
-        * 模板名称。
-  长度上限：255字节。
-  仅支持中文、英文、数字、_、-。
-        */
+      * 模板名称。
+长度上限：255字节。
+仅支持中文、英文、数字、_、-。
+      */
     TemplateName: string;
     /**
-        * 描述信息。
-  长度上限：1024字节。
-  仅支持中文、英文、数字、_、-。
-        */
+      * 描述信息。
+长度上限：1024字节。
+仅支持中文、英文、数字、_、-。
+      */
     Description?: string;
     /**
-        * 开播回调 URL，
-  相关协议文档：[事件消息通知](/document/product/267/32744)。
-        */
+      * 开播回调 URL，
+相关协议文档：[事件消息通知](/document/product/267/32744)。
+      */
     StreamBeginNotifyUrl?: string;
     /**
-        * 断流回调 URL，
-  相关协议文档：[事件消息通知](/document/product/267/32744)。
-        */
+      * 断流回调 URL，
+相关协议文档：[事件消息通知](/document/product/267/32744)。
+      */
     StreamEndNotifyUrl?: string;
     /**
-        * 录制回调 URL，
-  相关协议文档：[事件消息通知](/document/product/267/32744)。
-        */
+      * 录制回调 URL，
+相关协议文档：[事件消息通知](/document/product/267/32744)。
+      */
     RecordNotifyUrl?: string;
     /**
-        * 截图回调 URL，
-  相关协议文档：[事件消息通知](/document/product/267/32744)。
-        */
+      * 截图回调 URL，
+相关协议文档：[事件消息通知](/document/product/267/32744)。
+      */
     SnapshotNotifyUrl?: string;
     /**
-        * 鉴黄回调 URL，
-  相关协议文档：[事件消息通知](/document/product/267/32741)。
-        */
+      * 鉴黄回调 URL，
+相关协议文档：[事件消息通知](/document/product/267/32741)。
+      */
     PornCensorshipNotifyUrl?: string;
     /**
-        * 回调 Key，回调 URL 公用，回调签名详见事件消息通知文档。
-  [事件消息通知](/document/product/267/32744)。
-        */
+      * 回调 Key，回调 URL 公用，回调签名详见事件消息通知文档。
+[事件消息通知](/document/product/267/32744)。
+      */
     CallbackKey?: string;
     /**
-        * 混流回调 URL，
-  相关协议文档：[事件消息通知](/document/product/267/32744)。
-        */
+      * 混流回调 URL，
+相关协议文档：[事件消息通知](/document/product/267/32744)。
+      */
     StreamMixNotifyUrl?: string;
 }
 /**
@@ -2237,32 +2237,32 @@ export interface CreateLiveCallbackTemplateRequest {
  */
 export interface DescribeTopClientIpSumInfoListResponse {
     /**
-     * 页号，范围是[1,1000]，默认值是1。
-     */
+      * 页号，范围是[1,1000]，默认值是1。
+      */
     PageNum?: number;
     /**
-     * 每页个数，范围是[1,1000]，默认值是20。
-     */
+      * 每页个数，范围是[1,1000]，默认值是20。
+      */
     PageSize?: number;
     /**
-     * 排序指标，可选值包括”TotalRequest”，”FailedRequest”,“TotalFlux”。
-     */
+      * 排序指标，可选值包括”TotalRequest”，”FailedRequest”,“TotalFlux”。
+      */
     OrderParam?: string;
     /**
-     * 记录总数。
-     */
+      * 记录总数。
+      */
     TotalNum?: number;
     /**
-     * 记录总页数。
-     */
+      * 记录总页数。
+      */
     TotalPage?: number;
     /**
-     * 数据内容。
-     */
+      * 数据内容。
+      */
     DataInfoList?: Array<ClientIpPlaySumInfo>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -2270,8 +2270,8 @@ export interface DescribeTopClientIpSumInfoListResponse {
  */
 export interface DropLiveStreamResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -2279,15 +2279,15 @@ export interface DropLiveStreamResponse {
  */
 export interface DescribeLiveStreamStateResponse {
     /**
-        * 流状态，
-  active：活跃，
-  inactive：非活跃，
-  forbid：禁播。
-        */
+      * 流状态，
+active：活跃，
+inactive：非活跃，
+forbid：禁播。
+      */
     StreamState?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -2295,12 +2295,12 @@ export interface DescribeLiveStreamStateResponse {
  */
 export interface StopLiveRecordRequest {
     /**
-     * 流名称。
-     */
+      * 流名称。
+      */
     StreamName: string;
     /**
-     * 任务ID，由CreateLiveRecord接口返回。
-     */
+      * 任务ID，由CreateLiveRecord接口返回。
+      */
     TaskId: number;
 }
 /**
@@ -2308,8 +2308,8 @@ export interface StopLiveRecordRequest {
  */
 export interface DeletePullStreamConfigResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -2317,16 +2317,16 @@ export interface DeletePullStreamConfigResponse {
  */
 export interface DeleteLiveWatermarkRuleRequest {
     /**
-     * 推流域名。
-     */
+      * 推流域名。
+      */
     DomainName: string;
     /**
-     * 推流路径。与推流和播放地址中的 AppName 保持一致，默认为live。
-     */
+      * 推流路径。与推流和播放地址中的 AppName 保持一致，默认为live。
+      */
     AppName: string;
     /**
-     * 流名称。
-     */
+      * 流名称。
+      */
     StreamName: string;
 }
 /**
@@ -2334,42 +2334,42 @@ export interface DeleteLiveWatermarkRuleRequest {
  */
 export interface StreamEventInfo {
     /**
-     * 应用名称。
-     */
+      * 应用名称。
+      */
     AppName: string;
     /**
-     * 推流域名。
-     */
+      * 推流域名。
+      */
     DomainName: string;
     /**
-     * 流名称。
-     */
+      * 流名称。
+      */
     StreamName: string;
     /**
-        * 推流开始时间。
-  UTC 格式时间，例如：2019-01-07T12:00:00Z。
-        */
+      * 推流开始时间。
+UTC 格式时间，例如：2019-01-07T12:00:00Z。
+      */
     StreamStartTime: string;
     /**
-        * 推流结束时间。
-  UTC 格式时间，例如：2019-01-07T15:00:00Z。
-        */
+      * 推流结束时间。
+UTC 格式时间，例如：2019-01-07T15:00:00Z。
+      */
     StreamEndTime: string;
     /**
-     * 停止原因。
-     */
+      * 停止原因。
+      */
     StopReason: string;
     /**
-     * 推流持续时长，单位：秒。
-     */
+      * 推流持续时长，单位：秒。
+      */
     Duration: number;
     /**
-     * 主播 IP。
-     */
+      * 主播 IP。
+      */
     ClientIp: string;
     /**
-     * 分辨率。
-     */
+      * 分辨率。
+      */
     Resolution: string;
 }
 /**
@@ -2377,8 +2377,8 @@ export interface StreamEventInfo {
  */
 export interface DeleteRecordTaskResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -2390,13 +2390,13 @@ export declare type DescribeLiveWatermarksRequest = null;
  */
 export interface DescribeLivePackageInfoResponse {
     /**
-        * 套餐包信息。
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 套餐包信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     LivePackageInfoList?: Array<LivePackageInfo>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -2404,20 +2404,20 @@ export interface DescribeLivePackageInfoResponse {
  */
 export interface CreateLiveTranscodeRuleRequest {
     /**
-     * 播放域名。
-     */
+      * 播放域名。
+      */
     DomainName: string;
     /**
-     * 推流路径，与推流和播放地址中的AppName保持一致。如果只绑定域名，则此处填空。
-     */
+      * 推流路径，与推流和播放地址中的AppName保持一致。如果只绑定域名，则此处填空。
+      */
     AppName: string;
     /**
-     * 流名称。如果只绑定域名或路径，则此处填空。
-     */
+      * 流名称。如果只绑定域名或路径，则此处填空。
+      */
     StreamName: string;
     /**
-     * 指定已有的模板Id。
-     */
+      * 指定已有的模板Id。
+      */
     TemplateId: number;
 }
 /**
@@ -2429,16 +2429,16 @@ export declare type DescribeLiveWatermarkRulesRequest = null;
  */
 export interface DropLiveStreamRequest {
     /**
-     * 流名称。
-     */
+      * 流名称。
+      */
     StreamName: string;
     /**
-     * 您的推流域名。
-     */
+      * 您的推流域名。
+      */
     DomainName: string;
     /**
-     * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
-     */
+      * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
+      */
     AppName: string;
 }
 /**
@@ -2446,30 +2446,30 @@ export interface DropLiveStreamRequest {
  */
 export interface CreateCommonMixStreamRequest {
     /**
-     * 混流会话（申请混流开始到取消混流结束）标识 ID。
-     */
+      * 混流会话（申请混流开始到取消混流结束）标识 ID。
+      */
     MixStreamSessionId: string;
     /**
-     * 混流输入流列表。
-     */
+      * 混流输入流列表。
+      */
     InputStreamList: Array<CommonMixInputParam>;
     /**
-     * 混流输出流参数。
-     */
+      * 混流输出流参数。
+      */
     OutputParams: CommonMixOutputParams;
     /**
-        * 输入模板 ID，若设置该参数，将按默认模板布局输出，无需填入自定义位置参数。
-  不填默认为0。
-  两输入源支持10，20，30，40，50。
-  三输入源支持310，390，391。
-  四输入源支持410。
-  五输入源支持510，590。
-  六输入源支持610。
-        */
+      * 输入模板 ID，若设置该参数，将按默认模板布局输出，无需填入自定义位置参数。
+不填默认为0。
+两输入源支持10，20，30，40，50。
+三输入源支持310，390，391。
+四输入源支持410。
+五输入源支持510，590。
+六输入源支持610。
+      */
     MixStreamTemplateId?: number;
     /**
-     * 混流的特殊控制参数。如无特殊需求，无需填写。
-     */
+      * 混流的特殊控制参数。如无特殊需求，无需填写。
+      */
     ControlParams?: CommonMixControlParams;
 }
 /**
@@ -2477,12 +2477,12 @@ export interface CreateCommonMixStreamRequest {
  */
 export interface CreateLiveCertResponse {
     /**
-     * 证书ID
-     */
+      * 证书ID
+      */
     CertId?: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -2490,74 +2490,74 @@ export interface CreateLiveCertResponse {
  */
 export interface PushDataInfo {
     /**
-     * 流名称。
-     */
+      * 流名称。
+      */
     StreamName: string;
     /**
-     * 推流路径。
-     */
+      * 推流路径。
+      */
     AppName: string;
     /**
-     * 推流客户端 IP。
-     */
+      * 推流客户端 IP。
+      */
     ClientIp: string;
     /**
-     * 接流服务器 IP。
-     */
+      * 接流服务器 IP。
+      */
     ServerIp: string;
     /**
-     * 推流视频帧率，单位: Hz。
-     */
+      * 推流视频帧率，单位: Hz。
+      */
     VideoFps: number;
     /**
-     * 推流视频码率，单位: bps。
-     */
+      * 推流视频码率，单位: bps。
+      */
     VideoSpeed: number;
     /**
-     * 推流音频帧率，单位: Hz。
-     */
+      * 推流音频帧率，单位: Hz。
+      */
     AudioFps: number;
     /**
-     * 推流音频码率，单位: bps。
-     */
+      * 推流音频码率，单位: bps。
+      */
     AudioSpeed: number;
     /**
-     * 推流域名。
-     */
+      * 推流域名。
+      */
     PushDomain: string;
     /**
-     * 推流开始时间。
-     */
+      * 推流开始时间。
+      */
     BeginPushTime: string;
     /**
-        * 音频编码格式，
-  例："AAC"。
-        */
+      * 音频编码格式，
+例："AAC"。
+      */
     Acodec: string;
     /**
-        * 视频编码格式，
-  例："H264"。
-        */
+      * 视频编码格式，
+例："H264"。
+      */
     Vcodec: string;
     /**
-     * 分辨率。
-     */
+      * 分辨率。
+      */
     Resolution: string;
     /**
-     * 采样率。
-     */
+      * 采样率。
+      */
     AsampleRate: number;
     /**
-     * metadata 中的音频码率，单位: Kbps。
-     */
+      * metadata 中的音频码率，单位: Kbps。
+      */
     MetaAudioSpeed: number;
     /**
-     * metadata 中的视频码率，单位: Kbps。
-     */
+      * metadata 中的视频码率，单位: Kbps。
+      */
     MetaVideoSpeed: number;
     /**
-     * metadata 中的帧率。
-     */
+      * metadata 中的帧率。
+      */
     MetaFps: number;
 }
 /**
@@ -2565,27 +2565,27 @@ export interface PushDataInfo {
  */
 export interface AddDelayLiveStreamRequest {
     /**
-     * 推流路径，与推流和播放地址中的 AppName 保持一致，默认为 live。
-     */
+      * 推流路径，与推流和播放地址中的 AppName 保持一致，默认为 live。
+      */
     AppName: string;
     /**
-     * 推流域名。
-     */
+      * 推流域名。
+      */
     DomainName: string;
     /**
-     * 流名称。
-     */
+      * 流名称。
+      */
     StreamName: string;
     /**
-     * 延播时间，单位：秒，上限：600秒。
-     */
+      * 延播时间，单位：秒，上限：600秒。
+      */
     DelayTime: number;
     /**
-        * 延播设置的过期时间。UTC 格式，例如：2018-11-29T19:00:00Z。
-  注意：
-  1. 默认7天后过期，且最长支持7天内生效。
-  2. 北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
-        */
+      * 延播设置的过期时间。UTC 格式，例如：2018-11-29T19:00:00Z。
+注意：
+1. 默认7天后过期，且最长支持7天内生效。
+2. 北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
     ExpireTime?: string;
 }
 /**
@@ -2593,29 +2593,29 @@ export interface AddDelayLiveStreamRequest {
  */
 export interface DescribeGroupProIspPlayInfoListRequest {
     /**
-     * 起始时间点，格式为yyyy-mm-dd HH:MM:SS。
-     */
+      * 起始时间点，格式为yyyy-mm-dd HH:MM:SS。
+      */
     StartTime: string;
     /**
-        * 结束时间点，格式为yyyy-mm-dd HH:MM:SS
-  时间跨度在（0,3小时]，支持最近1个月数据查询。
-        */
+      * 结束时间点，格式为yyyy-mm-dd HH:MM:SS
+时间跨度在（0,3小时]，支持最近1个月数据查询。
+      */
     EndTime: string;
     /**
-     * 播放域名，默认为不填，表示求总体数据。
-     */
+      * 播放域名，默认为不填，表示求总体数据。
+      */
     PlayDomains?: Array<string>;
     /**
-     * 省份列表，默认不填，则返回各省份的数据。
-     */
+      * 省份列表，默认不填，则返回各省份的数据。
+      */
     ProvinceNames?: Array<string>;
     /**
-     * 运营商列表，默认不填，则返回整个运营商的数据。
-     */
+      * 运营商列表，默认不填，则返回整个运营商的数据。
+      */
     IspNames?: Array<string>;
     /**
-     * 国内还是国外，如果为空，查询所有地区数据；如果为“Mainland”，查询国内数据；如果为“Oversea”，则查询国外数据。
-     */
+      * 国内还是国外，如果为空，查询所有地区数据；如果为“Mainland”，查询国内数据；如果为“Oversea”，则查询国外数据。
+      */
     MainlandOrOversea?: string;
 }
 /**
@@ -2623,12 +2623,12 @@ export interface DescribeGroupProIspPlayInfoListRequest {
  */
 export interface ModifyPullStreamStatusRequest {
     /**
-     * 配置 ID 列表。
-     */
+      * 配置 ID 列表。
+      */
     ConfigIds: Array<string>;
     /**
-     * 目标状态。0无效，2正在运行，4暂停。
-     */
+      * 目标状态。0无效，2正在运行，4暂停。
+      */
     Status: string;
 }
 /**
@@ -2636,21 +2636,21 @@ export interface ModifyPullStreamStatusRequest {
  */
 export interface DescribeStreamDayPlayInfoListRequest {
     /**
-        * 日期，格式：YYYY-mm-dd。
-  第二天凌晨3点出昨天的数据，建议在这个时间点之后查询最新数据。支持最近3个月的数据查询。
-        */
+      * 日期，格式：YYYY-mm-dd。
+第二天凌晨3点出昨天的数据，建议在这个时间点之后查询最新数据。支持最近3个月的数据查询。
+      */
     DayTime: string;
     /**
-     * 播放域名。
-     */
+      * 播放域名。
+      */
     PlayDomain?: string;
     /**
-     * 页号，范围[1,1000]，默认值是1。
-     */
+      * 页号，范围[1,1000]，默认值是1。
+      */
     PageNum?: number;
     /**
-     * 每页个数，范围[100,1000]，默认值是1000。
-     */
+      * 每页个数，范围[100,1000]，默认值是1000。
+      */
     PageSize?: number;
 }
 /**
@@ -2658,46 +2658,46 @@ export interface DescribeStreamDayPlayInfoListRequest {
  */
 export interface TranscodeDetailInfo {
     /**
-     * 流名称。
-     */
+      * 流名称。
+      */
     StreamName: string;
     /**
-     * 开始时间（北京时间），格式：yyyy-mm-dd HH:MM。
-     */
+      * 开始时间（北京时间），格式：yyyy-mm-dd HH:MM。
+      */
     StartTime: string;
     /**
-     * 结束时间（北京时间），格式：yyyy-mm-dd HH:MM。
-     */
+      * 结束时间（北京时间），格式：yyyy-mm-dd HH:MM。
+      */
     EndTime: string;
     /**
-        * 转码时长，单位：分钟。
-  注意：因推流过程中可能有中断重推情况，此处时长为真实转码时长累加值，并非结束时间和开始时间的间隔。
-        */
+      * 转码时长，单位：分钟。
+注意：因推流过程中可能有中断重推情况，此处时长为真实转码时长累加值，并非结束时间和开始时间的间隔。
+      */
     Duration: number;
     /**
-        * 编码方式，带模块，
-  示例：
-  liveprocessor_H264：直播转码-H264，
-  liveprocessor_H265： 直播转码-H265，
-  topspeed_H264：极速高清-H264，
-  topspeed_H265：极速高清-H265。
-        */
+      * 编码方式，带模块，
+示例：
+liveprocessor_H264：直播转码-H264，
+liveprocessor_H265： 直播转码-H265，
+topspeed_H264：极速高清-H264，
+topspeed_H265：极速高清-H265。
+      */
     ModuleCodec: string;
     /**
-     * 码率。
-     */
+      * 码率。
+      */
     Bitrate: number;
     /**
-     * 类型，包含：转码（Transcode），混流（MixStream），水印（WaterMark）。
-     */
+      * 类型，包含：转码（Transcode），混流（MixStream），水印（WaterMark）。
+      */
     Type: string;
     /**
-     * 推流域名。
-     */
+      * 推流域名。
+      */
     PushDomain: string;
     /**
-     * 分辨率。
-     */
+      * 分辨率。
+      */
     Resolution: string;
 }
 /**
@@ -2705,12 +2705,12 @@ export interface TranscodeDetailInfo {
  */
 export interface DescribeLiveSnapshotTemplateResponse {
     /**
-     * 截图模板信息。
-     */
+      * 截图模板信息。
+      */
     Template?: SnapshotTemplateInfo;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -2718,12 +2718,12 @@ export interface DescribeLiveSnapshotTemplateResponse {
  */
 export interface DescribeLiveTranscodeRulesResponse {
     /**
-     * 转码规则列表。
-     */
+      * 转码规则列表。
+      */
     Rules?: Array<RuleInfo>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -2731,36 +2731,36 @@ export interface DescribeLiveTranscodeRulesResponse {
  */
 export interface AddLiveDomainRequest {
     /**
-     * 域名名称。
-     */
+      * 域名名称。
+      */
     DomainName: string;
     /**
-        * 域名类型，
-  0：推流域名，
-  1：播放域名。
-        */
+      * 域名类型，
+0：推流域名，
+1：播放域名。
+      */
     DomainType: number;
     /**
-        * 拉流域名类型：
-  1：国内，
-  2：全球，
-  3：境外。
-  默认值：1。
-        */
+      * 拉流域名类型：
+1：国内，
+2：全球，
+3：境外。
+默认值：1。
+      */
     PlayType?: number;
     /**
-        * 是否是慢直播：
-  0： 普通直播，
-  1 ：慢直播 。
-  默认值： 0。
-        */
+      * 是否是慢直播：
+0： 普通直播，
+1 ：慢直播 。
+默认值： 0。
+      */
     IsDelayLive?: number;
     /**
-        * 是否是小程序直播：
-  0： 标准直播，
-  1 ：小程序直播 。
-  默认值： 0。
-        */
+      * 是否是小程序直播：
+0： 标准直播，
+1 ：小程序直播 。
+默认值： 0。
+      */
     IsMiniProgramLive?: number;
 }
 /**
@@ -2768,42 +2768,42 @@ export interface AddLiveDomainRequest {
  */
 export interface StreamName {
     /**
-     * 流名称。
-     */
+      * 流名称。
+      */
     StreamName: string;
     /**
-     * 应用名称。
-     */
+      * 应用名称。
+      */
     AppName: string;
     /**
-     * 推流域名。
-     */
+      * 推流域名。
+      */
     DomainName: string;
     /**
-        * 推流开始时间。
-  UTC格式时间，例如：2019-01-07T12:00:00Z。
-        */
+      * 推流开始时间。
+UTC格式时间，例如：2019-01-07T12:00:00Z。
+      */
     StreamStartTime: string;
     /**
-        * 推流结束时间。
-  UTC格式时间，例如：2019-01-07T15:00:00Z。
-        */
+      * 推流结束时间。
+UTC格式时间，例如：2019-01-07T15:00:00Z。
+      */
     StreamEndTime: string;
     /**
-     * 停止原因。
-     */
+      * 停止原因。
+      */
     StopReason: string;
     /**
-     * 推流持续时长，单位：秒。
-     */
+      * 推流持续时长，单位：秒。
+      */
     Duration: number;
     /**
-     * 主播 IP。
-     */
+      * 主播 IP。
+      */
     ClientIp: string;
     /**
-     * 分辨率。
-     */
+      * 分辨率。
+      */
     Resolution: string;
 }
 /**
@@ -2811,10 +2811,10 @@ export interface StreamName {
  */
 export interface DescribeLivePackageInfoRequest {
     /**
-        * 包类型，可选值：
-  0：流量包；
-  1：转码包。
-        */
+      * 包类型，可选值：
+0：流量包；
+1：转码包。
+      */
     PackageType: number;
 }
 /**
@@ -2822,51 +2822,51 @@ export interface DescribeLivePackageInfoRequest {
  */
 export interface CreatePullStreamConfigRequest {
     /**
-        * 源 Url ，用于拉流的地址。目前可支持直播流及点播文件。
-  注意：
-  1. 多个点播url之间使用空格拼接。
-  2. 目前上限支持10个url。
-  3. 支持拉流文件格式：flv，rtmp，hls，mp4。
-        */
+      * 源 Url ，用于拉流的地址。目前可支持直播流及点播文件。
+注意：
+1. 多个点播url之间使用空格拼接。
+2. 目前上限支持10个url。
+3. 支持拉流文件格式：flv，rtmp，hls，mp4。
+      */
     FromUrl: string;
     /**
-        * 目的 Url ，用于推流的地址，目前限制该目标地址为腾讯域名。
-  仅支持：rtmp 协议。
-        */
+      * 目的 Url ，用于推流的地址，目前限制该目标地址为腾讯域名。
+仅支持：rtmp 协议。
+      */
     ToUrl: string;
     /**
-        * 选择完成转拉推的服务所在区域:
-  1-深圳，
-  2-上海，
-  3-天津，
-  4-中国香港。
-        */
+      * 选择完成转拉推的服务所在区域:
+1-深圳，
+2-上海，
+3-天津，
+4-中国香港。
+      */
     AreaId: number;
     /**
-        * 选择完成转拉推服务使用的运营商网络：
-  1-电信，
-  2-移动，
-  3-联通，
-  4-其他。
-  注：AreaId 为4的时候，IspId 只能为其他。
-        */
+      * 选择完成转拉推服务使用的运营商网络：
+1-电信，
+2-移动，
+3-联通，
+4-其他。
+注：AreaId 为4的时候，IspId 只能为其他。
+      */
     IspId: number;
     /**
-        * 开始时间。
-  使用 UTC 格式时间，
-  例如：2019-01-08T10:00:00Z。
-  注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
-        */
+      * 开始时间。
+使用 UTC 格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
     StartTime: string;
     /**
-        * 结束时间，注意：
-  1. 结束时间必须大于开始时间；
-  2. 结束时间和开始时间必须大于当前时间；
-  3. 结束时间 和 开始时间 间隔必须小于七天。
-  使用 UTC 格式时间，
-  例如：2019-01-08T10:00:00Z。
-  注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
-        */
+      * 结束时间，注意：
+1. 结束时间必须大于开始时间；
+2. 结束时间和开始时间必须大于当前时间；
+3. 结束时间 和 开始时间 间隔必须小于七天。
+使用 UTC 格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
     EndTime: string;
 }
 /**
@@ -2878,24 +2878,24 @@ export declare type DescribeLiveCertsRequest = null;
  */
 export interface CdnPlayStatData {
     /**
-     * 时间点，格式: yyyy-mm-dd HH:MM:SS。
-     */
+      * 时间点，格式: yyyy-mm-dd HH:MM:SS。
+      */
     Time: string;
     /**
-     * 带宽，单位: Mbps。
-     */
+      * 带宽，单位: Mbps。
+      */
     Bandwidth: number;
     /**
-     * 流量，单位: MB。
-     */
+      * 流量，单位: MB。
+      */
     Flux: number;
     /**
-     * 新增请求数。
-     */
+      * 新增请求数。
+      */
     Request: number;
     /**
-     * 并发连接数。
-     */
+      * 并发连接数。
+      */
     Online: number;
 }
 /**
@@ -2903,8 +2903,8 @@ export interface CdnPlayStatData {
  */
 export interface AddLiveDomainResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -2912,19 +2912,19 @@ export interface AddLiveDomainResponse {
  */
 export interface DescribeHttpStatusInfoListRequest {
     /**
-        * 起始时间，北京时间，
-  格式：yyyy-mm-dd HH:MM:SS。
-        */
+      * 起始时间，北京时间，
+格式：yyyy-mm-dd HH:MM:SS。
+      */
     StartTime: string;
     /**
-        * 结束时间，北京时间，
-  格式：yyyy-mm-dd HH:MM:SS。
-  注：最大时间跨度支持1天，支持最近3个月的数据查询。
-        */
+      * 结束时间，北京时间，
+格式：yyyy-mm-dd HH:MM:SS。
+注：最大时间跨度支持1天，支持最近3个月的数据查询。
+      */
     EndTime: string;
     /**
-     * 播放域名列表。
-     */
+      * 播放域名列表。
+      */
     PlayDomains?: Array<string>;
 }
 /**
@@ -2932,8 +2932,8 @@ export interface DescribeHttpStatusInfoListRequest {
  */
 export interface ModifyPullStreamConfigResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -2941,41 +2941,41 @@ export interface ModifyPullStreamConfigResponse {
  */
 export interface ModifyLiveCallbackTemplateRequest {
     /**
-     * DescribeLiveCallbackTemplates接口返回的模板 ID。
-     */
+      * DescribeLiveCallbackTemplates接口返回的模板 ID。
+      */
     TemplateId: number;
     /**
-     * 模板名称。
-     */
+      * 模板名称。
+      */
     TemplateName?: string;
     /**
-     * 描述信息。
-     */
+      * 描述信息。
+      */
     Description?: string;
     /**
-     * 开播回调 URL。
-     */
+      * 开播回调 URL。
+      */
     StreamBeginNotifyUrl?: string;
     /**
-     * 断流回调 URL。
-     */
+      * 断流回调 URL。
+      */
     StreamEndNotifyUrl?: string;
     /**
-     * 录制回调 URL。
-     */
+      * 录制回调 URL。
+      */
     RecordNotifyUrl?: string;
     /**
-     * 截图回调 URL。
-     */
+      * 截图回调 URL。
+      */
     SnapshotNotifyUrl?: string;
     /**
-     * 鉴黄回调 URL。
-     */
+      * 鉴黄回调 URL。
+      */
     PornCensorshipNotifyUrl?: string;
     /**
-        * 回调 Key，回调 URL 公用，回调签名详见事件消息通知文档。
-  [事件消息通知](/document/product/267/32744)。
-        */
+      * 回调 Key，回调 URL 公用，回调签名详见事件消息通知文档。
+[事件消息通知](/document/product/267/32744)。
+      */
     CallbackKey?: string;
 }
 /**
@@ -2983,45 +2983,45 @@ export interface ModifyLiveCallbackTemplateRequest {
  */
 export interface DescribeProvinceIspPlayInfoListRequest {
     /**
-        * 起始时间点，当前使用北京时间，
-  例：2019-02-21 10:00:00。
-        */
+      * 起始时间点，当前使用北京时间，
+例：2019-02-21 10:00:00。
+      */
     StartTime: string;
     /**
-        * 结束时间点，当前使用北京时间，
-  例：2019-02-21 12:00:00。
-  注：EndTime 和 StartTime 只支持最近1天的数据查询。
-        */
+      * 结束时间点，当前使用北京时间，
+例：2019-02-21 12:00:00。
+注：EndTime 和 StartTime 只支持最近1天的数据查询。
+      */
     EndTime: string;
     /**
-        * 支持如下粒度：
-  1：1分钟粒度（跨度不支持超过1天）
-        */
+      * 支持如下粒度：
+1：1分钟粒度（跨度不支持超过1天）
+      */
     Granularity: number;
     /**
-        * 统计指标类型：
-  “Bandwidth”：带宽
-  “FluxPerSecond”：平均流量
-  “Flux”：流量
-  “Request”：请求数
-  “Online”：并发连接数
-        */
+      * 统计指标类型：
+“Bandwidth”：带宽
+“FluxPerSecond”：平均流量
+“Flux”：流量
+“Request”：请求数
+“Online”：并发连接数
+      */
     StatType: string;
     /**
-     * 播放域名列表。
-     */
+      * 播放域名列表。
+      */
     PlayDomains?: Array<string>;
     /**
-     * 要查询的省份（地区）英文名称列表，如 Beijing。
-     */
+      * 要查询的省份（地区）英文名称列表，如 Beijing。
+      */
     ProvinceNames?: Array<string>;
     /**
-     * 要查询的运营商英文名称列表，如 China Mobile ，如果为空，查询所有运营商的数据。
-     */
+      * 要查询的运营商英文名称列表，如 China Mobile ，如果为空，查询所有运营商的数据。
+      */
     IspNames?: Array<string>;
     /**
-     * 地域，可选值：Mainland，Oversea，China，Foreign，Global（默认值）；如果为空，查询总的数据；如果为“Mainland”，查询中国大陆的数据；如果为“Oversea”，则查询中国大陆以外的数据；如果为China，查询中国的数据（包括港澳台）；如果为Foreign，查询国外的数据（不包括港澳台）。
-     */
+      * 地域，可选值：Mainland，Oversea，China，Foreign，Global（默认值）；如果为空，查询总的数据；如果为“Mainland”，查询中国大陆的数据；如果为“Oversea”，则查询中国大陆以外的数据；如果为China，查询中国的数据（包括港澳台）；如果为Foreign，查询国外的数据（不包括港澳台）。
+      */
     MainlandOrOversea?: string;
 }
 /**
@@ -3029,8 +3029,8 @@ export interface DescribeProvinceIspPlayInfoListRequest {
  */
 export interface DescribeLivePlayAuthKeyRequest {
     /**
-     * 域名。
-     */
+      * 域名。
+      */
     DomainName: string;
 }
 /**
@@ -3038,28 +3038,28 @@ export interface DescribeLivePlayAuthKeyRequest {
  */
 export interface DescribeLiveForbidStreamListResponse {
     /**
-     * 符合条件的总个数。
-     */
+      * 符合条件的总个数。
+      */
     TotalNum?: number;
     /**
-     * 总页数。
-     */
+      * 总页数。
+      */
     TotalPage?: number;
     /**
-     * 分页的页码。
-     */
+      * 分页的页码。
+      */
     PageNum?: number;
     /**
-     * 每页显示的条数。
-     */
+      * 每页显示的条数。
+      */
     PageSize?: number;
     /**
-     * 禁推流列表。
-     */
+      * 禁推流列表。
+      */
     ForbidStreamList?: Array<ForbidStreamInfo>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -3067,24 +3067,24 @@ export interface DescribeLiveForbidStreamListResponse {
  */
 export interface DescribeStreamPushInfoListRequest {
     /**
-     * 流名称。
-     */
+      * 流名称。
+      */
     StreamName: string;
     /**
-     * 起始时间点，格式为yyyy-mm-dd HH:MM:SS。
-     */
+      * 起始时间点，格式为yyyy-mm-dd HH:MM:SS。
+      */
     StartTime: string;
     /**
-     * 结束时间点，格式为yyyy-mm-dd HH:MM:SS，最大时间跨度支持6小时，支持最近6天数据查询。
-     */
+      * 结束时间点，格式为yyyy-mm-dd HH:MM:SS，最大时间跨度支持6小时，支持最近6天数据查询。
+      */
     EndTime: string;
     /**
-     * 推流域名。
-     */
+      * 推流域名。
+      */
     PushDomain?: string;
     /**
-     * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
-     */
+      * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
+      */
     AppName?: string;
 }
 /**
@@ -3092,12 +3092,12 @@ export interface DescribeStreamPushInfoListRequest {
  */
 export interface DescribeLiveWatermarkResponse {
     /**
-     * 水印信息。
-     */
+      * 水印信息。
+      */
     Watermark?: WatermarkInfo;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -3105,8 +3105,8 @@ export interface DescribeLiveWatermarkResponse {
  */
 export interface ResumeLiveStreamResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -3114,40 +3114,40 @@ export interface ResumeLiveStreamResponse {
  */
 export interface ModifyLiveRecordTemplateRequest {
     /**
-     * DescribeRecordTemplates接口获取到的模板 ID。
-     */
+      * DescribeRecordTemplates接口获取到的模板 ID。
+      */
     TemplateId: number;
     /**
-     * 模板名称。
-     */
+      * 模板名称。
+      */
     TemplateName?: string;
     /**
-     * 描述信息。
-     */
+      * 描述信息。
+      */
     Description?: string;
     /**
-     * FLV 录制参数，开启 FLV 录制时设置。
-     */
+      * FLV 录制参数，开启 FLV 录制时设置。
+      */
     FlvParam?: RecordParam;
     /**
-     * HLS 录制参数，开启 HLS 录制时设置。
-     */
+      * HLS 录制参数，开启 HLS 录制时设置。
+      */
     HlsParam?: RecordParam;
     /**
-     * MP4 录制参数，开启 MP4 录制时设置。
-     */
+      * MP4 录制参数，开启 MP4 录制时设置。
+      */
     Mp4Param?: RecordParam;
     /**
-     * AAC 录制参数，开启 AAC 录制时设置。
-     */
+      * AAC 录制参数，开启 AAC 录制时设置。
+      */
     AacParam?: RecordParam;
     /**
-     * HLS 录制定制参数。
-     */
+      * HLS 录制定制参数。
+      */
     HlsSpecialParam?: HlsSpecialParam;
     /**
-     * MP3 录制参数，开启 MP3 录制时设置。
-     */
+      * MP3 录制参数，开启 MP3 录制时设置。
+      */
     Mp3Param?: RecordParam;
 }
 /**
@@ -3155,10 +3155,10 @@ export interface ModifyLiveRecordTemplateRequest {
  */
 export interface DeletePullStreamConfigRequest {
     /**
-        * 配置 ID。
-  1. 在添加拉流配置接口 [CreatePullStreamConfig](/document/api/267/30159) 调用返回值中获取配置 ID。
-  2. 可以从接口 [DescribePullStreamConfigs](/document/api/267/30158) 中查询已创建过的拉流配置列表。
-        */
+      * 配置 ID。
+1. 在添加拉流配置接口 [CreatePullStreamConfig](/document/api/267/30159) 调用返回值中获取配置 ID。
+2. 可以从接口 [DescribePullStreamConfigs](/document/api/267/30158) 中查询已创建过的拉流配置列表。
+      */
     ConfigId: string;
 }
 /**
@@ -3166,62 +3166,62 @@ export interface DeletePullStreamConfigRequest {
  */
 export interface ModifyPullStreamConfigRequest {
     /**
-        * 配置 ID。
-  获取来源：
-  1. 创建拉流配置接口CreatePullStreamConfig返回的配置 ID。
-  2. 通过查询接口DescribePullStreamConfigs获取配置 ID。
-        */
+      * 配置 ID。
+获取来源：
+1. 创建拉流配置接口CreatePullStreamConfig返回的配置 ID。
+2. 通过查询接口DescribePullStreamConfigs获取配置 ID。
+      */
     ConfigId: string;
     /**
-        * 源 URL，用于拉流的地址。目前可支持直播流及点播文件。
-  注意：
-  1. 多个点播 URL 之间使用空格拼接。
-  2. 目前上限支持10个 URL。
-  3. 支持拉流文件格式：FLV，RTMP，HLS，MP4。
-  4. 使用标准三层样式，如：http://test.com/live/stream.flv。
-        */
+      * 源 URL，用于拉流的地址。目前可支持直播流及点播文件。
+注意：
+1. 多个点播 URL 之间使用空格拼接。
+2. 目前上限支持10个 URL。
+3. 支持拉流文件格式：FLV，RTMP，HLS，MP4。
+4. 使用标准三层样式，如：http://test.com/live/stream.flv。
+      */
     FromUrl?: string;
     /**
-        * 目的 URL，用于推流的地址，目前限制该目标地址为腾讯域名。
-  1. 仅支持 RTMP 协议。
-  2. 使用标准三层样式，如：http://test.com/live/stream.flv。
-        */
+      * 目的 URL，用于推流的地址，目前限制该目标地址为腾讯域名。
+1. 仅支持 RTMP 协议。
+2. 使用标准三层样式，如：http://test.com/live/stream.flv。
+      */
     ToUrl?: string;
     /**
-        * 区域 ID：
-  1-深圳。
-  2-上海。
-  3-天津。
-  4-中国香港。
-  如有改动，需同时传入IspId。
-        */
+      * 区域 ID：
+1-深圳。
+2-上海。
+3-天津。
+4-中国香港。
+如有改动，需同时传入IspId。
+      */
     AreaId?: number;
     /**
-        * 运营商 ID，
-  1：电信。
-  2：移动。
-  3：联通。
-  4：其他。
-  AreaId为4的时候，IspId只能为其他。如有改动，需同时传入AreaId。
-        */
+      * 运营商 ID，
+1：电信。
+2：移动。
+3：联通。
+4：其他。
+AreaId为4的时候，IspId只能为其他。如有改动，需同时传入AreaId。
+      */
     IspId?: number;
     /**
-        * 开始时间。
-  使用UTC格式时间，
-  例如：2019-01-08T10:00:00Z。
-  注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
-        */
+      * 开始时间。
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
     StartTime?: string;
     /**
-        * 结束时间，注意：
-  1. 结束时间必须大于开始时间；
-  2. 结束时间和开始时间必须大于当前时间；
-  3. 结束时间 和 开始时间 间隔必须小于七天。
-  
-  使用UTC格式时间，
-  例如：2019-01-08T10:00:00Z。
-  注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
-        */
+      * 结束时间，注意：
+1. 结束时间必须大于开始时间；
+2. 结束时间和开始时间必须大于当前时间；
+3. 结束时间 和 开始时间 间隔必须小于七天。
+
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
     EndTime?: string;
 }
 /**
@@ -3229,12 +3229,12 @@ export interface ModifyPullStreamConfigRequest {
  */
 export interface DescribeStreamPushInfoListResponse {
     /**
-     * 返回的数据列表。
-     */
+      * 返回的数据列表。
+      */
     DataInfoList?: Array<PushQualityData>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -3242,24 +3242,24 @@ export interface DescribeStreamPushInfoListResponse {
  */
 export interface DescribeLiveStreamPushInfoListRequest {
     /**
-     * 推流域名。
-     */
+      * 推流域名。
+      */
     PushDomain?: string;
     /**
-     * 推流路径，与推流和播放地址中的AppName保持一致，默认为live。
-     */
+      * 推流路径，与推流和播放地址中的AppName保持一致，默认为live。
+      */
     AppName?: string;
     /**
-        * 页数，
-  范围[1,10000]，
-  默认值：1。
-        */
+      * 页数，
+范围[1,10000]，
+默认值：1。
+      */
     PageNum?: number;
     /**
-        * 每页个数，
-  范围：[1,1000]，
-  默认值： 200。
-        */
+      * 每页个数，
+范围：[1,1000]，
+默认值： 200。
+      */
     PageSize?: number;
 }
 /**
@@ -3267,16 +3267,16 @@ export interface DescribeLiveStreamPushInfoListRequest {
  */
 export interface DescribeLiveWatermarksResponse {
     /**
-     * 水印总个数。
-     */
+      * 水印总个数。
+      */
     TotalNum?: number;
     /**
-     * 水印信息列表。
-     */
+      * 水印信息列表。
+      */
     WatermarkList?: Array<WatermarkInfo>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -3284,40 +3284,40 @@ export interface DescribeLiveWatermarksResponse {
  */
 export interface WatermarkInfo {
     /**
-     * 水印 ID。
-     */
+      * 水印 ID。
+      */
     WatermarkId: number;
     /**
-     * 水印图片 URL。
-     */
+      * 水印图片 URL。
+      */
     PictureUrl: string;
     /**
-     * 显示位置，X 轴偏移。
-     */
+      * 显示位置，X 轴偏移。
+      */
     XPosition: number;
     /**
-     * 显示位置，Y 轴偏移。
-     */
+      * 显示位置，Y 轴偏移。
+      */
     YPosition: number;
     /**
-     * 水印名称。
-     */
+      * 水印名称。
+      */
     WatermarkName: string;
     /**
-     * 当前状态。0：未使用，1:使用中。
-     */
+      * 当前状态。0：未使用，1:使用中。
+      */
     Status: number;
     /**
-     * 添加时间。
-     */
+      * 添加时间。
+      */
     CreateTime: string;
     /**
-     * 水印宽。
-     */
+      * 水印宽。
+      */
     Width: number;
     /**
-     * 水印高。
-     */
+      * 水印高。
+      */
     Height: number;
 }
 /**
@@ -3325,14 +3325,14 @@ export interface WatermarkInfo {
  */
 export interface DescribeLiveForbidStreamListRequest {
     /**
-     * 取得第几页，默认1。
-     */
+      * 取得第几页，默认1。
+      */
     PageNum?: number;
     /**
-        * 每页大小，最大100。
-  取值：1~100之前的任意整数。
-  默认值：10。
-        */
+      * 每页大小，最大100。
+取值：1~100之前的任意整数。
+默认值：10。
+      */
     PageSize?: number;
 }
 /**
@@ -3340,8 +3340,8 @@ export interface DescribeLiveForbidStreamListRequest {
  */
 export interface DescribeLiveDomainPlayInfoListRequest {
     /**
-     * 播放域名列表。
-     */
+      * 播放域名列表。
+      */
     PlayDomains?: Array<string>;
 }
 /**
@@ -3349,12 +3349,12 @@ export interface DescribeLiveDomainPlayInfoListRequest {
  */
 export interface CreatePullStreamConfigResponse {
     /**
-     * 配置成功后的 ID。
-     */
+      * 配置成功后的 ID。
+      */
     ConfigId?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -3362,16 +3362,16 @@ export interface CreatePullStreamConfigResponse {
  */
 export interface BindLiveDomainCertRequest {
     /**
-     * 证书Id。使用添加证书接口获取证书Id。
-     */
+      * 证书Id。使用添加证书接口获取证书Id。
+      */
     CertId: number;
     /**
-     * 播放域名。
-     */
+      * 播放域名。
+      */
     DomainName: string;
     /**
-     * HTTPS开启状态，0： 关闭  1：打开。
-     */
+      * HTTPS开启状态，0： 关闭  1：打开。
+      */
     Status?: number;
 }
 /**
@@ -3379,37 +3379,37 @@ export interface BindLiveDomainCertRequest {
  */
 export interface DescribeTopClientIpSumInfoListRequest {
     /**
-     * 起始时间点，格式为yyyy-mm-dd HH:MM:SS。
-     */
+      * 起始时间点，格式为yyyy-mm-dd HH:MM:SS。
+      */
     StartTime: string;
     /**
-        * 结束时间点，格式为yyyy-mm-dd HH:MM:SS
-  时间跨度在[0,4小时]，支持最近1天数据查询。
-        */
+      * 结束时间点，格式为yyyy-mm-dd HH:MM:SS
+时间跨度在[0,4小时]，支持最近1天数据查询。
+      */
     EndTime: string;
     /**
-     * 播放域名，默认为不填，表示求总体数据。
-     */
+      * 播放域名，默认为不填，表示求总体数据。
+      */
     PlayDomains?: Array<string>;
     /**
-     * 页号，范围是[1,1000]，默认值是1。
-     */
+      * 页号，范围是[1,1000]，默认值是1。
+      */
     PageNum?: number;
     /**
-     * 每页个数，范围是[1,1000]，默认值是20。
-     */
+      * 每页个数，范围是[1,1000]，默认值是20。
+      */
     PageSize?: number;
     /**
-     * 排序指标，可选值包括TotalRequest（默认值），FailedRequest,TotalFlux。
-     */
+      * 排序指标，可选值包括TotalRequest（默认值），FailedRequest,TotalFlux。
+      */
     OrderParam?: string;
     /**
-     * 地域，可选值：Mainland，Oversea，China，Foreign，Global（默认值）；如果为空，查询总的数据；如果为“Mainland”，查询中国大陆的数据；如果为“Oversea”，则查询中国大陆以外的数据；如果为China，查询中国的数据（包括港澳台）；如果为Foreign，查询国外的数据（不包括港澳台）。
-     */
+      * 地域，可选值：Mainland，Oversea，China，Foreign，Global（默认值）；如果为空，查询总的数据；如果为“Mainland”，查询中国大陆的数据；如果为“Oversea”，则查询中国大陆以外的数据；如果为China，查询中国的数据（包括港澳台）；如果为Foreign，查询国外的数据（不包括港澳台）。
+      */
     MainlandOrOversea?: string;
     /**
-     * 输出字段使用的语言，可选值：Chinese（默认值），English；目前国家，省份和运营商支持多语言。
-     */
+      * 输出字段使用的语言，可选值：Chinese（默认值），English；目前国家，省份和运营商支持多语言。
+      */
     OutLanguage?: string;
 }
 /**
@@ -3417,16 +3417,16 @@ export interface DescribeTopClientIpSumInfoListRequest {
  */
 export interface CreateLiveCallbackRuleRequest {
     /**
-     * 推流域名。
-     */
+      * 推流域名。
+      */
     DomainName: string;
     /**
-     * 推流路径，与推流和播放地址中的AppName保持一致，默认为live。
-     */
+      * 推流路径，与推流和播放地址中的AppName保持一致，默认为live。
+      */
     AppName: string;
     /**
-     * 模板ID。
-     */
+      * 模板ID。
+      */
     TemplateId: number;
 }
 /**
@@ -3434,8 +3434,8 @@ export interface CreateLiveCallbackRuleRequest {
  */
 export interface DeleteLiveWatermarkRuleResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -3443,9 +3443,9 @@ export interface DeleteLiveWatermarkRuleResponse {
  */
 export interface PublishTime {
     /**
-        * 推流时间。
-  UTC 格式，例如：2018-06-29T19:00:00Z。
-        */
+      * 推流时间。
+UTC 格式，例如：2018-06-29T19:00:00Z。
+      */
     PublishTime: string;
 }
 /**
@@ -3453,8 +3453,8 @@ export interface PublishTime {
  */
 export interface ModifyLiveCertResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -3462,32 +3462,32 @@ export interface ModifyLiveCertResponse {
  */
 export interface MonitorStreamPlayInfo {
     /**
-     * 播放域名。
-     */
+      * 播放域名。
+      */
     PlayDomain: string;
     /**
-     * 流id。
-     */
+      * 流id。
+      */
     StreamName: string;
     /**
-     * 播放码率，0表示原始码率。
-     */
+      * 播放码率，0表示原始码率。
+      */
     Rate: number;
     /**
-     * 播放协议，可选值包括 Unknown，Flv，Hls，Rtmp，Huyap2p。
-     */
+      * 播放协议，可选值包括 Unknown，Flv，Hls，Rtmp，Huyap2p。
+      */
     Protocol: string;
     /**
-     * 带宽，单位是Mbps。
-     */
+      * 带宽，单位是Mbps。
+      */
     Bandwidth: number;
     /**
-     * 在线人数，1分钟采样一个点，统计采样点的tcp链接数目。
-     */
+      * 在线人数，1分钟采样一个点，统计采样点的tcp链接数目。
+      */
     Online: number;
     /**
-     * 请求数。
-     */
+      * 请求数。
+      */
     Request: number;
 }
 /**
@@ -3495,40 +3495,40 @@ export interface MonitorStreamPlayInfo {
  */
 export interface DescribeLiveTranscodeDetailInfoRequest {
     /**
-     * 推流域名。
-     */
+      * 推流域名。
+      */
     PushDomain?: string;
     /**
-     * 流名称。
-     */
+      * 流名称。
+      */
     StreamName?: string;
     /**
-        * 查询时间，北京时间，
-  格式：yyyymmdd。
-  注意：支持查询近1个月内某天的详细数据。
-        */
+      * 查询时间，北京时间，
+格式：yyyymmdd。
+注意：支持查询近1个月内某天的详细数据。
+      */
     DayTime?: string;
     /**
-        * 页数，默认1，
-  不超过100页。
-        */
+      * 页数，默认1，
+不超过100页。
+      */
     PageNum?: number;
     /**
-        * 每页个数，默认20，
-  范围：[10,1000]。
-        */
+      * 每页个数，默认20，
+范围：[10,1000]。
+      */
     PageSize?: number;
     /**
-        * 起始天时间，北京时间，
-  格式：yyyymmdd。
-  注意：支持查询近1个月内的详细数据。
-        */
+      * 起始天时间，北京时间，
+格式：yyyymmdd。
+注意：支持查询近1个月内的详细数据。
+      */
     StartDayTime?: string;
     /**
-        * 结束天时间，北京时间，
-  格式：yyyymmdd。
-  注意：支持查询近1个月内的详细数据，注意DayTime 与（StartDayTime，EndDayTime）必须要传一个，如果都传，会以DayTime为准 。
-        */
+      * 结束天时间，北京时间，
+格式：yyyymmdd。
+注意：支持查询近1个月内的详细数据，注意DayTime 与（StartDayTime，EndDayTime）必须要传一个，如果都传，会以DayTime为准 。
+      */
     EndDayTime?: string;
 }
 /**
@@ -3536,32 +3536,32 @@ export interface DescribeLiveTranscodeDetailInfoRequest {
  */
 export interface ProIspPlayCodeDataInfo {
     /**
-     * 国家或地区。
-     */
+      * 国家或地区。
+      */
     CountryAreaName: string;
     /**
-     * 省份。
-     */
+      * 省份。
+      */
     ProvinceName: string;
     /**
-     * 运营商。
-     */
+      * 运营商。
+      */
     IspName: string;
     /**
-     * 错误码为2开头的次数。
-     */
+      * 错误码为2开头的次数。
+      */
     Code2xx: number;
     /**
-     * 错误码为3开头的次数。
-     */
+      * 错误码为3开头的次数。
+      */
     Code3xx: number;
     /**
-     * 错误码为4开头的次数。
-     */
+      * 错误码为4开头的次数。
+      */
     Code4xx: number;
     /**
-     * 错误码为5开头的次数。
-     */
+      * 错误码为5开头的次数。
+      */
     Code5xx: number;
 }
 /**
@@ -3569,10 +3569,10 @@ export interface ProIspPlayCodeDataInfo {
  */
 export interface DeleteLiveWatermarkRequest {
     /**
-        * 水印 ID。
-  在添加水印接口 [AddLiveWatermark](/document/product/267/30154) 调用返回值中获取水印 ID。
-  或DescribeLiveWatermarks接口返回的水印ID。
-        */
+      * 水印 ID。
+在添加水印接口 [AddLiveWatermark](/document/product/267/30154) 调用返回值中获取水印 ID。
+或DescribeLiveWatermarks接口返回的水印ID。
+      */
     WatermarkId: number;
 }
 /**
@@ -3580,28 +3580,28 @@ export interface DeleteLiveWatermarkRequest {
  */
 export interface DescribeLiveDomainsRequest {
     /**
-     * 域名状态过滤。0-停用，1-启用。
-     */
+      * 域名状态过滤。0-停用，1-启用。
+      */
     DomainStatus?: number;
     /**
-     * 域名类型过滤。0-推流，1-播放。
-     */
+      * 域名类型过滤。0-推流，1-播放。
+      */
     DomainType?: number;
     /**
-     * 分页大小，范围：10~100。默认10。
-     */
+      * 分页大小，范围：10~100。默认10。
+      */
     PageSize?: number;
     /**
-     * 取第几页，范围：1~100000。默认1。
-     */
+      * 取第几页，范围：1~100000。默认1。
+      */
     PageNum?: number;
     /**
-     * 0 普通直播 1慢直播 默认0。
-     */
+      * 0 普通直播 1慢直播 默认0。
+      */
     IsDelayLive?: number;
     /**
-     * 域名前缀。
-     */
+      * 域名前缀。
+      */
     DomainPrefix?: string;
 }
 /**
@@ -3609,20 +3609,20 @@ export interface DescribeLiveDomainsRequest {
  */
 export interface ProIspPlaySumInfo {
     /**
-     * 省份/运营商/国家或地区。
-     */
+      * 省份/运营商/国家或地区。
+      */
     Name: string;
     /**
-     * 总流量，单位: MB。
-     */
+      * 总流量，单位: MB。
+      */
     TotalFlux: number;
     /**
-     * 总请求数。
-     */
+      * 总请求数。
+      */
     TotalRequest: number;
     /**
-     * 平均下载流量，单位: MB/s。
-     */
+      * 平均下载流量，单位: MB/s。
+      */
     AvgFluxPerSecond: number;
 }
 /**
@@ -3630,56 +3630,56 @@ export interface ProIspPlaySumInfo {
  */
 export interface SnapshotTemplateInfo {
     /**
-     * 模板 ID。
-     */
+      * 模板 ID。
+      */
     TemplateId: number;
     /**
-     * 模板名称。
-     */
+      * 模板名称。
+      */
     TemplateName: string;
     /**
-     * 截图时间间隔，5-300秒。
-     */
+      * 截图时间间隔，5-300秒。
+      */
     SnapshotInterval: number;
     /**
-        * 截图宽度，范围：0-3000。
-  0：原始宽度并适配原始比例。
-        */
+      * 截图宽度，范围：0-3000。
+0：原始宽度并适配原始比例。
+      */
     Width: number;
     /**
-        * 截图高度，范围：0-2000。
-  0：原始高度并适配原始比例。
-        */
+      * 截图高度，范围：0-2000。
+0：原始高度并适配原始比例。
+      */
     Height: number;
     /**
-     * 是否开启鉴黄，0：不开启，1：开启。
-     */
+      * 是否开启鉴黄，0：不开启，1：开启。
+      */
     PornFlag: number;
     /**
-     * Cos 应用 ID。
-     */
+      * Cos 应用 ID。
+      */
     CosAppId: number;
     /**
-     * Cos Bucket名称。
-     */
+      * Cos Bucket名称。
+      */
     CosBucket: string;
     /**
-     * Cos 地域。
-     */
+      * Cos 地域。
+      */
     CosRegion: string;
     /**
-     * 模板描述。
-     */
+      * 模板描述。
+      */
     Description: string;
     /**
-        * Cos Bucket文件夹前缀。
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * Cos Bucket文件夹前缀。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     CosPrefix: string;
     /**
-        * Cos 文件名称。
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * Cos 文件名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     CosFileName: string;
 }
 /**
@@ -3687,8 +3687,8 @@ export interface SnapshotTemplateInfo {
  */
 export interface DeleteLiveSnapshotRuleResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -3696,61 +3696,61 @@ export interface DeleteLiveSnapshotRuleResponse {
  */
 export interface CreateLiveRecordRequest {
     /**
-     * 流名称。
-     */
+      * 流名称。
+      */
     StreamName: string;
     /**
-     * 推流路径，与推流和播放地址中的 AppName保持一致，默认为 live。
-     */
+      * 推流路径，与推流和播放地址中的 AppName保持一致，默认为 live。
+      */
     AppName?: string;
     /**
-     * 推流域名。多域名推流必须设置。
-     */
+      * 推流域名。多域名推流必须设置。
+      */
     DomainName?: string;
     /**
-        * 录制开始时间。中国标准时间，需要 URLEncode(rfc3986)。如 2017-01-01 10:10:01，编码为：2017-01-01+10%3a10%3a01。
-  定时录制模式，必须设置该字段；实时视频录制模式，忽略该字段。
-        */
+      * 录制开始时间。中国标准时间，需要 URLEncode(rfc3986)。如 2017-01-01 10:10:01，编码为：2017-01-01+10%3a10%3a01。
+定时录制模式，必须设置该字段；实时视频录制模式，忽略该字段。
+      */
     StartTime?: string;
     /**
-        * 录制结束时间。中国标准时间，需要 URLEncode(rfc3986)。如 2017-01-01 10:30:01，编码为：2017-01-01+10%3a30%3a01。
-  定时录制模式，必须设置该字段；实时录制模式，为可选字段。如果通过Highlight参数，设置录制为实时视频录制模式，其设置的结束时间不应超过当前时间+30分钟，如果设置的结束时间超过当前时间+30分钟或者小于当前时间或者不设置该参数，则实际结束时间为当前时间+30分钟。
-        */
+      * 录制结束时间。中国标准时间，需要 URLEncode(rfc3986)。如 2017-01-01 10:30:01，编码为：2017-01-01+10%3a30%3a01。
+定时录制模式，必须设置该字段；实时录制模式，为可选字段。如果通过Highlight参数，设置录制为实时视频录制模式，其设置的结束时间不应超过当前时间+30分钟，如果设置的结束时间超过当前时间+30分钟或者小于当前时间或者不设置该参数，则实际结束时间为当前时间+30分钟。
+      */
     EndTime?: string;
     /**
-        * 录制类型。
-  “video” : 音视频录制【默认】。
-  “audio” : 纯音频录制。
-  在定时录制模式或实时视频录制模式下，该参数均有效，不区分大小写。
-        */
+      * 录制类型。
+“video” : 音视频录制【默认】。
+“audio” : 纯音频录制。
+在定时录制模式或实时视频录制模式下，该参数均有效，不区分大小写。
+      */
     RecordType?: string;
     /**
-        * 录制文件格式。其值为：
-  “flv”【默认】,“hls”,”mp4”,“aac”,”mp3”。
-  在定时录制模式或实时视频录制模式下，该参数均有效，不区分大小写。
-        */
+      * 录制文件格式。其值为：
+“flv”【默认】,“hls”,”mp4”,“aac”,”mp3”。
+在定时录制模式或实时视频录制模式下，该参数均有效，不区分大小写。
+      */
     FileFormat?: string;
     /**
-        * 开启实时视频录制模式标志。
-  0：不开启实时视频录制模式，即定时录制模式【默认】。见[示例一](#.E7.A4.BA.E4.BE.8B1-.E5.88.9B.E5.BB.BA.E5.AE.9A.E6.97.B6.E5.BD.95.E5.88.B6.E4.BB.BB.E5.8A.A1)。
-  1：开启实时视频录制模式。见[示例二](#.E7.A4.BA.E4.BE.8B2-.E5.88.9B.E5.BB.BA.E5.AE.9E.E6.97.B6.E5.BD.95.E5.88.B6.E4.BB.BB.E5.8A.A1)。
-        */
+      * 开启实时视频录制模式标志。
+0：不开启实时视频录制模式，即定时录制模式【默认】。见[示例一](#.E7.A4.BA.E4.BE.8B1-.E5.88.9B.E5.BB.BA.E5.AE.9A.E6.97.B6.E5.BD.95.E5.88.B6.E4.BB.BB.E5.8A.A1)。
+1：开启实时视频录制模式。见[示例二](#.E7.A4.BA.E4.BE.8B2-.E5.88.9B.E5.BB.BA.E5.AE.9E.E6.97.B6.E5.BD.95.E5.88.B6.E4.BB.BB.E5.8A.A1)。
+      */
     Highlight?: number;
     /**
-        * 开启 A+B=C混流C流录制标志。
-  0：不开启 A+B=C混流C流录制【默认】。
-  1：开启 A+B=C混流C流录制。
-  在定时录制模式或实时视频录制模式下，该参数均有效。
-        */
+      * 开启 A+B=C混流C流录制标志。
+0：不开启 A+B=C混流C流录制【默认】。
+1：开启 A+B=C混流C流录制。
+在定时录制模式或实时视频录制模式下，该参数均有效。
+      */
     MixStream?: number;
     /**
-        * 录制流参数。当前支持以下参数：
-  record_interval - 录制分片时长，单位 秒，1800 - 7200。
-  storage_time - 录制文件存储时长，单位 秒。
-  eg. record_interval=3600&storage_time=2592000。
-  注：参数需要url encode。
-  在定时录制模式或实时视频录制模式下，该参数均有效。
-        */
+      * 录制流参数。当前支持以下参数：
+record_interval - 录制分片时长，单位 秒，1800 - 7200。
+storage_time - 录制文件存储时长，单位 秒。
+eg. record_interval=3600&storage_time=2592000。
+注：参数需要url encode。
+在定时录制模式或实时视频录制模式下，该参数均有效。
+      */
     StreamParam?: string;
 }
 /**
@@ -3758,8 +3758,8 @@ export interface CreateLiveRecordRequest {
  */
 export interface ForbidLiveStreamResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -3767,14 +3767,14 @@ export interface ForbidLiveStreamResponse {
  */
 export interface BandwidthInfo {
     /**
-        * 返回格式：
-  yyyy-mm-dd HH:MM:SS
-  根据粒度会有不同程度的缩减。
-        */
+      * 返回格式：
+yyyy-mm-dd HH:MM:SS
+根据粒度会有不同程度的缩减。
+      */
     Time: string;
     /**
-     * 带宽。
-     */
+      * 带宽。
+      */
     Bandwidth: number;
 }
 /**
@@ -3782,16 +3782,16 @@ export interface BandwidthInfo {
  */
 export interface DescribeLogDownloadListResponse {
     /**
-     * 日志信息列表。
-     */
+      * 日志信息列表。
+      */
     LogInfoList?: Array<LogInfo>;
     /**
-     * 总条数。
-     */
+      * 总条数。
+      */
     TotalNum?: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -3799,9 +3799,9 @@ export interface DescribeLogDownloadListResponse {
  */
 export interface CancelCommonMixStreamRequest {
     /**
-        * 混流会话（申请混流开始到取消混流结束）标识 ID。
-  该值与CreateCommonMixStream中的MixStreamSessionId保持一致。
-        */
+      * 混流会话（申请混流开始到取消混流结束）标识 ID。
+该值与CreateCommonMixStream中的MixStreamSessionId保持一致。
+      */
     MixStreamSessionId: string;
 }
 /**
@@ -3809,34 +3809,34 @@ export interface CancelCommonMixStreamRequest {
  */
 export interface UpdateLiveWatermarkRequest {
     /**
-        * 水印 ID。
-  在添加水印接口 [AddLiveWatermark](/document/product/267/30154) 调用返回值中获取水印 ID。
-        */
+      * 水印 ID。
+在添加水印接口 [AddLiveWatermark](/document/product/267/30154) 调用返回值中获取水印 ID。
+      */
     WatermarkId: number;
     /**
-     * 水印图片 URL。
-     */
+      * 水印图片 URL。
+      */
     PictureUrl: string;
     /**
-     * 显示位置，X轴偏移，单位是百分比，默认 0。
-     */
+      * 显示位置，X轴偏移，单位是百分比，默认 0。
+      */
     XPosition: number;
     /**
-     * 显示位置，Y轴偏移，单位是百分比，默认 0。
-     */
+      * 显示位置，Y轴偏移，单位是百分比，默认 0。
+      */
     YPosition: number;
     /**
-        * 水印名称。
-  最长16字节。
-        */
+      * 水印名称。
+最长16字节。
+      */
     WatermarkName?: string;
     /**
-     * 水印宽度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始宽度。
-     */
+      * 水印宽度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始宽度。
+      */
     Width?: number;
     /**
-     * 水印高度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始高度。
-     */
+      * 水印高度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始高度。
+      */
     Height?: number;
 }
 /**
@@ -3844,38 +3844,38 @@ export interface UpdateLiveWatermarkRequest {
  */
 export interface CertInfo {
     /**
-     * 证书 ID。
-     */
+      * 证书 ID。
+      */
     CertId: number;
     /**
-     * 证书名称。
-     */
+      * 证书名称。
+      */
     CertName: string;
     /**
-     * 描述信息。
-     */
+      * 描述信息。
+      */
     Description: string;
     /**
-     * 创建时间，UTC 格式。
-     */
+      * 创建时间，UTC 格式。
+      */
     CreateTime: string;
     /**
-     * 证书内容。
-     */
+      * 证书内容。
+      */
     HttpsCrt: string;
     /**
-        * 证书类型。
-  0：用户添加证书，
-  1：腾讯云托管证书。
-        */
+      * 证书类型。
+0：用户添加证书，
+1：腾讯云托管证书。
+      */
     CertType: number;
     /**
-     * 证书过期时间，UTC 格式。
-     */
+      * 证书过期时间，UTC 格式。
+      */
     CertExpireTime: string;
     /**
-     * 使用此证书的域名列表。
-     */
+      * 使用此证书的域名列表。
+      */
     DomainList: Array<string>;
 }
 /**
@@ -3883,8 +3883,8 @@ export interface CertInfo {
  */
 export interface ModifyLivePushAuthKeyResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -3892,12 +3892,12 @@ export interface ModifyLivePushAuthKeyResponse {
  */
 export interface DescribeLiveDelayInfoListResponse {
     /**
-     * 延播信息列表。
-     */
+      * 延播信息列表。
+      */
     DelayInfoList?: Array<DelayInfo>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -3905,10 +3905,10 @@ export interface DescribeLiveDelayInfoListResponse {
  */
 export interface DeleteLiveTranscodeTemplateRequest {
     /**
-        * 模板 ID。
-  1. 在创建转码模板接口 [CreateLiveTranscodeTemplate](/document/product/267/32646) 调用的返回值中获取模板 ID。
-  2. 可以从接口 [DescribeLiveTranscodeTemplates](/document/product/267/32641) 查询已经创建的过的模板列表。
-        */
+      * 模板 ID。
+1. 在创建转码模板接口 [CreateLiveTranscodeTemplate](/document/product/267/32646) 调用的返回值中获取模板 ID。
+2. 可以从接口 [DescribeLiveTranscodeTemplates](/document/product/267/32641) 查询已经创建的过的模板列表。
+      */
     TemplateId: number;
 }
 /**
@@ -3920,28 +3920,28 @@ export declare type DescribeLiveCallbackRulesRequest = null;
  */
 export interface ClientIpPlaySumInfo {
     /**
-     * 客户端 IP，点分型。
-     */
+      * 客户端 IP，点分型。
+      */
     ClientIp: string;
     /**
-     * 客户端所在省份。
-     */
+      * 客户端所在省份。
+      */
     Province: string;
     /**
-     * 总流量。
-     */
+      * 总流量。
+      */
     TotalFlux: number;
     /**
-     * 总请求数。
-     */
+      * 总请求数。
+      */
     TotalRequest: number;
     /**
-     * 总失败请求数。
-     */
+      * 总失败请求数。
+      */
     TotalFailedRequest: number;
     /**
-     * 客户端所在国家。
-     */
+      * 客户端所在国家。
+      */
     CountryArea: string;
 }
 /**
@@ -3949,12 +3949,12 @@ export interface ClientIpPlaySumInfo {
  */
 export interface DescribeLiveTranscodeTemplateResponse {
     /**
-     * 模板信息。
-     */
+      * 模板信息。
+      */
     Template?: TemplateInfo;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -3962,12 +3962,12 @@ export interface DescribeLiveTranscodeTemplateResponse {
  */
 export interface CreateLiveSnapshotTemplateResponse {
     /**
-     * 模板Id。
-     */
+      * 模板Id。
+      */
     TemplateId?: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -3975,27 +3975,27 @@ export interface CreateLiveSnapshotTemplateResponse {
  */
 export interface DescribeConcurrentRecordStreamNumRequest {
     /**
-        * 直播类型，SlowLive：慢直播。
-  NormalLive：普通直播。
-        */
+      * 直播类型，SlowLive：慢直播。
+NormalLive：普通直播。
+      */
     LiveType: string;
     /**
-        * 起始时间，格式：yyyy-mm-dd HH:MM:SS。
-  可以查询最近180天的数据。
-        */
+      * 起始时间，格式：yyyy-mm-dd HH:MM:SS。
+可以查询最近180天的数据。
+      */
     StartTime: string;
     /**
-        * 结束时间，格式：yyyy-mm-dd HH:MM:SS。
-  时间跨度最大支持31天。
-        */
+      * 结束时间，格式：yyyy-mm-dd HH:MM:SS。
+时间跨度最大支持31天。
+      */
     EndTime: string;
     /**
-     * 如果为空，查询所有地区数据；如果为“Mainland”，查询国内数据；如果为“Oversea”，则查询国外数据。
-     */
+      * 如果为空，查询所有地区数据；如果为“Mainland”，查询国内数据；如果为“Oversea”，则查询国外数据。
+      */
     MainlandOrOversea?: string;
     /**
-     * 推流域名列表，不填表示总体数据。
-     */
+      * 推流域名列表，不填表示总体数据。
+      */
     PushDomains?: Array<string>;
 }
 /**
@@ -4003,39 +4003,39 @@ export interface DescribeConcurrentRecordStreamNumRequest {
  */
 export interface DescribePlayErrorCodeSumInfoListRequest {
     /**
-        * 起始时间点，北京时间。
-  格式：yyyy-mm-dd HH:MM:SS。
-        */
+      * 起始时间点，北京时间。
+格式：yyyy-mm-dd HH:MM:SS。
+      */
     StartTime: string;
     /**
-        * 结束时间点，北京时间。
-  格式：yyyy-mm-dd HH:MM:SS。
-  注：EndTime 和 StartTime 只支持最近1天的数据查询。
-        */
+      * 结束时间点，北京时间。
+格式：yyyy-mm-dd HH:MM:SS。
+注：EndTime 和 StartTime 只支持最近1天的数据查询。
+      */
     EndTime: string;
     /**
-     * 播放域名列表，不填表示总体数据。
-     */
+      * 播放域名列表，不填表示总体数据。
+      */
     PlayDomains?: Array<string>;
     /**
-     * 页数，范围[1,1000]，默认值是1。
-     */
+      * 页数，范围[1,1000]，默认值是1。
+      */
     PageNum?: number;
     /**
-     * 每页个数，范围：[1,1000]，默认值是20。
-     */
+      * 每页个数，范围：[1,1000]，默认值是20。
+      */
     PageSize?: number;
     /**
-     * 地域，可选值：Mainland，Oversea，China，Foreign，Global（默认值）；如果为空，查询总的数据；如果为“Mainland”，查询中国大陆的数据；如果为“Oversea”，则查询中国大陆以外的数据；如果为China，查询中国的数据（包括港澳台）；如果为Foreign，查询国外的数据（不包括港澳台）。
-     */
+      * 地域，可选值：Mainland，Oversea，China，Foreign，Global（默认值）；如果为空，查询总的数据；如果为“Mainland”，查询中国大陆的数据；如果为“Oversea”，则查询中国大陆以外的数据；如果为China，查询中国的数据（包括港澳台）；如果为Foreign，查询国外的数据（不包括港澳台）。
+      */
     MainlandOrOversea?: string;
     /**
-     * 分组参数，可选值：CountryProIsp（默认值），Country（国家），默认是按照国家+省份+运营商来进行分组；目前国外的省份和运营商暂时无法识别。
-     */
+      * 分组参数，可选值：CountryProIsp（默认值），Country（国家），默认是按照国家+省份+运营商来进行分组；目前国外的省份和运营商暂时无法识别。
+      */
     GroupType?: string;
     /**
-     * 输出字段使用的语言，可选值：Chinese（默认值），English，目前国家，省份和运营商支持多语言。
-     */
+      * 输出字段使用的语言，可选值：Chinese（默认值），English，目前国家，省份和运营商支持多语言。
+      */
     OutLanguage?: string;
 }
 /**
@@ -4043,28 +4043,28 @@ export interface DescribePlayErrorCodeSumInfoListRequest {
  */
 export interface ModifyLiveCertRequest {
     /**
-     * 证书Id。
-     */
+      * 证书Id。
+      */
     CertId: string;
     /**
-     * 证书类型。0-用户添加证书；1-腾讯云托管证书。
-     */
+      * 证书类型。0-用户添加证书；1-腾讯云托管证书。
+      */
     CertType?: number;
     /**
-     * 证书名称。
-     */
+      * 证书名称。
+      */
     CertName?: string;
     /**
-     * 证书内容，即公钥。
-     */
+      * 证书内容，即公钥。
+      */
     HttpsCrt?: string;
     /**
-     * 私钥。
-     */
+      * 私钥。
+      */
     HttpsKey?: string;
     /**
-     * 描述信息。
-     */
+      * 描述信息。
+      */
     Description?: string;
 }
 /**
@@ -4072,14 +4072,14 @@ export interface ModifyLiveCertRequest {
  */
 export interface CommonMixControlParams {
     /**
-        * 取值范围[0,1]。
-  填1时，当参数中图层分辨率参数与视频实际分辨率不一致时，自动从视频中按图层设置的分辨率比例进行裁剪。
-        */
+      * 取值范围[0,1]。
+填1时，当参数中图层分辨率参数与视频实际分辨率不一致时，自动从视频中按图层设置的分辨率比例进行裁剪。
+      */
     UseMixCropCenter?: number;
     /**
-        * 取值范围[0,1]
-  填1时，当InputStreamList中个数为1时，且OutputParams.OutputStreamType为1时，不执行取消操作，执行拷贝流操作
-        */
+      * 取值范围[0,1]
+填1时，当InputStreamList中个数为1时，且OutputParams.OutputStreamType为1时，不执行取消操作，执行拷贝流操作
+      */
     AllowCopy?: number;
 }
 /**
@@ -4087,12 +4087,12 @@ export interface CommonMixControlParams {
  */
 export interface DescribeAreaBillBandwidthAndFluxListResponse {
     /**
-     * 明细数据信息。
-     */
+      * 明细数据信息。
+      */
     DataInfoList?: Array<BillAreaInfo>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -4100,8 +4100,8 @@ export interface DescribeAreaBillBandwidthAndFluxListResponse {
  */
 export interface ForbidLiveDomainRequest {
     /**
-     * 待停用的直播域名。
-     */
+      * 待停用的直播域名。
+      */
     DomainName: string;
 }
 /**
@@ -4113,16 +4113,16 @@ export declare type DescribeLiveRecordRulesRequest = null;
  */
 export interface DescribePlayErrorCodeDetailInfoListResponse {
     /**
-     * 统计信息列表。
-     */
+      * 统计信息列表。
+      */
     HttpCodeList?: Array<HttpCodeInfo>;
     /**
-     * 统计类型。
-     */
+      * 统计类型。
+      */
     StatType?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -4130,12 +4130,12 @@ export interface DescribePlayErrorCodeDetailInfoListResponse {
  */
 export interface CreateLiveRecordTemplateResponse {
     /**
-     * 模板Id。
-     */
+      * 模板Id。
+      */
     TemplateId?: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -4143,47 +4143,47 @@ export interface CreateLiveRecordTemplateResponse {
  */
 export interface RecordParam {
     /**
-        * 录制间隔。
-  单位秒，默认：1800。
-  取值范围：300-7200。
-  此参数对 HLS 无效，当录制 HLS 时从推流到断流生成一个文件。
-        */
+      * 录制间隔。
+单位秒，默认：1800。
+取值范围：300-7200。
+此参数对 HLS 无效，当录制 HLS 时从推流到断流生成一个文件。
+      */
     RecordInterval?: number;
     /**
-        * 录制存储时长。
-  单位秒，取值范围： 0 - 93312000。
-  0：表示永久存储。
-        */
+      * 录制存储时长。
+单位秒，取值范围： 0 - 93312000。
+0：表示永久存储。
+      */
     StorageTime?: number;
     /**
-     * 是否开启当前格式录制，默认值为0，0：否， 1：是。
-     */
+      * 是否开启当前格式录制，默认值为0，0：否， 1：是。
+      */
     Enable?: number;
     /**
-     * 点播子应用 ID。
-     */
+      * 点播子应用 ID。
+      */
     VodSubAppId?: number;
     /**
-        * 录制文件名。
-  支持的特殊占位符有：
-  {StreamID}: 流ID
-  {StartYear}: 开始时间-年
-  {StartMonth}: 开始时间-月
-  {StartDay}: 开始时间-日
-  {StartHour}: 开始时间-小时
-  {StartMinute}: 开始时间-分钟
-  {StartSecond}: 开始时间-秒
-  {StartMillisecond}: 开始时间-毫秒
-  {EndYear}: 结束时间-年
-  {EndMonth}: 结束时间-月
-  {EndDay}: 结束时间-日
-  {EndHour}: 结束时间-小时
-  {EndMinute}: 结束时间-分钟
-  {EndSecond}: 结束时间-秒
-  {EndMillisecond}: 结束时间-毫秒
-  
-  若未设置默认录制文件名为{StreamID}_{StartYear}-{StartMonth}-{StartDay}-{StartHour}-{StartMinute}-{StartSecond}_{EndYear}-{EndMonth}-{EndDay}-{EndHour}-{EndMinute}-{EndSecond}
-        */
+      * 录制文件名。
+支持的特殊占位符有：
+{StreamID}: 流ID
+{StartYear}: 开始时间-年
+{StartMonth}: 开始时间-月
+{StartDay}: 开始时间-日
+{StartHour}: 开始时间-小时
+{StartMinute}: 开始时间-分钟
+{StartSecond}: 开始时间-秒
+{StartMillisecond}: 开始时间-毫秒
+{EndYear}: 结束时间-年
+{EndMonth}: 结束时间-月
+{EndDay}: 结束时间-日
+{EndHour}: 结束时间-小时
+{EndMinute}: 结束时间-分钟
+{EndSecond}: 结束时间-秒
+{EndMillisecond}: 结束时间-毫秒
+
+若未设置默认录制文件名为{StreamID}_{StartYear}-{StartMonth}-{StartDay}-{StartHour}-{StartMinute}-{StartSecond}_{EndYear}-{EndMonth}-{EndDay}-{EndHour}-{EndMinute}-{EndSecond}
+      */
     VodFileName?: string;
 }
 /**
@@ -4191,26 +4191,26 @@ export interface RecordParam {
  */
 export interface DomainDetailInfo {
     /**
-        * 国内还是国外:
-  Mainland: 表示国内数据。
-  Oversea: 表示国外数据。
-        */
+      * 国内还是国外:
+Mainland: 表示国内数据。
+Oversea: 表示国外数据。
+      */
     MainlandOrOversea: string;
     /**
-     * 带宽，单位: Mbps。
-     */
+      * 带宽，单位: Mbps。
+      */
     Bandwidth: number;
     /**
-     * 流量，单位: MB。
-     */
+      * 流量，单位: MB。
+      */
     Flux: number;
     /**
-     * 人数。
-     */
+      * 人数。
+      */
     Online: number;
     /**
-     * 请求数。
-     */
+      * 请求数。
+      */
     Request: number;
 }
 /**
@@ -4218,12 +4218,12 @@ export interface DomainDetailInfo {
  */
 export interface HttpStatusInfo {
     /**
-     * 播放HTTP状态码。
-     */
+      * 播放HTTP状态码。
+      */
     HttpStatus: string;
     /**
-     * 个数。
-     */
+      * 个数。
+      */
     Num: number;
 }
 /**
@@ -4231,12 +4231,12 @@ export interface HttpStatusInfo {
  */
 export interface DeleteLiveRecordRequest {
     /**
-     * 流名称。
-     */
+      * 流名称。
+      */
     StreamName: string;
     /**
-     * 任务ID，由CreateLiveRecord接口返回。
-     */
+      * 任务ID，由CreateLiveRecord接口返回。
+      */
     TaskId: number;
 }
 /**
@@ -4244,12 +4244,12 @@ export interface DeleteLiveRecordRequest {
  */
 export interface DescribeLiveSnapshotTemplatesResponse {
     /**
-     * 截图模板列表。
-     */
+      * 截图模板列表。
+      */
     Templates?: Array<SnapshotTemplateInfo>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -4257,8 +4257,8 @@ export interface DescribeLiveSnapshotTemplatesResponse {
  */
 export interface StopRecordTaskRequest {
     /**
-     * 录制任务ID。
-     */
+      * 录制任务ID。
+      */
     TaskId: string;
 }
 /**
@@ -4266,13 +4266,13 @@ export interface StopRecordTaskRequest {
  */
 export interface HttpStatusData {
     /**
-        * 数据时间点，
-  格式：yyyy-mm-dd HH:MM:SS。
-        */
+      * 数据时间点，
+格式：yyyy-mm-dd HH:MM:SS。
+      */
     Time: string;
     /**
-     * 播放状态码详细信息。
-     */
+      * 播放状态码详细信息。
+      */
     HttpStatusInfoList: Array<HttpStatusInfo>;
 }
 /**
@@ -4280,13 +4280,13 @@ export interface HttpStatusData {
  */
 export interface HttpCodeInfo {
     /**
-        * HTTP协议返回码。
-  例："2xx", "3xx", "4xx", "5xx"。
-        */
+      * HTTP协议返回码。
+例："2xx", "3xx", "4xx", "5xx"。
+      */
     HttpCode: string;
     /**
-     * 统计信息，对于无数据的时间点，会补0。
-     */
+      * 统计信息，对于无数据的时间点，会补0。
+      */
     ValueList: Array<HttpCodeValue>;
 }
 /**
@@ -4294,29 +4294,29 @@ export interface HttpCodeInfo {
  */
 export interface DescribeStreamPlayInfoListRequest {
     /**
-     * 开始时间，北京时间，格式为yyyy-mm-dd HH:MM:SS
-     */
+      * 开始时间，北京时间，格式为yyyy-mm-dd HH:MM:SS
+      */
     StartTime: string;
     /**
-        * 结束时间，北京时间，格式为yyyy-mm-dd HH:MM:SS，
-  结束时间 和 开始时间  必须在同一天内，支持距当前时间30天内的数据查询。
-        */
+      * 结束时间，北京时间，格式为yyyy-mm-dd HH:MM:SS，
+结束时间 和 开始时间  必须在同一天内，支持距当前时间30天内的数据查询。
+      */
     EndTime: string;
     /**
-        * 播放域名，
-  若不填，则为查询所有播放域名的在线流数据。
-        */
+      * 播放域名，
+若不填，则为查询所有播放域名的在线流数据。
+      */
     PlayDomain?: string;
     /**
-        * 流名称，精确匹配。
-  若不填，则为查询总体播放数据。
-        */
+      * 流名称，精确匹配。
+若不填，则为查询总体播放数据。
+      */
     StreamName?: string;
     /**
-        * 推流路径，与播放地址中的AppName保持一致，会精确匹配，在同时传递了StreamName时生效。
-  若不填，则为查询总体播放数据。
-  注意：按AppName查询请先联系工单申请，开通后配置生效预计需要5个工作日左右，具体时间以最终回复为准。
-        */
+      * 推流路径，与播放地址中的AppName保持一致，会精确匹配，在同时传递了StreamName时生效。
+若不填，则为查询总体播放数据。
+注意：按AppName查询请先联系工单申请，开通后配置生效预计需要5个工作日左右，具体时间以最终回复为准。
+      */
     AppName?: string;
 }
 /**
@@ -4324,111 +4324,111 @@ export interface DescribeStreamPlayInfoListRequest {
  */
 export interface CreateLiveTranscodeTemplateRequest {
     /**
-        * 模板名称，例：900 900p 仅支持字母和数字的组合。
-  长度限制：
-    标准转码：1-10个字符
-    极速高清转码：3-10个字符
-        */
+      * 模板名称，例：900 900p 仅支持字母和数字的组合。
+长度限制：
+  标准转码：1-10个字符
+  极速高清转码：3-10个字符
+      */
     TemplateName: string;
     /**
-        * 视频码率。范围：0kbps - 8000kbps。
-  0为保持原始码率。
-  注: 转码模板有码率唯一要求，最终保存的码率可能与输入码率有所差别。
-        */
+      * 视频码率。范围：0kbps - 8000kbps。
+0为保持原始码率。
+注: 转码模板有码率唯一要求，最终保存的码率可能与输入码率有所差别。
+      */
     VideoBitrate: number;
     /**
-        * 音频编码：aac，默认aac。
-  注意：当前该参数未生效，待后续支持！
-        */
+      * 音频编码：aac，默认aac。
+注意：当前该参数未生效，待后续支持！
+      */
     Acodec?: string;
     /**
-        * 音频码率，默认0。
-  范围：0-500。
-        */
+      * 音频码率，默认0。
+范围：0-500。
+      */
     AudioBitrate?: number;
     /**
-        * 视频编码：h264/h265/origin，默认h264。
-  
-  origin: 保持原始编码格式
-        */
+      * 视频编码：h264/h265/origin，默认h264。
+
+origin: 保持原始编码格式
+      */
     Vcodec?: string;
     /**
-     * 模板描述。
-     */
+      * 模板描述。
+      */
     Description?: string;
     /**
-        * 宽，默认0。
-  范围[0-3000]
-  数值必须是2的倍数，0是原始宽度
-        */
+      * 宽，默认0。
+范围[0-3000]
+数值必须是2的倍数，0是原始宽度
+      */
     Width?: number;
     /**
-     * 是否保留视频，0：否，1：是。默认1。
-     */
+      * 是否保留视频，0：否，1：是。默认1。
+      */
     NeedVideo?: number;
     /**
-     * 是否保留音频，0：否，1：是。默认1。
-     */
+      * 是否保留音频，0：否，1：是。默认1。
+      */
     NeedAudio?: number;
     /**
-        * 高，默认0。
-  范围[0-3000]
-  数值必须是2的倍数，0是原始宽度
-        */
+      * 高，默认0。
+范围[0-3000]
+数值必须是2的倍数，0是原始宽度
+      */
     Height?: number;
     /**
-        * 帧率，默认0。
-  范围0-60fps
-        */
+      * 帧率，默认0。
+范围0-60fps
+      */
     Fps?: number;
     /**
-        * 关键帧间隔，单位：秒。
-  默认原始的间隔
-  范围2-6
-        */
+      * 关键帧间隔，单位：秒。
+默认原始的间隔
+范围2-6
+      */
     Gop?: number;
     /**
-        * 旋转角度，默认0。
-  可取值：0，90，180，270
-        */
+      * 旋转角度，默认0。
+可取值：0，90，180，270
+      */
     Rotate?: number;
     /**
-        * 编码质量：
-  baseline/main/high。默认baseline
-        */
+      * 编码质量：
+baseline/main/high。默认baseline
+      */
     Profile?: string;
     /**
-        * 当设置的码率>原始码率时，是否以原始码率为准。
-  0：否， 1：是
-  默认 0。
-        */
+      * 当设置的码率>原始码率时，是否以原始码率为准。
+0：否， 1：是
+默认 0。
+      */
     BitrateToOrig?: number;
     /**
-        * 当设置的高度>原始高度时，是否以原始高度为准。
-  0：否， 1：是
-  默认 0。
-        */
+      * 当设置的高度>原始高度时，是否以原始高度为准。
+0：否， 1：是
+默认 0。
+      */
     HeightToOrig?: number;
     /**
-        * 当设置的帧率>原始帧率时，是否以原始帧率为准。
-  0：否， 1：是
-  默认 0。
-        */
+      * 当设置的帧率>原始帧率时，是否以原始帧率为准。
+0：否， 1：是
+默认 0。
+      */
     FpsToOrig?: number;
     /**
-     * 是否是极速高清模板，0：否，1：是。默认0。
-     */
+      * 是否是极速高清模板，0：否，1：是。默认0。
+      */
     AiTransCode?: number;
     /**
-        * 极速高清视频码率压缩比。
-  极速高清目标码率=VideoBitrate * (1-AdaptBitratePercent)
-  
-  取值范围：0.0到0.5
-        */
+      * 极速高清视频码率压缩比。
+极速高清目标码率=VideoBitrate * (1-AdaptBitratePercent)
+
+取值范围：0.0到0.5
+      */
     AdaptBitratePercent?: number;
     /**
-     * 是否以短边作为高度，0：否，1：是。默认0。
-     */
+      * 是否以短边作为高度，0：否，1：是。默认0。
+      */
     ShortEdgeAsHeight?: number;
 }
 /**
@@ -4436,28 +4436,28 @@ export interface CreateLiveTranscodeTemplateRequest {
  */
 export interface DescribeLiveStreamPublishedListResponse {
     /**
-     * 推流记录信息。
-     */
+      * 推流记录信息。
+      */
     PublishInfo?: Array<StreamName>;
     /**
-     * 分页的页码。
-     */
+      * 分页的页码。
+      */
     PageNum?: number;
     /**
-     * 每页大小
-     */
+      * 每页大小
+      */
     PageSize?: number;
     /**
-     * 符合条件的总个数。
-     */
+      * 符合条件的总个数。
+      */
     TotalNum?: number;
     /**
-     * 总页数。
-     */
+      * 总页数。
+      */
     TotalPage?: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -4465,12 +4465,12 @@ export interface DescribeLiveStreamPublishedListResponse {
  */
 export interface DeleteLiveDomainRequest {
     /**
-     * 要删除的域名
-     */
+      * 要删除的域名
+      */
     DomainName: string;
     /**
-     * 类型。0-推流，1-播放
-     */
+      * 类型。0-推流，1-播放
+      */
     DomainType: number;
 }
 /**
@@ -4478,8 +4478,8 @@ export interface DeleteLiveDomainRequest {
  */
 export interface AddDelayLiveStreamResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -4487,12 +4487,12 @@ export interface AddDelayLiveStreamResponse {
  */
 export interface DescribeLiveTranscodeTemplatesResponse {
     /**
-     * 转码模板列表。
-     */
+      * 转码模板列表。
+      */
     Templates?: Array<TemplateInfo>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -4500,12 +4500,12 @@ export interface DescribeLiveTranscodeTemplatesResponse {
  */
 export interface DeleteLiveCallbackRuleRequest {
     /**
-     * 推流域名。
-     */
+      * 推流域名。
+      */
     DomainName: string;
     /**
-     * 推流路径，与推流和播放地址中的 AppName 保持一致，默认为 live。
-     */
+      * 推流路径，与推流和播放地址中的 AppName 保持一致，默认为 live。
+      */
     AppName: string;
 }
 /**
@@ -4513,26 +4513,26 @@ export interface DeleteLiveCallbackRuleRequest {
  */
 export interface PlayAuthKeyInfo {
     /**
-     * 域名。
-     */
+      * 域名。
+      */
     DomainName: string;
     /**
-        * 是否启用:
-  0: 关闭。
-  1: 启用。
-        */
+      * 是否启用:
+0: 关闭。
+1: 启用。
+      */
     Enable: number;
     /**
-     * 鉴权 Key。
-     */
+      * 鉴权 Key。
+      */
     AuthKey: string;
     /**
-     * 有效时间，单位：秒。
-     */
+      * 有效时间，单位：秒。
+      */
     AuthDelta: number;
     /**
-     * 鉴权 BackKey。
-     */
+      * 鉴权 BackKey。
+      */
     AuthBackKey: string;
 }
 /**
@@ -4540,101 +4540,101 @@ export interface PlayAuthKeyInfo {
  */
 export interface ModifyLiveTranscodeTemplateRequest {
     /**
-     * 模板 Id。
-     */
+      * 模板 Id。
+      */
     TemplateId: number;
     /**
-        * 视频编码：h264/h265/origin，默认h264。
-  
-  origin: 保持原始编码格式
-        */
+      * 视频编码：h264/h265/origin，默认h264。
+
+origin: 保持原始编码格式
+      */
     Vcodec?: string;
     /**
-        * 音频编码：aac，默认aac。
-  注意：当前该参数未生效，待后续支持！
-        */
+      * 音频编码：aac，默认aac。
+注意：当前该参数未生效，待后续支持！
+      */
     Acodec?: string;
     /**
-        * 音频码率，默认0。
-  范围：0-500。
-        */
+      * 音频码率，默认0。
+范围：0-500。
+      */
     AudioBitrate?: number;
     /**
-     * 模板描述。
-     */
+      * 模板描述。
+      */
     Description?: string;
     /**
-        * 视频码率。范围：0kbps - 8000kbps。
-  0为保持原始码率。
-  注: 转码模板有码率唯一要求，最终保存的码率可能与输入码率有所差别。
-        */
+      * 视频码率。范围：0kbps - 8000kbps。
+0为保持原始码率。
+注: 转码模板有码率唯一要求，最终保存的码率可能与输入码率有所差别。
+      */
     VideoBitrate?: number;
     /**
-        * 宽。0-3000。
-  数值必须是2的倍数，0是原始宽度
-        */
+      * 宽。0-3000。
+数值必须是2的倍数，0是原始宽度
+      */
     Width?: number;
     /**
-     * 是否保留视频，0：否，1：是。默认1。
-     */
+      * 是否保留视频，0：否，1：是。默认1。
+      */
     NeedVideo?: number;
     /**
-     * 是否保留音频，0：否，1：是。默认1。
-     */
+      * 是否保留音频，0：否，1：是。默认1。
+      */
     NeedAudio?: number;
     /**
-        * 高。0-3000。
-  数值必须是2的倍数，0是原始宽度
-        */
+      * 高。0-3000。
+数值必须是2的倍数，0是原始宽度
+      */
     Height?: number;
     /**
-        * 帧率，默认0。
-  范围0-60
-        */
+      * 帧率，默认0。
+范围0-60
+      */
     Fps?: number;
     /**
-        * 关键帧间隔，单位：秒。
-  范围2-6
-        */
+      * 关键帧间隔，单位：秒。
+范围2-6
+      */
     Gop?: number;
     /**
-        * 旋转角度，默认0。
-  可取值：0，90，180，270
-        */
+      * 旋转角度，默认0。
+可取值：0，90，180，270
+      */
     Rotate?: number;
     /**
-        * 编码质量：
-  baseline/main/high。
-        */
+      * 编码质量：
+baseline/main/high。
+      */
     Profile?: string;
     /**
-        * 当设置的码率>原始码率时，是否以原始码率为准。
-  0：否， 1：是
-  默认 0。
-        */
+      * 当设置的码率>原始码率时，是否以原始码率为准。
+0：否， 1：是
+默认 0。
+      */
     BitrateToOrig?: number;
     /**
-        * 当设置的高度>原始高度时，是否以原始高度为准。
-  0：否， 1：是
-  默认 0。
-        */
+      * 当设置的高度>原始高度时，是否以原始高度为准。
+0：否， 1：是
+默认 0。
+      */
     HeightToOrig?: number;
     /**
-        * 当设置的帧率>原始帧率时，是否以原始帧率为准。
-  0：否， 1：是
-  默认 0。
-        */
+      * 当设置的帧率>原始帧率时，是否以原始帧率为准。
+0：否， 1：是
+默认 0。
+      */
     FpsToOrig?: number;
     /**
-        * 极速高清视频码率压缩比。
-  极速高清目标码率=VideoBitrate * (1-AdaptBitratePercent)
-  
-  取值范围：0.0到0.5
-        */
+      * 极速高清视频码率压缩比。
+极速高清目标码率=VideoBitrate * (1-AdaptBitratePercent)
+
+取值范围：0.0到0.5
+      */
     AdaptBitratePercent?: number;
     /**
-     * 是否以短边作为高度，0：否，1：是。默认0。
-     */
+      * 是否以短边作为高度，0：否，1：是。默认0。
+      */
     ShortEdgeAsHeight?: number;
 }
 /**
@@ -4642,8 +4642,8 @@ export interface ModifyLiveTranscodeTemplateRequest {
  */
 export interface ModifyLiveDomainCertResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -4651,8 +4651,8 @@ export interface ModifyLiveDomainCertResponse {
  */
 export interface ModifyLiveCallbackTemplateResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -4660,8 +4660,8 @@ export interface ModifyLiveCallbackTemplateResponse {
  */
 export interface EnableLiveDomainRequest {
     /**
-     * 待启用的直播域名。
-     */
+      * 待启用的直播域名。
+      */
     DomainName: string;
 }
 /**
@@ -4669,16 +4669,16 @@ export interface EnableLiveDomainRequest {
  */
 export interface DescribeAllStreamPlayInfoListResponse {
     /**
-     * 查询时间点，回传的输入参数中的查询时间。
-     */
+      * 查询时间点，回传的输入参数中的查询时间。
+      */
     QueryTime?: string;
     /**
-     * 数据信息列表。
-     */
+      * 数据信息列表。
+      */
     DataInfoList?: Array<MonitorStreamPlayInfo>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -4686,8 +4686,8 @@ export interface DescribeAllStreamPlayInfoListResponse {
  */
 export interface ForbidLiveDomainResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -4699,38 +4699,38 @@ export declare type DescribeLiveSnapshotRulesRequest = null;
  */
 export interface CreateRecordTaskRequest {
     /**
-     * 流名称。
-     */
+      * 流名称。
+      */
     StreamName: string;
     /**
-     * 推流域名。
-     */
+      * 推流域名。
+      */
     DomainName: string;
     /**
-     * 推流路径。
-     */
+      * 推流路径。
+      */
     AppName: string;
     /**
-     * 录制任务结束时间，Unix时间戳。设置时间必须大于StartTime，且EndTime - StartTime不能超过24小时。
-     */
+      * 录制任务结束时间，Unix时间戳。设置时间必须大于StartTime，且EndTime - StartTime不能超过24小时。
+      */
     EndTime: number;
     /**
-     * 录制任务开始时间，Unix时间戳。如果不填表示立即启动录制。不超过从当前时间开始6天之内的时间。
-     */
+      * 录制任务开始时间，Unix时间戳。如果不填表示立即启动录制。不超过从当前时间开始6天之内的时间。
+      */
     StartTime?: number;
     /**
-        * 推流类型，默认0。取值：
-  0-直播推流。
-  1-合成流，即 A+B=C 类型混流。
-        */
+      * 推流类型，默认0。取值：
+0-直播推流。
+1-合成流，即 A+B=C 类型混流。
+      */
     StreamType?: number;
     /**
-     * 录制模板ID，CreateLiveRecordTemplate 返回值。如果不填或者传入错误ID，则默认录制HLS格式、永久存储。
-     */
+      * 录制模板ID，CreateLiveRecordTemplate 返回值。如果不填或者传入错误ID，则默认录制HLS格式、永久存储。
+      */
     TemplateId?: number;
     /**
-     * 扩展字段，暂无定义。默认为空。
-     */
+      * 扩展字段，暂无定义。默认为空。
+      */
     Extension?: string;
 }
 /**
@@ -4738,8 +4738,8 @@ export interface CreateRecordTaskRequest {
  */
 export interface CreateLiveTranscodeRuleResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -4747,8 +4747,8 @@ export interface CreateLiveTranscodeRuleResponse {
  */
 export interface CreateLiveCallbackRuleResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -4756,12 +4756,12 @@ export interface CreateLiveCallbackRuleResponse {
  */
 export interface DescribeLiveRecordTemplateResponse {
     /**
-     * 录制模板信息。
-     */
+      * 录制模板信息。
+      */
     Template?: RecordTemplateInfo;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -4769,16 +4769,16 @@ export interface DescribeLiveRecordTemplateResponse {
  */
 export interface DescribeAreaBillBandwidthAndFluxListRequest {
     /**
-     * 起始时间点，格式为yyyy-mm-dd HH:MM:SS。
-     */
+      * 起始时间点，格式为yyyy-mm-dd HH:MM:SS。
+      */
     StartTime: string;
     /**
-     * 结束时间点，格式为yyyy-mm-dd HH:MM:SS，起始和结束时间跨度不支持超过1天。
-     */
+      * 结束时间点，格式为yyyy-mm-dd HH:MM:SS，起始和结束时间跨度不支持超过1天。
+      */
     EndTime: string;
     /**
-     * 直播播放域名，若不填，表示总体数据。
-     */
+      * 直播播放域名，若不填，表示总体数据。
+      */
     PlayDomains?: Array<string>;
 }
 /**
@@ -4786,8 +4786,8 @@ export interface DescribeAreaBillBandwidthAndFluxListRequest {
  */
 export interface BindLiveDomainCertResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -4795,24 +4795,24 @@ export interface BindLiveDomainCertResponse {
  */
 export interface CallBackRuleInfo {
     /**
-     * 规则创建时间。
-     */
+      * 规则创建时间。
+      */
     CreateTime: string;
     /**
-     * 规则更新时间。
-     */
+      * 规则更新时间。
+      */
     UpdateTime: string;
     /**
-     * 模板 ID。
-     */
+      * 模板 ID。
+      */
     TemplateId: number;
     /**
-     * 推流域名。
-     */
+      * 推流域名。
+      */
     DomainName: string;
     /**
-     * 推流路径。
-     */
+      * 推流路径。
+      */
     AppName: string;
 }
 /**
@@ -4820,22 +4820,22 @@ export interface CallBackRuleInfo {
  */
 export interface PlaySumStatInfo {
     /**
-     * 域名或流 ID。
-     */
+      * 域名或流 ID。
+      */
     Name: string;
     /**
-        * 平均下载速度，
-  单位: MB/s。
-  计算公式: 每分钟的下载速度求平均值。
-        */
+      * 平均下载速度，
+单位: MB/s。
+计算公式: 每分钟的下载速度求平均值。
+      */
     AvgFluxPerSecond: number;
     /**
-     * 总流量，单位: MB。
-     */
+      * 总流量，单位: MB。
+      */
     TotalFlux: number;
     /**
-     * 总请求数。
-     */
+      * 总请求数。
+      */
     TotalRequest: number;
 }
 /**
@@ -4847,9 +4847,9 @@ export declare type DescribeLiveTranscodeTemplatesRequest = null;
  */
 export interface HlsSpecialParam {
     /**
-        * HLS续流超时时间。
-  取值范围[0，1800]。
-        */
+      * HLS续流超时时间。
+取值范围[0，1800]。
+      */
     FlowContinueDuration?: number;
 }
 /**
@@ -4857,12 +4857,12 @@ export interface HlsSpecialParam {
  */
 export interface DescribeLiveRecordRulesResponse {
     /**
-     * 规则列表。
-     */
+      * 规则列表。
+      */
     Rules?: Array<RuleInfo>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -4870,60 +4870,60 @@ export interface DescribeLiveRecordRulesResponse {
  */
 export interface CreateLiveSnapshotTemplateRequest {
     /**
-        * 模板名称。
-  长度上限：255字节。
-  仅支持中文、英文、数字、_、-。
-        */
+      * 模板名称。
+长度上限：255字节。
+仅支持中文、英文、数字、_、-。
+      */
     TemplateName: string;
     /**
-     * Cos 应用 ID。
-     */
+      * Cos 应用 ID。
+      */
     CosAppId: number;
     /**
-        * Cos Bucket名称。
-  注：CosBucket参数值不能包含-[appid] 部分。
-        */
+      * Cos Bucket名称。
+注：CosBucket参数值不能包含-[appid] 部分。
+      */
     CosBucket: string;
     /**
-     * Cos地区。
-     */
+      * Cos地区。
+      */
     CosRegion: string;
     /**
-        * 描述信息。
-  长度上限：1024字节。
-  仅支持中文、英文、数字、_、-。
-        */
+      * 描述信息。
+长度上限：1024字节。
+仅支持中文、英文、数字、_、-。
+      */
     Description?: string;
     /**
-        * 截图间隔，单位s，默认10s。
-  范围： 5s ~ 300s。
-        */
+      * 截图间隔，单位s，默认10s。
+范围： 5s ~ 300s。
+      */
     SnapshotInterval?: number;
     /**
-     * 截图宽度。默认：0（原始宽）。
-     */
+      * 截图宽度。默认：0（原始宽）。
+      */
     Width?: number;
     /**
-     * 截图高度。默认：0（原始高）。
-     */
+      * 截图高度。默认：0（原始高）。
+      */
     Height?: number;
     /**
-     * 是否开启鉴黄，0：不开启，1：开启。默认：0。
-     */
+      * 是否开启鉴黄，0：不开启，1：开启。默认：0。
+      */
     PornFlag?: number;
     /**
-        * Cos Bucket文件夹前缀。
-  如不传，实际按默认值
-  /{Year}-{Month}-{Day}
-  生效
-        */
+      * Cos Bucket文件夹前缀。
+如不传，实际按默认值
+/{Year}-{Month}-{Day}
+生效
+      */
     CosPrefix?: string;
     /**
-        * Cos 文件名称。
-  如不传，实际按默认值
-  {StreamID}-screenshot-{Hour}-{Minute}-{Second}-{Width}x{Height}{Ext}
-  生效
-        */
+      * Cos 文件名称。
+如不传，实际按默认值
+{StreamID}-screenshot-{Hour}-{Minute}-{Second}-{Width}x{Height}{Ext}
+生效
+      */
     CosFileName?: string;
 }
 /**
@@ -4931,32 +4931,32 @@ export interface CreateLiveSnapshotTemplateRequest {
  */
 export interface DescribeLiveDomainPlayInfoListResponse {
     /**
-     * 数据时间，格式为yyyy-mm-dd HH:MM:SS。
-     */
+      * 数据时间，格式为yyyy-mm-dd HH:MM:SS。
+      */
     Time?: string;
     /**
-     * 实时总带宽。
-     */
+      * 实时总带宽。
+      */
     TotalBandwidth?: number;
     /**
-     * 实时总流量。
-     */
+      * 实时总流量。
+      */
     TotalFlux?: number;
     /**
-     * 总请求数。
-     */
+      * 总请求数。
+      */
     TotalRequest?: number;
     /**
-     * 实时总连接数。
-     */
+      * 实时总连接数。
+      */
     TotalOnline?: number;
     /**
-     * 分域名的数据情况。
-     */
+      * 分域名的数据情况。
+      */
     DomainInfoList?: Array<DomainInfoList>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -4964,16 +4964,16 @@ export interface DescribeLiveDomainPlayInfoListResponse {
  */
 export interface HttpCodeValue {
     /**
-     * 时间，格式：yyyy-mm-dd HH:MM:SS。
-     */
+      * 时间，格式：yyyy-mm-dd HH:MM:SS。
+      */
     Time: string;
     /**
-     * 次数。
-     */
+      * 次数。
+      */
     Numbers: number;
     /**
-     * 占比。
-     */
+      * 占比。
+      */
     Percentage: number;
 }
 /**
@@ -4981,26 +4981,26 @@ export interface HttpCodeValue {
  */
 export interface DescribeLiveStreamOnlineListRequest {
     /**
-     * 推流域名。多域名用户需要填写 DomainName。
-     */
+      * 推流域名。多域名用户需要填写 DomainName。
+      */
     DomainName?: string;
     /**
-     * 推流路径，与推流和播放地址中的 AppName 保持一致，默认为 live。多路径用户需要填写 AppName。
-     */
+      * 推流路径，与推流和播放地址中的 AppName 保持一致，默认为 live。多路径用户需要填写 AppName。
+      */
     AppName?: string;
     /**
-     * 取得第几页，默认1。
-     */
+      * 取得第几页，默认1。
+      */
     PageNum?: number;
     /**
-        * 每页大小，最大100。
-  取值：10~100之间的任意整数。
-  默认值：10。
-        */
+      * 每页大小，最大100。
+取值：10~100之间的任意整数。
+默认值：10。
+      */
     PageSize?: number;
     /**
-     * 流名称，用于精确查询。
-     */
+      * 流名称，用于精确查询。
+      */
     StreamName?: string;
 }
 /**
@@ -5008,8 +5008,8 @@ export interface DescribeLiveStreamOnlineListRequest {
  */
 export interface DeleteLiveSnapshotTemplateResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -5017,9 +5017,9 @@ export interface DeleteLiveSnapshotTemplateResponse {
  */
 export interface DescribeLiveSnapshotTemplateRequest {
     /**
-        * 模板 ID。
-  调用 [CreateLiveSnapshotTemplate](/document/product/267/32624) 时返回的模板 ID。
-        */
+      * 模板 ID。
+调用 [CreateLiveSnapshotTemplate](/document/product/267/32624) 时返回的模板 ID。
+      */
     TemplateId: number;
 }
 /**
@@ -5027,8 +5027,8 @@ export interface DescribeLiveSnapshotTemplateRequest {
  */
 export interface DeleteLiveCertResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -5036,8 +5036,8 @@ export interface DeleteLiveCertResponse {
  */
 export interface CreateCommonMixStreamResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -5045,12 +5045,12 @@ export interface CreateCommonMixStreamResponse {
  */
 export interface CreateLiveCallbackTemplateResponse {
     /**
-     * 模板ID。
-     */
+      * 模板ID。
+      */
     TemplateId?: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -5058,8 +5058,8 @@ export interface CreateLiveCallbackTemplateResponse {
  */
 export interface DescribeLivePushAuthKeyRequest {
     /**
-     * 推流域名。
-     */
+      * 推流域名。
+      */
     DomainName: string;
 }
 /**
@@ -5067,13 +5067,13 @@ export interface DescribeLivePushAuthKeyRequest {
  */
 export interface PlayStatInfo {
     /**
-     * 数据时间点。
-     */
+      * 数据时间点。
+      */
     Time: string;
     /**
-        * 带宽/流量/请求数/并发连接数/下载速度的值，若没数据返回时该值为0。
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 带宽/流量/请求数/并发连接数/下载速度的值，若没数据返回时该值为0。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     Value: number;
 }
 /**
@@ -5081,10 +5081,10 @@ export interface PlayStatInfo {
  */
 export interface DescribeLiveCallbackTemplateRequest {
     /**
-        * 模板 ID。
-  1. 在创建回调模板接口 [CreateLiveCallbackTemplate](/document/product/267/32637) 调用的返回值中获取模板 ID。
-  2. 可以从接口 [DescribeLiveCallbackTemplates](/document/product/267/32632) 查询已经创建的过的模板列表。
-        */
+      * 模板 ID。
+1. 在创建回调模板接口 [CreateLiveCallbackTemplate](/document/product/267/32637) 调用的返回值中获取模板 ID。
+2. 可以从接口 [DescribeLiveCallbackTemplates](/document/product/267/32632) 查询已经创建的过的模板列表。
+      */
     TemplateId: number;
 }
 /**
@@ -5092,58 +5092,58 @@ export interface DescribeLiveCallbackTemplateRequest {
  */
 export interface ModifyLiveSnapshotTemplateRequest {
     /**
-     * 模板 ID。
-     */
+      * 模板 ID。
+      */
     TemplateId: number;
     /**
-        * 模板名称。
-  长度上限：255字节。
-        */
+      * 模板名称。
+长度上限：255字节。
+      */
     TemplateName?: string;
     /**
-        * 描述信息。
-  长度上限：1024字节。
-        */
+      * 描述信息。
+长度上限：1024字节。
+      */
     Description?: string;
     /**
-        * 截图间隔，单位s，默认10s。
-  范围： 5s ~ 300s。
-        */
+      * 截图间隔，单位s，默认10s。
+范围： 5s ~ 300s。
+      */
     SnapshotInterval?: number;
     /**
-     * 截图宽度。默认：0（原始宽）。
-     */
+      * 截图宽度。默认：0（原始宽）。
+      */
     Width?: number;
     /**
-     * 截图高度。默认：0（原始高）。
-     */
+      * 截图高度。默认：0（原始高）。
+      */
     Height?: number;
     /**
-        * 是否开启鉴黄，默认 0 。
-  0：不开启。
-  1：开启。
-        */
+      * 是否开启鉴黄，默认 0 。
+0：不开启。
+1：开启。
+      */
     PornFlag?: number;
     /**
-     * Cos 应用 ID。
-     */
+      * Cos 应用 ID。
+      */
     CosAppId?: number;
     /**
-        * Cos Bucket名称。
-  注：CosBucket参数值不能包含-[appid] 部分。
-        */
+      * Cos Bucket名称。
+注：CosBucket参数值不能包含-[appid] 部分。
+      */
     CosBucket?: string;
     /**
-     * Cos 地域。
-     */
+      * Cos 地域。
+      */
     CosRegion?: string;
     /**
-     * Cos Bucket文件夹前缀。
-     */
+      * Cos Bucket文件夹前缀。
+      */
     CosPrefix?: string;
     /**
-     * Cos 文件名称。
-     */
+      * Cos 文件名称。
+      */
     CosFileName?: string;
 }
 /**
@@ -5151,12 +5151,12 @@ export interface ModifyLiveSnapshotTemplateRequest {
  */
 export interface DescribeLiveCertResponse {
     /**
-     * 证书信息。
-     */
+      * 证书信息。
+      */
     CertInfo?: CertInfo;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -5164,8 +5164,8 @@ export interface DescribeLiveCertResponse {
  */
 export interface CreateLiveRecordRuleResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -5173,9 +5173,9 @@ export interface CreateLiveRecordRuleResponse {
  */
 export interface DescribeLiveTranscodeTemplateRequest {
     /**
-        * 模板 ID。
-  注意：在创建转码模板接口 [CreateLiveTranscodeTemplate](/document/product/267/32646) 调用的返回值中获取模板 ID。
-        */
+      * 模板 ID。
+注意：在创建转码模板接口 [CreateLiveTranscodeTemplate](/document/product/267/32646) 调用的返回值中获取模板 ID。
+      */
     TemplateId: number;
 }
 /**
@@ -5183,19 +5183,19 @@ export interface DescribeLiveTranscodeTemplateRequest {
  */
 export interface DescribeLogDownloadListRequest {
     /**
-        * 开始时间，北京时间。
-  格式：yyyy-mm-dd HH:MM:SS。
-        */
+      * 开始时间，北京时间。
+格式：yyyy-mm-dd HH:MM:SS。
+      */
     StartTime: string;
     /**
-        * 结束时间，北京时间。
-  格式：yyyy-mm-dd HH:MM:SS。
-  注意：结束时间 - 开始时间 <=7天。
-        */
+      * 结束时间，北京时间。
+格式：yyyy-mm-dd HH:MM:SS。
+注意：结束时间 - 开始时间 <=7天。
+      */
     EndTime: string;
     /**
-     * 域名列表。
-     */
+      * 域名列表。
+      */
     PlayDomains: Array<string>;
 }
 /**
@@ -5203,8 +5203,8 @@ export interface DescribeLogDownloadListRequest {
  */
 export interface DeleteLiveWatermarkResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -5212,12 +5212,12 @@ export interface DeleteLiveWatermarkResponse {
  */
 export interface DescribeLivePushAuthKeyResponse {
     /**
-     * 推流鉴权key信息。
-     */
+      * 推流鉴权key信息。
+      */
     PushAuthKeyInfo?: PushAuthKeyInfo;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -5225,20 +5225,20 @@ export interface DescribeLivePushAuthKeyResponse {
  */
 export interface CreateLiveWatermarkRuleRequest {
     /**
-     * 推流域名。
-     */
+      * 推流域名。
+      */
     DomainName: string;
     /**
-     * 推流路径，与推流和播放地址中的AppName保持一致，默认为live。
-     */
+      * 推流路径，与推流和播放地址中的AppName保持一致，默认为live。
+      */
     AppName: string;
     /**
-     * 流名称。
-     */
+      * 流名称。
+      */
     StreamName: string;
     /**
-     * 水印Id，即调用[AddLiveWatermark](/document/product/267/30154)接口返回的WatermarkId。
-     */
+      * 水印Id，即调用[AddLiveWatermark](/document/product/267/30154)接口返回的WatermarkId。
+      */
     TemplateId: number;
 }
 /**
@@ -5246,10 +5246,10 @@ export interface CreateLiveWatermarkRuleRequest {
  */
 export interface DescribeLiveRecordTemplatesRequest {
     /**
-        * 是否属于慢直播模板，默认：0。
-  0： 标准直播。
-  1：慢直播。
-        */
+      * 是否属于慢直播模板，默认：0。
+0： 标准直播。
+1：慢直播。
+      */
     IsDelayLive?: number;
 }
 /**
@@ -5257,8 +5257,8 @@ export interface DescribeLiveRecordTemplatesRequest {
  */
 export interface DescribeAllStreamPlayInfoListRequest {
     /**
-     * 查询时间点，精确到分钟粒度，支持最近1个月的数据查询，数据延迟为5分钟左右，如果要查询实时的数据，建议传递5分钟前的时间点，格式为yyyy-mm-dd HH:MM:SS。
-     */
+      * 查询时间点，精确到分钟粒度，支持最近1个月的数据查询，数据延迟为5分钟左右，如果要查询实时的数据，建议传递5分钟前的时间点，格式为yyyy-mm-dd HH:MM:SS。
+      */
     QueryTime: string;
 }
 /**
@@ -5266,13 +5266,13 @@ export interface DescribeAllStreamPlayInfoListRequest {
  */
 export interface DescribeLiveDomainResponse {
     /**
-        * 域名信息。
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 域名信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     DomainInfo?: DomainInfo;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -5280,8 +5280,8 @@ export interface DescribeLiveDomainResponse {
  */
 export interface DeleteRecordTaskRequest {
     /**
-     * 任务ID，CreateRecordTask返回。删除TaskId指定的录制任务。
-     */
+      * 任务ID，CreateRecordTask返回。删除TaskId指定的录制任务。
+      */
     TaskId: string;
 }
 /**
@@ -5289,8 +5289,8 @@ export interface DeleteRecordTaskRequest {
  */
 export interface StopLiveRecordResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -5298,28 +5298,28 @@ export interface StopLiveRecordResponse {
  */
 export interface DescribeStreamDayPlayInfoListResponse {
     /**
-     * 播放数据信息列表。
-     */
+      * 播放数据信息列表。
+      */
     DataInfoList?: Array<PlayDataInfoByStream>;
     /**
-     * 总数量。
-     */
+      * 总数量。
+      */
     TotalNum?: number;
     /**
-     * 总页数。
-     */
+      * 总页数。
+      */
     TotalPage?: number;
     /**
-     * 当前数据所处页码。
-     */
+      * 当前数据所处页码。
+      */
     PageNum?: number;
     /**
-     * 每页个数。
-     */
+      * 每页个数。
+      */
     PageSize?: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -5327,39 +5327,39 @@ export interface DescribeStreamDayPlayInfoListResponse {
  */
 export interface DescribeVisitTopSumInfoListResponse {
     /**
-        * 页号，
-  范围是[1,1000]，
-  默认值是1。
-        */
+      * 页号，
+范围是[1,1000]，
+默认值是1。
+      */
     PageNum?: number;
     /**
-        * 每页个数，范围是[1,1000]，
-  默认值是20。
-        */
+      * 每页个数，范围是[1,1000]，
+默认值是20。
+      */
     PageSize?: number;
     /**
-     * 峰值指标，可选值包括”Domain”，”StreamId”。
-     */
+      * 峰值指标，可选值包括”Domain”，”StreamId”。
+      */
     TopIndex?: string;
     /**
-     * 排序指标，可选值包括” AvgFluxPerSecond”(按每秒平均流量排序)，”TotalRequest”（默认，按总请求数排序）,“TotalFlux”（按总流量排序）。
-     */
+      * 排序指标，可选值包括” AvgFluxPerSecond”(按每秒平均流量排序)，”TotalRequest”（默认，按总请求数排序）,“TotalFlux”（按总流量排序）。
+      */
     OrderParam?: string;
     /**
-     * 记录总数。
-     */
+      * 记录总数。
+      */
     TotalNum?: number;
     /**
-     * 记录总页数。
-     */
+      * 记录总页数。
+      */
     TotalPage?: number;
     /**
-     * 数据内容。
-     */
+      * 数据内容。
+      */
     DataInfoList?: Array<PlaySumStatInfo>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -5367,8 +5367,8 @@ export interface DescribeVisitTopSumInfoListResponse {
  */
 export interface CreateLiveSnapshotRuleResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -5376,39 +5376,39 @@ export interface CreateLiveSnapshotRuleResponse {
  */
 export interface DelayInfo {
     /**
-     * 推流域名。
-     */
+      * 推流域名。
+      */
     DomainName: string;
     /**
-        * 推流路径，与推流和播放地址中的
-   AppName 保持一致，默认为 live。
-        */
+      * 推流路径，与推流和播放地址中的
+ AppName 保持一致，默认为 live。
+      */
     AppName: string;
     /**
-     * 流名称。
-     */
+      * 流名称。
+      */
     StreamName: string;
     /**
-     * 延播时间，单位：秒。
-     */
+      * 延播时间，单位：秒。
+      */
     DelayInterval: number;
     /**
-        * 创建时间，UTC 时间。
-  注意：UTC时间和北京时间相差8小时。
-  例如：2019-06-18T12:00:00Z（为北京时间 2019 年 6 月 18 日 20 点 0 分 0 秒）。
-        */
+      * 创建时间，UTC 时间。
+注意：UTC时间和北京时间相差8小时。
+例如：2019-06-18T12:00:00Z（为北京时间 2019 年 6 月 18 日 20 点 0 分 0 秒）。
+      */
     CreateTime: string;
     /**
-        * 过期时间，UTC 时间。
-  注意：UTC时间和北京时间相差8小时。
-  例如：2019-06-18T12:00:00Z（为北京时间 2019 年 6 月 18 日 20 点 0 分 0 秒）。
-        */
+      * 过期时间，UTC 时间。
+注意：UTC时间和北京时间相差8小时。
+例如：2019-06-18T12:00:00Z（为北京时间 2019 年 6 月 18 日 20 点 0 分 0 秒）。
+      */
     ExpireTime: string;
     /**
-        * 当前状态:
-  -1：已过期。
-  1： 生效中。
-        */
+      * 当前状态:
+-1：已过期。
+1： 生效中。
+      */
     Status: number;
 }
 /**
@@ -5416,28 +5416,28 @@ export interface DelayInfo {
  */
 export interface DescribeLiveStreamEventListResponse {
     /**
-     * 推断流事件列表。
-     */
+      * 推断流事件列表。
+      */
     EventList?: Array<StreamEventInfo>;
     /**
-     * 分页的页码。
-     */
+      * 分页的页码。
+      */
     PageNum?: number;
     /**
-     * 每页大小。
-     */
+      * 每页大小。
+      */
     PageSize?: number;
     /**
-     * 符合条件的总个数。
-     */
+      * 符合条件的总个数。
+      */
     TotalNum?: number;
     /**
-     * 总页数。
-     */
+      * 总页数。
+      */
     TotalPage?: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -5445,12 +5445,12 @@ export interface DescribeLiveStreamEventListResponse {
  */
 export interface DescribePullStreamConfigsResponse {
     /**
-     * 拉流配置。
-     */
+      * 拉流配置。
+      */
     PullStreamConfigs?: Array<PullStreamConfig>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -5458,12 +5458,12 @@ export interface DescribePullStreamConfigsResponse {
  */
 export interface DescribeLiveCallbackRulesResponse {
     /**
-     * 规则信息列表。
-     */
+      * 规则信息列表。
+      */
     Rules?: Array<CallBackRuleInfo>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -5471,12 +5471,12 @@ export interface DescribeLiveCallbackRulesResponse {
  */
 export interface CreateRecordTaskResponse {
     /**
-     * 任务ID，全局唯一标识录制任务。返回TaskId字段说明录制任务创建成功。
-     */
+      * 任务ID，全局唯一标识录制任务。返回TaskId字段说明录制任务创建成功。
+      */
     TaskId?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -5484,16 +5484,16 @@ export interface CreateRecordTaskResponse {
  */
 export interface ForbidStreamInfo {
     /**
-     * 流名称。
-     */
+      * 流名称。
+      */
     StreamName: string;
     /**
-     * 创建时间。
-     */
+      * 创建时间。
+      */
     CreateTime: string;
     /**
-     * 禁推过期时间。
-     */
+      * 禁推过期时间。
+      */
     ExpireTime: string;
 }
 /**
@@ -5501,8 +5501,8 @@ export interface ForbidStreamInfo {
  */
 export interface ResumeDelayLiveStreamResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -5510,16 +5510,16 @@ export interface ResumeDelayLiveStreamResponse {
  */
 export interface GroupProIspDataInfo {
     /**
-     * 省份。
-     */
+      * 省份。
+      */
     ProvinceName: string;
     /**
-     * 运营商。
-     */
+      * 运营商。
+      */
     IspName: string;
     /**
-     * 分钟维度的明细数据。
-     */
+      * 分钟维度的明细数据。
+      */
     DetailInfoList: Array<CdnPlayStatData>;
 }
 /**
@@ -5527,8 +5527,8 @@ export interface GroupProIspDataInfo {
  */
 export interface DeleteLiveDomainResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -5536,20 +5536,20 @@ export interface DeleteLiveDomainResponse {
  */
 export interface CommonMixCropParams {
     /**
-     * 裁剪的宽度。取值范围[0，2000]。
-     */
+      * 裁剪的宽度。取值范围[0，2000]。
+      */
     CropWidth?: number;
     /**
-     * 裁剪的高度。取值范围[0，2000]。
-     */
+      * 裁剪的高度。取值范围[0，2000]。
+      */
     CropHeight?: number;
     /**
-     * 裁剪的起始X坐标。取值范围[0，2000]。
-     */
+      * 裁剪的起始X坐标。取值范围[0，2000]。
+      */
     CropStartLocationX?: number;
     /**
-     * 裁剪的起始Y坐标。取值范围[0，2000]。
-     */
+      * 裁剪的起始Y坐标。取值范围[0，2000]。
+      */
     CropStartLocationY?: number;
 }
 /**
@@ -5557,42 +5557,42 @@ export interface CommonMixCropParams {
  */
 export interface CreateLiveRecordTemplateRequest {
     /**
-     * 模板名。仅支持中文、英文、数字、_、-。
-     */
+      * 模板名。仅支持中文、英文、数字、_、-。
+      */
     TemplateName: string;
     /**
-     * 描述信息。
-     */
+      * 描述信息。
+      */
     Description?: string;
     /**
-     * Flv录制参数，开启Flv录制时设置。
-     */
+      * Flv录制参数，开启Flv录制时设置。
+      */
     FlvParam?: RecordParam;
     /**
-     * Hls录制参数，开启hls录制时设置。
-     */
+      * Hls录制参数，开启hls录制时设置。
+      */
     HlsParam?: RecordParam;
     /**
-     * Mp4录制参数，开启Mp4录制时设置。
-     */
+      * Mp4录制参数，开启Mp4录制时设置。
+      */
     Mp4Param?: RecordParam;
     /**
-     * Aac录制参数，开启Aac录制时设置。
-     */
+      * Aac录制参数，开启Aac录制时设置。
+      */
     AacParam?: RecordParam;
     /**
-        * 直播类型，默认 0。
-  0：普通直播，
-  1：慢直播。
-        */
+      * 直播类型，默认 0。
+0：普通直播，
+1：慢直播。
+      */
     IsDelayLive?: number;
     /**
-     * HLS专属录制参数。
-     */
+      * HLS专属录制参数。
+      */
     HlsSpecialParam?: HlsSpecialParam;
     /**
-     * Mp3录制参数，开启Mp3录制时设置。
-     */
+      * Mp3录制参数，开启Mp3录制时设置。
+      */
     Mp3Param?: RecordParam;
 }
 /**
@@ -5600,44 +5600,44 @@ export interface CreateLiveRecordTemplateRequest {
  */
 export interface DescribeProIspPlaySumInfoListResponse {
     /**
-     * 总流量。
-     */
+      * 总流量。
+      */
     TotalFlux?: number;
     /**
-     * 总请求数。
-     */
+      * 总请求数。
+      */
     TotalRequest?: number;
     /**
-     * 统计的类型。
-     */
+      * 统计的类型。
+      */
     StatType?: string;
     /**
-     * 每页的记录数。
-     */
+      * 每页的记录数。
+      */
     PageSize?: number;
     /**
-     * 页号。
-     */
+      * 页号。
+      */
     PageNum?: number;
     /**
-     * 总记录数。
-     */
+      * 总记录数。
+      */
     TotalNum?: number;
     /**
-     * 总页数。
-     */
+      * 总页数。
+      */
     TotalPage?: number;
     /**
-     * 省份，运营商，国家或地区汇总数据列表。
-     */
+      * 省份，运营商，国家或地区汇总数据列表。
+      */
     DataInfoList?: Array<ProIspPlaySumInfo>;
     /**
-     * 下载速度，单位：MB/s，计算方式：总流量/总时长。
-     */
+      * 下载速度，单位：MB/s，计算方式：总流量/总时长。
+      */
     AvgFluxPerSecond?: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -5645,8 +5645,8 @@ export interface DescribeProIspPlaySumInfoListResponse {
  */
 export interface DeleteLiveCertRequest {
     /**
-     * DescribeLiveCerts接口获取到的证书Id。
-     */
+      * DescribeLiveCerts接口获取到的证书Id。
+      */
     CertId: number;
 }
 /**
@@ -5654,12 +5654,12 @@ export interface DeleteLiveCertRequest {
  */
 export interface DescribeHttpStatusInfoListResponse {
     /**
-     * 播放状态码列表。
-     */
+      * 播放状态码列表。
+      */
     DataInfoList?: Array<HttpStatusData>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -5667,7 +5667,7 @@ export interface DescribeHttpStatusInfoListResponse {
  */
 export interface DeleteLiveRecordRuleResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }

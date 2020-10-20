@@ -64,6 +64,42 @@ export interface GetDetectInfoEnhancedRequest {
 }
 
 /**
+ * GetFaceIdToken请求参数结构体
+ */
+export interface GetFaceIdTokenRequest {
+  /**
+   * 本地上传照片(LOCAL)、商业库(BUSINESS)
+   */
+  CompareLib: string
+
+  /**
+   * CompareLib为商业库时必传。
+   */
+  IdCard?: string
+
+  /**
+   * CompareLib为商业库库时必传。
+   */
+  Name?: string
+
+  /**
+      * CompareLib为上传照片比对时必传，Base64后图片最大8MB。
+请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
+      */
+  ImageBase64?: string
+
+  /**
+   * SDK中生成的Meta字符串
+   */
+  Meta?: string
+
+  /**
+   * 透传参数 1000长度字符串
+   */
+  Extra?: string
+}
+
+/**
  * Liveness请求参数结构体
  */
 export interface LivenessRequest {
@@ -455,7 +491,7 @@ export interface IdCardOCRVerificationRequest {
   /**
       * 身份证人像面的 Base64 值
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
       */
   ImageBase64?: string
 
@@ -615,13 +651,18 @@ LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模�
 }
 
 /**
- * MobileNetworkTimeVerification请求参数结构体
+ * GetFaceIdToken返回参数结构体
  */
-export interface MobileNetworkTimeVerificationRequest {
+export interface GetFaceIdTokenResponse {
   /**
-   * 手机号码
+   * 有效期 10分钟。只能完成1次核身。
    */
-  Mobile: string
+  FaceIdToken?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -763,6 +804,7 @@ export interface CheckIdCardInformationRequest {
       * 身份证人像面的 Base64 值
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
 支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
 ImageBase64、ImageUrl二者必须提供其中之一。若都提供了，则按照ImageUrl>ImageBase64的优先级使用参数。
       */
   ImageBase64?: string
@@ -960,8 +1002,8 @@ export interface DetectAuthRequest {
   Extra?: string
 
   /**
-      * 用于人脸比对的照片，图片的BASE64值；
-BASE64编码后的图片数据大小不超过3M，仅支持jpg、png格式。
+      * 用于人脸比对的照片，图片的Base64值；
+Base64编码后的图片数据大小不超过3M，仅支持jpg、png格式。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
       */
   ImageBase64?: string
 }
@@ -1062,8 +1104,9 @@ export interface ImageRecognitionRequest {
   Name: string
 
   /**
-      * 用于人脸比对的照片，图片的BASE64值；
-BASE64编码后的图片数据大小不超过3M，仅支持jpg、png格式。
+      * 用于人脸比对的照片，图片的Base64值；
+Base64编码后的图片数据大小不超过3M，仅支持jpg、png格式。
+请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
       */
   ImageBase64: string
 
@@ -1102,6 +1145,36 @@ export interface BankCard4EVerificationRequest {
 目前默认为0：身份证，其他证件类型暂不支持。
       */
   CertType?: number
+}
+
+/**
+ * MobileNetworkTimeVerification请求参数结构体
+ */
+export interface MobileNetworkTimeVerificationRequest {
+  /**
+   * 手机号码
+   */
+  Mobile: string
+}
+
+/**
+ * GetFaceIdResult请求参数结构体
+ */
+export interface GetFaceIdResultRequest {
+  /**
+   * SDK人脸核身流程的标识，调用GetFaceIdToken接口时生成。
+   */
+  FaceIdToken: string
+
+  /**
+   * 是否需要拉取视频，默认false不需要
+   */
+  IsNeedVideo?: boolean
+
+  /**
+   * 是否需要拉取截帧，默认false不需要
+   */
+  IsNeedBestFrame?: boolean
 }
 
 /**
@@ -1427,14 +1500,16 @@ export interface DetectInfoIdCardData {
  */
 export interface LivenessCompareRequest {
   /**
-      * 用于人脸比对的照片，图片的BASE64值；
-BASE64编码后的图片数据大小不超过3M，仅支持jpg、png格式。
+      * 用于人脸比对的照片，图片的Base64值；
+Base64编码后的图片数据大小不超过3M，仅支持jpg、png格式。
+请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
       */
   ImageBase64: string
 
   /**
-      * 用于活体检测的视频，视频的BASE64值；
-BASE64编码后的大小不超过8M，支持mp4、avi、flv格式。
+      * 用于活体检测的视频，视频的Base64值；
+Base64编码后的大小不超过8M，支持mp4、avi、flv格式。
+请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
       */
   VideoBase64: string
 
@@ -1535,4 +1610,57 @@ export interface DetectDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Comparemsg: string
+}
+
+/**
+ * GetFaceIdResult返回参数结构体
+ */
+export interface GetFaceIdResultResponse {
+  /**
+   * 身份证
+   */
+  IdCard?: string
+
+  /**
+   * 姓名
+   */
+  Name?: string
+
+  /**
+   * 业务核验结果，参考https://cloud.tencent.com/document/product/1007/47912
+   */
+  Result?: string
+
+  /**
+   * 业务核验描述
+   */
+  Description?: string
+
+  /**
+   * 相似度，0-100，数值越大相似度越高
+   */
+  Similarity?: number
+
+  /**
+      * 用户核验的视频
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VideoBase64?: string
+
+  /**
+      * 用户核验视频的截帧
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BestFrameBase64?: string
+
+  /**
+      * 获取token时透传的信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Extra?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }

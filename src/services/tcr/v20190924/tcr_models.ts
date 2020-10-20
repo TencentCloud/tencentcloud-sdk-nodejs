@@ -51,6 +51,47 @@ export interface WebhookTarget {
 }
 
 /**
+ * DescribeReplicationInstances返回参数结构体
+ */
+export interface DescribeReplicationInstancesResponse {
+  /**
+   * 总实例个数
+   */
+  TotalCount?: number
+
+  /**
+      * 同步实例列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReplicationRegistries?: Array<ReplicationRegistry>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeReplicationInstanceCreateTasks返回参数结构体
+ */
+export interface DescribeReplicationInstanceCreateTasksResponse {
+  /**
+   * 任务详情
+   */
+  TaskDetail?: Array<TaskDetail>
+
+  /**
+   * 整体任务状态
+   */
+  Status?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 触发器日志
  */
 export interface WebhookTriggerLog {
@@ -278,6 +319,43 @@ export interface DeleteInstanceTokenRequest {
    * 访问凭证 ID
    */
   TokenId: string
+}
+
+/**
+ * 任务详情
+ */
+export interface TaskDetail {
+  /**
+   * 任务
+   */
+  TaskName: string
+
+  /**
+   * 任务UUID
+   */
+  TaskUUID: string
+
+  /**
+   * 任务状态
+   */
+  TaskStatus: string
+
+  /**
+      * 任务的状态信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskMessage: string
+
+  /**
+   * 任务开始时间
+   */
+  CreatedTime: string
+
+  /**
+      * 任务结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FinishedTime: string
 }
 
 /**
@@ -661,6 +739,26 @@ export interface Limit {
    * 配置的值
    */
   Value: number
+}
+
+/**
+ * DescribeReplicationInstances请求参数结构体
+ */
+export interface DescribeReplicationInstancesRequest {
+  /**
+   * 实例Id
+   */
+  RegistryId: string
+
+  /**
+   * 偏移量,默认0
+   */
+  Offset?: number
+
+  /**
+   * 最大输出条数，默认20，最大为100
+   */
+  Limit?: number
 }
 
 /**
@@ -1938,6 +2036,21 @@ export interface Filter {
 }
 
 /**
+ * DescribeReplicationInstanceCreateTasks请求参数结构体
+ */
+export interface DescribeReplicationInstanceCreateTasksRequest {
+  /**
+   * 同步实例Id
+   */
+  ReplicationRegistryId: string
+
+  /**
+   * 同步实例的地域ID
+   */
+  ReplicationRegionId: number
+}
+
+/**
  * 仓库的信息
  */
 export interface RepoInfo {
@@ -2390,6 +2503,41 @@ export interface ModifyUserPasswordPersonalRequest {
    * 更新后的密码
    */
   Password: string
+}
+
+/**
+ * 企业版复制实例
+ */
+export interface ReplicationRegistry {
+  /**
+   * 主实例ID
+   */
+  RegistryId: string
+
+  /**
+   * 复制实例ID
+   */
+  ReplicationRegistryId: string
+
+  /**
+   * 复制实例的地域ID
+   */
+  ReplicationRegionId: number
+
+  /**
+   * 复制实例的地域名称
+   */
+  ReplicationRegionName: string
+
+  /**
+   * 复制实例的状态
+   */
+  Status: string
+
+  /**
+   * 创建时间
+   */
+  CreatedAt: string
 }
 
 /**

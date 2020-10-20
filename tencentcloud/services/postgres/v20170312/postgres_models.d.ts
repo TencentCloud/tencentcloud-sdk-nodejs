@@ -3,72 +3,72 @@
  */
 export interface CreateDBInstancesRequest {
     /**
-     * 售卖规格ID。该参数可以通过调用DescribeProductConfig的返回值中的SpecCode字段来获取。
-     */
+      * 售卖规格ID。该参数可以通过调用DescribeProductConfig的返回值中的SpecCode字段来获取。
+      */
     SpecCode: string;
     /**
-     * PostgreSQL内核版本，目前支持：9.3.5、9.5.4、10.4三种版本。
-     */
+      * PostgreSQL内核版本，目前支持：9.3.5、9.5.4、10.4三种版本。
+      */
     DBVersion: string;
     /**
-     * 实例容量大小，单位：GB。
-     */
+      * 实例容量大小，单位：GB。
+      */
     Storage: number;
     /**
-     * 一次性购买的实例数量。取值1-100
-     */
+      * 一次性购买的实例数量。取值1-100
+      */
     InstanceCount: number;
     /**
-     * 购买时长，单位：月。目前只支持1,2,3,4,5,6,7,8,9,10,11,12,24,36这些值，按量计费模式下该参数传1。
-     */
+      * 购买时长，单位：月。目前只支持1,2,3,4,5,6,7,8,9,10,11,12,24,36这些值，按量计费模式下该参数传1。
+      */
     Period: number;
     /**
-     * 可用区ID。该参数可以通过调用 DescribeZones 接口的返回值中的Zone字段来获取。
-     */
+      * 可用区ID。该参数可以通过调用 DescribeZones 接口的返回值中的Zone字段来获取。
+      */
     Zone: string;
     /**
-     * 项目ID。
-     */
+      * 项目ID。
+      */
     ProjectId?: number;
     /**
-     * 实例计费类型。目前支持：PREPAID（预付费，即包年包月），POSTPAID_BY_HOUR（后付费，即按量计费）。
-     */
+      * 实例计费类型。目前支持：PREPAID（预付费，即包年包月），POSTPAID_BY_HOUR（后付费，即按量计费）。
+      */
     InstanceChargeType?: string;
     /**
-     * 是否自动使用代金券。1（是），0（否），默认不使用。
-     */
+      * 是否自动使用代金券。1（是），0（否），默认不使用。
+      */
     AutoVoucher?: number;
     /**
-     * 代金券ID列表，目前仅支持指定一张代金券。
-     */
+      * 代金券ID列表，目前仅支持指定一张代金券。
+      */
     VoucherIds?: Array<string>;
     /**
-     * 私有网络ID。
-     */
+      * 私有网络ID。
+      */
     VpcId?: string;
     /**
-     * 私有网络子网ID。
-     */
+      * 私有网络子网ID。
+      */
     SubnetId?: string;
     /**
-     * 续费标记：0-正常续费（默认）；1-自动续费；
-     */
+      * 续费标记：0-正常续费（默认）；1-自动续费；
+      */
     AutoRenewFlag?: number;
     /**
-     * 活动ID
-     */
+      * 活动ID
+      */
     ActivityId?: number;
     /**
-     * 实例名(后续支持)
-     */
+      * 实例名(后续支持)
+      */
     Name?: string;
     /**
-     * 是否需要支持Ipv6，1：是，0：否
-     */
+      * 是否需要支持Ipv6，1：是，0：否
+      */
     NeedSupportIpv6?: number;
     /**
-     * 实例需要绑定的Tag信息，默认为空
-     */
+      * 实例需要绑定的Tag信息，默认为空
+      */
     TagList?: Array<Tag>;
 }
 /**
@@ -76,8 +76,8 @@ export interface CreateDBInstancesRequest {
  */
 export interface CloseServerlessDBExtranetAccessResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -85,8 +85,8 @@ export interface CloseServerlessDBExtranetAccessResponse {
  */
 export interface DestroyDBInstanceRequest {
     /**
-     * 待删除实例标识符
-     */
+      * 待删除实例标识符
+      */
     DBInstanceId: string;
 }
 /**
@@ -94,36 +94,36 @@ export interface DestroyDBInstanceRequest {
  */
 export interface CreateServerlessDBInstanceRequest {
     /**
-     * 可用区ID。公测阶段仅支持ap-shanghai-2、ap-beijing-1,ap-guangzhou-2.
-     */
+      * 可用区ID。公测阶段仅支持ap-shanghai-2、ap-beijing-1,ap-guangzhou-2.
+      */
     Zone: string;
     /**
-     * DB实例名称，同一个账号下该值必须唯一。
-     */
+      * DB实例名称，同一个账号下该值必须唯一。
+      */
     DBInstanceName: string;
     /**
-     * PostgreSQL内核版本，目前只支持：10.4。
-     */
+      * PostgreSQL内核版本，目前只支持：10.4。
+      */
     DBVersion: string;
     /**
-     * PostgreSQL数据库字符集，目前支持UTF8。
-     */
+      * PostgreSQL数据库字符集，目前支持UTF8。
+      */
     DBCharset: string;
     /**
-     * 项目ID。
-     */
+      * 项目ID。
+      */
     ProjectId?: number;
     /**
-     * 私有网络ID。
-     */
+      * 私有网络ID。
+      */
     VpcId?: string;
     /**
-     * 私有网络子网ID。
-     */
+      * 私有网络子网ID。
+      */
     SubnetId?: string;
     /**
-     * 实例需要绑定的标签数组信息
-     */
+      * 实例需要绑定的标签数组信息
+      */
     TagList?: Array<Tag>;
 }
 /**
@@ -131,12 +131,12 @@ export interface CreateServerlessDBInstanceRequest {
  */
 export interface InquiryPriceRenewDBInstanceRequest {
     /**
-     * 实例ID
-     */
+      * 实例ID
+      */
     DBInstanceId: string;
     /**
-     * 续费周期，按月计算，最大不超过48
-     */
+      * 续费周期，按月计算，最大不超过48
+      */
     Period: number;
 }
 /**
@@ -144,12 +144,12 @@ export interface InquiryPriceRenewDBInstanceRequest {
  */
 export interface SetAutoRenewFlagRequest {
     /**
-     * 实例ID数组
-     */
+      * 实例ID数组
+      */
     DBInstanceIdSet: Array<string>;
     /**
-     * 续费标记。0-正常续费；1-自动续费；2-到期不续费
-     */
+      * 续费标记。0-正常续费；1-自动续费；2-到期不续费
+      */
     AutoRenewFlag: number;
 }
 /**
@@ -157,16 +157,16 @@ export interface SetAutoRenewFlagRequest {
  */
 export interface DescribeOrdersResponse {
     /**
-     * 订单数量
-     */
+      * 订单数量
+      */
     TotalCount?: number;
     /**
-     * 订单数组
-     */
+      * 订单数组
+      */
     Deals?: Array<PgDeal>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -174,12 +174,12 @@ export interface DescribeOrdersResponse {
  */
 export interface DeleteServerlessDBInstanceRequest {
     /**
-     * DB实例名称，实例名和实例ID必须至少传一个，如果同时存在，将只以实例ID为准。
-     */
+      * DB实例名称，实例名和实例ID必须至少传一个，如果同时存在，将只以实例ID为准。
+      */
     DBInstanceName?: string;
     /**
-     * DB实例ID，实例名和实例ID必须至少传一个，如果同时存在，将只以实例ID为准。
-     */
+      * DB实例ID，实例名和实例ID必须至少传一个，如果同时存在，将只以实例ID为准。
+      */
     DBInstanceId?: string;
 }
 /**
@@ -187,24 +187,24 @@ export interface DeleteServerlessDBInstanceRequest {
  */
 export interface DescribeDBXlogsRequest {
     /**
-     * 实例ID，形如postgres-4wdeb0zv。
-     */
+      * 实例ID，形如postgres-4wdeb0zv。
+      */
     DBInstanceId: string;
     /**
-     * 查询开始时间，形如2018-06-10 17:06:38，起始时间不得小于7天以前
-     */
+      * 查询开始时间，形如2018-06-10 17:06:38，起始时间不得小于7天以前
+      */
     StartTime: string;
     /**
-     * 查询结束时间，形如2018-06-10 17:06:38
-     */
+      * 查询结束时间，形如2018-06-10 17:06:38
+      */
     EndTime: string;
     /**
-     * 分页返回，表示返回第几页的条目。从第0页开始计数。
-     */
+      * 分页返回，表示返回第几页的条目。从第0页开始计数。
+      */
     Offset?: number;
     /**
-     * 分页返回，表示每页有多少条目。取值为1-100。
-     */
+      * 分页返回，表示每页有多少条目。取值为1-100。
+      */
     Limit?: number;
 }
 /**
@@ -212,16 +212,16 @@ export interface DescribeDBXlogsRequest {
  */
 export interface InquiryPriceCreateDBInstancesResponse {
     /**
-     * 原始价格，单位：分
-     */
+      * 原始价格，单位：分
+      */
     OriginalPrice?: number;
     /**
-     * 折后价格，单位：分
-     */
+      * 折后价格，单位：分
+      */
     Price?: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -229,28 +229,28 @@ export interface InquiryPriceCreateDBInstancesResponse {
  */
 export interface AccountInfo {
     /**
-     * 实例ID，形如postgres-lnp6j617
-     */
+      * 实例ID，形如postgres-lnp6j617
+      */
     DBInstanceId: string;
     /**
-     * 帐号
-     */
+      * 帐号
+      */
     UserName: string;
     /**
-     * 帐号备注
-     */
+      * 帐号备注
+      */
     Remark: string;
     /**
-     * 帐号状态。 1-创建中，2-正常，3-修改中，4-密码重置中，-1-删除中
-     */
+      * 帐号状态。 1-创建中，2-正常，3-修改中，4-密码重置中，-1-删除中
+      */
     Status: number;
     /**
-     * 帐号创建时间
-     */
+      * 帐号创建时间
+      */
     CreateTime: string;
     /**
-     * 帐号最后一次更新时间
-     */
+      * 帐号最后一次更新时间
+      */
     UpdateTime: string;
 }
 /**
@@ -258,20 +258,20 @@ export interface AccountInfo {
  */
 export interface InquiryPriceUpgradeDBInstanceRequest {
     /**
-     * 实例的磁盘大小，单位GB
-     */
+      * 实例的磁盘大小，单位GB
+      */
     Storage: number;
     /**
-     * 实例的内存大小，单位GB
-     */
+      * 实例的内存大小，单位GB
+      */
     Memory: number;
     /**
-     * 实例ID，形如postgres-hez4fh0v
-     */
+      * 实例ID，形如postgres-hez4fh0v
+      */
     DBInstanceId: string;
     /**
-     * 实例计费类型，预付费或者后付费。PREPAID-预付费。目前只支持预付费。
-     */
+      * 实例计费类型，预付费或者后付费。PREPAID-预付费。目前只支持预付费。
+      */
     InstanceChargeType?: string;
 }
 /**
@@ -279,24 +279,24 @@ export interface InquiryPriceUpgradeDBInstanceRequest {
  */
 export interface DescribeAccountsRequest {
     /**
-     * 实例ID，形如postgres-6fego161
-     */
+      * 实例ID，形如postgres-6fego161
+      */
     DBInstanceId: string;
     /**
-     * 分页返回，每页最大返回数目，默认20，取值范围为1-100
-     */
+      * 分页返回，每页最大返回数目，默认20，取值范围为1-100
+      */
     Limit?: number;
     /**
-     * 分页返回，返回第几页的用户数据。页码从0开始计数
-     */
+      * 分页返回，返回第几页的用户数据。页码从0开始计数
+      */
     Offset?: number;
     /**
-     * 返回数据按照创建时间或者用户名排序。取值只能为createTime或者name。createTime-按照创建时间排序；name-按照用户名排序
-     */
+      * 返回数据按照创建时间或者用户名排序。取值只能为createTime或者name。createTime-按照创建时间排序；name-按照用户名排序
+      */
     OrderBy?: string;
     /**
-     * 返回结果是升序还是降序。取值只能为desc或者asc。desc-降序；asc-升序
-     */
+      * 返回结果是升序还是降序。取值只能为desc或者asc。desc-降序；asc-升序
+      */
     OrderByType?: string;
 }
 /**
@@ -304,16 +304,16 @@ export interface DescribeAccountsRequest {
  */
 export interface DescribeDBErrlogsResponse {
     /**
-     * 本次调用返回了多少条数据
-     */
+      * 本次调用返回了多少条数据
+      */
     TotalCount?: number;
     /**
-     * 错误日志列表
-     */
+      * 错误日志列表
+      */
     Details?: Array<ErrLogDetail>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -321,32 +321,32 @@ export interface DescribeDBErrlogsResponse {
  */
 export interface InquiryPriceCreateDBInstancesRequest {
     /**
-     * 可用区ID。该参数可以通过调用 DescribeZones 接口的返回值中的Zone字段来获取。
-     */
+      * 可用区ID。该参数可以通过调用 DescribeZones 接口的返回值中的Zone字段来获取。
+      */
     Zone: string;
     /**
-     * 规格ID。该参数可以通过调用DescribeProductConfig接口的返回值中的SpecCode字段来获取。
-     */
+      * 规格ID。该参数可以通过调用DescribeProductConfig接口的返回值中的SpecCode字段来获取。
+      */
     SpecCode: string;
     /**
-     * 存储容量大小，单位：GB。
-     */
+      * 存储容量大小，单位：GB。
+      */
     Storage: number;
     /**
-     * 实例数量。目前最大数量不超过100，如需一次性创建更多实例，请联系客服支持。
-     */
+      * 实例数量。目前最大数量不超过100，如需一次性创建更多实例，请联系客服支持。
+      */
     InstanceCount: number;
     /**
-     * 购买时长，单位：月。目前只支持1,2,3,4,5,6,7,8,9,10,11,12,24,36这些值。
-     */
+      * 购买时长，单位：月。目前只支持1,2,3,4,5,6,7,8,9,10,11,12,24,36这些值。
+      */
     Period: number;
     /**
-     * 计费ID。该参数可以通过调用DescribeProductConfig接口的返回值中的Pid字段来获取。
-     */
+      * 计费ID。该参数可以通过调用DescribeProductConfig接口的返回值中的Pid字段来获取。
+      */
     Pid: number;
     /**
-     * 实例计费类型。目前只支持：PREPAID（预付费，即包年包月）。
-     */
+      * 实例计费类型。目前只支持：PREPAID（预付费，即包年包月）。
+      */
     InstanceChargeType?: string;
 }
 /**
@@ -354,12 +354,12 @@ export interface InquiryPriceCreateDBInstancesRequest {
  */
 export interface ModifyDBInstanceNameRequest {
     /**
-     * 数据库实例ID，形如postgres-6fego161
-     */
+      * 数据库实例ID，形如postgres-6fego161
+      */
     DBInstanceId: string;
     /**
-     * 新的数据库实例名字
-     */
+      * 新的数据库实例名字
+      */
     InstanceName: string;
 }
 /**
@@ -367,44 +367,44 @@ export interface ModifyDBInstanceNameRequest {
  */
 export interface SpecItemInfo {
     /**
-     * 规格ID
-     */
+      * 规格ID
+      */
     SpecCode: string;
     /**
-     * PostgreSQL的内核版本编号
-     */
+      * PostgreSQL的内核版本编号
+      */
     Version: string;
     /**
-     * 内核编号对应的完整版本名称
-     */
+      * 内核编号对应的完整版本名称
+      */
     VersionName: string;
     /**
-     * CPU核数
-     */
+      * CPU核数
+      */
     Cpu: number;
     /**
-     * 内存大小，单位：MB
-     */
+      * 内存大小，单位：MB
+      */
     Memory: number;
     /**
-     * 该规格所支持最大存储容量，单位：GB
-     */
+      * 该规格所支持最大存储容量，单位：GB
+      */
     MaxStorage: number;
     /**
-     * 该规格所支持最小存储容量，单位：GB
-     */
+      * 该规格所支持最小存储容量，单位：GB
+      */
     MinStorage: number;
     /**
-     * 该规格的预估QPS
-     */
+      * 该规格的预估QPS
+      */
     Qps: number;
     /**
-     * 该规格对应的计费ID
-     */
+      * 该规格对应的计费ID
+      */
     Pid: number;
     /**
-     * 机器类型
-     */
+      * 机器类型
+      */
     Type: string;
 }
 /**
@@ -412,8 +412,8 @@ export interface SpecItemInfo {
  */
 export interface DescribeProductConfigRequest {
     /**
-     * 可用区名称
-     */
+      * 可用区名称
+      */
     Zone?: string;
 }
 /**
@@ -421,20 +421,20 @@ export interface DescribeProductConfigRequest {
  */
 export interface CreateDBInstancesResponse {
     /**
-     * 订单号列表。每个实例对应一个订单号。
-     */
+      * 订单号列表。每个实例对应一个订单号。
+      */
     DealNames?: Array<string>;
     /**
-     * 冻结流水号
-     */
+      * 冻结流水号
+      */
     BillId?: string;
     /**
-     * 创建成功的实例ID集合，只在后付费情景下有返回值
-     */
+      * 创建成功的实例ID集合，只在后付费情景下有返回值
+      */
     DBInstanceIdSet?: Array<string>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -442,8 +442,8 @@ export interface CreateDBInstancesResponse {
  */
 export interface RestartDBInstanceRequest {
     /**
-     * 实例ID，形如postgres-6r233v55
-     */
+      * 实例ID，形如postgres-6r233v55
+      */
     DBInstanceId: string;
 }
 /**
@@ -451,24 +451,24 @@ export interface RestartDBInstanceRequest {
  */
 export interface DescribeDBInstancesRequest {
     /**
-     * 过滤条件，目前支持：db-instance-id、db-instance-name、db-project-id、db-pay-mode、db-tag-key。
-     */
+      * 过滤条件，目前支持：db-instance-id、db-instance-name、db-project-id、db-pay-mode、db-tag-key。
+      */
     Filters?: Array<Filter>;
     /**
-     * 每页显示数量，默认返回10条。
-     */
+      * 每页显示数量，默认返回10条。
+      */
     Limit?: number;
     /**
-     * 分页序号，从0开始。
-     */
+      * 分页序号，从0开始。
+      */
     Offset?: number;
     /**
-     * 排序指标，如实例名、创建时间等，支持DBInstanceId,CreateTime,Name,EndTime
-     */
+      * 排序指标，如实例名、创建时间等，支持DBInstanceId,CreateTime,Name,EndTime
+      */
     OrderBy?: string;
     /**
-     * 排序方式，包括升序、降序
-     */
+      * 排序方式，包括升序、降序
+      */
     OrderByType?: string;
 }
 /**
@@ -476,20 +476,20 @@ export interface DescribeDBInstancesRequest {
  */
 export interface ErrLogDetail {
     /**
-     * 用户名
-     */
+      * 用户名
+      */
     UserName: string;
     /**
-     * 数据库名字
-     */
+      * 数据库名字
+      */
     Database: string;
     /**
-     * 错误发生时间
-     */
+      * 错误发生时间
+      */
     ErrTime: string;
     /**
-     * 错误消息
-     */
+      * 错误消息
+      */
     ErrMsg: string;
 }
 /**
@@ -497,79 +497,79 @@ export interface ErrLogDetail {
  */
 export interface ServerlessDBInstance {
     /**
-        * 实例id，唯一标识符
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 实例id，唯一标识符
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     DBInstanceId?: string;
     /**
-        * 实例名称
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     DBInstanceName?: string;
     /**
-        * 实例状态
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 实例状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     DBInstanceStatus?: string;
     /**
-        * 地域
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     Region?: string;
     /**
-        * 可用区
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 可用区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     Zone?: string;
     /**
-        * 项目id
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 项目id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     ProjectId?: number;
     /**
-        * 私有网络Id
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 私有网络Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     VpcId?: string;
     /**
-        * 子网id
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 子网id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     SubnetId?: string;
     /**
-        * 字符集
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 字符集
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     DBCharset?: string;
     /**
-        * 数据库版本
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 数据库版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     DBVersion?: string;
     /**
-        * 创建时间
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     CreateTime?: string;
     /**
-        * 实例网络信息
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 实例网络信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     DBInstanceNetInfo?: Array<ServerlessDBInstanceNetInfo>;
     /**
-        * 实例账户信息
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 实例账户信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     DBAccountSet?: Array<ServerlessDBAccount>;
     /**
-        * 实例下的db信息
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 实例下的db信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     DBDatabaseList?: Array<string>;
     /**
-        * 实例绑定的标签数组
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 实例绑定的标签数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     TagList?: Array<Tag>;
 }
 /**
@@ -577,17 +577,17 @@ export interface ServerlessDBInstance {
  */
 export interface DescribeServerlessDBInstancesResponse {
     /**
-     * 查询结果数
-     */
+      * 查询结果数
+      */
     TotalCount?: number;
     /**
-        * 查询结果
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 查询结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     DBInstanceSet?: Array<ServerlessDBInstance>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -595,12 +595,12 @@ export interface DescribeServerlessDBInstancesResponse {
  */
 export interface ModifyDBInstancesProjectResponse {
     /**
-     * 转移项目成功的实例个数
-     */
+      * 转移项目成功的实例个数
+      */
     Count?: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -608,12 +608,12 @@ export interface ModifyDBInstancesProjectResponse {
  */
 export interface RenewInstanceResponse {
     /**
-     * 订单名
-     */
+      * 订单名
+      */
     DealName?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -625,28 +625,28 @@ export declare type DescribeZonesRequest = null;
  */
 export interface UpgradeDBInstanceRequest {
     /**
-     * 升级后的实例内存大小，单位GB
-     */
+      * 升级后的实例内存大小，单位GB
+      */
     Memory: number;
     /**
-     * 升级后的实例磁盘大小，单位GB
-     */
+      * 升级后的实例磁盘大小，单位GB
+      */
     Storage: number;
     /**
-     * 实例ID，形如postgres-lnp6j617
-     */
+      * 实例ID，形如postgres-lnp6j617
+      */
     DBInstanceId: string;
     /**
-     * 是否自动使用代金券,1是,0否，默认不使用
-     */
+      * 是否自动使用代金券,1是,0否，默认不使用
+      */
     AutoVoucher?: number;
     /**
-     * 代金券ID列表，目前仅支持指定一张代金券
-     */
+      * 代金券ID列表，目前仅支持指定一张代金券
+      */
     VoucherIds?: Array<string>;
     /**
-     * 活动ID
-     */
+      * 活动ID
+      */
     ActivityId?: number;
 }
 /**
@@ -654,12 +654,12 @@ export interface UpgradeDBInstanceRequest {
  */
 export interface OpenServerlessDBExtranetAccessRequest {
     /**
-     * 实例的唯一标识符
-     */
+      * 实例的唯一标识符
+      */
     DBInstanceId?: string;
     /**
-     * 实例名称
-     */
+      * 实例名称
+      */
     DBInstanceName?: string;
 }
 /**
@@ -667,20 +667,20 @@ export interface OpenServerlessDBExtranetAccessRequest {
  */
 export interface RegionInfo {
     /**
-     * 该地域对应的英文名称
-     */
+      * 该地域对应的英文名称
+      */
     Region: string;
     /**
-     * 该地域对应的中文名称
-     */
+      * 该地域对应的中文名称
+      */
     RegionName: string;
     /**
-     * 该地域对应的数字编号
-     */
+      * 该地域对应的数字编号
+      */
     RegionId: number;
     /**
-     * 可用状态，UNAVAILABLE表示不可用，AVAILABLE表示可用
-     */
+      * 可用状态，UNAVAILABLE表示不可用，AVAILABLE表示可用
+      */
     RegionState: string;
 }
 /**
@@ -688,8 +688,8 @@ export interface RegionInfo {
  */
 export interface DeleteServerlessDBInstanceResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -697,16 +697,16 @@ export interface DeleteServerlessDBInstanceResponse {
  */
 export interface SlowlogDetail {
     /**
-     * 花费总时间
-     */
+      * 花费总时间
+      */
     TotalTime: number;
     /**
-     * 调用总次数
-     */
+      * 调用总次数
+      */
     TotalCalls: number;
     /**
-     * 脱敏后的慢SQL列表
-     */
+      * 脱敏后的慢SQL列表
+      */
     NormalQueries: Array<NormalQueryItem>;
 }
 /**
@@ -714,20 +714,20 @@ export interface SlowlogDetail {
  */
 export interface InitDBInstancesRequest {
     /**
-     * 实例ID集合。
-     */
+      * 实例ID集合。
+      */
     DBInstanceIdSet: Array<string>;
     /**
-     * 实例根账号用户名。
-     */
+      * 实例根账号用户名。
+      */
     AdminName: string;
     /**
-     * 实例根账号用户名对应的密码。
-     */
+      * 实例根账号用户名对应的密码。
+      */
     AdminPassword: string;
     /**
-     * 实例字符集，目前只支持：UTF8、LATIN1。
-     */
+      * 实例字符集，目前只支持：UTF8、LATIN1。
+      */
     Charset: string;
 }
 /**
@@ -735,12 +735,12 @@ export interface InitDBInstancesRequest {
  */
 export interface RestartDBInstanceResponse {
     /**
-     * 异步流程ID
-     */
+      * 异步流程ID
+      */
     FlowId?: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -748,12 +748,12 @@ export interface RestartDBInstanceResponse {
  */
 export interface SetAutoRenewFlagResponse {
     /**
-     * 设置成功的实例个数
-     */
+      * 设置成功的实例个数
+      */
     Count?: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -761,16 +761,16 @@ export interface SetAutoRenewFlagResponse {
  */
 export interface DescribeDBInstancesResponse {
     /**
-     * 查询到的实例数量。
-     */
+      * 查询到的实例数量。
+      */
     TotalCount?: number;
     /**
-     * 实例详细信息集合。
-     */
+      * 实例详细信息集合。
+      */
     DBInstanceSet?: Array<DBInstance>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -778,16 +778,16 @@ export interface DescribeDBInstancesResponse {
  */
 export interface SpecInfo {
     /**
-     * 地域英文编码，对应RegionSet的Region字段
-     */
+      * 地域英文编码，对应RegionSet的Region字段
+      */
     Region: string;
     /**
-     * 区域英文编码，对应ZoneSet的Zone字段
-     */
+      * 区域英文编码，对应ZoneSet的Zone字段
+      */
     Zone: string;
     /**
-     * 规格详细信息列表
-     */
+      * 规格详细信息列表
+      */
     SpecItemInfoList: Array<SpecItemInfo>;
 }
 /**
@@ -795,117 +795,117 @@ export interface SpecInfo {
  */
 export interface DBInstance {
     /**
-     * 实例所属地域，如: ap-guangzhou，对应RegionSet的Region字段
-     */
+      * 实例所属地域，如: ap-guangzhou，对应RegionSet的Region字段
+      */
     Region: string;
     /**
-     * 实例所属可用区， 如：ap-guangzhou-3，对应ZoneSet的Zone字段
-     */
+      * 实例所属可用区， 如：ap-guangzhou-3，对应ZoneSet的Zone字段
+      */
     Zone: string;
     /**
-     * 项目ID
-     */
+      * 项目ID
+      */
     ProjectId: number;
     /**
-     * 私有网络ID
-     */
+      * 私有网络ID
+      */
     VpcId: string;
     /**
-     * 子网ID
-     */
+      * 子网ID
+      */
     SubnetId: string;
     /**
-     * 实例ID
-     */
+      * 实例ID
+      */
     DBInstanceId: string;
     /**
-     * 实例名称
-     */
+      * 实例名称
+      */
     DBInstanceName: string;
     /**
-     * 实例状态，分别为：applying（申请中）、init(待初始化)、initing(初始化中)、running(运行中)、limited run（受限运行）、isolated（已隔离）、recycling（回收中）、recycled（已回收）、job running（任务执行中）、offline（下线）、migrating（迁移中）、expanding（扩容中）、readonly（只读）、restarting（重启中）
-     */
+      * 实例状态，分别为：applying（申请中）、init(待初始化)、initing(初始化中)、running(运行中)、limited run（受限运行）、isolated（已隔离）、recycling（回收中）、recycled（已回收）、job running（任务执行中）、offline（下线）、migrating（迁移中）、expanding（扩容中）、readonly（只读）、restarting（重启中）
+      */
     DBInstanceStatus: string;
     /**
-     * 实例分配的内存大小，单位：GB
-     */
+      * 实例分配的内存大小，单位：GB
+      */
     DBInstanceMemory: number;
     /**
-     * 实例分配的存储空间大小，单位：GB
-     */
+      * 实例分配的存储空间大小，单位：GB
+      */
     DBInstanceStorage: number;
     /**
-     * 实例分配的CPU数量，单位：个
-     */
+      * 实例分配的CPU数量，单位：个
+      */
     DBInstanceCpu: number;
     /**
-     * 售卖规格ID
-     */
+      * 售卖规格ID
+      */
     DBInstanceClass: string;
     /**
-     * 实例类型，类型有：1、primary（主实例）；2、readonly（只读实例）；3、guard（灾备实例）；4、temp（临时实例）
-     */
+      * 实例类型，类型有：1、primary（主实例）；2、readonly（只读实例）；3、guard（灾备实例）；4、temp（临时实例）
+      */
     DBInstanceType: string;
     /**
-     * 实例版本，目前只支持standard（双机高可用版, 一主一从）
-     */
+      * 实例版本，目前只支持standard（双机高可用版, 一主一从）
+      */
     DBInstanceVersion: string;
     /**
-     * 实例DB字符集
-     */
+      * 实例DB字符集
+      */
     DBCharset: string;
     /**
-     * PostgreSQL内核版本
-     */
+      * PostgreSQL内核版本
+      */
     DBVersion: string;
     /**
-     * 实例创建时间
-     */
+      * 实例创建时间
+      */
     CreateTime: string;
     /**
-     * 实例执行最后一次更新的时间
-     */
+      * 实例执行最后一次更新的时间
+      */
     UpdateTime: string;
     /**
-     * 实例到期时间
-     */
+      * 实例到期时间
+      */
     ExpireTime: string;
     /**
-     * 实例隔离时间
-     */
+      * 实例隔离时间
+      */
     IsolatedTime: string;
     /**
-     * 计费模式，1、prepaid（包年包月,预付费）；2、postpaid（按量计费，后付费）
-     */
+      * 计费模式，1、prepaid（包年包月,预付费）；2、postpaid（按量计费，后付费）
+      */
     PayType: string;
     /**
-     * 是否自动续费，1：自动续费，0：不自动续费
-     */
+      * 是否自动续费，1：自动续费，0：不自动续费
+      */
     AutoRenew: number;
     /**
-     * 实例网络连接信息
-     */
+      * 实例网络连接信息
+      */
     DBInstanceNetInfo: Array<DBInstanceNetInfo>;
     /**
-     * 机器类型
-     */
+      * 机器类型
+      */
     Type: string;
     /**
-     * 用户的AppId
-     */
+      * 用户的AppId
+      */
     AppId: number;
     /**
-     * 实例的Uid
-     */
+      * 实例的Uid
+      */
     Uid: number;
     /**
-     * 实例是否支持Ipv6，1：支持，0：不支持
-     */
+      * 实例是否支持Ipv6，1：支持，0：不支持
+      */
     SupportIpv6: number;
     /**
-        * 实例绑定的标签信息
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 实例绑定的标签信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     TagList: Array<Tag>;
 }
 /**
@@ -913,12 +913,12 @@ export interface DBInstance {
  */
 export interface DescribeProductConfigResponse {
     /**
-     * 售卖规格列表。
-     */
+      * 售卖规格列表。
+      */
     SpecInfoList?: Array<SpecInfo>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -926,8 +926,8 @@ export interface DescribeProductConfigResponse {
  */
 export interface ResetAccountPasswordResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -935,16 +935,16 @@ export interface ResetAccountPasswordResponse {
  */
 export interface ResetAccountPasswordRequest {
     /**
-     * 实例ID，形如postgres-4wdeb0zv
-     */
+      * 实例ID，形如postgres-4wdeb0zv
+      */
     DBInstanceId: string;
     /**
-     * 实例账户名
-     */
+      * 实例账户名
+      */
     UserName: string;
     /**
-     * UserName账户对应的新密码
-     */
+      * UserName账户对应的新密码
+      */
     Password: string;
 }
 /**
@@ -952,8 +952,8 @@ export interface ResetAccountPasswordRequest {
  */
 export interface DescribeOrdersRequest {
     /**
-     * 订单名集合
-     */
+      * 订单名集合
+      */
     DealNames: Array<string>;
 }
 /**
@@ -961,16 +961,16 @@ export interface DescribeOrdersRequest {
  */
 export interface InquiryPriceUpgradeDBInstanceResponse {
     /**
-     * 总费用，打折前的
-     */
+      * 总费用，打折前的
+      */
     OriginalPrice?: number;
     /**
-     * 实际需要付款金额
-     */
+      * 实际需要付款金额
+      */
     Price?: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -978,12 +978,12 @@ export interface InquiryPriceUpgradeDBInstanceResponse {
  */
 export interface InitDBInstancesResponse {
     /**
-     * 实例ID集合。
-     */
+      * 实例ID集合。
+      */
     DBInstanceIdSet?: Array<string>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -991,28 +991,28 @@ export interface InitDBInstancesResponse {
  */
 export interface DescribeDBBackupsRequest {
     /**
-     * 实例ID，形如postgres-4wdeb0zv。
-     */
+      * 实例ID，形如postgres-4wdeb0zv。
+      */
     DBInstanceId: string;
     /**
-     * 备份方式（1-全量）。目前只支持全量，取值为1。
-     */
+      * 备份方式（1-全量）。目前只支持全量，取值为1。
+      */
     Type: number;
     /**
-     * 查询开始时间，形如2018-06-10 17:06:38，起始时间不得小于7天以前
-     */
+      * 查询开始时间，形如2018-06-10 17:06:38，起始时间不得小于7天以前
+      */
     StartTime: string;
     /**
-     * 查询结束时间，形如2018-06-10 17:06:38
-     */
+      * 查询结束时间，形如2018-06-10 17:06:38
+      */
     EndTime: string;
     /**
-     * 备份列表分页返回，每页返回数量，默认为 20，最小为1，最大值为 100。（当该参数不传或者传0时按默认值处理）
-     */
+      * 备份列表分页返回，每页返回数量，默认为 20，最小为1，最大值为 100。（当该参数不传或者传0时按默认值处理）
+      */
     Limit?: number;
     /**
-     * 返回结果中的第几页，从第0页开始。默认为0。
-     */
+      * 返回结果中的第几页，从第0页开始。默认为0。
+      */
     Offset?: number;
 }
 /**
@@ -1020,19 +1020,19 @@ export interface DescribeDBBackupsRequest {
  */
 export interface ServerlessDBAccount {
     /**
-        * 用户名
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 用户名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     DBUser: string;
     /**
-        * 密码
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 密码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     DBPassword: string;
     /**
-        * 连接数限制
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 连接数限制
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     DBConnLimit: number;
 }
 /**
@@ -1040,27 +1040,27 @@ export interface ServerlessDBAccount {
  */
 export interface OpenDBExtranetAccessResponse {
     /**
-     * 异步任务流程ID
-     */
+      * 异步任务流程ID
+      */
     FlowId?: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
  * 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称等
- * 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
- * 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
+* 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
+* 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
  */
 export interface Filter {
     /**
-     * 过滤键的名称。
-     */
+      * 过滤键的名称。
+      */
     Name?: string;
     /**
-     * 一个或者多个过滤值。
-     */
+      * 一个或者多个过滤值。
+      */
     Values?: Array<string>;
 }
 /**
@@ -1068,20 +1068,20 @@ export interface Filter {
  */
 export interface RenewInstanceRequest {
     /**
-     * 实例ID，形如postgres-6fego161
-     */
+      * 实例ID，形如postgres-6fego161
+      */
     DBInstanceId: string;
     /**
-     * 续费多少个月
-     */
+      * 续费多少个月
+      */
     Period: number;
     /**
-     * 是否自动使用代金券,1是,0否，默认不使用
-     */
+      * 是否自动使用代金券,1是,0否，默认不使用
+      */
     AutoVoucher?: number;
     /**
-     * 代金券ID列表，目前仅支持指定一张代金券
-     */
+      * 代金券ID列表，目前仅支持指定一张代金券
+      */
     VoucherIds?: Array<string>;
 }
 /**
@@ -1089,12 +1089,12 @@ export interface RenewInstanceRequest {
  */
 export interface Tag {
     /**
-     * 标签键
-     */
+      * 标签键
+      */
     TagKey: string;
     /**
-     * 标签值
-     */
+      * 标签值
+      */
     TagValue: string;
 }
 /**
@@ -1102,28 +1102,28 @@ export interface Tag {
  */
 export interface PgDeal {
     /**
-     * 订单名
-     */
+      * 订单名
+      */
     DealName: string;
     /**
-     * 所属用户
-     */
+      * 所属用户
+      */
     OwnerUin: string;
     /**
-     * 订单涉及多少个实例
-     */
+      * 订单涉及多少个实例
+      */
     Count: number;
     /**
-     * 付费模式。1-预付费；0-后付费
-     */
+      * 付费模式。1-预付费；0-后付费
+      */
     PayMode: number;
     /**
-     * 异步任务流程ID
-     */
+      * 异步任务流程ID
+      */
     FlowId: number;
     /**
-     * 实例ID数组
-     */
+      * 实例ID数组
+      */
     DBInstanceIdSet: Array<string>;
 }
 /**
@@ -1131,16 +1131,16 @@ export interface PgDeal {
  */
 export interface DescribeRegionsResponse {
     /**
-     * 返回的结果数量。
-     */
+      * 返回的结果数量。
+      */
     TotalCount?: number;
     /**
-     * 地域信息集合。
-     */
+      * 地域信息集合。
+      */
     RegionSet?: Array<RegionInfo>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1148,8 +1148,8 @@ export interface DescribeRegionsResponse {
  */
 export interface DescribeDatabasesRequest {
     /**
-     * 实例ID
-     */
+      * 实例ID
+      */
     DBInstanceId: string;
 }
 /**
@@ -1157,16 +1157,16 @@ export interface DescribeDatabasesRequest {
  */
 export interface DescribeAccountsResponse {
     /**
-     * 本次调用接口共返回了多少条数据。
-     */
+      * 本次调用接口共返回了多少条数据。
+      */
     TotalCount?: number;
     /**
-     * 帐号列表详细信息。
-     */
+      * 帐号列表详细信息。
+      */
     Details?: Array<AccountInfo>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1174,16 +1174,16 @@ export interface DescribeAccountsResponse {
  */
 export interface InquiryPriceRenewDBInstanceResponse {
     /**
-     * 总费用，打折前的。比如24650表示246.5元
-     */
+      * 总费用，打折前的。比如24650表示246.5元
+      */
     OriginalPrice?: number;
     /**
-     * 实际需要付款金额。比如24650表示246.5元
-     */
+      * 实际需要付款金额。比如24650表示246.5元
+      */
     Price?: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1191,32 +1191,32 @@ export interface InquiryPriceRenewDBInstanceResponse {
  */
 export interface DescribeDBErrlogsRequest {
     /**
-     * 实例ID，形如postgres-5bq3wfjd
-     */
+      * 实例ID，形如postgres-5bq3wfjd
+      */
     DBInstanceId: string;
     /**
-     * 查询起始时间，形如2018-01-01 00:00:00，起始时间不得小于7天以前
-     */
+      * 查询起始时间，形如2018-01-01 00:00:00，起始时间不得小于7天以前
+      */
     StartTime: string;
     /**
-     * 查询结束时间，形如2018-01-01 00:00:00
-     */
+      * 查询结束时间，形如2018-01-01 00:00:00
+      */
     EndTime: string;
     /**
-     * 数据库名字
-     */
+      * 数据库名字
+      */
     DatabaseName?: string;
     /**
-     * 搜索关键字
-     */
+      * 搜索关键字
+      */
     SearchKeys?: Array<string>;
     /**
-     * 分页返回，每页返回的最大数量。取值为1-100
-     */
+      * 分页返回，每页返回的最大数量。取值为1-100
+      */
     Limit?: number;
     /**
-     * 分页返回，返回第几页的数据，从第0页开始计数
-     */
+      * 分页返回，返回第几页的数据，从第0页开始计数
+      */
     Offset?: number;
 }
 /**
@@ -1224,24 +1224,24 @@ export interface DescribeDBErrlogsRequest {
  */
 export interface ZoneInfo {
     /**
-     * 该可用区的英文名称
-     */
+      * 该可用区的英文名称
+      */
     Zone: string;
     /**
-     * 该可用区的中文名称
-     */
+      * 该可用区的中文名称
+      */
     ZoneName: string;
     /**
-     * 该可用区对应的数字编号
-     */
+      * 该可用区对应的数字编号
+      */
     ZoneId: number;
     /**
-     * 可用状态，UNAVAILABLE表示不可用，AVAILABLE表示可用
-     */
+      * 可用状态，UNAVAILABLE表示不可用，AVAILABLE表示可用
+      */
     ZoneState: string;
     /**
-     * 该可用区是否支持Ipv6
-     */
+      * 该可用区是否支持Ipv6
+      */
     ZoneSupportIpv6: number;
 }
 /**
@@ -1249,48 +1249,48 @@ export interface ZoneInfo {
  */
 export interface DBBackup {
     /**
-     * 备份文件唯一标识
-     */
+      * 备份文件唯一标识
+      */
     Id: number;
     /**
-     * 文件生成的开始时间
-     */
+      * 文件生成的开始时间
+      */
     StartTime: string;
     /**
-     * 文件生成的结束时间
-     */
+      * 文件生成的结束时间
+      */
     EndTime: string;
     /**
-     * 文件大小(K)
-     */
+      * 文件大小(K)
+      */
     Size: number;
     /**
-     * 策略（0-实例备份；1-多库备份）
-     */
+      * 策略（0-实例备份；1-多库备份）
+      */
     Strategy: number;
     /**
-     * 类型（0-定时）
-     */
+      * 类型（0-定时）
+      */
     Way: number;
     /**
-     * 备份方式（1-完整）
-     */
+      * 备份方式（1-完整）
+      */
     Type: number;
     /**
-     * 状态（1-创建中；2-成功；3-失败）
-     */
+      * 状态（1-创建中；2-成功；3-失败）
+      */
     Status: number;
     /**
-     * DB列表
-     */
+      * DB列表
+      */
     DbList: Array<string>;
     /**
-     * 内网下载地址
-     */
+      * 内网下载地址
+      */
     InternalAddr: string;
     /**
-     * 外网下载地址
-     */
+      * 外网下载地址
+      */
     ExternalAddr: string;
 }
 /**
@@ -1298,24 +1298,24 @@ export interface DBBackup {
  */
 export interface DBInstanceNetInfo {
     /**
-     * DNS域名
-     */
+      * DNS域名
+      */
     Address: string;
     /**
-     * IP地址
-     */
+      * IP地址
+      */
     Ip: string;
     /**
-     * 连接Port地址
-     */
+      * 连接Port地址
+      */
     Port: number;
     /**
-     * 网络类型，1、inner（基础网络内网地址）；2、private（私有网络内网地址）；3、public（基础网络或私有网络的外网地址）；
-     */
+      * 网络类型，1、inner（基础网络内网地址）；2、private（私有网络内网地址）；3、public（基础网络或私有网络的外网地址）；
+      */
     NetType: string;
     /**
-     * 网络连接状态
-     */
+      * 网络连接状态
+      */
     Status: string;
 }
 /**
@@ -1323,12 +1323,12 @@ export interface DBInstanceNetInfo {
  */
 export interface ModifyDBInstancesProjectRequest {
     /**
-     * postgresql实例ID数组
-     */
+      * postgresql实例ID数组
+      */
     DBInstanceIdSet: Array<string>;
     /**
-     * postgresql实例所属新项目的ID
-     */
+      * postgresql实例所属新项目的ID
+      */
     ProjectId: string;
 }
 /**
@@ -1336,29 +1336,29 @@ export interface ModifyDBInstancesProjectRequest {
  */
 export interface ServerlessDBInstanceNetInfo {
     /**
-        * 地址
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     Address: string;
     /**
-        * ip地址
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * ip地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     Ip: string;
     /**
-        * 端口号
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 端口号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     Port: number;
     /**
-        * 状态
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     Status: string;
     /**
-        * 网络类型
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 网络类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     NetType: string;
 }
 /**
@@ -1366,16 +1366,16 @@ export interface ServerlessDBInstanceNetInfo {
  */
 export interface UpgradeDBInstanceResponse {
     /**
-     * 交易名字。
-     */
+      * 交易名字。
+      */
     DealName?: string;
     /**
-     * 冻结流水号
-     */
+      * 冻结流水号
+      */
     BillId?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1383,8 +1383,8 @@ export interface UpgradeDBInstanceResponse {
  */
 export interface ModifyDBInstanceNameResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1392,8 +1392,8 @@ export interface ModifyDBInstanceNameResponse {
  */
 export interface OpenServerlessDBExtranetAccessResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1401,12 +1401,12 @@ export interface OpenServerlessDBExtranetAccessResponse {
  */
 export interface CloseDBExtranetAccessResponse {
     /**
-     * 异步任务流程ID
-     */
+      * 异步任务流程ID
+      */
     FlowId?: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1414,8 +1414,8 @@ export interface CloseDBExtranetAccessResponse {
  */
 export interface DestroyDBInstanceResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1423,12 +1423,12 @@ export interface DestroyDBInstanceResponse {
  */
 export interface DescribeDBInstanceAttributeResponse {
     /**
-     * 实例详细信息。
-     */
+      * 实例详细信息。
+      */
     DBInstance?: DBInstance;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1436,36 +1436,36 @@ export interface DescribeDBInstanceAttributeResponse {
  */
 export interface DescribeDBSlowlogsRequest {
     /**
-     * 实例ID，形如postgres-lnp6j617
-     */
+      * 实例ID，形如postgres-lnp6j617
+      */
     DBInstanceId: string;
     /**
-     * 查询起始时间，形如2018-06-10 17:06:38，起始时间不得小于7天以前
-     */
+      * 查询起始时间，形如2018-06-10 17:06:38，起始时间不得小于7天以前
+      */
     StartTime: string;
     /**
-     * 查询结束时间，形如2018-06-10 17:06:38
-     */
+      * 查询结束时间，形如2018-06-10 17:06:38
+      */
     EndTime: string;
     /**
-     * 数据库名字
-     */
+      * 数据库名字
+      */
     DatabaseName?: string;
     /**
-     * 按照何种指标排序，取值为sum_calls或者sum_cost_time。sum_calls-总调用次数；sum_cost_time-总的花费时间
-     */
+      * 按照何种指标排序，取值为sum_calls或者sum_cost_time。sum_calls-总调用次数；sum_cost_time-总的花费时间
+      */
     OrderBy?: string;
     /**
-     * 排序规则。desc-降序；asc-升序
-     */
+      * 排序规则。desc-降序；asc-升序
+      */
     OrderByType?: string;
     /**
-     * 分页返回结果，每页最大返回数量，取值为1-100，默认20
-     */
+      * 分页返回结果，每页最大返回数量，取值为1-100，默认20
+      */
     Limit?: number;
     /**
-     * 分页返回结果，返回结果的第几页，从0开始计数
-     */
+      * 分页返回结果，返回结果的第几页，从0开始计数
+      */
     Offset?: number;
 }
 /**
@@ -1473,24 +1473,24 @@ export interface DescribeDBSlowlogsRequest {
  */
 export interface DescribeServerlessDBInstancesRequest {
     /**
-     * 查询条件
-     */
+      * 查询条件
+      */
     Filter?: Array<Filter>;
     /**
-     * 查询个数
-     */
+      * 查询个数
+      */
     Limit?: number;
     /**
-     * 偏移量
-     */
+      * 偏移量
+      */
     Offset?: number;
     /**
-     * 排序指标，目前支持实例创建时间CreateTime
-     */
+      * 排序指标，目前支持实例创建时间CreateTime
+      */
     OrderBy?: string;
     /**
-     * 排序方式，包括升序、降序
-     */
+      * 排序方式，包括升序、降序
+      */
     OrderByType?: string;
 }
 /**
@@ -1498,12 +1498,12 @@ export interface DescribeServerlessDBInstancesRequest {
  */
 export interface OpenDBExtranetAccessRequest {
     /**
-     * 实例ID，形如postgres-hez4fh0v
-     */
+      * 实例ID，形如postgres-hez4fh0v
+      */
     DBInstanceId: string;
     /**
-     * 是否开通Ipv6外网，1：是，0：否
-     */
+      * 是否开通Ipv6外网，1：是，0：否
+      */
     IsIpv6?: number;
 }
 /**
@@ -1511,16 +1511,16 @@ export interface OpenDBExtranetAccessRequest {
  */
 export interface DescribeDBBackupsResponse {
     /**
-     * 返回备份列表中备份文件的个数
-     */
+      * 返回备份列表中备份文件的个数
+      */
     TotalCount?: number;
     /**
-     * 备份列表
-     */
+      * 备份列表
+      */
     BackupList?: Array<DBBackup>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1532,16 +1532,16 @@ export declare type DescribeRegionsRequest = null;
  */
 export interface DescribeZonesResponse {
     /**
-     * 返回的结果数量。
-     */
+      * 返回的结果数量。
+      */
     TotalCount?: number;
     /**
-     * 可用区信息集合。
-     */
+      * 可用区信息集合。
+      */
     ZoneSet?: Array<ZoneInfo>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1549,64 +1549,64 @@ export interface DescribeZonesResponse {
  */
 export interface NormalQueryItem {
     /**
-     * 用户名
-     */
+      * 用户名
+      */
     UserName: string;
     /**
-     * 调用次数
-     */
+      * 调用次数
+      */
     Calls: number;
     /**
-     * 粒度点
-     */
+      * 粒度点
+      */
     CallsGrids: Array<number>;
     /**
-     * 花费总时间
-     */
+      * 花费总时间
+      */
     CostTime: number;
     /**
-     * 影响的行数
-     */
+      * 影响的行数
+      */
     Rows: number;
     /**
-     * 花费最小时间
-     */
+      * 花费最小时间
+      */
     MinCostTime: number;
     /**
-     * 花费最大时间
-     */
+      * 花费最大时间
+      */
     MaxCostTime: number;
     /**
-     * 最早一条慢SQL时间
-     */
+      * 最早一条慢SQL时间
+      */
     FirstTime: string;
     /**
-     * 最晚一条慢SQL时间
-     */
+      * 最晚一条慢SQL时间
+      */
     LastTime: string;
     /**
-     * 读共享内存块数
-     */
+      * 读共享内存块数
+      */
     SharedReadBlks: number;
     /**
-     * 写共享内存块数
-     */
+      * 写共享内存块数
+      */
     SharedWriteBlks: number;
     /**
-     * 读io总耗时
-     */
+      * 读io总耗时
+      */
     ReadCostTime: number;
     /**
-     * 写io总耗时
-     */
+      * 写io总耗时
+      */
     WriteCostTime: number;
     /**
-     * 数据库名字
-     */
+      * 数据库名字
+      */
     DatabaseName: string;
     /**
-     * 脱敏后的慢SQL
-     */
+      * 脱敏后的慢SQL
+      */
     NormalQuery: string;
 }
 /**
@@ -1614,12 +1614,12 @@ export interface NormalQueryItem {
  */
 export interface CreateServerlessDBInstanceResponse {
     /**
-     * 实例ID，该ID全局唯一，如：postgres-xxxxx
-     */
+      * 实例ID，该ID全局唯一，如：postgres-xxxxx
+      */
     DBInstanceId?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1627,12 +1627,12 @@ export interface CreateServerlessDBInstanceResponse {
  */
 export interface DescribeDatabasesResponse {
     /**
-     * 数据库信息
-     */
+      * 数据库信息
+      */
     Items?: Array<string>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1640,16 +1640,16 @@ export interface DescribeDatabasesResponse {
  */
 export interface DescribeDBXlogsResponse {
     /**
-     * 表示此次返回结果有多少条数据。
-     */
+      * 表示此次返回结果有多少条数据。
+      */
     TotalCount?: number;
     /**
-     * Xlog列表
-     */
+      * Xlog列表
+      */
     XlogList?: Array<Xlog>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1657,8 +1657,8 @@ export interface DescribeDBXlogsResponse {
  */
 export interface DescribeDBInstanceAttributeRequest {
     /**
-     * 实例ID
-     */
+      * 实例ID
+      */
     DBInstanceId: string;
 }
 /**
@@ -1666,12 +1666,12 @@ export interface DescribeDBInstanceAttributeRequest {
  */
 export interface CloseServerlessDBExtranetAccessRequest {
     /**
-     * 实例唯一标识符
-     */
+      * 实例唯一标识符
+      */
     DBInstanceId?: string;
     /**
-     * 实例名称
-     */
+      * 实例名称
+      */
     DBInstanceName?: string;
 }
 /**
@@ -1679,8 +1679,8 @@ export interface CloseServerlessDBExtranetAccessRequest {
  */
 export interface ModifyAccountRemarkResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1688,16 +1688,16 @@ export interface ModifyAccountRemarkResponse {
  */
 export interface DescribeDBSlowlogsResponse {
     /**
-     * 本次返回多少条数据
-     */
+      * 本次返回多少条数据
+      */
     TotalCount?: number;
     /**
-     * 慢查询日志详情
-     */
+      * 慢查询日志详情
+      */
     Detail?: SlowlogDetail;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -1705,16 +1705,16 @@ export interface DescribeDBSlowlogsResponse {
  */
 export interface ModifyAccountRemarkRequest {
     /**
-     * 实例ID，形如postgres-4wdeb0zv
-     */
+      * 实例ID，形如postgres-4wdeb0zv
+      */
     DBInstanceId: string;
     /**
-     * 实例用户名
-     */
+      * 实例用户名
+      */
     UserName: string;
     /**
-     * 用户UserName对应的新备注
-     */
+      * 用户UserName对应的新备注
+      */
     Remark: string;
 }
 /**
@@ -1722,12 +1722,12 @@ export interface ModifyAccountRemarkRequest {
  */
 export interface CloseDBExtranetAccessRequest {
     /**
-     * 实例ID，形如postgres-6r233v55
-     */
+      * 实例ID，形如postgres-6r233v55
+      */
     DBInstanceId: string;
     /**
-     * 是否关闭Ipv6外网，1：是，0：否
-     */
+      * 是否关闭Ipv6外网，1：是，0：否
+      */
     IsIpv6?: number;
 }
 /**
@@ -1735,27 +1735,27 @@ export interface CloseDBExtranetAccessRequest {
  */
 export interface Xlog {
     /**
-     * 备份文件唯一标识
-     */
+      * 备份文件唯一标识
+      */
     Id: number;
     /**
-     * 文件生成的开始时间
-     */
+      * 文件生成的开始时间
+      */
     StartTime: string;
     /**
-     * 文件生成的结束时间
-     */
+      * 文件生成的结束时间
+      */
     EndTime: string;
     /**
-     * 内网下载地址
-     */
+      * 内网下载地址
+      */
     InternalAddr: string;
     /**
-     * 外网下载地址
-     */
+      * 外网下载地址
+      */
     ExternalAddr: string;
     /**
-     * 备份文件大小
-     */
+      * 备份文件大小
+      */
     Size: number;
 }

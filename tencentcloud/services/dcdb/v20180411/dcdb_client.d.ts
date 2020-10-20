@@ -8,9 +8,9 @@ import { InitDCDBInstancesResponse, UpgradeDCDBInstanceResponse, DescribeAccount
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-       * 本接口（DescribeAccountPrivileges）用于查询云数据库账号权限。
-  注意：注意：相同用户名，不同Host是不同的账号。
-       */
+     * 本接口（DescribeAccountPrivileges）用于查询云数据库账号权限。
+注意：注意：相同用户名，不同Host是不同的账号。
+     */
     DescribeAccountPrivileges(req: DescribeAccountPrivilegesRequest, cb?: (error: string, rep: DescribeAccountPrivilegesResponse) => void): Promise<DescribeAccountPrivilegesResponse>;
     /**
      * 本接口（DescribeOrders）用于查询分布式数据库订单信息。传入订单ID来查询订单关联的分布式数据库实例，和对应的任务流程ID。
@@ -29,14 +29,14 @@ export declare class Client extends AbstractClient {
      */
     DescribeDCDBUpgradePrice(req: DescribeDCDBUpgradePriceRequest, cb?: (error: string, rep: DescribeDCDBUpgradePriceResponse) => void): Promise<DescribeDCDBUpgradePriceResponse>;
     /**
-       * 本接口（ModifyAccountDescription）用于修改云数据库账号备注。
-  注意：相同用户名，不同Host是不同的账号。
-       */
+     * 本接口（ModifyAccountDescription）用于修改云数据库账号备注。
+注意：相同用户名，不同Host是不同的账号。
+     */
     ModifyAccountDescription(req: ModifyAccountDescriptionRequest, cb?: (error: string, rep: ModifyAccountDescriptionResponse) => void): Promise<ModifyAccountDescriptionResponse>;
     /**
-       * 本接口（ResetAccountPassword）用于重置云数据库账号的密码。
-  注意：相同用户名，不同Host是不同的账号。
-       */
+     * 本接口（ResetAccountPassword）用于重置云数据库账号的密码。
+注意：相同用户名，不同Host是不同的账号。
+     */
     ResetAccountPassword(req: ResetAccountPasswordRequest, cb?: (error: string, rep: ResetAccountPasswordResponse) => void): Promise<ResetAccountPasswordResponse>;
     /**
      * 本接口（DescribeDCDBPrice）用于在购买实例前，查询实例的价格。
@@ -63,9 +63,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeAccounts(req: DescribeAccountsRequest, cb?: (error: string, rep: DescribeAccountsResponse) => void): Promise<DescribeAccountsResponse>;
     /**
-       * 本接口（GrantAccountPrivileges）用于给云数据库账号赋权。
-  注意：相同用户名，不同Host是不同的账号。
-       */
+     * 本接口（GrantAccountPrivileges）用于给云数据库账号赋权。
+注意：相同用户名，不同Host是不同的账号。
+     */
     GrantAccountPrivileges(req: GrantAccountPrivilegesRequest, cb?: (error: string, rep: GrantAccountPrivilegesResponse) => void): Promise<GrantAccountPrivilegesResponse>;
     /**
      * 本接口（RenewDCDBInstance）用于续费分布式数据库实例。
@@ -116,14 +116,14 @@ export declare class Client extends AbstractClient {
      */
     CloseDBExtranetAccess(req: CloseDBExtranetAccessRequest, cb?: (error: string, rep: CloseDBExtranetAccessResponse) => void): Promise<CloseDBExtranetAccessResponse>;
     /**
-       * 查询云数据库实例列表，支持通过项目ID、实例ID、内网地址、实例名称等来筛选实例。
-  如果不指定任何筛选条件，则默认返回10条实例记录，单次请求最多支持返回100条实例记录。
-       */
+     * 查询云数据库实例列表，支持通过项目ID、实例ID、内网地址、实例名称等来筛选实例。
+如果不指定任何筛选条件，则默认返回10条实例记录，单次请求最多支持返回100条实例记录。
+     */
     DescribeDCDBInstances(req: DescribeDCDBInstancesRequest, cb?: (error: string, rep: DescribeDCDBInstancesResponse) => void): Promise<DescribeDCDBInstancesResponse>;
     /**
-       * 本接口（CopyAccountPrivileges）用于复制云数据库账号的权限。
-  注意：相同用户名，不同Host是不同的账号，Readonly属性相同的账号之间才能复制权限。
-       */
+     * 本接口（CopyAccountPrivileges）用于复制云数据库账号的权限。
+注意：相同用户名，不同Host是不同的账号，Readonly属性相同的账号之间才能复制权限。
+     */
     CopyAccountPrivileges(req: CopyAccountPrivilegesRequest, cb?: (error: string, rep: CopyAccountPrivilegesResponse) => void): Promise<CopyAccountPrivilegesResponse>;
     /**
      * 本接口（DescribeDCDBShards）用于查询云数据库实例的分片信息。

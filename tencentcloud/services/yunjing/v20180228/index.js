@@ -5,5 +5,5 @@ const Models = require("./yunjing_models");
 const yunjing_client_1 = require("./yunjing_client");
 exports.v20180228 = {
     Client: yunjing_client_1.Client,
-    Models: Models,
+    Models: Models
 };

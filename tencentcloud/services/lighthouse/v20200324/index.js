@@ -5,5 +5,5 @@ const Models = require("./lighthouse_models");
 const lighthouse_client_1 = require("./lighthouse_client");
 exports.v20200324 = {
     Client: lighthouse_client_1.Client,
-    Models: Models,
+    Models: Models
 };

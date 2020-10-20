@@ -248,6 +248,16 @@ it("live.v20180801.AddLiveWatermark", async function () {
     }
 })
 
+it("live.v20180801.DescribeAreaBillBandwidthAndFluxList", async function () {
+    try {
+       const data = await client.DescribeAreaBillBandwidthAndFluxList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DeleteLiveWatermarkRule", async function () {
     try {
        const data = await client.DeleteLiveWatermarkRule({})

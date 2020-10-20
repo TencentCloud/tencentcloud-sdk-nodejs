@@ -38,6 +38,16 @@ it("tiw.v20190919.SetTranscodeCallbackKey", async function () {
     }
 })
 
+it("tiw.v20190919.StartOnlineRecord", async function () {
+    try {
+       const data = await client.StartOnlineRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tiw.v20190919.DescribeTranscode", async function () {
     try {
        const data = await client.DescribeTranscode({})
@@ -51,6 +61,16 @@ it("tiw.v20190919.DescribeTranscode", async function () {
 it("tiw.v20190919.CreateTranscode", async function () {
     try {
        const data = await client.CreateTranscode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tiw.v20190919.DescribeVideoGenerationTaskCallback", async function () {
+    try {
+       const data = await client.DescribeVideoGenerationTaskCallback({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,9 +98,19 @@ it("tiw.v20190919.SetTranscodeCallback", async function () {
     }
 })
 
-it("tiw.v20190919.StartOnlineRecord", async function () {
+it("tiw.v20190919.SetVideoGenerationTaskCallback", async function () {
     try {
-       const data = await client.StartOnlineRecord({})
+       const data = await client.SetVideoGenerationTaskCallback({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tiw.v20190919.CreateVideoGenerationTask", async function () {
+    try {
+       const data = await client.CreateVideoGenerationTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,6 +158,16 @@ it("tiw.v20190919.DescribeOnlineRecord", async function () {
     }
 })
 
+it("tiw.v20190919.SetVideoGenerationTaskCallbackKey", async function () {
+    try {
+       const data = await client.SetVideoGenerationTaskCallbackKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tiw.v20190919.DescribeOnlineRecordCallback", async function () {
     try {
        const data = await client.DescribeOnlineRecordCallback({})
@@ -141,6 +181,16 @@ it("tiw.v20190919.DescribeOnlineRecordCallback", async function () {
 it("tiw.v20190919.ResumeOnlineRecord", async function () {
     try {
        const data = await client.ResumeOnlineRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tiw.v20190919.DescribeVideoGenerationTask", async function () {
+    try {
+       const data = await client.DescribeVideoGenerationTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

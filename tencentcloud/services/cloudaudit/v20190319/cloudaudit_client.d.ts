@@ -32,12 +32,12 @@ export declare class Client extends AbstractClient {
      */
     InquireAuditCredit(req?: InquireAuditCreditRequest, cb?: (error: string, rep: InquireAuditCreditResponse) => void): Promise<InquireAuditCreditResponse>;
     /**
-       * 参数要求：
-  1、如果IsCreateNewBucket的值存在的话，cosRegion和cosBucketName都是必填参数。
-  2、如果IsEnableCmqNotify的值是1的话，IsCreateNewQueue、CmqRegion和CmqQueueName都是必填参数。
-  3、如果IsEnableCmqNotify的值是0的话，IsCreateNewQueue、CmqRegion和CmqQueueName都不能传。
-  4、如果IsEnableKmsEncry的值是1的话，KmsRegion和KeyId属于必填项
-       */
+     * 参数要求：
+1、如果IsCreateNewBucket的值存在的话，cosRegion和cosBucketName都是必填参数。
+2、如果IsEnableCmqNotify的值是1的话，IsCreateNewQueue、CmqRegion和CmqQueueName都是必填参数。
+3、如果IsEnableCmqNotify的值是0的话，IsCreateNewQueue、CmqRegion和CmqQueueName都不能传。
+4、如果IsEnableKmsEncry的值是1的话，KmsRegion和KeyId属于必填项
+     */
     UpdateAudit(req: UpdateAuditRequest, cb?: (error: string, rep: UpdateAuditResponse) => void): Promise<UpdateAuditResponse>;
     /**
      * 根据地域获取KMS密钥别名
@@ -48,12 +48,12 @@ export declare class Client extends AbstractClient {
      */
     DescribeAudit(req: DescribeAuditRequest, cb?: (error: string, rep: DescribeAuditResponse) => void): Promise<DescribeAuditResponse>;
     /**
-       * 参数要求：
-  1、如果IsCreateNewBucket的值存在的话，cosRegion和cosBucketName都是必填参数。
-  2、如果IsEnableCmqNotify的值是1的话，IsCreateNewQueue、CmqRegion和CmqQueueName都是必填参数。
-  3、如果IsEnableCmqNotify的值是0的话，IsCreateNewQueue、CmqRegion和CmqQueueName都不能传。
-  4、如果IsEnableKmsEncry的值是1的话，KmsRegion和KeyId属于必填项
-       */
+     * 参数要求：
+1、如果IsCreateNewBucket的值存在的话，cosRegion和cosBucketName都是必填参数。
+2、如果IsEnableCmqNotify的值是1的话，IsCreateNewQueue、CmqRegion和CmqQueueName都是必填参数。
+3、如果IsEnableCmqNotify的值是0的话，IsCreateNewQueue、CmqRegion和CmqQueueName都不能传。
+4、如果IsEnableKmsEncry的值是1的话，KmsRegion和KeyId属于必填项
+     */
     CreateAudit(req: CreateAuditRequest, cb?: (error: string, rep: CreateAuditResponse) => void): Promise<CreateAuditResponse>;
     /**
      * 查询云审计支持的cos可用区

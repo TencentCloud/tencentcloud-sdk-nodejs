@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CheckDomainResponse, DescribeDomainPriceListRequest, DescribeDomainBaseInfoResponse, CreateDomainBatchRequest, CheckBatchStatusRequest, CheckBatchStatusResponse, DescribeTemplateListResponse, DescribeDomainBaseInfoRequest, DescribeTemplateListRequest, CreateDomainBatchResponse, DescribeDomainNameListRequest, DescribeDomainNameListResponse, DescribeDomainPriceListResponse, CheckDomainRequest } from "./domain_models";
+import { UploadImageResponse, BatchModifyDomainInfoRequest, UpdateProhibitionBatchRequest, DeleteTemplateResponse, TransferInDomainBatchRequest, CreateDomainBatchResponse, ModifyDomainDNSBatchResponse, RenewDomainBatchRequest, TransferInDomainBatchResponse, UpdateProhibitionBatchResponse, CheckDomainResponse, RenewDomainBatchResponse, BatchModifyDomainInfoResponse, DescribeDomainBaseInfoResponse, DescribeTemplateListResponse, TransferProhibitionBatchRequest, DescribeDomainNameListResponse, DescribeDomainPriceListResponse, CreateTemplateResponse, DeleteTemplateRequest, CheckBatchStatusRequest, SetDomainAutoRenewResponse, CreateTemplateRequest, DescribeDomainPriceListRequest, CreateDomainBatchRequest, DescribeDomainBaseInfoRequest, DescribeDomainNameListRequest, UploadImageRequest, CheckDomainRequest, TransferProhibitionBatchResponse, ModifyDomainDNSBatchRequest, ModifyDomainOwnerBatchRequest, CheckBatchStatusResponse, DescribeTemplateListRequest, ModifyDomainOwnerBatchResponse, SetDomainAutoRenewRequest } from "./domain_models";
 /**
  * domain client
  * @class
@@ -8,44 +8,111 @@ import { CheckDomainResponse, DescribeDomainPriceListRequest, DescribeDomainBase
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-       * 本接口 (  DescribeDomainNameList ) 获取域名列表。
-  
-  默认接口请求频率限制：20次/秒。
-  
-       */
+     * 本接口 (  DescribeDomainNameList ) 获取域名列表。
+
+默认接口请求频率限制：20次/秒。
+
+     */
     DescribeDomainNameList(req: DescribeDomainNameListRequest, cb?: (error: string, rep: DescribeDomainNameListResponse) => void): Promise<DescribeDomainNameListResponse>;
     /**
-       * 本接口 ( CreateDomainBatch ) 用于批量注册域名 。
-  
-  默认接口请求频率限制：20次/秒。
-       */
+     * 本接口 ( UploadImage ) 用于上传资质照片 。
+
+默认接口请求频率限制：20次/秒。
+     */
+    UploadImage(req: UploadImageRequest, cb?: (error: string, rep: UploadImageResponse) => void): Promise<UploadImageResponse>;
+    /**
+     * 本接口 ( CreateTemplate ) 用于添加域名信息模板 。
+
+默认接口请求频率限制：20次/秒。
+     */
+    CreateTemplate(req: CreateTemplateRequest, cb?: (error: string, rep: CreateTemplateResponse) => void): Promise<CreateTemplateResponse>;
+    /**
+     * 本接口 ( TransferInDomainBatch ) 用于批量禁止域名转移 。
+
+默认接口请求频率限制：20次/秒。
+     */
+    TransferProhibitionBatch(req: TransferProhibitionBatchRequest, cb?: (error: string, rep: TransferProhibitionBatchResponse) => void): Promise<TransferProhibitionBatchResponse>;
+    /**
+     * 本接口 ( ModifyDomainOwnerBatch) 用于域名批量账号间转移 。
+
+默认接口请求频率限制：20次/秒。
+     */
+    ModifyDomainOwnerBatch(req: ModifyDomainOwnerBatchRequest, cb?: (error: string, rep: ModifyDomainOwnerBatchResponse) => void): Promise<ModifyDomainOwnerBatchResponse>;
+    /**
+     * 本接口 ( CreateDomainBatch ) 用于批量注册域名 。
+
+默认接口请求频率限制：20次/秒。
+     */
     CreateDomainBatch(req: CreateDomainBatchRequest, cb?: (error: string, rep: CreateDomainBatchResponse) => void): Promise<CreateDomainBatchResponse>;
     /**
-       * 本接口 (  DescribeDomainBaseInfo) 获取域名基础信息。
-  
-  默认接口请求频率限制：20次/秒。
-  
-       */
+     * 本接口 (  DescribeDomainBaseInfo) 获取域名基础信息。
+
+默认接口请求频率限制：20次/秒。
+
+     */
     DescribeDomainBaseInfo(req: DescribeDomainBaseInfoRequest, cb?: (error: string, rep: DescribeDomainBaseInfoResponse) => void): Promise<DescribeDomainBaseInfoResponse>;
     /**
-       * 本接口 (DescribeTemplateList) 用于获取模板列表。
-  
-  默认接口请求频率限制：20次/秒。
-  
-       */
+     * 本接口 ( DeleteTemplate ) 用于删除域名信息模板。
+
+默认接口请求频率限制：20次/秒。
+     */
+    DeleteTemplate(req: DeleteTemplateRequest, cb?: (error: string, rep: DeleteTemplateResponse) => void): Promise<DeleteTemplateResponse>;
+    /**
+     * 本接口 (DescribeTemplateList) 用于获取模板列表。
+
+默认接口请求频率限制：20次/秒。
+
+     */
     DescribeTemplateList(req: DescribeTemplateListRequest, cb?: (error: string, rep: DescribeTemplateListResponse) => void): Promise<DescribeTemplateListResponse>;
+    /**
+     * 本接口 ( RenewDomainBatch ) 用于批量续费域名 。
+
+默认接口请求频率限制：20次/秒。
+
+     */
+    RenewDomainBatch(req: RenewDomainBatchRequest, cb?: (error: string, rep: RenewDomainBatchResponse) => void): Promise<RenewDomainBatchResponse>;
+    /**
+     * 本接口 ( BatchModifyDomainInfo ) 用于批量域名信息修改 。
+
+默认接口请求频率限制：20次/秒。
+     */
+    BatchModifyDomainInfo(req: BatchModifyDomainInfoRequest, cb?: (error: string, rep: BatchModifyDomainInfoResponse) => void): Promise<BatchModifyDomainInfoResponse>;
     /**
      * 按照域名后缀获取对应的价格列表
      */
     DescribeDomainPriceList(req: DescribeDomainPriceListRequest, cb?: (error: string, rep: DescribeDomainPriceListResponse) => void): Promise<DescribeDomainPriceListResponse>;
     /**
-       * 本接口 ( CheckBatchStatus ) 用于检查批量任务状态 。
-  
-  默认接口请求频率限制：20次/秒。
-       */
+     * 本接口 ( CheckBatchStatus ) 用于查询批量操作日志状态 。
+
+默认接口请求频率限制：20次/秒。
+     */
     CheckBatchStatus(req: CheckBatchStatusRequest, cb?: (error: string, rep: CheckBatchStatusResponse) => void): Promise<CheckBatchStatusResponse>;
     /**
      * 检查域名是否可以注册。
      */
     CheckDomain(req: CheckDomainRequest, cb?: (error: string, rep: CheckDomainResponse) => void): Promise<CheckDomainResponse>;
+    /**
+     * 本接口 ( TransferInDomainBatch ) 用于批量转入域名 。
+
+默认接口请求频率限制：20次/秒。
+     */
+    TransferInDomainBatch(req: TransferInDomainBatchRequest, cb?: (error: string, rep: TransferInDomainBatchResponse) => void): Promise<TransferInDomainBatchResponse>;
+    /**
+     * 本接口 ( UpdateProhibitionBatch ) 用于批量设置禁止域名更新 。
+
+默认接口请求频率限制：20次/秒。
+     */
+    UpdateProhibitionBatch(req: UpdateProhibitionBatchRequest, cb?: (error: string, rep: UpdateProhibitionBatchResponse) => void): Promise<UpdateProhibitionBatchResponse>;
+    /**
+     * 本接口 ( ModifyDomainDNSBatch) 用于批量修改域名DNS信息 。
+
+默认接口请求频率限制：20次/秒。
+     */
+    ModifyDomainDNSBatch(req: ModifyDomainDNSBatchRequest, cb?: (error: string, rep: ModifyDomainDNSBatchResponse) => void): Promise<ModifyDomainDNSBatchResponse>;
+    /**
+     * 本接口 ( SetDomainAutoRenew ) 用于设置域名自动续费。
+
+默认接口请求频率限制：20次/秒。
+     */
+    SetDomainAutoRenew(req: SetDomainAutoRenewRequest, cb?: (error: string, rep: SetDomainAutoRenewResponse) => void): Promise<SetDomainAutoRenewResponse>;
 }

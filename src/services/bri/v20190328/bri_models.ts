@@ -22,12 +22,12 @@ export interface DescribeBRIRequest {
   /**
    * 业务风险情报请求体
    */
-  RequestData?: BRIRequest
+  RequestData: BRIRequest
 
   /**
    * 客户用于计费的资源ID
    */
-  ResourceId?: string
+  ResourceId: string
 }
 
 /**
@@ -40,41 +40,6 @@ export interface BRIRequest {
   Service: string
 
   /**
-   * Apk证书Md5  (业务名为bri_apk时必填，除非已填FileMd5)
-   */
-  CertMd5?: string
-
-  /**
-   * Apk文件Md5 (业务名为bri_apk时必填，除非已填PackageName,CertMd5,FileSize)
-   */
-  FileMd5?: string
-
-  /**
-   * Apk文件大小  (业务名为bri_apk时必填，除非已填FileMd5)
-   */
-  FileSize?: number
-
-  /**
-   * 安卓设备的Imei (业务名为bri_dev时必填)
-   */
-  Imei?: string
-
-  /**
-   * 点分格式的IP (业务名为bri_ip时必填)
-   */
-  Ip?: string
-
-  /**
-   * Apk安装包名 (业务名为bri_apk时必填，除非已填FileMd5)
-   */
-  PackageName?: string
-
-  /**
-   * 电话号码 (业务名为bri_num时必填)
-   */
-  PhoneNumber?: string
-
-  /**
    * QQ号 (业务名为bri_social时必填, 除非已填Wechat)
    */
   QQ?: string
@@ -85,14 +50,50 @@ export interface BRIRequest {
   QQTag?: string
 
   /**
+   * 网址 (业务名为bri_url时必填)
+   */
+  Url?: string
+
+  /**
+   * Apk证书Md5  (业务名为bri_apk时必填，除非已填FileMd5)
+   */
+  CertMd5?: string
+
+  /**
+   * Apk安装包名 (业务名为bri_apk时必填，除非已填FileMd5)
+   */
+  PackageName?: string
+
+  /**
+   * Apk文件Md5 (业务名为bri_apk时必填，除非已填PackageName,CertMd5,FileSize)
+   */
+  FileMd5?: string
+
+  /**
    * 业务场景 (1-注册, 2-登录, 3-发消息)
    */
   Scene?: string
 
   /**
-   * 网址 (业务名为bri_url时必填)
+      * 电话号码 (业务名为bri_num时必填)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PhoneNumber?: string
+
+  /**
+   * Apk文件大小  (业务名为bri_apk时必填，除非已填FileMd5)
    */
-  Url?: string
+  FileSize?: number
+
+  /**
+   * 点分格式的IP (业务名为bri_ip时必填)
+   */
+  Ip?: string
+
+  /**
+   * 安卓设备的Imei (业务名为bri_dev时必填)
+   */
+  Imei?: string
 
   /**
    * 微信号 (业务名为bri_social时必填, 除非已填QQ)

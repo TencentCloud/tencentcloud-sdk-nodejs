@@ -28,6 +28,16 @@ it("asr.v20190614.GetAsrVocabList", async function () {
     }
 })
 
+it("asr.v20190614.DownloadAsrVocab", async function () {
+    try {
+       const data = await client.DownloadAsrVocab({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("asr.v20190614.CreateRecTask", async function () {
     try {
        const data = await client.CreateRecTask({})
@@ -58,9 +68,9 @@ it("asr.v20190614.DescribeTaskStatus", async function () {
     }
 })
 
-it("asr.v20190614.SetVocabState", async function () {
+it("asr.v20190614.ModifyCustomizationState", async function () {
     try {
-       const data = await client.SetVocabState({})
+       const data = await client.ModifyCustomizationState({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,6 +88,16 @@ it("asr.v20190614.UpdateAsrVocab", async function () {
     }
 })
 
+it("asr.v20190614.SetVocabState", async function () {
+    try {
+       const data = await client.SetVocabState({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("asr.v20190614.CreateAsrVocab", async function () {
     try {
        const data = await client.CreateAsrVocab({})
@@ -88,9 +108,29 @@ it("asr.v20190614.CreateAsrVocab", async function () {
     }
 })
 
-it("asr.v20190614.DownloadAsrVocab", async function () {
+it("asr.v20190614.DeleteCustomization", async function () {
     try {
-       const data = await client.DownloadAsrVocab({})
+       const data = await client.DeleteCustomization({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("asr.v20190614.CreateCustomization", async function () {
+    try {
+       const data = await client.CreateCustomization({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("asr.v20190614.GetCustomizationList", async function () {
+    try {
+       const data = await client.GetCustomizationList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,9 +148,29 @@ it("asr.v20190614.DeleteAsrVocab", async function () {
     }
 })
 
+it("asr.v20190614.ModifyCustomization", async function () {
+    try {
+       const data = await client.ModifyCustomization({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("asr.v20190614.SentenceRecognition", async function () {
     try {
        const data = await client.SentenceRecognition({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("asr.v20190614.DownloadCustomization", async function () {
+    try {
+       const data = await client.DownloadCustomization({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

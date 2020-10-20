@@ -48,10 +48,10 @@ export declare class Client extends AbstractClient {
      */
     CreateShieldInstance(req: CreateShieldInstanceRequest, cb?: (error: string, rep: CreateShieldInstanceResponse) => void): Promise<CreateShieldInstanceResponse>;
     /**
-       * 本接口用于查看app列表。
-  可以通过指定任务唯一标识ItemId来查询指定app的详细信息，或通过设定过滤器来查询满足过滤条件的app的详细信息。 指定偏移(Offset)和限制(Limit)来选择结果中的一部分，默认返回满足条件的前20个app信息。
-  
-       */
+     * 本接口用于查看app列表。
+可以通过指定任务唯一标识ItemId来查询指定app的详细信息，或通过设定过滤器来查询满足过滤条件的app的详细信息。 指定偏移(Offset)和限制(Limit)来选择结果中的一部分，默认返回满足条件的前20个app信息。
+
+     */
     DescribeShieldInstances(req: DescribeShieldInstancesRequest, cb?: (error: string, rep: DescribeShieldInstancesResponse) => void): Promise<DescribeShieldInstancesResponse>;
     /**
      * 对资源进行策略新增
@@ -62,9 +62,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeUserBaseInfoInstance(req?: DescribeUserBaseInfoInstanceRequest, cb?: (error: string, rep: DescribeUserBaseInfoInstanceResponse) => void): Promise<DescribeUserBaseInfoInstanceResponse>;
     /**
-       * 本接口用于查看app列表。
-  可以通过指定任务唯一标识ItemId来查询指定app的详细信息，或通过设定过滤器来查询满足过滤条件的app的详细信息。 指定偏移(Offset)和限制(Limit)来选择结果中的一部分，默认返回满足条件的前20个app信息。
-       */
+     * 本接口用于查看app列表。
+可以通过指定任务唯一标识ItemId来查询指定app的详细信息，或通过设定过滤器来查询满足过滤条件的app的详细信息。 指定偏移(Offset)和限制(Limit)来选择结果中的一部分，默认返回满足条件的前20个app信息。
+     */
     DescribeScanInstances(req: DescribeScanInstancesRequest, cb?: (error: string, rep: DescribeScanInstancesResponse) => void): Promise<DescribeScanInstancesResponse>;
     /**
      * 删除一个或者多个app加固信息

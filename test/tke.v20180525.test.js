@@ -128,6 +128,16 @@ it("tke.v20180525.CreateClusterAsGroup", async function () {
     }
 })
 
+it("tke.v20180525.AcquireClusterAdminRole", async function () {
+    try {
+       const data = await client.AcquireClusterAdminRole({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.DescribeExistedInstances", async function () {
     try {
        const data = await client.DescribeExistedInstances({})
@@ -158,9 +168,9 @@ it("tke.v20180525.CreateClusterRouteTable", async function () {
     }
 })
 
-it("tke.v20180525.DescribeClusterRouteTables", async function () {
+it("tke.v20180525.DescribeClusterAsGroupOption", async function () {
     try {
-       const data = await client.DescribeClusterRouteTables({})
+       const data = await client.DescribeClusterAsGroupOption({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,9 +218,9 @@ it("tke.v20180525.CreateClusterEndpoint", async function () {
     }
 })
 
-it("tke.v20180525.DescribeClusterAsGroupOption", async function () {
+it("tke.v20180525.DescribeClusterRouteTables", async function () {
     try {
-       const data = await client.DescribeClusterAsGroupOption({})
+       const data = await client.DescribeClusterRouteTables({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

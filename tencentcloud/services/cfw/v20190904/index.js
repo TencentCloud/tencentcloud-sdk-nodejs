@@ -5,5 +5,5 @@ const Models = require("./cfw_models");
 const cfw_client_1 = require("./cfw_client");
 exports.v20190904 = {
     Client: cfw_client_1.Client,
-    Models: Models,
+    Models: Models
 };

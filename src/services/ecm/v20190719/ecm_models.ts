@@ -2157,6 +2157,11 @@ export interface CreateModuleRequest {
    * 模块默认安全组列表
    */
   SecurityGroups?: Array<string>
+
+  /**
+   * 默认入带宽，单位：M。范围不得超过带宽上下限，详看DescribeConfig。
+   */
+  DefaultBandWidthIn?: number
 }
 
 /**
@@ -2857,9 +2862,14 @@ export interface ResetInstancesMaxBandwidthRequest {
   InstanceIdSet: Array<string>
 
   /**
-   * 修改后的最大带宽上限。
+   * 修改后的最大出带宽上限。
    */
   MaxBandwidthOut: number
+
+  /**
+   * 修改后的最大入带宽上限。
+   */
+  MaxBandwidthIn?: number
 }
 
 /**
@@ -2954,9 +2964,14 @@ export interface ModifyModuleNetworkRequest {
   ModuleId: string
 
   /**
-   * 默认带宽上限
+   * 默认出带宽上限
    */
   DefaultBandwidth: number
+
+  /**
+   * 默认入带宽上限
+   */
+  DefaultBandwidthIn?: number
 }
 
 /**
@@ -4513,6 +4528,11 @@ export interface PublicIPAddressInfo {
    * 实例的最大出带宽上限，单位为Mbps。
    */
   MaxBandwidthOut: number
+
+  /**
+   * 实例的最大入带宽上限，单位为Mbps。
+   */
+  MaxBandwidthIn: number
 }
 
 /**
@@ -5947,7 +5967,7 @@ DELETEFAILED：删除失败
   CreateTime: string
 
   /**
-   * 默认带宽
+   * 默认出带宽
    */
   DefaultBandwidth: number
 
@@ -5966,6 +5986,11 @@ DELETEFAILED：删除失败
    * 默认安全组id列表
    */
   SecurityGroupIds: Array<string>
+
+  /**
+   * 默认入带宽
+   */
+  DefaultBandwidthIn: number
 }
 
 /**

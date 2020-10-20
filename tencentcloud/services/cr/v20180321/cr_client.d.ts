@@ -44,9 +44,9 @@ export declare class Client extends AbstractClient {
      */
     QueryInstantData(req: QueryInstantDataRequest, cb?: (error: string, rep: QueryInstantDataResponse) => void): Promise<QueryInstantDataResponse>;
     /**
-       * <p>用于获取录音下载链接清单，次日早上8:00后可查询前日录音清单。</p>
-  <p>注意：录音清单中的录音下载链接仅次日20:00之前有效，请及时下载。</p>
-       */
+     * <p>用于获取录音下载链接清单，次日早上8:00后可查询前日录音清单。</p>
+<p>注意：录音清单中的录音下载链接仅次日20:00之前有效，请及时下载。</p>
+     */
     DownloadRecordList(req: DownloadRecordListRequest, cb?: (error: string, rep: DownloadRecordListResponse) => void): Promise<DownloadRecordListResponse>;
     /**
      * 提交黑名单后，黑名单中有效期内的号码将停止拨打，适用于到期/逾期提醒、回访场景。

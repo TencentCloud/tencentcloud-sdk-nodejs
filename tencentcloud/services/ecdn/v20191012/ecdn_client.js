@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddEcdnDomain", req, cb);
     }
     /**
+     * DescribeIpStatus 用于查询域名所在加速平台的所有节点明细。
+     */
+    async DescribeIpStatus(req, cb) {
+        return this.request("DescribeIpStatus", req, cb);
+    }
+    /**
      * PurgePathCache 用于批量刷新目录缓存，一次提交将返回一个刷新任务id。
      */
     async PurgePathCache(req, cb) {
@@ -46,9 +52,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StartEcdnDomain", req, cb);
     }
     /**
-       * 本接口（UpdateDomainConfig）用于更新ECDN加速域名配置信息。
-  注意：如果需要更新复杂类型的配置项，必须传递整个对象的所有属性，未传递的属性将使用默认值。建议通过查询接口获取配置属性后，直接修改后传递给本接口。Https配置由于证书的特殊性，更新时不用传递证书和密钥字段。
-       */
+     * 本接口（UpdateDomainConfig）用于更新ECDN加速域名配置信息。
+注意：如果需要更新复杂类型的配置项，必须传递整个对象的所有属性，未传递的属性将使用默认值。建议通过查询接口获取配置属性后，直接修改后传递给本接口。Https配置由于证书的特殊性，更新时不用传递证书和密钥字段。
+     */
     async UpdateDomainConfig(req, cb) {
         return this.request("UpdateDomainConfig", req, cb);
     }
@@ -101,17 +107,17 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDomains", req, cb);
     }
     /**
-       * DescribeEcdnStatistics用于查询 ECDN 实时访问监控数据，支持以下指标查询：
-  
-  + 流量（单位为 byte）
-  + 带宽（单位为 bps）
-  + 请求数（单位为 次）
-  + 响应时间（单位为ms）
-  + 状态码 2xx 汇总及各 2 开头状态码明细（单位为 个）
-  + 状态码 3xx 汇总及各 3 开头状态码明细（单位为 个）
-  + 状态码 4xx 汇总及各 4 开头状态码明细（单位为 个）
-  + 状态码 5xx 汇总及各 5 开头状态码明细（单位为 个）
-       */
+     * DescribeEcdnStatistics用于查询 ECDN 实时访问监控数据，支持以下指标查询：
+
++ 流量（单位为 byte）
++ 带宽（单位为 bps）
++ 请求数（单位为 次）
++ 响应时间（单位为ms）
++ 状态码 2xx 汇总及各 2 开头状态码明细（单位为 个）
++ 状态码 3xx 汇总及各 3 开头状态码明细（单位为 个）
++ 状态码 4xx 汇总及各 4 开头状态码明细（单位为 个）
++ 状态码 5xx 汇总及各 5 开头状态码明细（单位为 个）
+     */
     async DescribeEcdnStatistics(req, cb) {
         return this.request("DescribeEcdnStatistics", req, cb);
     }

@@ -28,34 +28,34 @@ class Client extends abstract_client_1.AbstractClient {
         super("cms.tencentcloudapi.com", "2019-03-21", clientConfig);
     }
     /**
-       * 本文档适用于文本内容安全、音频内容安全自定义识别库的管理。
-  <br>
-  删除文本样本库，暂时只支持单个删除。
-       */
+     * 本文档适用于文本内容安全、音频内容安全自定义识别库的管理。
+<br>
+删除文本样本库，暂时只支持单个删除。
+     */
     async DeleteTextSample(req, cb) {
         return this.request("DeleteTextSample", req, cb);
     }
     /**
-       * 本文档适用于文本内容安全、音频内容安全自定义识别库的管理。
-  <br>
-  通过该接口可以将文本新增到样本库。
-       */
+     * 本文档适用于文本内容安全、音频内容安全自定义识别库的管理。
+<br>
+通过该接口可以将文本新增到样本库。
+     */
     async CreateTextSample(req, cb) {
         return this.request("CreateTextSample", req, cb);
     }
     /**
-       * 本文档适用于图片内容安全、视频内容安全自定义识别库的管理。
-  <br>
-  通过该接口可以将图片新增到样本库。
-       */
+     * 本文档适用于图片内容安全、视频内容安全自定义识别库的管理。
+<br>
+通过该接口可以将图片新增到样本库。
+     */
     async CreateFileSample(req, cb) {
         return this.request("CreateFileSample", req, cb);
     }
     /**
-       * 本文档适用于文本内容安全、音频内容安全自定义识别库的管理。
-  <br>
-  支持批量查询文本样本库。
-       */
+     * 本文档适用于文本内容安全、音频内容安全自定义识别库的管理。
+<br>
+支持批量查询文本样本库。
+     */
     async DescribeTextSample(req, cb) {
         return this.request("DescribeTextSample", req, cb);
     }
@@ -66,10 +66,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ManualReview", req, cb);
     }
     /**
-       * 本文档适用于图片内容安全、视频内容安全自定义识别库的管理。
-  <br>
-  查询图片样本库，支持批量查询。
-       */
+     * 本文档适用于图片内容安全、视频内容安全自定义识别库的管理。
+<br>
+查询图片样本库，支持批量查询。
+     */
     async DescribeFileSample(req, cb) {
         return this.request("DescribeFileSample", req, cb);
     }
@@ -86,10 +86,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ImageModeration", req, cb);
     }
     /**
-       * 本文档适用于图片内容安全、视频内容安全自定义识别库的管理。
-  <br>
-  删除图片样本库，支持批量删除，一次提交不超过20个。
-       */
+     * 本文档适用于图片内容安全、视频内容安全自定义识别库的管理。
+<br>
+删除图片样本库，支持批量删除，一次提交不超过20个。
+     */
     async DeleteFileSample(req, cb) {
         return this.request("DeleteFileSample", req, cb);
     }

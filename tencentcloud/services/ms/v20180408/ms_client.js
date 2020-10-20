@@ -88,10 +88,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateShieldInstance", req, cb);
     }
     /**
-       * 本接口用于查看app列表。
-  可以通过指定任务唯一标识ItemId来查询指定app的详细信息，或通过设定过滤器来查询满足过滤条件的app的详细信息。 指定偏移(Offset)和限制(Limit)来选择结果中的一部分，默认返回满足条件的前20个app信息。
-  
-       */
+     * 本接口用于查看app列表。
+可以通过指定任务唯一标识ItemId来查询指定app的详细信息，或通过设定过滤器来查询满足过滤条件的app的详细信息。 指定偏移(Offset)和限制(Limit)来选择结果中的一部分，默认返回满足条件的前20个app信息。
+
+     */
     async DescribeShieldInstances(req, cb) {
         return this.request("DescribeShieldInstances", req, cb);
     }
@@ -108,9 +108,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUserBaseInfoInstance", req, cb);
     }
     /**
-       * 本接口用于查看app列表。
-  可以通过指定任务唯一标识ItemId来查询指定app的详细信息，或通过设定过滤器来查询满足过滤条件的app的详细信息。 指定偏移(Offset)和限制(Limit)来选择结果中的一部分，默认返回满足条件的前20个app信息。
-       */
+     * 本接口用于查看app列表。
+可以通过指定任务唯一标识ItemId来查询指定app的详细信息，或通过设定过滤器来查询满足过滤条件的app的详细信息。 指定偏移(Offset)和限制(Limit)来选择结果中的一部分，默认返回满足条件的前20个app信息。
+     */
     async DescribeScanInstances(req, cb) {
         return this.request("DescribeScanInstances", req, cb);
     }

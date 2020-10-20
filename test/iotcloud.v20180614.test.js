@@ -68,6 +68,16 @@ it("iotcloud.v20180614.PublishToDevice", async function () {
     }
 })
 
+it("iotcloud.v20180614.DescribeFirmware", async function () {
+    try {
+       const data = await client.DescribeFirmware({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotcloud.v20180614.DescribeDeviceShadow", async function () {
     try {
        const data = await client.DescribeDeviceShadow({})
@@ -118,9 +128,9 @@ it("iotcloud.v20180614.CancelTask", async function () {
     }
 })
 
-it("iotcloud.v20180614.UpdateDeviceShadow", async function () {
+it("iotcloud.v20180614.RetryDeviceFirmwareTask", async function () {
     try {
-       const data = await client.UpdateDeviceShadow({})
+       const data = await client.RetryDeviceFirmwareTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,9 +148,29 @@ it("iotcloud.v20180614.CreateTopicPolicy", async function () {
     }
 })
 
+it("iotcloud.v20180614.UpdateDeviceAvailableState", async function () {
+    try {
+       const data = await client.UpdateDeviceAvailableState({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotcloud.v20180614.CreateProduct", async function () {
     try {
        const data = await client.CreateProduct({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotcloud.v20180614.UploadFirmware", async function () {
+    try {
+       const data = await client.UploadFirmware({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -171,6 +201,16 @@ it("iotcloud.v20180614.DescribeProducts", async function () {
 it("iotcloud.v20180614.CreateMultiDevicesTask", async function () {
     try {
        const data = await client.CreateMultiDevicesTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotcloud.v20180614.DescribeFirmwareTaskStatistics", async function () {
+    try {
+       const data = await client.DescribeFirmwareTaskStatistics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -218,6 +258,16 @@ it("iotcloud.v20180614.ReplaceTopicRule", async function () {
     }
 })
 
+it("iotcloud.v20180614.EditFirmware", async function () {
+    try {
+       const data = await client.EditFirmware({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotcloud.v20180614.CreateDevice", async function () {
     try {
        const data = await client.CreateDevice({})
@@ -231,6 +281,16 @@ it("iotcloud.v20180614.CreateDevice", async function () {
 it("iotcloud.v20180614.PublishMessage", async function () {
     try {
        const data = await client.PublishMessage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotcloud.v20180614.DescribeFirmwareTaskDistribution", async function () {
+    try {
+       const data = await client.DescribeFirmwareTaskDistribution({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -268,6 +328,16 @@ it("iotcloud.v20180614.ResetDeviceState", async function () {
     }
 })
 
+it("iotcloud.v20180614.DescribeFirmwareTask", async function () {
+    try {
+       const data = await client.DescribeFirmwareTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotcloud.v20180614.DescribeTasks", async function () {
     try {
        const data = await client.DescribeTasks({})
@@ -288,9 +358,19 @@ it("iotcloud.v20180614.DescribeMultiDevices", async function () {
     }
 })
 
-it("iotcloud.v20180614.UpdateDeviceAvailableState", async function () {
+it("iotcloud.v20180614.DescribeFirmwareTaskDevices", async function () {
     try {
-       const data = await client.UpdateDeviceAvailableState({})
+       const data = await client.DescribeFirmwareTaskDevices({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotcloud.v20180614.CancelDeviceFirmwareTask", async function () {
+    try {
+       const data = await client.CancelDeviceFirmwareTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -311,6 +391,16 @@ it("iotcloud.v20180614.PublishAsDevice", async function () {
 it("iotcloud.v20180614.CreateLoraDevice", async function () {
     try {
        const data = await client.CreateLoraDevice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotcloud.v20180614.EnableTopicRule", async function () {
+    try {
+       const data = await client.EnableTopicRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -398,9 +488,19 @@ it("iotcloud.v20180614.DescribeMultiDevTask", async function () {
     }
 })
 
-it("iotcloud.v20180614.EnableTopicRule", async function () {
+it("iotcloud.v20180614.UpdateDeviceShadow", async function () {
     try {
-       const data = await client.EnableTopicRule({})
+       const data = await client.UpdateDeviceShadow({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotcloud.v20180614.DescribeFirmwareTasks", async function () {
+    try {
+       const data = await client.DescribeFirmwareTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

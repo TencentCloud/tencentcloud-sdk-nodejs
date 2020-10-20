@@ -32,12 +32,12 @@ export declare class Client extends AbstractClient {
      */
     IsolateDBInstance(req: IsolateDBInstanceRequest, cb?: (error: string, rep: IsolateDBInstanceResponse) => void): Promise<IsolateDBInstanceResponse>;
     /**
-       * 本接口(RestartDBInstances)用于重启云数据库实例。
-  
-  注意：
-  1、本接口只支持主实例进行重启操作；
-  2、实例状态必须为正常，并且没有其他异步任务在执行中。
-       */
+     * 本接口(RestartDBInstances)用于重启云数据库实例。
+
+注意：
+1、本接口只支持主实例进行重启操作；
+2、实例状态必须为正常，并且没有其他异步任务在执行中。
+     */
     RestartDBInstances(req: RestartDBInstancesRequest, cb?: (error: string, rep: RestartDBInstancesResponse) => void): Promise<RestartDBInstancesResponse>;
     /**
      * 本接口(ModifyInstanceTag)用于对实例标签进行添加、修改或者删除。
@@ -56,12 +56,12 @@ export declare class Client extends AbstractClient {
      */
     ModifyDBInstanceName(req: ModifyDBInstanceNameRequest, cb?: (error: string, rep: ModifyDBInstanceNameResponse) => void): Promise<ModifyDBInstanceNameResponse>;
     /**
-       * 本接口(OfflineIsolatedInstances)用于立即下线隔离状态的云数据库实例。进行操作的实例状态必须为隔离状态，即通过 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口查询到 Status 值为 5 的实例。
-  
-  该接口为异步操作，部分资源的回收可能存在延迟。您可以通过使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口，指定实例 InstanceId 和状态 Status 为 [5,6,7] 进行查询，若返回实例为空，则实例资源已全部释放。
-  
-  注意，实例下线后，相关资源和数据将无法找回，请谨慎操作。
-       */
+     * 本接口(OfflineIsolatedInstances)用于立即下线隔离状态的云数据库实例。进行操作的实例状态必须为隔离状态，即通过 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口查询到 Status 值为 5 的实例。
+
+该接口为异步操作，部分资源的回收可能存在延迟。您可以通过使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口，指定实例 InstanceId 和状态 Status 为 [5,6,7] 进行查询，若返回实例为空，则实例资源已全部释放。
+
+注意，实例下线后，相关资源和数据将无法找回，请谨慎操作。
+     */
     OfflineIsolatedInstances(req: OfflineIsolatedInstancesRequest, cb?: (error: string, rep: OfflineIsolatedInstancesResponse) => void): Promise<OfflineIsolatedInstancesResponse>;
     /**
      * 本接口(CreateAuditLogFile)用于创建云数据库实例的审计日志文件。
@@ -156,16 +156,16 @@ export declare class Client extends AbstractClient {
      */
     CreateParamTemplate(req: CreateParamTemplateRequest, cb?: (error: string, rep: CreateParamTemplateResponse) => void): Promise<CreateParamTemplateResponse>;
     /**
-       * 本接口(CreateDBInstanceHour)用于创建按量计费的实例，可通过传入实例规格、MySQL 版本号和数量等信息创建云数据库实例，支持主实例、灾备实例和只读实例的创建。
-  
-  该接口为异步接口，您还可以使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口查询该实例的详细信息。当该实例的 Status 为 1，且 TaskStatus 为 0，表示实例已经发货成功。
-  
-  1. 首先请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229) 接口查询可创建的实例规格信息，然后请使用 [查询数据库价格](https://cloud.tencent.com/document/api/236/18566) 接口查询可创建实例的售卖价格；
-  2. 单次创建实例最大支持 100 个，实例时长最大支持 36 个月；
-  3. 支持创建 MySQL 5.5、MySQL 5.6 和 MySQL 5.7 版本；
-  4. 支持创建主实例、灾备实例和只读实例；
-  5. 当入参指定 Port，ParamList 或 Password 时，该实例会进行初始化操作；
-       */
+     * 本接口(CreateDBInstanceHour)用于创建按量计费的实例，可通过传入实例规格、MySQL 版本号和数量等信息创建云数据库实例，支持主实例、灾备实例和只读实例的创建。
+
+该接口为异步接口，您还可以使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口查询该实例的详细信息。当该实例的 Status 为 1，且 TaskStatus 为 0，表示实例已经发货成功。
+
+1. 首先请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229) 接口查询可创建的实例规格信息，然后请使用 [查询数据库价格](https://cloud.tencent.com/document/api/236/18566) 接口查询可创建实例的售卖价格；
+2. 单次创建实例最大支持 100 个，实例时长最大支持 36 个月；
+3. 支持创建 MySQL 5.5、MySQL 5.6 和 MySQL 5.7 版本；
+4. 支持创建主实例、灾备实例和只读实例；
+5. 当入参指定 Port，ParamList 或 Password 时，该实例会进行初始化操作；
+     */
     CreateDBInstanceHour(req: CreateDBInstanceHourRequest, cb?: (error: string, rep: CreateDBInstanceHourResponse) => void): Promise<CreateDBInstanceHourResponse>;
     /**
      * 本接口(AddTimeWindow)用于添加云数据库实例的维护时间窗口，以指定实例在哪些时间段可以自动执行切换访问操作。
@@ -184,10 +184,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeDBInstanceConfig(req: DescribeDBInstanceConfigRequest, cb?: (error: string, rep: DescribeDBInstanceConfigResponse) => void): Promise<DescribeDBInstanceConfigResponse>;
     /**
-       * 本接口(DescribeBackupTables)用于查询指定的数据库的备份数据表名 (已废弃)。
-  旧版本支持全量备份后，用户如果分库表下载逻辑备份文件，需要用到此接口。
-  新版本支持(CreateBackup)创建逻辑备份的时候，直接发起指定库表备份，用户直接下载该备份文件即可。
-       */
+     * 本接口(DescribeBackupTables)用于查询指定的数据库的备份数据表名 (已废弃)。
+旧版本支持全量备份后，用户如果分库表下载逻辑备份文件，需要用到此接口。
+新版本支持(CreateBackup)创建逻辑备份的时候，直接发起指定库表备份，用户直接下载该备份文件即可。
+     */
     DescribeBackupTables(req: DescribeBackupTablesRequest, cb?: (error: string, rep: DescribeBackupTablesResponse) => void): Promise<DescribeBackupTablesResponse>;
     /**
      * 本接口(DeleteAuditPolicy)用于删除用户的审计策略。
@@ -206,16 +206,16 @@ export declare class Client extends AbstractClient {
      */
     InquiryPriceUpgradeInstances(req: InquiryPriceUpgradeInstancesRequest, cb?: (error: string, rep: InquiryPriceUpgradeInstancesResponse) => void): Promise<InquiryPriceUpgradeInstancesResponse>;
     /**
-       * 本接口(CreateDBInstance)用于创建包年包月的云数据库实例（包括主实例、灾备实例和只读实例），可通过传入实例规格、MySQL 版本号、购买时长和数量等信息创建云数据库实例。
-  
-  该接口为异步接口，您还可以使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口查询该实例的详细信息。当该实例的 Status 为1，且 TaskStatus 为0，表示实例已经发货成功。
-  
-  1. 首先请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229) 接口查询可创建的实例规格信息，然后请使用 [查询数据库价格](https://cloud.tencent.com/document/api/236/18566) 接口查询可创建实例的售卖价格；
-  2. 单次创建实例最大支持 100 个，实例时长最大支持 36 个月；
-  3. 支持创建 MySQL 5.5 、 MySQL 5.6 、 MySQL 5.7 版本；
-  4. 支持创建主实例、只读实例、灾备实例；
-  5. 当入参指定 Port，ParamList 或 Password 时，该实例会进行初始化操作；
-       */
+     * 本接口(CreateDBInstance)用于创建包年包月的云数据库实例（包括主实例、灾备实例和只读实例），可通过传入实例规格、MySQL 版本号、购买时长和数量等信息创建云数据库实例。
+
+该接口为异步接口，您还可以使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口查询该实例的详细信息。当该实例的 Status 为1，且 TaskStatus 为0，表示实例已经发货成功。
+
+1. 首先请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229) 接口查询可创建的实例规格信息，然后请使用 [查询数据库价格](https://cloud.tencent.com/document/api/236/18566) 接口查询可创建实例的售卖价格；
+2. 单次创建实例最大支持 100 个，实例时长最大支持 36 个月；
+3. 支持创建 MySQL 5.5 、 MySQL 5.6 、 MySQL 5.7 版本；
+4. 支持创建主实例、只读实例、灾备实例；
+5. 当入参指定 Port，ParamList 或 Password 时，该实例会进行初始化操作；
+     */
     CreateDBInstance(req: CreateDBInstanceRequest, cb?: (error: string, rep: CreateDBInstanceResponse) => void): Promise<CreateDBInstanceResponse>;
     /**
      * 该接口（ModifyParamTemplate）用于修改参数模板。
@@ -334,11 +334,11 @@ export declare class Client extends AbstractClient {
      */
     InitDBInstances(req: InitDBInstancesRequest, cb?: (error: string, rep: InitDBInstancesResponse) => void): Promise<InitDBInstancesResponse>;
     /**
-       * 本接口(ModifyAccountPrivileges)用于修改云数据库的账户的权限信息。
-  
-  注意，修改账号权限时，需要传入该账号下的全量权限信息。用户可以先通过 [查询云数据库账户的权限信息
-  ](https://cloud.tencent.com/document/api/236/17500) 查询该账号下的全量权限信息，然后进行权限修改。
-       */
+     * 本接口(ModifyAccountPrivileges)用于修改云数据库的账户的权限信息。
+
+注意，修改账号权限时，需要传入该账号下的全量权限信息。用户可以先通过 [查询云数据库账户的权限信息
+](https://cloud.tencent.com/document/api/236/17500) 查询该账号下的全量权限信息，然后进行权限修改。
+     */
     ModifyAccountPrivileges(req: ModifyAccountPrivilegesRequest, cb?: (error: string, rep: ModifyAccountPrivilegesResponse) => void): Promise<ModifyAccountPrivilegesResponse>;
     /**
      * 本接口(DescribeDBImportRecords)用于查询云数据库导入任务操作日志。
@@ -349,10 +349,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeDBSwitchRecords(req: DescribeDBSwitchRecordsRequest, cb?: (error: string, rep: DescribeDBSwitchRecordsResponse) => void): Promise<DescribeDBSwitchRecordsResponse>;
     /**
-       * 本接口(CreateDBImportJob)用于创建云数据库数据导入任务。
-  
-  注意，用户进行数据导入任务的文件，必须提前上传到腾讯云。用户须在控制台进行文件导入。
-       */
+     * 本接口(CreateDBImportJob)用于创建云数据库数据导入任务。
+
+注意，用户进行数据导入任务的文件，必须提前上传到腾讯云。用户须在控制台进行文件导入。
+     */
     CreateDBImportJob(req: CreateDBImportJobRequest, cb?: (error: string, rep: CreateDBImportJobResponse) => void): Promise<CreateDBImportJobResponse>;
     /**
      * 本接口(DescribeAccounts)用于查询云数据库的所有账户信息。
@@ -391,16 +391,16 @@ export declare class Client extends AbstractClient {
      */
     ModifyDBInstanceProject(req: ModifyDBInstanceProjectRequest, cb?: (error: string, rep: ModifyDBInstanceProjectResponse) => void): Promise<ModifyDBInstanceProjectResponse>;
     /**
-       * 本接口(DescribeBackupDatabases)用于查询备份文件包含的库 (已废弃)。
-  旧版本支持全量备份后，用户如果分库表下载逻辑备份文件，需要用到此接口。
-  新版本支持(CreateBackup)创建逻辑备份的时候，直接发起指定库表备份，用户直接下载该备份文件即可。
-       */
+     * 本接口(DescribeBackupDatabases)用于查询备份文件包含的库 (已废弃)。
+旧版本支持全量备份后，用户如果分库表下载逻辑备份文件，需要用到此接口。
+新版本支持(CreateBackup)创建逻辑备份的时候，直接发起指定库表备份，用户直接下载该备份文件即可。
+     */
     DescribeBackupDatabases(req: DescribeBackupDatabasesRequest, cb?: (error: string, rep: DescribeBackupDatabasesResponse) => void): Promise<DescribeBackupDatabasesResponse>;
     /**
-       * 本接口(DescribeDBPrice)用于查询云数据库实例的价格，支持查询按量计费或者包年包月的价格。可传入实例类型、购买时长、购买数量、内存大小、硬盘大小和可用区信息等来查询实例价格。
-  
-  注意：对某个地域进行询价，请使用对应地域的接入点，接入点信息请参照 <a href="https://cloud.tencent.com/document/api/236/15832">服务地址</a> 文档。例如：对广州地域进行询价，请把请求发到：cdb.ap-guangzhou.tencentcloudapi.com。同理对上海地域询价，把请求发到：cdb.ap-shanghai.tencentcloudapi.com。
-       */
+     * 本接口(DescribeDBPrice)用于查询云数据库实例的价格，支持查询按量计费或者包年包月的价格。可传入实例类型、购买时长、购买数量、内存大小、硬盘大小和可用区信息等来查询实例价格。
+
+注意：对某个地域进行询价，请使用对应地域的接入点，接入点信息请参照 <a href="https://cloud.tencent.com/document/api/236/15832">服务地址</a> 文档。例如：对广州地域进行询价，请把请求发到：cdb.ap-guangzhou.tencentcloudapi.com。同理对上海地域询价，把请求发到：cdb.ap-shanghai.tencentcloudapi.com。
+     */
     DescribeDBPrice(req: DescribeDBPriceRequest, cb?: (error: string, rep: DescribeDBPriceResponse) => void): Promise<DescribeDBPriceResponse>;
     /**
      * 本接口(ModifyAutoRenewFlag)用于修改云数据库实例的自动续费标记。仅支持包年包月的实例设置自动续费标记。
@@ -419,10 +419,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeDeviceMonitorInfo(req: DescribeDeviceMonitorInfoRequest, cb?: (error: string, rep: DescribeDeviceMonitorInfoResponse) => void): Promise<DescribeDeviceMonitorInfoResponse>;
     /**
-       * 本接口(OpenWanService)用于开通实例外网访问。
-  
-  注意，实例开通外网访问之前，需要先将实例进行 [实例初始化](https://cloud.tencent.com/document/api/236/15873) 操作。
-       */
+     * 本接口(OpenWanService)用于开通实例外网访问。
+
+注意，实例开通外网访问之前，需要先将实例进行 [实例初始化](https://cloud.tencent.com/document/api/236/15873) 操作。
+     */
     OpenWanService(req: OpenWanServiceRequest, cb?: (error: string, rep: OpenWanServiceResponse) => void): Promise<OpenWanServiceResponse>;
     /**
      * 本接口(ModifyAuditRule)用于修改用户的审计规则。

@@ -220,6 +220,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateInstance", req, cb);
     }
     /**
+     * 查询从实例列表
+     */
+    async DescribeReplicationInstances(req, cb) {
+        return this.request("DescribeReplicationInstances", req, cb);
+    }
+    /**
      * 创建触发器
      */
     async CreateWebhookTrigger(req, cb) {
@@ -248,6 +254,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteWebhookTrigger(req, cb) {
         return this.request("DeleteWebhookTrigger", req, cb);
+    }
+    /**
+     * 查询创建从实例任务状态
+     */
+    async DescribeReplicationInstanceCreateTasks(req, cb) {
+        return this.request("DescribeReplicationInstanceCreateTasks", req, cb);
     }
     /**
      * 用于企业版创建镜像仓库

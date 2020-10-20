@@ -18,10 +18,12 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  DescribeTelCdrResponse,
-  TelCdrInfo,
-  SeatUserInfo,
   DescribeTelCdrRequest,
+  DescribeTelCdrResponse,
+  CreateSDKLoginTokenResponse,
+  TelCdrInfo,
+  CreateSDKLoginTokenRequest,
+  SeatUserInfo,
 } from "./ccc_models"
 
 /**
@@ -31,6 +33,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("ccc.tencentcloudapi.com", "2020-02-10", clientConfig)
+  }
+
+  /**
+   * 创建 SDK 登录 Token。
+   */
+  async CreateSDKLoginToken(
+    req: CreateSDKLoginTokenRequest,
+    cb?: (error: string, rep: CreateSDKLoginTokenResponse) => void
+  ): Promise<CreateSDKLoginTokenResponse> {
+    return this.request("CreateSDKLoginToken", req, cb)
   }
 
   /**

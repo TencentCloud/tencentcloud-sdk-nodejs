@@ -78,9 +78,9 @@ it("tdmq.v20200217.DescribeSubscriptions", async function () {
     }
 })
 
-it("tdmq.v20200217.ModifyEnvironmentAttributes", async function () {
+it("tdmq.v20200217.DescribeTopics", async function () {
     try {
-       const data = await client.ModifyEnvironmentAttributes({})
+       const data = await client.DescribeTopics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -91,6 +91,16 @@ it("tdmq.v20200217.ModifyEnvironmentAttributes", async function () {
 it("tdmq.v20200217.DescribeEnvironmentAttributes", async function () {
     try {
        const data = await client.DescribeEnvironmentAttributes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.ModifyEnvironmentAttributes", async function () {
+    try {
+       const data = await client.ModifyEnvironmentAttributes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,9 +148,9 @@ it("tdmq.v20200217.DescribeProducers", async function () {
     }
 })
 
-it("tdmq.v20200217.DescribeTopics", async function () {
+it("tdmq.v20200217.DescribeEnvironmentRoles", async function () {
     try {
-       const data = await client.DescribeTopics({})
+       const data = await client.DescribeEnvironmentRoles({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

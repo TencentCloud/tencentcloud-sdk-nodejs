@@ -398,6 +398,16 @@ it("cam.v20190116.AttachRolePolicy", async function () {
     }
 })
 
+it("cam.v20190116.DescribeSafeAuthFlagColl", async function () {
+    try {
+       const data = await client.DescribeSafeAuthFlagColl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cam.v20190116.UpdatePolicy", async function () {
     try {
        const data = await client.UpdatePolicy({})
@@ -411,6 +421,16 @@ it("cam.v20190116.UpdatePolicy", async function () {
 it("cam.v20190116.ListPolicyVersions", async function () {
     try {
        const data = await client.ListPolicyVersions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cam.v20190116.DescribeSafeAuthFlag", async function () {
+    try {
+       const data = await client.DescribeSafeAuthFlag({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

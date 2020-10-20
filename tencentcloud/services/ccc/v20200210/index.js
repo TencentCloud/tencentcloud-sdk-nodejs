@@ -5,5 +5,5 @@ const Models = require("./ccc_models");
 const ccc_client_1 = require("./ccc_client");
 exports.v20200210 = {
     Client: ccc_client_1.Client,
-    Models: Models,
+    Models: Models
 };

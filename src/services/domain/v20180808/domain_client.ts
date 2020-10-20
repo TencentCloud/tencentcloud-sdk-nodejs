@@ -18,27 +18,49 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  CheckDomainResponse,
-  BatchStatus,
-  DomainList,
-  DescribeDomainPriceListRequest,
-  DescribeDomainBaseInfoResponse,
+  UploadImageResponse,
+  BatchModifyDomainInfoRequest,
   TemplateInfo,
-  CreateDomainBatchRequest,
-  CheckBatchStatusRequest,
-  CheckBatchStatusResponse,
-  DescribeTemplateListResponse,
-  DescribeDomainBaseInfoRequest,
-  DescribeTemplateListRequest,
+  UpdateProhibitionBatchRequest,
+  DeleteTemplateResponse,
+  TransferInDomainBatchRequest,
   CreateDomainBatchResponse,
-  DomainBaseInfo,
+  ModifyDomainDNSBatchResponse,
+  RenewDomainBatchRequest,
+  TransferInDomainBatchResponse,
+  UpdateProhibitionBatchResponse,
+  CheckDomainResponse,
+  RenewDomainBatchResponse,
   PriceInfo,
-  DescribeDomainNameListRequest,
+  BatchModifyDomainInfoResponse,
+  DescribeDomainBaseInfoResponse,
+  DescribeTemplateListResponse,
+  TransferProhibitionBatchRequest,
   DescribeDomainNameListResponse,
   ContactInfo,
   DescribeDomainPriceListResponse,
-  CheckDomainRequest,
+  CreateTemplateResponse,
   CertificateInfo,
+  DeleteTemplateRequest,
+  CheckBatchStatusRequest,
+  SetDomainAutoRenewResponse,
+  CreateTemplateRequest,
+  BatchStatus,
+  DomainList,
+  DescribeDomainPriceListRequest,
+  CreateDomainBatchRequest,
+  DescribeDomainBaseInfoRequest,
+  DomainBaseInfo,
+  DescribeDomainNameListRequest,
+  UploadImageRequest,
+  CheckDomainRequest,
+  TransferProhibitionBatchResponse,
+  ModifyDomainDNSBatchRequest,
+  ModifyDomainOwnerBatchRequest,
+  CheckBatchStatusResponse,
+  DescribeTemplateListRequest,
+  ModifyDomainOwnerBatchResponse,
+  SetDomainAutoRenewRequest,
 } from "./domain_models"
 
 /**
@@ -61,6 +83,54 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDomainNameListResponse) => void
   ): Promise<DescribeDomainNameListResponse> {
     return this.request("DescribeDomainNameList", req, cb)
+  }
+
+  /**
+     * 本接口 ( UploadImage ) 用于上传资质照片 。
+
+默认接口请求频率限制：20次/秒。
+     */
+  async UploadImage(
+    req: UploadImageRequest,
+    cb?: (error: string, rep: UploadImageResponse) => void
+  ): Promise<UploadImageResponse> {
+    return this.request("UploadImage", req, cb)
+  }
+
+  /**
+     * 本接口 ( CreateTemplate ) 用于添加域名信息模板 。
+
+默认接口请求频率限制：20次/秒。
+     */
+  async CreateTemplate(
+    req: CreateTemplateRequest,
+    cb?: (error: string, rep: CreateTemplateResponse) => void
+  ): Promise<CreateTemplateResponse> {
+    return this.request("CreateTemplate", req, cb)
+  }
+
+  /**
+     * 本接口 ( TransferInDomainBatch ) 用于批量禁止域名转移 。
+
+默认接口请求频率限制：20次/秒。
+     */
+  async TransferProhibitionBatch(
+    req: TransferProhibitionBatchRequest,
+    cb?: (error: string, rep: TransferProhibitionBatchResponse) => void
+  ): Promise<TransferProhibitionBatchResponse> {
+    return this.request("TransferProhibitionBatch", req, cb)
+  }
+
+  /**
+     * 本接口 ( ModifyDomainOwnerBatch) 用于域名批量账号间转移 。
+
+默认接口请求频率限制：20次/秒。
+     */
+  async ModifyDomainOwnerBatch(
+    req: ModifyDomainOwnerBatchRequest,
+    cb?: (error: string, rep: ModifyDomainOwnerBatchResponse) => void
+  ): Promise<ModifyDomainOwnerBatchResponse> {
+    return this.request("ModifyDomainOwnerBatch", req, cb)
   }
 
   /**
@@ -89,6 +159,18 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 本接口 ( DeleteTemplate ) 用于删除域名信息模板。
+
+默认接口请求频率限制：20次/秒。
+     */
+  async DeleteTemplate(
+    req: DeleteTemplateRequest,
+    cb?: (error: string, rep: DeleteTemplateResponse) => void
+  ): Promise<DeleteTemplateResponse> {
+    return this.request("DeleteTemplate", req, cb)
+  }
+
+  /**
      * 本接口 (DescribeTemplateList) 用于获取模板列表。
 
 默认接口请求频率限制：20次/秒。
@@ -102,6 +184,31 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 本接口 ( RenewDomainBatch ) 用于批量续费域名 。
+
+默认接口请求频率限制：20次/秒。
+
+     */
+  async RenewDomainBatch(
+    req: RenewDomainBatchRequest,
+    cb?: (error: string, rep: RenewDomainBatchResponse) => void
+  ): Promise<RenewDomainBatchResponse> {
+    return this.request("RenewDomainBatch", req, cb)
+  }
+
+  /**
+     * 本接口 ( BatchModifyDomainInfo ) 用于批量域名信息修改 。
+
+默认接口请求频率限制：20次/秒。
+     */
+  async BatchModifyDomainInfo(
+    req: BatchModifyDomainInfoRequest,
+    cb?: (error: string, rep: BatchModifyDomainInfoResponse) => void
+  ): Promise<BatchModifyDomainInfoResponse> {
+    return this.request("BatchModifyDomainInfo", req, cb)
+  }
+
+  /**
    * 按照域名后缀获取对应的价格列表
    */
   async DescribeDomainPriceList(
@@ -112,7 +219,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口 ( CheckBatchStatus ) 用于检查批量任务状态 。
+     * 本接口 ( CheckBatchStatus ) 用于查询批量操作日志状态 。
 
 默认接口请求频率限制：20次/秒。
      */
@@ -131,5 +238,53 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CheckDomainResponse) => void
   ): Promise<CheckDomainResponse> {
     return this.request("CheckDomain", req, cb)
+  }
+
+  /**
+     * 本接口 ( TransferInDomainBatch ) 用于批量转入域名 。
+
+默认接口请求频率限制：20次/秒。
+     */
+  async TransferInDomainBatch(
+    req: TransferInDomainBatchRequest,
+    cb?: (error: string, rep: TransferInDomainBatchResponse) => void
+  ): Promise<TransferInDomainBatchResponse> {
+    return this.request("TransferInDomainBatch", req, cb)
+  }
+
+  /**
+     * 本接口 ( UpdateProhibitionBatch ) 用于批量设置禁止域名更新 。
+
+默认接口请求频率限制：20次/秒。
+     */
+  async UpdateProhibitionBatch(
+    req: UpdateProhibitionBatchRequest,
+    cb?: (error: string, rep: UpdateProhibitionBatchResponse) => void
+  ): Promise<UpdateProhibitionBatchResponse> {
+    return this.request("UpdateProhibitionBatch", req, cb)
+  }
+
+  /**
+     * 本接口 ( ModifyDomainDNSBatch) 用于批量修改域名DNS信息 。
+
+默认接口请求频率限制：20次/秒。
+     */
+  async ModifyDomainDNSBatch(
+    req: ModifyDomainDNSBatchRequest,
+    cb?: (error: string, rep: ModifyDomainDNSBatchResponse) => void
+  ): Promise<ModifyDomainDNSBatchResponse> {
+    return this.request("ModifyDomainDNSBatch", req, cb)
+  }
+
+  /**
+     * 本接口 ( SetDomainAutoRenew ) 用于设置域名自动续费。
+
+默认接口请求频率限制：20次/秒。
+     */
+  async SetDomainAutoRenew(
+    req: SetDomainAutoRenewRequest,
+    cb?: (error: string, rep: SetDomainAutoRenewResponse) => void
+  ): Promise<SetDomainAutoRenewResponse> {
+    return this.request("SetDomainAutoRenew", req, cb)
   }
 }

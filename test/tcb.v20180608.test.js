@@ -38,9 +38,29 @@ it("tcb.v20180608.DescribeEndUsers", async function () {
     }
 })
 
+it("tcb.v20180608.DescribeEnvs", async function () {
+    try {
+       const data = await client.DescribeEnvs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.CreateAuthDomain", async function () {
     try {
        const data = await client.CreateAuthDomain({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.DescribeDownloadFile", async function () {
+    try {
+       const data = await client.DescribeDownloadFile({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,9 +218,19 @@ it("tcb.v20180608.DestroyEnv", async function () {
     }
 })
 
-it("tcb.v20180608.DescribeEnvs", async function () {
+it("tcb.v20180608.DescribeCloudBaseBuildService", async function () {
     try {
-       const data = await client.DescribeEnvs({})
+       const data = await client.DescribeCloudBaseBuildService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.DescribeCloudBaseRunVersionSnapshot", async function () {
+    try {
+       const data = await client.DescribeCloudBaseRunVersionSnapshot({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

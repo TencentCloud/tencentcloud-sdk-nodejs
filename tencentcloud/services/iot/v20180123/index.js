@@ -5,5 +5,5 @@ const Models = require("./iot_models");
 const iot_client_1 = require("./iot_client");
 exports.v20180123 = {
     Client: iot_client_1.Client,
-    Models: Models,
+    Models: Models
 };

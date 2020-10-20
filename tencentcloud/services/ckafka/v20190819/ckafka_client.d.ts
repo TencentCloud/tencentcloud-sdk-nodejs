@@ -88,9 +88,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeAppInfo(req: DescribeAppInfoRequest, cb?: (error: string, rep: DescribeAppInfoResponse) => void): Promise<DescribeAppInfoResponse>;
     /**
-       * 获取主题属性
-  
-       */
+     * 获取主题属性
+
+     */
     DescribeTopicAttributes(req: DescribeTopicAttributesRequest, cb?: (error: string, rep: DescribeTopicAttributesResponse) => void): Promise<DescribeTopicAttributesResponse>;
     /**
      * 获取实例属性
@@ -109,9 +109,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeGroupOffsets(req: DescribeGroupOffsetsRequest, cb?: (error: string, rep: DescribeGroupOffsetsResponse) => void): Promise<DescribeGroupOffsetsResponse>;
     /**
-       * 接口请求域名：https://ckafka.tencentcloudapi.com
-  本接口（DescribeTopic）用于在用户获取消息队列 CKafka 实例的主题列表
-       */
+     * 接口请求域名：https://ckafka.tencentcloudapi.com
+本接口（DescribeTopic）用于在用户获取消息队列 CKafka 实例的主题列表
+     */
     DescribeTopic(req: DescribeTopicRequest, cb?: (error: string, rep: DescribeTopicResponse) => void): Promise<DescribeTopicResponse>;
     /**
      * 添加用户

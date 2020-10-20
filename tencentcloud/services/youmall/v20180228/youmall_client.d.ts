@@ -84,10 +84,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeZoneFlowDailyByZoneId(req: DescribeZoneFlowDailyByZoneIdRequest, cb?: (error: string, rep: DescribeZoneFlowDailyByZoneIdResponse) => void): Promise<DescribeZoneFlowDailyByZoneIdResponse>;
     /**
-       * 输出开始时间到结束时间段内的进出场数据。不做按天聚合的情况下，每次进出场，产生一条进出场数据。
-  
-  
-       */
+     * 输出开始时间到结束时间段内的进出场数据。不做按天聚合的情况下，每次进出场，产生一条进出场数据。
+
+
+     */
     DescribePersonArrivedMall(req: DescribePersonArrivedMallRequest, cb?: (error: string, rep: DescribePersonArrivedMallResponse) => void): Promise<DescribePersonArrivedMallResponse>;
     /**
      * 输出开始时间到结束时间段内的进出场数据。按天聚合的情况下，每天多次进出场算一次，以最初进场时间为进场时间，最后离场时间为离场时间。停留时间为多次进出场的停留时间之和。
@@ -118,9 +118,9 @@ export declare class Client extends AbstractClient {
      */
     DeletePersonFeature(req: DeletePersonFeatureRequest, cb?: (error: string, rep: DeletePersonFeatureResponse) => void): Promise<DeletePersonFeatureResponse>;
     /**
-       * 标记到店顾客的身份类型，例如黑名单、白名单等
-  
-       */
+     * 标记到店顾客的身份类型，例如黑名单、白名单等
+
+     */
     ModifyPersonTagInfo(req: ModifyPersonTagInfoRequest, cb?: (error: string, rep: ModifyPersonTagInfoResponse) => void): Promise<ModifyPersonTagInfoResponse>;
     /**
      * 查询指定某一卖场的用户信息

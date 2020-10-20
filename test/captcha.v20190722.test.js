@@ -58,9 +58,19 @@ it("captcha.v20190722.DescribeCaptchaOperData", async function () {
     }
 })
 
-it("captcha.v20190722.DescribeCaptchaAppIdInfo", async function () {
+it("captcha.v20190722.DescribeCaptchaMiniData", async function () {
     try {
-       const data = await client.DescribeCaptchaAppIdInfo({})
+       const data = await client.DescribeCaptchaMiniData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("captcha.v20190722.DescribeCaptchaMiniOperData", async function () {
+    try {
+       const data = await client.DescribeCaptchaMiniOperData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,9 +88,39 @@ it("captcha.v20190722.DescribeCaptchaData", async function () {
     }
 })
 
+it("captcha.v20190722.DescribeCaptchaMiniDataSum", async function () {
+    try {
+       const data = await client.DescribeCaptchaMiniDataSum({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("captcha.v20190722.DescribeCaptchaMiniResult", async function () {
+    try {
+       const data = await client.DescribeCaptchaMiniResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("captcha.v20190722.UpdateCaptchaAppIdInfo", async function () {
     try {
        const data = await client.UpdateCaptchaAppIdInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("captcha.v20190722.DescribeCaptchaAppIdInfo", async function () {
+    try {
+       const data = await client.DescribeCaptchaAppIdInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

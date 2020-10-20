@@ -18,6 +18,116 @@ const client = new tencentcloud.domain.v20180808.Client({
 })
 describe("domain.v20180808.test.js", function () {
 
+it("domain.v20180808.DescribeDomainNameList", async function () {
+    try {
+       const data = await client.DescribeDomainNameList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("domain.v20180808.UploadImage", async function () {
+    try {
+       const data = await client.UploadImage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("domain.v20180808.CreateTemplate", async function () {
+    try {
+       const data = await client.CreateTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("domain.v20180808.TransferProhibitionBatch", async function () {
+    try {
+       const data = await client.TransferProhibitionBatch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("domain.v20180808.ModifyDomainOwnerBatch", async function () {
+    try {
+       const data = await client.ModifyDomainOwnerBatch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("domain.v20180808.CreateDomainBatch", async function () {
+    try {
+       const data = await client.CreateDomainBatch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("domain.v20180808.DescribeDomainBaseInfo", async function () {
+    try {
+       const data = await client.DescribeDomainBaseInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("domain.v20180808.DeleteTemplate", async function () {
+    try {
+       const data = await client.DeleteTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("domain.v20180808.DescribeTemplateList", async function () {
+    try {
+       const data = await client.DescribeTemplateList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("domain.v20180808.RenewDomainBatch", async function () {
+    try {
+       const data = await client.RenewDomainBatch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("domain.v20180808.BatchModifyDomainInfo", async function () {
+    try {
+       const data = await client.BatchModifyDomainInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("domain.v20180808.DescribeDomainPriceList", async function () {
     try {
        const data = await client.DescribeDomainPriceList({})
@@ -28,9 +138,59 @@ it("domain.v20180808.DescribeDomainPriceList", async function () {
     }
 })
 
+it("domain.v20180808.CheckBatchStatus", async function () {
+    try {
+       const data = await client.CheckBatchStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("domain.v20180808.CheckDomain", async function () {
     try {
        const data = await client.CheckDomain({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("domain.v20180808.TransferInDomainBatch", async function () {
+    try {
+       const data = await client.TransferInDomainBatch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("domain.v20180808.UpdateProhibitionBatch", async function () {
+    try {
+       const data = await client.UpdateProhibitionBatch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("domain.v20180808.ModifyDomainDNSBatch", async function () {
+    try {
+       const data = await client.ModifyDomainDNSBatch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("domain.v20180808.SetDomainAutoRenew", async function () {
+    try {
+       const data = await client.SetDomainAutoRenew({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

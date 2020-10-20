@@ -24,7 +24,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeTagValues(req: DescribeTagValuesRequest, cb?: (error: string, rep: DescribeTagValuesResponse) => void): Promise<DescribeTagValuesResponse>;
     /**
-     * 用于查询已有资源标签键值对
+     * 用于批量查询已有资源关联的标签键值对
      */
     DescribeResourceTagsByResourceIds(req: DescribeResourceTagsByResourceIdsRequest, cb?: (error: string, rep: DescribeResourceTagsByResourceIdsResponse) => void): Promise<DescribeResourceTagsByResourceIdsResponse>;
     /**
@@ -36,9 +36,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyResourceTags(req: ModifyResourceTagsRequest, cb?: (error: string, rep: ModifyResourceTagsResponse) => void): Promise<ModifyResourceTagsResponse>;
     /**
-       * 用于查询已建立的标签列表中的标签键。
-  
-       */
+     * 用于查询已建立的标签列表中的标签键。
+
+     */
     DescribeTagKeys(req: DescribeTagKeysRequest, cb?: (error: string, rep: DescribeTagKeysResponse) => void): Promise<DescribeTagKeysResponse>;
     /**
      * 本接口用于修改资源已关联的标签值（标签键不变）
@@ -57,14 +57,14 @@ export declare class Client extends AbstractClient {
      */
     DescribeResourceTagsByResourceIdsSeq(req: DescribeResourceTagsByResourceIdsSeqRequest, cb?: (error: string, rep: DescribeResourceTagsByResourceIdsSeqResponse) => void): Promise<DescribeResourceTagsByResourceIdsSeqResponse>;
     /**
-       * 用于查询已建立的标签列表。
-  
-       */
+     * 用于查询已建立的标签列表。
+
+     */
     DescribeTags(req: DescribeTagsRequest, cb?: (error: string, rep: DescribeTagsResponse) => void): Promise<DescribeTagsResponse>;
     /**
-       * 用于查询已建立的标签列表。
-  
-       */
+     * 用于查询已建立的标签列表。
+
+     */
     DescribeTagsSeq(req: DescribeTagsSeqRequest, cb?: (error: string, rep: DescribeTagsSeqResponse) => void): Promise<DescribeTagsSeqResponse>;
     /**
      * 通过标签查询资源列表

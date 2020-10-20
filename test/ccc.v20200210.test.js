@@ -18,6 +18,16 @@ const client = new tencentcloud.ccc.v20200210.Client({
 })
 describe("ccc.v20200210.test.js", function () {
 
+it("ccc.v20200210.CreateSDKLoginToken", async function () {
+    try {
+       const data = await client.CreateSDKLoginToken({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.DescribeTelCdr", async function () {
     try {
        const data = await client.DescribeTelCdr({})

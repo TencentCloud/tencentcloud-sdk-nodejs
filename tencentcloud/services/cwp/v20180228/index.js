@@ -5,5 +5,5 @@ const Models = require("./cwp_models");
 const cwp_client_1 = require("./cwp_client");
 exports.v20180228 = {
     Client: cwp_client_1.Client,
-    Models: Models,
+    Models: Models
 };

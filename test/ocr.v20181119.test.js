@@ -608,6 +608,16 @@ it("ocr.v20181119.RideHailingTransportLicenseOCR", async function () {
     }
 })
 
+it("ocr.v20181119.RecognizeThaiIDCardOCR", async function () {
+    try {
+       const data = await client.RecognizeThaiIDCardOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.VehicleLicenseOCR", async function () {
     try {
        const data = await client.VehicleLicenseOCR({})

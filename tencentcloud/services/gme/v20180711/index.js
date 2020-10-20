@@ -5,5 +5,5 @@ const Models = require("./gme_models");
 const gme_client_1 = require("./gme_client");
 exports.v20180711 = {
     Client: gme_client_1.Client,
-    Models: Models,
+    Models: Models
 };

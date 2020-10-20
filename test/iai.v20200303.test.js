@@ -298,6 +298,16 @@ it("iai.v20200303.DetectFaceAttributes", async function () {
     }
 })
 
+it("iai.v20200303.DetectLiveFaceAccurate", async function () {
+    try {
+       const data = await client.DetectLiveFaceAccurate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iai.v20200303.GetUpgradeGroupFaceModelVersionResult", async function () {
     try {
        const data = await client.GetUpgradeGroupFaceModelVersionResult({})

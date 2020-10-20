@@ -35,7 +35,7 @@ import {
   Sort,
   IpFreqLimit,
   DescribePurgeTasksRequest,
-  DomainFilter,
+  DescribeEcdnStatisticsResponse,
   DomainLogs,
   Hsts,
   HttpHeaderPathRule,
@@ -60,16 +60,19 @@ import {
   DeleteEcdnDomainRequest,
   DescribePurgeTasksResponse,
   AddEcdnDomainResponse,
+  IpStatus,
   PurgeTask,
   CacheRule,
-  DescribeEcdnStatisticsResponse,
+  DescribeIpStatusResponse,
   Origin,
   ServerCert,
   CacheKey,
+  DomainFilter,
   DescribeEcdnDomainStatisticsRequest,
   Quota,
   DescribeEcdnDomainLogsRequest,
   DomainDetailInfo,
+  DescribeIpStatusRequest,
   DescribeDomainsRequest,
 } from "./ecdn_models"
 
@@ -90,6 +93,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddEcdnDomainResponse) => void
   ): Promise<AddEcdnDomainResponse> {
     return this.request("AddEcdnDomain", req, cb)
+  }
+
+  /**
+   * DescribeIpStatus 用于查询域名所在加速平台的所有节点明细。
+   */
+  async DescribeIpStatus(
+    req: DescribeIpStatusRequest,
+    cb?: (error: string, rep: DescribeIpStatusResponse) => void
+  ): Promise<DescribeIpStatusResponse> {
+    return this.request("DescribeIpStatus", req, cb)
   }
 
   /**

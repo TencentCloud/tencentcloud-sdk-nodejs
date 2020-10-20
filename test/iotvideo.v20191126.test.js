@@ -38,9 +38,9 @@ it("iotvideo.v20191126.DisableOtaVersion", async function () {
     }
 })
 
-it("iotvideo.v20191126.CreateGencode", async function () {
+it("iotvideo.v20191126.ClearDeviceActiveCode", async function () {
     try {
-       const data = await client.CreateGencode({})
+       const data = await client.ClearDeviceActiveCode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -151,6 +151,16 @@ it("iotvideo.v20191126.ModifyDeviceAction", async function () {
 it("iotvideo.v20191126.CreateIotDataType", async function () {
     try {
        const data = await client.CreateIotDataType({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotvideo.v20191126.CreateAnonymousAccessToken", async function () {
+    try {
+       const data = await client.CreateAnonymousAccessToken({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -318,6 +328,26 @@ it("iotvideo.v20191126.DescribeLogs", async function () {
     }
 })
 
+it("iotvideo.v20191126.CreateStorageService", async function () {
+    try {
+       const data = await client.CreateStorageService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotvideo.v20191126.SetMessageQueue", async function () {
+    try {
+       const data = await client.SetMessageQueue({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideo.v20191126.DeleteDevice", async function () {
     try {
        const data = await client.DeleteDevice({})
@@ -341,6 +371,16 @@ it("iotvideo.v20191126.DescribeIotModels", async function () {
 it("iotvideo.v20191126.DeleteProduct", async function () {
     try {
        const data = await client.DeleteProduct({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotvideo.v20191126.DeliverStorageService", async function () {
+    try {
+       const data = await client.DeliverStorageService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -378,9 +418,19 @@ it("iotvideo.v20191126.DescribeRunLog", async function () {
     }
 })
 
-it("iotvideo.v20191126.SetMessageQueue", async function () {
+it("iotvideo.v20191126.DescribeBindDev", async function () {
     try {
-       const data = await client.SetMessageQueue({})
+       const data = await client.DescribeBindDev({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotvideo.v20191126.DescribeStorageService", async function () {
+    try {
+       const data = await client.DescribeStorageService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -438,6 +488,16 @@ it("iotvideo.v20191126.RunDeviceStream", async function () {
     }
 })
 
+it("iotvideo.v20191126.RefundStorageService", async function () {
+    try {
+       const data = await client.RefundStorageService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideo.v20191126.DescribeDevices", async function () {
     try {
        const data = await client.DescribeDevices({})
@@ -448,9 +508,9 @@ it("iotvideo.v20191126.DescribeDevices", async function () {
     }
 })
 
-it("iotvideo.v20191126.DescribeBindDev", async function () {
+it("iotvideo.v20191126.CreateGencode", async function () {
     try {
-       const data = await client.DescribeBindDev({})
+       const data = await client.CreateGencode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

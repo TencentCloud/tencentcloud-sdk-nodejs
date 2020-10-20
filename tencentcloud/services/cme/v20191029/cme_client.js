@@ -94,10 +94,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ExportVideoByEditorTrackData", req, cb);
     }
     /**
-       * 获取任务详情信息，包含下面几个部分：
-  <li>任务基础信息：包括任务状态、错误信息、创建时间等；</li>
-  <li>导出项目输出信息：包括输出的素材 Id 等。</li>
-       */
+     * 获取任务详情信息，包含下面几个部分：
+<li>任务基础信息：包括任务状态、错误信息、创建时间等；</li>
+<li>导出项目输出信息：包括输出的素材 Id 等。</li>
+     */
     async DescribeTaskDetail(req, cb) {
         return this.request("DescribeTaskDetail", req, cb);
     }
@@ -108,9 +108,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateLink", req, cb);
     }
     /**
-       * 修改团队信息，目前支持修改的操作有：
-  <li>修改团队名称。</li>
-       */
+     * 修改团队信息，目前支持修改的操作有：
+<li>修改团队名称。</li>
+     */
     async ModifyTeam(req, cb) {
         return this.request("ModifyTeam", req, cb);
     }
@@ -127,10 +127,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyMaterial", req, cb);
     }
     /**
-       * 删除一个团队。
-  <li>要删除的团队必须没有归属的素材；</li>
-  <li>要删除的团队必须没有归属的分类。</li>
-       */
+     * 删除一个团队。
+<li>要删除的团队必须没有归属的素材；</li>
+<li>要删除的团队必须没有归属的分类。</li>
+     */
     async DeleteTeam(req, cb) {
         return this.request("DeleteTeam", req, cb);
     }
@@ -141,9 +141,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddTeamMember", req, cb);
     }
     /**
-       * 移动某一个分类到另外一个分类下，也可用于分类重命名。
-  <li>如果 SourceClassPath = /素材/视频/NBA，DestinationClassPath = /素材/视频/篮球，当 DestinationClassPath 不存在时候，操作结果为重命名 ClassPath，如果 DestinationClassPath 存在时候，操作结果为产生新目录 /素材/视频/篮球/NBA。</li>
-       */
+     * 移动某一个分类到另外一个分类下，也可用于分类重命名。
+<li>如果 SourceClassPath = /素材/视频/NBA，DestinationClassPath = /素材/视频/篮球，当 DestinationClassPath 不存在时候，操作结果为重命名 ClassPath，如果 DestinationClassPath 存在时候，操作结果为产生新目录 /素材/视频/篮球/NBA。</li>
+     */
     async MoveClass(req, cb) {
         return this.request("MoveClass", req, cb);
     }
@@ -202,10 +202,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyProject", req, cb);
     }
     /**
-       * 新增分类，用于管理素材。
-  <li>分类层数不能超过10；</li>
-  <li>子分类数不能超过10。</li>
-       */
+     * 新增分类，用于管理素材。
+<li>分类层数不能超过10；</li>
+<li>子分类数不能超过10。</li>
+     */
     async CreateClass(req, cb) {
         return this.request("CreateClass", req, cb);
     }
@@ -222,17 +222,17 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListMedia", req, cb);
     }
     /**
-       * 创建云剪的编辑项目，支持创建视频剪辑、直播剪辑及导播台项目。
-  
-       */
+     * 创建云剪的编辑项目，支持创建视频剪辑、直播剪辑及导播台项目。
+
+     */
     async CreateProject(req, cb) {
         return this.request("CreateProject", req, cb);
     }
     /**
-       * 删除分类信息，删除时检验下述限制：
-  <li>分类路径必须存在；</li>
-  <li>分类下没有绑定素材。</li>
-       */
+     * 删除分类信息，删除时检验下述限制：
+<li>分类路径必须存在；</li>
+<li>分类下没有绑定素材。</li>
+     */
     async DeleteClass(req, cb) {
         return this.request("DeleteClass", req, cb);
     }

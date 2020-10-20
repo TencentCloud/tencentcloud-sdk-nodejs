@@ -232,9 +232,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteNonlocalLoginPlaces", req, cb);
     }
     /**
-       * 本接口 (DescribeOpenPorts) 用于获取端口列表数据。
-  
-       */
+     * 本接口 (DescribeOpenPorts) 用于获取端口列表数据。
+
+     */
     async DescribeOpenPorts(req, cb) {
         return this.request("DescribeOpenPorts", req, cb);
     }
@@ -491,9 +491,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeLoginWhiteList", req, cb);
     }
     /**
-       * 本接口 (DescribeVulScanResult) 用于获取漏洞检测结果。
-  
-       */
+     * 本接口 (DescribeVulScanResult) 用于获取漏洞检测结果。
+
+     */
     async DescribeVulScanResult(req, cb) {
         return this.request("DescribeVulScanResult", req, cb);
     }
@@ -522,9 +522,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UntrustMalwares", req, cb);
     }
     /**
-       * 本接口 (DescribeWeeklyReportVuls) 用于专业版周报漏洞数据。
-  
-       */
+     * 本接口 (DescribeWeeklyReportVuls) 用于专业版周报漏洞数据。
+
+     */
     async DescribeWeeklyReportVuls(req, cb) {
         return this.request("DescribeWeeklyReportVuls", req, cb);
     }

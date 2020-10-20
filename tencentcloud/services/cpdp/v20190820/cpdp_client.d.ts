@@ -32,11 +32,11 @@ export declare class Client extends AbstractClient {
      */
     BindAcct(req: BindAcctRequest, cb?: (error: string, rep: BindAcctResponse) => void): Promise<BindAcctResponse>;
     /**
-       * 会员绑定提现账户-小额鉴权。会员申请绑定提现账户，绑定后从会员子账户中提现到绑定账户。
-  转账鉴权有两种形式：往账鉴权和来账鉴权。
-  往账鉴权：该接口发起成功后，银行会向提现账户转入小于等于0.5元的随机金额，并短信通知客户查看，客户查看后，需将收到的金额大小，在电商平台页面上回填，并通知银行。银行验证通过后，完成提现账户绑定。
-  来账鉴权：该接口发起成功后，银行以短信通知客户查看，客户查看后，需通过待绑定的账户往市场的监管账户转入短信上指定的金额。银行检索到该笔指定金额的来账是源自待绑定账户，则绑定成功。平安银行的账户，即BankType送1时，大小额行号和超级网银号都不用送。
-       */
+     * 会员绑定提现账户-小额鉴权。会员申请绑定提现账户，绑定后从会员子账户中提现到绑定账户。
+转账鉴权有两种形式：往账鉴权和来账鉴权。
+往账鉴权：该接口发起成功后，银行会向提现账户转入小于等于0.5元的随机金额，并短信通知客户查看，客户查看后，需将收到的金额大小，在电商平台页面上回填，并通知银行。银行验证通过后，完成提现账户绑定。
+来账鉴权：该接口发起成功后，银行以短信通知客户查看，客户查看后，需通过待绑定的账户往市场的监管账户转入短信上指定的金额。银行检索到该笔指定金额的来账是源自待绑定账户，则绑定成功。平安银行的账户，即BankType送1时，大小额行号和超级网银号都不用送。
+     */
     BindRelateAcctSmallAmount(req: BindRelateAcctSmallAmountRequest, cb?: (error: string, rep: BindRelateAcctSmallAmountResponse) => void): Promise<BindRelateAcctSmallAmountResponse>;
     /**
      * 商户提现
@@ -47,9 +47,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyAgentTaxPaymentInfo(req: ModifyAgentTaxPaymentInfoRequest, cb?: (error: string, rep: ModifyAgentTaxPaymentInfoResponse) => void): Promise<ModifyAgentTaxPaymentInfoResponse>;
     /**
-       * 会员绑定信息查询。查询标志为“单个会员”的情况下，返回该会员的有效的绑定账户信息。
-  查询标志为“全部会员”的情况下，返回市场下的全部的有效的绑定账户信息。查询标志为“单个会员的证件信息”的情况下，返回市场下的指定的会员的留存在电商见证宝系统的证件信息。
-       */
+     * 会员绑定信息查询。查询标志为“单个会员”的情况下，返回该会员的有效的绑定账户信息。
+查询标志为“全部会员”的情况下，返回市场下的全部的有效的绑定账户信息。查询标志为“单个会员的证件信息”的情况下，返回市场下的指定的会员的留存在电商见证宝系统的证件信息。
+     */
     QueryMemberBind(req: QueryMemberBindRequest, cb?: (error: string, rep: QueryMemberBindResponse) => void): Promise<QueryMemberBindResponse>;
     /**
      * 维护会员绑定提现账户联行号。此接口可以支持市场修改会员的提现账户的开户行信息，具体包括开户行行名、开户行的银行联行号（大小额联行号）和超级网银行号。
@@ -68,9 +68,9 @@ export declare class Client extends AbstractClient {
      */
     RegisterBillSupportWithdraw(req: RegisterBillSupportWithdrawRequest, cb?: (error: string, rep: RegisterBillSupportWithdrawResponse) => void): Promise<RegisterBillSupportWithdrawResponse>;
     /**
-       * 会员子账户开立。会员在银行注册，并开立会员子账户，交易网会员代码即会员在平台端系统的会员编号。
-  平台需保存银行返回的子账户账号，后续交易接口都会用到。会员属性字段为预留扩展字段，当前必须送默认值。
-       */
+     * 会员子账户开立。会员在银行注册，并开立会员子账户，交易网会员代码即会员在平台端系统的会员编号。
+平台需保存银行返回的子账户账号，后续交易接口都会用到。会员属性字段为预留扩展字段，当前必须送默认值。
+     */
     CreateCustAcctId(req: CreateCustAcctIdRequest, cb?: (error: string, rep: CreateCustAcctIdResponse) => void): Promise<CreateCustAcctIdResponse>;
     /**
      * 会员提现-不验证。此接口受理会员发起的提现申请。会员子账户的可提现余额、可用余额会减少，市场的资金汇总账户(监管账户)会减少相应的发生金额，提现到会员申请的收款账户。
@@ -113,12 +113,12 @@ export declare class Client extends AbstractClient {
      */
     DeleteAgentTaxPaymentInfo(req: DeleteAgentTaxPaymentInfoRequest, cb?: (error: string, rep: DeleteAgentTaxPaymentInfoResponse) => void): Promise<DeleteAgentTaxPaymentInfoResponse>;
     /**
-       * 会员绑定提现账户-银联鉴权。用于会员申请绑定提现账户，申请后银行前往银联验证卡信息：姓名、证件、卡号、银行预留手机是否相符，相符则发送给会员手机动态验证码并返回成功，不相符则返回失败。
-  平台接收到银行返回成功后，进入输入动态验证码的页面，有效期120秒，若120秒未输入，客户可点击重新发送动态验证码，这个步骤重新调用该接口即可。
-  平安银行的账户，大小额行号和超级网银号都不用送。
-  超级网银号：单笔转账金额不超过5万，不限制笔数，只用选XX银行，不用具体到支行，可实时知道对方是否收款成功。
-  大小额联行号：单笔转账可超过5万，需具体到支行，不能实时知道对方是否收款成功。金额超过5万的，在工作日的8点30-17点间才会成功。
-       */
+     * 会员绑定提现账户-银联鉴权。用于会员申请绑定提现账户，申请后银行前往银联验证卡信息：姓名、证件、卡号、银行预留手机是否相符，相符则发送给会员手机动态验证码并返回成功，不相符则返回失败。
+平台接收到银行返回成功后，进入输入动态验证码的页面，有效期120秒，若120秒未输入，客户可点击重新发送动态验证码，这个步骤重新调用该接口即可。
+平安银行的账户，大小额行号和超级网银号都不用送。
+超级网银号：单笔转账金额不超过5万，不限制笔数，只用选XX银行，不用具体到支行，可实时知道对方是否收款成功。
+大小额联行号：单笔转账可超过5万，需具体到支行，不能实时知道对方是否收款成功。金额超过5万的，在工作日的8点30-17点间才会成功。
+     */
     BindRelateAcctUnionPay(req: BindRelateAcctUnionPayRequest, cb?: (error: string, rep: BindRelateAcctUnionPayResponse) => void): Promise<BindRelateAcctUnionPayResponse>;
     /**
      * 直播平台-代理商完税信息录入

@@ -668,6 +668,16 @@ it("sqlserver.v20180328.DescribeProductConfig", async function () {
     }
 })
 
+it("sqlserver.v20180328.RecycleDBInstance", async function () {
+    try {
+       const data = await client.RecycleDBInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sqlserver.v20180328.CreateReadOnlyDBInstances", async function () {
     try {
        const data = await client.CreateReadOnlyDBInstances({})

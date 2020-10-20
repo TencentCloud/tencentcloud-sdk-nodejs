@@ -3,13 +3,13 @@
  */
 export interface SendMultiSmsResponse {
     /**
-        * 短信流水数组
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 短信流水数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     Data?: Array<SmsRet>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -17,37 +17,37 @@ export interface SendMultiSmsResponse {
  */
 export interface AppInfo {
     /**
-     * 应用ID
-     */
+      * 应用ID
+      */
     Sdkappid: string;
     /**
-     * 应用key
-     */
+      * 应用key
+      */
     Appkey: string;
     /**
-     * 用户appid
-     */
+      * 用户appid
+      */
     CloudAppid: string;
     /**
-        * 应用名称
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 应用名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     Name: string;
     /**
-     * 应用描述
-     */
+      * 应用描述
+      */
     Description: string;
     /**
-     * 创建时间
-     */
+      * 创建时间
+      */
     CreatedTime: string;
     /**
-     * 应用类型
-     */
+      * 应用类型
+      */
     BizType: number;
     /**
-     * 用户Uin
-     */
+      * 用户Uin
+      */
     Uin: string;
 }
 /**
@@ -55,13 +55,13 @@ export interface AppInfo {
  */
 export interface RenewCardsResponse {
     /**
-        * 续费成功的订单id
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 续费成功的订单id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     Data?: ResRenew;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -69,13 +69,13 @@ export interface RenewCardsResponse {
  */
 export interface CardList {
     /**
-     * 卡片总数
-     */
+      * 卡片总数
+      */
     Total: string;
     /**
-        * 卡片列表信息
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 卡片列表信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     List: Array<CardInfo>;
 }
 /**
@@ -83,12 +83,12 @@ export interface CardList {
  */
 export interface DescribeCardsResponse {
     /**
-     * 卡片列表信息
-     */
+      * 卡片列表信息
+      */
     Data?: CardList;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -96,13 +96,13 @@ export interface DescribeCardsResponse {
  */
 export interface DescribeCardResponse {
     /**
-        * 卡片详细信息
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 卡片详细信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     Data?: CardInfo;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -110,130 +110,130 @@ export interface DescribeCardResponse {
  */
 export interface CardInfo {
     /**
-     * 卡片ID
-     */
+      * 卡片ID
+      */
     Iccid: string;
     /**
-        * 卡电话号码
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 卡电话号码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     Msisdn: string;
     /**
-        * 卡imsi
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 卡imsi
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     Imsi: string;
     /**
-        * 卡imei
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 卡imei
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     Imei: string;
     /**
-     * 应用ID
-     */
+      * 应用ID
+      */
     Sdkappid: string;
     /**
-     * 运营商编号
-     */
+      * 运营商编号
+      */
     Teleoperator: number;
     /**
-     * 卡片状态 1:未激活 2：激活 3：停卡 5：销卡
-     */
+      * 卡片状态 1:未激活 2：激活 3：停卡 5：销卡
+      */
     CardStatus: number;
     /**
-        * 网络状态
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 网络状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     NetworkStatus: number;
     /**
-        * 激活时间
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 激活时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     ActivitedTime: string;
     /**
-     * 资费类型，1 单卡，2 流量池
-     */
+      * 资费类型，1 单卡，2 流量池
+      */
     Type: number;
     /**
-        * 套餐类型
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 套餐类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     ProductId: string;
     /**
-        * 流量池ID
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 流量池ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     PoolId: string;
     /**
-        * 周期套餐流量使用
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 周期套餐流量使用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     DataUsedInPeriod: number;
     /**
-        * 周期套餐总量
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 周期套餐总量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     DataTotalInPeriod: number;
     /**
-        * 过期时间
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     ProductExpiredTime: string;
     /**
-        * 描述信息
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     Description: string;
     /**
-     * 创建时间
-     */
+      * 创建时间
+      */
     CreatedTime: string;
     /**
-     * 修改时间
-     */
+      * 修改时间
+      */
     ModifiedTime: string;
     /**
-        * 套餐周期
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 套餐周期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     PreorderCnt: number;
     /**
-        * 激活被回调标志
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 激活被回调标志
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     IsActivated: number;
     /**
-        * 订单ID
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 订单ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     OrderId: string;
     /**
-        * 是否自动续费
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 是否自动续费
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     AutoRenew: number;
     /**
-        * 备注
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     Remark: string;
     /**
-        * 0 不需要开通达量不停卡 1 需要开通达量不停卡
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 0 不需要开通达量不停卡 1 需要开通达量不停卡
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     AllowArrears: number;
     /**
-     * 是否开通短信0:未开短信 1:开通短信
-     */
+      * 是否开通短信0:未开短信 1:开通短信
+      */
     NeedSms: number;
     /**
-     * 供应商
-     */
+      * 供应商
+      */
     Provider: number;
     /**
-        * 实名认证 0:无 1:未实名 2:已实名
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 实名认证 0:无 1:未实名 2:已实名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     CertificationState: number;
 }
 /**
@@ -241,13 +241,13 @@ export interface CardInfo {
  */
 export interface DescribeAppResponse {
     /**
-        * 应用信息详情
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 应用信息详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     Data?: AppInfo;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -255,12 +255,12 @@ export interface DescribeAppResponse {
  */
 export interface DescribeCardRequest {
     /**
-     * 应用ID
-     */
+      * 应用ID
+      */
     Sdkappid: number;
     /**
-     * 卡片ID
-     */
+      * 卡片ID
+      */
     Iccid: string;
 }
 /**
@@ -268,8 +268,8 @@ export interface DescribeCardRequest {
  */
 export interface DescribeAppRequest {
     /**
-     * 物联卡应用ID
-     */
+      * 物联卡应用ID
+      */
     Sdkappid: number;
 }
 /**
@@ -277,13 +277,13 @@ export interface DescribeAppRequest {
  */
 export interface SendSmsResponse {
     /**
-        * 短信流水信息
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 短信流水信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     Data?: SmsSid;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -291,16 +291,16 @@ export interface SendSmsResponse {
  */
 export interface SendSmsRequest {
     /**
-     * 应用ID
-     */
+      * 应用ID
+      */
     Sdkappid: number;
     /**
-     * 卡片ID
-     */
+      * 卡片ID
+      */
     Iccid: string;
     /**
-     * 短信内容长度70限制
-     */
+      * 短信内容长度70限制
+      */
     Content: string;
 }
 /**
@@ -308,16 +308,16 @@ export interface SendSmsRequest {
  */
 export interface DescribeCardsRequest {
     /**
-     * 应用ID
-     */
+      * 应用ID
+      */
     Sdkappid: string;
     /**
-     * 偏移值
-     */
+      * 偏移值
+      */
     Offset: number;
     /**
-     * 列表限制
-     */
+      * 列表限制
+      */
     Limit: number;
 }
 /**
@@ -325,16 +325,16 @@ export interface DescribeCardsRequest {
  */
 export interface SendMultiSmsRequest {
     /**
-     * 应用ID
-     */
+      * 应用ID
+      */
     Sdkappid: string;
     /**
-     * 卡片列表
-     */
+      * 卡片列表
+      */
     Iccids: Array<string>;
     /**
-     * 短信内容 长度限制 70
-     */
+      * 短信内容 长度限制 70
+      */
     Content: string;
 }
 /**
@@ -342,9 +342,9 @@ export interface SendMultiSmsRequest {
  */
 export interface ResRenew {
     /**
-        * 每一张续费卡片的订单ID数组
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 每一张续费卡片的订单ID数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     OrderIds: Array<string>;
 }
 /**
@@ -352,20 +352,20 @@ export interface ResRenew {
  */
 export interface SmsRet {
     /**
-     * 该iccid请求状态
-     */
+      * 该iccid请求状态
+      */
     Code: string;
     /**
-     * 短信发送返回信息
-     */
+      * 短信发送返回信息
+      */
     Msg: string;
     /**
-     * 卡片ID
-     */
+      * 卡片ID
+      */
     Iccid: string;
     /**
-     * 流水ID
-     */
+      * 流水ID
+      */
     Sid: string;
 }
 /**
@@ -373,13 +373,13 @@ export interface SmsRet {
  */
 export interface SmsSid {
     /**
-        * 卡片ID
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 卡片ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     Iccid: string;
     /**
-     * 信息流水ID
-     */
+      * 信息流水ID
+      */
     Sid: string;
 }
 /**
@@ -387,15 +387,15 @@ export interface SmsSid {
  */
 export interface RenewCardsRequest {
     /**
-     * 应用ID
-     */
+      * 应用ID
+      */
     Sdkappid: number;
     /**
-     * 续费的iccid
-     */
+      * 续费的iccid
+      */
     Iccids: Array<string>;
     /**
-     * 续费的周期（单位：月）
-     */
+      * 续费的周期（单位：月）
+      */
     RenewNum: number;
 }

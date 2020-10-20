@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("ccc.tencentcloudapi.com", "2020-02-10", clientConfig);
     }
     /**
+     * 创建 SDK 登录 Token。
+     */
+    async CreateSDKLoginToken(req, cb) {
+        return this.request("CreateSDKLoginToken", req, cb);
+    }
+    /**
      * 获取电话服务记录与录音
      */
     async DescribeTelCdr(req, cb) {

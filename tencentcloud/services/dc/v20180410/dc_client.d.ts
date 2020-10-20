@@ -28,9 +28,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeDirectConnectTunnelExtra(req: DescribeDirectConnectTunnelExtraRequest, cb?: (error: string, rep: DescribeDirectConnectTunnelExtraResponse) => void): Promise<DescribeDirectConnectTunnelExtraResponse>;
     /**
-       * 删除物理专线。
-  只能删除处于已连接状态的物理专线。
-       */
+     * 删除物理专线。
+只能删除处于已连接状态的物理专线。
+     */
     DeleteDirectConnect(req: DeleteDirectConnectRequest, cb?: (error: string, rep: DeleteDirectConnectResponse) => void): Promise<DeleteDirectConnectResponse>;
     /**
      * 接受专用通道申请
@@ -41,20 +41,20 @@ export declare class Client extends AbstractClient {
      */
     DeleteDirectConnectTunnel(req: DeleteDirectConnectTunnelRequest, cb?: (error: string, rep: DeleteDirectConnectTunnelResponse) => void): Promise<DeleteDirectConnectTunnelResponse>;
     /**
-       * 查询物理专线接入点
-  
-       */
+     * 查询物理专线接入点
+
+     */
     DescribeAccessPoints(req: DescribeAccessPointsRequest, cb?: (error: string, rep: DescribeAccessPointsResponse) => void): Promise<DescribeAccessPointsResponse>;
     /**
      * 用于查询专用通道列表。
      */
     DescribeDirectConnectTunnels(req: DescribeDirectConnectTunnelsRequest, cb?: (error: string, rep: DescribeDirectConnectTunnelsResponse) => void): Promise<DescribeDirectConnectTunnelsResponse>;
     /**
-       * 申请物理专线接入。
-  调用该接口时，请注意：
-  账号要进行实名认证，否则不允许申请物理专线；
-  若账户下存在欠费状态的物理专线，则不能申请更多的物理专线。
-       */
+     * 申请物理专线接入。
+调用该接口时，请注意：
+账号要进行实名认证，否则不允许申请物理专线；
+若账户下存在欠费状态的物理专线，则不能申请更多的物理专线。
+     */
     CreateDirectConnect(req: CreateDirectConnectRequest, cb?: (error: string, rep: CreateDirectConnectResponse) => void): Promise<CreateDirectConnectResponse>;
     /**
      * 拒绝专用通道申请

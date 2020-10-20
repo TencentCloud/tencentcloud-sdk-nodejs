@@ -5,5 +5,5 @@ const Models = require("./msp_models");
 const msp_client_1 = require("./msp_client");
 exports.v20180319 = {
     Client: msp_client_1.Client,
-    Models: Models,
+    Models: Models
 };

@@ -1021,6 +1021,16 @@ export interface DescribeBackupByFlowIdResponse {
 }
 
 /**
+ * RecycleDBInstance请求参数结构体
+ */
+export interface RecycleDBInstanceRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+}
+
+/**
  * DescribeFlowStatus请求参数结构体
  */
 export interface DescribeFlowStatusRequest {
@@ -3351,6 +3361,21 @@ export interface DescribeReadOnlyGroupDetailsResponse {
    * 主实例ID，形如mssql-sgeshe3th
    */
   MasterInstanceId?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RecycleDBInstance返回参数结构体
+ */
+export interface RecycleDBInstanceResponse {
+  /**
+   * 流程id
+   */
+  FlowId?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

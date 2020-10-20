@@ -5,5 +5,5 @@ const Models = require("./ft_models");
 const ft_client_1 = require("./ft_client");
 exports.v20200304 = {
     Client: ft_client_1.Client,
-    Models: Models,
+    Models: Models
 };

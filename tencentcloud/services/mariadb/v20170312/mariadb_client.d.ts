@@ -8,9 +8,9 @@ import { CreateDBInstanceRequest, DescribeAccountPrivilegesResponse, DescribeDat
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-       * 本接口（DescribeAccountPrivileges）用于查询云数据库账号权限。
-  注意：注意：相同用户名，不同Host是不同的账号。
-       */
+     * 本接口（DescribeAccountPrivileges）用于查询云数据库账号权限。
+注意：注意：相同用户名，不同Host是不同的账号。
+     */
     DescribeAccountPrivileges(req: DescribeAccountPrivilegesRequest, cb?: (error: string, rep: DescribeAccountPrivilegesResponse) => void): Promise<DescribeAccountPrivilegesResponse>;
     /**
      * 本接口（DescribeRenewalPrice）用于在续费云数据库实例时，查询续费的价格。
@@ -25,9 +25,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeSaleInfo(req?: DescribeSaleInfoRequest, cb?: (error: string, rep: DescribeSaleInfoResponse) => void): Promise<DescribeSaleInfoResponse>;
     /**
-       * 本接口（ModifyAccountDescription）用于修改云数据库账号备注。
-  注意：相同用户名，不同Host是不同的账号。
-       */
+     * 本接口（ModifyAccountDescription）用于修改云数据库账号备注。
+注意：相同用户名，不同Host是不同的账号。
+     */
     ModifyAccountDescription(req: ModifyAccountDescriptionRequest, cb?: (error: string, rep: ModifyAccountDescriptionResponse) => void): Promise<ModifyAccountDescriptionResponse>;
     /**
      * 本接口（DescribeBackupTime）用于获取云数据库的备份时间。后台系统将根据此配置定期进行实例备份。
@@ -38,9 +38,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeDBResourceUsageDetails(req: DescribeDBResourceUsageDetailsRequest, cb?: (error: string, rep: DescribeDBResourceUsageDetailsResponse) => void): Promise<DescribeDBResourceUsageDetailsResponse>;
     /**
-       * 本接口（ResetAccountPassword）用于重置云数据库账号的密码。
-  注意：相同用户名，不同Host是不同的账号。
-       */
+     * 本接口（ResetAccountPassword）用于重置云数据库账号的密码。
+注意：相同用户名，不同Host是不同的账号。
+     */
     ResetAccountPassword(req: ResetAccountPasswordRequest, cb?: (error: string, rep: ResetAccountPasswordResponse) => void): Promise<ResetAccountPasswordResponse>;
     /**
      * 本接口(ModifyDBParameters)用于修改数据库参数。
@@ -67,9 +67,9 @@ export declare class Client extends AbstractClient {
      */
     RestartDBInstances(req: RestartDBInstancesRequest, cb?: (error: string, rep: RestartDBInstancesResponse) => void): Promise<RestartDBInstancesResponse>;
     /**
-       * 本接口（GrantAccountPrivileges）用于给云数据库账号赋权。
-  注意：相同用户名，不同Host是不同的账号。
-       */
+     * 本接口（GrantAccountPrivileges）用于给云数据库账号赋权。
+注意：相同用户名，不同Host是不同的账号。
+     */
     GrantAccountPrivileges(req: GrantAccountPrivilegesRequest, cb?: (error: string, rep: GrantAccountPrivilegesResponse) => void): Promise<GrantAccountPrivilegesResponse>;
     /**
      * 本接口（DeleteAccount）用于删除云数据库账号。用户名+host唯一确定一个账号。
@@ -96,9 +96,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeDBInstanceSpecs(req?: DescribeDBInstanceSpecsRequest, cb?: (error: string, rep: DescribeDBInstanceSpecsResponse) => void): Promise<DescribeDBInstanceSpecsResponse>;
     /**
-       * 本接口（DescribeDBInstances）用于查询云数据库实例列表，支持通过项目ID、实例ID、内网地址、实例名称等来筛选实例。
-  如果不指定任何筛选条件，则默认返回20条实例记录，单次请求最多支持返回100条实例记录。
-       */
+     * 本接口（DescribeDBInstances）用于查询云数据库实例列表，支持通过项目ID、实例ID、内网地址、实例名称等来筛选实例。
+如果不指定任何筛选条件，则默认返回20条实例记录，单次请求最多支持返回100条实例记录。
+     */
     DescribeDBInstances(req: DescribeDBInstancesRequest, cb?: (error: string, rep: DescribeDBInstancesResponse) => void): Promise<DescribeDBInstancesResponse>;
     /**
      * 本接口（RenewDBInstance）用于续费云数据库实例。
@@ -141,9 +141,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeAccounts(req: DescribeAccountsRequest, cb?: (error: string, rep: DescribeAccountsResponse) => void): Promise<DescribeAccountsResponse>;
     /**
-       * 本接口（CopyAccountPrivileges）用于复制云数据库账号的权限。
-  注意：相同用户名，不同Host是不同的账号，Readonly属性相同的账号之间才能复制权限。
-       */
+     * 本接口（CopyAccountPrivileges）用于复制云数据库账号的权限。
+注意：相同用户名，不同Host是不同的账号，Readonly属性相同的账号之间才能复制权限。
+     */
     CopyAccountPrivileges(req: CopyAccountPrivilegesRequest, cb?: (error: string, rep: CopyAccountPrivilegesResponse) => void): Promise<CopyAccountPrivilegesResponse>;
     /**
      * 本接口（DescribeDatabases）用于查询云数据库实例的数据库列表。

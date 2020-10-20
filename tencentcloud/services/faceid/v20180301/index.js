@@ -5,5 +5,5 @@ const Models = require("./faceid_models");
 const faceid_client_1 = require("./faceid_client");
 exports.v20180301 = {
     Client: faceid_client_1.Client,
-    Models: Models,
+    Models: Models
 };

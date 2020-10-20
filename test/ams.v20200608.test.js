@@ -38,6 +38,16 @@ it("ams.v20200608.DescribeBizConfig", async function () {
     }
 })
 
+it("ams.v20200608.DescribeTaskDetail", async function () {
+    try {
+       const data = await client.DescribeTaskDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ams.v20200608.CreateBizConfig", async function () {
     try {
        const data = await client.CreateBizConfig({})
@@ -48,9 +58,9 @@ it("ams.v20200608.CreateBizConfig", async function () {
     }
 })
 
-it("ams.v20200608.DescribeTaskDetail", async function () {
+it("ams.v20200608.CancelTask", async function () {
     try {
-       const data = await client.DescribeTaskDetail({})
+       const data = await client.CancelTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

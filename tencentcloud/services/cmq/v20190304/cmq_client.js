@@ -58,9 +58,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteSubscribe", req, cb);
     }
     /**
-       * 创建队列接口
-  
-       */
+     * 创建队列接口
+
+     */
     async CreateQueue(req, cb) {
         return this.request("CreateQueue", req, cb);
     }

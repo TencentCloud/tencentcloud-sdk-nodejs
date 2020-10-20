@@ -418,6 +418,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeProductConfig", req, cb);
     }
     /**
+     * 本接口（RecycleDBInstance）用于主动回收已下线的SQLSERVER实例
+     */
+    async RecycleDBInstance(req, cb) {
+        return this.request("RecycleDBInstance", req, cb);
+    }
+    /**
      * 本接口（CreateReadOnlyDBInstances）用于添加只读副本实例。
      */
     async CreateReadOnlyDBInstances(req, cb) {

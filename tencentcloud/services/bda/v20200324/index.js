@@ -5,5 +5,5 @@ const Models = require("./bda_models");
 const bda_client_1 = require("./bda_client");
 exports.v20200324 = {
     Client: bda_client_1.Client,
-    Models: Models,
+    Models: Models
 };

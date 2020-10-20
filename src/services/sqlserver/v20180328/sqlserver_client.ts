@@ -62,6 +62,7 @@ import {
   ZoneInfo,
   InquiryPriceCreateDBInstancesRequest,
   DescribeBackupByFlowIdResponse,
+  RecycleDBInstanceRequest,
   DescribeFlowStatusRequest,
   StartMigrationCheckResponse,
   MigrateTask,
@@ -152,6 +153,7 @@ import {
   DBPrivilege,
   DescribeOrdersRequest,
   DescribeReadOnlyGroupDetailsResponse,
+  RecycleDBInstanceResponse,
   DeleteAccountRequest,
   DescribeReadOnlyGroupByReadOnlyInstanceRequest,
   DescribeMaintenanceSpanRequest,
@@ -853,6 +855,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeProductConfigResponse) => void
   ): Promise<DescribeProductConfigResponse> {
     return this.request("DescribeProductConfig", req, cb)
+  }
+
+  /**
+   * 本接口（RecycleDBInstance）用于主动回收已下线的SQLSERVER实例
+   */
+  async RecycleDBInstance(
+    req: RecycleDBInstanceRequest,
+    cb?: (error: string, rep: RecycleDBInstanceResponse) => void
+  ): Promise<RecycleDBInstanceResponse> {
+    return this.request("RecycleDBInstance", req, cb)
   }
 
   /**

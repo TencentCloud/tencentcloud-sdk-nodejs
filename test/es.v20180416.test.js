@@ -108,6 +108,16 @@ it("es.v20180416.RestartInstance", async function () {
     }
 })
 
+it("es.v20180416.RestartNodes", async function () {
+    try {
+       const data = await client.RestartNodes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("es.v20180416.DescribeInstanceLogs", async function () {
     try {
        const data = await client.DescribeInstanceLogs({})

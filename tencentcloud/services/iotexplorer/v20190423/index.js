@@ -5,5 +5,5 @@ const Models = require("./iotexplorer_models");
 const iotexplorer_client_1 = require("./iotexplorer_client");
 exports.v20190423 = {
     Client: iotexplorer_client_1.Client,
-    Models: Models,
+    Models: Models
 };

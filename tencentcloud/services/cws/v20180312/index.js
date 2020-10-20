@@ -5,5 +5,5 @@ const Models = require("./cws_models");
 const cws_client_1 = require("./cws_client");
 exports.v20180312 = {
     Client: cws_client_1.Client,
-    Models: Models,
+    Models: Models
 };

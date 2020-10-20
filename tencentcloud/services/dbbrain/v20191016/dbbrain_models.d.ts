@@ -3,12 +3,12 @@
  */
 export interface DescribeTopSpaceTableTimeSeriesResponse {
     /**
-     * 返回的Top表空间统计信息的时序数据列表。
-     */
+      * 返回的Top表空间统计信息的时序数据列表。
+      */
     TopSpaceTableTimeSeries?: Array<TableSpaceTimeSeries>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -16,12 +16,12 @@ export interface DescribeTopSpaceTableTimeSeriesResponse {
  */
 export interface DescribeDBDiagHistoryResponse {
     /**
-     * 事件描述。
-     */
+      * 事件描述。
+      */
     Events?: Array<DiagHistoryEventItem>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -29,12 +29,12 @@ export interface DescribeDBDiagHistoryResponse {
  */
 export interface DescribeDBSpaceStatusRequest {
     /**
-     * 实例 ID 。
-     */
+      * 实例 ID 。
+      */
     InstanceId: string;
     /**
-     * 时间段天数，截止日期为当日，默认为7天。
-     */
+      * 时间段天数，截止日期为当日，默认为7天。
+      */
     RangeDays?: number;
 }
 /**
@@ -42,20 +42,20 @@ export interface DescribeDBSpaceStatusRequest {
  */
 export interface DescribeSlowLogTimeSeriesStatsResponse {
     /**
-     * 柱间单位时间间隔，单位为秒。
-     */
+      * 柱间单位时间间隔，单位为秒。
+      */
     Period?: number;
     /**
-     * 单位时间间隔内慢日志数量统计。
-     */
+      * 单位时间间隔内慢日志数量统计。
+      */
     TimeSeries?: Array<TimeSlice>;
     /**
-     * 单位时间间隔内的实例 cpu 利用率监控数据。
-     */
+      * 单位时间间隔内的实例 cpu 利用率监控数据。
+      */
     SeriesData?: MonitorMetricSeriesData;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -63,12 +63,12 @@ export interface DescribeSlowLogTimeSeriesStatsResponse {
  */
 export interface TimeSlice {
     /**
-     * 总数
-     */
+      * 总数
+      */
     Count: number;
     /**
-     * 统计开始时间
-     */
+      * 统计开始时间
+      */
     Timestamp: number;
 }
 /**
@@ -76,17 +76,17 @@ export interface TimeSlice {
  */
 export interface MonitorFloatMetric {
     /**
-     * 指标名称。
-     */
+      * 指标名称。
+      */
     Metric: string;
     /**
-     * 指标单位。
-     */
+      * 指标单位。
+      */
     Unit: string;
     /**
-        * 指标值。
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 指标值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     Values: Array<number>;
 }
 /**
@@ -94,17 +94,17 @@ export interface MonitorFloatMetric {
  */
 export interface MonitorMetric {
     /**
-     * 指标名称。
-     */
+      * 指标名称。
+      */
     Metric: string;
     /**
-     * 指标单位。
-     */
+      * 指标单位。
+      */
     Unit: string;
     /**
-        * 指标值。
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 指标值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     Values: Array<number>;
 }
 /**
@@ -112,20 +112,20 @@ export interface MonitorMetric {
  */
 export interface TableSpaceTimeSeries {
     /**
-     * 表名。
-     */
+      * 表名。
+      */
     TableName: string;
     /**
-     * 库名。
-     */
+      * 库名。
+      */
     TableSchema: string;
     /**
-     * 库表的存储引擎。
-     */
+      * 库表的存储引擎。
+      */
     Engine: string;
     /**
-     * 单位时间间隔内的空间指标数据。
-     */
+      * 单位时间间隔内的空间指标数据。
+      */
     SeriesData: MonitorFloatMetricSeriesData;
 }
 /**
@@ -133,16 +133,16 @@ export interface TableSpaceTimeSeries {
  */
 export interface DescribeTopSpaceTablesRequest {
     /**
-     * 实例 ID 。
-     */
+      * 实例 ID 。
+      */
     InstanceId: string;
     /**
-     * 返回的Top表数量，最大值为20，默认为最大值。
-     */
+      * 返回的Top表数量，最大值为20，默认为最大值。
+      */
     Limit?: number;
     /**
-     * 筛选Top表所用的排序字段，可选字段包含DataLength、IndexLength、TotalLength、DataFree、FragRatio、TableRows、PhysicalFileSize，默认为 PhysicalFileSize。
-     */
+      * 筛选Top表所用的排序字段，可选字段包含DataLength、IndexLength、TotalLength、DataFree、FragRatio、TableRows、PhysicalFileSize，默认为 PhysicalFileSize。
+      */
     SortBy?: string;
 }
 /**
@@ -150,16 +150,16 @@ export interface DescribeTopSpaceTablesRequest {
  */
 export interface DescribeSlowLogTimeSeriesStatsRequest {
     /**
-     * 实例 ID 。
-     */
+      * 实例 ID 。
+      */
     InstanceId: string;
     /**
-     * 开始时间。
-     */
+      * 开始时间。
+      */
     StartTime: string;
     /**
-     * 结束时间。
-     */
+      * 结束时间。
+      */
     EndTime: string;
 }
 /**
@@ -167,12 +167,12 @@ export interface DescribeSlowLogTimeSeriesStatsRequest {
  */
 export interface DescribeDBDiagEventRequest {
     /**
-     * 实例 ID 。
-     */
+      * 实例 ID 。
+      */
     InstanceId: string;
     /**
-     * 事件 ID 。通过“获取实例诊断历史DescribeDBDiagHistory”获取。
-     */
+      * 事件 ID 。通过“获取实例诊断历史DescribeDBDiagHistory”获取。
+      */
     EventId?: number;
 }
 /**
@@ -180,24 +180,24 @@ export interface DescribeDBDiagEventRequest {
  */
 export interface DescribeDBSpaceStatusResponse {
     /**
-     * 磁盘增长量(MB)。
-     */
+      * 磁盘增长量(MB)。
+      */
     Growth?: number;
     /**
-     * 磁盘剩余(MB)。
-     */
+      * 磁盘剩余(MB)。
+      */
     Remain?: number;
     /**
-     * 磁盘总量(MB)。
-     */
+      * 磁盘总量(MB)。
+      */
     Total?: number;
     /**
-     * 预计可用天数。
-     */
+      * 预计可用天数。
+      */
     AvailableDays?: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -205,53 +205,53 @@ export interface DescribeDBSpaceStatusResponse {
  */
 export interface DescribeDBDiagEventResponse {
     /**
-     * 诊断项。
-     */
+      * 诊断项。
+      */
     DiagItem?: string;
     /**
-     * 诊断类型。
-     */
+      * 诊断类型。
+      */
     DiagType?: string;
     /**
-     * 事件 ID 。
-     */
+      * 事件 ID 。
+      */
     EventId?: number;
     /**
-     * 事件详情。
-     */
+      * 事件详情。
+      */
     Explanation?: string;
     /**
-     * 概要。
-     */
+      * 概要。
+      */
     Outline?: string;
     /**
-     * 诊断出的问题。
-     */
+      * 诊断出的问题。
+      */
     Problem?: string;
     /**
-     * 严重程度。严重程度分为5级，按影响程度从高至低分别为：1：致命，2：严重，3：告警，4：提示，5：健康。
-     */
+      * 严重程度。严重程度分为5级，按影响程度从高至低分别为：1：致命，2：严重，3：告警，4：提示，5：健康。
+      */
     Severity?: number;
     /**
-     * 开始时间
-     */
+      * 开始时间
+      */
     StartTime?: string;
     /**
-     * 建议。
-     */
+      * 建议。
+      */
     Suggestions?: string;
     /**
-        * 保留字段。
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 保留字段。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     Metric?: string;
     /**
-     * 结束时间。
-     */
+      * 结束时间。
+      */
     EndTime?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -259,16 +259,16 @@ export interface DescribeDBDiagEventResponse {
  */
 export interface DescribeDBDiagHistoryRequest {
     /**
-     * 实例 ID 。
-     */
+      * 实例 ID 。
+      */
     InstanceId: string;
     /**
-     * 开始时间。如“2019-09-10 12:13:14”。
-     */
+      * 开始时间。如“2019-09-10 12:13:14”。
+      */
     StartTime: string;
     /**
-     * 结束时间。如“2019-09-11 12:13:14”。
-     */
+      * 结束时间。如“2019-09-11 12:13:14”。
+      */
     EndTime: string;
 }
 /**
@@ -276,24 +276,24 @@ export interface DescribeDBDiagHistoryRequest {
  */
 export interface DescribeTopSpaceTableTimeSeriesRequest {
     /**
-     * 实例 ID 。
-     */
+      * 实例 ID 。
+      */
     InstanceId: string;
     /**
-     * 返回的Top表数量，最大值为20，默认为最大值。
-     */
+      * 返回的Top表数量，最大值为20，默认为最大值。
+      */
     Limit?: number;
     /**
-     * 筛选Top表所用的排序字段，可选字段包含DataLength、IndexLength、TotalLength、DataFree、FragRatio、TableRows、PhysicalFileSize，默认为 PhysicalFileSize。
-     */
+      * 筛选Top表所用的排序字段，可选字段包含DataLength、IndexLength、TotalLength、DataFree、FragRatio、TableRows、PhysicalFileSize，默认为 PhysicalFileSize。
+      */
     SortBy?: string;
     /**
-     * 开始日期，最早为当日的前第6天，默认为截止日期的前第6天。
-     */
+      * 开始日期，最早为当日的前第6天，默认为截止日期的前第6天。
+      */
     StartDate?: string;
     /**
-     * 截止日期，最早为当日的前第6天，默认为当日。
-     */
+      * 截止日期，最早为当日的前第6天，默认为当日。
+      */
     EndDate?: string;
 }
 /**
@@ -301,12 +301,12 @@ export interface DescribeTopSpaceTableTimeSeriesRequest {
  */
 export interface MonitorMetricSeriesData {
     /**
-     * 监控指标。
-     */
+      * 监控指标。
+      */
     Series: Array<MonitorMetric>;
     /**
-     * 监控指标对应的时间戳。
-     */
+      * 监控指标对应的时间戳。
+      */
     Timestamp: Array<number>;
 }
 /**
@@ -314,47 +314,47 @@ export interface MonitorMetricSeriesData {
  */
 export interface DiagHistoryEventItem {
     /**
-     * 诊断类型。
-     */
+      * 诊断类型。
+      */
     DiagType: string;
     /**
-     * 结束时间。
-     */
+      * 结束时间。
+      */
     EndTime: string;
     /**
-     * 开始时间。
-     */
+      * 开始时间。
+      */
     StartTime: string;
     /**
-     * 事件 ID 。
-     */
+      * 事件 ID 。
+      */
     EventId: number;
     /**
-     * 严重程度。严重程度分为5级，按影响程度从高至低分别为：1：致命，2：严重，3：告警，4：提示，5：健康。
-     */
+      * 严重程度。严重程度分为5级，按影响程度从高至低分别为：1：致命，2：严重，3：告警，4：提示，5：健康。
+      */
     Severity: number;
     /**
-     * 概要。
-     */
+      * 概要。
+      */
     Outline: string;
     /**
-     * 诊断项。
-     */
+      * 诊断项。
+      */
     DiagItem: string;
     /**
-        * 实例 ID 。
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 实例 ID 。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     InstanceId: string;
     /**
-        * 保留字段
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 保留字段
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     Metric: string;
     /**
-        * 地域
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     Region: string;
 }
 /**
@@ -362,84 +362,84 @@ export interface DiagHistoryEventItem {
  */
 export interface SlowLogTopSqlItem {
     /**
-     * sql总锁等待时间
-     */
+      * sql总锁等待时间
+      */
     LockTime: number;
     /**
-     * 最大锁等待时间
-     */
+      * 最大锁等待时间
+      */
     LockTimeMax: number;
     /**
-     * 最小锁等待时间
-     */
+      * 最小锁等待时间
+      */
     LockTimeMin: number;
     /**
-     * 总扫描行数
-     */
+      * 总扫描行数
+      */
     RowsExamined: number;
     /**
-     * 最大扫描行数
-     */
+      * 最大扫描行数
+      */
     RowsExaminedMax: number;
     /**
-     * 最小扫描行数
-     */
+      * 最小扫描行数
+      */
     RowsExaminedMin: number;
     /**
-     * 总耗时
-     */
+      * 总耗时
+      */
     QueryTime: number;
     /**
-     * 最大执行时间
-     */
+      * 最大执行时间
+      */
     QueryTimeMax: number;
     /**
-     * 最小执行时间
-     */
+      * 最小执行时间
+      */
     QueryTimeMin: number;
     /**
-     * 总返回行数
-     */
+      * 总返回行数
+      */
     RowsSent: number;
     /**
-     * 最大返回行数
-     */
+      * 最大返回行数
+      */
     RowsSentMax: number;
     /**
-     * 最小返回行数
-     */
+      * 最小返回行数
+      */
     RowsSentMin: number;
     /**
-     * 执行次数
-     */
+      * 执行次数
+      */
     ExecTimes: number;
     /**
-     * sql模板
-     */
+      * sql模板
+      */
     SqlTemplate: string;
     /**
-     * 带参数SQL（随机）
-     */
+      * 带参数SQL（随机）
+      */
     SqlText: string;
     /**
-     * schema
-     */
+      * schema
+      */
     Schema: string;
     /**
-     * 总耗时占比
-     */
+      * 总耗时占比
+      */
     QueryTimeRatio: number;
     /**
-     * sql总锁等待时间占比
-     */
+      * sql总锁等待时间占比
+      */
     LockTimeRatio: number;
     /**
-     * 总扫描行数占比
-     */
+      * 总扫描行数占比
+      */
     RowsExaminedRatio: number;
     /**
-     * 总返回行数占比
-     */
+      * 总返回行数占比
+      */
     RowsSentRatio: number;
 }
 /**
@@ -447,12 +447,12 @@ export interface SlowLogTopSqlItem {
  */
 export interface MonitorFloatMetricSeriesData {
     /**
-     * 监控指标。
-     */
+      * 监控指标。
+      */
     Series: Array<MonitorFloatMetric>;
     /**
-     * 监控指标对应的时间戳。
-     */
+      * 监控指标对应的时间戳。
+      */
     Timestamp: Array<number>;
 }
 /**
@@ -460,32 +460,32 @@ export interface MonitorFloatMetricSeriesData {
  */
 export interface DescribeSlowLogTopSqlsRequest {
     /**
-     * 实例 ID 。
-     */
+      * 实例 ID 。
+      */
     InstanceId: string;
     /**
-     * 开始时间。
-     */
+      * 开始时间。
+      */
     StartTime: string;
     /**
-     * 截止时间。
-     */
+      * 截止时间。
+      */
     EndTime: string;
     /**
-     * 排序键，目前支持 QueryTime,ExecTimes,RowsSent,LockTime以及RowsExamined 等排序键。
-     */
+      * 排序键，目前支持 QueryTime,ExecTimes,RowsSent,LockTime以及RowsExamined 等排序键。
+      */
     SortBy?: string;
     /**
-     * 排序方式，支持ASC（升序）以及DESC（降序）。
-     */
+      * 排序方式，支持ASC（升序）以及DESC（降序）。
+      */
     OrderBy?: string;
     /**
-     * 返回数量，默认为20，最大值为100。
-     */
+      * 返回数量，默认为20，最大值为100。
+      */
     Limit?: number;
     /**
-     * 偏移量，默认为0。
-     */
+      * 偏移量，默认为0。
+      */
     Offset?: number;
 }
 /**
@@ -493,44 +493,44 @@ export interface DescribeSlowLogTopSqlsRequest {
  */
 export interface TableSpaceData {
     /**
-     * 表名。
-     */
+      * 表名。
+      */
     TableName: string;
     /**
-     * 库名。
-     */
+      * 库名。
+      */
     TableSchema: string;
     /**
-     * 库表的存储引擎。
-     */
+      * 库表的存储引擎。
+      */
     Engine: string;
     /**
-     * 数据空间（MB）。
-     */
+      * 数据空间（MB）。
+      */
     DataLength: number;
     /**
-     * 索引空间（MB）。
-     */
+      * 索引空间（MB）。
+      */
     IndexLength: number;
     /**
-     * 碎片空间（MB）。
-     */
+      * 碎片空间（MB）。
+      */
     DataFree: number;
     /**
-     * 总使用空间（MB）。
-     */
+      * 总使用空间（MB）。
+      */
     TotalLength: number;
     /**
-     * 碎片率（%）。
-     */
+      * 碎片率（%）。
+      */
     FragRatio: number;
     /**
-     * 行数。
-     */
+      * 行数。
+      */
     TableRows: number;
     /**
-     * 表对应的独立物理文件大小（MB）。
-     */
+      * 表对应的独立物理文件大小（MB）。
+      */
     PhysicalFileSize: number;
 }
 /**
@@ -538,16 +538,16 @@ export interface TableSpaceData {
  */
 export interface DescribeSlowLogTopSqlsResponse {
     /**
-     * 符合条件的记录总数。
-     */
+      * 符合条件的记录总数。
+      */
     TotalCount?: number;
     /**
-     * 慢日志 top sql 列表
-     */
+      * 慢日志 top sql 列表
+      */
     Rows?: Array<SlowLogTopSqlItem>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -555,11 +555,11 @@ export interface DescribeSlowLogTopSqlsResponse {
  */
 export interface DescribeTopSpaceTablesResponse {
     /**
-     * 返回的Top表空间统计信息列表。
-     */
+      * 返回的Top表空间统计信息列表。
+      */
     TopSpaceTables?: Array<TableSpaceData>;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }

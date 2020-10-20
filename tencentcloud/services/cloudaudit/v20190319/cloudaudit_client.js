@@ -64,12 +64,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquireAuditCredit", req, cb);
     }
     /**
-       * 参数要求：
-  1、如果IsCreateNewBucket的值存在的话，cosRegion和cosBucketName都是必填参数。
-  2、如果IsEnableCmqNotify的值是1的话，IsCreateNewQueue、CmqRegion和CmqQueueName都是必填参数。
-  3、如果IsEnableCmqNotify的值是0的话，IsCreateNewQueue、CmqRegion和CmqQueueName都不能传。
-  4、如果IsEnableKmsEncry的值是1的话，KmsRegion和KeyId属于必填项
-       */
+     * 参数要求：
+1、如果IsCreateNewBucket的值存在的话，cosRegion和cosBucketName都是必填参数。
+2、如果IsEnableCmqNotify的值是1的话，IsCreateNewQueue、CmqRegion和CmqQueueName都是必填参数。
+3、如果IsEnableCmqNotify的值是0的话，IsCreateNewQueue、CmqRegion和CmqQueueName都不能传。
+4、如果IsEnableKmsEncry的值是1的话，KmsRegion和KeyId属于必填项
+     */
     async UpdateAudit(req, cb) {
         return this.request("UpdateAudit", req, cb);
     }
@@ -86,12 +86,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAudit", req, cb);
     }
     /**
-       * 参数要求：
-  1、如果IsCreateNewBucket的值存在的话，cosRegion和cosBucketName都是必填参数。
-  2、如果IsEnableCmqNotify的值是1的话，IsCreateNewQueue、CmqRegion和CmqQueueName都是必填参数。
-  3、如果IsEnableCmqNotify的值是0的话，IsCreateNewQueue、CmqRegion和CmqQueueName都不能传。
-  4、如果IsEnableKmsEncry的值是1的话，KmsRegion和KeyId属于必填项
-       */
+     * 参数要求：
+1、如果IsCreateNewBucket的值存在的话，cosRegion和cosBucketName都是必填参数。
+2、如果IsEnableCmqNotify的值是1的话，IsCreateNewQueue、CmqRegion和CmqQueueName都是必填参数。
+3、如果IsEnableCmqNotify的值是0的话，IsCreateNewQueue、CmqRegion和CmqQueueName都不能传。
+4、如果IsEnableKmsEncry的值是1的话，KmsRegion和KeyId属于必填项
+     */
     async CreateAudit(req, cb) {
         return this.request("CreateAudit", req, cb);
     }

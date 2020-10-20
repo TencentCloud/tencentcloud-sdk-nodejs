@@ -52,19 +52,19 @@ export declare class Client extends AbstractClient {
      */
     ExportVideoByEditorTrackData(req: ExportVideoByEditorTrackDataRequest, cb?: (error: string, rep: ExportVideoByEditorTrackDataResponse) => void): Promise<ExportVideoByEditorTrackDataResponse>;
     /**
-       * 获取任务详情信息，包含下面几个部分：
-  <li>任务基础信息：包括任务状态、错误信息、创建时间等；</li>
-  <li>导出项目输出信息：包括输出的素材 Id 等。</li>
-       */
+     * 获取任务详情信息，包含下面几个部分：
+<li>任务基础信息：包括任务状态、错误信息、创建时间等；</li>
+<li>导出项目输出信息：包括输出的素材 Id 等。</li>
+     */
     DescribeTaskDetail(req: DescribeTaskDetailRequest, cb?: (error: string, rep: DescribeTaskDetailResponse) => void): Promise<DescribeTaskDetailResponse>;
     /**
      *  创建素材链接或分类路径链接，将源资源信息链接到目标。
      */
     CreateLink(req: CreateLinkRequest, cb?: (error: string, rep: CreateLinkResponse) => void): Promise<CreateLinkResponse>;
     /**
-       * 修改团队信息，目前支持修改的操作有：
-  <li>修改团队名称。</li>
-       */
+     * 修改团队信息，目前支持修改的操作有：
+<li>修改团队名称。</li>
+     */
     ModifyTeam(req: ModifyTeamRequest, cb?: (error: string, rep: ModifyTeamResponse) => void): Promise<ModifyTeamResponse>;
     /**
      * 根据素材 Id 删除素材。
@@ -75,19 +75,19 @@ export declare class Client extends AbstractClient {
      */
     ModifyMaterial(req: ModifyMaterialRequest, cb?: (error: string, rep: ModifyMaterialResponse) => void): Promise<ModifyMaterialResponse>;
     /**
-       * 删除一个团队。
-  <li>要删除的团队必须没有归属的素材；</li>
-  <li>要删除的团队必须没有归属的分类。</li>
-       */
+     * 删除一个团队。
+<li>要删除的团队必须没有归属的素材；</li>
+<li>要删除的团队必须没有归属的分类。</li>
+     */
     DeleteTeam(req: DeleteTeamRequest, cb?: (error: string, rep: DeleteTeamResponse) => void): Promise<DeleteTeamResponse>;
     /**
      * 向一个团队中团队成员，并且指定成员的角色。
      */
     AddTeamMember(req: AddTeamMemberRequest, cb?: (error: string, rep: AddTeamMemberResponse) => void): Promise<AddTeamMemberResponse>;
     /**
-       * 移动某一个分类到另外一个分类下，也可用于分类重命名。
-  <li>如果 SourceClassPath = /素材/视频/NBA，DestinationClassPath = /素材/视频/篮球，当 DestinationClassPath 不存在时候，操作结果为重命名 ClassPath，如果 DestinationClassPath 存在时候，操作结果为产生新目录 /素材/视频/篮球/NBA。</li>
-       */
+     * 移动某一个分类到另外一个分类下，也可用于分类重命名。
+<li>如果 SourceClassPath = /素材/视频/NBA，DestinationClassPath = /素材/视频/篮球，当 DestinationClassPath 不存在时候，操作结果为重命名 ClassPath，如果 DestinationClassPath 存在时候，操作结果为产生新目录 /素材/视频/篮球/NBA。</li>
+     */
     MoveClass(req: MoveClassRequest, cb?: (error: string, rep: MoveClassResponse) => void): Promise<MoveClassResponse>;
     /**
      * 修改团队成员信息，包括成员备注、角色等。
@@ -126,10 +126,10 @@ export declare class Client extends AbstractClient {
      */
     ModifyProject(req: ModifyProjectRequest, cb?: (error: string, rep: ModifyProjectResponse) => void): Promise<ModifyProjectResponse>;
     /**
-       * 新增分类，用于管理素材。
-  <li>分类层数不能超过10；</li>
-  <li>子分类数不能超过10。</li>
-       */
+     * 新增分类，用于管理素材。
+<li>分类层数不能超过10；</li>
+<li>子分类数不能超过10。</li>
+     */
     CreateClass(req: CreateClassRequest, cb?: (error: string, rep: CreateClassResponse) => void): Promise<CreateClassResponse>;
     /**
      * 将云点播中的媒资添加到素材库中，供后续视频编辑使用。
@@ -140,15 +140,15 @@ export declare class Client extends AbstractClient {
      */
     ListMedia(req: ListMediaRequest, cb?: (error: string, rep: ListMediaResponse) => void): Promise<ListMediaResponse>;
     /**
-       * 创建云剪的编辑项目，支持创建视频剪辑、直播剪辑及导播台项目。
-  
-       */
+     * 创建云剪的编辑项目，支持创建视频剪辑、直播剪辑及导播台项目。
+
+     */
     CreateProject(req: CreateProjectRequest, cb?: (error: string, rep: CreateProjectResponse) => void): Promise<CreateProjectResponse>;
     /**
-       * 删除分类信息，删除时检验下述限制：
-  <li>分类路径必须存在；</li>
-  <li>分类下没有绑定素材。</li>
-       */
+     * 删除分类信息，删除时检验下述限制：
+<li>分类路径必须存在；</li>
+<li>分类下没有绑定素材。</li>
+     */
     DeleteClass(req: DeleteClassRequest, cb?: (error: string, rep: DeleteClassResponse) => void): Promise<DeleteClassResponse>;
     /**
      * 删除云剪编辑项目。

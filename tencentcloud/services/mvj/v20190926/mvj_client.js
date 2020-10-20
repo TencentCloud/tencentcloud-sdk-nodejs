@@ -28,10 +28,10 @@ class Client extends abstract_client_1.AbstractClient {
         super("mvj.tencentcloudapi.com", "2019-09-26", clientConfig);
     }
     /**
-       * 欢迎使用营销价值判断（Marketing Value Judgement，简称 MVJ）。
-  
-  营销价值判断（MVJ）是针对零售场景的风控服务，通过识别高价值顾客，以帮助零售商保障营销资金
-       */
+     * 欢迎使用营销价值判断（Marketing Value Judgement，简称 MVJ）。
+
+营销价值判断（MVJ）是针对零售场景的风控服务，通过识别高价值顾客，以帮助零售商保障营销资金
+     */
     async MarketingValueJudgement(req, cb) {
         return this.request("MarketingValueJudgement", req, cb);
     }

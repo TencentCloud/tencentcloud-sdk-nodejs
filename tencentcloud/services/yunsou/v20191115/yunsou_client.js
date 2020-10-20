@@ -28,16 +28,16 @@ class Client extends abstract_client_1.AbstractClient {
         super("yunsou.tencentcloudapi.com", "2019-11-15", clientConfig);
     }
     /**
-       * 上传云搜数据的API接口。
-  
-       */
+     * 上传云搜数据的API接口。
+
+     */
     async DataManipulation(req, cb) {
         return this.request("DataManipulation", req, cb);
     }
     /**
-       * 用于检索云搜中的数据。
-  
-       */
+     * 用于检索云搜中的数据。
+
+     */
     async DataSearch(req, cb) {
         return this.request("DataSearch", req, cb);
     }

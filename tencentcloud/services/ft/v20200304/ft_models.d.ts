@@ -3,17 +3,17 @@
  */
 export interface QueryFaceMorphJobResponse {
     /**
-     * 当前任务状态：排队中、处理中、处理失败或者处理完成
-     */
+      * 当前任务状态：排队中、处理中、处理失败或者处理完成
+      */
     JobStatus?: string;
     /**
-        * 人像渐变输出的结果信息
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 人像渐变输出的结果信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     FaceMorphOutput?: FaceMorphOutput;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -21,8 +21,8 @@ export interface QueryFaceMorphJobResponse {
  */
 export interface CancelFaceMorphJobResponse {
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -30,13 +30,13 @@ export interface CancelFaceMorphJobResponse {
  */
 export interface AgeInfo {
     /**
-     * 变化到的人脸年龄 [10,80]。
-     */
+      * 变化到的人脸年龄 [10,80]。
+      */
     Age: number;
     /**
-        * 人脸框位置。若不输入则选择 Image 或 Url 中面积最大的人脸。
-  您可以通过 [人脸检测与分析](https://cloud.tencent.com/document/api/867/32800)  接口获取人脸框位置信息。
-        */
+      * 人脸框位置。若不输入则选择 Image 或 Url 中面积最大的人脸。
+您可以通过 [人脸检测与分析](https://cloud.tencent.com/document/api/867/32800)  接口获取人脸框位置信息。
+      */
     FaceRect?: FaceRect;
 }
 /**
@@ -44,20 +44,20 @@ export interface AgeInfo {
  */
 export interface FaceRect {
     /**
-     * 人脸框左上角横坐标。
-     */
+      * 人脸框左上角横坐标。
+      */
     X: number;
     /**
-     * 人脸框左上角纵坐标。
-     */
+      * 人脸框左上角纵坐标。
+      */
     Y: number;
     /**
-     * 人脸框宽度。
-     */
+      * 人脸框宽度。
+      */
     Width: number;
     /**
-     * 人脸框高度。
-     */
+      * 人脸框高度。
+      */
     Height: number;
 }
 /**
@@ -65,13 +65,13 @@ export interface FaceRect {
  */
 export interface GenderInfo {
     /**
-     * 选择转换方向，0：男变女，1：女变男。
-     */
+      * 选择转换方向，0：男变女，1：女变男。
+      */
     Gender: number;
     /**
-        * 人脸框位置。若不输入则选择 Image 或 Url 中面积最大的人脸。
-  您可以通过 [人脸检测与分析](https://cloud.tencent.com/document/api/867/32800)  接口获取人脸框位置信息。
-        */
+      * 人脸框位置。若不输入则选择 Image 或 Url 中面积最大的人脸。
+您可以通过 [人脸检测与分析](https://cloud.tencent.com/document/api/867/32800)  接口获取人脸框位置信息。
+      */
     FaceRect?: FaceRect;
 }
 /**
@@ -79,26 +79,26 @@ export interface GenderInfo {
  */
 export interface SwapGenderPicRequest {
     /**
-        * 人脸转化性别信息。
-  您可以输入最多3个 GenderInfo 来实现给一张图中的最多3张人脸转换性别。
-        */
+      * 人脸转化性别信息。
+您可以输入最多3个 GenderInfo 来实现给一张图中的最多3张人脸转换性别。
+      */
     GenderInfos: Array<GenderInfo>;
     /**
-        * 图片 base64 数据，base64 编码后大小不可超过5M。
-  支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
-        */
+      * 图片 base64 数据，base64 编码后大小不可超过5M。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+      */
     Image?: string;
     /**
-        * 图片的 Url ，对应图片 base64 编码后大小不可超过5M。
-  图片的 Url、Image必须提供一个，如果都提供，只使用 Url。
-  图片存储于腾讯云的 Url 可保障更高下载速度和稳定性，建议图片存储于腾讯云。
-  非腾讯云存储的Url速度和稳定性可能受一定影响。
-  支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
-        */
+      * 图片的 Url ，对应图片 base64 编码后大小不可超过5M。
+图片的 Url、Image必须提供一个，如果都提供，只使用 Url。
+图片存储于腾讯云的 Url 可保障更高下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的Url速度和稳定性可能受一定影响。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+      */
     Url?: string;
     /**
-     * 返回图像方式（base64 或 url ) ，二选一。url有效期为1天。
-     */
+      * 返回图像方式（base64 或 url ) ，二选一。url有效期为1天。
+      */
     RspImgType?: string;
 }
 /**
@@ -106,12 +106,12 @@ export interface SwapGenderPicRequest {
  */
 export interface GradientInfo {
     /**
-     * 图片的展示时长，即单张图片静止不变的时间。GIF默认每张图片0.7s，视频默认每张图片0.5s。最大取值1s。
-     */
+      * 图片的展示时长，即单张图片静止不变的时间。GIF默认每张图片0.7s，视频默认每张图片0.5s。最大取值1s。
+      */
     Tempo?: number;
     /**
-     * 人像渐变的最长时间，即单张图片使用渐变特效的时间。 GIF默认值为0.5s，视频默值认为1s。最大取值1s。
-     */
+      * 人像渐变的最长时间，即单张图片使用渐变特效的时间。 GIF默认值为0.5s，视频默值认为1s。最大取值1s。
+      */
     MorphTime?: number;
 }
 /**
@@ -119,16 +119,16 @@ export interface GradientInfo {
  */
 export interface SwapGenderPicResponse {
     /**
-     * RspImgType 为 base64 时，返回处理后的图片 base64 数据。默认返回base64
-     */
+      * RspImgType 为 base64 时，返回处理后的图片 base64 数据。默认返回base64
+      */
     ResultImage?: string;
     /**
-     * RspImgType 为 url 时，返回处理后的图片 url 数据。
-     */
+      * RspImgType 为 url 时，返回处理后的图片 url 数据。
+      */
     ResultUrl?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -136,19 +136,19 @@ export interface SwapGenderPicResponse {
  */
 export interface FaceMorphOutput {
     /**
-        * 人像渐变输出的url
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 人像渐变输出的url
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     MorphUrl: string;
     /**
-        * 人像渐变输出的结果MD5，用于校验
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 人像渐变输出的结果MD5，用于校验
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     MorphMd5: string;
     /**
-        * 人像渐变输出的结果封面图base64字符串
-  注意：此字段可能返回 null，表示取不到有效值。
-        */
+      * 人像渐变输出的结果封面图base64字符串
+注意：此字段可能返回 null，表示取不到有效值。
+      */
     CoverImage: string;
 }
 /**
@@ -156,41 +156,41 @@ export interface FaceMorphOutput {
  */
 export interface MorphFaceRequest {
     /**
-        * 图片 base64 数据，base64 编码后大小不可超过5M。
-  jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
-  人员人脸总数量至少2张，不可超过5张。
-  若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
-  支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
-        */
+      * 图片 base64 数据，base64 编码后大小不可超过5M。
+jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
+人员人脸总数量至少2张，不可超过5张。
+若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+      */
     Images?: Array<string>;
     /**
-        * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
-  Url、Image必须提供一个，如果都提供，只使用 Url。图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。
-  非腾讯云存储的Url速度和稳定性可能受一定影响。
-  支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
-  人员人脸总数量不可超过5张。
-  若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
-        */
+      * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
+Url、Image必须提供一个，如果都提供，只使用 Url。图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的Url速度和稳定性可能受一定影响。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+人员人脸总数量不可超过5张。
+若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
+      */
     Urls?: Array<string>;
     /**
-     * 人脸渐变参数。可调整每张图片的展示时长、人像渐变的最长时间
-     */
+      * 人脸渐变参数。可调整每张图片的展示时长、人像渐变的最长时间
+      */
     GradientInfos?: Array<GradientInfo>;
     /**
-     * 视频帧率，取值[1,25]。默认10
-     */
+      * 视频帧率，取值[1,25]。默认10
+      */
     Fps?: number;
     /**
-     * 视频类型，取值[0,2]，其中0为MP4，1为GIF，2为MOV。目前仅支持MP4格式，默认为MP4格式
-     */
+      * 视频类型，取值[0,2]，其中0为MP4，1为GIF，2为MOV。目前仅支持MP4格式，默认为MP4格式
+      */
     OutputType?: number;
     /**
-     * 视频宽度，取值[128,1280]。默认值720
-     */
+      * 视频宽度，取值[128,1280]。默认值720
+      */
     OutputWidth?: number;
     /**
-     * 视频高度，取值[128,1280]。默认值1280
-     */
+      * 视频高度，取值[128,1280]。默认值1280
+      */
     OutputHeight?: number;
 }
 /**
@@ -198,16 +198,16 @@ export interface MorphFaceRequest {
  */
 export interface ChangeAgePicResponse {
     /**
-     * RspImgType 为 base64 时，返回处理后的图片 base64 数据。默认返回base64
-     */
+      * RspImgType 为 base64 时，返回处理后的图片 base64 数据。默认返回base64
+      */
     ResultImage?: string;
     /**
-     * RspImgType 为 url 时，返回处理后的图片 url 数据。
-     */
+      * RspImgType 为 url 时，返回处理后的图片 url 数据。
+      */
     ResultUrl?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -215,26 +215,26 @@ export interface ChangeAgePicResponse {
  */
 export interface ChangeAgePicRequest {
     /**
-        * 人脸变老变年轻信息。
-  您可以输入最多3个 AgeInfo 来实现给一张图中的最多3张人脸变老变年轻。
-        */
+      * 人脸变老变年轻信息。
+您可以输入最多3个 AgeInfo 来实现给一张图中的最多3张人脸变老变年轻。
+      */
     AgeInfos: Array<AgeInfo>;
     /**
-        * 图片 base64 数据，base64 编码后大小不可超过5M。
-  支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
-        */
+      * 图片 base64 数据，base64 编码后大小不可超过5M。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+      */
     Image?: string;
     /**
-        * 图片的 Url ，对应图片 base64 编码后大小不可超过5M。
-  图片的 Url、Image必须提供一个，如果都提供，只使用 Url。
-  图片存储于腾讯云的 Url 可保障更高下载速度和稳定性，建议图片存储于腾讯云。
-  非腾讯云存储的Url速度和稳定性可能受一定影响。
-  支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
-        */
+      * 图片的 Url ，对应图片 base64 编码后大小不可超过5M。
+图片的 Url、Image必须提供一个，如果都提供，只使用 Url。
+图片存储于腾讯云的 Url 可保障更高下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的Url速度和稳定性可能受一定影响。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+      */
     Url?: string;
     /**
-     * 返回图像方式（base64 或 url ) ，二选一。url有效期为1天。
-     */
+      * 返回图像方式（base64 或 url ) ，二选一。url有效期为1天。
+      */
     RspImgType?: string;
 }
 /**
@@ -242,8 +242,8 @@ export interface ChangeAgePicRequest {
  */
 export interface CancelFaceMorphJobRequest {
     /**
-     * 人像渐变任务Job id
-     */
+      * 人像渐变任务Job id
+      */
     JobId: string;
 }
 /**
@@ -251,25 +251,25 @@ export interface CancelFaceMorphJobRequest {
  */
 export interface FaceCartoonPicRequest {
     /**
-        * 图片 base64 数据，base64 编码后大小不可超过5M。
-  支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
-        */
+      * 图片 base64 数据，base64 编码后大小不可超过5M。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+      */
     Image?: string;
     /**
-        * 图片的 Url ，对应图片 base64 编码后大小不可超过5M。
-  图片的 Url、Image必须提供一个，如果都提供，只使用 Url。
-  图片存储于腾讯云的 Url 可保障更高下载速度和稳定性，建议图片存储于腾讯云。
-  非腾讯云存储的Url速度和稳定性可能受一定影响。
-  支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
-        */
+      * 图片的 Url ，对应图片 base64 编码后大小不可超过5M。
+图片的 Url、Image必须提供一个，如果都提供，只使用 Url。
+图片存储于腾讯云的 Url 可保障更高下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的Url速度和稳定性可能受一定影响。
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+      */
     Url?: string;
     /**
-     * 返回图像方式（base64 或 url ) ，二选一。url有效期为1天。
-     */
+      * 返回图像方式（base64 或 url ) ，二选一。url有效期为1天。
+      */
     RspImgType?: string;
     /**
-     * 关闭全图动漫化，传入true（不分大小写）即关闭全图动漫化。
-     */
+      * 关闭全图动漫化，传入true（不分大小写）即关闭全图动漫化。
+      */
     DisableGlobalEffect?: string;
 }
 /**
@@ -277,8 +277,8 @@ export interface FaceCartoonPicRequest {
  */
 export interface QueryFaceMorphJobRequest {
     /**
-     * 人像渐变任务Job id
-     */
+      * 人像渐变任务Job id
+      */
     JobId: string;
 }
 /**
@@ -286,16 +286,16 @@ export interface QueryFaceMorphJobRequest {
  */
 export interface FaceCartoonPicResponse {
     /**
-     * 结果图片Base64信息。
-     */
+      * 结果图片Base64信息。
+      */
     ResultImage?: string;
     /**
-     * RspImgType 为 url 时，返回处理后的图片 url 数据。(默认为base64)
-     */
+      * RspImgType 为 url 时，返回处理后的图片 url 数据。(默认为base64)
+      */
     ResultUrl?: string;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }
 /**
@@ -303,15 +303,15 @@ export interface FaceCartoonPicResponse {
  */
 export interface MorphFaceResponse {
     /**
-     * 人像渐变任务的Job id
-     */
+      * 人像渐变任务的Job id
+      */
     JobId?: string;
     /**
-     * 预估处理时间，粒度为秒
-     */
+      * 预估处理时间，粒度为秒
+      */
     EstimatedProcessTime?: number;
     /**
-     * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-     */
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
     RequestId?: string;
 }

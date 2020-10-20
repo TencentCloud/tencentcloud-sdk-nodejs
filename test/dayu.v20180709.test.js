@@ -888,6 +888,16 @@ it("dayu.v20180709.ModifyCCHostProtection", async function () {
     }
 })
 
+it("dayu.v20180709.DescribeBizTrend", async function () {
+    try {
+       const data = await client.DescribeBizTrend({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dayu.v20180709.DescribleRegionCount", async function () {
     try {
        const data = await client.DescribleRegionCount({})

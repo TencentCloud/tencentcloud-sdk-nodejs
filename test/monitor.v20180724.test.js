@@ -58,6 +58,16 @@ it("monitor.v20180724.BindingPolicyObject", async function () {
     }
 })
 
+it("monitor.v20180724.DescribeAlarmHistories", async function () {
+    try {
+       const data = await client.DescribeAlarmHistories({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.ModifyAlarmReceivers", async function () {
     try {
        const data = await client.ModifyAlarmReceivers({})
@@ -118,6 +128,16 @@ it("monitor.v20180724.DescribePolicyGroupInfo", async function () {
     }
 })
 
+it("monitor.v20180724.ModifyPolicyGroup", async function () {
+    try {
+       const data = await client.ModifyPolicyGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.DescribeProductList", async function () {
     try {
        const data = await client.DescribeProductList({})
@@ -158,9 +178,9 @@ it("monitor.v20180724.GetMonitorData", async function () {
     }
 })
 
-it("monitor.v20180724.ModifyPolicyGroup", async function () {
+it("monitor.v20180724.DescribeAllNamespaces", async function () {
     try {
-       const data = await client.ModifyPolicyGroup({})
+       const data = await client.DescribeAllNamespaces({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
