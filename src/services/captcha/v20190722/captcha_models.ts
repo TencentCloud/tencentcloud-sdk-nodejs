@@ -1,0 +1,1033 @@
+/*
+ * Copyright (c) 2018 THL A29 Limited, a Tencent company. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+/**
+ * DescribeCaptchaOperData返回参数结构体
+ */
+export interface DescribeCaptchaOperDataResponse {
+  /**
+   * 成功返回 0 其它失败
+   */
+  CaptchaCode?: number
+
+  /**
+      * 返回信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CaptchaMsg?: string
+
+  /**
+      * 用户操作数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data?: CaptchaOperDataRes
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCaptchaOperData方法 拦截情况type = 2 返回的数据结构
+ */
+export interface CaptchaOperDataInterceptUnit {
+  /**
+   * 时间
+   */
+  DateKey: string
+
+  /**
+   * 停止验证数量
+   */
+  AllStopCnt: number
+
+  /**
+   * 图片停止加载数量
+   */
+  PicStopCnt: number
+
+  /**
+   * 策略拦截数量
+   */
+  StrategyStopCnt: number
+}
+
+/**
+ * DescribeCaptchaOperData方法 尝试次数分布 type = 4
+ */
+export interface CaptchaOperDataTryTimesDistributeUnit {
+  /**
+   * 尝试次数
+   */
+  TryCount: number
+
+  /**
+   * 用户请求数量
+   */
+  UserCount: number
+}
+
+/**
+ * DescribeCaptchaMiniOperData返回参数结构体
+ */
+export interface DescribeCaptchaMiniOperDataResponse {
+  /**
+   * 成功返回 0 其它失败
+   */
+  CaptchaCode?: number
+
+  /**
+      * 返回信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CaptchaMsg?: string
+
+  /**
+      * 用户操作数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data?: CaptchaOperDataRes
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCaptchaMiniDataSum返回参数结构体
+ */
+export interface DescribeCaptchaMiniDataSumResponse {
+  /**
+      * 请求总量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GetSum?: number
+
+  /**
+      * 请求验证成功量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VfySuccSum?: number
+
+  /**
+      * 请求验证量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VfySum?: number
+
+  /**
+      * 拦截攻击量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AttackSum?: number
+
+  /**
+      * 返回信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CaptchaMsg?: string
+
+  /**
+      * 成功返回0  其它失败
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CaptchaCode?: number
+
+  /**
+      * 票据校验总量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CheckTicketSum?: number
+
+  /**
+      * 票据验证通过量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TicketThroughputSum?: number
+
+  /**
+      * 票据验证拦截量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TicketInterceptSum?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateCaptchaAppIdInfo请求参数结构体
+ */
+export interface UpdateCaptchaAppIdInfoRequest {
+  /**
+   * 验证码应用ID
+   */
+  CaptchaAppId: number
+
+  /**
+   * 应用名
+   */
+  AppName: string
+
+  /**
+   * 域名限制
+   */
+  DomainLimit: string
+
+  /**
+   * 场景类型
+   */
+  SceneType: number
+
+  /**
+   * 验证码类型
+   */
+  CapType: number
+
+  /**
+   * 风险级别
+   */
+  EvilInterceptGrade: number
+
+  /**
+   * 智能检测
+   */
+  SmartVerify: number
+
+  /**
+   * 开启智能引擎
+   */
+  SmartEngine: number
+
+  /**
+   * web风格
+   */
+  SchemeColor: string
+
+  /**
+   * 语言
+   */
+  CaptchaLanguage: number
+
+  /**
+   * 告警邮箱
+   */
+  MailAlarm: string
+
+  /**
+   * 是否全屏
+   */
+  TopFullScreen: number
+
+  /**
+   * 流量限制
+   */
+  TrafficThreshold: number
+}
+
+/**
+ * DescribeCaptchaOperData 接口 返回数据类型集合
+ */
+export interface CaptchaOperDataRes {
+  /**
+      * 验证码加载耗时数据返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OperDataLoadTimeUnitArray: Array<CaptchaOperDataLoadTimeUnit>
+
+  /**
+      * 验证码拦截情况数据返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OperDataInterceptUnitArray: Array<CaptchaOperDataInterceptUnit>
+
+  /**
+      * 验证码尝试次数数据返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OperDataTryTimesUnitArray: Array<CaptchaOperDataTryTimesUnit>
+
+  /**
+      * 验证码尝试次数分布数据返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OperDataTryTimesDistributeUnitArray: Array<CaptchaOperDataTryTimesDistributeUnit>
+}
+
+/**
+ * DescribeCaptchaTicketData 返回的数据结构
+ */
+export interface TicketInterceptUnit {
+  /**
+   * 时间
+   */
+  DateKey: string
+
+  /**
+   * 票据验证拦截量
+   */
+  Intercept: number
+}
+
+/**
+ * DescribeCaptchaUserAllAppId请求参数结构体
+ */
+export type DescribeCaptchaUserAllAppIdRequest = null
+
+/**
+ * DescribeCaptchaMiniData返回参数结构体
+ */
+export interface DescribeCaptchaMiniDataResponse {
+  /**
+   * 返回码 0 成功 其它失败
+   */
+  CaptchaCode?: number
+
+  /**
+      * 数据数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data?: Array<CaptchaQueryData>
+
+  /**
+      * 返回信息描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CaptchaMsg?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateCaptchaAppIdInfo返回参数结构体
+ */
+export interface UpdateCaptchaAppIdInfoResponse {
+  /**
+   * 返回码 0 成功，其它失败
+   */
+  CaptchaCode?: number
+
+  /**
+      * 返回操作信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CaptchaMsg?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 用户注册的APPID和应用名称对象
+ */
+export interface CaptchaUserAllAppId {
+  /**
+   * 验证码应用ID
+   */
+  CaptchaAppId: number
+
+  /**
+   * 注册应用名称
+   */
+  AppName: string
+
+  /**
+   * 腾讯云APPID
+   */
+  TcAppId: number
+
+  /**
+   * 渠道信息
+   */
+  ChannelInfo: string
+}
+
+/**
+ * DescribeCaptchaDataSum返回参数结构体
+ */
+export interface DescribeCaptchaDataSumResponse {
+  /**
+   * 请求总量
+   */
+  GetSum?: number
+
+  /**
+   * 请求验证成功量
+   */
+  VfySuccSum?: number
+
+  /**
+   * 请求验证量
+   */
+  VfySum?: number
+
+  /**
+   * 拦截攻击量
+   */
+  AttackSum?: number
+
+  /**
+      * 返回信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CaptchaMsg?: string
+
+  /**
+   * 成功返回0  其它失败
+   */
+  CaptchaCode?: number
+
+  /**
+   * 票据校验量
+   */
+  CheckTicketSum?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCaptchaTicketData请求参数结构体
+ */
+export interface DescribeCaptchaTicketDataRequest {
+  /**
+   * 验证码应用ID
+   */
+  CaptchaAppId: number
+
+  /**
+   * 查询开始时间
+   */
+  Start: number
+}
+
+/**
+ * DescribeCaptchaMiniDataSum请求参数结构体
+ */
+export interface DescribeCaptchaMiniDataSumRequest {
+  /**
+   * 验证码应用ID
+   */
+  CaptchaAppId: number
+
+  /**
+   * 查询开始时间
+   */
+  Start: number
+
+  /**
+   * 查询结束时间
+   */
+  End: number
+}
+
+/**
+ * DescribeCaptchaOperData操作数据查询尝试次数 type = 3
+ */
+export interface CaptchaOperDataTryTimesUnit {
+  /**
+   * 时间
+   */
+  DateKey: string
+
+  /**
+   * 平均尝试次数
+   */
+  CntPerPass: Array<number>
+
+  /**
+   * market平均尝试次数
+   */
+  MarketCntPerPass: number
+}
+
+/**
+ * DescribeCaptchaOperData请求参数结构体
+ */
+export interface DescribeCaptchaOperDataRequest {
+  /**
+   * 验证码应用ID
+   */
+  CaptchaAppId: number
+
+  /**
+   * 查询开始时间
+   */
+  Start: number
+
+  /**
+   * 查询类型
+   */
+  Type: number
+}
+
+/**
+ * DescribeCaptchaDataSum请求参数结构体
+ */
+export interface DescribeCaptchaDataSumRequest {
+  /**
+   * 验证码应用ID
+   */
+  CaptchaAppId: number
+
+  /**
+   * 查询开始时间
+   */
+  Start: number
+
+  /**
+   * 查询结束时间
+   */
+  End: number
+}
+
+/**
+ * DescribeCaptchaTicketData 返回的数据结构
+ */
+export interface TicketAmountUnit {
+  /**
+   * 时间
+   */
+  DateKey: string
+
+  /**
+   * 票据验证总量
+   */
+  Amount: number
+}
+
+/**
+ * 该类型为DescribeCaptchaData 方法返回数据类型
+ */
+export interface CaptchaQueryData {
+  /**
+   * 数量
+   */
+  Cnt: number
+
+  /**
+   * 时间
+   */
+  Date: string
+}
+
+/**
+ * DescribeCaptchaTicketData 返回的数据结构
+ */
+export interface TicketThroughUnit {
+  /**
+   * 时间
+   */
+  DateKey: string
+
+  /**
+   * 票据验证的通过量
+   */
+  Through: number
+}
+
+/**
+ * DescribeCaptchaData返回参数结构体
+ */
+export interface DescribeCaptchaDataResponse {
+  /**
+   * 返回码 0 成功 其它失败
+   */
+  CaptchaCode?: number
+
+  /**
+      * 数据数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data?: Array<CaptchaQueryData>
+
+  /**
+      * 返回信息描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CaptchaMsg?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCaptchaResult请求参数结构体
+ */
+export interface DescribeCaptchaResultRequest {
+  /**
+   * 固定填值：9。可在控制台配置不同验证码类型。
+   */
+  CaptchaType: number
+
+  /**
+   * 前端回调函数返回的用户验证票据
+   */
+  Ticket: string
+
+  /**
+   * 用户操作来源的外网 IP
+   */
+  UserIp: string
+
+  /**
+   * 前端回调函数返回的随机字符串
+   */
+  Randstr: string
+
+  /**
+   * 验证码应用ID
+   */
+  CaptchaAppId: number
+
+  /**
+   * 用于服务器端校验验证码票据的验证密钥，请妥善保密，请勿泄露给第三方
+   */
+  AppSecretKey: string
+
+  /**
+   * 业务 ID，网站或应用在多个业务中使用此服务，通过此 ID 区分统计数据
+   */
+  BusinessId?: number
+
+  /**
+   * 场景 ID，网站或应用的业务下有多个场景使用此服务，通过此 ID 区分统计数据
+   */
+  SceneId?: number
+
+  /**
+   * mac 地址或设备唯一标识
+   */
+  MacAddress?: string
+
+  /**
+   * 手机设备号
+   */
+  Imei?: string
+
+  /**
+   * 是否返回前端获取验证码时间，取值1：需要返回
+   */
+  NeedGetCaptchaTime?: number
+}
+
+/**
+ * DescribeCaptchaResult返回参数结构体
+ */
+export interface DescribeCaptchaResultResponse {
+  /**
+      * 1	OK	验证通过
+6	user code len error	验证码长度不匹配
+7	captcha no match	验证码答案不匹配/Randstr参数不匹配
+8	verify timeout	验证码签名超时
+9	Sequnce repeat	验证码签名重放
+10	Sequnce invalid	验证码签名序列
+11	Cookie invalid	验证码cookie信息不合法
+12	sig len error	签名长度错误
+13	verify ip no match	ip不匹配
+15	decrypt fail	验证码签名解密失败
+16	appid no match	验证码强校验appid错误
+17	cmd no much	验证码系统命令不匹配
+18	uin no match	号码不匹配
+19	seq redirect	重定向验证
+20	opt no vcode	操作使用pt免验证码校验错误
+21	diff	差别，验证错误
+22	captcha type not match	验证码类型与拉取时不一致
+23	verify type error	验证类型错误
+24	invalid pkg	非法请求包
+25	bad visitor	策略拦截
+26	system busy	系统内部错误
+100	param err	appsecretkey 参数校验错误
+      */
+  CaptchaCode?: number
+
+  /**
+      * 状态描述及验证错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CaptchaMsg?: string
+
+  /**
+      * [0,100]，恶意等级
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EvilLevel?: number
+
+  /**
+      * 前端获取验证码时间，时间戳格式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GetCaptchaTime?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 操作数据查询方法DescribeCaptchaOperData 的返回结果，安全验证码加载耗时type = 1
+ */
+export interface CaptchaOperDataLoadTimeUnit {
+  /**
+   * 时间
+   */
+  DateKey: string
+
+  /**
+   * Market加载时间
+   */
+  MarketLoadTime: number
+
+  /**
+   * AppId加载时间
+   */
+  AppIdLoadTime: number
+}
+
+/**
+ * DescribeCaptchaMiniOperData请求参数结构体
+ */
+export interface DescribeCaptchaMiniOperDataRequest {
+  /**
+   * 验证码应用ID
+   */
+  CaptchaAppId: number
+
+  /**
+   * 查询开始时间
+   */
+  Start: number
+
+  /**
+   * 查询类型
+   */
+  Type: number
+}
+
+/**
+ * DescribeCaptchaAppIdInfo请求参数结构体
+ */
+export interface DescribeCaptchaAppIdInfoRequest {
+  /**
+   * 验证码应用注册APPID
+   */
+  CaptchaAppId: number
+}
+
+/**
+ * DescribeCaptchaAppIdInfo返回参数结构体
+ */
+export interface DescribeCaptchaAppIdInfoResponse {
+  /**
+   * 界面风格
+   */
+  SchemeColor?: string
+
+  /**
+   * 语言
+   */
+  Language?: number
+
+  /**
+   * 场景
+   */
+  SceneType?: number
+
+  /**
+   * 防控风险等级
+   */
+  EvilInterceptGrade?: number
+
+  /**
+   * 智能验证
+   */
+  SmartVerify?: number
+
+  /**
+   * 智能引擎
+   */
+  SmartEngine?: number
+
+  /**
+   * 验证码类型
+   */
+  CapType?: number
+
+  /**
+   * 应用名称
+   */
+  AppName?: string
+
+  /**
+   * 域名限制
+   */
+  DomainLimit?: string
+
+  /**
+      * 邮件告警
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MailAlarm?: Array<string>
+
+  /**
+   * 流量控制
+   */
+  TrafficThreshold?: number
+
+  /**
+   * 加密key
+   */
+  EncryptKey?: string
+
+  /**
+   * 是否全屏
+   */
+  TopFullScreen?: number
+
+  /**
+   * 成功返回0 其它失败
+   */
+  CaptchaCode?: number
+
+  /**
+      * 返回操作信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CaptchaMsg?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCaptchaUserAllAppId返回参数结构体
+ */
+export interface DescribeCaptchaUserAllAppIdResponse {
+  /**
+      * 用户注册的所有Appid和应用名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data?: Array<CaptchaUserAllAppId>
+
+  /**
+   * 成功返回 0  其它失败
+   */
+  CaptchaCode?: number
+
+  /**
+      * 返回操作信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CaptchaMsg?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCaptchaData请求参数结构体
+ */
+export interface DescribeCaptchaDataRequest {
+  /**
+   * 验证码应用ID
+   */
+  CaptchaAppId: number
+
+  /**
+   * 查询开始时间
+   */
+  Start: number
+
+  /**
+   * 查询结束时间
+   */
+  End: number
+
+  /**
+   * 查询类型
+   */
+  Type: number
+}
+
+/**
+ * DescribeCaptchaMiniResult请求参数结构体
+ */
+export interface DescribeCaptchaMiniResultRequest {
+  /**
+   * 固定填值：9（滑块验证码）
+   */
+  CaptchaType: number
+
+  /**
+   * 验证码返回给用户的票据
+   */
+  Ticket: string
+
+  /**
+   * 用户操作来源的外网 IP
+   */
+  UserIp: string
+
+  /**
+   * 验证码应用APPID
+   */
+  CaptchaAppId: number
+
+  /**
+   * 用于服务器端校验验证码票据的验证密钥，请妥善保密，请勿泄露给第三方
+   */
+  AppSecretKey: string
+
+  /**
+   * 业务 ID，网站或应用在多个业务中使用此服务，通过此 ID 区分统计数据
+   */
+  BusinessId?: number
+
+  /**
+   * 场景 ID，网站或应用的业务下有多个场景使用此服务，通过此 ID 区分统计数据
+   */
+  SceneId?: number
+
+  /**
+   * mac 地址或设备唯一标识
+   */
+  MacAddress?: string
+
+  /**
+   * 手机设备号
+   */
+  Imei?: string
+}
+
+/**
+ * DescribeCaptchaTicketData返回参数结构体
+ */
+export interface DescribeCaptchaTicketDataResponse {
+  /**
+   * 成功返回 0 其它失败
+   */
+  CaptchaCode?: number
+
+  /**
+      * 返回信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CaptchaMsg?: string
+
+  /**
+      * 验证码票据信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data?: CaptchaTicketDataRes
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCaptchaTicketData 接口 返回数据类型集合
+ */
+export interface CaptchaTicketDataRes {
+  /**
+   * 票据验证总量返回
+   */
+  TicketAmountArray: Array<TicketAmountUnit>
+
+  /**
+   * 票据验证通过量返回
+   */
+  TicketThroughArray: Array<TicketThroughUnit>
+
+  /**
+   * 票据验证拦截量返回
+   */
+  TicketInterceptArray: Array<TicketInterceptUnit>
+}
+
+/**
+ * DescribeCaptchaMiniResult返回参数结构体
+ */
+export interface DescribeCaptchaMiniResultResponse {
+  /**
+      * 1       ticket verification succeeded     票据验证成功
+7       CaptchaAppId does not match     票据与验证码应用APPID不匹配
+8       ticket expired     票据超时
+10     ticket format error     票据格式不正确
+15     ticket decryption failed     票据解密失败
+16     CaptchaAppId wrong format     检查验证码应用APPID错误
+21     ticket error     票据验证错误
+26     system internal error     系统内部错误
+100   param err     参数校验错误
+      */
+  CaptchaCode?: number
+
+  /**
+      * 状态描述及验证错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CaptchaMsg?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCaptchaMiniData请求参数结构体
+ */
+export interface DescribeCaptchaMiniDataRequest {
+  /**
+   * 验证码应用ID
+   */
+  CaptchaAppId: number
+
+  /**
+   * 查询开始时间
+   */
+  Start: number
+
+  /**
+   * 查询结束时间
+   */
+  End: number
+
+  /**
+   * 查询类型
+   */
+  Type: number
+}

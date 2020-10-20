@@ -1,0 +1,2630 @@
+/*
+ * Copyright (c) 2018 THL A29 Limited, a Tencent company. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+/**
+ * InitDCDBInstances返回参数结构体
+ */
+export interface InitDCDBInstancesResponse {
+  /**
+   * 异步任务ID，可通过 DescribeFlow 查询任务状态。
+   */
+  FlowIds?: Array<number>
+
+  /**
+   * 透传入参。
+   */
+  InstanceIds?: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpgradeDCDBInstance返回参数结构体
+ */
+export interface UpgradeDCDBInstanceResponse {
+  /**
+      * 长订单号。可以据此调用 DescribeOrders
+ 查询订单详细信息，或在支付失败时调用用户账号相关接口进行支付。
+      */
+  DealName?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAccountPrivileges返回参数结构体
+ */
+export interface DescribeAccountPrivilegesResponse {
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+
+  /**
+   * 权限列表。
+   */
+  Privileges?: Array<string>
+
+  /**
+   * 数据库账号用户名
+   */
+  UserName?: string
+
+  /**
+   * 数据库账号Host
+   */
+  Host?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDatabases请求参数结构体
+ */
+export interface DescribeDatabasesRequest {
+  /**
+   * 实例 ID，形如：dcdbt-ow7t8lmc。
+   */
+  InstanceId: string
+}
+
+/**
+ * DB参数描述
+ */
+export interface ParamDesc {
+  /**
+   * 参数名字
+   */
+  Param: string
+
+  /**
+   * 当前参数值
+   */
+  Value: string
+
+  /**
+      * 设置过的值，参数生效后，该值和value一样。未设置过就不返回该字段。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SetValue: string
+
+  /**
+   * 系统默认值
+   */
+  Default: string
+
+  /**
+   * 参数限制
+   */
+  Constraint: ParamConstraint
+
+  /**
+   * 是否有设置过值，false:没有设置过值，true:有设置过值。
+   */
+  HaveSetValue: boolean
+}
+
+/**
+ * DescribeDBParameters请求参数结构体
+ */
+export interface DescribeDBParametersRequest {
+  /**
+   * 实例 ID，形如：dcdbt-ow7t8lmc。
+   */
+  InstanceId: string
+}
+
+/**
+ * DescribeAccounts请求参数结构体
+ */
+export interface DescribeAccountsRequest {
+  /**
+   * 实例ID，形如：dcdbt-ow728lmc。
+   */
+  InstanceId: string
+}
+
+/**
+ * 按机型分类的规格配置
+ */
+export interface SpecConfig {
+  /**
+   * 规格机型
+   */
+  Machine: string
+
+  /**
+   * 规格列表
+   */
+  SpecConfigInfos: Array<SpecConfigInfo>
+}
+
+/**
+ * DescribeDCDBPrice返回参数结构体
+ */
+export interface DescribeDCDBPriceResponse {
+  /**
+   * 原价，单位：分
+   */
+  OriginalPrice?: number
+
+  /**
+   * 实际价格，单位：分。受折扣等影响，可能和原价不同。
+   */
+  Price?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RenewDCDBInstance返回参数结构体
+ */
+export interface RenewDCDBInstanceResponse {
+  /**
+      * 长订单号。可以据此调用 DescribeOrders
+ 查询订单详细信息，或在支付失败时调用用户账号相关接口进行支付。
+      */
+  DealName?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDBSyncMode返回参数结构体
+ */
+export interface DescribeDBSyncModeResponse {
+  /**
+   * 同步模式：0 异步，1 强同步， 2 强同步可退化
+   */
+  SyncMode?: number
+
+  /**
+   * 是否有修改流程在执行中：1 是， 0 否。
+   */
+  IsModifying?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDCDBUpgradePrice返回参数结构体
+ */
+export interface DescribeDCDBUpgradePriceResponse {
+  /**
+   * 原价，单位：分
+   */
+  OriginalPrice?: number
+
+  /**
+   * 实际价格，单位：分。受折扣等影响，可能和原价不同。
+   */
+  Price?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateAccount请求参数结构体
+ */
+export interface CreateAccountRequest {
+  /**
+   * 实例 ID，形如：dcdbt-ow728lmc，可以通过 DescribeDCDBInstances 查询实例详情获得。
+   */
+  InstanceId: string
+
+  /**
+   * AccountName
+   */
+  UserName: string
+
+  /**
+   * 可以登录的主机，与mysql 账号的 host 格式一致，可以支持通配符，例如 %，10.%，10.20.%。
+   */
+  Host: string
+
+  /**
+   * 账号密码，由字母、数字或常见符号组成，不能包含分号、单引号和双引号，长度为6~32位。
+   */
+  Password: string
+
+  /**
+   * 是否创建为只读账号，0：否， 1：该账号的sql请求优先选择备机执行，备机不可用时选择主机执行，2：优先选择备机执行，备机不可用时操作失败，3：只从备机读取。
+   */
+  ReadOnly?: number
+
+  /**
+   * 账号备注，可以包含中文、英文字符、常见符号和数字，长度为0~256字符
+   */
+  Description?: string
+
+  /**
+      * 如果备机延迟超过本参数设置值，系统将认为备机发生故障
+建议该参数值大于10。当ReadOnly选择1、2时该参数生效。
+      */
+  DelayThresh?: number
+}
+
+/**
+ * 项目信息描述
+ */
+export interface Project {
+  /**
+   * 项目ID
+   */
+  ProjectId: number
+
+  /**
+   * 资源拥有者（主账号）uin
+   */
+  OwnerUin: number
+
+  /**
+   * 应用Id
+   */
+  AppId: number
+
+  /**
+   * 项目名称
+   */
+  Name: string
+
+  /**
+   * 创建者uin
+   */
+  CreatorUin: number
+
+  /**
+   * 来源平台
+   */
+  SrcPlat: string
+
+  /**
+   * 来源AppId
+   */
+  SrcAppId: number
+
+  /**
+   * 项目状态,0正常，-1关闭。默认项目为3
+   */
+  Status: number
+
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 是否默认项目，1 是，0 不是
+   */
+  IsDefault: number
+
+  /**
+   * 描述信息
+   */
+  Info: string
+}
+
+/**
+ * CloneAccount返回参数结构体
+ */
+export interface CloneAccountResponse {
+  /**
+   * 异步任务流程ID
+   */
+  FlowId?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyAccountDescription返回参数结构体
+ */
+export interface ModifyAccountDescriptionResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateDCDBInstance返回参数结构体
+ */
+export interface CreateDCDBInstanceResponse {
+  /**
+      * 长订单号。可以据此调用 DescribeOrders
+ 查询订单详细信息，或在支付失败时调用用户账号相关接口进行支付。
+      */
+  DealName?: string
+
+  /**
+      * 订单对应的实例 ID 列表，如果此处没有返回实例 ID，可以通过订单查询接口获取。还可通过实例查询接口查询实例是否创建完成。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceIds?: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 参数约束
+ */
+export interface ParamConstraint {
+  /**
+   * 约束类型,如枚举enum，区间section
+   */
+  Type: string
+
+  /**
+   * 约束类型为enum时的可选值列表
+   */
+  Enum: string
+
+  /**
+      * 约束类型为section时的范围
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Range: ConstraintRange
+
+  /**
+   * 约束类型为string时的可选值列表
+   */
+  String: string
+}
+
+/**
+ * ModifyDBInstancesProject返回参数结构体
+ */
+export interface ModifyDBInstancesProjectResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 数据库视图信息
+ */
+export interface DatabaseView {
+  /**
+   * 视图名称
+   */
+  View: string
+}
+
+/**
+ * DescribeDBLogFiles请求参数结构体
+ */
+export interface DescribeDBLogFilesRequest {
+  /**
+   * 实例 ID，形如：dcdbt-ow7t8lmc。
+   */
+  InstanceId: string
+
+  /**
+   * 分片 ID，形如：shard-7noic7tv
+   */
+  ShardId: string
+
+  /**
+   * 请求日志类型，取值只能为1、2、3或者4。1-binlog，2-冷备，3-errlog，4-slowlog。
+   */
+  Type: number
+}
+
+/**
+ * DescribeOrders返回参数结构体
+ */
+export interface DescribeOrdersResponse {
+  /**
+   * 返回的订单数量。
+   */
+  TotalCount?: Array<number>
+
+  /**
+   * 订单信息列表。
+   */
+  Deals?: Array<Deal>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ResetAccountPassword请求参数结构体
+ */
+export interface ResetAccountPasswordRequest {
+  /**
+   * 实例 ID，形如：dcdbt-ow728lmc。
+   */
+  InstanceId: string
+
+  /**
+   * 登录用户名。
+   */
+  UserName: string
+
+  /**
+   * 用户允许的访问 host，用户名+host唯一确定一个账号。
+   */
+  Host: string
+
+  /**
+   * 新密码，由字母、数字或常见符号组成，不能包含分号、单引号和双引号，长度为6~32位。
+   */
+  Password: string
+}
+
+/**
+ * CopyAccountPrivileges返回参数结构体
+ */
+export interface CopyAccountPrivilegesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CloneAccount请求参数结构体
+ */
+export interface CloneAccountRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 源用户账户名
+   */
+  SrcUser: string
+
+  /**
+   * 源用户HOST
+   */
+  SrcHost: string
+
+  /**
+   * 目的用户账户名
+   */
+  DstUser: string
+
+  /**
+   * 目的用户HOST
+   */
+  DstHost: string
+
+  /**
+   * 目的用户账户描述
+   */
+  DstDesc?: string
+}
+
+/**
+ * DescribeDCDBRenewalPrice请求参数结构体
+ */
+export interface DescribeDCDBRenewalPriceRequest {
+  /**
+   * 待续费的实例ID。形如：dcdbt-ow728lmc，可以通过 DescribeDCDBInstances 查询实例详情获得。
+   */
+  InstanceId: string
+
+  /**
+   * 续费时长，单位：月。不传则默认为1个月。
+   */
+  Period?: number
+}
+
+/**
+ * 修改参数结果
+ */
+export interface ParamModifyResult {
+  /**
+   * 修改参数名字
+   */
+  Param: string
+
+  /**
+   * 参数修改结果。0表示修改成功；-1表示修改失败；-2表示该参数值非法
+   */
+  Code: number
+}
+
+/**
+ * DescribeDCDBPrice请求参数结构体
+ */
+export interface DescribeDCDBPriceRequest {
+  /**
+   * 欲新购实例的可用区ID。
+   */
+  Zone: string
+
+  /**
+   * 欲购买实例的数量，目前支持购买1-10个实例
+   */
+  Count: number
+
+  /**
+   * 欲购买的时长，单位：月。
+   */
+  Period: number
+
+  /**
+      * 单个分片节点个数大小，可以通过 DescribeShardSpec
+ 查询实例规格获得。
+      */
+  ShardNodeCount: number
+
+  /**
+      * 分片内存大小，单位：GB，可以通过 DescribeShardSpec
+ 查询实例规格获得。
+      */
+  ShardMemory: number
+
+  /**
+      * 分片存储空间大小，单位：GB，可以通过 DescribeShardSpec
+ 查询实例规格获得。
+      */
+  ShardStorage: number
+
+  /**
+   * 实例分片个数，可选范围2-8，可以通过升级实例进行新增分片到最多64个分片。
+   */
+  ShardCount: number
+
+  /**
+   * 付费类型。postpaid：按量付费   prepaid：预付费
+   */
+  Paymode?: string
+}
+
+/**
+ * 数据库函数信息
+ */
+export interface DatabaseFunction {
+  /**
+   * 函数名称
+   */
+  Func: string
+}
+
+/**
+ * DescribeSqlLogs请求参数结构体
+ */
+export interface DescribeSqlLogsRequest {
+  /**
+   * 实例 ID，形如：dcdbt-ow728lmc，可以通过 DescribeDCDBInstances 查询实例详情获得。
+   */
+  InstanceId: string
+
+  /**
+   * SQL日志偏移。
+   */
+  Offset?: number
+
+  /**
+   * 拉取数量（0-10000，为0时拉取总数信息）。
+   */
+  Limit?: number
+}
+
+/**
+ * ResetAccountPassword返回参数结构体
+ */
+export interface ResetAccountPasswordResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDCDBSaleInfo请求参数结构体
+ */
+export type DescribeDCDBSaleInfoRequest = null
+
+/**
+ * 升级实例 -- 扩容分片类型
+ */
+export interface ExpandShardConfig {
+  /**
+   * 分片ID数组
+   */
+  ShardInstanceIds: Array<string>
+
+  /**
+   * 分片内存大小，单位 GB
+   */
+  ShardMemory: number
+
+  /**
+   * 分片存储大小，单位 GB
+   */
+  ShardStorage: number
+}
+
+/**
+ * RenewDCDBInstance请求参数结构体
+ */
+export interface RenewDCDBInstanceRequest {
+  /**
+   * 待续费的实例ID。形如：dcdbt-ow728lmc，可以通过 DescribeDCDBInstances 查询实例详情获得。
+   */
+  InstanceId: string
+
+  /**
+   * 续费时长，单位：月。
+   */
+  Period: number
+
+  /**
+   * 是否自动使用代金券进行支付，默认不使用。
+   */
+  AutoVoucher?: boolean
+
+  /**
+   * 代金券ID列表，目前仅支持指定一张代金券。
+   */
+  VoucherIds?: Array<string>
+}
+
+/**
+ * 分片节点可用区选择
+ */
+export interface ShardZoneChooseInfo {
+  /**
+   * 主可用区
+   */
+  MasterZone: ZonesInfo
+
+  /**
+   * 可选的从可用区
+   */
+  SlaveZones: Array<ZonesInfo>
+}
+
+/**
+ * 数据库表信息
+ */
+export interface DatabaseTable {
+  /**
+   * 表名
+   */
+  Table: string
+}
+
+/**
+ * 订单信息
+ */
+export interface Deal {
+  /**
+   * 订单号
+   */
+  DealName: string
+
+  /**
+   * 所属账号
+   */
+  OwnerUin: string
+
+  /**
+   * 商品数量
+   */
+  Count: number
+
+  /**
+   * 关联的流程 Id，可用于查询流程执行状态
+   */
+  FlowId: number
+
+  /**
+      * 只有创建实例的订单会填充该字段，表示该订单创建的实例的 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceIds: Array<string>
+
+  /**
+   * 付费模式，0后付费/1预付费
+   */
+  PayMode: number
+}
+
+/**
+ * GrantAccountPrivileges请求参数结构体
+ */
+export interface GrantAccountPrivilegesRequest {
+  /**
+   * 实例 ID，形如：dcdbt-ow728lmc。
+   */
+  InstanceId: string
+
+  /**
+   * 登录用户名。
+   */
+  UserName: string
+
+  /**
+   * 用户允许的访问 host，用户名+host唯一确定一个账号。
+   */
+  Host: string
+
+  /**
+   * 数据库名。如果为 \*，表示查询全局权限（即 \*.\*），此时忽略 Type 和 Object 参数
+   */
+  DbName: string
+
+  /**
+      * 全局权限： SELECT，INSERT，UPDATE，DELETE，CREATE，DROP，REFERENCES，INDEX，ALTER，CREATE TEMPORARY TABLES，LOCK TABLES，EXECUTE，CREATE VIEW，SHOW VIEW，CREATE ROUTINE，ALTER ROUTINE，EVENT，TRIGGER，SHOW DATABASES 
+库权限： SELECT，INSERT，UPDATE，DELETE，CREATE，DROP，REFERENCES，INDEX，ALTER，CREATE TEMPORARY TABLES，LOCK TABLES，EXECUTE，CREATE VIEW，SHOW VIEW，CREATE ROUTINE，ALTER ROUTINE，EVENT，TRIGGER 
+表/视图权限： SELECT，INSERT，UPDATE，DELETE，CREATE，DROP，REFERENCES，INDEX，ALTER，CREATE VIEW，SHOW VIEW，TRIGGER 
+存储过程/函数权限： ALTER ROUTINE，EXECUTE 
+字段权限： INSERT，REFERENCES，SELECT，UPDATE
+      */
+  Privileges: Array<string>
+
+  /**
+   * 类型,可以填入 table 、 view 、 proc 、 func 和 \*。当 DbName 为具体数据库名，Type为 \* 时，表示设置该数据库权限（即db.\*），此时忽略 Object 参数
+   */
+  Type?: string
+
+  /**
+   * 具体的 Type 的名称，例如 Type 为 table 时就是具体的表名。DbName 和 Type 都为具体名称，则 Object 表示具体对象名，不能为 \* 或者为空
+   */
+  Object?: string
+
+  /**
+   * 当 Type=table 时，ColName 为 \* 表示对表授权，如果为具体字段名，表示对字段授权
+   */
+  ColName?: string
+}
+
+/**
+ * DescribeShardSpec请求参数结构体
+ */
+export type DescribeShardSpecRequest = null
+
+/**
+ * DescribeDCDBShards请求参数结构体
+ */
+export interface DescribeDCDBShardsRequest {
+  /**
+   * 实例ID，形如：dcdbt-ow728lmc。
+   */
+  InstanceId: string
+
+  /**
+   * 分片ID列表。
+   */
+  ShardInstanceIds?: Array<string>
+
+  /**
+   * 偏移量，默认为 0
+   */
+  Offset?: number
+
+  /**
+   * 返回数量，默认为 20，最大值为 100。
+   */
+  Limit?: number
+
+  /**
+   * 排序字段， 目前仅支持 createtime
+   */
+  OrderBy?: string
+
+  /**
+   * 排序类型， desc 或者 asc
+   */
+  OrderByType?: string
+}
+
+/**
+ * 云数据库参数信息。
+ */
+export interface DBParamValue {
+  /**
+   * 参数名称
+   */
+  Param: string
+
+  /**
+   * 参数值
+   */
+  Value: string
+}
+
+/**
+ * 实例可售卖规格详细信息，创建实例和扩容实例时 NodeCount、Memory 确定售卖规格，硬盘大小可用区间为[MinStorage,MaxStorage]
+ */
+export interface SpecConfigInfo {
+  /**
+   * 节点个数，2 表示一主一从，3 表示一主二从
+   */
+  NodeCount: number
+
+  /**
+   * 内存大小，单位 GB
+   */
+  Memory: number
+
+  /**
+   * 数据盘规格最小值，单位 GB
+   */
+  MinStorage: number
+
+  /**
+   * 数据盘规格最大值，单位 GB
+   */
+  MaxStorage: number
+
+  /**
+   * 推荐的使用场景
+   */
+  SuitInfo: string
+
+  /**
+   * 产品类型 Id
+   */
+  Pid: number
+
+  /**
+   * 最大 Qps 值
+   */
+  Qps: number
+
+  /**
+   * CPU核数
+   */
+  Cpu: number
+}
+
+/**
+ * ModifyDBParameters请求参数结构体
+ */
+export interface ModifyDBParametersRequest {
+  /**
+   * 实例 ID，形如：dcdbt-ow728lmc。
+   */
+  InstanceId: string
+
+  /**
+   * 参数列表，每一个元素是Param和Value的组合
+   */
+  Params: Array<DBParamValue>
+}
+
+/**
+ * 分布式数据库实例信息
+ */
+export interface DCDBInstanceInfo {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 实例名称
+   */
+  InstanceName: string
+
+  /**
+   * 应用ID
+   */
+  AppId: number
+
+  /**
+   * 项目ID
+   */
+  ProjectId: number
+
+  /**
+   * 地域
+   */
+  Region: string
+
+  /**
+   * 可用区
+   */
+  Zone: string
+
+  /**
+   * VPC数字ID
+   */
+  VpcId: number
+
+  /**
+   * Subnet数字ID
+   */
+  SubnetId: number
+
+  /**
+   * 状态中文描述
+   */
+  StatusDesc: string
+
+  /**
+   * 状态
+   */
+  Status: number
+
+  /**
+   * 内网IP
+   */
+  Vip: string
+
+  /**
+   * 内网端口
+   */
+  Vport: number
+
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 自动续费标志
+   */
+  AutoRenewFlag: number
+
+  /**
+   * 内存大小，单位 GB
+   */
+  Memory: number
+
+  /**
+   * 存储大小，单位 GB
+   */
+  Storage: number
+
+  /**
+   * 分片个数
+   */
+  ShardCount: number
+
+  /**
+   * 到期时间
+   */
+  PeriodEndTime: string
+
+  /**
+   * 隔离时间
+   */
+  IsolatedTimestamp: string
+
+  /**
+   * 账号ID
+   */
+  Uin: string
+
+  /**
+   * 分片详情
+   */
+  ShardDetail: Array<ShardInfo>
+
+  /**
+   * 节点数，2 为一主一从， 3 为一主二从
+   */
+  NodeCount: number
+
+  /**
+   * 临时实例标记，0 为非临时实例
+   */
+  IsTmp: number
+
+  /**
+   * 独享集群ID，为空表示非独享集群实例
+   */
+  ExclusterId: string
+
+  /**
+   * 字符串型的私有网络ID
+   */
+  UniqueVpcId: string
+
+  /**
+   * 字符串型的私有网络子网ID
+   */
+  UniqueSubnetId: string
+
+  /**
+   * 数字实例ID（过时字段，请勿依赖该值）
+   */
+  Id: number
+
+  /**
+   * 外网访问的域名，公网可解析
+   */
+  WanDomain: string
+
+  /**
+   * 外网 IP 地址，公网可访问
+   */
+  WanVip: string
+
+  /**
+   * 外网端口
+   */
+  WanPort: number
+
+  /**
+   * 产品类型 ID（过时字段，请勿依赖该值）
+   */
+  Pid: number
+
+  /**
+   * 实例最后更新时间，格式为 2006-01-02 15:04:05
+   */
+  UpdateTime: string
+
+  /**
+   * 数据库引擎
+   */
+  DbEngine: string
+
+  /**
+   * 数据库引擎版本
+   */
+  DbVersion: string
+
+  /**
+   * 付费模式
+   */
+  Paymode: string
+
+  /**
+      * 实例处于异步任务状态时，表示异步任务流程ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Locker: number
+
+  /**
+   * 外网状态，0-未开通；1-已开通；2-关闭；3-开通中
+   */
+  WanStatus: number
+
+  /**
+   * 该实例是否支持审计。1-支持；0-不支持
+   */
+  IsAuditSupported: number
+
+  /**
+   * Cpu核数
+   */
+  Cpu: number
+
+  /**
+      * 实例IPv6标志
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Ipv6Flag: number
+
+  /**
+      * 内网IPv6
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Vipv6: string
+
+  /**
+      * 外网IPv6
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WanVipv6: string
+
+  /**
+      * 外网IPv6端口
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WanPortIpv6: number
+
+  /**
+      * 外网IPv6状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WanStatusIpv6: number
+
+  /**
+      * DCN标志，0-无，1-主实例，2-灾备实例
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DcnFlag: number
+
+  /**
+      * DCN状态，0-无，1-创建中，2-同步中，3-已断开
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DcnStatus: number
+
+  /**
+      * DCN灾备实例数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DcnDstNum: number
+}
+
+/**
+ * 可用区信息
+ */
+export interface ZonesInfo {
+  /**
+   * 可用区英文ID
+   */
+  Zone: string
+
+  /**
+   * 可用区数字ID
+   */
+  ZoneId: number
+
+  /**
+   * 可用区中文名
+   */
+  ZoneName: string
+}
+
+/**
+ * ModifyDBParameters返回参数结构体
+ */
+export interface ModifyDBParametersResponse {
+  /**
+   * 实例 ID，形如：dcdbt-ow728lmc。
+   */
+  InstanceId?: string
+
+  /**
+   * 各参数修改结果
+   */
+  Result?: Array<ParamModifyResult>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 描述分布式数据库分片信息。
+ */
+export interface DCDBShardInfo {
+  /**
+   * 所属实例Id
+   */
+  InstanceId: string
+
+  /**
+   * 分片SQL透传Id，用于将sql透传到指定分片执行
+   */
+  ShardSerialId: string
+
+  /**
+   * 全局唯一的分片Id
+   */
+  ShardInstanceId: string
+
+  /**
+   * 状态：0 创建中，1 流程处理中， 2 运行中，3 分片未初始化
+   */
+  Status: number
+
+  /**
+   * 状态中文描述
+   */
+  StatusDesc: string
+
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 字符串格式的私有网络Id
+   */
+  VpcId: string
+
+  /**
+   * 字符串格式的私有网络子网Id
+   */
+  SubnetId: string
+
+  /**
+   * 项目ID
+   */
+  ProjectId: number
+
+  /**
+   * 地域
+   */
+  Region: string
+
+  /**
+   * 可用区
+   */
+  Zone: string
+
+  /**
+   * 内存大小，单位 GB
+   */
+  Memory: number
+
+  /**
+   * 存储大小，单位 GB
+   */
+  Storage: number
+
+  /**
+   * 到期时间
+   */
+  PeriodEndTime: string
+
+  /**
+   * 节点数，2 为一主一从， 3 为一主二从
+   */
+  NodeCount: number
+
+  /**
+   * 存储使用率，单位为 %
+   */
+  StorageUsage: number
+
+  /**
+   * 内存使用率，单位为 %
+   */
+  MemoryUsage: number
+
+  /**
+   * 数字分片Id（过时字段，请勿依赖该值）
+   */
+  ShardId: number
+
+  /**
+   * 产品ProductID
+   */
+  Pid: number
+
+  /**
+   * Proxy版本
+   */
+  ProxyVersion: string
+
+  /**
+      * 付费模型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Paymode: string
+
+  /**
+      * 分片的主可用区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ShardMasterZone: string
+
+  /**
+      * 分片的从可用区列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ShardSlaveZones: Array<string>
+
+  /**
+   * CPU核数
+   */
+  Cpu: number
+}
+
+/**
+ * CopyAccountPrivileges请求参数结构体
+ */
+export interface CopyAccountPrivilegesRequest {
+  /**
+   * 实例 ID，形如：dcdbt-ow728lmc。
+   */
+  InstanceId: string
+
+  /**
+   * 源用户名
+   */
+  SrcUserName: string
+
+  /**
+   * 源用户允许的访问 host
+   */
+  SrcHost: string
+
+  /**
+   * 目的用户名
+   */
+  DstUserName: string
+
+  /**
+   * 目的用户允许的访问 host
+   */
+  DstHost: string
+
+  /**
+   * 源账号的 ReadOnly 属性
+   */
+  SrcReadOnly?: string
+
+  /**
+   * 目的账号的 ReadOnly 属性
+   */
+  DstReadOnly?: string
+}
+
+/**
+ * DescribeDatabaseTable请求参数结构体
+ */
+export interface DescribeDatabaseTableRequest {
+  /**
+   * 实例 ID，形如：dcdbt-ow7t8lmc。
+   */
+  InstanceId: string
+
+  /**
+   * 数据库名称，通过 DescribeDatabases 接口获取。
+   */
+  DbName: string
+
+  /**
+   * 表名称，通过 DescribeDatabaseObjects 接口获取。
+   */
+  Table: string
+}
+
+/**
+ * OpenDBExtranetAccess返回参数结构体
+ */
+export interface OpenDBExtranetAccessResponse {
+  /**
+   * 异步任务ID，可通过 DescribeFlow 查询任务状态。
+   */
+  FlowId?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDatabaseObjects返回参数结构体
+ */
+export interface DescribeDatabaseObjectsResponse {
+  /**
+   * 透传入参。
+   */
+  InstanceId?: string
+
+  /**
+   * 数据库名称。
+   */
+  DbName?: string
+
+  /**
+   * 表列表。
+   */
+  Tables?: Array<DatabaseTable>
+
+  /**
+   * 视图列表。
+   */
+  Views?: Array<DatabaseView>
+
+  /**
+   * 存储过程列表。
+   */
+  Procs?: Array<DatabaseProcedure>
+
+  /**
+   * 函数列表。
+   */
+  Funcs?: Array<DatabaseFunction>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 数据库列信息
+ */
+export interface TableColumn {
+  /**
+   * 列名称
+   */
+  Col: string
+
+  /**
+   * 列类型
+   */
+  Type: string
+}
+
+/**
+ * 升级实例 -- 切分分片类型
+ */
+export interface SplitShardConfig {
+  /**
+   * 分片ID数组
+   */
+  ShardInstanceIds: Array<string>
+
+  /**
+   * 数据切分比例
+   */
+  SplitRate: number
+
+  /**
+   * 分片内存大小，单位 GB
+   */
+  ShardMemory: number
+
+  /**
+   * 分片存储大小，单位 GB
+   */
+  ShardStorage: number
+}
+
+/**
+ * FlushBinlog返回参数结构体
+ */
+export interface FlushBinlogResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDCDBRenewalPrice返回参数结构体
+ */
+export interface DescribeDCDBRenewalPriceResponse {
+  /**
+   * 原价，单位：分
+   */
+  OriginalPrice?: number
+
+  /**
+   * 实际价格，单位：分。受折扣等影响，可能和原价不同。
+   */
+  Price?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeShardSpec返回参数结构体
+ */
+export interface DescribeShardSpecResponse {
+  /**
+   * 按机型分类的可售卖规格列表
+   */
+  SpecConfig?: Array<SpecConfig>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDCDBShards返回参数结构体
+ */
+export interface DescribeDCDBShardsResponse {
+  /**
+   * 符合条件的分片数量
+   */
+  TotalCount?: number
+
+  /**
+   * 分片信息列表
+   */
+  Shards?: Array<DCDBShardInfo>
+
+  /**
+      * 灾备标志，0-无，1-主实例，2-灾备实例
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DcnFlag?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 数据库信息
+ */
+export interface Database {
+  /**
+   * 数据库名称
+   */
+  DbName: string
+}
+
+/**
+ * GrantAccountPrivileges返回参数结构体
+ */
+export interface GrantAccountPrivilegesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 分片信息
+ */
+export interface ShardInfo {
+  /**
+   * 分片ID
+   */
+  ShardInstanceId: string
+
+  /**
+   * 分片Set ID
+   */
+  ShardSerialId: string
+
+  /**
+   * 状态：0 创建中，1 流程处理中， 2 运行中，3 分片未初始化，-2 分片已删除
+   */
+  Status: number
+
+  /**
+   * 创建时间
+   */
+  Createtime: string
+
+  /**
+   * 内存大小，单位 GB
+   */
+  Memory: number
+
+  /**
+   * 存储大小，单位 GB
+   */
+  Storage: number
+
+  /**
+   * 分片数字ID
+   */
+  ShardId: number
+
+  /**
+   * 节点数，2 为一主一从， 3 为一主二从
+   */
+  NodeCount: number
+
+  /**
+   * 产品类型 Id（过时字段，请勿依赖该值）
+   */
+  Pid: number
+
+  /**
+   * Cpu核数
+   */
+  Cpu: number
+}
+
+/**
+ * OpenDBExtranetAccess请求参数结构体
+ */
+export interface OpenDBExtranetAccessRequest {
+  /**
+   * 待开放外网访问的实例ID。形如：dcdbt-ow728lmc。
+   */
+  InstanceId: string
+
+  /**
+   * 是否IPv6，默认0
+   */
+  Ipv6Flag?: number
+}
+
+/**
+ * DescribeDCDBSaleInfo返回参数结构体
+ */
+export interface DescribeDCDBSaleInfoResponse {
+  /**
+   * 可售卖地域信息列表
+   */
+  RegionList?: Array<RegionInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDBSyncMode请求参数结构体
+ */
+export interface DescribeDBSyncModeRequest {
+  /**
+   * 待修改同步模式的实例ID。形如：dcdbt-ow728lmc。
+   */
+  InstanceId: string
+}
+
+/**
+ * CloseDBExtranetAccess返回参数结构体
+ */
+export interface CloseDBExtranetAccessResponse {
+  /**
+   * 异步任务ID，可通过 DescribeFlow 查询任务状态。
+   */
+  FlowId?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyAccountDescription请求参数结构体
+ */
+export interface ModifyAccountDescriptionRequest {
+  /**
+   * 实例 ID，形如：dcdbt-ow728lmc。
+   */
+  InstanceId: string
+
+  /**
+   * 登录用户名。
+   */
+  UserName: string
+
+  /**
+   * 用户允许的访问 host，用户名+host唯一确定一个账号。
+   */
+  Host: string
+
+  /**
+   * 新的账号备注，长度 0~256。
+   */
+  Description: string
+}
+
+/**
+ * DescribeProjects请求参数结构体
+ */
+export type DescribeProjectsRequest = null
+
+/**
+ * DescribeDatabases返回参数结构体
+ */
+export interface DescribeDatabasesResponse {
+  /**
+   * 该实例上的数据库列表。
+   */
+  Databases?: Array<Database>
+
+  /**
+   * 透传入参。
+   */
+  InstanceId?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeOrders请求参数结构体
+ */
+export interface DescribeOrdersRequest {
+  /**
+   * 待查询的长订单号列表，创建实例、续费实例、扩容实例接口返回。
+   */
+  DealNames: Array<string>
+}
+
+/**
+ * DescribeDBLogFiles返回参数结构体
+ */
+export interface DescribeDBLogFilesResponse {
+  /**
+   * 实例 ID，形如：dcdbt-ow728lmc。
+   */
+  InstanceId?: string
+
+  /**
+   * 请求日志类型。1-binlog，2-冷备，3-errlog，4-slowlog。
+   */
+  Type?: number
+
+  /**
+   * 请求日志总数
+   */
+  Total?: number
+
+  /**
+   * 日志文件列表
+   */
+  Files?: Array<LogFileInfo>
+
+  /**
+   * 如果是VPC网络的实例，做用本前缀加上URI为下载地址
+   */
+  VpcPrefix?: string
+
+  /**
+   * 如果是普通网络的实例，做用本前缀加上URI为下载地址
+   */
+  NormalPrefix?: string
+
+  /**
+   * 分片 ID，形如：shard-7noic7tv
+   */
+  ShardId?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CloseDBExtranetAccess请求参数结构体
+ */
+export interface CloseDBExtranetAccessRequest {
+  /**
+   * 待关闭外网访问的实例ID。形如：dcdbt-ow728lmc，可以通过 DescribeDCDBInstances 查询实例详情获得。
+   */
+  InstanceId: string
+
+  /**
+   * 是否IPv6，默认0
+   */
+  Ipv6Flag?: number
+}
+
+/**
+ * InitDCDBInstances请求参数结构体
+ */
+export interface InitDCDBInstancesRequest {
+  /**
+   * 待初始化的实例ID列表，形如：dcdbt-ow728lmc，可以通过 DescribeDCDBInstances 查询实例详情获得。
+   */
+  InstanceIds: Array<string>
+
+  /**
+   * 参数列表。本接口的可选值为：character_set_server（字符集，必传），lower_case_table_names（表名大小写敏感，必传，0 - 敏感；1-不敏感），innodb_page_size（innodb数据页，默认16K），sync_mode（同步模式：0 - 异步； 1 - 强同步；2 - 强同步可退化。默认为强同步）。
+   */
+  Params: Array<DBParamValue>
+}
+
+/**
+ * 标签对象，包含tagKey & tagValue
+ */
+export interface ResourceTag {
+  /**
+   * 标签键key
+   */
+  TagKey: string
+
+  /**
+   * 标签值value
+   */
+  TagValue: string
+}
+
+/**
+ * DescribeSqlLogs返回参数结构体
+ */
+export interface DescribeSqlLogsResponse {
+  /**
+   * 当前消息队列中的sql日志条目数。
+   */
+  TotalCount?: number
+
+  /**
+   * 消息队列中的sql日志起始偏移。
+   */
+  StartOffset?: number
+
+  /**
+   * 消息队列中的sql日志结束偏移。
+   */
+  EndOffset?: number
+
+  /**
+   * 返回的第一条sql日志的偏移。
+   */
+  Offset?: number
+
+  /**
+   * 返回的sql日志数量。
+   */
+  Count?: number
+
+  /**
+   * Sql日志列表。
+   */
+  SqlItems?: Array<SqlLogItem>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteAccount请求参数结构体
+ */
+export interface DeleteAccountRequest {
+  /**
+   * 实例ID，形如：dcdbt-ow728lmc，可以通过 DescribeDCDBInstances 查询实例详情获得。
+   */
+  InstanceId: string
+
+  /**
+   * 用户名
+   */
+  UserName: string
+
+  /**
+   * 用户允许的访问 host
+   */
+  Host: string
+}
+
+/**
+ * DescribeDCDBInstances返回参数结构体
+ */
+export interface DescribeDCDBInstancesResponse {
+  /**
+   * 符合条件的实例数量
+   */
+  TotalCount?: number
+
+  /**
+   * 实例详细信息列表
+   */
+  Instances?: Array<DCDBInstanceInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateDCDBInstance请求参数结构体
+ */
+export interface CreateDCDBInstanceRequest {
+  /**
+      * 分片节点可用区分布，最多可填两个可用区。当分片规格为一主两从时，其中两个节点在第一个可用区。
+注意当前可售卖的可用区需要通过DescribeDCDBSaleInfo接口拉取。
+      */
+  Zones: Array<string>
+
+  /**
+   * 欲购买的时长，单位：月。
+   */
+  Period: number
+
+  /**
+      * 分片内存大小，单位：GB，可以通过 DescribeShardSpec
+ 查询实例规格获得。
+      */
+  ShardMemory: number
+
+  /**
+      * 分片存储空间大小，单位：GB，可以通过 DescribeShardSpec
+ 查询实例规格获得。
+      */
+  ShardStorage: number
+
+  /**
+      * 单个分片节点个数，可以通过 DescribeShardSpec
+ 查询实例规格获得。
+      */
+  ShardNodeCount: number
+
+  /**
+   * 实例分片个数，可选范围2-8，可以通过升级实例进行新增分片到最多64个分片。
+   */
+  ShardCount: number
+
+  /**
+   * 欲购买实例的数量
+   */
+  Count?: number
+
+  /**
+   * 项目 ID，可以通过查看项目列表获取，不传则关联到默认项目
+   */
+  ProjectId?: number
+
+  /**
+   * 虚拟私有网络 ID，不传或传空表示创建为基础网络
+   */
+  VpcId?: string
+
+  /**
+   * 虚拟私有网络子网 ID，VpcId不为空时必填
+   */
+  SubnetId?: string
+
+  /**
+      * 数据库引擎版本，当前可选：10.0.10，10.1.9，5.7.17。
+10.0.10 - Mariadb 10.0.10；
+10.1.9 - Mariadb 10.1.9；
+5.7.17 - Percona 5.7.17。
+如果不填的话，默认为10.1.9，表示Mariadb 10.1.9。
+      */
+  DbVersionId?: string
+
+  /**
+   * 是否自动使用代金券进行支付，默认不使用。
+   */
+  AutoVoucher?: boolean
+
+  /**
+   * 代金券ID列表，目前仅支持指定一张代金券。
+   */
+  VoucherIds?: Array<string>
+
+  /**
+   * 安全组id
+   */
+  SecurityGroupId?: string
+
+  /**
+   * 实例名称， 可以通过该字段自主的设置实例的名字
+   */
+  InstanceName?: string
+
+  /**
+   * 是否支持IPv6
+   */
+  Ipv6Flag?: number
+
+  /**
+   * 标签键值对数组
+   */
+  ResourceTags?: Array<ResourceTag>
+}
+
+/**
+ * DescribeDCDBUpgradePrice请求参数结构体
+ */
+export interface DescribeDCDBUpgradePriceRequest {
+  /**
+   * 待升级的实例ID。形如：dcdbt-ow728lmc，可以通过 DescribeDCDBInstances 查询实例详情获得。
+   */
+  InstanceId: string
+
+  /**
+      * 升级类型，取值范围: 
+<li> ADD: 新增分片 </li> 
+ <li> EXPAND: 升级实例中的已有分片 </li> 
+ <li> SPLIT: 将已有分片中的数据切分到新增分片上</li>
+      */
+  UpgradeType: string
+
+  /**
+   * 新增分片配置，当UpgradeType为ADD时生效。
+   */
+  AddShardConfig?: AddShardConfig
+
+  /**
+   * 扩容分片配置，当UpgradeType为EXPAND时生效。
+   */
+  ExpandShardConfig?: ExpandShardConfig
+
+  /**
+   * 切分分片配置，当UpgradeType为SPLIT时生效。
+   */
+  SplitShardConfig?: SplitShardConfig
+}
+
+/**
+ * 数据库存储过程信息
+ */
+export interface DatabaseProcedure {
+  /**
+   * 存储过程名称
+   */
+  Proc: string
+}
+
+/**
+ * 升级实例 -- 新增分片类型
+ */
+export interface AddShardConfig {
+  /**
+   * 新增分片的数量
+   */
+  ShardCount: number
+
+  /**
+   * 分片内存大小，单位 GB
+   */
+  ShardMemory: number
+
+  /**
+   * 分片存储大小，单位 GB
+   */
+  ShardStorage: number
+}
+
+/**
+ * ModifyDBSyncMode请求参数结构体
+ */
+export interface ModifyDBSyncModeRequest {
+  /**
+   * 待修改同步模式的实例ID。形如：dcdbt-ow728lmc。
+   */
+  InstanceId: string
+
+  /**
+   * 同步模式：0 异步，1 强同步， 2 强同步可退化
+   */
+  SyncMode: number
+}
+
+/**
+ * DescribeProjects返回参数结构体
+ */
+export interface DescribeProjectsResponse {
+  /**
+   * 项目列表
+   */
+  Projects?: Array<Project>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateAccount返回参数结构体
+ */
+export interface CreateAccountResponse {
+  /**
+   * 实例ID，透传入参。
+   */
+  InstanceId?: string
+
+  /**
+   * 用户名，透传入参。
+   */
+  UserName?: string
+
+  /**
+   * 允许访问的 host，透传入参。
+   */
+  Host?: string
+
+  /**
+   * 透传入参。
+   */
+  ReadOnly?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 售卖可用区信息
+ */
+export interface RegionInfo {
+  /**
+   * 地域英文ID
+   */
+  Region: string
+
+  /**
+   * 地域数字ID
+   */
+  RegionId: number
+
+  /**
+   * 地域中文名
+   */
+  RegionName: string
+
+  /**
+   * 可用区列表
+   */
+  ZoneList: Array<ZonesInfo>
+
+  /**
+   * 可选择的主可用区和从可用区
+   */
+  AvailableChoice: Array<ShardZoneChooseInfo>
+}
+
+/**
+ * DescribeDatabaseObjects请求参数结构体
+ */
+export interface DescribeDatabaseObjectsRequest {
+  /**
+   * 实例 ID，形如：dcdbt-ow7t8lmc。
+   */
+  InstanceId: string
+
+  /**
+   * 数据库名称，通过 DescribeDatabases 接口获取。
+   */
+  DbName: string
+}
+
+/**
+ * UpgradeDCDBInstance请求参数结构体
+ */
+export interface UpgradeDCDBInstanceRequest {
+  /**
+   * 待升级的实例ID。形如：dcdbt-ow728lmc，可以通过 DescribeDCDBInstances 查询实例详情获得。
+   */
+  InstanceId: string
+
+  /**
+      * 升级类型，取值范围: 
+<li> ADD: 新增分片 </li> 
+ <li> EXPAND: 升级实例中的已有分片 </li> 
+ <li> SPLIT: 将已有分片中的数据切分到新增分片上</li>
+      */
+  UpgradeType: string
+
+  /**
+   * 新增分片配置，当UpgradeType为ADD时生效。
+   */
+  AddShardConfig?: AddShardConfig
+
+  /**
+   * 扩容分片配置，当UpgradeType为EXPAND时生效。
+   */
+  ExpandShardConfig?: ExpandShardConfig
+
+  /**
+   * 切分分片配置，当UpgradeType为SPLIT时生效。
+   */
+  SplitShardConfig?: SplitShardConfig
+
+  /**
+   * 是否自动使用代金券进行支付，默认不使用。
+   */
+  AutoVoucher?: boolean
+
+  /**
+   * 代金券ID列表，目前仅支持指定一张代金券。
+   */
+  VoucherIds?: Array<string>
+}
+
+/**
+ * 约束类型值的范围
+ */
+export interface ConstraintRange {
+  /**
+   * 约束类型为section时的最小值
+   */
+  Min: string
+
+  /**
+   * 约束类型为section时的最大值
+   */
+  Max: string
+}
+
+/**
+ * 拉取的日志信息
+ */
+export interface LogFileInfo {
+  /**
+   * Log最后修改时间
+   */
+  Mtime: number
+
+  /**
+   * 文件长度
+   */
+  Length: number
+
+  /**
+   * 下载Log时用到的统一资源标识符
+   */
+  Uri: string
+
+  /**
+   * 文件名
+   */
+  FileName: string
+}
+
+/**
+ * 云数据库账号信息
+ */
+export interface DBAccount {
+  /**
+   * 用户名
+   */
+  UserName: string
+
+  /**
+   * 用户可以从哪台主机登录（对应 MySQL 用户的 host 字段，UserName + Host 唯一标识一个用户，IP形式，IP段以%结尾；支持填入%；为空默认等于%）
+   */
+  Host: string
+
+  /**
+   * 用户备注信息
+   */
+  Description: string
+
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 最后更新时间
+   */
+  UpdateTime: string
+
+  /**
+   * 只读标记，0：否， 1：该账号的sql请求优先选择备机执行，备机不可用时选择主机执行，2：优先选择备机执行，备机不可用时操作失败。
+   */
+  ReadOnly: number
+
+  /**
+      * 如果备机延迟超过本参数设置值，系统将认为备机发生故障
+建议该参数值大于10。当ReadOnly选择1、2时该参数生效。
+      */
+  DelayThresh: number
+}
+
+/**
+ * DescribeDatabaseTable返回参数结构体
+ */
+export interface DescribeDatabaseTableResponse {
+  /**
+   * 实例名称。
+   */
+  InstanceId?: string
+
+  /**
+   * 数据库名称。
+   */
+  DbName?: string
+
+  /**
+   * 表名称。
+   */
+  Table?: string
+
+  /**
+   * 列信息。
+   */
+  Cols?: Array<TableColumn>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAccountPrivileges请求参数结构体
+ */
+export interface DescribeAccountPrivilegesRequest {
+  /**
+   * 实例 ID，形如：dcdbt-ow7t8lmc。
+   */
+  InstanceId: string
+
+  /**
+   * 登录用户名。
+   */
+  UserName: string
+
+  /**
+   * 用户允许的访问 host，用户名+host唯一确定一个账号。
+   */
+  Host: string
+
+  /**
+   * 数据库名。如果为 \*，表示查询全局权限（即 \*.\*），此时忽略 Type 和 Object 参数
+   */
+  DbName: string
+
+  /**
+   * 类型,可以填入 table 、 view 、 proc 、 func 和 \*。当 DbName 为具体数据库名，Type为 \* 时，表示查询该数据库权限（即db.\*），此时忽略 Object 参数
+   */
+  Type?: string
+
+  /**
+   * 具体的 Type 的名称，例如 Type 为 table 时就是具体的表名。DbName 和 Type 都为具体名称，则 Object 表示具体对象名，不能为 \* 或者为空
+   */
+  Object?: string
+
+  /**
+   * 当 Type=table 时，ColName 为 \* 表示查询表的权限，如果为具体字段名，表示查询对应字段的权限
+   */
+  ColName?: string
+}
+
+/**
+ * 描述一条sql日志的详细信息。
+ */
+export interface SqlLogItem {
+  /**
+   * 本条日志在消息队列中的偏移量。
+   */
+  Offset: number
+
+  /**
+   * 执行本条sql的用户。
+   */
+  User: string
+
+  /**
+   * 执行本条sql的客户端IP+端口。
+   */
+  Client: string
+
+  /**
+   * 数据库名称。
+   */
+  DbName: string
+
+  /**
+   * 执行的sql语句。
+   */
+  Sql: string
+
+  /**
+   * 返回的数据行数。
+   */
+  SelectRowNum: number
+
+  /**
+   * 影响行数。
+   */
+  AffectRowNum: number
+
+  /**
+   * Sql执行时间戳。
+   */
+  Timestamp: number
+
+  /**
+   * Sql耗时，单位为毫秒。
+   */
+  TimeCostMs: number
+
+  /**
+   * Sql返回码，0为成功。
+   */
+  ResultCode: number
+}
+
+/**
+ * DescribeAccounts返回参数结构体
+ */
+export interface DescribeAccountsResponse {
+  /**
+   * 实例ID，透传入参。
+   */
+  InstanceId?: string
+
+  /**
+      * 实例用户列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Users?: Array<DBAccount>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDCDBInstances请求参数结构体
+ */
+export interface DescribeDCDBInstancesRequest {
+  /**
+   * 按照一个或者多个实例 ID 查询。实例 ID 形如：dcdbt-2t4cf98d
+   */
+  InstanceIds?: Array<string>
+
+  /**
+   * 搜索的字段名，当前支持的值有：instancename、vip、all。传 instancename 表示按实例名进行搜索；传 vip 表示按内网IP进行搜索；传 all 将会按实例ID、实例名和内网IP进行搜索。
+   */
+  SearchName?: string
+
+  /**
+   * 搜索的关键字，支持模糊搜索。多个关键字使用换行符（'\n'）分割。
+   */
+  SearchKey?: string
+
+  /**
+   * 按项目 ID 查询
+   */
+  ProjectIds?: Array<number>
+
+  /**
+   * 是否根据 VPC 网络来搜索
+   */
+  IsFilterVpc?: boolean
+
+  /**
+   * 私有网络 ID， IsFilterVpc 为 1 时有效
+   */
+  VpcId?: string
+
+  /**
+   * 私有网络的子网 ID， IsFilterVpc 为 1 时有效
+   */
+  SubnetId?: string
+
+  /**
+   * 排序字段， projectId， createtime， instancename 三者之一
+   */
+  OrderBy?: string
+
+  /**
+   * 排序类型， desc 或者 asc
+   */
+  OrderByType?: string
+
+  /**
+   * 偏移量，默认为 0
+   */
+  Offset?: number
+
+  /**
+   * 返回数量，默认为 10，最大值为 100。
+   */
+  Limit?: number
+
+  /**
+   * 1非独享集群，2独享集群， 0全部
+   */
+  ExclusterType?: number
+
+  /**
+   * 标识是否使用ExclusterType字段, false不使用，true使用
+   */
+  IsFilterExcluster?: boolean
+
+  /**
+   * 独享集群ID
+   */
+  ExclusterIds?: Array<string>
+
+  /**
+   * 按标签key查询
+   */
+  TagKeys?: Array<string>
+
+  /**
+   * 实例类型过滤，1-独享实例，2-主实例，3-灾备实例，多个按逗号分隔
+   */
+  FilterInstanceType?: string
+}
+
+/**
+ * DescribeDBParameters返回参数结构体
+ */
+export interface DescribeDBParametersResponse {
+  /**
+   * 实例 ID，形如：dcdbt-ow7t8lmc。
+   */
+  InstanceId?: string
+
+  /**
+   * 请求DB的当前参数值
+   */
+  Params?: Array<ParamDesc>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyDBInstancesProject请求参数结构体
+ */
+export interface ModifyDBInstancesProjectRequest {
+  /**
+   * 待修改的实例ID列表。实例 ID 形如：dcdbt-ow728lmc。
+   */
+  InstanceIds: Array<string>
+
+  /**
+   * 要分配的项目 ID，可以通过 DescribeProjects 查询项目列表接口获取。
+   */
+  ProjectId: number
+}
+
+/**
+ * FlushBinlog请求参数结构体
+ */
+export interface FlushBinlogRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+}
+
+/**
+ * ModifyDBSyncMode返回参数结构体
+ */
+export interface ModifyDBSyncModeResponse {
+  /**
+   * 异步任务Id，可通过 DescribeFlow 查询任务状态。
+   */
+  FlowId?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteAccount返回参数结构体
+ */
+export interface DeleteAccountResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
