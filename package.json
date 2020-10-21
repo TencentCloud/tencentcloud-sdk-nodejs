@@ -28,7 +28,8 @@
     "get-stream": "^6.0.0",
     "https-proxy-agent": "^2.2.1",
     "is-stream": "^2.0.0",
-    "node-fetch": "^2.2.0"
+    "node-fetch": "^2.2.0",
+    "tslib": "1.13.0"
   },
   "directories": {
     "example": "examples",
