@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCluster", req, cb);
     }
     /**
+     * 创建grafana监控面板
+     */
+    async CreatePrometheusDashboard(req, cb) {
+        return this.request("CreatePrometheusDashboard", req, cb);
+    }
+    /**
      * 获取镜像信息
      */
     async DescribeImages(req, cb) {
@@ -52,10 +58,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteClusterEndpoint", req, cb);
     }
     /**
-     * 删除集群(YUNAPI V3版本)
+     * 扩展(新建)集群节点
      */
-    async DeleteCluster(req, cb) {
-        return this.request("DeleteCluster", req, cb);
+    async CreateClusterInstances(req, cb) {
+        return this.request("CreateClusterInstances", req, cb);
     }
     /**
      * 修改集群属性
@@ -82,10 +88,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterEndpointVipStatus", req, cb);
     }
     /**
-     * 扩展(新建)集群节点
+     * 删除集群(YUNAPI V3版本)
      */
-    async CreateClusterInstances(req, cb) {
-        return this.request("CreateClusterInstances", req, cb);
+    async DeleteCluster(req, cb) {
+        return this.request("DeleteCluster", req, cb);
     }
     /**
      * 为已经存在的集群创建伸缩组
@@ -146,6 +152,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateClusterEndpoint(req, cb) {
         return this.request("CreateClusterEndpoint", req, cb);
+    }
+    /**
+     * 获取关联目标集群的实例列表
+     */
+    async DescribePrometheusAgentInstances(req, cb) {
+        return this.request("DescribePrometheusAgentInstances", req, cb);
     }
     /**
      * 查询集群路由表

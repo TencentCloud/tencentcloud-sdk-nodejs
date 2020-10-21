@@ -3749,6 +3749,11 @@ export interface VideoTemplateInfo {
 默认值：black 。
       */
     FillType?: string;
+    /**
+      * 视频恒定码率控制因子，取值范围为[1, 51]。
+如果指定该参数，将使用 CRF 的码率控制方式做转码。0值表示禁用 CRF 模式。
+      */
+    Vcrf?: number;
 }
 /**
  * 文本鉴政任务控制参数
@@ -8093,10 +8098,12 @@ export interface WatermarkInput {
     Definition: number;
     /**
       * 文字内容，长度不超过100个字符。仅当水印类型为文字水印时填写。
+文字水印不支持截图打水印。
       */
     TextContent?: string;
     /**
       * SVG 内容。长度不超过 2000000 个字符。仅当水印类型为 SVG 水印时填写。
+SVG 水印不支持截图打水印。
       */
     SvgContent?: string;
     /**
@@ -8364,6 +8371,11 @@ export interface VideoTemplateInfoForUpdate {
 默认值：black 。
       */
     FillType?: string;
+    /**
+      * 视频恒定码率控制因子，取值范围为[0, 51]。
+如果指定该参数，将使用 CRF 的码率控制方式做转码。取0值表示禁用 CRF 模式。
+      */
+    Vcrf?: number;
 }
 /**
  * CreateContentReviewTemplate请求参数结构体

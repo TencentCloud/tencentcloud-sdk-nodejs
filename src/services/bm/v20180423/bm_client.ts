@@ -306,7 +306,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取获取设备类型
+   * 获取设备类型
    */
   async DescribeDeviceClass(
     req: DescribeDeviceClassRequest,

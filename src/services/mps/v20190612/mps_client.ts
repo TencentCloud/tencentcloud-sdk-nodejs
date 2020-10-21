@@ -128,6 +128,7 @@ import {
   MediaProcessTaskImageSpriteResult,
   DescribeAdaptiveDynamicStreamingTemplatesResponse,
   MediaContentReviewOcrTextSegmentItem,
+  UrlInputInfo,
   DescribeAdaptiveDynamicStreamingTemplatesRequest,
   ImageWatermarkInput,
   AsrFullTextConfigureInfoForUpdate,

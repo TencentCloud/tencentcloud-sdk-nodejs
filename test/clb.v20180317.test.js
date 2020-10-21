@@ -118,6 +118,16 @@ it("clb.v20180317.CreateRule", async function () {
     }
 })
 
+it("clb.v20180317.DescribeExclusiveClusters", async function () {
+    try {
+       const data = await client.DescribeExclusiveClusters({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.SetLoadBalancerClsLog", async function () {
     try {
        const data = await client.SetLoadBalancerClsLog({})
@@ -348,6 +358,16 @@ it("clb.v20180317.BatchRegisterTargets", async function () {
     }
 })
 
+it("clb.v20180317.ModifyRule", async function () {
+    try {
+       const data = await client.ModifyRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.DescribeClsLogSet", async function () {
     try {
        const data = await client.DescribeClsLogSet({})
@@ -388,9 +408,9 @@ it("clb.v20180317.DescribeTaskStatus", async function () {
     }
 })
 
-it("clb.v20180317.ModifyRule", async function () {
+it("clb.v20180317.DescribeClusterResources", async function () {
     try {
-       const data = await client.ModifyRule({})
+       const data = await client.DescribeClusterResources({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

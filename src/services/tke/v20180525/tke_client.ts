@@ -41,6 +41,7 @@ import {
   ClusterAsGroup,
   DescribeClusterEndpointStatusRequest,
   Tag,
+  DescribePrometheusAgentInstancesRequest,
   ClusterNetworkSettings,
   DescribeImagesResponse,
   AutoScalingGroupRange,
@@ -54,6 +55,7 @@ import {
   Label,
   DeleteClusterEndpointVipResponse,
   ClusterBasicSettings,
+  CreatePrometheusDashboardResponse,
   RouteTableConflict,
   DeleteClusterInstancesRequest,
   ModifyClusterAsGroupAttributeResponse,
@@ -73,6 +75,7 @@ import {
   ResourceDeleteOption,
   LoginSettings,
   Instance,
+  ModifyClusterAttributeResponse,
   EnhancedService,
   CreateClusterAsGroupRequest,
   CreateClusterResponse,
@@ -92,10 +95,11 @@ import {
   DeleteClusterEndpointVipRequest,
   Cluster,
   DescribeClusterEndpointStatusResponse,
+  CreatePrometheusDashboardRequest,
   AddExistedInstancesResponse,
   DeleteClusterRouteTableResponse,
   DescribeClusterAsGroupOptionRequest,
-  ModifyClusterAttributeResponse,
+  DescribePrometheusAgentInstancesResponse,
   CreateClusterEndpointRequest,
   AddExistedInstancesRequest,
   ClusterAsGroupOption,
@@ -140,6 +144,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建grafana监控面板
+   */
+  async CreatePrometheusDashboard(
+    req: CreatePrometheusDashboardRequest,
+    cb?: (error: string, rep: CreatePrometheusDashboardResponse) => void
+  ): Promise<CreatePrometheusDashboardResponse> {
+    return this.request("CreatePrometheusDashboard", req, cb)
+  }
+
+  /**
    * 获取镜像信息
    */
   async DescribeImages(
@@ -170,13 +184,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除集群(YUNAPI V3版本)
+   * 扩展(新建)集群节点
    */
-  async DeleteCluster(
-    req: DeleteClusterRequest,
-    cb?: (error: string, rep: DeleteClusterResponse) => void
-  ): Promise<DeleteClusterResponse> {
-    return this.request("DeleteCluster", req, cb)
+  async CreateClusterInstances(
+    req: CreateClusterInstancesRequest,
+    cb?: (error: string, rep: CreateClusterInstancesResponse) => void
+  ): Promise<CreateClusterInstancesResponse> {
+    return this.request("CreateClusterInstances", req, cb)
   }
 
   /**
@@ -220,13 +234,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 扩展(新建)集群节点
+   * 删除集群(YUNAPI V3版本)
    */
-  async CreateClusterInstances(
-    req: CreateClusterInstancesRequest,
-    cb?: (error: string, rep: CreateClusterInstancesResponse) => void
-  ): Promise<CreateClusterInstancesResponse> {
-    return this.request("CreateClusterInstances", req, cb)
+  async DeleteCluster(
+    req: DeleteClusterRequest,
+    cb?: (error: string, rep: DeleteClusterResponse) => void
+  ): Promise<DeleteClusterResponse> {
+    return this.request("DeleteCluster", req, cb)
   }
 
   /**
@@ -327,6 +341,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateClusterEndpointResponse) => void
   ): Promise<CreateClusterEndpointResponse> {
     return this.request("CreateClusterEndpoint", req, cb)
+  }
+
+  /**
+   * 获取关联目标集群的实例列表
+   */
+  async DescribePrometheusAgentInstances(
+    req: DescribePrometheusAgentInstancesRequest,
+    cb?: (error: string, rep: DescribePrometheusAgentInstancesResponse) => void
+  ): Promise<DescribePrometheusAgentInstancesResponse> {
+    return this.request("DescribePrometheusAgentInstances", req, cb)
   }
 
   /**

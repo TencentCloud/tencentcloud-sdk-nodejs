@@ -112,7 +112,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePsaRegulation", req, cb);
     }
     /**
-     * 获取获取设备类型
+     * 获取设备类型
      */
     async DescribeDeviceClass(req, cb) {
         return this.request("DescribeDeviceClass", req, cb);

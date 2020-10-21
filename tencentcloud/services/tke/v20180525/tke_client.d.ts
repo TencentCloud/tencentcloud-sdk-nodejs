@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeClusterEndpointVipStatusRequest, DescribeClusterSecurityResponse, DescribeClusterSecurityRequest, DeleteClusterInstancesResponse, DescribeClusterKubeconfigResponse, CreateClusterRouteRequest, DescribeClusterEndpointVipStatusResponse, ModifyClusterEndpointSPRequest, DescribeClusterInstancesResponse, DeleteClusterResponse, CreateClusterRouteTableResponse, DeleteClusterEndpointResponse, DeleteClusterRequest, DeleteClusterAsGroupsRequest, DescribeExistedInstancesRequest, DescribeRegionsResponse, CreateClusterRouteResponse, DescribeClusterEndpointStatusRequest, DescribeImagesResponse, ModifyClusterAttributeRequest, DeleteClusterRouteResponse, CreateClusterEndpointVipResponse, DescribeClusterRoutesResponse, DescribeClustersRequest, DeleteClusterEndpointVipResponse, DeleteClusterInstancesRequest, ModifyClusterAsGroupAttributeResponse, CreateClusterInstancesRequest, DescribeClusterRouteTablesResponse, DescribeClusterKubeconfigRequest, CreateClusterEndpointVipRequest, DescribeRouteTableConflictsResponse, DescribeRegionsRequest, DescribeClustersResponse, DescribeExistedInstancesResponse, CreateClusterAsGroupRequest, CreateClusterResponse, DeleteClusterRouteTableRequest, CreateClusterRequest, AcquireClusterAdminRoleRequest, CreateClusterAsGroupResponse, DeleteClusterAsGroupsResponse, DescribeClusterInstancesRequest, CreateClusterEndpointResponse, AcquireClusterAdminRoleResponse, DeleteClusterEndpointVipRequest, DescribeClusterEndpointStatusResponse, AddExistedInstancesResponse, DeleteClusterRouteTableResponse, DescribeClusterAsGroupOptionRequest, ModifyClusterAttributeResponse, CreateClusterEndpointRequest, AddExistedInstancesRequest, CreateClusterInstancesResponse, DescribeClusterRouteTablesRequest, DescribeClusterRoutesRequest, DeleteClusterRouteRequest, DeleteClusterEndpointRequest, CreateClusterRouteTableRequest, DescribeClusterAsGroupsRequest, DescribeImagesRequest, ModifyClusterEndpointSPResponse, DescribeRouteTableConflictsRequest, DescribeClusterAsGroupOptionResponse, ModifyClusterAsGroupAttributeRequest, DescribeClusterAsGroupsResponse } from "./tke_models";
+import { DescribeClusterEndpointVipStatusRequest, DescribeClusterSecurityResponse, DescribeClusterSecurityRequest, DeleteClusterInstancesResponse, DescribeClusterKubeconfigResponse, CreateClusterRouteRequest, DescribeClusterEndpointVipStatusResponse, ModifyClusterEndpointSPRequest, DescribeClusterInstancesResponse, DeleteClusterResponse, CreateClusterRouteTableResponse, DeleteClusterEndpointResponse, DeleteClusterRequest, DeleteClusterAsGroupsRequest, DescribeExistedInstancesRequest, DescribeRegionsResponse, CreateClusterRouteResponse, DescribeClusterEndpointStatusRequest, DescribePrometheusAgentInstancesRequest, DescribeImagesResponse, ModifyClusterAttributeRequest, DeleteClusterRouteResponse, CreateClusterEndpointVipResponse, DescribeClusterRoutesResponse, DescribeClustersRequest, DeleteClusterEndpointVipResponse, CreatePrometheusDashboardResponse, DeleteClusterInstancesRequest, ModifyClusterAsGroupAttributeResponse, CreateClusterInstancesRequest, DescribeClusterRouteTablesResponse, DescribeClusterKubeconfigRequest, CreateClusterEndpointVipRequest, DescribeRouteTableConflictsResponse, DescribeRegionsRequest, DescribeClustersResponse, DescribeExistedInstancesResponse, ModifyClusterAttributeResponse, CreateClusterAsGroupRequest, CreateClusterResponse, DeleteClusterRouteTableRequest, CreateClusterRequest, AcquireClusterAdminRoleRequest, CreateClusterAsGroupResponse, DeleteClusterAsGroupsResponse, DescribeClusterInstancesRequest, CreateClusterEndpointResponse, AcquireClusterAdminRoleResponse, DeleteClusterEndpointVipRequest, DescribeClusterEndpointStatusResponse, CreatePrometheusDashboardRequest, AddExistedInstancesResponse, DeleteClusterRouteTableResponse, DescribeClusterAsGroupOptionRequest, DescribePrometheusAgentInstancesResponse, CreateClusterEndpointRequest, AddExistedInstancesRequest, CreateClusterInstancesResponse, DescribeClusterRouteTablesRequest, DescribeClusterRoutesRequest, DeleteClusterRouteRequest, DeleteClusterEndpointRequest, CreateClusterRouteTableRequest, DescribeClusterAsGroupsRequest, DescribeImagesRequest, ModifyClusterEndpointSPResponse, DescribeRouteTableConflictsRequest, DescribeClusterAsGroupOptionResponse, ModifyClusterAsGroupAttributeRequest, DescribeClusterAsGroupsResponse } from "./tke_models";
 /**
  * tke client
  * @class
@@ -11,6 +11,10 @@ export declare class Client extends AbstractClient {
      * 创建集群
      */
     CreateCluster(req: CreateClusterRequest, cb?: (error: string, rep: CreateClusterResponse) => void): Promise<CreateClusterResponse>;
+    /**
+     * 创建grafana监控面板
+     */
+    CreatePrometheusDashboard(req: CreatePrometheusDashboardRequest, cb?: (error: string, rep: CreatePrometheusDashboardResponse) => void): Promise<CreatePrometheusDashboardResponse>;
     /**
      * 获取镜像信息
      */
@@ -24,9 +28,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteClusterEndpoint(req: DeleteClusterEndpointRequest, cb?: (error: string, rep: DeleteClusterEndpointResponse) => void): Promise<DeleteClusterEndpointResponse>;
     /**
-     * 删除集群(YUNAPI V3版本)
+     * 扩展(新建)集群节点
      */
-    DeleteCluster(req: DeleteClusterRequest, cb?: (error: string, rep: DeleteClusterResponse) => void): Promise<DeleteClusterResponse>;
+    CreateClusterInstances(req: CreateClusterInstancesRequest, cb?: (error: string, rep: CreateClusterInstancesResponse) => void): Promise<CreateClusterInstancesResponse>;
     /**
      * 修改集群属性
      */
@@ -44,9 +48,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeClusterEndpointVipStatus(req: DescribeClusterEndpointVipStatusRequest, cb?: (error: string, rep: DescribeClusterEndpointVipStatusResponse) => void): Promise<DescribeClusterEndpointVipStatusResponse>;
     /**
-     * 扩展(新建)集群节点
+     * 删除集群(YUNAPI V3版本)
      */
-    CreateClusterInstances(req: CreateClusterInstancesRequest, cb?: (error: string, rep: CreateClusterInstancesResponse) => void): Promise<CreateClusterInstancesResponse>;
+    DeleteCluster(req: DeleteClusterRequest, cb?: (error: string, rep: DeleteClusterResponse) => void): Promise<DeleteClusterResponse>;
     /**
      * 为已经存在的集群创建伸缩组
      */
@@ -87,6 +91,10 @@ export declare class Client extends AbstractClient {
      * 创建集群访问端口(独立集群开启内网/外网访问，托管集群支持开启内网访问)
      */
     CreateClusterEndpoint(req: CreateClusterEndpointRequest, cb?: (error: string, rep: CreateClusterEndpointResponse) => void): Promise<CreateClusterEndpointResponse>;
+    /**
+     * 获取关联目标集群的实例列表
+     */
+    DescribePrometheusAgentInstances(req: DescribePrometheusAgentInstancesRequest, cb?: (error: string, rep: DescribePrometheusAgentInstancesResponse) => void): Promise<DescribePrometheusAgentInstancesResponse>;
     /**
      * 查询集群路由表
      */

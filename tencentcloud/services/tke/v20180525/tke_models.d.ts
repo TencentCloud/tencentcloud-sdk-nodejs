@@ -393,6 +393,16 @@ export interface Tag {
     Value?: string;
 }
 /**
+ * DescribePrometheusAgentInstances请求参数结构体
+ */
+export interface DescribePrometheusAgentInstancesRequest {
+    /**
+      * 集群id
+可以是tke, eks, edge的集群id
+      */
+    ClusterId: string;
+}
+/**
  * 集群网络相关的参数
  */
 export interface ClusterNetworkSettings {
@@ -649,6 +659,15 @@ export interface ClusterBasicSettings {
       * 是否开启节点的默认安全组(默认: 否，Aphla特性)
       */
     NeedWorkSecurityGroup?: boolean;
+}
+/**
+ * CreatePrometheusDashboard返回参数结构体
+ */
+export interface CreatePrometheusDashboardResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 路由表冲突对象
@@ -1074,6 +1093,30 @@ export interface Instance {
     AutoscalingGroupId: string;
 }
 /**
+ * ModifyClusterAttribute返回参数结构体
+ */
+export interface ModifyClusterAttributeResponse {
+    /**
+      * 集群所属项目
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProjectId?: number;
+    /**
+      * 集群名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterName?: string;
+    /**
+      * 集群描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterDesc?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 描述了实例的增强服务启用情况与其设置，如云安全，云监控等实例 Agent
  */
 export interface EnhancedService {
@@ -1363,6 +1406,10 @@ export interface ClusterAdvancedSettings {
       * 审计日志上传到的topic
       */
     AuditLogTopicId?: string;
+    /**
+      * 区分单网卡多IP模式和独立网卡模式
+      */
+    VpcCniType?: string;
 }
 /**
  * AcquireClusterAdminRole返回参数结构体
@@ -1481,6 +1528,24 @@ export interface DescribeClusterEndpointStatusResponse {
     RequestId?: string;
 }
 /**
+ * CreatePrometheusDashboard请求参数结构体
+ */
+export interface CreatePrometheusDashboardRequest {
+    /**
+      * 实例id
+      */
+    InstanceId: string;
+    /**
+      * 面板组名称
+      */
+    DashboardName: string;
+    /**
+      * 面板列表
+每一项是一个grafana dashboard的json定义
+      */
+    Contents: Array<string>;
+}
+/**
  * AddExistedInstances返回参数结构体
  */
 export interface AddExistedInstancesResponse {
@@ -1523,24 +1588,14 @@ export interface DescribeClusterAsGroupOptionRequest {
     ClusterId: string;
 }
 /**
- * ModifyClusterAttribute返回参数结构体
+ * DescribePrometheusAgentInstances返回参数结构体
  */
-export interface ModifyClusterAttributeResponse {
+export interface DescribePrometheusAgentInstancesResponse {
     /**
-      * 集群所属项目
+      * 关联该集群的实例列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ProjectId?: number;
-    /**
-      * 集群名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ClusterName?: string;
-    /**
-      * 集群描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ClusterDesc?: string;
+    Instances?: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

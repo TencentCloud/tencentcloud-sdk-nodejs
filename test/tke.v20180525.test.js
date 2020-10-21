@@ -28,6 +28,16 @@ it("tke.v20180525.CreateCluster", async function () {
     }
 })
 
+it("tke.v20180525.CreatePrometheusDashboard", async function () {
+    try {
+       const data = await client.CreatePrometheusDashboard({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.DescribeImages", async function () {
     try {
        const data = await client.DescribeImages({})
@@ -58,9 +68,9 @@ it("tke.v20180525.DeleteClusterEndpoint", async function () {
     }
 })
 
-it("tke.v20180525.DeleteCluster", async function () {
+it("tke.v20180525.CreateClusterInstances", async function () {
     try {
-       const data = await client.DeleteCluster({})
+       const data = await client.CreateClusterInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,9 +118,9 @@ it("tke.v20180525.DescribeClusterEndpointVipStatus", async function () {
     }
 })
 
-it("tke.v20180525.CreateClusterInstances", async function () {
+it("tke.v20180525.DeleteCluster", async function () {
     try {
-       const data = await client.CreateClusterInstances({})
+       const data = await client.DeleteCluster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -211,6 +221,16 @@ it("tke.v20180525.DescribeClusterAsGroups", async function () {
 it("tke.v20180525.CreateClusterEndpoint", async function () {
     try {
        const data = await client.CreateClusterEndpoint({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DescribePrometheusAgentInstances", async function () {
+    try {
+       const data = await client.DescribePrometheusAgentInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

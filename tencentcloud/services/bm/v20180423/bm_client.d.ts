@@ -64,7 +64,7 @@ export declare class Client extends AbstractClient {
      */
     CreatePsaRegulation(req: CreatePsaRegulationRequest, cb?: (error: string, rep: CreatePsaRegulationResponse) => void): Promise<CreatePsaRegulationResponse>;
     /**
-     * 获取获取设备类型
+     * 获取设备类型
      */
     DescribeDeviceClass(req: DescribeDeviceClassRequest, cb?: (error: string, rep: DescribeDeviceClassResponse) => void): Promise<DescribeDeviceClassResponse>;
     /**

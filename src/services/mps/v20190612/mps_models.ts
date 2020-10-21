@@ -705,7 +705,7 @@ export interface AiReviewPoliticalOcrTaskInput {
  */
 export interface MediaInputInfo {
   /**
-   * 输入来源对象的类型，现在仅支持 COS。
+   * 输入来源对象的类型，可以支持 COS 和 URL 两种。
    */
   Type: string
 
@@ -713,6 +713,12 @@ export interface MediaInputInfo {
    * 当 Type 为 COS 时有效，则该项为必填，表示视频处理 COS 对象信息。
    */
   CosInputInfo?: CosInputInfo
+
+  /**
+      * 当 Type 为 URL 时有效，则该项为必填，表示视频处理 URL 对象信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UrlInputInfo?: UrlInputInfo
 }
 
 /**
@@ -2799,6 +2805,16 @@ PicUrlExpireTime 时间点后图片将被删除）。
 }
 
 /**
+ * 视频处理 URL 对象信息。
+ */
+export interface UrlInputInfo {
+  /**
+   * 视频的 URL。
+   */
+  Url: string
+}
+
+/**
  * DescribeAdaptiveDynamicStreamingTemplates请求参数结构体
  */
 export interface DescribeAdaptiveDynamicStreamingTemplatesRequest {
@@ -3073,6 +3089,12 @@ export interface VideoTemplateInfo {
 默认值：black 。
       */
   FillType?: string
+
+  /**
+      * 视频恒定码率控制因子，取值范围为[1, 51]。
+如果指定该参数，将使用 CRF 的码率控制方式做转码。0值表示禁用 CRF 模式。
+      */
+  Vcrf?: number
 }
 
 /**
@@ -6576,17 +6598,20 @@ export interface WatermarkInput {
   /**
       * 水印自定义参数，当 Definition 填 0 时有效。
 该参数用于高度定制场景，建议您优先使用 Definition 指定水印参数。
+水印自定义参数不支持截图打水印。
       */
   RawParameter?: RawWatermarkParameter
 
   /**
-   * 文字内容，长度不超过100个字符。仅当水印类型为文字水印时填写。
-   */
+      * 文字内容，长度不超过100个字符。仅当水印类型为文字水印时填写。
+文字水印不支持截图打水印。
+      */
   TextContent?: string
 
   /**
-   * SVG 内容。长度不超过 2000000 个字符。仅当水印类型为 SVG 水印时填写。
-   */
+      * SVG 内容。长度不超过 2000000 个字符。仅当水印类型为 SVG 水印时填写。
+SVG 水印不支持截图打水印。
+      */
   SvgContent?: string
 
   /**
@@ -6837,6 +6862,12 @@ export interface VideoTemplateInfoForUpdate {
 <li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
       */
   FillType?: string
+
+  /**
+      * 视频恒定码率控制因子，取值范围为[0, 51]。
+如果指定该参数，将使用 CRF 的码率控制方式做转码。取0值表示禁用 CRF 模式。
+      */
+  Vcrf?: number
 }
 
 /**

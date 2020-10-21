@@ -821,6 +821,11 @@ Other-Overseas（其他境外地区）
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ProductRegion: string;
+    /**
+      * 接入模型，bit0是0：公版小程序未接入，bit0是1：公版小程序已接入
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AccessMode: number;
 }
 /**
  * CreateBinding请求参数结构体

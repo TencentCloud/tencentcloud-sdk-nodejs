@@ -481,23 +481,14 @@ export interface DescribeSimpleClustersResponse {
     RequestId?: string;
 }
 /**
- * 任务规则
+ * tsf 容器集群节点调度策略
  */
-export interface TaskRule {
+export interface SchedulingStrategy {
     /**
-      * 触发规则类型, Cron/Repeat
-      */
-    RuleType: string;
-    /**
-      * Cron类型规则，cron表达式。
+      * NONE：不使用调度策略；CROSS_AZ：跨可用区部署
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Expression?: string;
-    /**
-      * 时间间隔， 单位毫秒
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RepeatInterval: number;
+    Type: string;
 }
 /**
  * DescribePodInstances返回参数结构体
@@ -1841,6 +1832,11 @@ export interface Namespace {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     NamespaceType: string;
+    /**
+      * 是否开启高可用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsHaEnable: string;
 }
 /**
  * Tsf分页集群对象
@@ -1907,6 +1903,25 @@ export interface Env {
       * 服务端口
       */
     Value: string;
+}
+/**
+ * 任务规则
+ */
+export interface TaskRule {
+    /**
+      * 触发规则类型, Cron/Repeat
+      */
+    RuleType: string;
+    /**
+      * Cron类型规则，cron表达式。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Expression?: string;
+    /**
+      * 时间间隔， 单位毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RepeatInterval: number;
 }
 /**
  * DeleteContainerGroup返回参数结构体
@@ -4098,6 +4113,10 @@ export interface CreateNamespaceRequest {
       * 命名空间ID
       */
     NamespaceId?: string;
+    /**
+      * 是否开启高可用
+      */
+    IsHaEnable?: string;
 }
 /**
  * DescribeContainerGroupDetail请求参数结构体
@@ -4673,6 +4692,11 @@ export interface Cluster {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     OperationInfo: OperationInfo;
+    /**
+      * 集群版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterVersion: string;
 }
 /**
  * ModifyMicroservice返回参数结构体
@@ -5032,6 +5056,10 @@ export interface DescribeMicroservicesRequest {
       * 分页个数
       */
     Limit?: number;
+    /**
+      * 状态过滤，online、offline、single_online
+      */
+    Status?: Array<string>;
 }
 /**
  * ShrinkGroup请求参数结构体
@@ -5717,6 +5745,10 @@ export interface DeployGroupRequest {
       * 部署应用描述信息
       */
     DeployDesc?: string;
+    /**
+      * 是否允许强制启动
+      */
+    ForceStart?: boolean;
 }
 /**
  * 泳道分页查询
@@ -5989,6 +6021,10 @@ export interface DeployContainerGroupRequest {
       * 是否部署 agent 容器。若不指定该参数，则默认不部署 agent 容器。
       */
     DeployAgent?: boolean;
+    /**
+      * 节点调度策略。若不指定改参数，则默认不使用节点调度策略。
+      */
+    SchedulingStrategy?: SchedulingStrategy;
 }
 /**
  * Cos下载所需信息

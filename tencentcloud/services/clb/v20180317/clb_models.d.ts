@@ -315,19 +315,6 @@ export interface ModifyRuleRequest {
     TrpcFunc?: string;
 }
 /**
- * DescribeClassicalLBByInstanceId返回参数结构体
- */
-export interface DescribeClassicalLBByInstanceIdResponse {
-    /**
-      * 负载均衡相关信息列表
-      */
-    LoadBalancerInfoList?: Array<ClassicalLoadBalancerInfo>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * DescribeBlockIPList返回参数结构体
  */
 export interface DescribeBlockIPListResponse {
@@ -366,17 +353,21 @@ export interface DescribeRewriteRequest {
     SourceLocationIds?: Array<string>;
 }
 /**
- * CreateRule返回参数结构体
+ * DescribeTargetGroupInstances请求参数结构体
  */
-export interface CreateRuleResponse {
+export interface DescribeTargetGroupInstancesRequest {
     /**
-      * 创建的转发规则的唯一标识数组
+      * 过滤条件，当前仅支持TargetGroupId，BindIP，InstanceId过滤
       */
-    LocationIds?: Array<string>;
+    Filters: Array<Filter>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 显示数量限制，默认20
       */
-    RequestId?: string;
+    Limit?: number;
+    /**
+      * 显示的偏移量，默认为0
+      */
+    Offset?: number;
 }
 /**
  * AssociateTargetGroups请求参数结构体
@@ -386,6 +377,21 @@ export interface AssociateTargetGroupsRequest {
       * 绑定的关系数组
       */
     Associations: Array<TargetGroupAssociation>;
+}
+/**
+ * 集群所在的可用区。
+ */
+export interface ClustersZone {
+    /**
+      * 集群所在的主可用区。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MasterZone: Array<string>;
+    /**
+      * 集群所在的备可用区。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SlaveZone: Array<string>;
 }
 /**
  * 传统型负载均衡的后端服务相关信息
@@ -529,34 +535,47 @@ export interface TargetGroupInstance {
     NewPort?: number;
 }
 /**
- * DescribeRewrite返回参数结构体
+ * DescribeClassicalLBByInstanceId返回参数结构体
  */
-export interface DescribeRewriteResponse {
+export interface DescribeClassicalLBByInstanceIdResponse {
     /**
-      * 重定向转发规则构成的数组，若无重定向规则，则返回空数组
+      * 负载均衡相关信息列表
       */
-    RewriteSet?: Array<RuleOutput>;
+    LoadBalancerInfoList?: Array<ClassicalLoadBalancerInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
 }
 /**
- * DescribeTargetGroupInstances请求参数结构体
+ * CreateRule返回参数结构体
  */
-export interface DescribeTargetGroupInstancesRequest {
+export interface CreateRuleResponse {
     /**
-      * 过滤条件，当前仅支持TargetGroupId，BindIP，InstanceId过滤
+      * 创建的转发规则的唯一标识数组
       */
-    Filters: Array<Filter>;
+    LocationIds?: Array<string>;
     /**
-      * 显示数量限制，默认20
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Limit?: number;
+    RequestId?: string;
+}
+/**
+ * DescribeExclusiveClusters返回参数结构体
+ */
+export interface DescribeExclusiveClustersResponse {
     /**
-      * 显示的偏移量，默认为0
+      * 集群列表
       */
-    Offset?: number;
+    ClusterSet?: Array<Cluster>;
+    /**
+      * 集群总数目
+      */
+    TotalCount?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * RegisterTargetGroupInstances返回参数结构体
@@ -1454,6 +1473,23 @@ export interface ModifyBlockIPListRequest {
     AddStrategy?: string;
 }
 /**
+ * DescribeClusterResources返回参数结构体
+ */
+export interface DescribeClusterResourcesResponse {
+    /**
+      * 集群中资源列表
+      */
+    ClusterResourceSet?: Array<ClusterResource>;
+    /**
+      * 集群中资源总数
+      */
+    TotalCount?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyBlockIPList返回参数结构体
  */
 export interface ModifyBlockIPListResponse {
@@ -1467,24 +1503,62 @@ export interface ModifyBlockIPListResponse {
     RequestId?: string;
 }
 /**
- * 独占集群
+ * DescribeClusterResources请求参数结构体
  */
-export interface ExclusiveCluster {
+export interface DescribeClusterResourcesRequest {
     /**
-      * 4层独占集群列表
-注意：此字段可能返回 null，表示取不到有效值。
+      * 返回集群中资源列表数目，默认20，最大值100
       */
-    L4Clusters?: Array<ClusterItem>;
+    Limit?: number;
     /**
-      * 7层独占集群列表
-注意：此字段可能返回 null，表示取不到有效值。
+      * 返回集群中资源列表起始偏移量，默认0
       */
-    L7Clusters?: Array<ClusterItem>;
+    Offset?: number;
     /**
-      * vpcgw集群
-注意：此字段可能返回 null，表示取不到有效值。
+      * 查询集群中资源列表条件，详细的过滤条件如下：
+<li> cluster-id - String - 是否必填：否 - （过滤条件）按照 集群 的唯一ID过滤，如 ："tgw-12345678","stgw-12345678","vpcgw-12345678"。</li>
+<li> vip - String - 是否必填：否 - （过滤条件）按照vip过滤。</li>
+<li> loadblancer-id - String - 是否必填：否 - （过滤条件）按照负载均衡唯一ID过滤。</li>
+<li> idle - String 是否必填：否 - （过滤条件）按照是否闲置过滤，如"True","False"。</li>
       */
-    ClassicalCluster?: ClusterItem;
+    Filters?: Array<Filter>;
+}
+/**
+ * ModifyDomainAttributes请求参数结构体
+ */
+export interface ModifyDomainAttributesRequest {
+    /**
+      * 负载均衡实例 ID
+      */
+    LoadBalancerId: string;
+    /**
+      * 负载均衡监听器 ID
+      */
+    ListenerId: string;
+    /**
+      * 域名（必须是已经创建的转发规则下的域名）
+      */
+    Domain: string;
+    /**
+      * 要修改的新域名
+      */
+    NewDomain?: string;
+    /**
+      * 域名相关的证书信息，注意，仅对启用SNI的监听器适用。
+      */
+    Certificate?: CertificateInput;
+    /**
+      * 是否开启Http2，注意，只有HTTPS域名才能开启Http2。
+      */
+    Http2?: boolean;
+    /**
+      * 是否设为默认域名，注意，一个监听器下只能设置一个默认域名。
+      */
+    DefaultServer?: boolean;
+    /**
+      * 监听器下必须配置一个默认域名，若要关闭原默认域名，必须同时指定另一个域名作为新的默认域名。
+      */
+    NewDefaultServerDomain?: string;
 }
 /**
  * DescribeClassicalLBHealthStatus请求参数结构体
@@ -2147,6 +2221,33 @@ export interface Filter {
     Values: Array<string>;
 }
 /**
+ * 集群内资源类型
+ */
+export interface ClusterResource {
+    /**
+      * 集群唯一ID，如tgw-12345678。
+      */
+    ClusterId: string;
+    /**
+      * ip地址。
+      */
+    Vip: string;
+    /**
+      * 负载均衡唯一ID，如lb-12345678。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LoadBalancerId: string;
+    /**
+      * 资源是否闲置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Idle: string;
+    /**
+      * 集群名称。
+      */
+    ClusterName: string;
+}
+/**
  * ModifyDomain返回参数结构体
  */
 export interface ModifyDomainResponse {
@@ -2302,6 +2403,110 @@ export interface RewriteTarget {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TargetLocationId: string;
+}
+/**
+ * 集群的详细信息，如集群ID，名称，类型，可用区，标签等
+ */
+export interface Cluster {
+    /**
+      * 集群唯一ID
+      */
+    ClusterId: string;
+    /**
+      * 集群名称
+      */
+    ClusterName: string;
+    /**
+      * 集群类型，如TGW，STGW，VPCGW
+      */
+    ClusterType: string;
+    /**
+      * 集群标签，只有STGW集群有标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterTag: string;
+    /**
+      * 集群所在可用区，如ap-guangzhou-1
+      */
+    Zone: string;
+    /**
+      * 集群网络类型，如Public，Private
+      */
+    Network: string;
+    /**
+      * 最大连接数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxConn: number;
+    /**
+      * 最大入带宽
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxInFlow: number;
+    /**
+      * 最大入包量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxInPkg: number;
+    /**
+      * 最大出带宽
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxOutFlow: number;
+    /**
+      * 最大出包量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxOutPkg: number;
+    /**
+      * 最大新建连接数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxNewConn: number;
+    /**
+      * http最大新建连接数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HTTPMaxNewConn: number;
+    /**
+      * https最大新建连接数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HTTPSMaxNewConn: number;
+    /**
+      * http QPS
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HTTPQps: number;
+    /**
+      * https QPS
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HTTPSQps: number;
+    /**
+      * 集群内资源总数目
+      */
+    ResourceCount: number;
+    /**
+      * 集群内空闲资源数目
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IdleResourceCount: number;
+    /**
+      * 集群内转发机的数目
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LoadBalanceDirectorCount: number;
+    /**
+      * 集群的Isp属性，如："BGP","CMCC","CUCC","CTCC","INTERNAL"。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Isp: string;
+    /**
+      * 集群所在的可用区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClustersZone: ClustersZone;
 }
 /**
  * ModifyTargetWeight请求参数结构体
@@ -2644,41 +2849,24 @@ export interface ModifyTargetGroupAttributeRequest {
     Port?: number;
 }
 /**
- * ModifyDomainAttributes请求参数结构体
+ * 独占集群
  */
-export interface ModifyDomainAttributesRequest {
+export interface ExclusiveCluster {
     /**
-      * 负载均衡实例 ID
+      * 4层独占集群列表
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    LoadBalancerId: string;
+    L4Clusters?: Array<ClusterItem>;
     /**
-      * 负载均衡监听器 ID
+      * 7层独占集群列表
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ListenerId: string;
+    L7Clusters?: Array<ClusterItem>;
     /**
-      * 域名（必须是已经创建的转发规则下的域名）
+      * vpcgw集群
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Domain: string;
-    /**
-      * 要修改的新域名
-      */
-    NewDomain?: string;
-    /**
-      * 域名相关的证书信息，注意，仅对启用SNI的监听器适用。
-      */
-    Certificate?: CertificateInput;
-    /**
-      * 是否开启Http2，注意，只有HTTPS域名才能开启Http2。
-      */
-    Http2?: boolean;
-    /**
-      * 是否设为默认域名，注意，一个监听器下只能设置一个默认域名。
-      */
-    DefaultServer?: boolean;
-    /**
-      * 监听器下必须配置一个默认域名，若要关闭原默认域名，必须同时指定另一个域名作为新的默认域名。
-      */
-    NewDefaultServerDomain?: string;
+    ClassicalCluster?: ClusterItem;
 }
 /**
  * DeregisterTargets请求参数结构体
@@ -2757,29 +2945,17 @@ export interface ModifyTargetGroupInstancesWeightRequest {
     TargetGroupInstances: Array<TargetGroupInstance>;
 }
 /**
- * DescribeClassicalLBListeners请求参数结构体
+ * DescribeQuota返回参数结构体
  */
-export interface DescribeClassicalLBListenersRequest {
+export interface DescribeQuotaResponse {
     /**
-      * 负载均衡实例 ID
+      * 配额列表
       */
-    LoadBalancerId: string;
+    QuotaSet?: Array<Quota>;
     /**
-      * 负载均衡监听器ID列表
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    ListenerIds?: Array<string>;
-    /**
-      * 负载均衡监听的协议, 'TCP', 'UDP', 'HTTP', 'HTTPS'
-      */
-    Protocol?: string;
-    /**
-      * 负载均衡监听端口， 范围[1-65535]
-      */
-    ListenerPort?: number;
-    /**
-      * 监听器的状态，0 表示创建中，1 表示运行中
-      */
-    Status?: number;
+    RequestId?: string;
 }
 /**
  * DeleteTargetGroups返回参数结构体
@@ -2960,13 +3136,30 @@ export interface DescribeClassicalLBListenersResponse {
     RequestId?: string;
 }
 /**
- * ModifyTargetGroupAttribute返回参数结构体
+ * DescribeExclusiveClusters请求参数结构体
  */
-export interface ModifyTargetGroupAttributeResponse {
+export interface DescribeExclusiveClustersRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 返回集群列表数目，默认20，最大值100
       */
-    RequestId?: string;
+    Limit?: number;
+    /**
+      * 返回集群列表起始偏移量，默认0
+      */
+    Offset?: number;
+    /**
+      * 查询集群列表条件，详细的过滤条件如下：
+<li> cluster-type - String - 是否必填：否 - （过滤条件）按照 集群 的类型过滤，包括"TGW","STGW","VPCGW"。</li>
+<li> cluster-id - String - 是否必填：否 - （过滤条件）按照 集群 的唯一ID过滤，如 ："tgw-12345678","stgw-12345678","vpcgw-12345678"。</li>
+<li> cluster-name - String - 是否必填：否 - （过滤条件）按照 集群 的名称过滤。</li>
+<li> cluster-tag - String - 是否必填：否 - （过滤条件）按照 集群 的标签过滤。（只有TGW/STGW集群有集群标签） </li>
+<li> vip - String - 是否必填：否 - （过滤条件）按照 集群 内的vip过滤。</li>
+<li> loadblancer-id - String - 是否必填：否 - （过滤条件）按照 集群 内的负载均衡唯一ID过滤。</li>
+<li> network - String - 是否必填：否 - （过滤条件）按照 集群 的网络类型过滤，如："Public","Private"。</li>
+<li> zone - String - 是否必填：否 - （过滤条件）按照 集群 所在可用区过滤，如："ap-guangzhou-1"（广州一区）。</li>
+<li> isp -- String - 是否必填：否 - （过滤条件）按照TGW集群的 Isp 类型过滤，如："BGP","CMCC","CUCC","CTCC","INTERNAL"。</li>
+      */
+    Filters?: Array<Filter>;
 }
 /**
  * DescribeBlockIPTask请求参数结构体
@@ -2985,6 +3178,19 @@ export interface CreateLoadBalancerResponse {
       * 由负载均衡实例唯一 ID 组成的数组。
       */
     LoadBalancerIds?: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeRewrite返回参数结构体
+ */
+export interface DescribeRewriteResponse {
+    /**
+      * 重定向转发规则构成的数组，若无重定向规则，则返回空数组
+      */
+    RewriteSet?: Array<RuleOutput>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3012,6 +3218,15 @@ export interface Quota {
       * 配额数量。
       */
     QuotaLimit: number;
+}
+/**
+ * ModifyTargetGroupAttribute返回参数结构体
+ */
+export interface ModifyTargetGroupAttributeResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DeleteLoadBalancerListeners返回参数结构体
@@ -3192,17 +3407,29 @@ export interface DeleteTargetGroupsRequest {
     TargetGroupIds: Array<string>;
 }
 /**
- * DescribeQuota返回参数结构体
+ * DescribeClassicalLBListeners请求参数结构体
  */
-export interface DescribeQuotaResponse {
+export interface DescribeClassicalLBListenersRequest {
     /**
-      * 配额列表
+      * 负载均衡实例 ID
       */
-    QuotaSet?: Array<Quota>;
+    LoadBalancerId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 负载均衡监听器ID列表
       */
-    RequestId?: string;
+    ListenerIds?: Array<string>;
+    /**
+      * 负载均衡监听的协议, 'TCP', 'UDP', 'HTTP', 'HTTPS'
+      */
+    Protocol?: string;
+    /**
+      * 负载均衡监听端口， 范围[1-65535]
+      */
+    ListenerPort?: number;
+    /**
+      * 监听器的状态，0 表示创建中，1 表示运行中
+      */
+    Status?: number;
 }
 /**
  * 描述一个Target的健康信息

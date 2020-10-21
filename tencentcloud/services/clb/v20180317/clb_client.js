@@ -92,6 +92,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateRule", req, cb);
     }
     /**
+     * 查询集群信息列表，支持以集群类型、集群唯一ID、集群名字、集群标签、集群内vip、集群内负载均衡唯一id、集群网络类型、可用区等条件进行检索
+     */
+    async DescribeExclusiveClusters(req, cb) {
+        return this.request("DescribeExclusiveClusters", req, cb);
+    }
+    /**
      * 增加、删除、更新负载均衡的日志服务(CLS)主题
      */
     async SetLoadBalancerClsLog(req, cb) {
@@ -248,6 +254,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BatchRegisterTargets", req, cb);
     }
     /**
+     * ModifyRule 接口用来修改负载均衡七层监听器下的转发规则的各项属性，包括转发路径、健康检查属性、转发策略等。
+本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
+     */
+    async ModifyRule(req, cb) {
+        return this.request("ModifyRule", req, cb);
+    }
+    /**
      * 获取用户的clb专有日志集
      */
     async DescribeClsLogSet(req, cb) {
@@ -274,11 +287,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTaskStatus", req, cb);
     }
     /**
-     * ModifyRule 接口用来修改负载均衡七层监听器下的转发规则的各项属性，包括转发路径、健康检查属性、转发策略等。
-本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
+     * 查询独占集群中资源列表，支持按集群ID、vip、负载均衡ID、是否闲置为过滤条件检索
      */
-    async ModifyRule(req, cb) {
-        return this.request("ModifyRule", req, cb);
+    async DescribeClusterResources(req, cb) {
+        return this.request("DescribeClusterResources", req, cb);
     }
     /**
      * DescribeTargetHealth 接口用来获取负载均衡后端服务的健康检查结果，不支持传统型负载均衡。
