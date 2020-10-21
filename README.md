@@ -30,7 +30,7 @@
 # 示例
 
 ```js
-const tencentcloud = require("../../../../tencentcloud-sdk-nodejs")
+const tencentcloud = require("tencentcloud-sdk-nodejs")
 
 // 导入对应产品模块的client models。
 const CvmClient = tencentcloud.cvm.v20170312.Client
@@ -68,7 +68,7 @@ client.DescribeZones().then(
 在支持 tyepscript 项目中，采用如下方式调用
 
 ```js
-import * as tencentcloud from "../../../../tencentcloud-sdk-nodejs"
+import * as tencentcloud from "tencentcloud-sdk-nodejs"
 
 // 导入对应产品模块的client models。
 const CvmClient = tencentcloud.cvm.v20170312.Client
