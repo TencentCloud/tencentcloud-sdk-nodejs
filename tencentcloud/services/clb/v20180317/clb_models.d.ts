@@ -185,6 +185,10 @@ OPEN：公网属性， INTERNAL：内网属性。
       */
     Tags?: Array<TagInfo>;
     /**
+      * 指定Vip申请负载均衡
+      */
+    Vip?: string;
+    /**
       * 独占集群信息
       */
     ExclusiveCluster?: ExclusiveCluster;
