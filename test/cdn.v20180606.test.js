@@ -168,6 +168,16 @@ it("cdn.v20180606.ManageClsTopicDomains", async function () {
     }
 })
 
+it("cdn.v20180606.CreateDiagnoseUrl", async function () {
+    try {
+       const data = await client.CreateDiagnoseUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdn.v20180606.StartCdnDomain", async function () {
     try {
        const data = await client.StartCdnDomain({})
@@ -181,6 +191,26 @@ it("cdn.v20180606.StartCdnDomain", async function () {
 it("cdn.v20180606.StopCdnDomain", async function () {
     try {
        const data = await client.StopCdnDomain({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdn.v20180606.DescribeCertDomains", async function () {
+    try {
+       const data = await client.DescribeCertDomains({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdn.v20180606.ListDiagnoseReport", async function () {
+    try {
+       const data = await client.ListDiagnoseReport({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -348,9 +378,9 @@ it("cdn.v20180606.DescribePushTasks", async function () {
     }
 })
 
-it("cdn.v20180606.DescribeCertDomains", async function () {
+it("cdn.v20180606.DescribeDiagnoseReport", async function () {
     try {
-       const data = await client.DescribeCertDomains({})
+       const data = await client.DescribeDiagnoseReport({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

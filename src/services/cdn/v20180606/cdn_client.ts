@@ -29,6 +29,7 @@ import {
   DescribePushQuotaResponse,
   DescribePurgeQuotaResponse,
   Authentication,
+  DescribeScdnTopDataResponse,
   ImageOptimization,
   Https,
   RuleCache,
@@ -43,13 +44,14 @@ import {
   DescribePurgeQuotaRequest,
   Referer,
   UserAgentFilter,
-  DescribeScdnTopDataResponse,
+  AdvanceCacheRule,
   EnableClsLogTopicRequest,
   UpdateImageConfigResponse,
   CacheConfigNoCache,
   AccessControl,
   DeleteCdnDomainRequest,
   DescribePayTypeResponse,
+  ForceRedirect,
   PathRule,
   ListTopDataRequest,
   ListClsTopicDomainsRequest,
@@ -71,6 +73,7 @@ import {
   UpdatePayTypeResponse,
   TopicInfo,
   DescribeDomainsConfigResponse,
+  DescribeDiagnoseReportRequest,
   BriefDomain,
   UpdatePayTypeRequest,
   TpgAdapter,
@@ -105,6 +108,7 @@ import {
   AuthenticationTypeC,
   AuthenticationTypeB,
   AuthenticationTypeA,
+  SecurityConfig,
   DescribePushTasksResponse,
   ResourceOriginData,
   IpStatus,
@@ -126,8 +130,9 @@ import {
   SummarizedData,
   VerifyDomainRecordResponse,
   ManageClsTopicDomainsRequest,
+  ListDiagnoseReportRequest,
   Cache,
-  ForceRedirect,
+  DiagnoseData,
   DescribeOriginDataRequest,
   RangeOriginPull,
   ListScdnLogTasksRequest,
@@ -140,6 +145,7 @@ import {
   DescribeUrlViolationsRequest,
   RefererRule,
   IpFreqLimit,
+  CreateDiagnoseUrlResponse,
   CreateClsLogTopicRequest,
   CacheOptResult,
   CreateVerifyRecordResponse,
@@ -156,6 +162,7 @@ import {
   ScdnTopData,
   DomainLog,
   GetDisableRecordsRequest,
+  CreateDiagnoseUrlRequest,
   PurgeUrlsCacheResponse,
   DeleteClsLogTopicResponse,
   DescribeBillingDataResponse,
@@ -163,7 +170,7 @@ import {
   SchemeKey,
   DescribeImageConfigRequest,
   DescribeCdnIpResponse,
-  AdvanceCacheRule,
+  DescribeCdnDataResponse,
   DescribeIpStatusResponse,
   DescribeDistrictIspDataRequest,
   ListScdnLogTasksResponse,
@@ -182,6 +189,7 @@ import {
   ClsLogObject,
   RegionMapRelation,
   PurgePathCacheRequest,
+  DescribeDiagnoseReportResponse,
   CdnData,
   PurgeUrlsCacheRequest,
   StartCdnDomainRequest,
@@ -195,6 +203,7 @@ import {
   ResponseHeaderCache,
   ResourceBillingData,
   Sort,
+  ClientInfo,
   DescribePurgeTasksRequest,
   PushUrlsCacheResponse,
   StopCdnDomainResponse,
@@ -203,17 +212,18 @@ import {
   MaxAge,
   UpdateDomainConfigResponse,
   LogSetInfo,
-  SecurityConfig,
+  ListDiagnoseReportResponse,
   SearchClsLogRequest,
   UpdateDomainConfigRequest,
   AwsPrivateAccess,
   ManageClsTopicDomainsResponse,
   VideoSeek,
   Compatibility,
-  DescribeCdnDataResponse,
   ClsSearchLogs,
   DescribeUrlViolationsResponse,
   IpFilter,
+  DiagnoseUnit,
+  DiagnoseInfo,
   DescribePurgeTasksResponse,
   UrlRedirectRule,
   ErrorPageRule,
@@ -227,6 +237,7 @@ import {
   CacheTagKey,
   ScdnTypeData,
   DescribeDomainsRequest,
+  DiagnoseList,
   IpFilterPathRule,
 } from "./cdn_models"
 
@@ -402,6 +413,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * CreateDiagnoseUrl 用于添加域名诊断任务URL
+   */
+  async CreateDiagnoseUrl(
+    req: CreateDiagnoseUrlRequest,
+    cb?: (error: string, rep: CreateDiagnoseUrlResponse) => void
+  ): Promise<CreateDiagnoseUrlResponse> {
+    return this.request("CreateDiagnoseUrl", req, cb)
+  }
+
+  /**
    * StartCdnDomain 用于启用已停用域名的加速服务
    */
   async StartCdnDomain(
@@ -420,6 +441,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StopCdnDomainResponse) => void
   ): Promise<StopCdnDomainResponse> {
     return this.request("StopCdnDomain", req, cb)
+  }
+
+  /**
+   * DescribeCertDomains 用于校验SSL证书并提取证书中包含的域名。
+   */
+  async DescribeCertDomains(
+    req: DescribeCertDomainsRequest,
+    cb?: (error: string, rep: DescribeCertDomainsResponse) => void
+  ): Promise<DescribeCertDomainsResponse> {
+    return this.request("DescribeCertDomains", req, cb)
+  }
+
+  /**
+   * ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要详情。
+   */
+  async ListDiagnoseReport(
+    req: ListDiagnoseReportRequest,
+    cb?: (error: string, rep: ListDiagnoseReportResponse) => void
+  ): Promise<ListDiagnoseReportResponse> {
+    return this.request("ListDiagnoseReport", req, cb)
   }
 
   /**
@@ -607,13 +648,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * DescribeCertDomains 用于校验SSL证书并提取证书中包含的域名。
+   * DescribeDiagnoseReport 用于获取指定报告id的内容
    */
-  async DescribeCertDomains(
-    req: DescribeCertDomainsRequest,
-    cb?: (error: string, rep: DescribeCertDomainsResponse) => void
-  ): Promise<DescribeCertDomainsResponse> {
-    return this.request("DescribeCertDomains", req, cb)
+  async DescribeDiagnoseReport(
+    req: DescribeDiagnoseReportRequest,
+    cb?: (error: string, rep: DescribeDiagnoseReportResponse) => void
+  ): Promise<DescribeDiagnoseReportResponse> {
+    return this.request("DescribeDiagnoseReport", req, cb)
   }
 
   /**

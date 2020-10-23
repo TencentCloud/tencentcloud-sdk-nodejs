@@ -928,6 +928,11 @@ export interface CreateInstanceRequest {
    * 自定义MetaDB信息
    */
   MetaDBInfo?: CustomMetaInfo
+
+  /**
+   * 自定义应用角色。
+   */
+  ApplicationRole?: string
 }
 
 /**

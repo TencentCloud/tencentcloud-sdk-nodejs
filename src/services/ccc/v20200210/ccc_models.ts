@@ -160,11 +160,6 @@ export interface CreateSDKLoginTokenRequest {
  */
 export interface SeatUserInfo {
   /**
-   * 坐席电话号码
-   */
-  Phone: string
-
-  /**
    * 坐席名称
    */
   Name?: string
@@ -173,6 +168,11 @@ export interface SeatUserInfo {
    * 坐席邮箱
    */
   Mail?: string
+
+  /**
+   * 坐席电话号码
+   */
+  Phone?: string
 
   /**
    * 坐席昵称
@@ -189,4 +189,10 @@ export interface SeatUserInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SkillGroupNameList?: Array<string>
+
+  /**
+      * 工号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StaffNumber?: string
 }

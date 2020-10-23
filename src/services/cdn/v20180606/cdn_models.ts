@@ -340,6 +340,39 @@ off：关闭
 }
 
 /**
+ * DescribeScdnTopData返回参数结构体
+ */
+export interface DescribeScdnTopDataResponse {
+  /**
+      * WAF 攻击类型统计
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TopTypeData?: Array<ScdnTypeData>
+
+  /**
+      * TOP 攻击源 IP 统计
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TopIpData?: Array<ScdnTopData>
+
+  /**
+   * 查询的SCDN类型，当前仅支持 waf
+   */
+  Mode?: string
+
+  /**
+      * TOP URL 统计
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TopUrlData?: Array<ScdnTopUrlData>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ImageOptimization配置
  */
 export interface ImageOptimization {
@@ -675,36 +708,37 @@ export interface UserAgentFilter {
 }
 
 /**
- * DescribeScdnTopData返回参数结构体
+ * 缓存配置高级版本规则
  */
-export interface DescribeScdnTopDataResponse {
+export interface AdvanceCacheRule {
   /**
-      * WAF 攻击类型统计
+      * 规则类型：
+all：所有文件生效
+file：指定文件后缀生效
+directory：指定路径生效
+path：指定绝对路径生效
+default：源站未返回 max-age 情况下的缓存规则
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TopTypeData?: Array<ScdnTypeData>
+  CacheType: string
 
   /**
-      * TOP 攻击源 IP 统计
+      * 对应类型下的匹配内容：
+all 时填充 *
+file 时填充后缀名，如 jpg、txt
+directory 时填充路径，如 /xxx/test/
+path 时填充绝对路径，如 /xxx/test.html
+default 时填充 "no max-age"
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TopIpData?: Array<ScdnTopData>
+  CacheContents: Array<string>
 
   /**
-   * 查询的SCDN类型，当前仅支持 waf
-   */
-  Mode?: string
-
-  /**
-      * TOP URL 统计
+      * 缓存过期时间
+单位为秒，最大可设置为 365 天
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TopUrlData?: Array<ScdnTopUrlData>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  CacheTime: number
 }
 
 /**
@@ -842,6 +876,34 @@ bandwidth：带宽计费
 }
 
 /**
+ * 访问协议强制跳转配置，默认为关闭状态
+ */
+export interface ForceRedirect {
+  /**
+      * 访问强制跳转配置开关
+on：开启
+off：关闭
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Switch: string
+
+  /**
+      * 访问强制跳转类型
+http：强制 http 跳转
+https：强制 https 跳转
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RedirectType?: string
+
+  /**
+      * 强制跳转时返回状态码 
+支持 301、302
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RedirectStatusCode?: number
+}
+
+/**
  * 分路径回源配置规则。
  */
 export interface PathRule {
@@ -852,19 +914,19 @@ export interface PathRule {
   Regex: boolean
 
   /**
-      * URL路径。
+      * 匹配的URL路径。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Path: string
 
   /**
-      * 路径匹配时的回源源站。
+      * 路径匹配时的回源源站。暂不支持开了私有读写的COS源。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Origin: string
 
   /**
-      * 路径匹配时的回源Host头部。
+      * 路径匹配时回源的Host头部。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ServerName: string
@@ -876,13 +938,13 @@ export interface PathRule {
   OriginArea: string
 
   /**
-      * 路径匹配时的回源URI路径。
+      * 路径匹配时回源的URI路径。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ForwardUri?: string
 
   /**
-      * 路径匹配时的回源头部设置。
+      * 路径匹配时回源的头部设置。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RequestHeaders?: Array<HttpHeaderRule>
@@ -1518,6 +1580,16 @@ export interface DescribeDomainsConfigResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeDiagnoseReport请求参数结构体
+ */
+export interface DescribeDiagnoseReportRequest {
+  /**
+   * 报告ID
+   */
+  ReportId: string
 }
 
 /**
@@ -2680,6 +2752,16 @@ blacklist：黑名单，表示仅对 FileExtensions 中的类型进行鉴权
 }
 
 /**
+ * scdn相关的配置
+ */
+export interface SecurityConfig {
+  /**
+   * on|off
+   */
+  Switch: string
+}
+
+/**
  * DescribePushTasks返回参数结构体
  */
 export interface DescribePushTasksResponse {
@@ -3564,6 +3646,16 @@ export interface ManageClsTopicDomainsRequest {
 }
 
 /**
+ * ListDiagnoseReport请求参数结构体
+ */
+export interface ListDiagnoseReportRequest {
+  /**
+   * 用于搜索诊断URL的关键字，不填时返回用户所有的诊断任务。
+   */
+  KeyWords?: string
+}
+
+/**
  * 节点缓存过期时间配置，分为以下两种：
 + 基础版缓存过期规则配置
 + 高级版缓存过期规则配置
@@ -3589,31 +3681,23 @@ export interface Cache {
 }
 
 /**
- * 访问协议强制跳转配置，默认为关闭状态
+ * 诊断报告内容数据
  */
-export interface ForceRedirect {
+export interface DiagnoseData {
   /**
-      * 访问强制跳转配置开关
-on：开启
-off：关闭
+      * 诊断报告内容
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Switch: string
+  Data: Array<DiagnoseUnit>
 
   /**
-      * 访问强制跳转类型
-http：强制 http 跳转
-https：强制 https 跳转
+      * 当前诊断项是否正常。
+"ok"：正常
+"error"：异常
+"warning"："警告"
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  RedirectType?: string
-
-  /**
-      * 强制跳转时返回状态码 
-支持 301、302
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RedirectStatusCode?: number
+  Status: string
 }
 
 /**
@@ -4152,6 +4236,21 @@ off：关闭
 }
 
 /**
+ * CreateDiagnoseUrl返回参数结构体
+ */
+export interface CreateDiagnoseUrlResponse {
+  /**
+   * 系统生成的诊断链接，一个诊断链接最多可访问10次，有效期为24h。
+   */
+  DiagnoseLink?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateClsLogTopic请求参数结构体
  */
 export interface CreateClsLogTopicRequest {
@@ -4540,6 +4639,16 @@ enable：当前为可用状态，已解禁，可正常访问
 }
 
 /**
+ * CreateDiagnoseUrl请求参数结构体
+ */
+export interface CreateDiagnoseUrlRequest {
+  /**
+   * 需诊断的url，形如：http://www.test.com/test.txt。
+   */
+  Url: string
+}
+
+/**
  * PurgeUrlsCache返回参数结构体
  */
 export interface PurgeUrlsCacheResponse {
@@ -4641,37 +4750,27 @@ export interface DescribeCdnIpResponse {
 }
 
 /**
- * 缓存配置高级版本规则
+ * DescribeCdnData返回参数结构体
  */
-export interface AdvanceCacheRule {
+export interface DescribeCdnDataResponse {
   /**
-      * 规则类型：
-all：所有文件生效
-file：指定文件后缀生效
-directory：指定路径生效
-path：指定绝对路径生效
-default：源站未返回 max-age 情况下的缓存规则
-注意：此字段可能返回 null，表示取不到有效值。
+      * 返回数据的时间粒度，查询时指定：
+min：1 分钟粒度
+5min：5 分钟粒度
+hour：1 小时粒度
+day：天粒度
       */
-  CacheType: string
+  Interval?: string
 
   /**
-      * 对应类型下的匹配内容：
-all 时填充 *
-file 时填充后缀名，如 jpg、txt
-directory 时填充路径，如 /xxx/test/
-path 时填充绝对路径，如 /xxx/test.html
-default 时填充 "no max-age"
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CacheContents: Array<string>
+   * 指定条件查询得到的数据明细
+   */
+  Data?: Array<ResourceData>
 
   /**
-      * 缓存过期时间
-单位为秒，最大可设置为 365 天
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CacheTime: number
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5116,6 +5215,56 @@ delete：刷新全部资源
 }
 
 /**
+ * DescribeDiagnoseReport返回参数结构体
+ */
+export interface DescribeDiagnoseReportResponse {
+  /**
+   * 诊断报告基础信息
+   */
+  BaskInfo?: DiagnoseData
+
+  /**
+   * CNAME检测信息
+   */
+  CnameInfo?: DiagnoseData
+
+  /**
+   * 客户端检测信息
+   */
+  ClientInfo?: DiagnoseData
+
+  /**
+   * DNS检测信息
+   */
+  DnsInfo?: DiagnoseData
+
+  /**
+   * 网络检测信息
+   */
+  NetworkInfo?: DiagnoseData
+
+  /**
+   * 边缘节点检测信息
+   */
+  OcNodeInfo?: DiagnoseData
+
+  /**
+   * 中间源节点检测信息
+   */
+  MidNodeInfo?: DiagnoseData
+
+  /**
+   * 源站检测信息
+   */
+  OriginInfo?: DiagnoseData
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 访问明细数据类型
  */
 export interface CdnData {
@@ -5357,6 +5506,35 @@ certExpireTime，证书过期时间
 }
 
 /**
+ * 客户端信息
+ */
+export interface ClientInfo {
+  /**
+      * 省份。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProvName: string
+
+  /**
+      * 国家。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Country: string
+
+  /**
+      * 运营商。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IspName: string
+
+  /**
+      * 客户端IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Ip: string
+}
+
+/**
  * DescribePurgeTasks请求参数结构体
  */
 export interface DescribePurgeTasksRequest {
@@ -5560,13 +5738,18 @@ export interface LogSetInfo {
 }
 
 /**
- * scdn相关的配置
+ * ListDiagnoseReport返回参数结构体
  */
-export interface SecurityConfig {
+export interface ListDiagnoseReportResponse {
   /**
-   * on|off
+   * 诊断信息。
    */
-  Switch: string
+  Data?: Array<DiagnoseInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5857,30 +6040,6 @@ export interface Compatibility {
 }
 
 /**
- * DescribeCdnData返回参数结构体
- */
-export interface DescribeCdnDataResponse {
-  /**
-      * 返回数据的时间粒度，查询时指定：
-min：1 分钟粒度
-5min：5 分钟粒度
-hour：1 小时粒度
-day：天粒度
-      */
-  Interval?: string
-
-  /**
-   * 指定条件查询得到的数据明细
-   */
-  Data?: Array<ResourceData>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * Cls日志搜索结果
  */
 export interface ClsSearchLogs {
@@ -5953,6 +6112,76 @@ blacklist：黑名单
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FilterRules?: Array<IpFilterPathRule>
+}
+
+/**
+ * 诊断报告单元信息
+ */
+export interface DiagnoseUnit {
+  /**
+      * 内容单元英文名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Key: string
+
+  /**
+      * 内容单元中文名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  KeyText: string
+
+  /**
+      * 报告内容。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Value: string
+
+  /**
+      * 报告内容。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ValueText: string
+}
+
+/**
+ * 诊断信息
+ */
+export interface DiagnoseInfo {
+  /**
+      * 待诊断的URL。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiagnoseUrl: string
+
+  /**
+      * 由系统生成的诊断链接。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiagnoseLink: string
+
+  /**
+      * 诊断创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime: string
+
+  /**
+      * 诊断链接过期时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExpireDate: string
+
+  /**
+      * 诊断链接当前访问次数，一个诊断链接最多可访问10次。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VisitCount: number
+
+  /**
+      * 访问诊断链接的客户端简易信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClientList: Array<DiagnoseList>
 }
 
 /**
@@ -6342,6 +6571,46 @@ export interface DescribeDomainsRequest {
    * 查询条件过滤器，复杂类型
    */
   Filters?: Array<DomainFilter>
+}
+
+/**
+ * 客户端访问诊断URL信息列表
+ */
+export interface DiagnoseList {
+  /**
+      * 诊断任务标签。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiagnoseTag: string
+
+  /**
+      * 报告ID，用于获取详细诊断报告。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReportId: string
+
+  /**
+      * 客户端信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClientInfo: Array<ClientInfo>
+
+  /**
+      * 最终诊断结果。
+-1：已提交
+0  ：检测中
+1  ：检测正常
+2  ： 检测异常
+3  ： 诊断页面异常关闭
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FinalDiagnose: number
+
+  /**
+      * 诊断任务创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime: string
 }
 
 /**

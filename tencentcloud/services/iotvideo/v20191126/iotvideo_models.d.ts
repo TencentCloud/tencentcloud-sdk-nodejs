@@ -1177,6 +1177,14 @@ Other-Overseas（其他境外地区）
       * 设备类型, 0-普通视频设备，1-NVR设备
       */
     ProductCate?: number;
+    /**
+      * 接入模型，bit0是0：公版小程序未接入，bit0是1：公版小程序已接入
+      */
+    AccessMode?: number;
+    /**
+      * linux,android,liteos
+      */
+    Os?: string;
 }
 /**
  * RunTestOtaVersion返回参数结构体

@@ -64,6 +64,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteCertificate", req, cb);
     }
     /**
+     * 本接口（CompleteCertificate）用于主动触发证书验证。
+     */
+    async CompleteCertificate(req, cb) {
+        return this.request("CompleteCertificate", req, cb);
+    }
+    /**
      * 用户传入证书id和备注来修改证书备注。
      */
     async ModifyCertificateAlias(req, cb) {
@@ -80,6 +86,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ReplaceCertificate(req, cb) {
         return this.request("ReplaceCertificate", req, cb);
+    }
+    /**
+     * 本接口（CheckCertificateChain）用于检查证书链是否完整。
+     */
+    async CheckCertificateChain(req, cb) {
+        return this.request("CheckCertificateChain", req, cb);
     }
     /**
      * 本接口（ApplyCertificate）用于免费证书申请。

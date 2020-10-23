@@ -78,6 +78,16 @@ it("ssl.v20191205.DeleteCertificate", async function () {
     }
 })
 
+it("ssl.v20191205.CompleteCertificate", async function () {
+    try {
+       const data = await client.CompleteCertificate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ssl.v20191205.ModifyCertificateAlias", async function () {
     try {
        const data = await client.ModifyCertificateAlias({})
@@ -101,6 +111,16 @@ it("ssl.v20191205.DownloadCertificate", async function () {
 it("ssl.v20191205.ReplaceCertificate", async function () {
     try {
        const data = await client.ReplaceCertificate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ssl.v20191205.CheckCertificateChain", async function () {
+    try {
+       const data = await client.CheckCertificateChain({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

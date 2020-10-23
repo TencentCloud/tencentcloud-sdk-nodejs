@@ -24,11 +24,11 @@ export declare class Client extends AbstractClient {
      */
     DescribeCaptchaOperData(req: DescribeCaptchaOperDataRequest, cb?: (error: string, rep: DescribeCaptchaOperDataResponse) => void): Promise<DescribeCaptchaOperDataResponse>;
     /**
-     * 安全验证码小程序插件分类查询数据接口（内测中），请求量type=0、通过量type=1、验证量type=2、拦截量type=3 小时级查询（五小时左右延迟）
+     * 安全验证码小程序插件分类查询数据接口，请求量type=0、通过量type=1、验证量type=2、拦截量type=3 小时级查询（五小时左右延迟）
      */
     DescribeCaptchaMiniData(req: DescribeCaptchaMiniDataRequest, cb?: (error: string, rep: DescribeCaptchaMiniDataResponse) => void): Promise<DescribeCaptchaMiniDataResponse>;
     /**
-     * 安全验证码小程序插件用户操作数据查询（内测中）
+     * 安全验证码小程序插件用户操作数据查询
      */
     DescribeCaptchaMiniOperData(req: DescribeCaptchaMiniOperDataRequest, cb?: (error: string, rep: DescribeCaptchaMiniOperDataResponse) => void): Promise<DescribeCaptchaMiniOperDataResponse>;
     /**
@@ -36,11 +36,11 @@ export declare class Client extends AbstractClient {
      */
     DescribeCaptchaData(req: DescribeCaptchaDataRequest, cb?: (error: string, rep: DescribeCaptchaDataResponse) => void): Promise<DescribeCaptchaDataResponse>;
     /**
-     * 安全验证码小程序插件查询请求数据概况（内测中）
+     * 安全验证码小程序插件查询请求数据概况
      */
     DescribeCaptchaMiniDataSum(req: DescribeCaptchaMiniDataSumRequest, cb?: (error: string, rep: DescribeCaptchaMiniDataSumResponse) => void): Promise<DescribeCaptchaMiniDataSumResponse>;
     /**
-     * 核查验证码小程序插件票据结果（内测中）
+     * 核查验证码小程序插件票据结果
      */
     DescribeCaptchaMiniResult(req: DescribeCaptchaMiniResultRequest, cb?: (error: string, rep: DescribeCaptchaMiniResultResponse) => void): Promise<DescribeCaptchaMiniResultResponse>;
     /**

@@ -31,6 +31,16 @@ export interface ApplyCertificateResponse {
 }
 
 /**
+ * CompleteCertificate请求参数结构体
+ */
+export interface CompleteCertificateRequest {
+  /**
+   * 证书ID
+   */
+  CertificateId: string
+}
+
+/**
  * DeleteCertificate请求参数结构体
  */
 export interface DeleteCertificateRequest {
@@ -77,18 +87,20 @@ export interface CommitCertificateInformationRequest {
 }
 
 /**
- * CommitCertificateInformation返回参数结构体
+ * DownloadCertificate返回参数结构体
  */
-export interface CommitCertificateInformationResponse {
+export interface DownloadCertificateResponse {
   /**
-   * 亚信订单号。
-   */
-  OrderId?: string
+      * ZIP base64 编码内容，base64 解码后可保存为 ZIP 文件。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Content?: string
 
   /**
-   * 证书状态：0 = 审核中，1 = 已通过，2 = 审核失败，3 = 已过期，4 = 已添加DNS记录，5 = 企业证书，待提交，6 = 订单取消中，7 = 已取消，8 = 已提交资料， 待上传确认函，9 = 证书吊销中，10 = 已吊销，11 = 重颁发中，12 = 待上传吊销确认函。
-   */
-  Status?: number
+      * MIME 类型：application/zip = ZIP 压缩文件。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContentType?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -729,283 +741,6 @@ export interface DeleteCertificateResponse {
 }
 
 /**
- * 获取证书列表（DescribeCertificate）返回参数键为 DvAuthDetail 的内容。
- */
-export interface DvAuthDetail {
-  /**
-      * DV 认证密钥。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DvAuthKey?: string
-
-  /**
-      * DV 认证值。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DvAuthValue?: string
-
-  /**
-      * DV 认证值域名。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DvAuthDomain: string
-
-  /**
-      * DV 认证值路径。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DvAuthPath: string
-
-  /**
-      * DV 认证子域名。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DvAuthKeySubDomain: string
-
-  /**
-      * DV 认证信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DvAuths: Array<DvAuths>
-}
-
-/**
- * ModifyCertificateProject请求参数结构体
- */
-export interface ModifyCertificateProjectRequest {
-  /**
-   * 需要修改所属项目的证书 ID 集合，最多100个证书。
-   */
-  CertificateIdList: Array<string>
-
-  /**
-   * 项目 ID。
-   */
-  ProjectId: number
-}
-
-/**
- * 返回参数键为 DvAuths 的内容。
- */
-export interface DvAuths {
-  /**
-      * DV 认证密钥。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DvAuthKey: string
-
-  /**
-      * DV 认证值。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DvAuthValue: string
-
-  /**
-      * DV 认证值域名。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DvAuthDomain: string
-
-  /**
-      * DV 认证值路径。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DvAuthPath: string
-
-  /**
-      * DV 认证子域名，
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DvAuthSubDomain: string
-
-  /**
-      * DV 认证类型。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DvAuthVerifyType: string
-}
-
-/**
- * ModifyCertificateAlias请求参数结构体
- */
-export interface ModifyCertificateAliasRequest {
-  /**
-   * 证书 ID。
-   */
-  CertificateId: string
-
-  /**
-   * 备注名称。
-   */
-  Alias?: string
-}
-
-/**
- * DescribeCertificate请求参数结构体
- */
-export interface DescribeCertificateRequest {
-  /**
-   * 证书 ID。
-   */
-  CertificateId: string
-}
-
-/**
- * 获取证书列表（DescribeCertificates）返回参数键为 Certificates 下，key为 ProjectInfo 的内容。
- */
-export interface ProjectInfo {
-  /**
-      * 项目名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ProjectName: string
-
-  /**
-      * 项目创建用户 UIN。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ProjectCreatorUin: number
-
-  /**
-      * 项目创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ProjectCreateTime: string
-
-  /**
-      * 项目信息简述。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ProjectResume: string
-
-  /**
-      * 用户 UIN。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OwnerUin: number
-
-  /**
-      * 项目 ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ProjectId: string
-}
-
-/**
- * DescribeCertificateOperateLogs请求参数结构体
- */
-export interface DescribeCertificateOperateLogsRequest {
-  /**
-   * 偏移量，默认为0。
-   */
-  Offset?: number
-
-  /**
-   * 请求日志数量，默认为20。
-   */
-  Limit?: number
-
-  /**
-   * 开始时间，默认15天前。
-   */
-  StartTime?: string
-
-  /**
-   * 结束时间，默认现在时间。
-   */
-  EndTime?: string
-}
-
-/**
- * CancelCertificateOrder返回参数结构体
- */
-export interface CancelCertificateOrderResponse {
-  /**
-   * 取消订单成功的证书 ID。
-   */
-  CertificateId?: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * SubmitCertificateInformation返回参数结构体
- */
-export interface SubmitCertificateInformationResponse {
-  /**
-   * 证书 ID。
-   */
-  CertificateId?: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeCertificates返回参数结构体
- */
-export interface DescribeCertificatesResponse {
-  /**
-      * 总数量。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TotalCount?: number
-
-  /**
-      * 列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Certificates?: Array<Certificates>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DownloadCertificate返回参数结构体
- */
-export interface DownloadCertificateResponse {
-  /**
-      * ZIP base64 编码内容，base64 解码后可保存为 ZIP 文件。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Content?: string
-
-  /**
-      * MIME 类型：application/zip = ZIP 压缩文件。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ContentType?: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * UploadCertificate返回参数结构体
- */
-export interface UploadCertificateResponse {
-  /**
-   * 证书 ID。
-   */
-  CertificateId?: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeCertificateDetail返回参数结构体
  */
 export interface DescribeCertificateDetailResponse {
@@ -1211,6 +946,316 @@ export interface DescribeCertificateDetailResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CheckCertificateChain返回参数结构体
+ */
+export interface CheckCertificateChainResponse {
+  /**
+   * 1为通过检查，0为未通过检查。
+   */
+  IsValid?: boolean
+
+  /**
+   * 1为可信CA，0为不可信CA。
+   */
+  IsTrustedCA?: boolean
+
+  /**
+   * 包含证书链中每一段证书的通用名称。
+   */
+  Chains?: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyCertificateProject请求参数结构体
+ */
+export interface ModifyCertificateProjectRequest {
+  /**
+   * 需要修改所属项目的证书 ID 集合，最多100个证书。
+   */
+  CertificateIdList: Array<string>
+
+  /**
+   * 项目 ID。
+   */
+  ProjectId: number
+}
+
+/**
+ * 返回参数键为 DvAuths 的内容。
+ */
+export interface DvAuths {
+  /**
+      * DV 认证密钥。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DvAuthKey: string
+
+  /**
+      * DV 认证值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DvAuthValue: string
+
+  /**
+      * DV 认证值域名。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DvAuthDomain: string
+
+  /**
+      * DV 认证值路径。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DvAuthPath: string
+
+  /**
+      * DV 认证子域名，
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DvAuthSubDomain: string
+
+  /**
+      * DV 认证类型。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DvAuthVerifyType: string
+}
+
+/**
+ * ModifyCertificateAlias请求参数结构体
+ */
+export interface ModifyCertificateAliasRequest {
+  /**
+   * 证书 ID。
+   */
+  CertificateId: string
+
+  /**
+   * 备注名称。
+   */
+  Alias?: string
+}
+
+/**
+ * DescribeCertificate请求参数结构体
+ */
+export interface DescribeCertificateRequest {
+  /**
+   * 证书 ID。
+   */
+  CertificateId: string
+}
+
+/**
+ * 获取证书列表（DescribeCertificate）返回参数键为 DvAuthDetail 的内容。
+ */
+export interface DvAuthDetail {
+  /**
+      * DV 认证密钥。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DvAuthKey?: string
+
+  /**
+      * DV 认证值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DvAuthValue?: string
+
+  /**
+      * DV 认证值域名。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DvAuthDomain: string
+
+  /**
+      * DV 认证值路径。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DvAuthPath: string
+
+  /**
+      * DV 认证子域名。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DvAuthKeySubDomain: string
+
+  /**
+      * DV 认证信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DvAuths: Array<DvAuths>
+}
+
+/**
+ * 获取证书列表（DescribeCertificates）返回参数键为 Certificates 下，key为 ProjectInfo 的内容。
+ */
+export interface ProjectInfo {
+  /**
+      * 项目名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProjectName: string
+
+  /**
+      * 项目创建用户 UIN。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProjectCreatorUin: number
+
+  /**
+      * 项目创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProjectCreateTime: string
+
+  /**
+      * 项目信息简述。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProjectResume: string
+
+  /**
+      * 用户 UIN。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OwnerUin: number
+
+  /**
+      * 项目 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProjectId: string
+}
+
+/**
+ * DescribeCertificateOperateLogs请求参数结构体
+ */
+export interface DescribeCertificateOperateLogsRequest {
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+
+  /**
+   * 请求日志数量，默认为20。
+   */
+  Limit?: number
+
+  /**
+   * 开始时间，默认15天前。
+   */
+  StartTime?: string
+
+  /**
+   * 结束时间，默认现在时间。
+   */
+  EndTime?: string
+}
+
+/**
+ * CancelCertificateOrder返回参数结构体
+ */
+export interface CancelCertificateOrderResponse {
+  /**
+   * 取消订单成功的证书 ID。
+   */
+  CertificateId?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SubmitCertificateInformation返回参数结构体
+ */
+export interface SubmitCertificateInformationResponse {
+  /**
+   * 证书 ID。
+   */
+  CertificateId?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCertificates返回参数结构体
+ */
+export interface DescribeCertificatesResponse {
+  /**
+      * 总数量。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount?: number
+
+  /**
+      * 列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Certificates?: Array<Certificates>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CommitCertificateInformation返回参数结构体
+ */
+export interface CommitCertificateInformationResponse {
+  /**
+   * 亚信订单号。
+   */
+  OrderId?: string
+
+  /**
+   * 证书状态：0 = 审核中，1 = 已通过，2 = 审核失败，3 = 已过期，4 = 已添加DNS记录，5 = 企业证书，待提交，6 = 订单取消中，7 = 已取消，8 = 已提交资料， 待上传确认函，9 = 证书吊销中，10 = 已吊销，11 = 重颁发中，12 = 待上传吊销确认函。
+   */
+  Status?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UploadCertificate返回参数结构体
+ */
+export interface UploadCertificateResponse {
+  /**
+   * 证书 ID。
+   */
+  CertificateId?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CheckCertificateChain请求参数结构体
+ */
+export interface CheckCertificateChainRequest {
+  /**
+   * 待检查的证书链
+   */
+  CertificateChain: string
 }
 
 /**
@@ -1561,4 +1606,19 @@ export interface DescribeCertificatesRequest {
    * 是否可部署，可选值：1 = 可部署，0 =  不可部署。
    */
   Deployable?: number
+}
+
+/**
+ * CompleteCertificate返回参数结构体
+ */
+export interface CompleteCertificateResponse {
+  /**
+   * 证书ID
+   */
+  CertificateId?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }

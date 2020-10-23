@@ -130,6 +130,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ManageClsTopicDomains", req, cb);
     }
     /**
+     * CreateDiagnoseUrl 用于添加域名诊断任务URL
+     */
+    async CreateDiagnoseUrl(req, cb) {
+        return this.request("CreateDiagnoseUrl", req, cb);
+    }
+    /**
      * StartCdnDomain 用于启用已停用域名的加速服务
      */
     async StartCdnDomain(req, cb) {
@@ -141,6 +147,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async StopCdnDomain(req, cb) {
         return this.request("StopCdnDomain", req, cb);
+    }
+    /**
+     * DescribeCertDomains 用于校验SSL证书并提取证书中包含的域名。
+     */
+    async DescribeCertDomains(req, cb) {
+        return this.request("DescribeCertDomains", req, cb);
+    }
+    /**
+     * ListDiagnoseReport 用于获取用户诊断URL访问后各个子任务的简要详情。
+     */
+    async ListDiagnoseReport(req, cb) {
+        return this.request("ListDiagnoseReport", req, cb);
     }
     /**
      * DescribePurgeQuota 用于查询账户刷新配额和每日可用量。
@@ -263,10 +281,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePushTasks", req, cb);
     }
     /**
-     * DescribeCertDomains 用于校验SSL证书并提取证书中包含的域名。
+     * DescribeDiagnoseReport 用于获取指定报告id的内容
      */
-    async DescribeCertDomains(req, cb) {
-        return this.request("DescribeCertDomains", req, cb);
+    async DescribeDiagnoseReport(req, cb) {
+        return this.request("DescribeDiagnoseReport", req, cb);
     }
     /**
      * CreatClsLogTopic 用于创建日志主题。注意：一个日志集下至多可创建10个日志主题。

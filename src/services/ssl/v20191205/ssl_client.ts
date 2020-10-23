@@ -19,10 +19,11 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   ApplyCertificateResponse,
+  CompleteCertificateRequest,
   DeleteCertificateRequest,
   DescribeCertificateOperateLogsResponse,
   CommitCertificateInformationRequest,
-  CommitCertificateInformationResponse,
+  DownloadCertificateResponse,
   ReplaceCertificateResponse,
   DownloadCertificateRequest,
   CancelCertificateOrderRequest,
@@ -36,23 +37,26 @@ import {
   ApplyCertificateRequest,
   ReplaceCertificateRequest,
   DeleteCertificateResponse,
-  DvAuthDetail,
+  DescribeCertificateDetailResponse,
+  CheckCertificateChainResponse,
   ModifyCertificateProjectRequest,
   DvAuths,
   ModifyCertificateAliasRequest,
   DescribeCertificateRequest,
+  DvAuthDetail,
   ProjectInfo,
   DescribeCertificateOperateLogsRequest,
   CancelCertificateOrderResponse,
   SubmitCertificateInformationResponse,
   DescribeCertificatesResponse,
-  DownloadCertificateResponse,
+  CommitCertificateInformationResponse,
   UploadCertificateResponse,
-  DescribeCertificateDetailResponse,
+  CheckCertificateChainRequest,
   ModifyCertificateAliasResponse,
   SubmitCertificateInformationRequest,
   SubmittedData,
   DescribeCertificatesRequest,
+  CompleteCertificateResponse,
 } from "./ssl_models"
 
 /**
@@ -125,6 +129,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（CompleteCertificate）用于主动触发证书验证。
+   */
+  async CompleteCertificate(
+    req: CompleteCertificateRequest,
+    cb?: (error: string, rep: CompleteCertificateResponse) => void
+  ): Promise<CompleteCertificateResponse> {
+    return this.request("CompleteCertificate", req, cb)
+  }
+
+  /**
    * 用户传入证书id和备注来修改证书备注。
    */
   async ModifyCertificateAlias(
@@ -152,6 +166,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ReplaceCertificateResponse) => void
   ): Promise<ReplaceCertificateResponse> {
     return this.request("ReplaceCertificate", req, cb)
+  }
+
+  /**
+   * 本接口（CheckCertificateChain）用于检查证书链是否完整。
+   */
+  async CheckCertificateChain(
+    req: CheckCertificateChainRequest,
+    cb?: (error: string, rep: CheckCertificateChainResponse) => void
+  ): Promise<CheckCertificateChainResponse> {
+    return this.request("CheckCertificateChain", req, cb)
   }
 
   /**

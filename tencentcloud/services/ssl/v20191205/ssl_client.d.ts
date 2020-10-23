@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ApplyCertificateResponse, DeleteCertificateRequest, DescribeCertificateOperateLogsResponse, CommitCertificateInformationRequest, CommitCertificateInformationResponse, ReplaceCertificateResponse, DownloadCertificateRequest, CancelCertificateOrderRequest, ModifyCertificateProjectResponse, DescribeCertificateResponse, UploadCertificateRequest, DescribeCertificateDetailRequest, ApplyCertificateRequest, ReplaceCertificateRequest, DeleteCertificateResponse, ModifyCertificateProjectRequest, ModifyCertificateAliasRequest, DescribeCertificateRequest, DescribeCertificateOperateLogsRequest, CancelCertificateOrderResponse, SubmitCertificateInformationResponse, DescribeCertificatesResponse, DownloadCertificateResponse, UploadCertificateResponse, DescribeCertificateDetailResponse, ModifyCertificateAliasResponse, SubmitCertificateInformationRequest, DescribeCertificatesRequest } from "./ssl_models";
+import { ApplyCertificateResponse, CompleteCertificateRequest, DeleteCertificateRequest, DescribeCertificateOperateLogsResponse, CommitCertificateInformationRequest, DownloadCertificateResponse, ReplaceCertificateResponse, DownloadCertificateRequest, CancelCertificateOrderRequest, ModifyCertificateProjectResponse, DescribeCertificateResponse, UploadCertificateRequest, DescribeCertificateDetailRequest, ApplyCertificateRequest, ReplaceCertificateRequest, DeleteCertificateResponse, DescribeCertificateDetailResponse, CheckCertificateChainResponse, ModifyCertificateProjectRequest, ModifyCertificateAliasRequest, DescribeCertificateRequest, DescribeCertificateOperateLogsRequest, CancelCertificateOrderResponse, SubmitCertificateInformationResponse, DescribeCertificatesResponse, CommitCertificateInformationResponse, UploadCertificateResponse, CheckCertificateChainRequest, ModifyCertificateAliasResponse, SubmitCertificateInformationRequest, DescribeCertificatesRequest, CompleteCertificateResponse } from "./ssl_models";
 /**
  * ssl client
  * @class
@@ -32,6 +32,10 @@ export declare class Client extends AbstractClient {
      */
     DeleteCertificate(req: DeleteCertificateRequest, cb?: (error: string, rep: DeleteCertificateResponse) => void): Promise<DeleteCertificateResponse>;
     /**
+     * 本接口（CompleteCertificate）用于主动触发证书验证。
+     */
+    CompleteCertificate(req: CompleteCertificateRequest, cb?: (error: string, rep: CompleteCertificateResponse) => void): Promise<CompleteCertificateResponse>;
+    /**
      * 用户传入证书id和备注来修改证书备注。
      */
     ModifyCertificateAlias(req: ModifyCertificateAliasRequest, cb?: (error: string, rep: ModifyCertificateAliasResponse) => void): Promise<ModifyCertificateAliasResponse>;
@@ -43,6 +47,10 @@ export declare class Client extends AbstractClient {
      * 本接口（ReplaceCertificate）用于重颁发证书。已申请的免费证书仅支持 RSA 算法、密钥对参数为2048的证书重颁发，并且目前仅支持1次重颁发。
      */
     ReplaceCertificate(req: ReplaceCertificateRequest, cb?: (error: string, rep: ReplaceCertificateResponse) => void): Promise<ReplaceCertificateResponse>;
+    /**
+     * 本接口（CheckCertificateChain）用于检查证书链是否完整。
+     */
+    CheckCertificateChain(req: CheckCertificateChainRequest, cb?: (error: string, rep: CheckCertificateChainResponse) => void): Promise<CheckCertificateChainResponse>;
     /**
      * 本接口（ApplyCertificate）用于免费证书申请。
      */
