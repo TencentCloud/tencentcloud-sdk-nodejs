@@ -210,6 +210,8 @@ var sqlserver_1 = require("./sqlserver");
 Object.defineProperty(exports, "sqlserver", { enumerable: true, get: function () { return sqlserver_1.sqlserver; } });
 var ssl_1 = require("./ssl");
 Object.defineProperty(exports, "ssl", { enumerable: true, get: function () { return ssl_1.ssl; } });
+var sslpod_1 = require("./sslpod");
+Object.defineProperty(exports, "sslpod", { enumerable: true, get: function () { return sslpod_1.sslpod; } });
 var ssm_1 = require("./ssm");
 Object.defineProperty(exports, "ssm", { enumerable: true, get: function () { return ssm_1.ssm; } });
 var sts_1 = require("./sts");

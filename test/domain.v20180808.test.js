@@ -88,6 +88,26 @@ it("domain.v20180808.DescribeDomainBaseInfo", async function () {
     }
 })
 
+it("domain.v20180808.DescribeBatchOperationLogs", async function () {
+    try {
+       const data = await client.DescribeBatchOperationLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("domain.v20180808.DescribeBatchOperationLogDetails", async function () {
+    try {
+       const data = await client.DescribeBatchOperationLogDetails({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("domain.v20180808.DeleteTemplate", async function () {
     try {
        const data = await client.DeleteTemplate({})

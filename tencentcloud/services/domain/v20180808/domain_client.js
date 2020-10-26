@@ -86,6 +86,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDomainBaseInfo", req, cb);
     }
     /**
+     * 本接口 ( DescribeBatchOperationLogs ) 用于获取批量操作日志 。
+     */
+    async DescribeBatchOperationLogs(req, cb) {
+        return this.request("DescribeBatchOperationLogs", req, cb);
+    }
+    /**
+     * 本接口 ( DescribeBatchOperationLogDetails ) 用于获取批量操作日志详情。
+     */
+    async DescribeBatchOperationLogDetails(req, cb) {
+        return this.request("DescribeBatchOperationLogDetails", req, cb);
+    }
+    /**
      * 本接口 ( DeleteTemplate ) 用于删除域名信息模板。
 
 默认接口请求频率限制：20次/秒。
@@ -149,8 +161,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 本接口 ( UpdateProhibitionBatch ) 用于批量设置禁止域名更新 。
-
-默认接口请求频率限制：20次/秒。
      */
     async UpdateProhibitionBatch(req, cb) {
         return this.request("UpdateProhibitionBatch", req, cb);

@@ -25,6 +25,7 @@ import {
   DeleteTemplateResponse,
   TransferInDomainBatchRequest,
   CreateDomainBatchResponse,
+  DomainBatchDetailSet,
   ModifyDomainDNSBatchResponse,
   RenewDomainBatchRequest,
   TransferInDomainBatchResponse,
@@ -36,6 +37,7 @@ import {
   DescribeDomainBaseInfoResponse,
   DescribeTemplateListResponse,
   TransferProhibitionBatchRequest,
+  DescribeBatchOperationLogDetailsRequest,
   DescribeDomainNameListResponse,
   ContactInfo,
   DescribeDomainPriceListResponse,
@@ -52,15 +54,19 @@ import {
   DescribeDomainBaseInfoRequest,
   DomainBaseInfo,
   DescribeDomainNameListRequest,
+  DescribeBatchOperationLogsRequest,
   UploadImageRequest,
   CheckDomainRequest,
+  DescribeBatchOperationLogsResponse,
   TransferProhibitionBatchResponse,
   ModifyDomainDNSBatchRequest,
-  ModifyDomainOwnerBatchRequest,
+  DescribeBatchOperationLogDetailsResponse,
   CheckBatchStatusResponse,
   DescribeTemplateListRequest,
   ModifyDomainOwnerBatchResponse,
   SetDomainAutoRenewRequest,
+  ModifyDomainOwnerBatchRequest,
+  DomainBatchLogSet,
 } from "./domain_models"
 
 /**
@@ -159,6 +165,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口 ( DescribeBatchOperationLogs ) 用于获取批量操作日志 。
+   */
+  async DescribeBatchOperationLogs(
+    req: DescribeBatchOperationLogsRequest,
+    cb?: (error: string, rep: DescribeBatchOperationLogsResponse) => void
+  ): Promise<DescribeBatchOperationLogsResponse> {
+    return this.request("DescribeBatchOperationLogs", req, cb)
+  }
+
+  /**
+   * 本接口 ( DescribeBatchOperationLogDetails ) 用于获取批量操作日志详情。
+   */
+  async DescribeBatchOperationLogDetails(
+    req: DescribeBatchOperationLogDetailsRequest,
+    cb?: (error: string, rep: DescribeBatchOperationLogDetailsResponse) => void
+  ): Promise<DescribeBatchOperationLogDetailsResponse> {
+    return this.request("DescribeBatchOperationLogDetails", req, cb)
+  }
+
+  /**
      * 本接口 ( DeleteTemplate ) 用于删除域名信息模板。
 
 默认接口请求频率限制：20次/秒。
@@ -253,10 +279,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口 ( UpdateProhibitionBatch ) 用于批量设置禁止域名更新 。
-
-默认接口请求频率限制：20次/秒。
-     */
+   * 本接口 ( UpdateProhibitionBatch ) 用于批量设置禁止域名更新 。
+   */
   async UpdateProhibitionBatch(
     req: UpdateProhibitionBatchRequest,
     cb?: (error: string, rep: UpdateProhibitionBatchResponse) => void
