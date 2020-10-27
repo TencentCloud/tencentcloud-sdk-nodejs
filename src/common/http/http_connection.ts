@@ -116,6 +116,9 @@ export class HttpConnection {
     if (token === null) {
       delete config.headers["X-TC-Token"]
     }
+    if(region === null){
+      delete config.headers["X-TC-Region"]
+    }
 
     let form
     if (method === "GET") {
