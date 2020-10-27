@@ -81,8 +81,6 @@ export class Client extends AbstractClient {
   /**
      * 本接口 (  DescribeDomainNameList ) 获取域名列表。
 
-默认接口请求频率限制：20次/秒。
-
      */
   async DescribeDomainNameList(
     req: DescribeDomainNameListRequest,
@@ -92,10 +90,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口 ( UploadImage ) 用于上传资质照片 。
-
-默认接口请求频率限制：20次/秒。
-     */
+   * 本接口 ( UploadImage ) 用于上传资质照片 。
+   */
   async UploadImage(
     req: UploadImageRequest,
     cb?: (error: string, rep: UploadImageResponse) => void
@@ -104,10 +100,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口 ( CreateTemplate ) 用于添加域名信息模板 。
-
-默认接口请求频率限制：20次/秒。
-     */
+   * 本接口 ( CreateTemplate ) 用于添加域名信息模板 。
+   */
   async CreateTemplate(
     req: CreateTemplateRequest,
     cb?: (error: string, rep: CreateTemplateResponse) => void
@@ -128,10 +122,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口 ( ModifyDomainOwnerBatch) 用于域名批量账号间转移 。
-
-默认接口请求频率限制：20次/秒。
-     */
+   * 本接口 ( ModifyDomainOwnerBatch) 用于域名批量账号间转移 。
+   */
   async ModifyDomainOwnerBatch(
     req: ModifyDomainOwnerBatchRequest,
     cb?: (error: string, rep: ModifyDomainOwnerBatchResponse) => void
@@ -185,10 +177,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口 ( DeleteTemplate ) 用于删除域名信息模板。
-
-默认接口请求频率限制：20次/秒。
-     */
+   * 本接口 ( DeleteTemplate ) 用于删除域名信息模板。
+   */
   async DeleteTemplate(
     req: DeleteTemplateRequest,
     cb?: (error: string, rep: DeleteTemplateResponse) => void
@@ -198,8 +188,6 @@ export class Client extends AbstractClient {
 
   /**
      * 本接口 (DescribeTemplateList) 用于获取模板列表。
-
-默认接口请求频率限制：20次/秒。
 
      */
   async DescribeTemplateList(
@@ -223,10 +211,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口 ( BatchModifyDomainInfo ) 用于批量域名信息修改 。
-
-默认接口请求频率限制：20次/秒。
-     */
+   * 本接口 ( BatchModifyDomainInfo ) 用于批量域名信息修改 。
+   */
   async BatchModifyDomainInfo(
     req: BatchModifyDomainInfoRequest,
     cb?: (error: string, rep: BatchModifyDomainInfoResponse) => void

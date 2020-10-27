@@ -2586,6 +2586,10 @@ export interface Image {
       * 镜像来源类型
       */
     ImageSource: string;
+    /**
+      * 中间态和失败时候的任务ID
+      */
+    TaskId: string;
 }
 /**
  * 资源类型的Tag

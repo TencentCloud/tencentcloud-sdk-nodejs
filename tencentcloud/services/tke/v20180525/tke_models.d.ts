@@ -102,6 +102,15 @@ export interface DescribeClusterKubeconfigResponse {
     RequestId?: string;
 }
 /**
+ * RemoveNodeFromNodePool返回参数结构体
+ */
+export interface RemoveNodeFromNodePoolResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateClusterRoute请求参数结构体
  */
 export interface CreateClusterRouteRequest {
@@ -323,6 +332,23 @@ export interface CreateClusterRouteResponse {
     RequestId?: string;
 }
 /**
+ * AddNodeToNodePool请求参数结构体
+ */
+export interface AddNodeToNodePoolRequest {
+    /**
+      * 集群id
+      */
+    ClusterId: string;
+    /**
+      * 节点池id
+      */
+    NodePoolId: string;
+    /**
+      * 节点id
+      */
+    InstanceIds: Array<string>;
+}
+/**
  * 集群路由表对象
  */
 export interface RouteTableInfo {
@@ -367,17 +393,67 @@ export interface ClusterAsGroup {
     CreatedTime: string;
 }
 /**
- * DescribeClusterEndpointStatus请求参数结构体
+ * 集群的实例信息
  */
-export interface DescribeClusterEndpointStatusRequest {
+export interface Instance {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 节点角色, MASTER, WORKER, ETCD, MASTER_ETCD,ALL, 默认为WORKER
+      */
+    InstanceRole: string;
+    /**
+      * 实例异常(或者处于初始化中)的原因
+      */
+    FailedReason: string;
+    /**
+      * 实例的状态（running 运行中，initializing 初始化中，failed 异常）
+      */
+    InstanceState: string;
+    /**
+      * 实例是否封锁状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DrainStatus: string;
+    /**
+      * 节点配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceAdvancedSettings: InstanceAdvancedSettings;
+    /**
+      * 添加时间
+      */
+    CreatedTime: string;
+    /**
+      * 节点内网IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LanIP: string;
+    /**
+      * 资源池ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NodePoolId: string;
+    /**
+      * 自动伸缩组ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AutoscalingGroupId: string;
+}
+/**
+ * CreateClusterNodePoolFromExistingAsg请求参数结构体
+ */
+export interface CreateClusterNodePoolFromExistingAsgRequest {
     /**
       * 集群ID
       */
     ClusterId: string;
     /**
-      * 是否为外网访问（TRUE 外网访问 FALSE 内网访问，默认值： FALSE）
+      * 伸缩组ID
       */
-    IsExtranet?: boolean;
+    AutoscalingGroupId: string;
 }
 /**
  * 标签绑定的资源类型，当前支持类型："cluster"
@@ -813,6 +889,23 @@ export interface CreateClusterEndpointVipRequest {
     SecurityPolicies?: Array<string>;
 }
 /**
+ * kubernetes Taint
+ */
+export interface Taint {
+    /**
+      * Key
+      */
+    Key?: string;
+    /**
+      * Value
+      */
+    Value?: string;
+    /**
+      * Effect
+      */
+    Effect?: string;
+}
+/**
  * 已经存在的实例信息
  */
 export interface ExistedInstance {
@@ -888,18 +981,18 @@ export interface ExistedInstance {
     InstanceChargeType: string;
 }
 /**
- * DescribeRouteTableConflicts返回参数结构体
+ * DescribeClusterNodePools返回参数结构体
  */
-export interface DescribeRouteTableConflictsResponse {
+export interface DescribeClusterNodePoolsResponse {
     /**
-      * 路由表是否冲突。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    HasConflict?: boolean;
-    /**
-      * 路由表冲突列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RouteTableConflictSet?: Array<RouteTableConflict>;
+    RequestId?: string;
+}
+/**
+ * AddNodeToNodePool返回参数结构体
+ */
+export interface AddNodeToNodePoolResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -992,6 +1085,15 @@ export interface DataDisk {
     MountTarget?: string;
 }
 /**
+ * ModifyClusterNodePool返回参数结构体
+ */
+export interface ModifyClusterNodePoolResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeExistedInstances返回参数结构体
  */
 export interface DescribeExistedInstancesResponse {
@@ -1043,54 +1145,30 @@ export interface LoginSettings {
     KeepImageLogin?: string;
 }
 /**
- * 集群的实例信息
+ * CreateClusterNodePoolFromExistingAsg返回参数结构体
  */
-export interface Instance {
+export interface CreateClusterNodePoolFromExistingAsgResponse {
     /**
-      * 实例ID
+      * 节点池ID
       */
-    InstanceId: string;
+    NodePoolId?: string;
     /**
-      * 节点角色, MASTER, WORKER, ETCD, MASTER_ETCD,ALL, 默认为WORKER
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    InstanceRole: string;
+    RequestId?: string;
+}
+/**
+ * DescribeClusterEndpointStatus请求参数结构体
+ */
+export interface DescribeClusterEndpointStatusRequest {
     /**
-      * 实例异常(或者处于初始化中)的原因
+      * 集群ID
       */
-    FailedReason: string;
+    ClusterId: string;
     /**
-      * 实例的状态（running 运行中，initializing 初始化中，failed 异常）
+      * 是否为外网访问（TRUE 外网访问 FALSE 内网访问，默认值： FALSE）
       */
-    InstanceState: string;
-    /**
-      * 实例是否封锁状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DrainStatus: string;
-    /**
-      * 节点配置
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    InstanceAdvancedSettings: InstanceAdvancedSettings;
-    /**
-      * 添加时间
-      */
-    CreatedTime: string;
-    /**
-      * 节点内网IP
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    LanIP: string;
-    /**
-      * 资源池ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    NodePoolId: string;
-    /**
-      * 自动伸缩组ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AutoscalingGroupId: string;
+    IsExtranet?: boolean;
 }
 /**
  * ModifyClusterAttribute返回参数结构体
@@ -1153,6 +1231,24 @@ export interface CreateClusterAsGroupRequest {
       * 节点Label数组
       */
     Labels?: Array<Label>;
+}
+/**
+ * DescribeRouteTableConflicts返回参数结构体
+ */
+export interface DescribeRouteTableConflictsResponse {
+    /**
+      * 路由表是否冲突。
+      */
+    HasConflict?: boolean;
+    /**
+      * 路由表冲突列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RouteTableConflictSet?: Array<RouteTableConflict>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateCluster返回参数结构体
@@ -1297,6 +1393,46 @@ export interface DescribeClusterInstancesRequest {
     InstanceRole?: string;
 }
 /**
+ * 描述了k8s集群相关配置与信息。
+ */
+export interface InstanceAdvancedSettings {
+    /**
+      * 数据盘挂载点, 默认不挂载数据盘. 已格式化的 ext3，ext4，xfs 文件系统的数据盘将直接挂载，其他文件系统或未格式化的数据盘将自动格式化为ext4 并挂载，请注意备份数据! 无数据盘或有多块数据盘的云主机此设置不生效。
+注意，注意，多盘场景请使用下方的DataDisks数据结构，设置对应的云盘类型、云盘大小、挂载路径、是否格式化等信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MountTarget?: string;
+    /**
+      * dockerd --graph 指定值, 默认为 /var/lib/docker
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DockerGraphPath?: string;
+    /**
+      * base64 编码的用户脚本, 此脚本会在 k8s 组件运行后执行, 需要用户保证脚本的可重入及重试逻辑, 脚本及其生成的日志文件可在节点的 /data/ccs_userscript/ 路径查看, 如果要求节点需要在进行初始化完成后才可加入调度, 可配合 unschedulable 参数使用, 在 userScript 最后初始化完成后, 添加 kubectl uncordon nodename --kubeconfig=/root/.kube/config 命令使节点加入调度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UserScript?: string;
+    /**
+      * 设置加入的节点是否参与调度，默认值为0，表示参与调度；非0表示不参与调度, 待节点初始化完成之后, 可执行kubectl uncordon nodename使node加入调度.
+      */
+    Unschedulable?: number;
+    /**
+      * 节点Label数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Labels?: Array<Label>;
+    /**
+      * 多盘数据盘挂载信息，同时请确保购买CVM的参数传递了购买多个数据盘的信息，如添加节点CreateClusterInstances API的RunInstancesPara下的DataDisks也设置了购买多个数据盘, 具体可以参考CreateClusterInstances接口的，添加集群节点(多块数据盘)样例
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DataDisks?: Array<DataDisk>;
+    /**
+      * 节点相关的自定义参数信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExtraArgs?: InstanceExtraArgs;
+}
+/**
  * >描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
 > * 若存在多个`Filter`时，`Filter`间的关系为逻辑与（`AND`）关系。
 > * 若同一个`Filter`存在多个`Values`，同一`Filter`下`Values`间的关系为逻辑或（`OR`）关系。
@@ -1319,6 +1455,43 @@ export interface Filter {
       * 字段的过滤值。
       */
     Values: Array<string>;
+}
+/**
+ * ModifyClusterNodePool请求参数结构体
+ */
+export interface ModifyClusterNodePoolRequest {
+    /**
+      * 集群ID
+      */
+    ClusterId: string;
+    /**
+      * 节点池ID
+      */
+    NodePoolId: string;
+    /**
+      * 名称
+      */
+    Name?: string;
+    /**
+      * 最大节点数
+      */
+    MaxNodesNum?: number;
+    /**
+      * 最小节点数
+      */
+    MinNodesNum?: number;
+    /**
+      * 标签
+      */
+    Labels?: Array<Label>;
+    /**
+      * 污点
+      */
+    Taints?: Array<Taint>;
+    /**
+      * 是否开启伸缩
+      */
+    EnableAutoscale?: boolean;
 }
 /**
  * 镜像信息
@@ -1353,6 +1526,43 @@ export interface CreateClusterEndpointResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * CreateClusterNodePool请求参数结构体
+ */
+export interface CreateClusterNodePoolRequest {
+    /**
+      * cluster id
+      */
+    ClusterId: string;
+    /**
+      * AutoScalingGroupPara AS组参数
+      */
+    AutoScalingGroupPara: string;
+    /**
+      * LaunchConfigurePara 运行参数
+      */
+    LaunchConfigurePara: string;
+    /**
+      * InstanceAdvancedSettings 示例参数
+      */
+    InstanceAdvancedSettings: InstanceAdvancedSettings;
+    /**
+      * 是否启用自动伸缩
+      */
+    EnableAutoscale: boolean;
+    /**
+      * 节点池名称
+      */
+    Name?: string;
+    /**
+      * Labels标签
+      */
+    Labels?: Array<Label>;
+    /**
+      * Taints互斥
+      */
+    Taints?: Array<Taint>;
 }
 /**
  * 集群高级配置
@@ -1419,6 +1629,23 @@ export interface AcquireClusterAdminRoleResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DeleteClusterNodePool请求参数结构体
+ */
+export interface DeleteClusterNodePoolRequest {
+    /**
+      * 节点池对应的 ClusterId
+      */
+    ClusterId: string;
+    /**
+      * 需要删除的节点池 Id 列表
+      */
+    NodePoolIds: Array<string>;
+    /**
+      * 删除节点池时是否保留节点池内节点(节点仍然会被移出集群，但对应的实例不会被销毁)
+      */
+    KeepInstance: boolean;
 }
 /**
  * DeleteClusterEndpointVip请求参数结构体
@@ -1740,6 +1967,15 @@ export interface CreateClusterInstancesResponse {
     RequestId?: string;
 }
 /**
+ * DescribeClusterNodePools请求参数结构体
+ */
+export interface DescribeClusterNodePoolsRequest {
+    /**
+      * ClusterId（集群id）
+      */
+    ClusterId: string;
+}
+/**
  * DescribeClusterRouteTables请求参数结构体
  */
 export declare type DescribeClusterRouteTablesRequest = null;
@@ -1802,6 +2038,19 @@ export interface DeleteClusterEndpointRequest {
       * 是否为外网访问（TRUE 外网访问 FALSE 内网访问，默认值： FALSE）
       */
     IsExtranet?: boolean;
+}
+/**
+ * DescribeClusterNodePoolDetail请求参数结构体
+ */
+export interface DescribeClusterNodePoolDetailRequest {
+    /**
+      * 集群id
+      */
+    ClusterId: string;
+    /**
+      * 节点池id
+      */
+    NodePoolId: string;
 }
 /**
  * CreateClusterRouteTable请求参数结构体
@@ -1932,6 +2181,15 @@ export interface ClusterAsGroupAttribute {
     AutoScalingGroupRange?: AutoScalingGroupRange;
 }
 /**
+ * DeleteClusterNodePool返回参数结构体
+ */
+export interface DeleteClusterNodePoolResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 描述了 “云监控” 服务相关的信息
  */
 export interface RunMonitorServiceEnabled {
@@ -1941,44 +2199,17 @@ export interface RunMonitorServiceEnabled {
     Enabled?: boolean;
 }
 /**
- * 描述了k8s集群相关配置与信息。
+ * CreateClusterNodePool返回参数结构体
  */
-export interface InstanceAdvancedSettings {
+export interface CreateClusterNodePoolResponse {
     /**
-      * 数据盘挂载点, 默认不挂载数据盘. 已格式化的 ext3，ext4，xfs 文件系统的数据盘将直接挂载，其他文件系统或未格式化的数据盘将自动格式化为ext4 并挂载，请注意备份数据! 无数据盘或有多块数据盘的云主机此设置不生效。
-注意，注意，多盘场景请使用下方的DataDisks数据结构，设置对应的云盘类型、云盘大小、挂载路径、是否格式化等信息。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 节点池id
       */
-    MountTarget?: string;
+    NodePoolId?: string;
     /**
-      * dockerd --graph 指定值, 默认为 /var/lib/docker
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    DockerGraphPath?: string;
-    /**
-      * base64 编码的用户脚本, 此脚本会在 k8s 组件运行后执行, 需要用户保证脚本的可重入及重试逻辑, 脚本及其生成的日志文件可在节点的 /data/ccs_userscript/ 路径查看, 如果要求节点需要在进行初始化完成后才可加入调度, 可配合 unschedulable 参数使用, 在 userScript 最后初始化完成后, 添加 kubectl uncordon nodename --kubeconfig=/root/.kube/config 命令使节点加入调度
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UserScript?: string;
-    /**
-      * 设置加入的节点是否参与调度，默认值为0，表示参与调度；非0表示不参与调度, 待节点初始化完成之后, 可执行kubectl uncordon nodename使node加入调度.
-      */
-    Unschedulable?: number;
-    /**
-      * 节点Label数组
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Labels?: Array<Label>;
-    /**
-      * 多盘数据盘挂载信息，同时请确保购买CVM的参数传递了购买多个数据盘的信息，如添加节点CreateClusterInstances API的RunInstancesPara下的DataDisks也设置了购买多个数据盘, 具体可以参考CreateClusterInstances接口的，添加集群节点(多块数据盘)样例
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DataDisks?: Array<DataDisk>;
-    /**
-      * 节点相关的自定义参数信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ExtraArgs?: InstanceExtraArgs;
+    RequestId?: string;
 }
 /**
  * ModifyClusterAsGroupAttribute请求参数结构体
@@ -2022,6 +2253,32 @@ export interface DescribeClusterAsGroupsResponse {
       * 集群关联的伸缩组列表
       */
     ClusterAsGroupSet?: Array<ClusterAsGroup>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * RemoveNodeFromNodePool请求参数结构体
+ */
+export interface RemoveNodeFromNodePoolRequest {
+    /**
+      * 集群id
+      */
+    ClusterId: string;
+    /**
+      * 节点池id
+      */
+    NodePoolId: string;
+    /**
+      * 节点id列表
+      */
+    InstanceIds: Array<string>;
+}
+/**
+ * DescribeClusterNodePoolDetail返回参数结构体
+ */
+export interface DescribeClusterNodePoolDetailResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

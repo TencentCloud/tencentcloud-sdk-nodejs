@@ -89,6 +89,7 @@ import {
   RunTestOtaVersionRequest,
   DescribeDeviceResponse,
   SetMessageQueueResponse,
+  Contents,
   DeleteOtaVersionResponse,
   UploadOtaVersionRequest,
   DescribeIotModelsRequest,

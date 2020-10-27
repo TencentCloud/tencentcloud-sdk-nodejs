@@ -28,9 +28,9 @@ it("ssl.v20191205.DescribeCertificates", async function () {
     }
 })
 
-it("ssl.v20191205.ModifyCertificateProject", async function () {
+it("ssl.v20191205.UploadRevokeLetter", async function () {
     try {
-       const data = await client.ModifyCertificateProject({})
+       const data = await client.UploadRevokeLetter({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -38,9 +38,29 @@ it("ssl.v20191205.ModifyCertificateProject", async function () {
     }
 })
 
-it("ssl.v20191205.UploadCertificate", async function () {
+it("ssl.v20191205.UploadConfirmLetter", async function () {
     try {
-       const data = await client.UploadCertificate({})
+       const data = await client.UploadConfirmLetter({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ssl.v20191205.CreateCertificate", async function () {
+    try {
+       const data = await client.CreateCertificate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ssl.v20191205.ModifyCertificateProject", async function () {
+    try {
+       const data = await client.ModifyCertificateProject({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -81,6 +101,16 @@ it("ssl.v20191205.DeleteCertificate", async function () {
 it("ssl.v20191205.CompleteCertificate", async function () {
     try {
        const data = await client.CompleteCertificate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ssl.v20191205.UploadCertificate", async function () {
+    try {
+       const data = await client.UploadCertificate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -131,6 +161,16 @@ it("ssl.v20191205.CheckCertificateChain", async function () {
 it("ssl.v20191205.ApplyCertificate", async function () {
     try {
        const data = await client.ApplyCertificate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ssl.v20191205.RevokeCertificate", async function () {
+    try {
+       const data = await client.RevokeCertificate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

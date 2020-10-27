@@ -142,6 +142,7 @@ import {
   InstanceCounts,
   UpdateFleetNameRequest,
   CreateFleetResponse,
+  Filter,
   UpdateFleetAttributesResponse,
   DescribeFleetUtilizationRequest,
   DescribeGameServerSessionDetailsRequest,

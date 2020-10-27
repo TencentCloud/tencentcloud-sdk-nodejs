@@ -10,20 +10,14 @@ export declare class Client extends AbstractClient {
     /**
      * 本接口 (  DescribeDomainNameList ) 获取域名列表。
 
-默认接口请求频率限制：20次/秒。
-
      */
     DescribeDomainNameList(req: DescribeDomainNameListRequest, cb?: (error: string, rep: DescribeDomainNameListResponse) => void): Promise<DescribeDomainNameListResponse>;
     /**
      * 本接口 ( UploadImage ) 用于上传资质照片 。
-
-默认接口请求频率限制：20次/秒。
      */
     UploadImage(req: UploadImageRequest, cb?: (error: string, rep: UploadImageResponse) => void): Promise<UploadImageResponse>;
     /**
      * 本接口 ( CreateTemplate ) 用于添加域名信息模板 。
-
-默认接口请求频率限制：20次/秒。
      */
     CreateTemplate(req: CreateTemplateRequest, cb?: (error: string, rep: CreateTemplateResponse) => void): Promise<CreateTemplateResponse>;
     /**
@@ -34,8 +28,6 @@ export declare class Client extends AbstractClient {
     TransferProhibitionBatch(req: TransferProhibitionBatchRequest, cb?: (error: string, rep: TransferProhibitionBatchResponse) => void): Promise<TransferProhibitionBatchResponse>;
     /**
      * 本接口 ( ModifyDomainOwnerBatch) 用于域名批量账号间转移 。
-
-默认接口请求频率限制：20次/秒。
      */
     ModifyDomainOwnerBatch(req: ModifyDomainOwnerBatchRequest, cb?: (error: string, rep: ModifyDomainOwnerBatchResponse) => void): Promise<ModifyDomainOwnerBatchResponse>;
     /**
@@ -61,14 +53,10 @@ export declare class Client extends AbstractClient {
     DescribeBatchOperationLogDetails(req: DescribeBatchOperationLogDetailsRequest, cb?: (error: string, rep: DescribeBatchOperationLogDetailsResponse) => void): Promise<DescribeBatchOperationLogDetailsResponse>;
     /**
      * 本接口 ( DeleteTemplate ) 用于删除域名信息模板。
-
-默认接口请求频率限制：20次/秒。
      */
     DeleteTemplate(req: DeleteTemplateRequest, cb?: (error: string, rep: DeleteTemplateResponse) => void): Promise<DeleteTemplateResponse>;
     /**
      * 本接口 (DescribeTemplateList) 用于获取模板列表。
-
-默认接口请求频率限制：20次/秒。
 
      */
     DescribeTemplateList(req: DescribeTemplateListRequest, cb?: (error: string, rep: DescribeTemplateListResponse) => void): Promise<DescribeTemplateListResponse>;
@@ -81,8 +69,6 @@ export declare class Client extends AbstractClient {
     RenewDomainBatch(req: RenewDomainBatchRequest, cb?: (error: string, rep: RenewDomainBatchResponse) => void): Promise<RenewDomainBatchResponse>;
     /**
      * 本接口 ( BatchModifyDomainInfo ) 用于批量域名信息修改 。
-
-默认接口请求频率限制：20次/秒。
      */
     BatchModifyDomainInfo(req: BatchModifyDomainInfoRequest, cb?: (error: string, rep: BatchModifyDomainInfoResponse) => void): Promise<BatchModifyDomainInfoResponse>;
     /**

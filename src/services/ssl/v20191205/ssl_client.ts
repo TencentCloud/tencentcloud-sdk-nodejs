@@ -33,10 +33,16 @@ import {
   DescribeCertificateResponse,
   OperationLog,
   UploadCertificateRequest,
+  UploadConfirmLetterRequest,
   DescribeCertificateDetailRequest,
   ApplyCertificateRequest,
   ReplaceCertificateRequest,
+  UploadRevokeLetterResponse,
+  CreateCertificateResponse,
+  UploadRevokeLetterRequest,
   DeleteCertificateResponse,
+  RevokeCertificateResponse,
+  RevokeDomainValidateAuths,
   DescribeCertificateDetailResponse,
   CheckCertificateChainResponse,
   ModifyCertificateProjectRequest,
@@ -47,9 +53,10 @@ import {
   ProjectInfo,
   DescribeCertificateOperateLogsRequest,
   CancelCertificateOrderResponse,
-  SubmitCertificateInformationResponse,
+  CreateCertificateRequest,
   DescribeCertificatesResponse,
   CommitCertificateInformationResponse,
+  UploadConfirmLetterResponse,
   UploadCertificateResponse,
   CheckCertificateChainRequest,
   ModifyCertificateAliasResponse,
@@ -57,6 +64,8 @@ import {
   SubmittedData,
   DescribeCertificatesRequest,
   CompleteCertificateResponse,
+  SubmitCertificateInformationResponse,
+  RevokeCertificateRequest,
 } from "./ssl_models"
 
 /**
@@ -79,6 +88,36 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（UploadRevokeLetter）用于上传证书吊销确认函。
+   */
+  async UploadRevokeLetter(
+    req: UploadRevokeLetterRequest,
+    cb?: (error: string, rep: UploadRevokeLetterResponse) => void
+  ): Promise<UploadRevokeLetterResponse> {
+    return this.request("UploadRevokeLetter", req, cb)
+  }
+
+  /**
+   * 本接口（UploadConfirmLetter）用于上传证书确认函。
+   */
+  async UploadConfirmLetter(
+    req: UploadConfirmLetterRequest,
+    cb?: (error: string, rep: UploadConfirmLetterResponse) => void
+  ): Promise<UploadConfirmLetterResponse> {
+    return this.request("UploadConfirmLetter", req, cb)
+  }
+
+  /**
+   * 本接口（CreateCertificate）用于创建付费证书。
+   */
+  async CreateCertificate(
+    req: CreateCertificateRequest,
+    cb?: (error: string, rep: CreateCertificateResponse) => void
+  ): Promise<CreateCertificateResponse> {
+    return this.request("CreateCertificate", req, cb)
+  }
+
+  /**
    * 批量修改证书所属项目。
    */
   async ModifyCertificateProject(
@@ -86,16 +125,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyCertificateProjectResponse) => void
   ): Promise<ModifyCertificateProjectResponse> {
     return this.request("ModifyCertificateProject", req, cb)
-  }
-
-  /**
-   * 本接口（UploadCertificate）用于上传证书。
-   */
-  async UploadCertificate(
-    req: UploadCertificateRequest,
-    cb?: (error: string, rep: UploadCertificateResponse) => void
-  ): Promise<UploadCertificateResponse> {
-    return this.request("UploadCertificate", req, cb)
   }
 
   /**
@@ -136,6 +165,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CompleteCertificateResponse) => void
   ): Promise<CompleteCertificateResponse> {
     return this.request("CompleteCertificate", req, cb)
+  }
+
+  /**
+   * 本接口（UploadCertificate）用于上传证书。
+   */
+  async UploadCertificate(
+    req: UploadCertificateRequest,
+    cb?: (error: string, rep: UploadCertificateResponse) => void
+  ): Promise<UploadCertificateResponse> {
+    return this.request("UploadCertificate", req, cb)
   }
 
   /**
@@ -186,6 +225,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ApplyCertificateResponse) => void
   ): Promise<ApplyCertificateResponse> {
     return this.request("ApplyCertificate", req, cb)
+  }
+
+  /**
+   * 本接口（RevokeCertificate）用于吊销证书。
+   */
+  async RevokeCertificate(
+    req: RevokeCertificateRequest,
+    cb?: (error: string, rep: RevokeCertificateResponse) => void
+  ): Promise<RevokeCertificateResponse> {
+    return this.request("RevokeCertificate", req, cb)
   }
 
   /**

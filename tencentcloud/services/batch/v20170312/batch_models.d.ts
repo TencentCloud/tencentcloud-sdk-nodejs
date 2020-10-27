@@ -2013,7 +2013,7 @@ export interface ItemPrice {
       */
     DiscountPrice?: number;
     /**
-      * 折扣，如20.0代表2折
+      * 折扣，如20.0代表2折。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Discount: number;
@@ -2042,6 +2042,60 @@ export interface ItemPrice {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UnitPriceDiscountThirdStep: number;
+    /**
+      * 预支三年合计费用的原价，预付费模式使用，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OriginalPriceThreeYear: number;
+    /**
+      * 预支三年合计费用的折扣价，预付费模式使用，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DiscountPriceThreeYear: number;
+    /**
+      * 预支三年应用的折扣，如20.0代表2折。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DiscountThreeYear: number;
+    /**
+      * 预支五年合计费用的原价，预付费模式使用，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OriginalPriceFiveYear: number;
+    /**
+      * 预支五年合计费用的折扣价，预付费模式使用，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DiscountPriceFiveYear: number;
+    /**
+      * 预支五年应用的折扣，如20.0代表2折。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DiscountFiveYear: number;
+    /**
+      * 预支一年合计费用的原价，预付费模式使用，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OriginalPriceOneYear: number;
+    /**
+      * 预支一年合计费用的折扣价，预付费模式使用，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DiscountPriceOneYear: number;
+    /**
+      * 预支一年应用的折扣，如20.0代表2折。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DiscountOneYear: number;
 }
 /**
  * 描述实例机型配额信息。

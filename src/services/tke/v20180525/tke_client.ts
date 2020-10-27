@@ -23,6 +23,7 @@ import {
   DescribeClusterSecurityRequest,
   DeleteClusterInstancesResponse,
   DescribeClusterKubeconfigResponse,
+  RemoveNodeFromNodePoolResponse,
   CreateClusterRouteRequest,
   DescribeClusterEndpointVipStatusResponse,
   ModifyClusterEndpointSPRequest,
@@ -37,9 +38,11 @@ import {
   DescribeExistedInstancesRequest,
   DescribeRegionsResponse,
   CreateClusterRouteResponse,
+  AddNodeToNodePoolRequest,
   RouteTableInfo,
   ClusterAsGroup,
-  DescribeClusterEndpointStatusRequest,
+  Instance,
+  CreateClusterNodePoolFromExistingAsgRequest,
   Tag,
   DescribePrometheusAgentInstancesRequest,
   ClusterNetworkSettings,
@@ -64,20 +67,25 @@ import {
   DescribeClusterKubeconfigRequest,
   ClusterCIDRSettings,
   CreateClusterEndpointVipRequest,
+  Taint,
   ExistedInstance,
-  DescribeRouteTableConflictsResponse,
+  DescribeClusterNodePoolsResponse,
+  AddNodeToNodePoolResponse,
   TagSpecification,
   DescribeRegionsRequest,
   DescribeClustersResponse,
   ClusterExtraArgs,
   DataDisk,
+  ModifyClusterNodePoolResponse,
   DescribeExistedInstancesResponse,
   ResourceDeleteOption,
   LoginSettings,
-  Instance,
+  CreateClusterNodePoolFromExistingAsgResponse,
+  DescribeClusterEndpointStatusRequest,
   ModifyClusterAttributeResponse,
   EnhancedService,
   CreateClusterAsGroupRequest,
+  DescribeRouteTableConflictsResponse,
   CreateClusterResponse,
   RunSecurityServiceEnabled,
   DeleteClusterRouteTableRequest,
@@ -87,11 +95,15 @@ import {
   CreateClusterAsGroupResponse,
   DeleteClusterAsGroupsResponse,
   DescribeClusterInstancesRequest,
+  InstanceAdvancedSettings,
   Filter,
+  ModifyClusterNodePoolRequest,
   ImageInstance,
   CreateClusterEndpointResponse,
+  CreateClusterNodePoolRequest,
   ClusterAdvancedSettings,
   AcquireClusterAdminRoleResponse,
+  DeleteClusterNodePoolRequest,
   DeleteClusterEndpointVipRequest,
   Cluster,
   DescribeClusterEndpointStatusResponse,
@@ -104,11 +116,13 @@ import {
   AddExistedInstancesRequest,
   ClusterAsGroupOption,
   CreateClusterInstancesResponse,
+  DescribeClusterNodePoolsRequest,
   DescribeClusterRouteTablesRequest,
   ExistedInstancesForNode,
   DescribeClusterRoutesRequest,
   DeleteClusterRouteRequest,
   DeleteClusterEndpointRequest,
+  DescribeClusterNodePoolDetailRequest,
   CreateClusterRouteTableRequest,
   DescribeClusterAsGroupsRequest,
   DescribeImagesRequest,
@@ -117,11 +131,14 @@ import {
   ExistedInstancesPara,
   DescribeClusterAsGroupOptionResponse,
   ClusterAsGroupAttribute,
+  DeleteClusterNodePoolResponse,
   RunMonitorServiceEnabled,
-  InstanceAdvancedSettings,
+  CreateClusterNodePoolResponse,
   ModifyClusterAsGroupAttributeRequest,
   InstanceDataDiskMountSetting,
   DescribeClusterAsGroupsResponse,
+  RemoveNodeFromNodePoolRequest,
+  DescribeClusterNodePoolDetailResponse,
 } from "./tke_models"
 
 /**
@@ -151,6 +168,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreatePrometheusDashboardResponse) => void
   ): Promise<CreatePrometheusDashboardResponse> {
     return this.request("CreatePrometheusDashboard", req, cb)
+  }
+
+  /**
+   * 查询节点池详情
+   */
+  async DescribeClusterNodePoolDetail(
+    req: DescribeClusterNodePoolDetailRequest,
+    cb?: (error: string, rep: DescribeClusterNodePoolDetailResponse) => void
+  ): Promise<DescribeClusterNodePoolDetailResponse> {
+    return this.request("DescribeClusterNodePoolDetail", req, cb)
   }
 
   /**
@@ -224,6 +251,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 移出节点池节点，但保留在集群内
+   */
+  async RemoveNodeFromNodePool(
+    req: RemoveNodeFromNodePoolRequest,
+    cb?: (error: string, rep: RemoveNodeFromNodePoolResponse) => void
+  ): Promise<RemoveNodeFromNodePoolResponse> {
+    return this.request("RemoveNodeFromNodePool", req, cb)
+  }
+
+  /**
    * 查询集群开启端口流程状态(仅支持托管集群外网端口)
    */
   async DescribeClusterEndpointVipStatus(
@@ -294,6 +331,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 编辑节点池
+   */
+  async ModifyClusterNodePool(
+    req: ModifyClusterNodePoolRequest,
+    cb?: (error: string, rep: ModifyClusterNodePoolResponse) => void
+  ): Promise<ModifyClusterNodePoolResponse> {
+    return this.request("ModifyClusterNodePool", req, cb)
+  }
+
+  /**
    * 集群弹性伸缩配置
    */
   async DescribeClusterAsGroupOption(
@@ -301,6 +348,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClusterAsGroupOptionResponse) => void
   ): Promise<DescribeClusterAsGroupOptionResponse> {
     return this.request("DescribeClusterAsGroupOption", req, cb)
+  }
+
+  /**
+   * 将集群内节点移入节点池
+   */
+  async AddNodeToNodePool(
+    req: AddNodeToNodePoolRequest,
+    cb?: (error: string, rep: AddNodeToNodePoolResponse) => void
+  ): Promise<AddNodeToNodePoolResponse> {
+    return this.request("AddNodeToNodePool", req, cb)
   }
 
   /**
@@ -334,6 +391,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建节点池
+   */
+  async CreateClusterNodePool(
+    req: CreateClusterNodePoolRequest,
+    cb?: (error: string, rep: CreateClusterNodePoolResponse) => void
+  ): Promise<CreateClusterNodePoolResponse> {
+    return this.request("CreateClusterNodePool", req, cb)
+  }
+
+  /**
    * 创建集群访问端口(独立集群开启内网/外网访问，托管集群支持开启内网访问)
    */
   async CreateClusterEndpoint(
@@ -341,6 +408,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateClusterEndpointResponse) => void
   ): Promise<CreateClusterEndpointResponse> {
     return this.request("CreateClusterEndpoint", req, cb)
+  }
+
+  /**
+   * 从伸缩组创建节点池
+   */
+  async CreateClusterNodePoolFromExistingAsg(
+    req: CreateClusterNodePoolFromExistingAsgRequest,
+    cb?: (error: string, rep: CreateClusterNodePoolFromExistingAsgResponse) => void
+  ): Promise<CreateClusterNodePoolFromExistingAsgResponse> {
+    return this.request("CreateClusterNodePoolFromExistingAsg", req, cb)
   }
 
   /**
@@ -414,6 +491,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除节点池
+   */
+  async DeleteClusterNodePool(
+    req: DeleteClusterNodePoolRequest,
+    cb?: (error: string, rep: DeleteClusterNodePoolResponse) => void
+  ): Promise<DeleteClusterNodePoolResponse> {
+    return this.request("DeleteClusterNodePool", req, cb)
+  }
+
+  /**
    * 删除托管集群外网访问端口（老的方式，仅支持托管集群外网端口）
    */
   async DeleteClusterEndpointVip(
@@ -431,6 +518,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteClusterInstancesResponse) => void
   ): Promise<DeleteClusterInstancesResponse> {
     return this.request("DeleteClusterInstances", req, cb)
+  }
+
+  /**
+   * 查询节点池列表
+   */
+  async DescribeClusterNodePools(
+    req: DescribeClusterNodePoolsRequest,
+    cb?: (error: string, rep: DescribeClusterNodePoolsResponse) => void
+  ): Promise<DescribeClusterNodePoolsResponse> {
+    return this.request("DescribeClusterNodePools", req, cb)
   }
 
   /**

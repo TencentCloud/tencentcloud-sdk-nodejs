@@ -1434,6 +1434,11 @@ export interface RunTestOtaVersionRequest {
    * 操作人
    */
   Operator?: string
+
+  /**
+   * 备注信息
+   */
+  Remark?: string
 }
 
 /**
@@ -1460,6 +1465,29 @@ export interface SetMessageQueueResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 版本发布的描述信息，需要国际化，可以为空
+ */
+export interface Contents {
+  /**
+      * 英文，长度不超过300个字符
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  En?: string
+
+  /**
+      * 中文简体，长度不超过300个字符
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Cn?: string
+
+  /**
+      * 中文繁体(Traditional Chinese)，长度不超过300个字符
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tc?: string
 }
 
 /**
@@ -1616,6 +1644,16 @@ export interface RunOtaVersionRequest {
    * 操作人
    */
   Operator?: string
+
+  /**
+   * 备注信息
+   */
+  Remark?: string
+
+  /**
+   * 版本发布的描述信息，需要国际化，可以为空
+   */
+  Contents?: Contents
 }
 
 /**
@@ -2819,4 +2857,16 @@ export interface VersionData {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ModifyTimes: number
+
+  /**
+      * 备注信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Remark: string
+
+  /**
+      * 版本发布的描述信息，需要国际化，可以为空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Contents: Contents
 }

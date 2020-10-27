@@ -38,6 +38,7 @@ import {
   TendisNodes,
   RenewInstanceResponse,
   DescribeSlowLogResponse,
+  DescribeCommonDBInstancesRequest,
   DescribeDBSecurityGroupsResponse,
   DescribeBackupUrlRequest,
   DescribeInstancesResponse,
@@ -65,6 +66,7 @@ import {
   ModifyInstanceResponse,
   ProxyNodes,
   TradeDealDetail,
+  RedisCommonInstanceList,
   SourceInfo,
   ModifyDBInstanceSecurityGroupsResponse,
   DescribeInstanceMonitorHotKeyRequest,
@@ -136,6 +138,7 @@ import {
   InstanceSet,
   InquiryPriceRenewInstanceRequest,
   ModifyMaintenanceWindowResponse,
+  DescribeCommonDBInstancesResponse,
   DescribeInstanceMonitorTopNCmdTookRequest,
   DestroyPrepaidInstanceResponse,
   DescribeInstanceMonitorBigKeyTypeDistRequest,
@@ -262,6 +265,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTaskListResponse) => void
   ): Promise<DescribeTaskListResponse> {
     return this.request("DescribeTaskList", req, cb)
+  }
+
+  /**
+   * 升级实例
+   */
+  async UpgradeInstance(
+    req: UpgradeInstanceRequest,
+    cb?: (error: string, rep: UpgradeInstanceResponse) => void
+  ): Promise<UpgradeInstanceResponse> {
+    return this.request("UpgradeInstance", req, cb)
   }
 
   /**
@@ -595,6 +608,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询Redis实例列表信息
+   */
+  async DescribeCommonDBInstances(
+    req: DescribeCommonDBInstancesRequest,
+    cb?: (error: string, rep: DescribeCommonDBInstancesResponse) => void
+  ): Promise<DescribeCommonDBInstancesResponse> {
+    return this.request("DescribeCommonDBInstances", req, cb)
+  }
+
+  /**
    * 本接口查询指定可用区和实例类型下 Redis 的售卖规格， 如果用户不在购买白名单中，将不能查询该可用区或该类型的售卖规格详情。申请购买某地域白名单可以提交工单
    */
   async DescribeProductInfo(
@@ -602,16 +625,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeProductInfoResponse) => void
   ): Promise<DescribeProductInfoResponse> {
     return this.request("DescribeProductInfo", req, cb)
-  }
-
-  /**
-   * 升级实例
-   */
-  async UpgradeInstance(
-    req: UpgradeInstanceRequest,
-    cb?: (error: string, rep: UpgradeInstanceResponse) => void
-  ): Promise<UpgradeInstanceResponse> {
-    return this.request("UpgradeInstance", req, cb)
   }
 
   /**

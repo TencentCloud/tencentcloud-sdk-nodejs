@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ApplyCertificateResponse, CompleteCertificateRequest, DeleteCertificateRequest, DescribeCertificateOperateLogsResponse, CommitCertificateInformationRequest, DownloadCertificateResponse, ReplaceCertificateResponse, DownloadCertificateRequest, CancelCertificateOrderRequest, ModifyCertificateProjectResponse, DescribeCertificateResponse, UploadCertificateRequest, DescribeCertificateDetailRequest, ApplyCertificateRequest, ReplaceCertificateRequest, DeleteCertificateResponse, DescribeCertificateDetailResponse, CheckCertificateChainResponse, ModifyCertificateProjectRequest, ModifyCertificateAliasRequest, DescribeCertificateRequest, DescribeCertificateOperateLogsRequest, CancelCertificateOrderResponse, SubmitCertificateInformationResponse, DescribeCertificatesResponse, CommitCertificateInformationResponse, UploadCertificateResponse, CheckCertificateChainRequest, ModifyCertificateAliasResponse, SubmitCertificateInformationRequest, DescribeCertificatesRequest, CompleteCertificateResponse } from "./ssl_models";
+import { ApplyCertificateResponse, CompleteCertificateRequest, DeleteCertificateRequest, DescribeCertificateOperateLogsResponse, CommitCertificateInformationRequest, DownloadCertificateResponse, ReplaceCertificateResponse, DownloadCertificateRequest, CancelCertificateOrderRequest, ModifyCertificateProjectResponse, DescribeCertificateResponse, UploadCertificateRequest, UploadConfirmLetterRequest, DescribeCertificateDetailRequest, ApplyCertificateRequest, ReplaceCertificateRequest, UploadRevokeLetterResponse, CreateCertificateResponse, UploadRevokeLetterRequest, DeleteCertificateResponse, RevokeCertificateResponse, DescribeCertificateDetailResponse, CheckCertificateChainResponse, ModifyCertificateProjectRequest, ModifyCertificateAliasRequest, DescribeCertificateRequest, DescribeCertificateOperateLogsRequest, CancelCertificateOrderResponse, CreateCertificateRequest, DescribeCertificatesResponse, CommitCertificateInformationResponse, UploadConfirmLetterResponse, UploadCertificateResponse, CheckCertificateChainRequest, ModifyCertificateAliasResponse, SubmitCertificateInformationRequest, DescribeCertificatesRequest, CompleteCertificateResponse, SubmitCertificateInformationResponse, RevokeCertificateRequest } from "./ssl_models";
 /**
  * ssl client
  * @class
@@ -12,13 +12,21 @@ export declare class Client extends AbstractClient {
      */
     DescribeCertificates(req: DescribeCertificatesRequest, cb?: (error: string, rep: DescribeCertificatesResponse) => void): Promise<DescribeCertificatesResponse>;
     /**
+     * 本接口（UploadRevokeLetter）用于上传证书吊销确认函。
+     */
+    UploadRevokeLetter(req: UploadRevokeLetterRequest, cb?: (error: string, rep: UploadRevokeLetterResponse) => void): Promise<UploadRevokeLetterResponse>;
+    /**
+     * 本接口（UploadConfirmLetter）用于上传证书确认函。
+     */
+    UploadConfirmLetter(req: UploadConfirmLetterRequest, cb?: (error: string, rep: UploadConfirmLetterResponse) => void): Promise<UploadConfirmLetterResponse>;
+    /**
+     * 本接口（CreateCertificate）用于创建付费证书。
+     */
+    CreateCertificate(req: CreateCertificateRequest, cb?: (error: string, rep: CreateCertificateResponse) => void): Promise<CreateCertificateResponse>;
+    /**
      * 批量修改证书所属项目。
      */
     ModifyCertificateProject(req: ModifyCertificateProjectRequest, cb?: (error: string, rep: ModifyCertificateProjectResponse) => void): Promise<ModifyCertificateProjectResponse>;
-    /**
-     * 本接口（UploadCertificate）用于上传证书。
-     */
-    UploadCertificate(req: UploadCertificateRequest, cb?: (error: string, rep: UploadCertificateResponse) => void): Promise<UploadCertificateResponse>;
     /**
      * 取消证书订单。
      */
@@ -35,6 +43,10 @@ export declare class Client extends AbstractClient {
      * 本接口（CompleteCertificate）用于主动触发证书验证。
      */
     CompleteCertificate(req: CompleteCertificateRequest, cb?: (error: string, rep: CompleteCertificateResponse) => void): Promise<CompleteCertificateResponse>;
+    /**
+     * 本接口（UploadCertificate）用于上传证书。
+     */
+    UploadCertificate(req: UploadCertificateRequest, cb?: (error: string, rep: UploadCertificateResponse) => void): Promise<UploadCertificateResponse>;
     /**
      * 用户传入证书id和备注来修改证书备注。
      */
@@ -55,6 +67,10 @@ export declare class Client extends AbstractClient {
      * 本接口（ApplyCertificate）用于免费证书申请。
      */
     ApplyCertificate(req: ApplyCertificateRequest, cb?: (error: string, rep: ApplyCertificateResponse) => void): Promise<ApplyCertificateResponse>;
+    /**
+     * 本接口（RevokeCertificate）用于吊销证书。
+     */
+    RevokeCertificate(req: RevokeCertificateRequest, cb?: (error: string, rep: RevokeCertificateResponse) => void): Promise<RevokeCertificateResponse>;
     /**
      * 获取用户账号下有关证书的操作日志。
      */

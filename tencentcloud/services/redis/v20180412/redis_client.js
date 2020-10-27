@@ -76,6 +76,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTaskList", req, cb);
     }
     /**
+     * 升级实例
+     */
+    async UpgradeInstance(req, cb) {
+        return this.request("UpgradeInstance", req, cb);
+    }
+    /**
      * 回收站实例立即下线
      */
     async CleanUpInstance(req, cb) {
@@ -274,16 +280,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceMonitorBigKeyTypeDist", req, cb);
     }
     /**
+     * 查询Redis实例列表信息
+     */
+    async DescribeCommonDBInstances(req, cb) {
+        return this.request("DescribeCommonDBInstances", req, cb);
+    }
+    /**
      * 本接口查询指定可用区和实例类型下 Redis 的售卖规格， 如果用户不在购买白名单中，将不能查询该可用区或该类型的售卖规格详情。申请购买某地域白名单可以提交工单
      */
     async DescribeProductInfo(req, cb) {
         return this.request("DescribeProductInfo", req, cb);
-    }
-    /**
-     * 升级实例
-     */
-    async UpgradeInstance(req, cb) {
-        return this.request("UpgradeInstance", req, cb);
     }
     /**
      * 续费实例

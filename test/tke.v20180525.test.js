@@ -38,6 +38,16 @@ it("tke.v20180525.CreatePrometheusDashboard", async function () {
     }
 })
 
+it("tke.v20180525.DescribeClusterNodePoolDetail", async function () {
+    try {
+       const data = await client.DescribeClusterNodePoolDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.DescribeImages", async function () {
     try {
        const data = await client.DescribeImages({})
@@ -101,6 +111,16 @@ it("tke.v20180525.DeleteClusterAsGroups", async function () {
 it("tke.v20180525.DeleteClusterRoute", async function () {
     try {
        const data = await client.DeleteClusterRoute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.RemoveNodeFromNodePool", async function () {
+    try {
+       const data = await client.RemoveNodeFromNodePool({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,9 +198,29 @@ it("tke.v20180525.CreateClusterRouteTable", async function () {
     }
 })
 
+it("tke.v20180525.ModifyClusterNodePool", async function () {
+    try {
+       const data = await client.ModifyClusterNodePool({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.DescribeClusterAsGroupOption", async function () {
     try {
        const data = await client.DescribeClusterAsGroupOption({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.AddNodeToNodePool", async function () {
+    try {
+       const data = await client.AddNodeToNodePool({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -218,9 +258,29 @@ it("tke.v20180525.DescribeClusterAsGroups", async function () {
     }
 })
 
+it("tke.v20180525.CreateClusterNodePool", async function () {
+    try {
+       const data = await client.CreateClusterNodePool({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.CreateClusterEndpoint", async function () {
     try {
        const data = await client.CreateClusterEndpoint({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.CreateClusterNodePoolFromExistingAsg", async function () {
+    try {
+       const data = await client.CreateClusterNodePoolFromExistingAsg({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -298,6 +358,16 @@ it("tke.v20180525.DescribeClusterInstances", async function () {
     }
 })
 
+it("tke.v20180525.DeleteClusterNodePool", async function () {
+    try {
+       const data = await client.DeleteClusterNodePool({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.DeleteClusterEndpointVip", async function () {
     try {
        const data = await client.DeleteClusterEndpointVip({})
@@ -311,6 +381,16 @@ it("tke.v20180525.DeleteClusterEndpointVip", async function () {
 it("tke.v20180525.DeleteClusterInstances", async function () {
     try {
        const data = await client.DeleteClusterInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.DescribeClusterNodePools", async function () {
+    try {
+       const data = await client.DescribeClusterNodePools({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

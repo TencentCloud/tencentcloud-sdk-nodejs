@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePrometheusDashboard", req, cb);
     }
     /**
+     * 查询节点池详情
+     */
+    async DescribeClusterNodePoolDetail(req, cb) {
+        return this.request("DescribeClusterNodePoolDetail", req, cb);
+    }
+    /**
      * 获取镜像信息
      */
     async DescribeImages(req, cb) {
@@ -80,6 +86,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteClusterRoute(req, cb) {
         return this.request("DeleteClusterRoute", req, cb);
+    }
+    /**
+     * 移出节点池节点，但保留在集群内
+     */
+    async RemoveNodeFromNodePool(req, cb) {
+        return this.request("RemoveNodeFromNodePool", req, cb);
     }
     /**
      * 查询集群开启端口流程状态(仅支持托管集群外网端口)
@@ -124,10 +136,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateClusterRouteTable", req, cb);
     }
     /**
+     * 编辑节点池
+     */
+    async ModifyClusterNodePool(req, cb) {
+        return this.request("ModifyClusterNodePool", req, cb);
+    }
+    /**
      * 集群弹性伸缩配置
      */
     async DescribeClusterAsGroupOption(req, cb) {
         return this.request("DescribeClusterAsGroupOption", req, cb);
+    }
+    /**
+     * 将集群内节点移入节点池
+     */
+    async AddNodeToNodePool(req, cb) {
+        return this.request("AddNodeToNodePool", req, cb);
     }
     /**
      * 查询集群列表
@@ -148,10 +172,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterAsGroups", req, cb);
     }
     /**
+     * 创建节点池
+     */
+    async CreateClusterNodePool(req, cb) {
+        return this.request("CreateClusterNodePool", req, cb);
+    }
+    /**
      * 创建集群访问端口(独立集群开启内网/外网访问，托管集群支持开启内网访问)
      */
     async CreateClusterEndpoint(req, cb) {
         return this.request("CreateClusterEndpoint", req, cb);
+    }
+    /**
+     * 从伸缩组创建节点池
+     */
+    async CreateClusterNodePoolFromExistingAsg(req, cb) {
+        return this.request("CreateClusterNodePoolFromExistingAsg", req, cb);
     }
     /**
      * 获取关联目标集群的实例列表
@@ -196,6 +232,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterInstances", req, cb);
     }
     /**
+     * 删除节点池
+     */
+    async DeleteClusterNodePool(req, cb) {
+        return this.request("DeleteClusterNodePool", req, cb);
+    }
+    /**
      * 删除托管集群外网访问端口（老的方式，仅支持托管集群外网端口）
      */
     async DeleteClusterEndpointVip(req, cb) {
@@ -206,6 +248,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteClusterInstances(req, cb) {
         return this.request("DeleteClusterInstances", req, cb);
+    }
+    /**
+     * 查询节点池列表
+     */
+    async DescribeClusterNodePools(req, cb) {
+        return this.request("DescribeClusterNodePools", req, cb);
     }
     /**
      * 获取集群的kubeconfig文件，不同子账户获取自己的kubeconfig文件，该文件中有每个子账户自己的kube-apiserver的客户端证书，默认首次调此接口时候创建客户端证书，时效20年，未授予任何权限，如果是集群所有者或者主账户，则默认是cluster-admin权限。

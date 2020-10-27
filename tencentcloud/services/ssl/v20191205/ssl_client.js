@@ -34,16 +34,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCertificates", req, cb);
     }
     /**
+     * 本接口（UploadRevokeLetter）用于上传证书吊销确认函。
+     */
+    async UploadRevokeLetter(req, cb) {
+        return this.request("UploadRevokeLetter", req, cb);
+    }
+    /**
+     * 本接口（UploadConfirmLetter）用于上传证书确认函。
+     */
+    async UploadConfirmLetter(req, cb) {
+        return this.request("UploadConfirmLetter", req, cb);
+    }
+    /**
+     * 本接口（CreateCertificate）用于创建付费证书。
+     */
+    async CreateCertificate(req, cb) {
+        return this.request("CreateCertificate", req, cb);
+    }
+    /**
      * 批量修改证书所属项目。
      */
     async ModifyCertificateProject(req, cb) {
         return this.request("ModifyCertificateProject", req, cb);
-    }
-    /**
-     * 本接口（UploadCertificate）用于上传证书。
-     */
-    async UploadCertificate(req, cb) {
-        return this.request("UploadCertificate", req, cb);
     }
     /**
      * 取消证书订单。
@@ -68,6 +80,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CompleteCertificate(req, cb) {
         return this.request("CompleteCertificate", req, cb);
+    }
+    /**
+     * 本接口（UploadCertificate）用于上传证书。
+     */
+    async UploadCertificate(req, cb) {
+        return this.request("UploadCertificate", req, cb);
     }
     /**
      * 用户传入证书id和备注来修改证书备注。
@@ -98,6 +116,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ApplyCertificate(req, cb) {
         return this.request("ApplyCertificate", req, cb);
+    }
+    /**
+     * 本接口（RevokeCertificate）用于吊销证书。
+     */
+    async RevokeCertificate(req, cb) {
+        return this.request("RevokeCertificate", req, cb);
     }
     /**
      * 获取用户账号下有关证书的操作日志。

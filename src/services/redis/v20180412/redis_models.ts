@@ -264,8 +264,9 @@ export interface CreateInstancesRequest {
   TypeId: number
 
   /**
-   * 实例容量，单位MB， 数值需为1024的整数倍，取值大小以 [查询产品售卖规格](https://cloud.tencent.com/document/api/239/30600) 返回的规格为准。
-   */
+      * 内存容量，单位为MB， 数值需为1024的整数倍，具体规格以 [查询产品售卖规格](https://cloud.tencent.com/document/api/239/30600) 返回的规格为准。
+TypeId为标准架构时，MemSize是实例总内存容量；TypeId为集群架构时，MemSize是单分片内存容量。
+      */
   MemSize: number
 
   /**
@@ -284,8 +285,9 @@ export interface CreateInstancesRequest {
   BillingMode: number
 
   /**
-   * 实例密码，8-30个字符，至少包含小写字母、大写字母、数字和字符 ()`~!@#$%^&*-+=_|{}[]:;<>,.?/ 中的2种，不能以"/"开头。
-   */
+      * 实例密码，当输入参数NoAuth为true且使用私有网络VPC时，Password为非必填，否则Password为必填。
+密码格式为：8-30个字符，至少包含小写字母、大写字母、数字和字符 ()`~!@#$%^&*-+=_|{}[]:;<>,.?/ 中的2种，不能以"/"开头。
+      */
   Password?: string
 
   /**
@@ -582,6 +584,76 @@ export interface DescribeSlowLogResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeCommonDBInstances请求参数结构体
+ */
+export interface DescribeCommonDBInstancesRequest {
+  /**
+   * 实例Vip信息列表
+   */
+  VpcIds?: Array<number>
+
+  /**
+   * 子网id信息列表
+   */
+  SubnetIds?: Array<number>
+
+  /**
+   * 计费类型过滤列表；0表示包年包月，1表示按量计费
+   */
+  PayMode?: number
+
+  /**
+   * 实例id过滤信息列表
+   */
+  InstanceIds?: Array<string>
+
+  /**
+   * 实例名称过滤信息列表
+   */
+  InstanceNames?: Array<string>
+
+  /**
+   * 实例状态信息过滤列表
+   */
+  Status?: Array<string>
+
+  /**
+   * 排序字段
+   */
+  OrderBy?: string
+
+  /**
+   * 排序方式
+   */
+  OrderByType?: string
+
+  /**
+   * 实例vip信息列表
+   */
+  Vips?: Array<string>
+
+  /**
+   * vpc网络统一Id列表
+   */
+  UniqVpcIds?: Array<string>
+
+  /**
+   * 子网统一id列表
+   */
+  UniqSubnetIds?: Array<string>
+
+  /**
+   * 数量限制，默认推荐100
+   */
+  Limit?: number
+
+  /**
+   * 偏移量，默认0
+   */
+  Offset?: number
 }
 
 /**
@@ -1227,6 +1299,81 @@ export interface TradeDealDetail {
    * 实例ID
    */
   InstanceIds: Array<string>
+}
+
+/**
+ * 单个实例信息
+ */
+export interface RedisCommonInstanceList {
+  /**
+   * 实例名称
+   */
+  InstanceName: string
+
+  /**
+   * 实例id
+   */
+  InstanceId: string
+
+  /**
+   * 用户id
+   */
+  AppId: number
+
+  /**
+   * 实例所属项目id
+   */
+  ProjectId: number
+
+  /**
+   * 实例接入区域
+   */
+  Region: string
+
+  /**
+   * 实例接入zone
+   */
+  Zone: string
+
+  /**
+   * 实例网络id
+   */
+  VpcId: string
+
+  /**
+   * 子网id
+   */
+  SubnetId: string
+
+  /**
+   * 实例状态信息，0-创建中，1-运行中
+   */
+  Status: string
+
+  /**
+   * 实例网络ip
+   */
+  Vips: Array<string>
+
+  /**
+   * 实例网络端口
+   */
+  Vport: number
+
+  /**
+   * 实例创建时间
+   */
+  Createtime: string
+
+  /**
+   * 计费类型，0-按量计费，1-包年包月
+   */
+  PayMode: number
+
+  /**
+   * 网络类型，0-基础网络，1-VPC网络
+   */
+  NetType: number
 }
 
 /**
@@ -3044,6 +3191,26 @@ export interface ModifyMaintenanceWindowResponse {
    * 修改状态：success 或者 failed
    */
   Status?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCommonDBInstances返回参数结构体
+ */
+export interface DescribeCommonDBInstancesResponse {
+  /**
+   * 实例数
+   */
+  TotalCount?: number
+
+  /**
+   * 实例信息
+   */
+  InstanceDetails?: Array<RedisCommonInstanceList>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -1026,6 +1026,11 @@ export interface DescribeGameServerSessionQueuesRequest {
    * 返回结果偏移，最小值0
    */
   Offset?: number
+
+  /**
+   * 资源过滤字段，可以按照资源名称、资源ID和标签进行过滤- 资源名称过滤    - Key: 固定字符串 "resource:name"    - Values: 资源名称数组（游戏服务器会话队列支持多个名称的过滤）- 标签过滤    - 通过标签键过滤        - Key: 固定字符串 "tag:key"        - Values 不传    - 通过标签键值过滤        - Key: 固定字符串 "tag:key-value"        - Values: 标签键值对数组，例如 ["key1:value1", "key1:value2", "key2:value2"]
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -1519,6 +1524,11 @@ export interface DescribeAssetsRequest {
    * 搜索条件，支持包ID或包名字过滤，该字段会逐步废弃，建议使用 Filters 字段
    */
   Filter?: string
+
+  /**
+   * 资源过滤字段，可以按照资源名称、资源ID和标签进行过滤- 资源名称过滤    - Key: 固定字符串 "resource:name"    - Values: 资源名称数组（生成包当前仅支持单个名称的过滤）- 资源ID过滤    - Key: 固定字符串 "resource:resourceId"    - Values: 生成包ID数组（生成包当前仅支持单个生成包ID的过滤）- 标签过滤    - 通过标签键过滤        - Key: 固定字符串 "tag:key"        - Values 不传    - 通过标签键值过滤        - Key: 固定字符串 "tag:key-value"        - Values: 标签键值对数组，例如 ["key1:value1", "key1:value2", "key2:value2"]
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -2087,6 +2097,11 @@ export interface ListFleetsRequest {
    * 结果返回偏移，暂未使用
    */
   Offset?: number
+
+  /**
+   * 资源过滤字段，可以按照资源名称和标签进行过滤- 资源名称过滤    - Key: 固定字符串 "resource:name"    - Values: 资源名称数组（当前仅支持单个名称的过滤）- 标签过滤    - 通过标签键过滤        - Key: 固定字符串 "tag:key"        - Values 不传    - 通过标签键值过滤        - Key: 固定字符串 "tag:key-value"        - Values: 标签键值对数组，例如 ["key1:value1", "key1:value2", "key2:value2"]
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -2812,6 +2827,21 @@ export interface CreateFleetResponse {
 }
 
 /**
+ * 过滤字段内容
+ */
+export interface Filter {
+  /**
+   * 过滤属性的 key
+   */
+  Key?: string
+
+  /**
+   * 过滤属性的 values 值
+   */
+  Values?: Array<string>
+}
+
+/**
  * UpdateFleetAttributes返回参数结构体
  */
 export interface UpdateFleetAttributesResponse {
@@ -3376,6 +3406,11 @@ export interface ListAliasesRequest {
    * 排序方式，有效值asc|desc
    */
   OrderWay?: string
+
+  /**
+   * 资源过滤字段，可以按照资源名称和标签进行过滤- 资源名称过滤    - Key: 固定字符串 "resource:name"    - Values: 资源名称数组（舰队当前仅支持单个名称的过滤）- 标签过滤    - 通过标签键过滤        - Key: 固定字符串 "tag:key"        - Values 不传    - 通过标签键值过滤        - Key: 固定字符串 "tag:key-value"        - Values: 标签键值对数组，例如 ["key1:value1", "key1:value2", "key2:value2"]
+   */
+  Filters?: Array<Filter>
 }
 
 /**

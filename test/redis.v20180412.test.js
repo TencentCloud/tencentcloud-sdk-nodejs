@@ -98,6 +98,16 @@ it("redis.v20180412.DescribeTaskList", async function () {
     }
 })
 
+it("redis.v20180412.UpgradeInstance", async function () {
+    try {
+       const data = await client.UpgradeInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("redis.v20180412.CleanUpInstance", async function () {
     try {
        const data = await client.CleanUpInstance({})
@@ -428,9 +438,9 @@ it("redis.v20180412.DescribeInstanceMonitorBigKeyTypeDist", async function () {
     }
 })
 
-it("redis.v20180412.DescribeProductInfo", async function () {
+it("redis.v20180412.DescribeCommonDBInstances", async function () {
     try {
-       const data = await client.DescribeProductInfo({})
+       const data = await client.DescribeCommonDBInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -438,9 +448,9 @@ it("redis.v20180412.DescribeProductInfo", async function () {
     }
 })
 
-it("redis.v20180412.UpgradeInstance", async function () {
+it("redis.v20180412.DescribeProductInfo", async function () {
     try {
-       const data = await client.UpgradeInstance({})
+       const data = await client.DescribeProductInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

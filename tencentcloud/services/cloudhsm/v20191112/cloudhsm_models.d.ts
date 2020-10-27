@@ -230,6 +230,19 @@ export interface DescribeUsgRuleResponse {
     RequestId?: string;
 }
 /**
+ * 标签
+ */
+export interface Tag {
+    /**
+      * 标签键
+      */
+    TagKey: string;
+    /**
+      * 标签值
+      */
+    TagValue: string;
+}
+/**
  * 资源信息
  */
 export interface ResourceInfo {
@@ -323,6 +336,21 @@ export interface ResourceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     VpcName: string;
+    /**
+      * 创建者Uin账号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateUin: string;
+    /**
+      * 自动续费状态标识， 0-手动续费，1-自动续费，2-到期不续
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RenewFlag: number;
+    /**
+      * 标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tags: Array<Tag>;
 }
 /**
  * DescribeVpc请求参数结构体
@@ -477,9 +505,32 @@ export interface DescribeVsmAttributesResponse {
       */
     SubnetCidrBlock?: string;
     /**
+      * 资源所关联的Tag
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tags?: Array<Tag>;
+    /**
+      * 资源续费标识，0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费(用户设置)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RenewFlag?: number;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 标签过滤参数
+ */
+export interface TagFilter {
+    /**
+      * 标签键
+      */
+    TagKey: string;
+    /**
+      * 标签值
+      */
+    TagValue?: Array<string>;
 }
 /**
  * 安全组基础信息
@@ -640,6 +691,10 @@ export interface DescribeVsmsRequest {
       * 查询关键字
       */
     SearchWord?: string;
+    /**
+      * 标签过滤条件
+      */
+    TagFilters?: Array<TagFilter>;
 }
 /**
  * DescribeUsgRule请求参数结构体

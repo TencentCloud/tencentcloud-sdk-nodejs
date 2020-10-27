@@ -512,6 +512,19 @@ export interface UploadCertificateRequest {
     ProjectId?: number;
 }
 /**
+ * UploadConfirmLetter请求参数结构体
+ */
+export interface UploadConfirmLetterRequest {
+    /**
+      * 证书ID
+      */
+    CertificateId: string;
+    /**
+      * base64编码后的证书确认函文件，格式应为jpg、jpeg、png、pdf，大小应在1kb与1.4M之间。
+      */
+    ConfirmLetter: string;
+}
+/**
  * DescribeCertificateDetail请求参数结构体
  */
 export interface DescribeCertificateDetailRequest {
@@ -597,6 +610,57 @@ export interface ReplaceCertificateRequest {
       * KEY 密码。
       */
     CsrkeyPassword?: string;
+    /**
+      * 重颁发原因。
+      */
+    Reason?: string;
+}
+/**
+ * UploadRevokeLetter返回参数结构体
+ */
+export interface UploadRevokeLetterResponse {
+    /**
+      * 证书 ID。
+      */
+    CertificateId?: string;
+    /**
+      * 是否成功。
+      */
+    IsSuccess?: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateCertificate返回参数结构体
+ */
+export interface CreateCertificateResponse {
+    /**
+      * 证书ID列表
+      */
+    CertificateIds?: Array<string>;
+    /**
+      * 子订单ID
+      */
+    DealIds?: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * UploadRevokeLetter请求参数结构体
+ */
+export interface UploadRevokeLetterRequest {
+    /**
+      * 证书 ID。
+      */
+    CertificateId: string;
+    /**
+      * base64编码后的证书确认函文件，格式应为jpg、jpeg、png、pdf，大小应在1kb与1.4M之间。
+      */
+    RevokeLetter: string;
 }
 /**
  * DeleteCertificate返回参数结构体
@@ -610,6 +674,45 @@ export interface DeleteCertificateResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * RevokeCertificate返回参数结构体
+ */
+export interface RevokeCertificateResponse {
+    /**
+      * 吊销证书域名验证信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RevokeDomainValidateAuths?: Array<RevokeDomainValidateAuths>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 返回参数键为 RevokeDomainValidateAuths 的内容。
+ */
+export interface RevokeDomainValidateAuths {
+    /**
+      * DV 认证值路径。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DomainValidateAuthPath: string;
+    /**
+      * DV 认证 KEY。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DomainValidateAuthKey: string;
+    /**
+      * DV 认证值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DomainValidateAuthValue: string;
+    /**
+      * DV 认证域名。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DomainValidateAuthDomain: string;
 }
 /**
  * DescribeCertificateDetail返回参数结构体
@@ -981,17 +1084,21 @@ export interface CancelCertificateOrderResponse {
     RequestId?: string;
 }
 /**
- * SubmitCertificateInformation返回参数结构体
+ * CreateCertificate请求参数结构体
  */
-export interface SubmitCertificateInformationResponse {
+export interface CreateCertificateRequest {
     /**
-      * 证书 ID。
+      * 证书商品ID
       */
-    CertificateId?: string;
+    ProductId: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 证书包含的域名数量
       */
-    RequestId?: string;
+    DomainNum: number;
+    /**
+      * 证书年限，当前只支持 1 年证书的购买
+      */
+    TimeSpan: number;
 }
 /**
  * DescribeCertificates返回参数结构体
@@ -1024,6 +1131,23 @@ export interface CommitCertificateInformationResponse {
       * 证书状态：0 = 审核中，1 = 已通过，2 = 审核失败，3 = 已过期，4 = 已添加DNS记录，5 = 企业证书，待提交，6 = 订单取消中，7 = 已取消，8 = 已提交资料， 待上传确认函，9 = 证书吊销中，10 = 已吊销，11 = 重颁发中，12 = 待上传吊销确认函。
       */
     Status?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * UploadConfirmLetter返回参数结构体
+ */
+export interface UploadConfirmLetterResponse {
+    /**
+      * 证书ID
+      */
+    CertificateId?: string;
+    /**
+      * 是否成功
+      */
+    IsSuccess?: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1352,4 +1476,30 @@ export interface CompleteCertificateResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * SubmitCertificateInformation返回参数结构体
+ */
+export interface SubmitCertificateInformationResponse {
+    /**
+      * 证书 ID。
+      */
+    CertificateId?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * RevokeCertificate请求参数结构体
+ */
+export interface RevokeCertificateRequest {
+    /**
+      * 证书 ID。
+      */
+    CertificateId: string;
+    /**
+      * 吊销证书原因。
+      */
+    Reason?: string;
 }
