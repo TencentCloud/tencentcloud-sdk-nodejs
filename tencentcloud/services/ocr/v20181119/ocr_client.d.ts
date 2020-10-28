@@ -23,8 +23,6 @@ export declare class Client extends AbstractClient {
      * 本接口支持条形码备案信息查询，返回条形码查询结果的相关信息，包括产品名称、产品英文名称、品牌名称、规格型号、宽度、高度、深度、关键字、产品描述、厂家名称、厂家地址、企业社会信用代码13个字段信息。
 
 产品优势：直联中国物品编码中心，查询结果更加准确、可靠。
-
-本接口目前为内测阶段，如需使用服务，请<a href="https://cloud.tencent.com/act/event/connect-service" target="_blank">联系商务</a>开通。
      */
     QueryBarCode(req: QueryBarCodeRequest, cb?: (error: string, rep: QueryBarCodeResponse) => void): Promise<QueryBarCodeResponse>;
     /**
@@ -96,8 +94,6 @@ export declare class Client extends AbstractClient {
     MLIDCardOCR(req: MLIDCardOCRRequest, cb?: (error: string, rep: MLIDCardOCRResponse) => void): Promise<MLIDCardOCRResponse>;
     /**
      * 本接口支持条形码和二维码的识别（包括 DataMatrix 和 PDF417）。
-
-本接口目前处于公测阶段，2020年10月7日公测结束后，接口价格会进行相应的变更，请留意站内信通知。
      */
     QrcodeOCR(req: QrcodeOCRRequest, cb?: (error: string, rep: QrcodeOCRResponse) => void): Promise<QrcodeOCRResponse>;
     /**
@@ -359,8 +355,6 @@ export declare class Client extends AbstractClient {
     TrainTicketOCR(req: TrainTicketOCRRequest, cb?: (error: string, rep: TrainTicketOCRResponse) => void): Promise<TrainTicketOCRResponse>;
     /**
      * 本接口通过检测图片中的文字信息特征，快速判断图片中有无文字并返回判断结果，帮助用户过滤无文字的图片。
-
-本接口目前处于公测阶段，2020年10月7日公测结束后，接口价格会进行相应的变更，请留意站内信通知。
      */
     TextDetect(req: TextDetectRequest, cb?: (error: string, rep: TextDetectResponse) => void): Promise<TextDetectResponse>;
     /**

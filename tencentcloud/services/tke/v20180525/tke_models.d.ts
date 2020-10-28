@@ -185,6 +185,27 @@ export interface DeleteClusterResponse {
     RequestId?: string;
 }
 /**
+ * 自动扩所容的节点
+ */
+export interface AutoscalingAdded {
+    /**
+      * 正在加入中的节点数量
+      */
+    Joining: number;
+    /**
+      * 初始化中的节点数量
+      */
+    Initializing: number;
+    /**
+      * 正常的节点数量
+      */
+    Normal: number;
+    /**
+      * 节点总数
+      */
+    Total: number;
+}
+/**
  * CreateClusterRouteTable返回参数结构体
  */
 export interface CreateClusterRouteTableResponse {
@@ -347,6 +368,67 @@ export interface AddNodeToNodePoolRequest {
       * 节点id
       */
     InstanceIds: Array<string>;
+}
+/**
+ * 节点池描述
+ */
+export interface NodePool {
+    /**
+      * NodePoolId 资源池id
+      */
+    NodePoolId: string;
+    /**
+      * Name 资源池名称
+      */
+    Name: string;
+    /**
+      * ClusterInstanceId 集群实例id
+      */
+    ClusterInstanceId: string;
+    /**
+      * LifeState 状态
+      */
+    LifeState: string;
+    /**
+      * LaunchConfigurationId 配置
+      */
+    LaunchConfigurationId: string;
+    /**
+      * AutoscalingGroupId 分组id
+      */
+    AutoscalingGroupId: string;
+    /**
+      * Labels 标签
+      */
+    Labels: Array<Label>;
+    /**
+      * Taints 污点标记
+      */
+    Taints: Array<Taint>;
+    /**
+      * NodeCountSummary 节点列表
+      */
+    NodeCountSummary: NodeCountSummary;
+    /**
+      * 状态信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AutoscalingGroupStatus: string;
+    /**
+      * 最大节点数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxNodesNum: number;
+    /**
+      * 最小节点数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MinNodesNum: number;
+    /**
+      * 期望的节点数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DesiredNodesNum: number;
 }
 /**
  * 集群路由表对象
@@ -817,6 +899,27 @@ export interface CreateClusterInstancesRequest {
     InstanceAdvancedSettings?: InstanceAdvancedSettings;
 }
 /**
+ * 手动加入的节点
+ */
+export interface ManuallyAdded {
+    /**
+      * 加入中节的点数量
+      */
+    Joining: number;
+    /**
+      * 初始化中的节点数量
+      */
+    Initializing: number;
+    /**
+      * 正常的节点数量
+      */
+    Normal: number;
+    /**
+      * 节点总数
+      */
+    Total: number;
+}
+/**
  * DescribeClusterRouteTables返回参数结构体
  */
 export interface DescribeClusterRouteTablesResponse {
@@ -984,6 +1087,15 @@ export interface ExistedInstance {
  * DescribeClusterNodePools返回参数结构体
  */
 export interface DescribeClusterNodePoolsResponse {
+    /**
+      * NodePools（节点池列表）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NodePoolSet?: Array<NodePool>;
+    /**
+      * 资源总数
+      */
+    TotalCount?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2242,6 +2354,21 @@ export interface InstanceDataDiskMountSetting {
     Zone: string;
 }
 /**
+ * 节点统计列表
+ */
+export interface NodeCountSummary {
+    /**
+      * 手动管理的节点
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ManuallyAdded: ManuallyAdded;
+    /**
+      * 自动管理的节点
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AutoscalingAdded: AutoscalingAdded;
+}
+/**
  * DescribeClusterAsGroups返回参数结构体
  */
 export interface DescribeClusterAsGroupsResponse {
@@ -2279,6 +2406,10 @@ export interface RemoveNodeFromNodePoolRequest {
  * DescribeClusterNodePoolDetail返回参数结构体
  */
 export interface DescribeClusterNodePoolDetailResponse {
+    /**
+      * 节点池详情
+      */
+    NodePool?: NodePool;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

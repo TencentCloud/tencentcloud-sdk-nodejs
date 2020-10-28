@@ -1134,11 +1134,6 @@ export interface DescribeInstanceFamilyConfigsResponse {
  */
 export interface CreateImageResponse {
     /**
-      * 镜像ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ImageId?: string;
-    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -1703,7 +1698,7 @@ export interface CreateImageRequest {
       */
     ForcePoweroff?: string;
     /**
-      * 创建Windows镜像时是否启用Sysprep
+      * 创建Windows镜像时是否启用Sysprep，关于Sysprep的详情请参考[链接](https://cloud.tencent.com/document/product/213/43498)
       */
     Sysprep?: string;
     /**

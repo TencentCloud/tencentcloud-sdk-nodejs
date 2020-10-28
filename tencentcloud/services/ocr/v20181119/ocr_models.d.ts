@@ -2232,90 +2232,6 @@ export interface VehicleRegCertOCRRequest {
     ImageUrl?: string;
 }
 /**
- * 商品码信息
- */
-export interface ProductDataRecord {
-    /**
-      * 产品名称
-      */
-    ProductName: string;
-    /**
-      * 产品名称(英文)
-      */
-    EnName: string;
-    /**
-      * 品牌名称
-      */
-    BrandName: string;
-    /**
-      * 规格型号
-      */
-    Type: string;
-    /**
-      * 宽度，单位毫米
-      */
-    Width: string;
-    /**
-      * 高度，单位毫米
-      */
-    Height: string;
-    /**
-      * 深度，单位毫米
-      */
-    Depth: string;
-    /**
-      * 关键字
-      */
-    KeyWord: string;
-    /**
-      * 简短描述
-      */
-    Description: string;
-    /**
-      * 图片链接
-      */
-    ImageLink: Array<string>;
-    /**
-      * 厂家名称
-      */
-    ManufacturerName: string;
-    /**
-      * 厂家地址
-      */
-    ManufacturerAddress: string;
-    /**
-      * 企业社会信用代码
-      */
-    FirmCode: string;
-    /**
-      * 表示数据查询状态
-checkResult	状态说明
-1	 经查，该商品条码已在中国物品编码中心注册
-2	经查，该厂商识别代码已在中国物品编码中心注册，但编码信息未按规定通报。
-3	经查，该厂商识别代码已于xxxxx注销，请关注产品生产日期。
-4	经查，该企业以及条码未经条码中心注册，属于违法使用
--1	经查，该商品条码被冒用
--2	经查，该厂商识别代码已在中国物品编码中心注册，但该产品已经下市
-S001                未找到该厂商识别代码的注册信息。
-S002		该厂商识别代码已经在GS1注册，但编码信息未通报
-S003		该商品条码已在GS1通报
-S004		该商品条码已注销
-S005		数字不正确。GS1前缀（3位国家/地区代码）用于特殊用途。
-E001		完整性失败：此GTIN的长度无效。
-E002		完整性失败：校验位不正确。
-E003		完整性失败：字符串包含字母数字字符。
-E004		数字不正确。GS1前缀（3位国家/地区代码）不存在。
-E005		数字不正确。GS1前缀（3位国家/地区代码）用于特殊用途。
-E006		数字不正确。尚未分配该GS1公司前缀。
-E008	        经查，该企业厂商识别代码以及条码尚未通报
-      */
-    CheckResult: string;
-    /**
-      * UNSPSC分类码
-      */
-    CategoryCode: string;
-}
-/**
  * LicensePlateOCR请求参数结构体
  */
 export interface LicensePlateOCRRequest {
@@ -2795,14 +2711,6 @@ export interface FinanBillSliceInfo {
  * QueryBarCode返回参数结构体
  */
 export interface QueryBarCodeResponse {
-    /**
-      * 条码
-      */
-    BarCode?: string;
-    /**
-      * 条码信息数组
-      */
-    ProductDataRecords?: Array<ProductDataRecord>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

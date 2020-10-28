@@ -5114,7 +5114,7 @@ export interface CreateLiveTranscodeTemplateRequest {
   AudioBitrate?: number
 
   /**
-      * 视频编码：h264/h265/origin，默认h264。
+      * 视频编码：h264/h265/origin，默认origin。
 
 origin: 保持原始编码格式
       */
@@ -5346,7 +5346,7 @@ export interface ModifyLiveTranscodeTemplateRequest {
   TemplateId: number
 
   /**
-      * 视频编码：h264/h265/origin，默认h264。
+      * 视频编码：h264/h265/origin，默认origin。
 
 origin: 保持原始编码格式
       */
