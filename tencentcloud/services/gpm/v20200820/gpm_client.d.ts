@@ -1,0 +1,70 @@
+import { AbstractClient } from "../../../common/abstract_client";
+import { ClientConfig } from "../../../common/interface";
+import { DescribeDataResponse, DescribeMatchCodesRequest, DeleteRuleResponse, ModifyMatchRequest, StartMatchingResponse, CreateMatchRequest, DescribeMatchingProgressRequest, ModifyMatchResponse, CreateMatchResponse, DescribeMatchesRequest, DeleteRuleRequest, DescribeRulesRequest, DescribeRuleResponse, DescribeMatchRequest, ModifyRuleRequest, DescribeDataRequest, CreateRuleRequest, DescribeRuleRequest, DescribeMatchResponse, DeleteMatchResponse, CancelMatchingRequest, CancelMatchingResponse, DescribeMatchCodesResponse, CreateRuleResponse, DescribeRulesResponse, DescribeMatchesResponse, StartMatchingRequest, DeleteMatchRequest, DescribeMatchingProgressResponse, ModifyRuleResponse } from "./gpm_models";
+/**
+ * gpm client
+ * @class
+ */
+export declare class Client extends AbstractClient {
+    constructor(clientConfig: ClientConfig);
+    /**
+     * 取消匹配。
+     */
+    CancelMatching(req: CancelMatchingRequest, cb?: (error: string, rep: CancelMatchingResponse) => void): Promise<CancelMatchingResponse>;
+    /**
+     * 查询匹配进度。
+     */
+    DescribeMatchingProgress(req: DescribeMatchingProgressRequest, cb?: (error: string, rep: DescribeMatchingProgressResponse) => void): Promise<DescribeMatchingProgressResponse>;
+    /**
+     * 创建匹配
+     */
+    CreateMatch(req: CreateMatchRequest, cb?: (error: string, rep: CreateMatchResponse) => void): Promise<CreateMatchResponse>;
+    /**
+     * 修改匹配
+     */
+    ModifyMatch(req: ModifyMatchRequest, cb?: (error: string, rep: ModifyMatchResponse) => void): Promise<ModifyMatchResponse>;
+    /**
+     * 查询规则详情
+     */
+    DescribeRule(req: DescribeRuleRequest, cb?: (error: string, rep: DescribeRuleResponse) => void): Promise<DescribeRuleResponse>;
+    /**
+     * 查询匹配详情
+     */
+    DescribeMatch(req: DescribeMatchRequest, cb?: (error: string, rep: DescribeMatchResponse) => void): Promise<DescribeMatchResponse>;
+    /**
+     * 删除规则
+     */
+    DeleteRule(req: DeleteRuleRequest, cb?: (error: string, rep: DeleteRuleResponse) => void): Promise<DeleteRuleResponse>;
+    /**
+     * 删除匹配
+     */
+    DeleteMatch(req: DeleteMatchRequest, cb?: (error: string, rep: DeleteMatchResponse) => void): Promise<DeleteMatchResponse>;
+    /**
+     * 分页查询规则集列表
+     */
+    DescribeRules(req: DescribeRulesRequest, cb?: (error: string, rep: DescribeRulesResponse) => void): Promise<DescribeRulesResponse>;
+    /**
+     * 修改规则（描述、标签）
+     */
+    ModifyRule(req: ModifyRuleRequest, cb?: (error: string, rep: ModifyRuleResponse) => void): Promise<ModifyRuleResponse>;
+    /**
+     * 创建规则
+     */
+    CreateRule(req: CreateRuleRequest, cb?: (error: string, rep: CreateRuleResponse) => void): Promise<CreateRuleResponse>;
+    /**
+     * 支持传入一个玩家或多个玩家发起匹配，在同一个请求内的玩家将被分到同一个对局。
+     */
+    StartMatching(req: StartMatchingRequest, cb?: (error: string, rep: StartMatchingResponse) => void): Promise<StartMatchingResponse>;
+    /**
+     * 分页查询匹配列表
+     */
+    DescribeMatches(req: DescribeMatchesRequest, cb?: (error: string, rep: DescribeMatchesResponse) => void): Promise<DescribeMatchesResponse>;
+    /**
+     * 分页查询匹配Code
+     */
+    DescribeMatchCodes(req: DescribeMatchCodesRequest, cb?: (error: string, rep: DescribeMatchCodesResponse) => void): Promise<DescribeMatchCodesResponse>;
+    /**
+     * 统计数据
+     */
+    DescribeData(req: DescribeDataRequest, cb?: (error: string, rep: DescribeDataResponse) => void): Promise<DescribeDataResponse>;
+}

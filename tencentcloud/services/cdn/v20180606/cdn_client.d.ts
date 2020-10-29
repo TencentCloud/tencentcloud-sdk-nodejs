@@ -193,7 +193,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeDiagnoseReport(req: DescribeDiagnoseReportRequest, cb?: (error: string, rep: DescribeDiagnoseReportResponse) => void): Promise<DescribeDiagnoseReportResponse>;
     /**
-     * CreatClsLogTopic 用于创建日志主题。注意：一个日志集下至多可创建10个日志主题。
+     * CreateClsLogTopic 用于创建日志主题。注意：一个日志集下至多可创建10个日志主题。
      */
     CreateClsLogTopic(req: CreateClsLogTopicRequest, cb?: (error: string, rep: CreateClsLogTopicResponse) => void): Promise<CreateClsLogTopicResponse>;
     /**

@@ -1631,6 +1631,11 @@ export interface CreateServiceRequest {
    * 用户类型。保留类型，serverless用户使用。
    */
   AppIdType?: string
+
+  /**
+   * 标签。
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -4188,47 +4193,6 @@ export interface UsagePlanStatusInfo {
  * CreateService返回参数结构体
  */
 export interface CreateServiceResponse {
-  /**
-   * 服务唯一ID。
-   */
-  ServiceId?: string
-
-  /**
-   * 用户自定义服务名称。
-   */
-  ServiceName?: string
-
-  /**
-   * 用户自定义服务描述。
-   */
-  ServiceDesc?: string
-
-  /**
-   * 外网默认域名。
-   */
-  OuterSubDomain?: string
-
-  /**
-   * vpc内网默认域名。
-   */
-  InnerSubDomain?: string
-
-  /**
-   * 服务创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
-   */
-  CreatedTime?: string
-
-  /**
-   * 网络类型列表，INNER为内网访问，OUTER为外网访问。
-   */
-  NetTypes?: Array<string>
-
-  /**
-      * IP版本号。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  IpVersion?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

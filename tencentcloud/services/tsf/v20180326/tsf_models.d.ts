@@ -84,6 +84,25 @@ export interface DisableTaskFlowResponse {
     RequestId?: string;
 }
 /**
+ * 任务规则
+ */
+export interface TaskRule {
+    /**
+      * 触发规则类型, Cron/Repeat
+      */
+    RuleType: string;
+    /**
+      * Cron类型规则，cron表达式。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Expression?: string;
+    /**
+      * 时间间隔， 单位毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RepeatInterval: number;
+}
+/**
  * DescribeDownloadInfo请求参数结构体
  */
 export interface DescribeDownloadInfoRequest {
@@ -1260,6 +1279,19 @@ export interface UpdateRepositoryRequest {
     RepositoryDesc?: string;
 }
 /**
+ * RevocationConfig返回参数结构体
+ */
+export interface RevocationConfigResponse {
+    /**
+      * true：回滚成功；false：回滚失败
+      */
+    Result?: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 机器实例
  */
 export interface Instance {
@@ -1905,23 +1937,13 @@ export interface Env {
     Value: string;
 }
 /**
- * 任务规则
+ * DescribeImageRepository返回参数结构体
  */
-export interface TaskRule {
+export interface DescribeImageRepositoryResponse {
     /**
-      * 触发规则类型, Cron/Repeat
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    RuleType: string;
-    /**
-      * Cron类型规则，cron表达式。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Expression?: string;
-    /**
-      * 时间间隔， 单位毫秒
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RepeatInterval: number;
+    RequestId?: string;
 }
 /**
  * DeleteContainerGroup返回参数结构体
@@ -2285,17 +2307,21 @@ export interface DescribeConfigReleaseLogsResponse {
     RequestId?: string;
 }
 /**
- * RevocationConfig返回参数结构体
+ * DescribeImageRepository请求参数结构体
  */
-export interface RevocationConfigResponse {
+export interface DescribeImageRepositoryRequest {
     /**
-      * true：回滚成功；false：回滚失败
+      * 仓库名，搜索关键字,不带命名空间的
       */
-    Result?: boolean;
+    SearchWord?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 偏移量，取值从0开始
       */
-    RequestId?: string;
+    Offset?: number;
+    /**
+      * 分页个数，默认为20， 取值应为1~100
+      */
+    Limit?: number;
 }
 /**
  * DescribeSimpleGroups返回参数结构体

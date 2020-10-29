@@ -1330,28 +1330,6 @@ export interface UpdatePayTypeResponse {
     RequestId?: string;
 }
 /**
- * CLS主题信息
- */
-export interface TopicInfo {
-    /**
-      * 主题ID
-      */
-    TopicId: string;
-    /**
-      * 主题名字
-      */
-    TopicName: string;
-    /**
-      * 是否启用投递
-      */
-    Enabled: number;
-    /**
-      * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CreateTime: string;
-}
-/**
  * DescribeDomainsConfig返回参数结构体
  */
 export interface DescribeDomainsConfigResponse {
@@ -1581,35 +1559,6 @@ export interface RuleCacheConfig {
  */
 export interface ListClsTopicDomainsResponse {
     /**
-      * 开发者ID
-      */
-    AppId?: number;
-    /**
-      * 渠道
-      */
-    Channel?: string;
-    /**
-      * 日志集ID
-      */
-    LogsetId?: string;
-    /**
-      * 日志主题ID
-      */
-    TopicId?: string;
-    /**
-      * 域名区域配置，其中可能含有已删除的域名，如果要再传回ManageClsTopicDomains接口，需要结合ListCdnDomains接口排除掉已删除的域名
-      */
-    DomainAreaConfigs?: Array<DomainAreaConfig>;
-    /**
-      * 日志主题名称
-      */
-    TopicName?: string;
-    /**
-      * 日志主题最近更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UpdateTime?: string;
-    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -1732,15 +1681,6 @@ export interface EnableClsLogTopicResponse {
  * ListClsLogTopics返回参数结构体
  */
 export interface ListClsLogTopicsResponse {
-    /**
-      * 日志集信息
-      */
-    Logset?: LogSetInfo;
-    /**
-      * 日志主题信息列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Topics?: Array<TopicInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3274,10 +3214,6 @@ export declare type ListScdnLogTasksRequest = null;
  */
 export interface SearchClsLogResponse {
     /**
-      * 查询结果
-      */
-    Logs?: ClsSearchLogs;
-    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -4447,35 +4383,6 @@ export interface CreateVerifyRecordRequest {
     Domain: string;
 }
 /**
- * CLS日志搜索对象
- */
-export interface ClsLogObject {
-    /**
-      * 主题ID
-      */
-    TopicId: string;
-    /**
-      * 主题名字
-      */
-    TopicName: string;
-    /**
-      * 日志时间
-      */
-    Timestamp: string;
-    /**
-      * 日志内容
-      */
-    Content: string;
-    /**
-      * 采集路径
-      */
-    Filename: string;
-    /**
-      * 日志来源设备
-      */
-    Source: string;
-}
-/**
  * 区域映射id和子区域id的关联信息。
  */
 export interface RegionMapRelation {
@@ -4919,44 +4826,6 @@ export interface UpdateDomainConfigResponse {
     RequestId?: string;
 }
 /**
- * 日志集信息
- */
-export interface LogSetInfo {
-    /**
-      * 开发者ID
-      */
-    AppId: number;
-    /**
-      * 渠道
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Channel: string;
-    /**
-      * 日志集ID
-      */
-    LogsetId: string;
-    /**
-      * 日志集名字
-      */
-    LogsetName: string;
-    /**
-      * 是否默认日志集
-      */
-    IsDefault: number;
-    /**
-      * 日志保存时间，单位为天
-      */
-    LogsetSavePeriod: number;
-    /**
-      * 创建日期
-      */
-    CreateTime: string;
-    /**
-      * 区域
-      */
-    Region: string;
-}
-/**
  * ListDiagnoseReport返回参数结构体
  */
 export interface ListDiagnoseReportResponse {
@@ -5206,23 +5075,6 @@ export interface Compatibility {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Code: number;
-}
-/**
- * Cls日志搜索结果
- */
-export interface ClsSearchLogs {
-    /**
-      * 获取更多检索结果的游标
-      */
-    Context: string;
-    /**
-      * 搜索结果是否已经全部返回
-      */
-    Listover: boolean;
-    /**
-      * 日志内容信息
-      */
-    Results: Array<ClsLogObject>;
 }
 /**
  * DescribeUrlViolations返回参数结构体

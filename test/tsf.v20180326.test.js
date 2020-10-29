@@ -448,6 +448,16 @@ it("tsf.v20180326.DescribeGroups", async function () {
     }
 })
 
+it("tsf.v20180326.DescribeImageRepository", async function () {
+    try {
+       const data = await client.DescribeImageRepository({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tsf.v20180326.CreateRepository", async function () {
     try {
        const data = await client.CreateRepository({})

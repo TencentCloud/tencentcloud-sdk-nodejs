@@ -45,15 +45,20 @@ export interface DescribeFileSystemResponse {
       */
     FileSystem?: FileSystem;
     /**
-      * 文件系统已使用容量（byte）
+      * 文件系统已使用容量（已弃用）
 注意：此字段可能返回 null，表示取不到有效值。
       */
     FileSystemCapacityUsed?: number;
     /**
-      * 已使用容量（byte）
+      * 已使用容量（byte），包括标准和归档存储
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CapacityUsed?: number;
+    /**
+      * 已使用归档存储容量（byte）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ArchiveCapacityUsed?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -88,6 +93,37 @@ export interface ModifyFileSystemResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ModifyFileSystem请求参数结构体
+ */
+export interface ModifyFileSystemRequest {
+    /**
+      * 文件系统ID
+      */
+    FileSystemId: string;
+    /**
+      * 文件系统名称
+      */
+    FileSystemName?: string;
+    /**
+      * 文件系统描述
+      */
+    Description?: string;
+    /**
+      * 文件系统容量（byte），下限为1G，上限为1P，且必须是1G的整数倍
+注意：修改的文件系统容量不能小于当前使用量
+      */
+    CapacityQuota?: number;
+}
+/**
+ * DescribeLifeCycleRules请求参数结构体
+ */
+export interface DescribeLifeCycleRulesRequest {
+    /**
+      * 文件系统ID
+      */
+    FileSystemId: string;
 }
 /**
  * ModifyAccessGroup请求参数结构体
@@ -167,6 +203,24 @@ export interface DeleteAccessGroupRequest {
     AccessGroupId: string;
 }
 /**
+ * ModifyLifeCycleRules请求参数结构体
+ */
+export interface ModifyLifeCycleRulesRequest {
+    /**
+      * 多个生命周期规则，上限为10
+      */
+    LifeCycleRules: Array<LifeCycleRule>;
+}
+/**
+ * CreateRestoreTasks返回参数结构体
+ */
+export interface CreateRestoreTasksResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteFileSystem请求参数结构体
  */
 export interface DeleteFileSystemRequest {
@@ -174,6 +228,29 @@ export interface DeleteFileSystemRequest {
       * 文件系统ID
       */
     FileSystemId: string;
+}
+/**
+ * DescribeMountPoints请求参数结构体
+ */
+export interface DescribeMountPointsRequest {
+    /**
+      * 文件系统ID
+注意：若根据AccessGroupId查看挂载点列表，则无需设置FileSystemId
+      */
+    FileSystemId?: string;
+    /**
+      * 权限组ID
+注意：若根据FileSystemId查看挂载点列表，则无需设置AccessGroupId
+      */
+    AccessGroupId?: string;
+    /**
+      * 偏移量，默认为0
+      */
+    Offset?: number;
+    /**
+      * 返回数量，默认为所有
+      */
+    Limit?: number;
 }
 /**
  * DescribeMountPoint请求参数结构体
@@ -211,6 +288,15 @@ export interface DeleteAccessGroupResponse {
     RequestId?: string;
 }
 /**
+ * ModifyLifeCycleRules返回参数结构体
+ */
+export interface ModifyLifeCycleRulesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteMountPoint返回参数结构体
  */
 export interface DeleteMountPointResponse {
@@ -223,10 +309,6 @@ export interface DeleteMountPointResponse {
  * CreateMountPoint返回参数结构体
  */
 export interface CreateMountPointResponse {
-    /**
-      * 挂载点
-      */
-    MountPoint?: MountPoint;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -250,35 +332,39 @@ export interface CreateFileSystemRequest {
     Description?: string;
 }
 /**
- * ModifyFileSystem请求参数结构体
+ * ModifyResourceTags请求参数结构体
  */
-export interface ModifyFileSystemRequest {
+export interface ModifyResourceTagsRequest {
     /**
       * 文件系统ID
       */
     FileSystemId: string;
     /**
-      * 文件系统名称
+      * 多个资源标签，可以为空数组
       */
-    FileSystemName?: string;
-    /**
-      * 文件系统描述
-      */
-    Description?: string;
-    /**
-      * 文件系统容量（byte），下限为1G，上限为1P，且必须是1G的整数倍
-注意：修改的文件系统容量不能小于当前使用量
-      */
-    CapacityQuota?: number;
+    Tags?: Array<Tag>;
 }
 /**
- * DescribeMountPoints返回参数结构体
+ * DescribeResourceTags返回参数结构体
  */
-export interface DescribeMountPointsResponse {
+export interface DescribeResourceTagsResponse {
     /**
-      * 挂载点列表
+      * 资源标签列表
       */
-    MountPoints?: Array<MountPoint>;
+    Tags?: Array<Tag>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeAccessGroups返回参数结构体
+ */
+export interface DescribeAccessGroupsResponse {
+    /**
+      * 权限组列表
+      */
+    AccessGroups?: Array<AccessGroup>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -301,6 +387,19 @@ export interface DeleteFileSystemResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * CreateLifeCycleRules请求参数结构体
+ */
+export interface CreateLifeCycleRulesRequest {
+    /**
+      * 文件系统ID
+      */
+    FileSystemId: string;
+    /**
+      * 多个生命周期规则，上限为10
+      */
+    LifeCycleRules: Array<LifeCycleRule>;
 }
 /**
  * 过滤条件
@@ -327,6 +426,15 @@ export interface CreateAccessGroupResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DeleteLifeCycleRules请求参数结构体
+ */
+export interface DeleteLifeCycleRulesRequest {
+    /**
+      * 多个生命周期规则ID，上限为10
+      */
+    LifeCycleRuleIds: Array<number>;
 }
 /**
  * 文件系统
@@ -370,6 +478,35 @@ export interface FileSystem {
     Status: number;
 }
 /**
+ * 回热任务
+ */
+export interface RestoreTask {
+    /**
+      * 回热任务ID
+      */
+    RestoreTaskId?: number;
+    /**
+      * 回热任务文件路径
+      */
+    FilePath?: string;
+    /**
+      * 回热任务类型（1：标准；2：极速；3：批量）
+      */
+    Type?: number;
+    /**
+      * 指定恢复出的临时副本的有效时长（单位天）
+      */
+    Days?: number;
+    /**
+      * 回热任务状态（1：绑定文件中；2：绑定文件完成；3：文件回热中；4：文件回热完成）
+      */
+    Status?: number;
+    /**
+      * 创建时间
+      */
+    CreateTime?: string;
+}
+/**
  * ModifyMountPoint请求参数结构体
  */
 export interface ModifyMountPointRequest {
@@ -391,13 +528,61 @@ export interface ModifyMountPointRequest {
     AccessGroupId?: string;
 }
 /**
- * DescribeAccessGroups返回参数结构体
+ * DeleteLifeCycleRules返回参数结构体
  */
-export interface DescribeAccessGroupsResponse {
+export interface DeleteLifeCycleRulesResponse {
     /**
-      * 权限组列表
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    AccessGroups?: Array<AccessGroup>;
+    RequestId?: string;
+}
+/**
+ * CreateRestoreTasks请求参数结构体
+ */
+export interface CreateRestoreTasksRequest {
+    /**
+      * 文件系统ID
+      */
+    FileSystemId: string;
+    /**
+      * 多个回热任务，上限为10
+      */
+    RestoreTasks: Array<RestoreTask>;
+}
+/**
+ * 生命周期规则转换属性
+ */
+export interface Transition {
+    /**
+      * 触发时间（单位天）
+      */
+    Days: number;
+    /**
+      * 转换类型（1：归档；2：删除）
+      */
+    Type: number;
+}
+/**
+ * DescribeRestoreTasks返回参数结构体
+ */
+export interface DescribeRestoreTasksResponse {
+    /**
+      * 回热任务列表
+      */
+    RestoreTasks?: Array<RestoreTask>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeLifeCycleRules返回参数结构体
+ */
+export interface DescribeLifeCycleRulesResponse {
+    /**
+      * 生命周期规则列表
+      */
+    LifeCycleRules?: Array<LifeCycleRule>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -422,13 +607,9 @@ export interface DeleteAccessRulesRequest {
     AccessRuleIds: Array<number>;
 }
 /**
- * DescribeAccessRules返回参数结构体
+ * DeleteAccessRules返回参数结构体
  */
-export interface DescribeAccessRulesResponse {
-    /**
-      * 权限规则列表
-      */
-    AccessRules?: Array<AccessRule>;
+export interface DeleteAccessRulesResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -448,6 +629,53 @@ export interface DescribeFileSystemsRequest {
     Limit?: number;
 }
 /**
+ * DescribeResourceTags请求参数结构体
+ */
+export interface DescribeResourceTagsRequest {
+    /**
+      * 文件系统ID
+      */
+    FileSystemId: string;
+}
+/**
+ * ModifyResourceTags返回参数结构体
+ */
+export interface ModifyResourceTagsResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 生命周期规则
+ */
+export interface LifeCycleRule {
+    /**
+      * 生命周期规则ID
+      */
+    LifeCycleRuleId?: number;
+    /**
+      * 生命周期规则名称
+      */
+    LifeCycleRuleName?: string;
+    /**
+      * 生命周期规则路径（目录或文件）
+      */
+    Path?: string;
+    /**
+      * 生命周期规则转换列表
+      */
+    Transitions?: Array<Transition>;
+    /**
+      * 生命周期规则状态（1：打开；2：关闭）
+      */
+    Status?: number;
+    /**
+      * 创建时间
+      */
+    CreateTime?: string;
+}
+/**
  * CreateAccessRules请求参数结构体
  */
 export interface CreateAccessRulesRequest {
@@ -461,9 +689,13 @@ export interface CreateAccessRulesRequest {
     AccessGroupId: string;
 }
 /**
- * DeleteAccessRules返回参数结构体
+ * DescribeAccessRules返回参数结构体
  */
-export interface DeleteAccessRulesResponse {
+export interface DescribeAccessRulesResponse {
+    /**
+      * 权限规则列表
+      */
+    AccessRules?: Array<AccessRule>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -507,6 +739,28 @@ export interface MountPoint {
     VpcType: number;
 }
 /**
+ * DescribeMountPoints返回参数结构体
+ */
+export interface DescribeMountPointsResponse {
+    /**
+      * 挂载点列表
+      */
+    MountPoints?: Array<MountPoint>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeRestoreTasks请求参数结构体
+ */
+export interface DescribeRestoreTasksRequest {
+    /**
+      * 文件系统ID
+      */
+    FileSystemId: string;
+}
+/**
  * DescribeAccessRules请求参数结构体
  */
 export interface DescribeAccessRulesRequest {
@@ -533,27 +787,13 @@ export interface ModifyAccessRulesResponse {
     RequestId?: string;
 }
 /**
- * DescribeMountPoints请求参数结构体
+ * CreateLifeCycleRules返回参数结构体
  */
-export interface DescribeMountPointsRequest {
+export interface CreateLifeCycleRulesResponse {
     /**
-      * 文件系统ID
-注意：若根据AccessGroupId查看挂载点列表，则无需设置FileSystemId
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    FileSystemId?: string;
-    /**
-      * 权限组ID
-注意：若根据FileSystemId查看挂载点列表，则无需设置AccessGroupId
-      */
-    AccessGroupId?: string;
-    /**
-      * 偏移量，默认为0
-      */
-    Offset?: number;
-    /**
-      * 返回数量，默认为所有
-      */
-    Limit?: number;
+    RequestId?: string;
 }
 /**
  * ModifyAccessGroup返回参数结构体
@@ -563,6 +803,19 @@ export interface ModifyAccessGroupResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 资源标签。
+ */
+export interface Tag {
+    /**
+      * 标签键
+      */
+    Key: string;
+    /**
+      * 标签值
+      */
+    Value: string;
 }
 /**
  * ModifyMountPoint返回参数结构体

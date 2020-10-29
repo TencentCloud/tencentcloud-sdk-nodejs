@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { VerifyBizLicenseRequest, BusinessCardOCRResponse, HKIDCardOCRRequest, CarInvoiceOCRRequest, TrainTicketOCRRequest, EstateCertOCRResponse, FlightInvoiceOCRRequest, MLIDPassportOCRRequest, TextDetectResponse, VerifyBizLicenseResponse, FinanBillSliceOCRResponse, DriverLicenseOCRResponse, PermitOCRResponse, InvoiceGeneralOCRRequest, WaybillOCRResponse, MLIDCardOCRRequest, VehicleLicenseOCRRequest, EnterpriseLicenseOCRResponse, InstitutionOCRResponse, DriverLicenseOCRRequest, QrcodeOCRResponse, MainlandPermitOCRRequest, EnterpriseLicenseOCRRequest, BankCardOCRRequest, PropOwnerCertOCRResponse, TrainTicketOCRResponse, ArithmeticOCRResponse, FormulaOCRResponse, GeneralHandwritingOCRRequest, BizLicenseOCRRequest, MixedInvoiceDetectResponse, InsuranceBillOCRResponse, GeneralEfficientOCRResponse, HmtResidentPermitOCRRequest, QrcodeOCRRequest, TaxiInvoiceOCRResponse, GeneralBasicOCRResponse, RecognizeThaiIDCardOCRResponse, QuotaInvoiceOCRRequest, MixedInvoiceOCRResponse, ClassifyDetectOCRResponse, VehicleLicenseOCRResponse, VatInvoiceOCRRequest, IDCardOCRResponse, ClassifyDetectOCRRequest, DutyPaidProofOCRResponse, TollInvoiceOCRRequest, LicensePlateOCRResponse, HKIDCardOCRResponse, PermitOCRRequest, InvoiceGeneralOCRResponse, TaxiInvoiceOCRRequest, PropOwnerCertOCRRequest, TextDetectRequest, VatRollInvoiceOCRResponse, VatInvoiceVerifyRequest, EduPaperOCRResponse, RecognizeThaiIDCardOCRRequest, TableOCRRequest, VerifyBasicBizLicenseResponse, VehicleRegCertOCRRequest, LicensePlateOCRRequest, GeneralBasicOCRRequest, GeneralEfficientOCRRequest, TollInvoiceOCRResponse, RideHailingDriverLicenseOCRResponse, EnglishOCRRequest, VatInvoiceVerifyResponse, PassportOCRResponse, GeneralAccurateOCRRequest, OrgCodeCertOCRRequest, FlightInvoiceOCRResponse, InstitutionOCRRequest, QueryBarCodeResponse, ArithmeticOCRRequest, FinanBillSliceOCRRequest, MLIDPassportOCRResponse, VatRollInvoiceOCRRequest, SealOCRResponse, FinanBillOCRResponse, VinOCRResponse, EduPaperOCRRequest, FormulaOCRRequest, PassportOCRRequest, DutyPaidProofOCRRequest, RideHailingDriverLicenseOCRRequest, QueryBarCodeRequest, OrgCodeCertOCRResponse, MixedInvoiceOCRRequest, ResidenceBookletOCRResponse, CarInvoiceOCRResponse, GeneralFastOCRRequest, ShipInvoiceOCRResponse, VehicleRegCertOCRResponse, GeneralAccurateOCRResponse, SealOCRRequest, ResidenceBookletOCRRequest, BusInvoiceOCRResponse, MainlandPermitOCRResponse, HmtResidentPermitOCRResponse, EnglishOCRResponse, BusInvoiceOCRRequest, QuotaInvoiceOCRResponse, RideHailingTransportLicenseOCRResponse, InsuranceBillOCRRequest, GeneralHandwritingOCRResponse, TableOCRResponse, WaybillOCRRequest, IDCardOCRRequest, MixedInvoiceDetectRequest, VinOCRRequest, RideHailingTransportLicenseOCRRequest, MLIDCardOCRResponse, EstateCertOCRRequest, VerifyBasicBizLicenseRequest, BizLicenseOCRResponse, VatInvoiceOCRResponse, ShipInvoiceOCRRequest, BankCardOCRResponse, BusinessCardOCRRequest, FinanBillOCRRequest, GeneralFastOCRResponse } from "./ocr_models";
+import { VerifyBizLicenseRequest, BusinessCardOCRResponse, HKIDCardOCRRequest, CarInvoiceOCRRequest, TrainTicketOCRRequest, EstateCertOCRResponse, FlightInvoiceOCRRequest, MLIDPassportOCRRequest, TextDetectResponse, TollInvoiceOCRResponse, VerifyBizLicenseResponse, FinanBillSliceOCRResponse, DriverLicenseOCRResponse, PermitOCRResponse, InvoiceGeneralOCRRequest, WaybillOCRResponse, MLIDCardOCRRequest, VehicleLicenseOCRRequest, EnterpriseLicenseOCRResponse, InstitutionOCRResponse, DriverLicenseOCRRequest, RecognizeTableOCRResponse, QrcodeOCRResponse, MainlandPermitOCRRequest, EnterpriseLicenseOCRRequest, BankCardOCRRequest, PropOwnerCertOCRResponse, TrainTicketOCRResponse, ArithmeticOCRResponse, FormulaOCRResponse, GeneralHandwritingOCRRequest, BizLicenseOCRRequest, MixedInvoiceDetectResponse, InsuranceBillOCRResponse, GeneralEfficientOCRResponse, HmtResidentPermitOCRRequest, QrcodeOCRRequest, TaxiInvoiceOCRResponse, GeneralBasicOCRResponse, RecognizeThaiIDCardOCRResponse, MixedInvoiceOCRResponse, ClassifyDetectOCRResponse, VehicleLicenseOCRResponse, VatInvoiceOCRRequest, IDCardOCRResponse, ClassifyDetectOCRRequest, DutyPaidProofOCRResponse, TollInvoiceOCRRequest, LicensePlateOCRResponse, HKIDCardOCRResponse, PermitOCRRequest, InvoiceGeneralOCRResponse, TaxiInvoiceOCRRequest, PropOwnerCertOCRRequest, TextDetectRequest, VatRollInvoiceOCRResponse, VatInvoiceVerifyRequest, EduPaperOCRResponse, RecognizeThaiIDCardOCRRequest, TableOCRRequest, VerifyBasicBizLicenseResponse, VehicleRegCertOCRRequest, WaybillOCRRequest, LicensePlateOCRRequest, GeneralBasicOCRRequest, GeneralEfficientOCRRequest, AdvertiseOCRRequest, RideHailingDriverLicenseOCRResponse, EnglishOCRRequest, VatInvoiceVerifyResponse, PassportOCRResponse, GeneralAccurateOCRRequest, OrgCodeCertOCRRequest, FlightInvoiceOCRResponse, InstitutionOCRRequest, QueryBarCodeResponse, ArithmeticOCRRequest, FinanBillSliceOCRRequest, MLIDPassportOCRResponse, VatRollInvoiceOCRRequest, SealOCRResponse, FinanBillOCRResponse, ShipInvoiceOCRRequest, VinOCRResponse, EduPaperOCRRequest, FormulaOCRRequest, PassportOCRRequest, DutyPaidProofOCRRequest, RideHailingDriverLicenseOCRRequest, QueryBarCodeRequest, OrgCodeCertOCRResponse, MixedInvoiceOCRRequest, ResidenceBookletOCRResponse, CarInvoiceOCRResponse, GeneralFastOCRRequest, ShipInvoiceOCRResponse, VehicleRegCertOCRResponse, GeneralAccurateOCRResponse, SealOCRRequest, ResidenceBookletOCRRequest, BusInvoiceOCRResponse, MainlandPermitOCRResponse, HmtResidentPermitOCRResponse, EnglishOCRResponse, BusInvoiceOCRRequest, QuotaInvoiceOCRResponse, RideHailingTransportLicenseOCRResponse, InsuranceBillOCRRequest, GeneralHandwritingOCRResponse, TableOCRResponse, AdvertiseOCRResponse, IDCardOCRRequest, MixedInvoiceDetectRequest, VinOCRRequest, RideHailingTransportLicenseOCRRequest, MLIDCardOCRResponse, RecognizeTableOCRRequest, EstateCertOCRRequest, VerifyBasicBizLicenseRequest, BizLicenseOCRResponse, VatInvoiceOCRResponse, QuotaInvoiceOCRRequest, BankCardOCRResponse, BusinessCardOCRRequest, FinanBillOCRRequest, GeneralFastOCRResponse } from "./ocr_models";
 /**
  * ocr client
  * @class
@@ -210,6 +210,10 @@ export declare class Client extends AbstractClient {
      */
     WaybillOCR(req: WaybillOCRRequest, cb?: (error: string, rep: WaybillOCRResponse) => void): Promise<WaybillOCRResponse>;
     /**
+     * 本接口支持出租车发票关键字段的识别，包括发票号码、发票代码、金额、日期、上下车时间、里程、车牌号、发票类型及所属地区等字段。
+     */
+    TaxiInvoiceOCR(req: TaxiInvoiceOCRRequest, cb?: (error: string, rep: TaxiInvoiceOCRResponse) => void): Promise<TaxiInvoiceOCRResponse>;
+    /**
      * 本接口支持对通用机打发票的发票代码、发票号码、日期、购买方识别号、销售方识别号、校验码、小写金额等关键字段的识别。
      */
     InvoiceGeneralOCR(req: InvoiceGeneralOCRRequest, cb?: (error: string, rep: InvoiceGeneralOCRResponse) => void): Promise<InvoiceGeneralOCRResponse>;
@@ -220,9 +224,9 @@ export declare class Client extends AbstractClient {
      */
     HKIDCardOCR(req: HKIDCardOCRRequest, cb?: (error: string, rep: HKIDCardOCRResponse) => void): Promise<HKIDCardOCRResponse>;
     /**
-     * 本接口支持增值税专用发票、增值税普通发票、增值税电子发票全字段的内容检测和识别，包括发票代码、发票号码、打印发票代码、打印发票号码、开票日期、合计金额、校验码、税率、合计税额、价税合计、购买方识别号、复核、销售方识别号、开票人、密码区1、密码区2、密码区3、密码区4、发票名称、购买方名称、销售方名称、服务名称、备注、规格型号、数量、单价、金额、税额、收款人等字段。
+     * 本接口支持图片/ PDF内常规表格、无线表格、多表格的检测和识别，返回每个单元格的文字内容，支持对0度至180度旋转的表格图片识别，且支持将识别结果保存为 Excel 格式。
      */
-    VatInvoiceOCR(req: VatInvoiceOCRRequest, cb?: (error: string, rep: VatInvoiceOCRResponse) => void): Promise<VatInvoiceOCRResponse>;
+    RecognizeTableOCR(req: RecognizeTableOCRRequest, cb?: (error: string, rep: RecognizeTableOCRResponse) => void): Promise<RecognizeTableOCRResponse>;
     /**
      * 本接口支持营业执照信息的识别与准确性核验，返回的营业执照信息比营业执照识别及核验（基础版）接口更详细。
 您可以通过输入营业执照关键字段或传入营业执照图片提供所需的验证信息，接口返回真实的企业工商照面信息及核验结果，包括统一社会信用代码、组织机构代码、经营期限、法人姓名、经营状态、经营业务范围及方式、注册资金、注册币种、登记机关、开业日期、企业（机构）类型、注销日期、吊销日期、许可经营项目、一般经营项目、核准时间、省、地级市、区/县、住所所在行政区划代码、行业门类代码、行业门类名称、国民经济行业代码、国民经济行业名称、经营（业务）范围、要核验的工商注册号、工商注册号、要核验的企业名称、企业名称、要核验的注册住址、注册住址、核验结果共33个详细字段。
@@ -312,6 +316,10 @@ export declare class Client extends AbstractClient {
      * 本接口支持识别公路汽车客票的发票代码、发票号码、日期、姓名、票价等字段。
      */
     BusInvoiceOCR(req: BusInvoiceOCRRequest, cb?: (error: string, rep: BusInvoiceOCRResponse) => void): Promise<BusInvoiceOCRResponse>;
+    /**
+     * 本接口支持增值税专用发票、增值税普通发票、增值税电子发票全字段的内容检测和识别，包括发票代码、发票号码、打印发票代码、打印发票号码、开票日期、合计金额、校验码、税率、合计税额、价税合计、购买方识别号、复核、销售方识别号、开票人、密码区1、密码区2、密码区3、密码区4、发票名称、购买方名称、销售方名称、服务名称、备注、规格型号、数量、单价、金额、税额、收款人等字段。
+     */
+    VatInvoiceOCR(req: VatInvoiceOCRRequest, cb?: (error: string, rep: VatInvoiceOCRResponse) => void): Promise<VatInvoiceOCRResponse>;
     /**
      * 本接口支持图片内表格文档的检测和识别，返回每个单元格的文字内容，支持将识别结果保存为 Excel 格式。
      */
@@ -436,9 +444,11 @@ export declare class Client extends AbstractClient {
      */
     GeneralEfficientOCR(req: GeneralEfficientOCRRequest, cb?: (error: string, rep: GeneralEfficientOCRResponse) => void): Promise<GeneralEfficientOCRResponse>;
     /**
-     * 本接口支持出租车发票关键字段的识别，包括发票号码、发票代码、金额、日期、上下车时间、里程、车牌号、发票类型及所属地区等字段。
+     * 本接口支持广告商品图片内文字的检测和识别，返回文本框位置与文字内容。
+
+产品优势：针对广告商品图片普遍存在较多繁体字、艺术字的特点，进行了识别能力的增强。支持中英文、横排、竖排以及倾斜场景文字识别。文字识别的召回率和准确率能达到96%以上。
      */
-    TaxiInvoiceOCR(req: TaxiInvoiceOCRRequest, cb?: (error: string, rep: TaxiInvoiceOCRResponse) => void): Promise<TaxiInvoiceOCRResponse>;
+    AdvertiseOCR(req: AdvertiseOCRRequest, cb?: (error: string, rep: AdvertiseOCRResponse) => void): Promise<AdvertiseOCRResponse>;
     /**
      * 本接口支持国内机动车登记证书主要字段的结构化识别，包括机动车所有人、身份证明名称、号码、车辆型号、车辆识别代号、发动机号、制造厂名称等。
      */

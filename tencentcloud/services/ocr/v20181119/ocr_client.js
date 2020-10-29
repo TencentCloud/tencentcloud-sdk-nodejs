@@ -276,6 +276,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("WaybillOCR", req, cb);
     }
     /**
+     * 本接口支持出租车发票关键字段的识别，包括发票号码、发票代码、金额、日期、上下车时间、里程、车牌号、发票类型及所属地区等字段。
+     */
+    async TaxiInvoiceOCR(req, cb) {
+        return this.request("TaxiInvoiceOCR", req, cb);
+    }
+    /**
      * 本接口支持对通用机打发票的发票代码、发票号码、日期、购买方识别号、销售方识别号、校验码、小写金额等关键字段的识别。
      */
     async InvoiceGeneralOCR(req, cb) {
@@ -290,10 +296,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("HKIDCardOCR", req, cb);
     }
     /**
-     * 本接口支持增值税专用发票、增值税普通发票、增值税电子发票全字段的内容检测和识别，包括发票代码、发票号码、打印发票代码、打印发票号码、开票日期、合计金额、校验码、税率、合计税额、价税合计、购买方识别号、复核、销售方识别号、开票人、密码区1、密码区2、密码区3、密码区4、发票名称、购买方名称、销售方名称、服务名称、备注、规格型号、数量、单价、金额、税额、收款人等字段。
+     * 本接口支持图片/ PDF内常规表格、无线表格、多表格的检测和识别，返回每个单元格的文字内容，支持对0度至180度旋转的表格图片识别，且支持将识别结果保存为 Excel 格式。
      */
-    async VatInvoiceOCR(req, cb) {
-        return this.request("VatInvoiceOCR", req, cb);
+    async RecognizeTableOCR(req, cb) {
+        return this.request("RecognizeTableOCR", req, cb);
     }
     /**
      * 本接口支持营业执照信息的识别与准确性核验，返回的营业执照信息比营业执照识别及核验（基础版）接口更详细。
@@ -397,6 +403,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async BusInvoiceOCR(req, cb) {
         return this.request("BusInvoiceOCR", req, cb);
+    }
+    /**
+     * 本接口支持增值税专用发票、增值税普通发票、增值税电子发票全字段的内容检测和识别，包括发票代码、发票号码、打印发票代码、打印发票号码、开票日期、合计金额、校验码、税率、合计税额、价税合计、购买方识别号、复核、销售方识别号、开票人、密码区1、密码区2、密码区3、密码区4、发票名称、购买方名称、销售方名称、服务名称、备注、规格型号、数量、单价、金额、税额、收款人等字段。
+     */
+    async VatInvoiceOCR(req, cb) {
+        return this.request("VatInvoiceOCR", req, cb);
     }
     /**
      * 本接口支持图片内表格文档的检测和识别，返回每个单元格的文字内容，支持将识别结果保存为 Excel 格式。
@@ -544,10 +556,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GeneralEfficientOCR", req, cb);
     }
     /**
-     * 本接口支持出租车发票关键字段的识别，包括发票号码、发票代码、金额、日期、上下车时间、里程、车牌号、发票类型及所属地区等字段。
+     * 本接口支持广告商品图片内文字的检测和识别，返回文本框位置与文字内容。
+
+产品优势：针对广告商品图片普遍存在较多繁体字、艺术字的特点，进行了识别能力的增强。支持中英文、横排、竖排以及倾斜场景文字识别。文字识别的召回率和准确率能达到96%以上。
      */
-    async TaxiInvoiceOCR(req, cb) {
-        return this.request("TaxiInvoiceOCR", req, cb);
+    async AdvertiseOCR(req, cb) {
+        return this.request("AdvertiseOCR", req, cb);
     }
     /**
      * 本接口支持国内机动车登记证书主要字段的结构化识别，包括机动车所有人、身份证明名称、号码、车辆型号、车辆识别代号、发动机号、制造厂名称等。

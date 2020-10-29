@@ -288,6 +288,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DescribeGroups", req, cb);
     }
     /**
+     * 镜像仓库列表
+     */
+    async DescribeImageRepository(req, cb) {
+        return this.request("DescribeImageRepository", req, cb);
+    }
+    /**
      * 创建仓库
      */
     async CreateRepository(req, cb) {

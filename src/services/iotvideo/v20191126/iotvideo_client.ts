@@ -31,7 +31,7 @@ import {
   DeleteTraceIdsRequest,
   IotModelData,
   CreateStorageServiceRequest,
-  DescribeDevicesResponse,
+  DescribeOsListResponse,
   ModifyProductResponse,
   ModifyProductRequest,
   DisableDeviceStreamRequest,
@@ -41,11 +41,13 @@ import {
   CreateDevTokenRequest,
   DescribeStorageServiceResponse,
   DeleteIotDataTypeRequest,
+  ModifyVerContentResponse,
   DescribeMessageQueueRequest,
   DeleteAppUsrResponse,
   DescribeRegistrationStatusResponse,
   DescribeProductRequest,
   DescribeProductsResponse,
+  OsData,
   DeviceCertificate,
   UpgradeDeviceRequest,
   LogData,
@@ -85,6 +87,7 @@ import {
   DisableOtaVersionResponse,
   DescribeBindDevResponse,
   CreateProductRequest,
+  SystemType,
   RunTestOtaVersionResponse,
   RunTestOtaVersionRequest,
   DescribeDeviceResponse,
@@ -95,6 +98,8 @@ import {
   DescribeIotModelsRequest,
   DescribeModelDataRetRequest,
   CreateTraceIdsResponse,
+  DescribeDevicesResponse,
+  ModifyVerContentRequest,
   DeleteBindingRequest,
   DescribeOtaVersionsResponse,
   DeleteProductResponse,
@@ -146,6 +151,7 @@ import {
   DeleteAppUsrRequest,
   DescribeIotModelsResponse,
   DescribeMessageQueueResponse,
+  DescribeOsListRequest,
   DescribeDevicesRequest,
   CreateIotDataTypeResponse,
   ModifyDevicePropertyResponse,
@@ -494,6 +500,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 退订已购买的云存服务
+   */
+  async RefundStorageService(
+    req: RefundStorageServiceRequest,
+    cb?: (error: string, rep: RefundStorageServiceResponse) => void
+  ): Promise<RefundStorageServiceResponse> {
+    return this.request("RefundStorageService", req, cb)
+  }
+
+  /**
    * 购买云存服务
    */
   async CreateStorageService(
@@ -521,6 +537,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteDeviceResponse) => void
   ): Promise<DeleteDeviceResponse> {
     return this.request("DeleteDevice", req, cb)
+  }
+
+  /**
+   * 查看操作系统支持的芯片列表
+   */
+  async DescribeOsList(
+    req?: DescribeOsListRequest,
+    cb?: (error: string, rep: DescribeOsListResponse) => void
+  ): Promise<DescribeOsListResponse> {
+    return this.request("DescribeOsList", req, cb)
   }
 
   /**
@@ -654,13 +680,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 退订已购买的云存服务
+   * 编辑版本描述信息
    */
-  async RefundStorageService(
-    req: RefundStorageServiceRequest,
-    cb?: (error: string, rep: RefundStorageServiceResponse) => void
-  ): Promise<RefundStorageServiceResponse> {
-    return this.request("RefundStorageService", req, cb)
+  async ModifyVerContent(
+    req: ModifyVerContentRequest,
+    cb?: (error: string, rep: ModifyVerContentResponse) => void
+  ): Promise<ModifyVerContentResponse> {
+    return this.request("ModifyVerContent", req, cb)
   }
 
   /**

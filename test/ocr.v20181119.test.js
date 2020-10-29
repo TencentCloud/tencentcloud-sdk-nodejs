@@ -248,6 +248,16 @@ it("ocr.v20181119.WaybillOCR", async function () {
     }
 })
 
+it("ocr.v20181119.TaxiInvoiceOCR", async function () {
+    try {
+       const data = await client.TaxiInvoiceOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.InvoiceGeneralOCR", async function () {
     try {
        const data = await client.InvoiceGeneralOCR({})
@@ -268,9 +278,9 @@ it("ocr.v20181119.HKIDCardOCR", async function () {
     }
 })
 
-it("ocr.v20181119.VatInvoiceOCR", async function () {
+it("ocr.v20181119.RecognizeTableOCR", async function () {
     try {
-       const data = await client.VatInvoiceOCR({})
+       const data = await client.RecognizeTableOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -341,6 +351,16 @@ it("ocr.v20181119.FinanBillSliceOCR", async function () {
 it("ocr.v20181119.BusInvoiceOCR", async function () {
     try {
        const data = await client.BusInvoiceOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ocr.v20181119.VatInvoiceOCR", async function () {
+    try {
+       const data = await client.VatInvoiceOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -458,9 +478,9 @@ it("ocr.v20181119.GeneralEfficientOCR", async function () {
     }
 })
 
-it("ocr.v20181119.TaxiInvoiceOCR", async function () {
+it("ocr.v20181119.AdvertiseOCR", async function () {
     try {
-       const data = await client.TaxiInvoiceOCR({})
+       const data = await client.AdvertiseOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -287,7 +287,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDiagnoseReport", req, cb);
     }
     /**
-     * CreatClsLogTopic 用于创建日志主题。注意：一个日志集下至多可创建10个日志主题。
+     * CreateClsLogTopic 用于创建日志主题。注意：一个日志集下至多可创建10个日志主题。
      */
     async CreateClsLogTopic(req, cb) {
         return this.request("CreateClsLogTopic", req, cb);

@@ -71,7 +71,6 @@ import {
   DeleteClsLogTopicRequest,
   DescribeDistrictIspDataResponse,
   UpdatePayTypeResponse,
-  TopicInfo,
   DescribeDomainsConfigResponse,
   DescribeDiagnoseReportRequest,
   BriefDomain,
@@ -186,7 +185,6 @@ import {
   Seo,
   BandwidthAlert,
   CreateVerifyRecordRequest,
-  ClsLogObject,
   RegionMapRelation,
   PurgePathCacheRequest,
   DescribeDiagnoseReportResponse,
@@ -211,7 +209,6 @@ import {
   ListTopDataResponse,
   MaxAge,
   UpdateDomainConfigResponse,
-  LogSetInfo,
   ListDiagnoseReportResponse,
   SearchClsLogRequest,
   UpdateDomainConfigRequest,
@@ -219,7 +216,6 @@ import {
   ManageClsTopicDomainsResponse,
   VideoSeek,
   Compatibility,
-  ClsSearchLogs,
   DescribeUrlViolationsResponse,
   IpFilter,
   DiagnoseUnit,
@@ -658,7 +654,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * CreatClsLogTopic 用于创建日志主题。注意：一个日志集下至多可创建10个日志主题。
+   * CreateClsLogTopic 用于创建日志主题。注意：一个日志集下至多可创建10个日志主题。
    */
   async CreateClsLogTopic(
     req: CreateClsLogTopicRequest,

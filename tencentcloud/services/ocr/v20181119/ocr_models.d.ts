@@ -316,6 +316,23 @@ export interface TextDetectResponse {
     RequestId?: string;
 }
 /**
+ * TollInvoiceOCR返回参数结构体
+ */
+export interface TollInvoiceOCRResponse {
+    /**
+      * 过路过桥费发票识别结果，具体内容请点击左侧链接。
+      */
+    TollInvoiceInfos?: Array<TollInvoiceInfo>;
+    /**
+      * 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。
+      */
+    Angle?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * VerifyBizLicense返回参数结构体
  */
 export interface VerifyBizLicenseResponse {
@@ -949,6 +966,27 @@ GeneralBasicOcr接口返回段落信息Parag，包含ParagNo。
     ItemPolygon: ItemCoord;
 }
 /**
+ * RecognizeTableOCR返回参数结构体
+ */
+export interface RecognizeTableOCRResponse {
+    /**
+      * 检测到的文本信息，具体内容请点击左侧链接。
+      */
+    TableDetections?: Array<TableDetectInfo>;
+    /**
+      * Base64 编码后的 Excel 数据。
+      */
+    Data?: string;
+    /**
+      * 图片为PDF时，返回PDF的总页数，默认为0
+      */
+    PdfPageSize?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 数学试题识别结果
  */
 export interface TextEduPaper {
@@ -1538,24 +1576,19 @@ export interface RecognizeThaiIDCardOCRResponse {
     RequestId?: string;
 }
 /**
- * QuotaInvoiceOCR请求参数结构体
+ * 单元格识别结果
  */
-export interface QuotaInvoiceOCRRequest {
+export interface CellContent {
     /**
-      * 图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+      * 段落编号
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ImageBase64?: string;
+    ParagNo: number;
     /**
-      * 图片的 Url 地址。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+      * 字体大小
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ImageUrl?: string;
+    WordSize: number;
 }
 /**
  * MixedInvoiceOCR返回参数结构体
@@ -2232,6 +2265,26 @@ export interface VehicleRegCertOCRRequest {
     ImageUrl?: string;
 }
 /**
+ * WaybillOCR请求参数结构体
+ */
+export interface WaybillOCRRequest {
+    /**
+      * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+      */
+    ImageBase64?: string;
+    /**
+      * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+      */
+    ImageUrl?: string;
+}
+/**
  * LicensePlateOCR请求参数结构体
  */
 export interface LicensePlateOCRRequest {
@@ -2371,21 +2424,21 @@ export interface GeneralEfficientOCRRequest {
     ImageUrl?: string;
 }
 /**
- * TollInvoiceOCR返回参数结构体
+ * AdvertiseOCR请求参数结构体
  */
-export interface TollInvoiceOCRResponse {
+export interface AdvertiseOCRRequest {
     /**
-      * 过路过桥费发票识别结果，具体内容请点击左侧链接。
+      * 图片的 Base64 值。
+要求图片经Base64编码后不超过 7M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
-    TollInvoiceInfos?: Array<TollInvoiceInfo>;
+    ImageBase64?: string;
     /**
-      * 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。
+      * 图片的 Url 地址。
+要求图片经Base64编码后不超过 7M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
-    Angle?: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    ImageUrl?: string;
 }
 /**
  * RideHailingDriverLicenseOCR返回参数结构体
@@ -2695,6 +2748,28 @@ export interface TextVehicleFront {
     Seal: string;
 }
 /**
+ * 广告文字识别结果
+ */
+export interface AdvertiseTextDetection {
+    /**
+      * 识别出的文本行内容
+      */
+    DetectedText: string;
+    /**
+      * 置信度 0 ~100
+      */
+    Confidence: number;
+    /**
+      * 文本行坐标，以四个顶点坐标表示
+      */
+    Polygon: Array<Coord>;
+    /**
+      * 此字段为扩展字段。
+GeneralBasicOcr接口返回段落信息Parag，包含ParagNo。
+      */
+    AdvancedInfo: string;
+}
+/**
  * 金融票据切片识别单个字段的内容
  */
 export interface FinanBillSliceInfo {
@@ -2837,6 +2912,16 @@ export interface VatRollInvoiceOCRRequest {
     ImageUrl?: string;
 }
 /**
+ * 表格标题
+ */
+export interface TableTitle {
+    /**
+      * 表格名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Text: string;
+}
+/**
  * 坐标
  */
 export interface Coord {
@@ -2899,6 +2984,26 @@ export interface FinanBillOCRResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ShipInvoiceOCR请求参数结构体
+ */
+export interface ShipInvoiceOCRRequest {
+    /**
+      * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+      */
+    ImageBase64?: string;
+    /**
+      * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+      */
+    ImageUrl?: string;
 }
 /**
  * 运单识别结果
@@ -3170,6 +3275,21 @@ export interface MixedInvoiceOCRRequest {
 13：过路过桥费发票
       */
     Types?: Array<number>;
+}
+/**
+ * 表格内容检测
+ */
+export interface TableDetectInfo {
+    /**
+      * 单元格内容
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Cells: Array<TableCell>;
+    /**
+      * 表格标题
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Titles: Array<TableTitle>;
 }
 /**
  * ResidenceBookletOCR返回参数结构体
@@ -3840,6 +3960,52 @@ export interface GeneralHandwritingOCRResponse {
     RequestId?: string;
 }
 /**
+ * 单元格数据
+ */
+export interface TableCell {
+    /**
+      * 单元格左上角的列索引
+      */
+    ColTl: number;
+    /**
+      * 单元格左上角的行索引
+      */
+    RowTl: number;
+    /**
+      * 单元格右下角的列索引
+      */
+    ColBr: number;
+    /**
+      * 单元格右下角的行索引
+      */
+    RowBr: number;
+    /**
+      * 单元格内识别出的字符串文本，若文本存在多行，以换行符"\n"隔开
+      */
+    Text: string;
+    /**
+      * 单元格类型
+      */
+    Type: string;
+    /**
+      * 单元格置信度
+      */
+    Confidence: number;
+    /**
+      * 单元格在图像中的四点坐标
+      */
+    Polygon: Array<Coord>;
+    /**
+      * 此字段为扩展字段
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AdvancedInfo: string;
+    /**
+      * 单元格文本属性
+      */
+    Contents: Array<CellContent>;
+}
+/**
  * TableOCR返回参数结构体
  */
 export interface TableOCRResponse {
@@ -3866,24 +4032,17 @@ export interface QuestionBlockObj {
     QuestionArr: Array<QuestionObj>;
 }
 /**
- * WaybillOCR请求参数结构体
+ * AdvertiseOCR返回参数结构体
  */
-export interface WaybillOCRRequest {
+export interface AdvertiseOCRResponse {
     /**
-      * 图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+      * 检测到的文本信息，包括文本行内容、置信度、文本行坐标以及文本行旋转纠正后的坐标，具体内容请点击左侧链接。
       */
-    ImageBase64?: string;
+    TextDetections?: Array<AdvertiseTextDetection>;
     /**
-      * 图片的 Url 地址。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    ImageUrl?: string;
+    RequestId?: string;
 }
 /**
  * 增值税发票卷票信息
@@ -4082,6 +4241,31 @@ IKAD   劳工证
     RequestId?: string;
 }
 /**
+ * RecognizeTableOCR请求参数结构体
+ */
+export interface RecognizeTableOCRRequest {
+    /**
+      * 图片/PDF的 Base64 值。
+要求图片/PDF经Base64编码后不超过 7M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+      */
+    ImageBase64?: string;
+    /**
+      * 图片/PDF的 Url 地址。
+要求图片/PDF经Base64编码后不超过 7M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+      */
+    ImageUrl?: string;
+    /**
+      * 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。
+      */
+    IsPdf?: boolean;
+    /**
+      * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+      */
+    PdfPageNumber?: number;
+}
+/**
  * EstateCertOCR请求参数结构体
  */
 export interface EstateCertOCRRequest {
@@ -4229,9 +4413,9 @@ export interface VatInvoiceOCRResponse {
     RequestId?: string;
 }
 /**
- * ShipInvoiceOCR请求参数结构体
+ * QuotaInvoiceOCR请求参数结构体
  */
-export interface ShipInvoiceOCRRequest {
+export interface QuotaInvoiceOCRRequest {
     /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。

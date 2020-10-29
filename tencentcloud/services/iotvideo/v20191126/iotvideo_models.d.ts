@@ -230,18 +230,14 @@ export interface CreateStorageServiceRequest {
     EnableTime?: number;
 }
 /**
- * DescribeDevices返回参数结构体
+ * DescribeOsList返回参数结构体
  */
-export interface DescribeDevicesResponse {
+export interface DescribeOsListResponse {
     /**
-      * 设备信息 列表
+      * 系统类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Data?: Array<DevicesData>;
-    /**
-      * 设备总数
-      */
-    TotalCount?: number;
+    Data?: SystemType;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -402,6 +398,15 @@ export interface DeleteIotDataTypeRequest {
     TypeId: string;
 }
 /**
+ * ModifyVerContent返回参数结构体
+ */
+export interface ModifyVerContentResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeMessageQueue请求参数结构体
  */
 export interface DescribeMessageQueueRequest {
@@ -458,6 +463,21 @@ export interface DescribeProductsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 操作系统信息
+ */
+export interface OsData {
+    /**
+      * 芯片型号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ChipId: string;
+    /**
+      * 芯片厂商
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ChipManufacture: string;
 }
 /**
  * 设备证书及密钥
@@ -1187,6 +1207,26 @@ Other-Overseas（其他境外地区）
     Os?: string;
 }
 /**
+ * 系统类型
+ */
+export interface SystemType {
+    /**
+      * 安卓系统
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Android: Array<OsData>;
+    /**
+      * linux系统
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Linux: Array<OsData>;
+    /**
+      * LiteOs系统
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LiteOs: Array<OsData>;
+}
+/**
  * RunTestOtaVersion返回参数结构体
  */
 export interface RunTestOtaVersionResponse {
@@ -1327,6 +1367,49 @@ export interface CreateTraceIdsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeDevices返回参数结构体
+ */
+export interface DescribeDevicesResponse {
+    /**
+      * 设备信息 列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Data?: Array<DevicesData>;
+    /**
+      * 设备总数
+      */
+    TotalCount?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyVerContent请求参数结构体
+ */
+export interface ModifyVerContentRequest {
+    /**
+      * 产品id,大于0的有符号长整型
+      */
+    ProductId: number;
+    /**
+      * 需要修改的版本号
+      */
+    OtaVersion: string;
+    /**
+      * 操作人,字符长度<=64
+      */
+    Operator?: string;
+    /**
+      * 备注信息
+      */
+    Remark?: string;
+    /**
+      * 版本发布的描述信息，需要国际化，可以为空
+      */
+    Contents?: Contents;
 }
 /**
  * DeleteBinding请求参数结构体
@@ -2242,6 +2325,10 @@ export interface DescribeMessageQueueResponse {
       */
     RequestId?: string;
 }
+/**
+ * DescribeOsList请求参数结构体
+ */
+export declare type DescribeOsListRequest = null;
 /**
  * DescribeDevices请求参数结构体
  */

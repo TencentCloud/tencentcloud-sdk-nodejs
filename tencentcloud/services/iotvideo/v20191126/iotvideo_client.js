@@ -230,6 +230,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeLogs", req, cb);
     }
     /**
+     * 退订已购买的云存服务
+     */
+    async RefundStorageService(req, cb) {
+        return this.request("RefundStorageService", req, cb);
+    }
+    /**
      * 购买云存服务
      */
     async CreateStorageService(req, cb) {
@@ -246,6 +252,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteDevice(req, cb) {
         return this.request("DeleteDevice", req, cb);
+    }
+    /**
+     * 查看操作系统支持的芯片列表
+     */
+    async DescribeOsList(req, cb) {
+        return this.request("DescribeOsList", req, cb);
     }
     /**
      * 本接口（DescribeIotModels）用于列出物模型历史版本列表。
@@ -326,10 +338,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RunDeviceStream", req, cb);
     }
     /**
-     * 退订已购买的云存服务
+     * 编辑版本描述信息
      */
-    async RefundStorageService(req, cb) {
-        return this.request("RefundStorageService", req, cb);
+    async ModifyVerContent(req, cb) {
+        return this.request("ModifyVerContent", req, cb);
     }
     /**
      * 本接口（DescribeDevices）用于获取设备信息列表。

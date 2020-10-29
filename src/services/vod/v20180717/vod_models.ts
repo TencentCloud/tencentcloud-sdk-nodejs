@@ -2358,6 +2358,21 @@ export interface FileDeleteTask {
 }
 
 /**
+ * 标签键值。参考[标签](https://cloud.tencent.com/document/product/651)。
+ */
+export interface ResourceTag {
+  /**
+   * 标签键。
+   */
+  TagKey: string
+
+  /**
+   * 标签值。
+   */
+  TagValue: string
+}
+
+/**
  * 文本全文识别输出。
  */
 export interface AiRecognitionTaskOcrFullTextResultOutput {
@@ -6413,8 +6428,10 @@ export interface ModifySubAppIdStatusRequest {
 
   /**
       * 子应用状态，取值范围：
-<li>On：启用</li>
-<li>Off：停用</li>
+<li>On：启用。</li>
+<li>Off：停用。</li>
+<li>Destroyed：销毁。</li>
+当前状态如果是 Destoying ，不能进行启用操作，需要等待销毁完成后才能重新启用。
       */
   Status: string
 }
@@ -10248,7 +10265,12 @@ export interface DescribeTasksResponse {
 /**
  * DescribeSubAppIds请求参数结构体
  */
-export type DescribeSubAppIdsRequest = null
+export interface DescribeSubAppIdsRequest {
+  /**
+   * 标签信息，查询指定标签的子应用列表。
+   */
+  Tags?: Array<ResourceTag>
+}
 
 /**
  * 人脸识别输入。
@@ -10977,6 +10999,8 @@ export interface SubAppIdInfo {
       * 子应用状态，有效值：
 <li>On：启用；</li>
 <li>Off：停用。</li>
+<li>Destroying：销毁中。</li>
+<li>Destroyed：销毁完成。</li>
       */
   Status: string
 }

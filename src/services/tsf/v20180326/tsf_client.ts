@@ -24,6 +24,7 @@ import {
   DescribeMsApiListResponse,
   EnableTaskRequest,
   DisableTaskFlowResponse,
+  TaskRule,
   DescribeDownloadInfoRequest,
   ApiDetailResponse,
   ImageTag,
@@ -78,6 +79,7 @@ import {
   DeleteApplicationResponse,
   DescribeBasicResourceUsageResponse,
   UpdateRepositoryRequest,
+  RevocationConfigResponse,
   Instance,
   DeployServerlessGroupResponse,
   DescribeConfigsResponse,
@@ -102,7 +104,7 @@ import {
   DescribeGroupsResponse,
   TaskId,
   Env,
-  TaskRule,
+  DescribeImageRepositoryResponse,
   DeleteContainerGroupResponse,
   DescribeSimpleGroupsRequest,
   CreateNamespaceResponse,
@@ -120,7 +122,7 @@ import {
   DescribeApplicationResponse,
   LaneInfo,
   DescribeConfigReleaseLogsResponse,
-  RevocationConfigResponse,
+  DescribeImageRepositoryRequest,
   DescribeSimpleGroupsResponse,
   StopTaskExecuteRequest,
   DescribeFlowLastBatchStateRequest,
@@ -747,6 +749,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: DescribeGroupsResponse) => void
   ): Promise<DescribeGroupsResponse> {
     return this.request("DescribeGroups", req, cb)
+  }
+
+  /**
+   * 镜像仓库列表
+   */
+  async DescribeImageRepository(
+    req: DescribeImageRepositoryRequest,
+    cb?: (error: string, rep: DescribeImageRepositoryResponse) => void
+  ): Promise<DescribeImageRepositoryResponse> {
+    return this.request("DescribeImageRepository", req, cb)
   }
 
   /**

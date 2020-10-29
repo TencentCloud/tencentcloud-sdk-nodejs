@@ -422,7 +422,7 @@ export declare class Client extends AbstractClient {
      * 该接口用于获取当前账号有权限的子应用列表，包含主应用。若尚未开通子应用功能，接口将返回
  FailedOperation。
      */
-    DescribeSubAppIds(req?: DescribeSubAppIdsRequest, cb?: (error: string, rep: DescribeSubAppIdsResponse) => void): Promise<DescribeSubAppIdsResponse>;
+    DescribeSubAppIds(req: DescribeSubAppIdsRequest, cb?: (error: string, rep: DescribeSubAppIdsResponse) => void): Promise<DescribeSubAppIdsResponse>;
     /**
      * 该接口用于确认媒体文件（和封面文件）上传到腾讯云点播的结果，并存储媒体信息，返回文件的播放地址和文件 ID。
      */

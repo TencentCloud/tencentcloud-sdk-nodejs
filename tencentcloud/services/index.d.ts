@@ -61,6 +61,7 @@ export { fmu } from "./fmu";
 export { ft } from "./ft";
 export { gaap } from "./gaap";
 export { gme } from "./gme";
+export { gpm } from "./gpm";
 export { gs } from "./gs";
 export { gse } from "./gse";
 export { habo } from "./habo";
