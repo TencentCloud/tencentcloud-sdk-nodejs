@@ -1941,6 +1941,10 @@ export interface Env {
  */
 export interface DescribeImageRepositoryResponse {
     /**
+      * 查询的权限数据对象
+      */
+    Result?: ImageRepositoryResult;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -3377,37 +3381,64 @@ export interface ServerlessGroupPage {
     Content: Array<ServerlessGroup>;
 }
 /**
- * ModifyLaneRule请求参数结构体
+ * 镜像仓库
  */
-export interface ModifyLaneRuleRequest {
+export interface ImageRepository {
     /**
-      * 泳道规则ID
+      * 仓库名,含命名空间,如tsf/nginx
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RuleId: string;
+    Reponame: string;
     /**
-      * 泳道规则名称
+      * 仓库类型
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RuleName: string;
+    Repotype: string;
     /**
-      * 泳道规则备注
+      * 镜像版本数
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Remark: string;
+    TagCount: number;
     /**
-      * 泳道规则标签列表
+      * 是否公共,1:公有,0:私有
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RuleTagList: Array<LaneRuleTag>;
+    IsPublic: number;
     /**
-      * 泳道规则标签关系
+      * 是否被用户收藏。true：是，false：否
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RuleTagRelationship: string;
+    IsUserFavor: boolean;
     /**
-      * 泳道ID
+      * 是否是腾讯云官方仓库。 是否是腾讯云官方仓库。true：是，false：否
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    LaneId: string;
+    IsQcloudOfficial: boolean;
     /**
-      * 开启状态
+      * 被所有用户收藏次数
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Enable: boolean;
+    FavorCount: number;
+    /**
+      * 拉取次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PullCount: number;
+    /**
+      * 描述内容
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Description: string;
+    /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreationTime: string;
+    /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdateTime: string;
 }
 /**
  * AddInstances返回参数结构体
@@ -4250,6 +4281,26 @@ export interface StopContainerGroupRequest {
     GroupId: string;
 }
 /**
+ * 镜像仓库列表
+ */
+export interface ImageRepositoryResult {
+    /**
+      * 总记录数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
+    /**
+      * 镜像服务器地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Server: string;
+    /**
+      * 列表信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Content: Array<ImageRepository>;
+}
+/**
  * DescribeRepository请求参数结构体
  */
 export interface DescribeRepositoryRequest {
@@ -4723,6 +4774,39 @@ export interface Cluster {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ClusterVersion: string;
+}
+/**
+ * ModifyLaneRule请求参数结构体
+ */
+export interface ModifyLaneRuleRequest {
+    /**
+      * 泳道规则ID
+      */
+    RuleId: string;
+    /**
+      * 泳道规则名称
+      */
+    RuleName: string;
+    /**
+      * 泳道规则备注
+      */
+    Remark: string;
+    /**
+      * 泳道规则标签列表
+      */
+    RuleTagList: Array<LaneRuleTag>;
+    /**
+      * 泳道规则标签关系
+      */
+    RuleTagRelationship: string;
+    /**
+      * 泳道ID
+      */
+    LaneId: string;
+    /**
+      * 开启状态
+      */
+    Enable: boolean;
 }
 /**
  * ModifyMicroservice返回参数结构体

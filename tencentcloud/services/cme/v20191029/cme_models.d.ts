@@ -163,13 +163,40 @@ export interface ClassInfo {
     ClassPath: string;
 }
 /**
- * DeleteMaterial返回参数结构体
+ * ModifyProject返回参数结构体
  */
-export interface DeleteMaterialResponse {
+export interface ModifyProjectResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 音频轨道上的音频片段信息。
+ */
+export interface AudioTrackItem {
+    /**
+      * 音频素材来源类型。取值有：
+<ul>
+<li>VOD ：素材来源 VOD 。</li>
+<li>CME ：视频来源 CME 。</li>
+</ul>
+      */
+    SourceType: string;
+    /**
+      * 音频片段的媒体素材来源，可以是：
+<li>VOD 的媒体文件 ID 。</li>
+<li>CME 的素材 ID 。</li>
+      */
+    SourceMedia: string;
+    /**
+      * 音频片段取自素材文件的起始时间，单位为秒。0 表示从素材开始位置截取。默认为0。
+      */
+    SourceMediaStartTime?: number;
+    /**
+      * 音频片段的时长，单位为秒。默认和素材本身长度一致，表示截取全部素材。
+      */
+    Duration?: number;
 }
 /**
  * 整型范围
@@ -311,6 +338,71 @@ export interface ProjectInfo {
       * 项目更新时间，格式按照 ISO 8601 标准表示。
       */
     UpdateTime: string;
+}
+/**
+ * 视频轨的视频片段信息。
+ */
+export interface VideoTrackItem {
+    /**
+      * 视频素材来源类型。取值有：
+<ul>
+<li>VOD ：素材来源 VOD 。</li>
+<li>CME ：视频来源 CME 。</li>
+</ul>
+      */
+    SourceType: string;
+    /**
+      * 视频片段的媒体素材来源，可以是：
+<li>VOD 的媒体文件 ID 。</li>
+<li>CME 的素材 ID 。</li>
+      */
+    SourceMedia: string;
+    /**
+      * 视频片段取自素材文件的起始时间，单位为秒。默认为0。
+      */
+    SourceMediaStartTime?: number;
+    /**
+      * 视频片段时长，单位为秒。默认取视频素材本身长度，表示截取全部素材。如果源文件是图片，Duration需要大于0。
+      */
+    Duration?: number;
+    /**
+      * 视频片段原点距离画布原点的水平位置。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示视频片段 XPos 为画布宽度指定百分比的位置，如 10% 表示 XPos 为画布口宽度的 10%。</li>
+<li>当字符串以 px 结尾，表示视频片段 XPos 单位为像素，如 100px 表示 XPos 为100像素。</li>
+默认值：0px。
+      */
+    XPos?: string;
+    /**
+      * 视频片段原点距离画布原点的垂直位置。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示视频片段 YPos 为画布高度指定百分比的位置，如 10% 表示 YPos 为画布高度的 10%。</li>
+<li>当字符串以 px 结尾，表示视频片段 YPos 单位为像素，如 100px 表示 YPos 为100像素。</li>
+默认值：0px。
+      */
+    YPos?: string;
+    /**
+      * 视频原点位置，取值有：
+<li>Center：坐标原点为中心位置，如画布中心。</li>
+默认值 ：Center。
+      */
+    CoordinateOrigin?: string;
+    /**
+      * 视频片段的高度。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示视频片段 Height 为画布高度的百分比大小，如 10% 表示 Height 为画布高度的 10%；
+</li><li>当字符串以 px 结尾，表示视频片段 Height 单位为像素，如 100px 表示 Height 为100像素。</li>
+<li>当 Width、Height 均为空，则 Width 和 Height 取视频素材本身的 Width、Height。</li>
+<li>当 Width 为空，Height 非空，则 Width 按比例缩放</li>
+<li>当 Width 非空，Height 为空，则 Height 按比例缩放。</li>
+      */
+    Height?: string;
+    /**
+      * 视频片段的宽度。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示视频片段 Width 为画布宽度的百分比大小，如 10% 表示 Width 为画布宽度的 10%。</li>
+<li>当字符串以 px 结尾，表示视频片段 Width 单位为像素，如 100px 表示 Width 为100像素。</li>
+<li>当 Width、Height 均为空，则 Width 和 Height 取视频素材本身的 Width、Height。</li>
+<li>当 Width 为空，Height 非空，则 Width 按比例缩放</li>
+<li>当 Width 非空，Height 为空，则 Height 按比例缩放。</li>
+      */
+    Width?: string;
 }
 /**
  * DeleteTeam请求参数结构体
@@ -604,6 +696,14 @@ export interface CreateProjectRequest {
       * 导播台信息，仅当项目类型为 SWITCHER 时有效。
       */
     SwitcherProjectInput?: SwitcherProjectInput;
+    /**
+      * 直播剪辑信息，暂未开放，请勿使用。
+      */
+    LiveStreamClipProjectInput?: LiveStreamClipProjectInput;
+    /**
+      * 视频编辑信息。
+      */
+    VideoEditProjectInput?: VideoEditProjectInput;
 }
 /**
  * ModifyMaterial请求参数结构体
@@ -681,6 +781,31 @@ export interface DescribeTasksRequest {
       * 分页返回的记录条数，默认值：10。
       */
     Limit?: number;
+}
+/**
+ * 媒体轨道的片段信息
+ */
+export interface MediaTrackItem {
+    /**
+      * 片段类型。取值有：
+<li>Video：视频片段。</li>
+<li>Audio：音频片段。</li>
+<li>Empty：空白片段。</li>
+      */
+    Type: string;
+    /**
+      * 视频片段，当 Type = Video 时有效。
+      */
+    VideoItem?: VideoTrackItem;
+    /**
+      * 音频片段，当 Type = Audio 时有效。
+      */
+    AudioItem?: AudioTrackItem;
+    /**
+      * 空白片段，当 Type = Empty 时有效。空片段用于时间轴的占位。<li>如需要两个音频片段之间有一段时间的静音，可以用 EmptyTrackItem 来进行占位。</li>
+<li>使用 EmptyTrackItem 进行占位，来定位某个Item。</li>
+      */
+    EmptyItem?: EmptyTrackItem;
 }
 /**
  * 时间范围
@@ -784,6 +909,15 @@ export interface SearchMaterialResponse {
     RequestId?: string;
 }
 /**
+ * 空的轨道片段，用来进行时间轴的占位。如需要两个音频片段之间有一段时间的静音，可以用 EmptyTrackItem 来进行占位。
+ */
+export interface EmptyTrackItem {
+    /**
+      * 持续时间，单位为秒。
+      */
+    Duration: number;
+}
+/**
  * DescribeJoinTeams请求参数结构体
  */
 export interface DescribeJoinTeamsRequest {
@@ -833,6 +967,15 @@ export interface CreateProjectResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 视频编辑项目输入参数
+ */
+export interface VideoEditProjectInput {
+    /**
+      * 输入的媒体轨道列表，包括视频、音频，等素材组成的多个轨道信息，其中：<li>输入的多个轨道在时间轴上和输出媒体文件的时间轴对齐；</li><li>时间轴上相同时间点的各个轨道的素材进行重叠，视频或者图片按轨道顺序进行图像的叠加，轨道顺序高的素材叠加在上面，音频素材进行混音；</li><li>视频、音频，每一种类型的轨道最多支持10个。</li>
+      */
+    InitTracks?: Array<MediaTrack>;
 }
 /**
  * DeleteProject返回参数结构体
@@ -1789,9 +1932,9 @@ export interface AuthorizationInfo {
     PermissionSet: Array<string>;
 }
 /**
- * ModifyProject返回参数结构体
+ * DeleteMaterial返回参数结构体
  */
-export interface ModifyProjectResponse {
+export interface DeleteMaterialResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1842,6 +1985,23 @@ export interface DescribeTaskDetailRequest {
       * 任务 Id。
       */
     TaskId: string;
+}
+/**
+ * 轨道信息
+ */
+export interface MediaTrack {
+    /**
+      * 轨道类型，取值有：
+<ul>
+<li>Video ：视频轨道。视频轨道由以下 Item 组成：<ul><li>VideoTrackItem</li><li>EmptyTrackItem</li></ul> </li>
+<li>Audio ：音频轨道。音频轨道由以下 Item 组成：<ul><li>AudioTrackItem</li><li>EmptyTrackItem</li></ul> </li>
+</ul>
+      */
+    Type: string;
+    /**
+      * 轨道上的媒体片段列表。
+      */
+    TrackItems: Array<MediaTrackItem>;
 }
 /**
  * ModifyProject请求参数结构体
@@ -2034,37 +2194,17 @@ export interface DeleteClassResponse {
     RequestId?: string;
 }
 /**
- * GrantResourceAuthorization请求参数结构体
+ * 直播剪辑项目输入参数。
  */
-export interface GrantResourceAuthorizationRequest {
+export interface LiveStreamClipProjectInput {
     /**
-      * 平台名称，指定访问的平台。
+      * 直播流播放地址，目前仅支持 HLS 和 FLV 格式。
       */
-    Platform: string;
+    Url: string;
     /**
-      * 资源所属实体。
+      * 直播流录制时长，单位为秒，最大值为 7200。
       */
-    Owner: Entity;
-    /**
-      * 被授权资源。
-      */
-    Resources: Array<Resource>;
-    /**
-      * 被授权目标实体。
-      */
-    Authorizees: Array<Entity>;
-    /**
-      * 详细授权值。 取值有：
-<li>R：可读，可以浏览素材，但不能使用该素材（将其添加到 Project），或复制到自己的媒资库中</li>
-<li>X：可用，可以使用该素材（将其添加到 Project），但不能将其复制到自己的媒资库中，意味着被授权者无法将该资源进一步扩散给其他个人或团队。</li>
-<li>C：可复制，既可以使用该素材（将其添加到 Project），也可以将其复制到自己的媒资库中。</li>
-<li>W：可修改、删除媒资。</li>
-      */
-    Permissions: Array<string>;
-    /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
-      */
-    Operator?: string;
+    StreamRecordDuration: number;
 }
 /**
  * 链接素材信息
@@ -2102,6 +2242,39 @@ export interface ExportVideoByEditorTrackDataResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * GrantResourceAuthorization请求参数结构体
+ */
+export interface GrantResourceAuthorizationRequest {
+    /**
+      * 平台名称，指定访问的平台。
+      */
+    Platform: string;
+    /**
+      * 资源所属实体。
+      */
+    Owner: Entity;
+    /**
+      * 被授权资源。
+      */
+    Resources: Array<Resource>;
+    /**
+      * 被授权目标实体。
+      */
+    Authorizees: Array<Entity>;
+    /**
+      * 详细授权值。 取值有：
+<li>R：可读，可以浏览素材，但不能使用该素材（将其添加到 Project），或复制到自己的媒资库中</li>
+<li>X：可用，可以使用该素材（将其添加到 Project），但不能将其复制到自己的媒资库中，意味着被授权者无法将该资源进一步扩散给其他个人或团队。</li>
+<li>C：可复制，既可以使用该素材（将其添加到 Project），也可以将其复制到自己的媒资库中。</li>
+<li>W：可修改、删除媒资。</li>
+      */
+    Permissions: Array<string>;
+    /**
+      * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+      */
+    Operator?: string;
 }
 /**
  * DescribeProjects返回参数结构体

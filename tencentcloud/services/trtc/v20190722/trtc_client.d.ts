@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeAbnormalEventResponse, DescribeAbnormalEventRequest, StopMCUMixTranscodeResponse, DescribeRealtimeScaleResponse, DismissRoomResponse, DescribeRealtimeNetworkResponse, RemoveUserRequest, DescribeCallDetailRequest, DescribeRealtimeNetworkRequest, DismissRoomRequest, StartMCUMixTranscodeRequest, DescribeRealtimeQualityResponse, StopMCUMixTranscodeRequest, DescribeHistoryScaleRequest, DescribeRoomInformationResponse, CreateTroubleInfoResponse, DescribeRealtimeQualityRequest, CreateTroubleInfoRequest, DescribeDetailEventResponse, StartMCUMixTranscodeResponse, DescribeRealtimeScaleRequest, DescribeCallDetailResponse, DescribeRoomInformationRequest, DescribeDetailEventRequest, RemoveUserResponse, DescribeHistoryScaleResponse } from "./trtc_models";
+import { DescribeAbnormalEventResponse, DescribeAbnormalEventRequest, StopMCUMixTranscodeResponse, DescribeRealtimeScaleResponse, DismissRoomResponse, DescribeRealtimeNetworkResponse, DescribeUserInformationRequest, DescribeCallDetailRequest, DescribeRealtimeNetworkRequest, DescribeUserInformationResponse, StartMCUMixTranscodeRequest, DescribeRealtimeQualityResponse, StopMCUMixTranscodeRequest, DescribeHistoryScaleRequest, DescribeRoomInformationResponse, RemoveUserRequest, CreateTroubleInfoResponse, DescribeRealtimeQualityRequest, CreateTroubleInfoRequest, DismissRoomRequest, DescribeDetailEventResponse, StartMCUMixTranscodeResponse, DescribeRealtimeScaleRequest, DescribeCallDetailResponse, DescribeRoomInformationRequest, DescribeDetailEventRequest, RemoveUserResponse, DescribeHistoryScaleResponse } from "./trtc_models";
 /**
  * trtc client
  * @class
@@ -75,4 +75,8 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
      * 接口说明：把房间所有用户从房间移出，解散房间。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
      */
     DismissRoom(req: DismissRoomRequest, cb?: (error: string, rep: DismissRoomResponse) => void): Promise<DismissRoomResponse>;
+    /**
+     * 查询指定时间内的用户列表，可查询14天内数据。默认每页查询6个用户，支持每页最大查询100个用户PageSize不超过100）。
+     */
+    DescribeUserInformation(req: DescribeUserInformationRequest, cb?: (error: string, rep: DescribeUserInformationResponse) => void): Promise<DescribeUserInformationResponse>;
 }

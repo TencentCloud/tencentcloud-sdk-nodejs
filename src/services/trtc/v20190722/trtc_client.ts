@@ -27,10 +27,10 @@ import {
   DescribeRealtimeScaleResponse,
   DismissRoomResponse,
   DescribeRealtimeNetworkResponse,
-  RemoveUserRequest,
+  DescribeUserInformationRequest,
   DescribeCallDetailRequest,
   DescribeRealtimeNetworkRequest,
-  DismissRoomRequest,
+  DescribeUserInformationResponse,
   EncodeParams,
   StartMCUMixTranscodeRequest,
   DescribeRealtimeQualityResponse,
@@ -38,6 +38,7 @@ import {
   UserInformation,
   DescribeHistoryScaleRequest,
   DescribeRoomInformationResponse,
+  RemoveUserRequest,
   OutputParams,
   EventMessage,
   CreateTroubleInfoResponse,
@@ -47,6 +48,7 @@ import {
   ScaleInfomation,
   CreateTroubleInfoRequest,
   EventList,
+  DismissRoomRequest,
   DescribeDetailEventResponse,
   StartMCUMixTranscodeResponse,
   SmallVideoLayoutParams,
@@ -213,5 +215,15 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     cb?: (error: string, rep: DismissRoomResponse) => void
   ): Promise<DismissRoomResponse> {
     return this.request("DismissRoom", req, cb)
+  }
+
+  /**
+   * 查询指定时间内的用户列表，可查询14天内数据。默认每页查询6个用户，支持每页最大查询100个用户PageSize不超过100）。
+   */
+  async DescribeUserInformation(
+    req: DescribeUserInformationRequest,
+    cb?: (error: string, rep: DescribeUserInformationResponse) => void
+  ): Promise<DescribeUserInformationResponse> {
+    return this.request("DescribeUserInformation", req, cb)
   }
 }

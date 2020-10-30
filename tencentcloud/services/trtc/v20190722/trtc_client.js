@@ -121,5 +121,11 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     async DismissRoom(req, cb) {
         return this.request("DismissRoom", req, cb);
     }
+    /**
+     * 查询指定时间内的用户列表，可查询14天内数据。默认每页查询6个用户，支持每页最大查询100个用户PageSize不超过100）。
+     */
+    async DescribeUserInformation(req, cb) {
+        return this.request("DescribeUserInformation", req, cb);
+    }
 }
 exports.Client = Client;

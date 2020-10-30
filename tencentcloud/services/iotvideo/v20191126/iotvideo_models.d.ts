@@ -903,6 +903,10 @@ export interface CreateAppUsrRequest {
       * 标识用户的唯一ID，防止同一个用户多次注册
       */
     CunionId: string;
+    /**
+      * 用于小程序关联手机号
+      */
+    Mobile?: string;
 }
 /**
  * ModifyDeviceProperty请求参数结构体

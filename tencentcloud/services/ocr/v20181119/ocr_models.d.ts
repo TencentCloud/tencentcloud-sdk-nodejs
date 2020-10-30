@@ -2283,6 +2283,10 @@ export interface WaybillOCRRequest {
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
     ImageUrl?: string;
+    /**
+      * 预检测开关，当待识别运单占整个输入图像的比例较小时，建议打开预检测开关。默认值为false。
+      */
+    EnablePreDetect?: boolean;
 }
 /**
  * LicensePlateOCR请求参数结构体
@@ -2516,66 +2520,6 @@ export interface VatInvoiceVerifyResponse {
  * PassportOCR返回参数结构体
  */
 export interface PassportOCRResponse {
-    /**
-      * 国家码
-      */
-    Country?: string;
-    /**
-      * 护照号
-      */
-    PassportNo?: string;
-    /**
-      * 性别
-      */
-    Sex?: string;
-    /**
-      * 国籍
-      */
-    Nationality?: string;
-    /**
-      * 出生日期
-      */
-    BirthDate?: string;
-    /**
-      * 出生地点
-      */
-    BirthPlace?: string;
-    /**
-      * 签发日期
-      */
-    IssueDate?: string;
-    /**
-      * 签发地点
-      */
-    IssuePlace?: string;
-    /**
-      * 有效期
-      */
-    ExpiryDate?: string;
-    /**
-      * 持证人签名
-      */
-    Signature?: string;
-    /**
-      * 最下方第一行 MRZ Code 序列
-      */
-    CodeSet?: string;
-    /**
-      * 最下方第二行 MRZ Code 序列
-      */
-    CodeCrc?: string;
-    /**
-      * 姓名
-      */
-    Name?: string;
-    /**
-      * 姓
-      */
-    FamilyName?: string;
-    /**
-      * 名
-      */
-    FirstName?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

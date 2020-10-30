@@ -137,21 +137,37 @@ export interface DescribeRealtimeNetworkResponse {
     RequestId?: string;
 }
 /**
- * RemoveUser请求参数结构体
+ * DescribeUserInformation请求参数结构体
  */
-export interface RemoveUserRequest {
+export interface DescribeUserInformationRequest {
     /**
-      * TRTC的SDKAppId。
+      * 通话 ID（唯一标识一次通话）： sdkappid_roomgString（房间号_createTime（房间创建时间，unix时间戳，单位为s）例：1400353843_218695_1590065777。通过 DescribeRoomInformation（查询房间列表）接口获取（链接：https://cloud.tencent.com/document/product/647/44050）
       */
-    SdkAppId: number;
+    CommId: string;
     /**
-      * 房间号。
+      * 查询开始时间，5天内。本地unix时间戳（1588031999s）
       */
-    RoomId: number;
+    StartTime: number;
     /**
-      * 要移出的用户列表，最多10个。
+      * 查询结束时间，本地unix时间戳（1588031999s）
       */
-    UserIds: Array<string>;
+    EndTime: number;
+    /**
+      * 用户SDKAppID（1400188366）
+      */
+    SdkAppId: string;
+    /**
+      * 需查询的用户数组，不填默认返回6个用户,最多可填6个用户
+      */
+    UserIds?: Array<string>;
+    /**
+      * 设置分页index，从0开始（PageNumber和PageSize 其中一个不填均默认返回6条数据）
+      */
+    PageNumber?: string;
+    /**
+      * 设置分页大小（PageNumber和PageSize 其中一个不填均默认返回6条数据,PageSize最大不超过100）
+      */
+    PageSize?: string;
 }
 /**
  * DescribeCallDetail请求参数结构体
@@ -227,17 +243,22 @@ recvLossRateRaw：下行丢包率
     DataType?: Array<string>;
 }
 /**
- * DismissRoom请求参数结构体
+ * DescribeUserInformation返回参数结构体
  */
-export interface DismissRoomRequest {
+export interface DescribeUserInformationResponse {
     /**
-      * TRTC的SDKAppId。
+      * 返回的用户总条数
       */
-    SdkAppId: number;
+    Total?: number;
     /**
-      * 房间号。
+      * 用户信息列表
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RoomId: number;
+    UserList?: Array<UserInformation>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * MCU混流输出流编码参数
@@ -405,6 +426,23 @@ export interface DescribeRoomInformationResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * RemoveUser请求参数结构体
+ */
+export interface RemoveUserRequest {
+    /**
+      * TRTC的SDKAppId。
+      */
+    SdkAppId: number;
+    /**
+      * 房间号。
+      */
+    RoomId: number;
+    /**
+      * 要移出的用户列表，最多10个。
+      */
+    UserIds: Array<string>;
 }
 /**
  * MCU混流的输出参数
@@ -607,6 +645,19 @@ export interface EventList {
       * 发送端的userId
       */
     PeerId: string;
+}
+/**
+ * DismissRoom请求参数结构体
+ */
+export interface DismissRoomRequest {
+    /**
+      * TRTC的SDKAppId。
+      */
+    SdkAppId: number;
+    /**
+      * 房间号。
+      */
+    RoomId: number;
 }
 /**
  * DescribeDetailEvent返回参数结构体
