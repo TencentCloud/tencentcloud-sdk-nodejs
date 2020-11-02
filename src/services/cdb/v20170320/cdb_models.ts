@@ -179,6 +179,16 @@ export interface CreateDBInstanceRequest {
    * 实例类型。支持值包括： "HA" - 高可用版实例， "BASIC" - 基础版实例。 不指定则默认为高可用版。
    */
   DeviceType?: string
+
+  /**
+   * 参数模板id。
+   */
+  ParamTemplateId?: number
+
+  /**
+   * 告警策略id数组。
+   */
+  AlarmPolicyList?: Array<number>
 }
 
 /**
@@ -2193,6 +2203,16 @@ export interface CreateDBInstanceHourRequest {
    * 实例类型。支持值包括： "HA" - 高可用版实例， "BASIC" - 基础版实例。 不指定则默认为高可用版。
    */
   DeviceType?: string
+
+  /**
+   * 参数模板id。
+   */
+  ParamTemplateId?: number
+
+  /**
+   * 告警策略id数组。
+   */
+  AlarmPolicyList?: Array<number>
 }
 
 /**
@@ -3459,7 +3479,7 @@ export interface DescribeProjectSecurityGroupsRequest {
   /**
    * 项目ID。
    */
-  ProjectId: number
+  ProjectId?: number
 }
 
 /**

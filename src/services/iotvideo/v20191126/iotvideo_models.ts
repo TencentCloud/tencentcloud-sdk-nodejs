@@ -1423,7 +1423,7 @@ Other-Overseas（其他境外地区）
   AccessMode?: number
 
   /**
-   * linux,android,liteos
+   * Linux,Android,Liteos等系统
    */
   Os?: string
 }

@@ -1115,6 +1115,16 @@ export interface DisableCachesRequest {
 }
 
 /**
+ * DuplicateDomainConfig返回参数结构体
+ */
+export interface DuplicateDomainConfigResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 压缩规则配置，最多可设置 100 条
  */
 export interface CompressionRule {
@@ -2511,6 +2521,21 @@ export interface DescribeCertDomainsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DuplicateDomainConfig请求参数结构体
+ */
+export interface DuplicateDomainConfigRequest {
+  /**
+   * 新增域名
+   */
+  Domain: string
+
+  /**
+   * 被拷贝配置的域名
+   */
+  ReferenceDomain: string
 }
 
 /**

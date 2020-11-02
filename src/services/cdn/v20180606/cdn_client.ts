@@ -58,6 +58,7 @@ import {
   DescribeDomainsResponse,
   UpdateImageConfigRequest,
   DisableCachesRequest,
+  DuplicateDomainConfigResponse,
   CompressionRule,
   GuetzliAdapter,
   Origin,
@@ -103,6 +104,7 @@ import {
   CreateScdnLogTaskResponse,
   MapInfo,
   DescribeCertDomainsResponse,
+  DuplicateDomainConfigRequest,
   AuthenticationTypeD,
   AuthenticationTypeC,
   AuthenticationTypeB,
@@ -429,14 +431,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * StopCdnDomain 用于停止域名的加速服务。
-注意：停止加速服务后，访问至加速节点的请求将会直接返回 404。为避免对您的业务造成影响，请在停止加速服务前将解析切走。
-     */
-  async StopCdnDomain(
-    req: StopCdnDomainRequest,
-    cb?: (error: string, rep: StopCdnDomainResponse) => void
-  ): Promise<StopCdnDomainResponse> {
-    return this.request("StopCdnDomain", req, cb)
+   * 拷贝参考域名的配置至新域名。暂不支持自有证书以及定制化配置
+   */
+  async DuplicateDomainConfig(
+    req: DuplicateDomainConfigRequest,
+    cb?: (error: string, rep: DuplicateDomainConfigResponse) => void
+  ): Promise<DuplicateDomainConfigResponse> {
+    return this.request("DuplicateDomainConfig", req, cb)
   }
 
   /**
@@ -517,6 +518,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SearchClsLogResponse) => void
   ): Promise<SearchClsLogResponse> {
     return this.request("SearchClsLog", req, cb)
+  }
+
+  /**
+     * StopCdnDomain 用于停止域名的加速服务。
+注意：停止加速服务后，访问至加速节点的请求将会直接返回 404。为避免对您的业务造成影响，请在停止加速服务前将解析切走。
+     */
+  async StopCdnDomain(
+    req: StopCdnDomainRequest,
+    cb?: (error: string, rep: StopCdnDomainResponse) => void
+  ): Promise<StopCdnDomainResponse> {
+    return this.request("StopCdnDomain", req, cb)
   }
 
   /**

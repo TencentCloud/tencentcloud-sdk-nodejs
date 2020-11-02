@@ -3,6 +3,14 @@
  */
 export interface TextToVoiceResponse {
     /**
+      * base64编码的wav/mp3音频数据
+      */
+    Audio?: string;
+    /**
+      * 一次请求对应一个SessionId
+      */
+    SessionId?: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;

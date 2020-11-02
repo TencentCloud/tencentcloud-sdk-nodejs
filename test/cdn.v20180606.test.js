@@ -188,9 +188,9 @@ it("cdn.v20180606.StartCdnDomain", async function () {
     }
 })
 
-it("cdn.v20180606.StopCdnDomain", async function () {
+it("cdn.v20180606.DuplicateDomainConfig", async function () {
     try {
-       const data = await client.StopCdnDomain({})
+       const data = await client.DuplicateDomainConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -271,6 +271,16 @@ it("cdn.v20180606.DescribeScdnTopData", async function () {
 it("cdn.v20180606.SearchClsLog", async function () {
     try {
        const data = await client.SearchClsLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdn.v20180606.StopCdnDomain", async function () {
+    try {
+       const data = await client.StopCdnDomain({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

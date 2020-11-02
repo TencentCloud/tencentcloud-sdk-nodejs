@@ -411,7 +411,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("VatInvoiceOCR", req, cb);
     }
     /**
-     * 本接口支持图片内表格文档的检测和识别，返回每个单元格的文字内容，支持将识别结果保存为 Excel 格式。
+     * <b>此接口为表格识别的旧版本服务，不再进行服务升级，建议您使用识别能力更强、服务性能更优的<a href="">新版表格识别</a>。</b>
+
+本接口支持图片内表格文档的检测和识别，返回每个单元格的文字内容，支持将识别结果保存为 Excel 格式。
+
+
      */
     async TableOCR(req, cb) {
         return this.request("TableOCR", req, cb);

@@ -1826,6 +1826,11 @@ export interface FaceAttributesInfo {
  */
 export interface VerifyPersonRequest {
   /**
+   * 待验证的人员ID。人员ID具体信息请参考人员库管理相关接口。
+   */
+  PersonId: string
+
+  /**
       * 图片 base64 数据。
 若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
@@ -1840,11 +1845,6 @@ export interface VerifyPersonRequest {
 支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
       */
   Url?: string
-
-  /**
-   * 待验证的人员ID。人员ID具体信息请参考人员库管理相关接口。
-   */
-  PersonId?: string
 
   /**
       * 图片质量控制。 
@@ -2621,21 +2621,6 @@ B 图片的 Url、Image必须提供一个，如果都提供，只使用 Url。
  * VerifyPerson返回参数结构体
  */
 export interface VerifyPersonResponse {
-  /**
-   * 给定的人脸照片与 PersonId 对应的相似度。若 PersonId 下有多张人脸（Face），会融合多张人脸信息进行验证。
-   */
-  Score?: number
-
-  /**
-   * 是否为同一人的判断。
-   */
-  IsMatch?: boolean
-
-  /**
-   * 人脸识别所用的算法模型版本。
-   */
-  FaceModelVersion?: string
-
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

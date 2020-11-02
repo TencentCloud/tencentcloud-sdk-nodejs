@@ -3954,7 +3954,7 @@ export interface TableCell {
  */
 export interface TableOCRResponse {
     /**
-      * 检测到的文本信息，具体内容请点击左侧链接。
+      * 检测到的文本信息，具体内容请点击左侧链接
       */
     TextDetections?: Array<TextTable>;
     /**
