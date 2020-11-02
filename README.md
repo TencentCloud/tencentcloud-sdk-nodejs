@@ -65,7 +65,7 @@ client.DescribeZones().then(
 )
 ```
 
-在支持 tyepscript 项目中，采用如下方式调用
+在支持 typescript 项目中，采用如下方式调用
 
 ```js
 import * as tencentcloud from "tencentcloud-sdk-nodejs"
