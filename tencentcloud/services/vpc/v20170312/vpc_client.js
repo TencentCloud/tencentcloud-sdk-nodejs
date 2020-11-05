@@ -279,7 +279,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AssignPrivateIpAddresses", req, cb);
     }
     /**
-     * 本接口（CreateAndAttachNetworkInterface）用于创建弹性网卡并绑定云主机。
+     * 本接口（CreateAndAttachNetworkInterface）用于创建弹性网卡并绑定云服务器。
 * 创建弹性网卡时可以指定内网IP，并且可以指定一个主IP，指定的内网IP必须在弹性网卡所在子网内，而且不能被占用。
 * 创建弹性网卡时可以指定需要申请的内网IP数量，系统会随机生成内网IP地址。
 * 一个弹性网卡支持绑定的IP地址是有限制的，更多资源限制信息详见<a href="/document/product/576/18527">弹性网卡使用限制</a>。
@@ -682,7 +682,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyVpnGatewayCcnRoutes", req, cb);
     }
     /**
-     * 本接口（DetachNetworkInterface）用于弹性网卡解绑云主机。
+     * 本接口（DetachNetworkInterface）用于弹性网卡解绑云服务器。
      */
     async DetachNetworkInterface(req, cb) {
         return this.request("DetachNetworkInterface", req, cb);
@@ -852,11 +852,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDefaultVpc", req, cb);
     }
     /**
-     * 本接口（AttachNetworkInterface）用于弹性网卡绑定云主机。
-* 一个云主机可以绑定多个弹性网卡，但只能绑定一个主网卡。更多限制信息详见<a href="https://cloud.tencent.com/document/product/576/18527">弹性网卡使用限制</a>。
-* 一个弹性网卡只能同时绑定一个云主机。
-* 只有运行中或者已关机状态的云主机才能绑定弹性网卡，查看云主机状态详见<a href="https://cloud.tencent.com/document/api/213/9452#InstanceStatus">腾讯云主机信息</a>。
-* 弹性网卡绑定的云主机必须是私有网络的，而且云主机所在可用区必须和弹性网卡子网的可用区相同。
+     * 本接口（AttachNetworkInterface）用于弹性网卡绑定云服务器。
+* 一个云服务器可以绑定多个弹性网卡，但只能绑定一个主网卡。更多限制信息详见<a href="https://cloud.tencent.com/document/product/576/18527">弹性网卡使用限制</a>。
+* 一个弹性网卡只能同时绑定一个云服务器。
+* 只有运行中或者已关机状态的云服务器才能绑定弹性网卡，查看云服务器状态详见<a href="https://cloud.tencent.com/document/api/213/9452#InstanceStatus">腾讯云服务器信息</a>。
+* 弹性网卡绑定的云服务器必须是私有网络的，而且云服务器所在可用区必须和弹性网卡子网的可用区相同。
      */
     async AttachNetworkInterface(req, cb) {
         return this.request("AttachNetworkInterface", req, cb);
@@ -1194,6 +1194,12 @@ LimitTypes取值范围：
      */
     async DeleteHaVip(req, cb) {
         return this.request("DeleteHaVip", req, cb);
+    }
+    /**
+     * 本接口用于查询网络产品的配额信息
+     */
+    async DescribeProductQuota(req, cb) {
+        return this.request("DescribeProductQuota", req, cb);
     }
     /**
      * 接口用于修改带宽包属性，包括带宽包名字等

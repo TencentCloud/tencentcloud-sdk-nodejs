@@ -640,6 +640,21 @@ export interface DeleteEcdnDomainResponse {
     RequestId?: string;
 }
 /**
+ * 标签键和标签值
+ */
+export interface Tag {
+    /**
+      * 标签键
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TagKey: string;
+    /**
+      * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TagValue: string;
+}
+/**
  * StopEcdnDomain返回参数结构体
  */
 export interface StopEcdnDomainResponse {
@@ -741,6 +756,10 @@ export interface AddEcdnDomainRequest {
       * 访问协议强制跳转配置。
       */
     ForceRedirect?: ForceRedirect;
+    /**
+      * 域名绑定的标签
+      */
+    Tag?: Array<Tag>;
 }
 /**
  * 自定义响应头配置。
@@ -1188,6 +1207,11 @@ export interface DomainDetailInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Readonly: string;
+    /**
+      * 域名标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tag: Array<Tag>;
 }
 /**
  * DescribeIpStatus请求参数结构体

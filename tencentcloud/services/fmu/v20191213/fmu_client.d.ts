@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DeleteModelRequest, BeautifyVideoRequest, CancelBeautifyVideoJobResponse, CreateModelResponse, GetModelListResponse, BeautifyPicResponse, GetModelListRequest, BeautifyVideoResponse, TryLipstickPicResponse, DeleteModelResponse, CancelBeautifyVideoJobRequest, TryLipstickPicRequest, QueryBeautifyVideoJobResponse, CreateModelRequest, BeautifyPicRequest, QueryBeautifyVideoJobRequest } from "./fmu_models";
+import { DeleteModelRequest, BeautifyVideoRequest, CancelBeautifyVideoJobResponse, StyleImageProResponse, StyleImageRequest, CreateModelResponse, GetModelListResponse, BeautifyPicResponse, GetModelListRequest, BeautifyVideoResponse, TryLipstickPicResponse, DeleteModelResponse, CancelBeautifyVideoJobRequest, TryLipstickPicRequest, StyleImageProRequest, QueryBeautifyVideoJobResponse, StyleImageResponse, CreateModelRequest, BeautifyPicRequest, QueryBeautifyVideoJobRequest } from "./fmu_models";
 /**
  * fmu client
  * @class
@@ -15,16 +15,13 @@ export declare class Client extends AbstractClient {
      */
     CreateModel(req: CreateModelRequest, cb?: (error: string, rep: CreateModelResponse) => void): Promise<CreateModelResponse>;
     /**
-     * 对图片中的人脸嘴唇进行着色，最多支持同时对一张图中的3张人脸进行试唇色。
-
-您可以通过事先注册在腾讯云的唇色素材（LUT文件）改变图片中的人脸唇色，也可以输入RGBA模型数值。
-
-为了更好的效果，建议您使用事先注册在腾讯云的唇色素材（LUT文件）。
-
->
-- 公共参数中的签名方式请使用V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+     * 上传一张照片，输出滤镜处理后的图片。
      */
-    TryLipstickPic(req: TryLipstickPicRequest, cb?: (error: string, rep: TryLipstickPicResponse) => void): Promise<TryLipstickPicResponse>;
+    StyleImage(req: StyleImageRequest, cb?: (error: string, rep: StyleImageResponse) => void): Promise<StyleImageResponse>;
+    /**
+     * 上传一张照片，输出滤镜处理后的图片。
+     */
+    StyleImagePro(req: StyleImageProRequest, cb?: (error: string, rep: StyleImageProResponse) => void): Promise<StyleImageProResponse>;
     /**
      * 撤销视频美颜任务请求
      */
@@ -41,6 +38,17 @@ export declare class Client extends AbstractClient {
      * 用户上传一张人脸图片，精准定位五官，实现美肤、亮肤、祛痘等美颜功能。
      */
     BeautifyPic(req: BeautifyPicRequest, cb?: (error: string, rep: BeautifyPicResponse) => void): Promise<BeautifyPicResponse>;
+    /**
+     * 对图片中的人脸嘴唇进行着色，最多支持同时对一张图中的3张人脸进行试唇色。
+
+您可以通过事先注册在腾讯云的唇色素材（LUT文件）改变图片中的人脸唇色，也可以输入RGBA模型数值。
+
+为了更好的效果，建议您使用事先注册在腾讯云的唇色素材（LUT文件）。
+
+>
+- 公共参数中的签名方式请使用V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+     */
+    TryLipstickPic(req: TryLipstickPicRequest, cb?: (error: string, rep: TryLipstickPicResponse) => void): Promise<TryLipstickPicResponse>;
     /**
      * 查询已注册的唇色素材。
      */

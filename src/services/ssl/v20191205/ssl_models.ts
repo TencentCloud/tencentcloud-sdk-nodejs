@@ -1073,12 +1073,12 @@ export interface DescribeCertificateDetailResponse {
  */
 export interface CheckCertificateChainResponse {
   /**
-   * 1为通过检查，0为未通过检查。
+   * true为通过检查，false为未通过检查。
    */
   IsValid?: boolean
 
   /**
-   * 1为可信CA，0为不可信CA。
+   * true为可信CA，false为不可信CA。
    */
   IsTrustedCA?: boolean
 

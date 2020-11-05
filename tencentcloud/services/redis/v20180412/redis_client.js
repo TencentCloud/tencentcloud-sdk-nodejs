@@ -280,6 +280,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceMonitorBigKeyTypeDist", req, cb);
     }
     /**
+     * 修改实例的连接配置，包括带宽和最大连接数
+     */
+    async ModifyConnectionConfig(req, cb) {
+        return this.request("ModifyConnectionConfig", req, cb);
+    }
+    /**
      * 查询Redis实例列表信息
      */
     async DescribeCommonDBInstances(req, cb) {

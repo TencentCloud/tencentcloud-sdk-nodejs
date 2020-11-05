@@ -23,7 +23,9 @@ import {
   CancelBeautifyVideoJobResponse,
   RGBAInfo,
   BeautifyVideoOutput,
+  StyleImageProResponse,
   LipColorInfo,
+  StyleImageRequest,
   CreateModelResponse,
   GetModelListResponse,
   BeautifyPicResponse,
@@ -35,7 +37,9 @@ import {
   CancelBeautifyVideoJobRequest,
   BeautyParam,
   TryLipstickPicRequest,
+  StyleImageProRequest,
   QueryBeautifyVideoJobResponse,
+  StyleImageResponse,
   CreateModelRequest,
   FaceRect,
   BeautifyPicRequest,
@@ -65,20 +69,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 对图片中的人脸嘴唇进行着色，最多支持同时对一张图中的3张人脸进行试唇色。
+   * 上传一张照片，输出滤镜处理后的图片。
+   */
+  async StyleImage(
+    req: StyleImageRequest,
+    cb?: (error: string, rep: StyleImageResponse) => void
+  ): Promise<StyleImageResponse> {
+    return this.request("StyleImage", req, cb)
+  }
 
-您可以通过事先注册在腾讯云的唇色素材（LUT文件）改变图片中的人脸唇色，也可以输入RGBA模型数值。
-
-为了更好的效果，建议您使用事先注册在腾讯云的唇色素材（LUT文件）。
-
->     
-- 公共参数中的签名方式请使用V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
-     */
-  async TryLipstickPic(
-    req: TryLipstickPicRequest,
-    cb?: (error: string, rep: TryLipstickPicResponse) => void
-  ): Promise<TryLipstickPicResponse> {
-    return this.request("TryLipstickPic", req, cb)
+  /**
+   * 上传一张照片，输出滤镜处理后的图片。
+   */
+  async StyleImagePro(
+    req: StyleImageProRequest,
+    cb?: (error: string, rep: StyleImageProResponse) => void
+  ): Promise<StyleImageProResponse> {
+    return this.request("StyleImagePro", req, cb)
   }
 
   /**
@@ -119,6 +126,23 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BeautifyPicResponse) => void
   ): Promise<BeautifyPicResponse> {
     return this.request("BeautifyPic", req, cb)
+  }
+
+  /**
+     * 对图片中的人脸嘴唇进行着色，最多支持同时对一张图中的3张人脸进行试唇色。
+
+您可以通过事先注册在腾讯云的唇色素材（LUT文件）改变图片中的人脸唇色，也可以输入RGBA模型数值。
+
+为了更好的效果，建议您使用事先注册在腾讯云的唇色素材（LUT文件）。
+
+>     
+- 公共参数中的签名方式请使用V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+     */
+  async TryLipstickPic(
+    req: TryLipstickPicRequest,
+    cb?: (error: string, rep: TryLipstickPicResponse) => void
+  ): Promise<TryLipstickPicResponse> {
+    return this.request("TryLipstickPic", req, cb)
   }
 
   /**

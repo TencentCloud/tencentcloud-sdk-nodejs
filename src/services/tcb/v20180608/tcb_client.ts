@@ -23,7 +23,7 @@ import {
   DescribeEnvLimitRequest,
   DescribeQuotaDataResponse,
   CheckTcbServiceResponse,
-  DescribeEndUserLoginStatisticRequest,
+  CreateCloudBaseRunServerVersionRequest,
   StorageInfo,
   DescribeCloudBaseRunVersionSnapshotRequest,
   KVPair,
@@ -34,12 +34,13 @@ import {
   DescribeEndUsersResponse,
   AuthDomain,
   LogServiceInfo,
+  EstablishCloudBaseRunServerRequest,
   DescribeEnvLimitResponse,
   CreateStaticStoreRequest,
   CommonServiceAPIResponse,
   DescribeEndUserStatisticResponse,
   DescribeExtraPkgBillingInfoResponse,
-  ReinstateEnvResponse,
+  DestroyStaticStoreResponse,
   DescribePostpayPackageFreeQuotasRequest,
   CreateAuthDomainResponse,
   DescribeCloudBaseBuildServiceResponse,
@@ -55,8 +56,10 @@ import {
   CheckTcbServiceRequest,
   ModifyDatabaseACLResponse,
   StaticStorageInfo,
+  OrderInfo,
   CloudRunServiceSimpleVersionSnapshot,
   DescribeExtraPkgBillingInfoRequest,
+  CreateCloudBaseRunResourceRequest,
   CreatePostpayPackageRequest,
   DescribeEnvFreeQuotaRequest,
   DatabasesInfo,
@@ -64,17 +67,24 @@ import {
   DescribeAuthDomainsRequest,
   DescribeEndUserLoginStatisticResponse,
   DescribeAuthDomainsResponse,
+  CloudBaseRunVolumeMount,
   ReinstateEnvRequest,
+  CreateCloudBaseRunResourceResponse,
   DescribeDatabaseACLRequest,
   PlatformStatistic,
   CreateHostingDomainRequest,
-  DestroyStaticStoreResponse,
+  CreateCloudBaseRunServerVersionResponse,
   DeleteEndUserResponse,
   EnvBillingInfoItem,
+  DescribeEndUserLoginStatisticRequest,
   DescribeEnvFreeQuotaResponse,
+  CloudBaseEsInfo,
   ModifyEnvResponse,
   ModifyEndUserRequest,
   DescribeDatabaseACLResponse,
+  ReinstateEnvResponse,
+  CloudBaseRunNfsVolumeSource,
+  EstablishCloudBaseRunServerResponse,
   EnvInfo,
   CloudBaseRunImageInfo,
   DestroyEnvResponse,
@@ -85,7 +95,7 @@ import {
   DescribeCloudBaseRunVersionSnapshotResponse,
   DescribePostpayPackageFreeQuotasResponse,
   DeleteEndUserRequest,
-  OrderInfo,
+  CloudBaseRunImageSecretInfo,
   DescribeEnvsResponse,
   CloudBaseCodeRepoName,
   DescribeDownloadFileResponse,
@@ -100,6 +110,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("tcb.tencentcloudapi.com", "2018-06-08", clientConfig)
+  }
+
+  /**
+   * 查询版本历史
+   */
+  async DescribeCloudBaseRunVersionSnapshot(
+    req: DescribeCloudBaseRunVersionSnapshotRequest,
+    cb?: (error: string, rep: DescribeCloudBaseRunVersionSnapshotResponse) => void
+  ): Promise<DescribeCloudBaseRunVersionSnapshotResponse> {
+    return this.request("DescribeCloudBaseRunVersionSnapshot", req, cb)
   }
 
   /**
@@ -123,16 +143,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取环境列表，含环境下的各个资源信息。尤其是各资源的唯一标识，是请求各资源的关键参数
-   */
-  async DescribeEnvs(
-    req: DescribeEnvsRequest,
-    cb?: (error: string, rep: DescribeEnvsResponse) => void
-  ): Promise<DescribeEnvsResponse> {
-    return this.request("DescribeEnvs", req, cb)
-  }
-
-  /**
    * 增加安全域名
    */
   async CreateAuthDomain(
@@ -143,23 +153,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取下载文件信息
+   * 创建服务版本
    */
-  async DescribeDownloadFile(
-    req: DescribeDownloadFileRequest,
-    cb?: (error: string, rep: DescribeDownloadFileResponse) => void
-  ): Promise<DescribeDownloadFileResponse> {
-    return this.request("DescribeDownloadFile", req, cb)
+  async CreateCloudBaseRunServerVersion(
+    req: CreateCloudBaseRunServerVersionRequest,
+    cb?: (error: string, rep: CreateCloudBaseRunServerVersionResponse) => void
+  ): Promise<CreateCloudBaseRunServerVersionResponse> {
+    return this.request("CreateCloudBaseRunServerVersion", req, cb)
   }
 
   /**
-   * 获取安全域名列表
+   * 获取环境列表，含环境下的各个资源信息。尤其是各资源的唯一标识，是请求各资源的关键参数
    */
-  async DescribeAuthDomains(
-    req: DescribeAuthDomainsRequest,
-    cb?: (error: string, rep: DescribeAuthDomainsResponse) => void
-  ): Promise<DescribeAuthDomainsResponse> {
-    return this.request("DescribeAuthDomains", req, cb)
+  async DescribeEnvs(
+    req: DescribeEnvsRequest,
+    cb?: (error: string, rep: DescribeEnvsResponse) => void
+  ): Promise<DescribeEnvsResponse> {
+    return this.request("DescribeEnvs", req, cb)
   }
 
   /**
@@ -203,6 +213,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取下载文件信息
+   */
+  async DescribeDownloadFile(
+    req: DescribeDownloadFileRequest,
+    cb?: (error: string, rep: DescribeDownloadFileResponse) => void
+  ): Promise<DescribeDownloadFileResponse> {
+    return this.request("DescribeDownloadFile", req, cb)
+  }
+
+  /**
    * 获取后付费免费额度
    */
   async DescribePostpayPackageFreeQuotas(
@@ -210,6 +230,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePostpayPackageFreeQuotasResponse) => void
   ): Promise<DescribePostpayPackageFreeQuotasResponse> {
     return this.request("DescribePostpayPackageFreeQuotas", req, cb)
+  }
+
+  /**
+   * 创建云应用服务
+   */
+  async EstablishCloudBaseRunServer(
+    req: EstablishCloudBaseRunServerRequest,
+    cb?: (error: string, rep: EstablishCloudBaseRunServerResponse) => void
+  ): Promise<EstablishCloudBaseRunServerResponse> {
+    return this.request("EstablishCloudBaseRunServer", req, cb)
   }
 
   /**
@@ -263,6 +293,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 开通容器托管的资源，包括集群创建，VPC配置，异步任务创建，镜像托管，Coding等，查看创建结果需要根据DescribeCloudBaseRunResource接口来查看
+   */
+  async CreateCloudBaseRunResource(
+    req: CreateCloudBaseRunResourceRequest,
+    cb?: (error: string, rep: CreateCloudBaseRunResourceResponse) => void
+  ): Promise<CreateCloudBaseRunResourceResponse> {
+    return this.request("CreateCloudBaseRunResource", req, cb)
+  }
+
+  /**
    * 获取增值包计费相关信息
    */
   async DescribeExtraPkgBillingInfo(
@@ -313,13 +353,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询版本历史
+   * 获取安全域名列表
    */
-  async DescribeCloudBaseRunVersionSnapshot(
-    req: DescribeCloudBaseRunVersionSnapshotRequest,
-    cb?: (error: string, rep: DescribeCloudBaseRunVersionSnapshotResponse) => void
-  ): Promise<DescribeCloudBaseRunVersionSnapshotResponse> {
-    return this.request("DescribeCloudBaseRunVersionSnapshot", req, cb)
+  async DescribeAuthDomains(
+    req: DescribeAuthDomainsRequest,
+    cb?: (error: string, rep: DescribeAuthDomainsResponse) => void
+  ): Promise<DescribeAuthDomainsResponse> {
+    return this.request("DescribeAuthDomains", req, cb)
   }
 
   /**

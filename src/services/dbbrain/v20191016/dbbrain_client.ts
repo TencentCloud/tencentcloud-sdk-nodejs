@@ -18,20 +18,29 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  DescribeSlowLogTopSqlsResponse,
-  DescribeDBSpaceStatusRequest,
   DescribeTopSpaceTableTimeSeriesResponse,
+  DescribeDBDiagHistoryResponse,
+  DescribeDBSpaceStatusRequest,
+  DescribeSlowLogTimeSeriesStatsResponse,
+  TimeSlice,
+  MonitorFloatMetric,
+  MonitorMetric,
+  TableSpaceTimeSeries,
   DescribeTopSpaceTablesRequest,
   DescribeSlowLogTimeSeriesStatsRequest,
-  DescribeDBDiagHistoryResponse,
   DescribeDBDiagEventRequest,
   DescribeDBSpaceStatusResponse,
   DescribeDBDiagEventResponse,
   DescribeDBDiagHistoryRequest,
-  DescribeSlowLogTimeSeriesStatsResponse,
-  DescribeTopSpaceTablesResponse,
   DescribeTopSpaceTableTimeSeriesRequest,
+  MonitorMetricSeriesData,
+  DiagHistoryEventItem,
+  SlowLogTopSqlItem,
+  MonitorFloatMetricSeriesData,
   DescribeSlowLogTopSqlsRequest,
+  TableSpaceData,
+  DescribeSlowLogTopSqlsResponse,
+  DescribeTopSpaceTablesResponse,
 } from "./dbbrain_models"
 
 /**

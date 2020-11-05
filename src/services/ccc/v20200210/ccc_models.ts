@@ -20,11 +20,6 @@
  */
 export interface DescribeTelCdrRequest {
   /**
-   * 实例 ID
-   */
-  InstanceId: number
-
-  /**
    * 起始时间戳，Unix 时间戳
    */
   StartTimeStamp: number
@@ -35,7 +30,7 @@ export interface DescribeTelCdrRequest {
   EndTimeStamp: number
 
   /**
-   * 返回记录条数
+   * 返回记录条数，上限 100
    */
   Limit: number
 
@@ -43,6 +38,16 @@ export interface DescribeTelCdrRequest {
    * 偏移量
    */
   Offset: number
+
+  /**
+   * 实例 ID
+   */
+  InstanceId?: number
+
+  /**
+   * 应用ID。
+   */
+  SdkAppId?: number
 }
 
 /**
@@ -66,6 +71,61 @@ export interface DescribeTelCdrResponse {
 }
 
 /**
+ * DescribeIMCdrs返回参数结构体
+ */
+export interface DescribeIMCdrsResponse {
+  /**
+   * 总记录数
+   */
+  TotalCount?: number
+
+  /**
+   * 服务记录列表
+   */
+  IMCdrs?: Array<IMCdrInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeChatMessages请求参数结构体
+ */
+export interface DescribeChatMessagesRequest {
+  /**
+   * 服务记录ID
+   */
+  CdrId: string
+
+  /**
+   * 实例ID
+   */
+  InstanceId?: number
+
+  /**
+   * 应用ID
+   */
+  SdkAppId?: number
+
+  /**
+   * 返回记录条数 最大为100默认20
+   */
+  Limit?: number
+
+  /**
+   * 返回记录偏移 默认为0
+   */
+  Offset?: number
+
+  /**
+   * 1为从早到晚，2为从晚到早，默认为2
+   */
+  Order?: number
+}
+
+/**
  * CreateSDKLoginToken返回参数结构体
  */
 export interface CreateSDKLoginTokenResponse {
@@ -79,6 +139,91 @@ export interface CreateSDKLoginTokenResponse {
    */
   ExpiredTime?: number
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeIMCdrs请求参数结构体
+ */
+export interface DescribeIMCdrsRequest {
+  /**
+   * 起始时间
+   */
+  StartTimestamp: number
+
+  /**
+   * 结束时间
+   */
+  EndTimestamp: number
+
+  /**
+   * 实例ID
+   */
+  InstanceId?: number
+
+  /**
+   * 应用ID
+   */
+  SdkAppId?: number
+
+  /**
+   * 返回记录条数 最大为100默认20
+   */
+  Limit?: number
+
+  /**
+   * 返回记录偏移 默认为0
+   */
+  Offset?: number
+
+  /**
+   * 1为全媒体，2为文本客服，不填则查询全部
+   */
+  Type?: number
+}
+
+/**
+ * 聊天消息
+ */
+export interface MessageBody {
+  /**
+   * 消息时间戳
+   */
+  Timestamp: number
+
+  /**
+   * 发消息的用户ID
+   */
+  From: string
+
+  /**
+   * 消息列表
+   */
+  Messages: Array<Message>
+}
+
+/**
+ * CreateSDKLoginToken请求参数结构体
+ */
+export interface CreateSDKLoginTokenRequest {
+  /**
+   * 应用ID。
+   */
+  SdkAppId: number
+
+  /**
+   * 坐席账号。
+   */
+  SeatUserId: string
+}
+
+/**
+ * CreateStaff返回参数结构体
+ */
+export interface CreateStaffResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -141,21 +286,6 @@ export interface TelCdrInfo {
 }
 
 /**
- * CreateSDKLoginToken请求参数结构体
- */
-export interface CreateSDKLoginTokenRequest {
-  /**
-   * 应用ID。
-   */
-  SdkAppId: number
-
-  /**
-   * 坐席账号。
-   */
-  SeatUserId: string
-}
-
-/**
  * 坐席用户信息
  */
 export interface SeatUserInfo {
@@ -195,4 +325,94 @@ export interface SeatUserInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   StaffNumber?: string
+}
+
+/**
+ * CreateStaff请求参数结构体
+ */
+export interface CreateStaffRequest {
+  /**
+   * 应用ID
+   */
+  SdkAppId: number
+
+  /**
+   * 客服信息，个数不超过 10
+   */
+  Staffs: Array<SeatUserInfo>
+}
+
+/**
+ * DescribeChatMessages返回参数结构体
+ */
+export interface DescribeChatMessagesResponse {
+  /**
+   * 总记录数
+   */
+  TotalCount?: number
+
+  /**
+   * 消息列表
+   */
+  Messages?: Array<MessageBody>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 单条消息
+ */
+export interface Message {
+  /**
+   * 消息类型
+   */
+  Type: string
+
+  /**
+   * 消息内容
+   */
+  Content: string
+}
+
+/**
+ * 全媒体服务记录信息
+ */
+export interface IMCdrInfo {
+  /**
+   * 服务记录ID
+   */
+  Id: string
+
+  /**
+   * 服务时长秒数
+   */
+  Duration: number
+
+  /**
+   * 结束状态
+   */
+  EndStatus: number
+
+  /**
+   * 用户昵称
+   */
+  Nickname: string
+
+  /**
+   * 服务类型 1为全媒体，2为文本客服
+   */
+  Type: number
+
+  /**
+   * 客服ID
+   */
+  StaffId: string
+
+  /**
+   * 服务时间戳
+   */
+  Timestamp: number
 }

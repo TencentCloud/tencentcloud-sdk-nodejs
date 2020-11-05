@@ -37,17 +37,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateModel", req, cb);
     }
     /**
-     * 对图片中的人脸嘴唇进行着色，最多支持同时对一张图中的3张人脸进行试唇色。
-
-您可以通过事先注册在腾讯云的唇色素材（LUT文件）改变图片中的人脸唇色，也可以输入RGBA模型数值。
-
-为了更好的效果，建议您使用事先注册在腾讯云的唇色素材（LUT文件）。
-
->
-- 公共参数中的签名方式请使用V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+     * 上传一张照片，输出滤镜处理后的图片。
      */
-    async TryLipstickPic(req, cb) {
-        return this.request("TryLipstickPic", req, cb);
+    async StyleImage(req, cb) {
+        return this.request("StyleImage", req, cb);
+    }
+    /**
+     * 上传一张照片，输出滤镜处理后的图片。
+     */
+    async StyleImagePro(req, cb) {
+        return this.request("StyleImagePro", req, cb);
     }
     /**
      * 撤销视频美颜任务请求
@@ -72,6 +71,19 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async BeautifyPic(req, cb) {
         return this.request("BeautifyPic", req, cb);
+    }
+    /**
+     * 对图片中的人脸嘴唇进行着色，最多支持同时对一张图中的3张人脸进行试唇色。
+
+您可以通过事先注册在腾讯云的唇色素材（LUT文件）改变图片中的人脸唇色，也可以输入RGBA模型数值。
+
+为了更好的效果，建议您使用事先注册在腾讯云的唇色素材（LUT文件）。
+
+>
+- 公共参数中的签名方式请使用V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+     */
+    async TryLipstickPic(req, cb) {
+        return this.request("TryLipstickPic", req, cb);
     }
     /**
      * 查询已注册的唇色素材。

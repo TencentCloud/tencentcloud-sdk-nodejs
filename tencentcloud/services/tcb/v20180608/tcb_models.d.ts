@@ -56,19 +56,129 @@ export interface CheckTcbServiceResponse {
     RequestId?: string;
 }
 /**
- * DescribeEndUserLoginStatistic请求参数结构体
+ * CreateCloudBaseRunServerVersion请求参数结构体
  */
-export interface DescribeEndUserLoginStatisticRequest {
+export interface CreateCloudBaseRunServerVersionRequest {
     /**
-      * 环境id
+      * 环境ID
       */
     EnvId: string;
     /**
-      * 终端用户来源
-<li> qcloud </li>
-<li>miniapp</li>
+      * 枚举（package/repository/image)
       */
-    Source?: string;
+    UploadType: string;
+    /**
+      * 流量占比
+      */
+    FlowRatio: number;
+    /**
+      * Cpu的大小，单位：核
+      */
+    Cpu: number;
+    /**
+      * Mem的大小，单位：G
+      */
+    Mem: number;
+    /**
+      * 最小副本数，最小值：0
+      */
+    MinNum: number;
+    /**
+      * 副本最大数，最大值：50
+      */
+    MaxNum: number;
+    /**
+      * 策略类型(枚举值：比如cpu)
+      */
+    PolicyType: string;
+    /**
+      * 策略阈值
+      */
+    PolicyThreshold: number;
+    /**
+      * 服务端口
+      */
+    ContainerPort: number;
+    /**
+      * 服务名称
+      */
+    ServerName: string;
+    /**
+      * repository的类型(coding/gitlab/github/coding)
+      */
+    RepositoryType?: string;
+    /**
+      * Dockerfile地址
+      */
+    DockerfilePath?: string;
+    /**
+      * 构建目录
+      */
+    BuildDir?: string;
+    /**
+      * 环境变量
+      */
+    EnvParams?: string;
+    /**
+      * repository地址
+      */
+    Repository?: string;
+    /**
+      * 分支
+      */
+    Branch?: string;
+    /**
+      * 版本备注
+      */
+    VersionRemark?: string;
+    /**
+      * 代码包名字
+      */
+    PackageName?: string;
+    /**
+      * 代码包的版本
+      */
+    PackageVersion?: string;
+    /**
+      * Image的详情
+      */
+    ImageInfo?: CloudBaseRunImageInfo;
+    /**
+      * Github等拉取代码的详情
+      */
+    CodeDetail?: CloudBaseCodeRepoDetail;
+    /**
+      * 私有镜像秘钥信息
+      */
+    ImageSecretInfo?: CloudBaseRunImageSecretInfo;
+    /**
+      * 私有镜像 认证名称
+      */
+    ImagePullSecret?: string;
+    /**
+      * 用户自定义采集日志路径
+      */
+    CustomLogs?: string;
+    /**
+      * 延迟多长时间开始健康检查（单位s）
+      */
+    InitialDelaySeconds?: number;
+    /**
+      * cfs挂载信息
+      */
+    MountVolumeInfo?: Array<CloudBaseRunVolumeMount>;
+    /**
+      * 4 代表只能微信链路访问
+      */
+    AccessType?: number;
+    /**
+      * es信息
+      */
+    EsInfo?: CloudBaseEsInfo;
+    /**
+      * 是否使用统一域名
+      */
+    EnableUnion?: boolean;
 }
 /**
  * StorageInfo 资源信息
@@ -282,6 +392,39 @@ export interface LogServiceInfo {
     Region: string;
 }
 /**
+ * EstablishCloudBaseRunServer请求参数结构体
+ */
+export interface EstablishCloudBaseRunServerRequest {
+    /**
+      * 环境id
+      */
+    EnvId: string;
+    /**
+      * 服务名称
+      */
+    ServiceName: string;
+    /**
+      * 是否开通外网访问
+      */
+    IsPublic: boolean;
+    /**
+      * 镜像仓库
+      */
+    ImageRepo?: string;
+    /**
+      * 服务描述
+      */
+    Remark?: string;
+    /**
+      * es信息
+      */
+    EsInfo?: CloudBaseEsInfo;
+    /**
+      * 日志类型; es/cls
+      */
+    LogType?: string;
+}
+/**
  * DescribeEnvLimit返回参数结构体
  */
 export interface DescribeEnvLimitResponse {
@@ -380,9 +523,13 @@ export interface DescribeExtraPkgBillingInfoResponse {
     RequestId?: string;
 }
 /**
- * ReinstateEnv返回参数结构体
+ * DestroyStaticStore返回参数结构体
  */
-export interface ReinstateEnvResponse {
+export interface DestroyStaticStoreResponse {
+    /**
+      * 条件任务结果(succ/fail)
+      */
+    Result?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -662,6 +809,62 @@ export interface StaticStorageInfo {
     Bucket: string;
 }
 /**
+ * 订单信息
+ */
+export interface OrderInfo {
+    /**
+      * 订单号
+      */
+    TranId: string;
+    /**
+      * 订单要切换的套餐ID
+      */
+    PackageId: string;
+    /**
+      * 订单类型
+<li>1 购买</li>
+<li>2 续费</li>
+<li>3 变配</li>
+      */
+    TranType: string;
+    /**
+      * 订单状态。
+<li>1未支付</li>
+<li>2 支付中</li>
+<li>3 发货中</li>
+<li>4 发货成功</li>
+<li>5 发货失败</li>
+<li>6 已退款</li>
+<li>7 已取消</li>
+<li>100 已删除</li>
+      */
+    TranStatus: string;
+    /**
+      * 订单更新时间
+      */
+    UpdateTime: string;
+    /**
+      * 订单创建时间
+      */
+    CreateTime: string;
+    /**
+      * 付费模式.
+<li>prepayment 预付费</li>
+<li>postpaid 后付费</li>
+      */
+    PayMode: string;
+    /**
+      * 订单绑定的扩展ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExtensionId: string;
+    /**
+      * 资源初始化结果(仅当ExtensionId不为空时有效): successful(初始化成功), failed(初始化失败), doing(初始化进行中), init(准备初始化)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResourceReady: string;
+}
+/**
  * CloudRunServiceSimpleVersionSnapshot 信息
  */
 export interface CloudRunServiceSimpleVersionSnapshot {
@@ -821,6 +1024,23 @@ export interface DescribeExtraPkgBillingInfoRequest {
     EnvId?: string;
 }
 /**
+ * CreateCloudBaseRunResource请求参数结构体
+ */
+export interface CreateCloudBaseRunResourceRequest {
+    /**
+      * 环境ID
+      */
+    EnvId: string;
+    /**
+      * vpc的ID
+      */
+    VpcId?: string;
+    /**
+      * 子网ID列表，当VpcId不为空，SubnetIds也不能为空
+      */
+    SubnetIds?: Array<string>;
+}
+/**
  * CreatePostpayPackage请求参数结构体
  */
 export interface CreatePostpayPackageRequest {
@@ -969,6 +1189,27 @@ export interface DescribeAuthDomainsResponse {
     RequestId?: string;
 }
 /**
+ * cfs挂载点
+ */
+export interface CloudBaseRunVolumeMount {
+    /**
+      * 资源名
+      */
+    Name?: string;
+    /**
+      * 挂载路径
+      */
+    MountPath?: string;
+    /**
+      * 是否只读
+      */
+    ReadOnly?: boolean;
+    /**
+      * Nfs挂载信息
+      */
+    NfsVolumes?: Array<CloudBaseRunNfsVolumeSource>;
+}
+/**
  * ReinstateEnv请求参数结构体
  */
 export interface ReinstateEnvRequest {
@@ -976,6 +1217,20 @@ export interface ReinstateEnvRequest {
       * 环境ID
       */
     EnvId: string;
+}
+/**
+ * CreateCloudBaseRunResource返回参数结构体
+ */
+export interface CreateCloudBaseRunResourceResponse {
+    /**
+      * 返回集群创建是否成功 succ为成功。并且中间无err
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeDatabaseACL请求参数结构体
@@ -1028,13 +1283,19 @@ export interface CreateHostingDomainRequest {
     CertId: string;
 }
 /**
- * DestroyStaticStore返回参数结构体
+ * CreateCloudBaseRunServerVersion返回参数结构体
  */
-export interface DestroyStaticStoreResponse {
+export interface CreateCloudBaseRunServerVersionResponse {
     /**
-      * 条件任务结果(succ/fail)
+      * 状态(creating/succ)
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Result?: string;
+    /**
+      * 版本名称（只有Result为succ的时候，才会返回VersionName)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VersionName?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1117,6 +1378,21 @@ export interface EnvBillingInfoItem {
     FreeQuota: string;
 }
 /**
+ * DescribeEndUserLoginStatistic请求参数结构体
+ */
+export interface DescribeEndUserLoginStatisticRequest {
+    /**
+      * 环境id
+      */
+    EnvId: string;
+    /**
+      * 终端用户来源
+<li> qcloud </li>
+<li>miniapp</li>
+      */
+    Source?: string;
+}
+/**
  * DescribeEnvFreeQuota返回参数结构体
  */
 export interface DescribeEnvFreeQuotaResponse {
@@ -1129,6 +1405,46 @@ export interface DescribeEnvFreeQuotaResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * es信息
+ */
+export interface CloudBaseEsInfo {
+    /**
+      * es的id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Id?: number;
+    /**
+      * secret名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SecretName?: string;
+    /**
+      * ip地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Ip?: string;
+    /**
+      * 端口
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Port?: number;
+    /**
+      * 索引
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Index?: string;
+    /**
+      * 用户名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Account?: string;
+    /**
+      * 密码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Password?: string;
 }
 /**
  * ModifyEnv返回参数结构体
@@ -1168,6 +1484,41 @@ export interface DescribeDatabaseACLResponse {
 <li> ADMINONLY：仅管理员可读写</li>
       */
     AclTag?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ReinstateEnv返回参数结构体
+ */
+export interface ReinstateEnvResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * nfs挂载资源
+ */
+export interface CloudBaseRunNfsVolumeSource {
+    /**
+      * NFS挂载Server
+      */
+    Server?: string;
+    /**
+      * Server路径
+      */
+    Path?: string;
+    /**
+      * 是否只读
+      */
+    ReadOnly?: boolean;
+}
+/**
+ * EstablishCloudBaseRunServer返回参数结构体
+ */
+export interface EstablishCloudBaseRunServerResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1445,60 +1796,25 @@ export interface DeleteEndUserRequest {
     UserList: Array<string>;
 }
 /**
- * 订单信息
+ * ImageSecretInfo的信息
  */
-export interface OrderInfo {
+export interface CloudBaseRunImageSecretInfo {
     /**
-      * 订单号
+      * 镜像地址
       */
-    TranId: string;
+    RegistryServer?: string;
     /**
-      * 订单要切换的套餐ID
+      * 用户名
       */
-    PackageId: string;
+    UserName?: string;
     /**
-      * 订单类型
-<li>1 购买</li>
-<li>2 续费</li>
-<li>3 变配</li>
+      * 仓库密码
       */
-    TranType: string;
+    Password?: string;
     /**
-      * 订单状态。
-<li>1未支付</li>
-<li>2 支付中</li>
-<li>3 发货中</li>
-<li>4 发货成功</li>
-<li>5 发货失败</li>
-<li>6 已退款</li>
-<li>7 已取消</li>
-<li>100 已删除</li>
+      * 邮箱
       */
-    TranStatus: string;
-    /**
-      * 订单更新时间
-      */
-    UpdateTime: string;
-    /**
-      * 订单创建时间
-      */
-    CreateTime: string;
-    /**
-      * 付费模式.
-<li>prepayment 预付费</li>
-<li>postpaid 后付费</li>
-      */
-    PayMode: string;
-    /**
-      * 订单绑定的扩展ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ExtensionId: string;
-    /**
-      * 资源初始化结果(仅当ExtensionId不为空时有效): successful(初始化成功), failed(初始化失败), doing(初始化进行中), init(准备初始化)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ResourceReady: string;
+    Email?: string;
 }
 /**
  * DescribeEnvs返回参数结构体

@@ -28,9 +28,19 @@ it("fmu.v20191213.CreateModel", async function () {
     }
 })
 
-it("fmu.v20191213.TryLipstickPic", async function () {
+it("fmu.v20191213.StyleImage", async function () {
     try {
-       const data = await client.TryLipstickPic({})
+       const data = await client.StyleImage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("fmu.v20191213.StyleImagePro", async function () {
+    try {
+       const data = await client.StyleImagePro({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -71,6 +81,16 @@ it("fmu.v20191213.DeleteModel", async function () {
 it("fmu.v20191213.BeautifyPic", async function () {
     try {
        const data = await client.BeautifyPic({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("fmu.v20191213.TryLipstickPic", async function () {
+    try {
+       const data = await client.TryLipstickPic({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

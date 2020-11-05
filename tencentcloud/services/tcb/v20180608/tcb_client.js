@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("tcb.tencentcloudapi.com", "2018-06-08", clientConfig);
     }
     /**
+     * 查询版本历史
+     */
+    async DescribeCloudBaseRunVersionSnapshot(req, cb) {
+        return this.request("DescribeCloudBaseRunVersionSnapshot", req, cb);
+    }
+    /**
      * 创建托管域名
      */
     async CreateHostingDomain(req, cb) {
@@ -40,28 +46,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEndUsers", req, cb);
     }
     /**
-     * 获取环境列表，含环境下的各个资源信息。尤其是各资源的唯一标识，是请求各资源的关键参数
-     */
-    async DescribeEnvs(req, cb) {
-        return this.request("DescribeEnvs", req, cb);
-    }
-    /**
      * 增加安全域名
      */
     async CreateAuthDomain(req, cb) {
         return this.request("CreateAuthDomain", req, cb);
     }
     /**
-     * 获取下载文件信息
+     * 创建服务版本
      */
-    async DescribeDownloadFile(req, cb) {
-        return this.request("DescribeDownloadFile", req, cb);
+    async CreateCloudBaseRunServerVersion(req, cb) {
+        return this.request("CreateCloudBaseRunServerVersion", req, cb);
     }
     /**
-     * 获取安全域名列表
+     * 获取环境列表，含环境下的各个资源信息。尤其是各资源的唯一标识，是请求各资源的关键参数
      */
-    async DescribeAuthDomains(req, cb) {
-        return this.request("DescribeAuthDomains", req, cb);
+    async DescribeEnvs(req, cb) {
+        return this.request("DescribeEnvs", req, cb);
     }
     /**
      * 开通后付费资源
@@ -88,10 +88,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyEndUser", req, cb);
     }
     /**
+     * 获取下载文件信息
+     */
+    async DescribeDownloadFile(req, cb) {
+        return this.request("DescribeDownloadFile", req, cb);
+    }
+    /**
      * 获取后付费免费额度
      */
     async DescribePostpayPackageFreeQuotas(req, cb) {
         return this.request("DescribePostpayPackageFreeQuotas", req, cb);
+    }
+    /**
+     * 创建云应用服务
+     */
+    async EstablishCloudBaseRunServer(req, cb) {
+        return this.request("EstablishCloudBaseRunServer", req, cb);
     }
     /**
      * TCB云API统一入口
@@ -124,6 +136,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeQuotaData", req, cb);
     }
     /**
+     * 开通容器托管的资源，包括集群创建，VPC配置，异步任务创建，镜像托管，Coding等，查看创建结果需要根据DescribeCloudBaseRunResource接口来查看
+     */
+    async CreateCloudBaseRunResource(req, cb) {
+        return this.request("CreateCloudBaseRunResource", req, cb);
+    }
+    /**
      * 获取增值包计费相关信息
      */
     async DescribeExtraPkgBillingInfo(req, cb) {
@@ -154,10 +172,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCloudBaseBuildService", req, cb);
     }
     /**
-     * 查询版本历史
+     * 获取安全域名列表
      */
-    async DescribeCloudBaseRunVersionSnapshot(req, cb) {
-        return this.request("DescribeCloudBaseRunVersionSnapshot", req, cb);
+    async DescribeAuthDomains(req, cb) {
+        return this.request("DescribeAuthDomains", req, cb);
     }
     /**
      * 销毁静态托管资源，该接口创建异步销毁任务，资源最终状态可从DestroyStaticStore接口查看

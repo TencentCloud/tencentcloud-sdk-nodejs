@@ -52,6 +52,7 @@ import {
   AssociateInstancesKeyPairsRequest,
   ImportKeyPairResponse,
   DescribeInstancesStatusResponse,
+  ZoneInfo,
   DescribeInstanceTypeConfigsRequest,
   DescribeKeyPairsResponse,
   ResetInstancesPasswordRequest,

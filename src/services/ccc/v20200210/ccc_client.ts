@@ -20,10 +20,19 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeTelCdrRequest,
   DescribeTelCdrResponse,
+  DescribeIMCdrsResponse,
+  DescribeChatMessagesRequest,
   CreateSDKLoginTokenResponse,
-  TelCdrInfo,
+  DescribeIMCdrsRequest,
+  MessageBody,
   CreateSDKLoginTokenRequest,
+  CreateStaffResponse,
+  TelCdrInfo,
   SeatUserInfo,
+  CreateStaffRequest,
+  DescribeChatMessagesResponse,
+  Message,
+  IMCdrInfo,
 } from "./ccc_models"
 
 /**
@@ -33,6 +42,36 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("ccc.tencentcloudapi.com", "2020-02-10", clientConfig)
+  }
+
+  /**
+   * 获取电话服务记录与录音
+   */
+  async DescribeTelCdr(
+    req: DescribeTelCdrRequest,
+    cb?: (error: string, rep: DescribeTelCdrResponse) => void
+  ): Promise<DescribeTelCdrResponse> {
+    return this.request("DescribeTelCdr", req, cb)
+  }
+
+  /**
+   * 包括具体聊天内容
+   */
+  async DescribeChatMessages(
+    req: DescribeChatMessagesRequest,
+    cb?: (error: string, rep: DescribeChatMessagesResponse) => void
+  ): Promise<DescribeChatMessagesResponse> {
+    return this.request("DescribeChatMessages", req, cb)
+  }
+
+  /**
+   * 包括全媒体和文本两种类型
+   */
+  async DescribeIMCdrs(
+    req: DescribeIMCdrsRequest,
+    cb?: (error: string, rep: DescribeIMCdrsResponse) => void
+  ): Promise<DescribeIMCdrsResponse> {
+    return this.request("DescribeIMCdrs", req, cb)
   }
 
   /**
@@ -46,12 +85,12 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取电话服务记录与录音
+   * 创建客服账号。
    */
-  async DescribeTelCdr(
-    req: DescribeTelCdrRequest,
-    cb?: (error: string, rep: DescribeTelCdrResponse) => void
-  ): Promise<DescribeTelCdrResponse> {
-    return this.request("DescribeTelCdr", req, cb)
+  async CreateStaff(
+    req: CreateStaffRequest,
+    cb?: (error: string, rep: CreateStaffResponse) => void
+  ): Promise<CreateStaffResponse> {
+    return this.request("CreateStaff", req, cb)
   }
 }

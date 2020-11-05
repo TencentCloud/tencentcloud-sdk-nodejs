@@ -70,6 +70,7 @@ export { iai } from "./iai";
 export { ic } from "./ic";
 export { ie } from "./ie";
 export { iir } from "./iir";
+export { ims } from "./ims";
 export { iot } from "./iot";
 export { iotcloud } from "./iotcloud";
 export { iotexplorer } from "./iotexplorer";

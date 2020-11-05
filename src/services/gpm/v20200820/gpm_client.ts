@@ -33,15 +33,18 @@ import {
   DeleteRuleRequest,
   MatchInfo,
   DescribeRulesRequest,
+  DescribeTokenResponse,
   DescribeRuleResponse,
   DescribeMatchRequest,
   ModifyRuleRequest,
+  DescribeTokenRequest,
   DescribeDataRequest,
   RegionLatency,
   CreateRuleRequest,
   ReportOverviewData,
   DescribeRuleRequest,
   DescribeMatchResponse,
+  ModifyTokenResponse,
   MatchCodeAttr,
   MatchAttribute,
   DeleteMatchResponse,
@@ -54,6 +57,7 @@ import {
   DescribeRulesResponse,
   MTicket,
   RuleInfo,
+  ModifyTokenRequest,
   DescribeMatchesResponse,
   Player,
   StartMatchingRequest,
@@ -84,6 +88,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改匹配Token。
+   */
+  async ModifyToken(
+    req: ModifyTokenRequest,
+    cb?: (error: string, rep: ModifyTokenResponse) => void
+  ): Promise<ModifyTokenResponse> {
+    return this.request("ModifyToken", req, cb)
+  }
+
+  /**
    * 查询匹配进度。
    */
   async DescribeMatchingProgress(
@@ -111,6 +125,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyMatchResponse) => void
   ): Promise<ModifyMatchResponse> {
     return this.request("ModifyMatch", req, cb)
+  }
+
+  /**
+   * 查询匹配Token，Token用于push消息验证。
+   */
+  async DescribeToken(
+    req: DescribeTokenRequest,
+    cb?: (error: string, rep: DescribeTokenResponse) => void
+  ): Promise<DescribeTokenResponse> {
+    return this.request("DescribeToken", req, cb)
   }
 
   /**

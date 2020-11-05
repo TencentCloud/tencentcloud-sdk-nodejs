@@ -3176,6 +3176,10 @@ export interface InquiryPriceUpgradeInstancesRequest {
       * 数据复制方式，支持值包括：0 - 异步复制，1 - 半同步复制，2 - 强同步复制，升级主实例时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义。
       */
     ProtectMode?: number;
+    /**
+      * 部署策略，取值范围：HA-高可用版两节点，FE-金融版三节点；默认值根据数据复制方式决定，数据复制方式为强同步复制时默认值为FE，数据复制方式非强同步时默认值为HA。
+      */
+    DeviceType?: string;
 }
 /**
  * ModifyAuditRule返回参数结构体
@@ -3365,6 +3369,10 @@ export interface DescribeDBPriceRequest {
       * 数据复制方式，默认为 0，支持值包括：0 - 表示异步复制，1 - 表示半同步复制，2 - 表示强同步复制。
       */
     ProtectMode?: number;
+    /**
+      * 部署策略，取值范围：HA-高可用版两节点，FE-金融版三节点；默认值根据数据复制方式决定，数据复制方式为强同步复制时默认值为FE，数据复制方式非强同步时默认值为HA。
+      */
+    DeviceType?: string;
 }
 /**
  * AssociateSecurityGroups返回参数结构体

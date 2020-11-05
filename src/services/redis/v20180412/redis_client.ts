@@ -40,6 +40,7 @@ import {
   DescribeSlowLogResponse,
   DescribeCommonDBInstancesRequest,
   DescribeDBSecurityGroupsResponse,
+  RedisNodeInfo,
   DescribeBackupUrlRequest,
   DescribeInstancesResponse,
   InstanceEnumParam,
@@ -116,6 +117,7 @@ import {
   DescribeMaintenanceWindowResponse,
   DescribeInstanceSecurityGroupResponse,
   ProductConf,
+  ModifyConnectionConfigRequest,
   InstanceNode,
   StartupInstanceResponse,
   DescribeInstanceDTSInstanceInfo,
@@ -137,6 +139,7 @@ import {
   ModfiyInstancePasswordResponse,
   InstanceSet,
   InquiryPriceRenewInstanceRequest,
+  ModifyConnectionConfigResponse,
   ModifyMaintenanceWindowResponse,
   DescribeCommonDBInstancesResponse,
   DescribeInstanceMonitorTopNCmdTookRequest,
@@ -605,6 +608,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceMonitorBigKeyTypeDistResponse) => void
   ): Promise<DescribeInstanceMonitorBigKeyTypeDistResponse> {
     return this.request("DescribeInstanceMonitorBigKeyTypeDist", req, cb)
+  }
+
+  /**
+   * 修改实例的连接配置，包括带宽和最大连接数
+   */
+  async ModifyConnectionConfig(
+    req: ModifyConnectionConfigRequest,
+    cb?: (error: string, rep: ModifyConnectionConfigResponse) => void
+  ): Promise<ModifyConnectionConfigResponse> {
+    return this.request("ModifyConnectionConfig", req, cb)
   }
 
   /**

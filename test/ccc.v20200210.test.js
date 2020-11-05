@@ -18,6 +18,36 @@ const client = new tencentcloud.ccc.v20200210.Client({
 })
 describe("ccc.v20200210.test.js", function () {
 
+it("ccc.v20200210.DescribeTelCdr", async function () {
+    try {
+       const data = await client.DescribeTelCdr({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.DescribeChatMessages", async function () {
+    try {
+       const data = await client.DescribeChatMessages({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ccc.v20200210.DescribeIMCdrs", async function () {
+    try {
+       const data = await client.DescribeIMCdrs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.CreateSDKLoginToken", async function () {
     try {
        const data = await client.CreateSDKLoginToken({})
@@ -28,9 +58,9 @@ it("ccc.v20200210.CreateSDKLoginToken", async function () {
     }
 })
 
-it("ccc.v20200210.DescribeTelCdr", async function () {
+it("ccc.v20200210.CreateStaff", async function () {
     try {
-       const data = await client.DescribeTelCdr({})
+       const data = await client.CreateStaff({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

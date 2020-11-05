@@ -4420,7 +4420,7 @@ OPEN：公网属性， INTERNAL：内网属性。
   ExpireTime?: string
 
   /**
-      * 负载均衡实例的计费类型
+      * 负载均衡实例的计费类型，PREPAID：包年包月，POSTPAID_BY_HOUR：按量计费
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ChargeType?: string

@@ -441,6 +441,25 @@ export interface DescribeRulesRequest {
     Tags?: Array<Tag>;
 }
 /**
+ * DescribeToken返回参数结构体
+ */
+export interface DescribeTokenResponse {
+    /**
+      * 当前的MatchCode对应的Token。如果当前MatchCode没有Token，该参数可能取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MatchToken?: string;
+    /**
+      * 当Token被替换后，GPM将兼容推送原始Token的时间（秒）。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CompatibleSpan?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeRule返回参数结构体
  */
 export interface DescribeRuleResponse {
@@ -483,6 +502,15 @@ export interface ModifyRuleRequest {
       * 标签，key-value结构的数组，最多关联50组标签
       */
     Tags?: Array<StringKV>;
+}
+/**
+ * DescribeToken请求参数结构体
+ */
+export interface DescribeTokenRequest {
+    /**
+      * 匹配code
+      */
+    MatchCode: string;
 }
 /**
  * DescribeData请求参数结构体
@@ -582,6 +610,24 @@ export interface DescribeMatchResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MatchInfo?: MatchInfo;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyToken返回参数结构体
+ */
+export interface ModifyTokenResponse {
+    /**
+      * 成功设置的Token。
+      */
+    MatchToken?: string;
+    /**
+      * 当前Token被替换后，GPM将持续推送原Token的时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CompatibleSpan?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -821,6 +867,23 @@ export interface RuleInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CreateUin: string;
+}
+/**
+ * ModifyToken请求参数结构体
+ */
+export interface ModifyTokenRequest {
+    /**
+      * 匹配Code。
+      */
+    MatchCode: string;
+    /**
+      * 单位秒，取值0-1800。此参数表示当前Token被替换后，GPM将持续推送原Token的时间。在CompatibleSpan时间范围内，用户将在事件消息中收到当前和原始Token。
+      */
+    CompatibleSpan: number;
+    /**
+      * Token，[a-zA-Z0-9-_.], 长度0-64。如果为空，将由GPM随机生成。
+      */
+    MatchToken?: string;
 }
 /**
  * DescribeMatches返回参数结构体

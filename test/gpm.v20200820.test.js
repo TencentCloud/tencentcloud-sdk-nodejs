@@ -28,6 +28,16 @@ it("gpm.v20200820.CancelMatching", async function () {
     }
 })
 
+it("gpm.v20200820.ModifyToken", async function () {
+    try {
+       const data = await client.ModifyToken({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gpm.v20200820.DescribeMatchingProgress", async function () {
     try {
        const data = await client.DescribeMatchingProgress({})
@@ -51,6 +61,16 @@ it("gpm.v20200820.CreateMatch", async function () {
 it("gpm.v20200820.ModifyMatch", async function () {
     try {
        const data = await client.ModifyMatch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gpm.v20200820.DescribeToken", async function () {
+    try {
+       const data = await client.DescribeToken({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

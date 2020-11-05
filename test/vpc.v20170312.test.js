@@ -1688,6 +1688,16 @@ it("vpc.v20170312.DeleteHaVip", async function () {
     }
 })
 
+it("vpc.v20170312.DescribeProductQuota", async function () {
+    try {
+       const data = await client.DescribeProductQuota({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.ModifyBandwidthPackageAttribute", async function () {
     try {
        const data = await client.ModifyBandwidthPackageAttribute({})

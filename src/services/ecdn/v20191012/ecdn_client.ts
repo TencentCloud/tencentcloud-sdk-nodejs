@@ -50,6 +50,7 @@ import {
   DomainBriefInfo,
   StartEcdnDomainResponse,
   DeleteEcdnDomainResponse,
+  Tag,
   StopEcdnDomainResponse,
   PurgePathCacheResponse,
   PurgeUrlsCacheResponse,

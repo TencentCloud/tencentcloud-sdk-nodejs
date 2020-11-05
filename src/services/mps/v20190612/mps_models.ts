@@ -147,6 +147,45 @@ export interface UserDefineOcrTextReviewTemplateInfoForUpdate {
 }
 
 /**
+ * 自定义转码的规格参数。用于覆盖模板中对应参数值。
+ */
+export interface OverrideTranscodeParameter {
+  /**
+   * 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a。其中，mp3、flac、ogg、m4a 为纯音频文件。
+   */
+  Container?: string
+
+  /**
+      * 是否去除视频数据，取值：
+<li>0：保留；</li>
+<li>1：去除。</li>
+      */
+  RemoveVideo?: number
+
+  /**
+      * 是否去除音频数据，取值：
+<li>0：保留；</li>
+<li>1：去除。</li>
+      */
+  RemoveAudio?: number
+
+  /**
+   * 视频流配置参数。
+   */
+  VideoTemplate?: VideoTemplateInfoForUpdate
+
+  /**
+   * 音频流配置参数。
+   */
+  AudioTemplate?: AudioTemplateInfoForUpdate
+
+  /**
+   * 极速高清转码参数。
+   */
+  TEHDConfig?: TEHDConfigForUpdate
+}
+
+/**
  * 智能分类任务输入类型
  */
 export interface AiAnalysisTaskClassificationInput {
@@ -5884,6 +5923,14 @@ export interface TranscodeTaskInput {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RawParameter?: RawTranscodeParameter
+
+  /**
+      * 视频转码自定义参数，当 Definition 不填 0 时有效。
+当填写了该结构中的部分转码参数时，将使用填写的参数覆盖转码模板中的参数。
+该参数用于高度定制场景，建议您仅使用 Definition 指定转码参数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OverrideParameter?: OverrideTranscodeParameter
 
   /**
       * 水印列表，支持多张图片或文字水印，最大可支持 10 张。

@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CancelMatching", req, cb);
     }
     /**
+     * 修改匹配Token。
+     */
+    async ModifyToken(req, cb) {
+        return this.request("ModifyToken", req, cb);
+    }
+    /**
      * 查询匹配进度。
      */
     async DescribeMatchingProgress(req, cb) {
@@ -50,6 +56,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyMatch(req, cb) {
         return this.request("ModifyMatch", req, cb);
+    }
+    /**
+     * 查询匹配Token，Token用于push消息验证。
+     */
+    async DescribeToken(req, cb) {
+        return this.request("DescribeToken", req, cb);
     }
     /**
      * 查询规则详情

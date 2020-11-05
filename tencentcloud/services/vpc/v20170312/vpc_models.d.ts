@@ -2688,6 +2688,31 @@ export interface DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse 
     RequestId?: string;
 }
 /**
+ * 描述网络中心每个产品的配额信息
+ */
+export interface ProductQuota {
+    /**
+      * 产品配额ID
+      */
+    QuotaId: string;
+    /**
+      * 产品配额名称
+      */
+    QuotaName: string;
+    /**
+      * 产品当前配额
+      */
+    QuotaCurrent: number;
+    /**
+      * 产品配额上限
+      */
+    QuotaLimit: number;
+    /**
+      * 产品配额是否有地域属性
+      */
+    QuotaRegion: boolean;
+}
+/**
  * DescribeVpcIpv6Addresses返回参数结构体
  */
 export interface DescribeVpcIpv6AddressesResponse {
@@ -4520,6 +4545,23 @@ NAT类型支持网络地址转换配置，类型确定后不能修改；一个�
     NatGatewayId: string;
 }
 /**
+ * DescribeProductQuota返回参数结构体
+ */
+export interface DescribeProductQuotaResponse {
+    /**
+      * ProductQuota对象数组
+      */
+    ProductQuotaSet?: Array<ProductQuota>;
+    /**
+      * 符合条件的产品类型个数
+      */
+    TotalCount?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 价格
  */
 export interface Price {
@@ -4678,6 +4720,19 @@ export interface DetachCcnInstancesRequest {
       * 要解关联网络实例列表
       */
     Instances: Array<CcnInstance>;
+}
+/**
+ * 过滤器
+ */
+export interface Filter {
+    /**
+      * 属性名称, 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
+      */
+    Name: string;
+    /**
+      * 属性值, 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
+      */
+    Values: Array<string>;
 }
 /**
  * CreateFlowLog返回参数结构体
@@ -5261,7 +5316,7 @@ export interface CreateAndAttachNetworkInterfaceRequest {
       */
     SubnetId: string;
     /**
-      * 云主机实例ID。
+      * 云服务器实例ID。
       */
     InstanceId: string;
     /**
@@ -5622,11 +5677,11 @@ export interface GatewayFlowMonitorDetail {
       */
     OutPkg: number;
     /**
-      * 入带宽，单位：`Byte`。
+      * 入流量，单位：`Byte`。
       */
     InTraffic: number;
     /**
-      * 出带宽，单位：`Byte`。
+      * 出流量，单位：`Byte`。
       */
     OutTraffic: number;
 }
@@ -8541,17 +8596,13 @@ export interface UnassignPrivateIpAddressesRequest {
     PrivateIpAddresses: Array<PrivateIpAddressSpecification>;
 }
 /**
- * 过滤器
+ * DescribeProductQuota请求参数结构体
  */
-export interface Filter {
+export interface DescribeProductQuotaRequest {
     /**
-      * 属性名称, 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
+      * 查询的网络产品名称，如vpc、ccn等
       */
-    Name: string;
-    /**
-      * 属性值, 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
-      */
-    Values: Array<string>;
+    Product: string;
 }
 /**
  * ModifyNetDetect返回参数结构体

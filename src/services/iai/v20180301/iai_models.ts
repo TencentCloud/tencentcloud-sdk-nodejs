@@ -2622,6 +2622,21 @@ B 图片的 Url、Image必须提供一个，如果都提供，只使用 Url。
  */
 export interface VerifyPersonResponse {
   /**
+   * 给定的人脸照片与 PersonId 对应的相似度。若 PersonId 下有多张人脸（Face），会融合多张人脸信息进行验证。
+   */
+  Score?: number
+
+  /**
+   * 是否为同一人的判断。
+   */
+  IsMatch?: boolean
+
+  /**
+   * 人脸识别所用的算法模型版本。
+   */
+  FaceModelVersion?: string
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string

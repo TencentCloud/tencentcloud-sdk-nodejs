@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeDataResponse, DescribeMatchCodesRequest, DeleteRuleResponse, ModifyMatchRequest, StartMatchingResponse, CreateMatchRequest, DescribeMatchingProgressRequest, ModifyMatchResponse, CreateMatchResponse, DescribeMatchesRequest, DeleteRuleRequest, DescribeRulesRequest, DescribeRuleResponse, DescribeMatchRequest, ModifyRuleRequest, DescribeDataRequest, CreateRuleRequest, DescribeRuleRequest, DescribeMatchResponse, DeleteMatchResponse, CancelMatchingRequest, CancelMatchingResponse, DescribeMatchCodesResponse, CreateRuleResponse, DescribeRulesResponse, DescribeMatchesResponse, StartMatchingRequest, DeleteMatchRequest, DescribeMatchingProgressResponse, ModifyRuleResponse } from "./gpm_models";
+import { DescribeDataResponse, DescribeMatchCodesRequest, DeleteRuleResponse, ModifyMatchRequest, StartMatchingResponse, CreateMatchRequest, DescribeMatchingProgressRequest, ModifyMatchResponse, CreateMatchResponse, DescribeMatchesRequest, DeleteRuleRequest, DescribeRulesRequest, DescribeTokenResponse, DescribeRuleResponse, DescribeMatchRequest, ModifyRuleRequest, DescribeTokenRequest, DescribeDataRequest, CreateRuleRequest, DescribeRuleRequest, DescribeMatchResponse, ModifyTokenResponse, DeleteMatchResponse, CancelMatchingRequest, CancelMatchingResponse, DescribeMatchCodesResponse, CreateRuleResponse, DescribeRulesResponse, ModifyTokenRequest, DescribeMatchesResponse, StartMatchingRequest, DeleteMatchRequest, DescribeMatchingProgressResponse, ModifyRuleResponse } from "./gpm_models";
 /**
  * gpm client
  * @class
@@ -11,6 +11,10 @@ export declare class Client extends AbstractClient {
      * 取消匹配。
      */
     CancelMatching(req: CancelMatchingRequest, cb?: (error: string, rep: CancelMatchingResponse) => void): Promise<CancelMatchingResponse>;
+    /**
+     * 修改匹配Token。
+     */
+    ModifyToken(req: ModifyTokenRequest, cb?: (error: string, rep: ModifyTokenResponse) => void): Promise<ModifyTokenResponse>;
     /**
      * 查询匹配进度。
      */
@@ -23,6 +27,10 @@ export declare class Client extends AbstractClient {
      * 修改匹配
      */
     ModifyMatch(req: ModifyMatchRequest, cb?: (error: string, rep: ModifyMatchResponse) => void): Promise<ModifyMatchResponse>;
+    /**
+     * 查询匹配Token，Token用于push消息验证。
+     */
+    DescribeToken(req: DescribeTokenRequest, cb?: (error: string, rep: DescribeTokenResponse) => void): Promise<DescribeTokenResponse>;
     /**
      * 查询规则详情
      */

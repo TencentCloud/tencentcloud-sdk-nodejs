@@ -18,6 +18,16 @@ const client = new tencentcloud.tcb.v20180608.Client({
 })
 describe("tcb.v20180608.test.js", function () {
 
+it("tcb.v20180608.DescribeCloudBaseRunVersionSnapshot", async function () {
+    try {
+       const data = await client.DescribeCloudBaseRunVersionSnapshot({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.CreateHostingDomain", async function () {
     try {
        const data = await client.CreateHostingDomain({})
@@ -38,16 +48,6 @@ it("tcb.v20180608.DescribeEndUsers", async function () {
     }
 })
 
-it("tcb.v20180608.DescribeEnvs", async function () {
-    try {
-       const data = await client.DescribeEnvs({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tcb.v20180608.CreateAuthDomain", async function () {
     try {
        const data = await client.CreateAuthDomain({})
@@ -58,9 +58,9 @@ it("tcb.v20180608.CreateAuthDomain", async function () {
     }
 })
 
-it("tcb.v20180608.DescribeDownloadFile", async function () {
+it("tcb.v20180608.CreateCloudBaseRunServerVersion", async function () {
     try {
-       const data = await client.DescribeDownloadFile({})
+       const data = await client.CreateCloudBaseRunServerVersion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -68,9 +68,9 @@ it("tcb.v20180608.DescribeDownloadFile", async function () {
     }
 })
 
-it("tcb.v20180608.DescribeAuthDomains", async function () {
+it("tcb.v20180608.DescribeEnvs", async function () {
     try {
-       const data = await client.DescribeAuthDomains({})
+       const data = await client.DescribeEnvs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -118,9 +118,29 @@ it("tcb.v20180608.ModifyEndUser", async function () {
     }
 })
 
+it("tcb.v20180608.DescribeDownloadFile", async function () {
+    try {
+       const data = await client.DescribeDownloadFile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.DescribePostpayPackageFreeQuotas", async function () {
     try {
        const data = await client.DescribePostpayPackageFreeQuotas({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.EstablishCloudBaseRunServer", async function () {
+    try {
+       const data = await client.EstablishCloudBaseRunServer({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,6 +198,16 @@ it("tcb.v20180608.DescribeQuotaData", async function () {
     }
 })
 
+it("tcb.v20180608.CreateCloudBaseRunResource", async function () {
+    try {
+       const data = await client.CreateCloudBaseRunResource({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.DescribeExtraPkgBillingInfo", async function () {
     try {
        const data = await client.DescribeExtraPkgBillingInfo({})
@@ -228,9 +258,9 @@ it("tcb.v20180608.DescribeCloudBaseBuildService", async function () {
     }
 })
 
-it("tcb.v20180608.DescribeCloudBaseRunVersionSnapshot", async function () {
+it("tcb.v20180608.DescribeAuthDomains", async function () {
     try {
-       const data = await client.DescribeCloudBaseRunVersionSnapshot({})
+       const data = await client.DescribeAuthDomains({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

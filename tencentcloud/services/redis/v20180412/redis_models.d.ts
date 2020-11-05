@@ -275,6 +275,10 @@ TypeId为标准架构时，MemSize是实例总内存容量；TypeId为集群架�
       * 是否支持免密，true-免密实例，false-非免密实例，默认为非免密实例，仅VPC网络的实例支持免密码访问。
       */
     NoAuth?: boolean;
+    /**
+      * 实例的节点信息，目前支持传入节点的类型（主节点或者副本节点），节点的可用区。单可用区部署不需要传递此参数。
+      */
+    NodeSet?: Array<RedisNodeInfo>;
 }
 /**
  * ModifyNetworkConfig返回参数结构体
@@ -547,6 +551,23 @@ export interface DescribeDBSecurityGroupsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 描述Redis实例的主节点或者副本节点信息
+ */
+export interface RedisNodeInfo {
+    /**
+      * 节点类型，0 为主节点，1 为副本节点
+      */
+    NodeType: number;
+    /**
+      * 主节点或者副本节点的可用区ID
+      */
+    ZoneId: number;
+    /**
+      * 主节点或者副本节点的ID，创建时不需要传递此参数。
+      */
+    NodeId?: number;
 }
 /**
  * DescribeBackupUrl请求参数结构体
@@ -2074,6 +2095,25 @@ export interface ProductConf {
     EnableRepicaReadOnly: boolean;
 }
 /**
+ * ModifyConnectionConfig请求参数结构体
+ */
+export interface ModifyConnectionConfigRequest {
+    /**
+      * 实例的ID，长度在12-36之间。
+      */
+    InstanceId: string;
+    /**
+      * 附加带宽，大于0，单位MB。
+      */
+    Bandwidth?: number;
+    /**
+      * 单分片的总连接数。
+未开启副本只读时，下限为10000，上限为40000；
+开启副本只读时，下限为10000，上限为10000×(只读副本数+3)。
+      */
+    ClientLimit?: number;
+}
+/**
  * 实例节点
  */
 export interface InstanceNode {
@@ -2661,6 +2701,19 @@ export interface InquiryPriceRenewInstanceRequest {
       * 实例ID
       */
     InstanceId: string;
+}
+/**
+ * ModifyConnectionConfig返回参数结构体
+ */
+export interface ModifyConnectionConfigResponse {
+    /**
+      * 任务ID
+      */
+    TaskId?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ModifyMaintenanceWindow返回参数结构体

@@ -655,6 +655,10 @@ export interface CreateCfsFileSystemRequest {
       * 文件系统标签
       */
     ResourceTags?: Array<TagInfo>;
+    /**
+      * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。用于保证请求幂等性的字符串失效时间为2小时。
+      */
+    ClientToken?: string;
 }
 /**
  * DescribeMountTargets请求参数结构体

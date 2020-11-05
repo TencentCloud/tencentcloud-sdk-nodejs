@@ -23,6 +23,7 @@ import {
   ModifyWatermarkTemplateRequest,
   AiRecognitionTaskAsrFullTextSegmentItem,
   UserDefineOcrTextReviewTemplateInfoForUpdate,
+  OverrideTranscodeParameter,
   AiAnalysisTaskClassificationInput,
   SvgWatermarkInput,
   WorkflowInfo,

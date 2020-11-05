@@ -1,12 +1,16 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateHostingDomainResponse, CreateStaticStoreResponse, DescribeEnvLimitRequest, DescribeQuotaDataResponse, CheckTcbServiceResponse, DescribeEndUserLoginStatisticRequest, DescribeCloudBaseRunVersionSnapshotRequest, CreatePostpayPackageResponse, CommonServiceAPIRequest, DescribeEndUsersResponse, DescribeEnvLimitResponse, CreateStaticStoreRequest, CommonServiceAPIResponse, DescribeEndUserStatisticResponse, DescribeExtraPkgBillingInfoResponse, ReinstateEnvResponse, DescribePostpayPackageFreeQuotasRequest, CreateAuthDomainResponse, DescribeCloudBaseBuildServiceResponse, ModifyEnvRequest, DescribeEndUsersRequest, DescribeDownloadFileRequest, DescribeEnvsRequest, DescribeQuotaDataRequest, DescribeCloudBaseBuildServiceRequest, DescribeEndUserStatisticRequest, CheckTcbServiceRequest, ModifyDatabaseACLResponse, DescribeExtraPkgBillingInfoRequest, CreatePostpayPackageRequest, DescribeEnvFreeQuotaRequest, DescribeAuthDomainsRequest, DescribeEndUserLoginStatisticResponse, DescribeAuthDomainsResponse, ReinstateEnvRequest, DescribeDatabaseACLRequest, CreateHostingDomainRequest, DestroyStaticStoreResponse, DeleteEndUserResponse, DescribeEnvFreeQuotaResponse, ModifyEnvResponse, ModifyEndUserRequest, DescribeDatabaseACLResponse, DestroyEnvResponse, ModifyDatabaseACLRequest, DestroyStaticStoreRequest, ModifyEndUserResponse, DescribeCloudBaseRunVersionSnapshotResponse, DescribePostpayPackageFreeQuotasResponse, DeleteEndUserRequest, DescribeEnvsResponse, DescribeDownloadFileResponse, CreateAuthDomainRequest, DestroyEnvRequest } from "./tcb_models";
+import { CreateHostingDomainResponse, CreateStaticStoreResponse, DescribeEnvLimitRequest, DescribeQuotaDataResponse, CheckTcbServiceResponse, CreateCloudBaseRunServerVersionRequest, DescribeCloudBaseRunVersionSnapshotRequest, CreatePostpayPackageResponse, CommonServiceAPIRequest, DescribeEndUsersResponse, EstablishCloudBaseRunServerRequest, DescribeEnvLimitResponse, CreateStaticStoreRequest, CommonServiceAPIResponse, DescribeEndUserStatisticResponse, DescribeExtraPkgBillingInfoResponse, DestroyStaticStoreResponse, DescribePostpayPackageFreeQuotasRequest, CreateAuthDomainResponse, DescribeCloudBaseBuildServiceResponse, ModifyEnvRequest, DescribeEndUsersRequest, DescribeDownloadFileRequest, DescribeEnvsRequest, DescribeQuotaDataRequest, DescribeCloudBaseBuildServiceRequest, DescribeEndUserStatisticRequest, CheckTcbServiceRequest, ModifyDatabaseACLResponse, DescribeExtraPkgBillingInfoRequest, CreateCloudBaseRunResourceRequest, CreatePostpayPackageRequest, DescribeEnvFreeQuotaRequest, DescribeAuthDomainsRequest, DescribeEndUserLoginStatisticResponse, DescribeAuthDomainsResponse, ReinstateEnvRequest, CreateCloudBaseRunResourceResponse, DescribeDatabaseACLRequest, CreateHostingDomainRequest, CreateCloudBaseRunServerVersionResponse, DeleteEndUserResponse, DescribeEndUserLoginStatisticRequest, DescribeEnvFreeQuotaResponse, ModifyEnvResponse, ModifyEndUserRequest, DescribeDatabaseACLResponse, ReinstateEnvResponse, EstablishCloudBaseRunServerResponse, DestroyEnvResponse, ModifyDatabaseACLRequest, DestroyStaticStoreRequest, ModifyEndUserResponse, DescribeCloudBaseRunVersionSnapshotResponse, DescribePostpayPackageFreeQuotasResponse, DeleteEndUserRequest, DescribeEnvsResponse, DescribeDownloadFileResponse, CreateAuthDomainRequest, DestroyEnvRequest } from "./tcb_models";
 /**
  * tcb client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 查询版本历史
+     */
+    DescribeCloudBaseRunVersionSnapshot(req: DescribeCloudBaseRunVersionSnapshotRequest, cb?: (error: string, rep: DescribeCloudBaseRunVersionSnapshotResponse) => void): Promise<DescribeCloudBaseRunVersionSnapshotResponse>;
     /**
      * 创建托管域名
      */
@@ -16,21 +20,17 @@ export declare class Client extends AbstractClient {
      */
     DescribeEndUsers(req: DescribeEndUsersRequest, cb?: (error: string, rep: DescribeEndUsersResponse) => void): Promise<DescribeEndUsersResponse>;
     /**
-     * 获取环境列表，含环境下的各个资源信息。尤其是各资源的唯一标识，是请求各资源的关键参数
-     */
-    DescribeEnvs(req: DescribeEnvsRequest, cb?: (error: string, rep: DescribeEnvsResponse) => void): Promise<DescribeEnvsResponse>;
-    /**
      * 增加安全域名
      */
     CreateAuthDomain(req: CreateAuthDomainRequest, cb?: (error: string, rep: CreateAuthDomainResponse) => void): Promise<CreateAuthDomainResponse>;
     /**
-     * 获取下载文件信息
+     * 创建服务版本
      */
-    DescribeDownloadFile(req: DescribeDownloadFileRequest, cb?: (error: string, rep: DescribeDownloadFileResponse) => void): Promise<DescribeDownloadFileResponse>;
+    CreateCloudBaseRunServerVersion(req: CreateCloudBaseRunServerVersionRequest, cb?: (error: string, rep: CreateCloudBaseRunServerVersionResponse) => void): Promise<CreateCloudBaseRunServerVersionResponse>;
     /**
-     * 获取安全域名列表
+     * 获取环境列表，含环境下的各个资源信息。尤其是各资源的唯一标识，是请求各资源的关键参数
      */
-    DescribeAuthDomains(req: DescribeAuthDomainsRequest, cb?: (error: string, rep: DescribeAuthDomainsResponse) => void): Promise<DescribeAuthDomainsResponse>;
+    DescribeEnvs(req: DescribeEnvsRequest, cb?: (error: string, rep: DescribeEnvsResponse) => void): Promise<DescribeEnvsResponse>;
     /**
      * 开通后付费资源
      */
@@ -48,9 +48,17 @@ export declare class Client extends AbstractClient {
      */
     ModifyEndUser(req: ModifyEndUserRequest, cb?: (error: string, rep: ModifyEndUserResponse) => void): Promise<ModifyEndUserResponse>;
     /**
+     * 获取下载文件信息
+     */
+    DescribeDownloadFile(req: DescribeDownloadFileRequest, cb?: (error: string, rep: DescribeDownloadFileResponse) => void): Promise<DescribeDownloadFileResponse>;
+    /**
      * 获取后付费免费额度
      */
     DescribePostpayPackageFreeQuotas(req: DescribePostpayPackageFreeQuotasRequest, cb?: (error: string, rep: DescribePostpayPackageFreeQuotasResponse) => void): Promise<DescribePostpayPackageFreeQuotasResponse>;
+    /**
+     * 创建云应用服务
+     */
+    EstablishCloudBaseRunServer(req: EstablishCloudBaseRunServerRequest, cb?: (error: string, rep: EstablishCloudBaseRunServerResponse) => void): Promise<EstablishCloudBaseRunServerResponse>;
     /**
      * TCB云API统一入口
      */
@@ -72,6 +80,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeQuotaData(req: DescribeQuotaDataRequest, cb?: (error: string, rep: DescribeQuotaDataResponse) => void): Promise<DescribeQuotaDataResponse>;
     /**
+     * 开通容器托管的资源，包括集群创建，VPC配置，异步任务创建，镜像托管，Coding等，查看创建结果需要根据DescribeCloudBaseRunResource接口来查看
+     */
+    CreateCloudBaseRunResource(req: CreateCloudBaseRunResourceRequest, cb?: (error: string, rep: CreateCloudBaseRunResourceResponse) => void): Promise<CreateCloudBaseRunResourceResponse>;
+    /**
      * 获取增值包计费相关信息
      */
     DescribeExtraPkgBillingInfo(req: DescribeExtraPkgBillingInfoRequest, cb?: (error: string, rep: DescribeExtraPkgBillingInfoResponse) => void): Promise<DescribeExtraPkgBillingInfoResponse>;
@@ -92,9 +104,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeCloudBaseBuildService(req: DescribeCloudBaseBuildServiceRequest, cb?: (error: string, rep: DescribeCloudBaseBuildServiceResponse) => void): Promise<DescribeCloudBaseBuildServiceResponse>;
     /**
-     * 查询版本历史
+     * 获取安全域名列表
      */
-    DescribeCloudBaseRunVersionSnapshot(req: DescribeCloudBaseRunVersionSnapshotRequest, cb?: (error: string, rep: DescribeCloudBaseRunVersionSnapshotResponse) => void): Promise<DescribeCloudBaseRunVersionSnapshotResponse>;
+    DescribeAuthDomains(req: DescribeAuthDomainsRequest, cb?: (error: string, rep: DescribeAuthDomainsResponse) => void): Promise<DescribeAuthDomainsResponse>;
     /**
      * 销毁静态托管资源，该接口创建异步销毁任务，资源最终状态可从DestroyStaticStore接口查看
      */
