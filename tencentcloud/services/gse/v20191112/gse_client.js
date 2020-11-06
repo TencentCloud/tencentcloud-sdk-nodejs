@@ -137,6 +137,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeGameServerSessionQueues", req, cb);
     }
     /**
+     * 本接口（DescribeCcnInstances）用于查询云联网实例。
+     */
+    async DescribeCcnInstances(req, cb) {
+        return this.request("DescribeCcnInstances", req, cb);
+    }
+    /**
      * 本接口（PutScalingPolicy）用于设置服务器舰队的动态扩缩容策略。
 
 通过此接口可以增加或者更新服务器舰队的扩缩容策略。
@@ -441,10 +447,10 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
         return this.request("DescribeAssets", req, cb);
     }
     /**
-     * 本接口（DescribeCcnInstances）用于查询云联网实例。
+     * 本接口（CreateAssetWithImage）用于创建生成包镜像信息。
      */
-    async DescribeCcnInstances(req, cb) {
-        return this.request("DescribeCcnInstances", req, cb);
+    async CreateAssetWithImage(req, cb) {
+        return this.request("CreateAssetWithImage", req, cb);
     }
     /**
      * 本接口（StopFleetActions）用于停止服务器舰队自动扩缩容，改为手动扩缩容。

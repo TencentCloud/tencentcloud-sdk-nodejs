@@ -178,6 +178,16 @@ it("gse.v20191112.DescribeGameServerSessionQueues", async function () {
     }
 })
 
+it("gse.v20191112.DescribeCcnInstances", async function () {
+    try {
+       const data = await client.DescribeCcnInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gse.v20191112.PutScalingPolicy", async function () {
     try {
        const data = await client.PutScalingPolicy({})
@@ -518,9 +528,9 @@ it("gse.v20191112.DescribeAssets", async function () {
     }
 })
 
-it("gse.v20191112.DescribeCcnInstances", async function () {
+it("gse.v20191112.CreateAssetWithImage", async function () {
     try {
-       const data = await client.DescribeCcnInstances({})
+       const data = await client.CreateAssetWithImage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -138,7 +138,7 @@ export interface ModifyItemSwitchStatusResponse {
  */
 export interface ModifySequenceRulesResponse {
     /**
-      * 0: 修改成功, !0: 修改失败
+      * 0: 修改成功, 其他: 修改失败
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Status?: number;
@@ -152,7 +152,7 @@ export interface ModifySequenceRulesResponse {
  */
 export interface ModifyAcRuleResponse {
     /**
-      * 装填值
+      * 状态值，0:操作成功
       */
     Status?: number;
     /**
@@ -313,7 +313,7 @@ export interface DeleteAllAccessControlRuleRequest {
       */
     Direction?: number;
     /**
-      * 边ID
+      * VPC间防火墙开关ID
       */
     EdgeId?: string;
     /**
@@ -403,7 +403,7 @@ export interface ModifyItemSwitchStatusRequest {
       */
     Id: number;
     /**
-      * 状态值
+      * 状态值，0: 关闭 ,1:开启
       */
     Status: number;
     /**
@@ -500,7 +500,7 @@ export interface DescribeVpcRuleOverviewRequest {
  */
 export interface CreateAcRulesResponse {
     /**
-      * 状态值
+      * 状态值，0:操作成功
       */
     Status?: number;
     /**
@@ -639,7 +639,7 @@ export interface CreateAcRulesRequest {
       */
     Overwrite?: number;
     /**
-      * NAT实例ID, Area存在的时候这个必传
+      * NAT实例ID, 参数Area存在的时候这个必传
       */
     InstanceId?: string;
     /**
@@ -887,7 +887,7 @@ export interface DescribeAcListsResponse {
  */
 export interface ModifyAllSwitchStatusResponse {
     /**
-      * 修改成功与否状态值
+      * 开启或者关闭成功与否状态值
       */
     Status?: number;
     /**

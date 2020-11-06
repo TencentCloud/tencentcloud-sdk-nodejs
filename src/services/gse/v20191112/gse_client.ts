@@ -130,6 +130,7 @@ import {
   DescribeAliasRequest,
   CreateAliasRequest,
   UpdateGameServerSessionRequest,
+  ListAliasesRequest,
   CreateAssetRequest,
   DescribeGameServerSessionDetailsResponse,
   Credentials,
@@ -150,6 +151,7 @@ import {
   PlayerLatencyPolicy,
   UpdateRuntimeConfigurationRequest,
   GameProperty,
+  CreateAssetWithImageResponse,
   FleetStatisticTimes,
   FleetStatisticFlows,
   DescribeAssetRequest,
@@ -167,7 +169,7 @@ import {
   DescribeUserQuotaResponse,
   DescribeFleetEventsRequest,
   UpdateAssetResponse,
-  ListAliasesRequest,
+  CreateAssetWithImageRequest,
   PlayerSession,
   PutScalingPolicyResponse,
   CreateGameServerSessionQueueRequest,
@@ -368,6 +370,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeGameServerSessionQueuesResponse) => void
   ): Promise<DescribeGameServerSessionQueuesResponse> {
     return this.request("DescribeGameServerSessionQueues", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeCcnInstances）用于查询云联网实例。
+   */
+  async DescribeCcnInstances(
+    req: DescribeCcnInstancesRequest,
+    cb?: (error: string, rep: DescribeCcnInstancesResponse) => void
+  ): Promise<DescribeCcnInstancesResponse> {
+    return this.request("DescribeCcnInstances", req, cb)
   }
 
   /**
@@ -811,13 +823,13 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
   }
 
   /**
-   * 本接口（DescribeCcnInstances）用于查询云联网实例。
+   * 本接口（CreateAssetWithImage）用于创建生成包镜像信息。
    */
-  async DescribeCcnInstances(
-    req: DescribeCcnInstancesRequest,
-    cb?: (error: string, rep: DescribeCcnInstancesResponse) => void
-  ): Promise<DescribeCcnInstancesResponse> {
-    return this.request("DescribeCcnInstances", req, cb)
+  async CreateAssetWithImage(
+    req: CreateAssetWithImageRequest,
+    cb?: (error: string, rep: CreateAssetWithImageResponse) => void
+  ): Promise<CreateAssetWithImageResponse> {
+    return this.request("CreateAssetWithImage", req, cb)
   }
 
   /**

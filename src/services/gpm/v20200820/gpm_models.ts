@@ -307,7 +307,7 @@ export interface CreateMatchResponse {
  */
 export interface RuleBriefInfo {
   /**
-   * 规则名称
+   * 规则名称 [a-zA-Z\d-\.]*
    */
   RuleName: string
 
@@ -657,8 +657,23 @@ export interface DescribeDataRequest {
  */
 export interface RegionLatency {
   /**
-   * 地域
-   */
+      * 地域
+ap-beijing          华北地区(北京)
+ap-chengdu          西南地区(成都)
+ap-guangzhou          华南地区(广州)
+ap-hongkong          港澳台地区(中国香港)
+ap-seoul          亚太地区(首尔)
+ap-shanghai          华东地区(上海)
+ap-singapore          东南亚地区(新加坡)
+eu-frankfurt          欧洲地区(法兰克福)
+na-siliconvalley          美国西部(硅谷)
+na-toronto          北美地区(多伦多)
+ap-mumbai          亚太地区(孟买)
+na-ashburn          美国东部(弗吉尼亚)
+ap-bangkok          亚太地区(曼谷)
+eu-moscow          欧洲地区(莫斯科)
+ap-tokyo          亚太地区(东京)
+      */
   Region: string
 
   /**
@@ -785,7 +800,7 @@ export interface MatchCodeAttr {
  */
 export interface MatchAttribute {
   /**
-   * 属性名 长度 128
+   * 属性名 长度 128 [a-zA-Z0-9-\.]*
    */
   Name: string
 
@@ -845,7 +860,7 @@ export interface CancelMatchingRequest {
  */
 export interface AttributeMap {
   /**
-   * 属性字典 key
+   * 属性字典 key [a-zA-Z0-9-\.]*
    */
   Key: string
 
@@ -983,7 +998,7 @@ export interface MTicket {
  */
 export interface RuleInfo {
   /**
-   * 规则名称
+   * 规则名称 [a-zA-Z0-9-\.]*
    */
   RuleName: string
 
@@ -1111,7 +1126,7 @@ export interface DescribeMatchesResponse {
  */
 export interface Player {
   /**
-   * 玩家 PlayerId 长度 128
+   * 玩家 PlayerId 长度 128 [a-zA-Z\d-\._]*
    */
   Id: string
 
@@ -1126,7 +1141,7 @@ export interface Player {
   MatchAttributes: Array<MatchAttribute>
 
   /**
-   * 队伍名，可以传递不同队伍名，长度 128
+   * 队伍名，可以传递不同队伍名，长度 128 [a-zA-Z0-9-\.]*
    */
   Team?: string
 
@@ -1196,7 +1211,7 @@ export interface DeleteMatchRequest {
  */
 export interface MatchTicket {
   /**
-   * MatchTicketId 长度 128
+   * MatchTicketId 长度 128 [a-zA-Z0-9-\.]*
    */
   Id: string
 

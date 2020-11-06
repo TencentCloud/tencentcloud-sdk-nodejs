@@ -27,8 +27,10 @@ import {
   StorageInfo,
   DescribeCloudBaseRunVersionSnapshotRequest,
   KVPair,
+  DescribeCloudBaseRunServerVersionRequest,
   FunctionInfo,
   CreatePostpayPackageResponse,
+  DescribeCloudBaseRunServerVersionResponse,
   CommonServiceAPIRequest,
   PostpayEnvQuota,
   DescribeEndUsersResponse,
@@ -160,6 +162,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCloudBaseRunServerVersionResponse) => void
   ): Promise<CreateCloudBaseRunServerVersionResponse> {
     return this.request("CreateCloudBaseRunServerVersion", req, cb)
+  }
+
+  /**
+   * 查询服务版本的详情，CPU和MEM  请使用CPUSize和MemSize
+   */
+  async DescribeCloudBaseRunServerVersion(
+    req: DescribeCloudBaseRunServerVersionRequest,
+    cb?: (error: string, rep: DescribeCloudBaseRunServerVersionResponse) => void
+  ): Promise<DescribeCloudBaseRunServerVersionResponse> {
+    return this.request("DescribeCloudBaseRunServerVersion", req, cb)
   }
 
   /**

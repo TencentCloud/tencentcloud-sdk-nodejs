@@ -1864,7 +1864,7 @@ export interface CreateDBRequest {
  */
 export interface DescribeProjectSecurityGroupsRequest {
     /**
-      * 项目ID。
+      * 项目ID，可通过控制台项目管理中查看
       */
     ProjectId: number;
 }
@@ -2914,7 +2914,7 @@ export interface DescribeBackupByFlowIdRequest {
       */
     InstanceId: string;
     /**
-      * 创建备份流程ID
+      * 创建备份流程ID，可通过 [CreateBackup](https://cloud.tencent.com/document/product/238/19946) 接口获取
       */
     FlowId: string;
 }
@@ -3469,7 +3469,7 @@ export interface ModifyBackupNameRequest {
       */
     InstanceId: string;
     /**
-      * 要修改名称的备份ID，可通过DescribeBackups 接口获取。
+      * 要修改名称的备份ID，可通过 [DescribeBackups](https://cloud.tencent.com/document/product/238/19943)  接口获取。
       */
     BackupId: number;
     /**

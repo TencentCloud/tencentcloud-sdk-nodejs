@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCloudBaseRunServerVersion", req, cb);
     }
     /**
+     * 查询服务版本的详情，CPU和MEM  请使用CPUSize和MemSize
+     */
+    async DescribeCloudBaseRunServerVersion(req, cb) {
+        return this.request("DescribeCloudBaseRunServerVersion", req, cb);
+    }
+    /**
      * 获取环境列表，含环境下的各个资源信息。尤其是各资源的唯一标识，是请求各资源的关键参数
      */
     async DescribeEnvs(req, cb) {
