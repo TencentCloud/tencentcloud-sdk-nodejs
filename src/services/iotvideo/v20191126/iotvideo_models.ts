@@ -252,8 +252,20 @@ export interface IotModelData {
  */
 export interface CreateStorageServiceRequest {
   /**
-   * 云存套餐ID
-   */
+      * 云存套餐ID：
+yc1m3d ： 全时3天存储月套餐。
+yc1m7d ： 全时7天存储月套餐。
+yc1m30d ：全时30天存储月套餐。
+yc1y3d ：全时3天存储年套餐。
+yc1y7d ：全时7天存储年套餐。
+yc1y30d ：全时30天存储年套餐。
+ye1m3d ：事件3天存储月套餐。
+ye1m7d ：事件7天存储月套餐。
+ye1m30d ：事件30天存储月套餐 。
+ye1y3d ：事件3天存储年套餐。
+ye1y7d ：事件7天存储年套餐。
+ye1y30d ：事件30天存储年套餐。
+      */
   PkgId: string
 
   /**
@@ -1583,6 +1595,16 @@ export interface UploadOtaVersionRequest {
    * 操作人
    */
   Operator?: string
+
+  /**
+   * 备注信息
+   */
+  Remark?: string
+
+  /**
+   * 版本发布的描述信息，需要国际化，可以为空
+   */
+  Contents?: Contents
 }
 
 /**

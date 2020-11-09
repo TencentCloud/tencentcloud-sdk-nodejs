@@ -136,7 +136,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDomain", req, cb);
     }
     /**
-     * 本接口（ModifyCertificateAttributes）用于修改证书，包括证明名字以及证书内容。
+     * 本接口（ModifyCertificateAttributes）用于修改证书，包括证书名字以及证书内容。
      */
     async ModifyCertificateAttributes(req, cb) {
         return this.request("ModifyCertificateAttributes", req, cb);
@@ -312,7 +312,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDomainErrorPageInfo", req, cb);
     }
     /**
-     * 本接口（DescribeRealServers）用于查询源站信息，可以根据项目名查询所有的源站信息，此外支持指定IP机或者域名的源站模糊查询。
+     * 本接口（DescribeRealServers）用于查询源站信息，可以根据项目名查询所有的源站信息，此外支持指定IP或者域名的源站模糊查询。
      */
     async DescribeRealServers(req, cb) {
         return this.request("DescribeRealServers", req, cb);

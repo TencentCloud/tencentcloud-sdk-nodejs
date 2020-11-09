@@ -41,6 +41,7 @@ import {
   TableSpaceData,
   DescribeSlowLogTopSqlsResponse,
   DescribeTopSpaceTablesResponse,
+  SchemaItem,
 } from "./dbbrain_models"
 
 /**

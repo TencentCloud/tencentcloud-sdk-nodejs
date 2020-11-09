@@ -120,6 +120,20 @@ export interface DescribeProductEventListRequest {
     Limit?: number;
 }
 /**
+ * DescribeServiceDiscovery返回参数结构体
+ */
+export interface DescribeServiceDiscoveryResponse {
+    /**
+      * 返回服务发现列表信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ServiceDiscoverySet?: Array<ServiceDiscoveryItem>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 指标告警配置
  */
 export interface DescribePolicyConditionListMetric {
@@ -181,6 +195,19 @@ export interface BindingPolicyObjectRequest {
     Dimensions?: Array<BindingPolicyObjectDimension>;
 }
 /**
+ * CreateServiceDiscovery返回参数结构体
+ */
+export interface CreateServiceDiscoveryResponse {
+    /**
+      * 创建成功之后，返回对应服务发现信息
+      */
+    ServiceDiscovery?: ServiceDiscoveryItem;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribePolicyGroupInfo请求参数结构体
  */
 export interface DescribePolicyGroupInfoRequest {
@@ -192,6 +219,15 @@ export interface DescribePolicyGroupInfoRequest {
       * 策略组id
       */
     GroupId: number;
+}
+/**
+ * DeleteServiceDiscovery返回参数结构体
+ */
+export interface DeleteServiceDiscoveryResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 查询策略输出的用户回调信息
@@ -307,25 +343,25 @@ export interface DescribePolicyGroupInfoResponse {
     RequestId?: string;
 }
 /**
- * DescribeAllNamespaces请求参数结构体
+ * PutMonitorData请求参数结构体
  */
-export interface DescribeAllNamespacesRequest {
+export interface PutMonitorDataRequest {
     /**
-      * 根据使用场景过滤 "ST_DASHBOARD"=Dashboard类型 或 "ST_ALARM"=告警类型
+      * 一组指标和数据
       */
-    SceneType: string;
+    Metrics: Array<MetricDatum>;
     /**
-      * 固定值，为"monitor"
+      * 上报时自行指定的 IP
       */
-    Module: string;
+    AnnounceIp?: string;
     /**
-      * 根据监控类型过滤 不填默认查所有类型 "MT_QCE"=云产品监控 "MT_CUSTOM"=自定义监控
+      * 上报时自行指定的时间戳
       */
-    MonitorTypes?: Array<string>;
+    AnnounceTimestamp?: number;
     /**
-      * 根据namespace的Id过滤 不填默认查询所有
+      * 上报时自行指定的 IP 或 产品实例ID
       */
-    Ids?: Array<string>;
+    AnnounceInstance?: string;
 }
 /**
  * CreatePolicyGroup返回参数结构体
@@ -522,6 +558,24 @@ export interface UnBindingPolicyObjectRequest {
     InstanceGroupId?: number;
 }
 /**
+ * DescribeServiceDiscovery请求参数结构体
+ */
+export interface DescribeServiceDiscoveryRequest {
+    /**
+      * Prometheus 实例 ID
+      */
+    InstanceId: string;
+    /**
+      * <li>类型是 TKE，为对应的腾讯云容器服务集群 ID</li>
+      */
+    KubeClusterId: string;
+    /**
+      * 用户 Kubernetes 集群类型：
+<li> 1 = 容器服务集群(TKE) </li>
+      */
+    KubeType: number;
+}
+/**
  * DescribePolicyConditionList请求参数结构体
  */
 export interface DescribePolicyConditionListRequest {
@@ -568,6 +622,70 @@ export interface DimensionsDesc {
       * 维度名数组
       */
     Dimensions: Array<string>;
+}
+/**
+ * Prometheus 服务发现信息
+ */
+export interface ServiceDiscoveryItem {
+    /**
+      * 服务发现名称
+      */
+    Name: string;
+    /**
+      * 服务发现属于的 Namespace
+      */
+    Namespace: string;
+    /**
+      * 服务发现类型: ServiceMonitor/PodMonitor
+      */
+    Kind: string;
+    /**
+      * Namespace 选取方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NamespaceSelector: string;
+    /**
+      * Label 选取方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Selector: string;
+    /**
+      * Endpoints 信息（PodMonitor 不含该参数）
+      */
+    Endpoints: string;
+    /**
+      * 服务发现对应的配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Yaml: string;
+}
+/**
+ * CreateServiceDiscovery请求参数结构体
+ */
+export interface CreateServiceDiscoveryRequest {
+    /**
+      * Prometheus 实例 ID
+      */
+    InstanceId: string;
+    /**
+      * <li>类型为TKE：对应集成的腾讯云容器服务集群 ID</li>
+      */
+    KubeClusterId: string;
+    /**
+      * 用户 Kubernetes 集群类型：
+<li> 1 = 容器服务集群(TKE) </li>
+      */
+    KubeType: number;
+    /**
+      * 服务发现类型，取值如下：
+<li> 1 = ServiceMonitor</li>
+<li> 2 = PodMonitor</li>
+      */
+    Type: number;
+    /**
+      * 服务发现配置信息
+      */
+    Yaml: string;
 }
 /**
  * DescribePolicyConditionList策略条件
@@ -945,6 +1063,19 @@ export interface BindingPolicyObjectDimension {
     EventDimensions?: string;
 }
 /**
+ * UpdateServiceDiscovery返回参数结构体
+ */
+export interface UpdateServiceDiscoveryResponse {
+    /**
+      * 更新成功之后，返回对应服务发现的信息
+      */
+    ServiceDiscovery?: ServiceDiscoveryItem;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 实例对象的维度组合
  */
 export interface Dimension {
@@ -1070,6 +1201,34 @@ export interface DescribeBasicAlarmListAlarms {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     InstanceGroup: Array<InstanceGroup>;
+}
+/**
+ * UpdateServiceDiscovery请求参数结构体
+ */
+export interface UpdateServiceDiscoveryRequest {
+    /**
+      * Prometheus 实例 ID
+      */
+    InstanceId: string;
+    /**
+      * <li>类型是 TKE，为对应的腾讯云容器服务集群 ID</li>
+      */
+    KubeClusterId: string;
+    /**
+      * 用户 Kubernetes 集群类型：
+<li> 1 = 容器服务集群(TKE) </li>
+      */
+    KubeType: number;
+    /**
+      * 服务发现类型，取值如下：
+<li> 1 = ServiceMonitor</li>
+<li> 2 = PodMonitor</li>
+      */
+    Type: number;
+    /**
+      * 服务发现配置信息
+      */
+    Yaml: string;
 }
 /**
  * UnBindingAllPolicyObject返回参数结构体
@@ -1477,25 +1636,25 @@ export interface DescribePolicyConditionListConfigManualPeriodNum {
     Need: boolean;
 }
 /**
- * PutMonitorData请求参数结构体
+ * DescribeAllNamespaces请求参数结构体
  */
-export interface PutMonitorDataRequest {
+export interface DescribeAllNamespacesRequest {
     /**
-      * 一组指标和数据
+      * 根据使用场景过滤 "ST_DASHBOARD"=Dashboard类型 或 "ST_ALARM"=告警类型
       */
-    Metrics: Array<MetricDatum>;
+    SceneType: string;
     /**
-      * 上报时自行指定的 IP
+      * 固定值，为"monitor"
       */
-    AnnounceIp?: string;
+    Module: string;
     /**
-      * 上报时自行指定的时间戳
+      * 根据监控类型过滤 不填默认查所有类型 "MT_QCE"=云产品监控 "MT_CUSTOM"=自定义监控
       */
-    AnnounceTimestamp?: number;
+    MonitorTypes?: Array<string>;
     /**
-      * 上报时自行指定的 IP 或 产品实例ID
+      * 根据namespace的Id过滤 不填默认查询所有
       */
-    AnnounceInstance?: string;
+    Ids?: Array<string>;
 }
 /**
  * DescribePolicyGroupList接口策略组绑定的实例分组信息
@@ -2490,6 +2649,34 @@ export interface ModifyPolicyGroupCondition {
       * 规则id，不填表示新增，填写了ruleId表示在已存在的规则基础上进行修改
       */
     RuleId?: number;
+}
+/**
+ * DeleteServiceDiscovery请求参数结构体
+ */
+export interface DeleteServiceDiscoveryRequest {
+    /**
+      * Prometheus 实例 ID
+      */
+    InstanceId: string;
+    /**
+      * <li>类型是 TKE，为对应的腾讯云容器服务集群 ID</li>
+      */
+    KubeClusterId: string;
+    /**
+      * 用户 Kubernetes 集群类型：
+<li> 1 = 容器服务集群(TKE) </li>
+      */
+    KubeType: number;
+    /**
+      * 服务发现类型，取值如下：
+<li> 1 = ServiceMonitor</li>
+<li> 2 = PodMonitor</li>
+      */
+    Type: number;
+    /**
+      * 服务发现配置信息
+      */
+    Yaml: string;
 }
 /**
  * DescribeProductEventList返回的OverView对象

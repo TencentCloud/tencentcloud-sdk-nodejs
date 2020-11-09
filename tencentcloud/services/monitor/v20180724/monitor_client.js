@@ -28,46 +28,10 @@ class Client extends abstract_client_1.AbstractClient {
         super("monitor.tencentcloudapi.com", "2018-07-24", clientConfig);
     }
     /**
-     * 分页获取产品事件的列表
-     */
-    async DescribeProductEventList(req, cb) {
-        return this.request("DescribeProductEventList", req, cb);
-    }
-    /**
-     * 获取平台事件列表
-     */
-    async DescribeAccidentEventList(req, cb) {
-        return this.request("DescribeAccidentEventList", req, cb);
-    }
-    /**
      * 删除策略的关联对象
      */
     async UnBindingPolicyObject(req, cb) {
         return this.request("UnBindingPolicyObject", req, cb);
-    }
-    /**
-     * 将告警策略绑定到特定对象
-     */
-    async BindingPolicyObject(req, cb) {
-        return this.request("BindingPolicyObject", req, cb);
-    }
-    /**
-     * 告警2.0-告警历史列表
-     */
-    async DescribeAlarmHistories(req, cb) {
-        return this.request("DescribeAlarmHistories", req, cb);
-    }
-    /**
-     * 修改告警接收人
-     */
-    async ModifyAlarmReceivers(req, cb) {
-        return this.request("ModifyAlarmReceivers", req, cb);
-    }
-    /**
-     * 获取已绑定对象列表
-     */
-    async DescribeBindingPolicyObjectList(req, cb) {
-        return this.request("DescribeBindingPolicyObjectList", req, cb);
     }
     /**
      * 发送自定义消息告警
@@ -76,34 +40,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SendCustomAlarmMsg", req, cb);
     }
     /**
-     * 删除告警策略组
+     * 获取已绑定对象列表
      */
-    async DeletePolicyGroup(req, cb) {
-        return this.request("DeletePolicyGroup", req, cb);
+    async DescribeBindingPolicyObjectList(req, cb) {
+        return this.request("DescribeBindingPolicyObjectList", req, cb);
     }
     /**
-     * 获取基础指标详情
+     * 删除在腾讯云容器服务下创建的 Prometheus 服务发现。
+<p>注意：前提条件，已经通过 Prometheus 控制台集成了对应的腾讯云容器服务，具体请参考
+<a href="https://cloud.tencent.com/document/product/248/48859" target="_blank">Agent 安装</a>。</p>
      */
-    async DescribeBaseMetrics(req, cb) {
-        return this.request("DescribeBaseMetrics", req, cb);
-    }
-    /**
-     * 获取基础策略组详情
-     */
-    async DescribePolicyGroupInfo(req, cb) {
-        return this.request("DescribePolicyGroupInfo", req, cb);
-    }
-    /**
-     * 更新策略组
-     */
-    async ModifyPolicyGroup(req, cb) {
-        return this.request("ModifyPolicyGroup", req, cb);
-    }
-    /**
-     * 查询云监控产品列表
-     */
-    async DescribeProductList(req, cb) {
-        return this.request("DescribeProductList", req, cb);
+    async DeleteServiceDiscovery(req, cb) {
+        return this.request("DeleteServiceDiscovery", req, cb);
     }
     /**
      * 获取基础策略告警组列表
@@ -112,36 +60,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePolicyGroupList", req, cb);
     }
     /**
-     * 获取基础告警列表
-     */
-    async DescribeBasicAlarmList(req, cb) {
-        return this.request("DescribeBasicAlarmList", req, cb);
-    }
-    /**
      * 获取云产品的监控数据。传入产品的命名空间、对象维度描述和监控指标即可获得相应的监控数据。
 接口调用频率限制为：20次/秒，1200次/分钟。单请求最多可支持批量拉取10个实例的监控数据，单请求的数据点数限制为1440个。
 若您需要调用的指标、对象较多，可能存在因限频出现拉取失败的情况，建议尽量将请求按时间维度均摊。
      */
     async GetMonitorData(req, cb) {
         return this.request("GetMonitorData", req, cb);
-    }
-    /**
-     * 拉取所有名字空间
-     */
-    async DescribeAllNamespaces(req, cb) {
-        return this.request("DescribeAllNamespaces", req, cb);
-    }
-    /**
-     * 增加策略组
-     */
-    async CreatePolicyGroup(req, cb) {
-        return this.request("CreatePolicyGroup", req, cb);
-    }
-    /**
-     * 删除全部的关联对象
-     */
-    async UnBindingAllPolicyObject(req, cb) {
-        return this.request("UnBindingAllPolicyObject", req, cb);
     }
     /**
      * 默认接口请求频率限制：50次/秒。
@@ -160,6 +84,114 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribePolicyConditionList(req, cb) {
         return this.request("DescribePolicyConditionList", req, cb);
+    }
+    /**
+     * 修改告警接收人
+     */
+    async ModifyAlarmReceivers(req, cb) {
+        return this.request("ModifyAlarmReceivers", req, cb);
+    }
+    /**
+     * 将告警策略绑定到特定对象
+     */
+    async BindingPolicyObject(req, cb) {
+        return this.request("BindingPolicyObject", req, cb);
+    }
+    /**
+     * 列出在腾讯云容器服务下创建的 Prometheus 服务发现。
+<p>注意：前提条件，已经通过 Prometheus 控制台集成了对应的腾讯云容器服务，具体请参考
+<a href="https://cloud.tencent.com/document/product/248/48859" target="_blank">Agent 安装</a>。</p>
+     */
+    async DescribeServiceDiscovery(req, cb) {
+        return this.request("DescribeServiceDiscovery", req, cb);
+    }
+    /**
+     * 获取基础告警列表
+     */
+    async DescribeBasicAlarmList(req, cb) {
+        return this.request("DescribeBasicAlarmList", req, cb);
+    }
+    /**
+     * 获取基础策略组详情
+     */
+    async DescribePolicyGroupInfo(req, cb) {
+        return this.request("DescribePolicyGroupInfo", req, cb);
+    }
+    /**
+     * 查询云监控产品列表
+     */
+    async DescribeProductList(req, cb) {
+        return this.request("DescribeProductList", req, cb);
+    }
+    /**
+     * 拉取所有名字空间
+     */
+    async DescribeAllNamespaces(req, cb) {
+        return this.request("DescribeAllNamespaces", req, cb);
+    }
+    /**
+     * 在腾讯云容器服务下创建 Prometheus 服务发现。
+<p>注意：前提条件，已经通过 Prometheus 控制台集成了对应的腾讯云容器服务，具体请参考
+<a href="https://cloud.tencent.com/document/product/248/48859" target="_blank">Agent 安装</a>。</p>
+     */
+    async CreateServiceDiscovery(req, cb) {
+        return this.request("CreateServiceDiscovery", req, cb);
+    }
+    /**
+     * 更新策略组
+     */
+    async ModifyPolicyGroup(req, cb) {
+        return this.request("ModifyPolicyGroup", req, cb);
+    }
+    /**
+     * 删除全部的关联对象
+     */
+    async UnBindingAllPolicyObject(req, cb) {
+        return this.request("UnBindingAllPolicyObject", req, cb);
+    }
+    /**
+     * 删除告警策略组
+     */
+    async DeletePolicyGroup(req, cb) {
+        return this.request("DeletePolicyGroup", req, cb);
+    }
+    /**
+     * 在腾讯云容器服务下更新 Prometheus 服务发现。
+<p>注意：前提条件，已经通过 Prometheus 控制台集成了对应的腾讯云容器服务，具体请参考
+<a href="https://cloud.tencent.com/document/product/248/48859" target="_blank">Agent 安装</a>。</p>
+     */
+    async UpdateServiceDiscovery(req, cb) {
+        return this.request("UpdateServiceDiscovery", req, cb);
+    }
+    /**
+     * 增加策略组
+     */
+    async CreatePolicyGroup(req, cb) {
+        return this.request("CreatePolicyGroup", req, cb);
+    }
+    /**
+     * 分页获取产品事件的列表
+     */
+    async DescribeProductEventList(req, cb) {
+        return this.request("DescribeProductEventList", req, cb);
+    }
+    /**
+     * 获取平台事件列表
+     */
+    async DescribeAccidentEventList(req, cb) {
+        return this.request("DescribeAccidentEventList", req, cb);
+    }
+    /**
+     * 告警2.0-告警历史列表
+     */
+    async DescribeAlarmHistories(req, cb) {
+        return this.request("DescribeAlarmHistories", req, cb);
+    }
+    /**
+     * 获取基础指标详情
+     */
+    async DescribeBaseMetrics(req, cb) {
+        return this.request("DescribeBaseMetrics", req, cb);
     }
 }
 exports.Client = Client;

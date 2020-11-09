@@ -21,14 +21,17 @@ import {
   DescribePolicyConditionListConfigManual,
   CreatePolicyGroupEventCondition,
   DescribeProductEventListRequest,
+  DescribeServiceDiscoveryResponse,
   DescribePolicyConditionListMetric,
   DescribePolicyGroupListResponse,
   BindingPolicyObjectRequest,
+  CreateServiceDiscoveryResponse,
   DescribePolicyGroupInfoRequest,
+  DeleteServiceDiscoveryResponse,
   DescribePolicyGroupInfoCallback,
   DescribeProductEventListDimensions,
   DescribePolicyGroupInfoResponse,
-  DescribeAllNamespacesRequest,
+  PutMonitorDataRequest,
   CreatePolicyGroupResponse,
   PutMonitorDataResponse,
   DescribeBaseMetricsResponse,
@@ -39,10 +42,13 @@ import {
   DataPoint,
   DescribePolicyConditionListConfigManualPeriod,
   UnBindingPolicyObjectRequest,
+  DescribeServiceDiscoveryRequest,
   DescribePolicyConditionListRequest,
   DescribeBindingPolicyObjectListInstance,
   DeletePolicyGroupResponse,
   DimensionsDesc,
+  ServiceDiscoveryItem,
+  CreateServiceDiscoveryRequest,
   DescribePolicyConditionListCondition,
   DescribeProductListRequest,
   PeriodsSt,
@@ -61,8 +67,10 @@ import {
   DescribeBaseMetricsRequest,
   Instance,
   BindingPolicyObjectDimension,
+  UpdateServiceDiscoveryResponse,
   Dimension,
   DescribeBasicAlarmListAlarms,
+  UpdateServiceDiscoveryRequest,
   UnBindingAllPolicyObjectResponse,
   DescribeAlarmHistoriesRequest,
   MetricObjectMeaning,
@@ -76,7 +84,7 @@ import {
   UnBindingPolicyObjectResponse,
   DescribeProductEventListEvents,
   DescribePolicyConditionListConfigManualPeriodNum,
-  PutMonitorDataRequest,
+  DescribeAllNamespacesRequest,
   DescribePolicyGroupListGroupInstanceGroup,
   InstanceGroup,
   DescribeAccidentEventListResponse,
@@ -104,6 +112,7 @@ import {
   DescribePolicyGroupInfoEventCondition,
   SendCustomAlarmMsgResponse,
   ModifyPolicyGroupCondition,
+  DeleteServiceDiscoveryRequest,
   DescribeProductEventListOverView,
   DescribePolicyConditionListConfigManualCalcValue,
   BindingPolicyObjectResponse,
@@ -119,26 +128,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 分页获取产品事件的列表
-   */
-  async DescribeProductEventList(
-    req: DescribeProductEventListRequest,
-    cb?: (error: string, rep: DescribeProductEventListResponse) => void
-  ): Promise<DescribeProductEventListResponse> {
-    return this.request("DescribeProductEventList", req, cb)
-  }
-
-  /**
-   * 获取平台事件列表
-   */
-  async DescribeAccidentEventList(
-    req: DescribeAccidentEventListRequest,
-    cb?: (error: string, rep: DescribeAccidentEventListResponse) => void
-  ): Promise<DescribeAccidentEventListResponse> {
-    return this.request("DescribeAccidentEventList", req, cb)
-  }
-
-  /**
    * 删除策略的关联对象
    */
   async UnBindingPolicyObject(
@@ -146,46 +135,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UnBindingPolicyObjectResponse) => void
   ): Promise<UnBindingPolicyObjectResponse> {
     return this.request("UnBindingPolicyObject", req, cb)
-  }
-
-  /**
-   * 将告警策略绑定到特定对象
-   */
-  async BindingPolicyObject(
-    req: BindingPolicyObjectRequest,
-    cb?: (error: string, rep: BindingPolicyObjectResponse) => void
-  ): Promise<BindingPolicyObjectResponse> {
-    return this.request("BindingPolicyObject", req, cb)
-  }
-
-  /**
-   * 告警2.0-告警历史列表
-   */
-  async DescribeAlarmHistories(
-    req: DescribeAlarmHistoriesRequest,
-    cb?: (error: string, rep: DescribeAlarmHistoriesResponse) => void
-  ): Promise<DescribeAlarmHistoriesResponse> {
-    return this.request("DescribeAlarmHistories", req, cb)
-  }
-
-  /**
-   * 修改告警接收人
-   */
-  async ModifyAlarmReceivers(
-    req: ModifyAlarmReceiversRequest,
-    cb?: (error: string, rep: ModifyAlarmReceiversResponse) => void
-  ): Promise<ModifyAlarmReceiversResponse> {
-    return this.request("ModifyAlarmReceivers", req, cb)
-  }
-
-  /**
-   * 获取已绑定对象列表
-   */
-  async DescribeBindingPolicyObjectList(
-    req: DescribeBindingPolicyObjectListRequest,
-    cb?: (error: string, rep: DescribeBindingPolicyObjectListResponse) => void
-  ): Promise<DescribeBindingPolicyObjectListResponse> {
-    return this.request("DescribeBindingPolicyObjectList", req, cb)
   }
 
   /**
@@ -199,53 +148,25 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除告警策略组
+   * 获取已绑定对象列表
    */
-  async DeletePolicyGroup(
-    req: DeletePolicyGroupRequest,
-    cb?: (error: string, rep: DeletePolicyGroupResponse) => void
-  ): Promise<DeletePolicyGroupResponse> {
-    return this.request("DeletePolicyGroup", req, cb)
+  async DescribeBindingPolicyObjectList(
+    req: DescribeBindingPolicyObjectListRequest,
+    cb?: (error: string, rep: DescribeBindingPolicyObjectListResponse) => void
+  ): Promise<DescribeBindingPolicyObjectListResponse> {
+    return this.request("DescribeBindingPolicyObjectList", req, cb)
   }
 
   /**
-   * 获取基础指标详情
-   */
-  async DescribeBaseMetrics(
-    req: DescribeBaseMetricsRequest,
-    cb?: (error: string, rep: DescribeBaseMetricsResponse) => void
-  ): Promise<DescribeBaseMetricsResponse> {
-    return this.request("DescribeBaseMetrics", req, cb)
-  }
-
-  /**
-   * 获取基础策略组详情
-   */
-  async DescribePolicyGroupInfo(
-    req: DescribePolicyGroupInfoRequest,
-    cb?: (error: string, rep: DescribePolicyGroupInfoResponse) => void
-  ): Promise<DescribePolicyGroupInfoResponse> {
-    return this.request("DescribePolicyGroupInfo", req, cb)
-  }
-
-  /**
-   * 更新策略组
-   */
-  async ModifyPolicyGroup(
-    req: ModifyPolicyGroupRequest,
-    cb?: (error: string, rep: ModifyPolicyGroupResponse) => void
-  ): Promise<ModifyPolicyGroupResponse> {
-    return this.request("ModifyPolicyGroup", req, cb)
-  }
-
-  /**
-   * 查询云监控产品列表
-   */
-  async DescribeProductList(
-    req: DescribeProductListRequest,
-    cb?: (error: string, rep: DescribeProductListResponse) => void
-  ): Promise<DescribeProductListResponse> {
-    return this.request("DescribeProductList", req, cb)
+     * 删除在腾讯云容器服务下创建的 Prometheus 服务发现。
+<p>注意：前提条件，已经通过 Prometheus 控制台集成了对应的腾讯云容器服务，具体请参考
+<a href="https://cloud.tencent.com/document/product/248/48859" target="_blank">Agent 安装</a>。</p>
+     */
+  async DeleteServiceDiscovery(
+    req: DeleteServiceDiscoveryRequest,
+    cb?: (error: string, rep: DeleteServiceDiscoveryResponse) => void
+  ): Promise<DeleteServiceDiscoveryResponse> {
+    return this.request("DeleteServiceDiscovery", req, cb)
   }
 
   /**
@@ -259,16 +180,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取基础告警列表
-   */
-  async DescribeBasicAlarmList(
-    req: DescribeBasicAlarmListRequest,
-    cb?: (error: string, rep: DescribeBasicAlarmListResponse) => void
-  ): Promise<DescribeBasicAlarmListResponse> {
-    return this.request("DescribeBasicAlarmList", req, cb)
-  }
-
-  /**
      * 获取云产品的监控数据。传入产品的命名空间、对象维度描述和监控指标即可获得相应的监控数据。
 接口调用频率限制为：20次/秒，1200次/分钟。单请求最多可支持批量拉取10个实例的监控数据，单请求的数据点数限制为1440个。
 若您需要调用的指标、对象较多，可能存在因限频出现拉取失败的情况，建议尽量将请求按时间维度均摊。
@@ -278,36 +189,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetMonitorDataResponse) => void
   ): Promise<GetMonitorDataResponse> {
     return this.request("GetMonitorData", req, cb)
-  }
-
-  /**
-   * 拉取所有名字空间
-   */
-  async DescribeAllNamespaces(
-    req: DescribeAllNamespacesRequest,
-    cb?: (error: string, rep: DescribeAllNamespacesResponse) => void
-  ): Promise<DescribeAllNamespacesResponse> {
-    return this.request("DescribeAllNamespaces", req, cb)
-  }
-
-  /**
-   * 增加策略组
-   */
-  async CreatePolicyGroup(
-    req: CreatePolicyGroupRequest,
-    cb?: (error: string, rep: CreatePolicyGroupResponse) => void
-  ): Promise<CreatePolicyGroupResponse> {
-    return this.request("CreatePolicyGroup", req, cb)
-  }
-
-  /**
-   * 删除全部的关联对象
-   */
-  async UnBindingAllPolicyObject(
-    req: UnBindingAllPolicyObjectRequest,
-    cb?: (error: string, rep: UnBindingAllPolicyObjectResponse) => void
-  ): Promise<UnBindingAllPolicyObjectResponse> {
-    return this.request("UnBindingAllPolicyObject", req, cb)
   }
 
   /**
@@ -334,5 +215,181 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePolicyConditionListResponse) => void
   ): Promise<DescribePolicyConditionListResponse> {
     return this.request("DescribePolicyConditionList", req, cb)
+  }
+
+  /**
+   * 修改告警接收人
+   */
+  async ModifyAlarmReceivers(
+    req: ModifyAlarmReceiversRequest,
+    cb?: (error: string, rep: ModifyAlarmReceiversResponse) => void
+  ): Promise<ModifyAlarmReceiversResponse> {
+    return this.request("ModifyAlarmReceivers", req, cb)
+  }
+
+  /**
+   * 将告警策略绑定到特定对象
+   */
+  async BindingPolicyObject(
+    req: BindingPolicyObjectRequest,
+    cb?: (error: string, rep: BindingPolicyObjectResponse) => void
+  ): Promise<BindingPolicyObjectResponse> {
+    return this.request("BindingPolicyObject", req, cb)
+  }
+
+  /**
+     * 列出在腾讯云容器服务下创建的 Prometheus 服务发现。
+<p>注意：前提条件，已经通过 Prometheus 控制台集成了对应的腾讯云容器服务，具体请参考
+<a href="https://cloud.tencent.com/document/product/248/48859" target="_blank">Agent 安装</a>。</p>
+     */
+  async DescribeServiceDiscovery(
+    req: DescribeServiceDiscoveryRequest,
+    cb?: (error: string, rep: DescribeServiceDiscoveryResponse) => void
+  ): Promise<DescribeServiceDiscoveryResponse> {
+    return this.request("DescribeServiceDiscovery", req, cb)
+  }
+
+  /**
+   * 获取基础告警列表
+   */
+  async DescribeBasicAlarmList(
+    req: DescribeBasicAlarmListRequest,
+    cb?: (error: string, rep: DescribeBasicAlarmListResponse) => void
+  ): Promise<DescribeBasicAlarmListResponse> {
+    return this.request("DescribeBasicAlarmList", req, cb)
+  }
+
+  /**
+   * 获取基础策略组详情
+   */
+  async DescribePolicyGroupInfo(
+    req: DescribePolicyGroupInfoRequest,
+    cb?: (error: string, rep: DescribePolicyGroupInfoResponse) => void
+  ): Promise<DescribePolicyGroupInfoResponse> {
+    return this.request("DescribePolicyGroupInfo", req, cb)
+  }
+
+  /**
+   * 查询云监控产品列表
+   */
+  async DescribeProductList(
+    req: DescribeProductListRequest,
+    cb?: (error: string, rep: DescribeProductListResponse) => void
+  ): Promise<DescribeProductListResponse> {
+    return this.request("DescribeProductList", req, cb)
+  }
+
+  /**
+   * 拉取所有名字空间
+   */
+  async DescribeAllNamespaces(
+    req: DescribeAllNamespacesRequest,
+    cb?: (error: string, rep: DescribeAllNamespacesResponse) => void
+  ): Promise<DescribeAllNamespacesResponse> {
+    return this.request("DescribeAllNamespaces", req, cb)
+  }
+
+  /**
+     * 在腾讯云容器服务下创建 Prometheus 服务发现。
+<p>注意：前提条件，已经通过 Prometheus 控制台集成了对应的腾讯云容器服务，具体请参考
+<a href="https://cloud.tencent.com/document/product/248/48859" target="_blank">Agent 安装</a>。</p>
+     */
+  async CreateServiceDiscovery(
+    req: CreateServiceDiscoveryRequest,
+    cb?: (error: string, rep: CreateServiceDiscoveryResponse) => void
+  ): Promise<CreateServiceDiscoveryResponse> {
+    return this.request("CreateServiceDiscovery", req, cb)
+  }
+
+  /**
+   * 更新策略组
+   */
+  async ModifyPolicyGroup(
+    req: ModifyPolicyGroupRequest,
+    cb?: (error: string, rep: ModifyPolicyGroupResponse) => void
+  ): Promise<ModifyPolicyGroupResponse> {
+    return this.request("ModifyPolicyGroup", req, cb)
+  }
+
+  /**
+   * 删除全部的关联对象
+   */
+  async UnBindingAllPolicyObject(
+    req: UnBindingAllPolicyObjectRequest,
+    cb?: (error: string, rep: UnBindingAllPolicyObjectResponse) => void
+  ): Promise<UnBindingAllPolicyObjectResponse> {
+    return this.request("UnBindingAllPolicyObject", req, cb)
+  }
+
+  /**
+   * 删除告警策略组
+   */
+  async DeletePolicyGroup(
+    req: DeletePolicyGroupRequest,
+    cb?: (error: string, rep: DeletePolicyGroupResponse) => void
+  ): Promise<DeletePolicyGroupResponse> {
+    return this.request("DeletePolicyGroup", req, cb)
+  }
+
+  /**
+     * 在腾讯云容器服务下更新 Prometheus 服务发现。
+<p>注意：前提条件，已经通过 Prometheus 控制台集成了对应的腾讯云容器服务，具体请参考
+<a href="https://cloud.tencent.com/document/product/248/48859" target="_blank">Agent 安装</a>。</p>
+     */
+  async UpdateServiceDiscovery(
+    req: UpdateServiceDiscoveryRequest,
+    cb?: (error: string, rep: UpdateServiceDiscoveryResponse) => void
+  ): Promise<UpdateServiceDiscoveryResponse> {
+    return this.request("UpdateServiceDiscovery", req, cb)
+  }
+
+  /**
+   * 增加策略组
+   */
+  async CreatePolicyGroup(
+    req: CreatePolicyGroupRequest,
+    cb?: (error: string, rep: CreatePolicyGroupResponse) => void
+  ): Promise<CreatePolicyGroupResponse> {
+    return this.request("CreatePolicyGroup", req, cb)
+  }
+
+  /**
+   * 分页获取产品事件的列表
+   */
+  async DescribeProductEventList(
+    req: DescribeProductEventListRequest,
+    cb?: (error: string, rep: DescribeProductEventListResponse) => void
+  ): Promise<DescribeProductEventListResponse> {
+    return this.request("DescribeProductEventList", req, cb)
+  }
+
+  /**
+   * 获取平台事件列表
+   */
+  async DescribeAccidentEventList(
+    req: DescribeAccidentEventListRequest,
+    cb?: (error: string, rep: DescribeAccidentEventListResponse) => void
+  ): Promise<DescribeAccidentEventListResponse> {
+    return this.request("DescribeAccidentEventList", req, cb)
+  }
+
+  /**
+   * 告警2.0-告警历史列表
+   */
+  async DescribeAlarmHistories(
+    req: DescribeAlarmHistoriesRequest,
+    cb?: (error: string, rep: DescribeAlarmHistoriesResponse) => void
+  ): Promise<DescribeAlarmHistoriesResponse> {
+    return this.request("DescribeAlarmHistories", req, cb)
+  }
+
+  /**
+   * 获取基础指标详情
+   */
+  async DescribeBaseMetrics(
+    req: DescribeBaseMetricsRequest,
+    cb?: (error: string, rep: DescribeBaseMetricsResponse) => void
+  ): Promise<DescribeBaseMetricsResponse> {
+    return this.request("DescribeBaseMetrics", req, cb)
   }
 }
