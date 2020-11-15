@@ -431,13 +431,13 @@ class DescribeSlowLogTimeSeriesStatsRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 开始时间。
+         * 开始时间，如“2019-09-10 12:13:14”。
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 结束时间。
+         * 结束时间，如“2019-09-10 12:13:14”，结束时间与开始时间的间隔最大可为7天。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -670,13 +670,13 @@ class DescribeDBDiagHistoryRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 开始时间。如“2019-09-10 12:13:14”。
+         * 开始时间，如“2019-09-10 12:13:14”。
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 结束时间。如“2019-09-11 12:13:14”。
+         * 结束时间，如“2019-09-11 12:13:14”，结束时间与开始时间的间隔最大可为2天。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -724,13 +724,13 @@ class DescribeTopSpaceTableTimeSeriesRequest extends  AbstractModel {
         this.SortBy = null;
 
         /**
-         * 开始日期，最早为当日的前第6天，默认为截止日期的前第6天。
+         * 开始日期，最早为当日的前第29天，默认为截止日期的前第6天。
          * @type {string || null}
          */
         this.StartDate = null;
 
         /**
-         * 截止日期，最早为当日的前第6天，默认为当日。
+         * 截止日期，最早为当日的前第29天，默认为当日。
          * @type {string || null}
          */
         this.EndDate = null;
@@ -989,7 +989,7 @@ class SlowLogTopSqlItem extends  AbstractModel {
         this.SqlText = null;
 
         /**
-         * schema
+         * 数据库名
          * @type {string || null}
          */
         this.Schema = null;
@@ -1109,13 +1109,13 @@ class DescribeSlowLogTopSqlsRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 开始时间。
+         * 开始时间，如“2019-09-10 12:13:14”。
          * @type {string || null}
          */
         this.StartTime = null;
 
         /**
-         * 截止时间。
+         * 截止时间，如“2019-09-10 12:13:14”，截止时间与开始时间的间隔最大可为7天。
          * @type {string || null}
          */
         this.EndTime = null;
@@ -1144,6 +1144,12 @@ class DescribeSlowLogTopSqlsRequest extends  AbstractModel {
          */
         this.Offset = null;
 
+        /**
+         * 数据库名称数组。
+         * @type {Array.<SchemaItem> || null}
+         */
+        this.SchemaList = null;
+
     }
 
     /**
@@ -1160,6 +1166,15 @@ class DescribeSlowLogTopSqlsRequest extends  AbstractModel {
         this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.SchemaList) {
+            this.SchemaList = new Array();
+            for (let z in params.SchemaList) {
+                let obj = new SchemaItem();
+                obj.deserialize(params.SchemaList[z]);
+                this.SchemaList.push(obj);
+            }
+        }
 
     }
 }
@@ -1320,6 +1335,12 @@ class DescribeTopSpaceTablesResponse extends  AbstractModel {
         this.TopSpaceTables = null;
 
         /**
+         * 采集表空间数据的时间戳（秒）。
+         * @type {number || null}
+         */
+        this.Timestamp = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1343,7 +1364,36 @@ class DescribeTopSpaceTablesResponse extends  AbstractModel {
                 this.TopSpaceTables.push(obj);
             }
         }
+        this.Timestamp = 'Timestamp' in params ? params.Timestamp : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SchemaItem数组
+ * @class
+ */
+class SchemaItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据库名称
+         * @type {string || null}
+         */
+        this.Schema = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Schema = 'Schema' in params ? params.Schema : null;
 
     }
 }
@@ -1372,5 +1422,6 @@ module.exports = {
     TableSpaceData: TableSpaceData,
     DescribeSlowLogTopSqlsResponse: DescribeSlowLogTopSqlsResponse,
     DescribeTopSpaceTablesResponse: DescribeTopSpaceTablesResponse,
+    SchemaItem: SchemaItem,
 
 }

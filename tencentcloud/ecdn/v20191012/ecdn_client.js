@@ -48,6 +48,7 @@ const ClientCert = models.ClientCert;
 const DomainBriefInfo = models.DomainBriefInfo;
 const StartEcdnDomainResponse = models.StartEcdnDomainResponse;
 const DeleteEcdnDomainResponse = models.DeleteEcdnDomainResponse;
+const Tag = models.Tag;
 const StopEcdnDomainResponse = models.StopEcdnDomainResponse;
 const PurgePathCacheResponse = models.PurgePathCacheResponse;
 const PurgeUrlsCacheResponse = models.PurgeUrlsCacheResponse;

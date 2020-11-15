@@ -345,6 +345,73 @@ class CreateDomainBatchResponse extends  AbstractModel {
 }
 
 /**
+ * 批量操作日志详情
+ * @class
+ */
+class DomainBatchDetailSet extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 详情ID
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * 域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 执行状态：
+doing 执行中。
+failed 操作失败。
+success  操作成功。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 失败原因
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Reason = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreatedOn = null;
+
+        /**
+         * 更新时间
+         * @type {string || null}
+         */
+        this.UpdatedOn = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Reason = 'Reason' in params ? params.Reason : null;
+        this.CreatedOn = 'CreatedOn' in params ? params.CreatedOn : null;
+        this.UpdatedOn = 'UpdatedOn' in params ? params.UpdatedOn : null;
+
+    }
+}
+
+/**
  * ModifyDomainDNSBatch返回参数结构体
  * @class
  */
@@ -868,6 +935,48 @@ False：关闭禁止域名转移状态。
 }
 
 /**
+ * DescribeBatchOperationLogDetails请求参数结构体
+ * @class
+ */
+class DescribeBatchOperationLogDetailsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志ID。
+         * @type {number || null}
+         */
+        this.LogId = null;
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为20，最大值为200。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogId = 'LogId' in params ? params.LogId : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * DescribeDomainNameList返回参数结构体
  * @class
  */
@@ -1152,20 +1261,20 @@ class CertificateInfo extends  AbstractModel {
          * 证件类型。
 SFZ: 身份证。
 HZ: 护照。
-TXZ: 港澳居民来往内地通行证。
-TWSFZ: 台湾居民来往大陆通行证。
+TXZ: 中国港澳居民来往内地通行证。
+TWSFZ: 中国台湾居民来往大陆通行证。
 GWSFZ: 外国人永久居留身份证。
 ORG: 组织机构代码证
 YYZZ: 工商营业执照。
 TYDMZ: 统一社会信用代码证书。
 BDDH: 部队代号
 JDXKZ: 军队单位对外有偿服务许可证。
-SYZS: 事业单位法人证书。
+SYZS: 事业单位法定代表人证书。
 GWCZDJZ: 外国企业常驻代表机构登记证。
-STDJZ: 社会团体法人登记证书。
+STDJZ: 社会团体法定代表人登记证书。
 ZJDJZ: 宗教活动场所登记证。
 MBDJZ: 民办非企业单位登记证书。
-JJDJZ: 基金会法人登记证书。
+JJDJZ: 基金会法定代表人登记证书。
 LSXKZ: 律师事务所执业许可证。
 GWZHDJZ: 外国在华文化中心登记证。
 GWLYDJZ: 外国政府旅游部门常驻代表机构批准登记证。
@@ -1174,8 +1283,8 @@ GWJGZJ: 外国机构证件。
 SHFWJGZ: 社会服务机构登记证书。
 MBXXXKZ: 民办学校办学许可证。
 YLJGXKZ: 医疗机构执业许可证。
-GAJZZ: 港澳居住证
-TWJZZ: 台湾居住证。
+GAJZZ: 中国港澳居住证。
+TWJZZ: 中国台湾居住证。
 QTTYDM: 其他-统一社会信用代码证书。
 GZJGZY: 公证机构执业证。
          * @type {string || null}
@@ -1766,6 +1875,41 @@ class DescribeDomainNameListRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeBatchOperationLogs请求参数结构体
+ * @class
+ */
+class DescribeBatchOperationLogsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 返回数量，默认为20，最大值为200。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
  * UploadImage请求参数结构体
  * @class
  */
@@ -1824,6 +1968,57 @@ class CheckDomainRequest extends  AbstractModel {
         }
         this.DomainName = 'DomainName' in params ? params.DomainName : null;
         this.Period = 'Period' in params ? params.Period : null;
+
+    }
+}
+
+/**
+ * DescribeBatchOperationLogs返回参数结构体
+ * @class
+ */
+class DescribeBatchOperationLogsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数量
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 日志列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DomainBatchLogSet> || null}
+         */
+        this.DomainBatchLogSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.DomainBatchLogSet) {
+            this.DomainBatchLogSet = new Array();
+            for (let z in params.DomainBatchLogSet) {
+                let obj = new DomainBatchLogSet();
+                obj.deserialize(params.DomainBatchLogSet[z]);
+                this.DomainBatchLogSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1899,24 +2094,31 @@ class ModifyDomainDNSBatchRequest extends  AbstractModel {
 }
 
 /**
- * ModifyDomainOwnerBatch请求参数结构体
+ * DescribeBatchOperationLogDetails返回参数结构体
  * @class
  */
-class ModifyDomainOwnerBatchRequest extends  AbstractModel {
+class DescribeBatchOperationLogDetailsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 要过户的域名。
-         * @type {Array.<string> || null}
+         * 总数量。
+         * @type {number || null}
          */
-        this.Domains = null;
+        this.TotalCount = null;
 
         /**
-         * 转入账户的uin。
+         * 日志详情列表。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DomainBatchDetailSet> || null}
+         */
+        this.DomainBatchDetailSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.NewOwnerUin = null;
+        this.RequestId = null;
 
     }
 
@@ -1927,8 +2129,17 @@ class ModifyDomainOwnerBatchRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Domains = 'Domains' in params ? params.Domains : null;
-        this.NewOwnerUin = 'NewOwnerUin' in params ? params.NewOwnerUin : null;
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.DomainBatchDetailSet) {
+            this.DomainBatchDetailSet = new Array();
+            for (let z in params.DomainBatchDetailSet) {
+                let obj = new DomainBatchDetailSet();
+                obj.deserialize(params.DomainBatchDetailSet[z]);
+                this.DomainBatchDetailSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2098,6 +2309,92 @@ class SetDomainAutoRenewRequest extends  AbstractModel {
     }
 }
 
+/**
+ * ModifyDomainOwnerBatch请求参数结构体
+ * @class
+ */
+class ModifyDomainOwnerBatchRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 要过户的域名。
+         * @type {Array.<string> || null}
+         */
+        this.Domains = null;
+
+        /**
+         * 转入账户的uin。
+         * @type {string || null}
+         */
+        this.NewOwnerUin = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domains = 'Domains' in params ? params.Domains : null;
+        this.NewOwnerUin = 'NewOwnerUin' in params ? params.NewOwnerUin : null;
+
+    }
+}
+
+/**
+ * 批量操作记录
+ * @class
+ */
+class DomainBatchLogSet extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 日志ID
+         * @type {number || null}
+         */
+        this.LogId = null;
+
+        /**
+         * 数量
+         * @type {number || null}
+         */
+        this.Number = null;
+
+        /**
+         * 执行状态：
+doing 执行中。
+done 执行完成。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 提交时间
+         * @type {string || null}
+         */
+        this.CreatedOn = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.LogId = 'LogId' in params ? params.LogId : null;
+        this.Number = 'Number' in params ? params.Number : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.CreatedOn = 'CreatedOn' in params ? params.CreatedOn : null;
+
+    }
+}
+
 module.exports = {
     UploadImageResponse: UploadImageResponse,
     BatchModifyDomainInfoRequest: BatchModifyDomainInfoRequest,
@@ -2106,6 +2403,7 @@ module.exports = {
     DeleteTemplateResponse: DeleteTemplateResponse,
     TransferInDomainBatchRequest: TransferInDomainBatchRequest,
     CreateDomainBatchResponse: CreateDomainBatchResponse,
+    DomainBatchDetailSet: DomainBatchDetailSet,
     ModifyDomainDNSBatchResponse: ModifyDomainDNSBatchResponse,
     RenewDomainBatchRequest: RenewDomainBatchRequest,
     TransferInDomainBatchResponse: TransferInDomainBatchResponse,
@@ -2117,6 +2415,7 @@ module.exports = {
     DescribeDomainBaseInfoResponse: DescribeDomainBaseInfoResponse,
     DescribeTemplateListResponse: DescribeTemplateListResponse,
     TransferProhibitionBatchRequest: TransferProhibitionBatchRequest,
+    DescribeBatchOperationLogDetailsRequest: DescribeBatchOperationLogDetailsRequest,
     DescribeDomainNameListResponse: DescribeDomainNameListResponse,
     ContactInfo: ContactInfo,
     DescribeDomainPriceListResponse: DescribeDomainPriceListResponse,
@@ -2133,14 +2432,18 @@ module.exports = {
     DescribeDomainBaseInfoRequest: DescribeDomainBaseInfoRequest,
     DomainBaseInfo: DomainBaseInfo,
     DescribeDomainNameListRequest: DescribeDomainNameListRequest,
+    DescribeBatchOperationLogsRequest: DescribeBatchOperationLogsRequest,
     UploadImageRequest: UploadImageRequest,
     CheckDomainRequest: CheckDomainRequest,
+    DescribeBatchOperationLogsResponse: DescribeBatchOperationLogsResponse,
     TransferProhibitionBatchResponse: TransferProhibitionBatchResponse,
     ModifyDomainDNSBatchRequest: ModifyDomainDNSBatchRequest,
-    ModifyDomainOwnerBatchRequest: ModifyDomainOwnerBatchRequest,
+    DescribeBatchOperationLogDetailsResponse: DescribeBatchOperationLogDetailsResponse,
     CheckBatchStatusResponse: CheckBatchStatusResponse,
     DescribeTemplateListRequest: DescribeTemplateListRequest,
     ModifyDomainOwnerBatchResponse: ModifyDomainOwnerBatchResponse,
     SetDomainAutoRenewRequest: SetDomainAutoRenewRequest,
+    ModifyDomainOwnerBatchRequest: ModifyDomainOwnerBatchRequest,
+    DomainBatchLogSet: DomainBatchLogSet,
 
 }

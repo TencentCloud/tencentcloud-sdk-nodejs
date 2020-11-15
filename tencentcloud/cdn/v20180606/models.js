@@ -671,6 +671,89 @@ off：关闭
 }
 
 /**
+ * DescribeScdnTopData返回参数结构体
+ * @class
+ */
+class DescribeScdnTopDataResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * WAF 攻击类型统计
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ScdnTypeData> || null}
+         */
+        this.TopTypeData = null;
+
+        /**
+         * TOP 攻击源 IP 统计
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ScdnTopData> || null}
+         */
+        this.TopIpData = null;
+
+        /**
+         * 查询的SCDN类型，当前仅支持 waf
+         * @type {string || null}
+         */
+        this.Mode = null;
+
+        /**
+         * TOP URL 统计
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ScdnTopUrlData> || null}
+         */
+        this.TopUrlData = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TopTypeData) {
+            this.TopTypeData = new Array();
+            for (let z in params.TopTypeData) {
+                let obj = new ScdnTypeData();
+                obj.deserialize(params.TopTypeData[z]);
+                this.TopTypeData.push(obj);
+            }
+        }
+
+        if (params.TopIpData) {
+            this.TopIpData = new Array();
+            for (let z in params.TopIpData) {
+                let obj = new ScdnTopData();
+                obj.deserialize(params.TopIpData[z]);
+                this.TopIpData.push(obj);
+            }
+        }
+        this.Mode = 'Mode' in params ? params.Mode : null;
+
+        if (params.TopUrlData) {
+            this.TopUrlData = new Array();
+            for (let z in params.TopUrlData) {
+                let obj = new ScdnTopUrlData();
+                obj.deserialize(params.TopUrlData[z]);
+                this.TopUrlData.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ImageOptimization配置
  * @class
  */
@@ -1377,45 +1460,44 @@ class UserAgentFilter extends  AbstractModel {
 }
 
 /**
- * DescribeScdnTopData返回参数结构体
+ * 缓存配置高级版本规则
  * @class
  */
-class DescribeScdnTopDataResponse extends  AbstractModel {
+class AdvanceCacheRule extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * WAF 攻击类型统计
+         * 规则类型：
+all：所有文件生效
+file：指定文件后缀生效
+directory：指定路径生效
+path：指定绝对路径生效
+default：源站未返回 max-age 情况下的缓存规则
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<ScdnTypeData> || null}
-         */
-        this.TopTypeData = null;
-
-        /**
-         * TOP 攻击源 IP 统计
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<ScdnTopData> || null}
-         */
-        this.TopIpData = null;
-
-        /**
-         * 查询的SCDN类型，当前仅支持 waf
          * @type {string || null}
          */
-        this.Mode = null;
+        this.CacheType = null;
 
         /**
-         * TOP URL 统计
+         * 对应类型下的匹配内容：
+all 时填充 *
+file 时填充后缀名，如 jpg、txt
+directory 时填充路径，如 /xxx/test/
+path 时填充绝对路径，如 /xxx/test.html
+default 时填充 "no max-age"
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<ScdnTopUrlData> || null}
+         * @type {Array.<string> || null}
          */
-        this.TopUrlData = null;
+        this.CacheContents = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
+         * 缓存过期时间
+单位为秒，最大可设置为 365 天
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
          */
-        this.RequestId = null;
+        this.CacheTime = null;
 
     }
 
@@ -1426,35 +1508,9 @@ class DescribeScdnTopDataResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.TopTypeData) {
-            this.TopTypeData = new Array();
-            for (let z in params.TopTypeData) {
-                let obj = new ScdnTypeData();
-                obj.deserialize(params.TopTypeData[z]);
-                this.TopTypeData.push(obj);
-            }
-        }
-
-        if (params.TopIpData) {
-            this.TopIpData = new Array();
-            for (let z in params.TopIpData) {
-                let obj = new ScdnTopData();
-                obj.deserialize(params.TopIpData[z]);
-                this.TopIpData.push(obj);
-            }
-        }
-        this.Mode = 'Mode' in params ? params.Mode : null;
-
-        if (params.TopUrlData) {
-            this.TopUrlData = new Array();
-            for (let z in params.TopUrlData) {
-                let obj = new ScdnTopUrlData();
-                obj.deserialize(params.TopUrlData[z]);
-                this.TopUrlData.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.CacheType = 'CacheType' in params ? params.CacheType : null;
+        this.CacheContents = 'CacheContents' in params ? params.CacheContents : null;
+        this.CacheTime = 'CacheTime' in params ? params.CacheTime : null;
 
     }
 }
@@ -1730,6 +1786,56 @@ bandwidth：带宽计费
 }
 
 /**
+ * 访问协议强制跳转配置，默认为关闭状态
+ * @class
+ */
+class ForceRedirect extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 访问强制跳转配置开关
+on：开启
+off：关闭
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+        /**
+         * 访问强制跳转类型
+http：强制 http 跳转
+https：强制 https 跳转
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RedirectType = null;
+
+        /**
+         * 强制跳转时返回状态码 
+支持 301、302
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RedirectStatusCode = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
+        this.RedirectType = 'RedirectType' in params ? params.RedirectType : null;
+        this.RedirectStatusCode = 'RedirectStatusCode' in params ? params.RedirectStatusCode : null;
+
+    }
+}
+
+/**
  * 分路径回源配置规则。
  * @class
  */
@@ -1745,21 +1851,21 @@ class PathRule extends  AbstractModel {
         this.Regex = null;
 
         /**
-         * URL路径。
+         * 匹配的URL路径。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Path = null;
 
         /**
-         * 路径匹配时的回源源站。
+         * 路径匹配时的回源源站。暂不支持开了私有读写的COS源。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Origin = null;
 
         /**
-         * 路径匹配时的回源Host头部。
+         * 路径匹配时回源的Host头部。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
@@ -1773,14 +1879,14 @@ class PathRule extends  AbstractModel {
         this.OriginArea = null;
 
         /**
-         * 路径匹配时的回源URI路径。
+         * 路径匹配时回源的URI路径。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.ForwardUri = null;
 
         /**
-         * 路径匹配时的回源头部设置。
+         * 路径匹配时回源的头部设置。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<HttpHeaderRule> || null}
          */
@@ -2119,6 +2225,34 @@ class DisableCachesRequest extends  AbstractModel {
             return;
         }
         this.Urls = 'Urls' in params ? params.Urls : null;
+
+    }
+}
+
+/**
+ * DuplicateDomainConfig返回参数结构体
+ * @class
+ */
+class DuplicateDomainConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2988,6 +3122,34 @@ class DescribeDomainsConfigResponse extends  AbstractModel {
         }
         this.TotalNumber = 'TotalNumber' in params ? params.TotalNumber : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDiagnoseReport请求参数结构体
+ * @class
+ */
+class DescribeDiagnoseReportRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 报告ID
+         * @type {string || null}
+         */
+        this.ReportId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ReportId = 'ReportId' in params ? params.ReportId : null;
 
     }
 }
@@ -5100,6 +5262,41 @@ class DescribeCertDomainsResponse extends  AbstractModel {
 }
 
 /**
+ * DuplicateDomainConfig请求参数结构体
+ * @class
+ */
+class DuplicateDomainConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 新增域名
+         * @type {string || null}
+         */
+        this.Domain = null;
+
+        /**
+         * 被拷贝配置的域名
+         * @type {string || null}
+         */
+        this.ReferenceDomain = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Domain = 'Domain' in params ? params.Domain : null;
+        this.ReferenceDomain = 'ReferenceDomain' in params ? params.ReferenceDomain : null;
+
+    }
+}
+
+/**
  * 时间戳防盗链模式 D 配置
 时间戳防盗链模式 D 的访问 URL 格式为：http://DomainName/FileName?sign=md5hash&t=timestamp
 其中 timestamp 为十进制或十六进制 UNIX 时间戳；
@@ -5366,6 +5563,34 @@ blacklist：黑名单，表示仅对 FileExtensions 中的类型进行鉴权
         this.ExpireTime = 'ExpireTime' in params ? params.ExpireTime : null;
         this.FileExtensions = 'FileExtensions' in params ? params.FileExtensions : null;
         this.FilterType = 'FilterType' in params ? params.FilterType : null;
+
+    }
+}
+
+/**
+ * scdn相关的配置
+ * @class
+ */
+class SecurityConfig extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * on|off
+         * @type {string || null}
+         */
+        this.Switch = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Switch = 'Switch' in params ? params.Switch : null;
 
     }
 }
@@ -7048,6 +7273,41 @@ class ManageClsTopicDomainsRequest extends  AbstractModel {
 }
 
 /**
+ * ListDiagnoseReport请求参数结构体
+ * @class
+ */
+class ListDiagnoseReportRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 用于搜索诊断URL的关键字，不填时返回用户所有的诊断任务。
+         * @type {string || null}
+         */
+        this.KeyWords = null;
+
+        /**
+         * 用于搜索诊断系统返回的诊断链接，形如：http://cdn.cloud.tencent.com/self_diagnose/xxxxx
+         * @type {string || null}
+         */
+        this.DiagnoseLink = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.KeyWords = 'KeyWords' in params ? params.KeyWords : null;
+        this.DiagnoseLink = 'DiagnoseLink' in params ? params.DiagnoseLink : null;
+
+    }
+}
+
+/**
  * 节点缓存过期时间配置，分为以下两种：
 + 基础版缓存过期规则配置
 + 高级版缓存过期规则配置
@@ -7113,38 +7373,29 @@ class Cache extends  AbstractModel {
 }
 
 /**
- * 访问协议强制跳转配置，默认为关闭状态
+ * 诊断报告内容数据
  * @class
  */
-class ForceRedirect extends  AbstractModel {
+class DiagnoseData extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 访问强制跳转配置开关
-on：开启
-off：关闭
+         * 诊断报告内容
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DiagnoseUnit> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 当前诊断项是否正常。
+"ok"：正常
+"error"：异常
+"warning"："警告"
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Switch = null;
-
-        /**
-         * 访问强制跳转类型
-http：强制 http 跳转
-https：强制 https 跳转
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.RedirectType = null;
-
-        /**
-         * 强制跳转时返回状态码 
-支持 301、302
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.RedirectStatusCode = null;
+        this.Status = null;
 
     }
 
@@ -7155,9 +7406,16 @@ https：强制 https 跳转
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
-        this.RedirectType = 'RedirectType' in params ? params.RedirectType : null;
-        this.RedirectStatusCode = 'RedirectStatusCode' in params ? params.RedirectStatusCode : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new DiagnoseUnit();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -8154,6 +8412,41 @@ off：关闭
 }
 
 /**
+ * CreateDiagnoseUrl返回参数结构体
+ * @class
+ */
+class CreateDiagnoseUrlResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 系统生成的诊断链接，一个诊断链接最多可访问10次，有效期为24h。
+         * @type {string || null}
+         */
+        this.DiagnoseLink = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiagnoseLink = 'DiagnoseLink' in params ? params.DiagnoseLink : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateClsLogTopic请求参数结构体
  * @class
  */
@@ -8955,6 +9248,34 @@ enable：当前为可用状态，已解禁，可正常访问
 }
 
 /**
+ * CreateDiagnoseUrl请求参数结构体
+ * @class
+ */
+class CreateDiagnoseUrlRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需诊断的url，形如：http://www.test.com/test.txt。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Url = 'Url' in params ? params.Url : null;
+
+    }
+}
+
+/**
  * PurgeUrlsCache返回参数结构体
  * @class
  */
@@ -9213,44 +9534,34 @@ class DescribeCdnIpResponse extends  AbstractModel {
 }
 
 /**
- * 缓存配置高级版本规则
+ * DescribeCdnData返回参数结构体
  * @class
  */
-class AdvanceCacheRule extends  AbstractModel {
+class DescribeCdnDataResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 规则类型：
-all：所有文件生效
-file：指定文件后缀生效
-directory：指定路径生效
-path：指定绝对路径生效
-default：源站未返回 max-age 情况下的缓存规则
-注意：此字段可能返回 null，表示取不到有效值。
+         * 返回数据的时间粒度，查询时指定：
+min：1 分钟粒度
+5min：5 分钟粒度
+hour：1 小时粒度
+day：天粒度
          * @type {string || null}
          */
-        this.CacheType = null;
+        this.Interval = null;
 
         /**
-         * 对应类型下的匹配内容：
-all 时填充 *
-file 时填充后缀名，如 jpg、txt
-directory 时填充路径，如 /xxx/test/
-path 时填充绝对路径，如 /xxx/test.html
-default 时填充 "no max-age"
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<string> || null}
+         * 指定条件查询得到的数据明细
+         * @type {Array.<ResourceData> || null}
          */
-        this.CacheContents = null;
+        this.Data = null;
 
         /**
-         * 缓存过期时间
-单位为秒，最大可设置为 365 天
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
          */
-        this.CacheTime = null;
+        this.RequestId = null;
 
     }
 
@@ -9261,9 +9572,17 @@ default 时填充 "no max-age"
         if (!params) {
             return;
         }
-        this.CacheType = 'CacheType' in params ? params.CacheType : null;
-        this.CacheContents = 'CacheContents' in params ? params.CacheContents : null;
-        this.CacheTime = 'CacheTime' in params ? params.CacheTime : null;
+        this.Interval = 'Interval' in params ? params.Interval : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new ResourceData();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -10182,6 +10501,130 @@ delete：刷新全部资源
 }
 
 /**
+ * DescribeDiagnoseReport返回参数结构体
+ * @class
+ */
+class DescribeDiagnoseReportResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 诊断报告基础信息
+         * @type {DiagnoseData || null}
+         */
+        this.BaskInfo = null;
+
+        /**
+         * CNAME检测信息
+         * @type {DiagnoseData || null}
+         */
+        this.CnameInfo = null;
+
+        /**
+         * 客户端检测信息
+         * @type {DiagnoseData || null}
+         */
+        this.ClientInfo = null;
+
+        /**
+         * DNS检测信息
+         * @type {DiagnoseData || null}
+         */
+        this.DnsInfo = null;
+
+        /**
+         * 网络检测信息
+         * @type {DiagnoseData || null}
+         */
+        this.NetworkInfo = null;
+
+        /**
+         * 边缘节点检测信息
+         * @type {DiagnoseData || null}
+         */
+        this.OcNodeInfo = null;
+
+        /**
+         * 中间源节点检测信息
+         * @type {DiagnoseData || null}
+         */
+        this.MidNodeInfo = null;
+
+        /**
+         * 源站检测信息
+         * @type {DiagnoseData || null}
+         */
+        this.OriginInfo = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.BaskInfo) {
+            let obj = new DiagnoseData();
+            obj.deserialize(params.BaskInfo)
+            this.BaskInfo = obj;
+        }
+
+        if (params.CnameInfo) {
+            let obj = new DiagnoseData();
+            obj.deserialize(params.CnameInfo)
+            this.CnameInfo = obj;
+        }
+
+        if (params.ClientInfo) {
+            let obj = new DiagnoseData();
+            obj.deserialize(params.ClientInfo)
+            this.ClientInfo = obj;
+        }
+
+        if (params.DnsInfo) {
+            let obj = new DiagnoseData();
+            obj.deserialize(params.DnsInfo)
+            this.DnsInfo = obj;
+        }
+
+        if (params.NetworkInfo) {
+            let obj = new DiagnoseData();
+            obj.deserialize(params.NetworkInfo)
+            this.NetworkInfo = obj;
+        }
+
+        if (params.OcNodeInfo) {
+            let obj = new DiagnoseData();
+            obj.deserialize(params.OcNodeInfo)
+            this.OcNodeInfo = obj;
+        }
+
+        if (params.MidNodeInfo) {
+            let obj = new DiagnoseData();
+            obj.deserialize(params.MidNodeInfo)
+            this.MidNodeInfo = obj;
+        }
+
+        if (params.OriginInfo) {
+            let obj = new DiagnoseData();
+            obj.deserialize(params.OriginInfo)
+            this.OriginInfo = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 访问明细数据类型
  * @class
  */
@@ -10714,6 +11157,59 @@ certExpireTime，证书过期时间
 }
 
 /**
+ * 客户端信息
+ * @class
+ */
+class ClientInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 省份。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProvName = null;
+
+        /**
+         * 国家。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Country = null;
+
+        /**
+         * 运营商。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.IspName = null;
+
+        /**
+         * 客户端IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProvName = 'ProvName' in params ? params.ProvName : null;
+        this.Country = 'Country' in params ? params.Country : null;
+        this.IspName = 'IspName' in params ? params.IspName : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+
+    }
+}
+
+/**
  * DescribePurgeTasks请求参数结构体
  * @class
  */
@@ -11119,18 +11615,24 @@ class LogSetInfo extends  AbstractModel {
 }
 
 /**
- * scdn相关的配置
+ * ListDiagnoseReport返回参数结构体
  * @class
  */
-class SecurityConfig extends  AbstractModel {
+class ListDiagnoseReportResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * on|off
+         * 诊断信息。
+         * @type {Array.<DiagnoseInfo> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.Switch = null;
+        this.RequestId = null;
 
     }
 
@@ -11141,7 +11643,16 @@ class SecurityConfig extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Switch = 'Switch' in params ? params.Switch : null;
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new DiagnoseInfo();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -11773,60 +12284,6 @@ class Compatibility extends  AbstractModel {
 }
 
 /**
- * DescribeCdnData返回参数结构体
- * @class
- */
-class DescribeCdnDataResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 返回数据的时间粒度，查询时指定：
-min：1 分钟粒度
-5min：5 分钟粒度
-hour：1 小时粒度
-day：天粒度
-         * @type {string || null}
-         */
-        this.Interval = null;
-
-        /**
-         * 指定条件查询得到的数据明细
-         * @type {Array.<ResourceData> || null}
-         */
-        this.Data = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Interval = 'Interval' in params ? params.Interval : null;
-
-        if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new ResourceData();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
-        }
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
  * Cls日志搜索结果
  * @class
  */
@@ -11987,6 +12444,136 @@ blacklist：黑名单
                 let obj = new IpFilterPathRule();
                 obj.deserialize(params.FilterRules[z]);
                 this.FilterRules.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 诊断报告单元信息
+ * @class
+ */
+class DiagnoseUnit extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 内容单元英文名称。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 内容单元中文名称。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.KeyText = null;
+
+        /**
+         * 报告内容。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Value = null;
+
+        /**
+         * 报告内容。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ValueText = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.KeyText = 'KeyText' in params ? params.KeyText : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.ValueText = 'ValueText' in params ? params.ValueText : null;
+
+    }
+}
+
+/**
+ * 诊断信息
+ * @class
+ */
+class DiagnoseInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待诊断的URL。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DiagnoseUrl = null;
+
+        /**
+         * 由系统生成的诊断链接。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DiagnoseLink = null;
+
+        /**
+         * 诊断创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 诊断链接过期时间。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ExpireDate = null;
+
+        /**
+         * 诊断链接当前访问次数，一个诊断链接最多可访问10次。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.VisitCount = null;
+
+        /**
+         * 访问诊断链接的客户端简易信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DiagnoseList> || null}
+         */
+        this.ClientList = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiagnoseUrl = 'DiagnoseUrl' in params ? params.DiagnoseUrl : null;
+        this.DiagnoseLink = 'DiagnoseLink' in params ? params.DiagnoseLink : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.ExpireDate = 'ExpireDate' in params ? params.ExpireDate : null;
+        this.VisitCount = 'VisitCount' in params ? params.VisitCount : null;
+
+        if (params.ClientList) {
+            this.ClientList = new Array();
+            for (let z in params.ClientList) {
+                let obj = new DiagnoseList();
+                obj.deserialize(params.ClientList[z]);
+                this.ClientList.push(obj);
             }
         }
 
@@ -12742,6 +13329,80 @@ class DescribeDomainsRequest extends  AbstractModel {
 }
 
 /**
+ * 客户端访问诊断URL信息列表
+ * @class
+ */
+class DiagnoseList extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 诊断任务标签。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DiagnoseTag = null;
+
+        /**
+         * 报告ID，用于获取详细诊断报告。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ReportId = null;
+
+        /**
+         * 客户端信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ClientInfo> || null}
+         */
+        this.ClientInfo = null;
+
+        /**
+         * 最终诊断结果。
+-1：已提交
+0  ：检测中
+1  ：检测正常
+2  ： 检测异常
+3  ： 诊断页面异常关闭
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FinalDiagnose = null;
+
+        /**
+         * 诊断任务创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DiagnoseTag = 'DiagnoseTag' in params ? params.DiagnoseTag : null;
+        this.ReportId = 'ReportId' in params ? params.ReportId : null;
+
+        if (params.ClientInfo) {
+            this.ClientInfo = new Array();
+            for (let z in params.ClientInfo) {
+                let obj = new ClientInfo();
+                obj.deserialize(params.ClientInfo[z]);
+                this.ClientInfo.push(obj);
+            }
+        }
+        this.FinalDiagnose = 'FinalDiagnose' in params ? params.FinalDiagnose : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+
+    }
+}
+
+/**
  * IP黑白名单分路径配置
  * @class
  */
@@ -12818,6 +13479,7 @@ module.exports = {
     DescribePushQuotaResponse: DescribePushQuotaResponse,
     DescribePurgeQuotaResponse: DescribePurgeQuotaResponse,
     Authentication: Authentication,
+    DescribeScdnTopDataResponse: DescribeScdnTopDataResponse,
     ImageOptimization: ImageOptimization,
     Https: Https,
     RuleCache: RuleCache,
@@ -12832,19 +13494,21 @@ module.exports = {
     DescribePurgeQuotaRequest: DescribePurgeQuotaRequest,
     Referer: Referer,
     UserAgentFilter: UserAgentFilter,
-    DescribeScdnTopDataResponse: DescribeScdnTopDataResponse,
+    AdvanceCacheRule: AdvanceCacheRule,
     EnableClsLogTopicRequest: EnableClsLogTopicRequest,
     UpdateImageConfigResponse: UpdateImageConfigResponse,
     CacheConfigNoCache: CacheConfigNoCache,
     AccessControl: AccessControl,
     DeleteCdnDomainRequest: DeleteCdnDomainRequest,
     DescribePayTypeResponse: DescribePayTypeResponse,
+    ForceRedirect: ForceRedirect,
     PathRule: PathRule,
     ListTopDataRequest: ListTopDataRequest,
     ListClsTopicDomainsRequest: ListClsTopicDomainsRequest,
     DescribeDomainsResponse: DescribeDomainsResponse,
     UpdateImageConfigRequest: UpdateImageConfigRequest,
     DisableCachesRequest: DisableCachesRequest,
+    DuplicateDomainConfigResponse: DuplicateDomainConfigResponse,
     CompressionRule: CompressionRule,
     GuetzliAdapter: GuetzliAdapter,
     Origin: Origin,
@@ -12860,6 +13524,7 @@ module.exports = {
     UpdatePayTypeResponse: UpdatePayTypeResponse,
     TopicInfo: TopicInfo,
     DescribeDomainsConfigResponse: DescribeDomainsConfigResponse,
+    DescribeDiagnoseReportRequest: DescribeDiagnoseReportRequest,
     BriefDomain: BriefDomain,
     UpdatePayTypeRequest: UpdatePayTypeRequest,
     TpgAdapter: TpgAdapter,
@@ -12890,10 +13555,12 @@ module.exports = {
     CreateScdnLogTaskResponse: CreateScdnLogTaskResponse,
     MapInfo: MapInfo,
     DescribeCertDomainsResponse: DescribeCertDomainsResponse,
+    DuplicateDomainConfigRequest: DuplicateDomainConfigRequest,
     AuthenticationTypeD: AuthenticationTypeD,
     AuthenticationTypeC: AuthenticationTypeC,
     AuthenticationTypeB: AuthenticationTypeB,
     AuthenticationTypeA: AuthenticationTypeA,
+    SecurityConfig: SecurityConfig,
     DescribePushTasksResponse: DescribePushTasksResponse,
     ResourceOriginData: ResourceOriginData,
     IpStatus: IpStatus,
@@ -12915,8 +13582,9 @@ module.exports = {
     SummarizedData: SummarizedData,
     VerifyDomainRecordResponse: VerifyDomainRecordResponse,
     ManageClsTopicDomainsRequest: ManageClsTopicDomainsRequest,
+    ListDiagnoseReportRequest: ListDiagnoseReportRequest,
     Cache: Cache,
-    ForceRedirect: ForceRedirect,
+    DiagnoseData: DiagnoseData,
     DescribeOriginDataRequest: DescribeOriginDataRequest,
     RangeOriginPull: RangeOriginPull,
     ListScdnLogTasksRequest: ListScdnLogTasksRequest,
@@ -12929,6 +13597,7 @@ module.exports = {
     DescribeUrlViolationsRequest: DescribeUrlViolationsRequest,
     RefererRule: RefererRule,
     IpFreqLimit: IpFreqLimit,
+    CreateDiagnoseUrlResponse: CreateDiagnoseUrlResponse,
     CreateClsLogTopicRequest: CreateClsLogTopicRequest,
     CacheOptResult: CacheOptResult,
     CreateVerifyRecordResponse: CreateVerifyRecordResponse,
@@ -12945,6 +13614,7 @@ module.exports = {
     ScdnTopData: ScdnTopData,
     DomainLog: DomainLog,
     GetDisableRecordsRequest: GetDisableRecordsRequest,
+    CreateDiagnoseUrlRequest: CreateDiagnoseUrlRequest,
     PurgeUrlsCacheResponse: PurgeUrlsCacheResponse,
     DeleteClsLogTopicResponse: DeleteClsLogTopicResponse,
     DescribeBillingDataResponse: DescribeBillingDataResponse,
@@ -12952,7 +13622,7 @@ module.exports = {
     SchemeKey: SchemeKey,
     DescribeImageConfigRequest: DescribeImageConfigRequest,
     DescribeCdnIpResponse: DescribeCdnIpResponse,
-    AdvanceCacheRule: AdvanceCacheRule,
+    DescribeCdnDataResponse: DescribeCdnDataResponse,
     DescribeIpStatusResponse: DescribeIpStatusResponse,
     DescribeDistrictIspDataRequest: DescribeDistrictIspDataRequest,
     ListScdnLogTasksResponse: ListScdnLogTasksResponse,
@@ -12971,6 +13641,7 @@ module.exports = {
     ClsLogObject: ClsLogObject,
     RegionMapRelation: RegionMapRelation,
     PurgePathCacheRequest: PurgePathCacheRequest,
+    DescribeDiagnoseReportResponse: DescribeDiagnoseReportResponse,
     CdnData: CdnData,
     PurgeUrlsCacheRequest: PurgeUrlsCacheRequest,
     StartCdnDomainRequest: StartCdnDomainRequest,
@@ -12984,6 +13655,7 @@ module.exports = {
     ResponseHeaderCache: ResponseHeaderCache,
     ResourceBillingData: ResourceBillingData,
     Sort: Sort,
+    ClientInfo: ClientInfo,
     DescribePurgeTasksRequest: DescribePurgeTasksRequest,
     PushUrlsCacheResponse: PushUrlsCacheResponse,
     StopCdnDomainResponse: StopCdnDomainResponse,
@@ -12992,17 +13664,18 @@ module.exports = {
     MaxAge: MaxAge,
     UpdateDomainConfigResponse: UpdateDomainConfigResponse,
     LogSetInfo: LogSetInfo,
-    SecurityConfig: SecurityConfig,
+    ListDiagnoseReportResponse: ListDiagnoseReportResponse,
     SearchClsLogRequest: SearchClsLogRequest,
     UpdateDomainConfigRequest: UpdateDomainConfigRequest,
     AwsPrivateAccess: AwsPrivateAccess,
     ManageClsTopicDomainsResponse: ManageClsTopicDomainsResponse,
     VideoSeek: VideoSeek,
     Compatibility: Compatibility,
-    DescribeCdnDataResponse: DescribeCdnDataResponse,
     ClsSearchLogs: ClsSearchLogs,
     DescribeUrlViolationsResponse: DescribeUrlViolationsResponse,
     IpFilter: IpFilter,
+    DiagnoseUnit: DiagnoseUnit,
+    DiagnoseInfo: DiagnoseInfo,
     DescribePurgeTasksResponse: DescribePurgeTasksResponse,
     UrlRedirectRule: UrlRedirectRule,
     ErrorPageRule: ErrorPageRule,
@@ -13016,6 +13689,7 @@ module.exports = {
     CacheTagKey: CacheTagKey,
     ScdnTypeData: ScdnTypeData,
     DescribeDomainsRequest: DescribeDomainsRequest,
+    DiagnoseList: DiagnoseList,
     IpFilterPathRule: IpFilterPathRule,
 
 }

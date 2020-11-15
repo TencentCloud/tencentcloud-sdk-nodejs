@@ -104,7 +104,7 @@ class ModifyAllRuleStatusResponse extends  AbstractModel {
         super();
 
         /**
-         * 0: 修改成功, !0: 修改失败
+         * 0: 修改成功, 其他: 修改失败
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -341,7 +341,7 @@ class ModifySequenceRulesResponse extends  AbstractModel {
         super();
 
         /**
-         * 0: 修改成功, !0: 修改失败
+         * 0: 修改成功, 其他: 修改失败
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -377,7 +377,7 @@ class ModifyAcRuleResponse extends  AbstractModel {
         super();
 
         /**
-         * 装填值
+         * 状态值，0:操作成功
          * @type {number || null}
          */
         this.Status = null;
@@ -728,7 +728,7 @@ class DeleteAllAccessControlRuleRequest extends  AbstractModel {
         this.Direction = null;
 
         /**
-         * 边ID
+         * VPC间防火墙开关ID
          * @type {string || null}
          */
         this.EdgeId = null;
@@ -946,7 +946,7 @@ class ModifyItemSwitchStatusRequest extends  AbstractModel {
         this.Id = null;
 
         /**
-         * 状态值
+         * 状态值，0: 关闭 ,1:开启
          * @type {number || null}
          */
         this.Status = null;
@@ -1178,7 +1178,7 @@ class CreateAcRulesResponse extends  AbstractModel {
         super();
 
         /**
-         * 状态值
+         * 状态值，0:操作成功
          * @type {number || null}
          */
         this.Status = null;
@@ -1484,7 +1484,7 @@ class CreateAcRulesRequest extends  AbstractModel {
         this.Overwrite = null;
 
         /**
-         * NAT实例ID, Area存在的时候这个必传
+         * NAT实例ID, 参数Area存在的时候这个必传
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -2039,7 +2039,7 @@ class ModifyAllSwitchStatusResponse extends  AbstractModel {
         super();
 
         /**
-         * 修改成功与否状态值
+         * 开启或者关闭成功与否状态值
          * @type {number || null}
          */
         this.Status = null;

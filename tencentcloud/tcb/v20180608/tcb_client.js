@@ -21,23 +21,26 @@ const CreateStaticStoreResponse = models.CreateStaticStoreResponse;
 const DescribeEnvLimitRequest = models.DescribeEnvLimitRequest;
 const DescribeQuotaDataResponse = models.DescribeQuotaDataResponse;
 const CheckTcbServiceResponse = models.CheckTcbServiceResponse;
-const DescribeEndUserLoginStatisticRequest = models.DescribeEndUserLoginStatisticRequest;
+const CreateCloudBaseRunServerVersionRequest = models.CreateCloudBaseRunServerVersionRequest;
 const StorageInfo = models.StorageInfo;
 const DescribeCloudBaseRunVersionSnapshotRequest = models.DescribeCloudBaseRunVersionSnapshotRequest;
 const KVPair = models.KVPair;
+const DescribeCloudBaseRunServerVersionRequest = models.DescribeCloudBaseRunServerVersionRequest;
 const FunctionInfo = models.FunctionInfo;
 const CreatePostpayPackageResponse = models.CreatePostpayPackageResponse;
+const DescribeCloudBaseRunServerVersionResponse = models.DescribeCloudBaseRunServerVersionResponse;
 const CommonServiceAPIRequest = models.CommonServiceAPIRequest;
 const PostpayEnvQuota = models.PostpayEnvQuota;
 const DescribeEndUsersResponse = models.DescribeEndUsersResponse;
 const AuthDomain = models.AuthDomain;
 const LogServiceInfo = models.LogServiceInfo;
+const EstablishCloudBaseRunServerRequest = models.EstablishCloudBaseRunServerRequest;
 const DescribeEnvLimitResponse = models.DescribeEnvLimitResponse;
 const CreateStaticStoreRequest = models.CreateStaticStoreRequest;
 const CommonServiceAPIResponse = models.CommonServiceAPIResponse;
 const DescribeEndUserStatisticResponse = models.DescribeEndUserStatisticResponse;
 const DescribeExtraPkgBillingInfoResponse = models.DescribeExtraPkgBillingInfoResponse;
-const ReinstateEnvResponse = models.ReinstateEnvResponse;
+const DestroyStaticStoreResponse = models.DestroyStaticStoreResponse;
 const DescribePostpayPackageFreeQuotasRequest = models.DescribePostpayPackageFreeQuotasRequest;
 const CreateAuthDomainResponse = models.CreateAuthDomainResponse;
 const DescribeCloudBaseBuildServiceResponse = models.DescribeCloudBaseBuildServiceResponse;
@@ -53,8 +56,10 @@ const CloudBaseCodeRepoDetail = models.CloudBaseCodeRepoDetail;
 const CheckTcbServiceRequest = models.CheckTcbServiceRequest;
 const ModifyDatabaseACLResponse = models.ModifyDatabaseACLResponse;
 const StaticStorageInfo = models.StaticStorageInfo;
+const OrderInfo = models.OrderInfo;
 const CloudRunServiceSimpleVersionSnapshot = models.CloudRunServiceSimpleVersionSnapshot;
 const DescribeExtraPkgBillingInfoRequest = models.DescribeExtraPkgBillingInfoRequest;
+const CreateCloudBaseRunResourceRequest = models.CreateCloudBaseRunResourceRequest;
 const CreatePostpayPackageRequest = models.CreatePostpayPackageRequest;
 const DescribeEnvFreeQuotaRequest = models.DescribeEnvFreeQuotaRequest;
 const DatabasesInfo = models.DatabasesInfo;
@@ -62,17 +67,24 @@ const LoginStatistic = models.LoginStatistic;
 const DescribeAuthDomainsRequest = models.DescribeAuthDomainsRequest;
 const DescribeEndUserLoginStatisticResponse = models.DescribeEndUserLoginStatisticResponse;
 const DescribeAuthDomainsResponse = models.DescribeAuthDomainsResponse;
+const CloudBaseRunVolumeMount = models.CloudBaseRunVolumeMount;
 const ReinstateEnvRequest = models.ReinstateEnvRequest;
+const CreateCloudBaseRunResourceResponse = models.CreateCloudBaseRunResourceResponse;
 const DescribeDatabaseACLRequest = models.DescribeDatabaseACLRequest;
 const PlatformStatistic = models.PlatformStatistic;
 const CreateHostingDomainRequest = models.CreateHostingDomainRequest;
-const DestroyStaticStoreResponse = models.DestroyStaticStoreResponse;
+const CreateCloudBaseRunServerVersionResponse = models.CreateCloudBaseRunServerVersionResponse;
 const DeleteEndUserResponse = models.DeleteEndUserResponse;
 const EnvBillingInfoItem = models.EnvBillingInfoItem;
+const DescribeEndUserLoginStatisticRequest = models.DescribeEndUserLoginStatisticRequest;
 const DescribeEnvFreeQuotaResponse = models.DescribeEnvFreeQuotaResponse;
+const CloudBaseEsInfo = models.CloudBaseEsInfo;
 const ModifyEnvResponse = models.ModifyEnvResponse;
 const ModifyEndUserRequest = models.ModifyEndUserRequest;
 const DescribeDatabaseACLResponse = models.DescribeDatabaseACLResponse;
+const ReinstateEnvResponse = models.ReinstateEnvResponse;
+const CloudBaseRunNfsVolumeSource = models.CloudBaseRunNfsVolumeSource;
+const EstablishCloudBaseRunServerResponse = models.EstablishCloudBaseRunServerResponse;
 const EnvInfo = models.EnvInfo;
 const CloudBaseRunImageInfo = models.CloudBaseRunImageInfo;
 const DestroyEnvResponse = models.DestroyEnvResponse;
@@ -83,7 +95,7 @@ const EndUserInfo = models.EndUserInfo;
 const DescribeCloudBaseRunVersionSnapshotResponse = models.DescribeCloudBaseRunVersionSnapshotResponse;
 const DescribePostpayPackageFreeQuotasResponse = models.DescribePostpayPackageFreeQuotasResponse;
 const DeleteEndUserRequest = models.DeleteEndUserRequest;
-const OrderInfo = models.OrderInfo;
+const CloudBaseRunImageSecretInfo = models.CloudBaseRunImageSecretInfo;
 const DescribeEnvsResponse = models.DescribeEnvsResponse;
 const CloudBaseCodeRepoName = models.CloudBaseCodeRepoName;
 const DescribeDownloadFileResponse = models.DescribeDownloadFileResponse;
@@ -101,6 +113,17 @@ class TcbClient extends AbstractClient {
         super("tcb.tencentcloudapi.com", "2018-06-08", credential, region, profile);
     }
     
+    /**
+     * 查询版本历史
+     * @param {DescribeCloudBaseRunVersionSnapshotRequest} req
+     * @param {function(string, DescribeCloudBaseRunVersionSnapshotResponse):void} cb
+     * @public
+     */
+    DescribeCloudBaseRunVersionSnapshot(req, cb) {
+        let resp = new DescribeCloudBaseRunVersionSnapshotResponse();
+        this.request("DescribeCloudBaseRunVersionSnapshot", req, resp, cb);
+    }
+
     /**
      * 创建托管域名
      * @param {CreateHostingDomainRequest} req
@@ -124,17 +147,6 @@ class TcbClient extends AbstractClient {
     }
 
     /**
-     * 获取环境列表，含环境下的各个资源信息。尤其是各资源的唯一标识，是请求各资源的关键参数
-     * @param {DescribeEnvsRequest} req
-     * @param {function(string, DescribeEnvsResponse):void} cb
-     * @public
-     */
-    DescribeEnvs(req, cb) {
-        let resp = new DescribeEnvsResponse();
-        this.request("DescribeEnvs", req, resp, cb);
-    }
-
-    /**
      * 增加安全域名
      * @param {CreateAuthDomainRequest} req
      * @param {function(string, CreateAuthDomainResponse):void} cb
@@ -146,25 +158,36 @@ class TcbClient extends AbstractClient {
     }
 
     /**
-     * 获取下载文件信息
-     * @param {DescribeDownloadFileRequest} req
-     * @param {function(string, DescribeDownloadFileResponse):void} cb
+     * 创建服务版本
+     * @param {CreateCloudBaseRunServerVersionRequest} req
+     * @param {function(string, CreateCloudBaseRunServerVersionResponse):void} cb
      * @public
      */
-    DescribeDownloadFile(req, cb) {
-        let resp = new DescribeDownloadFileResponse();
-        this.request("DescribeDownloadFile", req, resp, cb);
+    CreateCloudBaseRunServerVersion(req, cb) {
+        let resp = new CreateCloudBaseRunServerVersionResponse();
+        this.request("CreateCloudBaseRunServerVersion", req, resp, cb);
     }
 
     /**
-     * 获取安全域名列表
-     * @param {DescribeAuthDomainsRequest} req
-     * @param {function(string, DescribeAuthDomainsResponse):void} cb
+     * 查询服务版本的详情，CPU和MEM  请使用CPUSize和MemSize
+     * @param {DescribeCloudBaseRunServerVersionRequest} req
+     * @param {function(string, DescribeCloudBaseRunServerVersionResponse):void} cb
      * @public
      */
-    DescribeAuthDomains(req, cb) {
-        let resp = new DescribeAuthDomainsResponse();
-        this.request("DescribeAuthDomains", req, resp, cb);
+    DescribeCloudBaseRunServerVersion(req, cb) {
+        let resp = new DescribeCloudBaseRunServerVersionResponse();
+        this.request("DescribeCloudBaseRunServerVersion", req, resp, cb);
+    }
+
+    /**
+     * 获取环境列表，含环境下的各个资源信息。尤其是各资源的唯一标识，是请求各资源的关键参数
+     * @param {DescribeEnvsRequest} req
+     * @param {function(string, DescribeEnvsResponse):void} cb
+     * @public
+     */
+    DescribeEnvs(req, cb) {
+        let resp = new DescribeEnvsResponse();
+        this.request("DescribeEnvs", req, resp, cb);
     }
 
     /**
@@ -212,6 +235,17 @@ class TcbClient extends AbstractClient {
     }
 
     /**
+     * 获取下载文件信息
+     * @param {DescribeDownloadFileRequest} req
+     * @param {function(string, DescribeDownloadFileResponse):void} cb
+     * @public
+     */
+    DescribeDownloadFile(req, cb) {
+        let resp = new DescribeDownloadFileResponse();
+        this.request("DescribeDownloadFile", req, resp, cb);
+    }
+
+    /**
      * 获取后付费免费额度
      * @param {DescribePostpayPackageFreeQuotasRequest} req
      * @param {function(string, DescribePostpayPackageFreeQuotasResponse):void} cb
@@ -220,6 +254,17 @@ class TcbClient extends AbstractClient {
     DescribePostpayPackageFreeQuotas(req, cb) {
         let resp = new DescribePostpayPackageFreeQuotasResponse();
         this.request("DescribePostpayPackageFreeQuotas", req, resp, cb);
+    }
+
+    /**
+     * 创建云应用服务
+     * @param {EstablishCloudBaseRunServerRequest} req
+     * @param {function(string, EstablishCloudBaseRunServerResponse):void} cb
+     * @public
+     */
+    EstablishCloudBaseRunServer(req, cb) {
+        let resp = new EstablishCloudBaseRunServerResponse();
+        this.request("EstablishCloudBaseRunServer", req, resp, cb);
     }
 
     /**
@@ -278,6 +323,17 @@ class TcbClient extends AbstractClient {
     }
 
     /**
+     * 开通容器托管的资源，包括集群创建，VPC配置，异步任务创建，镜像托管，Coding等，查看创建结果需要根据DescribeCloudBaseRunResource接口来查看
+     * @param {CreateCloudBaseRunResourceRequest} req
+     * @param {function(string, CreateCloudBaseRunResourceResponse):void} cb
+     * @public
+     */
+    CreateCloudBaseRunResource(req, cb) {
+        let resp = new CreateCloudBaseRunResourceResponse();
+        this.request("CreateCloudBaseRunResource", req, resp, cb);
+    }
+
+    /**
      * 获取增值包计费相关信息
      * @param {DescribeExtraPkgBillingInfoRequest} req
      * @param {function(string, DescribeExtraPkgBillingInfoResponse):void} cb
@@ -333,14 +389,14 @@ class TcbClient extends AbstractClient {
     }
 
     /**
-     * 查询版本历史
-     * @param {DescribeCloudBaseRunVersionSnapshotRequest} req
-     * @param {function(string, DescribeCloudBaseRunVersionSnapshotResponse):void} cb
+     * 获取安全域名列表
+     * @param {DescribeAuthDomainsRequest} req
+     * @param {function(string, DescribeAuthDomainsResponse):void} cb
      * @public
      */
-    DescribeCloudBaseRunVersionSnapshot(req, cb) {
-        let resp = new DescribeCloudBaseRunVersionSnapshotResponse();
-        this.request("DescribeCloudBaseRunVersionSnapshot", req, resp, cb);
+    DescribeAuthDomains(req, cb) {
+        let resp = new DescribeAuthDomainsResponse();
+        this.request("DescribeAuthDomains", req, resp, cb);
     }
 
     /**

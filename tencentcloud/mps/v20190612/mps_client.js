@@ -21,6 +21,7 @@ const ModifySampleSnapshotTemplateResponse = models.ModifySampleSnapshotTemplate
 const ModifyWatermarkTemplateRequest = models.ModifyWatermarkTemplateRequest;
 const AiRecognitionTaskAsrFullTextSegmentItem = models.AiRecognitionTaskAsrFullTextSegmentItem;
 const UserDefineOcrTextReviewTemplateInfoForUpdate = models.UserDefineOcrTextReviewTemplateInfoForUpdate;
+const OverrideTranscodeParameter = models.OverrideTranscodeParameter;
 const AiAnalysisTaskClassificationInput = models.AiAnalysisTaskClassificationInput;
 const SvgWatermarkInput = models.SvgWatermarkInput;
 const WorkflowInfo = models.WorkflowInfo;
@@ -126,6 +127,7 @@ const EditMediaRequest = models.EditMediaRequest;
 const MediaProcessTaskImageSpriteResult = models.MediaProcessTaskImageSpriteResult;
 const DescribeAdaptiveDynamicStreamingTemplatesResponse = models.DescribeAdaptiveDynamicStreamingTemplatesResponse;
 const MediaContentReviewOcrTextSegmentItem = models.MediaContentReviewOcrTextSegmentItem;
+const UrlInputInfo = models.UrlInputInfo;
 const DescribeAdaptiveDynamicStreamingTemplatesRequest = models.DescribeAdaptiveDynamicStreamingTemplatesRequest;
 const ImageWatermarkInput = models.ImageWatermarkInput;
 const AsrFullTextConfigureInfoForUpdate = models.AsrFullTextConfigureInfoForUpdate;
@@ -948,7 +950,8 @@ class MpsClient extends AbstractClient {
     /**
      * 对直播流媒体发起处理任务，功能包括：
 
-* 智能内容审核（画面鉴黄、鉴政、鉴暴、声音鉴黄）。
+* 智能内容审核（画面鉴黄、鉴政、鉴暴、声音鉴黄）；
+* 智能内容识别（人脸、文本全文、文本关键词、语音全文、语音关键词）。
 
 直播流处理事件通知实时写入用户指定的消息队列 CMQ 中，用户需要从消息队列 CMQ 中获取事件通知结果，同时处理过程中存在输出文件的，会写入用户指定的输出文件的目标存储中。
      * @param {ProcessLiveStreamRequest} req

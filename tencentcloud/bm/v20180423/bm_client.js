@@ -319,7 +319,7 @@ class BmClient extends AbstractClient {
     }
 
     /**
-     * 获取获取设备类型
+     * 获取设备类型
      * @param {DescribeDeviceClassRequest} req
      * @param {function(string, DescribeDeviceClassResponse):void} cb
      * @public

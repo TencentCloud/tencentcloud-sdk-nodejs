@@ -179,26 +179,192 @@ class CheckTcbServiceResponse extends  AbstractModel {
 }
 
 /**
- * DescribeEndUserLoginStatistic请求参数结构体
+ * CreateCloudBaseRunServerVersion请求参数结构体
  * @class
  */
-class DescribeEndUserLoginStatisticRequest extends  AbstractModel {
+class CreateCloudBaseRunServerVersionRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 环境id
+         * 环境ID
          * @type {string || null}
          */
         this.EnvId = null;
 
         /**
-         * 终端用户来源
-<li> qcloud </li>
-<li>miniapp</li>
+         * 枚举（package/repository/image)
          * @type {string || null}
          */
-        this.Source = null;
+        this.UploadType = null;
+
+        /**
+         * 流量占比
+         * @type {number || null}
+         */
+        this.FlowRatio = null;
+
+        /**
+         * Cpu的大小，单位：核
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * Mem的大小，单位：G
+         * @type {number || null}
+         */
+        this.Mem = null;
+
+        /**
+         * 最小副本数，最小值：0
+         * @type {number || null}
+         */
+        this.MinNum = null;
+
+        /**
+         * 副本最大数，最大值：50
+         * @type {number || null}
+         */
+        this.MaxNum = null;
+
+        /**
+         * 策略类型(枚举值：比如cpu)
+         * @type {string || null}
+         */
+        this.PolicyType = null;
+
+        /**
+         * 策略阈值
+         * @type {number || null}
+         */
+        this.PolicyThreshold = null;
+
+        /**
+         * 服务端口
+         * @type {number || null}
+         */
+        this.ContainerPort = null;
+
+        /**
+         * 服务名称
+         * @type {string || null}
+         */
+        this.ServerName = null;
+
+        /**
+         * repository的类型(coding/gitlab/github/coding)
+         * @type {string || null}
+         */
+        this.RepositoryType = null;
+
+        /**
+         * Dockerfile地址
+         * @type {string || null}
+         */
+        this.DockerfilePath = null;
+
+        /**
+         * 构建目录
+         * @type {string || null}
+         */
+        this.BuildDir = null;
+
+        /**
+         * 环境变量
+         * @type {string || null}
+         */
+        this.EnvParams = null;
+
+        /**
+         * repository地址
+         * @type {string || null}
+         */
+        this.Repository = null;
+
+        /**
+         * 分支
+         * @type {string || null}
+         */
+        this.Branch = null;
+
+        /**
+         * 版本备注
+         * @type {string || null}
+         */
+        this.VersionRemark = null;
+
+        /**
+         * 代码包名字
+         * @type {string || null}
+         */
+        this.PackageName = null;
+
+        /**
+         * 代码包的版本
+         * @type {string || null}
+         */
+        this.PackageVersion = null;
+
+        /**
+         * Image的详情
+         * @type {CloudBaseRunImageInfo || null}
+         */
+        this.ImageInfo = null;
+
+        /**
+         * Github等拉取代码的详情
+         * @type {CloudBaseCodeRepoDetail || null}
+         */
+        this.CodeDetail = null;
+
+        /**
+         * 私有镜像秘钥信息
+         * @type {CloudBaseRunImageSecretInfo || null}
+         */
+        this.ImageSecretInfo = null;
+
+        /**
+         * 私有镜像 认证名称
+         * @type {string || null}
+         */
+        this.ImagePullSecret = null;
+
+        /**
+         * 用户自定义采集日志路径
+         * @type {string || null}
+         */
+        this.CustomLogs = null;
+
+        /**
+         * 延迟多长时间开始健康检查（单位s）
+         * @type {number || null}
+         */
+        this.InitialDelaySeconds = null;
+
+        /**
+         * cfs挂载信息
+         * @type {Array.<CloudBaseRunVolumeMount> || null}
+         */
+        this.MountVolumeInfo = null;
+
+        /**
+         * 4 代表只能微信链路访问
+         * @type {number || null}
+         */
+        this.AccessType = null;
+
+        /**
+         * es信息
+         * @type {CloudBaseEsInfo || null}
+         */
+        this.EsInfo = null;
+
+        /**
+         * 是否使用统一域名
+         * @type {boolean || null}
+         */
+        this.EnableUnion = null;
 
     }
 
@@ -210,7 +376,63 @@ class DescribeEndUserLoginStatisticRequest extends  AbstractModel {
             return;
         }
         this.EnvId = 'EnvId' in params ? params.EnvId : null;
-        this.Source = 'Source' in params ? params.Source : null;
+        this.UploadType = 'UploadType' in params ? params.UploadType : null;
+        this.FlowRatio = 'FlowRatio' in params ? params.FlowRatio : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Mem = 'Mem' in params ? params.Mem : null;
+        this.MinNum = 'MinNum' in params ? params.MinNum : null;
+        this.MaxNum = 'MaxNum' in params ? params.MaxNum : null;
+        this.PolicyType = 'PolicyType' in params ? params.PolicyType : null;
+        this.PolicyThreshold = 'PolicyThreshold' in params ? params.PolicyThreshold : null;
+        this.ContainerPort = 'ContainerPort' in params ? params.ContainerPort : null;
+        this.ServerName = 'ServerName' in params ? params.ServerName : null;
+        this.RepositoryType = 'RepositoryType' in params ? params.RepositoryType : null;
+        this.DockerfilePath = 'DockerfilePath' in params ? params.DockerfilePath : null;
+        this.BuildDir = 'BuildDir' in params ? params.BuildDir : null;
+        this.EnvParams = 'EnvParams' in params ? params.EnvParams : null;
+        this.Repository = 'Repository' in params ? params.Repository : null;
+        this.Branch = 'Branch' in params ? params.Branch : null;
+        this.VersionRemark = 'VersionRemark' in params ? params.VersionRemark : null;
+        this.PackageName = 'PackageName' in params ? params.PackageName : null;
+        this.PackageVersion = 'PackageVersion' in params ? params.PackageVersion : null;
+
+        if (params.ImageInfo) {
+            let obj = new CloudBaseRunImageInfo();
+            obj.deserialize(params.ImageInfo)
+            this.ImageInfo = obj;
+        }
+
+        if (params.CodeDetail) {
+            let obj = new CloudBaseCodeRepoDetail();
+            obj.deserialize(params.CodeDetail)
+            this.CodeDetail = obj;
+        }
+
+        if (params.ImageSecretInfo) {
+            let obj = new CloudBaseRunImageSecretInfo();
+            obj.deserialize(params.ImageSecretInfo)
+            this.ImageSecretInfo = obj;
+        }
+        this.ImagePullSecret = 'ImagePullSecret' in params ? params.ImagePullSecret : null;
+        this.CustomLogs = 'CustomLogs' in params ? params.CustomLogs : null;
+        this.InitialDelaySeconds = 'InitialDelaySeconds' in params ? params.InitialDelaySeconds : null;
+
+        if (params.MountVolumeInfo) {
+            this.MountVolumeInfo = new Array();
+            for (let z in params.MountVolumeInfo) {
+                let obj = new CloudBaseRunVolumeMount();
+                obj.deserialize(params.MountVolumeInfo[z]);
+                this.MountVolumeInfo.push(obj);
+            }
+        }
+        this.AccessType = 'AccessType' in params ? params.AccessType : null;
+
+        if (params.EsInfo) {
+            let obj = new CloudBaseEsInfo();
+            obj.deserialize(params.EsInfo)
+            this.EsInfo = obj;
+        }
+        this.EnableUnion = 'EnableUnion' in params ? params.EnableUnion : null;
 
     }
 }
@@ -364,6 +586,48 @@ class KVPair extends  AbstractModel {
 }
 
 /**
+ * DescribeCloudBaseRunServerVersion请求参数结构体
+ * @class
+ */
+class DescribeCloudBaseRunServerVersionRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 环境ID
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 服务名称
+         * @type {string || null}
+         */
+        this.ServerName = null;
+
+        /**
+         * 版本名称
+         * @type {string || null}
+         */
+        this.VersionName = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.ServerName = 'ServerName' in params ? params.ServerName : null;
+        this.VersionName = 'VersionName' in params ? params.VersionName : null;
+
+    }
+}
+
+/**
  * 函数的信息
  * @class
  */
@@ -437,6 +701,281 @@ class CreatePostpayPackageResponse extends  AbstractModel {
         }
         this.TranId = 'TranId' in params ? params.TranId : null;
         this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeCloudBaseRunServerVersion返回参数结构体
+ * @class
+ */
+class DescribeCloudBaseRunServerVersionResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 版本名称
+         * @type {string || null}
+         */
+        this.VersionName = null;
+
+        /**
+         * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * Dockefile的路径
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DockerfilePath = null;
+
+        /**
+         * DockerBuild的目录
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.BuildDir = null;
+
+        /**
+         * 请使用CPUSize
+         * @type {number || null}
+         */
+        this.Cpu = null;
+
+        /**
+         * 请使用MemSize
+         * @type {number || null}
+         */
+        this.Mem = null;
+
+        /**
+         * 副本最小值
+         * @type {number || null}
+         */
+        this.MinNum = null;
+
+        /**
+         * 副本最大值
+         * @type {number || null}
+         */
+        this.MaxNum = null;
+
+        /**
+         * 策略类型
+         * @type {string || null}
+         */
+        this.PolicyType = null;
+
+        /**
+         * 策略阈值
+         * @type {number || null}
+         */
+        this.PolicyThreshold = null;
+
+        /**
+         * 环境变量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.EnvParams = null;
+
+        /**
+         * 创建时间
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * 更新时间
+         * @type {string || null}
+         */
+        this.UpdatedTime = null;
+
+        /**
+         * 版本的IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VersionIP = null;
+
+        /**
+         * 版本的端口号
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.VersionPort = null;
+
+        /**
+         * 版本状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 代码包的名字
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PackageName = null;
+
+        /**
+         * 代码版本的名字
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.PackageVersion = null;
+
+        /**
+         * 枚举（package/repository/image)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UploadType = null;
+
+        /**
+         * Repo的类型(coding/gitlab/github/coding)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.RepoType = null;
+
+        /**
+         * 地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Repo = null;
+
+        /**
+         * 分支
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Branch = null;
+
+        /**
+         * 服务名字
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ServerName = null;
+
+        /**
+         * 是否对于外网开放
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsPublic = null;
+
+        /**
+         * vpc id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 子网实例id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.SubnetIds = null;
+
+        /**
+         * 日志采集路径
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CustomLogs = null;
+
+        /**
+         * 监听端口
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ContainerPort = null;
+
+        /**
+         * 延迟多长时间开始健康检查（单位s）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.InitialDelaySeconds = null;
+
+        /**
+         * 镜像地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * CPU 大小
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.CpuSize = null;
+
+        /**
+         * MEM 大小
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MemSize = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VersionName = 'VersionName' in params ? params.VersionName : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+        this.DockerfilePath = 'DockerfilePath' in params ? params.DockerfilePath : null;
+        this.BuildDir = 'BuildDir' in params ? params.BuildDir : null;
+        this.Cpu = 'Cpu' in params ? params.Cpu : null;
+        this.Mem = 'Mem' in params ? params.Mem : null;
+        this.MinNum = 'MinNum' in params ? params.MinNum : null;
+        this.MaxNum = 'MaxNum' in params ? params.MaxNum : null;
+        this.PolicyType = 'PolicyType' in params ? params.PolicyType : null;
+        this.PolicyThreshold = 'PolicyThreshold' in params ? params.PolicyThreshold : null;
+        this.EnvParams = 'EnvParams' in params ? params.EnvParams : null;
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.UpdatedTime = 'UpdatedTime' in params ? params.UpdatedTime : null;
+        this.VersionIP = 'VersionIP' in params ? params.VersionIP : null;
+        this.VersionPort = 'VersionPort' in params ? params.VersionPort : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.PackageName = 'PackageName' in params ? params.PackageName : null;
+        this.PackageVersion = 'PackageVersion' in params ? params.PackageVersion : null;
+        this.UploadType = 'UploadType' in params ? params.UploadType : null;
+        this.RepoType = 'RepoType' in params ? params.RepoType : null;
+        this.Repo = 'Repo' in params ? params.Repo : null;
+        this.Branch = 'Branch' in params ? params.Branch : null;
+        this.ServerName = 'ServerName' in params ? params.ServerName : null;
+        this.IsPublic = 'IsPublic' in params ? params.IsPublic : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetIds = 'SubnetIds' in params ? params.SubnetIds : null;
+        this.CustomLogs = 'CustomLogs' in params ? params.CustomLogs : null;
+        this.ContainerPort = 'ContainerPort' in params ? params.ContainerPort : null;
+        this.InitialDelaySeconds = 'InitialDelaySeconds' in params ? params.InitialDelaySeconds : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.CpuSize = 'CpuSize' in params ? params.CpuSize : null;
+        this.MemSize = 'MemSize' in params ? params.MemSize : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -709,6 +1248,81 @@ class LogServiceInfo extends  AbstractModel {
 }
 
 /**
+ * EstablishCloudBaseRunServer请求参数结构体
+ * @class
+ */
+class EstablishCloudBaseRunServerRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 环境id
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 服务名称
+         * @type {string || null}
+         */
+        this.ServiceName = null;
+
+        /**
+         * 是否开通外网访问
+         * @type {boolean || null}
+         */
+        this.IsPublic = null;
+
+        /**
+         * 镜像仓库
+         * @type {string || null}
+         */
+        this.ImageRepo = null;
+
+        /**
+         * 服务描述
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * es信息
+         * @type {CloudBaseEsInfo || null}
+         */
+        this.EsInfo = null;
+
+        /**
+         * 日志类型; es/cls
+         * @type {string || null}
+         */
+        this.LogType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.ServiceName = 'ServiceName' in params ? params.ServiceName : null;
+        this.IsPublic = 'IsPublic' in params ? params.IsPublic : null;
+        this.ImageRepo = 'ImageRepo' in params ? params.ImageRepo : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+        if (params.EsInfo) {
+            let obj = new CloudBaseEsInfo();
+            obj.deserialize(params.EsInfo)
+            this.EsInfo = obj;
+        }
+        this.LogType = 'LogType' in params ? params.LogType : null;
+
+    }
+}
+
+/**
  * DescribeEnvLimit返回参数结构体
  * @class
  */
@@ -957,12 +1571,18 @@ class DescribeExtraPkgBillingInfoResponse extends  AbstractModel {
 }
 
 /**
- * ReinstateEnv返回参数结构体
+ * DestroyStaticStore返回参数结构体
  * @class
  */
-class ReinstateEnvResponse extends  AbstractModel {
+class DestroyStaticStoreResponse extends  AbstractModel {
     constructor(){
         super();
+
+        /**
+         * 条件任务结果(succ/fail)
+         * @type {string || null}
+         */
+        this.Result = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -979,6 +1599,7 @@ class ReinstateEnvResponse extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.Result = 'Result' in params ? params.Result : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1629,6 +2250,105 @@ class StaticStorageInfo extends  AbstractModel {
 }
 
 /**
+ * 订单信息
+ * @class
+ */
+class OrderInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 订单号
+         * @type {string || null}
+         */
+        this.TranId = null;
+
+        /**
+         * 订单要切换的套餐ID
+         * @type {string || null}
+         */
+        this.PackageId = null;
+
+        /**
+         * 订单类型
+<li>1 购买</li>
+<li>2 续费</li>
+<li>3 变配</li>
+         * @type {string || null}
+         */
+        this.TranType = null;
+
+        /**
+         * 订单状态。
+<li>1未支付</li>
+<li>2 支付中</li>
+<li>3 发货中</li>
+<li>4 发货成功</li>
+<li>5 发货失败</li>
+<li>6 已退款</li>
+<li>7 已取消</li>
+<li>100 已删除</li>
+         * @type {string || null}
+         */
+        this.TranStatus = null;
+
+        /**
+         * 订单更新时间
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
+
+        /**
+         * 订单创建时间
+         * @type {string || null}
+         */
+        this.CreateTime = null;
+
+        /**
+         * 付费模式.
+<li>prepayment 预付费</li>
+<li>postpaid 后付费</li>
+         * @type {string || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * 订单绑定的扩展ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ExtensionId = null;
+
+        /**
+         * 资源初始化结果(仅当ExtensionId不为空时有效): successful(初始化成功), failed(初始化失败), doing(初始化进行中), init(准备初始化)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ResourceReady = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TranId = 'TranId' in params ? params.TranId : null;
+        this.PackageId = 'PackageId' in params ? params.PackageId : null;
+        this.TranType = 'TranType' in params ? params.TranType : null;
+        this.TranStatus = 'TranStatus' in params ? params.TranStatus : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.ExtensionId = 'ExtensionId' in params ? params.ExtensionId : null;
+        this.ResourceReady = 'ResourceReady' in params ? params.ResourceReady : null;
+
+    }
+}
+
+/**
  * CloudRunServiceSimpleVersionSnapshot 信息
  * @class
  */
@@ -1915,6 +2635,48 @@ class DescribeExtraPkgBillingInfoRequest extends  AbstractModel {
             return;
         }
         this.EnvId = 'EnvId' in params ? params.EnvId : null;
+
+    }
+}
+
+/**
+ * CreateCloudBaseRunResource请求参数结构体
+ * @class
+ */
+class CreateCloudBaseRunResourceRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 环境ID
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * vpc的ID
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 子网ID列表，当VpcId不为空，SubnetIds也不能为空
+         * @type {Array.<string> || null}
+         */
+        this.SubnetIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetIds = 'SubnetIds' in params ? params.SubnetIds : null;
 
     }
 }
@@ -2265,6 +3027,63 @@ class DescribeAuthDomainsResponse extends  AbstractModel {
 }
 
 /**
+ * cfs挂载点
+ * @class
+ */
+class CloudBaseRunVolumeMount extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 资源名
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 挂载路径
+         * @type {string || null}
+         */
+        this.MountPath = null;
+
+        /**
+         * 是否只读
+         * @type {boolean || null}
+         */
+        this.ReadOnly = null;
+
+        /**
+         * Nfs挂载信息
+         * @type {Array.<CloudBaseRunNfsVolumeSource> || null}
+         */
+        this.NfsVolumes = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.MountPath = 'MountPath' in params ? params.MountPath : null;
+        this.ReadOnly = 'ReadOnly' in params ? params.ReadOnly : null;
+
+        if (params.NfsVolumes) {
+            this.NfsVolumes = new Array();
+            for (let z in params.NfsVolumes) {
+                let obj = new CloudBaseRunNfsVolumeSource();
+                obj.deserialize(params.NfsVolumes[z]);
+                this.NfsVolumes.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * ReinstateEnv请求参数结构体
  * @class
  */
@@ -2288,6 +3107,42 @@ class ReinstateEnvRequest extends  AbstractModel {
             return;
         }
         this.EnvId = 'EnvId' in params ? params.EnvId : null;
+
+    }
+}
+
+/**
+ * CreateCloudBaseRunResource返回参数结构体
+ * @class
+ */
+class CreateCloudBaseRunResourceResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回集群创建是否成功 succ为成功。并且中间无err
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2415,18 +3270,26 @@ class CreateHostingDomainRequest extends  AbstractModel {
 }
 
 /**
- * DestroyStaticStore返回参数结构体
+ * CreateCloudBaseRunServerVersion返回参数结构体
  * @class
  */
-class DestroyStaticStoreResponse extends  AbstractModel {
+class CreateCloudBaseRunServerVersionResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 条件任务结果(succ/fail)
+         * 状态(creating/succ)
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
         this.Result = null;
+
+        /**
+         * 版本名称（只有Result为succ的时候，才会返回VersionName)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.VersionName = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2444,6 +3307,7 @@ class DestroyStaticStoreResponse extends  AbstractModel {
             return;
         }
         this.Result = 'Result' in params ? params.Result : null;
+        this.VersionName = 'VersionName' in params ? params.VersionName : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -2605,6 +3469,43 @@ class EnvBillingInfoItem extends  AbstractModel {
 }
 
 /**
+ * DescribeEndUserLoginStatistic请求参数结构体
+ * @class
+ */
+class DescribeEndUserLoginStatisticRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 环境id
+         * @type {string || null}
+         */
+        this.EnvId = null;
+
+        /**
+         * 终端用户来源
+<li> qcloud </li>
+<li>miniapp</li>
+         * @type {string || null}
+         */
+        this.Source = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.EnvId = 'EnvId' in params ? params.EnvId : null;
+        this.Source = 'Source' in params ? params.Source : null;
+
+    }
+}
+
+/**
  * DescribeEnvFreeQuota返回参数结构体
  * @class
  */
@@ -2644,6 +3545,83 @@ class DescribeEnvFreeQuotaResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * es信息
+ * @class
+ */
+class CloudBaseEsInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * es的id
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Id = null;
+
+        /**
+         * secret名字
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.SecretName = null;
+
+        /**
+         * ip地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Ip = null;
+
+        /**
+         * 端口
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.Port = null;
+
+        /**
+         * 索引
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Index = null;
+
+        /**
+         * 用户名
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Account = null;
+
+        /**
+         * 密码
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Password = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Id = 'Id' in params ? params.Id : null;
+        this.SecretName = 'SecretName' in params ? params.SecretName : null;
+        this.Ip = 'Ip' in params ? params.Ip : null;
+        this.Port = 'Port' in params ? params.Port : null;
+        this.Index = 'Index' in params ? params.Index : null;
+        this.Account = 'Account' in params ? params.Account : null;
+        this.Password = 'Password' in params ? params.Password : null;
 
     }
 }
@@ -2752,6 +3730,104 @@ class DescribeDatabaseACLResponse extends  AbstractModel {
             return;
         }
         this.AclTag = 'AclTag' in params ? params.AclTag : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ReinstateEnv返回参数结构体
+ * @class
+ */
+class ReinstateEnvResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * nfs挂载资源
+ * @class
+ */
+class CloudBaseRunNfsVolumeSource extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * NFS挂载Server
+         * @type {string || null}
+         */
+        this.Server = null;
+
+        /**
+         * Server路径
+         * @type {string || null}
+         */
+        this.Path = null;
+
+        /**
+         * 是否只读
+         * @type {boolean || null}
+         */
+        this.ReadOnly = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Server = 'Server' in params ? params.Server : null;
+        this.Path = 'Path' in params ? params.Path : null;
+        this.ReadOnly = 'ReadOnly' in params ? params.ReadOnly : null;
+
+    }
+}
+
+/**
+ * EstablishCloudBaseRunServer返回参数结构体
+ * @class
+ */
+class EstablishCloudBaseRunServerResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3395,81 +4471,36 @@ class DeleteEndUserRequest extends  AbstractModel {
 }
 
 /**
- * 订单信息
+ * ImageSecretInfo的信息
  * @class
  */
-class OrderInfo extends  AbstractModel {
+class CloudBaseRunImageSecretInfo extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 订单号
+         * 镜像地址
          * @type {string || null}
          */
-        this.TranId = null;
+        this.RegistryServer = null;
 
         /**
-         * 订单要切换的套餐ID
+         * 用户名
          * @type {string || null}
          */
-        this.PackageId = null;
+        this.UserName = null;
 
         /**
-         * 订单类型
-<li>1 购买</li>
-<li>2 续费</li>
-<li>3 变配</li>
+         * 仓库密码
          * @type {string || null}
          */
-        this.TranType = null;
+        this.Password = null;
 
         /**
-         * 订单状态。
-<li>1未支付</li>
-<li>2 支付中</li>
-<li>3 发货中</li>
-<li>4 发货成功</li>
-<li>5 发货失败</li>
-<li>6 已退款</li>
-<li>7 已取消</li>
-<li>100 已删除</li>
+         * 邮箱
          * @type {string || null}
          */
-        this.TranStatus = null;
-
-        /**
-         * 订单更新时间
-         * @type {string || null}
-         */
-        this.UpdateTime = null;
-
-        /**
-         * 订单创建时间
-         * @type {string || null}
-         */
-        this.CreateTime = null;
-
-        /**
-         * 付费模式.
-<li>prepayment 预付费</li>
-<li>postpaid 后付费</li>
-         * @type {string || null}
-         */
-        this.PayMode = null;
-
-        /**
-         * 订单绑定的扩展ID
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ExtensionId = null;
-
-        /**
-         * 资源初始化结果(仅当ExtensionId不为空时有效): successful(初始化成功), failed(初始化失败), doing(初始化进行中), init(准备初始化)
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ResourceReady = null;
+        this.Email = null;
 
     }
 
@@ -3480,15 +4511,10 @@ class OrderInfo extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.TranId = 'TranId' in params ? params.TranId : null;
-        this.PackageId = 'PackageId' in params ? params.PackageId : null;
-        this.TranType = 'TranType' in params ? params.TranType : null;
-        this.TranStatus = 'TranStatus' in params ? params.TranStatus : null;
-        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
-        this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
-        this.PayMode = 'PayMode' in params ? params.PayMode : null;
-        this.ExtensionId = 'ExtensionId' in params ? params.ExtensionId : null;
-        this.ResourceReady = 'ResourceReady' in params ? params.ResourceReady : null;
+        this.RegistryServer = 'RegistryServer' in params ? params.RegistryServer : null;
+        this.UserName = 'UserName' in params ? params.UserName : null;
+        this.Password = 'Password' in params ? params.Password : null;
+        this.Email = 'Email' in params ? params.Email : null;
 
     }
 }
@@ -3708,23 +4734,26 @@ module.exports = {
     DescribeEnvLimitRequest: DescribeEnvLimitRequest,
     DescribeQuotaDataResponse: DescribeQuotaDataResponse,
     CheckTcbServiceResponse: CheckTcbServiceResponse,
-    DescribeEndUserLoginStatisticRequest: DescribeEndUserLoginStatisticRequest,
+    CreateCloudBaseRunServerVersionRequest: CreateCloudBaseRunServerVersionRequest,
     StorageInfo: StorageInfo,
     DescribeCloudBaseRunVersionSnapshotRequest: DescribeCloudBaseRunVersionSnapshotRequest,
     KVPair: KVPair,
+    DescribeCloudBaseRunServerVersionRequest: DescribeCloudBaseRunServerVersionRequest,
     FunctionInfo: FunctionInfo,
     CreatePostpayPackageResponse: CreatePostpayPackageResponse,
+    DescribeCloudBaseRunServerVersionResponse: DescribeCloudBaseRunServerVersionResponse,
     CommonServiceAPIRequest: CommonServiceAPIRequest,
     PostpayEnvQuota: PostpayEnvQuota,
     DescribeEndUsersResponse: DescribeEndUsersResponse,
     AuthDomain: AuthDomain,
     LogServiceInfo: LogServiceInfo,
+    EstablishCloudBaseRunServerRequest: EstablishCloudBaseRunServerRequest,
     DescribeEnvLimitResponse: DescribeEnvLimitResponse,
     CreateStaticStoreRequest: CreateStaticStoreRequest,
     CommonServiceAPIResponse: CommonServiceAPIResponse,
     DescribeEndUserStatisticResponse: DescribeEndUserStatisticResponse,
     DescribeExtraPkgBillingInfoResponse: DescribeExtraPkgBillingInfoResponse,
-    ReinstateEnvResponse: ReinstateEnvResponse,
+    DestroyStaticStoreResponse: DestroyStaticStoreResponse,
     DescribePostpayPackageFreeQuotasRequest: DescribePostpayPackageFreeQuotasRequest,
     CreateAuthDomainResponse: CreateAuthDomainResponse,
     DescribeCloudBaseBuildServiceResponse: DescribeCloudBaseBuildServiceResponse,
@@ -3740,8 +4769,10 @@ module.exports = {
     CheckTcbServiceRequest: CheckTcbServiceRequest,
     ModifyDatabaseACLResponse: ModifyDatabaseACLResponse,
     StaticStorageInfo: StaticStorageInfo,
+    OrderInfo: OrderInfo,
     CloudRunServiceSimpleVersionSnapshot: CloudRunServiceSimpleVersionSnapshot,
     DescribeExtraPkgBillingInfoRequest: DescribeExtraPkgBillingInfoRequest,
+    CreateCloudBaseRunResourceRequest: CreateCloudBaseRunResourceRequest,
     CreatePostpayPackageRequest: CreatePostpayPackageRequest,
     DescribeEnvFreeQuotaRequest: DescribeEnvFreeQuotaRequest,
     DatabasesInfo: DatabasesInfo,
@@ -3749,17 +4780,24 @@ module.exports = {
     DescribeAuthDomainsRequest: DescribeAuthDomainsRequest,
     DescribeEndUserLoginStatisticResponse: DescribeEndUserLoginStatisticResponse,
     DescribeAuthDomainsResponse: DescribeAuthDomainsResponse,
+    CloudBaseRunVolumeMount: CloudBaseRunVolumeMount,
     ReinstateEnvRequest: ReinstateEnvRequest,
+    CreateCloudBaseRunResourceResponse: CreateCloudBaseRunResourceResponse,
     DescribeDatabaseACLRequest: DescribeDatabaseACLRequest,
     PlatformStatistic: PlatformStatistic,
     CreateHostingDomainRequest: CreateHostingDomainRequest,
-    DestroyStaticStoreResponse: DestroyStaticStoreResponse,
+    CreateCloudBaseRunServerVersionResponse: CreateCloudBaseRunServerVersionResponse,
     DeleteEndUserResponse: DeleteEndUserResponse,
     EnvBillingInfoItem: EnvBillingInfoItem,
+    DescribeEndUserLoginStatisticRequest: DescribeEndUserLoginStatisticRequest,
     DescribeEnvFreeQuotaResponse: DescribeEnvFreeQuotaResponse,
+    CloudBaseEsInfo: CloudBaseEsInfo,
     ModifyEnvResponse: ModifyEnvResponse,
     ModifyEndUserRequest: ModifyEndUserRequest,
     DescribeDatabaseACLResponse: DescribeDatabaseACLResponse,
+    ReinstateEnvResponse: ReinstateEnvResponse,
+    CloudBaseRunNfsVolumeSource: CloudBaseRunNfsVolumeSource,
+    EstablishCloudBaseRunServerResponse: EstablishCloudBaseRunServerResponse,
     EnvInfo: EnvInfo,
     CloudBaseRunImageInfo: CloudBaseRunImageInfo,
     DestroyEnvResponse: DestroyEnvResponse,
@@ -3770,7 +4808,7 @@ module.exports = {
     DescribeCloudBaseRunVersionSnapshotResponse: DescribeCloudBaseRunVersionSnapshotResponse,
     DescribePostpayPackageFreeQuotasResponse: DescribePostpayPackageFreeQuotasResponse,
     DeleteEndUserRequest: DeleteEndUserRequest,
-    OrderInfo: OrderInfo,
+    CloudBaseRunImageSecretInfo: CloudBaseRunImageSecretInfo,
     DescribeEnvsResponse: DescribeEnvsResponse,
     CloudBaseCodeRepoName: CloudBaseCodeRepoName,
     DescribeDownloadFileResponse: DescribeDownloadFileResponse,

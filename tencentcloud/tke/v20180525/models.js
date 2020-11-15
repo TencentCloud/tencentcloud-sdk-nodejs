@@ -254,6 +254,34 @@ class DescribeClusterKubeconfigResponse extends  AbstractModel {
 }
 
 /**
+ * RemoveNodeFromNodePool返回参数结构体
+ * @class
+ */
+class RemoveNodeFromNodePoolResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * CreateClusterRoute请求参数结构体
  * @class
  */
@@ -447,6 +475,55 @@ class DeleteClusterResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 自动扩所容的节点
+ * @class
+ */
+class AutoscalingAdded extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 正在加入中的节点数量
+         * @type {number || null}
+         */
+        this.Joining = null;
+
+        /**
+         * 初始化中的节点数量
+         * @type {number || null}
+         */
+        this.Initializing = null;
+
+        /**
+         * 正常的节点数量
+         * @type {number || null}
+         */
+        this.Normal = null;
+
+        /**
+         * 节点总数
+         * @type {number || null}
+         */
+        this.Total = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Joining = 'Joining' in params ? params.Joining : null;
+        this.Initializing = 'Initializing' in params ? params.Initializing : null;
+        this.Normal = 'Normal' in params ? params.Normal : null;
+        this.Total = 'Total' in params ? params.Total : null;
 
     }
 }
@@ -850,6 +927,185 @@ class CreateClusterRouteResponse extends  AbstractModel {
 }
 
 /**
+ * AddNodeToNodePool请求参数结构体
+ * @class
+ */
+class AddNodeToNodePoolRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 节点池id
+         * @type {string || null}
+         */
+        this.NodePoolId = null;
+
+        /**
+         * 节点id
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * 节点池描述
+ * @class
+ */
+class NodePool extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * NodePoolId 资源池id
+         * @type {string || null}
+         */
+        this.NodePoolId = null;
+
+        /**
+         * Name 资源池名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * ClusterInstanceId 集群实例id
+         * @type {string || null}
+         */
+        this.ClusterInstanceId = null;
+
+        /**
+         * LifeState 状态
+         * @type {string || null}
+         */
+        this.LifeState = null;
+
+        /**
+         * LaunchConfigurationId 配置
+         * @type {string || null}
+         */
+        this.LaunchConfigurationId = null;
+
+        /**
+         * AutoscalingGroupId 分组id
+         * @type {string || null}
+         */
+        this.AutoscalingGroupId = null;
+
+        /**
+         * Labels 标签
+         * @type {Array.<Label> || null}
+         */
+        this.Labels = null;
+
+        /**
+         * Taints 污点标记
+         * @type {Array.<Taint> || null}
+         */
+        this.Taints = null;
+
+        /**
+         * NodeCountSummary 节点列表
+         * @type {NodeCountSummary || null}
+         */
+        this.NodeCountSummary = null;
+
+        /**
+         * 状态信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AutoscalingGroupStatus = null;
+
+        /**
+         * 最大节点数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MaxNodesNum = null;
+
+        /**
+         * 最小节点数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.MinNodesNum = null;
+
+        /**
+         * 期望的节点数量
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DesiredNodesNum = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.ClusterInstanceId = 'ClusterInstanceId' in params ? params.ClusterInstanceId : null;
+        this.LifeState = 'LifeState' in params ? params.LifeState : null;
+        this.LaunchConfigurationId = 'LaunchConfigurationId' in params ? params.LaunchConfigurationId : null;
+        this.AutoscalingGroupId = 'AutoscalingGroupId' in params ? params.AutoscalingGroupId : null;
+
+        if (params.Labels) {
+            this.Labels = new Array();
+            for (let z in params.Labels) {
+                let obj = new Label();
+                obj.deserialize(params.Labels[z]);
+                this.Labels.push(obj);
+            }
+        }
+
+        if (params.Taints) {
+            this.Taints = new Array();
+            for (let z in params.Taints) {
+                let obj = new Taint();
+                obj.deserialize(params.Taints[z]);
+                this.Taints.push(obj);
+            }
+        }
+
+        if (params.NodeCountSummary) {
+            let obj = new NodeCountSummary();
+            obj.deserialize(params.NodeCountSummary)
+            this.NodeCountSummary = obj;
+        }
+        this.AutoscalingGroupStatus = 'AutoscalingGroupStatus' in params ? params.AutoscalingGroupStatus : null;
+        this.MaxNodesNum = 'MaxNodesNum' in params ? params.MaxNodesNum : null;
+        this.MinNodesNum = 'MinNodesNum' in params ? params.MinNodesNum : null;
+        this.DesiredNodesNum = 'DesiredNodesNum' in params ? params.DesiredNodesNum : null;
+
+    }
+}
+
+/**
  * 集群路由表对象
  * @class
  */
@@ -958,10 +1214,111 @@ class ClusterAsGroup extends  AbstractModel {
 }
 
 /**
- * DescribeClusterEndpointStatus请求参数结构体
+ * 集群的实例信息
  * @class
  */
-class DescribeClusterEndpointStatusRequest extends  AbstractModel {
+class Instance extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 节点角色, MASTER, WORKER, ETCD, MASTER_ETCD,ALL, 默认为WORKER
+         * @type {string || null}
+         */
+        this.InstanceRole = null;
+
+        /**
+         * 实例异常(或者处于初始化中)的原因
+         * @type {string || null}
+         */
+        this.FailedReason = null;
+
+        /**
+         * 实例的状态（running 运行中，initializing 初始化中，failed 异常）
+         * @type {string || null}
+         */
+        this.InstanceState = null;
+
+        /**
+         * 实例是否封锁状态
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DrainStatus = null;
+
+        /**
+         * 节点配置
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {InstanceAdvancedSettings || null}
+         */
+        this.InstanceAdvancedSettings = null;
+
+        /**
+         * 添加时间
+         * @type {string || null}
+         */
+        this.CreatedTime = null;
+
+        /**
+         * 节点内网IP
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.LanIP = null;
+
+        /**
+         * 资源池ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NodePoolId = null;
+
+        /**
+         * 自动伸缩组ID
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AutoscalingGroupId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.InstanceRole = 'InstanceRole' in params ? params.InstanceRole : null;
+        this.FailedReason = 'FailedReason' in params ? params.FailedReason : null;
+        this.InstanceState = 'InstanceState' in params ? params.InstanceState : null;
+        this.DrainStatus = 'DrainStatus' in params ? params.DrainStatus : null;
+
+        if (params.InstanceAdvancedSettings) {
+            let obj = new InstanceAdvancedSettings();
+            obj.deserialize(params.InstanceAdvancedSettings)
+            this.InstanceAdvancedSettings = obj;
+        }
+        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
+        this.LanIP = 'LanIP' in params ? params.LanIP : null;
+        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
+        this.AutoscalingGroupId = 'AutoscalingGroupId' in params ? params.AutoscalingGroupId : null;
+
+    }
+}
+
+/**
+ * CreateClusterNodePoolFromExistingAsg请求参数结构体
+ * @class
+ */
+class CreateClusterNodePoolFromExistingAsgRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -972,10 +1329,10 @@ class DescribeClusterEndpointStatusRequest extends  AbstractModel {
         this.ClusterId = null;
 
         /**
-         * 是否为外网访问（TRUE 外网访问 FALSE 内网访问，默认值： FALSE）
-         * @type {boolean || null}
+         * 伸缩组ID
+         * @type {string || null}
          */
-        this.IsExtranet = null;
+        this.AutoscalingGroupId = null;
 
     }
 
@@ -987,7 +1344,7 @@ class DescribeClusterEndpointStatusRequest extends  AbstractModel {
             return;
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
-        this.IsExtranet = 'IsExtranet' in params ? params.IsExtranet : null;
+        this.AutoscalingGroupId = 'AutoscalingGroupId' in params ? params.AutoscalingGroupId : null;
 
     }
 }
@@ -1023,6 +1380,35 @@ class Tag extends  AbstractModel {
         }
         this.Key = 'Key' in params ? params.Key : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * DescribePrometheusAgentInstances请求参数结构体
+ * @class
+ */
+class DescribePrometheusAgentInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群id
+可以是tke, eks, edge的集群id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
 
     }
 }
@@ -1664,6 +2050,34 @@ class ClusterBasicSettings extends  AbstractModel {
 }
 
 /**
+ * CreatePrometheusDashboard返回参数结构体
+ * @class
+ */
+class CreatePrometheusDashboardResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 路由表冲突对象
  * @class
  */
@@ -1835,6 +2249,55 @@ class CreateClusterInstancesRequest extends  AbstractModel {
             obj.deserialize(params.InstanceAdvancedSettings)
             this.InstanceAdvancedSettings = obj;
         }
+
+    }
+}
+
+/**
+ * 手动加入的节点
+ * @class
+ */
+class ManuallyAdded extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 加入中节的点数量
+         * @type {number || null}
+         */
+        this.Joining = null;
+
+        /**
+         * 初始化中的节点数量
+         * @type {number || null}
+         */
+        this.Initializing = null;
+
+        /**
+         * 正常的节点数量
+         * @type {number || null}
+         */
+        this.Normal = null;
+
+        /**
+         * 节点总数
+         * @type {number || null}
+         */
+        this.Total = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Joining = 'Joining' in params ? params.Joining : null;
+        this.Initializing = 'Initializing' in params ? params.Initializing : null;
+        this.Normal = 'Normal' in params ? params.Normal : null;
+        this.Total = 'Total' in params ? params.Total : null;
 
     }
 }
@@ -2023,6 +2486,48 @@ class CreateClusterEndpointVipRequest extends  AbstractModel {
 }
 
 /**
+ * kubernetes Taint
+ * @class
+ */
+class Taint extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Key
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * Value
+         * @type {string || null}
+         */
+        this.Value = null;
+
+        /**
+         * Effect
+         * @type {string || null}
+         */
+        this.Effect = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Value = 'Value' in params ? params.Value : null;
+        this.Effect = 'Effect' in params ? params.Effect : null;
+
+    }
+}
+
+/**
  * 已经存在的实例信息
  * @class
  */
@@ -2156,25 +2661,25 @@ class ExistedInstance extends  AbstractModel {
 }
 
 /**
- * DescribeRouteTableConflicts返回参数结构体
+ * DescribeClusterNodePools返回参数结构体
  * @class
  */
-class DescribeRouteTableConflictsResponse extends  AbstractModel {
+class DescribeClusterNodePoolsResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 路由表是否冲突。
-         * @type {boolean || null}
+         * NodePools（节点池列表）
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<NodePool> || null}
          */
-        this.HasConflict = null;
+        this.NodePoolSet = null;
 
         /**
-         * 路由表冲突列表。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<RouteTableConflict> || null}
+         * 资源总数
+         * @type {number || null}
          */
-        this.RouteTableConflictSet = null;
+        this.TotalCount = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2191,15 +2696,43 @@ class DescribeRouteTableConflictsResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.HasConflict = 'HasConflict' in params ? params.HasConflict : null;
 
-        if (params.RouteTableConflictSet) {
-            this.RouteTableConflictSet = new Array();
-            for (let z in params.RouteTableConflictSet) {
-                let obj = new RouteTableConflict();
-                obj.deserialize(params.RouteTableConflictSet[z]);
-                this.RouteTableConflictSet.push(obj);
+        if (params.NodePoolSet) {
+            this.NodePoolSet = new Array();
+            for (let z in params.NodePoolSet) {
+                let obj = new NodePool();
+                obj.deserialize(params.NodePoolSet[z]);
+                this.NodePoolSet.push(obj);
             }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * AddNodeToNodePool返回参数结构体
+ * @class
+ */
+class AddNodeToNodePoolResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
@@ -2429,6 +2962,34 @@ class DataDisk extends  AbstractModel {
 }
 
 /**
+ * ModifyClusterNodePool返回参数结构体
+ * @class
+ */
+class ModifyClusterNodePoolResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeExistedInstances返回参数结构体
  * @class
  */
@@ -2560,77 +3121,24 @@ class LoginSettings extends  AbstractModel {
 }
 
 /**
- * 集群的实例信息
+ * CreateClusterNodePoolFromExistingAsg返回参数结构体
  * @class
  */
-class Instance extends  AbstractModel {
+class CreateClusterNodePoolFromExistingAsgResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 实例ID
-         * @type {string || null}
-         */
-        this.InstanceId = null;
-
-        /**
-         * 节点角色, MASTER, WORKER, ETCD, MASTER_ETCD,ALL, 默认为WORKER
-         * @type {string || null}
-         */
-        this.InstanceRole = null;
-
-        /**
-         * 实例异常(或者处于初始化中)的原因
-         * @type {string || null}
-         */
-        this.FailedReason = null;
-
-        /**
-         * 实例的状态（running 运行中，initializing 初始化中，failed 异常）
-         * @type {string || null}
-         */
-        this.InstanceState = null;
-
-        /**
-         * 实例是否封锁状态
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.DrainStatus = null;
-
-        /**
-         * 节点配置
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {InstanceAdvancedSettings || null}
-         */
-        this.InstanceAdvancedSettings = null;
-
-        /**
-         * 添加时间
-         * @type {string || null}
-         */
-        this.CreatedTime = null;
-
-        /**
-         * 节点内网IP
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.LanIP = null;
-
-        /**
-         * 资源池ID
-注意：此字段可能返回 null，表示取不到有效值。
+         * 节点池ID
          * @type {string || null}
          */
         this.NodePoolId = null;
 
         /**
-         * 自动伸缩组ID
-注意：此字段可能返回 null，表示取不到有效值。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.AutoscalingGroupId = null;
+        this.RequestId = null;
 
     }
 
@@ -2641,21 +3149,95 @@ class Instance extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
-        this.InstanceRole = 'InstanceRole' in params ? params.InstanceRole : null;
-        this.FailedReason = 'FailedReason' in params ? params.FailedReason : null;
-        this.InstanceState = 'InstanceState' in params ? params.InstanceState : null;
-        this.DrainStatus = 'DrainStatus' in params ? params.DrainStatus : null;
-
-        if (params.InstanceAdvancedSettings) {
-            let obj = new InstanceAdvancedSettings();
-            obj.deserialize(params.InstanceAdvancedSettings)
-            this.InstanceAdvancedSettings = obj;
-        }
-        this.CreatedTime = 'CreatedTime' in params ? params.CreatedTime : null;
-        this.LanIP = 'LanIP' in params ? params.LanIP : null;
         this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
-        this.AutoscalingGroupId = 'AutoscalingGroupId' in params ? params.AutoscalingGroupId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeClusterEndpointStatus请求参数结构体
+ * @class
+ */
+class DescribeClusterEndpointStatusRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 是否为外网访问（TRUE 外网访问 FALSE 内网访问，默认值： FALSE）
+         * @type {boolean || null}
+         */
+        this.IsExtranet = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.IsExtranet = 'IsExtranet' in params ? params.IsExtranet : null;
+
+    }
+}
+
+/**
+ * ModifyClusterAttribute返回参数结构体
+ * @class
+ */
+class ModifyClusterAttributeResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群所属项目
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 集群名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterName = null;
+
+        /**
+         * 集群描述
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterDesc = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
+        this.ClusterDesc = 'ClusterDesc' in params ? params.ClusterDesc : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -2770,6 +3352,57 @@ class CreateClusterAsGroupRequest extends  AbstractModel {
                 this.Labels.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * DescribeRouteTableConflicts返回参数结构体
+ * @class
+ */
+class DescribeRouteTableConflictsResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 路由表是否冲突。
+         * @type {boolean || null}
+         */
+        this.HasConflict = null;
+
+        /**
+         * 路由表冲突列表。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<RouteTableConflict> || null}
+         */
+        this.RouteTableConflictSet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.HasConflict = 'HasConflict' in params ? params.HasConflict : null;
+
+        if (params.RouteTableConflictSet) {
+            this.RouteTableConflictSet = new Array();
+            for (let z in params.RouteTableConflictSet) {
+                let obj = new RouteTableConflict();
+                obj.deserialize(params.RouteTableConflictSet[z]);
+                this.RouteTableConflictSet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -3185,6 +3818,104 @@ class DescribeClusterInstancesRequest extends  AbstractModel {
 }
 
 /**
+ * 描述了k8s集群相关配置与信息。
+ * @class
+ */
+class InstanceAdvancedSettings extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 数据盘挂载点, 默认不挂载数据盘. 已格式化的 ext3，ext4，xfs 文件系统的数据盘将直接挂载，其他文件系统或未格式化的数据盘将自动格式化为ext4 并挂载，请注意备份数据! 无数据盘或有多块数据盘的云主机此设置不生效。
+注意，注意，多盘场景请使用下方的DataDisks数据结构，设置对应的云盘类型、云盘大小、挂载路径、是否格式化等信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.MountTarget = null;
+
+        /**
+         * dockerd --graph 指定值, 默认为 /var/lib/docker
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DockerGraphPath = null;
+
+        /**
+         * base64 编码的用户脚本, 此脚本会在 k8s 组件运行后执行, 需要用户保证脚本的可重入及重试逻辑, 脚本及其生成的日志文件可在节点的 /data/ccs_userscript/ 路径查看, 如果要求节点需要在进行初始化完成后才可加入调度, 可配合 unschedulable 参数使用, 在 userScript 最后初始化完成后, 添加 kubectl uncordon nodename --kubeconfig=/root/.kube/config 命令使节点加入调度
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UserScript = null;
+
+        /**
+         * 设置加入的节点是否参与调度，默认值为0，表示参与调度；非0表示不参与调度, 待节点初始化完成之后, 可执行kubectl uncordon nodename使node加入调度.
+         * @type {number || null}
+         */
+        this.Unschedulable = null;
+
+        /**
+         * 节点Label数组
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Label> || null}
+         */
+        this.Labels = null;
+
+        /**
+         * 多盘数据盘挂载信息，同时请确保购买CVM的参数传递了购买多个数据盘的信息，如添加节点CreateClusterInstances API的RunInstancesPara下的DataDisks也设置了购买多个数据盘, 具体可以参考CreateClusterInstances接口的，添加集群节点(多块数据盘)样例
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DataDisk> || null}
+         */
+        this.DataDisks = null;
+
+        /**
+         * 节点相关的自定义参数信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {InstanceExtraArgs || null}
+         */
+        this.ExtraArgs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.MountTarget = 'MountTarget' in params ? params.MountTarget : null;
+        this.DockerGraphPath = 'DockerGraphPath' in params ? params.DockerGraphPath : null;
+        this.UserScript = 'UserScript' in params ? params.UserScript : null;
+        this.Unschedulable = 'Unschedulable' in params ? params.Unschedulable : null;
+
+        if (params.Labels) {
+            this.Labels = new Array();
+            for (let z in params.Labels) {
+                let obj = new Label();
+                obj.deserialize(params.Labels[z]);
+                this.Labels.push(obj);
+            }
+        }
+
+        if (params.DataDisks) {
+            this.DataDisks = new Array();
+            for (let z in params.DataDisks) {
+                let obj = new DataDisk();
+                obj.deserialize(params.DataDisks[z]);
+                this.DataDisks.push(obj);
+            }
+        }
+
+        if (params.ExtraArgs) {
+            let obj = new InstanceExtraArgs();
+            obj.deserialize(params.ExtraArgs)
+            this.ExtraArgs = obj;
+        }
+
+    }
+}
+
+/**
  * >描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
 > * 若存在多个`Filter`时，`Filter`间的关系为逻辑与（`AND`）关系。
 > * 若同一个`Filter`存在多个`Values`，同一`Filter`下`Values`间的关系为逻辑或（`OR`）关系。
@@ -3226,6 +3957,99 @@ class Filter extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Values = 'Values' in params ? params.Values : null;
+
+    }
+}
+
+/**
+ * ModifyClusterNodePool请求参数结构体
+ * @class
+ */
+class ModifyClusterNodePoolRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群ID
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 节点池ID
+         * @type {string || null}
+         */
+        this.NodePoolId = null;
+
+        /**
+         * 名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 最大节点数
+         * @type {number || null}
+         */
+        this.MaxNodesNum = null;
+
+        /**
+         * 最小节点数
+         * @type {number || null}
+         */
+        this.MinNodesNum = null;
+
+        /**
+         * 标签
+         * @type {Array.<Label> || null}
+         */
+        this.Labels = null;
+
+        /**
+         * 污点
+         * @type {Array.<Taint> || null}
+         */
+        this.Taints = null;
+
+        /**
+         * 是否开启伸缩
+         * @type {boolean || null}
+         */
+        this.EnableAutoscale = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
+        this.Name = 'Name' in params ? params.Name : null;
+        this.MaxNodesNum = 'MaxNodesNum' in params ? params.MaxNodesNum : null;
+        this.MinNodesNum = 'MinNodesNum' in params ? params.MinNodesNum : null;
+
+        if (params.Labels) {
+            this.Labels = new Array();
+            for (let z in params.Labels) {
+                let obj = new Label();
+                obj.deserialize(params.Labels[z]);
+                this.Labels.push(obj);
+            }
+        }
+
+        if (params.Taints) {
+            this.Taints = new Array();
+            for (let z in params.Taints) {
+                let obj = new Taint();
+                obj.deserialize(params.Taints[z]);
+                this.Taints.push(obj);
+            }
+        }
+        this.EnableAutoscale = 'EnableAutoscale' in params ? params.EnableAutoscale : null;
 
     }
 }
@@ -3312,6 +4136,104 @@ class CreateClusterEndpointResponse extends  AbstractModel {
 }
 
 /**
+ * CreateClusterNodePool请求参数结构体
+ * @class
+ */
+class CreateClusterNodePoolRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * cluster id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * AutoScalingGroupPara AS组参数
+         * @type {string || null}
+         */
+        this.AutoScalingGroupPara = null;
+
+        /**
+         * LaunchConfigurePara 运行参数
+         * @type {string || null}
+         */
+        this.LaunchConfigurePara = null;
+
+        /**
+         * InstanceAdvancedSettings 示例参数
+         * @type {InstanceAdvancedSettings || null}
+         */
+        this.InstanceAdvancedSettings = null;
+
+        /**
+         * 是否启用自动伸缩
+         * @type {boolean || null}
+         */
+        this.EnableAutoscale = null;
+
+        /**
+         * 节点池名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * Labels标签
+         * @type {Array.<Label> || null}
+         */
+        this.Labels = null;
+
+        /**
+         * Taints互斥
+         * @type {Array.<Taint> || null}
+         */
+        this.Taints = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.AutoScalingGroupPara = 'AutoScalingGroupPara' in params ? params.AutoScalingGroupPara : null;
+        this.LaunchConfigurePara = 'LaunchConfigurePara' in params ? params.LaunchConfigurePara : null;
+
+        if (params.InstanceAdvancedSettings) {
+            let obj = new InstanceAdvancedSettings();
+            obj.deserialize(params.InstanceAdvancedSettings)
+            this.InstanceAdvancedSettings = obj;
+        }
+        this.EnableAutoscale = 'EnableAutoscale' in params ? params.EnableAutoscale : null;
+        this.Name = 'Name' in params ? params.Name : null;
+
+        if (params.Labels) {
+            this.Labels = new Array();
+            for (let z in params.Labels) {
+                let obj = new Label();
+                obj.deserialize(params.Labels[z]);
+                this.Labels.push(obj);
+            }
+        }
+
+        if (params.Taints) {
+            this.Taints = new Array();
+            for (let z in params.Taints) {
+                let obj = new Taint();
+                obj.deserialize(params.Taints[z]);
+                this.Taints.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * 集群高级配置
  * @class
  */
@@ -3391,6 +4313,12 @@ class ClusterAdvancedSettings extends  AbstractModel {
          */
         this.AuditLogTopicId = null;
 
+        /**
+         * 区分单网卡多IP模式和独立网卡模式
+         * @type {string || null}
+         */
+        this.VpcCniType = null;
+
     }
 
     /**
@@ -3417,6 +4345,7 @@ class ClusterAdvancedSettings extends  AbstractModel {
         this.AuditEnabled = 'AuditEnabled' in params ? params.AuditEnabled : null;
         this.AuditLogsetId = 'AuditLogsetId' in params ? params.AuditLogsetId : null;
         this.AuditLogTopicId = 'AuditLogTopicId' in params ? params.AuditLogTopicId : null;
+        this.VpcCniType = 'VpcCniType' in params ? params.VpcCniType : null;
 
     }
 }
@@ -3445,6 +4374,48 @@ class AcquireClusterAdminRoleResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DeleteClusterNodePool请求参数结构体
+ * @class
+ */
+class DeleteClusterNodePoolRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 节点池对应的 ClusterId
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 需要删除的节点池 Id 列表
+         * @type {Array.<string> || null}
+         */
+        this.NodePoolIds = null;
+
+        /**
+         * 删除节点池时是否保留节点池内节点(节点仍然会被移出集群，但对应的实例不会被销毁)
+         * @type {boolean || null}
+         */
+        this.KeepInstance = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NodePoolIds = 'NodePoolIds' in params ? params.NodePoolIds : null;
+        this.KeepInstance = 'KeepInstance' in params ? params.KeepInstance : null;
 
     }
 }
@@ -3681,6 +4652,49 @@ class DescribeClusterEndpointStatusResponse extends  AbstractModel {
 }
 
 /**
+ * CreatePrometheusDashboard请求参数结构体
+ * @class
+ */
+class CreatePrometheusDashboardRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 面板组名称
+         * @type {string || null}
+         */
+        this.DashboardName = null;
+
+        /**
+         * 面板列表
+每一项是一个grafana dashboard的json定义
+         * @type {Array.<string> || null}
+         */
+        this.Contents = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.DashboardName = 'DashboardName' in params ? params.DashboardName : null;
+        this.Contents = 'Contents' in params ? params.Contents : null;
+
+    }
+}
+
+/**
  * AddExistedInstances返回参数结构体
  * @class
  */
@@ -3710,6 +4724,13 @@ class AddExistedInstancesResponse extends  AbstractModel {
         this.TimeoutInstanceIds = null;
 
         /**
+         * 失败的节点的失败原因
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<string> || null}
+         */
+        this.FailedReasons = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -3727,6 +4748,7 @@ class AddExistedInstancesResponse extends  AbstractModel {
         this.FailedInstanceIds = 'FailedInstanceIds' in params ? params.FailedInstanceIds : null;
         this.SuccInstanceIds = 'SuccInstanceIds' in params ? params.SuccInstanceIds : null;
         this.TimeoutInstanceIds = 'TimeoutInstanceIds' in params ? params.TimeoutInstanceIds : null;
+        this.FailedReasons = 'FailedReasons' in params ? params.FailedReasons : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -3789,33 +4811,19 @@ class DescribeClusterAsGroupOptionRequest extends  AbstractModel {
 }
 
 /**
- * ModifyClusterAttribute返回参数结构体
+ * DescribePrometheusAgentInstances返回参数结构体
  * @class
  */
-class ModifyClusterAttributeResponse extends  AbstractModel {
+class DescribePrometheusAgentInstancesResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 集群所属项目
+         * 关联该集群的实例列表
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
+         * @type {Array.<string> || null}
          */
-        this.ProjectId = null;
-
-        /**
-         * 集群名称
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ClusterName = null;
-
-        /**
-         * 集群描述
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ClusterDesc = null;
+        this.Instances = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3832,9 +4840,7 @@ class ModifyClusterAttributeResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-        this.ClusterName = 'ClusterName' in params ? params.ClusterName : null;
-        this.ClusterDesc = 'ClusterDesc' in params ? params.ClusterDesc : null;
+        this.Instances = 'Instances' in params ? params.Instances : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4128,6 +5134,34 @@ class CreateClusterInstancesResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeClusterNodePools请求参数结构体
+ * @class
+ */
+class DescribeClusterNodePoolsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ClusterId（集群id）
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+
+    }
+}
+
+/**
  * DescribeClusterRouteTables请求参数结构体
  * @class
  */
@@ -4316,6 +5350,41 @@ class DeleteClusterEndpointRequest extends  AbstractModel {
         }
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.IsExtranet = 'IsExtranet' in params ? params.IsExtranet : null;
+
+    }
+}
+
+/**
+ * DescribeClusterNodePoolDetail请求参数结构体
+ * @class
+ */
+class DescribeClusterNodePoolDetailRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 节点池id
+         * @type {string || null}
+         */
+        this.NodePoolId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
 
     }
 }
@@ -4669,6 +5738,34 @@ class ClusterAsGroupAttribute extends  AbstractModel {
 }
 
 /**
+ * DeleteClusterNodePool返回参数结构体
+ * @class
+ */
+class DeleteClusterNodePoolResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 描述了 “云监控” 服务相关的信息
  * @class
  */
@@ -4697,61 +5794,24 @@ class RunMonitorServiceEnabled extends  AbstractModel {
 }
 
 /**
- * 描述了k8s集群相关配置与信息。
+ * CreateClusterNodePool返回参数结构体
  * @class
  */
-class InstanceAdvancedSettings extends  AbstractModel {
+class CreateClusterNodePoolResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 数据盘挂载点, 默认不挂载数据盘. 已格式化的 ext3，ext4，xfs 文件系统的数据盘将直接挂载，其他文件系统或未格式化的数据盘将自动格式化为ext4 并挂载，请注意备份数据! 无数据盘或有多块数据盘的云主机此设置不生效。
-注意，注意，多盘场景请使用下方的DataDisks数据结构，设置对应的云盘类型、云盘大小、挂载路径、是否格式化等信息。
-注意：此字段可能返回 null，表示取不到有效值。
+         * 节点池id
          * @type {string || null}
          */
-        this.MountTarget = null;
+        this.NodePoolId = null;
 
         /**
-         * dockerd --graph 指定值, 默认为 /var/lib/docker
-注意：此字段可能返回 null，表示取不到有效值。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.DockerGraphPath = null;
-
-        /**
-         * base64 编码的用户脚本, 此脚本会在 k8s 组件运行后执行, 需要用户保证脚本的可重入及重试逻辑, 脚本及其生成的日志文件可在节点的 /data/ccs_userscript/ 路径查看, 如果要求节点需要在进行初始化完成后才可加入调度, 可配合 unschedulable 参数使用, 在 userScript 最后初始化完成后, 添加 kubectl uncordon nodename --kubeconfig=/root/.kube/config 命令使节点加入调度
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.UserScript = null;
-
-        /**
-         * 设置加入的节点是否参与调度，默认值为0，表示参与调度；非0表示不参与调度, 待节点初始化完成之后, 可执行kubectl uncordon nodename使node加入调度.
-         * @type {number || null}
-         */
-        this.Unschedulable = null;
-
-        /**
-         * 节点Label数组
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<Label> || null}
-         */
-        this.Labels = null;
-
-        /**
-         * 多盘数据盘挂载信息，同时请确保购买CVM的参数传递了购买多个数据盘的信息，如添加节点CreateClusterInstances API的RunInstancesPara下的DataDisks也设置了购买多个数据盘, 具体可以参考CreateClusterInstances接口的，添加集群节点(多块数据盘)样例
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<DataDisk> || null}
-         */
-        this.DataDisks = null;
-
-        /**
-         * 节点相关的自定义参数信息
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {InstanceExtraArgs || null}
-         */
-        this.ExtraArgs = null;
+        this.RequestId = null;
 
     }
 
@@ -4762,34 +5822,8 @@ class InstanceAdvancedSettings extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.MountTarget = 'MountTarget' in params ? params.MountTarget : null;
-        this.DockerGraphPath = 'DockerGraphPath' in params ? params.DockerGraphPath : null;
-        this.UserScript = 'UserScript' in params ? params.UserScript : null;
-        this.Unschedulable = 'Unschedulable' in params ? params.Unschedulable : null;
-
-        if (params.Labels) {
-            this.Labels = new Array();
-            for (let z in params.Labels) {
-                let obj = new Label();
-                obj.deserialize(params.Labels[z]);
-                this.Labels.push(obj);
-            }
-        }
-
-        if (params.DataDisks) {
-            this.DataDisks = new Array();
-            for (let z in params.DataDisks) {
-                let obj = new DataDisk();
-                obj.deserialize(params.DataDisks[z]);
-                this.DataDisks.push(obj);
-            }
-        }
-
-        if (params.ExtraArgs) {
-            let obj = new InstanceExtraArgs();
-            obj.deserialize(params.ExtraArgs)
-            this.ExtraArgs = obj;
-        }
+        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -4885,6 +5919,53 @@ class InstanceDataDiskMountSetting extends  AbstractModel {
 }
 
 /**
+ * 节点统计列表
+ * @class
+ */
+class NodeCountSummary extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 手动管理的节点
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {ManuallyAdded || null}
+         */
+        this.ManuallyAdded = null;
+
+        /**
+         * 自动管理的节点
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {AutoscalingAdded || null}
+         */
+        this.AutoscalingAdded = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ManuallyAdded) {
+            let obj = new ManuallyAdded();
+            obj.deserialize(params.ManuallyAdded)
+            this.ManuallyAdded = obj;
+        }
+
+        if (params.AutoscalingAdded) {
+            let obj = new AutoscalingAdded();
+            obj.deserialize(params.AutoscalingAdded)
+            this.AutoscalingAdded = obj;
+        }
+
+    }
+}
+
+/**
  * DescribeClusterAsGroups返回参数结构体
  * @class
  */
@@ -4934,17 +6015,101 @@ class DescribeClusterAsGroupsResponse extends  AbstractModel {
     }
 }
 
+/**
+ * RemoveNodeFromNodePool请求参数结构体
+ * @class
+ */
+class RemoveNodeFromNodePoolRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 集群id
+         * @type {string || null}
+         */
+        this.ClusterId = null;
+
+        /**
+         * 节点池id
+         * @type {string || null}
+         */
+        this.NodePoolId = null;
+
+        /**
+         * 节点id列表
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
+        this.NodePoolId = 'NodePoolId' in params ? params.NodePoolId : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * DescribeClusterNodePoolDetail返回参数结构体
+ * @class
+ */
+class DescribeClusterNodePoolDetailResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 节点池详情
+         * @type {NodePool || null}
+         */
+        this.NodePool = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.NodePool) {
+            let obj = new NodePool();
+            obj.deserialize(params.NodePool)
+            this.NodePool = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
 module.exports = {
     DescribeClusterEndpointVipStatusRequest: DescribeClusterEndpointVipStatusRequest,
     DescribeClusterSecurityResponse: DescribeClusterSecurityResponse,
     DescribeClusterSecurityRequest: DescribeClusterSecurityRequest,
     DeleteClusterInstancesResponse: DeleteClusterInstancesResponse,
     DescribeClusterKubeconfigResponse: DescribeClusterKubeconfigResponse,
+    RemoveNodeFromNodePoolResponse: RemoveNodeFromNodePoolResponse,
     CreateClusterRouteRequest: CreateClusterRouteRequest,
     DescribeClusterEndpointVipStatusResponse: DescribeClusterEndpointVipStatusResponse,
     ModifyClusterEndpointSPRequest: ModifyClusterEndpointSPRequest,
     DescribeClusterInstancesResponse: DescribeClusterInstancesResponse,
     DeleteClusterResponse: DeleteClusterResponse,
+    AutoscalingAdded: AutoscalingAdded,
     CreateClusterRouteTableResponse: CreateClusterRouteTableResponse,
     DeleteClusterEndpointResponse: DeleteClusterEndpointResponse,
     RouteInfo: RouteInfo,
@@ -4954,10 +6119,14 @@ module.exports = {
     DescribeExistedInstancesRequest: DescribeExistedInstancesRequest,
     DescribeRegionsResponse: DescribeRegionsResponse,
     CreateClusterRouteResponse: CreateClusterRouteResponse,
+    AddNodeToNodePoolRequest: AddNodeToNodePoolRequest,
+    NodePool: NodePool,
     RouteTableInfo: RouteTableInfo,
     ClusterAsGroup: ClusterAsGroup,
-    DescribeClusterEndpointStatusRequest: DescribeClusterEndpointStatusRequest,
+    Instance: Instance,
+    CreateClusterNodePoolFromExistingAsgRequest: CreateClusterNodePoolFromExistingAsgRequest,
     Tag: Tag,
+    DescribePrometheusAgentInstancesRequest: DescribePrometheusAgentInstancesRequest,
     ClusterNetworkSettings: ClusterNetworkSettings,
     DescribeImagesResponse: DescribeImagesResponse,
     AutoScalingGroupRange: AutoScalingGroupRange,
@@ -4971,27 +6140,35 @@ module.exports = {
     Label: Label,
     DeleteClusterEndpointVipResponse: DeleteClusterEndpointVipResponse,
     ClusterBasicSettings: ClusterBasicSettings,
+    CreatePrometheusDashboardResponse: CreatePrometheusDashboardResponse,
     RouteTableConflict: RouteTableConflict,
     DeleteClusterInstancesRequest: DeleteClusterInstancesRequest,
     ModifyClusterAsGroupAttributeResponse: ModifyClusterAsGroupAttributeResponse,
     CreateClusterInstancesRequest: CreateClusterInstancesRequest,
+    ManuallyAdded: ManuallyAdded,
     DescribeClusterRouteTablesResponse: DescribeClusterRouteTablesResponse,
     DescribeClusterKubeconfigRequest: DescribeClusterKubeconfigRequest,
     ClusterCIDRSettings: ClusterCIDRSettings,
     CreateClusterEndpointVipRequest: CreateClusterEndpointVipRequest,
+    Taint: Taint,
     ExistedInstance: ExistedInstance,
-    DescribeRouteTableConflictsResponse: DescribeRouteTableConflictsResponse,
+    DescribeClusterNodePoolsResponse: DescribeClusterNodePoolsResponse,
+    AddNodeToNodePoolResponse: AddNodeToNodePoolResponse,
     TagSpecification: TagSpecification,
     DescribeRegionsRequest: DescribeRegionsRequest,
     DescribeClustersResponse: DescribeClustersResponse,
     ClusterExtraArgs: ClusterExtraArgs,
     DataDisk: DataDisk,
+    ModifyClusterNodePoolResponse: ModifyClusterNodePoolResponse,
     DescribeExistedInstancesResponse: DescribeExistedInstancesResponse,
     ResourceDeleteOption: ResourceDeleteOption,
     LoginSettings: LoginSettings,
-    Instance: Instance,
+    CreateClusterNodePoolFromExistingAsgResponse: CreateClusterNodePoolFromExistingAsgResponse,
+    DescribeClusterEndpointStatusRequest: DescribeClusterEndpointStatusRequest,
+    ModifyClusterAttributeResponse: ModifyClusterAttributeResponse,
     EnhancedService: EnhancedService,
     CreateClusterAsGroupRequest: CreateClusterAsGroupRequest,
+    DescribeRouteTableConflictsResponse: DescribeRouteTableConflictsResponse,
     CreateClusterResponse: CreateClusterResponse,
     RunSecurityServiceEnabled: RunSecurityServiceEnabled,
     DeleteClusterRouteTableRequest: DeleteClusterRouteTableRequest,
@@ -5001,27 +6178,34 @@ module.exports = {
     CreateClusterAsGroupResponse: CreateClusterAsGroupResponse,
     DeleteClusterAsGroupsResponse: DeleteClusterAsGroupsResponse,
     DescribeClusterInstancesRequest: DescribeClusterInstancesRequest,
+    InstanceAdvancedSettings: InstanceAdvancedSettings,
     Filter: Filter,
+    ModifyClusterNodePoolRequest: ModifyClusterNodePoolRequest,
     ImageInstance: ImageInstance,
     CreateClusterEndpointResponse: CreateClusterEndpointResponse,
+    CreateClusterNodePoolRequest: CreateClusterNodePoolRequest,
     ClusterAdvancedSettings: ClusterAdvancedSettings,
     AcquireClusterAdminRoleResponse: AcquireClusterAdminRoleResponse,
+    DeleteClusterNodePoolRequest: DeleteClusterNodePoolRequest,
     DeleteClusterEndpointVipRequest: DeleteClusterEndpointVipRequest,
     Cluster: Cluster,
     DescribeClusterEndpointStatusResponse: DescribeClusterEndpointStatusResponse,
+    CreatePrometheusDashboardRequest: CreatePrometheusDashboardRequest,
     AddExistedInstancesResponse: AddExistedInstancesResponse,
     DeleteClusterRouteTableResponse: DeleteClusterRouteTableResponse,
     DescribeClusterAsGroupOptionRequest: DescribeClusterAsGroupOptionRequest,
-    ModifyClusterAttributeResponse: ModifyClusterAttributeResponse,
+    DescribePrometheusAgentInstancesResponse: DescribePrometheusAgentInstancesResponse,
     CreateClusterEndpointRequest: CreateClusterEndpointRequest,
     AddExistedInstancesRequest: AddExistedInstancesRequest,
     ClusterAsGroupOption: ClusterAsGroupOption,
     CreateClusterInstancesResponse: CreateClusterInstancesResponse,
+    DescribeClusterNodePoolsRequest: DescribeClusterNodePoolsRequest,
     DescribeClusterRouteTablesRequest: DescribeClusterRouteTablesRequest,
     ExistedInstancesForNode: ExistedInstancesForNode,
     DescribeClusterRoutesRequest: DescribeClusterRoutesRequest,
     DeleteClusterRouteRequest: DeleteClusterRouteRequest,
     DeleteClusterEndpointRequest: DeleteClusterEndpointRequest,
+    DescribeClusterNodePoolDetailRequest: DescribeClusterNodePoolDetailRequest,
     CreateClusterRouteTableRequest: CreateClusterRouteTableRequest,
     DescribeClusterAsGroupsRequest: DescribeClusterAsGroupsRequest,
     DescribeImagesRequest: DescribeImagesRequest,
@@ -5030,10 +6214,14 @@ module.exports = {
     ExistedInstancesPara: ExistedInstancesPara,
     DescribeClusterAsGroupOptionResponse: DescribeClusterAsGroupOptionResponse,
     ClusterAsGroupAttribute: ClusterAsGroupAttribute,
+    DeleteClusterNodePoolResponse: DeleteClusterNodePoolResponse,
     RunMonitorServiceEnabled: RunMonitorServiceEnabled,
-    InstanceAdvancedSettings: InstanceAdvancedSettings,
+    CreateClusterNodePoolResponse: CreateClusterNodePoolResponse,
     ModifyClusterAsGroupAttributeRequest: ModifyClusterAsGroupAttributeRequest,
     InstanceDataDiskMountSetting: InstanceDataDiskMountSetting,
+    NodeCountSummary: NodeCountSummary,
     DescribeClusterAsGroupsResponse: DescribeClusterAsGroupsResponse,
+    RemoveNodeFromNodePoolRequest: RemoveNodeFromNodePoolRequest,
+    DescribeClusterNodePoolDetailResponse: DescribeClusterNodePoolDetailResponse,
 
 }

@@ -21,7 +21,9 @@ const BeautifyVideoRequest = models.BeautifyVideoRequest;
 const CancelBeautifyVideoJobResponse = models.CancelBeautifyVideoJobResponse;
 const RGBAInfo = models.RGBAInfo;
 const BeautifyVideoOutput = models.BeautifyVideoOutput;
+const StyleImageProResponse = models.StyleImageProResponse;
 const LipColorInfo = models.LipColorInfo;
+const StyleImageRequest = models.StyleImageRequest;
 const CreateModelResponse = models.CreateModelResponse;
 const GetModelListResponse = models.GetModelListResponse;
 const BeautifyPicResponse = models.BeautifyPicResponse;
@@ -33,7 +35,9 @@ const DeleteModelResponse = models.DeleteModelResponse;
 const CancelBeautifyVideoJobRequest = models.CancelBeautifyVideoJobRequest;
 const BeautyParam = models.BeautyParam;
 const TryLipstickPicRequest = models.TryLipstickPicRequest;
+const StyleImageProRequest = models.StyleImageProRequest;
 const QueryBeautifyVideoJobResponse = models.QueryBeautifyVideoJobResponse;
+const StyleImageResponse = models.StyleImageResponse;
 const CreateModelRequest = models.CreateModelRequest;
 const FaceRect = models.FaceRect;
 const BeautifyPicRequest = models.BeautifyPicRequest;
@@ -65,21 +69,25 @@ class FmuClient extends AbstractClient {
     }
 
     /**
-     * 对图片中的人脸嘴唇进行着色，最多支持同时对一张图中的3张人脸进行试唇色。
-
-您可以通过事先注册在腾讯云的唇色素材（LUT文件）改变图片中的人脸唇色，也可以输入RGBA模型数值。
-
-为了更好的效果，建议您使用事先注册在腾讯云的唇色素材（LUT文件）。
-
->     
-- 公共参数中的签名方式请使用V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
-     * @param {TryLipstickPicRequest} req
-     * @param {function(string, TryLipstickPicResponse):void} cb
+     * 上传一张照片，输出滤镜处理后的图片。
+     * @param {StyleImageRequest} req
+     * @param {function(string, StyleImageResponse):void} cb
      * @public
      */
-    TryLipstickPic(req, cb) {
-        let resp = new TryLipstickPicResponse();
-        this.request("TryLipstickPic", req, resp, cb);
+    StyleImage(req, cb) {
+        let resp = new StyleImageResponse();
+        this.request("StyleImage", req, resp, cb);
+    }
+
+    /**
+     * 上传一张照片，输出滤镜处理后的图片。
+     * @param {StyleImageProRequest} req
+     * @param {function(string, StyleImageProResponse):void} cb
+     * @public
+     */
+    StyleImagePro(req, cb) {
+        let resp = new StyleImageProResponse();
+        this.request("StyleImagePro", req, resp, cb);
     }
 
     /**
@@ -124,6 +132,24 @@ class FmuClient extends AbstractClient {
     BeautifyPic(req, cb) {
         let resp = new BeautifyPicResponse();
         this.request("BeautifyPic", req, resp, cb);
+    }
+
+    /**
+     * 对图片中的人脸嘴唇进行着色，最多支持同时对一张图中的3张人脸进行试唇色。
+
+您可以通过事先注册在腾讯云的唇色素材（LUT文件）改变图片中的人脸唇色，也可以输入RGBA模型数值。
+
+为了更好的效果，建议您使用事先注册在腾讯云的唇色素材（LUT文件）。
+
+>     
+- 公共参数中的签名方式请使用V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
+     * @param {TryLipstickPicRequest} req
+     * @param {function(string, TryLipstickPicResponse):void} cb
+     * @public
+     */
+    TryLipstickPic(req, cb) {
+        let resp = new TryLipstickPicResponse();
+        this.request("TryLipstickPic", req, resp, cb);
     }
 
     /**

@@ -7023,6 +7023,62 @@ class DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse extends  Ab
 }
 
 /**
+ * 描述网络中心每个产品的配额信息
+ * @class
+ */
+class ProductQuota extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品配额ID
+         * @type {string || null}
+         */
+        this.QuotaId = null;
+
+        /**
+         * 产品配额名称
+         * @type {string || null}
+         */
+        this.QuotaName = null;
+
+        /**
+         * 产品当前配额
+         * @type {number || null}
+         */
+        this.QuotaCurrent = null;
+
+        /**
+         * 产品配额上限
+         * @type {number || null}
+         */
+        this.QuotaLimit = null;
+
+        /**
+         * 产品配额是否有地域属性
+         * @type {boolean || null}
+         */
+        this.QuotaRegion = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.QuotaId = 'QuotaId' in params ? params.QuotaId : null;
+        this.QuotaName = 'QuotaName' in params ? params.QuotaName : null;
+        this.QuotaCurrent = 'QuotaCurrent' in params ? params.QuotaCurrent : null;
+        this.QuotaLimit = 'QuotaLimit' in params ? params.QuotaLimit : null;
+        this.QuotaRegion = 'QuotaRegion' in params ? params.QuotaRegion : null;
+
+    }
+}
+
+/**
  * DescribeVpcIpv6Addresses返回参数结构体
  * @class
  */
@@ -11626,6 +11682,56 @@ NAT类型支持网络地址转换配置，类型确定后不能修改；一个�
 }
 
 /**
+ * DescribeProductQuota返回参数结构体
+ * @class
+ */
+class DescribeProductQuotaResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * ProductQuota对象数组
+         * @type {Array.<ProductQuota> || null}
+         */
+        this.ProductQuotaSet = null;
+
+        /**
+         * 符合条件的产品类型个数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ProductQuotaSet) {
+            this.ProductQuotaSet = new Array();
+            for (let z in params.ProductQuotaSet) {
+                let obj = new ProductQuota();
+                obj.deserialize(params.ProductQuotaSet[z]);
+                this.ProductQuotaSet.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 价格
  * @class
  */
@@ -12098,6 +12204,41 @@ class DetachCcnInstancesRequest extends  AbstractModel {
                 this.Instances.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * 过滤器
+ * @class
+ */
+class Filter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 属性名称, 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 属性值, 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Values = 'Values' in params ? params.Values : null;
 
     }
 }
@@ -13501,7 +13642,7 @@ class CreateAndAttachNetworkInterfaceRequest extends  AbstractModel {
         this.SubnetId = null;
 
         /**
-         * 云主机实例ID。
+         * 云服务器实例ID。
          * @type {string || null}
          */
         this.InstanceId = null;
@@ -14342,13 +14483,13 @@ class GatewayFlowMonitorDetail extends  AbstractModel {
         this.OutPkg = null;
 
         /**
-         * 入带宽，单位：`Byte`。
+         * 入流量，单位：`Byte`。
          * @type {number || null}
          */
         this.InTraffic = null;
 
         /**
-         * 出带宽，单位：`Byte`。
+         * 出流量，单位：`Byte`。
          * @type {number || null}
          */
         this.OutTraffic = null;
@@ -22107,24 +22248,18 @@ class UnassignPrivateIpAddressesRequest extends  AbstractModel {
 }
 
 /**
- * 过滤器
+ * DescribeProductQuota请求参数结构体
  * @class
  */
-class Filter extends  AbstractModel {
+class DescribeProductQuotaRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 属性名称, 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
+         * 查询的网络产品名称，如vpc、ccn等
          * @type {string || null}
          */
-        this.Name = null;
-
-        /**
-         * 属性值, 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
-         * @type {Array.<string> || null}
-         */
-        this.Values = null;
+        this.Product = null;
 
     }
 
@@ -22135,8 +22270,7 @@ class Filter extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.Values = 'Values' in params ? params.Values : null;
+        this.Product = 'Product' in params ? params.Product : null;
 
     }
 }
@@ -24310,6 +24444,7 @@ module.exports = {
     Vpc: Vpc,
     CreateVpnGatewayResponse: CreateVpnGatewayResponse,
     DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse: DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse,
+    ProductQuota: ProductQuota,
     DescribeVpcIpv6AddressesResponse: DescribeVpcIpv6AddressesResponse,
     ResetAttachCcnInstancesResponse: ResetAttachCcnInstancesResponse,
     RejectAttachCcnInstancesRequest: RejectAttachCcnInstancesRequest,
@@ -24406,6 +24541,7 @@ module.exports = {
     ModifyAddressesBandwidthRequest: ModifyAddressesBandwidthRequest,
     ResetVpnGatewayInternetMaxBandwidthRequest: ResetVpnGatewayInternetMaxBandwidthRequest,
     DirectConnectGateway: DirectConnectGateway,
+    DescribeProductQuotaResponse: DescribeProductQuotaResponse,
     Price: Price,
     HaVipDisassociateAddressIpRequest: HaVipDisassociateAddressIpRequest,
     DescribeBandwidthPackageResourcesResponse: DescribeBandwidthPackageResourcesResponse,
@@ -24418,6 +24554,7 @@ module.exports = {
     DescribeClassicLinkInstancesResponse: DescribeClassicLinkInstancesResponse,
     DescribeVpnGatewayCcnRoutesResponse: DescribeVpnGatewayCcnRoutesResponse,
     DetachCcnInstancesRequest: DetachCcnInstancesRequest,
+    Filter: Filter,
     CreateFlowLogResponse: CreateFlowLogResponse,
     DeleteDirectConnectGatewayRequest: DeleteDirectConnectGatewayRequest,
     ReleaseIp6AddressesBandwidthRequest: ReleaseIp6AddressesBandwidthRequest,
@@ -24643,7 +24780,7 @@ module.exports = {
     DetachClassicLinkVpcResponse: DetachClassicLinkVpcResponse,
     MigrateNetworkInterfaceResponse: MigrateNetworkInterfaceResponse,
     UnassignPrivateIpAddressesRequest: UnassignPrivateIpAddressesRequest,
-    Filter: Filter,
+    DescribeProductQuotaRequest: DescribeProductQuotaRequest,
     ModifyNetDetectResponse: ModifyNetDetectResponse,
     CreateHaVipRequest: CreateHaVipRequest,
     Ipv6SubnetCidrBlock: Ipv6SubnetCidrBlock,

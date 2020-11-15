@@ -563,6 +563,41 @@ class DescribeUsgRuleResponse extends  AbstractModel {
 }
 
 /**
+ * 标签
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签键
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * 标签值
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
  * 资源信息
  * @class
  */
@@ -696,6 +731,27 @@ class ResourceInfo extends  AbstractModel {
          */
         this.VpcName = null;
 
+        /**
+         * 创建者Uin账号
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreateUin = null;
+
+        /**
+         * 自动续费状态标识， 0-手动续费，1-自动续费，2-到期不续
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RenewFlag = null;
+
+        /**
+         * 标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
     }
 
     /**
@@ -731,6 +787,17 @@ class ResourceInfo extends  AbstractModel {
         this.Expired = 'Expired' in params ? params.Expired : null;
         this.RemainSeconds = 'RemainSeconds' in params ? params.RemainSeconds : null;
         this.VpcName = 'VpcName' in params ? params.VpcName : null;
+        this.CreateUin = 'CreateUin' in params ? params.CreateUin : null;
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
 
     }
 }
@@ -1010,6 +1077,20 @@ class DescribeVsmAttributesResponse extends  AbstractModel {
         this.SubnetCidrBlock = null;
 
         /**
+         * 资源所关联的Tag
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tags = null;
+
+        /**
+         * 资源续费标识，0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费(用户设置)
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RenewFlag = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -1052,7 +1133,52 @@ class DescribeVsmAttributesResponse extends  AbstractModel {
         this.VpcName = 'VpcName' in params ? params.VpcName : null;
         this.VpcCidrBlock = 'VpcCidrBlock' in params ? params.VpcCidrBlock : null;
         this.SubnetCidrBlock = 'SubnetCidrBlock' in params ? params.SubnetCidrBlock : null;
+
+        if (params.Tags) {
+            this.Tags = new Array();
+            for (let z in params.Tags) {
+                let obj = new Tag();
+                obj.deserialize(params.Tags[z]);
+                this.Tags.push(obj);
+            }
+        }
+        this.RenewFlag = 'RenewFlag' in params ? params.RenewFlag : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 标签过滤参数
+ * @class
+ */
+class TagFilter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签键
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * 标签值
+         * @type {Array.<string> || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
 
     }
 }
@@ -1418,6 +1544,12 @@ class DescribeVsmsRequest extends  AbstractModel {
          */
         this.SearchWord = null;
 
+        /**
+         * 标签过滤条件
+         * @type {Array.<TagFilter> || null}
+         */
+        this.TagFilters = null;
+
     }
 
     /**
@@ -1430,6 +1562,15 @@ class DescribeVsmsRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+
+        if (params.TagFilters) {
+            this.TagFilters = new Array();
+            for (let z in params.TagFilters) {
+                let obj = new TagFilter();
+                obj.deserialize(params.TagFilters[z]);
+                this.TagFilters.push(obj);
+            }
+        }
 
     }
 }
@@ -1614,11 +1755,13 @@ module.exports = {
     DescribeHSMByVpcIdRequest: DescribeHSMByVpcIdRequest,
     DescribeHSMByVpcIdResponse: DescribeHSMByVpcIdResponse,
     DescribeUsgRuleResponse: DescribeUsgRuleResponse,
+    Tag: Tag,
     ResourceInfo: ResourceInfo,
     DescribeVpcRequest: DescribeVpcRequest,
     Vpc: Vpc,
     DescribeUsgRequest: DescribeUsgRequest,
     DescribeVsmAttributesResponse: DescribeVsmAttributesResponse,
+    TagFilter: TagFilter,
     SgUnit: SgUnit,
     UsgRuleDetail: UsgRuleDetail,
     InquiryPriceBuyVsmResponse: InquiryPriceBuyVsmResponse,

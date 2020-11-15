@@ -1633,6 +1633,43 @@ class DeleteEcdnDomainResponse extends  AbstractModel {
 }
 
 /**
+ * 标签键和标签值
+ * @class
+ */
+class Tag extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 标签键
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TagKey = null;
+
+        /**
+         * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.TagValue = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TagKey = 'TagKey' in params ? params.TagKey : null;
+        this.TagValue = 'TagValue' in params ? params.TagValue : null;
+
+    }
+}
+
+/**
  * StopEcdnDomain返回参数结构体
  * @class
  */
@@ -1848,6 +1885,12 @@ class AddEcdnDomainRequest extends  AbstractModel {
          */
         this.ForceRedirect = null;
 
+        /**
+         * 域名绑定的标签
+         * @type {Array.<Tag> || null}
+         */
+        this.Tag = null;
+
     }
 
     /**
@@ -1907,6 +1950,15 @@ class AddEcdnDomainRequest extends  AbstractModel {
             let obj = new ForceRedirect();
             obj.deserialize(params.ForceRedirect)
             this.ForceRedirect = obj;
+        }
+
+        if (params.Tag) {
+            this.Tag = new Array();
+            for (let z in params.Tag) {
+                let obj = new Tag();
+                obj.deserialize(params.Tag[z]);
+                this.Tag.push(obj);
+            }
         }
 
     }
@@ -2865,6 +2917,13 @@ class DomainDetailInfo extends  AbstractModel {
          */
         this.Readonly = null;
 
+        /**
+         * 域名标签
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Tag> || null}
+         */
+        this.Tag = null;
+
     }
 
     /**
@@ -2933,6 +2992,15 @@ class DomainDetailInfo extends  AbstractModel {
         }
         this.Area = 'Area' in params ? params.Area : null;
         this.Readonly = 'Readonly' in params ? params.Readonly : null;
+
+        if (params.Tag) {
+            this.Tag = new Array();
+            for (let z in params.Tag) {
+                let obj = new Tag();
+                obj.deserialize(params.Tag[z]);
+                this.Tag.push(obj);
+            }
+        }
 
     }
 }
@@ -3058,6 +3126,7 @@ module.exports = {
     DomainBriefInfo: DomainBriefInfo,
     StartEcdnDomainResponse: StartEcdnDomainResponse,
     DeleteEcdnDomainResponse: DeleteEcdnDomainResponse,
+    Tag: Tag,
     StopEcdnDomainResponse: StopEcdnDomainResponse,
     PurgePathCacheResponse: PurgePathCacheResponse,
     PurgeUrlsCacheResponse: PurgeUrlsCacheResponse,

@@ -255,6 +255,50 @@ class DisableTaskFlowResponse extends  AbstractModel {
 }
 
 /**
+ * 任务规则
+ * @class
+ */
+class TaskRule extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 触发规则类型, Cron/Repeat
+         * @type {string || null}
+         */
+        this.RuleType = null;
+
+        /**
+         * Cron类型规则，cron表达式。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Expression = null;
+
+        /**
+         * 时间间隔， 单位毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.RepeatInterval = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleType = 'RuleType' in params ? params.RuleType : null;
+        this.Expression = 'Expression' in params ? params.Expression : null;
+        this.RepeatInterval = 'RepeatInterval' in params ? params.RepeatInterval : null;
+
+    }
+}
+
+/**
  * DescribeDownloadInfo请求参数结构体
  * @class
  */
@@ -1174,32 +1218,19 @@ class DescribeSimpleClustersResponse extends  AbstractModel {
 }
 
 /**
- * 任务规则
+ * tsf 容器集群节点调度策略
  * @class
  */
-class TaskRule extends  AbstractModel {
+class SchedulingStrategy extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 触发规则类型, Cron/Repeat
-         * @type {string || null}
-         */
-        this.RuleType = null;
-
-        /**
-         * Cron类型规则，cron表达式。
+         * NONE：不使用调度策略；CROSS_AZ：跨可用区部署
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Expression = null;
-
-        /**
-         * 时间间隔， 单位毫秒
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.RepeatInterval = null;
+        this.Type = null;
 
     }
 
@@ -1210,9 +1241,7 @@ class TaskRule extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RuleType = 'RuleType' in params ? params.RuleType : null;
-        this.Expression = 'Expression' in params ? params.Expression : null;
-        this.RepeatInterval = 'RepeatInterval' in params ? params.RepeatInterval : null;
+        this.Type = 'Type' in params ? params.Type : null;
 
     }
 }
@@ -3035,6 +3064,41 @@ class UpdateRepositoryRequest extends  AbstractModel {
 }
 
 /**
+ * RevocationConfig返回参数结构体
+ * @class
+ */
+class RevocationConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * true：回滚成功；false：回滚失败
+         * @type {boolean || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Result = 'Result' in params ? params.Result : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 机器实例
  * @class
  */
@@ -4207,6 +4271,13 @@ class Namespace extends  AbstractModel {
          */
         this.NamespaceType = null;
 
+        /**
+         * 是否开启高可用
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.IsHaEnable = null;
+
     }
 
     /**
@@ -4237,6 +4308,7 @@ class Namespace extends  AbstractModel {
         this.ClusterId = 'ClusterId' in params ? params.ClusterId : null;
         this.NamespaceResourceType = 'NamespaceResourceType' in params ? params.NamespaceResourceType : null;
         this.NamespaceType = 'NamespaceType' in params ? params.NamespaceType : null;
+        this.IsHaEnable = 'IsHaEnable' in params ? params.IsHaEnable : null;
 
     }
 }
@@ -4428,6 +4500,46 @@ class Env extends  AbstractModel {
         }
         this.Name = 'Name' in params ? params.Name : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * DescribeImageRepository返回参数结构体
+ * @class
+ */
+class DescribeImageRepositoryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 查询的权限数据对象
+         * @type {ImageRepositoryResult || null}
+         */
+        this.Result = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Result) {
+            let obj = new ImageRepositoryResult();
+            obj.deserialize(params.Result)
+            this.Result = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -5285,24 +5397,30 @@ class DescribeConfigReleaseLogsResponse extends  AbstractModel {
 }
 
 /**
- * RevocationConfig返回参数结构体
+ * DescribeImageRepository请求参数结构体
  * @class
  */
-class RevocationConfigResponse extends  AbstractModel {
+class DescribeImageRepositoryRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * true：回滚成功；false：回滚失败
-         * @type {boolean || null}
-         */
-        this.Result = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 仓库名，搜索关键字,不带命名空间的
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.SearchWord = null;
+
+        /**
+         * 偏移量，取值从0开始
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 分页个数，默认为20， 取值应为1~100
+         * @type {number || null}
+         */
+        this.Limit = null;
 
     }
 
@@ -5313,8 +5431,9 @@ class RevocationConfigResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Result = 'Result' in params ? params.Result : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.SearchWord = 'SearchWord' in params ? params.SearchWord : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
 
     }
 }
@@ -7691,54 +7810,89 @@ class ServerlessGroupPage extends  AbstractModel {
 }
 
 /**
- * ModifyLaneRule请求参数结构体
+ * 镜像仓库
  * @class
  */
-class ModifyLaneRuleRequest extends  AbstractModel {
+class ImageRepository extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 泳道规则ID
+         * 仓库名,含命名空间,如tsf/nginx
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.RuleId = null;
+        this.Reponame = null;
 
         /**
-         * 泳道规则名称
+         * 仓库类型
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.RuleName = null;
+        this.Repotype = null;
 
         /**
-         * 泳道规则备注
-         * @type {string || null}
+         * 镜像版本数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
          */
-        this.Remark = null;
+        this.TagCount = null;
 
         /**
-         * 泳道规则标签列表
-         * @type {Array.<LaneRuleTag> || null}
+         * 是否公共,1:公有,0:私有
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
          */
-        this.RuleTagList = null;
+        this.IsPublic = null;
 
         /**
-         * 泳道规则标签关系
-         * @type {string || null}
-         */
-        this.RuleTagRelationship = null;
-
-        /**
-         * 泳道ID
-         * @type {string || null}
-         */
-        this.LaneId = null;
-
-        /**
-         * 开启状态
+         * 是否被用户收藏。true：是，false：否
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {boolean || null}
          */
-        this.Enable = null;
+        this.IsUserFavor = null;
+
+        /**
+         * 是否是腾讯云官方仓库。 是否是腾讯云官方仓库。true：是，false：否
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {boolean || null}
+         */
+        this.IsQcloudOfficial = null;
+
+        /**
+         * 被所有用户收藏次数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.FavorCount = null;
+
+        /**
+         * 拉取次数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.PullCount = null;
+
+        /**
+         * 描述内容
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Description = null;
+
+        /**
+         * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.CreationTime = null;
+
+        /**
+         * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.UpdateTime = null;
 
     }
 
@@ -7749,21 +7903,17 @@ class ModifyLaneRuleRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.RuleId = 'RuleId' in params ? params.RuleId : null;
-        this.RuleName = 'RuleName' in params ? params.RuleName : null;
-        this.Remark = 'Remark' in params ? params.Remark : null;
-
-        if (params.RuleTagList) {
-            this.RuleTagList = new Array();
-            for (let z in params.RuleTagList) {
-                let obj = new LaneRuleTag();
-                obj.deserialize(params.RuleTagList[z]);
-                this.RuleTagList.push(obj);
-            }
-        }
-        this.RuleTagRelationship = 'RuleTagRelationship' in params ? params.RuleTagRelationship : null;
-        this.LaneId = 'LaneId' in params ? params.LaneId : null;
-        this.Enable = 'Enable' in params ? params.Enable : null;
+        this.Reponame = 'Reponame' in params ? params.Reponame : null;
+        this.Repotype = 'Repotype' in params ? params.Repotype : null;
+        this.TagCount = 'TagCount' in params ? params.TagCount : null;
+        this.IsPublic = 'IsPublic' in params ? params.IsPublic : null;
+        this.IsUserFavor = 'IsUserFavor' in params ? params.IsUserFavor : null;
+        this.IsQcloudOfficial = 'IsQcloudOfficial' in params ? params.IsQcloudOfficial : null;
+        this.FavorCount = 'FavorCount' in params ? params.FavorCount : null;
+        this.PullCount = 'PullCount' in params ? params.PullCount : null;
+        this.Description = 'Description' in params ? params.Description : null;
+        this.CreationTime = 'CreationTime' in params ? params.CreationTime : null;
+        this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
 
     }
 }
@@ -9403,6 +9553,12 @@ class CreateNamespaceRequest extends  AbstractModel {
          */
         this.NamespaceId = null;
 
+        /**
+         * 是否开启高可用
+         * @type {string || null}
+         */
+        this.IsHaEnable = null;
+
     }
 
     /**
@@ -9418,6 +9574,7 @@ class CreateNamespaceRequest extends  AbstractModel {
         this.NamespaceResourceType = 'NamespaceResourceType' in params ? params.NamespaceResourceType : null;
         this.NamespaceType = 'NamespaceType' in params ? params.NamespaceType : null;
         this.NamespaceId = 'NamespaceId' in params ? params.NamespaceId : null;
+        this.IsHaEnable = 'IsHaEnable' in params ? params.IsHaEnable : null;
 
     }
 }
@@ -9663,6 +9820,59 @@ class StopContainerGroupRequest extends  AbstractModel {
             return;
         }
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+    }
+}
+
+/**
+ * 镜像仓库列表
+ * @class
+ */
+class ImageRepositoryResult extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总记录数
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 镜像服务器地址
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Server = null;
+
+        /**
+         * 列表信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ImageRepository> || null}
+         */
+        this.Content = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.Server = 'Server' in params ? params.Server : null;
+
+        if (params.Content) {
+            this.Content = new Array();
+            for (let z in params.Content) {
+                let obj = new ImageRepository();
+                obj.deserialize(params.Content[z]);
+                this.Content.push(obj);
+            }
+        }
 
     }
 }
@@ -10727,6 +10937,13 @@ class Cluster extends  AbstractModel {
          */
         this.OperationInfo = null;
 
+        /**
+         * 集群版本
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ClusterVersion = null;
+
     }
 
     /**
@@ -10768,6 +10985,85 @@ class Cluster extends  AbstractModel {
             obj.deserialize(params.OperationInfo)
             this.OperationInfo = obj;
         }
+        this.ClusterVersion = 'ClusterVersion' in params ? params.ClusterVersion : null;
+
+    }
+}
+
+/**
+ * ModifyLaneRule请求参数结构体
+ * @class
+ */
+class ModifyLaneRuleRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 泳道规则ID
+         * @type {string || null}
+         */
+        this.RuleId = null;
+
+        /**
+         * 泳道规则名称
+         * @type {string || null}
+         */
+        this.RuleName = null;
+
+        /**
+         * 泳道规则备注
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 泳道规则标签列表
+         * @type {Array.<LaneRuleTag> || null}
+         */
+        this.RuleTagList = null;
+
+        /**
+         * 泳道规则标签关系
+         * @type {string || null}
+         */
+        this.RuleTagRelationship = null;
+
+        /**
+         * 泳道ID
+         * @type {string || null}
+         */
+        this.LaneId = null;
+
+        /**
+         * 开启状态
+         * @type {boolean || null}
+         */
+        this.Enable = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RuleId = 'RuleId' in params ? params.RuleId : null;
+        this.RuleName = 'RuleName' in params ? params.RuleName : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+        if (params.RuleTagList) {
+            this.RuleTagList = new Array();
+            for (let z in params.RuleTagList) {
+                let obj = new LaneRuleTag();
+                obj.deserialize(params.RuleTagList[z]);
+                this.RuleTagList.push(obj);
+            }
+        }
+        this.RuleTagRelationship = 'RuleTagRelationship' in params ? params.RuleTagRelationship : null;
+        this.LaneId = 'LaneId' in params ? params.LaneId : null;
+        this.Enable = 'Enable' in params ? params.Enable : null;
 
     }
 }
@@ -11639,6 +11935,12 @@ class DescribeMicroservicesRequest extends  AbstractModel {
          */
         this.Limit = null;
 
+        /**
+         * 状态过滤，online、offline、single_online
+         * @type {Array.<string> || null}
+         */
+        this.Status = null;
+
     }
 
     /**
@@ -11654,6 +11956,7 @@ class DescribeMicroservicesRequest extends  AbstractModel {
         this.OrderType = 'OrderType' in params ? params.OrderType : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Status = 'Status' in params ? params.Status : null;
 
     }
 }
@@ -13230,6 +13533,12 @@ class DeployGroupRequest extends  AbstractModel {
          */
         this.DeployDesc = null;
 
+        /**
+         * 是否允许强制启动
+         * @type {boolean || null}
+         */
+        this.ForceStart = null;
+
     }
 
     /**
@@ -13243,6 +13552,7 @@ class DeployGroupRequest extends  AbstractModel {
         this.PkgId = 'PkgId' in params ? params.PkgId : null;
         this.StartupParameters = 'StartupParameters' in params ? params.StartupParameters : null;
         this.DeployDesc = 'DeployDesc' in params ? params.DeployDesc : null;
+        this.ForceStart = 'ForceStart' in params ? params.ForceStart : null;
 
     }
 }
@@ -13808,6 +14118,12 @@ class DeployContainerGroupRequest extends  AbstractModel {
          */
         this.DeployAgent = null;
 
+        /**
+         * 节点调度策略。若不指定改参数，则默认不使用节点调度策略。
+         * @type {SchedulingStrategy || null}
+         */
+        this.SchedulingStrategy = null;
+
     }
 
     /**
@@ -13863,6 +14179,12 @@ class DeployContainerGroupRequest extends  AbstractModel {
             this.ServiceSetting = obj;
         }
         this.DeployAgent = 'DeployAgent' in params ? params.DeployAgent : null;
+
+        if (params.SchedulingStrategy) {
+            let obj = new SchedulingStrategy();
+            obj.deserialize(params.SchedulingStrategy)
+            this.SchedulingStrategy = obj;
+        }
 
     }
 }
@@ -15343,6 +15665,7 @@ module.exports = {
     DescribeMsApiListResponse: DescribeMsApiListResponse,
     EnableTaskRequest: EnableTaskRequest,
     DisableTaskFlowResponse: DisableTaskFlowResponse,
+    TaskRule: TaskRule,
     DescribeDownloadInfoRequest: DescribeDownloadInfoRequest,
     ApiDetailResponse: ApiDetailResponse,
     ImageTag: ImageTag,
@@ -15360,7 +15683,7 @@ module.exports = {
     DescribeImageTagsRequest: DescribeImageTagsRequest,
     ModifyLaneRuleResponse: ModifyLaneRuleResponse,
     DescribeSimpleClustersResponse: DescribeSimpleClustersResponse,
-    TaskRule: TaskRule,
+    SchedulingStrategy: SchedulingStrategy,
     DescribePodInstancesResponse: DescribePodInstancesResponse,
     VmGroup: VmGroup,
     DescribeRepositoryResponse: DescribeRepositoryResponse,
@@ -15397,6 +15720,7 @@ module.exports = {
     DeleteApplicationResponse: DeleteApplicationResponse,
     DescribeBasicResourceUsageResponse: DescribeBasicResourceUsageResponse,
     UpdateRepositoryRequest: UpdateRepositoryRequest,
+    RevocationConfigResponse: RevocationConfigResponse,
     Instance: Instance,
     DeployServerlessGroupResponse: DeployServerlessGroupResponse,
     DescribeConfigsResponse: DescribeConfigsResponse,
@@ -15421,6 +15745,7 @@ module.exports = {
     DescribeGroupsResponse: DescribeGroupsResponse,
     TaskId: TaskId,
     Env: Env,
+    DescribeImageRepositoryResponse: DescribeImageRepositoryResponse,
     DeleteContainerGroupResponse: DeleteContainerGroupResponse,
     DescribeSimpleGroupsRequest: DescribeSimpleGroupsRequest,
     CreateNamespaceResponse: CreateNamespaceResponse,
@@ -15438,7 +15763,7 @@ module.exports = {
     DescribeApplicationResponse: DescribeApplicationResponse,
     LaneInfo: LaneInfo,
     DescribeConfigReleaseLogsResponse: DescribeConfigReleaseLogsResponse,
-    RevocationConfigResponse: RevocationConfigResponse,
+    DescribeImageRepositoryRequest: DescribeImageRepositoryRequest,
     DescribeSimpleGroupsResponse: DescribeSimpleGroupsResponse,
     StopTaskExecuteRequest: StopTaskExecuteRequest,
     DescribeFlowLastBatchStateRequest: DescribeFlowLastBatchStateRequest,
@@ -15478,7 +15803,7 @@ module.exports = {
     DescribeServerlessGroupsResponse: DescribeServerlessGroupsResponse,
     DescribePublicConfigsResponse: DescribePublicConfigsResponse,
     ServerlessGroupPage: ServerlessGroupPage,
-    ModifyLaneRuleRequest: ModifyLaneRuleRequest,
+    ImageRepository: ImageRepository,
     AddInstancesResponse: AddInstancesResponse,
     DeleteApplicationRequest: DeleteApplicationRequest,
     ContinueRunFailedTaskBatchResponse: ContinueRunFailedTaskBatchResponse,
@@ -15516,6 +15841,7 @@ module.exports = {
     DescribeUploadInfoRequest: DescribeUploadInfoRequest,
     DescribeClusterInstancesRequest: DescribeClusterInstancesRequest,
     StopContainerGroupRequest: StopContainerGroupRequest,
+    ImageRepositoryResult: ImageRepositoryResult,
     DescribeRepositoryRequest: DescribeRepositoryRequest,
     RevocationPublicConfigRequest: RevocationPublicConfigRequest,
     TaskFlowLastBatchState: TaskFlowLastBatchState,
@@ -15539,6 +15865,7 @@ module.exports = {
     DeletePkgsResponse: DeletePkgsResponse,
     DescribeConfigReleasesResponse: DescribeConfigReleasesResponse,
     Cluster: Cluster,
+    ModifyLaneRuleRequest: ModifyLaneRuleRequest,
     ModifyMicroserviceResponse: ModifyMicroserviceResponse,
     DescribeMicroservicesResponse: DescribeMicroservicesResponse,
     DescribeDownloadInfoResponse: DescribeDownloadInfoResponse,

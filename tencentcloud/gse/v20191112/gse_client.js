@@ -128,6 +128,7 @@ const UpdateFleetNameResponse = models.UpdateFleetNameResponse;
 const DescribeAliasRequest = models.DescribeAliasRequest;
 const CreateAliasRequest = models.CreateAliasRequest;
 const UpdateGameServerSessionRequest = models.UpdateGameServerSessionRequest;
+const ListAliasesRequest = models.ListAliasesRequest;
 const CreateAssetRequest = models.CreateAssetRequest;
 const DescribeGameServerSessionDetailsResponse = models.DescribeGameServerSessionDetailsResponse;
 const Credentials = models.Credentials;
@@ -140,6 +141,7 @@ const DescribeFleetStatisticFlowsResponse = models.DescribeFleetStatisticFlowsRe
 const InstanceCounts = models.InstanceCounts;
 const UpdateFleetNameRequest = models.UpdateFleetNameRequest;
 const CreateFleetResponse = models.CreateFleetResponse;
+const Filter = models.Filter;
 const UpdateFleetAttributesResponse = models.UpdateFleetAttributesResponse;
 const DescribeFleetUtilizationRequest = models.DescribeFleetUtilizationRequest;
 const DescribeGameServerSessionDetailsRequest = models.DescribeGameServerSessionDetailsRequest;
@@ -147,6 +149,7 @@ const GameServerSession = models.GameServerSession;
 const PlayerLatencyPolicy = models.PlayerLatencyPolicy;
 const UpdateRuntimeConfigurationRequest = models.UpdateRuntimeConfigurationRequest;
 const GameProperty = models.GameProperty;
+const CreateAssetWithImageResponse = models.CreateAssetWithImageResponse;
 const FleetStatisticTimes = models.FleetStatisticTimes;
 const FleetStatisticFlows = models.FleetStatisticFlows;
 const DescribeAssetRequest = models.DescribeAssetRequest;
@@ -164,7 +167,7 @@ const DescribeFleetCapacityResponse = models.DescribeFleetCapacityResponse;
 const DescribeUserQuotaResponse = models.DescribeUserQuotaResponse;
 const DescribeFleetEventsRequest = models.DescribeFleetEventsRequest;
 const UpdateAssetResponse = models.UpdateAssetResponse;
-const ListAliasesRequest = models.ListAliasesRequest;
+const CreateAssetWithImageRequest = models.CreateAssetWithImageRequest;
 const PlayerSession = models.PlayerSession;
 const PutScalingPolicyResponse = models.PutScalingPolicyResponse;
 const CreateGameServerSessionQueueRequest = models.CreateGameServerSessionQueueRequest;
@@ -382,6 +385,17 @@ class GseClient extends AbstractClient {
     DescribeGameServerSessionQueues(req, cb) {
         let resp = new DescribeGameServerSessionQueuesResponse();
         this.request("DescribeGameServerSessionQueues", req, resp, cb);
+    }
+
+    /**
+     * 本接口（DescribeCcnInstances）用于查询云联网实例。
+     * @param {DescribeCcnInstancesRequest} req
+     * @param {function(string, DescribeCcnInstancesResponse):void} cb
+     * @public
+     */
+    DescribeCcnInstances(req, cb) {
+        let resp = new DescribeCcnInstancesResponse();
+        this.request("DescribeCcnInstances", req, resp, cb);
     }
 
     /**
@@ -859,14 +873,14 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     }
 
     /**
-     * 本接口（DescribeCcnInstances）用于查询云联网实例。
-     * @param {DescribeCcnInstancesRequest} req
-     * @param {function(string, DescribeCcnInstancesResponse):void} cb
+     * 本接口（CreateAssetWithImage）用于创建生成包镜像信息。
+     * @param {CreateAssetWithImageRequest} req
+     * @param {function(string, CreateAssetWithImageResponse):void} cb
      * @public
      */
-    DescribeCcnInstances(req, cb) {
-        let resp = new DescribeCcnInstancesResponse();
-        this.request("DescribeCcnInstances", req, resp, cb);
+    CreateAssetWithImage(req, cb) {
+        let resp = new CreateAssetWithImageResponse();
+        this.request("CreateAssetWithImage", req, resp, cb);
     }
 
     /**

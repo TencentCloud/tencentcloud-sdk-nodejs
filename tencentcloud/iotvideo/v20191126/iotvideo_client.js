@@ -29,7 +29,7 @@ const DescribeProductsRequest = models.DescribeProductsRequest;
 const DeleteTraceIdsRequest = models.DeleteTraceIdsRequest;
 const IotModelData = models.IotModelData;
 const CreateStorageServiceRequest = models.CreateStorageServiceRequest;
-const DescribeDevicesResponse = models.DescribeDevicesResponse;
+const DescribeOsListResponse = models.DescribeOsListResponse;
 const ModifyProductResponse = models.ModifyProductResponse;
 const ModifyProductRequest = models.ModifyProductRequest;
 const DisableDeviceStreamRequest = models.DisableDeviceStreamRequest;
@@ -39,11 +39,13 @@ const CreateUploadPathRequest = models.CreateUploadPathRequest;
 const CreateDevTokenRequest = models.CreateDevTokenRequest;
 const DescribeStorageServiceResponse = models.DescribeStorageServiceResponse;
 const DeleteIotDataTypeRequest = models.DeleteIotDataTypeRequest;
+const ModifyVerContentResponse = models.ModifyVerContentResponse;
 const DescribeMessageQueueRequest = models.DescribeMessageQueueRequest;
 const DeleteAppUsrResponse = models.DeleteAppUsrResponse;
 const DescribeRegistrationStatusResponse = models.DescribeRegistrationStatusResponse;
 const DescribeProductRequest = models.DescribeProductRequest;
 const DescribeProductsResponse = models.DescribeProductsResponse;
+const OsData = models.OsData;
 const DeviceCertificate = models.DeviceCertificate;
 const UpgradeDeviceRequest = models.UpgradeDeviceRequest;
 const LogData = models.LogData;
@@ -83,15 +85,19 @@ const UpgradeDeviceResponse = models.UpgradeDeviceResponse;
 const DisableOtaVersionResponse = models.DisableOtaVersionResponse;
 const DescribeBindDevResponse = models.DescribeBindDevResponse;
 const CreateProductRequest = models.CreateProductRequest;
+const SystemType = models.SystemType;
 const RunTestOtaVersionResponse = models.RunTestOtaVersionResponse;
 const RunTestOtaVersionRequest = models.RunTestOtaVersionRequest;
 const DescribeDeviceResponse = models.DescribeDeviceResponse;
 const SetMessageQueueResponse = models.SetMessageQueueResponse;
+const Contents = models.Contents;
 const DeleteOtaVersionResponse = models.DeleteOtaVersionResponse;
 const UploadOtaVersionRequest = models.UploadOtaVersionRequest;
 const DescribeIotModelsRequest = models.DescribeIotModelsRequest;
 const DescribeModelDataRetRequest = models.DescribeModelDataRetRequest;
 const CreateTraceIdsResponse = models.CreateTraceIdsResponse;
+const DescribeDevicesResponse = models.DescribeDevicesResponse;
+const ModifyVerContentRequest = models.ModifyVerContentRequest;
 const DeleteBindingRequest = models.DeleteBindingRequest;
 const DescribeOtaVersionsResponse = models.DescribeOtaVersionsResponse;
 const DeleteProductResponse = models.DeleteProductResponse;
@@ -143,6 +149,7 @@ const SendOnlineMsgResponse = models.SendOnlineMsgResponse;
 const DeleteAppUsrRequest = models.DeleteAppUsrRequest;
 const DescribeIotModelsResponse = models.DescribeIotModelsResponse;
 const DescribeMessageQueueResponse = models.DescribeMessageQueueResponse;
+const DescribeOsListRequest = models.DescribeOsListRequest;
 const DescribeDevicesRequest = models.DescribeDevicesRequest;
 const CreateIotDataTypeResponse = models.CreateIotDataTypeResponse;
 const ModifyDevicePropertyResponse = models.ModifyDevicePropertyResponse;
@@ -523,6 +530,17 @@ class IotvideoClient extends AbstractClient {
     }
 
     /**
+     * 退订已购买的云存服务
+     * @param {RefundStorageServiceRequest} req
+     * @param {function(string, RefundStorageServiceResponse):void} cb
+     * @public
+     */
+    RefundStorageService(req, cb) {
+        let resp = new RefundStorageServiceResponse();
+        this.request("RefundStorageService", req, resp, cb);
+    }
+
+    /**
      * 购买云存服务
      * @param {CreateStorageServiceRequest} req
      * @param {function(string, CreateStorageServiceResponse):void} cb
@@ -553,6 +571,17 @@ class IotvideoClient extends AbstractClient {
     DeleteDevice(req, cb) {
         let resp = new DeleteDeviceResponse();
         this.request("DeleteDevice", req, resp, cb);
+    }
+
+    /**
+     * 查看操作系统支持的芯片列表
+     * @param {DescribeOsListRequest} req
+     * @param {function(string, DescribeOsListResponse):void} cb
+     * @public
+     */
+    DescribeOsList(req, cb) {
+        let resp = new DescribeOsListResponse();
+        this.request("DescribeOsList", req, resp, cb);
     }
 
     /**
@@ -699,14 +728,14 @@ class IotvideoClient extends AbstractClient {
     }
 
     /**
-     * 退订已购买的云存服务
-     * @param {RefundStorageServiceRequest} req
-     * @param {function(string, RefundStorageServiceResponse):void} cb
+     * 编辑版本描述信息
+     * @param {ModifyVerContentRequest} req
+     * @param {function(string, ModifyVerContentResponse):void} cb
      * @public
      */
-    RefundStorageService(req, cb) {
-        let resp = new RefundStorageServiceResponse();
-        this.request("RefundStorageService", req, resp, cb);
+    ModifyVerContent(req, cb) {
+        let resp = new ModifyVerContentResponse();
+        this.request("ModifyVerContent", req, resp, cb);
     }
 
     /**

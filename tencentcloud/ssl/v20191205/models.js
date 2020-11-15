@@ -52,6 +52,34 @@ class ApplyCertificateResponse extends  AbstractModel {
 }
 
 /**
+ * CompleteCertificate请求参数结构体
+ * @class
+ */
+class CompleteCertificateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 证书ID
+         * @type {string || null}
+         */
+        this.CertificateId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+
+    }
+}
+
+/**
  * DeleteCertificate请求参数结构体
  * @class
  */
@@ -166,24 +194,26 @@ class CommitCertificateInformationRequest extends  AbstractModel {
 }
 
 /**
- * CommitCertificateInformation返回参数结构体
+ * DownloadCertificate返回参数结构体
  * @class
  */
-class CommitCertificateInformationResponse extends  AbstractModel {
+class DownloadCertificateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 亚信订单号。
+         * ZIP base64 编码内容，base64 解码后可保存为 ZIP 文件。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.OrderId = null;
+        this.Content = null;
 
         /**
-         * 证书状态：0 = 审核中，1 = 已通过，2 = 审核失败，3 = 已过期，4 = 已添加DNS记录，5 = 企业证书，待提交，6 = 订单取消中，7 = 已取消，8 = 已提交资料， 待上传确认函，9 = 证书吊销中，10 = 已吊销，11 = 重颁发中，12 = 待上传吊销确认函。
-         * @type {number || null}
+         * MIME 类型：application/zip = ZIP 压缩文件。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
          */
-        this.Status = null;
+        this.ContentType = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -200,8 +230,8 @@ class CommitCertificateInformationResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.OrderId = 'OrderId' in params ? params.OrderId : null;
-        this.Status = 'Status' in params ? params.Status : null;
+        this.Content = 'Content' in params ? params.Content : null;
+        this.ContentType = 'ContentType' in params ? params.ContentType : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1049,6 +1079,41 @@ class UploadCertificateRequest extends  AbstractModel {
 }
 
 /**
+ * UploadConfirmLetter请求参数结构体
+ * @class
+ */
+class UploadConfirmLetterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 证书ID
+         * @type {string || null}
+         */
+        this.CertificateId = null;
+
+        /**
+         * base64编码后的证书确认函文件，格式应为jpg、jpeg、png、pdf，大小应在1kb与1.4M之间。
+         * @type {string || null}
+         */
+        this.ConfirmLetter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+        this.ConfirmLetter = 'ConfirmLetter' in params ? params.ConfirmLetter : null;
+
+    }
+}
+
+/**
  * DescribeCertificateDetail请求参数结构体
  * @class
  */
@@ -1219,6 +1284,12 @@ class ReplaceCertificateRequest extends  AbstractModel {
          */
         this.CsrkeyPassword = null;
 
+        /**
+         * 重颁发原因。
+         * @type {string || null}
+         */
+        this.Reason = null;
+
     }
 
     /**
@@ -1233,6 +1304,126 @@ class ReplaceCertificateRequest extends  AbstractModel {
         this.CsrType = 'CsrType' in params ? params.CsrType : null;
         this.CsrContent = 'CsrContent' in params ? params.CsrContent : null;
         this.CsrkeyPassword = 'CsrkeyPassword' in params ? params.CsrkeyPassword : null;
+        this.Reason = 'Reason' in params ? params.Reason : null;
+
+    }
+}
+
+/**
+ * UploadRevokeLetter返回参数结构体
+ * @class
+ */
+class UploadRevokeLetterResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 证书 ID。
+         * @type {string || null}
+         */
+        this.CertificateId = null;
+
+        /**
+         * 是否成功。
+         * @type {boolean || null}
+         */
+        this.IsSuccess = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+        this.IsSuccess = 'IsSuccess' in params ? params.IsSuccess : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateCertificate返回参数结构体
+ * @class
+ */
+class CreateCertificateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 证书ID列表
+         * @type {Array.<string> || null}
+         */
+        this.CertificateIds = null;
+
+        /**
+         * 子订单ID
+         * @type {Array.<string> || null}
+         */
+        this.DealIds = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateIds = 'CertificateIds' in params ? params.CertificateIds : null;
+        this.DealIds = 'DealIds' in params ? params.DealIds : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UploadRevokeLetter请求参数结构体
+ * @class
+ */
+class UploadRevokeLetterRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 证书 ID。
+         * @type {string || null}
+         */
+        this.CertificateId = null;
+
+        /**
+         * base64编码后的证书确认函文件，格式应为jpg、jpeg、png、pdf，大小应在1kb与1.4M之间。
+         * @type {string || null}
+         */
+        this.RevokeLetter = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+        this.RevokeLetter = 'RevokeLetter' in params ? params.RevokeLetter : null;
 
     }
 }
@@ -1273,380 +1464,19 @@ class DeleteCertificateResponse extends  AbstractModel {
 }
 
 /**
- * 获取证书列表（DescribeCertificate）返回参数键为 DvAuthDetail 的内容。
+ * RevokeCertificate返回参数结构体
  * @class
  */
-class DvAuthDetail extends  AbstractModel {
+class RevokeCertificateResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * DV 认证密钥。
+         * 吊销证书域名验证信息。
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
+         * @type {Array.<RevokeDomainValidateAuths> || null}
          */
-        this.DvAuthKey = null;
-
-        /**
-         * DV 认证值。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.DvAuthValue = null;
-
-        /**
-         * DV 认证值域名。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.DvAuthDomain = null;
-
-        /**
-         * DV 认证值路径。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.DvAuthPath = null;
-
-        /**
-         * DV 认证子域名。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.DvAuthKeySubDomain = null;
-
-        /**
-         * DV 认证信息。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<DvAuths> || null}
-         */
-        this.DvAuths = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DvAuthKey = 'DvAuthKey' in params ? params.DvAuthKey : null;
-        this.DvAuthValue = 'DvAuthValue' in params ? params.DvAuthValue : null;
-        this.DvAuthDomain = 'DvAuthDomain' in params ? params.DvAuthDomain : null;
-        this.DvAuthPath = 'DvAuthPath' in params ? params.DvAuthPath : null;
-        this.DvAuthKeySubDomain = 'DvAuthKeySubDomain' in params ? params.DvAuthKeySubDomain : null;
-
-        if (params.DvAuths) {
-            this.DvAuths = new Array();
-            for (let z in params.DvAuths) {
-                let obj = new DvAuths();
-                obj.deserialize(params.DvAuths[z]);
-                this.DvAuths.push(obj);
-            }
-        }
-
-    }
-}
-
-/**
- * ModifyCertificateProject请求参数结构体
- * @class
- */
-class ModifyCertificateProjectRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 需要修改所属项目的证书 ID 集合，最多100个证书。
-         * @type {Array.<string> || null}
-         */
-        this.CertificateIdList = null;
-
-        /**
-         * 项目 ID。
-         * @type {number || null}
-         */
-        this.ProjectId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.CertificateIdList = 'CertificateIdList' in params ? params.CertificateIdList : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-
-    }
-}
-
-/**
- * 返回参数键为 DvAuths 的内容。
- * @class
- */
-class DvAuths extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * DV 认证密钥。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.DvAuthKey = null;
-
-        /**
-         * DV 认证值。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.DvAuthValue = null;
-
-        /**
-         * DV 认证值域名。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.DvAuthDomain = null;
-
-        /**
-         * DV 认证值路径。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.DvAuthPath = null;
-
-        /**
-         * DV 认证子域名，
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.DvAuthSubDomain = null;
-
-        /**
-         * DV 认证类型。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.DvAuthVerifyType = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.DvAuthKey = 'DvAuthKey' in params ? params.DvAuthKey : null;
-        this.DvAuthValue = 'DvAuthValue' in params ? params.DvAuthValue : null;
-        this.DvAuthDomain = 'DvAuthDomain' in params ? params.DvAuthDomain : null;
-        this.DvAuthPath = 'DvAuthPath' in params ? params.DvAuthPath : null;
-        this.DvAuthSubDomain = 'DvAuthSubDomain' in params ? params.DvAuthSubDomain : null;
-        this.DvAuthVerifyType = 'DvAuthVerifyType' in params ? params.DvAuthVerifyType : null;
-
-    }
-}
-
-/**
- * ModifyCertificateAlias请求参数结构体
- * @class
- */
-class ModifyCertificateAliasRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 证书 ID。
-         * @type {string || null}
-         */
-        this.CertificateId = null;
-
-        /**
-         * 备注名称。
-         * @type {string || null}
-         */
-        this.Alias = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
-        this.Alias = 'Alias' in params ? params.Alias : null;
-
-    }
-}
-
-/**
- * DescribeCertificate请求参数结构体
- * @class
- */
-class DescribeCertificateRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 证书 ID。
-         * @type {string || null}
-         */
-        this.CertificateId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
-
-    }
-}
-
-/**
- * 获取证书列表（DescribeCertificates）返回参数键为 Certificates 下，key为 ProjectInfo 的内容。
- * @class
- */
-class ProjectInfo extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 项目名称。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ProjectName = null;
-
-        /**
-         * 项目创建用户 UIN。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.ProjectCreatorUin = null;
-
-        /**
-         * 项目创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ProjectCreateTime = null;
-
-        /**
-         * 项目信息简述。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ProjectResume = null;
-
-        /**
-         * 用户 UIN。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.OwnerUin = null;
-
-        /**
-         * 项目 ID。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {string || null}
-         */
-        this.ProjectId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
-        this.ProjectCreatorUin = 'ProjectCreatorUin' in params ? params.ProjectCreatorUin : null;
-        this.ProjectCreateTime = 'ProjectCreateTime' in params ? params.ProjectCreateTime : null;
-        this.ProjectResume = 'ProjectResume' in params ? params.ProjectResume : null;
-        this.OwnerUin = 'OwnerUin' in params ? params.OwnerUin : null;
-        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
-
-    }
-}
-
-/**
- * DescribeCertificateOperateLogs请求参数结构体
- * @class
- */
-class DescribeCertificateOperateLogsRequest extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 偏移量，默认为0。
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 请求日志数量，默认为20。
-         * @type {number || null}
-         */
-        this.Limit = null;
-
-        /**
-         * 开始时间，默认15天前。
-         * @type {string || null}
-         */
-        this.StartTime = null;
-
-        /**
-         * 结束时间，默认现在时间。
-         * @type {string || null}
-         */
-        this.EndTime = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.StartTime = 'StartTime' in params ? params.StartTime : null;
-        this.EndTime = 'EndTime' in params ? params.EndTime : null;
-
-    }
-}
-
-/**
- * CancelCertificateOrder返回参数结构体
- * @class
- */
-class CancelCertificateOrderResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 取消订单成功的证书 ID。
-         * @type {string || null}
-         */
-        this.CertificateId = null;
+        this.RevokeDomainValidateAuths = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1663,92 +1493,13 @@ class CancelCertificateOrderResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
-    }
-}
-
-/**
- * SubmitCertificateInformation返回参数结构体
- * @class
- */
-class SubmitCertificateInformationResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 证书 ID。
-         * @type {string || null}
-         */
-        this.CertificateId = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * DescribeCertificates返回参数结构体
- * @class
- */
-class DescribeCertificatesResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 总数量。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {number || null}
-         */
-        this.TotalCount = null;
-
-        /**
-         * 列表。
-注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<Certificates> || null}
-         */
-        this.Certificates = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
-
-        if (params.Certificates) {
-            this.Certificates = new Array();
-            for (let z in params.Certificates) {
-                let obj = new Certificates();
-                obj.deserialize(params.Certificates[z]);
-                this.Certificates.push(obj);
+        if (params.RevokeDomainValidateAuths) {
+            this.RevokeDomainValidateAuths = new Array();
+            for (let z in params.RevokeDomainValidateAuths) {
+                let obj = new RevokeDomainValidateAuths();
+                obj.deserialize(params.RevokeDomainValidateAuths[z]);
+                this.RevokeDomainValidateAuths.push(obj);
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
@@ -1757,32 +1508,40 @@ class DescribeCertificatesResponse extends  AbstractModel {
 }
 
 /**
- * DownloadCertificate返回参数结构体
+ * 返回参数键为 RevokeDomainValidateAuths 的内容。
  * @class
  */
-class DownloadCertificateResponse extends  AbstractModel {
+class RevokeDomainValidateAuths extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * ZIP base64 编码内容，base64 解码后可保存为 ZIP 文件。
+         * DV 认证值路径。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.Content = null;
+        this.DomainValidateAuthPath = null;
 
         /**
-         * MIME 类型：application/zip = ZIP 压缩文件。
+         * DV 认证 KEY。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.ContentType = null;
+        this.DomainValidateAuthKey = null;
 
         /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * DV 认证值。
+注意：此字段可能返回 null，表示取不到有效值。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.DomainValidateAuthValue = null;
+
+        /**
+         * DV 认证域名。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DomainValidateAuthDomain = null;
 
     }
 
@@ -1793,44 +1552,10 @@ class DownloadCertificateResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Content = 'Content' in params ? params.Content : null;
-        this.ContentType = 'ContentType' in params ? params.ContentType : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
-
-    }
-}
-
-/**
- * UploadCertificate返回参数结构体
- * @class
- */
-class UploadCertificateResponse extends  AbstractModel {
-    constructor(){
-        super();
-
-        /**
-         * 证书 ID。
-         * @type {string || null}
-         */
-        this.CertificateId = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-         * @type {string || null}
-         */
-        this.RequestId = null;
-
-    }
-
-    /**
-     * @private
-     */
-    deserialize(params) {
-        if (!params) {
-            return;
-        }
-        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.DomainValidateAuthPath = 'DomainValidateAuthPath' in params ? params.DomainValidateAuthPath : null;
+        this.DomainValidateAuthKey = 'DomainValidateAuthKey' in params ? params.DomainValidateAuthKey : null;
+        this.DomainValidateAuthValue = 'DomainValidateAuthValue' in params ? params.DomainValidateAuthValue : null;
+        this.DomainValidateAuthDomain = 'DomainValidateAuthDomain' in params ? params.DomainValidateAuthDomain : null;
 
     }
 }
@@ -2138,6 +1863,693 @@ class DescribeCertificateDetailResponse extends  AbstractModel {
         this.RenewAble = 'RenewAble' in params ? params.RenewAble : null;
         this.Deployable = 'Deployable' in params ? params.Deployable : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CheckCertificateChain返回参数结构体
+ * @class
+ */
+class CheckCertificateChainResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * true为通过检查，false为未通过检查。
+         * @type {boolean || null}
+         */
+        this.IsValid = null;
+
+        /**
+         * true为可信CA，false为不可信CA。
+         * @type {boolean || null}
+         */
+        this.IsTrustedCA = null;
+
+        /**
+         * 包含证书链中每一段证书的通用名称。
+         * @type {Array.<string> || null}
+         */
+        this.Chains = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.IsValid = 'IsValid' in params ? params.IsValid : null;
+        this.IsTrustedCA = 'IsTrustedCA' in params ? params.IsTrustedCA : null;
+        this.Chains = 'Chains' in params ? params.Chains : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyCertificateProject请求参数结构体
+ * @class
+ */
+class ModifyCertificateProjectRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 需要修改所属项目的证书 ID 集合，最多100个证书。
+         * @type {Array.<string> || null}
+         */
+        this.CertificateIdList = null;
+
+        /**
+         * 项目 ID。
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateIdList = 'CertificateIdList' in params ? params.CertificateIdList : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
+ * 返回参数键为 DvAuths 的内容。
+ * @class
+ */
+class DvAuths extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * DV 认证密钥。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DvAuthKey = null;
+
+        /**
+         * DV 认证值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DvAuthValue = null;
+
+        /**
+         * DV 认证值域名。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DvAuthDomain = null;
+
+        /**
+         * DV 认证值路径。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DvAuthPath = null;
+
+        /**
+         * DV 认证子域名，
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DvAuthSubDomain = null;
+
+        /**
+         * DV 认证类型。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DvAuthVerifyType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DvAuthKey = 'DvAuthKey' in params ? params.DvAuthKey : null;
+        this.DvAuthValue = 'DvAuthValue' in params ? params.DvAuthValue : null;
+        this.DvAuthDomain = 'DvAuthDomain' in params ? params.DvAuthDomain : null;
+        this.DvAuthPath = 'DvAuthPath' in params ? params.DvAuthPath : null;
+        this.DvAuthSubDomain = 'DvAuthSubDomain' in params ? params.DvAuthSubDomain : null;
+        this.DvAuthVerifyType = 'DvAuthVerifyType' in params ? params.DvAuthVerifyType : null;
+
+    }
+}
+
+/**
+ * ModifyCertificateAlias请求参数结构体
+ * @class
+ */
+class ModifyCertificateAliasRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 证书 ID。
+         * @type {string || null}
+         */
+        this.CertificateId = null;
+
+        /**
+         * 备注名称。
+         * @type {string || null}
+         */
+        this.Alias = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+        this.Alias = 'Alias' in params ? params.Alias : null;
+
+    }
+}
+
+/**
+ * DescribeCertificate请求参数结构体
+ * @class
+ */
+class DescribeCertificateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 证书 ID。
+         * @type {string || null}
+         */
+        this.CertificateId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+
+    }
+}
+
+/**
+ * 获取证书列表（DescribeCertificate）返回参数键为 DvAuthDetail 的内容。
+ * @class
+ */
+class DvAuthDetail extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * DV 认证密钥。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DvAuthKey = null;
+
+        /**
+         * DV 认证值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DvAuthValue = null;
+
+        /**
+         * DV 认证值域名。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DvAuthDomain = null;
+
+        /**
+         * DV 认证值路径。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DvAuthPath = null;
+
+        /**
+         * DV 认证子域名。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DvAuthKeySubDomain = null;
+
+        /**
+         * DV 认证信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DvAuths> || null}
+         */
+        this.DvAuths = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DvAuthKey = 'DvAuthKey' in params ? params.DvAuthKey : null;
+        this.DvAuthValue = 'DvAuthValue' in params ? params.DvAuthValue : null;
+        this.DvAuthDomain = 'DvAuthDomain' in params ? params.DvAuthDomain : null;
+        this.DvAuthPath = 'DvAuthPath' in params ? params.DvAuthPath : null;
+        this.DvAuthKeySubDomain = 'DvAuthKeySubDomain' in params ? params.DvAuthKeySubDomain : null;
+
+        if (params.DvAuths) {
+            this.DvAuths = new Array();
+            for (let z in params.DvAuths) {
+                let obj = new DvAuths();
+                obj.deserialize(params.DvAuths[z]);
+                this.DvAuths.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
+ * 获取证书列表（DescribeCertificates）返回参数键为 Certificates 下，key为 ProjectInfo 的内容。
+ * @class
+ */
+class ProjectInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 项目名称。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProjectName = null;
+
+        /**
+         * 项目创建用户 UIN。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.ProjectCreatorUin = null;
+
+        /**
+         * 项目创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProjectCreateTime = null;
+
+        /**
+         * 项目信息简述。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProjectResume = null;
+
+        /**
+         * 用户 UIN。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.OwnerUin = null;
+
+        /**
+         * 项目 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ProjectId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProjectName = 'ProjectName' in params ? params.ProjectName : null;
+        this.ProjectCreatorUin = 'ProjectCreatorUin' in params ? params.ProjectCreatorUin : null;
+        this.ProjectCreateTime = 'ProjectCreateTime' in params ? params.ProjectCreateTime : null;
+        this.ProjectResume = 'ProjectResume' in params ? params.ProjectResume : null;
+        this.OwnerUin = 'OwnerUin' in params ? params.OwnerUin : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+
+    }
+}
+
+/**
+ * DescribeCertificateOperateLogs请求参数结构体
+ * @class
+ */
+class DescribeCertificateOperateLogsRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 偏移量，默认为0。
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 请求日志数量，默认为20。
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 开始时间，默认15天前。
+         * @type {string || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 结束时间，默认现在时间。
+         * @type {string || null}
+         */
+        this.EndTime = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
+
+    }
+}
+
+/**
+ * CancelCertificateOrder返回参数结构体
+ * @class
+ */
+class CancelCertificateOrderResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 取消订单成功的证书 ID。
+         * @type {string || null}
+         */
+        this.CertificateId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CreateCertificate请求参数结构体
+ * @class
+ */
+class CreateCertificateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 证书商品ID
+         * @type {number || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 证书包含的域名数量
+         * @type {number || null}
+         */
+        this.DomainNum = null;
+
+        /**
+         * 证书年限，当前只支持 1 年证书的购买
+         * @type {number || null}
+         */
+        this.TimeSpan = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.DomainNum = 'DomainNum' in params ? params.DomainNum : null;
+        this.TimeSpan = 'TimeSpan' in params ? params.TimeSpan : null;
+
+    }
+}
+
+/**
+ * DescribeCertificates返回参数结构体
+ * @class
+ */
+class DescribeCertificatesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 总数量。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 列表。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<Certificates> || null}
+         */
+        this.Certificates = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.Certificates) {
+            this.Certificates = new Array();
+            for (let z in params.Certificates) {
+                let obj = new Certificates();
+                obj.deserialize(params.Certificates[z]);
+                this.Certificates.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CommitCertificateInformation返回参数结构体
+ * @class
+ */
+class CommitCertificateInformationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 亚信订单号。
+         * @type {string || null}
+         */
+        this.OrderId = null;
+
+        /**
+         * 证书状态：0 = 审核中，1 = 已通过，2 = 审核失败，3 = 已过期，4 = 已添加DNS记录，5 = 企业证书，待提交，6 = 订单取消中，7 = 已取消，8 = 已提交资料， 待上传确认函，9 = 证书吊销中，10 = 已吊销，11 = 重颁发中，12 = 待上传吊销确认函。
+         * @type {number || null}
+         */
+        this.Status = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.OrderId = 'OrderId' in params ? params.OrderId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UploadConfirmLetter返回参数结构体
+ * @class
+ */
+class UploadConfirmLetterResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 证书ID
+         * @type {string || null}
+         */
+        this.CertificateId = null;
+
+        /**
+         * 是否成功
+         * @type {boolean || null}
+         */
+        this.IsSuccess = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+        this.IsSuccess = 'IsSuccess' in params ? params.IsSuccess : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * UploadCertificate返回参数结构体
+ * @class
+ */
+class UploadCertificateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 证书 ID。
+         * @type {string || null}
+         */
+        this.CertificateId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * CheckCertificateChain请求参数结构体
+ * @class
+ */
+class CheckCertificateChainRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 待检查的证书链
+         * @type {string || null}
+         */
+        this.CertificateChain = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateChain = 'CertificateChain' in params ? params.CertificateChain : null;
 
     }
 }
@@ -2678,12 +3090,118 @@ class DescribeCertificatesRequest extends  AbstractModel {
     }
 }
 
+/**
+ * CompleteCertificate返回参数结构体
+ * @class
+ */
+class CompleteCertificateResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 证书ID
+         * @type {string || null}
+         */
+        this.CertificateId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * SubmitCertificateInformation返回参数结构体
+ * @class
+ */
+class SubmitCertificateInformationResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 证书 ID。
+         * @type {string || null}
+         */
+        this.CertificateId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RevokeCertificate请求参数结构体
+ * @class
+ */
+class RevokeCertificateRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 证书 ID。
+         * @type {string || null}
+         */
+        this.CertificateId = null;
+
+        /**
+         * 吊销证书原因。
+         * @type {string || null}
+         */
+        this.Reason = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.CertificateId = 'CertificateId' in params ? params.CertificateId : null;
+        this.Reason = 'Reason' in params ? params.Reason : null;
+
+    }
+}
+
 module.exports = {
     ApplyCertificateResponse: ApplyCertificateResponse,
+    CompleteCertificateRequest: CompleteCertificateRequest,
     DeleteCertificateRequest: DeleteCertificateRequest,
     DescribeCertificateOperateLogsResponse: DescribeCertificateOperateLogsResponse,
     CommitCertificateInformationRequest: CommitCertificateInformationRequest,
-    CommitCertificateInformationResponse: CommitCertificateInformationResponse,
+    DownloadCertificateResponse: DownloadCertificateResponse,
     ReplaceCertificateResponse: ReplaceCertificateResponse,
     DownloadCertificateRequest: DownloadCertificateRequest,
     CancelCertificateOrderRequest: CancelCertificateOrderRequest,
@@ -2693,26 +3211,38 @@ module.exports = {
     DescribeCertificateResponse: DescribeCertificateResponse,
     OperationLog: OperationLog,
     UploadCertificateRequest: UploadCertificateRequest,
+    UploadConfirmLetterRequest: UploadConfirmLetterRequest,
     DescribeCertificateDetailRequest: DescribeCertificateDetailRequest,
     ApplyCertificateRequest: ApplyCertificateRequest,
     ReplaceCertificateRequest: ReplaceCertificateRequest,
+    UploadRevokeLetterResponse: UploadRevokeLetterResponse,
+    CreateCertificateResponse: CreateCertificateResponse,
+    UploadRevokeLetterRequest: UploadRevokeLetterRequest,
     DeleteCertificateResponse: DeleteCertificateResponse,
-    DvAuthDetail: DvAuthDetail,
+    RevokeCertificateResponse: RevokeCertificateResponse,
+    RevokeDomainValidateAuths: RevokeDomainValidateAuths,
+    DescribeCertificateDetailResponse: DescribeCertificateDetailResponse,
+    CheckCertificateChainResponse: CheckCertificateChainResponse,
     ModifyCertificateProjectRequest: ModifyCertificateProjectRequest,
     DvAuths: DvAuths,
     ModifyCertificateAliasRequest: ModifyCertificateAliasRequest,
     DescribeCertificateRequest: DescribeCertificateRequest,
+    DvAuthDetail: DvAuthDetail,
     ProjectInfo: ProjectInfo,
     DescribeCertificateOperateLogsRequest: DescribeCertificateOperateLogsRequest,
     CancelCertificateOrderResponse: CancelCertificateOrderResponse,
-    SubmitCertificateInformationResponse: SubmitCertificateInformationResponse,
+    CreateCertificateRequest: CreateCertificateRequest,
     DescribeCertificatesResponse: DescribeCertificatesResponse,
-    DownloadCertificateResponse: DownloadCertificateResponse,
+    CommitCertificateInformationResponse: CommitCertificateInformationResponse,
+    UploadConfirmLetterResponse: UploadConfirmLetterResponse,
     UploadCertificateResponse: UploadCertificateResponse,
-    DescribeCertificateDetailResponse: DescribeCertificateDetailResponse,
+    CheckCertificateChainRequest: CheckCertificateChainRequest,
     ModifyCertificateAliasResponse: ModifyCertificateAliasResponse,
     SubmitCertificateInformationRequest: SubmitCertificateInformationRequest,
     SubmittedData: SubmittedData,
     DescribeCertificatesRequest: DescribeCertificatesRequest,
+    CompleteCertificateResponse: CompleteCertificateResponse,
+    SubmitCertificateInformationResponse: SubmitCertificateInformationResponse,
+    RevokeCertificateRequest: RevokeCertificateRequest,
 
 }

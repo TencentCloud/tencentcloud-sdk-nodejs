@@ -405,30 +405,54 @@ class DescribeRealtimeNetworkResponse extends  AbstractModel {
 }
 
 /**
- * RemoveUser请求参数结构体
+ * DescribeUserInformation请求参数结构体
  * @class
  */
-class RemoveUserRequest extends  AbstractModel {
+class DescribeUserInformationRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * TRTC的SDKAppId。
+         * 通话 ID（唯一标识一次通话）： sdkappid_roomgString（房间号_createTime（房间创建时间，unix时间戳，单位为s）例：1400353843_218695_1590065777。通过 DescribeRoomInformation（查询房间列表）接口获取（链接：https://cloud.tencent.com/document/product/647/44050）
+         * @type {string || null}
+         */
+        this.CommId = null;
+
+        /**
+         * 查询开始时间，5天内。本地unix时间戳（1588031999s）
          * @type {number || null}
+         */
+        this.StartTime = null;
+
+        /**
+         * 查询结束时间，本地unix时间戳（1588031999s）
+         * @type {number || null}
+         */
+        this.EndTime = null;
+
+        /**
+         * 用户SDKAppID（1400188366）
+         * @type {string || null}
          */
         this.SdkAppId = null;
 
         /**
-         * 房间号。
-         * @type {number || null}
-         */
-        this.RoomId = null;
-
-        /**
-         * 要移出的用户列表，最多10个。
+         * 需查询的用户数组，不填默认返回6个用户,最多可填6个用户
          * @type {Array.<string> || null}
          */
         this.UserIds = null;
+
+        /**
+         * 设置分页index，从0开始（PageNumber和PageSize 其中一个不填均默认返回6条数据）
+         * @type {string || null}
+         */
+        this.PageNumber = null;
+
+        /**
+         * 设置分页大小（PageNumber和PageSize 其中一个不填均默认返回6条数据,PageSize最大不超过100）
+         * @type {string || null}
+         */
+        this.PageSize = null;
 
     }
 
@@ -439,9 +463,13 @@ class RemoveUserRequest extends  AbstractModel {
         if (!params) {
             return;
         }
+        this.CommId = 'CommId' in params ? params.CommId : null;
+        this.StartTime = 'StartTime' in params ? params.StartTime : null;
+        this.EndTime = 'EndTime' in params ? params.EndTime : null;
         this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.RoomId = 'RoomId' in params ? params.RoomId : null;
         this.UserIds = 'UserIds' in params ? params.UserIds : null;
+        this.PageNumber = 'PageNumber' in params ? params.PageNumber : null;
+        this.PageSize = 'PageSize' in params ? params.PageSize : null;
 
     }
 }
@@ -588,24 +616,31 @@ recvLossRateRaw：下行丢包率
 }
 
 /**
- * DismissRoom请求参数结构体
+ * DescribeUserInformation返回参数结构体
  * @class
  */
-class DismissRoomRequest extends  AbstractModel {
+class DescribeUserInformationResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * TRTC的SDKAppId。
+         * 返回的用户总条数
          * @type {number || null}
          */
-        this.SdkAppId = null;
+        this.Total = null;
 
         /**
-         * 房间号。
-         * @type {number || null}
+         * 用户信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<UserInformation> || null}
          */
-        this.RoomId = null;
+        this.UserList = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
 
     }
 
@@ -616,8 +651,17 @@ class DismissRoomRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
-        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.Total = 'Total' in params ? params.Total : null;
+
+        if (params.UserList) {
+            this.UserList = new Array();
+            for (let z in params.UserList) {
+                let obj = new UserInformation();
+                obj.deserialize(params.UserList[z]);
+                this.UserList.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -1027,6 +1071,48 @@ class DescribeRoomInformationResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * RemoveUser请求参数结构体
+ * @class
+ */
+class RemoveUserRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * TRTC的SDKAppId。
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * 房间号。
+         * @type {number || null}
+         */
+        this.RoomId = null;
+
+        /**
+         * 要移出的用户列表，最多10个。
+         * @type {Array.<string> || null}
+         */
+        this.UserIds = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
+        this.UserIds = 'UserIds' in params ? params.UserIds : null;
 
     }
 }
@@ -1491,6 +1577,41 @@ class EventList extends  AbstractModel {
             }
         }
         this.PeerId = 'PeerId' in params ? params.PeerId : null;
+
+    }
+}
+
+/**
+ * DismissRoom请求参数结构体
+ * @class
+ */
+class DismissRoomRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * TRTC的SDKAppId。
+         * @type {number || null}
+         */
+        this.SdkAppId = null;
+
+        /**
+         * 房间号。
+         * @type {number || null}
+         */
+        this.RoomId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SdkAppId = 'SdkAppId' in params ? params.SdkAppId : null;
+        this.RoomId = 'RoomId' in params ? params.RoomId : null;
 
     }
 }
@@ -2082,10 +2203,10 @@ module.exports = {
     DescribeRealtimeScaleResponse: DescribeRealtimeScaleResponse,
     DismissRoomResponse: DismissRoomResponse,
     DescribeRealtimeNetworkResponse: DescribeRealtimeNetworkResponse,
-    RemoveUserRequest: RemoveUserRequest,
+    DescribeUserInformationRequest: DescribeUserInformationRequest,
     DescribeCallDetailRequest: DescribeCallDetailRequest,
     DescribeRealtimeNetworkRequest: DescribeRealtimeNetworkRequest,
-    DismissRoomRequest: DismissRoomRequest,
+    DescribeUserInformationResponse: DescribeUserInformationResponse,
     EncodeParams: EncodeParams,
     StartMCUMixTranscodeRequest: StartMCUMixTranscodeRequest,
     DescribeRealtimeQualityResponse: DescribeRealtimeQualityResponse,
@@ -2093,6 +2214,7 @@ module.exports = {
     UserInformation: UserInformation,
     DescribeHistoryScaleRequest: DescribeHistoryScaleRequest,
     DescribeRoomInformationResponse: DescribeRoomInformationResponse,
+    RemoveUserRequest: RemoveUserRequest,
     OutputParams: OutputParams,
     EventMessage: EventMessage,
     CreateTroubleInfoResponse: CreateTroubleInfoResponse,
@@ -2102,6 +2224,7 @@ module.exports = {
     ScaleInfomation: ScaleInfomation,
     CreateTroubleInfoRequest: CreateTroubleInfoRequest,
     EventList: EventList,
+    DismissRoomRequest: DismissRoomRequest,
     DescribeDetailEventResponse: DescribeDetailEventResponse,
     StartMCUMixTranscodeResponse: StartMCUMixTranscodeResponse,
     SmallVideoLayoutParams: SmallVideoLayoutParams,

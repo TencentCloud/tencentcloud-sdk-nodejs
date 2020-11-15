@@ -251,7 +251,7 @@ class IotcloudClient extends AbstractClient {
     }
 
     /**
-     * 本接口（CreateTopicRule）用于创建一个规则
+     * 本接口（CreateTopicRule）用于创建一个规则 
      * @param {CreateTopicRuleRequest} req
      * @param {function(string, CreateTopicRuleResponse):void} cb
      * @public
@@ -405,7 +405,7 @@ class IotcloudClient extends AbstractClient {
     }
 
     /**
-     * 本接口（ReplaceTopicRule）用于修改替换规则
+     * 本接口（ReplaceTopicRule）用于修改替换规则 
      * @param {ReplaceTopicRuleRequest} req
      * @param {function(string, ReplaceTopicRuleResponse):void} cb
      * @public

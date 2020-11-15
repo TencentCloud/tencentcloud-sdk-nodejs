@@ -299,6 +299,50 @@ class DescribeProductEventListRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeServiceDiscovery返回参数结构体
+ * @class
+ */
+class DescribeServiceDiscoveryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 返回服务发现列表信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<ServiceDiscoveryItem> || null}
+         */
+        this.ServiceDiscoverySet = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ServiceDiscoverySet) {
+            this.ServiceDiscoverySet = new Array();
+            for (let z in params.ServiceDiscoverySet) {
+                let obj = new ServiceDiscoveryItem();
+                obj.deserialize(params.ServiceDiscoverySet[z]);
+                this.ServiceDiscoverySet.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 指标告警配置
  * @class
  */
@@ -462,6 +506,46 @@ class BindingPolicyObjectRequest extends  AbstractModel {
 }
 
 /**
+ * CreateServiceDiscovery返回参数结构体
+ * @class
+ */
+class CreateServiceDiscoveryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 创建成功之后，返回对应服务发现信息
+         * @type {ServiceDiscoveryItem || null}
+         */
+        this.ServiceDiscovery = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ServiceDiscovery) {
+            let obj = new ServiceDiscoveryItem();
+            obj.deserialize(params.ServiceDiscovery)
+            this.ServiceDiscovery = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribePolicyGroupInfo请求参数结构体
  * @class
  */
@@ -492,6 +576,34 @@ class DescribePolicyGroupInfoRequest extends  AbstractModel {
         }
         this.Module = 'Module' in params ? params.Module : null;
         this.GroupId = 'GroupId' in params ? params.GroupId : null;
+
+    }
+}
+
+/**
+ * DeleteServiceDiscovery返回参数结构体
+ * @class
+ */
+class DeleteServiceDiscoveryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -761,36 +873,36 @@ class DescribePolicyGroupInfoResponse extends  AbstractModel {
 }
 
 /**
- * DescribeAllNamespaces请求参数结构体
+ * PutMonitorData请求参数结构体
  * @class
  */
-class DescribeAllNamespacesRequest extends  AbstractModel {
+class PutMonitorDataRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 根据使用场景过滤 "ST_DASHBOARD"=Dashboard类型 或 "ST_ALARM"=告警类型
+         * 一组指标和数据
+         * @type {Array.<MetricDatum> || null}
+         */
+        this.Metrics = null;
+
+        /**
+         * 上报时自行指定的 IP
          * @type {string || null}
          */
-        this.SceneType = null;
+        this.AnnounceIp = null;
 
         /**
-         * 固定值，为"monitor"
+         * 上报时自行指定的时间戳
+         * @type {number || null}
+         */
+        this.AnnounceTimestamp = null;
+
+        /**
+         * 上报时自行指定的 IP 或 产品实例ID
          * @type {string || null}
          */
-        this.Module = null;
-
-        /**
-         * 根据监控类型过滤 不填默认查所有类型 "MT_QCE"=云产品监控 "MT_CUSTOM"=自定义监控
-         * @type {Array.<string> || null}
-         */
-        this.MonitorTypes = null;
-
-        /**
-         * 根据namespace的Id过滤 不填默认查询所有
-         * @type {Array.<string> || null}
-         */
-        this.Ids = null;
+        this.AnnounceInstance = null;
 
     }
 
@@ -801,10 +913,18 @@ class DescribeAllNamespacesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.SceneType = 'SceneType' in params ? params.SceneType : null;
-        this.Module = 'Module' in params ? params.Module : null;
-        this.MonitorTypes = 'MonitorTypes' in params ? params.MonitorTypes : null;
-        this.Ids = 'Ids' in params ? params.Ids : null;
+
+        if (params.Metrics) {
+            this.Metrics = new Array();
+            for (let z in params.Metrics) {
+                let obj = new MetricDatum();
+                obj.deserialize(params.Metrics[z]);
+                this.Metrics.push(obj);
+            }
+        }
+        this.AnnounceIp = 'AnnounceIp' in params ? params.AnnounceIp : null;
+        this.AnnounceTimestamp = 'AnnounceTimestamp' in params ? params.AnnounceTimestamp : null;
+        this.AnnounceInstance = 'AnnounceInstance' in params ? params.AnnounceInstance : null;
 
     }
 }
@@ -1293,6 +1413,49 @@ class UnBindingPolicyObjectRequest extends  AbstractModel {
 }
 
 /**
+ * DescribeServiceDiscovery请求参数结构体
+ * @class
+ */
+class DescribeServiceDiscoveryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Prometheus 实例 ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * <li>类型是 TKE，为对应的腾讯云容器服务集群 ID</li>
+         * @type {string || null}
+         */
+        this.KubeClusterId = null;
+
+        /**
+         * 用户 Kubernetes 集群类型：
+<li> 1 = 容器服务集群(TKE) </li>
+         * @type {number || null}
+         */
+        this.KubeType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.KubeClusterId = 'KubeClusterId' in params ? params.KubeClusterId : null;
+        this.KubeType = 'KubeType' in params ? params.KubeType : null;
+
+    }
+}
+
+/**
  * DescribePolicyConditionList请求参数结构体
  * @class
  */
@@ -1421,6 +1584,138 @@ class DimensionsDesc extends  AbstractModel {
             return;
         }
         this.Dimensions = 'Dimensions' in params ? params.Dimensions : null;
+
+    }
+}
+
+/**
+ * Prometheus 服务发现信息
+ * @class
+ */
+class ServiceDiscoveryItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 服务发现名称
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 服务发现属于的 Namespace
+         * @type {string || null}
+         */
+        this.Namespace = null;
+
+        /**
+         * 服务发现类型: ServiceMonitor/PodMonitor
+         * @type {string || null}
+         */
+        this.Kind = null;
+
+        /**
+         * Namespace 选取方式
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.NamespaceSelector = null;
+
+        /**
+         * Label 选取方式
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Selector = null;
+
+        /**
+         * Endpoints 信息（PodMonitor 不含该参数）
+         * @type {string || null}
+         */
+        this.Endpoints = null;
+
+        /**
+         * 服务发现对应的配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Yaml = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.Namespace = 'Namespace' in params ? params.Namespace : null;
+        this.Kind = 'Kind' in params ? params.Kind : null;
+        this.NamespaceSelector = 'NamespaceSelector' in params ? params.NamespaceSelector : null;
+        this.Selector = 'Selector' in params ? params.Selector : null;
+        this.Endpoints = 'Endpoints' in params ? params.Endpoints : null;
+        this.Yaml = 'Yaml' in params ? params.Yaml : null;
+
+    }
+}
+
+/**
+ * CreateServiceDiscovery请求参数结构体
+ * @class
+ */
+class CreateServiceDiscoveryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Prometheus 实例 ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * <li>类型为TKE：对应集成的腾讯云容器服务集群 ID</li>
+         * @type {string || null}
+         */
+        this.KubeClusterId = null;
+
+        /**
+         * 用户 Kubernetes 集群类型：
+<li> 1 = 容器服务集群(TKE) </li>
+         * @type {number || null}
+         */
+        this.KubeType = null;
+
+        /**
+         * 服务发现类型，取值如下：
+<li> 1 = ServiceMonitor</li>
+<li> 2 = PodMonitor</li>
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * 服务发现配置信息
+         * @type {string || null}
+         */
+        this.Yaml = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.KubeClusterId = 'KubeClusterId' in params ? params.KubeClusterId : null;
+        this.KubeType = 'KubeType' in params ? params.KubeType : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Yaml = 'Yaml' in params ? params.Yaml : null;
 
     }
 }
@@ -2414,6 +2709,46 @@ class BindingPolicyObjectDimension extends  AbstractModel {
 }
 
 /**
+ * UpdateServiceDiscovery返回参数结构体
+ * @class
+ */
+class UpdateServiceDiscoveryResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 更新成功之后，返回对应服务发现的信息
+         * @type {ServiceDiscoveryItem || null}
+         */
+        this.ServiceDiscovery = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.ServiceDiscovery) {
+            let obj = new ServiceDiscoveryItem();
+            obj.deserialize(params.ServiceDiscovery)
+            this.ServiceDiscovery = obj;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 实例对象的维度组合
  * @class
  */
@@ -2648,6 +2983,65 @@ class DescribeBasicAlarmListAlarms extends  AbstractModel {
                 this.InstanceGroup.push(obj);
             }
         }
+
+    }
+}
+
+/**
+ * UpdateServiceDiscovery请求参数结构体
+ * @class
+ */
+class UpdateServiceDiscoveryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Prometheus 实例 ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * <li>类型是 TKE，为对应的腾讯云容器服务集群 ID</li>
+         * @type {string || null}
+         */
+        this.KubeClusterId = null;
+
+        /**
+         * 用户 Kubernetes 集群类型：
+<li> 1 = 容器服务集群(TKE) </li>
+         * @type {number || null}
+         */
+        this.KubeType = null;
+
+        /**
+         * 服务发现类型，取值如下：
+<li> 1 = ServiceMonitor</li>
+<li> 2 = PodMonitor</li>
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * 服务发现配置信息
+         * @type {string || null}
+         */
+        this.Yaml = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.KubeClusterId = 'KubeClusterId' in params ? params.KubeClusterId : null;
+        this.KubeType = 'KubeType' in params ? params.KubeType : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Yaml = 'Yaml' in params ? params.Yaml : null;
 
     }
 }
@@ -3537,36 +3931,36 @@ class DescribePolicyConditionListConfigManualPeriodNum extends  AbstractModel {
 }
 
 /**
- * PutMonitorData请求参数结构体
+ * DescribeAllNamespaces请求参数结构体
  * @class
  */
-class PutMonitorDataRequest extends  AbstractModel {
+class DescribeAllNamespacesRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 一组指标和数据
-         * @type {Array.<MetricDatum> || null}
-         */
-        this.Metrics = null;
-
-        /**
-         * 上报时自行指定的 IP
+         * 根据使用场景过滤 "ST_DASHBOARD"=Dashboard类型 或 "ST_ALARM"=告警类型
          * @type {string || null}
          */
-        this.AnnounceIp = null;
+        this.SceneType = null;
 
         /**
-         * 上报时自行指定的时间戳
-         * @type {number || null}
-         */
-        this.AnnounceTimestamp = null;
-
-        /**
-         * 上报时自行指定的 IP 或 产品实例ID
+         * 固定值，为"monitor"
          * @type {string || null}
          */
-        this.AnnounceInstance = null;
+        this.Module = null;
+
+        /**
+         * 根据监控类型过滤 不填默认查所有类型 "MT_QCE"=云产品监控 "MT_CUSTOM"=自定义监控
+         * @type {Array.<string> || null}
+         */
+        this.MonitorTypes = null;
+
+        /**
+         * 根据namespace的Id过滤 不填默认查询所有
+         * @type {Array.<string> || null}
+         */
+        this.Ids = null;
 
     }
 
@@ -3577,18 +3971,10 @@ class PutMonitorDataRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.Metrics) {
-            this.Metrics = new Array();
-            for (let z in params.Metrics) {
-                let obj = new MetricDatum();
-                obj.deserialize(params.Metrics[z]);
-                this.Metrics.push(obj);
-            }
-        }
-        this.AnnounceIp = 'AnnounceIp' in params ? params.AnnounceIp : null;
-        this.AnnounceTimestamp = 'AnnounceTimestamp' in params ? params.AnnounceTimestamp : null;
-        this.AnnounceInstance = 'AnnounceInstance' in params ? params.AnnounceInstance : null;
+        this.SceneType = 'SceneType' in params ? params.SceneType : null;
+        this.Module = 'Module' in params ? params.Module : null;
+        this.MonitorTypes = 'MonitorTypes' in params ? params.MonitorTypes : null;
+        this.Ids = 'Ids' in params ? params.Ids : null;
 
     }
 }
@@ -5731,6 +6117,65 @@ class ModifyPolicyGroupCondition extends  AbstractModel {
 }
 
 /**
+ * DeleteServiceDiscovery请求参数结构体
+ * @class
+ */
+class DeleteServiceDiscoveryRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * Prometheus 实例 ID
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * <li>类型是 TKE，为对应的腾讯云容器服务集群 ID</li>
+         * @type {string || null}
+         */
+        this.KubeClusterId = null;
+
+        /**
+         * 用户 Kubernetes 集群类型：
+<li> 1 = 容器服务集群(TKE) </li>
+         * @type {number || null}
+         */
+        this.KubeType = null;
+
+        /**
+         * 服务发现类型，取值如下：
+<li> 1 = ServiceMonitor</li>
+<li> 2 = PodMonitor</li>
+         * @type {number || null}
+         */
+        this.Type = null;
+
+        /**
+         * 服务发现配置信息
+         * @type {string || null}
+         */
+        this.Yaml = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.KubeClusterId = 'KubeClusterId' in params ? params.KubeClusterId : null;
+        this.KubeType = 'KubeType' in params ? params.KubeType : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Yaml = 'Yaml' in params ? params.Yaml : null;
+
+    }
+}
+
+/**
  * DescribeProductEventList返回的OverView对象
  * @class
  */
@@ -5875,14 +6320,17 @@ module.exports = {
     DescribePolicyConditionListConfigManual: DescribePolicyConditionListConfigManual,
     CreatePolicyGroupEventCondition: CreatePolicyGroupEventCondition,
     DescribeProductEventListRequest: DescribeProductEventListRequest,
+    DescribeServiceDiscoveryResponse: DescribeServiceDiscoveryResponse,
     DescribePolicyConditionListMetric: DescribePolicyConditionListMetric,
     DescribePolicyGroupListResponse: DescribePolicyGroupListResponse,
     BindingPolicyObjectRequest: BindingPolicyObjectRequest,
+    CreateServiceDiscoveryResponse: CreateServiceDiscoveryResponse,
     DescribePolicyGroupInfoRequest: DescribePolicyGroupInfoRequest,
+    DeleteServiceDiscoveryResponse: DeleteServiceDiscoveryResponse,
     DescribePolicyGroupInfoCallback: DescribePolicyGroupInfoCallback,
     DescribeProductEventListDimensions: DescribeProductEventListDimensions,
     DescribePolicyGroupInfoResponse: DescribePolicyGroupInfoResponse,
-    DescribeAllNamespacesRequest: DescribeAllNamespacesRequest,
+    PutMonitorDataRequest: PutMonitorDataRequest,
     CreatePolicyGroupResponse: CreatePolicyGroupResponse,
     PutMonitorDataResponse: PutMonitorDataResponse,
     DescribeBaseMetricsResponse: DescribeBaseMetricsResponse,
@@ -5893,10 +6341,13 @@ module.exports = {
     DataPoint: DataPoint,
     DescribePolicyConditionListConfigManualPeriod: DescribePolicyConditionListConfigManualPeriod,
     UnBindingPolicyObjectRequest: UnBindingPolicyObjectRequest,
+    DescribeServiceDiscoveryRequest: DescribeServiceDiscoveryRequest,
     DescribePolicyConditionListRequest: DescribePolicyConditionListRequest,
     DescribeBindingPolicyObjectListInstance: DescribeBindingPolicyObjectListInstance,
     DeletePolicyGroupResponse: DeletePolicyGroupResponse,
     DimensionsDesc: DimensionsDesc,
+    ServiceDiscoveryItem: ServiceDiscoveryItem,
+    CreateServiceDiscoveryRequest: CreateServiceDiscoveryRequest,
     DescribePolicyConditionListCondition: DescribePolicyConditionListCondition,
     DescribeProductListRequest: DescribeProductListRequest,
     PeriodsSt: PeriodsSt,
@@ -5915,8 +6366,10 @@ module.exports = {
     DescribeBaseMetricsRequest: DescribeBaseMetricsRequest,
     Instance: Instance,
     BindingPolicyObjectDimension: BindingPolicyObjectDimension,
+    UpdateServiceDiscoveryResponse: UpdateServiceDiscoveryResponse,
     Dimension: Dimension,
     DescribeBasicAlarmListAlarms: DescribeBasicAlarmListAlarms,
+    UpdateServiceDiscoveryRequest: UpdateServiceDiscoveryRequest,
     UnBindingAllPolicyObjectResponse: UnBindingAllPolicyObjectResponse,
     DescribeAlarmHistoriesRequest: DescribeAlarmHistoriesRequest,
     MetricObjectMeaning: MetricObjectMeaning,
@@ -5930,7 +6383,7 @@ module.exports = {
     UnBindingPolicyObjectResponse: UnBindingPolicyObjectResponse,
     DescribeProductEventListEvents: DescribeProductEventListEvents,
     DescribePolicyConditionListConfigManualPeriodNum: DescribePolicyConditionListConfigManualPeriodNum,
-    PutMonitorDataRequest: PutMonitorDataRequest,
+    DescribeAllNamespacesRequest: DescribeAllNamespacesRequest,
     DescribePolicyGroupListGroupInstanceGroup: DescribePolicyGroupListGroupInstanceGroup,
     InstanceGroup: InstanceGroup,
     DescribeAccidentEventListResponse: DescribeAccidentEventListResponse,
@@ -5958,6 +6411,7 @@ module.exports = {
     DescribePolicyGroupInfoEventCondition: DescribePolicyGroupInfoEventCondition,
     SendCustomAlarmMsgResponse: SendCustomAlarmMsgResponse,
     ModifyPolicyGroupCondition: ModifyPolicyGroupCondition,
+    DeleteServiceDiscoveryRequest: DeleteServiceDiscoveryRequest,
     DescribeProductEventListOverView: DescribeProductEventListOverView,
     DescribePolicyConditionListConfigManualCalcValue: DescribePolicyConditionListConfigManualCalcValue,
     BindingPolicyObjectResponse: BindingPolicyObjectResponse,

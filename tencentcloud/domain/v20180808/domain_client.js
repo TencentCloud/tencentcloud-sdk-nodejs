@@ -23,6 +23,7 @@ const UpdateProhibitionBatchRequest = models.UpdateProhibitionBatchRequest;
 const DeleteTemplateResponse = models.DeleteTemplateResponse;
 const TransferInDomainBatchRequest = models.TransferInDomainBatchRequest;
 const CreateDomainBatchResponse = models.CreateDomainBatchResponse;
+const DomainBatchDetailSet = models.DomainBatchDetailSet;
 const ModifyDomainDNSBatchResponse = models.ModifyDomainDNSBatchResponse;
 const RenewDomainBatchRequest = models.RenewDomainBatchRequest;
 const TransferInDomainBatchResponse = models.TransferInDomainBatchResponse;
@@ -34,6 +35,7 @@ const BatchModifyDomainInfoResponse = models.BatchModifyDomainInfoResponse;
 const DescribeDomainBaseInfoResponse = models.DescribeDomainBaseInfoResponse;
 const DescribeTemplateListResponse = models.DescribeTemplateListResponse;
 const TransferProhibitionBatchRequest = models.TransferProhibitionBatchRequest;
+const DescribeBatchOperationLogDetailsRequest = models.DescribeBatchOperationLogDetailsRequest;
 const DescribeDomainNameListResponse = models.DescribeDomainNameListResponse;
 const ContactInfo = models.ContactInfo;
 const DescribeDomainPriceListResponse = models.DescribeDomainPriceListResponse;
@@ -50,15 +52,19 @@ const CreateDomainBatchRequest = models.CreateDomainBatchRequest;
 const DescribeDomainBaseInfoRequest = models.DescribeDomainBaseInfoRequest;
 const DomainBaseInfo = models.DomainBaseInfo;
 const DescribeDomainNameListRequest = models.DescribeDomainNameListRequest;
+const DescribeBatchOperationLogsRequest = models.DescribeBatchOperationLogsRequest;
 const UploadImageRequest = models.UploadImageRequest;
 const CheckDomainRequest = models.CheckDomainRequest;
+const DescribeBatchOperationLogsResponse = models.DescribeBatchOperationLogsResponse;
 const TransferProhibitionBatchResponse = models.TransferProhibitionBatchResponse;
 const ModifyDomainDNSBatchRequest = models.ModifyDomainDNSBatchRequest;
-const ModifyDomainOwnerBatchRequest = models.ModifyDomainOwnerBatchRequest;
+const DescribeBatchOperationLogDetailsResponse = models.DescribeBatchOperationLogDetailsResponse;
 const CheckBatchStatusResponse = models.CheckBatchStatusResponse;
 const DescribeTemplateListRequest = models.DescribeTemplateListRequest;
 const ModifyDomainOwnerBatchResponse = models.ModifyDomainOwnerBatchResponse;
 const SetDomainAutoRenewRequest = models.SetDomainAutoRenewRequest;
+const ModifyDomainOwnerBatchRequest = models.ModifyDomainOwnerBatchRequest;
+const DomainBatchLogSet = models.DomainBatchLogSet;
 
 
 /**
@@ -74,8 +80,6 @@ class DomainClient extends AbstractClient {
     /**
      * 本接口 (  DescribeDomainNameList ) 获取域名列表。
 
-默认接口请求频率限制：20次/秒。
-
      * @param {DescribeDomainNameListRequest} req
      * @param {function(string, DescribeDomainNameListResponse):void} cb
      * @public
@@ -87,8 +91,6 @@ class DomainClient extends AbstractClient {
 
     /**
      * 本接口 ( UploadImage ) 用于上传资质照片 。
-
-默认接口请求频率限制：20次/秒。
      * @param {UploadImageRequest} req
      * @param {function(string, UploadImageResponse):void} cb
      * @public
@@ -100,8 +102,6 @@ class DomainClient extends AbstractClient {
 
     /**
      * 本接口 ( CreateTemplate ) 用于添加域名信息模板 。
-
-默认接口请求频率限制：20次/秒。
      * @param {CreateTemplateRequest} req
      * @param {function(string, CreateTemplateResponse):void} cb
      * @public
@@ -126,8 +126,6 @@ class DomainClient extends AbstractClient {
 
     /**
      * 本接口 ( ModifyDomainOwnerBatch) 用于域名批量账号间转移 。
-
-默认接口请求频率限制：20次/秒。
      * @param {ModifyDomainOwnerBatchRequest} req
      * @param {function(string, ModifyDomainOwnerBatchResponse):void} cb
      * @public
@@ -165,9 +163,29 @@ class DomainClient extends AbstractClient {
     }
 
     /**
-     * 本接口 ( DeleteTemplate ) 用于删除域名信息模板。
+     * 本接口 ( DescribeBatchOperationLogs ) 用于获取批量操作日志 。
+     * @param {DescribeBatchOperationLogsRequest} req
+     * @param {function(string, DescribeBatchOperationLogsResponse):void} cb
+     * @public
+     */
+    DescribeBatchOperationLogs(req, cb) {
+        let resp = new DescribeBatchOperationLogsResponse();
+        this.request("DescribeBatchOperationLogs", req, resp, cb);
+    }
 
-默认接口请求频率限制：20次/秒。
+    /**
+     * 本接口 ( DescribeBatchOperationLogDetails ) 用于获取批量操作日志详情。
+     * @param {DescribeBatchOperationLogDetailsRequest} req
+     * @param {function(string, DescribeBatchOperationLogDetailsResponse):void} cb
+     * @public
+     */
+    DescribeBatchOperationLogDetails(req, cb) {
+        let resp = new DescribeBatchOperationLogDetailsResponse();
+        this.request("DescribeBatchOperationLogDetails", req, resp, cb);
+    }
+
+    /**
+     * 本接口 ( DeleteTemplate ) 用于删除域名信息模板。
      * @param {DeleteTemplateRequest} req
      * @param {function(string, DeleteTemplateResponse):void} cb
      * @public
@@ -179,8 +197,6 @@ class DomainClient extends AbstractClient {
 
     /**
      * 本接口 (DescribeTemplateList) 用于获取模板列表。
-
-默认接口请求频率限制：20次/秒。
 
      * @param {DescribeTemplateListRequest} req
      * @param {function(string, DescribeTemplateListResponse):void} cb
@@ -207,8 +223,6 @@ class DomainClient extends AbstractClient {
 
     /**
      * 本接口 ( BatchModifyDomainInfo ) 用于批量域名信息修改 。
-
-默认接口请求频率限制：20次/秒。
      * @param {BatchModifyDomainInfoRequest} req
      * @param {function(string, BatchModifyDomainInfoResponse):void} cb
      * @public
@@ -268,8 +282,6 @@ class DomainClient extends AbstractClient {
 
     /**
      * 本接口 ( UpdateProhibitionBatch ) 用于批量设置禁止域名更新 。
-
-默认接口请求频率限制：20次/秒。
      * @param {UpdateProhibitionBatchRequest} req
      * @param {function(string, UpdateProhibitionBatchResponse):void} cb
      * @public

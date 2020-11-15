@@ -4620,7 +4620,7 @@ class DescribeProjectSecurityGroupsRequest extends  AbstractModel {
         super();
 
         /**
-         * 项目ID。
+         * 项目ID，可通过控制台项目管理中查看
          * @type {number || null}
          */
         this.ProjectId = null;
@@ -7083,7 +7083,7 @@ class DescribeBackupByFlowIdRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 创建备份流程ID
+         * 创建备份流程ID，可通过 [CreateBackup](https://cloud.tencent.com/document/product/238/19946) 接口获取
          * @type {string || null}
          */
         this.FlowId = null;
@@ -8485,7 +8485,7 @@ class ModifyBackupNameRequest extends  AbstractModel {
         this.InstanceId = null;
 
         /**
-         * 要修改名称的备份ID，可通过DescribeBackups 接口获取。
+         * 要修改名称的备份ID，可通过 [DescribeBackups](https://cloud.tencent.com/document/product/238/19943)  接口获取。
          * @type {number || null}
          */
         this.BackupId = null;

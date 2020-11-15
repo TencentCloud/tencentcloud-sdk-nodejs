@@ -22,6 +22,7 @@ const DescribeGroupInstancesResponse = models.DescribeGroupInstancesResponse;
 const DescribeMsApiListResponse = models.DescribeMsApiListResponse;
 const EnableTaskRequest = models.EnableTaskRequest;
 const DisableTaskFlowResponse = models.DisableTaskFlowResponse;
+const TaskRule = models.TaskRule;
 const DescribeDownloadInfoRequest = models.DescribeDownloadInfoRequest;
 const ApiDetailResponse = models.ApiDetailResponse;
 const ImageTag = models.ImageTag;
@@ -39,7 +40,7 @@ const DeleteServerlessGroupRequest = models.DeleteServerlessGroupRequest;
 const DescribeImageTagsRequest = models.DescribeImageTagsRequest;
 const ModifyLaneRuleResponse = models.ModifyLaneRuleResponse;
 const DescribeSimpleClustersResponse = models.DescribeSimpleClustersResponse;
-const TaskRule = models.TaskRule;
+const SchedulingStrategy = models.SchedulingStrategy;
 const DescribePodInstancesResponse = models.DescribePodInstancesResponse;
 const VmGroup = models.VmGroup;
 const DescribeRepositoryResponse = models.DescribeRepositoryResponse;
@@ -76,6 +77,7 @@ const CreateLaneRequest = models.CreateLaneRequest;
 const DeleteApplicationResponse = models.DeleteApplicationResponse;
 const DescribeBasicResourceUsageResponse = models.DescribeBasicResourceUsageResponse;
 const UpdateRepositoryRequest = models.UpdateRepositoryRequest;
+const RevocationConfigResponse = models.RevocationConfigResponse;
 const Instance = models.Instance;
 const DeployServerlessGroupResponse = models.DeployServerlessGroupResponse;
 const DescribeConfigsResponse = models.DescribeConfigsResponse;
@@ -100,6 +102,7 @@ const DescribeGroupResponse = models.DescribeGroupResponse;
 const DescribeGroupsResponse = models.DescribeGroupsResponse;
 const TaskId = models.TaskId;
 const Env = models.Env;
+const DescribeImageRepositoryResponse = models.DescribeImageRepositoryResponse;
 const DeleteContainerGroupResponse = models.DeleteContainerGroupResponse;
 const DescribeSimpleGroupsRequest = models.DescribeSimpleGroupsRequest;
 const CreateNamespaceResponse = models.CreateNamespaceResponse;
@@ -117,7 +120,7 @@ const ServerlessGroup = models.ServerlessGroup;
 const DescribeApplicationResponse = models.DescribeApplicationResponse;
 const LaneInfo = models.LaneInfo;
 const DescribeConfigReleaseLogsResponse = models.DescribeConfigReleaseLogsResponse;
-const RevocationConfigResponse = models.RevocationConfigResponse;
+const DescribeImageRepositoryRequest = models.DescribeImageRepositoryRequest;
 const DescribeSimpleGroupsResponse = models.DescribeSimpleGroupsResponse;
 const StopTaskExecuteRequest = models.StopTaskExecuteRequest;
 const DescribeFlowLastBatchStateRequest = models.DescribeFlowLastBatchStateRequest;
@@ -157,7 +160,7 @@ const ExpandGroupResponse = models.ExpandGroupResponse;
 const DescribeServerlessGroupsResponse = models.DescribeServerlessGroupsResponse;
 const DescribePublicConfigsResponse = models.DescribePublicConfigsResponse;
 const ServerlessGroupPage = models.ServerlessGroupPage;
-const ModifyLaneRuleRequest = models.ModifyLaneRuleRequest;
+const ImageRepository = models.ImageRepository;
 const AddInstancesResponse = models.AddInstancesResponse;
 const DeleteApplicationRequest = models.DeleteApplicationRequest;
 const ContinueRunFailedTaskBatchResponse = models.ContinueRunFailedTaskBatchResponse;
@@ -195,6 +198,7 @@ const DescribeApiDetailRequest = models.DescribeApiDetailRequest;
 const DescribeUploadInfoRequest = models.DescribeUploadInfoRequest;
 const DescribeClusterInstancesRequest = models.DescribeClusterInstancesRequest;
 const StopContainerGroupRequest = models.StopContainerGroupRequest;
+const ImageRepositoryResult = models.ImageRepositoryResult;
 const DescribeRepositoryRequest = models.DescribeRepositoryRequest;
 const RevocationPublicConfigRequest = models.RevocationPublicConfigRequest;
 const TaskFlowLastBatchState = models.TaskFlowLastBatchState;
@@ -218,6 +222,7 @@ const DeleteImageTag = models.DeleteImageTag;
 const DeletePkgsResponse = models.DeletePkgsResponse;
 const DescribeConfigReleasesResponse = models.DescribeConfigReleasesResponse;
 const Cluster = models.Cluster;
+const ModifyLaneRuleRequest = models.ModifyLaneRuleRequest;
 const ModifyMicroserviceResponse = models.ModifyMicroserviceResponse;
 const DescribeMicroservicesResponse = models.DescribeMicroservicesResponse;
 const DescribeDownloadInfoResponse = models.DescribeDownloadInfoResponse;
@@ -788,6 +793,17 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     DescribeGroups(req, cb) {
         let resp = new DescribeGroupsResponse();
         this.request("DescribeGroups", req, resp, cb);
+    }
+
+    /**
+     * 镜像仓库列表 
+     * @param {DescribeImageRepositoryRequest} req
+     * @param {function(string, DescribeImageRepositoryResponse):void} cb
+     * @public
+     */
+    DescribeImageRepository(req, cb) {
+        let resp = new DescribeImageRepositoryResponse();
+        this.request("DescribeImageRepository", req, resp, cb);
     }
 
     /**

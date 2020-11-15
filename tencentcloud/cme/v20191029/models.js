@@ -421,10 +421,10 @@ class ClassInfo extends  AbstractModel {
 }
 
 /**
- * DeleteMaterial返回参数结构体
+ * ModifyProject返回参数结构体
  * @class
  */
-class DeleteMaterialResponse extends  AbstractModel {
+class ModifyProjectResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -444,6 +444,61 @@ class DeleteMaterialResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 音频轨道上的音频片段信息。
+ * @class
+ */
+class AudioTrackItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 音频素材来源类型。取值有：
+<ul>
+<li>VOD ：素材来源 VOD 。</li>
+<li>CME ：视频来源 CME 。</li>
+</ul>
+         * @type {string || null}
+         */
+        this.SourceType = null;
+
+        /**
+         * 音频片段的媒体素材来源，可以是：
+<li>VOD 的媒体文件 ID 。</li>
+<li>CME 的素材 ID 。</li>
+         * @type {string || null}
+         */
+        this.SourceMedia = null;
+
+        /**
+         * 音频片段取自素材文件的起始时间，单位为秒。0 表示从素材开始位置截取。默认为0。
+         * @type {number || null}
+         */
+        this.SourceMediaStartTime = null;
+
+        /**
+         * 音频片段的时长，单位为秒。默认和素材本身长度一致，表示截取全部素材。
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
+        this.SourceMedia = 'SourceMedia' in params ? params.SourceMedia : null;
+        this.SourceMediaStartTime = 'SourceMediaStartTime' in params ? params.SourceMediaStartTime : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
 
     }
 }
@@ -798,6 +853,114 @@ class ProjectInfo extends  AbstractModel {
         this.CoverUrl = 'CoverUrl' in params ? params.CoverUrl : null;
         this.CreateTime = 'CreateTime' in params ? params.CreateTime : null;
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
+
+    }
+}
+
+/**
+ * 视频轨的视频片段信息。
+ * @class
+ */
+class VideoTrackItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 视频素材来源类型。取值有：
+<ul>
+<li>VOD ：素材来源 VOD 。</li>
+<li>CME ：视频来源 CME 。</li>
+</ul>
+         * @type {string || null}
+         */
+        this.SourceType = null;
+
+        /**
+         * 视频片段的媒体素材来源，可以是：
+<li>VOD 的媒体文件 ID 。</li>
+<li>CME 的素材 ID 。</li>
+         * @type {string || null}
+         */
+        this.SourceMedia = null;
+
+        /**
+         * 视频片段取自素材文件的起始时间，单位为秒。默认为0。
+         * @type {number || null}
+         */
+        this.SourceMediaStartTime = null;
+
+        /**
+         * 视频片段时长，单位为秒。默认取视频素材本身长度，表示截取全部素材。如果源文件是图片，Duration需要大于0。
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+        /**
+         * 视频片段原点距离画布原点的水平位置。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示视频片段 XPos 为画布宽度指定百分比的位置，如 10% 表示 XPos 为画布口宽度的 10%。</li>
+<li>当字符串以 px 结尾，表示视频片段 XPos 单位为像素，如 100px 表示 XPos 为100像素。</li>
+默认值：0px。
+         * @type {string || null}
+         */
+        this.XPos = null;
+
+        /**
+         * 视频片段原点距离画布原点的垂直位置。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示视频片段 YPos 为画布高度指定百分比的位置，如 10% 表示 YPos 为画布高度的 10%。</li>
+<li>当字符串以 px 结尾，表示视频片段 YPos 单位为像素，如 100px 表示 YPos 为100像素。</li>
+默认值：0px。
+         * @type {string || null}
+         */
+        this.YPos = null;
+
+        /**
+         * 视频原点位置，取值有：
+<li>Center：坐标原点为中心位置，如画布中心。</li>
+默认值 ：Center。
+         * @type {string || null}
+         */
+        this.CoordinateOrigin = null;
+
+        /**
+         * 视频片段的高度。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示视频片段 Height 为画布高度的百分比大小，如 10% 表示 Height 为画布高度的 10%；
+</li><li>当字符串以 px 结尾，表示视频片段 Height 单位为像素，如 100px 表示 Height 为100像素。</li>
+<li>当 Width、Height 均为空，则 Width 和 Height 取视频素材本身的 Width、Height。</li>
+<li>当 Width 为空，Height 非空，则 Width 按比例缩放</li>
+<li>当 Width 非空，Height 为空，则 Height 按比例缩放。</li>
+         * @type {string || null}
+         */
+        this.Height = null;
+
+        /**
+         * 视频片段的宽度。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示视频片段 Width 为画布宽度的百分比大小，如 10% 表示 Width 为画布宽度的 10%。</li>
+<li>当字符串以 px 结尾，表示视频片段 Width 单位为像素，如 100px 表示 Width 为100像素。</li>
+<li>当 Width、Height 均为空，则 Width 和 Height 取视频素材本身的 Width、Height。</li>
+<li>当 Width 为空，Height 非空，则 Width 按比例缩放</li>
+<li>当 Width 非空，Height 为空，则 Height 按比例缩放。</li>
+         * @type {string || null}
+         */
+        this.Width = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.SourceType = 'SourceType' in params ? params.SourceType : null;
+        this.SourceMedia = 'SourceMedia' in params ? params.SourceMedia : null;
+        this.SourceMediaStartTime = 'SourceMediaStartTime' in params ? params.SourceMediaStartTime : null;
+        this.Duration = 'Duration' in params ? params.Duration : null;
+        this.XPos = 'XPos' in params ? params.XPos : null;
+        this.YPos = 'YPos' in params ? params.YPos : null;
+        this.CoordinateOrigin = 'CoordinateOrigin' in params ? params.CoordinateOrigin : null;
+        this.Height = 'Height' in params ? params.Height : null;
+        this.Width = 'Width' in params ? params.Width : null;
 
     }
 }
@@ -1484,6 +1647,18 @@ class CreateProjectRequest extends  AbstractModel {
          */
         this.SwitcherProjectInput = null;
 
+        /**
+         * 直播剪辑信息，暂未开放，请勿使用。
+         * @type {LiveStreamClipProjectInput || null}
+         */
+        this.LiveStreamClipProjectInput = null;
+
+        /**
+         * 视频编辑信息。
+         * @type {VideoEditProjectInput || null}
+         */
+        this.VideoEditProjectInput = null;
+
     }
 
     /**
@@ -1509,6 +1684,18 @@ class CreateProjectRequest extends  AbstractModel {
             let obj = new SwitcherProjectInput();
             obj.deserialize(params.SwitcherProjectInput)
             this.SwitcherProjectInput = obj;
+        }
+
+        if (params.LiveStreamClipProjectInput) {
+            let obj = new LiveStreamClipProjectInput();
+            obj.deserialize(params.LiveStreamClipProjectInput)
+            this.LiveStreamClipProjectInput = obj;
+        }
+
+        if (params.VideoEditProjectInput) {
+            let obj = new VideoEditProjectInput();
+            obj.deserialize(params.VideoEditProjectInput)
+            this.VideoEditProjectInput = obj;
         }
 
     }
@@ -1682,6 +1869,74 @@ class DescribeTasksRequest extends  AbstractModel {
         this.StatusSet = 'StatusSet' in params ? params.StatusSet : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
+
+    }
+}
+
+/**
+ * 媒体轨道的片段信息
+ * @class
+ */
+class MediaTrackItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 片段类型。取值有：
+<li>Video：视频片段。</li>
+<li>Audio：音频片段。</li>
+<li>Empty：空白片段。</li>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 视频片段，当 Type = Video 时有效。
+         * @type {VideoTrackItem || null}
+         */
+        this.VideoItem = null;
+
+        /**
+         * 音频片段，当 Type = Audio 时有效。
+         * @type {AudioTrackItem || null}
+         */
+        this.AudioItem = null;
+
+        /**
+         * 空白片段，当 Type = Empty 时有效。空片段用于时间轴的占位。<li>如需要两个音频片段之间有一段时间的静音，可以用 EmptyTrackItem 来进行占位。</li>
+<li>使用 EmptyTrackItem 进行占位，来定位某个Item。</li>
+         * @type {EmptyTrackItem || null}
+         */
+        this.EmptyItem = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.VideoItem) {
+            let obj = new VideoTrackItem();
+            obj.deserialize(params.VideoItem)
+            this.VideoItem = obj;
+        }
+
+        if (params.AudioItem) {
+            let obj = new AudioTrackItem();
+            obj.deserialize(params.AudioItem)
+            this.AudioItem = obj;
+        }
+
+        if (params.EmptyItem) {
+            let obj = new EmptyTrackItem();
+            obj.deserialize(params.EmptyItem)
+            this.EmptyItem = obj;
+        }
 
     }
 }
@@ -1972,6 +2227,34 @@ class SearchMaterialResponse extends  AbstractModel {
 }
 
 /**
+ * 空的轨道片段，用来进行时间轴的占位。如需要两个音频片段之间有一段时间的静音，可以用 EmptyTrackItem 来进行占位。
+ * @class
+ */
+class EmptyTrackItem extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 持续时间，单位为秒。
+         * @type {number || null}
+         */
+        this.Duration = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Duration = 'Duration' in params ? params.Duration : null;
+
+    }
+}
+
+/**
  * DescribeJoinTeams请求参数结构体
  * @class
  */
@@ -2093,6 +2376,42 @@ class CreateProjectResponse extends  AbstractModel {
         }
         this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 视频编辑项目输入参数
+ * @class
+ */
+class VideoEditProjectInput extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 输入的媒体轨道列表，包括视频、音频，等素材组成的多个轨道信息，其中：<li>输入的多个轨道在时间轴上和输出媒体文件的时间轴对齐；</li><li>时间轴上相同时间点的各个轨道的素材进行重叠，视频或者图片按轨道顺序进行图像的叠加，轨道顺序高的素材叠加在上面，音频素材进行混音；</li><li>视频、音频，每一种类型的轨道最多支持10个。</li>
+         * @type {Array.<MediaTrack> || null}
+         */
+        this.InitTracks = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.InitTracks) {
+            this.InitTracks = new Array();
+            for (let z in params.InitTracks) {
+                let obj = new MediaTrack();
+                obj.deserialize(params.InitTracks[z]);
+                this.InitTracks.push(obj);
+            }
+        }
 
     }
 }
@@ -4495,10 +4814,10 @@ class AuthorizationInfo extends  AbstractModel {
 }
 
 /**
- * ModifyProject返回参数结构体
+ * DeleteMaterial返回参数结构体
  * @class
  */
-class ModifyProjectResponse extends  AbstractModel {
+class DeleteMaterialResponse extends  AbstractModel {
     constructor(){
         super();
 
@@ -4641,6 +4960,53 @@ class DescribeTaskDetailRequest extends  AbstractModel {
         }
         this.Platform = 'Platform' in params ? params.Platform : null;
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
+
+    }
+}
+
+/**
+ * 轨道信息
+ * @class
+ */
+class MediaTrack extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 轨道类型，取值有：
+<ul>
+<li>Video ：视频轨道。视频轨道由以下 Item 组成：<ul><li>VideoTrackItem</li><li>EmptyTrackItem</li></ul> </li>
+<li>Audio ：音频轨道。音频轨道由以下 Item 组成：<ul><li>AudioTrackItem</li><li>EmptyTrackItem</li></ul> </li>
+</ul>
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 轨道上的媒体片段列表。
+         * @type {Array.<MediaTrackItem> || null}
+         */
+        this.TrackItems = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Type = 'Type' in params ? params.Type : null;
+
+        if (params.TrackItems) {
+            this.TrackItems = new Array();
+            for (let z in params.TrackItems) {
+                let obj = new MediaTrackItem();
+                obj.deserialize(params.TrackItems[z]);
+                this.TrackItems.push(obj);
+            }
+        }
 
     }
 }
@@ -5125,52 +5491,24 @@ class DeleteClassResponse extends  AbstractModel {
 }
 
 /**
- * GrantResourceAuthorization请求参数结构体
+ * 直播剪辑项目输入参数。
  * @class
  */
-class GrantResourceAuthorizationRequest extends  AbstractModel {
+class LiveStreamClipProjectInput extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 平台名称，指定访问的平台。
+         * 直播流播放地址，目前仅支持 HLS 和 FLV 格式。
          * @type {string || null}
          */
-        this.Platform = null;
+        this.Url = null;
 
         /**
-         * 资源所属实体。
-         * @type {Entity || null}
+         * 直播流录制时长，单位为秒，最大值为 7200。
+         * @type {number || null}
          */
-        this.Owner = null;
-
-        /**
-         * 被授权资源。
-         * @type {Array.<Resource> || null}
-         */
-        this.Resources = null;
-
-        /**
-         * 被授权目标实体。
-         * @type {Array.<Entity> || null}
-         */
-        this.Authorizees = null;
-
-        /**
-         * 详细授权值。 取值有：
-<li>R：可读，可以浏览素材，但不能使用该素材（将其添加到 Project），或复制到自己的媒资库中</li>
-<li>X：可用，可以使用该素材（将其添加到 Project），但不能将其复制到自己的媒资库中，意味着被授权者无法将该资源进一步扩散给其他个人或团队。</li>
-<li>C：可复制，既可以使用该素材（将其添加到 Project），也可以将其复制到自己的媒资库中。</li>
-<li>W：可修改、删除媒资。</li>
-         * @type {Array.<string> || null}
-         */
-        this.Permissions = null;
-
-        /**
-         * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
-         * @type {string || null}
-         */
-        this.Operator = null;
+        this.StreamRecordDuration = null;
 
     }
 
@@ -5181,33 +5519,8 @@ class GrantResourceAuthorizationRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Platform = 'Platform' in params ? params.Platform : null;
-
-        if (params.Owner) {
-            let obj = new Entity();
-            obj.deserialize(params.Owner)
-            this.Owner = obj;
-        }
-
-        if (params.Resources) {
-            this.Resources = new Array();
-            for (let z in params.Resources) {
-                let obj = new Resource();
-                obj.deserialize(params.Resources[z]);
-                this.Resources.push(obj);
-            }
-        }
-
-        if (params.Authorizees) {
-            this.Authorizees = new Array();
-            for (let z in params.Authorizees) {
-                let obj = new Entity();
-                obj.deserialize(params.Authorizees[z]);
-                this.Authorizees.push(obj);
-            }
-        }
-        this.Permissions = 'Permissions' in params ? params.Permissions : null;
-        this.Operator = 'Operator' in params ? params.Operator : null;
+        this.Url = 'Url' in params ? params.Url : null;
+        this.StreamRecordDuration = 'StreamRecordDuration' in params ? params.StreamRecordDuration : null;
 
     }
 }
@@ -5315,6 +5628,94 @@ class ExportVideoByEditorTrackDataResponse extends  AbstractModel {
         }
         this.TaskId = 'TaskId' in params ? params.TaskId : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * GrantResourceAuthorization请求参数结构体
+ * @class
+ */
+class GrantResourceAuthorizationRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 平台名称，指定访问的平台。
+         * @type {string || null}
+         */
+        this.Platform = null;
+
+        /**
+         * 资源所属实体。
+         * @type {Entity || null}
+         */
+        this.Owner = null;
+
+        /**
+         * 被授权资源。
+         * @type {Array.<Resource> || null}
+         */
+        this.Resources = null;
+
+        /**
+         * 被授权目标实体。
+         * @type {Array.<Entity> || null}
+         */
+        this.Authorizees = null;
+
+        /**
+         * 详细授权值。 取值有：
+<li>R：可读，可以浏览素材，但不能使用该素材（将其添加到 Project），或复制到自己的媒资库中</li>
+<li>X：可用，可以使用该素材（将其添加到 Project），但不能将其复制到自己的媒资库中，意味着被授权者无法将该资源进一步扩散给其他个人或团队。</li>
+<li>C：可复制，既可以使用该素材（将其添加到 Project），也可以将其复制到自己的媒资库中。</li>
+<li>W：可修改、删除媒资。</li>
+         * @type {Array.<string> || null}
+         */
+        this.Permissions = null;
+
+        /**
+         * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Platform = 'Platform' in params ? params.Platform : null;
+
+        if (params.Owner) {
+            let obj = new Entity();
+            obj.deserialize(params.Owner)
+            this.Owner = obj;
+        }
+
+        if (params.Resources) {
+            this.Resources = new Array();
+            for (let z in params.Resources) {
+                let obj = new Resource();
+                obj.deserialize(params.Resources[z]);
+                this.Resources.push(obj);
+            }
+        }
+
+        if (params.Authorizees) {
+            this.Authorizees = new Array();
+            for (let z in params.Authorizees) {
+                let obj = new Entity();
+                obj.deserialize(params.Authorizees[z]);
+                this.Authorizees.push(obj);
+            }
+        }
+        this.Permissions = 'Permissions' in params ? params.Permissions : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
 
     }
 }
@@ -5510,13 +5911,15 @@ module.exports = {
     DescribeTaskDetailResponse: DescribeTaskDetailResponse,
     ExportVideoEditProjectRequest: ExportVideoEditProjectRequest,
     ClassInfo: ClassInfo,
-    DeleteMaterialResponse: DeleteMaterialResponse,
+    ModifyProjectResponse: ModifyProjectResponse,
+    AudioTrackItem: AudioTrackItem,
     IntegerRange: IntegerRange,
     SearchMaterialRequest: SearchMaterialRequest,
     DeleteTeamResponse: DeleteTeamResponse,
     RevokeResourceAuthorizationResponse: RevokeResourceAuthorizationResponse,
     DescribeTasksResponse: DescribeTasksResponse,
     ProjectInfo: ProjectInfo,
+    VideoTrackItem: VideoTrackItem,
     DeleteTeamRequest: DeleteTeamRequest,
     ModifyMaterialResponse: ModifyMaterialResponse,
     LinkMaterial: LinkMaterial,
@@ -5533,6 +5936,7 @@ module.exports = {
     ModifyMaterialRequest: ModifyMaterialRequest,
     Authorizer: Authorizer,
     DescribeTasksRequest: DescribeTasksRequest,
+    MediaTrackItem: MediaTrackItem,
     TimeRange: TimeRange,
     DescribeLoginStatusRequest: DescribeLoginStatusRequest,
     DeleteLoginStatusResponse: DeleteLoginStatusResponse,
@@ -5540,9 +5944,11 @@ module.exports = {
     CreateLinkResponse: CreateLinkResponse,
     ListMediaResponse: ListMediaResponse,
     SearchMaterialResponse: SearchMaterialResponse,
+    EmptyTrackItem: EmptyTrackItem,
     DescribeJoinTeamsRequest: DescribeJoinTeamsRequest,
     DeleteMaterialRequest: DeleteMaterialRequest,
     CreateProjectResponse: CreateProjectResponse,
+    VideoEditProjectInput: VideoEditProjectInput,
     DeleteProjectResponse: DeleteProjectResponse,
     DeleteClassRequest: DeleteClassRequest,
     CreateLinkRequest: CreateLinkRequest,
@@ -5591,9 +5997,10 @@ module.exports = {
     MaterialStatus: MaterialStatus,
     MediaImageSpriteInfo: MediaImageSpriteInfo,
     AuthorizationInfo: AuthorizationInfo,
-    ModifyProjectResponse: ModifyProjectResponse,
+    DeleteMaterialResponse: DeleteMaterialResponse,
     RevokeResourceAuthorizationRequest: RevokeResourceAuthorizationRequest,
     DescribeTaskDetailRequest: DescribeTaskDetailRequest,
+    MediaTrack: MediaTrack,
     ModifyProjectRequest: ModifyProjectRequest,
     MaterialInfo: MaterialInfo,
     LoginStatusInfo: LoginStatusInfo,
@@ -5602,9 +6009,10 @@ module.exports = {
     DescribeSharedSpaceRequest: DescribeSharedSpaceRequest,
     TaskBaseInfo: TaskBaseInfo,
     DeleteClassResponse: DeleteClassResponse,
-    GrantResourceAuthorizationRequest: GrantResourceAuthorizationRequest,
+    LiveStreamClipProjectInput: LiveStreamClipProjectInput,
     LinkMaterialInfo: LinkMaterialInfo,
     ExportVideoByEditorTrackDataResponse: ExportVideoByEditorTrackDataResponse,
+    GrantResourceAuthorizationRequest: GrantResourceAuthorizationRequest,
     DescribeProjectsResponse: DescribeProjectsResponse,
     ImportMaterialRequest: ImportMaterialRequest,
     DescribeMaterialsRequest: DescribeMaterialsRequest,

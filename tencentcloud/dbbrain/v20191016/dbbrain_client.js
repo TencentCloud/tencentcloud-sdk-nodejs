@@ -39,6 +39,7 @@ const DescribeSlowLogTopSqlsRequest = models.DescribeSlowLogTopSqlsRequest;
 const TableSpaceData = models.TableSpaceData;
 const DescribeSlowLogTopSqlsResponse = models.DescribeSlowLogTopSqlsResponse;
 const DescribeTopSpaceTablesResponse = models.DescribeTopSpaceTablesResponse;
+const SchemaItem = models.SchemaItem;
 
 
 /**

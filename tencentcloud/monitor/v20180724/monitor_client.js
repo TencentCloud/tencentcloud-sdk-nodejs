@@ -19,14 +19,17 @@ const AbstractClient = require('../../common/abstract_client')
 const DescribePolicyConditionListConfigManual = models.DescribePolicyConditionListConfigManual;
 const CreatePolicyGroupEventCondition = models.CreatePolicyGroupEventCondition;
 const DescribeProductEventListRequest = models.DescribeProductEventListRequest;
+const DescribeServiceDiscoveryResponse = models.DescribeServiceDiscoveryResponse;
 const DescribePolicyConditionListMetric = models.DescribePolicyConditionListMetric;
 const DescribePolicyGroupListResponse = models.DescribePolicyGroupListResponse;
 const BindingPolicyObjectRequest = models.BindingPolicyObjectRequest;
+const CreateServiceDiscoveryResponse = models.CreateServiceDiscoveryResponse;
 const DescribePolicyGroupInfoRequest = models.DescribePolicyGroupInfoRequest;
+const DeleteServiceDiscoveryResponse = models.DeleteServiceDiscoveryResponse;
 const DescribePolicyGroupInfoCallback = models.DescribePolicyGroupInfoCallback;
 const DescribeProductEventListDimensions = models.DescribeProductEventListDimensions;
 const DescribePolicyGroupInfoResponse = models.DescribePolicyGroupInfoResponse;
-const DescribeAllNamespacesRequest = models.DescribeAllNamespacesRequest;
+const PutMonitorDataRequest = models.PutMonitorDataRequest;
 const CreatePolicyGroupResponse = models.CreatePolicyGroupResponse;
 const PutMonitorDataResponse = models.PutMonitorDataResponse;
 const DescribeBaseMetricsResponse = models.DescribeBaseMetricsResponse;
@@ -37,10 +40,13 @@ const GetMonitorDataRequest = models.GetMonitorDataRequest;
 const DataPoint = models.DataPoint;
 const DescribePolicyConditionListConfigManualPeriod = models.DescribePolicyConditionListConfigManualPeriod;
 const UnBindingPolicyObjectRequest = models.UnBindingPolicyObjectRequest;
+const DescribeServiceDiscoveryRequest = models.DescribeServiceDiscoveryRequest;
 const DescribePolicyConditionListRequest = models.DescribePolicyConditionListRequest;
 const DescribeBindingPolicyObjectListInstance = models.DescribeBindingPolicyObjectListInstance;
 const DeletePolicyGroupResponse = models.DeletePolicyGroupResponse;
 const DimensionsDesc = models.DimensionsDesc;
+const ServiceDiscoveryItem = models.ServiceDiscoveryItem;
+const CreateServiceDiscoveryRequest = models.CreateServiceDiscoveryRequest;
 const DescribePolicyConditionListCondition = models.DescribePolicyConditionListCondition;
 const DescribeProductListRequest = models.DescribeProductListRequest;
 const PeriodsSt = models.PeriodsSt;
@@ -59,8 +65,10 @@ const DescribeProductEventListResponse = models.DescribeProductEventListResponse
 const DescribeBaseMetricsRequest = models.DescribeBaseMetricsRequest;
 const Instance = models.Instance;
 const BindingPolicyObjectDimension = models.BindingPolicyObjectDimension;
+const UpdateServiceDiscoveryResponse = models.UpdateServiceDiscoveryResponse;
 const Dimension = models.Dimension;
 const DescribeBasicAlarmListAlarms = models.DescribeBasicAlarmListAlarms;
+const UpdateServiceDiscoveryRequest = models.UpdateServiceDiscoveryRequest;
 const UnBindingAllPolicyObjectResponse = models.UnBindingAllPolicyObjectResponse;
 const DescribeAlarmHistoriesRequest = models.DescribeAlarmHistoriesRequest;
 const MetricObjectMeaning = models.MetricObjectMeaning;
@@ -74,7 +82,7 @@ const DescribeBindingPolicyObjectListRequest = models.DescribeBindingPolicyObjec
 const UnBindingPolicyObjectResponse = models.UnBindingPolicyObjectResponse;
 const DescribeProductEventListEvents = models.DescribeProductEventListEvents;
 const DescribePolicyConditionListConfigManualPeriodNum = models.DescribePolicyConditionListConfigManualPeriodNum;
-const PutMonitorDataRequest = models.PutMonitorDataRequest;
+const DescribeAllNamespacesRequest = models.DescribeAllNamespacesRequest;
 const DescribePolicyGroupListGroupInstanceGroup = models.DescribePolicyGroupListGroupInstanceGroup;
 const InstanceGroup = models.InstanceGroup;
 const DescribeAccidentEventListResponse = models.DescribeAccidentEventListResponse;
@@ -102,6 +110,7 @@ const UnBindingAllPolicyObjectRequest = models.UnBindingAllPolicyObjectRequest;
 const DescribePolicyGroupInfoEventCondition = models.DescribePolicyGroupInfoEventCondition;
 const SendCustomAlarmMsgResponse = models.SendCustomAlarmMsgResponse;
 const ModifyPolicyGroupCondition = models.ModifyPolicyGroupCondition;
+const DeleteServiceDiscoveryRequest = models.DeleteServiceDiscoveryRequest;
 const DescribeProductEventListOverView = models.DescribeProductEventListOverView;
 const DescribePolicyConditionListConfigManualCalcValue = models.DescribePolicyConditionListConfigManualCalcValue;
 const BindingPolicyObjectResponse = models.BindingPolicyObjectResponse;
@@ -118,28 +127,6 @@ class MonitorClient extends AbstractClient {
     }
     
     /**
-     * 分页获取产品事件的列表
-     * @param {DescribeProductEventListRequest} req
-     * @param {function(string, DescribeProductEventListResponse):void} cb
-     * @public
-     */
-    DescribeProductEventList(req, cb) {
-        let resp = new DescribeProductEventListResponse();
-        this.request("DescribeProductEventList", req, resp, cb);
-    }
-
-    /**
-     * 获取平台事件列表
-     * @param {DescribeAccidentEventListRequest} req
-     * @param {function(string, DescribeAccidentEventListResponse):void} cb
-     * @public
-     */
-    DescribeAccidentEventList(req, cb) {
-        let resp = new DescribeAccidentEventListResponse();
-        this.request("DescribeAccidentEventList", req, resp, cb);
-    }
-
-    /**
      * 删除策略的关联对象
      * @param {UnBindingPolicyObjectRequest} req
      * @param {function(string, UnBindingPolicyObjectResponse):void} cb
@@ -148,50 +135,6 @@ class MonitorClient extends AbstractClient {
     UnBindingPolicyObject(req, cb) {
         let resp = new UnBindingPolicyObjectResponse();
         this.request("UnBindingPolicyObject", req, resp, cb);
-    }
-
-    /**
-     * 将告警策略绑定到特定对象
-     * @param {BindingPolicyObjectRequest} req
-     * @param {function(string, BindingPolicyObjectResponse):void} cb
-     * @public
-     */
-    BindingPolicyObject(req, cb) {
-        let resp = new BindingPolicyObjectResponse();
-        this.request("BindingPolicyObject", req, resp, cb);
-    }
-
-    /**
-     * 告警2.0-告警历史列表
-     * @param {DescribeAlarmHistoriesRequest} req
-     * @param {function(string, DescribeAlarmHistoriesResponse):void} cb
-     * @public
-     */
-    DescribeAlarmHistories(req, cb) {
-        let resp = new DescribeAlarmHistoriesResponse();
-        this.request("DescribeAlarmHistories", req, resp, cb);
-    }
-
-    /**
-     * 修改告警接收人
-     * @param {ModifyAlarmReceiversRequest} req
-     * @param {function(string, ModifyAlarmReceiversResponse):void} cb
-     * @public
-     */
-    ModifyAlarmReceivers(req, cb) {
-        let resp = new ModifyAlarmReceiversResponse();
-        this.request("ModifyAlarmReceivers", req, resp, cb);
-    }
-
-    /**
-     * 获取已绑定对象列表
-     * @param {DescribeBindingPolicyObjectListRequest} req
-     * @param {function(string, DescribeBindingPolicyObjectListResponse):void} cb
-     * @public
-     */
-    DescribeBindingPolicyObjectList(req, cb) {
-        let resp = new DescribeBindingPolicyObjectListResponse();
-        this.request("DescribeBindingPolicyObjectList", req, resp, cb);
     }
 
     /**
@@ -206,58 +149,27 @@ class MonitorClient extends AbstractClient {
     }
 
     /**
-     * 删除告警策略组
-     * @param {DeletePolicyGroupRequest} req
-     * @param {function(string, DeletePolicyGroupResponse):void} cb
+     * 获取已绑定对象列表
+     * @param {DescribeBindingPolicyObjectListRequest} req
+     * @param {function(string, DescribeBindingPolicyObjectListResponse):void} cb
      * @public
      */
-    DeletePolicyGroup(req, cb) {
-        let resp = new DeletePolicyGroupResponse();
-        this.request("DeletePolicyGroup", req, resp, cb);
+    DescribeBindingPolicyObjectList(req, cb) {
+        let resp = new DescribeBindingPolicyObjectListResponse();
+        this.request("DescribeBindingPolicyObjectList", req, resp, cb);
     }
 
     /**
-     * 获取基础指标详情
-     * @param {DescribeBaseMetricsRequest} req
-     * @param {function(string, DescribeBaseMetricsResponse):void} cb
+     * 删除在腾讯云容器服务下创建的 Prometheus 服务发现。
+<p>注意：前提条件，已经通过 Prometheus 控制台集成了对应的腾讯云容器服务，具体请参考
+<a href="https://cloud.tencent.com/document/product/248/48859" target="_blank">Agent 安装</a>。</p>
+     * @param {DeleteServiceDiscoveryRequest} req
+     * @param {function(string, DeleteServiceDiscoveryResponse):void} cb
      * @public
      */
-    DescribeBaseMetrics(req, cb) {
-        let resp = new DescribeBaseMetricsResponse();
-        this.request("DescribeBaseMetrics", req, resp, cb);
-    }
-
-    /**
-     * 获取基础策略组详情
-     * @param {DescribePolicyGroupInfoRequest} req
-     * @param {function(string, DescribePolicyGroupInfoResponse):void} cb
-     * @public
-     */
-    DescribePolicyGroupInfo(req, cb) {
-        let resp = new DescribePolicyGroupInfoResponse();
-        this.request("DescribePolicyGroupInfo", req, resp, cb);
-    }
-
-    /**
-     * 更新策略组
-     * @param {ModifyPolicyGroupRequest} req
-     * @param {function(string, ModifyPolicyGroupResponse):void} cb
-     * @public
-     */
-    ModifyPolicyGroup(req, cb) {
-        let resp = new ModifyPolicyGroupResponse();
-        this.request("ModifyPolicyGroup", req, resp, cb);
-    }
-
-    /**
-     * 查询云监控产品列表
-     * @param {DescribeProductListRequest} req
-     * @param {function(string, DescribeProductListResponse):void} cb
-     * @public
-     */
-    DescribeProductList(req, cb) {
-        let resp = new DescribeProductListResponse();
-        this.request("DescribeProductList", req, resp, cb);
+    DeleteServiceDiscovery(req, cb) {
+        let resp = new DeleteServiceDiscoveryResponse();
+        this.request("DeleteServiceDiscovery", req, resp, cb);
     }
 
     /**
@@ -272,17 +184,6 @@ class MonitorClient extends AbstractClient {
     }
 
     /**
-     * 获取基础告警列表
-     * @param {DescribeBasicAlarmListRequest} req
-     * @param {function(string, DescribeBasicAlarmListResponse):void} cb
-     * @public
-     */
-    DescribeBasicAlarmList(req, cb) {
-        let resp = new DescribeBasicAlarmListResponse();
-        this.request("DescribeBasicAlarmList", req, resp, cb);
-    }
-
-    /**
      * 获取云产品的监控数据。传入产品的命名空间、对象维度描述和监控指标即可获得相应的监控数据。
 接口调用频率限制为：20次/秒，1200次/分钟。单请求最多可支持批量拉取10个实例的监控数据，单请求的数据点数限制为1440个。
 若您需要调用的指标、对象较多，可能存在因限频出现拉取失败的情况，建议尽量将请求按时间维度均摊。
@@ -293,39 +194,6 @@ class MonitorClient extends AbstractClient {
     GetMonitorData(req, cb) {
         let resp = new GetMonitorDataResponse();
         this.request("GetMonitorData", req, resp, cb);
-    }
-
-    /**
-     * 拉取所有名字空间
-     * @param {DescribeAllNamespacesRequest} req
-     * @param {function(string, DescribeAllNamespacesResponse):void} cb
-     * @public
-     */
-    DescribeAllNamespaces(req, cb) {
-        let resp = new DescribeAllNamespacesResponse();
-        this.request("DescribeAllNamespaces", req, resp, cb);
-    }
-
-    /**
-     * 增加策略组
-     * @param {CreatePolicyGroupRequest} req
-     * @param {function(string, CreatePolicyGroupResponse):void} cb
-     * @public
-     */
-    CreatePolicyGroup(req, cb) {
-        let resp = new CreatePolicyGroupResponse();
-        this.request("CreatePolicyGroup", req, resp, cb);
-    }
-
-    /**
-     * 删除全部的关联对象
-     * @param {UnBindingAllPolicyObjectRequest} req
-     * @param {function(string, UnBindingAllPolicyObjectResponse):void} cb
-     * @public
-     */
-    UnBindingAllPolicyObject(req, cb) {
-        let resp = new UnBindingAllPolicyObjectResponse();
-        this.request("UnBindingAllPolicyObject", req, resp, cb);
     }
 
     /**
@@ -354,6 +222,199 @@ class MonitorClient extends AbstractClient {
     DescribePolicyConditionList(req, cb) {
         let resp = new DescribePolicyConditionListResponse();
         this.request("DescribePolicyConditionList", req, resp, cb);
+    }
+
+    /**
+     * 修改告警接收人
+     * @param {ModifyAlarmReceiversRequest} req
+     * @param {function(string, ModifyAlarmReceiversResponse):void} cb
+     * @public
+     */
+    ModifyAlarmReceivers(req, cb) {
+        let resp = new ModifyAlarmReceiversResponse();
+        this.request("ModifyAlarmReceivers", req, resp, cb);
+    }
+
+    /**
+     * 将告警策略绑定到特定对象
+     * @param {BindingPolicyObjectRequest} req
+     * @param {function(string, BindingPolicyObjectResponse):void} cb
+     * @public
+     */
+    BindingPolicyObject(req, cb) {
+        let resp = new BindingPolicyObjectResponse();
+        this.request("BindingPolicyObject", req, resp, cb);
+    }
+
+    /**
+     * 列出在腾讯云容器服务下创建的 Prometheus 服务发现。
+<p>注意：前提条件，已经通过 Prometheus 控制台集成了对应的腾讯云容器服务，具体请参考
+<a href="https://cloud.tencent.com/document/product/248/48859" target="_blank">Agent 安装</a>。</p>
+     * @param {DescribeServiceDiscoveryRequest} req
+     * @param {function(string, DescribeServiceDiscoveryResponse):void} cb
+     * @public
+     */
+    DescribeServiceDiscovery(req, cb) {
+        let resp = new DescribeServiceDiscoveryResponse();
+        this.request("DescribeServiceDiscovery", req, resp, cb);
+    }
+
+    /**
+     * 获取基础告警列表
+     * @param {DescribeBasicAlarmListRequest} req
+     * @param {function(string, DescribeBasicAlarmListResponse):void} cb
+     * @public
+     */
+    DescribeBasicAlarmList(req, cb) {
+        let resp = new DescribeBasicAlarmListResponse();
+        this.request("DescribeBasicAlarmList", req, resp, cb);
+    }
+
+    /**
+     * 获取基础策略组详情
+     * @param {DescribePolicyGroupInfoRequest} req
+     * @param {function(string, DescribePolicyGroupInfoResponse):void} cb
+     * @public
+     */
+    DescribePolicyGroupInfo(req, cb) {
+        let resp = new DescribePolicyGroupInfoResponse();
+        this.request("DescribePolicyGroupInfo", req, resp, cb);
+    }
+
+    /**
+     * 查询云监控产品列表
+     * @param {DescribeProductListRequest} req
+     * @param {function(string, DescribeProductListResponse):void} cb
+     * @public
+     */
+    DescribeProductList(req, cb) {
+        let resp = new DescribeProductListResponse();
+        this.request("DescribeProductList", req, resp, cb);
+    }
+
+    /**
+     * 拉取所有名字空间
+     * @param {DescribeAllNamespacesRequest} req
+     * @param {function(string, DescribeAllNamespacesResponse):void} cb
+     * @public
+     */
+    DescribeAllNamespaces(req, cb) {
+        let resp = new DescribeAllNamespacesResponse();
+        this.request("DescribeAllNamespaces", req, resp, cb);
+    }
+
+    /**
+     * 在腾讯云容器服务下创建 Prometheus 服务发现。
+<p>注意：前提条件，已经通过 Prometheus 控制台集成了对应的腾讯云容器服务，具体请参考
+<a href="https://cloud.tencent.com/document/product/248/48859" target="_blank">Agent 安装</a>。</p>
+     * @param {CreateServiceDiscoveryRequest} req
+     * @param {function(string, CreateServiceDiscoveryResponse):void} cb
+     * @public
+     */
+    CreateServiceDiscovery(req, cb) {
+        let resp = new CreateServiceDiscoveryResponse();
+        this.request("CreateServiceDiscovery", req, resp, cb);
+    }
+
+    /**
+     * 更新策略组
+     * @param {ModifyPolicyGroupRequest} req
+     * @param {function(string, ModifyPolicyGroupResponse):void} cb
+     * @public
+     */
+    ModifyPolicyGroup(req, cb) {
+        let resp = new ModifyPolicyGroupResponse();
+        this.request("ModifyPolicyGroup", req, resp, cb);
+    }
+
+    /**
+     * 删除全部的关联对象
+     * @param {UnBindingAllPolicyObjectRequest} req
+     * @param {function(string, UnBindingAllPolicyObjectResponse):void} cb
+     * @public
+     */
+    UnBindingAllPolicyObject(req, cb) {
+        let resp = new UnBindingAllPolicyObjectResponse();
+        this.request("UnBindingAllPolicyObject", req, resp, cb);
+    }
+
+    /**
+     * 删除告警策略组
+     * @param {DeletePolicyGroupRequest} req
+     * @param {function(string, DeletePolicyGroupResponse):void} cb
+     * @public
+     */
+    DeletePolicyGroup(req, cb) {
+        let resp = new DeletePolicyGroupResponse();
+        this.request("DeletePolicyGroup", req, resp, cb);
+    }
+
+    /**
+     * 在腾讯云容器服务下更新 Prometheus 服务发现。
+<p>注意：前提条件，已经通过 Prometheus 控制台集成了对应的腾讯云容器服务，具体请参考
+<a href="https://cloud.tencent.com/document/product/248/48859" target="_blank">Agent 安装</a>。</p>
+     * @param {UpdateServiceDiscoveryRequest} req
+     * @param {function(string, UpdateServiceDiscoveryResponse):void} cb
+     * @public
+     */
+    UpdateServiceDiscovery(req, cb) {
+        let resp = new UpdateServiceDiscoveryResponse();
+        this.request("UpdateServiceDiscovery", req, resp, cb);
+    }
+
+    /**
+     * 增加策略组
+     * @param {CreatePolicyGroupRequest} req
+     * @param {function(string, CreatePolicyGroupResponse):void} cb
+     * @public
+     */
+    CreatePolicyGroup(req, cb) {
+        let resp = new CreatePolicyGroupResponse();
+        this.request("CreatePolicyGroup", req, resp, cb);
+    }
+
+    /**
+     * 分页获取产品事件的列表
+     * @param {DescribeProductEventListRequest} req
+     * @param {function(string, DescribeProductEventListResponse):void} cb
+     * @public
+     */
+    DescribeProductEventList(req, cb) {
+        let resp = new DescribeProductEventListResponse();
+        this.request("DescribeProductEventList", req, resp, cb);
+    }
+
+    /**
+     * 获取平台事件列表
+     * @param {DescribeAccidentEventListRequest} req
+     * @param {function(string, DescribeAccidentEventListResponse):void} cb
+     * @public
+     */
+    DescribeAccidentEventList(req, cb) {
+        let resp = new DescribeAccidentEventListResponse();
+        this.request("DescribeAccidentEventList", req, resp, cb);
+    }
+
+    /**
+     * 告警2.0-告警历史列表
+     * @param {DescribeAlarmHistoriesRequest} req
+     * @param {function(string, DescribeAlarmHistoriesResponse):void} cb
+     * @public
+     */
+    DescribeAlarmHistories(req, cb) {
+        let resp = new DescribeAlarmHistoriesResponse();
+        this.request("DescribeAlarmHistories", req, resp, cb);
+    }
+
+    /**
+     * 获取基础指标详情
+     * @param {DescribeBaseMetricsRequest} req
+     * @param {function(string, DescribeBaseMetricsResponse):void} cb
+     * @public
+     */
+    DescribeBaseMetrics(req, cb) {
+        let resp = new DescribeBaseMetricsResponse();
+        this.request("DescribeBaseMetrics", req, resp, cb);
     }
 
 

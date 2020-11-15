@@ -36,7 +36,9 @@ const ModifyInstanceRequest = models.ModifyInstanceRequest;
 const TendisNodes = models.TendisNodes;
 const RenewInstanceResponse = models.RenewInstanceResponse;
 const DescribeSlowLogResponse = models.DescribeSlowLogResponse;
+const DescribeCommonDBInstancesRequest = models.DescribeCommonDBInstancesRequest;
 const DescribeDBSecurityGroupsResponse = models.DescribeDBSecurityGroupsResponse;
+const RedisNodeInfo = models.RedisNodeInfo;
 const DescribeBackupUrlRequest = models.DescribeBackupUrlRequest;
 const DescribeInstancesResponse = models.DescribeInstancesResponse;
 const InstanceEnumParam = models.InstanceEnumParam;
@@ -63,6 +65,7 @@ const DestroyPostpaidInstanceResponse = models.DestroyPostpaidInstanceResponse;
 const ModifyInstanceResponse = models.ModifyInstanceResponse;
 const ProxyNodes = models.ProxyNodes;
 const TradeDealDetail = models.TradeDealDetail;
+const RedisCommonInstanceList = models.RedisCommonInstanceList;
 const SourceInfo = models.SourceInfo;
 const ModifyDBInstanceSecurityGroupsResponse = models.ModifyDBInstanceSecurityGroupsResponse;
 const DescribeInstanceMonitorHotKeyRequest = models.DescribeInstanceMonitorHotKeyRequest;
@@ -112,6 +115,7 @@ const EnableReplicaReadonlyResponse = models.EnableReplicaReadonlyResponse;
 const DescribeMaintenanceWindowResponse = models.DescribeMaintenanceWindowResponse;
 const DescribeInstanceSecurityGroupResponse = models.DescribeInstanceSecurityGroupResponse;
 const ProductConf = models.ProductConf;
+const ModifyConnectionConfigRequest = models.ModifyConnectionConfigRequest;
 const InstanceNode = models.InstanceNode;
 const StartupInstanceResponse = models.StartupInstanceResponse;
 const DescribeInstanceDTSInstanceInfo = models.DescribeInstanceDTSInstanceInfo;
@@ -133,7 +137,9 @@ const ManualBackupInstanceRequest = models.ManualBackupInstanceRequest;
 const ModfiyInstancePasswordResponse = models.ModfiyInstancePasswordResponse;
 const InstanceSet = models.InstanceSet;
 const InquiryPriceRenewInstanceRequest = models.InquiryPriceRenewInstanceRequest;
+const ModifyConnectionConfigResponse = models.ModifyConnectionConfigResponse;
 const ModifyMaintenanceWindowResponse = models.ModifyMaintenanceWindowResponse;
+const DescribeCommonDBInstancesResponse = models.DescribeCommonDBInstancesResponse;
 const DescribeInstanceMonitorTopNCmdTookRequest = models.DescribeInstanceMonitorTopNCmdTookRequest;
 const DestroyPrepaidInstanceResponse = models.DestroyPrepaidInstanceResponse;
 const DescribeInstanceMonitorBigKeyTypeDistRequest = models.DescribeInstanceMonitorBigKeyTypeDistRequest;
@@ -269,6 +275,17 @@ class RedisClient extends AbstractClient {
     DescribeTaskList(req, cb) {
         let resp = new DescribeTaskListResponse();
         this.request("DescribeTaskList", req, resp, cb);
+    }
+
+    /**
+     * 升级实例
+     * @param {UpgradeInstanceRequest} req
+     * @param {function(string, UpgradeInstanceResponse):void} cb
+     * @public
+     */
+    UpgradeInstance(req, cb) {
+        let resp = new UpgradeInstanceResponse();
+        this.request("UpgradeInstance", req, resp, cb);
     }
 
     /**
@@ -635,6 +652,28 @@ class RedisClient extends AbstractClient {
     }
 
     /**
+     * 修改实例的连接配置，包括带宽和最大连接数
+     * @param {ModifyConnectionConfigRequest} req
+     * @param {function(string, ModifyConnectionConfigResponse):void} cb
+     * @public
+     */
+    ModifyConnectionConfig(req, cb) {
+        let resp = new ModifyConnectionConfigResponse();
+        this.request("ModifyConnectionConfig", req, resp, cb);
+    }
+
+    /**
+     * 查询Redis实例列表信息
+     * @param {DescribeCommonDBInstancesRequest} req
+     * @param {function(string, DescribeCommonDBInstancesResponse):void} cb
+     * @public
+     */
+    DescribeCommonDBInstances(req, cb) {
+        let resp = new DescribeCommonDBInstancesResponse();
+        this.request("DescribeCommonDBInstances", req, resp, cb);
+    }
+
+    /**
      * 本接口查询指定可用区和实例类型下 Redis 的售卖规格， 如果用户不在购买白名单中，将不能查询该可用区或该类型的售卖规格详情。申请购买某地域白名单可以提交工单
      * @param {DescribeProductInfoRequest} req
      * @param {function(string, DescribeProductInfoResponse):void} cb
@@ -643,17 +682,6 @@ class RedisClient extends AbstractClient {
     DescribeProductInfo(req, cb) {
         let resp = new DescribeProductInfoResponse();
         this.request("DescribeProductInfo", req, resp, cb);
-    }
-
-    /**
-     * 升级实例
-     * @param {UpgradeInstanceRequest} req
-     * @param {function(string, UpgradeInstanceResponse):void} cb
-     * @public
-     */
-    UpgradeInstance(req, cb) {
-        let resp = new UpgradeInstanceResponse();
-        this.request("UpgradeInstance", req, resp, cb);
     }
 
     /**

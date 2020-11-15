@@ -21,38 +21,58 @@ const AccessRule = models.AccessRule;
 const DescribeFileSystemResponse = models.DescribeFileSystemResponse;
 const AccessGroup = models.AccessGroup;
 const ModifyFileSystemResponse = models.ModifyFileSystemResponse;
+const ModifyFileSystemRequest = models.ModifyFileSystemRequest;
+const DescribeLifeCycleRulesRequest = models.DescribeLifeCycleRulesRequest;
 const ModifyAccessGroupRequest = models.ModifyAccessGroupRequest;
 const DescribeFileSystemsResponse = models.DescribeFileSystemsResponse;
 const DescribeFileSystemRequest = models.DescribeFileSystemRequest;
 const CreateMountPointRequest = models.CreateMountPointRequest;
 const DeleteAccessGroupRequest = models.DeleteAccessGroupRequest;
+const ModifyLifeCycleRulesRequest = models.ModifyLifeCycleRulesRequest;
+const CreateRestoreTasksResponse = models.CreateRestoreTasksResponse;
 const DeleteFileSystemRequest = models.DeleteFileSystemRequest;
+const DescribeMountPointsRequest = models.DescribeMountPointsRequest;
 const DescribeMountPointRequest = models.DescribeMountPointRequest;
 const DescribeAccessGroupsRequest = models.DescribeAccessGroupsRequest;
 const DeleteAccessGroupResponse = models.DeleteAccessGroupResponse;
+const ModifyLifeCycleRulesResponse = models.ModifyLifeCycleRulesResponse;
 const DeleteMountPointResponse = models.DeleteMountPointResponse;
 const CreateMountPointResponse = models.CreateMountPointResponse;
 const CreateFileSystemRequest = models.CreateFileSystemRequest;
-const ModifyFileSystemRequest = models.ModifyFileSystemRequest;
-const DescribeMountPointsResponse = models.DescribeMountPointsResponse;
+const ModifyResourceTagsRequest = models.ModifyResourceTagsRequest;
+const DescribeResourceTagsResponse = models.DescribeResourceTagsResponse;
+const DescribeAccessGroupsResponse = models.DescribeAccessGroupsResponse;
 const DeleteMountPointRequest = models.DeleteMountPointRequest;
 const DeleteFileSystemResponse = models.DeleteFileSystemResponse;
+const CreateLifeCycleRulesRequest = models.CreateLifeCycleRulesRequest;
 const Filter = models.Filter;
 const CreateAccessGroupResponse = models.CreateAccessGroupResponse;
+const DeleteLifeCycleRulesRequest = models.DeleteLifeCycleRulesRequest;
 const FileSystem = models.FileSystem;
+const RestoreTask = models.RestoreTask;
 const ModifyMountPointRequest = models.ModifyMountPointRequest;
-const DescribeAccessGroupsResponse = models.DescribeAccessGroupsResponse;
+const DeleteLifeCycleRulesResponse = models.DeleteLifeCycleRulesResponse;
+const CreateRestoreTasksRequest = models.CreateRestoreTasksRequest;
+const Transition = models.Transition;
+const DescribeRestoreTasksResponse = models.DescribeRestoreTasksResponse;
+const DescribeLifeCycleRulesResponse = models.DescribeLifeCycleRulesResponse;
 const CreateAccessRulesResponse = models.CreateAccessRulesResponse;
 const DeleteAccessRulesRequest = models.DeleteAccessRulesRequest;
-const DescribeAccessRulesResponse = models.DescribeAccessRulesResponse;
-const DescribeFileSystemsRequest = models.DescribeFileSystemsRequest;
-const CreateAccessRulesRequest = models.CreateAccessRulesRequest;
 const DeleteAccessRulesResponse = models.DeleteAccessRulesResponse;
+const DescribeFileSystemsRequest = models.DescribeFileSystemsRequest;
+const DescribeResourceTagsRequest = models.DescribeResourceTagsRequest;
+const ModifyResourceTagsResponse = models.ModifyResourceTagsResponse;
+const LifeCycleRule = models.LifeCycleRule;
+const CreateAccessRulesRequest = models.CreateAccessRulesRequest;
+const DescribeAccessRulesResponse = models.DescribeAccessRulesResponse;
 const MountPoint = models.MountPoint;
+const DescribeMountPointsResponse = models.DescribeMountPointsResponse;
+const DescribeRestoreTasksRequest = models.DescribeRestoreTasksRequest;
 const DescribeAccessRulesRequest = models.DescribeAccessRulesRequest;
 const ModifyAccessRulesResponse = models.ModifyAccessRulesResponse;
-const DescribeMountPointsRequest = models.DescribeMountPointsRequest;
+const CreateLifeCycleRulesResponse = models.CreateLifeCycleRulesResponse;
 const ModifyAccessGroupResponse = models.ModifyAccessGroupResponse;
+const Tag = models.Tag;
 const ModifyMountPointResponse = models.ModifyMountPointResponse;
 const ModifyAccessRulesRequest = models.ModifyAccessRulesRequest;
 const CreateAccessGroupRequest = models.CreateAccessGroupRequest;
@@ -70,146 +90,25 @@ class ChdfsClient extends AbstractClient {
     }
     
     /**
-     * 查看挂载点详细信息。
-     * @param {DescribeMountPointRequest} req
-     * @param {function(string, DescribeMountPointResponse):void} cb
+     * 批量创建回热任务，回热任务ID、状态和创建时间无需填写。
+     * @param {CreateRestoreTasksRequest} req
+     * @param {function(string, CreateRestoreTasksResponse):void} cb
      * @public
      */
-    DescribeMountPoint(req, cb) {
-        let resp = new DescribeMountPointResponse();
-        this.request("DescribeMountPoint", req, resp, cb);
+    CreateRestoreTasks(req, cb) {
+        let resp = new CreateRestoreTasksResponse();
+        this.request("CreateRestoreTasks", req, resp, cb);
     }
 
     /**
-     * 修改文件系统属性，仅限于创建成功的文件系统。
-     * @param {ModifyFileSystemRequest} req
-     * @param {function(string, ModifyFileSystemResponse):void} cb
+     * 批量创建生命周期规则，生命周期规则ID和创建时间无需填写。
+     * @param {CreateLifeCycleRulesRequest} req
+     * @param {function(string, CreateLifeCycleRulesResponse):void} cb
      * @public
      */
-    ModifyFileSystem(req, cb) {
-        let resp = new ModifyFileSystemResponse();
-        this.request("ModifyFileSystem", req, resp, cb);
-    }
-
-    /**
-     * 删除文件系统，不允许删除非空文件系统。
-     * @param {DeleteFileSystemRequest} req
-     * @param {function(string, DeleteFileSystemResponse):void} cb
-     * @public
-     */
-    DeleteFileSystem(req, cb) {
-        let resp = new DeleteFileSystemResponse();
-        this.request("DeleteFileSystem", req, resp, cb);
-    }
-
-    /**
-     * 批量删除权限规则。
-     * @param {DeleteAccessRulesRequest} req
-     * @param {function(string, DeleteAccessRulesResponse):void} cb
-     * @public
-     */
-    DeleteAccessRules(req, cb) {
-        let resp = new DeleteAccessRulesResponse();
-        this.request("DeleteAccessRules", req, resp, cb);
-    }
-
-    /**
-     * 查看文件系统详细信息。
-     * @param {DescribeFileSystemRequest} req
-     * @param {function(string, DescribeFileSystemResponse):void} cb
-     * @public
-     */
-    DescribeFileSystem(req, cb) {
-        let resp = new DescribeFileSystemResponse();
-        this.request("DescribeFileSystem", req, resp, cb);
-    }
-
-    /**
-     * 查看权限组列表。
-     * @param {DescribeAccessGroupsRequest} req
-     * @param {function(string, DescribeAccessGroupsResponse):void} cb
-     * @public
-     */
-    DescribeAccessGroups(req, cb) {
-        let resp = new DescribeAccessGroupsResponse();
-        this.request("DescribeAccessGroups", req, resp, cb);
-    }
-
-    /**
-     * 通过权限组ID查看权限规则列表。
-     * @param {DescribeAccessRulesRequest} req
-     * @param {function(string, DescribeAccessRulesResponse):void} cb
-     * @public
-     */
-    DescribeAccessRules(req, cb) {
-        let resp = new DescribeAccessRulesResponse();
-        this.request("DescribeAccessRules", req, resp, cb);
-    }
-
-    /**
-     * 查看文件系统列表。
-     * @param {DescribeFileSystemsRequest} req
-     * @param {function(string, DescribeFileSystemsResponse):void} cb
-     * @public
-     */
-    DescribeFileSystems(req, cb) {
-        let resp = new DescribeFileSystemsResponse();
-        this.request("DescribeFileSystems", req, resp, cb);
-    }
-
-    /**
-     * 创建文件系统挂载点，仅限于创建成功的文件系统。
-     * @param {CreateMountPointRequest} req
-     * @param {function(string, CreateMountPointResponse):void} cb
-     * @public
-     */
-    CreateMountPoint(req, cb) {
-        let resp = new CreateMountPointResponse();
-        this.request("CreateMountPoint", req, resp, cb);
-    }
-
-    /**
-     * 通过文件系统ID或者权限组ID查看挂载点列表。
-     * @param {DescribeMountPointsRequest} req
-     * @param {function(string, DescribeMountPointsResponse):void} cb
-     * @public
-     */
-    DescribeMountPoints(req, cb) {
-        let resp = new DescribeMountPointsResponse();
-        this.request("DescribeMountPoints", req, resp, cb);
-    }
-
-    /**
-     * 修改权限组属性。
-     * @param {ModifyAccessGroupRequest} req
-     * @param {function(string, ModifyAccessGroupResponse):void} cb
-     * @public
-     */
-    ModifyAccessGroup(req, cb) {
-        let resp = new ModifyAccessGroupResponse();
-        this.request("ModifyAccessGroup", req, resp, cb);
-    }
-
-    /**
-     * 批量修改权限规则属性，需要指定权限规则ID。
-     * @param {ModifyAccessRulesRequest} req
-     * @param {function(string, ModifyAccessRulesResponse):void} cb
-     * @public
-     */
-    ModifyAccessRules(req, cb) {
-        let resp = new ModifyAccessRulesResponse();
-        this.request("ModifyAccessRules", req, resp, cb);
-    }
-
-    /**
-     * 删除权限组。
-     * @param {DeleteAccessGroupRequest} req
-     * @param {function(string, DeleteAccessGroupResponse):void} cb
-     * @public
-     */
-    DeleteAccessGroup(req, cb) {
-        let resp = new DeleteAccessGroupResponse();
-        this.request("DeleteAccessGroup", req, resp, cb);
+    CreateLifeCycleRules(req, cb) {
+        let resp = new CreateLifeCycleRulesResponse();
+        this.request("CreateLifeCycleRules", req, resp, cb);
     }
 
     /**
@@ -224,6 +123,116 @@ class ChdfsClient extends AbstractClient {
     }
 
     /**
+     * 批量修改权限规则属性，需要指定权限规则ID，支持修改权限规则地址、访问模式和优先级。
+     * @param {ModifyAccessRulesRequest} req
+     * @param {function(string, ModifyAccessRulesResponse):void} cb
+     * @public
+     */
+    ModifyAccessRules(req, cb) {
+        let resp = new ModifyAccessRulesResponse();
+        this.request("ModifyAccessRules", req, resp, cb);
+    }
+
+    /**
+     * 删除挂载点。
+     * @param {DeleteMountPointRequest} req
+     * @param {function(string, DeleteMountPointResponse):void} cb
+     * @public
+     */
+    DeleteMountPoint(req, cb) {
+        let resp = new DeleteMountPointResponse();
+        this.request("DeleteMountPoint", req, resp, cb);
+    }
+
+    /**
+     * 查看挂载点详细信息。
+     * @param {DescribeMountPointRequest} req
+     * @param {function(string, DescribeMountPointResponse):void} cb
+     * @public
+     */
+    DescribeMountPoint(req, cb) {
+        let resp = new DescribeMountPointResponse();
+        this.request("DescribeMountPoint", req, resp, cb);
+    }
+
+    /**
+     * 批量删除权限规则。
+     * @param {DeleteAccessRulesRequest} req
+     * @param {function(string, DeleteAccessRulesResponse):void} cb
+     * @public
+     */
+    DeleteAccessRules(req, cb) {
+        let resp = new DeleteAccessRulesResponse();
+        this.request("DeleteAccessRules", req, resp, cb);
+    }
+
+    /**
+     * 修改权限组属性。
+     * @param {ModifyAccessGroupRequest} req
+     * @param {function(string, ModifyAccessGroupResponse):void} cb
+     * @public
+     */
+    ModifyAccessGroup(req, cb) {
+        let resp = new ModifyAccessGroupResponse();
+        this.request("ModifyAccessGroup", req, resp, cb);
+    }
+
+    /**
+     * 创建文件系统挂载点，仅限于创建成功的文件系统。
+     * @param {CreateMountPointRequest} req
+     * @param {function(string, CreateMountPointResponse):void} cb
+     * @public
+     */
+    CreateMountPoint(req, cb) {
+        let resp = new CreateMountPointResponse();
+        this.request("CreateMountPoint", req, resp, cb);
+    }
+
+    /**
+     * 批量修改生命周期规则属性，需要指定生命周期规则ID，支持修改生命周期规则名称、路径、转换列表和状态。
+     * @param {ModifyLifeCycleRulesRequest} req
+     * @param {function(string, ModifyLifeCycleRulesResponse):void} cb
+     * @public
+     */
+    ModifyLifeCycleRules(req, cb) {
+        let resp = new ModifyLifeCycleRulesResponse();
+        this.request("ModifyLifeCycleRules", req, resp, cb);
+    }
+
+    /**
+     * 查看权限组列表。
+     * @param {DescribeAccessGroupsRequest} req
+     * @param {function(string, DescribeAccessGroupsResponse):void} cb
+     * @public
+     */
+    DescribeAccessGroups(req, cb) {
+        let resp = new DescribeAccessGroupsResponse();
+        this.request("DescribeAccessGroups", req, resp, cb);
+    }
+
+    /**
+     * 删除文件系统，不允许删除非空文件系统。
+     * @param {DeleteFileSystemRequest} req
+     * @param {function(string, DeleteFileSystemResponse):void} cb
+     * @public
+     */
+    DeleteFileSystem(req, cb) {
+        let resp = new DeleteFileSystemResponse();
+        this.request("DeleteFileSystem", req, resp, cb);
+    }
+
+    /**
+     * 查看文件系统详细信息。
+     * @param {DescribeFileSystemRequest} req
+     * @param {function(string, DescribeFileSystemResponse):void} cb
+     * @public
+     */
+    DescribeFileSystem(req, cb) {
+        let resp = new DescribeFileSystemResponse();
+        this.request("DescribeFileSystem", req, resp, cb);
+    }
+
+    /**
      * 创建文件系统（异步）。
      * @param {CreateFileSystemRequest} req
      * @param {function(string, CreateFileSystemResponse):void} cb
@@ -235,14 +244,25 @@ class ChdfsClient extends AbstractClient {
     }
 
     /**
-     * 创建权限组。
-     * @param {CreateAccessGroupRequest} req
-     * @param {function(string, CreateAccessGroupResponse):void} cb
+     * 通过权限组ID查看权限规则列表。
+     * @param {DescribeAccessRulesRequest} req
+     * @param {function(string, DescribeAccessRulesResponse):void} cb
      * @public
      */
-    CreateAccessGroup(req, cb) {
-        let resp = new CreateAccessGroupResponse();
-        this.request("CreateAccessGroup", req, resp, cb);
+    DescribeAccessRules(req, cb) {
+        let resp = new DescribeAccessRulesResponse();
+        this.request("DescribeAccessRules", req, resp, cb);
+    }
+
+    /**
+     * 批量删除生命周期规则。
+     * @param {DeleteLifeCycleRulesRequest} req
+     * @param {function(string, DeleteLifeCycleRulesResponse):void} cb
+     * @public
+     */
+    DeleteLifeCycleRules(req, cb) {
+        let resp = new DeleteLifeCycleRulesResponse();
+        this.request("DeleteLifeCycleRules", req, resp, cb);
     }
 
     /**
@@ -257,14 +277,102 @@ class ChdfsClient extends AbstractClient {
     }
 
     /**
-     * 删除挂载点。
-     * @param {DeleteMountPointRequest} req
-     * @param {function(string, DeleteMountPointResponse):void} cb
+     * 修改文件系统属性，仅限于创建成功的文件系统。
+     * @param {ModifyFileSystemRequest} req
+     * @param {function(string, ModifyFileSystemResponse):void} cb
      * @public
      */
-    DeleteMountPoint(req, cb) {
-        let resp = new DeleteMountPointResponse();
-        this.request("DeleteMountPoint", req, resp, cb);
+    ModifyFileSystem(req, cb) {
+        let resp = new ModifyFileSystemResponse();
+        this.request("ModifyFileSystem", req, resp, cb);
+    }
+
+    /**
+     * 查看文件系统列表。
+     * @param {DescribeFileSystemsRequest} req
+     * @param {function(string, DescribeFileSystemsResponse):void} cb
+     * @public
+     */
+    DescribeFileSystems(req, cb) {
+        let resp = new DescribeFileSystemsResponse();
+        this.request("DescribeFileSystems", req, resp, cb);
+    }
+
+    /**
+     * 通过文件系统ID或者权限组ID查看挂载点列表。
+     * @param {DescribeMountPointsRequest} req
+     * @param {function(string, DescribeMountPointsResponse):void} cb
+     * @public
+     */
+    DescribeMountPoints(req, cb) {
+        let resp = new DescribeMountPointsResponse();
+        this.request("DescribeMountPoints", req, resp, cb);
+    }
+
+    /**
+     * 通过文件系统ID查看资源标签列表。
+     * @param {DescribeResourceTagsRequest} req
+     * @param {function(string, DescribeResourceTagsResponse):void} cb
+     * @public
+     */
+    DescribeResourceTags(req, cb) {
+        let resp = new DescribeResourceTagsResponse();
+        this.request("DescribeResourceTags", req, resp, cb);
+    }
+
+    /**
+     * 通过文件系统ID查看回热任务列表。
+     * @param {DescribeRestoreTasksRequest} req
+     * @param {function(string, DescribeRestoreTasksResponse):void} cb
+     * @public
+     */
+    DescribeRestoreTasks(req, cb) {
+        let resp = new DescribeRestoreTasksResponse();
+        this.request("DescribeRestoreTasks", req, resp, cb);
+    }
+
+    /**
+     * 修改资源标签列表，全量覆盖。
+     * @param {ModifyResourceTagsRequest} req
+     * @param {function(string, ModifyResourceTagsResponse):void} cb
+     * @public
+     */
+    ModifyResourceTags(req, cb) {
+        let resp = new ModifyResourceTagsResponse();
+        this.request("ModifyResourceTags", req, resp, cb);
+    }
+
+    /**
+     * 通过文件系统ID查看生命周期规则列表。
+     * @param {DescribeLifeCycleRulesRequest} req
+     * @param {function(string, DescribeLifeCycleRulesResponse):void} cb
+     * @public
+     */
+    DescribeLifeCycleRules(req, cb) {
+        let resp = new DescribeLifeCycleRulesResponse();
+        this.request("DescribeLifeCycleRules", req, resp, cb);
+    }
+
+    /**
+     * 删除权限组。
+     * @param {DeleteAccessGroupRequest} req
+     * @param {function(string, DeleteAccessGroupResponse):void} cb
+     * @public
+     */
+    DeleteAccessGroup(req, cb) {
+        let resp = new DeleteAccessGroupResponse();
+        this.request("DeleteAccessGroup", req, resp, cb);
+    }
+
+    /**
+     * 创建权限组。
+     * @param {CreateAccessGroupRequest} req
+     * @param {function(string, CreateAccessGroupResponse):void} cb
+     * @public
+     */
+    CreateAccessGroup(req, cb) {
+        let resp = new CreateAccessGroupResponse();
+        this.request("CreateAccessGroup", req, resp, cb);
     }
 
 

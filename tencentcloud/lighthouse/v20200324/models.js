@@ -919,6 +919,14 @@ class Bundle extends  AbstractModel {
          */
         this.BundleSalesState = null;
 
+        /**
+         * 套餐类型。
+取值范围：
+<li> GENERAL_BUNDLE：通用型</li><li> STORAGE_BUNDLE：存储型 </li>
+         * @type {string || null}
+         */
+        this.BundleType = null;
+
     }
 
     /**
@@ -945,6 +953,7 @@ class Bundle extends  AbstractModel {
         this.InternetMaxBandwidthOut = 'InternetMaxBandwidthOut' in params ? params.InternetMaxBandwidthOut : null;
         this.InternetChargeType = 'InternetChargeType' in params ? params.InternetChargeType : null;
         this.BundleSalesState = 'BundleSalesState' in params ? params.BundleSalesState : null;
+        this.BundleType = 'BundleType' in params ? params.BundleType : null;
 
     }
 }

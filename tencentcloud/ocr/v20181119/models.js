@@ -691,6 +691,56 @@ class TextDetectResponse extends  AbstractModel {
 }
 
 /**
+ * TollInvoiceOCR返回参数结构体
+ * @class
+ */
+class TollInvoiceOCRResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过路过桥费发票识别结果，具体内容请点击左侧链接。
+         * @type {Array.<TollInvoiceInfo> || null}
+         */
+        this.TollInvoiceInfos = null;
+
+        /**
+         * 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。
+         * @type {number || null}
+         */
+        this.Angle = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TollInvoiceInfos) {
+            this.TollInvoiceInfos = new Array();
+            for (let z in params.TollInvoiceInfos) {
+                let obj = new TollInvoiceInfo();
+                obj.deserialize(params.TollInvoiceInfos[z]);
+                this.TollInvoiceInfos.push(obj);
+            }
+        }
+        this.Angle = 'Angle' in params ? params.Angle : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * VerifyBizLicense返回参数结构体
  * @class
  */
@@ -2126,6 +2176,63 @@ GeneralBasicOcr接口返回段落信息Parag，包含ParagNo。
 }
 
 /**
+ * RecognizeTableOCR返回参数结构体
+ * @class
+ */
+class RecognizeTableOCRResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 检测到的文本信息，具体内容请点击左侧链接。
+         * @type {Array.<TableDetectInfo> || null}
+         */
+        this.TableDetections = null;
+
+        /**
+         * Base64 编码后的 Excel 数据。
+         * @type {string || null}
+         */
+        this.Data = null;
+
+        /**
+         * 图片为PDF时，返回PDF的总页数，默认为0
+         * @type {number || null}
+         */
+        this.PdfPageSize = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.TableDetections) {
+            this.TableDetections = new Array();
+            for (let z in params.TableDetections) {
+                let obj = new TableDetectInfo();
+                obj.deserialize(params.TableDetections[z]);
+                this.TableDetections.push(obj);
+            }
+        }
+        this.Data = 'Data' in params ? params.Data : null;
+        this.PdfPageSize = 'PdfPageSize' in params ? params.PdfPageSize : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * 数学试题识别结果
  * @class
  */
@@ -3498,31 +3605,26 @@ class RecognizeThaiIDCardOCRResponse extends  AbstractModel {
 }
 
 /**
- * QuotaInvoiceOCR请求参数结构体
+ * 单元格识别结果
  * @class
  */
-class QuotaInvoiceOCRRequest extends  AbstractModel {
+class CellContent extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
-         * @type {string || null}
+         * 段落编号
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
          */
-        this.ImageBase64 = null;
+        this.ParagNo = null;
 
         /**
-         * 图片的 Url 地址。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
-         * @type {string || null}
+         * 字体大小
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
          */
-        this.ImageUrl = null;
+        this.WordSize = null;
 
     }
 
@@ -3533,8 +3635,8 @@ class QuotaInvoiceOCRRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
-        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.ParagNo = 'ParagNo' in params ? params.ParagNo : null;
+        this.WordSize = 'WordSize' in params ? params.WordSize : null;
 
     }
 }
@@ -5026,6 +5128,55 @@ class VehicleRegCertOCRRequest extends  AbstractModel {
 }
 
 /**
+ * WaybillOCR请求参数结构体
+ * @class
+ */
+class WaybillOCRRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * 预检测开关，当待识别运单占整个输入图像的比例较小时，建议打开预检测开关。默认值为false。
+         * @type {boolean || null}
+         */
+        this.EnablePreDetect = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.EnablePreDetect = 'EnablePreDetect' in params ? params.EnablePreDetect : null;
+
+    }
+}
+
+/**
  * 商品码信息
  * @class
  */
@@ -5434,30 +5585,28 @@ class GeneralEfficientOCRRequest extends  AbstractModel {
 }
 
 /**
- * TollInvoiceOCR返回参数结构体
+ * AdvertiseOCR请求参数结构体
  * @class
  */
-class TollInvoiceOCRResponse extends  AbstractModel {
+class AdvertiseOCRRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 过路过桥费发票识别结果，具体内容请点击左侧链接。
-         * @type {Array.<TollInvoiceInfo> || null}
-         */
-        this.TollInvoiceInfos = null;
-
-        /**
-         * 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。
-         * @type {number || null}
-         */
-        this.Angle = null;
-
-        /**
-         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * 图片的 Base64 值。
+要求图片经Base64编码后不超过 7M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
          * @type {string || null}
          */
-        this.RequestId = null;
+        this.ImageBase64 = null;
+
+        /**
+         * 图片的 Url 地址。
+要求图片经Base64编码后不超过 7M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
 
     }
 
@@ -5468,17 +5617,8 @@ class TollInvoiceOCRResponse extends  AbstractModel {
         if (!params) {
             return;
         }
-
-        if (params.TollInvoiceInfos) {
-            this.TollInvoiceInfos = new Array();
-            for (let z in params.TollInvoiceInfos) {
-                let obj = new TollInvoiceInfo();
-                obj.deserialize(params.TollInvoiceInfos[z]);
-                this.TollInvoiceInfos.push(obj);
-            }
-        }
-        this.Angle = 'Angle' in params ? params.Angle : null;
-        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
 
     }
 }
@@ -6149,6 +6289,64 @@ class TextVehicleFront extends  AbstractModel {
 }
 
 /**
+ * 广告文字识别结果
+ * @class
+ */
+class AdvertiseTextDetection extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 识别出的文本行内容
+         * @type {string || null}
+         */
+        this.DetectedText = null;
+
+        /**
+         * 置信度 0 ~100
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * 文本行坐标，以四个顶点坐标表示
+         * @type {Array.<Coord> || null}
+         */
+        this.Polygon = null;
+
+        /**
+         * 此字段为扩展字段。
+GeneralBasicOcr接口返回段落信息Parag，包含ParagNo。
+         * @type {string || null}
+         */
+        this.AdvancedInfo = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.DetectedText = 'DetectedText' in params ? params.DetectedText : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+
+        if (params.Polygon) {
+            this.Polygon = new Array();
+            for (let z in params.Polygon) {
+                let obj = new Coord();
+                obj.deserialize(params.Polygon[z]);
+                this.Polygon.push(obj);
+            }
+        }
+        this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
+
+    }
+}
+
+/**
  * 金融票据切片识别单个字段的内容
  * @class
  */
@@ -6469,6 +6667,35 @@ class VatRollInvoiceOCRRequest extends  AbstractModel {
 }
 
 /**
+ * 表格标题
+ * @class
+ */
+class TableTitle extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 表格名称
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Text = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Text = 'Text' in params ? params.Text : null;
+
+    }
+}
+
+/**
  * 坐标
  * @class
  */
@@ -6643,6 +6870,48 @@ class FinanBillOCRResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ShipInvoiceOCR请求参数结构体
+ * @class
+ */
+class ShipInvoiceOCRRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片的 Base64 值。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * 图片的 Url 地址。
+支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
+支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
+非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
 
     }
 }
@@ -7258,6 +7527,59 @@ class MixedInvoiceOCRRequest extends  AbstractModel {
         this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
         this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
         this.Types = 'Types' in params ? params.Types : null;
+
+    }
+}
+
+/**
+ * 表格内容检测
+ * @class
+ */
+class TableDetectInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 单元格内容
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<TableCell> || null}
+         */
+        this.Cells = null;
+
+        /**
+         * 表格标题
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<TableTitle> || null}
+         */
+        this.Titles = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Cells) {
+            this.Cells = new Array();
+            for (let z in params.Cells) {
+                let obj = new TableCell();
+                obj.deserialize(params.Cells[z]);
+                this.Cells.push(obj);
+            }
+        }
+
+        if (params.Titles) {
+            this.Titles = new Array();
+            for (let z in params.Titles) {
+                let obj = new TableTitle();
+                obj.deserialize(params.Titles[z]);
+                this.Titles.push(obj);
+            }
+        }
 
     }
 }
@@ -8813,6 +9135,114 @@ class GeneralHandwritingOCRResponse extends  AbstractModel {
 }
 
 /**
+ * 单元格数据
+ * @class
+ */
+class TableCell extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 单元格左上角的列索引
+         * @type {number || null}
+         */
+        this.ColTl = null;
+
+        /**
+         * 单元格左上角的行索引
+         * @type {number || null}
+         */
+        this.RowTl = null;
+
+        /**
+         * 单元格右下角的列索引
+         * @type {number || null}
+         */
+        this.ColBr = null;
+
+        /**
+         * 单元格右下角的行索引
+         * @type {number || null}
+         */
+        this.RowBr = null;
+
+        /**
+         * 单元格内识别出的字符串文本，若文本存在多行，以换行符"\n"隔开
+         * @type {string || null}
+         */
+        this.Text = null;
+
+        /**
+         * 单元格类型
+         * @type {string || null}
+         */
+        this.Type = null;
+
+        /**
+         * 单元格置信度
+         * @type {number || null}
+         */
+        this.Confidence = null;
+
+        /**
+         * 单元格在图像中的四点坐标
+         * @type {Array.<Coord> || null}
+         */
+        this.Polygon = null;
+
+        /**
+         * 此字段为扩展字段
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.AdvancedInfo = null;
+
+        /**
+         * 单元格文本属性
+         * @type {Array.<CellContent> || null}
+         */
+        this.Contents = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ColTl = 'ColTl' in params ? params.ColTl : null;
+        this.RowTl = 'RowTl' in params ? params.RowTl : null;
+        this.ColBr = 'ColBr' in params ? params.ColBr : null;
+        this.RowBr = 'RowBr' in params ? params.RowBr : null;
+        this.Text = 'Text' in params ? params.Text : null;
+        this.Type = 'Type' in params ? params.Type : null;
+        this.Confidence = 'Confidence' in params ? params.Confidence : null;
+
+        if (params.Polygon) {
+            this.Polygon = new Array();
+            for (let z in params.Polygon) {
+                let obj = new Coord();
+                obj.deserialize(params.Polygon[z]);
+                this.Polygon.push(obj);
+            }
+        }
+        this.AdvancedInfo = 'AdvancedInfo' in params ? params.AdvancedInfo : null;
+
+        if (params.Contents) {
+            this.Contents = new Array();
+            for (let z in params.Contents) {
+                let obj = new CellContent();
+                obj.deserialize(params.Contents[z]);
+                this.Contents.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * TableOCR返回参数结构体
  * @class
  */
@@ -8821,7 +9251,7 @@ class TableOCRResponse extends  AbstractModel {
         super();
 
         /**
-         * 检测到的文本信息，具体内容请点击左侧链接。
+         * 检测到的文本信息，具体内容请点击左侧链接
          * @type {Array.<TextTable> || null}
          */
         this.TextDetections = null;
@@ -8899,31 +9329,24 @@ class QuestionBlockObj extends  AbstractModel {
 }
 
 /**
- * WaybillOCR请求参数结构体
+ * AdvertiseOCR返回参数结构体
  * @class
  */
-class WaybillOCRRequest extends  AbstractModel {
+class AdvertiseOCRResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
-         * @type {string || null}
+         * 检测到的文本信息，包括文本行内容、置信度、文本行坐标以及文本行旋转纠正后的坐标，具体内容请点击左侧链接。
+         * @type {Array.<AdvertiseTextDetection> || null}
          */
-        this.ImageBase64 = null;
+        this.TextDetections = null;
 
         /**
-         * 图片的 Url 地址。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
-        this.ImageUrl = null;
+        this.RequestId = null;
 
     }
 
@@ -8934,8 +9357,16 @@ class WaybillOCRRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
-        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+
+        if (params.TextDetections) {
+            this.TextDetections = new Array();
+            for (let z in params.TextDetections) {
+                let obj = new AdvertiseTextDetection();
+                obj.deserialize(params.TextDetections[z]);
+                this.TextDetections.push(obj);
+            }
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -9340,6 +9771,59 @@ IKAD   劳工证
 }
 
 /**
+ * RecognizeTableOCR请求参数结构体
+ * @class
+ */
+class RecognizeTableOCRRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 图片/PDF的 Base64 值。
+要求图片/PDF经Base64编码后不超过 7M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。
+图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+         * @type {string || null}
+         */
+        this.ImageBase64 = null;
+
+        /**
+         * 图片/PDF的 Url 地址。
+要求图片/PDF经Base64编码后不超过 7M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。
+图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+         * @type {string || null}
+         */
+        this.ImageUrl = null;
+
+        /**
+         * 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。
+         * @type {boolean || null}
+         */
+        this.IsPdf = null;
+
+        /**
+         * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+         * @type {number || null}
+         */
+        this.PdfPageNumber = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ImageBase64 = 'ImageBase64' in params ? params.ImageBase64 : null;
+        this.ImageUrl = 'ImageUrl' in params ? params.ImageUrl : null;
+        this.IsPdf = 'IsPdf' in params ? params.IsPdf : null;
+        this.PdfPageNumber = 'PdfPageNumber' in params ? params.PdfPageNumber : null;
+
+    }
+}
+
+/**
  * EstateCertOCR请求参数结构体
  * @class
  */
@@ -9645,10 +10129,10 @@ class VatInvoiceOCRResponse extends  AbstractModel {
 }
 
 /**
- * ShipInvoiceOCR请求参数结构体
+ * QuotaInvoiceOCR请求参数结构体
  * @class
  */
-class ShipInvoiceOCRRequest extends  AbstractModel {
+class QuotaInvoiceOCRRequest extends  AbstractModel {
     constructor(){
         super();
 
@@ -9973,6 +10457,7 @@ module.exports = {
     FlightInvoiceOCRRequest: FlightInvoiceOCRRequest,
     MLIDPassportOCRRequest: MLIDPassportOCRRequest,
     TextDetectResponse: TextDetectResponse,
+    TollInvoiceOCRResponse: TollInvoiceOCRResponse,
     VerifyBizLicenseResponse: VerifyBizLicenseResponse,
     FinanBillSliceOCRResponse: FinanBillSliceOCRResponse,
     DriverLicenseOCRResponse: DriverLicenseOCRResponse,
@@ -9995,6 +10480,7 @@ module.exports = {
     DriverLicenseOCRRequest: DriverLicenseOCRRequest,
     BizLicenseVerifyResult: BizLicenseVerifyResult,
     TextDetection: TextDetection,
+    RecognizeTableOCRResponse: RecognizeTableOCRResponse,
     TextEduPaper: TextEduPaper,
     QrcodeOCRResponse: QrcodeOCRResponse,
     WaybillObj: WaybillObj,
@@ -10020,7 +10506,7 @@ module.exports = {
     TaxiInvoiceOCRResponse: TaxiInvoiceOCRResponse,
     GeneralBasicOCRResponse: GeneralBasicOCRResponse,
     RecognizeThaiIDCardOCRResponse: RecognizeThaiIDCardOCRResponse,
-    QuotaInvoiceOCRRequest: QuotaInvoiceOCRRequest,
+    CellContent: CellContent,
     MixedInvoiceOCRResponse: MixedInvoiceOCRResponse,
     ClassifyDetectOCRResponse: ClassifyDetectOCRResponse,
     VehicleLicenseOCRResponse: VehicleLicenseOCRResponse,
@@ -10046,12 +10532,13 @@ module.exports = {
     QrcodeImgSize: QrcodeImgSize,
     VerifyBasicBizLicenseResponse: VerifyBasicBizLicenseResponse,
     VehicleRegCertOCRRequest: VehicleRegCertOCRRequest,
+    WaybillOCRRequest: WaybillOCRRequest,
     ProductDataRecord: ProductDataRecord,
     LicensePlateOCRRequest: LicensePlateOCRRequest,
     GeneralBasicOCRRequest: GeneralBasicOCRRequest,
     TextVehicleBack: TextVehicleBack,
     GeneralEfficientOCRRequest: GeneralEfficientOCRRequest,
-    TollInvoiceOCRResponse: TollInvoiceOCRResponse,
+    AdvertiseOCRRequest: AdvertiseOCRRequest,
     RideHailingDriverLicenseOCRResponse: RideHailingDriverLicenseOCRResponse,
     EnglishOCRRequest: EnglishOCRRequest,
     VatInvoiceVerifyResponse: VatInvoiceVerifyResponse,
@@ -10063,16 +10550,19 @@ module.exports = {
     CarInvoiceInfo: CarInvoiceInfo,
     FlightInvoiceInfo: FlightInvoiceInfo,
     TextVehicleFront: TextVehicleFront,
+    AdvertiseTextDetection: AdvertiseTextDetection,
     FinanBillSliceInfo: FinanBillSliceInfo,
     QueryBarCodeResponse: QueryBarCodeResponse,
     ArithmeticOCRRequest: ArithmeticOCRRequest,
     FinanBillSliceOCRRequest: FinanBillSliceOCRRequest,
     MLIDPassportOCRResponse: MLIDPassportOCRResponse,
     VatRollInvoiceOCRRequest: VatRollInvoiceOCRRequest,
+    TableTitle: TableTitle,
     Coord: Coord,
     SealOCRResponse: SealOCRResponse,
     DutyPaidProofInfo: DutyPaidProofInfo,
     FinanBillOCRResponse: FinanBillOCRResponse,
+    ShipInvoiceOCRRequest: ShipInvoiceOCRRequest,
     TextWaybill: TextWaybill,
     QuestionObj: QuestionObj,
     VinOCRResponse: VinOCRResponse,
@@ -10085,6 +10575,7 @@ module.exports = {
     ItemCoord: ItemCoord,
     OrgCodeCertOCRResponse: OrgCodeCertOCRResponse,
     MixedInvoiceOCRRequest: MixedInvoiceOCRRequest,
+    TableDetectInfo: TableDetectInfo,
     ResidenceBookletOCRResponse: ResidenceBookletOCRResponse,
     CarInvoiceOCRResponse: CarInvoiceOCRResponse,
     GeneralFastOCRRequest: GeneralFastOCRRequest,
@@ -10110,9 +10601,10 @@ module.exports = {
     EnterpriseLicenseInfo: EnterpriseLicenseInfo,
     InsuranceBillOCRRequest: InsuranceBillOCRRequest,
     GeneralHandwritingOCRResponse: GeneralHandwritingOCRResponse,
+    TableCell: TableCell,
     TableOCRResponse: TableOCRResponse,
     QuestionBlockObj: QuestionBlockObj,
-    WaybillOCRRequest: WaybillOCRRequest,
+    AdvertiseOCRResponse: AdvertiseOCRResponse,
     VatRollInvoiceInfo: VatRollInvoiceInfo,
     ShipInvoiceInfo: ShipInvoiceInfo,
     IDCardOCRRequest: IDCardOCRRequest,
@@ -10120,11 +10612,12 @@ module.exports = {
     VinOCRRequest: VinOCRRequest,
     RideHailingTransportLicenseOCRRequest: RideHailingTransportLicenseOCRRequest,
     MLIDCardOCRResponse: MLIDCardOCRResponse,
+    RecognizeTableOCRRequest: RecognizeTableOCRRequest,
     EstateCertOCRRequest: EstateCertOCRRequest,
     VerifyBasicBizLicenseRequest: VerifyBasicBizLicenseRequest,
     BizLicenseOCRResponse: BizLicenseOCRResponse,
     VatInvoiceOCRResponse: VatInvoiceOCRResponse,
-    ShipInvoiceOCRRequest: ShipInvoiceOCRRequest,
+    QuotaInvoiceOCRRequest: QuotaInvoiceOCRRequest,
     BankCardOCRResponse: BankCardOCRResponse,
     BusinessCardOCRRequest: BusinessCardOCRRequest,
     FinanBillOCRRequest: FinanBillOCRRequest,

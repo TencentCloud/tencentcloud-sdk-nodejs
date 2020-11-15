@@ -489,13 +489,14 @@ class CreateInstancesRequest extends  AbstractModel {
         this.ZoneId = null;
 
         /**
-         * 实例类型：2 – Redis2.8内存版（标准架构），3 – CKV 3.2内存版(标准架构)，4 – CKV 3.2内存版(集群架构)，6 – Redis4.0内存版（标准架构），7 – Redis4.0内存版（集群架构），8 – Redis5.0内存版（标准架构），9 – Redis5.0内存版（集群架构）。
+         * 实例类型：2 – Redis2.8内存版(标准架构)，3 – CKV 3.2内存版(标准架构)，4 – CKV 3.2内存版(集群架构)，6 – Redis4.0内存版(标准架构)，7 – Redis4.0内存版(集群架构)，8 – Redis5.0内存版(标准架构)，9 – Redis5.0内存版(集群架构)。
          * @type {number || null}
          */
         this.TypeId = null;
 
         /**
-         * 实例容量，单位MB， 数值需为1024的整数倍，取值大小以 [查询产品售卖规格](https://cloud.tencent.com/document/api/239/30600) 返回的规格为准。
+         * 内存容量，单位为MB， 数值需为1024的整数倍，具体规格以 [查询产品售卖规格](https://cloud.tencent.com/document/api/239/30600) 返回的规格为准。
+TypeId为标准架构时，MemSize是实例总内存容量；TypeId为集群架构时，MemSize是单分片内存容量。
          * @type {number || null}
          */
         this.MemSize = null;
@@ -519,7 +520,9 @@ class CreateInstancesRequest extends  AbstractModel {
         this.BillingMode = null;
 
         /**
-         * 实例密码，8-30个字符，至少包含小写字母、大写字母、数字和字符 ()`~!@#$%^&*-+=_|{}[]:;<>,.?/ 中的2种，不能以"/"开头。
+         * 实例密码，当输入参数NoAuth为true且使用私有网络VPC时，Password为非必填，否则Password为必填参数。
+当实例类型TypeId为Redis2.8、4.0和5.0时，其密码格式为：8-30个字符，至少包含小写字母、大写字母、数字和字符 ()`~!@#$%^&*-+=_|{}[]:;<>,.?/ 中的2种，不能以"/"开头；
+当实例类型TypeId为CKV 3.2时，其密码格式为：8-30个字符，必须包含字母和数字 且 不包含其他字符。
          * @type {string || null}
          */
         this.Password = null;
@@ -590,6 +593,12 @@ class CreateInstancesRequest extends  AbstractModel {
          */
         this.NoAuth = null;
 
+        /**
+         * 实例的节点信息，目前支持传入节点的类型（主节点或者副本节点），节点的可用区。单可用区部署不需要传递此参数。
+         * @type {Array.<RedisNodeInfo> || null}
+         */
+        this.NodeSet = null;
+
     }
 
     /**
@@ -617,6 +626,15 @@ class CreateInstancesRequest extends  AbstractModel {
         this.ReplicasReadonly = 'ReplicasReadonly' in params ? params.ReplicasReadonly : null;
         this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
         this.NoAuth = 'NoAuth' in params ? params.NoAuth : null;
+
+        if (params.NodeSet) {
+            this.NodeSet = new Array();
+            for (let z in params.NodeSet) {
+                let obj = new RedisNodeInfo();
+                obj.deserialize(params.NodeSet[z]);
+                this.NodeSet.push(obj);
+            }
+        }
 
     }
 }
@@ -1122,6 +1140,118 @@ class DescribeSlowLogResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeCommonDBInstances请求参数结构体
+ * @class
+ */
+class DescribeCommonDBInstancesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例Vip信息列表
+         * @type {Array.<number> || null}
+         */
+        this.VpcIds = null;
+
+        /**
+         * 子网id信息列表
+         * @type {Array.<number> || null}
+         */
+        this.SubnetIds = null;
+
+        /**
+         * 计费类型过滤列表；0表示包年包月，1表示按量计费
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * 实例id过滤信息列表
+         * @type {Array.<string> || null}
+         */
+        this.InstanceIds = null;
+
+        /**
+         * 实例名称过滤信息列表
+         * @type {Array.<string> || null}
+         */
+        this.InstanceNames = null;
+
+        /**
+         * 实例状态信息过滤列表
+         * @type {Array.<string> || null}
+         */
+        this.Status = null;
+
+        /**
+         * 排序字段
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * 排序方式
+         * @type {string || null}
+         */
+        this.OrderByType = null;
+
+        /**
+         * 实例vip信息列表
+         * @type {Array.<string> || null}
+         */
+        this.Vips = null;
+
+        /**
+         * vpc网络统一Id列表
+         * @type {Array.<string> || null}
+         */
+        this.UniqVpcIds = null;
+
+        /**
+         * 子网统一id列表
+         * @type {Array.<string> || null}
+         */
+        this.UniqSubnetIds = null;
+
+        /**
+         * 数量限制，默认推荐100
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移量，默认0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.VpcIds = 'VpcIds' in params ? params.VpcIds : null;
+        this.SubnetIds = 'SubnetIds' in params ? params.SubnetIds : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+        this.InstanceNames = 'InstanceNames' in params ? params.InstanceNames : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderByType = 'OrderByType' in params ? params.OrderByType : null;
+        this.Vips = 'Vips' in params ? params.Vips : null;
+        this.UniqVpcIds = 'UniqVpcIds' in params ? params.UniqVpcIds : null;
+        this.UniqSubnetIds = 'UniqSubnetIds' in params ? params.UniqSubnetIds : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+
+    }
+}
+
+/**
  * DescribeDBSecurityGroups返回参数结构体
  * @class
  */
@@ -1160,6 +1290,48 @@ class DescribeDBSecurityGroupsResponse extends  AbstractModel {
             }
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 描述Redis实例的主节点或者副本节点信息
+ * @class
+ */
+class RedisNodeInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 节点类型，0 为主节点，1 为副本节点
+         * @type {number || null}
+         */
+        this.NodeType = null;
+
+        /**
+         * 主节点或者副本节点的可用区ID
+         * @type {number || null}
+         */
+        this.ZoneId = null;
+
+        /**
+         * 主节点或者副本节点的ID，创建时不需要传递此参数。
+         * @type {number || null}
+         */
+        this.NodeId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.NodeType = 'NodeType' in params ? params.NodeType : null;
+        this.ZoneId = 'ZoneId' in params ? params.ZoneId : null;
+        this.NodeId = 'NodeId' in params ? params.NodeId : null;
 
     }
 }
@@ -2442,6 +2614,125 @@ class TradeDealDetail extends  AbstractModel {
         this.Description = 'Description' in params ? params.Description : null;
         this.Price = 'Price' in params ? params.Price : null;
         this.InstanceIds = 'InstanceIds' in params ? params.InstanceIds : null;
+
+    }
+}
+
+/**
+ * 单个实例信息
+ * @class
+ */
+class RedisCommonInstanceList extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例名称
+         * @type {string || null}
+         */
+        this.InstanceName = null;
+
+        /**
+         * 实例id
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 用户id
+         * @type {number || null}
+         */
+        this.AppId = null;
+
+        /**
+         * 实例所属项目id
+         * @type {number || null}
+         */
+        this.ProjectId = null;
+
+        /**
+         * 实例接入区域
+         * @type {string || null}
+         */
+        this.Region = null;
+
+        /**
+         * 实例接入zone
+         * @type {string || null}
+         */
+        this.Zone = null;
+
+        /**
+         * 实例网络id
+         * @type {string || null}
+         */
+        this.VpcId = null;
+
+        /**
+         * 子网id
+         * @type {string || null}
+         */
+        this.SubnetId = null;
+
+        /**
+         * 实例状态信息，0-创建中，1-运行中
+         * @type {string || null}
+         */
+        this.Status = null;
+
+        /**
+         * 实例网络ip
+         * @type {Array.<string> || null}
+         */
+        this.Vips = null;
+
+        /**
+         * 实例网络端口
+         * @type {number || null}
+         */
+        this.Vport = null;
+
+        /**
+         * 实例创建时间
+         * @type {string || null}
+         */
+        this.Createtime = null;
+
+        /**
+         * 计费类型，0-按量计费，1-包年包月
+         * @type {number || null}
+         */
+        this.PayMode = null;
+
+        /**
+         * 网络类型，0-基础网络，1-VPC网络
+         * @type {number || null}
+         */
+        this.NetType = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceName = 'InstanceName' in params ? params.InstanceName : null;
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.AppId = 'AppId' in params ? params.AppId : null;
+        this.ProjectId = 'ProjectId' in params ? params.ProjectId : null;
+        this.Region = 'Region' in params ? params.Region : null;
+        this.Zone = 'Zone' in params ? params.Zone : null;
+        this.VpcId = 'VpcId' in params ? params.VpcId : null;
+        this.SubnetId = 'SubnetId' in params ? params.SubnetId : null;
+        this.Status = 'Status' in params ? params.Status : null;
+        this.Vips = 'Vips' in params ? params.Vips : null;
+        this.Vport = 'Vport' in params ? params.Vport : null;
+        this.Createtime = 'Createtime' in params ? params.Createtime : null;
+        this.PayMode = 'PayMode' in params ? params.PayMode : null;
+        this.NetType = 'NetType' in params ? params.NetType : null;
 
     }
 }
@@ -4755,6 +5046,50 @@ class ProductConf extends  AbstractModel {
 }
 
 /**
+ * ModifyConnectionConfig请求参数结构体
+ * @class
+ */
+class ModifyConnectionConfigRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例的ID，长度在12-36之间。
+         * @type {string || null}
+         */
+        this.InstanceId = null;
+
+        /**
+         * 附加带宽，大于0，单位MB。
+         * @type {number || null}
+         */
+        this.Bandwidth = null;
+
+        /**
+         * 单分片的总连接数。
+未开启副本只读时，下限为10000，上限为40000；
+开启副本只读时，下限为10000，上限为10000×(只读副本数+3)。
+         * @type {number || null}
+         */
+        this.ClientLimit = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.InstanceId = 'InstanceId' in params ? params.InstanceId : null;
+        this.Bandwidth = 'Bandwidth' in params ? params.Bandwidth : null;
+        this.ClientLimit = 'ClientLimit' in params ? params.ClientLimit : null;
+
+    }
+}
+
+/**
  * 实例节点
  * @class
  */
@@ -6076,6 +6411,41 @@ class InquiryPriceRenewInstanceRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyConnectionConfig返回参数结构体
+ * @class
+ */
+class ModifyConnectionConfigResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 任务ID
+         * @type {number || null}
+         */
+        this.TaskId = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * ModifyMaintenanceWindow返回参数结构体
  * @class
  */
@@ -6105,6 +6475,56 @@ class ModifyMaintenanceWindowResponse extends  AbstractModel {
             return;
         }
         this.Status = 'Status' in params ? params.Status : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeCommonDBInstances返回参数结构体
+ * @class
+ */
+class DescribeCommonDBInstancesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 实例数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 实例信息
+         * @type {Array.<RedisCommonInstanceList> || null}
+         */
+        this.InstanceDetails = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+
+        if (params.InstanceDetails) {
+            this.InstanceDetails = new Array();
+            for (let z in params.InstanceDetails) {
+                let obj = new RedisCommonInstanceList();
+                obj.deserialize(params.InstanceDetails[z]);
+                this.InstanceDetails.push(obj);
+            }
+        }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -7965,7 +8385,9 @@ module.exports = {
     TendisNodes: TendisNodes,
     RenewInstanceResponse: RenewInstanceResponse,
     DescribeSlowLogResponse: DescribeSlowLogResponse,
+    DescribeCommonDBInstancesRequest: DescribeCommonDBInstancesRequest,
     DescribeDBSecurityGroupsResponse: DescribeDBSecurityGroupsResponse,
+    RedisNodeInfo: RedisNodeInfo,
     DescribeBackupUrlRequest: DescribeBackupUrlRequest,
     DescribeInstancesResponse: DescribeInstancesResponse,
     InstanceEnumParam: InstanceEnumParam,
@@ -7992,6 +8414,7 @@ module.exports = {
     ModifyInstanceResponse: ModifyInstanceResponse,
     ProxyNodes: ProxyNodes,
     TradeDealDetail: TradeDealDetail,
+    RedisCommonInstanceList: RedisCommonInstanceList,
     SourceInfo: SourceInfo,
     ModifyDBInstanceSecurityGroupsResponse: ModifyDBInstanceSecurityGroupsResponse,
     DescribeInstanceMonitorHotKeyRequest: DescribeInstanceMonitorHotKeyRequest,
@@ -8041,6 +8464,7 @@ module.exports = {
     DescribeMaintenanceWindowResponse: DescribeMaintenanceWindowResponse,
     DescribeInstanceSecurityGroupResponse: DescribeInstanceSecurityGroupResponse,
     ProductConf: ProductConf,
+    ModifyConnectionConfigRequest: ModifyConnectionConfigRequest,
     InstanceNode: InstanceNode,
     StartupInstanceResponse: StartupInstanceResponse,
     DescribeInstanceDTSInstanceInfo: DescribeInstanceDTSInstanceInfo,
@@ -8062,7 +8486,9 @@ module.exports = {
     ModfiyInstancePasswordResponse: ModfiyInstancePasswordResponse,
     InstanceSet: InstanceSet,
     InquiryPriceRenewInstanceRequest: InquiryPriceRenewInstanceRequest,
+    ModifyConnectionConfigResponse: ModifyConnectionConfigResponse,
     ModifyMaintenanceWindowResponse: ModifyMaintenanceWindowResponse,
+    DescribeCommonDBInstancesResponse: DescribeCommonDBInstancesResponse,
     DescribeInstanceMonitorTopNCmdTookRequest: DescribeInstanceMonitorTopNCmdTookRequest,
     DestroyPrepaidInstanceResponse: DestroyPrepaidInstanceResponse,
     DescribeInstanceMonitorBigKeyTypeDistRequest: DescribeInstanceMonitorBigKeyTypeDistRequest,

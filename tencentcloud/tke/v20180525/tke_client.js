@@ -21,11 +21,13 @@ const DescribeClusterSecurityResponse = models.DescribeClusterSecurityResponse;
 const DescribeClusterSecurityRequest = models.DescribeClusterSecurityRequest;
 const DeleteClusterInstancesResponse = models.DeleteClusterInstancesResponse;
 const DescribeClusterKubeconfigResponse = models.DescribeClusterKubeconfigResponse;
+const RemoveNodeFromNodePoolResponse = models.RemoveNodeFromNodePoolResponse;
 const CreateClusterRouteRequest = models.CreateClusterRouteRequest;
 const DescribeClusterEndpointVipStatusResponse = models.DescribeClusterEndpointVipStatusResponse;
 const ModifyClusterEndpointSPRequest = models.ModifyClusterEndpointSPRequest;
 const DescribeClusterInstancesResponse = models.DescribeClusterInstancesResponse;
 const DeleteClusterResponse = models.DeleteClusterResponse;
+const AutoscalingAdded = models.AutoscalingAdded;
 const CreateClusterRouteTableResponse = models.CreateClusterRouteTableResponse;
 const DeleteClusterEndpointResponse = models.DeleteClusterEndpointResponse;
 const RouteInfo = models.RouteInfo;
@@ -35,10 +37,14 @@ const DeleteClusterAsGroupsRequest = models.DeleteClusterAsGroupsRequest;
 const DescribeExistedInstancesRequest = models.DescribeExistedInstancesRequest;
 const DescribeRegionsResponse = models.DescribeRegionsResponse;
 const CreateClusterRouteResponse = models.CreateClusterRouteResponse;
+const AddNodeToNodePoolRequest = models.AddNodeToNodePoolRequest;
+const NodePool = models.NodePool;
 const RouteTableInfo = models.RouteTableInfo;
 const ClusterAsGroup = models.ClusterAsGroup;
-const DescribeClusterEndpointStatusRequest = models.DescribeClusterEndpointStatusRequest;
+const Instance = models.Instance;
+const CreateClusterNodePoolFromExistingAsgRequest = models.CreateClusterNodePoolFromExistingAsgRequest;
 const Tag = models.Tag;
+const DescribePrometheusAgentInstancesRequest = models.DescribePrometheusAgentInstancesRequest;
 const ClusterNetworkSettings = models.ClusterNetworkSettings;
 const DescribeImagesResponse = models.DescribeImagesResponse;
 const AutoScalingGroupRange = models.AutoScalingGroupRange;
@@ -52,27 +58,35 @@ const RegionInstance = models.RegionInstance;
 const Label = models.Label;
 const DeleteClusterEndpointVipResponse = models.DeleteClusterEndpointVipResponse;
 const ClusterBasicSettings = models.ClusterBasicSettings;
+const CreatePrometheusDashboardResponse = models.CreatePrometheusDashboardResponse;
 const RouteTableConflict = models.RouteTableConflict;
 const DeleteClusterInstancesRequest = models.DeleteClusterInstancesRequest;
 const ModifyClusterAsGroupAttributeResponse = models.ModifyClusterAsGroupAttributeResponse;
 const CreateClusterInstancesRequest = models.CreateClusterInstancesRequest;
+const ManuallyAdded = models.ManuallyAdded;
 const DescribeClusterRouteTablesResponse = models.DescribeClusterRouteTablesResponse;
 const DescribeClusterKubeconfigRequest = models.DescribeClusterKubeconfigRequest;
 const ClusterCIDRSettings = models.ClusterCIDRSettings;
 const CreateClusterEndpointVipRequest = models.CreateClusterEndpointVipRequest;
+const Taint = models.Taint;
 const ExistedInstance = models.ExistedInstance;
-const DescribeRouteTableConflictsResponse = models.DescribeRouteTableConflictsResponse;
+const DescribeClusterNodePoolsResponse = models.DescribeClusterNodePoolsResponse;
+const AddNodeToNodePoolResponse = models.AddNodeToNodePoolResponse;
 const TagSpecification = models.TagSpecification;
 const DescribeRegionsRequest = models.DescribeRegionsRequest;
 const DescribeClustersResponse = models.DescribeClustersResponse;
 const ClusterExtraArgs = models.ClusterExtraArgs;
 const DataDisk = models.DataDisk;
+const ModifyClusterNodePoolResponse = models.ModifyClusterNodePoolResponse;
 const DescribeExistedInstancesResponse = models.DescribeExistedInstancesResponse;
 const ResourceDeleteOption = models.ResourceDeleteOption;
 const LoginSettings = models.LoginSettings;
-const Instance = models.Instance;
+const CreateClusterNodePoolFromExistingAsgResponse = models.CreateClusterNodePoolFromExistingAsgResponse;
+const DescribeClusterEndpointStatusRequest = models.DescribeClusterEndpointStatusRequest;
+const ModifyClusterAttributeResponse = models.ModifyClusterAttributeResponse;
 const EnhancedService = models.EnhancedService;
 const CreateClusterAsGroupRequest = models.CreateClusterAsGroupRequest;
+const DescribeRouteTableConflictsResponse = models.DescribeRouteTableConflictsResponse;
 const CreateClusterResponse = models.CreateClusterResponse;
 const RunSecurityServiceEnabled = models.RunSecurityServiceEnabled;
 const DeleteClusterRouteTableRequest = models.DeleteClusterRouteTableRequest;
@@ -82,27 +96,34 @@ const AcquireClusterAdminRoleRequest = models.AcquireClusterAdminRoleRequest;
 const CreateClusterAsGroupResponse = models.CreateClusterAsGroupResponse;
 const DeleteClusterAsGroupsResponse = models.DeleteClusterAsGroupsResponse;
 const DescribeClusterInstancesRequest = models.DescribeClusterInstancesRequest;
+const InstanceAdvancedSettings = models.InstanceAdvancedSettings;
 const Filter = models.Filter;
+const ModifyClusterNodePoolRequest = models.ModifyClusterNodePoolRequest;
 const ImageInstance = models.ImageInstance;
 const CreateClusterEndpointResponse = models.CreateClusterEndpointResponse;
+const CreateClusterNodePoolRequest = models.CreateClusterNodePoolRequest;
 const ClusterAdvancedSettings = models.ClusterAdvancedSettings;
 const AcquireClusterAdminRoleResponse = models.AcquireClusterAdminRoleResponse;
+const DeleteClusterNodePoolRequest = models.DeleteClusterNodePoolRequest;
 const DeleteClusterEndpointVipRequest = models.DeleteClusterEndpointVipRequest;
 const Cluster = models.Cluster;
 const DescribeClusterEndpointStatusResponse = models.DescribeClusterEndpointStatusResponse;
+const CreatePrometheusDashboardRequest = models.CreatePrometheusDashboardRequest;
 const AddExistedInstancesResponse = models.AddExistedInstancesResponse;
 const DeleteClusterRouteTableResponse = models.DeleteClusterRouteTableResponse;
 const DescribeClusterAsGroupOptionRequest = models.DescribeClusterAsGroupOptionRequest;
-const ModifyClusterAttributeResponse = models.ModifyClusterAttributeResponse;
+const DescribePrometheusAgentInstancesResponse = models.DescribePrometheusAgentInstancesResponse;
 const CreateClusterEndpointRequest = models.CreateClusterEndpointRequest;
 const AddExistedInstancesRequest = models.AddExistedInstancesRequest;
 const ClusterAsGroupOption = models.ClusterAsGroupOption;
 const CreateClusterInstancesResponse = models.CreateClusterInstancesResponse;
+const DescribeClusterNodePoolsRequest = models.DescribeClusterNodePoolsRequest;
 const DescribeClusterRouteTablesRequest = models.DescribeClusterRouteTablesRequest;
 const ExistedInstancesForNode = models.ExistedInstancesForNode;
 const DescribeClusterRoutesRequest = models.DescribeClusterRoutesRequest;
 const DeleteClusterRouteRequest = models.DeleteClusterRouteRequest;
 const DeleteClusterEndpointRequest = models.DeleteClusterEndpointRequest;
+const DescribeClusterNodePoolDetailRequest = models.DescribeClusterNodePoolDetailRequest;
 const CreateClusterRouteTableRequest = models.CreateClusterRouteTableRequest;
 const DescribeClusterAsGroupsRequest = models.DescribeClusterAsGroupsRequest;
 const DescribeImagesRequest = models.DescribeImagesRequest;
@@ -111,11 +132,15 @@ const DescribeRouteTableConflictsRequest = models.DescribeRouteTableConflictsReq
 const ExistedInstancesPara = models.ExistedInstancesPara;
 const DescribeClusterAsGroupOptionResponse = models.DescribeClusterAsGroupOptionResponse;
 const ClusterAsGroupAttribute = models.ClusterAsGroupAttribute;
+const DeleteClusterNodePoolResponse = models.DeleteClusterNodePoolResponse;
 const RunMonitorServiceEnabled = models.RunMonitorServiceEnabled;
-const InstanceAdvancedSettings = models.InstanceAdvancedSettings;
+const CreateClusterNodePoolResponse = models.CreateClusterNodePoolResponse;
 const ModifyClusterAsGroupAttributeRequest = models.ModifyClusterAsGroupAttributeRequest;
 const InstanceDataDiskMountSetting = models.InstanceDataDiskMountSetting;
+const NodeCountSummary = models.NodeCountSummary;
 const DescribeClusterAsGroupsResponse = models.DescribeClusterAsGroupsResponse;
+const RemoveNodeFromNodePoolRequest = models.RemoveNodeFromNodePoolRequest;
+const DescribeClusterNodePoolDetailResponse = models.DescribeClusterNodePoolDetailResponse;
 
 
 /**
@@ -137,6 +162,28 @@ class TkeClient extends AbstractClient {
     CreateCluster(req, cb) {
         let resp = new CreateClusterResponse();
         this.request("CreateCluster", req, resp, cb);
+    }
+
+    /**
+     * 创建grafana监控面板
+     * @param {CreatePrometheusDashboardRequest} req
+     * @param {function(string, CreatePrometheusDashboardResponse):void} cb
+     * @public
+     */
+    CreatePrometheusDashboard(req, cb) {
+        let resp = new CreatePrometheusDashboardResponse();
+        this.request("CreatePrometheusDashboard", req, resp, cb);
+    }
+
+    /**
+     * 查询节点池详情
+     * @param {DescribeClusterNodePoolDetailRequest} req
+     * @param {function(string, DescribeClusterNodePoolDetailResponse):void} cb
+     * @public
+     */
+    DescribeClusterNodePoolDetail(req, cb) {
+        let resp = new DescribeClusterNodePoolDetailResponse();
+        this.request("DescribeClusterNodePoolDetail", req, resp, cb);
     }
 
     /**
@@ -173,14 +220,14 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 删除集群(YUNAPI V3版本)
-     * @param {DeleteClusterRequest} req
-     * @param {function(string, DeleteClusterResponse):void} cb
+     * 扩展(新建)集群节点
+     * @param {CreateClusterInstancesRequest} req
+     * @param {function(string, CreateClusterInstancesResponse):void} cb
      * @public
      */
-    DeleteCluster(req, cb) {
-        let resp = new DeleteClusterResponse();
-        this.request("DeleteCluster", req, resp, cb);
+    CreateClusterInstances(req, cb) {
+        let resp = new CreateClusterInstancesResponse();
+        this.request("CreateClusterInstances", req, resp, cb);
     }
 
     /**
@@ -217,6 +264,17 @@ class TkeClient extends AbstractClient {
     }
 
     /**
+     * 移出节点池节点，但保留在集群内
+     * @param {RemoveNodeFromNodePoolRequest} req
+     * @param {function(string, RemoveNodeFromNodePoolResponse):void} cb
+     * @public
+     */
+    RemoveNodeFromNodePool(req, cb) {
+        let resp = new RemoveNodeFromNodePoolResponse();
+        this.request("RemoveNodeFromNodePool", req, resp, cb);
+    }
+
+    /**
      * 查询集群开启端口流程状态(仅支持托管集群外网端口)
      * @param {DescribeClusterEndpointVipStatusRequest} req
      * @param {function(string, DescribeClusterEndpointVipStatusResponse):void} cb
@@ -228,14 +286,14 @@ class TkeClient extends AbstractClient {
     }
 
     /**
-     * 扩展(新建)集群节点
-     * @param {CreateClusterInstancesRequest} req
-     * @param {function(string, CreateClusterInstancesResponse):void} cb
+     * 删除集群(YUNAPI V3版本)
+     * @param {DeleteClusterRequest} req
+     * @param {function(string, DeleteClusterResponse):void} cb
      * @public
      */
-    CreateClusterInstances(req, cb) {
-        let resp = new CreateClusterInstancesResponse();
-        this.request("CreateClusterInstances", req, resp, cb);
+    DeleteCluster(req, cb) {
+        let resp = new DeleteClusterResponse();
+        this.request("DeleteCluster", req, resp, cb);
     }
 
     /**
@@ -294,6 +352,17 @@ class TkeClient extends AbstractClient {
     }
 
     /**
+     * 编辑节点池
+     * @param {ModifyClusterNodePoolRequest} req
+     * @param {function(string, ModifyClusterNodePoolResponse):void} cb
+     * @public
+     */
+    ModifyClusterNodePool(req, cb) {
+        let resp = new ModifyClusterNodePoolResponse();
+        this.request("ModifyClusterNodePool", req, resp, cb);
+    }
+
+    /**
      * 集群弹性伸缩配置
      * @param {DescribeClusterAsGroupOptionRequest} req
      * @param {function(string, DescribeClusterAsGroupOptionResponse):void} cb
@@ -302,6 +371,17 @@ class TkeClient extends AbstractClient {
     DescribeClusterAsGroupOption(req, cb) {
         let resp = new DescribeClusterAsGroupOptionResponse();
         this.request("DescribeClusterAsGroupOption", req, resp, cb);
+    }
+
+    /**
+     * 将集群内节点移入节点池
+     * @param {AddNodeToNodePoolRequest} req
+     * @param {function(string, AddNodeToNodePoolResponse):void} cb
+     * @public
+     */
+    AddNodeToNodePool(req, cb) {
+        let resp = new AddNodeToNodePoolResponse();
+        this.request("AddNodeToNodePool", req, resp, cb);
     }
 
     /**
@@ -338,6 +418,17 @@ class TkeClient extends AbstractClient {
     }
 
     /**
+     * 创建节点池
+     * @param {CreateClusterNodePoolRequest} req
+     * @param {function(string, CreateClusterNodePoolResponse):void} cb
+     * @public
+     */
+    CreateClusterNodePool(req, cb) {
+        let resp = new CreateClusterNodePoolResponse();
+        this.request("CreateClusterNodePool", req, resp, cb);
+    }
+
+    /**
      * 创建集群访问端口(独立集群开启内网/外网访问，托管集群支持开启内网访问)
      * @param {CreateClusterEndpointRequest} req
      * @param {function(string, CreateClusterEndpointResponse):void} cb
@@ -346,6 +437,28 @@ class TkeClient extends AbstractClient {
     CreateClusterEndpoint(req, cb) {
         let resp = new CreateClusterEndpointResponse();
         this.request("CreateClusterEndpoint", req, resp, cb);
+    }
+
+    /**
+     * 从伸缩组创建节点池
+     * @param {CreateClusterNodePoolFromExistingAsgRequest} req
+     * @param {function(string, CreateClusterNodePoolFromExistingAsgResponse):void} cb
+     * @public
+     */
+    CreateClusterNodePoolFromExistingAsg(req, cb) {
+        let resp = new CreateClusterNodePoolFromExistingAsgResponse();
+        this.request("CreateClusterNodePoolFromExistingAsg", req, resp, cb);
+    }
+
+    /**
+     * 获取关联目标集群的实例列表
+     * @param {DescribePrometheusAgentInstancesRequest} req
+     * @param {function(string, DescribePrometheusAgentInstancesResponse):void} cb
+     * @public
+     */
+    DescribePrometheusAgentInstances(req, cb) {
+        let resp = new DescribePrometheusAgentInstancesResponse();
+        this.request("DescribePrometheusAgentInstances", req, resp, cb);
     }
 
     /**
@@ -415,6 +528,17 @@ class TkeClient extends AbstractClient {
     }
 
     /**
+     * 删除节点池
+     * @param {DeleteClusterNodePoolRequest} req
+     * @param {function(string, DeleteClusterNodePoolResponse):void} cb
+     * @public
+     */
+    DeleteClusterNodePool(req, cb) {
+        let resp = new DeleteClusterNodePoolResponse();
+        this.request("DeleteClusterNodePool", req, resp, cb);
+    }
+
+    /**
      * 删除托管集群外网访问端口（老的方式，仅支持托管集群外网端口）
      * @param {DeleteClusterEndpointVipRequest} req
      * @param {function(string, DeleteClusterEndpointVipResponse):void} cb
@@ -434,6 +558,17 @@ class TkeClient extends AbstractClient {
     DeleteClusterInstances(req, cb) {
         let resp = new DeleteClusterInstancesResponse();
         this.request("DeleteClusterInstances", req, resp, cb);
+    }
+
+    /**
+     * 查询节点池列表
+     * @param {DescribeClusterNodePoolsRequest} req
+     * @param {function(string, DescribeClusterNodePoolsResponse):void} cb
+     * @public
+     */
+    DescribeClusterNodePools(req, cb) {
+        let resp = new DescribeClusterNodePoolsResponse();
+        this.request("DescribeClusterNodePools", req, resp, cb);
     }
 
     /**

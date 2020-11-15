@@ -10165,7 +10165,7 @@ class CreateLiveTranscodeTemplateRequest extends  AbstractModel {
         this.AudioBitrate = null;
 
         /**
-         * 视频编码：h264/h265/origin，默认h264。
+         * 视频编码：h264/h265/origin，默认origin。
 
 origin: 保持原始编码格式
          * @type {string || null}
@@ -10598,7 +10598,7 @@ class ModifyLiveTranscodeTemplateRequest extends  AbstractModel {
         this.TemplateId = null;
 
         /**
-         * 视频编码：h264/h265/origin，默认h264。
+         * 视频编码：h264/h265/origin，默认origin。
 
 origin: 保持原始编码格式
          * @type {string || null}

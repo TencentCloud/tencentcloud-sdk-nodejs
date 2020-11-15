@@ -6472,6 +6472,12 @@ class Image extends  AbstractModel {
          */
         this.ImageSource = null;
 
+        /**
+         * 中间态和失败时候的任务ID
+         * @type {string || null}
+         */
+        this.TaskId = null;
+
     }
 
     /**
@@ -6501,6 +6507,7 @@ class Image extends  AbstractModel {
             this.SrcImage = obj;
         }
         this.ImageSource = 'ImageSource' in params ? params.ImageSource : null;
+        this.TaskId = 'TaskId' in params ? params.TaskId : null;
 
     }
 }

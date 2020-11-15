@@ -234,6 +234,18 @@ class CreateDBInstanceRequest extends  AbstractModel {
          */
         this.DeviceType = null;
 
+        /**
+         * 参数模板id。
+         * @type {number || null}
+         */
+        this.ParamTemplateId = null;
+
+        /**
+         * 告警策略id数组。
+         * @type {Array.<number> || null}
+         */
+        this.AlarmPolicyList = null;
+
     }
 
     /**
@@ -291,6 +303,8 @@ class CreateDBInstanceRequest extends  AbstractModel {
         this.DeployGroupId = 'DeployGroupId' in params ? params.DeployGroupId : null;
         this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
         this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
+        this.ParamTemplateId = 'ParamTemplateId' in params ? params.ParamTemplateId : null;
+        this.AlarmPolicyList = 'AlarmPolicyList' in params ? params.AlarmPolicyList : null;
 
     }
 }
@@ -959,6 +973,13 @@ class DescribeDBInstanceInfoResponse extends  AbstractModel {
         this.KeyRegion = null;
 
         /**
+         * 当前 CDB 后端服务使用的 KMS 服务的默认地域。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.DefaultKmsRegion = null;
+
+        /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
          * @type {string || null}
          */
@@ -978,6 +999,7 @@ class DescribeDBInstanceInfoResponse extends  AbstractModel {
         this.Encryption = 'Encryption' in params ? params.Encryption : null;
         this.KeyId = 'KeyId' in params ? params.KeyId : null;
         this.KeyRegion = 'KeyRegion' in params ? params.KeyRegion : null;
+        this.DefaultKmsRegion = 'DefaultKmsRegion' in params ? params.DefaultKmsRegion : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -4243,6 +4265,18 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
          */
         this.DeviceType = null;
 
+        /**
+         * 参数模板id。
+         * @type {number || null}
+         */
+        this.ParamTemplateId = null;
+
+        /**
+         * 告警策略id数组。
+         * @type {Array.<number> || null}
+         */
+        this.AlarmPolicyList = null;
+
     }
 
     /**
@@ -4299,6 +4333,8 @@ class CreateDBInstanceHourRequest extends  AbstractModel {
         this.DeployGroupId = 'DeployGroupId' in params ? params.DeployGroupId : null;
         this.ClientToken = 'ClientToken' in params ? params.ClientToken : null;
         this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
+        this.ParamTemplateId = 'ParamTemplateId' in params ? params.ParamTemplateId : null;
+        this.AlarmPolicyList = 'AlarmPolicyList' in params ? params.AlarmPolicyList : null;
 
     }
 }
@@ -7687,6 +7723,12 @@ class InquiryPriceUpgradeInstancesRequest extends  AbstractModel {
          */
         this.ProtectMode = null;
 
+        /**
+         * 部署策略，取值范围：HA-高可用版两节点，FE-金融版三节点；默认值根据数据复制方式决定，数据复制方式为强同步复制时默认值为FE，数据复制方式非强同步时默认值为HA。
+         * @type {string || null}
+         */
+        this.DeviceType = null;
+
     }
 
     /**
@@ -7701,6 +7743,7 @@ class InquiryPriceUpgradeInstancesRequest extends  AbstractModel {
         this.Volume = 'Volume' in params ? params.Volume : null;
         this.Cpu = 'Cpu' in params ? params.Cpu : null;
         this.ProtectMode = 'ProtectMode' in params ? params.ProtectMode : null;
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
 
     }
 }
@@ -8148,6 +8191,12 @@ class DescribeDBPriceRequest extends  AbstractModel {
          */
         this.ProtectMode = null;
 
+        /**
+         * 部署策略，取值范围：HA-高可用版两节点，FE-金融版三节点；默认值根据数据复制方式决定，数据复制方式为强同步复制时默认值为FE，数据复制方式非强同步时默认值为HA。
+         * @type {string || null}
+         */
+        this.DeviceType = null;
+
     }
 
     /**
@@ -8165,6 +8214,7 @@ class DescribeDBPriceRequest extends  AbstractModel {
         this.Period = 'Period' in params ? params.Period : null;
         this.InstanceRole = 'InstanceRole' in params ? params.InstanceRole : null;
         this.ProtectMode = 'ProtectMode' in params ? params.ProtectMode : null;
+        this.DeviceType = 'DeviceType' in params ? params.DeviceType : null;
 
     }
 }

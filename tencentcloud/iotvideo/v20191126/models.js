@@ -525,7 +525,19 @@ class CreateStorageServiceRequest extends  AbstractModel {
         super();
 
         /**
-         * 云存套餐ID
+         * 云存套餐ID：
+yc1m3d ： 全时3天存储月套餐。
+yc1m7d ： 全时7天存储月套餐。
+yc1m30d ：全时30天存储月套餐。
+yc1y3d ：全时3天存储年套餐。
+yc1y7d ：全时7天存储年套餐。
+yc1y30d ：全时30天存储年套餐。
+ye1m3d ：事件3天存储月套餐。
+ye1m7d ：事件7天存储月套餐。
+ye1m30d ：事件30天存储月套餐 。
+ye1y3d ：事件3天存储年套餐。
+ye1y7d ：事件7天存储年套餐。
+ye1y30d ：事件30天存储年套餐。
          * @type {string || null}
          */
         this.PkgId = null;
@@ -587,25 +599,19 @@ class CreateStorageServiceRequest extends  AbstractModel {
 }
 
 /**
- * DescribeDevices返回参数结构体
+ * DescribeOsList返回参数结构体
  * @class
  */
-class DescribeDevicesResponse extends  AbstractModel {
+class DescribeOsListResponse extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 设备信息 列表
+         * 系统类型
 注意：此字段可能返回 null，表示取不到有效值。
-         * @type {Array.<DevicesData> || null}
+         * @type {SystemType || null}
          */
         this.Data = null;
-
-        /**
-         * 设备总数
-         * @type {number || null}
-         */
-        this.TotalCount = null;
 
         /**
          * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -624,14 +630,10 @@ class DescribeDevicesResponse extends  AbstractModel {
         }
 
         if (params.Data) {
-            this.Data = new Array();
-            for (let z in params.Data) {
-                let obj = new DevicesData();
-                obj.deserialize(params.Data[z]);
-                this.Data.push(obj);
-            }
+            let obj = new SystemType();
+            obj.deserialize(params.Data)
+            this.Data = obj;
         }
-        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
@@ -1033,6 +1035,34 @@ class DeleteIotDataTypeRequest extends  AbstractModel {
 }
 
 /**
+ * ModifyVerContent返回参数结构体
+ * @class
+ */
+class ModifyVerContentResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
  * DescribeMessageQueue请求参数结构体
  * @class
  */
@@ -1206,6 +1236,43 @@ class DescribeProductsResponse extends  AbstractModel {
         }
         this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 操作系统信息
+ * @class
+ */
+class OsData extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 芯片型号
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ChipId = null;
+
+        /**
+         * 芯片厂商
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.ChipManufacture = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ChipId = 'ChipId' in params ? params.ChipId : null;
+        this.ChipManufacture = 'ChipManufacture' in params ? params.ChipManufacture : null;
 
     }
 }
@@ -2000,6 +2067,20 @@ Other-Overseas（其他境外地区）
          */
         this.ProductRegion = null;
 
+        /**
+         * 接入模型，bit0是0：公版小程序未接入，bit0是1：公版小程序已接入
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.AccessMode = null;
+
+        /**
+         * linux,android,liteos
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Os = null;
+
     }
 
     /**
@@ -2021,6 +2102,8 @@ Other-Overseas（其他境外地区）
         this.ChipId = 'ChipId' in params ? params.ChipId : null;
         this.ProductCate = 'ProductCate' in params ? params.ProductCate : null;
         this.ProductRegion = 'ProductRegion' in params ? params.ProductRegion : null;
+        this.AccessMode = 'AccessMode' in params ? params.AccessMode : null;
+        this.Os = 'Os' in params ? params.Os : null;
 
     }
 }
@@ -2151,6 +2234,12 @@ class CreateAppUsrRequest extends  AbstractModel {
          */
         this.CunionId = null;
 
+        /**
+         * 用于小程序关联手机号
+         * @type {string || null}
+         */
+        this.Mobile = null;
+
     }
 
     /**
@@ -2161,6 +2250,7 @@ class CreateAppUsrRequest extends  AbstractModel {
             return;
         }
         this.CunionId = 'CunionId' in params ? params.CunionId : null;
+        this.Mobile = 'Mobile' in params ? params.Mobile : null;
 
     }
 }
@@ -2896,6 +2986,18 @@ Other-Overseas（其他境外地区）
          */
         this.ProductCate = null;
 
+        /**
+         * 接入模型，bit0是0：公版小程序未接入，bit0是1：公版小程序已接入
+         * @type {number || null}
+         */
+        this.AccessMode = null;
+
+        /**
+         * Linux,Android,Liteos等系统
+         * @type {string || null}
+         */
+        this.Os = null;
+
     }
 
     /**
@@ -2913,6 +3015,77 @@ Other-Overseas（其他境外地区）
         this.ChipId = 'ChipId' in params ? params.ChipId : null;
         this.ProductRegion = 'ProductRegion' in params ? params.ProductRegion : null;
         this.ProductCate = 'ProductCate' in params ? params.ProductCate : null;
+        this.AccessMode = 'AccessMode' in params ? params.AccessMode : null;
+        this.Os = 'Os' in params ? params.Os : null;
+
+    }
+}
+
+/**
+ * 系统类型
+ * @class
+ */
+class SystemType extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 安卓系统
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<OsData> || null}
+         */
+        this.Android = null;
+
+        /**
+         * linux系统
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<OsData> || null}
+         */
+        this.Linux = null;
+
+        /**
+         * LiteOs系统
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<OsData> || null}
+         */
+        this.LiteOs = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Android) {
+            this.Android = new Array();
+            for (let z in params.Android) {
+                let obj = new OsData();
+                obj.deserialize(params.Android[z]);
+                this.Android.push(obj);
+            }
+        }
+
+        if (params.Linux) {
+            this.Linux = new Array();
+            for (let z in params.Linux) {
+                let obj = new OsData();
+                obj.deserialize(params.Linux[z]);
+                this.Linux.push(obj);
+            }
+        }
+
+        if (params.LiteOs) {
+            this.LiteOs = new Array();
+            for (let z in params.LiteOs) {
+                let obj = new OsData();
+                obj.deserialize(params.LiteOs[z]);
+                this.LiteOs.push(obj);
+            }
+        }
 
     }
 }
@@ -2977,6 +3150,12 @@ class RunTestOtaVersionRequest extends  AbstractModel {
          */
         this.Operator = null;
 
+        /**
+         * 备注信息
+         * @type {string || null}
+         */
+        this.Remark = null;
+
     }
 
     /**
@@ -2990,6 +3169,7 @@ class RunTestOtaVersionRequest extends  AbstractModel {
         this.OtaVersion = 'OtaVersion' in params ? params.OtaVersion : null;
         this.Tids = 'Tids' in params ? params.Tids : null;
         this.Operator = 'Operator' in params ? params.Operator : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
 
     }
 }
@@ -3059,6 +3239,51 @@ class SetMessageQueueResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * 版本发布的描述信息，需要国际化，可以为空
+ * @class
+ */
+class Contents extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 英文，长度不超过300个字符
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.En = null;
+
+        /**
+         * 中文简体，长度不超过300个字符
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Cn = null;
+
+        /**
+         * 中文繁体(Traditional Chinese)，长度不超过300个字符
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Tc = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.En = 'En' in params ? params.En : null;
+        this.Cn = 'Cn' in params ? params.Cn : null;
+        this.Tc = 'Tc' in params ? params.Tc : null;
 
     }
 }
@@ -3135,6 +3360,18 @@ class UploadOtaVersionRequest extends  AbstractModel {
          */
         this.Operator = null;
 
+        /**
+         * 备注信息
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 版本发布的描述信息，需要国际化，可以为空
+         * @type {Contents || null}
+         */
+        this.Contents = null;
+
     }
 
     /**
@@ -3150,6 +3387,13 @@ class UploadOtaVersionRequest extends  AbstractModel {
         this.FileSize = 'FileSize' in params ? params.FileSize : null;
         this.Md5 = 'Md5' in params ? params.Md5 : null;
         this.Operator = 'Operator' in params ? params.Operator : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+        if (params.Contents) {
+            let obj = new Contents();
+            obj.deserialize(params.Contents)
+            this.Contents = obj;
+        }
 
     }
 }
@@ -3234,6 +3478,118 @@ class CreateTraceIdsResponse extends  AbstractModel {
             return;
         }
         this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * DescribeDevices返回参数结构体
+ * @class
+ */
+class DescribeDevicesResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 设备信息 列表
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Array.<DevicesData> || null}
+         */
+        this.Data = null;
+
+        /**
+         * 设备总数
+         * @type {number || null}
+         */
+        this.TotalCount = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+        if (params.Data) {
+            this.Data = new Array();
+            for (let z in params.Data) {
+                let obj = new DevicesData();
+                obj.deserialize(params.Data[z]);
+                this.Data.push(obj);
+            }
+        }
+        this.TotalCount = 'TotalCount' in params ? params.TotalCount : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
+
+    }
+}
+
+/**
+ * ModifyVerContent请求参数结构体
+ * @class
+ */
+class ModifyVerContentRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 产品id,大于0的有符号长整型
+         * @type {number || null}
+         */
+        this.ProductId = null;
+
+        /**
+         * 需要修改的版本号
+         * @type {string || null}
+         */
+        this.OtaVersion = null;
+
+        /**
+         * 操作人,字符长度<=64
+         * @type {string || null}
+         */
+        this.Operator = null;
+
+        /**
+         * 备注信息
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 版本发布的描述信息，需要国际化，可以为空
+         * @type {Contents || null}
+         */
+        this.Contents = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.ProductId = 'ProductId' in params ? params.ProductId : null;
+        this.OtaVersion = 'OtaVersion' in params ? params.OtaVersion : null;
+        this.Operator = 'Operator' in params ? params.Operator : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+        if (params.Contents) {
+            let obj = new Contents();
+            obj.deserialize(params.Contents)
+            this.Contents = obj;
+        }
 
     }
 }
@@ -3397,6 +3753,18 @@ class RunOtaVersionRequest extends  AbstractModel {
          */
         this.Operator = null;
 
+        /**
+         * 备注信息
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 版本发布的描述信息，需要国际化，可以为空
+         * @type {Contents || null}
+         */
+        this.Contents = null;
+
     }
 
     /**
@@ -3411,6 +3779,13 @@ class RunOtaVersionRequest extends  AbstractModel {
         this.GrayValue = 'GrayValue' in params ? params.GrayValue : null;
         this.OldVersions = 'OldVersions' in params ? params.OldVersions : null;
         this.Operator = 'Operator' in params ? params.Operator : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+        if (params.Contents) {
+            let obj = new Contents();
+            obj.deserialize(params.Contents)
+            this.Contents = obj;
+        }
 
     }
 }
@@ -5498,6 +5873,27 @@ class DescribeMessageQueueResponse extends  AbstractModel {
 }
 
 /**
+ * DescribeOsList请求参数结构体
+ * @class
+ */
+class DescribeOsListRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+
+    }
+}
+
+/**
  * DescribeDevices请求参数结构体
  * @class
  */
@@ -5913,6 +6309,20 @@ class VersionData extends  AbstractModel {
          */
         this.ModifyTimes = null;
 
+        /**
+         * 备注信息
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {string || null}
+         */
+        this.Remark = null;
+
+        /**
+         * 版本发布的描述信息，需要国际化，可以为空
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {Contents || null}
+         */
+        this.Contents = null;
+
     }
 
     /**
@@ -5937,6 +6347,13 @@ class VersionData extends  AbstractModel {
         this.UpdateTime = 'UpdateTime' in params ? params.UpdateTime : null;
         this.UploadTime = 'UploadTime' in params ? params.UploadTime : null;
         this.ModifyTimes = 'ModifyTimes' in params ? params.ModifyTimes : null;
+        this.Remark = 'Remark' in params ? params.Remark : null;
+
+        if (params.Contents) {
+            let obj = new Contents();
+            obj.deserialize(params.Contents)
+            this.Contents = obj;
+        }
 
     }
 }
@@ -5955,7 +6372,7 @@ module.exports = {
     DeleteTraceIdsRequest: DeleteTraceIdsRequest,
     IotModelData: IotModelData,
     CreateStorageServiceRequest: CreateStorageServiceRequest,
-    DescribeDevicesResponse: DescribeDevicesResponse,
+    DescribeOsListResponse: DescribeOsListResponse,
     ModifyProductResponse: ModifyProductResponse,
     ModifyProductRequest: ModifyProductRequest,
     DisableDeviceStreamRequest: DisableDeviceStreamRequest,
@@ -5965,11 +6382,13 @@ module.exports = {
     CreateDevTokenRequest: CreateDevTokenRequest,
     DescribeStorageServiceResponse: DescribeStorageServiceResponse,
     DeleteIotDataTypeRequest: DeleteIotDataTypeRequest,
+    ModifyVerContentResponse: ModifyVerContentResponse,
     DescribeMessageQueueRequest: DescribeMessageQueueRequest,
     DeleteAppUsrResponse: DeleteAppUsrResponse,
     DescribeRegistrationStatusResponse: DescribeRegistrationStatusResponse,
     DescribeProductRequest: DescribeProductRequest,
     DescribeProductsResponse: DescribeProductsResponse,
+    OsData: OsData,
     DeviceCertificate: DeviceCertificate,
     UpgradeDeviceRequest: UpgradeDeviceRequest,
     LogData: LogData,
@@ -6009,15 +6428,19 @@ module.exports = {
     DisableOtaVersionResponse: DisableOtaVersionResponse,
     DescribeBindDevResponse: DescribeBindDevResponse,
     CreateProductRequest: CreateProductRequest,
+    SystemType: SystemType,
     RunTestOtaVersionResponse: RunTestOtaVersionResponse,
     RunTestOtaVersionRequest: RunTestOtaVersionRequest,
     DescribeDeviceResponse: DescribeDeviceResponse,
     SetMessageQueueResponse: SetMessageQueueResponse,
+    Contents: Contents,
     DeleteOtaVersionResponse: DeleteOtaVersionResponse,
     UploadOtaVersionRequest: UploadOtaVersionRequest,
     DescribeIotModelsRequest: DescribeIotModelsRequest,
     DescribeModelDataRetRequest: DescribeModelDataRetRequest,
     CreateTraceIdsResponse: CreateTraceIdsResponse,
+    DescribeDevicesResponse: DescribeDevicesResponse,
+    ModifyVerContentRequest: ModifyVerContentRequest,
     DeleteBindingRequest: DeleteBindingRequest,
     DescribeOtaVersionsResponse: DescribeOtaVersionsResponse,
     DeleteProductResponse: DeleteProductResponse,
@@ -6069,6 +6492,7 @@ module.exports = {
     DeleteAppUsrRequest: DeleteAppUsrRequest,
     DescribeIotModelsResponse: DescribeIotModelsResponse,
     DescribeMessageQueueResponse: DescribeMessageQueueResponse,
+    DescribeOsListRequest: DescribeOsListRequest,
     DescribeDevicesRequest: DescribeDevicesRequest,
     CreateIotDataTypeResponse: CreateIotDataTypeResponse,
     ModifyDevicePropertyResponse: ModifyDevicePropertyResponse,

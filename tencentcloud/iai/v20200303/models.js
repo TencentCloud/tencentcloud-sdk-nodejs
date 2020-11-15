@@ -3754,6 +3754,12 @@ class VerifyPersonRequest extends  AbstractModel {
         super();
 
         /**
+         * 待验证的人员ID。人员ID具体信息请参考人员库管理相关接口。
+         * @type {string || null}
+         */
+        this.PersonId = null;
+
+        /**
          * 图片 base64 数据。
 jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。
 若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
@@ -3773,12 +3779,6 @@ jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2
          * @type {string || null}
          */
         this.Url = null;
-
-        /**
-         * 待验证的人员ID。人员ID具体信息请参考人员库管理相关接口。
-         * @type {string || null}
-         */
-        this.PersonId = null;
 
         /**
          * 图片质量控制。 
@@ -3808,9 +3808,9 @@ jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2
         if (!params) {
             return;
         }
+        this.PersonId = 'PersonId' in params ? params.PersonId : null;
         this.Image = 'Image' in params ? params.Image : null;
         this.Url = 'Url' in params ? params.Url : null;
-        this.PersonId = 'PersonId' in params ? params.PersonId : null;
         this.QualityControl = 'QualityControl' in params ? params.QualityControl : null;
         this.NeedRotateDetection = 'NeedRotateDetection' in params ? params.NeedRotateDetection : null;
 

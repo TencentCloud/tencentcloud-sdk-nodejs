@@ -281,6 +281,88 @@ class UserDefineOcrTextReviewTemplateInfoForUpdate extends  AbstractModel {
 }
 
 /**
+ * 自定义转码的规格参数。用于覆盖模板中对应参数值。
+ * @class
+ */
+class OverrideTranscodeParameter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a。其中，mp3、flac、ogg、m4a 为纯音频文件。
+         * @type {string || null}
+         */
+        this.Container = null;
+
+        /**
+         * 是否去除视频数据，取值：
+<li>0：保留；</li>
+<li>1：去除。</li>
+         * @type {number || null}
+         */
+        this.RemoveVideo = null;
+
+        /**
+         * 是否去除音频数据，取值：
+<li>0：保留；</li>
+<li>1：去除。</li>
+         * @type {number || null}
+         */
+        this.RemoveAudio = null;
+
+        /**
+         * 视频流配置参数。
+         * @type {VideoTemplateInfoForUpdate || null}
+         */
+        this.VideoTemplate = null;
+
+        /**
+         * 音频流配置参数。
+         * @type {AudioTemplateInfoForUpdate || null}
+         */
+        this.AudioTemplate = null;
+
+        /**
+         * 极速高清转码参数。
+         * @type {TEHDConfigForUpdate || null}
+         */
+        this.TEHDConfig = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Container = 'Container' in params ? params.Container : null;
+        this.RemoveVideo = 'RemoveVideo' in params ? params.RemoveVideo : null;
+        this.RemoveAudio = 'RemoveAudio' in params ? params.RemoveAudio : null;
+
+        if (params.VideoTemplate) {
+            let obj = new VideoTemplateInfoForUpdate();
+            obj.deserialize(params.VideoTemplate)
+            this.VideoTemplate = obj;
+        }
+
+        if (params.AudioTemplate) {
+            let obj = new AudioTemplateInfoForUpdate();
+            obj.deserialize(params.AudioTemplate)
+            this.AudioTemplate = obj;
+        }
+
+        if (params.TEHDConfig) {
+            let obj = new TEHDConfigForUpdate();
+            obj.deserialize(params.TEHDConfig)
+            this.TEHDConfig = obj;
+        }
+
+    }
+}
+
+/**
  * 智能分类任务输入类型
  * @class
  */
@@ -1409,7 +1491,7 @@ class MediaInputInfo extends  AbstractModel {
         super();
 
         /**
-         * 输入来源对象的类型，现在仅支持 COS。
+         * 输入来源对象的类型，支持 COS 和 URL 两种。
          * @type {string || null}
          */
         this.Type = null;
@@ -1419,6 +1501,13 @@ class MediaInputInfo extends  AbstractModel {
          * @type {CosInputInfo || null}
          */
         this.CosInputInfo = null;
+
+        /**
+         * 当 Type 为 URL 时有效，则该项为必填，表示视频处理 URL 对象信息。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {UrlInputInfo || null}
+         */
+        this.UrlInputInfo = null;
 
     }
 
@@ -1435,6 +1524,12 @@ class MediaInputInfo extends  AbstractModel {
             let obj = new CosInputInfo();
             obj.deserialize(params.CosInputInfo)
             this.CosInputInfo = obj;
+        }
+
+        if (params.UrlInputInfo) {
+            let obj = new UrlInputInfo();
+            obj.deserialize(params.UrlInputInfo)
+            this.UrlInputInfo = obj;
         }
 
     }
@@ -2366,6 +2461,7 @@ class AudioTemplateInfoForUpdate extends  AbstractModel {
 <li>1：单通道</li>
 <li>2：双通道</li>
 <li>6：立体声</li>
+当媒体的封装格式是音频格式时（flac，ogg，mp3，m4a）时，声道数不允许设为立体声。
          * @type {number || null}
          */
         this.AudioChannel = null;
@@ -2663,6 +2759,7 @@ class AudioTemplateInfo extends  AbstractModel {
 <li>1：单通道</li>
 <li>2：双通道</li>
 <li>6：立体声</li>
+当媒体的封装格式是音频格式时（flac，ogg，mp3，m4a）时，声道数不允许设为立体声。
 默认值：2。
          * @type {number || null}
          */
@@ -5834,6 +5931,34 @@ PicUrlExpireTime 时间点后图片将被删除）。
 }
 
 /**
+ * 视频处理 URL 对象信息。
+ * @class
+ */
+class UrlInputInfo extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 视频的 URL。
+         * @type {string || null}
+         */
+        this.Url = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Url = 'Url' in params ? params.Url : null;
+
+    }
+}
+
+/**
  * DescribeAdaptiveDynamicStreamingTemplates请求参数结构体
  * @class
  */
@@ -6370,10 +6495,20 @@ class VideoTemplateInfo extends  AbstractModel {
          * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
 <li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
 <li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
+<li>white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。</li>
+<li>gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊填充。</li>
 默认值：black 。
          * @type {string || null}
          */
         this.FillType = null;
+
+        /**
+         * 视频恒定码率控制因子，取值范围为[1, 51]。
+如果指定该参数，将使用 CRF 的码率控制方式做转码（视频码率将不再生效）。
+如果没有特殊需求，不建议指定该参数。
+         * @type {number || null}
+         */
+        this.Vcrf = null;
 
     }
 
@@ -6392,6 +6527,7 @@ class VideoTemplateInfo extends  AbstractModel {
         this.Height = 'Height' in params ? params.Height : null;
         this.Gop = 'Gop' in params ? params.Gop : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
+        this.Vcrf = 'Vcrf' in params ? params.Vcrf : null;
 
     }
 }
@@ -12064,6 +12200,15 @@ class TranscodeTaskInput extends  AbstractModel {
         this.RawParameter = null;
 
         /**
+         * 视频转码自定义参数，当 Definition 不填 0 时有效。
+当填写了该结构中的部分转码参数时，将使用填写的参数覆盖转码模板中的参数。
+该参数用于高度定制场景，建议您仅使用 Definition 指定转码参数。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {OverrideTranscodeParameter || null}
+         */
+        this.OverrideParameter = null;
+
+        /**
          * 水印列表，支持多张图片或文字水印，最大可支持 10 张。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {Array.<WatermarkInput> || null}
@@ -12117,6 +12262,12 @@ class TranscodeTaskInput extends  AbstractModel {
             let obj = new RawTranscodeParameter();
             obj.deserialize(params.RawParameter)
             this.RawParameter = obj;
+        }
+
+        if (params.OverrideParameter) {
+            let obj = new OverrideTranscodeParameter();
+            obj.deserialize(params.OverrideParameter)
+            this.OverrideParameter = obj;
         }
 
         if (params.WatermarkSet) {
@@ -13620,18 +13771,21 @@ class WatermarkInput extends  AbstractModel {
         /**
          * 水印自定义参数，当 Definition 填 0 时有效。
 该参数用于高度定制场景，建议您优先使用 Definition 指定水印参数。
+水印自定义参数不支持截图打水印。
          * @type {RawWatermarkParameter || null}
          */
         this.RawParameter = null;
 
         /**
          * 文字内容，长度不超过100个字符。仅当水印类型为文字水印时填写。
+文字水印不支持截图打水印。
          * @type {string || null}
          */
         this.TextContent = null;
 
         /**
          * SVG 内容。长度不超过 2000000 个字符。仅当水印类型为 SVG 水印时填写。
+SVG 水印不支持截图打水印。
          * @type {string || null}
          */
         this.SvgContent = null;
@@ -14105,9 +14259,18 @@ class VideoTemplateInfoForUpdate extends  AbstractModel {
          * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
 <li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
 <li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
+<li>white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。</li>
+<li>gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊填充。</li>
          * @type {string || null}
          */
         this.FillType = null;
+
+        /**
+         * 视频恒定码率控制因子。取值范围为[0, 51]，填0表示禁用该参数。
+如果没有特殊需求，不建议指定该参数。
+         * @type {number || null}
+         */
+        this.Vcrf = null;
 
     }
 
@@ -14126,6 +14289,7 @@ class VideoTemplateInfoForUpdate extends  AbstractModel {
         this.Height = 'Height' in params ? params.Height : null;
         this.Gop = 'Gop' in params ? params.Gop : null;
         this.FillType = 'FillType' in params ? params.FillType : null;
+        this.Vcrf = 'Vcrf' in params ? params.Vcrf : null;
 
     }
 }
@@ -19835,6 +19999,7 @@ module.exports = {
     ModifyWatermarkTemplateRequest: ModifyWatermarkTemplateRequest,
     AiRecognitionTaskAsrFullTextSegmentItem: AiRecognitionTaskAsrFullTextSegmentItem,
     UserDefineOcrTextReviewTemplateInfoForUpdate: UserDefineOcrTextReviewTemplateInfoForUpdate,
+    OverrideTranscodeParameter: OverrideTranscodeParameter,
     AiAnalysisTaskClassificationInput: AiAnalysisTaskClassificationInput,
     SvgWatermarkInput: SvgWatermarkInput,
     WorkflowInfo: WorkflowInfo,
@@ -19940,6 +20105,7 @@ module.exports = {
     MediaProcessTaskImageSpriteResult: MediaProcessTaskImageSpriteResult,
     DescribeAdaptiveDynamicStreamingTemplatesResponse: DescribeAdaptiveDynamicStreamingTemplatesResponse,
     MediaContentReviewOcrTextSegmentItem: MediaContentReviewOcrTextSegmentItem,
+    UrlInputInfo: UrlInputInfo,
     DescribeAdaptiveDynamicStreamingTemplatesRequest: DescribeAdaptiveDynamicStreamingTemplatesRequest,
     ImageWatermarkInput: ImageWatermarkInput,
     AsrFullTextConfigureInfoForUpdate: AsrFullTextConfigureInfoForUpdate,

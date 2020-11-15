@@ -31,11 +31,11 @@ const DeleteRuleRequest = models.DeleteRuleRequest;
 const DisassociateTargetGroupsResponse = models.DisassociateTargetGroupsResponse;
 const SetLoadBalancerClsLogResponse = models.SetLoadBalancerClsLogResponse;
 const ModifyRuleRequest = models.ModifyRuleRequest;
-const DescribeClassicalLBByInstanceIdResponse = models.DescribeClassicalLBByInstanceIdResponse;
 const DescribeBlockIPListResponse = models.DescribeBlockIPListResponse;
 const DescribeRewriteRequest = models.DescribeRewriteRequest;
-const CreateRuleResponse = models.CreateRuleResponse;
+const DescribeTargetGroupInstancesRequest = models.DescribeTargetGroupInstancesRequest;
 const AssociateTargetGroupsRequest = models.AssociateTargetGroupsRequest;
+const ClustersZone = models.ClustersZone;
 const ClassicalTarget = models.ClassicalTarget;
 const RsWeightRule = models.RsWeightRule;
 const DeregisterTargetsFromClassicalLBRequest = models.DeregisterTargetsFromClassicalLBRequest;
@@ -44,8 +44,9 @@ const BasicTargetGroupInfo = models.BasicTargetGroupInfo;
 const ModifyTargetWeightResponse = models.ModifyTargetWeightResponse;
 const DescribeTaskStatusRequest = models.DescribeTaskStatusRequest;
 const TargetGroupInstance = models.TargetGroupInstance;
-const DescribeRewriteResponse = models.DescribeRewriteResponse;
-const DescribeTargetGroupInstancesRequest = models.DescribeTargetGroupInstancesRequest;
+const DescribeClassicalLBByInstanceIdResponse = models.DescribeClassicalLBByInstanceIdResponse;
+const CreateRuleResponse = models.CreateRuleResponse;
+const DescribeExclusiveClustersResponse = models.DescribeExclusiveClustersResponse;
 const RegisterTargetGroupInstancesResponse = models.RegisterTargetGroupInstancesResponse;
 const ClassicalTargetInfo = models.ClassicalTargetInfo;
 const DescribeTargetsRequest = models.DescribeTargetsRequest;
@@ -91,8 +92,10 @@ const TargetGroupBackend = models.TargetGroupBackend;
 const DescribeClassicalLBByInstanceIdRequest = models.DescribeClassicalLBByInstanceIdRequest;
 const ManualRewriteResponse = models.ManualRewriteResponse;
 const ModifyBlockIPListRequest = models.ModifyBlockIPListRequest;
+const DescribeClusterResourcesResponse = models.DescribeClusterResourcesResponse;
 const ModifyBlockIPListResponse = models.ModifyBlockIPListResponse;
-const ExclusiveCluster = models.ExclusiveCluster;
+const DescribeClusterResourcesRequest = models.DescribeClusterResourcesRequest;
+const ModifyDomainAttributesRequest = models.ModifyDomainAttributesRequest;
 const DescribeClassicalLBHealthStatusRequest = models.DescribeClassicalLBHealthStatusRequest;
 const ModifyDomainRequest = models.ModifyDomainRequest;
 const CreateClsLogSetResponse = models.CreateClsLogSetResponse;
@@ -122,6 +125,7 @@ const CreateListenerRequest = models.CreateListenerRequest;
 const CreateClsLogSetRequest = models.CreateClsLogSetRequest;
 const DisassociateTargetGroupsRequest = models.DisassociateTargetGroupsRequest;
 const Filter = models.Filter;
+const ClusterResource = models.ClusterResource;
 const ModifyDomainResponse = models.ModifyDomainResponse;
 const RegisterTargetsResponse = models.RegisterTargetsResponse;
 const DeregisterTargetsFromClassicalLBResponse = models.DeregisterTargetsFromClassicalLBResponse;
@@ -130,6 +134,7 @@ const DeleteLoadBalancerResponse = models.DeleteLoadBalancerResponse;
 const AutoRewriteResponse = models.AutoRewriteResponse;
 const DeregisterTargetsResponse = models.DeregisterTargetsResponse;
 const RewriteTarget = models.RewriteTarget;
+const Cluster = models.Cluster;
 const ModifyTargetWeightRequest = models.ModifyTargetWeightRequest;
 const DescribeLoadBalancersDetailResponse = models.DescribeLoadBalancersDetailResponse;
 const LoadBalancerDetail = models.LoadBalancerDetail;
@@ -143,12 +148,12 @@ const ReplaceCertForLoadBalancersRequest = models.ReplaceCertForLoadBalancersReq
 const DeleteRuleResponse = models.DeleteRuleResponse;
 const DescribeClsLogSetResponse = models.DescribeClsLogSetResponse;
 const ModifyTargetGroupAttributeRequest = models.ModifyTargetGroupAttributeRequest;
-const ModifyDomainAttributesRequest = models.ModifyDomainAttributesRequest;
+const ExclusiveCluster = models.ExclusiveCluster;
 const DeregisterTargetsRequest = models.DeregisterTargetsRequest;
 const InternetAccessible = models.InternetAccessible;
 const CreateLoadBalancerSnatIpsRequest = models.CreateLoadBalancerSnatIpsRequest;
 const ModifyTargetGroupInstancesWeightRequest = models.ModifyTargetGroupInstancesWeightRequest;
-const DescribeClassicalLBListenersRequest = models.DescribeClassicalLBListenersRequest;
+const DescribeQuotaResponse = models.DescribeQuotaResponse;
 const DeleteTargetGroupsResponse = models.DeleteTargetGroupsResponse;
 const ModifyTargetGroupInstancesPortRequest = models.ModifyTargetGroupInstancesPortRequest;
 const BatchRegisterTargetsRequest = models.BatchRegisterTargetsRequest;
@@ -158,10 +163,12 @@ const TagInfo = models.TagInfo;
 const SnatIp = models.SnatIp;
 const DescribeBlockIPTaskResponse = models.DescribeBlockIPTaskResponse;
 const DescribeClassicalLBListenersResponse = models.DescribeClassicalLBListenersResponse;
-const ModifyTargetGroupAttributeResponse = models.ModifyTargetGroupAttributeResponse;
+const DescribeExclusiveClustersRequest = models.DescribeExclusiveClustersRequest;
 const DescribeBlockIPTaskRequest = models.DescribeBlockIPTaskRequest;
 const CreateLoadBalancerResponse = models.CreateLoadBalancerResponse;
+const DescribeRewriteResponse = models.DescribeRewriteResponse;
 const Quota = models.Quota;
+const ModifyTargetGroupAttributeResponse = models.ModifyTargetGroupAttributeResponse;
 const DeleteLoadBalancerListenersResponse = models.DeleteLoadBalancerListenersResponse;
 const DescribeListenersRequest = models.DescribeListenersRequest;
 const DeleteLoadBalancerSnatIpsRequest = models.DeleteLoadBalancerSnatIpsRequest;
@@ -174,7 +181,7 @@ const DeleteListenerResponse = models.DeleteListenerResponse;
 const DeleteLoadBalancerSnatIpsResponse = models.DeleteLoadBalancerSnatIpsResponse;
 const CertificateOutput = models.CertificateOutput;
 const DeleteTargetGroupsRequest = models.DeleteTargetGroupsRequest;
-const DescribeQuotaResponse = models.DescribeQuotaResponse;
+const DescribeClassicalLBListenersRequest = models.DescribeClassicalLBListenersRequest;
 const TargetHealth = models.TargetHealth;
 const TargetGroupAssociation = models.TargetGroupAssociation;
 const ListenerHealth = models.ListenerHealth;
@@ -306,6 +313,17 @@ class ClbClient extends AbstractClient {
     CreateRule(req, cb) {
         let resp = new CreateRuleResponse();
         this.request("CreateRule", req, resp, cb);
+    }
+
+    /**
+     * 查询集群信息列表，支持以集群类型、集群唯一ID、集群名字、集群标签、集群内vip、集群内负载均衡唯一id、集群网络类型、可用区等条件进行检索
+     * @param {DescribeExclusiveClustersRequest} req
+     * @param {function(string, DescribeExclusiveClustersResponse):void} cb
+     * @public
+     */
+    DescribeExclusiveClusters(req, cb) {
+        let resp = new DescribeExclusiveClustersResponse();
+        this.request("DescribeExclusiveClusters", req, resp, cb);
     }
 
     /**
@@ -580,6 +598,18 @@ class ClbClient extends AbstractClient {
     }
 
     /**
+     * ModifyRule 接口用来修改负载均衡七层监听器下的转发规则的各项属性，包括转发路径、健康检查属性、转发策略等。
+本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
+     * @param {ModifyRuleRequest} req
+     * @param {function(string, ModifyRuleResponse):void} cb
+     * @public
+     */
+    ModifyRule(req, cb) {
+        let resp = new ModifyRuleResponse();
+        this.request("ModifyRule", req, resp, cb);
+    }
+
+    /**
      * 获取用户的clb专有日志集
      * @param {DescribeClsLogSetRequest} req
      * @param {function(string, DescribeClsLogSetResponse):void} cb
@@ -626,15 +656,14 @@ class ClbClient extends AbstractClient {
     }
 
     /**
-     * ModifyRule 接口用来修改负载均衡七层监听器下的转发规则的各项属性，包括转发路径、健康检查属性、转发策略等。
-本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
-     * @param {ModifyRuleRequest} req
-     * @param {function(string, ModifyRuleResponse):void} cb
+     * 查询独占集群中资源列表，支持按集群ID、vip、负载均衡ID、是否闲置为过滤条件检索
+     * @param {DescribeClusterResourcesRequest} req
+     * @param {function(string, DescribeClusterResourcesResponse):void} cb
      * @public
      */
-    ModifyRule(req, cb) {
-        let resp = new ModifyRuleResponse();
-        this.request("ModifyRule", req, resp, cb);
+    DescribeClusterResources(req, cb) {
+        let resp = new DescribeClusterResourcesResponse();
+        this.request("DescribeClusterResources", req, resp, cb);
     }
 
     /**

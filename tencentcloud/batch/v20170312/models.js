@@ -4964,7 +4964,7 @@ class Placement extends  AbstractModel {
         super();
 
         /**
-         * 实例所属的[可用区](https://cloud.tencent.com/document/product/213/15753#ZoneInfo)ID。该参数也可以通过调用  [DescribeZones](https://cloud.tencent.com/document/product/213/15707) 的返回值中的Zone字段来获取。
+         * 实例所属的可用区ID。该参数可以通过调用  [DescribeZones](https://cloud.tencent.com/document/product/213/15707) 的返回值中的Zone字段来获取。
          * @type {string || null}
          */
         this.Zone = null;
@@ -5154,7 +5154,7 @@ class ItemPrice extends  AbstractModel {
         this.DiscountPrice = null;
 
         /**
-         * 折扣，如20.0代表2折
+         * 折扣，如20.0代表2折。
 注意：此字段可能返回 null，表示取不到有效值。
          * @type {number || null}
          */
@@ -5195,6 +5195,78 @@ class ItemPrice extends  AbstractModel {
          */
         this.UnitPriceDiscountThirdStep = null;
 
+        /**
+         * 预支三年合计费用的原价，预付费模式使用，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.OriginalPriceThreeYear = null;
+
+        /**
+         * 预支三年合计费用的折扣价，预付费模式使用，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DiscountPriceThreeYear = null;
+
+        /**
+         * 预支三年应用的折扣，如20.0代表2折。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DiscountThreeYear = null;
+
+        /**
+         * 预支五年合计费用的原价，预付费模式使用，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.OriginalPriceFiveYear = null;
+
+        /**
+         * 预支五年合计费用的折扣价，预付费模式使用，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DiscountPriceFiveYear = null;
+
+        /**
+         * 预支五年应用的折扣，如20.0代表2折。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DiscountFiveYear = null;
+
+        /**
+         * 预支一年合计费用的原价，预付费模式使用，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.OriginalPriceOneYear = null;
+
+        /**
+         * 预支一年合计费用的折扣价，预付费模式使用，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DiscountPriceOneYear = null;
+
+        /**
+         * 预支一年应用的折扣，如20.0代表2折。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+         * @type {number || null}
+         */
+        this.DiscountOneYear = null;
+
     }
 
     /**
@@ -5214,6 +5286,15 @@ class ItemPrice extends  AbstractModel {
         this.UnitPriceDiscountSecondStep = 'UnitPriceDiscountSecondStep' in params ? params.UnitPriceDiscountSecondStep : null;
         this.UnitPriceThirdStep = 'UnitPriceThirdStep' in params ? params.UnitPriceThirdStep : null;
         this.UnitPriceDiscountThirdStep = 'UnitPriceDiscountThirdStep' in params ? params.UnitPriceDiscountThirdStep : null;
+        this.OriginalPriceThreeYear = 'OriginalPriceThreeYear' in params ? params.OriginalPriceThreeYear : null;
+        this.DiscountPriceThreeYear = 'DiscountPriceThreeYear' in params ? params.DiscountPriceThreeYear : null;
+        this.DiscountThreeYear = 'DiscountThreeYear' in params ? params.DiscountThreeYear : null;
+        this.OriginalPriceFiveYear = 'OriginalPriceFiveYear' in params ? params.OriginalPriceFiveYear : null;
+        this.DiscountPriceFiveYear = 'DiscountPriceFiveYear' in params ? params.DiscountPriceFiveYear : null;
+        this.DiscountFiveYear = 'DiscountFiveYear' in params ? params.DiscountFiveYear : null;
+        this.OriginalPriceOneYear = 'OriginalPriceOneYear' in params ? params.OriginalPriceOneYear : null;
+        this.DiscountPriceOneYear = 'DiscountPriceOneYear' in params ? params.DiscountPriceOneYear : null;
+        this.DiscountOneYear = 'DiscountOneYear' in params ? params.DiscountOneYear : null;
 
     }
 }

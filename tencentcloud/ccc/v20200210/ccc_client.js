@@ -18,10 +18,19 @@ const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const DescribeTelCdrRequest = models.DescribeTelCdrRequest;
 const DescribeTelCdrResponse = models.DescribeTelCdrResponse;
+const DescribeIMCdrsResponse = models.DescribeIMCdrsResponse;
+const DescribeChatMessagesRequest = models.DescribeChatMessagesRequest;
 const CreateSDKLoginTokenResponse = models.CreateSDKLoginTokenResponse;
-const TelCdrInfo = models.TelCdrInfo;
+const DescribeIMCdrsRequest = models.DescribeIMCdrsRequest;
+const MessageBody = models.MessageBody;
 const CreateSDKLoginTokenRequest = models.CreateSDKLoginTokenRequest;
+const CreateStaffResponse = models.CreateStaffResponse;
+const TelCdrInfo = models.TelCdrInfo;
 const SeatUserInfo = models.SeatUserInfo;
+const CreateStaffRequest = models.CreateStaffRequest;
+const DescribeChatMessagesResponse = models.DescribeChatMessagesResponse;
+const Message = models.Message;
+const IMCdrInfo = models.IMCdrInfo;
 
 
 /**
@@ -35,6 +44,39 @@ class CccClient extends AbstractClient {
     }
     
     /**
+     * 获取电话服务记录与录音
+     * @param {DescribeTelCdrRequest} req
+     * @param {function(string, DescribeTelCdrResponse):void} cb
+     * @public
+     */
+    DescribeTelCdr(req, cb) {
+        let resp = new DescribeTelCdrResponse();
+        this.request("DescribeTelCdr", req, resp, cb);
+    }
+
+    /**
+     * 包括具体聊天内容
+     * @param {DescribeChatMessagesRequest} req
+     * @param {function(string, DescribeChatMessagesResponse):void} cb
+     * @public
+     */
+    DescribeChatMessages(req, cb) {
+        let resp = new DescribeChatMessagesResponse();
+        this.request("DescribeChatMessages", req, resp, cb);
+    }
+
+    /**
+     * 包括全媒体和文本两种类型
+     * @param {DescribeIMCdrsRequest} req
+     * @param {function(string, DescribeIMCdrsResponse):void} cb
+     * @public
+     */
+    DescribeIMCdrs(req, cb) {
+        let resp = new DescribeIMCdrsResponse();
+        this.request("DescribeIMCdrs", req, resp, cb);
+    }
+
+    /**
      * 创建 SDK 登录 Token。
      * @param {CreateSDKLoginTokenRequest} req
      * @param {function(string, CreateSDKLoginTokenResponse):void} cb
@@ -46,14 +88,14 @@ class CccClient extends AbstractClient {
     }
 
     /**
-     * 获取电话服务记录与录音
-     * @param {DescribeTelCdrRequest} req
-     * @param {function(string, DescribeTelCdrResponse):void} cb
+     * 创建客服账号。
+     * @param {CreateStaffRequest} req
+     * @param {function(string, CreateStaffResponse):void} cb
      * @public
      */
-    DescribeTelCdr(req, cb) {
-        let resp = new DescribeTelCdrResponse();
-        this.request("DescribeTelCdr", req, resp, cb);
+    CreateStaff(req, cb) {
+        let resp = new CreateStaffResponse();
+        this.request("CreateStaff", req, resp, cb);
     }
 
 

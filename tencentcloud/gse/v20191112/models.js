@@ -2136,6 +2136,12 @@ class DescribeGameServerSessionQueuesRequest extends  AbstractModel {
          */
         this.Offset = null;
 
+        /**
+         * 资源过滤字段，可以按照资源名称、资源ID和标签进行过滤- 资源名称过滤    - Key: 固定字符串 "resource:name"    - Values: 资源名称数组（游戏服务器会话队列支持多个名称的过滤）- 标签过滤    - 通过标签键过滤        - Key: 固定字符串 "tag:key"        - Values 不传    - 通过标签键值过滤        - Key: 固定字符串 "tag:key-value"        - Values: 标签键值对数组，例如 ["key1:value1", "key1:value2", "key2:value2"]
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
     }
 
     /**
@@ -2148,6 +2154,15 @@ class DescribeGameServerSessionQueuesRequest extends  AbstractModel {
         this.Names = 'Names' in params ? params.Names : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -3195,6 +3210,12 @@ class DescribeAssetsRequest extends  AbstractModel {
          */
         this.Filter = null;
 
+        /**
+         * 资源过滤字段，可以按照资源名称、资源ID和标签进行过滤- 资源名称过滤    - Key: 固定字符串 "resource:name"    - Values: 资源名称数组（生成包当前仅支持单个名称的过滤）- 资源ID过滤    - Key: 固定字符串 "resource:resourceId"    - Values: 生成包ID数组（生成包当前仅支持单个生成包ID的过滤）- 标签过滤    - 通过标签键过滤        - Key: 固定字符串 "tag:key"        - Values 不传    - 通过标签键值过滤        - Key: 固定字符串 "tag:key-value"        - Values: 标签键值对数组，例如 ["key1:value1", "key1:value2", "key2:value2"]
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
     }
 
     /**
@@ -3208,6 +3229,15 @@ class DescribeAssetsRequest extends  AbstractModel {
         this.Offset = 'Offset' in params ? params.Offset : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Filter = 'Filter' in params ? params.Filter : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -4427,6 +4457,12 @@ class ListFleetsRequest extends  AbstractModel {
          */
         this.Offset = null;
 
+        /**
+         * 资源过滤字段，可以按照资源名称和标签进行过滤- 资源名称过滤    - Key: 固定字符串 "resource:name"    - Values: 资源名称数组（当前仅支持单个名称的过滤）- 标签过滤    - 通过标签键过滤        - Key: 固定字符串 "tag:key"        - Values 不传    - 通过标签键值过滤        - Key: 固定字符串 "tag:key-value"        - Values: 标签键值对数组，例如 ["key1:value1", "key1:value2", "key2:value2"]
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
     }
 
     /**
@@ -4439,6 +4475,15 @@ class ListFleetsRequest extends  AbstractModel {
         this.AssetId = 'AssetId' in params ? params.AssetId : null;
         this.Limit = 'Limit' in params ? params.Limit : null;
         this.Offset = 'Offset' in params ? params.Offset : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
 
     }
 }
@@ -5363,6 +5408,84 @@ class UpdateGameServerSessionRequest extends  AbstractModel {
 }
 
 /**
+ * ListAliases请求参数结构体
+ * @class
+ */
+class ListAliasesRequest extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 名字，长度不小于1字符不超过1024字符
+         * @type {string || null}
+         */
+        this.Name = null;
+
+        /**
+         * 路由策略类型，有效值常规别名(SIMPLE)、终止别名(TERMINAL)
+         * @type {string || null}
+         */
+        this.RoutingStrategyType = null;
+
+        /**
+         * 要返回的最大结果数，最小值1
+         * @type {number || null}
+         */
+        this.Limit = null;
+
+        /**
+         * 偏移，默认0
+         * @type {number || null}
+         */
+        this.Offset = null;
+
+        /**
+         * 排序字段，例如CreationTime
+         * @type {string || null}
+         */
+        this.OrderBy = null;
+
+        /**
+         * 排序方式，有效值asc|desc
+         * @type {string || null}
+         */
+        this.OrderWay = null;
+
+        /**
+         * 资源过滤字段，可以按照资源名称和标签进行过滤- 资源名称过滤    - Key: 固定字符串 "resource:name"    - Values: 资源名称数组（舰队当前仅支持单个名称的过滤）- 标签过滤    - 通过标签键过滤        - Key: 固定字符串 "tag:key"        - Values 不传    - 通过标签键值过滤        - Key: 固定字符串 "tag:key-value"        - Values: 标签键值对数组，例如 ["key1:value1", "key1:value2", "key2:value2"]
+         * @type {Array.<Filter> || null}
+         */
+        this.Filters = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Name = 'Name' in params ? params.Name : null;
+        this.RoutingStrategyType = 'RoutingStrategyType' in params ? params.RoutingStrategyType : null;
+        this.Limit = 'Limit' in params ? params.Limit : null;
+        this.Offset = 'Offset' in params ? params.Offset : null;
+        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
+        this.OrderWay = 'OrderWay' in params ? params.OrderWay : null;
+
+        if (params.Filters) {
+            this.Filters = new Array();
+            for (let z in params.Filters) {
+                let obj = new Filter();
+                obj.deserialize(params.Filters[z]);
+                this.Filters.push(obj);
+            }
+        }
+
+    }
+}
+
+/**
  * CreateAsset请求参数结构体
  * @class
  */
@@ -5401,7 +5524,7 @@ class CreateAssetRequest extends  AbstractModel {
         this.OperateSystem = null;
 
         /**
-         * 生成包支持的操作系统镜像id，若传入OperateSystem字段的值是CentOS7.16，则不需要传入该值；如果不是，则需要通过DescribeAssetSystems接口获取asset支持的操作系统ImageId进行传入
+         * 生成包支持的操作系统镜像id，若传入OperateSystem字段的值是CentOS7.16，则不需要传入该值；如果不是，则需要通过[DescribeAssetSystems](https://cloud.tencent.com/document/product/1165/49191)接口获取asset支持的操作系统ImageId进行传入
          * @type {string || null}
          */
         this.ImageId = null;
@@ -5962,6 +6085,41 @@ class CreateFleetResponse extends  AbstractModel {
 }
 
 /**
+ * 过滤字段内容
+ * @class
+ */
+class Filter extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 过滤属性的 key
+         * @type {string || null}
+         */
+        this.Key = null;
+
+        /**
+         * 过滤属性的 values 值
+         * @type {Array.<string> || null}
+         */
+        this.Values = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.Key = 'Key' in params ? params.Key : null;
+        this.Values = 'Values' in params ? params.Values : null;
+
+    }
+}
+
+/**
  * UpdateFleetAttributes返回参数结构体
  * @class
  */
@@ -6393,6 +6551,48 @@ class GameProperty extends  AbstractModel {
         }
         this.Key = 'Key' in params ? params.Key : null;
         this.Value = 'Value' in params ? params.Value : null;
+
+    }
+}
+
+/**
+ * CreateAssetWithImage返回参数结构体
+ * @class
+ */
+class CreateAssetWithImageResponse extends  AbstractModel {
+    constructor(){
+        super();
+
+        /**
+         * 生成包ID
+         * @type {string || null}
+         */
+        this.AssetId = null;
+
+        /**
+         * 生成包的全局唯一资源标识符
+         * @type {string || null}
+         */
+        this.AssetArn = null;
+
+        /**
+         * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+         * @type {string || null}
+         */
+        this.RequestId = null;
+
+    }
+
+    /**
+     * @private
+     */
+    deserialize(params) {
+        if (!params) {
+            return;
+        }
+        this.AssetId = 'AssetId' in params ? params.AssetId : null;
+        this.AssetArn = 'AssetArn' in params ? params.AssetArn : null;
+        this.RequestId = 'RequestId' in params ? params.RequestId : null;
 
     }
 }
@@ -7096,48 +7296,66 @@ class UpdateAssetResponse extends  AbstractModel {
 }
 
 /**
- * ListAliases请求参数结构体
+ * CreateAssetWithImage请求参数结构体
  * @class
  */
-class ListAliasesRequest extends  AbstractModel {
+class CreateAssetWithImageRequest extends  AbstractModel {
     constructor(){
         super();
 
         /**
-         * 名字，长度不小于1字符不超过1024字符
+         * 生成包名字，最小长度为1，最大长度为64
          * @type {string || null}
          */
-        this.Name = null;
+        this.AssetName = null;
 
         /**
-         * 路由策略类型，有效值常规别名(SIMPLE)、终止别名(TERMINAL)
+         * 生成包版本，最小长度为1，最大长度为64
          * @type {string || null}
          */
-        this.RoutingStrategyType = null;
+        this.AssetVersion = null;
 
         /**
-         * 要返回的最大结果数，最小值1
+         * 生成包所在地域，详见产品支持的 [地域列表](https://cloud.tencent.com/document/api/1165/42053#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8)
+         * @type {string || null}
+         */
+        this.AssetRegion = null;
+
+        /**
+         * 生成包支持的操作系统镜像id
+         * @type {string || null}
+         */
+        this.ImageId = null;
+
+        /**
+         * 操作系统镜像包大小，比如：40GB，支持单位 KB、MB、GB
+         * @type {string || null}
+         */
+        this.ImageSize = null;
+
+        /**
+         * 操作系统镜像包名称，最小长度为1，最大长度为64
+         * @type {string || null}
+         */
+        this.ImageOs = null;
+
+        /**
+         * 操作系统镜像包类型，CentOS 或者 Windows
+         * @type {string || null}
+         */
+        this.OsType = null;
+
+        /**
+         * 操作系统镜像包类型，当前只支持 SHARED_IMAGE
+         * @type {string || null}
+         */
+        this.ImageType = null;
+
+        /**
+         * 操作系统镜像包位数，32 或者 64
          * @type {number || null}
          */
-        this.Limit = null;
-
-        /**
-         * 偏移，默认0
-         * @type {number || null}
-         */
-        this.Offset = null;
-
-        /**
-         * 排序字段，例如CreationTime
-         * @type {string || null}
-         */
-        this.OrderBy = null;
-
-        /**
-         * 排序方式，有效值asc|desc
-         * @type {string || null}
-         */
-        this.OrderWay = null;
+        this.OsBit = null;
 
     }
 
@@ -7148,12 +7366,15 @@ class ListAliasesRequest extends  AbstractModel {
         if (!params) {
             return;
         }
-        this.Name = 'Name' in params ? params.Name : null;
-        this.RoutingStrategyType = 'RoutingStrategyType' in params ? params.RoutingStrategyType : null;
-        this.Limit = 'Limit' in params ? params.Limit : null;
-        this.Offset = 'Offset' in params ? params.Offset : null;
-        this.OrderBy = 'OrderBy' in params ? params.OrderBy : null;
-        this.OrderWay = 'OrderWay' in params ? params.OrderWay : null;
+        this.AssetName = 'AssetName' in params ? params.AssetName : null;
+        this.AssetVersion = 'AssetVersion' in params ? params.AssetVersion : null;
+        this.AssetRegion = 'AssetRegion' in params ? params.AssetRegion : null;
+        this.ImageId = 'ImageId' in params ? params.ImageId : null;
+        this.ImageSize = 'ImageSize' in params ? params.ImageSize : null;
+        this.ImageOs = 'ImageOs' in params ? params.ImageOs : null;
+        this.OsType = 'OsType' in params ? params.OsType : null;
+        this.ImageType = 'ImageType' in params ? params.ImageType : null;
+        this.OsBit = 'OsBit' in params ? params.OsBit : null;
 
     }
 }
@@ -8318,6 +8539,7 @@ module.exports = {
     DescribeAliasRequest: DescribeAliasRequest,
     CreateAliasRequest: CreateAliasRequest,
     UpdateGameServerSessionRequest: UpdateGameServerSessionRequest,
+    ListAliasesRequest: ListAliasesRequest,
     CreateAssetRequest: CreateAssetRequest,
     DescribeGameServerSessionDetailsResponse: DescribeGameServerSessionDetailsResponse,
     Credentials: Credentials,
@@ -8330,6 +8552,7 @@ module.exports = {
     InstanceCounts: InstanceCounts,
     UpdateFleetNameRequest: UpdateFleetNameRequest,
     CreateFleetResponse: CreateFleetResponse,
+    Filter: Filter,
     UpdateFleetAttributesResponse: UpdateFleetAttributesResponse,
     DescribeFleetUtilizationRequest: DescribeFleetUtilizationRequest,
     DescribeGameServerSessionDetailsRequest: DescribeGameServerSessionDetailsRequest,
@@ -8337,6 +8560,7 @@ module.exports = {
     PlayerLatencyPolicy: PlayerLatencyPolicy,
     UpdateRuntimeConfigurationRequest: UpdateRuntimeConfigurationRequest,
     GameProperty: GameProperty,
+    CreateAssetWithImageResponse: CreateAssetWithImageResponse,
     FleetStatisticTimes: FleetStatisticTimes,
     FleetStatisticFlows: FleetStatisticFlows,
     DescribeAssetRequest: DescribeAssetRequest,
@@ -8354,7 +8578,7 @@ module.exports = {
     DescribeUserQuotaResponse: DescribeUserQuotaResponse,
     DescribeFleetEventsRequest: DescribeFleetEventsRequest,
     UpdateAssetResponse: UpdateAssetResponse,
-    ListAliasesRequest: ListAliasesRequest,
+    CreateAssetWithImageRequest: CreateAssetWithImageRequest,
     PlayerSession: PlayerSession,
     PutScalingPolicyResponse: PutScalingPolicyResponse,
     CreateGameServerSessionQueueRequest: CreateGameServerSessionQueueRequest,

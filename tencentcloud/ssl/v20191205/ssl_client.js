@@ -17,10 +17,11 @@
 const models = require("./models");
 const AbstractClient = require('../../common/abstract_client')
 const ApplyCertificateResponse = models.ApplyCertificateResponse;
+const CompleteCertificateRequest = models.CompleteCertificateRequest;
 const DeleteCertificateRequest = models.DeleteCertificateRequest;
 const DescribeCertificateOperateLogsResponse = models.DescribeCertificateOperateLogsResponse;
 const CommitCertificateInformationRequest = models.CommitCertificateInformationRequest;
-const CommitCertificateInformationResponse = models.CommitCertificateInformationResponse;
+const DownloadCertificateResponse = models.DownloadCertificateResponse;
 const ReplaceCertificateResponse = models.ReplaceCertificateResponse;
 const DownloadCertificateRequest = models.DownloadCertificateRequest;
 const CancelCertificateOrderRequest = models.CancelCertificateOrderRequest;
@@ -30,27 +31,39 @@ const CertificateExtra = models.CertificateExtra;
 const DescribeCertificateResponse = models.DescribeCertificateResponse;
 const OperationLog = models.OperationLog;
 const UploadCertificateRequest = models.UploadCertificateRequest;
+const UploadConfirmLetterRequest = models.UploadConfirmLetterRequest;
 const DescribeCertificateDetailRequest = models.DescribeCertificateDetailRequest;
 const ApplyCertificateRequest = models.ApplyCertificateRequest;
 const ReplaceCertificateRequest = models.ReplaceCertificateRequest;
+const UploadRevokeLetterResponse = models.UploadRevokeLetterResponse;
+const CreateCertificateResponse = models.CreateCertificateResponse;
+const UploadRevokeLetterRequest = models.UploadRevokeLetterRequest;
 const DeleteCertificateResponse = models.DeleteCertificateResponse;
-const DvAuthDetail = models.DvAuthDetail;
+const RevokeCertificateResponse = models.RevokeCertificateResponse;
+const RevokeDomainValidateAuths = models.RevokeDomainValidateAuths;
+const DescribeCertificateDetailResponse = models.DescribeCertificateDetailResponse;
+const CheckCertificateChainResponse = models.CheckCertificateChainResponse;
 const ModifyCertificateProjectRequest = models.ModifyCertificateProjectRequest;
 const DvAuths = models.DvAuths;
 const ModifyCertificateAliasRequest = models.ModifyCertificateAliasRequest;
 const DescribeCertificateRequest = models.DescribeCertificateRequest;
+const DvAuthDetail = models.DvAuthDetail;
 const ProjectInfo = models.ProjectInfo;
 const DescribeCertificateOperateLogsRequest = models.DescribeCertificateOperateLogsRequest;
 const CancelCertificateOrderResponse = models.CancelCertificateOrderResponse;
-const SubmitCertificateInformationResponse = models.SubmitCertificateInformationResponse;
+const CreateCertificateRequest = models.CreateCertificateRequest;
 const DescribeCertificatesResponse = models.DescribeCertificatesResponse;
-const DownloadCertificateResponse = models.DownloadCertificateResponse;
+const CommitCertificateInformationResponse = models.CommitCertificateInformationResponse;
+const UploadConfirmLetterResponse = models.UploadConfirmLetterResponse;
 const UploadCertificateResponse = models.UploadCertificateResponse;
-const DescribeCertificateDetailResponse = models.DescribeCertificateDetailResponse;
+const CheckCertificateChainRequest = models.CheckCertificateChainRequest;
 const ModifyCertificateAliasResponse = models.ModifyCertificateAliasResponse;
 const SubmitCertificateInformationRequest = models.SubmitCertificateInformationRequest;
 const SubmittedData = models.SubmittedData;
 const DescribeCertificatesRequest = models.DescribeCertificatesRequest;
+const CompleteCertificateResponse = models.CompleteCertificateResponse;
+const SubmitCertificateInformationResponse = models.SubmitCertificateInformationResponse;
+const RevokeCertificateRequest = models.RevokeCertificateRequest;
 
 
 /**
@@ -75,6 +88,39 @@ class SslClient extends AbstractClient {
     }
 
     /**
+     * 本接口（UploadRevokeLetter）用于上传证书吊销确认函。
+     * @param {UploadRevokeLetterRequest} req
+     * @param {function(string, UploadRevokeLetterResponse):void} cb
+     * @public
+     */
+    UploadRevokeLetter(req, cb) {
+        let resp = new UploadRevokeLetterResponse();
+        this.request("UploadRevokeLetter", req, resp, cb);
+    }
+
+    /**
+     * 本接口（UploadConfirmLetter）用于上传证书确认函。
+     * @param {UploadConfirmLetterRequest} req
+     * @param {function(string, UploadConfirmLetterResponse):void} cb
+     * @public
+     */
+    UploadConfirmLetter(req, cb) {
+        let resp = new UploadConfirmLetterResponse();
+        this.request("UploadConfirmLetter", req, resp, cb);
+    }
+
+    /**
+     * 本接口（CreateCertificate）用于创建付费证书。
+     * @param {CreateCertificateRequest} req
+     * @param {function(string, CreateCertificateResponse):void} cb
+     * @public
+     */
+    CreateCertificate(req, cb) {
+        let resp = new CreateCertificateResponse();
+        this.request("CreateCertificate", req, resp, cb);
+    }
+
+    /**
      * 批量修改证书所属项目。
      * @param {ModifyCertificateProjectRequest} req
      * @param {function(string, ModifyCertificateProjectResponse):void} cb
@@ -83,17 +129,6 @@ class SslClient extends AbstractClient {
     ModifyCertificateProject(req, cb) {
         let resp = new ModifyCertificateProjectResponse();
         this.request("ModifyCertificateProject", req, resp, cb);
-    }
-
-    /**
-     * 本接口（UploadCertificate）用于上传证书。
-     * @param {UploadCertificateRequest} req
-     * @param {function(string, UploadCertificateResponse):void} cb
-     * @public
-     */
-    UploadCertificate(req, cb) {
-        let resp = new UploadCertificateResponse();
-        this.request("UploadCertificate", req, resp, cb);
     }
 
     /**
@@ -130,6 +165,28 @@ class SslClient extends AbstractClient {
     }
 
     /**
+     * 本接口（CompleteCertificate）用于主动触发证书验证。
+     * @param {CompleteCertificateRequest} req
+     * @param {function(string, CompleteCertificateResponse):void} cb
+     * @public
+     */
+    CompleteCertificate(req, cb) {
+        let resp = new CompleteCertificateResponse();
+        this.request("CompleteCertificate", req, resp, cb);
+    }
+
+    /**
+     * 本接口（UploadCertificate）用于上传证书。
+     * @param {UploadCertificateRequest} req
+     * @param {function(string, UploadCertificateResponse):void} cb
+     * @public
+     */
+    UploadCertificate(req, cb) {
+        let resp = new UploadCertificateResponse();
+        this.request("UploadCertificate", req, resp, cb);
+    }
+
+    /**
      * 用户传入证书id和备注来修改证书备注。
      * @param {ModifyCertificateAliasRequest} req
      * @param {function(string, ModifyCertificateAliasResponse):void} cb
@@ -163,6 +220,17 @@ class SslClient extends AbstractClient {
     }
 
     /**
+     * 本接口（CheckCertificateChain）用于检查证书链是否完整。
+     * @param {CheckCertificateChainRequest} req
+     * @param {function(string, CheckCertificateChainResponse):void} cb
+     * @public
+     */
+    CheckCertificateChain(req, cb) {
+        let resp = new CheckCertificateChainResponse();
+        this.request("CheckCertificateChain", req, resp, cb);
+    }
+
+    /**
      * 本接口（ApplyCertificate）用于免费证书申请。
      * @param {ApplyCertificateRequest} req
      * @param {function(string, ApplyCertificateResponse):void} cb
@@ -171,6 +239,17 @@ class SslClient extends AbstractClient {
     ApplyCertificate(req, cb) {
         let resp = new ApplyCertificateResponse();
         this.request("ApplyCertificate", req, resp, cb);
+    }
+
+    /**
+     * 本接口（RevokeCertificate）用于吊销证书。
+     * @param {RevokeCertificateRequest} req
+     * @param {function(string, RevokeCertificateResponse):void} cb
+     * @public
+     */
+    RevokeCertificate(req, cb) {
+        let resp = new RevokeCertificateResponse();
+        this.request("RevokeCertificate", req, resp, cb);
     }
 
     /**
