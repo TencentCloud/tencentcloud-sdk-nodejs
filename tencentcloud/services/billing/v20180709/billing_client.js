@@ -124,6 +124,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCostDetail", req, cb);
     }
     /**
+     * 获取COS产品用量明细
+     */
+    async DescribeDosageCosDetailByDate(req, cb) {
+        return this.request("DescribeDosageCosDetailByDate", req, cb);
+    }
+    /**
      * 支付订单
      */
     async PayDeals(req, cb) {

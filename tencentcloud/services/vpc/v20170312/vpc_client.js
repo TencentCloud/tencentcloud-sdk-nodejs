@@ -1462,6 +1462,12 @@ LimitTypes取值范围：
         return this.request("UnassignIpv6SubnetCidrBlock", req, cb);
     }
     /**
+     * 该接口用于获取ip地理位置库下载链接
+     */
+    async DescribeIpGeolocationDatabaseUrl(req, cb) {
+        return this.request("DescribeIpGeolocationDatabaseUrl", req, cb);
+    }
+    /**
      * 该接口用于修改IPV6地址访问internet的带宽
      */
     async ModifyIp6AddressesBandwidth(req, cb) {

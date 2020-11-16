@@ -20,7 +20,7 @@ export interface TagWithDelete {
  */
 export interface DetachResourcesTagRequest {
     /**
-      * 资源所属业务名称
+      * 资源所属业务名称（资源六段式中的第三段）
       */
     ServiceType: string;
     /**
@@ -32,11 +32,11 @@ export interface DetachResourcesTagRequest {
       */
     TagKey: string;
     /**
-      * 资源所在地域不区分地域的资源不需要传入该字段
+      * 资源所在地域，不区分地域的资源不需要传入该字段，区分地域的资源必填
       */
     ResourceRegion?: string;
     /**
-      * 资源前缀，cos存储桶不需要传入该字段
+      * 资源前缀（资源六段式中最后一段"/"前面的部分），cos存储桶不需要传入该字段，其他云资源必填
       */
     ResourcePrefix?: string;
 }
@@ -453,7 +453,7 @@ export interface DescribeResourceTagsByResourceIdsResponse {
  */
 export interface ModifyResourcesTagValueRequest {
     /**
-      * 资源所属业务名称
+      * 资源所属业务名称（资源六段式中的第三段）
       */
     ServiceType: string;
     /**
@@ -469,11 +469,11 @@ export interface ModifyResourcesTagValueRequest {
       */
     TagValue: string;
     /**
-      * 资源所在地域，不区分地域的资源不需要传入该字段
+      * 资源所在地域，不区分地域的资源不需要传入该字段，区分地域的资源必填
       */
     ResourceRegion?: string;
     /**
-      * 资源前缀，cos存储桶不需要传入该字段
+      * 资源前缀（资源六段式中最后一段"/"前面的部分），cos存储桶不需要传入该字段，其他云资源必填
       */
     ResourcePrefix?: string;
 }
@@ -694,7 +694,7 @@ export interface Tag {
  */
 export interface AttachResourcesTagRequest {
     /**
-      * 资源所属业务名称
+      * 资源所属业务名称（资源六段式中的第三段）
       */
     ServiceType: string;
     /**
@@ -710,11 +710,11 @@ export interface AttachResourcesTagRequest {
       */
     TagValue: string;
     /**
-      * 资源所在地域，不区分地域的资源不需要传入该字段
+      * 资源所在地域，不区分地域的资源不需要传入该字段，区分地域的资源必填
       */
     ResourceRegion?: string;
     /**
-      * 资源前缀，cos存储桶不需要传入该字段
+      * 资源前缀（资源六段式中最后一段"/"前面的部分），cos存储桶不需要传入该字段，其他云资源必填
       */
     ResourcePrefix?: string;
 }

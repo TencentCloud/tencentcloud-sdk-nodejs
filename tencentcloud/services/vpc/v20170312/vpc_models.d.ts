@@ -965,6 +965,19 @@ export interface ModifyFlowLogAttributeRequest {
     FlowLogDescription?: string;
 }
 /**
+ * 过滤器键值对
+ */
+export interface FilterObject {
+    /**
+      * 属性名称, 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
+      */
+    Name: string;
+    /**
+      * 属性值, 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
+      */
+    Values: Array<string>;
+}
+/**
  * AssociateNetworkAclSubnets返回参数结构体
  */
 export interface AssociateNetworkAclSubnetsResponse {
@@ -1244,6 +1257,23 @@ export interface DescribeDirectConnectGatewaysRequest {
  * ModifyIp6Translator返回参数结构体
  */
 export interface ModifyIp6TranslatorResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeIpGeolocationDatabaseUrl返回参数结构体
+ */
+export interface DescribeIpGeolocationDatabaseUrlResponse {
+    /**
+      * IP地址库下载链接地址
+      */
+    DownLoadUrl?: string;
+    /**
+      * 链接到期时间。按照`ISO8601`标准表示，并且使用`UTC`时间。
+      */
+    ExpiredAt?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1907,15 +1937,6 @@ export interface ResetNatGatewayConnectionRequest {
       * NAT网关并发连接上限，形如：1000000、3000000、10000000。
       */
     MaxConcurrentConnection: number;
-}
-/**
- * ReplaceDirectConnectGatewayCcnRoutes返回参数结构体
- */
-export interface ReplaceDirectConnectGatewayCcnRoutesResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * DeleteAddressTemplate请求参数结构体
@@ -3298,17 +3319,25 @@ export interface DescribeSecurityGroupLimitsResponse {
     RequestId?: string;
 }
 /**
- * 过滤器键值对
+ * 对端网关
  */
-export interface FilterObject {
+export interface CustomerGateway {
     /**
-      * 属性名称, 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
+      * 用户网关唯一ID
       */
-    Name: string;
+    CustomerGatewayId: string;
     /**
-      * 属性值, 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
+      * 网关名称
       */
-    Values: Array<string>;
+    CustomerGatewayName: string;
+    /**
+      * 公网地址
+      */
+    IpAddress: string;
+    /**
+      * 创建时间
+      */
+    CreatedTime: string;
 }
 /**
  * ModifyDirectConnectGatewayAttribute请求参数结构体
@@ -4317,6 +4346,15 @@ export interface RemoveIp6RulesRequest {
       * 待删除IPV6转换规则，形如rule6-xxxxxxxx
       */
     Ip6RuleIds: Array<string>;
+}
+/**
+ * DescribeIpGeolocationDatabaseUrl请求参数结构体
+ */
+export interface DescribeIpGeolocationDatabaseUrlRequest {
+    /**
+      * ip地址库协议类型，目前支持"ipv4"和"ipv6"。
+      */
+    Type: string;
 }
 /**
  * AddIp6Rules返回参数结构体
@@ -7698,25 +7736,21 @@ export interface EnableRoutesResponse {
     RequestId?: string;
 }
 /**
- * 对端网关
+ * MigratePrivateIpAddress请求参数结构体
  */
-export interface CustomerGateway {
+export interface MigratePrivateIpAddressRequest {
     /**
-      * 用户网关唯一ID
+      * 当内网IP绑定的弹性网卡实例ID，例如：eni-m6dyj72l。
       */
-    CustomerGatewayId: string;
+    SourceNetworkInterfaceId: string;
     /**
-      * 网关名称
+      * 待迁移的目的弹性网卡实例ID。
       */
-    CustomerGatewayName: string;
+    DestinationNetworkInterfaceId: string;
     /**
-      * 公网地址
+      * 迁移的内网IP地址，例如：10.0.0.6。
       */
-    IpAddress: string;
-    /**
-      * 创建时间
-      */
-    CreatedTime: string;
+    PrivateIpAddress: string;
 }
 /**
  * DescribeServiceTemplates请求参数结构体
@@ -8071,21 +8105,13 @@ VPN网关实例ID，形如，`vpn-ltjahce6`。
     Limit?: number;
 }
 /**
- * MigratePrivateIpAddress请求参数结构体
+ * ReplaceDirectConnectGatewayCcnRoutes返回参数结构体
  */
-export interface MigratePrivateIpAddressRequest {
+export interface ReplaceDirectConnectGatewayCcnRoutesResponse {
     /**
-      * 当内网IP绑定的弹性网卡实例ID，例如：eni-m6dyj72l。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    SourceNetworkInterfaceId: string;
-    /**
-      * 待迁移的目的弹性网卡实例ID。
-      */
-    DestinationNetworkInterfaceId: string;
-    /**
-      * 迁移的内网IP地址，例如：10.0.0.6。
-      */
-    PrivateIpAddress: string;
+    RequestId?: string;
 }
 /**
  * ModifySecurityGroupPolicies返回参数结构体

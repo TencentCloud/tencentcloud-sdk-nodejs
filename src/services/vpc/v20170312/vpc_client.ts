@@ -71,6 +71,7 @@ import {
   DisassociateNetworkInterfaceSecurityGroupsRequest,
   SecurityGroupPolicySet,
   ModifyFlowLogAttributeRequest,
+  FilterObject,
   AssociateNetworkAclSubnetsResponse,
   DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest,
   ResetRoutesRequest,
@@ -87,6 +88,7 @@ import {
   DescribeBandwidthPackagesResponse,
   DescribeDirectConnectGatewaysRequest,
   ModifyIp6TranslatorResponse,
+  DescribeIpGeolocationDatabaseUrlResponse,
   DeleteIp6TranslatorsResponse,
   DescribeVpcsRequest,
   DescribeRouteConflictsResponse,
@@ -128,7 +130,6 @@ import {
   DeleteAddressTemplateResponse,
   ModifySubnetAttributeResponse,
   ResetNatGatewayConnectionRequest,
-  ReplaceDirectConnectGatewayCcnRoutesResponse,
   DeleteAddressTemplateRequest,
   NetworkInterface,
   TransformAddressRequest,
@@ -201,7 +202,7 @@ import {
   DescribeGatewayFlowMonitorDetailRequest,
   InquiryPriceCreateVpnGatewayResponse,
   DescribeSecurityGroupLimitsResponse,
-  FilterObject,
+  CustomerGateway,
   ModifyDirectConnectGatewayAttributeRequest,
   ModifyBandwidthPackageAttributeResponse,
   DetachNetworkInterfaceResponse,
@@ -250,6 +251,7 @@ import {
   AssignIpv6CidrBlockResponse,
   CreateCcnRequest,
   RemoveIp6RulesRequest,
+  DescribeIpGeolocationDatabaseUrlRequest,
   AddIp6RulesResponse,
   DeleteVpnConnectionRequest,
   NetworkAclEntry,
@@ -444,7 +446,7 @@ import {
   ReplaceRoutesResponse,
   DirectConnectGatewayCcnRoute,
   EnableRoutesResponse,
-  CustomerGateway,
+  MigratePrivateIpAddressRequest,
   DescribeServiceTemplatesRequest,
   DeleteRouteTableRequest,
   CreateVpnGatewayRequest,
@@ -469,7 +471,7 @@ import {
   DescribeSecurityGroupsResponse,
   ModifyVpnGatewayCcnRoutesRequest,
   DescribeGatewayFlowQosRequest,
-  MigratePrivateIpAddressRequest,
+  ReplaceDirectConnectGatewayCcnRoutesResponse,
   ModifySecurityGroupPoliciesResponse,
   ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest,
   ServiceTemplateSpecification,
@@ -2830,6 +2832,16 @@ LimitTypes取值范围：
     cb?: (error: string, rep: UnassignIpv6SubnetCidrBlockResponse) => void
   ): Promise<UnassignIpv6SubnetCidrBlockResponse> {
     return this.request("UnassignIpv6SubnetCidrBlock", req, cb)
+  }
+
+  /**
+   * 该接口用于获取ip地理位置库下载链接
+   */
+  async DescribeIpGeolocationDatabaseUrl(
+    req: DescribeIpGeolocationDatabaseUrlRequest,
+    cb?: (error: string, rep: DescribeIpGeolocationDatabaseUrlResponse) => void
+  ): Promise<DescribeIpGeolocationDatabaseUrlResponse> {
+    return this.request("DescribeIpGeolocationDatabaseUrl", req, cb)
   }
 
   /**

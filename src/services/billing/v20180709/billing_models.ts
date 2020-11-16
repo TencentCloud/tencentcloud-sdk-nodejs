@@ -116,6 +116,16 @@ export interface DescribeCostSummaryByProductRequest {
 }
 
 /**
+ * 消耗汇总详情
+ */
+export interface ConsumptionSummaryTotal {
+  /**
+   * 折后总价
+   */
+  RealTotalCost: string
+}
+
+/**
  * DescribeCostSummaryByProject返回参数结构体
  */
 export interface DescribeCostSummaryByProjectResponse {
@@ -1196,6 +1206,31 @@ export interface DescribeBillListResponse {
   DeductAmount?: number
 
   /**
+   * 资金转入总额，单位（分）
+   */
+  AgentInAmount?: number
+
+  /**
+   * 垫付充值总额，单位（分）
+   */
+  AdvanceRechargeAmount?: number
+
+  /**
+   * 提现扣减总额，单位（分）
+   */
+  WithdrawAmount?: number
+
+  /**
+   * 资金转出总额，单位（分）
+   */
+  AgentOutAmount?: number
+
+  /**
+   * 还垫付总额，单位（分）
+   */
+  AdvancePayAmount?: number
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1522,6 +1557,21 @@ export interface ConsumptionRegionSummaryDataItem {
 }
 
 /**
+ * DescribeDosageCosDetailByDate返回参数结构体
+ */
+export interface DescribeDosageCosDetailByDateResponse {
+  /**
+   * 用量数组
+   */
+  DetailSets?: Array<CosDetailSets>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeBillResourceSummary返回参数结构体
  */
 export interface DescribeBillResourceSummaryResponse {
@@ -1688,6 +1738,31 @@ export interface DescribeBillResourceSummaryRequest {
    * 查询交易类型。如 按量计费日结，按量计费小时结 等
    */
   ActionType?: string
+}
+
+/**
+ * PayDeals请求参数结构体
+ */
+export interface PayDealsRequest {
+  /**
+   * 需要支付的一个或者多个子订单号，与BigDealIds字段两者必须且仅传一个参数
+   */
+  OrderIds?: Array<string>
+
+  /**
+   * 是否自动使用代金券,1:是,0否,默认0
+   */
+  AutoVoucher?: number
+
+  /**
+   * 代金券ID列表,目前仅支持指定一张代金券
+   */
+  VoucherIds?: Array<string>
+
+  /**
+   * 需要支付的一个或者多个大订单号，与OrderIds字段两者必须且仅传一个参数
+   */
+  BigDealIds?: Array<string>
 }
 
 /**
@@ -2214,13 +2289,43 @@ export interface ConditionProject {
 }
 
 /**
- * 消耗汇总详情
+ * cos产品用量明细返回数据结构
  */
-export interface ConsumptionSummaryTotal {
+export interface CosDetailSets {
   /**
-   * 折后总价
+   * 存储桶名称
    */
-  RealTotalCost: string
+  BucketName: string
+
+  /**
+   * 用量开始时间
+   */
+  DosageBeginTime: string
+
+  /**
+   * 用量结束时间
+   */
+  DosageEndTime: string
+
+  /**
+   * 一级产品类型名称
+   */
+  SubProductCodeName: string
+
+  /**
+   * 二级产品类型名称
+   */
+  BillingItemCodeName: string
+
+  /**
+   * 用量
+   */
+  DosageValue: string
+
+  /**
+   * 单位
+   */
+  Unit: string
 }
 
 /**
@@ -2347,28 +2452,23 @@ export interface DescribeCostDetailResponse {
 }
 
 /**
- * PayDeals请求参数结构体
+ * DescribeDosageCosDetailByDate请求参数结构体
  */
-export interface PayDealsRequest {
+export interface DescribeDosageCosDetailByDateRequest {
   /**
-   * 需要支付的一个或者多个子订单号，与BigDealIds字段两者必须且仅传一个参数
+   * 查询用量开始时间
    */
-  OrderIds?: Array<string>
+  StartDate: string
 
   /**
-   * 是否自动使用代金券,1:是,0否,默认0
+   * 查询用量结束时间（与开始时间同月，不支持跨月查询）
    */
-  AutoVoucher?: number
+  EndDate: string
 
   /**
-   * 代金券ID列表,目前仅支持指定一张代金券
+   * COS 存储桶名称，可通过Get Service 接口是用来获取请求者名下的所有存储空间列表（Bucket list）https://tcloud-dev.oa.com/document/product/555/30925?!preview&!document=1
    */
-  VoucherIds?: Array<string>
-
-  /**
-   * 需要支付的一个或者多个大订单号，与OrderIds字段两者必须且仅传一个参数
-   */
-  BigDealIds?: Array<string>
+  BucketName: string
 }
 
 /**

@@ -178,6 +178,16 @@ it("billing.v20180709.DescribeCostDetail", async function () {
     }
 })
 
+it("billing.v20180709.DescribeDosageCosDetailByDate", async function () {
+    try {
+       const data = await client.DescribeDosageCosDetailByDate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("billing.v20180709.PayDeals", async function () {
     try {
        const data = await client.PayDeals({})

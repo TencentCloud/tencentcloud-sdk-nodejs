@@ -364,6 +364,11 @@ export interface HealthCheckSetting {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Command?: Array<string>;
+    /**
+      * TSF_DEFAULT：tsf 默认就绪探针。K8S_NATIVE：k8s 原生探针。不填默认为 k8s 原生探针。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Type?: string;
 }
 /**
  * DescribeContainerGroups请求参数结构体
@@ -646,6 +651,31 @@ export interface VmGroup {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DeployDesc: string;
+    /**
+      * 滚动发布的更新方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdateType: number;
+    /**
+      * 发布是否启用beta批次
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeployBetaEnable: boolean;
+    /**
+      * 滚动发布的批次比例列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeployBatch: Array<number>;
+    /**
+      * 滚动发布的批次执行方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeployExeMode: string;
+    /**
+      * 滚动发布的每个批次的等待时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeployWaitTime: number;
 }
 /**
  * DescribeRepository返回参数结构体

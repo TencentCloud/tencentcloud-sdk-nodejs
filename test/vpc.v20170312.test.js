@@ -2108,6 +2108,16 @@ it("vpc.v20170312.UnassignIpv6SubnetCidrBlock", async function () {
     }
 })
 
+it("vpc.v20170312.DescribeIpGeolocationDatabaseUrl", async function () {
+    try {
+       const data = await client.DescribeIpGeolocationDatabaseUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.ModifyIp6AddressesBandwidth", async function () {
     try {
        const data = await client.ModifyIp6AddressesBandwidth({})

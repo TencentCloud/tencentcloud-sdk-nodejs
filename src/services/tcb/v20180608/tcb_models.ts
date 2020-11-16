@@ -796,6 +796,11 @@ export interface CreateStaticStoreRequest {
    * 环境ID
    */
   EnvId: string
+
+  /**
+   * 是否启用统一域名
+   */
+  EnableUnion?: boolean
 }
 
 /**

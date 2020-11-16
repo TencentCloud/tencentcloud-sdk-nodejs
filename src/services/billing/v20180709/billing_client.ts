@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   CostComponentSet,
   DescribeCostSummaryByProductRequest,
+  ConsumptionSummaryTotal,
   DescribeCostSummaryByProjectResponse,
   DescribeDosageDetailByDateRequest,
   ProjectSummaryOverviewItem,
@@ -55,11 +56,13 @@ import {
   DescribeBillSummaryByPayModeRequest,
   DescribeCostSummaryByProjectRequest,
   ConsumptionRegionSummaryDataItem,
+  DescribeDosageCosDetailByDateResponse,
   DescribeBillResourceSummaryResponse,
   ActionSummaryOverviewItem,
   ConditionPayMode,
   DescribeDealsByCondRequest,
   DescribeBillResourceSummaryRequest,
+  PayDealsRequest,
   DescribeBillListRequest,
   PayDealsResponse,
   BillDetail,
@@ -72,13 +75,13 @@ import {
   DescribeCostDetailRequest,
   DescribeDealsByCondResponse,
   ConditionProject,
-  ConsumptionSummaryTotal,
+  CosDetailSets,
   DescribeBillSummaryByProjectRequest,
   DescribeBillSummaryByProjectResponse,
   ConditionBusiness,
   DescribeCostSummaryByResourceRequest,
   DescribeCostDetailResponse,
-  PayDealsRequest,
+  DescribeDosageCosDetailByDateRequest,
   PayModeSummaryOverviewItem,
   BusinessSummaryTotal,
   DescribeCostSummaryByRegionResponse,
@@ -251,6 +254,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCostDetailResponse) => void
   ): Promise<DescribeCostDetailResponse> {
     return this.request("DescribeCostDetail", req, cb)
+  }
+
+  /**
+   * 获取COS产品用量明细
+   */
+  async DescribeDosageCosDetailByDate(
+    req: DescribeDosageCosDetailByDateRequest,
+    cb?: (error: string, rep: DescribeDosageCosDetailByDateResponse) => void
+  ): Promise<DescribeDosageCosDetailByDateResponse> {
+    return this.request("DescribeDosageCosDetailByDate", req, cb)
   }
 
   /**

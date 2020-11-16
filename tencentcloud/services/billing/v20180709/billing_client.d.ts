@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeCostSummaryByProductRequest, DescribeCostSummaryByProjectResponse, DescribeDosageDetailByDateRequest, DescribeBillSummaryByProductRequest, DescribeBillSummaryByPayModeResponse, DescribeBillSummaryByTagRequest, DescribeBillSummaryByProductResponse, DescribeBillSummaryByRegionResponse, DescribeAccountBalanceRequest, DescribeBillDetailRequest, DescribeCostSummaryByProductResponse, DescribeDosageDetailByDateResponse, DescribeBillListResponse, DescribeAccountBalanceResponse, DescribeCostSummaryByRegionRequest, DescribeBillSummaryByRegionRequest, DescribeBillSummaryByPayModeRequest, DescribeCostSummaryByProjectRequest, DescribeBillResourceSummaryResponse, DescribeDealsByCondRequest, DescribeBillResourceSummaryRequest, DescribeBillListRequest, PayDealsResponse, DescribeBillSummaryByTagResponse, DescribeCostSummaryByResourceResponse, DescribeBillDetailResponse, DescribeCostDetailRequest, DescribeDealsByCondResponse, DescribeBillSummaryByProjectRequest, DescribeBillSummaryByProjectResponse, DescribeCostSummaryByResourceRequest, DescribeCostDetailResponse, PayDealsRequest, DescribeCostSummaryByRegionResponse } from "./billing_models";
+import { DescribeCostSummaryByProductRequest, DescribeCostSummaryByProjectResponse, DescribeDosageDetailByDateRequest, DescribeBillSummaryByProductRequest, DescribeBillSummaryByPayModeResponse, DescribeBillSummaryByTagRequest, DescribeBillSummaryByProductResponse, DescribeBillSummaryByRegionResponse, DescribeAccountBalanceRequest, DescribeBillDetailRequest, DescribeCostSummaryByProductResponse, DescribeDosageDetailByDateResponse, DescribeBillListResponse, DescribeAccountBalanceResponse, DescribeCostSummaryByRegionRequest, DescribeBillSummaryByRegionRequest, DescribeBillSummaryByPayModeRequest, DescribeCostSummaryByProjectRequest, DescribeDosageCosDetailByDateResponse, DescribeBillResourceSummaryResponse, DescribeDealsByCondRequest, DescribeBillResourceSummaryRequest, PayDealsRequest, DescribeBillListRequest, PayDealsResponse, DescribeBillSummaryByTagResponse, DescribeCostSummaryByResourceResponse, DescribeBillDetailResponse, DescribeCostDetailRequest, DescribeDealsByCondResponse, DescribeBillSummaryByProjectRequest, DescribeBillSummaryByProjectResponse, DescribeCostSummaryByResourceRequest, DescribeCostDetailResponse, DescribeDosageCosDetailByDateRequest, DescribeCostSummaryByRegionResponse } from "./billing_models";
 /**
  * billing client
  * @class
@@ -71,6 +71,10 @@ export declare class Client extends AbstractClient {
      * 查询消耗明细
      */
     DescribeCostDetail(req: DescribeCostDetailRequest, cb?: (error: string, rep: DescribeCostDetailResponse) => void): Promise<DescribeCostDetailResponse>;
+    /**
+     * 获取COS产品用量明细
+     */
+    DescribeDosageCosDetailByDate(req: DescribeDosageCosDetailByDateRequest, cb?: (error: string, rep: DescribeDosageCosDetailByDateResponse) => void): Promise<DescribeDosageCosDetailByDateResponse>;
     /**
      * 支付订单
      */

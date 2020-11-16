@@ -2280,7 +2280,7 @@ export interface DBInstance {
       */
     RenewFlag: number;
     /**
-      * 实例高可用， 1-双机高可用，2-单机
+      * 实例高可用， 1-双机高可用，2-单机，3-跨可用区，4-集群跨可用区，5-集群，9-自研机房
       */
     Model: number;
     /**
@@ -2443,6 +2443,10 @@ export interface AccountDetail {
       * 该账户对相关db的读写权限信息
       */
     Dbs: Array<DBPrivilege>;
+    /**
+      * 是否为管理员账户
+      */
+    IsAdmin: boolean;
 }
 /**
  * CreateBasicDBInstances请求参数结构体
