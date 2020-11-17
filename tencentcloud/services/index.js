@@ -288,3 +288,5 @@ var yunjing_1 = require("./yunjing");
 Object.defineProperty(exports, "yunjing", { enumerable: true, get: function () { return yunjing_1.yunjing; } });
 var yunsou_1 = require("./yunsou");
 Object.defineProperty(exports, "yunsou", { enumerable: true, get: function () { return yunsou_1.yunsou; } });
+var zj_1 = require("./zj");
+Object.defineProperty(exports, "zj", { enumerable: true, get: function () { return zj_1.zj; } });

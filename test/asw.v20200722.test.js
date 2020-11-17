@@ -38,6 +38,16 @@ it("asw.v20200722.DescribeExecution", async function () {
     }
 })
 
+it("asw.v20200722.DescribeFlowServices", async function () {
+    try {
+       const data = await client.DescribeFlowServices({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("asw.v20200722.DescribeExecutions", async function () {
     try {
        const data = await client.DescribeExecutions({})

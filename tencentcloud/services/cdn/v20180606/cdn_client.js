@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("cdn.tencentcloudapi.com", "2018-06-06", clientConfig);
     }
     /**
+     * 动态打包任务提交接口
+     */
+    async CreateEdgePackTask(req, cb) {
+        return this.request("CreateEdgePackTask", req, cb);
+    }
+    /**
      * DescribeIpStatus 用于查询域名所在加速平台的边缘节点、回源节点明细。注意事项：边缘节点（edge）尚未全量开放，未在内测名单中的账号不支持调用
      */
     async DescribeIpStatus(req, cb) {

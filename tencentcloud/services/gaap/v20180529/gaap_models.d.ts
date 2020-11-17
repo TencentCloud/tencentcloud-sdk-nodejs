@@ -831,6 +831,10 @@ export interface CreateTCPListenersRequest {
       * 源站端口列表，该参数仅支持v1版本监听器和通道组监听器。
       */
     RealServerPorts?: Array<number>;
+    /**
+      * 监听器获取客户端 IP 的方式，0表示 TOA, 1表示Proxy Protocol
+      */
+    ClientIPMethod?: number;
 }
 /**
  * 证书详情，包括证书ID， 证书名字，证书类型，证书内容以及密钥内容。
@@ -1661,6 +1665,11 @@ lc表示最小连接数。
       * 监听器创建时间，Unix时间戳
       */
     CreateTime: number;
+    /**
+      * 监听器获取客户端 IP 的方式，0表示TOA, 1表示Proxy Protocol
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClientIPMethod: number;
 }
 /**
  * CreateSecurityRules返回参数结构体
@@ -2604,6 +2613,21 @@ export interface ProxyGroupDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TagSet: Array<TagPair>;
+    /**
+      * 安全策略ID，当设置了安全策略时，存在该字段。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PolicyId: string;
+    /**
+      * 通道组版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Version: string;
+    /**
+      * 通道获取客户端IP的方式，0表示TOA，1表示Proxy Protocol
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClientIPMethod: Array<number>;
 }
 /**
  * CreateHTTPListener请求参数结构体
@@ -4168,6 +4192,11 @@ UNKNOWN表示未知状态。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ProxyType: number;
+    /**
+      * 通道获取客户端IP的方式，0表示TOA，1表示Proxy Protocol
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClientIPMethod: Array<number>;
 }
 /**
  * RemoveRealServers返回参数结构体

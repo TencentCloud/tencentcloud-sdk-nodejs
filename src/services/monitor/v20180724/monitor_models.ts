@@ -746,6 +746,16 @@ export interface DeletePolicyGroupResponse {
 }
 
 /**
+ * DescribeMonitorTypes请求参数结构体
+ */
+export interface DescribeMonitorTypesRequest {
+  /**
+   * 固定值，为"monitor"
+   */
+  Module: string
+}
+
+/**
  * 维度信息
  */
 export interface DimensionsDesc {
@@ -1282,6 +1292,21 @@ export interface UpdateServiceDiscoveryResponse {
    * 更新成功之后，返回对应服务发现的信息
    */
   ServiceDiscovery?: ServiceDiscoveryItem
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeMonitorTypes返回参数结构体
+ */
+export interface DescribeMonitorTypesResponse {
+  /**
+   * 监控类型
+   */
+  MonitorTypes?: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

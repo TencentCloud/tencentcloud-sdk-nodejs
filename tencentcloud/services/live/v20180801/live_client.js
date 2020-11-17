@@ -276,6 +276,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddDelayLiveStream", req, cb);
     }
     /**
+     * 直播上行路数查询
+     */
+    async DescribeUploadStreamNums(req, cb) {
+        return this.request("DescribeUploadStreamNums", req, cb);
+    }
+    /**
      * 查询天维度每条流的播放数据，包括总流量等。
      */
     async DescribeStreamDayPlayInfoList(req, cb) {

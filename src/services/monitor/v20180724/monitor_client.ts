@@ -46,6 +46,7 @@ import {
   DescribePolicyConditionListRequest,
   DescribeBindingPolicyObjectListInstance,
   DeletePolicyGroupResponse,
+  DescribeMonitorTypesRequest,
   DimensionsDesc,
   ServiceDiscoveryItem,
   CreateServiceDiscoveryRequest,
@@ -68,6 +69,7 @@ import {
   Instance,
   BindingPolicyObjectDimension,
   UpdateServiceDiscoveryResponse,
+  DescribeMonitorTypesResponse,
   Dimension,
   DescribeBasicAlarmListAlarms,
   UpdateServiceDiscoveryRequest,
@@ -341,6 +343,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateServiceDiscoveryResponse) => void
   ): Promise<UpdateServiceDiscoveryResponse> {
     return this.request("UpdateServiceDiscovery", req, cb)
+  }
+
+  /**
+   * 云监控支持多种类型的监控，此接口列出支持的所有类型
+   */
+  async DescribeMonitorTypes(
+    req: DescribeMonitorTypesRequest,
+    cb?: (error: string, rep: DescribeMonitorTypesResponse) => void
+  ): Promise<DescribeMonitorTypesResponse> {
+    return this.request("DescribeMonitorTypes", req, cb)
   }
 
   /**

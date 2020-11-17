@@ -46,6 +46,93 @@ export interface DescribeExecutionsRequest {
 }
 
 /**
+ * DescribeFlowServices返回参数结构体
+ */
+export interface DescribeFlowServicesResponse {
+  /**
+   * 用户的状态机列表
+   */
+  FlowServiceSet?: Array<StateMachine>
+
+  /**
+   * 用户的状态机总数
+   */
+  TotalCount?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 状态机
+ */
+export interface StateMachine {
+  /**
+   * 状态机资源
+   */
+  FlowServiceResource: string
+
+  /**
+   * 状态机类型。EXPRESS，STANDARD
+   */
+  Type: string
+
+  /**
+   * 状态机名称
+   */
+  FlowServiceName: string
+
+  /**
+   * 状态机中文名
+   */
+  FlowServiceChineseName: string
+
+  /**
+   * 创建时间。timestamp
+   */
+  CreateDate: string
+
+  /**
+   * 修改时间。timestamp
+   */
+  ModifyDate: string
+
+  /**
+   * 状态机状态
+   */
+  Status: string
+
+  /**
+      * 创建者的subAccountUin
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Creator: string
+
+  /**
+      * 修改者的subAccountUin
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Modifier: string
+
+  /**
+   * 状态机id
+   */
+  FlowServiceId: string
+
+  /**
+   * 模板id
+   */
+  TemplateId: string
+
+  /**
+   * 备注
+   */
+  Description: string
+}
+
+/**
  * DescribeExecution返回参数结构体
  */
 export interface DescribeExecutionResponse {
@@ -103,23 +190,23 @@ export interface DescribeExecutionResponse {
 }
 
 /**
- * StartExecution返回参数结构体
+ * DescribeFlowServices请求参数结构体
  */
-export interface StartExecutionResponse {
+export interface DescribeFlowServicesRequest {
   /**
-   * 执行资源名
+   * 偏移量，默认为0。
    */
-  ExecutionResourceName?: string
+  Offset?: number
 
   /**
-   * 执行开始时间
+   * 返回数量，默认为20，最大值为100。
    */
-  StartDate?: string
+  Limit?: number
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 过滤条件，详见下表：实例过滤条件表。每次请求的Filter.Values的上限为5。参数名字仅支持FlowServiceName， Status, Type三种情况
    */
-  RequestId?: string
+  Filters?: Array<Filter>
 }
 
 /**
@@ -207,6 +294,21 @@ export interface CreateFlowServiceResponse {
 }
 
 /**
+ * 模版过滤类型
+ */
+export interface Filter {
+  /**
+   * 过滤器名字
+   */
+  Name?: string
+
+  /**
+   * 过滤器值的数组
+   */
+  Values?: Array<string>
+}
+
+/**
  * StartExecution请求参数结构体
  */
 export interface StartExecutionRequest {
@@ -239,6 +341,26 @@ export interface ModifyFlowServiceResponse {
    * 更新时间
    */
   UpdateDate?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * StartExecution返回参数结构体
+ */
+export interface StartExecutionResponse {
+  /**
+   * 执行资源名
+   */
+  ExecutionResourceName?: string
+
+  /**
+   * 执行开始时间
+   */
+  StartDate?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

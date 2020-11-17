@@ -484,18 +484,18 @@ export interface PushAuthKeyInfo {
 }
 
 /**
- * 多个域名信息列表
+ * DescribeUploadStreamNums返回参数结构体
  */
-export interface DomainInfoList {
+export interface DescribeUploadStreamNumsResponse {
   /**
-   * 域名。
+   * 明细数据信息
    */
-  Domain: string
+  DataInfoList?: Array<ConcurrentRecordStreamNum>
 
   /**
-   * 明细信息。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  DetailInfoList: Array<DomainDetailInfo>
+  RequestId?: string
 }
 
 /**
@@ -1213,6 +1213,34 @@ export interface CommonMixOutputParams {
    * 输出流中的sei信息。如果无特殊需要，不填。
    */
   MixSei?: string
+}
+
+/**
+ * DescribeUploadStreamNums请求参数结构体
+ */
+export interface DescribeUploadStreamNumsRequest {
+  /**
+   * 起始时间点，格式为yyyy-mm-dd HH:MM:SS。
+   */
+  StartTime: string
+
+  /**
+   * 结束时间点，格式为yyyy-mm-dd HH:MM:SS，起始和结束时间跨度不支持超过31天。支持最近31天的数据查询
+   */
+  EndTime: string
+
+  /**
+   * 直播域名，若不填，表示总体数据。
+   */
+  Domains?: Array<string>
+
+  /**
+      * 数据粒度，支持如下粒度：
+5：5分钟粒度，（跨度不支持超过1天），
+1440：天粒度（跨度不支持超过一个月）。
+默认值：5。
+      */
+  Granularity?: number
 }
 
 /**
@@ -3640,6 +3668,21 @@ export interface DescribeStreamPushInfoListRequest {
    * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
    */
   AppName?: string
+}
+
+/**
+ * 多个域名信息列表
+ */
+export interface DomainInfoList {
+  /**
+   * 域名。
+   */
+  Domain: string
+
+  /**
+   * 明细信息。
+   */
+  DetailInfoList: Array<DomainDetailInfo>
 }
 
 /**

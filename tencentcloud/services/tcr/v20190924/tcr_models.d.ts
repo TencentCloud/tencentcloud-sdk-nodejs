@@ -945,6 +945,15 @@ export interface CreateNamespacePersonalResponse {
     RequestId?: string;
 }
 /**
+ * DeleteInstance返回参数结构体
+ */
+export interface DeleteInstanceResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteImageLifecycleGlobalPersonal请求参数结构体
  */
 export declare type DeleteImageLifecycleGlobalPersonalRequest = null;
@@ -1852,6 +1861,19 @@ export interface ModifyApplicationTriggerPersonalResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DeleteInstance请求参数结构体
+ */
+export interface DeleteInstanceRequest {
+    /**
+      * 实例id
+      */
+    RegistryId: string;
+    /**
+      * 是否删除存储桶，默认为false
+      */
+    DeleteBucket?: boolean;
 }
 /**
  * DescribeImageManifests返回参数结构体

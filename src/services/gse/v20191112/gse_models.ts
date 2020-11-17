@@ -241,6 +241,16 @@ export interface Asset {
    * 生成包支持的操作系统类型
    */
   OsType: string
+
+  /**
+   * 生成包资源类型，ASSET 或者 IMAGE；ASSET 代表是原有生成包类型，IMAGE 为扩充使用镜像类型
+   */
+  ResourceType: string
+
+  /**
+   * 镜像资源共享类型，当 ResourceType 为 IMAGE 时该字段有意义，SHARED 表示共享、SHARED_IMAGE 表示未共享；ResourceType 为 ASSET 时这里返回 UNKNOWN_SHARED 用于占位
+   */
+  SharingStatus: string
 }
 
 /**

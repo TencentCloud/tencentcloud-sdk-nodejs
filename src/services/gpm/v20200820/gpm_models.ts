@@ -42,7 +42,7 @@ export interface DescribeDataResponse {
  */
 export interface DescribeMatchCodesRequest {
   /**
-   * 偏移量
+   * 偏移量，页码
    */
   Offset: number
 
@@ -97,7 +97,7 @@ export interface ModifyMatchRequest {
   MatchDesc?: string
 
   /**
-   * 只支持https协议
+   * 只支持 http 和 https 协议
    */
   NotifyUrl?: string
 
@@ -187,7 +187,7 @@ export interface CreateMatchRequest {
   MatchDesc?: string
 
   /**
-   * 只支持https协议
+   * 只支持https 和 http 协议
    */
   NotifyUrl?: string
 
@@ -508,7 +508,7 @@ export interface MatchInfo {
   RuleName: string
 
   /**
-      * 日志状态，0表示正常，1表示日志集不存在，2表示日志主题不存在，3表示日志集和日志主题都不存在
+      * 日志状态，0表示正常，1表示日志集不存在，2表示日志主题不存在，3表示日志集和日志主题都不存在。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LogStatus?: number
@@ -602,7 +602,7 @@ export interface ModifyRuleRequest {
   RuleCode: string
 
   /**
-   * 规则名称
+   * 规则名称，只能包含数字、字母、. 和 -
    */
   RuleName: string
 
@@ -1176,7 +1176,7 @@ export interface StartMatchingRequest {
   Players: Array<Player>
 
   /**
-   * 请求 Id 默认 "" 为空则由 GPM 自动生成 长度 128。
+   * 请求 Id 默认空字符串，为空则由 GPM 自动生成 长度 128，只能包含数字、字母、. 和 -
    */
   MatchTicketId?: string
 }

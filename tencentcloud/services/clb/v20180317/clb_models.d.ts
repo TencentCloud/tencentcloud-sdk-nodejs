@@ -197,6 +197,14 @@ OPEN：公网属性， INTERNAL：内网属性。
       */
     ClientToken?: string;
     /**
+      * 是否支持绑定跨地域/跨Vpc绑定IP的功能。
+      */
+    SnatPro?: boolean;
+    /**
+      * 开启绑定跨地域/跨Vpc绑定IP的功能后，创建SnatIp。
+      */
+    SnatIps?: Array<SnatIp>;
+    /**
       * Stgw独占集群的标签。
       */
     ClusterTag?: string;

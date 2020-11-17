@@ -58,6 +58,11 @@ export interface DescribeDBSpaceStatusRequest {
    * 时间段天数，截止日期为当日，默认为7天。
    */
   RangeDays?: number
+
+  /**
+   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
+   */
+  Product?: string
 }
 
 /**
@@ -185,6 +190,11 @@ export interface DescribeTopSpaceTablesRequest {
    * 筛选Top表所用的排序字段，可选字段包含DataLength、IndexLength、TotalLength、DataFree、FragRatio、TableRows、PhysicalFileSize，默认为 PhysicalFileSize。
    */
   SortBy?: string
+
+  /**
+   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
+   */
+  Product?: string
 }
 
 /**
@@ -205,6 +215,11 @@ export interface DescribeSlowLogTimeSeriesStatsRequest {
    * 结束时间，如“2019-09-10 12:13:14”，结束时间与开始时间的间隔最大可为7天。
    */
   EndTime: string
+
+  /**
+   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
+   */
+  Product?: string
 }
 
 /**
@@ -220,6 +235,11 @@ export interface DescribeDBDiagEventRequest {
    * 事件 ID 。通过“获取实例诊断历史DescribeDBDiagHistory”获取。
    */
   EventId?: number
+
+  /**
+   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
+   */
+  Product?: string
 }
 
 /**
@@ -336,6 +356,11 @@ export interface DescribeDBDiagHistoryRequest {
    * 结束时间，如“2019-09-11 12:13:14”，结束时间与开始时间的间隔最大可为2天。
    */
   EndTime: string
+
+  /**
+   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
+   */
+  Product?: string
 }
 
 /**
@@ -366,6 +391,11 @@ export interface DescribeTopSpaceTableTimeSeriesRequest {
    * 截止日期，最早为当日的前第29天，默认为当日。
    */
   EndDate?: string
+
+  /**
+   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
+   */
+  Product?: string
 }
 
 /**
@@ -604,6 +634,11 @@ export interface DescribeSlowLogTopSqlsRequest {
    * 数据库名称数组。
    */
   SchemaList?: Array<SchemaItem>
+
+  /**
+   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
+   */
+  Product?: string
 }
 
 /**

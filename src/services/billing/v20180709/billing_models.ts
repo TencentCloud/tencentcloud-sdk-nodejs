@@ -85,17 +85,12 @@ export interface CostComponentSet {
  */
 export interface DescribeCostSummaryByProductRequest {
   /**
-   * 查询账单数据的用户UIN
-   */
-  PayerUin: string
-
-  /**
-   * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09-03 03:01:45，EndTime 为 2018-09-25 12:01:45，查询结果是 2018 年 9 月数据。
+   * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
    */
   BeginTime: string
 
   /**
-   * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09-03 03:01:45，EndTime 为 2018-09-25 12:01:45，查询结果是 2018 年 9 月数据。
+   * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
    */
   EndTime: string
 
@@ -108,6 +103,11 @@ export interface DescribeCostSummaryByProductRequest {
    * 偏移量
    */
   Offset: number
+
+  /**
+   * 查询账单数据的用户UIN
+   */
+  PayerUin?: string
 
   /**
    * 是否需要返回记录数量，0不需要，1需要，默认不需要
@@ -271,19 +271,19 @@ export interface ConditionRegion {
  */
 export interface DescribeBillSummaryByProductRequest {
   /**
-   * 查询账单数据的用户UIN
-   */
-  PayerUin: string
-
-  /**
-   * 目前只支持传当月开始，且必须和EndTime为相同月份，例 2018-09-01 00:00:00
+   * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
    */
   BeginTime: string
 
   /**
-   * 目前只支持传当月结束，且必须和BeginTime为相同月份，例 2018-09-30 23:59:59
+   * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
    */
   EndTime: string
+
+  /**
+   * 查询账单数据的用户UIN
+   */
+  PayerUin?: string
 }
 
 /**
@@ -609,17 +609,12 @@ export interface BillResourceSummary {
  */
 export interface DescribeBillSummaryByTagRequest {
   /**
-   * 查询账单数据的用户UIN
-   */
-  PayerUin: string
-
-  /**
-   * 目前只支持传当月开始，且必须和EndTime为相同月份，例 2018-09-01 00:00:00
+   * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
    */
   BeginTime: string
 
   /**
-   * 目前只支持传当月结束，且必须和BeginTime为相同月份，例 2018-09-30 23:59:59
+   * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
    */
   EndTime: string
 
@@ -627,6 +622,11 @@ export interface DescribeBillSummaryByTagRequest {
    * 分账标签键
    */
   TagKey: string
+
+  /**
+   * 查询账单数据的用户UIN
+   */
+  PayerUin?: string
 }
 
 /**
@@ -1256,17 +1256,12 @@ export interface DescribeAccountBalanceResponse {
  */
 export interface DescribeCostSummaryByRegionRequest {
   /**
-   * 查询账单数据的用户UIN
-   */
-  PayerUin: string
-
-  /**
-   * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09-03 03:01:45，EndTime 为 2018-09-25 12:01:45，查询结果是 2018 年 9 月数据。
+   * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
    */
   BeginTime: string
 
   /**
-   * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09-03 03:01:45，EndTime 为 2018-09-25 12:01:45，查询结果是 2018 年 9 月数据。
+   * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
    */
   EndTime: string
 
@@ -1279,6 +1274,11 @@ export interface DescribeCostSummaryByRegionRequest {
    * 偏移量
    */
   Offset: number
+
+  /**
+   * 查询账单数据的用户UIN
+   */
+  PayerUin?: string
 
   /**
    * 是否需要返回记录数量，0不需要，1需要，默认不需要
@@ -1456,19 +1456,19 @@ export interface ConsumptionSummaryTrend {
  */
 export interface DescribeBillSummaryByRegionRequest {
   /**
-   * 查询账单数据的用户UIN
-   */
-  PayerUin: string
-
-  /**
-   * 目前只支持传当月开始，且必须和EndTime为相同月份，例 2018-09-01 00:00:00
+   * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
    */
   BeginTime: string
 
   /**
-   * 目前只支持传当月结束，且必须和BeginTime为相同月份，例 2018-09-30 23:59:59
+   * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
    */
   EndTime: string
+
+  /**
+   * 查询账单数据的用户UIN
+   */
+  PayerUin?: string
 }
 
 /**
@@ -1476,19 +1476,19 @@ export interface DescribeBillSummaryByRegionRequest {
  */
 export interface DescribeBillSummaryByPayModeRequest {
   /**
-   * 查询账单数据的用户UIN
-   */
-  PayerUin: string
-
-  /**
-   * 目前只支持传当月开始，且必须和EndTime为相同月份，例 2018-09-01 00:00:00
+   * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
    */
   BeginTime: string
 
   /**
-   * 目前只支持传当月结束，且必须和BeginTime为相同月份，例 2018-09-30 23:59:59
+   * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
    */
   EndTime: string
+
+  /**
+   * 查询账单数据的用户UIN
+   */
+  PayerUin?: string
 }
 
 /**
@@ -1496,17 +1496,12 @@ export interface DescribeBillSummaryByPayModeRequest {
  */
 export interface DescribeCostSummaryByProjectRequest {
   /**
-   * 查询账单数据的用户UIN
-   */
-  PayerUin: string
-
-  /**
-   * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09-03 03:01:45，EndTime 为 2018-09-25 12:01:45，查询结果是 2018 年 9 月数据。
+   * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
    */
   BeginTime: string
 
   /**
-   * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09-03 03:01:45，EndTime 为 2018-09-25 12:01:45，查询结果是 2018 年 9 月数据。
+   * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
    */
   EndTime: string
 
@@ -1519,6 +1514,11 @@ export interface DescribeCostSummaryByProjectRequest {
    * 偏移量
    */
   Offset: number
+
+  /**
+   * 查询账单数据的用户UIN
+   */
+  PayerUin?: string
 
   /**
    * 是否需要返回记录数量，0不需要，1需要，默认不需要
@@ -2333,19 +2333,19 @@ export interface CosDetailSets {
  */
 export interface DescribeBillSummaryByProjectRequest {
   /**
-   * 查询账单数据的用户UIN
-   */
-  PayerUin: string
-
-  /**
-   * 目前只支持传当月开始，且必须和EndTime为相同月份，例 2018-09-01 00:00:00
+   * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
    */
   BeginTime: string
 
   /**
-   * 目前只支持传当月结束，且必须和BeginTime为相同月份，例 2018-09-30 23:59:59
+   * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
    */
   EndTime: string
+
+  /**
+   * 查询账单数据的用户UIN
+   */
+  PayerUin?: string
 }
 
 /**
@@ -2389,17 +2389,12 @@ export interface ConditionBusiness {
  */
 export interface DescribeCostSummaryByResourceRequest {
   /**
-   * 查询账单数据的用户UIN
-   */
-  PayerUin: string
-
-  /**
-   * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09-03 03:01:45，EndTime 为 2018-09-25 12:01:45，查询结果是 2018 年 9 月数据。
+   * 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
    */
   BeginTime: string
 
   /**
-   * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09-03 03:01:45，EndTime 为 2018-09-25 12:01:45，查询结果是 2018 年 9 月数据。
+   * 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。
    */
   EndTime: string
 
@@ -2412,6 +2407,11 @@ export interface DescribeCostSummaryByResourceRequest {
    * 偏移量
    */
   Offset: number
+
+  /**
+   * 查询账单数据的用户UIN
+   */
+  PayerUin?: string
 
   /**
    * 是否需要返回记录数量，0不需要，1需要，默认不需要

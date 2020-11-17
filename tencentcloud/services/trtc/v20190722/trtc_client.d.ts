@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeAbnormalEventResponse, DescribeAbnormalEventRequest, StopMCUMixTranscodeResponse, DescribeRealtimeScaleResponse, DismissRoomResponse, DescribeRealtimeNetworkResponse, DescribeUserInformationRequest, DescribeCallDetailRequest, DescribeRealtimeNetworkRequest, DescribeUserInformationResponse, StartMCUMixTranscodeRequest, DescribeRealtimeQualityResponse, StopMCUMixTranscodeRequest, DescribeHistoryScaleRequest, DescribeRoomInformationResponse, RemoveUserRequest, CreateTroubleInfoResponse, DescribeRealtimeQualityRequest, CreateTroubleInfoRequest, DismissRoomRequest, DescribeDetailEventResponse, StartMCUMixTranscodeResponse, DescribeRealtimeScaleRequest, DescribeCallDetailResponse, DescribeRoomInformationRequest, DescribeDetailEventRequest, RemoveUserResponse, DescribeHistoryScaleResponse } from "./trtc_models";
+import { DescribeAbnormalEventResponse, DescribeAbnormalEventRequest, DescribeTrtcInteractiveTimeResponse, DismissRoomByStrRoomIdRequest, DescribeTrtcMcuTranscodeTimeRequest, RemoveUserByStrRoomIdRequest, DescribeRealtimeScaleResponse, DismissRoomResponse, DescribeRealtimeNetworkResponse, DescribeRecordStatisticRequest, DescribeUserInformationRequest, DescribeCallDetailRequest, DescribeRealtimeNetworkRequest, DescribeUserInformationResponse, RemoveUserByStrRoomIdResponse, StartMCUMixTranscodeRequest, DescribeRealtimeQualityResponse, StopMCUMixTranscodeRequest, DescribeHistoryScaleRequest, DescribeRoomInformationResponse, RemoveUserRequest, CreateTroubleInfoResponse, DescribeRealtimeQualityRequest, StopMCUMixTranscodeResponse, CreateTroubleInfoRequest, DismissRoomRequest, DescribeDetailEventResponse, StartMCUMixTranscodeResponse, DescribeTrtcMcuTranscodeTimeResponse, RemoveUserResponse, DescribeRealtimeScaleRequest, DescribeCallDetailResponse, DescribeTrtcInteractiveTimeRequest, DescribeRoomInformationRequest, DescribeDetailEventRequest, DescribeRecordStatisticResponse, DismissRoomByStrRoomIdResponse, DescribeHistoryScaleResponse } from "./trtc_models";
 /**
  * trtc client
  * @class
@@ -8,9 +8,22 @@ import { DescribeAbnormalEventResponse, DescribeAbnormalEventRequest, StopMCUMix
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 接口说明：将用户从房间移出，适用于主播/房主/管理员踢人等场景。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
+     * 查询云端录制计费时长。
+
+- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
+- 单次查询统计区间最多不能超过31天。
+- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
+- 日结后付费将于次日上午推送账单，建议次日上午9点以后再来查询前一天的用量。
      */
-    RemoveUser(req: RemoveUserRequest, cb?: (error: string, rep: RemoveUserResponse) => void): Promise<RemoveUserResponse>;
+    DescribeRecordStatistic(req: DescribeRecordStatisticRequest, cb?: (error: string, rep: DescribeRecordStatisticResponse) => void): Promise<DescribeRecordStatisticResponse>;
+    /**
+     * 查询旁路转码计费时长。
+- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
+- 单次查询统计区间最多不能超过31天。
+- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
+- 日结后付费将于次日上午推送账单，建议次日上午9点以后再来查询前一天的用量。
+     */
+    DescribeTrtcMcuTranscodeTime(req: DescribeTrtcMcuTranscodeTimeRequest, cb?: (error: string, rep: DescribeTrtcMcuTranscodeTimeResponse) => void): Promise<DescribeTrtcMcuTranscodeTimeResponse>;
     /**
      * 创建异常信息
      */
@@ -19,6 +32,14 @@ export declare class Client extends AbstractClient {
      * 可查询sdkqppid 每天的房间数和用户数，每分钟1次，可查询最近14天的数据。当天未结束，无法查到当天的房间数与用户数。
      */
     DescribeHistoryScale(req: DescribeHistoryScaleRequest, cb?: (error: string, rep: DescribeHistoryScaleResponse) => void): Promise<DescribeHistoryScaleResponse>;
+    /**
+     * 查询音视频互动计费时长。
+- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
+- 单次查询统计区间最多不能超过31天。
+- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
+- 日结后付费将于次日上午推送账单，建议次日上午9点以后再来查询前一天的用量。
+     */
+    DescribeTrtcInteractiveTime(req: DescribeTrtcInteractiveTimeRequest, cb?: (error: string, rep: DescribeTrtcInteractiveTimeResponse) => void): Promise<DescribeTrtcInteractiveTimeResponse>;
     /**
      * 接口说明：启动云端混流，并指定混流画面中各路画面的布局位置。
 
@@ -53,17 +74,25 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
      */
     DescribeRoomInformation(req: DescribeRoomInformationRequest, cb?: (error: string, rep: DescribeRoomInformationResponse) => void): Promise<DescribeRoomInformationResponse>;
     /**
+     * 接口说明：将用户从房间移出，适用于主播/房主/管理员踢人等场景。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
+     */
+    RemoveUser(req: RemoveUserRequest, cb?: (error: string, rep: RemoveUserResponse) => void): Promise<RemoveUserResponse>;
+    /**
      * 查询用户某次通话内的进退房，视频开关等详细事件。可查询14天内数据。
      */
     DescribeDetailEvent(req: DescribeDetailEventRequest, cb?: (error: string, rep: DescribeDetailEventResponse) => void): Promise<DescribeDetailEventResponse>;
+    /**
+     * 接口说明：结束云端混流
+     */
+    StopMCUMixTranscode(req: StopMCUMixTranscodeRequest, cb?: (error: string, rep: StopMCUMixTranscodeResponse) => void): Promise<StopMCUMixTranscodeResponse>;
     /**
      * 查询指定时间内的用户列表及用户通话质量数据，可查询14天内数据。DataType 不为null，查询实时数据时，查询起止时间不超过1个小时，每次查询用户不超过6个，支持跨天查询。DataType，UserIds为null时，默认查询6个用户，同时支持每页查询100以内用户个数（PageSize不超过100）。接口用于查询质量问题，不推荐作为计费使用。
      */
     DescribeCallDetail(req: DescribeCallDetailRequest, cb?: (error: string, rep: DescribeCallDetailResponse) => void): Promise<DescribeCallDetailResponse>;
     /**
-     * 接口说明：结束云端混流
+     * 接口说明：把房间所有用户从房间移出，解散房间。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
      */
-    StopMCUMixTranscode(req: StopMCUMixTranscodeRequest, cb?: (error: string, rep: StopMCUMixTranscodeResponse) => void): Promise<StopMCUMixTranscodeResponse>;
+    DismissRoomByStrRoomId(req: DismissRoomByStrRoomIdRequest, cb?: (error: string, rep: DismissRoomByStrRoomIdResponse) => void): Promise<DismissRoomByStrRoomIdResponse>;
     /**
      * 查询SDKAppID下用户的异常体验事件，返回异常体验ID与可能产生异常体验的原因。可查询5天内数据，查询起止时间不超过1个小时。支持跨天查询。异常体验ID映射见：https://cloud.tencent.com/document/product/647/44916
      */
@@ -72,6 +101,10 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
      * 查询sdkappid维度下实时质量数据，包括：进房成功率，首帧秒开率，音频卡顿率，视频卡顿率。可查询24小时内数据，查询起止时间不超过1个小时。
      */
     DescribeRealtimeQuality(req: DescribeRealtimeQualityRequest, cb?: (error: string, rep: DescribeRealtimeQualityResponse) => void): Promise<DescribeRealtimeQualityResponse>;
+    /**
+     * 接口说明：将用户从房间移出，适用于主播/房主/管理员踢人等场景。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
+     */
+    RemoveUserByStrRoomId(req: RemoveUserByStrRoomIdRequest, cb?: (error: string, rep: RemoveUserByStrRoomIdResponse) => void): Promise<RemoveUserByStrRoomIdResponse>;
     /**
      * 接口说明：把房间所有用户从房间移出，解散房间。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
      */

@@ -12,7 +12,7 @@ export interface RefreshDomainResponse {
  */
 export interface DeleteDomainRequest {
     /**
-      * 域名列表中的ID
+      * 域名ID，可通过搜索域名接口获得
       */
     DomainId: number;
 }
@@ -34,7 +34,7 @@ export interface ModifyDomainTagsResponse {
  */
 export interface DescribeDomainCertsRequest {
     /**
-      * 域名ID
+      * 域名ID，可通过搜索域名接口获得
       */
     DomainId: number;
 }
@@ -43,7 +43,7 @@ export interface DescribeDomainCertsRequest {
  */
 export interface RefreshDomainRequest {
     /**
-      * 域名列表中的ID
+      * 域名列表中的ID，可通过搜索域名接口获得
       */
     DomainId: number;
 }
@@ -146,7 +146,7 @@ export interface ChartNameValue {
  */
 export interface CreateDomainRequest {
     /**
-      * 监控的服务器类型 Enums(0,1,2,3)
+      * 监控的服务器类型（0：web，1：smtp，2：imap，3：pops）
       */
     ServerType: number;
     /**
@@ -447,7 +447,7 @@ export interface DescribeDomainsRequest {
       */
     SearchType: string;
     /**
-      * 标签
+      * 标签，多个标签用逗号分隔
       */
     Tag?: string;
     /**

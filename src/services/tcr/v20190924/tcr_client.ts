@@ -74,6 +74,7 @@ import {
   TcrImageInfo,
   DescribeImageLifecycleGlobalPersonalResponse,
   CreateNamespacePersonalResponse,
+  DeleteInstanceResponse,
   DeleteImageLifecycleGlobalPersonalRequest,
   DescribeInstanceStatusRequest,
   ModifyWebhookTriggerRequest,
@@ -132,6 +133,7 @@ import {
   DescribeImagePersonalRequest,
   DeleteImageLifecyclePersonalRequest,
   ModifyApplicationTriggerPersonalResponse,
+  DeleteInstanceRequest,
   DescribeImageManifestsResponse,
   DescribeNamespacePersonalResponse,
   DeleteNamespacePersonalResponse,
@@ -227,6 +229,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 用于在企业版中创建命名空间
+   */
+  async CreateNamespace(
+    req: CreateNamespaceRequest,
+    cb?: (error: string, rep: CreateNamespaceResponse) => void
+  ): Promise<CreateNamespaceResponse> {
+    return this.request("CreateNamespace", req, cb)
+  }
+
+  /**
    * 用于获取个人版镜像仓库tag列表
    */
   async DescribeImagePersonal(
@@ -257,13 +269,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于在企业版中创建命名空间
+   * 删除镜像仓库企业版实例
    */
-  async CreateNamespace(
-    req: CreateNamespaceRequest,
-    cb?: (error: string, rep: CreateNamespaceResponse) => void
-  ): Promise<CreateNamespaceResponse> {
-    return this.request("CreateNamespace", req, cb)
+  async DeleteInstance(
+    req: DeleteInstanceRequest,
+    cb?: (error: string, rep: DeleteInstanceResponse) => void
+  ): Promise<DeleteInstanceResponse> {
+    return this.request("DeleteInstance", req, cb)
   }
 
   /**
@@ -287,13 +299,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于个人版镜像仓库中删除
+   * 删除命名空间
    */
-  async DeleteRepositoryPersonal(
-    req: DeleteRepositoryPersonalRequest,
-    cb?: (error: string, rep: DeleteRepositoryPersonalResponse) => void
-  ): Promise<DeleteRepositoryPersonalResponse> {
-    return this.request("DeleteRepositoryPersonal", req, cb)
+  async DeleteNamespace(
+    req: DeleteNamespaceRequest,
+    cb?: (error: string, rep: DeleteNamespaceResponse) => void
+  ): Promise<DeleteNamespaceResponse> {
+    return this.request("DeleteNamespace", req, cb)
   }
 
   /**
@@ -367,13 +379,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除命名空间
+   * 用于个人版镜像仓库中删除
    */
-  async DeleteNamespace(
-    req: DeleteNamespaceRequest,
-    cb?: (error: string, rep: DeleteNamespaceResponse) => void
-  ): Promise<DeleteNamespaceResponse> {
-    return this.request("DeleteNamespace", req, cb)
+  async DeleteRepositoryPersonal(
+    req: DeleteRepositoryPersonalRequest,
+    cb?: (error: string, rep: DeleteRepositoryPersonalResponse) => void
+  ): Promise<DeleteRepositoryPersonalResponse> {
+    return this.request("DeleteRepositoryPersonal", req, cb)
   }
 
   /**

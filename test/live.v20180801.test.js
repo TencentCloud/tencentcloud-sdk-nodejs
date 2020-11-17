@@ -388,6 +388,16 @@ it("live.v20180801.AddDelayLiveStream", async function () {
     }
 })
 
+it("live.v20180801.DescribeUploadStreamNums", async function () {
+    try {
+       const data = await client.DescribeUploadStreamNums({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DescribeStreamDayPlayInfoList", async function () {
     try {
        const data = await client.DescribeStreamDayPlayInfoList({})

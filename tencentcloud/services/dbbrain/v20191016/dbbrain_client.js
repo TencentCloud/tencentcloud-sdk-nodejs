@@ -34,7 +34,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTopSpaceTableTimeSeries", req, cb);
     }
     /**
-     * 获取慢日志统计柱状图
+     * 获取慢日志统计柱状图。
      */
     async DescribeSlowLogTimeSeriesStats(req, cb) {
         return this.request("DescribeSlowLogTimeSeriesStats", req, cb);

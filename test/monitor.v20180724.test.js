@@ -218,6 +218,16 @@ it("monitor.v20180724.UpdateServiceDiscovery", async function () {
     }
 })
 
+it("monitor.v20180724.DescribeMonitorTypes", async function () {
+    try {
+       const data = await client.DescribeMonitorTypes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.CreatePolicyGroup", async function () {
     try {
        const data = await client.CreatePolicyGroup({})

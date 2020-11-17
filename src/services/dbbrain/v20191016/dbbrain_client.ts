@@ -64,7 +64,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取慢日志统计柱状图
+   * 获取慢日志统计柱状图。
    */
   async DescribeSlowLogTimeSeriesStats(
     req: DescribeSlowLogTimeSeriesStatsRequest,

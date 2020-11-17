@@ -164,6 +164,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateServiceDiscovery", req, cb);
     }
     /**
+     * 云监控支持多种类型的监控，此接口列出支持的所有类型
+     */
+    async DescribeMonitorTypes(req, cb) {
+        return this.request("DescribeMonitorTypes", req, cb);
+    }
+    /**
      * 增加策略组
      */
     async CreatePolicyGroup(req, cb) {

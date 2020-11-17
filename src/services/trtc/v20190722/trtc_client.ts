@@ -21,23 +21,30 @@ import {
   DescribeAbnormalEventResponse,
   RealtimeData,
   DescribeAbnormalEventRequest,
+  DescribeTrtcInteractiveTimeResponse,
   LayoutParams,
   TimeValue,
-  StopMCUMixTranscodeResponse,
+  DismissRoomByStrRoomIdRequest,
+  DescribeTrtcMcuTranscodeTimeRequest,
+  SdkAppIdTrtcMcuTranscodeTimeUsage,
+  RemoveUserByStrRoomIdRequest,
   DescribeRealtimeScaleResponse,
   DismissRoomResponse,
   DescribeRealtimeNetworkResponse,
+  DescribeRecordStatisticRequest,
   DescribeUserInformationRequest,
   DescribeCallDetailRequest,
   DescribeRealtimeNetworkRequest,
   DescribeUserInformationResponse,
   EncodeParams,
+  RemoveUserByStrRoomIdResponse,
   StartMCUMixTranscodeRequest,
   DescribeRealtimeQualityResponse,
   StopMCUMixTranscodeRequest,
   UserInformation,
   DescribeHistoryScaleRequest,
   DescribeRoomInformationResponse,
+  RecordUsage,
   RemoveUserRequest,
   OutputParams,
   EventMessage,
@@ -46,20 +53,29 @@ import {
   AbnormalEvent,
   DescribeRealtimeQualityRequest,
   ScaleInfomation,
+  StopMCUMixTranscodeResponse,
   CreateTroubleInfoRequest,
   EventList,
   DismissRoomRequest,
   DescribeDetailEventResponse,
   StartMCUMixTranscodeResponse,
+  OneSdkAppIdTranscodeTimeUsagesInfo,
+  DescribeTrtcMcuTranscodeTimeResponse,
+  SdkAppIdRecordUsage,
+  OneSdkAppIdUsagesInfo,
   SmallVideoLayoutParams,
+  RemoveUserResponse,
   PresetLayoutConfig,
   DescribeRealtimeScaleRequest,
   DescribeCallDetailResponse,
+  SdkAppIdTrtcUsage,
+  DescribeTrtcInteractiveTimeRequest,
   DescribeRoomInformationRequest,
   DescribeDetailEventRequest,
   AbnormalExperience,
   RoomState,
-  RemoveUserResponse,
+  DescribeRecordStatisticResponse,
+  DismissRoomByStrRoomIdResponse,
   DescribeHistoryScaleResponse,
 } from "./trtc_models"
 
@@ -73,13 +89,32 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 接口说明：将用户从房间移出，适用于主播/房主/管理员踢人等场景。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
-   */
-  async RemoveUser(
-    req: RemoveUserRequest,
-    cb?: (error: string, rep: RemoveUserResponse) => void
-  ): Promise<RemoveUserResponse> {
-    return this.request("RemoveUser", req, cb)
+     * 查询云端录制计费时长。
+
+- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
+- 单次查询统计区间最多不能超过31天。
+- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
+- 日结后付费将于次日上午推送账单，建议次日上午9点以后再来查询前一天的用量。
+     */
+  async DescribeRecordStatistic(
+    req: DescribeRecordStatisticRequest,
+    cb?: (error: string, rep: DescribeRecordStatisticResponse) => void
+  ): Promise<DescribeRecordStatisticResponse> {
+    return this.request("DescribeRecordStatistic", req, cb)
+  }
+
+  /**
+     * 查询旁路转码计费时长。
+- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
+- 单次查询统计区间最多不能超过31天。
+- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
+- 日结后付费将于次日上午推送账单，建议次日上午9点以后再来查询前一天的用量。
+     */
+  async DescribeTrtcMcuTranscodeTime(
+    req: DescribeTrtcMcuTranscodeTimeRequest,
+    cb?: (error: string, rep: DescribeTrtcMcuTranscodeTimeResponse) => void
+  ): Promise<DescribeTrtcMcuTranscodeTimeResponse> {
+    return this.request("DescribeTrtcMcuTranscodeTime", req, cb)
   }
 
   /**
@@ -100,6 +135,20 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeHistoryScaleResponse) => void
   ): Promise<DescribeHistoryScaleResponse> {
     return this.request("DescribeHistoryScale", req, cb)
+  }
+
+  /**
+     * 查询音视频互动计费时长。
+- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
+- 单次查询统计区间最多不能超过31天。
+- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
+- 日结后付费将于次日上午推送账单，建议次日上午9点以后再来查询前一天的用量。
+     */
+  async DescribeTrtcInteractiveTime(
+    req: DescribeTrtcInteractiveTimeRequest,
+    cb?: (error: string, rep: DescribeTrtcInteractiveTimeResponse) => void
+  ): Promise<DescribeTrtcInteractiveTimeResponse> {
+    return this.request("DescribeTrtcInteractiveTime", req, cb)
   }
 
   /**
@@ -160,6 +209,16 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
   }
 
   /**
+   * 接口说明：将用户从房间移出，适用于主播/房主/管理员踢人等场景。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
+   */
+  async RemoveUser(
+    req: RemoveUserRequest,
+    cb?: (error: string, rep: RemoveUserResponse) => void
+  ): Promise<RemoveUserResponse> {
+    return this.request("RemoveUser", req, cb)
+  }
+
+  /**
    * 查询用户某次通话内的进退房，视频开关等详细事件。可查询14天内数据。
    */
   async DescribeDetailEvent(
@@ -167,6 +226,16 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     cb?: (error: string, rep: DescribeDetailEventResponse) => void
   ): Promise<DescribeDetailEventResponse> {
     return this.request("DescribeDetailEvent", req, cb)
+  }
+
+  /**
+   * 接口说明：结束云端混流
+   */
+  async StopMCUMixTranscode(
+    req: StopMCUMixTranscodeRequest,
+    cb?: (error: string, rep: StopMCUMixTranscodeResponse) => void
+  ): Promise<StopMCUMixTranscodeResponse> {
+    return this.request("StopMCUMixTranscode", req, cb)
   }
 
   /**
@@ -180,13 +249,13 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
   }
 
   /**
-   * 接口说明：结束云端混流
+   * 接口说明：把房间所有用户从房间移出，解散房间。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
    */
-  async StopMCUMixTranscode(
-    req: StopMCUMixTranscodeRequest,
-    cb?: (error: string, rep: StopMCUMixTranscodeResponse) => void
-  ): Promise<StopMCUMixTranscodeResponse> {
-    return this.request("StopMCUMixTranscode", req, cb)
+  async DismissRoomByStrRoomId(
+    req: DismissRoomByStrRoomIdRequest,
+    cb?: (error: string, rep: DismissRoomByStrRoomIdResponse) => void
+  ): Promise<DismissRoomByStrRoomIdResponse> {
+    return this.request("DismissRoomByStrRoomId", req, cb)
   }
 
   /**
@@ -207,6 +276,16 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     cb?: (error: string, rep: DescribeRealtimeQualityResponse) => void
   ): Promise<DescribeRealtimeQualityResponse> {
     return this.request("DescribeRealtimeQuality", req, cb)
+  }
+
+  /**
+   * 接口说明：将用户从房间移出，适用于主播/房主/管理员踢人等场景。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
+   */
+  async RemoveUserByStrRoomId(
+    req: RemoveUserByStrRoomIdRequest,
+    cb?: (error: string, rep: RemoveUserByStrRoomIdResponse) => void
+  ): Promise<RemoveUserByStrRoomIdResponse> {
+    return this.request("RemoveUserByStrRoomId", req, cb)
   }
 
   /**

@@ -36,7 +36,7 @@ import {
   DeleteLiveSnapshotTemplateRequest,
   DescribeGroupProIspPlayInfoListResponse,
   PushAuthKeyInfo,
-  DomainInfoList,
+  DescribeUploadStreamNumsResponse,
   DeleteLiveRecordTemplateRequest,
   DeleteLiveCallbackTemplateResponse,
   DescribeLiveStreamOnlineListResponse,
@@ -62,6 +62,7 @@ import {
   DescribePlayErrorCodeDetailInfoListRequest,
   DescribeBillBandwidthAndFluxListRequest,
   CommonMixOutputParams,
+  DescribeUploadStreamNumsRequest,
   DescribeLiveSnapshotRulesResponse,
   DescribeLiveTranscodeDetailInfoResponse,
   DescribeLiveDomainRequest,
@@ -158,6 +159,7 @@ import {
   DescribeLivePlayAuthKeyRequest,
   DescribeLiveForbidStreamListResponse,
   DescribeStreamPushInfoListRequest,
+  DomainInfoList,
   DescribeLiveWatermarkResponse,
   ResumeLiveStreamResponse,
   ModifyLiveRecordTemplateRequest,
@@ -689,6 +691,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddDelayLiveStreamResponse) => void
   ): Promise<AddDelayLiveStreamResponse> {
     return this.request("AddDelayLiveStream", req, cb)
+  }
+
+  /**
+   * 直播上行路数查询
+   */
+  async DescribeUploadStreamNums(
+    req: DescribeUploadStreamNumsRequest,
+    cb?: (error: string, rep: DescribeUploadStreamNumsResponse) => void
+  ): Promise<DescribeUploadStreamNumsResponse> {
+    return this.request("DescribeUploadStreamNums", req, cb)
   }
 
   /**

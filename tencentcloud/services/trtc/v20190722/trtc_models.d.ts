@@ -51,6 +51,19 @@ export interface DescribeAbnormalEventRequest {
     RoomId?: string;
 }
 /**
+ * DescribeTrtcInteractiveTime返回参数结构体
+ */
+export interface DescribeTrtcInteractiveTimeResponse {
+    /**
+      * 应用的用量信息数组。
+      */
+    Usages?: Array<OneSdkAppIdUsagesInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * MCU混流布局参数
  */
 export interface LayoutParams {
@@ -97,13 +110,78 @@ export interface TimeValue {
     Value: number;
 }
 /**
- * StopMCUMixTranscode返回参数结构体
+ * DismissRoomByStrRoomId请求参数结构体
  */
-export interface StopMCUMixTranscodeResponse {
+export interface DismissRoomByStrRoomIdRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * TRTC的SDKAppId。
       */
-    RequestId?: string;
+    SdkAppId: number;
+    /**
+      * 房间号。
+      */
+    RoomId: string;
+}
+/**
+ * DescribeTrtcMcuTranscodeTime请求参数结构体
+ */
+export interface DescribeTrtcMcuTranscodeTimeRequest {
+    /**
+      * 查询开始时间，格式为YYYY-MM-DD。
+      */
+    StartTime: string;
+    /**
+      * 查询结束时间，格式为YYYY-MM-DD。
+单次查询统计区间最多不能超过31天。
+      */
+    EndTime: string;
+    /**
+      * 应用ID，可不传。传应用ID时返回的是该应用的用量，不传时返回多个应用的合计值。
+      */
+    SdkAppId?: number;
+}
+/**
+ * 查询旁路转码计费时长。
+查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
+ */
+export interface SdkAppIdTrtcMcuTranscodeTimeUsage {
+    /**
+      * 本组数据对应的时间点，格式如：2020-09-07或2020-09-07 00:05:05。
+      */
+    TimeKey: string;
+    /**
+      * 语音时长，单位：秒。
+      */
+    AudioTime: number;
+    /**
+      * 视频时长-标清SD，单位：秒。
+      */
+    VideoTimeSd: number;
+    /**
+      * 视频时长-高清HD，单位：秒。
+      */
+    VideoTimeHd: number;
+    /**
+      * 视频时长-全高清FHD，单位：秒。
+      */
+    VideoTimeFhd: number;
+}
+/**
+ * RemoveUserByStrRoomId请求参数结构体
+ */
+export interface RemoveUserByStrRoomIdRequest {
+    /**
+      * TRTC的SDKAppId。
+      */
+    SdkAppId: number;
+    /**
+      * 房间号。
+      */
+    RoomId: string;
+    /**
+      * 要移出的用户列表，最多10个。
+      */
+    UserIds: Array<string>;
 }
 /**
  * DescribeRealtimeScale返回参数结构体
@@ -141,6 +219,23 @@ export interface DescribeRealtimeNetworkResponse {
     RequestId?: string;
 }
 /**
+ * DescribeRecordStatistic请求参数结构体
+ */
+export interface DescribeRecordStatisticRequest {
+    /**
+      * 查询开始日期。
+      */
+    StartTime: string;
+    /**
+      * 查询结束日期。
+      */
+    EndTime: string;
+    /**
+      * 应用ID，可不传。传应用ID时返回的是该应用的用量，不传时返回多个应用的合计值。
+      */
+    SdkAppId?: number;
+}
+/**
  * DescribeUserInformation请求参数结构体
  */
 export interface DescribeUserInformationRequest {
@@ -149,7 +244,7 @@ export interface DescribeUserInformationRequest {
       */
     CommId: string;
     /**
-      * 查询开始时间，5天内。本地unix时间戳（1588031999s）
+      * 查询开始时间，14天内。本地unix时间戳（1588031999s）
       */
     StartTime: number;
     /**
@@ -182,7 +277,7 @@ export interface DescribeCallDetailRequest {
       */
     CommId: string;
     /**
-      * 查询开始时间，5天内。本地unix时间戳（1588031999s）
+      * 查询开始时间，14天内。本地unix时间戳（1588031999s）
       */
     StartTime: number;
     /**
@@ -310,6 +405,15 @@ export interface EncodeParams {
     BackgroundImageId?: number;
 }
 /**
+ * RemoveUserByStrRoomId返回参数结构体
+ */
+export interface RemoveUserByStrRoomIdResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * StartMCUMixTranscode请求参数结构体
  */
 export interface StartMCUMixTranscodeRequest {
@@ -430,6 +534,31 @@ export interface DescribeRoomInformationResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 录制的使用信息。
+ */
+export interface RecordUsage {
+    /**
+      * 本组数据对应的时间点，格式如:2020-09-07或2020-09-07 00:05:05。
+      */
+    TimeKey: string;
+    /**
+      * 视频时长-标清SD，单位：秒。
+      */
+    Class1VideoTime: number;
+    /**
+      * 视频时长-高清HD，单位：秒。
+      */
+    Class2VideoTime: number;
+    /**
+      * 视频时长-超清HD，单位：秒。
+      */
+    Class3VideoTime: number;
+    /**
+      * 语音时长，单位：秒。
+      */
+    AudioTime: number;
 }
 /**
  * RemoveUser请求参数结构体
@@ -593,6 +722,15 @@ export interface ScaleInfomation {
     RoomNumbers: number;
 }
 /**
+ * StopMCUMixTranscode返回参数结构体
+ */
+export interface StopMCUMixTranscodeResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateTroubleInfo请求参数结构体
  */
 export interface CreateTroubleInfoRequest {
@@ -686,6 +824,66 @@ export interface StartMCUMixTranscodeResponse {
     RequestId?: string;
 }
 /**
+ * 旁路转码时长的查询结果
+ */
+export interface OneSdkAppIdTranscodeTimeUsagesInfo {
+    /**
+      * 旁路转码时长查询结果数组
+      */
+    SdkAppIdTranscodeTimeUsages: Array<SdkAppIdTrtcMcuTranscodeTimeUsage>;
+    /**
+      * 查询记录数量
+      */
+    TotalNum: number;
+    /**
+      * 所查询的应用ID，可能值为:1-应用的应用ID，2-total，显示为total则表示查询的是所有应用的用量合计值。
+      */
+    SdkAppId: string;
+}
+/**
+ * DescribeTrtcMcuTranscodeTime返回参数结构体
+ */
+export interface DescribeTrtcMcuTranscodeTimeResponse {
+    /**
+      * 应用的用量信息数组。
+      */
+    Usages?: Array<OneSdkAppIdTranscodeTimeUsagesInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * SdkAppId级别录制时长数据。
+ */
+export interface SdkAppIdRecordUsage {
+    /**
+      * SdkAppId的值。
+      */
+    SdkAppId: string;
+    /**
+      * 统计的时间点数据。
+      */
+    Usages: Array<RecordUsage>;
+}
+/**
+ * 单个SdkAppId的音视频互动计费时长用量数组和数组长度。
+ */
+export interface OneSdkAppIdUsagesInfo {
+    /**
+      * 该 SdkAppId 对应的用量记录数长度
+      */
+    TotalNum: number;
+    /**
+      * 用量数组
+      */
+    SdkAppIdTrtcTimeUsages: Array<SdkAppIdTrtcUsage>;
+    /**
+      * 应用ID
+      */
+    SdkAppId: string;
+}
+/**
  * 画中画模板中有效，代表小画面的布局参数
  */
 export interface SmallVideoLayoutParams {
@@ -713,6 +911,15 @@ export interface SmallVideoLayoutParams {
       * 小画面在输出时的Y偏移，单位为像素值，LocationY与ImageHeight之和不能超过混流输出的总高度，不填默认为0。
       */
     LocationY?: number;
+}
+/**
+ * RemoveUser返回参数结构体
+ */
+export interface RemoveUserResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 自定义模板中有效，指定用户视频在混合画面中的位置。
@@ -798,6 +1005,55 @@ export interface DescribeCallDetailResponse {
     RequestId?: string;
 }
 /**
+ * 查询音视频互动时长的输出数据。
+查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
+ */
+export interface SdkAppIdTrtcUsage {
+    /**
+      * 本组数据对应的时间点，格式如：2020-09-07或2020-09-07 00:05:05。
+      */
+    TimeKey: string;
+    /**
+      * 语音时长，单位：秒。
+      */
+    AudioTime: number;
+    /**
+      * 音视频时长，单位：秒。
+2019年10月11日前注册，没有变更为 [新计费模式](https://cloud.tencent.com/document/product/647/17157) 的用户才会返回此值。
+      */
+    AudioVideoTime: number;
+    /**
+      * 视频时长-标清SD，单位：秒。
+      */
+    VideoTimeSd: number;
+    /**
+      * 视频时长-高清HD，单位：秒。
+      */
+    VideoTimeHd: number;
+    /**
+      * 视频时长-超清HD，单位：秒。
+      */
+    VideoTimeHdp: number;
+}
+/**
+ * DescribeTrtcInteractiveTime请求参数结构体
+ */
+export interface DescribeTrtcInteractiveTimeRequest {
+    /**
+      * 查询开始时间，格式为YYYY-MM-DD。
+      */
+    StartTime: string;
+    /**
+      * 查询结束时间，格式为YYYY-MM-DD。
+单次查询统计区间最多不能超过31天。
+      */
+    EndTime: string;
+    /**
+      * 应用ID，可不传。传应用ID时返回的是该应用的用量，不传时返回所有应用的合计值。
+      */
+    SdkAppId?: number;
+}
+/**
  * DescribeRoomInformation请求参数结构体
  */
 export interface DescribeRoomInformationRequest {
@@ -806,7 +1062,7 @@ export interface DescribeRoomInformationRequest {
       */
     SdkAppId: string;
     /**
-      * 查询开始时间，5天内。本地unix时间戳（1588031999s）
+      * 查询开始时间，14天内。本地unix时间戳（1588031999s）
       */
     StartTime: number;
     /**
@@ -835,7 +1091,7 @@ export interface DescribeDetailEventRequest {
       */
     CommId: string;
     /**
-      * 查询开始时间，5天内。本地unix时间戳（1588031999s）
+      * 查询开始时间，14天内。本地unix时间戳（1588031999s）
       */
     StartTime: number;
     /**
@@ -906,9 +1162,22 @@ export interface RoomState {
     UserId: string;
 }
 /**
- * RemoveUser返回参数结构体
+ * DescribeRecordStatistic返回参数结构体
  */
-export interface RemoveUserResponse {
+export interface DescribeRecordStatisticResponse {
+    /**
+      * 应用的用量信息数组。
+      */
+    SdkAppIdUsages?: Array<SdkAppIdRecordUsage>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DismissRoomByStrRoomId返回参数结构体
+ */
+export interface DismissRoomByStrRoomIdResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

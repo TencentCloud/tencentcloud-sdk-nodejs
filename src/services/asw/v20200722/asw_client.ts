@@ -19,13 +19,17 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeExecutionsRequest,
+  DescribeFlowServicesResponse,
+  StateMachine,
   DescribeExecutionResponse,
-  StartExecutionResponse,
+  DescribeFlowServicesRequest,
   DescribeExecutionRequest,
   DescribeFlowServiceDetailResponse,
   CreateFlowServiceResponse,
+  Filter,
   StartExecutionRequest,
   ModifyFlowServiceResponse,
+  StartExecutionResponse,
   CreateFlowServiceRequest,
   DescribeExecutionsResponse,
   ModifyFlowServiceRequest,
@@ -59,6 +63,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeExecutionResponse) => void
   ): Promise<DescribeExecutionResponse> {
     return this.request("DescribeExecution", req, cb)
+  }
+
+  /**
+   * 查询指定用户下所有状态机，以列表形式返回
+   */
+  async DescribeFlowServices(
+    req: DescribeFlowServicesRequest,
+    cb?: (error: string, rep: DescribeFlowServicesResponse) => void
+  ): Promise<DescribeFlowServicesResponse> {
+    return this.request("DescribeFlowServices", req, cb)
   }
 
   /**

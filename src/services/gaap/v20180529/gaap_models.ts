@@ -991,6 +991,11 @@ export interface CreateTCPListenersRequest {
    * 源站端口列表，该参数仅支持v1版本监听器和通道组监听器。
    */
   RealServerPorts?: Array<number>
+
+  /**
+   * 监听器获取客户端 IP 的方式，0表示 TOA, 1表示Proxy Protocol
+   */
+  ClientIPMethod?: number
 }
 
 /**
@@ -1969,6 +1974,12 @@ lc表示最小连接数。
    * 监听器创建时间，Unix时间戳
    */
   CreateTime: number
+
+  /**
+      * 监听器获取客户端 IP 的方式，0表示TOA, 1表示Proxy Protocol
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClientIPMethod: number
 }
 
 /**
@@ -3075,6 +3086,24 @@ export interface ProxyGroupDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TagSet: Array<TagPair>
+
+  /**
+      * 安全策略ID，当设置了安全策略时，存在该字段。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PolicyId: string
+
+  /**
+      * 通道组版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Version: string
+
+  /**
+      * 通道获取客户端IP的方式，0表示TOA，1表示Proxy Protocol
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClientIPMethod: Array<number>
 }
 
 /**
@@ -4914,6 +4943,12 @@ UNKNOWN表示未知状态。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ProxyType: number
+
+  /**
+      * 通道获取客户端IP的方式，0表示TOA，1表示Proxy Protocol
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClientIPMethod: Array<number>
 }
 
 /**

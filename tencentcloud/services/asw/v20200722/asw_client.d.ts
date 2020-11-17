@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeExecutionsRequest, DescribeExecutionResponse, StartExecutionResponse, DescribeExecutionRequest, DescribeFlowServiceDetailResponse, CreateFlowServiceResponse, StartExecutionRequest, ModifyFlowServiceResponse, CreateFlowServiceRequest, DescribeExecutionsResponse, ModifyFlowServiceRequest, DescribeFlowServiceDetailRequest } from "./asw_models";
+import { DescribeExecutionsRequest, DescribeFlowServicesResponse, DescribeExecutionResponse, DescribeFlowServicesRequest, DescribeExecutionRequest, DescribeFlowServiceDetailResponse, CreateFlowServiceResponse, StartExecutionRequest, ModifyFlowServiceResponse, StartExecutionResponse, CreateFlowServiceRequest, DescribeExecutionsResponse, ModifyFlowServiceRequest, DescribeFlowServiceDetailRequest } from "./asw_models";
 /**
  * asw client
  * @class
@@ -15,6 +15,10 @@ export declare class Client extends AbstractClient {
      * 查询执行详细信息
      */
     DescribeExecution(req: DescribeExecutionRequest, cb?: (error: string, rep: DescribeExecutionResponse) => void): Promise<DescribeExecutionResponse>;
+    /**
+     * 查询指定用户下所有状态机，以列表形式返回
+     */
+    DescribeFlowServices(req: DescribeFlowServicesRequest, cb?: (error: string, rep: DescribeFlowServicesResponse) => void): Promise<DescribeFlowServicesResponse>;
     /**
      * 对状态机的执行历史进行描述.
      */

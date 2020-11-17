@@ -28,10 +28,25 @@ class Client extends abstract_client_1.AbstractClient {
         super("trtc.tencentcloudapi.com", "2019-07-22", clientConfig);
     }
     /**
-     * 接口说明：将用户从房间移出，适用于主播/房主/管理员踢人等场景。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
+     * 查询云端录制计费时长。
+
+- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
+- 单次查询统计区间最多不能超过31天。
+- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
+- 日结后付费将于次日上午推送账单，建议次日上午9点以后再来查询前一天的用量。
      */
-    async RemoveUser(req, cb) {
-        return this.request("RemoveUser", req, cb);
+    async DescribeRecordStatistic(req, cb) {
+        return this.request("DescribeRecordStatistic", req, cb);
+    }
+    /**
+     * 查询旁路转码计费时长。
+- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
+- 单次查询统计区间最多不能超过31天。
+- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
+- 日结后付费将于次日上午推送账单，建议次日上午9点以后再来查询前一天的用量。
+     */
+    async DescribeTrtcMcuTranscodeTime(req, cb) {
+        return this.request("DescribeTrtcMcuTranscodeTime", req, cb);
     }
     /**
      * 创建异常信息
@@ -44,6 +59,16 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeHistoryScale(req, cb) {
         return this.request("DescribeHistoryScale", req, cb);
+    }
+    /**
+     * 查询音视频互动计费时长。
+- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
+- 单次查询统计区间最多不能超过31天。
+- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
+- 日结后付费将于次日上午推送账单，建议次日上午9点以后再来查询前一天的用量。
+     */
+    async DescribeTrtcInteractiveTime(req, cb) {
+        return this.request("DescribeTrtcInteractiveTime", req, cb);
     }
     /**
      * 接口说明：启动云端混流，并指定混流画面中各路画面的布局位置。
@@ -87,10 +112,22 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
         return this.request("DescribeRoomInformation", req, cb);
     }
     /**
+     * 接口说明：将用户从房间移出，适用于主播/房主/管理员踢人等场景。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
+     */
+    async RemoveUser(req, cb) {
+        return this.request("RemoveUser", req, cb);
+    }
+    /**
      * 查询用户某次通话内的进退房，视频开关等详细事件。可查询14天内数据。
      */
     async DescribeDetailEvent(req, cb) {
         return this.request("DescribeDetailEvent", req, cb);
+    }
+    /**
+     * 接口说明：结束云端混流
+     */
+    async StopMCUMixTranscode(req, cb) {
+        return this.request("StopMCUMixTranscode", req, cb);
     }
     /**
      * 查询指定时间内的用户列表及用户通话质量数据，可查询14天内数据。DataType 不为null，查询实时数据时，查询起止时间不超过1个小时，每次查询用户不超过6个，支持跨天查询。DataType，UserIds为null时，默认查询6个用户，同时支持每页查询100以内用户个数（PageSize不超过100）。接口用于查询质量问题，不推荐作为计费使用。
@@ -99,10 +136,10 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
         return this.request("DescribeCallDetail", req, cb);
     }
     /**
-     * 接口说明：结束云端混流
+     * 接口说明：把房间所有用户从房间移出，解散房间。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
      */
-    async StopMCUMixTranscode(req, cb) {
-        return this.request("StopMCUMixTranscode", req, cb);
+    async DismissRoomByStrRoomId(req, cb) {
+        return this.request("DismissRoomByStrRoomId", req, cb);
     }
     /**
      * 查询SDKAppID下用户的异常体验事件，返回异常体验ID与可能产生异常体验的原因。可查询5天内数据，查询起止时间不超过1个小时。支持跨天查询。异常体验ID映射见：https://cloud.tencent.com/document/product/647/44916
@@ -115,6 +152,12 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
      */
     async DescribeRealtimeQuality(req, cb) {
         return this.request("DescribeRealtimeQuality", req, cb);
+    }
+    /**
+     * 接口说明：将用户从房间移出，适用于主播/房主/管理员踢人等场景。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
+     */
+    async RemoveUserByStrRoomId(req, cb) {
+        return this.request("RemoveUserByStrRoomId", req, cb);
     }
     /**
      * 接口说明：把房间所有用户从房间移出，解散房间。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。

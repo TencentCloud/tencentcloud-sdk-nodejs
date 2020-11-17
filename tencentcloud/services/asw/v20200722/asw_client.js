@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeExecution", req, cb);
     }
     /**
+     * 查询指定用户下所有状态机，以列表形式返回
+     */
+    async DescribeFlowServices(req, cb) {
+        return this.request("DescribeFlowServices", req, cb);
+    }
+    /**
      * 对状态机的执行历史进行描述.
      */
     async DescribeExecutions(req, cb) {

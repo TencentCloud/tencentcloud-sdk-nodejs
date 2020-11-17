@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateImageLifecyclePersonal", req, cb);
     }
     /**
+     * 用于在企业版中创建命名空间
+     */
+    async CreateNamespace(req, cb) {
+        return this.request("CreateNamespace", req, cb);
+    }
+    /**
      * 用于获取个人版镜像仓库tag列表
      */
     async DescribeImagePersonal(req, cb) {
@@ -70,10 +76,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeImageLifecycleGlobalPersonal", req, cb);
     }
     /**
-     * 用于在企业版中创建命名空间
+     * 删除镜像仓库企业版实例
      */
-    async CreateNamespace(req, cb) {
-        return this.request("CreateNamespace", req, cb);
+    async DeleteInstance(req, cb) {
+        return this.request("DeleteInstance", req, cb);
     }
     /**
      * 用于修改应用更新触发器
@@ -88,10 +94,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyRepository", req, cb);
     }
     /**
-     * 用于个人版镜像仓库中删除
+     * 删除命名空间
      */
-    async DeleteRepositoryPersonal(req, cb) {
-        return this.request("DeleteRepositoryPersonal", req, cb);
+    async DeleteNamespace(req, cb) {
+        return this.request("DeleteNamespace", req, cb);
     }
     /**
      * 删除镜像仓库
@@ -136,10 +142,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNamespacePersonal", req, cb);
     }
     /**
-     * 删除命名空间
+     * 用于个人版镜像仓库中删除
      */
-    async DeleteNamespace(req, cb) {
-        return this.request("DeleteNamespace", req, cb);
+    async DeleteRepositoryPersonal(req, cb) {
+        return this.request("DeleteRepositoryPersonal", req, cb);
     }
     /**
      * 查询个人版仓库信息

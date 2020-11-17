@@ -198,6 +198,7 @@ import {
   OriginPullOptimization,
   ErrorPage,
   PushTask,
+  CreateEdgePackTaskResponse,
   TimestampData,
   StartCdnDomainResponse,
   DescribePushQuotaRequest,
@@ -239,6 +240,7 @@ import {
   CacheTagKey,
   ScdnTypeData,
   DescribeDomainsRequest,
+  CreateEdgePackTaskRequest,
   DiagnoseList,
   IpFilterPathRule,
 } from "./cdn_models"
@@ -250,6 +252,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("cdn.tencentcloudapi.com", "2018-06-06", clientConfig)
+  }
+
+  /**
+   * 动态打包任务提交接口
+   */
+  async CreateEdgePackTask(
+    req: CreateEdgePackTaskRequest,
+    cb?: (error: string, rep: CreateEdgePackTaskResponse) => void
+  ): Promise<CreateEdgePackTaskResponse> {
+    return this.request("CreateEdgePackTask", req, cb)
   }
 
   /**
