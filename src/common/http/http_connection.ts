@@ -57,6 +57,7 @@ export class HttpConnection {
     timeout = 60000,
     token,
     requestClient,
+    language,
   }: {
     method: string
     url: string
@@ -71,6 +72,7 @@ export class HttpConnection {
     timeout?: number
     token: string
     requestClient: string
+    language: string
   }): Promise<Response> {
     // data 中可能带有 readStream，由于需要计算整个 body 的 hash，
     // 所以这里把 readStream 转为 Buffer
@@ -118,6 +120,10 @@ export class HttpConnection {
     }
     if (region === null) {
       delete config.headers["X-TC-Region"]
+    }
+
+    if (language) {
+      config.headers["X-TC-Language"] = language
     }
 
     let form
