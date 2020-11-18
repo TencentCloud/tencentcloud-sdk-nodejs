@@ -1,5 +1,5 @@
 import { sdkVersion } from "./sdk_version"
-import { ClientProfile, Credential, ClientConfig } from "./interface"
+import { ClientProfile, Credential, ClientConfig, SUPPORT_LANGUAGE_LIST } from "./interface"
 import Sign from "./sign"
 import { HttpConnection } from "./http/http_connection"
 import TencentCloudSDKHttpException from "./exception/tencent_cloud_sdk_exception"
@@ -81,6 +81,13 @@ export class AbstractClient {
         },
         profile && profile.httpProfile
       ),
+      language: profile.language,
+    }
+
+    if (this.profile.language && !SUPPORT_LANGUAGE_LIST.includes(this.profile.language)) {
+      throw new TencentCloudSDKHttpException(
+        `Language invalid, choices: ${SUPPORT_LANGUAGE_LIST.join("|")}`
+      )
     }
   }
 
@@ -158,6 +165,7 @@ export class AbstractClient {
         timeout: this.profile.httpProfile.reqTimeout * 1000,
         token: this.credential.token,
         requestClient: this.sdkVersion,
+        language: this.profile.language,
       })
     } catch (e) {
       throw new TencentCloudSDKHttpException(e.message)
@@ -223,6 +231,10 @@ export class AbstractClient {
 
     if (this.credential.token) {
       params.Token = this.credential.token
+    }
+
+    if (this.profile.language) {
+      params.Language = this.profile.language
     }
 
     if (this.profile.signMethod) {

@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AbstractClient = void 0;
 const sdk_version_1 = require("./sdk_version");
+const interface_1 = require("./interface");
 const sign_1 = require("./sign");
 const http_connection_1 = require("./http/http_connection");
 const tencent_cloud_sdk_exception_1 = require("./exception/tencent_cloud_sdk_exception");
@@ -46,7 +47,11 @@ class AbstractClient {
                 protocol: "https://",
                 reqTimeout: 60,
             }, profile && profile.httpProfile),
+            language: profile.language,
         };
+        if (this.profile.language && !interface_1.SUPPORT_LANGUAGE_LIST.includes(this.profile.language)) {
+            throw new tencent_cloud_sdk_exception_1.default(`Language invalid, choices: ${interface_1.SUPPORT_LANGUAGE_LIST.join("|")}`);
+        }
     }
     /**
      * @inner
@@ -109,6 +114,7 @@ class AbstractClient {
                 timeout: this.profile.httpProfile.reqTimeout * 1000,
                 token: this.credential.token,
                 requestClient: this.sdkVersion,
+                language: this.profile.language,
             });
         }
         catch (e) {
@@ -169,6 +175,9 @@ class AbstractClient {
         }
         if (this.credential.token) {
             params.Token = this.credential.token;
+        }
+        if (this.profile.language) {
+            params.Language = this.profile.language;
         }
         if (this.profile.signMethod) {
             params.SignatureMethod = this.profile.signMethod;

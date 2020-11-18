@@ -60,7 +60,18 @@ export interface ClientProfile {
      */
     reqTimeout?: number
   }
+  /**
+   * api请求时附带的 language 字段
+   * @type {"zh-CN" | "en-US"}
+   * 非必选
+   */
+  language?: "zh-CN" | "en-US"
 }
+
+/**
+ * ClientProfile.language 属性支持的取值列表
+ */
+export const SUPPORT_LANGUAGE_LIST = ["zh-CN", "en-US"]
 
 /**
  * 认证信息类

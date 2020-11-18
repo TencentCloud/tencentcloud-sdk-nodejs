@@ -27,7 +27,7 @@ class HttpConnection {
         }
         return await fetch_1.default(url, config);
     }
-    static async doRequestWithSign3({ method, url, data, service, action, region, version, secretId, secretKey, multipart = false, timeout = 60000, token, requestClient, }) {
+    static async doRequestWithSign3({ method, url, data, service, action, region, version, secretId, secretKey, multipart = false, timeout = 60000, token, requestClient, language, }) {
         // data 中可能带有 readStream，由于需要计算整个 body 的 hash，
         // 所以这里把 readStream 转为 Buffer
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
@@ -63,6 +63,9 @@ class HttpConnection {
         }
         if (region === null) {
             delete config.headers["X-TC-Region"];
+        }
+        if (language) {
+            config.headers["X-TC-Language"] = language;
         }
         let form;
         if (method === "GET") {
