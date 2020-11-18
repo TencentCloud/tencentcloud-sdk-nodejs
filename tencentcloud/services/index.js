@@ -22,6 +22,8 @@ var asr_1 = require("./asr");
 Object.defineProperty(exports, "asr", { enumerable: true, get: function () { return asr_1.asr; } });
 var asw_1 = require("./asw");
 Object.defineProperty(exports, "asw", { enumerable: true, get: function () { return asw_1.asw; } });
+var ba_1 = require("./ba");
+Object.defineProperty(exports, "ba", { enumerable: true, get: function () { return ba_1.ba; } });
 var batch_1 = require("./batch");
 Object.defineProperty(exports, "batch", { enumerable: true, get: function () { return batch_1.batch; } });
 var bda_1 = require("./bda");

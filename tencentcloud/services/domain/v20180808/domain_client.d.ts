@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { UploadImageResponse, BatchModifyDomainInfoRequest, UpdateProhibitionBatchRequest, DeleteTemplateResponse, TransferInDomainBatchRequest, CreateDomainBatchResponse, ModifyDomainDNSBatchResponse, RenewDomainBatchRequest, TransferInDomainBatchResponse, UpdateProhibitionBatchResponse, CheckDomainResponse, RenewDomainBatchResponse, BatchModifyDomainInfoResponse, DescribeDomainBaseInfoResponse, DescribeTemplateListResponse, TransferProhibitionBatchRequest, DescribeBatchOperationLogDetailsRequest, DescribeDomainNameListResponse, DescribeDomainPriceListResponse, CreateTemplateResponse, DeleteTemplateRequest, CheckBatchStatusRequest, SetDomainAutoRenewResponse, CreateTemplateRequest, DescribeDomainPriceListRequest, CreateDomainBatchRequest, DescribeDomainBaseInfoRequest, DescribeDomainNameListRequest, DescribeBatchOperationLogsRequest, UploadImageRequest, CheckDomainRequest, DescribeBatchOperationLogsResponse, TransferProhibitionBatchResponse, ModifyDomainDNSBatchRequest, DescribeBatchOperationLogDetailsResponse, CheckBatchStatusResponse, DescribeTemplateListRequest, ModifyDomainOwnerBatchResponse, SetDomainAutoRenewRequest, ModifyDomainOwnerBatchRequest } from "./domain_models";
+import { UploadImageResponse, BatchModifyDomainInfoRequest, UpdateProhibitionBatchRequest, DeleteTemplateResponse, TransferInDomainBatchRequest, CreateDomainBatchResponse, ModifyDomainDNSBatchResponse, RenewDomainBatchRequest, DescribeTemplateResponse, UpdateProhibitionBatchResponse, CheckDomainResponse, RenewDomainBatchResponse, DescribeTemplateRequest, TransferInDomainBatchResponse, BatchModifyDomainInfoResponse, DescribeDomainBaseInfoResponse, DescribeTemplateListResponse, TransferProhibitionBatchRequest, DescribeBatchOperationLogDetailsRequest, DescribeDomainNameListResponse, DescribeDomainPriceListResponse, CreateTemplateResponse, DeleteTemplateRequest, CheckBatchStatusRequest, SetDomainAutoRenewResponse, CreateTemplateRequest, DescribeDomainPriceListRequest, CreateDomainBatchRequest, DescribeDomainBaseInfoRequest, DescribeDomainNameListRequest, DescribeBatchOperationLogsRequest, UploadImageRequest, CheckDomainRequest, DescribeBatchOperationLogsResponse, TransferProhibitionBatchResponse, ModifyDomainDNSBatchRequest, DescribeBatchOperationLogDetailsResponse, CheckBatchStatusResponse, DescribeTemplateListRequest, ModifyDomainOwnerBatchResponse, SetDomainAutoRenewRequest, ModifyDomainOwnerBatchRequest } from "./domain_models";
 /**
  * domain client
  * @class
@@ -21,11 +21,9 @@ export declare class Client extends AbstractClient {
      */
     CreateTemplate(req: CreateTemplateRequest, cb?: (error: string, rep: CreateTemplateResponse) => void): Promise<CreateTemplateResponse>;
     /**
-     * 本接口 ( TransferInDomainBatch ) 用于批量禁止域名转移 。
-
-默认接口请求频率限制：20次/秒。
+     * 本接口 (DescribeTemplate) 用于获取模板信息。
      */
-    TransferProhibitionBatch(req: TransferProhibitionBatchRequest, cb?: (error: string, rep: TransferProhibitionBatchResponse) => void): Promise<TransferProhibitionBatchResponse>;
+    DescribeTemplate(req: DescribeTemplateRequest, cb?: (error: string, rep: DescribeTemplateResponse) => void): Promise<DescribeTemplateResponse>;
     /**
      * 本接口 ( ModifyDomainOwnerBatch) 用于域名批量账号间转移 。
      */
@@ -67,6 +65,12 @@ export declare class Client extends AbstractClient {
 
      */
     RenewDomainBatch(req: RenewDomainBatchRequest, cb?: (error: string, rep: RenewDomainBatchResponse) => void): Promise<RenewDomainBatchResponse>;
+    /**
+     * 本接口 ( TransferInDomainBatch ) 用于批量禁止域名转移 。
+
+默认接口请求频率限制：20次/秒。
+     */
+    TransferProhibitionBatch(req: TransferProhibitionBatchRequest, cb?: (error: string, rep: TransferProhibitionBatchResponse) => void): Promise<TransferProhibitionBatchResponse>;
     /**
      * 本接口 ( BatchModifyDomainInfo ) 用于批量域名信息修改 。
      */

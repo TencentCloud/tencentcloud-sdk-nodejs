@@ -9,6 +9,7 @@ export { apigateway } from "./apigateway";
 export { as } from "./as";
 export { asr } from "./asr";
 export { asw } from "./asw";
+export { ba } from "./ba";
 export { batch } from "./batch";
 export { bda } from "./bda";
 export { billing } from "./billing";

@@ -813,6 +813,18 @@ export interface VmGroup {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DeployWaitTime: number
+
+  /**
+      * 是否开启了健康检查
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnableHealthCheck: boolean
+
+  /**
+      * 健康检查配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HealthCheckSettings: HealthCheckSettings
 }
 
 /**
@@ -1739,52 +1751,58 @@ export interface Instance {
   OperationState: number
 
   /**
-      * NamespaceId
+      * NamespaceId Ns ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
   NamespaceId: string
 
   /**
-      * InstanceZoneId
+      * InstanceZoneId 可用区ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
   InstanceZoneId: string
 
   /**
-      * InstanceImportMode
+      * InstanceImportMode 导入模式
 注意：此字段可能返回 null，表示取不到有效值。
       */
   InstanceImportMode: string
 
   /**
-      * ApplicationType
+      * ApplicationType应用类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ApplicationType: string
 
   /**
-      * ApplicationResourceType
+      * ApplicationResourceType 资源类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ApplicationResourceType: string
 
   /**
-      * ServiceSidecarStatus
+      * sidecar状态
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ServiceSidecarStatus: string
 
   /**
-      * GroupName
+      * 部署组名
 注意：此字段可能返回 null，表示取不到有效值。
       */
   GroupName: string
 
   /**
-      * NamespaceName
+      * NS名
 注意：此字段可能返回 null，表示取不到有效值。
       */
   NamespaceName: string
+
+  /**
+      * 健康检查原因
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Reason: string
 }
 
 /**
@@ -4287,6 +4305,26 @@ export interface ApiResponseDescr {
 }
 
 /**
+ * UpdateHealthCheckSettings请求参数结构体
+ */
+export interface UpdateHealthCheckSettingsRequest {
+  /**
+   * 部署组ID
+   */
+  GroupId: string
+
+  /**
+   * 是否能使健康检查
+   */
+  EnableHealthCheck?: boolean
+
+  /**
+   * 健康检查配置
+   */
+  HealthCheckSettings?: HealthCheckSettings
+}
+
+/**
  * DeployServerlessGroup请求参数结构体
  */
 export interface DeployServerlessGroupRequest {
@@ -5167,6 +5205,24 @@ export interface PropertyField {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Description: string
+}
+
+/**
+ * UpdateHealthCheckSettings返回参数结构体
+ */
+export interface UpdateHealthCheckSettingsResponse {
+  /**
+      * 更新健康检查配置操作是否成功。
+true：操作成功。
+false：操作失败。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result?: boolean
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6929,6 +6985,41 @@ export interface DeployGroupRequest {
    * 是否允许强制启动
    */
   ForceStart?: boolean
+
+  /**
+   * 是否开启健康检查
+   */
+  EnableHealthCheck?: boolean
+
+  /**
+   * 开启健康检查时，配置健康检查
+   */
+  HealthCheckSettings?: HealthCheckSettings
+
+  /**
+   * 部署方式，0表示快速更新，1表示滚动更新
+   */
+  UpdateType?: number
+
+  /**
+   * 是否启用beta批次
+   */
+  DeployBetaEnable?: boolean
+
+  /**
+   * 滚动发布每个批次参与的实例比率
+   */
+  DeployBatch?: Array<number>
+
+  /**
+   * 滚动发布的执行方式
+   */
+  DeployExeMode?: string
+
+  /**
+   * 滚动发布每个批次的时间间隔
+   */
+  DeployWaitTime?: number
 }
 
 /**

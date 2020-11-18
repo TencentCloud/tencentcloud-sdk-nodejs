@@ -158,7 +158,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CompleteCertificate）用于主动触发证书验证。
+   * 本接口（CompleteCertificate）用于主动触发证书验证。仅非DNSPod和Wotrus品牌证书支持使用此接口。
    */
   async CompleteCertificate(
     req: CompleteCertificateRequest,
@@ -248,7 +248,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 提交证书资料。
+   * 提交证书资料。输入参数信息可以分多次提交，但提交的证书资料应最低限度保持完整。
    */
   async SubmitCertificateInformation(
     req: SubmitCertificateInformationRequest,

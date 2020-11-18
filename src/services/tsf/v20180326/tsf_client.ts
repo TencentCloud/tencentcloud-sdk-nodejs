@@ -175,6 +175,7 @@ import {
   ServiceSetting,
   ExecuteTaskResponse,
   ApiResponseDescr,
+  UpdateHealthCheckSettingsRequest,
   DeployServerlessGroupRequest,
   Config,
   CreateClusterResponse,
@@ -205,6 +206,7 @@ import {
   RevocationPublicConfigRequest,
   TaskFlowLastBatchState,
   PropertyField,
+  UpdateHealthCheckSettingsResponse,
   TsfPageApplication,
   DescribeGroupRequest,
   RedoTaskRequest,
@@ -661,6 +663,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: DescribeLanesResponse) => void
   ): Promise<DescribeLanesResponse> {
     return this.request("DescribeLanes", req, cb)
+  }
+
+  /**
+   * 更新健康检查配置
+   */
+  async UpdateHealthCheckSettings(
+    req: UpdateHealthCheckSettingsRequest,
+    cb?: (error: string, rep: UpdateHealthCheckSettingsResponse) => void
+  ): Promise<UpdateHealthCheckSettingsResponse> {
+    return this.request("UpdateHealthCheckSettings", req, cb)
   }
 
   /**

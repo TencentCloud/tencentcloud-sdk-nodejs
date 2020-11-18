@@ -55,7 +55,7 @@ export interface TemplateInfo {
   TemplateId: string
 
   /**
-   * 认证状态
+   * 认证状态：未实名认证:NotUpload, 实名审核中:InAudit，已实名认证:Approved，实名审核失败:Reject
    */
   AuditStatus: string
 
@@ -75,7 +75,7 @@ export interface TemplateInfo {
   UserUin: string
 
   /**
-   * 是否是默认模板
+   * 是否是默认模板: 是:yes，否:no
    */
   IsDefault: string
 
@@ -248,13 +248,13 @@ export interface RenewDomainBatchRequest {
 }
 
 /**
- * TransferInDomainBatch返回参数结构体
+ * DescribeTemplate返回参数结构体
  */
-export interface TransferInDomainBatchResponse {
+export interface DescribeTemplateResponse {
   /**
-   * 日志ID
+   * 模板信息
    */
-  LogId?: number
+  Template?: TemplateInfo
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -399,6 +399,31 @@ export interface PriceInfo {
    * 商品的购买类型，新购，续费，赎回，转入，续费并转入
    */
   Operation: string
+}
+
+/**
+ * DescribeTemplate请求参数结构体
+ */
+export interface DescribeTemplateRequest {
+  /**
+   * 模板ID
+   */
+  TemplateId: string
+}
+
+/**
+ * TransferInDomainBatch返回参数结构体
+ */
+export interface TransferInDomainBatchResponse {
+  /**
+   * 日志ID
+   */
+  LogId?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

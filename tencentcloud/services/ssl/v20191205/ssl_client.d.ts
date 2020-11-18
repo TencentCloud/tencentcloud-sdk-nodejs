@@ -40,7 +40,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteCertificate(req: DeleteCertificateRequest, cb?: (error: string, rep: DeleteCertificateResponse) => void): Promise<DeleteCertificateResponse>;
     /**
-     * 本接口（CompleteCertificate）用于主动触发证书验证。
+     * 本接口（CompleteCertificate）用于主动触发证书验证。仅非DNSPod和Wotrus品牌证书支持使用此接口。
      */
     CompleteCertificate(req: CompleteCertificateRequest, cb?: (error: string, rep: CompleteCertificateResponse) => void): Promise<CompleteCertificateResponse>;
     /**
@@ -76,7 +76,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeCertificateOperateLogs(req: DescribeCertificateOperateLogsRequest, cb?: (error: string, rep: DescribeCertificateOperateLogsResponse) => void): Promise<DescribeCertificateOperateLogsResponse>;
     /**
-     * 提交证书资料。
+     * 提交证书资料。输入参数信息可以分多次提交，但提交的证书资料应最低限度保持完整。
      */
     SubmitCertificateInformation(req: SubmitCertificateInformationRequest, cb?: (error: string, rep: SubmitCertificateInformationResponse) => void): Promise<SubmitCertificateInformationResponse>;
     /**

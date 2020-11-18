@@ -1432,7 +1432,7 @@ export interface DomainDetailInfo {
   Readonly: string
 
   /**
-      * 域名标签
+      * 域名标签。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Tag: Array<Tag>

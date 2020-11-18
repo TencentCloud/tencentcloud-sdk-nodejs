@@ -28,11 +28,13 @@ import {
   DomainBatchDetailSet,
   ModifyDomainDNSBatchResponse,
   RenewDomainBatchRequest,
-  TransferInDomainBatchResponse,
+  DescribeTemplateResponse,
   UpdateProhibitionBatchResponse,
   CheckDomainResponse,
   RenewDomainBatchResponse,
   PriceInfo,
+  DescribeTemplateRequest,
+  TransferInDomainBatchResponse,
   BatchModifyDomainInfoResponse,
   DescribeDomainBaseInfoResponse,
   DescribeTemplateListResponse,
@@ -110,15 +112,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口 ( TransferInDomainBatch ) 用于批量禁止域名转移 。
-
-默认接口请求频率限制：20次/秒。
-     */
-  async TransferProhibitionBatch(
-    req: TransferProhibitionBatchRequest,
-    cb?: (error: string, rep: TransferProhibitionBatchResponse) => void
-  ): Promise<TransferProhibitionBatchResponse> {
-    return this.request("TransferProhibitionBatch", req, cb)
+   * 本接口 (DescribeTemplate) 用于获取模板信息。
+   */
+  async DescribeTemplate(
+    req: DescribeTemplateRequest,
+    cb?: (error: string, rep: DescribeTemplateResponse) => void
+  ): Promise<DescribeTemplateResponse> {
+    return this.request("DescribeTemplate", req, cb)
   }
 
   /**
@@ -208,6 +208,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RenewDomainBatchResponse) => void
   ): Promise<RenewDomainBatchResponse> {
     return this.request("RenewDomainBatch", req, cb)
+  }
+
+  /**
+     * 本接口 ( TransferInDomainBatch ) 用于批量禁止域名转移 。
+
+默认接口请求频率限制：20次/秒。
+     */
+  async TransferProhibitionBatch(
+    req: TransferProhibitionBatchRequest,
+    cb?: (error: string, rep: TransferProhibitionBatchResponse) => void
+  ): Promise<TransferProhibitionBatchResponse> {
+    return this.request("TransferProhibitionBatch", req, cb)
   }
 
   /**

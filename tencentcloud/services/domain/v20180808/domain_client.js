@@ -47,12 +47,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTemplate", req, cb);
     }
     /**
-     * 本接口 ( TransferInDomainBatch ) 用于批量禁止域名转移 。
-
-默认接口请求频率限制：20次/秒。
+     * 本接口 (DescribeTemplate) 用于获取模板信息。
      */
-    async TransferProhibitionBatch(req, cb) {
-        return this.request("TransferProhibitionBatch", req, cb);
+    async DescribeTemplate(req, cb) {
+        return this.request("DescribeTemplate", req, cb);
     }
     /**
      * 本接口 ( ModifyDomainOwnerBatch) 用于域名批量账号间转移 。
@@ -110,6 +108,14 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async RenewDomainBatch(req, cb) {
         return this.request("RenewDomainBatch", req, cb);
+    }
+    /**
+     * 本接口 ( TransferInDomainBatch ) 用于批量禁止域名转移 。
+
+默认接口请求频率限制：20次/秒。
+     */
+    async TransferProhibitionBatch(req, cb) {
+        return this.request("TransferProhibitionBatch", req, cb);
     }
     /**
      * 本接口 ( BatchModifyDomainInfo ) 用于批量域名信息修改 。
