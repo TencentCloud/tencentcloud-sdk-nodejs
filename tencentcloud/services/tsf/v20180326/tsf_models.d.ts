@@ -84,23 +84,73 @@ export interface DisableTaskFlowResponse {
     RequestId?: string;
 }
 /**
- * 任务规则
+ * ModifyTask请求参数结构体
  */
-export interface TaskRule {
+export interface ModifyTaskRequest {
     /**
-      * 触发规则类型, Cron/Repeat
+      * 任务ID
       */
-    RuleType: string;
+    TaskId: string;
     /**
-      * Cron类型规则，cron表达式。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 任务名称
       */
-    Expression?: string;
+    TaskName?: string;
     /**
-      * 时间间隔， 单位毫秒
-注意：此字段可能返回 null，表示取不到有效值。
+      * 任务类型
       */
-    RepeatInterval: number;
+    TaskType?: string;
+    /**
+      * 任务内容
+      */
+    TaskContent?: string;
+    /**
+      * 任务执行类型
+      */
+    ExecuteType?: string;
+    /**
+      * 触发规则
+      */
+    TaskRule?: TaskRule;
+    /**
+      * 超时时间，单位 ms
+      */
+    TimeOut?: number;
+    /**
+      * 分组ID
+      */
+    GroupId?: string;
+    /**
+      * 分片数量
+      */
+    ShardCount?: number;
+    /**
+      * 分片参数
+      */
+    ShardArguments?: ShardArgument;
+    /**
+      * 高级设置
+      */
+    AdvanceSettings?: AdvanceSettings;
+    /**
+      * 判断任务成功的操作符 GT/GTE
+      */
+    SuccessOperator?: string;
+    /**
+      * 判断任务成功率的阈值
+      */
+    SuccessRatio?: number;
+    /**
+      * 重试次数
+      */
+    RetryCount?: number;
+    /**
+      * 重试间隔
+      */
+    RetryInterval?: number;
+    /**
+      * 任务参数，长度限制10000个字符
+      */
+    TaskArgument?: string;
 }
 /**
  * DescribeDownloadInfo请求参数结构体
@@ -881,6 +931,19 @@ export interface StopGroupResponse {
     RequestId?: string;
 }
 /**
+ * StopTaskExecute返回参数结构体
+ */
+export interface StopTaskExecuteResponse {
+    /**
+      * 操作成功 or 失败
+      */
+    Result?: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * StartContainerGroup返回参数结构体
  */
 export interface StartContainerGroupResponse {
@@ -1562,6 +1625,23 @@ export interface DescribeApplicationAttributeResponse {
     RequestId?: string;
 }
 /**
+ * RedoTaskExecute请求参数结构体
+ */
+export interface RedoTaskExecuteRequest {
+    /**
+      * 任务批次ID
+      */
+    BatchId: string;
+    /**
+      * 任务执行ID
+      */
+    ExecuteId: string;
+    /**
+      * 任务ID
+      */
+    TaskId: string;
+}
+/**
  * DescribeApplications返回参数结构体
  */
 export interface DescribeApplicationsResponse {
@@ -2137,13 +2217,41 @@ export interface ApiDefinitionDescr {
     Properties: Array<PropertyField>;
 }
 /**
- * ExecuteTask请求参数结构体
+ * DescribeServerlessGroups请求参数结构体
  */
-export interface ExecuteTaskRequest {
+export interface DescribeServerlessGroupsRequest {
     /**
-      * 任务 ID。
+      * 搜索字段，模糊搜索groupName字段
       */
-    TaskId: string;
+    SearchWord?: string;
+    /**
+      * 分组所属应用ID
+      */
+    ApplicationId?: string;
+    /**
+      * 排序字段，默认为 createTime字段，支持id， name， createTime
+      */
+    OrderBy?: string;
+    /**
+      * 排序方式，默认为1：倒序排序，0：正序，1：倒序
+      */
+    OrderType?: string;
+    /**
+      * 偏移量，取值从0开始
+      */
+    Offset?: number;
+    /**
+      * 分页个数，默认为20， 取值应为1~50
+      */
+    Limit?: number;
+    /**
+      * 分组所属名字空间ID
+      */
+    NamespaceId?: string;
+    /**
+      * 分组所属集群ID
+      */
+    ClusterId?: string;
 }
 /**
  * RedoTaskFlowBatch请求参数结构体
@@ -2785,6 +2893,25 @@ export interface DescribeRepositoriesRequest {
       * 仓库类型（默认仓库：default，私有仓库：private）
       */
     RepositoryType?: string;
+}
+/**
+ * 任务规则
+ */
+export interface TaskRule {
+    /**
+      * 触发规则类型, Cron/Repeat
+      */
+    RuleType: string;
+    /**
+      * Cron类型规则，cron表达式。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Expression?: string;
+    /**
+      * 时间间隔， 单位毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RepeatInterval: number;
 }
 /**
  * DescribeApplicationAttribute请求参数结构体
@@ -3615,7 +3742,7 @@ export interface ServiceSetting {
       * 容器端口映射
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ProtocolPorts: ProtocolPort;
+    ProtocolPorts: Array<ProtocolPort>;
     /**
       * 子网ID
 注意：此字段可能返回 null，表示取不到有效值。
@@ -4363,6 +4490,19 @@ export interface ImageRepositoryResult {
     Content: Array<ImageRepository>;
 }
 /**
+ * ModifyTask返回参数结构体
+ */
+export interface ModifyTaskResponse {
+    /**
+      * 更新是否成功
+      */
+    Result?: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeRepository请求参数结构体
  */
 export interface DescribeRepositoryRequest {
@@ -4570,6 +4710,20 @@ export interface DescribeServerlessGroupRequest {
     GroupId: string;
 }
 /**
+ * UpdateRepository返回参数结构体
+ */
+export interface UpdateRepositoryResponse {
+    /**
+      * 更新仓库是否成功
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result?: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 列表中部署组分页信息
  */
 export interface TsfPageVmGroup {
@@ -4627,17 +4781,13 @@ export interface ContinueRunFailedTaskBatchRequest {
     BatchId: string;
 }
 /**
- * StopTaskExecute返回参数结构体
+ * ExecuteTask请求参数结构体
  */
-export interface StopTaskExecuteResponse {
+export interface ExecuteTaskRequest {
     /**
-      * 操作成功 or 失败
+      * 任务 ID。
       */
-    Result?: boolean;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    TaskId: string;
 }
 /**
  * EnableTaskFlow返回参数结构体
@@ -5140,14 +5290,13 @@ false：操作失败。
     RequestId?: string;
 }
 /**
- * DescribeLanes返回参数结构体
+ * CreateTaskFlow返回参数结构体
  */
-export interface DescribeLanesResponse {
+export interface CreateTaskFlowResponse {
     /**
-      * 泳道列表
-注意：此字段可能返回 null，表示取不到有效值。
+      * 工作流 ID
       */
-    Result?: LaneInfos;
+    Result?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5489,14 +5638,14 @@ export interface ModifyContainerGroupRequest {
     SubnetId?: string;
 }
 /**
- * UpdateRepository返回参数结构体
+ * DescribeLanes返回参数结构体
  */
-export interface UpdateRepositoryResponse {
+export interface DescribeLanesResponse {
     /**
-      * 更新仓库是否成功
+      * 泳道列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: boolean;
+    Result?: LaneInfos;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6085,41 +6234,25 @@ export interface CreateLaneRuleRequest {
     LaneId: string;
 }
 /**
- * DescribeServerlessGroups请求参数结构体
+ * CreateTaskFlow请求参数结构体
  */
-export interface DescribeServerlessGroupsRequest {
+export interface CreateTaskFlowRequest {
     /**
-      * 搜索字段，模糊搜索groupName字段
+      * 工作流名称
       */
-    SearchWord?: string;
+    FlowName: string;
     /**
-      * 分组所属应用ID
+      * 触发方式
       */
-    ApplicationId?: string;
+    TriggerRule: TaskRule;
     /**
-      * 排序字段，默认为 createTime字段，支持id， name， createTime
+      * 工作流任务节点列表
       */
-    OrderBy?: string;
+    FlowEdges: Array<TaskFlowEdge>;
     /**
-      * 排序方式，默认为1：倒序排序，0：正序，1：倒序
+      * 工作流执行超时时间
       */
-    OrderType?: string;
-    /**
-      * 偏移量，取值从0开始
-      */
-    Offset?: number;
-    /**
-      * 分页个数，默认为20， 取值应为1~50
-      */
-    Limit?: number;
-    /**
-      * 分组所属名字空间ID
-      */
-    NamespaceId?: string;
-    /**
-      * 分组所属集群ID
-      */
-    ClusterId?: string;
+    TimeOut: number;
 }
 /**
  * DeployContainerGroup请求参数结构体
@@ -6803,11 +6936,87 @@ export interface TsfPageConfig {
     Content: Array<Config>;
 }
 /**
+ * 工作流图中的边
+ */
+export interface TaskFlowEdge {
+    /**
+      * 节点 ID
+      */
+    NodeId: string;
+    /**
+      * 子节点 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ChildNodeId: string;
+    /**
+      * 是否核心任务,Y/N
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CoreNode: string;
+    /**
+      * 边类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EdgeType: string;
+    /**
+      * 任务节点类型
+      */
+    NodeType: string;
+    /**
+      * X轴坐标位置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PositionX: string;
+    /**
+      * Y轴坐标位置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PositionY: string;
+    /**
+      * 图 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GraphId: string;
+    /**
+      * 工作流 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FlowId: string;
+    /**
+      * 节点名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NodeName: string;
+    /**
+      * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskId: string;
+    /**
+      * 任务历史ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskLogId: string;
+}
+/**
  * RedoTaskFlowBatch返回参数结构体
  */
 export interface RedoTaskFlowBatchResponse {
     /**
       * 工作流批次历史 ID
+      */
+    Result?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * RedoTaskExecute返回参数结构体
+ */
+export interface RedoTaskExecuteResponse {
+    /**
+      * 成功失败
       */
     Result?: string;
     /**

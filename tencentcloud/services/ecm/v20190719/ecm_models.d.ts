@@ -627,7 +627,9 @@ Linux实例密码必须8到30位，至少包括两项[a-z]，[A-Z]、[0-9] 和 [
       */
     Password?: string;
     /**
-      * 公网出带宽上限，单位：Mbps。如果未传该参数或者传的值为0，则使用模块下的默认值
+      * 公网出带宽上限，单位：Mbps。
+1.如果未传该参数或者传的值为0，则使用模块下的默认值。
+2.如果未传该参数或者传的值为0且未指定模块，则使用InternetMaxBandwidthIn的值
       */
     InternetMaxBandwidthOut?: number;
     /**
@@ -687,6 +689,12 @@ Windows 实例：名字符长度为[2, 15]，允许字母（不限制大小写�
       * 系统盘大小，单位是G。如果未传该参数或者传的值为0，则使用模块下的默认值
       */
     SystemDiskSize?: number;
+    /**
+      * 公网入带宽上限，单位：Mbps。
+1.如果未传该参数或者传的值为0，则使用对应模块的默认值。
+2.如果未传该参数或者传的值为0且未指定模块，则使用InternetMaxBandwidthOut
+      */
+    InternetMaxBandwidthIn?: number;
 }
 /**
  * ReleaseAddresses请求参数结构体

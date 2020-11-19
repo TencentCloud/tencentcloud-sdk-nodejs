@@ -24,7 +24,7 @@ import {
   DescribeMsApiListResponse,
   EnableTaskRequest,
   DisableTaskFlowResponse,
-  TaskRule,
+  ModifyTaskRequest,
   DescribeDownloadInfoRequest,
   ApiDetailResponse,
   ImageTag,
@@ -54,6 +54,7 @@ import {
   DescribeApiVersionsResponse,
   DescribeRepositoriesResponse,
   StopGroupResponse,
+  StopTaskExecuteResponse,
   StartContainerGroupResponse,
   CreateGroupRequest,
   ModifyMicroserviceRequest,
@@ -84,6 +85,7 @@ import {
   DeployServerlessGroupResponse,
   DescribeConfigsResponse,
   DescribeApplicationAttributeResponse,
+  RedoTaskExecuteRequest,
   DescribeApplicationsResponse,
   VmGroupSimple,
   ModifyContainerReplicasRequest,
@@ -114,7 +116,7 @@ import {
   DescribeImageTagsResponse,
   DeleteGroupRequest,
   ApiDefinitionDescr,
-  ExecuteTaskRequest,
+  DescribeServerlessGroupsRequest,
   RedoTaskFlowBatchRequest,
   TsfPageMsInstance,
   StopTaskBatchRequest,
@@ -139,6 +141,7 @@ import {
   ShrinkInstancesResponse,
   DeleteImageTagsRequest,
   DescribeRepositoriesRequest,
+  TaskRule,
   DescribeApplicationAttributeRequest,
   DescribePodInstancesRequest,
   DescribeTaskLastStatusRequest,
@@ -202,6 +205,7 @@ import {
   DescribeClusterInstancesRequest,
   StopContainerGroupRequest,
   ImageRepositoryResult,
+  ModifyTaskResponse,
   DescribeRepositoryRequest,
   RevocationPublicConfigRequest,
   TaskFlowLastBatchState,
@@ -215,11 +219,12 @@ import {
   EnableTaskFlowRequest,
   CreateLaneResponse,
   DescribeServerlessGroupRequest,
+  UpdateRepositoryResponse,
   TsfPageVmGroup,
   AddInstanceResult,
   DescribeFlowLastBatchStateResponse,
   ContinueRunFailedTaskBatchRequest,
-  StopTaskExecuteResponse,
+  ExecuteTaskRequest,
   EnableTaskFlowResponse,
   ApplicationAttribute,
   DeleteImageTag,
@@ -240,7 +245,7 @@ import {
   DeployContainerGroupResponse,
   CreatePublicConfigResponse,
   DeleteMicroserviceResponse,
-  DescribeLanesResponse,
+  CreateTaskFlowResponse,
   ContainGroupResult,
   ProtocolPort,
   LaneRules,
@@ -258,7 +263,7 @@ import {
   DescribeGroupsRequest,
   DescribeTaskLastStatusResponse,
   ModifyContainerGroupRequest,
-  UpdateRepositoryResponse,
+  DescribeLanesResponse,
   TsfPageMicroservice,
   DescribePublicConfigsRequest,
   AddInstancesRequest,
@@ -283,7 +288,7 @@ import {
   DeleteGroupResponse,
   CreateRepositoryResponse,
   CreateLaneRuleRequest,
-  DescribeServerlessGroupsRequest,
+  CreateTaskFlowRequest,
   DeployContainerGroupRequest,
   CosDownloadInfo,
   TsfPageSimpleGroup,
@@ -308,7 +313,9 @@ import {
   LaneGroup,
   DescribeBasicResourceUsageRequest,
   TsfPageConfig,
+  TaskFlowEdge,
   RedoTaskFlowBatchResponse,
+  RedoTaskExecuteResponse,
   RevocationPublicConfigResponse,
   DescribeGroupInstancesRequest,
   CreateGroupResponse,
@@ -713,6 +720,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: StopContainerGroupResponse) => void
   ): Promise<StopContainerGroupResponse> {
     return this.request("StopContainerGroup", req, cb)
+  }
+
+  /**
+   * 修改任务
+   */
+  async ModifyTask(
+    req: ModifyTaskRequest,
+    cb?: (error: string, rep: ModifyTaskResponse) => void
+  ): Promise<ModifyTaskResponse> {
+    return this.request("ModifyTask", req, cb)
   }
 
   /**
@@ -1147,6 +1164,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
+   * 重新执行在某个节点上执行任务。
+   */
+  async RedoTaskExecute(
+    req: RedoTaskExecuteRequest,
+    cb?: (error: string, rep: RedoTaskExecuteResponse) => void
+  ): Promise<RedoTaskExecuteResponse> {
+    return this.request("RedoTaskExecute", req, cb)
+  }
+
+  /**
    * 查询工作流最新一个批次的状态信息
    */
   async DescribeFlowLastBatchState(
@@ -1174,6 +1201,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: DeployContainerGroupResponse) => void
   ): Promise<DeployContainerGroupResponse> {
     return this.request("DeployContainerGroup", req, cb)
+  }
+
+  /**
+   * 创建工作流
+   */
+  async CreateTaskFlow(
+    req: CreateTaskFlowRequest,
+    cb?: (error: string, rep: CreateTaskFlowResponse) => void
+  ): Promise<CreateTaskFlowResponse> {
+    return this.request("CreateTaskFlow", req, cb)
   }
 
   /**

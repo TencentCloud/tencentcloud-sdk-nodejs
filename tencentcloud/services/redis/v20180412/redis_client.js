@@ -232,6 +232,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeProjectSecurityGroups", req, cb);
     }
     /**
+     * 查询Tendis慢查询
+     */
+    async DescribeTendisSlowLog(req, cb) {
+        return this.request("DescribeTendisSlowLog", req, cb);
+    }
+    /**
      * 本接口 (AssociateSecurityGroups) 用于安全组批量绑定多个指定实例。
      */
     async AssociateSecurityGroups(req, cb) {

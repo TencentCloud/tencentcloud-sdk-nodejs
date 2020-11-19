@@ -264,6 +264,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("StopContainerGroup", req, cb);
     }
     /**
+     * 修改任务
+     */
+    async ModifyTask(req, cb) {
+        return this.request("ModifyTask", req, cb);
+    }
+    /**
      * 创建泳道规则
      */
     async CreateLaneRule(req, cb) {
@@ -523,6 +529,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DeleteServerlessGroup", req, cb);
     }
     /**
+     * 重新执行在某个节点上执行任务。
+     */
+    async RedoTaskExecute(req, cb) {
+        return this.request("RedoTaskExecute", req, cb);
+    }
+    /**
      * 查询工作流最新一个批次的状态信息
      */
     async DescribeFlowLastBatchState(req, cb) {
@@ -539,6 +551,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async DeployContainerGroup(req, cb) {
         return this.request("DeployContainerGroup", req, cb);
+    }
+    /**
+     * 创建工作流
+     */
+    async CreateTaskFlow(req, cb) {
+        return this.request("CreateTaskFlow", req, cb);
     }
     /**
      * 查询虚拟机部署组详情

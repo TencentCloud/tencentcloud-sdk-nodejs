@@ -72,6 +72,7 @@ import {
   ModifyDBInstanceSecurityGroupsResponse,
   DescribeInstanceMonitorHotKeyRequest,
   DescribeInstanceDTSInfoRequest,
+  DescribeTendisSlowLogResponse,
   DescribeProductInfoResponse,
   ModifyInstanceAccountRequest,
   DescribeBackupUrlResponse,
@@ -151,6 +152,7 @@ import {
   DescribeInstanceNodeInfoRequest,
   DescribeMaintenanceWindowRequest,
   InstanceClusterNode,
+  DescribeTendisSlowLogRequest,
   DescribeProxySlowLogRequest,
   DescribeProxySlowLogResponse,
   UpgradeInstanceVersionRequest,
@@ -170,6 +172,7 @@ import {
   DeleteInstanceAccountResponse,
   DescribeInstanceMonitorSIPRequest,
   InstanceClusterShard,
+  TendisSlowLogDetail,
   ZoneCapacityConf,
   UpgradeInstanceRequest,
   DescribeInstanceNodeInfoResponse,
@@ -528,6 +531,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeProjectSecurityGroupsResponse) => void
   ): Promise<DescribeProjectSecurityGroupsResponse> {
     return this.request("DescribeProjectSecurityGroups", req, cb)
+  }
+
+  /**
+   * 查询Tendis慢查询
+   */
+  async DescribeTendisSlowLog(
+    req: DescribeTendisSlowLogRequest,
+    cb?: (error: string, rep: DescribeTendisSlowLogResponse) => void
+  ): Promise<DescribeTendisSlowLogResponse> {
+    return this.request("DescribeTendisSlowLog", req, cb)
   }
 
   /**

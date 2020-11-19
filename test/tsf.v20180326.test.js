@@ -408,6 +408,16 @@ it("tsf.v20180326.StopContainerGroup", async function () {
     }
 })
 
+it("tsf.v20180326.ModifyTask", async function () {
+    try {
+       const data = await client.ModifyTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tsf.v20180326.CreateLaneRule", async function () {
     try {
        const data = await client.CreateLaneRule({})
@@ -838,6 +848,16 @@ it("tsf.v20180326.DeleteServerlessGroup", async function () {
     }
 })
 
+it("tsf.v20180326.RedoTaskExecute", async function () {
+    try {
+       const data = await client.RedoTaskExecute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tsf.v20180326.DescribeFlowLastBatchState", async function () {
     try {
        const data = await client.DescribeFlowLastBatchState({})
@@ -861,6 +881,16 @@ it("tsf.v20180326.DeleteRepository", async function () {
 it("tsf.v20180326.DeployContainerGroup", async function () {
     try {
        const data = await client.DeployContainerGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tsf.v20180326.CreateTaskFlow", async function () {
+    try {
+       const data = await client.CreateTaskFlow({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

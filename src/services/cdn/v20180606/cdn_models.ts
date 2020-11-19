@@ -5241,6 +5241,11 @@ flush：刷新产生更新的资源
 delete：刷新全部资源
       */
   FlushType: string
+
+  /**
+   * 是否对中文字符进行编码后刷新
+   */
+  UrlEncode?: boolean
 }
 
 /**
