@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateHostingDomainResponse, CreateStaticStoreResponse, DescribeEnvLimitRequest, DescribeQuotaDataResponse, CheckTcbServiceResponse, CreateCloudBaseRunServerVersionRequest, DescribeCloudBaseRunVersionSnapshotRequest, DescribeCloudBaseRunServerVersionRequest, CreatePostpayPackageResponse, DescribeCloudBaseRunServerVersionResponse, CommonServiceAPIRequest, DescribeEndUsersResponse, EstablishCloudBaseRunServerRequest, DescribeEnvLimitResponse, CreateStaticStoreRequest, CommonServiceAPIResponse, DescribeEndUserStatisticResponse, DescribeExtraPkgBillingInfoResponse, DestroyStaticStoreResponse, DescribePostpayPackageFreeQuotasRequest, CreateAuthDomainResponse, DescribeCloudBaseBuildServiceResponse, ModifyEnvRequest, DescribeEndUsersRequest, DescribeDownloadFileRequest, DescribeEnvsRequest, DescribeQuotaDataRequest, DescribeCloudBaseBuildServiceRequest, DescribeEndUserStatisticRequest, CheckTcbServiceRequest, ModifyDatabaseACLResponse, DescribeExtraPkgBillingInfoRequest, CreateCloudBaseRunResourceRequest, CreatePostpayPackageRequest, DescribeEnvFreeQuotaRequest, DescribeAuthDomainsRequest, DescribeEndUserLoginStatisticResponse, DescribeAuthDomainsResponse, ReinstateEnvRequest, CreateCloudBaseRunResourceResponse, DescribeDatabaseACLRequest, CreateHostingDomainRequest, CreateCloudBaseRunServerVersionResponse, DeleteEndUserResponse, DescribeEndUserLoginStatisticRequest, DescribeEnvFreeQuotaResponse, ModifyEnvResponse, ModifyEndUserRequest, DescribeDatabaseACLResponse, ReinstateEnvResponse, EstablishCloudBaseRunServerResponse, DestroyEnvResponse, ModifyDatabaseACLRequest, DestroyStaticStoreRequest, ModifyEndUserResponse, DescribeCloudBaseRunVersionSnapshotResponse, DescribePostpayPackageFreeQuotasResponse, DeleteEndUserRequest, DescribeEnvsResponse, DescribeDownloadFileResponse, CreateAuthDomainRequest, DestroyEnvRequest } from "./tcb_models";
+import { DescribeEnvLimitResponse, CheckTcbServiceResponse, DescribeCloudBaseRunServerVersionRequest, DescribeCloudBaseRunServerVersionResponse, CommonServiceAPIResponse, DescribePostpayPackageFreeQuotasRequest, DescribeEnvLimitRequest, DescribeCloudBaseBuildServiceResponse, DescribeEndUsersRequest, DescribeEndUserStatisticRequest, CreatePostpayPackageRequest, ModifyEndUserRequest, DescribeAuthDomainsResponse, CreateHostingDomainRequest, DescribeCloudBaseRunResourceRequest, ModifyDatabaseACLRequest, DestroyStaticStoreRequest, DescribeEndUserLoginStatisticResponse, DescribeQuotaDataResponse, CommonServiceAPIRequest, CreateStaticStoreRequest, CreateAuthDomainResponse, DescribeEnvsRequest, DescribeExtraPkgBillingInfoRequest, DescribeEnvFreeQuotaRequest, DeleteEndUserRequest, CreateCloudBaseRunResourceResponse, DestroyStaticStoreResponse, DeleteEndUserResponse, ModifyDatabaseACLResponse, EstablishCloudBaseRunServerResponse, DestroyEnvRequest, DestroyEnvResponse, DescribeEnvsResponse, CreateAuthDomainRequest, CreateHostingDomainResponse, CreateCloudBaseRunServerVersionRequest, CreatePostpayPackageResponse, EstablishCloudBaseRunServerRequest, DescribeDownloadFileRequest, ReinstateEnvResponse, DescribeEnvFreeQuotaResponse, ReinstateEnvRequest, DescribeDatabaseACLRequest, CreateCloudBaseRunServerVersionResponse, DescribeEndUserLoginStatisticRequest, ModifyEnvResponse, DescribeDownloadFileResponse, DescribeQuotaDataRequest, CreateStaticStoreResponse, DescribeCloudBaseRunResourceResponse, DescribeCloudBaseRunVersionSnapshotRequest, DescribeEndUsersResponse, DescribeEndUserStatisticResponse, DescribeCloudBaseBuildServiceRequest, CheckTcbServiceRequest, CreateCloudBaseRunResourceRequest, ModifyEndUserResponse, DescribeAuthDomainsRequest, DescribeDatabaseACLResponse, ModifyEnvRequest, DescribeCloudBaseRunVersionSnapshotResponse, DescribePostpayPackageFreeQuotasResponse, DescribeExtraPkgBillingInfoResponse } from "./tcb_models";
 /**
  * tcb client
  * @class
@@ -40,6 +40,10 @@ export declare class Client extends AbstractClient {
      */
     CreatePostpayPackage(req: CreatePostpayPackageRequest, cb?: (error: string, rep: CreatePostpayPackageResponse) => void): Promise<CreatePostpayPackageResponse>;
     /**
+     * 查看容器托管的集群状态
+     */
+    DescribeCloudBaseRunResource(req: DescribeCloudBaseRunResourceRequest, cb?: (error: string, rep: DescribeCloudBaseRunResourceResponse) => void): Promise<DescribeCloudBaseRunResourceResponse>;
+    /**
      * 针对已隔离的免费环境，可以通过本接口将其恢复访问。
      */
     ReinstateEnv(req: ReinstateEnvRequest, cb?: (error: string, rep: ReinstateEnvResponse) => void): Promise<ReinstateEnvResponse>;
@@ -51,10 +55,6 @@ export declare class Client extends AbstractClient {
      * 管理终端用户
      */
     ModifyEndUser(req: ModifyEndUserRequest, cb?: (error: string, rep: ModifyEndUserResponse) => void): Promise<ModifyEndUserResponse>;
-    /**
-     * 获取下载文件信息
-     */
-    DescribeDownloadFile(req: DescribeDownloadFileRequest, cb?: (error: string, rep: DescribeDownloadFileResponse) => void): Promise<DescribeDownloadFileResponse>;
     /**
      * 获取后付费免费额度
      */
@@ -91,6 +91,10 @@ export declare class Client extends AbstractClient {
      * 获取增值包计费相关信息
      */
     DescribeExtraPkgBillingInfo(req: DescribeExtraPkgBillingInfoRequest, cb?: (error: string, rep: DescribeExtraPkgBillingInfoResponse) => void): Promise<DescribeExtraPkgBillingInfoResponse>;
+    /**
+     * 获取下载文件信息
+     */
+    DescribeDownloadFile(req: DescribeDownloadFileRequest, cb?: (error: string, rep: DescribeDownloadFileResponse) => void): Promise<DescribeDownloadFileResponse>;
     /**
      * 更新环境信息
      */

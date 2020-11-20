@@ -98,6 +98,16 @@ it("tcb.v20180608.CreatePostpayPackage", async function () {
     }
 })
 
+it("tcb.v20180608.DescribeCloudBaseRunResource", async function () {
+    try {
+       const data = await client.DescribeCloudBaseRunResource({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.ReinstateEnv", async function () {
     try {
        const data = await client.ReinstateEnv({})
@@ -121,16 +131,6 @@ it("tcb.v20180608.DescribeEndUserStatistic", async function () {
 it("tcb.v20180608.ModifyEndUser", async function () {
     try {
        const data = await client.ModifyEndUser({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tcb.v20180608.DescribeDownloadFile", async function () {
-    try {
-       const data = await client.DescribeDownloadFile({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -221,6 +221,16 @@ it("tcb.v20180608.CreateCloudBaseRunResource", async function () {
 it("tcb.v20180608.DescribeExtraPkgBillingInfo", async function () {
     try {
        const data = await client.DescribeExtraPkgBillingInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.DescribeDownloadFile", async function () {
+    try {
+       const data = await client.DescribeDownloadFile({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

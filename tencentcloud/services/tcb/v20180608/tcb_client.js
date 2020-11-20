@@ -76,6 +76,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePostpayPackage", req, cb);
     }
     /**
+     * 查看容器托管的集群状态
+     */
+    async DescribeCloudBaseRunResource(req, cb) {
+        return this.request("DescribeCloudBaseRunResource", req, cb);
+    }
+    /**
      * 针对已隔离的免费环境，可以通过本接口将其恢复访问。
      */
     async ReinstateEnv(req, cb) {
@@ -92,12 +98,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyEndUser(req, cb) {
         return this.request("ModifyEndUser", req, cb);
-    }
-    /**
-     * 获取下载文件信息
-     */
-    async DescribeDownloadFile(req, cb) {
-        return this.request("DescribeDownloadFile", req, cb);
     }
     /**
      * 获取后付费免费额度
@@ -152,6 +152,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeExtraPkgBillingInfo(req, cb) {
         return this.request("DescribeExtraPkgBillingInfo", req, cb);
+    }
+    /**
+     * 获取下载文件信息
+     */
+    async DescribeDownloadFile(req, cb) {
+        return this.request("DescribeDownloadFile", req, cb);
     }
     /**
      * 更新环境信息

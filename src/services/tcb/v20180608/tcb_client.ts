@@ -18,91 +18,94 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  CreateHostingDomainResponse,
-  CreateStaticStoreResponse,
-  DescribeEnvLimitRequest,
-  DescribeQuotaDataResponse,
-  CheckTcbServiceResponse,
-  CreateCloudBaseRunServerVersionRequest,
-  StorageInfo,
-  DescribeCloudBaseRunVersionSnapshotRequest,
-  KVPair,
-  DescribeCloudBaseRunServerVersionRequest,
-  FunctionInfo,
-  CreatePostpayPackageResponse,
-  DescribeCloudBaseRunServerVersionResponse,
-  CommonServiceAPIRequest,
-  PostpayEnvQuota,
-  DescribeEndUsersResponse,
-  AuthDomain,
-  LogServiceInfo,
-  EstablishCloudBaseRunServerRequest,
   DescribeEnvLimitResponse,
-  CreateStaticStoreRequest,
-  CommonServiceAPIResponse,
-  DescribeEndUserStatisticResponse,
-  DescribeExtraPkgBillingInfoResponse,
-  DestroyStaticStoreResponse,
-  DescribePostpayPackageFreeQuotasRequest,
-  CreateAuthDomainResponse,
-  DescribeCloudBaseBuildServiceResponse,
-  ModifyEnvRequest,
-  DescribeEndUsersRequest,
-  DescribeDownloadFileRequest,
-  DescribeEnvsRequest,
-  DescribeQuotaDataRequest,
-  DescribeCloudBaseBuildServiceRequest,
-  DescribeEndUserStatisticRequest,
-  PackageFreeQuotaInfo,
-  CloudBaseCodeRepoDetail,
-  CheckTcbServiceRequest,
-  ModifyDatabaseACLResponse,
-  StaticStorageInfo,
   OrderInfo,
+  CheckTcbServiceResponse,
+  DescribeCloudBaseRunServerVersionRequest,
+  DescribeCloudBaseRunServerVersionResponse,
+  CommonServiceAPIResponse,
+  DescribePostpayPackageFreeQuotasRequest,
+  DescribeEnvLimitRequest,
+  DescribeCloudBaseBuildServiceResponse,
+  DescribeEndUsersRequest,
+  DescribeEndUserStatisticRequest,
   CloudRunServiceSimpleVersionSnapshot,
-  DescribeExtraPkgBillingInfoRequest,
-  CreateCloudBaseRunResourceRequest,
+  LogServiceInfo,
   CreatePostpayPackageRequest,
-  DescribeEnvFreeQuotaRequest,
-  DatabasesInfo,
-  LoginStatistic,
-  DescribeAuthDomainsRequest,
-  DescribeEndUserLoginStatisticResponse,
-  DescribeAuthDomainsResponse,
-  CloudBaseRunVolumeMount,
-  ReinstateEnvRequest,
-  CreateCloudBaseRunResourceResponse,
-  DescribeDatabaseACLRequest,
-  PlatformStatistic,
-  CreateHostingDomainRequest,
-  CreateCloudBaseRunServerVersionResponse,
-  DeleteEndUserResponse,
-  EnvBillingInfoItem,
-  DescribeEndUserLoginStatisticRequest,
-  DescribeEnvFreeQuotaResponse,
-  CloudBaseEsInfo,
-  ModifyEnvResponse,
   ModifyEndUserRequest,
-  DescribeDatabaseACLResponse,
-  ReinstateEnvResponse,
-  CloudBaseRunNfsVolumeSource,
-  EstablishCloudBaseRunServerResponse,
-  EnvInfo,
+  DescribeAuthDomainsResponse,
+  CreateHostingDomainRequest,
+  DescribeCloudBaseRunResourceRequest,
+  CloudBaseRunVolumeMount,
   CloudBaseRunImageInfo,
-  DestroyEnvResponse,
   ModifyDatabaseACLRequest,
   DestroyStaticStoreRequest,
-  ModifyEndUserResponse,
   EndUserInfo,
+  DescribeEndUserLoginStatisticResponse,
+  DescribeQuotaDataResponse,
+  KVPair,
+  FunctionInfo,
+  CommonServiceAPIRequest,
+  CreateStaticStoreRequest,
+  CreateAuthDomainResponse,
+  DescribeEnvsRequest,
+  DescribeExtraPkgBillingInfoRequest,
+  DescribeEnvFreeQuotaRequest,
+  DeleteEndUserRequest,
+  CreateCloudBaseRunResourceResponse,
+  DestroyStaticStoreResponse,
+  DeleteEndUserResponse,
+  ModifyDatabaseACLResponse,
+  CloudBaseEsInfo,
+  EstablishCloudBaseRunServerResponse,
+  EnvInfo,
+  DestroyEnvRequest,
+  DestroyEnvResponse,
+  DescribeEnvsResponse,
+  CreateAuthDomainRequest,
+  CreateHostingDomainResponse,
+  CreateCloudBaseRunServerVersionRequest,
+  LoginStatistic,
+  CreatePostpayPackageResponse,
+  EstablishCloudBaseRunServerRequest,
+  DescribeDownloadFileRequest,
+  ReinstateEnvResponse,
+  PackageFreeQuotaInfo,
+  DescribeEnvFreeQuotaResponse,
+  StaticStorageInfo,
+  DatabasesInfo,
+  ReinstateEnvRequest,
+  DescribeDatabaseACLRequest,
+  CreateCloudBaseRunServerVersionResponse,
+  DescribeEndUserLoginStatisticRequest,
+  PlatformStatistic,
+  CloudBaseRunNfsVolumeSource,
+  CloudBaseRunImageSecretInfo,
+  ModifyEnvResponse,
+  DescribeDownloadFileResponse,
+  DescribeQuotaDataRequest,
+  CreateStaticStoreResponse,
+  DescribeCloudBaseRunResourceResponse,
+  StorageInfo,
+  DescribeCloudBaseRunVersionSnapshotRequest,
+  DescribeEndUsersResponse,
+  AuthDomain,
+  EnvBillingInfoItem,
+  DescribeEndUserStatisticResponse,
+  DescribeCloudBaseBuildServiceRequest,
+  CloudBaseCodeRepoDetail,
+  CheckTcbServiceRequest,
+  CreateCloudBaseRunResourceRequest,
+  ModifyEndUserResponse,
+  DescribeAuthDomainsRequest,
+  CloudBaseRunVpcSubnet,
+  DescribeDatabaseACLResponse,
+  ModifyEnvRequest,
+  PostpayEnvQuota,
   DescribeCloudBaseRunVersionSnapshotResponse,
   DescribePostpayPackageFreeQuotasResponse,
-  DeleteEndUserRequest,
-  CloudBaseRunImageSecretInfo,
-  DescribeEnvsResponse,
+  DescribeExtraPkgBillingInfoResponse,
   CloudBaseCodeRepoName,
-  DescribeDownloadFileResponse,
-  CreateAuthDomainRequest,
-  DestroyEnvRequest,
 } from "./tcb_models"
 
 /**
@@ -195,6 +198,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查看容器托管的集群状态
+   */
+  async DescribeCloudBaseRunResource(
+    req: DescribeCloudBaseRunResourceRequest,
+    cb?: (error: string, rep: DescribeCloudBaseRunResourceResponse) => void
+  ): Promise<DescribeCloudBaseRunResourceResponse> {
+    return this.request("DescribeCloudBaseRunResource", req, cb)
+  }
+
+  /**
    * 针对已隔离的免费环境，可以通过本接口将其恢复访问。
    */
   async ReinstateEnv(
@@ -222,16 +235,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyEndUserResponse) => void
   ): Promise<ModifyEndUserResponse> {
     return this.request("ModifyEndUser", req, cb)
-  }
-
-  /**
-   * 获取下载文件信息
-   */
-  async DescribeDownloadFile(
-    req: DescribeDownloadFileRequest,
-    cb?: (error: string, rep: DescribeDownloadFileResponse) => void
-  ): Promise<DescribeDownloadFileResponse> {
-    return this.request("DescribeDownloadFile", req, cb)
   }
 
   /**
@@ -322,6 +325,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeExtraPkgBillingInfoResponse) => void
   ): Promise<DescribeExtraPkgBillingInfoResponse> {
     return this.request("DescribeExtraPkgBillingInfo", req, cb)
+  }
+
+  /**
+   * 获取下载文件信息
+   */
+  async DescribeDownloadFile(
+    req: DescribeDownloadFileRequest,
+    cb?: (error: string, rep: DescribeDownloadFileResponse) => void
+  ): Promise<DescribeDownloadFileResponse> {
+    return this.request("DescribeDownloadFile", req, cb)
   }
 
   /**

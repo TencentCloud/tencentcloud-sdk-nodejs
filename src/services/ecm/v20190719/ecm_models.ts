@@ -2434,6 +2434,12 @@ export interface Listener {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CreateTime: string
+
+  /**
+      * 监听器的会话类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SessionType: string
 }
 
 /**
@@ -4438,6 +4444,11 @@ export interface CreateListenerRequest {
 分别表示按权重轮询、最小连接数， 默认为 WRR。
       */
   Scheduler?: string
+
+  /**
+   * 会话保持类型。不传或传NORMAL表示默认会话保持类型。QUIC_CID 表示根据Quic Connection ID做会话保持。QUIC_CID只支持UDP协议。
+   */
+  SessionType?: string
 }
 
 /**

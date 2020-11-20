@@ -3846,4 +3846,9 @@ OPEN：公网属性， INTERNAL：内网属性。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MixIpTarget?: boolean;
+    /**
+      * 私有网络内网负载均衡，就近接入模式下规则所落在的可用区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Zones?: Array<string>;
 }

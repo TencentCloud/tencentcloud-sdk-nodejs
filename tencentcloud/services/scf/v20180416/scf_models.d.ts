@@ -47,6 +47,18 @@ export interface Trigger {
       * 触发器状态
       */
     AvailableStatus: string;
+    /**
+      * 触发器最小资源ID
+      */
+    ResourceId: string;
+    /**
+      * 触发器和云函数绑定状态
+      */
+    BindStatus: string;
+    /**
+      * 触发器类型，双向表示两侧控制台均可操作，单向表示SCF控制台单向创建
+      */
+    TriggerAttribute: string;
 }
 /**
  * ListTriggers返回参数结构体
@@ -600,7 +612,7 @@ export interface UpdateFunctionCodeRequest {
       */
     Code?: Code;
     /**
-      * 代码来源方式，支持以下'ZipFile', 'Cos', 'Inline', 'TempCos', 'Git' 之一，使用Git来源必须指定此字段
+      * 代码来源方式，支持 ZipFile, Cos, Inline 之一
       */
     CodeSource?: string;
 }
@@ -625,7 +637,7 @@ export interface UpdateFunctionConfigurationRequest {
       */
     Timeout?: number;
     /**
-      * 函数运行环境，目前仅支持 Python2.7，Python3.6，Nodejs6.10，Nodejs8.9，Nodejs10.15，Nodejs12.16， PHP5， PHP7，Golang1 ， Java8和CustomRuntime
+      * 函数运行环境，目前仅支持 Python2.7，Python3.6，Nodejs6.10，Nodejs8.9，Nodejs10.15，Nodejs12.16， PHP5， PHP7，Go1 ， Java8和CustomRuntime
       */
     Runtime?: string;
     /**
@@ -653,7 +665,7 @@ export interface UpdateFunctionConfigurationRequest {
       */
     ClsTopicId?: string;
     /**
-      * 在更新时是否同步发布新版本，默认为：FALSE，不发布
+      * 在更新时是否同步发布新版本，默认为：FALSE，不发布新版本
       */
     Publish?: string;
     /**
@@ -673,7 +685,7 @@ export interface UpdateFunctionConfigurationRequest {
       */
     PublicNetConfig?: PublicNetConfigIn;
     /**
-      * 文件系统配置入参，用于云函数绑定文件系统
+      * 文件系统配置入参，用于云函数绑定CFS文件系统
       */
     CfsConfig?: CfsConfig;
     /**
@@ -1017,6 +1029,18 @@ export interface TriggerInfo {
       * 触发器最后修改时间
       */
     ModTime: string;
+    /**
+      * 触发器最小资源ID
+      */
+    ResourceId: string;
+    /**
+      * 触发器和云函数绑定状态
+      */
+    BindStatus: string;
+    /**
+      * 触发器类型，双向表示两侧控制台均可操作，单向表示SCF控制台单向创建
+      */
+    TriggerAttribute: string;
 }
 /**
  * CreateFunction请求参数结构体
@@ -1027,11 +1051,11 @@ export interface CreateFunctionRequest {
       */
     FunctionName: string;
     /**
-      * 函数的代码. 注意：不能同时指定Cos与ZipFile
+      * 函数代码. 注意：不能同时指定Cos、ZipFile或 DemoId。
       */
     Code: Code;
     /**
-      * 函数处理方法名称，名称格式支持 "文件名称.方法名称" 形式，文件名称和函数名称之间以"."隔开，文件名称和函数名称要求以字母开始和结尾，中间允许插入字母、数字、下划线和连接符，文件名称和函数名字的长度要求是 2-60 个字符
+      * 函数处理方法名称，名称格式支持 "文件名称.方法名称" 形式（java 名称格式 包名.类名::方法名），文件名称和函数名称之间以"."隔开，文件名称和函数名称要求以字母开始和结尾，中间允许插入字母、数字、下划线和连接符，文件名称和函数名字的长度要求是 2-60 个字符
       */
     Handler?: string;
     /**
@@ -1051,7 +1075,7 @@ export interface CreateFunctionRequest {
       */
     Environment?: Environment;
     /**
-      * 函数运行环境，目前仅支持 Python2.7，Python3.6，Nodejs6.10，Nodejs8.9，Nodejs10.15，Nodejs12.16， PHP5， PHP7，Golang1 ， Java8和CustomRuntime，默认Python2.7
+      * 函数运行环境，目前仅支持 Python2.7，Python3.6，Nodejs6.10，Nodejs8.9，Nodejs10.15，Nodejs12.16， PHP5， PHP7，Go1，Java8和CustomRuntime，默认Python2.7
       */
     Runtime?: string;
     /**
@@ -1079,7 +1103,7 @@ export interface CreateFunctionRequest {
       */
     Type?: string;
     /**
-      * CodeSource 代码来源，支持以下'ZipFile', 'Cos', 'Demo', 'TempCos', 'Git'之一，使用Git来源必须指定此字段
+      * CodeSource 代码来源，支持ZipFile, Cos, Demo 其中之一
       */
     CodeSource?: string;
     /**
@@ -1846,7 +1870,7 @@ export interface Function {
       */
     Namespace: string;
     /**
-      * 函数状态
+      * 函数状态，状态值及流转[参考此处](https://cloud.tencent.com/document/product/583/47175)
       */
     Status: string;
     /**
@@ -1865,6 +1889,20 @@ export interface Function {
       * 函数类型，取值为 HTTP 或者 Event
       */
     Type: string;
+    /**
+      * 函数状态失败原因
+      */
+    StatusReasons: Array<StatusReason>;
+    /**
+      * 函数所有版本预置并发内存总和
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalProvisionedConcurrencyMem: number;
+    /**
+      * 函数并发保留内存
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReservedConcurrencyMem: number;
 }
 /**
  * 死信队列参数
