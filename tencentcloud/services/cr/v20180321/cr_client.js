@@ -79,6 +79,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UploadDataFile", req, cb);
     }
     /**
+     * 查询产品列表
+     */
+    async QueryProducts(req, cb) {
+        return this.request("QueryProducts", req, cb);
+    }
+    /**
      * 实时数据查询
      */
     async QueryInstantData(req, cb) {

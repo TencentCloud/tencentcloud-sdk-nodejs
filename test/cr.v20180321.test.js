@@ -98,6 +98,16 @@ it("cr.v20180321.UploadDataFile", async function () {
     }
 })
 
+it("cr.v20180321.QueryProducts", async function () {
+    try {
+       const data = await client.QueryProducts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cr.v20180321.QueryInstantData", async function () {
     try {
        const data = await client.QueryInstantData({})

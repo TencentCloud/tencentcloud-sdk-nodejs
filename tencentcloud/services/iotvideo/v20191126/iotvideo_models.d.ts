@@ -1318,6 +1318,11 @@ export interface Contents {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Tc?: string;
+    /**
+      * 默认语言，最多不超过300个字符
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Default?: string;
 }
 /**
  * DeleteOtaVersion返回参数结构体

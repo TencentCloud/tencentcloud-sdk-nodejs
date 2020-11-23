@@ -521,6 +521,10 @@ export interface UpdateDomainConfigRequest {
       * 域名加速区域，mainland，overseas或global，分别表示中国境内加速，海外加速或全球加速。
       */
     Area?: string;
+    /**
+      * WebSocket配置
+      */
+    WebSocket?: WebSocket;
 }
 /**
  * DescribeDomainsConfig请求参数结构体
@@ -655,6 +659,20 @@ export interface Tag {
     TagValue: string;
 }
 /**
+ * WebSocket配置。
+ */
+export interface WebSocket {
+    /**
+      * WebSocket配置开关，on或off。
+      */
+    Switch: string;
+    /**
+      * 设置超时时间，单位为秒，最大超时时间65秒。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Timeout?: number;
+}
+/**
  * StopEcdnDomain返回参数结构体
  */
 export interface StopEcdnDomainResponse {
@@ -760,6 +778,10 @@ export interface AddEcdnDomainRequest {
       * 域名绑定的标签
       */
     Tag?: Array<Tag>;
+    /**
+      * WebSocket配置
+      */
+    WebSocket?: WebSocket;
 }
 /**
  * 自定义响应头配置。
@@ -1212,6 +1234,11 @@ export interface DomainDetailInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Tag: Array<Tag>;
+    /**
+      * WebSocket配置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WebSocket: WebSocket;
 }
 /**
  * DescribeIpStatus请求参数结构体

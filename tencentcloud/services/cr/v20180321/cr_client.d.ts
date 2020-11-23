@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { UploadFileRequest, UploadFileResponse, UploadDataJsonResponse, DescribeTaskStatusResponse, DownloadReportRequest, ApplyCreditAuditResponse, UploadDataFileResponse, QueryInstantDataResponse, DownloadRecordListRequest, UploadDataJsonRequest, DescribeCreditResultResponse, DownloadDialogueTextResponse, QueryInstantDataRequest, ApplyBlackListResponse, DescribeRecordsRequest, DescribeCreditResultRequest, ApplyBlackListRequest, ApplyCreditAuditRequest, DownloadReportResponse, DownloadRecordListResponse, UploadDataFileRequest, DescribeTaskStatusRequest, DescribeRecordsResponse, DownloadDialogueTextRequest } from "./cr_models";
+import { UploadFileRequest, UploadFileResponse, UploadDataJsonResponse, DescribeTaskStatusResponse, DownloadReportRequest, ApplyCreditAuditResponse, UploadDataFileResponse, QueryInstantDataResponse, DownloadRecordListRequest, UploadDataJsonRequest, QueryProductsRequest, DescribeCreditResultResponse, DownloadDialogueTextResponse, QueryInstantDataRequest, ApplyBlackListResponse, DescribeRecordsRequest, DescribeCreditResultRequest, ApplyBlackListRequest, ApplyCreditAuditRequest, DownloadReportResponse, DownloadRecordListResponse, UploadDataFileRequest, DescribeTaskStatusRequest, QueryProductsResponse, DescribeRecordsResponse, DownloadDialogueTextRequest } from "./cr_models";
 /**
  * cr client
  * @class
@@ -39,6 +39,10 @@ export declare class Client extends AbstractClient {
      * 上传文件，接口返回数据任务ID，支持xlsx、xls、csv、zip格式。
      */
     UploadDataFile(req: UploadDataFileRequest, cb?: (error: string, rep: UploadDataFileResponse) => void): Promise<UploadDataFileResponse>;
+    /**
+     * 查询产品列表
+     */
+    QueryProducts(req: QueryProductsRequest, cb?: (error: string, rep: QueryProductsResponse) => void): Promise<QueryProductsResponse>;
     /**
      * 实时数据查询
      */

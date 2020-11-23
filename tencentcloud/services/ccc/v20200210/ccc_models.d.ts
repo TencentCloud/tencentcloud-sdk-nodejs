@@ -1,4 +1,25 @@
 /**
+ * DescribeTelCallInfo返回参数结构体
+ */
+export interface DescribeTelCallInfoResponse {
+    /**
+      * 电话呼出统计分钟数
+      */
+    TelCallOutCount?: number;
+    /**
+      * 电话呼入统计分钟数
+      */
+    TelCallInCount?: number;
+    /**
+      * 坐席使用统计个数
+      */
+    SeatUsedCount?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeTelCdr请求参数结构体
  */
 export interface DescribeTelCdrRequest {
@@ -173,6 +194,23 @@ export interface CreateSDKLoginTokenRequest {
       * 坐席账号。
       */
     SeatUserId: string;
+}
+/**
+ * DescribeTelCallInfo请求参数结构体
+ */
+export interface DescribeTelCallInfoRequest {
+    /**
+      * 起始时间戳，Unix 时间戳
+      */
+    StartTimeStamp: number;
+    /**
+      * 结束时间戳，Unix 时间戳
+      */
+    EndTimeStamp: number;
+    /**
+      * 应用ID列表，多个ID时，返回值为多个ID使用总和
+      */
+    SdkAppIdList: Array<number>;
 }
 /**
  * CreateStaff返回参数结构体

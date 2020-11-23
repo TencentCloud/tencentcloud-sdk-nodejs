@@ -312,6 +312,26 @@ export interface UploadDataJsonRequest {
 }
 
 /**
+ * QueryProducts请求参数结构体
+ */
+export interface QueryProductsRequest {
+  /**
+   * 模块名。默认值（固定）：Product
+   */
+  Module: string
+
+  /**
+   * 操作名。默认值（固定）：QueryProducts
+   */
+  Operation: string
+
+  /**
+   * 实例Id。
+   */
+  InstanceId: string
+}
+
+/**
  * DescribeCreditResult返回参数结构体
  */
 export interface DescribeCreditResultResponse {
@@ -693,6 +713,54 @@ export interface DescribeTaskStatusRequest {
    * 实例ID，不传默认为系统分配的初始实例。
    */
   InstId?: string
+}
+
+/**
+ * QueryProducts接口对应数据结构。产品对应的相关信息。
+ */
+export interface ProductQueryInfo {
+  /**
+   * 产品Id
+   */
+  ProductId: string
+
+  /**
+   * 产品名称
+   */
+  ProductName: string
+
+  /**
+      * 产品编码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProductCode: string
+
+  /**
+      * 产品状态 0 禁用 1 启用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProductStatus: number
+
+  /**
+      * 场景类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SceneType: string
+}
+
+/**
+ * QueryProducts返回参数结构体
+ */
+export interface QueryProductsResponse {
+  /**
+   * 产品信息。
+   */
+  ProductList?: Array<ProductQueryInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

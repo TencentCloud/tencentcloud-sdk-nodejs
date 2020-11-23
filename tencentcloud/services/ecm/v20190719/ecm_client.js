@@ -52,6 +52,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyModuleName", req, cb);
     }
     /**
+     * 查询路由表对象列表
+     */
+    async DescribeRouteTables(req, cb) {
+        return this.request("DescribeRouteTables", req, cb);
+    }
+    /**
+     * 创建了VPC后，系统会创建一个默认路由表，所有新建的子网都会关联到默认路由表。默认情况下您可以直接使用默认路由表来管理您的路由策略。当您的路由策略较多时，您可以调用创建路由表接口创建更多路由表管理您的路由策略。
+     */
+    async CreateRouteTable(req, cb) {
+        return this.request("CreateRouteTable", req, cb);
+    }
+    /**
      * 批量解绑后端服务。
      */
     async BatchDeregisterTargets(req, cb) {
@@ -62,6 +74,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyInstancesAttribute(req, cb) {
         return this.request("ModifyInstancesAttribute", req, cb);
+    }
+    /**
+     * 对某个路由表名称和所有路由策略（Route）进行重新设置
+     */
+    async ResetRoutes(req, cb) {
+        return this.request("ResetRoutes", req, cb);
     }
     /**
      * 创建ECM实例
@@ -110,6 +128,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ImportImage(req, cb) {
         return this.request("ImportImage", req, cb);
+    }
+    /**
+     * 修改子网关联的路由表，一个子网只能关联一个路由表。
+     */
+    async ReplaceRouteTableAssociation(req, cb) {
+        return this.request("ReplaceRouteTableAssociation", req, cb);
     }
     /**
      * 修改负载均衡实例的属性。
@@ -299,10 +323,22 @@ EIP 如果欠费或被封堵，则不能被绑定。
         return this.request("DeleteModule", req, cb);
     }
     /**
-     * 修改模块IP直通。
+     * 获取负载均衡后端服务的健康检查状态。
      */
-    async ModifyModuleIpDirect(req, cb) {
-        return this.request("ModifyModuleIpDirect", req, cb);
+    async DescribeTargetHealth(req, cb) {
+        return this.request("DescribeTargetHealth", req, cb);
+    }
+    /**
+     * 替换路由策略
+     */
+    async ReplaceRoutes(req, cb) {
+        return this.request("ReplaceRoutes", req, cb);
+    }
+    /**
+     * 查询自定义路由策略与云联网路由策略冲突列表
+     */
+    async DescribeRouteConflicts(req, cb) {
+        return this.request("DescribeRouteConflicts", req, cb);
     }
     /**
      * 弹性网卡退还内网 IP。
@@ -310,6 +346,12 @@ EIP 如果欠费或被封堵，则不能被绑定。
      */
     async RemovePrivateIpAddresses(req, cb) {
         return this.request("RemovePrivateIpAddresses", req, cb);
+    }
+    /**
+     * 禁用已启用的子网路由
+     */
+    async DisableRoutes(req, cb) {
+        return this.request("DisableRoutes", req, cb);
     }
     /**
      * 获取概览页统计的基本数据
@@ -360,6 +402,12 @@ EIP 如果欠费或被封堵，则不能被绑定。
         return this.request("DescribeInstanceTypeConfig", req, cb);
     }
     /**
+     * 对某个路由表批量删除路由策略
+     */
+    async DeleteRoutes(req, cb) {
+        return this.request("DeleteRoutes", req, cb);
+    }
+    /**
      * 修改安全组出站和入站规则
      */
     async ModifySecurityGroupPolicies(req, cb) {
@@ -388,6 +436,12 @@ EIP 如果欠费或被封堵，则不能被绑定。
      */
     async ModifyImageAttribute(req, cb) {
         return this.request("ModifyImageAttribute", req, cb);
+    }
+    /**
+     * 查询负载均衡实例列表。
+     */
+    async DescribeLoadBalancers(req, cb) {
+        return this.request("DescribeLoadBalancers", req, cb);
     }
     /**
      * 本接口(DescribeTaskStatus)用于获取异步任务状态
@@ -424,6 +478,12 @@ EIP 如果欠费或被封堵，则不能被绑定。
      */
     async DescribeInstanceVncUrl(req, cb) {
         return this.request("DescribeInstanceVncUrl", req, cb);
+    }
+    /**
+     * 删除路由表
+     */
+    async DeleteRouteTable(req, cb) {
+        return this.request("DeleteRouteTable", req, cb);
     }
     /**
      * 查询用户安全组配额
@@ -464,10 +524,22 @@ EIP 如果欠费或被封堵，则不能被绑定。
         return this.request("ModifyModuleNetwork", req, cb);
     }
     /**
+     * 用于查询高可用虚拟IP（HAVIP）列表。
+     */
+    async DescribeHaVips(req, cb) {
+        return this.request("DescribeHaVips", req, cb);
+    }
+    /**
      * 弹性网卡申请内网 IP
      */
     async AssignPrivateIpAddresses(req, cb) {
         return this.request("AssignPrivateIpAddresses", req, cb);
+    }
+    /**
+     * 用于删除高可用虚拟IP（HAVIP）
+     */
+    async DeleteHaVip(req, cb) {
+        return this.request("DeleteHaVip", req, cb);
     }
     /**
      * 查询您账户的弹性公网IP（简称 EIP）在当前地域的配额信息
@@ -530,10 +602,17 @@ EIP 如果欠费或被封堵，则不能被绑定。
         return this.request("CreateModule", req, cb);
     }
     /**
-     * 查询负载均衡实例列表。
+     * 启用已禁用的子网路由。
+本接口会校验启用后，是否与已有路由冲突，如果冲突，则无法启用，失败处理。路由冲突时，需要先禁用与之冲突的路由，才能启用该路由。
      */
-    async DescribeLoadBalancers(req, cb) {
-        return this.request("DescribeLoadBalancers", req, cb);
+    async EnableRoutes(req, cb) {
+        return this.request("EnableRoutes", req, cb);
+    }
+    /**
+     * 本接口（CreateHaVip）用于创建高可用虚拟IP（HAVIP）
+     */
+    async CreateHaVip(req, cb) {
+        return this.request("CreateHaVip", req, cb);
     }
     /**
      * 弹性网卡迁移
@@ -548,6 +627,12 @@ EIP 如果欠费或被封堵，则不能被绑定。
         return this.request("CreateListener", req, cb);
     }
     /**
+     * 修改路由表属性
+     */
+    async ModifyRouteTableAttribute(req, cb) {
+        return this.request("ModifyRouteTableAttribute", req, cb);
+    }
+    /**
      * 修改监听器绑定的后端机器的转发权重。
      */
     async ModifyTargetWeight(req, cb) {
@@ -560,6 +645,18 @@ EIP 如果欠费或被封堵，则不能被绑定。
         return this.request("ModifyModuleSecurityGroups", req, cb);
     }
     /**
+     * 创建路由策略
+     */
+    async CreateRoutes(req, cb) {
+        return this.request("CreateRoutes", req, cb);
+    }
+    /**
+     * 用于修改高可用虚拟IP（HAVIP）属性
+     */
+    async ModifyHaVipAttribute(req, cb) {
+        return this.request("ModifyHaVipAttribute", req, cb);
+    }
+    /**
      * 释放一个或多个弹性公网IP（简称 EIP）。
 该操作不可逆，释放后 EIP 关联的 IP 地址将不再属于您的名下。
 只有状态为 UNBIND 的 EIP 才能进行释放操作。
@@ -568,10 +665,10 @@ EIP 如果欠费或被封堵，则不能被绑定。
         return this.request("ReleaseAddresses", req, cb);
     }
     /**
-     * 获取负载均衡后端服务的健康检查状态。
+     * 修改模块IP直通。
      */
-    async DescribeTargetHealth(req, cb) {
-        return this.request("DescribeTargetHealth", req, cb);
+    async ModifyModuleIpDirect(req, cb) {
+        return this.request("ModifyModuleIpDirect", req, cb);
     }
     /**
      * 查询负载均衡绑定的后端服务列表。
@@ -580,10 +677,10 @@ EIP 如果欠费或被封堵，则不能被绑定。
         return this.request("DescribeTargets", req, cb);
     }
     /**
-     * 删除镜像
+     * 修改私有网络（VPC）的相关属性
      */
-    async DeleteImage(req, cb) {
-        return this.request("DeleteImage", req, cb);
+    async ModifyVpcAttribute(req, cb) {
+        return this.request("ModifyVpcAttribute", req, cb);
     }
     /**
      * 查询安全组关联实例统计
@@ -621,10 +718,10 @@ CidrBlock, Ipv6CidrBlock, SecurityGroupId, AddressTemplate 四者是排他关系
         return this.request("CreateSecurityGroupPolicies", req, cb);
     }
     /**
-     * 修改私有网络（VPC）的相关属性
+     * 删除镜像
      */
-    async ModifyVpcAttribute(req, cb) {
-        return this.request("ModifyVpcAttribute", req, cb);
+    async DeleteImage(req, cb) {
+        return this.request("DeleteImage", req, cb);
     }
 }
 exports.Client = Client;

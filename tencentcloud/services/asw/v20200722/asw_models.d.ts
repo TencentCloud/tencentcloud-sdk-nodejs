@@ -319,7 +319,7 @@ export interface CreateFlowServiceRequest {
       */
     FlowServiceChineseName?: string;
     /**
-      * 角色资源名
+      * 角色资源名, 比如: qcs::cam::uin/20103392:roleName/SomeRoleForYourStateMachine
       */
     RoleResource?: string;
     /**

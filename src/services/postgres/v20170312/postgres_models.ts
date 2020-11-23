@@ -1100,6 +1100,24 @@ export interface DBInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TagList: Array<Tag>
+
+  /**
+      * 主实例信息，仅在实例为只读实例时返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MasterDBInstanceId: string
+
+  /**
+      * 只读实例数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReadOnlyInstanceNum: number
+
+  /**
+      * 只读实例在只读组中的状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StatusInReadonlyGroup: string
 }
 
 /**

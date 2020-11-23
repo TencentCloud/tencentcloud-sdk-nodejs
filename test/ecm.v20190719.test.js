@@ -58,6 +58,26 @@ it("ecm.v20190719.ModifyModuleName", async function () {
     }
 })
 
+it("ecm.v20190719.DescribeRouteTables", async function () {
+    try {
+       const data = await client.DescribeRouteTables({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ecm.v20190719.CreateRouteTable", async function () {
+    try {
+       const data = await client.CreateRouteTable({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ecm.v20190719.BatchDeregisterTargets", async function () {
     try {
        const data = await client.BatchDeregisterTargets({})
@@ -71,6 +91,16 @@ it("ecm.v20190719.BatchDeregisterTargets", async function () {
 it("ecm.v20190719.ModifyInstancesAttribute", async function () {
     try {
        const data = await client.ModifyInstancesAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ecm.v20190719.ResetRoutes", async function () {
+    try {
+       const data = await client.ResetRoutes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -151,6 +181,16 @@ it("ecm.v20190719.DescribeNode", async function () {
 it("ecm.v20190719.ImportImage", async function () {
     try {
        const data = await client.ImportImage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ecm.v20190719.ReplaceRouteTableAssociation", async function () {
+    try {
+       const data = await client.ReplaceRouteTableAssociation({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -448,9 +488,29 @@ it("ecm.v20190719.DeleteModule", async function () {
     }
 })
 
-it("ecm.v20190719.ModifyModuleIpDirect", async function () {
+it("ecm.v20190719.DescribeTargetHealth", async function () {
     try {
-       const data = await client.ModifyModuleIpDirect({})
+       const data = await client.DescribeTargetHealth({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ecm.v20190719.ReplaceRoutes", async function () {
+    try {
+       const data = await client.ReplaceRoutes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ecm.v20190719.DescribeRouteConflicts", async function () {
+    try {
+       const data = await client.DescribeRouteConflicts({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -461,6 +521,16 @@ it("ecm.v20190719.ModifyModuleIpDirect", async function () {
 it("ecm.v20190719.RemovePrivateIpAddresses", async function () {
     try {
        const data = await client.RemovePrivateIpAddresses({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ecm.v20190719.DisableRoutes", async function () {
+    try {
+       const data = await client.DisableRoutes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -548,6 +618,16 @@ it("ecm.v20190719.DescribeInstanceTypeConfig", async function () {
     }
 })
 
+it("ecm.v20190719.DeleteRoutes", async function () {
+    try {
+       const data = await client.DeleteRoutes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ecm.v20190719.ModifySecurityGroupPolicies", async function () {
     try {
        const data = await client.ModifySecurityGroupPolicies({})
@@ -591,6 +671,16 @@ it("ecm.v20190719.AssociateSecurityGroups", async function () {
 it("ecm.v20190719.ModifyImageAttribute", async function () {
     try {
        const data = await client.ModifyImageAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ecm.v20190719.DescribeLoadBalancers", async function () {
+    try {
+       const data = await client.DescribeLoadBalancers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -658,6 +748,16 @@ it("ecm.v20190719.DescribeInstanceVncUrl", async function () {
     }
 })
 
+it("ecm.v20190719.DeleteRouteTable", async function () {
+    try {
+       const data = await client.DeleteRouteTable({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ecm.v20190719.DescribeSecurityGroupLimits", async function () {
     try {
        const data = await client.DescribeSecurityGroupLimits({})
@@ -718,9 +818,29 @@ it("ecm.v20190719.ModifyModuleNetwork", async function () {
     }
 })
 
+it("ecm.v20190719.DescribeHaVips", async function () {
+    try {
+       const data = await client.DescribeHaVips({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ecm.v20190719.AssignPrivateIpAddresses", async function () {
     try {
        const data = await client.AssignPrivateIpAddresses({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ecm.v20190719.DeleteHaVip", async function () {
+    try {
+       const data = await client.DeleteHaVip({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -828,9 +948,19 @@ it("ecm.v20190719.CreateModule", async function () {
     }
 })
 
-it("ecm.v20190719.DescribeLoadBalancers", async function () {
+it("ecm.v20190719.EnableRoutes", async function () {
     try {
-       const data = await client.DescribeLoadBalancers({})
+       const data = await client.EnableRoutes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ecm.v20190719.CreateHaVip", async function () {
+    try {
+       const data = await client.CreateHaVip({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -858,6 +988,16 @@ it("ecm.v20190719.CreateListener", async function () {
     }
 })
 
+it("ecm.v20190719.ModifyRouteTableAttribute", async function () {
+    try {
+       const data = await client.ModifyRouteTableAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ecm.v20190719.ModifyTargetWeight", async function () {
     try {
        const data = await client.ModifyTargetWeight({})
@@ -878,6 +1018,26 @@ it("ecm.v20190719.ModifyModuleSecurityGroups", async function () {
     }
 })
 
+it("ecm.v20190719.CreateRoutes", async function () {
+    try {
+       const data = await client.CreateRoutes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ecm.v20190719.ModifyHaVipAttribute", async function () {
+    try {
+       const data = await client.ModifyHaVipAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ecm.v20190719.ReleaseAddresses", async function () {
     try {
        const data = await client.ReleaseAddresses({})
@@ -888,9 +1048,9 @@ it("ecm.v20190719.ReleaseAddresses", async function () {
     }
 })
 
-it("ecm.v20190719.DescribeTargetHealth", async function () {
+it("ecm.v20190719.ModifyModuleIpDirect", async function () {
     try {
-       const data = await client.DescribeTargetHealth({})
+       const data = await client.ModifyModuleIpDirect({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -908,9 +1068,9 @@ it("ecm.v20190719.DescribeTargets", async function () {
     }
 })
 
-it("ecm.v20190719.DeleteImage", async function () {
+it("ecm.v20190719.ModifyVpcAttribute", async function () {
     try {
-       const data = await client.DeleteImage({})
+       const data = await client.ModifyVpcAttribute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -958,9 +1118,9 @@ it("ecm.v20190719.CreateSecurityGroupPolicies", async function () {
     }
 })
 
-it("ecm.v20190719.ModifyVpcAttribute", async function () {
+it("ecm.v20190719.DeleteImage", async function () {
     try {
-       const data = await client.ModifyVpcAttribute({})
+       const data = await client.DeleteImage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

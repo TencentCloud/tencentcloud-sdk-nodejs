@@ -1311,6 +1311,10 @@ export interface CreateCloudBaseRunServerVersionRequest {
       * 是否使用统一域名
       */
     EnableUnion?: boolean;
+    /**
+      * 操作备注
+      */
+    OperatorRemark?: string;
 }
 /**
  * 终端用户登录新增统计
@@ -1387,6 +1391,14 @@ export interface EstablishCloudBaseRunServerRequest {
       * 日志类型; es/cls
       */
     LogType?: string;
+    /**
+      * 操作备注
+      */
+    OperatorRemark?: string;
+    /**
+      * 来源方（默认值：qcloud，微信侧来源miniapp)
+      */
+    Source?: string;
 }
 /**
  * DescribeDownloadFile请求参数结构体

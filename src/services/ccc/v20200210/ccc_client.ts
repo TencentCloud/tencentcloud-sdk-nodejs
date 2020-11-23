@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeTelCallInfoResponse,
   DescribeTelCdrRequest,
   DescribeTelCdrResponse,
   DescribeIMCdrsResponse,
@@ -26,6 +27,7 @@ import {
   DescribeIMCdrsRequest,
   MessageBody,
   CreateSDKLoginTokenRequest,
+  DescribeTelCallInfoRequest,
   CreateStaffResponse,
   TelCdrInfo,
   SeatUserInfo,
@@ -42,16 +44,6 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("ccc.tencentcloudapi.com", "2020-02-10", clientConfig)
-  }
-
-  /**
-   * 获取电话服务记录与录音
-   */
-  async DescribeTelCdr(
-    req: DescribeTelCdrRequest,
-    cb?: (error: string, rep: DescribeTelCdrResponse) => void
-  ): Promise<DescribeTelCdrResponse> {
-    return this.request("DescribeTelCdr", req, cb)
   }
 
   /**
@@ -75,16 +67,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建 SDK 登录 Token。
-   */
-  async CreateSDKLoginToken(
-    req: CreateSDKLoginTokenRequest,
-    cb?: (error: string, rep: CreateSDKLoginTokenResponse) => void
-  ): Promise<CreateSDKLoginTokenResponse> {
-    return this.request("CreateSDKLoginToken", req, cb)
-  }
-
-  /**
    * 创建客服账号。
    */
   async CreateStaff(
@@ -92,5 +74,35 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateStaffResponse) => void
   ): Promise<CreateStaffResponse> {
     return this.request("CreateStaff", req, cb)
+  }
+
+  /**
+   * 获取电话服务记录与录音
+   */
+  async DescribeTelCdr(
+    req: DescribeTelCdrRequest,
+    cb?: (error: string, rep: DescribeTelCdrResponse) => void
+  ): Promise<DescribeTelCdrResponse> {
+    return this.request("DescribeTelCdr", req, cb)
+  }
+
+  /**
+   * 获取电话呼叫统计信息
+   */
+  async DescribeTelCallInfo(
+    req: DescribeTelCallInfoRequest,
+    cb?: (error: string, rep: DescribeTelCallInfoResponse) => void
+  ): Promise<DescribeTelCallInfoResponse> {
+    return this.request("DescribeTelCallInfo", req, cb)
+  }
+
+  /**
+   * 创建 SDK 登录 Token。
+   */
+  async CreateSDKLoginToken(
+    req: CreateSDKLoginTokenRequest,
+    cb?: (error: string, rep: CreateSDKLoginTokenResponse) => void
+  ): Promise<CreateSDKLoginTokenResponse> {
+    return this.request("CreateSDKLoginToken", req, cb)
   }
 }

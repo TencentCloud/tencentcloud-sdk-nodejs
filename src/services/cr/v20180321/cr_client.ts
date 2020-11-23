@@ -30,6 +30,7 @@ import {
   QueryInstantDataResponse,
   DownloadRecordListRequest,
   UploadDataJsonRequest,
+  QueryProductsRequest,
   DescribeCreditResultResponse,
   DownloadDialogueTextResponse,
   QueryInstantDataRequest,
@@ -42,6 +43,8 @@ import {
   DownloadRecordListResponse,
   UploadDataFileRequest,
   DescribeTaskStatusRequest,
+  ProductQueryInfo,
+  QueryProductsResponse,
   DescribeRecordsResponse,
   DownloadDialogueTextRequest,
 } from "./cr_models"
@@ -136,6 +139,16 @@ export class Client extends AbstractClient {
       multipart: true,
     }
     return this.request("UploadDataFile", req, cb)
+  }
+
+  /**
+   * 查询产品列表
+   */
+  async QueryProducts(
+    req: QueryProductsRequest,
+    cb?: (error: string, rep: QueryProductsResponse) => void
+  ): Promise<QueryProductsResponse> {
+    return this.request("QueryProducts", req, cb)
   }
 
   /**

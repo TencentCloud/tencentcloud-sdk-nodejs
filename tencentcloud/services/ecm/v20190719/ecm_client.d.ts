@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeTaskResultResponse, BatchDeregisterTargetsResponse, DescribePeakBaseOverviewRequest, DisassociateAddressResponse, BatchModifyTargetWeightResponse, CreateLoadBalancerRequest, DescribeInstancesDeniedActionsRequest, ModifyModuleSecurityGroupsRequest, DescribeModuleResponse, ModifyLoadBalancerAttributesRequest, DeleteSecurityGroupPoliciesRequest, ImportCustomImageResponse, ModifyModuleConfigResponse, ModifyModuleNameResponse, DescribeNetworkInterfacesRequest, DescribeSubnetsRequest, AssociateSecurityGroupsRequest, StartInstancesRequest, DeleteSubnetResponse, ModifyAddressesBandwidthResponse, DescribeSubnetsResponse, RunInstancesRequest, ReleaseAddressesRequest, DescribeLoadBalancersRequest, DescribeInstancesResponse, ModifyModuleSecurityGroupsResponse, DescribeNodeResponse, RemovePrivateIpAddressesResponse, DescribeDefaultSubnetResponse, ReplaceSecurityGroupPolicyRequest, ModifyTargetWeightResponse, DescribeCustomImageTaskResponse, DeleteSubnetRequest, DescribeModuleRequest, DescribeTaskStatusRequest, CreateNetworkInterfaceRequest, CreateModuleResponse, RebootInstancesRequest, AllocateAddressesRequest, DeleteNetworkInterfaceRequest, RemovePrivateIpAddressesRequest, DescribeTargetsRequest, ModifyInstancesAttributeRequest, ResetInstancesResponse, DescribeImageRequest, DeleteLoadBalancerListenersRequest, MigratePrivateIpAddressRequest, ModifySubnetAttributeResponse, DescribeNodeRequest, CreateSubnetResponse, DescribeSecurityGroupPoliciesResponse, DescribeListenersResponse, ModifySecurityGroupPoliciesRequest, DescribeConfigRequest, DescribeInstanceVncUrlRequest, CreateListenerResponse, StopInstancesResponse, StartInstancesResponse, CreateVpcResponse, ModifyTargetPortResponse, DescribeTaskStatusResponse, BatchRegisterTargetsResponse, CreateModuleRequest, ModifyInstancesAttributeResponse, ReleaseAddressesResponse, ModifyVpcAttributeRequest, DescribeInstancesDeniedActionsResponse, DisassociateAddressRequest, ReplaceSecurityGroupPolicyResponse, ModifyLoadBalancerAttributesResponse, DescribeDefaultSubnetRequest, ResetInstancesMaxBandwidthResponse, DeleteSecurityGroupResponse, DeleteVpcRequest, CreateNetworkInterfaceResponse, ModifyListenerRequest, RunInstancesResponse, DescribeAddressQuotaRequest, DescribeInstanceTypeConfigResponse, DescribeSecurityGroupLimitsResponse, DescribeAddressesResponse, DeleteListenerRequest, DescribeSecurityGroupsResponse, ImportImageRequest, DetachNetworkInterfaceResponse, DeleteModuleRequest, CreateImageResponse, ModifySecurityGroupPoliciesResponse, ResetInstancesMaxBandwidthRequest, ResetInstancesPasswordResponse, ModifyModuleNetworkRequest, DetachNetworkInterfaceRequest, DescribeConfigResponse, ModifyModuleNetworkResponse, ModifyDefaultSubnetResponse, ModifyTargetWeightRequest, CreateSubnetRequest, DescribeModuleDetailResponse, StopInstancesRequest, ModifyVpcAttributeResponse, DeleteLoadBalancerRequest, DeleteVpcResponse, DescribeVpcsResponse, ModifySecurityGroupAttributeResponse, MigratePrivateIpAddressResponse, CreateImageRequest, DescribeInstanceVncUrlResponse, DeleteModuleResponse, DescribeInstanceTypeConfigRequest, DescribeLoadBalanceTaskStatusRequest, ImportCustomImageRequest, DescribeModuleDetailRequest, AssociateAddressRequest, ModifySecurityGroupAttributeRequest, ModifyModuleConfigRequest, DescribePeakNetworkOverviewResponse, AttachNetworkInterfaceResponse, DescribeVpcsRequest, DescribeBaseOverviewRequest, AssociateSecurityGroupsResponse, BatchDeregisterTargetsRequest, DescribeImportImageOsRequest, ModifyListenerResponse, DescribeTargetHealthResponse, DescribeLoadBalanceTaskStatusResponse, ModifyModuleNameRequest, ModifyDefaultSubnetRequest, DescribeInstancesRequest, CreateListenerRequest, DescribeTaskResultRequest, AssociateAddressResponse, TerminateInstancesResponse, DescribeAddressesRequest, DescribeSecurityGroupPoliciesRequest, MigrateNetworkInterfaceRequest, DescribeAddressQuotaResponse, CreateSecurityGroupPoliciesResponse, CreateSecurityGroupResponse, DeleteLoadBalancerResponse, DeleteSecurityGroupRequest, ModifyAddressAttributeRequest, ModifyModuleImageResponse, ResetInstancesRequest, DescribeCustomImageTaskRequest, DescribeSecurityGroupAssociationStatisticsResponse, DescribeTargetsResponse, ModifyAddressAttributeResponse, ImportImageResponse, BatchModifyTargetWeightRequest, CreateSecurityGroupRequest, DescribeSecurityGroupLimitsRequest, DescribeTargetHealthRequest, TerminateInstancesRequest, DeleteNetworkInterfaceResponse, DescribePeakNetworkOverviewRequest, ModifyModuleIpDirectResponse, AssignPrivateIpAddressesResponse, DescribeSecurityGroupsRequest, RebootInstancesResponse, ModifyModuleIpDirectRequest, ModifyAddressesBandwidthRequest, DeleteSecurityGroupPoliciesResponse, DescribePeakBaseOverviewResponse, ModifyImageAttributeResponse, BatchRegisterTargetsRequest, DescribeImageResponse, DeleteImageResponse, DescribeNetworkInterfacesResponse, AssignPrivateIpAddressesRequest, ResetInstancesPasswordRequest, ModifyImageAttributeRequest, CreateVpcRequest, CreateLoadBalancerResponse, DescribeSecurityGroupAssociationStatisticsRequest, DisassociateSecurityGroupsRequest, ModifySubnetAttributeRequest, AllocateAddressesResponse, DeleteLoadBalancerListenersResponse, DescribeListenersRequest, AttachNetworkInterfaceRequest, ModifyModuleImageRequest, CreateSecurityGroupPoliciesRequest, ModifyTargetPortRequest, DescribeImportImageOsResponse, DescribeLoadBalancersResponse, MigrateNetworkInterfaceResponse, DeleteListenerResponse, DeleteImageRequest, DescribeBaseOverviewResponse, DisassociateSecurityGroupsResponse } from "./ecm_models";
+import { DescribeTaskResultResponse, BatchDeregisterTargetsResponse, DescribePeakBaseOverviewRequest, DisassociateAddressResponse, BatchModifyTargetWeightResponse, CreateRoutesRequest, CreateLoadBalancerRequest, DescribeHaVipsResponse, ModifyModuleSecurityGroupsRequest, DescribeModuleResponse, ModifyLoadBalancerAttributesRequest, DeleteSecurityGroupPoliciesRequest, ImportCustomImageResponse, ModifyModuleConfigResponse, ModifyModuleNameResponse, DescribeNetworkInterfacesRequest, DescribeSubnetsRequest, AssociateSecurityGroupsRequest, StartInstancesRequest, DeleteSubnetResponse, ModifyAddressesBandwidthResponse, DescribeSubnetsResponse, RunInstancesRequest, ReleaseAddressesRequest, DescribeLoadBalancersRequest, DescribeInstancesResponse, ModifyModuleSecurityGroupsResponse, DescribeNodeResponse, RemovePrivateIpAddressesResponse, DescribeDefaultSubnetResponse, ReplaceRouteTableAssociationRequest, ReplaceSecurityGroupPolicyRequest, ModifyTargetWeightResponse, DescribeCustomImageTaskResponse, DeleteSubnetRequest, DescribeModuleRequest, DescribeTaskStatusRequest, CreateNetworkInterfaceRequest, CreateModuleResponse, RebootInstancesRequest, AllocateAddressesRequest, DeleteNetworkInterfaceRequest, RemovePrivateIpAddressesRequest, DescribeTargetsRequest, ModifyInstancesAttributeRequest, ResetInstancesResponse, DeleteVpcRequest, DeleteLoadBalancerListenersRequest, MigratePrivateIpAddressRequest, ModifySubnetAttributeResponse, DescribeInstancesDeniedActionsRequest, DeleteRouteTableRequest, DescribeNodeRequest, CreateSubnetResponse, DescribeSecurityGroupPoliciesResponse, DescribeListenersResponse, ModifySecurityGroupPoliciesRequest, DescribeConfigRequest, DescribeInstanceVncUrlRequest, DescribeInstanceVncUrlResponse, StopInstancesResponse, StartInstancesResponse, CreateVpcResponse, ModifyTargetPortResponse, TerminateInstancesRequest, DescribeTaskStatusResponse, BatchRegisterTargetsResponse, CreateModuleRequest, ReplaceRouteTableAssociationResponse, ModifyInstancesAttributeResponse, ReleaseAddressesResponse, ModifyVpcAttributeRequest, DescribeInstancesDeniedActionsResponse, DeleteHaVipResponse, ReplaceSecurityGroupPolicyResponse, ReplaceRoutesResponse, ModifyLoadBalancerAttributesResponse, DescribeDefaultSubnetRequest, ResetInstancesMaxBandwidthResponse, DeleteSecurityGroupResponse, DescribeImageRequest, CreateNetworkInterfaceResponse, ModifyListenerRequest, RunInstancesResponse, DescribeAddressQuotaRequest, ModifyModuleNameRequest, DescribeInstanceTypeConfigResponse, DescribeSecurityGroupLimitsResponse, DescribeAddressesResponse, CreateRoutesResponse, DeleteListenerRequest, DescribeSecurityGroupsResponse, ImportImageRequest, DetachNetworkInterfaceResponse, ResetRoutesResponse, DeleteModuleRequest, CreateImageResponse, ModifySecurityGroupPoliciesResponse, ResetInstancesMaxBandwidthRequest, ResetRoutesRequest, DisableRoutesResponse, ResetInstancesPasswordResponse, ModifyModuleNetworkRequest, DetachNetworkInterfaceRequest, DescribeConfigResponse, ModifyModuleNetworkResponse, ModifyDefaultSubnetResponse, ModifyTargetWeightRequest, CreateSubnetRequest, DescribeModuleDetailResponse, StopInstancesRequest, ModifyVpcAttributeResponse, DeleteLoadBalancerRequest, DeleteVpcResponse, DescribeVpcsResponse, ModifySecurityGroupAttributeResponse, MigratePrivateIpAddressResponse, CreateImageRequest, DeleteRouteTableResponse, CreateListenerResponse, DeleteModuleResponse, DescribeInstanceTypeConfigRequest, DescribeLoadBalanceTaskStatusRequest, ImportCustomImageRequest, ModifyHaVipAttributeResponse, DescribeModuleDetailRequest, DeleteRoutesRequest, AssociateAddressRequest, ModifySecurityGroupAttributeRequest, ModifyModuleConfigRequest, DescribePeakNetworkOverviewResponse, AttachNetworkInterfaceResponse, DescribeVpcsRequest, DescribeRouteConflictsResponse, DescribeRouteTablesRequest, DescribeBaseOverviewRequest, CreateHaVipResponse, AssociateSecurityGroupsResponse, ModifyRouteTableAttributeRequest, BatchDeregisterTargetsRequest, DescribeImportImageOsRequest, DisableRoutesRequest, ModifyListenerResponse, DescribeTargetHealthResponse, DescribeLoadBalanceTaskStatusResponse, EnableRoutesRequest, ModifyDefaultSubnetRequest, DescribeInstancesRequest, CreateListenerRequest, DescribeTaskResultRequest, AssociateAddressResponse, CreateRouteTableRequest, TerminateInstancesResponse, CreateHaVipRequest, DescribeAddressesRequest, DescribeSecurityGroupPoliciesRequest, MigrateNetworkInterfaceRequest, DescribeAddressQuotaResponse, CreateSecurityGroupPoliciesResponse, CreateSecurityGroupResponse, DeleteLoadBalancerResponse, DeleteSecurityGroupRequest, ReplaceRoutesRequest, CreateRouteTableResponse, ModifyModuleImageResponse, DeleteRoutesResponse, ResetInstancesRequest, DescribeCustomImageTaskRequest, DescribeSecurityGroupAssociationStatisticsResponse, DescribeTargetsResponse, ModifyAddressAttributeResponse, ImportImageResponse, BatchModifyTargetWeightRequest, CreateSecurityGroupRequest, DescribeSecurityGroupLimitsRequest, DescribeTargetHealthRequest, EnableRoutesResponse, DeleteNetworkInterfaceResponse, DescribePeakNetworkOverviewRequest, ModifyModuleIpDirectResponse, AssignPrivateIpAddressesResponse, DescribeSecurityGroupsRequest, ModifyHaVipAttributeRequest, RebootInstancesResponse, ModifyModuleIpDirectRequest, ModifyAddressesBandwidthRequest, DeleteSecurityGroupPoliciesResponse, ModifyAddressAttributeRequest, DescribePeakBaseOverviewResponse, ModifyImageAttributeResponse, DescribeHaVipsRequest, BatchRegisterTargetsRequest, DescribeImageResponse, DeleteImageResponse, DescribeNetworkInterfacesResponse, DeleteHaVipRequest, AssignPrivateIpAddressesRequest, ResetInstancesPasswordRequest, ModifyImageAttributeRequest, CreateVpcRequest, CreateLoadBalancerResponse, DescribeSecurityGroupAssociationStatisticsRequest, DisassociateSecurityGroupsRequest, DescribeRouteTablesResponse, ModifySubnetAttributeRequest, AllocateAddressesResponse, DisassociateAddressRequest, DeleteLoadBalancerListenersResponse, DescribeListenersRequest, AttachNetworkInterfaceRequest, ModifyModuleImageRequest, CreateSecurityGroupPoliciesRequest, ModifyTargetPortRequest, DescribeImportImageOsResponse, DescribeLoadBalancersResponse, ModifyRouteTableAttributeResponse, MigrateNetworkInterfaceResponse, DeleteListenerResponse, DeleteImageRequest, DescribeBaseOverviewResponse, DisassociateSecurityGroupsResponse, DescribeRouteConflictsRequest } from "./ecm_models";
 /**
  * ecm client
  * @class
@@ -24,6 +24,14 @@ export declare class Client extends AbstractClient {
      */
     ModifyModuleName(req: ModifyModuleNameRequest, cb?: (error: string, rep: ModifyModuleNameResponse) => void): Promise<ModifyModuleNameResponse>;
     /**
+     * 查询路由表对象列表
+     */
+    DescribeRouteTables(req: DescribeRouteTablesRequest, cb?: (error: string, rep: DescribeRouteTablesResponse) => void): Promise<DescribeRouteTablesResponse>;
+    /**
+     * 创建了VPC后，系统会创建一个默认路由表，所有新建的子网都会关联到默认路由表。默认情况下您可以直接使用默认路由表来管理您的路由策略。当您的路由策略较多时，您可以调用创建路由表接口创建更多路由表管理您的路由策略。
+     */
+    CreateRouteTable(req: CreateRouteTableRequest, cb?: (error: string, rep: CreateRouteTableResponse) => void): Promise<CreateRouteTableResponse>;
+    /**
      * 批量解绑后端服务。
      */
     BatchDeregisterTargets(req: BatchDeregisterTargetsRequest, cb?: (error: string, rep: BatchDeregisterTargetsResponse) => void): Promise<BatchDeregisterTargetsResponse>;
@@ -31,6 +39,10 @@ export declare class Client extends AbstractClient {
      * 修改实例的属性。
      */
     ModifyInstancesAttribute(req: ModifyInstancesAttributeRequest, cb?: (error: string, rep: ModifyInstancesAttributeResponse) => void): Promise<ModifyInstancesAttributeResponse>;
+    /**
+     * 对某个路由表名称和所有路由策略（Route）进行重新设置
+     */
+    ResetRoutes(req: ResetRoutesRequest, cb?: (error: string, rep: ResetRoutesResponse) => void): Promise<ResetRoutesResponse>;
     /**
      * 创建ECM实例
      */
@@ -63,6 +75,10 @@ export declare class Client extends AbstractClient {
      * 从CVM产品导入镜像到ECM
      */
     ImportImage(req: ImportImageRequest, cb?: (error: string, rep: ImportImageResponse) => void): Promise<ImportImageResponse>;
+    /**
+     * 修改子网关联的路由表，一个子网只能关联一个路由表。
+     */
+    ReplaceRouteTableAssociation(req: ReplaceRouteTableAssociationRequest, cb?: (error: string, rep: ReplaceRouteTableAssociationResponse) => void): Promise<ReplaceRouteTableAssociationResponse>;
     /**
      * 修改负载均衡实例的属性。
      */
@@ -193,14 +209,26 @@ EIP 如果欠费或被封堵，则不能被绑定。
      */
     DeleteModule(req: DeleteModuleRequest, cb?: (error: string, rep: DeleteModuleResponse) => void): Promise<DeleteModuleResponse>;
     /**
-     * 修改模块IP直通。
+     * 获取负载均衡后端服务的健康检查状态。
      */
-    ModifyModuleIpDirect(req: ModifyModuleIpDirectRequest, cb?: (error: string, rep: ModifyModuleIpDirectResponse) => void): Promise<ModifyModuleIpDirectResponse>;
+    DescribeTargetHealth(req: DescribeTargetHealthRequest, cb?: (error: string, rep: DescribeTargetHealthResponse) => void): Promise<DescribeTargetHealthResponse>;
+    /**
+     * 替换路由策略
+     */
+    ReplaceRoutes(req: ReplaceRoutesRequest, cb?: (error: string, rep: ReplaceRoutesResponse) => void): Promise<ReplaceRoutesResponse>;
+    /**
+     * 查询自定义路由策略与云联网路由策略冲突列表
+     */
+    DescribeRouteConflicts(req: DescribeRouteConflictsRequest, cb?: (error: string, rep: DescribeRouteConflictsResponse) => void): Promise<DescribeRouteConflictsResponse>;
     /**
      * 弹性网卡退还内网 IP。
 退还弹性网卡上的辅助内网IP，接口自动解关联弹性公网 IP。不能退还弹性网卡的主内网IP。
      */
     RemovePrivateIpAddresses(req: RemovePrivateIpAddressesRequest, cb?: (error: string, rep: RemovePrivateIpAddressesResponse) => void): Promise<RemovePrivateIpAddressesResponse>;
+    /**
+     * 禁用已启用的子网路由
+     */
+    DisableRoutes(req: DisableRoutesRequest, cb?: (error: string, rep: DisableRoutesResponse) => void): Promise<DisableRoutesResponse>;
     /**
      * 获取概览页统计的基本数据
      */
@@ -234,6 +262,10 @@ EIP 如果欠费或被封堵，则不能被绑定。
      */
     DescribeInstanceTypeConfig(req?: DescribeInstanceTypeConfigRequest, cb?: (error: string, rep: DescribeInstanceTypeConfigResponse) => void): Promise<DescribeInstanceTypeConfigResponse>;
     /**
+     * 对某个路由表批量删除路由策略
+     */
+    DeleteRoutes(req: DeleteRoutesRequest, cb?: (error: string, rep: DeleteRoutesResponse) => void): Promise<DeleteRoutesResponse>;
+    /**
      * 修改安全组出站和入站规则
      */
     ModifySecurityGroupPolicies(req: ModifySecurityGroupPoliciesRequest, cb?: (error: string, rep: ModifySecurityGroupPoliciesResponse) => void): Promise<ModifySecurityGroupPoliciesResponse>;
@@ -253,6 +285,10 @@ EIP 如果欠费或被封堵，则不能被绑定。
      * 本接口（ModifyImageAttribute）用于修改镜像属性。
      */
     ModifyImageAttribute(req: ModifyImageAttributeRequest, cb?: (error: string, rep: ModifyImageAttributeResponse) => void): Promise<ModifyImageAttributeResponse>;
+    /**
+     * 查询负载均衡实例列表。
+     */
+    DescribeLoadBalancers(req: DescribeLoadBalancersRequest, cb?: (error: string, rep: DescribeLoadBalancersResponse) => void): Promise<DescribeLoadBalancersResponse>;
     /**
      * 本接口(DescribeTaskStatus)用于获取异步任务状态
      */
@@ -277,6 +313,10 @@ EIP 如果欠费或被封堵，则不能被绑定。
      * 查询实例管理终端地址
      */
     DescribeInstanceVncUrl(req: DescribeInstanceVncUrlRequest, cb?: (error: string, rep: DescribeInstanceVncUrlResponse) => void): Promise<DescribeInstanceVncUrlResponse>;
+    /**
+     * 删除路由表
+     */
+    DeleteRouteTable(req: DeleteRouteTableRequest, cb?: (error: string, rep: DeleteRouteTableResponse) => void): Promise<DeleteRouteTableResponse>;
     /**
      * 查询用户安全组配额
      */
@@ -304,9 +344,17 @@ EIP 如果欠费或被封堵，则不能被绑定。
      */
     ModifyModuleNetwork(req: ModifyModuleNetworkRequest, cb?: (error: string, rep: ModifyModuleNetworkResponse) => void): Promise<ModifyModuleNetworkResponse>;
     /**
+     * 用于查询高可用虚拟IP（HAVIP）列表。
+     */
+    DescribeHaVips(req?: DescribeHaVipsRequest, cb?: (error: string, rep: DescribeHaVipsResponse) => void): Promise<DescribeHaVipsResponse>;
+    /**
      * 弹性网卡申请内网 IP
      */
     AssignPrivateIpAddresses(req: AssignPrivateIpAddressesRequest, cb?: (error: string, rep: AssignPrivateIpAddressesResponse) => void): Promise<AssignPrivateIpAddressesResponse>;
+    /**
+     * 用于删除高可用虚拟IP（HAVIP）
+     */
+    DeleteHaVip(req?: DeleteHaVipRequest, cb?: (error: string, rep: DeleteHaVipResponse) => void): Promise<DeleteHaVipResponse>;
     /**
      * 查询您账户的弹性公网IP（简称 EIP）在当前地域的配额信息
      */
@@ -348,9 +396,14 @@ EIP 如果欠费或被封堵，则不能被绑定。
      */
     CreateModule(req: CreateModuleRequest, cb?: (error: string, rep: CreateModuleResponse) => void): Promise<CreateModuleResponse>;
     /**
-     * 查询负载均衡实例列表。
+     * 启用已禁用的子网路由。
+本接口会校验启用后，是否与已有路由冲突，如果冲突，则无法启用，失败处理。路由冲突时，需要先禁用与之冲突的路由，才能启用该路由。
      */
-    DescribeLoadBalancers(req: DescribeLoadBalancersRequest, cb?: (error: string, rep: DescribeLoadBalancersResponse) => void): Promise<DescribeLoadBalancersResponse>;
+    EnableRoutes(req: EnableRoutesRequest, cb?: (error: string, rep: EnableRoutesResponse) => void): Promise<EnableRoutesResponse>;
+    /**
+     * 本接口（CreateHaVip）用于创建高可用虚拟IP（HAVIP）
+     */
+    CreateHaVip(req?: CreateHaVipRequest, cb?: (error: string, rep: CreateHaVipResponse) => void): Promise<CreateHaVipResponse>;
     /**
      * 弹性网卡迁移
      */
@@ -360,6 +413,10 @@ EIP 如果欠费或被封堵，则不能被绑定。
      */
     CreateListener(req: CreateListenerRequest, cb?: (error: string, rep: CreateListenerResponse) => void): Promise<CreateListenerResponse>;
     /**
+     * 修改路由表属性
+     */
+    ModifyRouteTableAttribute(req: ModifyRouteTableAttributeRequest, cb?: (error: string, rep: ModifyRouteTableAttributeResponse) => void): Promise<ModifyRouteTableAttributeResponse>;
+    /**
      * 修改监听器绑定的后端机器的转发权重。
      */
     ModifyTargetWeight(req: ModifyTargetWeightRequest, cb?: (error: string, rep: ModifyTargetWeightResponse) => void): Promise<ModifyTargetWeightResponse>;
@@ -368,23 +425,31 @@ EIP 如果欠费或被封堵，则不能被绑定。
      */
     ModifyModuleSecurityGroups(req: ModifyModuleSecurityGroupsRequest, cb?: (error: string, rep: ModifyModuleSecurityGroupsResponse) => void): Promise<ModifyModuleSecurityGroupsResponse>;
     /**
+     * 创建路由策略
+     */
+    CreateRoutes(req: CreateRoutesRequest, cb?: (error: string, rep: CreateRoutesResponse) => void): Promise<CreateRoutesResponse>;
+    /**
+     * 用于修改高可用虚拟IP（HAVIP）属性
+     */
+    ModifyHaVipAttribute(req?: ModifyHaVipAttributeRequest, cb?: (error: string, rep: ModifyHaVipAttributeResponse) => void): Promise<ModifyHaVipAttributeResponse>;
+    /**
      * 释放一个或多个弹性公网IP（简称 EIP）。
 该操作不可逆，释放后 EIP 关联的 IP 地址将不再属于您的名下。
 只有状态为 UNBIND 的 EIP 才能进行释放操作。
      */
     ReleaseAddresses(req: ReleaseAddressesRequest, cb?: (error: string, rep: ReleaseAddressesResponse) => void): Promise<ReleaseAddressesResponse>;
     /**
-     * 获取负载均衡后端服务的健康检查状态。
+     * 修改模块IP直通。
      */
-    DescribeTargetHealth(req: DescribeTargetHealthRequest, cb?: (error: string, rep: DescribeTargetHealthResponse) => void): Promise<DescribeTargetHealthResponse>;
+    ModifyModuleIpDirect(req: ModifyModuleIpDirectRequest, cb?: (error: string, rep: ModifyModuleIpDirectResponse) => void): Promise<ModifyModuleIpDirectResponse>;
     /**
      * 查询负载均衡绑定的后端服务列表。
      */
     DescribeTargets(req: DescribeTargetsRequest, cb?: (error: string, rep: DescribeTargetsResponse) => void): Promise<DescribeTargetsResponse>;
     /**
-     * 删除镜像
+     * 修改私有网络（VPC）的相关属性
      */
-    DeleteImage(req: DeleteImageRequest, cb?: (error: string, rep: DeleteImageResponse) => void): Promise<DeleteImageResponse>;
+    ModifyVpcAttribute(req: ModifyVpcAttributeRequest, cb?: (error: string, rep: ModifyVpcAttributeResponse) => void): Promise<ModifyVpcAttributeResponse>;
     /**
      * 查询安全组关联实例统计
      */
@@ -413,7 +478,7 @@ CidrBlock, Ipv6CidrBlock, SecurityGroupId, AddressTemplate 四者是排他关系
      */
     CreateSecurityGroupPolicies(req: CreateSecurityGroupPoliciesRequest, cb?: (error: string, rep: CreateSecurityGroupPoliciesResponse) => void): Promise<CreateSecurityGroupPoliciesResponse>;
     /**
-     * 修改私有网络（VPC）的相关属性
+     * 删除镜像
      */
-    ModifyVpcAttribute(req: ModifyVpcAttributeRequest, cb?: (error: string, rep: ModifyVpcAttributeResponse) => void): Promise<ModifyVpcAttributeResponse>;
+    DeleteImage(req: DeleteImageRequest, cb?: (error: string, rep: DeleteImageResponse) => void): Promise<DeleteImageResponse>;
 }

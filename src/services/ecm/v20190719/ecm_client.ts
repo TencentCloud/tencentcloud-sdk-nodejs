@@ -28,8 +28,9 @@ import {
   DisassociateAddressResponse,
   BatchModifyTargetWeightResponse,
   InstanceStatistic,
+  CreateRoutesRequest,
   CreateLoadBalancerRequest,
-  DescribeInstancesDeniedActionsRequest,
+  DescribeHaVipsResponse,
   ModifyModuleSecurityGroupsRequest,
   Internet,
   DescribeModuleResponse,
@@ -45,6 +46,7 @@ import {
   DescribeSubnetsRequest,
   AssociateSecurityGroupsRequest,
   StartInstancesRequest,
+  RouteConflict,
   EipQuota,
   DeleteSubnetResponse,
   ModifyAddressesBandwidthResponse,
@@ -60,7 +62,7 @@ import {
   DescribeNodeResponse,
   RemovePrivateIpAddressesResponse,
   DescribeDefaultSubnetResponse,
-  VpcInfo,
+  ReplaceRouteTableAssociationRequest,
   ReplaceSecurityGroupPolicyRequest,
   ModifyTargetWeightResponse,
   Node,
@@ -72,20 +74,26 @@ import {
   CreateNetworkInterfaceRequest,
   CreateModuleResponse,
   RebootInstancesRequest,
+  SecurityGroupPolicySet,
   AllocateAddressesRequest,
+  NetworkInterfaceAttachment,
+  Instance,
   DeleteNetworkInterfaceRequest,
   RemovePrivateIpAddressesRequest,
+  RouteTable,
   ZoneInstanceCountISP,
   LoadBalancerHealth,
   DescribeTargetsRequest,
   ModifyInstancesAttributeRequest,
   InstanceFamilyTypeConfig,
   ResetInstancesResponse,
-  DescribeImageRequest,
+  DeleteVpcRequest,
   DeleteLoadBalancerListenersRequest,
   MigratePrivateIpAddressRequest,
   ModifySubnetAttributeResponse,
   ZoneInfo,
+  DescribeInstancesDeniedActionsRequest,
+  DeleteRouteTableRequest,
   DescribeNodeRequest,
   CreateSubnetResponse,
   DescribeSecurityGroupPoliciesResponse,
@@ -94,25 +102,28 @@ import {
   ModifySecurityGroupPoliciesRequest,
   DescribeConfigRequest,
   DescribeInstanceVncUrlRequest,
-  CreateListenerResponse,
+  DescribeInstanceVncUrlResponse,
   TargetsWeightRule,
   StopInstancesResponse,
   StartInstancesResponse,
   CreateVpcResponse,
   ModifyTargetPortResponse,
   AssistantCidr,
+  TerminateInstancesRequest,
   DescribeTaskStatusResponse,
   BatchRegisterTargetsResponse,
   CreateModuleRequest,
+  ReplaceRouteTableAssociationResponse,
   InstanceNetworkInfo,
   ModifyInstancesAttributeResponse,
   ReleaseAddressesResponse,
   ModifyVpcAttributeRequest,
   DescribeInstancesDeniedActionsResponse,
-  DisassociateAddressRequest,
+  DeleteHaVipResponse,
   TaskOutput,
   ModuleCounter,
   ReplaceSecurityGroupPolicyResponse,
+  ReplaceRoutesResponse,
   RuleHealth,
   Listener,
   ModifyLoadBalancerAttributesResponse,
@@ -120,29 +131,34 @@ import {
   DescribeDefaultSubnetRequest,
   ResetInstancesMaxBandwidthResponse,
   DeleteSecurityGroupResponse,
-  DeleteVpcRequest,
+  VpcInfo,
+  Route,
+  DescribeImageRequest,
   CreateNetworkInterfaceResponse,
   ModifyListenerRequest,
   RunInstancesResponse,
   DescribeAddressQuotaRequest,
+  ModifyModuleNameRequest,
   DescribeInstanceTypeConfigResponse,
   NodeInstanceNum,
   HealthCheck,
   DescribeSecurityGroupLimitsResponse,
   DescribeAddressesResponse,
-  SecurityGroupPolicySet,
+  CreateRoutesResponse,
   DeleteListenerRequest,
   DescribeSecurityGroupsResponse,
   ImportImageRequest,
   DetachNetworkInterfaceResponse,
   InstanceFamilyConfig,
+  ResetRoutesResponse,
   DeleteModuleRequest,
   CreateImageResponse,
   ModifySecurityGroupPoliciesResponse,
   ResetInstancesMaxBandwidthRequest,
   LoadBalancerInternetAccessible,
   OsVersion,
-  ServiceTemplateSpecification,
+  ResetRoutesRequest,
+  DisableRoutesResponse,
   PeakBase,
   ResetInstancesPasswordResponse,
   ModifyModuleNetworkRequest,
@@ -164,6 +180,7 @@ import {
   DeleteLoadBalancerRequest,
   DeleteVpcResponse,
   Target,
+  RouteTableAssociation,
   DescribeVpcsResponse,
   ImageUrl,
   ISP,
@@ -172,14 +189,16 @@ import {
   ISPCounter,
   MigratePrivateIpAddressResponse,
   CreateImageRequest,
-  Instance,
+  DeleteRouteTableResponse,
   EnhancedService,
-  DescribeInstanceVncUrlResponse,
+  CreateListenerResponse,
   DeleteModuleResponse,
   DescribeInstanceTypeConfigRequest,
   DescribeLoadBalanceTaskStatusRequest,
   ImportCustomImageRequest,
+  ModifyHaVipAttributeResponse,
   DescribeModuleDetailRequest,
+  DeleteRoutesRequest,
   AssociateAddressRequest,
   ModifySecurityGroupAttributeRequest,
   ModifyModuleConfigRequest,
@@ -188,16 +207,20 @@ import {
   AttachNetworkInterfaceResponse,
   SecurityGroupPolicy,
   DescribeVpcsRequest,
+  DescribeRouteConflictsResponse,
+  DescribeRouteTablesRequest,
   DescribeBaseOverviewRequest,
+  CreateHaVipResponse,
   AssociateSecurityGroupsResponse,
   DiskInfo,
+  ModifyRouteTableAttributeRequest,
   BatchDeregisterTargetsRequest,
   DescribeImportImageOsRequest,
-  NetworkInterfaceAttachment,
+  DisableRoutesRequest,
   ModifyListenerResponse,
   DescribeTargetHealthResponse,
   DescribeLoadBalanceTaskStatusResponse,
-  ModifyModuleNameRequest,
+  EnableRoutesRequest,
   ModifyDefaultSubnetRequest,
   DescribeInstancesRequest,
   CreateListenerRequest,
@@ -205,8 +228,10 @@ import {
   VirtualPrivateCloud,
   AssociateAddressResponse,
   Filter,
+  CreateRouteTableRequest,
   PublicIPAddressInfo,
   TerminateInstancesResponse,
+  CreateHaVipRequest,
   DescribeAddressesRequest,
   DescribeSecurityGroupPoliciesRequest,
   MigrateNetworkInterfaceRequest,
@@ -216,8 +241,10 @@ import {
   ZoneInstanceInfo,
   DeleteLoadBalancerResponse,
   DeleteSecurityGroupRequest,
-  ModifyAddressAttributeRequest,
+  ReplaceRoutesRequest,
+  CreateRouteTableResponse,
   ModifyModuleImageResponse,
+  DeleteRoutesResponse,
   ResetInstancesRequest,
   PeakNetwork,
   DescribeCustomImageTaskRequest,
@@ -234,7 +261,7 @@ import {
   City,
   PrivateIPAddressInfo,
   DescribeTargetHealthRequest,
-  TerminateInstancesRequest,
+  EnableRoutesResponse,
   DeleteNetworkInterfaceResponse,
   SimpleModule,
   DescribePeakNetworkOverviewRequest,
@@ -242,13 +269,16 @@ import {
   AssignPrivateIpAddressesResponse,
   DescribeSecurityGroupsRequest,
   PeakNetworkRegionInfo,
+  ModifyHaVipAttributeRequest,
   RebootInstancesResponse,
   ModifyModuleIpDirectRequest,
   ModifyAddressesBandwidthRequest,
   DeleteSecurityGroupPoliciesResponse,
+  ModifyAddressAttributeRequest,
   PeakFamilyInfo,
   DescribePeakBaseOverviewResponse,
   ModifyImageAttributeResponse,
+  DescribeHaVipsRequest,
   BatchRegisterTargetsRequest,
   DescribeImageResponse,
   ListenerBackend,
@@ -257,6 +287,7 @@ import {
   DeleteImageResponse,
   Address,
   DescribeNetworkInterfacesResponse,
+  DeleteHaVipRequest,
   AssignPrivateIpAddressesRequest,
   ResetInstancesPasswordRequest,
   ModifyImageAttributeRequest,
@@ -267,8 +298,10 @@ import {
   DescribeSecurityGroupAssociationStatisticsRequest,
   Country,
   DisassociateSecurityGroupsRequest,
+  DescribeRouteTablesResponse,
   ModifySubnetAttributeRequest,
   AllocateAddressesResponse,
+  DisassociateAddressRequest,
   DeleteLoadBalancerListenersResponse,
   DescribeListenersRequest,
   AttachNetworkInterfaceRequest,
@@ -279,14 +312,17 @@ import {
   ModifyTargetPortRequest,
   DescribeImportImageOsResponse,
   DescribeLoadBalancersResponse,
+  ModifyRouteTableAttributeResponse,
   MigrateNetworkInterfaceResponse,
   DeleteListenerResponse,
   DeleteImageRequest,
   Module,
   DescribeBaseOverviewResponse,
+  ServiceTemplateSpecification,
   TargetHealth,
   ListenerHealth,
   DisassociateSecurityGroupsResponse,
+  DescribeRouteConflictsRequest,
   LoadBalancer,
   AddressInfo,
 } from "./ecm_models"
@@ -341,6 +377,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询路由表对象列表
+   */
+  async DescribeRouteTables(
+    req: DescribeRouteTablesRequest,
+    cb?: (error: string, rep: DescribeRouteTablesResponse) => void
+  ): Promise<DescribeRouteTablesResponse> {
+    return this.request("DescribeRouteTables", req, cb)
+  }
+
+  /**
+   * 创建了VPC后，系统会创建一个默认路由表，所有新建的子网都会关联到默认路由表。默认情况下您可以直接使用默认路由表来管理您的路由策略。当您的路由策略较多时，您可以调用创建路由表接口创建更多路由表管理您的路由策略。
+   */
+  async CreateRouteTable(
+    req: CreateRouteTableRequest,
+    cb?: (error: string, rep: CreateRouteTableResponse) => void
+  ): Promise<CreateRouteTableResponse> {
+    return this.request("CreateRouteTable", req, cb)
+  }
+
+  /**
    * 批量解绑后端服务。
    */
   async BatchDeregisterTargets(
@@ -358,6 +414,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyInstancesAttributeResponse) => void
   ): Promise<ModifyInstancesAttributeResponse> {
     return this.request("ModifyInstancesAttribute", req, cb)
+  }
+
+  /**
+   * 对某个路由表名称和所有路由策略（Route）进行重新设置
+   */
+  async ResetRoutes(
+    req: ResetRoutesRequest,
+    cb?: (error: string, rep: ResetRoutesResponse) => void
+  ): Promise<ResetRoutesResponse> {
+    return this.request("ResetRoutes", req, cb)
   }
 
   /**
@@ -438,6 +504,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ImportImageResponse) => void
   ): Promise<ImportImageResponse> {
     return this.request("ImportImage", req, cb)
+  }
+
+  /**
+   * 修改子网关联的路由表，一个子网只能关联一个路由表。
+   */
+  async ReplaceRouteTableAssociation(
+    req: ReplaceRouteTableAssociationRequest,
+    cb?: (error: string, rep: ReplaceRouteTableAssociationResponse) => void
+  ): Promise<ReplaceRouteTableAssociationResponse> {
+    return this.request("ReplaceRouteTableAssociation", req, cb)
   }
 
   /**
@@ -744,13 +820,33 @@ EIP 如果欠费或被封堵，则不能被绑定。
   }
 
   /**
-   * 修改模块IP直通。
+   * 获取负载均衡后端服务的健康检查状态。
    */
-  async ModifyModuleIpDirect(
-    req: ModifyModuleIpDirectRequest,
-    cb?: (error: string, rep: ModifyModuleIpDirectResponse) => void
-  ): Promise<ModifyModuleIpDirectResponse> {
-    return this.request("ModifyModuleIpDirect", req, cb)
+  async DescribeTargetHealth(
+    req: DescribeTargetHealthRequest,
+    cb?: (error: string, rep: DescribeTargetHealthResponse) => void
+  ): Promise<DescribeTargetHealthResponse> {
+    return this.request("DescribeTargetHealth", req, cb)
+  }
+
+  /**
+   * 替换路由策略
+   */
+  async ReplaceRoutes(
+    req: ReplaceRoutesRequest,
+    cb?: (error: string, rep: ReplaceRoutesResponse) => void
+  ): Promise<ReplaceRoutesResponse> {
+    return this.request("ReplaceRoutes", req, cb)
+  }
+
+  /**
+   * 查询自定义路由策略与云联网路由策略冲突列表
+   */
+  async DescribeRouteConflicts(
+    req: DescribeRouteConflictsRequest,
+    cb?: (error: string, rep: DescribeRouteConflictsResponse) => void
+  ): Promise<DescribeRouteConflictsResponse> {
+    return this.request("DescribeRouteConflicts", req, cb)
   }
 
   /**
@@ -762,6 +858,16 @@ EIP 如果欠费或被封堵，则不能被绑定。
     cb?: (error: string, rep: RemovePrivateIpAddressesResponse) => void
   ): Promise<RemovePrivateIpAddressesResponse> {
     return this.request("RemovePrivateIpAddresses", req, cb)
+  }
+
+  /**
+   * 禁用已启用的子网路由
+   */
+  async DisableRoutes(
+    req: DisableRoutesRequest,
+    cb?: (error: string, rep: DisableRoutesResponse) => void
+  ): Promise<DisableRoutesResponse> {
+    return this.request("DisableRoutes", req, cb)
   }
 
   /**
@@ -845,6 +951,16 @@ EIP 如果欠费或被封堵，则不能被绑定。
   }
 
   /**
+   * 对某个路由表批量删除路由策略
+   */
+  async DeleteRoutes(
+    req: DeleteRoutesRequest,
+    cb?: (error: string, rep: DeleteRoutesResponse) => void
+  ): Promise<DeleteRoutesResponse> {
+    return this.request("DeleteRoutes", req, cb)
+  }
+
+  /**
    * 修改安全组出站和入站规则
    */
   async ModifySecurityGroupPolicies(
@@ -892,6 +1008,16 @@ EIP 如果欠费或被封堵，则不能被绑定。
     cb?: (error: string, rep: ModifyImageAttributeResponse) => void
   ): Promise<ModifyImageAttributeResponse> {
     return this.request("ModifyImageAttribute", req, cb)
+  }
+
+  /**
+   * 查询负载均衡实例列表。
+   */
+  async DescribeLoadBalancers(
+    req: DescribeLoadBalancersRequest,
+    cb?: (error: string, rep: DescribeLoadBalancersResponse) => void
+  ): Promise<DescribeLoadBalancersResponse> {
+    return this.request("DescribeLoadBalancers", req, cb)
   }
 
   /**
@@ -952,6 +1078,16 @@ EIP 如果欠费或被封堵，则不能被绑定。
     cb?: (error: string, rep: DescribeInstanceVncUrlResponse) => void
   ): Promise<DescribeInstanceVncUrlResponse> {
     return this.request("DescribeInstanceVncUrl", req, cb)
+  }
+
+  /**
+   * 删除路由表
+   */
+  async DeleteRouteTable(
+    req: DeleteRouteTableRequest,
+    cb?: (error: string, rep: DeleteRouteTableResponse) => void
+  ): Promise<DeleteRouteTableResponse> {
+    return this.request("DeleteRouteTable", req, cb)
   }
 
   /**
@@ -1017,6 +1153,16 @@ EIP 如果欠费或被封堵，则不能被绑定。
   }
 
   /**
+   * 用于查询高可用虚拟IP（HAVIP）列表。
+   */
+  async DescribeHaVips(
+    req?: DescribeHaVipsRequest,
+    cb?: (error: string, rep: DescribeHaVipsResponse) => void
+  ): Promise<DescribeHaVipsResponse> {
+    return this.request("DescribeHaVips", req, cb)
+  }
+
+  /**
    * 弹性网卡申请内网 IP
    */
   async AssignPrivateIpAddresses(
@@ -1024,6 +1170,16 @@ EIP 如果欠费或被封堵，则不能被绑定。
     cb?: (error: string, rep: AssignPrivateIpAddressesResponse) => void
   ): Promise<AssignPrivateIpAddressesResponse> {
     return this.request("AssignPrivateIpAddresses", req, cb)
+  }
+
+  /**
+   * 用于删除高可用虚拟IP（HAVIP）
+   */
+  async DeleteHaVip(
+    req?: DeleteHaVipRequest,
+    cb?: (error: string, rep: DeleteHaVipResponse) => void
+  ): Promise<DeleteHaVipResponse> {
+    return this.request("DeleteHaVip", req, cb)
   }
 
   /**
@@ -1127,13 +1283,24 @@ EIP 如果欠费或被封堵，则不能被绑定。
   }
 
   /**
-   * 查询负载均衡实例列表。
+     * 启用已禁用的子网路由。
+本接口会校验启用后，是否与已有路由冲突，如果冲突，则无法启用，失败处理。路由冲突时，需要先禁用与之冲突的路由，才能启用该路由。
+     */
+  async EnableRoutes(
+    req: EnableRoutesRequest,
+    cb?: (error: string, rep: EnableRoutesResponse) => void
+  ): Promise<EnableRoutesResponse> {
+    return this.request("EnableRoutes", req, cb)
+  }
+
+  /**
+   * 本接口（CreateHaVip）用于创建高可用虚拟IP（HAVIP）
    */
-  async DescribeLoadBalancers(
-    req: DescribeLoadBalancersRequest,
-    cb?: (error: string, rep: DescribeLoadBalancersResponse) => void
-  ): Promise<DescribeLoadBalancersResponse> {
-    return this.request("DescribeLoadBalancers", req, cb)
+  async CreateHaVip(
+    req?: CreateHaVipRequest,
+    cb?: (error: string, rep: CreateHaVipResponse) => void
+  ): Promise<CreateHaVipResponse> {
+    return this.request("CreateHaVip", req, cb)
   }
 
   /**
@@ -1157,6 +1324,16 @@ EIP 如果欠费或被封堵，则不能被绑定。
   }
 
   /**
+   * 修改路由表属性
+   */
+  async ModifyRouteTableAttribute(
+    req: ModifyRouteTableAttributeRequest,
+    cb?: (error: string, rep: ModifyRouteTableAttributeResponse) => void
+  ): Promise<ModifyRouteTableAttributeResponse> {
+    return this.request("ModifyRouteTableAttribute", req, cb)
+  }
+
+  /**
    * 修改监听器绑定的后端机器的转发权重。
    */
   async ModifyTargetWeight(
@@ -1177,6 +1354,26 @@ EIP 如果欠费或被封堵，则不能被绑定。
   }
 
   /**
+   * 创建路由策略
+   */
+  async CreateRoutes(
+    req: CreateRoutesRequest,
+    cb?: (error: string, rep: CreateRoutesResponse) => void
+  ): Promise<CreateRoutesResponse> {
+    return this.request("CreateRoutes", req, cb)
+  }
+
+  /**
+   * 用于修改高可用虚拟IP（HAVIP）属性
+   */
+  async ModifyHaVipAttribute(
+    req?: ModifyHaVipAttributeRequest,
+    cb?: (error: string, rep: ModifyHaVipAttributeResponse) => void
+  ): Promise<ModifyHaVipAttributeResponse> {
+    return this.request("ModifyHaVipAttribute", req, cb)
+  }
+
+  /**
      * 释放一个或多个弹性公网IP（简称 EIP）。
 该操作不可逆，释放后 EIP 关联的 IP 地址将不再属于您的名下。
 只有状态为 UNBIND 的 EIP 才能进行释放操作。
@@ -1189,13 +1386,13 @@ EIP 如果欠费或被封堵，则不能被绑定。
   }
 
   /**
-   * 获取负载均衡后端服务的健康检查状态。
+   * 修改模块IP直通。
    */
-  async DescribeTargetHealth(
-    req: DescribeTargetHealthRequest,
-    cb?: (error: string, rep: DescribeTargetHealthResponse) => void
-  ): Promise<DescribeTargetHealthResponse> {
-    return this.request("DescribeTargetHealth", req, cb)
+  async ModifyModuleIpDirect(
+    req: ModifyModuleIpDirectRequest,
+    cb?: (error: string, rep: ModifyModuleIpDirectResponse) => void
+  ): Promise<ModifyModuleIpDirectResponse> {
+    return this.request("ModifyModuleIpDirect", req, cb)
   }
 
   /**
@@ -1209,13 +1406,13 @@ EIP 如果欠费或被封堵，则不能被绑定。
   }
 
   /**
-   * 删除镜像
+   * 修改私有网络（VPC）的相关属性
    */
-  async DeleteImage(
-    req: DeleteImageRequest,
-    cb?: (error: string, rep: DeleteImageResponse) => void
-  ): Promise<DeleteImageResponse> {
-    return this.request("DeleteImage", req, cb)
+  async ModifyVpcAttribute(
+    req: ModifyVpcAttributeRequest,
+    cb?: (error: string, rep: ModifyVpcAttributeResponse) => void
+  ): Promise<ModifyVpcAttributeResponse> {
+    return this.request("ModifyVpcAttribute", req, cb)
   }
 
   /**
@@ -1270,12 +1467,12 @@ CidrBlock, Ipv6CidrBlock, SecurityGroupId, AddressTemplate 四者是排他关系
   }
 
   /**
-   * 修改私有网络（VPC）的相关属性
+   * 删除镜像
    */
-  async ModifyVpcAttribute(
-    req: ModifyVpcAttributeRequest,
-    cb?: (error: string, rep: ModifyVpcAttributeResponse) => void
-  ): Promise<ModifyVpcAttributeResponse> {
-    return this.request("ModifyVpcAttribute", req, cb)
+  async DeleteImage(
+    req: DeleteImageRequest,
+    cb?: (error: string, rep: DeleteImageResponse) => void
+  ): Promise<DeleteImageResponse> {
+    return this.request("DeleteImage", req, cb)
   }
 }

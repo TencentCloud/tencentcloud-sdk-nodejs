@@ -245,6 +245,21 @@ export interface InstanceStatistic {
 }
 
 /**
+ * CreateRoutes请求参数结构体
+ */
+export interface CreateRoutesRequest {
+  /**
+   * 路由表实例ID。
+   */
+  RouteTableId: string
+
+  /**
+   * 要创建的路由策略对象。
+   */
+  Routes: Array<Route>
+}
+
+/**
  * CreateLoadBalancer请求参数结构体
  */
 export interface CreateLoadBalancerRequest {
@@ -291,13 +306,13 @@ export interface CreateLoadBalancerRequest {
 }
 
 /**
- * DescribeInstancesDeniedActions请求参数结构体
+ * DescribeHaVips返回参数结构体
  */
-export interface DescribeInstancesDeniedActionsRequest {
+export interface DescribeHaVipsResponse {
   /**
-   * 无
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceIdSet: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -664,6 +679,27 @@ export interface StartInstancesRequest {
    * 待开启的实例ID列表。在单次请求的过程中，单个region下的请求实例数上限为100。
    */
   InstanceIdSet: Array<string>
+}
+
+/**
+ * 路由冲突对象
+ */
+export interface RouteConflict {
+  /**
+   * 路由表实例ID
+   */
+  RouteTableId?: string
+
+  /**
+   * 要检查的与之冲突的目的端
+   */
+  DestinationCidrBlock: string
+
+  /**
+      * 冲突的路由策略列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ConflictSet: Array<Route>
 }
 
 /**
@@ -1186,107 +1222,23 @@ export interface DescribeDefaultSubnetResponse {
 }
 
 /**
- * 私有网络(VPC)对象。
+ * ReplaceRouteTableAssociation请求参数结构体
  */
-export interface VpcInfo {
+export interface ReplaceRouteTableAssociationRequest {
   /**
-   * VPC名称。
+   * 子网实例ID，例如：subnet-3x5lf5q0。可通过DescribeSubnets接口查询。
    */
-  VpcName: string
+  SubnetId: string
 
   /**
-   * VPC实例ID，例如：vpc-azd4dt1c。
+   * 路由表实例ID，例如：rtb-azd4dt1c。
    */
-  VpcId: string
+  RouteTableId: string
 
   /**
-   * VPC的IPv4 CIDR。
+   * ECM 地域
    */
-  CidrBlock: string
-
-  /**
-   * 是否默认VPC。
-   */
-  IsDefault: boolean
-
-  /**
-   * 是否开启组播。
-   */
-  EnableMulticast: boolean
-
-  /**
-   * 创建时间。
-   */
-  CreatedTime: string
-
-  /**
-      * DNS列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DnsServerSet: Array<string>
-
-  /**
-   * DHCP域名选项值。
-   */
-  DomainName: string
-
-  /**
-   * DHCP选项集ID。
-   */
-  DhcpOptionsId: string
-
-  /**
-   * 是否开启DHCP。
-   */
-  EnableDhcp: boolean
-
-  /**
-   * VPC的IPv6 CIDR。
-   */
-  Ipv6CidrBlock: string
-
-  /**
-      * 标签键值对
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TagSet: Array<Tag>
-
-  /**
-      * 辅助CIDR
-注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AssistantCidrSet: Array<AssistantCidr>
-
-  /**
-      * 地域
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Region: string
-
-  /**
-      * 描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Description: string
-
-  /**
-      * 地域中文名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RegionName: string
-
-  /**
-      * 包含子网数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SubnetCount: number
-
-  /**
-      * 包含实例数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  InstanceCount: number
+  EcmRegion: string
 }
 
 /**
@@ -1574,6 +1526,26 @@ SOFT_FIRST：表示优先软关机，失败再执行硬关机
 }
 
 /**
+ * 安全组规则集合
+ */
+export interface SecurityGroupPolicySet {
+  /**
+   * 安全组规则当前版本。用户每次更新安全规则版本会自动加1，防止更新的路由规则已过期，不填不考虑冲突。
+   */
+  Version?: string
+
+  /**
+   * 出站规则。其中出站规则和入站规则必须选一个。
+   */
+  Egress?: Array<SecurityGroupPolicy>
+
+  /**
+   * 入站规则。其中出站规则和入站规则必须选一个。
+   */
+  Ingress?: Array<SecurityGroupPolicy>
+}
+
+/**
  * AllocateAddresses请求参数结构体
  */
 export interface AllocateAddressesRequest {
@@ -1603,6 +1575,215 @@ CUCC：中国联通
    * 需要关联的标签列表。
    */
   Tags?: Array<Tag>
+}
+
+/**
+ * 弹性网卡绑定关系
+ */
+export interface NetworkInterfaceAttachment {
+  /**
+   * 云主机实例ID。
+   */
+  InstanceId: string
+
+  /**
+   * 网卡在云主机实例内的序号。
+   */
+  DeviceIndex: number
+
+  /**
+   * 云主机所有者账户信息。
+   */
+  InstanceAccountId: string
+
+  /**
+   * 绑定时间。
+   */
+  AttachTime: string
+}
+
+/**
+ * 用于描述实例相关的信息。
+ */
+export interface Instance {
+  /**
+   * 实例ID。
+   */
+  InstanceId: string
+
+  /**
+      * 实例名称，如ens-34241f3s。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceName: string
+
+  /**
+      * 实例状态。取值范围：
+PENDING：表示创建中
+LAUNCH_FAILED：表示创建失败
+RUNNING：表示运行中
+STOPPED：表示关机
+STARTING：表示开机中
+STOPPING：表示关机中
+REBOOTING：表示重启中
+SHUTDOWN：表示停止待销毁
+TERMINATING：表示销毁中。
+      */
+  InstanceState: string
+
+  /**
+      * 实例当前使用的镜像的信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Image: Image
+
+  /**
+      * 实例当前所属的模块简要信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SimpleModule: SimpleModule
+
+  /**
+      * 实例所在的位置相关信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Position: Position
+
+  /**
+      * 实例的网络相关信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Internet: Internet
+
+  /**
+      * 实例的配置相关信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceTypeConfig: InstanceTypeConfig
+
+  /**
+      * 实例的创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime: string
+
+  /**
+      * 实例的标签信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TagSet: Array<Tag>
+
+  /**
+      * 实例最后一次操作。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LatestOperation: string
+
+  /**
+      * 实例最后一次操作结果。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LatestOperationState: string
+
+  /**
+      * 实例业务状态。取值范围：
+NORMAL：表示正常状态的实例
+EXPIRED：表示过期的实例
+PROTECTIVELY_ISOLATED：表示被安全隔离的实例。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RestrictState: string
+
+  /**
+      * 系统盘大小，单位GB。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SystemDiskSize: number
+
+  /**
+      * 数据盘大小，单位GB。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DataDiskSize: number
+
+  /**
+      * 实例UUID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UUID: string
+
+  /**
+      * 付费方式。
+    0为后付费。
+    1为预付费。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PayMode: number
+
+  /**
+      * 过期时间。格式为yyyy-mm-dd HH:mm:ss。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExpireTime: string
+
+  /**
+      * 隔离时间。格式为yyyy-mm-dd HH:mm:ss。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsolatedTime: string
+
+  /**
+      * 是否自动续费。
+      0为不自动续费。
+      1为自动续费。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RenewFlag: number
+
+  /**
+      * 过期状态。
+    NORMAL 表示机器运行正常。
+    WILL_EXPIRE 表示即将过期。
+    EXPIRED 表示已过期。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExpireState: string
+
+  /**
+      * 系统盘信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SystemDisk: DiskInfo
+
+  /**
+      * 数据盘信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DataDisks: Array<DiskInfo>
+
+  /**
+      * 新实例标志
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NewFlag: number
+
+  /**
+      * 实例所属安全组。该参数可以通过调用 DescribeSecurityGroups 的返回值中的sgId字段来获取。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SecurityGroupIds: Array<string>
+
+  /**
+      * VPC属性
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VirtualPrivateCloud: VirtualPrivateCloud
+
+  /**
+      * 实例运营商字段。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ISP: string
 }
 
 /**
@@ -1638,6 +1819,48 @@ export interface RemovePrivateIpAddressesRequest {
    * 指定的内网IP信息，单次最多指定10个。
    */
   PrivateIpAddresses: Array<PrivateIpAddressSpecification>
+}
+
+/**
+ * 路由表
+ */
+export interface RouteTable {
+  /**
+   * VPC实例ID
+   */
+  VpcId?: string
+
+  /**
+   * 路由表实例ID
+   */
+  RouteTableId?: string
+
+  /**
+   * 路由表名称
+   */
+  RouteTableName?: string
+
+  /**
+      * 路由表关联关系
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AssociationSet?: Array<RouteTableAssociation>
+
+  /**
+      * IPv4路由策略集合
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RouteSet?: Array<Route>
+
+  /**
+   * 是否默认路由表
+   */
+  Main?: boolean
+
+  /**
+   * 创建时间
+   */
+  CreatedTime?: string
 }
 
 /**
@@ -1769,27 +1992,18 @@ export interface ResetInstancesResponse {
 }
 
 /**
- * DescribeImage请求参数结构体
+ * DeleteVpc请求参数结构体
  */
-export interface DescribeImageRequest {
+export interface DeleteVpcRequest {
   /**
-      * 过滤条件，每次请求的Filters的上限为10，详细的过滤条件如下：
-image-id - String - 是否必填： 否 - （过滤条件）按照镜像ID进行过滤
-image-type - String - 是否必填： 否 - （过滤条件）按照镜像类型进行过滤。取值范围：
-PRIVATE_IMAGE: 私有镜像 (本帐户创建的镜像) 
-PUBLIC_IMAGE: 公共镜像 (腾讯云官方镜像)
-      */
-  Filters?: Array<Filter>
+   * VPC实例ID。可通过DescribeVpcs接口返回值中的VpcId获取。
+   */
+  VpcId: string
 
   /**
-   * 偏移量，默认为0。关于Offset的更进一步介绍请参考 API 简介中的相关小节。
+   * ECM 地域
    */
-  Offset?: number
-
-  /**
-   * 返回数量，默认为20，最大值为100。关于Limit的更进一步介绍请参考 API 简介中的相关小节。
-   */
-  Limit?: number
+  EcmRegion: string
 }
 
 /**
@@ -1860,6 +2074,26 @@ export interface ZoneInfo {
    * Zone
    */
   Zone: string
+}
+
+/**
+ * DescribeInstancesDeniedActions请求参数结构体
+ */
+export interface DescribeInstancesDeniedActionsRequest {
+  /**
+   * 无
+   */
+  InstanceIdSet: Array<string>
+}
+
+/**
+ * DeleteRouteTable请求参数结构体
+ */
+export interface DeleteRouteTableRequest {
+  /**
+   * 路由表实例ID，例如：rtb-azd4dt1c
+   */
+  RouteTableId: string
 }
 
 /**
@@ -1975,14 +2209,13 @@ export interface DescribeInstanceVncUrlRequest {
 }
 
 /**
- * CreateListener返回参数结构体
+ * DescribeInstanceVncUrl返回参数结构体
  */
-export interface CreateListenerResponse {
+export interface DescribeInstanceVncUrlResponse {
   /**
-      * 创建的监听器的唯一标识数组
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ListenerIds?: Array<string>
+   * 实例的管理终端地址。
+   */
+  InstanceVncUrl?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2086,6 +2319,26 @@ export interface AssistantCidr {
 }
 
 /**
+ * TerminateInstances请求参数结构体
+ */
+export interface TerminateInstancesRequest {
+  /**
+   * 待销毁的实例ID列表。
+   */
+  InstanceIdSet: Array<string>
+
+  /**
+   * 是否定时销毁，默认为否。
+   */
+  TerminateDelay?: boolean
+
+  /**
+   * 定时销毁的时间，格式形如："2019-08-05 12:01:30"，若非定时销毁，则此参数被忽略。
+   */
+  TerminateTime?: string
+}
+
+/**
  * DescribeTaskStatus返回参数结构体
  */
 export interface DescribeTaskStatusResponse {
@@ -2171,6 +2424,16 @@ export interface CreateModuleRequest {
    * 默认入带宽，单位：M。范围不得超过带宽上下限，详看DescribeConfig。
    */
   DefaultBandWidthIn?: number
+}
+
+/**
+ * ReplaceRouteTableAssociation返回参数结构体
+ */
+export interface ReplaceRouteTableAssociationResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2271,30 +2534,13 @@ export interface DescribeInstancesDeniedActionsResponse {
 }
 
 /**
- * DisassociateAddress请求参数结构体
+ * DeleteHaVip返回参数结构体
  */
-export interface DisassociateAddressRequest {
+export interface DeleteHaVipResponse {
   /**
-   * ECM 地域
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  EcmRegion: string
-
-  /**
-   * 标识 EIP 的唯一 ID。EIP 唯一 ID 形如：eip-11112222。
-   */
-  AddressId: string
-
-  /**
-      * 表示解绑 EIP 之后是否分配普通公网 IP。取值范围：
-TRUE：表示解绑 EIP 之后分配普通公网 IP。
-FALSE：表示解绑 EIP 之后不分配普通公网 IP。
-默认取值：FALSE。
-
-只有满足以下条件时才能指定该参数：
-只有在解绑主网卡的主内网 IP 上的 EIP 时才能指定该参数。
-解绑 EIP 后重新分配普通公网 IP 操作一个账号每天最多操作 10 次；详情可通过 DescribeAddressQuota 接口获取。
-      */
-  ReallocateNormalPublicIp?: boolean
+  RequestId?: string
 }
 
 /**
@@ -2366,6 +2612,16 @@ export interface ModuleCounter {
  * ReplaceSecurityGroupPolicy返回参数结构体
  */
 export interface ReplaceSecurityGroupPolicyResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ReplaceRoutes返回参数结构体
+ */
+export interface ReplaceRoutesResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2505,18 +2761,183 @@ export interface DeleteSecurityGroupResponse {
 }
 
 /**
- * DeleteVpc请求参数结构体
+ * 私有网络(VPC)对象。
  */
-export interface DeleteVpcRequest {
+export interface VpcInfo {
   /**
-   * VPC实例ID。可通过DescribeVpcs接口返回值中的VpcId获取。
+   * VPC名称。
+   */
+  VpcName: string
+
+  /**
+   * VPC实例ID，例如：vpc-azd4dt1c。
    */
   VpcId: string
 
   /**
-   * ECM 地域
+   * VPC的IPv4 CIDR。
    */
-  EcmRegion: string
+  CidrBlock: string
+
+  /**
+   * 是否默认VPC。
+   */
+  IsDefault: boolean
+
+  /**
+   * 是否开启组播。
+   */
+  EnableMulticast: boolean
+
+  /**
+   * 创建时间。
+   */
+  CreatedTime: string
+
+  /**
+      * DNS列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DnsServerSet: Array<string>
+
+  /**
+   * DHCP域名选项值。
+   */
+  DomainName: string
+
+  /**
+   * DHCP选项集ID。
+   */
+  DhcpOptionsId: string
+
+  /**
+   * 是否开启DHCP。
+   */
+  EnableDhcp: boolean
+
+  /**
+   * VPC的IPv6 CIDR。
+   */
+  Ipv6CidrBlock: string
+
+  /**
+      * 标签键值对
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TagSet: Array<Tag>
+
+  /**
+      * 辅助CIDR
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AssistantCidrSet: Array<AssistantCidr>
+
+  /**
+      * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Region: string
+
+  /**
+      * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Description: string
+
+  /**
+      * 地域中文名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RegionName: string
+
+  /**
+      * 包含子网数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubnetCount: number
+
+  /**
+      * 包含实例数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceCount: number
+}
+
+/**
+ * 路由策略
+ */
+export interface Route {
+  /**
+   * 目的IPv4网段
+   */
+  DestinationCidrBlock?: string
+
+  /**
+      * 下一跳类型
+NORMAL_CVM：普通云服务器；
+      */
+  GatewayType?: string
+
+  /**
+      * 下一跳地址
+这里只需要指定不同下一跳类型的网关ID，系统会自动匹配到下一跳地址
+当 GatewayType 为 EIP 时，GatewayId 固定值 '0'
+      */
+  GatewayId?: string
+
+  /**
+   * 路由策略唯一ID
+   */
+  RouteItemId?: string
+
+  /**
+   * 路由策略描述
+   */
+  RouteDescription?: string
+
+  /**
+   * 是否启用
+   */
+  Enabled?: boolean
+
+  /**
+      * 路由类型，目前我们支持的类型有：
+USER：用户路由；
+NETD：网络探测路由，创建网络探测实例时，系统默认下发，不可编辑与删除；
+CCN：云联网路由，系统默认下发，不可编辑与删除。
+用户只能添加和操作 USER 类型的路由。
+      */
+  RouteType?: string
+
+  /**
+   * 路由策略ID。IPv4路由策略ID是有意义的值，IPv6路由策略是无意义的值0。后续建议完全使用字符串唯一ID `RouteItemId`操作路由策略
+   */
+  RouteId?: number
+}
+
+/**
+ * DescribeImage请求参数结构体
+ */
+export interface DescribeImageRequest {
+  /**
+      * 过滤条件，每次请求的Filters的上限为10，详细的过滤条件如下：
+image-id - String - 是否必填： 否 - （过滤条件）按照镜像ID进行过滤
+image-type - String - 是否必填： 否 - （过滤条件）按照镜像类型进行过滤。取值范围：
+PRIVATE_IMAGE: 私有镜像 (本帐户创建的镜像) 
+PUBLIC_IMAGE: 公共镜像 (腾讯云官方镜像)
+      */
+  Filters?: Array<Filter>
+
+  /**
+   * 偏移量，默认为0。关于Offset的更进一步介绍请参考 API 简介中的相关小节。
+   */
+  Offset?: number
+
+  /**
+   * 返回数量，默认为20，最大值为100。关于Limit的更进一步介绍请参考 API 简介中的相关小节。
+   */
+  Limit?: number
 }
 
 /**
@@ -2594,6 +3015,21 @@ export interface DescribeAddressQuotaRequest {
    * ECM 地域
    */
   EcmRegion: string
+}
+
+/**
+ * ModifyModuleName请求参数结构体
+ */
+export interface ModifyModuleNameRequest {
+  /**
+   * 模块ID。
+   */
+  ModuleId: string
+
+  /**
+   * 模块名称。
+   */
+  ModuleName: string
 }
 
 /**
@@ -2733,23 +3169,24 @@ export interface DescribeAddressesResponse {
 }
 
 /**
- * 安全组规则集合
+ * CreateRoutes返回参数结构体
  */
-export interface SecurityGroupPolicySet {
+export interface CreateRoutesResponse {
   /**
-   * 安全组规则当前版本。用户每次更新安全规则版本会自动加1，防止更新的路由规则已过期，不填不考虑冲突。
+   * 新增的实例个数。
    */
-  Version?: string
+  TotalCount?: number
 
   /**
-   * 出站规则。其中出站规则和入站规则必须选一个。
-   */
-  Egress?: Array<SecurityGroupPolicy>
+      * 路由表对象。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RouteTableSet?: Array<RouteTable>
 
   /**
-   * 入站规则。其中出站规则和入站规则必须选一个。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Ingress?: Array<SecurityGroupPolicy>
+  RequestId?: string
 }
 
 /**
@@ -2830,6 +3267,16 @@ export interface InstanceFamilyConfig {
    * 机型ID
    */
   InstanceFamily: string
+}
+
+/**
+ * ResetRoutes返回参数结构体
+ */
+export interface ResetRoutesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2920,18 +3367,33 @@ export interface OsVersion {
 }
 
 /**
- * 协议端口模版
+ * ResetRoutes请求参数结构体
  */
-export interface ServiceTemplateSpecification {
+export interface ResetRoutesRequest {
   /**
-   * 协议端口ID，例如：eppm-f5n1f8da。
+   * 路由表实例ID，例如：rtb-azd4dt1c。
    */
-  ServiceId: string
+  RouteTableId: string
 
   /**
-   * 协议端口组ID，例如：eppmg-f5n1f8da。
+   * 路由表名称，最大长度不能超过60个字节。
    */
-  ServiceGroupId: string
+  RouteTableName: string
+
+  /**
+   * 路由策略。
+   */
+  Routes: Array<Route>
+}
+
+/**
+ * DisableRoutes返回参数结构体
+ */
+export interface DisableRoutesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3505,6 +3967,21 @@ export interface Target {
 }
 
 /**
+ * 路由表关联关系
+ */
+export interface RouteTableAssociation {
+  /**
+   * 子网实例ID
+   */
+  SubnetId?: string
+
+  /**
+   * 路由表实例ID
+   */
+  RouteTableId?: string
+}
+
+/**
  * DescribeVpcs返回参数结构体
  */
 export interface DescribeVpcsResponse {
@@ -3670,187 +4147,13 @@ FALSE：表示开机状态制作，目前不支持，需要先手动关机
 }
 
 /**
- * 用于描述实例相关的信息。
+ * DeleteRouteTable返回参数结构体
  */
-export interface Instance {
+export interface DeleteRouteTableResponse {
   /**
-   * 实例ID。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceId: string
-
-  /**
-      * 实例名称，如ens-34241f3s。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  InstanceName: string
-
-  /**
-      * 实例状态。取值范围：
-PENDING：表示创建中
-LAUNCH_FAILED：表示创建失败
-RUNNING：表示运行中
-STOPPED：表示关机
-STARTING：表示开机中
-STOPPING：表示关机中
-REBOOTING：表示重启中
-SHUTDOWN：表示停止待销毁
-TERMINATING：表示销毁中。
-      */
-  InstanceState: string
-
-  /**
-      * 实例当前使用的镜像的信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Image: Image
-
-  /**
-      * 实例当前所属的模块简要信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SimpleModule: SimpleModule
-
-  /**
-      * 实例所在的位置相关信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Position: Position
-
-  /**
-      * 实例的网络相关信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Internet: Internet
-
-  /**
-      * 实例的配置相关信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  InstanceTypeConfig: InstanceTypeConfig
-
-  /**
-      * 实例的创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CreateTime: string
-
-  /**
-      * 实例的标签信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TagSet: Array<Tag>
-
-  /**
-      * 实例最后一次操作。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  LatestOperation: string
-
-  /**
-      * 实例最后一次操作结果。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  LatestOperationState: string
-
-  /**
-      * 实例业务状态。取值范围：
-NORMAL：表示正常状态的实例
-EXPIRED：表示过期的实例
-PROTECTIVELY_ISOLATED：表示被安全隔离的实例。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RestrictState: string
-
-  /**
-      * 系统盘大小，单位GB。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SystemDiskSize: number
-
-  /**
-      * 数据盘大小，单位GB。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DataDiskSize: number
-
-  /**
-      * 实例UUID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UUID: string
-
-  /**
-      * 付费方式。
-    0为后付费。
-    1为预付费。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PayMode: number
-
-  /**
-      * 过期时间。格式为yyyy-mm-dd HH:mm:ss。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ExpireTime: string
-
-  /**
-      * 隔离时间。格式为yyyy-mm-dd HH:mm:ss。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  IsolatedTime: string
-
-  /**
-      * 是否自动续费。
-      0为不自动续费。
-      1为自动续费。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RenewFlag: number
-
-  /**
-      * 过期状态。
-    NORMAL 表示机器运行正常。
-    WILL_EXPIRE 表示即将过期。
-    EXPIRED 表示已过期。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ExpireState: string
-
-  /**
-      * 系统盘信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SystemDisk: DiskInfo
-
-  /**
-      * 数据盘信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DataDisks: Array<DiskInfo>
-
-  /**
-      * 新实例标志
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  NewFlag: number
-
-  /**
-      * 实例所属安全组。该参数可以通过调用 DescribeSecurityGroups 的返回值中的sgId字段来获取。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SecurityGroupIds: Array<string>
-
-  /**
-      * VPC属性
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  VirtualPrivateCloud: VirtualPrivateCloud
-
-  /**
-      * 实例运营商字段。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ISP: string
+  RequestId?: string
 }
 
 /**
@@ -3874,13 +4177,14 @@ export interface EnhancedService {
 }
 
 /**
- * DescribeInstanceVncUrl返回参数结构体
+ * CreateListener返回参数结构体
  */
-export interface DescribeInstanceVncUrlResponse {
+export interface CreateListenerResponse {
   /**
-   * 实例的管理终端地址。
-   */
-  InstanceVncUrl?: string
+      * 创建的监听器的唯一标识数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ListenerIds?: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3954,6 +4258,16 @@ export interface ImportCustomImageRequest {
 }
 
 /**
+ * ModifyHaVipAttribute返回参数结构体
+ */
+export interface ModifyHaVipAttributeResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeModuleDetail请求参数结构体
  */
 export interface DescribeModuleDetailRequest {
@@ -3961,6 +4275,21 @@ export interface DescribeModuleDetailRequest {
    * 模块ID，如em-qn46snq8。
    */
   ModuleId: string
+}
+
+/**
+ * DeleteRoutes请求参数结构体
+ */
+export interface DeleteRoutesRequest {
+  /**
+   * 路由表唯一ID。
+   */
+  RouteTableId: string
+
+  /**
+   * 路由策略对象。
+   */
+  Routes: Array<Route>
 }
 
 /**
@@ -4192,9 +4521,69 @@ tag:tag-key - String - 是否必填：否 - 按照标签键值对进行过滤。
 }
 
 /**
+ * DescribeRouteConflicts返回参数结构体
+ */
+export interface DescribeRouteConflictsResponse {
+  /**
+      * 路由策略冲突列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RouteConflictSet?: Array<RouteConflict>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeRouteTables请求参数结构体
+ */
+export interface DescribeRouteTablesRequest {
+  /**
+   * 路由表实例ID，例如：rtb-azd4dt1c。
+   */
+  RouteTableIds?: Array<string>
+
+  /**
+      * 过滤条件，参数不支持同时指定RouteTableIds和Filters。
+route-table-id - String - （过滤条件）路由表实例ID。
+route-table-name - String - （过滤条件）路由表名称。
+vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。
+association.main - String - （过滤条件）是否主路由表。
+      */
+  Filters?: Array<Filter>
+
+  /**
+   * 偏移量
+   */
+  Offset?: number
+
+  /**
+   * 限数
+   */
+  Limit?: number
+
+  /**
+   * ECM 地域，传空或不传表示所有区域
+   */
+  EcmRegion?: string
+}
+
+/**
  * DescribeBaseOverview请求参数结构体
  */
 export type DescribeBaseOverviewRequest = null
+
+/**
+ * CreateHaVip返回参数结构体
+ */
+export interface CreateHaVipResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * AssociateSecurityGroups返回参数结构体
@@ -4227,6 +4616,21 @@ export interface DiskInfo {
 }
 
 /**
+ * ModifyRouteTableAttribute请求参数结构体
+ */
+export interface ModifyRouteTableAttributeRequest {
+  /**
+   * 路由表实例ID，例如：rtb-azd4dt1c
+   */
+  RouteTableId: string
+
+  /**
+   * 路由表名称
+   */
+  RouteTableName: string
+}
+
+/**
  * BatchDeregisterTargets请求参数结构体
  */
 export interface BatchDeregisterTargetsRequest {
@@ -4247,28 +4651,18 @@ export interface BatchDeregisterTargetsRequest {
 export type DescribeImportImageOsRequest = null
 
 /**
- * 弹性网卡绑定关系
+ * DisableRoutes请求参数结构体
  */
-export interface NetworkInterfaceAttachment {
+export interface DisableRoutesRequest {
   /**
-   * 云主机实例ID。
+   * 路由表唯一ID。
    */
-  InstanceId: string
+  RouteTableId: string
 
   /**
-   * 网卡在云主机实例内的序号。
+   * 路由策略ID。
    */
-  DeviceIndex: number
-
-  /**
-   * 云主机所有者账户信息。
-   */
-  InstanceAccountId: string
-
-  /**
-   * 绑定时间。
-   */
-  AttachTime: string
+  RouteIds: Array<number>
 }
 
 /**
@@ -4314,18 +4708,18 @@ export interface DescribeLoadBalanceTaskStatusResponse {
 }
 
 /**
- * ModifyModuleName请求参数结构体
+ * EnableRoutes请求参数结构体
  */
-export interface ModifyModuleNameRequest {
+export interface EnableRoutesRequest {
   /**
-   * 模块ID。
+   * 路由表唯一ID。
    */
-  ModuleId: string
+  RouteTableId: string
 
   /**
-   * 模块名称。
+   * 路由策略ID。
    */
-  ModuleName: string
+  RouteIds: Array<number>
 }
 
 /**
@@ -4531,6 +4925,26 @@ export interface Filter {
 }
 
 /**
+ * CreateRouteTable请求参数结构体
+ */
+export interface CreateRouteTableRequest {
+  /**
+   * 待操作的VPC实例ID。可通过DescribeVpcs接口返回值中的VpcId获取。
+   */
+  VpcId: string
+
+  /**
+   * 路由表名称，最大长度不能超过60个字节。
+   */
+  RouteTableName: string
+
+  /**
+   * ecm地域
+   */
+  EcmRegion: string
+}
+
+/**
  * 实例的公网ip相关信息。
  */
 export interface PublicIPAddressInfo {
@@ -4569,6 +4983,11 @@ export interface TerminateInstancesResponse {
    */
   RequestId?: string
 }
+
+/**
+ * CreateHaVip请求参数结构体
+ */
+export type CreateHaVipRequest = null
 
 /**
  * DescribeAddresses请求参数结构体
@@ -4719,34 +5138,49 @@ export interface DeleteSecurityGroupRequest {
 }
 
 /**
- * ModifyAddressAttribute请求参数结构体
+ * ReplaceRoutes请求参数结构体
  */
-export interface ModifyAddressAttributeRequest {
+export interface ReplaceRoutesRequest {
   /**
-   * ECM 地域
+   * 路由表实例ID。
    */
-  EcmRegion: string
+  RouteTableId: string
 
   /**
-   * 标识 EIP 的唯一 ID。EIP 唯一 ID 形如：eip-11112222。
+   * 路由策略对象。
    */
-  AddressId: string
+  Routes: Array<Route>
+}
+
+/**
+ * CreateRouteTable返回参数结构体
+ */
+export interface CreateRouteTableResponse {
+  /**
+   * 路由表对象
+   */
+  RouteTable?: RouteTable
 
   /**
-   * 修改后的 EIP 名称。长度上限为20个字符。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  AddressName?: string
-
-  /**
-   * 设定EIP是否直通，"TRUE"表示直通，"FALSE"表示非直通。注意该参数仅对EIP直通功能可见的用户可以设定。
-   */
-  EipDirectConnection?: string
+  RequestId?: string
 }
 
 /**
  * ModifyModuleImage返回参数结构体
  */
 export interface ModifyModuleImageResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteRoutes返回参数结构体
+ */
+export interface DeleteRoutesResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5012,23 +5446,13 @@ export interface DescribeTargetHealthRequest {
 }
 
 /**
- * TerminateInstances请求参数结构体
+ * EnableRoutes返回参数结构体
  */
-export interface TerminateInstancesRequest {
+export interface EnableRoutesResponse {
   /**
-   * 待销毁的实例ID列表。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceIdSet: Array<string>
-
-  /**
-   * 是否定时销毁，默认为否。
-   */
-  TerminateDelay?: boolean
-
-  /**
-   * 定时销毁的时间，格式形如："2019-08-05 12:01:30"，若非定时销毁，则此参数被忽略。
-   */
-  TerminateTime?: string
+  RequestId?: string
 }
 
 /**
@@ -5154,6 +5578,11 @@ export interface PeakNetworkRegionInfo {
 }
 
 /**
+ * ModifyHaVipAttribute请求参数结构体
+ */
+export type ModifyHaVipAttributeRequest = null
+
+/**
  * RebootInstances返回参数结构体
  */
 export interface RebootInstancesResponse {
@@ -5211,6 +5640,31 @@ export interface DeleteSecurityGroupPoliciesResponse {
 }
 
 /**
+ * ModifyAddressAttribute请求参数结构体
+ */
+export interface ModifyAddressAttributeRequest {
+  /**
+   * ECM 地域
+   */
+  EcmRegion: string
+
+  /**
+   * 标识 EIP 的唯一 ID。EIP 唯一 ID 形如：eip-11112222。
+   */
+  AddressId: string
+
+  /**
+   * 修改后的 EIP 名称。长度上限为20个字符。
+   */
+  AddressName?: string
+
+  /**
+   * 设定EIP是否直通，"TRUE"表示直通，"FALSE"表示非直通。注意该参数仅对EIP直通功能可见的用户可以设定。
+   */
+  EipDirectConnection?: string
+}
+
+/**
  * PeakFamilyInfo 按机型类别分类的cpu等数据的峰值信息
  */
 export interface PeakFamilyInfo {
@@ -5250,6 +5704,11 @@ export interface ModifyImageAttributeResponse {
    */
   RequestId?: string
 }
+
+/**
+ * DescribeHaVips请求参数结构体
+ */
+export type DescribeHaVipsRequest = null
 
 /**
  * BatchRegisterTargets请求参数结构体
@@ -5474,6 +5933,11 @@ export interface DescribeNetworkInterfacesResponse {
 }
 
 /**
+ * DeleteHaVip请求参数结构体
+ */
+export type DeleteHaVipRequest = null
+
+/**
  * AssignPrivateIpAddresses请求参数结构体
  */
 export interface AssignPrivateIpAddressesRequest {
@@ -5687,6 +6151,27 @@ export interface DisassociateSecurityGroupsRequest {
 }
 
 /**
+ * DescribeRouteTables返回参数结构体
+ */
+export interface DescribeRouteTablesResponse {
+  /**
+   * 符合条件的实例数量
+   */
+  TotalCount?: number
+
+  /**
+      * 路由表列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RouteTableSet?: Array<RouteTable>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifySubnetAttribute请求参数结构体
  */
 export interface ModifySubnetAttributeRequest {
@@ -5735,6 +6220,33 @@ export interface AllocateAddressesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DisassociateAddress请求参数结构体
+ */
+export interface DisassociateAddressRequest {
+  /**
+   * ECM 地域
+   */
+  EcmRegion: string
+
+  /**
+   * 标识 EIP 的唯一 ID。EIP 唯一 ID 形如：eip-11112222。
+   */
+  AddressId: string
+
+  /**
+      * 表示解绑 EIP 之后是否分配普通公网 IP。取值范围：
+TRUE：表示解绑 EIP 之后分配普通公网 IP。
+FALSE：表示解绑 EIP 之后不分配普通公网 IP。
+默认取值：FALSE。
+
+只有满足以下条件时才能指定该参数：
+只有在解绑主网卡的主内网 IP 上的 EIP 时才能指定该参数。
+解绑 EIP 后重新分配普通公网 IP 操作一个账号每天最多操作 10 次；详情可通过 DescribeAddressQuota 接口获取。
+      */
+  ReallocateNormalPublicIp?: boolean
 }
 
 /**
@@ -5915,6 +6427,16 @@ export interface DescribeLoadBalancersResponse {
 }
 
 /**
+ * ModifyRouteTableAttribute返回参数结构体
+ */
+export interface ModifyRouteTableAttributeResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * MigrateNetworkInterface返回参数结构体
  */
 export interface MigrateNetworkInterfaceResponse {
@@ -6084,6 +6606,21 @@ export interface DescribeBaseOverviewResponse {
 }
 
 /**
+ * 协议端口模版
+ */
+export interface ServiceTemplateSpecification {
+  /**
+   * 协议端口ID，例如：eppm-f5n1f8da。
+   */
+  ServiceId: string
+
+  /**
+   * 协议端口组ID，例如：eppmg-f5n1f8da。
+   */
+  ServiceGroupId: string
+}
+
+/**
  * 后端的健康检查状态
  */
 export interface TargetHealth {
@@ -6161,6 +6698,21 @@ export interface DisassociateSecurityGroupsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeRouteConflicts请求参数结构体
+ */
+export interface DescribeRouteConflictsRequest {
+  /**
+   * 路由表实例ID，例如：rtb-azd4dt1c。
+   */
+  RouteTableId: string
+
+  /**
+   * 要检查的与之冲突的目的端列表
+   */
+  DestinationCidrBlocks: Array<string>
 }
 
 /**

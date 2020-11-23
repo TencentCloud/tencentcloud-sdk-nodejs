@@ -51,6 +51,7 @@ import {
   StartEcdnDomainResponse,
   DeleteEcdnDomainResponse,
   Tag,
+  WebSocket,
   StopEcdnDomainResponse,
   PurgePathCacheResponse,
   PurgeUrlsCacheResponse,

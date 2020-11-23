@@ -28,12 +28,6 @@ class Client extends abstract_client_1.AbstractClient {
         super("ccc.tencentcloudapi.com", "2020-02-10", clientConfig);
     }
     /**
-     * 获取电话服务记录与录音
-     */
-    async DescribeTelCdr(req, cb) {
-        return this.request("DescribeTelCdr", req, cb);
-    }
-    /**
      * 包括具体聊天内容
      */
     async DescribeChatMessages(req, cb) {
@@ -46,16 +40,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeIMCdrs", req, cb);
     }
     /**
-     * 创建 SDK 登录 Token。
-     */
-    async CreateSDKLoginToken(req, cb) {
-        return this.request("CreateSDKLoginToken", req, cb);
-    }
-    /**
      * 创建客服账号。
      */
     async CreateStaff(req, cb) {
         return this.request("CreateStaff", req, cb);
+    }
+    /**
+     * 获取电话服务记录与录音
+     */
+    async DescribeTelCdr(req, cb) {
+        return this.request("DescribeTelCdr", req, cb);
+    }
+    /**
+     * 获取电话呼叫统计信息
+     */
+    async DescribeTelCallInfo(req, cb) {
+        return this.request("DescribeTelCallInfo", req, cb);
+    }
+    /**
+     * 创建 SDK 登录 Token。
+     */
+    async CreateSDKLoginToken(req, cb) {
+        return this.request("CreateSDKLoginToken", req, cb);
     }
 }
 exports.Client = Client;
