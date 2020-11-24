@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeInstanceOperationsRequest, RestartInstanceResponse, CreateInstanceResponse, DescribeInstanceLogsRequest, UpgradeLicenseRequest, CreateInstanceRequest, DeleteInstanceResponse, DescribeInstancesResponse, DescribeInstanceLogsResponse, UpdatePluginsResponse, RestartInstanceRequest, DescribeInstancesRequest, UpdateInstanceRequest, DescribeInstanceOperationsResponse, RestartNodesRequest, UpdatePluginsRequest, UpgradeLicenseResponse, DeleteInstanceRequest, RestartNodesResponse, UpgradeInstanceResponse, UpdateInstanceResponse, UpgradeInstanceRequest } from "./es_models";
+import { DescribeInstanceOperationsRequest, RestartInstanceResponse, RestartKibanaRequest, CreateInstanceResponse, DescribeInstanceLogsRequest, UpgradeLicenseRequest, CreateInstanceRequest, DeleteInstanceResponse, DescribeInstancesResponse, DescribeInstanceLogsResponse, UpdatePluginsResponse, RestartInstanceRequest, DescribeInstancesRequest, UpdateInstanceRequest, DescribeInstanceOperationsResponse, RestartNodesRequest, UpdatePluginsRequest, UpgradeLicenseResponse, DeleteInstanceRequest, RestartNodesResponse, UpgradeInstanceResponse, UpdateInstanceResponse, UpgradeInstanceRequest, RestartKibanaResponse } from "./es_models";
 /**
  * es client
  * @class
@@ -58,4 +58,8 @@ export declare class Client extends AbstractClient {
      * 查询用户该地域下符合条件的ES集群的日志
      */
     DescribeInstanceLogs(req: DescribeInstanceLogsRequest, cb?: (error: string, rep: DescribeInstanceLogsResponse) => void): Promise<DescribeInstanceLogsResponse>;
+    /**
+     * 重启Kibana
+     */
+    RestartKibana(req: RestartKibanaRequest, cb?: (error: string, rep: RestartKibanaResponse) => void): Promise<RestartKibanaResponse>;
 }

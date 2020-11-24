@@ -346,7 +346,7 @@ EIP 如果欠费或被封堵，则不能被绑定。
     /**
      * 用于查询高可用虚拟IP（HAVIP）列表。
      */
-    DescribeHaVips(req?: DescribeHaVipsRequest, cb?: (error: string, rep: DescribeHaVipsResponse) => void): Promise<DescribeHaVipsResponse>;
+    DescribeHaVips(req: DescribeHaVipsRequest, cb?: (error: string, rep: DescribeHaVipsResponse) => void): Promise<DescribeHaVipsResponse>;
     /**
      * 弹性网卡申请内网 IP
      */
@@ -354,7 +354,7 @@ EIP 如果欠费或被封堵，则不能被绑定。
     /**
      * 用于删除高可用虚拟IP（HAVIP）
      */
-    DeleteHaVip(req?: DeleteHaVipRequest, cb?: (error: string, rep: DeleteHaVipResponse) => void): Promise<DeleteHaVipResponse>;
+    DeleteHaVip(req: DeleteHaVipRequest, cb?: (error: string, rep: DeleteHaVipResponse) => void): Promise<DeleteHaVipResponse>;
     /**
      * 查询您账户的弹性公网IP（简称 EIP）在当前地域的配额信息
      */
@@ -403,7 +403,7 @@ EIP 如果欠费或被封堵，则不能被绑定。
     /**
      * 本接口（CreateHaVip）用于创建高可用虚拟IP（HAVIP）
      */
-    CreateHaVip(req?: CreateHaVipRequest, cb?: (error: string, rep: CreateHaVipResponse) => void): Promise<CreateHaVipResponse>;
+    CreateHaVip(req: CreateHaVipRequest, cb?: (error: string, rep: CreateHaVipResponse) => void): Promise<CreateHaVipResponse>;
     /**
      * 弹性网卡迁移
      */
@@ -431,7 +431,7 @@ EIP 如果欠费或被封堵，则不能被绑定。
     /**
      * 用于修改高可用虚拟IP（HAVIP）属性
      */
-    ModifyHaVipAttribute(req?: ModifyHaVipAttributeRequest, cb?: (error: string, rep: ModifyHaVipAttributeResponse) => void): Promise<ModifyHaVipAttributeResponse>;
+    ModifyHaVipAttribute(req: ModifyHaVipAttributeRequest, cb?: (error: string, rep: ModifyHaVipAttributeResponse) => void): Promise<ModifyHaVipAttributeResponse>;
     /**
      * 释放一个或多个弹性公网IP（简称 EIP）。
 该操作不可逆，释放后 EIP 关联的 IP 地址将不再属于您的名下。

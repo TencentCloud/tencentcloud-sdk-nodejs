@@ -27,6 +27,7 @@ import {
   EsPublicAcl,
   DictInfo,
   RestartInstanceResponse,
+  RestartKibanaRequest,
   CreateInstanceResponse,
   DescribeInstanceLogsRequest,
   UpgradeLicenseRequest,
@@ -56,6 +57,7 @@ import {
   UpgradeInstanceResponse,
   UpdateInstanceResponse,
   UpgradeInstanceRequest,
+  RestartKibanaResponse,
   Operation,
 } from "./es_models"
 
@@ -183,5 +185,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceLogsResponse) => void
   ): Promise<DescribeInstanceLogsResponse> {
     return this.request("DescribeInstanceLogs", req, cb)
+  }
+
+  /**
+   * 重启Kibana
+   */
+  async RestartKibana(
+    req: RestartKibanaRequest,
+    cb?: (error: string, rep: RestartKibanaResponse) => void
+  ): Promise<RestartKibanaResponse> {
+    return this.request("RestartKibana", req, cb)
   }
 }

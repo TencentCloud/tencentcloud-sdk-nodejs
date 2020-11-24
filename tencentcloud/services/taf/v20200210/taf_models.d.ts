@@ -1,27 +1,17 @@
 /**
- * CheckKol
+ * 业务出参
  */
-export interface InputKolDataList {
+export interface OutputRecognizeEffectiveFlowValue {
     /**
-      * 账号类型[1：微信；2：qq；3：微博]
+      * 返回标签
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Type: number;
+    Lable: string;
     /**
-      * KOL账号ID[比如微信公众号ID]
+      * 返回分值
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Id: string;
-    /**
-      * KOL名称
-      */
-    Name: string;
-    /**
-      * 手机号
-      */
-    Phone?: string;
-    /**
-      * 代理商名称
-      */
-    AgentInfo?: string;
+    Score: number;
 }
 /**
  * CheckKol
@@ -51,6 +41,15 @@ export interface InputKolBspData {
       * BspData
       */
     DataList: Array<InputKolDataList>;
+}
+/**
+ * RecognizeEffectiveFlow请求参数结构体
+ */
+export interface RecognizeEffectiveFlowRequest {
+    /**
+      * 业务入参
+      */
+    BusinessSecurityData: InputRecognizeEffectiveFlow;
 }
 /**
  * EnhanceTaDegree请求参数结构体
@@ -282,6 +281,19 @@ export interface OutputSendTrafficSecuritySmsMsg {
     Value: Array<string>;
 }
 /**
+ * RecognizeEffectiveFlow返回参数结构体
+ */
+export interface RecognizeEffectiveFlowResponse {
+    /**
+      * 业务出参
+      */
+    Data?: OutputRecognizeEffectiveFlow;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * SendTrafficSecuritySmsMessage返回参数结构体
  */
 export interface SendTrafficSecuritySmsMessageResponse {
@@ -314,6 +326,15 @@ export interface RecognizeCustomizedAudienceRequest {
     BspData: InputRecognizeTargetAudience;
 }
 /**
+ * RecognizeTargetAudience请求参数结构体
+ */
+export interface RecognizeTargetAudienceRequest {
+    /**
+      * 业务数据
+      */
+    BspData: InputRecognizeTargetAudience;
+}
+/**
  * RecognizeTargetAudience返回参数结构体
  */
 export interface RecognizeTargetAudienceResponse {
@@ -326,6 +347,26 @@ export interface RecognizeTargetAudienceResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 业务出参
+ */
+export interface OutputRecognizeEffectiveFlow {
+    /**
+      * 返回码。0表示成功，非0标识失败错误码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Code: number;
+    /**
+      * UTF-8编码，出错消息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Message: string;
+    /**
+      * 业务入参
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Value: OutputRecognizeEffectiveFlowValue;
 }
 /**
  * 流量反欺诈-验准入参
@@ -528,14 +569,34 @@ export interface RecognizePreciseTargetAudienceRequest {
     BspData: InputRecognizeTargetAudience;
 }
 /**
- * RecognizeTargetAudience请求参数结构体
+ * CheckKol
  */
-export interface RecognizeTargetAudienceRequest {
+export interface InputKolDataList {
     /**
-      * 业务数据
+      * 账号类型[1：微信；2：qq；3：微博]
       */
-    BspData: InputRecognizeTargetAudience;
+    Type: number;
+    /**
+      * KOL账号ID[比如微信公众号ID]
+      */
+    Id: string;
+    /**
+      * KOL名称
+      */
+    Name: string;
+    /**
+      * 手机号
+      */
+    Phone?: string;
+    /**
+      * 代理商名称
+      */
+    AgentInfo?: string;
 }
+/**
+ * 接口入参
+ */
+export declare type InputRecognizeEffectiveFlow = null;
 /**
  * RecognizePreciseTargetAudience返回参数结构体
  */

@@ -512,58 +512,18 @@ export interface CreateDhcpIpResponse {
 }
 
 /**
- * 流日志
+ * DescribeIpGeolocationInfos请求参数结构体
  */
-export interface FlowLog {
+export interface DescribeIpGeolocationInfosRequest {
   /**
-   * 私用网络ID或者统一ID，建议使用统一ID
+   * 查询IP地址列表，支持IPv4和IPv6。
    */
-  VpcId?: string
+  AddressIps: Array<string>
 
   /**
-   * 流日志唯一ID
+   * 查询IP地址的字段信息，包括"Country","Province","City","Region","Isp","AsName","AsId"
    */
-  FlowLogId?: string
-
-  /**
-   * 流日志实例名字
-   */
-  FlowLogName?: string
-
-  /**
-   * 流日志所属资源类型，VPC|SUBNET|NETWORKINTERFACE
-   */
-  ResourceType?: string
-
-  /**
-   * 资源唯一ID
-   */
-  ResourceId?: string
-
-  /**
-   * 流日志采集类型，ACCEPT|REJECT|ALL
-   */
-  TrafficType?: string
-
-  /**
-   * 流日志存储ID
-   */
-  CloudLogId?: string
-
-  /**
-   * 流日志存储ID状态
-   */
-  CloudLogState?: string
-
-  /**
-   * 流日志描述信息
-   */
-  FlowLogDescription?: string
-
-  /**
-   * 流日志创建时间
-   */
-  CreatedTime?: string
+  Fields?: IpField
 }
 
 /**
@@ -657,6 +617,61 @@ export interface ModifyNatGatewayAttributeRequest {
 }
 
 /**
+ * 流日志
+ */
+export interface FlowLog {
+  /**
+   * 私用网络ID或者统一ID，建议使用统一ID
+   */
+  VpcId?: string
+
+  /**
+   * 流日志唯一ID
+   */
+  FlowLogId?: string
+
+  /**
+   * 流日志实例名字
+   */
+  FlowLogName?: string
+
+  /**
+   * 流日志所属资源类型，VPC|SUBNET|NETWORKINTERFACE
+   */
+  ResourceType?: string
+
+  /**
+   * 资源唯一ID
+   */
+  ResourceId?: string
+
+  /**
+   * 流日志采集类型，ACCEPT|REJECT|ALL
+   */
+  TrafficType?: string
+
+  /**
+   * 流日志存储ID
+   */
+  CloudLogId?: string
+
+  /**
+   * 流日志存储ID状态
+   */
+  CloudLogState?: string
+
+  /**
+   * 流日志描述信息
+   */
+  FlowLogDescription?: string
+
+  /**
+   * 流日志创建时间
+   */
+  CreatedTime?: string
+}
+
+/**
  * DescribeVpcLimits返回参数结构体
  */
 export interface DescribeVpcLimitsResponse {
@@ -669,6 +684,51 @@ export interface DescribeVpcLimitsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * IP在线查询的字段信息
+ */
+export interface IpField {
+  /**
+   * 国家字段信息
+   */
+  Country?: boolean
+
+  /**
+   * 省、州、郡一级行政区域字段信息
+   */
+  Province?: boolean
+
+  /**
+   * 市一级行政区域字段信息
+   */
+  City?: boolean
+
+  /**
+   * 市内区域字段信息
+   */
+  Region?: boolean
+
+  /**
+   * 接入运营商字段信息
+   */
+  Isp?: boolean
+
+  /**
+   * 骨干运营商字段信息
+   */
+  AsName?: boolean
+
+  /**
+   * 骨干As号
+   */
+  AsId?: boolean
+
+  /**
+   * 注释字段
+   */
+  Comment?: boolean
 }
 
 /**
@@ -1165,6 +1225,26 @@ export interface FilterObject {
 }
 
 /**
+ * DescribeIpGeolocationInfos返回参数结构体
+ */
+export interface DescribeIpGeolocationInfosResponse {
+  /**
+   * IP地址信息列表
+   */
+  AddressInfo?: Array<IpGeolocationInfo>
+
+  /**
+   * IP地址信息个数
+   */
+  Total?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AssociateNetworkAclSubnets返回参数结构体
  */
 export interface AssociateNetworkAclSubnetsResponse {
@@ -1603,6 +1683,65 @@ export interface DescribeGatewayFlowMonitorDetailResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * IP地理位置信息
+ */
+export interface IpGeolocationInfo {
+  /**
+      * 国家信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Country?: string
+
+  /**
+      * 省、州、郡一级行政区域信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Province?: string
+
+  /**
+      * 市一级行政区域信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  City?: string
+
+  /**
+      * 市内区域信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Region?: string
+
+  /**
+      * 接入运营商信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Isp?: string
+
+  /**
+      * 骨干运营商名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AsName?: string
+
+  /**
+      * 骨干运营商AS号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AsId?: string
+
+  /**
+      * 注释信息。目前的填充值为移动接入用户的APN值，如无APN属性则为空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Comment?: string
+
+  /**
+      * IP地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AddressIp: string
 }
 
 /**
@@ -5150,6 +5289,16 @@ export interface AddIp6RulesResponse {
 }
 
 /**
+ * EnableRoutes返回参数结构体
+ */
+export interface EnableRoutesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteVpnConnection请求参数结构体
  */
 export interface DeleteVpnConnectionRequest {
@@ -8025,16 +8174,6 @@ export interface DeleteVpnGatewayResponse {
 }
 
 /**
- * EnableCcnRoutes返回参数结构体
- */
-export interface EnableCcnRoutesResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeHaVips请求参数结构体
  */
 export interface DescribeHaVipsRequest {
@@ -8838,13 +8977,13 @@ export interface InquiryPriceRenewVpnGatewayRequest {
 }
 
 /**
- * DeleteHaVip请求参数结构体
+ * EnableCcnRoutes返回参数结构体
  */
-export interface DeleteHaVipRequest {
+export interface EnableCcnRoutesResponse {
   /**
-   * `HAVIP`唯一`ID`，形如：`havip-9o233uri`。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  HaVipId: string
+  RequestId?: string
 }
 
 /**
@@ -9082,13 +9221,13 @@ export interface DirectConnectGatewayCcnRoute {
 }
 
 /**
- * EnableRoutes返回参数结构体
+ * DeleteHaVip请求参数结构体
  */
-export interface EnableRoutesResponse {
+export interface DeleteHaVipRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * `HAVIP`唯一`ID`，形如：`havip-9o233uri`。
    */
-  RequestId?: string
+  HaVipId: string
 }
 
 /**

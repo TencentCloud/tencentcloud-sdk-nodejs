@@ -68,9 +68,9 @@ it("iotexplorer.v20190423.CreateStudioProduct", async function () {
     }
 })
 
-it("iotexplorer.v20190423.DescribeDevice", async function () {
+it("iotexplorer.v20190423.EnableTopicRule", async function () {
     try {
-       const data = await client.DescribeDevice({})
+       const data = await client.EnableTopicRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -81,6 +81,16 @@ it("iotexplorer.v20190423.DescribeDevice", async function () {
 it("iotexplorer.v20190423.CreateLoRaGateway", async function () {
     try {
        const data = await client.CreateLoRaGateway({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.CreateTopicRule", async function () {
+    try {
+       const data = await client.CreateTopicRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -101,6 +111,16 @@ it("iotexplorer.v20190423.ModifyLoRaGateway", async function () {
 it("iotexplorer.v20190423.SearchStudioProduct", async function () {
     try {
        const data = await client.SearchStudioProduct({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.ModifyTopicRule", async function () {
+    try {
+       const data = await client.ModifyTopicRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -218,6 +238,36 @@ it("iotexplorer.v20190423.ReleaseStudioProduct", async function () {
     }
 })
 
+it("iotexplorer.v20190423.GetTopicRuleList", async function () {
+    try {
+       const data = await client.GetTopicRuleList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.SearchTopicRule", async function () {
+    try {
+       const data = await client.SearchTopicRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.GetStudioProductList", async function () {
+    try {
+       const data = await client.GetStudioProductList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.ModifyModelDefinition", async function () {
     try {
        const data = await client.ModifyModelDefinition({})
@@ -258,9 +308,29 @@ it("iotexplorer.v20190423.CreateProject", async function () {
     }
 })
 
+it("iotexplorer.v20190423.DisableTopicRule", async function () {
+    try {
+       const data = await client.DisableTopicRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.CallDeviceActionAsync", async function () {
     try {
        const data = await client.CallDeviceActionAsync({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.DescribeDevice", async function () {
+    try {
+       const data = await client.DescribeDevice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -288,9 +358,19 @@ it("iotexplorer.v20190423.ControlDeviceData", async function () {
     }
 })
 
-it("iotexplorer.v20190423.GetStudioProductList", async function () {
+it("iotexplorer.v20190423.DescribeTopicRule", async function () {
     try {
-       const data = await client.GetStudioProductList({})
+       const data = await client.DescribeTopicRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.DeleteTopicRule", async function () {
+    try {
+       const data = await client.DeleteTopicRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

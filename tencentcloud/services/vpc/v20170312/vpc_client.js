@@ -1104,6 +1104,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("MigratePrivateIpAddress", req, cb);
     }
     /**
+     * 该接口用于查询IP地址信息，包括地理位置信息和网络信息。
+     */
+    async DescribeIpGeolocationInfos(req, cb) {
+        return this.request("DescribeIpGeolocationInfos", req, cb);
+    }
+    /**
      * 本接口（DescribeServiceTemplates）用于查询协议端口模板
      */
     async DescribeServiceTemplates(req, cb) {

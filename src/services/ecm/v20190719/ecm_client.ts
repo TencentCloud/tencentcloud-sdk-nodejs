@@ -46,6 +46,7 @@ import {
   DescribeSubnetsRequest,
   AssociateSecurityGroupsRequest,
   StartInstancesRequest,
+  HaVip,
   RouteConflict,
   EipQuota,
   DeleteSubnetResponse,
@@ -1156,7 +1157,7 @@ EIP 如果欠费或被封堵，则不能被绑定。
    * 用于查询高可用虚拟IP（HAVIP）列表。
    */
   async DescribeHaVips(
-    req?: DescribeHaVipsRequest,
+    req: DescribeHaVipsRequest,
     cb?: (error: string, rep: DescribeHaVipsResponse) => void
   ): Promise<DescribeHaVipsResponse> {
     return this.request("DescribeHaVips", req, cb)
@@ -1176,7 +1177,7 @@ EIP 如果欠费或被封堵，则不能被绑定。
    * 用于删除高可用虚拟IP（HAVIP）
    */
   async DeleteHaVip(
-    req?: DeleteHaVipRequest,
+    req: DeleteHaVipRequest,
     cb?: (error: string, rep: DeleteHaVipResponse) => void
   ): Promise<DeleteHaVipResponse> {
     return this.request("DeleteHaVip", req, cb)
@@ -1297,7 +1298,7 @@ EIP 如果欠费或被封堵，则不能被绑定。
    * 本接口（CreateHaVip）用于创建高可用虚拟IP（HAVIP）
    */
   async CreateHaVip(
-    req?: CreateHaVipRequest,
+    req: CreateHaVipRequest,
     cb?: (error: string, rep: CreateHaVipResponse) => void
   ): Promise<CreateHaVipResponse> {
     return this.request("CreateHaVip", req, cb)
@@ -1367,7 +1368,7 @@ EIP 如果欠费或被封堵，则不能被绑定。
    * 用于修改高可用虚拟IP（HAVIP）属性
    */
   async ModifyHaVipAttribute(
-    req?: ModifyHaVipAttributeRequest,
+    req: ModifyHaVipAttributeRequest,
     cb?: (error: string, rep: ModifyHaVipAttributeResponse) => void
   ): Promise<ModifyHaVipAttributeResponse> {
     return this.request("ModifyHaVipAttribute", req, cb)

@@ -1588,6 +1588,16 @@ it("vpc.v20170312.MigratePrivateIpAddress", async function () {
     }
 })
 
+it("vpc.v20170312.DescribeIpGeolocationInfos", async function () {
+    try {
+       const data = await client.DescribeIpGeolocationInfos({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DescribeServiceTemplates", async function () {
     try {
        const data = await client.DescribeServiceTemplates({})

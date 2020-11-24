@@ -58,16 +58,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateStudioProduct", req, cb);
     }
     /**
-     * 用于查看某个设备的详细信息
+     * 启用规则
      */
-    async DescribeDevice(req, cb) {
-        return this.request("DescribeDevice", req, cb);
+    async EnableTopicRule(req, cb) {
+        return this.request("EnableTopicRule", req, cb);
     }
     /**
      * 创建新 LoRa 网关设备接口
      */
     async CreateLoRaGateway(req, cb) {
         return this.request("CreateLoRaGateway", req, cb);
+    }
+    /**
+     * 创建规则
+     */
+    async CreateTopicRule(req, cb) {
+        return this.request("CreateTopicRule", req, cb);
     }
     /**
      * 修改 LoRa 网关信息
@@ -80,6 +86,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async SearchStudioProduct(req, cb) {
         return this.request("SearchStudioProduct", req, cb);
+    }
+    /**
+     * 修改规则
+     */
+    async ModifyTopicRule(req, cb) {
+        return this.request("ModifyTopicRule", req, cb);
     }
     /**
      * 提供查询用户所创建的项目列表查询功能。
@@ -148,6 +160,24 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ReleaseStudioProduct", req, cb);
     }
     /**
+     * 获取规则列表
+     */
+    async GetTopicRuleList(req, cb) {
+        return this.request("GetTopicRuleList", req, cb);
+    }
+    /**
+     * 搜索规则
+     */
+    async SearchTopicRule(req, cb) {
+        return this.request("SearchTopicRule", req, cb);
+    }
+    /**
+     * 提供查询某个项目下所有产品信息的能力。
+     */
+    async GetStudioProductList(req, cb) {
+        return this.request("GetStudioProductList", req, cb);
+    }
+    /**
      * 提供修改产品的数据模板的能力
      */
     async ModifyModelDefinition(req, cb) {
@@ -172,10 +202,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateProject", req, cb);
     }
     /**
+     * 禁用规则
+     */
+    async DisableTopicRule(req, cb) {
+        return this.request("DisableTopicRule", req, cb);
+    }
+    /**
      * 提供给用户异步调用设备行为的能力
      */
     async CallDeviceActionAsync(req, cb) {
         return this.request("CallDeviceActionAsync", req, cb);
+    }
+    /**
+     * 用于查看某个设备的详细信息
+     */
+    async DescribeDevice(req, cb) {
+        return this.request("DescribeDevice", req, cb);
     }
     /**
      * 提供删除某个项目的能力
@@ -190,10 +232,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ControlDeviceData", req, cb);
     }
     /**
-     * 提供查询某个项目下所有产品信息的能力。
+     * 获取规则信息
      */
-    async GetStudioProductList(req, cb) {
-        return this.request("GetStudioProductList", req, cb);
+    async DescribeTopicRule(req, cb) {
+        return this.request("DescribeTopicRule", req, cb);
+    }
+    /**
+     * 删除规则
+     */
+    async DeleteTopicRule(req, cb) {
+        return this.request("DeleteTopicRule", req, cb);
     }
 }
 exports.Client = Client;

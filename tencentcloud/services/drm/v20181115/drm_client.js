@@ -28,7 +28,8 @@ class Client extends abstract_client_1.AbstractClient {
         super("drm.tencentcloudapi.com", "2018-11-15", clientConfig);
     }
     /**
-     * 开发者调用该接口，启动一次内容文件的DRM加密工作流
+     * 开发者调用该接口，启动一次内容文件的DRM加密工作流。
+注意：该接口已下线。
      */
     async StartEncryption(req, cb) {
         return this.request("StartEncryption", req, cb);

@@ -18,9 +18,10 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  InputKolDataList,
+  OutputRecognizeEffectiveFlowValue,
   OutputKolData,
   InputKolBspData,
+  RecognizeEffectiveFlowRequest,
   EnhanceTaDegreeRequest,
   OutputRecognizeTargetAudienceValue,
   SendTrafficSecuritySmsMessageRequest,
@@ -30,15 +31,19 @@ import {
   EnhanceTaDegreeResponse,
   InputTaBspData,
   OutputSendTrafficSecuritySmsMsg,
+  RecognizeEffectiveFlowResponse,
   SendTrafficSecuritySmsMessageResponse,
   DetectFraudKOLRequest,
   RecognizeCustomizedAudienceRequest,
+  RecognizeTargetAudienceRequest,
   RecognizeTargetAudienceResponse,
+  OutputRecognizeEffectiveFlow,
   InputRecognizeTargetAudience,
   OutputTaData,
   OutputTaValue,
   RecognizePreciseTargetAudienceRequest,
-  RecognizeTargetAudienceRequest,
+  InputKolDataList,
+  InputRecognizeEffectiveFlow,
   RecognizePreciseTargetAudienceResponse,
   OutputRecognizeTargetAudience,
   InputSendTrafficSecuritySmsMsg,
@@ -71,6 +76,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RecognizeTargetAudienceResponse) => void
   ): Promise<RecognizeTargetAudienceResponse> {
     return this.request("RecognizeTargetAudience", req, cb)
+  }
+
+  /**
+   * 筛选敏感易骚扰人群
+   */
+  async RecognizeEffectiveFlow(
+    req: RecognizeEffectiveFlowRequest,
+    cb?: (error: string, rep: RecognizeEffectiveFlowResponse) => void
+  ): Promise<RecognizeEffectiveFlowResponse> {
+    return this.request("RecognizeEffectiveFlow", req, cb)
   }
 
   /**

@@ -128,4 +128,14 @@ it("es.v20180416.DescribeInstanceLogs", async function () {
     }
 })
 
+it("es.v20180416.RestartKibana", async function () {
+    try {
+       const data = await client.RestartKibana({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

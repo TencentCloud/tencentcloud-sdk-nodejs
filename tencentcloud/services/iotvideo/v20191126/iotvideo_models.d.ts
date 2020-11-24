@@ -1221,6 +1221,10 @@ Other-Overseas（其他境外地区）
       * Linux,Android,Liteos等系统
       */
     Os?: string;
+    /**
+      * 芯片架构，只是针对操作系统为android的
+      */
+    ChipArch?: string;
 }
 /**
  * 系统类型
@@ -1420,9 +1424,9 @@ export interface DescribeDevicesResponse {
  */
 export interface ModifyVerContentRequest {
     /**
-      * 产品id,大于0的有符号长整型
+      * 产品id
       */
-    ProductId: number;
+    ProductId: string;
     /**
       * 需要修改的版本号
       */

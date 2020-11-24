@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { EnhanceTaDegreeRequest, SendTrafficSecuritySmsMessageRequest, DetectFraudKOLResponse, RecognizeCustomizedAudienceResponse, EnhanceTaDegreeResponse, SendTrafficSecuritySmsMessageResponse, DetectFraudKOLRequest, RecognizeCustomizedAudienceRequest, RecognizeTargetAudienceResponse, RecognizePreciseTargetAudienceRequest, RecognizeTargetAudienceRequest, RecognizePreciseTargetAudienceResponse } from "./taf_models";
+import { RecognizeEffectiveFlowRequest, EnhanceTaDegreeRequest, SendTrafficSecuritySmsMessageRequest, DetectFraudKOLResponse, RecognizeCustomizedAudienceResponse, EnhanceTaDegreeResponse, RecognizeEffectiveFlowResponse, SendTrafficSecuritySmsMessageResponse, DetectFraudKOLRequest, RecognizeCustomizedAudienceRequest, RecognizeTargetAudienceRequest, RecognizeTargetAudienceResponse, RecognizePreciseTargetAudienceRequest, RecognizePreciseTargetAudienceResponse } from "./taf_models";
 /**
  * taf client
  * @class
@@ -15,6 +15,10 @@ export declare class Client extends AbstractClient {
      * 流量反欺诈-流量验准
      */
     RecognizeTargetAudience(req: RecognizeTargetAudienceRequest, cb?: (error: string, rep: RecognizeTargetAudienceResponse) => void): Promise<RecognizeTargetAudienceResponse>;
+    /**
+     * 筛选敏感易骚扰人群
+     */
+    RecognizeEffectiveFlow(req: RecognizeEffectiveFlowRequest, cb?: (error: string, rep: RecognizeEffectiveFlowResponse) => void): Promise<RecognizeEffectiveFlowResponse>;
     /**
      * 流量反欺诈-流量验准定制版
      */

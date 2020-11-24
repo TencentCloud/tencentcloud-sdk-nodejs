@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeProjectResponse, ControlDeviceDataResponse, DescribeDeviceDataHistoryRequest, SearchStudioProductResponse, DescribeStudioProductRequest, DeleteProjectRequest, ListEventHistoryRequest, ListEventHistoryResponse, GetStudioProductListResponse, DescribeModelDefinitionResponse, ModifyModelDefinitionResponse, GetLoRaGatewayListResponse, GetProjectListRequest, DeleteStudioProductResponse, DeleteDeviceRequest, GetDeviceListResponse, ModifyStudioProductResponse, ControlDeviceDataRequest, SearchStudioProductRequest, ReleaseStudioProductResponse, DescribeStudioProductResponse, DeleteLoRaGatewayRequest, ModifyProjectResponse, ModifyModelDefinitionRequest, CreateStudioProductResponse, CallDeviceActionSyncRequest, DeleteStudioProductRequest, ModifyProjectRequest, ModifyLoRaGatewayResponse, CallDeviceActionSyncResponse, CreateLoRaGatewayRequest, ModifyStudioProductRequest, DescribeDeviceDataHistoryResponse, CreateStudioProductRequest, CreateProjectResponse, ReleaseStudioProductRequest, DescribeModelDefinitionRequest, DeleteProjectResponse, CallDeviceActionAsyncResponse, CallDeviceActionAsyncRequest, DescribeDeviceDataResponse, CreateDeviceResponse, GetLoRaGatewayListRequest, CreateDeviceRequest, DescribeProjectRequest, GetStudioProductListRequest, DescribeDeviceDataRequest, DeleteDeviceResponse, CreateLoRaGatewayResponse, DescribeDeviceRequest, GetDeviceListRequest, ModifyLoRaGatewayRequest, DeleteLoRaGatewayResponse, DescribeDeviceResponse, GetProjectListResponse, CreateProjectRequest } from "./iotexplorer_models";
+import { DescribeProjectResponse, ControlDeviceDataResponse, DescribeDeviceDataHistoryRequest, SearchStudioProductResponse, DescribeStudioProductRequest, DeleteProjectRequest, ListEventHistoryRequest, ListEventHistoryResponse, ModifyTopicRuleRequest, GetTopicRuleListRequest, GetStudioProductListResponse, GetLoRaGatewayListResponse, DescribeModelDefinitionResponse, ModifyModelDefinitionResponse, DisableTopicRuleRequest, GetProjectListRequest, ModifyLoRaGatewayResponse, DeleteStudioProductResponse, GetLoRaGatewayListRequest, DeleteDeviceRequest, GetDeviceListResponse, ModifyStudioProductResponse, ControlDeviceDataRequest, SearchTopicRuleResponse, SearchStudioProductRequest, ReleaseStudioProductResponse, DescribeStudioProductResponse, DeleteLoRaGatewayRequest, ModifyProjectResponse, DeleteTopicRuleResponse, ModifyModelDefinitionRequest, CreateStudioProductResponse, CallDeviceActionSyncRequest, DeleteStudioProductRequest, GetProjectListResponse, ModifyTopicRuleResponse, ModifyProjectRequest, EnableTopicRuleResponse, DescribeTopicRuleRequest, DescribeTopicRuleResponse, CallDeviceActionSyncResponse, CreateLoRaGatewayRequest, ModifyStudioProductRequest, DescribeDeviceDataHistoryResponse, CreateStudioProductRequest, ReleaseStudioProductRequest, CreateProjectResponse, GetTopicRuleListResponse, DescribeModelDefinitionRequest, DeleteProjectResponse, CallDeviceActionAsyncResponse, CallDeviceActionAsyncRequest, CreateTopicRuleResponse, DescribeDeviceDataResponse, CreateDeviceResponse, CreateTopicRuleRequest, CreateDeviceRequest, DescribeProjectRequest, GetStudioProductListRequest, SearchTopicRuleRequest, DescribeDeviceDataRequest, DeleteDeviceResponse, DeleteTopicRuleRequest, CreateLoRaGatewayResponse, DescribeDeviceRequest, GetDeviceListRequest, ModifyLoRaGatewayRequest, DeleteLoRaGatewayResponse, EnableTopicRuleRequest, DescribeDeviceResponse, DisableTopicRuleResponse, CreateProjectRequest } from "./iotexplorer_models";
 /**
  * iotexplorer client
  * @class
@@ -28,13 +28,17 @@ export declare class Client extends AbstractClient {
      */
     CreateStudioProduct(req: CreateStudioProductRequest, cb?: (error: string, rep: CreateStudioProductResponse) => void): Promise<CreateStudioProductResponse>;
     /**
-     * 用于查看某个设备的详细信息
+     * 启用规则
      */
-    DescribeDevice(req: DescribeDeviceRequest, cb?: (error: string, rep: DescribeDeviceResponse) => void): Promise<DescribeDeviceResponse>;
+    EnableTopicRule(req: EnableTopicRuleRequest, cb?: (error: string, rep: EnableTopicRuleResponse) => void): Promise<EnableTopicRuleResponse>;
     /**
      * 创建新 LoRa 网关设备接口
      */
     CreateLoRaGateway(req: CreateLoRaGatewayRequest, cb?: (error: string, rep: CreateLoRaGatewayResponse) => void): Promise<CreateLoRaGatewayResponse>;
+    /**
+     * 创建规则
+     */
+    CreateTopicRule(req: CreateTopicRuleRequest, cb?: (error: string, rep: CreateTopicRuleResponse) => void): Promise<CreateTopicRuleResponse>;
     /**
      * 修改 LoRa 网关信息
      */
@@ -43,6 +47,10 @@ export declare class Client extends AbstractClient {
      * 提供根据产品名称查找产品的能力
      */
     SearchStudioProduct(req: SearchStudioProductRequest, cb?: (error: string, rep: SearchStudioProductResponse) => void): Promise<SearchStudioProductResponse>;
+    /**
+     * 修改规则
+     */
+    ModifyTopicRule(req: ModifyTopicRuleRequest, cb?: (error: string, rep: ModifyTopicRuleResponse) => void): Promise<ModifyTopicRuleResponse>;
     /**
      * 提供查询用户所创建的项目列表查询功能。
      */
@@ -88,6 +96,18 @@ export declare class Client extends AbstractClient {
      */
     ReleaseStudioProduct(req: ReleaseStudioProductRequest, cb?: (error: string, rep: ReleaseStudioProductResponse) => void): Promise<ReleaseStudioProductResponse>;
     /**
+     * 获取规则列表
+     */
+    GetTopicRuleList(req: GetTopicRuleListRequest, cb?: (error: string, rep: GetTopicRuleListResponse) => void): Promise<GetTopicRuleListResponse>;
+    /**
+     * 搜索规则
+     */
+    SearchTopicRule(req: SearchTopicRuleRequest, cb?: (error: string, rep: SearchTopicRuleResponse) => void): Promise<SearchTopicRuleResponse>;
+    /**
+     * 提供查询某个项目下所有产品信息的能力。
+     */
+    GetStudioProductList(req: GetStudioProductListRequest, cb?: (error: string, rep: GetStudioProductListResponse) => void): Promise<GetStudioProductListResponse>;
+    /**
      * 提供修改产品的数据模板的能力
      */
     ModifyModelDefinition(req: ModifyModelDefinitionRequest, cb?: (error: string, rep: ModifyModelDefinitionResponse) => void): Promise<ModifyModelDefinitionResponse>;
@@ -104,9 +124,17 @@ export declare class Client extends AbstractClient {
      */
     CreateProject(req: CreateProjectRequest, cb?: (error: string, rep: CreateProjectResponse) => void): Promise<CreateProjectResponse>;
     /**
+     * 禁用规则
+     */
+    DisableTopicRule(req: DisableTopicRuleRequest, cb?: (error: string, rep: DisableTopicRuleResponse) => void): Promise<DisableTopicRuleResponse>;
+    /**
      * 提供给用户异步调用设备行为的能力
      */
     CallDeviceActionAsync(req: CallDeviceActionAsyncRequest, cb?: (error: string, rep: CallDeviceActionAsyncResponse) => void): Promise<CallDeviceActionAsyncResponse>;
+    /**
+     * 用于查看某个设备的详细信息
+     */
+    DescribeDevice(req: DescribeDeviceRequest, cb?: (error: string, rep: DescribeDeviceResponse) => void): Promise<DescribeDeviceResponse>;
     /**
      * 提供删除某个项目的能力
      */
@@ -116,7 +144,11 @@ export declare class Client extends AbstractClient {
      */
     ControlDeviceData(req: ControlDeviceDataRequest, cb?: (error: string, rep: ControlDeviceDataResponse) => void): Promise<ControlDeviceDataResponse>;
     /**
-     * 提供查询某个项目下所有产品信息的能力。
+     * 获取规则信息
      */
-    GetStudioProductList(req: GetStudioProductListRequest, cb?: (error: string, rep: GetStudioProductListResponse) => void): Promise<GetStudioProductListResponse>;
+    DescribeTopicRule(req: DescribeTopicRuleRequest, cb?: (error: string, rep: DescribeTopicRuleResponse) => void): Promise<DescribeTopicRuleResponse>;
+    /**
+     * 删除规则
+     */
+    DeleteTopicRule(req: DeleteTopicRuleRequest, cb?: (error: string, rep: DeleteTopicRuleResponse) => void): Promise<DeleteTopicRuleResponse>;
 }

@@ -27,63 +27,82 @@ import {
   DeleteProjectRequest,
   ListEventHistoryRequest,
   ListEventHistoryResponse,
+  ModifyTopicRuleRequest,
   DeviceDataHistoryItem,
-  ProductEntry,
+  GetTopicRuleListRequest,
   GetStudioProductListResponse,
+  GetLoRaGatewayListResponse,
   DescribeModelDefinitionResponse,
   ModifyModelDefinitionResponse,
-  GetLoRaGatewayListResponse,
+  DisableTopicRuleRequest,
   ProjectEntry,
   GetProjectListRequest,
+  ModifyLoRaGatewayResponse,
   DeleteStudioProductResponse,
   EventHistoryItem,
+  GetLoRaGatewayListRequest,
   DeleteDeviceRequest,
   GetDeviceListResponse,
   ModifyStudioProductResponse,
   ControlDeviceDataRequest,
+  TopicRulePayload,
+  SearchTopicRuleResponse,
   SearchStudioProductRequest,
   ReleaseStudioProductResponse,
   DescribeStudioProductResponse,
   DeleteLoRaGatewayRequest,
   ModifyProjectResponse,
+  DeleteTopicRuleResponse,
   ModifyModelDefinitionRequest,
   LoRaGatewayLocation,
   CreateStudioProductResponse,
   CallDeviceActionSyncRequest,
   DeleteStudioProductRequest,
+  GetProjectListResponse,
+  ModifyTopicRuleResponse,
   ModifyProjectRequest,
-  ModifyLoRaGatewayResponse,
+  EnableTopicRuleResponse,
+  DescribeTopicRuleRequest,
+  DescribeTopicRuleResponse,
   CallDeviceActionSyncResponse,
   CreateLoRaGatewayRequest,
   ModifyStudioProductRequest,
   DescribeDeviceDataHistoryResponse,
   CreateStudioProductRequest,
   ProductModelDefinition,
-  CreateProjectResponse,
   ReleaseStudioProductRequest,
+  CreateProjectResponse,
+  GetTopicRuleListResponse,
   DescribeModelDefinitionRequest,
   DeleteProjectResponse,
   CallDeviceActionAsyncResponse,
   CallDeviceActionAsyncRequest,
   ProjectEntryEx,
+  CreateTopicRuleResponse,
   DescribeDeviceDataResponse,
   CreateDeviceResponse,
-  GetLoRaGatewayListRequest,
+  CreateTopicRuleRequest,
+  TopicRuleInfo,
   CreateDeviceRequest,
   DescribeProjectRequest,
   GetStudioProductListRequest,
+  SearchTopicRuleRequest,
   DescribeDeviceDataRequest,
   DeleteDeviceResponse,
   DeviceInfo,
+  DeleteTopicRuleRequest,
   CreateLoRaGatewayResponse,
   DescribeDeviceRequest,
   GetDeviceListRequest,
   ModifyLoRaGatewayRequest,
   DeleteLoRaGatewayResponse,
   LoRaGatewayItem,
+  EnableTopicRuleRequest,
   DescribeDeviceResponse,
-  GetProjectListResponse,
+  TopicRule,
+  DisableTopicRuleResponse,
   CreateProjectRequest,
+  ProductEntry,
 } from "./iotexplorer_models"
 
 /**
@@ -146,13 +165,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于查看某个设备的详细信息
+   * 启用规则
    */
-  async DescribeDevice(
-    req: DescribeDeviceRequest,
-    cb?: (error: string, rep: DescribeDeviceResponse) => void
-  ): Promise<DescribeDeviceResponse> {
-    return this.request("DescribeDevice", req, cb)
+  async EnableTopicRule(
+    req: EnableTopicRuleRequest,
+    cb?: (error: string, rep: EnableTopicRuleResponse) => void
+  ): Promise<EnableTopicRuleResponse> {
+    return this.request("EnableTopicRule", req, cb)
   }
 
   /**
@@ -163,6 +182,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateLoRaGatewayResponse) => void
   ): Promise<CreateLoRaGatewayResponse> {
     return this.request("CreateLoRaGateway", req, cb)
+  }
+
+  /**
+   * 创建规则
+   */
+  async CreateTopicRule(
+    req: CreateTopicRuleRequest,
+    cb?: (error: string, rep: CreateTopicRuleResponse) => void
+  ): Promise<CreateTopicRuleResponse> {
+    return this.request("CreateTopicRule", req, cb)
   }
 
   /**
@@ -183,6 +212,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SearchStudioProductResponse) => void
   ): Promise<SearchStudioProductResponse> {
     return this.request("SearchStudioProduct", req, cb)
+  }
+
+  /**
+   * 修改规则
+   */
+  async ModifyTopicRule(
+    req: ModifyTopicRuleRequest,
+    cb?: (error: string, rep: ModifyTopicRuleResponse) => void
+  ): Promise<ModifyTopicRuleResponse> {
+    return this.request("ModifyTopicRule", req, cb)
   }
 
   /**
@@ -296,6 +335,36 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取规则列表
+   */
+  async GetTopicRuleList(
+    req: GetTopicRuleListRequest,
+    cb?: (error: string, rep: GetTopicRuleListResponse) => void
+  ): Promise<GetTopicRuleListResponse> {
+    return this.request("GetTopicRuleList", req, cb)
+  }
+
+  /**
+   * 搜索规则
+   */
+  async SearchTopicRule(
+    req: SearchTopicRuleRequest,
+    cb?: (error: string, rep: SearchTopicRuleResponse) => void
+  ): Promise<SearchTopicRuleResponse> {
+    return this.request("SearchTopicRule", req, cb)
+  }
+
+  /**
+   * 提供查询某个项目下所有产品信息的能力。
+   */
+  async GetStudioProductList(
+    req: GetStudioProductListRequest,
+    cb?: (error: string, rep: GetStudioProductListResponse) => void
+  ): Promise<GetStudioProductListResponse> {
+    return this.request("GetStudioProductList", req, cb)
+  }
+
+  /**
    * 提供修改产品的数据模板的能力
    */
   async ModifyModelDefinition(
@@ -336,6 +405,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 禁用规则
+   */
+  async DisableTopicRule(
+    req: DisableTopicRuleRequest,
+    cb?: (error: string, rep: DisableTopicRuleResponse) => void
+  ): Promise<DisableTopicRuleResponse> {
+    return this.request("DisableTopicRule", req, cb)
+  }
+
+  /**
    * 提供给用户异步调用设备行为的能力
    */
   async CallDeviceActionAsync(
@@ -343,6 +422,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CallDeviceActionAsyncResponse) => void
   ): Promise<CallDeviceActionAsyncResponse> {
     return this.request("CallDeviceActionAsync", req, cb)
+  }
+
+  /**
+   * 用于查看某个设备的详细信息
+   */
+  async DescribeDevice(
+    req: DescribeDeviceRequest,
+    cb?: (error: string, rep: DescribeDeviceResponse) => void
+  ): Promise<DescribeDeviceResponse> {
+    return this.request("DescribeDevice", req, cb)
   }
 
   /**
@@ -366,12 +455,22 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 提供查询某个项目下所有产品信息的能力。
+   * 获取规则信息
    */
-  async GetStudioProductList(
-    req: GetStudioProductListRequest,
-    cb?: (error: string, rep: GetStudioProductListResponse) => void
-  ): Promise<GetStudioProductListResponse> {
-    return this.request("GetStudioProductList", req, cb)
+  async DescribeTopicRule(
+    req: DescribeTopicRuleRequest,
+    cb?: (error: string, rep: DescribeTopicRuleResponse) => void
+  ): Promise<DescribeTopicRuleResponse> {
+    return this.request("DescribeTopicRule", req, cb)
+  }
+
+  /**
+   * 删除规则
+   */
+  async DeleteTopicRule(
+    req: DeleteTopicRuleRequest,
+    cb?: (error: string, rep: DeleteTopicRuleResponse) => void
+  ): Promise<DeleteTopicRuleResponse> {
+    return this.request("DeleteTopicRule", req, cb)
   }
 }

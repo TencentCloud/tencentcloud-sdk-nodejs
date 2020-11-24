@@ -225,6 +225,16 @@ export interface RestartInstanceResponse {
 }
 
 /**
+ * RestartKibana请求参数结构体
+ */
+export interface RestartKibanaRequest {
+  /**
+   * ES实例ID
+   */
+  InstanceId: string
+}
+
+/**
  * CreateInstance返回参数结构体
  */
 export interface CreateInstanceResponse {
@@ -971,7 +981,7 @@ export interface UpdateInstanceRequest {
   NodeNum?: number
 
   /**
-   * 配置项（JSON格式字符串）
+   * ES配置项（JSON格式字符串）
    */
   EsConfig?: string
 
@@ -1074,6 +1084,11 @@ export interface UpdateInstanceRequest {
    * 场景化模板类型 -1：不启用 1：通用 2：日志 3：搜索
    */
   SceneType?: number
+
+  /**
+   * Kibana配置项（JSON格式字符串）
+   */
+  KibanaConfig?: string
 }
 
 /**
@@ -1354,6 +1369,16 @@ export interface UpgradeInstanceRequest {
    * 升级方式：<li>scale 蓝绿变更</li><li>restart 滚动重启</li>默认值为scale
    */
   UpgradeMode?: string
+}
+
+/**
+ * RestartKibana返回参数结构体
+ */
+export interface RestartKibanaResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -190,6 +190,19 @@ export interface ListEventHistoryResponse {
     RequestId?: string;
 }
 /**
+ * ModifyTopicRule请求参数结构体
+ */
+export interface ModifyTopicRuleRequest {
+    /**
+      * 规则名称
+      */
+    RuleName: string;
+    /**
+      * 替换的规则包体
+      */
+    TopicRulePayload: TopicRulePayload;
+}
+/**
  * 设备历史数据结构
  */
 export interface DeviceDataHistoryItem {
@@ -203,70 +216,17 @@ export interface DeviceDataHistoryItem {
     Value: string;
 }
 /**
- * 产品详情
+ * GetTopicRuleList请求参数结构体
  */
-export interface ProductEntry {
+export interface GetTopicRuleListRequest {
     /**
-      * 产品ID
+      * 请求的页数
       */
-    ProductId: string;
+    PageNum: number;
     /**
-      * 产品名称
+      * 分页的大小
       */
-    ProductName: string;
-    /**
-      * 产品分组模板ID
-      */
-    CategoryId: number;
-    /**
-      * 加密类型
-      */
-    EncryptionType: string;
-    /**
-      * 连接类型
-      */
-    NetType: string;
-    /**
-      * 数据协议
-      */
-    DataProtocol: number;
-    /**
-      * 产品描述
-      */
-    ProductDesc: string;
-    /**
-      * 状态
-      */
-    DevStatus: string;
-    /**
-      * 创建时间
-      */
-    CreateTime: number;
-    /**
-      * 更新时间
-      */
-    UpdateTime: number;
-    /**
-      * 区域
-      */
-    Region: string;
-    /**
-      * 产品类型
-      */
-    ProductType: number;
-    /**
-      * 项目ID
-      */
-    ProjectId: string;
-    /**
-      * 产品ModuleId
-      */
-    ModuleId: number;
-    /**
-      * 是否使用脚本进行二进制转json功能 可以取值 true / false
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    EnableProductScript: string;
+    PageSize: number;
 }
 /**
  * GetStudioProductList返回参数结构体
@@ -280,6 +240,24 @@ export interface GetStudioProductListResponse {
       * 产品数量
       */
     Total?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * GetLoRaGatewayList返回参数结构体
+ */
+export interface GetLoRaGatewayListResponse {
+    /**
+      * 返回总数
+      */
+    Total?: number;
+    /**
+      * 返回详情项
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Gateways?: Array<LoRaGatewayItem>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -308,22 +286,13 @@ export interface ModifyModelDefinitionResponse {
     RequestId?: string;
 }
 /**
- * GetLoRaGatewayList返回参数结构体
+ * DisableTopicRule请求参数结构体
  */
-export interface GetLoRaGatewayListResponse {
+export interface DisableTopicRuleRequest {
     /**
-      * 返回总数
+      * 规则名称
       */
-    Total?: number;
-    /**
-      * 返回详情项
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Gateways?: Array<LoRaGatewayItem>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    RuleName: string;
 }
 /**
  * 项目详情
@@ -362,6 +331,19 @@ export interface GetProjectListRequest {
       * 个数限制
       */
     Limit?: number;
+}
+/**
+ * ModifyLoRaGateway返回参数结构体
+ */
+export interface ModifyLoRaGatewayResponse {
+    /**
+      * 返回网关数据
+      */
+    Gateway?: LoRaGatewayItem;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DeleteStudioProduct返回参数结构体
@@ -406,6 +388,23 @@ export interface EventHistoryItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Data: string;
+}
+/**
+ * GetLoRaGatewayList请求参数结构体
+ */
+export interface GetLoRaGatewayListRequest {
+    /**
+      * 是否是社区网关
+      */
+    IsCommunity: boolean;
+    /**
+      * 偏移量
+      */
+    Offset?: number;
+    /**
+      * 限制个数
+      */
+    Limit?: number;
 }
 /**
  * DeleteDevice请求参数结构体
@@ -482,6 +481,92 @@ export interface ControlDeviceDataRequest {
     DataTimestamp?: number;
 }
 /**
+ * TopicRulePayload结构
+ */
+export interface TopicRulePayload {
+    /**
+      * 规则的SQL语句，如： SELECT * FROM 'pid/dname/event'，然后对其进行base64编码，得：U0VMRUNUICogRlJPTSAncGlkL2RuYW1lL2V2ZW50Jw==
+      */
+    Sql: string;
+    /**
+      * 行为的JSON字符串，大部分种类举例如下：
+[
+{
+"republish": {
+"topic": "TEST/test"
+}
+},
+{
+"forward": {
+"api": "http://127.0.0.1:8080"
+}
+},
+{
+"ckafka": {
+"instance": {
+"id": "ckafka-test",
+"name": ""
+},
+"topic": {
+"id": "topic-test",
+"name": "test"
+},
+"region": "gz"
+}
+},
+{
+"cmqqueue": {
+"queuename": "queue-test-TEST",
+"region": "gz"
+}
+},
+{
+"mysql": {
+"instanceid": "cdb-test",
+"region": "gz",
+"username": "test",
+"userpwd": "*****",
+"dbname": "d_mqtt",
+"tablename": "t_test",
+"fieldpairs": [
+{
+"field": "test",
+"value": "test"
+}
+],
+"devicetype": "CUSTOM"
+}
+}
+]
+      */
+    Actions?: string;
+    /**
+      * 规则描述
+      */
+    Description?: string;
+    /**
+      * 是否禁用规则
+      */
+    RuleDisabled?: boolean;
+}
+/**
+ * SearchTopicRule返回参数结构体
+ */
+export interface SearchTopicRuleResponse {
+    /**
+      * 搜索到的规则总数
+      */
+    TotalCnt?: number;
+    /**
+      * 规则信息列表
+      */
+    Rules?: Array<TopicRuleInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * SearchStudioProduct请求参数结构体
  */
 export interface SearchStudioProductRequest {
@@ -545,6 +630,15 @@ export interface ModifyProjectResponse {
       * 项目详情
       */
     Project?: ProjectEntry;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeleteTopicRule返回参数结构体
+ */
+export interface DeleteTopicRuleResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -628,6 +722,34 @@ export interface DeleteStudioProductRequest {
     ProductId: string;
 }
 /**
+ * GetProjectList返回参数结构体
+ */
+export interface GetProjectListResponse {
+    /**
+      * 项目列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Projects?: Array<ProjectEntryEx>;
+    /**
+      * 列表项个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Total?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyTopicRule返回参数结构体
+ */
+export interface ModifyTopicRuleResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyProject请求参数结构体
  */
 export interface ModifyProjectRequest {
@@ -645,13 +767,32 @@ export interface ModifyProjectRequest {
     ProjectDesc: string;
 }
 /**
- * ModifyLoRaGateway返回参数结构体
+ * EnableTopicRule返回参数结构体
  */
-export interface ModifyLoRaGatewayResponse {
+export interface EnableTopicRuleResponse {
     /**
-      * 返回网关数据
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Gateway?: LoRaGatewayItem;
+    RequestId?: string;
+}
+/**
+ * DescribeTopicRule请求参数结构体
+ */
+export interface DescribeTopicRuleRequest {
+    /**
+      * 规则名称。
+      */
+    RuleName: string;
+}
+/**
+ * DescribeTopicRule返回参数结构体
+ */
+export interface DescribeTopicRuleResponse {
+    /**
+      * 规则描述。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Rule?: TopicRule;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -830,6 +971,19 @@ export interface ProductModelDefinition {
     CategoryModel: string;
 }
 /**
+ * ReleaseStudioProduct请求参数结构体
+ */
+export interface ReleaseStudioProductRequest {
+    /**
+      * 产品ID
+      */
+    ProductId: string;
+    /**
+      * 产品DevStatus
+      */
+    DevStatus: string;
+}
+/**
  * CreateProject返回参数结构体
  */
 export interface CreateProjectResponse {
@@ -843,17 +997,21 @@ export interface CreateProjectResponse {
     RequestId?: string;
 }
 /**
- * ReleaseStudioProduct请求参数结构体
+ * GetTopicRuleList返回参数结构体
  */
-export interface ReleaseStudioProductRequest {
+export interface GetTopicRuleListResponse {
     /**
-      * 产品ID
+      * 规则总数量
       */
-    ProductId: string;
+    TotalCnt?: number;
     /**
-      * 产品DevStatus
+      * 规则列表
       */
-    DevStatus: string;
+    Rules?: Array<TopicRuleInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeModelDefinition请求参数结构体
@@ -949,6 +1107,15 @@ export interface ProjectEntryEx {
     WebAppCount: number;
 }
 /**
+ * CreateTopicRule返回参数结构体
+ */
+export interface CreateTopicRuleResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeDeviceData返回参数结构体
  */
 export interface DescribeDeviceDataResponse {
@@ -975,21 +1142,38 @@ export interface CreateDeviceResponse {
     RequestId?: string;
 }
 /**
- * GetLoRaGatewayList请求参数结构体
+ * CreateTopicRule请求参数结构体
  */
-export interface GetLoRaGatewayListRequest {
+export interface CreateTopicRuleRequest {
     /**
-      * 是否是社区网关
+      * 规则名称
       */
-    IsCommunity: boolean;
+    RuleName: string;
     /**
-      * 偏移量
+      * 规则内容
       */
-    Offset?: number;
+    TopicRulePayload: TopicRulePayload;
+}
+/**
+ * 规则信息
+ */
+export interface TopicRuleInfo {
     /**
-      * 限制个数
+      * 规则名称
       */
-    Limit?: number;
+    RuleName: string;
+    /**
+      * 规则描述
+      */
+    Description: string;
+    /**
+      * 创建时间
+      */
+    CreatedAt: number;
+    /**
+      * 规则是否禁用
+      */
+    RuleDisabled: boolean;
 }
 /**
  * CreateDevice请求参数结构体
@@ -1053,6 +1237,15 @@ export interface GetStudioProductListRequest {
       * Limit
       */
     Limit?: number;
+}
+/**
+ * SearchTopicRule请求参数结构体
+ */
+export interface SearchTopicRuleRequest {
+    /**
+      * 规则名
+      */
+    RuleName: string;
 }
 /**
  * DescribeDeviceData请求参数结构体
@@ -1162,6 +1355,15 @@ export interface DeviceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     NwkSKey: string;
+}
+/**
+ * DeleteTopicRule请求参数结构体
+ */
+export interface DeleteTopicRuleRequest {
+    /**
+      * 规则名
+      */
+    RuleName: string;
 }
 /**
  * CreateLoRaGateway返回参数结构体
@@ -1306,6 +1508,15 @@ export interface LoRaGatewayItem {
     LastSeenAt: string;
 }
 /**
+ * EnableTopicRule请求参数结构体
+ */
+export interface EnableTopicRuleRequest {
+    /**
+      * 规则名称
+      */
+    RuleName: string;
+}
+/**
  * DescribeDevice返回参数结构体
  */
 export interface DescribeDeviceResponse {
@@ -1319,19 +1530,37 @@ export interface DescribeDeviceResponse {
     RequestId?: string;
 }
 /**
- * GetProjectList返回参数结构体
+ * TopicRule结构
  */
-export interface GetProjectListResponse {
+export interface TopicRule {
     /**
-      * 项目列表
+      * 规则名称。
+      */
+    RuleName: string;
+    /**
+      * 规则的SQL语句，如： SELECT * FROM 'pid/dname/event'，然后对其进行base64编码，得：U0VMRUNUICogRlJPTSAncGlkL2RuYW1lL2V2ZW50Jw==
+      */
+    Sql: string;
+    /**
+      * 规则描述。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Projects?: Array<ProjectEntryEx>;
+    Description: string;
     /**
-      * 列表项个数
+      * 行为的JSON字符串。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Total?: number;
+    Actions: string;
+    /**
+      * 是否禁用规则
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RuleDisabled: boolean;
+}
+/**
+ * DisableTopicRule返回参数结构体
+ */
+export interface DisableTopicRuleResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1349,4 +1578,70 @@ export interface CreateProjectRequest {
       * 项目描述
       */
     ProjectDesc: string;
+}
+/**
+ * 产品详情
+ */
+export interface ProductEntry {
+    /**
+      * 产品ID
+      */
+    ProductId: string;
+    /**
+      * 产品名称
+      */
+    ProductName: string;
+    /**
+      * 产品分组模板ID
+      */
+    CategoryId: number;
+    /**
+      * 加密类型
+      */
+    EncryptionType: string;
+    /**
+      * 连接类型
+      */
+    NetType: string;
+    /**
+      * 数据协议
+      */
+    DataProtocol: number;
+    /**
+      * 产品描述
+      */
+    ProductDesc: string;
+    /**
+      * 状态
+      */
+    DevStatus: string;
+    /**
+      * 创建时间
+      */
+    CreateTime: number;
+    /**
+      * 更新时间
+      */
+    UpdateTime: number;
+    /**
+      * 区域
+      */
+    Region: string;
+    /**
+      * 产品类型
+      */
+    ProductType: number;
+    /**
+      * 项目ID
+      */
+    ProjectId: string;
+    /**
+      * 产品ModuleId
+      */
+    ModuleId: number;
+    /**
+      * 是否使用脚本进行二进制转json功能 可以取值 true / false
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EnableProductScript: string;
 }

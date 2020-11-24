@@ -43,14 +43,16 @@ import {
   DescribeVpnGatewaysResponse,
   ServiceTemplateGroup,
   CreateDhcpIpResponse,
-  FlowLog,
+  DescribeIpGeolocationInfosRequest,
   CreateDefaultSecurityGroupRequest,
   DescribeServiceTemplateGroupsResponse,
   DetachClassicLinkVpcRequest,
   DescribeBandwidthPackageBillUsageResponse,
   DeleteBandwidthPackageResponse,
   ModifyNatGatewayAttributeRequest,
+  FlowLog,
   DescribeVpcLimitsResponse,
+  IpField,
   AddBandwidthPackageResourcesRequest,
   AssignIpv6SubnetCidrBlockRequest,
   CreateVpcResponse,
@@ -72,6 +74,7 @@ import {
   SecurityGroupPolicySet,
   ModifyFlowLogAttributeRequest,
   FilterObject,
+  DescribeIpGeolocationInfosResponse,
   AssociateNetworkAclSubnetsResponse,
   DeleteNatGatewayDestinationIpPortTranslationNatRuleRequest,
   ResetRoutesRequest,
@@ -94,6 +97,7 @@ import {
   DescribeRouteConflictsResponse,
   AcceptAttachCcnInstancesRequest,
   DescribeGatewayFlowMonitorDetailResponse,
+  IpGeolocationInfo,
   DeleteFlowLogRequest,
   NetDetectState,
   HaVipDisassociateAddressIpResponse,
@@ -253,6 +257,7 @@ import {
   RemoveIp6RulesRequest,
   DescribeIpGeolocationDatabaseUrlRequest,
   AddIp6RulesResponse,
+  EnableRoutesResponse,
   DeleteVpnConnectionRequest,
   NetworkAclEntry,
   DescribeDhcpIpsRequest,
@@ -395,7 +400,6 @@ import {
   DisassociateDhcpIpWithAddressIpResponse,
   ModifyNetworkAclAttributeRequest,
   DeleteVpnGatewayResponse,
-  EnableCcnRoutesResponse,
   DescribeHaVipsRequest,
   UnassignPrivateIpAddressesResponse,
   Address,
@@ -429,7 +433,7 @@ import {
   DescribeCustomerGatewaysResponse,
   CheckAssistantCidrResponse,
   InquiryPriceRenewVpnGatewayRequest,
-  DeleteHaVipRequest,
+  EnableCcnRoutesResponse,
   ModifyVpnGatewayCcnRoutesResponse,
   DetachCcnInstancesResponse,
   ModifyServiceTemplateGroupAttributeResponse,
@@ -445,7 +449,7 @@ import {
   DeleteAddressTemplateGroupResponse,
   ReplaceRoutesResponse,
   DirectConnectGatewayCcnRoute,
-  EnableRoutesResponse,
+  DeleteHaVipRequest,
   MigratePrivateIpAddressRequest,
   DescribeServiceTemplatesRequest,
   DeleteRouteTableRequest,
@@ -2266,6 +2270,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: MigratePrivateIpAddressResponse) => void
   ): Promise<MigratePrivateIpAddressResponse> {
     return this.request("MigratePrivateIpAddress", req, cb)
+  }
+
+  /**
+   * 该接口用于查询IP地址信息，包括地理位置信息和网络信息。
+   */
+  async DescribeIpGeolocationInfos(
+    req: DescribeIpGeolocationInfosRequest,
+    cb?: (error: string, rep: DescribeIpGeolocationInfosResponse) => void
+  ): Promise<DescribeIpGeolocationInfosResponse> {
+    return this.request("DescribeIpGeolocationInfos", req, cb)
   }
 
   /**

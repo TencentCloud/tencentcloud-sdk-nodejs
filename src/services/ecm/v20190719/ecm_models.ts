@@ -310,6 +310,17 @@ export interface CreateLoadBalancerRequest {
  */
 export interface DescribeHaVipsResponse {
   /**
+   * 符合条件的对象数。
+   */
+  TotalCount?: number
+
+  /**
+      * HAVIP对象数组。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HaVipSet?: Array<HaVip>
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -679,6 +690,72 @@ export interface StartInstancesRequest {
    * 待开启的实例ID列表。在单次请求的过程中，单个region下的请求实例数上限为100。
    */
   InstanceIdSet: Array<string>
+}
+
+/**
+ * HAVIP对象。
+ */
+export interface HaVip {
+  /**
+   * HAVIP的ID，是HAVIP的唯一标识。
+   */
+  HaVipId: string
+
+  /**
+      * HAVIP名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HaVipName: string
+
+  /**
+   * 虚拟IP地址。
+   */
+  Vip: string
+
+  /**
+   * HAVIP所在私有网络ID。
+   */
+  VpcId: string
+
+  /**
+   * HAVIP所在子网ID。
+   */
+  SubnetId: string
+
+  /**
+   * HAVIP关联弹性网卡ID。
+   */
+  NetworkInterfaceId: string
+
+  /**
+      * 被绑定的实例ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceId: string
+
+  /**
+      * 绑定EIP。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AddressIp: string
+
+  /**
+      * 状态：
+AVAILABLE：运行中。
+UNBIND：未绑定。
+      */
+  State: string
+
+  /**
+   * 创建时间。
+   */
+  CreatedTime: string
+
+  /**
+      * 使用havip的业务标识。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Business: string
 }
 
 /**
@@ -4580,6 +4657,11 @@ export type DescribeBaseOverviewRequest = null
  */
 export interface CreateHaVipResponse {
   /**
+   * HAVIP对象。
+   */
+  HaVip?: HaVip
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -4987,7 +5069,27 @@ export interface TerminateInstancesResponse {
 /**
  * CreateHaVip请求参数结构体
  */
-export type CreateHaVipRequest = null
+export interface CreateHaVipRequest {
+  /**
+   * HAVIP所在私有网络ID。
+   */
+  VpcId: string
+
+  /**
+   * HAVIP所在子网ID。
+   */
+  SubnetId: string
+
+  /**
+   * HAVIP名称。
+   */
+  HaVipName: string
+
+  /**
+   * 指定虚拟IP地址，必须在VPC网段内且未被占用。不指定则自动分配。
+   */
+  Vip?: string
+}
 
 /**
  * DescribeAddresses请求参数结构体
@@ -5580,7 +5682,17 @@ export interface PeakNetworkRegionInfo {
 /**
  * ModifyHaVipAttribute请求参数结构体
  */
-export type ModifyHaVipAttributeRequest = null
+export interface ModifyHaVipAttributeRequest {
+  /**
+   * HAVIP唯一ID，形如：havip-9o233uri。
+   */
+  HaVipId: string
+
+  /**
+   * HAVIP名称，可任意命名，但不得超过60个字符。
+   */
+  HaVipName: string
+}
 
 /**
  * RebootInstances返回参数结构体
@@ -5708,7 +5820,36 @@ export interface ModifyImageAttributeResponse {
 /**
  * DescribeHaVips请求参数结构体
  */
-export type DescribeHaVipsRequest = null
+export interface DescribeHaVipsRequest {
+  /**
+   * HAVIP数组，HAVIP唯一ID，形如：havip-9o233uri。
+   */
+  HaVipIds?: Array<string>
+
+  /**
+      * 过滤条件，参数不支持同时指定HaVipIds和Filters。
+havip-id - String - HAVIP唯一ID，形如：havip-9o233uri。
+havip-name - String - HAVIP名称。
+vpc-id - String - HAVIP所在私有网络ID。
+subnet-id - String - HAVIP所在子网ID。
+      */
+  Filters?: Array<Filter>
+
+  /**
+   * 偏移量。
+   */
+  Offset?: number
+
+  /**
+   * 返回数量。
+   */
+  Limit?: number
+
+  /**
+   * Ecm 区域，不填代表全部区域。
+   */
+  EcmRegion?: string
+}
 
 /**
  * BatchRegisterTargets请求参数结构体
@@ -5935,7 +6076,12 @@ export interface DescribeNetworkInterfacesResponse {
 /**
  * DeleteHaVip请求参数结构体
  */
-export type DeleteHaVipRequest = null
+export interface DeleteHaVipRequest {
+  /**
+   * HAVIP唯一ID，形如：havip-9o233uri。
+   */
+  HaVipId: string
+}
 
 /**
  * AssignPrivateIpAddresses请求参数结构体

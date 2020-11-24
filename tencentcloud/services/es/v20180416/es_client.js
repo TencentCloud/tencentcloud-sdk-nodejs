@@ -100,5 +100,11 @@ class Client extends abstract_client_1.AbstractClient {
     async DescribeInstanceLogs(req, cb) {
         return this.request("DescribeInstanceLogs", req, cb);
     }
+    /**
+     * 重启Kibana
+     */
+    async RestartKibana(req, cb) {
+        return this.request("RestartKibana", req, cb);
+    }
 }
 exports.Client = Client;
