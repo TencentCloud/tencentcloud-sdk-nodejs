@@ -108,6 +108,16 @@ it("sqlserver.v20180328.DescribeMigrations", async function () {
     }
 })
 
+it("sqlserver.v20180328.RecycleReadOnlyGroup", async function () {
+    try {
+       const data = await client.RecycleReadOnlyGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sqlserver.v20180328.ModifyBackupName", async function () {
     try {
        const data = await client.ModifyBackupName({})

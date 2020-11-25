@@ -75,6 +75,7 @@ import {
   DBCreateInfo,
   AccountPrivilege,
   ModifyMigrationResponse,
+  RecycleReadOnlyGroupResponse,
   DescribeZonesResponse,
   DescribeDBsResponse,
   DescribeDBInstancesRequest,
@@ -125,6 +126,7 @@ import {
   ModifyDBInstanceNameRequest,
   AccountPassword,
   DeleteMigrationResponse,
+  RecycleReadOnlyGroupRequest,
   InquiryPriceRenewDBInstanceResponse,
   InquiryPriceRenewDBInstanceRequest,
   TerminateDBInstanceResponse,
@@ -295,6 +297,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeMigrationsResponse) => void
   ): Promise<DescribeMigrationsResponse> {
     return this.request("DescribeMigrations", req, cb)
+  }
+
+  /**
+   * 本接口（RecycleReadOnlyGroup）立即回收只读组的资源，只读组占用的vip等资源将立即释放且不可找回。
+   */
+  async RecycleReadOnlyGroup(
+    req?: RecycleReadOnlyGroupRequest,
+    cb?: (error: string, rep: RecycleReadOnlyGroupResponse) => void
+  ): Promise<RecycleReadOnlyGroupResponse> {
+    return this.request("RecycleReadOnlyGroup", req, cb)
   }
 
   /**
@@ -528,7 +540,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(TerminateDBInstance)用于主动销毁按量计费实例。
+   * 本接口(TerminateDBInstance)用于主动隔离实例，使得实例进入回收站。
    */
   async TerminateDBInstance(
     req: TerminateDBInstanceRequest,

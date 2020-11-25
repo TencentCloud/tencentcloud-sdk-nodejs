@@ -98,6 +98,16 @@ it("trtc.v20190722.DescribeRealtimeNetwork", async function () {
     }
 })
 
+it("trtc.v20190722.StopMCUMixTranscodeByStrRoomId", async function () {
+    try {
+       const data = await client.StopMCUMixTranscodeByStrRoomId({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trtc.v20190722.DescribeRoomInformation", async function () {
     try {
        const data = await client.DescribeRoomInformation({})
@@ -171,6 +181,16 @@ it("trtc.v20190722.DescribeAbnormalEvent", async function () {
 it("trtc.v20190722.DescribeRealtimeQuality", async function () {
     try {
        const data = await client.DescribeRealtimeQuality({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trtc.v20190722.StartMCUMixTranscodeByStrRoomId", async function () {
+    try {
+       const data = await client.StartMCUMixTranscodeByStrRoomId({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

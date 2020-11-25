@@ -746,7 +746,7 @@ export interface DescribeFirmwareTaskStatisticsResponse {
  */
 export interface CreateLoraDeviceRequest {
     /**
-      * 产品 ID ，创建产品时腾讯云为用户分配全局唯一的 ID
+      * 产品Id ，创建产品时腾讯云为用户分配全局唯一的Id
       */
     ProductId: string;
     /**

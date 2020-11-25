@@ -64,6 +64,31 @@ export interface DescribeTrtcInteractiveTimeResponse {
     RequestId?: string;
 }
 /**
+ * StartMCUMixTranscodeByStrRoomId请求参数结构体
+ */
+export interface StartMCUMixTranscodeByStrRoomIdRequest {
+    /**
+      * TRTC的SDKAppId。
+      */
+    SdkAppId: number;
+    /**
+      * 字符串房间号。
+      */
+    StrRoomId: string;
+    /**
+      * 混流输出控制参数。
+      */
+    OutputParams: OutputParams;
+    /**
+      * 混流输出编码参数。
+      */
+    EncodeParams: EncodeParams;
+    /**
+      * 混流输出布局参数。
+      */
+    LayoutParams: LayoutParams;
+}
+/**
  * MCU混流布局参数
  */
 export interface LayoutParams {
@@ -637,6 +662,19 @@ export interface CreateTroubleInfoResponse {
     RequestId?: string;
 }
 /**
+ * StopMCUMixTranscodeByStrRoomId请求参数结构体
+ */
+export interface StopMCUMixTranscodeByStrRoomIdRequest {
+    /**
+      * TRTC的SDKAppId。
+      */
+    SdkAppId: number;
+    /**
+      * 字符串房间号。
+      */
+    StrRoomId: string;
+}
+/**
  * Es返回的质量数据
  */
 export interface QualityData {
@@ -671,6 +709,15 @@ export interface AbnormalEvent {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PeerId: string;
+}
+/**
+ * StopMCUMixTranscodeByStrRoomId返回参数结构体
+ */
+export interface StopMCUMixTranscodeByStrRoomIdResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeRealtimeQuality请求参数结构体
@@ -1196,6 +1243,15 @@ export interface DescribeHistoryScaleResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ScaleList?: Array<ScaleInfomation>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * StartMCUMixTranscodeByStrRoomId返回参数结构体
+ */
+export interface StartMCUMixTranscodeByStrRoomIdResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -52,7 +52,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTelCdr", req, cb);
     }
     /**
-     * 获取电话呼叫统计信息
+     * 按实例获取电话消耗统计
      */
     async DescribeTelCallInfo(req, cb) {
         return this.request("DescribeTelCallInfo", req, cb);

@@ -503,6 +503,11 @@ export interface DescribeProductConfigRequest {
    * 可用区英文ID，形如ap-guangzhou-1
    */
   Zone: string
+
+  /**
+   * 购买实例的类型 HA-高可用型(包括双机高可用，alwaysOn集群)，RO-只读副本型，SI-基础版本型
+   */
+  InstanceType?: string
 }
 
 /**
@@ -1199,6 +1204,16 @@ export interface SpecInfo {
    * 此规格下支持的付费模式，POST-仅支持按量计费 PRE-仅支持包年包月 ALL-支持所有
    */
   PayModeStatus: string
+
+  /**
+   * 产品类型，HA-高可用型(包括双机高可用，alwaysOn集群)，RO-只读副本型，SI-基础版本型
+   */
+  InstanceType: string
+
+  /**
+   * 跨可用区类型，MultiZones-只支持跨可用区，SameZones-只支持同可用区，ALL-支持所有
+   */
+  MultiZonesStatus: string
 }
 
 /**
@@ -1329,6 +1344,21 @@ export interface ModifyMigrationResponse {
    * 迁移任务ID
    */
   MigrateId?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RecycleReadOnlyGroup返回参数结构体
+ */
+export interface RecycleReadOnlyGroupResponse {
+  /**
+   * 任务流ID
+   */
+  FlowId?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2508,6 +2538,11 @@ export interface DeleteMigrationResponse {
    */
   RequestId?: string
 }
+
+/**
+ * RecycleReadOnlyGroup请求参数结构体
+ */
+export type RecycleReadOnlyGroupRequest = null
 
 /**
  * InquiryPriceRenewDBInstance返回参数结构体

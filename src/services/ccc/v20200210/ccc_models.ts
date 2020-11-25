@@ -260,7 +260,7 @@ export interface DescribeTelCallInfoRequest {
   StartTimeStamp: number
 
   /**
-   * 结束时间戳，Unix 时间戳
+   * 结束时间戳，Unix 时间戳，查询时间范围最大为90天
    */
   EndTimeStamp: number
 

@@ -87,7 +87,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取电话呼叫统计信息
+   * 按实例获取电话消耗统计
    */
   async DescribeTelCallInfo(
     req: DescribeTelCallInfoRequest,

@@ -24,7 +24,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeTelCdr(req: DescribeTelCdrRequest, cb?: (error: string, rep: DescribeTelCdrResponse) => void): Promise<DescribeTelCdrResponse>;
     /**
-     * 获取电话呼叫统计信息
+     * 按实例获取电话消耗统计
      */
     DescribeTelCallInfo(req: DescribeTelCallInfoRequest, cb?: (error: string, rep: DescribeTelCallInfoResponse) => void): Promise<DescribeTelCallInfoResponse>;
     /**

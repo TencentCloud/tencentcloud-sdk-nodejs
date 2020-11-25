@@ -82,6 +82,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMigrations", req, cb);
     }
     /**
+     * 本接口（RecycleReadOnlyGroup）立即回收只读组的资源，只读组占用的vip等资源将立即释放且不可找回。
+     */
+    async RecycleReadOnlyGroup(req, cb) {
+        return this.request("RecycleReadOnlyGroup", req, cb);
+    }
+    /**
      * 本接口(ModifyBackupName)用于修改备份名称。
      */
     async ModifyBackupName(req, cb) {
@@ -220,7 +226,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RenewDBInstance", req, cb);
     }
     /**
-     * 本接口(TerminateDBInstance)用于主动销毁按量计费实例。
+     * 本接口(TerminateDBInstance)用于主动隔离实例，使得实例进入回收站。
      */
     async TerminateDBInstance(req, cb) {
         return this.request("TerminateDBInstance", req, cb);
