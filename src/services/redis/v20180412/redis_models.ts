@@ -353,6 +353,16 @@ TypeId为标准架构时，MemSize是实例总内存容量；TypeId为集群架�
 }
 
 /**
+ * DescribeInstanceZoneInfo请求参数结构体
+ */
+export interface DescribeInstanceZoneInfoRequest {
+  /**
+   * 实例Id，如：crs-6ubhgouj
+   */
+  InstanceId?: string
+}
+
+/**
  * ModifyNetworkConfig返回参数结构体
  */
 export interface ModifyNetworkConfigResponse {
@@ -733,48 +743,23 @@ export interface DescribeInstancesResponse {
 }
 
 /**
- * 实例枚举类型参数描述
+ * DescribeInstanceZoneInfo返回参数结构体
  */
-export interface InstanceEnumParam {
+export interface DescribeInstanceZoneInfoResponse {
   /**
-   * 参数名
+   * 实例节点组的个数
    */
-  ParamName: string
+  TotalCount?: number
 
   /**
-   * 参数类型：enum
+   * 实例节点组列表
    */
-  ValueType: string
+  ReplicaGroups?: Array<ReplicaGroup>
 
   /**
-   * 修改后是否需要重启：true，false
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  NeedRestart: string
-
-  /**
-   * 参数默认值
-   */
-  DefaultValue: string
-
-  /**
-   * 当前运行参数值
-   */
-  CurrentValue: string
-
-  /**
-   * 参数说明
-   */
-  Tips: string
-
-  /**
-   * 参数可取值
-   */
-  EnumValue: Array<string>
-
-  /**
-   * 参数状态, 1: 修改中， 2：修改完成
-   */
-  Status: number
+  RequestId?: string
 }
 
 /**
@@ -1076,6 +1061,31 @@ export interface DescribeInstanceDealDetailRequest {
    * 订单交易ID数组，即 [CreateInstances](https://cloud.tencent.com/document/api/239/20026) 的输出参数DealId。
    */
   DealIds: Array<string>
+}
+
+/**
+ * Redis节点的运行信息
+ */
+export interface RedisNode {
+  /**
+   * 节点key的个数
+   */
+  Keys: number
+
+  /**
+   * 节点slot分布
+   */
+  Slot: string
+
+  /**
+   * 节点的序列ID
+   */
+  NodeId: string
+
+  /**
+   * 节点的状态
+   */
+  Status: string
 }
 
 /**
@@ -2646,6 +2656,36 @@ export interface AssociateSecurityGroupsResponse {
 }
 
 /**
+ * 实例节点信息
+ */
+export interface ReplicaGroup {
+  /**
+   * 节点组ID
+   */
+  GroupId: number
+
+  /**
+   * 节点组的名称，主节点为空
+   */
+  GroupName: string
+
+  /**
+   * 节点的可用区ID，比如ap-guangzhou-1
+   */
+  ZoneId: string
+
+  /**
+   * 节点组类型，master为主节点，replica为副本节点
+   */
+  Role: string
+
+  /**
+   * 节点组节点列表
+   */
+  RedisNodes: Array<RedisNode>
+}
+
+/**
  * DescribeTaskInfo返回参数结构体
  */
 export interface DescribeTaskInfoResponse {
@@ -3808,6 +3848,51 @@ export interface HotKeyInfo {
    * 数量
    */
   Count: number
+}
+
+/**
+ * 实例枚举类型参数描述
+ */
+export interface InstanceEnumParam {
+  /**
+   * 参数名
+   */
+  ParamName: string
+
+  /**
+   * 参数类型：enum
+   */
+  ValueType: string
+
+  /**
+   * 修改后是否需要重启：true，false
+   */
+  NeedRestart: string
+
+  /**
+   * 参数默认值
+   */
+  DefaultValue: string
+
+  /**
+   * 当前运行参数值
+   */
+  CurrentValue: string
+
+  /**
+   * 参数说明
+   */
+  Tips: string
+
+  /**
+   * 参数可取值
+   */
+  EnumValue: Array<string>
+
+  /**
+   * 参数状态, 1: 修改中， 2：修改完成
+   */
+  Status: number
 }
 
 /**

@@ -546,55 +546,13 @@ export interface LogServiceInfo {
     Region: string;
 }
 /**
- * CreatePostpayPackage请求参数结构体
+ * DescribeCloudBaseRunResourceForExtend请求参数结构体
  */
-export interface CreatePostpayPackageRequest {
+export interface DescribeCloudBaseRunResourceForExtendRequest {
     /**
-      * 环境ID，需要系统自动创建环境时，此字段不传
+      * 环境ID
       */
-    EnvId?: string;
-    /**
-      * 微信 AppId，微信必传
-      */
-    WxAppId?: string;
-    /**
-      * 付费来源
-<li>miniapp</li>
-<li>qcloud</li>
-      */
-    Source?: string;
-    /**
-      * 用户享有的免费额度级别，目前只能为“basic”，不传该字段或该字段为空，标识不享受免费额度。
-      */
-    FreeQuota?: string;
-    /**
-      * 环境创建来源，取值：
-<li>miniapp</li>
-<li>qcloud</li>
-用法同CreateEnv接口的Source参数
-和 Channel 参数同时传，或者同时不传；EnvId 为空时必传。
-      */
-    EnvSource?: string;
-    /**
-      * 环境别名，要以a-z开头，不能包含  a-z,0-9,-  以外的字符
-      */
-    Alias?: string;
-    /**
-      * 如果envsource为miniapp, channel可以为ide或api;
-如果envsource为qcloud, channel可以为qc_console,cocos, qq, cloudgame,dcloud,serverless_framework
-和 EnvSource 参数同时传，或者同时不传；EnvId 为空时必传。
-      */
-    Channel?: string;
-    /**
-      * 扩展ID
-      */
-    ExtensionId?: string;
-    /**
-      * 订单标记。建议使用方统一转大小写之后再判断。
-<li>QuickStart：快速启动来源</li>
-<li>Activity：活动来源</li>
-      */
-    Flag?: string;
+    EnvId: string;
 }
 /**
  * ModifyEndUser请求参数结构体
@@ -1315,6 +1273,10 @@ export interface CreateCloudBaseRunServerVersionRequest {
       * 操作备注
       */
     OperatorRemark?: string;
+    /**
+      * 服务路劲
+      */
+    ServerPath?: string;
 }
 /**
  * 终端用户登录新增统计
@@ -1504,6 +1466,40 @@ export interface StaticStorageInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Bucket: string;
+}
+/**
+ * DescribeCloudBaseRunResourceForExtend返回参数结构体
+ */
+export interface DescribeCloudBaseRunResourceForExtendResponse {
+    /**
+      * 集群状态(creating/succ)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterStatus?: string;
+    /**
+      * 虚拟集群ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VirtualClusterId?: string;
+    /**
+      * vpc id信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VpcId?: string;
+    /**
+      * 地域信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Region?: string;
+    /**
+      * 子网信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubnetIds?: Array<CloudBaseRunVpcSubnet>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 数据库资源信息
@@ -1947,6 +1943,57 @@ export interface DescribeEndUserStatisticResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * CreatePostpayPackage请求参数结构体
+ */
+export interface CreatePostpayPackageRequest {
+    /**
+      * 环境ID，需要系统自动创建环境时，此字段不传
+      */
+    EnvId?: string;
+    /**
+      * 微信 AppId，微信必传
+      */
+    WxAppId?: string;
+    /**
+      * 付费来源
+<li>miniapp</li>
+<li>qcloud</li>
+      */
+    Source?: string;
+    /**
+      * 用户享有的免费额度级别，目前只能为“basic”，不传该字段或该字段为空，标识不享受免费额度。
+      */
+    FreeQuota?: string;
+    /**
+      * 环境创建来源，取值：
+<li>miniapp</li>
+<li>qcloud</li>
+用法同CreateEnv接口的Source参数
+和 Channel 参数同时传，或者同时不传；EnvId 为空时必传。
+      */
+    EnvSource?: string;
+    /**
+      * 环境别名，要以a-z开头，不能包含  a-z,0-9,-  以外的字符
+      */
+    Alias?: string;
+    /**
+      * 如果envsource为miniapp, channel可以为ide或api;
+如果envsource为qcloud, channel可以为qc_console,cocos, qq, cloudgame,dcloud,serverless_framework
+和 EnvSource 参数同时传，或者同时不传；EnvId 为空时必传。
+      */
+    Channel?: string;
+    /**
+      * 扩展ID
+      */
+    ExtensionId?: string;
+    /**
+      * 订单标记。建议使用方统一转大小写之后再判断。
+<li>QuickStart：快速启动来源</li>
+<li>Activity：活动来源</li>
+      */
+    Flag?: string;
 }
 /**
  * DescribeCloudBaseBuildService请求参数结构体

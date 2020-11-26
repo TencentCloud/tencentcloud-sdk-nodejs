@@ -352,6 +352,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ClearInstance", req, cb);
     }
     /**
+     * 查询Redis节点信息
+     */
+    async DescribeInstanceZoneInfo(req, cb) {
+        return this.request("DescribeInstanceZoneInfo", req, cb);
+    }
+    /**
      * 查询订单信息
      */
     async DescribeInstanceDealDetail(req, cb) {

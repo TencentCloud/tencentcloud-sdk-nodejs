@@ -18,16 +18,6 @@ const client = new tencentcloud.tcb.v20180608.Client({
 })
 describe("tcb.v20180608.test.js", function () {
 
-it("tcb.v20180608.DescribeCloudBaseRunVersionSnapshot", async function () {
-    try {
-       const data = await client.DescribeCloudBaseRunVersionSnapshot({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tcb.v20180608.CreateHostingDomain", async function () {
     try {
        const data = await client.CreateHostingDomain({})
@@ -41,6 +31,16 @@ it("tcb.v20180608.CreateHostingDomain", async function () {
 it("tcb.v20180608.DescribeEndUsers", async function () {
     try {
        const data = await client.DescribeEndUsers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.DescribeEnvs", async function () {
+    try {
+       const data = await client.DescribeEnvs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,9 +78,9 @@ it("tcb.v20180608.DescribeCloudBaseRunServerVersion", async function () {
     }
 })
 
-it("tcb.v20180608.DescribeEnvs", async function () {
+it("tcb.v20180608.DescribeAuthDomains", async function () {
     try {
-       const data = await client.DescribeEnvs({})
+       const data = await client.DescribeAuthDomains({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -121,6 +121,16 @@ it("tcb.v20180608.ReinstateEnv", async function () {
 it("tcb.v20180608.DescribeEndUserStatistic", async function () {
     try {
        const data = await client.DescribeEndUserStatistic({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.DescribeCloudBaseRunResourceForExtend", async function () {
+    try {
+       const data = await client.DescribeCloudBaseRunResourceForExtend({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -278,9 +288,9 @@ it("tcb.v20180608.DescribeCloudBaseBuildService", async function () {
     }
 })
 
-it("tcb.v20180608.DescribeAuthDomains", async function () {
+it("tcb.v20180608.DescribeCloudBaseRunVersionSnapshot", async function () {
     try {
-       const data = await client.DescribeAuthDomains({})
+       const data = await client.DescribeCloudBaseRunVersionSnapshot({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -31,7 +31,7 @@ import {
   DescribeEndUserStatisticRequest,
   CloudRunServiceSimpleVersionSnapshot,
   LogServiceInfo,
-  CreatePostpayPackageRequest,
+  DescribeCloudBaseRunResourceForExtendRequest,
   ModifyEndUserRequest,
   DescribeAuthDomainsResponse,
   CreateHostingDomainRequest,
@@ -73,6 +73,7 @@ import {
   PackageFreeQuotaInfo,
   DescribeEnvFreeQuotaResponse,
   StaticStorageInfo,
+  DescribeCloudBaseRunResourceForExtendResponse,
   DatabasesInfo,
   ReinstateEnvRequest,
   DescribeDatabaseACLRequest,
@@ -92,6 +93,7 @@ import {
   AuthDomain,
   EnvBillingInfoItem,
   DescribeEndUserStatisticResponse,
+  CreatePostpayPackageRequest,
   DescribeCloudBaseBuildServiceRequest,
   CloudBaseCodeRepoDetail,
   CheckTcbServiceRequest,
@@ -118,16 +120,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询版本历史
-   */
-  async DescribeCloudBaseRunVersionSnapshot(
-    req: DescribeCloudBaseRunVersionSnapshotRequest,
-    cb?: (error: string, rep: DescribeCloudBaseRunVersionSnapshotResponse) => void
-  ): Promise<DescribeCloudBaseRunVersionSnapshotResponse> {
-    return this.request("DescribeCloudBaseRunVersionSnapshot", req, cb)
-  }
-
-  /**
    * 创建托管域名
    */
   async CreateHostingDomain(
@@ -145,6 +137,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEndUsersResponse) => void
   ): Promise<DescribeEndUsersResponse> {
     return this.request("DescribeEndUsers", req, cb)
+  }
+
+  /**
+   * 获取环境列表，含环境下的各个资源信息。尤其是各资源的唯一标识，是请求各资源的关键参数
+   */
+  async DescribeEnvs(
+    req: DescribeEnvsRequest,
+    cb?: (error: string, rep: DescribeEnvsResponse) => void
+  ): Promise<DescribeEnvsResponse> {
+    return this.request("DescribeEnvs", req, cb)
   }
 
   /**
@@ -178,13 +180,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取环境列表，含环境下的各个资源信息。尤其是各资源的唯一标识，是请求各资源的关键参数
+   * 获取安全域名列表
    */
-  async DescribeEnvs(
-    req: DescribeEnvsRequest,
-    cb?: (error: string, rep: DescribeEnvsResponse) => void
-  ): Promise<DescribeEnvsResponse> {
-    return this.request("DescribeEnvs", req, cb)
+  async DescribeAuthDomains(
+    req: DescribeAuthDomainsRequest,
+    cb?: (error: string, rep: DescribeAuthDomainsResponse) => void
+  ): Promise<DescribeAuthDomainsResponse> {
+    return this.request("DescribeAuthDomains", req, cb)
   }
 
   /**
@@ -225,6 +227,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEndUserStatisticResponse) => void
   ): Promise<DescribeEndUserStatisticResponse> {
     return this.request("DescribeEndUserStatistic", req, cb)
+  }
+
+  /**
+   * 查看容器托管的集群状态扩展使用
+   */
+  async DescribeCloudBaseRunResourceForExtend(
+    req: DescribeCloudBaseRunResourceForExtendRequest,
+    cb?: (error: string, rep: DescribeCloudBaseRunResourceForExtendResponse) => void
+  ): Promise<DescribeCloudBaseRunResourceForExtendResponse> {
+    return this.request("DescribeCloudBaseRunResourceForExtend", req, cb)
   }
 
   /**
@@ -378,13 +390,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取安全域名列表
+   * 查询版本历史
    */
-  async DescribeAuthDomains(
-    req: DescribeAuthDomainsRequest,
-    cb?: (error: string, rep: DescribeAuthDomainsResponse) => void
-  ): Promise<DescribeAuthDomainsResponse> {
-    return this.request("DescribeAuthDomains", req, cb)
+  async DescribeCloudBaseRunVersionSnapshot(
+    req: DescribeCloudBaseRunVersionSnapshotRequest,
+    cb?: (error: string, rep: DescribeCloudBaseRunVersionSnapshotResponse) => void
+  ): Promise<DescribeCloudBaseRunVersionSnapshotResponse> {
+    return this.request("DescribeCloudBaseRunVersionSnapshot", req, cb)
   }
 
   /**

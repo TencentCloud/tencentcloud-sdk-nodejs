@@ -752,6 +752,19 @@ export interface DomainCertInfo {
    * 证书状态。
    */
   Status: number
+
+  /**
+      * 证书本身标识的域名列表。
+比如: ["*.x.com"]
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CertDomains: Array<string>
+
+  /**
+      * 腾讯云ssl的证书Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CloudCertId: string
 }
 
 /**
@@ -1622,8 +1635,10 @@ export interface PlayCodeTotalInfo {
  */
 export interface AddLiveWatermarkRequest {
   /**
-   * 水印图片 URL。
-   */
+      * 水印图片 URL。
+URL中禁止包含的字符：
+ ;(){}$>`#"\'|
+      */
   PictureUrl: string
 
   /**
@@ -1648,7 +1663,7 @@ export interface AddLiveWatermarkRequest {
   Width?: number
 
   /**
-   * 水印高度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始高度。
+   * 水印高度，占直播原始画面高度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始高度。
    */
   Height?: number
 }
@@ -4535,8 +4550,10 @@ export interface UpdateLiveWatermarkRequest {
   WatermarkId: number
 
   /**
-   * 水印图片 URL。
-   */
+      * 水印图片 URL。
+URL中禁止包含的字符：
+ ;(){}$>`#"\'|
+      */
   PictureUrl: string
 
   /**

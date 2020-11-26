@@ -28,6 +28,7 @@ import {
   SwitchInstanceVipRequest,
   UpgradeInstanceVersionResponse,
   CreateInstancesRequest,
+  DescribeInstanceZoneInfoRequest,
   ModifyNetworkConfigResponse,
   CommandTake,
   DescribeInstanceMonitorBigKeyResponse,
@@ -43,7 +44,7 @@ import {
   RedisNodeInfo,
   DescribeBackupUrlRequest,
   DescribeInstancesResponse,
-  InstanceEnumParam,
+  DescribeInstanceZoneInfoResponse,
   Account,
   InstanceProxySlowlogDetail,
   SecurityGroupsInboundAndOutbound,
@@ -56,6 +57,7 @@ import {
   ModifyAutoBackupConfigRequest,
   InstanceMultiParam,
   DescribeInstanceDealDetailRequest,
+  RedisNode,
   DescribeProjectSecurityGroupRequest,
   RestoreInstanceResponse,
   DescribeInstanceShardsResponse,
@@ -123,6 +125,7 @@ import {
   StartupInstanceResponse,
   DescribeInstanceDTSInstanceInfo,
   AssociateSecurityGroupsResponse,
+  ReplicaGroup,
   DescribeTaskInfoResponse,
   DescribeInstanceMonitorBigKeyTypeDistResponse,
   CleanUpInstanceRequest,
@@ -165,6 +168,7 @@ import {
   DisassociateSecurityGroupsRequest,
   StartupInstanceRequest,
   HotKeyInfo,
+  InstanceEnumParam,
   CreateInstanceAccountResponse,
   DescribeInstanceBackupsRequest,
   SecurityGroupDetail,
@@ -731,6 +735,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ClearInstanceResponse) => void
   ): Promise<ClearInstanceResponse> {
     return this.request("ClearInstance", req, cb)
+  }
+
+  /**
+   * 查询Redis节点信息
+   */
+  async DescribeInstanceZoneInfo(
+    req: DescribeInstanceZoneInfoRequest,
+    cb?: (error: string, rep: DescribeInstanceZoneInfoResponse) => void
+  ): Promise<DescribeInstanceZoneInfoResponse> {
+    return this.request("DescribeInstanceZoneInfo", req, cb)
   }
 
   /**

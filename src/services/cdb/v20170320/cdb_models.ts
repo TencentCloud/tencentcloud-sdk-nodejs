@@ -580,12 +580,12 @@ export interface Parameter {
   /**
    * 参数名称
    */
-  Name: string
+  Name?: string
 
   /**
    * 参数值
    */
-  CurrentValue: string
+  CurrentValue?: string
 }
 
 /**

@@ -20,18 +20,16 @@
  */
 export interface VerifyBizLicenseRequest {
   /**
-      * 用于入参是营业执照图片的场景，ImageBase64和ImageUrl必选一个输入。
+      * 用于入参是营业执照图片的场景，ImageBase64和ImageUrl必须提供一个，如果都提供，只使用 ImageUrl。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
 支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
   ImageBase64?: string
 
   /**
-      * 用于入参是营业执照图片的场景，ImageBase64和ImageUrl必选一个输入。
+      * 用于入参是营业执照图片的场景，ImageBase64和ImageUrl必须提供一个，如果都提供，只使用 ImageUrl。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
 支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
   ImageUrl?: string
 
@@ -47,7 +45,7 @@ Config = {"Name":true,"Address":true}
   ImageConfig?: string
 
   /**
-   * 用于入参是文本的场景，RegNum表示注册号或者统一社会信用代码。RegNum为必选项。
+   * 用于入参是文本的场景，RegNum表示注册号或者统一社会信用代码。若没有传入营业执照图片，则RegNum为必选项，若图片和RegNum都传入，则只使用RegNum。
    */
   RegNum?: string
 
@@ -57,7 +55,7 @@ Config = {"Name":true,"Address":true}
   Name?: string
 
   /**
-   * 用于入参是文本的场景，Address表示经营地址，填写后会返回Name的校验结果。
+   * 用于入参是文本的场景，Address表示经营地址，填写后会返回Address的校验结果。
    */
   Address?: string
 }
@@ -2609,7 +2607,7 @@ export interface VerifyBasicBizLicenseResponse {
   Zsopscope?: string
 
   /**
-   * 状态信息
+   * 查询的状态信息
    */
   Reason?: string
 
@@ -4145,8 +4143,16 @@ export interface ShipInvoiceOCRResponse {
  */
 export interface InsuranceBillInfo {
   /**
-   * 识别出的字段名称（关键字）。
-   */
+      * 识别出的字段名称(关键字)，支持以下字段：
+【病案首页】
+姓名、性别、出生日期、出院诊断、疾病编码、入院病情等。
+【费用清单】
+医疗参保人员类别、身份证号、入院方式、结账日期、项目、金额等。
+【结算单】
+名称、单价、数量、金额、医保内、医保外等。
+【医疗发票】
+姓名、性别、住院时间、收费项目、金额、合计等。
+      */
   Name: string
 
   /**
@@ -4732,8 +4738,9 @@ export interface CandWord {
  */
 export interface EnterpriseLicenseInfo {
   /**
-   * 识别出的字段名称。
-   */
+      * 识别出的字段名称（关键字），不同证件类型可能不同，证件类型包含企业登记证书、许可证书、企业执照、三证合一类证书；
+支持以下字段：统一社会信用代码、法定代表人、公司名称、公司地址、注册资金、企业关型、经营范围、成立日期、有效期、开办资金、经费来源、举办单位等；
+      */
   Name: string
 
   /**
@@ -5161,18 +5168,16 @@ export interface EstateCertOCRRequest {
  */
 export interface VerifyBasicBizLicenseRequest {
   /**
-      * 用于入参是营业执照图片的场景，ImageBase64和ImageUrl必选一个输入。
+      * 用于入参是营业执照图片的场景，ImageBase64和ImageUrl必须提供一个，如果都提供，只使用 ImageUrl。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
 支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
   ImageBase64?: string
 
   /**
-      * 用于入参是营业执照图片的场景，ImageBase64和ImageUrl必选一个输入。
+      * 用于入参是营业执照图片的场景，ImageBase64和ImageUrl必须提供一个，如果都提供，只使用 ImageUrl。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
 支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
   ImageUrl?: string
 
@@ -5188,7 +5193,7 @@ Config = {"Name":true,"Address":true}
   ImageConfig?: string
 
   /**
-   * 用于入参是文本的场景，RegNum表示注册号或者统一社会信用代码。RegNum为必选项。
+   * 用于入参是文本的场景，RegNum表示注册号或者统一社会信用代码。若没有传入营业执照图片，则RegNum为必选项，若图片和RegNum都传入，则只使用RegNum。
    */
   RegNum?: string
 
@@ -5198,7 +5203,7 @@ Config = {"Name":true,"Address":true}
   Name?: string
 
   /**
-   * 用于入参是文本的场景，Address表示经营地址，填写后会返回Name的校验结果。
+   * 用于入参是文本的场景，Address表示经营地址。Address为可选项，填写后会返回Address的校验结果。
    */
   Address?: string
 

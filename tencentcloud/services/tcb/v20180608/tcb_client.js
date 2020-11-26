@@ -28,12 +28,6 @@ class Client extends abstract_client_1.AbstractClient {
         super("tcb.tencentcloudapi.com", "2018-06-08", clientConfig);
     }
     /**
-     * 查询版本历史
-     */
-    async DescribeCloudBaseRunVersionSnapshot(req, cb) {
-        return this.request("DescribeCloudBaseRunVersionSnapshot", req, cb);
-    }
-    /**
      * 创建托管域名
      */
     async CreateHostingDomain(req, cb) {
@@ -44,6 +38,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeEndUsers(req, cb) {
         return this.request("DescribeEndUsers", req, cb);
+    }
+    /**
+     * 获取环境列表，含环境下的各个资源信息。尤其是各资源的唯一标识，是请求各资源的关键参数
+     */
+    async DescribeEnvs(req, cb) {
+        return this.request("DescribeEnvs", req, cb);
     }
     /**
      * 增加安全域名
@@ -64,10 +64,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCloudBaseRunServerVersion", req, cb);
     }
     /**
-     * 获取环境列表，含环境下的各个资源信息。尤其是各资源的唯一标识，是请求各资源的关键参数
+     * 获取安全域名列表
      */
-    async DescribeEnvs(req, cb) {
-        return this.request("DescribeEnvs", req, cb);
+    async DescribeAuthDomains(req, cb) {
+        return this.request("DescribeAuthDomains", req, cb);
     }
     /**
      * 开通后付费资源
@@ -92,6 +92,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeEndUserStatistic(req, cb) {
         return this.request("DescribeEndUserStatistic", req, cb);
+    }
+    /**
+     * 查看容器托管的集群状态扩展使用
+     */
+    async DescribeCloudBaseRunResourceForExtend(req, cb) {
+        return this.request("DescribeCloudBaseRunResourceForExtend", req, cb);
     }
     /**
      * 管理终端用户
@@ -184,10 +190,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCloudBaseBuildService", req, cb);
     }
     /**
-     * 获取安全域名列表
+     * 查询版本历史
      */
-    async DescribeAuthDomains(req, cb) {
-        return this.request("DescribeAuthDomains", req, cb);
+    async DescribeCloudBaseRunVersionSnapshot(req, cb) {
+        return this.request("DescribeCloudBaseRunVersionSnapshot", req, cb);
     }
     /**
      * 销毁静态托管资源，该接口创建异步销毁任务，资源最终状态可从DestroyStaticStore接口查看
