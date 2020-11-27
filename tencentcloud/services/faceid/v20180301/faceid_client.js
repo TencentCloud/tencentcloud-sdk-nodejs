@@ -58,10 +58,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetFaceIdToken", req, cb);
     }
     /**
-     * 本接口用于查询手机号在网时长，输入手机号进行查询。
+     * 本接口用于校验手机号和姓名的真实性和一致性。
      */
-    async MobileNetworkTimeVerification(req, cb) {
-        return this.request("MobileNetworkTimeVerification", req, cb);
+    async CheckPhoneAndName(req, cb) {
+        return this.request("CheckPhoneAndName", req, cb);
     }
     /**
      * 本接口用于银行卡号、姓名、开户证件号信息的真实性和一致性。
@@ -128,6 +128,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async IdCardVerification(req, cb) {
         return this.request("IdCardVerification", req, cb);
+    }
+    /**
+     * 本接口用于查询手机号在网时长，输入手机号进行查询。
+     */
+    async MobileNetworkTimeVerification(req, cb) {
+        return this.request("MobileNetworkTimeVerification", req, cb);
     }
     /**
      * 每次调用人脸核身SaaS化服务前，需先调用本接口获取BizToken，用来串联核身流程，在验证完成后，用于获取验证结果信息。

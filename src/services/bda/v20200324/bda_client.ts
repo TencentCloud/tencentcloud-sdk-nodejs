@@ -21,27 +21,32 @@ import {
   SegmentPortraitPicResponse,
   DetectBodyJointsResponse,
   Candidate,
+  VideoBasicInformation,
   DeletePersonRequest,
   ModifyGroupResponse,
-  UpperBodyClothSleeve,
+  TerminateSegmentationTaskResponse,
   BodyAttributeInfo,
   GetGroupListResponse,
   GroupInfo,
+  DescribeSegmentationTaskRequest,
   SegmentationOptions,
+  UpperBodyClothTexture,
+  TerminateSegmentationTaskRequest,
   ModifyGroupRequest,
   CreatePersonRequest,
   ModifyPersonInfoResponse,
-  Trace,
+  CreateSegmentationTaskResponse,
   DeleteGroupRequest,
   ModifyPersonInfoRequest,
   Gender,
   SegmentCustomizedPortraitPicRequest,
   CreateGroupRequest,
   LowerBodyCloth,
-  UpperBodyClothTexture,
+  CreateSegmentationTaskRequest,
   TraceInfo,
   DeleteGroupResponse,
   BodyRect,
+  DescribeSegmentationTaskResponse,
   DetectBodyRequest,
   Age,
   SearchTraceRequest,
@@ -50,6 +55,7 @@ import {
   PersonInfo,
   Bag,
   SegmentCustomizedPortraitPicResponse,
+  Trace,
   DetectBodyJointsRequest,
   SegmentPortraitPicRequest,
   UpperBodyClothColor,
@@ -57,6 +63,7 @@ import {
   BodyDetectResult,
   Orientation,
   BodyJointsResult,
+  UpperBodyClothSleeve,
   UpperBodyCloth,
   LowerBodyClothLength,
   SearchTraceResponse,
@@ -97,6 +104,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SearchTraceResponse) => void
   ): Promise<SearchTraceResponse> {
     return this.request("SearchTrace", req, cb)
+  }
+
+  /**
+   * 终止指定视频人像分割处理任务
+   */
+  async TerminateSegmentationTask(
+    req: TerminateSegmentationTaskRequest,
+    cb?: (error: string, rep: TerminateSegmentationTaskResponse) => void
+  ): Promise<TerminateSegmentationTaskResponse> {
+    return this.request("TerminateSegmentationTask", req, cb)
   }
 
   /**
@@ -200,6 +217,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 可以查看单条任务的处理情况，包括处理状态，处理结果。
+   */
+  async DescribeSegmentationTask(
+    req: DescribeSegmentationTaskRequest,
+    cb?: (error: string, rep: DescribeSegmentationTaskResponse) => void
+  ): Promise<DescribeSegmentationTaskResponse> {
+    return this.request("DescribeSegmentationTask", req, cb)
+  }
+
+  /**
      * 用于创建一个空的人体库，如果人体库已存在返回错误。
 
 1个APPID下最多有2000W个人体轨迹（Trace），最多1W个人体库（Group）。
@@ -250,5 +277,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetPersonListResponse) => void
   ): Promise<GetPersonListResponse> {
     return this.request("GetPersonList", req, cb)
+  }
+
+  /**
+   * 本接口为离线人像分割处理接口组中的提交任务接口，可以对提交的资源进行处理视频流/图片流识别视频作品中的人像区域，进行一键抠像、背景替换、人像虚化等后期处理。
+   */
+  async CreateSegmentationTask(
+    req: CreateSegmentationTaskRequest,
+    cb?: (error: string, rep: CreateSegmentationTaskResponse) => void
+  ): Promise<CreateSegmentationTaskResponse> {
+    return this.request("CreateSegmentationTask", req, cb)
   }
 }

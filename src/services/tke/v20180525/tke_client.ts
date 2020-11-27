@@ -55,6 +55,7 @@ import {
   CreateClusterEndpointVipResponse,
   DescribeClusterRoutesResponse,
   DescribeClustersRequest,
+  UpgradeClusterInstancesRequest,
   ExtensionAddon,
   RegionInstance,
   Label,
@@ -63,6 +64,7 @@ import {
   CreatePrometheusDashboardResponse,
   RouteTableConflict,
   DeleteClusterInstancesRequest,
+  UpgradeNodeResetParam,
   ModifyClusterAsGroupAttributeResponse,
   CreateClusterInstancesRequest,
   ManuallyAdded,
@@ -71,8 +73,10 @@ import {
   ClusterCIDRSettings,
   CreateClusterEndpointVipRequest,
   Taint,
+  CheckInstancesUpgradeAbleRequest,
   ExistedInstance,
   DescribeClusterNodePoolsResponse,
+  UpgradeAbleInstancesItem,
   AddNodeToNodePoolResponse,
   TagSpecification,
   DescribeRegionsRequest,
@@ -108,9 +112,11 @@ import {
   AcquireClusterAdminRoleResponse,
   DeleteClusterNodePoolRequest,
   DeleteClusterEndpointVipRequest,
+  CheckInstancesUpgradeAbleResponse,
   Cluster,
   DescribeClusterEndpointStatusResponse,
   CreatePrometheusDashboardRequest,
+  UpgradeClusterInstancesResponse,
   AddExistedInstancesResponse,
   DeleteClusterRouteTableResponse,
   DescribeClusterAsGroupOptionRequest,
@@ -152,6 +158,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("tke.tencentcloudapi.com", "2018-05-25", clientConfig)
+  }
+
+  /**
+   * 检查给定节点列表中哪些是可升级的
+   */
+  async CheckInstancesUpgradeAble(
+    req: CheckInstancesUpgradeAbleRequest,
+    cb?: (error: string, rep: CheckInstancesUpgradeAbleResponse) => void
+  ): Promise<CheckInstancesUpgradeAbleResponse> {
+    return this.request("CheckInstancesUpgradeAble", req, cb)
   }
 
   /**
@@ -402,6 +418,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateClusterNodePoolResponse) => void
   ): Promise<CreateClusterNodePoolResponse> {
     return this.request("CreateClusterNodePool", req, cb)
+  }
+
+  /**
+   * 给集群的一批work节点进行升级
+   */
+  async UpgradeClusterInstances(
+    req: UpgradeClusterInstancesRequest,
+    cb?: (error: string, rep: UpgradeClusterInstancesResponse) => void
+  ): Promise<UpgradeClusterInstancesResponse> {
+    return this.request("UpgradeClusterInstances", req, cb)
   }
 
   /**

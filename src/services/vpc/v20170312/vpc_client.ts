@@ -361,6 +361,7 @@ import {
   DeleteDirectConnectGatewayCcnRoutesRequest,
   CreateNatGatewayDestinationIpPortTranslationNatRuleRequest,
   CreateFlowLogRequest,
+  InquirePriceCreateDirectConnectGatewayRequest,
   AttachNetworkInterfaceResponse,
   DisassociateNatGatewayAddressRequest,
   DescribeServiceTemplatesResponse,
@@ -425,6 +426,7 @@ import {
   ModifyServiceTemplateGroupAttributeRequest,
   UnassignIpv6CidrBlockRequest,
   CCN,
+  InquirePriceCreateDirectConnectGatewayResponse,
   DeleteIp6TranslatorsRequest,
   Ip6Translator,
   DestinationIpPortTranslationNatRule,
@@ -973,6 +975,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AssignPrivateIpAddressesResponse) => void
   ): Promise<AssignPrivateIpAddressesResponse> {
     return this.request("AssignPrivateIpAddresses", req, cb)
+  }
+
+  /**
+   * 本接口（DescribePriceCreateDirectConnectGateway）用于创建专线网关询价。
+   */
+  async InquirePriceCreateDirectConnectGateway(
+    req?: InquirePriceCreateDirectConnectGatewayRequest,
+    cb?: (error: string, rep: InquirePriceCreateDirectConnectGatewayResponse) => void
+  ): Promise<InquirePriceCreateDirectConnectGatewayResponse> {
+    return this.request("InquirePriceCreateDirectConnectGateway", req, cb)
   }
 
   /**

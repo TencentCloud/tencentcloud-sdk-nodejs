@@ -41,6 +41,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SearchTrace", req, cb);
     }
     /**
+     * 终止指定视频人像分割处理任务
+     */
+    async TerminateSegmentationTask(req, cb) {
+        return this.request("TerminateSegmentationTask", req, cb);
+    }
+    /**
      * 检测给定图片中的人体（Body）的位置信息及属性信息。
 
      */
@@ -105,6 +111,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetGroupList", req, cb);
     }
     /**
+     * 可以查看单条任务的处理情况，包括处理状态，处理结果。
+     */
+    async DescribeSegmentationTask(req, cb) {
+        return this.request("DescribeSegmentationTask", req, cb);
+    }
+    /**
      * 用于创建一个空的人体库，如果人体库已存在返回错误。
 
 1个APPID下最多有2000W个人体轨迹（Trace），最多1W个人体库（Group）。
@@ -140,6 +152,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async GetPersonList(req, cb) {
         return this.request("GetPersonList", req, cb);
+    }
+    /**
+     * 本接口为离线人像分割处理接口组中的提交任务接口，可以对提交的资源进行处理视频流/图片流识别视频作品中的人像区域，进行一键抠像、背景替换、人像虚化等后期处理。
+     */
+    async CreateSegmentationTask(req, cb) {
+        return this.request("CreateSegmentationTask", req, cb);
     }
 }
 exports.Client = Client;

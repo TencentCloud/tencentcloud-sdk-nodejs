@@ -4096,6 +4096,11 @@ export interface ApiInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Tags: Array<Tag>;
+    /**
+      * API已发布的环境信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Environments: Array<string>;
 }
 /**
  * 环境限流

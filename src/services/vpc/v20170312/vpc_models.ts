@@ -7471,6 +7471,11 @@ export interface CreateFlowLogRequest {
 }
 
 /**
+ * InquirePriceCreateDirectConnectGateway请求参数结构体
+ */
+export type InquirePriceCreateDirectConnectGatewayRequest = null
+
+/**
  * AttachNetworkInterface返回参数结构体
  */
 export interface AttachNetworkInterfaceResponse {
@@ -8799,6 +8804,28 @@ export interface CCN {
    * 是否支持云联网路由优先级的功能。False：不支持，True：支持。
    */
   RoutePriorityFlag: boolean
+}
+
+/**
+ * InquirePriceCreateDirectConnectGateway返回参数结构体
+ */
+export interface InquirePriceCreateDirectConnectGatewayResponse {
+  /**
+      * 专线网关标准接入费用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCost?: number
+
+  /**
+      * 专线网关真实接入费用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RealTotalCost?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

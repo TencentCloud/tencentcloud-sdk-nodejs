@@ -617,11 +617,5 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     async DisassociateSecurityGroups(req, cb) {
         return this.request("DisassociateSecurityGroups", req, cb);
     }
-    /**
-     * 查询用户可购买的竞价机型信息列表
-     */
-    async DescribeSpotTypeConfig(req, cb) {
-        return this.request("DescribeSpotTypeConfig", req, cb);
-    }
 }
 exports.Client = Client;

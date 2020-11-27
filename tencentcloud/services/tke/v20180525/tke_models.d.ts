@@ -708,6 +708,45 @@ export interface DescribeClustersRequest {
     Filters?: Array<Filter>;
 }
 /**
+ * UpgradeClusterInstances请求参数结构体
+ */
+export interface UpgradeClusterInstancesRequest {
+    /**
+      * 集群ID
+      */
+    ClusterId: string;
+    /**
+      * create 表示开始一次升级任务
+pause 表示停止任务
+resume表示继续任务
+abort表示终止任务
+      */
+    Operation: string;
+    /**
+      * 升级类型，只有Operation是create需要设置
+reset 大版本重装升级
+hot 小版本热升级
+major 大版本原地升级
+      */
+    UpgradeType?: string;
+    /**
+      * 需要升级的节点列表
+      */
+    InstanceIds?: Array<string>;
+    /**
+      * 当节点重新加入集群时候所使用的参数，参考添加已有节点接口
+      */
+    ResetParam?: UpgradeNodeResetParam;
+    /**
+      * 是否忽略节点升级前检查
+      */
+    SkipPreCheck?: boolean;
+    /**
+      * 最大可容忍的不可用Pod比例
+      */
+    MaxNotReadyPercent?: number;
+}
+/**
  * 创建集群时，选择安装的扩展组件的信息
  */
 export interface ExtensionAddon {
@@ -873,6 +912,27 @@ export interface DeleteClusterInstancesRequest {
     ForceDelete?: boolean;
 }
 /**
+ * 节点升级重装参数
+ */
+export interface UpgradeNodeResetParam {
+    /**
+      * 实例额外需要设置参数信息
+      */
+    InstanceAdvancedSettings?: InstanceAdvancedSettings;
+    /**
+      * 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。若不指定该参数，则默认开启云监控、云安全服务。
+      */
+    EnhancedService?: EnhancedService;
+    /**
+      * 节点登录信息（目前仅支持使用Password或者单个KeyIds）
+      */
+    LoginSettings?: LoginSettings;
+    /**
+      * 实例所属安全组。该参数可以通过调用 DescribeSecurityGroups 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。（目前仅支持设置单个sgId）
+      */
+    SecurityGroupIds?: Array<string>;
+}
+/**
  * ModifyClusterAsGroupAttribute返回参数结构体
  */
 export interface ModifyClusterAsGroupAttributeResponse {
@@ -1009,6 +1069,35 @@ export interface Taint {
     Effect?: string;
 }
 /**
+ * CheckInstancesUpgradeAble请求参数结构体
+ */
+export interface CheckInstancesUpgradeAbleRequest {
+    /**
+      * 集群ID
+      */
+    ClusterId: string;
+    /**
+      * 节点列表，空为全部节点
+      */
+    InstanceIds?: Array<string>;
+    /**
+      * 升级类型
+      */
+    UpgradeType?: string;
+    /**
+      * 分页Offset
+      */
+    Offset?: number;
+    /**
+      * 分页Limit
+      */
+    Limit?: number;
+    /**
+      * 过滤
+      */
+    Filter?: Array<Filter>;
+}
+/**
  * 已经存在的实例信息
  */
 export interface ExistedInstance {
@@ -1100,6 +1189,24 @@ export interface DescribeClusterNodePoolsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 可升级节点信息
+ */
+export interface UpgradeAbleInstancesItem {
+    /**
+      * 节点Id
+      */
+    InstanceId: string;
+    /**
+      * 节点的当前版本
+      */
+    Version: string;
+    /**
+      * 当前版本的最新小版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LatestVersion: string;
 }
 /**
  * AddNodeToNodePool返回参数结构体
@@ -1779,6 +1886,33 @@ export interface DeleteClusterEndpointVipRequest {
     ClusterId: string;
 }
 /**
+ * CheckInstancesUpgradeAble返回参数结构体
+ */
+export interface CheckInstancesUpgradeAbleResponse {
+    /**
+      * 集群master当前小版本
+      */
+    ClusterVersion?: string;
+    /**
+      * 集群master对应的大版本目前最新小版本
+      */
+    LatestVersion?: string;
+    /**
+      * 可升级节点列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpgradeAbleInstances?: Array<UpgradeAbleInstancesItem>;
+    /**
+      * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Total?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 集群信息结构体
  */
 export interface Cluster {
@@ -1893,6 +2027,15 @@ export interface CreatePrometheusDashboardRequest {
 每一项是一个grafana dashboard的json定义
       */
     Contents: Array<string>;
+}
+/**
+ * UpgradeClusterInstances返回参数结构体
+ */
+export interface UpgradeClusterInstancesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * AddExistedInstances返回参数结构体

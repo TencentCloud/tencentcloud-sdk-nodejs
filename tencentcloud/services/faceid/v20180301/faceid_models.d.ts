@@ -419,6 +419,30 @@ export interface IdCardOCRVerificationRequest {
     ImageUrl?: string;
 }
 /**
+ * CheckPhoneAndName返回参数结构体
+ */
+export interface CheckPhoneAndNameResponse {
+    /**
+      * 认证结果码，收费情况如下。
+收费结果码：
+0: 验证结果一致
+1: 验证结果不一致
+不收费结果码：
+-1:查无记录
+-2:引擎未知错误
+-3:引擎服务异常
+      */
+    Result?: string;
+    /**
+      * 业务结果描述
+      */
+    Description?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * BankCard4EVerification返回参数结构体
  */
 export interface BankCard4EVerificationResponse {
@@ -816,6 +840,15 @@ export interface DetectInfoText {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Mobile: string;
+    /**
+      * 本次流程最终比对库源类型。包括：
+公安商业库；
+业务方自有库（用户上传照片、客户的混合库、混合部署库）；
+二次验证库；
+人工审核库；
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CompareLibType: string;
 }
 /**
  * DetectAuth请求参数结构体
@@ -1285,6 +1318,19 @@ export interface DetectInfoIdCardData {
     Avatar: string;
 }
 /**
+ * CheckPhoneAndName请求参数结构体
+ */
+export interface CheckPhoneAndNameRequest {
+    /**
+      * ⼿机号
+      */
+    Mobile: string;
+    /**
+      * 姓名
+      */
+    Name: string;
+}
+/**
  * LivenessCompare请求参数结构体
  */
 export interface LivenessCompareRequest {
@@ -1383,6 +1429,15 @@ export interface DetectDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Comparemsg: string;
+    /**
+      * 比对库源类型。包括：
+公安商业库；
+业务方自有库（用户上传照片、客户的混合库、混合部署库）；
+二次验证库；
+人工审核库；
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CompareLibType: string;
 }
 /**
  * GetFaceIdResult返回参数结构体

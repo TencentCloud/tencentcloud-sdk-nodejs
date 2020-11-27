@@ -68,9 +68,9 @@ it("faceid.v20180301.GetFaceIdToken", async function () {
     }
 })
 
-it("faceid.v20180301.MobileNetworkTimeVerification", async function () {
+it("faceid.v20180301.CheckPhoneAndName", async function () {
     try {
-       const data = await client.MobileNetworkTimeVerification({})
+       const data = await client.CheckPhoneAndName({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -181,6 +181,16 @@ it("faceid.v20180301.LivenessRecognition", async function () {
 it("faceid.v20180301.IdCardVerification", async function () {
     try {
        const data = await client.IdCardVerification({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("faceid.v20180301.MobileNetworkTimeVerification", async function () {
+    try {
+       const data = await client.MobileNetworkTimeVerification({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

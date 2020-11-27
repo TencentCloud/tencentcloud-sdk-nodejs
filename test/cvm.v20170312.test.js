@@ -688,14 +688,4 @@ it("cvm.v20170312.DisassociateSecurityGroups", async function () {
     }
 })
 
-it("cvm.v20170312.DescribeSpotTypeConfig", async function () {
-    try {
-       const data = await client.DescribeSpotTypeConfig({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 })

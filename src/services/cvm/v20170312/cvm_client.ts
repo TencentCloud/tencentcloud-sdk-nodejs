@@ -36,7 +36,7 @@ import {
   AssociateSecurityGroupsRequest,
   ResetInstancesTypeRequest,
   InquiryPriceResetInstanceRequest,
-  ModifyImageSharePermissionResponse,
+  RunInstancesRequest,
   DeleteImagesRequest,
   DescribeInstancesResponse,
   DescribeHostsResponse,
@@ -53,7 +53,7 @@ import {
   ImportKeyPairResponse,
   DescribeInstancesStatusResponse,
   ZoneInfo,
-  DescribeInstanceTypeConfigsRequest,
+  InquiryPriceModifyInstancesChargeTypeResponse,
   DescribeKeyPairsResponse,
   ResetInstancesPasswordRequest,
   InternetChargeTypeConfig,
@@ -61,7 +61,6 @@ import {
   ModifyInstancesVpcAttributeResponse,
   InquiryPriceResetInstancesTypeRequest,
   DescribeInstancesOperationLimitRequest,
-  DescribeSpotTypeConfigResponse,
   ModifyInstancesChargeTypeRequest,
   DescribeInstanceVncUrlRequest,
   ModifyImageSharePermissionRequest,
@@ -71,7 +70,7 @@ import {
   ReservedInstancePrice,
   ResetInstancesInternetMaxBandwidthResponse,
   ModifyInstancesAttributeResponse,
-  InquiryPriceModifyInstancesChargeTypeResponse,
+  ModifyImageSharePermissionResponse,
   DescribeInstancesOperationLimitResponse,
   SyncImagesResponse,
   DescribeZoneInstanceConfigInfosResponse,
@@ -136,8 +135,7 @@ import {
   DescribeImageSharePermissionRequest,
   DisasterRecoverGroup,
   InquiryPriceResetInstanceResponse,
-  RunInstancesRequest,
-  Filter,
+  DescribeInstanceTypeConfigsRequest,
   InquiryPriceResetInstancesInternetMaxBandwidthRequest,
   ModifyHostsAttributeResponse,
   DescribeDisasterRecoverGroupQuotaRequest,
@@ -164,7 +162,6 @@ import {
   ModifyDisasterRecoverGroupAttributeRequest,
   ReservedInstancePriceItem,
   RebootInstancesResponse,
-  DescribeSpotTypeConfigRequest,
   InquiryPriceResetInstancesTypeResponse,
   ReservedInstancesOffering,
   OsVersion,
@@ -186,6 +183,7 @@ import {
   RenewInstancesResponse,
   RunMonitorServiceEnabled,
   ResetInstanceResponse,
+  Filter,
   VirtualPrivateCloud,
   InternetBandwidthConfig,
   ModifyDisasterRecoverGroupAttributeResponse,
@@ -1069,15 +1067,5 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     cb?: (error: string, rep: DisassociateSecurityGroupsResponse) => void
   ): Promise<DisassociateSecurityGroupsResponse> {
     return this.request("DisassociateSecurityGroups", req, cb)
-  }
-
-  /**
-   * 查询用户可购买的竞价机型信息列表
-   */
-  async DescribeSpotTypeConfig(
-    req?: DescribeSpotTypeConfigRequest,
-    cb?: (error: string, rep: DescribeSpotTypeConfigResponse) => void
-  ): Promise<DescribeSpotTypeConfigResponse> {
-    return this.request("DescribeSpotTypeConfig", req, cb)
   }
 }

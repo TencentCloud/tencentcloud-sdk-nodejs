@@ -35,6 +35,7 @@ import {
   DetectAuthResponse,
   PhoneVerificationResponse,
   IdCardOCRVerificationRequest,
+  CheckPhoneAndNameResponse,
   BankCard4EVerificationResponse,
   MobileStatusRequest,
   LivenessRecognitionResponse,
@@ -64,6 +65,7 @@ import {
   BankCard2EVerificationResponse,
   IdCardVerificationResponse,
   DetectInfoIdCardData,
+  CheckPhoneAndNameRequest,
   LivenessCompareRequest,
   DetectDetail,
   GetFaceIdResultResponse,
@@ -129,13 +131,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于查询手机号在网时长，输入手机号进行查询。
+   * 本接口用于校验手机号和姓名的真实性和一致性。
    */
-  async MobileNetworkTimeVerification(
-    req: MobileNetworkTimeVerificationRequest,
-    cb?: (error: string, rep: MobileNetworkTimeVerificationResponse) => void
-  ): Promise<MobileNetworkTimeVerificationResponse> {
-    return this.request("MobileNetworkTimeVerification", req, cb)
+  async CheckPhoneAndName(
+    req: CheckPhoneAndNameRequest,
+    cb?: (error: string, rep: CheckPhoneAndNameResponse) => void
+  ): Promise<CheckPhoneAndNameResponse> {
+    return this.request("CheckPhoneAndName", req, cb)
   }
 
   /**
@@ -246,6 +248,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: IdCardVerificationResponse) => void
   ): Promise<IdCardVerificationResponse> {
     return this.request("IdCardVerification", req, cb)
+  }
+
+  /**
+   * 本接口用于查询手机号在网时长，输入手机号进行查询。
+   */
+  async MobileNetworkTimeVerification(
+    req: MobileNetworkTimeVerificationRequest,
+    cb?: (error: string, rep: MobileNetworkTimeVerificationResponse) => void
+  ): Promise<MobileNetworkTimeVerificationResponse> {
+    return this.request("MobileNetworkTimeVerification", req, cb)
   }
 
   /**

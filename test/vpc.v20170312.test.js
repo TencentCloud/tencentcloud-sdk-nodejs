@@ -408,6 +408,16 @@ it("vpc.v20170312.AssignPrivateIpAddresses", async function () {
     }
 })
 
+it("vpc.v20170312.InquirePriceCreateDirectConnectGateway", async function () {
+    try {
+       const data = await client.InquirePriceCreateDirectConnectGateway({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.CreateAndAttachNetworkInterface", async function () {
     try {
        const data = await client.CreateAndAttachNetworkInterface({})

@@ -279,6 +279,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AssignPrivateIpAddresses", req, cb);
     }
     /**
+     * 本接口（DescribePriceCreateDirectConnectGateway）用于创建专线网关询价。
+     */
+    async InquirePriceCreateDirectConnectGateway(req, cb) {
+        return this.request("InquirePriceCreateDirectConnectGateway", req, cb);
+    }
+    /**
      * 本接口（CreateAndAttachNetworkInterface）用于创建弹性网卡并绑定云服务器。
 * 创建弹性网卡时可以指定内网IP，并且可以指定一个主IP，指定的内网IP必须在弹性网卡所在子网内，而且不能被占用。
 * 创建弹性网卡时可以指定需要申请的内网IP数量，系统会随机生成内网IP地址。

@@ -28,6 +28,16 @@ it("bda.v20200324.SearchTrace", async function () {
     }
 })
 
+it("bda.v20200324.TerminateSegmentationTask", async function () {
+    try {
+       const data = await client.TerminateSegmentationTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bda.v20200324.DetectBody", async function () {
     try {
        const data = await client.DetectBody({})
@@ -118,6 +128,16 @@ it("bda.v20200324.GetGroupList", async function () {
     }
 })
 
+it("bda.v20200324.DescribeSegmentationTask", async function () {
+    try {
+       const data = await client.DescribeSegmentationTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bda.v20200324.CreateGroup", async function () {
     try {
        const data = await client.CreateGroup({})
@@ -151,6 +171,16 @@ it("bda.v20200324.SegmentCustomizedPortraitPic", async function () {
 it("bda.v20200324.GetPersonList", async function () {
     try {
        const data = await client.GetPersonList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bda.v20200324.CreateSegmentationTask", async function () {
+    try {
+       const data = await client.CreateSegmentationTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

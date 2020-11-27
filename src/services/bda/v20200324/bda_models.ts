@@ -76,6 +76,36 @@ export interface Candidate {
 }
 
 /**
+ * 视频基础信息
+ */
+export interface VideoBasicInformation {
+  /**
+   * 视频宽度
+   */
+  FrameWidth: number
+
+  /**
+   * 视频高度
+   */
+  FrameHeight: number
+
+  /**
+   * 视频帧速率(FPS)
+   */
+  FramesPerSecond: number
+
+  /**
+   * 视频时长
+   */
+  Duration: number
+
+  /**
+   * 视频帧数
+   */
+  TotalFrames: number
+}
+
+/**
  * DeletePerson请求参数结构体
  */
 export interface DeletePersonRequest {
@@ -96,18 +126,13 @@ export interface ModifyGroupResponse {
 }
 
 /**
- * 上衣衣袖信息。
+ * TerminateSegmentationTask返回参数结构体
  */
-export interface UpperBodyClothSleeve {
+export interface TerminateSegmentationTaskResponse {
   /**
-   * 上衣衣袖信息, 返回值为以下集合中的一个 {长袖, 短袖}。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Type: string
-
-  /**
-   * Type识别概率值，[0.0,1.0],代表判断正确的概率。如0.8则代表有Type值有80%概率正确。
-   */
-  Probability: number
+  RequestId?: string
 }
 
 /**
@@ -206,6 +231,16 @@ export interface GroupInfo {
 Unix 纪元时间是 1970 年 1 月 1 日星期四，协调世界时 (UTC) 。
       */
   CreationTimestamp: number
+}
+
+/**
+ * DescribeSegmentationTask请求参数结构体
+ */
+export interface DescribeSegmentationTaskRequest {
+  /**
+   * 在提交分割任务成功时返回的任务标识ID。
+   */
+  TaskID: string
 }
 
 /**
@@ -319,6 +354,31 @@ export interface SegmentationOptions {
 }
 
 /**
+ * 上衣纹理信息。
+ */
+export interface UpperBodyClothTexture {
+  /**
+   * 上衣纹理信息，返回值为以下集合中的一个, {纯色, 格子, 大色块}。
+   */
+  Type: string
+
+  /**
+   * Type识别概率值，[0.0,1.0], 代表判断正确的概率。如0.8则代表有Type值有80%概率正确。
+   */
+  Probability: number
+}
+
+/**
+ * TerminateSegmentationTask请求参数结构体
+ */
+export interface TerminateSegmentationTaskRequest {
+  /**
+   * 在提交分割任务成功时返回的任务标识ID。
+   */
+  TaskID: string
+}
+
+/**
  * ModifyGroup请求参数结构体
  */
 export interface ModifyGroupRequest {
@@ -375,35 +435,23 @@ export interface ModifyPersonInfoResponse {
 }
 
 /**
- * 人体轨迹信息
+ * CreateSegmentationTask返回参数结构体
  */
-export interface Trace {
+export interface CreateSegmentationTaskResponse {
   /**
-      * 人体轨迹图片 Base64 数组。 
-数组长度最小为1最大为5。 
-单个图片 base64 编码后大小不可超过2M。 
-支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
-      */
-  Images?: Array<string>
+   * 任务标识ID,可以用与追溯任务状态，查看任务结果
+   */
+  TaskID?: string
 
   /**
-      * 人体轨迹图片 Url 数组。 
-数组长度最小为1最大为5。 
-单个图片 base64 编码后大小不可超过2M。 
-Urls、Images必须提供一个，如果都提供，只使用 Urls。 
-图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
-非腾讯云存储的Url速度和稳定性可能受一定影响。 
-支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
-      */
-  Urls?: Array<string>
+   * 预估处理时间，单位为秒
+   */
+  EstimatedProcessingTime?: number
 
   /**
-      * 若输入的Images 和 Urls 是已经裁剪后的人体小图，则可以忽略本参数。 
-若否，或图片中包含多个人体，则需要通过本参数来指定图片中的人体框。 
-顺序对应 Images 或 Urls 中的顺序。  
-当不输入本参数时，我们将认为输入图片已是经过裁剪后的人体小图，不会进行人体检测而直接进行特征提取处理。
-      */
-  BodyRects?: Array<BodyRect>
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -522,18 +570,25 @@ export interface LowerBodyCloth {
 }
 
 /**
- * 上衣纹理信息。
+ * CreateSegmentationTask请求参数结构体
  */
-export interface UpperBodyClothTexture {
+export interface CreateSegmentationTaskRequest {
   /**
-   * 上衣纹理信息，返回值为以下集合中的一个, {纯色, 格子, 大色块}。
+   * 需要分割的视频URL，可外网访问。
    */
-  Type: string
+  VideoUrl: string
 
   /**
-   * Type识别概率值，[0.0,1.0], 代表判断正确的概率。如0.8则代表有Type值有80%概率正确。
+      * 背景图片URL。 
+可以将视频背景替换为输入的图片。 
+如果不输入背景图片，则输出人像区域mask。
+      */
+  BackgroundImageUrl?: string
+
+  /**
+   * 预留字段，后期用于展示更多识别信息。
    */
-  Probability: number
+  Config?: string
 }
 
 /**
@@ -584,6 +639,48 @@ export interface BodyRect {
    * 人体高度。
    */
   Height: number
+}
+
+/**
+ * DescribeSegmentationTask返回参数结构体
+ */
+export interface DescribeSegmentationTaskResponse {
+  /**
+      * 当前任务状态：
+QUEUING 排队中
+PROCESSING 处理中
+FINISHED 处理完成
+      */
+  TaskStatus?: string
+
+  /**
+      * 分割后视频URL, 存储于腾讯云COS
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResultVideoUrl?: string
+
+  /**
+      * 分割后视频MD5，用于校验
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResultVideoMD5?: string
+
+  /**
+      * 视频基本信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VideoBasicInformation?: VideoBasicInformation
+
+  /**
+      * 分割任务错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrorMsg?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -766,6 +863,38 @@ export interface SegmentCustomizedPortraitPicResponse {
 }
 
 /**
+ * 人体轨迹信息
+ */
+export interface Trace {
+  /**
+      * 人体轨迹图片 Base64 数组。 
+数组长度最小为1最大为5。 
+单个图片 base64 编码后大小不可超过2M。 
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+      */
+  Images?: Array<string>
+
+  /**
+      * 人体轨迹图片 Url 数组。 
+数组长度最小为1最大为5。 
+单个图片 base64 编码后大小不可超过2M。 
+Urls、Images必须提供一个，如果都提供，只使用 Urls。 
+图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
+非腾讯云存储的Url速度和稳定性可能受一定影响。 
+支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+      */
+  Urls?: Array<string>
+
+  /**
+      * 若输入的Images 和 Urls 是已经裁剪后的人体小图，则可以忽略本参数。 
+若否，或图片中包含多个人体，则需要通过本参数来指定图片中的人体框。 
+顺序对应 Images 或 Urls 中的顺序。  
+当不输入本参数时，我们将认为输入图片已是经过裁剪后的人体小图，不会进行人体检测而直接进行特征提取处理。
+      */
+  BodyRects?: Array<BodyRect>
+}
+
+/**
  * DetectBodyJoints请求参数结构体
  */
 export interface DetectBodyJointsRequest {
@@ -893,6 +1022,21 @@ export interface BodyJointsResult {
    * 检测出的人体置信度，0-1之间，数值越高越准确。
    */
   Confidence: number
+}
+
+/**
+ * 上衣衣袖信息。
+ */
+export interface UpperBodyClothSleeve {
+  /**
+   * 上衣衣袖信息, 返回值为以下集合中的一个 {长袖, 短袖}。
+   */
+  Type: string
+
+  /**
+   * Type识别概率值，[0.0,1.0],代表判断正确的概率。如0.8则代表有Type值有80%概率正确。
+   */
+  Probability: number
 }
 
 /**

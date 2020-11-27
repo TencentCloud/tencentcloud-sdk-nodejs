@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { SegmentPortraitPicResponse, DetectBodyJointsResponse, DeletePersonRequest, ModifyGroupResponse, GetGroupListResponse, ModifyGroupRequest, CreatePersonRequest, ModifyPersonInfoResponse, DeleteGroupRequest, ModifyPersonInfoRequest, SegmentCustomizedPortraitPicRequest, CreateGroupRequest, DeleteGroupResponse, DetectBodyRequest, SearchTraceRequest, DetectBodyResponse, SegmentCustomizedPortraitPicResponse, DetectBodyJointsRequest, SegmentPortraitPicRequest, GetGroupListRequest, SearchTraceResponse, CreateTraceResponse, CreatePersonResponse, GetPersonListResponse, GetPersonListRequest, CreateTraceRequest, DeletePersonResponse, CreateGroupResponse } from "./bda_models";
+import { SegmentPortraitPicResponse, DetectBodyJointsResponse, DeletePersonRequest, ModifyGroupResponse, TerminateSegmentationTaskResponse, GetGroupListResponse, DescribeSegmentationTaskRequest, TerminateSegmentationTaskRequest, ModifyGroupRequest, CreatePersonRequest, ModifyPersonInfoResponse, CreateSegmentationTaskResponse, DeleteGroupRequest, ModifyPersonInfoRequest, SegmentCustomizedPortraitPicRequest, CreateGroupRequest, CreateSegmentationTaskRequest, DeleteGroupResponse, DescribeSegmentationTaskResponse, DetectBodyRequest, SearchTraceRequest, DetectBodyResponse, SegmentCustomizedPortraitPicResponse, DetectBodyJointsRequest, SegmentPortraitPicRequest, GetGroupListRequest, SearchTraceResponse, CreateTraceResponse, CreatePersonResponse, GetPersonListResponse, GetPersonListRequest, CreateTraceRequest, DeletePersonResponse, CreateGroupResponse } from "./bda_models";
 /**
  * bda client
  * @class
@@ -18,6 +18,10 @@ export declare class Client extends AbstractClient {
 - 构成人体轨迹单张图片大小不得超过2M，分辨率不得超过1920*1080。
      */
     SearchTrace(req: SearchTraceRequest, cb?: (error: string, rep: SearchTraceResponse) => void): Promise<SearchTraceResponse>;
+    /**
+     * 终止指定视频人像分割处理任务
+     */
+    TerminateSegmentationTask(req: TerminateSegmentationTaskRequest, cb?: (error: string, rep: TerminateSegmentationTaskResponse) => void): Promise<TerminateSegmentationTaskResponse>;
     /**
      * 检测给定图片中的人体（Body）的位置信息及属性信息。
 
@@ -65,6 +69,10 @@ export declare class Client extends AbstractClient {
      */
     GetGroupList(req: GetGroupListRequest, cb?: (error: string, rep: GetGroupListResponse) => void): Promise<GetGroupListResponse>;
     /**
+     * 可以查看单条任务的处理情况，包括处理状态，处理结果。
+     */
+    DescribeSegmentationTask(req: DescribeSegmentationTaskRequest, cb?: (error: string, rep: DescribeSegmentationTaskResponse) => void): Promise<DescribeSegmentationTaskResponse>;
+    /**
      * 用于创建一个空的人体库，如果人体库已存在返回错误。
 
 1个APPID下最多有2000W个人体轨迹（Trace），最多1W个人体库（Group）。
@@ -93,4 +101,8 @@ export declare class Client extends AbstractClient {
      * 获取指定人体库中的人员列表。
      */
     GetPersonList(req: GetPersonListRequest, cb?: (error: string, rep: GetPersonListResponse) => void): Promise<GetPersonListResponse>;
+    /**
+     * 本接口为离线人像分割处理接口组中的提交任务接口，可以对提交的资源进行处理视频流/图片流识别视频作品中的人像区域，进行一键抠像、背景替换、人像虚化等后期处理。
+     */
+    CreateSegmentationTask(req: CreateSegmentationTaskRequest, cb?: (error: string, rep: CreateSegmentationTaskResponse) => void): Promise<CreateSegmentationTaskResponse>;
 }

@@ -18,6 +18,16 @@ const client = new tencentcloud.tke.v20180525.Client({
 })
 describe("tke.v20180525.test.js", function () {
 
+it("tke.v20180525.CheckInstancesUpgradeAble", async function () {
+    try {
+       const data = await client.CheckInstancesUpgradeAble({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.CreateCluster", async function () {
     try {
        const data = await client.CreateCluster({})
@@ -261,6 +271,16 @@ it("tke.v20180525.DescribeClusterAsGroups", async function () {
 it("tke.v20180525.CreateClusterNodePool", async function () {
     try {
        const data = await client.CreateClusterNodePool({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.UpgradeClusterInstances", async function () {
+    try {
+       const data = await client.UpgradeClusterInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

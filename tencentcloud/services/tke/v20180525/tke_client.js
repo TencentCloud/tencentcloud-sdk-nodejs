@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("tke.tencentcloudapi.com", "2018-05-25", clientConfig);
     }
     /**
+     * 检查给定节点列表中哪些是可升级的
+     */
+    async CheckInstancesUpgradeAble(req, cb) {
+        return this.request("CheckInstancesUpgradeAble", req, cb);
+    }
+    /**
      * 创建集群
      */
     async CreateCluster(req, cb) {
@@ -176,6 +182,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateClusterNodePool(req, cb) {
         return this.request("CreateClusterNodePool", req, cb);
+    }
+    /**
+     * 给集群的一批work节点进行升级
+     */
+    async UpgradeClusterInstances(req, cb) {
+        return this.request("UpgradeClusterInstances", req, cb);
     }
     /**
      * 创建集群访问端口(独立集群开启内网/外网访问，托管集群支持开启内网访问)
