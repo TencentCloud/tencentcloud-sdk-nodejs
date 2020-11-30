@@ -71,7 +71,7 @@ import {
   VerifyFaceRequest,
   GetPersonListResponse,
   Hair,
-  GetPersonListNumRequest,
+  CheckSimilarPersonResponse,
   Result,
   GetPersonGroupInfoResponse,
   UpgradeGroupFaceModelVersionResponse,
@@ -84,6 +84,7 @@ import {
   FaceQualityCompleteness,
   FaceAttributesInfo,
   VerifyPersonRequest,
+  CompareMaskFaceResponse,
   ModifyPersonBaseInfoRequest,
   DetectLiveFaceAccurateRequest,
   JobIdInfo,
@@ -93,6 +94,7 @@ import {
   SearchPersonsRequest,
   PersonInfo,
   GroupExDescriptionInfo,
+  CompareMaskFaceRequest,
   AnalyzeFaceResponse,
   DetectFaceRequest,
   GetPersonBaseInfoRequest,
@@ -112,7 +114,7 @@ import {
   CompareFaceRequest,
   VerifyPersonResponse,
   DetectFaceResponse,
-  CheckSimilarPersonResponse,
+  GetPersonListNumRequest,
   Eyebrow,
   GetGroupInfoRequest,
   UpgradeJobInfo,
@@ -170,18 +172,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 用于创建一个空的人员库，如果人员库已存在返回错误。
-可根据需要创建自定义描述字段，用于辅助描述该人员库下的人员信息。
-
-1个APPID下最多创建10万个人员库（Group）、最多包含5000万张人脸（Face）。
-
-不同算法模型版本（FaceModelVersion）的人员库（Group）最多可包含人脸（Face）数不同。算法模型版本为2.0的人员库最多包含100万张人脸，算法模型版本为3.0的人员库最多可包含300万张人脸。
-     */
-  async CreateGroup(
-    req: CreateGroupRequest,
-    cb?: (error: string, rep: CreateGroupResponse) => void
-  ): Promise<CreateGroupResponse> {
-    return this.request("CreateGroup", req, cb)
+   * 获取指定人员的信息，包括加入的人员库、描述内容等。
+   */
+  async GetPersonGroupInfo(
+    req: GetPersonGroupInfoRequest,
+    cb?: (error: string, rep: GetPersonGroupInfoResponse) => void
+  ): Promise<GetPersonGroupInfoResponse> {
+    return this.request("GetPersonGroupInfo", req, cb)
   }
 
   /**
@@ -259,13 +256,18 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取指定人员的信息，包括加入的人员库、描述内容等。
-   */
-  async GetPersonGroupInfo(
-    req: GetPersonGroupInfoRequest,
-    cb?: (error: string, rep: GetPersonGroupInfoResponse) => void
-  ): Promise<GetPersonGroupInfoResponse> {
-    return this.request("GetPersonGroupInfo", req, cb)
+     * 用于创建一个空的人员库，如果人员库已存在返回错误。
+可根据需要创建自定义描述字段，用于辅助描述该人员库下的人员信息。
+
+1个APPID下最多创建10万个人员库（Group）、最多包含5000万张人脸（Face）。
+
+不同算法模型版本（FaceModelVersion）的人员库（Group）最多可包含人脸（Face）数不同。算法模型版本为2.0的人员库最多包含100万张人脸，算法模型版本为3.0的人员库最多可包含300万张人脸。
+     */
+  async CreateGroup(
+    req: CreateGroupRequest,
+    cb?: (error: string, rep: CreateGroupResponse) => void
+  ): Promise<CreateGroupResponse> {
+    return this.request("CreateGroup", req, cb)
   }
 
   /**
@@ -423,6 +425,20 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreatePersonResponse) => void
   ): Promise<CreatePersonResponse> {
     return this.request("CreatePerson", req, cb)
+  }
+
+  /**
+     * 对两张图片中的人脸进行相似度比对，返回人脸相似度分数。
+
+戴口罩人脸比对接口可在查询照人脸戴口罩情况下使用，口罩遮挡程度最高可以遮挡鼻尖。
+
+如图片人脸不存在戴口罩情况，建议使用人脸比对服务。
+     */
+  async CompareMaskFace(
+    req: CompareMaskFaceRequest,
+    cb?: (error: string, rep: CompareMaskFaceResponse) => void
+  ): Promise<CompareMaskFaceResponse> {
+    return this.request("CompareMaskFace", req, cb)
   }
 
   /**

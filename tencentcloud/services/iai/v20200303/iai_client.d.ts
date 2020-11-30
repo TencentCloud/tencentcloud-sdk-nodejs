@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DetectFaceAttributesResponse, SearchPersonsReturnsByGroupResponse, CreatePersonRequest, CreateFaceResponse, CreateFaceRequest, CreateGroupRequest, GetPersonGroupInfoRequest, CheckSimilarPersonRequest, AnalyzeDenseLandmarksRequest, GetGroupListRequest, GetUpgradeGroupFaceModelVersionJobListRequest, GetUpgradeGroupFaceModelVersionResultResponse, DetectLiveFaceAccurateResponse, AnalyzeFaceRequest, CreatePersonResponse, SearchFacesResponse, CopyPersonResponse, EstimateCheckSimilarPersonCostTimeResponse, DeleteFaceResponse, DeletePersonRequest, DetectLiveFaceResponse, DeleteFaceRequest, ModifyGroupRequest, DeleteGroupRequest, EstimateCheckSimilarPersonCostTimeRequest, RevertGroupFaceModelVersionResponse, UpgradeGroupFaceModelVersionRequest, DetectLiveFaceRequest, GetPersonBaseInfoResponse, GetSimilarPersonResultRequest, SearchPersonsResponse, GetUpgradeGroupFaceModelVersionResultRequest, SearchFacesReturnsByGroupResponse, CopyPersonRequest, SearchPersonsReturnsByGroupRequest, DeletePersonFromGroupResponse, GetCheckSimilarPersonJobIdListResponse, GetPersonListNumResponse, DeletePersonFromGroupRequest, VerifyFaceRequest, GetPersonListResponse, GetPersonListNumRequest, GetPersonGroupInfoResponse, UpgradeGroupFaceModelVersionResponse, SearchFacesReturnsByGroupRequest, AnalyzeDenseLandmarksResponse, ModifyPersonBaseInfoResponse, GetSimilarPersonResultResponse, ModifyPersonGroupInfoRequest, RevertGroupFaceModelVersionRequest, VerifyPersonRequest, ModifyPersonBaseInfoRequest, DetectLiveFaceAccurateRequest, SearchFacesRequest, GetCheckSimilarPersonJobIdListRequest, SearchPersonsRequest, AnalyzeFaceResponse, DetectFaceRequest, GetPersonBaseInfoRequest, DeletePersonResponse, GetUpgradeGroupFaceModelVersionJobListResponse, GetGroupListResponse, DetectFaceAttributesRequest, GetGroupInfoResponse, CompareFaceResponse, VerifyFaceResponse, DeleteGroupResponse, CompareFaceRequest, VerifyPersonResponse, DetectFaceResponse, CheckSimilarPersonResponse, GetGroupInfoRequest, ModifyGroupResponse, GetPersonListRequest, ModifyPersonGroupInfoResponse, CreateGroupResponse } from "./iai_models";
+import { DetectFaceAttributesResponse, SearchPersonsReturnsByGroupResponse, CreatePersonRequest, CreateFaceResponse, CreateFaceRequest, CreateGroupRequest, GetPersonGroupInfoRequest, CheckSimilarPersonRequest, AnalyzeDenseLandmarksRequest, GetGroupListRequest, GetUpgradeGroupFaceModelVersionJobListRequest, GetUpgradeGroupFaceModelVersionResultResponse, DetectLiveFaceAccurateResponse, AnalyzeFaceRequest, CreatePersonResponse, SearchFacesResponse, CopyPersonResponse, EstimateCheckSimilarPersonCostTimeResponse, DeleteFaceResponse, DeletePersonRequest, DetectLiveFaceResponse, DeleteFaceRequest, ModifyGroupRequest, DeleteGroupRequest, EstimateCheckSimilarPersonCostTimeRequest, RevertGroupFaceModelVersionResponse, UpgradeGroupFaceModelVersionRequest, DetectLiveFaceRequest, GetPersonBaseInfoResponse, GetSimilarPersonResultRequest, SearchPersonsResponse, GetUpgradeGroupFaceModelVersionResultRequest, SearchFacesReturnsByGroupResponse, CopyPersonRequest, SearchPersonsReturnsByGroupRequest, DeletePersonFromGroupResponse, GetCheckSimilarPersonJobIdListResponse, GetPersonListNumResponse, DeletePersonFromGroupRequest, VerifyFaceRequest, GetPersonListResponse, CheckSimilarPersonResponse, GetPersonGroupInfoResponse, UpgradeGroupFaceModelVersionResponse, SearchFacesReturnsByGroupRequest, AnalyzeDenseLandmarksResponse, ModifyPersonBaseInfoResponse, GetSimilarPersonResultResponse, ModifyPersonGroupInfoRequest, RevertGroupFaceModelVersionRequest, VerifyPersonRequest, CompareMaskFaceResponse, ModifyPersonBaseInfoRequest, DetectLiveFaceAccurateRequest, SearchFacesRequest, GetCheckSimilarPersonJobIdListRequest, SearchPersonsRequest, CompareMaskFaceRequest, AnalyzeFaceResponse, DetectFaceRequest, GetPersonBaseInfoRequest, DeletePersonResponse, GetUpgradeGroupFaceModelVersionJobListResponse, GetGroupListResponse, DetectFaceAttributesRequest, GetGroupInfoResponse, CompareFaceResponse, VerifyFaceResponse, DeleteGroupResponse, CompareFaceRequest, VerifyPersonResponse, DetectFaceResponse, GetPersonListNumRequest, GetGroupInfoRequest, ModifyGroupResponse, GetPersonListRequest, ModifyPersonGroupInfoResponse, CreateGroupResponse } from "./iai_models";
 /**
  * iai client
  * @class
@@ -31,14 +31,9 @@ export declare class Client extends AbstractClient {
      */
     SearchFacesReturnsByGroup(req: SearchFacesReturnsByGroupRequest, cb?: (error: string, rep: SearchFacesReturnsByGroupResponse) => void): Promise<SearchFacesReturnsByGroupResponse>;
     /**
-     * 用于创建一个空的人员库，如果人员库已存在返回错误。
-可根据需要创建自定义描述字段，用于辅助描述该人员库下的人员信息。
-
-1个APPID下最多创建10万个人员库（Group）、最多包含5000万张人脸（Face）。
-
-不同算法模型版本（FaceModelVersion）的人员库（Group）最多可包含人脸（Face）数不同。算法模型版本为2.0的人员库最多包含100万张人脸，算法模型版本为3.0的人员库最多可包含300万张人脸。
+     * 获取指定人员的信息，包括加入的人员库、描述内容等。
      */
-    CreateGroup(req: CreateGroupRequest, cb?: (error: string, rep: CreateGroupResponse) => void): Promise<CreateGroupResponse>;
+    GetPersonGroupInfo(req: GetPersonGroupInfoRequest, cb?: (error: string, rep: GetPersonGroupInfoResponse) => void): Promise<GetPersonGroupInfoResponse>;
     /**
      * 获取人员查重任务列表，按任务创建时间逆序（最新的在前面）。
 
@@ -78,9 +73,14 @@ export declare class Client extends AbstractClient {
      */
     GetPersonListNum(req: GetPersonListNumRequest, cb?: (error: string, rep: GetPersonListNumResponse) => void): Promise<GetPersonListNumResponse>;
     /**
-     * 获取指定人员的信息，包括加入的人员库、描述内容等。
+     * 用于创建一个空的人员库，如果人员库已存在返回错误。
+可根据需要创建自定义描述字段，用于辅助描述该人员库下的人员信息。
+
+1个APPID下最多创建10万个人员库（Group）、最多包含5000万张人脸（Face）。
+
+不同算法模型版本（FaceModelVersion）的人员库（Group）最多可包含人脸（Face）数不同。算法模型版本为2.0的人员库最多包含100万张人脸，算法模型版本为3.0的人员库最多可包含300万张人脸。
      */
-    GetPersonGroupInfo(req: GetPersonGroupInfoRequest, cb?: (error: string, rep: GetPersonGroupInfoResponse) => void): Promise<GetPersonGroupInfoResponse>;
+    CreateGroup(req: CreateGroupRequest, cb?: (error: string, rep: CreateGroupResponse) => void): Promise<CreateGroupResponse>;
     /**
      * 对请求图片进行五官定位（也称人脸关键点定位），计算构成人脸轮廓的 90 个点，包括眉毛（左右各 8 点）、眼睛（左右各 8 点）、鼻子（13 点）、嘴巴（22 点）、脸型轮廓（21 点）、眼珠[或瞳孔]（2点）。
 
@@ -166,6 +166,14 @@ export declare class Client extends AbstractClient {
 - 公共参数中的签名方式请使用V3版本，即配置SignatureMethod参数为TC3-HMAC-SHA256。
      */
     CreatePerson(req: CreatePersonRequest, cb?: (error: string, rep: CreatePersonResponse) => void): Promise<CreatePersonResponse>;
+    /**
+     * 对两张图片中的人脸进行相似度比对，返回人脸相似度分数。
+
+戴口罩人脸比对接口可在查询照人脸戴口罩情况下使用，口罩遮挡程度最高可以遮挡鼻尖。
+
+如图片人脸不存在戴口罩情况，建议使用人脸比对服务。
+     */
+    CompareMaskFace(req: CompareMaskFaceRequest, cb?: (error: string, rep: CompareMaskFaceResponse) => void): Promise<CompareMaskFaceResponse>;
     /**
      * 获取人员库升级任务列表
 

@@ -128,6 +128,16 @@ it("cdb.v20170320.ModifyDBInstanceName", async function () {
     }
 })
 
+it("cdb.v20170320.StopRollback", async function () {
+    try {
+       const data = await client.StopRollback({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.OfflineIsolatedInstances", async function () {
     try {
        const data = await client.OfflineIsolatedInstances({})
@@ -291,6 +301,16 @@ it("cdb.v20170320.DescribeAccountPrivileges", async function () {
 it("cdb.v20170320.ReleaseIsolatedDBInstances", async function () {
     try {
        const data = await client.ReleaseIsolatedDBInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdb.v20170320.CreateCloneInstance", async function () {
+    try {
+       const data = await client.CreateCloneInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -551,16 +571,6 @@ it("cdb.v20170320.DescribeAuditLogFiles", async function () {
 it("cdb.v20170320.DescribeInstanceParamRecords", async function () {
     try {
        const data = await client.DescribeInstanceParamRecords({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cdb.v20170320.DeleteAuditRule", async function () {
-    try {
-       const data = await client.DeleteAuditRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -888,9 +898,9 @@ it("cdb.v20170320.ModifyBackupConfig", async function () {
     }
 })
 
-it("cdb.v20170320.ModifyDBInstanceProject", async function () {
+it("cdb.v20170320.DescribeAuditRules", async function () {
     try {
-       const data = await client.ModifyDBInstanceProject({})
+       const data = await client.DescribeAuditRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -948,6 +958,16 @@ it("cdb.v20170320.StartBatchRollback", async function () {
     }
 })
 
+it("cdb.v20170320.ModifyDBInstanceProject", async function () {
+    try {
+       const data = await client.ModifyDBInstanceProject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.DescribeDeviceMonitorInfo", async function () {
     try {
        const data = await client.DescribeDeviceMonitorInfo({})
@@ -978,9 +998,9 @@ it("cdb.v20170320.ModifyAuditRule", async function () {
     }
 })
 
-it("cdb.v20170320.DescribeAuditRules", async function () {
+it("cdb.v20170320.DeleteAuditRule", async function () {
     try {
-       const data = await client.DescribeAuditRules({})
+       const data = await client.DeleteAuditRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1021,6 +1041,16 @@ it("cdb.v20170320.DescribeDBSecurityGroups", async function () {
 it("cdb.v20170320.DescribeRoGroups", async function () {
     try {
        const data = await client.DescribeRoGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdb.v20170320.DescribeCloneList", async function () {
+    try {
+       const data = await client.DescribeCloneList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

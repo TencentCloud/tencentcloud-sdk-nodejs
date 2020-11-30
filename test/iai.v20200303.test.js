@@ -38,9 +38,9 @@ it("iai.v20200303.SearchFacesReturnsByGroup", async function () {
     }
 })
 
-it("iai.v20200303.CreateGroup", async function () {
+it("iai.v20200303.GetPersonGroupInfo", async function () {
     try {
-       const data = await client.CreateGroup({})
+       const data = await client.GetPersonGroupInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,9 +108,9 @@ it("iai.v20200303.GetPersonListNum", async function () {
     }
 })
 
-it("iai.v20200303.GetPersonGroupInfo", async function () {
+it("iai.v20200303.CreateGroup", async function () {
     try {
-       const data = await client.GetPersonGroupInfo({})
+       const data = await client.CreateGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -231,6 +231,16 @@ it("iai.v20200303.RevertGroupFaceModelVersion", async function () {
 it("iai.v20200303.CreatePerson", async function () {
     try {
        const data = await client.CreatePerson({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iai.v20200303.CompareMaskFace", async function () {
+    try {
+       const data = await client.CompareMaskFace({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

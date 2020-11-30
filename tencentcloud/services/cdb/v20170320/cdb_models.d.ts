@@ -459,7 +459,7 @@ export interface DescribeErrorLogDataRequest {
       */
     KeyWords?: Array<string>;
     /**
-      * 分页的返回数量，最大为400。
+      * 分页的返回数量，默认为100，最大为400。
       */
     Limit?: number;
     /**
@@ -1372,13 +1372,17 @@ export interface BackupSummaryItem {
     BackupVolume: number;
 }
 /**
- * SwitchForUpgrade请求参数结构体
+ * 可回档时间范围
  */
-export interface SwitchForUpgradeRequest {
+export interface RollbackTimeRange {
     /**
-      * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+      * 实例可回档开始时间，时间格式：2016-10-29 01:06:04
       */
-    InstanceId: string;
+    Begin: string;
+    /**
+      * 实例可回档结束时间，时间格式：2016-11-02 11:44:47
+      */
+    End: string;
 }
 /**
  * ModifyInstanceTag返回参数结构体
@@ -1414,6 +1418,23 @@ export interface CreateDBInstanceHourResponse {
       * 实例 ID 列表。
       */
     InstanceIds?: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeCloneList返回参数结构体
+ */
+export interface DescribeCloneListResponse {
+    /**
+      * 满足条件的条目数。
+      */
+    TotalCount?: number;
+    /**
+      * 克隆任务列表。
+      */
+    Items?: Array<CloneItem>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1485,6 +1506,43 @@ export interface DescribeAccountsRequest {
       * 匹配账号名的正则表达式，规则同 MySQL 官网。
       */
     AccountRegexp?: string;
+}
+/**
+ * 克隆任务记录。
+ */
+export interface CloneItem {
+    /**
+      * 克隆任务的源实例Id。
+      */
+    SrcInstanceId: string;
+    /**
+      * 克隆任务的新产生实例Id。
+      */
+    DstInstanceId: string;
+    /**
+      * 克隆任务对应的任务列表Id。
+      */
+    CloneJobId: number;
+    /**
+      * 克隆实例使用的策略， 包括以下类型：  timepoint:指定时间点回档，  backupset: 指定备份文件回档。
+      */
+    RollbackStrategy: string;
+    /**
+      * 克隆实例回档的时间点。
+      */
+    RollbackTargetTime: string;
+    /**
+      * 任务开始时间。
+      */
+    StartTime: string;
+    /**
+      * 任务结束时间。
+      */
+    EndTime: string;
+    /**
+      * 任务状态，包括以下状态：initial,running,wait_complete,success,failed
+      */
+    TaskStatus: string;
 }
 /**
  * DescribeTasks请求参数结构体
@@ -1624,6 +1682,15 @@ export interface AddTimeWindowRequest {
       * 星期日的可维护时间窗口。 一周中应至少设置一天的时间窗。
       */
     Sunday?: Array<string>;
+}
+/**
+ * SwitchForUpgrade请求参数结构体
+ */
+export interface SwitchForUpgradeRequest {
+    /**
+      * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+      */
+    InstanceId: string;
 }
 /**
  * 导入任务记录
@@ -1897,13 +1964,21 @@ export interface RollbackInstancesInfo {
     Tables?: Array<RollbackTables>;
 }
 /**
- * DescribeParamTemplateInfo请求参数结构体
+ * DescribeCloneList请求参数结构体
  */
-export interface DescribeParamTemplateInfoRequest {
+export interface DescribeCloneListRequest {
     /**
-      * 参数模板 ID。
+      * 查询指定源实例的克隆任务列表。
       */
-    TemplateId: number;
+    InstanceId: string;
+    /**
+      * 分页查询时的偏移量。
+      */
+    Offset?: number;
+    /**
+      * 分页查询时的每页条目数。
+      */
+    Limit?: number;
 }
 /**
  * 备份详细信息
@@ -1974,6 +2049,75 @@ export interface CloseWanServiceResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * CreateCloneInstance请求参数结构体
+ */
+export interface CreateCloneInstanceRequest {
+    /**
+      * 克隆源实例Id。
+      */
+    InstanceId: string;
+    /**
+      * 如果需要克隆实例回档到指定时间，则指定该值。时间格式为： yyyy-mm-dd hh:mm:ss 。
+      */
+    SpecifiedRollbackTime?: string;
+    /**
+      * 如果需要克隆实例回档到指定备份的时间点，则指定该值为物理备份的Id。请使用 [查询数据备份文件列表](/document/api/236/15842) 。
+      */
+    SpecifiedBackupId?: number;
+    /**
+      * 私有网络 ID，如果不传则默认选择基础网络，请使用 [查询私有网络列表](/document/api/215/15778) 。
+      */
+    UniqVpcId?: string;
+    /**
+      * 私有网络下的子网 ID，如果设置了 UniqVpcId，则 UniqSubnetId 必填，请使用 [查询子网列表](/document/api/215/15784)。
+      */
+    UniqSubnetId?: string;
+    /**
+      * 实例内存大小，单位：MB，需要不低于克隆源实例，默认和源实例相同。
+      */
+    Memory?: number;
+    /**
+      * 实例硬盘大小，单位：GB，需要不低于克隆源实例，默认和源实例相同。
+      */
+    Volume?: number;
+    /**
+      * 新产生的克隆实例名称。
+      */
+    InstanceName?: string;
+    /**
+      * 安全组参数，可使用 [查询项目安全组信息](https://cloud.tencent.com/document/api/236/15850) 接口查询某个项目的安全组详情。
+      */
+    SecurityGroup?: Array<string>;
+    /**
+      * 实例标签信息。
+      */
+    ResourceTags?: Array<TagInfo>;
+    /**
+      * 实例Cpu核数，需要不低于克隆源实例。
+      */
+    Cpu?: number;
+    /**
+      * 数据复制方式，默认为 0，支持值包括：0 - 表示异步复制，1 - 表示半同步复制，2 - 表示强同步复制。
+      */
+    ProtectMode?: number;
+    /**
+      * 多可用区域，默认为 0，支持值包括：0 - 表示单可用区，1 - 表示多可用区。
+      */
+    DeployMode?: number;
+    /**
+      * 新产生的克隆实例备库 1 的可用区信息，默认同源实例 Zone 的值。
+      */
+    SlaveZone?: string;
+    /**
+      * 备库 2 的可用区信息，默认为空，克隆强同步主实例时可指定该参数。
+      */
+    BackupZone?: string;
+    /**
+      * 克隆实例类型。支持值包括： "HA" - 高可用版实例， "EXCLUSIVE" - 独享型实例。 不指定则默认为高可用版。
+      */
+    DeviceType?: string;
 }
 /**
  * DescribeDBInstances请求参数结构体
@@ -2235,29 +2379,37 @@ export interface CreateAuditLogFileResponse {
     RequestId?: string;
 }
 /**
- * DescribeBackupSummaries请求参数结构体
+ * 通用时间窗
  */
-export interface DescribeBackupSummariesRequest {
+export interface CommonTimeWindow {
     /**
-      * 需要查询的云数据库产品类型，目前仅支持 "mysql"。
+      * 周一的时间窗，格式如： 02:00-06:00
       */
-    Product: string;
+    Monday?: string;
     /**
-      * 分页查询数据的偏移量。
+      * 周二的时间窗，格式如： 02:00-06:00
       */
-    Offset?: number;
+    Tuesday?: string;
     /**
-      * 分页查询数据的条目限制，默认值为20。
+      * 周三的时间窗，格式如： 02:00-06:00
       */
-    Limit?: number;
+    Wednesday?: string;
     /**
-      * 指定按某一项排序，可选值包括： BackupVolume: 备份容量， DataBackupVolume: 数据备份容量， BinlogBackupVolume: 日志备份容量， AutoBackupVolume: 自动备份容量， ManualBackupVolume: 手动备份容量。
+      * 周四的时间窗，格式如： 02:00-06:00
       */
-    OrderBy?: string;
+    Thursday?: string;
     /**
-      * 指定排序方向，可选值包括： ASC: 正序， DESC: 逆序。
+      * 周五的时间窗，格式如： 02:00-06:00
       */
-    OrderDirection?: string;
+    Friday?: string;
+    /**
+      * 周六的时间窗，格式如： 02:00-06:00
+      */
+    Saturday?: string;
+    /**
+      * 周日的时间窗，格式如： 02:00-06:00
+      */
+    Sunday?: string;
 }
 /**
  * StartBatchRollback返回参数结构体
@@ -2473,6 +2625,28 @@ export interface DescribeBackupDatabasesResponse {
     RequestId?: string;
 }
 /**
+ * VerifyRootAccount请求参数结构体
+ */
+export interface VerifyRootAccountRequest {
+    /**
+      * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+      */
+    InstanceId: string;
+    /**
+      * 实例 ROOT 账号的密码。
+      */
+    Password: string;
+}
+/**
+ * SwitchForUpgrade返回参数结构体
+ */
+export interface SwitchForUpgradeResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeBackupSummaries返回参数结构体
  */
 export interface DescribeBackupSummariesResponse {
@@ -2505,6 +2679,19 @@ export interface DescribeInstanceParamRecordsRequest {
       * 分页大小。
       */
     Limit?: number;
+}
+/**
+ * StopRollback返回参数结构体
+ */
+export interface StopRollbackResponse {
+    /**
+      * 执行请求的异步任务ID
+      */
+    AsyncRequestId?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 参数模板信息
@@ -3050,17 +3237,29 @@ export interface TagInfo {
     TagValue: Array<string>;
 }
 /**
- * 可回档时间范围
+ * DescribeBackupSummaries请求参数结构体
  */
-export interface RollbackTimeRange {
+export interface DescribeBackupSummariesRequest {
     /**
-      * 实例可回档开始时间，时间格式：2016-10-29 01:06:04
+      * 需要查询的云数据库产品类型，目前仅支持 "mysql"。
       */
-    Begin: string;
+    Product: string;
     /**
-      * 实例可回档结束时间，时间格式：2016-11-02 11:44:47
+      * 分页查询数据的偏移量。
       */
-    End: string;
+    Offset?: number;
+    /**
+      * 分页查询数据的条目限制，默认值为20。
+      */
+    Limit?: number;
+    /**
+      * 指定按某一项排序，可选值包括： BackupVolume: 备份容量， DataBackupVolume: 数据备份容量， BinlogBackupVolume: 日志备份容量， AutoBackupVolume: 自动备份容量， ManualBackupVolume: 手动备份容量。
+      */
+    OrderBy?: string;
+    /**
+      * 指定排序方向，可选值包括： ASC: 正序， DESC: 逆序。
+      */
+    OrderDirection?: string;
 }
 /**
  * DescribeSupportedPrivileges返回参数结构体
@@ -3088,13 +3287,17 @@ export interface DescribeSupportedPrivilegesResponse {
     RequestId?: string;
 }
 /**
- * OfflineIsolatedInstances请求参数结构体
+ * CreateCloneInstance返回参数结构体
  */
-export interface OfflineIsolatedInstancesRequest {
+export interface CreateCloneInstanceResponse {
     /**
-      * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+      * 异步任务的请求ID，可使用此 ID 查询异步任务的执行结果。
       */
-    InstanceIds: Array<string>;
+    AsyncRequestId?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ModifyDBInstanceProject返回参数结构体
@@ -3201,17 +3404,21 @@ export interface DescribeAsyncRequestInfoRequest {
     AsyncRequestId: string;
 }
 /**
- * VerifyRootAccount请求参数结构体
+ * 数据库表权限
  */
-export interface VerifyRootAccountRequest {
+export interface TablePrivilege {
     /**
-      * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+      * 数据库名
       */
-    InstanceId: string;
+    Database: string;
     /**
-      * 实例 ROOT 账号的密码。
+      * 数据库表名
       */
-    Password: string;
+    Table: string;
+    /**
+      * 权限信息
+      */
+    Privileges: Array<string>;
 }
 /**
  * BalanceRoGroupLoad请求参数结构体
@@ -4390,39 +4597,6 @@ export interface ModifyRoGroupInfoResponse {
     RequestId?: string;
 }
 /**
- * 通用时间窗
- */
-export interface CommonTimeWindow {
-    /**
-      * 周一的时间窗，格式如： 02:00-06:00
-      */
-    Monday?: string;
-    /**
-      * 周二的时间窗，格式如： 02:00-06:00
-      */
-    Tuesday?: string;
-    /**
-      * 周三的时间窗，格式如： 02:00-06:00
-      */
-    Wednesday?: string;
-    /**
-      * 周四的时间窗，格式如： 02:00-06:00
-      */
-    Thursday?: string;
-    /**
-      * 周五的时间窗，格式如： 02:00-06:00
-      */
-    Friday?: string;
-    /**
-      * 周六的时间窗，格式如： 02:00-06:00
-      */
-    Saturday?: string;
-    /**
-      * 周日的时间窗，格式如： 02:00-06:00
-      */
-    Sunday?: string;
-}
-/**
  * 账号详细信息
  */
 export interface AccountInfo {
@@ -4629,7 +4803,7 @@ export interface DescribeSlowLogDataRequest {
       */
     Offset?: number;
     /**
-      * 一次性返回的记录数量，最大为400。
+      * 一次性返回的记录数量，默认为100，最大为400。
       */
     Limit?: number;
 }
@@ -4916,21 +5090,13 @@ export interface DescribeDBInstancesResponse {
     RequestId?: string;
 }
 /**
- * 数据库表权限
+ * DescribeParamTemplateInfo请求参数结构体
  */
-export interface TablePrivilege {
+export interface DescribeParamTemplateInfoRequest {
     /**
-      * 数据库名
+      * 参数模板 ID。
       */
-    Database: string;
-    /**
-      * 数据库表名
-      */
-    Table: string;
-    /**
-      * 权限信息
-      */
-    Privileges: Array<string>;
+    TemplateId: number;
 }
 /**
  * 慢查询日志详情
@@ -5145,13 +5311,13 @@ export interface DeleteAccountsRequest {
     Accounts: Array<Account>;
 }
 /**
- * SwitchForUpgrade返回参数结构体
+ * OfflineIsolatedInstances请求参数结构体
  */
-export interface SwitchForUpgradeResponse {
+export interface OfflineIsolatedInstancesRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
       */
-    RequestId?: string;
+    InstanceIds: Array<string>;
 }
 /**
  * DescribeAccountPrivileges请求参数结构体
@@ -5193,6 +5359,15 @@ export interface DescribeAccountsResponse {
 export interface OpenWanServiceRequest {
     /**
       * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
+      */
+    InstanceId: string;
+}
+/**
+ * StopRollback请求参数结构体
+ */
+export interface StopRollbackRequest {
+    /**
+      * 撤销回档任务对应的实例Id。
       */
     InstanceId: string;
 }

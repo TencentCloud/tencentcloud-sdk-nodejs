@@ -78,18 +78,21 @@ import {
   ParameterDetail,
   DeleteAuditPolicyRequest,
   BackupSummaryItem,
-  SwitchForUpgradeRequest,
+  RollbackTimeRange,
   ModifyInstanceTagResponse,
   CreateParamTemplateResponse,
   CreateDBInstanceHourResponse,
+  DescribeCloneListResponse,
   ReleaseIsolatedDBInstancesRequest,
   BinlogInfo,
   DescribeAccountsRequest,
+  CloneItem,
   DescribeTasksRequest,
   IsolateDBInstanceResponse,
   SlaveConfig,
   DescribeErrorLogDataResponse,
   AddTimeWindowRequest,
+  SwitchForUpgradeRequest,
   ImportRecord,
   DeleteAuditLogFileResponse,
   DescribeRollbackTaskDetailResponse,
@@ -97,9 +100,10 @@ import {
   CreateDBInstanceHourRequest,
   DescribeDeployGroupListRequest,
   RollbackInstancesInfo,
-  DescribeParamTemplateInfoRequest,
+  DescribeCloneListRequest,
   BackupInfo,
   CloseWanServiceResponse,
+  CreateCloneInstanceRequest,
   DescribeDBInstancesRequest,
   DescribeDBSecurityGroupsRequest,
   ModifyDBInstanceVipVportResponse,
@@ -112,7 +116,7 @@ import {
   DescribeProjectSecurityGroupsResponse,
   ModifyDBInstanceProjectRequest,
   CreateAuditLogFileResponse,
-  DescribeBackupSummariesRequest,
+  CommonTimeWindow,
   StartBatchRollbackResponse,
   DescribeRoGroupsRequest,
   DescribeDBSwitchRecordsRequest,
@@ -128,8 +132,11 @@ import {
   RestartDBInstancesResponse,
   CreateRoInstanceIpResponse,
   DescribeBackupDatabasesResponse,
+  VerifyRootAccountRequest,
+  SwitchForUpgradeResponse,
   DescribeBackupSummariesResponse,
   DescribeInstanceParamRecordsRequest,
+  StopRollbackResponse,
   ParamTemplateInfo,
   ModifyAutoRenewFlagResponse,
   DeleteTimeWindowResponse,
@@ -162,9 +169,9 @@ import {
   DeviceNetInfo,
   SlaveInfo,
   TagInfo,
-  RollbackTimeRange,
+  DescribeBackupSummariesRequest,
   DescribeSupportedPrivilegesResponse,
-  OfflineIsolatedInstancesRequest,
+  CreateCloneInstanceResponse,
   ModifyDBInstanceProjectResponse,
   ModifyDBInstanceNameRequest,
   TagInfoUnit,
@@ -173,7 +180,7 @@ import {
   InquiryPriceUpgradeInstancesRequest,
   ModifyAuditRuleResponse,
   DescribeAsyncRequestInfoRequest,
-  VerifyRootAccountRequest,
+  TablePrivilege,
   BalanceRoGroupLoadRequest,
   DescribeAuditRulesRequest,
   DescribeBackupOverviewResponse,
@@ -232,7 +239,6 @@ import {
   Account,
   CreateBackupRequest,
   ModifyRoGroupInfoResponse,
-  CommonTimeWindow,
   AccountInfo,
   DescribeDBInstanceCharsetRequest,
   DescribeTimeWindowRequest,
@@ -258,7 +264,7 @@ import {
   DeleteTimeWindowRequest,
   DeleteAuditPolicyResponse,
   DescribeDBInstancesResponse,
-  TablePrivilege,
+  DescribeParamTemplateInfoRequest,
   SlowLogInfo,
   InitDBInstancesResponse,
   DescribeDataBackupOverviewRequest,
@@ -271,10 +277,11 @@ import {
   CreateDeployGroupRequest,
   DisassociateSecurityGroupsRequest,
   DeleteAccountsRequest,
-  SwitchForUpgradeResponse,
+  OfflineIsolatedInstancesRequest,
   DescribeAccountPrivilegesRequest,
   DescribeAccountsResponse,
   OpenWanServiceRequest,
+  StopRollbackRequest,
   DeleteBackupRequest,
   ModifyNameOrDescByDpIdRequest,
   DescribeInstanceParamsRequest,
@@ -419,6 +426,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDBInstanceNameResponse) => void
   ): Promise<ModifyDBInstanceNameResponse> {
     return this.request("ModifyDBInstanceName", req, cb)
+  }
+
+  /**
+   * 本接口(StopRollback) 用于撤销实例正在进行的回档任务，该接口返回一个异步任务id。 撤销结果可以通过 DescribeRequestResult 查询任务的执行情况。
+   */
+  async StopRollback(
+    req: StopRollbackRequest,
+    cb?: (error: string, rep: StopRollbackResponse) => void
+  ): Promise<StopRollbackResponse> {
+    return this.request("StopRollback", req, cb)
   }
 
   /**
@@ -593,6 +610,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ReleaseIsolatedDBInstancesResponse) => void
   ): Promise<ReleaseIsolatedDBInstancesResponse> {
     return this.request("ReleaseIsolatedDBInstances", req, cb)
+  }
+
+  /**
+   * 本接口(CreateCloneInstance) 用于从目标源实例创建一个克隆实例，可以指定克隆实例回档到源实例的指定物理备份文件或者指定的回档时间点。
+   */
+  async CreateCloneInstance(
+    req: CreateCloneInstanceRequest,
+    cb?: (error: string, rep: CreateCloneInstanceResponse) => void
+  ): Promise<CreateCloneInstanceResponse> {
+    return this.request("CreateCloneInstance", req, cb)
   }
 
   /**
@@ -871,16 +898,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceParamRecordsResponse) => void
   ): Promise<DescribeInstanceParamRecordsResponse> {
     return this.request("DescribeInstanceParamRecords", req, cb)
-  }
-
-  /**
-   * 本接口(DeleteAuditRule)用于删除用户的审计规则。
-   */
-  async DeleteAuditRule(
-    req: DeleteAuditRuleRequest,
-    cb?: (error: string, rep: DeleteAuditRuleResponse) => void
-  ): Promise<DeleteAuditRuleResponse> {
-    return this.request("DeleteAuditRule", req, cb)
   }
 
   /**
@@ -1209,13 +1226,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(ModifyDBInstanceProject)用于修改云数据库实例的所属项目。
+   * 本接口(DescribeAuditRules)用于查询用户在当前地域的审计规则。
    */
-  async ModifyDBInstanceProject(
-    req: ModifyDBInstanceProjectRequest,
-    cb?: (error: string, rep: ModifyDBInstanceProjectResponse) => void
-  ): Promise<ModifyDBInstanceProjectResponse> {
-    return this.request("ModifyDBInstanceProject", req, cb)
+  async DescribeAuditRules(
+    req: DescribeAuditRulesRequest,
+    cb?: (error: string, rep: DescribeAuditRulesResponse) => void
+  ): Promise<DescribeAuditRulesResponse> {
+    return this.request("DescribeAuditRules", req, cb)
   }
 
   /**
@@ -1273,6 +1290,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(ModifyDBInstanceProject)用于修改云数据库实例的所属项目。
+   */
+  async ModifyDBInstanceProject(
+    req: ModifyDBInstanceProjectRequest,
+    cb?: (error: string, rep: ModifyDBInstanceProjectResponse) => void
+  ): Promise<ModifyDBInstanceProjectResponse> {
+    return this.request("ModifyDBInstanceProject", req, cb)
+  }
+
+  /**
    * 本接口（DescribeDeviceMonitorInfo）用于查询云数据库物理机当天的监控信息，暂只支持内存488G、硬盘6T的实例查询。
    */
   async DescribeDeviceMonitorInfo(
@@ -1305,13 +1332,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeAuditRules)用于查询用户在当前地域的审计规则。
+   * 本接口(DeleteAuditRule)用于删除用户的审计规则。
    */
-  async DescribeAuditRules(
-    req: DescribeAuditRulesRequest,
-    cb?: (error: string, rep: DescribeAuditRulesResponse) => void
-  ): Promise<DescribeAuditRulesResponse> {
-    return this.request("DescribeAuditRules", req, cb)
+  async DeleteAuditRule(
+    req: DeleteAuditRuleRequest,
+    cb?: (error: string, rep: DeleteAuditRuleResponse) => void
+  ): Promise<DeleteAuditRuleResponse> {
+    return this.request("DeleteAuditRule", req, cb)
   }
 
   /**
@@ -1352,6 +1379,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRoGroupsResponse) => void
   ): Promise<DescribeRoGroupsResponse> {
     return this.request("DescribeRoGroups", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeCloneList) 用于查询用户实例的克隆任务列表。
+   */
+  async DescribeCloneList(
+    req: DescribeCloneListRequest,
+    cb?: (error: string, rep: DescribeCloneListResponse) => void
+  ): Promise<DescribeCloneListResponse> {
+    return this.request("DescribeCloneList", req, cb)
   }
 
   /**

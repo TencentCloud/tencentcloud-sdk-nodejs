@@ -55,15 +55,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SearchFacesReturnsByGroup", req, cb);
     }
     /**
-     * 用于创建一个空的人员库，如果人员库已存在返回错误。
-可根据需要创建自定义描述字段，用于辅助描述该人员库下的人员信息。
-
-1个APPID下最多创建10万个人员库（Group）、最多包含5000万张人脸（Face）。
-
-不同算法模型版本（FaceModelVersion）的人员库（Group）最多可包含人脸（Face）数不同。算法模型版本为2.0的人员库最多包含100万张人脸，算法模型版本为3.0的人员库最多可包含300万张人脸。
+     * 获取指定人员的信息，包括加入的人员库、描述内容等。
      */
-    async CreateGroup(req, cb) {
-        return this.request("CreateGroup", req, cb);
+    async GetPersonGroupInfo(req, cb) {
+        return this.request("GetPersonGroupInfo", req, cb);
     }
     /**
      * 获取人员查重任务列表，按任务创建时间逆序（最新的在前面）。
@@ -116,10 +111,15 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetPersonListNum", req, cb);
     }
     /**
-     * 获取指定人员的信息，包括加入的人员库、描述内容等。
+     * 用于创建一个空的人员库，如果人员库已存在返回错误。
+可根据需要创建自定义描述字段，用于辅助描述该人员库下的人员信息。
+
+1个APPID下最多创建10万个人员库（Group）、最多包含5000万张人脸（Face）。
+
+不同算法模型版本（FaceModelVersion）的人员库（Group）最多可包含人脸（Face）数不同。算法模型版本为2.0的人员库最多包含100万张人脸，算法模型版本为3.0的人员库最多可包含300万张人脸。
      */
-    async GetPersonGroupInfo(req, cb) {
-        return this.request("GetPersonGroupInfo", req, cb);
+    async CreateGroup(req, cb) {
+        return this.request("CreateGroup", req, cb);
     }
     /**
      * 对请求图片进行五官定位（也称人脸关键点定位），计算构成人脸轮廓的 90 个点，包括眉毛（左右各 8 点）、眼睛（左右各 8 点）、鼻子（13 点）、嘴巴（22 点）、脸型轮廓（21 点）、眼珠[或瞳孔]（2点）。
@@ -229,6 +229,16 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreatePerson(req, cb) {
         return this.request("CreatePerson", req, cb);
+    }
+    /**
+     * 对两张图片中的人脸进行相似度比对，返回人脸相似度分数。
+
+戴口罩人脸比对接口可在查询照人脸戴口罩情况下使用，口罩遮挡程度最高可以遮挡鼻尖。
+
+如图片人脸不存在戴口罩情况，建议使用人脸比对服务。
+     */
+    async CompareMaskFace(req, cb) {
+        return this.request("CompareMaskFace", req, cb);
     }
     /**
      * 获取人员库升级任务列表

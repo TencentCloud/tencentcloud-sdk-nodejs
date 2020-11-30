@@ -98,6 +98,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstanceName", req, cb);
     }
     /**
+     * 本接口(StopRollback) 用于撤销实例正在进行的回档任务，该接口返回一个异步任务id。 撤销结果可以通过 DescribeRequestResult 查询任务的执行情况。
+     */
+    async StopRollback(req, cb) {
+        return this.request("StopRollback", req, cb);
+    }
+    /**
      * 本接口(OfflineIsolatedInstances)用于立即下线隔离状态的云数据库实例。进行操作的实例状态必须为隔离状态，即通过 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口查询到 Status 值为 5 的实例。
 
 该接口为异步操作，部分资源的回收可能存在延迟。您可以通过使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口，指定实例 InstanceId 和状态 Status 为 [5,6,7] 进行查询，若返回实例为空，则实例资源已全部释放。
@@ -202,6 +208,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ReleaseIsolatedDBInstances(req, cb) {
         return this.request("ReleaseIsolatedDBInstances", req, cb);
+    }
+    /**
+     * 本接口(CreateCloneInstance) 用于从目标源实例创建一个克隆实例，可以指定克隆实例回档到源实例的指定物理备份文件或者指定的回档时间点。
+     */
+    async CreateCloneInstance(req, cb) {
+        return this.request("CreateCloneInstance", req, cb);
     }
     /**
      * 本接口(ModifyAuditConfig)用于修改云数据库审计策略的服务配置，包括审计日志保存时长等。
@@ -376,12 +388,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeInstanceParamRecords(req, cb) {
         return this.request("DescribeInstanceParamRecords", req, cb);
-    }
-    /**
-     * 本接口(DeleteAuditRule)用于删除用户的审计规则。
-     */
-    async DeleteAuditRule(req, cb) {
-        return this.request("DeleteAuditRule", req, cb);
     }
     /**
      * 本接口(DescribeBackupSummaries)用于查询备份的统计情况，返回以实例为维度的备份占用容量，以及每个实例的数据备份和日志备份的个数和容量（容量单位为字节）。
@@ -581,10 +587,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyBackupConfig", req, cb);
     }
     /**
-     * 本接口(ModifyDBInstanceProject)用于修改云数据库实例的所属项目。
+     * 本接口(DescribeAuditRules)用于查询用户在当前地域的审计规则。
      */
-    async ModifyDBInstanceProject(req, cb) {
-        return this.request("ModifyDBInstanceProject", req, cb);
+    async DescribeAuditRules(req, cb) {
+        return this.request("DescribeAuditRules", req, cb);
     }
     /**
      * 本接口(DescribeBackupDatabases)用于查询备份文件包含的库 (已废弃)。
@@ -621,6 +627,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StartBatchRollback", req, cb);
     }
     /**
+     * 本接口(ModifyDBInstanceProject)用于修改云数据库实例的所属项目。
+     */
+    async ModifyDBInstanceProject(req, cb) {
+        return this.request("ModifyDBInstanceProject", req, cb);
+    }
+    /**
      * 本接口（DescribeDeviceMonitorInfo）用于查询云数据库物理机当天的监控信息，暂只支持内存488G、硬盘6T的实例查询。
      */
     async DescribeDeviceMonitorInfo(req, cb) {
@@ -641,10 +653,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAuditRule", req, cb);
     }
     /**
-     * 本接口(DescribeAuditRules)用于查询用户在当前地域的审计规则。
+     * 本接口(DeleteAuditRule)用于删除用户的审计规则。
      */
-    async DescribeAuditRules(req, cb) {
-        return this.request("DescribeAuditRules", req, cb);
+    async DeleteAuditRule(req, cb) {
+        return this.request("DeleteAuditRule", req, cb);
     }
     /**
      * 本接口(DescribeSupportedPrivileges)用于查询云数据库的支持的权限信息，包括全局权限，数据库权限，表权限以及列权限。
@@ -669,6 +681,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeRoGroups(req, cb) {
         return this.request("DescribeRoGroups", req, cb);
+    }
+    /**
+     * 本接口(DescribeCloneList) 用于查询用户实例的克隆任务列表。
+     */
+    async DescribeCloneList(req, cb) {
+        return this.request("DescribeCloneList", req, cb);
     }
     /**
      * 修改置放群组的名称或者描述

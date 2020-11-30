@@ -1,7 +1,12 @@
 /**
  * ExportBashEvents请求参数结构体
  */
-export declare type ExportBashEventsRequest = null;
+export interface ExportBashEventsRequest {
+    /**
+      * 过滤参数
+      */
+    Filters?: Array<Filters>;
+}
 /**
  * ModifyAutoOpenProVersionConfig请求参数结构体
  */
@@ -38,6 +43,10 @@ export interface ExportReverseShellEventsResponse {
       * 导出文件下载链接地址。
       */
     DownloadUrl?: string;
+    /**
+      * 任务id
+      */
+    TaskId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -497,7 +506,26 @@ export interface InquiryPriceOpenProVersionPrepaidRequest {
 /**
  * ExportMalwares请求参数结构体
  */
-export declare type ExportMalwaresRequest = null;
+export interface ExportMalwaresRequest {
+    /**
+      * 限制条数,默认10
+      */
+    Limit?: number;
+    /**
+      * 偏移量 默认0
+      */
+    Offset?: number;
+    /**
+      * 过滤参数。
+<li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
+<li>FilePath - String - 是否必填：否 - 路径筛选</li>
+<li>VirusName - String - 是否必填：否 - 描述筛选</li>
+<li>CreateBeginTime - String - 是否必填：否 - 创建时间筛选-开始时间</li>
+<li>CreateEndTime - String - 是否必填：否 - 创建时间筛选-结束时间</li>
+<li>Status - String - 是否必填：否 - 状态筛选</li>
+      */
+    Filters?: Array<Filters>;
+}
 /**
  * DescribeProcesses返回参数结构体
  */
@@ -1281,7 +1309,25 @@ export interface UntrustMaliciousRequestRequest {
 /**
  * ExportNonlocalLoginPlaces请求参数结构体
  */
-export declare type ExportNonlocalLoginPlacesRequest = null;
+export interface ExportNonlocalLoginPlacesRequest {
+    /**
+      * <li>Status - int - 是否必填：否 - 状态筛选1:正常登录；2：异地登录</li>
+      */
+    Filters?: Array<Filter>;
+}
+/**
+ * 安全事件统计列表
+ */
+export interface SecurityEventInfo {
+    /**
+      * 安全事件数
+      */
+    EventCnt: number;
+    /**
+      * 受影响机器数
+      */
+    UuidCnt: number;
+}
 /**
  * DescribeComponentInfo返回参数结构体
  */
@@ -1437,6 +1483,10 @@ export interface ExportBruteAttacksResponse {
       */
     DownloadUrl?: string;
     /**
+      * 导出任务ID
+      */
+    TaskId?: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -1453,7 +1503,12 @@ export interface EditReverseShellRuleResponse {
 /**
  * ExportBruteAttacks请求参数结构体
  */
-export declare type ExportBruteAttacksRequest = null;
+export interface ExportBruteAttacksRequest {
+    /**
+      * 过滤参数
+      */
+    Filters?: Array<Filters>;
+}
 /**
  * DeleteMachine返回参数结构体
  */
@@ -2606,6 +2661,10 @@ export interface DeleteTagsResponse {
     RequestId?: string;
 }
 /**
+ * DescribeSecurityEventsCnt请求参数结构体
+ */
+export declare type DescribeSecurityEventsCntRequest = null;
+/**
  * DeleteBruteAttacks请求参数结构体
  */
 export interface DeleteBruteAttacksRequest {
@@ -3428,6 +3487,10 @@ export interface ExportBashEventsResponse {
       */
     DownloadUrl?: string;
     /**
+      * 导出任务ID
+      */
+    TaskId?: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -3691,6 +3754,14 @@ export interface Machine {
       * 地域信息
       */
     RegionInfo: RegionInfo;
+    /**
+      * 实例状态 TERMINATED_PRO_VERSION 已销毁
+      */
+    InstanceState: string;
+    /**
+      * 授权状态 1 授权 0 未授权
+      */
+    LicenseStatus: number;
 }
 /**
  * TrustMalwares请求参数结构体
@@ -4108,6 +4179,63 @@ export interface DescribeHistoryAccountsRequest {
     Filters?: Array<Filter>;
 }
 /**
+ * DescribeSecurityEventsCnt返回参数结构体
+ */
+export interface DescribeSecurityEventsCntResponse {
+    /**
+      * 木马文件相关风险事件
+      */
+    Malware?: SecurityEventInfo;
+    /**
+      * 登录审计相关风险事件
+      */
+    HostLogin?: SecurityEventInfo;
+    /**
+      * 密码破解相关风险事件
+      */
+    BruteAttack?: SecurityEventInfo;
+    /**
+      * 恶意请求相关风险事件
+      */
+    RiskDns?: SecurityEventInfo;
+    /**
+      * 高危命令相关风险事件
+      */
+    Bash?: SecurityEventInfo;
+    /**
+      * 本地提权相关风险事件
+      */
+    PrivilegeRules?: SecurityEventInfo;
+    /**
+      * 反弹Shell相关风险事件
+      */
+    ReverseShell?: SecurityEventInfo;
+    /**
+      * 系统组件相关风险事件
+      */
+    SysVul?: SecurityEventInfo;
+    /**
+      * Web应用漏洞相关风险事件
+      */
+    WebVul?: SecurityEventInfo;
+    /**
+      * 应急漏洞相关风险事件
+      */
+    EmergencyVul?: SecurityEventInfo;
+    /**
+      * 安全基线相关风险事件
+      */
+    BaseLine?: SecurityEventInfo;
+    /**
+      * 攻击检测相关风险事件
+      */
+    AttackLogs?: SecurityEventInfo;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeMachineInfo返回参数结构体
  */
 export interface DescribeMachineInfoResponse {
@@ -4183,6 +4311,14 @@ export interface DescribeMachineInfoResponse {
       * 免费漏洞剩余检测数量。
       */
     FreeVulsLeft?: number;
+    /**
+      * agent版本号
+      */
+    AgentVersion?: string;
+    /**
+      * 专业版到期时间(仅预付费)
+      */
+    ProVersionDeadline?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4390,7 +4526,12 @@ export interface ModifyAutoOpenProVersionConfigResponse {
 /**
  * ExportReverseShellEvents请求参数结构体
  */
-export declare type ExportReverseShellEventsRequest = null;
+export interface ExportReverseShellEventsRequest {
+    /**
+      * 过滤参数
+      */
+    Filters?: Array<Filters>;
+}
 /**
  * DescribeVuls返回参数结构体
  */
@@ -4528,6 +4669,22 @@ export interface ModifyAlarmAttributeResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
+
+若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
+若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
+ */
+export interface Filters {
+    /**
+      * 过滤键的名称。
+      */
+    Name: string;
+    /**
+      * 一个或者多个过滤值。
+      */
+    Values: Array<string>;
 }
 /**
  * 高危命令数据
