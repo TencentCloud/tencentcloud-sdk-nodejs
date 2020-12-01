@@ -1347,7 +1347,7 @@ export interface ResponseErrorCodeReq {
  */
 export interface CreateServiceRequest {
     /**
-      * 用户自定义的服务名称。如果没传，则系统自动生成一个唯一名称。
+      * 用户自定义的服务名称。
       */
     ServiceName: string;
     /**
@@ -2028,7 +2028,7 @@ export interface CreateApiRequest {
       */
     ServiceId: string;
     /**
-      * API 的后端服务类型。支持HTTP、MOCK、TSF、CLB、SCF、WEBSOCKET、TARGET（内测）。
+      * API 的后端服务类型。支持HTTP、MOCK、TSF、SCF、WEBSOCKET、TARGET（内测）。
       */
     ServiceType: string;
     /**
@@ -2036,7 +2036,7 @@ export interface CreateApiRequest {
       */
     ServiceTimeout: number;
     /**
-      * API 的前端请求类型，如 HTTP 或 HTTPS 或者 HTTP 和 HTTPS。
+      * API 的前端请求协议，支持HTTP和WEBSOCKET。
       */
     Protocol: string;
     /**

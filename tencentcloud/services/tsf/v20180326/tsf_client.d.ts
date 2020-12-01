@@ -150,7 +150,7 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     UpdateHealthCheckSettings(req: UpdateHealthCheckSettingsRequest, cb?: (error: string, rep: UpdateHealthCheckSettingsResponse) => void): Promise<UpdateHealthCheckSettingsResponse>;
     /**
-     * 执行一次任务。
+     * 手动执行一次任务。
      */
     ExecuteTask(req: ExecuteTaskRequest, cb?: (error: string, rep: ExecuteTaskResponse) => void): Promise<ExecuteTaskResponse>;
     /**

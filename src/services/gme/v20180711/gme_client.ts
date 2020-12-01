@@ -31,8 +31,10 @@ import {
   VoiceMessageConf,
   DescribeFilterResultListResponse,
   DescribeAppStatisticsResponse,
+  InOutTimeInfo,
   Task,
   VoiceFilterStatisticsItem,
+  DescribeUserInAndOutTimeResponse,
   VoiceFilterInfo,
   DescribeFilterResultResponse,
   DescribeScanResult,
@@ -49,6 +51,7 @@ import {
   DescribeFilterResultRequest,
   VoiceFilterConf,
   ScanVoiceRequest,
+  DescribeUserInAndOutTimeRequest,
 } from "./gme_models"
 
 /**
@@ -277,5 +280,15 @@ Type表示过滤类型，1：政治，2：色情，3：谩骂
     cb?: (error: string, rep: ModifyAppStatusResponse) => void
   ): Promise<ModifyAppStatusResponse> {
     return this.request("ModifyAppStatus", req, cb)
+  }
+
+  /**
+   * 拉取用户在房间得进出时间
+   */
+  async DescribeUserInAndOutTime(
+    req: DescribeUserInAndOutTimeRequest,
+    cb?: (error: string, rep: DescribeUserInAndOutTimeResponse) => void
+  ): Promise<DescribeUserInAndOutTimeResponse> {
+    return this.request("DescribeUserInAndOutTime", req, cb)
   }
 }

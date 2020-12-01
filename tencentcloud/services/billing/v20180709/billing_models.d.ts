@@ -1159,12 +1159,12 @@ export interface BillDetailComponent {
       */
     IncentivePayAmount: string;
     /**
-      * 组件类型代码（未开放的字段）
+      * 组件类型代码
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ItemCode: string;
     /**
-      * 组件名称代码（未开放的字段）
+      * 组件名称代码
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ComponentCode: string;
@@ -1589,12 +1589,12 @@ export interface BillDetail {
       */
     Tags: Array<BillTagInfo>;
     /**
-      * 商品名称代码（未开放的字段）
+      * 商品名称代码
 注意：此字段可能返回 null，表示取不到有效值。
       */
     BusinessCode: string;
     /**
-      * 子商品名称代码 （未开放的字段）
+      * 子商品名称代码
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ProductCode: string;

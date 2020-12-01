@@ -265,6 +265,21 @@ export interface DescribeAppStatisticsResponse {
 }
 
 /**
+ * 用户进出房间信息
+ */
+export interface InOutTimeInfo {
+  /**
+   * 进入房间时间
+   */
+  StartTime: number
+
+  /**
+   * 退出房间时间
+   */
+  EndTime: number
+}
+
+/**
  * 语音检测任务列表
  */
 export interface Task {
@@ -297,6 +312,26 @@ export interface VoiceFilterStatisticsItem {
    * 语音过滤总时长
    */
   Duration: number
+}
+
+/**
+ * DescribeUserInAndOutTime返回参数结构体
+ */
+export interface DescribeUserInAndOutTimeResponse {
+  /**
+   * 用户在房间得进出时间列表
+   */
+  InOutList?: Array<InOutTimeInfo>
+
+  /**
+   * 用户在房间中总时长
+   */
+  Duration?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -781,4 +816,24 @@ export interface ScanVoiceRequest {
    * 异步检测结果回调地址，具体见上述<a href="#Callback_Declare">回调相关说明</a>。（说明：该字段为空时，必须通过接口(查询语音检测结果)获取检测结果）。
    */
   Callback?: string
+}
+
+/**
+ * DescribeUserInAndOutTime请求参数结构体
+ */
+export interface DescribeUserInAndOutTimeRequest {
+  /**
+   * 应用ID
+   */
+  BizId: number
+
+  /**
+   * 房间ID
+   */
+  RoomId: number
+
+  /**
+   * 用户ID
+   */
+  UserId: number
 }

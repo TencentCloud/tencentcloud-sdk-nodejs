@@ -98,4 +98,14 @@ it("gme.v20180711.ModifyAppStatus", async function () {
     }
 })
 
+it("gme.v20180711.DescribeUserInAndOutTime", async function () {
+    try {
+       const data = await client.DescribeUserInAndOutTime({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

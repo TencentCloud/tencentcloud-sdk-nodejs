@@ -240,7 +240,7 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("UpdateHealthCheckSettings", req, cb);
     }
     /**
-     * 执行一次任务。
+     * 手动执行一次任务。
      */
     async ExecuteTask(req, cb) {
         return this.request("ExecuteTask", req, cb);

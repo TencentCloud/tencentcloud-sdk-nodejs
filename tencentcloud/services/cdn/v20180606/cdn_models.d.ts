@@ -107,42 +107,43 @@ DefenceMode映射如下：
     DefenceMode: string;
 }
 /**
- * DescribeCdnDomainLogs请求参数结构体
+ * 时间戳防盗链高级版配置，白名单功能
  */
-export interface DescribeCdnDomainLogsRequest {
+export interface AdvancedAuthentication {
     /**
-      * 指定域名查询
+      * 防盗链配置开关，on或off，开启时必须且只能配置一种模式，其余模式为null。
       */
-    Domain: string;
+    Switch: string;
     /**
-      * 开始时间，如 2019-09-04 00:00:00
+      * 时间戳防盗链高级版模式A配置。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    StartTime: string;
+    TypeA?: AdvancedAuthenticationTypeA;
     /**
-      * 结束时间，如 2019-09-04 12:00:00
+      * 时间戳防盗链高级版模式B配置。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    EndTime: string;
+    TypeB?: AdvancedAuthenticationTypeB;
     /**
-      * 分页查询偏移量，默认为 0
+      * 时间戳防盗链高级版模式C配置。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Offset?: number;
+    TypeC?: AdvancedAuthenticationTypeC;
     /**
-      * 分页查询限制数目，默认为 100，最大为 1000
+      * 时间戳防盗链高级版模式D配置。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Limit?: number;
+    TypeD?: AdvancedAuthenticationTypeD;
     /**
-      * 指定区域下载日志
-mainland：获取境内加速日志包下载链接
-overseas：获取境外加速日志包下载链接
-global：同时获取境内、境外加速日志包下载链接（分开打包）
-不指定时默认为 mainland
+      * 时间戳防盗链高级版模式E配置。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Area?: string;
+    TypeE?: AdvancedAuthenticationTypeE;
     /**
-      * 指定下载日志的类型。
-access：获取访问日志
+      * 时间戳防盗链高级版模式F配置。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    LogType?: string;
+    TypeF?: AdvancedAuthenticationTypeF;
 }
 /**
  * 智能压缩配置，默认对 js、html、css、xml、json、shtml、htm 后缀且大小为 256 ~ 2097152 字节的文件进行 GZIP 压缩
@@ -408,6 +409,7 @@ file 时填充后缀名，如 jpg、txt
 directory 时填充路径，如 /xxx/test
 path 时填充绝对路径，如 /xxx/test.html
 index 时填充 /
+default 时填充 "no max-age"
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RulePaths: Array<string>;
@@ -418,6 +420,7 @@ file：指定文件后缀生效
 directory：指定路径生效
 path：指定绝对路径生效
 index：首页
+default: 源站无max-age时生效
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RuleType: string;
@@ -428,33 +431,42 @@ index：首页
     CacheConfig: RuleCacheConfig;
 }
 /**
- * CDN报表数据
+ * DescribeCdnDomainLogs请求参数结构体
  */
-export interface ReportData {
+export interface DescribeCdnDomainLogsRequest {
     /**
-      * 项目ID/域名ID。
+      * 指定域名查询
       */
-    ResourceId: string;
+    Domain: string;
     /**
-      * 项目名称/域名。
+      * 开始时间，如 2019-09-04 00:00:00
       */
-    Resource: string;
+    StartTime: string;
     /**
-      * 流量总和/带宽最大值，单位分别为bytes，bps。
+      * 结束时间，如 2019-09-04 12:00:00
       */
-    Value: number;
+    EndTime: string;
     /**
-      * 单个资源占总体百分比。
+      * 分页查询偏移量，默认为 0
       */
-    Percentage: number;
+    Offset?: number;
     /**
-      * 计费流量总和/计费带宽最大值，单位分别为bytes，bps。
+      * 分页查询限制数目，默认为 100，最大为 1000
       */
-    BillingValue: number;
+    Limit?: number;
     /**
-      * 计费数值占总体百分比。
+      * 指定区域下载日志
+mainland：获取境内加速日志包下载链接
+overseas：获取境外加速日志包下载链接
+global：同时获取境内、境外加速日志包下载链接（分开打包）
+不指定时默认为 mainland
       */
-    BillingPercentage: number;
+    Area?: string;
+    /**
+      * 指定下载日志的类型。
+access：获取访问日志
+      */
+    LogType?: string;
 }
 /**
  * DescribeTrafficPackages请求参数结构体
@@ -603,35 +615,25 @@ export interface UserAgentFilter {
     FilterRules?: Array<UserAgentFilterRule>;
 }
 /**
- * 缓存配置高级版本规则
+ * DescribeCdnData返回参数结构体
  */
-export interface AdvanceCacheRule {
+export interface DescribeCdnDataResponse {
     /**
-      * 规则类型：
-all：所有文件生效
-file：指定文件后缀生效
-directory：指定路径生效
-path：指定绝对路径生效
-default：源站未返回 max-age 情况下的缓存规则
-注意：此字段可能返回 null，表示取不到有效值。
+      * 返回数据的时间粒度，查询时指定：
+min：1 分钟粒度
+5min：5 分钟粒度
+hour：1 小时粒度
+day：天粒度
       */
-    CacheType: string;
+    Interval?: string;
     /**
-      * 对应类型下的匹配内容：
-all 时填充 *
-file 时填充后缀名，如 jpg、txt
-directory 时填充路径，如 /xxx/test/
-path 时填充绝对路径，如 /xxx/test.html
-default 时填充 "no max-age"
-注意：此字段可能返回 null，表示取不到有效值。
+      * 指定条件查询得到的数据明细
       */
-    CacheContents: Array<string>;
+    Data?: Array<ResourceData>;
     /**
-      * 缓存过期时间
-单位为秒，最大可设置为 365 天
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    CacheTime: number;
+    RequestId?: string;
 }
 /**
  * EnableClsLogTopic请求参数结构体
@@ -786,27 +788,27 @@ export interface PathRule {
       */
     Regex: boolean;
     /**
-      * 匹配的URL路径。
+      * 匹配的URL路径，仅支持Url路径，不支持参数。默认完全匹配，正则模式下支持通配符 *，最多支持5个通配符，最大长度1024字符。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Path: string;
     /**
-      * 路径匹配时的回源源站。暂不支持开了私有读写的COS源。
+      * 路径匹配时的回源源站。暂不支持开了私有读写的COS源。不填写时沿用默认源站。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Origin: string;
     /**
-      * 路径匹配时回源的Host头部。
+      * 路径匹配时回源的Host头部。不填写时沿用默认ServerName。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ServerName: string;
     /**
-      * 源站所属区域，支持CN，OV。分别表示国内或海外。
+      * 源站所属区域，支持CN，OV。分别表示国内或海外。默认为CN。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     OriginArea: string;
     /**
-      * 路径匹配时回源的URI路径。
+      * 路径匹配时回源的URI路径，必须以“/”开头，不包含参数部分。最大长度1024字符。可使用$1, $2, $3, $4, $5分别捕获匹配路径中的通配符号，最多支持10个捕获值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ForwardUri?: string;
@@ -929,6 +931,18 @@ export interface DescribeDomainsResponse {
     RequestId?: string;
 }
 /**
+ * DescribePayType请求参数结构体
+ */
+export interface DescribePayTypeRequest {
+    /**
+      * 指定服务地域查询
+mainland：境内计费方式查询
+overseas：境外计费方式查询
+未填充时默认为 mainland
+      */
+    Area?: string;
+}
+/**
  * UpdateImageConfig请求参数结构体
  */
 export interface UpdateImageConfigRequest {
@@ -960,13 +974,33 @@ export interface DisableCachesRequest {
     Urls: Array<string>;
 }
 /**
- * DuplicateDomainConfig返回参数结构体
+ * 时间戳防盗链高级版模式D配置。
  */
-export interface DuplicateDomainConfigResponse {
+export interface AdvancedAuthenticationTypeD {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 用于计算签名的密钥，只允许字母和数字，长度6-32字节。
       */
-    RequestId?: string;
+    SecretKey: string;
+    /**
+      * 备份密钥，当使用SecretKey鉴权失败时会使用该密钥重新鉴权。
+      */
+    BackupSecretKey: string;
+    /**
+      * uri串中签名的字段名，字母，数字或下划线构成，同时必须以字母开头。
+      */
+    SignParam: string;
+    /**
+      * uri串中时间的字段名，字母，数字或下划线构成，同时必须以字母开头。
+      */
+    TimeParam: string;
+    /**
+      * 过期时间，单位秒。
+      */
+    ExpireTime: number;
+    /**
+      * 时间格式，dec，hex分别表示十进制，十六进制。
+      */
+    TimeFormat: string;
 }
 /**
  * 压缩规则配置，最多可设置 100 条
@@ -1128,6 +1162,27 @@ complain：申诉进行中
       * 更新时间
       */
     UpdateTime: string;
+}
+/**
+ * DescribeDomainsConfig请求参数结构体
+ */
+export interface DescribeDomainsConfigRequest {
+    /**
+      * 分页查询偏移量，默认为 0
+      */
+    Offset?: number;
+    /**
+      * 分页查询限制数目，默认为 100，最大可设置为 1000
+      */
+    Limit?: number;
+    /**
+      * 查询条件过滤器，复杂类型
+      */
+    Filters?: Array<DomainFilter>;
+    /**
+      * 排序规则
+      */
+    Sort?: Sort;
 }
 /**
  * 排序类型数据结构
@@ -1316,6 +1371,15 @@ export interface DeleteClsLogTopicRequest {
     Channel?: string;
 }
 /**
+ * DeleteScdnDomain请求参数结构体
+ */
+export interface DeleteScdnDomainRequest {
+    /**
+      * 域名
+      */
+    Domain: string;
+}
+/**
  * DescribeDistrictIspData返回参数结构体
  */
 export interface DescribeDistrictIspDataResponse {
@@ -1467,17 +1531,18 @@ global：全球锁定
     Readonly: string;
 }
 /**
- * UpdatePayType请求参数结构体
+ * 时间戳与其对应的数值
  */
-export interface UpdatePayTypeRequest {
+export interface TimestampData {
     /**
-      * 计费区域，mainland或overseas。
+      * 数据统计时间点，采用向前汇总模式
+以 5 分钟粒度为例，13:35:00 时间点代表的统计数据区间为 13:35:00 至 13:39:59
       */
-    Area: string;
+    Time: string;
     /**
-      * 计费类型，flux或bandwidth。
+      * 数据值
       */
-    PayType: string;
+    Value: number;
 }
 /**
  * 图片优化-TpgAdapter配置
@@ -2088,6 +2153,7 @@ all：所有文件生效
 file：指定文件后缀生效
 directory：指定路径生效
 path：指定绝对路径生效
+index: 指定主页生效
       */
     MaxAgeType: string;
     /**
@@ -2096,6 +2162,7 @@ all 时填充 *
 file 时填充后缀名，如 jpg、txt
 directory 时填充路径，如 /xxx/test/
 path 时填充绝对路径，如 /xxx/test.html
+index 时填充 /
       */
     MaxAgeContents: Array<string>;
     /**
@@ -2104,16 +2171,39 @@ path 时填充绝对路径，如 /xxx/test.html
     MaxAgeTime: number;
 }
 /**
- * DescribePayType请求参数结构体
+ * 时间戳防盗链高级版模式E配置。
  */
-export interface DescribePayTypeRequest {
+export interface AdvancedAuthenticationTypeE {
     /**
-      * 指定服务地域查询
-mainland：境内计费方式查询
-overseas：境外计费方式查询
-未填充时默认为 mainland
+      * 用于计算签名的密钥，只允许字母和数字，长度6-32字节。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Area?: string;
+    SecretKey: string;
+    /**
+      * uri串中签名的字段名，字母，数字或下划线构成，同时必须以字母开头。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SignParam: string;
+    /**
+      * uri串中Acl签名的字段名，字母，数字或下划线构成，同时必须以字母开头。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AclSignParam: string;
+    /**
+      * uri串中开始时间字段名，字母，数字或下划线构成，同时必须以字母开头。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StartTimeParam: string;
+    /**
+      * uri串中过期时间字段名，字母，数字或下划线构成，同时必须以字母开头。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExpireTimeParam: string;
+    /**
+      * 时间格式，dec
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TimeFormat: string;
 }
 /**
  * DescribeCertDomains请求参数结构体
@@ -2125,25 +2215,83 @@ export interface DescribeCertDomainsRequest {
     Cert: string;
 }
 /**
- * DescribeDomainsConfig请求参数结构体
+ * 时间戳防盗链高级鉴权模式TypeF配置
  */
-export interface DescribeDomainsConfigRequest {
+export interface AdvancedAuthenticationTypeF {
     /**
-      * 分页查询偏移量，默认为 0
+      * uri串中签名的字段名，字母，数字或下划线构成，同时必须以字母开头。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Offset?: number;
+    SignParam: string;
     /**
-      * 分页查询限制数目，默认为 100，最大可设置为 1000
+      * uri串中时间的字段名，字母，数字或下划线构成，同时必须以字母开头。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Limit?: number;
+    TimeParam: string;
     /**
-      * 查询条件过滤器，复杂类型
+      * uri串中Transaction字段名，字母，数字或下划线构成，同时必须以字母开头。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Filters?: Array<DomainFilter>;
+    TransactionParam: string;
     /**
-      * 排序规则
+      * 用于计算签名的主密钥，只允许字母和数字，长度6-32字节。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Sort?: Sort;
+    SecretKey: string;
+    /**
+      * 用于计算签名的备选密钥，主密钥校验失败后再次尝试备选密钥，只允许字母和数字，长度6-32字节。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BackupSecretKey?: string;
+}
+/**
+ * 时间戳防盗链高级版模式A配置。
+ */
+export interface AdvancedAuthenticationTypeA {
+    /**
+      * 用于计算签名的密钥，只允许字母和数字，长度6-32字节。
+      */
+    SecretKey: string;
+    /**
+      * uri串中签名的字段名，字母，数字或下划线构成，同时必须以字母开头。
+      */
+    SignParam: string;
+    /**
+      * uri串中时间的字段名，字母，数字或下划线构成，同时必须以字母开头。
+      */
+    TimeParam: string;
+    /**
+      * 过期时间，单位秒。
+      */
+    ExpireTime: number;
+    /**
+      * 是否必须提供过期时间参数。
+      */
+    ExpireTimeRequired: boolean;
+    /**
+      * Url组成格式，如：${private_key}${schema}${host}${full_uri。
+      */
+    Format: string;
+    /**
+      * 时间格式，dec，hex分别表示十进制，十六进制。
+      */
+    TimeFormat: string;
+    /**
+      * 鉴权失败时返回的状态码。
+      */
+    FailCode: number;
+    /**
+      * 链接过期时返回的状态码。
+      */
+    ExpireCode: number;
+    /**
+      * 需要鉴权的url路径列表。
+      */
+    RulePaths: Array<string>;
+    /**
+      * 保留字段。
+      */
+    Transformation?: number;
 }
 /**
  * 缓存过期配置高级版（功能灰度中，尚未全量）
@@ -2174,13 +2322,62 @@ off：关闭
     IgnoreSetCookie: string;
 }
 /**
- * DeleteScdnDomain请求参数结构体
+ * 时间戳防盗链高级版模式C配置。
  */
-export interface DeleteScdnDomainRequest {
+export interface AdvancedAuthenticationTypeC {
     /**
-      * 域名
+      * 访问密钥。
       */
-    Domain: string;
+    AccessKey: string;
+    /**
+      * 鉴权密钥。
+      */
+    SecretKey: string;
+}
+/**
+ * 时间戳防盗链高级版模式B配置。
+ */
+export interface AdvancedAuthenticationTypeB {
+    /**
+      * alpha键名。
+      */
+    KeyAlpha: string;
+    /**
+      * beta键名。
+      */
+    KeyBeta: string;
+    /**
+      * gamma键名。
+      */
+    KeyGamma: string;
+    /**
+      * uri串中签名的字段名，字母，数字或下划线构成，同时必须以字母开头。
+      */
+    SignParam: string;
+    /**
+      * uri串中时间的字段名，字母，数字或下划线构成，同时必须以字母开头。
+      */
+    TimeParam: string;
+    /**
+      * 过期时间，单位秒。
+      */
+    ExpireTime: number;
+    /**
+      * 时间格式，dec，hex分别表示十进制，十六进制。
+      */
+    TimeFormat: string;
+    /**
+      * 鉴权失败时返回的状态码。
+      */
+    FailCode: number;
+    /**
+      * 链接过期时返回的状态码。
+      */
+    ExpireCode: number;
+    /**
+      * 需要鉴权的url路径列表。
+      */
+    RulePaths: Array<string>;
 }
 /**
  * 图片优化-WebpAdapter配置
@@ -2394,6 +2591,16 @@ export interface AuthenticationTypeA {
 blacklist：黑名单，表示仅对 FileExtensions 中的类型进行鉴权
       */
     FilterType: string;
+}
+/**
+ * 回源鉴权高级配置TypeA
+ */
+export interface OriginAuthenticationTypeA {
+    /**
+      * 用于计算签名的密钥，只允许字母和数字，长度6-32字节。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SecretKey: string;
 }
 /**
  * scdn相关的配置
@@ -2979,7 +3186,7 @@ readonly：域名存在特殊配置，被锁定
       */
     MaxAge: MaxAge;
     /**
-      * Ipv6 配置（功能灰度中，敬请期待）
+      * Ipv6 回源配置（功能灰度中，敬请期待）
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Ipv6: Ipv6;
@@ -3062,6 +3269,16 @@ off：不支持
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Tag: Array<Tag>;
+    /**
+      * 时间戳防盗链高级配置，白名单功能
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AdvancedAuthentication: AdvancedAuthentication;
+    /**
+      * 回源鉴权高级配置，白名单功能
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OriginAuthentication: OriginAuthentication;
 }
 /**
  * GetDisableRecords返回参数结构体
@@ -3097,6 +3314,15 @@ off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
       */
     HeaderRules?: Array<HttpHeaderPathRule>;
+}
+/**
+ * DuplicateDomainConfig返回参数结构体
+ */
+export interface DuplicateDomainConfigResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CDN 节点上下线历史记录
@@ -3177,6 +3403,23 @@ export interface ListDiagnoseReportRequest {
       * 用于搜索诊断系统返回的诊断链接，形如：http://cdn.cloud.tencent.com/self_diagnose/xxxxx
       */
     DiagnoseLink?: string;
+}
+/**
+ * Url重定向规则配置
+ */
+export interface UrlRedirectRule {
+    /**
+      * 重定向状态码，301 | 302
+      */
+    RedirectStatusCode: number;
+    /**
+      * 待匹配的Url，仅支持Url路径，不支持参数。默认完全匹配，支持通配符 *，最多支持5个通配符，最大长度1024字符。
+      */
+    Pattern: string;
+    /**
+      * 目标URL，必须以“/”开头，不包含参数部分。最大长度1024字符。可使用$1, $2, $3, $4, $5分别捕获匹配路径中的通配符号，最多支持10个捕获值。
+      */
+    RedirectUrl: string;
 }
 /**
  * 节点缓存过期时间配置，分为以下两种：
@@ -4124,25 +4367,35 @@ export interface DescribeCdnIpResponse {
     RequestId?: string;
 }
 /**
- * DescribeCdnData返回参数结构体
+ * 缓存配置高级版本规则
  */
-export interface DescribeCdnDataResponse {
+export interface AdvanceCacheRule {
     /**
-      * 返回数据的时间粒度，查询时指定：
-min：1 分钟粒度
-5min：5 分钟粒度
-hour：1 小时粒度
-day：天粒度
+      * 规则类型：
+all：所有文件生效
+file：指定文件后缀生效
+directory：指定路径生效
+path：指定绝对路径生效
+default：源站未返回 max-age 情况下的缓存规则
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Interval?: string;
+    CacheType: string;
     /**
-      * 指定条件查询得到的数据明细
+      * 对应类型下的匹配内容：
+all 时填充 *
+file 时填充后缀名，如 jpg、txt
+directory 时填充路径，如 /xxx/test/
+path 时填充绝对路径，如 /xxx/test.html
+default 时填充 "no max-age"
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Data?: Array<ResourceData>;
+    CacheContents: Array<string>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 缓存过期时间
+单位为秒，最大可设置为 365 天
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RequestId?: string;
+    CacheTime: number;
 }
 /**
  * DescribeIpStatus返回参数结构体
@@ -4716,18 +4969,33 @@ export interface CreateEdgePackTaskResponse {
     RequestId?: string;
 }
 /**
- * 时间戳与其对应的数值
+ * CDN报表数据
  */
-export interface TimestampData {
+export interface ReportData {
     /**
-      * 数据统计时间点，采用向前汇总模式
-以 5 分钟粒度为例，13:35:00 时间点代表的统计数据区间为 13:35:00 至 13:39:59
+      * 项目ID/域名ID。
       */
-    Time: string;
+    ResourceId: string;
     /**
-      * 数据值
+      * 项目名称/域名。
+      */
+    Resource: string;
+    /**
+      * 流量总和/带宽最大值，单位分别为bytes，bps。
       */
     Value: number;
+    /**
+      * 单个资源占总体百分比。
+      */
+    Percentage: number;
+    /**
+      * 计费流量总和/计费带宽最大值，单位分别为bytes，bps。
+      */
+    BillingValue: number;
+    /**
+      * 计费数值占总体百分比。
+      */
+    BillingPercentage: number;
 }
 /**
  * StartCdnDomain返回参数结构体
@@ -5199,6 +5467,14 @@ global：全球加速
       * 访问端口配置
       */
     AccessPort?: Array<number>;
+    /**
+      * 时间戳防盗链高级版配置，白名单功能
+      */
+    AdvancedAuthentication?: AdvancedAuthentication;
+    /**
+      * 回源鉴权高级版配置，白名单功能
+      */
+    OriginAuthentication?: OriginAuthentication;
 }
 /**
  * s3源站回源鉴权。
@@ -5315,6 +5591,19 @@ blacklist：黑名单
     FilterRules?: Array<IpFilterPathRule>;
 }
 /**
+ * UpdatePayType请求参数结构体
+ */
+export interface UpdatePayTypeRequest {
+    /**
+      * 计费区域，mainland或overseas。
+      */
+    Area: string;
+    /**
+      * 计费类型，flux或bandwidth。
+      */
+    PayType: string;
+}
+/**
  * 诊断报告单元信息
  */
 export interface DiagnoseUnit {
@@ -5394,21 +5683,19 @@ export interface DescribePurgeTasksResponse {
     RequestId?: string;
 }
 /**
- * Url重定向规则配置
+ * 回源鉴权高级配置
  */
-export interface UrlRedirectRule {
+export interface OriginAuthentication {
     /**
-      * 重定向状态码，301 | 302
+      * 鉴权开关，on或off
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RedirectStatusCode: number;
+    Switch: string;
     /**
-      * 待匹配的Url模式，支持完全路径匹配和正则匹配，最大长度1024字符。
+      * 鉴权类型A配置
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Pattern: string;
-    /**
-      * 目标URL，必须以“/”开头，最大长度1024字符。
-      */
-    RedirectUrl: string;
+    TypeA?: OriginAuthenticationTypeA;
 }
 /**
  * 状态码重定向规则配置

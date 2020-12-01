@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ScanVoiceResponse, ModifyAppStatusRequest, DescribeScanResultListResponse, VoiceFilterRequest, DescribeScanResultListRequest, VoiceFilterResponse, DescribeFilterResultListResponse, DescribeAppStatisticsResponse, DescribeFilterResultResponse, DescribeFilterResultListRequest, CreateAppRequest, CreateAppResponse, DescribeAppStatisticsRequest, ModifyAppStatusResponse, DescribeFilterResultRequest, ScanVoiceRequest } from "./gme_models";
+import { ScanVoiceResponse, ModifyAppStatusRequest, DescribeScanResultListResponse, VoiceFilterRequest, DescribeScanResultListRequest, VoiceFilterResponse, DescribeFilterResultListResponse, DescribeAppStatisticsResponse, DescribeUserInAndOutTimeResponse, DescribeFilterResultResponse, DescribeFilterResultListRequest, CreateAppRequest, CreateAppResponse, DescribeAppStatisticsRequest, ModifyAppStatusResponse, DescribeFilterResultRequest, ScanVoiceRequest, DescribeUserInAndOutTimeRequest } from "./gme_models";
 /**
  * gme client
  * @class
@@ -178,4 +178,8 @@ Type表示过滤类型，1：政治，2：色情，3：谩骂
      * 本接口(ModifyAppStatus)用于修改应用总开关状态。
      */
     ModifyAppStatus(req: ModifyAppStatusRequest, cb?: (error: string, rep: ModifyAppStatusResponse) => void): Promise<ModifyAppStatusResponse>;
+    /**
+     * 拉取用户在房间得进出时间
+     */
+    DescribeUserInAndOutTime(req: DescribeUserInAndOutTimeRequest, cb?: (error: string, rep: DescribeUserInAndOutTimeResponse) => void): Promise<DescribeUserInAndOutTimeResponse>;
 }

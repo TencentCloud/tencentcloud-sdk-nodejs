@@ -214,5 +214,11 @@ Type表示过滤类型，1：政治，2：色情，3：谩骂
     async ModifyAppStatus(req, cb) {
         return this.request("ModifyAppStatus", req, cb);
     }
+    /**
+     * 拉取用户在房间得进出时间
+     */
+    async DescribeUserInAndOutTime(req, cb) {
+        return this.request("DescribeUserInAndOutTime", req, cb);
+    }
 }
 exports.Client = Client;

@@ -420,11 +420,11 @@ export interface MatchInfo {
  */
 export interface DescribeRulesRequest {
     /**
-      * 当前页号，不传则获取所有有权限的资源。
+      * 当前页号，不传则返回第一页
       */
     PageNumber?: number;
     /**
-      * 单页大小，不传则获取所有有权限的资源。
+      * 单页大小，最大 30，不填默认30
       */
     PageSize?: number;
     /**
@@ -914,11 +914,11 @@ export interface DescribeMatchesResponse {
       */
     TotalCount?: number;
     /**
-      * 当前页号
+      * 当前页号，不填默认返回第一页
       */
     PageNumber?: number;
     /**
-      * 单页大小
+      * 单页大小，不填默认取 30，最大值不能超过 30
       */
     PageSize?: number;
     /**

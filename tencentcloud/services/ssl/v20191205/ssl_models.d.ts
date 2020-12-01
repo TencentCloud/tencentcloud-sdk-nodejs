@@ -491,7 +491,7 @@ export interface OperationLog {
  */
 export interface UploadCertificateRequest {
     /**
-      * 证书公钥。
+      * 证书内容。
       */
     CertificatePublicKey: string;
     /**
