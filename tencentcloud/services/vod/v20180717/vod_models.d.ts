@@ -1135,6 +1135,10 @@ export interface DescribeStorageDataResponse {
       */
     StandardStorage?: number;
     /**
+      * 各计费区域的存储用量。
+      */
+    StorageStat?: Array<StorageStatData>;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -1971,6 +1975,23 @@ export interface FileUploadTask {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MetaData: MediaMetaData;
+}
+/**
+ * DescribeCDNStatDetails返回参数结构体
+ */
+export interface DescribeCDNStatDetailsResponse {
+    /**
+      * 每条数据的时间粒度，单位：分钟。
+      */
+    DataInterval?: number;
+    /**
+      * CDN 用量数据。
+      */
+    Data?: Array<StatDataItem>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 智能封面结果类型
@@ -5834,7 +5855,7 @@ export interface MediaTrackItem {
  */
 export interface DescribeStorageDetailsResponse {
     /**
-      * 存储统计数据，每分钟/小时/天一条数据。
+      * 存储统计数据，每5分钟或每天一条数据。
       */
     Data?: Array<StatDataItem>;
     /**
@@ -7362,6 +7383,104 @@ FINISH：已完成。
       * 微信地址。
       */
     WechatUrl: string;
+}
+/**
+ * DescribeCDNStatDetails请求参数结构体
+ */
+export interface DescribeCDNStatDetailsRequest {
+    /**
+      * 查询指标，取值有：
+<li>Traffic：流量，单位为 Byte。</li>
+<li>Bandwidth：带宽，单位为 Bps。</li>
+      */
+    Metric: string;
+    /**
+      * 起始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    StartTime: string;
+    /**
+      * 结束时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    EndTime: string;
+    /**
+      * 域名列表。一次最多查询20个域名的数据。默认返回所有域名叠加的用量数据。
+      */
+    DomainNames?: Array<string>;
+    /**
+      * 服务区域，取值有：
+<li>Chinese Mainland：中国大陆。 </li>
+<li>Asia Pacific Region 1：亚太一区，包括中国香港、中国澳门、新加坡、越南、泰国。 </li>
+<li>Asia Pacific Region 2：亚太二区，包括中国台湾、日本、马来西亚、印度尼西亚、韩国。 </li>
+<li>Asia Pacific Region 3：亚太三区，包括菲律宾、印度、澳大利亚和亚太其它国家和地区。 </li>
+<li>Middle East：中东。 </li>
+<li>Europe：欧洲。</li>
+<li>North America：北美。</li>
+<li>South America：南美。</li>
+<li>Africa：非洲。</li>
+默认为中国大陆。
+      */
+    Area?: string;
+    /**
+      * 用户所在地区，Area 为 Chinese Mainland 时，取值为以下地区信息，当 Area 为其它值时， 忽略 Districts 参数。
+<li>Beijing：北京。</li>
+<li>Inner Mongoria：内蒙古。</li>
+<li>Shanxi：山西。</li>
+<li>Hebei：河北。</li>
+<li>Tianjin：天津。</li>
+<li>Ningxia：宁夏。</li>
+<li>Shaanxi：陕西。</li>
+<li>Gansu：甘肃。</li>
+<li>Qinghai：青海。</li>
+<li>Xinjiang：新疆。</li>
+<li>Heilongjiang：黑龙江。</li>
+<li>Jilin：吉林。</li>
+<li>Liaoning：辽宁。</li>
+<li>Fujian：福建。</li>
+<li>Jiangsu：江苏。</li>
+<li>Anhui：安徽。</li>
+<li>Shandong：山东。</li>
+<li>Shanghai：上海。</li>
+<li>Zhejiang：浙江。</li>
+<li>Henan：河南。</li>
+<li>Hubei：湖北。</li>
+<li>Jiangxi：江西。</li>
+<li>Hunan：湖南。</li>
+<li>Guizhou：贵州。</li>
+<li>Yunnan：云南。</li>
+<li>Chongqing：重庆。</li>
+<li>Sichuan：四川。</li>
+<li>Tibet：西藏。</li>
+<li>Guangdong：广东。</li>
+<li>Guangxi：广西。</li>
+<li>Hainan：海南。</li>
+<li>Hongkong Macao And Taiwan：港澳台。</li>
+<li>outside Chinese Mainland：海外。</li>
+<li>Other：其他 。</li>
+      */
+    Districts?: Array<string>;
+    /**
+      * 用户所属运营商信息，Area 为 Chinese Mainland 时，取值为以下运营商信息。当 Area 为其它值时忽略 Isps 参数。
+<li>China Telecom：中国电信。 </li>
+<li>China Unicom：中国联通。 </li>
+<li>CERNET：教育网。</li>
+<li>Great Wall Broadband Network：长城宽带。</li>
+<li>China Mobile：中国移动。</li>
+<li>China Mobile Tieton：中国铁通。</li>
+<li>ISPs outside Chinese Mainland：海外运营商。</li>
+<li>Other ISPs：其他运营商。</li>
+      */
+    Isps?: Array<string>;
+    /**
+      * 每条数据的时间粒度，单位：分钟，取值有：
+<li>5：5 分钟粒度，返回指定查询时间内5分钟粒度的明细数据。</li>
+<li>1440：天粒度，返回指定查询时间内1天粒度的数据。起始时间和结束时间跨度大于24小时，只支持天粒度的数据。</li>
+当 StartTime 和 EndTime 时间跨度大于24小时时，DataInterval 默认为 1440。
+      */
+    DataInterval?: number;
+    /**
+      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      */
+    SubAppId?: number;
 }
 /**
  * 视频裁剪结果文件信息（2017 版）
@@ -11397,19 +11516,18 @@ export interface AiAnalysisTaskCoverInput {
  */
 export interface DescribeStorageDetailsRequest {
     /**
-      * 起始时间，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#52)。
+      * 起始时间，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#52)。
       */
     StartTime: string;
     /**
-      * 结束时间，需大于开始日期，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#52)。
+      * 结束时间，需大于开始日期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#52)。
       */
     EndTime: string;
     /**
-      * 查询时间间隔，有效值：
-<li>Minute：每分钟一个统计数据。</li>
-<li>Hour：每小时一个统计数据。</li>
-<li>Day：每天一个统计数据。</li>
-默认按时间跨度决定，小于1小时按分钟，小于等于7天按小时，大于7天按天展示。
+      * 统计时间粒度，有效值：
+<li>Minute：以5分钟为粒度。</li>
+<li>Day：以天为粒度。</li>
+默认按时间跨度决定，小于等于1天以5分钟为粒度，大于1天则以天为粒度。
       */
     Interval?: string;
     /**
@@ -11425,6 +11543,13 @@ export interface DescribeStorageDetailsRequest {
 当该字段为1时，表示以管理员身份查询所有子应用（含主应用）的用量合计。
       */
     SubAppId?: number;
+    /**
+      * 查询的存储区域，有效值：
+<li>Chinese Mainland：中国境内（不包含港澳台）。</li>
+<li>outside Chinese Mainland：中国境外。</li>
+默认值为 Chinese Mainland。
+      */
+    Area?: string;
 }
 /**
  * 轨道信息
@@ -11443,6 +11568,29 @@ export interface MediaTrack {
       * 轨道上的媒体片段列表。
       */
     TrackItems: Array<MediaTrackItem>;
+}
+/**
+ * 云点播存储用量的分区统计数据
+ */
+export interface StorageStatData {
+    /**
+      * 点播存储的计费区域，可能值：
+<li>Chinese Mainland：中国境内（不包含港澳台）。</li>
+<li>outside Chinese Mainland：中国境外。</li>
+      */
+    Area: string;
+    /**
+      * 当前总存储量，单位是字节。
+      */
+    TotalStorage: number;
+    /**
+      * 当前低频存储量，单位是字节。
+      */
+    InfrequentStorage: number;
+    /**
+      * 当前标准存储量，单位是字节。
+      */
+    StandardStorage: number;
 }
 /**
  * 视频处理输出文件信息参数。

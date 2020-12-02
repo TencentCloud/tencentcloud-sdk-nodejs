@@ -349,6 +349,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteClsLogTopic", req, cb);
     }
     /**
+     * 本接口（DescribeCdnOriginIp）用于查询 CDN 回源节点的IP信息。（注：使用此接口需开启对应白名单）
+     */
+    async DescribeCdnOriginIp(req, cb) {
+        return this.request("DescribeCdnOriginIp", req, cb);
+    }
+    /**
      * DescribeBillingData 用于查询实际计费数据明细。
      */
     async DescribeBillingData(req, cb) {

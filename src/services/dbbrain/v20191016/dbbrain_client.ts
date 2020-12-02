@@ -18,30 +18,45 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeAllUserContactRequest,
   DescribeTopSpaceTableTimeSeriesResponse,
+  ContactItem,
   DescribeDBDiagHistoryResponse,
   DescribeDBSpaceStatusRequest,
-  DescribeSlowLogTimeSeriesStatsResponse,
+  DescribeAllUserContactResponse,
   TimeSlice,
-  MonitorFloatMetric,
+  ModifyDiagDBInstanceConfRequest,
   MonitorMetric,
+  CreateDBDiagReportTaskRequest,
+  MonitorFloatMetric,
   TableSpaceTimeSeries,
+  DescribeAllUserGroupResponse,
+  SchemaItem,
+  CreateMailProfileResponse,
   DescribeTopSpaceTablesRequest,
   DescribeSlowLogTimeSeriesStatsRequest,
   DescribeDBDiagEventRequest,
   DescribeDBSpaceStatusResponse,
   DescribeDBDiagEventResponse,
   DescribeDBDiagHistoryRequest,
+  GroupItem,
   DescribeTopSpaceTableTimeSeriesRequest,
+  CreateDBDiagReportTaskResponse,
   MonitorMetricSeriesData,
+  ModifyDiagDBInstanceConfResponse,
   DiagHistoryEventItem,
   SlowLogTopSqlItem,
+  CreateMailProfileRequest,
   MonitorFloatMetricSeriesData,
+  MailConfiguration,
   DescribeSlowLogTopSqlsRequest,
   TableSpaceData,
   DescribeSlowLogTopSqlsResponse,
+  InstanceConfs,
+  ProfileInfo,
+  DescribeAllUserGroupRequest,
+  DescribeSlowLogTimeSeriesStatsResponse,
   DescribeTopSpaceTablesResponse,
-  SchemaItem,
 } from "./dbbrain_models"
 
 /**
@@ -54,16 +69,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取实例占用空间最大的前几张表在指定时间段内的每日由DBbrain定时采集的空间数据，默认返回按大小排序。
-   */
-  async DescribeTopSpaceTableTimeSeries(
-    req: DescribeTopSpaceTableTimeSeriesRequest,
-    cb?: (error: string, rep: DescribeTopSpaceTableTimeSeriesResponse) => void
-  ): Promise<DescribeTopSpaceTableTimeSeriesResponse> {
-    return this.request("DescribeTopSpaceTableTimeSeries", req, cb)
-  }
-
-  /**
    * 获取慢日志统计柱状图。
    */
   async DescribeSlowLogTimeSeriesStats(
@@ -71,6 +76,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSlowLogTimeSeriesStatsResponse) => void
   ): Promise<DescribeSlowLogTimeSeriesStatsResponse> {
     return this.request("DescribeSlowLogTimeSeriesStats", req, cb)
+  }
+
+  /**
+   * 获取邮件发送中联系人的相关信息。
+   */
+  async DescribeAllUserContact(
+    req: DescribeAllUserContactRequest,
+    cb?: (error: string, rep: DescribeAllUserContactResponse) => void
+  ): Promise<DescribeAllUserContactResponse> {
+    return this.request("DescribeAllUserContact", req, cb)
+  }
+
+  /**
+   * 获取实例异常诊断事件的详情信息。
+   */
+  async DescribeDBDiagEvent(
+    req: DescribeDBDiagEventRequest,
+    cb?: (error: string, rep: DescribeDBDiagEventResponse) => void
+  ): Promise<DescribeDBDiagEventResponse> {
+    return this.request("DescribeDBDiagEvent", req, cb)
   }
 
   /**
@@ -94,16 +119,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取实例异常诊断事件的详情信息。
-   */
-  async DescribeDBDiagEvent(
-    req: DescribeDBDiagEventRequest,
-    cb?: (error: string, rep: DescribeDBDiagEventResponse) => void
-  ): Promise<DescribeDBDiagEventResponse> {
-    return this.request("DescribeDBDiagEvent", req, cb)
-  }
-
-  /**
    * 获取实例Top表的实时空间统计信息，默认返回按大小排序。
    */
   async DescribeTopSpaceTables(
@@ -111,6 +126,56 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTopSpaceTablesResponse) => void
   ): Promise<DescribeTopSpaceTablesResponse> {
     return this.request("DescribeTopSpaceTables", req, cb)
+  }
+
+  /**
+   * 创建健康报告，并可以选择是否发送邮件。
+   */
+  async CreateDBDiagReportTask(
+    req: CreateDBDiagReportTaskRequest,
+    cb?: (error: string, rep: CreateDBDiagReportTaskResponse) => void
+  ): Promise<CreateDBDiagReportTaskResponse> {
+    return this.request("CreateDBDiagReportTask", req, cb)
+  }
+
+  /**
+   * 创建邮件配置。其中入参ProfileType表示所创建配置的类型，ProfileType 取值包括：dbScan_mail_configuration（数据库巡检邮件配置）、scheduler_mail_configuration（定期生成邮件配置）。
+   */
+  async CreateMailProfile(
+    req: CreateMailProfileRequest,
+    cb?: (error: string, rep: CreateMailProfileResponse) => void
+  ): Promise<CreateMailProfileResponse> {
+    return this.request("CreateMailProfile", req, cb)
+  }
+
+  /**
+   * 修改实例巡检开关。
+   */
+  async ModifyDiagDBInstanceConf(
+    req: ModifyDiagDBInstanceConfRequest,
+    cb?: (error: string, rep: ModifyDiagDBInstanceConfResponse) => void
+  ): Promise<ModifyDiagDBInstanceConfResponse> {
+    return this.request("ModifyDiagDBInstanceConf", req, cb)
+  }
+
+  /**
+   * 获取实例占用空间最大的前几张表在指定时间段内的每日由DBbrain定时采集的空间数据，默认返回按大小排序。
+   */
+  async DescribeTopSpaceTableTimeSeries(
+    req: DescribeTopSpaceTableTimeSeriesRequest,
+    cb?: (error: string, rep: DescribeTopSpaceTableTimeSeriesResponse) => void
+  ): Promise<DescribeTopSpaceTableTimeSeriesResponse> {
+    return this.request("DescribeTopSpaceTableTimeSeries", req, cb)
+  }
+
+  /**
+   * 获取邮件发送联系组的相关信息。
+   */
+  async DescribeAllUserGroup(
+    req: DescribeAllUserGroupRequest,
+    cb?: (error: string, rep: DescribeAllUserGroupResponse) => void
+  ): Promise<DescribeAllUserGroupResponse> {
+    return this.request("DescribeAllUserGroup", req, cb)
   }
 
   /**

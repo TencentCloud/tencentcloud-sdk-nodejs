@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeTopSpaceTableTimeSeriesResponse, DescribeDBDiagHistoryResponse, DescribeDBSpaceStatusRequest, DescribeSlowLogTimeSeriesStatsResponse, DescribeTopSpaceTablesRequest, DescribeSlowLogTimeSeriesStatsRequest, DescribeDBDiagEventRequest, DescribeDBSpaceStatusResponse, DescribeDBDiagEventResponse, DescribeDBDiagHistoryRequest, DescribeTopSpaceTableTimeSeriesRequest, DescribeSlowLogTopSqlsRequest, DescribeSlowLogTopSqlsResponse, DescribeTopSpaceTablesResponse } from "./dbbrain_models";
+import { DescribeAllUserContactRequest, DescribeTopSpaceTableTimeSeriesResponse, DescribeDBDiagHistoryResponse, DescribeDBSpaceStatusRequest, DescribeAllUserContactResponse, ModifyDiagDBInstanceConfRequest, CreateDBDiagReportTaskRequest, DescribeAllUserGroupResponse, CreateMailProfileResponse, DescribeTopSpaceTablesRequest, DescribeSlowLogTimeSeriesStatsRequest, DescribeDBDiagEventRequest, DescribeDBSpaceStatusResponse, DescribeDBDiagEventResponse, DescribeDBDiagHistoryRequest, DescribeTopSpaceTableTimeSeriesRequest, CreateDBDiagReportTaskResponse, ModifyDiagDBInstanceConfResponse, CreateMailProfileRequest, DescribeSlowLogTopSqlsRequest, DescribeSlowLogTopSqlsResponse, DescribeAllUserGroupRequest, DescribeSlowLogTimeSeriesStatsResponse, DescribeTopSpaceTablesResponse } from "./dbbrain_models";
 /**
  * dbbrain client
  * @class
@@ -8,13 +8,17 @@ import { DescribeTopSpaceTableTimeSeriesResponse, DescribeDBDiagHistoryResponse,
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 获取实例占用空间最大的前几张表在指定时间段内的每日由DBbrain定时采集的空间数据，默认返回按大小排序。
-     */
-    DescribeTopSpaceTableTimeSeries(req: DescribeTopSpaceTableTimeSeriesRequest, cb?: (error: string, rep: DescribeTopSpaceTableTimeSeriesResponse) => void): Promise<DescribeTopSpaceTableTimeSeriesResponse>;
-    /**
      * 获取慢日志统计柱状图。
      */
     DescribeSlowLogTimeSeriesStats(req: DescribeSlowLogTimeSeriesStatsRequest, cb?: (error: string, rep: DescribeSlowLogTimeSeriesStatsResponse) => void): Promise<DescribeSlowLogTimeSeriesStatsResponse>;
+    /**
+     * 获取邮件发送中联系人的相关信息。
+     */
+    DescribeAllUserContact(req: DescribeAllUserContactRequest, cb?: (error: string, rep: DescribeAllUserContactResponse) => void): Promise<DescribeAllUserContactResponse>;
+    /**
+     * 获取实例异常诊断事件的详情信息。
+     */
+    DescribeDBDiagEvent(req: DescribeDBDiagEventRequest, cb?: (error: string, rep: DescribeDBDiagEventResponse) => void): Promise<DescribeDBDiagEventResponse>;
     /**
      * 获取实例诊断事件的列表。
      */
@@ -24,13 +28,29 @@ export declare class Client extends AbstractClient {
      */
     DescribeDBSpaceStatus(req: DescribeDBSpaceStatusRequest, cb?: (error: string, rep: DescribeDBSpaceStatusResponse) => void): Promise<DescribeDBSpaceStatusResponse>;
     /**
-     * 获取实例异常诊断事件的详情信息。
-     */
-    DescribeDBDiagEvent(req: DescribeDBDiagEventRequest, cb?: (error: string, rep: DescribeDBDiagEventResponse) => void): Promise<DescribeDBDiagEventResponse>;
-    /**
      * 获取实例Top表的实时空间统计信息，默认返回按大小排序。
      */
     DescribeTopSpaceTables(req: DescribeTopSpaceTablesRequest, cb?: (error: string, rep: DescribeTopSpaceTablesResponse) => void): Promise<DescribeTopSpaceTablesResponse>;
+    /**
+     * 创建健康报告，并可以选择是否发送邮件。
+     */
+    CreateDBDiagReportTask(req: CreateDBDiagReportTaskRequest, cb?: (error: string, rep: CreateDBDiagReportTaskResponse) => void): Promise<CreateDBDiagReportTaskResponse>;
+    /**
+     * 创建邮件配置。其中入参ProfileType表示所创建配置的类型，ProfileType 取值包括：dbScan_mail_configuration（数据库巡检邮件配置）、scheduler_mail_configuration（定期生成邮件配置）。
+     */
+    CreateMailProfile(req: CreateMailProfileRequest, cb?: (error: string, rep: CreateMailProfileResponse) => void): Promise<CreateMailProfileResponse>;
+    /**
+     * 修改实例巡检开关。
+     */
+    ModifyDiagDBInstanceConf(req: ModifyDiagDBInstanceConfRequest, cb?: (error: string, rep: ModifyDiagDBInstanceConfResponse) => void): Promise<ModifyDiagDBInstanceConfResponse>;
+    /**
+     * 获取实例占用空间最大的前几张表在指定时间段内的每日由DBbrain定时采集的空间数据，默认返回按大小排序。
+     */
+    DescribeTopSpaceTableTimeSeries(req: DescribeTopSpaceTableTimeSeriesRequest, cb?: (error: string, rep: DescribeTopSpaceTableTimeSeriesResponse) => void): Promise<DescribeTopSpaceTableTimeSeriesResponse>;
+    /**
+     * 获取邮件发送联系组的相关信息。
+     */
+    DescribeAllUserGroup(req: DescribeAllUserGroupRequest, cb?: (error: string, rep: DescribeAllUserGroupResponse) => void): Promise<DescribeAllUserGroupResponse>;
     /**
      * 按照Sql模板+schema的聚合方式，统计排序指定时间段内的top慢sql。
      */

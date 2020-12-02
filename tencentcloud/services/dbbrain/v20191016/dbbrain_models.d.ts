@@ -1,4 +1,17 @@
 /**
+ * DescribeAllUserContact请求参数结构体
+ */
+export interface DescribeAllUserContactRequest {
+    /**
+      * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL。
+      */
+    Product: string;
+    /**
+      * 联系人名数组，支持模糊搜索。
+      */
+    Names?: Array<string>;
+}
+/**
  * DescribeTopSpaceTableTimeSeries返回参数结构体
  */
 export interface DescribeTopSpaceTableTimeSeriesResponse {
@@ -10,6 +23,23 @@ export interface DescribeTopSpaceTableTimeSeriesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 联系人contact描述。
+ */
+export interface ContactItem {
+    /**
+      * 联系人id。
+      */
+    Id: number;
+    /**
+      * 联系人姓名。
+      */
+    Name: string;
+    /**
+      * 联系人绑定的邮箱。
+      */
+    Mail: string;
 }
 /**
  * DescribeDBDiagHistory返回参数结构体
@@ -42,21 +72,18 @@ export interface DescribeDBSpaceStatusRequest {
     Product?: string;
 }
 /**
- * DescribeSlowLogTimeSeriesStats返回参数结构体
+ * DescribeAllUserContact返回参数结构体
  */
-export interface DescribeSlowLogTimeSeriesStatsResponse {
+export interface DescribeAllUserContactResponse {
     /**
-      * 柱间单位时间间隔，单位为秒。
+      * 联系人的总数量。
       */
-    Period?: number;
+    TotalCount?: number;
     /**
-      * 单位时间间隔内慢日志数量统计。
+      * 联系人的信息。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    TimeSeries?: Array<TimeSlice>;
-    /**
-      * 单位时间间隔内的实例 cpu 利用率监控数据。
-      */
-    SeriesData?: MonitorMetricSeriesData;
+    Contacts?: Array<ContactItem>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -76,9 +103,30 @@ export interface TimeSlice {
     Timestamp: number;
 }
 /**
- * 监控数据（浮点型）
+ * ModifyDiagDBInstanceConf请求参数结构体
  */
-export interface MonitorFloatMetric {
+export interface ModifyDiagDBInstanceConfRequest {
+    /**
+      * 巡检开关。
+      */
+    InstanceConfs: InstanceConfs;
+    /**
+      * 生效实例地域，取值为"All"，代表全地域。
+      */
+    Regions: string;
+    /**
+      * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL。
+      */
+    Product: string;
+    /**
+      * 指定更改巡检状态的实例ID。
+      */
+    InstanceIds?: Array<string>;
+}
+/**
+ * 监控数据
+ */
+export interface MonitorMetric {
     /**
       * 指标名称。
       */
@@ -94,9 +142,42 @@ export interface MonitorFloatMetric {
     Values: Array<number>;
 }
 /**
- * 监控数据
+ * CreateDBDiagReportTask请求参数结构体
  */
-export interface MonitorMetric {
+export interface CreateDBDiagReportTaskRequest {
+    /**
+      * 实例ID。
+      */
+    InstanceId: string;
+    /**
+      * 开始时间，如“2020-11-08T14:00:00+08:00”。
+      */
+    StartTime: string;
+    /**
+      * 结束时间，如“2020-11-09T14:00:00+08:00”。
+      */
+    EndTime: string;
+    /**
+      * 是否发送邮件: 0 - 否，1 - 是。
+      */
+    SendMailFlag: number;
+    /**
+      * 接收邮件的联系人ID数组。
+      */
+    ContactPerson?: Array<number>;
+    /**
+      * 接收邮件的联系组ID数组。
+      */
+    ContactGroup?: Array<number>;
+    /**
+      * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认值为"mysql"。
+      */
+    Product?: string;
+}
+/**
+ * 监控数据（浮点型）
+ */
+export interface MonitorFloatMetric {
     /**
       * 指标名称。
       */
@@ -131,6 +212,42 @@ export interface TableSpaceTimeSeries {
       * 单位时间间隔内的空间指标数据。
       */
     SeriesData: MonitorFloatMetricSeriesData;
+}
+/**
+ * DescribeAllUserGroup返回参数结构体
+ */
+export interface DescribeAllUserGroupResponse {
+    /**
+      * 组总数。
+      */
+    TotalCount?: number;
+    /**
+      * 组信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Groups?: Array<GroupItem>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * SchemaItem数组
+ */
+export interface SchemaItem {
+    /**
+      * 数据库名称
+      */
+    Schema: string;
+}
+/**
+ * CreateMailProfile返回参数结构体
+ */
+export interface CreateMailProfileResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeTopSpaceTables请求参数结构体
@@ -292,6 +409,23 @@ export interface DescribeDBDiagHistoryRequest {
     Product?: string;
 }
 /**
+ * 描述组信息。
+ */
+export interface GroupItem {
+    /**
+      * 组id。
+      */
+    Id: number;
+    /**
+      * 组名称。
+      */
+    Name: string;
+    /**
+      * 组成员数量。
+      */
+    MemberCount: number;
+}
+/**
  * DescribeTopSpaceTableTimeSeries请求参数结构体
  */
 export interface DescribeTopSpaceTableTimeSeriesRequest {
@@ -321,6 +455,20 @@ export interface DescribeTopSpaceTableTimeSeriesRequest {
     Product?: string;
 }
 /**
+ * CreateDBDiagReportTask返回参数结构体
+ */
+export interface CreateDBDiagReportTaskResponse {
+    /**
+      * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AsyncRequestId?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 单位时间间隔内的监控指标数据
  */
 export interface MonitorMetricSeriesData {
@@ -332,6 +480,15 @@ export interface MonitorMetricSeriesData {
       * 监控指标对应的时间戳。
       */
     Timestamp: Array<number>;
+}
+/**
+ * ModifyDiagDBInstanceConf返回参数结构体
+ */
+export interface ModifyDiagDBInstanceConfResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 实例诊断历史事件
@@ -467,6 +624,35 @@ export interface SlowLogTopSqlItem {
     RowsSentRatio: number;
 }
 /**
+ * CreateMailProfile请求参数结构体
+ */
+export interface CreateMailProfileRequest {
+    /**
+      * 邮件配置内容。
+      */
+    ProfileInfo: ProfileInfo;
+    /**
+      * 配置级别，支持值包括："User" - 用户级别，"Instance" - 实例级别，其中数据库巡检邮件配置为用户级别，定期生成邮件配置为实例级别。
+      */
+    ProfileLevel: string;
+    /**
+      * 配置名称，需要保持唯一性，数据库巡检邮件配置名称自拟；定期生成邮件配置命名格式："scheduler_" + {instanceId}，如"schduler_cdb-test"。
+      */
+    ProfileName: string;
+    /**
+      * 配置类型，支持值包括："dbScan_mail_configuration" - 数据库巡检邮件配置，"scheduler_mail_configuration" - 定期生成邮件配置。
+      */
+    ProfileType: string;
+    /**
+      * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL。
+      */
+    Product: string;
+    /**
+      * 配置绑定的实例ID，当配置级别为"Instance"时需要传入。
+      */
+    BindInstanceIds?: Array<string>;
+}
+/**
  * 单位时间间隔内的监控指标数据（浮点型）
  */
 export interface MonitorFloatMetricSeriesData {
@@ -478,6 +664,31 @@ export interface MonitorFloatMetricSeriesData {
       * 监控指标对应的时间戳。
       */
     Timestamp: Array<number>;
+}
+/**
+ * 邮件发送配置
+ */
+export interface MailConfiguration {
+    /**
+      * 是否开启邮件发送: 0, 否; 1, 是。
+      */
+    SendMail: number;
+    /**
+      * 地域配置, 如["ap-guangzhou", "ap-shanghai"]。
+      */
+    Region: Array<string>;
+    /**
+      * 发送指定的健康等级的报告, 如["HEALTH", "SUB_HEALTH", "RISK", "HIGH_RISK"]。
+      */
+    HealthStatus: Array<string>;
+    /**
+      * 联系人id, 联系人/联系组不能都为空。
+      */
+    ContactPerson?: Array<number>;
+    /**
+      * 联系组id, 联系人/联系组不能都为空。
+      */
+    ContactGroup?: Array<number>;
 }
 /**
  * DescribeSlowLogTopSqls请求参数结构体
@@ -583,6 +794,62 @@ export interface DescribeSlowLogTopSqlsResponse {
     RequestId?: string;
 }
 /**
+ * 实例配置。
+ */
+export interface InstanceConfs {
+    /**
+      * 数据库巡检开关, Yes/No。
+      */
+    DailyInspection?: string;
+}
+/**
+ * 用户配置的信息
+ */
+export interface ProfileInfo {
+    /**
+      * 语言, 如"zh"。
+      */
+    Language: string;
+    /**
+      * 邮件模板的内容。
+      */
+    MailConfiguration: MailConfiguration;
+}
+/**
+ * DescribeAllUserGroup请求参数结构体
+ */
+export interface DescribeAllUserGroupRequest {
+    /**
+      * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL。
+      */
+    Product: string;
+    /**
+      * 联系组名称数组，支持模糊搜索。
+      */
+    Names?: Array<string>;
+}
+/**
+ * DescribeSlowLogTimeSeriesStats返回参数结构体
+ */
+export interface DescribeSlowLogTimeSeriesStatsResponse {
+    /**
+      * 柱间单位时间间隔，单位为秒。
+      */
+    Period?: number;
+    /**
+      * 单位时间间隔内慢日志数量统计。
+      */
+    TimeSeries?: Array<TimeSlice>;
+    /**
+      * 单位时间间隔内的实例 cpu 利用率监控数据。
+      */
+    SeriesData?: MonitorMetricSeriesData;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeTopSpaceTables返回参数结构体
  */
 export interface DescribeTopSpaceTablesResponse {
@@ -598,13 +865,4 @@ export interface DescribeTopSpaceTablesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * SchemaItem数组
- */
-export interface SchemaItem {
-    /**
-      * 数据库名称
-      */
-    Schema: string;
 }

@@ -634,6 +634,26 @@ export interface DomainFilter {
 }
 
 /**
+ * DescribeCdnOriginIp返回参数结构体
+ */
+export interface DescribeCdnOriginIpResponse {
+  /**
+   * 回源节点IP详情。
+   */
+  Ips?: Array<OriginIp>
+
+  /**
+   * 回源节点IP总个数。
+   */
+  TotalCount?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 域名国内海外分地区特殊配置。
  */
 export interface SpecificConfig {
@@ -1610,6 +1630,11 @@ export interface DescribeDistrictIspDataResponse {
    */
   RequestId?: string
 }
+
+/**
+ * DescribeCdnOriginIp请求参数结构体
+ */
+export type DescribeCdnOriginIpRequest = null
 
 /**
  * UpdatePayType返回参数结构体
@@ -6726,6 +6751,16 @@ export interface DeleteCdnDomainResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CDN回源节点IP信息
+ */
+export interface OriginIp {
+  /**
+   * 回源IP段/回源IP，默认返回IP段信息。
+   */
+  Ip: string
 }
 
 /**

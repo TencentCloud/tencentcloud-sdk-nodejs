@@ -218,6 +218,15 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTranscodeTemplate", req, cb);
     }
     /**
+     * 该接口用于查询点播域名的 CDN 带宽、流量等统计数据。
+* 查询的起始时间和结束时间跨度不超过90天。
+* 可以查询不同服务区域的数据。
+* 中国境内的数据支持查询指定地区、运营商的统计数据。
+     */
+    async DescribeCDNStatDetails(req, cb) {
+        return this.request("DescribeCDNStatDetails", req, cb);
+    }
+    /**
      * 修改用户自定义雪碧图模板。
      */
     async ModifyImageSpriteTemplate(req, cb) {
@@ -456,10 +465,9 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 该接口返回查询时间范围内使用的点播存储空间，单位：字节。
-   1. 可以查询最近365天内的存储空间数据；
-   2. 查询时间跨度不超过90天；
-   3. 分钟粒度查询跨度不超过5天；
-   4. 小时粒度查询跨度不超过10天。
+    1. 可以查询最近365天内的存储空间数据；
+    2. 查询时间跨度不超过90天；
+    3. 分钟粒度查询跨度不超过7天；
      */
     async DescribeStorageDetails(req, cb) {
         return this.request("DescribeStorageDetails", req, cb);

@@ -28,16 +28,22 @@ class Client extends abstract_client_1.AbstractClient {
         super("dbbrain.tencentcloudapi.com", "2019-10-16", clientConfig);
     }
     /**
-     * 获取实例占用空间最大的前几张表在指定时间段内的每日由DBbrain定时采集的空间数据，默认返回按大小排序。
-     */
-    async DescribeTopSpaceTableTimeSeries(req, cb) {
-        return this.request("DescribeTopSpaceTableTimeSeries", req, cb);
-    }
-    /**
      * 获取慢日志统计柱状图。
      */
     async DescribeSlowLogTimeSeriesStats(req, cb) {
         return this.request("DescribeSlowLogTimeSeriesStats", req, cb);
+    }
+    /**
+     * 获取邮件发送中联系人的相关信息。
+     */
+    async DescribeAllUserContact(req, cb) {
+        return this.request("DescribeAllUserContact", req, cb);
+    }
+    /**
+     * 获取实例异常诊断事件的详情信息。
+     */
+    async DescribeDBDiagEvent(req, cb) {
+        return this.request("DescribeDBDiagEvent", req, cb);
     }
     /**
      * 获取实例诊断事件的列表。
@@ -52,16 +58,40 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBSpaceStatus", req, cb);
     }
     /**
-     * 获取实例异常诊断事件的详情信息。
-     */
-    async DescribeDBDiagEvent(req, cb) {
-        return this.request("DescribeDBDiagEvent", req, cb);
-    }
-    /**
      * 获取实例Top表的实时空间统计信息，默认返回按大小排序。
      */
     async DescribeTopSpaceTables(req, cb) {
         return this.request("DescribeTopSpaceTables", req, cb);
+    }
+    /**
+     * 创建健康报告，并可以选择是否发送邮件。
+     */
+    async CreateDBDiagReportTask(req, cb) {
+        return this.request("CreateDBDiagReportTask", req, cb);
+    }
+    /**
+     * 创建邮件配置。其中入参ProfileType表示所创建配置的类型，ProfileType 取值包括：dbScan_mail_configuration（数据库巡检邮件配置）、scheduler_mail_configuration（定期生成邮件配置）。
+     */
+    async CreateMailProfile(req, cb) {
+        return this.request("CreateMailProfile", req, cb);
+    }
+    /**
+     * 修改实例巡检开关。
+     */
+    async ModifyDiagDBInstanceConf(req, cb) {
+        return this.request("ModifyDiagDBInstanceConf", req, cb);
+    }
+    /**
+     * 获取实例占用空间最大的前几张表在指定时间段内的每日由DBbrain定时采集的空间数据，默认返回按大小排序。
+     */
+    async DescribeTopSpaceTableTimeSeries(req, cb) {
+        return this.request("DescribeTopSpaceTableTimeSeries", req, cb);
+    }
+    /**
+     * 获取邮件发送联系组的相关信息。
+     */
+    async DescribeAllUserGroup(req, cb) {
+        return this.request("DescribeAllUserGroup", req, cb);
     }
     /**
      * 按照Sql模板+schema的聚合方式，统计排序指定时间段内的top慢sql。

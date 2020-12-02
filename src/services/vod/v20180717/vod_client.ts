@@ -100,6 +100,7 @@ import {
   ConcatTask2017,
   DeleteAIRecognitionTemplateRequest,
   FileUploadTask,
+  DescribeCDNStatDetailsResponse,
   AiAnalysisTaskCoverResult,
   AiAnalysisTaskClassificationOutput,
   FileDeleteTask,
@@ -337,6 +338,7 @@ import {
   TranscodeTaskInput,
   ModifyAIRecognitionTemplateRequest,
   WechatPublishTask,
+  DescribeCDNStatDetailsRequest,
   ClipFileInfo2017,
   StatDataItem,
   MediaSourceData,
@@ -501,6 +503,7 @@ import {
   AiAnalysisTaskCoverInput,
   DescribeStorageDetailsRequest,
   MediaTrack,
+  StorageStatData,
   MediaOutputInfo,
   EditMediaTaskOutput,
   HighlightSegmentItem,
@@ -811,6 +814,19 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateTranscodeTemplateResponse) => void
   ): Promise<CreateTranscodeTemplateResponse> {
     return this.request("CreateTranscodeTemplate", req, cb)
+  }
+
+  /**
+   * 该接口用于查询点播域名的 CDN 带宽、流量等统计数据。
+   * 查询的起始时间和结束时间跨度不超过90天。
+   * 可以查询不同服务区域的数据。
+   * 中国境内的数据支持查询指定地区、运营商的统计数据。
+   */
+  async DescribeCDNStatDetails(
+    req: DescribeCDNStatDetailsRequest,
+    cb?: (error: string, rep: DescribeCDNStatDetailsResponse) => void
+  ): Promise<DescribeCDNStatDetailsResponse> {
+    return this.request("DescribeCDNStatDetails", req, cb)
   }
 
   /**
@@ -1176,10 +1192,9 @@ export class Client extends AbstractClient {
 
   /**
      * 该接口返回查询时间范围内使用的点播存储空间，单位：字节。
-   1. 可以查询最近365天内的存储空间数据；
-   2. 查询时间跨度不超过90天；
-   3. 分钟粒度查询跨度不超过5天；
-   4. 小时粒度查询跨度不超过10天。
+    1. 可以查询最近365天内的存储空间数据；
+    2. 查询时间跨度不超过90天；
+    3. 分钟粒度查询跨度不超过7天；
      */
   async DescribeStorageDetails(
     req: DescribeStorageDetailsRequest,

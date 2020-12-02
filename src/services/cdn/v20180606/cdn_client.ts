@@ -38,6 +38,7 @@ import {
   CreateClsLogTopicResponse,
   PurgePathCacheResponse,
   DomainFilter,
+  DescribeCdnOriginIpResponse,
   SpecificConfig,
   FollowRedirect,
   RequestHeader,
@@ -74,6 +75,7 @@ import {
   DeleteClsLogTopicRequest,
   DeleteScdnDomainRequest,
   DescribeDistrictIspDataResponse,
+  DescribeCdnOriginIpRequest,
   UpdatePayTypeResponse,
   TopicInfo,
   DescribeDomainsConfigResponse,
@@ -243,6 +245,7 @@ import {
   PurgeTask,
   OriginPullTimeout,
   DeleteCdnDomainResponse,
+  OriginIp,
   CdnIp,
   DescribeCdnDataRequest,
   DescribeImageConfigResponse,
@@ -770,6 +773,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteClsLogTopicResponse) => void
   ): Promise<DeleteClsLogTopicResponse> {
     return this.request("DeleteClsLogTopic", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeCdnOriginIp）用于查询 CDN 回源节点的IP信息。（注：使用此接口需开启对应白名单）
+   */
+  async DescribeCdnOriginIp(
+    req?: DescribeCdnOriginIpRequest,
+    cb?: (error: string, rep: DescribeCdnOriginIpResponse) => void
+  ): Promise<DescribeCdnOriginIpResponse> {
+    return this.request("DescribeCdnOriginIp", req, cb)
   }
 
   /**

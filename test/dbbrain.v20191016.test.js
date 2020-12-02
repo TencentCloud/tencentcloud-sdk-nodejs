@@ -18,9 +18,9 @@ const client = new tencentcloud.dbbrain.v20191016.Client({
 })
 describe("dbbrain.v20191016.test.js", function () {
 
-it("dbbrain.v20191016.DescribeTopSpaceTableTimeSeries", async function () {
+it("dbbrain.v20191016.DescribeSlowLogTimeSeriesStats", async function () {
     try {
-       const data = await client.DescribeTopSpaceTableTimeSeries({})
+       const data = await client.DescribeSlowLogTimeSeriesStats({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -28,9 +28,19 @@ it("dbbrain.v20191016.DescribeTopSpaceTableTimeSeries", async function () {
     }
 })
 
-it("dbbrain.v20191016.DescribeSlowLogTimeSeriesStats", async function () {
+it("dbbrain.v20191016.DescribeAllUserContact", async function () {
     try {
-       const data = await client.DescribeSlowLogTimeSeriesStats({})
+       const data = await client.DescribeAllUserContact({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20191016.DescribeDBDiagEvent", async function () {
+    try {
+       const data = await client.DescribeDBDiagEvent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,9 +68,9 @@ it("dbbrain.v20191016.DescribeDBSpaceStatus", async function () {
     }
 })
 
-it("dbbrain.v20191016.DescribeDBDiagEvent", async function () {
+it("dbbrain.v20191016.DescribeTopSpaceTables", async function () {
     try {
-       const data = await client.DescribeDBDiagEvent({})
+       const data = await client.DescribeTopSpaceTables({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -68,9 +78,49 @@ it("dbbrain.v20191016.DescribeDBDiagEvent", async function () {
     }
 })
 
-it("dbbrain.v20191016.DescribeTopSpaceTables", async function () {
+it("dbbrain.v20191016.CreateDBDiagReportTask", async function () {
     try {
-       const data = await client.DescribeTopSpaceTables({})
+       const data = await client.CreateDBDiagReportTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20191016.CreateMailProfile", async function () {
+    try {
+       const data = await client.CreateMailProfile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20191016.ModifyDiagDBInstanceConf", async function () {
+    try {
+       const data = await client.ModifyDiagDBInstanceConf({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20191016.DescribeTopSpaceTableTimeSeries", async function () {
+    try {
+       const data = await client.DescribeTopSpaceTableTimeSeries({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20191016.DescribeAllUserGroup", async function () {
+    try {
+       const data = await client.DescribeAllUserGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

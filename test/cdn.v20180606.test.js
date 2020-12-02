@@ -488,6 +488,16 @@ it("cdn.v20180606.DeleteClsLogTopic", async function () {
     }
 })
 
+it("cdn.v20180606.DescribeCdnOriginIp", async function () {
+    try {
+       const data = await client.DescribeCdnOriginIp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdn.v20180606.DescribeBillingData", async function () {
     try {
        const data = await client.DescribeBillingData({})
