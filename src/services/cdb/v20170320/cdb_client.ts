@@ -25,11 +25,12 @@ import {
   DescribeAccountPrivilegesResponse,
   CreateDBImportJobRequest,
   DescribeDatabasesRequest,
+  UpgradeDBInstanceRequest,
   DescribeBackupConfigRequest,
   DescribeRoMinScaleResponse,
   CreateAuditRuleResponse,
   StopDBImportJobRequest,
-  RoWeightValue,
+  OfflineIsolatedInstancesResponse,
   DescribeSlowLogDataResponse,
   SellType,
   DescribeDBInstanceInfoResponse,
@@ -87,6 +88,7 @@ import {
   BinlogInfo,
   DescribeAccountsRequest,
   CloneItem,
+  StartDelayReplicationResponse,
   DescribeTasksRequest,
   IsolateDBInstanceResponse,
   SlaveConfig,
@@ -158,10 +160,12 @@ import {
   DescribeBackupTablesResponse,
   Outbound,
   SlaveInstanceInfo,
+  RoWeightValue,
   ModifyDBInstanceVipVportRequest,
   ModifyParamTemplateResponse,
   ModifyDBInstanceSecurityGroupsResponse,
   DescribeProjectSecurityGroupsRequest,
+  ModifyRoReplicationDelayRequest,
   StartBatchRollbackRequest,
   SecurityGroup,
   ZoneConf,
@@ -182,6 +186,7 @@ import {
   DescribeAsyncRequestInfoRequest,
   TablePrivilege,
   BalanceRoGroupLoadRequest,
+  ModifyRoTypeResponse,
   DescribeAuditRulesRequest,
   DescribeBackupOverviewResponse,
   ColumnPrivilege,
@@ -206,7 +211,7 @@ import {
   DescribeDBInstanceConfigRequest,
   DescribeBackupTablesRequest,
   DescribeBinlogsResponse,
-  OfflineIsolatedInstancesResponse,
+  ModifyRoTypeRequest,
   DatabasePrivilege,
   RoGroupAttr,
   ModifyAuditConfigResponse,
@@ -247,6 +252,7 @@ import {
   DeviceMemInfo,
   ModifyAutoRenewFlagRequest,
   UpgradeDBInstanceEngineVersionRequest,
+  StartDelayReplicationRequest,
   ModifyBackupConfigRequest,
   DeleteDeployGroupsRequest,
   DescribeSlowLogDataRequest,
@@ -259,7 +265,7 @@ import {
   DescribeDBImportRecordsRequest,
   CreateDBImportJobResponse,
   DescribeTagsOfInstanceIdsRequest,
-  UpgradeDBInstanceRequest,
+  StopDelayReplicationResponse,
   DescribeTimeWindowResponse,
   DeleteTimeWindowRequest,
   DeleteAuditPolicyResponse,
@@ -294,10 +300,12 @@ import {
   ReleaseResult,
   InstanceInfo,
   OpenWanServiceResponse,
+  ModifyRoReplicationDelayResponse,
   DescribeAuditLogFilesRequest,
   DescribeTagsOfInstanceIdsResponse,
   ModifyAccountPasswordResponse,
   AuditRule,
+  StopDelayReplicationRequest,
   DescribeBinlogsRequest,
   DisassociateSecurityGroupsResponse,
   DescribeDBInstanceGTIDRequest,
@@ -603,6 +611,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改只读实例类型，可以将普通只读实例变为延迟只读实例，或者将延迟只读实例变为普通只读实例。
+   */
+  async ModifyRoType(
+    req: ModifyRoTypeRequest,
+    cb?: (error: string, rep: ModifyRoTypeResponse) => void
+  ): Promise<ModifyRoTypeResponse> {
+    return this.request("ModifyRoType", req, cb)
+  }
+
+  /**
    * 本接口（ReleaseIsolatedDBInstances）用于恢复已隔离云数据库实例。
    */
   async ReleaseIsolatedDBInstances(
@@ -800,6 +818,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InquiryPriceUpgradeInstancesResponse) => void
   ): Promise<InquiryPriceUpgradeInstancesResponse> {
     return this.request("InquiryPriceUpgradeInstances", req, cb)
+  }
+
+  /**
+   * 停止延迟只读实例的延迟复制。
+   */
+  async StopDelayReplication(
+    req: StopDelayReplicationRequest,
+    cb?: (error: string, rep: StopDelayReplicationResponse) => void
+  ): Promise<StopDelayReplicationResponse> {
+    return this.request("StopDelayReplication", req, cb)
   }
 
   /**
@@ -1166,6 +1194,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 启动延迟只读实例的延迟复制。
+   */
+  async StartDelayReplication(
+    req: StartDelayReplicationRequest,
+    cb?: (error: string, rep: StartDelayReplicationResponse) => void
+  ): Promise<StartDelayReplicationResponse> {
+    return this.request("StartDelayReplication", req, cb)
+  }
+
+  /**
    * 本接口(ModifyAccountPassword)用于修改云数据库账户的密码。
    */
   async ModifyAccountPassword(
@@ -1349,6 +1387,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSupportedPrivilegesResponse) => void
   ): Promise<DescribeSupportedPrivilegesResponse> {
     return this.request("DescribeSupportedPrivileges", req, cb)
+  }
+
+  /**
+   * 修改延迟只读实例的延迟复制时间。
+   */
+  async ModifyRoReplicationDelay(
+    req: ModifyRoReplicationDelayRequest,
+    cb?: (error: string, rep: ModifyRoReplicationDelayResponse) => void
+  ): Promise<ModifyRoReplicationDelayResponse> {
+    return this.request("ModifyRoReplicationDelay", req, cb)
   }
 
   /**

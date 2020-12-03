@@ -214,7 +214,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ResetDeviceState", req, cb);
     }
     /**
-     * 查询固件升级任务列表
+     * 查询固件升级任务详情
      */
     async DescribeFirmwareTask(req, cb) {
         return this.request("DescribeFirmwareTask", req, cb);

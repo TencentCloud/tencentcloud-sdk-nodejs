@@ -307,6 +307,51 @@ export interface DescribeDatabasesRequest {
     DatabaseRegexp?: string;
 }
 /**
+ * UpgradeDBInstance请求参数结构体
+ */
+export interface UpgradeDBInstanceRequest {
+    /**
+      * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
+      */
+    InstanceId: string;
+    /**
+      * 升级后的内存大小，单位：MB，为保证传入 Memory 值有效，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229) 接口获取可升级的内存规格。
+      */
+    Memory: number;
+    /**
+      * 升级后的硬盘大小，单位：GB，为保证传入 Volume 值有效，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229) 接口获取可升级的硬盘范围。
+      */
+    Volume: number;
+    /**
+      * 数据复制方式，支持值包括：0 - 异步复制，1 - 半同步复制，2 - 强同步复制，升级主实例时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义。
+      */
+    ProtectMode?: number;
+    /**
+      * 部署模式，默认为 0，支持值包括：0 - 单可用区部署，1 - 多可用区部署，升级主实例时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义。
+      */
+    DeployMode?: number;
+    /**
+      * 备库1的可用区信息，默认和实例的 Zone 参数一致，升级主实例为多可用区部署时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义。可通过 [获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229) 接口查询支持的可用区。
+      */
+    SlaveZone?: string;
+    /**
+      * 主实例数据库引擎版本，支持值包括：5.5、5.6 和 5.7。
+      */
+    EngineVersion?: string;
+    /**
+      * 切换访问新实例的方式，默认为 0。支持值包括：0 - 立刻切换，1 - 时间窗切换；当该值为 1 时，升级中过程中，切换访问新实例的流程将会在时间窗内进行，或者用户主动调用接口 [切换访问新实例](https://cloud.tencent.com/document/product/236/15864) 触发该流程。
+      */
+    WaitSwitch?: number;
+    /**
+      * 备库 2 的可用区信息，默认为空，升级主实例时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义。
+      */
+    BackupZone?: string;
+    /**
+      * 实例类型，默认为 master，支持值包括：master - 表示主实例，dr - 表示灾备实例，ro - 表示只读实例。
+      */
+    InstanceRole?: string;
+}
+/**
  * DescribeBackupConfig请求参数结构体
  */
 export interface DescribeBackupConfigRequest {
@@ -355,17 +400,13 @@ export interface StopDBImportJobRequest {
     AsyncRequestId: string;
 }
 /**
- * RO 实例的权重值
+ * OfflineIsolatedInstances返回参数结构体
  */
-export interface RoWeightValue {
+export interface OfflineIsolatedInstancesResponse {
     /**
-      * RO 实例 ID。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    InstanceId: string;
-    /**
-      * 权重值。取值范围为 [0, 100]。
-      */
-    Weight: number;
+    RequestId?: string;
 }
 /**
  * DescribeSlowLogData返回参数结构体
@@ -1543,6 +1584,20 @@ export interface CloneItem {
       * 任务状态，包括以下状态：initial,running,wait_complete,success,failed
       */
     TaskStatus: string;
+}
+/**
+ * StartDelayReplication返回参数结构体
+ */
+export interface StartDelayReplicationResponse {
+    /**
+      * 延迟复制任务 ID。DelayReplicationType不为DEFAULT时返回，可用来查询回放任务状态。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AsyncRequestId?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeTasks请求参数结构体
@@ -3057,6 +3112,19 @@ export interface SlaveInstanceInfo {
     Zone: string;
 }
 /**
+ * RO 实例的权重值
+ */
+export interface RoWeightValue {
+    /**
+      * RO 实例 ID。
+      */
+    InstanceId: string;
+    /**
+      * 权重值。取值范围为 [0, 100]。
+      */
+    Weight: number;
+}
+/**
  * ModifyDBInstanceVipVport请求参数结构体
  */
 export interface ModifyDBInstanceVipVportRequest {
@@ -3111,6 +3179,19 @@ export interface DescribeProjectSecurityGroupsRequest {
       * 项目ID。
       */
     ProjectId?: number;
+}
+/**
+ * ModifyRoReplicationDelay请求参数结构体
+ */
+export interface ModifyRoReplicationDelayRequest {
+    /**
+      * 实例 ID。
+      */
+    InstanceId: string;
+    /**
+      * 延迟时间（s）。最小值1，最大值259200。
+      */
+    ReplicationDelay: number;
 }
 /**
  * StartBatchRollback请求参数结构体
@@ -3428,6 +3509,15 @@ export interface BalanceRoGroupLoadRequest {
       * RO 组的 ID，格式如：cdbrg-c1nl9rpv。
       */
     RoGroupId: string;
+}
+/**
+ * ModifyRoType返回参数结构体
+ */
+export interface ModifyRoTypeResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeAuditRules请求参数结构体
@@ -3894,13 +3984,25 @@ export interface DescribeBinlogsResponse {
     RequestId?: string;
 }
 /**
- * OfflineIsolatedInstances返回参数结构体
+ * ModifyRoType请求参数结构体
  */
-export interface OfflineIsolatedInstancesResponse {
+export interface ModifyRoTypeRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 实例 ID。
       */
-    RequestId?: string;
+    InstanceId: string;
+    /**
+      * 只读实例源类型，取值 NORMAL（普通只读实例）、DELAY_REPLICATION（延迟只读实例）。
+      */
+    SrcRoInstType: string;
+    /**
+      * 只读实例目标类型，取值 NORMAL（普通只读实例）、DELAY_REPLICATION（延迟只读实例）。
+      */
+    DstRoInstType: string;
+    /**
+      * 延迟时间（s），将实例修改为延迟只读实例时必传。最小值1，最大值259200。
+      */
+    ReplicationDelay?: number;
 }
 /**
  * 数据库权限
@@ -4725,6 +4827,27 @@ export interface UpgradeDBInstanceEngineVersionRequest {
     UpgradeSubversion?: number;
 }
 /**
+ * StartDelayReplication请求参数结构体
+ */
+export interface StartDelayReplicationRequest {
+    /**
+      * 实例 ID。
+      */
+    InstanceId: string;
+    /**
+      * 延迟复制类型。可选值 DEFAULT（按照延迟复制时间进行复制）、GTID（回放到指定GTID）、DUE_TIME（回放到指定时间点）。
+      */
+    DelayReplicationType: string;
+    /**
+      * 指定时间点，默认为0，最大值不能超过当前时间。
+      */
+    DueTime?: number;
+    /**
+      * 指定GITD。回放到指定GTID时必传。
+      */
+    Gtid?: string;
+}
+/**
  * ModifyBackupConfig请求参数结构体
  */
 export interface ModifyBackupConfigRequest {
@@ -4973,49 +5096,13 @@ export interface DescribeTagsOfInstanceIdsRequest {
     Limit?: number;
 }
 /**
- * UpgradeDBInstance请求参数结构体
+ * StopDelayReplication返回参数结构体
  */
-export interface UpgradeDBInstanceRequest {
+export interface StopDelayReplicationResponse {
     /**
-      * 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    InstanceId: string;
-    /**
-      * 升级后的内存大小，单位：MB，为保证传入 Memory 值有效，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229) 接口获取可升级的内存规格。
-      */
-    Memory: number;
-    /**
-      * 升级后的硬盘大小，单位：GB，为保证传入 Volume 值有效，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229) 接口获取可升级的硬盘范围。
-      */
-    Volume: number;
-    /**
-      * 数据复制方式，支持值包括：0 - 异步复制，1 - 半同步复制，2 - 强同步复制，升级主实例时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义。
-      */
-    ProtectMode?: number;
-    /**
-      * 部署模式，默认为 0，支持值包括：0 - 单可用区部署，1 - 多可用区部署，升级主实例时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义。
-      */
-    DeployMode?: number;
-    /**
-      * 备库1的可用区信息，默认和实例的 Zone 参数一致，升级主实例为多可用区部署时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义。可通过 [获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229) 接口查询支持的可用区。
-      */
-    SlaveZone?: string;
-    /**
-      * 主实例数据库引擎版本，支持值包括：5.5、5.6 和 5.7。
-      */
-    EngineVersion?: string;
-    /**
-      * 切换访问新实例的方式，默认为 0。支持值包括：0 - 立刻切换，1 - 时间窗切换；当该值为 1 时，升级中过程中，切换访问新实例的流程将会在时间窗内进行，或者用户主动调用接口 [切换访问新实例](https://cloud.tencent.com/document/product/236/15864) 触发该流程。
-      */
-    WaitSwitch?: number;
-    /**
-      * 备库 2 的可用区信息，默认为空，升级主实例时可指定该参数，升级只读实例或者灾备实例时指定该参数无意义。
-      */
-    BackupZone?: string;
-    /**
-      * 实例类型，默认为 master，支持值包括：master - 表示主实例，dr - 表示灾备实例，ro - 表示只读实例。
-      */
-    InstanceRole?: string;
+    RequestId?: string;
 }
 /**
  * DescribeTimeWindow返回参数结构体
@@ -5775,6 +5862,15 @@ export interface OpenWanServiceResponse {
     RequestId?: string;
 }
 /**
+ * ModifyRoReplicationDelay返回参数结构体
+ */
+export interface ModifyRoReplicationDelayResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeAuditLogFiles请求参数结构体
  */
 export interface DescribeAuditLogFilesRequest {
@@ -5864,6 +5960,15 @@ export interface AuditRule {
       * 是否开启全审计。
       */
     AuditAll: boolean;
+}
+/**
+ * StopDelayReplication请求参数结构体
+ */
+export interface StopDelayReplicationRequest {
+    /**
+      * 实例 ID。
+      */
+    InstanceId: string;
 }
 /**
  * DescribeBinlogs请求参数结构体

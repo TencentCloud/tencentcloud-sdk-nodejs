@@ -204,6 +204,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAccountPrivileges", req, cb);
     }
     /**
+     * 修改只读实例类型，可以将普通只读实例变为延迟只读实例，或者将延迟只读实例变为普通只读实例。
+     */
+    async ModifyRoType(req, cb) {
+        return this.request("ModifyRoType", req, cb);
+    }
+    /**
      * 本接口（ReleaseIsolatedDBInstances）用于恢复已隔离云数据库实例。
      */
     async ReleaseIsolatedDBInstances(req, cb) {
@@ -326,6 +332,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async InquiryPriceUpgradeInstances(req, cb) {
         return this.request("InquiryPriceUpgradeInstances", req, cb);
+    }
+    /**
+     * 停止延迟只读实例的延迟复制。
+     */
+    async StopDelayReplication(req, cb) {
+        return this.request("StopDelayReplication", req, cb);
     }
     /**
      * 本接口(CreateDBInstance)用于创建包年包月的云数据库实例（包括主实例、灾备实例和只读实例），可通过传入实例规格、MySQL 版本号、购买时长和数量等信息创建云数据库实例。
@@ -551,6 +563,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("VerifyRootAccount", req, cb);
     }
     /**
+     * 启动延迟只读实例的延迟复制。
+     */
+    async StartDelayReplication(req, cb) {
+        return this.request("StartDelayReplication", req, cb);
+    }
+    /**
      * 本接口(ModifyAccountPassword)用于修改云数据库账户的密码。
      */
     async ModifyAccountPassword(req, cb) {
@@ -663,6 +681,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeSupportedPrivileges(req, cb) {
         return this.request("DescribeSupportedPrivileges", req, cb);
+    }
+    /**
+     * 修改延迟只读实例的延迟复制时间。
+     */
+    async ModifyRoReplicationDelay(req, cb) {
+        return this.request("ModifyRoReplicationDelay", req, cb);
     }
     /**
      * 本接口(DescribeBinlogs)用于查询云数据库实例的 binlog 文件列表。

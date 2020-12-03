@@ -298,6 +298,16 @@ it("cdb.v20170320.DescribeAccountPrivileges", async function () {
     }
 })
 
+it("cdb.v20170320.ModifyRoType", async function () {
+    try {
+       const data = await client.ModifyRoType({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.ReleaseIsolatedDBInstances", async function () {
     try {
        const data = await client.ReleaseIsolatedDBInstances({})
@@ -481,6 +491,16 @@ it("cdb.v20170320.DescribeSlowLogs", async function () {
 it("cdb.v20170320.InquiryPriceUpgradeInstances", async function () {
     try {
        const data = await client.InquiryPriceUpgradeInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdb.v20170320.StopDelayReplication", async function () {
+    try {
+       const data = await client.StopDelayReplication({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -838,6 +858,16 @@ it("cdb.v20170320.VerifyRootAccount", async function () {
     }
 })
 
+it("cdb.v20170320.StartDelayReplication", async function () {
+    try {
+       const data = await client.StartDelayReplication({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.ModifyAccountPassword", async function () {
     try {
        const data = await client.ModifyAccountPassword({})
@@ -1011,6 +1041,16 @@ it("cdb.v20170320.DeleteAuditRule", async function () {
 it("cdb.v20170320.DescribeSupportedPrivileges", async function () {
     try {
        const data = await client.DescribeSupportedPrivileges({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdb.v20170320.ModifyRoReplicationDelay", async function () {
+    try {
+       const data = await client.ModifyRoReplicationDelay({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

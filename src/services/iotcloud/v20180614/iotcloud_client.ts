@@ -463,7 +463,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询固件升级任务列表
+   * 查询固件升级任务详情
    */
   async DescribeFirmwareTask(
     req: DescribeFirmwareTaskRequest,

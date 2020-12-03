@@ -338,10 +338,11 @@ export interface AiReviewTaskProhibitedAsrResult {
       */
     Status: string;
     /**
-      * 错误码，0 表示成功，其他值表示失败：
-<li>40000：输入参数不合法，请检查输入参数；</li>
-<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
-<li>70000：内部服务错误，建议重试。</li>
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      */
+    ErrCodeExt: string;
+    /**
+      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
       */
     ErrCode: number;
     /**
@@ -429,10 +430,11 @@ export interface AiReviewTaskProhibitedOcrResult {
       */
     Status: string;
     /**
-      * 错误码，0 表示成功，其他值表示失败：
-<li>40000：输入参数不合法，请检查输入参数；</li>
-<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
-<li>70000：内部服务错误，建议重试。</li>
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      */
+    ErrCodeExt: string;
+    /**
+      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
       */
     ErrCode: number;
     /**
@@ -526,7 +528,11 @@ export interface AiAnalysisTaskCoverResult {
       */
     Status: string;
     /**
-      * 错误码，0：成功，其他值：失败。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      */
+    ErrCodeExt: string;
+    /**
+      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
       */
     ErrCode: number;
     /**
@@ -737,11 +743,15 @@ export interface RawWatermarkParameter {
  */
 export interface AiReviewTaskPoliticalOcrResult {
     /**
-      * 任务状态，有 PROCESSING，SUCCESS �� FAIL 三种。
+      * 任务状态，有 PROCESSING，SUCCESS，FAIL 三种。
       */
     Status: string;
     /**
-      * 错误码，0：成功，其他值：失败。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      */
+    ErrCodeExt: string;
+    /**
+      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
       */
     ErrCode: number;
     /**
@@ -1295,7 +1305,11 @@ export interface AiRecognitionTaskFaceResult {
       */
     Status: string;
     /**
-      * 错误码，0：成功，其他值：失败。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      */
+    ErrCodeExt: string;
+    /**
+      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
       */
     ErrCode: number;
     /**
@@ -1717,7 +1731,11 @@ export interface MediaProcessTaskAdaptiveDynamicStreamingResult {
       */
     Status: string;
     /**
-      * 错误码，0：成功，其他值：失败。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      */
+    ErrCodeExt: string;
+    /**
+      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
       */
     ErrCode: number;
     /**
@@ -2172,10 +2190,11 @@ export interface AiReviewTaskTerrorismOcrResult {
       */
     Status: string;
     /**
-      * 错误码，0 表示成功，其他值表示失败：
-<li>40000：输入参数不合法，请检查输入参数；</li>
-<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
-<li>70000：内部服务错误，建议重试。</li>
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      */
+    ErrCodeExt: string;
+    /**
+      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
       */
     ErrCode: number;
     /**
@@ -2201,7 +2220,11 @@ export interface AiRecognitionTaskOcrWordsResult {
       */
     Status: string;
     /**
-      * 错误码，0：成功，其他值：失败。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      */
+    ErrCodeExt: string;
+    /**
+      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
       */
     ErrCode: number;
     /**
@@ -2362,10 +2385,11 @@ export interface MediaProcessTaskImageSpriteResult {
       */
     Status: string;
     /**
-      * 错误码，0 表示成功，其他值表示失败：
-<li>40000：输入参数不合法，请检查输入参数；</li>
-<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
-<li>70000：内部服务错误，建议重试。</li>
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      */
+    ErrCodeExt: string;
+    /**
+      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
       */
     ErrCode: number;
     /**
@@ -2745,7 +2769,11 @@ export interface AiReviewTaskPornOcrResult {
       */
     Status: string;
     /**
-      * 错误码，0：成功，其他值：失败。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      */
+    ErrCodeExt: string;
+    /**
+      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
       */
     ErrCode: number;
     /**
@@ -2976,10 +3004,11 @@ export interface MediaProcessTaskAnimatedGraphicResult {
       */
     Status: string;
     /**
-      * 错误码，0 表示成功，其他值表示失败：
-<li>40000：输入参数不合法，请检查输入参数；</li>
-<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
-<li>70000：内部服务错误，建议重试。</li>
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      */
+    ErrCodeExt: string;
+    /**
+      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
       */
     ErrCode: number;
     /**
@@ -3005,7 +3034,11 @@ export interface AiAnalysisTaskTagResult {
       */
     Status: string;
     /**
-      * 错误码，0：成功，其他值：失败。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      */
+    ErrCodeExt: string;
+    /**
+      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
       */
     ErrCode: number;
     /**
@@ -3089,7 +3122,11 @@ export interface AiRecognitionTaskOcrFullTextResult {
       */
     Status: string;
     /**
-      * 错误码，0：成功，其他值：失败。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      */
+    ErrCodeExt: string;
+    /**
+      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
       */
     ErrCode: number;
     /**
@@ -3115,10 +3152,11 @@ export interface MediaProcessTaskSnapshotByTimeOffsetResult {
       */
     Status: string;
     /**
-      * 错误码，0 表示成功，其他值表示失败：
-<li>40000：输入参数不合法，请检查输入参数；</li>
-<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
-<li>70000：内部服务错误，建议重试。</li>
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      */
+    ErrCodeExt: string;
+    /**
+      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
       */
     ErrCode: number;
     /**
@@ -3227,10 +3265,11 @@ export interface MediaProcessTaskTranscodeResult {
       */
     Status: string;
     /**
-      * 错误码，0 表示成功，其他值表示失败：
-<li>40000：输入参数不合法，请检查输入参数；</li>
-<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
-<li>70000：内部服务错误，建议重试。</li>
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      */
+    ErrCodeExt: string;
+    /**
+      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
       */
     ErrCode: number;
     /**
@@ -4117,7 +4156,11 @@ export interface AiReviewTaskTerrorismResult {
       */
     Status: string;
     /**
-      * 错误码，0：成功，其他值：失败。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      */
+    ErrCodeExt: string;
+    /**
+      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
       */
     ErrCode: number;
     /**
@@ -4668,7 +4711,11 @@ export interface AiReviewTaskPoliticalAsrResult {
       */
     Status: string;
     /**
-      * 错误码，0：成功，其他值：失败。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      */
+    ErrCodeExt: string;
+    /**
+      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
       */
     ErrCode: number;
     /**
@@ -4793,7 +4840,11 @@ export interface AiReviewTaskPornResult {
       */
     Status: string;
     /**
-      * 错误码，0：成功，其他值：失败。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      */
+    ErrCodeExt: string;
+    /**
+      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
       */
     ErrCode: number;
     /**
@@ -5214,10 +5265,11 @@ export interface MediaProcessTaskSampleSnapshotResult {
       */
     Status: string;
     /**
-      * 错误码，0 表示成功，其他值表示失败：
-<li>40000：输入参数不合法，请检查输入参数；</li>
-<li>60000：源文件错误（如视频数据损坏），请确认源文件是否正常；</li>
-<li>70000：内部服务错误，建议重试。</li>
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      */
+    ErrCodeExt: string;
+    /**
+      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
       */
     ErrCode: number;
     /**
@@ -5419,7 +5471,11 @@ export interface AiAnalysisTaskFrameTagResult {
       */
     Status: string;
     /**
-      * 错误码，0：成功，其他值：失败。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      */
+    ErrCodeExt: string;
+    /**
+      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
       */
     ErrCode: number;
     /**
@@ -5486,7 +5542,11 @@ export interface AiRecognitionTaskAsrFullTextResult {
       */
     Status: string;
     /**
-      * 错误码，0：成功，其他值：失败。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      */
+    ErrCodeExt: string;
+    /**
+      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
       */
     ErrCode: number;
     /**
@@ -6068,7 +6128,11 @@ export interface AiReviewTaskPoliticalResult {
       */
     Status: string;
     /**
-      * 错误码，0：成功，其他值：失败。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      */
+    ErrCodeExt: string;
+    /**
+      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
       */
     ErrCode: number;
     /**
@@ -7569,7 +7633,11 @@ export interface AiRecognitionTaskAsrWordsResult {
       */
     Status: string;
     /**
-      * 错误码，0：成功，其他值：失败。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      */
+    ErrCodeExt: string;
+    /**
+      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
       */
     ErrCode: number;
     /**
@@ -7707,7 +7775,11 @@ export interface AiReviewTaskPornAsrResult {
       */
     Status: string;
     /**
-      * 错误码，0：成功，其他值：失败。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      */
+    ErrCodeExt: string;
+    /**
+      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
       */
     ErrCode: number;
     /**
@@ -8055,7 +8127,11 @@ export interface AiAnalysisTaskClassificationResult {
       */
     Status: string;
     /**
-      * 错误码，0：成功，其他值：失败。
+      * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+      */
+    ErrCodeExt: string;
+    /**
+      * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
       */
     ErrCode: number;
     /**

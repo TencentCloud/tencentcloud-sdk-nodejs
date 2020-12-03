@@ -132,7 +132,7 @@ export declare class Client extends AbstractClient {
      */
     ResetDeviceState(req: ResetDeviceStateRequest, cb?: (error: string, rep: ResetDeviceStateResponse) => void): Promise<ResetDeviceStateResponse>;
     /**
-     * 查询固件升级任务列表
+     * 查询固件升级任务详情
      */
     DescribeFirmwareTask(req: DescribeFirmwareTaskRequest, cb?: (error: string, rep: DescribeFirmwareTaskResponse) => void): Promise<DescribeFirmwareTaskResponse>;
     /**
