@@ -52,7 +52,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BankCard4EVerification", req, cb);
     }
     /**
-     * 每次调用人脸核身SaaS化服务前，需先调用本接口获取FaceIdToken，用来串联核身流程，在验证完成后，用于获取验证结果信息，该token仅能核身一次。
+     * 每次调用人脸核身SDK服务前，需先调用本接口获取SDKToken，用来串联核身流程，在验证完成后，用于获取验证结果信息，该token仅能核身一次。
      */
     async GetFaceIdToken(req, cb) {
         return this.request("GetFaceIdToken", req, cb);

@@ -24,7 +24,7 @@ export declare class Client extends AbstractClient {
      */
     BankCard4EVerification(req: BankCard4EVerificationRequest, cb?: (error: string, rep: BankCard4EVerificationResponse) => void): Promise<BankCard4EVerificationResponse>;
     /**
-     * 每次调用人脸核身SaaS化服务前，需先调用本接口获取FaceIdToken，用来串联核身流程，在验证完成后，用于获取验证结果信息，该token仅能核身一次。
+     * 每次调用人脸核身SDK服务前，需先调用本接口获取SDKToken，用来串联核身流程，在验证完成后，用于获取验证结果信息，该token仅能核身一次。
      */
     GetFaceIdToken(req: GetFaceIdTokenRequest, cb?: (error: string, rep: GetFaceIdTokenResponse) => void): Promise<GetFaceIdTokenResponse>;
     /**

@@ -55,6 +55,7 @@ import {
   TimeRange,
   DescribeLoginStatusRequest,
   DeleteLoginStatusResponse,
+  WeiboPublishInfo,
   Resource,
   CreateLinkResponse,
   ListMediaResponse,
@@ -75,6 +76,7 @@ import {
   ImportMediaToProjectRequest,
   VODExportInfo,
   SortBy,
+  PenguinMediaPlatformPublishInfo,
   ImageMaterial,
   DescribeClassRequest,
   MoveClassRequest,
@@ -95,6 +97,7 @@ import {
   VideoStreamInfo,
   AddTeamMemberRequest,
   ExportVideoEditProjectResponse,
+  ThirdPartyPublishInfo,
   ListMediaRequest,
   ModifyTeamResponse,
   DeleteLoginStatusRequest,
@@ -122,6 +125,7 @@ import {
   DescribeClassResponse,
   MediaMetaData,
   DescribeSharedSpaceRequest,
+  KuaishouPublishInfo,
   TaskBaseInfo,
   DeleteClassResponse,
   LiveStreamClipProjectInput,
@@ -461,7 +465,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 创建云剪的编辑项目，支持创建视频剪辑、直播剪辑及导播台项目。
+     * 创建云剪的编辑项目，支持创建视频剪辑、直播剪辑、导播台项目以及视频拆条项目。
 
      */
   async CreateProject(

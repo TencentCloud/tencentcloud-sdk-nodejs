@@ -22,7 +22,7 @@ import {
   CameraConfig,
   CreateServerStateResponse,
   Polygon,
-  DescribeTasksRequest,
+  CreateCaptureResponse,
   DescribeConfigRequest,
   DeleteTaskRequest,
   CreateCameraAlertsRequest,
@@ -34,6 +34,7 @@ import {
   TaskContent,
   SearchImageResponse,
   CreateProgramStateResponse,
+  DescribeTasksRequest,
   SearchImageRequest,
   DeleteMultiBizAlertResponse,
   SearchResult,
@@ -51,6 +52,7 @@ import {
   DescribeMultiBizBaseImageResponse,
   DescribeImageRequest,
   ZoneArea,
+  CreateCaptureRequest,
   CreateCameraAlertsMoveAlert,
   DescribeCamerasResponse,
   Point,
@@ -204,5 +206,15 @@ mac为空返回对应GroupCode和MallId全量配置
     cb?: (error: string, rep: DescribeZonesResponse) => void
   ): Promise<DescribeZonesResponse> {
     return this.request("DescribeZones", req, cb)
+  }
+
+  /**
+   * 场内抓拍上报接口
+   */
+  async CreateCapture(
+    req: CreateCaptureRequest,
+    cb?: (error: string, rep: CreateCaptureResponse) => void
+  ): Promise<CreateCaptureResponse> {
+    return this.request("CreateCapture", req, cb)
   }
 }

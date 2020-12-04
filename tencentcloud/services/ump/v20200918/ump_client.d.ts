@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateMultiBizAlertResponse, CreateServerStateResponse, DescribeTasksRequest, DescribeConfigRequest, DeleteTaskRequest, CreateCameraAlertsRequest, CreateCameraAlertsResponse, DeleteMultiBizAlertRequest, DescribeZonesRequest, SearchImageResponse, CreateProgramStateResponse, SearchImageRequest, DeleteMultiBizAlertResponse, DescribeImageResponse, DeleteTaskResponse, CreateProgramStateRequest, DescribeMultiBizBaseImageRequest, DescribeTasksResponse, DescribeCamerasRequest, DescribeMultiBizBaseImageResponse, DescribeImageRequest, DescribeCamerasResponse, DescribeConfigResponse, CreateMultiBizAlertRequest, DescribeZonesResponse, CreateServerStateRequest } from "./ump_models";
+import { CreateMultiBizAlertResponse, CreateServerStateResponse, CreateCaptureResponse, DescribeConfigRequest, DeleteTaskRequest, CreateCameraAlertsRequest, CreateCameraAlertsResponse, DeleteMultiBizAlertRequest, DescribeZonesRequest, SearchImageResponse, CreateProgramStateResponse, DescribeTasksRequest, SearchImageRequest, DeleteMultiBizAlertResponse, DescribeImageResponse, DeleteTaskResponse, CreateProgramStateRequest, DescribeMultiBizBaseImageRequest, DescribeTasksResponse, DescribeCamerasRequest, DescribeMultiBizBaseImageResponse, DescribeImageRequest, CreateCaptureRequest, DescribeCamerasResponse, DescribeConfigResponse, CreateMultiBizAlertRequest, DescribeZonesResponse, CreateServerStateRequest } from "./ump_models";
 /**
  * ump client
  * @class
@@ -63,4 +63,8 @@ mac为空返回对应GroupCode和MallId全量配置
      * 获取集团广场的点位列表
      */
     DescribeZones(req: DescribeZonesRequest, cb?: (error: string, rep: DescribeZonesResponse) => void): Promise<DescribeZonesResponse>;
+    /**
+     * 场内抓拍上报接口
+     */
+    CreateCapture(req: CreateCaptureRequest, cb?: (error: string, rep: CreateCaptureResponse) => void): Promise<CreateCaptureResponse>;
 }

@@ -101,22 +101,18 @@ export interface Polygon {
     Points: Array<Point>;
 }
 /**
- * DescribeTasks请求参数结构体
+ * CreateCapture返回参数结构体
  */
-export interface DescribeTasksRequest {
+export interface CreateCaptureResponse {
     /**
-      * 集团编码
+      * 原始应答报文
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    GroupCode: string;
+    RspData?: string;
     /**
-      * 广场ID
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    MallId: number;
-    /**
-      * 任务类型:
-1: 底图拉取
-      */
-    TaskType: number;
+    RequestId?: string;
 }
 /**
  * DescribeConfig请求参数结构体
@@ -346,6 +342,24 @@ export interface CreateProgramStateResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeTasks请求参数结构体
+ */
+export interface DescribeTasksRequest {
+    /**
+      * 集团编码
+      */
+    GroupCode: string;
+    /**
+      * 广场ID
+      */
+    MallId: number;
+    /**
+      * 任务类型:
+1: 底图拉取
+      */
+    TaskType: number;
 }
 /**
  * SearchImage请求参数结构体
@@ -674,6 +688,15 @@ export interface ZoneArea {
       * 店门标注
       */
     ShopArea: Array<Point>;
+}
+/**
+ * CreateCapture请求参数结构体
+ */
+export interface CreateCaptureRequest {
+    /**
+      * 原始抓拍报文
+      */
+    Data: string;
 }
 /**
  * 移动告警

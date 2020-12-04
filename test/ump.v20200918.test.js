@@ -148,4 +148,14 @@ it("ump.v20200918.DescribeZones", async function () {
     }
 })
 
+it("ump.v20200918.CreateCapture", async function () {
+    try {
+       const data = await client.CreateCapture({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

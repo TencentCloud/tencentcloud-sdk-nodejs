@@ -109,5 +109,11 @@ mac为空返回对应GroupCode和MallId全量配置
     async DescribeZones(req, cb) {
         return this.request("DescribeZones", req, cb);
     }
+    /**
+     * 场内抓拍上报接口
+     */
+    async CreateCapture(req, cb) {
+        return this.request("CreateCapture", req, cb);
+    }
 }
 exports.Client = Client;

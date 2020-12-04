@@ -140,7 +140,7 @@ export declare class Client extends AbstractClient {
      */
     ListMedia(req: ListMediaRequest, cb?: (error: string, rep: ListMediaResponse) => void): Promise<ListMediaResponse>;
     /**
-     * 创建云剪的编辑项目，支持创建视频剪辑、直播剪辑及导播台项目。
+     * 创建云剪的编辑项目，支持创建视频剪辑、直播剪辑、导播台项目以及视频拆条项目。
 
      */
     CreateProject(req: CreateProjectRequest, cb?: (error: string, rep: CreateProjectResponse) => void): Promise<CreateProjectResponse>;
