@@ -202,6 +202,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ReplaceCertForLoadBalancers", req, cb);
     }
     /**
+     * 获取目标组绑定的服务器信息
+     */
+    async DescribeTargetGroupInstances(req, cb) {
+        return this.request("DescribeTargetGroupInstances", req, cb);
+    }
+    /**
      * 本接口(AssociateTargetGroups)用来将目标组绑定到负载均衡的监听器（四层协议）或转发规则（七层协议）上。
 本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
      */
@@ -393,10 +399,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClassicalLBByInstanceId", req, cb);
     }
     /**
-     * 获取目标组绑定的服务器信息
+     * 查询账号下高流量负载均衡，返回前10个负载均衡。如果是子账号登录，只返回子账号有权限的负载均衡。
      */
-    async DescribeTargetGroupInstances(req, cb) {
-        return this.request("DescribeTargetGroupInstances", req, cb);
+    async DescribeLoadBalancerTraffic(req, cb) {
+        return this.request("DescribeLoadBalancerTraffic", req, cb);
     }
     /**
      * 批量修改目标组服务器端口。

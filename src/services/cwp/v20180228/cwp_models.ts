@@ -3792,6 +3792,11 @@ export interface Filter {
    * 一个或者多个过滤值。
    */
   Values: Array<string>
+
+  /**
+   * 模糊搜索
+   */
+  ExactMatch?: boolean
 }
 
 /**

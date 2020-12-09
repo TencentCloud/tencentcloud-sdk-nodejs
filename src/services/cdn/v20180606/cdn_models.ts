@@ -471,6 +471,12 @@ failed：部署失败
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Hsts?: Hsts
+
+  /**
+      * Tls版本设置，仅支持部分Advance域名，支持设置 TLSv1, TLSV1.1, TLSV1.2, TLSv1.3，修改时必须开启连续的版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TlsVersion?: Array<string>
 }
 
 /**
@@ -584,6 +590,26 @@ export interface CreateClsLogTopicResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 精准访问控制匹配规则
+ */
+export interface ScdnAclRule {
+  /**
+   * 匹配关键字, params | url | ip | referer | user-agent
+   */
+  MatchKey: string
+
+  /**
+   * 逻辑操作符，取值 exclude, include, notequal, equal, len-less, len-equal, len-more
+   */
+  LogiOperator: string
+
+  /**
+   * 匹配值
+   */
+  MatchValue: string
 }
 
 /**
@@ -931,13 +957,15 @@ https：强制 https 跳转
  */
 export interface PathRule {
   /**
-      * 是否是正则匹配。
+      * 是否开启通配符“*”匹配：
+false：关闭
+true：开启
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Regex: boolean
 
   /**
-      * 匹配的URL路径，仅支持Url路径，不支持参数。默认完全匹配，正则模式下支持通配符 *，最多支持5个通配符，最大长度1024字符。
+      * 匹配的URL路径，仅支持Url路径，不支持参数。默认完全匹配，开启通配符“*”匹配后，最多支持5个通配符，最大长度为1024个字符。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Path: string
@@ -946,22 +974,25 @@ export interface PathRule {
       * 路径匹配时的回源源站。暂不支持开了私有读写的COS源。不填写时沿用默认源站。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Origin: string
+  Origin?: string
 
   /**
       * 路径匹配时回源的Host头部。不填写时沿用默认ServerName。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ServerName: string
+  ServerName?: string
 
   /**
-      * 源站所属区域，支持CN，OV。分别表示国内或海外。默认为CN。
+      * 源站所属区域，支持CN，OV：
+CN：中国境内
+OV：中国境外
+默认为CN。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  OriginArea: string
+  OriginArea?: string
 
   /**
-      * 路径匹配时回源的URI路径，必须以“/”开头，不包含参数部分。最大长度1024字符。可使用$1, $2, $3, $4, $5分别捕获匹配路径中的通配符号，最多支持10个捕获值。
+      * 路径匹配时回源的URI路径，必须以“/”开头，不包含参数部分。最大长度为1024个字符。可使用$1, $2, $3, $4, $5分别捕获匹配路径中的通配符号“*”，最多支持10个捕获值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ForwardUri?: string
@@ -1233,6 +1264,21 @@ export interface GuetzliAdapter {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Switch?: string
+}
+
+/**
+ * UpdateScdnDomain返回参数结构体
+ */
+export interface UpdateScdnDomainResponse {
+  /**
+   * 提交结果，Success表示成功
+   */
+  Result?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2042,6 +2088,43 @@ disabled：未启用
 }
 
 /**
+ * Bot cookie策略
+ */
+export interface BotCookie {
+  /**
+   * on|off
+   */
+  Switch: string
+
+  /**
+   * 规则类型，当前只有all
+   */
+  RuleType: string
+
+  /**
+   * 规则值，['*']
+   */
+  RuleValue: Array<string>
+
+  /**
+   * 执行动作，monitor|intercept|redirect|captcha
+   */
+  Action: string
+
+  /**
+      * 重定向时设置的重定向页面
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RedirectUrl?: string
+
+  /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime?: string
+}
+
+/**
  * DescribeCdnIp请求参数结构体
  */
 export interface DescribeCdnIpRequest {
@@ -2538,13 +2621,21 @@ file 时填充后缀名，如 jpg、txt
 directory 时填充路径，如 /xxx/test/
 path 时填充绝对路径，如 /xxx/test.html
 index 时填充 /
+注意：all规则不可删除，默认遵循源站，可修改。
       */
   MaxAgeContents: Array<string>
 
   /**
-   * MaxAge 时间设置，单位秒
-   */
+      * MaxAge 时间设置，单位秒
+注意：时间为0，即不缓存。
+      */
   MaxAgeTime: number
+
+  /**
+      * 是否遵循源站，on或off，开启时忽略时间设置。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FollowOrigin?: string
 }
 
 /**
@@ -2859,6 +2950,28 @@ export interface DescribeCertDomainsResponse {
 }
 
 /**
+ * bot配置类型
+ */
+export interface ScdnBotConfig {
+  /**
+   * on|off
+   */
+  Switch: string
+
+  /**
+      * Bot cookie策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BotCookie?: Array<BotCookie>
+
+  /**
+      * Bot Js策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BotJavaScript?: Array<BotJavaScript>
+}
+
+/**
  * DuplicateDomainConfig请求参数结构体
  */
 export interface DuplicateDomainConfigRequest {
@@ -3136,6 +3249,21 @@ offline：下线状态
  * AddCdnDomain返回参数结构体
  */
 export interface AddCdnDomainResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * VerifyDomainRecord返回参数结构体
+ */
+export interface VerifyDomainRecordResponse {
+  /**
+   * 是否验证成功
+   */
+  Result?: boolean
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3925,18 +4053,53 @@ avg：平均值
 }
 
 /**
- * VerifyDomainRecord返回参数结构体
+ * UpdateScdnDomain请求参数结构体
  */
-export interface VerifyDomainRecordResponse {
+export interface UpdateScdnDomainRequest {
   /**
-   * 是否验证成功
+   * 域名
    */
-  Result?: boolean
+  Domain: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * Web 攻击防护（WAF）配置
    */
-  RequestId?: string
+  Waf?: ScdnWafConfig
+
+  /**
+   * 自定义防护策略配置
+   */
+  Acl?: ScdnAclConfig
+
+  /**
+   * CC 防护配置，目前 CC 防护默认开启
+   */
+  CC?: ScdnConfig
+
+  /**
+   * DDOS 防护配置，目前 DDoS 防护默认开启
+   */
+  Ddos?: ScdnDdosConfig
+
+  /**
+   * BOT 防护配置
+   */
+  Bot?: ScdnBotConfig
+}
+
+/**
+ * UpdatePayType请求参数结构体
+ */
+export interface UpdatePayTypeRequest {
+  /**
+   * 计费区域，mainland或overseas。
+   */
+  Area: string
+
+  /**
+   * 计费类型，flux或bandwidth。
+   */
+  PayType: string
 }
 
 /**
@@ -3980,23 +4143,37 @@ export interface ListDiagnoseReportRequest {
 }
 
 /**
- * Url重定向规则配置
+ * waf配置类型
  */
-export interface UrlRedirectRule {
+export interface ScdnWafConfig {
   /**
-   * 重定向状态码，301 | 302
+   * on|off
    */
-  RedirectStatusCode: number
+  Switch: string
 
   /**
-   * 待匹配的Url，仅支持Url路径，不支持参数。默认完全匹配，支持通配符 *，最多支持5个通配符，最大长度1024字符。
-   */
-  Pattern: string
+      * intercept|observe，默认intercept
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Mode?: string
 
   /**
-   * 目标URL，必须以“/”开头，不包含参数部分。最大长度1024字符。可使用$1, $2, $3, $4, $5分别捕获匹配路径中的通配符号，最多支持10个捕获值。
-   */
-  RedirectUrl: string
+      * 重定向的错误页面
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrorPage?: ScdnErrorPage
+
+  /**
+      * webshell拦截开关，on|off，默认off
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WebShellSwitch?: string
+
+  /**
+      * 类型拦截规则
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Rules?: Array<ScdnWafRule>
 }
 
 /**
@@ -4561,6 +4738,67 @@ false：不允许空 referer
 }
 
 /**
+ * scdn 的自定义 cc 规则
+ */
+export interface ScdnCCRules {
+  /**
+      * 规则类型：
+all：所有文件生效
+file：指定文件后缀生效
+directory：指定路径生效
+path：指定绝对路径生效
+index：首页
+      */
+  RuleType: string
+
+  /**
+   * 规则值
+   */
+  RuleValue: Array<string>
+
+  /**
+   * 规则限频
+   */
+  Qps?: number
+
+  /**
+      * 探测时长
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DetectionTime?: number
+
+  /**
+      * 限频阈值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FrequencyLimit?: number
+
+  /**
+      * IP 惩罚开关，可选on|off
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PunishmentSwitch?: string
+
+  /**
+      * IP 惩罚时长
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PunishmentTime?: number
+
+  /**
+      * 执行动作，intercept|redirect
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Action?: string
+
+  /**
+      * 动作为 redirect 时，重定向的url
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RedirectUrl?: string
+}
+
+/**
  * 单节点单 IP 访问限频配置，默认为关闭状态
  */
 export interface IpFreqLimit {
@@ -4577,6 +4815,16 @@ off：关闭
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Qps?: number
+}
+
+/**
+ * ddos配置类型
+ */
+export interface ScdnDdosConfig {
+  /**
+   * on|off
+   */
+  Switch: string
 }
 
 /**
@@ -4914,6 +5162,22 @@ export interface ScdnTopData {
 }
 
 /**
+ * cc的配置类型
+ */
+export interface ScdnConfig {
+  /**
+   * on | off
+   */
+  Switch: string
+
+  /**
+      * 自定义 cc 防护规则
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Rules?: Array<ScdnCCRules>
+}
+
+/**
  * 日志包下载链接详情
  */
 export interface DomainLog {
@@ -5005,6 +5269,43 @@ export interface PurgeUrlsCacheResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Bot js策略
+ */
+export interface BotJavaScript {
+  /**
+   * on|off
+   */
+  Switch: string
+
+  /**
+   * 规则类型，当前只有file
+   */
+  RuleType: string
+
+  /**
+   * 规则值，['html', 'htm']
+   */
+  RuleValue: Array<string>
+
+  /**
+   * 执行动作，monitor|intercept|redirect|captcha
+   */
+  Action: string
+
+  /**
+      * 重定向时设置的重定向页面
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RedirectUrl?: string
+
+  /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime?: string
 }
 
 /**
@@ -5223,6 +5524,21 @@ export interface ListScdnLogTasksResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * acl的错误页面
+ */
+export interface ScdnErrorPage {
+  /**
+   * 状态码
+   */
+  RedirectCode: number
+
+  /**
+   * 重定向url
+   */
+  RedirectUrl: string
 }
 
 /**
@@ -6443,6 +6759,46 @@ export interface Compatibility {
 }
 
 /**
+ * SCDN精准访问控制配置
+ */
+export interface ScdnAclGroup {
+  /**
+   * 规则名称
+   */
+  RuleName: string
+
+  /**
+   * 具体配置
+   */
+  Configure: Array<ScdnAclRule>
+
+  /**
+   * 规则行为，一般为refuse
+   */
+  Result: string
+
+  /**
+   * 规则是否生效中active|inactive
+   */
+  Status?: string
+}
+
+/**
+ * Waf 规则信息
+ */
+export interface ScdnWafRule {
+  /**
+   * 攻击类型
+   */
+  AttackType: string
+
+  /**
+   * 防护措施，observe
+   */
+  Operate: string
+}
+
+/**
  * Cls日志搜索结果
  */
 export interface ClsSearchLogs {
@@ -6518,18 +6874,25 @@ blacklist：黑名单
 }
 
 /**
- * UpdatePayType请求参数结构体
+ * SCDN访问控制
  */
-export interface UpdatePayTypeRequest {
+export interface ScdnAclConfig {
   /**
-   * 计费区域，mainland或overseas。
+   * 是否开启，on | off
    */
-  Area: string
+  Switch: string
 
   /**
-   * 计费类型，flux或bandwidth。
-   */
-  PayType: string
+      * Acl规则组，switch为on时必填
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ScriptData?: Array<ScdnAclGroup>
+
+  /**
+      * 错误页面配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrorPage?: ScdnErrorPage
 }
 
 /**
@@ -7027,6 +7390,32 @@ export interface CreateEdgePackTaskRequest {
    * BlockID 的值, WALLE为1903654775(0x71777777)，VasDolly为2282837503(0x881155ff),传0或不传时默认为 WALLE 方案
    */
   BlockID?: number
+}
+
+/**
+ * Url重定向规则配置
+ */
+export interface UrlRedirectRule {
+  /**
+   * 重定向状态码，301 | 302
+   */
+  RedirectStatusCode: number
+
+  /**
+   * 待匹配的Url，仅支持Url路径，不支持参数。默认完全匹配，支持通配符 *，最多支持5个通配符，最大长度1024字符。
+   */
+  Pattern: string
+
+  /**
+   * 目标URL，必须以“/”开头，不包含参数部分。最大长度1024字符。可使用$1, $2, $3, $4, $5分别捕获匹配路径中的通配符号，最多支持10个捕获值。
+   */
+  RedirectUrl: string
+
+  /**
+      * 目标host，必须以http://或https://开头，并填写标准格式域名，如果不填写，默认为http:// + 当前域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RedirectHost?: string
 }
 
 /**

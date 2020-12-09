@@ -28,10 +28,10 @@ class Client extends abstract_client_1.AbstractClient {
         super("captcha.tencentcloudapi.com", "2019-07-22", clientConfig);
     }
     /**
-     * 安全验证码获取用户注册所有APPId和应用名称
+     * 核查验证码小程序插件票据接入风控结果(Beta)
      */
-    async DescribeCaptchaUserAllAppId(req, cb) {
-        return this.request("DescribeCaptchaUserAllAppId", req, cb);
+    async DescribeCaptchaMiniRiskResult(req, cb) {
+        return this.request("DescribeCaptchaMiniRiskResult", req, cb);
     }
     /**
      * 安全验证码用户操作票据数据查询
@@ -86,6 +86,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UpdateCaptchaAppIdInfo(req, cb) {
         return this.request("UpdateCaptchaAppIdInfo", req, cb);
+    }
+    /**
+     * 安全验证码获取用户注册所有APPId和应用名称
+     */
+    async DescribeCaptchaUserAllAppId(req, cb) {
+        return this.request("DescribeCaptchaUserAllAppId", req, cb);
     }
     /**
      * 查询安全验证码应用APPId信息

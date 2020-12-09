@@ -3182,6 +3182,10 @@ export interface SimpleHlsClipResponse {
       */
     MetaData?: MediaMetaData;
     /**
+      * 剪辑固化后的视频的媒体文件的唯一标识。
+      */
+    FileId?: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -3825,6 +3829,11 @@ export interface VideoTemplateInfo {
 如果没有特殊需求，不建议指定该参数。
       */
     Vcrf?: number;
+    /**
+      * 关键帧 I 帧之间的间隔，取值范围：0 和 [1, 100000]，单位：帧数。
+当填 0 或不填时，系统将自动设置 gop 长度。
+      */
+    Gop?: number;
 }
 /**
  * 文本鉴政任务控制参数
@@ -4707,6 +4716,10 @@ export interface SimpleHlsClipRequest {
       * 裁剪的结束偏移时间，单位秒。默认 0，即裁剪到视频尾部。负数表示距离视频结束多少秒结束裁剪。例如 -10 表示到倒数第 10 秒结束裁剪。
       */
     EndTimeOffset?: number;
+    /**
+      * 是否固化。0 不固化，1 固化。默认不固化。
+      */
+    IsPersistence?: number;
     /**
       * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
       */
@@ -6887,7 +6900,6 @@ export interface DescribeCDNUsageDataRequest {
 <li>60：小时粒度，返回指定查询时间内1小时粒度的数据。</li>
 <li>1440：天粒度，返回指定查询时间内1天粒度的数据。</li>
 默认值为1440，返回天粒度的数据。
-当该字段为1时，表示以管理员身份查询所有子应用（含主应用）的用量合计。
       */
     DataInterval?: number;
     /**
@@ -7508,7 +7520,7 @@ export interface DescribeCDNStatDetailsRequest {
 <li>Guangdong：广东。</li>
 <li>Guangxi：广西。</li>
 <li>Hainan：海南。</li>
-<li>Hongkong Macao And Taiwan：港澳台。</li>
+<li>Hong Kong, Macao and Taiwan：港澳台。</li>
 <li>outside Chinese Mainland：海外。</li>
 <li>Other：其他 。</li>
       */
@@ -8599,6 +8611,11 @@ export interface VideoTemplateInfoForUpdate {
 如果没有特殊需求，不建议指定该参数。
       */
     Vcrf?: number;
+    /**
+      * 关键帧 I 帧之间的间隔，取值范围：0 和 [1, 100000]，单位：帧数。
+当填 0 或不填时，系统将自动设置 gop 长度。
+      */
+    Gop?: number;
 }
 /**
  * CreateContentReviewTemplate请求参数结构体

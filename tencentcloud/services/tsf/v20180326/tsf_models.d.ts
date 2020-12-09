@@ -6312,7 +6312,7 @@ export interface ApiInfo {
       */
     PathMapping: string;
     /**
-      * api所在服务host
+      * api所在服务host,限定外部Api填写。格式: "http://127.0.0.1:8080"
       */
     Host?: string;
     /**
@@ -7597,7 +7597,7 @@ export interface ApiGroupInfo {
       */
     GroupContext: string;
     /**
-      * 鉴权类型。 secret： 秘钥鉴权； none:无鉴权
+      * 鉴权类型。 secret： 密钥鉴权； none:无鉴权
 注意：此字段可能返回 null，表示取不到有效值。
       */
     AuthType: string;
@@ -7670,7 +7670,7 @@ export interface CreateApiGroupRequest {
       */
     GroupContext: string;
     /**
-      * 鉴权类型。secret： 秘钥鉴权； none:无鉴权
+      * 鉴权类型。secret： 密钥鉴权； none:无鉴权
       */
     AuthType?: string;
     /**

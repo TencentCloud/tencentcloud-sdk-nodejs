@@ -244,6 +244,78 @@ export interface UpdateCaptchaAppIdInfoRequest {
 }
 
 /**
+ * 拦截策略返回信息
+ */
+export interface OutputManageMarketingRiskValue {
+  /**
+      * 账号 ID。对应输入参数： AccountType 是 1 时，对应 QQ 的 OpenID。
+AccountType 是 2 时，对应微信的 OpenID/UnionID。
+AccountType 是 4 时，对应手机号。
+AccountType 是 8 时，对应 imei、idfa、imeiMD5 或者 idfaMD5。
+AccountType 是 0 时，对应账号信息。
+AccountType 是 10004 时，对应手机号的 MD5。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserId: string
+
+  /**
+      * 操作时间戳，单位秒（对应输入参数）。 
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PostTime: number
+
+  /**
+      * 对应输入参数，AccountType 是 QQ 或微信开放账号时，用于标识 QQ 或微信用户登录 后关联业务自身的账号 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AssociateAccount: string
+
+  /**
+      * 业务详情。 注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserIp: string
+
+  /**
+      * 风险值 pass : 无恶意
+review：需要人工审核
+reject：拒绝，高风险恶意
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RiskLevel: string
+
+  /**
+      * 风险类型，请查看下面详细说明 注意：此字段可能返回 null，表示取不到有效值。
+账号风险	
+        账号信用低	1	账号近期存在因恶意被处罚历史，网络低活跃，被举报等因素
+	疑似 低活跃账号	11	账号活跃度与正常用户有差异
+	垃圾账号	2	疑似批量注册小号，近期存在严重违规或大量举报
+	疑似小号	21	账号有疑似线上养号，小号等行为
+	疑似 违规账号	22	账号曾有违规行为、曾被举报过、曾因违规被处罚过等
+	无效账号	3	送检账号参数无法成功解析，请检查微信 openid 是否有
+	黑名单	4	该账号在业务侧有过拉黑记录
+	白名单 	5	业务自行有添加过白名单记录
+行为风险	
+        批量操作	101	存在 ip/设备/环境等因素的聚集性异常
+	疑似 IP 属性聚集 	1011	出现 IP 聚集
+	疑似 设备属性聚集 	1012	出现设备聚集
+	自动机 	103	疑似自动机批量请求
+	微信登录态无效 	104	检查 wxtoken 参数，是否已经失效
+环境风险	
+        环境异常 	201	操作 ip/设备/环境存在异常。当前 ip 为非常用 ip 或恶意 ip 段
+	疑似 非常用IP请求 	2011	当前请求 IP 非该账号常用 IP
+	疑似 IP 异常 	2012	使用 idc 机房 ip 或 使用代理 ip 或 使用恶意 ip 
+	非公网有效 ip 	205	传进来的 IP 地址为内网 ip 地址或者 ip 保留地
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RiskType: Array<number>
+}
+
+/**
  * DescribeCaptchaOperData 接口 返回数据类型集合
  */
 export interface CaptchaOperDataRes {
@@ -338,6 +410,66 @@ export interface UpdateCaptchaAppIdInfoResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeCaptchaMiniRiskResult请求参数结构体
+ */
+export interface DescribeCaptchaMiniRiskResultRequest {
+  /**
+   * 固定填值：9（滑块验证码）
+   */
+  CaptchaType: number
+
+  /**
+   * 验证码返回给用户的票据
+   */
+  Ticket: string
+
+  /**
+   * 用户操作来源的外网 IP
+   */
+  UserIp: string
+
+  /**
+   * 验证码应用APPID
+   */
+  CaptchaAppId: number
+
+  /**
+   * 用于服务器端校验验证码票据的验证密钥，请妥善保密，请勿泄露给第三方
+   */
+  AppSecretKey: string
+
+  /**
+   * 业务 ID，网站或应用在多个业务中使用此服务，通过此 ID 区分统计数据
+   */
+  BusinessId?: number
+
+  /**
+   * 场景 ID，网站或应用的业务下有多个场景使用此服务，通过此 ID 区分统计数据
+   */
+  SceneId?: number
+
+  /**
+   * mac 地址或设备唯一标识
+   */
+  MacAddress?: string
+
+  /**
+   * 手机设备号
+   */
+  Imei?: string
+
+  /**
+   * 验证场景：1 活动防刷场景，2 登陆保护场景，3 注册保护场景。根据需求选择场景参数。
+   */
+  SceneCode?: number
+
+  /**
+   * 用户操作来源的微信开放账号
+   */
+  WeChatOpenId?: string
 }
 
 /**
@@ -504,6 +636,44 @@ export interface DescribeCaptchaDataSumRequest {
    * 查询结束时间
    */
   End: number
+}
+
+/**
+ * DescribeCaptchaMiniRiskResult返回参数结构体
+ */
+export interface DescribeCaptchaMiniRiskResultResponse {
+  /**
+      * 1 ticket verification succeeded 票据验证成功
+7 CaptchaAppId does not match 票据与验证码应用APPID不匹配
+8 ticket expired 票据超时
+10 ticket format error 票据格式不正确
+15 ticket decryption failed 票据解密失败
+16 CaptchaAppId wrong format 检查验证码应用APPID错误
+21 ticket error 票据验证错误
+25 bad visitor 策略拦截
+26 system internal error 系统内部错误
+100 param err 参数校验错误
+      */
+  CaptchaCode?: number
+
+  /**
+      * 状态描述及验证错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CaptchaMsg?: string
+
+  /**
+      * 拦截策略返回信息
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ManageMarketingRiskValue?: OutputManageMarketingRiskValue
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

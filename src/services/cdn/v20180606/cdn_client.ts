@@ -36,6 +36,7 @@ import {
   DescribeCdnDomainLogsRequest,
   DescribeTrafficPackagesRequest,
   CreateClsLogTopicResponse,
+  ScdnAclRule,
   PurgePathCacheResponse,
   DomainFilter,
   DescribeCdnOriginIpResponse,
@@ -63,6 +64,7 @@ import {
   AdvancedAuthenticationTypeD,
   CompressionRule,
   GuetzliAdapter,
+  UpdateScdnDomainResponse,
   Origin,
   ViolationUrl,
   DescribeDomainsConfigRequest,
@@ -89,6 +91,7 @@ import {
   RuleCacheConfig,
   ListClsTopicDomainsResponse,
   TrafficPackage,
+  BotCookie,
   DescribeCdnIpRequest,
   Ipv6,
   StatusCodeCache,
@@ -112,6 +115,7 @@ import {
   CreateScdnLogTaskResponse,
   MapInfo,
   DescribeCertDomainsResponse,
+  ScdnBotConfig,
   DuplicateDomainConfigRequest,
   AuthenticationTypeD,
   AuthenticationTypeC,
@@ -123,6 +127,7 @@ import {
   ResourceOriginData,
   IpStatus,
   AddCdnDomainResponse,
+  VerifyDomainRecordResponse,
   DomainAreaConfig,
   ServerCert,
   AccessControlRule,
@@ -139,10 +144,11 @@ import {
   DuplicateDomainConfigResponse,
   CdnIpHistory,
   SummarizedData,
-  VerifyDomainRecordResponse,
+  UpdateScdnDomainRequest,
+  UpdatePayTypeRequest,
   ManageClsTopicDomainsRequest,
   ListDiagnoseReportRequest,
-  UrlRedirectRule,
+  ScdnWafConfig,
   Cache,
   DiagnoseData,
   DescribeOriginDataRequest,
@@ -156,7 +162,9 @@ import {
   DescribeScdnTopDataRequest,
   DescribeUrlViolationsRequest,
   RefererRule,
+  ScdnCCRules,
   IpFreqLimit,
+  ScdnDdosConfig,
   CreateDiagnoseUrlResponse,
   CreateClsLogTopicRequest,
   CacheOptResult,
@@ -172,10 +180,12 @@ import {
   StatusCodeCacheRule,
   ClientCert,
   ScdnTopData,
+  ScdnConfig,
   DomainLog,
   GetDisableRecordsRequest,
   CreateDiagnoseUrlRequest,
   PurgeUrlsCacheResponse,
+  BotJavaScript,
   DeleteClsLogTopicResponse,
   DescribeBillingDataResponse,
   DisableCachesResponse,
@@ -186,6 +196,7 @@ import {
   DescribeIpStatusResponse,
   DescribeDistrictIspDataRequest,
   ListScdnLogTasksResponse,
+  ScdnErrorPage,
   CacheKey,
   UrlRedirect,
   DownstreamCapping,
@@ -232,10 +243,12 @@ import {
   ManageClsTopicDomainsResponse,
   VideoSeek,
   Compatibility,
+  ScdnAclGroup,
+  ScdnWafRule,
   ClsSearchLogs,
   DescribeUrlViolationsResponse,
   IpFilter,
-  UpdatePayTypeRequest,
+  ScdnAclConfig,
   DiagnoseUnit,
   DiagnoseInfo,
   DescribePurgeTasksResponse,
@@ -253,6 +266,7 @@ import {
   ScdnTypeData,
   DescribeDomainsRequest,
   CreateEdgePackTaskRequest,
+  UrlRedirectRule,
   DiagnoseList,
   IpFilterPathRule,
 } from "./cdn_models"
@@ -496,6 +510,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePurgeQuotaResponse) => void
   ): Promise<DescribePurgeQuotaResponse> {
     return this.request("DescribePurgeQuota", req, cb)
+  }
+
+  /**
+   * UpdateScdnDomain 用于修改 SCDN 加速域名安全相关配置
+   */
+  async UpdateScdnDomain(
+    req: UpdateScdnDomainRequest,
+    cb?: (error: string, rep: UpdateScdnDomainResponse) => void
+  ): Promise<UpdateScdnDomainResponse> {
+    return this.request("UpdateScdnDomain", req, cb)
   }
 
   /**

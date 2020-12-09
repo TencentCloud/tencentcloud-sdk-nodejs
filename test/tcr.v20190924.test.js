@@ -318,6 +318,16 @@ it("tcr.v20190924.DeleteImagePersonal", async function () {
     }
 })
 
+it("tcr.v20190924.ManageInternalEndpoint", async function () {
+    try {
+       const data = await client.ManageInternalEndpoint({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.ModifyWebhookTrigger", async function () {
     try {
        const data = await client.ModifyWebhookTrigger({})
@@ -561,6 +571,16 @@ it("tcr.v20190924.DeleteNamespacePersonal", async function () {
 it("tcr.v20190924.ModifyRepositoryAccessPersonal", async function () {
     try {
        const data = await client.ModifyRepositoryAccessPersonal({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcr.v20190924.DescribeInternalEndpoints", async function () {
+    try {
+       const data = await client.DescribeInternalEndpoints({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

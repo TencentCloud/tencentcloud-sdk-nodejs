@@ -32,12 +32,14 @@ import {
   DeleteRuleRequest,
   DisassociateTargetGroupsResponse,
   SetLoadBalancerClsLogResponse,
+  DescribeLoadBalancerTrafficResponse,
   ModifyRuleRequest,
   DescribeBlockIPListResponse,
   DescribeRewriteRequest,
+  ModifyLoadBalancerAttributesResponse,
   DescribeTargetGroupInstancesRequest,
   AssociateTargetGroupsRequest,
-  ClustersZone,
+  DescribeLoadBalancersRequest,
   ClassicalTarget,
   RsWeightRule,
   DeregisterTargetsFromClassicalLBRequest,
@@ -70,12 +72,13 @@ import {
   BatchRegisterTargetsResponse,
   ModifyLoadBalancerAttributesRequest,
   Target,
+  DescribeLoadBalancerTrafficRequest,
   DescribeBlockIPListRequest,
   CertIdRelatedWithLoadBalancers,
   DescribeClassicalLBHealthStatusResponse,
   DescribeClsLogSetRequest,
   Listener,
-  ModifyLoadBalancerAttributesResponse,
+  LoadBalancerTraffic,
   RegisterTargetsWithClassicalLBRequest,
   ModifyDomainAttributesResponse,
   ReplaceCertForLoadBalancersResponse,
@@ -131,7 +134,7 @@ import {
   ModifyDomainResponse,
   RegisterTargetsResponse,
   DeregisterTargetsFromClassicalLBResponse,
-  DescribeLoadBalancersRequest,
+  ClustersZone,
   DeleteLoadBalancerResponse,
   AutoRewriteResponse,
   DeregisterTargetsResponse,
@@ -481,6 +484,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取目标组绑定的服务器信息
+   */
+  async DescribeTargetGroupInstances(
+    req: DescribeTargetGroupInstancesRequest,
+    cb?: (error: string, rep: DescribeTargetGroupInstancesResponse) => void
+  ): Promise<DescribeTargetGroupInstancesResponse> {
+    return this.request("DescribeTargetGroupInstances", req, cb)
+  }
+
+  /**
      * 本接口(AssociateTargetGroups)用来将目标组绑定到负载均衡的监听器（四层协议）或转发规则（七层协议）上。
 本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
      */
@@ -792,13 +805,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取目标组绑定的服务器信息
+   * 查询账号下高流量负载均衡，返回前10个负载均衡。如果是子账号登录，只返回子账号有权限的负载均衡。
    */
-  async DescribeTargetGroupInstances(
-    req: DescribeTargetGroupInstancesRequest,
-    cb?: (error: string, rep: DescribeTargetGroupInstancesResponse) => void
-  ): Promise<DescribeTargetGroupInstancesResponse> {
-    return this.request("DescribeTargetGroupInstances", req, cb)
+  async DescribeLoadBalancerTraffic(
+    req: DescribeLoadBalancerTrafficRequest,
+    cb?: (error: string, rep: DescribeLoadBalancerTrafficResponse) => void
+  ): Promise<DescribeLoadBalancerTrafficResponse> {
+    return this.request("DescribeLoadBalancerTraffic", req, cb)
   }
 
   /**

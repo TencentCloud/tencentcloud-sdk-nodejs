@@ -46,7 +46,7 @@ export declare class Client extends AbstractClient {
     /**
      * 本接口（RecycleReadOnlyGroup）立即回收只读组的资源，只读组占用的vip等资源将立即释放且不可找回。
      */
-    RecycleReadOnlyGroup(req?: RecycleReadOnlyGroupRequest, cb?: (error: string, rep: RecycleReadOnlyGroupResponse) => void): Promise<RecycleReadOnlyGroupResponse>;
+    RecycleReadOnlyGroup(req: RecycleReadOnlyGroupRequest, cb?: (error: string, rep: RecycleReadOnlyGroupResponse) => void): Promise<RecycleReadOnlyGroupResponse>;
     /**
      * 本接口(ModifyBackupName)用于修改备份名称。
      */

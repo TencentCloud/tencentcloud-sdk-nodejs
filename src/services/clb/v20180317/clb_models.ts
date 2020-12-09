@@ -241,6 +241,11 @@ OPEN：公网属性， INTERNAL：内网属性。
   Vip?: string
 
   /**
+   * 带宽包ID，指定此参数时，网络计费方式（InternetAccessible.InternetChargeType）只支持按带宽包计费（BANDWIDTH_PACKAGE）
+   */
+  BandwidthPackageId?: string
+
+  /**
    * 独占集群信息
    */
   ExclusiveCluster?: ExclusiveCluster
@@ -288,7 +293,7 @@ export interface RuleHealth {
   Url: string
 
   /**
-      * 本规则上绑定的后端的健康检查状态
+      * 本规则上绑定的后端服务的健康检查状态
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Targets: Array<TargetHealth>
@@ -343,6 +348,22 @@ export interface DisassociateTargetGroupsResponse {
  * SetLoadBalancerClsLog返回参数结构体
  */
 export interface SetLoadBalancerClsLogResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeLoadBalancerTraffic返回参数结构体
+ */
+export interface DescribeLoadBalancerTrafficResponse {
+  /**
+      * 按出带宽从高到低排序后的负载均衡信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LoadBalancerTraffic?: Array<LoadBalancerTraffic>
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -451,6 +472,22 @@ export interface DescribeRewriteRequest {
 }
 
 /**
+ * ModifyLoadBalancerAttributes返回参数结构体
+ */
+export interface ModifyLoadBalancerAttributesResponse {
+  /**
+      * 切换负载均衡计费方式时，可用此参数查询切换任务是否成功。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DealName?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeTargetGroupInstances请求参数结构体
  */
 export interface DescribeTargetGroupInstancesRequest {
@@ -481,20 +518,110 @@ export interface AssociateTargetGroupsRequest {
 }
 
 /**
- * 集群所在的可用区。
+ * DescribeLoadBalancers请求参数结构体
  */
-export interface ClustersZone {
+export interface DescribeLoadBalancersRequest {
   /**
-      * 集群所在的主可用区。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MasterZone: Array<string>
+   * 负载均衡实例 ID。
+   */
+  LoadBalancerIds?: Array<string>
 
   /**
-      * 集群所在的备可用区。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 负载均衡实例的网络类型：
+OPEN：公网属性， INTERNAL：内网属性。
       */
-  SlaveZone: Array<string>
+  LoadBalancerType?: string
+
+  /**
+   * 负载均衡实例的类型。1：通用的负载均衡实例，0：传统型负载均衡实例。如果不传此参数，则查询所有类型的负载均衡实例。
+   */
+  Forward?: number
+
+  /**
+   * 负载均衡实例的名称。
+   */
+  LoadBalancerName?: string
+
+  /**
+   * 腾讯云为负载均衡实例分配的域名，本参数仅对传统型公网负载均衡才有意义。
+   */
+  Domain?: string
+
+  /**
+   * 负载均衡实例的 VIP 地址，支持多个。
+   */
+  LoadBalancerVips?: Array<string>
+
+  /**
+   * 负载均衡绑定的后端服务的外网 IP。
+   */
+  BackendPublicIps?: Array<string>
+
+  /**
+   * 负载均衡绑定的后端服务的内网 IP。
+   */
+  BackendPrivateIps?: Array<string>
+
+  /**
+   * 数据偏移量，默认为 0。
+   */
+  Offset?: number
+
+  /**
+   * 返回负载均衡实例的数量，默认为20，最大值为100。
+   */
+  Limit?: number
+
+  /**
+   * 排序参数，支持以下字段：LoadBalancerName，CreateTime，Domain，LoadBalancerType。
+   */
+  OrderBy?: string
+
+  /**
+   * 1：倒序，0：顺序，默认按照创建时间倒序。
+   */
+  OrderType?: number
+
+  /**
+   * 搜索字段，模糊匹配名称、域名、VIP。
+   */
+  SearchKey?: string
+
+  /**
+   * 负载均衡实例所属的项目 ID，可以通过 DescribeProject 接口获取。
+   */
+  ProjectId?: number
+
+  /**
+   * 负载均衡是否绑定后端服务，0：没有绑定后端服务，1：绑定后端服务，-1：查询全部。
+   */
+  WithRs?: number
+
+  /**
+      * 负载均衡实例所属私有网络唯一ID，如 vpc-bhqkbhdx，
+基础网络可传入'0'。
+      */
+  VpcId?: string
+
+  /**
+   * 安全组ID，如 sg-m1cc9123
+   */
+  SecurityGroup?: string
+
+  /**
+   * 主可用区ID，如 ："100001" （对应的是广州一区）
+   */
+  MasterZone?: string
+
+  /**
+      * 每次请求的`Filters`的上限为10，`Filter.Values`的上限为100。详细的过滤条件如下：
+<li> internet-charge-type - String - 是否必填：否 - （过滤条件）按照 CLB 的网络计费模式过滤，包括"BANDWIDTH_PREPAID","TRAFFIC_POSTPAID_BY_HOUR","BANDWIDTH_POSTPAID_BY_HOUR","BANDWIDTH_PACKAGE"。</li>
+<li> master-zone-id - String - 是否必填：否 - （过滤条件）按照 CLB 的主可用区ID过滤，如 ："100001" （对应的是广州一区）。</li>
+<li> tag-key - String - 是否必填：否 - （过滤条件）按照 CLB 标签的键过滤。</li>
+<li> tag-value - String - 是否必填：否 - （过滤条件）按照 CLB 标签的值过滤。</li>
+<li> function-name - String - 是否必填：否 - （过滤条件）按照 CLB 后端绑定的SCF云函数的函数名称过滤。</li>
+      */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -1107,6 +1234,16 @@ export interface Target {
 }
 
 /**
+ * DescribeLoadBalancerTraffic请求参数结构体
+ */
+export interface DescribeLoadBalancerTrafficRequest {
+  /**
+   * 负载均衡所在地域，不传默认返回所有地域负载均衡。
+   */
+  LoadBalancerRegion?: string
+}
+
+/**
  * DescribeBlockIPList请求参数结构体
  */
 export interface DescribeBlockIPListRequest {
@@ -1262,19 +1399,33 @@ export interface Listener {
 }
 
 /**
- * ModifyLoadBalancerAttributes返回参数结构体
+ * 负载均衡流量数据。
  */
-export interface ModifyLoadBalancerAttributesResponse {
+export interface LoadBalancerTraffic {
   /**
-      * 切换负载均衡计费方式时，可用此参数查询切换任务是否成功。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DealName?: string
+   * 负载均衡ID
+   */
+  LoadBalancerId: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 负载均衡名字
    */
-  RequestId?: string
+  LoadBalancerName: string
+
+  /**
+   * 负载均衡所在地域
+   */
+  Region: string
+
+  /**
+   * 负载均衡的vip
+   */
+  Vip: string
+
+  /**
+   * 最大出带宽，单位：Mbps
+   */
+  OutBandwidth: number
 }
 
 /**
@@ -2711,108 +2862,20 @@ export interface DeregisterTargetsFromClassicalLBResponse {
 }
 
 /**
- * DescribeLoadBalancers请求参数结构体
+ * 集群所在的可用区。
  */
-export interface DescribeLoadBalancersRequest {
+export interface ClustersZone {
   /**
-   * 负载均衡实例 ID。
-   */
-  LoadBalancerIds?: Array<string>
-
-  /**
-      * 负载均衡实例的网络类型：
-OPEN：公网属性， INTERNAL：内网属性。
+      * 集群所在的主可用区。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  LoadBalancerType?: string
+  MasterZone: Array<string>
 
   /**
-   * 负载均衡实例的类型。1：通用的负载均衡实例，0：传统型负载均衡实例。如果不传此参数，则查询所有类型的负载均衡实例。
-   */
-  Forward?: number
-
-  /**
-   * 负载均衡实例的名称。
-   */
-  LoadBalancerName?: string
-
-  /**
-   * 腾讯云为负载均衡实例分配的域名，本参数仅对传统型公网负载均衡才有意义。
-   */
-  Domain?: string
-
-  /**
-   * 负载均衡实例的 VIP 地址，支持多个。
-   */
-  LoadBalancerVips?: Array<string>
-
-  /**
-   * 负载均衡绑定的后端服务的外网 IP。
-   */
-  BackendPublicIps?: Array<string>
-
-  /**
-   * 负载均衡绑定的后端服务的内网 IP。
-   */
-  BackendPrivateIps?: Array<string>
-
-  /**
-   * 数据偏移量，默认为 0。
-   */
-  Offset?: number
-
-  /**
-   * 返回负载均衡实例的数量，默认为20，最大值为100。
-   */
-  Limit?: number
-
-  /**
-   * 排序参数，支持以下字段：LoadBalancerName，CreateTime，Domain，LoadBalancerType。
-   */
-  OrderBy?: string
-
-  /**
-   * 1：倒序，0：顺序，默认按照创建时间倒序。
-   */
-  OrderType?: number
-
-  /**
-   * 搜索字段，模糊匹配名称、域名、VIP。
-   */
-  SearchKey?: string
-
-  /**
-   * 负载均衡实例所属的项目 ID，可以通过 DescribeProject 接口获取。
-   */
-  ProjectId?: number
-
-  /**
-   * 负载均衡是否绑定后端服务，0：没有绑定后端服务，1：绑定后端服务，-1：查询全部。
-   */
-  WithRs?: number
-
-  /**
-      * 负载均衡实例所属私有网络唯一ID，如 vpc-bhqkbhdx，
-基础网络可传入'0'。
+      * 集群所在的备可用区。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  VpcId?: string
-
-  /**
-   * 安全组ID，如 sg-m1cc9123
-   */
-  SecurityGroup?: string
-
-  /**
-   * 主可用区ID，如 ："100001" （对应的是广州一区）
-   */
-  MasterZone?: string
-
-  /**
-      * 每次请求的`Filters`的上限为10，`Filter.Values`的上限为100。详细的过滤条件如下：
-<li> internet-charge-type - String - 是否必填：否 - （过滤条件）按照 CLB 的网络计费模式过滤，包括"BANDWIDTH_PREPAID","TRAFFIC_POSTPAID_BY_HOUR","BANDWIDTH_POSTPAID_BY_HOUR","BANDWIDTH_PACKAGE"。</li>
-<li> master-zone-id - String - 是否必填：否 - （过滤条件）按照 CLB 的主可用区ID过滤，如 ："100001" （对应的是广州一区）。</li>
-<li> tag-key - String - 是否必填：否 - （过滤条件）按照 CLB 标签的键过滤。</li>
-      */
-  Filters?: Array<Filter>
+  SlaveZone: Array<string>
 }
 
 /**

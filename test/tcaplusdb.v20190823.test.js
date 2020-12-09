@@ -58,6 +58,16 @@ it("tcaplusdb.v20190823.CreateCluster", async function () {
     }
 })
 
+it("tcaplusdb.v20190823.DescribeMachine", async function () {
+    try {
+       const data = await client.DescribeMachine({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcaplusdb.v20190823.DescribeUinInWhitelist", async function () {
     try {
        const data = await client.DescribeUinInWhitelist({})
@@ -181,6 +191,16 @@ it("tcaplusdb.v20190823.ModifyTableQuotas", async function () {
 it("tcaplusdb.v20190823.DescribeClusters", async function () {
     try {
        const data = await client.DescribeClusters({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcaplusdb.v20190823.ModifyClusterMachine", async function () {
+    try {
+       const data = await client.ModifyClusterMachine({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

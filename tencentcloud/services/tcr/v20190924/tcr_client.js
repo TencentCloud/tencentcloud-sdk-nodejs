@@ -208,6 +208,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteImagePersonal", req, cb);
     }
     /**
+     * 管理实例内网访问VPC链接
+     */
+    async ManageInternalEndpoint(req, cb) {
+        return this.request("ManageInternalEndpoint", req, cb);
+    }
+    /**
      * 更新触发器
      */
     async ModifyWebhookTrigger(req, cb) {
@@ -356,6 +362,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyRepositoryAccessPersonal(req, cb) {
         return this.request("ModifyRepositoryAccessPersonal", req, cb);
+    }
+    /**
+     * 查询实例内网访问VPC链接
+     */
+    async DescribeInternalEndpoints(req, cb) {
+        return this.request("DescribeInternalEndpoints", req, cb);
     }
     /**
      * 用于在个人版镜像仓库中删除仓库Tag自动清理策略

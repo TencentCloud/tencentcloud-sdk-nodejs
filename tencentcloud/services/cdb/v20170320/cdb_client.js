@@ -98,7 +98,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstanceName", req, cb);
     }
     /**
-     * 本接口(StopRollback) 用于撤销实例正在进行的回档任务，该接口返回一个异步任务id。 撤销结果可以通过 DescribeRequestResult 查询任务的执行情况。
+     * 本接口(StopRollback) 用于撤销实例正在进行的回档任务，该接口返回一个异步任务id。 撤销结果可以通过 DescribeAsyncRequestInfo 查询任务的执行情况。
      */
     async StopRollback(req, cb) {
         return this.request("StopRollback", req, cb);

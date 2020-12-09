@@ -172,6 +172,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePurgeQuota", req, cb);
     }
     /**
+     * UpdateScdnDomain 用于修改 SCDN 加速域名安全相关配置
+     */
+    async UpdateScdnDomain(req, cb) {
+        return this.request("UpdateScdnDomain", req, cb);
+    }
+    /**
      * ListScdnLogTasks 用于查询SCDN日志下载任务列表,以及展示下载任务基本信息
      */
     async ListScdnLogTasks(req, cb) {

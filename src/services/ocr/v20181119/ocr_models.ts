@@ -712,7 +712,7 @@ export interface TextDetectionEn {
   Confidence: number
 
   /**
-      * 文本行坐标，以四个顶点坐标表示。
+      * 文本行在原图中的四点坐标。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Polygon: Array<Coord>
@@ -723,7 +723,7 @@ export interface TextDetectionEn {
   AdvancedInfo: string
 
   /**
-   * 单词在原图中的四点坐标。
+   * 英文单词在原图中的四点坐标。
    */
   WordCoordPoint: Array<WordCoordPoint>
 
@@ -996,6 +996,7 @@ export interface VehicleLicenseOCRRequest {
   /**
       * FRONT 为行驶证主页正面（有红色印章的一面），
 BACK 为行驶证副页正面（有号码号牌的一面）。
+默认值为：FRONT。
       */
   CardSide?: string
 }
@@ -1105,6 +1106,7 @@ export interface DriverLicenseOCRRequest {
   /**
       * FRONT 为驾驶证主页正面（有红色印章的一面），
 BACK 为驾驶证副页正面（有档案编号的一面）。
+默认值为：FRONT。
       */
   CardSide?: string
 }

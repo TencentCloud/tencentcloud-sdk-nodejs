@@ -972,7 +972,7 @@ Oversea：则查询国外数据，
       */
     Granularity?: number;
     /**
-      * 服务名称，可选值包括LVB(标准直播)，LEB(快直播)，默认值是LVB。
+      * 服务名称，可选值包括LVB(标准直播)，LEB(快直播)，不填则查LVB+LEB总值。
       */
     ServiceName?: string;
 }

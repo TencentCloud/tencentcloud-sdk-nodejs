@@ -981,6 +981,11 @@ yunxun: Guangzhou Yunxun Information Technology Co., Ltd.（广州云讯信息�
 xinnet: Xin Net Technology Corporation（北京新网数码信息技术有限公司）
       */
   RegistrarType: string
+
+  /**
+   * 域名绑定的ns
+   */
+  NameServer: Array<string>
 }
 
 /**

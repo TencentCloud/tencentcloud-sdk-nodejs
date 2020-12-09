@@ -278,6 +278,16 @@ it("clb.v20180317.ReplaceCertForLoadBalancers", async function () {
     }
 })
 
+it("clb.v20180317.DescribeTargetGroupInstances", async function () {
+    try {
+       const data = await client.DescribeTargetGroupInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.AssociateTargetGroups", async function () {
     try {
        const data = await client.AssociateTargetGroups({})
@@ -578,9 +588,9 @@ it("clb.v20180317.DescribeClassicalLBByInstanceId", async function () {
     }
 })
 
-it("clb.v20180317.DescribeTargetGroupInstances", async function () {
+it("clb.v20180317.DescribeLoadBalancerTraffic", async function () {
     try {
-       const data = await client.DescribeTargetGroupInstances({})
+       const data = await client.DescribeLoadBalancerTraffic({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

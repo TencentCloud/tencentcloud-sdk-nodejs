@@ -25,18 +25,22 @@ import {
   DeleteClusterResponse,
   DeleteTableIndexResponse,
   TableRollbackResultNew,
+  ServerMachineInfo,
   DescribeTablesResponse,
   DeleteClusterRequest,
   SelectedTableWithField,
   DeleteTableIndexRequest,
+  ProxyMachineInfo,
   DescribeTasksResponse,
   DeleteTablesRequest,
   DescribeRegionsResponse,
   SelectedTableInfoNew,
   ModifyClusterPasswordRequest,
+  DescribeMachineResponse,
   DeleteTableGroupRequest,
   TagsInfoOfTableGroup,
   CreateTableGroupRequest,
+  ModifyClusterMachineResponse,
   TagsInfoOfTable,
   DeleteIdlFilesResponse,
   FieldInfo,
@@ -73,6 +77,7 @@ import {
   TagInfoUnit,
   CreateClusterResponse,
   DescribeClustersRequest,
+  ServerDetailInfo,
   TableInfoNew,
   TaskInfoNew,
   DeleteIdlFilesRequest,
@@ -90,6 +95,7 @@ import {
   DescribeUinInWhitelistResponse,
   ParsedTableInfoNew,
   RollbackTablesResponse,
+  MachineInfo,
   CreateBackupRequest,
   CreateClusterRequest,
   TableResultNew,
@@ -98,11 +104,15 @@ import {
   RegionInfo,
   DescribeTableGroupsResponse,
   DeleteTableGroupResponse,
+  PoolInfo,
+  DescribeMachineRequest,
   RollbackTablesRequest,
   DescribeUinInWhitelistRequest,
   CompareIdlFilesRequest,
+  ProxyDetailInfo,
   IdlFileInfoWithoutContent,
   ModifyTableMemosResponse,
+  ModifyClusterMachineRequest,
   Filter,
   DeleteTablesResponse,
   ErrorInfo,
@@ -156,6 +166,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateClusterResponse) => void
   ): Promise<CreateClusterResponse> {
     return this.request("CreateCluster", req, cb)
+  }
+
+  /**
+   * 查询独占集群可以申请的剩余机器
+   */
+  async DescribeMachine(
+    req: DescribeMachineRequest,
+    cb?: (error: string, rep: DescribeMachineResponse) => void
+  ): Promise<DescribeMachineResponse> {
+    return this.request("DescribeMachine", req, cb)
   }
 
   /**
@@ -286,6 +306,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClustersResponse) => void
   ): Promise<DescribeClustersResponse> {
     return this.request("DescribeClusters", req, cb)
+  }
+
+  /**
+   * 修改独占集群机器
+   */
+  async ModifyClusterMachine(
+    req: ModifyClusterMachineRequest,
+    cb?: (error: string, rep: ModifyClusterMachineResponse) => void
+  ): Promise<ModifyClusterMachineResponse> {
+    return this.request("ModifyClusterMachine", req, cb)
   }
 
   /**

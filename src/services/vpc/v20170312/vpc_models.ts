@@ -1117,6 +1117,11 @@ export interface CreateDirectConnectGatewayRequest {
 <li>NAT - NAT型</li>NAT类型支持网络地址转换配置，类型确定后不能修改；一个私有网络可以创建一个NAT类型的专线网关和一个非NAT类型的专线网关
       */
   GatewayType?: string
+
+  /**
+   * 云联网路由发布模式，可选值：`standard`（标准模式）、`exquisite`（精细模式）。只有云联网类型专线网关才支持`ModeType`。
+   */
+  ModeType?: string
 }
 
 /**
@@ -4089,6 +4094,11 @@ export interface ModifyDirectConnectGatewayAttributeRequest {
    * 云联网路由学习类型，可选值：`BGP`（自动学习）、`STATIC`（静态，即用户配置）。只有云联网类型专线网关且开启了BGP功能才支持修改`CcnRouteType`。
    */
   CcnRouteType?: string
+
+  /**
+   * 云联网路由发布模式，可选值：`standard`（标准模式）、`exquisite`（精细模式）。只有云联网类型专线网关才支持修改`ModeType`。
+   */
+  ModeType?: string
 }
 
 /**
@@ -5547,6 +5557,18 @@ NAT类型支持网络地址转换配置，类型确定后不能修改；一个�
 注意：此字段可能返回 null，表示取不到有效值。
       */
   NatGatewayId: string
+
+  /**
+      * 专线网关是否支持VXLAN架构
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VXLANSupport: Array<boolean>
+
+  /**
+      * 云联网路由发布模式：`standard`（标准模式）、`exquisite`（精细模式）。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ModeType: string
 }
 
 /**

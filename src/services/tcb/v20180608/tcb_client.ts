@@ -86,6 +86,7 @@ import {
   DescribeDownloadFileResponse,
   DescribeQuotaDataRequest,
   CreateStaticStoreResponse,
+  CloudBaseRunVpcInfo,
   DescribeCloudBaseRunResourceResponse,
   StorageInfo,
   DescribeCloudBaseRunVersionSnapshotRequest,

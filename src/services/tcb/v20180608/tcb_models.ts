@@ -1631,6 +1631,16 @@ export interface EstablishCloudBaseRunServerRequest {
    * 来源方（默认值：qcloud，微信侧来源miniapp)
    */
   Source?: string
+
+  /**
+   * vpc信息
+   */
+  VpcInfo?: CloudBaseRunVpcInfo
+
+  /**
+   * 0/1=允许公网访问;2=关闭公网访问
+   */
+  PublicAccess?: number
 }
 
 /**
@@ -2045,6 +2055,29 @@ export interface CreateStaticStoreResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * vpc信息
+ */
+export interface CloudBaseRunVpcInfo {
+  /**
+      * vpc的id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcId?: string
+
+  /**
+      * 子网id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubnetIds?: Array<string>
+
+  /**
+      * 创建类型(0=继承; 1=新建; 2=指定)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateType?: number
 }
 
 /**

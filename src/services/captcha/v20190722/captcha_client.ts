@@ -24,11 +24,13 @@ import {
   DescribeCaptchaMiniOperDataResponse,
   DescribeCaptchaMiniDataSumResponse,
   UpdateCaptchaAppIdInfoRequest,
+  OutputManageMarketingRiskValue,
   CaptchaOperDataRes,
   TicketInterceptUnit,
   DescribeCaptchaUserAllAppIdRequest,
   DescribeCaptchaMiniDataResponse,
   UpdateCaptchaAppIdInfoResponse,
+  DescribeCaptchaMiniRiskResultRequest,
   CaptchaUserAllAppId,
   DescribeCaptchaDataSumResponse,
   DescribeCaptchaTicketDataRequest,
@@ -36,6 +38,7 @@ import {
   CaptchaOperDataTryTimesUnit,
   DescribeCaptchaOperDataRequest,
   DescribeCaptchaDataSumRequest,
+  DescribeCaptchaMiniRiskResultResponse,
   TicketAmountUnit,
   CaptchaQueryData,
   TicketThroughUnit,
@@ -65,13 +68,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 安全验证码获取用户注册所有APPId和应用名称
+   * 核查验证码小程序插件票据接入风控结果(Beta)
    */
-  async DescribeCaptchaUserAllAppId(
-    req?: DescribeCaptchaUserAllAppIdRequest,
-    cb?: (error: string, rep: DescribeCaptchaUserAllAppIdResponse) => void
-  ): Promise<DescribeCaptchaUserAllAppIdResponse> {
-    return this.request("DescribeCaptchaUserAllAppId", req, cb)
+  async DescribeCaptchaMiniRiskResult(
+    req: DescribeCaptchaMiniRiskResultRequest,
+    cb?: (error: string, rep: DescribeCaptchaMiniRiskResultResponse) => void
+  ): Promise<DescribeCaptchaMiniRiskResultResponse> {
+    return this.request("DescribeCaptchaMiniRiskResult", req, cb)
   }
 
   /**
@@ -162,6 +165,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateCaptchaAppIdInfoResponse) => void
   ): Promise<UpdateCaptchaAppIdInfoResponse> {
     return this.request("UpdateCaptchaAppIdInfo", req, cb)
+  }
+
+  /**
+   * 安全验证码获取用户注册所有APPId和应用名称
+   */
+  async DescribeCaptchaUserAllAppId(
+    req?: DescribeCaptchaUserAllAppIdRequest,
+    cb?: (error: string, rep: DescribeCaptchaUserAllAppIdResponse) => void
+  ): Promise<DescribeCaptchaUserAllAppIdResponse> {
+    return this.request("DescribeCaptchaUserAllAppId", req, cb)
   }
 
   /**

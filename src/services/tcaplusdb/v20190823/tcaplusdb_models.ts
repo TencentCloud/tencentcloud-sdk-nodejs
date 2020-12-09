@@ -172,6 +172,21 @@ export interface TableRollbackResultNew {
 }
 
 /**
+ * svr的机器列表ServerList
+ */
+export interface ServerMachineInfo {
+  /**
+   * 机器唯一id
+   */
+  ServerUid: string
+
+  /**
+   * 机器类型
+   */
+  MachineType: string
+}
+
+/**
  * DescribeTables返回参数结构体
  */
 export interface DescribeTablesResponse {
@@ -254,6 +269,21 @@ export interface DeleteTableIndexRequest {
    * 待删除分布式索引的表格列表
    */
   SelectedTables: Array<SelectedTableInfoNew>
+}
+
+/**
+ * proxy机器信息
+ */
+export interface ProxyMachineInfo {
+  /**
+   * 唯一id
+   */
+  ProxyUid: string
+
+  /**
+   * 机器类型
+   */
+  MachineType: string
 }
 
 /**
@@ -417,6 +447,21 @@ export interface ModifyClusterPasswordRequest {
 }
 
 /**
+ * DescribeMachine返回参数结构体
+ */
+export interface DescribeMachineResponse {
+  /**
+   * 独占机器资源列表
+   */
+  PoolList?: Array<PoolInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteTableGroup请求参数结构体
  */
 export interface DeleteTableGroupRequest {
@@ -483,6 +528,21 @@ export interface CreateTableGroupRequest {
    * 表格组标签列表
    */
   ResourceTags?: Array<TagInfoUnit>
+}
+
+/**
+ * ModifyClusterMachine返回参数结构体
+ */
+export interface ModifyClusterMachineResponse {
+  /**
+   * 集群id
+   */
+  ClusterId?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -807,6 +867,48 @@ export interface ClusterInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ApiAccessIpv6: string
+
+  /**
+      * 集群类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterType: number
+
+  /**
+      * 集群状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterStatus: number
+
+  /**
+      * 读CU
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReadCapacityUnit: number
+
+  /**
+      * 写CU
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WriteCapacityUnit: number
+
+  /**
+      * 磁盘容量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiskVolume: number
+
+  /**
+      * 独占server机器信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServerList: Array<ServerDetailInfo>
+
+  /**
+      * 独占proxy机器信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProxyList: Array<ProxyDetailInfo>
 }
 
 /**
@@ -1312,6 +1414,41 @@ export interface DescribeClustersRequest {
    * 是否启用Ipv6
    */
   Ipv6Enable?: number
+}
+
+/**
+ * server独占机器的详细信息
+ */
+export interface ServerDetailInfo {
+  /**
+   * svr唯一id
+   */
+  ServerUid: string
+
+  /**
+   * 机器类型
+   */
+  MachineType: string
+
+  /**
+   * 内存占用量
+   */
+  MemoryRate: number
+
+  /**
+   * 磁盘占用量
+   */
+  DiskRate: number
+
+  /**
+   * 读次数
+   */
+  ReadNum: number
+
+  /**
+   * 写次数
+   */
+  WriteNum: number
 }
 
 /**
@@ -1925,6 +2062,21 @@ export interface RollbackTablesResponse {
 }
 
 /**
+ * 机器类型和数量
+ */
+export interface MachineInfo {
+  /**
+   * 机器类型
+   */
+  MachineType: string
+
+  /**
+   * 机器数量
+   */
+  MachineNum: number
+}
+
+/**
  * CreateBackup请求参数结构体
  */
 export interface CreateBackupRequest {
@@ -1982,6 +2134,21 @@ export interface CreateClusterRequest {
    * 集群是否开启IPv6功能
    */
   Ipv6Enable?: number
+
+  /**
+   * 独占集群占用的svr机器
+   */
+  ServerList?: Array<MachineInfo>
+
+  /**
+   * 独占集群占用的proxy机器
+   */
+  ProxyList?: Array<MachineInfo>
+
+  /**
+   * 集群类型1共享2独占
+   */
+  ClusterType?: number
 }
 
 /**
@@ -2133,6 +2300,46 @@ export interface DeleteTableGroupResponse {
 }
 
 /**
+ * center资源池中的机器信息
+ */
+export interface PoolInfo {
+  /**
+   * 唯一id
+   */
+  PoolUid: number
+
+  /**
+   * 是否支持ipv6
+   */
+  Ipv6Enable: number
+
+  /**
+   * 剩余可用app
+   */
+  AvailableAppCount: number
+
+  /**
+   * svr机器列表
+   */
+  ServerList: Array<ServerMachineInfo>
+
+  /**
+   * proxy机器列表
+   */
+  ProxyList: Array<ProxyMachineInfo>
+}
+
+/**
+ * DescribeMachine请求参数结构体
+ */
+export interface DescribeMachineRequest {
+  /**
+   * 是否按ipv6过滤
+   */
+  Ipv6Enable?: number
+}
+
+/**
  * RollbackTables请求参数结构体
  */
 export interface RollbackTablesRequest {
@@ -2185,6 +2392,36 @@ export interface CompareIdlFilesRequest {
    * 本次上传IDL文件列表，与ExistingIdlFiles必选其一
    */
   NewIdlFiles?: Array<IdlFileInfo>
+}
+
+/**
+ * 独占的proxy详细信息
+ */
+export interface ProxyDetailInfo {
+  /**
+   * proxy的唯一id
+   */
+  ProxyUid: string
+
+  /**
+   * 机器类型
+   */
+  MachineType: string
+
+  /**
+   * 请求包速度
+   */
+  ProcessSpeed: number
+
+  /**
+   * 请求包时延
+   */
+  AverageProcessDelay: number
+
+  /**
+   * 慢处理包速度
+   */
+  SlowProcessSpeed: number
 }
 
 /**
@@ -2246,6 +2483,31 @@ export interface ModifyTableMemosResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyClusterMachine请求参数结构体
+ */
+export interface ModifyClusterMachineRequest {
+  /**
+   * 集群id
+   */
+  ClusterId: string
+
+  /**
+   * svr占用的机器
+   */
+  ServerList: Array<MachineInfo>
+
+  /**
+   * proxy占用的机器
+   */
+  ProxyList: Array<MachineInfo>
+
+  /**
+   * 集群类型1共享集群2独占集群
+   */
+  ClusterType: number
 }
 
 /**

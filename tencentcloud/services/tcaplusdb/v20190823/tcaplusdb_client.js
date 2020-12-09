@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCluster", req, cb);
     }
     /**
+     * 查询独占集群可以申请的剩余机器
+     */
+    async DescribeMachine(req, cb) {
+        return this.request("DescribeMachine", req, cb);
+    }
+    /**
      * 查询本用户是否在白名单中，控制是否能创建TDR类型的APP或表
      */
     async DescribeUinInWhitelist(req, cb) {
@@ -128,6 +134,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeClusters(req, cb) {
         return this.request("DescribeClusters", req, cb);
+    }
+    /**
+     * 修改独占集群机器
+     */
+    async ModifyClusterMachine(req, cb) {
+        return this.request("ModifyClusterMachine", req, cb);
     }
     /**
      * 删除表格组

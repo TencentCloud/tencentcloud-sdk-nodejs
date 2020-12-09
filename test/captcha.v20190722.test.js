@@ -18,9 +18,9 @@ const client = new tencentcloud.captcha.v20190722.Client({
 })
 describe("captcha.v20190722.test.js", function () {
 
-it("captcha.v20190722.DescribeCaptchaUserAllAppId", async function () {
+it("captcha.v20190722.DescribeCaptchaMiniRiskResult", async function () {
     try {
-       const data = await client.DescribeCaptchaUserAllAppId({})
+       const data = await client.DescribeCaptchaMiniRiskResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -111,6 +111,16 @@ it("captcha.v20190722.DescribeCaptchaMiniResult", async function () {
 it("captcha.v20190722.UpdateCaptchaAppIdInfo", async function () {
     try {
        const data = await client.UpdateCaptchaAppIdInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("captcha.v20190722.DescribeCaptchaUserAllAppId", async function () {
+    try {
+       const data = await client.DescribeCaptchaUserAllAppId({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

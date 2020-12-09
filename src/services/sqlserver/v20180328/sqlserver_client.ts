@@ -303,7 +303,7 @@ export class Client extends AbstractClient {
    * 本接口（RecycleReadOnlyGroup）立即回收只读组的资源，只读组占用的vip等资源将立即释放且不可找回。
    */
   async RecycleReadOnlyGroup(
-    req?: RecycleReadOnlyGroupRequest,
+    req: RecycleReadOnlyGroupRequest,
     cb?: (error: string, rep: RecycleReadOnlyGroupResponse) => void
   ): Promise<RecycleReadOnlyGroupResponse> {
     return this.request("RecycleReadOnlyGroup", req, cb)

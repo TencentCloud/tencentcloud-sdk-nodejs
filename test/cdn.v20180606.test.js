@@ -238,6 +238,16 @@ it("cdn.v20180606.DescribePurgeQuota", async function () {
     }
 })
 
+it("cdn.v20180606.UpdateScdnDomain", async function () {
+    try {
+       const data = await client.UpdateScdnDomain({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdn.v20180606.ListScdnLogTasks", async function () {
     try {
        const data = await client.ListScdnLogTasks({})

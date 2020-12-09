@@ -829,7 +829,7 @@ export interface InvokeRequest {
       */
     GroupName: string;
     /**
-      * 被调用的函数参数列表
+      * 被调用的函数参数列表，参数列表大小总和要求小于2M
       */
     Args?: Array<string>;
     /**

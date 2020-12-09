@@ -24,6 +24,7 @@ import {
   DescribeReplicationInstancesResponse,
   DescribeReplicationInstanceCreateTasksResponse,
   WebhookTriggerLog,
+  AccessVpc,
   ModifyRepositoryResponse,
   TriggerInvokePara,
   DescribeNamespacesResponse,
@@ -59,6 +60,7 @@ import {
   DupImageTagResp,
   DescribeImagesResponse,
   DescribeRepositoryFilterPersonalRequest,
+  DescribeInternalEndpointsResponse,
   DescribeRepositoryPersonalRequest,
   AutoDelStrategyInfoResp,
   DeleteApplicationTriggerPersonalRequest,
@@ -144,6 +146,7 @@ import {
   DescribeApplicationTriggerLogPersonalRequest,
   DescribeFavorRepositoryPersonalRequest,
   DescribeNamespacesRequest,
+  ManageInternalEndpointResponse,
   DescribeRepositoryFilterPersonalResponse,
   DescribeFavorRepositoryPersonalResponse,
   ModifyRepositoryAccessPersonalResponse,
@@ -151,6 +154,7 @@ import {
   CreateInstanceTokenRequest,
   ModifyUserPasswordPersonalRequest,
   ReplicationRegistry,
+  DescribeInternalEndpointsRequest,
   ValidateNamespaceExistPersonalResponse,
   DescribeApplicationTriggerPersonalResp,
   TagInfo,
@@ -175,6 +179,7 @@ import {
   DeleteImageRequest,
   CreateRepositoryPersonalResponse,
   CreateApplicationTriggerPersonalResponse,
+  ManageInternalEndpointRequest,
   BatchDeleteImagePersonalResponse,
   DeleteRepositoryPersonalRequest,
 } from "./tcr_models"
@@ -489,6 +494,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 管理实例内网访问VPC链接
+   */
+  async ManageInternalEndpoint(
+    req: ManageInternalEndpointRequest,
+    cb?: (error: string, rep: ManageInternalEndpointResponse) => void
+  ): Promise<ManageInternalEndpointResponse> {
+    return this.request("ManageInternalEndpoint", req, cb)
+  }
+
+  /**
    * 更新触发器
    */
   async ModifyWebhookTrigger(
@@ -736,6 +751,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyRepositoryAccessPersonalResponse) => void
   ): Promise<ModifyRepositoryAccessPersonalResponse> {
     return this.request("ModifyRepositoryAccessPersonal", req, cb)
+  }
+
+  /**
+   * 查询实例内网访问VPC链接
+   */
+  async DescribeInternalEndpoints(
+    req: DescribeInternalEndpointsRequest,
+    cb?: (error: string, rep: DescribeInternalEndpointsResponse) => void
+  ): Promise<DescribeInternalEndpointsResponse> {
+    return this.request("DescribeInternalEndpoints", req, cb)
   }
 
   /**

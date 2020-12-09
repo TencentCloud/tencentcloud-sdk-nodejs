@@ -2542,7 +2542,17 @@ export interface DeleteMigrationResponse {
 /**
  * RecycleReadOnlyGroup请求参数结构体
  */
-export type RecycleReadOnlyGroupRequest = null
+export interface RecycleReadOnlyGroupRequest {
+  /**
+   * 主实例的ID
+   */
+  InstanceId: string
+
+  /**
+   * 只读组的ID
+   */
+  ReadOnlyGroupId: string
+}
 
 /**
  * InquiryPriceRenewDBInstance返回参数结构体

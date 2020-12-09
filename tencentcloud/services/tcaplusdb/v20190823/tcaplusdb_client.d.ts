@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ModifyClusterNameRequest, ModifyTableGroupNameResponse, DescribeTableTagsRequest, ModifyClusterPasswordResponse, DeleteClusterResponse, DeleteTableIndexResponse, DescribeTablesResponse, DeleteClusterRequest, DeleteTableIndexRequest, DescribeTasksResponse, DeleteTablesRequest, DescribeRegionsResponse, ModifyClusterPasswordRequest, DeleteTableGroupRequest, CreateTableGroupRequest, DeleteIdlFilesResponse, ModifyTableTagsRequest, DescribeTasksRequest, RecoverRecycleTablesResponse, ClearTablesResponse, DescribeIdlFileInfosRequest, DescribeTablesInRecycleResponse, ModifyTablesResponse, ModifyTableGroupTagsResponse, ModifyClusterTagsRequest, DescribeTableGroupTagsResponse, SetTableIndexRequest, ModifyTableQuotasResponse, RecoverRecycleTablesRequest, ModifyTableGroupNameRequest, DescribeTableGroupsRequest, ModifyTableTagsResponse, ModifyTableGroupTagsRequest, ModifyTableQuotasRequest, CompareIdlFilesResponse, CreateTablesResponse, DescribeRegionsRequest, DescribeClustersResponse, ModifyClusterTagsResponse, DescribeClusterTagsResponse, SetTableIndexResponse, ClearTablesRequest, DescribeIdlFileInfosResponse, CreateClusterResponse, DescribeClustersRequest, DeleteIdlFilesRequest, CreateBackupResponse, VerifyIdlFilesResponse, DescribeTableTagsResponse, CreateTableGroupResponse, VerifyIdlFilesRequest, ModifyClusterNameResponse, ModifyTablesRequest, DescribeTableGroupTagsRequest, DescribeTablesInRecycleRequest, DescribeTablesRequest, ModifyTableMemosRequest, DescribeUinInWhitelistResponse, RollbackTablesResponse, CreateBackupRequest, CreateClusterRequest, CreateTablesRequest, DescribeClusterTagsRequest, DescribeTableGroupsResponse, DeleteTableGroupResponse, RollbackTablesRequest, DescribeUinInWhitelistRequest, CompareIdlFilesRequest, ModifyTableMemosResponse, DeleteTablesResponse } from "./tcaplusdb_models";
+import { ModifyClusterNameRequest, ModifyTableGroupNameResponse, DescribeTableTagsRequest, ModifyClusterPasswordResponse, DeleteClusterResponse, DeleteTableIndexResponse, DescribeTablesResponse, DeleteClusterRequest, DeleteTableIndexRequest, DescribeTasksResponse, DeleteTablesRequest, DescribeRegionsResponse, ModifyClusterPasswordRequest, DescribeMachineResponse, DeleteTableGroupRequest, CreateTableGroupRequest, ModifyClusterMachineResponse, DeleteIdlFilesResponse, ModifyTableTagsRequest, DescribeTasksRequest, RecoverRecycleTablesResponse, ClearTablesResponse, DescribeIdlFileInfosRequest, DescribeTablesInRecycleResponse, ModifyTablesResponse, ModifyTableGroupTagsResponse, ModifyClusterTagsRequest, DescribeTableGroupTagsResponse, SetTableIndexRequest, ModifyTableQuotasResponse, RecoverRecycleTablesRequest, ModifyTableGroupNameRequest, DescribeTableGroupsRequest, ModifyTableTagsResponse, ModifyTableGroupTagsRequest, ModifyTableQuotasRequest, CompareIdlFilesResponse, CreateTablesResponse, DescribeRegionsRequest, DescribeClustersResponse, ModifyClusterTagsResponse, DescribeClusterTagsResponse, SetTableIndexResponse, ClearTablesRequest, DescribeIdlFileInfosResponse, CreateClusterResponse, DescribeClustersRequest, DeleteIdlFilesRequest, CreateBackupResponse, VerifyIdlFilesResponse, DescribeTableTagsResponse, CreateTableGroupResponse, VerifyIdlFilesRequest, ModifyClusterNameResponse, ModifyTablesRequest, DescribeTableGroupTagsRequest, DescribeTablesInRecycleRequest, DescribeTablesRequest, ModifyTableMemosRequest, DescribeUinInWhitelistResponse, RollbackTablesResponse, CreateBackupRequest, CreateClusterRequest, CreateTablesRequest, DescribeClusterTagsRequest, DescribeTableGroupsResponse, DeleteTableGroupResponse, DescribeMachineRequest, RollbackTablesRequest, DescribeUinInWhitelistRequest, CompareIdlFilesRequest, ModifyTableMemosResponse, ModifyClusterMachineRequest, DeleteTablesResponse } from "./tcaplusdb_models";
 /**
  * tcaplusdb client
  * @class
@@ -23,6 +23,10 @@ export declare class Client extends AbstractClient {
      * 本接口用于创建TcaplusDB集群
      */
     CreateCluster(req: CreateClusterRequest, cb?: (error: string, rep: CreateClusterResponse) => void): Promise<CreateClusterResponse>;
+    /**
+     * 查询独占集群可以申请的剩余机器
+     */
+    DescribeMachine(req: DescribeMachineRequest, cb?: (error: string, rep: DescribeMachineResponse) => void): Promise<DescribeMachineResponse>;
     /**
      * 查询本用户是否在白名单中，控制是否能创建TDR类型的APP或表
      */
@@ -75,6 +79,10 @@ export declare class Client extends AbstractClient {
      * 查询TcaplusDB集群列表，包含集群详细信息。
      */
     DescribeClusters(req: DescribeClustersRequest, cb?: (error: string, rep: DescribeClustersResponse) => void): Promise<DescribeClustersResponse>;
+    /**
+     * 修改独占集群机器
+     */
+    ModifyClusterMachine(req: ModifyClusterMachineRequest, cb?: (error: string, rep: ModifyClusterMachineResponse) => void): Promise<ModifyClusterMachineResponse>;
     /**
      * 删除表格组
      */

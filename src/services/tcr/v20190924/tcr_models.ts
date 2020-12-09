@@ -137,6 +137,31 @@ export interface WebhookTriggerLog {
 }
 
 /**
+ * 内网接入信息
+ */
+export interface AccessVpc {
+  /**
+   * Vpc的Id
+   */
+  VpcId: string
+
+  /**
+   * 子网Id
+   */
+  SubnetId: string
+
+  /**
+   * 内网接入状态
+   */
+  Status: string
+
+  /**
+   * 内网接入Ip
+   */
+  AccessIp: string
+}
+
+/**
  * ModifyRepository返回参数结构体
  */
 export interface ModifyRepositoryResponse {
@@ -910,6 +935,27 @@ export interface DescribeRepositoryFilterPersonalRequest {
    * 命名空间
    */
   Namespace?: string
+}
+
+/**
+ * DescribeInternalEndpoints返回参数结构体
+ */
+export interface DescribeInternalEndpointsResponse {
+  /**
+      * 内网接入信息的列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AccessVpcSet?: Array<AccessVpc>
+
+  /**
+   * 内网接入总数
+   */
+  TotalCount?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2407,6 +2453,21 @@ export interface DescribeNamespacesRequest {
 }
 
 /**
+ * ManageInternalEndpoint返回参数结构体
+ */
+export interface ManageInternalEndpointResponse {
+  /**
+   * 实例Id
+   */
+  RegistryId?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeRepositoryFilterPersonal返回参数结构体
  */
 export interface DescribeRepositoryFilterPersonalResponse {
@@ -2569,6 +2630,16 @@ export interface ReplicationRegistry {
    * 创建时间
    */
   CreatedAt: string
+}
+
+/**
+ * DescribeInternalEndpoints请求参数结构体
+ */
+export interface DescribeInternalEndpointsRequest {
+  /**
+   * 实例Id
+   */
+  RegistryId: string
 }
 
 /**
@@ -3130,6 +3201,36 @@ export interface CreateApplicationTriggerPersonalResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ManageInternalEndpoint请求参数结构体
+ */
+export interface ManageInternalEndpointRequest {
+  /**
+   * 实例Id
+   */
+  RegistryId: string
+
+  /**
+   * Create/Delete
+   */
+  Operation: string
+
+  /**
+   * 需要接入的用户vpcid
+   */
+  VpcId: string
+
+  /**
+   * 需要接入的用户子网id
+   */
+  SubnetId: string
+
+  /**
+   * 请求的地域ID
+   */
+  RegionId?: number
 }
 
 /**
