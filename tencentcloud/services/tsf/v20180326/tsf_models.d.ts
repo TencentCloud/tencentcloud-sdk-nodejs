@@ -6312,7 +6312,7 @@ export interface ApiInfo {
       */
     PathMapping: string;
     /**
-      * api所在服务host,限定外部Api填写。格式: "http://127.0.0.1:8080"
+      * api所在服务host,限定外部Api填写。格式: `http://127.0.0.1:8080`
       */
     Host?: string;
     /**

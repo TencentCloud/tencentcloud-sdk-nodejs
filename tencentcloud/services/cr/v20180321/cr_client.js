@@ -70,6 +70,24 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTaskStatus", req, cb);
     }
     /**
+     * 查询机器人对话流
+     */
+    async DescribeBotFlow(req, cb) {
+        return this.request("DescribeBotFlow", req, cb);
+    }
+    /**
+     * 查询产品列表
+     */
+    async QueryProducts(req, cb) {
+        return this.request("QueryProducts", req, cb);
+    }
+    /**
+     * 上传机器人文件
+     */
+    async UploadBotFile(req, cb) {
+        return this.request("UploadBotFile", req, cb);
+    }
+    /**
      * 上传文件，接口返回数据任务ID，支持xlsx、xls、csv、zip格式。
      */
     async UploadDataFile(req, cb) {
@@ -79,10 +97,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UploadDataFile", req, cb);
     }
     /**
-     * 查询产品列表
+     * 查询机器人文件模板
      */
-    async QueryProducts(req, cb) {
-        return this.request("QueryProducts", req, cb);
+    async DescribeFileModel(req, cb) {
+        return this.request("DescribeFileModel", req, cb);
     }
     /**
      * 实时数据查询
@@ -108,6 +126,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ApplyCreditAudit(req, cb) {
         return this.request("ApplyCreditAudit", req, cb);
+    }
+    /**
+     * 创建机器人任务
+     */
+    async CreateBotTask(req, cb) {
+        return this.request("CreateBotTask", req, cb);
     }
 }
 exports.Client = Client;

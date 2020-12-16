@@ -378,9 +378,29 @@ it("cpdp.v20190820.ApplyReWithdrawal", async function () {
     }
 })
 
+it("cpdp.v20190820.TransferSinglePay", async function () {
+    try {
+       const data = await client.TransferSinglePay({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.ApplyPayerInfo", async function () {
     try {
        const data = await client.ApplyPayerInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.RevokeMemberRechargeThirdPay", async function () {
+    try {
+       const data = await client.RevokeMemberRechargeThirdPay({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -518,9 +538,9 @@ it("cpdp.v20190820.RevResigterBillSupportWithdraw", async function () {
     }
 })
 
-it("cpdp.v20190820.RevokeMemberRechargeThirdPay", async function () {
+it("cpdp.v20190820.QueryTransferResult", async function () {
     try {
-       const data = await client.RevokeMemberRechargeThirdPay({})
+       const data = await client.QueryTransferResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

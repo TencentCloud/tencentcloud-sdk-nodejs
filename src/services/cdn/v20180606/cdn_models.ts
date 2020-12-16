@@ -2536,6 +2536,11 @@ global：全球加速
    * 标签配置
    */
   Tag?: Array<Tag>
+
+  /**
+   * Ipv6 访问配置
+   */
+  Ipv6Access?: Ipv6Access
 }
 
 /**
@@ -3963,6 +3968,12 @@ off：不支持
 注意：此字段可能返回 null，表示取不到有效值。
       */
   OriginAuthentication: OriginAuthentication
+
+  /**
+      * Ipv6访问配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Ipv6Access: Ipv6Access
 }
 
 /**
@@ -3985,6 +3996,17 @@ export interface GetDisableRecordsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Ipv6访问配置
+ */
+export interface Ipv6Access {
+  /**
+      * 域名是否开启ipv6访问功能，on或off。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Switch: string
 }
 
 /**
@@ -6701,6 +6723,11 @@ global：全球加速
    * 回源鉴权高级版配置，白名单功能
    */
   OriginAuthentication?: OriginAuthentication
+
+  /**
+   * Ipv6 访问配置
+   */
+  Ipv6Access?: Ipv6Access
 }
 
 /**

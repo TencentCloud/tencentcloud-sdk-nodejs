@@ -19,6 +19,96 @@ export interface MultiDiskMC {
     Volume?: number;
 }
 /**
+ * 集群配置。
+ */
+export interface ClusterSetting {
+    /**
+      * 付费方式。
+PREPAID 包年包月。
+POSTPAID_BY_HOUR 按量计费，默认方式。
+      */
+    InstanceChargeType: string;
+    /**
+      * 是否为HA集群。
+      */
+    SupportHA: boolean;
+    /**
+      * 集群所使用的安全组，目前仅支持一个。
+      */
+    SecurityGroupIds: Array<string>;
+    /**
+      * 实例位置。
+      */
+    Placement: Placement;
+    /**
+      * 实例所在VPC。
+      */
+    VPCSettings: VPCSettings;
+    /**
+      * 实例登陆配置。
+      */
+    LoginSettings: LoginSettings;
+    /**
+      * 实例标签。
+      */
+    TagSpecification: Array<string>;
+    /**
+      * 元数据库配置。
+      */
+    MetaDB: MetaDbInfo;
+    /**
+      * 实例硬件配置。
+      */
+    ResourceSpec: JobFlowResourceSpec;
+    /**
+      * 是否申请公网IP，默认为false。
+      */
+    PublicIpAssigned?: boolean;
+    /**
+      * 包年包月配置，只对包年包月集群生效。
+      */
+    InstanceChargePrepaid?: InstanceChargePrepaid;
+    /**
+      * 集群置放群组。
+      */
+    DisasterRecoverGroupIds?: string;
+    /**
+      * 是否使用cbs加密。
+      */
+    CbsEncryptFlag?: boolean;
+    /**
+      * 是否使用远程登陆，默认为false。
+      */
+    RemoteTcpDefaultPort?: boolean;
+}
+/**
+ * 任务步骤结果描述
+ */
+export interface JobResult {
+    /**
+      * 任务步骤名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name: string;
+    /**
+      * 任务步骤失败时的处理策略，可以为以下值：
+"CONTINUE"，跳过当前失败步骤，继续后续步骤。
+“TERMINATE_CLUSTER”，终止当前及后续步骤，并销毁集群。
+“CANCEL_AND_WAIT”，取消当前步骤并阻塞等待处理。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ActionOnFailure: string;
+    /**
+      * 当前步骤的状态，可以为以下值：
+“JobFlowStepStatusInit”，初始化状态，等待执行。
+“JobFlowStepStatusRunning”，任务步骤正在执行。
+“JobFlowStepStatusFailed”，任务步骤执行失败。
+“JobFlowStepStatusSucceed”，任务步骤执行成功。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    JobState: string;
+}
+/**
  * EMR产品配置
  */
 export interface EmrProductConfigOutter {
@@ -115,6 +205,73 @@ export interface LoginSettings {
       * Public Key
       */
     PublicKeyId?: string;
+}
+/**
+ * RunJobFlow请求参数结构体
+ */
+export interface RunJobFlowRequest {
+    /**
+      * 作业名称。
+      */
+    Name: string;
+    /**
+      * 是否新创建集群。
+true，新创建集群，则使用Instance中的参数进行集群创建。
+false，使用已有集群，则通过InstanceId传入。
+      */
+    CreateCluster: boolean;
+    /**
+      * 作业流程执行步骤。
+      */
+    Steps: Array<Step>;
+    /**
+      * 作业流程正常完成时，集群的处理方式，可选择:
+Terminate 销毁集群。
+Reserve 保留集群。
+      */
+    InstancePolicy: string;
+    /**
+      * 只有CreateCluster为true时生效，目前只支持EMR版本，例如EMR-2.2.0，不支持ClickHouse和Druid版本。
+      */
+    ProductVersion?: string;
+    /**
+      * 只在CreateCluster为true时生效。
+true 表示安装kerberos，false表示不安装kerberos。
+      */
+    SecurityClusterFlag?: boolean;
+    /**
+      * 只在CreateCluster为true时生效。
+新建集群时，要安装的软件列表。
+      */
+    Software?: Array<string>;
+    /**
+      * 引导脚本。
+      */
+    BootstrapActions?: Array<BootstrapAction>;
+    /**
+      * 指定配置创建集群。
+      */
+    Configurations?: Array<Configuration>;
+    /**
+      * 作业日志保存地址。
+      */
+    LogUri?: string;
+    /**
+      * 只在CreateCluster为false时生效。
+      */
+    InstanceId?: string;
+    /**
+      * 自定义应用角色，大数据应用访问外部服务时使用的角色，默认为"EME_QCSRole"。
+      */
+    ApplicationRole?: string;
+    /**
+      * 重入标签，用来可重入检查，防止在一段时间内，创建相同的流程作业。
+      */
+    ClientToken?: string;
+    /**
+      * 只在CreateCluster为true时生效，使用该配置创建集群。
+      */
+    Instance?: ClusterSetting;
 }
 /**
  * VPC 参数
@@ -388,6 +545,19 @@ export interface TerminateInstanceRequest {
     ResourceIds?: Array<string>;
 }
 /**
+ * TerminateTasks请求参数结构体
+ */
+export interface TerminateTasksRequest {
+    /**
+      * 实例ID。
+      */
+    InstanceId: string;
+    /**
+      * 待销毁节点的资源ID列表。资源ID形如：emr-vm-xxxxxxxx。有效的资源ID可通过登录[控制台](https://console.cloud.tencent.com/emr/static/hardware)查询。
+      */
+    ResourceIds: Array<string>;
+}
+/**
  * Pod的存储设备描述信息。
  */
 export interface PodVolume {
@@ -426,41 +596,24 @@ export interface CreateInstanceResponse {
     RequestId?: string;
 }
 /**
- * 扩容容器资源时的资源描述
+ * Pod PVC存储方式描述
  */
-export interface PodSpec {
+export interface PersistentVolumeContext {
     /**
-      * 外部资源提供者的标识符，例如"cls-a1cd23fa"。
+      * 磁盘大小，单位为GB。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ResourceProviderIdentifier: string;
+    DiskSize?: number;
     /**
-      * 外部资源提供者类型，例如"tke",当前仅支持"tke"。
+      * 磁盘类型。CLOUD_PREMIUM;CLOUD_SSD
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ResourceProviderType: string;
+    DiskType?: string;
     /**
-      * 资源的用途，即节点类型，当前仅支持"TASK"。
+      * 磁盘数量
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    NodeType: string;
-    /**
-      * CPU核数。
-      */
-    Cpu: number;
-    /**
-      * 内存大小，单位为GB。
-      */
-    Memory: number;
-    /**
-      * 资源对宿主机的挂载点，指定的挂载点对应了宿主机的路径，该挂载点在Pod中作为数据存储目录使用。弃用
-      */
-    DataVolumes?: Array<string>;
-    /**
-      * Eks集群-CPU类型，当前支持"intel"和"amd"
-      */
-    CpuType?: string;
-    /**
-      * Pod节点数据目录挂载信息。
-      */
-    PodVolumes?: Array<PodVolume>;
+    DiskNum?: number;
 }
 /**
  * InquiryPriceRenewInstance返回参数结构体
@@ -493,17 +646,13 @@ export interface InquiryPriceRenewInstanceResponse {
     RequestId?: string;
 }
 /**
- * TerminateTasks请求参数结构体
+ * DescribeJobFlow请求参数结构体
  */
-export interface TerminateTasksRequest {
+export interface DescribeJobFlowRequest {
     /**
-      * 实例ID。
+      * 流程任务Id，RunJobFlow接口返回的值。
       */
-    InstanceId: string;
-    /**
-      * 待销毁节点的资源ID列表。资源ID形如：emr-vm-xxxxxxxx。有效的资源ID可通过登录[控制台](https://console.cloud.tencent.com/emr/static/hardware)查询。
-      */
-    ResourceIds: Array<string>;
+    JobFlowId: number;
 }
 /**
  * InquiryPriceCreateInstance返回参数结构体
@@ -537,6 +686,26 @@ export interface InquiryPriceCreateInstanceResponse {
     RequestId?: string;
 }
 /**
+ * 引导脚本
+ */
+export interface BootstrapAction {
+    /**
+      * 脚本位置，支持cos上的文件，且只支持https协议。
+      */
+    Path: string;
+    /**
+      * 执行时间。
+resourceAfter 表示在机器资源申请成功后执行。
+clusterBefore 表示在集群初始化前执行。
+clusterAfter 表示在集群初始化后执行。
+      */
+    WhenRun: string;
+    /**
+      * 脚本参数
+      */
+    Args?: Array<string>;
+}
+/**
  * Pod HostPath挂载方式描述
  */
 export interface HostVolumeContext {
@@ -545,6 +714,45 @@ export interface HostVolumeContext {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     VolumePath: string;
+}
+/**
+ * 执行步骤
+ */
+export interface Step {
+    /**
+      * 执行步骤名称。
+      */
+    Name: string;
+    /**
+      * 执行动作。
+      */
+    ExecutionStep: Execution;
+    /**
+      * 执行失败策略。
+1. TERMINATE_CLUSTER 执行失败时退出并销毁集群。
+2. CANCEL_AND_WAIT 执行失败时阻塞等待。
+3. CONTINUE 执行失败时跳过并执行后续步骤。
+      */
+    ActionOnFailure: string;
+    /**
+      * 指定执行Step时的用户名，非必须，默认为hadoop。
+      */
+    User?: string;
+}
+/**
+ * 实例预付费参数，只有在付费类型为PREPAID时生效。
+
+ */
+export interface InstanceChargePrepaid {
+    /**
+      * 包年包月时间，默认为1，单位：月。
+取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11, 12, 24, 36, 48, 60。
+      */
+    Period: number;
+    /**
+      * 是否自动续费，默认为否。
+      */
+    RenewFlag: boolean;
 }
 /**
  * DescribeClusterNodes请求参数结构体
@@ -779,6 +987,59 @@ export interface CreateInstanceRequest {
     ApplicationRole?: string;
 }
 /**
+ * 流程作业资源描述
+ */
+export interface JobFlowResourceSpec {
+    /**
+      * 主节点数量。
+      */
+    MasterCount: number;
+    /**
+      * 主节点配置。
+      */
+    MasterResourceSpec: JobFlowResource;
+    /**
+      * Core节点数量
+      */
+    CoreCount: number;
+    /**
+      * Core节点配置。
+      */
+    CoreResourceSpec: JobFlowResource;
+    /**
+      * Task节点数量。
+      */
+    TaskCount?: number;
+    /**
+      * Common节点数量。
+      */
+    CommonCount?: number;
+    /**
+      * Task节点配置。
+      */
+    TaskResourceSpec?: JobFlowResource;
+    /**
+      * Common节点配置。
+      */
+    CommonResourceSpec?: JobFlowResource;
+}
+/**
+ * 执行动作。
+ */
+export interface Execution {
+    /**
+      * 任务类型，目前支持以下类型。
+1. “MR”，将通过hadoop jar的方式提交。
+2. "HIVE"，将通过hive -f的方式提交。
+3. "SPARK"，将通过spark-submit的方式提交。
+      */
+    JobType: string;
+    /**
+      * 任务参数，提供除提交指令以外的参数。
+      */
+    Args: Array<string>;
+}
+/**
  * DescribeInstances返回参数结构体
  */
 export interface DescribeInstancesResponse {
@@ -876,6 +1137,23 @@ export interface Placement {
     Zone: string;
 }
 /**
+ * 元数据库信息
+ */
+export interface MetaDbInfo {
+    /**
+      * 元数据类型。
+      */
+    MetaType: string;
+    /**
+      * 统一元数据库实例ID。
+      */
+    UnifyMetaInstanceId: string;
+    /**
+      * 自建元数据库信息。
+      */
+    MetaDBInfo: CustomMetaInfo;
+}
+/**
  * DescribeInstances请求参数结构体
  */
 export interface DescribeInstancesRequest {
@@ -934,6 +1212,25 @@ export interface CustomMetaInfo {
       * 自定义MetaDB密码
       */
     MetaDataPass?: string;
+}
+/**
+ * 磁盘描述。
+ */
+export interface DiskSpec {
+    /**
+      * 磁盘类型。
+LOCAL_BASIC  本地盘。
+CLOUD_BASIC 云硬盘。
+LOCAL_SSD 本地SSD。
+CLOUD_SSD 云SSD。
+CLOUD_PREMIUM 高效云盘。
+CLOUD_HSSD 增强型云SSD。
+      */
+    DiskType: string;
+    /**
+      * 磁盘大小，单位GB。
+      */
+    DiskSize: number;
 }
 /**
  * InquiryPriceUpdateInstance请求参数结构体
@@ -1166,6 +1463,43 @@ export interface ClusterInstancesInfo {
     ProductId: number;
 }
 /**
+ * 扩容容器资源时的资源描述
+ */
+export interface PodSpec {
+    /**
+      * 外部资源提供者的标识符，例如"cls-a1cd23fa"。
+      */
+    ResourceProviderIdentifier: string;
+    /**
+      * 外部资源提供者类型，例如"tke",当前仅支持"tke"。
+      */
+    ResourceProviderType: string;
+    /**
+      * 资源的用途，即节点类型，当前仅支持"TASK"。
+      */
+    NodeType: string;
+    /**
+      * CPU核数。
+      */
+    Cpu: number;
+    /**
+      * 内存大小，单位为GB。
+      */
+    Memory: number;
+    /**
+      * 资源对宿主机的挂载点，指定的挂载点对应了宿主机的路径，该挂载点在Pod中作为数据存储目录使用。弃用
+      */
+    DataVolumes?: Array<string>;
+    /**
+      * Eks集群-CPU类型，当前支持"intel"和"amd"
+      */
+    CpuType?: string;
+    /**
+      * Pod节点数据目录挂载信息。
+      */
+    PodVolumes?: Array<PodVolume>;
+}
+/**
  * 多云盘参数
  */
 export interface MultiDisk {
@@ -1181,6 +1515,19 @@ export interface MultiDisk {
       * 该类型云盘个数
       */
     Count?: number;
+}
+/**
+ * RunJobFlow返回参数结构体
+ */
+export interface RunJobFlowResponse {
+    /**
+      * 作业流程ID。
+      */
+    JobFlowId?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 搜索字段
@@ -1296,6 +1643,19 @@ export interface UpdateInstanceSettings {
       * 变配机器规格
       */
     InstanceType?: string;
+}
+/**
+ * 自定义配置参数
+ */
+export interface Configuration {
+    /**
+      * 配置文件名，支持SPARK、HIVE、HDFS、YARN的部分配置文件自定义。
+      */
+    Classification: string;
+    /**
+      * 配置参数通过KV的形式传入，部分文件支持自定义，可以通过特殊的键"content"传入所有内容。
+      */
+    Properties: string;
 }
 /**
  * TerminateTasks返回参数结构体
@@ -1594,24 +1954,62 @@ export interface NewResourceSpec {
     CommonCount?: number;
 }
 /**
- * Pod PVC存储方式描述
+ * 磁盘组。
  */
-export interface PersistentVolumeContext {
+export interface DiskGroup {
     /**
-      * 磁盘大小，单位为GB。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 磁盘规格。
       */
-    DiskSize?: number;
+    Spec: DiskSpec;
     /**
-      * 磁盘类型。CLOUD_PREMIUM;CLOUD_SSD
-注意：此字段可能返回 null，表示取不到有效值。
+      * 同类型磁盘数量。
       */
-    DiskType?: string;
+    Count: number;
+}
+/**
+ * 机器资源描述。
+ */
+export interface JobFlowResource {
     /**
-      * 磁盘数量
-注意：此字段可能返回 null，表示取不到有效值。
+      * 机器类型描述。
       */
-    DiskNum?: number;
+    Spec: string;
+    /**
+      * 机器类型描述，可参考CVM的该含义。
+      */
+    InstanceType: string;
+    /**
+      * 标签KV对。
+      */
+    Tags: Array<Tag>;
+    /**
+      * 磁盘描述列表。
+      */
+    DiskGroups: Array<DiskGroup>;
+}
+/**
+ * DescribeJobFlow返回参数结构体
+ */
+export interface DescribeJobFlowResponse {
+    /**
+      * 流程任务状态，可以为以下值：
+JobFlowInit，流程任务初始化。
+JobFlowResourceApplied，资源申请中，通常为JobFlow需要新建集群时的状态。
+JobFlowResourceReady，执行流程任务的资源就绪。
+JobFlowStepsRunning，流程任务步骤已提交。
+JobFlowStepsComplete，流程任务步骤已完成。
+JobFlowTerminating，流程任务所需资源销毁中。
+JobFlowFinish，流程任务已完成。
+      */
+    State?: string;
+    /**
+      * 流程任务步骤结果。
+      */
+    Details?: Array<JobResult>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * InquiryPriceRenewInstance请求参数结构体

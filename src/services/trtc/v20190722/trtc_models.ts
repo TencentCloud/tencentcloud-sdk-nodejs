@@ -1332,7 +1332,7 @@ export interface DescribeRoomInformationRequest {
   EndTime: number
 
   /**
-   * 数字房间号
+   * 字符串房间号
    */
   RoomId?: string
 

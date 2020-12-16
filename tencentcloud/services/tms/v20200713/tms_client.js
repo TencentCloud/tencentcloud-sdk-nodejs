@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("tms.tencentcloudapi.com", "2020-07-13", clientConfig);
     }
     /**
+     * 控制台识别统计
+     */
+    async DescribeTextStat(req, cb) {
+        return this.request("DescribeTextStat", req, cb);
+    }
+    /**
      * 举报恶意账号
      */
     async AccountTipoffAccess(req, cb) {
@@ -38,6 +44,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async TextModeration(req, cb) {
         return this.request("TextModeration", req, cb);
+    }
+    /**
+     * 控制台获取用户词库列表
+     */
+    async DescribeTextLib(req, cb) {
+        return this.request("DescribeTextLib", req, cb);
     }
 }
 exports.Client = Client;

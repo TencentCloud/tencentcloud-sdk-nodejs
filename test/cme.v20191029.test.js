@@ -58,6 +58,26 @@ it("cme.v20191029.DescribeSharedSpace", async function () {
     }
 })
 
+it("cme.v20191029.GenerateVideoSegmentationSchemeByAi", async function () {
+    try {
+       const data = await client.GenerateVideoSegmentationSchemeByAi({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cme.v20191029.ExportVideoByVideoSegmentationData", async function () {
+    try {
+       const data = await client.ExportVideoByVideoSegmentationData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cme.v20191029.GrantResourceAuthorization", async function () {
     try {
        const data = await client.GrantResourceAuthorization({})

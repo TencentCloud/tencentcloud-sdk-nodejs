@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("tke.tencentcloudapi.com", "2018-05-25", clientConfig);
     }
     /**
+     * 拉取模板列表，默认模板将总是在最前面
+     */
+    async DescribePrometheusTemplates(req, cb) {
+        return this.request("DescribePrometheusTemplates", req, cb);
+    }
+    /**
      * 检查给定节点列表中哪些是可升级的
      */
     async CheckInstancesUpgradeAble(req, cb) {
@@ -46,22 +52,34 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreatePrometheusDashboard", req, cb);
     }
     /**
+     * 获取实例列表
+     */
+    async DescribePrometheusOverviews(req, cb) {
+        return this.request("DescribePrometheusOverviews", req, cb);
+    }
+    /**
      * 查询节点池详情
      */
     async DescribeClusterNodePoolDetail(req, cb) {
         return this.request("DescribeClusterNodePoolDetail", req, cb);
     }
     /**
-     * 获取镜像信息
+     * 删除一个云原生Promehtheus配置模板
      */
-    async DescribeImages(req, cb) {
-        return this.request("DescribeImages", req, cb);
+    async DeletePrometheusTemplate(req, cb) {
+        return this.request("DeletePrometheusTemplate", req, cb);
     }
     /**
-     * 修改集群伸缩组属性
+     * 获取被关联集群列表
      */
-    async ModifyClusterAsGroupAttribute(req, cb) {
-        return this.request("ModifyClusterAsGroupAttribute", req, cb);
+    async DescribePrometheusAgents(req, cb) {
+        return this.request("DescribePrometheusAgents", req, cb);
+    }
+    /**
+     * 取消模板同步，这将会删除目标中该模板所生产的配置
+     */
+    async DeletePrometheusTemplateSync(req, cb) {
+        return this.request("DeletePrometheusTemplateSync", req, cb);
     }
     /**
      * 删除集群访问端口(独立集群开启内网/外网访问，托管集群支持开启内网访问)
@@ -70,10 +88,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteClusterEndpoint", req, cb);
     }
     /**
+     * 同步模板到实例或者集群
+     */
+    async SyncPrometheusTemplate(req, cb) {
+        return this.request("SyncPrometheusTemplate", req, cb);
+    }
+    /**
      * 扩展(新建)集群节点
      */
     async CreateClusterInstances(req, cb) {
         return this.request("CreateClusterInstances", req, cb);
+    }
+    /**
+     * 获取targets信息
+     */
+    async DescribePrometheusTargets(req, cb) {
+        return this.request("DescribePrometheusTargets", req, cb);
     }
     /**
      * 修改集群属性
@@ -94,10 +124,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteClusterRoute", req, cb);
     }
     /**
-     * 移出节点池节点，但保留在集群内
+     * 修改模板内容
      */
-    async RemoveNodeFromNodePool(req, cb) {
-        return this.request("RemoveNodeFromNodePool", req, cb);
+    async ModifyPrometheusTemplate(req, cb) {
+        return this.request("ModifyPrometheusTemplate", req, cb);
     }
     /**
      * 查询集群开启端口流程状态(仅支持托管集群外网端口)
@@ -160,10 +190,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddNodeToNodePool", req, cb);
     }
     /**
-     * 查询集群列表
+     * 创建一个云原生Prometheus模板实例
      */
-    async DescribeClusters(req, cb) {
-        return this.request("DescribeClusters", req, cb);
+    async CreatePrometheusTemplate(req, cb) {
+        return this.request("CreatePrometheusTemplate", req, cb);
     }
     /**
      * 查询集群访问端口状态(独立集群开启内网/外网访问，托管集群支持开启内网访问)
@@ -202,6 +232,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateClusterNodePoolFromExistingAsg", req, cb);
     }
     /**
+     * 查询集群列表
+     */
+    async DescribeClusters(req, cb) {
+        return this.request("DescribeClusters", req, cb);
+    }
+    /**
      * 获取关联目标集群的实例列表
      */
     async DescribePrometheusAgentInstances(req, cb) {
@@ -214,6 +250,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterRouteTables", req, cb);
     }
     /**
+     * 获取模板同步信息
+     */
+    async DescribePrometheusTemplateSync(req, cb) {
+        return this.request("DescribePrometheusTemplateSync", req, cb);
+    }
+    /**
      * 获取容器服务支持的所有地域
      */
     async DescribeRegions(req, cb) {
@@ -224,6 +266,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async AddExistedInstances(req, cb) {
         return this.request("AddExistedInstances", req, cb);
+    }
+    /**
+     * 修改节点池关联伸缩组的期望实例数
+     */
+    async ModifyNodePoolDesiredCapacityAboutAsg(req, cb) {
+        return this.request("ModifyNodePoolDesiredCapacityAboutAsg", req, cb);
+    }
+    /**
+     * 移出节点池节点，但保留在集群内
+     */
+    async RemoveNodeFromNodePool(req, cb) {
+        return this.request("RemoveNodeFromNodePool", req, cb);
     }
     /**
      * 集群的密钥信息
@@ -250,6 +304,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteClusterNodePool", req, cb);
     }
     /**
+     * 修改集群伸缩组属性
+     */
+    async ModifyClusterAsGroupAttribute(req, cb) {
+        return this.request("ModifyClusterAsGroupAttribute", req, cb);
+    }
+    /**
      * 删除托管集群外网访问端口（老的方式，仅支持托管集群外网端口）
      */
     async DeleteClusterEndpointVip(req, cb) {
@@ -272,6 +332,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeClusterKubeconfig(req, cb) {
         return this.request("DescribeClusterKubeconfig", req, cb);
+    }
+    /**
+     * 获取镜像信息
+     */
+    async DescribeImages(req, cb) {
+        return this.request("DescribeImages", req, cb);
+    }
+    /**
+     * 获取告警规则列表
+     */
+    async DescribePrometheusAlertRule(req, cb) {
+        return this.request("DescribePrometheusAlertRule", req, cb);
     }
     /**
      * 修改托管集群外网端口的安全策略（老的方式，仅支持托管集群外网端口）

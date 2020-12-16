@@ -681,33 +681,38 @@ export interface UpdateFleetPortSettingsRequest {
 }
 
 /**
- * DescribeFleetStatisticFlows请求参数结构体
+ * 云联网实例信息
  */
-export interface DescribeFleetStatisticFlowsRequest {
+export interface CcnInstanceSets {
   /**
-   * 服务器舰队ID
-   */
-  FleetId?: string
+      * 云联网账号 Uin
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AccountId: string
 
   /**
-   * 查询开始时间，时间格式：YYYY-MM-DD hh:mm:ss
-   */
-  BeginTime?: string
+      * 云联网 Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CcnId: string
 
   /**
-   * 查询结束时间，时间格式：YYYY-MM-DD hh:mm:ss
-   */
-  EndTime?: string
+      * 云联网关联时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime: string
 
   /**
-   * 结果返回最大数量，最小值0，最大值100
-   */
-  Limit?: number
+      * 云联网实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceName: string
 
   /**
-   * 返回结果偏移，最小值0
-   */
-  Offset?: number
+      * 云联网状态：申请中、已连接、已过期、已拒绝、已删除、失败的、关联中、解关联中、解关联失败
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  State: string
 }
 
 /**
@@ -2518,6 +2523,27 @@ export interface CreateAliasRequest {
 }
 
 /**
+ * CopyFleet返回参数结构体
+ */
+export interface CopyFleetResponse {
+  /**
+      * 服务器舰队属性
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FleetAttributes?: Array<FleetAttributes>
+
+  /**
+   * 服务器舰队数量
+   */
+  TotalCount?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UpdateGameServerSession请求参数结构体
  */
 export interface UpdateGameServerSessionRequest {
@@ -2918,6 +2944,21 @@ export interface DescribeFleetUtilizationRequest {
 }
 
 /**
+ * DescribeInstanceTypes返回参数结构体
+ */
+export interface DescribeInstanceTypesResponse {
+  /**
+   * 服务器实例类型列表
+   */
+  InstanceTypeList?: Array<InstanceTypeInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeGameServerSessionDetails请求参数结构体
  */
 export interface DescribeGameServerSessionDetailsRequest {
@@ -3297,18 +3338,78 @@ export interface DescribeUserQuotasResponse {
 export type GetUploadFederationTokenRequest = null
 
 /**
- * DescribeInstanceTypes返回参数结构体
+ * CopyFleet请求参数结构体
  */
-export interface DescribeInstanceTypesResponse {
+export interface CopyFleetRequest {
   /**
-   * 服务器实例类型列表
+   * 服务器舰队 Id
    */
-  InstanceTypeList?: Array<InstanceTypeInfo>
+  FleetId: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 复制数量，最小值1，最大值为剩余配额，可以根据[获取用户配额](https://cloud.tencent.com/document/product/1165/48732)接口获取。
    */
-  RequestId?: string
+  CopyNumber: number
+
+  /**
+   * 生成包 Id
+   */
+  AssetId?: string
+
+  /**
+   * 描述，最小长度0，最大长度100
+   */
+  Description?: string
+
+  /**
+   * 网络配置
+   */
+  InboundPermissions?: Array<InboundPermission>
+
+  /**
+   * 服务器类型，参数根据[获取服务器实例类型列表](https://cloud.tencent.com/document/product/1165/48732)接口获取。
+   */
+  InstanceType?: string
+
+  /**
+   * 服务器舰队类型，目前只支持ON_DEMAND类型
+   */
+  FleetType?: string
+
+  /**
+   * 服务器舰队名称，最小长度1，最大长度50
+   */
+  Name?: string
+
+  /**
+   * 保护策略：不保护NoProtection、完全保护FullProtection、时限保护TimeLimitProtection
+   */
+  NewGameServerSessionProtectionPolicy?: string
+
+  /**
+   * 资源创建限制策略
+   */
+  ResourceCreationLimitPolicy?: ResourceCreationLimitPolicy
+
+  /**
+   * 进程配置
+   */
+  RuntimeConfiguration?: RuntimeConfiguration
+
+  /**
+   * 时限保护超时时间，默认60分钟，最小值5，最大值1440；当NewGameSessionProtectionPolicy为TimeLimitProtection时参数有效
+   */
+  GameServerSessionProtectionTimeLimit?: number
+
+  /**
+   * 是否选择扩缩容：SCALING_SELECTED 或者 SCALING_UNSELECTED；默认是 SCALING_UNSELECTED
+   */
+  SelectedScalingType?: string
+
+  /**
+   * 是否选择云联网：CCN_SELECTED 或者 CCN_UNSELECTED；默认是 CCN_UNSELECTED
+   */
+  SelectedCcnType?: string
 }
 
 /**
@@ -3986,36 +4087,31 @@ export interface StopGameServerSessionPlacementResponse {
 }
 
 /**
- * 云联网实例信息
+ * DescribeFleetStatisticFlows请求参数结构体
  */
-export interface CcnInstanceSets {
+export interface DescribeFleetStatisticFlowsRequest {
   /**
-      * 云联网账号 Uin
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AccountId: string
+   * 服务器舰队ID
+   */
+  FleetId?: string
 
   /**
-      * 云联网 Id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CcnId: string
+   * 查询开始时间，时间格式：YYYY-MM-DD hh:mm:ss
+   */
+  BeginTime?: string
 
   /**
-      * 云联网关联时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CreateTime: string
+   * 查询结束时间，时间格式：YYYY-MM-DD hh:mm:ss
+   */
+  EndTime?: string
 
   /**
-      * 云联网实例名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  InstanceName: string
+   * 结果返回最大数量，最小值0，最大值100
+   */
+  Limit?: number
 
   /**
-      * 云联网状态：申请中、已连接、已过期、已拒绝、已删除、失败的、关联中、解关联中、解关联失败
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  State: string
+   * 返回结果偏移，最小值0
+   */
+  Offset?: number
 }

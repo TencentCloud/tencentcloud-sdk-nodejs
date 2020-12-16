@@ -350,6 +350,11 @@ TypeId为标准架构时，MemSize是实例总内存容量；TypeId为集群架�
    * 实例的节点信息，目前支持传入节点的类型（主节点或者副本节点），节点的可用区。单可用区部署不需要传递此参数。
    */
   NodeSet?: Array<RedisNodeInfo>
+
+  /**
+   * 购买实例绑定标签
+   */
+  ResourceTags?: Array<ResourceTag>
 }
 
 /**
@@ -2643,6 +2648,21 @@ export interface DescribeInstanceDTSInstanceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Status: number
+}
+
+/**
+ * API购买实例绑定标签
+ */
+export interface ResourceTag {
+  /**
+   * 标签key
+   */
+  TagKey: string
+
+  /**
+   * 标签value
+   */
+  TagValue: string
 }
 
 /**

@@ -98,9 +98,29 @@ it("emr.v20190103.InquiryPriceScaleOutInstance", async function () {
     }
 })
 
+it("emr.v20190103.DescribeJobFlow", async function () {
+    try {
+       const data = await client.DescribeJobFlow({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.ScaleOutInstance", async function () {
     try {
        const data = await client.ScaleOutInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.RunJobFlow", async function () {
+    try {
+       const data = await client.RunJobFlow({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

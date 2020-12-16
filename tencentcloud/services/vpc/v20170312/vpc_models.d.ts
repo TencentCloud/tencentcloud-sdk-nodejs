@@ -891,6 +891,31 @@ export interface DescribeFlowLogsRequest {
     Filters?: Filter;
 }
 /**
+ * CloneSecurityGroup请求参数结构体
+ */
+export interface CloneSecurityGroupRequest {
+    /**
+      * 安全组实例ID，例如sg-33ocnj9n，可通过DescribeSecurityGroups获取。
+      */
+    SecurityGroupId: string;
+    /**
+      * 安全组名称，可任意命名，但不得超过60个字符。未提供参数时，克隆后的安全组名称和SecurityGroupId对应的安全组名称相同。
+      */
+    GroupName?: string;
+    /**
+      * 安全组备注，最多100个字符。未提供参数时，克隆后的安全组备注和SecurityGroupId对应的安全组备注相同。
+      */
+    GroupDescription?: string;
+    /**
+      * 项目ID，默认0。可在qcloud控制台项目管理页面查询到。
+      */
+    ProjectId?: string;
+    /**
+      * 源Region,跨地域克隆安全组时，需要传入源安全组所属地域信息，例如：克隆广州的安全组到上海，则这里需要传入广州安全的地域信息：ap-guangzhou。
+      */
+    RemoteRegion?: string;
+}
+/**
  * AssociateNatGatewayAddress请求参数结构体
  */
 export interface AssociateNatGatewayAddressRequest {
@@ -2286,6 +2311,25 @@ NORMAL_CVM：普通云服务器；
     NetDetectDescription?: string;
 }
 /**
+ * DescribeNetDetectStates返回参数结构体
+ */
+export interface DescribeNetDetectStatesResponse {
+    /**
+      * 符合条件的网络探测验证结果对象数组。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NetDetectStateSet?: Array<NetDetectState>;
+    /**
+      * 符合条件的网络探测验证结果对象数量。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeVpcResourceDashboard返回参数结构体
  */
 export interface DescribeVpcResourceDashboardResponse {
@@ -3562,19 +3606,14 @@ export interface NatGatewayDestinationIpPortTranslationNatRule {
     CreatedTime: string;
 }
 /**
- * DescribeNetDetectStates返回参数结构体
+ * CloneSecurityGroup返回参数结构体
  */
-export interface DescribeNetDetectStatesResponse {
+export interface CloneSecurityGroupResponse {
     /**
-      * 符合条件的网络探测验证结果对象数组。
+      * 安全组对象。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    NetDetectStateSet?: Array<NetDetectState>;
-    /**
-      * 符合条件的网络探测验证结果对象数量。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TotalCount?: number;
+    SecurityGroup?: SecurityGroup;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

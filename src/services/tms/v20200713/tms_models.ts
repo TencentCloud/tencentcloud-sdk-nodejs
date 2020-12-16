@@ -16,6 +16,69 @@
  */
 
 /**
+ * 文本过滤条件
+ */
+export interface Filters {
+  /**
+      * 查询字段：
+策略BizType
+子账号SubUin
+日期区间DateRange
+      */
+  Name: string
+
+  /**
+   * 查询值
+   */
+  Values: Array<string>
+}
+
+/**
+ * 识别结果统计
+ */
+export interface Overview {
+  /**
+   * 总调用量
+   */
+  TotalCount: number
+
+  /**
+   * 总调用时长
+   */
+  TotalHour: number
+
+  /**
+   * 通过量
+   */
+  PassCount: number
+
+  /**
+   * 通过时长
+   */
+  PassHour: number
+
+  /**
+   * 违规量
+   */
+  EvilCount: number
+
+  /**
+   * 违规时长
+   */
+  EvilHour: number
+
+  /**
+   * 疑似违规量
+   */
+  SuspectCount: number
+
+  /**
+   * 疑似违规时长
+   */
+  SuspectHour: number
+}
+
+/**
  * 账号风险检测结果
  */
 export interface RiskDetails {
@@ -28,6 +91,21 @@ export interface RiskDetails {
    * 风险等级，1:疑似，2：恶意
    */
   Level: number
+}
+
+/**
+ * DescribeTextStat请求参数结构体
+ */
+export interface DescribeTextStatRequest {
+  /**
+   * 审核类型 1: 机器审核; 2: 人工审核
+   */
+  AuditType: number
+
+  /**
+   * 查询条件
+   */
+  Filters: Array<Filters>
 }
 
 /**
@@ -58,6 +136,135 @@ export interface TextModerationRequest {
    * 设备相关信息字段，填入后可识别违规风险设备。
    */
   Device?: Device
+}
+
+/**
+ * AccountTipoffAccess请求参数结构体
+ */
+export interface AccountTipoffAccessRequest {
+  /**
+   * 被举报账号，长度低于 128 个字符
+   */
+  ReportedAccount: string
+
+  /**
+   * 被举报账号类型(1-手机号 2-QQ号 3-微信号 4-QQ群号 5-微信openid 6-QQopenid 0-其它)
+   */
+  ReportedAccountType: number
+
+  /**
+   * 被举报账号所属恶意类型(1-诈骗，2-骚扰，3-广告，4-违法违规，5-赌博传销，0-其他)
+   */
+  EvilType: number
+
+  /**
+   * 举报者账号，长度低于 128 个字符
+   */
+  SenderAccount?: string
+
+  /**
+   * 举报者账号类型(1-手机号 2-QQ号 3-微信号 4-QQ群号 5-微信openid 6-QQopenid 0-其它)
+   */
+  SenderAccountType?: number
+
+  /**
+   * 举报者IP地址
+   */
+  SenderIP?: string
+
+  /**
+   * 包含被举报账号的恶意内容（比如文本、图片链接，长度低于1024个字符）
+   */
+  EvilContent?: string
+}
+
+/**
+ * 自定义库列表
+ */
+export interface TextLib {
+  /**
+   * 库id
+   */
+  LibId: number
+
+  /**
+   * 库名
+   */
+  LibName: string
+}
+
+/**
+ * 识别量统计
+ */
+export interface TrendCount {
+  /**
+      * 总调用量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
+
+  /**
+      * 总调用时长
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalHour: number
+
+  /**
+      * 通过量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PassCount: number
+
+  /**
+      * 通过时长
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PassHour: number
+
+  /**
+      * 违规量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EvilCount: number
+
+  /**
+      * 违规时长
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EvilHour: number
+
+  /**
+      * 疑似违规量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SuspectCount: number
+
+  /**
+      * 疑似违规时长
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SuspectHour: number
+
+  /**
+      * 日期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Date: string
+}
+
+/**
+ * DescribeTextLib返回参数结构体
+ */
+export interface DescribeTextLibResponse {
+  /**
+   * 文本库id和name列表
+   */
+  TextLib?: Array<TextLib>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -107,43 +314,26 @@ export interface DetailResults {
 }
 
 /**
- * AccountTipoffAccess请求参数结构体
+ * 违规数据分布
  */
-export interface AccountTipoffAccessRequest {
+export interface EvilCount {
   /**
-   * 被举报账号，长度低于 128 个字符
-   */
-  ReportedAccount: string
+      * 违规类型：
+Terror	24001
+Porn	20002
+Polity	20001
+Ad	20105
+Abuse	20007	
+Illegal	20006	
+Spam	25001	
+Moan	26001
+      */
+  EvilType: string
 
   /**
-   * 被举报账号类型(1-手机号 2-QQ号 3-微信号 4-QQ群号 5-微信openid 6-QQopenid 0-其它)
+   * 分布类型总量
    */
-  ReportedAccountType: number
-
-  /**
-   * 被举报账号所属恶意类型(1-诈骗，2-骚扰，3-广告，4-违法违规，5-赌博传销，0-其他)
-   */
-  EvilType: number
-
-  /**
-   * 举报者账号，长度低于 128 个字符
-   */
-  SenderAccount?: string
-
-  /**
-   * 举报者账号类型(1-手机号 2-QQ号 3-微信号 4-QQ群号 5-微信openid 6-QQopenid 0-其它)
-   */
-  SenderAccountType?: number
-
-  /**
-   * 举报者IP地址
-   */
-  SenderIP?: string
-
-  /**
-   * 包含被举报账号的恶意内容（比如文本、图片链接，长度低于1024个字符）
-   */
-  EvilContent?: string
+  Count: number
 }
 
 /**
@@ -210,6 +400,42 @@ export interface AccountTipoffAccessResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Data?: TipoffResponse
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeTextLib请求参数结构体
+ */
+export interface DescribeTextLibRequest {
+  /**
+   * 内容类型 text: 1; image: 2; audio: 3; video: 4
+   */
+  StrategyType: number
+}
+
+/**
+ * DescribeTextStat返回参数结构体
+ */
+export interface DescribeTextStatResponse {
+  /**
+   * 识别结果统计
+   */
+  Overview?: Overview
+
+  /**
+   * 识别量统计
+   */
+  TrendCount?: Array<TrendCount>
+
+  /**
+      * 违规数据分布
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EvilCount?: Array<EvilCount>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

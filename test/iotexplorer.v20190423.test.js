@@ -178,6 +178,16 @@ it("iotexplorer.v20190423.ModifyProject", async function () {
     }
 })
 
+it("iotexplorer.v20190423.PublishMessage", async function () {
+    try {
+       const data = await client.PublishMessage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.GetDeviceList", async function () {
     try {
        const data = await client.GetDeviceList({})

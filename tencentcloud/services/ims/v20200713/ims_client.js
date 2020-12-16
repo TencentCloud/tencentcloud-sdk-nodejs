@@ -49,5 +49,17 @@ class Client extends abstract_client_1.AbstractClient {
     async ImageModeration(req, cb) {
         return this.request("ImageModeration", req, cb);
     }
+    /**
+     * 图片机器审核明细
+     */
+    async DescribeImsList(req, cb) {
+        return this.request("DescribeImsList", req, cb);
+    }
+    /**
+     * 控制台识别统计
+     */
+    async DescribeImageStat(req, cb) {
+        return this.request("DescribeImageStat", req, cb);
+    }
 }
 exports.Client = Client;

@@ -2026,6 +2026,21 @@ export interface ApplyUploadResponse {
 }
 
 /**
+ * DescribeDailyPlayStatFileList返回参数结构体
+ */
+export interface DescribeDailyPlayStatFileListResponse {
+  /**
+   * 播放统计文件列表。
+   */
+  PlayStatFileSet?: Array<PlayStatFileInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 文字水印模板
  */
 export interface TextWatermarkTemplateInputForUpdate {
@@ -2814,6 +2829,31 @@ export interface ProcessMediaByUrlRequest {
    * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
    */
   SubAppId?: number
+}
+
+/**
+ * 播放统计文件信息
+ */
+export interface PlayStatFileInfo {
+  /**
+   * 播放统计数据所属日期，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  Date: string
+
+  /**
+      * 播放统计文件的 URL 地址。播放统计文件内容为：
+<li> date：播放日期。</li>
+<li> file_id：视频文件 ID。</li>
+<li> ip_count：去重后的客户端 IP 数。</li>
+<li> flux：播放流量，单位：字节。</li>
+<li> play_times：总的播放次数。</li>
+<li> pc_play_times：PC 端播放次数。</li>
+<li> mobile_play_times：移动端播放次数。</li>
+<li> iphone_play_times：iPhone 端播放次数。</li>
+<li> android_play_times：Android 端播放次数。</li>
+<li> host_name	域名。</li>
+      */
+  Url: string
 }
 
 /**
@@ -5279,6 +5319,11 @@ export interface MediaProcessTaskTranscodeResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: MediaTranscodeItem
+
+  /**
+   * 转码进度，取值范围 [0-100] 。
+   */
+  Progress: number
 }
 
 /**
@@ -5596,6 +5641,26 @@ export interface MediaAdaptiveDynamicStreamingInfo {
    * 转自适应码流信息数组。
    */
   AdaptiveDynamicStreamingSet: Array<AdaptiveDynamicStreamingInfoItem>
+}
+
+/**
+ * DescribeDailyPlayStatFileList请求参数结构体
+ */
+export interface DescribeDailyPlayStatFileListRequest {
+  /**
+   * 起始日期，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  StartTime: string
+
+  /**
+   * 结束日期，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  EndTime: string
+
+  /**
+   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+   */
+  SubAppId?: number
 }
 
 /**
@@ -9918,6 +9983,11 @@ export interface DescribeSubAppIdsResponse {
   SubAppIdInfoSet?: Array<SubAppIdInfo>
 
   /**
+   * 子应用总数量。
+   */
+  TotalCount?: number
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -10525,6 +10595,16 @@ export interface DescribeTasksResponse {
  * DescribeSubAppIds请求参数结构体
  */
 export interface DescribeSubAppIdsRequest {
+  /**
+   * 分页拉取的最大返回结果数。默认值：200；最大值：200。
+   */
+  Limit?: number
+
+  /**
+   * 分页拉取的起始偏移量。默认值：0。
+   */
+  Offset?: number
+
   /**
    * 标签信息，查询指定标签的子应用列表。
    */

@@ -124,6 +124,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyProject", req, cb);
     }
     /**
+     * 本接口（PublishMessage）用于使用自定义透传协议进行设备远控
+     */
+    async PublishMessage(req, cb) {
+        return this.request("PublishMessage", req, cb);
+    }
+    /**
      * 用于查询某个产品下的设备列表
      */
     async GetDeviceList(req, cb) {

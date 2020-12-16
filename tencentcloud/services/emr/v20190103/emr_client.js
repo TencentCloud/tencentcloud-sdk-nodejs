@@ -76,10 +76,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquiryPriceScaleOutInstance", req, cb);
     }
     /**
+     * 查询流程任务
+     */
+    async DescribeJobFlow(req, cb) {
+        return this.request("DescribeJobFlow", req, cb);
+    }
+    /**
      * 实例扩容
      */
     async ScaleOutInstance(req, cb) {
         return this.request("ScaleOutInstance", req, cb);
+    }
+    /**
+     * 创建流程作业
+     */
+    async RunJobFlow(req, cb) {
+        return this.request("RunJobFlow", req, cb);
     }
     /**
      * 销毁EMR实例。此接口仅支持弹性MapReduce正式计费版本。

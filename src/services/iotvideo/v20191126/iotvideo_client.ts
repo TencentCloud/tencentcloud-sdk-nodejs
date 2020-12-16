@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeRechargeRecordsResponse,
   UploadOtaVersionResponse,
   CreateGencodeResponse,
   DescribeLogsRequest,
@@ -41,6 +42,7 @@ import {
   CreateDevTokenRequest,
   DescribeStorageServiceResponse,
   DeleteIotDataTypeRequest,
+  DescribeRechargeRecordsRequest,
   ModifyVerContentResponse,
   DescribeMessageQueueRequest,
   DeleteAppUsrResponse,
@@ -140,9 +142,10 @@ import {
   DescribeLogsResponse,
   ModifyDeviceActionResponse,
   CreateBindingResponse,
-  DevicesData,
+  DescribeAccountBalanceRequest,
   CreateDevicesRequest,
   DisableDeviceRequest,
+  DescribeAccountBalanceResponse,
   DisableOtaVersionRequest,
   DescribeProductResponse,
   CreateAnonymousAccessTokenResponse,
@@ -161,7 +164,9 @@ import {
   DisableDeviceStreamResponse,
   DeleteDeviceResponse,
   CreateUploadPathResponse,
+  RechargeRecord,
   VersionData,
+  DevicesData,
 } from "./iotvideo_models"
 
 /**
@@ -479,6 +484,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 客户可通过本接口获取充值记录信息, 一次最多返回50条记录。
+   */
+  async DescribeRechargeRecords(
+    req: DescribeRechargeRecordsRequest,
+    cb?: (error: string, rep: DescribeRechargeRecordsResponse) => void
+  ): Promise<DescribeRechargeRecordsResponse> {
+    return this.request("DescribeRechargeRecords", req, cb)
+  }
+
+  /**
    * 本接口（ModifyProduct）用于编辑物联网智能视频产品的相关信息。
    */
   async ModifyProduct(
@@ -527,6 +542,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SetMessageQueueResponse) => void
   ): Promise<SetMessageQueueResponse> {
     return this.request("SetMessageQueue", req, cb)
+  }
+
+  /**
+   * 客户可通过本接口获取账户余额信息, 默认接口请求频率限制：1次/秒
+   */
+  async DescribeAccountBalance(
+    req: DescribeAccountBalanceRequest,
+    cb?: (error: string, rep: DescribeAccountBalanceResponse) => void
+  ): Promise<DescribeAccountBalanceResponse> {
+    return this.request("DescribeAccountBalance", req, cb)
   }
 
   /**

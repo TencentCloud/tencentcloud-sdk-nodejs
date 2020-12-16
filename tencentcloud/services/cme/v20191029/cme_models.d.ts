@@ -16,17 +16,13 @@ export interface AudioStreamInfo {
     Codec: string;
 }
 /**
- * DescribeTeams请求参数结构体
+ * ModifyMaterial返回参数结构体
  */
-export interface DescribeTeamsRequest {
+export interface ModifyMaterialResponse {
     /**
-      * 平台名称，指定访问的平台。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Platform: string;
-    /**
-      * 团队 ID 列表，限30个。
-      */
-    TeamIds: Array<string>;
+    RequestId?: string;
 }
 /**
  * DeleteProject请求参数结构体
@@ -40,6 +36,19 @@ export interface DeleteProjectRequest {
       * 项目 Id。
       */
     ProjectId: string;
+}
+/**
+ * ExportVideoByVideoSegmentationData返回参数结构体
+ */
+export interface ExportVideoByVideoSegmentationDataResponse {
+    /**
+      * 任务 Id。
+      */
+    TaskId?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ImportMaterial返回参数结构体
@@ -57,6 +66,52 @@ export interface ImportMaterialResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ExportVideoByVideoSegmentationData请求参数结构体
+ */
+export interface ExportVideoByVideoSegmentationDataRequest {
+    /**
+      * 平台名称，指定访问的平台。
+      */
+    Platform: string;
+    /**
+      * 视频拆条项目 Id 。
+      */
+    ProjectId: string;
+    /**
+      * 指定需要导出的智能拆条片段的组 Id 。
+      */
+    SegmentGroupId: string;
+    /**
+      * 指定需要导出的智能拆条片段 Id  集合。
+      */
+    SegmentIds: Array<string>;
+    /**
+      * 导出模板 Id，目前不支持自定义创建，只支持下面的预置模板 Id。
+<li>10：分辨率为 480P，输出视频格式为 MP4；</li>
+<li>11：分辨率为 720P，输出视频格式为 MP4；</li>
+<li>12：分辨率为 1080P，输出视频格式为 MP4。</li>
+      */
+    Definition: number;
+    /**
+      * 导出目标。
+<li>CME：云剪，即导出为云剪素材；</li>
+<li>VOD：云点播，即导出为云点播媒资。</li>
+      */
+    ExportDestination: string;
+    /**
+      * 导出的云剪素材信息。指定 ExportDestination = CME 时有效。
+      */
+    CMEExportInfo?: CMEExportInfo;
+    /**
+      * 导出的云点播媒资信息。指定 ExportDestination = VOD 时有效。
+      */
+    VODExportInfo?: VODExportInfo;
+    /**
+      * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+      */
+    Operator?: string;
 }
 /**
  * DescribeTeams返回参数结构体
@@ -176,17 +231,21 @@ export interface ModifyProjectResponse {
  */
 export interface AudioTrackItem {
     /**
-      * 音频素材来源类型。取值有：
+      * 音频素材来源类型，取值有：
 <ul>
-<li>VOD ：素材来源 VOD 。</li>
-<li>CME ：视频来源 CME 。</li>
+<li>VOD ：素材来源于云点播文件 ；</li>
+<li>CME ：视频来源于制作云媒体文件 ；</li>
+<li>EXTERNAL ：视频来源于媒资绑定。</li>
 </ul>
       */
     SourceType: string;
     /**
       * 音频片段的媒体素材来源，可以是：
-<li>VOD 的媒体文件 ID 。</li>
-<li>CME 的素材 ID 。</li>
+<ul>
+<li>当 SourceType 为 VOD 时，为云点播的媒体文件 ID ；</li>
+<li>当 SourceType 为 CME 时，为制作云的媒体 ID；</li>
+<li>当 SourceType 为 EXTERNAL 时，为媒资绑定的 Definition 与 MediaKey 中间用冒号分隔合并后的字符串，格式为 Definition:MediaKey 。</li>
+</ul>
       */
     SourceMedia: string;
     /**
@@ -277,6 +336,21 @@ export interface DeleteTeamResponse {
     RequestId?: string;
 }
 /**
+ * 视频拆条项目的输入信息。
+ */
+export interface VideoSegmentationProjectInput {
+    /**
+      * 视频拆条处理模型，不填则默认为手工分割视频。取值 ：
+<li>AI.GameHighlights.PUBG：和平精英集锦 ;</li>
+<li>AI.GameHighlights.Honor OfKings：王者荣耀集锦 ;</li>
+<li>AI.SportHighlights.Football：足球集锦 </li>
+<li>AI.SportHighlights.Basketball：篮球集锦 ；</li>
+<li>AI.PersonSegmentation：人物集锦  ;</li>
+<li>AI.NewsSegmentation：新闻拆条。</li>
+      */
+    ProcessModel?: string;
+}
+/**
  * RevokeResourceAuthorization返回参数结构体
  */
 export interface RevokeResourceAuthorizationResponse {
@@ -344,17 +418,21 @@ export interface ProjectInfo {
  */
 export interface VideoTrackItem {
     /**
-      * 视频素材来源类型。取值有：
+      * 视频素材来源类型，取值有：
 <ul>
-<li>VOD ：素材来源 VOD 。</li>
-<li>CME ：视频来源 CME 。</li>
+<li>VOD ：素材来源于云点播文件 。</li>
+<li>CME ：视频来源制作云媒体文件。</li>
+<li>EXTERNAL ：视频来源于媒资绑定。</li>
 </ul>
       */
     SourceType: string;
     /**
-      * 视频片段的媒体素材来源，可以是：
-<li>VOD 的媒体文件 ID 。</li>
-<li>CME 的素材 ID 。</li>
+      * 视频片段的媒体素材来源，取值为：
+<ul>
+<li>当 SourceType 为 VOD 时，为云点播的媒体文件 ID；</li>
+<li>当 SourceType 为 CME 时，为制作云的媒体 ID；</li>
+<li>当 SourceType 为 EXTERNAL 时，为媒资绑定的 Definition 与 MediaKey 中间用冒号分隔合并后的字符串，格式为 Definition:MediaKey 。</li>
+</ul>
       */
     SourceMedia: string;
     /**
@@ -387,19 +465,19 @@ export interface VideoTrackItem {
     CoordinateOrigin?: string;
     /**
       * 视频片段的高度。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示视频片段 Height 为画布高度的百分比大小，如 10% 表示 Height 为画布高度的 10%；
-</li><li>当字符串以 px 结尾，表示视频片段 Height 单位为像素，如 100px 表示 Height 为100像素。</li>
-<li>当 Width、Height 均为空，则 Width 和 Height 取视频素材本身的 Width、Height。</li>
-<li>当 Width 为空，Height 非空，则 Width 按比例缩放</li>
+<li>当字符串以 % 结尾，表示视频片段 Height 为画布高度的百分比大小，如 10% 表示 Height 为画布高度的 10%；</li>
+<li>当字符串以 px 结尾，表示视频片段 Height 单位为像素，如 100px 表示 Height 为100像素；</li>
+<li>当 Width、Height 均为空，则 Width 和 Height 取视频素材本身的 Width、Height；</li>
+<li>当 Width 为空，Height 非空，则 Width 按比例缩放；</li>
 <li>当 Width 非空，Height 为空，则 Height 按比例缩放。</li>
       */
     Height?: string;
     /**
       * 视频片段的宽度。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示视频片段 Width 为画布宽度的百分比大小，如 10% 表示 Width 为画布宽度的 10%。</li>
-<li>当字符串以 px 结尾，表示视频片段 Width 单位为像素，如 100px 表示 Width 为100像素。</li>
-<li>当 Width、Height 均为空，则 Width 和 Height 取视频素材本身的 Width、Height。</li>
-<li>当 Width 为空，Height 非空，则 Width 按比例缩放</li>
+<li>当字符串以 % 结尾，表示视频片段 Width 为画布宽度的百分比大小，如 10% 表示 Width 为画布宽度的 10%；</li>
+<li>当字符串以 px 结尾，表示视频片段 Width 单位为像素，如 100px 表示 Width 为100像素；</li>
+<li>当 Width、Height 均为空，则 Width 和 Height 取视频素材本身的 Width、Height；</li>
+<li>当 Width 为空，Height 非空，则 Width 按比例缩放；</li>
 <li>当 Width 非空，Height 为空，则 Height 按比例缩放。</li>
       */
     Width?: string;
@@ -422,13 +500,17 @@ export interface DeleteTeamRequest {
     Operator?: string;
 }
 /**
- * ModifyMaterial返回参数结构体
+ * DescribeTeams请求参数结构体
  */
-export interface ModifyMaterialResponse {
+export interface DescribeTeamsRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 平台名称，指定访问的平台。
       */
-    RequestId?: string;
+    Platform: string;
+    /**
+      * 团队 ID 列表，限30个。
+      */
+    TeamIds: Array<string>;
 }
 /**
  * 链接类型的素材信息
@@ -672,6 +754,7 @@ export interface CreateProjectRequest {
       * 项目类别，取值有：
 <li>VIDEO_EDIT：视频编辑。</li>
 <li>SWITCHER：导播台。</li>
+<li>VIDEO_SEGMENTATION：视频拆条。</li>
       */
     Category: string;
     /**
@@ -704,6 +787,10 @@ export interface CreateProjectRequest {
       * 视频编辑信息，仅当项目类型为 VIDEO_EDIT 时必填。
       */
     VideoEditProjectInput?: VideoEditProjectInput;
+    /**
+      * 视频拆条信息，仅当项目类型为 VIDEO_SEGMENTATION  时必填。
+      */
+    VideoSegmentationProjectInput?: VideoSegmentationProjectInput;
 }
 /**
  * ModifyMaterial请求参数结构体
@@ -1299,6 +1386,47 @@ export interface DescribeClassRequest {
     Operator?: string;
 }
 /**
+ * 文件元信息。
+ */
+export interface MediaMetaData {
+    /**
+      * 大小。
+      */
+    Size: number;
+    /**
+      * 容器类型。
+      */
+    Container: string;
+    /**
+      * 视频流码率平均值与音频流码率平均值之和，单位：bps。
+      */
+    Bitrate: number;
+    /**
+      * 视频流高度的最大值，单位：px。
+      */
+    Height: number;
+    /**
+      * 视频流宽度的最大值，单位：px。
+      */
+    Width: number;
+    /**
+      * 时长，单位：秒。
+      */
+    Duration: number;
+    /**
+      * 视频拍摄时的选择角度，单位：度
+      */
+    Rotate: number;
+    /**
+      * 视频流信息。
+      */
+    VideoStreamInfoSet: Array<VideoStreamInfo>;
+    /**
+      * 音频流信息。
+      */
+    AudioStreamInfoSet: Array<AudioStreamInfo>;
+}
+/**
  * MoveClass请求参数结构体
  */
 export interface MoveClassRequest {
@@ -1709,6 +1837,23 @@ export interface DeleteLoginStatusRequest {
       * 用户 Id 列表，N 从 0 开始取值，最大 19。
       */
     UserIds: Array<string>;
+}
+/**
+ * GenerateVideoSegmentationSchemeByAi请求参数结构体
+ */
+export interface GenerateVideoSegmentationSchemeByAiRequest {
+    /**
+      * 平台名称，指定访问的平台。
+      */
+    Platform: string;
+    /**
+      * 视频拆条项目 Id 。
+      */
+    ProjectId: string;
+    /**
+      * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+      */
+    Operator?: string;
 }
 /**
  * DeleteTeamMembers请求参数结构体
@@ -2164,45 +2309,17 @@ export interface DescribeClassResponse {
     RequestId?: string;
 }
 /**
- * 文件元信息。
+ * GenerateVideoSegmentationSchemeByAi返回参数结构体
  */
-export interface MediaMetaData {
+export interface GenerateVideoSegmentationSchemeByAiResponse {
     /**
-      * 大小。
+      * 视频智能拆条任务 Id 。
       */
-    Size: number;
+    TaskId?: string;
     /**
-      * 容器类型。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Container: string;
-    /**
-      * 视频流码率平均值与音频流码率平均值之和，单位：bps。
-      */
-    Bitrate: number;
-    /**
-      * 视频流高度的最大值，单位：px。
-      */
-    Height: number;
-    /**
-      * 视频流宽度的最大值，单位：px。
-      */
-    Width: number;
-    /**
-      * 时长，单位：秒。
-      */
-    Duration: number;
-    /**
-      * 视频拍摄时的选择角度，单位：度
-      */
-    Rotate: number;
-    /**
-      * 视频流信息。
-      */
-    VideoStreamInfoSet: Array<VideoStreamInfo>;
-    /**
-      * 音频流信息。
-      */
-    AudioStreamInfoSet: Array<AudioStreamInfo>;
+    RequestId?: string;
 }
 /**
  * DescribeSharedSpace请求参数结构体

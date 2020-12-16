@@ -308,6 +308,16 @@ it("iotvideo.v20191126.DeleteAppUsr", async function () {
     }
 })
 
+it("iotvideo.v20191126.DescribeRechargeRecords", async function () {
+    try {
+       const data = await client.DescribeRechargeRecords({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideo.v20191126.ModifyProduct", async function () {
     try {
        const data = await client.ModifyProduct({})
@@ -351,6 +361,16 @@ it("iotvideo.v20191126.CreateStorageService", async function () {
 it("iotvideo.v20191126.SetMessageQueue", async function () {
     try {
        const data = await client.SetMessageQueue({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotvideo.v20191126.DescribeAccountBalance", async function () {
+    try {
+       const data = await client.DescribeAccountBalance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

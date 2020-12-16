@@ -28,6 +28,41 @@ class Client extends abstract_client_1.AbstractClient {
         super("ams.tencentcloudapi.com", "2020-06-08", clientConfig);
     }
     /**
+     * 控制台识别统计
+     */
+    async DescribeAudioStat(req, cb) {
+        return this.request("DescribeAudioStat", req, cb);
+    }
+    /**
+     * 查看任务详情
+     */
+    async DescribeTaskDetail(req, cb) {
+        return this.request("DescribeTaskDetail", req, cb);
+    }
+    /**
+     * 创建业务配置，1个账号最多可以创建20个配置，可定义音频审核的场景，如色情、谩骂等，
+
+在创建业务配置之前，你需要以下步骤：
+1. 开通COS存储桶功能，新建存储桶，例如 cms_segments，用来存储 视频转换过程中生成对音频和图片。
+2. 然后在COS控制台，授权天御内容安全主账号 对 cms_segments 存储桶对读写权限。具体授权操作，参考https://cloud.tencent.com/document/product/436/38648
+
+     */
+    async CreateBizConfig(req, cb) {
+        return this.request("CreateBizConfig", req, cb);
+    }
+    /**
+     * 查看单个配置
+     */
+    async DescribeBizConfig(req, cb) {
+        return this.request("DescribeBizConfig", req, cb);
+    }
+    /**
+     * 取消任务
+     */
+    async CancelTask(req, cb) {
+        return this.request("CancelTask", req, cb);
+    }
+    /**
      * 本接口（Audio Moderation）用于提交音频内容（包括音频文件或流地址）进行智能审核任务，使用前请您登陆控制台开通音频内容安全服务。
 
 ### 功能使用说明：
@@ -57,33 +92,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAudioModerationTask", req, cb);
     }
     /**
-     * 查看单个配置
+     * 音频审核明细列表
      */
-    async DescribeBizConfig(req, cb) {
-        return this.request("DescribeBizConfig", req, cb);
-    }
-    /**
-     * 查看任务详情
-     */
-    async DescribeTaskDetail(req, cb) {
-        return this.request("DescribeTaskDetail", req, cb);
-    }
-    /**
-     * 创建业务配置，1个账号最多可以创建20个配置，可定义音频审核的场景，如色情、谩骂等，
-
-在创建业务配置之前，你需要以下步骤：
-1. 开通COS存储桶功能，新建存储桶，例如 cms_segments，用来存储 视频转换过程中生成对音频和图片。
-2. 然后在COS控制台，授权天御内容安全主账号 对 cms_segments 存储桶对读写权限。具体授权操作，参考https://cloud.tencent.com/document/product/436/38648
-
-     */
-    async CreateBizConfig(req, cb) {
-        return this.request("CreateBizConfig", req, cb);
-    }
-    /**
-     * 取消任务
-     */
-    async CancelTask(req, cb) {
-        return this.request("CancelTask", req, cb);
+    async DescribeAmsList(req, cb) {
+        return this.request("DescribeAmsList", req, cb);
     }
 }
 exports.Client = Client;

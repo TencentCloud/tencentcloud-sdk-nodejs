@@ -47,7 +47,7 @@ import {
   UpdateAssetRequest,
   DesiredPlayerSession,
   UpdateFleetPortSettingsRequest,
-  DescribeFleetStatisticFlowsRequest,
+  CcnInstanceSets,
   UpdateAliasRequest,
   GameServerSessionPlacement,
   JoinGameServerSessionBatchRequest,
@@ -129,6 +129,7 @@ import {
   UpdateFleetNameResponse,
   DescribeAliasRequest,
   CreateAliasRequest,
+  CopyFleetResponse,
   UpdateGameServerSessionRequest,
   ListAliasesRequest,
   CreateAssetRequest,
@@ -146,6 +147,7 @@ import {
   Filter,
   UpdateFleetAttributesResponse,
   DescribeFleetUtilizationRequest,
+  DescribeInstanceTypesResponse,
   DescribeGameServerSessionDetailsRequest,
   GameServerSession,
   PlayerLatencyPolicy,
@@ -161,7 +163,7 @@ import {
   JoinGameServerSessionRequest,
   DescribeUserQuotasResponse,
   GetUploadFederationTokenRequest,
-  DescribeInstanceTypesResponse,
+  CopyFleetRequest,
   SearchGameServerSessionsResponse,
   DescribeFleetEventsResponse,
   RoutingStrategy,
@@ -187,7 +189,7 @@ import {
   InstanceExtend,
   PutScalingPolicyRequest,
   StopGameServerSessionPlacementResponse,
-  CcnInstanceSets,
+  DescribeFleetStatisticFlowsRequest,
 } from "./gse_models"
 
 /**
@@ -300,6 +302,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateGameServerSessionQueueResponse) => void
   ): Promise<CreateGameServerSessionQueueResponse> {
     return this.request("CreateGameServerSessionQueue", req, cb)
+  }
+
+  /**
+   * 本接口（UpdateGameServerSession）用于更新游戏服务器会话。
+   */
+  async UpdateGameServerSession(
+    req: UpdateGameServerSessionRequest,
+    cb?: (error: string, rep: UpdateGameServerSessionResponse) => void
+  ): Promise<UpdateGameServerSessionResponse> {
+    return this.request("UpdateGameServerSession", req, cb)
   }
 
   /**
@@ -500,13 +512,13 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
   }
 
   /**
-   * 本接口（DescribeFleetStatisticDetails）用于查询服务部署统计详情。
+   * 本接口（CopyFleet）用于复制服务器舰队。
    */
-  async DescribeFleetStatisticDetails(
-    req: DescribeFleetStatisticDetailsRequest,
-    cb?: (error: string, rep: DescribeFleetStatisticDetailsResponse) => void
-  ): Promise<DescribeFleetStatisticDetailsResponse> {
-    return this.request("DescribeFleetStatisticDetails", req, cb)
+  async CopyFleet(
+    req: CopyFleetRequest,
+    cb?: (error: string, rep: CopyFleetResponse) => void
+  ): Promise<CopyFleetResponse> {
+    return this.request("CopyFleet", req, cb)
   }
 
   /**
@@ -803,13 +815,13 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
   }
 
   /**
-   * 本接口（DescribeInstances）用于查询服务器实例列表。
+   * 本接口（DescribeFleetStatisticDetails）用于查询服务部署统计详情。
    */
-  async DescribeInstances(
-    req: DescribeInstancesRequest,
-    cb?: (error: string, rep: DescribeInstancesResponse) => void
-  ): Promise<DescribeInstancesResponse> {
-    return this.request("DescribeInstances", req, cb)
+  async DescribeFleetStatisticDetails(
+    req: DescribeFleetStatisticDetailsRequest,
+    cb?: (error: string, rep: DescribeFleetStatisticDetailsResponse) => void
+  ): Promise<DescribeFleetStatisticDetailsResponse> {
+    return this.request("DescribeFleetStatisticDetails", req, cb)
   }
 
   /**
@@ -933,13 +945,13 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
   }
 
   /**
-   * 本接口（UpdateGameServerSession）用于更新游戏服务器会话。
+   * 本接口（DescribeInstances）用于查询服务器实例列表。
    */
-  async UpdateGameServerSession(
-    req: UpdateGameServerSessionRequest,
-    cb?: (error: string, rep: UpdateGameServerSessionResponse) => void
-  ): Promise<UpdateGameServerSessionResponse> {
-    return this.request("UpdateGameServerSession", req, cb)
+  async DescribeInstances(
+    req: DescribeInstancesRequest,
+    cb?: (error: string, rep: DescribeInstancesResponse) => void
+  ): Promise<DescribeInstancesResponse> {
+    return this.request("DescribeInstances", req, cb)
   }
 
   /**

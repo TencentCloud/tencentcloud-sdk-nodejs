@@ -95,6 +95,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateGameServerSessionQueue", req, cb);
     }
     /**
+     * 本接口（UpdateGameServerSession）用于更新游戏服务器会话。
+     */
+    async UpdateGameServerSession(req, cb) {
+        return this.request("UpdateGameServerSession", req, cb);
+    }
+    /**
      * 本接口（DeleteAsset）用于删除生成包。
      */
     async DeleteAsset(req, cb) {
@@ -252,10 +258,10 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
         return this.request("DescribeScalingPolicies", req, cb);
     }
     /**
-     * 本接口（DescribeFleetStatisticDetails）用于查询服务部署统计详情。
+     * 本接口（CopyFleet）用于复制服务器舰队。
      */
-    async DescribeFleetStatisticDetails(req, cb) {
-        return this.request("DescribeFleetStatisticDetails", req, cb);
+    async CopyFleet(req, cb) {
+        return this.request("CopyFleet", req, cb);
     }
     /**
      * 本接口（DescribeGameServerSessions）用于查询游戏服务器会话列表。
@@ -435,10 +441,10 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
         return this.request("SearchGameServerSessions", req, cb);
     }
     /**
-     * 本接口（DescribeInstances）用于查询服务器实例列表。
+     * 本接口（DescribeFleetStatisticDetails）用于查询服务部署统计详情。
      */
-    async DescribeInstances(req, cb) {
-        return this.request("DescribeInstances", req, cb);
+    async DescribeFleetStatisticDetails(req, cb) {
+        return this.request("DescribeFleetStatisticDetails", req, cb);
     }
     /**
      * 本接口（DescribeAssets）用于获取生成包列表。
@@ -513,10 +519,10 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
         return this.request("DescribeFleetUtilization", req, cb);
     }
     /**
-     * 本接口（UpdateGameServerSession）用于更新游戏服务器会话。
+     * 本接口（DescribeInstances）用于查询服务器实例列表。
      */
-    async UpdateGameServerSession(req, cb) {
-        return this.request("UpdateGameServerSession", req, cb);
+    async DescribeInstances(req, cb) {
+        return this.request("DescribeInstances", req, cb);
     }
     /**
      * 本接口（UpdateFleetPortSettings）用于更新服务器舰队安全组。

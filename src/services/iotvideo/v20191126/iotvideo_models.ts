@@ -16,6 +16,28 @@
  */
 
 /**
+ * DescribeRechargeRecords返回参数结构体
+ */
+export interface DescribeRechargeRecordsResponse {
+  /**
+      * 账户类型 1:设备接入 2:云存
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AccountType?: number
+
+  /**
+      * 充值记录列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Records?: Array<RechargeRecord>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UploadOtaVersion返回参数结构体
  */
 export interface UploadOtaVersionResponse {
@@ -494,6 +516,26 @@ export interface DeleteIotDataTypeRequest {
    * 自定义数据类型的标识符
    */
   TypeId: string
+}
+
+/**
+ * DescribeRechargeRecords请求参数结构体
+ */
+export interface DescribeRechargeRecordsRequest {
+  /**
+   * 账户类型 1:设备接入 2:云存
+   */
+  AccountType: number
+
+  /**
+   * 从第几条记录开始显示
+   */
+  Offset?: number
+
+  /**
+   * 总共查询多少条记录
+   */
+  Limit?: number
 }
 
 /**
@@ -2544,58 +2586,13 @@ export interface CreateBindingResponse {
 }
 
 /**
- * 设备列表元素所包含的设备基本信息
+ * DescribeAccountBalance请求参数结构体
  */
-export interface DevicesData {
+export interface DescribeAccountBalanceRequest {
   /**
-   * 设备TID
+   * 账户类型 1:设备接入 2:云存
    */
-  Tid: string
-
-  /**
-   * 设备名称
-   */
-  DeviceName: string
-
-  /**
-   * 激活时间 0代表未激活
-   */
-  ActiveTime: number
-
-  /**
-   * 设备是否被禁用
-   */
-  Disabled: boolean
-
-  /**
-   * 设备推流状态
-   */
-  StreamStatus: boolean
-
-  /**
-   * 固件版本
-   */
-  OtaVersion: string
-
-  /**
-   * 设备在线状态
-   */
-  Online: number
-
-  /**
-   * 设备最后上线时间（mqtt连接成功时间），UNIX时间戳，单位秒
-   */
-  LastOnlineTime: number
-
-  /**
-   * 物模型json数据
-   */
-  IotModel: string
-
-  /**
-   * 设备固件最新更新时间，UNIX时间戳，单位秒
-   */
-  LastUpdateTime: number
+  AccountType: number
 }
 
 /**
@@ -2631,6 +2628,40 @@ export interface DisableDeviceRequest {
    * 设备TID ≤100
    */
   Tids: Array<string>
+}
+
+/**
+ * DescribeAccountBalance返回参数结构体
+ */
+export interface DescribeAccountBalanceResponse {
+  /**
+      * 账户类型 1=设备接入;2=云存
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AccountType?: number
+
+  /**
+      * 余额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Balance?: number
+
+  /**
+      * 账户状态，1=正常；8=冻结；9=销户
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  State?: number
+
+  /**
+      * 最后修改时间，UTC值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LastUpdateTime?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2904,6 +2935,35 @@ export interface CreateUploadPathResponse {
 }
 
 /**
+ * 充值记录列表
+ */
+export interface RechargeRecord {
+  /**
+      * 流水记录号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WaterId: number
+
+  /**
+      * 充值前的余额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BalanceBeforeRecharge: number
+
+  /**
+      * 充值金额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Money: number
+
+  /**
+      * 充值时间, UTC值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OperateTime: number
+}
+
+/**
  * 固件版本详细信息
  */
 export interface VersionData {
@@ -3008,4 +3068,59 @@ export interface VersionData {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Contents: Contents
+}
+
+/**
+ * 设备列表元素所包含的设备基本信息
+ */
+export interface DevicesData {
+  /**
+   * 设备TID
+   */
+  Tid: string
+
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+
+  /**
+   * 激活时间 0代表未激活
+   */
+  ActiveTime: number
+
+  /**
+   * 设备是否被禁用
+   */
+  Disabled: boolean
+
+  /**
+   * 设备推流状态
+   */
+  StreamStatus: boolean
+
+  /**
+   * 固件版本
+   */
+  OtaVersion: string
+
+  /**
+   * 设备在线状态
+   */
+  Online: number
+
+  /**
+   * 设备最后上线时间（mqtt连接成功时间），UNIX时间戳，单位秒
+   */
+  LastOnlineTime: number
+
+  /**
+   * 物模型json数据
+   */
+  IotModel: string
+
+  /**
+   * 设备固件最新更新时间，UNIX时间戳，单位秒
+   */
+  LastUpdateTime: number
 }

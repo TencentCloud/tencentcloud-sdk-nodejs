@@ -18,35 +18,49 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  CreateBotTaskRequest,
   UploadFileRequest,
   UploadFileResponse,
   UploadDataJsonResponse,
-  DescribeTaskStatusResponse,
+  DescribeBotFlowResponse,
+  DownloadDialogueTextRequest,
   DownloadReportRequest,
   ApplyCreditAuditResponse,
   UploadDataFileResponse,
-  SingleBlackApply,
-  SingleRecord,
-  QueryInstantDataResponse,
   DownloadRecordListRequest,
+  DescribeFileModelRequest,
+  QueryInstantDataResponse,
+  CallTimeDict,
+  UploadBotFileResponse,
   UploadDataJsonRequest,
-  QueryProductsRequest,
+  CallTimeInfo,
   DescribeCreditResultResponse,
   DownloadDialogueTextResponse,
-  QueryInstantDataRequest,
+  DescribeBotFlowRequest,
+  SingleBlackApply,
+  BotFlow,
   ApplyBlackListResponse,
   DescribeRecordsRequest,
+  SingleRecord,
+  QueryInstantDataRequest,
   DescribeCreditResultRequest,
   ApplyBlackListRequest,
   ApplyCreditAuditRequest,
   DownloadReportResponse,
+  SmsTemplate,
+  PhonePool,
   DownloadRecordListResponse,
+  CreateBotTaskResponse,
+  UploadBotFileRequest,
   UploadDataFileRequest,
+  DescribeFileModelResponse,
   DescribeTaskStatusRequest,
   ProductQueryInfo,
+  QueryProductsRequest,
+  SmsSign,
   QueryProductsResponse,
   DescribeRecordsResponse,
-  DownloadDialogueTextRequest,
+  DescribeTaskStatusResponse,
 } from "./cr_models"
 
 /**
@@ -129,6 +143,36 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询机器人对话流
+   */
+  async DescribeBotFlow(
+    req: DescribeBotFlowRequest,
+    cb?: (error: string, rep: DescribeBotFlowResponse) => void
+  ): Promise<DescribeBotFlowResponse> {
+    return this.request("DescribeBotFlow", req, cb)
+  }
+
+  /**
+   * 查询产品列表
+   */
+  async QueryProducts(
+    req: QueryProductsRequest,
+    cb?: (error: string, rep: QueryProductsResponse) => void
+  ): Promise<QueryProductsResponse> {
+    return this.request("QueryProducts", req, cb)
+  }
+
+  /**
+   * 上传机器人文件
+   */
+  async UploadBotFile(
+    req: UploadBotFileRequest,
+    cb?: (error: string, rep: UploadBotFileResponse) => void
+  ): Promise<UploadBotFileResponse> {
+    return this.request("UploadBotFile", req, cb)
+  }
+
+  /**
    * 上传文件，接口返回数据任务ID，支持xlsx、xls、csv、zip格式。
    */
   async UploadDataFile(
@@ -142,13 +186,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询产品列表
+   * 查询机器人文件模板
    */
-  async QueryProducts(
-    req: QueryProductsRequest,
-    cb?: (error: string, rep: QueryProductsResponse) => void
-  ): Promise<QueryProductsResponse> {
-    return this.request("QueryProducts", req, cb)
+  async DescribeFileModel(
+    req: DescribeFileModelRequest,
+    cb?: (error: string, rep: DescribeFileModelResponse) => void
+  ): Promise<DescribeFileModelResponse> {
+    return this.request("DescribeFileModel", req, cb)
   }
 
   /**
@@ -190,5 +234,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ApplyCreditAuditResponse) => void
   ): Promise<ApplyCreditAuditResponse> {
     return this.request("ApplyCreditAudit", req, cb)
+  }
+
+  /**
+   * 创建机器人任务
+   */
+  async CreateBotTask(
+    req: CreateBotTaskRequest,
+    cb?: (error: string, rep: CreateBotTaskResponse) => void
+  ): Promise<CreateBotTaskResponse> {
+    return this.request("CreateBotTask", req, cb)
   }
 }

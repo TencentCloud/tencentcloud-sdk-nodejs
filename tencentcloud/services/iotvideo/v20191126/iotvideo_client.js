@@ -217,6 +217,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAppUsr", req, cb);
     }
     /**
+     * 客户可通过本接口获取充值记录信息, 一次最多返回50条记录。
+     */
+    async DescribeRechargeRecords(req, cb) {
+        return this.request("DescribeRechargeRecords", req, cb);
+    }
+    /**
      * 本接口（ModifyProduct）用于编辑物联网智能视频产品的相关信息。
      */
     async ModifyProduct(req, cb) {
@@ -246,6 +252,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async SetMessageQueue(req, cb) {
         return this.request("SetMessageQueue", req, cb);
+    }
+    /**
+     * 客户可通过本接口获取账户余额信息, 默认接口请求频率限制：1次/秒
+     */
+    async DescribeAccountBalance(req, cb) {
+        return this.request("DescribeAccountBalance", req, cb);
     }
     /**
      * 本接口（DeleteDevice）用于删除设备，可进行批量操作，每次操作最多100台设备。

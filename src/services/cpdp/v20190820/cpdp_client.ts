@@ -103,6 +103,7 @@ import {
   QueryAgentTaxPaymentBatchResponse,
   DeleteAgentTaxPaymentInfosResponse,
   RegisterBillSupportWithdrawResponse,
+  QueryTransferResultResponse,
   QuerySmallAmountTransferResponse,
   CreateRedInvoiceResponse,
   QueryInvoiceResultData,
@@ -117,6 +118,7 @@ import {
   MerchantManagementResult,
   ApplyWithdrawalResponse,
   QueryBankTransactionDetailsResponse,
+  QueryTransferResultRequest,
   QueryPayerinfoData,
   QueryMerchantBalanceData,
   QueryMemberTransactionRequest,
@@ -130,6 +132,7 @@ import {
   QueryExchangerateData,
   WithdrawBill,
   QueryRefundRequest,
+  QueryTransferResultData,
   QueryTransferDetailResponse,
   BindRelateAccReUnionPayRequest,
   CreateCustAcctIdResponse,
@@ -168,6 +171,7 @@ import {
   QueryOutwardOrderData,
   TransactionItem,
   QueryTransferBatchRequest,
+  TransferSinglePayData,
   CheckAcctResponse,
   QueryReconciliationDocumentResponse,
   QueryApplicationMaterialResponse,
@@ -176,6 +180,7 @@ import {
   QueryMerchantInfoForManagementRequest,
   FileItem,
   RechargeMemberThirdPayRequest,
+  TransferSinglePayRequest,
   ApplyOutwardOrderResult,
   ApplyPayerInfoRequest,
   CreateSinglePayResponse,
@@ -214,6 +219,7 @@ import {
   Order,
   QueryDeclareData,
   QueryMemberBindRequest,
+  TransferSinglePayResponse,
   QueryAgentStatementsRequest,
   BindRelateAcctUnionPayResponse,
   QueryReconciliationDocumentRequest,
@@ -606,6 +612,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 智能代发-单笔代发转账接口
+   */
+  async TransferSinglePay(
+    req: TransferSinglePayRequest,
+    cb?: (error: string, rep: TransferSinglePayResponse) => void
+  ): Promise<TransferSinglePayResponse> {
+    return this.request("TransferSinglePay", req, cb)
+  }
+
+  /**
    * 跨境-付款人申请。通过该接口提交付款人信息并进行 kyc 审核。
    */
   async ApplyPayerInfo(
@@ -613,6 +629,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ApplyPayerInfoResponse) => void
   ): Promise<ApplyPayerInfoResponse> {
     return this.request("ApplyPayerInfo", req, cb)
+  }
+
+  /**
+   * 撤销会员在途充值(经第三方支付渠道)
+   */
+  async RevokeMemberRechargeThirdPay(
+    req: RevokeMemberRechargeThirdPayRequest,
+    cb?: (error: string, rep: RevokeMemberRechargeThirdPayResponse) => void
+  ): Promise<RevokeMemberRechargeThirdPayResponse> {
+    return this.request("RevokeMemberRechargeThirdPay", req, cb)
   }
 
   /**
@@ -746,13 +772,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 撤销会员在途充值(经第三方支付渠道)
+   * 智能代发-单笔代发转账查询接口
    */
-  async RevokeMemberRechargeThirdPay(
-    req: RevokeMemberRechargeThirdPayRequest,
-    cb?: (error: string, rep: RevokeMemberRechargeThirdPayResponse) => void
-  ): Promise<RevokeMemberRechargeThirdPayResponse> {
-    return this.request("RevokeMemberRechargeThirdPay", req, cb)
+  async QueryTransferResult(
+    req: QueryTransferResultRequest,
+    cb?: (error: string, rep: QueryTransferResultResponse) => void
+  ): Promise<QueryTransferResultResponse> {
+    return this.request("QueryTransferResult", req, cb)
   }
 
   /**

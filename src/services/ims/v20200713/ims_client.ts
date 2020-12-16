@@ -18,19 +18,29 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeImageStatRequest,
+  TrendCount,
+  Location,
+  LabelDetailItem,
+  ImageModerationResponse,
   ImageModerationRequest,
+  DescribeImsListResponse,
+  OcrResult,
+  User,
+  LabelResult,
+  Device,
+  ImsDetail,
+  EvilCount,
   ObjectResult,
   OcrTextDetail,
   ObjectDetail,
-  OcrResult,
-  LibDetail,
-  Location,
-  LabelResult,
-  LabelDetailItem,
-  Device,
+  Filter,
+  DescribeImageStatResponse,
+  DescribeImsListRequest,
   LibResult,
-  ImageModerationResponse,
-  User,
+  Overview,
+  LibDetail,
+  Filters,
 } from "./ims_models"
 
 /**
@@ -66,5 +76,25 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ImageModerationResponse) => void
   ): Promise<ImageModerationResponse> {
     return this.request("ImageModeration", req, cb)
+  }
+
+  /**
+   * 图片机器审核明细
+   */
+  async DescribeImsList(
+    req: DescribeImsListRequest,
+    cb?: (error: string, rep: DescribeImsListResponse) => void
+  ): Promise<DescribeImsListResponse> {
+    return this.request("DescribeImsList", req, cb)
+  }
+
+  /**
+   * 控制台识别统计
+   */
+  async DescribeImageStat(
+    req: DescribeImageStatRequest,
+    cb?: (error: string, rep: DescribeImageStatResponse) => void
+  ): Promise<DescribeImageStatResponse> {
+    return this.request("DescribeImageStat", req, cb)
   }
 }

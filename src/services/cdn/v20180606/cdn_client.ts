@@ -140,6 +140,7 @@ import {
   DescribeIpStatusRequest,
   DetailDomain,
   GetDisableRecordsResponse,
+  Ipv6Access,
   ResponseHeader,
   DuplicateDomainConfigResponse,
   CdnIpHistory,

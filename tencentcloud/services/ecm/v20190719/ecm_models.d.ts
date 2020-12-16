@@ -39,19 +39,19 @@ export interface Ipv6Address {
     /**
       * 是否是主IP。
       */
-    Primary: boolean;
+    Primary?: boolean;
     /**
       * EIP实例ID，形如：eip-hxlqja90。
       */
-    AddressId: string;
+    AddressId?: string;
     /**
       * 描述信息。
       */
-    Description: string;
+    Description?: string;
     /**
       * 公网IP是否被封堵。
       */
-    IsWanIpBlocked: boolean;
+    IsWanIpBlocked?: boolean;
     /**
       * IPv6地址状态：
 PENDING：生产中
@@ -59,7 +59,7 @@ MIGRATING：迁移中
 DELETING：删除中
 AVAILABLE：可用的
       */
-    State: string;
+    State?: string;
 }
 /**
  * BatchDeregisterTargets返回参数结构体
@@ -1659,6 +1659,10 @@ export interface ZoneInstanceCountISP {
       * 指定主网卡内网IP。条件：SubnetId与VpcId必须同时指定，并且IP数量与InstanceCount相同，多IP主机副网卡内网IP在相同子网内通过DHCP获取。
       */
     PrivateIpAddresses?: Array<string>;
+    /**
+      * 为弹性网卡指定随机生成的IPv6地址数量，目前数量不能大于1。
+      */
+    Ipv6AddressCount?: number;
 }
 /**
  * 负载均衡器健康状态
@@ -3675,7 +3679,7 @@ export interface ImportCustomImageRequest {
       */
     InitFlag?: string;
     /**
-      * 镜像描述，多层镜像按顺序传入
+      * 镜像文件描述，多层镜像按顺序传入
       */
     ImageUrls?: Array<ImageUrl>;
 }
@@ -5935,4 +5939,9 @@ export interface AddressInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PrivateIPAddressInfo: PrivateIPAddressInfo;
+    /**
+      * 实例的外网ipv6相关信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PublicIPv6AddressInfo: PublicIPAddressInfo;
 }

@@ -108,6 +108,16 @@ it("gse.v20191112.CreateGameServerSessionQueue", async function () {
     }
 })
 
+it("gse.v20191112.UpdateGameServerSession", async function () {
+    try {
+       const data = await client.UpdateGameServerSession({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gse.v20191112.DeleteAsset", async function () {
     try {
        const data = await client.DeleteAsset({})
@@ -208,9 +218,9 @@ it("gse.v20191112.DescribeScalingPolicies", async function () {
     }
 })
 
-it("gse.v20191112.DescribeFleetStatisticDetails", async function () {
+it("gse.v20191112.CopyFleet", async function () {
     try {
-       const data = await client.DescribeFleetStatisticDetails({})
+       const data = await client.CopyFleet({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -508,9 +518,9 @@ it("gse.v20191112.SearchGameServerSessions", async function () {
     }
 })
 
-it("gse.v20191112.DescribeInstances", async function () {
+it("gse.v20191112.DescribeFleetStatisticDetails", async function () {
     try {
-       const data = await client.DescribeInstances({})
+       const data = await client.DescribeFleetStatisticDetails({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -638,9 +648,9 @@ it("gse.v20191112.DescribeFleetUtilization", async function () {
     }
 })
 
-it("gse.v20191112.UpdateGameServerSession", async function () {
+it("gse.v20191112.DescribeInstances", async function () {
     try {
-       const data = await client.UpdateGameServerSession({})
+       const data = await client.DescribeInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

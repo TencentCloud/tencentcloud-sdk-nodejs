@@ -3205,6 +3205,32 @@ export interface RegisterBillSupportWithdrawResponse {
 }
 
 /**
+ * QueryTransferResult返回参数结构体
+ */
+export interface QueryTransferResultResponse {
+  /**
+   * 错误码。响应成功："SUCCESS"，其他为不成功
+   */
+  ErrCode?: string
+
+  /**
+   * 响应消息
+   */
+  ErrMessage?: string
+
+  /**
+      * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result?: QueryTransferResultData
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * QuerySmallAmountTransfer返回参数结构体
  */
 export interface QuerySmallAmountTransferResponse {
@@ -3923,6 +3949,43 @@ export interface QueryBankTransactionDetailsResponse {
 }
 
 /**
+ * QueryTransferResult请求参数结构体
+ */
+export interface QueryTransferResultRequest {
+  /**
+   * 商户号
+   */
+  MerchantId: string
+
+  /**
+   * 申请商户号的appid或者商户号绑定的appid
+   */
+  MerchantAppId: string
+
+  /**
+      * 1、 微信企业付款 
+2、 支付宝转账 
+3、 平安银企直联代发转账
+      */
+  TransferType: number
+
+  /**
+   * 交易流水流水号（与 OrderId 不能同时为空）
+   */
+  TradeSerialNo?: string
+
+  /**
+   * 订单号（与 TradeSerialNo 不能同时为空）
+   */
+  OrderId?: string
+
+  /**
+   * 接入环境。沙箱环境填sandbox。
+   */
+  Profile?: string
+}
+
+/**
  * 付款人查询数据
  */
 export interface QueryPayerinfoData {
@@ -4468,6 +4531,38 @@ development: 开发环境
 缺省: release
       */
   MidasEnvironment?: string
+}
+
+/**
+ * 智能代发-单笔代发转账查询接口返回内容
+ */
+export interface QueryTransferResultData {
+  /**
+   * 平台交易流水号
+   */
+  TradeSerialNo: string
+
+  /**
+   * 订单号
+   */
+  OrderId: string
+
+  /**
+      * 交易状态。
+0 处理中  
+1 提交成功 
+2 交易成功 
+3 交易失败 
+4 未知渠道异常 
+99 未知系统异常
+      */
+  TradeStatus: number
+
+  /**
+      * 业务备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Remark: string
 }
 
 /**
@@ -6526,6 +6621,16 @@ FAIL：转账失败，只查询转账失败的明细单。
 }
 
 /**
+ * 智能代发-单笔代发转账接口返回数据
+ */
+export interface TransferSinglePayData {
+  /**
+   * 平台交易流水号，唯一
+   */
+  TradeSerialNo: string
+}
+
+/**
  * CheckAcct返回参数结构体
  */
 export interface CheckAcctResponse {
@@ -6771,6 +6876,80 @@ export interface RechargeMemberThirdPayRequest {
 
   /**
    * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
+   */
+  Profile?: string
+}
+
+/**
+ * TransferSinglePay请求参数结构体
+ */
+export interface TransferSinglePayRequest {
+  /**
+   * 商户号
+   */
+  MerchantId: string
+
+  /**
+      * 微信申请商户号的appid或者商户号绑定的appid
+支付宝、平安填入MerchantId
+      */
+  MerchantAppId: string
+
+  /**
+      * 1、 微信企业付款 
+2、 支付宝转账 
+3、 平安银企直联代发转账
+      */
+  TransferType: number
+
+  /**
+   * 订单流水号，唯一，不能包含特殊字符，长度最大限制64位，推荐使用字母，数字组合，"_","-"组合
+   */
+  OrderId: string
+
+  /**
+   * 转账金额，单位分
+   */
+  TransferAmount: number
+
+  /**
+      * 收款方标识。
+微信为open_id；
+支付宝为会员alipay_user_id;
+平安为收款方银行账号
+      */
+  PayeeId: string
+
+  /**
+   * 收款方姓名，微信，支付宝可选；平安模式下必传
+   */
+  PayeeName?: string
+
+  /**
+      * 收款方附加信息，平安接入使用。需要以JSON格式提供以下字段：
+PayeeBankName：收款人开户行名称
+ CcyCode：货币类型（RMB-人民币）
+ UnionFlag：行内跨行标志（1：行内转账，0：跨行转账）。
+      */
+  PayeeExtends?: string
+
+  /**
+   * 请求预留字段，原样透传返回
+   */
+  ReqReserved?: string
+
+  /**
+   * 业务备注
+   */
+  Remark?: string
+
+  /**
+   * 转账结果回调通知URL。若不填，则不进行回调。
+   */
+  NotifyUrl?: string
+
+  /**
+   * 接入环境。沙箱环境填sandbox。
    */
   Profile?: string
 }
@@ -8478,6 +8657,32 @@ export interface QueryMemberBindRequest {
    * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
    */
   Profile?: string
+}
+
+/**
+ * TransferSinglePay返回参数结构体
+ */
+export interface TransferSinglePayResponse {
+  /**
+   * 错误码。响应成功："SUCCESS"，其他为不成功
+   */
+  ErrCode?: string
+
+  /**
+   * 响应消息
+   */
+  ErrMessage?: string
+
+  /**
+      * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result?: TransferSinglePayData
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -66,6 +66,7 @@ import {
   UnassignIpv6AddressesResponse,
   CreateIp6TranslatorsResponse,
   DescribeFlowLogsRequest,
+  CloneSecurityGroupRequest,
   AssociateNatGatewayAddressRequest,
   CreateDirectConnectGatewayRequest,
   ModifyBandwidthPackageAttributeRequest,
@@ -144,6 +145,7 @@ import {
   DescribeVpcsResponse,
   ModifySecurityGroupAttributeRequest,
   ModifyNetDetectRequest,
+  DescribeNetDetectStatesResponse,
   DescribeVpcResourceDashboardResponse,
   AllocateIp6AddressesBandwidthResponse,
   DescribeNetDetectStatesRequest,
@@ -213,7 +215,7 @@ import {
   ResetRoutesResponse,
   DeleteNetworkAclRequest,
   NatGatewayDestinationIpPortTranslationNatRule,
-  DescribeNetDetectStatesResponse,
+  CloneSecurityGroupResponse,
   ModifyDhcpIpAttributeRequest,
   ModifyIp6TranslatorRequest,
   CreateVpnConnectionResponse,
@@ -955,13 +957,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（InquiryPriceRenewVpnGateway）用于续费VPN网关询价。目前仅支持IPSEC类型网关的询价。
+   * 本接口（CloneSecurityGroup）用于根据存量的安全组，克隆创建出同样规则配置的安全组。仅克隆安全组及其规则信息，不会克隆安全组标签信息。
    */
-  async InquiryPriceRenewVpnGateway(
-    req: InquiryPriceRenewVpnGatewayRequest,
-    cb?: (error: string, rep: InquiryPriceRenewVpnGatewayResponse) => void
-  ): Promise<InquiryPriceRenewVpnGatewayResponse> {
-    return this.request("InquiryPriceRenewVpnGateway", req, cb)
+  async CloneSecurityGroup(
+    req: CloneSecurityGroupRequest,
+    cb?: (error: string, rep: CloneSecurityGroupResponse) => void
+  ): Promise<CloneSecurityGroupResponse> {
+    return this.request("CloneSecurityGroup", req, cb)
   }
 
   /**
@@ -2033,6 +2035,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeNetworkInterfacesResponse) => void
   ): Promise<DescribeNetworkInterfacesResponse> {
     return this.request("DescribeNetworkInterfaces", req, cb)
+  }
+
+  /**
+   * 本接口（InquiryPriceRenewVpnGateway）用于续费VPN网关询价。目前仅支持IPSEC类型网关的询价。
+   */
+  async InquiryPriceRenewVpnGateway(
+    req: InquiryPriceRenewVpnGatewayRequest,
+    cb?: (error: string, rep: InquiryPriceRenewVpnGatewayResponse) => void
+  ): Promise<InquiryPriceRenewVpnGatewayResponse> {
+    return this.request("InquiryPriceRenewVpnGateway", req, cb)
   }
 
   /**

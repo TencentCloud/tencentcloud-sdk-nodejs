@@ -16,6 +16,86 @@
  */
 
 /**
+ * CreateBotTask请求参数结构体
+ */
+export interface CreateBotTaskRequest {
+  /**
+   * 模块名。默认值（固定）：AiApi
+   */
+  Module: string
+
+  /**
+   * 操作名。默认值（固定）：CreateTask
+   */
+  Operation: string
+
+  /**
+   * 任务名称
+   */
+  BotName: string
+
+  /**
+   * 对话流ID
+   */
+  FlowId: string
+
+  /**
+   * 产品拨打时间集合
+   */
+  CallTimeCollection: CallTimeDict
+
+  /**
+   * 是否禁止拨打
+   */
+  BanCall: string
+
+  /**
+   * 禁止拨打起始时间
+   */
+  StartTimeBan: string
+
+  /**
+   * 禁止拨打结束时间
+   */
+  EndTimeBan: string
+
+  /**
+   * 拨打线路集合
+   */
+  PhoneCollection: string
+
+  /**
+   * 重播方式，NON：未接通、LABEL：意向分级，可多选，用竖线分隔：NON|LABEL
+   */
+  CodeType?: string
+
+  /**
+   * 重播值集合，A：强意向、B：中意向、C：低意向、D：无意向、E：在忙、F：未接通、G：无效号码，可多选，用竖线分隔：A|B|C|D|E|F|G
+   */
+  CodeCollection?: string
+
+  /**
+   * 继续拨打次数
+   */
+  CallCount?: number
+
+  /**
+   * 拨打间隔
+   */
+  CallInterval?: number
+
+  /**
+   * 未接通引用短信签名ID
+   */
+  SmsSignId?: string
+
+  /**
+   * 未接通引用短信模板ID
+   */
+  SmsTemplateId?: string
+}
+
+/**
  * UploadFile请求参数结构体
  */
 export interface UploadFileRequest {
@@ -77,29 +157,56 @@ export interface UploadDataJsonResponse {
 }
 
 /**
- * DescribeTaskStatus返回参数结构体
+ * DescribeBotFlow返回参数结构体
  */
-export interface DescribeTaskStatusResponse {
+export interface DescribeBotFlowResponse {
   /**
-   * <p>任务结果：</p><ul style="margin-bottom:0px;"><li>处理中："Uploading Data."</li><li>上传成功："File Uploading Task Success."</li><li>上传失败：具体失败原因</li></ul>
-   */
-  TaskResult?: string
-
-  /**
-   * <p>任务类型：</p><ul style="margin-bottom:0px;"><li>到期/逾期提醒数据上传：002</li><li>到期/逾期提醒停拨数据上传：003</li><li>回访数据上传：004</li><li>回访停拨数据上传：005</li></ul>
-   */
-  TaskType?: string
-
-  /**
-      * 过滤文件下载链接，有过滤数据时才存在。
+      * 机器人对话流列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TaskFileUrl?: string
+  BotFlowList?: Array<BotFlow>
+
+  /**
+      * 短信签名列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SmsSignList?: Array<SmsSign>
+
+  /**
+      * 短信模板列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SmsTemplateList?: Array<SmsTemplate>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DownloadDialogueText请求参数结构体
+ */
+export interface DownloadDialogueTextRequest {
+  /**
+   * 模块名，本接口取值：Report
+   */
+  Module: string
+
+  /**
+   * 操作名，本接口取值：DownloadTextReport
+   */
+  Operation: string
+
+  /**
+   * 报告日期，格式为YYYY-MM-DD
+   */
+  ReportDate: string
+
+  /**
+   * 实例ID
+   */
+  InstId: string
 }
 
 /**
@@ -158,80 +265,58 @@ export interface UploadDataFileResponse {
 }
 
 /**
- * 黑名单申请信息
+ * DownloadRecordList请求参数结构体
  */
-export interface SingleBlackApply {
+export interface DownloadRecordListRequest {
   /**
-   * 黑名单类型，01代表手机号码。
+   * 模块名，本接口取值：Record
    */
-  BlackType: string
+  Module: string
 
   /**
-   * 操作类型，A为新增，D为删除。
+   * 操作名，本接口取值：DownloadList
    */
-  OperationType: string
+  Operation: string
 
   /**
-   * 黑名单值，BlackType为01时，填写11位手机号码。
-   */
-  BlackValue: string
-
-  /**
-   * 备注。
-   */
-  BlackDescription: string
-
-  /**
-   * 黑名单生效截止日期，格式为YYYY-MM-DD，不填默认为永久。
-   */
-  BlackValidDate?: string
-}
-
-/**
- * 录音信息
- */
-export interface SingleRecord {
-  /**
-   * 案件编号。
-   */
-  AccountNum: string
-
-  /**
-   * 外呼日期。
+   * 录音日期，格式为YYYY-MM-DD
    */
   BizDate: string
 
   /**
-   * 开始呼叫时间。
+   * 实例ID
    */
-  CallStartTime: string
+  InstId: string
+}
 
+/**
+ * DescribeFileModel请求参数结构体
+ */
+export interface DescribeFileModelRequest {
   /**
-   * 主叫号码。
+   * 模块名。默认值（固定）：AiApi
    */
-  CallerPhone: string
+  Module: string
 
   /**
-   * 呼叫方向，O为呼出，I为呼入。
+   * 操作名。默认值（固定）：DescribeFileModel
    */
-  Direction: string
+  Operation: string
 
   /**
-   * 通话时长。
+   * 模板文件类型，输入input，停拨stop
    */
-  Duration: number
+  FileType: string
 
   /**
-      * 产品ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ProductId: string
+   * 任务ID，二者必填一个
+   */
+  BotId?: string
 
   /**
-      * 录音下载链接。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RecordCosUrl: string
+   * 任务名称，二者必填一个
+   */
+  BotName?: string
 }
 
 /**
@@ -257,28 +342,53 @@ export interface QueryInstantDataResponse {
 }
 
 /**
- * DownloadRecordList请求参数结构体
+ * 产品拨打时间集合
  */
-export interface DownloadRecordListRequest {
+export interface CallTimeDict {
   /**
-   * 模块名，本接口取值：Record
+   * 周一
    */
-  Module: string
+  Monday: CallTimeInfo
 
   /**
-   * 操作名，本接口取值：DownloadList
+   * 周二
    */
-  Operation: string
+  Tuesday: CallTimeInfo
 
   /**
-   * 录音日期，格式为YYYY-MM-DD
+   * 周三
    */
-  BizDate: string
+  Wednesday: CallTimeInfo
 
   /**
-   * 实例ID
+   * 周四
    */
-  InstId: string
+  Thursday: CallTimeInfo
+
+  /**
+   * 周五
+   */
+  Friday: CallTimeInfo
+
+  /**
+   * 周六
+   */
+  Saturday: CallTimeInfo
+
+  /**
+   * 周日
+   */
+  Sunday: CallTimeInfo
+}
+
+/**
+ * UploadBotFile返回参数结构体
+ */
+export interface UploadBotFileResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -312,23 +422,18 @@ export interface UploadDataJsonRequest {
 }
 
 /**
- * QueryProducts请求参数结构体
+ * 产品拨打时间信息
  */
-export interface QueryProductsRequest {
+export interface CallTimeInfo {
   /**
-   * 模块名。默认值（固定）：Product
+   * 产品开始拨打时间，HHmmss格式
    */
-  Module: string
+  StartTime: string
 
   /**
-   * 操作名。默认值（固定）：QueryProducts
+   * 产品结束拨打时间，HHmmss格式
    */
-  Operation: string
-
-  /**
-   * 实例Id。
-   */
-  InstanceId: string
+  EndTime: string
 }
 
 /**
@@ -390,38 +495,68 @@ export interface DownloadDialogueTextResponse {
 }
 
 /**
- * QueryInstantData请求参数结构体
+ * DescribeBotFlow请求参数结构体
  */
-export interface QueryInstantDataRequest {
+export interface DescribeBotFlowRequest {
   /**
-   * 模块名，本接口取值：Data
+   * 模块名。默认值（固定）：AiApi
    */
   Module: string
 
   /**
-   * 操作名，本接口取值：Query
+   * 操作名。默认值（固定）：GetFlow
    */
   Operation: string
+}
+
+/**
+ * 黑名单申请信息
+ */
+export interface SingleBlackApply {
+  /**
+   * 黑名单类型，01代表手机号码。
+   */
+  BlackType: string
 
   /**
-   * 产品ID
+   * 操作类型，A为新增，D为删除。
    */
-  ProductId?: string
+  OperationType: string
 
   /**
-   * 实例ID，不传默认为系统分配的初始实例
+   * 黑名单值，BlackType为01时，填写11位手机号码。
    */
-  InstanceId?: string
+  BlackValue: string
 
   /**
-   * 查询类型：callRecord 通话记录
+   * 备注。
    */
-  QueryModel?: string
+  BlackDescription: string
 
   /**
-   * 查询参数
+   * 黑名单生效截止日期，格式为YYYY-MM-DD，不填默认为永久。
    */
-  Data?: string
+  BlackValidDate?: string
+}
+
+/**
+ * 机器人对话流信息
+ */
+export interface BotFlow {
+  /**
+   * 对话流ID
+   */
+  BotFlowId: string
+
+  /**
+   * 对话流名称
+   */
+  BotFlowName: string
+
+  /**
+   * 号码组信息列表
+   */
+  PhonePoolList: Array<PhonePool>
 }
 
 /**
@@ -487,6 +622,88 @@ export interface DescribeRecordsRequest {
    * 实例ID，不传默认为系统分配的初始实例
    */
   InstId?: string
+}
+
+/**
+ * 录音信息
+ */
+export interface SingleRecord {
+  /**
+   * 案件编号。
+   */
+  AccountNum: string
+
+  /**
+   * 外呼日期。
+   */
+  BizDate: string
+
+  /**
+   * 开始呼叫时间。
+   */
+  CallStartTime: string
+
+  /**
+   * 主叫号码。
+   */
+  CallerPhone: string
+
+  /**
+   * 呼叫方向，O为呼出，I为呼入。
+   */
+  Direction: string
+
+  /**
+   * 通话时长。
+   */
+  Duration: number
+
+  /**
+      * 产品ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProductId: string
+
+  /**
+      * 录音下载链接。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RecordCosUrl: string
+}
+
+/**
+ * QueryInstantData请求参数结构体
+ */
+export interface QueryInstantDataRequest {
+  /**
+   * 模块名，本接口取值：Data
+   */
+  Module: string
+
+  /**
+   * 操作名，本接口取值：Query
+   */
+  Operation: string
+
+  /**
+   * 产品ID
+   */
+  ProductId?: string
+
+  /**
+   * 实例ID，不传默认为系统分配的初始实例
+   */
+  InstanceId?: string
+
+  /**
+   * 查询类型：callRecord 通话记录
+   */
+  QueryModel?: string
+
+  /**
+   * 查询参数
+   */
+  Data?: string
 }
 
 /**
@@ -636,6 +853,36 @@ export interface DownloadReportResponse {
 }
 
 /**
+ * 短信模板信息
+ */
+export interface SmsTemplate {
+  /**
+   * 短信模板ID
+   */
+  TemplateId: string
+
+  /**
+   * 短信模板名称
+   */
+  TemplateName: string
+}
+
+/**
+ * 号码组信息
+ */
+export interface PhonePool {
+  /**
+   * 号码组ID
+   */
+  PoolId: string
+
+  /**
+   * 号码组名称
+   */
+  PoolName: string
+}
+
+/**
  * DownloadRecordList返回参数结构体
  */
 export interface DownloadRecordListResponse {
@@ -648,6 +895,56 @@ export interface DownloadRecordListResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateBotTask返回参数结构体
+ */
+export interface CreateBotTaskResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UploadBotFile请求参数结构体
+ */
+export interface UploadBotFileRequest {
+  /**
+   * 模块名。默认值（固定）：AiApi
+   */
+  Module: string
+
+  /**
+   * 操作名。默认值（固定）：Upload
+   */
+  Operation: string
+
+  /**
+   * 文件类型，输入input，停拨stop
+   */
+  FileType: string
+
+  /**
+   * 文件链接
+   */
+  FileUrl: string
+
+  /**
+   * 文件名
+   */
+  FileName: string
+
+  /**
+   * 任务ID，二者必填一个
+   */
+  BotId?: string
+
+  /**
+   * 任务名称，二者必填一个
+   */
+  BotName?: string
 }
 
 /**
@@ -688,6 +985,21 @@ export interface UploadDataFileRequest {
    * 实例ID，不传默认为系统分配的初始实例。
    */
   InstId?: string
+}
+
+/**
+ * DescribeFileModel返回参数结构体
+ */
+export interface DescribeFileModelResponse {
+  /**
+   * 模板下载链接
+   */
+  CosUrl?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -749,6 +1061,41 @@ export interface ProductQueryInfo {
 }
 
 /**
+ * QueryProducts请求参数结构体
+ */
+export interface QueryProductsRequest {
+  /**
+   * 模块名。默认值（固定）：Product
+   */
+  Module: string
+
+  /**
+   * 操作名。默认值（固定）：QueryProducts
+   */
+  Operation: string
+
+  /**
+   * 实例Id。
+   */
+  InstanceId: string
+}
+
+/**
+ * 短信签名信息
+ */
+export interface SmsSign {
+  /**
+   * 短信签名ID
+   */
+  SignId: string
+
+  /**
+   * 短信签名名称
+   */
+  SignName: string
+}
+
+/**
  * QueryProducts返回参数结构体
  */
 export interface QueryProductsResponse {
@@ -785,26 +1132,27 @@ export interface DescribeRecordsResponse {
 }
 
 /**
- * DownloadDialogueText请求参数结构体
+ * DescribeTaskStatus返回参数结构体
  */
-export interface DownloadDialogueTextRequest {
+export interface DescribeTaskStatusResponse {
   /**
-   * 模块名，本接口取值：Report
+   * <p>任务结果：</p><ul style="margin-bottom:0px;"><li>处理中："Uploading Data."</li><li>上传成功："File Uploading Task Success."</li><li>上传失败：具体失败原因</li></ul>
    */
-  Module: string
+  TaskResult?: string
 
   /**
-   * 操作名，本接口取值：DownloadTextReport
+   * <p>任务类型：</p><ul style="margin-bottom:0px;"><li>到期/逾期提醒数据上传：002</li><li>到期/逾期提醒停拨数据上传：003</li><li>回访数据上传：004</li><li>回访停拨数据上传：005</li></ul>
    */
-  Operation: string
+  TaskType?: string
 
   /**
-   * 报告日期，格式为YYYY-MM-DD
-   */
-  ReportDate: string
+      * 过滤文件下载链接，有过滤数据时才存在。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskFileUrl?: string
 
   /**
-   * 实例ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  InstId: string
+  RequestId?: string
 }

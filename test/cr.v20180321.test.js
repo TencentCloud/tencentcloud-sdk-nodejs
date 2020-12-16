@@ -88,9 +88,9 @@ it("cr.v20180321.DescribeTaskStatus", async function () {
     }
 })
 
-it("cr.v20180321.UploadDataFile", async function () {
+it("cr.v20180321.DescribeBotFlow", async function () {
     try {
-       const data = await client.UploadDataFile({})
+       const data = await client.DescribeBotFlow({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -101,6 +101,36 @@ it("cr.v20180321.UploadDataFile", async function () {
 it("cr.v20180321.QueryProducts", async function () {
     try {
        const data = await client.QueryProducts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cr.v20180321.UploadBotFile", async function () {
+    try {
+       const data = await client.UploadBotFile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cr.v20180321.UploadDataFile", async function () {
+    try {
+       const data = await client.UploadDataFile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cr.v20180321.DescribeFileModel", async function () {
+    try {
+       const data = await client.DescribeFileModel({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -141,6 +171,16 @@ it("cr.v20180321.ApplyBlackList", async function () {
 it("cr.v20180321.ApplyCreditAudit", async function () {
     try {
        const data = await client.ApplyCreditAudit({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cr.v20180321.CreateBotTask", async function () {
+    try {
+       const data = await client.CreateBotTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

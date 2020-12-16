@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DeleteGameServerSessionQueueRequest, CreateAssetResponse, GetInstanceAccessResponse, ListAliasesResponse, DeleteGameServerSessionQueueResponse, DescribeFleetAttributesRequest, ResolveAliasRequest, StartGameServerSessionPlacementResponse, DescribeFleetStatisticDetailsRequest, DescribeAssetSystemsRequest, GetInstanceAccessRequest, CreateFleetRequest, StartFleetActionsRequest, UpdateFleetPortSettingsResponse, DescribeInstancesResponse, ListFleetsResponse, DeleteAssetResponse, DescribeFleetUtilizationResponse, DescribeScalingPoliciesRequest, DeleteFleetRequest, DetachCcnInstancesResponse, DescribeFleetPortSettingsResponse, DescribeUserQuotasRequest, UpdateAssetRequest, UpdateFleetPortSettingsRequest, DescribeFleetStatisticFlowsRequest, UpdateAliasRequest, JoinGameServerSessionBatchRequest, UpdateFleetCapacityResponse, DescribeRuntimeConfigurationResponse, CreateGameServerSessionRequest, UpdateAliasResponse, UpdateGameServerSessionQueueResponse, DescribeGameServerSessionQueuesRequest, GetUploadFederationTokenResponse, DeleteScalingPolicyResponse, DescribeFleetStatisticSummaryRequest, ResolveAliasResponse, DescribeInstancesExtendResponse, UpdateRuntimeConfigurationResponse, DescribeCcnInstancesResponse, DescribeInstanceLimitResponse, DescribeAssetResponse, DescribeFleetStatisticSummaryResponse, DescribeGameServerSessionQueuesResponse, DeleteAliasRequest, DescribeAssetSystemsResponse, DescribeFleetAttributesResponse, GetUploadCredentialsResponse, AttachCcnInstancesRequest, DescribeAssetsRequest, SetServerWeightResponse, DescribeGameServerSessionsRequest, GetUploadCredentialsRequest, DescribePlayerSessionsRequest, DeleteAssetRequest, DescribeAssetsResponse, DescribeFleetCapacityRequest, DescribeCcnInstancesRequest, DescribeFleetStatisticDetailsResponse, UpdateGameServerSessionQueueRequest, JoinGameServerSessionResponse, DescribeGameServerSessionPlacementRequest, SetServerWeightRequest, GetGameServerSessionLogUrlResponse, DeleteFleetResponse, StartGameServerSessionPlacementRequest, DescribeGameServerSessionPlacementResponse, CreateAliasResponse, ListFleetsRequest, UpdateFleetAttributesRequest, AttachCcnInstancesResponse, DescribeFleetPortSettingsRequest, StopFleetActionsResponse, DeleteAliasResponse, DeleteScalingPolicyRequest, DescribeAliasResponse, StopFleetActionsRequest, SearchGameServerSessionsRequest, DescribePlayerSessionsResponse, DescribeUserQuotaRequest, DescribeInstanceLimitRequest, CreateGameServerSessionQueueResponse, DescribeInstanceTypesRequest, StopGameServerSessionPlacementRequest, UpdateFleetNameResponse, DescribeAliasRequest, CreateAliasRequest, UpdateGameServerSessionRequest, ListAliasesRequest, CreateAssetRequest, DescribeGameServerSessionDetailsResponse, GetGameServerSessionLogUrlRequest, CreateGameServerSessionResponse, DescribeInstancesRequest, DescribeFleetStatisticFlowsResponse, UpdateFleetNameRequest, CreateFleetResponse, UpdateFleetAttributesResponse, DescribeFleetUtilizationRequest, DescribeGameServerSessionDetailsRequest, UpdateRuntimeConfigurationRequest, CreateAssetWithImageResponse, DescribeAssetRequest, DescribeInstancesExtendRequest, DescribeGameServerSessionsResponse, StartFleetActionsResponse, JoinGameServerSessionRequest, DescribeUserQuotasResponse, GetUploadFederationTokenRequest, DescribeInstanceTypesResponse, SearchGameServerSessionsResponse, DescribeFleetEventsResponse, DescribeFleetCapacityResponse, DescribeUserQuotaResponse, DescribeFleetEventsRequest, UpdateAssetResponse, CreateAssetWithImageRequest, PutScalingPolicyResponse, CreateGameServerSessionQueueRequest, DescribeRuntimeConfigurationRequest, DescribeScalingPoliciesResponse, DetachCcnInstancesRequest, UpdateGameServerSessionResponse, UpdateFleetCapacityRequest, JoinGameServerSessionBatchResponse, PutScalingPolicyRequest, StopGameServerSessionPlacementResponse } from "./gse_models";
+import { DeleteGameServerSessionQueueRequest, CreateAssetResponse, GetInstanceAccessResponse, ListAliasesResponse, DeleteGameServerSessionQueueResponse, DescribeFleetAttributesRequest, ResolveAliasRequest, StartGameServerSessionPlacementResponse, DescribeFleetStatisticDetailsRequest, DescribeAssetSystemsRequest, GetInstanceAccessRequest, CreateFleetRequest, StartFleetActionsRequest, UpdateFleetPortSettingsResponse, DescribeInstancesResponse, ListFleetsResponse, DeleteAssetResponse, DescribeFleetUtilizationResponse, DescribeScalingPoliciesRequest, DeleteFleetRequest, DetachCcnInstancesResponse, DescribeFleetPortSettingsResponse, DescribeUserQuotasRequest, UpdateAssetRequest, UpdateFleetPortSettingsRequest, UpdateAliasRequest, JoinGameServerSessionBatchRequest, UpdateFleetCapacityResponse, DescribeRuntimeConfigurationResponse, CreateGameServerSessionRequest, UpdateAliasResponse, UpdateGameServerSessionQueueResponse, DescribeGameServerSessionQueuesRequest, GetUploadFederationTokenResponse, DeleteScalingPolicyResponse, DescribeFleetStatisticSummaryRequest, ResolveAliasResponse, DescribeInstancesExtendResponse, UpdateRuntimeConfigurationResponse, DescribeCcnInstancesResponse, DescribeInstanceLimitResponse, DescribeAssetResponse, DescribeFleetStatisticSummaryResponse, DescribeGameServerSessionQueuesResponse, DeleteAliasRequest, DescribeAssetSystemsResponse, DescribeFleetAttributesResponse, GetUploadCredentialsResponse, AttachCcnInstancesRequest, DescribeAssetsRequest, SetServerWeightResponse, DescribeGameServerSessionsRequest, GetUploadCredentialsRequest, DescribePlayerSessionsRequest, DeleteAssetRequest, DescribeAssetsResponse, DescribeFleetCapacityRequest, DescribeCcnInstancesRequest, DescribeFleetStatisticDetailsResponse, UpdateGameServerSessionQueueRequest, JoinGameServerSessionResponse, DescribeGameServerSessionPlacementRequest, SetServerWeightRequest, GetGameServerSessionLogUrlResponse, DeleteFleetResponse, StartGameServerSessionPlacementRequest, DescribeGameServerSessionPlacementResponse, CreateAliasResponse, ListFleetsRequest, UpdateFleetAttributesRequest, AttachCcnInstancesResponse, DescribeFleetPortSettingsRequest, StopFleetActionsResponse, DeleteAliasResponse, DeleteScalingPolicyRequest, DescribeAliasResponse, StopFleetActionsRequest, SearchGameServerSessionsRequest, DescribePlayerSessionsResponse, DescribeUserQuotaRequest, DescribeInstanceLimitRequest, CreateGameServerSessionQueueResponse, DescribeInstanceTypesRequest, StopGameServerSessionPlacementRequest, UpdateFleetNameResponse, DescribeAliasRequest, CreateAliasRequest, CopyFleetResponse, UpdateGameServerSessionRequest, ListAliasesRequest, CreateAssetRequest, DescribeGameServerSessionDetailsResponse, GetGameServerSessionLogUrlRequest, CreateGameServerSessionResponse, DescribeInstancesRequest, DescribeFleetStatisticFlowsResponse, UpdateFleetNameRequest, CreateFleetResponse, UpdateFleetAttributesResponse, DescribeFleetUtilizationRequest, DescribeInstanceTypesResponse, DescribeGameServerSessionDetailsRequest, UpdateRuntimeConfigurationRequest, CreateAssetWithImageResponse, DescribeAssetRequest, DescribeInstancesExtendRequest, DescribeGameServerSessionsResponse, StartFleetActionsResponse, JoinGameServerSessionRequest, DescribeUserQuotasResponse, GetUploadFederationTokenRequest, CopyFleetRequest, SearchGameServerSessionsResponse, DescribeFleetEventsResponse, DescribeFleetCapacityResponse, DescribeUserQuotaResponse, DescribeFleetEventsRequest, UpdateAssetResponse, CreateAssetWithImageRequest, PutScalingPolicyResponse, CreateGameServerSessionQueueRequest, DescribeRuntimeConfigurationRequest, DescribeScalingPoliciesResponse, DetachCcnInstancesRequest, UpdateGameServerSessionResponse, UpdateFleetCapacityRequest, JoinGameServerSessionBatchResponse, PutScalingPolicyRequest, StopGameServerSessionPlacementResponse, DescribeFleetStatisticFlowsRequest } from "./gse_models";
 /**
  * gse client
  * @class
@@ -56,6 +56,10 @@ export declare class Client extends AbstractClient {
      * 本接口（CreateGameServerSessionQueue）用于创建游戏服务器会话队列。
      */
     CreateGameServerSessionQueue(req: CreateGameServerSessionQueueRequest, cb?: (error: string, rep: CreateGameServerSessionQueueResponse) => void): Promise<CreateGameServerSessionQueueResponse>;
+    /**
+     * 本接口（UpdateGameServerSession）用于更新游戏服务器会话。
+     */
+    UpdateGameServerSession(req: UpdateGameServerSessionRequest, cb?: (error: string, rep: UpdateGameServerSessionResponse) => void): Promise<UpdateGameServerSessionResponse>;
     /**
      * 本接口（DeleteAsset）用于删除生成包。
      */
@@ -194,9 +198,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
      */
     DescribeScalingPolicies(req: DescribeScalingPoliciesRequest, cb?: (error: string, rep: DescribeScalingPoliciesResponse) => void): Promise<DescribeScalingPoliciesResponse>;
     /**
-     * 本接口（DescribeFleetStatisticDetails）用于查询服务部署统计详情。
+     * 本接口（CopyFleet）用于复制服务器舰队。
      */
-    DescribeFleetStatisticDetails(req: DescribeFleetStatisticDetailsRequest, cb?: (error: string, rep: DescribeFleetStatisticDetailsResponse) => void): Promise<DescribeFleetStatisticDetailsResponse>;
+    CopyFleet(req: CopyFleetRequest, cb?: (error: string, rep: CopyFleetResponse) => void): Promise<CopyFleetResponse>;
     /**
      * 本接口（DescribeGameServerSessions）用于查询游戏服务器会话列表。
      */
@@ -317,9 +321,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
      */
     SearchGameServerSessions(req: SearchGameServerSessionsRequest, cb?: (error: string, rep: SearchGameServerSessionsResponse) => void): Promise<SearchGameServerSessionsResponse>;
     /**
-     * 本接口（DescribeInstances）用于查询服务器实例列表。
+     * 本接口（DescribeFleetStatisticDetails）用于查询服务部署统计详情。
      */
-    DescribeInstances(req: DescribeInstancesRequest, cb?: (error: string, rep: DescribeInstancesResponse) => void): Promise<DescribeInstancesResponse>;
+    DescribeFleetStatisticDetails(req: DescribeFleetStatisticDetailsRequest, cb?: (error: string, rep: DescribeFleetStatisticDetailsResponse) => void): Promise<DescribeFleetStatisticDetailsResponse>;
     /**
      * 本接口（DescribeAssets）用于获取生成包列表。
      */
@@ -369,9 +373,9 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
      */
     DescribeFleetUtilization(req: DescribeFleetUtilizationRequest, cb?: (error: string, rep: DescribeFleetUtilizationResponse) => void): Promise<DescribeFleetUtilizationResponse>;
     /**
-     * 本接口（UpdateGameServerSession）用于更新游戏服务器会话。
+     * 本接口（DescribeInstances）用于查询服务器实例列表。
      */
-    UpdateGameServerSession(req: UpdateGameServerSessionRequest, cb?: (error: string, rep: UpdateGameServerSessionResponse) => void): Promise<UpdateGameServerSessionResponse>;
+    DescribeInstances(req: DescribeInstancesRequest, cb?: (error: string, rep: DescribeInstancesResponse) => void): Promise<DescribeInstancesResponse>;
     /**
      * 本接口（UpdateFleetPortSettings）用于更新服务器舰队安全组。
      */

@@ -1707,6 +1707,12 @@ export interface DBInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   DcnDstNum: number
+
+  /**
+      * 1： 主实例（独享型）, 2: 主实例, 3： 灾备实例, 4： 灾备实例（独享型）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceType: number
 }
 
 /**

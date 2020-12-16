@@ -19,9 +19,11 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   AudioStreamInfo,
-  DescribeTeamsRequest,
+  ModifyMaterialResponse,
   DeleteProjectRequest,
+  ExportVideoByVideoSegmentationDataResponse,
   ImportMaterialResponse,
+  ExportVideoByVideoSegmentationDataRequest,
   DescribeTeamsResponse,
   DescribeTaskDetailResponse,
   ExportVideoEditProjectRequest,
@@ -31,12 +33,13 @@ import {
   IntegerRange,
   SearchMaterialRequest,
   DeleteTeamResponse,
+  VideoSegmentationProjectInput,
   RevokeResourceAuthorizationResponse,
   DescribeTasksResponse,
   ProjectInfo,
   VideoTrackItem,
   DeleteTeamRequest,
-  ModifyMaterialResponse,
+  DescribeTeamsRequest,
   LinkMaterial,
   SwitcherProjectInput,
   FlattenListMediaRequest,
@@ -79,6 +82,7 @@ import {
   PenguinMediaPlatformPublishInfo,
   ImageMaterial,
   DescribeClassRequest,
+  MediaMetaData,
   MoveClassRequest,
   DeleteTeamMembersResponse,
   MoveClassResponse,
@@ -101,6 +105,7 @@ import {
   ListMediaRequest,
   ModifyTeamResponse,
   DeleteLoginStatusRequest,
+  GenerateVideoSegmentationSchemeByAiRequest,
   DeleteTeamMembersRequest,
   DescribeSharedSpaceResponse,
   SearchScope,
@@ -123,7 +128,7 @@ import {
   MaterialInfo,
   LoginStatusInfo,
   DescribeClassResponse,
-  MediaMetaData,
+  GenerateVideoSegmentationSchemeByAiResponse,
   DescribeSharedSpaceRequest,
   KuaishouPublishInfo,
   TaskBaseInfo,
@@ -184,6 +189,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSharedSpaceResponse) => void
   ): Promise<DescribeSharedSpaceResponse> {
     return this.request("DescribeSharedSpace", req, cb)
+  }
+
+  /**
+   * 发起视频智能拆条任务，支持智能生成和平精英集锦、王者荣耀集锦、足球集锦、篮球集锦 、人物集锦、新闻拆条等任务。
+   */
+  async GenerateVideoSegmentationSchemeByAi(
+    req: GenerateVideoSegmentationSchemeByAiRequest,
+    cb?: (error: string, rep: GenerateVideoSegmentationSchemeByAiResponse) => void
+  ): Promise<GenerateVideoSegmentationSchemeByAiResponse> {
+    return this.request("GenerateVideoSegmentationSchemeByAi", req, cb)
+  }
+
+  /**
+   * 使用视频智能拆条数据导出视频，将指定的视频拆条片段导出为一个视频。
+   */
+  async ExportVideoByVideoSegmentationData(
+    req: ExportVideoByVideoSegmentationDataRequest,
+    cb?: (error: string, rep: ExportVideoByVideoSegmentationDataResponse) => void
+  ): Promise<ExportVideoByVideoSegmentationDataResponse> {
+    return this.request("ExportVideoByVideoSegmentationData", req, cb)
   }
 
   /**

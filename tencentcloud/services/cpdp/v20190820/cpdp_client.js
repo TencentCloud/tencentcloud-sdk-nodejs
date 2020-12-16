@@ -253,10 +253,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ApplyReWithdrawal", req, cb);
     }
     /**
+     * 智能代发-单笔代发转账接口
+     */
+    async TransferSinglePay(req, cb) {
+        return this.request("TransferSinglePay", req, cb);
+    }
+    /**
      * 跨境-付款人申请。通过该接口提交付款人信息并进行 kyc 审核。
      */
     async ApplyPayerInfo(req, cb) {
         return this.request("ApplyPayerInfo", req, cb);
+    }
+    /**
+     * 撤销会员在途充值(经第三方支付渠道)
+     */
+    async RevokeMemberRechargeThirdPay(req, cb) {
+        return this.request("RevokeMemberRechargeThirdPay", req, cb);
     }
     /**
      * 跨境-对接方账户余额查询
@@ -337,10 +349,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RevResigterBillSupportWithdraw", req, cb);
     }
     /**
-     * 撤销会员在途充值(经第三方支付渠道)
+     * 智能代发-单笔代发转账查询接口
      */
-    async RevokeMemberRechargeThirdPay(req, cb) {
-        return this.request("RevokeMemberRechargeThirdPay", req, cb);
+    async QueryTransferResult(req, cb) {
+        return this.request("QueryTransferResult", req, cb);
     }
     /**
      * 查询银行时间段内交易明细。查询时间段的会员成功交易。

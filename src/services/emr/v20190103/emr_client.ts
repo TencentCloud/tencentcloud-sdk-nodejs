@@ -19,45 +19,61 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   MultiDiskMC,
+  ClusterSetting,
+  JobResult,
   EmrProductConfigOutter,
   LoginSettings,
+  RunJobFlowRequest,
   VPCSettings,
   PriceResource,
   ScaleOutInstanceResponse,
   InquiryPriceCreateInstanceRequest,
   Resource,
   TerminateInstanceRequest,
+  TerminateTasksRequest,
   PodVolume,
   TerminateInstanceResponse,
   CreateInstanceResponse,
-  PodSpec,
+  PersistentVolumeContext,
   InquiryPriceRenewInstanceResponse,
-  TerminateTasksRequest,
+  DescribeJobFlowRequest,
   InquiryPriceCreateInstanceResponse,
+  BootstrapAction,
   HostVolumeContext,
+  Step,
+  InstanceChargePrepaid,
   DescribeClusterNodesRequest,
   PreExecuteFileSettings,
   CreateInstanceRequest,
+  JobFlowResourceSpec,
+  Execution,
   DescribeInstancesResponse,
   InquiryPriceScaleOutInstanceRequest,
   Tag,
   Placement,
+  MetaDbInfo,
   DescribeInstancesRequest,
   CustomMetaInfo,
+  DiskSpec,
   InquiryPriceUpdateInstanceRequest,
   COSSettings,
   ClusterInstancesInfo,
+  PodSpec,
   MultiDisk,
+  RunJobFlowResponse,
   SearchItem,
   InquiryPriceScaleOutInstanceResponse,
   OutterResource,
   UpdateInstanceSettings,
+  Configuration,
   TerminateTasksResponse,
   DescribeClusterNodesResponse,
   NodeHardwareInfo,
   InquiryPriceUpdateInstanceResponse,
   NewResourceSpec,
-  PersistentVolumeContext,
+  DiskGroup,
+  JobFlowResource,
+  DescribeJobFlowResponse,
   InquiryPriceRenewInstanceRequest,
   CdbInfo,
   ScaleOutInstanceRequest,
@@ -153,6 +169,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询流程任务
+   */
+  async DescribeJobFlow(
+    req: DescribeJobFlowRequest,
+    cb?: (error: string, rep: DescribeJobFlowResponse) => void
+  ): Promise<DescribeJobFlowResponse> {
+    return this.request("DescribeJobFlow", req, cb)
+  }
+
+  /**
    * 实例扩容
    */
   async ScaleOutInstance(
@@ -160,6 +186,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ScaleOutInstanceResponse) => void
   ): Promise<ScaleOutInstanceResponse> {
     return this.request("ScaleOutInstance", req, cb)
+  }
+
+  /**
+   * 创建流程作业
+   */
+  async RunJobFlow(
+    req: RunJobFlowRequest,
+    cb?: (error: string, rep: RunJobFlowResponse) => void
+  ): Promise<RunJobFlowResponse> {
+    return this.request("RunJobFlow", req, cb)
   }
 
   /**

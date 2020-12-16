@@ -18,19 +18,9 @@ const client = new tencentcloud.ams.v20200608.Client({
 })
 describe("ams.v20200608.test.js", function () {
 
-it("ams.v20200608.CreateAudioModerationTask", async function () {
+it("ams.v20200608.DescribeAudioStat", async function () {
     try {
-       const data = await client.CreateAudioModerationTask({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ams.v20200608.DescribeBizConfig", async function () {
-    try {
-       const data = await client.DescribeBizConfig({})
+       const data = await client.DescribeAudioStat({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,9 +48,39 @@ it("ams.v20200608.CreateBizConfig", async function () {
     }
 })
 
+it("ams.v20200608.DescribeBizConfig", async function () {
+    try {
+       const data = await client.DescribeBizConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ams.v20200608.CancelTask", async function () {
     try {
        const data = await client.CancelTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ams.v20200608.CreateAudioModerationTask", async function () {
+    try {
+       const data = await client.CreateAudioModerationTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ams.v20200608.DescribeAmsList", async function () {
+    try {
+       const data = await client.DescribeAmsList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ScaleOutInstanceResponse, InquiryPriceCreateInstanceRequest, TerminateInstanceRequest, TerminateInstanceResponse, CreateInstanceResponse, InquiryPriceRenewInstanceResponse, TerminateTasksRequest, InquiryPriceCreateInstanceResponse, DescribeClusterNodesRequest, CreateInstanceRequest, DescribeInstancesResponse, InquiryPriceScaleOutInstanceRequest, DescribeInstancesRequest, InquiryPriceUpdateInstanceRequest, InquiryPriceScaleOutInstanceResponse, TerminateTasksResponse, DescribeClusterNodesResponse, InquiryPriceUpdateInstanceResponse, InquiryPriceRenewInstanceRequest, ScaleOutInstanceRequest } from "./emr_models";
+import { RunJobFlowRequest, ScaleOutInstanceResponse, InquiryPriceCreateInstanceRequest, TerminateInstanceRequest, TerminateTasksRequest, TerminateInstanceResponse, CreateInstanceResponse, InquiryPriceRenewInstanceResponse, DescribeJobFlowRequest, InquiryPriceCreateInstanceResponse, DescribeClusterNodesRequest, CreateInstanceRequest, DescribeInstancesResponse, InquiryPriceScaleOutInstanceRequest, DescribeInstancesRequest, InquiryPriceUpdateInstanceRequest, RunJobFlowResponse, InquiryPriceScaleOutInstanceResponse, TerminateTasksResponse, DescribeClusterNodesResponse, InquiryPriceUpdateInstanceResponse, DescribeJobFlowResponse, InquiryPriceRenewInstanceRequest, ScaleOutInstanceRequest } from "./emr_models";
 /**
  * emr client
  * @class
@@ -40,9 +40,17 @@ export declare class Client extends AbstractClient {
      */
     InquiryPriceScaleOutInstance(req: InquiryPriceScaleOutInstanceRequest, cb?: (error: string, rep: InquiryPriceScaleOutInstanceResponse) => void): Promise<InquiryPriceScaleOutInstanceResponse>;
     /**
+     * 查询流程任务
+     */
+    DescribeJobFlow(req: DescribeJobFlowRequest, cb?: (error: string, rep: DescribeJobFlowResponse) => void): Promise<DescribeJobFlowResponse>;
+    /**
      * 实例扩容
      */
     ScaleOutInstance(req: ScaleOutInstanceRequest, cb?: (error: string, rep: ScaleOutInstanceResponse) => void): Promise<ScaleOutInstanceResponse>;
+    /**
+     * 创建流程作业
+     */
+    RunJobFlow(req: RunJobFlowRequest, cb?: (error: string, rep: RunJobFlowResponse) => void): Promise<RunJobFlowResponse>;
     /**
      * 销毁EMR实例。此接口仅支持弹性MapReduce正式计费版本。
      */

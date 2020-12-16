@@ -3462,7 +3462,7 @@ export interface InquiryPriceUpgradeInstancesRequest {
       */
     ProtectMode?: number;
     /**
-      * 部署策略，取值范围：HA-高可用版两节点，FE-金融版三节点；默认值根据数据复制方式决定，数据复制方式为强同步复制时默认值为FE，数据复制方式非强同步时默认值为HA。
+      * 部署策略，取值范围：HA-高可用版
       */
     DeviceType?: string;
 }
@@ -3668,7 +3668,7 @@ export interface DescribeDBPriceRequest {
       */
     ProtectMode?: number;
     /**
-      * 部署策略，取值范围：HA-高可用版两节点，FE-金融版三节点；默认值根据数据复制方式决定，数据复制方式为强同步复制时默认值为FE，数据复制方式非强同步时默认值为HA。
+      * 部署策略，取值范围：HA-高可用版
       */
     DeviceType?: string;
 }
@@ -5764,7 +5764,7 @@ export interface InstanceInfo {
       */
     MasterInfo?: MasterInfo;
     /**
-      * 实例类型，可能的返回值：“HA”-高可用版；“FE”-金融版；“BASIC”-基础版
+      * 实例类型
       */
     DeviceType: string;
     /**

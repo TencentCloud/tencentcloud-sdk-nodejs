@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { UploadFileRequest, UploadFileResponse, UploadDataJsonResponse, DescribeTaskStatusResponse, DownloadReportRequest, ApplyCreditAuditResponse, UploadDataFileResponse, QueryInstantDataResponse, DownloadRecordListRequest, UploadDataJsonRequest, QueryProductsRequest, DescribeCreditResultResponse, DownloadDialogueTextResponse, QueryInstantDataRequest, ApplyBlackListResponse, DescribeRecordsRequest, DescribeCreditResultRequest, ApplyBlackListRequest, ApplyCreditAuditRequest, DownloadReportResponse, DownloadRecordListResponse, UploadDataFileRequest, DescribeTaskStatusRequest, QueryProductsResponse, DescribeRecordsResponse, DownloadDialogueTextRequest } from "./cr_models";
+import { CreateBotTaskRequest, UploadFileRequest, UploadFileResponse, UploadDataJsonResponse, DescribeBotFlowResponse, DownloadDialogueTextRequest, DownloadReportRequest, ApplyCreditAuditResponse, UploadDataFileResponse, DownloadRecordListRequest, DescribeFileModelRequest, QueryInstantDataResponse, UploadBotFileResponse, UploadDataJsonRequest, DescribeCreditResultResponse, DownloadDialogueTextResponse, DescribeBotFlowRequest, ApplyBlackListResponse, DescribeRecordsRequest, QueryInstantDataRequest, DescribeCreditResultRequest, ApplyBlackListRequest, ApplyCreditAuditRequest, DownloadReportResponse, DownloadRecordListResponse, CreateBotTaskResponse, UploadBotFileRequest, UploadDataFileRequest, DescribeFileModelResponse, DescribeTaskStatusRequest, QueryProductsRequest, QueryProductsResponse, DescribeRecordsResponse, DescribeTaskStatusResponse } from "./cr_models";
 /**
  * cr client
  * @class
@@ -36,13 +36,25 @@ export declare class Client extends AbstractClient {
      */
     DescribeTaskStatus(req: DescribeTaskStatusRequest, cb?: (error: string, rep: DescribeTaskStatusResponse) => void): Promise<DescribeTaskStatusResponse>;
     /**
-     * 上传文件，接口返回数据任务ID，支持xlsx、xls、csv、zip格式。
+     * 查询机器人对话流
      */
-    UploadDataFile(req: UploadDataFileRequest, cb?: (error: string, rep: UploadDataFileResponse) => void): Promise<UploadDataFileResponse>;
+    DescribeBotFlow(req: DescribeBotFlowRequest, cb?: (error: string, rep: DescribeBotFlowResponse) => void): Promise<DescribeBotFlowResponse>;
     /**
      * 查询产品列表
      */
     QueryProducts(req: QueryProductsRequest, cb?: (error: string, rep: QueryProductsResponse) => void): Promise<QueryProductsResponse>;
+    /**
+     * 上传机器人文件
+     */
+    UploadBotFile(req: UploadBotFileRequest, cb?: (error: string, rep: UploadBotFileResponse) => void): Promise<UploadBotFileResponse>;
+    /**
+     * 上传文件，接口返回数据任务ID，支持xlsx、xls、csv、zip格式。
+     */
+    UploadDataFile(req: UploadDataFileRequest, cb?: (error: string, rep: UploadDataFileResponse) => void): Promise<UploadDataFileResponse>;
+    /**
+     * 查询机器人文件模板
+     */
+    DescribeFileModel(req: DescribeFileModelRequest, cb?: (error: string, rep: DescribeFileModelResponse) => void): Promise<DescribeFileModelResponse>;
     /**
      * 实时数据查询
      */
@@ -60,4 +72,8 @@ export declare class Client extends AbstractClient {
      * 提交信审外呼申请，返回当次请求日期。
      */
     ApplyCreditAudit(req: ApplyCreditAuditRequest, cb?: (error: string, rep: ApplyCreditAuditResponse) => void): Promise<ApplyCreditAuditResponse>;
+    /**
+     * 创建机器人任务
+     */
+    CreateBotTask(req: CreateBotTaskRequest, cb?: (error: string, rep: CreateBotTaskResponse) => void): Promise<CreateBotTaskResponse>;
 }

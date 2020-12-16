@@ -124,6 +124,7 @@ import {
   InstanceNode,
   StartupInstanceResponse,
   DescribeInstanceDTSInstanceInfo,
+  ResourceTag,
   AssociateSecurityGroupsResponse,
   ReplicaGroup,
   DescribeTaskInfoResponse,

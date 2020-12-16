@@ -18,13 +18,22 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  Filters,
+  Overview,
   RiskDetails,
+  DescribeTextStatRequest,
   TextModerationRequest,
-  DetailResults,
   AccountTipoffAccessRequest,
+  TextLib,
+  TrendCount,
+  DescribeTextLibResponse,
+  DetailResults,
+  EvilCount,
   Device,
   TipoffResponse,
   AccountTipoffAccessResponse,
+  DescribeTextLibRequest,
+  DescribeTextStatResponse,
   TextModerationResponse,
   User,
 } from "./tms_models"
@@ -36,6 +45,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("tms.tencentcloudapi.com", "2020-07-13", clientConfig)
+  }
+
+  /**
+   * 控制台识别统计
+   */
+  async DescribeTextStat(
+    req: DescribeTextStatRequest,
+    cb?: (error: string, rep: DescribeTextStatResponse) => void
+  ): Promise<DescribeTextStatResponse> {
+    return this.request("DescribeTextStat", req, cb)
   }
 
   /**
@@ -56,5 +75,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: TextModerationResponse) => void
   ): Promise<TextModerationResponse> {
     return this.request("TextModeration", req, cb)
+  }
+
+  /**
+   * 控制台获取用户词库列表
+   */
+  async DescribeTextLib(
+    req: DescribeTextLibRequest,
+    cb?: (error: string, rep: DescribeTextLibResponse) => void
+  ): Promise<DescribeTextLibResponse> {
+    return this.request("DescribeTextLib", req, cb)
   }
 }

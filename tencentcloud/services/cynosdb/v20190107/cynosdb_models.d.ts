@@ -1146,6 +1146,20 @@ export interface CynosdbInstance {
       * 续费标志
       */
     RenewFlag: number;
+    /**
+      * serverless实例cpu下限
+      */
+    MinCpu: number;
+    /**
+      * serverless实例cpu上限
+      */
+    MaxCpu: number;
+    /**
+      * serverless实例状态, 可选值：
+resume
+pause
+      */
+    ServerlessStatus: string;
 }
 /**
  * DescribeAccounts返回参数结构体
@@ -1519,6 +1533,31 @@ timeRollback，时间点回档
       * 集群创建需要绑定的tag数组信息
       */
     ResourceTags?: Array<Tag>;
+    /**
+      * Db类型
+当DbType为MYSQL时可选(默认NORMAL)：
+<li>NORMAL</li>
+<li>SERVERLESS</li>
+      */
+    DbMode?: string;
+    /**
+      * 当DbMode为SEVERLESS时的cpu最小值，可选范围参考DescribeServerlessInstanceSpecs接口返回
+      */
+    MinCpu?: number;
+    /**
+      * 当DbMode为SEVERLESS时的cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回
+      */
+    MaxCpu?: number;
+    /**
+      * 当DbMode为SEVERLESS时，指定集群是否自动暂停，可选范围
+<li>yes</li>
+<li>no</li>
+      */
+    AutoPause?: string;
+    /**
+      * 当DbMode为SEVERLESS时，指定集群自动暂停的延迟，可选范围[60,INF]
+      */
+    AutoPauseDelay?: number;
 }
 /**
  * 集群信息
@@ -1628,6 +1667,16 @@ export interface CynosdbCluster {
       * 集群绑定的tag数组
       */
     ResourceTags?: Array<Tag>;
+    /**
+      * Db类型(NORMAL, SERVERLESS)
+      */
+    DbMode?: string;
+    /**
+      * 当Db类型为SERVERLESS时，serverless集群状态，可选值:
+resume
+pause
+      */
+    ServerlessStatus?: string;
 }
 /**
  * OfflineCluster请求参数结构体

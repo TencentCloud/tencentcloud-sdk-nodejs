@@ -74,6 +74,26 @@ Block 确认违规
     Details: Array<ImageResultsResultDetail>;
 }
 /**
+ * 输入信息详情
+ */
+export interface InputInfo {
+    /**
+      * 传入的类型可选：URL，COS
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Type: string;
+    /**
+      * Url地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Url: string;
+    /**
+      * 桶信息。当输入当时COS时，该字段不为空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BucketInfo: BucketInfo;
+}
+/**
  *  数据存储信息
  */
 export interface StorageInfo {
@@ -352,6 +372,15 @@ export interface DescribeTaskDetailRequest {
     ShowAllSegments?: boolean;
 }
 /**
+ * CancelTask返回参数结构体
+ */
+export interface CancelTaskResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 任务输出标签
  */
 export interface TaskLabel {
@@ -436,24 +465,102 @@ export interface ImageResultsResultDetail {
     SubLabelCode: string;
 }
 /**
- * 输入信息详情
+ * DescribeAmsList请求参数结构体
  */
-export interface InputInfo {
+export interface DescribeAmsListRequest {
     /**
-      * 传入的类型可选：URL，COS
-注意：此字段可能返回 null，表示取不到有效值。
+      * 页码
       */
-    Type: string;
+    PageToken: string;
     /**
-      * Url地址
-注意：此字段可能返回 null，表示取不到有效值。
+      * 过滤条件
+      */
+    Limit: number;
+    /**
+      * 查询方向
+      */
+    PageDirection: string;
+    /**
+      * 过滤条件
+      */
+    Filters?: Array<Filter>;
+}
+/**
+ * 音频过滤条件
+ */
+export interface Filters {
+    /**
+      * 查询字段：
+策略BizType
+子账号SubUin
+日期区间DateRange
+      */
+    Name: string;
+    /**
+      * 查询值
+      */
+    Values: Array<string>;
+}
+/**
+ * 机器审核详情列表数据项
+ */
+export interface AmsDetailInfo {
+    /**
+      * 标签
+      */
+    Label: Array<string>;
+    /**
+      * 时长(秒/s)
+      */
+    Duration: number;
+    /**
+      * 任务名
+      */
+    Name: string;
+    /**
+      * 任务ID，创建任务后返回的TaskId字段
+      */
+    TaskID: string;
+    /**
+      * 插入时间
+      */
+    InsertTime: string;
+    /**
+      * 数据来源 0机审，其他为自主审核
+      */
+    DataForm: number;
+    /**
+      * 操作人
+      */
+    Operator: string;
+    /**
+      * 原始命中标签
+      */
+    OriginalLabel: Array<string>;
+    /**
+      * 操作时间
+      */
+    OperateTime: string;
+    /**
+      * 视频原始地址
       */
     Url: string;
     /**
-      * 桶信息。当输入当时COS时，该字段不为空
-注意：此字段可能返回 null，表示取不到有效值。
+      * 封面图地址
       */
-    BucketInfo: BucketInfo;
+    Thumbnail: string;
+    /**
+      * 短音频内容
+      */
+    Content: string;
+    /**
+      * 短音频个数
+      */
+    DetailCount: number;
+    /**
+      * 音频审核的请求 id
+      */
+    RequestId: string;
 }
 /**
  * 音频小语种检测结果
@@ -503,13 +610,100 @@ export interface FileOutput {
     ObjectPrefix: string;
 }
 /**
- * CancelTask返回参数结构体
+ * 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
  */
-export interface CancelTaskResponse {
+export interface Filter {
+    /**
+      * 过滤键的名称。
+      */
+    Name: string;
+    /**
+      * 一个或者多个过滤值。
+      */
+    Values: Array<string>;
+}
+/**
+ * DescribeAudioStat返回参数结构体
+ */
+export interface DescribeAudioStatResponse {
+    /**
+      * 识别结果统计
+      */
+    Overview?: Overview;
+    /**
+      * 识别量统计
+      */
+    TrendCount?: Array<TrendCount>;
+    /**
+      * 违规数据分布
+      */
+    EvilCount?: Array<EvilCount>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeAmsList返回参数结构体
+ */
+export interface DescribeAmsListResponse {
+    /**
+      * 返回列表数据
+      */
+    AmsDetailSet?: Array<AmsDetailInfo>;
+    /**
+      * 总条数
+      */
+    Total?: number;
+    /**
+      * 分页 token
+      */
+    PageToken?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 识别量统计
+ */
+export interface TrendCount {
+    /**
+      * 总调用量
+      */
+    TotalCount: number;
+    /**
+      * 总调用时长
+      */
+    TotalHour: number;
+    /**
+      * 通过量
+      */
+    PassCount: number;
+    /**
+      * 通过时长
+      */
+    PassHour: number;
+    /**
+      * 违规量
+      */
+    EvilCount: number;
+    /**
+      * 违规时长
+      */
+    EvilHour: number;
+    /**
+      * 疑似违规量
+      */
+    SuspectCount: number;
+    /**
+      * 疑似违规时长
+      */
+    SuspectHour: number;
+    /**
+      * 日期
+      */
+    Date: string;
 }
 /**
  * 音频ASR文本审核结果
@@ -549,6 +743,56 @@ export interface AudioResultDetailTextResult {
       * 词库类型 1 黑白库 2 自定义库
       */
     LibType: number;
+}
+/**
+ * DescribeAudioStat请求参数结构体
+ */
+export interface DescribeAudioStatRequest {
+    /**
+      * 审核类型 1: 机器审核; 2: 人工审核
+      */
+    AuditType: number;
+    /**
+      * 查询条件
+      */
+    Filters: Array<Filters>;
+}
+/**
+ * 识别结果统计
+ */
+export interface Overview {
+    /**
+      * 总调用量
+      */
+    TotalCount: number;
+    /**
+      * 总调用时长
+      */
+    TotalHour: number;
+    /**
+      * 通过量
+      */
+    PassCount: number;
+    /**
+      * 通过时长
+      */
+    PassHour: number;
+    /**
+      * 违规量
+      */
+    EvilCount: number;
+    /**
+      * 违规时长
+      */
+    EvilHour: number;
+    /**
+      * 疑似违规量
+      */
+    SuspectCount: number;
+    /**
+      * 疑似违规时长
+      */
+    SuspectHour: number;
 }
 /**
  * 音频输出参数
@@ -745,6 +989,27 @@ export interface AudioSegments {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Result: AudioResult;
+}
+/**
+ * 违规数据分布
+ */
+export interface EvilCount {
+    /**
+      * 违规类型：
+Terror	24001
+Porn	20002
+Polity	20001
+Ad	20105
+Abuse	20007
+Illegal	20006
+Spam	25001
+Moan	26001
+      */
+    EvilType: string;
+    /**
+      * 分布类型总量
+      */
+    Count: number;
 }
 /**
  * 图片详情位置信息

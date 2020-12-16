@@ -22,6 +22,7 @@ import {
   DescribeClusterSecurityResponse,
   DescribeClusterSecurityRequest,
   DeleteClusterInstancesResponse,
+  ModifyNodePoolDesiredCapacityAboutAsgResponse,
   DescribeClusterKubeconfigResponse,
   RemoveNodeFromNodePoolResponse,
   CreateClusterRouteRequest,
@@ -30,28 +31,39 @@ import {
   DescribeClusterInstancesResponse,
   DeleteClusterResponse,
   AutoscalingAdded,
+  DescribePrometheusTemplateSyncResponse,
   CreateClusterRouteTableResponse,
   DeleteClusterEndpointResponse,
-  RouteInfo,
+  PrometheusTemplateModify,
+  PrometheusNotification,
+  DescribePrometheusTemplatesResponse,
+  CreateClusterEndpointResponse,
+  RouteTableInfo,
   DeleteClusterRequest,
   RunInstancesForNode,
   DeleteClusterAsGroupsRequest,
   DescribeExistedInstancesRequest,
   DescribeRegionsResponse,
   CreateClusterRouteResponse,
+  PrometheusTemplateSyncTarget,
+  DescribePrometheusTemplatesRequest,
   AddNodeToNodePoolRequest,
   NodePool,
-  RouteTableInfo,
+  DescribePrometheusAlertRuleResponse,
   ClusterAsGroup,
   Instance,
+  DescribePrometheusTemplateSyncRequest,
+  PrometheusAlertRuleDetail,
+  UpgradeAbleInstancesItem,
   CreateClusterNodePoolFromExistingAsgRequest,
-  Tag,
+  PrometheusAlertRule,
   DescribePrometheusAgentInstancesRequest,
   ClusterNetworkSettings,
   DescribeImagesResponse,
   AutoScalingGroupRange,
   ModifyClusterAttributeRequest,
   DeleteClusterRouteResponse,
+  SyncPrometheusTemplateResponse,
   CreateClusterEndpointVipResponse,
   DescribeClusterRoutesResponse,
   DescribeClustersRequest,
@@ -59,7 +71,10 @@ import {
   ExtensionAddon,
   RegionInstance,
   Label,
+  ModifyPrometheusTemplateResponse,
+  DeletePrometheusTemplateSyncRequest,
   DeleteClusterEndpointVipResponse,
+  SyncPrometheusTemplateRequest,
   ClusterBasicSettings,
   CreatePrometheusDashboardResponse,
   RouteTableConflict,
@@ -68,24 +83,33 @@ import {
   ModifyClusterAsGroupAttributeResponse,
   CreateClusterInstancesRequest,
   ManuallyAdded,
+  PrometheusConfigItem,
   DescribeClusterRouteTablesResponse,
   DescribeClusterKubeconfigRequest,
   ClusterCIDRSettings,
+  CreatePrometheusTemplateResponse,
   CreateClusterEndpointVipRequest,
+  RouteInfo,
   Taint,
   CheckInstancesUpgradeAbleRequest,
   ExistedInstance,
   DescribeClusterNodePoolsResponse,
-  UpgradeAbleInstancesItem,
+  DescribePrometheusAlertRuleRequest,
+  ModifyNodePoolDesiredCapacityAboutAsgRequest,
+  ModifyPrometheusTemplateRequest,
   AddNodeToNodePoolResponse,
+  UpgradeClusterInstancesResponse,
   TagSpecification,
   DescribeRegionsRequest,
   DescribeClustersResponse,
+  DescribePrometheusOverviewsRequest,
   ClusterExtraArgs,
   DataDisk,
   ModifyClusterNodePoolResponse,
   DescribeExistedInstancesResponse,
+  CreatePrometheusTemplateRequest,
   ResourceDeleteOption,
+  PrometheusTarget,
   LoginSettings,
   CreateClusterNodePoolFromExistingAsgResponse,
   DescribeClusterEndpointStatusRequest,
@@ -103,25 +127,29 @@ import {
   DeleteClusterAsGroupsResponse,
   DescribeClusterInstancesRequest,
   InstanceAdvancedSettings,
+  DescribePrometheusAgentsRequest,
+  PrometheusAgentOverview,
   Filter,
   ModifyClusterNodePoolRequest,
   ImageInstance,
-  CreateClusterEndpointResponse,
+  DeletePrometheusTemplateRequest,
   CreateClusterNodePoolRequest,
   ClusterAdvancedSettings,
   AcquireClusterAdminRoleResponse,
+  DeletePrometheusTemplateResponse,
   DeleteClusterNodePoolRequest,
   DeleteClusterEndpointVipRequest,
   CheckInstancesUpgradeAbleResponse,
   Cluster,
   DescribeClusterEndpointStatusResponse,
   CreatePrometheusDashboardRequest,
-  UpgradeClusterInstancesResponse,
+  DescribePrometheusAgentsResponse,
   AddExistedInstancesResponse,
   DeleteClusterRouteTableResponse,
   DescribeClusterAsGroupOptionRequest,
   DescribePrometheusAgentInstancesResponse,
   CreateClusterEndpointRequest,
+  PrometheusJobTargets,
   AddExistedInstancesRequest,
   ClusterAsGroupOption,
   CreateClusterInstancesResponse,
@@ -130,21 +158,28 @@ import {
   ExistedInstancesForNode,
   DescribeClusterRoutesRequest,
   DeleteClusterRouteRequest,
+  DescribePrometheusOverviewsResponse,
   DeleteClusterEndpointRequest,
+  DescribePrometheusTargetsRequest,
+  DescribePrometheusTargetsResponse,
   DescribeClusterNodePoolDetailRequest,
+  DeletePrometheusTemplateSyncResponse,
   CreateClusterRouteTableRequest,
   DescribeClusterAsGroupsRequest,
   DescribeImagesRequest,
   ModifyClusterEndpointSPResponse,
+  Tag,
   DescribeRouteTableConflictsRequest,
   ExistedInstancesPara,
   DescribeClusterAsGroupOptionResponse,
   ClusterAsGroupAttribute,
   DeleteClusterNodePoolResponse,
+  PrometheusTemplate,
   RunMonitorServiceEnabled,
   CreateClusterNodePoolResponse,
   ModifyClusterAsGroupAttributeRequest,
   InstanceDataDiskMountSetting,
+  PrometheusInstanceOverview,
   NodeCountSummary,
   DescribeClusterAsGroupsResponse,
   RemoveNodeFromNodePoolRequest,
@@ -158,6 +193,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("tke.tencentcloudapi.com", "2018-05-25", clientConfig)
+  }
+
+  /**
+   * 拉取模板列表，默认模板将总是在最前面
+   */
+  async DescribePrometheusTemplates(
+    req: DescribePrometheusTemplatesRequest,
+    cb?: (error: string, rep: DescribePrometheusTemplatesResponse) => void
+  ): Promise<DescribePrometheusTemplatesResponse> {
+    return this.request("DescribePrometheusTemplates", req, cb)
   }
 
   /**
@@ -191,6 +236,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取实例列表
+   */
+  async DescribePrometheusOverviews(
+    req: DescribePrometheusOverviewsRequest,
+    cb?: (error: string, rep: DescribePrometheusOverviewsResponse) => void
+  ): Promise<DescribePrometheusOverviewsResponse> {
+    return this.request("DescribePrometheusOverviews", req, cb)
+  }
+
+  /**
    * 查询节点池详情
    */
   async DescribeClusterNodePoolDetail(
@@ -201,23 +256,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取镜像信息
+   * 删除一个云原生Promehtheus配置模板
    */
-  async DescribeImages(
-    req?: DescribeImagesRequest,
-    cb?: (error: string, rep: DescribeImagesResponse) => void
-  ): Promise<DescribeImagesResponse> {
-    return this.request("DescribeImages", req, cb)
+  async DeletePrometheusTemplate(
+    req: DeletePrometheusTemplateRequest,
+    cb?: (error: string, rep: DeletePrometheusTemplateResponse) => void
+  ): Promise<DeletePrometheusTemplateResponse> {
+    return this.request("DeletePrometheusTemplate", req, cb)
   }
 
   /**
-   * 修改集群伸缩组属性
+   * 获取被关联集群列表
    */
-  async ModifyClusterAsGroupAttribute(
-    req: ModifyClusterAsGroupAttributeRequest,
-    cb?: (error: string, rep: ModifyClusterAsGroupAttributeResponse) => void
-  ): Promise<ModifyClusterAsGroupAttributeResponse> {
-    return this.request("ModifyClusterAsGroupAttribute", req, cb)
+  async DescribePrometheusAgents(
+    req: DescribePrometheusAgentsRequest,
+    cb?: (error: string, rep: DescribePrometheusAgentsResponse) => void
+  ): Promise<DescribePrometheusAgentsResponse> {
+    return this.request("DescribePrometheusAgents", req, cb)
+  }
+
+  /**
+   * 取消模板同步，这将会删除目标中该模板所生产的配置
+   */
+  async DeletePrometheusTemplateSync(
+    req: DeletePrometheusTemplateSyncRequest,
+    cb?: (error: string, rep: DeletePrometheusTemplateSyncResponse) => void
+  ): Promise<DeletePrometheusTemplateSyncResponse> {
+    return this.request("DeletePrometheusTemplateSync", req, cb)
   }
 
   /**
@@ -231,6 +296,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 同步模板到实例或者集群
+   */
+  async SyncPrometheusTemplate(
+    req: SyncPrometheusTemplateRequest,
+    cb?: (error: string, rep: SyncPrometheusTemplateResponse) => void
+  ): Promise<SyncPrometheusTemplateResponse> {
+    return this.request("SyncPrometheusTemplate", req, cb)
+  }
+
+  /**
    * 扩展(新建)集群节点
    */
   async CreateClusterInstances(
@@ -238,6 +313,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateClusterInstancesResponse) => void
   ): Promise<CreateClusterInstancesResponse> {
     return this.request("CreateClusterInstances", req, cb)
+  }
+
+  /**
+   * 获取targets信息
+   */
+  async DescribePrometheusTargets(
+    req: DescribePrometheusTargetsRequest,
+    cb?: (error: string, rep: DescribePrometheusTargetsResponse) => void
+  ): Promise<DescribePrometheusTargetsResponse> {
+    return this.request("DescribePrometheusTargets", req, cb)
   }
 
   /**
@@ -271,13 +356,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 移出节点池节点，但保留在集群内
+   * 修改模板内容
    */
-  async RemoveNodeFromNodePool(
-    req: RemoveNodeFromNodePoolRequest,
-    cb?: (error: string, rep: RemoveNodeFromNodePoolResponse) => void
-  ): Promise<RemoveNodeFromNodePoolResponse> {
-    return this.request("RemoveNodeFromNodePool", req, cb)
+  async ModifyPrometheusTemplate(
+    req: ModifyPrometheusTemplateRequest,
+    cb?: (error: string, rep: ModifyPrometheusTemplateResponse) => void
+  ): Promise<ModifyPrometheusTemplateResponse> {
+    return this.request("ModifyPrometheusTemplate", req, cb)
   }
 
   /**
@@ -381,13 +466,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询集群列表
+   * 创建一个云原生Prometheus模板实例
    */
-  async DescribeClusters(
-    req: DescribeClustersRequest,
-    cb?: (error: string, rep: DescribeClustersResponse) => void
-  ): Promise<DescribeClustersResponse> {
-    return this.request("DescribeClusters", req, cb)
+  async CreatePrometheusTemplate(
+    req: CreatePrometheusTemplateRequest,
+    cb?: (error: string, rep: CreatePrometheusTemplateResponse) => void
+  ): Promise<CreatePrometheusTemplateResponse> {
+    return this.request("CreatePrometheusTemplate", req, cb)
   }
 
   /**
@@ -451,6 +536,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询集群列表
+   */
+  async DescribeClusters(
+    req: DescribeClustersRequest,
+    cb?: (error: string, rep: DescribeClustersResponse) => void
+  ): Promise<DescribeClustersResponse> {
+    return this.request("DescribeClusters", req, cb)
+  }
+
+  /**
    * 获取关联目标集群的实例列表
    */
   async DescribePrometheusAgentInstances(
@@ -471,6 +566,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取模板同步信息
+   */
+  async DescribePrometheusTemplateSync(
+    req: DescribePrometheusTemplateSyncRequest,
+    cb?: (error: string, rep: DescribePrometheusTemplateSyncResponse) => void
+  ): Promise<DescribePrometheusTemplateSyncResponse> {
+    return this.request("DescribePrometheusTemplateSync", req, cb)
+  }
+
+  /**
    * 获取容器服务支持的所有地域
    */
   async DescribeRegions(
@@ -488,6 +593,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddExistedInstancesResponse) => void
   ): Promise<AddExistedInstancesResponse> {
     return this.request("AddExistedInstances", req, cb)
+  }
+
+  /**
+   * 修改节点池关联伸缩组的期望实例数
+   */
+  async ModifyNodePoolDesiredCapacityAboutAsg(
+    req: ModifyNodePoolDesiredCapacityAboutAsgRequest,
+    cb?: (error: string, rep: ModifyNodePoolDesiredCapacityAboutAsgResponse) => void
+  ): Promise<ModifyNodePoolDesiredCapacityAboutAsgResponse> {
+    return this.request("ModifyNodePoolDesiredCapacityAboutAsg", req, cb)
+  }
+
+  /**
+   * 移出节点池节点，但保留在集群内
+   */
+  async RemoveNodeFromNodePool(
+    req: RemoveNodeFromNodePoolRequest,
+    cb?: (error: string, rep: RemoveNodeFromNodePoolResponse) => void
+  ): Promise<RemoveNodeFromNodePoolResponse> {
+    return this.request("RemoveNodeFromNodePool", req, cb)
   }
 
   /**
@@ -531,6 +656,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改集群伸缩组属性
+   */
+  async ModifyClusterAsGroupAttribute(
+    req: ModifyClusterAsGroupAttributeRequest,
+    cb?: (error: string, rep: ModifyClusterAsGroupAttributeResponse) => void
+  ): Promise<ModifyClusterAsGroupAttributeResponse> {
+    return this.request("ModifyClusterAsGroupAttribute", req, cb)
+  }
+
+  /**
    * 删除托管集群外网访问端口（老的方式，仅支持托管集群外网端口）
    */
   async DeleteClusterEndpointVip(
@@ -568,6 +703,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClusterKubeconfigResponse) => void
   ): Promise<DescribeClusterKubeconfigResponse> {
     return this.request("DescribeClusterKubeconfig", req, cb)
+  }
+
+  /**
+   * 获取镜像信息
+   */
+  async DescribeImages(
+    req?: DescribeImagesRequest,
+    cb?: (error: string, rep: DescribeImagesResponse) => void
+  ): Promise<DescribeImagesResponse> {
+    return this.request("DescribeImages", req, cb)
+  }
+
+  /**
+   * 获取告警规则列表
+   */
+  async DescribePrometheusAlertRule(
+    req: DescribePrometheusAlertRuleRequest,
+    cb?: (error: string, rep: DescribePrometheusAlertRuleResponse) => void
+  ): Promise<DescribePrometheusAlertRuleResponse> {
+    return this.request("DescribePrometheusAlertRule", req, cb)
   }
 
   /**

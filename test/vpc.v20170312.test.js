@@ -388,9 +388,9 @@ it("vpc.v20170312.RemoveBandwidthPackageResources", async function () {
     }
 })
 
-it("vpc.v20170312.InquiryPriceRenewVpnGateway", async function () {
+it("vpc.v20170312.CloneSecurityGroup", async function () {
     try {
-       const data = await client.InquiryPriceRenewVpnGateway({})
+       const data = await client.CloneSecurityGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1361,6 +1361,16 @@ it("vpc.v20170312.ModifySubnetAttribute", async function () {
 it("vpc.v20170312.DescribeNetworkInterfaces", async function () {
     try {
        const data = await client.DescribeNetworkInterfaces({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.InquiryPriceRenewVpnGateway", async function () {
+    try {
+       const data = await client.InquiryPriceRenewVpnGateway({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
