@@ -380,7 +380,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteBinding", req, cb);
     }
     /**
-     * 本接口（CreateStorage）用于购买云存套餐。
+     * 该接口已经停止维护，请勿使用
      */
     async CreateStorage(req, cb) {
         return this.request("CreateStorage", req, cb);

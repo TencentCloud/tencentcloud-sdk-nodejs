@@ -2626,6 +2626,26 @@ export interface DeleteHaVipResponse {
 }
 
 /**
+ * ReleaseIpv6Addresses请求参数结构体
+ */
+export interface ReleaseIpv6AddressesRequest {
+  /**
+   * ECM 地域
+   */
+  EcmRegion: string
+
+  /**
+   * 弹性网卡实例ID，形如：eni-m6dyj72l。
+   */
+  NetworkInterfaceId: string
+
+  /**
+   * 指定的IPv6地址列表，单次最多指定10个。
+   */
+  Ipv6Addresses: Array<Ipv6Address>
+}
+
+/**
  * 任务查询出参
  */
 export interface TaskOutput {
@@ -3251,6 +3271,21 @@ export interface DescribeAddressesResponse {
 }
 
 /**
+ * AssignIpv6Addresses返回参数结构体
+ */
+export interface AssignIpv6AddressesResponse {
+  /**
+   * 分配给弹性网卡的IPv6地址列表。
+   */
+  Ipv6AddressSet?: Array<Ipv6Address>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateRoutes返回参数结构体
  */
 export interface CreateRoutesResponse {
@@ -3690,6 +3725,31 @@ export interface DescribeConfigResponse {
 }
 
 /**
+ * AssignIpv6Addresses请求参数结构体
+ */
+export interface AssignIpv6AddressesRequest {
+  /**
+   * ECM 地域
+   */
+  EcmRegion: string
+
+  /**
+   * 弹性网卡实例ID，形如：eni-1snva0vd。目前只支持主网卡上分配。
+   */
+  NetworkInterfaceId: string
+
+  /**
+   * 指定的IPv6地址列表，单次最多指定10个。与入参Ipv6AddressCount合并计算配额。与Ipv6AddressCount必填一个。
+   */
+  Ipv6Addresses?: Array<Ipv6Address>
+
+  /**
+   * 自动分配IPv6地址个数，内网IP地址个数总和不能超过配数。与入参Ipv6Addresses合并计算配额。与Ipv6Addresses必填一个。
+   */
+  Ipv6AddressCount?: number
+}
+
+/**
  * ModifyModuleNetwork返回参数结构体
  */
 export interface ModifyModuleNetworkResponse {
@@ -4007,6 +4067,16 @@ export interface DeleteLoadBalancerRequest {
    * 要删除的负载均衡实例 ID数组，数组大小最大支持20
    */
   LoadBalancerIds?: Array<string>
+}
+
+/**
+ * ModifyIpv6AddressesAttribute返回参数结构体
+ */
+export interface ModifyIpv6AddressesAttributeResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4347,6 +4417,26 @@ export interface ModifyHaVipAttributeResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyIpv6AddressesAttribute请求参数结构体
+ */
+export interface ModifyIpv6AddressesAttributeRequest {
+  /**
+   * ECM 地域
+   */
+  EcmRegion: string
+
+  /**
+   * 弹性网卡实例ID，形如：eni-m6dyj72l。
+   */
+  NetworkInterfaceId: string
+
+  /**
+   * 指定的IPv6地址信息。
+   */
+  Ipv6Addresses: Array<Ipv6Address>
 }
 
 /**
@@ -6864,6 +6954,21 @@ export interface DescribeRouteConflictsRequest {
    * 要检查的与之冲突的目的端列表
    */
   DestinationCidrBlocks: Array<string>
+}
+
+/**
+ * ReleaseIpv6Addresses返回参数结构体
+ */
+export interface ReleaseIpv6AddressesResponse {
+  /**
+   * 任务ID，可以通过DescribeTaskResult查询任务状态
+   */
+  TaskId?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

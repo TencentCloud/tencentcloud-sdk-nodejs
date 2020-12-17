@@ -148,6 +148,16 @@ it("vod.v20180717.DescribeStorageData", async function () {
     }
 })
 
+it("vod.v20180717.SplitMedia", async function () {
+    try {
+       const data = await client.SplitMedia({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.ModifyAIAnalysisTemplate", async function () {
     try {
        const data = await client.ModifyAIAnalysisTemplate({})

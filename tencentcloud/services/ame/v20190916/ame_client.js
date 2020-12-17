@@ -64,7 +64,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePackageItems", req, cb);
     }
     /**
-     * 客户上报用户数据功能，为了更好的为用户提供优质服务
+     * 客户上报用户数据功能，为了更好地为用户提供优质服务
      */
     async ReportData(req, cb) {
         return this.request("ReportData", req, cb);

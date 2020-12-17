@@ -488,6 +488,16 @@ it("ecm.v20190719.DeleteModule", async function () {
     }
 })
 
+it("ecm.v20190719.ReleaseIpv6Addresses", async function () {
+    try {
+       const data = await client.ReleaseIpv6Addresses({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ecm.v20190719.DescribeTargetHealth", async function () {
     try {
        const data = await client.DescribeTargetHealth({})
@@ -531,6 +541,16 @@ it("ecm.v20190719.RemovePrivateIpAddresses", async function () {
 it("ecm.v20190719.DisableRoutes", async function () {
     try {
        const data = await client.DisableRoutes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ecm.v20190719.ModifyIpv6AddressesAttribute", async function () {
+    try {
+       const data = await client.ModifyIpv6AddressesAttribute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -781,6 +801,16 @@ it("ecm.v20190719.ModifyDefaultSubnet", async function () {
 it("ecm.v20190719.RebootInstances", async function () {
     try {
        const data = await client.RebootInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ecm.v20190719.AssignIpv6Addresses", async function () {
+    try {
+       const data = await client.AssignIpv6Addresses({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

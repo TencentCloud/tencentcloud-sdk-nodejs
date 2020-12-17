@@ -117,6 +117,12 @@ export interface TransferInDomainBatchRequest {
       * 付费模式 0手动在线付费，1使用余额付费。
       */
     PayMode: number;
+    /**
+      * 自动续费开关。有两个可选值：
+0 表示关闭，不自动续费（默认值）
+1 表示开启，将自动续费
+      */
+    AutoRenewFlag?: number;
 }
 /**
  * CreateDomainBatch返回参数结构体
@@ -194,6 +200,13 @@ export interface RenewDomainBatchRequest {
       * 付费模式 0手动在线付费，1使用余额付费。
       */
     PayMode: number;
+    /**
+      * 自动续费开关。有三个可选值：
+0 表示关闭，不自动续费
+1 表示开启，将自动续费
+2 表示不处理，保留域名原有状态（默认值）
+      */
+    AutoRenewFlag?: number;
 }
 /**
  * DescribeTemplate返回参数结构体
@@ -730,6 +743,12 @@ export interface CreateDomainBatchRequest {
       * 付费模式 0手动在线付费，1使用余额付费
       */
     PayMode: number;
+    /**
+      * 自动续费开关。有两个可选值：
+0 表示关闭，不自动续费（默认值）
+1 表示开启，将自动续费
+      */
+    AutoRenewFlag?: number;
 }
 /**
  * DescribeDomainBaseInfo请求参数结构体

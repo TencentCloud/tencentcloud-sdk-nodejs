@@ -208,6 +208,8 @@ var rp_1 = require("./rp");
 Object.defineProperty(exports, "rp", { enumerable: true, get: function () { return rp_1.rp; } });
 var scf_1 = require("./scf");
 Object.defineProperty(exports, "scf", { enumerable: true, get: function () { return scf_1.scf; } });
+var ses_1 = require("./ses");
+Object.defineProperty(exports, "ses", { enumerable: true, get: function () { return ses_1.ses; } });
 var smpn_1 = require("./smpn");
 Object.defineProperty(exports, "smpn", { enumerable: true, get: function () { return smpn_1.smpn; } });
 var sms_1 = require("./sms");

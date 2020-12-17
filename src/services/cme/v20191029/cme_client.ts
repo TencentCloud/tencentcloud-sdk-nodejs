@@ -53,6 +53,7 @@ import {
   CreateProjectRequest,
   ModifyMaterialRequest,
   Authorizer,
+  DescribePlatformsResponse,
   DescribeTasksRequest,
   MediaTrackItem,
   TimeRange,
@@ -64,6 +65,7 @@ import {
   ListMediaResponse,
   SearchMaterialResponse,
   EmptyTrackItem,
+  PlatformInfo,
   DescribeJoinTeamsRequest,
   DeleteMaterialRequest,
   CreateProjectResponse,
@@ -82,6 +84,7 @@ import {
   PenguinMediaPlatformPublishInfo,
   ImageMaterial,
   DescribeClassRequest,
+  DescribeSharedSpaceResponse,
   MediaMetaData,
   MoveClassRequest,
   DeleteTeamMembersResponse,
@@ -107,7 +110,7 @@ import {
   DeleteLoginStatusRequest,
   GenerateVideoSegmentationSchemeByAiRequest,
   DeleteTeamMembersRequest,
-  DescribeSharedSpaceResponse,
+  DescribePlatformsRequest,
   SearchScope,
   VideoMaterial,
   DescribeResourceAuthorizationResponse,
@@ -118,7 +121,7 @@ import {
   DescribeJoinTeamsResponse,
   DescribeTeamMembersRequest,
   MaterialStatus,
-  MediaImageSpriteInfo,
+  DescribeProjectsResponse,
   AuthorizationInfo,
   DeleteMaterialResponse,
   RevokeResourceAuthorizationRequest,
@@ -137,7 +140,7 @@ import {
   LinkMaterialInfo,
   ExportVideoByEditorTrackDataResponse,
   GrantResourceAuthorizationRequest,
-  DescribeProjectsResponse,
+  MediaImageSpriteInfo,
   ImportMaterialRequest,
   DescribeMaterialsRequest,
 } from "./cme_models"
@@ -279,6 +282,19 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ExportVideoByEditorTrackDataResponse) => void
   ): Promise<ExportVideoByEditorTrackDataResponse> {
     return this.request("ExportVideoByEditorTrackData", req, cb)
+  }
+
+  /**
+     * <li>支持获取所创建的所有平台列表信息；</li>
+<li>支持获取指定的平台列表信息。</li>
+
+
+     */
+  async DescribePlatforms(
+    req: DescribePlatformsRequest,
+    cb?: (error: string, rep: DescribePlatformsResponse) => void
+  ): Promise<DescribePlatformsResponse> {
+    return this.request("DescribePlatforms", req, cb)
   }
 
   /**

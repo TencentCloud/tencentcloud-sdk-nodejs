@@ -46,10 +46,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateStaff", req, cb);
     }
     /**
-     * 获取电话服务记录与录音
+     * 创建 SDK 登录 Token。
      */
-    async DescribeTelCdr(req, cb) {
-        return this.request("DescribeTelCdr", req, cb);
+    async CreateSDKLoginToken(req, cb) {
+        return this.request("CreateSDKLoginToken", req, cb);
+    }
+    /**
+     * 获取 PSTN 活动会话列表。
+     */
+    async DescribePSTNActiveSessionList(req, cb) {
+        return this.request("DescribePSTNActiveSessionList", req, cb);
     }
     /**
      * 按实例获取电话消耗统计
@@ -58,10 +64,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTelCallInfo", req, cb);
     }
     /**
-     * 创建 SDK 登录 Token。
+     * 获取电话服务记录与录音
      */
-    async CreateSDKLoginToken(req, cb) {
-        return this.request("CreateSDKLoginToken", req, cb);
+    async DescribeTelCdr(req, cb) {
+        return this.request("DescribeTelCdr", req, cb);
     }
 }
 exports.Client = Client;

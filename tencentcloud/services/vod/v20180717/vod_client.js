@@ -135,6 +135,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeStorageData", req, cb);
     }
     /**
+     * 对点播视频进行拆条，生成多个新的点播视频。
+     */
+    async SplitMedia(req, cb) {
+        return this.request("SplitMedia", req, cb);
+    }
+    /**
      * 修改用户自定义视频内容分析模板。
 
 注意：模板 ID 10000 以下的为系统预置模板，不允许修改。

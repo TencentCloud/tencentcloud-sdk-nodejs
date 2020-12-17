@@ -117,7 +117,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 客户上报用户数据功能，为了更好的为用户提供优质服务
+   * 客户上报用户数据功能，为了更好地为用户提供优质服务
    */
   async ReportData(
     req: ReportDataRequest,

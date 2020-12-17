@@ -836,6 +836,15 @@ export interface CreateStaticStoreRequest {
     EnableUnion?: boolean;
 }
 /**
+ * DeleteCloudBaseProjectLatestVersion返回参数结构体
+ */
+export interface DeleteCloudBaseProjectLatestVersionResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateAuthDomain返回参数结构体
  */
 export interface CreateAuthDomainResponse {
@@ -1606,6 +1615,19 @@ export interface PlatformStatistic {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UpdateTime?: string;
+}
+/**
+ * DeleteCloudBaseProjectLatestVersion请求参数结构体
+ */
+export interface DeleteCloudBaseProjectLatestVersionRequest {
+    /**
+      * 环境id
+      */
+    EnvId: string;
+    /**
+      * 项目名
+      */
+    ProjectName: string;
 }
 /**
  * nfs挂载资源

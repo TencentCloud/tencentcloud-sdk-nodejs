@@ -2777,6 +2777,21 @@ export interface PoliticalOcrReviewTemplateInfoForUpdate {
 }
 
 /**
+ * 视频处理任务的输出媒体文件信息
+ */
+export interface TaskOutputMediaInfo {
+  /**
+   * 媒体文件 ID。
+   */
+  FileId: string
+
+  /**
+   * 转拉完成后生成的媒体文件基础信息。
+   */
+  MediaBasicInfo: MediaBasicInfo
+}
+
+/**
  * ProcessMediaByUrl请求参数结构体
  */
 export interface ProcessMediaByUrlRequest {
@@ -2829,6 +2844,37 @@ export interface ProcessMediaByUrlRequest {
    * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
    */
   SubAppId?: number
+}
+
+/**
+ * 视频拆条任务配置信息。
+ */
+export interface SplitMediaTaskConfig {
+  /**
+      * 视频拆条起始的偏移时间，单位：秒。
+<li>不填或填0，表示转码后的视频从原始视频的起始位置开始；</li>
+<li>当数值大于0时（假设为 n），表示转码后的视频从原始视频的第 n 秒位置开始；</li>
+<li>当数值小于0时（假设为 -n），表示转码后的视频从原始视频结束 n 秒前的位置开始。</li>
+      */
+  StartTimeOffset?: number
+
+  /**
+      * 视频拆条结束的偏移时间，单位：秒。
+<li>不填或填0，表示转码后的视频持续到原始视频的末尾终止；</li>
+<li>当数值大于0时（假设为 n），表示转码后的视频持续到原始视频第 n 秒时终止；</li>
+<li>当数值小于0时（假设为 -n），表示转码后的视频持续到原始视频结束 n 秒前终止。</li>
+      */
+  EndTimeOffset?: number
+
+  /**
+   * [任务流模板](/document/product/266/11700#.E4.BB.BB.E5.8A.A1.E6.B5.81.E6.A8.A1.E6.9D.BF)名字，如果要对生成的新视频执行任务流时填写。
+   */
+  ProcedureName?: string
+
+  /**
+   * 视频拆条输出信息。
+   */
+  OutputConfig?: SplitMediaOutputConfig
 }
 
 /**
@@ -3721,6 +3767,27 @@ export interface EditMediaOutputConfig {
    * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
    */
   ExpireTime?: string
+}
+
+/**
+ * 视频拆条任务信息。
+ */
+export interface SplitMediaTaskSegmentInfo {
+  /**
+   * 视频拆条任务输入信息。
+   */
+  Input: SplitMediaTaskInput
+
+  /**
+      * 视频拆条任务输出信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Output: TaskOutputMediaInfo
+
+  /**
+   * 若发起视频拆条任务时指定了视频处理流程，则该字段为流程任务 ID。
+   */
+  ProcedureTaskId: string
 }
 
 /**
@@ -6237,6 +6304,53 @@ export interface TranscodePlayInfo2017 {
 }
 
 /**
+ * 视频拆条任务信息，仅当 TaskType 为 SplitMedia，该字段有值。
+ */
+export interface SplitMediaTask {
+  /**
+   * 任务 ID。
+   */
+  TaskId: string
+
+  /**
+      * 任务流状态，取值：
+<li>PROCESSING：处理中；</li>
+<li>FINISH：已完成。</li>
+      */
+  Status: string
+
+  /**
+   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   */
+  ErrCodeExt: string
+
+  /**
+   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
+   */
+  ErrCode: number
+
+  /**
+   * 错误信息。
+   */
+  Message: string
+
+  /**
+   * 视频拆条任务详细信息列表。
+   */
+  FileInfoSet: Array<SplitMediaTaskSegmentInfo>
+
+  /**
+   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+   */
+  SessionContext: string
+
+  /**
+   * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   */
+  SessionId: string
+}
+
+/**
  * 制作媒体文件任务的输入。
  */
 export interface ComposeMediaTaskInput {
@@ -6752,6 +6866,41 @@ export interface DrmStreamingsInfo {
 }
 
 /**
+ * SplitMedia请求参数结构体
+ */
+export interface SplitMediaRequest {
+  /**
+   * 视频的 ID。
+   */
+  FileId: string
+
+  /**
+   * 视频拆条任务信息列表，最多同时支持100个拆条信息。
+   */
+  Segments: Array<SplitMediaTaskConfig>
+
+  /**
+   * 标识来源上下文，用于透传用户请求信息，在 SplitMediaComplete 回调和任务流状态变更回调将返回该字段值，最长 1000个字符。
+   */
+  SessionContext?: string
+
+  /**
+   * 用于任务去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   */
+  SessionId?: string
+
+  /**
+   * 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
+   */
+  TasksPriority?: number
+
+  /**
+   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+   */
+  SubAppId?: number
+}
+
+/**
  * Ocr 文字涉恐信息
  */
 export interface AiReviewTerrorismOcrTaskOutput {
@@ -7227,9 +7376,10 @@ export interface DescribeTaskDetailResponse {
       * 任务类型，取值：
 <li>Procedure：视频处理任务；</li>
 <li>EditMedia：视频编辑任务；</li>
+<li>SplitMedia：视频拆条任务；</li>
+<li>ComposeMedia：制作媒体文件任务；</li>
 <li>WechatPublish：微信发布任务；</li>
 <li>WechatMiniProgramPublish：微信小程序视频发布任务；</li>
-<li>ComposeMedia：制作媒体文件任务；</li>
 <li>PullUpload：拉取上传媒体文件任务。</li>
 
 兼容 2017 版的任务类型：
@@ -7289,6 +7439,18 @@ export interface DescribeTaskDetailResponse {
   ComposeMediaTask?: ComposeMediaTask
 
   /**
+      * 视频拆条任务信息，仅当 TaskType 为 SplitMedia，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SplitMediaTask?: SplitMediaTask
+
+  /**
+      * 微信小程序发布任务信息，仅当 TaskType 为 WechatMiniProgramPublish，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WechatMiniProgramPublishTask?: WechatMiniProgramPublishTask
+
+  /**
       * 拉取上传媒体文件任务信息，仅当 TaskType 为 PullUpload，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
@@ -7299,12 +7461,6 @@ export interface DescribeTaskDetailResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TranscodeTask?: TranscodeTask2017
-
-  /**
-      * 视频指定时间点截图任务信息，仅当 TaskType 为 SnapshotByTimeOffset，该字段有值。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SnapshotByTimeOffsetTask?: SnapshotByTimeOffsetTask2017
 
   /**
       * 视频拼接任务信息，仅当 TaskType 为 Concat，该字段有值。
@@ -7325,10 +7481,10 @@ export interface DescribeTaskDetailResponse {
   CreateImageSpriteTask?: CreateImageSpriteTask2017
 
   /**
-      * 微信小程序发布任务信息，仅当 TaskType 为 WechatMiniProgramPublish，该字段有值。
+      * 视频指定时间点截图任务信息，仅当 TaskType 为 SnapshotByTimeOffset，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  WechatMiniProgramPublishTask?: WechatMiniProgramPublishTask
+  SnapshotByTimeOffsetTask?: SnapshotByTimeOffsetTask2017
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -9037,6 +9193,7 @@ export interface EventContent {
 <li>FileDeleted：视频删除完成；</li>
 <li>PullComplete：视频转拉完成；</li>
 <li>EditMediaComplete：视频编辑完成；</li>
+<li>SplitMediaComplete：视频拆分完成；</li>
 <li>WechatPublishComplete：微信发布完成；</li>
 <li>ComposeMediaComplete：制作媒体文件完成；</li>
 <li>WechatMiniProgramPublishComplete：微信小程序发布完成。</li>
@@ -9080,22 +9237,16 @@ export interface EventContent {
   EditMediaCompleteEvent: EditMediaTask
 
   /**
-      * 微信发布完成事件，当事件类型为 WechatPublishComplete 时有效。
+      * 视频拆条完成事件，当事件类型为 SplitMediaComplete 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  WechatPublishCompleteEvent: WechatPublishTask
+  SplitMediaCompleteEvent: SplitMediaTask
 
   /**
-      * 视频转码完成事件，当事件类型为 TranscodeComplete 时有效。
+      * 制作媒体文件任务完成事件，当事件类型为 ComposeMediaComplete 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TranscodeCompleteEvent: TranscodeTask2017
-
-  /**
-      * 视频拼接完成事件，当事件类型为 ConcatComplete 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ConcatCompleteEvent: ConcatTask2017
+  ComposeMediaCompleteEvent: ComposeMediaTask
 
   /**
       * 视频剪辑完成事件，当事件类型为 ClipComplete 时有效。
@@ -9104,10 +9255,22 @@ export interface EventContent {
   ClipCompleteEvent: ClipTask2017
 
   /**
+      * 视频转码完成事件，当事件类型为 TranscodeComplete 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TranscodeCompleteEvent: TranscodeTask2017
+
+  /**
       * 视频截取雪碧图完成事件，当事件类型为 CreateImageSpriteComplete 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CreateImageSpriteCompleteEvent: CreateImageSpriteTask2017
+
+  /**
+      * 视频拼接完成事件，当事件类型为 ConcatComplete 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ConcatCompleteEvent: ConcatTask2017
 
   /**
       * 视频按时间点截图完成事件，当事件类型为 CreateSnapshotByTimeOffsetComplete 时有效。
@@ -9116,10 +9279,10 @@ export interface EventContent {
   SnapshotByTimeOffsetCompleteEvent: SnapshotByTimeOffsetTask2017
 
   /**
-      * 制作媒体文件任务完成事件，当事件类型为 ComposeMediaComplete 时有效。
+      * 微信发布完成事件，当事件类型为 WechatPublishComplete 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ComposeMediaCompleteEvent: ComposeMediaTask
+  WechatPublishCompleteEvent: WechatPublishTask
 
   /**
       * 微信小程序发布任务完成事件，当事件类型为 WechatMiniProgramPublishComplete 时有效。
@@ -10559,6 +10722,32 @@ export interface AiRecognitionTaskOcrFullTextResultInput {
    * 文本全文识别模板 ID。
    */
   Definition: number
+}
+
+/**
+ * 视频拆条的结果文件输出。
+ */
+export interface SplitMediaOutputConfig {
+  /**
+   * 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。
+   */
+  MediaName?: string
+
+  /**
+   * 输出文件格式，可选值：mp4、hls。默认是 mp4。
+   */
+  Type?: string
+
+  /**
+      * 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。
+<li>默认值：0，表示其他分类。</li>
+      */
+  ClassId?: number
+
+  /**
+   * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  ExpireTime?: string
 }
 
 /**
@@ -12267,6 +12456,42 @@ export interface DescribePersonSamplesResponse {
 }
 
 /**
+ * 视频拆条任务输入信息
+ */
+export interface SplitMediaTaskInput {
+  /**
+   * 视频的 ID。
+   */
+  FileId: string
+
+  /**
+      * 视频拆条起始的偏移时间，单位：秒。
+<li>不填或填0，表示转码后的视频从原始视频的起始位置开始；</li>
+<li>当数值大于0时（假设为 n），表示转码后的视频从原始视频的第 n 秒位置开始；</li>
+<li>当数值小于0时（假设为 -n），表示转码后的视频从原始视频结束 n 秒前的位置开始。</li>
+      */
+  StartTimeOffset: number
+
+  /**
+      * 视频拆条结束的偏移时间，单位：秒。
+<li>不填或填0，表示转码后的视频持续到原始视频的末尾终止；</li>
+<li>当数值大于0时（假设为 n），表示转码后的视频持续到原始视频第 n 秒时终止；</li>
+<li>当数值小于0时（假设为 -n），表示转码后的视频持续到原始视频结束 n 秒前终止。</li>
+      */
+  EndTimeOffset: number
+
+  /**
+   * [任务流模板](/document/product/266/11700#.E4.BB.BB.E5.8A.A1.E6.B5.81.E6.A8.A1.E6.9D.BF)名字，如果要对生成的新视频执行任务流时填写。
+   */
+  ProcedureName: string
+
+  /**
+   * 视频拆条输出信息。
+   */
+  OutputConfig: SplitMediaOutputConfig
+}
+
+/**
  * 鉴黄任务控制参数
  */
 export interface PornConfigureInfo {
@@ -12312,6 +12537,21 @@ export interface AiRecognitionTaskObjectSeqmentItem {
    * 识别结果的区域坐标。数组包含 4 个元素 [x1,y1,x2,y2]，依次表示区域左上点、右下点的横纵坐标。
    */
   AreaCoordSet: Array<number>
+}
+
+/**
+ * SplitMedia返回参数结构体
+ */
+export interface SplitMediaResponse {
+  /**
+   * 视频拆条的任务 ID，可以通过该 ID 查询拆条任务（任务类型为 SplitMedia）的状态。
+   */
+  TaskId?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

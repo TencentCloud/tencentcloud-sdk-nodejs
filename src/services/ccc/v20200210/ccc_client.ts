@@ -18,7 +18,9 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribePSTNActiveSessionListRequest,
   DescribeTelCallInfoResponse,
+  SeatUserInfo,
   DescribeTelCdrRequest,
   DescribeTelCdrResponse,
   DescribeIMCdrsResponse,
@@ -30,10 +32,11 @@ import {
   DescribeTelCallInfoRequest,
   CreateStaffResponse,
   TelCdrInfo,
-  SeatUserInfo,
+  PSTNSessionInfo,
   CreateStaffRequest,
   DescribeChatMessagesResponse,
   Message,
+  DescribePSTNActiveSessionListResponse,
   IMCdrInfo,
 } from "./ccc_models"
 
@@ -77,13 +80,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取电话服务记录与录音
+   * 创建 SDK 登录 Token。
    */
-  async DescribeTelCdr(
-    req: DescribeTelCdrRequest,
-    cb?: (error: string, rep: DescribeTelCdrResponse) => void
-  ): Promise<DescribeTelCdrResponse> {
-    return this.request("DescribeTelCdr", req, cb)
+  async CreateSDKLoginToken(
+    req: CreateSDKLoginTokenRequest,
+    cb?: (error: string, rep: CreateSDKLoginTokenResponse) => void
+  ): Promise<CreateSDKLoginTokenResponse> {
+    return this.request("CreateSDKLoginToken", req, cb)
+  }
+
+  /**
+   * 获取 PSTN 活动会话列表。
+   */
+  async DescribePSTNActiveSessionList(
+    req: DescribePSTNActiveSessionListRequest,
+    cb?: (error: string, rep: DescribePSTNActiveSessionListResponse) => void
+  ): Promise<DescribePSTNActiveSessionListResponse> {
+    return this.request("DescribePSTNActiveSessionList", req, cb)
   }
 
   /**
@@ -97,12 +110,12 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建 SDK 登录 Token。
+   * 获取电话服务记录与录音
    */
-  async CreateSDKLoginToken(
-    req: CreateSDKLoginTokenRequest,
-    cb?: (error: string, rep: CreateSDKLoginTokenResponse) => void
-  ): Promise<CreateSDKLoginTokenResponse> {
-    return this.request("CreateSDKLoginToken", req, cb)
+  async DescribeTelCdr(
+    req: DescribeTelCdrRequest,
+    cb?: (error: string, rep: DescribeTelCdrResponse) => void
+  ): Promise<DescribeTelCdrResponse> {
+    return this.request("DescribeTelCdr", req, cb)
   }
 }

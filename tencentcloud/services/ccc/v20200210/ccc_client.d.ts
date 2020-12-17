@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeTelCallInfoResponse, DescribeTelCdrRequest, DescribeTelCdrResponse, DescribeIMCdrsResponse, DescribeChatMessagesRequest, CreateSDKLoginTokenResponse, DescribeIMCdrsRequest, CreateSDKLoginTokenRequest, DescribeTelCallInfoRequest, CreateStaffResponse, CreateStaffRequest, DescribeChatMessagesResponse } from "./ccc_models";
+import { DescribePSTNActiveSessionListRequest, DescribeTelCallInfoResponse, DescribeTelCdrRequest, DescribeTelCdrResponse, DescribeIMCdrsResponse, DescribeChatMessagesRequest, CreateSDKLoginTokenResponse, DescribeIMCdrsRequest, CreateSDKLoginTokenRequest, DescribeTelCallInfoRequest, CreateStaffResponse, CreateStaffRequest, DescribeChatMessagesResponse, DescribePSTNActiveSessionListResponse } from "./ccc_models";
 /**
  * ccc client
  * @class
@@ -20,15 +20,19 @@ export declare class Client extends AbstractClient {
      */
     CreateStaff(req: CreateStaffRequest, cb?: (error: string, rep: CreateStaffResponse) => void): Promise<CreateStaffResponse>;
     /**
-     * 获取电话服务记录与录音
+     * 创建 SDK 登录 Token。
      */
-    DescribeTelCdr(req: DescribeTelCdrRequest, cb?: (error: string, rep: DescribeTelCdrResponse) => void): Promise<DescribeTelCdrResponse>;
+    CreateSDKLoginToken(req: CreateSDKLoginTokenRequest, cb?: (error: string, rep: CreateSDKLoginTokenResponse) => void): Promise<CreateSDKLoginTokenResponse>;
+    /**
+     * 获取 PSTN 活动会话列表。
+     */
+    DescribePSTNActiveSessionList(req: DescribePSTNActiveSessionListRequest, cb?: (error: string, rep: DescribePSTNActiveSessionListResponse) => void): Promise<DescribePSTNActiveSessionListResponse>;
     /**
      * 按实例获取电话消耗统计
      */
     DescribeTelCallInfo(req: DescribeTelCallInfoRequest, cb?: (error: string, rep: DescribeTelCallInfoResponse) => void): Promise<DescribeTelCallInfoResponse>;
     /**
-     * 创建 SDK 登录 Token。
+     * 获取电话服务记录与录音
      */
-    CreateSDKLoginToken(req: CreateSDKLoginTokenRequest, cb?: (error: string, rep: CreateSDKLoginTokenResponse) => void): Promise<CreateSDKLoginTokenResponse>;
+    DescribeTelCdr(req: DescribeTelCdrRequest, cb?: (error: string, rep: DescribeTelCdrResponse) => void): Promise<DescribeTelCdrResponse>;
 }

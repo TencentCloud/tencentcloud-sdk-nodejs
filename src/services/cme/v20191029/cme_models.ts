@@ -998,6 +998,26 @@ export interface Authorizer {
 }
 
 /**
+ * DescribePlatforms返回参数结构体
+ */
+export interface DescribePlatformsResponse {
+  /**
+   * 符合搜索条件的记录总数。
+   */
+  TotalCount?: number
+
+  /**
+   * 平台信息列表。
+   */
+  PlatformInfoSet?: Array<PlatformInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeTasks请求参数结构体
  */
 export interface DescribeTasksRequest {
@@ -1214,6 +1234,41 @@ export interface EmptyTrackItem {
    * 持续时间，单位为秒。
    */
   Duration: number
+}
+
+/**
+ * 平台信息。
+ */
+export interface PlatformInfo {
+  /**
+   * 平台名称。
+   */
+  Platform: string
+
+  /**
+   * 平台描述。
+   */
+  Description: string
+
+  /**
+   * 云点播子应用 Id。
+   */
+  VodSubAppId: number
+
+  /**
+   * 平台绑定的 license Id。
+   */
+  LicenseId: string
+
+  /**
+   * 创建时间，格式按照 ISO 8601 标准表示。
+   */
+  CreateTime: string
+
+  /**
+   * 更新时间，格式按照 ISO 8601 标准表示。
+   */
+  UpdateTime: string
 }
 
 /**
@@ -1639,6 +1694,27 @@ export interface DescribeClassRequest {
    * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
    */
   Operator?: string
+}
+
+/**
+ * DescribeSharedSpace返回参数结构体
+ */
+export interface DescribeSharedSpaceResponse {
+  /**
+   * 查询到的共享空间总数。
+   */
+  TotalCount?: number
+
+  /**
+      * 各个共享空间对应的授权者信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AuthorizerSet?: Array<Authorizer>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2223,24 +2299,28 @@ export interface DeleteTeamMembersRequest {
 }
 
 /**
- * DescribeSharedSpace返回参数结构体
+ * DescribePlatforms请求参数结构体
  */
-export interface DescribeSharedSpaceResponse {
+export interface DescribePlatformsRequest {
   /**
-   * 查询到的共享空间总数。
+   * 平台集合。
    */
-  TotalCount?: number
+  Platforms?: Array<string>
 
   /**
-      * 各个共享空间对应的授权者信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AuthorizerSet?: Array<Authorizer>
+   * 平台绑定的 license Id 集合。
+   */
+  LicenseIds?: Array<string>
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 分页返回的起始偏移量，默认值：0。
    */
-  RequestId?: string
+  Offset?: number
+
+  /**
+   * 分页返回的记录条数，默认值：10。
+   */
+  Limit?: number
 }
 
 /**
@@ -2499,33 +2579,23 @@ export interface MaterialStatus {
 }
 
 /**
- * 雪碧图
+ * DescribeProjects返回参数结构体
  */
-export interface MediaImageSpriteInfo {
+export interface DescribeProjectsResponse {
   /**
-   * 雪碧图小图的高度。
+   * 符合条件的记录总数。
    */
-  Height: number
+  TotalCount?: number
 
   /**
-   * 雪碧图小图的宽度。
+   * 项目信息列表。
    */
-  Width: number
+  ProjectInfoSet?: Array<ProjectInfo>
 
   /**
-   * 雪碧图小图的总数量。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  TotalCount: number
-
-  /**
-   * 截取雪碧图输出的地址。
-   */
-  ImageUrlSet: Array<string>
-
-  /**
-   * 雪碧图子图位置与时间关系的 WebVtt 文件地址。WebVtt 文件表明了各个雪碧图小图对应的时间点，以及在雪碧大图里的坐标位置，一般被播放器用于实现预览。
-   */
-  WebVttUrl: string
+  RequestId?: string
 }
 
 /**
@@ -2927,23 +2997,33 @@ export interface GrantResourceAuthorizationRequest {
 }
 
 /**
- * DescribeProjects返回参数结构体
+ * 雪碧图
  */
-export interface DescribeProjectsResponse {
+export interface MediaImageSpriteInfo {
   /**
-   * 符合条件的记录总数。
+   * 雪碧图小图的高度。
    */
-  TotalCount?: number
+  Height: number
 
   /**
-   * 项目信息列表。
+   * 雪碧图小图的宽度。
    */
-  ProjectInfoSet?: Array<ProjectInfo>
+  Width: number
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 雪碧图小图的总数量。
    */
-  RequestId?: string
+  TotalCount: number
+
+  /**
+   * 截取雪碧图输出的地址。
+   */
+  ImageUrlSet: Array<string>
+
+  /**
+   * 雪碧图子图位置与时间关系的 WebVtt 文件地址。WebVtt 文件表明了各个雪碧图小图对应的时间点，以及在雪碧大图里的坐标位置，一般被播放器用于实现预览。
+   */
+  WebVttUrl: string
 }
 
 /**

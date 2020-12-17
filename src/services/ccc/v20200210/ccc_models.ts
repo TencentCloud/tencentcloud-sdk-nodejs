@@ -16,6 +16,26 @@
  */
 
 /**
+ * DescribePSTNActiveSessionList请求参数结构体
+ */
+export interface DescribePSTNActiveSessionListRequest {
+  /**
+   * 应用 ID
+   */
+  SdkAppId: number
+
+  /**
+   * 数据偏移
+   */
+  Offset: number
+
+  /**
+   * 返回的数据条数，最大 25
+   */
+  Limit: number
+}
+
+/**
  * DescribeTelCallInfo返回参数结构体
  */
 export interface DescribeTelCallInfoResponse {
@@ -38,6 +58,48 @@ export interface DescribeTelCallInfoResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 坐席用户信息
+ */
+export interface SeatUserInfo {
+  /**
+   * 坐席名称
+   */
+  Name?: string
+
+  /**
+   * 坐席邮箱
+   */
+  Mail?: string
+
+  /**
+   * 坐席电话号码
+   */
+  Phone?: string
+
+  /**
+   * 坐席昵称
+   */
+  Nick?: string
+
+  /**
+   * 用户ID
+   */
+  UserId?: string
+
+  /**
+      * 坐席关联的技能组列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SkillGroupNameList?: Array<string>
+
+  /**
+      * 工号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StaffNumber?: string
 }
 
 /**
@@ -336,45 +398,63 @@ export interface TelCdrInfo {
 }
 
 /**
- * 坐席用户信息
+ * PSTN 会话信息
  */
-export interface SeatUserInfo {
+export interface PSTNSessionInfo {
   /**
-   * 坐席名称
+   * 会话 ID
    */
-  Name?: string
+  SessionID: string
+
+  /**
+   * 会话临时房间 ID
+   */
+  RoomID: string
+
+  /**
+   * 主叫
+   */
+  Caller: string
+
+  /**
+   * 被叫
+   */
+  Callee: string
+
+  /**
+   * 开始时间，Unix 时间戳
+   */
+  StartTimestamp: string
+
+  /**
+   * 接听时间，Unix 时间戳
+   */
+  AcceptTimestamp: string
 
   /**
    * 坐席邮箱
    */
-  Mail?: string
+  StaffEmail: string
 
   /**
-   * 坐席电话号码
+   * 坐席工号
    */
-  Phone?: string
+  StaffNumber: string
 
   /**
-   * 坐席昵称
+   * 坐席状态 inProgress 进行中
    */
-  Nick?: string
+  SessionStatus: string
 
   /**
-   * 用户ID
+   * 会话呼叫方向， 0 呼入 | 1 - 呼出
    */
-  UserId?: string
+  Direction: number
 
   /**
-      * 坐席关联的技能组列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SkillGroupNameList?: Array<string>
-
-  /**
-      * 工号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  StaffNumber?: string
+   * 振铃时间，Unix 时间戳
+   */
+  RingTimestamp: number
 }
 
 /**
@@ -425,6 +505,26 @@ export interface Message {
    * 消息内容
    */
   Content: string
+}
+
+/**
+ * DescribePSTNActiveSessionList返回参数结构体
+ */
+export interface DescribePSTNActiveSessionListResponse {
+  /**
+   * 列表总条数
+   */
+  Total?: number
+
+  /**
+   * 列表内容
+   */
+  Sessions?: Array<PSTNSessionInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

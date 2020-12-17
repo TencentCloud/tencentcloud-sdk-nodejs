@@ -248,7 +248,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteBinding(req: DeleteBindingRequest, cb?: (error: string, rep: DeleteBindingResponse) => void): Promise<DeleteBindingResponse>;
     /**
-     * 本接口（CreateStorage）用于购买云存套餐。
+     * 该接口已经停止维护，请勿使用
      */
     CreateStorage(req: CreateStorageRequest, cb?: (error: string, rep: CreateStorageResponse) => void): Promise<CreateStorageResponse>;
     /**

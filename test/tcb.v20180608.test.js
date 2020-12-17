@@ -148,6 +148,16 @@ it("tcb.v20180608.ModifyEndUser", async function () {
     }
 })
 
+it("tcb.v20180608.DescribeExtraPkgBillingInfo", async function () {
+    try {
+       const data = await client.DescribeExtraPkgBillingInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.DescribePostpayPackageFreeQuotas", async function () {
     try {
        const data = await client.DescribePostpayPackageFreeQuotas({})
@@ -228,9 +238,9 @@ it("tcb.v20180608.CreateCloudBaseRunResource", async function () {
     }
 })
 
-it("tcb.v20180608.DescribeExtraPkgBillingInfo", async function () {
+it("tcb.v20180608.DeleteCloudBaseProjectLatestVersion", async function () {
     try {
-       const data = await client.DescribeExtraPkgBillingInfo({})
+       const data = await client.DeleteCloudBaseProjectLatestVersion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

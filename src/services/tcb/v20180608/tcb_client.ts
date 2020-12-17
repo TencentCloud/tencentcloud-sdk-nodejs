@@ -47,6 +47,7 @@ import {
   FunctionInfo,
   CommonServiceAPIRequest,
   CreateStaticStoreRequest,
+  DeleteCloudBaseProjectLatestVersionResponse,
   CreateAuthDomainResponse,
   DescribeEnvsRequest,
   DescribeExtraPkgBillingInfoRequest,
@@ -80,6 +81,7 @@ import {
   CreateCloudBaseRunServerVersionResponse,
   DescribeEndUserLoginStatisticRequest,
   PlatformStatistic,
+  DeleteCloudBaseProjectLatestVersionRequest,
   CloudBaseRunNfsVolumeSource,
   CloudBaseRunImageSecretInfo,
   ModifyEnvResponse,
@@ -251,6 +253,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取增值包计费相关信息
+   */
+  async DescribeExtraPkgBillingInfo(
+    req: DescribeExtraPkgBillingInfoRequest,
+    cb?: (error: string, rep: DescribeExtraPkgBillingInfoResponse) => void
+  ): Promise<DescribeExtraPkgBillingInfoResponse> {
+    return this.request("DescribeExtraPkgBillingInfo", req, cb)
+  }
+
+  /**
    * 获取后付费免费额度
    */
   async DescribePostpayPackageFreeQuotas(
@@ -331,13 +343,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取增值包计费相关信息
+   * 删除云项目
    */
-  async DescribeExtraPkgBillingInfo(
-    req: DescribeExtraPkgBillingInfoRequest,
-    cb?: (error: string, rep: DescribeExtraPkgBillingInfoResponse) => void
-  ): Promise<DescribeExtraPkgBillingInfoResponse> {
-    return this.request("DescribeExtraPkgBillingInfo", req, cb)
+  async DeleteCloudBaseProjectLatestVersion(
+    req: DeleteCloudBaseProjectLatestVersionRequest,
+    cb?: (error: string, rep: DeleteCloudBaseProjectLatestVersionResponse) => void
+  ): Promise<DeleteCloudBaseProjectLatestVersionResponse> {
+    return this.request("DeleteCloudBaseProjectLatestVersion", req, cb)
   }
 
   /**

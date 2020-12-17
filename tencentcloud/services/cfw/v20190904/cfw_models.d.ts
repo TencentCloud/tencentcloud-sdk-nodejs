@@ -804,19 +804,19 @@ export interface RuleInfoData {
       */
     Strategy: string;
     /**
-      * 描述
+      * 访问源类型，1是IP，3是域名，4是IP地址模版，5是域名地址模版
       */
-    Detail: string;
+    SourceType: number;
     /**
       * 方向，0：出站，1：入站
       */
     Direction: number;
     /**
-      * 源类型,1是ip,2是域名,3是ip地址簿，4是ip组地址簿
+      * 描述
       */
-    SourceType: number;
+    Detail: string;
     /**
-      * 目的类型,1是ip,2是域名,3是ip地址簿，4是ip组地址簿
+      * 访问目的类型，1是IP，3是域名，4是IP地址模版，5是域名地址模版
       */
     TargetType: number;
     /**
@@ -828,7 +828,7 @@ export interface RuleInfoData {
       */
     Id?: number;
     /**
-      * log
+      * 日志id，从告警处创建必传，其它为空
       */
     LogId?: string;
     /**
@@ -840,7 +840,7 @@ export interface RuleInfoData {
       */
     Country?: number;
     /**
-      * 云厂商，支持多个，以逗号分隔， 1:腾讯云（仅海外）,2:阿里云,3:亚马逊云,4:华为云,5:微软云
+      * 云厂商，支持多个，以逗号分隔， 1:腾讯云（仅中国香港及海外）,2:阿里云,3:亚马逊云,4:华为云,5:微软云
       */
     CloudCode?: string;
     /**
@@ -848,11 +848,11 @@ export interface RuleInfoData {
       */
     IsRegion?: number;
     /**
-      * 地域名
+      * 城市名
       */
     CityName?: string;
     /**
-      * 地域名
+      * 国家名
       */
     CountryName?: string;
 }

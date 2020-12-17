@@ -32,7 +32,7 @@ export declare class Client extends AbstractClient {
      */
     DescribePackageItems(req: DescribePackageItemsRequest, cb?: (error: string, rep: DescribePackageItemsResponse) => void): Promise<DescribePackageItemsResponse>;
     /**
-     * 客户上报用户数据功能，为了更好的为用户提供优质服务
+     * 客户上报用户数据功能，为了更好地为用户提供优质服务
      */
     ReportData(req: ReportDataRequest, cb?: (error: string, rep: ReportDataResponse) => void): Promise<ReportDataResponse>;
     /**

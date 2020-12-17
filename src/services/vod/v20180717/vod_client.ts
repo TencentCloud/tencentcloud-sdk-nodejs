@@ -120,7 +120,9 @@ import {
   DescribeAIRecognitionTemplatesResponse,
   EditMediaResponse,
   PoliticalOcrReviewTemplateInfoForUpdate,
+  TaskOutputMediaInfo,
   ProcessMediaByUrlRequest,
+  SplitMediaTaskConfig,
   PlayStatFileInfo,
   ModifyMediaInfoRequest,
   DeleteTranscodeTemplateRequest,
@@ -155,6 +157,7 @@ import {
   DeleteAdaptiveDynamicStreamingTemplateRequest,
   AiRecognitionTaskOcrFullTextSegmentItem,
   EditMediaOutputConfig,
+  SplitMediaTaskSegmentInfo,
   AiReviewPornAsrTaskOutput,
   SimpleHlsClipResponse,
   DeleteAIAnalysisTemplateRequest,
@@ -251,6 +254,7 @@ import {
   HeadTailConfigureInfoForUpdate,
   ImageScale,
   TranscodePlayInfo2017,
+  SplitMediaTask,
   ComposeMediaTaskInput,
   AnimatedGraphicTaskInput,
   MosaicInput,
@@ -271,6 +275,7 @@ import {
   ResetProcedureTemplateResponse,
   ProhibitedConfigureInfo,
   DrmStreamingsInfo,
+  SplitMediaRequest,
   AiReviewTerrorismOcrTaskOutput,
   AiAnalysisResult,
   DescribeAIAnalysisTemplatesRequest,
@@ -404,6 +409,7 @@ import {
   DescribeMediaProcessUsageDataResponse,
   DescribeSuperPlayerConfigsRequest,
   AiRecognitionTaskOcrFullTextResultInput,
+  SplitMediaOutputConfig,
   AiRecognitionTaskSegmentResultInput,
   DescribeTasksResponse,
   DescribeSubAppIdsRequest,
@@ -459,8 +465,10 @@ import {
   DeleteTranscodeTemplateResponse,
   MediaTranscodeItem,
   DescribePersonSamplesResponse,
+  SplitMediaTaskInput,
   PornConfigureInfo,
   AiRecognitionTaskObjectSeqmentItem,
+  SplitMediaResponse,
   PullEventsRequest,
   FaceConfigureInfoForUpdate,
   DescribeAIAnalysisTemplatesResponse,
@@ -686,6 +694,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeStorageDataResponse) => void
   ): Promise<DescribeStorageDataResponse> {
     return this.request("DescribeStorageData", req, cb)
+  }
+
+  /**
+   * 对点播视频进行拆条，生成多个新的点播视频。
+   */
+  async SplitMedia(
+    req: SplitMediaRequest,
+    cb?: (error: string, rep: SplitMediaResponse) => void
+  ): Promise<SplitMediaResponse> {
+    return this.request("SplitMedia", req, cb)
   }
 
   /**

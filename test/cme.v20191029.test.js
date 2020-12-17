@@ -148,6 +148,16 @@ it("cme.v20191029.ExportVideoByEditorTrackData", async function () {
     }
 })
 
+it("cme.v20191029.DescribePlatforms", async function () {
+    try {
+       const data = await client.DescribePlatforms({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cme.v20191029.DescribeTaskDetail", async function () {
     try {
        const data = await client.DescribeTaskDetail({})

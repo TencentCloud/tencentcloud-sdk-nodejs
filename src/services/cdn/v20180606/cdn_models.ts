@@ -53,6 +53,12 @@ export interface ScdnTopUrlData {
    * 时间
    */
   Time: string
+
+  /**
+      * 域名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Domain: string
 }
 
 /**

@@ -102,6 +102,7 @@ export { redis } from "./redis";
 export { rkp } from "./rkp";
 export { rp } from "./rp";
 export { scf } from "./scf";
+export { ses } from "./ses";
 export { smpn } from "./smpn";
 export { sms } from "./sms";
 export { soe } from "./soe";

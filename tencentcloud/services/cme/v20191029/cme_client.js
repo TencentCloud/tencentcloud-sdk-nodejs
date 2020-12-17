@@ -106,6 +106,15 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ExportVideoByEditorTrackData", req, cb);
     }
     /**
+     * <li>支持获取所创建的所有平台列表信息；</li>
+<li>支持获取指定的平台列表信息。</li>
+
+
+     */
+    async DescribePlatforms(req, cb) {
+        return this.request("DescribePlatforms", req, cb);
+    }
+    /**
      * 获取任务详情信息，包含下面几个部分：
 <li>任务基础信息：包括任务状态、错误信息、创建时间等；</li>
 <li>导出项目输出信息：包括输出的素材 Id 等。</li>

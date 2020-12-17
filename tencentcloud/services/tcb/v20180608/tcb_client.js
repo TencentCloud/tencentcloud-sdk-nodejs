@@ -106,6 +106,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyEndUser", req, cb);
     }
     /**
+     * 获取增值包计费相关信息
+     */
+    async DescribeExtraPkgBillingInfo(req, cb) {
+        return this.request("DescribeExtraPkgBillingInfo", req, cb);
+    }
+    /**
      * 获取后付费免费额度
      */
     async DescribePostpayPackageFreeQuotas(req, cb) {
@@ -154,10 +160,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCloudBaseRunResource", req, cb);
     }
     /**
-     * 获取增值包计费相关信息
+     * 删除云项目
      */
-    async DescribeExtraPkgBillingInfo(req, cb) {
-        return this.request("DescribeExtraPkgBillingInfo", req, cb);
+    async DeleteCloudBaseProjectLatestVersion(req, cb) {
+        return this.request("DeleteCloudBaseProjectLatestVersion", req, cb);
     }
     /**
      * 获取下载文件信息

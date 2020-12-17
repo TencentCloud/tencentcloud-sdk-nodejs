@@ -121,6 +121,7 @@ import {
   ModifyVpcAttributeRequest,
   DescribeInstancesDeniedActionsResponse,
   DeleteHaVipResponse,
+  ReleaseIpv6AddressesRequest,
   TaskOutput,
   ModuleCounter,
   ReplaceSecurityGroupPolicyResponse,
@@ -145,6 +146,7 @@ import {
   HealthCheck,
   DescribeSecurityGroupLimitsResponse,
   DescribeAddressesResponse,
+  AssignIpv6AddressesResponse,
   CreateRoutesResponse,
   DeleteListenerRequest,
   DescribeSecurityGroupsResponse,
@@ -168,6 +170,7 @@ import {
   DetachNetworkInterfaceRequest,
   AddressTemplateSpecification,
   DescribeConfigResponse,
+  AssignIpv6AddressesRequest,
   ModifyModuleNetworkResponse,
   ModifyDefaultSubnetResponse,
   ModifyTargetWeightRequest,
@@ -179,6 +182,7 @@ import {
   Subnet,
   ModifyVpcAttributeResponse,
   DeleteLoadBalancerRequest,
+  ModifyIpv6AddressesAttributeResponse,
   DeleteVpcResponse,
   Target,
   RouteTableAssociation,
@@ -198,6 +202,7 @@ import {
   DescribeLoadBalanceTaskStatusRequest,
   ImportCustomImageRequest,
   ModifyHaVipAttributeResponse,
+  ModifyIpv6AddressesAttributeRequest,
   DescribeModuleDetailRequest,
   DeleteRoutesRequest,
   AssociateAddressRequest,
@@ -324,6 +329,7 @@ import {
   ListenerHealth,
   DisassociateSecurityGroupsResponse,
   DescribeRouteConflictsRequest,
+  ReleaseIpv6AddressesResponse,
   LoadBalancer,
   AddressInfo,
 } from "./ecm_models"
@@ -821,6 +827,16 @@ EIP 如果欠费或被封堵，则不能被绑定。
   }
 
   /**
+   * 本接口（UnassignIpv6Addresses）用于释放弹性网卡IPv6地址。
+   */
+  async ReleaseIpv6Addresses(
+    req: ReleaseIpv6AddressesRequest,
+    cb?: (error: string, rep: ReleaseIpv6AddressesResponse) => void
+  ): Promise<ReleaseIpv6AddressesResponse> {
+    return this.request("ReleaseIpv6Addresses", req, cb)
+  }
+
+  /**
    * 获取负载均衡后端服务的健康检查状态。
    */
   async DescribeTargetHealth(
@@ -869,6 +885,16 @@ EIP 如果欠费或被封堵，则不能被绑定。
     cb?: (error: string, rep: DisableRoutesResponse) => void
   ): Promise<DisableRoutesResponse> {
     return this.request("DisableRoutes", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyIpv6AddressesAttribute）用于修改弹性网卡IPv6地址属性。
+   */
+  async ModifyIpv6AddressesAttribute(
+    req: ModifyIpv6AddressesAttributeRequest,
+    cb?: (error: string, rep: ModifyIpv6AddressesAttributeResponse) => void
+  ): Promise<ModifyIpv6AddressesAttributeResponse> {
+    return this.request("ModifyIpv6AddressesAttribute", req, cb)
   }
 
   /**
@@ -1119,6 +1145,16 @@ EIP 如果欠费或被封堵，则不能被绑定。
     cb?: (error: string, rep: RebootInstancesResponse) => void
   ): Promise<RebootInstancesResponse> {
     return this.request("RebootInstances", req, cb)
+  }
+
+  /**
+   * 本接口（AssignIpv6Addresses）用于弹性网卡申请IPv6地址。
+   */
+  async AssignIpv6Addresses(
+    req: AssignIpv6AddressesRequest,
+    cb?: (error: string, rep: AssignIpv6AddressesResponse) => void
+  ): Promise<AssignIpv6AddressesResponse> {
+    return this.request("AssignIpv6Addresses", req, cb)
   }
 
   /**

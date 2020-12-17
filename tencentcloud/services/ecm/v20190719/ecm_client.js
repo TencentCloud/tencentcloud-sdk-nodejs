@@ -323,6 +323,12 @@ EIP 如果欠费或被封堵，则不能被绑定。
         return this.request("DeleteModule", req, cb);
     }
     /**
+     * 本接口（UnassignIpv6Addresses）用于释放弹性网卡IPv6地址。
+     */
+    async ReleaseIpv6Addresses(req, cb) {
+        return this.request("ReleaseIpv6Addresses", req, cb);
+    }
+    /**
      * 获取负载均衡后端服务的健康检查状态。
      */
     async DescribeTargetHealth(req, cb) {
@@ -352,6 +358,12 @@ EIP 如果欠费或被封堵，则不能被绑定。
      */
     async DisableRoutes(req, cb) {
         return this.request("DisableRoutes", req, cb);
+    }
+    /**
+     * 本接口（ModifyIpv6AddressesAttribute）用于修改弹性网卡IPv6地址属性。
+     */
+    async ModifyIpv6AddressesAttribute(req, cb) {
+        return this.request("ModifyIpv6AddressesAttribute", req, cb);
     }
     /**
      * 获取概览页统计的基本数据
@@ -502,6 +514,12 @@ EIP 如果欠费或被封堵，则不能被绑定。
      */
     async RebootInstances(req, cb) {
         return this.request("RebootInstances", req, cb);
+    }
+    /**
+     * 本接口（AssignIpv6Addresses）用于弹性网卡申请IPv6地址。
+     */
+    async AssignIpv6Addresses(req, cb) {
+        return this.request("AssignIpv6Addresses", req, cb);
     }
     /**
      * 弹性网卡内网IP迁移。
