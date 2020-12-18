@@ -159,8 +159,9 @@ export interface ImageModerationResponse {
   Suggestion?: string
 
   /**
-   * 恶意标签，Normal：正常，Polity：涉政，Porn：色情，Illegal：违法，Abuse：谩骂，Terror：暴恐，Ad：广告，Custom：自定义图片。
-   */
+      * 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义图片。
+以及令人反感、不安全或不适宜的内容类型。
+      */
   Label?: string
 
   /**
@@ -175,26 +176,26 @@ export interface ImageModerationResponse {
   Score?: number
 
   /**
-      * 识别模型的审核结果，包括涉黄、性感、涉暴、违法违规、等审核结果。
+      * 智能模型的识别结果，包括涉黄、广告等令人反感、不安全或不适宜的内容类型识别结果。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LabelResults?: Array<LabelResult>
 
   /**
-      * 物体检测模型的审核结果，包括涉政实体、广告台标/二维码等物体坐标信息与内容审核信息。
+      * 物体检测模型的审核结果，包括实体、广告台标/二维码等物体坐标信息与内容审核信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ObjectResults?: Array<ObjectResult>
 
   /**
-      * OCR识别后的文本审核结果，包括文本所处图片的OCR坐标信息以及图片文本的审核结果。
+      * OCR识别后的文本识别结果，包括文本所处图片的OCR坐标信息以及图片文本的识别结果。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   OcrResults?: Array<OcrResult>
 
   /**
       * 基于图片风险库识别的结果。
-风险库包括违规黑库与正常白库的结果。
+风险库包括不安全黑库与正常白库的结果。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LibResults?: Array<LibResult>
@@ -298,13 +299,15 @@ export interface OcrResult {
   Scene: string
 
   /**
-   * 建议值，Block：打击，Review：待复审，Pass：正常
-   */
+      * 建议您拿到判断结果后的执行操作。
+建议值，Block：建议屏蔽，Review：建议复审，Pass：建议通过
+      */
   Suggestion: string
 
   /**
-   * 恶意标签，Normal：正常，Polity：涉政，Porn：色情，Illegal：违法，Abuse：谩骂，Terror：暴恐，Ad：广告
-   */
+      * 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义词库。
+以及令人反感、不安全或不适宜的内容类型。
+      */
   Label: string
 
   /**
@@ -321,6 +324,11 @@ export interface OcrResult {
    * ocr结果详情
    */
   Details: Array<OcrTextDetail>
+
+  /**
+   * ocr识别出的文本结果
+   */
+  Text: string
 }
 
 /**
@@ -383,13 +391,15 @@ export interface LabelResult {
   Scene: string
 
   /**
-   * 建议值，Block：打击，Review：待复审，Pass：正常
-   */
+      * 建议您拿到判断结果后的执行操作。
+建议值，Block：建议屏蔽，Review：建议复审，Pass：建议通过
+      */
   Suggestion: string
 
   /**
-   * 恶意标签，Normal：正常，Polity：涉政，Porn：色情，Illegal：违法，Abuse：谩骂，Terror：暴恐，Ad：广告，Custom：自定义图片
-   */
+      * 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义图片。
+以及令人反感、不安全或不适宜的内容类型。
+      */
   Label: string
 
   /**
@@ -524,7 +534,7 @@ Moan	26001
 }
 
 /**
- * 实体检测结果详情：政治实体、广告台标、二维码
+ * 实体检测结果详情：实体、广告台标、二维码
  */
 export interface ObjectResult {
   /**
@@ -533,13 +543,15 @@ export interface ObjectResult {
   Scene: string
 
   /**
-   * 建议值，Block：打击，Review：待复审，Pass：正常
-   */
+      * 建议您拿到判断结果后的执行操作。
+建议值，Block：建议屏蔽，Review：建议复审，Pass：建议通过
+      */
   Suggestion: string
 
   /**
-   * 恶意标签，Normal：正常，Polity：涉政，Porn：色情，Illegal：违法，Abuse：谩骂，Terror：暴恐，Ad：广告，Custom：自定义图片
-   */
+      * 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义图片。
+以及令人反感、不安全或不适宜的内容类型。
+      */
   Label: string
 
   /**
@@ -576,17 +588,18 @@ export interface OcrTextDetail {
   Text: string
 
   /**
-   * 恶意标签，Normal：正常，Polity：涉政，Porn：色情，Illegal：违法，Abuse：谩骂，Terror：暴恐，Ad：广告，Custom：自定义关键词
-   */
+      * 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义词库。
+以及令人反感、不安全或不适宜的内容类型。
+      */
   Label: string
 
   /**
-   * 仅当Lable为Custom自定义关键词时有效，表示自定义库id
+   * 仅当Label为Custom自定义关键词时有效，表示自定义库id
    */
   LibId: string
 
   /**
-   * 仅当Lable为Custom自定义关键词时有效，表示自定义库名称
+   * 仅当Label为Custom自定义关键词时有效，表示自定义库名称
    */
   LibName: string
 
@@ -607,7 +620,7 @@ export interface OcrTextDetail {
 }
 
 /**
- * 实体检测结果明细，当检测场景为政治实体、广告台标、二维码和人脸属性时表示模型检测目标框的标签名称、标签值、标签分数以及检测框的位置信息。
+ * 实体检测结果明细，当检测场景为实体、广告台标、二维码时表示模型检测目标框的标签名称、标签值、标签分数以及检测框的位置信息。
  */
 export interface ObjectDetail {
   /**
@@ -623,7 +636,6 @@ export interface ObjectDetail {
   /**
       * 标签值，
 当标签为二维码时，表示URL地址，如Name为QrCode时，Value为"http//abc.com/aaa"
-当标签为人脸属性，表示属性值，如Name为Age时 Value为18
       */
   Value: string
 
@@ -709,13 +721,15 @@ export interface LibResult {
   Scene: string
 
   /**
-   * 建议值，Block：打击，Review：待复审，Pass：正常
-   */
+      * 建议您拿到判断结果后的执行操作。
+建议值，Block：建议屏蔽，Review：建议复审，Pass：建议通过
+      */
   Suggestion: string
 
   /**
-   * 恶意标签，Normal：正常，Polity：涉政，Porn：色情，Illegal：违法，Abuse：谩骂，Terror：暴恐，Ad：广告，Custom：自定义图片
-   */
+      * 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义词库。
+以及令人反感、不安全或不适宜的内容类型。
+      */
   Label: string
 
   /**
@@ -791,12 +805,12 @@ export interface LibDetail {
   Id: number
 
   /**
-   * 仅当Lable为Custom自定义关键词时有效，表示自定义库id
+   * 仅当Label为Custom自定义关键词时有效，表示自定义库id
    */
   LibId: string
 
   /**
-      * 仅当Lable为Custom自定义关键词时有效，表示自定义库名称
+      * 仅当Label为Custom自定义关键词时有效，表示自定义库名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LibName: string
@@ -807,8 +821,9 @@ export interface LibDetail {
   ImageId: string
 
   /**
-   * 恶意标签，Normal：正常，Polity：涉政，Porn：色情，Illegal：违法，Abuse：谩骂，Terror：暴恐，Ad：广告，Custom：自定义图片
-   */
+      * 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义词库。
+以及其他令人反感、不安全或不适宜的内容类型。
+      */
   Label: string
 
   /**

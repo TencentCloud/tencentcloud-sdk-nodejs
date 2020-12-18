@@ -664,7 +664,7 @@ export interface DescribeHistoryScaleRequest {
  */
 export interface DescribeRoomInformationResponse {
   /**
-   * 返回的数据总条数
+   * 返回当页数据总数
    */
   Total?: number
 

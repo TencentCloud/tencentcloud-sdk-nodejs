@@ -611,6 +611,10 @@ STATIC：静态
       * TencentBackupAddress，腾讯侧备用互联 IP
       */
     TencentBackupAddress?: string;
+    /**
+      * 高速上云服务ID
+      */
+    CloudAttachId?: string;
 }
 /**
  * DeleteDirectConnect返回参数结构体
@@ -1185,4 +1189,9 @@ REJECTED:拒绝
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SignLaw: boolean;
+    /**
+      * 高速上云服务ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CloudAttachId: string;
 }

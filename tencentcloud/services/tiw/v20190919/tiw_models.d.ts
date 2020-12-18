@@ -537,8 +537,6 @@ export interface CreateTranscodeRequest {
     MinResolution?: string;
     /**
       * 动态PPT转码可以为文件生成该分辨率的缩略图，不传、传空字符串或分辨率格式错误则不生成缩略图，分辨率格式同MinResolution
-
-静态转码这个参数不起作用
       */
     ThumbnailResolution?: string;
     /**

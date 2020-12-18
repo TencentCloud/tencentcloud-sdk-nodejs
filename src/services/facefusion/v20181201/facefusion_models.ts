@@ -105,7 +105,7 @@ export interface FaceFusionResponse {
   Image?: string
 
   /**
-   * 鉴政结果
+   * 不适宜内容识别结果
    */
   ReviewResultSet?: Array<FuseFaceReviewResult>
 
@@ -180,8 +180,8 @@ export interface FaceFusionRequest {
   PornDetect?: number
 
   /**
-      * 0表示不需要鉴政，1表示需要鉴政。默认值为0。
-请注意，鉴政服务开启后，您需要根据返回结果自行判断是否调整您的业务逻辑。例如提示您的用户图片非法，请更换图片。
+      * 0表示不需要不适宜内容识别，1表示需要不适宜内容识别。默认值为0。
+请注意，不适宜内容识别服务开启后，您需要根据返回结果自行判断是否调整您的业务逻辑。例如提示您的用户图片非法，请更换图片。
       */
   CelebrityIdentify?: number
 }
@@ -343,7 +343,7 @@ export interface FuseFaceResponse {
   FusedImage?: string
 
   /**
-      * 鉴政结果。该数组的顺序和请求中mergeinfo的顺序一致，一一对应
+      * 不适宜内容识别结果。该数组的顺序和请求中mergeinfo的顺序一致，一一对应
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ReviewResultSet?: Array<FuseFaceReviewResult>
@@ -391,8 +391,8 @@ export interface FuseFaceRequest {
   FuseFaceDegree?: number
 
   /**
-      * 0表示不需要鉴政，1表示需要鉴政。默认值为0。
-请注意，鉴政服务开启后，您需要根据返回结果自行判断是否调整您的业务逻辑。例如提示您的用户图片非法，请更换图片。
+      * 0表示不需要不适宜内容识别，1表示需要不适宜内容识别。默认值为0。
+请注意，不适宜内容识别服务开启后，您需要根据返回结果自行判断是否调整您的业务逻辑。例如提示您的用户图片非法，请更换图片。
       */
   CelebrityIdentify?: number
 }

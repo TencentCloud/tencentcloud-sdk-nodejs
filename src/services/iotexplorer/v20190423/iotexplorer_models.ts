@@ -747,6 +747,11 @@ export interface CreateLoRaGatewayRequest {
    * 是否公开
    */
   IsPublic?: boolean
+
+  /**
+   * 频点ID
+   */
+  FrequencyId?: string
 }
 
 /**
@@ -1477,6 +1482,11 @@ export interface LoRaGatewayItem {
    * 最后上报时间
    */
   LastSeenAt: string
+
+  /**
+   * 频点ID
+   */
+  FrequencyId?: string
 }
 
 /**
@@ -1943,6 +1953,11 @@ export interface ModifyLoRaGatewayRequest {
    * 位置详情
    */
   PositionDetails?: string
+
+  /**
+   * 频点ID
+   */
+  FrequencyId?: string
 }
 
 /**

@@ -618,6 +618,10 @@ export interface CreateLoRaGatewayRequest {
       * 是否公开
       */
     IsPublic?: boolean;
+    /**
+      * 频点ID
+      */
+    FrequencyId?: string;
 }
 /**
  * CreateProject返回参数结构体
@@ -1246,6 +1250,10 @@ export interface LoRaGatewayItem {
       * 最后上报时间
       */
     LastSeenAt: string;
+    /**
+      * 频点ID
+      */
+    FrequencyId?: string;
 }
 /**
  * ControlDeviceData返回参数结构体
@@ -1644,6 +1652,10 @@ export interface ModifyLoRaGatewayRequest {
       * 位置详情
       */
     PositionDetails?: string;
+    /**
+      * 频点ID
+      */
+    FrequencyId?: string;
 }
 /**
  * ListEventHistory返回参数结构体

@@ -7559,7 +7559,7 @@ export interface DescribeSimpleGroupsRequest {
       */
     SearchWord?: string;
     /**
-      * 部署组类型，精确过滤字段，M：service mesh, P：原生应用， M：网关应用
+      * 部署组类型，精确过滤字段，M：service mesh, P：原生应用， G：网关应用
       */
     AppMicroServiceType?: string;
 }
