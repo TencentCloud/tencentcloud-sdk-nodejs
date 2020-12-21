@@ -21,11 +21,9 @@ export interface ImageResultResult {
       * 场景
 Porn 色情
 Sexy 性感
-Polity 政治
-Illegal 违法
 Abuse 谩骂
-Terror 暴恐
 Ad 广告
+等多个识别场景
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Scene: string;
@@ -37,10 +35,8 @@ Ad 广告
       */
     HitFlag: number;
     /**
-      * 审核建议，可选值：
-Pass 通过，
-Review 建议人审，
-Block 确认违规
+      * 建议您拿到判断结果后的执行操作。
+建议值，Block：建议屏蔽，Review：建议复审，Pass：建议通过
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Suggestion: string;
@@ -385,22 +381,14 @@ export interface CancelTaskResponse {
  */
 export interface TaskLabel {
     /**
-      * 命中的标签
-Porn 色情
-Sexy 性感
-Polity 政治
-Illegal 违法
-Abuse 谩骂
-Terror 暴恐
-Ad 广告
+      * 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义词库。
+以及令人反感、不安全或不适宜的内容类型。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Label: string;
     /**
-      * 审核建议，可选值：
-Pass 通过，
-Review 建议人审，
-Block 确认违规
+      * 建议您拿到判断结果后的执行操作。
+建议值，Block：建议屏蔽，Review：建议复审，Pass：建议通过
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Suggestion: string;
@@ -567,7 +555,7 @@ export interface AmsDetailInfo {
  */
 export interface AudioResultDetailLanguageResult {
     /**
-      * 语种
+      * 语言信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Label: string;
@@ -648,7 +636,7 @@ export interface DescribeAudioStatResponse {
  */
 export interface DescribeAmsListResponse {
     /**
-      * 返回列表数据
+      * 返回列表数据----非必选，该参数暂未对外开放
       */
     AmsDetailSet?: Array<AmsDetailInfo>;
     /**
@@ -806,22 +794,14 @@ export interface AudioResult {
       */
     HitFlag: number;
     /**
-      * 命中的标签
-Porn 色情
-Polity 政治
-Illegal 违法
-Abuse 谩骂
-Terror 暴恐
-Ad 广告
-Moan 呻吟
+      * 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义词库。
+以及令人反感、不安全或不适宜的内容类型。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Label: string;
     /**
-      * 审核建议，可选值：
-Pass 通过，
-Review 建议人审，
-Block 确认违规
+      * 建议您拿到判断结果后的执行操作。
+建议值，Block：建议屏蔽，Review：建议复审，Pass：建议通过
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Suggestion: string;
@@ -849,15 +829,15 @@ Block 确认违规
       */
     Extra: string;
     /**
-      * 文本审核结果
+      * 文本识别结果
       */
     TextResults: Array<AudioResultDetailTextResult>;
     /**
-      * 音频呻吟审核结果
+      * 音频呻吟检测结果
       */
     MoanResults: Array<AudioResultDetailMoanResult>;
     /**
-      * 音频语种检测结果
+      * 音频语言检测结果
       */
     LanguageResults: Array<AudioResultDetailLanguageResult>;
 }
@@ -866,7 +846,7 @@ Block 确认违规
  */
 export interface AudioResultDetailMoanResult {
     /**
-      * 固定为Moan
+      * 固定为Moan（呻吟）
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Label: string;
@@ -943,6 +923,10 @@ export interface MediaInfo {
       * 高，单位为像素
       */
     Height: number;
+    /**
+      * 缩略图
+      */
+    Thumbnail: string;
 }
 /**
  * 媒体审核配置
@@ -995,15 +979,7 @@ export interface AudioSegments {
  */
 export interface EvilCount {
     /**
-      * 违规类型：
-Terror	24001
-Porn	20002
-Polity	20001
-Ad	20105
-Abuse	20007
-Illegal	20006
-Spam	25001
-Moan	26001
+      * ----非必选，该参数功能暂未对外开放
       */
     EvilType: string;
     /**
@@ -1053,24 +1029,16 @@ export interface ImageResult {
       */
     HitFlag: number;
     /**
-      * 命中的标签
-Porn 色情
-Sexy 性感
-Polity 政治
-Illegal 违法
-Abuse 谩骂
-Terror 暴恐
-Ad 广告
+      * 建议您拿到判断结果后的执行操作。
+建议值，Block：建议屏蔽，Review：建议复审，Pass：建议通过
+      */
+    Suggestion: string;
+    /**
+      * 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义词库。
+以及令人反感、不安全或不适宜的内容类型。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Label: string;
-    /**
-      * 审核建议，可选值：
-Pass 通过，
-Review 建议人审，
-Block 确认违规
-      */
-    Suggestion: string;
     /**
       * 得分
       */

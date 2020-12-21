@@ -143,6 +143,12 @@ DefenceMode映射如下：
   intercept = '防御模式'
       */
   DefenceMode: string
+
+  /**
+      * 查询条件
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Conditions: Array<ScdnEventLogConditions>
 }
 
 /**
@@ -2152,6 +2158,26 @@ export interface Ipv6 {
 }
 
 /**
+ * SCDN 事件日志查询条件
+ */
+export interface ScdnEventLogConditions {
+  /**
+   * 匹配关键字，ip, attack_location
+   */
+  Key: string
+
+  /**
+   * 逻辑操作符，取值 exclude, include
+   */
+  Operator: string
+
+  /**
+   * 匹配值，允许使用通配符(*)查询，匹配零个、单个、多个字符，例如 1.2.*
+   */
+  Value: string
+}
+
+/**
  * 状态码缓存过期配置，默认情况下会对 404 状态码缓存 10 秒
  */
 export interface StatusCodeCache {
@@ -2580,6 +2606,203 @@ path: 根据完整访问路径生效
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FilterType: string
+}
+
+/**
+ * UpdateDomainConfig请求参数结构体
+ */
+export interface UpdateDomainConfigRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+
+  /**
+   * 项目 ID
+   */
+  ProjectId?: number
+
+  /**
+   * 源站配置
+   */
+  Origin?: Origin
+
+  /**
+   * IP 黑白名单配置
+   */
+  IpFilter?: IpFilter
+
+  /**
+   * IP 限频配置
+   */
+  IpFreqLimit?: IpFreqLimit
+
+  /**
+   * 状态码缓存配置
+   */
+  StatusCodeCache?: StatusCodeCache
+
+  /**
+   * 智能压缩配置
+   */
+  Compression?: Compression
+
+  /**
+   * 带宽封顶配置
+   */
+  BandwidthAlert?: BandwidthAlert
+
+  /**
+   * Range 回源配置
+   */
+  RangeOriginPull?: RangeOriginPull
+
+  /**
+   * 301/302 回源跟随配置
+   */
+  FollowRedirect?: FollowRedirect
+
+  /**
+   * 错误码重定向配置（功能灰度中，尚未全量）
+   */
+  ErrorPage?: ErrorPage
+
+  /**
+   * 请求头部配置
+   */
+  RequestHeader?: RequestHeader
+
+  /**
+   * 响应头部配置
+   */
+  ResponseHeader?: ResponseHeader
+
+  /**
+   * 下载速度配置
+   */
+  DownstreamCapping?: DownstreamCapping
+
+  /**
+   * 节点缓存键配置
+   */
+  CacheKey?: CacheKey
+
+  /**
+   * 头部缓存配置
+   */
+  ResponseHeaderCache?: ResponseHeaderCache
+
+  /**
+   * 视频拖拽配置
+   */
+  VideoSeek?: VideoSeek
+
+  /**
+   * 缓存过期时间配置
+   */
+  Cache?: Cache
+
+  /**
+   * 跨国链路优化配置
+   */
+  OriginPullOptimization?: OriginPullOptimization
+
+  /**
+   * Https 加速配置
+   */
+  Https?: Https
+
+  /**
+   * 时间戳防盗链配置
+   */
+  Authentication?: Authentication
+
+  /**
+   * SEO 优化配置
+   */
+  Seo?: Seo
+
+  /**
+   * 访问协议强制跳转配置
+   */
+  ForceRedirect?: ForceRedirect
+
+  /**
+   * Referer 防盗链配置
+   */
+  Referer?: Referer
+
+  /**
+   * 浏览器缓存配置（功能灰度中，尚未全量）
+   */
+  MaxAge?: MaxAge
+
+  /**
+      * 域名业务类型
+web：静态加速
+download：下载加速
+media：流媒体点播加速
+      */
+  ServiceType?: string
+
+  /**
+      * 地域属性特殊配置
+适用于域名境内加速、境外加速配置不一致场景
+      */
+  SpecificConfig?: SpecificConfig
+
+  /**
+      * 域名加速区域
+mainland：中国境内加速
+overseas：中国境外加速
+global：全球加速
+      */
+  Area?: string
+
+  /**
+   * 回源超时配置
+   */
+  OriginPullTimeout?: OriginPullTimeout
+
+  /**
+   * 回源S3私有鉴权
+   */
+  AwsPrivateAccess?: AwsPrivateAccess
+
+  /**
+   * UA黑白名单配置
+   */
+  UserAgentFilter?: UserAgentFilter
+
+  /**
+   * 访问控制
+   */
+  AccessControl?: AccessControl
+
+  /**
+   * URL重定向配置
+   */
+  UrlRedirect?: UrlRedirect
+
+  /**
+   * 访问端口配置
+   */
+  AccessPort?: Array<number>
+
+  /**
+   * 时间戳防盗链高级版配置，白名单功能
+   */
+  AdvancedAuthentication?: AdvancedAuthentication
+
+  /**
+   * 回源鉴权高级版配置，白名单功能
+   */
+  OriginAuthentication?: OriginAuthentication
+
+  /**
+   * Ipv6 访问配置
+   */
+  Ipv6Access?: Ipv6Access
 }
 
 /**
@@ -3500,6 +3723,16 @@ DefenceMode 映射如下：
    * 指定域名查询, 与 Domain 参数同时有值时使用 Domains 参数，不填默认查询全部域名，指定域名查询时最多支持同时选择 5 个域名查询
    */
   Domains?: Array<string>
+
+  /**
+   * 指定攻击类型查询, 与 AttackType 参数同时有值时使用 AttackTypes 参数，不填默认查询全部攻击类型
+   */
+  AttackTypes?: Array<string>
+
+  /**
+   * 查询条件
+   */
+  Conditions?: Array<ScdnEventLogConditions>
 }
 
 /**
@@ -3980,6 +4213,12 @@ off：不支持
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Ipv6Access: Ipv6Access
+
+  /**
+      * 高级配置集合。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AdvanceSet: Array<AdvanceConfig>
 }
 
 /**
@@ -6540,200 +6779,22 @@ export interface SearchClsLogRequest {
 }
 
 /**
- * UpdateDomainConfig请求参数结构体
+ * 高级配置集合
  */
-export interface UpdateDomainConfigRequest {
+export interface AdvanceConfig {
   /**
-   * 域名
-   */
-  Domain: string
-
-  /**
-   * 项目 ID
-   */
-  ProjectId?: number
-
-  /**
-   * 源站配置
-   */
-  Origin?: Origin
-
-  /**
-   * IP 黑白名单配置
-   */
-  IpFilter?: IpFilter
-
-  /**
-   * IP 限频配置
-   */
-  IpFreqLimit?: IpFreqLimit
-
-  /**
-   * 状态码缓存配置
-   */
-  StatusCodeCache?: StatusCodeCache
-
-  /**
-   * 智能压缩配置
-   */
-  Compression?: Compression
-
-  /**
-   * 带宽封顶配置
-   */
-  BandwidthAlert?: BandwidthAlert
-
-  /**
-   * Range 回源配置
-   */
-  RangeOriginPull?: RangeOriginPull
-
-  /**
-   * 301/302 回源跟随配置
-   */
-  FollowRedirect?: FollowRedirect
-
-  /**
-   * 错误码重定向配置（功能灰度中，尚未全量）
-   */
-  ErrorPage?: ErrorPage
-
-  /**
-   * 请求头部配置
-   */
-  RequestHeader?: RequestHeader
-
-  /**
-   * 响应头部配置
-   */
-  ResponseHeader?: ResponseHeader
-
-  /**
-   * 下载速度配置
-   */
-  DownstreamCapping?: DownstreamCapping
-
-  /**
-   * 节点缓存键配置
-   */
-  CacheKey?: CacheKey
-
-  /**
-   * 头部缓存配置
-   */
-  ResponseHeaderCache?: ResponseHeaderCache
-
-  /**
-   * 视频拖拽配置
-   */
-  VideoSeek?: VideoSeek
-
-  /**
-   * 缓存过期时间配置
-   */
-  Cache?: Cache
-
-  /**
-   * 跨国链路优化配置
-   */
-  OriginPullOptimization?: OriginPullOptimization
-
-  /**
-   * Https 加速配置
-   */
-  Https?: Https
-
-  /**
-   * 时间戳防盗链配置
-   */
-  Authentication?: Authentication
-
-  /**
-   * SEO 优化配置
-   */
-  Seo?: Seo
-
-  /**
-   * 访问协议强制跳转配置
-   */
-  ForceRedirect?: ForceRedirect
-
-  /**
-   * Referer 防盗链配置
-   */
-  Referer?: Referer
-
-  /**
-   * 浏览器缓存配置（功能灰度中，尚未全量）
-   */
-  MaxAge?: MaxAge
-
-  /**
-      * 域名业务类型
-web：静态加速
-download：下载加速
-media：流媒体点播加速
+      * 高级配置名称。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  ServiceType?: string
+  Name: string
 
   /**
-      * 地域属性特殊配置
-适用于域名境内加速、境外加速配置不一致场景
+      * 是否支持高级配置，
+on：支持
+off：不支持
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  SpecificConfig?: SpecificConfig
-
-  /**
-      * 域名加速区域
-mainland：中国境内加速
-overseas：中国境外加速
-global：全球加速
-      */
-  Area?: string
-
-  /**
-   * 回源超时配置
-   */
-  OriginPullTimeout?: OriginPullTimeout
-
-  /**
-   * 回源S3私有鉴权
-   */
-  AwsPrivateAccess?: AwsPrivateAccess
-
-  /**
-   * UA黑白名单配置
-   */
-  UserAgentFilter?: UserAgentFilter
-
-  /**
-   * 访问控制
-   */
-  AccessControl?: AccessControl
-
-  /**
-   * URL重定向配置
-   */
-  UrlRedirect?: UrlRedirect
-
-  /**
-   * 访问端口配置
-   */
-  AccessPort?: Array<number>
-
-  /**
-   * 时间戳防盗链高级版配置，白名单功能
-   */
-  AdvancedAuthentication?: AdvancedAuthentication
-
-  /**
-   * 回源鉴权高级版配置，白名单功能
-   */
-  OriginAuthentication?: OriginAuthentication
-
-  /**
-   * Ipv6 访问配置
-   */
-  Ipv6Access?: Ipv6Access
+  Value: string
 }
 
 /**

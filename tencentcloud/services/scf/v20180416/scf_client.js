@@ -94,6 +94,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetFunctionLogs", req, cb);
     }
     /**
+     * 获取函数或函数某一版本的预置并发详情。
+     */
+    async GetProvisionedConcurrencyConfig(req, cb) {
+        return this.request("GetProvisionedConcurrencyConfig", req, cb);
+    }
+    /**
      * 更新命名空间
      */
     async UpdateNamespace(req, cb) {
@@ -143,6 +149,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAlias", req, cb);
     }
     /**
+     * 设置函数某一非$LATEST版本的预置并发。
+     */
+    async PutProvisionedConcurrencyConfig(req, cb) {
+        return this.request("PutProvisionedConcurrencyConfig", req, cb);
+    }
+    /**
      * 该接口根据传入的参数查询函数的版本。
      */
     async ListVersionByFunction(req, cb) {
@@ -161,6 +173,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListLayerVersions", req, cb);
     }
     /**
+     * 获取函数的保留并发详情。
+     */
+    async GetReservedConcurrencyConfig(req, cb) {
+        return this.request("GetReservedConcurrencyConfig", req, cb);
+    }
+    /**
      * 该接口根据传入的查询参数返回相关函数信息。
      */
     async ListFunctions(req, cb) {
@@ -173,10 +191,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateFunctionConfiguration", req, cb);
     }
     /**
+     * 设置函数保留并发
+     */
+    async PutReservedConcurrencyConfig(req, cb) {
+        return this.request("PutReservedConcurrencyConfig", req, cb);
+    }
+    /**
      * 使用给定的zip文件或cos对象创建一个层的新版本，每次使用相同的层的名称调用本接口，都会生成一个新版本。
      */
     async PublishLayerVersion(req, cb) {
         return this.request("PublishLayerVersion", req, cb);
+    }
+    /**
+     * 删除函数的保留并发配置。
+     */
+    async DeleteReservedConcurrencyConfig(req, cb) {
+        return this.request("DeleteReservedConcurrencyConfig", req, cb);
+    }
+    /**
+     * 删除函数版本的预置并发配置。
+     */
+    async DeleteProvisionedConcurrencyConfig(req, cb) {
+        return this.request("DeleteProvisionedConcurrencyConfig", req, cb);
     }
     /**
      * 该接口用于获取函数代码包的下载地址。
@@ -189,6 +225,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async GetAlias(req, cb) {
         return this.request("GetAlias", req, cb);
+    }
+    /**
+     * 修改账号并发限制配额
+     */
+    async PutTotalConcurrencyConfig(req, cb) {
+        return this.request("PutTotalConcurrencyConfig", req, cb);
     }
     /**
      * 该接口根据传入参数创建新的函数。

@@ -28,9 +28,29 @@ it("ie.v20200304.DescribeMediaQualityRestorationTaskRusult", async function () {
     }
 })
 
+it("ie.v20200304.CreateMediaProcessTask", async function () {
+    try {
+       const data = await client.CreateMediaProcessTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ie.v20200304.StopMediaQualityRestorationTask", async function () {
     try {
        const data = await client.StopMediaQualityRestorationTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ie.v20200304.DescribeMediaProcessTaskResult", async function () {
+    try {
+       const data = await client.DescribeMediaProcessTaskResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -51,6 +71,16 @@ it("ie.v20200304.CreateMediaQualityRestorationTask", async function () {
 it("ie.v20200304.DescribeEditingTaskResult", async function () {
     try {
        const data = await client.DescribeEditingTaskResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ie.v20200304.StopMediaProcessTask", async function () {
+    try {
+       const data = await client.StopMediaProcessTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

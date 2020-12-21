@@ -19,20 +19,26 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   AccessInfo,
+  UpdateAliasRequest,
   Trigger,
-  ListTriggersResponse,
+  GetProvisionedConcurrencyConfigRequest,
   ListAliasesResponse,
   DeleteLayerVersionResponse,
-  GetAliasResponse,
+  GetReservedConcurrencyConfigResponse,
+  RoutingConfig,
+  DeleteProvisionedConcurrencyConfigResponse,
   VersionWeight,
   LayerVersionInfo,
+  PutProvisionedConcurrencyConfigResponse,
   UpdateFunctionConfigurationResponse,
   PublishLayerVersionResponse,
   PublicNetConfigIn,
-  UpdateAliasRequest,
-  RoutingConfig,
+  DeleteReservedConcurrencyConfigResponse,
+  GetAliasResponse,
   UpdateAliasResponse,
+  VersionProvisionedConcurrencyInfo,
   GetFunctionLogsRequest,
+  StatusReason,
   Tag,
   LogFilter,
   EipConfigIn,
@@ -42,7 +48,7 @@ import {
   Namespace,
   GetFunctionRequest,
   ListNamespacesRequest,
-  PublishVersionRequest,
+  PutReservedConcurrencyConfigResponse,
   DeleteAliasRequest,
   ListVersionByFunctionResponse,
   GetAliasRequest,
@@ -50,7 +56,8 @@ import {
   PublicNetConfigOut,
   UpdateFunctionCodeRequest,
   UpdateFunctionConfigurationRequest,
-  StatusReason,
+  DeleteReservedConcurrencyConfigRequest,
+  ListTriggersResponse,
   UpdateNamespaceResponse,
   ListLayersRequest,
   CopyFunctionRequest,
@@ -67,14 +74,17 @@ import {
   LogSearchContext,
   TriggerInfo,
   CreateFunctionRequest,
+  PutTotalConcurrencyConfigResponse,
   DeleteAliasResponse,
   PublishVersionResponse,
+  DeleteProvisionedConcurrencyConfigRequest,
   Environment,
   GetFunctionAddressRequest,
   InvokeResponse,
   InvokeRequest,
   CreateAliasRequest,
   VersionMatch,
+  PutReservedConcurrencyConfigRequest,
   ListLayerVersionsRequest,
   CreateTriggerResponse,
   PublishLayerVersionRequest,
@@ -84,9 +94,12 @@ import {
   Variable,
   GetFunctionResponse,
   Code,
+  PutTotalConcurrencyConfigRequest,
   UpdateNamespaceRequest,
   GetLayerVersionResponse,
+  PublishVersionRequest,
   FunctionLog,
+  GetFunctionAddressResponse,
   CfsInsInfo,
   FunctionVersion,
   Function,
@@ -95,6 +108,8 @@ import {
   ListFunctionsResponse,
   ListTriggersRequest,
   CreateFunctionResponse,
+  GetReservedConcurrencyConfigRequest,
+  PutProvisionedConcurrencyConfigRequest,
   ListAliasesRequest,
   EipOutConfig,
   Alias,
@@ -103,7 +118,7 @@ import {
   DeleteTriggerResponse,
   DeleteTriggerRequest,
   VpcConfig,
-  GetFunctionAddressResponse,
+  GetProvisionedConcurrencyConfigResponse,
   ListNamespacesResponse,
   EipConfigOut,
   UpdateFunctionCodeResponse,
@@ -225,6 +240,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取函数或函数某一版本的预置并发详情。
+   */
+  async GetProvisionedConcurrencyConfig(
+    req: GetProvisionedConcurrencyConfigRequest,
+    cb?: (error: string, rep: GetProvisionedConcurrencyConfigResponse) => void
+  ): Promise<GetProvisionedConcurrencyConfigResponse> {
+    return this.request("GetProvisionedConcurrencyConfig", req, cb)
+  }
+
+  /**
    * 更新命名空间
    */
   async UpdateNamespace(
@@ -306,6 +331,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 设置函数某一非$LATEST版本的预置并发。
+   */
+  async PutProvisionedConcurrencyConfig(
+    req: PutProvisionedConcurrencyConfigRequest,
+    cb?: (error: string, rep: PutProvisionedConcurrencyConfigResponse) => void
+  ): Promise<PutProvisionedConcurrencyConfigResponse> {
+    return this.request("PutProvisionedConcurrencyConfig", req, cb)
+  }
+
+  /**
    * 该接口根据传入的参数查询函数的版本。
    */
   async ListVersionByFunction(
@@ -336,6 +371,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取函数的保留并发详情。
+   */
+  async GetReservedConcurrencyConfig(
+    req: GetReservedConcurrencyConfigRequest,
+    cb?: (error: string, rep: GetReservedConcurrencyConfigResponse) => void
+  ): Promise<GetReservedConcurrencyConfigResponse> {
+    return this.request("GetReservedConcurrencyConfig", req, cb)
+  }
+
+  /**
    * 该接口根据传入的查询参数返回相关函数信息。
    */
   async ListFunctions(
@@ -356,6 +401,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 设置函数保留并发
+   */
+  async PutReservedConcurrencyConfig(
+    req: PutReservedConcurrencyConfigRequest,
+    cb?: (error: string, rep: PutReservedConcurrencyConfigResponse) => void
+  ): Promise<PutReservedConcurrencyConfigResponse> {
+    return this.request("PutReservedConcurrencyConfig", req, cb)
+  }
+
+  /**
    * 使用给定的zip文件或cos对象创建一个层的新版本，每次使用相同的层的名称调用本接口，都会生成一个新版本。
    */
   async PublishLayerVersion(
@@ -363,6 +418,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: PublishLayerVersionResponse) => void
   ): Promise<PublishLayerVersionResponse> {
     return this.request("PublishLayerVersion", req, cb)
+  }
+
+  /**
+   * 删除函数的保留并发配置。
+   */
+  async DeleteReservedConcurrencyConfig(
+    req: DeleteReservedConcurrencyConfigRequest,
+    cb?: (error: string, rep: DeleteReservedConcurrencyConfigResponse) => void
+  ): Promise<DeleteReservedConcurrencyConfigResponse> {
+    return this.request("DeleteReservedConcurrencyConfig", req, cb)
+  }
+
+  /**
+   * 删除函数版本的预置并发配置。
+   */
+  async DeleteProvisionedConcurrencyConfig(
+    req: DeleteProvisionedConcurrencyConfigRequest,
+    cb?: (error: string, rep: DeleteProvisionedConcurrencyConfigResponse) => void
+  ): Promise<DeleteProvisionedConcurrencyConfigResponse> {
+    return this.request("DeleteProvisionedConcurrencyConfig", req, cb)
   }
 
   /**
@@ -383,6 +458,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetAliasResponse) => void
   ): Promise<GetAliasResponse> {
     return this.request("GetAlias", req, cb)
+  }
+
+  /**
+   * 修改账号并发限制配额
+   */
+  async PutTotalConcurrencyConfig(
+    req: PutTotalConcurrencyConfigRequest,
+    cb?: (error: string, rep: PutTotalConcurrencyConfigResponse) => void
+  ): Promise<PutTotalConcurrencyConfigResponse> {
+    return this.request("PutTotalConcurrencyConfig", req, cb)
   }
 
   /**

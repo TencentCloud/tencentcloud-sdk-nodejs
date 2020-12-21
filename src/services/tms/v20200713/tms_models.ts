@@ -118,14 +118,14 @@ export interface TextModerationRequest {
   Content: string
 
   /**
-   * 数据ID，英文字母、下划线、-组成，不超过64个字符
-   */
-  DataId?: string
-
-  /**
    * 该字段用于标识业务场景。您可以在内容安全控制台创建对应的ID，配置不同的内容审核策略，通过接口调用，默认不填为0，后端使用默认策略。 -- 该字段暂未开放。
    */
   BizType?: string
+
+  /**
+   * 数据ID，英文字母、下划线、-组成，不超过64个字符
+   */
+  DataId?: string
 
   /**
    * 账号相关信息字段，填入后可识别违规风险账号。
@@ -272,12 +272,14 @@ export interface DescribeTextLibResponse {
  */
 export interface DetailResults {
   /**
-   * 恶意标签，Normal：正常，Polity：涉政，Porn：色情，Illegal：违法，Abuse：谩骂，Terror：暴恐，Ad：广告，Custom：自定义关键词
-   */
+      * 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义词库。
+以及令人反感、不安全或不适宜的内容类型。
+      */
   Label: string
 
   /**
-      * 建议值,Block：打击,Review：待复审,Pass：正常
+      * 建议您拿到判断结果后的执行操作。
+建议值，Block：建议屏蔽，Review：建议复审，Pass：建议通过
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Suggestion: string
@@ -295,19 +297,19 @@ export interface DetailResults {
   Score: number
 
   /**
-      * 仅当Lable为Custom自定义关键词时有效，表示自定义关键词库类型，1:黑白库，2：自定义库
+      * 仅当Label为Custom自定义关键词时有效，表示自定义关键词库类型，1:黑白库，2：自定义库
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LibType: number
 
   /**
-      * 仅当Lable为Custom自定义关键词时有效，表示自定义库id
+      * 仅当Label为Custom自定义关键词时有效，表示自定义库id
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LibId: string
 
   /**
-      * 仅当Lable为Custom自定义关键词时有效，表示自定义库名称
+      * 仅当Labe为Custom自定义关键词时有效，表示自定义库名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LibName: string
@@ -318,16 +320,8 @@ export interface DetailResults {
  */
 export interface EvilCount {
   /**
-      * 违规类型：
-Terror	24001
-Porn	20002
-Polity	20001
-Ad	20105
-Abuse	20007	
-Illegal	20006	
-Spam	25001	
-Moan	26001
-      */
+   * ----非必选，该参数功能暂未对外开放
+   */
   EvilType: string
 
   /**
@@ -459,14 +453,14 @@ export interface TextModerationResponse {
   EvilFlag?: number
 
   /**
-      * 机器识别后判断违规所属类型。
-Normal：正常，Polity：涉政，Porn：色情，Illegal：违法，Abuse：谩骂，Terror：暴恐，Ad：广告，Custom：自定义关键词
+      * 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义词库。
+以及令人反感、不安全或不适宜的内容类型。
       */
   Label?: string
 
   /**
       * 建议您拿到判断结果后的执行操作。
-Block：建议打击，Review：建议复审，Normal：建议通过。
+建议值，Block：建议屏蔽，Review：建议复审，Pass：建议通过
       */
   Suggestion?: string
 
@@ -500,6 +494,12 @@ Block：建议打击，Review：建议复审，Normal：建议通过。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Extra?: string
+
+  /**
+      * 请求参数中的DataId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DataId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

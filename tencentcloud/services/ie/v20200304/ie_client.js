@@ -34,10 +34,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMediaQualityRestorationTaskRusult", req, cb);
     }
     /**
+     * 用于创建编辑处理任务，如媒体截取、媒体编辑、媒体拼接、媒体字幕。
+     */
+    async CreateMediaProcessTask(req, cb) {
+        return this.request("CreateMediaProcessTask", req, cb);
+    }
+    /**
      * 删除正在进行的画质重生任务
      */
     async StopMediaQualityRestorationTask(req, cb) {
         return this.request("StopMediaQualityRestorationTask", req, cb);
+    }
+    /**
+     * 用于获取编辑处理任务的结果。
+     */
+    async DescribeMediaProcessTaskResult(req, cb) {
+        return this.request("DescribeMediaProcessTaskResult", req, cb);
     }
     /**
      * 创建画质重生任务，对视频进行转码、去噪、去划痕、去毛刺、超分、细节增强和色彩增强。
@@ -50,6 +62,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeEditingTaskResult(req, cb) {
         return this.request("DescribeEditingTaskResult", req, cb);
+    }
+    /**
+     * 用于停止正在进行中的编辑处理任务。
+     */
+    async StopMediaProcessTask(req, cb) {
+        return this.request("StopMediaProcessTask", req, cb);
     }
     /**
      * 获取媒体质检任务结果

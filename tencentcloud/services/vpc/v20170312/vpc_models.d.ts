@@ -514,6 +514,14 @@ export interface ModifyNatGatewayAttributeRequest {
       * NAT网关最大外网出带宽(单位:Mbps)。
       */
     InternetMaxBandwidthOut?: number;
+    /**
+      * 是否修改NAT网关绑定的安全组。
+      */
+    ModifySecurityGroup?: boolean;
+    /**
+      * NAT网关绑定的安全组列表，最终状态，空列表表示删除所有安全组，形如: `['sg-1n232323', 'sg-o4242424']`
+      */
+    SecurityGroupIds?: Array<string>;
 }
 /**
  * 流日志
@@ -3882,6 +3890,11 @@ export interface NatGateway {
       * 标签键值对。
       */
     TagSet: Array<Tag>;
+    /**
+      * NAT网关绑定的安全组列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SecurityGroupSet: Array<string>;
 }
 /**
  * VPC资源看板（各资源个数）

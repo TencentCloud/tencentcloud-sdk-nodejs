@@ -70,7 +70,7 @@ POSTPAID_BY_HOUR 按量计费，默认方式。
   VPCSettings: VPCSettings
 
   /**
-   * 实例登陆配置。
+   * 实例登录配置。
    */
   LoginSettings: LoginSettings
 
@@ -110,7 +110,7 @@ POSTPAID_BY_HOUR 按量计费，默认方式。
   CbsEncryptFlag?: boolean
 
   /**
-   * 是否使用远程登陆，默认为false。
+   * 是否使用远程登录，默认为false。
    */
   RemoteTcpDefaultPort?: boolean
 }

@@ -160,7 +160,7 @@ export interface FaceFusionLiteResponse {
     RequestId?: string;
 }
 /**
- * 人脸融合鉴黄鉴政人脸信息
+ * 人脸融合不适宜内容识别人脸信息
  */
 export interface FuseFaceReviewDetail {
     /**
@@ -237,7 +237,7 @@ export interface FaceFusionLiteRequest {
     Engine?: string;
 }
 /**
- * 人脸融合鉴黄鉴政返回参数item
+ * 人脸融合不适宜内容识别返回参数item
  */
 export interface FuseFaceReviewResult {
     /**

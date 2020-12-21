@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeEditingTaskResultRequest, CreateMediaQualityRestorationTaskRequest, CreateEditingTaskRequest, DescribeMediaQualityRestorationTaskRusultRequest, DescribeQualityControlTaskResultRequest, DescribeEditingTaskResultResponse, CreateEditingTaskResponse, StopMediaQualityRestorationTaskResponse, StopMediaQualityRestorationTaskRequest, DescribeQualityControlTaskResultResponse, DescribeMediaQualityRestorationTaskRusultResponse, CreateQualityControlTaskResponse, CreateQualityControlTaskRequest, CreateMediaQualityRestorationTaskResponse } from "./ie_models";
+import { DescribeQualityControlTaskResultRequest, DescribeMediaQualityRestorationTaskRusultResponse, CreateQualityControlTaskResponse, CreateQualityControlTaskRequest, CreateMediaQualityRestorationTaskResponse, StopMediaProcessTaskResponse, StopMediaQualityRestorationTaskResponse, CreateMediaProcessTaskRequest, CreateMediaProcessTaskResponse, CreateEditingTaskResponse, DescribeMediaQualityRestorationTaskRusultRequest, DescribeEditingTaskResultRequest, DescribeEditingTaskResultResponse, StopMediaQualityRestorationTaskRequest, DescribeQualityControlTaskResultResponse, CreateMediaQualityRestorationTaskRequest, CreateEditingTaskRequest, StopMediaProcessTaskRequest, DescribeMediaProcessTaskResultRequest, DescribeMediaProcessTaskResultResponse } from "./ie_models";
 /**
  * ie client
  * @class
@@ -12,9 +12,17 @@ export declare class Client extends AbstractClient {
      */
     DescribeMediaQualityRestorationTaskRusult(req: DescribeMediaQualityRestorationTaskRusultRequest, cb?: (error: string, rep: DescribeMediaQualityRestorationTaskRusultResponse) => void): Promise<DescribeMediaQualityRestorationTaskRusultResponse>;
     /**
+     * 用于创建编辑处理任务，如媒体截取、媒体编辑、媒体拼接、媒体字幕。
+     */
+    CreateMediaProcessTask(req: CreateMediaProcessTaskRequest, cb?: (error: string, rep: CreateMediaProcessTaskResponse) => void): Promise<CreateMediaProcessTaskResponse>;
+    /**
      * 删除正在进行的画质重生任务
      */
     StopMediaQualityRestorationTask(req: StopMediaQualityRestorationTaskRequest, cb?: (error: string, rep: StopMediaQualityRestorationTaskResponse) => void): Promise<StopMediaQualityRestorationTaskResponse>;
+    /**
+     * 用于获取编辑处理任务的结果。
+     */
+    DescribeMediaProcessTaskResult(req: DescribeMediaProcessTaskResultRequest, cb?: (error: string, rep: DescribeMediaProcessTaskResultResponse) => void): Promise<DescribeMediaProcessTaskResultResponse>;
     /**
      * 创建画质重生任务，对视频进行转码、去噪、去划痕、去毛刺、超分、细节增强和色彩增强。
      */
@@ -23,6 +31,10 @@ export declare class Client extends AbstractClient {
      * 获取编辑理解任务结果。
      */
     DescribeEditingTaskResult(req: DescribeEditingTaskResultRequest, cb?: (error: string, rep: DescribeEditingTaskResultResponse) => void): Promise<DescribeEditingTaskResultResponse>;
+    /**
+     * 用于停止正在进行中的编辑处理任务。
+     */
+    StopMediaProcessTask(req: StopMediaProcessTaskRequest, cb?: (error: string, rep: StopMediaProcessTaskResponse) => void): Promise<StopMediaProcessTaskResponse>;
     /**
      * 获取媒体质检任务结果
      */

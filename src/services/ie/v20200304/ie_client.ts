@@ -18,73 +18,93 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  TagTaskResult,
-  TagEditingInfo,
+  MediaJoiningTaskResult,
+  StripTaskResultItem,
+  CosAuthMode,
+  OpeningEndingTaskResultItem,
+  MediaCuttingTaskResult,
+  CoverTaskResultItem,
+  MediaCuttingInfo,
+  IntervalTime,
+  LowLightEnhance,
+  MuxInfo,
+  VideoInfo,
+  CoverEditingInfo,
+  DescribeQualityControlTaskResultRequest,
+  DescribeMediaQualityRestorationTaskRusultResponse,
+  DarInfo,
+  CreateQualityControlTaskResponse,
+  SubTaskTranscodeInfo,
+  CreateQualityControlTaskRequest,
+  HighlightsTaskResultItem,
+  CreateMediaQualityRestorationTaskResponse,
   Sharp,
-  TagTaskResultItem,
-  VideoEnhance,
-  CosInfo,
+  StopMediaProcessTaskResponse,
   SaveInfo,
   ScratchRepair,
   ArtifactReduction,
-  CosAuthMode,
-  QualityControlInfo,
-  OpeningEndingTaskResultItem,
-  DownInfo,
-  ClassificationEditingInfo,
-  LowLightEnhance,
-  DescribeEditingTaskResultRequest,
-  CoverTaskResultItem,
-  TargetInfo,
+  TagEditingInfo,
+  StopMediaQualityRestorationTaskResponse,
   StripEditingInfo,
   EditingInfo,
+  CreateMediaProcessTaskRequest,
+  CreateMediaProcessTaskResponse,
+  TaskResultFile,
+  CreateEditingTaskResponse,
+  UrlInfo,
+  MediaSourceInfo,
+  CallbackInfo,
+  SectionTime,
+  PicMarkInfoItem,
+  MediaJoiningInfo,
+  DescribeMediaQualityRestorationTaskRusultRequest,
+  ColorEnhance,
+  SegmentInfo,
+  OpeningEndingEditingInfo,
+  MediaTargetInfo,
+  TagTaskResultItem,
+  QualityControlInfo,
+  DownInfo,
+  ClassificationEditingInfo,
+  HighlightsTaskResult,
+  DescribeEditingTaskResultRequest,
+  AudioInfoResultItem,
+  EditInfo,
+  VideoEnhance,
+  DescribeEditingTaskResultResponse,
+  QualityControlInfoTaskResult,
   MediaQualityRestorationTaskResult,
+  MediaCuttingOutForm,
+  StopMediaQualityRestorationTaskRequest,
+  DescribeQualityControlTaskResultResponse,
+  ClassificationTaskResultItem,
+  AudioInfo,
+  SubTaskResultItem,
+  StripTaskResult,
+  HighlightsEditingInfo,
+  FileInfo,
+  OpeningEndingTaskResult,
+  QualityControlResultItems,
+  QualityControlItem,
+  CoverTaskResult,
+  TagTaskResult,
+  CosInfo,
+  MediaCuttingTimeInfo,
+  TargetInfo,
   CreateMediaQualityRestorationTaskRequest,
   CreateEditingTaskRequest,
-  AudioInfoResultItem,
   Denoising,
   FaceProtect,
   VideoInfoResultItem,
-  HighlightsTaskResult,
-  EditInfo,
-  MuxInfo,
-  DescribeMediaQualityRestorationTaskRusultRequest,
-  VideoInfo,
-  OpeningEndingTaskResult,
-  DescribeQualityControlTaskResultRequest,
-  DescribeEditingTaskResultResponse,
-  CreateEditingTaskResponse,
-  QualityControlInfoTaskResult,
-  StopMediaQualityRestorationTaskResponse,
-  UrlInfo,
-  StopMediaQualityRestorationTaskRequest,
-  DescribeQualityControlTaskResultResponse,
-  DescribeMediaQualityRestorationTaskRusultResponse,
-  ClassificationTaskResultItem,
-  DarInfo,
-  AudioInfo,
-  CreateQualityControlTaskResponse,
+  StopMediaProcessTaskRequest,
+  TargetVideoInfo,
+  DescribeMediaProcessTaskResultRequest,
+  MediaProcessTaskResult,
   EditingTaskResult,
-  SubTaskTranscodeInfo,
-  QualityControlResultItems,
-  SubTaskResultItem,
-  QualityControlItem,
-  HighlightsEditingInfo,
-  FileInfo,
-  CreateQualityControlTaskRequest,
+  MediaProcessInfo,
   ClassificationTaskResult,
-  StripTaskResultItem,
+  DescribeMediaProcessTaskResultResponse,
   HighlightsTaskResultItemSegment,
-  HighlightsTaskResultItem,
-  PicMarkInfoItem,
-  CoverEditingInfo,
-  ColorEnhance,
-  CreateMediaQualityRestorationTaskResponse,
-  SegmentInfo,
-  CallbackInfo,
-  OpeningEndingEditingInfo,
-  StripTaskResult,
-  CoverTaskResult,
 } from "./ie_models"
 
 /**
@@ -107,6 +127,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 用于创建编辑处理任务，如媒体截取、媒体编辑、媒体拼接、媒体字幕。
+   */
+  async CreateMediaProcessTask(
+    req: CreateMediaProcessTaskRequest,
+    cb?: (error: string, rep: CreateMediaProcessTaskResponse) => void
+  ): Promise<CreateMediaProcessTaskResponse> {
+    return this.request("CreateMediaProcessTask", req, cb)
+  }
+
+  /**
    * 删除正在进行的画质重生任务
    */
   async StopMediaQualityRestorationTask(
@@ -114,6 +144,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StopMediaQualityRestorationTaskResponse) => void
   ): Promise<StopMediaQualityRestorationTaskResponse> {
     return this.request("StopMediaQualityRestorationTask", req, cb)
+  }
+
+  /**
+   * 用于获取编辑处理任务的结果。
+   */
+  async DescribeMediaProcessTaskResult(
+    req: DescribeMediaProcessTaskResultRequest,
+    cb?: (error: string, rep: DescribeMediaProcessTaskResultResponse) => void
+  ): Promise<DescribeMediaProcessTaskResultResponse> {
+    return this.request("DescribeMediaProcessTaskResult", req, cb)
   }
 
   /**
@@ -134,6 +174,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEditingTaskResultResponse) => void
   ): Promise<DescribeEditingTaskResultResponse> {
     return this.request("DescribeEditingTaskResult", req, cb)
+  }
+
+  /**
+   * 用于停止正在进行中的编辑处理任务。
+   */
+  async StopMediaProcessTask(
+    req: StopMediaProcessTaskRequest,
+    cb?: (error: string, rep: StopMediaProcessTaskResponse) => void
+  ): Promise<StopMediaProcessTaskResponse> {
+    return this.request("StopMediaProcessTask", req, cb)
   }
 
   /**

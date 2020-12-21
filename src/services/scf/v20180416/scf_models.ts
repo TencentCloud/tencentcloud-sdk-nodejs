@@ -31,6 +31,41 @@ export interface AccessInfo {
 }
 
 /**
+ * UpdateAlias请求参数结构体
+ */
+export interface UpdateAliasRequest {
+  /**
+   * 函数名称
+   */
+  FunctionName: string
+
+  /**
+   * 别名的名称
+   */
+  Name: string
+
+  /**
+   * 别名指向的主版本
+   */
+  FunctionVersion: string
+
+  /**
+   * 函数所在的命名空间
+   */
+  Namespace?: string
+
+  /**
+   * 别名的路由信息，需要为别名指定附加版本时，必须提供此参数
+   */
+  RoutingConfig?: RoutingConfig
+
+  /**
+   * 别名的描述
+   */
+  Description?: string
+}
+
+/**
  * 触发器类型
  */
 export interface Trigger {
@@ -91,23 +126,23 @@ export interface Trigger {
 }
 
 /**
- * ListTriggers返回参数结构体
+ * GetProvisionedConcurrencyConfig请求参数结构体
  */
-export interface ListTriggersResponse {
+export interface GetProvisionedConcurrencyConfigRequest {
   /**
-   * 触发器总数
+   * 需要获取预置并发详情的函数名称。
    */
-  TotalCount?: number
+  FunctionName: string
 
   /**
-   * 触发器列表
+   * 函数所在的命名空间，默认为default。
    */
-  Triggers?: Array<TriggerInfo>
+  Namespace?: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 函数版本号，不传则返回函数所有版本的预置并发信息。
    */
-  RequestId?: string
+  Qualifier?: string
 }
 
 /**
@@ -142,42 +177,40 @@ export interface DeleteLayerVersionResponse {
 }
 
 /**
- * GetAlias返回参数结构体
+ * GetReservedConcurrencyConfig返回参数结构体
  */
-export interface GetAliasResponse {
+export interface GetReservedConcurrencyConfigResponse {
   /**
-   * 别名指向的主版本
-   */
-  FunctionVersion?: string
-
-  /**
-   * 别名的名称
-   */
-  Name?: string
-
-  /**
-   * 别名的路由信息
-   */
-  RoutingConfig?: RoutingConfig
-
-  /**
-      * 别名的描述
+      * 该函数的保留并发内存。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Description?: string
+  ReservedMem?: number
 
   /**
-      * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AddTime?: string
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 别名的版本路由配置
+ */
+export interface RoutingConfig {
+  /**
+   * 随机权重路由附加版本
+   */
+  AdditionalVersionWeights?: Array<VersionWeight>
 
   /**
-      * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ModTime?: string
+   * 规则路由附加版本
+   */
+  AddtionVersionMatchs?: Array<VersionMatch>
+}
 
+/**
+ * DeleteProvisionedConcurrencyConfig返回参数结构体
+ */
+export interface DeleteProvisionedConcurrencyConfigResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -243,6 +276,16 @@ export interface LayerVersionInfo {
 }
 
 /**
+ * PutProvisionedConcurrencyConfig返回参数结构体
+ */
+export interface PutProvisionedConcurrencyConfigResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UpdateFunctionConfiguration返回参数结构体
  */
 export interface UpdateFunctionConfigurationResponse {
@@ -283,53 +326,56 @@ export interface PublicNetConfigIn {
 }
 
 /**
- * UpdateAlias请求参数结构体
+ * DeleteReservedConcurrencyConfig返回参数结构体
  */
-export interface UpdateAliasRequest {
+export interface DeleteReservedConcurrencyConfigResponse {
   /**
-   * 函数名称
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  FunctionName: string
+  RequestId?: string
+}
+
+/**
+ * GetAlias返回参数结构体
+ */
+export interface GetAliasResponse {
+  /**
+   * 别名指向的主版本
+   */
+  FunctionVersion?: string
 
   /**
    * 别名的名称
    */
-  Name: string
+  Name?: string
 
   /**
-   * 别名指向的主版本
-   */
-  FunctionVersion: string
-
-  /**
-   * 函数所在的命名空间
-   */
-  Namespace?: string
-
-  /**
-   * 别名的路由信息，需要为别名指定附加版本时，必须提供此参数
+   * 别名的路由信息
    */
   RoutingConfig?: RoutingConfig
 
   /**
-   * 别名的描述
-   */
+      * 别名的描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   Description?: string
-}
-
-/**
- * 别名的版本路由配置
- */
-export interface RoutingConfig {
-  /**
-   * 随机权重路由附加版本
-   */
-  AdditionalVersionWeights?: Array<VersionWeight>
 
   /**
-   * 规则路由附加版本
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AddTime?: string
+
+  /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ModTime?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  AddtionVersionMatchs?: Array<VersionMatch>
+  RequestId?: string
 }
 
 /**
@@ -340,6 +386,36 @@ export interface UpdateAliasResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 函数版本的预置并发信息，包括设置预置并发数、已完成预置的并发数和预置任务状态。
+ */
+export interface VersionProvisionedConcurrencyInfo {
+  /**
+   * 设置的预置并发数。
+   */
+  AllocatedProvisionedConcurrencyNum: number
+
+  /**
+   * 当前已完成预置的并发数。
+   */
+  AvailableProvisionedConcurrencyNum: number
+
+  /**
+   * 预置任务状态，Done表示已完成，InProgress表示进行中，Failed表示部分或全部失败。
+   */
+  Status: string
+
+  /**
+   * 对预置任务状态Status的说明。
+   */
+  StatusReason: string
+
+  /**
+   * 函数版本号
+   */
+  Qualifier: string
 }
 
 /**
@@ -405,6 +481,21 @@ export interface GetFunctionLogsRequest {
    * 该字段已下线
    */
   SearchContext?: LogSearchContext
+}
+
+/**
+ * 状态原因描述
+ */
+export interface StatusReason {
+  /**
+   * 错误码
+   */
+  ErrorCode: string
+
+  /**
+   * 错误描述
+   */
+  ErrorMessage: string
 }
 
 /**
@@ -574,23 +665,13 @@ export interface ListNamespacesRequest {
 }
 
 /**
- * PublishVersion请求参数结构体
+ * PutReservedConcurrencyConfig返回参数结构体
  */
-export interface PublishVersionRequest {
+export interface PutReservedConcurrencyConfigResponse {
   /**
-   * 发布函数的名称
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  FunctionName: string
-
-  /**
-   * 函数的描述
-   */
-  Description?: string
-
-  /**
-   * 函数的命名空间
-   */
-  Namespace?: string
+  RequestId?: string
 }
 
 /**
@@ -841,18 +922,38 @@ export interface UpdateFunctionConfigurationRequest {
 }
 
 /**
- * 状态原因描述
+ * DeleteReservedConcurrencyConfig请求参数结构体
  */
-export interface StatusReason {
+export interface DeleteReservedConcurrencyConfigRequest {
   /**
-   * 错误码
+   * 需要删除预置并发的函数的名称
    */
-  ErrorCode: string
+  FunctionName: string
 
   /**
-   * 错误描述
+   * 函数所属命名空间，默认为default
    */
-  ErrorMessage: string
+  Namespace?: string
+}
+
+/**
+ * ListTriggers返回参数结构体
+ */
+export interface ListTriggersResponse {
+  /**
+   * 触发器总数
+   */
+  TotalCount?: number
+
+  /**
+   * 触发器列表
+   */
+  Triggers?: Array<TriggerInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1365,6 +1466,16 @@ export interface CreateFunctionRequest {
 }
 
 /**
+ * PutTotalConcurrencyConfig返回参数结构体
+ */
+export interface PutTotalConcurrencyConfigResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteAlias返回参数结构体
  */
 export interface DeleteAliasResponse {
@@ -1422,6 +1533,26 @@ export interface PublishVersionResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteProvisionedConcurrencyConfig请求参数结构体
+ */
+export interface DeleteProvisionedConcurrencyConfigRequest {
+  /**
+   * 需要删除预置并发的函数的名称
+   */
+  FunctionName: string
+
+  /**
+   * 函数的版本号
+   */
+  Qualifier: string
+
+  /**
+   * 函数所属命名空间，默认为default
+   */
+  Namespace?: string
 }
 
 /**
@@ -1574,6 +1705,26 @@ exact 匹配规则要求：
 字符串精确匹配
       */
   Expression: string
+}
+
+/**
+ * PutReservedConcurrencyConfig请求参数结构体
+ */
+export interface PutReservedConcurrencyConfigRequest {
+  /**
+   * 需要设置预置并发的函数的名称
+   */
+  FunctionName: string
+
+  /**
+   * 函数保留并发内存，注：函数的保留并发内存总和上限：用户总并发内存配额 - 12800
+   */
+  ReservedConcurrencyMem: number
+
+  /**
+   * 函数所属命名空间，默认为default
+   */
+  Namespace?: string
 }
 
 /**
@@ -1990,6 +2141,21 @@ export interface Code {
 }
 
 /**
+ * PutTotalConcurrencyConfig请求参数结构体
+ */
+export interface PutTotalConcurrencyConfigRequest {
+  /**
+   * 账号并发内存配额，注：账号并发内存配额下限：用户已用并发内存总额 + 12800
+   */
+  TotalConcurrencyMem: number
+
+  /**
+   * 命名空间，默认为default
+   */
+  Namespace?: string
+}
+
+/**
  * UpdateNamespace请求参数结构体
  */
 export interface UpdateNamespaceRequest {
@@ -2064,6 +2230,26 @@ Deleted 已删除
 }
 
 /**
+ * PublishVersion请求参数结构体
+ */
+export interface PublishVersionRequest {
+  /**
+   * 发布函数的名称
+   */
+  FunctionName: string
+
+  /**
+   * 函数的描述
+   */
+  Description?: string
+
+  /**
+   * 函数的命名空间
+   */
+  Namespace?: string
+}
+
+/**
  * 日志信息
  */
 export interface FunctionLog {
@@ -2131,6 +2317,26 @@ export interface FunctionLog {
    * 重试次数
    */
   RetryNum: number
+}
+
+/**
+ * GetFunctionAddress返回参数结构体
+ */
+export interface GetFunctionAddressResponse {
+  /**
+   * 函数的Cos地址
+   */
+  Url?: string
+
+  /**
+   * 函数的SHA256编码
+   */
+  CodeSha256?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2421,6 +2627,46 @@ export interface CreateFunctionResponse {
 }
 
 /**
+ * GetReservedConcurrencyConfig请求参数结构体
+ */
+export interface GetReservedConcurrencyConfigRequest {
+  /**
+   * 需要获取预置并发详情的函数名称。
+   */
+  FunctionName: string
+
+  /**
+   * 函数所在的命名空间，默认为default。
+   */
+  Namespace?: string
+}
+
+/**
+ * PutProvisionedConcurrencyConfig请求参数结构体
+ */
+export interface PutProvisionedConcurrencyConfigRequest {
+  /**
+   * 需要设置预置并发的函数的名称
+   */
+  FunctionName: string
+
+  /**
+   * 函数的版本号，注：$LATEST版本不支持预置并发
+   */
+  Qualifier: string
+
+  /**
+   * 预置并发数量，注：所有版本的预置并发数总和存在上限限制，当前的上限是：函数最大并发配额 - 100
+   */
+  VersionProvisionedConcurrencyNum: number
+
+  /**
+   * 函数所属命名空间，默认为default
+   */
+  Namespace?: string
+}
+
+/**
  * ListAliases请求参数结构体
  */
 export interface ListAliasesRequest {
@@ -2605,18 +2851,18 @@ export interface VpcConfig {
 }
 
 /**
- * GetFunctionAddress返回参数结构体
+ * GetProvisionedConcurrencyConfig返回参数结构体
  */
-export interface GetFunctionAddressResponse {
+export interface GetProvisionedConcurrencyConfigResponse {
   /**
-   * 函数的Cos地址
+   * 该函数剩余可配置的预置并发数。
    */
-  Url?: string
+  UnallocatedConcurrencyNum?: number
 
   /**
-   * 函数的SHA256编码
+   * 函数已预置的并发配置详情。
    */
-  CodeSha256?: string
+  Allocated?: Array<VersionProvisionedConcurrencyInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

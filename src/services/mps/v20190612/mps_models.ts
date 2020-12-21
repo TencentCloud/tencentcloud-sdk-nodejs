@@ -1278,7 +1278,7 @@ export interface AudioTemplateInfoForUpdate {
  */
 export interface DeletePersonSampleRequest {
   /**
-   * 人物 ID。
+   * 素材 ID。
    */
   PersonId: string
 }
@@ -1733,31 +1733,31 @@ export interface AiReviewPornTaskInput {
  */
 export interface CreatePersonSampleRequest {
   /**
-   * 人物名称，长度限制：20 个字符。
+   * 素材名称，长度限制：20 个字符。
    */
   Name: string
 
   /**
-      * 人物应用场景，可选值：
+      * 素材应用场景，可选值：
 1. Recognition：用于内容识别，等价于 Recognition.Face。
-2. Review：用于内容审核，等价于 Review.Face。
-3. All：用于内容识别、内容审核，等价于 1+2。
+2. Review：用于不适宜内容识别，等价于 Review.Face。
+3. All：包含以上全部，等价于 1+2。
       */
   Usages: Array<string>
 
   /**
-   * 人物描述，长度限制：1024 个字符。
+   * 素材描述，长度限制：1024 个字符。
    */
   Description?: string
 
   /**
-      * 人脸图片 [Base64](https://tools.ietf.org/html/rfc4648) 编码后的字符串，仅支持 jpeg、png 图片格式。数组长度限制：5 张图片。
-注意：图片必须是单人像正面人脸较清晰的照片，像素不低于 200*200。
+      * 素材图片 [Base64](https://tools.ietf.org/html/rfc4648) 编码后的字符串，仅支持 jpeg、png 图片格式。数组长度限制：5 张图片。
+注意：图片必须是单人像五官较清晰的照片，像素不低于 200*200。
       */
   FaceContents?: Array<string>
 
   /**
-      * 人物标签
+      * 素材标签
 <li>数组长度限制：20 个标签；</li>
 <li>单个标签长度限制：128 个字符。</li>
       */
@@ -2452,13 +2452,13 @@ export interface CreateWordSamplesRequest {
   /**
       * <b>关键词应用场景，可选值：</b>
 1. Recognition.Ocr：通过光学字符识别技术，进行内容识别；
-2. Recognition.Asr：通过语音识别技术，进行内容识别；
-3. Review.Ocr：通过光学字符识别技术，进行内容审核；
-4. Review.Asr：通过语音识别技术，进行内容审核；
+2. Recognition.Asr：通过音频识别技术，进行内容识别；
+3. Review.Ocr：通过光学字符识别技术，进行不适宜内容识别；
+4. Review.Asr：通过音频识别技术，进行不适宜内容识别；
 <b>可合并简写为：</b>
-5. Recognition：通过光学字符识别技术、语音识别技术，进行内容识别，等价于 1+2；
-6. Review：通过光学字符识别技术、语音识别技术，进行内容审核，等价于 3+4；
-7. All：通过光学字符识别技术、语音识别技术，进行内容识别、内容审核，等价于 1+2+3+4。
+5. Recognition：通过光学字符识别技术、音频识别技术，进行内容识别，等价于 1+2；
+6. Review：通过光学字符识别技术、音频识别技术，进行不适宜内容识别，等价于 3+4；
+7. All：通过光学字符识别技术、音频识别技术，进行内容识别、不适宜内容识别，等价于 1+2+3+4。
       */
   Usages: Array<string>
 
@@ -2964,12 +2964,12 @@ export interface AsrFullTextConfigureInfoForUpdate {
  */
 export interface CreatePersonSampleResponse {
   /**
-   * 人物信息。
+   * 素材信息。
    */
   Person?: AiSamplePerson
 
   /**
-   * 处理失败的人脸信息。
+   * 处理失败的五官定位信息。
    */
   FailFaceInfoSet?: Array<AiSampleFailFaceInfo>
 
@@ -2984,7 +2984,7 @@ export interface CreatePersonSampleResponse {
  */
 export interface CreateContentReviewTemplateResponse {
   /**
-   * 内容审核模板唯一标识。
+   * 内容智能识别模板唯一标识。
    */
   Definition?: number
 
@@ -3478,13 +3478,13 @@ export interface ModifyWordSampleRequest {
   /**
       * <b>关键词应用场景，可选值：</b>
 1. Recognition.Ocr：通过光学字符识别技术，进行内容识别；
-2. Recognition.Asr：通过语音识别技术，进行内容识别；
-3. Review.Ocr：通过光学字符识别技术，进行内容审核；
-4. Review.Asr：通过语音识别技术，进行内容审核；
+2. Recognition.Asr：通过音频识别技术，进行内容识别；
+3. Review.Ocr：通过光学字符识别技术，进行不适宜的内容识别；
+4. Review.Asr：通过音频识别技术，进行不适宜的音频识别；
 <b>可合并简写为：</b>
-5. Recognition：通过光学字符识别技术、语音识别技术，进行内容识别，等价于 1+2；
-6. Review：通过光学字符识别技术、语音识别技术，进行内容审核，等价于 3+4；
-7. All：通过光学字符识别技术、语音识别技术，进行内容识别、内容审核，等价于 1+2+3+4。
+5. Recognition：通过光学字符识别技术、音频识别技术，进行内容识别，等价于 1+2；
+6. Review：通过光学字符识别技术、音频识别技术，进行不适宜的内容识别，等价于 3+4；
+7. All：包含以上全部，等价于 1+2+3+4。
       */
   Usages?: Array<string>
 
@@ -4463,7 +4463,7 @@ export interface AnimatedGraphicTaskInput {
  */
 export interface DeleteContentReviewTemplateRequest {
   /**
-   * 内容审核模板唯一标识。
+   * 内容智能识别模板唯一标识。
    */
   Definition: number
 }
@@ -5055,32 +5055,32 @@ export interface CreateSnapshotByTimeOffsetTemplateResponse {
  */
 export interface ModifyContentReviewTemplateRequest {
   /**
-   * 内容审核模板唯一标识。
+   * 内容智能识别模板唯一标识。
    */
   Definition: number
 
   /**
-   * 内容审核模板名称，长度限制：64 个字符。
+   * 内容智能识别模板名称，长度限制：64 个字符。
    */
   Name?: string
 
   /**
-   * 内容审核模板描述信息，长度限制：256 个字符。
+   * 内容智能识别模板描述信息，长度限制：256 个字符。
    */
   Comment?: string
 
   /**
-   * 鉴黄控制参数。
+   * 令人反感的信息的控制参数。
    */
   PornConfigure?: PornConfigureInfoForUpdate
 
   /**
-   * 鉴恐控制参数。
+   * 令人不安全的信息的控制参数。
    */
   TerrorismConfigure?: TerrorismConfigureInfoForUpdate
 
   /**
-   * 鉴政控制参数。
+   * 令人不适宜的控制参数。
    */
   PoliticalConfigure?: PoliticalConfigureInfoForUpdate
 
@@ -5093,7 +5093,7 @@ export interface ModifyContentReviewTemplateRequest {
   ProhibitedConfigure?: ProhibitedConfigureInfoForUpdate
 
   /**
-   * 用户自定义内容审核控制参数。
+   * 用户自定义内容智能识别控制参数。
    */
   UserDefineConfigure?: UserDefineConfigureInfoForUpdate
 }
@@ -6268,7 +6268,7 @@ export interface TEHDConfigForUpdate {
  */
 export interface ModifyPersonSampleRequest {
   /**
-   * 人物 ID。
+   * 素材 ID。
    */
   PersonId: string
 
@@ -6283,15 +6283,15 @@ export interface ModifyPersonSampleRequest {
   Description?: string
 
   /**
-      * 人物应用场景，可选值：
+      * 素材应用场景，可选值：
 1. Recognition：用于内容识别，等价于 Recognition.Face。
-2. Review：用于内容审核，等价于 Review.Face。
-3. All：用于内容识别、内容审核，等价于 1+2。
+2. Review：用于不适宜的内容识别，等价于 Review.Face。
+3. All：用于内容识别、不适宜的内容识别，等价于 1+2。
       */
   Usages?: Array<string>
 
   /**
-   * 人脸操作信息。
+   * 五官操作信息。
    */
   FaceOperationInfo?: AiSampleFaceOperation
 
@@ -7010,27 +7010,27 @@ export interface VideoTemplateInfoForUpdate {
  */
 export interface CreateContentReviewTemplateRequest {
   /**
-   * 内容审核模板名称，长度限制：64 个字符。
+   * 内容智能识别模板名称，长度限制：64 个字符。
    */
   Name?: string
 
   /**
-   * 内容审核模板描述信息，长度限制：256 个字符。
+   * 内容智能识别模板描述信息，长度限制：256 个字符。
    */
   Comment?: string
 
   /**
-   * 鉴黄控制参数。
+   * 令人反感的信息的控制参数。
    */
   PornConfigure?: PornConfigureInfo
 
   /**
-   * 鉴恐控制参数。
+   * 令人不安全的信息的控制参数。
    */
   TerrorismConfigure?: TerrorismConfigureInfo
 
   /**
-   * 鉴政控制参数。
+   * 令人不适宜的信息的控制参数。
    */
   PoliticalConfigure?: PoliticalConfigureInfo
 
@@ -7043,7 +7043,7 @@ export interface CreateContentReviewTemplateRequest {
   ProhibitedConfigure?: ProhibitedConfigureInfo
 
   /**
-   * 用户自定义内容审核控制参数。
+   * 用户自定义内容智能识别控制参数。
    */
   UserDefineConfigure?: UserDefineConfigureInfo
 }
@@ -7053,7 +7053,7 @@ export interface CreateContentReviewTemplateRequest {
  */
 export interface DescribeContentReviewTemplatesRequest {
   /**
-   * 内容审核模板唯一标识过滤条件，数组长度限制：50。
+   * 内容智能识别模板唯一标识过滤条件，数组长度限制：50。
    */
   Definitions?: Array<number>
 
@@ -8228,22 +8228,22 @@ export interface DeleteWatermarkTemplateRequest {
  */
 export interface DescribeWordSamplesRequest {
   /**
-      * <b>关键词应用场景过滤条件，可选值：</b>
-1. Recognition.Ocr：通过光学字符识别技术，进行内容识别；
-2. Recognition.Asr：通过语音识别技术，进行内容识别；
-3. Review.Ocr：通过光学字符识别技术，进行内容审核；
-4. Review.Asr：通过语音识别技术，进行内容审核；
-<b>可合并简写为：</b>
-5. Recognition：通过光学字符识别技术、语音识别技术，进行内容识别，等价于 1+2；
-6. Review：通过光学字符识别技术、语音识别技术，进行内容审核，等价于 3+4；
-可多选，元素间关系为 or，即关键词的应用场景包含该字段集合中任意元素的记录，均符合该条件。
-      */
-  Usages?: Array<string>
-
-  /**
    * 关键词过滤条件，数组长度限制：100 个词。
    */
   Keywords?: Array<string>
+
+  /**
+      * <b>关键词应用场景过滤条件，可选值：</b>
+1. Recognition.Ocr：通过光学字符识别技术，进行内容识别；
+2. Recognition.Asr：通过音频识别技术，进行内容识别；
+3. Review.Ocr：通过光学字符识别技术，进行不适宜内容的识别；
+4. Review.Asr：通过音频识别技术，进行不适宜内容的识别；
+<b>可合并简写为：</b>
+5. Recognition：通过光学字符识别技术、音频识别技术，进行内容识别，等价于 1+2；
+6. Review：通过光学字符识别技术、音频识别技术，进行不适宜内容的识别，等价于 3+4；
+可多选，元素间关系为 or，即关键词的应用场景包含该字段集合中任意元素的记录，均符合该条件。
+      */
+  Usages?: Array<string>
 
   /**
    * 标签过滤条件，数组长度限制：20 个词。
@@ -8689,12 +8689,12 @@ export interface ExecuteFunctionRequest {
  */
 export interface ModifyPersonSampleResponse {
   /**
-   * 人物信息。
+   * 素材信息。
    */
   Person?: AiSamplePerson
 
   /**
-      * 处理失败的人脸信息。
+      * 处理失败的五官信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FailFaceInfoSet?: Array<AiSampleFailFaceInfo>
@@ -8790,7 +8790,7 @@ export interface DescribePersonSamplesResponse {
   TotalCount?: number
 
   /**
-   * 人物信息。
+   * 素材信息。
    */
   PersonSet?: Array<AiSamplePerson>
 
@@ -9564,27 +9564,27 @@ export interface MediaImageSpriteItem {
  */
 export interface DescribePersonSamplesRequest {
   /**
-      * 拉取的人物类型，可选值：
-<li>UserDefine：用户自定义人物库；</li>
-<li>Default：系统默认人物库。</li>
+      * 拉取的素材类型，可选值：
+<li>UserDefine：用户自定义素材库；</li>
+<li>Default：系统默认素材库。</li>
 
-默认值：UserDefine，拉取用户自定义人物库人物。
-说明：如果是拉取系统默认人物库，只能使用人物名字或者人物 ID + 人物名字的方式进行拉取，且人脸图片只返回一张。
+默认值：UserDefine，拉取用户自定义素材库素材。
+说明：如果是拉取系统默认素材库，只能使用素材名字或者素材 ID + 素材名字的方式进行拉取，且人脸图片只返回一张。
       */
   Type?: string
 
   /**
-   * 人物 ID，数组长度限制：100。
+   * 素材 ID，数组长度限制：100。
    */
   PersonIds?: Array<string>
 
   /**
-   * 人物名称，数组长度限制：20。
+   * 素材名称，数组长度限制：20。
    */
   Names?: Array<string>
 
   /**
-   * 人物标签，数组长度限制：20。
+   * 素材标签，数组长度限制：20。
    */
   Tags?: Array<string>
 

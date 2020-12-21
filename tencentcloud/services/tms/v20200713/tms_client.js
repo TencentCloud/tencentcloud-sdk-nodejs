@@ -40,7 +40,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AccountTipoffAccess", req, cb);
     }
     /**
-     * 文本内容检测（Text Moderation）服务使用了深度学习技术，识别涉黄、涉政、涉恐等有害内容，同时支持用户配置词库，打击自定义的违规文本。
+     * 文本内容检测（Text Moderation）服务使用了深度学习技术，识别可能令人反感、不安全或不适宜的文本内容，同时支持用户配置词库黑白名单，打击自定义识别类型的图片。
      */
     async TextModeration(req, cb) {
         return this.request("TextModeration", req, cb);
