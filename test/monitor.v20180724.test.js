@@ -18,6 +18,26 @@ const client = new tencentcloud.monitor.v20180724.Client({
 })
 describe("monitor.v20180724.test.js", function () {
 
+it("monitor.v20180724.PutMonitorData", async function () {
+    try {
+       const data = await client.PutMonitorData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribeAlarmPolicies", async function () {
+    try {
+       const data = await client.DescribeAlarmPolicies({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.UnBindingPolicyObject", async function () {
     try {
        const data = await client.UnBindingPolicyObject({})
@@ -48,6 +68,16 @@ it("monitor.v20180724.DescribeBindingPolicyObjectList", async function () {
     }
 })
 
+it("monitor.v20180724.ModifyAlarmPolicyNotice", async function () {
+    try {
+       const data = await client.ModifyAlarmPolicyNotice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.DeleteServiceDiscovery", async function () {
     try {
        const data = await client.DeleteServiceDiscovery({})
@@ -68,6 +98,16 @@ it("monitor.v20180724.DescribePolicyGroupList", async function () {
     }
 })
 
+it("monitor.v20180724.DeleteAlarmPolicy", async function () {
+    try {
+       const data = await client.DeleteAlarmPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.GetMonitorData", async function () {
     try {
        const data = await client.GetMonitorData({})
@@ -78,9 +118,9 @@ it("monitor.v20180724.GetMonitorData", async function () {
     }
 })
 
-it("monitor.v20180724.PutMonitorData", async function () {
+it("monitor.v20180724.ModifyAlarmPolicyTasks", async function () {
     try {
-       const data = await client.PutMonitorData({})
+       const data = await client.ModifyAlarmPolicyTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,9 +138,19 @@ it("monitor.v20180724.DescribePolicyConditionList", async function () {
     }
 })
 
-it("monitor.v20180724.ModifyAlarmReceivers", async function () {
+it("monitor.v20180724.ModifyAlarmPolicyCondition", async function () {
     try {
-       const data = await client.ModifyAlarmReceivers({})
+       const data = await client.ModifyAlarmPolicyCondition({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribeBasicAlarmList", async function () {
+    try {
+       const data = await client.DescribeBasicAlarmList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -118,9 +168,9 @@ it("monitor.v20180724.BindingPolicyObject", async function () {
     }
 })
 
-it("monitor.v20180724.DescribeServiceDiscovery", async function () {
+it("monitor.v20180724.CreateAlarmNotice", async function () {
     try {
-       const data = await client.DescribeServiceDiscovery({})
+       const data = await client.CreateAlarmNotice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,9 +178,9 @@ it("monitor.v20180724.DescribeServiceDiscovery", async function () {
     }
 })
 
-it("monitor.v20180724.DescribeBasicAlarmList", async function () {
+it("monitor.v20180724.CreateAlarmPolicy", async function () {
     try {
-       const data = await client.DescribeBasicAlarmList({})
+       const data = await client.CreateAlarmPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,9 +228,29 @@ it("monitor.v20180724.CreateServiceDiscovery", async function () {
     }
 })
 
-it("monitor.v20180724.ModifyPolicyGroup", async function () {
+it("monitor.v20180724.DescribeAlarmNotices", async function () {
     try {
-       const data = await client.ModifyPolicyGroup({})
+       const data = await client.DescribeAlarmNotices({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribeAlarmNoticeCallbacks", async function () {
+    try {
+       const data = await client.DescribeAlarmNoticeCallbacks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.ModifyAlarmReceivers", async function () {
+    try {
+       const data = await client.ModifyAlarmReceivers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,6 +298,16 @@ it("monitor.v20180724.DescribeMonitorTypes", async function () {
     }
 })
 
+it("monitor.v20180724.SetDefaultAlarmPolicy", async function () {
+    try {
+       const data = await client.SetDefaultAlarmPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.CreatePolicyGroup", async function () {
     try {
        const data = await client.CreatePolicyGroup({})
@@ -258,6 +338,16 @@ it("monitor.v20180724.DescribeAccidentEventList", async function () {
     }
 })
 
+it("monitor.v20180724.ModifyAlarmPolicyInfo", async function () {
+    try {
+       const data = await client.ModifyAlarmPolicyInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.DescribeAlarmHistories", async function () {
     try {
        const data = await client.DescribeAlarmHistories({})
@@ -268,9 +358,99 @@ it("monitor.v20180724.DescribeAlarmHistories", async function () {
     }
 })
 
+it("monitor.v20180724.DescribeAlarmMetrics", async function () {
+    try {
+       const data = await client.DescribeAlarmMetrics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.ModifyAlarmPolicyStatus", async function () {
+    try {
+       const data = await client.ModifyAlarmPolicyStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.DescribeBaseMetrics", async function () {
     try {
        const data = await client.DescribeBaseMetrics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribeAlarmNotice", async function () {
+    try {
+       const data = await client.DescribeAlarmNotice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribeAlarmEvents", async function () {
+    try {
+       const data = await client.DescribeAlarmEvents({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DeleteAlarmNotices", async function () {
+    try {
+       const data = await client.DeleteAlarmNotices({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribeServiceDiscovery", async function () {
+    try {
+       const data = await client.DescribeServiceDiscovery({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.ModifyAlarmNotice", async function () {
+    try {
+       const data = await client.ModifyAlarmNotice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.ModifyPolicyGroup", async function () {
+    try {
+       const data = await client.ModifyPolicyGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribeAlarmPolicy", async function () {
+    try {
+       const data = await client.DescribeAlarmPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

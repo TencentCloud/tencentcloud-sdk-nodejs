@@ -588,4 +588,14 @@ it("tke.v20180525.DescribeClusterRoutes", async function () {
     }
 })
 
+it("tke.v20180525.ModifyClusterAsGroupOptionAttribute", async function () {
+    try {
+       const data = await client.ModifyClusterAsGroupOptionAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

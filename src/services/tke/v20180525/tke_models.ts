@@ -2659,6 +2659,16 @@ export interface ModifyClusterNodePoolRequest {
    * 是否开启伸缩
    */
   EnableAutoscale?: boolean
+
+  /**
+   * 操作系统名称
+   */
+  OsName?: string
+
+  /**
+   * 镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值)
+   */
+  OsCustomizeType?: string
 }
 
 /**
@@ -3183,6 +3193,16 @@ export interface PrometheusJobTargets {
 }
 
 /**
+ * ModifyClusterAsGroupOptionAttribute返回参数结构体
+ */
+export interface ModifyClusterAsGroupOptionAttributeResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AddExistedInstances请求参数结构体
  */
 export interface AddExistedInstancesRequest {
@@ -3192,7 +3212,7 @@ export interface AddExistedInstancesRequest {
   ClusterId: string
 
   /**
-   * 实例列表
+   * 实例列表，不支持竞价实例
    */
   InstanceIds: Array<string>
 
@@ -3220,6 +3240,11 @@ export interface AddExistedInstancesRequest {
    * 重装系统时，可以指定修改实例的HostName(集群为HostName模式时，此参数必传，规则名称除不支持大写字符外与[CVM创建实例](https://cloud.tencent.com/document/product/213/15730)接口HostName一致)
    */
   HostName?: string
+
+  /**
+   * 节点池选项
+   */
+  NodePool?: NodePoolOption
 }
 
 /**
@@ -3334,6 +3359,21 @@ export interface DescribeClusterNodePoolsRequest {
  * DescribeClusterRouteTables请求参数结构体
  */
 export type DescribeClusterRouteTablesRequest = null
+
+/**
+ * ModifyClusterAsGroupOptionAttribute请求参数结构体
+ */
+export interface ModifyClusterAsGroupOptionAttributeRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 集群弹性伸缩属性
+   */
+  ClusterAsGroupOption: ClusterAsGroupOption
+}
 
 /**
  * 不同角色的已存在节点配置参数
@@ -3781,6 +3821,26 @@ export interface CreateClusterNodePoolResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 加入存量节点时的节点池选项
+ */
+export interface NodePoolOption {
+  /**
+   * 是否加入节点池
+   */
+  AddToNodePool?: boolean
+
+  /**
+   * 节点池id
+   */
+  NodePoolId?: string
+
+  /**
+   * 是否继承节点池相关配置
+   */
+  InheritConfigurationFromNodePool?: boolean
 }
 
 /**

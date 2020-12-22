@@ -150,11 +150,13 @@ import {
   DescribePrometheusAgentInstancesResponse,
   CreateClusterEndpointRequest,
   PrometheusJobTargets,
+  ModifyClusterAsGroupOptionAttributeResponse,
   AddExistedInstancesRequest,
   ClusterAsGroupOption,
   CreateClusterInstancesResponse,
   DescribeClusterNodePoolsRequest,
   DescribeClusterRouteTablesRequest,
+  ModifyClusterAsGroupOptionAttributeRequest,
   ExistedInstancesForNode,
   DescribeClusterRoutesRequest,
   DeleteClusterRouteRequest,
@@ -177,6 +179,7 @@ import {
   PrometheusTemplate,
   RunMonitorServiceEnabled,
   CreateClusterNodePoolResponse,
+  NodePoolOption,
   ModifyClusterAsGroupAttributeRequest,
   InstanceDataDiskMountSetting,
   PrometheusInstanceOverview,
@@ -763,5 +766,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClusterRoutesResponse) => void
   ): Promise<DescribeClusterRoutesResponse> {
     return this.request("DescribeClusterRoutes", req, cb)
+  }
+
+  /**
+   * 修改集群弹性伸缩属性
+   */
+  async ModifyClusterAsGroupOptionAttribute(
+    req: ModifyClusterAsGroupOptionAttributeRequest,
+    cb?: (error: string, rep: ModifyClusterAsGroupOptionAttributeResponse) => void
+  ): Promise<ModifyClusterAsGroupOptionAttributeResponse> {
+    return this.request("ModifyClusterAsGroupOptionAttribute", req, cb)
   }
 }

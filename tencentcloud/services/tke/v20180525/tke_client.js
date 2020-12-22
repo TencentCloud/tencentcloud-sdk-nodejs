@@ -369,5 +369,11 @@ class Client extends abstract_client_1.AbstractClient {
     async DescribeClusterRoutes(req, cb) {
         return this.request("DescribeClusterRoutes", req, cb);
     }
+    /**
+     * 修改集群弹性伸缩属性
+     */
+    async ModifyClusterAsGroupOptionAttribute(req, cb) {
+        return this.request("ModifyClusterAsGroupOptionAttribute", req, cb);
+    }
 }
 exports.Client = Client;

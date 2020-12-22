@@ -826,6 +826,11 @@ https：强制 https 跳转
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RedirectStatusCode?: number;
+    /**
+      * 强制跳转时是否返回增加的头部。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CarryHeaders?: string;
 }
 /**
  * 分路径回源配置规则。
@@ -1191,7 +1196,7 @@ ip：IP 列表作为源站
       */
     BasePath?: string;
     /**
-      * 分路径回源配置规则
+      * 回源路径重写规则配置
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PathRules?: Array<PathRule>;

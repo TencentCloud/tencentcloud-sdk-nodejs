@@ -2311,6 +2311,7 @@ export interface LivePackageInfo {
       * 使用量。
 注意：当为流量包时单位为字节。
 当为转码包时单位为分钟。
+当为连麦包时单位为小时。
       */
   Used: number
 
@@ -2318,6 +2319,7 @@ export interface LivePackageInfo {
       * 剩余量。
 注意：当为流量包时单位为字节。
 当为转码包时单位为分钟。
+当为连麦包时单位为小时。
       */
   Left: number
 
@@ -2336,6 +2338,7 @@ export interface LivePackageInfo {
 0: 流量包。
 1: 普通转码包。
 2: 极速高清包。
+3: 连麦包。
       */
   Type: number
 
@@ -2344,6 +2347,9 @@ export interface LivePackageInfo {
 0: 未使用。
 1: 使用中。
 2: 已过期。
+3: 已冻结。
+4: 已耗尽。
+5: 已退款
       */
   Status: number
 }
@@ -2869,6 +2875,21 @@ export interface DescribeLivePackageInfoResponse {
   LivePackageInfoList?: Array<LivePackageInfo>
 
   /**
+      * 套餐包当前计费方式:
+-1: 无计费方式或获取失败
+0: 无计费方式
+201: 月结带宽
+202: 月结流量
+203: 日结带宽
+204: 日结流量
+205: 日结时长
+206: 月结时长
+304: 日结流量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PackageBillMode?: number
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -3365,6 +3386,7 @@ export interface DescribeLivePackageInfoRequest {
       * 包类型，可选值：
 0：流量包；
 1：转码包。
+2: 连麦包。
       */
   PackageType: number
 }
@@ -5147,7 +5169,7 @@ export interface DescribeStreamPlayInfoListRequest {
  */
 export interface CreateLiveTranscodeTemplateRequest {
   /**
-      * 模板名称，例：900 900p 仅支持字母和数字的组合。
+      * 模板名称，例： 900p 仅支持字母和数字的组合。
 长度限制：
   标准转码：1-10个字符
   极速高清转码：3-10个字符

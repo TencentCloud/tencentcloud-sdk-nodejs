@@ -19,104 +19,153 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribePolicyConditionListConfigManual,
+  ModifyAlarmPolicyInfoRequest,
   CreatePolicyGroupEventCondition,
   DescribeProductEventListRequest,
+  AlarmPolicyTriggerTask,
   DescribeServiceDiscoveryResponse,
   DescribePolicyConditionListMetric,
   DescribePolicyGroupListResponse,
   BindingPolicyObjectRequest,
   CreateServiceDiscoveryResponse,
+  PutMonitorDataResponse,
   DescribePolicyGroupInfoRequest,
   DeleteServiceDiscoveryResponse,
   DescribePolicyGroupInfoCallback,
+  CreateAlarmPolicyRequest,
+  DescribeAlarmEventsResponse,
   DescribeProductEventListDimensions,
   DescribePolicyGroupInfoResponse,
+  ModifyAlarmPolicyNoticeRequest,
+  DeleteAlarmPolicyRequest,
   PutMonitorDataRequest,
   CreatePolicyGroupResponse,
-  PutMonitorDataResponse,
+  ModifyAlarmPolicyTasksResponse,
   DescribeBaseMetricsResponse,
   SendCustomAlarmMsgRequest,
   DescribePolicyConditionListConfigManualContinueTime,
   CommonNamespace,
   GetMonitorDataRequest,
   DataPoint,
+  DescribeAlarmPoliciesResponse,
+  ConditionsTemp,
   DescribePolicyConditionListConfigManualPeriod,
   UnBindingPolicyObjectRequest,
   DescribeServiceDiscoveryRequest,
+  InstanceGroup,
   DescribePolicyConditionListRequest,
-  DescribeBindingPolicyObjectListInstance,
   DeletePolicyGroupResponse,
   DescribeMonitorTypesRequest,
+  DescribeAlarmNoticesResponse,
+  ModifyAlarmPolicyTasksRequest,
   DimensionsDesc,
   ServiceDiscoveryItem,
+  SetDefaultAlarmPolicyRequest,
+  ModifyAlarmNoticeRequest,
   CreateServiceDiscoveryRequest,
   DescribePolicyConditionListCondition,
   DescribeProductListRequest,
   PeriodsSt,
+  AlarmPolicy,
+  CreateAlarmPolicyResponse,
   ModifyAlarmReceiversResponse,
   DescribePolicyConditionListResponse,
   DescribeAllNamespacesResponse,
+  DeleteAlarmNoticesResponse,
   DescribeBasicAlarmListResponse,
   ProductSimple,
   ModifyAlarmReceiversRequest,
+  AlarmPolicyRule,
+  DescribeAlarmNoticeCallbacksRequest,
   DescribeProductEventListEventsDimensions,
-  MetricSet,
-  DescribeBindingPolicyObjectListResponse,
+  ModifyAlarmPolicyConditionResponse,
+  Dimension,
+  DescribeBindingPolicyObjectListInstance,
   ModifyPolicyGroupEventCondition,
+  Metric,
   ModifyPolicyGroupRequest,
-  DescribeProductEventListResponse,
+  DescribeAlarmHistoriesResponse,
+  DescribeAlarmMetricsRequest,
   DescribeBaseMetricsRequest,
+  UserNotice,
+  AlarmPolicyFilter,
+  DescribeAlarmNoticeCallbacksResponse,
+  ModifyAlarmPolicyNoticeResponse,
+  ModifyAlarmPolicyStatusResponse,
   Instance,
   BindingPolicyObjectDimension,
+  DescribeAlarmPolicyResponse,
   UpdateServiceDiscoveryResponse,
   DescribeMonitorTypesResponse,
-  Dimension,
+  MetricSet,
   DescribeBasicAlarmListAlarms,
   UpdateServiceDiscoveryRequest,
-  UnBindingAllPolicyObjectResponse,
+  CreateAlarmNoticeResponse,
   DescribeAlarmHistoriesRequest,
   MetricObjectMeaning,
-  DeletePolicyGroupRequest,
+  AlarmEvent,
   ModifyPolicyGroupResponse,
   DescribePolicyConditionListConfigManualCalcType,
+  DeletePolicyGroupRequest,
   DescribePolicyGroupInfoCondition,
-  DescribeProductEventListEventsGroupInfo,
+  DescribeBindingPolicyObjectListResponse,
   DescribePolicyGroupInfoConditionTpl,
   DescribeBindingPolicyObjectListRequest,
   UnBindingPolicyObjectResponse,
   DescribeProductEventListEvents,
+  DeleteAlarmNoticesRequest,
   DescribePolicyConditionListConfigManualPeriodNum,
   DescribeAllNamespacesRequest,
+  DescribeAlarmMetricsResponse,
   DescribePolicyGroupListGroupInstanceGroup,
-  InstanceGroup,
+  DescribeAlarmPoliciesRequest,
   DescribeAccidentEventListResponse,
   DescribePolicyConditionListConfigManualStatType,
+  ModifyAlarmPolicyInfoResponse,
+  AlarmNotice,
+  MetricConfig,
+  DescribeAlarmEventsRequest,
+  ModifyAlarmPolicyConditionRequest,
+  ModifyAlarmNoticeResponse,
   DescribeAccidentEventListAlarms,
   DescribeProductListResponse,
-  DescribeAlarmHistoriesResponse,
+  DescribeProductEventListResponse,
   AlarmHistory,
   MonitorTypeNamespace,
+  DeleteAlarmPolicyResponse,
+  URLNotice,
+  DescribeAlarmPolicyRequest,
   CreatePolicyGroupRequest,
   CreatePolicyGroupCondition,
   DescribePolicyGroupInfoReceiverInfo,
   DescribePolicyConditionListEventMetric,
   DescribePolicyGroupListRequest,
   DescribeBasicAlarmListRequest,
+  UnBindingAllPolicyObjectResponse,
+  DescribeAlarmNoticesRequest,
   DescribePolicyGroupListGroup,
   DescribeAccidentEventListRequest,
   MetricDatum,
+  DescribeAlarmNoticeResponse,
   DescribeBindingPolicyObjectListInstanceGroup,
+  DescribeProductEventListEventsGroupInfo,
+  ModifyAlarmPolicyStatusRequest,
+  DescribeAlarmNoticeRequest,
   DescribeBindingPolicyObjectListDimension,
+  CreateAlarmNoticeRequest,
   InstanceGroups,
   GetMonitorDataResponse,
   ReceiverInfo,
   UnBindingAllPolicyObjectRequest,
   DescribePolicyGroupInfoEventCondition,
   SendCustomAlarmMsgResponse,
+  AlarmPolicyCondition,
   ModifyPolicyGroupCondition,
   DeleteServiceDiscoveryRequest,
+  AlarmPolicyEventCondition,
   DescribeProductEventListOverView,
   DescribePolicyConditionListConfigManualCalcValue,
+  SetDefaultAlarmPolicyResponse,
   BindingPolicyObjectResponse,
 } from "./monitor_models"
 
@@ -127,6 +176,32 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("monitor.tencentcloudapi.com", "2018-07-24", clientConfig)
+  }
+
+  /**
+     * 默认接口请求频率限制：50次/秒。
+默认单租户指标上限：100个。
+单次上报最多 30 个指标/值对，请求返回错误时，请求中所有的指标/值均不会被保存。
+
+上报的时间戳为期望保存的时间戳，建议构造整数分钟时刻的时间戳。
+时间戳时间范围必须为当前时间到 300 秒前之间。
+同一 IP 指标对的数据需按分钟先后顺序上报。
+     */
+  async PutMonitorData(
+    req: PutMonitorDataRequest,
+    cb?: (error: string, rep: PutMonitorDataResponse) => void
+  ): Promise<PutMonitorDataResponse> {
+    return this.request("PutMonitorData", req, cb)
+  }
+
+  /**
+   * 告警策略列表
+   */
+  async DescribeAlarmPolicies(
+    req: DescribeAlarmPoliciesRequest,
+    cb?: (error: string, rep: DescribeAlarmPoliciesResponse) => void
+  ): Promise<DescribeAlarmPoliciesResponse> {
+    return this.request("DescribeAlarmPolicies", req, cb)
   }
 
   /**
@@ -160,6 +235,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 云监控告警修改告警策略绑定的告警通知模板
+   */
+  async ModifyAlarmPolicyNotice(
+    req: ModifyAlarmPolicyNoticeRequest,
+    cb?: (error: string, rep: ModifyAlarmPolicyNoticeResponse) => void
+  ): Promise<ModifyAlarmPolicyNoticeResponse> {
+    return this.request("ModifyAlarmPolicyNotice", req, cb)
+  }
+
+  /**
      * 删除在腾讯云容器服务下创建的 Prometheus 服务发现。
 <p>注意：前提条件，已经通过 Prometheus 控制台集成了对应的腾讯云容器服务，具体请参考
 <a href="https://cloud.tencent.com/document/product/248/48859" target="_blank">Agent 安装</a>。</p>
@@ -182,6 +267,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除告警策略
+   */
+  async DeleteAlarmPolicy(
+    req: DeleteAlarmPolicyRequest,
+    cb?: (error: string, rep: DeleteAlarmPolicyResponse) => void
+  ): Promise<DeleteAlarmPolicyResponse> {
+    return this.request("DeleteAlarmPolicy", req, cb)
+  }
+
+  /**
      * 获取云产品的监控数据。传入产品的命名空间、对象维度描述和监控指标即可获得相应的监控数据。
 接口调用频率限制为：20次/秒，1200次/分钟。单请求最多可支持批量拉取10个实例的监控数据，单请求的数据点数限制为1440个。
 若您需要调用的指标、对象较多，可能存在因限频出现拉取失败的情况，建议尽量将请求按时间维度均摊。
@@ -194,19 +289,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 默认接口请求频率限制：50次/秒。
-默认单租户指标上限：100个。
-单次上报最多 30 个指标/值对，请求返回错误时，请求中所有的指标/值均不会被保存。
-
-上报的时间戳为期望保存的时间戳，建议构造整数分钟时刻的时间戳。
-时间戳时间范围必须为当前时间到 300 秒前之间。
-同一 IP 指标对的数据需按分钟先后顺序上报。
-     */
-  async PutMonitorData(
-    req: PutMonitorDataRequest,
-    cb?: (error: string, rep: PutMonitorDataResponse) => void
-  ): Promise<PutMonitorDataResponse> {
-    return this.request("PutMonitorData", req, cb)
+   * 云监控告警修改告警策略的触发任务，TriggerTasks字段放触发任务列表，TriggerTasks传空数组时，代表解绑该策略的所有触发任务。
+   */
+  async ModifyAlarmPolicyTasks(
+    req: ModifyAlarmPolicyTasksRequest,
+    cb?: (error: string, rep: ModifyAlarmPolicyTasksResponse) => void
+  ): Promise<ModifyAlarmPolicyTasksResponse> {
+    return this.request("ModifyAlarmPolicyTasks", req, cb)
   }
 
   /**
@@ -220,13 +309,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改告警接收人
+   * 编辑告警策略触发条件
    */
-  async ModifyAlarmReceivers(
-    req: ModifyAlarmReceiversRequest,
-    cb?: (error: string, rep: ModifyAlarmReceiversResponse) => void
-  ): Promise<ModifyAlarmReceiversResponse> {
-    return this.request("ModifyAlarmReceivers", req, cb)
+  async ModifyAlarmPolicyCondition(
+    req: ModifyAlarmPolicyConditionRequest,
+    cb?: (error: string, rep: ModifyAlarmPolicyConditionResponse) => void
+  ): Promise<ModifyAlarmPolicyConditionResponse> {
+    return this.request("ModifyAlarmPolicyCondition", req, cb)
+  }
+
+  /**
+   * 获取基础告警列表
+   */
+  async DescribeBasicAlarmList(
+    req: DescribeBasicAlarmListRequest,
+    cb?: (error: string, rep: DescribeBasicAlarmListResponse) => void
+  ): Promise<DescribeBasicAlarmListResponse> {
+    return this.request("DescribeBasicAlarmList", req, cb)
   }
 
   /**
@@ -240,25 +339,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 列出在腾讯云容器服务下创建的 Prometheus 服务发现。
-<p>注意：前提条件，已经通过 Prometheus 控制台集成了对应的腾讯云容器服务，具体请参考
-<a href="https://cloud.tencent.com/document/product/248/48859" target="_blank">Agent 安装</a>。</p>
-     */
-  async DescribeServiceDiscovery(
-    req: DescribeServiceDiscoveryRequest,
-    cb?: (error: string, rep: DescribeServiceDiscoveryResponse) => void
-  ): Promise<DescribeServiceDiscoveryResponse> {
-    return this.request("DescribeServiceDiscovery", req, cb)
+   * 云监控告警创建告警通知模板
+   */
+  async CreateAlarmNotice(
+    req: CreateAlarmNoticeRequest,
+    cb?: (error: string, rep: CreateAlarmNoticeResponse) => void
+  ): Promise<CreateAlarmNoticeResponse> {
+    return this.request("CreateAlarmNotice", req, cb)
   }
 
   /**
-   * 获取基础告警列表
+   * 创建告警策略
    */
-  async DescribeBasicAlarmList(
-    req: DescribeBasicAlarmListRequest,
-    cb?: (error: string, rep: DescribeBasicAlarmListResponse) => void
-  ): Promise<DescribeBasicAlarmListResponse> {
-    return this.request("DescribeBasicAlarmList", req, cb)
+  async CreateAlarmPolicy(
+    req: CreateAlarmPolicyRequest,
+    cb?: (error: string, rep: CreateAlarmPolicyResponse) => void
+  ): Promise<CreateAlarmPolicyResponse> {
+    return this.request("CreateAlarmPolicy", req, cb)
   }
 
   /**
@@ -304,13 +401,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新策略组
+   * 云监控告警查询告警通知模板列表
    */
-  async ModifyPolicyGroup(
-    req: ModifyPolicyGroupRequest,
-    cb?: (error: string, rep: ModifyPolicyGroupResponse) => void
-  ): Promise<ModifyPolicyGroupResponse> {
-    return this.request("ModifyPolicyGroup", req, cb)
+  async DescribeAlarmNotices(
+    req: DescribeAlarmNoticesRequest,
+    cb?: (error: string, rep: DescribeAlarmNoticesResponse) => void
+  ): Promise<DescribeAlarmNoticesResponse> {
+    return this.request("DescribeAlarmNotices", req, cb)
+  }
+
+  /**
+   * 云监控告警获取告警通知模板所有回调URL
+   */
+  async DescribeAlarmNoticeCallbacks(
+    req: DescribeAlarmNoticeCallbacksRequest,
+    cb?: (error: string, rep: DescribeAlarmNoticeCallbacksResponse) => void
+  ): Promise<DescribeAlarmNoticeCallbacksResponse> {
+    return this.request("DescribeAlarmNoticeCallbacks", req, cb)
+  }
+
+  /**
+   * 修改告警接收人
+   */
+  async ModifyAlarmReceivers(
+    req: ModifyAlarmReceiversRequest,
+    cb?: (error: string, rep: ModifyAlarmReceiversResponse) => void
+  ): Promise<ModifyAlarmReceiversResponse> {
+    return this.request("ModifyAlarmReceivers", req, cb)
   }
 
   /**
@@ -356,6 +473,17 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 设置一个策略为该告警策略类型、该项目的默认告警策略。
+同一项目下相同的告警策略类型，就会被设置为非默认。
+     */
+  async SetDefaultAlarmPolicy(
+    req: SetDefaultAlarmPolicyRequest,
+    cb?: (error: string, rep: SetDefaultAlarmPolicyResponse) => void
+  ): Promise<SetDefaultAlarmPolicyResponse> {
+    return this.request("SetDefaultAlarmPolicy", req, cb)
+  }
+
+  /**
    * 增加策略组
    */
   async CreatePolicyGroup(
@@ -386,13 +514,43 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 告警2.0-告警历史列表
+   * 告警2.0编辑告警策略基本信息，包括策略名、备注
+   */
+  async ModifyAlarmPolicyInfo(
+    req: ModifyAlarmPolicyInfoRequest,
+    cb?: (error: string, rep: ModifyAlarmPolicyInfoResponse) => void
+  ): Promise<ModifyAlarmPolicyInfoResponse> {
+    return this.request("ModifyAlarmPolicyInfo", req, cb)
+  }
+
+  /**
+   * 告警历史列表
    */
   async DescribeAlarmHistories(
     req: DescribeAlarmHistoriesRequest,
     cb?: (error: string, rep: DescribeAlarmHistoriesResponse) => void
   ): Promise<DescribeAlarmHistoriesResponse> {
     return this.request("DescribeAlarmHistories", req, cb)
+  }
+
+  /**
+   * 查询告警指标列表
+   */
+  async DescribeAlarmMetrics(
+    req: DescribeAlarmMetricsRequest,
+    cb?: (error: string, rep: DescribeAlarmMetricsResponse) => void
+  ): Promise<DescribeAlarmMetricsResponse> {
+    return this.request("DescribeAlarmMetrics", req, cb)
+  }
+
+  /**
+   * 修改告警策略的启停状态
+   */
+  async ModifyAlarmPolicyStatus(
+    req: ModifyAlarmPolicyStatusRequest,
+    cb?: (error: string, rep: ModifyAlarmPolicyStatusResponse) => void
+  ): Promise<ModifyAlarmPolicyStatusResponse> {
+    return this.request("ModifyAlarmPolicyStatus", req, cb)
   }
 
   /**
@@ -403,5 +561,77 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBaseMetricsResponse) => void
   ): Promise<DescribeBaseMetricsResponse> {
     return this.request("DescribeBaseMetrics", req, cb)
+  }
+
+  /**
+   * 云监控告警获取告警通知模板详情
+   */
+  async DescribeAlarmNotice(
+    req: DescribeAlarmNoticeRequest,
+    cb?: (error: string, rep: DescribeAlarmNoticeResponse) => void
+  ): Promise<DescribeAlarmNoticeResponse> {
+    return this.request("DescribeAlarmNotice", req, cb)
+  }
+
+  /**
+   * 查询告警事件列表
+   */
+  async DescribeAlarmEvents(
+    req: DescribeAlarmEventsRequest,
+    cb?: (error: string, rep: DescribeAlarmEventsResponse) => void
+  ): Promise<DescribeAlarmEventsResponse> {
+    return this.request("DescribeAlarmEvents", req, cb)
+  }
+
+  /**
+   * 云监控告警删除告警通知模板
+   */
+  async DeleteAlarmNotices(
+    req: DeleteAlarmNoticesRequest,
+    cb?: (error: string, rep: DeleteAlarmNoticesResponse) => void
+  ): Promise<DeleteAlarmNoticesResponse> {
+    return this.request("DeleteAlarmNotices", req, cb)
+  }
+
+  /**
+     * 列出在腾讯云容器服务下创建的 Prometheus 服务发现。
+<p>注意：前提条件，已经通过 Prometheus 控制台集成了对应的腾讯云容器服务，具体请参考
+<a href="https://cloud.tencent.com/document/product/248/48859" target="_blank">Agent 安装</a>。</p>
+     */
+  async DescribeServiceDiscovery(
+    req: DescribeServiceDiscoveryRequest,
+    cb?: (error: string, rep: DescribeServiceDiscoveryResponse) => void
+  ): Promise<DescribeServiceDiscoveryResponse> {
+    return this.request("DescribeServiceDiscovery", req, cb)
+  }
+
+  /**
+   * 云监控告警编辑告警通知模板
+   */
+  async ModifyAlarmNotice(
+    req: ModifyAlarmNoticeRequest,
+    cb?: (error: string, rep: ModifyAlarmNoticeResponse) => void
+  ): Promise<ModifyAlarmNoticeResponse> {
+    return this.request("ModifyAlarmNotice", req, cb)
+  }
+
+  /**
+   * 更新策略组
+   */
+  async ModifyPolicyGroup(
+    req: ModifyPolicyGroupRequest,
+    cb?: (error: string, rep: ModifyPolicyGroupResponse) => void
+  ): Promise<ModifyPolicyGroupResponse> {
+    return this.request("ModifyPolicyGroup", req, cb)
+  }
+
+  /**
+   * 告警策略详情
+   */
+  async DescribeAlarmPolicy(
+    req: DescribeAlarmPolicyRequest,
+    cb?: (error: string, rep: DescribeAlarmPolicyResponse) => void
+  ): Promise<DescribeAlarmPolicyResponse> {
+    return this.request("DescribeAlarmPolicy", req, cb)
   }
 }

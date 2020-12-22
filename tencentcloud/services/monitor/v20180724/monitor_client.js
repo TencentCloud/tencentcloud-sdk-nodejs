@@ -28,6 +28,24 @@ class Client extends abstract_client_1.AbstractClient {
         super("monitor.tencentcloudapi.com", "2018-07-24", clientConfig);
     }
     /**
+     * 默认接口请求频率限制：50次/秒。
+默认单租户指标上限：100个。
+单次上报最多 30 个指标/值对，请求返回错误时，请求中所有的指标/值均不会被保存。
+
+上报的时间戳为期望保存的时间戳，建议构造整数分钟时刻的时间戳。
+时间戳时间范围必须为当前时间到 300 秒前之间。
+同一 IP 指标对的数据需按分钟先后顺序上报。
+     */
+    async PutMonitorData(req, cb) {
+        return this.request("PutMonitorData", req, cb);
+    }
+    /**
+     * 告警策略列表
+     */
+    async DescribeAlarmPolicies(req, cb) {
+        return this.request("DescribeAlarmPolicies", req, cb);
+    }
+    /**
      * 删除策略的关联对象
      */
     async UnBindingPolicyObject(req, cb) {
@@ -46,6 +64,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBindingPolicyObjectList", req, cb);
     }
     /**
+     * 云监控告警修改告警策略绑定的告警通知模板
+     */
+    async ModifyAlarmPolicyNotice(req, cb) {
+        return this.request("ModifyAlarmPolicyNotice", req, cb);
+    }
+    /**
      * 删除在腾讯云容器服务下创建的 Prometheus 服务发现。
 <p>注意：前提条件，已经通过 Prometheus 控制台集成了对应的腾讯云容器服务，具体请参考
 <a href="https://cloud.tencent.com/document/product/248/48859" target="_blank">Agent 安装</a>。</p>
@@ -60,6 +84,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePolicyGroupList", req, cb);
     }
     /**
+     * 删除告警策略
+     */
+    async DeleteAlarmPolicy(req, cb) {
+        return this.request("DeleteAlarmPolicy", req, cb);
+    }
+    /**
      * 获取云产品的监控数据。传入产品的命名空间、对象维度描述和监控指标即可获得相应的监控数据。
 接口调用频率限制为：20次/秒，1200次/分钟。单请求最多可支持批量拉取10个实例的监控数据，单请求的数据点数限制为1440个。
 若您需要调用的指标、对象较多，可能存在因限频出现拉取失败的情况，建议尽量将请求按时间维度均摊。
@@ -68,16 +98,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetMonitorData", req, cb);
     }
     /**
-     * 默认接口请求频率限制：50次/秒。
-默认单租户指标上限：100个。
-单次上报最多 30 个指标/值对，请求返回错误时，请求中所有的指标/值均不会被保存。
-
-上报的时间戳为期望保存的时间戳，建议构造整数分钟时刻的时间戳。
-时间戳时间范围必须为当前时间到 300 秒前之间。
-同一 IP 指标对的数据需按分钟先后顺序上报。
+     * 云监控告警修改告警策略的触发任务，TriggerTasks字段放触发任务列表，TriggerTasks传空数组时，代表解绑该策略的所有触发任务。
      */
-    async PutMonitorData(req, cb) {
-        return this.request("PutMonitorData", req, cb);
+    async ModifyAlarmPolicyTasks(req, cb) {
+        return this.request("ModifyAlarmPolicyTasks", req, cb);
     }
     /**
      * 获取基础告警策略条件
@@ -86,10 +110,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePolicyConditionList", req, cb);
     }
     /**
-     * 修改告警接收人
+     * 编辑告警策略触发条件
      */
-    async ModifyAlarmReceivers(req, cb) {
-        return this.request("ModifyAlarmReceivers", req, cb);
+    async ModifyAlarmPolicyCondition(req, cb) {
+        return this.request("ModifyAlarmPolicyCondition", req, cb);
+    }
+    /**
+     * 获取基础告警列表
+     */
+    async DescribeBasicAlarmList(req, cb) {
+        return this.request("DescribeBasicAlarmList", req, cb);
     }
     /**
      * 将告警策略绑定到特定对象
@@ -98,18 +128,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BindingPolicyObject", req, cb);
     }
     /**
-     * 列出在腾讯云容器服务下创建的 Prometheus 服务发现。
-<p>注意：前提条件，已经通过 Prometheus 控制台集成了对应的腾讯云容器服务，具体请参考
-<a href="https://cloud.tencent.com/document/product/248/48859" target="_blank">Agent 安装</a>。</p>
+     * 云监控告警创建告警通知模板
      */
-    async DescribeServiceDiscovery(req, cb) {
-        return this.request("DescribeServiceDiscovery", req, cb);
+    async CreateAlarmNotice(req, cb) {
+        return this.request("CreateAlarmNotice", req, cb);
     }
     /**
-     * 获取基础告警列表
+     * 创建告警策略
      */
-    async DescribeBasicAlarmList(req, cb) {
-        return this.request("DescribeBasicAlarmList", req, cb);
+    async CreateAlarmPolicy(req, cb) {
+        return this.request("CreateAlarmPolicy", req, cb);
     }
     /**
      * 获取基础策略组详情
@@ -138,10 +166,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateServiceDiscovery", req, cb);
     }
     /**
-     * 更新策略组
+     * 云监控告警查询告警通知模板列表
      */
-    async ModifyPolicyGroup(req, cb) {
-        return this.request("ModifyPolicyGroup", req, cb);
+    async DescribeAlarmNotices(req, cb) {
+        return this.request("DescribeAlarmNotices", req, cb);
+    }
+    /**
+     * 云监控告警获取告警通知模板所有回调URL
+     */
+    async DescribeAlarmNoticeCallbacks(req, cb) {
+        return this.request("DescribeAlarmNoticeCallbacks", req, cb);
+    }
+    /**
+     * 修改告警接收人
+     */
+    async ModifyAlarmReceivers(req, cb) {
+        return this.request("ModifyAlarmReceivers", req, cb);
     }
     /**
      * 删除全部的关联对象
@@ -170,6 +210,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMonitorTypes", req, cb);
     }
     /**
+     * 设置一个策略为该告警策略类型、该项目的默认告警策略。
+同一项目下相同的告警策略类型，就会被设置为非默认。
+     */
+    async SetDefaultAlarmPolicy(req, cb) {
+        return this.request("SetDefaultAlarmPolicy", req, cb);
+    }
+    /**
      * 增加策略组
      */
     async CreatePolicyGroup(req, cb) {
@@ -188,16 +235,78 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAccidentEventList", req, cb);
     }
     /**
-     * 告警2.0-告警历史列表
+     * 告警2.0编辑告警策略基本信息，包括策略名、备注
+     */
+    async ModifyAlarmPolicyInfo(req, cb) {
+        return this.request("ModifyAlarmPolicyInfo", req, cb);
+    }
+    /**
+     * 告警历史列表
      */
     async DescribeAlarmHistories(req, cb) {
         return this.request("DescribeAlarmHistories", req, cb);
+    }
+    /**
+     * 查询告警指标列表
+     */
+    async DescribeAlarmMetrics(req, cb) {
+        return this.request("DescribeAlarmMetrics", req, cb);
+    }
+    /**
+     * 修改告警策略的启停状态
+     */
+    async ModifyAlarmPolicyStatus(req, cb) {
+        return this.request("ModifyAlarmPolicyStatus", req, cb);
     }
     /**
      * 获取基础指标详情
      */
     async DescribeBaseMetrics(req, cb) {
         return this.request("DescribeBaseMetrics", req, cb);
+    }
+    /**
+     * 云监控告警获取告警通知模板详情
+     */
+    async DescribeAlarmNotice(req, cb) {
+        return this.request("DescribeAlarmNotice", req, cb);
+    }
+    /**
+     * 查询告警事件列表
+     */
+    async DescribeAlarmEvents(req, cb) {
+        return this.request("DescribeAlarmEvents", req, cb);
+    }
+    /**
+     * 云监控告警删除告警通知模板
+     */
+    async DeleteAlarmNotices(req, cb) {
+        return this.request("DeleteAlarmNotices", req, cb);
+    }
+    /**
+     * 列出在腾讯云容器服务下创建的 Prometheus 服务发现。
+<p>注意：前提条件，已经通过 Prometheus 控制台集成了对应的腾讯云容器服务，具体请参考
+<a href="https://cloud.tencent.com/document/product/248/48859" target="_blank">Agent 安装</a>。</p>
+     */
+    async DescribeServiceDiscovery(req, cb) {
+        return this.request("DescribeServiceDiscovery", req, cb);
+    }
+    /**
+     * 云监控告警编辑告警通知模板
+     */
+    async ModifyAlarmNotice(req, cb) {
+        return this.request("ModifyAlarmNotice", req, cb);
+    }
+    /**
+     * 更新策略组
+     */
+    async ModifyPolicyGroup(req, cb) {
+        return this.request("ModifyPolicyGroup", req, cb);
+    }
+    /**
+     * 告警策略详情
+     */
+    async DescribeAlarmPolicy(req, cb) {
+        return this.request("DescribeAlarmPolicy", req, cb);
     }
 }
 exports.Client = Client;

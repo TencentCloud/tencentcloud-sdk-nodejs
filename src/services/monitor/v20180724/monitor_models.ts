@@ -57,6 +57,31 @@ export interface DescribePolicyConditionListConfigManual {
 }
 
 /**
+ * ModifyAlarmPolicyInfo请求参数结构体
+ */
+export interface ModifyAlarmPolicyInfoRequest {
+  /**
+   * 模块名，这里填“monitor”
+   */
+  Module: string
+
+  /**
+   * 告警策略 ID
+   */
+  PolicyId: string
+
+  /**
+   * 要修改的字段 NAME=策略名称 REMARK=策略备注
+   */
+  Key: string
+
+  /**
+   * 修改后的值
+   */
+  Value: string
+}
+
+/**
  * 创建策略传入的事件告警条件
  */
 export interface CreatePolicyGroupEventCondition {
@@ -159,6 +184,23 @@ export interface DescribeProductEventListRequest {
    * 每页返回的数量，默认20
    */
   Limit?: number
+}
+
+/**
+ * 告警策略触发任务
+ */
+export interface AlarmPolicyTriggerTask {
+  /**
+      * 触发任务类型 AS=弹性伸缩
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Type: string
+
+  /**
+      * 用 json 表示配置信息 {"Key1":"Value1","Key2":"Value2"}
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskConfig: string
 }
 
 /**
@@ -265,6 +307,16 @@ export interface CreateServiceDiscoveryResponse {
 }
 
 /**
+ * PutMonitorData返回参数结构体
+ */
+export interface PutMonitorDataResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribePolicyGroupInfo请求参数结构体
  */
 export interface DescribePolicyGroupInfoRequest {
@@ -307,6 +359,81 @@ export interface DescribePolicyGroupInfoCallback {
    * 用户回调接口验证码
    */
   VerifyCode: string
+}
+
+/**
+ * CreateAlarmPolicy请求参数结构体
+ */
+export interface CreateAlarmPolicyRequest {
+  /**
+   * 固定值，为"monitor"
+   */
+  Module: string
+
+  /**
+   * 策略名称，不超过20字符
+   */
+  PolicyName: string
+
+  /**
+   * 监控类型 MT_QCE=云产品监控
+   */
+  MonitorType: string
+
+  /**
+   * 告警策略类型，由 DescribeAllNamespaces 获得，例如 cvm_device
+   */
+  Namespace: string
+
+  /**
+   * 备注，不超过100字符，仅支持中英文、数字、下划线、-
+   */
+  Remark?: string
+
+  /**
+   * 是否启用 0=停用 1=启用，可不传 默认为1
+   */
+  Enable?: number
+
+  /**
+   * 项目 Id -1=无项目 0=默认项目，可不传 默认为-1
+   */
+  ProjectId?: number
+
+  /**
+   * 指标触发条件
+   */
+  Condition?: AlarmPolicyCondition
+
+  /**
+   * 事件触发条件
+   */
+  EventCondition?: AlarmPolicyEventCondition
+
+  /**
+   * 通知规则 Id 列表，由 DescribeAlarmNotices 获得
+   */
+  NoticeIds?: Array<string>
+
+  /**
+   * 触发任务列表
+   */
+  TriggerTasks?: Array<AlarmPolicyTriggerTask>
+}
+
+/**
+ * DescribeAlarmEvents返回参数结构体
+ */
+export interface DescribeAlarmEventsResponse {
+  /**
+   * 告警事件列表
+   */
+  Events?: Array<AlarmEvent>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -426,6 +553,41 @@ export interface DescribePolicyGroupInfoResponse {
 }
 
 /**
+ * ModifyAlarmPolicyNotice请求参数结构体
+ */
+export interface ModifyAlarmPolicyNoticeRequest {
+  /**
+   * 模块名，这里填“monitor”
+   */
+  Module: string
+
+  /**
+   * 告警策略 ID
+   */
+  PolicyId: string
+
+  /**
+   * 告警通知模板 ID 列表
+   */
+  NoticeIds?: Array<string>
+}
+
+/**
+ * DeleteAlarmPolicy请求参数结构体
+ */
+export interface DeleteAlarmPolicyRequest {
+  /**
+   * 模块名，固定值 monitor
+   */
+  Module: string
+
+  /**
+   * 告警策略 ID 列表
+   */
+  PolicyIds: Array<string>
+}
+
+/**
  * PutMonitorData请求参数结构体
  */
 export interface PutMonitorDataRequest {
@@ -466,9 +628,9 @@ export interface CreatePolicyGroupResponse {
 }
 
 /**
- * PutMonitorData返回参数结构体
+ * ModifyAlarmPolicyTasks返回参数结构体
  */
-export interface PutMonitorDataResponse {
+export interface ModifyAlarmPolicyTasksResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -633,6 +795,49 @@ export interface DataPoint {
 }
 
 /**
+ * DescribeAlarmPolicies返回参数结构体
+ */
+export interface DescribeAlarmPoliciesResponse {
+  /**
+   * 策略总数
+   */
+  TotalCount?: number
+
+  /**
+   * 策略数组
+   */
+  Policies?: Array<AlarmPolicy>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 告警条件模版
+ */
+export interface ConditionsTemp {
+  /**
+      * 模版名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TemplateName: string
+
+  /**
+      * 指标触发条件
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Condition: AlarmPolicyCondition
+
+  /**
+      * 事件触发条件
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EventCondition: AlarmPolicyEventCondition
+}
+
+/**
  * DescribePolicyConditionList.ConfigManual.Period
  */
 export interface DescribePolicyConditionListConfigManualPeriod {
@@ -701,6 +906,23 @@ export interface DescribeServiceDiscoveryRequest {
 }
 
 /**
+ * DescribeBasicAlarmList返回的Alarms里的InstanceGroup
+ */
+export interface InstanceGroup {
+  /**
+      * 实例组ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceGroupId: number
+
+  /**
+      * 实例组名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceGroupName: string
+}
+
+/**
  * DescribePolicyConditionList请求参数结构体
  */
 export interface DescribePolicyConditionListRequest {
@@ -708,31 +930,6 @@ export interface DescribePolicyConditionListRequest {
    * 固定值，为"monitor"
    */
   Module: string
-}
-
-/**
- * 查询策略绑定对象列表接口返回的对象实例信息
- */
-export interface DescribeBindingPolicyObjectListInstance {
-  /**
-   * 对象唯一id
-   */
-  UniqueId: string
-
-  /**
-   * 表示对象实例的维度集合，jsonObj字符串
-   */
-  Dimensions: string
-
-  /**
-   * 对象是否被屏蔽，0表示未屏蔽，1表示被屏蔽
-   */
-  IsShielded: number
-
-  /**
-   * 对象所在的地域
-   */
-  Region: string
 }
 
 /**
@@ -750,9 +947,49 @@ export interface DeletePolicyGroupResponse {
  */
 export interface DescribeMonitorTypesRequest {
   /**
-   * 固定值，为"monitor"
+   * 模块名，固定值 monitor
    */
   Module: string
+}
+
+/**
+ * DescribeAlarmNotices返回参数结构体
+ */
+export interface DescribeAlarmNoticesResponse {
+  /**
+   * 告警通知模板总数
+   */
+  TotalCount?: number
+
+  /**
+   * 告警通知模板列表
+   */
+  Notices?: Array<AlarmNotice>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyAlarmPolicyTasks请求参数结构体
+ */
+export interface ModifyAlarmPolicyTasksRequest {
+  /**
+   * 模块名，这里填“monitor”
+   */
+  Module: string
+
+  /**
+   * 告警策略 ID
+   */
+  PolicyId: string
+
+  /**
+   * 告警策略触发任务列表，空数据代表解绑
+   */
+  TriggerTasks?: Array<AlarmPolicyTriggerTask>
 }
 
 /**
@@ -806,6 +1043,61 @@ export interface ServiceDiscoveryItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Yaml: string
+}
+
+/**
+ * SetDefaultAlarmPolicy请求参数结构体
+ */
+export interface SetDefaultAlarmPolicyRequest {
+  /**
+   * 模块名，固定值 monitor
+   */
+  Module: string
+
+  /**
+   * 告警策略 ID
+   */
+  PolicyId: string
+}
+
+/**
+ * ModifyAlarmNotice请求参数结构体
+ */
+export interface ModifyAlarmNoticeRequest {
+  /**
+   * 模块名，这里填“monitor”
+   */
+  Module: string
+
+  /**
+   * 告警通知规则名称 60字符以内
+   */
+  Name: string
+
+  /**
+   * 通知类型 ALARM=未恢复通知 OK=已恢复通知 ALL=都通知
+   */
+  NoticeType: string
+
+  /**
+   * 通知语言 zh-CN=中文 en-US=英文
+   */
+  NoticeLanguage: string
+
+  /**
+   * 告警通知模板 ID
+   */
+  NoticeId: string
+
+  /**
+   * 用户通知 最多5个
+   */
+  UserNotices?: Array<UserNotice>
+
+  /**
+   * 回调通知 最多3个
+   */
+  URLNotices?: Array<URLNotice>
 }
 
 /**
@@ -930,6 +1222,202 @@ export interface PeriodsSt {
 }
 
 /**
+ * 告警策略详情
+ */
+export interface AlarmPolicy {
+  /**
+      * 告警策略 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PolicyId: string
+
+  /**
+      * 告警策略名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PolicyName: string
+
+  /**
+      * 备注信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Remark: string
+
+  /**
+      * 监控类型 MT_QCE=云产品监控
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MonitorType: string
+
+  /**
+      * 启停状态 0=停用 1=启用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Enable: number
+
+  /**
+      * 策略组绑定的实例数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UseSum: number
+
+  /**
+      * 项目 Id -1=无项目 0=默认项目
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProjectId: number
+
+  /**
+      * 项目名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProjectName: string
+
+  /**
+      * 告警策略类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Namespace: string
+
+  /**
+      * 触发条件模板 Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ConditionTemplateId: string
+
+  /**
+      * 指标触发条件
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Condition: AlarmPolicyCondition
+
+  /**
+      * 事件触发条件
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EventCondition: AlarmPolicyEventCondition
+
+  /**
+      * 通知规则 id 列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NoticeIds: Array<string>
+
+  /**
+      * 通知规则 列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Notices: Array<AlarmNotice>
+
+  /**
+      * 触发任务列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TriggerTasks: Array<AlarmPolicyTriggerTask>
+
+  /**
+      * 模板策略组
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ConditionsTemp: ConditionsTemp
+
+  /**
+      * 最后编辑的用户uin
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LastEditUin: string
+
+  /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime: number
+
+  /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InsertTime: number
+
+  /**
+      * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Region: Array<string>
+
+  /**
+      * namespace显示名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NamespaceShowName: string
+
+  /**
+      * 是否默认策略，1是，0否
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsDefault: number
+
+  /**
+      * 能否设置默认策略，1是，0否
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CanSetDefault: number
+
+  /**
+      * 实例分组ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceGroupId: number
+
+  /**
+      * 实例分组总实例数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceSum: number
+
+  /**
+      * 实例分组名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceGroupName: string
+
+  /**
+      * 触发条件类型 STATIC=静态阈值 DYNAMIC=动态类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleType: string
+
+  /**
+      * 用于实例、实例组绑定和解绑接口（BindingPolicyObject、UnBindingAllPolicyObject、UnBindingPolicyObject）的策略 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OriginId: string
+}
+
+/**
+ * CreateAlarmPolicy返回参数结构体
+ */
+export interface CreateAlarmPolicyResponse {
+  /**
+   * 告警策略 ID
+   */
+  PolicyId?: string
+
+  /**
+   * 用于实例、实例组绑定和解绑接口（BindingPolicyObject、UnBindingAllPolicyObject、UnBindingPolicyObject）的策略 ID
+   */
+  OriginId?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyAlarmReceivers返回参数结构体
  */
 export interface ModifyAlarmReceiversResponse {
@@ -959,15 +1447,35 @@ export interface DescribePolicyConditionListResponse {
  */
 export interface DescribeAllNamespacesResponse {
   /**
-   * 云产品的名字空间
+   * 云产品的告警策略类型，已废弃
    */
   QceNamespaces?: CommonNamespace
 
   /**
-   * 自定义监控的命名空间
+   * 其他告警策略类型，已废弃
    */
   CustomNamespaces?: CommonNamespace
 
+  /**
+   * 云产品的告警策略类型
+   */
+  QceNamespacesNew?: Array<CommonNamespace>
+
+  /**
+   * 其他告警策略类型，暂不支持
+   */
+  CustomNamespacesNew?: Array<CommonNamespace>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteAlarmNotices返回参数结构体
+ */
+export interface DeleteAlarmNoticesResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1038,6 +1546,104 @@ export interface ModifyAlarmReceiversRequest {
 }
 
 /**
+ * 告警策略触发条件
+ */
+export interface AlarmPolicyRule {
+  /**
+      * 指标名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MetricName?: string
+
+  /**
+      * 秒数 统计周期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Period?: number
+
+  /**
+      * 英文运算符
+intelligent=无阈值智能检测
+eq=等于
+ge=大于等于
+gt=大于
+le=小于等于
+lt=小于
+ne=不等于
+day_increase=天同比增长
+day_decrease=天同比下降
+day_wave=天同比波动
+week_increase=周同比增长
+week_decrease=周同比下降
+week_wave=周同比波动
+cycle_increase=环比增长
+cycle_decrease=环比下降
+cycle_wave=环比波动
+re=正则匹配
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Operator?: string
+
+  /**
+      * 阈值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Value?: string
+
+  /**
+      * 周期数 持续通知周期 1=持续1个周期 2=持续2个周期...
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContinuePeriod?: number
+
+  /**
+      * 秒数 告警间隔  0=不重复 300=每5分钟告警一次 600=每10分钟告警一次 900=每15分钟告警一次 1800=每30分钟告警一次 3600=每1小时告警一次 7200=每2小时告警一次 10800=每3小时告警一次 21600=每6小时告警一次 43200=每12小时告警一次 86400=每1天告警一次
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NoticeFrequency?: number
+
+  /**
+      * 告警频率是否指数增长 0=否 1=是
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsPowerNotice?: number
+
+  /**
+      * 对于单个触发规则的过滤条件
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Filter?: AlarmPolicyFilter
+
+  /**
+      * 指标展示名，用于出参
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Description?: string
+
+  /**
+      * 单位，用于出参
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Unit?: string
+
+  /**
+      * 触发条件类型 STATIC=静态阈值 DYNAMIC=动态阈值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RuleType?: string
+}
+
+/**
+ * DescribeAlarmNoticeCallbacks请求参数结构体
+ */
+export interface DescribeAlarmNoticeCallbacksRequest {
+  /**
+   * 模块名，这里填“monitor”
+   */
+  Module: string
+}
+
+/**
  * DescribeProductEventList返回的Events的Dimensions
  */
 export interface DescribeProductEventListEventsDimensions {
@@ -1061,80 +1667,53 @@ export interface DescribeProductEventListEventsDimensions {
 }
 
 /**
- * 对业务指标的单位及支持统计周期的描述
+ * ModifyAlarmPolicyCondition返回参数结构体
  */
-export interface MetricSet {
-  /**
-   * 命名空间，每个云产品会有一个命名空间
-   */
-  Namespace: string
-
-  /**
-   * 指标名称
-   */
-  MetricName: string
-
-  /**
-   * 指标使用的单位
-   */
-  Unit: string
-
-  /**
-   * 指标使用的单位
-   */
-  UnitCname: string
-
-  /**
-   * 指标支持的统计周期，单位是秒，如60、300
-   */
-  Period: Array<number>
-
-  /**
-   * 统计周期内指标方式
-   */
-  Periods: Array<PeriodsSt>
-
-  /**
-   * 统计指标含义解释
-   */
-  Meaning: MetricObjectMeaning
-
-  /**
-   * 维度描述信息
-   */
-  Dimensions: Array<DimensionsDesc>
-}
-
-/**
- * DescribeBindingPolicyObjectList返回参数结构体
- */
-export interface DescribeBindingPolicyObjectListResponse {
-  /**
-      * 绑定的对象实例列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  List?: Array<DescribeBindingPolicyObjectListInstance>
-
-  /**
-   * 绑定的对象实例总数
-   */
-  Total?: number
-
-  /**
-   * 未屏蔽的对象实例数
-   */
-  NoShieldedSum?: number
-
-  /**
-      * 绑定的实例分组信息，没有绑定实例分组则为空
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  InstanceGroup?: DescribeBindingPolicyObjectListInstanceGroup
-
+export interface ModifyAlarmPolicyConditionResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 实例对象的维度组合
+ */
+export interface Dimension {
+  /**
+   * 实例维度名称
+   */
+  Name: string
+
+  /**
+   * 实例维度值
+   */
+  Value: string
+}
+
+/**
+ * 查询策略绑定对象列表接口返回的对象实例信息
+ */
+export interface DescribeBindingPolicyObjectListInstance {
+  /**
+   * 对象唯一id
+   */
+  UniqueId: string
+
+  /**
+   * 表示对象实例的维度集合，jsonObj字符串
+   */
+  Dimensions: string
+
+  /**
+   * 对象是否被屏蔽，0表示未屏蔽，1表示被屏蔽
+   */
+  IsShielded: number
+
+  /**
+   * 对象所在的地域
+   */
+  Region: string
 }
 
 /**
@@ -1160,6 +1739,52 @@ export interface ModifyPolicyGroupEventCondition {
    * 规则id，不填表示新增，填写了ruleId表示在已存在的规则基础上进行修改
    */
   RuleId?: number
+}
+
+/**
+ * 指标，可用于设置告警、查询数据
+ */
+export interface Metric {
+  /**
+   * 告警策略类型
+   */
+  Namespace: string
+
+  /**
+   * 指标名
+   */
+  MetricName: string
+
+  /**
+   * 指标展示名
+   */
+  Description: string
+
+  /**
+   * 最小值
+   */
+  Min: number
+
+  /**
+   * 最大值
+   */
+  Max: number
+
+  /**
+   * 维度列表
+   */
+  Dimensions: Array<string>
+
+  /**
+   * 单位
+   */
+  Unit: string
+
+  /**
+      * 指标配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MetricConfig: MetricConfig
 }
 
 /**
@@ -1208,30 +1833,43 @@ export interface ModifyPolicyGroupRequest {
 }
 
 /**
- * DescribeProductEventList返回参数结构体
+ * DescribeAlarmHistories返回参数结构体
  */
-export interface DescribeProductEventListResponse {
+export interface DescribeAlarmHistoriesResponse {
   /**
-      * 事件列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Events?: Array<DescribeProductEventListEvents>
-
-  /**
-   * 事件统计
+   * 总数
    */
-  OverView?: DescribeProductEventListOverView
+  TotalCount?: number
 
   /**
-      * 事件总数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Total?: number
+   * 告警历史列表
+   */
+  Histories?: Array<AlarmHistory>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeAlarmMetrics请求参数结构体
+ */
+export interface DescribeAlarmMetricsRequest {
+  /**
+   * 固定值，为"monitor"
+   */
+  Module: string
+
+  /**
+   * 监控类型过滤 "MT_QCE"=云产品监控
+   */
+  MonitorType: string
+
+  /**
+   * 告警策略类型，由 DescribeAllNamespaces 获得，例如 cvm_device
+   */
+  Namespace: string
 }
 
 /**
@@ -1247,6 +1885,130 @@ export interface DescribeBaseMetricsRequest {
    * 指标名，各个云产品的指标名不同。如需获取指标名，请前往各产品监控指标文档，例如云服务器的指标名，可参见 [云服务器监控指标](https://cloud.tencent.com/document/product/248/6843)
    */
   MetricName?: string
+}
+
+/**
+ * 云监控告警通知模板 - 用户通知详情
+ */
+export interface UserNotice {
+  /**
+      * 接收者类型 USER=用户 GROUP=用户组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReceiverType: string
+
+  /**
+      * 通知开始时间 00:00:00 开始的秒数（取值范围0-86399）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StartTime: number
+
+  /**
+      * 通知结束时间 00:00:00 开始的秒数（取值范围0-86399）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EndTime: number
+
+  /**
+      * 通知渠道列表 EMAIL=邮件 SMS=短信 CALL=电话 WECHAT=微信
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NoticeWay: Array<string>
+
+  /**
+      * 用户 uid 列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserIds?: Array<number>
+
+  /**
+      * 用户组 group id 列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupIds?: Array<number>
+
+  /**
+      * 电话轮询列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PhoneOrder?: Array<number>
+
+  /**
+      * 电话轮询次数 （取值范围1-5）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PhoneCircleTimes?: number
+
+  /**
+      * 单次轮询内拨打间隔 秒数 （取值范围60-900）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PhoneInnerInterval?: number
+
+  /**
+      * 两次轮询间隔 秒数（取值范围60-900）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PhoneCircleInterval?: number
+
+  /**
+      * 是否需要触达通知 0=否 1=是
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NeedPhoneArriveNotice?: number
+}
+
+/**
+ * 告警策略过滤条件
+ */
+export interface AlarmPolicyFilter {
+  /**
+      * 过滤条件类型 DIMENSION=使用 Dimensions 做过滤
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Type: string
+
+  /**
+      * AlarmPolicyDimension 二维数组序列化后的json字符串，一维数组之间互为或关系，一维数组内的元素互为与关系
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Dimensions?: string
+}
+
+/**
+ * DescribeAlarmNoticeCallbacks返回参数结构体
+ */
+export interface DescribeAlarmNoticeCallbacksResponse {
+  /**
+      * 告警回调通知
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  URLNotices?: Array<URLNotice>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyAlarmPolicyNotice返回参数结构体
+ */
+export interface ModifyAlarmPolicyNoticeResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyAlarmPolicyStatus返回参数结构体
+ */
+export interface ModifyAlarmPolicyStatusResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1285,6 +2047,21 @@ export interface BindingPolicyObjectDimension {
 }
 
 /**
+ * DescribeAlarmPolicy返回参数结构体
+ */
+export interface DescribeAlarmPolicyResponse {
+  /**
+   * 策略详情
+   */
+  Policy?: AlarmPolicy
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UpdateServiceDiscovery返回参数结构体
  */
 export interface UpdateServiceDiscoveryResponse {
@@ -1304,7 +2081,7 @@ export interface UpdateServiceDiscoveryResponse {
  */
 export interface DescribeMonitorTypesResponse {
   /**
-   * 监控类型
+   * 监控类型，云产品监控为 MT_QCE
    */
   MonitorTypes?: Array<string>
 
@@ -1315,18 +2092,48 @@ export interface DescribeMonitorTypesResponse {
 }
 
 /**
- * 实例对象的维度组合
+ * 对业务指标的单位及支持统计周期的描述
  */
-export interface Dimension {
+export interface MetricSet {
   /**
-   * 实例维度名称
+   * 命名空间，每个云产品会有一个命名空间
    */
-  Name: string
+  Namespace: string
 
   /**
-   * 实例维度值
+   * 指标名称
    */
-  Value: string
+  MetricName: string
+
+  /**
+   * 指标使用的单位
+   */
+  Unit: string
+
+  /**
+   * 指标使用的单位
+   */
+  UnitCname: string
+
+  /**
+   * 指标支持的统计周期，单位是秒，如60、300
+   */
+  Period: Array<number>
+
+  /**
+   * 统计周期内指标方式
+   */
+  Periods: Array<PeriodsSt>
+
+  /**
+   * 统计指标含义解释
+   */
+  Meaning: MetricObjectMeaning
+
+  /**
+   * 维度描述信息
+   */
+  Dimensions: Array<DimensionsDesc>
 }
 
 /**
@@ -1499,9 +2306,14 @@ export interface UpdateServiceDiscoveryRequest {
 }
 
 /**
- * UnBindingAllPolicyObject返回参数结构体
+ * CreateAlarmNotice返回参数结构体
  */
-export interface UnBindingAllPolicyObjectResponse {
+export interface CreateAlarmNoticeResponse {
+  /**
+   * 告警通知模板ID
+   */
+  NoticeId?: string
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1543,7 +2355,7 @@ export interface DescribeAlarmHistoriesRequest {
   EndTime?: number
 
   /**
-   * 根据监控类型过滤 不选默认查所有类型 "MT_QCE"=云产品监控 "MT_CUSTOM"=自定义监控 "MT_PROME"=prometheus监控
+   * 根据监控类型过滤 不选默认查所有类型 "MT_QCE"=云产品监控 "
    */
   MonitorTypes?: Array<string>
 
@@ -1558,7 +2370,7 @@ export interface DescribeAlarmHistoriesRequest {
   AlarmStatus?: Array<string>
 
   /**
-   * 根据项目ID过滤，-1=“-“项目 0=默认项目
+   * 根据项目ID过滤，-1=无项目 0=默认项目
    */
   ProjectIds?: Array<number>
 
@@ -1619,18 +2431,23 @@ export interface MetricObjectMeaning {
 }
 
 /**
- * DeletePolicyGroup请求参数结构体
+ * 告警事件
  */
-export interface DeletePolicyGroupRequest {
+export interface AlarmEvent {
   /**
-   * 固定值，为"monitor"
+   * 事件名
    */
-  Module: string
+  EventName: string
 
   /**
-   * 策略组id
+   * 展示的事件名
    */
-  GroupId: Array<number>
+  Description: string
+
+  /**
+   * 告警策略类型
+   */
+  Namespace: string
 }
 
 /**
@@ -1662,6 +2479,21 @@ export interface DescribePolicyConditionListConfigManualCalcType {
    * 是否必须
    */
   Need: boolean
+}
+
+/**
+ * DeletePolicyGroup请求参数结构体
+ */
+export interface DeletePolicyGroupRequest {
+  /**
+   * 固定值，为"monitor"
+   */
+  Module: string
+
+  /**
+   * 策略组id
+   */
+  GroupId: Array<number>
 }
 
 /**
@@ -1729,20 +2561,35 @@ export interface DescribePolicyGroupInfoCondition {
 }
 
 /**
- * DescribeProductEventList返回的Events里的GroupInfo
+ * DescribeBindingPolicyObjectList返回参数结构体
  */
-export interface DescribeProductEventListEventsGroupInfo {
+export interface DescribeBindingPolicyObjectListResponse {
   /**
-      * 策略ID
+      * 绑定的对象实例列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  GroupId: number
+  List?: Array<DescribeBindingPolicyObjectListInstance>
 
   /**
-      * 策略名
+   * 绑定的对象实例总数
+   */
+  Total?: number
+
+  /**
+   * 未屏蔽的对象实例数
+   */
+  NoShieldedSum?: number
+
+  /**
+      * 绑定的实例分组信息，没有绑定实例分组则为空
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  GroupName: string
+  InstanceGroup?: DescribeBindingPolicyObjectListInstanceGroup
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1959,6 +2806,21 @@ export interface DescribeProductEventListEvents {
 }
 
 /**
+ * DeleteAlarmNotices请求参数结构体
+ */
+export interface DeleteAlarmNoticesRequest {
+  /**
+   * 模块名，这里填“monitor”
+   */
+  Module: string
+
+  /**
+   * 告警通知模板id列表
+   */
+  NoticeIds: Array<string>
+}
+
+/**
  * DescribePolicyConditionList.ConfigManual.PeriodNum
  */
 export interface DescribePolicyConditionListConfigManualPeriodNum {
@@ -1995,7 +2857,7 @@ export interface DescribeAllNamespacesRequest {
   Module: string
 
   /**
-   * 根据监控类型过滤 不填默认查所有类型 "MT_QCE"=云产品监控 "MT_CUSTOM"=自定义监控
+   * 根据监控类型过滤 不填默认查所有类型 "MT_QCE"=云产品监控
    */
   MonitorTypes?: Array<string>
 
@@ -2003,6 +2865,21 @@ export interface DescribeAllNamespacesRequest {
    * 根据namespace的Id过滤 不填默认查询所有
    */
   Ids?: Array<string>
+}
+
+/**
+ * DescribeAlarmMetrics返回参数结构体
+ */
+export interface DescribeAlarmMetricsResponse {
+  /**
+   * 告警指标列表
+   */
+  Metrics?: Array<Metric>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2046,20 +2923,88 @@ export interface DescribePolicyGroupListGroupInstanceGroup {
 }
 
 /**
- * DescribeBasicAlarmList返回的Alarms里的InstanceGroup
+ * DescribeAlarmPolicies请求参数结构体
  */
-export interface InstanceGroup {
+export interface DescribeAlarmPoliciesRequest {
   /**
-      * 实例组ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  InstanceGroupId: number
+   * 固定值，为"monitor"
+   */
+  Module: string
 
   /**
-      * 实例组名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  InstanceGroupName: string
+   * 页数，从 1 开始计数，默认 1
+   */
+  PageNumber?: number
+
+  /**
+   * 每页的数量，取值1~100，默认20
+   */
+  PageSize?: number
+
+  /**
+   * 按策略名称模糊搜索
+   */
+  PolicyName?: string
+
+  /**
+   * 根据监控类型过滤 不选默认查所有类型 "MT_QCE"=云产品监控
+   */
+  MonitorTypes?: Array<string>
+
+  /**
+   * 根据命名空间过滤
+   */
+  Namespaces?: Array<string>
+
+  /**
+   * 告警对象列表
+   */
+  Dimensions?: string
+
+  /**
+   * 根据接收人搜索
+   */
+  ReceiverUids?: Array<number>
+
+  /**
+   * 根据接收组搜索
+   */
+  ReceiverGroups?: Array<number>
+
+  /**
+   * 根据默认策略筛选 不传展示全部策略 DEFAULT=展示默认策略 NOT_DEFAULT=展示非默认策略
+   */
+  PolicyType?: Array<string>
+
+  /**
+   * 排序字段
+   */
+  Field?: string
+
+  /**
+   * 排序顺序：升序：ASC  降序：DESC
+   */
+  Order?: string
+
+  /**
+   * 项目id数组
+   */
+  ProjectIds?: Array<number>
+
+  /**
+   * 告警通知id列表
+   */
+  NoticeIds?: Array<string>
+
+  /**
+   * 根据触发条件筛选 不传展示全部策略 STATIC=展示静态阈值策略 DYNAMIC=展示动态阈值策略
+   */
+  RuleTypes?: Array<string>
+
+  /**
+   * 启停，1：启用   0：停止
+   */
+  Enable?: Array<number>
 }
 
 /**
@@ -2138,6 +3083,151 @@ export interface DescribePolicyConditionListConfigManualStatType {
 }
 
 /**
+ * ModifyAlarmPolicyInfo返回参数结构体
+ */
+export interface ModifyAlarmPolicyInfoResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 告警通知模板详情
+ */
+export interface AlarmNotice {
+  /**
+      * 告警通知模板 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Id: string
+
+  /**
+      * 告警通知模板名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name: string
+
+  /**
+      * 上次修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdatedAt: string
+
+  /**
+      * 上次修改人
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdatedBy: string
+
+  /**
+      * 告警通知类型 ALARM=未恢复通知 OK=已恢复通知 ALL=全部通知
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NoticeType: string
+
+  /**
+      * 用户通知列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserNotices: Array<UserNotice>
+
+  /**
+      * 回调通知列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  URLNotices: Array<URLNotice>
+
+  /**
+      * 是否是系统预设通知模板 0=否 1=是
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsPreset: number
+
+  /**
+      * 通知语言 zh-CN=中文 en-US=英文
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NoticeLanguage: string
+
+  /**
+      * 告警通知模板绑定的告警策略ID列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PolicyIds: Array<string>
+}
+
+/**
+ * 指标配置
+ */
+export interface MetricConfig {
+  /**
+   * 允许使用的运算符
+   */
+  Operator: Array<string>
+
+  /**
+   * 允许配置的数据周期，以秒为单位
+   */
+  Period: Array<number>
+
+  /**
+   * 允许配置的持续周期个数
+   */
+  ContinuePeriod: Array<number>
+}
+
+/**
+ * DescribeAlarmEvents请求参数结构体
+ */
+export interface DescribeAlarmEventsRequest {
+  /**
+   * 模块名，固定值 monitor
+   */
+  Module: string
+
+  /**
+   * 告警策略类型，由 DescribeAllNamespaces 获得，例如 cvm_device
+   */
+  Namespace: string
+}
+
+/**
+ * ModifyAlarmPolicyCondition请求参数结构体
+ */
+export interface ModifyAlarmPolicyConditionRequest {
+  /**
+   * 模块名，固定值 monitor
+   */
+  Module: string
+
+  /**
+   * 告警策略 ID
+   */
+  PolicyId: string
+
+  /**
+   * 指标触发条件
+   */
+  Condition?: AlarmPolicyCondition
+
+  /**
+   * 事件触发条件
+   */
+  EventCondition?: AlarmPolicyEventCondition
+}
+
+/**
+ * ModifyAlarmNotice返回参数结构体
+ */
+export interface ModifyAlarmNoticeResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAccidentEventList接口的出参类型
  */
 export interface DescribeAccidentEventListAlarms {
@@ -2213,18 +3303,25 @@ export interface DescribeProductListResponse {
 }
 
 /**
- * DescribeAlarmHistories返回参数结构体
+ * DescribeProductEventList返回参数结构体
  */
-export interface DescribeAlarmHistoriesResponse {
+export interface DescribeProductEventListResponse {
   /**
-   * 总数
-   */
-  TotalCount?: number
+      * 事件列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Events?: Array<DescribeProductEventListEvents>
 
   /**
-   * 告警历史列表
+   * 事件统计
    */
-  Histories?: Array<AlarmHistory>
+  OverView?: DescribeProductEventListOverView
+
+  /**
+      * 事件总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Total?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2340,6 +3437,11 @@ export interface AlarmHistory {
    * 地域
    */
   Region: string
+
+  /**
+   * 策略是否存在 0=不存在 1=存在
+   */
+  PolicyExists: number
 }
 
 /**
@@ -2355,6 +3457,54 @@ export interface MonitorTypeNamespace {
    * 策略类型值
    */
   Namespace: string
+}
+
+/**
+ * DeleteAlarmPolicy返回参数结构体
+ */
+export interface DeleteAlarmPolicyResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 云监控告警通知模板 - 回调通知详情
+ */
+export interface URLNotice {
+  /**
+      * 回调 url（限长256字符）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  URL: string
+
+  /**
+      * 是否通过验证 0=否 1=是
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsValid?: number
+
+  /**
+      * 验证码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ValidationCode?: string
+}
+
+/**
+ * DescribeAlarmPolicy请求参数结构体
+ */
+export interface DescribeAlarmPolicyRequest {
+  /**
+   * 固定值，为"monitor"
+   */
+  Module: string
+
+  /**
+   * 告警策略ID
+   */
+  PolicyId: string
 }
 
 /**
@@ -2715,6 +3865,66 @@ export interface DescribeBasicAlarmListRequest {
 }
 
 /**
+ * UnBindingAllPolicyObject返回参数结构体
+ */
+export interface UnBindingAllPolicyObjectResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAlarmNotices请求参数结构体
+ */
+export interface DescribeAlarmNoticesRequest {
+  /**
+   * 模块名，这里填“monitor”
+   */
+  Module: string
+
+  /**
+   * 页码 最小为1
+   */
+  PageNumber: number
+
+  /**
+   * 分页大小 1～200
+   */
+  PageSize: number
+
+  /**
+   * 按更新时间排序方式 ASC=正序 DESC=倒序
+   */
+  Order: string
+
+  /**
+   * 主账号 uid 用于创建预设通知
+   */
+  OwnerUid?: number
+
+  /**
+   * 告警通知模板名称 用来模糊搜索
+   */
+  Name?: string
+
+  /**
+   * 根据接收人过滤告警通知模板需要选定通知用户类型 USER=用户 GROUP=用户组 传空=不按接收人过滤
+   */
+  ReceiverType?: string
+
+  /**
+   * 接收对象列表
+   */
+  UserIds?: Array<number>
+
+  /**
+   * 接收组列表
+   */
+  GroupIds?: Array<number>
+}
+
+/**
  * DescribePolicyGroupList.Group
  */
 export interface DescribePolicyGroupListGroup {
@@ -2906,6 +4116,21 @@ export interface MetricDatum {
 }
 
 /**
+ * DescribeAlarmNotice返回参数结构体
+ */
+export interface DescribeAlarmNoticeResponse {
+  /**
+   * 告警通知模板详细信息
+   */
+  Notice?: AlarmNotice
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeBindingPolicyObjectList返回的是实例分组信息
  */
 export interface DescribeBindingPolicyObjectListInstanceGroup {
@@ -2952,6 +4177,58 @@ export interface DescribeBindingPolicyObjectListInstanceGroup {
 }
 
 /**
+ * DescribeProductEventList返回的Events里的GroupInfo
+ */
+export interface DescribeProductEventListEventsGroupInfo {
+  /**
+      * 策略ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupId: number
+
+  /**
+      * 策略名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupName: string
+}
+
+/**
+ * ModifyAlarmPolicyStatus请求参数结构体
+ */
+export interface ModifyAlarmPolicyStatusRequest {
+  /**
+   * 模块名，固定值 monitor
+   */
+  Module: string
+
+  /**
+   * 告警策略 ID
+   */
+  PolicyId: string
+
+  /**
+   * 启停状态 0=停用 1=启用
+   */
+  Enable: number
+}
+
+/**
+ * DescribeAlarmNotice请求参数结构体
+ */
+export interface DescribeAlarmNoticeRequest {
+  /**
+   * 模块名，这里填“monitor”
+   */
+  Module: string
+
+  /**
+   * 告警通知模板 id
+   */
+  NoticeId: string
+}
+
+/**
  * DescribeBindingPolicyObjectList接口的Dimension
  */
 export interface DescribeBindingPolicyObjectListDimension {
@@ -2974,6 +4251,41 @@ export interface DescribeBindingPolicyObjectListDimension {
    * 事件维度组合json字符串
    */
   EventDimensions: string
+}
+
+/**
+ * CreateAlarmNotice请求参数结构体
+ */
+export interface CreateAlarmNoticeRequest {
+  /**
+   * 模块名，这里填“monitor”
+   */
+  Module: string
+
+  /**
+   * 通知模板名称 60字符以内
+   */
+  Name: string
+
+  /**
+   * 通知类型 ALARM=未恢复通知 OK=已恢复通知 ALL=都通知
+   */
+  NoticeType: string
+
+  /**
+   * 通知语言 zh-CN=中文 en-US=英文
+   */
+  NoticeLanguage: string
+
+  /**
+   * 用户通知 最多5个
+   */
+  UserNotices?: Array<UserNotice>
+
+  /**
+   * 回调通知 最多3个
+   */
+  URLNotices?: Array<URLNotice>
 }
 
 /**
@@ -3162,6 +4474,23 @@ export interface SendCustomAlarmMsgResponse {
 }
 
 /**
+ * 告警策略指标触发条件
+ */
+export interface AlarmPolicyCondition {
+  /**
+      * 指标触发与或条件，0=或，1=与
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsUnionRule: number
+
+  /**
+      * 告警触发条件列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Rules: Array<AlarmPolicyRule>
+}
+
+/**
  * 修改告警策略组传入的指标阈值条件
  */
 export interface ModifyPolicyGroupCondition {
@@ -3240,6 +4569,17 @@ export interface DeleteServiceDiscoveryRequest {
 }
 
 /**
+ * 告警策略事件触发条件
+ */
+export interface AlarmPolicyEventCondition {
+  /**
+      * 告警触发条件列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Rules: Array<AlarmPolicyRule>
+}
+
+/**
  * DescribeProductEventList返回的OverView对象
  */
 export interface DescribeProductEventListOverView {
@@ -3300,6 +4640,16 @@ export interface DescribePolicyConditionListConfigManualCalcValue {
    * 是否必须
    */
   Need: boolean
+}
+
+/**
+ * SetDefaultAlarmPolicy返回参数结构体
+ */
+export interface SetDefaultAlarmPolicyResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

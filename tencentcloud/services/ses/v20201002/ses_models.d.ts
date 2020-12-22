@@ -3,11 +3,11 @@
  */
 export interface Simple {
     /**
-      * Html代码。需要包含所有的代码信息，不要包含外部css，否则会导致显示格式错乱
+      * base64之后的Html代码。需要包含所有的代码信息，不要包含外部css，否则会导致显示格式错乱
       */
     Html?: string;
     /**
-      * 纯文本信息，如果没有Html，邮件中会直接显示纯文本；如果有Html，它代表邮件的纯文本样式
+      * base64之后的纯文本信息，如果没有Html，邮件中会直接显示纯文本；如果有Html，它代表邮件的纯文本样式
       */
     Text?: string;
 }
@@ -83,7 +83,7 @@ export interface Template {
  */
 export interface SendEmailRequest {
     /**
-      * 发信邮件地址。比如：noreply@mail.qcloud.com。
+      * 发信邮件地址。例如：noreply@mail.qcloud.com。
       */
     FromEmailAddress: string;
     /**
@@ -179,7 +179,7 @@ export interface GetStatisticsReportRequest {
       */
     Domain?: string;
     /**
-      * 收件方邮箱类型，比如gmail.com
+      * 收件方邮箱类型，例如gmail.com
       */
     ReceivingMailboxType?: string;
 }
@@ -382,13 +382,17 @@ export interface TemplatesMetadata {
       */
     TemplateName: string;
     /**
-      * 模板状态。1-审核中|0-已通过|其它-不可用
+      * 模板状态。1-审核中|0-已通过|2-拒绝|其它-不可用
       */
     TemplateStatus: number;
     /**
       * 模板ID
       */
     TemplateID: number;
+    /**
+      * 审核原因
+      */
+    ReviewReason: string;
 }
 /**
  * ListEmailIdentities返回参数结构体
@@ -530,7 +534,7 @@ export interface CreateEmailIdentityResponse {
  */
 export interface CreateEmailIdentityRequest {
     /**
-      * 您的发信域名，建议使用三级以上域名。比如：mail.qcloud.com。
+      * 您的发信域名，建议使用三级以上域名。例如：mail.qcloud.com。
       */
     EmailIdentity: string;
 }

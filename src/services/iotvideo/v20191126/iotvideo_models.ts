@@ -2635,25 +2635,25 @@ export interface DisableDeviceRequest {
  */
 export interface DescribeAccountBalanceResponse {
   /**
-      * 账户类型 1=设备接入;2=云存
+      * 账户类型 1=设备接入;2=云存。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AccountType?: number
 
   /**
-      * 余额
+      * 余额, 单位 : 分(人民币)。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Balance?: number
 
   /**
-      * 账户状态，1=正常；8=冻结；9=销户
+      * 账户状态，1=正常；8=冻结；9=销户。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   State?: number
 
   /**
-      * 最后修改时间，UTC值
+      * 最后修改时间，UTC值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LastUpdateTime?: number
@@ -2939,25 +2939,25 @@ export interface CreateUploadPathResponse {
  */
 export interface RechargeRecord {
   /**
-      * 流水记录号
+      * 流水记录号。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   WaterId: number
 
   /**
-      * 充值前的余额
+      * 充值前的余额，单位0.01元。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   BalanceBeforeRecharge: number
 
   /**
-      * 充值金额
+      * 充值金额，单位0.01元。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Money: number
 
   /**
-      * 充值时间, UTC值
+      * 充值时间, UTC值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   OperateTime: number
