@@ -838,6 +838,16 @@ it("live.v20180801.DescribeLiveDomainPlayInfoList", async function () {
     }
 })
 
+it("live.v20180801.DescribeCallbackRecordsList", async function () {
+    try {
+       const data = await client.DescribeCallbackRecordsList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.CreateLiveRecordRule", async function () {
     try {
        const data = await client.CreateLiveRecordRule({})

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeCdnDomainLogsResponse, DescribePushQuotaResponse, DescribePurgeQuotaResponse, DescribeScdnTopDataResponse, DescribeCdnDomainLogsRequest, DescribeTrafficPackagesRequest, CreateClsLogTopicResponse, PurgePathCacheResponse, DescribeCdnOriginIpResponse, DescribePurgeQuotaRequest, DescribeCdnDataResponse, EnableClsLogTopicRequest, UpdateImageConfigResponse, DeleteCdnDomainRequest, DescribePayTypeResponse, ListTopDataRequest, ListClsTopicDomainsRequest, DescribeDomainsResponse, DescribePayTypeRequest, UpdateImageConfigRequest, DisableCachesRequest, UpdateScdnDomainResponse, DescribeDomainsConfigRequest, EnableCachesRequest, DescribeBillingDataRequest, DeleteClsLogTopicRequest, DeleteScdnDomainRequest, DescribeDistrictIspDataResponse, DescribeCdnOriginIpRequest, UpdatePayTypeResponse, DescribeDomainsConfigResponse, DescribeDiagnoseReportRequest, DescribeReportDataResponse, DisableClsLogTopicRequest, ListClsTopicDomainsResponse, DescribeCdnIpRequest, DescribeIpVisitResponse, EnableClsLogTopicResponse, ListClsLogTopicsResponse, AddCdnDomainRequest, UpdateDomainConfigRequest, DescribeCertDomainsRequest, CreateScdnLogTaskResponse, DescribeCertDomainsResponse, DuplicateDomainConfigRequest, DescribePushTasksResponse, AddCdnDomainResponse, VerifyDomainRecordResponse, CreateScdnLogTaskRequest, DisableClsLogTopicResponse, DescribeIpStatusRequest, GetDisableRecordsResponse, DuplicateDomainConfigResponse, UpdateScdnDomainRequest, UpdatePayTypeRequest, ManageClsTopicDomainsRequest, ListDiagnoseReportRequest, DescribeOriginDataRequest, ListScdnLogTasksRequest, SearchClsLogResponse, PushUrlsCacheRequest, DescribeReportDataRequest, DescribePushTasksRequest, DescribeScdnTopDataRequest, DescribeUrlViolationsRequest, CreateDiagnoseUrlResponse, CreateClsLogTopicRequest, CreateVerifyRecordResponse, StopCdnDomainRequest, DescribeMapInfoResponse, DescribeTrafficPackagesResponse, DescribeMapInfoRequest, EnableCachesResponse, DescribeIpVisitRequest, GetDisableRecordsRequest, CreateDiagnoseUrlRequest, PurgeUrlsCacheResponse, DeleteClsLogTopicResponse, DescribeBillingDataResponse, DisableCachesResponse, DescribeImageConfigRequest, DescribeCdnIpResponse, DescribeIpStatusResponse, DescribeDistrictIspDataRequest, ListScdnLogTasksResponse, VerifyDomainRecordRequest, DeleteScdnDomainResponse, ListClsLogTopicsRequest, CreateVerifyRecordRequest, PurgePathCacheRequest, DescribeDiagnoseReportResponse, PurgeUrlsCacheRequest, StartCdnDomainRequest, CreateEdgePackTaskResponse, StartCdnDomainResponse, DescribePushQuotaRequest, DescribePurgeTasksRequest, PushUrlsCacheResponse, StopCdnDomainResponse, ListTopDataResponse, UpdateDomainConfigResponse, ListDiagnoseReportResponse, SearchClsLogRequest, ManageClsTopicDomainsResponse, DescribeUrlViolationsResponse, DescribePurgeTasksResponse, DescribeOriginDataResponse, DeleteCdnDomainResponse, DescribeCdnDataRequest, DescribeImageConfigResponse, DescribeDomainsRequest, CreateEdgePackTaskRequest } from "./cdn_models";
+import { DescribeCdnDomainLogsResponse, DescribePushQuotaResponse, DescribePurgeQuotaResponse, DescribeScdnTopDataResponse, DescribeCdnDomainLogsRequest, DescribeTrafficPackagesRequest, CreateClsLogTopicResponse, PurgePathCacheResponse, DescribeCdnOriginIpResponse, DescribePurgeQuotaRequest, StartScdnDomainRequest, StopScdnDomainResponse, DescribeCdnDataResponse, EnableClsLogTopicRequest, UpdateImageConfigResponse, DeleteCdnDomainRequest, DescribePayTypeResponse, ListTopDataRequest, ListClsTopicDomainsRequest, DescribeDomainsResponse, DescribePayTypeRequest, UpdateImageConfigRequest, DisableCachesRequest, UpdateScdnDomainResponse, DescribeDomainsConfigRequest, EnableCachesRequest, DescribeBillingDataRequest, DeleteClsLogTopicRequest, DeleteScdnDomainRequest, DescribeDistrictIspDataResponse, DescribeCdnOriginIpRequest, UpdatePayTypeResponse, DescribeDomainsConfigResponse, DescribeDiagnoseReportRequest, DescribeReportDataResponse, DisableClsLogTopicRequest, ListClsTopicDomainsResponse, DescribeCdnIpRequest, DescribeIpVisitResponse, EnableClsLogTopicResponse, ListClsLogTopicsResponse, AddCdnDomainRequest, UpdateDomainConfigRequest, DescribeCertDomainsRequest, CreateScdnLogTaskResponse, DescribeCertDomainsResponse, DuplicateDomainConfigRequest, DescribePushTasksResponse, AddCdnDomainResponse, ListScdnDomainsResponse, VerifyDomainRecordResponse, ListScdnDomainsRequest, CreateScdnLogTaskRequest, DisableClsLogTopicResponse, DescribeIpStatusRequest, GetDisableRecordsResponse, DuplicateDomainConfigResponse, UpdateScdnDomainRequest, UpdatePayTypeRequest, ManageClsTopicDomainsRequest, ListDiagnoseReportRequest, DescribeOriginDataRequest, ListScdnLogTasksRequest, SearchClsLogResponse, PushUrlsCacheRequest, DescribeReportDataRequest, DescribePushTasksRequest, DescribeScdnTopDataRequest, DescribeUrlViolationsRequest, CreateDiagnoseUrlResponse, CreateClsLogTopicRequest, CreateVerifyRecordResponse, StopCdnDomainRequest, DescribeMapInfoResponse, DescribeTrafficPackagesResponse, DescribeMapInfoRequest, EnableCachesResponse, DescribeIpVisitRequest, GetDisableRecordsRequest, CreateDiagnoseUrlRequest, PurgeUrlsCacheResponse, StartScdnDomainResponse, DeleteClsLogTopicResponse, DescribeBillingDataResponse, DisableCachesResponse, DescribeImageConfigRequest, DescribeCdnIpResponse, DescribeIpStatusResponse, DescribeDistrictIspDataRequest, ListScdnLogTasksResponse, VerifyDomainRecordRequest, DeleteScdnDomainResponse, ListClsLogTopicsRequest, CreateVerifyRecordRequest, PurgePathCacheRequest, DescribeDiagnoseReportResponse, StartCdnDomainResponse, PurgeUrlsCacheRequest, StartCdnDomainRequest, CreateEdgePackTaskResponse, DescribeScdnConfigResponse, DescribePushQuotaRequest, DescribePurgeTasksRequest, PushUrlsCacheResponse, StopCdnDomainResponse, ListTopDataResponse, UpdateDomainConfigResponse, ListDiagnoseReportResponse, SearchClsLogRequest, ManageClsTopicDomainsResponse, DescribeUrlViolationsResponse, DescribePurgeTasksResponse, DescribeOriginDataResponse, DeleteCdnDomainResponse, DescribeCdnDataRequest, DescribeImageConfigResponse, DescribeScdnConfigRequest, StopScdnDomainRequest, DescribeDomainsRequest, CreateEdgePackTaskRequest } from "./cdn_models";
 /**
  * cdn client
  * @class
@@ -80,6 +80,10 @@ export declare class Client extends AbstractClient {
      */
     CreateVerifyRecord(req: CreateVerifyRecordRequest, cb?: (error: string, rep: CreateVerifyRecordResponse) => void): Promise<CreateVerifyRecordResponse>;
     /**
+     * GetDisableRecords 用于查询资源禁用历史，及 URL 当前状态。（接口尚在内测中，暂未全量开放使用）
+     */
+    GetDisableRecords(req: GetDisableRecordsRequest, cb?: (error: string, rep: GetDisableRecordsResponse) => void): Promise<GetDisableRecordsResponse>;
+    /**
      * ManageClsTopicDomains 用于管理某日志主题下绑定的域名列表。
      */
     ManageClsTopicDomains(req: ManageClsTopicDomainsRequest, cb?: (error: string, rep: ManageClsTopicDomainsResponse) => void): Promise<ManageClsTopicDomainsResponse>;
@@ -95,6 +99,10 @@ export declare class Client extends AbstractClient {
      * 拷贝参考域名的配置至新域名。暂不支持自有证书以及定制化配置
      */
     DuplicateDomainConfig(req: DuplicateDomainConfigRequest, cb?: (error: string, rep: DuplicateDomainConfigResponse) => void): Promise<DuplicateDomainConfigResponse>;
+    /**
+     * StopScdnDomain 用于关闭域名的安全防护配置
+     */
+    StopScdnDomain(req: StopScdnDomainRequest, cb?: (error: string, rep: StopScdnDomainResponse) => void): Promise<StopScdnDomainResponse>;
     /**
      * DescribeCertDomains 用于校验SSL证书并提取证书中包含的域名。
      */
@@ -168,6 +176,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeCdnIp(req: DescribeCdnIpRequest, cb?: (error: string, rep: DescribeCdnIpResponse) => void): Promise<DescribeCdnIpResponse>;
     /**
+     * StartScdnDomain 用于开启域名的安全防护配置
+     */
+    StartScdnDomain(req: StartScdnDomainRequest, cb?: (error: string, rep: StartScdnDomainResponse) => void): Promise<StartScdnDomainResponse>;
+    /**
      * PurgePathCache 用于批量提交目录刷新，根据域名的加速区域进行对应区域的刷新。
 默认情况下境内、境外加速区域每日目录刷新额度为各 100 条，每次最多可提交 20 条。
      */
@@ -231,9 +243,9 @@ export declare class Client extends AbstractClient {
      */
     ListClsLogTopics(req: ListClsLogTopicsRequest, cb?: (error: string, rep: ListClsLogTopicsResponse) => void): Promise<ListClsLogTopicsResponse>;
     /**
-     * GetDisableRecords 用于查询资源禁用历史，及 URL 当前状态。（接口尚在内测中，暂未全量开放使用）
+     * DescribeScdnConfig 用于查询指定 SCDN 加速域名的安全相关配置
      */
-    GetDisableRecords(req: GetDisableRecordsRequest, cb?: (error: string, rep: GetDisableRecordsResponse) => void): Promise<GetDisableRecordsResponse>;
+    DescribeScdnConfig(req: DescribeScdnConfigRequest, cb?: (error: string, rep: DescribeScdnConfigResponse) => void): Promise<DescribeScdnConfigResponse>;
     /**
      * DeleteClsLogTopic 用于删除日志主题。注意：删除后，所有该日志主题下绑定域名的日志将不再继续投递至该主题，已经投递的日志将会被全部清空。生效时间约为 5~15 分钟。
      */
@@ -254,6 +266,10 @@ export declare class Client extends AbstractClient {
      * EnableClsLogTopic 用于启动日志主题投递。注意：启动后，所有绑定该日志主题域名的日志将继续投递至该主题。生效时间约为 5~15 分钟。
      */
     EnableClsLogTopic(req: EnableClsLogTopicRequest, cb?: (error: string, rep: EnableClsLogTopicResponse) => void): Promise<EnableClsLogTopicResponse>;
+    /**
+     * ListScdnDomains 用于查询 SCDN 安全加速域名列表，及域名基本配置信息
+     */
+    ListScdnDomains(req: ListScdnDomainsRequest, cb?: (error: string, rep: ListScdnDomainsResponse) => void): Promise<ListScdnDomainsResponse>;
     /**
      * DescribeReportData 用于查询域名/项目维度的日/周/月报表数据。
      */

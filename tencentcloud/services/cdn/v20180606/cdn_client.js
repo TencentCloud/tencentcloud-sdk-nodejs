@@ -130,6 +130,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateVerifyRecord", req, cb);
     }
     /**
+     * GetDisableRecords 用于查询资源禁用历史，及 URL 当前状态。（接口尚在内测中，暂未全量开放使用）
+     */
+    async GetDisableRecords(req, cb) {
+        return this.request("GetDisableRecords", req, cb);
+    }
+    /**
      * ManageClsTopicDomains 用于管理某日志主题下绑定的域名列表。
      */
     async ManageClsTopicDomains(req, cb) {
@@ -152,6 +158,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DuplicateDomainConfig(req, cb) {
         return this.request("DuplicateDomainConfig", req, cb);
+    }
+    /**
+     * StopScdnDomain 用于关闭域名的安全防护配置
+     */
+    async StopScdnDomain(req, cb) {
+        return this.request("StopScdnDomain", req, cb);
     }
     /**
      * DescribeCertDomains 用于校验SSL证书并提取证书中包含的域名。
@@ -252,6 +264,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCdnIp", req, cb);
     }
     /**
+     * StartScdnDomain 用于开启域名的安全防护配置
+     */
+    async StartScdnDomain(req, cb) {
+        return this.request("StartScdnDomain", req, cb);
+    }
+    /**
      * PurgePathCache 用于批量提交目录刷新，根据域名的加速区域进行对应区域的刷新。
 默认情况下境内、境外加速区域每日目录刷新额度为各 100 条，每次最多可提交 20 条。
      */
@@ -343,10 +361,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListClsLogTopics", req, cb);
     }
     /**
-     * GetDisableRecords 用于查询资源禁用历史，及 URL 当前状态。（接口尚在内测中，暂未全量开放使用）
+     * DescribeScdnConfig 用于查询指定 SCDN 加速域名的安全相关配置
      */
-    async GetDisableRecords(req, cb) {
-        return this.request("GetDisableRecords", req, cb);
+    async DescribeScdnConfig(req, cb) {
+        return this.request("DescribeScdnConfig", req, cb);
     }
     /**
      * DeleteClsLogTopic 用于删除日志主题。注意：删除后，所有该日志主题下绑定域名的日志将不再继续投递至该主题，已经投递的日志将会被全部清空。生效时间约为 5~15 分钟。
@@ -377,6 +395,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async EnableClsLogTopic(req, cb) {
         return this.request("EnableClsLogTopic", req, cb);
+    }
+    /**
+     * ListScdnDomains 用于查询 SCDN 安全加速域名列表，及域名基本配置信息
+     */
+    async ListScdnDomains(req, cb) {
+        return this.request("ListScdnDomains", req, cb);
     }
     /**
      * DescribeReportData 用于查询域名/项目维度的日/周/月报表数据。

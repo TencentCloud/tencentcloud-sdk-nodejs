@@ -168,6 +168,16 @@ it("cdn.v20180606.CreateVerifyRecord", async function () {
     }
 })
 
+it("cdn.v20180606.GetDisableRecords", async function () {
+    try {
+       const data = await client.GetDisableRecords({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdn.v20180606.ManageClsTopicDomains", async function () {
     try {
        const data = await client.ManageClsTopicDomains({})
@@ -201,6 +211,16 @@ it("cdn.v20180606.StartCdnDomain", async function () {
 it("cdn.v20180606.DuplicateDomainConfig", async function () {
     try {
        const data = await client.DuplicateDomainConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdn.v20180606.StopScdnDomain", async function () {
+    try {
+       const data = await client.StopScdnDomain({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -331,6 +351,16 @@ it("cdn.v20180606.DescribeOriginData", async function () {
 it("cdn.v20180606.DescribeCdnIp", async function () {
     try {
        const data = await client.DescribeCdnIp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdn.v20180606.StartScdnDomain", async function () {
+    try {
+       const data = await client.StartScdnDomain({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -478,9 +508,9 @@ it("cdn.v20180606.ListClsLogTopics", async function () {
     }
 })
 
-it("cdn.v20180606.GetDisableRecords", async function () {
+it("cdn.v20180606.DescribeScdnConfig", async function () {
     try {
-       const data = await client.GetDisableRecords({})
+       const data = await client.DescribeScdnConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -531,6 +561,16 @@ it("cdn.v20180606.DescribePushQuota", async function () {
 it("cdn.v20180606.EnableClsLogTopic", async function () {
     try {
        const data = await client.EnableClsLogTopic({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdn.v20180606.ListScdnDomains", async function () {
+    try {
+       const data = await client.ListScdnDomains({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

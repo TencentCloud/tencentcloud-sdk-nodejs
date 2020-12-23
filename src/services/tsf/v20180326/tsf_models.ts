@@ -9243,6 +9243,11 @@ export interface DescribeGroupsRequest {
    * 部署组资源类型列表
    */
   GroupResourceTypeList?: Array<string>
+
+  /**
+   * 部署组状态过滤字段
+   */
+  Status?: string
 }
 
 /**

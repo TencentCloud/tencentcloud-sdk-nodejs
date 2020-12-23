@@ -58,6 +58,16 @@ it("dcdb.v20180411.DescribeShardSpec", async function () {
     }
 })
 
+it("dcdb.v20180411.ResetAccountPassword", async function () {
+    try {
+       const data = await client.ResetAccountPassword({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dcdb.v20180411.DescribeDCDBUpgradePrice", async function () {
     try {
        const data = await client.DescribeDCDBUpgradePrice({})
@@ -78,9 +88,9 @@ it("dcdb.v20180411.ModifyAccountDescription", async function () {
     }
 })
 
-it("dcdb.v20180411.ResetAccountPassword", async function () {
+it("dcdb.v20180411.DescribeUserTasks", async function () {
     try {
-       const data = await client.ResetAccountPassword({})
+       const data = await client.DescribeUserTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

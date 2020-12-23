@@ -729,13 +729,13 @@ export interface DescribeScreenShotSheetNumListResponse {
     RequestId?: string;
 }
 /**
- * ModifyLiveSnapshotTemplate返回参数结构体
+ * DescribeLiveCert请求参数结构体
  */
-export interface ModifyLiveSnapshotTemplateResponse {
+export interface DescribeLiveCertRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * DescribeLiveCerts接口获取到的证书Id。
       */
-    RequestId?: string;
+    CertId: number;
 }
 /**
  * ModifyLivePushAuthKey请求参数结构体
@@ -1297,6 +1297,15 @@ export interface StreamOnlineInfo {
  * CreateLiveWatermarkRule返回参数结构体
  */
 export interface CreateLiveWatermarkRuleResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyLiveSnapshotTemplate返回参数结构体
+ */
+export interface ModifyLiveSnapshotTemplateResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2193,13 +2202,40 @@ export interface DescribeLiveRecordTemplatesResponse {
     RequestId?: string;
 }
 /**
- * DescribeLiveCert请求参数结构体
+ * DescribeCallbackRecordsList请求参数结构体
  */
-export interface DescribeLiveCertRequest {
+export interface DescribeCallbackRecordsListRequest {
     /**
-      * DescribeLiveCerts接口获取到的证书Id。
+      * 起始时间点，格式为yyyy-mm-dd HH:MM:SS。
       */
-    CertId: number;
+    StartTime: string;
+    /**
+      * 结束时间点，格式为yyyy-mm-dd HH:MM:SS，起始和结束时间跨度不支持超过1天。
+      */
+    EndTime: string;
+    /**
+      * 流名称，精确匹配。
+      */
+    StreamName: string;
+    /**
+      * 页码
+      */
+    PageNum: number;
+    /**
+      * 每页条数
+      */
+    PageSize: number;
+    /**
+      * 事件类型。
+0: "断流",
+1: "推流",
+100: "录制"
+      */
+    EventType?: number;
+    /**
+      * 回调结果。0为成功，其他为失败
+      */
+    ResultCode?: number;
 }
 /**
  * DescribeLiveCallbackTemplates返回参数结构体
@@ -2274,6 +2310,39 @@ export interface CreateLiveCallbackTemplateRequest {
 相关协议文档：[事件消息通知](/document/product/267/32744)。
       */
     StreamMixNotifyUrl?: string;
+}
+/**
+ * 回调事件信息
+ */
+export interface CallbackEventInfo {
+    /**
+      * 事件时间
+      */
+    EventTime: string;
+    /**
+      * 事件类型
+      */
+    EventType: number;
+    /**
+      * 回调请求
+      */
+    Request: string;
+    /**
+      * 回调响应
+      */
+    Response: string;
+    /**
+      * 客户接口响应时间
+      */
+    ResponseTime: string;
+    /**
+      * 回调结果
+      */
+    ResultCode: number;
+    /**
+      * 流名称
+      */
+    StreamId: string;
 }
 /**
  * DescribeTopClientIpSumInfoList返回参数结构体
@@ -3504,6 +3573,35 @@ export interface CreateLiveCallbackRuleRequest {
  * DeleteLiveWatermarkRule返回参数结构体
  */
 export interface DeleteLiveWatermarkRuleResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeCallbackRecordsList返回参数结构体
+ */
+export interface DescribeCallbackRecordsListResponse {
+    /**
+      * 回调事件列表
+      */
+    DataInfoList?: Array<CallbackEventInfo>;
+    /**
+      * 页码
+      */
+    PageNum?: number;
+    /**
+      * 每页条数
+      */
+    PageSize?: number;
+    /**
+      * 总条数
+      */
+    TotalNum?: number;
+    /**
+      * 总页数
+      */
+    TotalPage?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

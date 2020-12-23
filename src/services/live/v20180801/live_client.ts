@@ -50,7 +50,7 @@ import {
   ConcurrentRecordStreamNum,
   DescribeStreamPlayInfoListResponse,
   DescribeScreenShotSheetNumListResponse,
-  ModifyLiveSnapshotTemplateResponse,
+  DescribeLiveCertRequest,
   ModifyLivePushAuthKeyRequest,
   DeleteLiveCallbackTemplateRequest,
   DescribeLiveStreamStateRequest,
@@ -77,6 +77,7 @@ import {
   ModifyLiveDomainCertRequest,
   StreamOnlineInfo,
   CreateLiveWatermarkRuleResponse,
+  ModifyLiveSnapshotTemplateResponse,
   DescribeProIspPlaySumInfoListRequest,
   DescribeDeliverBandwidthListRequest,
   PlayCodeTotalInfo,
@@ -118,10 +119,11 @@ import {
   CommonMixInputParam,
   DescribeProvinceIspPlayInfoListResponse,
   DescribeLiveRecordTemplatesResponse,
-  DescribeLiveCertRequest,
+  DescribeCallbackRecordsListRequest,
   DescribeLiveCallbackTemplatesResponse,
   ModifyLivePlayAuthKeyResponse,
   CreateLiveCallbackTemplateRequest,
+  CallbackEventInfo,
   DescribeTopClientIpSumInfoListResponse,
   DropLiveStreamResponse,
   DescribeLiveStreamStateResponse,
@@ -176,6 +178,7 @@ import {
   DescribeTopClientIpSumInfoListRequest,
   CreateLiveCallbackRuleRequest,
   DeleteLiveWatermarkRuleResponse,
+  DescribeCallbackRecordsListResponse,
   PublishTime,
   ModifyLiveCertResponse,
   MonitorStreamPlayInfo,
@@ -1150,6 +1153,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: DescribeLiveDomainPlayInfoListResponse) => void
   ): Promise<DescribeLiveDomainPlayInfoListResponse> {
     return this.request("DescribeLiveDomainPlayInfoList", req, cb)
+  }
+
+  /**
+   * 回调事件查询
+   */
+  async DescribeCallbackRecordsList(
+    req: DescribeCallbackRecordsListRequest,
+    cb?: (error: string, rep: DescribeCallbackRecordsListResponse) => void
+  ): Promise<DescribeCallbackRecordsListResponse> {
+    return this.request("DescribeCallbackRecordsList", req, cb)
   }
 
   /**

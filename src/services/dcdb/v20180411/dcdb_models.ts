@@ -16,6 +16,26 @@
  */
 
 /**
+ * DescribeUserTasks返回参数结构体
+ */
+export interface DescribeUserTasksResponse {
+  /**
+   * 任务总数
+   */
+  TotalCount?: number
+
+  /**
+   * 任务列表
+   */
+  FlowSet?: Array<UserTaskInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * InitDCDBInstances返回参数结构体
  */
 export interface InitDCDBInstancesResponse {
@@ -183,15 +203,9 @@ export interface DescribeDCDBPriceResponse {
 }
 
 /**
- * RenewDCDBInstance返回参数结构体
+ * FlushBinlog返回参数结构体
  */
-export interface RenewDCDBInstanceResponse {
-  /**
-      * 长订单号。可以据此调用 DescribeOrders
- 查询订单详细信息，或在支付失败时调用用户账号相关接口进行支付。
-      */
-  DealName?: string
-
+export interface FlushBinlogResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -280,63 +294,23 @@ export interface CreateAccountRequest {
 }
 
 /**
- * 项目信息描述
+ * DescribeDBParameters返回参数结构体
  */
-export interface Project {
+export interface DescribeDBParametersResponse {
   /**
-   * 项目ID
+   * 实例 ID，形如：dcdbt-ow7t8lmc。
    */
-  ProjectId: number
+  InstanceId?: string
 
   /**
-   * 资源拥有者（主账号）uin
+   * 请求DB的当前参数值
    */
-  OwnerUin: number
+  Params?: Array<ParamDesc>
 
   /**
-   * 应用Id
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  AppId: number
-
-  /**
-   * 项目名称
-   */
-  Name: string
-
-  /**
-   * 创建者uin
-   */
-  CreatorUin: number
-
-  /**
-   * 来源平台
-   */
-  SrcPlat: string
-
-  /**
-   * 来源AppId
-   */
-  SrcAppId: number
-
-  /**
-   * 项目状态,0正常，-1关闭。默认项目为3
-   */
-  Status: number
-
-  /**
-   * 创建时间
-   */
-  CreateTime: string
-
-  /**
-   * 是否默认项目，1 是，0 不是
-   */
-  IsDefault: number
-
-  /**
-   * 描述信息
-   */
-  Info: string
+  RequestId?: string
 }
 
 /**
@@ -1514,9 +1488,15 @@ export interface SplitShardConfig {
 }
 
 /**
- * FlushBinlog返回参数结构体
+ * RenewDCDBInstance返回参数结构体
  */
-export interface FlushBinlogResponse {
+export interface RenewDCDBInstanceResponse {
+  /**
+      * 长订单号。可以据此调用 DescribeOrders
+ 查询订单详细信息，或在支付失败时调用用户账号相关接口进行支付。
+      */
+  DealName?: string
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2076,6 +2056,66 @@ export interface DescribeDCDBUpgradePriceRequest {
 }
 
 /**
+ * 用户任务信息
+ */
+export interface UserTaskInfo {
+  /**
+   * 任务ID
+   */
+  Id: number
+
+  /**
+   * 用户账户ID
+   */
+  AppId: number
+
+  /**
+   * 任务状态，0-任务初始化中；1-任务运行中；2-任务成功；3-任务失败
+   */
+  Status: number
+
+  /**
+   * 任务类型，0-实例回档；1-实例创建；2-实例扩容；3-实例迁移；4-实例删除；5-实例重启
+   */
+  UserTaskType: number
+
+  /**
+   * 任务创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 任务结束时间
+   */
+  EndTime: string
+
+  /**
+   * 任务错误信息
+   */
+  ErrMsg: string
+
+  /**
+   * 客户端参数
+   */
+  InputData: string
+
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 实例名称
+   */
+  InstanceName: string
+
+  /**
+   * 地域ID
+   */
+  RegionId: number
+}
+
+/**
  * 数据库存储过程信息
  */
 export interface DatabaseProcedure {
@@ -2566,23 +2606,63 @@ export interface DescribeDCDBInstancesRequest {
 }
 
 /**
- * DescribeDBParameters返回参数结构体
+ * 项目信息描述
  */
-export interface DescribeDBParametersResponse {
+export interface Project {
   /**
-   * 实例 ID，形如：dcdbt-ow7t8lmc。
+   * 项目ID
    */
-  InstanceId?: string
+  ProjectId: number
 
   /**
-   * 请求DB的当前参数值
+   * 资源拥有者（主账号）uin
    */
-  Params?: Array<ParamDesc>
+  OwnerUin: number
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 应用Id
    */
-  RequestId?: string
+  AppId: number
+
+  /**
+   * 项目名称
+   */
+  Name: string
+
+  /**
+   * 创建者uin
+   */
+  CreatorUin: number
+
+  /**
+   * 来源平台
+   */
+  SrcPlat: string
+
+  /**
+   * 来源AppId
+   */
+  SrcAppId: number
+
+  /**
+   * 项目状态,0正常，-1关闭。默认项目为3
+   */
+  Status: number
+
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 是否默认项目，1 是，0 不是
+   */
+  IsDefault: number
+
+  /**
+   * 描述信息
+   */
+  Info: string
 }
 
 /**
@@ -2623,6 +2703,51 @@ export interface ModifyDBSyncModeResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeUserTasks请求参数结构体
+ */
+export interface DescribeUserTasksRequest {
+  /**
+   * 任务的状态列表。0-任务启动中；1-任务运行中；2-任务成功；3-任务失败
+   */
+  Statuses?: Array<number>
+
+  /**
+   * 实例ID列表
+   */
+  InstanceIds?: Array<string>
+
+  /**
+   * 任务类型列表，当前支持的任务类型有：0-回档任务；1-创建实例任务；2-扩容任务；3-迁移任务；4-删除实例任务；5-重启任务
+   */
+  FlowTypes?: Array<number>
+
+  /**
+   * 任务的创建时间
+   */
+  StartTime?: string
+
+  /**
+   * 任务的结束时间
+   */
+  EndTime?: string
+
+  /**
+   * 任务ID的数组
+   */
+  UTaskIds?: Array<number>
+
+  /**
+   * 每次最多返回多少条任务，取值范围为(0,100]，不传的话默认值为20
+   */
+  Limit?: number
+
+  /**
+   * 返回任务默认是按照创建时间降序排列，从偏移值Offset处开始返回
+   */
+  Offset?: number
 }
 
 /**

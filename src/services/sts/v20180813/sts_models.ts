@@ -215,13 +215,18 @@ export interface Credentials {
  */
 export interface AssumeRoleRequest {
   /**
-   * 角色的资源描述。例如：qcs::cam::uin/12345678:role/4611686018427397919、qcs::cam::uin/12345678:roleName/testRoleName
-   */
+      * 角色的资源描述，可在[访问管理](https://console.cloud.tencent.com/cam/role)，点击角色名获取。
+普通角色：
+qcs::cam::uin/12345678:role/4611686018427397919、qcs::cam::uin/12345678:roleName/testRoleName
+服务角色：
+qcs::cam::uin/12345678:role/tencentcloudServiceRole/4611686018427397920、qcs::cam::uin/12345678:role/tencentcloudServiceRoleName/testServiceRoleName
+      */
   RoleArn: string
 
   /**
-   * 临时会话名称，由用户自定义名称
-   */
+      * 临时会话名称，由用户自定义名称。
+长度在2到128之间，可包含大小写字符，数字以及特殊字符：=,.@_-。 正则为：[\w+=,.@_-]*
+      */
   RoleSessionName: string
 
   /**
@@ -237,4 +242,10 @@ export interface AssumeRoleRequest {
 3、策略中不能包含 principal 元素。
       */
   Policy?: string
+
+  /**
+      * 角色外部ID，可在[访问管理](https://console.cloud.tencent.com/cam/role)，点击角色名获取。
+长度在2到128之间，可包含大小写字符，数字以及特殊字符：=,.@:/-。 正则为：[\w+=,.@:\/-]*
+      */
+  ExternalId?: string
 }

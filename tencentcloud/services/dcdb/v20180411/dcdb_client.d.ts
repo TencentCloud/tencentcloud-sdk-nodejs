@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { InitDCDBInstancesResponse, UpgradeDCDBInstanceResponse, DescribeAccountPrivilegesResponse, DescribeDatabasesRequest, DescribeDBParametersRequest, DescribeAccountsRequest, DescribeDCDBPriceResponse, RenewDCDBInstanceResponse, DescribeDBSyncModeResponse, DescribeDCDBUpgradePriceResponse, CreateAccountRequest, CloneAccountResponse, ModifyAccountDescriptionResponse, CreateDCDBInstanceResponse, ModifyDBInstancesProjectResponse, DescribeDBLogFilesRequest, DescribeOrdersResponse, ResetAccountPasswordRequest, CopyAccountPrivilegesResponse, CloneAccountRequest, DescribeDCDBRenewalPriceRequest, DescribeDCDBPriceRequest, DescribeSqlLogsRequest, ResetAccountPasswordResponse, DescribeDCDBSaleInfoRequest, RenewDCDBInstanceRequest, GrantAccountPrivilegesRequest, DescribeShardSpecRequest, DescribeDCDBShardsRequest, ModifyDBParametersRequest, ModifyDBParametersResponse, CopyAccountPrivilegesRequest, DescribeDatabaseTableRequest, OpenDBExtranetAccessResponse, DescribeDatabaseObjectsResponse, FlushBinlogResponse, DescribeDCDBRenewalPriceResponse, DescribeShardSpecResponse, DescribeDCDBShardsResponse, GrantAccountPrivilegesResponse, OpenDBExtranetAccessRequest, DescribeDCDBSaleInfoResponse, DescribeDBSyncModeRequest, CloseDBExtranetAccessResponse, ModifyAccountDescriptionRequest, DescribeProjectsRequest, DescribeDatabasesResponse, DescribeOrdersRequest, DescribeDBLogFilesResponse, CloseDBExtranetAccessRequest, InitDCDBInstancesRequest, DescribeSqlLogsResponse, DeleteAccountRequest, DescribeDCDBInstancesResponse, CreateDCDBInstanceRequest, DescribeDCDBUpgradePriceRequest, ModifyDBSyncModeRequest, DescribeProjectsResponse, CreateAccountResponse, DescribeDatabaseObjectsRequest, UpgradeDCDBInstanceRequest, DescribeDatabaseTableResponse, DescribeAccountPrivilegesRequest, DescribeAccountsResponse, DescribeDCDBInstancesRequest, DescribeDBParametersResponse, ModifyDBInstancesProjectRequest, FlushBinlogRequest, ModifyDBSyncModeResponse, DeleteAccountResponse } from "./dcdb_models";
+import { DescribeUserTasksResponse, InitDCDBInstancesResponse, UpgradeDCDBInstanceResponse, DescribeAccountPrivilegesResponse, DescribeDatabasesRequest, DescribeDBParametersRequest, DescribeAccountsRequest, DescribeDCDBPriceResponse, FlushBinlogResponse, DescribeDBSyncModeResponse, DescribeDCDBUpgradePriceResponse, CreateAccountRequest, DescribeDBParametersResponse, CloneAccountResponse, ModifyAccountDescriptionResponse, CreateDCDBInstanceResponse, ModifyDBInstancesProjectResponse, DescribeDBLogFilesRequest, DescribeOrdersResponse, ResetAccountPasswordRequest, CopyAccountPrivilegesResponse, CloneAccountRequest, DescribeDCDBRenewalPriceRequest, DescribeDCDBPriceRequest, DescribeSqlLogsRequest, ResetAccountPasswordResponse, DescribeDCDBSaleInfoRequest, RenewDCDBInstanceRequest, GrantAccountPrivilegesRequest, DescribeShardSpecRequest, DescribeDCDBShardsRequest, ModifyDBParametersRequest, ModifyDBParametersResponse, CopyAccountPrivilegesRequest, DescribeDatabaseTableRequest, OpenDBExtranetAccessResponse, DescribeDatabaseObjectsResponse, RenewDCDBInstanceResponse, DescribeDCDBRenewalPriceResponse, DescribeShardSpecResponse, DescribeDCDBShardsResponse, GrantAccountPrivilegesResponse, OpenDBExtranetAccessRequest, DescribeDCDBSaleInfoResponse, DescribeDBSyncModeRequest, CloseDBExtranetAccessResponse, ModifyAccountDescriptionRequest, DescribeProjectsRequest, DescribeDatabasesResponse, DescribeOrdersRequest, DescribeDBLogFilesResponse, CloseDBExtranetAccessRequest, InitDCDBInstancesRequest, DescribeSqlLogsResponse, DeleteAccountRequest, DescribeDCDBInstancesResponse, CreateDCDBInstanceRequest, DescribeDCDBUpgradePriceRequest, ModifyDBSyncModeRequest, DescribeProjectsResponse, CreateAccountResponse, DescribeDatabaseObjectsRequest, UpgradeDCDBInstanceRequest, DescribeDatabaseTableResponse, DescribeAccountPrivilegesRequest, DescribeAccountsResponse, DescribeDCDBInstancesRequest, ModifyDBInstancesProjectRequest, FlushBinlogRequest, ModifyDBSyncModeResponse, DescribeUserTasksRequest, DeleteAccountResponse } from "./dcdb_models";
 /**
  * dcdb client
  * @class
@@ -25,6 +25,11 @@ export declare class Client extends AbstractClient {
      */
     DescribeShardSpec(req?: DescribeShardSpecRequest, cb?: (error: string, rep: DescribeShardSpecResponse) => void): Promise<DescribeShardSpecResponse>;
     /**
+     * 本接口（ResetAccountPassword）用于重置云数据库账号的密码。
+注意：相同用户名，不同Host是不同的账号。
+     */
+    ResetAccountPassword(req: ResetAccountPasswordRequest, cb?: (error: string, rep: ResetAccountPasswordResponse) => void): Promise<ResetAccountPasswordResponse>;
+    /**
      * 本接口（DescribeDCDBUpgradePrice）用于查询升级分布式数据库实例价格。
      */
     DescribeDCDBUpgradePrice(req: DescribeDCDBUpgradePriceRequest, cb?: (error: string, rep: DescribeDCDBUpgradePriceResponse) => void): Promise<DescribeDCDBUpgradePriceResponse>;
@@ -34,10 +39,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyAccountDescription(req: ModifyAccountDescriptionRequest, cb?: (error: string, rep: ModifyAccountDescriptionResponse) => void): Promise<ModifyAccountDescriptionResponse>;
     /**
-     * 本接口（ResetAccountPassword）用于重置云数据库账号的密码。
-注意：相同用户名，不同Host是不同的账号。
+     * 本接口（DescribeUserTasks）用于拉取用户任务列表
      */
-    ResetAccountPassword(req: ResetAccountPasswordRequest, cb?: (error: string, rep: ResetAccountPasswordResponse) => void): Promise<ResetAccountPasswordResponse>;
+    DescribeUserTasks(req: DescribeUserTasksRequest, cb?: (error: string, rep: DescribeUserTasksResponse) => void): Promise<DescribeUserTasksResponse>;
     /**
      * 本接口（DescribeDCDBPrice）用于在购买实例前，查询实例的价格。
      */

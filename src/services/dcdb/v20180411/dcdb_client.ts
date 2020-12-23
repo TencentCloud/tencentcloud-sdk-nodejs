@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeUserTasksResponse,
   InitDCDBInstancesResponse,
   UpgradeDCDBInstanceResponse,
   DescribeAccountPrivilegesResponse,
@@ -27,11 +28,11 @@ import {
   DescribeAccountsRequest,
   SpecConfig,
   DescribeDCDBPriceResponse,
-  RenewDCDBInstanceResponse,
+  FlushBinlogResponse,
   DescribeDBSyncModeResponse,
   DescribeDCDBUpgradePriceResponse,
   CreateAccountRequest,
-  Project,
+  DescribeDBParametersResponse,
   CloneAccountResponse,
   ModifyAccountDescriptionResponse,
   CreateDCDBInstanceResponse,
@@ -71,7 +72,7 @@ import {
   DescribeDatabaseObjectsResponse,
   TableColumn,
   SplitShardConfig,
-  FlushBinlogResponse,
+  RenewDCDBInstanceResponse,
   DescribeDCDBRenewalPriceResponse,
   DescribeShardSpecResponse,
   DescribeDCDBShardsResponse,
@@ -95,6 +96,7 @@ import {
   DescribeDCDBInstancesResponse,
   CreateDCDBInstanceRequest,
   DescribeDCDBUpgradePriceRequest,
+  UserTaskInfo,
   DatabaseProcedure,
   AddShardConfig,
   ModifyDBSyncModeRequest,
@@ -111,10 +113,11 @@ import {
   SqlLogItem,
   DescribeAccountsResponse,
   DescribeDCDBInstancesRequest,
-  DescribeDBParametersResponse,
+  Project,
   ModifyDBInstancesProjectRequest,
   FlushBinlogRequest,
   ModifyDBSyncModeResponse,
+  DescribeUserTasksRequest,
   DeleteAccountResponse,
 } from "./dcdb_models"
 
@@ -169,6 +172,17 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 本接口（ResetAccountPassword）用于重置云数据库账号的密码。
+注意：相同用户名，不同Host是不同的账号。
+     */
+  async ResetAccountPassword(
+    req: ResetAccountPasswordRequest,
+    cb?: (error: string, rep: ResetAccountPasswordResponse) => void
+  ): Promise<ResetAccountPasswordResponse> {
+    return this.request("ResetAccountPassword", req, cb)
+  }
+
+  /**
    * 本接口（DescribeDCDBUpgradePrice）用于查询升级分布式数据库实例价格。
    */
   async DescribeDCDBUpgradePrice(
@@ -190,14 +204,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口（ResetAccountPassword）用于重置云数据库账号的密码。
-注意：相同用户名，不同Host是不同的账号。
-     */
-  async ResetAccountPassword(
-    req: ResetAccountPasswordRequest,
-    cb?: (error: string, rep: ResetAccountPasswordResponse) => void
-  ): Promise<ResetAccountPasswordResponse> {
-    return this.request("ResetAccountPassword", req, cb)
+   * 本接口（DescribeUserTasks）用于拉取用户任务列表
+   */
+  async DescribeUserTasks(
+    req: DescribeUserTasksRequest,
+    cb?: (error: string, rep: DescribeUserTasksResponse) => void
+  ): Promise<DescribeUserTasksResponse> {
+    return this.request("DescribeUserTasks", req, cb)
   }
 
   /**

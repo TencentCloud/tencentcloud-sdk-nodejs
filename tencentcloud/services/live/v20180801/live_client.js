@@ -555,6 +555,12 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
         return this.request("DescribeLiveDomainPlayInfoList", req, cb);
     }
     /**
+     * 回调事件查询
+     */
+    async DescribeCallbackRecordsList(req, cb) {
+        return this.request("DescribeCallbackRecordsList", req, cb);
+    }
+    /**
      * 创建录制规则，需要先调用[CreateLiveRecordTemplate](/document/product/267/32614)接口创建录制模板，将返回的模板id绑定到流使用。
 <br>录制相关文档：[直播录制](/document/product/267/32739)。
      */

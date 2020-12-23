@@ -25,7 +25,7 @@ export interface StopGameRequest {
   UserId: string
 
   /**
-   * 用于多人游戏，游戏主机用户ID
+   * 【多人游戏】游戏主机用户ID
    */
   HostUserId?: string
 }
@@ -60,9 +60,14 @@ export interface CreateSessionResponse {
   ServerSession?: string
 
   /**
-   * 【多人游戏】角色编号；比如Player1、Player2、Viewer1
+   * 【多人游戏】角色编号；比如1、2、3、4
    */
   RoleNumber?: string
+
+  /**
+   * 【多人云游】角色；Player表示玩家；Viewer表示观察者
+   */
+  Role?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -85,12 +90,12 @@ export interface TrylockWorkerRequest {
   GameId: string
 
   /**
-   * 游戏区域，ap-guangzhou、ap-shanghai、ap-beijing等
+   * 游戏区域，ap-guangzhou、ap-shanghai、ap-beijing等，如果不为空，优先按照该区域进行调度分配机器
    */
   GameRegion?: string
 
   /**
-   * 资源池编号，1表示共用，2表示测试
+   * 【废弃】资源池编号
    */
   SetNo?: number
 
@@ -145,7 +150,7 @@ export interface CreateSessionRequest {
   ImageUrl?: string
 
   /**
-   * 【将废弃】资源池编号，比如1表示正式，2表示测试
+   * 【废弃】资源池编号
    */
   SetNo?: number
 

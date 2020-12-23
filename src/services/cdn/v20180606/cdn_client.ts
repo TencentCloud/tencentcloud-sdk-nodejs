@@ -45,10 +45,12 @@ import {
   RequestHeader,
   DescribePurgeQuotaRequest,
   Referer,
-  UserAgentFilter,
+  StartScdnDomainRequest,
+  StopScdnDomainResponse,
   DescribeCdnDataResponse,
   EnableClsLogTopicRequest,
   UpdateImageConfigResponse,
+  ScdnDomain,
   CacheConfigNoCache,
   AccessControl,
   DeleteCdnDomainRequest,
@@ -75,6 +77,7 @@ import {
   DescribeBillingDataRequest,
   SimpleCache,
   DeleteClsLogTopicRequest,
+  UserAgentFilter,
   DeleteScdnDomainRequest,
   DescribeDistrictIspDataResponse,
   DescribeCdnOriginIpRequest,
@@ -129,8 +132,10 @@ import {
   ResourceOriginData,
   IpStatus,
   AddCdnDomainResponse,
+  ListScdnDomainsResponse,
   VerifyDomainRecordResponse,
   DomainAreaConfig,
+  ListScdnDomainsRequest,
   ServerCert,
   AccessControlRule,
   HttpHeaderPathRule,
@@ -188,6 +193,7 @@ import {
   GetDisableRecordsRequest,
   CreateDiagnoseUrlRequest,
   PurgeUrlsCacheResponse,
+  StartScdnDomainResponse,
   BotJavaScript,
   DeleteClsLogTopicResponse,
   DescribeBillingDataResponse,
@@ -216,6 +222,7 @@ import {
   RegionMapRelation,
   PurgePathCacheRequest,
   DescribeDiagnoseReportResponse,
+  StartCdnDomainResponse,
   CdnData,
   PurgeUrlsCacheRequest,
   StartCdnDomainRequest,
@@ -224,7 +231,7 @@ import {
   PushTask,
   CreateEdgePackTaskResponse,
   ReportData,
-  StartCdnDomainResponse,
+  DescribeScdnConfigResponse,
   DescribePushQuotaRequest,
   TopDetailData,
   ResponseHeaderCache,
@@ -265,7 +272,9 @@ import {
   CdnIp,
   DescribeCdnDataRequest,
   DescribeImageConfigResponse,
+  DescribeScdnConfigRequest,
   CacheTagKey,
+  StopScdnDomainRequest,
   ScdnTypeData,
   DescribeDomainsRequest,
   CreateEdgePackTaskRequest,
@@ -446,6 +455,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * GetDisableRecords 用于查询资源禁用历史，及 URL 当前状态。（接口尚在内测中，暂未全量开放使用）
+   */
+  async GetDisableRecords(
+    req: GetDisableRecordsRequest,
+    cb?: (error: string, rep: GetDisableRecordsResponse) => void
+  ): Promise<GetDisableRecordsResponse> {
+    return this.request("GetDisableRecords", req, cb)
+  }
+
+  /**
    * ManageClsTopicDomains 用于管理某日志主题下绑定的域名列表。
    */
   async ManageClsTopicDomains(
@@ -483,6 +502,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DuplicateDomainConfigResponse) => void
   ): Promise<DuplicateDomainConfigResponse> {
     return this.request("DuplicateDomainConfig", req, cb)
+  }
+
+  /**
+   * StopScdnDomain 用于关闭域名的安全防护配置
+   */
+  async StopScdnDomain(
+    req: StopScdnDomainRequest,
+    cb?: (error: string, rep: StopScdnDomainResponse) => void
+  ): Promise<StopScdnDomainResponse> {
+    return this.request("StopScdnDomain", req, cb)
   }
 
   /**
@@ -636,6 +665,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * StartScdnDomain 用于开启域名的安全防护配置
+   */
+  async StartScdnDomain(
+    req: StartScdnDomainRequest,
+    cb?: (error: string, rep: StartScdnDomainResponse) => void
+  ): Promise<StartScdnDomainResponse> {
+    return this.request("StartScdnDomain", req, cb)
+  }
+
+  /**
      * PurgePathCache 用于批量提交目录刷新，根据域名的加速区域进行对应区域的刷新。
 默认情况下境内、境外加速区域每日目录刷新额度为各 100 条，每次最多可提交 20 条。
      */
@@ -783,13 +822,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * GetDisableRecords 用于查询资源禁用历史，及 URL 当前状态。（接口尚在内测中，暂未全量开放使用）
+   * DescribeScdnConfig 用于查询指定 SCDN 加速域名的安全相关配置
    */
-  async GetDisableRecords(
-    req: GetDisableRecordsRequest,
-    cb?: (error: string, rep: GetDisableRecordsResponse) => void
-  ): Promise<GetDisableRecordsResponse> {
-    return this.request("GetDisableRecords", req, cb)
+  async DescribeScdnConfig(
+    req: DescribeScdnConfigRequest,
+    cb?: (error: string, rep: DescribeScdnConfigResponse) => void
+  ): Promise<DescribeScdnConfigResponse> {
+    return this.request("DescribeScdnConfig", req, cb)
   }
 
   /**
@@ -840,6 +879,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: EnableClsLogTopicResponse) => void
   ): Promise<EnableClsLogTopicResponse> {
     return this.request("EnableClsLogTopic", req, cb)
+  }
+
+  /**
+   * ListScdnDomains 用于查询 SCDN 安全加速域名列表，及域名基本配置信息
+   */
+  async ListScdnDomains(
+    req: ListScdnDomainsRequest,
+    cb?: (error: string, rep: ListScdnDomainsResponse) => void
+  ): Promise<ListScdnDomainsResponse> {
+    return this.request("ListScdnDomains", req, cb)
   }
 
   /**

@@ -649,19 +649,26 @@ off：关闭
     RefererRules?: Array<RefererRule>;
 }
 /**
- * UserAgent黑白名单配置
+ * StartScdnDomain请求参数结构体
  */
-export interface UserAgentFilter {
+export interface StartScdnDomainRequest {
     /**
-      * 开关，on或off
-注意：此字段可能返回 null，表示取不到有效值。
+      * 域名
       */
-    Switch: string;
+    Domain: string;
+}
+/**
+ * StopScdnDomain返回参数结构体
+ */
+export interface StopScdnDomainResponse {
     /**
-      * UA黑白名单生效规则列表
-注意：此字段可能返回 null，表示取不到有效值。
+      * 关闭结果，Success表示成功
       */
-    FilterRules?: Array<UserAgentFilterRule>;
+    Result?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeCdnData返回参数结构体
@@ -709,6 +716,47 @@ export interface UpdateImageConfigResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 聚合了SCDN域名的基本信息
+ */
+export interface ScdnDomain {
+    /**
+      * 域名
+      */
+    Domain: string;
+    /**
+      * 当前状态，取值online | offline | process
+      */
+    Status: string;
+    /**
+      * Waf 状态默认为‘/’，取值 close | intercept | observe
+      */
+    Waf: string;
+    /**
+      * Acl 状态默认为‘/’，取值 close | open
+      */
+    Acl: string;
+    /**
+      * CC 状态默认为‘/’，取值 close | open
+      */
+    CC: string;
+    /**
+      * Ddos 状态默认为‘/’，取值 close | open
+      */
+    Ddos: string;
+    /**
+      * 项目ID
+      */
+    ProjectId: string;
+    /**
+      * Acl 规则数
+      */
+    AclRuleNumbers: number;
+    /**
+      * Bot 状态默认为‘/’，取值 close | open
+      */
+    Bot: string;
 }
 /**
  * 路径缓存不缓存配置
@@ -1441,6 +1489,21 @@ export interface DeleteClsLogTopicRequest {
       * 接入渠道，默认值为cdn
       */
     Channel?: string;
+}
+/**
+ * UserAgent黑白名单配置
+ */
+export interface UserAgentFilter {
+    /**
+      * 开关，on或off
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Switch: string;
+    /**
+      * UA黑白名单生效规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FilterRules?: Array<UserAgentFilterRule>;
 }
 /**
  * DeleteScdnDomain请求参数结构体
@@ -2998,6 +3061,25 @@ export interface AddCdnDomainResponse {
     RequestId?: string;
 }
 /**
+ * ListScdnDomains返回参数结构体
+ */
+export interface ListScdnDomainsResponse {
+    /**
+      * 域名列表信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DomainList?: Array<ScdnDomain>;
+    /**
+      * 域名的总条数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * VerifyDomainRecord返回参数结构体
  */
 export interface VerifyDomainRecordResponse {
@@ -3022,6 +3104,19 @@ export interface DomainAreaConfig {
       * 地区列表，其中元素可为mainland/overseas
       */
     Area: Array<string>;
+}
+/**
+ * ListScdnDomains请求参数结构体
+ */
+export interface ListScdnDomainsRequest {
+    /**
+      * 分页起始地址
+      */
+    Offset?: number;
+    /**
+      * 列表分页记录条数，最大1000
+      */
+    Limit?: number;
 }
 /**
  * https 加速服务端证书配置：
@@ -4762,6 +4857,19 @@ export interface PurgeUrlsCacheResponse {
     RequestId?: string;
 }
 /**
+ * StartScdnDomain返回参数结构体
+ */
+export interface StartScdnDomainResponse {
+    /**
+      * 开启结果，Success表示成功
+      */
+    Result?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * Bot js策略
  */
 export interface BotJavaScript {
@@ -5342,6 +5450,15 @@ export interface DescribeDiagnoseReportResponse {
     RequestId?: string;
 }
 /**
+ * StartCdnDomain返回参数结构体
+ */
+export interface StartCdnDomainResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 访问明细数据类型
  */
 export interface CdnData {
@@ -5513,9 +5630,29 @@ export interface ReportData {
     BillingPercentage: number;
 }
 /**
- * StartCdnDomain返回参数结构体
+ * DescribeScdnConfig返回参数结构体
  */
-export interface StartCdnDomainResponse {
+export interface DescribeScdnConfigResponse {
+    /**
+      * 自定义防护策略配置
+      */
+    Acl?: ScdnAclConfig;
+    /**
+      * Web 攻击防护（WAF）配置
+      */
+    Waf?: ScdnWafConfig;
+    /**
+      * CC 防护配置
+      */
+    CC?: ScdnConfig;
+    /**
+      * DDOS 防护配置
+      */
+    Ddos?: ScdnDdosConfig;
+    /**
+      * BOT 防护配置
+      */
+    Bot?: ScdnBotConfig;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6384,6 +6521,15 @@ export interface DescribeImageConfigResponse {
     RequestId?: string;
 }
 /**
+ * DescribeScdnConfig请求参数结构体
+ */
+export interface DescribeScdnConfigRequest {
+    /**
+      * 域名
+      */
+    Domain: string;
+}
+/**
  * 组成CacheKey的一部分
  */
 export interface CacheTagKey {
@@ -6397,6 +6543,15 @@ export interface CacheTagKey {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Value?: string;
+}
+/**
+ * StopScdnDomain请求参数结构体
+ */
+export interface StopScdnDomainRequest {
+    /**
+      * 域名
+      */
+    Domain: string;
 }
 /**
  * Scdn饼图数据，waf仅有

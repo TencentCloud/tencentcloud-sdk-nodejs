@@ -53,6 +53,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeShardSpec", req, cb);
     }
     /**
+     * 本接口（ResetAccountPassword）用于重置云数据库账号的密码。
+注意：相同用户名，不同Host是不同的账号。
+     */
+    async ResetAccountPassword(req, cb) {
+        return this.request("ResetAccountPassword", req, cb);
+    }
+    /**
      * 本接口（DescribeDCDBUpgradePrice）用于查询升级分布式数据库实例价格。
      */
     async DescribeDCDBUpgradePrice(req, cb) {
@@ -66,11 +73,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAccountDescription", req, cb);
     }
     /**
-     * 本接口（ResetAccountPassword）用于重置云数据库账号的密码。
-注意：相同用户名，不同Host是不同的账号。
+     * 本接口（DescribeUserTasks）用于拉取用户任务列表
      */
-    async ResetAccountPassword(req, cb) {
-        return this.request("ResetAccountPassword", req, cb);
+    async DescribeUserTasks(req, cb) {
+        return this.request("DescribeUserTasks", req, cb);
     }
     /**
      * 本接口（DescribeDCDBPrice）用于在购买实例前，查询实例的价格。
