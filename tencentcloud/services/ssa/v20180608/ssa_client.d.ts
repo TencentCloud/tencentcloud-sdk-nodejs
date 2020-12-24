@@ -1,0 +1,62 @@
+import { AbstractClient } from "../../../common/abstract_client";
+import { ClientConfig } from "../../../common/interface";
+import { DescribeAssetDetailRequest, DescribeVulListResponse, DescribeCheckConfigAssetListRequest, DescribeComplianceListResponse, DescribeConfigListResponse, DescribeCheckConfigDetailResponse, DescribeAssetListResponse, DescribeCheckConfigAssetListResponse, DescribeCheckConfigDetailRequest, DescribeAssetListRequest, DescribeComplianceDetailResponse, DescribeAssetsMappingListResponse, DescribeComplianceListRequest, DescribeVulListRequest, DescribeLeakDetectionListRequest, DescribeEventDetailResponse, DescribeSafetyEventListResponse, DescribeSafetyEventListRequest, SaDivulgeDataQueryPubResponse, DescribeConfigListRequest, DescribeLeakDetectionListResponse, DescribeEventDetailRequest, SaDivulgeDataQueryPubRequest, DescribeAssetsMappingListRequest, DescribeComplianceDetailRequest, DescribeAssetDetailResponse } from "./ssa_models";
+/**
+ * ssa client
+ * @class
+ */
+export declare class Client extends AbstractClient {
+    constructor(clientConfig: ClientConfig);
+    /**
+     * 合规管理总览页检查项列表
+     */
+    DescribeComplianceList(req: DescribeComplianceListRequest, cb?: (error: string, rep: DescribeComplianceListResponse) => void): Promise<DescribeComplianceListResponse>;
+    /**
+     * 云配置检查项总览页检查项列表
+     */
+    DescribeConfigList(req: DescribeConfigListRequest, cb?: (error: string, rep: DescribeConfigListResponse) => void): Promise<DescribeConfigListResponse>;
+    /**
+     * 资产安全资产列表
+     */
+    DescribeAssetList(req: DescribeAssetListRequest, cb?: (error: string, rep: DescribeAssetListResponse) => void): Promise<DescribeAssetListResponse>;
+    /**
+     * 获取安全事件详情
+     */
+    DescribeEventDetail(req: DescribeEventDetailRequest, cb?: (error: string, rep: DescribeEventDetailResponse) => void): Promise<DescribeEventDetailResponse>;
+    /**
+     * 查询【通用字段】【泄露监测数据列表】
+     */
+    SaDivulgeDataQueryPub(req: SaDivulgeDataQueryPubRequest, cb?: (error: string, rep: SaDivulgeDataQueryPubResponse) => void): Promise<SaDivulgeDataQueryPubResponse>;
+    /**
+     * 云安全配置检查项详情
+     */
+    DescribeCheckConfigDetail(req: DescribeCheckConfigDetailRequest, cb?: (error: string, rep: DescribeCheckConfigDetailResponse) => void): Promise<DescribeCheckConfigDetailResponse>;
+    /**
+     * 云安全配置管理资产组列表
+     */
+    DescribeCheckConfigAssetList(req: DescribeCheckConfigAssetListRequest, cb?: (error: string, rep: DescribeCheckConfigAssetListResponse) => void): Promise<DescribeCheckConfigAssetListResponse>;
+    /**
+     * 获取泄露列表
+     */
+    DescribeLeakDetectionList(req: DescribeLeakDetectionListRequest, cb?: (error: string, rep: DescribeLeakDetectionListResponse) => void): Promise<DescribeLeakDetectionListResponse>;
+    /**
+     * 资产测绘-测绘列表
+     */
+    DescribeAssetsMappingList(req: DescribeAssetsMappingListRequest, cb?: (error: string, rep: DescribeAssetsMappingListResponse) => void): Promise<DescribeAssetsMappingListResponse>;
+    /**
+     * 资产安全页资产详情
+     */
+    DescribeAssetDetail(req: DescribeAssetDetailRequest, cb?: (error: string, rep: DescribeAssetDetailResponse) => void): Promise<DescribeAssetDetailResponse>;
+    /**
+     * 漏洞管理页，获取漏洞列表
+     */
+    DescribeVulList(req: DescribeVulListRequest, cb?: (error: string, rep: DescribeVulListResponse) => void): Promise<DescribeVulListResponse>;
+    /**
+     * 合规管理检查项详情
+     */
+    DescribeComplianceDetail(req: DescribeComplianceDetailRequest, cb?: (error: string, rep: DescribeComplianceDetailResponse) => void): Promise<DescribeComplianceDetailResponse>;
+    /**
+     * 获取安全事件列表
+     */
+    DescribeSafetyEventList(req: DescribeSafetyEventListRequest, cb?: (error: string, rep: DescribeSafetyEventListResponse) => void): Promise<DescribeSafetyEventListResponse>;
+}

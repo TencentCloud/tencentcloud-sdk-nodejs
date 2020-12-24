@@ -380,6 +380,26 @@ export interface Price {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     UnitPriceDiscount: number;
+    /**
+      * 高精度预付费云盘预支费用的原价, 单位：元	。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OriginalPriceHigh: string;
+    /**
+      * 高精度预付费云盘预支费用的折扣价, 单位：元
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DiscountPriceHigh: string;
+    /**
+      * 高精度后付费云盘原单价, 单位：元
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UnitPriceHigh: string;
+    /**
+      * 高精度后付费云盘折扣单价, 单位：元
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UnitPriceDiscountHigh: string;
 }
 /**
  * UnbindAutoSnapshotPolicy返回参数结构体
@@ -701,7 +721,7 @@ export interface Filter {
  */
 export interface InquiryPriceCreateDisksRequest {
     /**
-      * 云硬盘类型。取值范围：<br><li>普通云硬盘：CLOUD_BASIC<br><li>高性能云硬盘：CLOUD_PREMIUM<br><li>SSD云硬盘：CLOUD_SSD。
+      * 硬盘介质类型。取值范围：<br><li>CLOUD_BASIC：表示普通云硬盘<br><li>CLOUD_PREMIUM：表示高性能云硬盘<br><li>CLOUD_SSD：表示SSD云硬盘<br><li>CLOUD_HSSD：表示增强型SSD云硬盘<br><li>CLOUD_TSSD：表示极速型SSD云硬盘。
       */
     DiskType: string;
     /**
@@ -724,6 +744,10 @@ export interface InquiryPriceCreateDisksRequest {
       * 云盘所属项目ID。
       */
     ProjectId?: number;
+    /**
+      * 额外购买的云硬盘性能值，单位MB/s。<br>目前仅支持增强型SSD云硬盘（CLOUD_HSSD）和极速型SSD云硬盘（CLOUD_TSSD）
+      */
+    ThroughputPerformance?: number;
 }
 /**
  * DescribeSnapshots返回参数结构体

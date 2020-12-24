@@ -3068,6 +3068,12 @@ export interface VersionData {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Contents: Contents
+
+  /**
+      * 月活设备数，当月第一天开始有上线的设备数量。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AliveInMonthCnt: number
 }
 
 /**

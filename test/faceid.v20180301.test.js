@@ -98,6 +98,16 @@ it("faceid.v20180301.CheckIdCardInformation", async function () {
     }
 })
 
+it("faceid.v20180301.GetRealNameAuthToken", async function () {
+    try {
+       const data = await client.GetRealNameAuthToken({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("faceid.v20180301.IdCardOCRVerification", async function () {
     try {
        const data = await client.IdCardOCRVerification({})
@@ -241,6 +251,16 @@ it("faceid.v20180301.GetDetectInfo", async function () {
 it("faceid.v20180301.BankCard2EVerification", async function () {
     try {
        const data = await client.BankCard2EVerification({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("faceid.v20180301.GetRealNameAuthResult", async function () {
+    try {
+       const data = await client.GetRealNameAuthResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

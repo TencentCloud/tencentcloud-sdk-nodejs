@@ -30,6 +30,7 @@ import {
   DescribeAgentSelfPayDealsResponse,
   AgentTransferMoneyRequest,
   DescribeClientBalanceRequest,
+  ProductInfoElem,
   RemovePayRelationForClientResponse,
   DescribeRebateInfosRequest,
   CreatePayRelationForClientResponse,

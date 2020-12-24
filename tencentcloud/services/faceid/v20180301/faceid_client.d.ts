@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { GetDetectInfoEnhancedRequest, GetFaceIdTokenRequest, LivenessRequest, CheckBankCardInformationRequest, MobileNetworkTimeVerificationResponse, GetLiveCodeRequest, IdCardVerificationRequest, BankCardVerificationRequest, CheckBankCardInformationResponse, CheckIdCardInformationResponse, GetDetectInfoEnhancedResponse, PhoneVerificationRequest, DetectAuthResponse, PhoneVerificationResponse, IdCardOCRVerificationRequest, CheckPhoneAndNameResponse, BankCard4EVerificationResponse, MobileStatusRequest, LivenessRecognitionResponse, BankCard2EVerificationRequest, LivenessRecognitionRequest, GetFaceIdTokenResponse, IdCardOCRVerificationResponse, MobileStatusResponse, LivenessResponse, CheckIdCardInformationRequest, DetectAuthRequest, MinorsVerificationResponse, BankCardVerificationResponse, ImageRecognitionRequest, BankCard4EVerificationRequest, MobileNetworkTimeVerificationRequest, GetFaceIdResultRequest, GetActionSequenceResponse, MinorsVerificationRequest, ImageRecognitionResponse, GetActionSequenceRequest, GetDetectInfoResponse, LivenessCompareResponse, GetLiveCodeResponse, GetDetectInfoRequest, BankCard2EVerificationResponse, IdCardVerificationResponse, CheckPhoneAndNameRequest, LivenessCompareRequest, GetFaceIdResultResponse } from "./faceid_models";
+import { GetDetectInfoEnhancedRequest, GetFaceIdTokenRequest, LivenessRequest, CheckBankCardInformationRequest, MobileNetworkTimeVerificationResponse, GetLiveCodeRequest, IdCardVerificationRequest, BankCardVerificationRequest, CheckBankCardInformationResponse, CheckIdCardInformationResponse, GetDetectInfoEnhancedResponse, PhoneVerificationRequest, GetRealNameAuthResultRequest, DetectAuthResponse, PhoneVerificationResponse, IdCardOCRVerificationRequest, CheckPhoneAndNameResponse, BankCard4EVerificationResponse, MobileStatusRequest, GetRealNameAuthTokenRequest, BankCard2EVerificationRequest, LivenessRecognitionRequest, GetFaceIdTokenResponse, IdCardOCRVerificationResponse, MobileStatusResponse, GetRealNameAuthTokenResponse, LivenessResponse, CheckIdCardInformationRequest, DetectAuthRequest, MinorsVerificationResponse, BankCardVerificationResponse, ImageRecognitionRequest, BankCard4EVerificationRequest, MobileNetworkTimeVerificationRequest, GetFaceIdResultRequest, GetActionSequenceResponse, LivenessRecognitionResponse, MinorsVerificationRequest, ImageRecognitionResponse, GetActionSequenceRequest, GetDetectInfoResponse, LivenessCompareResponse, GetLiveCodeResponse, GetDetectInfoRequest, BankCard2EVerificationResponse, IdCardVerificationResponse, CheckPhoneAndNameRequest, LivenessCompareRequest, GetFaceIdResultResponse, GetRealNameAuthResultResponse } from "./faceid_models";
 /**
  * faceid client
  * @class
@@ -39,6 +39,10 @@ export declare class Client extends AbstractClient {
      * 传入身份证人像面照片，识别身份证照片上的信息，并将姓名、身份证号、身份证人像照片与公安权威库的证件照进行比对，是否属于同一个人，从而验证身份证信息的真实性。
      */
     CheckIdCardInformation(req: CheckIdCardInformationRequest, cb?: (error: string, rep: CheckIdCardInformationResponse) => void): Promise<CheckIdCardInformationResponse>;
+    /**
+     * 微信实名认证授权
+     */
+    GetRealNameAuthToken(req: GetRealNameAuthTokenRequest, cb?: (error: string, rep: GetRealNameAuthTokenResponse) => void): Promise<GetRealNameAuthTokenResponse>;
     /**
      * 本接口用于校验姓名和身份证号的真实性和一致性，您可以通过输入姓名和身份证号或传入身份证人像面照片提供所需验证信息。
      */
@@ -99,4 +103,8 @@ export declare class Client extends AbstractClient {
      * 本接口用于校验姓名和银行卡号的真实性和一致性。
      */
     BankCard2EVerification(req: BankCard2EVerificationRequest, cb?: (error: string, rep: BankCard2EVerificationResponse) => void): Promise<BankCard2EVerificationResponse>;
+    /**
+     * 获取微信实名认证结果
+     */
+    GetRealNameAuthResult(req: GetRealNameAuthResultRequest, cb?: (error: string, rep: GetRealNameAuthResultResponse) => void): Promise<GetRealNameAuthResultResponse>;
 }

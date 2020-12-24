@@ -76,6 +76,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CheckIdCardInformation", req, cb);
     }
     /**
+     * 微信实名认证授权
+     */
+    async GetRealNameAuthToken(req, cb) {
+        return this.request("GetRealNameAuthToken", req, cb);
+    }
+    /**
      * 本接口用于校验姓名和身份证号的真实性和一致性，您可以通过输入姓名和身份证号或传入身份证人像面照片提供所需验证信息。
      */
     async IdCardOCRVerification(req, cb) {
@@ -164,6 +170,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async BankCard2EVerification(req, cb) {
         return this.request("BankCard2EVerification", req, cb);
+    }
+    /**
+     * 获取微信实名认证结果
+     */
+    async GetRealNameAuthResult(req, cb) {
+        return this.request("GetRealNameAuthResult", req, cb);
     }
 }
 exports.Client = Client;

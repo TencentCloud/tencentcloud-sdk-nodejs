@@ -422,6 +422,16 @@ export interface PhoneVerificationRequest {
 }
 
 /**
+ * GetRealNameAuthResult请求参数结构体
+ */
+export interface GetRealNameAuthResultRequest {
+  /**
+   * 实名认证凭证
+   */
+  AuthToken: string
+}
+
+/**
  * DetectAuth返回参数结构体
  */
 export interface DetectAuthResponse {
@@ -584,40 +594,23 @@ export interface MobileStatusRequest {
 }
 
 /**
- * LivenessRecognition返回参数结构体
+ * GetRealNameAuthToken请求参数结构体
  */
-export interface LivenessRecognitionResponse {
+export interface GetRealNameAuthTokenRequest {
   /**
-      * 验证通过后的视频最佳截图照片，照片为BASE64编码后的值，jpg格式。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BestFrameBase64?: string
-
-  /**
-   * 相似度，取值范围 [0.00, 100.00]。推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）
+   * 姓名
    */
-  Sim?: number
+  Name: string
 
   /**
-   * 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分
+   * 身份证号
    */
-  Result?: string
+  IDCard: string
 
   /**
-   * 业务结果描述。
+   * 回调地址。实名认证完成后，将会重定向到这个地址通知认证发起方
    */
-  Description?: string
-
-  /**
-      * 最佳截图列表，仅在配置了返回多张最佳截图时返回。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BestFrameList?: Array<string>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  CallbackURL: string
 }
 
 /**
@@ -784,6 +777,26 @@ export interface MobileStatusResponse {
 99：未知状态
       */
   StatusCode?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetRealNameAuthToken返回参数结构体
+ */
+export interface GetRealNameAuthTokenResponse {
+  /**
+   * 查询实名认证结果的唯一凭证
+   */
+  AuthToken?: string
+
+  /**
+   * 实名认证授权地址，认证发起方需要重定向到这个地址获取认证用户的授权
+   */
+  RedirectURL?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1222,6 +1235,43 @@ export interface GetActionSequenceResponse {
    * 动作顺序(2,1 or 1,2) 。1代表张嘴，2代表闭眼。
    */
   ActionSequence?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * LivenessRecognition返回参数结构体
+ */
+export interface LivenessRecognitionResponse {
+  /**
+      * 验证通过后的视频最佳截图照片，照片为BASE64编码后的值，jpg格式。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BestFrameBase64?: string
+
+  /**
+   * 相似度，取值范围 [0.00, 100.00]。推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）
+   */
+  Sim?: number
+
+  /**
+   * 业务错误码，成功情况返回Success, 错误情况请参考下方错误码 列表中FailedOperation部分
+   */
+  Result?: string
+
+  /**
+   * 业务结果描述。
+   */
+  Description?: string
+
+  /**
+      * 最佳截图列表，仅在配置了返回多张最佳截图时返回。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BestFrameList?: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1720,6 +1770,29 @@ export interface GetFaceIdResultResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Extra?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetRealNameAuthResult返回参数结构体
+ */
+export interface GetRealNameAuthResultResponse {
+  /**
+      * 认证结果码，收费情况如下：
+
+收费码：
+0:  姓名和身份证号一致
+-1: 姓名和身份证号不一致
+-2: 姓名和微信实名姓名不一致
+
+不收费码：
+-3: 微信号未实名
+      */
+  ResultType?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

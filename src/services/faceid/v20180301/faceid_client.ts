@@ -32,18 +32,20 @@ import {
   CheckIdCardInformationResponse,
   GetDetectInfoEnhancedResponse,
   PhoneVerificationRequest,
+  GetRealNameAuthResultRequest,
   DetectAuthResponse,
   PhoneVerificationResponse,
   IdCardOCRVerificationRequest,
   CheckPhoneAndNameResponse,
   BankCard4EVerificationResponse,
   MobileStatusRequest,
-  LivenessRecognitionResponse,
+  GetRealNameAuthTokenRequest,
   BankCard2EVerificationRequest,
   LivenessRecognitionRequest,
   GetFaceIdTokenResponse,
   IdCardOCRVerificationResponse,
   MobileStatusResponse,
+  GetRealNameAuthTokenResponse,
   LivenessResponse,
   CheckIdCardInformationRequest,
   DetectInfoText,
@@ -55,6 +57,7 @@ import {
   MobileNetworkTimeVerificationRequest,
   GetFaceIdResultRequest,
   GetActionSequenceResponse,
+  LivenessRecognitionResponse,
   MinorsVerificationRequest,
   ImageRecognitionResponse,
   GetActionSequenceRequest,
@@ -69,6 +72,7 @@ import {
   LivenessCompareRequest,
   DetectDetail,
   GetFaceIdResultResponse,
+  GetRealNameAuthResultResponse,
 } from "./faceid_models"
 
 /**
@@ -158,6 +162,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CheckIdCardInformationResponse) => void
   ): Promise<CheckIdCardInformationResponse> {
     return this.request("CheckIdCardInformation", req, cb)
+  }
+
+  /**
+   * 微信实名认证授权
+   */
+  async GetRealNameAuthToken(
+    req: GetRealNameAuthTokenRequest,
+    cb?: (error: string, rep: GetRealNameAuthTokenResponse) => void
+  ): Promise<GetRealNameAuthTokenResponse> {
+    return this.request("GetRealNameAuthToken", req, cb)
   }
 
   /**
@@ -308,5 +322,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BankCard2EVerificationResponse) => void
   ): Promise<BankCard2EVerificationResponse> {
     return this.request("BankCard2EVerification", req, cb)
+  }
+
+  /**
+   * 获取微信实名认证结果
+   */
+  async GetRealNameAuthResult(
+    req: GetRealNameAuthResultRequest,
+    cb?: (error: string, rep: GetRealNameAuthResultResponse) => void
+  ): Promise<GetRealNameAuthResultResponse> {
+    return this.request("GetRealNameAuthResult", req, cb)
   }
 }

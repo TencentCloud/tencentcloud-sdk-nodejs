@@ -280,6 +280,11 @@ export interface ModifySubDomainRequest {
    * 网络类型 （'INNER' 或 'OUTER'）
    */
   NetType?: string
+
+  /**
+   * 是否将HTTP请求强制跳转 HTTPS，默认为false。参数为 true时，API网关会将所有使用该自定义域名的 HTTP 协议的请求重定向至 HTTPS 协议进行转发。
+   */
+  IsForcedHttps?: boolean
 }
 
 /**
@@ -861,6 +866,12 @@ export interface ModifyIPStrategyResponse {
  * BindSubDomain返回参数结构体
  */
 export interface BindSubDomainResponse {
+  /**
+      * 绑定操作是否成功。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result?: boolean
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3636,6 +3647,11 @@ export interface BindSubDomainRequest {
    * 自定义域名路径映射，最多输入三个Environment，并且只能分别取值“test”、 ”prepub“、”release“。
    */
   PathMappingSet?: Array<PathMapping>
+
+  /**
+   * 是否将HTTP请求强制跳转 HTTPS，默认为false。参数为 true时，API网关会将所有使用该自定义域名的 HTTP 协议的请求重定向至 HTTPS 协议进行转发。
+   */
+  IsForcedHttps?: boolean
 }
 
 /**

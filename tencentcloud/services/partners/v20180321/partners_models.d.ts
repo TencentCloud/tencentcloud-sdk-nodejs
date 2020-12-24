@@ -301,6 +301,19 @@ export interface DescribeClientBalanceRequest {
     ClientUin: string;
 }
 /**
+ * 产品详情
+ */
+export interface ProductInfoElem {
+    /**
+      * 产品属性
+      */
+    Name: string;
+    /**
+      * 产品属性值
+      */
+    Value: string;
+}
+/**
  * RemovePayRelationForClient返回参数结构体
  */
 export interface RemovePayRelationForClientResponse {
@@ -938,6 +951,11 @@ export interface AgentDealElem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     OverdueTime: string;
+    /**
+      * 产品详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProductInfo: Array<ProductInfoElem>;
 }
 /**
  * 代理商业务员信息

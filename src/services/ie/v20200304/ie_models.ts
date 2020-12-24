@@ -27,6 +27,20 @@ export interface MediaJoiningTaskResult {
 }
 
 /**
+ * 音频降噪
+ */
+export interface Denoise {
+  /**
+      * 音频降噪强度，可选项：
+1. weak
+2.normal，
+3.strong
+默认为weak
+      */
+  Type?: string
+}
+
+/**
  * 智能拆条结果项
  */
 export interface StripTaskResultItem {
@@ -1451,6 +1465,11 @@ export interface AudioInfo {
    * 采样率，单位：Hz。可选项：32000，44100,48000
    */
   SampleRate: number
+
+  /**
+   * 音频降噪信息
+   */
+  Denoise?: Denoise
 }
 
 /**
