@@ -76,13 +76,62 @@ export interface RenewDiskRequest {
 }
 
 /**
- * TerminateDisks返回参数结构体
+ * 描述预付费或后付费云盘的价格。
  */
-export interface TerminateDisksResponse {
+export interface Price {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+      * 预付费云盘预支费用的原价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OriginalPrice?: number
+
+  /**
+      * 预付费云盘预支费用的折扣价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiscountPrice?: number
+
+  /**
+      * 后付费云盘原单价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnitPrice: number
+
+  /**
+      * 后付费云盘的计价单元，取值范围：<br><li>HOUR：表示后付费云盘的计价单元是按小时计算。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ChargeUnit: string
+
+  /**
+      * 后付费云盘折扣单价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnitPriceDiscount: number
+
+  /**
+      * 高精度预付费云盘预支费用的原价, 单位：元	。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OriginalPriceHigh: string
+
+  /**
+      * 高精度预付费云盘预支费用的折扣价, 单位：元
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiscountPriceHigh: string
+
+  /**
+      * 高精度后付费云盘原单价, 单位：元
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnitPriceHigh: string
+
+  /**
+      * 高精度后付费云盘折扣单价, 单位：元
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UnitPriceDiscountHigh: string
 }
 
 /**
@@ -113,6 +162,21 @@ export interface SharePermission {
    * 分享的账号Id
    */
   AccountId: string
+}
+
+/**
+ * ModifyDiskExtraPerformance请求参数结构体
+ */
+export interface ModifyDiskExtraPerformanceRequest {
+  /**
+   * 需要创建快照的云硬盘ID，可通过[DescribeDisks](/document/product/362/16315)接口查询。
+   */
+  DiskId: string
+
+  /**
+   * 额外购买的云硬盘性能值，单位MB/s。
+   */
+  ThroughputPerformance: number
 }
 
 /**
@@ -276,6 +340,21 @@ export interface ModifySnapshotsSharePermissionResponse {
 }
 
 /**
+ * InquirePriceModifyDiskExtraPerformance请求参数结构体
+ */
+export interface InquirePriceModifyDiskExtraPerformanceRequest {
+  /**
+   * 云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询。
+   */
+  DiskId: string
+
+  /**
+   * 额外购买的云硬盘性能值，单位MB/s。
+   */
+  ThroughputPerformance: number
+}
+
+/**
  * GetSnapOverview请求参数结构体
  */
 export type GetSnapOverviewRequest = null
@@ -427,62 +506,13 @@ export interface ModifyDisksChargeTypeRequest {
 }
 
 /**
- * 描述预付费或后付费云盘的价格。
+ * ModifyDiskExtraPerformance返回参数结构体
  */
-export interface Price {
+export interface ModifyDiskExtraPerformanceResponse {
   /**
-      * 预付费云盘预支费用的原价，单位：元。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OriginalPrice?: number
-
-  /**
-      * 预付费云盘预支费用的折扣价，单位：元。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DiscountPrice?: number
-
-  /**
-      * 后付费云盘原单价，单位：元。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UnitPrice: number
-
-  /**
-      * 后付费云盘的计价单元，取值范围：<br><li>HOUR：表示后付费云盘的计价单元是按小时计算。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ChargeUnit: string
-
-  /**
-      * 后付费云盘折扣单价，单位：元。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UnitPriceDiscount: number
-
-  /**
-      * 高精度预付费云盘预支费用的原价, 单位：元	。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OriginalPriceHigh: string
-
-  /**
-      * 高精度预付费云盘预支费用的折扣价, 单位：元
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DiscountPriceHigh: string
-
-  /**
-      * 高精度后付费云盘原单价, 单位：元
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UnitPriceHigh: string
-
-  /**
-      * 高精度后付费云盘折扣单价, 单位：元
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UnitPriceDiscountHigh: string
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -716,6 +746,16 @@ export interface DescribeDiskAssociatedAutoSnapshotPolicyResponse {
    */
   AutoSnapshotPolicySet?: Array<AutoSnapshotPolicy>
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * TerminateDisks返回参数结构体
+ */
+export interface TerminateDisksResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1202,6 +1242,21 @@ export interface DescribeDiskOperationLogsRequest {
 }
 
 /**
+ * InquirePriceModifyDiskExtraPerformance返回参数结构体
+ */
+export interface InquirePriceModifyDiskExtraPerformanceResponse {
+  /**
+   * 描述了调整云盘额外性能时对应的价格。
+   */
+  DiskPrice?: Price
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * BindAutoSnapshotPolicy返回参数结构体
  */
 export interface BindAutoSnapshotPolicyResponse {
@@ -1216,7 +1271,7 @@ export interface BindAutoSnapshotPolicyResponse {
  */
 export interface CreateDisksRequest {
   /**
-   * 硬盘介质类型。取值范围：<br><li>CLOUD_BASIC：表示普通云硬盘<br><li>CLOUD_PREMIUM：表示高性能云硬盘<br><li>CLOUD_SSD：表示SSD云硬盘<br><li>CLOUD_HSSD：表示增强型SSD云硬盘。
+   * 硬盘介质类型。取值范围：<br><li>CLOUD_BASIC：表示普通云硬盘<br><li>CLOUD_PREMIUM：表示高性能云硬盘<br><li>CLOUD_SSD：表示SSD云硬盘<br><li>CLOUD_HSSD：表示增强型SSD云硬盘<br><li>CLOUD_TSSD：表示极速型SSD云硬盘。
    */
   DiskType: string
 
@@ -1274,6 +1329,11 @@ export interface CreateDisksRequest {
    * 可选参数，默认为False。传入True时，云盘将创建为共享型云盘。
    */
   Shareable?: boolean
+
+  /**
+   * 可选参数。使用此参数可给云硬盘购买额外的性能。<br>当前仅支持极速型云盘（CLOUD_TSSD）和增强型SSD云硬盘（CLOUD_HSSD）
+   */
+  ThroughputPerformance?: number
 }
 
 /**

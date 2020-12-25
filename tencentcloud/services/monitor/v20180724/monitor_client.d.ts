@@ -18,7 +18,7 @@ export declare class Client extends AbstractClient {
      */
     PutMonitorData(req: PutMonitorDataRequest, cb?: (error: string, rep: PutMonitorDataResponse) => void): Promise<PutMonitorDataResponse>;
     /**
-     * 告警策略列表
+     * 查询告警策略列表
      */
     DescribeAlarmPolicies(req: DescribeAlarmPoliciesRequest, cb?: (error: string, rep: DescribeAlarmPoliciesResponse) => void): Promise<DescribeAlarmPoliciesResponse>;
     /**
@@ -78,7 +78,7 @@ export declare class Client extends AbstractClient {
      */
     BindingPolicyObject(req: BindingPolicyObjectRequest, cb?: (error: string, rep: BindingPolicyObjectResponse) => void): Promise<BindingPolicyObjectResponse>;
     /**
-     * 云监控告警创建告警通知模板
+     * 创建通知模板
      */
     CreateAlarmNotice(req: CreateAlarmNoticeRequest, cb?: (error: string, rep: CreateAlarmNoticeResponse) => void): Promise<CreateAlarmNoticeResponse>;
     /**
@@ -94,7 +94,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeProductList(req: DescribeProductListRequest, cb?: (error: string, rep: DescribeProductListResponse) => void): Promise<DescribeProductListResponse>;
     /**
-     * 拉取所有名字空间
+     * 查询所有名字空间
      */
     DescribeAllNamespaces(req: DescribeAllNamespacesRequest, cb?: (error: string, rep: DescribeAllNamespacesResponse) => void): Promise<DescribeAllNamespacesResponse>;
     /**
@@ -104,7 +104,7 @@ export declare class Client extends AbstractClient {
      */
     CreateServiceDiscovery(req: CreateServiceDiscoveryRequest, cb?: (error: string, rep: CreateServiceDiscoveryResponse) => void): Promise<CreateServiceDiscoveryResponse>;
     /**
-     * 云监控告警查询告警通知模板列表
+     * 查询通知模板列表
      */
     DescribeAlarmNotices(req: DescribeAlarmNoticesRequest, cb?: (error: string, rep: DescribeAlarmNoticesResponse) => void): Promise<DescribeAlarmNoticesResponse>;
     /**
@@ -155,7 +155,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyAlarmPolicyInfo(req: ModifyAlarmPolicyInfoRequest, cb?: (error: string, rep: ModifyAlarmPolicyInfoResponse) => void): Promise<ModifyAlarmPolicyInfoResponse>;
     /**
-     * 告警历史列表
+     * 查询告警历史
      */
     DescribeAlarmHistories(req: DescribeAlarmHistoriesRequest, cb?: (error: string, rep: DescribeAlarmHistoriesResponse) => void): Promise<DescribeAlarmHistoriesResponse>;
     /**
@@ -163,7 +163,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeAlarmMetrics(req: DescribeAlarmMetricsRequest, cb?: (error: string, rep: DescribeAlarmMetricsResponse) => void): Promise<DescribeAlarmMetricsResponse>;
     /**
-     * 修改告警策略的启停状态
+     * 启停告警策略
      */
     ModifyAlarmPolicyStatus(req: ModifyAlarmPolicyStatusRequest, cb?: (error: string, rep: ModifyAlarmPolicyStatusResponse) => void): Promise<ModifyAlarmPolicyStatusResponse>;
     /**
@@ -171,7 +171,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeBaseMetrics(req: DescribeBaseMetricsRequest, cb?: (error: string, rep: DescribeBaseMetricsResponse) => void): Promise<DescribeBaseMetricsResponse>;
     /**
-     * 云监控告警获取告警通知模板详情
+     * 查询单个通知模板的详情
      */
     DescribeAlarmNotice(req: DescribeAlarmNoticeRequest, cb?: (error: string, rep: DescribeAlarmNoticeResponse) => void): Promise<DescribeAlarmNoticeResponse>;
     /**
@@ -197,7 +197,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyPolicyGroup(req: ModifyPolicyGroupRequest, cb?: (error: string, rep: ModifyPolicyGroupResponse) => void): Promise<ModifyPolicyGroupResponse>;
     /**
-     * 告警策略详情
+     * 获取单个告警策略详情
      */
     DescribeAlarmPolicy(req: DescribeAlarmPolicyRequest, cb?: (error: string, rep: DescribeAlarmPolicyResponse) => void): Promise<DescribeAlarmPolicyResponse>;
 }

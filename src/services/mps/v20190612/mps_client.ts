@@ -784,9 +784,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 对已发起的任务进行管理。
-> 注意：目前仅支持终止执行中的直播流处理任务。
-     */
+   * 对已发起的任务进行管理。
+   */
   async ManageTask(
     req: ManageTaskRequest,
     cb?: (error: string, rep: ManageTaskResponse) => void

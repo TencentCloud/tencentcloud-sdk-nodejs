@@ -1,4 +1,8 @@
 /**
+ * DescribeInternetAddressQuota请求参数结构体
+ */
+export declare type DescribeInternetAddressQuotaRequest = null;
+/**
  * bgp参数，包括Asn，AuthKey
  */
 export interface BgpPeer {
@@ -101,15 +105,6 @@ export interface ModifyDirectConnectAttributeRequest {
       * 物理专线申请者补签用户使用协议
       */
     SignLaw?: boolean;
-}
-/**
- * DeleteDirectConnectTunnel请求参数结构体
- */
-export interface DeleteDirectConnectTunnelRequest {
-    /**
-      * 专用通道ID
-      */
-    DirectConnectTunnelId: string;
 }
 /**
  * CreateDirectConnect返回参数结构体
@@ -298,6 +293,75 @@ export interface DirectConnect {
     SignLaw: boolean;
 }
 /**
+ * 互联网地址详细信息
+ */
+export interface InternetAddressDetail {
+    /**
+      * 互联网地址ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceId: string;
+    /**
+      * 互联网网络地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Subnet: string;
+    /**
+      * 网络地址掩码长度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaskLen: number;
+    /**
+      * 0:BGP
+1:电信
+2:移动
+3:联通
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AddrType: number;
+    /**
+      * 0:使用中
+1:已停用
+2:已退还
+      */
+    Status: number;
+    /**
+      * 申请时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApplyTime: string;
+    /**
+      * 停用时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StopTime: string;
+    /**
+      * 退还时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReleaseTime: string;
+    /**
+      * 地域信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Region: string;
+    /**
+      * 用户ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AppId: number;
+    /**
+      * 0:IPv4 1:IPv6
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AddrProto: number;
+    /**
+      * 释放状态的IP地址保留的天数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReserveTime: number;
+}
+/**
  * DescribeAccessPoints返回参数结构体
  */
 export interface DescribeAccessPointsResponse {
@@ -315,13 +379,13 @@ export interface DescribeAccessPointsResponse {
     RequestId?: string;
 }
 /**
- * AcceptDirectConnectTunnel返回参数结构体
+ * DeleteDirectConnectTunnel请求参数结构体
  */
-export interface AcceptDirectConnectTunnelResponse {
+export interface DeleteDirectConnectTunnelRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 专用通道ID
       */
-    RequestId?: string;
+    DirectConnectTunnelId: string;
 }
 /**
  * AcceptDirectConnectTunnel请求参数结构体
@@ -331,6 +395,15 @@ export interface AcceptDirectConnectTunnelRequest {
       * 物理专线拥有者接受共享专用通道申请
       */
     DirectConnectTunnelId: string;
+}
+/**
+ * ReleaseInternetAddress请求参数结构体
+ */
+export interface ReleaseInternetAddressRequest {
+    /**
+      * 公网互联网地址ID
+      */
+    InstanceId: string;
 }
 /**
  * DescribeDirectConnectTunnelExtra返回参数结构体
@@ -362,6 +435,20 @@ export interface RouteFilterPrefix {
       * 用户侧网段地址
       */
     Cidr?: string;
+}
+/**
+ * ApplyInternetAddress返回参数结构体
+ */
+export interface ApplyInternetAddressResponse {
+    /**
+      * 互联网公网地址ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceId?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * bgp状态信息
@@ -522,6 +609,31 @@ REJECTED:拒绝
       * BGP状态
       */
     BgpStatus: BGPStatus;
+    /**
+      * 是否开启IPv6
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IPv6Enable: number;
+    /**
+      * 腾讯侧互联IPv6地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TencentIPv6Address: string;
+    /**
+      * 腾讯侧备用互联IPv6地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TencentBackupIPv6Address: string;
+    /**
+      * BGPv6状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BgpIPv6Status: BGPStatus;
+    /**
+      * 用户侧互联IPv6地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CustomerIPv6Address: string;
 }
 /**
  * 标签键值对
@@ -635,6 +747,36 @@ export interface ModifyDirectConnectTunnelExtraResponse {
     RequestId?: string;
 }
 /**
+ * EnableInternetAddress返回参数结构体
+ */
+export interface EnableInternetAddressResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ApplyInternetAddress请求参数结构体
+ */
+export interface ApplyInternetAddressRequest {
+    /**
+      * CIDR地址掩码长度
+      */
+    MaskLen: number;
+    /**
+      * 0:BGP类型地址
+1：中国电信
+2：中国移动
+3：中国联通
+      */
+    AddrType: number;
+    /**
+      * 0：IPv4
+1:IPv6
+      */
+    AddrProto: number;
+}
+/**
  * DescribeDirectConnects返回参数结构体
  */
 export interface DescribeDirectConnectsResponse {
@@ -676,25 +818,13 @@ export interface DescribeAccessPointsRequest {
     Limit?: number;
 }
 /**
- * DescribeDirectConnects请求参数结构体
+ * AcceptDirectConnectTunnel返回参数结构体
  */
-export interface DescribeDirectConnectsRequest {
+export interface AcceptDirectConnectTunnelResponse {
     /**
-      * 过滤条件:
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Filters?: Array<Filter>;
-    /**
-      * 物理专线 ID数组
-      */
-    DirectConnectIds?: Array<string>;
-    /**
-      * 偏移量，默认为0
-      */
-    Offset?: number;
-    /**
-      * 返回数量，默认为20，最大值为100
-      */
-    Limit?: number;
+    RequestId?: string;
 }
 /**
  * DescribeDirectConnectTunnels请求参数结构体
@@ -720,6 +850,24 @@ export interface DescribeDirectConnectTunnelsRequest {
       * 返回数量，默认为20，最大值为100
       */
     Limit?: number;
+}
+/**
+ * DescribeInternetAddress返回参数结构体
+ */
+export interface DescribeInternetAddressResponse {
+    /**
+      * 互联网公网地址数量
+      */
+    TotalCount?: number;
+    /**
+      * 互联网公网地址列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Subnets?: Array<InternetAddressDetail>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ModifyDirectConnectTunnelAttribute请求参数结构体
@@ -770,6 +918,34 @@ export interface Filter {
       * 字段的过滤值。
       */
     Values: Array<string>;
+}
+/**
+ * DisableInternetAddress返回参数结构体
+ */
+export interface DisableInternetAddressResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeInternetAddressStatistics请求参数结构体
+ */
+export declare type DescribeInternetAddressStatisticsRequest = null;
+/**
+ * 互联网公网地址统计
+ */
+export interface InternetAddressStatistics {
+    /**
+      * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Region: string;
+    /**
+      * 互联网公网地址数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubnetNum: number;
 }
 /**
  * CreateDirectConnect请求参数结构体
@@ -846,6 +1022,15 @@ export interface CreateDirectConnectRequest {
     SignLaw?: boolean;
 }
 /**
+ * EnableInternetAddress请求参数结构体
+ */
+export interface EnableInternetAddressRequest {
+    /**
+      * 互联网公网地址ID
+      */
+    InstanceId: string;
+}
+/**
  * ModifyDirectConnectAttribute返回参数结构体
  */
 export interface ModifyDirectConnectAttributeResponse {
@@ -910,6 +1095,11 @@ export interface ModifyDirectConnectTunnelExtraRequest {
       * NQA配置信息
       */
     NqaInfo?: NQAInfo;
+    /**
+      * 0：停用IPv6
+1: 启用IPv6
+      */
+    IPv6Enable?: number;
 }
 /**
  * RejectDirectConnectTunnel返回参数结构体
@@ -932,6 +1122,27 @@ export interface CreateDirectConnectTunnelResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeDirectConnects请求参数结构体
+ */
+export interface DescribeDirectConnectsRequest {
+    /**
+      * 过滤条件:
+      */
+    Filters?: Array<Filter>;
+    /**
+      * 物理专线 ID数组
+      */
+    DirectConnectIds?: Array<string>;
+    /**
+      * 偏移量，默认为0
+      */
+    Offset?: number;
+    /**
+      * 返回数量，默认为20，最大值为100
+      */
+    Limit?: number;
 }
 /**
  * DeleteDirectConnectTunnel返回参数结构体
@@ -1016,6 +1227,24 @@ export interface AccessPoint {
     AvailablePortType: Array<string>;
 }
 /**
+ * DescribeInternetAddressStatistics返回参数结构体
+ */
+export interface DescribeInternetAddressStatisticsResponse {
+    /**
+      * 互联网公网地址统计信息数量
+      */
+    TotalCount?: number;
+    /**
+      * 互联网公网地址统计信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InternetAddressStatistics?: Array<InternetAddressStatistics>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * nqa配置信息
  */
 export interface NQAInfo {
@@ -1033,6 +1262,28 @@ export interface NQAInfo {
     DestinationIp?: string;
 }
 /**
+ * DescribeInternetAddress请求参数结构体
+ */
+export interface DescribeInternetAddressRequest {
+    /**
+      * 偏移量，默认为0
+      */
+    Offset?: number;
+    /**
+      * 返回数量，默认为20，最大值100
+      */
+    Limit?: number;
+    /**
+      * 过滤条件：
+<li>AddrType, 地址类型。0：BGP 1; 1: 电信， 2：移动， 3：联通</li>
+<li>AddrProto地址类型。0：IPv4 1:IPv6</li>
+<li>Status 地址状态。 0：使用中， 1：已停用， 2：已退还</li>
+<li>Subnet 互联网公网地址，数组</li>
+<InstanceIds>互联网公网地址ID，数组</li>
+      */
+    Filters?: Array<Filter>;
+}
+/**
  * DescribePublicDirectConnectTunnelRoutes返回参数结构体
  */
 export interface DescribePublicDirectConnectTunnelRoutesResponse {
@@ -1044,6 +1295,49 @@ export interface DescribePublicDirectConnectTunnelRoutesResponse {
       * 记录总数
       */
     TotalCount?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeInternetAddressQuota返回参数结构体
+ */
+export interface DescribeInternetAddressQuotaResponse {
+    /**
+      * IPv6互联网公网允许的最小前缀长度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Ipv6PrefixLen?: number;
+    /**
+      * BGP类型IPv4互联网地址配额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Ipv4BgpQuota?: number;
+    /**
+      * 非BGP类型IPv4互联网地址配额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Ipv4OtherQuota?: number;
+    /**
+      * BGP类型IPv4互联网地址已使用数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Ipv4BgpNum?: number;
+    /**
+      * 非BGP类型互联网地址已使用数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Ipv4OtherNum?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ReleaseInternetAddress返回参数结构体
+ */
+export interface ReleaseInternetAddressResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1194,4 +1488,13 @@ REJECTED:拒绝
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CloudAttachId: string;
+}
+/**
+ * DisableInternetAddress请求参数结构体
+ */
+export interface DisableInternetAddressRequest {
+    /**
+      * 公网互联网地址ID
+      */
+    InstanceId: string;
 }

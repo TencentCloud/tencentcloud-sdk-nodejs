@@ -40,7 +40,7 @@ export declare class Client extends AbstractClient {
      */
     CheckIdCardInformation(req: CheckIdCardInformationRequest, cb?: (error: string, rep: CheckIdCardInformationResponse) => void): Promise<CheckIdCardInformationResponse>;
     /**
-     * 微信实名认证授权
+     * 输入姓名和身份证号验证与微信实名的信息是否一致
      */
     GetRealNameAuthToken(req: GetRealNameAuthTokenRequest, cb?: (error: string, rep: GetRealNameAuthTokenResponse) => void): Promise<GetRealNameAuthTokenResponse>;
     /**

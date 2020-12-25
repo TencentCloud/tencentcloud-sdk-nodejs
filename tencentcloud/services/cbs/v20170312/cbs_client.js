@@ -28,6 +28,14 @@ class Client extends abstract_client_1.AbstractClient {
         super("cbs.tencentcloudapi.com", "2017-03-12", clientConfig);
     }
     /**
+     * 本接口（ModifyDiskExtraPerformance）用于调整云硬盘额外的性能。
+
+* 目前仅支持极速型SSD云硬盘（CLOUD_TSSD）和高性能SSD云硬盘(CLOUD_HSSD)。
+     */
+    async ModifyDiskExtraPerformance(req, cb) {
+        return this.request("ModifyDiskExtraPerformance", req, cb);
+    }
+    /**
      * 本接口（RenewDisk）用于续费云硬盘。
 
 * 只支持预付费的云硬盘。云硬盘类型可以通过[DescribeDisks](/document/product/362/16315)接口查询，见输出参数中DiskChargeType字段解释。
@@ -51,6 +59,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async InquiryPriceResizeDisk(req, cb) {
         return this.request("InquiryPriceResizeDisk", req, cb);
+    }
+    /**
+     * 本接口（InquirePriceModifyDiskExtraPerformance）用于调整云硬盘额外性能询价。
+     */
+    async InquirePriceModifyDiskExtraPerformance(req, cb) {
+        return this.request("InquirePriceModifyDiskExtraPerformance", req, cb);
     }
     /**
      * 本接口（DescribeAutoSnapshotPolicies）用于查询定期快照策略。

@@ -99,6 +99,15 @@ export interface NodeInfo {
     DiskEncrypt?: number;
 }
 /**
+ * GetRequestTargetNodeTypes请求参数结构体
+ */
+export interface GetRequestTargetNodeTypesRequest {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+}
+/**
  * DescribeInstanceOperations请求参数结构体
  */
 export interface DescribeInstanceOperationsRequest {
@@ -239,6 +248,19 @@ export interface DescribeInstanceLogsRequest {
 <li>1, 升序</li>
       */
     OrderByType?: number;
+}
+/**
+ * UpdateRequestTargetNodeTypes请求参数结构体
+ */
+export interface UpdateRequestTargetNodeTypesRequest {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 接收请求的目标节点类型列表
+      */
+    TargetNodeTypes: Array<string>;
 }
 /**
  * UpgradeLicense请求参数结构体
@@ -974,6 +996,15 @@ export interface UpdatePluginsRequest {
     ForceRestart?: boolean;
 }
 /**
+ * UpdateRequestTargetNodeTypes返回参数结构体
+ */
+export interface UpdateRequestTargetNodeTypesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * UpgradeLicense返回参数结构体
  */
 export interface UpgradeLicenseResponse {
@@ -1129,6 +1160,19 @@ export interface UpgradeInstanceRequest {
       * 升级方式：<li>scale 蓝绿变更</li><li>restart 滚动重启</li>默认值为scale
       */
     UpgradeMode?: string;
+}
+/**
+ * GetRequestTargetNodeTypes返回参数结构体
+ */
+export interface GetRequestTargetNodeTypesResponse {
+    /**
+      * 接收请求的目标节点类型列表
+      */
+    TargetNodeTypes?: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * RestartKibana返回参数结构体

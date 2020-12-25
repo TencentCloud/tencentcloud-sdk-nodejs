@@ -18,6 +18,26 @@ const client = new tencentcloud.dc.v20180410.Client({
 })
 describe("dc.v20180410.test.js", function () {
 
+it("dc.v20180410.ModifyDirectConnectTunnelExtra", async function () {
+    try {
+       const data = await client.ModifyDirectConnectTunnelExtra({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dc.v20180410.DisableInternetAddress", async function () {
+    try {
+       const data = await client.DisableInternetAddress({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dc.v20180410.DescribePublicDirectConnectTunnelRoutes", async function () {
     try {
        const data = await client.DescribePublicDirectConnectTunnelRoutes({})
@@ -28,9 +48,9 @@ it("dc.v20180410.DescribePublicDirectConnectTunnelRoutes", async function () {
     }
 })
 
-it("dc.v20180410.ModifyDirectConnectTunnelExtra", async function () {
+it("dc.v20180410.DescribeAccessPoints", async function () {
     try {
-       const data = await client.ModifyDirectConnectTunnelExtra({})
+       const data = await client.DescribeAccessPoints({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -88,6 +108,16 @@ it("dc.v20180410.AcceptDirectConnectTunnel", async function () {
     }
 })
 
+it("dc.v20180410.DescribeInternetAddressStatistics", async function () {
+    try {
+       const data = await client.DescribeInternetAddressStatistics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dc.v20180410.DeleteDirectConnectTunnel", async function () {
     try {
        const data = await client.DeleteDirectConnectTunnel({})
@@ -98,9 +128,39 @@ it("dc.v20180410.DeleteDirectConnectTunnel", async function () {
     }
 })
 
-it("dc.v20180410.DescribeAccessPoints", async function () {
+it("dc.v20180410.ApplyInternetAddress", async function () {
     try {
-       const data = await client.DescribeAccessPoints({})
+       const data = await client.ApplyInternetAddress({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dc.v20180410.EnableInternetAddress", async function () {
+    try {
+       const data = await client.EnableInternetAddress({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dc.v20180410.DescribeInternetAddressQuota", async function () {
+    try {
+       const data = await client.DescribeInternetAddressQuota({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dc.v20180410.DescribeInternetAddress", async function () {
+    try {
+       const data = await client.DescribeInternetAddress({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -141,6 +201,16 @@ it("dc.v20180410.RejectDirectConnectTunnel", async function () {
 it("dc.v20180410.DescribeDirectConnects", async function () {
     try {
        const data = await client.DescribeDirectConnects({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dc.v20180410.ReleaseInternetAddress", async function () {
+    try {
+       const data = await client.ReleaseInternetAddress({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -528,6 +528,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ForbidMediaDistribution", req, cb);
     }
     /**
+     * 对已发起的任务进行管理。
+     */
+    async ManageTask(req, cb) {
+        return this.request("ManageTask", req, cb);
+    }
+    /**
      * 获取图片处理模板列表，支持根据条件，分页查询。
      */
     async DescribeImageProcessingTemplates(req, cb) {

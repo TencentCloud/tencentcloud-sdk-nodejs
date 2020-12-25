@@ -1,12 +1,18 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DetachDisksRequest, DescribeDiskOperationLogsResponse, ResizeDiskRequest, RenewDiskRequest, TerminateDisksResponse, DescribeSnapshotSharePermissionResponse, ModifyDiskAttributesResponse, TerminateDisksRequest, ModifyDisksChargeTypeResponse, DescribeDisksRequest, DescribeInstancesDiskNumRequest, ModifySnapshotsSharePermissionResponse, GetSnapOverviewRequest, DescribeSnapshotOperationLogsRequest, ModifySnapshotAttributeRequest, InquiryPriceRenewDisksRequest, DescribeSnapshotSharePermissionRequest, RenewDiskResponse, InquiryPriceRenewDisksResponse, ModifyDisksRenewFlagRequest, ModifyAutoSnapshotPolicyAttributeResponse, ModifyDisksChargeTypeRequest, UnbindAutoSnapshotPolicyResponse, InquiryPriceCreateDisksResponse, BindAutoSnapshotPolicyRequest, CreateSnapshotResponse, DeleteSnapshotsRequest, DescribeDiskConfigQuotaRequest, DeleteAutoSnapshotPoliciesRequest, DescribeSnapshotOperationLogsResponse, ModifyDisksRenewFlagResponse, DescribeDiskAssociatedAutoSnapshotPolicyResponse, GetSnapOverviewResponse, ApplySnapshotResponse, DeleteAutoSnapshotPoliciesResponse, DescribeDisksResponse, ModifySnapshotAttributeResponse, DeleteSnapshotsResponse, DetachDisksResponse, InquiryPriceCreateDisksRequest, DescribeSnapshotsResponse, CreateDisksResponse, AttachDisksResponse, CreateAutoSnapshotPolicyResponse, ModifySnapshotsSharePermissionRequest, UnbindAutoSnapshotPolicyRequest, DescribeDiskOperationLogsRequest, BindAutoSnapshotPolicyResponse, CreateDisksRequest, AttachDisksRequest, DescribeAutoSnapshotPoliciesResponse, DescribeDiskAssociatedAutoSnapshotPolicyRequest, DescribeAutoSnapshotPoliciesRequest, DescribeDiskConfigQuotaResponse, ModifyDiskAttributesRequest, CreateSnapshotRequest, InquiryPriceResizeDiskResponse, DescribeInstancesDiskNumResponse, ResizeDiskResponse, DescribeSnapshotsRequest, CreateAutoSnapshotPolicyRequest, InquiryPriceResizeDiskRequest, ModifyAutoSnapshotPolicyAttributeRequest, ApplySnapshotRequest } from "./cbs_models";
+import { DetachDisksRequest, DescribeDiskOperationLogsResponse, ResizeDiskRequest, RenewDiskRequest, DescribeSnapshotSharePermissionResponse, ModifyDiskExtraPerformanceRequest, ModifyDiskAttributesResponse, TerminateDisksRequest, ModifyDisksChargeTypeResponse, DescribeDisksRequest, DescribeInstancesDiskNumRequest, ModifySnapshotsSharePermissionResponse, InquirePriceModifyDiskExtraPerformanceRequest, GetSnapOverviewRequest, DescribeSnapshotOperationLogsRequest, ModifySnapshotAttributeRequest, InquiryPriceRenewDisksRequest, DescribeSnapshotSharePermissionRequest, RenewDiskResponse, InquiryPriceRenewDisksResponse, ModifyDisksRenewFlagRequest, ModifyAutoSnapshotPolicyAttributeResponse, ModifyDisksChargeTypeRequest, ModifyDiskExtraPerformanceResponse, UnbindAutoSnapshotPolicyResponse, InquiryPriceCreateDisksResponse, BindAutoSnapshotPolicyRequest, CreateSnapshotResponse, DeleteSnapshotsRequest, DescribeDiskConfigQuotaRequest, DeleteAutoSnapshotPoliciesRequest, DescribeSnapshotOperationLogsResponse, ModifyDisksRenewFlagResponse, DescribeDiskAssociatedAutoSnapshotPolicyResponse, TerminateDisksResponse, GetSnapOverviewResponse, ApplySnapshotResponse, DeleteAutoSnapshotPoliciesResponse, DescribeDisksResponse, ModifySnapshotAttributeResponse, DeleteSnapshotsResponse, DetachDisksResponse, InquiryPriceCreateDisksRequest, DescribeSnapshotsResponse, CreateDisksResponse, AttachDisksResponse, CreateAutoSnapshotPolicyResponse, ModifySnapshotsSharePermissionRequest, UnbindAutoSnapshotPolicyRequest, DescribeDiskOperationLogsRequest, InquirePriceModifyDiskExtraPerformanceResponse, BindAutoSnapshotPolicyResponse, CreateDisksRequest, AttachDisksRequest, DescribeAutoSnapshotPoliciesResponse, DescribeDiskAssociatedAutoSnapshotPolicyRequest, DescribeAutoSnapshotPoliciesRequest, DescribeDiskConfigQuotaResponse, ModifyDiskAttributesRequest, CreateSnapshotRequest, InquiryPriceResizeDiskResponse, DescribeInstancesDiskNumResponse, ResizeDiskResponse, DescribeSnapshotsRequest, CreateAutoSnapshotPolicyRequest, InquiryPriceResizeDiskRequest, ModifyAutoSnapshotPolicyAttributeRequest, ApplySnapshotRequest } from "./cbs_models";
 /**
  * cbs client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 本接口（ModifyDiskExtraPerformance）用于调整云硬盘额外的性能。
+
+* 目前仅支持极速型SSD云硬盘（CLOUD_TSSD）和高性能SSD云硬盘(CLOUD_HSSD)。
+     */
+    ModifyDiskExtraPerformance(req: ModifyDiskExtraPerformanceRequest, cb?: (error: string, rep: ModifyDiskExtraPerformanceResponse) => void): Promise<ModifyDiskExtraPerformanceResponse>;
     /**
      * 本接口（RenewDisk）用于续费云硬盘。
 
@@ -26,6 +32,10 @@ export declare class Client extends AbstractClient {
 * 只支持预付费模式的云硬盘扩容询价。
      */
     InquiryPriceResizeDisk(req: InquiryPriceResizeDiskRequest, cb?: (error: string, rep: InquiryPriceResizeDiskResponse) => void): Promise<InquiryPriceResizeDiskResponse>;
+    /**
+     * 本接口（InquirePriceModifyDiskExtraPerformance）用于调整云硬盘额外性能询价。
+     */
+    InquirePriceModifyDiskExtraPerformance(req: InquirePriceModifyDiskExtraPerformanceRequest, cb?: (error: string, rep: InquirePriceModifyDiskExtraPerformanceResponse) => void): Promise<InquirePriceModifyDiskExtraPerformanceResponse>;
     /**
      * 本接口（DescribeAutoSnapshotPolicies）用于查询定期快照策略。
 

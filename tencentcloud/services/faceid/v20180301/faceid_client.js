@@ -76,7 +76,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CheckIdCardInformation", req, cb);
     }
     /**
-     * 微信实名认证授权
+     * 输入姓名和身份证号验证与微信实名的信息是否一致
      */
     async GetRealNameAuthToken(req, cb) {
         return this.request("GetRealNameAuthToken", req, cb);

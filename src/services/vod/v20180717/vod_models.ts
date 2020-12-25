@@ -692,6 +692,16 @@ export interface MediaMiniProgramReviewElem {
 }
 
 /**
+ * ManageTask返回参数结构体
+ */
+export interface ManageTaskResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateImageProcessingTemplate请求参数结构体
  */
 export interface CreateImageProcessingTemplateRequest {
@@ -963,33 +973,24 @@ export interface AiReviewTaskPoliticalOcrResult {
 }
 
 /**
- * AI 样本管理，关键词输出信息。
+ * ManageTask请求参数结构体
  */
-export interface AiSampleWord {
+export interface ManageTaskRequest {
   /**
-   * 关键词。
+   * 视频处理的任务 ID。
    */
-  Keyword: string
+  TaskId: string
 
   /**
-   * 关键词标签。
-   */
-  TagSet: Array<string>
+      * 操作类型，取值范围：
+<li>Abort：终止任务。只能终止已发起且状态为等待中（WAITING）的任务。</li>
+      */
+  OperationType: string
 
   /**
-   * 关键词应用场景。
+   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
    */
-  UsageSet: Array<string>
-
-  /**
-   * 创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-   */
-  CreateTime: string
-
-  /**
-   * 最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-   */
-  UpdateTime: string
+  SubAppId?: number
 }
 
 /**
@@ -1435,37 +1436,23 @@ export interface DeletePersonSampleRequest {
 }
 
 /**
- * 采样截图信息
+ * 语音识别片段。
  */
-export interface MediaSampleSnapshotItem {
+export interface AiRecognitionTaskAsrWordsSegmentItem {
   /**
-   * 采样截图规格 ID，参见[采样截图参数模板](https://cloud.tencent.com/document/product/266/33480#.E9.87.87.E6.A0.B7.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
+   * 识别片段起始的偏移时间，单位：秒。
    */
-  Definition: number
+  StartTimeOffset: number
 
   /**
-      * 采样方式，取值范围：
-<li>Percent：根据百分比间隔采样。</li>
-<li>Time：根据时间间隔采样。</li>
-      */
-  SampleType: string
-
-  /**
-      * 采样间隔
-<li>当 SampleType 为 Percent 时，该值表示多少百分比一张图。</li>
-<li>当 SampleType 为 Time 时，该值表示多少时间间隔一张图，单位秒， 第一张图均为视频首帧。</li>
-      */
-  Interval: number
-
-  /**
-   * 生成的截图 url 列表。
+   * 识别片段终止的偏移时间，单位：秒。
    */
-  ImageUrlSet: Array<string>
+  EndTimeOffset: number
 
   /**
-   * 截图如果被打上了水印，被打水印的模板 ID 列表。
+   * 识别片段置信度。取值：0~100。
    */
-  WaterMarkDefinition: Array<number>
+  Confidence: number
 }
 
 /**
@@ -4406,6 +4393,40 @@ export interface ProhibitedConfigureInfoForUpdate {
 }
 
 /**
+ * 采样截图信息
+ */
+export interface MediaSampleSnapshotItem {
+  /**
+   * 采样截图规格 ID，参见[采样截图参数模板](https://cloud.tencent.com/document/product/266/33480#.E9.87.87.E6.A0.B7.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
+   */
+  Definition: number
+
+  /**
+      * 采样方式，取值范围：
+<li>Percent：根据百分比间隔采样。</li>
+<li>Time：根据时间间隔采样。</li>
+      */
+  SampleType: string
+
+  /**
+      * 采样间隔
+<li>当 SampleType 为 Percent 时，该值表示多少百分比一张图。</li>
+<li>当 SampleType 为 Time 时，该值表示多少时间间隔一张图，单位秒， 第一张图均为视频首帧。</li>
+      */
+  Interval: number
+
+  /**
+   * 生成的截图 url 列表。
+   */
+  ImageUrlSet: Array<string>
+
+  /**
+   * 截图如果被打上了水印，被打水印的模板 ID 列表。
+   */
+  WaterMarkDefinition: Array<number>
+}
+
+/**
  * 智能标签任务控制参数
  */
 export interface TagConfigureInfoForUpdate {
@@ -5330,6 +5351,36 @@ export interface MediaProcessTaskSnapshotByTimeOffsetResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: MediaSnapshotByTimeOffsetItem
+}
+
+/**
+ * AI 样本管理，关键词输出信息。
+ */
+export interface AiSampleWord {
+  /**
+   * 关键词。
+   */
+  Keyword: string
+
+  /**
+   * 关键词标签。
+   */
+  TagSet: Array<string>
+
+  /**
+   * 关键词应用场景。
+   */
+  UsageSet: Array<string>
+
+  /**
+   * 创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  CreateTime: string
+
+  /**
+   * 最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  UpdateTime: string
 }
 
 /**
@@ -8355,26 +8406,6 @@ export interface AiReviewTaskPoliticalAsrResult {
    * 内容审核 Asr 文字鉴政任务输出。
    */
   Output: AiReviewPoliticalAsrTaskOutput
-}
-
-/**
- * 语音识别片段。
- */
-export interface AiRecognitionTaskAsrWordsSegmentItem {
-  /**
-   * 识别片段起始的偏移时间，单位：秒。
-   */
-  StartTimeOffset: number
-
-  /**
-   * 识别片段终止的偏移时间，单位：秒。
-   */
-  EndTimeOffset: number
-
-  /**
-   * 识别片段置信度。取值：0~100。
-   */
-  Confidence: number
 }
 
 /**

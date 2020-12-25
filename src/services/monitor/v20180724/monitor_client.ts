@@ -195,7 +195,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 告警策略列表
+   * 查询告警策略列表
    */
   async DescribeAlarmPolicies(
     req: DescribeAlarmPoliciesRequest,
@@ -339,7 +339,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 云监控告警创建告警通知模板
+   * 创建通知模板
    */
   async CreateAlarmNotice(
     req: CreateAlarmNoticeRequest,
@@ -379,7 +379,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 拉取所有名字空间
+   * 查询所有名字空间
    */
   async DescribeAllNamespaces(
     req: DescribeAllNamespacesRequest,
@@ -401,7 +401,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 云监控告警查询告警通知模板列表
+   * 查询通知模板列表
    */
   async DescribeAlarmNotices(
     req: DescribeAlarmNoticesRequest,
@@ -524,7 +524,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 告警历史列表
+   * 查询告警历史
    */
   async DescribeAlarmHistories(
     req: DescribeAlarmHistoriesRequest,
@@ -544,7 +544,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改告警策略的启停状态
+   * 启停告警策略
    */
   async ModifyAlarmPolicyStatus(
     req: ModifyAlarmPolicyStatusRequest,
@@ -564,7 +564,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 云监控告警获取告警通知模板详情
+   * 查询单个通知模板的详情
    */
   async DescribeAlarmNotice(
     req: DescribeAlarmNoticeRequest,
@@ -626,7 +626,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 告警策略详情
+   * 获取单个告警策略详情
    */
   async DescribeAlarmPolicy(
     req: DescribeAlarmPolicyRequest,

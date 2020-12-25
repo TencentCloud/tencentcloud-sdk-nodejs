@@ -40,7 +40,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("PutMonitorData", req, cb);
     }
     /**
-     * 告警策略列表
+     * 查询告警策略列表
      */
     async DescribeAlarmPolicies(req, cb) {
         return this.request("DescribeAlarmPolicies", req, cb);
@@ -128,7 +128,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BindingPolicyObject", req, cb);
     }
     /**
-     * 云监控告警创建告警通知模板
+     * 创建通知模板
      */
     async CreateAlarmNotice(req, cb) {
         return this.request("CreateAlarmNotice", req, cb);
@@ -152,7 +152,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeProductList", req, cb);
     }
     /**
-     * 拉取所有名字空间
+     * 查询所有名字空间
      */
     async DescribeAllNamespaces(req, cb) {
         return this.request("DescribeAllNamespaces", req, cb);
@@ -166,7 +166,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateServiceDiscovery", req, cb);
     }
     /**
-     * 云监控告警查询告警通知模板列表
+     * 查询通知模板列表
      */
     async DescribeAlarmNotices(req, cb) {
         return this.request("DescribeAlarmNotices", req, cb);
@@ -241,7 +241,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAlarmPolicyInfo", req, cb);
     }
     /**
-     * 告警历史列表
+     * 查询告警历史
      */
     async DescribeAlarmHistories(req, cb) {
         return this.request("DescribeAlarmHistories", req, cb);
@@ -253,7 +253,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAlarmMetrics", req, cb);
     }
     /**
-     * 修改告警策略的启停状态
+     * 启停告警策略
      */
     async ModifyAlarmPolicyStatus(req, cb) {
         return this.request("ModifyAlarmPolicyStatus", req, cb);
@@ -265,7 +265,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBaseMetrics", req, cb);
     }
     /**
-     * 云监控告警获取告警通知模板详情
+     * 查询单个通知模板的详情
      */
     async DescribeAlarmNotice(req, cb) {
         return this.request("DescribeAlarmNotice", req, cb);
@@ -303,7 +303,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyPolicyGroup", req, cb);
     }
     /**
-     * 告警策略详情
+     * 获取单个告警策略详情
      */
     async DescribeAlarmPolicy(req, cb) {
         return this.request("DescribeAlarmPolicy", req, cb);

@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("es.tencentcloudapi.com", "2018-04-16", clientConfig);
     }
     /**
+     * 更新接收客户端请求的节点类型
+     */
+    async UpdateRequestTargetNodeTypes(req, cb) {
+        return this.request("UpdateRequestTargetNodeTypes", req, cb);
+    }
+    /**
      * 查询实例指定条件下的操作记录
      */
     async DescribeInstanceOperations(req, cb) {
@@ -38,6 +44,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeInstances(req, cb) {
         return this.request("DescribeInstances", req, cb);
+    }
+    /**
+     * 获取接收客户端请求的节点类型
+     */
+    async GetRequestTargetNodeTypes(req, cb) {
+        return this.request("GetRequestTargetNodeTypes", req, cb);
     }
     /**
      * 变更插件列表

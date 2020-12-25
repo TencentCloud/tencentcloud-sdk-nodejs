@@ -18,46 +18,62 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeInternetAddressQuotaRequest,
   BgpPeer,
   DirectConnectTunnelRoute,
   RejectDirectConnectTunnelRequest,
   ModifyDirectConnectAttributeRequest,
-  DeleteDirectConnectTunnelRequest,
   CreateDirectConnectResponse,
   DescribeDirectConnectTunnelExtraRequest,
   DescribePublicDirectConnectTunnelRoutesRequest,
   DirectConnect,
+  InternetAddressDetail,
   DescribeAccessPointsResponse,
-  AcceptDirectConnectTunnelResponse,
+  DeleteDirectConnectTunnelRequest,
   AcceptDirectConnectTunnelRequest,
+  ReleaseInternetAddressRequest,
   DescribeDirectConnectTunnelExtraResponse,
   ModifyDirectConnectTunnelAttributeResponse,
   RouteFilterPrefix,
+  ApplyInternetAddressResponse,
   BGPStatus,
   DirectConnectTunnelExtra,
   Tag,
   CreateDirectConnectTunnelRequest,
   DeleteDirectConnectResponse,
   ModifyDirectConnectTunnelExtraResponse,
+  EnableInternetAddressResponse,
+  ApplyInternetAddressRequest,
   DescribeDirectConnectsResponse,
   DescribeAccessPointsRequest,
-  DescribeDirectConnectsRequest,
+  AcceptDirectConnectTunnelResponse,
   DescribeDirectConnectTunnelsRequest,
+  DescribeInternetAddressResponse,
   ModifyDirectConnectTunnelAttributeRequest,
   Filter,
+  DisableInternetAddressResponse,
+  DescribeInternetAddressStatisticsRequest,
+  InternetAddressStatistics,
   CreateDirectConnectRequest,
+  EnableInternetAddressRequest,
   ModifyDirectConnectAttributeResponse,
   ModifyDirectConnectTunnelExtraRequest,
   RejectDirectConnectTunnelResponse,
   CreateDirectConnectTunnelResponse,
+  DescribeDirectConnectsRequest,
   DeleteDirectConnectTunnelResponse,
   BFDInfo,
   DeleteDirectConnectRequest,
   DescribeDirectConnectTunnelsResponse,
   AccessPoint,
+  DescribeInternetAddressStatisticsResponse,
   NQAInfo,
+  DescribeInternetAddressRequest,
   DescribePublicDirectConnectTunnelRoutesResponse,
+  DescribeInternetAddressQuotaResponse,
+  ReleaseInternetAddressResponse,
   DirectConnectTunnel,
+  DisableInternetAddressRequest,
 } from "./dc_models"
 
 /**
@@ -67,6 +83,26 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("dc.tencentcloudapi.com", "2018-04-10", clientConfig)
+  }
+
+  /**
+   * 本接口（ModifyDirectConnectTunnelExtra）用于修改专用通道扩展信息
+   */
+  async ModifyDirectConnectTunnelExtra(
+    req: ModifyDirectConnectTunnelExtraRequest,
+    cb?: (error: string, rep: ModifyDirectConnectTunnelExtraResponse) => void
+  ): Promise<ModifyDirectConnectTunnelExtraResponse> {
+    return this.request("ModifyDirectConnectTunnelExtra", req, cb)
+  }
+
+  /**
+   * 停用用户申请的公网互联网地址
+   */
+  async DisableInternetAddress(
+    req: DisableInternetAddressRequest,
+    cb?: (error: string, rep: DisableInternetAddressResponse) => void
+  ): Promise<DisableInternetAddressResponse> {
+    return this.request("DisableInternetAddress", req, cb)
   }
 
   /**
@@ -80,13 +116,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyDirectConnectTunnelExtra）用于修改专用通道扩展信息
-   */
-  async ModifyDirectConnectTunnelExtra(
-    req: ModifyDirectConnectTunnelExtraRequest,
-    cb?: (error: string, rep: ModifyDirectConnectTunnelExtraResponse) => void
-  ): Promise<ModifyDirectConnectTunnelExtraResponse> {
-    return this.request("ModifyDirectConnectTunnelExtra", req, cb)
+     * 查询物理专线接入点
+
+     */
+  async DescribeAccessPoints(
+    req: DescribeAccessPointsRequest,
+    cb?: (error: string, rep: DescribeAccessPointsResponse) => void
+  ): Promise<DescribeAccessPointsResponse> {
+    return this.request("DescribeAccessPoints", req, cb)
   }
 
   /**
@@ -141,6 +178,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取用户互联网公网地址分配统计信息
+   */
+  async DescribeInternetAddressStatistics(
+    req?: DescribeInternetAddressStatisticsRequest,
+    cb?: (error: string, rep: DescribeInternetAddressStatisticsResponse) => void
+  ): Promise<DescribeInternetAddressStatisticsResponse> {
+    return this.request("DescribeInternetAddressStatistics", req, cb)
+  }
+
+  /**
    * 删除专用通道
    */
   async DeleteDirectConnectTunnel(
@@ -151,14 +198,43 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 查询物理专线接入点
+   * 申请互联网CIDR地址
+   */
+  async ApplyInternetAddress(
+    req: ApplyInternetAddressRequest,
+    cb?: (error: string, rep: ApplyInternetAddressResponse) => void
+  ): Promise<ApplyInternetAddressResponse> {
+    return this.request("ApplyInternetAddress", req, cb)
+  }
 
-     */
-  async DescribeAccessPoints(
-    req: DescribeAccessPointsRequest,
-    cb?: (error: string, rep: DescribeAccessPointsResponse) => void
-  ): Promise<DescribeAccessPointsResponse> {
-    return this.request("DescribeAccessPoints", req, cb)
+  /**
+   * 启用已停用的互联网公网地址
+   */
+  async EnableInternetAddress(
+    req: EnableInternetAddressRequest,
+    cb?: (error: string, rep: EnableInternetAddressResponse) => void
+  ): Promise<EnableInternetAddressResponse> {
+    return this.request("EnableInternetAddress", req, cb)
+  }
+
+  /**
+   * 获取用户互联网公网地址配额
+   */
+  async DescribeInternetAddressQuota(
+    req?: DescribeInternetAddressQuotaRequest,
+    cb?: (error: string, rep: DescribeInternetAddressQuotaResponse) => void
+  ): Promise<DescribeInternetAddressQuotaResponse> {
+    return this.request("DescribeInternetAddressQuota", req, cb)
+  }
+
+  /**
+   * 获取用户互联网公网地址信息
+   */
+  async DescribeInternetAddress(
+    req: DescribeInternetAddressRequest,
+    cb?: (error: string, rep: DescribeInternetAddressResponse) => void
+  ): Promise<DescribeInternetAddressResponse> {
+    return this.request("DescribeInternetAddress", req, cb)
   }
 
   /**
@@ -202,6 +278,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDirectConnectsResponse) => void
   ): Promise<DescribeDirectConnectsResponse> {
     return this.request("DescribeDirectConnects", req, cb)
+  }
+
+  /**
+   * 释放已申请的互联网地址
+   */
+  async ReleaseInternetAddress(
+    req: ReleaseInternetAddressRequest,
+    cb?: (error: string, rep: ReleaseInternetAddressResponse) => void
+  ): Promise<ReleaseInternetAddressResponse> {
+    return this.request("ReleaseInternetAddress", req, cb)
   }
 
   /**

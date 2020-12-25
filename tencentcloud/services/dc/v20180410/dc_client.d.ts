@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { RejectDirectConnectTunnelRequest, ModifyDirectConnectAttributeRequest, DeleteDirectConnectTunnelRequest, CreateDirectConnectResponse, DescribeDirectConnectTunnelExtraRequest, DescribePublicDirectConnectTunnelRoutesRequest, DescribeAccessPointsResponse, AcceptDirectConnectTunnelResponse, AcceptDirectConnectTunnelRequest, DescribeDirectConnectTunnelExtraResponse, ModifyDirectConnectTunnelAttributeResponse, CreateDirectConnectTunnelRequest, DeleteDirectConnectResponse, ModifyDirectConnectTunnelExtraResponse, DescribeDirectConnectsResponse, DescribeAccessPointsRequest, DescribeDirectConnectsRequest, DescribeDirectConnectTunnelsRequest, ModifyDirectConnectTunnelAttributeRequest, CreateDirectConnectRequest, ModifyDirectConnectAttributeResponse, ModifyDirectConnectTunnelExtraRequest, RejectDirectConnectTunnelResponse, CreateDirectConnectTunnelResponse, DeleteDirectConnectTunnelResponse, DeleteDirectConnectRequest, DescribeDirectConnectTunnelsResponse, DescribePublicDirectConnectTunnelRoutesResponse } from "./dc_models";
+import { DescribeInternetAddressQuotaRequest, RejectDirectConnectTunnelRequest, ModifyDirectConnectAttributeRequest, CreateDirectConnectResponse, DescribeDirectConnectTunnelExtraRequest, DescribePublicDirectConnectTunnelRoutesRequest, DescribeAccessPointsResponse, DeleteDirectConnectTunnelRequest, AcceptDirectConnectTunnelRequest, ReleaseInternetAddressRequest, DescribeDirectConnectTunnelExtraResponse, ModifyDirectConnectTunnelAttributeResponse, ApplyInternetAddressResponse, CreateDirectConnectTunnelRequest, DeleteDirectConnectResponse, ModifyDirectConnectTunnelExtraResponse, EnableInternetAddressResponse, ApplyInternetAddressRequest, DescribeDirectConnectsResponse, DescribeAccessPointsRequest, AcceptDirectConnectTunnelResponse, DescribeDirectConnectTunnelsRequest, DescribeInternetAddressResponse, ModifyDirectConnectTunnelAttributeRequest, DisableInternetAddressResponse, DescribeInternetAddressStatisticsRequest, CreateDirectConnectRequest, EnableInternetAddressRequest, ModifyDirectConnectAttributeResponse, ModifyDirectConnectTunnelExtraRequest, RejectDirectConnectTunnelResponse, CreateDirectConnectTunnelResponse, DescribeDirectConnectsRequest, DeleteDirectConnectTunnelResponse, DeleteDirectConnectRequest, DescribeDirectConnectTunnelsResponse, DescribeInternetAddressStatisticsResponse, DescribeInternetAddressRequest, DescribePublicDirectConnectTunnelRoutesResponse, DescribeInternetAddressQuotaResponse, ReleaseInternetAddressResponse, DisableInternetAddressRequest } from "./dc_models";
 /**
  * dc client
  * @class
@@ -8,13 +8,22 @@ import { RejectDirectConnectTunnelRequest, ModifyDirectConnectAttributeRequest, 
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
+     * 本接口（ModifyDirectConnectTunnelExtra）用于修改专用通道扩展信息
+     */
+    ModifyDirectConnectTunnelExtra(req: ModifyDirectConnectTunnelExtraRequest, cb?: (error: string, rep: ModifyDirectConnectTunnelExtraResponse) => void): Promise<ModifyDirectConnectTunnelExtraResponse>;
+    /**
+     * 停用用户申请的公网互联网地址
+     */
+    DisableInternetAddress(req: DisableInternetAddressRequest, cb?: (error: string, rep: DisableInternetAddressResponse) => void): Promise<DisableInternetAddressResponse>;
+    /**
      * 本接口（DescribePublicDirectConnectTunnelRoutes）用于查询互联网通道路由列表
      */
     DescribePublicDirectConnectTunnelRoutes(req: DescribePublicDirectConnectTunnelRoutesRequest, cb?: (error: string, rep: DescribePublicDirectConnectTunnelRoutesResponse) => void): Promise<DescribePublicDirectConnectTunnelRoutesResponse>;
     /**
-     * 本接口（ModifyDirectConnectTunnelExtra）用于修改专用通道扩展信息
+     * 查询物理专线接入点
+
      */
-    ModifyDirectConnectTunnelExtra(req: ModifyDirectConnectTunnelExtraRequest, cb?: (error: string, rep: ModifyDirectConnectTunnelExtraResponse) => void): Promise<ModifyDirectConnectTunnelExtraResponse>;
+    DescribeAccessPoints(req: DescribeAccessPointsRequest, cb?: (error: string, rep: DescribeAccessPointsResponse) => void): Promise<DescribeAccessPointsResponse>;
     /**
      * 修改物理专线的属性。
      */
@@ -37,14 +46,29 @@ export declare class Client extends AbstractClient {
      */
     AcceptDirectConnectTunnel(req: AcceptDirectConnectTunnelRequest, cb?: (error: string, rep: AcceptDirectConnectTunnelResponse) => void): Promise<AcceptDirectConnectTunnelResponse>;
     /**
+     * 获取用户互联网公网地址分配统计信息
+     */
+    DescribeInternetAddressStatistics(req?: DescribeInternetAddressStatisticsRequest, cb?: (error: string, rep: DescribeInternetAddressStatisticsResponse) => void): Promise<DescribeInternetAddressStatisticsResponse>;
+    /**
      * 删除专用通道
      */
     DeleteDirectConnectTunnel(req: DeleteDirectConnectTunnelRequest, cb?: (error: string, rep: DeleteDirectConnectTunnelResponse) => void): Promise<DeleteDirectConnectTunnelResponse>;
     /**
-     * 查询物理专线接入点
-
+     * 申请互联网CIDR地址
      */
-    DescribeAccessPoints(req: DescribeAccessPointsRequest, cb?: (error: string, rep: DescribeAccessPointsResponse) => void): Promise<DescribeAccessPointsResponse>;
+    ApplyInternetAddress(req: ApplyInternetAddressRequest, cb?: (error: string, rep: ApplyInternetAddressResponse) => void): Promise<ApplyInternetAddressResponse>;
+    /**
+     * 启用已停用的互联网公网地址
+     */
+    EnableInternetAddress(req: EnableInternetAddressRequest, cb?: (error: string, rep: EnableInternetAddressResponse) => void): Promise<EnableInternetAddressResponse>;
+    /**
+     * 获取用户互联网公网地址配额
+     */
+    DescribeInternetAddressQuota(req?: DescribeInternetAddressQuotaRequest, cb?: (error: string, rep: DescribeInternetAddressQuotaResponse) => void): Promise<DescribeInternetAddressQuotaResponse>;
+    /**
+     * 获取用户互联网公网地址信息
+     */
+    DescribeInternetAddress(req: DescribeInternetAddressRequest, cb?: (error: string, rep: DescribeInternetAddressResponse) => void): Promise<DescribeInternetAddressResponse>;
     /**
      * 用于查询专用通道列表。
      */
@@ -64,6 +88,10 @@ export declare class Client extends AbstractClient {
      * 查询物理专线列表。
      */
     DescribeDirectConnects(req: DescribeDirectConnectsRequest, cb?: (error: string, rep: DescribeDirectConnectsResponse) => void): Promise<DescribeDirectConnectsResponse>;
+    /**
+     * 释放已申请的互联网地址
+     */
+    ReleaseInternetAddress(req: ReleaseInternetAddressRequest, cb?: (error: string, rep: ReleaseInternetAddressResponse) => void): Promise<ReleaseInternetAddressResponse>;
     /**
      * 修改专用通道属性
      */

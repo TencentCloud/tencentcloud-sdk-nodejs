@@ -18,6 +18,16 @@ const client = new tencentcloud.cbs.v20170312.Client({
 })
 describe("cbs.v20170312.test.js", function () {
 
+it("cbs.v20170312.ModifyDiskExtraPerformance", async function () {
+    try {
+       const data = await client.ModifyDiskExtraPerformance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cbs.v20170312.RenewDisk", async function () {
     try {
        const data = await client.RenewDisk({})
@@ -41,6 +51,16 @@ it("cbs.v20170312.DescribeInstancesDiskNum", async function () {
 it("cbs.v20170312.InquiryPriceResizeDisk", async function () {
     try {
        const data = await client.InquiryPriceResizeDisk({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cbs.v20170312.InquirePriceModifyDiskExtraPerformance", async function () {
+    try {
+       const data = await client.InquirePriceModifyDiskExtraPerformance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

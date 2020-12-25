@@ -22,9 +22,10 @@ import {
   DescribeDiskOperationLogsResponse,
   ResizeDiskRequest,
   RenewDiskRequest,
-  TerminateDisksResponse,
+  Price,
   DescribeSnapshotSharePermissionResponse,
   SharePermission,
+  ModifyDiskExtraPerformanceRequest,
   ModifyDiskAttributesResponse,
   TerminateDisksRequest,
   ModifyDisksChargeTypeResponse,
@@ -33,6 +34,7 @@ import {
   AutoSnapshotPolicy,
   Policy,
   ModifySnapshotsSharePermissionResponse,
+  InquirePriceModifyDiskExtraPerformanceRequest,
   GetSnapOverviewRequest,
   DescribeSnapshotOperationLogsRequest,
   ModifySnapshotAttributeRequest,
@@ -43,7 +45,7 @@ import {
   ModifyDisksRenewFlagRequest,
   ModifyAutoSnapshotPolicyAttributeResponse,
   ModifyDisksChargeTypeRequest,
-  Price,
+  ModifyDiskExtraPerformanceResponse,
   UnbindAutoSnapshotPolicyResponse,
   InquiryPriceCreateDisksResponse,
   DiskConfig,
@@ -56,6 +58,7 @@ import {
   DescribeSnapshotOperationLogsResponse,
   ModifyDisksRenewFlagResponse,
   DescribeDiskAssociatedAutoSnapshotPolicyResponse,
+  TerminateDisksResponse,
   GetSnapOverviewResponse,
   ApplySnapshotResponse,
   DeleteAutoSnapshotPoliciesResponse,
@@ -76,6 +79,7 @@ import {
   DiskOperationLog,
   UnbindAutoSnapshotPolicyRequest,
   DescribeDiskOperationLogsRequest,
+  InquirePriceModifyDiskExtraPerformanceResponse,
   BindAutoSnapshotPolicyResponse,
   CreateDisksRequest,
   AttachDisksRequest,
@@ -107,6 +111,18 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("cbs.tencentcloudapi.com", "2017-03-12", clientConfig)
+  }
+
+  /**
+     * 本接口（ModifyDiskExtraPerformance）用于调整云硬盘额外的性能。
+
+* 目前仅支持极速型SSD云硬盘（CLOUD_TSSD）和高性能SSD云硬盘(CLOUD_HSSD)。
+     */
+  async ModifyDiskExtraPerformance(
+    req: ModifyDiskExtraPerformanceRequest,
+    cb?: (error: string, rep: ModifyDiskExtraPerformanceResponse) => void
+  ): Promise<ModifyDiskExtraPerformanceResponse> {
+    return this.request("ModifyDiskExtraPerformance", req, cb)
   }
 
   /**
@@ -144,6 +160,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InquiryPriceResizeDiskResponse) => void
   ): Promise<InquiryPriceResizeDiskResponse> {
     return this.request("InquiryPriceResizeDisk", req, cb)
+  }
+
+  /**
+   * 本接口（InquirePriceModifyDiskExtraPerformance）用于调整云硬盘额外性能询价。
+   */
+  async InquirePriceModifyDiskExtraPerformance(
+    req: InquirePriceModifyDiskExtraPerformanceRequest,
+    cb?: (error: string, rep: InquirePriceModifyDiskExtraPerformanceResponse) => void
+  ): Promise<InquirePriceModifyDiskExtraPerformanceResponse> {
+    return this.request("InquirePriceModifyDiskExtraPerformance", req, cb)
   }
 
   /**

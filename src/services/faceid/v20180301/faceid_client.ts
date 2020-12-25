@@ -165,7 +165,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 微信实名认证授权
+   * 输入姓名和身份证号验证与微信实名的信息是否一致
    */
   async GetRealNameAuthToken(
     req: GetRealNameAuthTokenRequest,

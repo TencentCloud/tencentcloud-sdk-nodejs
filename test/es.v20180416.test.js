@@ -18,6 +18,16 @@ const client = new tencentcloud.es.v20180416.Client({
 })
 describe("es.v20180416.test.js", function () {
 
+it("es.v20180416.UpdateRequestTargetNodeTypes", async function () {
+    try {
+       const data = await client.UpdateRequestTargetNodeTypes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("es.v20180416.DescribeInstanceOperations", async function () {
     try {
        const data = await client.DescribeInstanceOperations({})
@@ -31,6 +41,16 @@ it("es.v20180416.DescribeInstanceOperations", async function () {
 it("es.v20180416.DescribeInstances", async function () {
     try {
        const data = await client.DescribeInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.GetRequestTargetNodeTypes", async function () {
+    try {
+       const data = await client.GetRequestTargetNodeTypes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

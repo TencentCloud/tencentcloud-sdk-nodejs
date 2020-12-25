@@ -1667,13 +1667,13 @@ export interface CreateClustersResponse {
   DealNames?: Array<string>
 
   /**
-      * 资源ID列表
+      * 资源ID列表（异步发货可能无法返回该字段, 强烈建议使用dealNames字段查询接口DescribeResourcesByDealName获取异步发货的资源ID）
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ResourceIds?: Array<string>
 
   /**
-      * 集群ID列表
+      * 集群ID列表（异步发货可能不返回该字段, 强烈建议使用dealNames查询接口DescribeResourcesByDealName获取异步发货的集群ID）
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ClusterIds?: Array<string>
@@ -1737,24 +1737,19 @@ export interface CreateClustersRequest {
   DbVersion: string
 
   /**
-   * Cpu核数
-   */
-  Cpu: number
-
-  /**
-   * 内存
-   */
-  Memory: number
-
-  /**
-   * 存储上限，单位GB
-   */
-  StorageLimit: number
-
-  /**
    * 所属项目ID
    */
   ProjectId?: number
+
+  /**
+   * 普通实例Cpu核数
+   */
+  Cpu?: number
+
+  /**
+   * 普通实例内存
+   */
+  Memory?: number
 
   /**
    * 存储
@@ -1815,6 +1810,11 @@ timeRollback，时间点回档
   ExpectTimeThresh?: number
 
   /**
+   * 普通实例存储上限，单位GB
+   */
+  StorageLimit?: number
+
+  /**
    * 实例数量
    */
   InstanceCount?: number
@@ -1863,25 +1863,29 @@ timeRollback，时间点回档
   DbMode?: string
 
   /**
-   * 当DbMode为SEVERLESS时的cpu最小值，可选范围参考DescribeServerlessInstanceSpecs接口返回
-   */
+      * 当DbMode为SEVERLESS时必填
+cpu最小值，可选范围参考DescribeServerlessInstanceSpecs接口返回
+      */
   MinCpu?: number
 
   /**
-   * 当DbMode为SEVERLESS时的cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回
-   */
+      * 当DbMode为SEVERLESS时必填：
+cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回
+      */
   MaxCpu?: number
 
   /**
       * 当DbMode为SEVERLESS时，指定集群是否自动暂停，可选范围
 <li>yes</li>
 <li>no</li>
+默认值:yes
       */
   AutoPause?: string
 
   /**
-   * 当DbMode为SEVERLESS时，指定集群自动暂停的延迟，可选范围[60,INF]
-   */
+      * 当DbMode为SEVERLESS时，指定集群自动暂停的延迟，单位秒，可选范围[600,691200]
+默认值:600
+      */
   AutoPauseDelay?: number
 }
 

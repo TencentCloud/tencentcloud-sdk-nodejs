@@ -40,6 +40,7 @@ import {
   AiRecognitionTaskAsrFullTextResultOutput,
   AiReviewProhibitedOcrTaskOutput,
   MediaMiniProgramReviewElem,
+  ManageTaskResponse,
   CreateImageProcessingTemplateRequest,
   AiAnalysisTaskCoverOutput,
   MediaSnapshotByTimeOffsetItem,
@@ -49,7 +50,7 @@ import {
   CreateImageSpriteTask2017,
   TempCertificate,
   AiReviewTaskPoliticalOcrResult,
-  AiSampleWord,
+  ManageTaskRequest,
   CreateImageSpriteTemplateRequest,
   MediaSnapshotByTimePicInfoItem,
   UserDefineFaceReviewTemplateInfo,
@@ -65,7 +66,7 @@ import {
   AudioTemplateInfoForUpdate,
   ModifySubAppIdInfoRequest,
   DeletePersonSampleRequest,
-  MediaSampleSnapshotItem,
+  AiRecognitionTaskAsrWordsSegmentItem,
   AiRecognitionTaskInput,
   AudioTemplateInfo,
   ExecuteFunctionResponse,
@@ -181,6 +182,7 @@ import {
   ModifyAnimatedGraphicsTemplateRequest,
   DescribeProcedureTemplatesRequest,
   ProhibitedConfigureInfoForUpdate,
+  MediaSampleSnapshotItem,
   TagConfigureInfoForUpdate,
   DeleteWordSamplesRequest,
   EmptyTrackItem,
@@ -215,6 +217,7 @@ import {
   ModifyMediaInfoResponse,
   AiRecognitionTaskOcrFullTextResult,
   MediaProcessTaskSnapshotByTimeOffsetResult,
+  AiSampleWord,
   AiRecognitionTaskAsrWordsResultOutput,
   ModifyAdaptiveDynamicStreamingTemplateResponse,
   MediaProcessTaskTranscodeResult,
@@ -326,7 +329,6 @@ import {
   DescribeCDNUsageDataRequest,
   PornOcrReviewTemplateInfo,
   AiReviewTaskPoliticalAsrResult,
-  AiRecognitionTaskAsrWordsSegmentItem,
   DescribeReviewDetailsRequest,
   PornConfigureInfoForUpdate,
   AiReviewProhibitedAsrTaskInput,
@@ -1303,6 +1305,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ForbidMediaDistributionResponse) => void
   ): Promise<ForbidMediaDistributionResponse> {
     return this.request("ForbidMediaDistribution", req, cb)
+  }
+
+  /**
+   * 对已发起的任务进行管理。
+   */
+  async ManageTask(
+    req: ManageTaskRequest,
+    cb?: (error: string, rep: ManageTaskResponse) => void
+  ): Promise<ManageTaskResponse> {
+    return this.request("ManageTask", req, cb)
   }
 
   /**

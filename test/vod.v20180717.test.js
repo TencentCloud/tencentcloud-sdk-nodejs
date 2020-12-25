@@ -688,6 +688,16 @@ it("vod.v20180717.ForbidMediaDistribution", async function () {
     }
 })
 
+it("vod.v20180717.ManageTask", async function () {
+    try {
+       const data = await client.ManageTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.DescribeImageProcessingTemplates", async function () {
     try {
        const data = await client.DescribeImageProcessingTemplates({})

@@ -22,6 +22,7 @@ import {
   LocalDiskInfo,
   TaskDetail,
   NodeInfo,
+  GetRequestTargetNodeTypesRequest,
   DescribeInstanceOperationsRequest,
   OperationDetail,
   EsPublicAcl,
@@ -30,6 +31,7 @@ import {
   RestartKibanaRequest,
   CreateInstanceResponse,
   DescribeInstanceLogsRequest,
+  UpdateRequestTargetNodeTypesRequest,
   UpgradeLicenseRequest,
   CosBackup,
   TagInfo,
@@ -48,6 +50,7 @@ import {
   DescribeInstanceOperationsResponse,
   RestartNodesRequest,
   UpdatePluginsRequest,
+  UpdateRequestTargetNodeTypesResponse,
   UpgradeLicenseResponse,
   EsAcl,
   MasterNodeInfo,
@@ -57,6 +60,7 @@ import {
   UpgradeInstanceResponse,
   UpdateInstanceResponse,
   UpgradeInstanceRequest,
+  GetRequestTargetNodeTypesResponse,
   RestartKibanaResponse,
   Operation,
 } from "./es_models"
@@ -68,6 +72,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("es.tencentcloudapi.com", "2018-04-16", clientConfig)
+  }
+
+  /**
+   * 更新接收客户端请求的节点类型
+   */
+  async UpdateRequestTargetNodeTypes(
+    req: UpdateRequestTargetNodeTypesRequest,
+    cb?: (error: string, rep: UpdateRequestTargetNodeTypesResponse) => void
+  ): Promise<UpdateRequestTargetNodeTypesResponse> {
+    return this.request("UpdateRequestTargetNodeTypes", req, cb)
   }
 
   /**
@@ -88,6 +102,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstancesResponse) => void
   ): Promise<DescribeInstancesResponse> {
     return this.request("DescribeInstances", req, cb)
+  }
+
+  /**
+   * 获取接收客户端请求的节点类型
+   */
+  async GetRequestTargetNodeTypes(
+    req: GetRequestTargetNodeTypesRequest,
+    cb?: (error: string, rep: GetRequestTargetNodeTypesResponse) => void
+  ): Promise<GetRequestTargetNodeTypesResponse> {
+    return this.request("GetRequestTargetNodeTypes", req, cb)
   }
 
   /**

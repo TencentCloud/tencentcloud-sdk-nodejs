@@ -28,16 +28,29 @@ class Client extends abstract_client_1.AbstractClient {
         super("dc.tencentcloudapi.com", "2018-04-10", clientConfig);
     }
     /**
+     * 本接口（ModifyDirectConnectTunnelExtra）用于修改专用通道扩展信息
+     */
+    async ModifyDirectConnectTunnelExtra(req, cb) {
+        return this.request("ModifyDirectConnectTunnelExtra", req, cb);
+    }
+    /**
+     * 停用用户申请的公网互联网地址
+     */
+    async DisableInternetAddress(req, cb) {
+        return this.request("DisableInternetAddress", req, cb);
+    }
+    /**
      * 本接口（DescribePublicDirectConnectTunnelRoutes）用于查询互联网通道路由列表
      */
     async DescribePublicDirectConnectTunnelRoutes(req, cb) {
         return this.request("DescribePublicDirectConnectTunnelRoutes", req, cb);
     }
     /**
-     * 本接口（ModifyDirectConnectTunnelExtra）用于修改专用通道扩展信息
+     * 查询物理专线接入点
+
      */
-    async ModifyDirectConnectTunnelExtra(req, cb) {
-        return this.request("ModifyDirectConnectTunnelExtra", req, cb);
+    async DescribeAccessPoints(req, cb) {
+        return this.request("DescribeAccessPoints", req, cb);
     }
     /**
      * 修改物理专线的属性。
@@ -71,17 +84,40 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AcceptDirectConnectTunnel", req, cb);
     }
     /**
+     * 获取用户互联网公网地址分配统计信息
+     */
+    async DescribeInternetAddressStatistics(req, cb) {
+        return this.request("DescribeInternetAddressStatistics", req, cb);
+    }
+    /**
      * 删除专用通道
      */
     async DeleteDirectConnectTunnel(req, cb) {
         return this.request("DeleteDirectConnectTunnel", req, cb);
     }
     /**
-     * 查询物理专线接入点
-
+     * 申请互联网CIDR地址
      */
-    async DescribeAccessPoints(req, cb) {
-        return this.request("DescribeAccessPoints", req, cb);
+    async ApplyInternetAddress(req, cb) {
+        return this.request("ApplyInternetAddress", req, cb);
+    }
+    /**
+     * 启用已停用的互联网公网地址
+     */
+    async EnableInternetAddress(req, cb) {
+        return this.request("EnableInternetAddress", req, cb);
+    }
+    /**
+     * 获取用户互联网公网地址配额
+     */
+    async DescribeInternetAddressQuota(req, cb) {
+        return this.request("DescribeInternetAddressQuota", req, cb);
+    }
+    /**
+     * 获取用户互联网公网地址信息
+     */
+    async DescribeInternetAddress(req, cb) {
+        return this.request("DescribeInternetAddress", req, cb);
     }
     /**
      * 用于查询专用通道列表。
@@ -109,6 +145,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDirectConnects(req, cb) {
         return this.request("DescribeDirectConnects", req, cb);
+    }
+    /**
+     * 释放已申请的互联网地址
+     */
+    async ReleaseInternetAddress(req, cb) {
+        return this.request("ReleaseInternetAddress", req, cb);
     }
     /**
      * 修改专用通道属性
