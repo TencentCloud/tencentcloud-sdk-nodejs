@@ -858,6 +858,10 @@ export interface DescribeBillDetailRequest {
       * 查询交易类型。如 按量计费日结，按量计费小时结 等
       */
     ActionType?: string;
+    /**
+      * 项目ID:资源所属项目ID
+      */
+    ProjectId?: number;
 }
 /**
  * 消耗按项目汇总详情
@@ -1608,6 +1612,10 @@ export interface BillDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RegionId: string;
+    /**
+      * 项目ID:资源所属项目ID
+      */
+    ProjectId: number;
 }
 /**
  * DescribeBillSummaryByTag返回参数结构体

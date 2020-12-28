@@ -663,6 +663,21 @@ export interface NodePool {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DesiredNodesNum: number;
+    /**
+      * 节点池osName
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NodePoolOs: string;
+    /**
+      * 容器的镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OsCustomizeType: string;
+    /**
+      * 镜像id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ImageId: string;
 }
 /**
  * DescribePrometheusAlertRule返回参数结构体

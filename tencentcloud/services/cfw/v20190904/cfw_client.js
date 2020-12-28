@@ -34,40 +34,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNatRuleOverview", req, cb);
     }
     /**
-     * 修改规则执行顺序
-     */
-    async ModifySequenceRules(req, cb) {
-        return this.request("ModifySequenceRules", req, cb);
-    }
-    /**
-     * 创建规则
-     */
-    async CreateAcRules(req, cb) {
-        return this.request("CreateAcRules", req, cb);
-    }
-    /**
      * 修改规则表状态
      */
     async ModifyTableStatus(req, cb) {
         return this.request("ModifyTableStatus", req, cb);
     }
     /**
-     * 同步资产-互联网&VPC
+     * 获取安全组关联实例列表
      */
-    async RunSyncAsset(req, cb) {
-        return this.request("RunSyncAsset", req, cb);
-    }
-    /**
-     * 防火墙开关列表
-     */
-    async DescribeSwitchLists(req, cb) {
-        return this.request("DescribeSwitchLists", req, cb);
-    }
-    /**
-     * 修改规则
-     */
-    async ModifyAcRule(req, cb) {
-        return this.request("ModifyAcRule", req, cb);
+    async DescribeAssociatedInstanceList(req, cb) {
+        return this.request("DescribeAssociatedInstanceList", req, cb);
     }
     /**
      * vpc规则列表概况
@@ -76,34 +52,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeVpcRuleOverview", req, cb);
     }
     /**
-     * 查询规则列表概况
-     */
-    async DescribeRuleOverview(req, cb) {
-        return this.request("DescribeRuleOverview", req, cb);
-    }
-    /**
-     * 启用停用全部规则
-     */
-    async ModifyAllRuleStatus(req, cb) {
-        return this.request("ModifyAllRuleStatus", req, cb);
-    }
-    /**
      * 删除规则
      */
     async DeleteAcRule(req, cb) {
         return this.request("DeleteAcRule", req, cb);
     }
     /**
-     * 一键开启和关闭
+     * 创建安全组API规则
      */
-    async ModifyAllSwitchStatus(req, cb) {
-        return this.request("ModifyAllSwitchStatus", req, cb);
-    }
-    /**
-     * 访问控制列表
-     */
-    async DescribeAcLists(req, cb) {
-        return this.request("DescribeAcLists", req, cb);
+    async CreateSecurityGroupApiRules(req, cb) {
+        return this.request("CreateSecurityGroupApiRules", req, cb);
     }
     /**
      * 同步资产状态查询-互联网&VPC
@@ -112,16 +70,94 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSyncAssetStatus", req, cb);
     }
     /**
-     * 全部删除规则
+     * 查询安全组规则列表
      */
-    async DeleteAllAccessControlRule(req, cb) {
-        return this.request("DeleteAllAccessControlRule", req, cb);
+    async DescribeSecurityGroupList(req, cb) {
+        return this.request("DescribeSecurityGroupList", req, cb);
+    }
+    /**
+     * 删除全部规则
+     */
+    async DeleteSecurityGroupAllRule(req, cb) {
+        return this.request("DeleteSecurityGroupAllRule", req, cb);
+    }
+    /**
+     * 创建规则
+     */
+    async CreateAcRules(req, cb) {
+        return this.request("CreateAcRules", req, cb);
+    }
+    /**
+     * 启用停用全部规则
+     */
+    async ModifySecurityGroupAllRuleStatus(req, cb) {
+        return this.request("ModifySecurityGroupAllRuleStatus", req, cb);
+    }
+    /**
+     * 防火墙开关列表
+     */
+    async DescribeSwitchLists(req, cb) {
+        return this.request("DescribeSwitchLists", req, cb);
+    }
+    /**
+     * 查询规则列表概况
+     */
+    async DescribeRuleOverview(req, cb) {
+        return this.request("DescribeRuleOverview", req, cb);
+    }
+    /**
+     * 修改规则执行顺序
+     */
+    async ModifySequenceRules(req, cb) {
+        return this.request("ModifySequenceRules", req, cb);
+    }
+    /**
+     * 一键开启和关闭
+     */
+    async ModifyAllSwitchStatus(req, cb) {
+        return this.request("ModifyAllSwitchStatus", req, cb);
+    }
+    /**
+     * 启用停用全部规则
+     */
+    async ModifyAllRuleStatus(req, cb) {
+        return this.request("ModifyAllRuleStatus", req, cb);
     }
     /**
      * 查询规则表状态
      */
     async DescribeTableStatus(req, cb) {
         return this.request("DescribeTableStatus", req, cb);
+    }
+    /**
+     * 同步资产-互联网&VPC
+     */
+    async RunSyncAsset(req, cb) {
+        return this.request("RunSyncAsset", req, cb);
+    }
+    /**
+     * 修改规则
+     */
+    async ModifyAcRule(req, cb) {
+        return this.request("ModifyAcRule", req, cb);
+    }
+    /**
+     * 删除规则
+     */
+    async DeleteSecurityGroupRule(req, cb) {
+        return this.request("DeleteSecurityGroupRule", req, cb);
+    }
+    /**
+     * 访问控制列表
+     */
+    async DescribeAcLists(req, cb) {
+        return this.request("DescribeAcLists", req, cb);
+    }
+    /**
+     * 全部删除规则
+     */
+    async DeleteAllAccessControlRule(req, cb) {
+        return this.request("DeleteAllAccessControlRule", req, cb);
     }
     /**
      * 修改单个防火墙开关

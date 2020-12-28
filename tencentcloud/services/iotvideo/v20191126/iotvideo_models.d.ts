@@ -433,15 +433,15 @@ export interface DeleteIotDataTypeRequest {
  */
 export interface DescribeRechargeRecordsRequest {
     /**
-      * 账户类型 1:设备接入 2:云存
+      * 账户类型 1:设备接入 2:云存。
       */
     AccountType: number;
     /**
-      * 从第几条记录开始显示
+      * 从第几条记录开始显示, 默认值为0。
       */
     Offset?: number;
     /**
-      * 总共查询多少条记录
+      * 总共查询多少条记录，默认为值50。
       */
     Limit?: number;
 }

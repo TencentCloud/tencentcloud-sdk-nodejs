@@ -20,41 +20,56 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeVpcRuleOverviewResponse,
   DescribeSyncAssetStatusResponse,
+  ModifyAllSwitchStatusRequest,
   ModifyAllRuleStatusResponse,
   DescribeRuleOverviewResponse,
-  ModifyAllSwitchStatusRequest,
+  CreateSecurityGroupApiRulesRequest,
+  DescribeSecurityGroupListResponse,
+  AcListsData,
   SequenceData,
   ModifyItemSwitchStatusResponse,
-  ModifySequenceRulesResponse,
+  CreateSecurityGroupApiRulesResponse,
   ModifyAcRuleResponse,
+  ModifySequenceRulesResponse,
   DescribeTableStatusResponse,
   DeleteAcRuleResponse,
-  SwitchListsData,
+  ModifySequenceRulesRequest,
+  SecurityGroupApiRuleData,
   DescribeSwitchListsResponse,
   DescribeSyncAssetStatusRequest,
   DeleteAllAccessControlRuleRequest,
   RunSyncAssetResponse,
   RunSyncAssetRequest,
-  DescribeSwitchListsRequest,
+  DeleteSecurityGroupRuleRequest,
   ModifyTableStatusResponse,
   ModifyItemSwitchStatusRequest,
   DescribeRuleOverviewRequest,
-  DescribeTableStatusRequest,
-  DescribeAcListsRequest,
   DescribeVpcRuleOverviewRequest,
+  DescribeAcListsRequest,
+  DescribeTableStatusRequest,
   CreateAcRulesResponse,
+  DescribeAssociatedInstanceListResponse,
+  AssociatedInstanceInfo,
+  DescribeAssociatedInstanceListRequest,
   ModifyAcRuleRequest,
   DescribeNatRuleOverviewResponse,
   DeleteAcRuleRequest,
   DeleteAllAccessControlRuleResponse,
+  DeleteSecurityGroupAllRuleResponse,
+  ModifySecurityGroupAllRuleStatusResponse,
+  SecurityGroupListData,
   CreateAcRulesRequest,
+  DescribeSecurityGroupListRequest,
+  DescribeSwitchListsRequest,
   ModifyTableStatusRequest,
-  AcListsData,
+  DeleteSecurityGroupRuleResponse,
   DescribeNatRuleOverviewRequest,
-  ModifySequenceRulesRequest,
+  ModifySecurityGroupAllRuleStatusRequest,
+  DeleteSecurityGroupAllRuleRequest,
   ModifyAllRuleStatusRequest,
   RuleInfoData,
   DescribeAcListsResponse,
+  SwitchListsData,
   ModifyAllSwitchStatusResponse,
 } from "./cfw_models"
 
@@ -78,26 +93,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改规则执行顺序
-   */
-  async ModifySequenceRules(
-    req: ModifySequenceRulesRequest,
-    cb?: (error: string, rep: ModifySequenceRulesResponse) => void
-  ): Promise<ModifySequenceRulesResponse> {
-    return this.request("ModifySequenceRules", req, cb)
-  }
-
-  /**
-   * 创建规则
-   */
-  async CreateAcRules(
-    req: CreateAcRulesRequest,
-    cb?: (error: string, rep: CreateAcRulesResponse) => void
-  ): Promise<CreateAcRulesResponse> {
-    return this.request("CreateAcRules", req, cb)
-  }
-
-  /**
    * 修改规则表状态
    */
   async ModifyTableStatus(
@@ -108,33 +103,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 同步资产-互联网&VPC
+   * 获取安全组关联实例列表
    */
-  async RunSyncAsset(
-    req: RunSyncAssetRequest,
-    cb?: (error: string, rep: RunSyncAssetResponse) => void
-  ): Promise<RunSyncAssetResponse> {
-    return this.request("RunSyncAsset", req, cb)
-  }
-
-  /**
-   * 防火墙开关列表
-   */
-  async DescribeSwitchLists(
-    req: DescribeSwitchListsRequest,
-    cb?: (error: string, rep: DescribeSwitchListsResponse) => void
-  ): Promise<DescribeSwitchListsResponse> {
-    return this.request("DescribeSwitchLists", req, cb)
-  }
-
-  /**
-   * 修改规则
-   */
-  async ModifyAcRule(
-    req: ModifyAcRuleRequest,
-    cb?: (error: string, rep: ModifyAcRuleResponse) => void
-  ): Promise<ModifyAcRuleResponse> {
-    return this.request("ModifyAcRule", req, cb)
+  async DescribeAssociatedInstanceList(
+    req: DescribeAssociatedInstanceListRequest,
+    cb?: (error: string, rep: DescribeAssociatedInstanceListResponse) => void
+  ): Promise<DescribeAssociatedInstanceListResponse> {
+    return this.request("DescribeAssociatedInstanceList", req, cb)
   }
 
   /**
@@ -148,26 +123,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询规则列表概况
-   */
-  async DescribeRuleOverview(
-    req: DescribeRuleOverviewRequest,
-    cb?: (error: string, rep: DescribeRuleOverviewResponse) => void
-  ): Promise<DescribeRuleOverviewResponse> {
-    return this.request("DescribeRuleOverview", req, cb)
-  }
-
-  /**
-   * 启用停用全部规则
-   */
-  async ModifyAllRuleStatus(
-    req: ModifyAllRuleStatusRequest,
-    cb?: (error: string, rep: ModifyAllRuleStatusResponse) => void
-  ): Promise<ModifyAllRuleStatusResponse> {
-    return this.request("ModifyAllRuleStatus", req, cb)
-  }
-
-  /**
    * 删除规则
    */
   async DeleteAcRule(
@@ -178,23 +133,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 一键开启和关闭
+   * 创建安全组API规则
    */
-  async ModifyAllSwitchStatus(
-    req: ModifyAllSwitchStatusRequest,
-    cb?: (error: string, rep: ModifyAllSwitchStatusResponse) => void
-  ): Promise<ModifyAllSwitchStatusResponse> {
-    return this.request("ModifyAllSwitchStatus", req, cb)
-  }
-
-  /**
-   * 访问控制列表
-   */
-  async DescribeAcLists(
-    req: DescribeAcListsRequest,
-    cb?: (error: string, rep: DescribeAcListsResponse) => void
-  ): Promise<DescribeAcListsResponse> {
-    return this.request("DescribeAcLists", req, cb)
+  async CreateSecurityGroupApiRules(
+    req: CreateSecurityGroupApiRulesRequest,
+    cb?: (error: string, rep: CreateSecurityGroupApiRulesResponse) => void
+  ): Promise<CreateSecurityGroupApiRulesResponse> {
+    return this.request("CreateSecurityGroupApiRules", req, cb)
   }
 
   /**
@@ -208,13 +153,93 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 全部删除规则
+   * 查询安全组规则列表
    */
-  async DeleteAllAccessControlRule(
-    req: DeleteAllAccessControlRuleRequest,
-    cb?: (error: string, rep: DeleteAllAccessControlRuleResponse) => void
-  ): Promise<DeleteAllAccessControlRuleResponse> {
-    return this.request("DeleteAllAccessControlRule", req, cb)
+  async DescribeSecurityGroupList(
+    req: DescribeSecurityGroupListRequest,
+    cb?: (error: string, rep: DescribeSecurityGroupListResponse) => void
+  ): Promise<DescribeSecurityGroupListResponse> {
+    return this.request("DescribeSecurityGroupList", req, cb)
+  }
+
+  /**
+   * 删除全部规则
+   */
+  async DeleteSecurityGroupAllRule(
+    req: DeleteSecurityGroupAllRuleRequest,
+    cb?: (error: string, rep: DeleteSecurityGroupAllRuleResponse) => void
+  ): Promise<DeleteSecurityGroupAllRuleResponse> {
+    return this.request("DeleteSecurityGroupAllRule", req, cb)
+  }
+
+  /**
+   * 创建规则
+   */
+  async CreateAcRules(
+    req: CreateAcRulesRequest,
+    cb?: (error: string, rep: CreateAcRulesResponse) => void
+  ): Promise<CreateAcRulesResponse> {
+    return this.request("CreateAcRules", req, cb)
+  }
+
+  /**
+   * 启用停用全部规则
+   */
+  async ModifySecurityGroupAllRuleStatus(
+    req: ModifySecurityGroupAllRuleStatusRequest,
+    cb?: (error: string, rep: ModifySecurityGroupAllRuleStatusResponse) => void
+  ): Promise<ModifySecurityGroupAllRuleStatusResponse> {
+    return this.request("ModifySecurityGroupAllRuleStatus", req, cb)
+  }
+
+  /**
+   * 防火墙开关列表
+   */
+  async DescribeSwitchLists(
+    req: DescribeSwitchListsRequest,
+    cb?: (error: string, rep: DescribeSwitchListsResponse) => void
+  ): Promise<DescribeSwitchListsResponse> {
+    return this.request("DescribeSwitchLists", req, cb)
+  }
+
+  /**
+   * 查询规则列表概况
+   */
+  async DescribeRuleOverview(
+    req: DescribeRuleOverviewRequest,
+    cb?: (error: string, rep: DescribeRuleOverviewResponse) => void
+  ): Promise<DescribeRuleOverviewResponse> {
+    return this.request("DescribeRuleOverview", req, cb)
+  }
+
+  /**
+   * 修改规则执行顺序
+   */
+  async ModifySequenceRules(
+    req: ModifySequenceRulesRequest,
+    cb?: (error: string, rep: ModifySequenceRulesResponse) => void
+  ): Promise<ModifySequenceRulesResponse> {
+    return this.request("ModifySequenceRules", req, cb)
+  }
+
+  /**
+   * 一键开启和关闭
+   */
+  async ModifyAllSwitchStatus(
+    req: ModifyAllSwitchStatusRequest,
+    cb?: (error: string, rep: ModifyAllSwitchStatusResponse) => void
+  ): Promise<ModifyAllSwitchStatusResponse> {
+    return this.request("ModifyAllSwitchStatus", req, cb)
+  }
+
+  /**
+   * 启用停用全部规则
+   */
+  async ModifyAllRuleStatus(
+    req: ModifyAllRuleStatusRequest,
+    cb?: (error: string, rep: ModifyAllRuleStatusResponse) => void
+  ): Promise<ModifyAllRuleStatusResponse> {
+    return this.request("ModifyAllRuleStatus", req, cb)
   }
 
   /**
@@ -225,6 +250,56 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTableStatusResponse) => void
   ): Promise<DescribeTableStatusResponse> {
     return this.request("DescribeTableStatus", req, cb)
+  }
+
+  /**
+   * 同步资产-互联网&VPC
+   */
+  async RunSyncAsset(
+    req: RunSyncAssetRequest,
+    cb?: (error: string, rep: RunSyncAssetResponse) => void
+  ): Promise<RunSyncAssetResponse> {
+    return this.request("RunSyncAsset", req, cb)
+  }
+
+  /**
+   * 修改规则
+   */
+  async ModifyAcRule(
+    req: ModifyAcRuleRequest,
+    cb?: (error: string, rep: ModifyAcRuleResponse) => void
+  ): Promise<ModifyAcRuleResponse> {
+    return this.request("ModifyAcRule", req, cb)
+  }
+
+  /**
+   * 删除规则
+   */
+  async DeleteSecurityGroupRule(
+    req: DeleteSecurityGroupRuleRequest,
+    cb?: (error: string, rep: DeleteSecurityGroupRuleResponse) => void
+  ): Promise<DeleteSecurityGroupRuleResponse> {
+    return this.request("DeleteSecurityGroupRule", req, cb)
+  }
+
+  /**
+   * 访问控制列表
+   */
+  async DescribeAcLists(
+    req: DescribeAcListsRequest,
+    cb?: (error: string, rep: DescribeAcListsResponse) => void
+  ): Promise<DescribeAcListsResponse> {
+    return this.request("DescribeAcLists", req, cb)
+  }
+
+  /**
+   * 全部删除规则
+   */
+  async DeleteAllAccessControlRule(
+    req: DeleteAllAccessControlRuleRequest,
+    cb?: (error: string, rep: DeleteAllAccessControlRuleResponse) => void
+  ): Promise<DeleteAllAccessControlRuleResponse> {
+    return this.request("DeleteAllAccessControlRule", req, cb)
   }
 
   /**

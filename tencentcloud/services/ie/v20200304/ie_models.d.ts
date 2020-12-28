@@ -730,7 +730,12 @@ export interface DescribeMediaQualityRestorationTaskRusultRequest {
  */
 export interface ColorEnhance {
     /**
-      * 颜色增强类型，可选项：weak,strong。
+      * 颜色增强类型，可选项：
+1.  tra；
+2.  weak；
+3.  normal;
+4.  strong;
+注意：tra不支持自适应调整，处理速度更快；weak,normal,strong支持基于画面颜色自适应，处理速度更慢。
       */
     Type: string;
 }
