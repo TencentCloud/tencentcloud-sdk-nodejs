@@ -608,7 +608,7 @@ export interface GetRealNameAuthTokenRequest {
   IDCard: string
 
   /**
-   * 回调地址。实名认证完成后，将会重定向到这个地址通知认证发起方
+   * 回调地址。实名认证完成后，将会重定向到这个地址通知认证发起方。仅支持http或https协议。
    */
   CallbackURL: string
 }
@@ -794,7 +794,7 @@ export interface GetRealNameAuthTokenResponse {
   AuthToken?: string
 
   /**
-   * 实名认证授权地址，认证发起方需要重定向到这个地址获取认证用户的授权
+   * 实名认证授权地址，认证发起方需要重定向到这个地址获取认证用户的授权，仅能在微信环境下打开。
    */
   RedirectURL?: string
 

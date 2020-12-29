@@ -9266,17 +9266,21 @@ export interface DescribeTasksResponse {
  */
 export interface DescribeSubAppIdsRequest {
     /**
-      * 分页拉取的最大返回结果数。默认值：200；最大值：200。
+      * 子应用名称。
       */
-    Limit?: number;
+    Name?: string;
+    /**
+      * 标签信息，查询指定标签的子应用列表。
+      */
+    Tags?: Array<ResourceTag>;
     /**
       * 分页拉取的起始偏移量。默认值：0。
       */
     Offset?: number;
     /**
-      * 标签信息，查询指定标签的子应用列表。
+      * 分页拉取的最大返回结果数。默认值：200；最大值：200。
       */
-    Tags?: Array<ResourceTag>;
+    Limit?: number;
 }
 /**
  * 人脸识别输入。

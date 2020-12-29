@@ -2506,6 +2506,11 @@ export interface CreateModuleRequest {
    * 默认入带宽，单位：M。范围不得超过带宽上下限，详看DescribeConfig。
    */
   DefaultBandWidthIn?: number
+
+  /**
+   * 是否禁止分配外网IP
+   */
+  DisableWanIp?: boolean
 }
 
 /**
@@ -3867,27 +3872,18 @@ export interface TaskInput {
 }
 
 /**
- * StopInstances请求参数结构体
+ * ModifyModuleDisableWanIp请求参数结构体
  */
-export interface StopInstancesRequest {
+export interface ModifyModuleDisableWanIpRequest {
   /**
-   * 需要关机的实例ID列表。在单次请求的过程中，单个region下的请求实例数上限为100。
+   * 模块ID
    */
-  InstanceIdSet: Array<string>
+  ModuleId: string
 
   /**
-   * 是否在正常关闭失败后选择强制关闭实例，默认为false，即否。
+   * 是否禁止分配外网ip
    */
-  ForceStop?: boolean
-
-  /**
-      * 实例的关闭模式。取值范围：
-SOFT_FIRST：表示在正常关闭失败后进行强制关闭;
-HARD：直接强制关闭;
-SOFT：仅软关机；
-默认为SOFT。
-      */
-  StopType?: string
+  DisableWanIp: boolean
 }
 
 /**
@@ -4302,6 +4298,16 @@ FALSE：表示开机状态制作，目前不支持，需要先手动关机
  * DeleteRouteTable返回参数结构体
  */
 export interface DeleteRouteTableResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyModuleDisableWanIp返回参数结构体
+ */
+export interface ModifyModuleDisableWanIpResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6410,6 +6416,30 @@ export interface DescribeRouteTablesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * StopInstances请求参数结构体
+ */
+export interface StopInstancesRequest {
+  /**
+   * 需要关机的实例ID列表。在单次请求的过程中，单个region下的请求实例数上限为100。
+   */
+  InstanceIdSet: Array<string>
+
+  /**
+   * 是否在正常关闭失败后选择强制关闭实例，默认为false，即否。
+   */
+  ForceStop?: boolean
+
+  /**
+      * 实例的关闭模式。取值范围：
+SOFT_FIRST：表示在正常关闭失败后进行强制关闭;
+HARD：直接强制关闭;
+SOFT：仅软关机；
+默认为SOFT。
+      */
+  StopType?: string
 }
 
 /**

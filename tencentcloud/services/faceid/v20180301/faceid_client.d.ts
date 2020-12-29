@@ -40,7 +40,8 @@ export declare class Client extends AbstractClient {
      */
     CheckIdCardInformation(req: CheckIdCardInformationRequest, cb?: (error: string, rep: CheckIdCardInformationResponse) => void): Promise<CheckIdCardInformationResponse>;
     /**
-     * 输入姓名和身份证号验证与微信实名的信息是否一致
+     * 该接口仅限微信公众号中使用，传入姓名和身份证号获取回调URL，在微信公众号中打开验证姓名和身份证号与微信实名的信息是否一致。
+
      */
     GetRealNameAuthToken(req: GetRealNameAuthTokenRequest, cb?: (error: string, rep: GetRealNameAuthTokenResponse) => void): Promise<GetRealNameAuthTokenResponse>;
     /**

@@ -141,6 +141,7 @@ export { trtc } from "./trtc";
 export { tsf } from "./tsf";
 export { tts } from "./tts";
 export { ump } from "./ump";
+export { vms } from "./vms";
 export { vod } from "./vod";
 export { vpc } from "./vpc";
 export { wss } from "./wss";

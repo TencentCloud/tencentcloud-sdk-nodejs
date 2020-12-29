@@ -118,6 +118,10 @@ export interface ExportVideoByVideoSegmentationDataRequest {
  */
 export interface DescribeTeamsResponse {
     /**
+      * 符合条件的记录总数。
+      */
+    TotalCount?: number;
+    /**
       * 团队列表。
       */
     TeamSet?: Array<TeamInfo>;
@@ -510,7 +514,15 @@ export interface DescribeTeamsRequest {
     /**
       * 团队 ID 列表，限30个。
       */
-    TeamIds: Array<string>;
+    TeamIds?: Array<string>;
+    /**
+      * 分页偏移量，默认值：0。
+      */
+    Offset?: number;
+    /**
+      * 返回记录条数，默认值：20，最大值：30。
+      */
+    Limit?: number;
 }
 /**
  * 链接类型的素材信息
@@ -623,6 +635,12 @@ export interface AddMemberInfo {
       * 团队成员备注。
       */
     Remark?: string;
+    /**
+      * 团队成员角色，不填则默认添加普通成员。可选值：
+<li>Admin：团队管理员；</li>
+<li>Member：普通成员。</li>
+      */
+    Role?: string;
 }
 /**
  * 用于描述资源的归属实体。
@@ -1320,15 +1338,26 @@ export interface ImportMediaToProjectRequest {
       */
     ProjectId: string;
     /**
-      * 云点播媒资 FileId。
+      * 导入媒资类型，取值：
+<li>VOD：云点播文件；</li>
+<li>EXTERNAL：媒资绑定。</li>
+注意：如果不填默认为云点播文件。
       */
-    VodFileId: string;
+    SourceType?: string;
     /**
-      * 素材名称，不能超过30个字符。
+      * 云点播媒资文件Id，当 SourceType 取值 VOD 或者缺省的时候必填。
+      */
+    VodFileId?: string;
+    /**
+      * 原始媒资文件信息，当 SourceType 取值 EXTERNAL 的时候必填。
+      */
+    ExternalMediaInfo?: ExternalMediaInfo;
+    /**
+      * 媒体名称，不能超过30个字符。
       */
     Name?: string;
     /**
-      * 素材预处理任务模板 ID，取值：
+      * 媒体预处理任务模板 ID，取值：
 <li>10：进行编辑预处理。</li>
 注意：如果填0则不进行处理。
       */
@@ -2468,6 +2497,19 @@ export interface LiveStreamClipProjectInput {
     StreamRecordDuration: number;
 }
 /**
+ * 媒资绑定资源信息，包含媒资绑定模板 ID 和文件信息。
+ */
+export interface ExternalMediaInfo {
+    /**
+      * 媒资绑定模板 ID。
+      */
+    Definition: number;
+    /**
+      * 媒资绑定媒体路径或文件 ID。
+      */
+    MediaKey: string;
+}
+/**
  * 链接素材信息
  */
 export interface LinkMaterialInfo {
@@ -2571,23 +2613,34 @@ export interface ImportMaterialRequest {
       */
     Platform: string;
     /**
-      * 云点播媒资 FileId。
-      */
-    VodFileId: string;
-    /**
-      * 素材归属者。
+      * 媒体归属者，团队或个人。
       */
     Owner: Entity;
     /**
-      * 素材名称，不能超过30个字符。
+      * 媒体名称，不能超过30个字符。
       */
     Name: string;
     /**
-      * 素材分类路径，形如："/a/b"，层级数不能超过10，每个层级长度不能超过15字符。若不填则默认为根路径。
+      * 导入媒资类型，取值：
+<li>VOD：云点播文件；</li>
+<li>EXTERNAL：媒资绑定。</li>
+注意：如果不填默认为云点播文件。
+      */
+    SourceType?: string;
+    /**
+      * 云点播媒资 FileId，仅当 SourceType 为 VOD 时有效。
+      */
+    VodFileId?: string;
+    /**
+      * 原始媒资文件信息，当 SourceType 取值 EXTERNAL 的时候必填。
+      */
+    ExternalMediaInfo?: ExternalMediaInfo;
+    /**
+      * 媒体分类路径，形如："/a/b"，层级数不能超过10，每个层级长度不能超过15字符。若不填则默认为根路径。
       */
     ClassPath?: string;
     /**
-      * 素材预处理任务模板 ID。取值：
+      * 媒体预处理任务模板 ID。取值：
 <li>10：进行编辑预处理。</li>
       */
     PreProcessDefinition?: number;

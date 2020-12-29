@@ -237,6 +237,12 @@ EIP 如果被封堵，则不能进行解绑定操作。
         return this.request("AllocateAddresses", req, cb);
     }
     /**
+     * 修改模块是否禁止分配外网ip的属性。
+     */
+    async ModifyModuleDisableWanIp(req, cb) {
+        return this.request("ModifyModuleDisableWanIp", req, cb);
+    }
+    /**
      * 修改负载均衡监听器属性。
      */
     async ModifyListener(req, cb) {

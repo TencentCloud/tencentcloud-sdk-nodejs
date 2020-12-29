@@ -358,6 +358,16 @@ it("ecm.v20190719.AllocateAddresses", async function () {
     }
 })
 
+it("ecm.v20190719.ModifyModuleDisableWanIp", async function () {
+    try {
+       const data = await client.ModifyModuleDisableWanIp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ecm.v20190719.ModifyListener", async function () {
     try {
        const data = await client.ModifyListener({})

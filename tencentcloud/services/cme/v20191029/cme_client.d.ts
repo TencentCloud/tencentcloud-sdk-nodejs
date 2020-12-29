@@ -12,7 +12,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeMaterials(req: DescribeMaterialsRequest, cb?: (error: string, rep: DescribeMaterialsResponse) => void): Promise<DescribeMaterialsResponse>;
     /**
-     * 获取指定团队的信息。
+     * 获取指定团队的信息，拉取团队信息列表。
      */
     DescribeTeams(req: DescribeTeamsRequest, cb?: (error: string, rep: DescribeTeamsResponse) => void): Promise<DescribeTeamsResponse>;
     /**
@@ -52,7 +52,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeResourceAuthorization(req: DescribeResourceAuthorizationRequest, cb?: (error: string, rep: DescribeResourceAuthorizationResponse) => void): Promise<DescribeResourceAuthorizationResponse>;
     /**
-     * 将云点播媒资文件导入到云剪素材库。
+     * 将云点播媒资文件导入到云剪媒体资源库。
      */
     ImportMaterial(req: ImportMaterialRequest, cb?: (error: string, rep: ImportMaterialResponse) => void): Promise<ImportMaterialResponse>;
     /**
@@ -147,7 +147,7 @@ export declare class Client extends AbstractClient {
      */
     CreateClass(req: CreateClassRequest, cb?: (error: string, rep: CreateClassResponse) => void): Promise<CreateClassResponse>;
     /**
-     * 将云点播中的媒资添加到素材库中，供后续视频编辑使用。
+     * 将云点播中的媒资或者用户自有媒资文件添加到媒体库中，供后续视频编辑使用。
      */
     ImportMediaToProject(req: ImportMediaToProjectRequest, cb?: (error: string, rep: ImportMediaToProjectResponse) => void): Promise<ImportMediaToProjectResponse>;
     /**

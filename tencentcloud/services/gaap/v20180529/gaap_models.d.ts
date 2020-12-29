@@ -768,6 +768,14 @@ export interface DescribeRuleRealServersRequest {
       * 转发规则ID
       */
     RuleId: string;
+    /**
+      * 偏移量，默认为0。
+      */
+    Offset?: number;
+    /**
+      * 返回数量，默认为20，最大值为1000。
+      */
+    Limit?: number;
 }
 /**
  * DescribeGroupDomainConfig请求参数结构体
@@ -3058,6 +3066,21 @@ export interface RuleCheckParams {
 当调用ModifyRuleAttribute时，不支持修改该参数。
       */
     Domain?: string;
+    /**
+      * 源站服务失败统计频率
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FailedCountInter?: number;
+    /**
+      * 源站健康性检查阀值，超过该阀值会屏蔽服务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FailedThreshold?: number;
+    /**
+      * 源站健康性检测超出阀值后，屏蔽的时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BlockInter?: number;
 }
 /**
  * CreateSecurityPolicy请求参数结构体
@@ -3556,6 +3579,14 @@ export interface DomainRuleSet {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PolyRealServerCertificateAliasInfo: Array<CertificateAliasInfo>;
+    /**
+      * 域名的状态。
+0表示运行中，
+1表示变更中，
+2表示删除中。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DomainStatus: number;
 }
 /**
  * DescribeTCPListeners请求参数结构体
@@ -4188,7 +4219,7 @@ UNKNOWN表示未知状态。
       */
     ModifyConfigTime: number;
     /**
-      * 通道类型
+      * 通道类型，104表示新的银牌质量通道类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ProxyType: number;

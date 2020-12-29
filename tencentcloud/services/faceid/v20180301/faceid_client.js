@@ -76,7 +76,8 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CheckIdCardInformation", req, cb);
     }
     /**
-     * 输入姓名和身份证号验证与微信实名的信息是否一致
+     * 该接口仅限微信公众号中使用，传入姓名和身份证号获取回调URL，在微信公众号中打开验证姓名和身份证号与微信实名的信息是否一致。
+
      */
     async GetRealNameAuthToken(req, cb) {
         return this.request("GetRealNameAuthToken", req, cb);

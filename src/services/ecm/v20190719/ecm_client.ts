@@ -177,7 +177,7 @@ import {
   CreateSubnetRequest,
   DescribeModuleDetailResponse,
   TaskInput,
-  StopInstancesRequest,
+  ModifyModuleDisableWanIpRequest,
   Backend,
   Subnet,
   ModifyVpcAttributeResponse,
@@ -195,6 +195,7 @@ import {
   MigratePrivateIpAddressResponse,
   CreateImageRequest,
   DeleteRouteTableResponse,
+  ModifyModuleDisableWanIpResponse,
   EnhancedService,
   CreateListenerResponse,
   DeleteModuleResponse,
@@ -305,6 +306,7 @@ import {
   Country,
   DisassociateSecurityGroupsRequest,
   DescribeRouteTablesResponse,
+  StopInstancesRequest,
   ModifySubnetAttributeRequest,
   AllocateAddressesResponse,
   DisassociateAddressRequest,
@@ -686,6 +688,16 @@ EIP 如果被封堵，则不能进行解绑定操作。
     cb?: (error: string, rep: AllocateAddressesResponse) => void
   ): Promise<AllocateAddressesResponse> {
     return this.request("AllocateAddresses", req, cb)
+  }
+
+  /**
+   * 修改模块是否禁止分配外网ip的属性。
+   */
+  async ModifyModuleDisableWanIp(
+    req: ModifyModuleDisableWanIpRequest,
+    cb?: (error: string, rep: ModifyModuleDisableWanIpResponse) => void
+  ): Promise<ModifyModuleDisableWanIpResponse> {
+    return this.request("ModifyModuleDisableWanIp", req, cb)
   }
 
   /**
