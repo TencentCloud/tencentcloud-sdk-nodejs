@@ -1248,6 +1248,11 @@ ip：IP 列表作为源站
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PathRules?: Array<PathRule>;
+    /**
+      * 分路径回源配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PathBasedOrigin?: Array<PathBasedOriginRule>;
 }
 /**
  * 违规 URL 详情
@@ -4044,6 +4049,31 @@ export interface SearchClsLogResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 分路径回源规则
+ */
+export interface PathBasedOriginRule {
+    /**
+      * 规则类型：
+file：指定文件后缀生效
+directory：指定路径生效
+path：指定绝对路径生效
+index: 指定主页生效
+      */
+    RuleType: string;
+    /**
+      * RuleType 对应类型下的匹配内容：
+file 时填充后缀名，如 jpg、txt
+directory 时填充路径，如 /xxx/test/
+path 时填充绝对路径，如 /xxx/test.html
+index 时填充 /
+      */
+    RulePaths: Array<string>;
+    /**
+      * 源站列表，支持域名或ipv4地址
+      */
+    Origin: Array<string>;
 }
 /**
  * PushUrlsCache请求参数结构体

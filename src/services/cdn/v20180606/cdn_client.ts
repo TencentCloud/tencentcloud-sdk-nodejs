@@ -163,6 +163,7 @@ import {
   RangeOriginPull,
   ListScdnLogTasksRequest,
   SearchClsLogResponse,
+  PathBasedOriginRule,
   PushUrlsCacheRequest,
   MainlandConfig,
   DescribeReportDataRequest,
