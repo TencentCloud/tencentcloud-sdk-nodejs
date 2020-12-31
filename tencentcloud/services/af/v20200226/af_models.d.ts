@@ -3,7 +3,7 @@
  */
 export interface RiskDetail {
     /**
-      * 风险码
+      * 风险码 参数详细定义请加微信：TYXGJ-01
       */
     RiskCode: number;
 }

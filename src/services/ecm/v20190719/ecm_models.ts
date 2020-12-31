@@ -2936,38 +2936,32 @@ export interface VpcInfo {
   /**
       * 辅助CIDR
 注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
       */
   AssistantCidrSet: Array<AssistantCidr>
 
   /**
-      * 地域
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 地域
+   */
   Region: string
 
   /**
-      * 描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 描述
+   */
   Description: string
 
   /**
-      * 地域中文名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 地域中文名
+   */
   RegionName: string
 
   /**
-      * 包含子网数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 包含子网数量
+   */
   SubnetCount: number
 
   /**
-      * 包含实例数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 包含实例数量
+   */
   InstanceCount: number
 }
 
@@ -5693,7 +5687,7 @@ export interface DescribePeakNetworkOverviewRequest {
   StartTime?: string
 
   /**
-   * 结束时间（xxxx-xx-xx）如2019-08-14，默认为昨天，不应与当前日期间隔超过30天。当开始与结束间隔不超过2天时返回5分钟粒度的数据，否则返回1小时粒度的数据。
+   * 结束时间（xxxx-xx-xx）如2019-08-14，默认为昨天，不应与当前日期间隔超过30天。当开始与结束间隔不超过1天时会返回1分钟粒度的数据，不超过7天时返回5分钟粒度的数据，否则返回1小时粒度的数据。
    */
   EndTime?: string
 
