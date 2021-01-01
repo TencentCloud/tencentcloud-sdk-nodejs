@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreateBotTaskRequest,
+  ExportBotDataRequest,
   UploadFileRequest,
   UploadFileResponse,
   UploadDataJsonResponse,
@@ -41,6 +42,7 @@ import {
   BotFlow,
   ApplyBlackListResponse,
   DescribeRecordsRequest,
+  ExportBotDataResponse,
   SingleRecord,
   QueryInstantDataRequest,
   DescribeCreditResultRequest,
@@ -51,6 +53,7 @@ import {
   PhonePool,
   DownloadRecordListResponse,
   CreateBotTaskResponse,
+  BotFileData,
   UploadBotFileRequest,
   UploadDataFileRequest,
   DescribeFileModelResponse,
@@ -120,6 +123,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCreditResultResponse) => void
   ): Promise<DescribeCreditResultResponse> {
     return this.request("DescribeCreditResult", req, cb)
+  }
+
+  /**
+   * 导出机器人数据
+   */
+  async ExportBotData(
+    req: ExportBotDataRequest,
+    cb?: (error: string, rep: ExportBotDataResponse) => void
+  ): Promise<ExportBotDataResponse> {
+    return this.request("ExportBotData", req, cb)
   }
 
   /**

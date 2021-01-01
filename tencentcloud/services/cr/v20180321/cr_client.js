@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCreditResult", req, cb);
     }
     /**
+     * 导出机器人数据
+     */
+    async ExportBotData(req, cb) {
+        return this.request("ExportBotData", req, cb);
+    }
+    /**
      * 用于获取指定案件的对话文本内容，次日早上8:00后可查询前日对话文本内容。
      */
     async DownloadDialogueText(req, cb) {

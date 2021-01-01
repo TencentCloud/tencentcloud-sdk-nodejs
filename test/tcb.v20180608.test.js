@@ -348,6 +348,16 @@ it("tcb.v20180608.DescribeEnvLimit", async function () {
     }
 })
 
+it("tcb.v20180608.DescribePostpayFreeQuotas", async function () {
+    try {
+       const data = await client.DescribePostpayFreeQuotas({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.DescribeEnvFreeQuota", async function () {
     try {
        const data = await client.DescribeEnvFreeQuota({})

@@ -37,6 +37,7 @@ import {
   CreateHostingDomainRequest,
   DescribeCloudBaseRunResourceRequest,
   CloudBaseRunVolumeMount,
+  DescribePostpayFreeQuotasRequest,
   CloudBaseRunImageInfo,
   ModifyDatabaseACLRequest,
   DestroyStaticStoreRequest,
@@ -92,6 +93,8 @@ import {
   DescribeCloudBaseRunResourceResponse,
   StorageInfo,
   DescribeCloudBaseRunVersionSnapshotRequest,
+  FreequotaInfo,
+  DescribePostpayFreeQuotasResponse,
   DescribeEndUsersResponse,
   AuthDomain,
   EnvBillingInfoItem,
@@ -450,6 +453,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEnvLimitResponse) => void
   ): Promise<DescribeEnvLimitResponse> {
     return this.request("DescribeEnvLimit", req, cb)
+  }
+
+  /**
+   * 查询后付费资源免费量
+   */
+  async DescribePostpayFreeQuotas(
+    req: DescribePostpayFreeQuotasRequest,
+    cb?: (error: string, rep: DescribePostpayFreeQuotasResponse) => void
+  ): Promise<DescribePostpayFreeQuotasResponse> {
+    return this.request("DescribePostpayFreeQuotas", req, cb)
   }
 
   /**

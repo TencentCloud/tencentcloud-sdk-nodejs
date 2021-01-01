@@ -64,6 +64,31 @@ export interface CreateBotTaskRequest {
     SmsTemplateId?: string;
 }
 /**
+ * ExportBotData请求参数结构体
+ */
+export interface ExportBotDataRequest {
+    /**
+      * 模块名。默认值（固定）：AiApi
+      */
+    Module: string;
+    /**
+      * 操作名。默认值（固定）：ExportBotData
+      */
+    Operation: string;
+    /**
+      * 业务日期。YYYY-MM-DD
+      */
+    BizDate: string;
+    /**
+      * 任务ID，二者必填一个
+      */
+    BotId?: string;
+    /**
+      * 任务名称，二者必填一个
+      */
+    BotName?: string;
+}
+/**
  * UploadFile请求参数结构体
  */
 export interface UploadFileRequest {
@@ -511,6 +536,19 @@ export interface DescribeRecordsRequest {
     InstId?: string;
 }
 /**
+ * ExportBotData返回参数结构体
+ */
+export interface ExportBotDataResponse {
+    /**
+      * 导出文件列表
+      */
+    Data?: Array<BotFileData>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 录音信息
  */
 export interface SingleRecord {
@@ -747,6 +785,19 @@ export interface CreateBotTaskResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 机器人文件结构
+ */
+export interface BotFileData {
+    /**
+      * 文件类型 A 拨打结果 T 记录详情
+      */
+    FileType: string;
+    /**
+      * 文件地址
+      */
+    CosUrl: string;
 }
 /**
  * UploadBotFile请求参数结构体

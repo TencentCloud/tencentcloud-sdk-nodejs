@@ -226,6 +226,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEnvLimit", req, cb);
     }
     /**
+     * 查询后付费资源免费量
+     */
+    async DescribePostpayFreeQuotas(req, cb) {
+        return this.request("DescribePostpayFreeQuotas", req, cb);
+    }
+    /**
      * 查询后付费免费配额信息
      */
     async DescribeEnvFreeQuota(req, cb) {

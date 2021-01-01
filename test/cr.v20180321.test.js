@@ -68,6 +68,16 @@ it("cr.v20180321.DescribeCreditResult", async function () {
     }
 })
 
+it("cr.v20180321.ExportBotData", async function () {
+    try {
+       const data = await client.ExportBotData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cr.v20180321.DownloadDialogueText", async function () {
     try {
        const data = await client.DownloadDialogueText({})

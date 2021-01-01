@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateBotTaskRequest, UploadFileRequest, UploadFileResponse, UploadDataJsonResponse, DescribeBotFlowResponse, DownloadDialogueTextRequest, DownloadReportRequest, ApplyCreditAuditResponse, UploadDataFileResponse, DownloadRecordListRequest, DescribeFileModelRequest, QueryInstantDataResponse, UploadBotFileResponse, UploadDataJsonRequest, DescribeCreditResultResponse, DownloadDialogueTextResponse, DescribeBotFlowRequest, ApplyBlackListResponse, DescribeRecordsRequest, QueryInstantDataRequest, DescribeCreditResultRequest, ApplyBlackListRequest, ApplyCreditAuditRequest, DownloadReportResponse, DownloadRecordListResponse, CreateBotTaskResponse, UploadBotFileRequest, UploadDataFileRequest, DescribeFileModelResponse, DescribeTaskStatusRequest, QueryProductsRequest, QueryProductsResponse, DescribeRecordsResponse, DescribeTaskStatusResponse } from "./cr_models";
+import { CreateBotTaskRequest, ExportBotDataRequest, UploadFileRequest, UploadFileResponse, UploadDataJsonResponse, DescribeBotFlowResponse, DownloadDialogueTextRequest, DownloadReportRequest, ApplyCreditAuditResponse, UploadDataFileResponse, DownloadRecordListRequest, DescribeFileModelRequest, QueryInstantDataResponse, UploadBotFileResponse, UploadDataJsonRequest, DescribeCreditResultResponse, DownloadDialogueTextResponse, DescribeBotFlowRequest, ApplyBlackListResponse, DescribeRecordsRequest, ExportBotDataResponse, QueryInstantDataRequest, DescribeCreditResultRequest, ApplyBlackListRequest, ApplyCreditAuditRequest, DownloadReportResponse, DownloadRecordListResponse, CreateBotTaskResponse, UploadBotFileRequest, UploadDataFileRequest, DescribeFileModelResponse, DescribeTaskStatusRequest, QueryProductsRequest, QueryProductsResponse, DescribeRecordsResponse, DescribeTaskStatusResponse } from "./cr_models";
 /**
  * cr client
  * @class
@@ -27,6 +27,10 @@ export declare class Client extends AbstractClient {
      * 根据信审任务ID和请求日期，获取相关信审结果。
      */
     DescribeCreditResult(req: DescribeCreditResultRequest, cb?: (error: string, rep: DescribeCreditResultResponse) => void): Promise<DescribeCreditResultResponse>;
+    /**
+     * 导出机器人数据
+     */
+    ExportBotData(req: ExportBotDataRequest, cb?: (error: string, rep: ExportBotDataResponse) => void): Promise<ExportBotDataResponse>;
     /**
      * 用于获取指定案件的对话文本内容，次日早上8:00后可查询前日对话文本内容。
      */

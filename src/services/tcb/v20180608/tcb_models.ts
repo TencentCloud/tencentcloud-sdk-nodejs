@@ -768,6 +768,16 @@ export interface CloudBaseRunVolumeMount {
 }
 
 /**
+ * DescribePostpayFreeQuotas请求参数结构体
+ */
+export interface DescribePostpayFreeQuotasRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+}
+
+/**
  * CloudBaseRun 镜像信息
  */
 export interface CloudBaseRunImageInfo {
@@ -2204,6 +2214,67 @@ export interface DescribeCloudBaseRunVersionSnapshotRequest {
    * 限制大小
    */
   Limit?: number
+}
+
+/**
+ * 后付费资源免费量信息
+ */
+export interface FreequotaInfo {
+  /**
+      * 资源类型
+<li>COS</li>
+<li>CDN</li>
+<li>FLEXDB</li>
+<li>SCF</li>
+      */
+  ResourceType: string
+
+  /**
+   * 资源指标名称
+   */
+  ResourceMetric: string
+
+  /**
+   * 资源指标免费量
+   */
+  FreeQuota: number
+
+  /**
+   * 指标单位
+   */
+  MetricUnit: string
+
+  /**
+      * 免费量抵扣周期
+<li>sum-month:以月为单位抵扣</li>
+<li>sum-day:以天为单位抵扣</li>
+<li>totalize:总容量抵扣</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeductType: string
+
+  /**
+      * 免费量类型
+<li>basic:通用量抵扣</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FreeQuotaType: string
+}
+
+/**
+ * DescribePostpayFreeQuotas返回参数结构体
+ */
+export interface DescribePostpayFreeQuotasResponse {
+  /**
+      * 免费量资源信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FreequotaInfoList?: Array<FreequotaInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
