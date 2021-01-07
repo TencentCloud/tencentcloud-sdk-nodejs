@@ -702,9 +702,8 @@ export interface HaVip {
   HaVipId: string
 
   /**
-      * HAVIP名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * HAVIP名称。
+   */
   HaVipName: string
 
   /**
@@ -728,15 +727,13 @@ export interface HaVip {
   NetworkInterfaceId: string
 
   /**
-      * 被绑定的实例ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 被绑定的实例ID。
+   */
   InstanceId: string
 
   /**
-      * 绑定EIP。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 绑定EIP。
+   */
   AddressIp: string
 
   /**
@@ -752,9 +749,8 @@ UNBIND：未绑定。
   CreatedTime: string
 
   /**
-      * 使用havip的业务标识。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
+   * 使用havip的业务标识。
+   */
   Business: string
 }
 

@@ -47,6 +47,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOrders", req, cb);
     }
     /**
+     * 本接口（ModifyBackupTime）用于设置云数据库实例的备份时间。后台系统将根据此配置定期进行实例备份。
+     */
+    async ModifyBackupTime(req, cb) {
+        return this.request("ModifyBackupTime", req, cb);
+    }
+    /**
      * 本接口(DescribeSaleInfo)用于查询云数据库可售卖的地域和可用区信息。
      */
     async DescribeSaleInfo(req, cb) {
@@ -177,10 +183,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeUpgradePrice", req, cb);
     }
     /**
-     * 本接口（ModifyBackupTime）用于设置云数据库实例的备份时间。后台系统将根据此配置定期进行实例备份。
+     * 本接口（DescribeProjectSecurityGroups）用于查询项目安全组信息
      */
-    async ModifyBackupTime(req, cb) {
-        return this.request("ModifyBackupTime", req, cb);
+    async DescribeProjectSecurityGroups(req, cb) {
+        return this.request("DescribeProjectSecurityGroups", req, cb);
+    }
+    /**
+     * 本接口 (AssociateSecurityGroups) 用于安全组批量绑定云资源。
+     */
+    async AssociateSecurityGroups(req, cb) {
+        return this.request("AssociateSecurityGroups", req, cb);
     }
     /**
      * 本接口（CreateAccount）用于创建云数据库账号。一个实例可以创建多个不同的账号，相同的用户名+不同的host是不同的账号。
@@ -207,6 +219,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDBInstance", req, cb);
     }
     /**
+     * 本接口（ModifyDBInstanceSecurityGroups）用于修改云数据库安全组
+     */
+    async ModifyDBInstanceSecurityGroups(req, cb) {
+        return this.request("ModifyDBInstanceSecurityGroups", req, cb);
+    }
+    /**
      * 本接口(CloseDBExtranetAccess)用于关闭云数据库实例的外网访问。关闭外网访问后，外网地址将不可访问，查询实例列表接口将不返回对应实例的外网域名和端口信息。
      */
     async CloseDBExtranetAccess(req, cb) {
@@ -223,6 +241,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAccounts(req, cb) {
         return this.request("DescribeAccounts", req, cb);
+    }
+    /**
+     * 相当于在mysqld中执行flush logs，完成切分的binlog将展示在实例控制台binlog列表里。
+     */
+    async FlushBinlog(req, cb) {
+        return this.request("FlushBinlog", req, cb);
     }
     /**
      * 本接口（CopyAccountPrivileges）用于复制云数据库账号的权限。
@@ -242,6 +266,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribePrice(req, cb) {
         return this.request("DescribePrice", req, cb);
+    }
+    /**
+     * 本接口（DescribeDBSecurityGroups）用于查询实例安全组信息
+     */
+    async DescribeDBSecurityGroups(req, cb) {
+        return this.request("DescribeDBSecurityGroups", req, cb);
     }
     /**
      * 本接口（CloneAccount）用于克隆实例账户。
@@ -274,10 +304,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBResourceUsage", req, cb);
     }
     /**
-     * 相当于在mysqld中执行flush logs，完成切分的binlog将展示在实例控制台binlog列表里。
+     * 本接口(DisassociateSecurityGroups)用于安全组批量解绑实例。
      */
-    async FlushBinlog(req, cb) {
-        return this.request("FlushBinlog", req, cb);
+    async DisassociateSecurityGroups(req, cb) {
+        return this.request("DisassociateSecurityGroups", req, cb);
     }
     /**
      * 本接口(ModifyLogFileRetentionPeriod)用于修改数据库备份日志保存天数。

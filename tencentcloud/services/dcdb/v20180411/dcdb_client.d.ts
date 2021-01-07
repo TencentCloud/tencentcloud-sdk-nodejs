@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeUserTasksResponse, InitDCDBInstancesResponse, UpgradeDCDBInstanceResponse, DescribeAccountPrivilegesResponse, DescribeDatabasesRequest, DescribeDBParametersRequest, DescribeAccountsRequest, DescribeDCDBPriceResponse, FlushBinlogResponse, DescribeDBSyncModeResponse, DescribeDCDBUpgradePriceResponse, CreateAccountRequest, DescribeDBParametersResponse, CloneAccountResponse, ModifyAccountDescriptionResponse, CreateDCDBInstanceResponse, ModifyDBInstancesProjectResponse, DescribeDBLogFilesRequest, DescribeOrdersResponse, ResetAccountPasswordRequest, CopyAccountPrivilegesResponse, CloneAccountRequest, DescribeDCDBRenewalPriceRequest, DescribeDCDBPriceRequest, DescribeSqlLogsRequest, ResetAccountPasswordResponse, DescribeDCDBSaleInfoRequest, RenewDCDBInstanceRequest, GrantAccountPrivilegesRequest, DescribeShardSpecRequest, DescribeDCDBShardsRequest, ModifyDBParametersRequest, ModifyDBParametersResponse, CopyAccountPrivilegesRequest, DescribeDatabaseTableRequest, OpenDBExtranetAccessResponse, DescribeDatabaseObjectsResponse, RenewDCDBInstanceResponse, DescribeDCDBRenewalPriceResponse, DescribeShardSpecResponse, DescribeDCDBShardsResponse, GrantAccountPrivilegesResponse, OpenDBExtranetAccessRequest, DescribeDCDBSaleInfoResponse, DescribeDBSyncModeRequest, CloseDBExtranetAccessResponse, ModifyAccountDescriptionRequest, DescribeProjectsRequest, DescribeDatabasesResponse, DescribeOrdersRequest, DescribeDBLogFilesResponse, CloseDBExtranetAccessRequest, InitDCDBInstancesRequest, DescribeSqlLogsResponse, DeleteAccountRequest, DescribeDCDBInstancesResponse, CreateDCDBInstanceRequest, DescribeDCDBUpgradePriceRequest, ModifyDBSyncModeRequest, DescribeProjectsResponse, CreateAccountResponse, DescribeDatabaseObjectsRequest, UpgradeDCDBInstanceRequest, DescribeDatabaseTableResponse, DescribeAccountPrivilegesRequest, DescribeAccountsResponse, DescribeDCDBInstancesRequest, ModifyDBInstancesProjectRequest, FlushBinlogRequest, ModifyDBSyncModeResponse, DescribeUserTasksRequest, DeleteAccountResponse } from "./dcdb_models";
+import { DescribeUserTasksResponse, InitDCDBInstancesResponse, UpgradeDCDBInstanceResponse, DescribeAccountPrivilegesResponse, DescribeDatabasesRequest, DescribeDBParametersRequest, DescribeAccountsRequest, DescribeDCDBPriceResponse, AssociateSecurityGroupsRequest, FlushBinlogResponse, DescribeDBSecurityGroupsResponse, DescribeDBSyncModeResponse, DescribeProjectSecurityGroupsRequest, DescribeDCDBUpgradePriceResponse, CreateAccountRequest, DescribeDBParametersResponse, CloneAccountResponse, ModifyAccountDescriptionResponse, CreateDCDBInstanceResponse, ModifyDBInstancesProjectResponse, DescribeDBLogFilesRequest, DescribeOrdersResponse, ModifyDBInstanceSecurityGroupsResponse, ResetAccountPasswordRequest, CopyAccountPrivilegesResponse, CloneAccountRequest, DescribeDCDBRenewalPriceRequest, DescribeDBSecurityGroupsRequest, DescribeDCDBPriceRequest, DescribeProjectSecurityGroupsResponse, DescribeSqlLogsRequest, ResetAccountPasswordResponse, DescribeDCDBSaleInfoRequest, RenewDCDBInstanceRequest, GrantAccountPrivilegesRequest, DescribeShardSpecRequest, DescribeDCDBShardsRequest, ModifyDBParametersRequest, ModifyDBInstanceSecurityGroupsRequest, ModifyDBParametersResponse, CopyAccountPrivilegesRequest, DescribeDatabaseTableRequest, OpenDBExtranetAccessResponse, DescribeDatabaseObjectsResponse, RenewDCDBInstanceResponse, DescribeShardSpecResponse, AssociateSecurityGroupsResponse, DescribeDCDBRenewalPriceResponse, DescribeDCDBShardsResponse, GrantAccountPrivilegesResponse, OpenDBExtranetAccessRequest, DescribeDCDBSaleInfoResponse, DescribeDBSyncModeRequest, CloseDBExtranetAccessResponse, ModifyAccountDescriptionRequest, DescribeProjectsRequest, DescribeDatabasesResponse, DescribeOrdersRequest, DescribeDBLogFilesResponse, CloseDBExtranetAccessRequest, InitDCDBInstancesRequest, DescribeSqlLogsResponse, DeleteAccountRequest, DescribeDCDBInstancesResponse, CreateDCDBInstanceRequest, DescribeDCDBUpgradePriceRequest, ModifyDBSyncModeRequest, DescribeProjectsResponse, CreateAccountResponse, DescribeDatabaseObjectsRequest, UpgradeDCDBInstanceRequest, DisassociateSecurityGroupsRequest, DescribeDatabaseTableResponse, DescribeAccountPrivilegesRequest, DescribeAccountsResponse, DescribeDCDBInstancesRequest, ModifyDBInstancesProjectRequest, FlushBinlogRequest, ModifyDBSyncModeResponse, DisassociateSecurityGroupsResponse, DescribeUserTasksRequest, DeleteAccountResponse } from "./dcdb_models";
 /**
  * dcdb client
  * @class
@@ -21,6 +21,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeDatabaseObjects(req: DescribeDatabaseObjectsRequest, cb?: (error: string, rep: DescribeDatabaseObjectsResponse) => void): Promise<DescribeDatabaseObjectsResponse>;
     /**
+     * 本接口（DescribeDatabaseTable）用于查询云数据库实例的表信息。
+     */
+    DescribeDatabaseTable(req: DescribeDatabaseTableRequest, cb?: (error: string, rep: DescribeDatabaseTableResponse) => void): Promise<DescribeDatabaseTableResponse>;
+    /**
      * 查询可创建的分布式数据库可售卖的分片规格配置。
      */
     DescribeShardSpec(req?: DescribeShardSpecRequest, cb?: (error: string, rep: DescribeShardSpecResponse) => void): Promise<DescribeShardSpecResponse>;
@@ -30,9 +34,10 @@ export declare class Client extends AbstractClient {
      */
     ResetAccountPassword(req: ResetAccountPasswordRequest, cb?: (error: string, rep: ResetAccountPasswordResponse) => void): Promise<ResetAccountPasswordResponse>;
     /**
-     * 本接口（DescribeDCDBUpgradePrice）用于查询升级分布式数据库实例价格。
+     * 查询云数据库实例列表，支持通过项目ID、实例ID、内网地址、实例名称等来筛选实例。
+如果不指定任何筛选条件，则默认返回10条实例记录，单次请求最多支持返回100条实例记录。
      */
-    DescribeDCDBUpgradePrice(req: DescribeDCDBUpgradePriceRequest, cb?: (error: string, rep: DescribeDCDBUpgradePriceResponse) => void): Promise<DescribeDCDBUpgradePriceResponse>;
+    DescribeDCDBInstances(req: DescribeDCDBInstancesRequest, cb?: (error: string, rep: DescribeDCDBInstancesResponse) => void): Promise<DescribeDCDBInstancesResponse>;
     /**
      * 本接口（ModifyAccountDescription）用于修改云数据库账号备注。
 注意：相同用户名，不同Host是不同的账号。
@@ -62,10 +67,6 @@ export declare class Client extends AbstractClient {
      * 本接口(InitDCDBInstances)用于初始化云数据库实例，包括设置默认字符集、表名大小写敏感等。
      */
     InitDCDBInstances(req: InitDCDBInstancesRequest, cb?: (error: string, rep: InitDCDBInstancesResponse) => void): Promise<InitDCDBInstancesResponse>;
-    /**
-     * 本接口（DescribeAccounts）用于查询指定云数据库实例的账号列表。
-     */
-    DescribeAccounts(req: DescribeAccountsRequest, cb?: (error: string, rep: DescribeAccountsResponse) => void): Promise<DescribeAccountsResponse>;
     /**
      * 本接口（GrantAccountPrivileges）用于给云数据库账号赋权。
 注意：相同用户名，不同Host是不同的账号。
@@ -100,9 +101,21 @@ export declare class Client extends AbstractClient {
      */
     DescribeDBSyncMode(req: DescribeDBSyncModeRequest, cb?: (error: string, rep: DescribeDBSyncModeResponse) => void): Promise<DescribeDBSyncModeResponse>;
     /**
+     * 本接口（DescribeProjectSecurityGroups）用于查询项目安全组信息
+     */
+    DescribeProjectSecurityGroups(req: DescribeProjectSecurityGroupsRequest, cb?: (error: string, rep: DescribeProjectSecurityGroupsResponse) => void): Promise<DescribeProjectSecurityGroupsResponse>;
+    /**
+     * 本接口 (AssociateSecurityGroups) 用于安全组批量绑定云资源。
+     */
+    AssociateSecurityGroups(req: AssociateSecurityGroupsRequest, cb?: (error: string, rep: AssociateSecurityGroupsResponse) => void): Promise<AssociateSecurityGroupsResponse>;
+    /**
      * 本接口（CreateAccount）用于创建云数据库账号。一个实例可以创建多个不同的账号，相同的用户名+不同的host是不同的账号。
      */
     CreateAccount(req: CreateAccountRequest, cb?: (error: string, rep: CreateAccountResponse) => void): Promise<CreateAccountResponse>;
+    /**
+     * 本接口（ModifyDBInstanceSecurityGroups）用于修改云数据库安全组
+     */
+    ModifyDBInstanceSecurityGroups(req: ModifyDBInstanceSecurityGroupsRequest, cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void): Promise<ModifyDBInstanceSecurityGroupsResponse>;
     /**
      * 本接口（UpgradeDCDBInstance）用于升级分布式数据库实例。本接口完成下单和支付两个动作，如果发生支付失败的错误，调用用户账户相关接口中的支付订单接口（PayDeals）重新支付即可。
      */
@@ -120,10 +133,13 @@ export declare class Client extends AbstractClient {
      */
     CloseDBExtranetAccess(req: CloseDBExtranetAccessRequest, cb?: (error: string, rep: CloseDBExtranetAccessResponse) => void): Promise<CloseDBExtranetAccessResponse>;
     /**
-     * 查询云数据库实例列表，支持通过项目ID、实例ID、内网地址、实例名称等来筛选实例。
-如果不指定任何筛选条件，则默认返回10条实例记录，单次请求最多支持返回100条实例记录。
+     * 本接口（DescribeAccounts）用于查询指定云数据库实例的账号列表。
      */
-    DescribeDCDBInstances(req: DescribeDCDBInstancesRequest, cb?: (error: string, rep: DescribeDCDBInstancesResponse) => void): Promise<DescribeDCDBInstancesResponse>;
+    DescribeAccounts(req: DescribeAccountsRequest, cb?: (error: string, rep: DescribeAccountsResponse) => void): Promise<DescribeAccountsResponse>;
+    /**
+     * 相当于在所有分片的mysqld中执行flush logs，完成切分的binlog将展示在各个分片控制台binlog列表里。
+     */
+    FlushBinlog(req: FlushBinlogRequest, cb?: (error: string, rep: FlushBinlogResponse) => void): Promise<FlushBinlogResponse>;
     /**
      * 本接口（CopyAccountPrivileges）用于复制云数据库账号的权限。
 注意：相同用户名，不同Host是不同的账号，Readonly属性相同的账号之间才能复制权限。
@@ -142,17 +158,21 @@ export declare class Client extends AbstractClient {
      */
     DescribeDatabases(req: DescribeDatabasesRequest, cb?: (error: string, rep: DescribeDatabasesResponse) => void): Promise<DescribeDatabasesResponse>;
     /**
-     * 本接口（DescribeDatabaseTable）用于查询云数据库实例的表信息。
+     * 本接口（DescribeDBSecurityGroups）用于查询实例安全组信息
      */
-    DescribeDatabaseTable(req: DescribeDatabaseTableRequest, cb?: (error: string, rep: DescribeDatabaseTableResponse) => void): Promise<DescribeDatabaseTableResponse>;
+    DescribeDBSecurityGroups(req: DescribeDBSecurityGroupsRequest, cb?: (error: string, rep: DescribeDBSecurityGroupsResponse) => void): Promise<DescribeDBSecurityGroupsResponse>;
+    /**
+     * 本接口（DescribeDCDBUpgradePrice）用于查询升级分布式数据库实例价格。
+     */
+    DescribeDCDBUpgradePrice(req: DescribeDCDBUpgradePriceRequest, cb?: (error: string, rep: DescribeDCDBUpgradePriceResponse) => void): Promise<DescribeDCDBUpgradePriceResponse>;
     /**
      * 本接口（CloneAccount）用于克隆实例账户。
      */
     CloneAccount(req: CloneAccountRequest, cb?: (error: string, rep: CloneAccountResponse) => void): Promise<CloneAccountResponse>;
     /**
-     * 相当于在所有分片的mysqld中执行flush logs，完成切分的binlog将展示在各个分片控制台binlog列表里。
+     * 本接口(DisassociateSecurityGroups)用于安全组批量解绑实例。
      */
-    FlushBinlog(req: FlushBinlogRequest, cb?: (error: string, rep: FlushBinlogResponse) => void): Promise<FlushBinlogResponse>;
+    DisassociateSecurityGroups(req: DisassociateSecurityGroupsRequest, cb?: (error: string, rep: DisassociateSecurityGroupsResponse) => void): Promise<DisassociateSecurityGroupsResponse>;
     /**
      * 本接口（DescribeDCDBRenewalPrice）用于在续费分布式数据库实例时，查询续费的价格。
      */

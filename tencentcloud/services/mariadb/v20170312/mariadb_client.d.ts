@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateDBInstanceRequest, DescribeAccountPrivilegesResponse, DescribeDatabasesRequest, DescribeDBParametersRequest, DescribeAccountsRequest, DescribeRenewalPriceResponse, CreateTmpInstancesRequest, RestartDBInstancesResponse, DescribeUpgradePriceRequest, FlushBinlogResponse, DescribeDBResourceUsageDetailsResponse, DescribeDBInstanceSpecsResponse, DescribeDBSlowLogsRequest, CreateAccountRequest, InitDBInstancesResponse, DescribeDBParametersResponse, ModifyLogFileRetentionPeriodRequest, DescribeFlowResponse, CloneAccountResponse, ModifyAccountDescriptionResponse, DescribeDBResourceUsageRequest, ModifyDBInstancesProjectResponse, DescribeDBLogFilesRequest, DescribeDBResourceUsageResponse, DescribeOrdersResponse, ResetAccountPasswordRequest, CopyAccountPrivilegesResponse, CloneAccountRequest, DescribeDBInstancesRequest, DescribeSaleInfoRequest, RenewDBInstanceRequest, DescribeSqlLogsRequest, ResetAccountPasswordResponse, DescribeDBInstanceSpecsRequest, DescribePriceRequest, CreateDBInstanceResponse, DescribeBackupTimeRequest, DescribeSaleInfoResponse, GrantAccountPrivilegesRequest, ModifyDBParametersRequest, ModifyDBParametersResponse, CopyAccountPrivilegesRequest, OpenDBExtranetAccessResponse, ModifyDBInstanceNameRequest, ModifyBackupTimeRequest, CreateTmpInstancesResponse, UpgradeDBInstanceRequest, DescribeUpgradePriceResponse, DescribePriceResponse, InitDBInstancesRequest, ModifyBackupTimeResponse, GrantAccountPrivilegesResponse, OpenDBExtranetAccessRequest, ModifyDBInstanceNameResponse, CloseDBExtranetAccessResponse, ModifyAccountDescriptionRequest, DescribeDBPerformanceDetailsRequest, DescribeBackupTimeResponse, RenewDBInstanceResponse, DescribeDatabasesResponse, DescribeOrdersRequest, DescribeDBLogFilesResponse, CloseDBExtranetAccessRequest, DescribeSqlLogsResponse, DeleteAccountRequest, DescribeFlowRequest, DescribeDBPerformanceResponse, CreateAccountResponse, DescribeLogFileRetentionPeriodResponse, DescribeDBInstancesResponse, DescribeRenewalPriceRequest, RestartDBInstancesRequest, DescribeDBResourceUsageDetailsRequest, DescribeAccountPrivilegesRequest, DescribeDBPerformanceDetailsResponse, DescribeAccountsResponse, DescribeDBSlowLogsResponse, UpgradeDBInstanceResponse, DescribeLogFileRetentionPeriodRequest, ModifyDBInstancesProjectRequest, FlushBinlogRequest, ModifyLogFileRetentionPeriodResponse, DescribeDBPerformanceRequest, DeleteAccountResponse } from "./mariadb_models";
+import { CreateDBInstanceRequest, DescribeAccountPrivilegesResponse, DescribeDatabasesRequest, DescribeDBParametersRequest, DescribeAccountsRequest, DescribeRenewalPriceResponse, CreateTmpInstancesRequest, RestartDBInstancesResponse, AssociateSecurityGroupsRequest, DescribeUpgradePriceRequest, FlushBinlogResponse, DescribeDBSecurityGroupsResponse, DescribeDBResourceUsageDetailsResponse, DescribeDBInstanceSpecsResponse, DescribeProjectSecurityGroupsRequest, DescribeDBSlowLogsRequest, CreateAccountRequest, InitDBInstancesResponse, DescribeDBParametersResponse, ModifyLogFileRetentionPeriodRequest, DescribeFlowResponse, CloneAccountResponse, ModifyAccountDescriptionResponse, DescribeDBResourceUsageRequest, ModifyDBInstancesProjectResponse, DescribeDBLogFilesRequest, DescribeDBResourceUsageResponse, DescribeOrdersResponse, ModifyDBInstanceSecurityGroupsResponse, ResetAccountPasswordRequest, CopyAccountPrivilegesResponse, CloneAccountRequest, DescribeDBInstancesRequest, DescribeDBSecurityGroupsRequest, DescribeSaleInfoRequest, RenewDBInstanceRequest, DescribeProjectSecurityGroupsResponse, DescribeSqlLogsRequest, ResetAccountPasswordResponse, DescribeDBInstanceSpecsRequest, DescribePriceRequest, CreateDBInstanceResponse, DescribeBackupTimeRequest, DescribeSaleInfoResponse, GrantAccountPrivilegesRequest, ModifyDBParametersRequest, ModifyDBInstanceSecurityGroupsRequest, ModifyDBParametersResponse, CopyAccountPrivilegesRequest, OpenDBExtranetAccessResponse, ModifyDBInstanceNameRequest, ModifyBackupTimeRequest, CreateTmpInstancesResponse, UpgradeDBInstanceRequest, DescribeUpgradePriceResponse, AssociateSecurityGroupsResponse, DescribePriceResponse, InitDBInstancesRequest, ModifyBackupTimeResponse, GrantAccountPrivilegesResponse, OpenDBExtranetAccessRequest, ModifyDBInstanceNameResponse, CloseDBExtranetAccessResponse, ModifyAccountDescriptionRequest, DescribeDBPerformanceDetailsRequest, DescribeBackupTimeResponse, RenewDBInstanceResponse, DescribeDatabasesResponse, DescribeOrdersRequest, DescribeDBLogFilesResponse, CloseDBExtranetAccessRequest, DescribeSqlLogsResponse, DeleteAccountRequest, DescribeFlowRequest, DescribeDBPerformanceResponse, CreateAccountResponse, DescribeLogFileRetentionPeriodResponse, DescribeDBInstancesResponse, DescribeRenewalPriceRequest, RestartDBInstancesRequest, DescribeDBResourceUsageDetailsRequest, DisassociateSecurityGroupsRequest, DescribeAccountPrivilegesRequest, DescribeDBPerformanceDetailsResponse, DescribeAccountsResponse, DescribeDBSlowLogsResponse, UpgradeDBInstanceResponse, DescribeLogFileRetentionPeriodRequest, ModifyDBInstancesProjectRequest, FlushBinlogRequest, ModifyLogFileRetentionPeriodResponse, DisassociateSecurityGroupsResponse, DescribeDBPerformanceRequest, DeleteAccountResponse } from "./mariadb_models";
 /**
  * mariadb client
  * @class
@@ -20,6 +20,10 @@ export declare class Client extends AbstractClient {
      * 本接口（DescribeOrders）用于查询云数据库订单信息。传入订单ID来查询订单关联的云数据库实例，和对应的任务流程ID。
      */
     DescribeOrders(req: DescribeOrdersRequest, cb?: (error: string, rep: DescribeOrdersResponse) => void): Promise<DescribeOrdersResponse>;
+    /**
+     * 本接口（ModifyBackupTime）用于设置云数据库实例的备份时间。后台系统将根据此配置定期进行实例备份。
+     */
+    ModifyBackupTime(req: ModifyBackupTimeRequest, cb?: (error: string, rep: ModifyBackupTimeResponse) => void): Promise<ModifyBackupTimeResponse>;
     /**
      * 本接口(DescribeSaleInfo)用于查询云数据库可售卖的地域和可用区信息。
      */
@@ -109,9 +113,13 @@ export declare class Client extends AbstractClient {
      */
     DescribeUpgradePrice(req: DescribeUpgradePriceRequest, cb?: (error: string, rep: DescribeUpgradePriceResponse) => void): Promise<DescribeUpgradePriceResponse>;
     /**
-     * 本接口（ModifyBackupTime）用于设置云数据库实例的备份时间。后台系统将根据此配置定期进行实例备份。
+     * 本接口（DescribeProjectSecurityGroups）用于查询项目安全组信息
      */
-    ModifyBackupTime(req: ModifyBackupTimeRequest, cb?: (error: string, rep: ModifyBackupTimeResponse) => void): Promise<ModifyBackupTimeResponse>;
+    DescribeProjectSecurityGroups(req: DescribeProjectSecurityGroupsRequest, cb?: (error: string, rep: DescribeProjectSecurityGroupsResponse) => void): Promise<DescribeProjectSecurityGroupsResponse>;
+    /**
+     * 本接口 (AssociateSecurityGroups) 用于安全组批量绑定云资源。
+     */
+    AssociateSecurityGroups(req: AssociateSecurityGroupsRequest, cb?: (error: string, rep: AssociateSecurityGroupsResponse) => void): Promise<AssociateSecurityGroupsResponse>;
     /**
      * 本接口（CreateAccount）用于创建云数据库账号。一个实例可以创建多个不同的账号，相同的用户名+不同的host是不同的账号。
      */
@@ -129,6 +137,10 @@ export declare class Client extends AbstractClient {
      */
     CreateDBInstance(req: CreateDBInstanceRequest, cb?: (error: string, rep: CreateDBInstanceResponse) => void): Promise<CreateDBInstanceResponse>;
     /**
+     * 本接口（ModifyDBInstanceSecurityGroups）用于修改云数据库安全组
+     */
+    ModifyDBInstanceSecurityGroups(req: ModifyDBInstanceSecurityGroupsRequest, cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void): Promise<ModifyDBInstanceSecurityGroupsResponse>;
+    /**
      * 本接口(CloseDBExtranetAccess)用于关闭云数据库实例的外网访问。关闭外网访问后，外网地址将不可访问，查询实例列表接口将不返回对应实例的外网域名和端口信息。
      */
     CloseDBExtranetAccess(req: CloseDBExtranetAccessRequest, cb?: (error: string, rep: CloseDBExtranetAccessResponse) => void): Promise<CloseDBExtranetAccessResponse>;
@@ -140,6 +152,10 @@ export declare class Client extends AbstractClient {
      * 本接口（DescribeAccounts）用于查询指定云数据库实例的账号列表。
      */
     DescribeAccounts(req: DescribeAccountsRequest, cb?: (error: string, rep: DescribeAccountsResponse) => void): Promise<DescribeAccountsResponse>;
+    /**
+     * 相当于在mysqld中执行flush logs，完成切分的binlog将展示在实例控制台binlog列表里。
+     */
+    FlushBinlog(req: FlushBinlogRequest, cb?: (error: string, rep: FlushBinlogResponse) => void): Promise<FlushBinlogResponse>;
     /**
      * 本接口（CopyAccountPrivileges）用于复制云数据库账号的权限。
 注意：相同用户名，不同Host是不同的账号，Readonly属性相同的账号之间才能复制权限。
@@ -153,6 +169,10 @@ export declare class Client extends AbstractClient {
      * 本接口（DescribePrice）用于在购买实例前，查询实例的价格。
      */
     DescribePrice(req: DescribePriceRequest, cb?: (error: string, rep: DescribePriceResponse) => void): Promise<DescribePriceResponse>;
+    /**
+     * 本接口（DescribeDBSecurityGroups）用于查询实例安全组信息
+     */
+    DescribeDBSecurityGroups(req: DescribeDBSecurityGroupsRequest, cb?: (error: string, rep: DescribeDBSecurityGroupsResponse) => void): Promise<DescribeDBSecurityGroupsResponse>;
     /**
      * 本接口（CloneAccount）用于克隆实例账户。
      */
@@ -174,9 +194,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeDBResourceUsage(req: DescribeDBResourceUsageRequest, cb?: (error: string, rep: DescribeDBResourceUsageResponse) => void): Promise<DescribeDBResourceUsageResponse>;
     /**
-     * 相当于在mysqld中执行flush logs，完成切分的binlog将展示在实例控制台binlog列表里。
+     * 本接口(DisassociateSecurityGroups)用于安全组批量解绑实例。
      */
-    FlushBinlog(req: FlushBinlogRequest, cb?: (error: string, rep: FlushBinlogResponse) => void): Promise<FlushBinlogResponse>;
+    DisassociateSecurityGroups(req: DisassociateSecurityGroupsRequest, cb?: (error: string, rep: DisassociateSecurityGroupsResponse) => void): Promise<DisassociateSecurityGroupsResponse>;
     /**
      * 本接口(ModifyLogFileRetentionPeriod)用于修改数据库备份日志保存天数。
      */

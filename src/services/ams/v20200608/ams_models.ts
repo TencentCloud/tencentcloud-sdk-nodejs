@@ -659,6 +659,11 @@ export interface AmsDetailInfo {
    * 音频审核的请求 id
    */
   RequestId: string
+
+  /**
+   * 音频机审状态
+   */
+  Status: string
 }
 
 /**

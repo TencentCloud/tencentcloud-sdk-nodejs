@@ -436,6 +436,32 @@ export interface ValidateNamespaceExistPersonalRequest {
     Namespace: string;
 }
 /**
+ * 实例预付费模式
+ */
+export interface RegistryChargePrepaid {
+    /**
+      * 购买实例的时长，单位：月
+      */
+    Period: number;
+    /**
+      * 自动续费标识，0：手动续费，1：自动续费，2：不续费并且不通知
+      */
+    RenewFlag: number;
+}
+/**
+ * RenewInstance返回参数结构体
+ */
+export interface RenewInstanceResponse {
+    /**
+      * 企业版实例Id
+      */
+    RegistryId?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 实例信息结构体
  */
 export interface Registry {
@@ -488,6 +514,21 @@ export interface Registry {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TagSpecification: TagSpecification;
+    /**
+      * 实例过期时间（预付费）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExpiredAt: string;
+    /**
+      * 实例付费类型，0表示后付费，1表示预付费
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PayMod: number;
+    /**
+      * 预付费续费标识，0表示手动续费，1表示自动续费，2不续费并且不通知
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RenewFlag: number;
 }
 /**
  * DescribeRepositories返回参数结构体
@@ -615,6 +656,23 @@ export interface NamespaceInfo {
       * 命名空间下仓库数量
       */
     RepoCount: number;
+}
+/**
+ * RenewInstance请求参数结构体
+ */
+export interface RenewInstanceRequest {
+    /**
+      * 实例Id
+      */
+    RegistryId: string;
+    /**
+      * 预付费自动续费标识和购买时长
+      */
+    RegistryChargePrepaid: RegistryChargePrepaid;
+    /**
+      * 0 续费， 1按量转包年包月
+      */
+    Flag: number;
 }
 /**
  * 共享镜像仓库用户配额
@@ -1647,6 +1705,10 @@ export interface CreateInstanceRequest {
       * 云标签描述
       */
     TagSpecification?: TagSpecification;
+    /**
+      * 实例计费类型，0表示按量计费，1表示预付费，当前版本只支持后付费，默认为按量计费
+      */
+    RegistryChargeType?: number;
 }
 /**
  * DescribeInstanceToken请求参数结构体

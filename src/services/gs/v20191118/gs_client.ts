@@ -19,10 +19,14 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   StopGameRequest,
+  SaveGameArchiveResponse,
+  SwitchGameArchiveRequest,
   TrylockWorkerResponse,
   StopGameResponse,
   CreateSessionResponse,
+  SaveGameArchiveRequest,
   TrylockWorkerRequest,
+  SwitchGameArchiveResponse,
   CreateSessionRequest,
 } from "./gs_models"
 
@@ -33,6 +37,26 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("gs.tencentcloudapi.com", "2019-11-18", clientConfig)
+  }
+
+  /**
+   * 保存游戏存档
+   */
+  async SaveGameArchive(
+    req: SaveGameArchiveRequest,
+    cb?: (error: string, rep: SaveGameArchiveResponse) => void
+  ): Promise<SaveGameArchiveResponse> {
+    return this.request("SaveGameArchive", req, cb)
+  }
+
+  /**
+   * 尝试锁定机器
+   */
+  async TrylockWorker(
+    req: TrylockWorkerRequest,
+    cb?: (error: string, rep: TrylockWorkerResponse) => void
+  ): Promise<TrylockWorkerResponse> {
+    return this.request("TrylockWorker", req, cb)
   }
 
   /**
@@ -56,12 +80,12 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 尝试锁定机器
+   * 切换游戏存档
    */
-  async TrylockWorker(
-    req: TrylockWorkerRequest,
-    cb?: (error: string, rep: TrylockWorkerResponse) => void
-  ): Promise<TrylockWorkerResponse> {
-    return this.request("TrylockWorker", req, cb)
+  async SwitchGameArchive(
+    req: SwitchGameArchiveRequest,
+    cb?: (error: string, rep: SwitchGameArchiveResponse) => void
+  ): Promise<SwitchGameArchiveResponse> {
+    return this.request("SwitchGameArchive", req, cb)
   }
 }

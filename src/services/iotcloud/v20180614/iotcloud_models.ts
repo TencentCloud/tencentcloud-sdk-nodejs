@@ -1567,6 +1567,11 @@ export interface PublishMessageRequest {
    * 服务质量等级，取值为0或1
    */
   Qos?: number
+
+  /**
+   * Payload内容的编码格式，取值为base64或空。base64表示云端将收到的请求数据进行base64解码后下发到设备，空则直接将原始内容下发到设备
+   */
+  PayloadEncoding?: string
 }
 
 /**

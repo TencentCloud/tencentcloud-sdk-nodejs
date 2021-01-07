@@ -25,11 +25,16 @@ import {
   Music,
   DescribeStationsResponse,
   DescribePackageItemsResponse,
+  DescribeCloudMusicPurchasedRequest,
   PackageItem,
+  DescribeCloudMusicPurchasedResponse,
   DataInfo,
+  MusicOpenDetail,
   Package,
   ReportDataResponse,
   DescribePackageItemsRequest,
+  AuthInfo,
+  Lyric,
   DescribeItemByIdRequest,
   DescribeMusicRequest,
   UseRange,
@@ -37,13 +42,16 @@ import {
   DescribeStationsRequest,
   DescribeItemsRequest,
   Item,
+  DescribeCloudMusicResponse,
   DescribePackagesRequest,
   ImagePath,
   DescribeItemsResponse,
   DescribeItemByIdResponse,
   DescribePackagesResponse,
-  Lyric,
+  DescribeCloudMusicRequest,
+  DescribeAuthInfoResponse,
   DescribeLyricRequest,
+  DescribeAuthInfoRequest,
   ReportDataRequest,
 } from "./ame_models"
 
@@ -67,7 +75,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询已购曲库包列表接口
+   * 获取已购曲库包列表接口
    */
   async DescribePackages(
     req: DescribePackagesRequest,
@@ -87,7 +95,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 分类内容下歌曲列表获取，根据CategoryID或CategoryCode
+   * 该服务后续会停用，不再建议使用
    */
   async DescribeItems(
     req: DescribeItemsRequest,
@@ -97,23 +105,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据接口的模式及歌曲ID来取得对应权限的歌曲播放地址等信息。
+   * 获取授权项目信息列表
    */
-  async DescribeMusic(
-    req: DescribeMusicRequest,
-    cb?: (error: string, rep: DescribeMusicResponse) => void
-  ): Promise<DescribeMusicResponse> {
-    return this.request("DescribeMusic", req, cb)
-  }
-
-  /**
-   * 查询曲库包已核验歌曲列表接口
-   */
-  async DescribePackageItems(
-    req: DescribePackageItemsRequest,
-    cb?: (error: string, rep: DescribePackageItemsResponse) => void
-  ): Promise<DescribePackageItemsResponse> {
-    return this.request("DescribePackageItems", req, cb)
+  async DescribeAuthInfo(
+    req: DescribeAuthInfoRequest,
+    cb?: (error: string, rep: DescribeAuthInfoResponse) => void
+  ): Promise<DescribeAuthInfoResponse> {
+    return this.request("DescribeAuthInfo", req, cb)
   }
 
   /**
@@ -127,7 +125,47 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取素材库列表时使用
+   * 获取曲库包歌曲播放信息接口
+   */
+  async DescribeMusic(
+    req: DescribeMusicRequest,
+    cb?: (error: string, rep: DescribeMusicResponse) => void
+  ): Promise<DescribeMusicResponse> {
+    return this.request("DescribeMusic", req, cb)
+  }
+
+  /**
+   * 获取云音乐播放信息接口
+   */
+  async DescribeCloudMusic(
+    req: DescribeCloudMusicRequest,
+    cb?: (error: string, rep: DescribeCloudMusicResponse) => void
+  ): Promise<DescribeCloudMusicResponse> {
+    return this.request("DescribeCloudMusic", req, cb)
+  }
+
+  /**
+   * 获取曲库包下已核销歌曲列表接口
+   */
+  async DescribePackageItems(
+    req: DescribePackageItemsRequest,
+    cb?: (error: string, rep: DescribePackageItemsResponse) => void
+  ): Promise<DescribePackageItemsResponse> {
+    return this.request("DescribePackageItems", req, cb)
+  }
+
+  /**
+   * 获取授权项目下已购云音乐列表
+   */
+  async DescribeCloudMusicPurchased(
+    req: DescribeCloudMusicPurchasedRequest,
+    cb?: (error: string, rep: DescribeCloudMusicPurchasedResponse) => void
+  ): Promise<DescribeCloudMusicPurchasedResponse> {
+    return this.request("DescribeCloudMusicPurchased", req, cb)
+  }
+
+  /**
+   * 该服务后续会停用，不再建议使用
    */
   async DescribeStations(
     req: DescribeStationsRequest,

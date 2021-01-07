@@ -212,6 +212,10 @@ OPEN：公网属性， INTERNAL：内网属性。
       * Stgw独占集群的标签。
       */
     ClusterTag?: string;
+    /**
+      * EIP 的唯一 ID，形如：eip-11112222，仅适用于内网负载均衡绑定EIP
+      */
+    EipAddressId?: string;
 }
 /**
  * 一条转发规则的健康检查状态

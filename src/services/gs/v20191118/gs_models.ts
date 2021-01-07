@@ -31,6 +31,41 @@ export interface StopGameRequest {
 }
 
 /**
+ * SaveGameArchive返回参数结构体
+ */
+export interface SaveGameArchiveResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SwitchGameArchive请求参数结构体
+ */
+export interface SwitchGameArchiveRequest {
+  /**
+   * 游戏用户ID
+   */
+  UserId: string
+
+  /**
+   * 游戏ID
+   */
+  GameId: string
+
+  /**
+   * 游戏存档Url
+   */
+  GameArchiveUrl?: string
+
+  /**
+   * 游戏相关参数
+   */
+  GameContext?: string
+}
+
+/**
  * TrylockWorker返回参数结构体
  */
 export interface TrylockWorkerResponse {
@@ -76,6 +111,21 @@ export interface CreateSessionResponse {
 }
 
 /**
+ * SaveGameArchive请求参数结构体
+ */
+export interface SaveGameArchiveRequest {
+  /**
+   * 游戏用户ID
+   */
+  UserId: string
+
+  /**
+   * 游戏ID
+   */
+  GameId: string
+}
+
+/**
  * TrylockWorker请求参数结构体
  */
 export interface TrylockWorkerRequest {
@@ -108,6 +158,16 @@ export interface TrylockWorkerRequest {
    * 分组ID
    */
   GroupId?: string
+}
+
+/**
+ * SwitchGameArchive返回参数结构体
+ */
+export interface SwitchGameArchiveResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

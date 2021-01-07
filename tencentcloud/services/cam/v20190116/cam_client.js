@@ -323,6 +323,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DetachGroupPolicy", req, cb);
     }
     /**
+     * 获取企业微信子用户列表
+     */
+    async ListWeChatWorkSubAccounts(req, cb) {
+        return this.request("ListWeChatWorkSubAccounts", req, cb);
+    }
+    /**
      * 从用户组删除用户
      */
     async RemoveUserFromGroup(req, cb) {

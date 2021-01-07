@@ -1950,6 +1950,103 @@ export interface CreateAgentTaxPaymentInfosResponse {
     RequestId?: string;
 }
 /**
+ * RechargeByThirdPay请求参数结构体
+ */
+export interface RechargeByThirdPayRequest {
+    /**
+      * 请求类型 此接口固定填：MemberRechargeThirdPayReq
+      */
+    RequestType: string;
+    /**
+      * 商户号
+      */
+    MerchantCode: string;
+    /**
+      * 支付渠道
+      */
+    PayChannel: string;
+    /**
+      * 子渠道
+      */
+    PayChannelSubId: number;
+    /**
+      * 交易订单号
+      */
+    OrderId: string;
+    /**
+      * 父账户账号，资金汇总账号
+      */
+    BankAccountNumber: string;
+    /**
+      * 平台短号(银行分配)
+      */
+    PlatformShortNumber: string;
+    /**
+      * 聚鑫分配的安全ID
+      */
+    MidasSecretId: string;
+    /**
+      * 聚鑫分配的支付主MidasAppId
+      */
+    MidasAppId: string;
+    /**
+      * 计费签名
+      */
+    MidasSignature: string;
+    /**
+      * 交易流水号
+      */
+    TransSequenceNumber: string;
+    /**
+      * 子账户账号
+      */
+    BankSubAccountNumber: string;
+    /**
+      * 交易手续费，以元为单位
+      */
+    TransFee: string;
+    /**
+      * 第三方支付渠道类型 0001-微信 0002-支付宝 0003-京东支付
+      */
+    ThirdPayChannel: string;
+    /**
+      * 第三方渠道商户号
+      */
+    ThirdPayChannelMerchantCode: string;
+    /**
+      * 第三方渠道订单号或流水号
+      */
+    ThirdPayChannelOrderId: string;
+    /**
+      * 交易金额
+      */
+    CurrencyAmount: string;
+    /**
+      * 单位，1：元，2：角，3：分
+      */
+    CurrencyUnit: string;
+    /**
+      * 币种
+      */
+    CurrencyType: string;
+    /**
+      * 交易网会员代码
+      */
+    TransNetMemberCode: string;
+    /**
+      * midas环境参数
+      */
+    MidasEnvironment: string;
+    /**
+      * 保留域
+      */
+    ReservedMessage?: string;
+    /**
+      * 备注
+      */
+    Remark?: string;
+}
+/**
  * QueryPayerInfo请求参数结构体
  */
 export interface QueryPayerInfoRequest {
@@ -2798,101 +2895,19 @@ export interface QueryInvoiceResultData {
     PdfUrl: string;
 }
 /**
- * RechargeByThirdPay请求参数结构体
+ * 智能代发-单笔代发转账对账单返回数据
  */
-export interface RechargeByThirdPayRequest {
+export interface QueryBillDownloadURLData {
     /**
-      * 请求类型 此接口固定填：MemberRechargeThirdPayReq
+      * 统一对账单下载链接
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RequestType: string;
+    BillDownloadURL: string;
     /**
-      * 商户号
+      * 渠道原始对账单下载链接
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    MerchantCode: string;
-    /**
-      * 支付渠道
-      */
-    PayChannel: string;
-    /**
-      * 子渠道
-      */
-    PayChannelSubId: number;
-    /**
-      * 交易订单号
-      */
-    OrderId: string;
-    /**
-      * 父账户账号，资金汇总账号
-      */
-    BankAccountNumber: string;
-    /**
-      * 平台短号(银行分配)
-      */
-    PlatformShortNumber: string;
-    /**
-      * 聚鑫分配的安全ID
-      */
-    MidasSecretId: string;
-    /**
-      * 聚鑫分配的支付主MidasAppId
-      */
-    MidasAppId: string;
-    /**
-      * 计费签名
-      */
-    MidasSignature: string;
-    /**
-      * 交易流水号
-      */
-    TransSequenceNumber: string;
-    /**
-      * 子账户账号
-      */
-    BankSubAccountNumber: string;
-    /**
-      * 交易手续费，以元为单位
-      */
-    TransFee: string;
-    /**
-      * 第三方支付渠道类型 0001-微信 0002-支付宝 0003-京东支付
-      */
-    ThirdPayChannel: string;
-    /**
-      * 第三方渠道商户号
-      */
-    ThirdPayChannelMerchantCode: string;
-    /**
-      * 第三方渠道订单号或流水号
-      */
-    ThirdPayChannelOrderId: string;
-    /**
-      * 交易金额
-      */
-    CurrencyAmount: string;
-    /**
-      * 单位，1：元，2：角，3：分
-      */
-    CurrencyUnit: string;
-    /**
-      * 币种
-      */
-    CurrencyType: string;
-    /**
-      * 交易网会员代码
-      */
-    TransNetMemberCode: string;
-    /**
-      * midas环境参数
-      */
-    MidasEnvironment: string;
-    /**
-      * 保留域
-      */
-    ReservedMessage?: string;
-    /**
-      * 备注
-      */
-    Remark?: string;
+    OriginalBillDownloadURL: string;
 }
 /**
  * QuerySingleTransactionStatus返回参数结构体
@@ -3486,17 +3501,22 @@ export interface QueryExchangerateResult {
     Data: Array<QueryExchangerateData>;
 }
 /**
- * QueryOrder返回参数结构体
+ * QueryBillDownloadURL返回参数结构体
  */
-export interface QueryOrderResponse {
+export interface QueryBillDownloadURLResponse {
     /**
-      * 返回订单数
+      * 错误码。响应成功："SUCCESS"，其他为不成功
       */
-    TotalNum?: number;
+    ErrCode?: string;
     /**
-      * 查询结果的订单列表
+      * 响应消息
       */
-    OrderList?: Array<QueryOrderOutOrderList>;
+    ErrMessage?: string;
+    /**
+      * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result?: QueryBillDownloadURLData;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5740,6 +5760,26 @@ export interface RechargeMemberThirdPayRequest {
     Profile?: string;
 }
 /**
+ * QueryBillDownloadURL请求参数结构体
+ */
+export interface QueryBillDownloadURLRequest {
+    /**
+      * 商户号
+      */
+    MerchantId: string;
+    /**
+      * 代发类型：
+1、 微信企业付款
+2、 支付宝转账
+3、 平安银企直联代发转账
+      */
+    TransferType: number;
+    /**
+      * 账单日期，格式yyyy-MM-dd
+      */
+    BillDate: string;
+}
+/**
  * TransferSinglePay请求参数结构体
  */
 export interface TransferSinglePayRequest {
@@ -7312,6 +7352,23 @@ export interface QueryReconciliationDocumentRequest {
       * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
       */
     Profile?: string;
+}
+/**
+ * QueryOrder返回参数结构体
+ */
+export interface QueryOrderResponse {
+    /**
+      * 返回订单数
+      */
+    TotalNum?: number;
+    /**
+      * 查询结果的订单列表
+      */
+    OrderList?: Array<QueryOrderOutOrderList>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * UnifiedOrder请求参数结构体

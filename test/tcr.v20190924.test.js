@@ -268,6 +268,16 @@ it("tcr.v20190924.DescribeApplicationTriggerLogPersonal", async function () {
     }
 })
 
+it("tcr.v20190924.RenewInstance", async function () {
+    try {
+       const data = await client.RenewInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.DeleteInstanceToken", async function () {
     try {
        const data = await client.DeleteInstanceToken({})

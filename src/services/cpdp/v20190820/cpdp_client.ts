@@ -76,6 +76,7 @@ import {
   QueryOrderOutSubOrderList,
   QueryOutwardOrderResult,
   CreateAgentTaxPaymentInfosResponse,
+  RechargeByThirdPayRequest,
   QueryPayerInfoRequest,
   QueryMerchantInfoForManagementResponse,
   CreateTransferBatchResponse,
@@ -107,7 +108,7 @@ import {
   QuerySmallAmountTransferResponse,
   CreateRedInvoiceResponse,
   QueryInvoiceResultData,
-  RechargeByThirdPayRequest,
+  QueryBillDownloadURLData,
   QuerySingleTransactionStatusResponse,
   QueryAcctInfoRequest,
   DescribeChargeDetailResponse,
@@ -123,7 +124,7 @@ import {
   QueryMerchantBalanceData,
   QueryMemberTransactionRequest,
   QueryExchangerateResult,
-  QueryOrderResponse,
+  QueryBillDownloadURLResponse,
   QueryMerchantBalanceRequest,
   CreateAcctResponse,
   DescribeChargeDetailRequest,
@@ -180,6 +181,7 @@ import {
   QueryMerchantInfoForManagementRequest,
   FileItem,
   RechargeMemberThirdPayRequest,
+  QueryBillDownloadURLRequest,
   TransferSinglePayRequest,
   ApplyOutwardOrderResult,
   ApplyPayerInfoRequest,
@@ -223,6 +225,7 @@ import {
   QueryAgentStatementsRequest,
   BindRelateAcctUnionPayResponse,
   QueryReconciliationDocumentRequest,
+  QueryOrderResponse,
   UnifiedOrderRequest,
   UnBindAcctRequest,
   MigrateOrderRefundResponse,
@@ -589,6 +592,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryOrderResponse) => void
   ): Promise<QueryOrderResponse> {
     return this.request("QueryOrder", req, cb)
+  }
+
+  /**
+   * 获取单笔代发转账对账单下载URL
+   */
+  async QueryBillDownloadURL(
+    req: QueryBillDownloadURLRequest,
+    cb?: (error: string, rep: QueryBillDownloadURLResponse) => void
+  ): Promise<QueryBillDownloadURLResponse> {
+    return this.request("QueryBillDownloadURL", req, cb)
   }
 
   /**

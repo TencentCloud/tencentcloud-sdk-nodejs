@@ -200,6 +200,23 @@ export interface RestartDBInstancesResponse {
     RequestId?: string;
 }
 /**
+ * AssociateSecurityGroups请求参数结构体
+ */
+export interface AssociateSecurityGroupsRequest {
+    /**
+      * 数据库引擎名称，本接口取值：mariadb。
+      */
+    Product: string;
+    /**
+      * 要绑定的安全组ID，类似sg-efil73jd。
+      */
+    SecurityGroupId: string;
+    /**
+      * 被绑定的实例ID，类似tdsql-lesecurk，支持指定多个实例。
+      */
+    InstanceIds: Array<string>;
+}
+/**
  * DescribeUpgradePrice请求参数结构体
  */
 export interface DescribeUpgradePriceRequest {
@@ -222,6 +239,19 @@ export interface DescribeUpgradePriceRequest {
  * FlushBinlog返回参数结构体
  */
 export interface FlushBinlogResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeDBSecurityGroups返回参数结构体
+ */
+export interface DescribeDBSecurityGroupsResponse {
+    /**
+      * 安全组详情。
+      */
+    Groups?: Array<SecurityGroup>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -262,6 +292,19 @@ export interface DescribeDBInstanceSpecsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeProjectSecurityGroups请求参数结构体
+ */
+export interface DescribeProjectSecurityGroupsRequest {
+    /**
+      * 数据库引擎名称，本接口取值：mariadb。
+      */
+    Product: string;
+    /**
+      * 项目ID。
+      */
+    ProjectId?: number;
 }
 /**
  * DescribeDBSlowLogs请求参数结构体
@@ -623,6 +666,15 @@ export interface DescribeOrdersResponse {
     RequestId?: string;
 }
 /**
+ * ModifyDBInstanceSecurityGroups返回参数结构体
+ */
+export interface ModifyDBInstanceSecurityGroupsResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ResetAccountPassword请求参数结构体
  */
 export interface ResetAccountPasswordRequest {
@@ -768,6 +820,19 @@ export interface DescribeDBInstancesRequest {
     FilterInstanceType?: string;
 }
 /**
+ * DescribeDBSecurityGroups请求参数结构体
+ */
+export interface DescribeDBSecurityGroupsRequest {
+    /**
+      * 数据库引擎名称，本接口取值：mariadb。
+      */
+    Product: string;
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+}
+/**
  * DescribeSaleInfo请求参数结构体
  */
 export declare type DescribeSaleInfoRequest = null;
@@ -791,6 +856,19 @@ export interface RenewDBInstanceRequest {
       * 代金券ID列表，目前仅支持指定一张代金券。
       */
     VoucherIds?: Array<string>;
+}
+/**
+ * DescribeProjectSecurityGroups返回参数结构体
+ */
+export interface DescribeProjectSecurityGroupsResponse {
+    /**
+      * 安全组详情。
+      */
+    Groups?: Array<SecurityGroup>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeSqlLogs请求参数结构体
@@ -1038,6 +1116,23 @@ export interface ModifyDBParametersRequest {
     Params: Array<DBParamValue>;
 }
 /**
+ * ModifyDBInstanceSecurityGroups请求参数结构体
+ */
+export interface ModifyDBInstanceSecurityGroupsRequest {
+    /**
+      * 数据库引擎名称，本接口取值：mariadb。
+      */
+    Product: string;
+    /**
+      * 实例ID。
+      */
+    InstanceId: string;
+    /**
+      * 要修改的安全组 ID 列表，一个或者多个安全组 ID 组成的数组
+      */
+    SecurityGroupIds: Array<string>;
+}
+/**
  * 可用区信息
  */
 export interface ZonesInfo {
@@ -1103,6 +1198,39 @@ export interface CopyAccountPrivilegesRequest {
       * 目的账号的 ReadOnly 属性
       */
     DstReadOnly?: string;
+}
+/**
+ * 安全组详情
+ */
+export interface SecurityGroup {
+    /**
+      * 项目ID
+      */
+    ProjectId: number;
+    /**
+      * 创建时间，时间格式：yyyy-mm-dd hh:mm:ss
+      */
+    CreateTime: string;
+    /**
+      * 安全组ID
+      */
+    SecurityGroupId: string;
+    /**
+      * 安全组名称
+      */
+    SecurityGroupName: string;
+    /**
+      * 安全组备注
+      */
+    SecurityGroupRemark: string;
+    /**
+      * 入站规则
+      */
+    Inbound: Array<SecurityGroupBound>;
+    /**
+      * 出站规则
+      */
+    Outbound: Array<SecurityGroupBound>;
 }
 /**
  * OpenDBExtranetAccess返回参数结构体
@@ -1188,6 +1316,27 @@ export interface UpgradeDBInstanceRequest {
     VoucherIds?: Array<string>;
 }
 /**
+ * 安全出入口规则
+ */
+export interface SecurityGroupBound {
+    /**
+      * 策略，ACCEPT 或者 DROP
+      */
+    Action: string;
+    /**
+      * 来源 IP 或 IP 段，例如192.168.0.0/16
+      */
+    CidrIp: string;
+    /**
+      * 端口
+      */
+    PortRange: string;
+    /**
+      * 网络协议，支持 UDP、TCP 等
+      */
+    IpProtocol: string;
+}
+/**
  * DescribeUpgradePrice返回参数结构体
  */
 export interface DescribeUpgradePriceResponse {
@@ -1199,6 +1348,15 @@ export interface DescribeUpgradePriceResponse {
       * 实际价格，单位：分。受折扣等影响，可能和原价不同。
       */
     Price?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * AssociateSecurityGroups返回参数结构体
+ */
+export interface AssociateSecurityGroupsResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2043,6 +2201,23 @@ export interface DescribeDBResourceUsageDetailsRequest {
     MetricName?: string;
 }
 /**
+ * DisassociateSecurityGroups请求参数结构体
+ */
+export interface DisassociateSecurityGroupsRequest {
+    /**
+      * 数据库引擎名称，本接口取值：mariadb。
+      */
+    Product: string;
+    /**
+      * 安全组Id。
+      */
+    SecurityGroupId: string;
+    /**
+      * 实例ID列表，一个或者多个实例Id组成的数组。
+      */
+    InstanceIds: Array<string>;
+}
+/**
  * 云数据库账号信息
  */
 export interface DBAccount {
@@ -2293,6 +2468,15 @@ export interface ModifyLogFileRetentionPeriodResponse {
       * 实例 ID，形如：tdsql-ow728lmc。
       */
     InstanceId?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DisassociateSecurityGroups返回参数结构体
+ */
+export interface DisassociateSecurityGroupsResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -48,6 +48,16 @@ it("dcdb.v20180411.DescribeDatabaseObjects", async function () {
     }
 })
 
+it("dcdb.v20180411.DescribeDatabaseTable", async function () {
+    try {
+       const data = await client.DescribeDatabaseTable({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dcdb.v20180411.DescribeShardSpec", async function () {
     try {
        const data = await client.DescribeShardSpec({})
@@ -68,9 +78,9 @@ it("dcdb.v20180411.ResetAccountPassword", async function () {
     }
 })
 
-it("dcdb.v20180411.DescribeDCDBUpgradePrice", async function () {
+it("dcdb.v20180411.DescribeDCDBInstances", async function () {
     try {
-       const data = await client.DescribeDCDBUpgradePrice({})
+       const data = await client.DescribeDCDBInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -141,16 +151,6 @@ it("dcdb.v20180411.OpenDBExtranetAccess", async function () {
 it("dcdb.v20180411.InitDCDBInstances", async function () {
     try {
        const data = await client.InitDCDBInstances({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("dcdb.v20180411.DescribeAccounts", async function () {
-    try {
-       const data = await client.DescribeAccounts({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,9 +238,39 @@ it("dcdb.v20180411.DescribeDBSyncMode", async function () {
     }
 })
 
+it("dcdb.v20180411.DescribeProjectSecurityGroups", async function () {
+    try {
+       const data = await client.DescribeProjectSecurityGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dcdb.v20180411.AssociateSecurityGroups", async function () {
+    try {
+       const data = await client.AssociateSecurityGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dcdb.v20180411.CreateAccount", async function () {
     try {
        const data = await client.CreateAccount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dcdb.v20180411.ModifyDBInstanceSecurityGroups", async function () {
+    try {
+       const data = await client.ModifyDBInstanceSecurityGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -288,9 +318,19 @@ it("dcdb.v20180411.CloseDBExtranetAccess", async function () {
     }
 })
 
-it("dcdb.v20180411.DescribeDCDBInstances", async function () {
+it("dcdb.v20180411.DescribeAccounts", async function () {
     try {
-       const data = await client.DescribeDCDBInstances({})
+       const data = await client.DescribeAccounts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dcdb.v20180411.FlushBinlog", async function () {
+    try {
+       const data = await client.FlushBinlog({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -338,9 +378,19 @@ it("dcdb.v20180411.DescribeDatabases", async function () {
     }
 })
 
-it("dcdb.v20180411.DescribeDatabaseTable", async function () {
+it("dcdb.v20180411.DescribeDBSecurityGroups", async function () {
     try {
-       const data = await client.DescribeDatabaseTable({})
+       const data = await client.DescribeDBSecurityGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dcdb.v20180411.DescribeDCDBUpgradePrice", async function () {
+    try {
+       const data = await client.DescribeDCDBUpgradePrice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -358,9 +408,9 @@ it("dcdb.v20180411.CloneAccount", async function () {
     }
 })
 
-it("dcdb.v20180411.FlushBinlog", async function () {
+it("dcdb.v20180411.DisassociateSecurityGroups", async function () {
     try {
-       const data = await client.FlushBinlog({})
+       const data = await client.DisassociateSecurityGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -18,6 +18,26 @@ const client = new tencentcloud.gs.v20191118.Client({
 })
 describe("gs.v20191118.test.js", function () {
 
+it("gs.v20191118.SaveGameArchive", async function () {
+    try {
+       const data = await client.SaveGameArchive({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.TrylockWorker", async function () {
+    try {
+       const data = await client.TrylockWorker({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gs.v20191118.CreateSession", async function () {
     try {
        const data = await client.CreateSession({})
@@ -38,9 +58,9 @@ it("gs.v20191118.StopGame", async function () {
     }
 })
 
-it("gs.v20191118.TrylockWorker", async function () {
+it("gs.v20191118.SwitchGameArchive", async function () {
     try {
-       const data = await client.TrylockWorker({})
+       const data = await client.SwitchGameArchive({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

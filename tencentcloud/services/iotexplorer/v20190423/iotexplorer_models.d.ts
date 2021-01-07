@@ -803,6 +803,10 @@ export interface CreateProjectRequest {
       * 项目描述
       */
     ProjectDesc: string;
+    /**
+      * 实例ID，不带实例ID，默认为公共实例
+      */
+    InstanceId?: string;
 }
 /**
  * DescribeDevice返回参数结构体
@@ -1328,6 +1332,10 @@ export interface GetProjectListRequest {
       * 个数限制
       */
     Limit?: number;
+    /**
+      * 实例ID
+      */
+    InstanceId?: string;
 }
 /**
  * SearchStudioProduct请求参数结构体

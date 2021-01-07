@@ -48,6 +48,16 @@ it("mariadb.v20170312.DescribeOrders", async function () {
     }
 })
 
+it("mariadb.v20170312.ModifyBackupTime", async function () {
+    try {
+       const data = await client.ModifyBackupTime({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mariadb.v20170312.DescribeSaleInfo", async function () {
     try {
        const data = await client.DescribeSaleInfo({})
@@ -258,9 +268,19 @@ it("mariadb.v20170312.DescribeUpgradePrice", async function () {
     }
 })
 
-it("mariadb.v20170312.ModifyBackupTime", async function () {
+it("mariadb.v20170312.DescribeProjectSecurityGroups", async function () {
     try {
-       const data = await client.ModifyBackupTime({})
+       const data = await client.DescribeProjectSecurityGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mariadb.v20170312.AssociateSecurityGroups", async function () {
+    try {
+       const data = await client.AssociateSecurityGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,6 +328,16 @@ it("mariadb.v20170312.CreateDBInstance", async function () {
     }
 })
 
+it("mariadb.v20170312.ModifyDBInstanceSecurityGroups", async function () {
+    try {
+       const data = await client.ModifyDBInstanceSecurityGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mariadb.v20170312.CloseDBExtranetAccess", async function () {
     try {
        const data = await client.CloseDBExtranetAccess({})
@@ -338,6 +368,16 @@ it("mariadb.v20170312.DescribeAccounts", async function () {
     }
 })
 
+it("mariadb.v20170312.FlushBinlog", async function () {
+    try {
+       const data = await client.FlushBinlog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mariadb.v20170312.CopyAccountPrivileges", async function () {
     try {
        const data = await client.CopyAccountPrivileges({})
@@ -361,6 +401,16 @@ it("mariadb.v20170312.DescribeDatabases", async function () {
 it("mariadb.v20170312.DescribePrice", async function () {
     try {
        const data = await client.DescribePrice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mariadb.v20170312.DescribeDBSecurityGroups", async function () {
+    try {
+       const data = await client.DescribeDBSecurityGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -418,9 +468,9 @@ it("mariadb.v20170312.DescribeDBResourceUsage", async function () {
     }
 })
 
-it("mariadb.v20170312.FlushBinlog", async function () {
+it("mariadb.v20170312.DisassociateSecurityGroups", async function () {
     try {
-       const data = await client.FlushBinlog({})
+       const data = await client.DisassociateSecurityGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

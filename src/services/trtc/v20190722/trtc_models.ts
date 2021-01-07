@@ -750,7 +750,7 @@ export interface OutputParams {
   PureAudioStream?: number
 
   /**
-   * 自定义录制文件名
+   * 自定义录制文件名。请先在实时音视频控制台开通录制功能，https://cloud.tencent.com/document/product/647/50768
    */
   RecordId?: string
 
@@ -1211,7 +1211,7 @@ export interface PresetLayoutConfig {
   MixInputType?: number
 
   /**
-   * 占位图ID。实时音视频控制台上传并生成，https://cloud.tencent.com/document/product/647/50769
+   * 占位图ID。启用占位图功能时，在当前位置的用户没有上行视频时显示占位图。占位图在实时音视频控制台上传并生成，https://cloud.tencent.com/document/product/647/50769
    */
   PlaceImageId?: number
 }

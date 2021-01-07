@@ -28,8 +28,11 @@ import {
   DescribeAccountsRequest,
   SpecConfig,
   DescribeDCDBPriceResponse,
+  AssociateSecurityGroupsRequest,
   FlushBinlogResponse,
+  DescribeDBSecurityGroupsResponse,
   DescribeDBSyncModeResponse,
+  DescribeProjectSecurityGroupsRequest,
   DescribeDCDBUpgradePriceResponse,
   CreateAccountRequest,
   DescribeDBParametersResponse,
@@ -41,12 +44,15 @@ import {
   DatabaseView,
   DescribeDBLogFilesRequest,
   DescribeOrdersResponse,
+  ModifyDBInstanceSecurityGroupsResponse,
   ResetAccountPasswordRequest,
   CopyAccountPrivilegesResponse,
   CloneAccountRequest,
   DescribeDCDBRenewalPriceRequest,
   ParamModifyResult,
+  DescribeDBSecurityGroupsRequest,
   DescribeDCDBPriceRequest,
+  DescribeProjectSecurityGroupsResponse,
   DatabaseFunction,
   DescribeSqlLogsRequest,
   ResetAccountPasswordResponse,
@@ -63,18 +69,22 @@ import {
   SpecConfigInfo,
   ModifyDBParametersRequest,
   DCDBInstanceInfo,
+  ModifyDBInstanceSecurityGroupsRequest,
   ZonesInfo,
   ModifyDBParametersResponse,
   DCDBShardInfo,
   CopyAccountPrivilegesRequest,
+  SecurityGroup,
   DescribeDatabaseTableRequest,
   OpenDBExtranetAccessResponse,
   DescribeDatabaseObjectsResponse,
   TableColumn,
+  SecurityGroupBound,
   SplitShardConfig,
   RenewDCDBInstanceResponse,
-  DescribeDCDBRenewalPriceResponse,
   DescribeShardSpecResponse,
+  AssociateSecurityGroupsResponse,
+  DescribeDCDBRenewalPriceResponse,
   DescribeDCDBShardsResponse,
   Database,
   GrantAccountPrivilegesResponse,
@@ -107,6 +117,7 @@ import {
   UpgradeDCDBInstanceRequest,
   ConstraintRange,
   LogFileInfo,
+  DisassociateSecurityGroupsRequest,
   DBAccount,
   DescribeDatabaseTableResponse,
   DescribeAccountPrivilegesRequest,
@@ -117,6 +128,7 @@ import {
   ModifyDBInstancesProjectRequest,
   FlushBinlogRequest,
   ModifyDBSyncModeResponse,
+  DisassociateSecurityGroupsResponse,
   DescribeUserTasksRequest,
   DeleteAccountResponse,
 } from "./dcdb_models"
@@ -162,6 +174,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DescribeDatabaseTable）用于查询云数据库实例的表信息。
+   */
+  async DescribeDatabaseTable(
+    req: DescribeDatabaseTableRequest,
+    cb?: (error: string, rep: DescribeDatabaseTableResponse) => void
+  ): Promise<DescribeDatabaseTableResponse> {
+    return this.request("DescribeDatabaseTable", req, cb)
+  }
+
+  /**
    * 查询可创建的分布式数据库可售卖的分片规格配置。
    */
   async DescribeShardSpec(
@@ -183,13 +205,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeDCDBUpgradePrice）用于查询升级分布式数据库实例价格。
-   */
-  async DescribeDCDBUpgradePrice(
-    req: DescribeDCDBUpgradePriceRequest,
-    cb?: (error: string, rep: DescribeDCDBUpgradePriceResponse) => void
-  ): Promise<DescribeDCDBUpgradePriceResponse> {
-    return this.request("DescribeDCDBUpgradePrice", req, cb)
+     * 查询云数据库实例列表，支持通过项目ID、实例ID、内网地址、实例名称等来筛选实例。
+如果不指定任何筛选条件，则默认返回10条实例记录，单次请求最多支持返回100条实例记录。
+     */
+  async DescribeDCDBInstances(
+    req: DescribeDCDBInstancesRequest,
+    cb?: (error: string, rep: DescribeDCDBInstancesResponse) => void
+  ): Promise<DescribeDCDBInstancesResponse> {
+    return this.request("DescribeDCDBInstances", req, cb)
   }
 
   /**
@@ -261,16 +284,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InitDCDBInstancesResponse) => void
   ): Promise<InitDCDBInstancesResponse> {
     return this.request("InitDCDBInstances", req, cb)
-  }
-
-  /**
-   * 本接口（DescribeAccounts）用于查询指定云数据库实例的账号列表。
-   */
-  async DescribeAccounts(
-    req: DescribeAccountsRequest,
-    cb?: (error: string, rep: DescribeAccountsResponse) => void
-  ): Promise<DescribeAccountsResponse> {
-    return this.request("DescribeAccounts", req, cb)
   }
 
   /**
@@ -355,6 +368,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DescribeProjectSecurityGroups）用于查询项目安全组信息
+   */
+  async DescribeProjectSecurityGroups(
+    req: DescribeProjectSecurityGroupsRequest,
+    cb?: (error: string, rep: DescribeProjectSecurityGroupsResponse) => void
+  ): Promise<DescribeProjectSecurityGroupsResponse> {
+    return this.request("DescribeProjectSecurityGroups", req, cb)
+  }
+
+  /**
+   * 本接口 (AssociateSecurityGroups) 用于安全组批量绑定云资源。
+   */
+  async AssociateSecurityGroups(
+    req: AssociateSecurityGroupsRequest,
+    cb?: (error: string, rep: AssociateSecurityGroupsResponse) => void
+  ): Promise<AssociateSecurityGroupsResponse> {
+    return this.request("AssociateSecurityGroups", req, cb)
+  }
+
+  /**
    * 本接口（CreateAccount）用于创建云数据库账号。一个实例可以创建多个不同的账号，相同的用户名+不同的host是不同的账号。
    */
   async CreateAccount(
@@ -362,6 +395,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAccountResponse) => void
   ): Promise<CreateAccountResponse> {
     return this.request("CreateAccount", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyDBInstanceSecurityGroups）用于修改云数据库安全组
+   */
+  async ModifyDBInstanceSecurityGroups(
+    req: ModifyDBInstanceSecurityGroupsRequest,
+    cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void
+  ): Promise<ModifyDBInstanceSecurityGroupsResponse> {
+    return this.request("ModifyDBInstanceSecurityGroups", req, cb)
   }
 
   /**
@@ -405,14 +448,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 查询云数据库实例列表，支持通过项目ID、实例ID、内网地址、实例名称等来筛选实例。
-如果不指定任何筛选条件，则默认返回10条实例记录，单次请求最多支持返回100条实例记录。
-     */
-  async DescribeDCDBInstances(
-    req: DescribeDCDBInstancesRequest,
-    cb?: (error: string, rep: DescribeDCDBInstancesResponse) => void
-  ): Promise<DescribeDCDBInstancesResponse> {
-    return this.request("DescribeDCDBInstances", req, cb)
+   * 本接口（DescribeAccounts）用于查询指定云数据库实例的账号列表。
+   */
+  async DescribeAccounts(
+    req: DescribeAccountsRequest,
+    cb?: (error: string, rep: DescribeAccountsResponse) => void
+  ): Promise<DescribeAccountsResponse> {
+    return this.request("DescribeAccounts", req, cb)
+  }
+
+  /**
+   * 相当于在所有分片的mysqld中执行flush logs，完成切分的binlog将展示在各个分片控制台binlog列表里。
+   */
+  async FlushBinlog(
+    req: FlushBinlogRequest,
+    cb?: (error: string, rep: FlushBinlogResponse) => void
+  ): Promise<FlushBinlogResponse> {
+    return this.request("FlushBinlog", req, cb)
   }
 
   /**
@@ -457,13 +509,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeDatabaseTable）用于查询云数据库实例的表信息。
+   * 本接口（DescribeDBSecurityGroups）用于查询实例安全组信息
    */
-  async DescribeDatabaseTable(
-    req: DescribeDatabaseTableRequest,
-    cb?: (error: string, rep: DescribeDatabaseTableResponse) => void
-  ): Promise<DescribeDatabaseTableResponse> {
-    return this.request("DescribeDatabaseTable", req, cb)
+  async DescribeDBSecurityGroups(
+    req: DescribeDBSecurityGroupsRequest,
+    cb?: (error: string, rep: DescribeDBSecurityGroupsResponse) => void
+  ): Promise<DescribeDBSecurityGroupsResponse> {
+    return this.request("DescribeDBSecurityGroups", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeDCDBUpgradePrice）用于查询升级分布式数据库实例价格。
+   */
+  async DescribeDCDBUpgradePrice(
+    req: DescribeDCDBUpgradePriceRequest,
+    cb?: (error: string, rep: DescribeDCDBUpgradePriceResponse) => void
+  ): Promise<DescribeDCDBUpgradePriceResponse> {
+    return this.request("DescribeDCDBUpgradePrice", req, cb)
   }
 
   /**
@@ -477,13 +539,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 相当于在所有分片的mysqld中执行flush logs，完成切分的binlog将展示在各个分片控制台binlog列表里。
+   * 本接口(DisassociateSecurityGroups)用于安全组批量解绑实例。
    */
-  async FlushBinlog(
-    req: FlushBinlogRequest,
-    cb?: (error: string, rep: FlushBinlogResponse) => void
-  ): Promise<FlushBinlogResponse> {
-    return this.request("FlushBinlog", req, cb)
+  async DisassociateSecurityGroups(
+    req: DisassociateSecurityGroupsRequest,
+    cb?: (error: string, rep: DisassociateSecurityGroupsResponse) => void
+  ): Promise<DisassociateSecurityGroupsResponse> {
+    return this.request("DisassociateSecurityGroups", req, cb)
   }
 
   /**

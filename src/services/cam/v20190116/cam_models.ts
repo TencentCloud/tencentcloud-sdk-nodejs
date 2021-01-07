@@ -608,6 +608,63 @@ IsAttached: 当需要查询标记实体是否已经关联策略时不为null。0
 }
 
 /**
+ * 企业微信子用户
+ */
+export interface WeChatWorkSubAccount {
+  /**
+   * 子用户用户 ID
+   */
+  Uin: number
+
+  /**
+   * 子用户用户名
+   */
+  Name: string
+
+  /**
+   * 子用户 UID
+   */
+  Uid: number
+
+  /**
+   * 备注
+   */
+  Remark: string
+
+  /**
+   * 子用户能否登录控制台
+   */
+  ConsoleLogin: number
+
+  /**
+   * 手机号
+   */
+  PhoneNum: string
+
+  /**
+   * 区号
+   */
+  CountryCode: string
+
+  /**
+   * 邮箱
+   */
+  Email: string
+
+  /**
+      * 企业微信UserId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WeChatWorkUserId: string
+
+  /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime: string
+}
+
+/**
  * 异地登录设置
  */
 export interface OffsiteFlag {
@@ -1068,6 +1125,21 @@ export interface DeleteRoleRequest {
 }
 
 /**
+ * ListWeChatWorkSubAccounts请求参数结构体
+ */
+export interface ListWeChatWorkSubAccountsRequest {
+  /**
+   * 偏移量
+   */
+  Offset: number
+
+  /**
+   * 限制数目
+   */
+  Limit: number
+}
+
+/**
  * UpdateRoleConsoleLogin请求参数结构体
  */
 export interface UpdateRoleConsoleLoginRequest {
@@ -1225,6 +1297,12 @@ export interface SubAccountInfo {
    * 邮箱
    */
   Email: string
+
+  /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime: string
 }
 
 /**
@@ -1320,6 +1398,26 @@ export interface UpdateUserRequest {
    * 邮箱
    */
   Email?: string
+}
+
+/**
+ * ListWeChatWorkSubAccounts返回参数结构体
+ */
+export interface ListWeChatWorkSubAccountsResponse {
+  /**
+   * 企业微信子用户列表。
+   */
+  Data?: Array<WeChatWorkSubAccount>
+
+  /**
+   * 总数目。
+   */
+  TotalCount?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

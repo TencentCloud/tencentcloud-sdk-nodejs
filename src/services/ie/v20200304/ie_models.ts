@@ -236,6 +236,26 @@ export interface MuxInfo {
 }
 
 /**
+ * 目标视频信息。
+ */
+export interface TargetVideoInfo {
+  /**
+   * 视频宽度，单位像素
+   */
+  Width?: number
+
+  /**
+   * 视频高度，单位像素
+   */
+  Height?: number
+
+  /**
+   * 视频帧率，范围在1到120之间
+   */
+  FrameRate?: number
+}
+
+/**
  * 视频转码信息
  */
 export interface VideoInfo {
@@ -329,21 +349,6 @@ hlg。
    * 画质增强参数信息。
    */
   VideoEnhance?: VideoEnhance
-}
-
-/**
- * 智能封面任务参数信息
- */
-export interface CoverEditingInfo {
-  /**
-   * 是否开启智能封面。0为关闭，1为开启。其他非0非1值默认为0。
-   */
-  Switch: number
-
-  /**
-   * 额外定制化服务参数。参数为序列化的Json字符串，例如：{"k1":"v1"}。
-   */
-  CustomInfo?: string
 }
 
 /**
@@ -456,6 +461,29 @@ export interface CreateQualityControlTaskRequest {
 }
 
 /**
+ * 帧标签任务参数
+ */
+export interface FrameTagRec {
+  /**
+      * 标签类型：
+"Common": 通用类型
+"Game":游戏类型
+      */
+  TagType: string
+
+  /**
+      * 游戏具体类型:
+"HonorOfKings_AnchorViews":王者荣耀主播视角
+"HonorOfKings_GameViews":王者荣耀比赛视角
+"LOL_AnchorViews":英雄联盟主播视角
+"LOL_GameViews":英雄联盟比赛视角
+"PUBG_AnchorViews":和平精英主播视角
+"PUBG_GameViews":和平精英比赛视角
+      */
+  GameExtendType?: string
+}
+
+/**
  * 智能集锦结果项
  */
 export interface HighlightsTaskResultItem {
@@ -516,13 +544,35 @@ export interface Sharp {
 }
 
 /**
- * StopMediaProcessTask返回参数结构体
+ * 媒体识别任务处理结果
  */
-export interface StopMediaProcessTaskResponse {
+export interface MediaRecognitionTaskResult {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 帧标签识别结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FrameTagResults: FrameTagResult
+
+  /**
+      * 语音字幕识别结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubtitleResults: SubtitleResult
+}
+
+/**
+ * 媒体识别任务参数
+ */
+export interface MediaRecognitionInfo {
+  /**
+   * 帧标签识别
    */
-  RequestId?: string
+  FrameTagRec?: FrameTagRec
+
+  /**
+   * 语音字幕识别
+   */
+  SubtitleRec?: SubtitleRec
 }
 
 /**
@@ -677,6 +727,16 @@ export interface CreateMediaProcessTaskRequest {
 }
 
 /**
+ * 语音字幕识别结果
+ */
+export interface SubtitleResult {
+  /**
+   * 语音字幕数组
+   */
+  SubtitleItems: Array<SubtitleItem>
+}
+
+/**
  * CreateMediaProcessTask返回参数结构体
  */
 export interface CreateMediaProcessTaskResponse {
@@ -788,6 +848,25 @@ export interface SectionTime {
    * 时间区间时长，单位ms
    */
   Duration: number
+}
+
+/**
+ * 语音字幕任务参数
+ */
+export interface SubtitleRec {
+  /**
+      * 语音识别：
+zh：中文
+en：英文
+      */
+  AsrDst?: string
+
+  /**
+      * 翻译识别：
+zh：中文
+en：英文
+      */
+  TransDst?: string
 }
 
 /**
@@ -915,8 +994,8 @@ export interface MediaTargetInfo {
   /**
       * 目标文件名，不能带特殊字符（如/等），无需后缀名，最长200字符。
 
-注1：部分子服务支持站位符，形式为： {parameter}
-预设parameter：
+注1：部分子服务支持占位符，形式为： {parameter}
+预设parameter有：
 index：序号；
       */
   FileName: string
@@ -1160,54 +1239,13 @@ export interface EditInfo {
 }
 
 /**
- * 画质增强参数信息
+ * StopMediaProcessTask返回参数结构体
  */
-export interface VideoEnhance {
+export interface StopMediaProcessTaskResponse {
   /**
-   * 去编码毛刺、伪影参数。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ArtifactReduction?: ArtifactReduction
-
-  /**
-   * 去噪声参数。
-   */
-  Denoising?: Denoising
-
-  /**
-   * 颜色增强参数。
-   */
-  ColorEnhance?: ColorEnhance
-
-  /**
-   * 细节增强参数。
-   */
-  Sharp?: Sharp
-
-  /**
-   * 超分参数，可选项：2，目前仅支持2倍超分。
-   */
-  WdSuperResolution?: number
-
-  /**
-   * 人脸保护信息。
-   */
-  FaceProtect?: FaceProtect
-
-  /**
-      * 插帧，取值范围：[0, 60]，单位：Hz。
-注意：当取值为 0，表示帧率和原始视频保持一致。
-      */
-  WdFps?: number
-
-  /**
-   * 去划痕参数
-   */
-  ScratchRepair?: ScratchRepair
-
-  /**
-   * 低光照增强参数
-   */
-  LowLightEnhance?: LowLightEnhance
+  RequestId?: string
 }
 
 /**
@@ -1649,6 +1687,57 @@ export interface OpeningEndingTaskResult {
 }
 
 /**
+ * 画质增强参数信息
+ */
+export interface VideoEnhance {
+  /**
+   * 去编码毛刺、伪影参数。
+   */
+  ArtifactReduction?: ArtifactReduction
+
+  /**
+   * 去噪声参数。
+   */
+  Denoising?: Denoising
+
+  /**
+   * 颜色增强参数。
+   */
+  ColorEnhance?: ColorEnhance
+
+  /**
+   * 细节增强参数。
+   */
+  Sharp?: Sharp
+
+  /**
+   * 超分参数，可选项：2，目前仅支持2倍超分。
+   */
+  WdSuperResolution?: number
+
+  /**
+   * 人脸保护信息。
+   */
+  FaceProtect?: FaceProtect
+
+  /**
+      * 插帧，取值范围：[0, 60]，单位：Hz。
+注意：当取值为 0，表示帧率和原始视频保持一致。
+      */
+  WdFps?: number
+
+  /**
+   * 去划痕参数
+   */
+  ScratchRepair?: ScratchRepair
+
+  /**
+   * 低光照增强参数
+   */
+  LowLightEnhance?: LowLightEnhance
+}
+
+/**
  * 质检结果项数组
  */
 export interface QualityControlResultItems {
@@ -1662,6 +1751,31 @@ export interface QualityControlResultItems {
    * 质检结果项
    */
   QualityControlItems: Array<QualityControlItem>
+}
+
+/**
+ * 帧标签
+ */
+export interface FrameTagItem {
+  /**
+   * 标签起始时间戳PTS(ms)
+   */
+  StartPts: number
+
+  /**
+   * 语句结束时间戳PTS(ms)
+   */
+  EndPts: number
+
+  /**
+   * 字符串形式的起始结束时间
+   */
+  Period: string
+
+  /**
+   * 标签数组
+   */
+  TagItems: Array<TagItem>
 }
 
 /**
@@ -1772,6 +1886,16 @@ export interface CosInfo {
    * cos 授权信息，不填默认为公有权限。
    */
   CosAuthMode?: CosAuthMode
+}
+
+/**
+ * 帧标签结果
+ */
+export interface FrameTagResult {
+  /**
+   * 帧标签结果数组
+   */
+  FrameTagItems: Array<FrameTagItem>
 }
 
 /**
@@ -1980,23 +2104,71 @@ export interface StopMediaProcessTaskRequest {
 }
 
 /**
- * 目标视频信息。
+ * 智能封面任务参数信息
  */
-export interface TargetVideoInfo {
+export interface CoverEditingInfo {
   /**
-   * 视频宽度，单位像素
+   * 是否开启智能封面。0为关闭，1为开启。其他非0非1值默认为0。
    */
-  Width?: number
+  Switch: number
 
   /**
-   * 视频高度，单位像素
+   * 额外定制化服务参数。参数为序列化的Json字符串，例如：{"k1":"v1"}。
    */
-  Height?: number
+  CustomInfo?: string
+}
+
+/**
+ * 语音字幕识别项
+ */
+export interface SubtitleItem {
+  /**
+   * 语音识别结果
+   */
+  Id: string
 
   /**
-   * 视频帧率，范围在1到120之间
+      * 中文翻译结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Zh: string
+
+  /**
+      * 英文翻译结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  En: string
+
+  /**
+   * 语句起始时间戳PTS(ms)
    */
-  FrameRate?: number
+  StartPts: number
+
+  /**
+   * 语句结束时间戳PTS(ms)
+   */
+  EndPts: number
+
+  /**
+   * 字符串形式的起始结束时间
+   */
+  Period: string
+
+  /**
+   * 结果的置信度（百分制）
+   */
+  Confidence: number
+
+  /**
+   * 当前语句是否结束
+   */
+  EndFlag: boolean
+
+  /**
+      * 语句分割时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PuncEndTs: string
 }
 
 /**
@@ -2024,6 +2196,7 @@ export interface MediaProcessTaskResult {
 MediaEditing：视频编辑（待上线）；
 MediaCutting：视频剪切；
 MediaJoining：视频拼接。
+MediaRecognition：媒体识别；
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Type: string
@@ -2067,6 +2240,12 @@ MediaJoining：视频拼接。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MediaJoiningTaskResult: MediaJoiningTaskResult
+
+  /**
+      * 媒体识别任务处理结果，当Type=MediaRecognition时才有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MediaRecognitionTaskResult: MediaRecognitionTaskResult
 }
 
 /**
@@ -2130,6 +2309,7 @@ export interface MediaProcessInfo {
 MediaEditing：媒体编辑（待上线）；
 MediaCutting：媒体剪切；
 MediaJoining：媒体拼接。
+MediaRecognition: 媒体识别。
       */
   Type: string
 
@@ -2142,6 +2322,11 @@ MediaJoining：媒体拼接。
    * 视频拼接任务参数，Type=MediaJoining时必选。
    */
   MediaJoiningInfo?: MediaJoiningInfo
+
+  /**
+   * 媒体识别任务参数，Type=MediaRecognition时必选
+   */
+  MediaRecognitionInfo?: MediaRecognitionInfo
 }
 
 /**
@@ -2170,6 +2355,33 @@ export interface ClassificationTaskResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ItemSet: Array<ClassificationTaskResultItem>
+}
+
+/**
+ * 标签项
+ */
+export interface TagItem {
+  /**
+   * 标签内容
+   */
+  Id: string
+
+  /**
+   * 结果的置信度（百分制）
+   */
+  Confidence: number
+
+  /**
+      * 分级数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Categorys: Array<string>
+
+  /**
+      * 标签备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Ext: string
 }
 
 /**

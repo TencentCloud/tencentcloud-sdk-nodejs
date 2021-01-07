@@ -58,9 +58,39 @@ it("ame.v20190916.DescribeItems", async function () {
     }
 })
 
+it("ame.v20190916.DescribeAuthInfo", async function () {
+    try {
+       const data = await client.DescribeAuthInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ame.v20190916.ReportData", async function () {
+    try {
+       const data = await client.ReportData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ame.v20190916.DescribeMusic", async function () {
     try {
        const data = await client.DescribeMusic({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ame.v20190916.DescribeCloudMusic", async function () {
+    try {
+       const data = await client.DescribeCloudMusic({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,9 +108,9 @@ it("ame.v20190916.DescribePackageItems", async function () {
     }
 })
 
-it("ame.v20190916.ReportData", async function () {
+it("ame.v20190916.DescribeCloudMusicPurchased", async function () {
     try {
-       const data = await client.ReportData({})
+       const data = await client.DescribeCloudMusicPurchased({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

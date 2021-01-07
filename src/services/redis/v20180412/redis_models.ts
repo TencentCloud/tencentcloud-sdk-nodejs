@@ -2025,7 +2025,7 @@ export interface CreateInstancesResponse {
   DealId?: string
 
   /**
-   * 实例ID(该字段灰度中，部分地域不可见)
+   * 实例ID
    */
   InstanceIds?: Array<string>
 

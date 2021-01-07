@@ -358,6 +358,16 @@ it("cpdp.v20190820.QueryOrder", async function () {
     }
 })
 
+it("cpdp.v20190820.QueryBillDownloadURL", async function () {
+    try {
+       const data = await client.QueryBillDownloadURL({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.CreateInvoice", async function () {
     try {
        const data = await client.CreateInvoice({})

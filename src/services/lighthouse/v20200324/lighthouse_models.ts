@@ -277,7 +277,7 @@ export interface TrafficPackage {
   TrafficPackageId: string
 
   /**
-   * 流量包生效周期内的总流量，单位字节。
+   * 流量包生效周期内已使用流量，单位字节。
    */
   TrafficUsed: number
 
@@ -418,12 +418,12 @@ export interface Blueprint {
   ImageUrl: string
 
   /**
-   * 镜像所需系统盘大小
+   * 镜像所需系统盘大小。
    */
   RequiredSystemDiskSize: number
 
   /**
-   * 镜像状态，取值：ONLINE、OFFLINE
+   * 镜像状态。
    */
   BlueprintState: string
 }
@@ -510,6 +510,14 @@ export interface Bundle {
 <li> GENERAL_BUNDLE：通用型</li><li> STORAGE_BUNDLE：存储型 </li>
       */
   BundleType: string
+
+  /**
+      * 套餐展示标签.
+取值范围:
+"ACTIVITY": 活动套餐,
+"NORMAL": 普通套餐
+      */
+  BundleDisplayLabel: string
 }
 
 /**

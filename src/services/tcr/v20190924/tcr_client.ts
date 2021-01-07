@@ -38,6 +38,8 @@ import {
   CreateApplicationTriggerPersonalRequest,
   AutoDelStrategyInfo,
   ValidateNamespaceExistPersonalRequest,
+  RegistryChargePrepaid,
+  RenewInstanceResponse,
   Registry,
   DescribeRepositoriesResponse,
   DeleteInstanceTokenResponse,
@@ -48,6 +50,7 @@ import {
   DescribeApplicationTriggerPersonalRequest,
   DeleteNamespacePersonalRequest,
   NamespaceInfo,
+  RenewInstanceRequest,
   Limit,
   DescribeReplicationInstancesRequest,
   DeleteRepositoryResponse,
@@ -441,6 +444,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeApplicationTriggerLogPersonalResponse) => void
   ): Promise<DescribeApplicationTriggerLogPersonalResponse> {
     return this.request("DescribeApplicationTriggerLogPersonal", req, cb)
+  }
+
+  /**
+   * 预付费实例续费，同时支持按量计费转包年包月
+   */
+  async RenewInstance(
+    req: RenewInstanceRequest,
+    cb?: (error: string, rep: RenewInstanceResponse) => void
+  ): Promise<RenewInstanceResponse> {
+    return this.request("RenewInstance", req, cb)
   }
 
   /**

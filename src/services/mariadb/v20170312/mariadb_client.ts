@@ -27,10 +27,13 @@ import {
   DescribeRenewalPriceResponse,
   CreateTmpInstancesRequest,
   RestartDBInstancesResponse,
+  AssociateSecurityGroupsRequest,
   DescribeUpgradePriceRequest,
   FlushBinlogResponse,
+  DescribeDBSecurityGroupsResponse,
   DescribeDBResourceUsageDetailsResponse,
   DescribeDBInstanceSpecsResponse,
+  DescribeProjectSecurityGroupsRequest,
   DescribeDBSlowLogsRequest,
   CreateAccountRequest,
   InitDBInstancesResponse,
@@ -49,13 +52,16 @@ import {
   DescribeDBLogFilesRequest,
   DescribeDBResourceUsageResponse,
   DescribeOrdersResponse,
+  ModifyDBInstanceSecurityGroupsResponse,
   ResetAccountPasswordRequest,
   CopyAccountPrivilegesResponse,
   CloneAccountRequest,
   ParamModifyResult,
   DescribeDBInstancesRequest,
+  DescribeDBSecurityGroupsRequest,
   DescribeSaleInfoRequest,
   RenewDBInstanceRequest,
+  DescribeProjectSecurityGroupsResponse,
   DescribeSqlLogsRequest,
   ResetAccountPasswordResponse,
   DescribeDBInstanceSpecsRequest,
@@ -68,15 +74,19 @@ import {
   DBParamValue,
   SpecConfigInfo,
   ModifyDBParametersRequest,
+  ModifyDBInstanceSecurityGroupsRequest,
   ZonesInfo,
   ModifyDBParametersResponse,
   CopyAccountPrivilegesRequest,
+  SecurityGroup,
   OpenDBExtranetAccessResponse,
   ModifyDBInstanceNameRequest,
   ModifyBackupTimeRequest,
   CreateTmpInstancesResponse,
   UpgradeDBInstanceRequest,
+  SecurityGroupBound,
   DescribeUpgradePriceResponse,
+  AssociateSecurityGroupsResponse,
   DBInstance,
   DescribePriceResponse,
   InitDBInstancesRequest,
@@ -110,6 +120,7 @@ import {
   LogFileInfo,
   RestartDBInstancesRequest,
   DescribeDBResourceUsageDetailsRequest,
+  DisassociateSecurityGroupsRequest,
   DBAccount,
   DescribeAccountPrivilegesRequest,
   DescribeDBPerformanceDetailsResponse,
@@ -122,6 +133,7 @@ import {
   FlushBinlogRequest,
   MonitorData,
   ModifyLogFileRetentionPeriodResponse,
+  DisassociateSecurityGroupsResponse,
   DescribeDBPerformanceRequest,
   DeleteAccountResponse,
 } from "./mariadb_models"
@@ -164,6 +176,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeOrdersResponse) => void
   ): Promise<DescribeOrdersResponse> {
     return this.request("DescribeOrders", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyBackupTime）用于设置云数据库实例的备份时间。后台系统将根据此配置定期进行实例备份。
+   */
+  async ModifyBackupTime(
+    req: ModifyBackupTimeRequest,
+    cb?: (error: string, rep: ModifyBackupTimeResponse) => void
+  ): Promise<ModifyBackupTimeResponse> {
+    return this.request("ModifyBackupTime", req, cb)
   }
 
   /**
@@ -381,13 +403,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyBackupTime）用于设置云数据库实例的备份时间。后台系统将根据此配置定期进行实例备份。
+   * 本接口（DescribeProjectSecurityGroups）用于查询项目安全组信息
    */
-  async ModifyBackupTime(
-    req: ModifyBackupTimeRequest,
-    cb?: (error: string, rep: ModifyBackupTimeResponse) => void
-  ): Promise<ModifyBackupTimeResponse> {
-    return this.request("ModifyBackupTime", req, cb)
+  async DescribeProjectSecurityGroups(
+    req: DescribeProjectSecurityGroupsRequest,
+    cb?: (error: string, rep: DescribeProjectSecurityGroupsResponse) => void
+  ): Promise<DescribeProjectSecurityGroupsResponse> {
+    return this.request("DescribeProjectSecurityGroups", req, cb)
+  }
+
+  /**
+   * 本接口 (AssociateSecurityGroups) 用于安全组批量绑定云资源。
+   */
+  async AssociateSecurityGroups(
+    req: AssociateSecurityGroupsRequest,
+    cb?: (error: string, rep: AssociateSecurityGroupsResponse) => void
+  ): Promise<AssociateSecurityGroupsResponse> {
+    return this.request("AssociateSecurityGroups", req, cb)
   }
 
   /**
@@ -431,6 +463,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（ModifyDBInstanceSecurityGroups）用于修改云数据库安全组
+   */
+  async ModifyDBInstanceSecurityGroups(
+    req: ModifyDBInstanceSecurityGroupsRequest,
+    cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void
+  ): Promise<ModifyDBInstanceSecurityGroupsResponse> {
+    return this.request("ModifyDBInstanceSecurityGroups", req, cb)
+  }
+
+  /**
    * 本接口(CloseDBExtranetAccess)用于关闭云数据库实例的外网访问。关闭外网访问后，外网地址将不可访问，查询实例列表接口将不返回对应实例的外网域名和端口信息。
    */
   async CloseDBExtranetAccess(
@@ -458,6 +500,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAccountsResponse) => void
   ): Promise<DescribeAccountsResponse> {
     return this.request("DescribeAccounts", req, cb)
+  }
+
+  /**
+   * 相当于在mysqld中执行flush logs，完成切分的binlog将展示在实例控制台binlog列表里。
+   */
+  async FlushBinlog(
+    req: FlushBinlogRequest,
+    cb?: (error: string, rep: FlushBinlogResponse) => void
+  ): Promise<FlushBinlogResponse> {
+    return this.request("FlushBinlog", req, cb)
   }
 
   /**
@@ -489,6 +541,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePriceResponse) => void
   ): Promise<DescribePriceResponse> {
     return this.request("DescribePrice", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeDBSecurityGroups）用于查询实例安全组信息
+   */
+  async DescribeDBSecurityGroups(
+    req: DescribeDBSecurityGroupsRequest,
+    cb?: (error: string, rep: DescribeDBSecurityGroupsResponse) => void
+  ): Promise<DescribeDBSecurityGroupsResponse> {
+    return this.request("DescribeDBSecurityGroups", req, cb)
   }
 
   /**
@@ -542,13 +604,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 相当于在mysqld中执行flush logs，完成切分的binlog将展示在实例控制台binlog列表里。
+   * 本接口(DisassociateSecurityGroups)用于安全组批量解绑实例。
    */
-  async FlushBinlog(
-    req: FlushBinlogRequest,
-    cb?: (error: string, rep: FlushBinlogResponse) => void
-  ): Promise<FlushBinlogResponse> {
-    return this.request("FlushBinlog", req, cb)
+  async DisassociateSecurityGroups(
+    req: DisassociateSecurityGroupsRequest,
+    cb?: (error: string, rep: DisassociateSecurityGroupsResponse) => void
+  ): Promise<DisassociateSecurityGroupsResponse> {
+    return this.request("DisassociateSecurityGroups", req, cb)
   }
 
   /**

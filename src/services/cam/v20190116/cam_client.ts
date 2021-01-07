@@ -53,6 +53,7 @@ import {
   RemoveUserFromGroupRequest,
   CreatePolicyVersionResponse,
   ListPoliciesResponse,
+  WeChatWorkSubAccount,
   OffsiteFlag,
   GroupIdOfUidInfo,
   UpdateRoleDescriptionRequest,
@@ -71,6 +72,7 @@ import {
   AddUserRequest,
   LoginActionFlag,
   DeleteRoleRequest,
+  ListWeChatWorkSubAccountsRequest,
   UpdateRoleConsoleLoginRequest,
   GetCustomMFATokenInfoResponse,
   UpdateAssumeRolePolicyResponse,
@@ -84,6 +86,7 @@ import {
   SAMLProviderInfo,
   UpdateSAMLProviderResponse,
   UpdateUserRequest,
+  ListWeChatWorkSubAccountsResponse,
   CreateSAMLProviderRequest,
   AttachPolicyInfo,
   PutRolePermissionsBoundaryRequest,
@@ -654,6 +657,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DetachGroupPolicyResponse) => void
   ): Promise<DetachGroupPolicyResponse> {
     return this.request("DetachGroupPolicy", req, cb)
+  }
+
+  /**
+   * 获取企业微信子用户列表
+   */
+  async ListWeChatWorkSubAccounts(
+    req: ListWeChatWorkSubAccountsRequest,
+    cb?: (error: string, rep: ListWeChatWorkSubAccountsResponse) => void
+  ): Promise<ListWeChatWorkSubAccountsResponse> {
+    return this.request("ListWeChatWorkSubAccounts", req, cb)
   }
 
   /**

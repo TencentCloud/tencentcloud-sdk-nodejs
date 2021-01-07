@@ -176,7 +176,7 @@ export interface DescribeStationsResponse {
  */
 export interface DescribePackageItemsResponse {
   /**
-      * 歌曲信息数组
+      * 已核销歌曲信息列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PackageItems?: Array<PackageItem>
@@ -185,6 +185,16 @@ export interface DescribePackageItemsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeCloudMusicPurchased请求参数结构体
+ */
+export interface DescribeCloudMusicPurchasedRequest {
+  /**
+   * 授权项目Id
+   */
+  AuthInfoId: string
 }
 
 /**
@@ -228,6 +238,22 @@ export interface PackageItem {
 }
 
 /**
+ * DescribeCloudMusicPurchased返回参数结构体
+ */
+export interface DescribeCloudMusicPurchasedResponse {
+  /**
+      * 云音乐列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MusicOpenDetail?: Array<MusicOpenDetail>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 数据信息
  */
 export interface DataInfo {
@@ -255,6 +281,65 @@ export interface DataInfo {
    * 试听结束时间
    */
   AuditionEnd: number
+}
+
+/**
+ * 对外开放信息
+ */
+export interface MusicOpenDetail {
+  /**
+      * 音乐Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MusicId: string
+
+  /**
+      * 专辑名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AlbumName: string
+
+  /**
+      * 专辑图片路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AlbumImageUrl: string
+
+  /**
+      * 音乐名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MusicName: string
+
+  /**
+      * 音乐图片路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MusicImageUrl: string
+
+  /**
+      * 歌手
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Singers: Array<string>
+
+  /**
+      * 播放时长
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Duration: number
+
+  /**
+      * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags: Array<string>
+
+  /**
+      * 歌词url
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LyricUrl: string
 }
 
 /**
@@ -332,12 +417,12 @@ export interface ReportDataResponse {
  */
 export interface DescribePackageItemsRequest {
   /**
-   * 订单id
+   * 订单id，从获取已购曲库包列表中获取
    */
   OrderId: string
 
   /**
-   * 默认0
+   * 默认0，Offset=Offset+Length
    */
   Offset?: number
 
@@ -345,6 +430,73 @@ export interface DescribePackageItemsRequest {
    * 默认20
    */
   Length?: number
+}
+
+/**
+ * AuthInfo集合
+ */
+export interface AuthInfo {
+  /**
+      * 主体名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubjectName: string
+
+  /**
+      * 项目名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProjectName: string
+
+  /**
+   * 应用场景
+   */
+  AppScene: number
+
+  /**
+   * 应用地域
+   */
+  AppRegion: number
+
+  /**
+   * 授权时间
+   */
+  AuthPeriod: number
+
+  /**
+   * 是否可商业化
+   */
+  Commercialization: number
+
+  /**
+   * 是否可跨平台
+   */
+  Platform: number
+
+  /**
+   * 加密后Id
+   */
+  Id: string
+}
+
+/**
+ * 歌词信息
+ */
+export interface Lyric {
+  /**
+   * 歌词cdn地址
+   */
+  Url: string
+
+  /**
+   * 歌词后缀名
+   */
+  FileNameExt: string
+
+  /**
+   * 歌词类型
+   */
+  SubItemType: string
 }
 
 /**
@@ -372,8 +524,8 @@ export interface DescribeMusicRequest {
   IdentityId: string
 
   /**
-      * 基础版：入参 MP3-64K-FTD-P  获取64kbps歌曲热门片段。
-高级/商用版：入参 MP3-320K-FTD 获取320kbps已核验歌曲完整资源。
+      * MP3-64K-FTD-P  为获取64kbps歌曲热门片段。
+MP3-320K-FTD 为获取320kbps已核验歌曲完整资源。
       */
   SubItemType?: string
 
@@ -419,7 +571,7 @@ export interface DescribeStationsRequest {
   Limit: number
 
   /**
-   * offset (Default = 0)，(当前页-1) * Limit
+   * offset (Default = 0)，Offset=Offset+Limit
    */
   Offset: number
 }
@@ -484,11 +636,54 @@ export interface Item {
 }
 
 /**
+ * DescribeCloudMusic返回参数结构体
+ */
+export interface DescribeCloudMusicResponse {
+  /**
+   * 歌曲Id
+   */
+  MusicId?: string
+
+  /**
+   * 歌曲名称
+   */
+  MusicName?: string
+
+  /**
+      * 歌曲时长
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Duration?: number
+
+  /**
+   * 歌曲链接
+   */
+  MusicUrl?: string
+
+  /**
+      * 歌曲图片
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MusicImageUrl?: string
+
+  /**
+      * 歌手列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Singers?: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribePackages请求参数结构体
  */
 export interface DescribePackagesRequest {
   /**
-   * 默认0
+   * 默认0，Offset=Offset+Length
    */
   Offset?: number
 
@@ -573,7 +768,7 @@ export interface DescribeItemByIdResponse {
  */
 export interface DescribePackagesResponse {
   /**
-      * 已购曲库包数组
+      * 已购曲库包列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Packages?: Array<Package>
@@ -585,23 +780,38 @@ export interface DescribePackagesResponse {
 }
 
 /**
- * 歌词信息
+ * DescribeCloudMusic请求参数结构体
  */
-export interface Lyric {
+export interface DescribeCloudMusicRequest {
   /**
-   * 歌词cdn地址
+   * 歌曲Id
    */
-  Url: string
+  MusicId: string
 
   /**
-   * 歌词后缀名
+   * 歌曲类型，请填写：MP3-320K-FTD
    */
-  FileNameExt: string
+  MusicType?: string
+}
+
+/**
+ * DescribeAuthInfo返回参数结构体
+ */
+export interface DescribeAuthInfoResponse {
+  /**
+   * 授权项目列表
+   */
+  AuthInfo?: Array<AuthInfo>
 
   /**
-   * 歌词类型
+   * 总数
    */
-  SubItemType: string
+  TotalCount?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -617,6 +827,26 @@ export interface DescribeLyricRequest {
    * 歌词格式，可选项，可不填写，目前填写只能填LRC-LRC。该字段为预留的扩展字段。后续如果不填，会返回歌曲的所有格式的歌词。如果填写某个正确的格式，则只返回该格式的歌词。
    */
   SubItemType?: string
+}
+
+/**
+ * DescribeAuthInfo请求参数结构体
+ */
+export interface DescribeAuthInfoRequest {
+  /**
+   * 偏移量：Offset=Offset+Limit
+   */
+  Offset?: number
+
+  /**
+   * 数据条数
+   */
+  Limit?: number
+
+  /**
+   * 搜索关键字
+   */
+  Key?: string
 }
 
 /**

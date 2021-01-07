@@ -47,6 +47,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDatabaseObjects", req, cb);
     }
     /**
+     * 本接口（DescribeDatabaseTable）用于查询云数据库实例的表信息。
+     */
+    async DescribeDatabaseTable(req, cb) {
+        return this.request("DescribeDatabaseTable", req, cb);
+    }
+    /**
      * 查询可创建的分布式数据库可售卖的分片规格配置。
      */
     async DescribeShardSpec(req, cb) {
@@ -60,10 +66,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ResetAccountPassword", req, cb);
     }
     /**
-     * 本接口（DescribeDCDBUpgradePrice）用于查询升级分布式数据库实例价格。
+     * 查询云数据库实例列表，支持通过项目ID、实例ID、内网地址、实例名称等来筛选实例。
+如果不指定任何筛选条件，则默认返回10条实例记录，单次请求最多支持返回100条实例记录。
      */
-    async DescribeDCDBUpgradePrice(req, cb) {
-        return this.request("DescribeDCDBUpgradePrice", req, cb);
+    async DescribeDCDBInstances(req, cb) {
+        return this.request("DescribeDCDBInstances", req, cb);
     }
     /**
      * 本接口（ModifyAccountDescription）用于修改云数据库账号备注。
@@ -107,12 +114,6 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async InitDCDBInstances(req, cb) {
         return this.request("InitDCDBInstances", req, cb);
-    }
-    /**
-     * 本接口（DescribeAccounts）用于查询指定云数据库实例的账号列表。
-     */
-    async DescribeAccounts(req, cb) {
-        return this.request("DescribeAccounts", req, cb);
     }
     /**
      * 本接口（GrantAccountPrivileges）用于给云数据库账号赋权。
@@ -164,10 +165,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBSyncMode", req, cb);
     }
     /**
+     * 本接口（DescribeProjectSecurityGroups）用于查询项目安全组信息
+     */
+    async DescribeProjectSecurityGroups(req, cb) {
+        return this.request("DescribeProjectSecurityGroups", req, cb);
+    }
+    /**
+     * 本接口 (AssociateSecurityGroups) 用于安全组批量绑定云资源。
+     */
+    async AssociateSecurityGroups(req, cb) {
+        return this.request("AssociateSecurityGroups", req, cb);
+    }
+    /**
      * 本接口（CreateAccount）用于创建云数据库账号。一个实例可以创建多个不同的账号，相同的用户名+不同的host是不同的账号。
      */
     async CreateAccount(req, cb) {
         return this.request("CreateAccount", req, cb);
+    }
+    /**
+     * 本接口（ModifyDBInstanceSecurityGroups）用于修改云数据库安全组
+     */
+    async ModifyDBInstanceSecurityGroups(req, cb) {
+        return this.request("ModifyDBInstanceSecurityGroups", req, cb);
     }
     /**
      * 本接口（UpgradeDCDBInstance）用于升级分布式数据库实例。本接口完成下单和支付两个动作，如果发生支付失败的错误，调用用户账户相关接口中的支付订单接口（PayDeals）重新支付即可。
@@ -194,11 +213,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CloseDBExtranetAccess", req, cb);
     }
     /**
-     * 查询云数据库实例列表，支持通过项目ID、实例ID、内网地址、实例名称等来筛选实例。
-如果不指定任何筛选条件，则默认返回10条实例记录，单次请求最多支持返回100条实例记录。
+     * 本接口（DescribeAccounts）用于查询指定云数据库实例的账号列表。
      */
-    async DescribeDCDBInstances(req, cb) {
-        return this.request("DescribeDCDBInstances", req, cb);
+    async DescribeAccounts(req, cb) {
+        return this.request("DescribeAccounts", req, cb);
+    }
+    /**
+     * 相当于在所有分片的mysqld中执行flush logs，完成切分的binlog将展示在各个分片控制台binlog列表里。
+     */
+    async FlushBinlog(req, cb) {
+        return this.request("FlushBinlog", req, cb);
     }
     /**
      * 本接口（CopyAccountPrivileges）用于复制云数据库账号的权限。
@@ -226,10 +250,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDatabases", req, cb);
     }
     /**
-     * 本接口（DescribeDatabaseTable）用于查询云数据库实例的表信息。
+     * 本接口（DescribeDBSecurityGroups）用于查询实例安全组信息
      */
-    async DescribeDatabaseTable(req, cb) {
-        return this.request("DescribeDatabaseTable", req, cb);
+    async DescribeDBSecurityGroups(req, cb) {
+        return this.request("DescribeDBSecurityGroups", req, cb);
+    }
+    /**
+     * 本接口（DescribeDCDBUpgradePrice）用于查询升级分布式数据库实例价格。
+     */
+    async DescribeDCDBUpgradePrice(req, cb) {
+        return this.request("DescribeDCDBUpgradePrice", req, cb);
     }
     /**
      * 本接口（CloneAccount）用于克隆实例账户。
@@ -238,10 +268,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CloneAccount", req, cb);
     }
     /**
-     * 相当于在所有分片的mysqld中执行flush logs，完成切分的binlog将展示在各个分片控制台binlog列表里。
+     * 本接口(DisassociateSecurityGroups)用于安全组批量解绑实例。
      */
-    async FlushBinlog(req, cb) {
-        return this.request("FlushBinlog", req, cb);
+    async DisassociateSecurityGroups(req, cb) {
+        return this.request("DisassociateSecurityGroups", req, cb);
     }
     /**
      * 本接口（DescribeDCDBRenewalPrice）用于在续费分布式数据库实例时，查询续费的价格。

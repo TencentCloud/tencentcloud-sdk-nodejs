@@ -2283,6 +2283,10 @@ global：全球加速
       * Ipv6 访问配置
       */
     Ipv6Access?: Ipv6Access;
+    /**
+      * 离线缓存
+      */
+    OfflineCache?: OfflineCache;
 }
 /**
  * UserAgent黑白名单规则配置
@@ -2472,6 +2476,14 @@ global：全球加速
       * Ipv6 访问配置
       */
     Ipv6Access?: Ipv6Access;
+    /**
+      * 离线缓存
+      */
+    OfflineCache?: OfflineCache;
+    /**
+      * 合并回源
+      */
+    OriginCombine?: OriginCombine;
 }
 /**
  * 域名标签配置
@@ -3728,6 +3740,16 @@ off：不支持
 注意：此字段可能返回 null，表示取不到有效值。
       */
     AdvanceSet: Array<AdvanceConfig>;
+    /**
+      * 离线缓存
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OfflineCache: OfflineCache;
+    /**
+      * 合并回源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OriginCombine: OriginCombine;
 }
 /**
  * GetDisableRecords返回参数结构体
@@ -5855,13 +5877,13 @@ export interface PushUrlsCacheResponse {
     RequestId?: string;
 }
 /**
- * StopCdnDomain返回参数结构体
+ * 合并回源配置项
  */
-export interface StopCdnDomainResponse {
+export interface OriginCombine {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * on|off 是否开启合并回源
       */
-    RequestId?: string;
+    Switch: string;
 }
 /**
  * 组成CacheKey的一部分
@@ -6631,6 +6653,15 @@ export interface DescribeDomainsRequest {
     Filters?: Array<DomainFilter>;
 }
 /**
+ * 离线缓存是否开启
+ */
+export interface OfflineCache {
+    /**
+      * on | off, 离线缓存是否开启
+      */
+    Switch: string;
+}
+/**
  * CreateEdgePackTask请求参数结构体
  */
 export interface CreateEdgePackTaskRequest {
@@ -6650,6 +6681,15 @@ export interface CreateEdgePackTaskRequest {
       * BlockID 的值, WALLE为1903654775(0x71777777)，VasDolly为2282837503(0x881155ff),传0或不传时默认为 WALLE 方案
       */
     BlockID?: number;
+}
+/**
+ * StopCdnDomain返回参数结构体
+ */
+export interface StopCdnDomainResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * Url重定向规则配置

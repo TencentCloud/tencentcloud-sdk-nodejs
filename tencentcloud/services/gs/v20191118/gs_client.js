@@ -28,6 +28,18 @@ class Client extends abstract_client_1.AbstractClient {
         super("gs.tencentcloudapi.com", "2019-11-18", clientConfig);
     }
     /**
+     * 保存游戏存档
+     */
+    async SaveGameArchive(req, cb) {
+        return this.request("SaveGameArchive", req, cb);
+    }
+    /**
+     * 尝试锁定机器
+     */
+    async TrylockWorker(req, cb) {
+        return this.request("TrylockWorker", req, cb);
+    }
+    /**
      * 创建会话
      */
     async CreateSession(req, cb) {
@@ -40,10 +52,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StopGame", req, cb);
     }
     /**
-     * 尝试锁定机器
+     * 切换游戏存档
      */
-    async TrylockWorker(req, cb) {
-        return this.request("TrylockWorker", req, cb);
+    async SwitchGameArchive(req, cb) {
+        return this.request("SwitchGameArchive", req, cb);
     }
 }
 exports.Client = Client;

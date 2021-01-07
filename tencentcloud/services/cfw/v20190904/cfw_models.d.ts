@@ -22,7 +22,7 @@ export interface DescribeVpcRuleOverviewResponse {
  */
 export interface DescribeSyncAssetStatusResponse {
     /**
-      * 0：同步成功，1：资产更新中，2：后台同步调用失败
+      * 1-更新中 2-更新完成 3、4-更新失败
       */
     Status?: number;
     /**
@@ -39,7 +39,7 @@ export interface ModifyAllSwitchStatusRequest {
       */
     Status: number;
     /**
-      * 0: 边界防火墙开关，1：vpc防火墙开关
+      * 0: 互联网边界防火墙开关，1：vpc防火墙开关
       */
     Type?: number;
     /**
@@ -129,7 +129,7 @@ export interface CreateSecurityGroupApiRulesRequest {
  */
 export interface DescribeSecurityGroupListResponse {
     /**
-      * 总条数
+      * 列表当前规则总条数
       */
     Total?: number;
     /**
@@ -224,7 +224,7 @@ export interface SequenceData {
  */
 export interface ModifyItemSwitchStatusResponse {
     /**
-      * 修改成功与否状态值
+      * 修改成功与否状态值 0：修改成功，非 0：修改失败
       */
     Status?: number;
     /**
@@ -250,7 +250,7 @@ export interface CreateSecurityGroupApiRulesResponse {
  */
 export interface ModifyAcRuleResponse {
     /**
-      * 状态值，0:操作成功
+      * 状态值，0:操作成功，非0：操作失败
       */
     Status?: number;
     /**
@@ -268,7 +268,7 @@ export interface ModifyAcRuleResponse {
  */
 export interface ModifySequenceRulesResponse {
     /**
-      * 0: 修改成功, 其他: 修改失败
+      * 0: 修改成功, 非0: 修改失败
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Status?: number;
@@ -296,7 +296,7 @@ export interface DescribeTableStatusResponse {
  */
 export interface DeleteAcRuleResponse {
     /**
-      * 状态值
+      * 状态值 0: 删除成功, !0: 删除失败
       */
     Status?: number;
     /**
@@ -326,7 +326,7 @@ export interface ModifySequenceRulesRequest {
       */
     Area?: string;
     /**
-      * 0：出向，1：入向
+      * 方向，0：出向，1：入向
       */
     Direction?: number;
 }
@@ -416,15 +416,15 @@ export interface DescribeSyncAssetStatusRequest {
  */
 export interface DeleteAllAccessControlRuleRequest {
     /**
-      * 方向，0：出站，1：入站
+      * 方向，0：出站，1：入站  默认值是 0
       */
     Direction?: number;
     /**
-      * VPC间防火墙开关ID
+      * VPC间防火墙开关ID  全部删除 EdgeId和Area只填写一个，不填写则不删除vpc间防火墙开关 ，默认值为‘’
       */
     EdgeId?: string;
     /**
-      * nat地域
+      * nat地域 全部删除 EdgeId和Area只填写一个，不填写则不删除nat防火墙开关 默认值为‘’
       */
     Area?: string;
 }
@@ -498,7 +498,7 @@ export interface ModifyItemSwitchStatusRequest {
       */
     Status: number;
     /**
-      * 0: 边界防火墙开关，1：vpc防火墙开关
+      * 0: 互联网边界边界防火墙开关，1：vpc防火墙开关
       */
     Type?: number;
 }
@@ -516,7 +516,7 @@ export interface DescribeRuleOverviewRequest {
  */
 export interface DescribeVpcRuleOverviewRequest {
     /**
-      * 边id
+      * EdgeId值两个vpc间的边id  不是必填项可以为空，就是所有vpc间的访问控制规则
       */
     EdgeId: string;
 }
@@ -570,19 +570,19 @@ export interface DescribeAcListsRequest {
  */
 export interface DescribeTableStatusRequest {
     /**
-      * EdgeId值
+      * EdgeId值两个vpc间的边id vpc填Edgeid，不要填Area；
       */
     EdgeId?: string;
     /**
-      * 状态值，0：检查表的状态
+      * 状态值，0：检查表的状态 确实只有一个默认值
       */
     Status?: number;
     /**
-      * Nat所在地域
+      * Nat所在地域 NAT填Area，不要填Edgeid；
       */
     Area?: string;
     /**
-      * 方向，0：出站，1：入站
+      * 方向，0：出站，1：入站 默认值为 0
       */
     Direction?: number;
 }
@@ -751,7 +751,7 @@ export interface DescribeNatRuleOverviewResponse {
       */
     TotalNum?: number;
     /**
-      * 访问规则剩余条数
+      * 访问控制规则剩余配额
       */
     RemainNum?: number;
     /**
@@ -772,15 +772,15 @@ export interface DescribeNatRuleOverviewResponse {
  */
 export interface DeleteAcRuleRequest {
     /**
-      * id值
+      * 删除规则对应的id值 669872
       */
     Id: number;
     /**
-      * 出站还是入站
+      * 方向，0：出站，1：入站
       */
     Direction: number;
     /**
-      * EdgeId值
+      * EdgeId值两个vpc间的边id
       */
     EdgeId?: string;
     /**
@@ -793,11 +793,11 @@ export interface DeleteAcRuleRequest {
  */
 export interface DeleteAllAccessControlRuleResponse {
     /**
-      * 状态值
+      * 状态值 0: 修改成功, !0: 修改失败
       */
     Status?: number;
     /**
-      * 返回多余信息
+      * 删除了几条访问控制规则
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Info?: number;
@@ -934,7 +934,7 @@ export interface CreateAcRulesRequest {
       */
     Data: Array<RuleInfoData>;
     /**
-      * 0：添加，1：插入
+      * 0：添加（默认），1：插入
       */
     Type?: number;
     /**
@@ -971,7 +971,7 @@ export interface DescribeSecurityGroupListRequest {
       */
     Direction: number;
     /**
-      * 腾讯云地域的英文简写
+      * 地域代码（例: ap-guangzhou),支持腾讯云全部地域
       */
     Area: string;
     /**
@@ -1000,27 +1000,27 @@ export interface DescribeSecurityGroupListRequest {
  */
 export interface DescribeSwitchListsRequest {
     /**
-      * 防火墙状态
+      * 防火墙状态  0: 关闭，1：开启
       */
     Status?: number;
     /**
-      * 资产类型
+      * 资产类型 CVM/NAT/VPN/CLB/其它
       */
     Type?: string;
     /**
-      * 地域
+      * 地域 上海/重庆/广州，等等
       */
     Area?: string;
     /**
-      * 搜索值
+      * 搜索值  例子："{"common":"106.54.189.45"}"
       */
     SearchValue?: string;
     /**
-      * 条数
+      * 条数  默认值:10
       */
     Limit?: number;
     /**
-      * 偏移值
+      * 偏移值 默认值: 0
       */
     Offset?: number;
     /**
@@ -1028,7 +1028,7 @@ export interface DescribeSwitchListsRequest {
       */
     Order?: string;
     /**
-      * 排序字段
+      * 排序字段 PortTimes(风险端口数)
       */
     By?: string;
 }
@@ -1037,7 +1037,7 @@ export interface DescribeSwitchListsRequest {
  */
 export interface ModifyTableStatusRequest {
     /**
-      * EdgeId值
+      * EdgeId值两个vpc间的边id
       */
     EdgeId?: string;
     /**
@@ -1076,11 +1076,26 @@ export interface DeleteSecurityGroupRuleResponse {
  */
 export interface DescribeNatRuleOverviewRequest {
     /**
-      * 方向，0：出站，1：入站
+      * 方向，0：出站，1：入站 默认值：0
       */
     Direction?: number;
     /**
-      * NAT地域
+      * NAT地域  这个是必填项，填入相关的英文，'ap-beijing-fsi': '北京金融',
+        'ap-beijing': '北京',
+        'ap-changsha-ec': '长沙EC',
+        'ap-chengdu': '成都',
+        'ap-chongqing': '重庆',
+        'ap-fuzhou-ec': '福州EC',
+        'ap-guangzhou-open': '广州Open',
+        'ap-guangzhou': '广州',
+        'ap-hangzhou-ec': '杭州EC',
+        'ap-jinan-ec': '济南EC',
+        'ap-nanjing': '南京',
+        'ap-shanghai-fsi': '上海金融',
+        'ap-shanghai': '上海',
+        'ap-shenzhen-fsi': '深圳金融',
+        'ap-shenzhen': '深圳',
+        'ap-wuhan-ec': '武汉EC'
       */
     Area?: string;
 }
@@ -1089,7 +1104,7 @@ export interface DescribeNatRuleOverviewRequest {
  */
 export interface ModifySecurityGroupAllRuleStatusRequest {
     /**
-      * 状态，0：全部停用，1：全部启用
+      * 列表规则状态，0：全部停用，1：全部启用
       */
     Status: number;
     /**
@@ -1314,7 +1329,7 @@ export interface SwitchListsData {
  */
 export interface ModifyAllSwitchStatusResponse {
     /**
-      * 开启或者关闭成功与否状态值
+      * 修改成功与否的状态值 0：修改成功，非 0：修改失败
       */
     Status?: number;
     /**

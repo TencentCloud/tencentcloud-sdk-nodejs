@@ -34,7 +34,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeItemById", req, cb);
     }
     /**
-     * 查询已购曲库包列表接口
+     * 获取已购曲库包列表接口
      */
     async DescribePackages(req, cb) {
         return this.request("DescribePackages", req, cb);
@@ -46,22 +46,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeLyric", req, cb);
     }
     /**
-     * 分类内容下歌曲列表获取，根据CategoryID或CategoryCode
+     * 该服务后续会停用，不再建议使用
      */
     async DescribeItems(req, cb) {
         return this.request("DescribeItems", req, cb);
     }
     /**
-     * 根据接口的模式及歌曲ID来取得对应权限的歌曲播放地址等信息。
+     * 获取授权项目信息列表
      */
-    async DescribeMusic(req, cb) {
-        return this.request("DescribeMusic", req, cb);
-    }
-    /**
-     * 查询曲库包已核验歌曲列表接口
-     */
-    async DescribePackageItems(req, cb) {
-        return this.request("DescribePackageItems", req, cb);
+    async DescribeAuthInfo(req, cb) {
+        return this.request("DescribeAuthInfo", req, cb);
     }
     /**
      * 客户上报用户数据功能，为了更好地为用户提供优质服务
@@ -70,7 +64,31 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ReportData", req, cb);
     }
     /**
-     * 获取素材库列表时使用
+     * 获取曲库包歌曲播放信息接口
+     */
+    async DescribeMusic(req, cb) {
+        return this.request("DescribeMusic", req, cb);
+    }
+    /**
+     * 获取云音乐播放信息接口
+     */
+    async DescribeCloudMusic(req, cb) {
+        return this.request("DescribeCloudMusic", req, cb);
+    }
+    /**
+     * 获取曲库包下已核销歌曲列表接口
+     */
+    async DescribePackageItems(req, cb) {
+        return this.request("DescribePackageItems", req, cb);
+    }
+    /**
+     * 获取授权项目下已购云音乐列表
+     */
+    async DescribeCloudMusicPurchased(req, cb) {
+        return this.request("DescribeCloudMusicPurchased", req, cb);
+    }
+    /**
+     * 该服务后续会停用，不再建议使用
      */
     async DescribeStations(req, cb) {
         return this.request("DescribeStations", req, cb);

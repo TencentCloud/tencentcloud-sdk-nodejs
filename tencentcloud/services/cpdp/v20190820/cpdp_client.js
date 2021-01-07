@@ -241,6 +241,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryOrder", req, cb);
     }
     /**
+     * 获取单笔代发转账对账单下载URL
+     */
+    async QueryBillDownloadURL(req, cb) {
+        return this.request("QueryBillDownloadURL", req, cb);
+    }
+    /**
      * 智慧零售-发票开具
      */
     async CreateInvoice(req, cb) {

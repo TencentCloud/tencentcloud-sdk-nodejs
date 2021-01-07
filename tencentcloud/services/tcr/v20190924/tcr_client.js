@@ -178,6 +178,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeApplicationTriggerLogPersonal", req, cb);
     }
     /**
+     * 预付费实例续费，同时支持按量计费转包年包月
+     */
+    async RenewInstance(req, cb) {
+        return this.request("RenewInstance", req, cb);
+    }
+    /**
      * 删除长期访问凭证
      */
     async DeleteInstanceToken(req, cb) {
