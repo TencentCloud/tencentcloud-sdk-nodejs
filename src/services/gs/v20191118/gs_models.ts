@@ -253,4 +253,9 @@ export interface CreateSessionRequest {
    * 【多人云游】角色；Player表示玩家；Viewer表示观察者
    */
   Role?: string
+
+  /**
+   * 游戏相关参数
+   */
+  GameContext?: string
 }

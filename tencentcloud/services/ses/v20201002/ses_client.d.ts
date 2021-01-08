@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ListEmailAddressRequest, GetEmailIdentityResponse, ListBlackEmailAddressRequest, SendEmailRequest, DeleteEmailIdentityRequest, UpdateEmailIdentityRequest, GetEmailIdentityRequest, DeleteEmailIdentityResponse, GetStatisticsReportRequest, DeleteEmailTemplateResponse, CreateEmailTemplateRequest, UpdateEmailTemplateRequest, UpdateEmailIdentityResponse, DeleteEmailTemplateRequest, DeleteBlackListResponse, ListEmailTemplatesRequest, DeleteBlackListRequest, ListEmailTemplatesResponse, SendEmailResponse, ListBlackEmailAddressResponse, ListEmailIdentitiesResponse, ListEmailAddressResponse, GetStatisticsReportResponse, DeleteEmailAddressRequest, GetEmailTemplateRequest, DeleteEmailAddressResponse, CreateEmailIdentityResponse, CreateEmailIdentityRequest, CreateEmailAddressRequest, CreateEmailTemplateResponse, CreateEmailAddressResponse, UpdateEmailTemplateResponse, GetEmailTemplateResponse, ListEmailIdentitiesRequest } from "./ses_models";
+import { ListEmailAddressRequest, GetEmailIdentityResponse, ListBlackEmailAddressRequest, GetSendEmailStatusResponse, SendEmailRequest, DeleteEmailIdentityRequest, UpdateEmailIdentityRequest, GetEmailIdentityRequest, DeleteEmailIdentityResponse, GetStatisticsReportRequest, DeleteEmailTemplateResponse, CreateEmailTemplateRequest, UpdateEmailTemplateRequest, UpdateEmailIdentityResponse, DeleteEmailTemplateRequest, DeleteBlackListResponse, ListEmailTemplatesRequest, DeleteBlackListRequest, ListEmailTemplatesResponse, SendEmailResponse, ListBlackEmailAddressResponse, GetSendEmailStatusRequest, ListEmailIdentitiesResponse, ListEmailAddressResponse, GetStatisticsReportResponse, DeleteEmailAddressRequest, GetEmailTemplateRequest, DeleteEmailAddressResponse, CreateEmailIdentityResponse, CreateEmailIdentityRequest, CreateEmailAddressRequest, CreateEmailTemplateResponse, CreateEmailAddressResponse, UpdateEmailTemplateResponse, GetEmailTemplateResponse, ListEmailIdentitiesRequest } from "./ses_models";
 /**
  * ses client
  * @class
@@ -44,6 +44,10 @@ export declare class Client extends AbstractClient {
      * 腾讯云发送的邮件一旦被收件方判断为硬退(Hard Bounce)，腾讯云会拉黑该地址，并不允许所有用户向该地址发送邮件。成为邮箱黑名单。如果业务方确认是误判，可以从黑名单中删除。
      */
     ListBlackEmailAddress(req: ListBlackEmailAddressRequest, cb?: (error: string, rep: ListBlackEmailAddressResponse) => void): Promise<ListBlackEmailAddressResponse>;
+    /**
+     * 获取邮件发送状态。仅支持查询90天之内的数据
+     */
+    GetSendEmailStatus(req: GetSendEmailStatusRequest, cb?: (error: string, rep: GetSendEmailStatusResponse) => void): Promise<GetSendEmailStatusResponse>;
     /**
      * 删除发信模版
      */

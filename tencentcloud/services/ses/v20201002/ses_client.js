@@ -83,6 +83,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListBlackEmailAddress", req, cb);
     }
     /**
+     * 获取邮件发送状态。仅支持查询90天之内的数据
+     */
+    async GetSendEmailStatus(req, cb) {
+        return this.request("GetSendEmailStatus", req, cb);
+    }
+    /**
      * 删除发信模版
      */
     async DeleteEmailTemplate(req, cb) {

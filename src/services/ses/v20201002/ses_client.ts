@@ -23,6 +23,7 @@ import {
   GetEmailIdentityResponse,
   ListBlackEmailAddressRequest,
   Template,
+  GetSendEmailStatusResponse,
   SendEmailRequest,
   EmailSender,
   DeleteEmailIdentityRequest,
@@ -37,11 +38,13 @@ import {
   UpdateEmailIdentityResponse,
   DeleteEmailTemplateRequest,
   DeleteBlackListResponse,
+  SendEmailStatus,
   ListEmailTemplatesRequest,
   DeleteBlackListRequest,
   ListEmailTemplatesResponse,
   SendEmailResponse,
   ListBlackEmailAddressResponse,
+  GetSendEmailStatusRequest,
   TemplatesMetadata,
   ListEmailIdentitiesResponse,
   ListEmailAddressResponse,
@@ -161,6 +164,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListBlackEmailAddressResponse) => void
   ): Promise<ListBlackEmailAddressResponse> {
     return this.request("ListBlackEmailAddress", req, cb)
+  }
+
+  /**
+   * 获取邮件发送状态。仅支持查询90天之内的数据
+   */
+  async GetSendEmailStatus(
+    req: GetSendEmailStatusRequest,
+    cb?: (error: string, rep: GetSendEmailStatusResponse) => void
+  ): Promise<GetSendEmailStatusResponse> {
+    return this.request("GetSendEmailStatus", req, cb)
   }
 
   /**

@@ -108,6 +108,16 @@ it("ses.v20201002.ListBlackEmailAddress", async function () {
     }
 })
 
+it("ses.v20201002.GetSendEmailStatus", async function () {
+    try {
+       const data = await client.GetSendEmailStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ses.v20201002.DeleteEmailTemplate", async function () {
     try {
        const data = await client.DeleteEmailTemplate({})
