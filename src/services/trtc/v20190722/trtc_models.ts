@@ -119,6 +119,11 @@ export interface StartMCUMixTranscodeByStrRoomIdRequest {
    * 混流输出布局参数。
    */
   LayoutParams: LayoutParams
+
+  /**
+   * 第三方CDN转推参数。
+   */
+  PublishCdnParams?: PublishCdnParams
 }
 
 /**
@@ -568,6 +573,11 @@ export interface StartMCUMixTranscodeRequest {
    * 混流输出布局参数。
    */
   LayoutParams: LayoutParams
+
+  /**
+   * 第三方CDN转推参数。
+   */
+  PublishCdnParams?: PublishCdnParams
 }
 
 /**
@@ -1326,6 +1336,21 @@ export interface DescribeTrtcInteractiveTimeRequest {
    * 应用ID，可不传。传应用ID时返回的是该应用的用量，不传时返回所有应用的合计值。
    */
   SdkAppId?: number
+}
+
+/**
+ * 第三方CDN转推参数
+ */
+export interface PublishCdnParams {
+  /**
+   * 腾讯云直播BizId。
+   */
+  BizId: number
+
+  /**
+   * 第三方CDN转推的目的地址，同时只支持转推一个第三方CDN地址。
+   */
+  PublishCdnUrls: Array<string>
 }
 
 /**

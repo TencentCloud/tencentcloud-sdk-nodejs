@@ -166,6 +166,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateServiceDiscovery", req, cb);
     }
     /**
+     * 根据维度条件查询监控数据
+     */
+    async DescribeStatisticData(req, cb) {
+        return this.request("DescribeStatisticData", req, cb);
+    }
+    /**
      * 查询通知模板列表
      */
     async DescribeAlarmNotices(req, cb) {

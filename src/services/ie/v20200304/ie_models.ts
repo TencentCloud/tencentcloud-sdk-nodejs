@@ -783,8 +783,8 @@ export interface CreateEditingTaskResponse {
  */
 export interface UrlInfo {
   /**
-      * 视频 URL。音视频支持mp4、ts等格式；直播流支持flv、rtmp格式。
-注意：目前智能编辑还不支持直播流场景。
+      * 视频 URL。
+注意：编辑理解仅支持mp4、flv等格式的点播文件，不支持hls；
       */
   Url: string
 

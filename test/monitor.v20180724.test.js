@@ -228,6 +228,16 @@ it("monitor.v20180724.CreateServiceDiscovery", async function () {
     }
 })
 
+it("monitor.v20180724.DescribeStatisticData", async function () {
+    try {
+       const data = await client.DescribeStatisticData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.DescribeAlarmNotices", async function () {
     try {
        const data = await client.DescribeAlarmNotices({})

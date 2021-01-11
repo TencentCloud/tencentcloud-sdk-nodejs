@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribePolicyConditionListConfigManual,
+  ModifyAlarmPolicyNoticeResponse,
   ModifyAlarmPolicyInfoRequest,
   CreatePolicyGroupEventCondition,
   DescribeProductEventListRequest,
@@ -42,13 +43,15 @@ import {
   CreatePolicyGroupResponse,
   ModifyAlarmPolicyTasksResponse,
   DescribeBaseMetricsResponse,
-  SendCustomAlarmMsgRequest,
+  MetricDataPoint,
   DescribePolicyConditionListConfigManualContinueTime,
   CommonNamespace,
   GetMonitorDataRequest,
   DataPoint,
   DescribeAlarmPoliciesResponse,
+  ModifyAlarmPolicyStatusRequest,
   ConditionsTemp,
+  SendCustomAlarmMsgRequest,
   DescribePolicyConditionListConfigManualPeriod,
   UnBindingPolicyObjectRequest,
   DescribeServiceDiscoveryRequest,
@@ -81,6 +84,7 @@ import {
   ModifyAlarmPolicyConditionResponse,
   Dimension,
   DescribeBindingPolicyObjectListInstance,
+  Point,
   ModifyPolicyGroupEventCondition,
   Metric,
   ModifyPolicyGroupRequest,
@@ -90,7 +94,7 @@ import {
   UserNotice,
   AlarmPolicyFilter,
   DescribeAlarmNoticeCallbacksResponse,
-  ModifyAlarmPolicyNoticeResponse,
+  ModifyAlarmPolicyConditionRequest,
   ModifyAlarmPolicyStatusResponse,
   Instance,
   BindingPolicyObjectDimension,
@@ -106,6 +110,7 @@ import {
   AlarmEvent,
   ModifyPolicyGroupResponse,
   DescribePolicyConditionListConfigManualCalcType,
+  MetricData,
   DeletePolicyGroupRequest,
   DescribePolicyGroupInfoCondition,
   DescribeBindingPolicyObjectListResponse,
@@ -125,7 +130,7 @@ import {
   AlarmNotice,
   MetricConfig,
   DescribeAlarmEventsRequest,
-  ModifyAlarmPolicyConditionRequest,
+  MidQueryCondition,
   ModifyAlarmNoticeResponse,
   DescribeAccidentEventListAlarms,
   DescribeProductListResponse,
@@ -138,6 +143,7 @@ import {
   CreatePolicyGroupRequest,
   CreatePolicyGroupCondition,
   DescribePolicyGroupInfoReceiverInfo,
+  DescribeStatisticDataResponse,
   DescribePolicyConditionListEventMetric,
   DescribePolicyGroupListRequest,
   DescribeBasicAlarmListRequest,
@@ -149,7 +155,7 @@ import {
   DescribeAlarmNoticeResponse,
   DescribeBindingPolicyObjectListInstanceGroup,
   DescribeProductEventListEventsGroupInfo,
-  ModifyAlarmPolicyStatusRequest,
+  DescribeStatisticDataRequest,
   DescribeAlarmNoticeRequest,
   DescribeBindingPolicyObjectListDimension,
   CreateAlarmNoticeRequest,
@@ -398,6 +404,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateServiceDiscoveryResponse) => void
   ): Promise<CreateServiceDiscoveryResponse> {
     return this.request("CreateServiceDiscovery", req, cb)
+  }
+
+  /**
+   * 根据维度条件查询监控数据
+   */
+  async DescribeStatisticData(
+    req: DescribeStatisticDataRequest,
+    cb?: (error: string, rep: DescribeStatisticDataResponse) => void
+  ): Promise<DescribeStatisticDataResponse> {
+    return this.request("DescribeStatisticData", req, cb)
   }
 
   /**

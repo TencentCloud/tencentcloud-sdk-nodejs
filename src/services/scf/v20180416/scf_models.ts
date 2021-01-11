@@ -2605,7 +2605,7 @@ export interface ListTriggersRequest {
   Limit?: number
 
   /**
-   * 根据哪个字段进行返回结果排序,支持以下字段：AddTime, ModTime，默认ModTime
+   * 根据哪个字段进行返回结果排序,支持以下字段：add_time，mod_time，默认mod_time
    */
   OrderBy?: string
 

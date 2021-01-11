@@ -73,6 +73,7 @@ import {
   DescribeCallDetailResponse,
   SdkAppIdTrtcUsage,
   DescribeTrtcInteractiveTimeRequest,
+  PublishCdnParams,
   DescribeRoomInformationRequest,
   DescribeDetailEventRequest,
   AbnormalExperience,

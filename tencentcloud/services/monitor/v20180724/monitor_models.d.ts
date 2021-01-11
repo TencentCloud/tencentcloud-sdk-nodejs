@@ -34,6 +34,15 @@ export interface DescribePolicyConditionListConfigManual {
     StatType: DescribePolicyConditionListConfigManualStatType;
 }
 /**
+ * ModifyAlarmPolicyNotice返回参数结构体
+ */
+export interface ModifyAlarmPolicyNoticeResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyAlarmPolicyInfo请求参数结构体
  */
 export interface ModifyAlarmPolicyInfoRequest {
@@ -536,21 +545,17 @@ export interface DescribeBaseMetricsResponse {
     RequestId?: string;
 }
 /**
- * SendCustomAlarmMsg请求参数结构体
+ * DescribeMetricData出参
  */
-export interface SendCustomAlarmMsgRequest {
+export interface MetricDataPoint {
     /**
-      * 接口模块名，当前取值monitor
+      * 实例对象维度组合
       */
-    Module: string;
+    Dimensions: Array<Dimension>;
     /**
-      * 消息策略ID，在云监控自定义消息页面配置
+      * 数据点列表
       */
-    PolicyId: string;
-    /**
-      * 用户想要发送的自定义消息内容
-      */
-    Msg: string;
+    Values: Array<Point>;
 }
 /**
  * DescribePolicyConditionList.ConfigManual.ContinueTime
@@ -672,6 +677,23 @@ export interface DescribeAlarmPoliciesResponse {
     RequestId?: string;
 }
 /**
+ * ModifyAlarmPolicyStatus请求参数结构体
+ */
+export interface ModifyAlarmPolicyStatusRequest {
+    /**
+      * 模块名，固定值 monitor
+      */
+    Module: string;
+    /**
+      * 告警策略 ID
+      */
+    PolicyId: string;
+    /**
+      * 启停状态 0=停用 1=启用
+      */
+    Enable: number;
+}
+/**
  * 告警条件模版
  */
 export interface ConditionsTemp {
@@ -690,6 +712,23 @@ export interface ConditionsTemp {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     EventCondition: AlarmPolicyEventCondition;
+}
+/**
+ * SendCustomAlarmMsg请求参数结构体
+ */
+export interface SendCustomAlarmMsgRequest {
+    /**
+      * 接口模块名，当前取值monitor
+      */
+    Module: string;
+    /**
+      * 消息策略ID，在云监控自定义消息页面配置
+      */
+    PolicyId: string;
+    /**
+      * 用户想要发送的自定义消息内容
+      */
+    Msg: string;
 }
 /**
  * DescribePolicyConditionList.ConfigManual.Period
@@ -1443,6 +1482,20 @@ export interface DescribeBindingPolicyObjectListInstance {
     Region: string;
 }
 /**
+ * 监控数据点
+ */
+export interface Point {
+    /**
+      * 该监控数据点生成的时间点
+      */
+    Timestamp: number;
+    /**
+      * 监控数据点的值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Value: number;
+}
+/**
  * 修改告警策略组传入的事件告警条件
  */
 export interface ModifyPolicyGroupEventCondition {
@@ -1675,13 +1728,25 @@ export interface DescribeAlarmNoticeCallbacksResponse {
     RequestId?: string;
 }
 /**
- * ModifyAlarmPolicyNotice返回参数结构体
+ * ModifyAlarmPolicyCondition请求参数结构体
  */
-export interface ModifyAlarmPolicyNoticeResponse {
+export interface ModifyAlarmPolicyConditionRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 模块名，固定值 monitor
       */
-    RequestId?: string;
+    Module: string;
+    /**
+      * 告警策略 ID
+      */
+    PolicyId: string;
+    /**
+      * 指标触发条件
+      */
+    Condition?: AlarmPolicyCondition;
+    /**
+      * 事件触发条件
+      */
+    EventCondition?: AlarmPolicyEventCondition;
 }
 /**
  * ModifyAlarmPolicyStatus返回参数结构体
@@ -2086,6 +2151,19 @@ export interface DescribePolicyConditionListConfigManualCalcType {
       * 是否必须
       */
     Need: boolean;
+}
+/**
+ * DescribeMetricData接口出参
+ */
+export interface MetricData {
+    /**
+      * 指标名
+      */
+    MetricName: string;
+    /**
+      * 监控数据点
+      */
+    Points: Array<MetricDataPoint>;
 }
 /**
  * DeletePolicyGroup请求参数结构体
@@ -2686,25 +2764,21 @@ export interface DescribeAlarmEventsRequest {
     Namespace: string;
 }
 /**
- * ModifyAlarmPolicyCondition请求参数结构体
+ * DescribeMidDimensionValueList的查询条件
  */
-export interface ModifyAlarmPolicyConditionRequest {
+export interface MidQueryCondition {
     /**
-      * 模块名，固定值 monitor
+      * 维度
       */
-    Module: string;
+    Key: string;
     /**
-      * 告警策略 ID
+      * 操作符，支持等于(eq)、不等于(ne)，以及in
       */
-    PolicyId: string;
+    Operator: string;
     /**
-      * 指标触发条件
+      * 维度值，当Op是eq、ne时，只使用第一个元素
       */
-    Condition?: AlarmPolicyCondition;
-    /**
-      * 事件触发条件
-      */
-    EventCondition?: AlarmPolicyEventCondition;
+    Value: Array<string>;
 }
 /**
  * ModifyAlarmNotice返回参数结构体
@@ -3102,6 +3176,31 @@ export interface DescribePolicyGroupInfoReceiverInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ReceiveLanguage: string;
+}
+/**
+ * DescribeStatisticData返回参数结构体
+ */
+export interface DescribeStatisticDataResponse {
+    /**
+      * 统计周期
+      */
+    Period?: number;
+    /**
+      * 开始时间
+      */
+    StartTime?: string;
+    /**
+      * 结束时间
+      */
+    EndTime?: string;
+    /**
+      * 监控数据
+      */
+    Data?: Array<MetricData>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribePolicyConditionList.EventMetric
@@ -3516,21 +3615,41 @@ export interface DescribeProductEventListEventsGroupInfo {
     GroupName: string;
 }
 /**
- * ModifyAlarmPolicyStatus请求参数结构体
+ * DescribeStatisticData请求参数结构体
  */
-export interface ModifyAlarmPolicyStatusRequest {
+export interface DescribeStatisticDataRequest {
     /**
-      * 模块名，固定值 monitor
+      * 所属模块，固定值，为monitor
       */
     Module: string;
     /**
-      * 告警策略 ID
+      * 命名空间，目前只支持QCE/TKE
       */
-    PolicyId: string;
+    Namespace: string;
     /**
-      * 启停状态 0=停用 1=启用
+      * 指标名列表
       */
-    Enable: number;
+    MetricNames: Array<string>;
+    /**
+      * 维度条件，操作符支持=、in
+      */
+    Conditions?: Array<MidQueryCondition>;
+    /**
+      * 统计粒度。默认取值为300，单位为s
+      */
+    Period?: number;
+    /**
+      * 起始时间，默认为当前时间，如2020-12-08T19:51:23+08:00
+      */
+    StartTime?: string;
+    /**
+      * 结束时间，默认为当前时间，如2020-12-08T19:51:23+08:00
+      */
+    EndTime?: string;
+    /**
+      * 按指定维度groupBy
+      */
+    GroupBys?: Array<string>;
 }
 /**
  * DescribeAlarmNotice请求参数结构体
