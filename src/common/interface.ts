@@ -9,9 +9,9 @@ export interface ClientConfig {
   credential: Credential
   /**
    * @param {string} region 产品地域
-   * 必选
+   * 对于要求区分地域的产品，此参数必选（如 cvm）；对于不区分地域的产品（如 sms），无需传入。
    */
-  region: string
+  region?: string
   /**
    * @param {ClientProfile} profile 可选配置实例
    * 可选，没有特殊需求可以跳过。
