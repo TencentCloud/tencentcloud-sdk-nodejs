@@ -22,8 +22,6 @@
   "author": "tencentcloudapi",
   "license": "Apache-2.0",
   "dependencies": {
-    "babel-eslint": "^10.0.2",
-    "eslint-plugin-react": "^7.17.0",
     "form-data": "^3.0.0",
     "get-stream": "^6.0.0",
     "https-proxy-agent": "^2.2.1",
@@ -43,10 +41,7 @@
     "@types/form-data": "^2.5.0",
     "@types/node": "^14.0.26",
     "@types/node-fetch": "^2.5.7",
-    "@typescript-eslint/eslint-plugin": "^2.34.0",
-    "@typescript-eslint/parser": "^2.34.0",
     "chai": "^4.2.0",
-    "eslint": "^6.8.0",
     "mocha": "^8.1.1",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.7"
