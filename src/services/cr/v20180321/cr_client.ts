@@ -19,7 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreateBotTaskRequest,
-  ExportBotDataRequest,
+  BotInfo,
   UploadFileRequest,
   UploadFileResponse,
   UploadDataJsonResponse,
@@ -42,24 +42,32 @@ import {
   BotFlow,
   ApplyBlackListResponse,
   DescribeRecordsRequest,
+  QueryBotListRequest,
+  QueryRecordListRequest,
   ExportBotDataResponse,
   SingleRecord,
+  QueryRecordListResponse,
   QueryInstantDataRequest,
+  ExportBotDataRequest,
   DescribeCreditResultRequest,
   ApplyBlackListRequest,
   ApplyCreditAuditRequest,
   DownloadReportResponse,
   SmsTemplate,
+  RecordInfo,
   PhonePool,
+  UploadBotDataResponse,
   DownloadRecordListResponse,
   CreateBotTaskResponse,
   BotFileData,
   UploadBotFileRequest,
   UploadDataFileRequest,
   DescribeFileModelResponse,
+  QueryBotListResponse,
   DescribeTaskStatusRequest,
   ProductQueryInfo,
   QueryProductsRequest,
+  UploadBotDataRequest,
   SmsSign,
   QueryProductsResponse,
   DescribeRecordsResponse,
@@ -96,13 +104,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 上传Json格式数据，接口返回数据任务ID
+   * 查询机器人任务状态列表
    */
-  async UploadDataJson(
-    req: UploadDataJsonRequest,
-    cb?: (error: string, rep: UploadDataJsonResponse) => void
-  ): Promise<UploadDataJsonResponse> {
-    return this.request("UploadDataJson", req, cb)
+  async QueryBotList(
+    req: QueryBotListRequest,
+    cb?: (error: string, rep: QueryBotListResponse) => void
+  ): Promise<QueryBotListResponse> {
+    return this.request("QueryBotList", req, cb)
   }
 
   /**
@@ -133,6 +141,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ExportBotDataResponse) => void
   ): Promise<ExportBotDataResponse> {
     return this.request("ExportBotData", req, cb)
+  }
+
+  /**
+   * 上传Json格式数据，接口返回数据任务ID
+   */
+  async UploadDataJson(
+    req: UploadDataJsonRequest,
+    cb?: (error: string, rep: UploadDataJsonResponse) => void
+  ): Promise<UploadDataJsonResponse> {
+    return this.request("UploadDataJson", req, cb)
   }
 
   /**
@@ -176,6 +194,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询录音列表
+   */
+  async QueryRecordList(
+    req: QueryRecordListRequest,
+    cb?: (error: string, rep: QueryRecordListResponse) => void
+  ): Promise<QueryRecordListResponse> {
+    return this.request("QueryRecordList", req, cb)
+  }
+
+  /**
    * 上传机器人文件
    */
   async UploadBotFile(
@@ -183,6 +211,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UploadBotFileResponse) => void
   ): Promise<UploadBotFileResponse> {
     return this.request("UploadBotFile", req, cb)
+  }
+
+  /**
+   * 上传机器人任务数据
+   */
+  async UploadBotData(
+    req: UploadBotDataRequest,
+    cb?: (error: string, rep: UploadBotDataResponse) => void
+  ): Promise<UploadBotDataResponse> {
+    return this.request("UploadBotData", req, cb)
   }
 
   /**

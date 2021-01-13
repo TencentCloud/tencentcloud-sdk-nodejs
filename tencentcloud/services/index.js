@@ -286,6 +286,8 @@ var tts_1 = require("./tts");
 Object.defineProperty(exports, "tts", { enumerable: true, get: function () { return tts_1.tts; } });
 var ump_1 = require("./ump");
 Object.defineProperty(exports, "ump", { enumerable: true, get: function () { return ump_1.ump; } });
+var vm_1 = require("./vm");
+Object.defineProperty(exports, "vm", { enumerable: true, get: function () { return vm_1.vm; } });
 var vms_1 = require("./vms");
 Object.defineProperty(exports, "vms", { enumerable: true, get: function () { return vms_1.vms; } });
 var vod_1 = require("./vod");

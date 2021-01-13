@@ -7480,6 +7480,10 @@ development: 开发环境
       * 微信商户子应用ID
       */
     WxSubAppId?: string;
+    /**
+      * 支付通知地址
+      */
+    PaymentNotifyUrl?: string;
 }
 /**
  * UnBindAcct请求参数结构体

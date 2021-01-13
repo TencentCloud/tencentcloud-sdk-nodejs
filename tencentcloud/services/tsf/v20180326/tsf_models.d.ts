@@ -819,7 +819,7 @@ export interface MsInstance {
       * 实例注册id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    RegistrationId: number;
+    RegistrationId: string;
     /**
       * 屏蔽状态，hidden 为屏蔽，unhidden 为未屏蔽
 注意：此字段可能返回 null，表示取不到有效值。
