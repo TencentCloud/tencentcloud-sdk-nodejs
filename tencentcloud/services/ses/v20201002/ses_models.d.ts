@@ -102,7 +102,7 @@ export interface SendEmailRequest {
       */
     FromEmailAddress: string;
     /**
-      * 收信人邮箱地址
+      * 收信人邮箱地址，最多支持群发50人。
       */
     Destination: Array<string>;
     /**

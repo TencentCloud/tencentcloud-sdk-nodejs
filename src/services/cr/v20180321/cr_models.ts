@@ -96,33 +96,23 @@ export interface CreateBotTaskRequest {
 }
 
 /**
- * ExportBotData请求参数结构体
+ * 机器人列表
  */
-export interface ExportBotDataRequest {
+export interface BotInfo {
   /**
-   * 模块名。默认值（固定）：AiApi
+   * 机器人ID
    */
-  Module: string
+  BotId: string
 
   /**
-   * 操作名。默认值（固定）：ExportBotData
+   * 机器人名称
    */
-  Operation: string
+  BotName: string
 
   /**
-   * 业务日期。YYYY-MM-DD
+   * 机器人状态。0-停用 1-启用 2-待审核
    */
-  BizDate: string
-
-  /**
-   * 任务ID，二者必填一个
-   */
-  BotId?: string
-
-  /**
-   * 任务名称，二者必填一个
-   */
-  BotName?: string
+  BotStatus: string
 }
 
 /**
@@ -655,6 +645,71 @@ export interface DescribeRecordsRequest {
 }
 
 /**
+ * QueryBotList请求参数结构体
+ */
+export interface QueryBotListRequest {
+  /**
+   * 模块名：AiApi
+   */
+  Module: string
+
+  /**
+   * 操作名：QueryBotList
+   */
+  Operation: string
+}
+
+/**
+ * QueryRecordList请求参数结构体
+ */
+export interface QueryRecordListRequest {
+  /**
+   * 模块名。AiApi
+   */
+  Module: string
+
+  /**
+   * 操作名。QueryRecordList
+   */
+  Operation: string
+
+  /**
+   * 偏移值
+   */
+  Offset: number
+
+  /**
+   * 偏移位移，最大20
+   */
+  Limit: number
+
+  /**
+   * 任务ID，二者必填一个
+   */
+  BotId?: string
+
+  /**
+   * 任务名称，二者必填一个
+   */
+  BotName?: string
+
+  /**
+   * 被叫号码
+   */
+  CalledPhone?: string
+
+  /**
+   * 开始日期
+   */
+  StartBizDate?: string
+
+  /**
+   * 结束日期
+   */
+  EndBizDate?: string
+}
+
+/**
  * ExportBotData返回参数结构体
  */
 export interface ExportBotDataResponse {
@@ -717,6 +772,26 @@ export interface SingleRecord {
 }
 
 /**
+ * QueryRecordList返回参数结构体
+ */
+export interface QueryRecordListResponse {
+  /**
+   * 录音列表。
+   */
+  RecordList?: Array<RecordInfo>
+
+  /**
+   * 总数
+   */
+  TotalCount?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * QueryInstantData请求参数结构体
  */
 export interface QueryInstantDataRequest {
@@ -749,6 +824,36 @@ export interface QueryInstantDataRequest {
    * 查询参数
    */
   Data?: string
+}
+
+/**
+ * ExportBotData请求参数结构体
+ */
+export interface ExportBotDataRequest {
+  /**
+   * 模块名。默认值（固定）：AiApi
+   */
+  Module: string
+
+  /**
+   * 操作名。默认值（固定）：ExportBotData
+   */
+  Operation: string
+
+  /**
+   * 业务日期。YYYY-MM-DD
+   */
+  BizDate: string
+
+  /**
+   * 任务ID，二者必填一个
+   */
+  BotId?: string
+
+  /**
+   * 任务名称，二者必填一个
+   */
+  BotName?: string
 }
 
 /**
@@ -913,6 +1018,51 @@ export interface SmsTemplate {
 }
 
 /**
+ * 录音文件详情
+ */
+export interface RecordInfo {
+  /**
+   * 任务Id
+   */
+  BotId: string
+
+  /**
+   * 任务名称
+   */
+  BotName: string
+
+  /**
+   * 任务日期
+   */
+  BizDate: string
+
+  /**
+   * 被叫号码
+   */
+  CalledPhone: string
+
+  /**
+   * 开始通话时间
+   */
+  CallStartTime: string
+
+  /**
+   * 通话时长
+   */
+  Duration: number
+
+  /**
+   * 录音文件地址
+   */
+  CosUrl: string
+
+  /**
+   * 对话日志。JSON格式
+   */
+  DialogueLog: string
+}
+
+/**
  * 号码组信息
  */
 export interface PhonePool {
@@ -925,6 +1075,16 @@ export interface PhonePool {
    * 号码组名称
    */
   PoolName: string
+}
+
+/**
+ * UploadBotData返回参数结构体
+ */
+export interface UploadBotDataResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1063,6 +1223,21 @@ export interface DescribeFileModelResponse {
 }
 
 /**
+ * QueryBotList返回参数结构体
+ */
+export interface QueryBotListResponse {
+  /**
+   * 任务列表。
+   */
+  BotList?: Array<BotInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeTaskStatus请求参数结构体
  */
 export interface DescribeTaskStatusRequest {
@@ -1138,6 +1313,36 @@ export interface QueryProductsRequest {
    * 实例Id。
    */
   InstanceId: string
+}
+
+/**
+ * UploadBotData请求参数结构体
+ */
+export interface UploadBotDataRequest {
+  /**
+   * 模块名。默认值（固定）：AiApi
+   */
+  Module: string
+
+  /**
+   * 操作名。默认值（固定）：UploadData
+   */
+  Operation: string
+
+  /**
+   * 任务数据。JSON格式
+   */
+  Data: string
+
+  /**
+   * 任务ID，二者必填一个
+   */
+  BotId?: string
+
+  /**
+   * 任务名称，二者必填一个
+   */
+  BotName?: string
 }
 
 /**

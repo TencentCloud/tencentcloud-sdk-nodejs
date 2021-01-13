@@ -40,10 +40,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UploadFile", req, cb);
     }
     /**
-     * 上传Json格式数据，接口返回数据任务ID
+     * 查询机器人任务状态列表
      */
-    async UploadDataJson(req, cb) {
-        return this.request("UploadDataJson", req, cb);
+    async QueryBotList(req, cb) {
+        return this.request("QueryBotList", req, cb);
     }
     /**
      * 用于获取指定案件的录音地址，次日早上8:00后可查询前日录音。
@@ -62,6 +62,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ExportBotData(req, cb) {
         return this.request("ExportBotData", req, cb);
+    }
+    /**
+     * 上传Json格式数据，接口返回数据任务ID
+     */
+    async UploadDataJson(req, cb) {
+        return this.request("UploadDataJson", req, cb);
     }
     /**
      * 用于获取指定案件的对话文本内容，次日早上8:00后可查询前日对话文本内容。
@@ -88,10 +94,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryProducts", req, cb);
     }
     /**
+     * 查询录音列表
+     */
+    async QueryRecordList(req, cb) {
+        return this.request("QueryRecordList", req, cb);
+    }
+    /**
      * 上传机器人文件
      */
     async UploadBotFile(req, cb) {
         return this.request("UploadBotFile", req, cb);
+    }
+    /**
+     * 上传机器人任务数据
+     */
+    async UploadBotData(req, cb) {
+        return this.request("UploadBotData", req, cb);
     }
     /**
      * 上传文件，接口返回数据任务ID，支持xlsx、xls、csv、zip格式。

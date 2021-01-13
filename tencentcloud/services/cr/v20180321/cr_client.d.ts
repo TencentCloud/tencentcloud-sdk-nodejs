@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateBotTaskRequest, ExportBotDataRequest, UploadFileRequest, UploadFileResponse, UploadDataJsonResponse, DescribeBotFlowResponse, DownloadDialogueTextRequest, DownloadReportRequest, ApplyCreditAuditResponse, UploadDataFileResponse, DownloadRecordListRequest, DescribeFileModelRequest, QueryInstantDataResponse, UploadBotFileResponse, UploadDataJsonRequest, DescribeCreditResultResponse, DownloadDialogueTextResponse, DescribeBotFlowRequest, ApplyBlackListResponse, DescribeRecordsRequest, ExportBotDataResponse, QueryInstantDataRequest, DescribeCreditResultRequest, ApplyBlackListRequest, ApplyCreditAuditRequest, DownloadReportResponse, DownloadRecordListResponse, CreateBotTaskResponse, UploadBotFileRequest, UploadDataFileRequest, DescribeFileModelResponse, DescribeTaskStatusRequest, QueryProductsRequest, QueryProductsResponse, DescribeRecordsResponse, DescribeTaskStatusResponse } from "./cr_models";
+import { CreateBotTaskRequest, UploadFileRequest, UploadFileResponse, UploadDataJsonResponse, DescribeBotFlowResponse, DownloadDialogueTextRequest, DownloadReportRequest, ApplyCreditAuditResponse, UploadDataFileResponse, DownloadRecordListRequest, DescribeFileModelRequest, QueryInstantDataResponse, UploadBotFileResponse, UploadDataJsonRequest, DescribeCreditResultResponse, DownloadDialogueTextResponse, DescribeBotFlowRequest, ApplyBlackListResponse, DescribeRecordsRequest, QueryBotListRequest, QueryRecordListRequest, ExportBotDataResponse, QueryRecordListResponse, QueryInstantDataRequest, ExportBotDataRequest, DescribeCreditResultRequest, ApplyBlackListRequest, ApplyCreditAuditRequest, DownloadReportResponse, UploadBotDataResponse, DownloadRecordListResponse, CreateBotTaskResponse, UploadBotFileRequest, UploadDataFileRequest, DescribeFileModelResponse, QueryBotListResponse, DescribeTaskStatusRequest, QueryProductsRequest, UploadBotDataRequest, QueryProductsResponse, DescribeRecordsResponse, DescribeTaskStatusResponse } from "./cr_models";
 /**
  * cr client
  * @class
@@ -16,9 +16,9 @@ export declare class Client extends AbstractClient {
      */
     UploadFile(req: UploadFileRequest, cb?: (error: string, rep: UploadFileResponse) => void): Promise<UploadFileResponse>;
     /**
-     * 上传Json格式数据，接口返回数据任务ID
+     * 查询机器人任务状态列表
      */
-    UploadDataJson(req: UploadDataJsonRequest, cb?: (error: string, rep: UploadDataJsonResponse) => void): Promise<UploadDataJsonResponse>;
+    QueryBotList(req: QueryBotListRequest, cb?: (error: string, rep: QueryBotListResponse) => void): Promise<QueryBotListResponse>;
     /**
      * 用于获取指定案件的录音地址，次日早上8:00后可查询前日录音。
      */
@@ -31,6 +31,10 @@ export declare class Client extends AbstractClient {
      * 导出机器人数据
      */
     ExportBotData(req: ExportBotDataRequest, cb?: (error: string, rep: ExportBotDataResponse) => void): Promise<ExportBotDataResponse>;
+    /**
+     * 上传Json格式数据，接口返回数据任务ID
+     */
+    UploadDataJson(req: UploadDataJsonRequest, cb?: (error: string, rep: UploadDataJsonResponse) => void): Promise<UploadDataJsonResponse>;
     /**
      * 用于获取指定案件的对话文本内容，次日早上8:00后可查询前日对话文本内容。
      */
@@ -48,9 +52,17 @@ export declare class Client extends AbstractClient {
      */
     QueryProducts(req: QueryProductsRequest, cb?: (error: string, rep: QueryProductsResponse) => void): Promise<QueryProductsResponse>;
     /**
+     * 查询录音列表
+     */
+    QueryRecordList(req: QueryRecordListRequest, cb?: (error: string, rep: QueryRecordListResponse) => void): Promise<QueryRecordListResponse>;
+    /**
      * 上传机器人文件
      */
     UploadBotFile(req: UploadBotFileRequest, cb?: (error: string, rep: UploadBotFileResponse) => void): Promise<UploadBotFileResponse>;
+    /**
+     * 上传机器人任务数据
+     */
+    UploadBotData(req: UploadBotDataRequest, cb?: (error: string, rep: UploadBotDataResponse) => void): Promise<UploadBotDataResponse>;
     /**
      * 上传文件，接口返回数据任务ID，支持xlsx、xls、csv、zip格式。
      */
