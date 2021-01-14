@@ -2184,6 +2184,26 @@ disabled：未启用
    * 流量包来源
    */
   Channel: string
+
+  /**
+   * 流量包生效区域，目前仅支持mainland
+   */
+  Area: string
+
+  /**
+   * 流量包生命周期月数
+   */
+  LifeTimeMonth: number
+
+  /**
+   * 流量包是否支持续订
+   */
+  ExtensionAvailable: boolean
+
+  /**
+   * 流量包是否支持退费
+   */
+  RefundAvailable: boolean
 }
 
 /**

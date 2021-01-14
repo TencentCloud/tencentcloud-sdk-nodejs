@@ -58,10 +58,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SaDivulgeDataQueryPub", req, cb);
     }
     /**
-     * 云安全配置检查项详情
+     * 合规管理-资产列表
      */
-    async DescribeCheckConfigDetail(req, cb) {
-        return this.request("DescribeCheckConfigDetail", req, cb);
+    async DescribeComplianceAssetList(req, cb) {
+        return this.request("DescribeComplianceAssetList", req, cb);
     }
     /**
      * 云安全配置管理资产组列表
@@ -82,16 +82,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAssetsMappingList", req, cb);
     }
     /**
+     * 漏洞管理页，获取漏洞列表
+     */
+    async DescribeVulList(req, cb) {
+        return this.request("DescribeVulList", req, cb);
+    }
+    /**
      * 资产安全页资产详情
      */
     async DescribeAssetDetail(req, cb) {
         return this.request("DescribeAssetDetail", req, cb);
     }
     /**
-     * 漏洞管理页，获取漏洞列表
+     * 云安全配置检查项详情
      */
-    async DescribeVulList(req, cb) {
-        return this.request("DescribeVulList", req, cb);
+    async DescribeCheckConfigDetail(req, cb) {
+        return this.request("DescribeCheckConfigDetail", req, cb);
     }
     /**
      * 合规管理检查项详情
@@ -104,6 +110,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeSafetyEventList(req, cb) {
         return this.request("DescribeSafetyEventList", req, cb);
+    }
+    /**
+     * 漏洞列表页，获取漏洞详情信息
+     */
+    async DescribeVulDetail(req, cb) {
+        return this.request("DescribeVulDetail", req, cb);
     }
 }
 exports.Client = Client;

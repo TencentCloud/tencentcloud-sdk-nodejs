@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeAssetDetailRequest, DescribeVulListResponse, DescribeCheckConfigAssetListRequest, DescribeComplianceListResponse, DescribeConfigListResponse, DescribeCheckConfigDetailResponse, DescribeAssetListResponse, DescribeCheckConfigAssetListResponse, DescribeCheckConfigDetailRequest, DescribeAssetListRequest, DescribeComplianceDetailResponse, DescribeAssetsMappingListResponse, DescribeComplianceListRequest, DescribeVulListRequest, DescribeLeakDetectionListRequest, DescribeEventDetailResponse, DescribeSafetyEventListResponse, DescribeSafetyEventListRequest, SaDivulgeDataQueryPubResponse, DescribeConfigListRequest, DescribeLeakDetectionListResponse, DescribeEventDetailRequest, SaDivulgeDataQueryPubRequest, DescribeAssetsMappingListRequest, DescribeComplianceDetailRequest, DescribeAssetDetailResponse } from "./ssa_models";
+import { DescribeAssetDetailRequest, DescribeVulListResponse, DescribeComplianceAssetListResponse, DescribeCheckConfigAssetListRequest, DescribeComplianceListResponse, DescribeConfigListResponse, DescribeCheckConfigDetailResponse, DescribeAssetListResponse, DescribeCheckConfigAssetListResponse, DescribeCheckConfigDetailRequest, DescribeAssetListRequest, DescribeComplianceDetailResponse, DescribeAssetsMappingListResponse, DescribeComplianceListRequest, DescribeVulListRequest, DescribeLeakDetectionListRequest, DescribeEventDetailResponse, DescribeSafetyEventListResponse, DescribeSafetyEventListRequest, SaDivulgeDataQueryPubResponse, DescribeConfigListRequest, DescribeLeakDetectionListResponse, DescribeEventDetailRequest, SaDivulgeDataQueryPubRequest, DescribeVulDetailRequest, DescribeAssetsMappingListRequest, DescribeComplianceDetailRequest, DescribeComplianceAssetListRequest, DescribeAssetDetailResponse, DescribeVulDetailResponse } from "./ssa_models";
 /**
  * ssa client
  * @class
@@ -28,9 +28,9 @@ export declare class Client extends AbstractClient {
      */
     SaDivulgeDataQueryPub(req: SaDivulgeDataQueryPubRequest, cb?: (error: string, rep: SaDivulgeDataQueryPubResponse) => void): Promise<SaDivulgeDataQueryPubResponse>;
     /**
-     * 云安全配置检查项详情
+     * 合规管理-资产列表
      */
-    DescribeCheckConfigDetail(req: DescribeCheckConfigDetailRequest, cb?: (error: string, rep: DescribeCheckConfigDetailResponse) => void): Promise<DescribeCheckConfigDetailResponse>;
+    DescribeComplianceAssetList(req: DescribeComplianceAssetListRequest, cb?: (error: string, rep: DescribeComplianceAssetListResponse) => void): Promise<DescribeComplianceAssetListResponse>;
     /**
      * 云安全配置管理资产组列表
      */
@@ -44,13 +44,17 @@ export declare class Client extends AbstractClient {
      */
     DescribeAssetsMappingList(req: DescribeAssetsMappingListRequest, cb?: (error: string, rep: DescribeAssetsMappingListResponse) => void): Promise<DescribeAssetsMappingListResponse>;
     /**
+     * 漏洞管理页，获取漏洞列表
+     */
+    DescribeVulList(req: DescribeVulListRequest, cb?: (error: string, rep: DescribeVulListResponse) => void): Promise<DescribeVulListResponse>;
+    /**
      * 资产安全页资产详情
      */
     DescribeAssetDetail(req: DescribeAssetDetailRequest, cb?: (error: string, rep: DescribeAssetDetailResponse) => void): Promise<DescribeAssetDetailResponse>;
     /**
-     * 漏洞管理页，获取漏洞列表
+     * 云安全配置检查项详情
      */
-    DescribeVulList(req: DescribeVulListRequest, cb?: (error: string, rep: DescribeVulListResponse) => void): Promise<DescribeVulListResponse>;
+    DescribeCheckConfigDetail(req: DescribeCheckConfigDetailRequest, cb?: (error: string, rep: DescribeCheckConfigDetailResponse) => void): Promise<DescribeCheckConfigDetailResponse>;
     /**
      * 合规管理检查项详情
      */
@@ -59,4 +63,8 @@ export declare class Client extends AbstractClient {
      * 获取安全事件列表
      */
     DescribeSafetyEventList(req: DescribeSafetyEventListRequest, cb?: (error: string, rep: DescribeSafetyEventListResponse) => void): Promise<DescribeSafetyEventListResponse>;
+    /**
+     * 漏洞列表页，获取漏洞详情信息
+     */
+    DescribeVulDetail(req: DescribeVulDetailRequest, cb?: (error: string, rep: DescribeVulDetailResponse) => void): Promise<DescribeVulDetailResponse>;
 }

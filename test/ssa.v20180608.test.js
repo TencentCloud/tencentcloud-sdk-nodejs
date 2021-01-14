@@ -68,9 +68,9 @@ it("ssa.v20180608.SaDivulgeDataQueryPub", async function () {
     }
 })
 
-it("ssa.v20180608.DescribeCheckConfigDetail", async function () {
+it("ssa.v20180608.DescribeComplianceAssetList", async function () {
     try {
-       const data = await client.DescribeCheckConfigDetail({})
+       const data = await client.DescribeComplianceAssetList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,6 +108,16 @@ it("ssa.v20180608.DescribeAssetsMappingList", async function () {
     }
 })
 
+it("ssa.v20180608.DescribeVulList", async function () {
+    try {
+       const data = await client.DescribeVulList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ssa.v20180608.DescribeAssetDetail", async function () {
     try {
        const data = await client.DescribeAssetDetail({})
@@ -118,9 +128,9 @@ it("ssa.v20180608.DescribeAssetDetail", async function () {
     }
 })
 
-it("ssa.v20180608.DescribeVulList", async function () {
+it("ssa.v20180608.DescribeCheckConfigDetail", async function () {
     try {
-       const data = await client.DescribeVulList({})
+       const data = await client.DescribeCheckConfigDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -141,6 +151,16 @@ it("ssa.v20180608.DescribeComplianceDetail", async function () {
 it("ssa.v20180608.DescribeSafetyEventList", async function () {
     try {
        const data = await client.DescribeSafetyEventList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ssa.v20180608.DescribeVulDetail", async function () {
+    try {
+       const data = await client.DescribeVulDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

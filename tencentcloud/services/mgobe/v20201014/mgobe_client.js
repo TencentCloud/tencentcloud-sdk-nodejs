@@ -28,10 +28,34 @@ class Client extends abstract_client_1.AbstractClient {
         super("mgobe.tencentcloudapi.com", "2020-10-14", clientConfig);
     }
     /**
+     * 修改房间玩家自定义属性
+     */
+    async ChangeRoomPlayerProfile(req, cb) {
+        return this.request("ChangeRoomPlayerProfile", req, cb);
+    }
+    /**
+     * 踢出房间玩家
+     */
+    async RemoveRoomPlayer(req, cb) {
+        return this.request("RemoveRoomPlayer", req, cb);
+    }
+    /**
+     * 修改玩家自定义状态
+     */
+    async ChangeRoomPlayerStatus(req, cb) {
+        return this.request("ChangeRoomPlayerStatus", req, cb);
+    }
+    /**
      * 通过game_id、room_id解散房间
      */
     async DismissRoom(req, cb) {
         return this.request("DismissRoom", req, cb);
+    }
+    /**
+     * 修改房间
+     */
+    async ModifyRoom(req, cb) {
+        return this.request("ModifyRoom", req, cb);
     }
 }
 exports.Client = Client;

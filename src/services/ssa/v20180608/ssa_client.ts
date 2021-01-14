@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeAssetDetailRequest,
   DescribeVulListResponse,
+  DescribeComplianceAssetListResponse,
   DataCheck,
   DescribeCheckConfigAssetListRequest,
   Asset,
@@ -34,6 +35,7 @@ import {
   DescribeAssetListRequest,
   DescribeComplianceDetailResponse,
   DescribeAssetsMappingListResponse,
+  Tag,
   VulItem,
   DescribeComplianceListRequest,
   DescribeVulListRequest,
@@ -56,12 +58,14 @@ import {
   DescribeEventDetailRequest,
   CheckAssetItem,
   SaDivulgeDataQueryPubRequest,
+  DescribeVulDetailRequest,
   DataCompliance,
   DescribeAssetsMappingListRequest,
   DescribeComplianceDetailRequest,
   AssetDetail,
-  Tag,
+  DescribeComplianceAssetListRequest,
   DescribeAssetDetailResponse,
+  DescribeVulDetailResponse,
 } from "./ssa_models"
 
 /**
@@ -124,13 +128,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 云安全配置检查项详情
+   * 合规管理-资产列表
    */
-  async DescribeCheckConfigDetail(
-    req: DescribeCheckConfigDetailRequest,
-    cb?: (error: string, rep: DescribeCheckConfigDetailResponse) => void
-  ): Promise<DescribeCheckConfigDetailResponse> {
-    return this.request("DescribeCheckConfigDetail", req, cb)
+  async DescribeComplianceAssetList(
+    req: DescribeComplianceAssetListRequest,
+    cb?: (error: string, rep: DescribeComplianceAssetListResponse) => void
+  ): Promise<DescribeComplianceAssetListResponse> {
+    return this.request("DescribeComplianceAssetList", req, cb)
   }
 
   /**
@@ -164,6 +168,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 漏洞管理页，获取漏洞列表
+   */
+  async DescribeVulList(
+    req: DescribeVulListRequest,
+    cb?: (error: string, rep: DescribeVulListResponse) => void
+  ): Promise<DescribeVulListResponse> {
+    return this.request("DescribeVulList", req, cb)
+  }
+
+  /**
    * 资产安全页资产详情
    */
   async DescribeAssetDetail(
@@ -174,13 +188,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 漏洞管理页，获取漏洞列表
+   * 云安全配置检查项详情
    */
-  async DescribeVulList(
-    req: DescribeVulListRequest,
-    cb?: (error: string, rep: DescribeVulListResponse) => void
-  ): Promise<DescribeVulListResponse> {
-    return this.request("DescribeVulList", req, cb)
+  async DescribeCheckConfigDetail(
+    req: DescribeCheckConfigDetailRequest,
+    cb?: (error: string, rep: DescribeCheckConfigDetailResponse) => void
+  ): Promise<DescribeCheckConfigDetailResponse> {
+    return this.request("DescribeCheckConfigDetail", req, cb)
   }
 
   /**
@@ -201,5 +215,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSafetyEventListResponse) => void
   ): Promise<DescribeSafetyEventListResponse> {
     return this.request("DescribeSafetyEventList", req, cb)
+  }
+
+  /**
+   * 漏洞列表页，获取漏洞详情信息
+   */
+  async DescribeVulDetail(
+    req: DescribeVulDetailRequest,
+    cb?: (error: string, rep: DescribeVulDetailResponse) => void
+  ): Promise<DescribeVulDetailResponse> {
+    return this.request("DescribeVulDetail", req, cb)
   }
 }

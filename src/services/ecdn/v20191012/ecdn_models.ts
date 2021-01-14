@@ -1039,6 +1039,11 @@ online：上线状态，正常调度服务中
 offline：下线状态
       */
   Status: string
+
+  /**
+   * 节点 IP 添加时间
+   */
+  CreateTime: string
 }
 
 /**

@@ -621,6 +621,11 @@ export interface DescribeErrorLogDataRequest {
    * 偏移量，默认为0。
    */
   Offset?: number
+
+  /**
+   * 仅在实例为主实例或者灾备实例时生效，可选值：slave，代表拉取从机的日志。
+   */
+  InstType?: string
 }
 
 /**
@@ -5854,6 +5859,11 @@ export interface DescribeSlowLogDataRequest {
    * 一次性返回的记录数量，默认为100，最大为400。
    */
   Limit?: number
+
+  /**
+   * 仅在实例为主实例或者灾备实例时生效，可选值：slave，代表拉取从机的日志。
+   */
+  InstType?: string
 }
 
 /**

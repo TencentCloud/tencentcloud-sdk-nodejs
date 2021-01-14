@@ -509,11 +509,11 @@ export interface DriverLicenseOCRResponse {
       */
     Address?: string;
     /**
-      * 出生日期
+      * 出生日期（YYYY-MM-DD）
       */
     DateOfBirth?: string;
     /**
-      * 初次领证日期
+      * 初次领证日期（YYYY-MM-DD）
       */
     DateOfFirstIssue?: string;
     /**
@@ -521,11 +521,11 @@ export interface DriverLicenseOCRResponse {
       */
     Class?: string;
     /**
-      * 有效期开始时间
+      * 有效期开始时间（YYYY-MM-DD）
       */
     StartDate?: string;
     /**
-      * 有效期截止时间
+      * 有效期截止时间（YYYY-MM-DD）
       */
     EndDate?: string;
     /**
@@ -556,6 +556,10 @@ WARN_DRIVER_LICENSE_PS_CARD ps告警
 注：告警信息可以同时存在多个
       */
     RecognizeWarnMsg?: Array<string>;
+    /**
+      * 发证单位
+      */
+    IssuingAuthority?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

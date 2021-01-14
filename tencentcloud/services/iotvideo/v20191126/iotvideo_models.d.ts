@@ -233,6 +233,8 @@ ye1m30d ：事件30天存储月套餐 。
 ye1y3d ：事件3天存储年套餐。
 ye1y7d ：事件7天存储年套餐。
 ye1y30d ：事件30天存储年套餐。
+yc1w7d : 全时7天存储周套餐。
+ye1w7d : 事件7天存储周套餐。
       */
     PkgId: string;
     /**
@@ -244,7 +246,7 @@ ye1y30d ：事件30天存储年套餐。
       */
     OrderCount: number;
     /**
-      * 云存服务所在的区域,如ap-guangzhou,ap-singapore
+      * 云存服务所在的区域,如ap-guangzhou,ap-singapore, na-siliconvalley, eu-frankfurt
       */
     StorageRegion: string;
     /**

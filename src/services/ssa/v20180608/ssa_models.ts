@@ -41,6 +41,26 @@ export interface DescribeVulListResponse {
 }
 
 /**
+ * DescribeComplianceAssetList返回参数结构体
+ */
+export interface DescribeComplianceAssetListResponse {
+  /**
+   * 资产组列表
+   */
+  CheckAssetsList?: Array<CheckAssetItem>
+
+  /**
+   * 资产组列表总数
+   */
+  Total?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 检查项详情对象
  */
 export interface DataCheck {
@@ -94,6 +114,12 @@ export interface DataCheck {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AssetTotal: number
+
+  /**
+      * 备注内容
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Remarks: string
 }
 
 /**
@@ -562,6 +588,21 @@ export interface DescribeAssetsMappingListResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 标签
+ */
+export interface Tag {
+  /**
+   * 数据库标识
+   */
+  Fid: number
+
+  /**
+   * 标签名称
+   */
+  Fname: string
 }
 
 /**
@@ -1607,6 +1648,11 @@ export interface CheckAssetItem {
    * 详情
    */
   Detail?: string
+
+  /**
+   * 备注内容
+   */
+  Remarks?: string
 }
 
 /**
@@ -1672,6 +1718,21 @@ export interface SaDivulgeDataQueryPubRequest {
    * 查询个数
    */
   Limit: string
+}
+
+/**
+ * DescribeVulDetail请求参数结构体
+ */
+export interface DescribeVulDetailRequest {
+  /**
+   * 漏洞唯一标识符
+   */
+  UniqId: string
+
+  /**
+   * 查看详情来源
+   */
+  Source?: string
 }
 
 /**
@@ -1765,6 +1826,12 @@ export interface DataCompliance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AssetTotal: number
+
+  /**
+      * 忽略内容
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Remarks: string
 }
 
 /**
@@ -2051,18 +2118,33 @@ export interface AssetDetail {
 }
 
 /**
- * 标签
+ * DescribeComplianceAssetList请求参数结构体
  */
-export interface Tag {
+export interface DescribeComplianceAssetListRequest {
   /**
-   * 数据库标识
+   * 页码
    */
-  Fid: number
+  Offset: number
 
   /**
-   * 标签名称
+   * 每页数量
    */
-  Fname: string
+  Limit: number
+
+  /**
+   * 检查项uuid
+   */
+  Id: string
+
+  /**
+   * 过滤条件
+   */
+  Filter?: Array<Filter>
+
+  /**
+   * 查询条件
+   */
+  Search?: Array<Filter>
 }
 
 /**
@@ -2074,6 +2156,142 @@ export interface DescribeAssetDetailResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Data?: AssetDetail
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeVulDetail返回参数结构体
+ */
+export interface DescribeVulDetailResponse {
+  /**
+      * 漏洞类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VulType?: number
+
+  /**
+      * 漏洞子类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubVulType?: string
+
+  /**
+      * cvss分数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CvssScore?: string
+
+  /**
+      * cvss值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Cvss?: string
+
+  /**
+      * cve编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Cve?: string
+
+  /**
+      * cnvd编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Cnvd?: string
+
+  /**
+      * cnnvd编号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Cnnvd?: string
+
+  /**
+      * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Desc?: string
+
+  /**
+      * 参考
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Reference?: string
+
+  /**
+      * 修复意见
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Repair?: string
+
+  /**
+      * 披露时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReleaseTime?: string
+
+  /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime?: string
+
+  /**
+      * 漏洞名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name?: string
+
+  /**
+      * 等级
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Level?: number
+
+  /**
+      * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status?: number
+
+  /**
+      * 受影响资产唯一标识
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ImpactAsset?: string
+
+  /**
+      * 受影响资产名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ImpactAssetName?: string
+
+  /**
+      * 受影响资产是否已删除
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsAssetDeleted?: boolean
+
+  /**
+      * 漏洞来源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Source?: string
+
+  /**
+      * 漏洞URL
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VulUrl?: string
+
+  /**
+      * 资产归属
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SsaAssetCategory?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
