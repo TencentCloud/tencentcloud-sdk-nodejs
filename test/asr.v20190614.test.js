@@ -98,6 +98,16 @@ it("asr.v20190614.SetVocabState", async function () {
     }
 })
 
+it("asr.v20190614.CreateAsyncRecognitionTask", async function () {
+    try {
+       const data = await client.CreateAsyncRecognitionTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("asr.v20190614.CreateAsrVocab", async function () {
     try {
        const data = await client.CreateAsrVocab({})
@@ -121,6 +131,16 @@ it("asr.v20190614.DeleteCustomization", async function () {
 it("asr.v20190614.CreateCustomization", async function () {
     try {
        const data = await client.CreateCustomization({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("asr.v20190614.DescribeAsyncRecognitionTasks", async function () {
+    try {
+       const data = await client.DescribeAsyncRecognitionTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

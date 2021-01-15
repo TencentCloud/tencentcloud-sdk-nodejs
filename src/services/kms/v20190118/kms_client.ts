@@ -27,6 +27,7 @@ import {
   DisableWhiteBoxKeyResponse,
   DisableKeyResponse,
   DescribeWhiteBoxServiceStatusRequest,
+  VerifyByAsymmetricKeyRequest,
   DescribeKeyRequest,
   WhiteboxKeyInfo,
   ListAlgorithmsResponse,
@@ -49,6 +50,7 @@ import {
   GetServiceStatusRequest,
   EnableWhiteBoxKeysResponse,
   ArchiveKeyResponse,
+  VerifyByAsymmetricKeyResponse,
   DescribeWhiteBoxKeyRequest,
   GetParametersForImportResponse,
   DecryptResponse,
@@ -102,6 +104,7 @@ import {
   EnableKeyRotationResponse,
   BindCloudResourceResponse,
   EnableKeysResponse,
+  SignByAsymmetricKeyRequest,
   DescribeWhiteBoxDeviceFingerprintsRequest,
   GetRegionsRequest,
   EncryptByWhiteBoxRequest,
@@ -112,6 +115,7 @@ import {
   GetPublicKeyResponse,
   BindCloudResourceRequest,
   TagFilter,
+  SignByAsymmetricKeyResponse,
   DescribeWhiteBoxDecryptKeyResponse,
   DescribeWhiteBoxDeviceFingerprintsResponse,
   UpdateKeyDescriptionRequest,
@@ -229,6 +233,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AsymmetricSm2DecryptResponse) => void
   ): Promise<AsymmetricSm2DecryptResponse> {
     return this.request("AsymmetricSm2Decrypt", req, cb)
+  }
+
+  /**
+     * 非对称密钥签名。
+注意：只有成功创建了KeyUsage= ASYMMETRIC_SIGN_VERIFY_SM2 的密钥才可以使用签名功能
+     */
+  async SignByAsymmetricKey(
+    req: SignByAsymmetricKeyRequest,
+    cb?: (error: string, rep: SignByAsymmetricKeyResponse) => void
+  ): Promise<SignByAsymmetricKeyResponse> {
+    return this.request("SignByAsymmetricKey", req, cb)
   }
 
   /**
@@ -599,5 +614,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetRegionsResponse) => void
   ): Promise<GetRegionsResponse> {
     return this.request("GetRegions", req, cb)
+  }
+
+  /**
+   * 使用非对称密钥验签
+   */
+  async VerifyByAsymmetricKey(
+    req: VerifyByAsymmetricKeyRequest,
+    cb?: (error: string, rep: VerifyByAsymmetricKeyResponse) => void
+  ): Promise<VerifyByAsymmetricKeyResponse> {
+    return this.request("VerifyByAsymmetricKey", req, cb)
   }
 }

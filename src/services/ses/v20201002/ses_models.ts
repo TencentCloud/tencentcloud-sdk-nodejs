@@ -65,12 +65,12 @@ export interface GetEmailIdentityResponse {
  */
 export interface ListBlackEmailAddressRequest {
   /**
-   * 开始日期
+   * 开始日期，格式为YYYY-MM-DD
    */
   StartDate: string
 
   /**
-   * 结束日期
+   * 结束日期，格式为YYYY-MM-DD
    */
   EndDate: string
 
@@ -80,7 +80,7 @@ export interface ListBlackEmailAddressRequest {
   Limit: number
 
   /**
-   * 规范，配合Limit使用
+   * 规范，配合Limit使用，Limit最大取值为100
    */
   Offset: number
 
@@ -93,6 +93,21 @@ export interface ListBlackEmailAddressRequest {
    * 可以指定任务ID进行查询
    */
   TaskID?: string
+}
+
+/**
+ * 附件结构，包含附件名和base之后的附件内容。
+ */
+export interface Attachment {
+  /**
+   * 附件名称，最大支持255个字符长度，不支持部分附件类型，详情请参考[附件类型](https://cloud.tencent.com/document/product/1288/51951)。
+   */
+  FileName: string
+
+  /**
+   * base64之后的附件内容，您可以发送的附件大小上限为5 MB。 注意：腾讯云api目前要求请求包大小不得超过10 MB。如果您要发送多个附件，那么这些附件的总大小不能超过10 MB。
+   */
+  Content: string
 }
 
 /**
@@ -137,7 +152,7 @@ export interface SendEmailRequest {
   FromEmailAddress: string
 
   /**
-   * 收信人邮箱地址，最多支持群发50人。
+   * 收信人邮箱地址，最多支持群发50人。注意：邮件内容会显示所有收件人地址，非群发邮件请多次调用API发送。
    */
   Destination: Array<string>
 
@@ -147,7 +162,7 @@ export interface SendEmailRequest {
   Subject: string
 
   /**
-   * 邮件的“回复”电子邮件地址。可以填写您能收到邮件的邮箱地址，可以是个人邮箱。如果不填，收件人将会回复到腾讯云。注意：邮件内容会显示所有收件人地址，非群发邮件请多次调用API发送。
+   * 邮件的“回复”电子邮件地址。可以填写您能收到邮件的邮箱地址，可以是个人邮箱。如果不填，收件人将会回复到腾讯云。
    */
   ReplyToAddresses?: string
 
@@ -160,6 +175,11 @@ export interface SendEmailRequest {
    * 使用API直接发送内容时，填写的邮件内容
    */
   Simple?: Simple
+
+  /**
+   * 需要发送附件时，填写附件相关参数。
+   */
+  Attachments?: Array<Attachment>
 }
 
 /**
@@ -371,7 +391,7 @@ export interface UpdateEmailIdentityResponse {
  */
 export interface DeleteEmailTemplateRequest {
   /**
-   * 删除发信模版
+   * 模版ID
    */
   TemplateID: number
 }
@@ -528,7 +548,7 @@ export interface ListEmailTemplatesResponse {
  */
 export interface SendEmailResponse {
   /**
-   * 接受消息时生成的消息的唯一标识符。
+   * 接受消息生成的唯一消息标识符。
    */
   MessageId?: string
 
@@ -789,7 +809,7 @@ export interface CreateEmailIdentityRequest {
  */
 export interface CreateEmailAddressRequest {
   /**
-   * 您的发信地址，上限为10个
+   * 您的发信地址（发信地址总数上限为10个）
    */
   EmailAddress: string
 

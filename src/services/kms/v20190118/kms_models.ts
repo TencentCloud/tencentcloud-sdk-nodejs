@@ -106,7 +106,7 @@ export interface CreateKeyRequest {
   Description?: string
 
   /**
-   * 指定key的用途，默认为  "ENCRYPT_DECRYPT" 表示创建对称加解密密钥，其它支持用途 “ASYMMETRIC_DECRYPT_RSA_2048” 表示创建用于加解密的RSA2048非对称密钥，“ASYMMETRIC_DECRYPT_SM2” 表示创建用于加解密的SM2非对称密钥
+   * 指定key的用途，默认为  "ENCRYPT_DECRYPT" 表示创建对称加解密密钥，其它支持用途 “ASYMMETRIC_DECRYPT_RSA_2048” 表示创建用于加解密的RSA2048非对称密钥，“ASYMMETRIC_DECRYPT_SM2” 表示创建用于加解密的SM2非对称密钥, “ASYMMETRIC_SIGN_VERIFY_SM2” 表示创建用于签名验签的SM2非对称密钥,
    */
   KeyUsage?: string
 
@@ -145,6 +145,36 @@ export interface DisableKeyResponse {
  * DescribeWhiteBoxServiceStatus请求参数结构体
  */
 export type DescribeWhiteBoxServiceStatusRequest = null
+
+/**
+ * VerifyByAsymmetricKey请求参数结构体
+ */
+export interface VerifyByAsymmetricKeyRequest {
+  /**
+   * 密钥的唯一标识
+   */
+  KeyId: string
+
+  /**
+   * 签名值，通过调用KMS签名接口生成
+   */
+  SignatureValue: string
+
+  /**
+   * 消息原文或消息摘要。如果提供的是消息原文，则消息原文的长度（Base64编码前的长度）不超过4096字节。如果提供的是消息摘要，SM2签名算法的消息摘要长度（Base64编码前的长度）必须等于32字节
+   */
+  Message: string
+
+  /**
+   * 签名算法，支持的算法：SM2DSA
+   */
+  Algorithm: string
+
+  /**
+   * 消息类型：RAW，DIGEST，如果不传，默认为RAW，表示消息原文。
+   */
+  MessageType?: string
+}
 
 /**
  * DescribeKey请求参数结构体
@@ -235,6 +265,11 @@ export interface ListAlgorithmsResponse {
    * 本地区支持的非对称加密算法
    */
   AsymmetricAlgorithms?: Array<AlgorithmInfo>
+
+  /**
+   * 本地区支持的非对称签名验签算法
+   */
+  AsymmetricSignVerifyAlgorithms?: Array<AlgorithmInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -487,6 +522,21 @@ export interface EnableWhiteBoxKeysResponse {
  * ArchiveKey返回参数结构体
  */
 export interface ArchiveKeyResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * VerifyByAsymmetricKey返回参数结构体
+ */
+export interface VerifyByAsymmetricKeyResponse {
+  /**
+   * 签名是否有效
+   */
+  SignatureValid?: boolean
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -802,7 +852,7 @@ export interface ListKeyDetailRequest {
   Origin?: string
 
   /**
-   * 根据CMK的KeyUsage筛选，ALL表示筛选全部，可使用的参数为：ALL 或 ENCRYPT_DECRYPT 或 ASYMMETRIC_DECRYPT_RSA_2048 或 ASYMMETRIC_DECRYPT_SM2，为空则默认筛选ENCRYPT_DECRYPT类型
+   * 根据CMK的KeyUsage筛选，ALL表示筛选全部，可使用的参数为：ALL 或 ENCRYPT_DECRYPT 或 ASYMMETRIC_DECRYPT_RSA_2048 或 ASYMMETRIC_DECRYPT_SM2 或 ASYMMETRIC_SIGN_VERIFY_SM2，为空则默认筛选ENCRYPT_DECRYPT类型
    */
   KeyUsage?: string
 
@@ -1266,7 +1316,7 @@ export interface KeyMetadata {
   KeyState: string
 
   /**
-   * CMK用途，取值为: ENCRYPT_DECRYPT | ASYMMETRIC_DECRYPT_RSA_2048 | ASYMMETRIC_DECRYPT_SM2
+   * CMK用途，取值为: ENCRYPT_DECRYPT | ASYMMETRIC_DECRYPT_RSA_2048 | ASYMMETRIC_DECRYPT_SM2 | ASYMMETRIC_SIGN_VERIFY_SM2
    */
   KeyUsage: string
 
@@ -1490,6 +1540,31 @@ export interface EnableKeysResponse {
 }
 
 /**
+ * SignByAsymmetricKey请求参数结构体
+ */
+export interface SignByAsymmetricKeyRequest {
+  /**
+   * 签名算法，支持的算法：SM2DSA
+   */
+  Algorithm: string
+
+  /**
+   * 消息原文或消息摘要。如果提供的是消息原文，则消息原文的长度（Base64编码前的长度）不超过4096字节。如果提供的是消息摘要，SM2签名算法的消息摘要长度（Base64编码前的长度）必须等于32字节
+   */
+  Message: string
+
+  /**
+   * 密钥的唯一标识
+   */
+  KeyId: string
+
+  /**
+   * 消息类型：RAW，DIGEST，如果不传，默认为RAW，表示消息原文。
+   */
+  MessageType?: string
+}
+
+/**
  * DescribeWhiteBoxDeviceFingerprints请求参数结构体
  */
 export interface DescribeWhiteBoxDeviceFingerprintsRequest {
@@ -1627,6 +1702,21 @@ export interface TagFilter {
    * 标签值
    */
   TagValue?: Array<string>
+}
+
+/**
+ * SignByAsymmetricKey返回参数结构体
+ */
+export interface SignByAsymmetricKeyResponse {
+  /**
+   * 签名，Base64编码
+   */
+  Signature?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

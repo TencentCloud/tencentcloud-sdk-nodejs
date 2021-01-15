@@ -92,6 +92,17 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetVocabState", req, cb);
     }
     /**
+     * 本接口用于对语音流进行准实时识别，通过异步回调来返回识别结果。
+<br>• 支持rtmp、hls、rtsp等流媒体协议，以及各类基于http协议的直播流
+<br>• 音频流时长无限制，服务会自动拉取音频流数据，若连续10分钟拉不到流数据时，服务会终止识别任务
+<br>• 服务通过回调的方式来提供识别结果，用户需要提供CallbackUrl
+<br>• 签名方法参考 [公共参数](https://cloud.tencent.com/document/api/1093/35640) 中签名方法v3。
+<br>• 默认单账号限制并发数为20路，如您有提高并发限制的需求，请提[工单](https://console.cloud.tencent.com/workorder/category)进行咨询。
+     */
+    async CreateAsyncRecognitionTask(req, cb) {
+        return this.request("CreateAsyncRecognitionTask", req, cb);
+    }
+    /**
      * 用户通过本接口进行热词表的创建。
 <br>•   默认最多可创建30个热词表。
 <br>•   每个热词表最多可添加128个词，每个词最长10个字，不能超出限制。
@@ -113,6 +124,13 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateCustomization(req, cb) {
         return this.request("CreateCustomization", req, cb);
+    }
+    /**
+     * 本接口用于查询当前在运行的语音流异步识别任务列表。
+<br>•   签名方法参考 [公共参数](https://cloud.tencent.com/document/api/1093/35640) 中签名方法v3。
+     */
+    async DescribeAsyncRecognitionTasks(req, cb) {
+        return this.request("DescribeAsyncRecognitionTasks", req, cb);
     }
     /**
      * 查询自学习模型列表

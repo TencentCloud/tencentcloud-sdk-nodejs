@@ -223,7 +223,7 @@ export interface DescribePolicyGroupListResponse {
  */
 export interface BindingPolicyObjectRequest {
     /**
-      * 策略分组Id
+      * 策略组id，如传入PolicyId则该字段可传入任意值
       */
     GroupId: number;
     /**
@@ -238,6 +238,10 @@ export interface BindingPolicyObjectRequest {
       * 需要绑定的对象维度信息
       */
     Dimensions?: Array<BindingPolicyObjectDimension>;
+    /**
+      * 告警策略ID，使用此字段时GroupId可传入任意值
+      */
+    PolicyId?: string;
 }
 /**
  * CreateServiceDiscovery返回参数结构体
@@ -758,7 +762,7 @@ export interface UnBindingPolicyObjectRequest {
       */
     Module: string;
     /**
-      * 策略组id
+      * 策略组id，如传入PolicyId则该字段可传入任意值
       */
     GroupId: number;
     /**
@@ -769,6 +773,10 @@ export interface UnBindingPolicyObjectRequest {
       * 实例分组id, 如果按实例分组删除的话UniqueId参数是无效的
       */
     InstanceGroupId?: number;
+    /**
+      * 告警策略ID，使用此字段时GroupId可传入任意值
+      */
+    PolicyId?: string;
 }
 /**
  * DescribeServiceDiscovery请求参数结构体
@@ -976,6 +984,7 @@ export interface CreateServiceDiscoveryRequest {
       * 服务发现类型，取值如下：
 <li> 1 = ServiceMonitor</li>
 <li> 2 = PodMonitor</li>
+<li> 3 = JobMonitor</li>
       */
     Type: number;
     /**
@@ -1998,6 +2007,7 @@ export interface UpdateServiceDiscoveryRequest {
       * 服务发现类型，取值如下：
 <li> 1 = ServiceMonitor</li>
 <li> 2 = PodMonitor</li>
+<li> 3 = JobMonitor</li>
       */
     Type: number;
     /**
@@ -3830,9 +3840,13 @@ export interface UnBindingAllPolicyObjectRequest {
       */
     Module: string;
     /**
-      * 策略组id
+      * 策略组id，如传入PolicyId则该字段可传入任意值
       */
     GroupId: number;
+    /**
+      * 告警策略ID，使用此字段时GroupId可传入任意值
+      */
+    PolicyId?: string;
 }
 /**
  * 查询策略输出的事件告警条件
@@ -3941,6 +3955,7 @@ export interface DeleteServiceDiscoveryRequest {
       * 服务发现类型，取值如下：
 <li> 1 = ServiceMonitor</li>
 <li> 2 = PodMonitor</li>
+<li> 3 = PodMonitor</li>
       */
     Type: number;
     /**

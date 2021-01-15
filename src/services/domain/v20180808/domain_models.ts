@@ -43,6 +43,13 @@ export interface BatchModifyDomainInfoRequest {
    * 模板ID。
    */
   TemplateId: string
+
+  /**
+      * true： 开启60天内禁止转移注册商锁定
+false：关闭60天内禁止转移注册商锁定
+默认 true
+      */
+  LockTransfer?: boolean
 }
 
 /**
@@ -162,6 +169,13 @@ export interface TransferInDomainBatchRequest {
 1 表示开启，将自动续费
       */
   AutoRenewFlag?: number
+
+  /**
+      * true： 开启60天内禁止转移注册商锁定
+false：关闭60天内禁止转移注册商锁定
+默认 true
+      */
+  LockTransfer?: boolean
 }
 
 /**
@@ -464,6 +478,12 @@ export interface DescribeDomainBaseInfoResponse {
    * 域名信息
    */
   DomainInfo?: DomainBaseInfo
+
+  /**
+      * 用户Uin
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Uin?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1008,6 +1028,17 @@ xinnet: Xin Net Technology Corporation（北京新网数码信息技术有限公
    * 域名绑定的ns
    */
   NameServer: Array<string>
+
+  /**
+      * true：开启锁定
+false：关闭锁定
+      */
+  LockTransfer: boolean
+
+  /**
+   * 锁定结束时间
+   */
+  LockEndTime: string
 }
 
 /**

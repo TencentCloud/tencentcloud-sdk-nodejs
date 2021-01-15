@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { SetVideoGenerationTaskCallbackRequest, StopOnlineRecordResponse, SetVideoGenerationTaskCallbackKeyRequest, DescribeVideoGenerationTaskCallbackResponse, ResumeOnlineRecordResponse, SetVideoGenerationTaskCallbackResponse, StartOnlineRecordRequest, DescribeOnlineRecordCallbackRequest, DescribeOnlineRecordCallbackResponse, SetTranscodeCallbackResponse, StopOnlineRecordRequest, SetVideoGenerationTaskCallbackKeyResponse, CreateTranscodeResponse, DescribeVideoGenerationTaskResponse, SetTranscodeCallbackKeyResponse, DescribeOnlineRecordRequest, StartOnlineRecordResponse, DescribeVideoGenerationTaskRequest, CreateVideoGenerationTaskResponse, PauseOnlineRecordResponse, CreateTranscodeRequest, SetOnlineRecordCallbackKeyResponse, DescribeOnlineRecordResponse, SetTranscodeCallbackKeyRequest, DescribeTranscodeRequest, DescribeTranscodeResponse, SetOnlineRecordCallbackResponse, SetOnlineRecordCallbackKeyRequest, CreateVideoGenerationTaskRequest, DescribeTranscodeCallbackRequest, ResumeOnlineRecordRequest, DescribeTranscodeCallbackResponse, SetTranscodeCallbackRequest, SetOnlineRecordCallbackRequest, DescribeVideoGenerationTaskCallbackRequest, PauseOnlineRecordRequest } from "./tiw_models";
+import { SetVideoGenerationTaskCallbackRequest, StopOnlineRecordResponse, SetVideoGenerationTaskCallbackKeyRequest, StartWhiteboardPushRequest, DescribeVideoGenerationTaskCallbackResponse, ResumeOnlineRecordResponse, SetVideoGenerationTaskCallbackResponse, StartOnlineRecordRequest, StartWhiteboardPushResponse, DescribeOnlineRecordCallbackRequest, DescribeOnlineRecordCallbackResponse, StopWhiteboardPushRequest, SetTranscodeCallbackResponse, StopOnlineRecordRequest, SetVideoGenerationTaskCallbackKeyResponse, CreateTranscodeResponse, DescribeVideoGenerationTaskResponse, SetTranscodeCallbackKeyResponse, DescribeOnlineRecordRequest, StartOnlineRecordResponse, DescribeVideoGenerationTaskRequest, CreateVideoGenerationTaskResponse, PauseOnlineRecordResponse, CreateTranscodeRequest, SetOnlineRecordCallbackKeyResponse, DescribeOnlineRecordResponse, SetTranscodeCallbackKeyRequest, DescribeTranscodeRequest, DescribeTranscodeResponse, SetOnlineRecordCallbackResponse, SetOnlineRecordCallbackKeyRequest, CreateVideoGenerationTaskRequest, DescribeTranscodeCallbackRequest, ResumeOnlineRecordRequest, DescribeTranscodeCallbackResponse, SetTranscodeCallbackRequest, SetOnlineRecordCallbackRequest, DescribeVideoGenerationTaskCallbackRequest, PauseOnlineRecordRequest, StopWhiteboardPushResponse } from "./tiw_models";
 /**
  * tiw client
  * @class
@@ -51,6 +51,14 @@ export declare class Client extends AbstractClient {
      * 设置实时录制回调鉴权密钥，回调鉴权方式请参考文档：https://cloud.tencent.com/document/product/1137/40257
      */
     SetOnlineRecordCallbackKey(req: SetOnlineRecordCallbackKeyRequest, cb?: (error: string, rep: SetOnlineRecordCallbackKeyResponse) => void): Promise<SetOnlineRecordCallbackKeyResponse>;
+    /**
+     * 停止白板推流任务
+     */
+    StopWhiteboardPush(req: StopWhiteboardPushRequest, cb?: (error: string, rep: StopWhiteboardPushResponse) => void): Promise<StopWhiteboardPushResponse>;
+    /**
+     * 发起一个白板推流任务
+     */
+    StartWhiteboardPush(req: StartWhiteboardPushRequest, cb?: (error: string, rep: StartWhiteboardPushResponse) => void): Promise<StartWhiteboardPushResponse>;
     /**
      * 暂停实时录制
      */

@@ -22,6 +22,7 @@ import {
   ListEmailAddressRequest,
   GetEmailIdentityResponse,
   ListBlackEmailAddressRequest,
+  Attachment,
   Template,
   GetSendEmailStatusResponse,
   SendEmailRequest,

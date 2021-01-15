@@ -148,6 +148,70 @@ export interface SetVideoGenerationTaskCallbackKeyRequest {
 }
 
 /**
+ * StartWhiteboardPush请求参数结构体
+ */
+export interface StartWhiteboardPushRequest {
+  /**
+   * 客户的SdkAppId
+   */
+  SdkAppId: number
+
+  /**
+   * 需要推流白板的房间号，取值范围: (1, 4294967295)
+   */
+  RoomId: number
+
+  /**
+      * 用于白板推流服务进房进行推流的用户ID，
+该ID必须是一个单独的未在SDK中使用的ID，白板推流服务使用这个用户ID进入房间进行白板音视频推流，若该ID和SDK中使用的ID重复，会导致SDK和白板推流服务互踢，影响正常推流。
+      */
+  PushUserId: string
+
+  /**
+   * 与PushUserId对应的签名
+   */
+  PushUserSig: string
+
+  /**
+   * 白板参数，例如白板宽高、背景颜色等
+   */
+  Whiteboard?: Whiteboard
+
+  /**
+      * 自动停止推流超时时间，单位秒，取值范围[300, 259200], 默认值为1800秒。
+
+当白板超过设定时间没有操作的时候，白板推流服务会自动停止白板推流。
+      */
+  AutoStopTimeout?: number
+
+  /**
+   * 对主白板推流任务进行操作时，是否同时同步操作备份任务
+   */
+  AutoManageBackup?: boolean
+
+  /**
+      * 备份白板推流相关参数。
+
+指定了备份参数的情况下，白板推流服务会在房间内新增一路白板画面视频流，即同一个房间内会有两路白板画面推流。
+      */
+  Backup?: WhiteboardPushBackupParam
+
+  /**
+      * 在实时音视频云端录制模式选择为 `指定用户录制` 模式的时候是否自动录制白板推流。
+
+默认在实时音视频的云端录制模式选择为 `指定用户录制` 模式的情况下，不会自动进行白板推流录制，如果希望进行白板推流录制，请将此参数设置为true。
+
+如果实时音视频的云端录制模式选择为 `全局自动录制` 模式，可忽略此参数。
+      */
+  AutoRecord?: boolean
+
+  /**
+   * 内部参数，不需要关注此参数
+   */
+  ExtraData?: string
+}
+
+/**
  * 拼接视频中被忽略的时间段
  */
 export interface OmittedDuration {
@@ -205,6 +269,22 @@ export interface SetVideoGenerationTaskCallbackResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 白板推流备份相关请求参数
+ */
+export interface WhiteboardPushBackupParam {
+  /**
+      * 用于白板推流服务进房的用户ID，
+该ID必须是一个单独的未在SDK中使用的ID，白板推流服务将使用这个用户ID进入房间进行白板推流，若该ID和SDK中使用的ID重复，会导致SDK和录制服务互踢，影响正常推流。
+      */
+  PushUserId: string
+
+  /**
+   * 与PushUserId对应的签名
+   */
+  PushUserSig: string
 }
 
 /**
@@ -289,6 +369,27 @@ VIDEO_GENERATION_MODE - 视频生成模式（内测中，需邮件申请开通�
 }
 
 /**
+ * StartWhiteboardPush返回参数结构体
+ */
+export interface StartWhiteboardPushResponse {
+  /**
+   * 推流任务Id
+   */
+  TaskId?: string
+
+  /**
+      * 备份任务结果参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Backup?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeOnlineRecordCallback请求参数结构体
  */
 export interface DescribeOnlineRecordCallbackRequest {
@@ -316,6 +417,21 @@ export interface DescribeOnlineRecordCallbackResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * StopWhiteboardPush请求参数结构体
+ */
+export interface StopWhiteboardPushRequest {
+  /**
+   * 客户的SdkAppId
+   */
+  SdkAppId: number
+
+  /**
+   * 需要停止的白板推流任务 Id
+   */
+  TaskId: string
 }
 
 /**
@@ -1125,4 +1241,20 @@ export interface PauseOnlineRecordRequest {
    * 实时录制任务 Id
    */
   TaskId: string
+}
+
+/**
+ * StopWhiteboardPush返回参数结构体
+ */
+export interface StopWhiteboardPushResponse {
+  /**
+      * 备份任务相关参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Backup?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }

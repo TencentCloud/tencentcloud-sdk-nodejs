@@ -18,19 +18,9 @@ const client = new tencentcloud.cr.v20180321.Client({
 })
 describe("cr.v20180321.test.js", function () {
 
-it("cr.v20180321.DownloadReport", async function () {
+it("cr.v20180321.DownloadDialogueText", async function () {
     try {
-       const data = await client.DownloadReport({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cr.v20180321.UploadFile", async function () {
-    try {
-       const data = await client.UploadFile({})
+       const data = await client.DownloadDialogueText({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,79 +38,9 @@ it("cr.v20180321.QueryBotList", async function () {
     }
 })
 
-it("cr.v20180321.DescribeRecords", async function () {
-    try {
-       const data = await client.DescribeRecords({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cr.v20180321.DescribeCreditResult", async function () {
-    try {
-       const data = await client.DescribeCreditResult({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cr.v20180321.ExportBotData", async function () {
-    try {
-       const data = await client.ExportBotData({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cr.v20180321.UploadDataJson", async function () {
-    try {
-       const data = await client.UploadDataJson({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cr.v20180321.DownloadDialogueText", async function () {
-    try {
-       const data = await client.DownloadDialogueText({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cr.v20180321.DescribeTaskStatus", async function () {
-    try {
-       const data = await client.DescribeTaskStatus({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cr.v20180321.DescribeBotFlow", async function () {
     try {
        const data = await client.DescribeBotFlow({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cr.v20180321.QueryProducts", async function () {
-    try {
-       const data = await client.QueryProducts({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,9 +58,9 @@ it("cr.v20180321.QueryRecordList", async function () {
     }
 })
 
-it("cr.v20180321.UploadBotFile", async function () {
+it("cr.v20180321.QueryInstantData", async function () {
     try {
-       const data = await client.UploadBotFile({})
+       const data = await client.QueryInstantData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,9 +78,39 @@ it("cr.v20180321.UploadBotData", async function () {
     }
 })
 
-it("cr.v20180321.UploadDataFile", async function () {
+it("cr.v20180321.DescribeRecords", async function () {
     try {
-       const data = await client.UploadDataFile({})
+       const data = await client.DescribeRecords({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cr.v20180321.ExportBotData", async function () {
+    try {
+       const data = await client.ExportBotData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cr.v20180321.DescribeCreditResult", async function () {
+    try {
+       const data = await client.DescribeCreditResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cr.v20180321.UploadBotFile", async function () {
+    try {
+       const data = await client.UploadBotFile({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,9 +128,39 @@ it("cr.v20180321.DescribeFileModel", async function () {
     }
 })
 
-it("cr.v20180321.QueryInstantData", async function () {
+it("cr.v20180321.ApplyBlackList", async function () {
     try {
-       const data = await client.QueryInstantData({})
+       const data = await client.ApplyBlackList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cr.v20180321.UploadFile", async function () {
+    try {
+       const data = await client.UploadFile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cr.v20180321.DescribeTaskStatus", async function () {
+    try {
+       const data = await client.DescribeTaskStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cr.v20180321.QueryProducts", async function () {
+    try {
+       const data = await client.QueryProducts({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,9 +178,9 @@ it("cr.v20180321.DownloadRecordList", async function () {
     }
 })
 
-it("cr.v20180321.ApplyBlackList", async function () {
+it("cr.v20180321.UploadDataJson", async function () {
     try {
-       const data = await client.ApplyBlackList({})
+       const data = await client.UploadDataJson({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -211,6 +191,36 @@ it("cr.v20180321.ApplyBlackList", async function () {
 it("cr.v20180321.ApplyCreditAudit", async function () {
     try {
        const data = await client.ApplyCreditAudit({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cr.v20180321.DownloadReport", async function () {
+    try {
+       const data = await client.DownloadReport({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cr.v20180321.DownloadBotRecord", async function () {
+    try {
+       const data = await client.DownloadBotRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cr.v20180321.UploadDataFile", async function () {
+    try {
+       const data = await client.UploadDataFile({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

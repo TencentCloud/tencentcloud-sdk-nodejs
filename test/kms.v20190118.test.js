@@ -118,6 +118,16 @@ it("kms.v20190118.AsymmetricSm2Decrypt", async function () {
     }
 })
 
+it("kms.v20190118.SignByAsymmetricKey", async function () {
+    try {
+       const data = await client.SignByAsymmetricKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("kms.v20190118.CancelKeyDeletion", async function () {
     try {
        const data = await client.CancelKeyDeletion({})
@@ -481,6 +491,16 @@ it("kms.v20190118.DescribeWhiteBoxDecryptKey", async function () {
 it("kms.v20190118.GetRegions", async function () {
     try {
        const data = await client.GetRegions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("kms.v20190118.VerifyByAsymmetricKey", async function () {
+    try {
+       const data = await client.VerifyByAsymmetricKey({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

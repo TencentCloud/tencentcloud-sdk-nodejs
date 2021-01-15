@@ -128,6 +128,26 @@ it("tiw.v20190919.SetOnlineRecordCallbackKey", async function () {
     }
 })
 
+it("tiw.v20190919.StopWhiteboardPush", async function () {
+    try {
+       const data = await client.StopWhiteboardPush({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tiw.v20190919.StartWhiteboardPush", async function () {
+    try {
+       const data = await client.StartWhiteboardPush({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tiw.v20190919.PauseOnlineRecord", async function () {
     try {
        const data = await client.PauseOnlineRecord({})

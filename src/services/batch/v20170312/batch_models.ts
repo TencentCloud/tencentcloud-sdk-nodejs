@@ -1791,6 +1791,12 @@ export interface DataDisk {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   KmsKeyId?: string
+
+  /**
+      * 云硬盘性能，单位：MB/s
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ThroughputPerformance?: number
 }
 
 /**

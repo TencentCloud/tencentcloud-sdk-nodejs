@@ -1193,6 +1193,12 @@ export interface RecognizeTableOCRResponse {
   PdfPageSize?: number
 
   /**
+      * 图片旋转角度（角度制），文本的水平
+方向为 0°；顺时针为正，逆时针为负
+      */
+  Angle?: number
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1619,7 +1625,7 @@ export interface GeneralHandwritingOCRRequest {
   /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
   ImageBase64?: string
@@ -1627,7 +1633,7 @@ export interface GeneralHandwritingOCRRequest {
   /**
       * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
@@ -2009,7 +2015,7 @@ export interface VatInvoiceOCRRequest {
   /**
       * 图片/PDF的 Base64 值。
 支持的文件格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。
-支持的图片/PDF大小：所下载文件经Base64编码后不超过 3M。文件下载时间不超过 3 秒。
+支持的图片/PDF大小：所下载文件经Base64编码后不超过 7M。文件下载时间不超过 3 秒。
 输入参数 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
   ImageBase64?: string
@@ -2017,7 +2023,7 @@ export interface VatInvoiceOCRRequest {
   /**
       * 图片/PDF的 Url 地址。
 支持的文件格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。
-支持的图片/PDF大小：所下载文件经 Base64 编码后不超过 3M。文件下载时间不超过 3 秒。
+支持的图片/PDF大小：所下载文件经 Base64 编码后不超过 7M。文件下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
@@ -3057,7 +3063,7 @@ export interface EnglishOCRRequest {
   /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
   ImageBase64?: string
@@ -3065,7 +3071,7 @@ export interface EnglishOCRRequest {
   /**
       * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
@@ -4010,6 +4016,21 @@ export interface TableDetectInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Titles: Array<TableTitle>
+
+  /**
+      * 图像中的文本块类型，0 为非表格文本，
+1 为有线表格，2 为无线表格
+（接口暂不支持日文无线表格识别，若传入日文无线表格，返回0）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Type: number
+
+  /**
+      * 表格主体四个顶点坐标（依次为左上角，
+右上角，右下角，左下角）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TableCoordPoint: Array<Coord>
 }
 
 /**
@@ -4234,7 +4255,7 @@ export interface GeneralAccurateOCRResponse {
   TextDetections?: Array<TextDetection>
 
   /**
-   * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。
+   * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看<a href="https://cloud.tencent.com/document/product/866/45139">如何纠正倾斜文本</a>
    */
   Angel?: number
 
@@ -4630,6 +4651,11 @@ export interface EnglishOCRResponse {
   TextDetections?: Array<TextDetectionEn>
 
   /**
+   * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看<a href="https://cloud.tencent.com/document/product/866/45139">如何纠正倾斜文本</a>
+   */
+  Angel?: number
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -4806,6 +4832,11 @@ export interface GeneralHandwritingOCRResponse {
    * 检测到的文本信息，具体内容请点击左侧链接。
    */
   TextDetections?: Array<TextGeneralHandwriting>
+
+  /**
+   * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看<a href="https://cloud.tencent.com/document/product/866/45139">如何纠正倾斜文本</a>
+   */
+  Angel?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5166,6 +5197,11 @@ export interface RecognizeTableOCRRequest {
    * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
    */
   PdfPageNumber?: number
+
+  /**
+   * 语言，zh：中英文（默认）jap：日文
+   */
+  TableLanguage?: string
 }
 
 /**
@@ -5332,6 +5368,11 @@ export interface VatInvoiceOCRResponse {
    * 图片为PDF时，返回PDF的总页数，默认为0
    */
   PdfPageSize?: number
+
+  /**
+   * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看<a href="https://cloud.tencent.com/document/product/866/45139">如何纠正倾斜文本</a>
+   */
+  Angle?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

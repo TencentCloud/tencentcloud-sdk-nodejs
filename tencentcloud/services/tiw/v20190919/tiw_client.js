@@ -94,6 +94,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetOnlineRecordCallbackKey", req, cb);
     }
     /**
+     * 停止白板推流任务
+     */
+    async StopWhiteboardPush(req, cb) {
+        return this.request("StopWhiteboardPush", req, cb);
+    }
+    /**
+     * 发起一个白板推流任务
+     */
+    async StartWhiteboardPush(req, cb) {
+        return this.request("StartWhiteboardPush", req, cb);
+    }
+    /**
      * 暂停实时录制
      */
     async PauseOnlineRecord(req, cb) {

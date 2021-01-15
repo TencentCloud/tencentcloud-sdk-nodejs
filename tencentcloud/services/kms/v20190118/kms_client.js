@@ -89,6 +89,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AsymmetricSm2Decrypt", req, cb);
     }
     /**
+     * 非对称密钥签名。
+注意：只有成功创建了KeyUsage= ASYMMETRIC_SIGN_VERIFY_SM2 的密钥才可以使用签名功能
+     */
+    async SignByAsymmetricKey(req, cb) {
+        return this.request("SignByAsymmetricKey", req, cb);
+    }
+    /**
      * 取消CMK的计划删除操作
      */
     async CancelKeyDeletion(req, cb) {
@@ -309,6 +316,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async GetRegions(req, cb) {
         return this.request("GetRegions", req, cb);
+    }
+    /**
+     * 使用非对称密钥验签
+     */
+    async VerifyByAsymmetricKey(req, cb) {
+        return this.request("VerifyByAsymmetricKey", req, cb);
     }
 }
 exports.Client = Client;

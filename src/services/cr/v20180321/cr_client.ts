@@ -24,7 +24,8 @@ import {
   UploadFileResponse,
   UploadDataJsonResponse,
   DescribeBotFlowResponse,
-  DownloadDialogueTextRequest,
+  DescribeTaskStatusResponse,
+  DownloadBotRecordRequest,
   DownloadReportRequest,
   ApplyCreditAuditResponse,
   UploadDataFileResponse,
@@ -66,12 +67,13 @@ import {
   QueryBotListResponse,
   DescribeTaskStatusRequest,
   ProductQueryInfo,
+  DownloadBotRecordResponse,
   QueryProductsRequest,
   UploadBotDataRequest,
   SmsSign,
   QueryProductsResponse,
   DescribeRecordsResponse,
-  DescribeTaskStatusResponse,
+  DownloadDialogueTextRequest,
 } from "./cr_models"
 
 /**
@@ -81,76 +83,6 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("cr.tencentcloudapi.com", "2018-03-21", clientConfig)
-  }
-
-  /**
-   * 用于下载结果报表。当日23:00后，可获取当日到期/逾期提醒结果，次日00:30后，可获取昨日回访结果。
-   */
-  async DownloadReport(
-    req: DownloadReportRequest,
-    cb?: (error: string, rep: DownloadReportResponse) => void
-  ): Promise<DownloadReportResponse> {
-    return this.request("DownloadReport", req, cb)
-  }
-
-  /**
-   * 客户通过调用该接口上传需催收文档，格式需为excel格式。接口返回任务ID。
-   */
-  async UploadFile(
-    req: UploadFileRequest,
-    cb?: (error: string, rep: UploadFileResponse) => void
-  ): Promise<UploadFileResponse> {
-    return this.request("UploadFile", req, cb)
-  }
-
-  /**
-   * 查询机器人任务状态列表
-   */
-  async QueryBotList(
-    req: QueryBotListRequest,
-    cb?: (error: string, rep: QueryBotListResponse) => void
-  ): Promise<QueryBotListResponse> {
-    return this.request("QueryBotList", req, cb)
-  }
-
-  /**
-   * 用于获取指定案件的录音地址，次日早上8:00后可查询前日录音。
-   */
-  async DescribeRecords(
-    req: DescribeRecordsRequest,
-    cb?: (error: string, rep: DescribeRecordsResponse) => void
-  ): Promise<DescribeRecordsResponse> {
-    return this.request("DescribeRecords", req, cb)
-  }
-
-  /**
-   * 根据信审任务ID和请求日期，获取相关信审结果。
-   */
-  async DescribeCreditResult(
-    req: DescribeCreditResultRequest,
-    cb?: (error: string, rep: DescribeCreditResultResponse) => void
-  ): Promise<DescribeCreditResultResponse> {
-    return this.request("DescribeCreditResult", req, cb)
-  }
-
-  /**
-   * 导出机器人数据
-   */
-  async ExportBotData(
-    req: ExportBotDataRequest,
-    cb?: (error: string, rep: ExportBotDataResponse) => void
-  ): Promise<ExportBotDataResponse> {
-    return this.request("ExportBotData", req, cb)
-  }
-
-  /**
-   * 上传Json格式数据，接口返回数据任务ID
-   */
-  async UploadDataJson(
-    req: UploadDataJsonRequest,
-    cb?: (error: string, rep: UploadDataJsonResponse) => void
-  ): Promise<UploadDataJsonResponse> {
-    return this.request("UploadDataJson", req, cb)
   }
 
   /**
@@ -164,13 +96,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据上传文件接口的输出参数DataResId，获取相关上传结果。
+   * 查询机器人任务状态列表
    */
-  async DescribeTaskStatus(
-    req: DescribeTaskStatusRequest,
-    cb?: (error: string, rep: DescribeTaskStatusResponse) => void
-  ): Promise<DescribeTaskStatusResponse> {
-    return this.request("DescribeTaskStatus", req, cb)
+  async QueryBotList(
+    req: QueryBotListRequest,
+    cb?: (error: string, rep: QueryBotListResponse) => void
+  ): Promise<QueryBotListResponse> {
+    return this.request("QueryBotList", req, cb)
   }
 
   /**
@@ -184,16 +116,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询产品列表
-   */
-  async QueryProducts(
-    req: QueryProductsRequest,
-    cb?: (error: string, rep: QueryProductsResponse) => void
-  ): Promise<QueryProductsResponse> {
-    return this.request("QueryProducts", req, cb)
-  }
-
-  /**
    * 查询录音列表
    */
   async QueryRecordList(
@@ -204,13 +126,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 上传机器人文件
+   * 实时数据查询
    */
-  async UploadBotFile(
-    req: UploadBotFileRequest,
-    cb?: (error: string, rep: UploadBotFileResponse) => void
-  ): Promise<UploadBotFileResponse> {
-    return this.request("UploadBotFile", req, cb)
+  async QueryInstantData(
+    req: QueryInstantDataRequest,
+    cb?: (error: string, rep: QueryInstantDataResponse) => void
+  ): Promise<QueryInstantDataResponse> {
+    return this.request("QueryInstantData", req, cb)
   }
 
   /**
@@ -224,16 +146,43 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 上传文件，接口返回数据任务ID，支持xlsx、xls、csv、zip格式。
+   * 用于获取指定案件的录音地址，次日早上8:00后可查询前日录音。
    */
-  async UploadDataFile(
-    req: UploadDataFileRequest,
-    cb?: (error: string, rep: UploadDataFileResponse) => void
-  ): Promise<UploadDataFileResponse> {
-    let options = {
-      multipart: true,
-    }
-    return this.request("UploadDataFile", req, cb)
+  async DescribeRecords(
+    req: DescribeRecordsRequest,
+    cb?: (error: string, rep: DescribeRecordsResponse) => void
+  ): Promise<DescribeRecordsResponse> {
+    return this.request("DescribeRecords", req, cb)
+  }
+
+  /**
+   * 导出机器人数据
+   */
+  async ExportBotData(
+    req: ExportBotDataRequest,
+    cb?: (error: string, rep: ExportBotDataResponse) => void
+  ): Promise<ExportBotDataResponse> {
+    return this.request("ExportBotData", req, cb)
+  }
+
+  /**
+   * 根据信审任务ID和请求日期，获取相关信审结果。
+   */
+  async DescribeCreditResult(
+    req: DescribeCreditResultRequest,
+    cb?: (error: string, rep: DescribeCreditResultResponse) => void
+  ): Promise<DescribeCreditResultResponse> {
+    return this.request("DescribeCreditResult", req, cb)
+  }
+
+  /**
+   * 上传机器人文件
+   */
+  async UploadBotFile(
+    req: UploadBotFileRequest,
+    cb?: (error: string, rep: UploadBotFileResponse) => void
+  ): Promise<UploadBotFileResponse> {
+    return this.request("UploadBotFile", req, cb)
   }
 
   /**
@@ -247,13 +196,43 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 实时数据查询
+   * 提交黑名单后，黑名单中有效期内的号码将停止拨打，适用于到期/逾期提醒、回访场景。
    */
-  async QueryInstantData(
-    req: QueryInstantDataRequest,
-    cb?: (error: string, rep: QueryInstantDataResponse) => void
-  ): Promise<QueryInstantDataResponse> {
-    return this.request("QueryInstantData", req, cb)
+  async ApplyBlackList(
+    req: ApplyBlackListRequest,
+    cb?: (error: string, rep: ApplyBlackListResponse) => void
+  ): Promise<ApplyBlackListResponse> {
+    return this.request("ApplyBlackList", req, cb)
+  }
+
+  /**
+   * 客户通过调用该接口上传需催收文档，格式需为excel格式。接口返回任务ID。
+   */
+  async UploadFile(
+    req: UploadFileRequest,
+    cb?: (error: string, rep: UploadFileResponse) => void
+  ): Promise<UploadFileResponse> {
+    return this.request("UploadFile", req, cb)
+  }
+
+  /**
+   * 根据上传文件接口的输出参数DataResId，获取相关上传结果。
+   */
+  async DescribeTaskStatus(
+    req: DescribeTaskStatusRequest,
+    cb?: (error: string, rep: DescribeTaskStatusResponse) => void
+  ): Promise<DescribeTaskStatusResponse> {
+    return this.request("DescribeTaskStatus", req, cb)
+  }
+
+  /**
+   * 查询产品列表
+   */
+  async QueryProducts(
+    req: QueryProductsRequest,
+    cb?: (error: string, rep: QueryProductsResponse) => void
+  ): Promise<QueryProductsResponse> {
+    return this.request("QueryProducts", req, cb)
   }
 
   /**
@@ -268,13 +247,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 提交黑名单后，黑名单中有效期内的号码将停止拨打，适用于到期/逾期提醒、回访场景。
+   * 上传Json格式数据，接口返回数据任务ID
    */
-  async ApplyBlackList(
-    req: ApplyBlackListRequest,
-    cb?: (error: string, rep: ApplyBlackListResponse) => void
-  ): Promise<ApplyBlackListResponse> {
-    return this.request("ApplyBlackList", req, cb)
+  async UploadDataJson(
+    req: UploadDataJsonRequest,
+    cb?: (error: string, rep: UploadDataJsonResponse) => void
+  ): Promise<UploadDataJsonResponse> {
+    return this.request("UploadDataJson", req, cb)
   }
 
   /**
@@ -285,6 +264,39 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ApplyCreditAuditResponse) => void
   ): Promise<ApplyCreditAuditResponse> {
     return this.request("ApplyCreditAudit", req, cb)
+  }
+
+  /**
+   * 用于下载结果报表。当日23:00后，可获取当日到期/逾期提醒结果，次日00:30后，可获取昨日回访结果。
+   */
+  async DownloadReport(
+    req: DownloadReportRequest,
+    cb?: (error: string, rep: DownloadReportResponse) => void
+  ): Promise<DownloadReportResponse> {
+    return this.request("DownloadReport", req, cb)
+  }
+
+  /**
+   * 下载任务录音与文本，第二天12点后可使用此接口获取对应的录音与文本
+   */
+  async DownloadBotRecord(
+    req: DownloadBotRecordRequest,
+    cb?: (error: string, rep: DownloadBotRecordResponse) => void
+  ): Promise<DownloadBotRecordResponse> {
+    return this.request("DownloadBotRecord", req, cb)
+  }
+
+  /**
+   * 上传文件，接口返回数据任务ID，支持xlsx、xls、csv、zip格式。
+   */
+  async UploadDataFile(
+    req: UploadDataFileRequest,
+    cb?: (error: string, rep: UploadDataFileResponse) => void
+  ): Promise<UploadDataFileResponse> {
+    let options = {
+      multipart: true,
+    }
+    return this.request("UploadDataFile", req, cb)
   }
 
   /**

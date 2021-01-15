@@ -2522,6 +2522,13 @@ export interface ImageWatermarkInput {
 默认值：0px，表示 Height 按照原始水印图片的宽高比缩放。
       */
     Height?: string;
+    /**
+      * 水印重复类型。使用场景：水印为动态图像。取值范围：
+<li>once：动态水印播放完后，不再出现；</li>
+<li>repeat_last_frame：水印播放完后，停留在最后一帧；</li>
+<li>repeat：水印循环播放，直到视频结束（默认值）。</li>
+      */
+    RepeatType?: string;
 }
 /**
  * 语音全文识别任务控制参数
@@ -3384,6 +3391,13 @@ export interface ImageWatermarkTemplate {
 0px：表示 Height 按照 Width 对视频宽度的比例缩放。
       */
     Height: string;
+    /**
+      * 水印重复类型。使用场景：水印为动态图像。取值范围：
+<li>once：动态水印播放完后，不再出现；</li>
+<li>repeat_last_frame：水印播放完后，停留在最后一帧；</li>
+<li>repeat：水印循环播放，直到视频结束。</li>
+      */
+    RepeatType: string;
 }
 /**
  * 语音关键词识别控制参数。
@@ -4389,6 +4403,13 @@ export interface ImageWatermarkInputForUpdate {
 默认值：0px，表示 Height 按照原始水印图片的宽高比缩放。
       */
     Height?: string;
+    /**
+      * 水印重复类型。使用场景：水印为动态图像。取值范围：
+<li>once：动态水印播放完后，不再出现；</li>
+<li>repeat_last_frame：水印播放完后，停留在最后一帧；</li>
+<li>repeat：水印循环播放，直到视频结束。</li>
+      */
+    RepeatType?: string;
 }
 /**
  * 智能内容审核任务类型

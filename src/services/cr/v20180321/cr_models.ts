@@ -205,28 +205,49 @@ export interface DescribeBotFlowResponse {
 }
 
 /**
- * DownloadDialogueText请求参数结构体
+ * DescribeTaskStatus返回参数结构体
  */
-export interface DownloadDialogueTextRequest {
+export interface DescribeTaskStatusResponse {
   /**
-   * 模块名，本接口取值：Report
+   * <p>任务结果：</p><ul style="margin-bottom:0px;"><li>处理中："Uploading Data."</li><li>上传成功："File Uploading Task Success."</li><li>上传失败：具体失败原因</li></ul>
+   */
+  TaskResult?: string
+
+  /**
+   * <p>任务类型：</p><ul style="margin-bottom:0px;"><li>到期/逾期提醒数据上传：002</li><li>到期/逾期提醒停拨数据上传：003</li><li>回访数据上传：004</li><li>回访停拨数据上传：005</li></ul>
+   */
+  TaskType?: string
+
+  /**
+      * 过滤文件下载链接，有过滤数据时才存在。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskFileUrl?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DownloadBotRecord请求参数结构体
+ */
+export interface DownloadBotRecordRequest {
+  /**
+   * 模块：AiApi
    */
   Module: string
 
   /**
-   * 操作名，本接口取值：DownloadTextReport
+   * 操作：DownloadRecord
    */
   Operation: string
 
   /**
-   * 报告日期，格式为YYYY-MM-DD
+   * 业务日期
    */
-  ReportDate: string
-
-  /**
-   * 实例ID
-   */
-  InstId: string
+  BizDate: string
 }
 
 /**
@@ -1296,6 +1317,26 @@ export interface ProductQueryInfo {
 }
 
 /**
+ * DownloadBotRecord返回参数结构体
+ */
+export interface DownloadBotRecordResponse {
+  /**
+   * 录音地址。请求后30分钟内有效
+   */
+  RecordCosUrl?: string
+
+  /**
+   * 文本地址。请求后30分钟内有效
+   */
+  TextCosUrl?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * QueryProducts请求参数结构体
  */
 export interface QueryProductsRequest {
@@ -1397,27 +1438,26 @@ export interface DescribeRecordsResponse {
 }
 
 /**
- * DescribeTaskStatus返回参数结构体
+ * DownloadDialogueText请求参数结构体
  */
-export interface DescribeTaskStatusResponse {
+export interface DownloadDialogueTextRequest {
   /**
-   * <p>任务结果：</p><ul style="margin-bottom:0px;"><li>处理中："Uploading Data."</li><li>上传成功："File Uploading Task Success."</li><li>上传失败：具体失败原因</li></ul>
+   * 模块名，本接口取值：Report
    */
-  TaskResult?: string
+  Module: string
 
   /**
-   * <p>任务类型：</p><ul style="margin-bottom:0px;"><li>到期/逾期提醒数据上传：002</li><li>到期/逾期提醒停拨数据上传：003</li><li>回访数据上传：004</li><li>回访停拨数据上传：005</li></ul>
+   * 操作名，本接口取值：DownloadTextReport
    */
-  TaskType?: string
+  Operation: string
 
   /**
-      * 过滤文件下载链接，有过滤数据时才存在。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TaskFileUrl?: string
+   * 报告日期，格式为YYYY-MM-DD
+   */
+  ReportDate: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 实例ID
    */
-  RequestId?: string
+  InstId: string
 }

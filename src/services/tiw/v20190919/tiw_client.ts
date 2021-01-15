@@ -24,13 +24,17 @@ import {
   StreamControl,
   StopOnlineRecordResponse,
   SetVideoGenerationTaskCallbackKeyRequest,
+  StartWhiteboardPushRequest,
   OmittedDuration,
   DescribeVideoGenerationTaskCallbackResponse,
   ResumeOnlineRecordResponse,
   SetVideoGenerationTaskCallbackResponse,
+  WhiteboardPushBackupParam,
   StartOnlineRecordRequest,
+  StartWhiteboardPushResponse,
   DescribeOnlineRecordCallbackRequest,
   DescribeOnlineRecordCallbackResponse,
+  StopWhiteboardPushRequest,
   SetTranscodeCallbackResponse,
   StopOnlineRecordRequest,
   SetVideoGenerationTaskCallbackKeyResponse,
@@ -65,6 +69,7 @@ import {
   MixStream,
   DescribeVideoGenerationTaskCallbackRequest,
   PauseOnlineRecordRequest,
+  StopWhiteboardPushResponse,
 } from "./tiw_models"
 
 /**
@@ -184,6 +189,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SetOnlineRecordCallbackKeyResponse) => void
   ): Promise<SetOnlineRecordCallbackKeyResponse> {
     return this.request("SetOnlineRecordCallbackKey", req, cb)
+  }
+
+  /**
+   * 停止白板推流任务
+   */
+  async StopWhiteboardPush(
+    req: StopWhiteboardPushRequest,
+    cb?: (error: string, rep: StopWhiteboardPushResponse) => void
+  ): Promise<StopWhiteboardPushResponse> {
+    return this.request("StopWhiteboardPush", req, cb)
+  }
+
+  /**
+   * 发起一个白板推流任务
+   */
+  async StartWhiteboardPush(
+    req: StartWhiteboardPushRequest,
+    cb?: (error: string, rep: StartWhiteboardPushResponse) => void
+  ): Promise<StartWhiteboardPushResponse> {
+    return this.request("StartWhiteboardPush", req, cb)
   }
 
   /**
