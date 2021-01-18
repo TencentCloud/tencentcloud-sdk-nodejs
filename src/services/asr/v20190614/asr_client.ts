@@ -28,6 +28,7 @@ import {
   GetAsrVocabRequest,
   DescribeTaskStatusResponse,
   SentenceRecognitionRequest,
+  CloseAsyncRecognitionTaskResponse,
   SentenceWord,
   CreateCustomizationRequest,
   DownloadAsrVocabResponse,
@@ -42,6 +43,7 @@ import {
   DownloadAsrVocabRequest,
   SetVocabStateRequest,
   Vocab,
+  CloseAsyncRecognitionTaskRequest,
   Task,
   AsyncRecognitionTasks,
   ModifyCustomizationRequest,
@@ -50,12 +52,12 @@ import {
   DeleteAsrVocabRequest,
   GetCustomizationListRequest,
   UpdateAsrVocabResponse,
-  DescribeTaskStatusRequest,
+  CreateAsrVocabResponse,
   Model,
   CreateAsrVocabRequest,
   SentenceDetail,
   UpdateAsrVocabRequest,
-  CreateAsrVocabResponse,
+  DescribeTaskStatusRequest,
   SentenceRecognitionResponse,
   DeleteCustomizationRequest,
   AsyncRecognitionTaskInfo,
@@ -73,6 +75,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("asr.tencentcloudapi.com", "2019-06-14", clientConfig)
+  }
+
+  /**
+   * 本接口用于关闭语音流异步识别任务。
+   */
+  async CloseAsyncRecognitionTask(
+    req: CloseAsyncRecognitionTaskRequest,
+    cb?: (error: string, rep: CloseAsyncRecognitionTaskResponse) => void
+  ): Promise<CloseAsyncRecognitionTaskResponse> {
+    return this.request("CloseAsyncRecognitionTask", req, cb)
   }
 
   /**

@@ -88,6 +88,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAgentPayDeals", req, cb);
     }
     /**
+     * 代理商名下客户解绑记录查询接口
+     */
+    async DescribeUnbindClientList(req, cb) {
+        return this.request("DescribeUnbindClientList", req, cb);
+    }
+    /**
      * 代理商可查询自己名下待审核客户列表
      */
     async DescribeAgentClients(req, cb) {

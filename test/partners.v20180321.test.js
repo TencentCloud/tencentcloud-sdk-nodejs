@@ -118,6 +118,16 @@ it("partners.v20180321.DescribeAgentPayDeals", async function () {
     }
 })
 
+it("partners.v20180321.DescribeUnbindClientList", async function () {
+    try {
+       const data = await client.DescribeUnbindClientList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("partners.v20180321.DescribeAgentClients", async function () {
     try {
        const data = await client.DescribeAgentClients({})

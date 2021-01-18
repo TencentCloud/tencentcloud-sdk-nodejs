@@ -166,6 +166,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateClusterRoute", req, cb);
     }
     /**
+     * 查询节点池列表
+     */
+    async DescribeClusterNodePools(req, cb) {
+        return this.request("DescribeClusterNodePools", req, cb);
+    }
+    /**
      * 创建集群路由表
      */
     async CreateClusterRouteTable(req, cb) {
@@ -176,6 +182,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyClusterNodePool(req, cb) {
         return this.request("ModifyClusterNodePool", req, cb);
+    }
+    /**
+     * 获得节点升级当前的进度
+     */
+    async GetUpgradeInstanceProgress(req, cb) {
+        return this.request("GetUpgradeInstanceProgress", req, cb);
     }
     /**
      * 集群弹性伸缩配置
@@ -322,16 +334,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteClusterInstances", req, cb);
     }
     /**
-     * 查询节点池列表
+     * 获取集群可以升级的所有版本
      */
-    async DescribeClusterNodePools(req, cb) {
-        return this.request("DescribeClusterNodePools", req, cb);
+    async DescribeAvailableClusterVersion(req, cb) {
+        return this.request("DescribeAvailableClusterVersion", req, cb);
     }
     /**
      * 获取集群的kubeconfig文件，不同子账户获取自己的kubeconfig文件，该文件中有每个子账户自己的kube-apiserver的客户端证书，默认首次调此接口时候创建客户端证书，时效20年，未授予任何权限，如果是集群所有者或者主账户，则默认是cluster-admin权限。
      */
     async DescribeClusterKubeconfig(req, cb) {
         return this.request("DescribeClusterKubeconfig", req, cb);
+    }
+    /**
+     * 升级集群 Master 组件到指定版本
+     */
+    async UpdateClusterVersion(req, cb) {
+        return this.request("UpdateClusterVersion", req, cb);
     }
     /**
      * 获取镜像信息

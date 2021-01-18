@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("asr.tencentcloudapi.com", "2019-06-14", clientConfig);
     }
     /**
+     * 本接口用于关闭语音流异步识别任务。
+     */
+    async CloseAsyncRecognitionTask(req, cb) {
+        return this.request("CloseAsyncRecognitionTask", req, cb);
+    }
+    /**
      * 用户通过该接口，可获得所有的热词表及其信息。
      */
     async GetAsrVocabList(req, cb) {

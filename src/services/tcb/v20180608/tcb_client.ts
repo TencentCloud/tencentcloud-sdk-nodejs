@@ -23,6 +23,7 @@ import {
   CheckTcbServiceResponse,
   DescribeCloudBaseRunServerVersionRequest,
   DescribeCloudBaseRunServerVersionResponse,
+  CloudBaseRunSideSpec,
   CommonServiceAPIResponse,
   DescribePostpayPackageFreeQuotasRequest,
   DescribeEnvLimitRequest,

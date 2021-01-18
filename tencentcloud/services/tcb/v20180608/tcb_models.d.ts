@@ -286,6 +286,46 @@ export interface DescribeCloudBaseRunServerVersionResponse {
     RequestId?: string;
 }
 /**
+ * CloudBaseRun 的 Side 描述定义
+ */
+export interface CloudBaseRunSideSpec {
+    /**
+      * 容器镜像
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ContainerImage?: string;
+    /**
+      * 容器端口
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ContainerPort?: number;
+    /**
+      * 容器的名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ContainerName?: string;
+    /**
+      * kv的json字符串
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EnvVar?: string;
+    /**
+      * InitialDelaySeconds 延迟多长时间启动健康检查
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InitialDelaySeconds?: number;
+    /**
+      * CPU大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Cpu?: number;
+    /**
+      * 内存大小（单位：M）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Mem?: number;
+}
+/**
  * CommonServiceAPI返回参数结构体
  */
 export interface CommonServiceAPIResponse {
@@ -1295,6 +1335,14 @@ export interface CreateCloudBaseRunServerVersionRequest {
       * 服务路劲
       */
     ServerPath?: string;
+    /**
+      * 镜像复用的key
+      */
+    ImageReuseKey?: string;
+    /**
+      * 容器的描述文件
+      */
+    SidecarSpecs?: Array<CloudBaseRunSideSpec>;
 }
 /**
  * 终端用户登录新增统计

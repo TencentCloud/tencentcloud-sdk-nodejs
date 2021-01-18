@@ -142,6 +142,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAccounts", req, cb);
     }
     /**
+     * 根据计费订单id查询资源列表
+     */
+    async DescribeResourcesByDealName(req, cb) {
+        return this.request("DescribeResourcesByDealName", req, cb);
+    }
+    /**
      * SetRenewFlag设置实例的自动续费功能
      */
     async SetRenewFlag(req, cb) {

@@ -446,6 +446,21 @@ webhook
 }
 
 /**
+ * 集群版本信息
+ */
+export interface ClusterVersion {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 集群主版本号列表，例如1.18.4
+   */
+  Versions: Array<string>
+}
+
+/**
  * DescribePrometheusTemplates返回参数结构体
  */
 export interface DescribePrometheusTemplatesResponse {
@@ -473,6 +488,50 @@ export interface CreateClusterEndpointResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 某个节点的升级进度
+ */
+export interface InstanceUpgradeProgressItem {
+  /**
+   * 节点instanceID
+   */
+  InstanceID: string
+
+  /**
+      * 任务生命周期
+process 运行中
+paused 已停止
+pauing 正在停止
+done  已完成
+timeout 已超时
+aborted 已取消
+pending 还未开始
+      */
+  LifeState: string
+
+  /**
+      * 升级开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StartAt: string
+
+  /**
+      * 升级结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EndAt: string
+
+  /**
+   * 升级前检查结果
+   */
+  CheckResult: InstanceUpgradePreCheckResult
+
+  /**
+   * 升级步骤详情
+   */
+  Detail: Array<TaskStepInfo>
 }
 
 /**
@@ -1168,9 +1227,9 @@ export interface DeleteClusterRouteResponse {
 }
 
 /**
- * SyncPrometheusTemplate返回参数结构体
+ * ModifyClusterEndpointSP返回参数结构体
  */
-export interface SyncPrometheusTemplateResponse {
+export interface ModifyClusterEndpointSPResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1378,6 +1437,16 @@ export interface DeletePrometheusTemplateSyncRequest {
    * 取消同步的对象列表
    */
   Targets: Array<PrometheusTemplateSyncTarget>
+}
+
+/**
+ * UpdateClusterVersion返回参数结构体
+ */
+export interface UpdateClusterVersionResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1931,23 +2000,23 @@ export interface DescribePrometheusAlertRuleRequest {
 }
 
 /**
- * ModifyNodePoolDesiredCapacityAboutAsg请求参数结构体
+ * GetUpgradeInstanceProgress请求参数结构体
  */
-export interface ModifyNodePoolDesiredCapacityAboutAsgRequest {
+export interface GetUpgradeInstanceProgressRequest {
   /**
-   * 集群id
+   * 集群ID
    */
   ClusterId: string
 
   /**
-   * 节点池id
+   * 最多获取多少个节点的进度
    */
-  NodePoolId: string
+  Limit?: number
 
   /**
-   * 节点池所关联的伸缩组的期望实例数
+   * 从第几个节点开始获取进度
    */
-  DesiredCapacity: number
+  Offset?: number
 }
 
 /**
@@ -2073,6 +2142,16 @@ export interface ClusterExtraArgs {
 }
 
 /**
+ * SyncPrometheusTemplate返回参数结构体
+ */
+export interface SyncPrometheusTemplateResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 描述了k8s节点数据盘相关配置与信息。
  */
 export interface DataDisk {
@@ -2111,6 +2190,47 @@ export interface DataDisk {
  * ModifyClusterNodePool返回参数结构体
  */
 export interface ModifyClusterNodePoolResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetUpgradeInstanceProgress返回参数结构体
+ */
+export interface GetUpgradeInstanceProgressResponse {
+  /**
+   * 升级节点总数
+   */
+  Total?: number
+
+  /**
+   * 已升级节点总数
+   */
+  Done?: number
+
+  /**
+      * 升级任务生命周期
+process 运行中
+paused 已停止
+pauing 正在停止
+done  已完成
+timeout 已超时
+aborted 已取消
+      */
+  LifeState?: string
+
+  /**
+   * 各节点升级进度详情
+   */
+  Instances?: Array<InstanceUpgradeProgressItem>
+
+  /**
+   * 集群当前状态
+   */
+  ClusterStatus?: InstanceUpgradeClusterStatus
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2364,6 +2484,43 @@ export interface CreateClusterResponse {
 }
 
 /**
+ * 任务步骤信息
+ */
+export interface TaskStepInfo {
+  /**
+   * 步骤名称
+   */
+  Step: string
+
+  /**
+      * 生命周期
+pending : 步骤未开始
+running: 步骤执行中
+success: 步骤成功完成
+failed: 步骤失败
+      */
+  LifeState: string
+
+  /**
+      * 步骤开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StartAt: string
+
+  /**
+      * 步骤结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EndAt: string
+
+  /**
+      * 若步骤生命周期为failed,则此字段显示错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailedMsg: string
+}
+
+/**
  * 描述了 “云安全” 服务相关的信息
  */
 export interface RunSecurityServiceEnabled {
@@ -2381,6 +2538,21 @@ export interface DeleteClusterRouteTableRequest {
    * 路由表名称
    */
   RouteTableName: string
+}
+
+/**
+ * DescribeAvailableClusterVersion请求参数结构体
+ */
+export interface DescribeAvailableClusterVersionRequest {
+  /**
+   * 集群 Id
+   */
+  ClusterId?: string
+
+  /**
+   * 集群 Id 列表
+   */
+  ClusterIds?: Array<string>
 }
 
 /**
@@ -3364,6 +3536,26 @@ export interface CreateClusterInstancesResponse {
 }
 
 /**
+ * ModifyNodePoolDesiredCapacityAboutAsg请求参数结构体
+ */
+export interface ModifyNodePoolDesiredCapacityAboutAsgRequest {
+  /**
+   * 集群id
+   */
+  ClusterId: string
+
+  /**
+   * 节点池id
+   */
+  NodePoolId: string
+
+  /**
+   * 节点池所关联的伸缩组的期望实例数
+   */
+  DesiredCapacity: number
+}
+
+/**
  * DescribeClusterNodePools请求参数结构体
  */
 export interface DescribeClusterNodePoolsRequest {
@@ -3411,6 +3603,21 @@ export interface ExistedInstancesForNode {
    * 节点高级设置，会覆盖集群级别设置的InstanceAdvancedSettings（当前只对节点自定义参数ExtraArgs生效）
    */
   InstanceAdvancedSettingsOverride?: InstanceAdvancedSettings
+}
+
+/**
+ * 节点升级过程中集群当前状态
+ */
+export interface InstanceUpgradeClusterStatus {
+  /**
+   * pod总数
+   */
+  PodTotal: number
+
+  /**
+   * NotReady pod总数
+   */
+  NotReadyPod: number
 }
 
 /**
@@ -3577,6 +3784,26 @@ export interface CreateClusterRouteTableRequest {
 }
 
 /**
+ * RemoveNodeFromNodePool请求参数结构体
+ */
+export interface RemoveNodeFromNodePoolRequest {
+  /**
+   * 集群id
+   */
+  ClusterId: string
+
+  /**
+   * 节点池id
+   */
+  NodePoolId: string
+
+  /**
+   * 节点id列表
+   */
+  InstanceIds: Array<string>
+}
+
+/**
  * DescribeClusterAsGroups请求参数结构体
  */
 export interface DescribeClusterAsGroupsRequest {
@@ -3607,9 +3834,21 @@ export interface DescribeClusterAsGroupsRequest {
 export type DescribeImagesRequest = null
 
 /**
- * ModifyClusterEndpointSP返回参数结构体
+ * DescribeAvailableClusterVersion返回参数结构体
  */
-export interface ModifyClusterEndpointSPResponse {
+export interface DescribeAvailableClusterVersionResponse {
+  /**
+      * 可升级的集群版本号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Versions?: Array<string>
+
+  /**
+      * 集群信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Clusters?: Array<ClusterVersion>
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3644,6 +3883,41 @@ export interface DescribeRouteTableConflictsRequest {
    * 路由表绑定的VPC
    */
   VpcId: string
+}
+
+/**
+ * 节点升级检查项结果
+ */
+export interface InstanceUpgradePreCheckResultItem {
+  /**
+   * 工作负载的命名空间
+   */
+  Namespace: string
+
+  /**
+   * 工作负载类型
+   */
+  WorkLoadKind: string
+
+  /**
+   * 工作负载名称
+   */
+  WorkLoadName: string
+
+  /**
+   * 驱逐节点前工作负载running的pod数目
+   */
+  Before: number
+
+  /**
+   * 驱逐节点后工作负载running的pod数目
+   */
+  After: number
+
+  /**
+   * 工作负载在本节点上的pod列表
+   */
+  Pods: Array<string>
 }
 
 /**
@@ -3877,6 +4151,31 @@ export interface ModifyClusterAsGroupAttributeRequest {
 }
 
 /**
+ * UpdateClusterVersion请求参数结构体
+ */
+export interface UpdateClusterVersionRequest {
+  /**
+   * 集群 Id
+   */
+  ClusterId: string
+
+  /**
+   * 需要升级到的版本
+   */
+  DstVersion: string
+
+  /**
+   * 可容忍的最大不可用pod数目
+   */
+  MaxNotReadyPercent?: number
+
+  /**
+   * 是否跳过预检查阶段
+   */
+  SkipPreCheck?: boolean
+}
+
+/**
  * CVM实例数据盘挂载配置
  */
 export interface InstanceDataDiskMountSetting {
@@ -3972,23 +4271,23 @@ export interface DescribeClusterAsGroupsResponse {
 }
 
 /**
- * RemoveNodeFromNodePool请求参数结构体
+ * 某个节点升级前检查结果
  */
-export interface RemoveNodeFromNodePoolRequest {
+export interface InstanceUpgradePreCheckResult {
   /**
-   * 集群id
+   * 检查是否通过
    */
-  ClusterId: string
+  CheckPass: boolean
 
   /**
-   * 节点池id
+   * 检查项数组
    */
-  NodePoolId: string
+  Items: Array<InstanceUpgradePreCheckResultItem>
 
   /**
-   * 节点id列表
+   * 本节点独立pod列表
    */
-  InstanceIds: Array<string>
+  SinglePods: Array<string>
 }
 
 /**

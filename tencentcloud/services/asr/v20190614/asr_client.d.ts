@@ -1,12 +1,16 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { SetVocabStateResponse, CreateCustomizationResponse, DescribeAsyncRecognitionTasksRequest, ModifyCustomizationStateRequest, GetAsrVocabResponse, CreateAsyncRecognitionTaskRequest, GetAsrVocabRequest, DescribeTaskStatusResponse, SentenceRecognitionRequest, CreateCustomizationRequest, DownloadAsrVocabResponse, CreateRecTaskResponse, ModifyCustomizationResponse, CreateAsyncRecognitionTaskResponse, DeleteAsrVocabResponse, DownloadCustomizationResponse, CreateRecTaskRequest, GetAsrVocabListRequest, GetCustomizationListResponse, DownloadAsrVocabRequest, SetVocabStateRequest, ModifyCustomizationRequest, DeleteCustomizationResponse, DeleteAsrVocabRequest, GetCustomizationListRequest, UpdateAsrVocabResponse, DescribeTaskStatusRequest, CreateAsrVocabRequest, UpdateAsrVocabRequest, CreateAsrVocabResponse, SentenceRecognitionResponse, DeleteCustomizationRequest, ModifyCustomizationStateResponse, DescribeAsyncRecognitionTasksResponse, GetAsrVocabListResponse, DownloadCustomizationRequest } from "./asr_models";
+import { SetVocabStateResponse, CreateCustomizationResponse, DescribeAsyncRecognitionTasksRequest, ModifyCustomizationStateRequest, GetAsrVocabResponse, CreateAsyncRecognitionTaskRequest, GetAsrVocabRequest, DescribeTaskStatusResponse, SentenceRecognitionRequest, CloseAsyncRecognitionTaskResponse, CreateCustomizationRequest, DownloadAsrVocabResponse, CreateRecTaskResponse, ModifyCustomizationResponse, CreateAsyncRecognitionTaskResponse, DeleteAsrVocabResponse, DownloadCustomizationResponse, CreateRecTaskRequest, GetAsrVocabListRequest, GetCustomizationListResponse, DownloadAsrVocabRequest, SetVocabStateRequest, CloseAsyncRecognitionTaskRequest, ModifyCustomizationRequest, DeleteCustomizationResponse, DeleteAsrVocabRequest, GetCustomizationListRequest, UpdateAsrVocabResponse, CreateAsrVocabResponse, CreateAsrVocabRequest, UpdateAsrVocabRequest, DescribeTaskStatusRequest, SentenceRecognitionResponse, DeleteCustomizationRequest, ModifyCustomizationStateResponse, DescribeAsyncRecognitionTasksResponse, GetAsrVocabListResponse, DownloadCustomizationRequest } from "./asr_models";
 /**
  * asr client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 本接口用于关闭语音流异步识别任务。
+     */
+    CloseAsyncRecognitionTask(req: CloseAsyncRecognitionTaskRequest, cb?: (error: string, rep: CloseAsyncRecognitionTaskResponse) => void): Promise<CloseAsyncRecognitionTaskResponse>;
     /**
      * 用户通过该接口，可获得所有的热词表及其信息。
      */

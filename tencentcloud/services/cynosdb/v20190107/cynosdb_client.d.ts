@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { AddInstancesResponse, UpgradeInstanceResponse, DescribeClustersRequest, DescribeProjectSecurityGroupsRequest, SetRenewFlagResponse, ModifyDBInstanceSecurityGroupsResponse, DescribeBackupConfigRequest, DescribeClusterInstanceGrpsRequest, DescribeAccountsRequest, IsolateInstanceRequest, DescribeMaintainPeriodResponse, DescribeBackupListResponse, DescribeRollbackTimeRangeResponse, ModifyMaintainPeriodConfigRequest, ModifyBackupConfigRequest, DescribeDBSecurityGroupsRequest, DescribeRollbackTimeValidityRequest, IsolateClusterRequest, DescribeClusterInstanceGrpsResponse, AddInstancesRequest, DescribeClusterDetailRequest, DescribeProjectSecurityGroupsResponse, DescribeDBSecurityGroupsResponse, DescribeMaintainPeriodRequest, DescribeInstancesResponse, DescribeRollbackTimeValidityResponse, DescribeInstanceDetailRequest, ModifyMaintainPeriodConfigResponse, DescribeInstancesRequest, IsolateInstanceResponse, DescribeBackupListRequest, DescribeAccountsResponse, UpgradeInstanceRequest, DescribeInstanceDetailResponse, OfflineInstanceRequest, DescribeRollbackTimeRangeRequest, OfflineClusterResponse, DescribeInstanceSpecsResponse, DescribeInstanceSpecsRequest, IsolateClusterResponse, CreateClustersResponse, SetRenewFlagRequest, CreateClustersRequest, OfflineClusterRequest, DescribeClusterDetailResponse, OfflineInstanceResponse, DescribeClustersResponse, ModifyBackupConfigResponse, DescribeBackupConfigResponse, ModifyDBInstanceSecurityGroupsRequest } from "./cynosdb_models";
+import { AddInstancesResponse, UpgradeInstanceResponse, DescribeClustersRequest, DescribeProjectSecurityGroupsRequest, SetRenewFlagResponse, ModifyDBInstanceSecurityGroupsResponse, DescribeBackupConfigRequest, DescribeClusterInstanceGrpsRequest, DescribeResourcesByDealNameResponse, DescribeAccountsRequest, IsolateInstanceRequest, DescribeMaintainPeriodResponse, DescribeBackupListResponse, DescribeRollbackTimeRangeResponse, ModifyMaintainPeriodConfigRequest, ModifyBackupConfigRequest, DescribeDBSecurityGroupsRequest, DescribeRollbackTimeValidityRequest, IsolateClusterRequest, DescribeClusterInstanceGrpsResponse, AddInstancesRequest, DescribeClusterDetailRequest, DescribeProjectSecurityGroupsResponse, DescribeDBSecurityGroupsResponse, DescribeMaintainPeriodRequest, DescribeInstancesResponse, DescribeRollbackTimeValidityResponse, DescribeInstanceDetailRequest, ModifyMaintainPeriodConfigResponse, DescribeInstancesRequest, DescribeResourcesByDealNameRequest, IsolateInstanceResponse, DescribeBackupListRequest, DescribeRollbackTimeRangeRequest, DescribeAccountsResponse, UpgradeInstanceRequest, DescribeInstanceDetailResponse, OfflineInstanceRequest, OfflineClusterResponse, DescribeInstanceSpecsResponse, DescribeInstanceSpecsRequest, IsolateClusterResponse, CreateClustersResponse, SetRenewFlagRequest, CreateClustersRequest, OfflineClusterRequest, DescribeClusterDetailResponse, OfflineInstanceResponse, DescribeClustersResponse, ModifyBackupConfigResponse, DescribeBackupConfigResponse, ModifyDBInstanceSecurityGroupsRequest } from "./cynosdb_models";
 /**
  * cynosdb client
  * @class
@@ -83,6 +83,10 @@ export declare class Client extends AbstractClient {
      * 本接口(DescribeAccounts)用于查询数据库管理账号。
      */
     DescribeAccounts(req: DescribeAccountsRequest, cb?: (error: string, rep: DescribeAccountsResponse) => void): Promise<DescribeAccountsResponse>;
+    /**
+     * 根据计费订单id查询资源列表
+     */
+    DescribeResourcesByDealName(req: DescribeResourcesByDealNameRequest, cb?: (error: string, rep: DescribeResourcesByDealNameResponse) => void): Promise<DescribeResourcesByDealNameResponse>;
     /**
      * SetRenewFlag设置实例的自动续费功能
      */

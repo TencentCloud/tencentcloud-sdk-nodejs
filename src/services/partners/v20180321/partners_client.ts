@@ -31,6 +31,7 @@ import {
   AgentTransferMoneyRequest,
   DescribeClientBalanceRequest,
   ProductInfoElem,
+  UnbindClientElem,
   RemovePayRelationForClientResponse,
   DescribeRebateInfosRequest,
   CreatePayRelationForClientResponse,
@@ -43,12 +44,14 @@ import {
   DescribeAgentClientsRequest,
   DescribeSalesmansResponse,
   AgentAuditedClient,
+  DescribeUnbindClientListRequest,
   DescribeAgentPayDealsResponse,
   DealGoodsPriceElem,
   DescribeAgentSelfPayDealsRequest,
   ModifyClientRemarkRequest,
   CreatePayRelationForClientRequest,
   AgentTransferMoneyResponse,
+  DescribeUnbindClientListResponse,
   AgentBillElem,
   AuditApplyClientResponse,
   DescribeAgentDealsCacheResponse,
@@ -167,6 +170,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAgentPayDealsResponse) => void
   ): Promise<DescribeAgentPayDealsResponse> {
     return this.request("DescribeAgentPayDeals", req, cb)
+  }
+
+  /**
+   * 代理商名下客户解绑记录查询接口
+   */
+  async DescribeUnbindClientList(
+    req: DescribeUnbindClientListRequest,
+    cb?: (error: string, rep: DescribeUnbindClientListResponse) => void
+  ): Promise<DescribeUnbindClientListResponse> {
+    return this.request("DescribeUnbindClientList", req, cb)
   }
 
   /**

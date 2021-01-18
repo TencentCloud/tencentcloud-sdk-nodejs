@@ -281,6 +281,21 @@ export interface DescribeClusterInstanceGrpsRequest {
 }
 
 /**
+ * DescribeResourcesByDealName返回参数结构体
+ */
+export interface DescribeResourcesByDealNameResponse {
+  /**
+   * 计费资源id信息数组
+   */
+  BillingResourceInfos?: Array<BillingResourceInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAccounts请求参数结构体
  */
 export interface DescribeAccountsRequest {
@@ -1139,6 +1154,16 @@ export interface DescribeInstancesRequest {
 }
 
 /**
+ * DescribeResourcesByDealName请求参数结构体
+ */
+export interface DescribeResourcesByDealNameRequest {
+  /**
+   * 计费订单id
+   */
+  DealName: string
+}
+
+/**
  * IsolateInstance返回参数结构体
  */
 export interface IsolateInstanceResponse {
@@ -1177,6 +1202,16 @@ export interface DescribeBackupListRequest {
    * 备份文件列表起始
    */
   Offset: number
+}
+
+/**
+ * DescribeRollbackTimeRange请求参数结构体
+ */
+export interface DescribeRollbackTimeRangeRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
 }
 
 /**
@@ -1498,13 +1533,18 @@ export interface OfflineInstanceRequest {
 }
 
 /**
- * DescribeRollbackTimeRange请求参数结构体
+ * 计费资源信息
  */
-export interface DescribeRollbackTimeRangeRequest {
+export interface BillingResourceInfo {
   /**
    * 集群ID
    */
   ClusterId: string
+
+  /**
+   * 实例ID列表
+   */
+  InstanceIds: Array<string>
 }
 
 /**

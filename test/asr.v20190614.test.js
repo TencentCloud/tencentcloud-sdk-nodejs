@@ -18,6 +18,16 @@ const client = new tencentcloud.asr.v20190614.Client({
 })
 describe("asr.v20190614.test.js", function () {
 
+it("asr.v20190614.CloseAsyncRecognitionTask", async function () {
+    try {
+       const data = await client.CloseAsyncRecognitionTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("asr.v20190614.GetAsrVocabList", async function () {
     try {
        const data = await client.GetAsrVocabList({})

@@ -35,7 +35,7 @@ export interface UploadIdResponse {
  */
 export interface QueryCallDetailsRequest {
   /**
-   * 请求类型:1,人群特征洞察统计 2购车意向预测统计
+   * 请求类型 1:人群特征洞察统计 2:购车意向预测统计
    */
   Type: number
 
@@ -45,7 +45,7 @@ export interface QueryCallDetailsRequest {
   StartTime: number
 
   /**
-   * 结束时间戳(毫秒）
+   * 结束时间戳（毫秒）
    */
   EndTime: number
 
@@ -385,7 +385,7 @@ export interface QueryCallStatResponse {
  */
 export interface QueryCallStatRequest {
   /**
-   * 请求类型:1,人群特征洞察统计 2购车意向预测统计
+   * 请求类型 1:人群特征洞察统计 2:购车意向预测统计
    */
   Type: number
 
@@ -395,7 +395,7 @@ export interface QueryCallStatRequest {
   StartTime: number
 
   /**
-   * 结束时间戳(毫秒）
+   * 结束时间戳（毫秒）
    */
   EndTime: number
 }

@@ -562,6 +562,10 @@ export interface DescribeBackupsRequest {
       * 按照备份ID筛选，不填则不筛选此项
       */
     BackupId?: number;
+    /**
+      * 按照备份的库名称筛选，不填则不筛选此项
+      */
+    DatabaseName?: string;
 }
 /**
  * ModifyDBInstanceProject返回参数结构体

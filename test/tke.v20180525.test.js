@@ -248,6 +248,16 @@ it("tke.v20180525.CreateClusterRoute", async function () {
     }
 })
 
+it("tke.v20180525.DescribeClusterNodePools", async function () {
+    try {
+       const data = await client.DescribeClusterNodePools({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.CreateClusterRouteTable", async function () {
     try {
        const data = await client.CreateClusterRouteTable({})
@@ -261,6 +271,16 @@ it("tke.v20180525.CreateClusterRouteTable", async function () {
 it("tke.v20180525.ModifyClusterNodePool", async function () {
     try {
        const data = await client.ModifyClusterNodePool({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.GetUpgradeInstanceProgress", async function () {
+    try {
+       const data = await client.GetUpgradeInstanceProgress({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -508,9 +528,9 @@ it("tke.v20180525.DeleteClusterInstances", async function () {
     }
 })
 
-it("tke.v20180525.DescribeClusterNodePools", async function () {
+it("tke.v20180525.DescribeAvailableClusterVersion", async function () {
     try {
-       const data = await client.DescribeClusterNodePools({})
+       const data = await client.DescribeAvailableClusterVersion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -521,6 +541,16 @@ it("tke.v20180525.DescribeClusterNodePools", async function () {
 it("tke.v20180525.DescribeClusterKubeconfig", async function () {
     try {
        const data = await client.DescribeClusterKubeconfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.UpdateClusterVersion", async function () {
+    try {
+       const data = await client.UpdateClusterVersion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

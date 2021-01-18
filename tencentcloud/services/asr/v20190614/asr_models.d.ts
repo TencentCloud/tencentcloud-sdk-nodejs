@@ -237,6 +237,15 @@ export interface SentenceRecognitionRequest {
     WordInfo?: number;
 }
 /**
+ * CloseAsyncRecognitionTask返回参数结构体
+ */
+export interface CloseAsyncRecognitionTaskResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 一句话识别返回的词时间戳
  */
 export interface SentenceWord {
@@ -525,6 +534,15 @@ export interface Vocab {
     TagInfos: Array<string>;
 }
 /**
+ * CloseAsyncRecognitionTask请求参数结构体
+ */
+export interface CloseAsyncRecognitionTaskRequest {
+    /**
+      * 语音流异步识别任务的唯一标识，在创建任务时会返回
+      */
+    TaskId: number;
+}
+/**
  * 录音文件识别、实时语音异步识别请求的返回数据
  */
 export interface Task {
@@ -643,13 +661,17 @@ export interface UpdateAsrVocabResponse {
     RequestId?: string;
 }
 /**
- * DescribeTaskStatus请求参数结构体
+ * CreateAsrVocab返回参数结构体
  */
-export interface DescribeTaskStatusRequest {
+export interface CreateAsrVocabResponse {
     /**
-      * 从CreateRecTask接口获取的TaskId，用于获取任务状态与结果。
+      * 词表ID，可用于获取词表信息
       */
-    TaskId: number;
+    VocabId?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 自学习模型信息
@@ -778,17 +800,13 @@ export interface UpdateAsrVocabRequest {
     Description?: string;
 }
 /**
- * CreateAsrVocab返回参数结构体
+ * DescribeTaskStatus请求参数结构体
  */
-export interface CreateAsrVocabResponse {
+export interface DescribeTaskStatusRequest {
     /**
-      * 词表ID，可用于获取词表信息
+      * 从CreateRecTask接口获取的TaskId，用于获取任务状态与结果。
       */
-    VocabId?: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    TaskId: number;
 }
 /**
  * SentenceRecognition返回参数结构体

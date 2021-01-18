@@ -36,8 +36,10 @@ import {
   DeleteClusterEndpointResponse,
   PrometheusTemplateModify,
   PrometheusNotification,
+  ClusterVersion,
   DescribePrometheusTemplatesResponse,
   CreateClusterEndpointResponse,
+  InstanceUpgradeProgressItem,
   RouteTableInfo,
   DeleteClusterRequest,
   RunInstancesForNode,
@@ -63,7 +65,7 @@ import {
   AutoScalingGroupRange,
   ModifyClusterAttributeRequest,
   DeleteClusterRouteResponse,
-  SyncPrometheusTemplateResponse,
+  ModifyClusterEndpointSPResponse,
   CreateClusterEndpointVipResponse,
   DescribeClusterRoutesResponse,
   DescribeClustersRequest,
@@ -73,6 +75,7 @@ import {
   Label,
   ModifyPrometheusTemplateResponse,
   DeletePrometheusTemplateSyncRequest,
+  UpdateClusterVersionResponse,
   DeleteClusterEndpointVipResponse,
   SyncPrometheusTemplateRequest,
   ClusterBasicSettings,
@@ -95,7 +98,7 @@ import {
   ExistedInstance,
   DescribeClusterNodePoolsResponse,
   DescribePrometheusAlertRuleRequest,
-  ModifyNodePoolDesiredCapacityAboutAsgRequest,
+  GetUpgradeInstanceProgressRequest,
   ModifyPrometheusTemplateRequest,
   AddNodeToNodePoolResponse,
   UpgradeClusterInstancesResponse,
@@ -104,8 +107,10 @@ import {
   DescribeClustersResponse,
   DescribePrometheusOverviewsRequest,
   ClusterExtraArgs,
+  SyncPrometheusTemplateResponse,
   DataDisk,
   ModifyClusterNodePoolResponse,
+  GetUpgradeInstanceProgressResponse,
   DescribeExistedInstancesResponse,
   CreatePrometheusTemplateRequest,
   ResourceDeleteOption,
@@ -118,8 +123,10 @@ import {
   CreateClusterAsGroupRequest,
   DescribeRouteTableConflictsResponse,
   CreateClusterResponse,
+  TaskStepInfo,
   RunSecurityServiceEnabled,
   DeleteClusterRouteTableRequest,
+  DescribeAvailableClusterVersionRequest,
   CreateClusterRequest,
   InstanceExtraArgs,
   AcquireClusterAdminRoleRequest,
@@ -154,10 +161,12 @@ import {
   AddExistedInstancesRequest,
   ClusterAsGroupOption,
   CreateClusterInstancesResponse,
+  ModifyNodePoolDesiredCapacityAboutAsgRequest,
   DescribeClusterNodePoolsRequest,
   DescribeClusterRouteTablesRequest,
   ModifyClusterAsGroupOptionAttributeRequest,
   ExistedInstancesForNode,
+  InstanceUpgradeClusterStatus,
   DescribeClusterRoutesRequest,
   DeleteClusterRouteRequest,
   DescribePrometheusOverviewsResponse,
@@ -167,11 +176,13 @@ import {
   DescribeClusterNodePoolDetailRequest,
   DeletePrometheusTemplateSyncResponse,
   CreateClusterRouteTableRequest,
+  RemoveNodeFromNodePoolRequest,
   DescribeClusterAsGroupsRequest,
   DescribeImagesRequest,
-  ModifyClusterEndpointSPResponse,
+  DescribeAvailableClusterVersionResponse,
   Tag,
   DescribeRouteTableConflictsRequest,
+  InstanceUpgradePreCheckResultItem,
   ExistedInstancesPara,
   DescribeClusterAsGroupOptionResponse,
   ClusterAsGroupAttribute,
@@ -181,11 +192,12 @@ import {
   CreateClusterNodePoolResponse,
   NodePoolOption,
   ModifyClusterAsGroupAttributeRequest,
+  UpdateClusterVersionRequest,
   InstanceDataDiskMountSetting,
   PrometheusInstanceOverview,
   NodeCountSummary,
   DescribeClusterAsGroupsResponse,
-  RemoveNodeFromNodePoolRequest,
+  InstanceUpgradePreCheckResult,
   DescribeClusterNodePoolDetailResponse,
 } from "./tke_models"
 
@@ -429,6 +441,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询节点池列表
+   */
+  async DescribeClusterNodePools(
+    req: DescribeClusterNodePoolsRequest,
+    cb?: (error: string, rep: DescribeClusterNodePoolsResponse) => void
+  ): Promise<DescribeClusterNodePoolsResponse> {
+    return this.request("DescribeClusterNodePools", req, cb)
+  }
+
+  /**
    * 创建集群路由表
    */
   async CreateClusterRouteTable(
@@ -446,6 +468,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyClusterNodePoolResponse) => void
   ): Promise<ModifyClusterNodePoolResponse> {
     return this.request("ModifyClusterNodePool", req, cb)
+  }
+
+  /**
+   * 获得节点升级当前的进度
+   */
+  async GetUpgradeInstanceProgress(
+    req: GetUpgradeInstanceProgressRequest,
+    cb?: (error: string, rep: GetUpgradeInstanceProgressResponse) => void
+  ): Promise<GetUpgradeInstanceProgressResponse> {
+    return this.request("GetUpgradeInstanceProgress", req, cb)
   }
 
   /**
@@ -689,13 +721,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询节点池列表
+   * 获取集群可以升级的所有版本
    */
-  async DescribeClusterNodePools(
-    req: DescribeClusterNodePoolsRequest,
-    cb?: (error: string, rep: DescribeClusterNodePoolsResponse) => void
-  ): Promise<DescribeClusterNodePoolsResponse> {
-    return this.request("DescribeClusterNodePools", req, cb)
+  async DescribeAvailableClusterVersion(
+    req: DescribeAvailableClusterVersionRequest,
+    cb?: (error: string, rep: DescribeAvailableClusterVersionResponse) => void
+  ): Promise<DescribeAvailableClusterVersionResponse> {
+    return this.request("DescribeAvailableClusterVersion", req, cb)
   }
 
   /**
@@ -706,6 +738,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClusterKubeconfigResponse) => void
   ): Promise<DescribeClusterKubeconfigResponse> {
     return this.request("DescribeClusterKubeconfig", req, cb)
+  }
+
+  /**
+   * 升级集群 Master 组件到指定版本
+   */
+  async UpdateClusterVersion(
+    req: UpdateClusterVersionRequest,
+    cb?: (error: string, rep: UpdateClusterVersionResponse) => void
+  ): Promise<UpdateClusterVersionResponse> {
+    return this.request("UpdateClusterVersion", req, cb)
   }
 
   /**

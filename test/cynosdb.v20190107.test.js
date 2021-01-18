@@ -208,6 +208,16 @@ it("cynosdb.v20190107.DescribeAccounts", async function () {
     }
 })
 
+it("cynosdb.v20190107.DescribeResourcesByDealName", async function () {
+    try {
+       const data = await client.DescribeResourcesByDealName({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.SetRenewFlag", async function () {
     try {
        const data = await client.SetRenewFlag({})

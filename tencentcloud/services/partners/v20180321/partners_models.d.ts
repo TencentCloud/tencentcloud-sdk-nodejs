@@ -314,6 +314,33 @@ export interface ProductInfoElem {
     Value: string;
 }
 /**
+ * 解绑客户信息
+ */
+export interface UnbindClientElem {
+    /**
+      * 解绑账号ID
+      */
+    Uin: string;
+    /**
+      * 名称
+      */
+    Name: string;
+    /**
+      * 状态：0:审核中；1：已解绑；2：已撤销 3：关联撤销 4: 已驳回
+      */
+    Status: number;
+    /**
+      * 申请时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApplyTime: string;
+    /**
+      * 解绑/撤销时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ActionTime: string;
+}
+/**
  * RemovePayRelationForClient返回参数结构体
  */
 export interface RemovePayRelationForClientResponse {
@@ -589,6 +616,39 @@ export interface AgentAuditedClient {
     Mail: string;
 }
 /**
+ * DescribeUnbindClientList请求参数结构体
+ */
+export interface DescribeUnbindClientListRequest {
+    /**
+      * 解绑状态：0:所有,1:审核中,2已解绑
+      */
+    Status: number;
+    /**
+      * 偏移量
+      */
+    Offset: number;
+    /**
+      * 限制数目
+      */
+    Limit: number;
+    /**
+      * 解绑账号ID
+      */
+    UnbindUin?: string;
+    /**
+      * 解绑申请时间范围起始点
+      */
+    ApplyTimeStart?: string;
+    /**
+      * 解绑申请时间范围终止点
+      */
+    ApplyTimeEnd?: string;
+    /**
+      * 对申请时间的升序降序，值：asc，desc
+      */
+    OrderDirection?: string;
+}
+/**
  * DescribeAgentPayDeals返回参数结构体
  */
 export interface DescribeAgentPayDealsResponse {
@@ -677,6 +737,23 @@ export interface CreatePayRelationForClientRequest {
  * AgentTransferMoney返回参数结构体
  */
 export interface AgentTransferMoneyResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeUnbindClientList返回参数结构体
+ */
+export interface DescribeUnbindClientListResponse {
+    /**
+      * 符合条件的解绑客户数量
+      */
+    TotalCount?: number;
+    /**
+      * 符合条件的解绑客户列表
+      */
+    UnbindClientList?: Array<UnbindClientElem>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

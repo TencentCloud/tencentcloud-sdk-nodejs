@@ -30,6 +30,7 @@ import {
   ModifyDBInstanceSecurityGroupsResponse,
   DescribeBackupConfigRequest,
   DescribeClusterInstanceGrpsRequest,
+  DescribeResourcesByDealNameResponse,
   DescribeAccountsRequest,
   IsolateInstanceRequest,
   DescribeMaintainPeriodResponse,
@@ -56,15 +57,17 @@ import {
   DescribeInstanceDetailRequest,
   ModifyMaintainPeriodConfigResponse,
   DescribeInstancesRequest,
+  DescribeResourcesByDealNameRequest,
   IsolateInstanceResponse,
   DescribeBackupListRequest,
+  DescribeRollbackTimeRangeRequest,
   QueryFilter,
   CynosdbInstance,
   DescribeAccountsResponse,
   UpgradeInstanceRequest,
   DescribeInstanceDetailResponse,
   OfflineInstanceRequest,
-  DescribeRollbackTimeRangeRequest,
+  BillingResourceInfo,
   OfflineClusterResponse,
   DescribeInstanceSpecsResponse,
   ObjectTask,
@@ -282,6 +285,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAccountsResponse) => void
   ): Promise<DescribeAccountsResponse> {
     return this.request("DescribeAccounts", req, cb)
+  }
+
+  /**
+   * 根据计费订单id查询资源列表
+   */
+  async DescribeResourcesByDealName(
+    req: DescribeResourcesByDealNameRequest,
+    cb?: (error: string, rep: DescribeResourcesByDealNameResponse) => void
+  ): Promise<DescribeResourcesByDealNameResponse> {
+    return this.request("DescribeResourcesByDealName", req, cb)
   }
 
   /**
