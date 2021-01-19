@@ -905,6 +905,14 @@ export interface AutoRewriteRequest {
       * HTTPS:443监听器下需要重定向的域名，若不填，对HTTPS:443监听器下的所有域名都设置重定向。
       */
     Domains?: Array<string>;
+    /**
+      * 重定向状态码，可取值301,302,307
+      */
+    RewriteCodes?: Array<number>;
+    /**
+      * 重定向是否携带匹配的url
+      */
+    TakeUrls?: Array<boolean>;
 }
 /**
  * DescribeLoadBalancerListByCertId返回参数结构体
@@ -2475,6 +2483,21 @@ export interface RewriteTarget {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TargetLocationId: string;
+    /**
+      * 重定向状态码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RewriteCode: number;
+    /**
+      * 重定向是否携带匹配的url
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TakeUrl: boolean;
+    /**
+      * 重定向类型，Manual: 手动重定向，Auto:  自动重定向
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RewriteType: string;
 }
 /**
  * 集群的详细信息，如集群ID，名称，类型，可用区，标签等
@@ -3382,6 +3405,18 @@ export interface RewriteLocationMap {
       * 重定向至的目标转发规则ID
       */
     TargetLocationId: string;
+    /**
+      * 重定向状态码，可取值301,302,307
+      */
+    RewriteCode?: number;
+    /**
+      * 重定向是否携带匹配的url，配置RewriteCode时必填
+      */
+    TakeUrl?: boolean;
+    /**
+      * 源转发的域名，必须是SourceLocationId对应的域名，配置RewriteCode时必填
+      */
+    SourceDomain?: string;
 }
 /**
  * ModifyTargetPort请求参数结构体

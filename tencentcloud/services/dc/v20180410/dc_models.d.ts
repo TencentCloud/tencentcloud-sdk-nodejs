@@ -1056,7 +1056,7 @@ export interface ModifyDirectConnectTunnelExtraRequest {
       */
     BgpPeer?: BgpPeer;
     /**
-      * 用户侧网段地址
+      * 用户侧过滤网段地址
       */
     RouteFilterPrefixes?: RouteFilterPrefix;
     /**
@@ -1100,6 +1100,10 @@ export interface ModifyDirectConnectTunnelExtraRequest {
 1: 启用IPv6
       */
     IPv6Enable?: number;
+    /**
+      * 去往用户侧的路由信息
+      */
+    CustomerIDCRoutes?: Array<RouteFilterPrefix>;
 }
 /**
  * RejectDirectConnectTunnel返回参数结构体

@@ -138,6 +138,7 @@ import {
   SwitchForUpgradeResponse,
   DescribeBackupSummariesResponse,
   DescribeInstanceParamRecordsRequest,
+  SwitchDBInstanceMasterSlaveRequest,
   StopRollbackResponse,
   ParamTemplateInfo,
   ModifyAutoRenewFlagResponse,
@@ -153,6 +154,7 @@ import {
   BackupItem,
   DatabaseName,
   AuditFilter,
+  SwitchDBInstanceMasterSlaveResponse,
   DescribeBackupConfigResponse,
   DeleteDeployGroupsResponse,
   ModifyDBInstanceSecurityGroupsRequest,
@@ -578,6 +580,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeErrorLogDataResponse) => void
   ): Promise<DescribeErrorLogDataResponse> {
     return this.request("DescribeErrorLogData", req, cb)
+  }
+
+  /**
+   * 该接口 (SwitchDBInstanceMasterSlave) 支持用户主动切换实例主从角色。
+   */
+  async SwitchDBInstanceMasterSlave(
+    req: SwitchDBInstanceMasterSlaveRequest,
+    cb?: (error: string, rep: SwitchDBInstanceMasterSlaveResponse) => void
+  ): Promise<SwitchDBInstanceMasterSlaveResponse> {
+    return this.request("SwitchDBInstanceMasterSlave", req, cb)
   }
 
   /**

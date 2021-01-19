@@ -339,6 +339,11 @@ export interface DescribeImagesRequest {
    * 图片类型，可选以下值：照片、插画
    */
   ImageSenseType?: string
+
+  /**
+   * 分层图库id数组，可选以下数值：1(基础)，2(精选)，3(高级)
+   */
+  LayeredGalleryIds?: Array<number>
 }
 
 /**

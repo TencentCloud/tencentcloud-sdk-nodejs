@@ -48,6 +48,7 @@ export interface ModifyLaunchConfigurationAttributesRequest {
     SecurityGroupIds?: Array<string>;
     /**
       * 公网带宽相关信息设置。
+本字段属复杂类型，修改时采取整字段全覆盖模式。即只修改复杂类型内部一个子字段时，也请提供全部所需子字段。
       */
     InternetAccessible?: InternetAccessible;
     /**
@@ -60,11 +61,13 @@ export interface ModifyLaunchConfigurationAttributesRequest {
     /**
       * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。
 若修改实例的付费模式为预付费，则该参数必传；从预付费修改为其他付费模式时，本字段原信息会自动丢弃。
+本字段属复杂类型，修改时采取整字段全覆盖模式。即只修改复杂类型内部一个子字段时，也请提供全部所需子字段。
       */
     InstanceChargePrepaid?: InstanceChargePrepaid;
     /**
       * 实例的市场相关选项，如竞价实例相关参数。
 若修改实例的付费模式为竞价付费，则该参数必传；从竞价付费修改为其他付费模式时，本字段原信息会自动丢弃。
+本字段属复杂类型，修改时采取整字段全覆盖模式。即只修改复杂类型内部一个子字段时，也请提供全部所需子字段。
       */
     InstanceMarketOptions?: InstanceMarketOptionsRequest;
 }

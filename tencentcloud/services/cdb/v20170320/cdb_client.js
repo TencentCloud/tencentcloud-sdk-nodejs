@@ -186,6 +186,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeErrorLogData", req, cb);
     }
     /**
+     * 该接口 (SwitchDBInstanceMasterSlave) 支持用户主动切换实例主从角色。
+     */
+    async SwitchDBInstanceMasterSlave(req, cb) {
+        return this.request("SwitchDBInstanceMasterSlave", req, cb);
+    }
+    /**
      * 本接口(DisassociateSecurityGroups)用于安全组批量解绑实例。
      */
     async DisassociateSecurityGroups(req, cb) {

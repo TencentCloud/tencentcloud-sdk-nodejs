@@ -270,6 +270,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("EnableWorkflow", req, cb);
     }
     /**
+     * 智能媒体识别，包含表情和动作识别。仅用于智学，其他调用无效。
+     */
+    async RecognizeMediaForZhiXue(req, cb) {
+        return this.request("RecognizeMediaForZhiXue", req, cb);
+    }
+    /**
      * 对已发起的任务进行管理。
      */
     async ManageTask(req, cb) {

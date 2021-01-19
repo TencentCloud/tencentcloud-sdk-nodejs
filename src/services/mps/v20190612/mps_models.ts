@@ -2020,6 +2020,26 @@ export interface AiAnalysisTaskFrameTagOutput {
 }
 
 /**
+ * RecognizeMediaForZhiXue请求参数结构体
+ */
+export interface RecognizeMediaForZhiXueRequest {
+  /**
+   * 输入媒体文件存储信息。
+   */
+  InputInfo: MediaInputInfo
+
+  /**
+   * 表情识别参数配置。默认开启。
+   */
+  ExpressionConfig?: ExpressionConfigInfo
+
+  /**
+   * 动作识别参数配置。默认开启。
+   */
+  ActionConfig?: ActionConfigInfo
+}
+
+/**
  * 对视频转自适应码流任务结果类型
  */
 export interface MediaProcessTaskAdaptiveDynamicStreamingResult {
@@ -4016,6 +4036,21 @@ export interface LiveStreamAsrWordsRecognitionResult {
 }
 
 /**
+ * RecognizeMediaForZhiXue返回参数结构体
+ */
+export interface RecognizeMediaForZhiXueResponse {
+  /**
+   * 任务 ID，可以通过该 ID 查询任务状态和结果。
+   */
+  TaskId?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AI 样本管理，人物信息。
  */
 export interface AiSamplePerson {
@@ -5402,6 +5437,18 @@ export interface AiReviewPoliticalAsrTaskInput {
    * 鉴政模板 ID。
    */
   Definition: number
+}
+
+/**
+ * 动作识别参数配置
+ */
+export interface ActionConfigInfo {
+  /**
+      * 动作识别任务开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+      */
+  Switch: string
 }
 
 /**
@@ -6980,6 +7027,18 @@ export interface MediaMetaData {
    * 音频时长，单位：秒。
    */
   AudioDuration: number
+}
+
+/**
+ * 表情识别参数配置
+ */
+export interface ExpressionConfigInfo {
+  /**
+      * 表情识别任务开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+      */
+  Switch: string
 }
 
 /**

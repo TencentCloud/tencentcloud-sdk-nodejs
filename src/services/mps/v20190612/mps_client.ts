@@ -92,6 +92,7 @@ import {
   UserDefineAsrTextReviewTemplateInfo,
   DescribeWordSamplesResponse,
   AiAnalysisTaskFrameTagOutput,
+  RecognizeMediaForZhiXueRequest,
   MediaProcessTaskAdaptiveDynamicStreamingResult,
   OcrWordsConfigureInfoForUpdate,
   WatermarkTemplate,
@@ -171,6 +172,7 @@ import {
   ImageWatermarkTemplate,
   AsrWordsConfigureInfo,
   LiveStreamAsrWordsRecognitionResult,
+  RecognizeMediaForZhiXueResponse,
   AiSamplePerson,
   DescribeWorkflowsResponse,
   AsrWordsConfigureInfoForUpdate,
@@ -222,6 +224,7 @@ import {
   CreateSampleSnapshotTemplateResponse,
   ProhibitedAsrReviewTemplateInfo,
   AiReviewPoliticalAsrTaskInput,
+  ActionConfigInfo,
   MediaAiAnalysisTagItem,
   TranscodeTemplate,
   PornOcrReviewTemplateInfo,
@@ -275,6 +278,7 @@ import {
   LiveStreamOcrFullTextRecognitionResult,
   ModifyTranscodeTemplateResponse,
   MediaMetaData,
+  ExpressionConfigInfo,
   VideoTemplateInfoForUpdate,
   CreateContentReviewTemplateRequest,
   DescribeContentReviewTemplatesRequest,
@@ -781,6 +785,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: EnableWorkflowResponse) => void
   ): Promise<EnableWorkflowResponse> {
     return this.request("EnableWorkflow", req, cb)
+  }
+
+  /**
+   * 智能媒体识别，包含表情和动作识别。仅用于智学，其他调用无效。
+   */
+  async RecognizeMediaForZhiXue(
+    req: RecognizeMediaForZhiXueRequest,
+    cb?: (error: string, rep: RecognizeMediaForZhiXueResponse) => void
+  ): Promise<RecognizeMediaForZhiXueResponse> {
+    return this.request("RecognizeMediaForZhiXue", req, cb)
   }
 
   /**

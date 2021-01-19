@@ -121,6 +121,12 @@ export interface FleetAttributes {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   BillingStatus: string
+
+  /**
+      * 标签列表，最大长度50组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags: Array<Tag>
 }
 
 /**
@@ -251,6 +257,12 @@ export interface Asset {
    * 镜像资源共享类型，当 ResourceType 为 IMAGE 时该字段有意义，SHARED 表示共享、SHARED_IMAGE 表示未共享；ResourceType 为 ASSET 时这里返回 UNKNOWN_SHARED 用于占位
    */
   SharingStatus: string
+
+  /**
+      * 标签列表，最大长度50组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags: Array<Tag>
 }
 
 /**
@@ -452,6 +464,11 @@ export interface CreateFleetRequest {
    * 时限保护超时时间，默认60分钟，最小值5，最大值1440；当NewGameSessionProtectionPolicy为TimeLimitProtection时参数有效
    */
   GameServerSessionProtectionTimeLimit?: number
+
+  /**
+   * 标签列表，最大长度50组
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -892,6 +909,12 @@ export interface GameServerSessionQueue {
    * 超时时间
    */
   TimeoutInSeconds: number
+
+  /**
+      * 标签列表，最大长度50组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags: Array<Tag>
 }
 
 /**
@@ -1096,6 +1119,21 @@ export interface DescribeFleetStatisticSummaryRequest {
    * 查询结束时间，时间格式: YYYY-MM-DD hh:mm:ss
    */
   EndTime?: string
+}
+
+/**
+ * 标签结构体
+ */
+export interface Tag {
+  /**
+   * 标签键，最大长度127字节
+   */
+  Key: string
+
+  /**
+   * 标签值，最大长度255字节
+   */
+  Value: string
 }
 
 /**
@@ -2520,6 +2558,11 @@ export interface CreateAliasRequest {
    * 别名的可读说明，长度不小于1字符不超过1024字符
    */
   Description?: string
+
+  /**
+   * 标签列表，最大长度50组
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -2646,6 +2689,11 @@ export interface CreateAssetRequest {
    * 生成包支持的操作系统镜像id，若传入OperateSystem字段的值是CentOS7.16，则不需要传入该值；如果不是，则需要通过[DescribeAssetSystems](https://cloud.tencent.com/document/product/1165/49191)接口获取asset支持的操作系统ImageId进行传入
    */
   ImageId?: string
+
+  /**
+   * 标签列表，最大长度50组
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -3410,6 +3458,11 @@ export interface CopyFleetRequest {
    * 是否选择云联网：CCN_SELECTED 或者 CCN_UNSELECTED；默认是 CCN_UNSELECTED
    */
   SelectedCcnType?: string
+
+  /**
+   * 标签列表，最大长度50组
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -3697,6 +3750,11 @@ export interface CreateGameServerSessionQueueRequest {
    * 超时时间（单位秒，默认值为600秒）
    */
   TimeoutInSeconds?: number
+
+  /**
+   * 标签列表，最大长度50组
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -3738,6 +3796,12 @@ export interface Alias {
    * 上次修改此数据对象的时间
    */
   LastUpdatedTime: string
+
+  /**
+      * 标签列表，最大长度50组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags: Array<Tag>
 }
 
 /**

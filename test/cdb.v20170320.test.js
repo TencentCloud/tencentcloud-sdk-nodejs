@@ -268,6 +268,16 @@ it("cdb.v20170320.DescribeErrorLogData", async function () {
     }
 })
 
+it("cdb.v20170320.SwitchDBInstanceMasterSlave", async function () {
+    try {
+       const data = await client.SwitchDBInstanceMasterSlave({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.DisassociateSecurityGroups", async function () {
     try {
        const data = await client.DisassociateSecurityGroups({})

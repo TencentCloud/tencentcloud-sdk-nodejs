@@ -62,6 +62,7 @@ import {
   GetUploadFederationTokenResponse,
   DeleteScalingPolicyResponse,
   DescribeFleetStatisticSummaryRequest,
+  Tag,
   PlayerDataMap,
   ResolveAliasResponse,
   DescribeInstancesExtendResponse,
