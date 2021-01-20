@@ -106,10 +106,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePublicConfigSummary", req, cb);
     }
     /**
-     * 查询仓库列表
+     * 新增微服务
      */
-    async DescribeRepositories(req, cb) {
-        return this.request("DescribeRepositories", req, cb);
+    async CreateMicroservice(req, cb) {
+        return this.request("CreateMicroservice", req, cb);
     }
     /**
      * 查询配置项列表
@@ -124,10 +124,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DisableTask", req, cb);
     }
     /**
-     * 停用工作流
+     * 查询服务API列表
      */
-    async DisableTaskFlow(req, cb) {
-        return this.request("DisableTaskFlow", req, cb);
+    async DescribeMsApiList(req, cb) {
+        return this.request("DescribeMsApiList", req, cb);
     }
     /**
      * 创建集群
@@ -232,6 +232,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async DescribeApplication(req, cb) {
         return this.request("DescribeApplication", req, cb);
+    }
+    /**
+     * 查询Serverless部署组列表
+     */
+    async DescribeServerlessGroups(req, cb) {
+        return this.request("DescribeServerlessGroups", req, cb);
     }
     /**
      * 查询网关分组监控明细数据
@@ -366,6 +372,18 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DescribeImageRepository", req, cb);
     }
     /**
+     * 查询仓库列表
+     */
+    async DescribeRepositories(req, cb) {
+        return this.request("DescribeRepositories", req, cb);
+    }
+    /**
+     * 停用工作流
+     */
+    async DisableTaskFlow(req, cb) {
+        return this.request("DisableTaskFlow", req, cb);
+    }
+    /**
      * 一键导入API分组
      */
     async CreateAllGatewayApiAsync(req, cb) {
@@ -456,10 +474,10 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("ReleaseApiGroup", req, cb);
     }
     /**
-     * 查询Serverless部署组列表
+     * 删除路径重写
      */
-    async DescribeServerlessGroups(req, cb) {
-        return this.request("DescribeServerlessGroups", req, cb);
+    async DeletePathRewrites(req, cb) {
+        return this.request("DeletePathRewrites", req, cb);
     }
     /**
      * 创建虚拟机部署组
@@ -499,6 +517,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DescribePublicConfigs", req, cb);
     }
     /**
+     * 查询路径重写
+     */
+    async DescribePathRewrite(req, cb) {
+        return this.request("DescribePathRewrite", req, cb);
+    }
+    /**
      * 启用任务
      */
     async EnableTask(req, cb) {
@@ -527,6 +551,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async DeleteTask(req, cb) {
         return this.request("DeleteTask", req, cb);
+    }
+    /**
+     * 查询路径重写列表
+     */
+    async DescribePathRewrites(req, cb) {
+        return this.request("DescribePathRewrites", req, cb);
     }
     /**
      * 删除泳道
@@ -571,12 +601,6 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("ModifyLane", req, cb);
     }
     /**
-     * 新增微服务
-     */
-    async CreateMicroservice(req, cb) {
-        return this.request("CreateMicroservice", req, cb);
-    }
-    /**
      * 修改微服务详情
      */
     async ModifyMicroservice(req, cb) {
@@ -589,10 +613,10 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DeleteNamespace", req, cb);
     }
     /**
-     * 查询服务API列表
+     * 创建路径重写
      */
-    async DescribeMsApiList(req, cb) {
-        return this.request("DescribeMsApiList", req, cb);
+    async CreatePathRewrites(req, cb) {
+        return this.request("CreatePathRewrites", req, cb);
     }
     /**
      * 删除Api分组
@@ -605,6 +629,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async CreateApplication(req, cb) {
         return this.request("CreateApplication", req, cb);
+    }
+    /**
+     * 修改路径重写
+     */
+    async ModifyPathRewrite(req, cb) {
+        return this.request("ModifyPathRewrite", req, cb);
     }
     /**
      * 重新执行任务批次

@@ -1,4 +1,51 @@
 /**
+ * DeleteTopics返回参数结构体
+ */
+export interface DeleteTopicsResponse {
+    /**
+      * 被删除的主题数组。
+      */
+    TopicSets?: Array<TopicRecord>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeBindClusters返回参数结构体
+ */
+export interface DescribeBindClustersResponse {
+    /**
+      * 专享集群的数量
+      */
+    TotalCount?: number;
+    /**
+      * 专享集群的列表
+      */
+    ClusterSet?: Array<BindCluster>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 订阅关系
+ */
+export interface SubscriptionTopic {
+    /**
+      * 环境（命名空间）名称。
+      */
+    EnvironmentId: string;
+    /**
+      * 主题名称。
+      */
+    TopicName: string;
+    /**
+      * 订阅名称。
+      */
+    SubscriptionName: string;
+}
+/**
  * ModifyEnvironmentAttributes请求参数结构体
  */
 export interface ModifyEnvironmentAttributesRequest {
@@ -14,6 +61,10 @@ export interface ModifyEnvironmentAttributesRequest {
       * 备注，字符串最长不超过128。
       */
     Remark?: string;
+    /**
+      * Pulsar 集群的ID
+      */
+    ClusterId?: string;
 }
 /**
  * DescribeSubscriptions请求参数结构体
@@ -43,13 +94,17 @@ export interface DescribeSubscriptionsRequest {
       * 数据过滤条件。
       */
     Filters?: Array<FilterSubscription>;
+    /**
+      * Pulsar 集群的ID
+      */
+    ClusterId?: string;
 }
 /**
- * 环境信息
+ * 命名空间信息
  */
 export interface Environment {
     /**
-      * 环境（命名空间）名称
+      * 命名空间名称
       */
     EnvironmentId: string;
     /**
@@ -68,6 +123,74 @@ export interface Environment {
       * 最近修改时间
       */
     UpdateTime: string;
+    /**
+      * 命名空间ID
+      */
+    NamespaceId: string;
+    /**
+      * 命名空间名称
+      */
+    NamespaceName: string;
+}
+/**
+ * vcp绑定记录
+ */
+export interface VpcBindRecord {
+    /**
+      * 租户Vpc Id
+      */
+    UniqueVpcId: string;
+    /**
+      * 租户Vpc子网Id
+      */
+    UniqueSubnetId: string;
+    /**
+      * 路由Id
+      */
+    RouterId: string;
+    /**
+      * Vpc的Id
+      */
+    Ip: string;
+    /**
+      * Vpc的Port
+      */
+    Port: number;
+    /**
+      * 说明，128个字符以内
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Remark: string;
+}
+/**
+ * DeleteCluster返回参数结构体
+ */
+export interface DeleteClusterResponse {
+    /**
+      * 集群的ID
+      */
+    ClusterId?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyCluster请求参数结构体
+ */
+export interface ModifyClusterRequest {
+    /**
+      * 集群Id，需要更新的集群Id。
+      */
+    ClusterId: string;
+    /**
+      * 更新后的集群名称。
+      */
+    ClusterName?: string;
+    /**
+      * 说明信息。
+      */
+    Remark?: string;
 }
 /**
  * DescribeEnvironmentAttributes请求参数结构体
@@ -77,6 +200,10 @@ export interface DescribeEnvironmentAttributesRequest {
       * 环境（命名空间）名称。
       */
     EnvironmentId: string;
+    /**
+      * Pulsar 集群的ID
+      */
+    ClusterId?: string;
 }
 /**
  * 分区topic
@@ -149,14 +276,17 @@ export interface PartitionsTopic {
     TopicType: number;
 }
 /**
- * ResetMsgSubOffsetByTimestamp返回参数结构体
+ * DescribeBindClusters请求参数结构体
  */
-export interface ResetMsgSubOffsetByTimestampResponse {
+export declare type DescribeBindClustersRequest = null;
+/**
+ * CreateCluster返回参数结构体
+ */
+export interface CreateClusterResponse {
     /**
-      * 结果。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 集群ID
       */
-    Result?: boolean;
+    ClusterId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -178,6 +308,645 @@ export interface DescribeTopicsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 环境角色集合
+ */
+export interface EnvironmentRole {
+    /**
+      * 环境（命名空间）。
+      */
+    EnvironmentId: string;
+    /**
+      * 角色名称。
+      */
+    RoleName: string;
+    /**
+      * 授权项，最多只能包含produce、consume两项的非空字符串数组。
+      */
+    Permissions: Array<string>;
+    /**
+      * 角色描述。
+      */
+    RoleDescribe: string;
+    /**
+      * 创建时间。
+      */
+    CreateTime: string;
+    /**
+      * 更新时间。
+      */
+    UpdateTime: string;
+}
+/**
+ * CreateCluster请求参数结构体
+ */
+export interface CreateClusterRequest {
+    /**
+      * 集群名称，不支持中字以及除了短线和下划线外的特殊字符且不超过16个字符。
+      */
+    ClusterName: string;
+    /**
+      * 用户专享物理集群ID，如果不传，则默认在公共集群上创建用户集群资源。
+      */
+    BindClusterId?: number;
+    /**
+      * 说明，128个字符以内。
+      */
+    Remark?: string;
+    /**
+      * 集群的标签列表
+      */
+    Tags?: Array<Tag>;
+}
+/**
+ * 用户专享集群信息
+ */
+export interface BindCluster {
+    /**
+      * 物理集群的名称
+      */
+    ClusterName: string;
+}
+/**
+ * ModifyCluster返回参数结构体
+ */
+export interface ModifyClusterResponse {
+    /**
+      * 集群的ID
+      */
+    ClusterId?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateTopic返回参数结构体
+ */
+export interface CreateTopicResponse {
+    /**
+      * 环境（命名空间）名称。
+      */
+    EnvironmentId?: string;
+    /**
+      * 主题名。
+      */
+    TopicName?: string;
+    /**
+      * 0：非分区topic，无分区；非0：具体分区topic的分区数。
+      */
+    Partitions?: number;
+    /**
+      * 备注，128字符以内。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Remark?: string;
+    /**
+      * 0： 普通消息；
+1 ：全局顺序消息；
+2 ：局部顺序消息；
+3 ：重试队列；
+4 ：死信队列；
+5 ：事务消息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TopicType?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeClusterDetail请求参数结构体
+ */
+export interface DescribeClusterDetailRequest {
+    /**
+      * 集群的ID
+      */
+    ClusterId: string;
+}
+/**
+ * DescribeEnvironments返回参数结构体
+ */
+export interface DescribeEnvironmentsResponse {
+    /**
+      * 环境（命名空间）记录数。
+      */
+    TotalCount?: number;
+    /**
+      * 环境（命名空间）集合数组。
+      */
+    EnvironmentSet?: Array<Environment>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeEnvironments请求参数结构体
+ */
+export interface DescribeEnvironmentsRequest {
+    /**
+      * 环境（命名空间）名称，模糊搜索。
+      */
+    EnvironmentId?: string;
+    /**
+      * 起始下标，不填默认为0。
+      */
+    Offset?: number;
+    /**
+      * 返回数量，不填则默认为10，最大值为20。
+      */
+    Limit?: number;
+}
+/**
+ * ModifyTopic返回参数结构体
+ */
+export interface ModifyTopicResponse {
+    /**
+      * 分区数
+      */
+    Partitions?: number;
+    /**
+      * 备注，128字符以内。
+      */
+    Remark?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeClusters请求参数结构体
+ */
+export interface DescribeClustersRequest {
+    /**
+      * 起始下标，不填默认为0。
+      */
+    Offset?: number;
+    /**
+      * 返回数量，不填则默认为10，最大值为20。
+      */
+    Limit?: number;
+}
+/**
+ * DescribeProducers请求参数结构体
+ */
+export interface DescribeProducersRequest {
+    /**
+      * 环境（命名空间）名称。
+      */
+    EnvironmentId: string;
+    /**
+      * 主题名。
+      */
+    TopicName: string;
+    /**
+      * 起始下标，不填默认为0。
+      */
+    Offset?: number;
+    /**
+      * 返回数量，不填则默认为10，最大值为20。
+      */
+    Limit?: number;
+    /**
+      * 生产者名称，模糊匹配。
+      */
+    ProducerName?: string;
+    /**
+      * Pulsar 集群的ID
+      */
+    ClusterId?: string;
+}
+/**
+ * DescribeEnvironmentAttributes返回参数结构体
+ */
+export interface DescribeEnvironmentAttributesResponse {
+    /**
+      * 未消费消息过期时间，单位：秒，最大1296000（15天）。
+      */
+    MsgTTL?: number;
+    /**
+      * 消费速率限制，单位：byte/秒，0：不限速。
+      */
+    RateInByte?: number;
+    /**
+      * 消费速率限制，单位：个数/秒，0：不限速。
+      */
+    RateInSize?: number;
+    /**
+      * 已消费消息保存策略，单位：小时，0：消费完马上删除。
+      */
+    RetentionHours?: number;
+    /**
+      * 已消费消息保存策略，单位：G，0：消费完马上删除。
+      */
+    RetentionSize?: number;
+    /**
+      * 环境（命名空间）名称。
+      */
+    EnvironmentId?: string;
+    /**
+      * 副本数。
+      */
+    Replicas?: number;
+    /**
+      * 备注。
+      */
+    Remark?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 主题关键信息
+ */
+export interface TopicRecord {
+    /**
+      * 环境（命名空间）名称。
+      */
+    EnvironmentId: string;
+    /**
+      * 主题名称。
+      */
+    TopicName: string;
+}
+/**
+ * 订阅者
+ */
+export interface Subscription {
+    /**
+      * 主题名称。
+      */
+    TopicName: string;
+    /**
+      * 环境（命名空间）名称。
+      */
+    EnvironmentId: string;
+    /**
+      * 消费者开始连接的时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConnectedSince: string;
+    /**
+      * 消费者地址。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConsumerAddr: string;
+    /**
+      * 消费者数量。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConsumerCount: string;
+    /**
+      * 消费者名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConsumerName: string;
+    /**
+      * 堆积的消息数量。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MsgBacklog: string;
+    /**
+      * 于TTL，此订阅下没有被发送而是被丢弃的比例。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MsgRateExpired: string;
+    /**
+      * 消费者每秒分发消息的数量之和。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MsgRateOut: string;
+    /**
+      * 消费者每秒消息的byte。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MsgThroughputOut: string;
+    /**
+      * 订阅名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubscriptionName: string;
+    /**
+      * 消费者集合。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConsumerSets: Array<Consumer>;
+    /**
+      * 是否在线。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsOnline: boolean;
+    /**
+      * 消费进度集合。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConsumersScheduleSets: Array<ConsumersSchedule>;
+    /**
+      * 备注。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Remark: string;
+    /**
+      * 创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime: string;
+    /**
+      * 最近修改时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdateTime: string;
+}
+/**
+ * DeleteCluster请求参数结构体
+ */
+export interface DeleteClusterRequest {
+    /**
+      * 集群Id，传入需要删除的集群Id。
+      */
+    ClusterId: string;
+}
+/**
+ * 过滤订阅列表
+ */
+export interface FilterSubscription {
+    /**
+      * 是否仅展示包含真实消费者的订阅。
+      */
+    ConsumerHasCount?: boolean;
+    /**
+      * 是否仅展示消息堆积的订阅。
+      */
+    ConsumerHasBacklog?: boolean;
+    /**
+      * 是否仅展示存在消息超期丢弃的订阅。
+      */
+    ConsumerHasExpired?: boolean;
+}
+/**
+ * 标签的key/value的类型
+ */
+export interface Tag {
+    /**
+      * 标签的key的值
+      */
+    TagKey: string;
+    /**
+      * 标签的Value的值
+      */
+    TagValue: string;
+}
+/**
+ * DescribeSubscriptions返回参数结构体
+ */
+export interface DescribeSubscriptionsResponse {
+    /**
+      * 订阅者集合数组。
+      */
+    SubscriptionSets?: Array<Subscription>;
+    /**
+      * 数量。
+      */
+    TotalCount?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeProducers返回参数结构体
+ */
+export interface DescribeProducersResponse {
+    /**
+      * 生产者集合数组。
+      */
+    ProducerSets?: Array<Producer>;
+    /**
+      * 记录总数。
+      */
+    TotalCount?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateTopic请求参数结构体
+ */
+export interface CreateTopicRequest {
+    /**
+      * 环境（命名空间）名称。
+      */
+    EnvironmentId: string;
+    /**
+      * 主题名，不支持中字以及除了短线和下划线外的特殊字符且不超过32个字符。
+      */
+    TopicName: string;
+    /**
+      * 0：非分区topic，无分区；非0：具体分区topic的分区数，最大不允许超过128。
+      */
+    Partitions: number;
+    /**
+      * 0： 普通消息；
+1 ：全局顺序消息；
+2 ：局部顺序消息；
+3 ：重试队列；
+4 ：死信队列；
+5 ：事务消息。
+      */
+    TopicType: number;
+    /**
+      * 备注，128字符以内。
+      */
+    Remark?: string;
+    /**
+      * Pulsar 集群的ID
+      */
+    ClusterId?: string;
+}
+/**
+ * DescribeTopics请求参数结构体
+ */
+export interface DescribeTopicsRequest {
+    /**
+      * 环境（命名空间）名称。
+      */
+    EnvironmentId: string;
+    /**
+      * 主题名模糊匹配。
+      */
+    TopicName?: string;
+    /**
+      * 起始下标，不填默认为0。
+      */
+    Offset?: number;
+    /**
+      * 返回数量，不填则默认为10，最大值为20。
+      */
+    Limit?: number;
+    /**
+      * topic类型描述：
+0：普通消息；
+1：全局顺序消息；
+2：局部顺序消息；
+3：重试队列；
+4：死信队列；
+5：事务消息。
+      */
+    TopicType?: number;
+    /**
+      * Pulsar 集群的ID
+      */
+    ClusterId?: string;
+}
+/**
+ * DeleteEnvironments返回参数结构体
+ */
+export interface DeleteEnvironmentsResponse {
+    /**
+      * 成功删除的环境（命名空间）数组。
+      */
+    EnvironmentIds?: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 生产者连接实例
+ */
+export interface Connection {
+    /**
+      * 生产者地址。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Address: string;
+    /**
+      * 主题分区。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Partitions: number;
+    /**
+      * 生产者版本。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClientVersion: string;
+    /**
+      * 生产者名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProducerName: string;
+    /**
+      * 生产者ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProducerId: string;
+    /**
+      * 消息平均大小(byte)。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AverageMsgSize: string;
+    /**
+      * 生成速率(byte/秒)。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MsgThroughputIn: string;
+}
+/**
+ * DeleteTopics请求参数结构体
+ */
+export interface DeleteTopicsRequest {
+    /**
+      * 主题集合，每次最多删除20个。
+      */
+    TopicSets: Array<TopicRecord>;
+    /**
+      * pulsar集群Id。
+      */
+    ClusterId?: string;
+    /**
+      * 环境（命名空间）名称。
+      */
+    EnvironmentId?: string;
+}
+/**
+ * DescribeEnvironmentRoles返回参数结构体
+ */
+export interface DescribeEnvironmentRolesResponse {
+    /**
+      * 记录数。
+      */
+    TotalCount?: number;
+    /**
+      * 环境角色集合。
+      */
+    EnvironmentRoleSets?: Array<EnvironmentRole>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateSubscription请求参数结构体
+ */
+export interface CreateSubscriptionRequest {
+    /**
+      * 环境（命名空间）名称。
+      */
+    EnvironmentId: string;
+    /**
+      * 主题名称。
+      */
+    TopicName: string;
+    /**
+      * 订阅者名称，不支持中字以及除了短线和下划线外的特殊字符且不超过150个字符。
+      */
+    SubscriptionName: string;
+    /**
+      * 是否幂等创建，若否不允许创建同名的订阅关系。
+      */
+    IsIdempotent: boolean;
+    /**
+      * 备注，128个字符以内。
+      */
+    Remark?: string;
+    /**
+      * Pulsar 集群的ID
+      */
+    ClusterId?: string;
+    /**
+      * 是否自动创建死信和重试主题，True 表示创建，False表示不创建，默认自动创建死信和重试主题。
+      */
+    AutoCreatePolicyTopic?: boolean;
+}
+/**
+ * ModifyTopic请求参数结构体
+ */
+export interface ModifyTopicRequest {
+    /**
+      * 环境（命名空间）名称。
+      */
+    EnvironmentId: string;
+    /**
+      * 主题名。
+      */
+    TopicName: string;
+    /**
+      * 分区数，必须大于或者等于原分区数，若想维持原分区数请输入原数目，修改分区数仅对非全局顺序消息起效果，不允许超过128个分区。
+      */
+    Partitions: number;
+    /**
+      * 备注，128字符以内。
+      */
+    Remark?: string;
+    /**
+      * Pulsar 集群的ID
+      */
+    ClusterId?: string;
 }
 /**
  * 主题实例
@@ -286,480 +1055,6 @@ export interface Topic {
     UpdateTime: string;
 }
 /**
- * CreateTopic返回参数结构体
- */
-export interface CreateTopicResponse {
-    /**
-      * 环境（命名空间）名称。
-      */
-    EnvironmentId?: string;
-    /**
-      * 主题名。
-      */
-    TopicName?: string;
-    /**
-      * 0：非分区topic，无分区；非0：具体分区topic的分区数。
-      */
-    Partitions?: number;
-    /**
-      * 备注，128字符以内。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Remark?: string;
-    /**
-      * 0： 普通消息；
-1 ：全局顺序消息；
-2 ：局部顺序消息；
-3 ：重试队列；
-4 ：死信队列；
-5 ：事务消息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TopicType?: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribeEnvironments返回参数结构体
- */
-export interface DescribeEnvironmentsResponse {
-    /**
-      * 环境（命名空间）记录数。
-      */
-    TotalCount?: number;
-    /**
-      * 环境（命名空间）集合数组。
-      */
-    EnvironmentSet?: Array<Environment>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * ModifyTopic返回参数结构体
- */
-export interface ModifyTopicResponse {
-    /**
-      * 分区数
-      */
-    Partitions?: number;
-    /**
-      * 备注，128字符以内。
-      */
-    Remark?: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribeProducers请求参数结构体
- */
-export interface DescribeProducersRequest {
-    /**
-      * 环境（命名空间）名称。
-      */
-    EnvironmentId: string;
-    /**
-      * 主题名。
-      */
-    TopicName: string;
-    /**
-      * 起始下标，不填默认为0。
-      */
-    Offset?: number;
-    /**
-      * 返回数量，不填则默认为10，最大值为20。
-      */
-    Limit?: number;
-    /**
-      * 生产者名称，模糊匹配。
-      */
-    ProducerName?: string;
-}
-/**
- * DescribeEnvironmentAttributes返回参数结构体
- */
-export interface DescribeEnvironmentAttributesResponse {
-    /**
-      * 未消费消息过期时间，单位：秒，最大1296000（15天）。
-      */
-    MsgTTL?: number;
-    /**
-      * 消费速率限制，单位：byte/秒，0：不限速。
-      */
-    RateInByte?: number;
-    /**
-      * 消费速率限制，单位：个数/秒，0：不限速。
-      */
-    RateInSize?: number;
-    /**
-      * 已消费消息保存策略，单位：小时，0：消费完马上删除。
-      */
-    RetentionHours?: number;
-    /**
-      * 已消费消息保存策略，单位：G，0：消费完马上删除。
-      */
-    RetentionSize?: number;
-    /**
-      * 环境（命名空间）名称。
-      */
-    EnvironmentId?: string;
-    /**
-      * 副本数。
-      */
-    Replicas?: number;
-    /**
-      * 备注。
-      */
-    Remark?: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * 订阅者
- */
-export interface Subscription {
-    /**
-      * 主题名称。
-      */
-    TopicName: string;
-    /**
-      * 环境（命名空间）名称。
-      */
-    EnvironmentId: string;
-    /**
-      * 消费者开始连接的时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ConnectedSince: string;
-    /**
-      * 消费者地址。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ConsumerAddr: string;
-    /**
-      * 消费者数量。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ConsumerCount: string;
-    /**
-      * 消费者名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ConsumerName: string;
-    /**
-      * 堆积的消息数量。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MsgBacklog: string;
-    /**
-      * 于TTL，此订阅下没有被发送而是被丢弃的比例。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MsgRateExpired: string;
-    /**
-      * 消费者每秒分发消息的数量之和。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MsgRateOut: string;
-    /**
-      * 消费者每秒消息的byte。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MsgThroughputOut: string;
-    /**
-      * 订阅名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SubscriptionName: string;
-    /**
-      * 消费者集合。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ConsumerSets: Array<Consumer>;
-    /**
-      * 是否在线。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    IsOnline: boolean;
-    /**
-      * 消费进度集合。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ConsumersScheduleSets: Array<ConsumersSchedule>;
-    /**
-      * 备注。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Remark: string;
-    /**
-      * 创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CreateTime: string;
-    /**
-      * 最近修改时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UpdateTime: string;
-}
-/**
- * DeleteTopics返回参数结构体
- */
-export interface DeleteTopicsResponse {
-    /**
-      * 被删除的主题数组。
-      */
-    TopicSets?: Array<TopicRecord>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * 订阅关系
- */
-export interface SubscriptionTopic {
-    /**
-      * 环境（命名空间）名称。
-      */
-    EnvironmentId: string;
-    /**
-      * 主题名称。
-      */
-    TopicName: string;
-    /**
-      * 订阅名称。
-      */
-    SubscriptionName: string;
-}
-/**
- * DescribeSubscriptions返回参数结构体
- */
-export interface DescribeSubscriptionsResponse {
-    /**
-      * 订阅者集合数组。
-      */
-    SubscriptionSets?: Array<Subscription>;
-    /**
-      * 数量。
-      */
-    TotalCount?: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribeProducers返回参数结构体
- */
-export interface DescribeProducersResponse {
-    /**
-      * 生产者集合数组。
-      */
-    ProducerSets?: Array<Producer>;
-    /**
-      * 记录总数。
-      */
-    TotalCount?: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * CreateTopic请求参数结构体
- */
-export interface CreateTopicRequest {
-    /**
-      * 环境（命名空间）名称。
-      */
-    EnvironmentId: string;
-    /**
-      * 主题名，不支持中字以及除了短线和下划线外的特殊字符且不超过32个字符。
-      */
-    TopicName: string;
-    /**
-      * 0：非分区topic，无分区；非0：具体分区topic的分区数，最大不允许超过128。
-      */
-    Partitions: number;
-    /**
-      * 0： 普通消息；
-1 ：全局顺序消息；
-2 ：局部顺序消息；
-3 ：重试队列；
-4 ：死信队列；
-5 ：事务消息。
-      */
-    TopicType: number;
-    /**
-      * 备注，128字符以内。
-      */
-    Remark?: string;
-}
-/**
- * DescribeTopics请求参数结构体
- */
-export interface DescribeTopicsRequest {
-    /**
-      * 环境（命名空间）名称。
-      */
-    EnvironmentId: string;
-    /**
-      * 主题名模糊匹配。
-      */
-    TopicName?: string;
-    /**
-      * 起始下标，不填默认为0。
-      */
-    Offset?: number;
-    /**
-      * 返回数量，不填则默认为10，最大值为20。
-      */
-    Limit?: number;
-    /**
-      * topic类型描述：
-0：普通消息；
-1：全局顺序消息；
-2：局部顺序消息；
-3：重试队列；
-4：死信队列；
-5：事务消息。
-      */
-    TopicType?: number;
-}
-/**
- * DeleteEnvironments返回参数结构体
- */
-export interface DeleteEnvironmentsResponse {
-    /**
-      * 成功删除的环境（命名空间）数组。
-      */
-    EnvironmentIds?: Array<string>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * 生产者连接实例
- */
-export interface Connection {
-    /**
-      * 生产者地址。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Address: string;
-    /**
-      * 主题分区。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Partitions: number;
-    /**
-      * 生产者版本。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ClientVersion: string;
-    /**
-      * 生产者名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ProducerName: string;
-    /**
-      * 生产者ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ProducerId: string;
-    /**
-      * 消息平均大小(byte)。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AverageMsgSize: string;
-    /**
-      * 生成速率(byte/秒)。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MsgThroughputIn: string;
-}
-/**
- * DeleteTopics请求参数结构体
- */
-export interface DeleteTopicsRequest {
-    /**
-      * 主题集合，每次最多删除20个。
-      */
-    TopicSets: Array<TopicRecord>;
-}
-/**
- * DescribeEnvironmentRoles返回参数结构体
- */
-export interface DescribeEnvironmentRolesResponse {
-    /**
-      * 记录数。
-      */
-    TotalCount?: number;
-    /**
-      * 环境角色集合。
-      */
-    EnvironmentRoleSets?: Array<EnvironmentRole>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * CreateSubscription请求参数结构体
- */
-export interface CreateSubscriptionRequest {
-    /**
-      * 环境（命名空间）名称。
-      */
-    EnvironmentId: string;
-    /**
-      * 主题名称。
-      */
-    TopicName: string;
-    /**
-      * 订阅者名称，不支持中字以及除了短线和下划线外的特殊字符且不超过150个字符。
-      */
-    SubscriptionName: string;
-    /**
-      * 是否幂等创建，若否不允许创建同名的订阅关系。
-      */
-    IsIdempotent: boolean;
-    /**
-      * 备注，128个字符以内。
-      */
-    Remark?: string;
-}
-/**
- * ModifyTopic请求参数结构体
- */
-export interface ModifyTopicRequest {
-    /**
-      * 环境（命名空间）名称。
-      */
-    EnvironmentId: string;
-    /**
-      * 主题名。
-      */
-    TopicName: string;
-    /**
-      * 分区数，必须大于或者等于原分区数，若想维持原分区数请输入原数目，修改分区数仅对非全局顺序消息起效果，不允许超过128个分区。
-      */
-    Partitions: number;
-    /**
-      * 备注，128字符以内。
-      */
-    Remark?: string;
-}
-/**
  *  消费者
  */
 export interface Consumer {
@@ -785,28 +1080,28 @@ export interface Consumer {
     ClientVersion: string;
 }
 /**
- * 过滤订阅列表
+ * DescribeBindVpcs返回参数结构体
  */
-export interface FilterSubscription {
+export interface DescribeBindVpcsResponse {
     /**
-      * 是否仅展示包含真实消费者的订阅。
+      * 记录数。
       */
-    ConsumerHasCount?: boolean;
+    TotalCount?: number;
     /**
-      * 是否仅展示消息堆积的订阅。
+      * Vpc集合。
       */
-    ConsumerHasBacklog?: boolean;
+    VpcSets?: Array<VpcBindRecord>;
     /**
-      * 是否仅展示存在消息超期丢弃的订阅。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    ConsumerHasExpired?: boolean;
+    RequestId?: string;
 }
 /**
  * ModifyEnvironmentAttributes返回参数结构体
  */
 export interface ModifyEnvironmentAttributesResponse {
     /**
-      * 环境（命名空间）名称。
+      * 命名空间名称。
       */
     EnvironmentId?: string;
     /**
@@ -818,6 +1113,11 @@ export interface ModifyEnvironmentAttributesResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Remark?: string;
+    /**
+      * 命名空间ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NamespaceId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -831,13 +1131,21 @@ export interface DeleteSubscriptionsRequest {
       * 订阅关系集合，每次最多删除20个。
       */
     SubscriptionTopicSets: Array<SubscriptionTopic>;
+    /**
+      * pulsar集群Id。
+      */
+    ClusterId?: string;
+    /**
+      * 环境（命名空间）名称。
+      */
+    EnvironmentId?: string;
 }
 /**
  * CreateEnvironment返回参数结构体
  */
 export interface CreateEnvironmentResponse {
     /**
-      * 环境（命名空间）名称。
+      * 命名空间名称。
       */
     EnvironmentId?: string;
     /**
@@ -849,6 +1157,10 @@ export interface CreateEnvironmentResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Remark?: string;
+    /**
+      * 命名空间ID
+      */
+    NamespaceId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -874,6 +1186,10 @@ export interface ResetMsgSubOffsetByTimestampRequest {
       * 时间戳，精确到毫秒。
       */
     ToTimestamp: number;
+    /**
+      * Pulsar 集群的ID
+      */
+    ClusterId?: string;
 }
 /**
  * 生产者
@@ -965,44 +1281,86 @@ export interface DeleteEnvironmentsRequest {
       * 环境（命名空间）数组，每次最多删除20个。
       */
     EnvironmentIds: Array<string>;
+    /**
+      * Pulsar 集群的ID
+      */
+    ClusterId?: string;
 }
 /**
- * 环境角色集合
+ * DescribeClusterDetail返回参数结构体
  */
-export interface EnvironmentRole {
+export interface DescribeClusterDetailResponse {
     /**
-      * 环境（命名空间）。
+      * 集群的详细信息
       */
-    EnvironmentId: string;
+    ClusterSet?: Cluster;
     /**
-      * 角色名称。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    RoleName: string;
+    RequestId?: string;
+}
+/**
+ * 集群信息集合
+ */
+export interface Cluster {
     /**
-      * 授权项，最多只能包含produce、consume两项的非空字符串数组。
+      * 集群Id。
       */
-    Permissions: Array<string>;
+    ClusterId: string;
     /**
-      * 角色描述。
+      * 集群名称。
       */
-    RoleDescribe: string;
+    ClusterName: string;
     /**
-      * 创建时间。
+      * 说明信息。
+      */
+    Remark: string;
+    /**
+      * 接入点数量
+      */
+    EndPointNum: number;
+    /**
+      * 创建时间
       */
     CreateTime: string;
     /**
-      * 更新时间。
+      * 集群是否健康，1表示健康，0表示异常
       */
-    UpdateTime: string;
+    Healthy: number;
+    /**
+      * 集群健康信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HealthyInfo: string;
+    /**
+      * 集群状态，0:创建中，1:正常，2:删除中，3:已删除，5:创建失败，6: 删除失败
+      */
+    Status: number;
+    /**
+      * 最大命名空间数量
+      */
+    MaxNamespaceNum: number;
+    /**
+      * 最大Topic数量
+      */
+    MaxTopicNum: number;
+    /**
+      * 最大QPS
+      */
+    MaxQps: number;
+    /**
+      * 消息保留时间
+      */
+    MessageRetentionTime: number;
+    /**
+      * 最大存储容量
+      */
+    MaxStorageCapacity: number;
 }
 /**
- * DescribeEnvironments请求参数结构体
+ * DescribeBindVpcs请求参数结构体
  */
-export interface DescribeEnvironmentsRequest {
-    /**
-      * 环境（命名空间）名称，模糊搜索。
-      */
-    EnvironmentId?: string;
+export interface DescribeBindVpcsRequest {
     /**
       * 起始下标，不填默认为0。
       */
@@ -1011,19 +1369,41 @@ export interface DescribeEnvironmentsRequest {
       * 返回数量，不填则默认为10，最大值为20。
       */
     Limit?: number;
+    /**
+      * Pulsar 集群的ID
+      */
+    ClusterId?: string;
 }
 /**
- * 主题关键信息
+ * DescribeClusters返回参数结构体
  */
-export interface TopicRecord {
+export interface DescribeClustersResponse {
     /**
-      * 环境（命名空间）名称。
+      * 集群列表数量
       */
-    EnvironmentId: string;
+    TotalCount?: number;
     /**
-      * 主题名称。
+      * 集群信息列表
       */
-    TopicName: string;
+    ClusterSet?: Array<Cluster>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ResetMsgSubOffsetByTimestamp返回参数结构体
+ */
+export interface ResetMsgSubOffsetByTimestampResponse {
+    /**
+      * 结果。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result?: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateEnvironment请求参数结构体
@@ -1041,6 +1421,10 @@ export interface CreateEnvironmentRequest {
       * 说明，128个字符以内。
       */
     Remark?: string;
+    /**
+      * Pulsar 集群的ID
+      */
+    ClusterId?: string;
 }
 /**
  * DescribeEnvironmentRoles请求参数结构体
@@ -1049,7 +1433,7 @@ export interface DescribeEnvironmentRolesRequest {
     /**
       * 环境（命名空间）
       */
-    EnvironmentId: string;
+    EnvironmentId?: string;
     /**
       * 起始下标，不填默认为0。
       */
@@ -1058,4 +1442,12 @@ export interface DescribeEnvironmentRolesRequest {
       * 返回数量，不填则默认为10，最大值为20。
       */
     Limit?: number;
+    /**
+      * Pulsar 集群的ID
+      */
+    ClusterId?: string;
+    /**
+      * 角色名称
+      */
+    RoleName?: string;
 }

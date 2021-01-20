@@ -18,9 +18,9 @@ const client = new tencentcloud.tdmq.v20200217.Client({
 })
 describe("tdmq.v20200217.test.js", function () {
 
-it("tdmq.v20200217.CreateTopic", async function () {
+it("tdmq.v20200217.DeleteEnvironments", async function () {
     try {
-       const data = await client.CreateTopic({})
+       const data = await client.DeleteEnvironments({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -28,9 +28,19 @@ it("tdmq.v20200217.CreateTopic", async function () {
     }
 })
 
-it("tdmq.v20200217.DeleteEnvironments", async function () {
+it("tdmq.v20200217.DescribeBindVpcs", async function () {
     try {
-       const data = await client.DeleteEnvironments({})
+       const data = await client.DescribeBindVpcs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.CreateCluster", async function () {
+    try {
+       const data = await client.CreateCluster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,6 +58,26 @@ it("tdmq.v20200217.ModifyTopic", async function () {
     }
 })
 
+it("tdmq.v20200217.DeleteCluster", async function () {
+    try {
+       const data = await client.DeleteCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.DescribeEnvironmentRoles", async function () {
+    try {
+       const data = await client.DescribeEnvironmentRoles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmq.v20200217.DeleteTopics", async function () {
     try {
        const data = await client.DeleteTopics({})
@@ -58,9 +88,9 @@ it("tdmq.v20200217.DeleteTopics", async function () {
     }
 })
 
-it("tdmq.v20200217.CreateSubscription", async function () {
+it("tdmq.v20200217.DescribeBindClusters", async function () {
     try {
-       const data = await client.CreateSubscription({})
+       const data = await client.DescribeBindClusters({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -68,9 +98,9 @@ it("tdmq.v20200217.CreateSubscription", async function () {
     }
 })
 
-it("tdmq.v20200217.DescribeSubscriptions", async function () {
+it("tdmq.v20200217.DescribeClusters", async function () {
     try {
-       const data = await client.DescribeSubscriptions({})
+       const data = await client.DescribeClusters({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,39 +108,9 @@ it("tdmq.v20200217.DescribeSubscriptions", async function () {
     }
 })
 
-it("tdmq.v20200217.DescribeTopics", async function () {
+it("tdmq.v20200217.CreateTopic", async function () {
     try {
-       const data = await client.DescribeTopics({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tdmq.v20200217.DescribeEnvironmentAttributes", async function () {
-    try {
-       const data = await client.DescribeEnvironmentAttributes({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tdmq.v20200217.ModifyEnvironmentAttributes", async function () {
-    try {
-       const data = await client.ModifyEnvironmentAttributes({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tdmq.v20200217.CreateEnvironment", async function () {
-    try {
-       const data = await client.CreateEnvironment({})
+       const data = await client.CreateTopic({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,9 +128,29 @@ it("tdmq.v20200217.DescribeEnvironments", async function () {
     }
 })
 
-it("tdmq.v20200217.ResetMsgSubOffsetByTimestamp", async function () {
+it("tdmq.v20200217.DescribeClusterDetail", async function () {
     try {
-       const data = await client.ResetMsgSubOffsetByTimestamp({})
+       const data = await client.DescribeClusterDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.DescribeSubscriptions", async function () {
+    try {
+       const data = await client.DescribeSubscriptions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.CreateEnvironment", async function () {
+    try {
+       const data = await client.CreateEnvironment({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,9 +168,59 @@ it("tdmq.v20200217.DescribeProducers", async function () {
     }
 })
 
-it("tdmq.v20200217.DescribeEnvironmentRoles", async function () {
+it("tdmq.v20200217.DescribeTopics", async function () {
     try {
-       const data = await client.DescribeEnvironmentRoles({})
+       const data = await client.DescribeTopics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.ModifyCluster", async function () {
+    try {
+       const data = await client.ModifyCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.ModifyEnvironmentAttributes", async function () {
+    try {
+       const data = await client.ModifyEnvironmentAttributes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.CreateSubscription", async function () {
+    try {
+       const data = await client.CreateSubscription({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.DescribeEnvironmentAttributes", async function () {
+    try {
+       const data = await client.DescribeEnvironmentAttributes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.ResetMsgSubOffsetByTimestamp", async function () {
+    try {
+       const data = await client.ResetMsgSubOffsetByTimestamp({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

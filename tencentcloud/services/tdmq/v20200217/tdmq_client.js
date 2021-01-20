@@ -28,16 +28,22 @@ class Client extends abstract_client_1.AbstractClient {
         super("tdmq.tencentcloudapi.com", "2020-02-17", clientConfig);
     }
     /**
-     * 新增指定分区、类型的消息主题
-     */
-    async CreateTopic(req, cb) {
-        return this.request("CreateTopic", req, cb);
-    }
-    /**
      * 批量删除租户下的环境
      */
     async DeleteEnvironments(req, cb) {
         return this.request("DeleteEnvironments", req, cb);
+    }
+    /**
+     * 获取租户VPC绑定关系
+     */
+    async DescribeBindVpcs(req, cb) {
+        return this.request("DescribeBindVpcs", req, cb);
+    }
+    /**
+     * 创建用户的集群
+     */
+    async CreateCluster(req, cb) {
+        return this.request("CreateCluster", req, cb);
     }
     /**
      * 修改主题备注和分区数
@@ -46,46 +52,40 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyTopic", req, cb);
     }
     /**
+     * 删除集群
+     */
+    async DeleteCluster(req, cb) {
+        return this.request("DeleteCluster", req, cb);
+    }
+    /**
+     * 获取环境角色列表
+     */
+    async DescribeEnvironmentRoles(req, cb) {
+        return this.request("DescribeEnvironmentRoles", req, cb);
+    }
+    /**
      * 批量删除topics
      */
     async DeleteTopics(req, cb) {
         return this.request("DeleteTopics", req, cb);
     }
     /**
-     * 创建一个主题的订阅关系
+     * 获取用户绑定的专享集群列表
      */
-    async CreateSubscription(req, cb) {
-        return this.request("CreateSubscription", req, cb);
+    async DescribeBindClusters(req, cb) {
+        return this.request("DescribeBindClusters", req, cb);
     }
     /**
-     * 查询指定环境和主题下的订阅者列表
+     * 获取集群列表
      */
-    async DescribeSubscriptions(req, cb) {
-        return this.request("DescribeSubscriptions", req, cb);
+    async DescribeClusters(req, cb) {
+        return this.request("DescribeClusters", req, cb);
     }
     /**
-     * 获取环境下主题列表
+     * 新增指定分区、类型的消息主题
      */
-    async DescribeTopics(req, cb) {
-        return this.request("DescribeTopics", req, cb);
-    }
-    /**
-     * 获取指定环境的属性
-     */
-    async DescribeEnvironmentAttributes(req, cb) {
-        return this.request("DescribeEnvironmentAttributes", req, cb);
-    }
-    /**
-     * 修改指定环境的属性值
-     */
-    async ModifyEnvironmentAttributes(req, cb) {
-        return this.request("ModifyEnvironmentAttributes", req, cb);
-    }
-    /**
-     * 用于在用户账户下创建消息队列 Tdmq环境（命名空间）
-     */
-    async CreateEnvironment(req, cb) {
-        return this.request("CreateEnvironment", req, cb);
+    async CreateTopic(req, cb) {
+        return this.request("CreateTopic", req, cb);
     }
     /**
      * 获取租户下环境列表
@@ -94,10 +94,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEnvironments", req, cb);
     }
     /**
-     * 根据时间戳进行消息回溯，精确到毫秒
+     * 获取集群的详细信息
      */
-    async ResetMsgSubOffsetByTimestamp(req, cb) {
-        return this.request("ResetMsgSubOffsetByTimestamp", req, cb);
+    async DescribeClusterDetail(req, cb) {
+        return this.request("DescribeClusterDetail", req, cb);
+    }
+    /**
+     * 查询指定环境和主题下的订阅者列表
+     */
+    async DescribeSubscriptions(req, cb) {
+        return this.request("DescribeSubscriptions", req, cb);
+    }
+    /**
+     * 用于在用户账户下创建消息队列 Tdmq环境（命名空间）
+     */
+    async CreateEnvironment(req, cb) {
+        return this.request("CreateEnvironment", req, cb);
     }
     /**
      * 获取生产者列表，仅显示在线的生产者
@@ -106,10 +118,40 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeProducers", req, cb);
     }
     /**
-     * 获取环境角色列表
+     * 获取环境下主题列表
      */
-    async DescribeEnvironmentRoles(req, cb) {
-        return this.request("DescribeEnvironmentRoles", req, cb);
+    async DescribeTopics(req, cb) {
+        return this.request("DescribeTopics", req, cb);
+    }
+    /**
+     * 更新集群信息
+     */
+    async ModifyCluster(req, cb) {
+        return this.request("ModifyCluster", req, cb);
+    }
+    /**
+     * 修改指定环境的属性值
+     */
+    async ModifyEnvironmentAttributes(req, cb) {
+        return this.request("ModifyEnvironmentAttributes", req, cb);
+    }
+    /**
+     * 创建一个主题的订阅关系
+     */
+    async CreateSubscription(req, cb) {
+        return this.request("CreateSubscription", req, cb);
+    }
+    /**
+     * 获取指定环境的属性
+     */
+    async DescribeEnvironmentAttributes(req, cb) {
+        return this.request("DescribeEnvironmentAttributes", req, cb);
+    }
+    /**
+     * 根据时间戳进行消息回溯，精确到毫秒
+     */
+    async ResetMsgSubOffsetByTimestamp(req, cb) {
+        return this.request("ResetMsgSubOffsetByTimestamp", req, cb);
     }
     /**
      * 删除订阅关系

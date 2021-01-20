@@ -36,7 +36,37 @@ export interface DescribePublicConfigSummaryRequest {
 }
 
 /**
- * ApiDetailResponse
+ * ModifyPathRewrite请求参数结构体
+ */
+export interface ModifyPathRewriteRequest {
+  /**
+   * 路径重写规则ID
+   */
+  PathRewriteId: string
+
+  /**
+   * 正则表达式
+   */
+  Regex?: string
+
+  /**
+   * 替换的内容
+   */
+  Replacement?: string
+
+  /**
+   * 是否屏蔽映射后路径，Y: 是 N: 否
+   */
+  Blocked?: string
+
+  /**
+   * 规则顺序，越小优先级越高
+   */
+  Order?: number
+}
+
+/**
+ * ApiDetailResponse描述
  */
 export interface ApiDetailResponse {
   /**
@@ -72,6 +102,12 @@ export interface ApiDetailResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Status: number
+
+  /**
+      * API 描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Description: string
 }
 
 /**
@@ -116,33 +152,18 @@ export interface CosCredentials {
 }
 
 /**
- * DescribeImageTags请求参数结构体
+ * DeletePathRewrites返回参数结构体
  */
-export interface DescribeImageTagsRequest {
+export interface DeletePathRewritesResponse {
   /**
-   * 应用Id
+   * true/false
    */
-  ApplicationId: string
+  Result?: boolean
 
   /**
-   * 偏移量，取值从0开始
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Offset?: number
-
-  /**
-   * 分页个数，默认为20， 取值应为1~100
-   */
-  Limit?: number
-
-  /**
-   * 不填和0:查询 1:不查询
-   */
-  QueryImageIdFlag?: number
-
-  /**
-   * 可用于搜索的 tag 名字
-   */
-  SearchWord?: string
+  RequestId?: string
 }
 
 /**
@@ -190,6 +211,16 @@ false：停止失败
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeletePathRewrites请求参数结构体
+ */
+export interface DeletePathRewritesRequest {
+  /**
+   * 路径重写规则IDs
+   */
+  PathRewriteIds: Array<string>
 }
 
 /**
@@ -325,6 +356,21 @@ export interface UpdateRepositoryRequest {
    * 仓库描述
    */
   RepositoryDesc?: string
+}
+
+/**
+ * DescribePathRewrite返回参数结构体
+ */
+export interface DescribePathRewriteResponse {
+  /**
+   * 路径重写规则对象
+   */
+  Result?: PathRewrite
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -606,6 +652,21 @@ export interface CreateMicroserviceRequest {
    * 微服务描述信息
    */
   MicroserviceDesc?: string
+}
+
+/**
+ * 路径重写翻页对象
+ */
+export interface PathRewritePage {
+  /**
+   * 总记录数
+   */
+  TotalCount: number
+
+  /**
+   * 路径重写规则列表
+   */
+  Content: Array<PathRewrite>
 }
 
 /**
@@ -1540,6 +1601,11 @@ export interface CreateNamespaceRequest {
    * 是否开启高可用
    */
   IsHaEnable?: string
+
+  /**
+   * 需要绑定的数据集ID
+   */
+  ProgramId?: string
 }
 
 /**
@@ -3569,6 +3635,16 @@ export interface AddClusterInstancesRequest {
    * 镜像特征ID列表
    */
   FeatureIdList?: Array<string>
+
+  /**
+   * 实例额外需要设置参数信息
+   */
+  InstanceAdvancedSettings?: InstanceAdvancedSettings
+
+  /**
+   * 部署组ID
+   */
+  SecurityGroupIds?: Array<string>
 }
 
 /**
@@ -4370,13 +4446,28 @@ export interface StartGroupResponse {
 }
 
 /**
- * DescribeServerlessGroup请求参数结构体
+ * DescribePathRewrites请求参数结构体
  */
-export interface DescribeServerlessGroupRequest {
+export interface DescribePathRewritesRequest {
   /**
-   * 部署组ID
+   * 网关部署组ID
    */
-  GroupId: string
+  GatewayGroupId: string
+
+  /**
+   * 根据正则表达式或替换的内容模糊查询
+   */
+  SearchWord?: string
+
+  /**
+   * 每页数量
+   */
+  Limit?: number
+
+  /**
+   * 起始偏移量
+   */
+  Offset?: number
 }
 
 /**
@@ -4578,6 +4669,11 @@ export interface CreateApplicationRequest {
    * 应用runtime类型
    */
   ApplicationRuntimeType?: string
+
+  /**
+   * 需要绑定的数据集ID
+   */
+  ProgramId?: string
 }
 
 /**
@@ -4738,6 +4834,16 @@ export interface UnbindApiGroupResponse {
 }
 
 /**
+ * DescribePathRewrite请求参数结构体
+ */
+export interface DescribePathRewriteRequest {
+  /**
+   * 路径重写规则ID
+   */
+  PathRewriteId: string
+}
+
+/**
  * CreateApplication返回参数结构体
  */
 export interface CreateApplicationResponse {
@@ -4824,6 +4930,21 @@ export interface TaskId {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TaskId: string
+}
+
+/**
+ * ModifyPathRewrite返回参数结构体
+ */
+export interface ModifyPathRewriteResponse {
+  /**
+   * true/false
+   */
+  Result?: boolean
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5327,6 +5448,12 @@ export interface ApplicationForPage {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ApigatewayServiceId: string
+
+  /**
+      * 应用备注名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationRemarkName: string
 }
 
 /**
@@ -5545,6 +5672,41 @@ export interface CreateAllGatewayApiAsyncRequest {
    * 微服务ID
    */
   MicroserviceId: string
+}
+
+/**
+ * 路径重写
+ */
+export interface PathRewrite {
+  /**
+   * 路径重写规则ID
+   */
+  PathRewriteId: string
+
+  /**
+   * 网关部署组ID
+   */
+  GatewayGroupId: string
+
+  /**
+   * 正则表达式
+   */
+  Regex: string
+
+  /**
+   * 替换的内容
+   */
+  Replacement: string
+
+  /**
+   * 是否屏蔽映射后路径，Y: 是 N: 否
+   */
+  Blocked: string
+
+  /**
+   * 规则顺序，越小优先级越高
+   */
+  Order: number
 }
 
 /**
@@ -6475,6 +6637,36 @@ export interface DescribeRepositoryResponse {
 }
 
 /**
+ * 路径重写创建对象
+ */
+export interface PathRewriteCreateObject {
+  /**
+   * 网关部署组ID
+   */
+  GatewayGroupId: string
+
+  /**
+   * 正则表达式
+   */
+  Regex: string
+
+  /**
+   * 替换的内容
+   */
+  Replacement: string
+
+  /**
+   * 是否屏蔽映射后路径，Y: 是 N: 否
+   */
+  Blocked: string
+
+  /**
+   * 规则顺序，越小优先级越高
+   */
+  Order: number
+}
+
+/**
  * DescribeApiGroups请求参数结构体
  */
 export interface DescribeApiGroupsRequest {
@@ -6517,6 +6709,16 @@ export interface DescribeApiGroupsRequest {
    * 排序类型：0(ASC)或1(DESC)
    */
   OrderType?: number
+}
+
+/**
+ * DescribeServerlessGroup请求参数结构体
+ */
+export interface DescribeServerlessGroupRequest {
+  /**
+   * 部署组ID
+   */
+  GroupId: string
 }
 
 /**
@@ -7030,6 +7232,24 @@ export interface ServerlessGroupPage {
 }
 
 /**
+ * 容器导入实例高级设置
+ */
+export interface InstanceAdvancedSettings {
+  /**
+      * 数据盘挂载点, 默认不挂载数据盘. 已格式化的 ext3，ext4，xfs 文件系统的数据盘将直接挂载，其他文件系统或未格式化的数据盘将自动格式化为ext4 并挂载，请注意备份数据! 无数据盘或有多块数据盘的云主机此设置不生效。
+注意，注意，多盘场景请使用下方的DataDisks数据结构，设置对应的云盘类型、云盘大小、挂载路径、是否格式化等信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MountTarget: string
+
+  /**
+      * dockerd --graph 指定值, 默认为 /var/lib/docker
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DockerGraphPath: string
+}
+
+/**
  * API监控明细数据
  */
 export interface GroupApiUseStatistics {
@@ -7438,6 +7658,41 @@ export interface ApiInfo {
    * api描述信息
    */
   Description?: string
+}
+
+/**
+ * CreateRepository请求参数结构体
+ */
+export interface CreateRepositoryRequest {
+  /**
+   * 仓库名称
+   */
+  RepositoryName: string
+
+  /**
+   * 仓库类型（默认仓库：default，私有仓库：private）
+   */
+  RepositoryType: string
+
+  /**
+   * 仓库所在桶名称
+   */
+  BucketName: string
+
+  /**
+   * 仓库所在桶地域
+   */
+  BucketRegion: string
+
+  /**
+   * 目录
+   */
+  Directory?: string
+
+  /**
+   * 仓库描述
+   */
+  RepositoryDesc?: string
 }
 
 /**
@@ -8502,6 +8757,21 @@ export interface CreateClusterRequest {
    * 集群版本
    */
   ClusterVersion?: string
+
+  /**
+   * 集群中每个Node上最大的Pod数量。取值范围4～256。不为2的幂值时会向上取最接近的2的幂值。
+   */
+  MaxNodePodNum?: number
+
+  /**
+   * 集群最大的service数量。取值范围32～32768，不为2的幂值时会向上取最接近的2的幂值。
+   */
+  MaxClusterServiceNum?: number
+
+  /**
+   * 需要绑定的数据集ID
+   */
+  ProgramId?: string
 }
 
 /**
@@ -8818,6 +9088,21 @@ export interface GroupUseStatisticsEntity {
 }
 
 /**
+ * DescribePathRewrites返回参数结构体
+ */
+export interface DescribePathRewritesResponse {
+  /**
+   * 路径重写翻页对象
+   */
+  Result?: PathRewritePage
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 添加实例到集群的结果
  */
 export interface AddInstanceResult {
@@ -8838,6 +9123,12 @@ export interface AddInstanceResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TimeoutInstanceIds: Array<string>
+
+  /**
+      * 失败的节点的失败原因
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailedReasons: Array<string>
 }
 
 /**
@@ -9321,38 +9612,13 @@ export interface OperationInfoDetail {
 }
 
 /**
- * CreateRepository请求参数结构体
+ * CreatePathRewrites请求参数结构体
  */
-export interface CreateRepositoryRequest {
+export interface CreatePathRewritesRequest {
   /**
-   * 仓库名称
+   * 路径重写列表
    */
-  RepositoryName: string
-
-  /**
-   * 仓库类型（默认仓库：default，私有仓库：private）
-   */
-  RepositoryType: string
-
-  /**
-   * 仓库所在桶名称
-   */
-  BucketName: string
-
-  /**
-   * 仓库所在桶地域
-   */
-  BucketRegion: string
-
-  /**
-   * 目录
-   */
-  Directory?: string
-
-  /**
-   * 仓库描述
-   */
-  RepositoryDesc?: string
+  PathRewrites: PathRewriteCreateObject
 }
 
 /**
@@ -9414,6 +9680,36 @@ export interface DescribeImageRepositoryResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeImageTags请求参数结构体
+ */
+export interface DescribeImageTagsRequest {
+  /**
+   * 应用Id
+   */
+  ApplicationId: string
+
+  /**
+   * 偏移量，取值从0开始
+   */
+  Offset?: number
+
+  /**
+   * 分页个数，默认为20， 取值应为1~100
+   */
+  Limit?: number
+
+  /**
+   * 不填和0:查询 1:不查询
+   */
+  QueryImageIdFlag?: number
+
+  /**
+   * 可用于搜索的 tag 名字
+   */
+  SearchWord?: string
 }
 
 /**
@@ -9565,6 +9861,21 @@ export interface DescribePublicConfigReleasesResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Result?: TsfPageConfigRelease
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreatePathRewrites返回参数结构体
+ */
+export interface CreatePathRewritesResponse {
+  /**
+   * true/false
+   */
+  Result?: boolean
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

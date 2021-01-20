@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DuplicateImagePersonalRequest,
   DescribeImagePersonalResponse,
   DescribeUserQuotaPersonalRequest,
   WebhookTarget,
@@ -152,6 +153,7 @@ import {
   ManageInternalEndpointResponse,
   DescribeRepositoryFilterPersonalResponse,
   DescribeFavorRepositoryPersonalResponse,
+  CheckInstanceNameResponse,
   ModifyRepositoryAccessPersonalResponse,
   ModifyApplicationTriggerPersonalRequest,
   CreateInstanceTokenRequest,
@@ -170,7 +172,7 @@ import {
   TriggerResp,
   CreateRepositoryResponse,
   RespLimit,
-  DuplicateImagePersonalRequest,
+  CheckInstanceNameRequest,
   DescribeInstanceTokenResponse,
   SameImagesResp,
   CreateNamespacePersonalRequest,
@@ -237,16 +239,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于在企业版中创建命名空间
-   */
-  async CreateNamespace(
-    req: CreateNamespaceRequest,
-    cb?: (error: string, rep: CreateNamespaceResponse) => void
-  ): Promise<CreateNamespaceResponse> {
-    return this.request("CreateNamespace", req, cb)
-  }
-
-  /**
    * 用于获取个人版镜像仓库tag列表
    */
   async DescribeImagePersonal(
@@ -277,13 +269,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除镜像仓库企业版实例
+   * 用于在企业版中创建命名空间
    */
-  async DeleteInstance(
-    req: DeleteInstanceRequest,
-    cb?: (error: string, rep: DeleteInstanceResponse) => void
-  ): Promise<DeleteInstanceResponse> {
-    return this.request("DeleteInstance", req, cb)
+  async CreateNamespace(
+    req: CreateNamespaceRequest,
+    cb?: (error: string, rep: CreateNamespaceResponse) => void
+  ): Promise<CreateNamespaceResponse> {
+    return this.request("CreateNamespace", req, cb)
   }
 
   /**
@@ -327,6 +319,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除镜像仓库企业版实例
+   */
+  async DeleteInstance(
+    req: DeleteInstanceRequest,
+    cb?: (error: string, rep: DeleteInstanceResponse) => void
+  ): Promise<DeleteInstanceResponse> {
+    return this.request("DeleteInstance", req, cb)
+  }
+
+  /**
    * 查询镜像仓库列表或指定镜像仓库信息
    */
   async DescribeRepositories(
@@ -364,6 +366,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeWebhookTriggerLogResponse) => void
   ): Promise<DescribeWebhookTriggerLogResponse> {
     return this.request("DescribeWebhookTriggerLog", req, cb)
+  }
+
+  /**
+   * 检查待创建的实例名称是否符合规范
+   */
+  async CheckInstanceName(
+    req: CheckInstanceNameRequest,
+    cb?: (error: string, rep: CheckInstanceNameResponse) => void
+  ): Promise<CheckInstanceNameResponse> {
+    return this.request("CheckInstanceName", req, cb)
   }
 
   /**

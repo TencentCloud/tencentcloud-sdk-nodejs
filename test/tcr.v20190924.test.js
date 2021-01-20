@@ -58,16 +58,6 @@ it("tcr.v20190924.CreateImageLifecyclePersonal", async function () {
     }
 })
 
-it("tcr.v20190924.CreateNamespace", async function () {
-    try {
-       const data = await client.CreateNamespace({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tcr.v20190924.DescribeImagePersonal", async function () {
     try {
        const data = await client.DescribeImagePersonal({})
@@ -98,9 +88,9 @@ it("tcr.v20190924.DescribeImageLifecycleGlobalPersonal", async function () {
     }
 })
 
-it("tcr.v20190924.DeleteInstance", async function () {
+it("tcr.v20190924.CreateNamespace", async function () {
     try {
-       const data = await client.DeleteInstance({})
+       const data = await client.CreateNamespace({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,6 +138,16 @@ it("tcr.v20190924.DeleteRepository", async function () {
     }
 })
 
+it("tcr.v20190924.DeleteInstance", async function () {
+    try {
+       const data = await client.DeleteInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.DescribeRepositories", async function () {
     try {
        const data = await client.DescribeRepositories({})
@@ -181,6 +181,16 @@ it("tcr.v20190924.ModifyRepositoryInfoPersonal", async function () {
 it("tcr.v20190924.DescribeWebhookTriggerLog", async function () {
     try {
        const data = await client.DescribeWebhookTriggerLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcr.v20190924.CheckInstanceName", async function () {
+    try {
+       const data = await client.CheckInstanceName({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

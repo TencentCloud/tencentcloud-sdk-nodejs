@@ -16,6 +16,21 @@
  */
 
 /**
+ * DuplicateImagePersonal请求参数结构体
+ */
+export interface DuplicateImagePersonalRequest {
+  /**
+   * 源镜像名称，不包含domain。例如： tencentyun/foo:v1
+   */
+  SrcImage: string
+
+  /**
+   * 目的镜像名称，不包含domain。例如： tencentyun/foo:latest
+   */
+  DestImage: string
+}
+
+/**
  * DescribeImagePersonal返回参数结构体
  */
 export interface DescribeImagePersonalResponse {
@@ -2571,6 +2586,21 @@ export interface DescribeFavorRepositoryPersonalResponse {
 }
 
 /**
+ * CheckInstanceName返回参数结构体
+ */
+export interface CheckInstanceNameResponse {
+  /**
+   * 检查结果，true为合法，false为非法
+   */
+  IsValidated?: boolean
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyRepositoryAccessPersonal返回参数结构体
  */
 export interface ModifyRepositoryAccessPersonalResponse {
@@ -3019,18 +3049,13 @@ export interface RespLimit {
 }
 
 /**
- * DuplicateImagePersonal请求参数结构体
+ * CheckInstanceName请求参数结构体
  */
-export interface DuplicateImagePersonalRequest {
+export interface CheckInstanceNameRequest {
   /**
-   * 源镜像名称，不包含domain。例如： tencentyun/foo:v1
+   * 待创建的实例名称
    */
-  SrcImage: string
-
-  /**
-   * 目的镜像名称，不包含domain。例如： tencentyun/foo:latest
-   */
-  DestImage: string
+  RegistryName: string
 }
 
 /**

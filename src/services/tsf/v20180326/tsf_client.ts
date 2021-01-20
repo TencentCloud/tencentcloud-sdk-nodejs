@@ -19,12 +19,14 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribePublicConfigSummaryRequest,
+  ModifyPathRewriteRequest,
   ApiDetailResponse,
   CosCredentials,
-  DescribeImageTagsRequest,
+  DeletePathRewritesResponse,
   ReleaseConfigResponse,
   DescribeApiVersionsResponse,
   StopContainerGroupResponse,
+  DeletePathRewritesRequest,
   DeleteLaneResponse,
   DescribeConfigReleaseLogsResponse,
   ContinueRunFailedTaskBatchRequest,
@@ -33,6 +35,7 @@ import {
   DeleteApplicationResponse,
   QuantileEntity,
   UpdateRepositoryRequest,
+  DescribePathRewriteResponse,
   DescribeConfigsResponse,
   ModifyContainerReplicasRequest,
   CreateGatewayApiResponse,
@@ -52,6 +55,7 @@ import {
   DeletePublicConfigRequest,
   DeleteNamespaceResponse,
   CreateMicroserviceRequest,
+  PathRewritePage,
   DeleteImageTagsRequest,
   DescribeRepositoriesRequest,
   RollbackConfigRequest,
@@ -189,7 +193,7 @@ import {
   Microservice,
   StopTaskExecuteResponse,
   StartGroupResponse,
-  DescribeServerlessGroupRequest,
+  DescribePathRewritesRequest,
   ShrinkGroupRequest,
   RepositoryList,
   CreateLaneRuleResponse,
@@ -205,12 +209,14 @@ import {
   ModifyContainerReplicasResponse,
   ApiUseStatisticsEntity,
   UnbindApiGroupResponse,
+  DescribePathRewriteRequest,
   CreateApplicationResponse,
   GatewayGroupIds,
   DeployGroupResponse,
   DescribeServerlessGroupResponse,
   RedoTaskBatchResponse,
   TaskId,
+  ModifyPathRewriteResponse,
   UpdateApiGroupRequest,
   TsfApiListResponse,
   TsfPageGatewayDeployGroup,
@@ -235,6 +241,7 @@ import {
   DescribeGatewayMonitorOverviewResponse,
   CreatePublicConfigRequest,
   CreateAllGatewayApiAsyncRequest,
+  PathRewrite,
   EnableTaskFlowResponse,
   TsfPageConfigRelease,
   DisableTaskFlowResponse,
@@ -266,7 +273,9 @@ import {
   TaskFlowLastBatchState,
   UpdateGatewayApiRequest,
   DescribeRepositoryResponse,
+  PathRewriteCreateObject,
   DescribeApiGroupsRequest,
+  DescribeServerlessGroupRequest,
   ApplicationAttribute,
   DeletePkgsResponse,
   DescribeGroupsResponse,
@@ -287,6 +296,7 @@ import {
   CosDownloadInfo,
   DeletePkgsRequest,
   ServerlessGroupPage,
+  InstanceAdvancedSettings,
   GroupApiUseStatistics,
   ChangeApiUsableStatusResponse,
   EnableTaskResponse,
@@ -305,6 +315,7 @@ import {
   EnableTaskFlowRequest,
   DescribeReleasedConfigRequest,
   ApiInfo,
+  CreateRepositoryRequest,
   ModifyMicroserviceRequest,
   DescribeConfigReleasesRequest,
   GroupDailyUseStatistics,
@@ -347,6 +358,7 @@ import {
   UpdateHealthCheckSettingsResponse,
   ApiRateLimitRule,
   GroupUseStatisticsEntity,
+  DescribePathRewritesResponse,
   AddInstanceResult,
   DescribeFlowLastBatchStateResponse,
   DescribeSimpleGroupsRequest,
@@ -367,14 +379,16 @@ import {
   DescribeGroupsRequest,
   LaneRuleTag,
   OperationInfoDetail,
-  CreateRepositoryRequest,
+  CreatePathRewritesRequest,
   DeleteNamespaceRequest,
   BindApiGroupResponse,
   DescribeMicroserviceResponse,
   DescribeImageRepositoryResponse,
+  DescribeImageTagsRequest,
   DescribeConfigSummaryResponse,
   CreateContainGroupRequest,
   DescribePublicConfigReleasesResponse,
+  CreatePathRewritesResponse,
   DeleteRepositoryRequest,
   DraftApiGroupResponse,
   DescribeConfigSummaryRequest,
@@ -526,13 +540,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询仓库列表
+   * 新增微服务
    */
-  async DescribeRepositories(
-    req: DescribeRepositoriesRequest,
-    cb?: (error: string, rep: DescribeRepositoriesResponse) => void
-  ): Promise<DescribeRepositoriesResponse> {
-    return this.request("DescribeRepositories", req, cb)
+  async CreateMicroservice(
+    req: CreateMicroserviceRequest,
+    cb?: (error: string, rep: CreateMicroserviceResponse) => void
+  ): Promise<CreateMicroserviceResponse> {
+    return this.request("CreateMicroservice", req, cb)
   }
 
   /**
@@ -556,13 +570,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 停用工作流
+   * 查询服务API列表
    */
-  async DisableTaskFlow(
-    req: DisableTaskFlowRequest,
-    cb?: (error: string, rep: DisableTaskFlowResponse) => void
-  ): Promise<DisableTaskFlowResponse> {
-    return this.request("DisableTaskFlow", req, cb)
+  async DescribeMsApiList(
+    req: DescribeMsApiListRequest,
+    cb?: (error: string, rep: DescribeMsApiListResponse) => void
+  ): Promise<DescribeMsApiListResponse> {
+    return this.request("DescribeMsApiList", req, cb)
   }
 
   /**
@@ -735,6 +749,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: DescribeApplicationResponse) => void
   ): Promise<DescribeApplicationResponse> {
     return this.request("DescribeApplication", req, cb)
+  }
+
+  /**
+   * 查询Serverless部署组列表
+   */
+  async DescribeServerlessGroups(
+    req: DescribeServerlessGroupsRequest,
+    cb?: (error: string, rep: DescribeServerlessGroupsResponse) => void
+  ): Promise<DescribeServerlessGroupsResponse> {
+    return this.request("DescribeServerlessGroups", req, cb)
   }
 
   /**
@@ -958,6 +982,26 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
+   * 查询仓库列表
+   */
+  async DescribeRepositories(
+    req: DescribeRepositoriesRequest,
+    cb?: (error: string, rep: DescribeRepositoriesResponse) => void
+  ): Promise<DescribeRepositoriesResponse> {
+    return this.request("DescribeRepositories", req, cb)
+  }
+
+  /**
+   * 停用工作流
+   */
+  async DisableTaskFlow(
+    req: DisableTaskFlowRequest,
+    cb?: (error: string, rep: DisableTaskFlowResponse) => void
+  ): Promise<DisableTaskFlowResponse> {
+    return this.request("DisableTaskFlow", req, cb)
+  }
+
+  /**
    * 一键导入API分组
    */
   async CreateAllGatewayApiAsync(
@@ -1108,13 +1152,13 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 查询Serverless部署组列表
+   * 删除路径重写
    */
-  async DescribeServerlessGroups(
-    req: DescribeServerlessGroupsRequest,
-    cb?: (error: string, rep: DescribeServerlessGroupsResponse) => void
-  ): Promise<DescribeServerlessGroupsResponse> {
-    return this.request("DescribeServerlessGroups", req, cb)
+  async DeletePathRewrites(
+    req: DeletePathRewritesRequest,
+    cb?: (error: string, rep: DeletePathRewritesResponse) => void
+  ): Promise<DeletePathRewritesResponse> {
+    return this.request("DeletePathRewrites", req, cb)
   }
 
   /**
@@ -1179,6 +1223,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
+   * 查询路径重写
+   */
+  async DescribePathRewrite(
+    req: DescribePathRewriteRequest,
+    cb?: (error: string, rep: DescribePathRewriteResponse) => void
+  ): Promise<DescribePathRewriteResponse> {
+    return this.request("DescribePathRewrite", req, cb)
+  }
+
+  /**
    * 启用任务
    */
   async EnableTask(
@@ -1226,6 +1280,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: DeleteTaskResponse) => void
   ): Promise<DeleteTaskResponse> {
     return this.request("DeleteTask", req, cb)
+  }
+
+  /**
+   * 查询路径重写列表
+   */
+  async DescribePathRewrites(
+    req: DescribePathRewritesRequest,
+    cb?: (error: string, rep: DescribePathRewritesResponse) => void
+  ): Promise<DescribePathRewritesResponse> {
+    return this.request("DescribePathRewrites", req, cb)
   }
 
   /**
@@ -1299,16 +1363,6 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 新增微服务
-   */
-  async CreateMicroservice(
-    req: CreateMicroserviceRequest,
-    cb?: (error: string, rep: CreateMicroserviceResponse) => void
-  ): Promise<CreateMicroserviceResponse> {
-    return this.request("CreateMicroservice", req, cb)
-  }
-
-  /**
    * 修改微服务详情
    */
   async ModifyMicroservice(
@@ -1329,13 +1383,13 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
-   * 查询服务API列表
+   * 创建路径重写
    */
-  async DescribeMsApiList(
-    req: DescribeMsApiListRequest,
-    cb?: (error: string, rep: DescribeMsApiListResponse) => void
-  ): Promise<DescribeMsApiListResponse> {
-    return this.request("DescribeMsApiList", req, cb)
+  async CreatePathRewrites(
+    req: CreatePathRewritesRequest,
+    cb?: (error: string, rep: CreatePathRewritesResponse) => void
+  ): Promise<CreatePathRewritesResponse> {
+    return this.request("CreatePathRewrites", req, cb)
   }
 
   /**
@@ -1356,6 +1410,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: CreateApplicationResponse) => void
   ): Promise<CreateApplicationResponse> {
     return this.request("CreateApplication", req, cb)
+  }
+
+  /**
+   * 修改路径重写
+   */
+  async ModifyPathRewrite(
+    req: ModifyPathRewriteRequest,
+    cb?: (error: string, rep: ModifyPathRewriteResponse) => void
+  ): Promise<ModifyPathRewriteResponse> {
+    return this.request("ModifyPathRewrite", req, cb)
   }
 
   /**

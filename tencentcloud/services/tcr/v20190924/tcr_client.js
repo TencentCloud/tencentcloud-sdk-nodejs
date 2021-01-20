@@ -52,12 +52,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateImageLifecyclePersonal", req, cb);
     }
     /**
-     * 用于在企业版中创建命名空间
-     */
-    async CreateNamespace(req, cb) {
-        return this.request("CreateNamespace", req, cb);
-    }
-    /**
      * 用于获取个人版镜像仓库tag列表
      */
     async DescribeImagePersonal(req, cb) {
@@ -76,10 +70,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeImageLifecycleGlobalPersonal", req, cb);
     }
     /**
-     * 删除镜像仓库企业版实例
+     * 用于在企业版中创建命名空间
      */
-    async DeleteInstance(req, cb) {
-        return this.request("DeleteInstance", req, cb);
+    async CreateNamespace(req, cb) {
+        return this.request("CreateNamespace", req, cb);
     }
     /**
      * 用于修改应用更新触发器
@@ -106,6 +100,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteRepository", req, cb);
     }
     /**
+     * 删除镜像仓库企业版实例
+     */
+    async DeleteInstance(req, cb) {
+        return this.request("DeleteInstance", req, cb);
+    }
+    /**
      * 查询镜像仓库列表或指定镜像仓库信息
      */
     async DescribeRepositories(req, cb) {
@@ -128,6 +128,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeWebhookTriggerLog(req, cb) {
         return this.request("DescribeWebhookTriggerLog", req, cb);
+    }
+    /**
+     * 检查待创建的实例名称是否符合规范
+     */
+    async CheckInstanceName(req, cb) {
+        return this.request("CheckInstanceName", req, cb);
     }
     /**
      * 查询镜像版本列表或指定容器镜像信息

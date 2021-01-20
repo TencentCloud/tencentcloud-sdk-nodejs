@@ -3329,6 +3329,18 @@ Public：公网属性， Private：内网属性。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Isolation: number
+
+  /**
+      * 负载均衡绑定的安全组列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SecurityGroup: Array<string>
+
+  /**
+      * 负载均衡安全组上移特性是否开启标识。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LoadBalancerPassToTarget: number
 }
 
 /**
@@ -4665,4 +4677,10 @@ OPEN：公网属性， INTERNAL：内网属性。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Zones?: Array<string>
+
+  /**
+      * CLB是否为NFV，空：不是，l7nfv：七层是NFV。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NfvInfo?: string
 }

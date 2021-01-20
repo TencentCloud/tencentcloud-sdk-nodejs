@@ -148,9 +148,9 @@ it("tsf.v20180326.DescribePublicConfigSummary", async function () {
     }
 })
 
-it("tsf.v20180326.DescribeRepositories", async function () {
+it("tsf.v20180326.CreateMicroservice", async function () {
     try {
-       const data = await client.DescribeRepositories({})
+       const data = await client.CreateMicroservice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,9 +178,9 @@ it("tsf.v20180326.DisableTask", async function () {
     }
 })
 
-it("tsf.v20180326.DisableTaskFlow", async function () {
+it("tsf.v20180326.DescribeMsApiList", async function () {
     try {
-       const data = await client.DisableTaskFlow({})
+       const data = await client.DescribeMsApiList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -351,6 +351,16 @@ it("tsf.v20180326.DescribeGroupBindedGateways", async function () {
 it("tsf.v20180326.DescribeApplication", async function () {
     try {
        const data = await client.DescribeApplication({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tsf.v20180326.DescribeServerlessGroups", async function () {
+    try {
+       const data = await client.DescribeServerlessGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -578,6 +588,26 @@ it("tsf.v20180326.DescribeImageRepository", async function () {
     }
 })
 
+it("tsf.v20180326.DescribeRepositories", async function () {
+    try {
+       const data = await client.DescribeRepositories({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tsf.v20180326.DisableTaskFlow", async function () {
+    try {
+       const data = await client.DisableTaskFlow({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tsf.v20180326.CreateAllGatewayApiAsync", async function () {
     try {
        const data = await client.CreateAllGatewayApiAsync({})
@@ -728,9 +758,9 @@ it("tsf.v20180326.ReleaseApiGroup", async function () {
     }
 })
 
-it("tsf.v20180326.DescribeServerlessGroups", async function () {
+it("tsf.v20180326.DeletePathRewrites", async function () {
     try {
-       const data = await client.DescribeServerlessGroups({})
+       const data = await client.DeletePathRewrites({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -798,6 +828,16 @@ it("tsf.v20180326.DescribePublicConfigs", async function () {
     }
 })
 
+it("tsf.v20180326.DescribePathRewrite", async function () {
+    try {
+       const data = await client.DescribePathRewrite({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tsf.v20180326.EnableTask", async function () {
     try {
        const data = await client.EnableTask({})
@@ -841,6 +881,16 @@ it("tsf.v20180326.ExpandGroup", async function () {
 it("tsf.v20180326.DeleteTask", async function () {
     try {
        const data = await client.DeleteTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tsf.v20180326.DescribePathRewrites", async function () {
+    try {
+       const data = await client.DescribePathRewrites({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -918,16 +968,6 @@ it("tsf.v20180326.ModifyLane", async function () {
     }
 })
 
-it("tsf.v20180326.CreateMicroservice", async function () {
-    try {
-       const data = await client.CreateMicroservice({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tsf.v20180326.ModifyMicroservice", async function () {
     try {
        const data = await client.ModifyMicroservice({})
@@ -948,9 +988,9 @@ it("tsf.v20180326.DeleteNamespace", async function () {
     }
 })
 
-it("tsf.v20180326.DescribeMsApiList", async function () {
+it("tsf.v20180326.CreatePathRewrites", async function () {
     try {
-       const data = await client.DescribeMsApiList({})
+       const data = await client.CreatePathRewrites({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -971,6 +1011,16 @@ it("tsf.v20180326.DeleteApiGroup", async function () {
 it("tsf.v20180326.CreateApplication", async function () {
     try {
        const data = await client.CreateApplication({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tsf.v20180326.ModifyPathRewrite", async function () {
+    try {
+       const data = await client.ModifyPathRewrite({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

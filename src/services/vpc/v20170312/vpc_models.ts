@@ -2388,6 +2388,21 @@ export interface ModifyVpnConnectionAttributeRequest {
    * IPSec配置，腾讯云提供IPSec安全会话设置。
    */
   IPSECOptionsSpecification?: IPSECOptionsSpecification
+
+  /**
+   * 是否启用通道健康检查
+   */
+  EnableHealthCheck?: boolean
+
+  /**
+   * 本端通道探测ip
+   */
+  HealthCheckLocalIp?: string
+
+  /**
+   * 对端通道探测ip
+   */
+  HealthCheckRemoteIp?: string
 }
 
 /**
@@ -2942,7 +2957,7 @@ export interface InstanceStatistic {
  */
 export interface CreateVpnConnectionRequest {
   /**
-   * VPC实例ID。可通过DescribeVpcs接口返回值中的VpcId获取。
+   * VPC实例ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/215/15778)接口返回值中的VpcId获取。
    */
   VpcId: string
 
@@ -2985,6 +3000,21 @@ export interface CreateVpnConnectionRequest {
    * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]
    */
   Tags?: Array<Tag>
+
+  /**
+   * 是否支持隧道内健康检查
+   */
+  EnableHealthCheck?: boolean
+
+  /**
+   * 健康检查本端地址
+   */
+  HealthCheckLocalIp?: string
+
+  /**
+   * 健康检查对端地址
+   */
+  HealthCheckRemoteIp?: string
 }
 
 /**
@@ -4950,7 +4980,7 @@ export interface DescribeNetworkInterfaceLimitRequest {
  */
 export interface CreateBandwidthPackageRequest {
   /**
-   * 带宽包类型，包括'BGP'，'SINGLEISP'，'ANYCAST'
+   * 带宽包类型，包括'HIGH_QUALITY_BGP', 'BGP'，'SINGLEISP'，'ANYCAST'
    */
   NetworkType?: string
 
@@ -4970,7 +5000,7 @@ export interface CreateBandwidthPackageRequest {
   BandwidthPackageCount?: number
 
   /**
-   * 带宽包限速大小。单位：Mbps，-1表示不限速。
+   * 带宽包限速大小。单位：Mbps，-1表示不限速。该功能当前内测中，暂不对外开放。
    */
   InternetMaxBandwidth?: number
 
@@ -5360,7 +5390,7 @@ export interface RemoveIp6RulesRequest {
  */
 export interface DescribeIpGeolocationDatabaseUrlRequest {
   /**
-   * IP地理位置库协议类型，目前支持"ipv4"和"ipv6"。
+   * IP地理位置库协议类型，目前仅支持"ipv4"。
    */
   Type: string
 }
