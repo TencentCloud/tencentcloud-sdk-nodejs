@@ -34,48 +34,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetOnlineRecordCallback", req, cb);
     }
     /**
-     * 设置文档转码回调鉴权密钥，回调鉴权方式请参考文档：https://cloud.tencent.com/document/product/1137/40257
-     */
-    async SetTranscodeCallbackKey(req, cb) {
-        return this.request("SetTranscodeCallbackKey", req, cb);
-    }
-    /**
-     * 发起一个实时录制任务
-     */
-    async StartOnlineRecord(req, cb) {
-        return this.request("StartOnlineRecord", req, cb);
-    }
-    /**
-     * 查询文档转码任务的执行进度与转码结果
-     */
-    async DescribeTranscode(req, cb) {
-        return this.request("DescribeTranscode", req, cb);
-    }
-    /**
-     * 创建一个文档转码任务
-     */
-    async CreateTranscode(req, cb) {
-        return this.request("CreateTranscode", req, cb);
-    }
-    /**
-     * 查询录制视频生成回调地址
-     */
-    async DescribeVideoGenerationTaskCallback(req, cb) {
-        return this.request("DescribeVideoGenerationTaskCallback", req, cb);
-    }
-    /**
-     * 停止实时录制
-     */
-    async StopOnlineRecord(req, cb) {
-        return this.request("StopOnlineRecord", req, cb);
-    }
-    /**
-     * 设置文档转码回调地址，回调数据格式请参考文档：https://cloud.tencent.com/document/product/1137/40260
-     */
-    async SetTranscodeCallback(req, cb) {
-        return this.request("SetTranscodeCallback", req, cb);
-    }
-    /**
      * 设置录制视频生成回调地址
      */
     async SetVideoGenerationTaskCallback(req, cb) {
@@ -94,16 +52,94 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetOnlineRecordCallbackKey", req, cb);
     }
     /**
-     * 停止白板推流任务
+     * 设置文档转码回调地址，回调数据格式请参考文档：https://cloud.tencent.com/document/product/1137/40260
      */
-    async StopWhiteboardPush(req, cb) {
-        return this.request("StopWhiteboardPush", req, cb);
+    async SetTranscodeCallback(req, cb) {
+        return this.request("SetTranscodeCallback", req, cb);
+    }
+    /**
+     * 恢复实时录制
+     */
+    async ResumeOnlineRecord(req, cb) {
+        return this.request("ResumeOnlineRecord", req, cb);
+    }
+    /**
+     * 设置文档转码回调鉴权密钥，回调鉴权方式请参考文档：https://cloud.tencent.com/document/product/1137/40257
+     */
+    async SetTranscodeCallbackKey(req, cb) {
+        return this.request("SetTranscodeCallbackKey", req, cb);
+    }
+    /**
+     * 查询文档转码任务的执行进度与转码结果
+     */
+    async DescribeTranscode(req, cb) {
+        return this.request("DescribeTranscode", req, cb);
+    }
+    /**
+     * 查询录制任务状态与结果
+     */
+    async DescribeOnlineRecord(req, cb) {
+        return this.request("DescribeOnlineRecord", req, cb);
+    }
+    /**
+     * 查询实时录制回调地址
+     */
+    async DescribeOnlineRecordCallback(req, cb) {
+        return this.request("DescribeOnlineRecordCallback", req, cb);
+    }
+    /**
+     * 查询白板推流回调地址
+     */
+    async DescribeWhiteboardPushCallback(req, cb) {
+        return this.request("DescribeWhiteboardPushCallback", req, cb);
     }
     /**
      * 发起一个白板推流任务
      */
     async StartWhiteboardPush(req, cb) {
         return this.request("StartWhiteboardPush", req, cb);
+    }
+    /**
+     * 创建一个文档转码任务
+     */
+    async CreateTranscode(req, cb) {
+        return this.request("CreateTranscode", req, cb);
+    }
+    /**
+     * 查询录制视频生成回调地址
+     */
+    async DescribeVideoGenerationTaskCallback(req, cb) {
+        return this.request("DescribeVideoGenerationTaskCallback", req, cb);
+    }
+    /**
+     * 设置白板推流回调地址，回调数据格式请参考文档：https://cloud.tencent.com/document/product/1137/40257
+     */
+    async SetWhiteboardPushCallback(req, cb) {
+        return this.request("SetWhiteboardPushCallback", req, cb);
+    }
+    /**
+     * 发起一个实时录制任务
+     */
+    async StartOnlineRecord(req, cb) {
+        return this.request("StartOnlineRecord", req, cb);
+    }
+    /**
+     * 停止实时录制
+     */
+    async StopOnlineRecord(req, cb) {
+        return this.request("StopOnlineRecord", req, cb);
+    }
+    /**
+     * 设置白板推流回调鉴权密钥，回调鉴权方式请参考文档：https://cloud.tencent.com/document/product/1137/40257
+     */
+    async SetWhiteboardPushCallbackKey(req, cb) {
+        return this.request("SetWhiteboardPushCallbackKey", req, cb);
+    }
+    /**
+     * 停止白板推流任务
+     */
+    async StopWhiteboardPush(req, cb) {
+        return this.request("StopWhiteboardPush", req, cb);
     }
     /**
      * 暂停实时录制
@@ -118,28 +154,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTranscodeCallback", req, cb);
     }
     /**
-     * 查询录制任务状态与结果
-     */
-    async DescribeOnlineRecord(req, cb) {
-        return this.request("DescribeOnlineRecord", req, cb);
-    }
-    /**
      * 设置视频生成回调鉴权密钥
      */
     async SetVideoGenerationTaskCallbackKey(req, cb) {
         return this.request("SetVideoGenerationTaskCallbackKey", req, cb);
     }
     /**
-     * 查询实时录制回调地址
+     * 查询推流任务状态与结果
      */
-    async DescribeOnlineRecordCallback(req, cb) {
-        return this.request("DescribeOnlineRecordCallback", req, cb);
-    }
-    /**
-     * 恢复实时录制
-     */
-    async ResumeOnlineRecord(req, cb) {
-        return this.request("ResumeOnlineRecord", req, cb);
+    async DescribeWhiteboardPush(req, cb) {
+        return this.request("DescribeWhiteboardPush", req, cb);
     }
     /**
      * 查询录制视频生成任务状态与结果

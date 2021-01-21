@@ -90,7 +90,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量删除租户下的环境
+   * 批量删除租户下的命名空间
    */
   async DeleteEnvironments(
     req: DeleteEnvironmentsRequest,
@@ -140,7 +140,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取环境角色列表
+   * 获取命名空间角色列表
    */
   async DescribeEnvironmentRoles(
     req: DescribeEnvironmentRolesRequest,
@@ -190,7 +190,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取租户下环境列表
+   * 获取租户下命名空间列表
    */
   async DescribeEnvironments(
     req: DescribeEnvironmentsRequest,
@@ -220,7 +220,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于在用户账户下创建消息队列 Tdmq环境（命名空间）
+   * 用于在用户账户下创建消息队列 Tdmq 命名空间
    */
   async CreateEnvironment(
     req: CreateEnvironmentRequest,
@@ -260,7 +260,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改指定环境的属性值
+   * 修改指定命名空间的属性值
    */
   async ModifyEnvironmentAttributes(
     req: ModifyEnvironmentAttributesRequest,
@@ -280,7 +280,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取指定环境的属性
+   * 获取指定命名空间的属性
    */
   async DescribeEnvironmentAttributes(
     req: DescribeEnvironmentAttributesRequest,

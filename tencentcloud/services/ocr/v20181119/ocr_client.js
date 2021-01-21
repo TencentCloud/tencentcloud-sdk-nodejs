@@ -645,6 +645,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("FinanBillOCR", req, cb);
     }
     /**
+     * 本接口支持OFD格式的增值税电子普通发票和增值税电子专用发票的识别，返回发票代码、发票号码、开票日期、验证码、机器编号、密码区，购买方和销售方信息，包括名称、纳税人识别号、地址电话、开户行及账号，以及价税合计、开票人、收款人、复核人、税额、不含税金额等字段信息。
+     */
+    async VerifyOfdVatInvoiceOCR(req, cb) {
+        return this.request("VerifyOfdVatInvoiceOCR", req, cb);
+    }
+    /**
      * 本接口支持多张、多类型票据的混合识别，系统自动实现分割、分类和识别，同时支持自选需要识别的票据类型。目前已支持增值税发票、增值税发票（卷票）、定额发票、通用机打发票、购车发票、火车票、出租车发票、机票行程单、汽车票、轮船票、过路过桥费发票共11种票据。
      */
     async MixedInvoiceOCR(req, cb) {

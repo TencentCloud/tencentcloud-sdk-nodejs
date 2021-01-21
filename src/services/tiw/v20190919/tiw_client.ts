@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   Canvas,
+  SetWhiteboardPushCallbackKeyRequest,
   LayoutParams,
   SetVideoGenerationTaskCallbackRequest,
   StreamControl,
@@ -26,9 +27,11 @@ import {
   SetVideoGenerationTaskCallbackKeyRequest,
   StartWhiteboardPushRequest,
   OmittedDuration,
+  DescribeWhiteboardPushRequest,
   DescribeVideoGenerationTaskCallbackResponse,
   ResumeOnlineRecordResponse,
   SetVideoGenerationTaskCallbackResponse,
+  SetWhiteboardPushCallbackKeyResponse,
   WhiteboardPushBackupParam,
   StartOnlineRecordRequest,
   StartWhiteboardPushResponse,
@@ -40,18 +43,20 @@ import {
   SetVideoGenerationTaskCallbackKeyResponse,
   CreateTranscodeResponse,
   DescribeVideoGenerationTaskResponse,
-  VideoInfo,
+  DescribeWhiteboardPushCallbackResponse,
   CustomLayout,
+  VideoInfo,
   SetTranscodeCallbackKeyResponse,
   Concat,
   DescribeOnlineRecordRequest,
+  DescribeWhiteboardPushResponse,
   StartOnlineRecordResponse,
-  Whiteboard,
+  SetOnlineRecordCallbackKeyResponse,
   DescribeVideoGenerationTaskRequest,
   CreateVideoGenerationTaskResponse,
   PauseOnlineRecordResponse,
   CreateTranscodeRequest,
-  SetOnlineRecordCallbackKeyResponse,
+  DescribeWhiteboardPushCallbackRequest,
   DescribeOnlineRecordResponse,
   SetTranscodeCallbackKeyRequest,
   DescribeTranscodeRequest,
@@ -64,8 +69,11 @@ import {
   ResumeOnlineRecordRequest,
   DescribeTranscodeCallbackResponse,
   SetTranscodeCallbackRequest,
+  SetWhiteboardPushCallbackRequest,
+  SetWhiteboardPushCallbackResponse,
   RecordControl,
   SetOnlineRecordCallbackRequest,
+  Whiteboard,
   MixStream,
   DescribeVideoGenerationTaskCallbackRequest,
   PauseOnlineRecordRequest,
@@ -89,76 +97,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SetOnlineRecordCallbackResponse) => void
   ): Promise<SetOnlineRecordCallbackResponse> {
     return this.request("SetOnlineRecordCallback", req, cb)
-  }
-
-  /**
-   * 设置文档转码回调鉴权密钥，回调鉴权方式请参考文档：https://cloud.tencent.com/document/product/1137/40257
-   */
-  async SetTranscodeCallbackKey(
-    req: SetTranscodeCallbackKeyRequest,
-    cb?: (error: string, rep: SetTranscodeCallbackKeyResponse) => void
-  ): Promise<SetTranscodeCallbackKeyResponse> {
-    return this.request("SetTranscodeCallbackKey", req, cb)
-  }
-
-  /**
-   * 发起一个实时录制任务
-   */
-  async StartOnlineRecord(
-    req: StartOnlineRecordRequest,
-    cb?: (error: string, rep: StartOnlineRecordResponse) => void
-  ): Promise<StartOnlineRecordResponse> {
-    return this.request("StartOnlineRecord", req, cb)
-  }
-
-  /**
-   * 查询文档转码任务的执行进度与转码结果
-   */
-  async DescribeTranscode(
-    req: DescribeTranscodeRequest,
-    cb?: (error: string, rep: DescribeTranscodeResponse) => void
-  ): Promise<DescribeTranscodeResponse> {
-    return this.request("DescribeTranscode", req, cb)
-  }
-
-  /**
-   * 创建一个文档转码任务
-   */
-  async CreateTranscode(
-    req: CreateTranscodeRequest,
-    cb?: (error: string, rep: CreateTranscodeResponse) => void
-  ): Promise<CreateTranscodeResponse> {
-    return this.request("CreateTranscode", req, cb)
-  }
-
-  /**
-   * 查询录制视频生成回调地址
-   */
-  async DescribeVideoGenerationTaskCallback(
-    req: DescribeVideoGenerationTaskCallbackRequest,
-    cb?: (error: string, rep: DescribeVideoGenerationTaskCallbackResponse) => void
-  ): Promise<DescribeVideoGenerationTaskCallbackResponse> {
-    return this.request("DescribeVideoGenerationTaskCallback", req, cb)
-  }
-
-  /**
-   * 停止实时录制
-   */
-  async StopOnlineRecord(
-    req: StopOnlineRecordRequest,
-    cb?: (error: string, rep: StopOnlineRecordResponse) => void
-  ): Promise<StopOnlineRecordResponse> {
-    return this.request("StopOnlineRecord", req, cb)
-  }
-
-  /**
-   * 设置文档转码回调地址，回调数据格式请参考文档：https://cloud.tencent.com/document/product/1137/40260
-   */
-  async SetTranscodeCallback(
-    req: SetTranscodeCallbackRequest,
-    cb?: (error: string, rep: SetTranscodeCallbackResponse) => void
-  ): Promise<SetTranscodeCallbackResponse> {
-    return this.request("SetTranscodeCallback", req, cb)
   }
 
   /**
@@ -192,13 +130,73 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 停止白板推流任务
+   * 设置文档转码回调地址，回调数据格式请参考文档：https://cloud.tencent.com/document/product/1137/40260
    */
-  async StopWhiteboardPush(
-    req: StopWhiteboardPushRequest,
-    cb?: (error: string, rep: StopWhiteboardPushResponse) => void
-  ): Promise<StopWhiteboardPushResponse> {
-    return this.request("StopWhiteboardPush", req, cb)
+  async SetTranscodeCallback(
+    req: SetTranscodeCallbackRequest,
+    cb?: (error: string, rep: SetTranscodeCallbackResponse) => void
+  ): Promise<SetTranscodeCallbackResponse> {
+    return this.request("SetTranscodeCallback", req, cb)
+  }
+
+  /**
+   * 恢复实时录制
+   */
+  async ResumeOnlineRecord(
+    req: ResumeOnlineRecordRequest,
+    cb?: (error: string, rep: ResumeOnlineRecordResponse) => void
+  ): Promise<ResumeOnlineRecordResponse> {
+    return this.request("ResumeOnlineRecord", req, cb)
+  }
+
+  /**
+   * 设置文档转码回调鉴权密钥，回调鉴权方式请参考文档：https://cloud.tencent.com/document/product/1137/40257
+   */
+  async SetTranscodeCallbackKey(
+    req: SetTranscodeCallbackKeyRequest,
+    cb?: (error: string, rep: SetTranscodeCallbackKeyResponse) => void
+  ): Promise<SetTranscodeCallbackKeyResponse> {
+    return this.request("SetTranscodeCallbackKey", req, cb)
+  }
+
+  /**
+   * 查询文档转码任务的执行进度与转码结果
+   */
+  async DescribeTranscode(
+    req: DescribeTranscodeRequest,
+    cb?: (error: string, rep: DescribeTranscodeResponse) => void
+  ): Promise<DescribeTranscodeResponse> {
+    return this.request("DescribeTranscode", req, cb)
+  }
+
+  /**
+   * 查询录制任务状态与结果
+   */
+  async DescribeOnlineRecord(
+    req: DescribeOnlineRecordRequest,
+    cb?: (error: string, rep: DescribeOnlineRecordResponse) => void
+  ): Promise<DescribeOnlineRecordResponse> {
+    return this.request("DescribeOnlineRecord", req, cb)
+  }
+
+  /**
+   * 查询实时录制回调地址
+   */
+  async DescribeOnlineRecordCallback(
+    req: DescribeOnlineRecordCallbackRequest,
+    cb?: (error: string, rep: DescribeOnlineRecordCallbackResponse) => void
+  ): Promise<DescribeOnlineRecordCallbackResponse> {
+    return this.request("DescribeOnlineRecordCallback", req, cb)
+  }
+
+  /**
+   * 查询白板推流回调地址
+   */
+  async DescribeWhiteboardPushCallback(
+    req: DescribeWhiteboardPushCallbackRequest,
+    cb?: (error: string, rep: DescribeWhiteboardPushCallbackResponse) => void
+  ): Promise<DescribeWhiteboardPushCallbackResponse> {
+    return this.request("DescribeWhiteboardPushCallback", req, cb)
   }
 
   /**
@@ -209,6 +207,76 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StartWhiteboardPushResponse) => void
   ): Promise<StartWhiteboardPushResponse> {
     return this.request("StartWhiteboardPush", req, cb)
+  }
+
+  /**
+   * 创建一个文档转码任务
+   */
+  async CreateTranscode(
+    req: CreateTranscodeRequest,
+    cb?: (error: string, rep: CreateTranscodeResponse) => void
+  ): Promise<CreateTranscodeResponse> {
+    return this.request("CreateTranscode", req, cb)
+  }
+
+  /**
+   * 查询录制视频生成回调地址
+   */
+  async DescribeVideoGenerationTaskCallback(
+    req: DescribeVideoGenerationTaskCallbackRequest,
+    cb?: (error: string, rep: DescribeVideoGenerationTaskCallbackResponse) => void
+  ): Promise<DescribeVideoGenerationTaskCallbackResponse> {
+    return this.request("DescribeVideoGenerationTaskCallback", req, cb)
+  }
+
+  /**
+   * 设置白板推流回调地址，回调数据格式请参考文档：https://cloud.tencent.com/document/product/1137/40257
+   */
+  async SetWhiteboardPushCallback(
+    req: SetWhiteboardPushCallbackRequest,
+    cb?: (error: string, rep: SetWhiteboardPushCallbackResponse) => void
+  ): Promise<SetWhiteboardPushCallbackResponse> {
+    return this.request("SetWhiteboardPushCallback", req, cb)
+  }
+
+  /**
+   * 发起一个实时录制任务
+   */
+  async StartOnlineRecord(
+    req: StartOnlineRecordRequest,
+    cb?: (error: string, rep: StartOnlineRecordResponse) => void
+  ): Promise<StartOnlineRecordResponse> {
+    return this.request("StartOnlineRecord", req, cb)
+  }
+
+  /**
+   * 停止实时录制
+   */
+  async StopOnlineRecord(
+    req: StopOnlineRecordRequest,
+    cb?: (error: string, rep: StopOnlineRecordResponse) => void
+  ): Promise<StopOnlineRecordResponse> {
+    return this.request("StopOnlineRecord", req, cb)
+  }
+
+  /**
+   * 设置白板推流回调鉴权密钥，回调鉴权方式请参考文档：https://cloud.tencent.com/document/product/1137/40257
+   */
+  async SetWhiteboardPushCallbackKey(
+    req: SetWhiteboardPushCallbackKeyRequest,
+    cb?: (error: string, rep: SetWhiteboardPushCallbackKeyResponse) => void
+  ): Promise<SetWhiteboardPushCallbackKeyResponse> {
+    return this.request("SetWhiteboardPushCallbackKey", req, cb)
+  }
+
+  /**
+   * 停止白板推流任务
+   */
+  async StopWhiteboardPush(
+    req: StopWhiteboardPushRequest,
+    cb?: (error: string, rep: StopWhiteboardPushResponse) => void
+  ): Promise<StopWhiteboardPushResponse> {
+    return this.request("StopWhiteboardPush", req, cb)
   }
 
   /**
@@ -232,16 +300,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询录制任务状态与结果
-   */
-  async DescribeOnlineRecord(
-    req: DescribeOnlineRecordRequest,
-    cb?: (error: string, rep: DescribeOnlineRecordResponse) => void
-  ): Promise<DescribeOnlineRecordResponse> {
-    return this.request("DescribeOnlineRecord", req, cb)
-  }
-
-  /**
    * 设置视频生成回调鉴权密钥
    */
   async SetVideoGenerationTaskCallbackKey(
@@ -252,23 +310,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询实时录制回调地址
+   * 查询推流任务状态与结果
    */
-  async DescribeOnlineRecordCallback(
-    req: DescribeOnlineRecordCallbackRequest,
-    cb?: (error: string, rep: DescribeOnlineRecordCallbackResponse) => void
-  ): Promise<DescribeOnlineRecordCallbackResponse> {
-    return this.request("DescribeOnlineRecordCallback", req, cb)
-  }
-
-  /**
-   * 恢复实时录制
-   */
-  async ResumeOnlineRecord(
-    req: ResumeOnlineRecordRequest,
-    cb?: (error: string, rep: ResumeOnlineRecordResponse) => void
-  ): Promise<ResumeOnlineRecordResponse> {
-    return this.request("ResumeOnlineRecord", req, cb)
+  async DescribeWhiteboardPush(
+    req: DescribeWhiteboardPushRequest,
+    cb?: (error: string, rep: DescribeWhiteboardPushResponse) => void
+  ): Promise<DescribeWhiteboardPushResponse> {
+    return this.request("DescribeWhiteboardPush", req, cb)
   }
 
   /**

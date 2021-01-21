@@ -2223,6 +2223,21 @@ export interface ModifyApiRequest {
    * 用户自定义错误码配置。
    */
   ResponseErrorCodes?: Array<ResponseErrorCodeReq>
+
+  /**
+   * 是否开启Base64编码，只有后端为scf时才会生效。
+   */
+  IsBase64Encoded?: boolean
+
+  /**
+   * 是否开启Base64编码的header触发，只有后端为scf时才会生效。
+   */
+  IsBase64Trigger?: boolean
+
+  /**
+   * Header触发规则，总规则数不能超过10。
+   */
+  Base64EncodedTriggerRules?: Array<Base64EncodedTriggerRule>
 }
 
 /**
@@ -2634,6 +2649,11 @@ export interface CreateApiRequest {
    * 用户类型。
    */
   UserType?: string
+
+  /**
+   * 是否打开Base64编码，只有后端是scf时才会生效。
+   */
+  IsBase64Encoded?: boolean
 }
 
 /**
@@ -4871,6 +4891,24 @@ export interface ApiInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Environments: Array<string>
+
+  /**
+      * 是否开启Base64编码，只有后端为scf时才会生效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsBase64Encoded: boolean
+
+  /**
+      * 是否开启Base64编码的header触发，只有后端为scf时才会生效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsBase64Trigger: boolean
+
+  /**
+      * Header触发规则，总规则数量不超过10。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Base64EncodedTriggerRules: Array<Base64EncodedTriggerRule>
 }
 
 /**
@@ -4896,6 +4934,28 @@ export interface EnableApiKeyRequest {
    * 待启用的密钥 ID。
    */
   AccessKeyId: string
+}
+
+/**
+ * Base64编码的header触发规则
+ */
+export interface Base64EncodedTriggerRule {
+  /**
+   * 进行编码触发的header，可选值 "Accept"和"Content_Type" 对应实际数据流请求header中的Accept和 Content-Type。
+   */
+  Name: string
+
+  /**
+      * 进行编码触发的header的可选值数组, 数组元素的字符串最大长度为40，元素可以包括数字，英文字母以及特殊字符，特殊字符的可选值为： `.`    `+`    `*`   `-`   `/`  `_` 
+
+例如 [
+    "application/x-vpeg005",
+    "application/xhtml+xml",
+    "application/vnd.ms-project",
+    "application/vnd.rn-rn_music_package"
+] 等都是合法的。
+      */
+  Value: Array<string>
 }
 
 /**

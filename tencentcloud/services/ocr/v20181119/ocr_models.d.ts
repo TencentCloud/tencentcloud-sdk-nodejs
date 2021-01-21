@@ -1425,6 +1425,27 @@ export interface MixedInvoiceDetectResponse {
     RequestId?: string;
 }
 /**
+ * 发票人员信息
+ */
+export interface VatInvoiceUserInfo {
+    /**
+      * 名称
+      */
+    Name: string;
+    /**
+      * 纳税人识别号
+      */
+    TaxId: string;
+    /**
+      * 地 址、电 话
+      */
+    AddrTel: string;
+    /**
+      * 开户行及账号
+      */
+    FinancialAccount: string;
+}
+/**
  * InsuranceBillOCR返回参数结构体
  */
 export interface InsuranceBillOCRResponse {
@@ -1956,6 +1977,43 @@ export interface HKIDCardOCRResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 发票商品
+ */
+export interface VatInvoiceGoodsInfo {
+    /**
+      * 项目名称
+      */
+    Item: string;
+    /**
+      * 规格型号
+      */
+    Specification: string;
+    /**
+      * 单位
+      */
+    MeasurementDimension: string;
+    /**
+      * 价格
+      */
+    Price: string;
+    /**
+      * 数量
+      */
+    Quantity: string;
+    /**
+      * 金额
+      */
+    Amount: string;
+    /**
+      * 税率(如6%、免税)
+      */
+    TaxScheme: string;
+    /**
+      * 税额
+      */
+    TaxAmount: string;
 }
 /**
  * PermitOCR请求参数结构体
@@ -2956,6 +3014,20 @@ export interface ArithmeticOCRRequest {
     ImageUrl?: string;
 }
 /**
+ * VerifyOfdVatInvoiceOCR请求参数结构体
+ */
+export interface VerifyOfdVatInvoiceOCRRequest {
+    /**
+      * OFD文件的 Url 地址。
+      */
+    OfdFileUrl?: string;
+    /**
+      * OFD文件的 Base64 值。
+OfdFileUrl 和 OfdFileBase64 必传其一，若两者都传，只解析OfdFileBase64。
+      */
+    OfdFileBase64?: string;
+}
+/**
  * FinanBillSliceOCR请求参数结构体
  */
 export interface FinanBillSliceOCRRequest {
@@ -3661,6 +3733,85 @@ export interface SealOCRRequest {
 建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
       */
     ImageUrl?: string;
+}
+/**
+ * VerifyOfdVatInvoiceOCR返回参数结构体
+ */
+export interface VerifyOfdVatInvoiceOCRResponse {
+    /**
+      * 发票类型
+026:增值税电子普通发票
+028:增值税电子专用发票
+      */
+    Type?: string;
+    /**
+      * 发票代码
+      */
+    InvoiceCode?: string;
+    /**
+      * 发票号码
+      */
+    InvoiceNumber?: string;
+    /**
+      * 开票日期
+      */
+    IssueDate?: string;
+    /**
+      * 验证码
+      */
+    InvoiceCheckCode?: string;
+    /**
+      * 机器编号
+      */
+    MachineNumber?: string;
+    /**
+      * 密码区
+      */
+    TaxControlCode?: string;
+    /**
+      * 购买方
+      */
+    Buyer?: VatInvoiceUserInfo;
+    /**
+      * 销售方
+      */
+    Seller?: VatInvoiceUserInfo;
+    /**
+      * 价税合计
+      */
+    TaxInclusiveTotalAmount?: string;
+    /**
+      * 开票人
+      */
+    InvoiceClerk?: string;
+    /**
+      * 收款人
+      */
+    Payee?: string;
+    /**
+      * 复核人
+      */
+    Checker?: string;
+    /**
+      * 税额
+      */
+    TaxTotalAmount?: string;
+    /**
+      * 不含税金额
+      */
+    TaxExclusiveTotalAmount?: string;
+    /**
+      * 备注
+      */
+    Note?: string;
+    /**
+      * 货物或服务清单
+      */
+    GoodsInfos?: Array<VatInvoiceGoodsInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 表格识别结果

@@ -75,7 +75,7 @@ export interface SubscriptionTopic {
  */
 export interface ModifyEnvironmentAttributesRequest {
   /**
-   * 环境（命名空间）名称。
+   * 命名空间名称。
    */
   EnvironmentId: string
 
@@ -90,7 +90,7 @@ export interface ModifyEnvironmentAttributesRequest {
   Remark?: string
 
   /**
-   * Pulsar 集群的ID
+   * 集群ID
    */
   ClusterId?: string
 }
@@ -231,7 +231,7 @@ export interface DeleteClusterResponse {
  */
 export interface ModifyClusterRequest {
   /**
-   * 集群Id，需要更新的集群Id。
+   * Pulsar 集群的ID，需要更新的集群Id。
    */
   ClusterId: string
 
@@ -429,7 +429,7 @@ export interface CreateClusterRequest {
   ClusterName: string
 
   /**
-   * 用户专享物理集群ID，如果不传，则默认在公共集群上创建用户集群资源。
+   * 用户专享物理集群ID，如果不传，则默认在公共集群上创建用户集群资源。
    */
   BindClusterId?: number
 
@@ -459,7 +459,7 @@ export interface BindCluster {
  */
 export interface ModifyClusterResponse {
   /**
-   * 集群的ID
+   * Pulsar 集群的ID
    */
   ClusterId?: string
 
@@ -526,12 +526,12 @@ export interface DescribeClusterDetailRequest {
  */
 export interface DescribeEnvironmentsResponse {
   /**
-   * 环境（命名空间）记录数。
+   * 命名空间记录数。
    */
   TotalCount?: number
 
   /**
-   * 环境（命名空间）集合数组。
+   * 命名空间集合数组。
    */
   EnvironmentSet?: Array<Environment>
 
@@ -546,7 +546,7 @@ export interface DescribeEnvironmentsResponse {
  */
 export interface DescribeEnvironmentsRequest {
   /**
-   * 环境（命名空间）名称，模糊搜索。
+   * 命名空间名称，模糊搜索。
    */
   EnvironmentId?: string
 
@@ -559,6 +559,11 @@ export interface DescribeEnvironmentsRequest {
    * 返回数量，不填则默认为10，最大值为20。
    */
   Limit?: number
+
+  /**
+   * Pulsar 集群的ID
+   */
+  ClusterId?: string
 }
 
 /**
@@ -1059,7 +1064,7 @@ export interface DescribeEnvironmentRolesResponse {
   TotalCount?: number
 
   /**
-   * 环境角色集合。
+   * 命名空间角色集合。
    */
   EnvironmentRoleSets?: Array<EnvironmentRole>
 
@@ -1370,7 +1375,7 @@ export interface DeleteSubscriptionsRequest {
  */
 export interface CreateEnvironmentResponse {
   /**
-   * 命名空间名称。
+   * 环境（命名空间）名称。
    */
   EnvironmentId?: string
 
@@ -1401,7 +1406,7 @@ export interface CreateEnvironmentResponse {
  */
 export interface ResetMsgSubOffsetByTimestampRequest {
   /**
-   * 环境（命名空间）名称。
+   * 命名空间名称。
    */
   EnvironmentId: string
 
@@ -1709,7 +1714,7 @@ export interface CreateEnvironmentRequest {
  */
 export interface DescribeEnvironmentRolesRequest {
   /**
-   * 环境（命名空间）
+   * 环境（命名空间）名称。
    */
   EnvironmentId?: string
 

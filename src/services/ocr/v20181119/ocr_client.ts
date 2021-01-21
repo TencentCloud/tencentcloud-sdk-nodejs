@@ -71,6 +71,7 @@ import {
   GeneralHandwritingOCRRequest,
   BizLicenseOCRRequest,
   MixedInvoiceDetectResponse,
+  VatInvoiceUserInfo,
   InsuranceBillOCRResponse,
   GeneralEfficientOCRResponse,
   HmtResidentPermitOCRRequest,
@@ -89,6 +90,7 @@ import {
   TollInvoiceOCRRequest,
   LicensePlateOCRResponse,
   HKIDCardOCRResponse,
+  VatInvoiceGoodsInfo,
   PermitOCRRequest,
   InvoiceGeneralOCRResponse,
   TaxiInvoiceOCRRequest,
@@ -126,6 +128,7 @@ import {
   FinanBillSliceInfo,
   QueryBarCodeResponse,
   ArithmeticOCRRequest,
+  VerifyOfdVatInvoiceOCRRequest,
   FinanBillSliceOCRRequest,
   MLIDPassportOCRResponse,
   VatRollInvoiceOCRRequest,
@@ -158,6 +161,7 @@ import {
   ClassifyDetectInfo,
   GeneralAccurateOCRResponse,
   SealOCRRequest,
+  VerifyOfdVatInvoiceOCRResponse,
   TextTable,
   ResidenceBookletOCRRequest,
   BusInvoiceOCRResponse,
@@ -1053,6 +1057,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: FinanBillOCRResponse) => void
   ): Promise<FinanBillOCRResponse> {
     return this.request("FinanBillOCR", req, cb)
+  }
+
+  /**
+   * 本接口支持OFD格式的增值税电子普通发票和增值税电子专用发票的识别，返回发票代码、发票号码、开票日期、验证码、机器编号、密码区，购买方和销售方信息，包括名称、纳税人识别号、地址电话、开户行及账号，以及价税合计、开票人、收款人、复核人、税额、不含税金额等字段信息。
+   */
+  async VerifyOfdVatInvoiceOCR(
+    req: VerifyOfdVatInvoiceOCRRequest,
+    cb?: (error: string, rep: VerifyOfdVatInvoiceOCRResponse) => void
+  ): Promise<VerifyOfdVatInvoiceOCRResponse> {
+    return this.request("VerifyOfdVatInvoiceOCR", req, cb)
   }
 
   /**

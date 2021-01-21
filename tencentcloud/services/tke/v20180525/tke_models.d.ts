@@ -862,6 +862,11 @@ export interface PrometheusAlertRuleDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TemplateId?: string;
+    /**
+      * 计算周期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Interval?: string;
 }
 /**
  * 可升级节点信息
@@ -1384,6 +1389,10 @@ export interface CreateClusterInstancesRequest {
       * 实例额外需要设置参数信息
       */
     InstanceAdvancedSettings?: InstanceAdvancedSettings;
+    /**
+      * 校验规则相关选项，可配置跳过某些校验规则。目前支持GlobalRouteCIDRCheck（跳过GlobalRouter的相关校验），VpcCniCIDRCheck（跳过VpcCni相关校验）
+      */
+    SkipValidateOptions?: Array<string>;
 }
 /**
  * 手动加入的节点
@@ -2902,17 +2911,21 @@ export interface AddExistedInstancesRequest {
       */
     LoginSettings?: LoginSettings;
     /**
-      * 实例所属安全组。该参数可以通过调用 DescribeSecurityGroups 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。（目前仅支持设置单个sgId）
-      */
-    SecurityGroupIds?: Array<string>;
-    /**
       * 重装系统时，可以指定修改实例的HostName(集群为HostName模式时，此参数必传，规则名称除不支持大写字符外与[CVM创建实例](https://cloud.tencent.com/document/product/213/15730)接口HostName一致)
       */
     HostName?: string;
     /**
+      * 实例所属安全组。该参数可以通过调用 DescribeSecurityGroups 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。（目前仅支持设置单个sgId）
+      */
+    SecurityGroupIds?: Array<string>;
+    /**
       * 节点池选项
       */
     NodePool?: NodePoolOption;
+    /**
+      * 校验规则相关选项，可配置跳过某些校验规则。目前支持GlobalRouteCIDRCheck（跳过GlobalRouter的相关校验），VpcCniCIDRCheck（跳过VpcCni相关校验）
+      */
+    SkipValidateOptions?: Array<string>;
 }
 /**
  * 集群弹性伸缩配置

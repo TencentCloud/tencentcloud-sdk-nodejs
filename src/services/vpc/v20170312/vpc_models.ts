@@ -679,6 +679,11 @@ export interface FlowLog {
    * 流日志创建时间
    */
   CreatedTime?: string
+
+  /**
+   * 标签列表，例如：[{"Key": "city", "Value": "shanghai"}]
+   */
+  TagSet: Array<Tag>
 }
 
 /**

@@ -28,7 +28,7 @@ class Client extends abstract_client_1.AbstractClient {
         super("tdmq.tencentcloudapi.com", "2020-02-17", clientConfig);
     }
     /**
-     * 批量删除租户下的环境
+     * 批量删除租户下的命名空间
      */
     async DeleteEnvironments(req, cb) {
         return this.request("DeleteEnvironments", req, cb);
@@ -58,7 +58,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteCluster", req, cb);
     }
     /**
-     * 获取环境角色列表
+     * 获取命名空间角色列表
      */
     async DescribeEnvironmentRoles(req, cb) {
         return this.request("DescribeEnvironmentRoles", req, cb);
@@ -88,7 +88,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTopic", req, cb);
     }
     /**
-     * 获取租户下环境列表
+     * 获取租户下命名空间列表
      */
     async DescribeEnvironments(req, cb) {
         return this.request("DescribeEnvironments", req, cb);
@@ -106,7 +106,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSubscriptions", req, cb);
     }
     /**
-     * 用于在用户账户下创建消息队列 Tdmq环境（命名空间）
+     * 用于在用户账户下创建消息队列 Tdmq 命名空间
      */
     async CreateEnvironment(req, cb) {
         return this.request("CreateEnvironment", req, cb);
@@ -130,7 +130,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyCluster", req, cb);
     }
     /**
-     * 修改指定环境的属性值
+     * 修改指定命名空间的属性值
      */
     async ModifyEnvironmentAttributes(req, cb) {
         return this.request("ModifyEnvironmentAttributes", req, cb);
@@ -142,7 +142,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateSubscription", req, cb);
     }
     /**
-     * 获取指定环境的属性
+     * 获取指定命名空间的属性
      */
     async DescribeEnvironmentAttributes(req, cb) {
         return this.request("DescribeEnvironmentAttributes", req, cb);

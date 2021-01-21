@@ -12,6 +12,19 @@ export interface Canvas {
     BackgroundColor?: string;
 }
 /**
+ * SetWhiteboardPushCallbackKey请求参数结构体
+ */
+export interface SetWhiteboardPushCallbackKeyRequest {
+    /**
+      * 应用的SdkAppId
+      */
+    SdkAppId: number;
+    /**
+      * 设置白板推流回调鉴权密钥，最长64字符，如果传入空字符串，那么删除现有的鉴权回调密钥。回调鉴权方式请参考文档：https://cloud.tencent.com/document/product/1137/40257
+      */
+    CallbackKey: string;
+}
+/**
  * 自定义混流配置布局参数
  */
 export interface LayoutParams {
@@ -186,6 +199,19 @@ export interface OmittedDuration {
     ResumeTime: number;
 }
 /**
+ * DescribeWhiteboardPush请求参数结构体
+ */
+export interface DescribeWhiteboardPushRequest {
+    /**
+      * 客户的SdkAppId
+      */
+    SdkAppId: number;
+    /**
+      * 白板推流任务Id
+      */
+    TaskId: string;
+}
+/**
  * DescribeVideoGenerationTaskCallback返回参数结构体
  */
 export interface DescribeVideoGenerationTaskCallbackResponse {
@@ -215,6 +241,15 @@ export interface ResumeOnlineRecordResponse {
  * SetVideoGenerationTaskCallback返回参数结构体
  */
 export interface SetVideoGenerationTaskCallbackResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * SetWhiteboardPushCallbackKey返回参数结构体
+ */
+export interface SetWhiteboardPushCallbackKeyResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -301,6 +336,10 @@ VIDEO_GENERATION_MODE - 视频生成模式（内测中，需邮件申请开通�
 在`视频生成模式`下，默认会记录白板群组内的非白板信令消息，如果指定了`ChatGroupId`，则会记录指定群ID的聊天消息。
       */
     ChatGroupId?: string;
+    /**
+      * 内部参数
+      */
+    ExtraData?: string;
 }
 /**
  * StartWhiteboardPush返回参数结构体
@@ -448,6 +487,36 @@ export interface DescribeVideoGenerationTaskResponse {
     RequestId?: string;
 }
 /**
+ * DescribeWhiteboardPushCallback返回参数结构体
+ */
+export interface DescribeWhiteboardPushCallbackResponse {
+    /**
+      * 白板推流事件回调地址，如果未设置回调地址，该字段为空字符串
+      */
+    Callback?: string;
+    /**
+      * 白板推流回调鉴权密钥
+      */
+    CallbackKey?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 自定义混流布局参数
+ */
+export interface CustomLayout {
+    /**
+      * 混流画布参数
+      */
+    Canvas: Canvas;
+    /**
+      * 流布局参数，每路流的布局不能超出画布区域
+      */
+    InputStreamList: Array<StreamLayout>;
+}
+/**
  * 视频信息
  */
 export interface VideoInfo {
@@ -498,19 +567,6 @@ export interface VideoInfo {
     Height: number;
 }
 /**
- * 自定义混流布局参数
- */
-export interface CustomLayout {
-    /**
-      * 混流画布参数
-      */
-    Canvas: Canvas;
-    /**
-      * 流布局参数，每路流的布局不能超出画布区域
-      */
-    InputStreamList: Array<StreamLayout>;
-}
-/**
  * SetTranscodeCallbackKey返回参数结构体
  */
 export interface SetTranscodeCallbackKeyResponse {
@@ -547,6 +603,66 @@ export interface DescribeOnlineRecordRequest {
     TaskId: string;
 }
 /**
+ * DescribeWhiteboardPush返回参数结构体
+ */
+export interface DescribeWhiteboardPushResponse {
+    /**
+      * 推流结束原因，
+- AUTO: 房间内长时间没有音视频上行及白板操作导致自动停止推流
+- USER_CALL: 主动调用了停止推流接口
+- EXCEPTION: 推流异常结束
+      */
+    FinishReason?: string;
+    /**
+      * 需要查询结果的白板推流任务Id
+      */
+    TaskId?: string;
+    /**
+      * 推流任务状态
+- PREPARED: 表示推流正在准备中（进房/启动推流服务等操作）
+- PUSHING: 表示推流已开始
+- STOPPED: 表示推流已停止
+      */
+    Status?: string;
+    /**
+      * 房间号
+      */
+    RoomId?: number;
+    /**
+      * 白板的群组 Id
+      */
+    GroupId?: string;
+    /**
+      * 推流用户Id
+      */
+    PushUserId?: string;
+    /**
+      * 实际开始推流时间，Unix 时间戳，单位秒
+      */
+    PushStartTime?: number;
+    /**
+      * 实际停止推流时间，Unix 时间戳，单位秒
+      */
+    PushStopTime?: number;
+    /**
+      * 推流过程中出现异常的次数
+      */
+    ExceptionCnt?: number;
+    /**
+      * 白板推流首帧对应的IM时间戳，可用于录制回放时IM聊天消息与白板推流视频进行同步对时。
+      */
+    IMSyncTime?: number;
+    /**
+      * 备份推流任务结果信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Backup?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * StartOnlineRecord返回参数结构体
  */
 export interface StartOnlineRecordResponse {
@@ -560,21 +676,13 @@ export interface StartOnlineRecordResponse {
     RequestId?: string;
 }
 /**
- * 实时录制白板参数，例如白板宽高等
+ * SetOnlineRecordCallbackKey返回参数结构体
  */
-export interface Whiteboard {
+export interface SetOnlineRecordCallbackKeyResponse {
     /**
-      * 实时录制结果里白板视频宽，默认为1280
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Width?: number;
-    /**
-      * 实时录制结果里白板视频高，默认为960
-      */
-    Height?: number;
-    /**
-      * 白板初始化参数，透传到白板 SDK
-      */
-    InitParam?: string;
+    RequestId?: string;
 }
 /**
  * DescribeVideoGenerationTask请求参数结构体
@@ -645,15 +753,19 @@ zip： 生成`.zip`压缩包
 tar.gz： 生成`.tar.gz`压缩包
       */
     CompressFileType?: string;
+    /**
+      * 内部参数
+      */
+    ExtraData?: string;
 }
 /**
- * SetOnlineRecordCallbackKey返回参数结构体
+ * DescribeWhiteboardPushCallback请求参数结构体
  */
-export interface SetOnlineRecordCallbackKeyResponse {
+export interface DescribeWhiteboardPushCallbackRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 应用的SdkAppId
       */
-    RequestId?: string;
+    SdkAppId: number;
 }
 /**
  * DescribeOnlineRecord返回参数结构体
@@ -896,6 +1008,10 @@ export interface CreateVideoGenerationTaskRequest {
 此参数与开始录制接口提供的RecordControl参数互斥，在本接口与开始录制接口都提供了RecordControl参数时，优先使用本接口指定的RecordControl参数进行视频生成控制，否则使用开始录制接口提供的RecordControl参数进行视频拼生成控制。
       */
     RecordControl?: RecordControl;
+    /**
+      * 内部参数
+      */
+    ExtraData?: string;
 }
 /**
  * DescribeTranscodeCallback请求参数结构体
@@ -951,6 +1067,28 @@ export interface SetTranscodeCallbackRequest {
     Callback: string;
 }
 /**
+ * SetWhiteboardPushCallback请求参数结构体
+ */
+export interface SetWhiteboardPushCallbackRequest {
+    /**
+      * 客户的SdkAppId
+      */
+    SdkAppId: number;
+    /**
+      * 白板推流任务结果回调地址，如果传空字符串会删除原来的回调地址配置，回调地址仅支持 http或https协议，即回调地址以http://或https://开头。回调数据格式请参考文档：https://cloud.tencent.com/document/product/1137/40257
+      */
+    Callback: string;
+}
+/**
+ * SetWhiteboardPushCallback返回参数结构体
+ */
+export interface SetWhiteboardPushCallbackResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 录制控制参数， 用于指定全局录制控制及具体流录制控制参数，比如设置需要对哪些流进行录制，是否只录制小画面等
  */
 export interface RecordControl {
@@ -1002,6 +1140,23 @@ export interface SetOnlineRecordCallbackRequest {
       * 实时录制任务结果回调地址，如果传空字符串会删除原来的回调地址配置，回调地址仅支持 http或https协议，即回调地址以http://或https://开头。回调数据格式请参考文档：https://cloud.tencent.com/document/product/1137/40258
       */
     Callback: string;
+}
+/**
+ * 实时录制白板参数，例如白板宽高等
+ */
+export interface Whiteboard {
+    /**
+      * 实时录制结果里白板视频宽，默认为1280
+      */
+    Width?: number;
+    /**
+      * 实时录制结果里白板视频高，默认为960
+      */
+    Height?: number;
+    /**
+      * 白板初始化参数，透传到白板 SDK
+      */
+    InitParam?: string;
 }
 /**
  * 混流配置

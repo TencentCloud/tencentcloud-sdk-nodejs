@@ -8,7 +8,7 @@ import { DeleteTopicsResponse, DescribeBindClustersResponse, ModifyEnvironmentAt
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 批量删除租户下的环境
+     * 批量删除租户下的命名空间
      */
     DeleteEnvironments(req: DeleteEnvironmentsRequest, cb?: (error: string, rep: DeleteEnvironmentsResponse) => void): Promise<DeleteEnvironmentsResponse>;
     /**
@@ -28,7 +28,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteCluster(req: DeleteClusterRequest, cb?: (error: string, rep: DeleteClusterResponse) => void): Promise<DeleteClusterResponse>;
     /**
-     * 获取环境角色列表
+     * 获取命名空间角色列表
      */
     DescribeEnvironmentRoles(req: DescribeEnvironmentRolesRequest, cb?: (error: string, rep: DescribeEnvironmentRolesResponse) => void): Promise<DescribeEnvironmentRolesResponse>;
     /**
@@ -48,7 +48,7 @@ export declare class Client extends AbstractClient {
      */
     CreateTopic(req: CreateTopicRequest, cb?: (error: string, rep: CreateTopicResponse) => void): Promise<CreateTopicResponse>;
     /**
-     * 获取租户下环境列表
+     * 获取租户下命名空间列表
      */
     DescribeEnvironments(req: DescribeEnvironmentsRequest, cb?: (error: string, rep: DescribeEnvironmentsResponse) => void): Promise<DescribeEnvironmentsResponse>;
     /**
@@ -60,7 +60,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeSubscriptions(req: DescribeSubscriptionsRequest, cb?: (error: string, rep: DescribeSubscriptionsResponse) => void): Promise<DescribeSubscriptionsResponse>;
     /**
-     * 用于在用户账户下创建消息队列 Tdmq环境（命名空间）
+     * 用于在用户账户下创建消息队列 Tdmq 命名空间
      */
     CreateEnvironment(req: CreateEnvironmentRequest, cb?: (error: string, rep: CreateEnvironmentResponse) => void): Promise<CreateEnvironmentResponse>;
     /**
@@ -76,7 +76,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyCluster(req: ModifyClusterRequest, cb?: (error: string, rep: ModifyClusterResponse) => void): Promise<ModifyClusterResponse>;
     /**
-     * 修改指定环境的属性值
+     * 修改指定命名空间的属性值
      */
     ModifyEnvironmentAttributes(req: ModifyEnvironmentAttributesRequest, cb?: (error: string, rep: ModifyEnvironmentAttributesResponse) => void): Promise<ModifyEnvironmentAttributesResponse>;
     /**
@@ -84,7 +84,7 @@ export declare class Client extends AbstractClient {
      */
     CreateSubscription(req: CreateSubscriptionRequest, cb?: (error: string, rep: CreateSubscriptionResponse) => void): Promise<CreateSubscriptionResponse>;
     /**
-     * 获取指定环境的属性
+     * 获取指定命名空间的属性
      */
     DescribeEnvironmentAttributes(req: DescribeEnvironmentAttributesRequest, cb?: (error: string, rep: DescribeEnvironmentAttributesResponse) => void): Promise<DescribeEnvironmentAttributesResponse>;
     /**

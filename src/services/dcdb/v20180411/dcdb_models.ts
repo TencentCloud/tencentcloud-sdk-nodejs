@@ -1440,6 +1440,11 @@ export interface DCDBShardInfo {
    * CPU核数
    */
   Cpu: number
+
+  /**
+   * 分片ShardKey的范围（总共64个哈希值），例如： 0-31，32-63
+   */
+  Range: string
 }
 
 /**

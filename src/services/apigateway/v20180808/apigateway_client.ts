@@ -191,6 +191,7 @@ import {
   ApiInfo,
   EnvironmentStrategy,
   EnableApiKeyRequest,
+  Base64EncodedTriggerRule,
   DescribeServicesStatusResponse,
   CreateApiKeyRequest,
 } from "./apigateway_models"

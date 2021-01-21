@@ -598,6 +598,16 @@ it("ocr.v20181119.FinanBillOCR", async function () {
     }
 })
 
+it("ocr.v20181119.VerifyOfdVatInvoiceOCR", async function () {
+    try {
+       const data = await client.VerifyOfdVatInvoiceOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.MixedInvoiceOCR", async function () {
     try {
        const data = await client.MixedInvoiceOCR({})

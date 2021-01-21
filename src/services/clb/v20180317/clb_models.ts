@@ -1407,10 +1407,16 @@ export interface Listener {
   SessionType: string
 
   /**
-      * 是否开启长连接（本参数仅对于HTTP/HTTPS监听器有意义）
+      * 是否开启长连接，1开启，0关闭，（本参数仅对于HTTP/HTTPS监听器有意义）
 注意：此字段可能返回 null，表示取不到有效值。
       */
   KeepaliveEnable: number
+
+  /**
+      * 仅支持Nat64 CLB TCP监听器
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Toa: boolean
 }
 
 /**
