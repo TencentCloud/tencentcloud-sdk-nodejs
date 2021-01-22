@@ -720,6 +720,11 @@ export interface SegmentCustomizedPortraitPicResponse {
       */
     MaskImage?: string;
     /**
+      * 坐标信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ImageRects?: Array<ImageRect>;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -816,6 +821,31 @@ export interface GetGroupListRequest {
       * 返回数量，默认值为10，最大值为1000。
       */
     Limit?: number;
+}
+/**
+ * 图像坐标信息。
+ */
+export interface ImageRect {
+    /**
+      * 左上角横坐标。
+      */
+    X: number;
+    /**
+      * 左上角纵坐标。
+      */
+    Y: number;
+    /**
+      * 人体宽度。
+      */
+    Width: number;
+    /**
+      * 人体高度。
+      */
+    Height: number;
+    /**
+      * 分割选项名称。
+      */
+    Label: string;
 }
 /**
  * 图中检测出来的人体框。

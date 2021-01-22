@@ -408,6 +408,16 @@ it("sqlserver.v20180328.ResetAccountPassword", async function () {
     }
 })
 
+it("sqlserver.v20180328.ModifyDBInstanceNetwork", async function () {
+    try {
+       const data = await client.ModifyDBInstanceNetwork({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sqlserver.v20180328.DescribeDBs", async function () {
     try {
        const data = await client.DescribeDBs({})

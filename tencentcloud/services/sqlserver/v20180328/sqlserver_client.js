@@ -262,6 +262,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ResetAccountPassword", req, cb);
     }
     /**
+     * 本接口（ModifyDBInstanceNetwork）用于修改运行中实例的网络，仅支持从VPC网络到VPC网络的转换
+     */
+    async ModifyDBInstanceNetwork(req, cb) {
+        return this.request("ModifyDBInstanceNetwork", req, cb);
+    }
+    /**
      * 本接口（DescribeDBs）用于查询数据库列表。
      */
     async DescribeDBs(req, cb) {

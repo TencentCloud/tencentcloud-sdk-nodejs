@@ -60,6 +60,7 @@ import {
   SegmentPortraitPicRequest,
   UpperBodyClothColor,
   GetGroupListRequest,
+  ImageRect,
   BodyDetectResult,
   Orientation,
   BodyJointsResult,

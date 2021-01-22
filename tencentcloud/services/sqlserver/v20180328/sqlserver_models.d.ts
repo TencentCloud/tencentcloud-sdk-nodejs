@@ -91,6 +91,10 @@ export interface CreateDBInstancesRequest {
       * 是否跨可用区部署，默认值为false
       */
     MultiZones?: boolean;
+    /**
+      * 新建实例绑定的标签集合
+      */
+    ResourceTags?: Array<ResourceTag>;
 }
 /**
  * 实例续费状态信息
@@ -798,6 +802,27 @@ export interface InquiryPriceCreateDBInstancesRequest {
     MachineType?: string;
 }
 /**
+ * ModifyDBInstanceNetwork请求参数结构体
+ */
+export interface ModifyDBInstanceNetworkRequest {
+    /**
+      * 实例id
+      */
+    InstanceId: string;
+    /**
+      * 新VPC网络Id
+      */
+    NewVpcId: string;
+    /**
+      * 新子网Id
+      */
+    NewSubnetId: string;
+    /**
+      * 原vip保留时长，单位小时，默认为0，代表立即回收，最大为168小时
+      */
+    OldIpRetainTime?: number;
+}
+/**
  * DescribeBackupByFlowId返回参数结构体
  */
 export interface DescribeBackupByFlowIdResponse {
@@ -1223,6 +1248,30 @@ export interface DescribeDBInstancesRequest {
       * 实例所属子网的唯一字符串ID，格式如： subnet-xxx，传空字符串(“”)则按照基础网络筛选。
       */
     SubnetId?: string;
+    /**
+      * 实例内网地址列表，格式如：172.1.0.12
+      */
+    VipSet?: Array<string>;
+    /**
+      * 实例名称列表，模糊查询
+      */
+    InstanceNameSet?: Array<string>;
+    /**
+      * 实例版本代号列表，格式如：2008R2，2012SP3等
+      */
+    VersionSet?: Array<string>;
+    /**
+      * 实例可用区，格式如：ap-guangzhou-2
+      */
+    Zone?: string;
+    /**
+      * 实例标签列表
+      */
+    TagKeys?: Array<string>;
+    /**
+      * 模糊查询关键字，支持实例id、实例名、内网ip
+      */
+    SearchKey?: string;
 }
 /**
  * DescribeDBSecurityGroups请求参数结构体
@@ -1649,6 +1698,10 @@ export interface CreateReadOnlyDBInstancesRequest {
       * 代金券ID数组，目前单个订单只能使用一张
       */
     VoucherIds?: Array<string>;
+    /**
+      * 新建实例绑定的标签集合
+      */
+    ResourceTags?: Array<ResourceTag>;
 }
 /**
  * ModifyAccountPrivilege请求参数结构体
@@ -2207,6 +2260,19 @@ export interface DbRollbackTimeInfo {
     EndTime: string;
 }
 /**
+ * ModifyDBInstanceNetwork返回参数结构体
+ */
+export interface ModifyDBInstanceNetworkResponse {
+    /**
+      * 实例转网流程id，可通过[DescribeFlowStatus](https://cloud.tencent.com/document/product/238/19967)接口查询流程状态
+      */
+    FlowId?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * AssociateSecurityGroups返回参数结构体
  */
 export interface AssociateSecurityGroupsResponse {
@@ -2389,6 +2455,11 @@ export interface DBInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     HAFlag: string;
+    /**
+      * 实例绑定的标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResourceTags: Array<ResourceTag>;
 }
 /**
  * DescribeProductConfig返回参数结构体
@@ -2570,6 +2641,10 @@ export interface CreateBasicDBInstancesRequest {
       * 可维护时间窗配置，持续时间，单位：小时
       */
     Span?: number;
+    /**
+      * 新建实例绑定的标签集合
+      */
+    ResourceTags?: Array<ResourceTag>;
 }
 /**
  * ModifyDBName返回参数结构体
@@ -2865,6 +2940,19 @@ export interface DescribeReadOnlyGroupDetailsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 实例绑定的标签信息
+ */
+export interface ResourceTag {
+    /**
+      * 标签key
+      */
+    TagKey: string;
+    /**
+      * 标签value
+      */
+    TagValue: string;
 }
 /**
  * RecycleDBInstance返回参数结构体
@@ -3235,11 +3323,11 @@ export interface UpgradeDBInstanceRequest {
     /**
       * 实例升级后内存大小，单位GB，其值不能小于当前实例内存大小
       */
-    Memory: number;
+    Memory?: number;
     /**
       * 实例升级后磁盘大小，单位GB，其值不能小于当前实例磁盘大小
       */
-    Storage: number;
+    Storage?: number;
     /**
       * 是否自动使用代金券，0 - 不使用；1 - 默认使用。取值默认为0
       */
@@ -3252,6 +3340,18 @@ export interface UpgradeDBInstanceRequest {
       * 实例升级后的CPU核心数
       */
     Cpu?: number;
+    /**
+      * 升级sqlserver的版本，目前支持：2008R2（SQL Server 2008 Enterprise），2012SP3（SQL Server 2012 Enterprise）版本等。每个地域支持售卖的版本不同，可通过DescribeProductConfig接口来拉取每个地域可售卖的版本信息，版本不支持降级，不填则不修改版本
+      */
+    DBVersion?: string;
+    /**
+      * 升级sqlserver的高可用架构,从镜像容灾升级到always on集群容灾，仅支持2017及以上版本且支持always on高可用的实例，不支持降级到镜像方式容灾，CLUSTER-升级为always on容灾，不填则不修改高可用架构
+      */
+    HAType?: string;
+    /**
+      * 修改实例是否为跨可用区容灾，SameZones-修改为同可用区 MultiZones-修改为夸可用区
+      */
+    MultiZones?: string;
 }
 /**
  * CreateAccount请求参数结构体

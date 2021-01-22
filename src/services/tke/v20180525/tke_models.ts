@@ -132,6 +132,16 @@ export interface ModifyNodePoolDesiredCapacityAboutAsgResponse {
 }
 
 /**
+ * ModifyClusterNodePool返回参数结构体
+ */
+export interface ModifyClusterNodePoolResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeClusterKubeconfig返回参数结构体
  */
 export interface DescribeClusterKubeconfigResponse {
@@ -280,6 +290,61 @@ export interface DescribePrometheusTemplateSyncResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UpdateEKSCluster请求参数结构体
+ */
+export interface UpdateEKSClusterRequest {
+  /**
+   * 弹性集群Id
+   */
+  ClusterId: string
+
+  /**
+   * 弹性集群名称
+   */
+  ClusterName?: string
+
+  /**
+   * 弹性集群描述信息
+   */
+  ClusterDesc?: string
+
+  /**
+   * 子网Id 列表
+   */
+  SubnetIds?: Array<string>
+
+  /**
+   * 弹性容器集群公网访问LB信息
+   */
+  PublicLB?: ClusterPublicLB
+
+  /**
+   * 弹性容器集群内网访问LB信息
+   */
+  InternalLB?: ClusterInternalLB
+
+  /**
+   * Service 子网Id
+   */
+  ServiceSubnetId?: string
+
+  /**
+   * 集群自定义的dns 服务器信息
+   */
+  DnsServers?: Array<DnsServerConf>
+
+  /**
+   * 是否清空自定义dns 服务器设置。为1 表示 是。其他表示 否。
+   */
+  ClearDnsServer?: string
+
+  /**
+   * 将来删除集群时是否要删除cbs。默认为 FALSE
+   */
+  NeedDeleteCbs?: boolean
 }
 
 /**
@@ -461,33 +526,23 @@ export interface ClusterVersion {
 }
 
 /**
- * DescribePrometheusTemplates返回参数结构体
+ * CreatePrometheusTemplate请求参数结构体
  */
-export interface DescribePrometheusTemplatesResponse {
+export interface CreatePrometheusTemplateRequest {
   /**
-   * 模板列表
+   * 模板设置
    */
-  Templates?: Array<PrometheusTemplate>
-
-  /**
-   * 总数
-   */
-  Total?: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Template: PrometheusTemplate
 }
 
 /**
- * CreateClusterEndpoint返回参数结构体
+ * DeletePrometheusTemplate请求参数结构体
  */
-export interface CreateClusterEndpointResponse {
+export interface DeletePrometheusTemplateRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 模板id
    */
-  RequestId?: string
+  TemplateId: string
 }
 
 /**
@@ -535,6 +590,26 @@ pending 还未开始
 }
 
 /**
+ * DescribeEKSClusters返回参数结构体
+ */
+export interface DescribeEKSClustersResponse {
+  /**
+   * 集群总个数
+   */
+  TotalCount?: number
+
+  /**
+   * 集群信息列表
+   */
+  Clusters?: Array<EksCluster>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 集群路由表对象
  */
 export interface RouteTableInfo {
@@ -552,6 +627,26 @@ export interface RouteTableInfo {
    * VPC实例ID。
    */
   VpcId: string
+}
+
+/**
+ * IP 地址
+ */
+export interface IPAddress {
+  /**
+   * Ip 地址的类型。可为 advertise, public 等
+   */
+  Type: string
+
+  /**
+   * Ip 地址
+   */
+  Ip: string
+
+  /**
+   * 网络端口
+   */
+  Port: number
 }
 
 /**
@@ -575,23 +670,91 @@ export interface DeleteClusterRequest {
 }
 
 /**
- * 不同角色的节点配置参数
+ * prometheus一个抓取目标的信息
  */
-export interface RunInstancesForNode {
+export interface PrometheusTarget {
   /**
-   * 节点角色，取值:MASTER_ETCD, WORKER。MASTER_ETCD只有在创建 INDEPENDENT_CLUSTER 独立集群时需要指定。MASTER_ETCD节点数量为3～7，建议为奇数。MASTER_ETCD节点最小配置为4C8G。
+   * 抓取目标的URL
    */
-  NodeRole: string
+  Url: string
 
   /**
-   * CVM创建透传参数，json化字符串格式，详见[CVM创建实例](https://cloud.tencent.com/document/product/213/15730)接口，传入公共参数外的其他参数即可，其中ImageId会替换为TKE集群OS对应的镜像。
-   */
-  RunInstancesPara: Array<string>
+      * target当前状态,当前支持
+up = 健康
+down = 不健康
+unknown = 未知
+      */
+  State: string
 
   /**
-   * 节点高级设置，该参数会覆盖集群级别设置的InstanceAdvancedSettings，和上边的RunInstancesPara按照顺序一一对应（当前只对节点自定义参数ExtraArgs生效）。
+   * target的元label
    */
-  InstanceAdvancedSettingsOverrides?: Array<InstanceAdvancedSettings>
+  Labels: Array<Label>
+
+  /**
+   * 上一次抓取的时间
+   */
+  LastScrape: string
+
+  /**
+   * 上一次抓取的耗时，单位是s
+   */
+  ScrapeDuration: number
+
+  /**
+   * 上一次抓取如果错误，该字段存储错误信息
+   */
+  Error: string
+}
+
+/**
+ * CreateEKSCluster请求参数结构体
+ */
+export interface CreateEKSClusterRequest {
+  /**
+   * k8s版本号。可为1.14.4, 1.12.8。
+   */
+  K8SVersion: string
+
+  /**
+   * vpc 的Id
+   */
+  VpcId: string
+
+  /**
+   * 集群名称
+   */
+  ClusterName: string
+
+  /**
+   * 子网Id 列表
+   */
+  SubnetIds: Array<string>
+
+  /**
+   * 集群描述信息
+   */
+  ClusterDesc?: string
+
+  /**
+   * Serivce 所在子网Id
+   */
+  ServiceSubnetId?: string
+
+  /**
+   * 集群自定义的Dns服务器信息
+   */
+  DnsServers?: Array<DnsServerConf>
+
+  /**
+   * 扩展参数。须是map[string]string 的json 格式。
+   */
+  ExtraParam?: string
+
+  /**
+   * 是否在用户集群内开启Dns。默认为true
+   */
+  EnableVpcCoreDNS?: boolean
 }
 
 /**
@@ -652,6 +815,21 @@ export interface DescribeExistedInstancesRequest {
    * 返回数量，默认为20，最大值为100。关于Limit的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
    */
   Limit?: number
+}
+
+/**
+ * 标签绑定的资源类型，当前支持类型："cluster"
+ */
+export interface Tag {
+  /**
+   * 标签键
+   */
+  Key?: string
+
+  /**
+   * 标签值
+   */
+  Value?: string
 }
 
 /**
@@ -983,16 +1161,6 @@ export interface Instance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AutoscalingGroupId: string
-}
-
-/**
- * DescribePrometheusTemplateSync请求参数结构体
- */
-export interface DescribePrometheusTemplateSyncRequest {
-  /**
-   * 模板ID
-   */
-  TemplateId: string
 }
 
 /**
@@ -1350,6 +1518,26 @@ major 大版本原地升级
 }
 
 /**
+ * 弹性容器集群公网访问负载均衡信息
+ */
+export interface ClusterPublicLB {
+  /**
+   * 是否开启公网访问LB
+   */
+  Enabled: boolean
+
+  /**
+   * 允许访问的来源CIDR列表
+   */
+  AllowFromCidrs?: Array<string>
+
+  /**
+   * 安全策略放通单个IP或CIDR(例如: "192.168.1.0/24",默认为拒绝所有)
+   */
+  SecurityPolicies?: Array<string>
+}
+
+/**
  * 创建集群时，选择安装的扩展组件的信息
  */
 export interface ExtensionAddon {
@@ -1446,9 +1634,19 @@ export interface DeletePrometheusTemplateSyncRequest {
 }
 
 /**
- * UpdateClusterVersion返回参数结构体
+ * DescribePrometheusTemplates返回参数结构体
  */
-export interface UpdateClusterVersionResponse {
+export interface DescribePrometheusTemplatesResponse {
+  /**
+   * 模板列表
+   */
+  Templates?: Array<PrometheusTemplate>
+
+  /**
+   * 总数
+   */
+  Total?: number
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1541,31 +1739,33 @@ export interface CreatePrometheusDashboardResponse {
 }
 
 /**
- * 路由表冲突对象
+ * DescribeEKSClusterCredential返回参数结构体
  */
-export interface RouteTableConflict {
+export interface DescribeEKSClusterCredentialResponse {
   /**
-   * 路由表类型。
+   * 集群的接入地址信息
    */
-  RouteTableType: string
+  Addresses?: Array<IPAddress>
 
   /**
-      * 路由表CIDR。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RouteTableCidrBlock: string
+   * 集群的认证信息
+   */
+  Credential?: ClusterCredential
 
   /**
-      * 路由表名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RouteTableName: string
+   * 集群的公网访问信息
+   */
+  PublicLB?: ClusterPublicLB
 
   /**
-      * 路由表ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RouteTableId: string
+   * 集群的内网访问信息
+   */
+  InternalLB?: ClusterInternalLB
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1679,6 +1879,16 @@ export interface ManuallyAdded {
 }
 
 /**
+ * DeleteEKSCluster返回参数结构体
+ */
+export interface DeleteEKSClusterResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * prometheus配置
  */
 export interface PrometheusConfigItem {
@@ -1700,23 +1910,23 @@ export interface PrometheusConfigItem {
 }
 
 /**
- * DescribeClusterRouteTables返回参数结构体
+ * DeleteClusterNodePool请求参数结构体
  */
-export interface DescribeClusterRouteTablesResponse {
+export interface DeleteClusterNodePoolRequest {
   /**
-   * 符合条件的实例数量。
+   * 节点池对应的 ClusterId
    */
-  TotalCount?: number
+  ClusterId: string
 
   /**
-   * 集群路由表对象。
+   * 需要删除的节点池 Id 列表
    */
-  RouteTableSet?: Array<RouteTableInfo>
+  NodePoolIds: Array<string>
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 删除节点池时是否保留节点池内节点(节点仍然会被移出集群，但对应的实例不会被销毁)
    */
-  RequestId?: string
+  KeepInstance: boolean
 }
 
 /**
@@ -1817,6 +2027,21 @@ export interface RouteInfo {
    * 下一跳地址。
    */
   GatewayIp: string
+}
+
+/**
+ * 弹性容器集群内网访问LB信息
+ */
+export interface ClusterInternalLB {
+  /**
+   * 是否开启内网访问LB
+   */
+  Enabled: boolean
+
+  /**
+   * 内网访问LB关联的子网Id
+   */
+  SubnetId?: string
 }
 
 /**
@@ -2011,6 +2236,16 @@ export interface DescribePrometheusAlertRuleRequest {
 }
 
 /**
+ * DescribeEKSClusterCredential请求参数结构体
+ */
+export interface DescribeEKSClusterCredentialRequest {
+  /**
+   * 集群Id
+   */
+  ClusterId: string
+}
+
+/**
  * GetUpgradeInstanceProgress请求参数结构体
  */
 export interface GetUpgradeInstanceProgressRequest {
@@ -2056,9 +2291,9 @@ export interface AddNodeToNodePoolResponse {
 }
 
 /**
- * UpgradeClusterInstances返回参数结构体
+ * UpdateEKSCluster返回参数结构体
  */
-export interface UpgradeClusterInstancesResponse {
+export interface UpdateEKSClusterResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2105,6 +2340,44 @@ export interface DescribeClustersResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 接入k8s 的认证信息
+ */
+export interface ClusterCredential {
+  /**
+   * CA 根证书
+   */
+  CACert: string
+
+  /**
+   * 认证用的Token
+   */
+  Token?: string
+}
+
+/**
+ * 描述了实例登录相关配置与信息。
+ */
+export interface LoginSettings {
+  /**
+      * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到30位，至少包括两项[a-z]，[A-Z]、[0-9] 和 [( ) \` ~ ! @ # $ % ^ & *  - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。<br><li>Windows实例密码必须12到30位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /]中的特殊符号。<br><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Password?: string
+
+  /**
+      * 密钥ID列表。关联密钥后，就可以通过对应的私钥来访问实例；KeyId可通过接口[DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699)获取，密钥与密码不能同时指定，同时Windows操作系统不支持指定密钥。当前仅支持购买的时候指定一个密钥。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  KeyIds?: Array<string>
+
+  /**
+      * 保持镜像的原始设置。该参数与Password或KeyIds.N不能同时指定。只有使用自定义镜像、共享镜像或外部导入镜像创建实例时才能指定该参数为TRUE。取值范围：<br><li>TRUE：表示保持镜像的登录设置<br><li>FALSE：表示不保持镜像的登录设置<br><br>默认取值：FALSE。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  KeepImageLogin?: string
 }
 
 /**
@@ -2198,13 +2471,13 @@ export interface DataDisk {
 }
 
 /**
- * ModifyClusterNodePool返回参数结构体
+ * DeleteEKSCluster请求参数结构体
  */
-export interface ModifyClusterNodePoolResponse {
+export interface DeleteEKSClusterRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 弹性集群Id
    */
-  RequestId?: string
+  ClusterId: string
 }
 
 /**
@@ -2270,13 +2543,44 @@ export interface DescribeExistedInstancesResponse {
 }
 
 /**
- * CreatePrometheusTemplate请求参数结构体
+ * CreateEKSCluster返回参数结构体
  */
-export interface CreatePrometheusTemplateRequest {
+export interface CreateEKSClusterResponse {
   /**
-   * 模板设置
+   * 弹性集群Id
    */
-  Template: PrometheusTemplate
+  ClusterId?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeEKSClusters请求参数结构体
+ */
+export interface DescribeEKSClustersRequest {
+  /**
+      * 集群ID列表(为空时，
+表示获取账号下所有集群)
+      */
+  ClusterIds?: Array<string>
+
+  /**
+   * 偏移量,默认0
+   */
+  Offset?: number
+
+  /**
+   * 最大输出条数，默认20
+   */
+  Limit?: number
+
+  /**
+   * 过滤条件,当前只支持按照单个条件ClusterName进行过滤
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -2295,64 +2599,83 @@ export interface ResourceDeleteOption {
 }
 
 /**
- * prometheus一个抓取目标的信息
+ * Eks 自定义域名服务器 配置
  */
-export interface PrometheusTarget {
+export interface DnsServerConf {
   /**
-   * 抓取目标的URL
+   * 域名。空字符串表示所有域名。
    */
-  Url: string
+  Domain: string
 
   /**
-      * target当前状态,当前支持
-up = 健康
-down = 不健康
-unknown = 未知
-      */
-  State: string
-
-  /**
-   * target的元label
+   * dns 服务器地址列表。地址格式 ip:port
    */
-  Labels: Array<Label>
-
-  /**
-   * 上一次抓取的时间
-   */
-  LastScrape: string
-
-  /**
-   * 上一次抓取的耗时，单位是s
-   */
-  ScrapeDuration: number
-
-  /**
-   * 上一次抓取如果错误，该字段存储错误信息
-   */
-  Error: string
+  DnsServers: Array<string>
 }
 
 /**
- * 描述了实例登录相关配置与信息。
+ * 弹性集群信息
  */
-export interface LoginSettings {
+export interface EksCluster {
   /**
-      * 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下：<br><li>Linux实例密码必须8到30位，至少包括两项[a-z]，[A-Z]、[0-9] 和 [( ) \` ~ ! @ # $ % ^ & *  - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。<br><li>Windows实例密码必须12到30位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) \` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /]中的特殊符号。<br><br>若不指定该参数，则由系统随机生成密码，并通过站内信方式通知到用户。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Password?: string
+   * 集群Id
+   */
+  ClusterId: string
 
   /**
-      * 密钥ID列表。关联密钥后，就可以通过对应的私钥来访问实例；KeyId可通过接口[DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699)获取，密钥与密码不能同时指定，同时Windows操作系统不支持指定密钥。当前仅支持购买的时候指定一个密钥。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  KeyIds?: Array<string>
+   * 集群名称
+   */
+  ClusterName: string
 
   /**
-      * 保持镜像的原始设置。该参数与Password或KeyIds.N不能同时指定。只有使用自定义镜像、共享镜像或外部导入镜像创建实例时才能指定该参数为TRUE。取值范围：<br><li>TRUE：表示保持镜像的登录设置<br><li>FALSE：表示不保持镜像的登录设置<br><br>默认取值：FALSE。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  KeepImageLogin?: string
+   * Vpc Id
+   */
+  VpcId: string
+
+  /**
+   * 子网列表
+   */
+  SubnetIds: Array<string>
+
+  /**
+   * k8s 版本号
+   */
+  K8SVersion: string
+
+  /**
+   * 集群状态
+   */
+  Status?: string
+
+  /**
+   * 集群描述信息
+   */
+  ClusterDesc?: string
+
+  /**
+   * 集群创建时间
+   */
+  CreatedTime?: string
+
+  /**
+   * Service 子网Id
+   */
+  ServiceSubnetId?: string
+
+  /**
+   * 集群的自定义dns 服务器信息
+   */
+  DnsServers?: Array<DnsServerConf>
+
+  /**
+   * 将来删除集群时是否要删除cbs。默认为 FALSE
+   */
+  NeedDeleteCbs?: boolean
+
+  /**
+   * 是否在用户集群内开启Dns。默认为TRUE
+   */
+  EnableVpcCoreDNS?: boolean
 }
 
 /**
@@ -2902,13 +3225,13 @@ export interface ImageInstance {
 }
 
 /**
- * DeletePrometheusTemplate请求参数结构体
+ * CreateClusterEndpoint返回参数结构体
  */
-export interface DeletePrometheusTemplateRequest {
+export interface CreateClusterEndpointResponse {
   /**
-   * 模板id
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  TemplateId: string
+  RequestId?: string
 }
 
 /**
@@ -3058,23 +3381,13 @@ export interface DeletePrometheusTemplateResponse {
 }
 
 /**
- * DeleteClusterNodePool请求参数结构体
+ * DescribePrometheusTemplateSync请求参数结构体
  */
-export interface DeleteClusterNodePoolRequest {
+export interface DescribePrometheusTemplateSyncRequest {
   /**
-   * 节点池对应的 ClusterId
+   * 模板ID
    */
-  ClusterId: string
-
-  /**
-   * 需要删除的节点池 Id 列表
-   */
-  NodePoolIds: Array<string>
-
-  /**
-   * 删除节点池时是否保留节点池内节点(节点仍然会被移出集群，但对应的实例不会被销毁)
-   */
-  KeepInstance: boolean
+  TemplateId: string
 }
 
 /**
@@ -3231,6 +3544,16 @@ export interface DescribeClusterEndpointStatusResponse {
       */
   Status?: string
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpgradeClusterInstances返回参数结构体
+ */
+export interface UpgradeClusterInstancesResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3637,6 +3960,26 @@ export interface InstanceUpgradeClusterStatus {
 }
 
 /**
+ * 不同角色的节点配置参数
+ */
+export interface RunInstancesForNode {
+  /**
+   * 节点角色，取值:MASTER_ETCD, WORKER。MASTER_ETCD只有在创建 INDEPENDENT_CLUSTER 独立集群时需要指定。MASTER_ETCD节点数量为3～7，建议为奇数。MASTER_ETCD节点最小配置为4C8G。
+   */
+  NodeRole: string
+
+  /**
+   * CVM创建透传参数，json化字符串格式，详见[CVM创建实例](https://cloud.tencent.com/document/product/213/15730)接口，传入公共参数外的其他参数即可，其中ImageId会替换为TKE集群OS对应的镜像。
+   */
+  RunInstancesPara: Array<string>
+
+  /**
+   * 节点高级设置，该参数会覆盖集群级别设置的InstanceAdvancedSettings，和上边的RunInstancesPara按照顺序一一对应（当前只对节点自定义参数ExtraArgs生效）。
+   */
+  InstanceAdvancedSettingsOverrides?: Array<InstanceAdvancedSettings>
+}
+
+/**
  * DescribeClusterRoutes请求参数结构体
  */
 export interface DescribeClusterRoutesRequest {
@@ -3872,18 +4215,23 @@ export interface DescribeAvailableClusterVersionResponse {
 }
 
 /**
- * 标签绑定的资源类型，当前支持类型："cluster"
+ * DescribeClusterRouteTables返回参数结构体
  */
-export interface Tag {
+export interface DescribeClusterRouteTablesResponse {
   /**
-   * 标签键
+   * 符合条件的实例数量。
    */
-  Key?: string
+  TotalCount?: number
 
   /**
-   * 标签值
+   * 集群路由表对象。
    */
-  Value?: string
+  RouteTableSet?: Array<RouteTableInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4114,6 +4462,44 @@ export interface RunMonitorServiceEnabled {
    * 是否开启[云监控](/document/product/248)服务。取值范围：<br><li>TRUE：表示开启云监控服务<br><li>FALSE：表示不开启云监控服务<br><br>默认取值：TRUE。
    */
   Enabled?: boolean
+}
+
+/**
+ * UpdateClusterVersion返回参数结构体
+ */
+export interface UpdateClusterVersionResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 路由表冲突对象
+ */
+export interface RouteTableConflict {
+  /**
+   * 路由表类型。
+   */
+  RouteTableType: string
+
+  /**
+      * 路由表CIDR。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RouteTableCidrBlock: string
+
+  /**
+      * 路由表名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RouteTableName: string
+
+  /**
+      * 路由表ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RouteTableId: string
 }
 
 /**

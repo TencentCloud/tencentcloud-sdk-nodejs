@@ -61,6 +61,7 @@ import {
   ModifyMaintenanceSpanResponse,
   ZoneInfo,
   InquiryPriceCreateDBInstancesRequest,
+  ModifyDBInstanceNetworkRequest,
   DescribeBackupByFlowIdResponse,
   RecycleDBInstanceRequest,
   DescribeFlowStatusRequest,
@@ -131,6 +132,7 @@ import {
   InquiryPriceRenewDBInstanceRequest,
   TerminateDBInstanceResponse,
   DbRollbackTimeInfo,
+  ModifyDBInstanceNetworkResponse,
   AssociateSecurityGroupsResponse,
   DescribeReadOnlyGroupListRequest,
   CreateBackupResponse,
@@ -155,6 +157,7 @@ import {
   DBPrivilege,
   DescribeOrdersRequest,
   DescribeReadOnlyGroupDetailsResponse,
+  ResourceTag,
   RecycleDBInstanceResponse,
   DeleteAccountRequest,
   DescribeReadOnlyGroupByReadOnlyInstanceRequest,
@@ -597,6 +600,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ResetAccountPasswordResponse) => void
   ): Promise<ResetAccountPasswordResponse> {
     return this.request("ResetAccountPassword", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyDBInstanceNetwork）用于修改运行中实例的网络，仅支持从VPC网络到VPC网络的转换
+   */
+  async ModifyDBInstanceNetwork(
+    req: ModifyDBInstanceNetworkRequest,
+    cb?: (error: string, rep: ModifyDBInstanceNetworkResponse) => void
+  ): Promise<ModifyDBInstanceNetworkResponse> {
+    return this.request("ModifyDBInstanceNetwork", req, cb)
   }
 
   /**

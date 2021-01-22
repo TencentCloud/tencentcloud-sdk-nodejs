@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePrometheusTemplates", req, cb);
     }
     /**
+     * 查询弹性集群列表
+     */
+    async DescribeEKSClusters(req, cb) {
+        return this.request("DescribeEKSClusters", req, cb);
+    }
+    /**
      * 检查给定节点列表中哪些是可升级的
      */
     async CheckInstancesUpgradeAble(req, cb) {
@@ -56,6 +62,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribePrometheusOverviews(req, cb) {
         return this.request("DescribePrometheusOverviews", req, cb);
+    }
+    /**
+     * 创建弹性集群
+     */
+    async CreateEKSCluster(req, cb) {
+        return this.request("CreateEKSCluster", req, cb);
     }
     /**
      * 查询节点池详情
@@ -232,6 +244,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpgradeClusterInstances", req, cb);
     }
     /**
+     * 获取镜像信息
+     */
+    async DescribeImages(req, cb) {
+        return this.request("DescribeImages", req, cb);
+    }
+    /**
      * 创建集群访问端口(独立集群开启内网/外网访问，托管集群支持开启内网访问)
      */
     async CreateClusterEndpoint(req, cb) {
@@ -278,6 +296,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async AddExistedInstances(req, cb) {
         return this.request("AddExistedInstances", req, cb);
+    }
+    /**
+     * 删除弹性集群(yunapiv3)
+     */
+    async DeleteEKSCluster(req, cb) {
+        return this.request("DeleteEKSCluster", req, cb);
     }
     /**
      * 修改节点池关联伸缩组的期望实例数
@@ -346,16 +370,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterKubeconfig", req, cb);
     }
     /**
+     * 修改弹性集群名称等属性
+     */
+    async UpdateEKSCluster(req, cb) {
+        return this.request("UpdateEKSCluster", req, cb);
+    }
+    /**
      * 升级集群 Master 组件到指定版本
      */
     async UpdateClusterVersion(req, cb) {
         return this.request("UpdateClusterVersion", req, cb);
     }
     /**
-     * 获取镜像信息
+     * 获取弹性容器集群的接入认证信息
      */
-    async DescribeImages(req, cb) {
-        return this.request("DescribeImages", req, cb);
+    async DescribeEKSClusterCredential(req, cb) {
+        return this.request("DescribeEKSClusterCredential", req, cb);
     }
     /**
      * 获取告警规则列表

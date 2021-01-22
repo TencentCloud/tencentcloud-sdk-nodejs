@@ -2018,7 +2018,7 @@ export interface CreateInstanceRequest {
   RegistryName: string
 
   /**
-   * 企业版实例类型
+   * 企业版实例类型（basic 基础版；standard 标准版；premium 高级版）
    */
   RegistryType: string
 
