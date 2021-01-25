@@ -259,7 +259,7 @@ export interface CreateJobConfigResponse {
     /**
       * 作业配置版本号
       */
-    Version?: number;
+    Version: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -566,6 +566,11 @@ export interface JobV1 {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SchedulerType: number;
+    /**
+      * 作业所在集群状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClusterStatus: number;
 }
 /**
  * DescribeSystemResources返回参数结构体

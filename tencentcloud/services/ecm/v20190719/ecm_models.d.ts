@@ -207,11 +207,29 @@ export interface CreateRoutesRequest {
     Routes: Array<Route>;
 }
 /**
+ * SetSecurityGroupForLoadbalancers请求参数结构体
+ */
+export interface SetSecurityGroupForLoadbalancersRequest {
+    /**
+      * 负载均衡实例ID数组
+      */
+    LoadBalancerIds: Array<string>;
+    /**
+      * 安全组ID，如 esg-12345678
+      */
+    SecurityGroup: string;
+    /**
+      * ADD 绑定安全组；
+DEL 解绑安全组
+      */
+    OperationType: string;
+}
+/**
  * CreateLoadBalancer请求参数结构体
  */
 export interface CreateLoadBalancerRequest {
     /**
-      * 区域。
+      * ECM区域，形如ap-xian-ecm。
       */
     EcmRegion: string;
     /**
@@ -243,6 +261,10 @@ export interface CreateLoadBalancerRequest {
       * 标签。
       */
     Tags?: Array<TagInfo>;
+    /**
+      * 安全组。
+      */
+    SecurityGroups?: Array<string>;
 }
 /**
  * DescribeHaVips返回参数结构体
@@ -330,6 +352,10 @@ export interface ModifyLoadBalancerAttributesRequest {
       * 网络计费及带宽相关参数
       */
     InternetChargeInfo?: LoadBalancerInternetAccessible;
+    /**
+      * Target是否放通来自ELB的流量。开启放通（true）：只验证ELB上的安全组；不开启放通（false）：需同时验证ELB和后端实例上的安全组。
+      */
+    LoadBalancerPassToTarget?: boolean;
 }
 /**
  * DeleteSecurityGroupPolicies请求参数结构体
@@ -645,6 +671,15 @@ export interface RouteConflict {
     ConflictSet: Array<Route>;
 }
 /**
+ * SetLoadBalancerSecurityGroups返回参数结构体
+ */
+export interface SetLoadBalancerSecurityGroupsResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 描述EIP配额信息
  */
 export interface EipQuota {
@@ -846,6 +881,10 @@ export interface DescribeLoadBalancersRequest {
 tag-key - String - 是否必填：否 - （过滤条件）按照标签的键过滤。
       */
     Filters?: Array<Filter>;
+    /**
+      * 安全组。
+      */
+    SecurityGroup?: string;
 }
 /**
  * DescribeInstances返回参数结构体
@@ -1002,6 +1041,15 @@ export interface SrcImage {
       * 来源镜像类型
       */
     ImageType: string;
+}
+/**
+ * SetSecurityGroupForLoadbalancers返回参数结构体
+ */
+export interface SetSecurityGroupForLoadbalancersResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 机型配置
@@ -2379,19 +2427,17 @@ export interface ModifyLoadBalancerAttributesResponse {
     RequestId?: string;
 }
 /**
- * 标签信息。
+ * SetLoadBalancerSecurityGroups请求参数结构体
  */
-export interface Tag {
+export interface SetLoadBalancerSecurityGroupsRequest {
     /**
-      * 标签的键。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 负载均衡实例 ID
       */
-    Key: string;
+    LoadBalancerId: string;
     /**
-      * 标签的值。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 安全组ID构成的数组，一个负载均衡实例最多可绑定5个安全组，如果要解绑所有安全组，可不传此参数，或传入空数组
       */
-    Value: string;
+    SecurityGroups?: Array<string>;
 }
 /**
  * DescribeDefaultSubnet请求参数结构体
@@ -5327,6 +5373,21 @@ export interface ModifyImageAttributeRequest {
     ImageDescription?: string;
 }
 /**
+ * 标签信息。
+ */
+export interface Tag {
+    /**
+      * 标签的键。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Key: string;
+    /**
+      * 标签的值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Value: string;
+}
+/**
  * 操作Action
  */
 export interface OperatorAction {
@@ -6030,6 +6091,16 @@ export interface LoadBalancer {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     NetworkAttributes: LoadBalancerInternetAccessible;
+    /**
+      * 安全组。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SecureGroups: Array<string>;
+    /**
+      * 后端机器是否放通来自ELB的流量。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LoadBalancerPassToTarget: boolean;
 }
 /**
  * ip地址相关信息结构体。

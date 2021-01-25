@@ -35,6 +35,7 @@ import {
   UploadCertificateRequest,
   UploadConfirmLetterRequest,
   DescribeCertificateDetailRequest,
+  Tags,
   ApplyCertificateRequest,
   ReplaceCertificateRequest,
   UploadRevokeLetterResponse,

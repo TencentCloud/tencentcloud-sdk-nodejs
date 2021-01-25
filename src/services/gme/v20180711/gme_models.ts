@@ -75,6 +75,21 @@ export interface ModifyAppStatusRequest {
 }
 
 /**
+ * 用户进出房间信息
+ */
+export interface InOutTimeInfo {
+  /**
+   * 进入房间时间
+   */
+  StartTime: number
+
+  /**
+   * 退出房间时间
+   */
+  EndTime: number
+}
+
+/**
  * DescribeScanResultList返回参数结构体
  */
 export interface DescribeScanResultListResponse {
@@ -88,6 +103,26 @@ export interface DescribeScanResultListResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeApplicationData请求参数结构体
+ */
+export interface DescribeApplicationDataRequest {
+  /**
+   * 应用ID
+   */
+  BizId: number
+
+  /**
+   * 数据开始时间，格式为 年-月-日，如: 2018-07-13
+   */
+  StartDate: string
+
+  /**
+   * 数据结束时间，格式为 年-月-日，如: 2018-07-13
+   */
+  EndDate: string
 }
 
 /**
@@ -233,6 +268,76 @@ export interface VoiceMessageConf {
 }
 
 /**
+ * 应用统计数据
+ */
+export interface ApplicationDataStatistics {
+  /**
+   * 应用ID
+   */
+  BizId: number
+
+  /**
+   * Dau统计项数目
+   */
+  DauDataNum: number
+
+  /**
+   * 大陆地区Dau统计数据，单位人
+   */
+  DauDataMainland: Array<StatisticsItem>
+
+  /**
+   * 海外地区Dau统计数据，单位人
+   */
+  DauDataOversea: Array<StatisticsItem>
+
+  /**
+   * 大陆和海外地区Dau统计数据汇总，单位人
+   */
+  DauDataSum: Array<StatisticsItem>
+
+  /**
+   * 实时语音时长统计项数目
+   */
+  DurationDataNum: number
+
+  /**
+   * 大陆地区实时语音时长统计数据，单位分钟
+   */
+  DurationDataMainland: Array<StatisticsItem>
+
+  /**
+   * 海外地区实时语音时长统计数据，单位分钟
+   */
+  DurationDataOversea: Array<StatisticsItem>
+
+  /**
+   * 大陆和海外地区实时语音时长统计数据汇总，单位分钟
+   */
+  DurationDataSum: Array<StatisticsItem>
+
+  /**
+   * Pcu统计项数目
+   */
+  PcuDataNum: number
+
+  /**
+   * 大陆地区Pcu统计数据，单位人
+   */
+  PcuDataMainland: Array<StatisticsItem>
+
+  /**
+   * 海外地区Pcu统计数据，单位人
+   */
+  PcuDataOversea: Array<StatisticsItem>
+
+  /**
+   * 大陆和海外地区Pcu统计数据汇总，单位人
+   */
+  PcuDataSum: Array<StatisticsItem>
+}
+
+/**
  * DescribeFilterResultList返回参数结构体
  */
 export interface DescribeFilterResultListResponse {
@@ -265,18 +370,18 @@ export interface DescribeAppStatisticsResponse {
 }
 
 /**
- * 用户进出房间信息
+ * DescribeApplicationData返回参数结构体
  */
-export interface InOutTimeInfo {
+export interface DescribeApplicationDataResponse {
   /**
-   * 进入房间时间
+   * 应用统计数据
    */
-  StartTime: number
+  Data: ApplicationDataStatistics
 
   /**
-   * 退出房间时间
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  EndTime: number
+  RequestId?: string
 }
 
 /**
@@ -312,6 +417,21 @@ export interface VoiceFilterStatisticsItem {
    * 语音过滤总时长
    */
   Duration: number
+}
+
+/**
+ * 用量数据单元
+ */
+export interface StatisticsItem {
+  /**
+   * 日期，格式为年-月-日，如2018-07-13
+   */
+  StatDate: string
+
+  /**
+   * 统计值
+   */
+  Data: number
 }
 
 /**
@@ -762,31 +882,6 @@ export interface ModifyAppStatusResponse {
 }
 
 /**
- * DescribeFilterResult请求参数结构体
- */
-export interface DescribeFilterResultRequest {
-  /**
-   * 应用ID
-   */
-  BizId: number
-
-  /**
-   * 文件ID
-   */
-  FileId: string
-}
-
-/**
- * 语音过滤服务配置数据
- */
-export interface VoiceFilterConf {
-  /**
-   * 语音过滤服务开关，取值：open/close
-   */
-  Status?: string
-}
-
-/**
  * ScanVoice请求参数结构体
  */
 export interface ScanVoiceRequest {
@@ -816,6 +911,31 @@ export interface ScanVoiceRequest {
    * 异步检测结果回调地址，具体见上述<a href="#Callback_Declare">回调相关说明</a>。（说明：该字段为空时，必须通过接口(查询语音检测结果)获取检测结果）。
    */
   Callback?: string
+}
+
+/**
+ * 语音过滤服务配置数据
+ */
+export interface VoiceFilterConf {
+  /**
+   * 语音过滤服务开关，取值：open/close
+   */
+  Status?: string
+}
+
+/**
+ * DescribeFilterResult请求参数结构体
+ */
+export interface DescribeFilterResultRequest {
+  /**
+   * 应用ID
+   */
+  BizId: number
+
+  /**
+   * 文件ID
+   */
+  FileId: string
 }
 
 /**

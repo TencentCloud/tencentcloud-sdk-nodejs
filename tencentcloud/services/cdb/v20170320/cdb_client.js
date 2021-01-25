@@ -174,7 +174,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTagsOfInstanceIds", req, cb);
     }
     /**
-     * 本接口(DescribeDatabases)用于查询云数据库实例的数据库信息。
+     * 本接口(DescribeDatabases)用于查询云数据库实例的数据库信息，仅支持主实例和灾备实例，不支持只读实例。
      */
     async DescribeDatabases(req, cb) {
         return this.request("DescribeDatabases", req, cb);
@@ -198,7 +198,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DisassociateSecurityGroups", req, cb);
     }
     /**
-     * 本接口(DescribeTables)用于查询云数据库实例的数据库表信息。
+     * 本接口(DescribeTables)用于查询云数据库实例的数据库表信息，仅支持主实例和灾备实例，不支持只读实例。
      */
     async DescribeTables(req, cb) {
         return this.request("DescribeTables", req, cb);

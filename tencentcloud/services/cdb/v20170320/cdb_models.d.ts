@@ -714,11 +714,11 @@ export interface DescribeTablesResponse {
     /**
       * 符合查询条件的数据库表总数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 返回的数据库表信息。
       */
-    Items?: Array<string>;
+    Items: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4245,11 +4245,11 @@ export interface DescribeDatabasesResponse {
     /**
       * 符合查询条件的实例总数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 返回的实例信息。
       */
-    Items?: Array<string>;
+    Items: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

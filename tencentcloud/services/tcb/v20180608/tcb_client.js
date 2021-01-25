@@ -40,6 +40,15 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEndUsers", req, cb);
     }
     /**
+     * 查询后付费短信资源量
+1 有免费包的返回SmsFreeQuota结构所有字段
+2 没有免费包，有付费包，付费返回复用SmsFreeQuota结构，其中只有 TodayUsedQuota 字段有效
+3 都没有返回为空数组
+     */
+    async DescribeSmsQuotas(req, cb) {
+        return this.request("DescribeSmsQuotas", req, cb);
+    }
+    /**
      * 获取环境列表，含环境下的各个资源信息。尤其是各资源的唯一标识，是请求各资源的关键参数
      */
     async DescribeEnvs(req, cb) {

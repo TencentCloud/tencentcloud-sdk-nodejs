@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ScanVoiceResponse, ModifyAppStatusRequest, DescribeScanResultListResponse, VoiceFilterRequest, DescribeScanResultListRequest, VoiceFilterResponse, DescribeFilterResultListResponse, DescribeAppStatisticsResponse, DescribeUserInAndOutTimeResponse, DescribeFilterResultResponse, DescribeFilterResultListRequest, CreateAppRequest, CreateAppResponse, DescribeAppStatisticsRequest, ModifyAppStatusResponse, DescribeFilterResultRequest, ScanVoiceRequest, DescribeUserInAndOutTimeRequest } from "./gme_models";
+import { ScanVoiceResponse, ModifyAppStatusRequest, DescribeScanResultListResponse, DescribeApplicationDataRequest, VoiceFilterRequest, DescribeScanResultListRequest, VoiceFilterResponse, DescribeFilterResultListResponse, DescribeAppStatisticsResponse, DescribeApplicationDataResponse, DescribeUserInAndOutTimeResponse, DescribeFilterResultResponse, DescribeFilterResultListRequest, CreateAppRequest, CreateAppResponse, DescribeAppStatisticsRequest, ModifyAppStatusResponse, ScanVoiceRequest, DescribeFilterResultRequest, DescribeUserInAndOutTimeRequest } from "./gme_models";
 /**
  * gme client
  * @class
@@ -26,6 +26,10 @@ export declare class Client extends AbstractClient {
 Type表示过滤类型，1：政治，2：色情，3：谩骂
      */
     VoiceFilter(req: VoiceFilterRequest, cb?: (error: string, rep: VoiceFilterResponse) => void): Promise<VoiceFilterResponse>;
+    /**
+     * 本接口(DescribeApplicationData)用于获取数据详情信息，最多可拉取最近90天的数据。
+     */
+    DescribeApplicationData(req: DescribeApplicationDataRequest, cb?: (error: string, rep: DescribeApplicationDataResponse) => void): Promise<DescribeApplicationDataResponse>;
     /**
      * 根据日期查询识别结果列表
      */

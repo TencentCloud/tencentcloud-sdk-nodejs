@@ -38,6 +38,16 @@ it("tcb.v20180608.DescribeEndUsers", async function () {
     }
 })
 
+it("tcb.v20180608.DescribeSmsQuotas", async function () {
+    try {
+       const data = await client.DescribeSmsQuotas({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.DescribeEnvs", async function () {
     try {
        const data = await client.DescribeEnvs({})

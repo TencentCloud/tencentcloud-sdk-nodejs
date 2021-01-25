@@ -29,6 +29,7 @@ import {
   BatchModifyTargetWeightResponse,
   InstanceStatistic,
   CreateRoutesRequest,
+  SetSecurityGroupForLoadbalancersRequest,
   CreateLoadBalancerRequest,
   DescribeHaVipsResponse,
   ModifyModuleSecurityGroupsRequest,
@@ -48,6 +49,7 @@ import {
   StartInstancesRequest,
   HaVip,
   RouteConflict,
+  SetLoadBalancerSecurityGroupsResponse,
   EipQuota,
   DeleteSubnetResponse,
   ModifyAddressesBandwidthResponse,
@@ -59,6 +61,7 @@ import {
   NetworkInterface,
   ModifyModuleSecurityGroupsResponse,
   SrcImage,
+  SetSecurityGroupForLoadbalancersResponse,
   InstanceTypeConfig,
   DescribeNodeResponse,
   RemovePrivateIpAddressesResponse,
@@ -129,7 +132,7 @@ import {
   RuleHealth,
   Listener,
   ModifyLoadBalancerAttributesResponse,
-  Tag,
+  SetLoadBalancerSecurityGroupsRequest,
   DescribeDefaultSubnetRequest,
   ResetInstancesMaxBandwidthResponse,
   DeleteSecurityGroupResponse,
@@ -298,6 +301,7 @@ import {
   AssignPrivateIpAddressesRequest,
   ResetInstancesPasswordRequest,
   ModifyImageAttributeRequest,
+  Tag,
   OperatorAction,
   CreateVpcRequest,
   CreateLoadBalancerResponse,
@@ -678,6 +682,16 @@ EIP 如果被封堵，则不能进行解绑定操作。
     cb?: (error: string, rep: CreateVpcResponse) => void
   ): Promise<CreateVpcResponse> {
     return this.request("CreateVpc", req, cb)
+  }
+
+  /**
+   * 设置负载均衡实例的安全组。
+   */
+  async SetLoadBalancerSecurityGroups(
+    req: SetLoadBalancerSecurityGroupsRequest,
+    cb?: (error: string, rep: SetLoadBalancerSecurityGroupsResponse) => void
+  ): Promise<SetLoadBalancerSecurityGroupsResponse> {
+    return this.request("SetLoadBalancerSecurityGroups", req, cb)
   }
 
   /**
@@ -1137,6 +1151,16 @@ EIP 如果欠费或被封堵，则不能被绑定。
     cb?: (error: string, rep: DescribeSecurityGroupLimitsResponse) => void
   ): Promise<DescribeSecurityGroupLimitsResponse> {
     return this.request("DescribeSecurityGroupLimits", req, cb)
+  }
+
+  /**
+   * 绑定或解绑一个安全组到多个负载均衡实例。
+   */
+  async SetSecurityGroupForLoadbalancers(
+    req: SetSecurityGroupForLoadbalancersRequest,
+    cb?: (error: string, rep: SetSecurityGroupForLoadbalancersResponse) => void
+  ): Promise<SetSecurityGroupForLoadbalancersResponse> {
+    return this.request("SetSecurityGroupForLoadbalancers", req, cb)
   }
 
   /**

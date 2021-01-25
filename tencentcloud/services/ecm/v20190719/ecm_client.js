@@ -231,6 +231,12 @@ EIP 如果被封堵，则不能进行解绑定操作。
         return this.request("CreateVpc", req, cb);
     }
     /**
+     * 设置负载均衡实例的安全组。
+     */
+    async SetLoadBalancerSecurityGroups(req, cb) {
+        return this.request("SetLoadBalancerSecurityGroups", req, cb);
+    }
+    /**
      * 申请一个或多个弹性公网IP（简称 EIP）
      */
     async AllocateAddresses(req, cb) {
@@ -508,6 +514,12 @@ EIP 如果欠费或被封堵，则不能被绑定。
      */
     async DescribeSecurityGroupLimits(req, cb) {
         return this.request("DescribeSecurityGroupLimits", req, cb);
+    }
+    /**
+     * 绑定或解绑一个安全组到多个负载均衡实例。
+     */
+    async SetSecurityGroupForLoadbalancers(req, cb) {
+        return this.request("SetSecurityGroupForLoadbalancers", req, cb);
     }
     /**
      * 修改在一个可用区下创建实例时使用的默认子网（创建实例时，未填写VPC参数时使用的sunbetId）

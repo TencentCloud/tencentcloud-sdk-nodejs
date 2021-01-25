@@ -21,7 +21,9 @@ import {
   ScanVoiceResponse,
   AppStatisticsItem,
   ModifyAppStatusRequest,
+  InOutTimeInfo,
   DescribeScanResultListResponse,
+  DescribeApplicationDataRequest,
   VoiceFilterRequest,
   VoiceMessageStatisticsItem,
   DescribeScanResultListRequest,
@@ -29,11 +31,13 @@ import {
   VoiceFilterResponse,
   Tag,
   VoiceMessageConf,
+  ApplicationDataStatistics,
   DescribeFilterResultListResponse,
   DescribeAppStatisticsResponse,
-  InOutTimeInfo,
+  DescribeApplicationDataResponse,
   Task,
   VoiceFilterStatisticsItem,
+  StatisticsItem,
   DescribeUserInAndOutTimeResponse,
   VoiceFilterInfo,
   DescribeFilterResultResponse,
@@ -48,9 +52,9 @@ import {
   DescribeAppStatisticsRequest,
   ScanPiece,
   ModifyAppStatusResponse,
-  DescribeFilterResultRequest,
-  VoiceFilterConf,
   ScanVoiceRequest,
+  VoiceFilterConf,
+  DescribeFilterResultRequest,
   DescribeUserInAndOutTimeRequest,
 } from "./gme_models"
 
@@ -104,6 +108,16 @@ Type表示过滤类型，1：政治，2：色情，3：谩骂
     cb?: (error: string, rep: VoiceFilterResponse) => void
   ): Promise<VoiceFilterResponse> {
     return this.request("VoiceFilter", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeApplicationData)用于获取数据详情信息，最多可拉取最近90天的数据。
+   */
+  async DescribeApplicationData(
+    req: DescribeApplicationDataRequest,
+    cb?: (error: string, rep: DescribeApplicationDataResponse) => void
+  ): Promise<DescribeApplicationDataResponse> {
+    return this.request("DescribeApplicationData", req, cb)
   }
 
   /**

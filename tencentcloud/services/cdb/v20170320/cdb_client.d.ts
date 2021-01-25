@@ -108,7 +108,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeTagsOfInstanceIds(req: DescribeTagsOfInstanceIdsRequest, cb?: (error: string, rep: DescribeTagsOfInstanceIdsResponse) => void): Promise<DescribeTagsOfInstanceIdsResponse>;
     /**
-     * 本接口(DescribeDatabases)用于查询云数据库实例的数据库信息。
+     * 本接口(DescribeDatabases)用于查询云数据库实例的数据库信息，仅支持主实例和灾备实例，不支持只读实例。
      */
     DescribeDatabases(req: DescribeDatabasesRequest, cb?: (error: string, rep: DescribeDatabasesResponse) => void): Promise<DescribeDatabasesResponse>;
     /**
@@ -124,7 +124,7 @@ export declare class Client extends AbstractClient {
      */
     DisassociateSecurityGroups(req: DisassociateSecurityGroupsRequest, cb?: (error: string, rep: DisassociateSecurityGroupsResponse) => void): Promise<DisassociateSecurityGroupsResponse>;
     /**
-     * 本接口(DescribeTables)用于查询云数据库实例的数据库表信息。
+     * 本接口(DescribeTables)用于查询云数据库实例的数据库表信息，仅支持主实例和灾备实例，不支持只读实例。
      */
     DescribeTables(req: DescribeTablesRequest, cb?: (error: string, rep: DescribeTablesResponse) => void): Promise<DescribeTablesResponse>;
     /**

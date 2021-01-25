@@ -348,6 +348,16 @@ it("ecm.v20190719.CreateVpc", async function () {
     }
 })
 
+it("ecm.v20190719.SetLoadBalancerSecurityGroups", async function () {
+    try {
+       const data = await client.SetLoadBalancerSecurityGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ecm.v20190719.AllocateAddresses", async function () {
     try {
        const data = await client.AllocateAddresses({})
@@ -791,6 +801,16 @@ it("ecm.v20190719.DeleteRouteTable", async function () {
 it("ecm.v20190719.DescribeSecurityGroupLimits", async function () {
     try {
        const data = await client.DescribeSecurityGroupLimits({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ecm.v20190719.SetSecurityGroupForLoadbalancers", async function () {
+    try {
+       const data = await client.SetSecurityGroupForLoadbalancers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

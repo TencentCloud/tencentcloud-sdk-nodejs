@@ -58,6 +58,16 @@ it("gme.v20180711.VoiceFilter", async function () {
     }
 })
 
+it("gme.v20180711.DescribeApplicationData", async function () {
+    try {
+       const data = await client.DescribeApplicationData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gme.v20180711.DescribeFilterResultList", async function () {
     try {
        const data = await client.DescribeFilterResultList({})

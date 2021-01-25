@@ -801,18 +801,13 @@ export interface EndUserInfo {
     UserName: string;
 }
 /**
- * DescribeEndUserLoginStatistic返回参数结构体
+ * DescribeSmsQuotas请求参数结构体
  */
-export interface DescribeEndUserLoginStatisticResponse {
+export interface DescribeSmsQuotasRequest {
     /**
-      * 环境终端用户新增与登录统计
-注意：此字段可能返回 null，表示取不到有效值。
+      * 环境ID
       */
-    LoginStatistics?: Array<LoginStatistic>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    EnvId: string;
 }
 /**
  * DescribeQuotaData返回参数结构体
@@ -848,6 +843,36 @@ export interface KVPair {
       * 值
       */
     Value: string;
+}
+/**
+ * 短信免费量
+ */
+export interface SmsFreeQuota {
+    /**
+      * 免费量总条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FreeQuota: number;
+    /**
+      * 共计已使用总条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalUsedQuota: number;
+    /**
+      * 免费周期起点，0000-00-00 00:00:00 形式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CycleStart: string;
+    /**
+      * 免费周期终点，0000-00-00 00:00:00 形式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CycleEnd: string;
+    /**
+      * 今天已使用总条数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TodayUsedQuota: number;
 }
 /**
  * 函数的信息
@@ -935,6 +960,19 @@ export interface DescribeExtraPkgBillingInfoRequest {
     EnvId?: string;
 }
 /**
+ * DeleteEndUser请求参数结构体
+ */
+export interface DeleteEndUserRequest {
+    /**
+      * 环境ID
+      */
+    EnvId: string;
+    /**
+      * 用户列表，每一项都是uuid
+      */
+    UserList: Array<string>;
+}
+/**
  * DescribeEnvFreeQuota请求参数结构体
  */
 export interface DescribeEnvFreeQuotaRequest {
@@ -949,17 +987,18 @@ export interface DescribeEnvFreeQuotaRequest {
     ResourceTypes?: Array<string>;
 }
 /**
- * DeleteEndUser请求参数结构体
+ * DescribeEndUserLoginStatistic返回参数结构体
  */
-export interface DeleteEndUserRequest {
+export interface DescribeEndUserLoginStatisticResponse {
     /**
-      * 环境ID
+      * 环境终端用户新增与登录统计
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    EnvId: string;
+    LoginStatistics?: Array<LoginStatistic>;
     /**
-      * 用户列表，每一项都是uuid
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    UserList: Array<string>;
+    RequestId?: string;
 }
 /**
  * CreateCloudBaseRunResource返回参数结构体
@@ -1337,7 +1376,7 @@ export interface CreateCloudBaseRunServerVersionRequest {
       */
     OperatorRemark?: string;
     /**
-      * 服务路劲
+      * 服务路径
       */
     ServerPath?: string;
     /**
@@ -1707,6 +1746,20 @@ export interface CloudBaseRunNfsVolumeSource {
       * 是否只读
       */
     ReadOnly?: boolean;
+}
+/**
+ * DescribeSmsQuotas返回参数结构体
+ */
+export interface DescribeSmsQuotasResponse {
+    /**
+      * 短信免费量信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SmsFreeQuotaList?: Array<SmsFreeQuota>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ImageSecretInfo的信息

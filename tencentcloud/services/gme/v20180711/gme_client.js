@@ -55,6 +55,12 @@ Type表示过滤类型，1：政治，2：色情，3：谩骂
         return this.request("VoiceFilter", req, cb);
     }
     /**
+     * 本接口(DescribeApplicationData)用于获取数据详情信息，最多可拉取最近90天的数据。
+     */
+    async DescribeApplicationData(req, cb) {
+        return this.request("DescribeApplicationData", req, cb);
+    }
+    /**
      * 根据日期查询识别结果列表
      */
     async DescribeFilterResultList(req, cb) {

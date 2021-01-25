@@ -43,9 +43,10 @@ import {
   ModifyDatabaseACLRequest,
   DestroyStaticStoreRequest,
   EndUserInfo,
-  DescribeEndUserLoginStatisticResponse,
+  DescribeSmsQuotasRequest,
   DescribeQuotaDataResponse,
   KVPair,
+  SmsFreeQuota,
   FunctionInfo,
   CommonServiceAPIRequest,
   CreateStaticStoreRequest,
@@ -53,8 +54,9 @@ import {
   CreateAuthDomainResponse,
   DescribeEnvsRequest,
   DescribeExtraPkgBillingInfoRequest,
-  DescribeEnvFreeQuotaRequest,
   DeleteEndUserRequest,
+  DescribeEnvFreeQuotaRequest,
+  DescribeEndUserLoginStatisticResponse,
   CreateCloudBaseRunResourceResponse,
   DestroyStaticStoreResponse,
   DeleteEndUserResponse,
@@ -85,6 +87,7 @@ import {
   PlatformStatistic,
   DeleteCloudBaseProjectLatestVersionRequest,
   CloudBaseRunNfsVolumeSource,
+  DescribeSmsQuotasResponse,
   CloudBaseRunImageSecretInfo,
   ModifyEnvResponse,
   DescribeDownloadFileResponse,
@@ -144,6 +147,19 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEndUsersResponse) => void
   ): Promise<DescribeEndUsersResponse> {
     return this.request("DescribeEndUsers", req, cb)
+  }
+
+  /**
+     * 查询后付费短信资源量
+1 有免费包的返回SmsFreeQuota结构所有字段
+2 没有免费包，有付费包，付费返回复用SmsFreeQuota结构，其中只有 TodayUsedQuota 字段有效
+3 都没有返回为空数组
+     */
+  async DescribeSmsQuotas(
+    req: DescribeSmsQuotasRequest,
+    cb?: (error: string, rep: DescribeSmsQuotasResponse) => void
+  ): Promise<DescribeSmsQuotasResponse> {
+    return this.request("DescribeSmsQuotas", req, cb)
   }
 
   /**
