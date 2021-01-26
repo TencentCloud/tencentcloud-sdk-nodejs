@@ -18,6 +18,16 @@ const client = new tencentcloud.scf.v20180416.Client({
 })
 describe("scf.v20180416.test.js", function () {
 
+it("scf.v20180416.UpdateAlias", async function () {
+    try {
+       const data = await client.UpdateAlias({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("scf.v20180416.DeleteFunction", async function () {
     try {
        const data = await client.DeleteFunction({})
@@ -28,9 +38,9 @@ it("scf.v20180416.DeleteFunction", async function () {
     }
 })
 
-it("scf.v20180416.UpdateAlias", async function () {
+it("scf.v20180416.TerminateAsyncEvent", async function () {
     try {
-       const data = await client.UpdateAlias({})
+       const data = await client.TerminateAsyncEvent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -231,6 +241,16 @@ it("scf.v20180416.ListVersionByFunction", async function () {
 it("scf.v20180416.ListLayers", async function () {
     try {
        const data = await client.ListLayers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("scf.v20180416.ListAsyncEvents", async function () {
+    try {
+       const data = await client.ListAsyncEvents({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

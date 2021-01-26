@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { UpdateAliasRequest, GetProvisionedConcurrencyConfigRequest, ListAliasesResponse, DeleteLayerVersionResponse, GetReservedConcurrencyConfigResponse, DeleteProvisionedConcurrencyConfigResponse, PutProvisionedConcurrencyConfigResponse, UpdateFunctionConfigurationResponse, PublishLayerVersionResponse, DeleteReservedConcurrencyConfigResponse, GetAliasResponse, UpdateAliasResponse, GetFunctionLogsRequest, ListLayerVersionsResponse, DeleteFunctionRequest, CopyFunctionResponse, GetFunctionRequest, ListNamespacesRequest, PutReservedConcurrencyConfigResponse, DeleteAliasRequest, ListVersionByFunctionResponse, GetAliasRequest, CreateNamespaceResponse, UpdateFunctionCodeRequest, UpdateFunctionConfigurationRequest, DeleteReservedConcurrencyConfigRequest, ListTriggersResponse, UpdateNamespaceResponse, ListLayersRequest, CopyFunctionRequest, DeleteNamespaceResponse, DeleteNamespaceRequest, ListFunctionsRequest, CreateTriggerRequest, ListLayersResponse, DeleteFunctionResponse, CreateAliasResponse, CreateFunctionRequest, PutTotalConcurrencyConfigResponse, DeleteAliasResponse, PublishVersionResponse, DeleteProvisionedConcurrencyConfigRequest, GetFunctionAddressRequest, InvokeResponse, InvokeRequest, CreateAliasRequest, PutReservedConcurrencyConfigRequest, ListLayerVersionsRequest, CreateTriggerResponse, PublishLayerVersionRequest, CreateNamespaceRequest, DeleteLayerVersionRequest, GetFunctionResponse, PutTotalConcurrencyConfigRequest, UpdateNamespaceRequest, GetLayerVersionResponse, PublishVersionRequest, GetFunctionAddressResponse, ListVersionByFunctionRequest, ListFunctionsResponse, ListTriggersRequest, CreateFunctionResponse, GetReservedConcurrencyConfigRequest, PutProvisionedConcurrencyConfigRequest, ListAliasesRequest, GetLayerVersionRequest, GetFunctionLogsResponse, DeleteTriggerResponse, DeleteTriggerRequest, GetProvisionedConcurrencyConfigResponse, ListNamespacesResponse, UpdateFunctionCodeResponse } from "./scf_models";
+import { UpdateAliasRequest, GetProvisionedConcurrencyConfigRequest, ListAliasesResponse, DeleteLayerVersionResponse, GetReservedConcurrencyConfigResponse, DeleteProvisionedConcurrencyConfigResponse, PutProvisionedConcurrencyConfigResponse, UpdateFunctionConfigurationResponse, PublishLayerVersionResponse, DeleteProvisionedConcurrencyConfigRequest, DeleteReservedConcurrencyConfigResponse, GetAliasResponse, UpdateAliasResponse, GetFunctionLogsRequest, ListLayerVersionsResponse, DeleteFunctionRequest, CopyFunctionResponse, GetFunctionRequest, ListNamespacesRequest, PublishVersionRequest, DeleteAliasRequest, ListVersionByFunctionResponse, GetAliasRequest, CreateNamespaceResponse, UpdateFunctionCodeRequest, UpdateFunctionConfigurationRequest, DeleteReservedConcurrencyConfigRequest, ListTriggersResponse, TerminateAsyncEventRequest, ListLayersRequest, CopyFunctionRequest, DeleteNamespaceResponse, DeleteNamespaceRequest, ListFunctionsRequest, CreateTriggerRequest, UpdateNamespaceResponse, ListLayersResponse, DeleteFunctionResponse, ListAsyncEventsRequest, CreateAliasResponse, CreateFunctionRequest, PutTotalConcurrencyConfigResponse, DeleteAliasResponse, PublishVersionResponse, TerminateAsyncEventResponse, GetFunctionAddressRequest, InvokeResponse, InvokeRequest, CreateAliasRequest, PutReservedConcurrencyConfigRequest, ListLayerVersionsRequest, CreateTriggerResponse, PublishLayerVersionRequest, CreateNamespaceRequest, DeleteLayerVersionRequest, GetFunctionResponse, PutTotalConcurrencyConfigRequest, UpdateNamespaceRequest, GetLayerVersionResponse, PutReservedConcurrencyConfigResponse, GetFunctionAddressResponse, ListVersionByFunctionRequest, ListFunctionsResponse, ListTriggersRequest, CreateFunctionResponse, GetReservedConcurrencyConfigRequest, PutProvisionedConcurrencyConfigRequest, ListAliasesRequest, GetLayerVersionRequest, GetFunctionLogsResponse, DeleteTriggerResponse, DeleteTriggerRequest, GetProvisionedConcurrencyConfigResponse, ListAsyncEventsResponse, ListNamespacesResponse, UpdateFunctionCodeResponse } from "./scf_models";
 /**
  * scf client
  * @class
@@ -8,13 +8,17 @@ import { UpdateAliasRequest, GetProvisionedConcurrencyConfigRequest, ListAliases
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
+     * 更新别名的配置
+     */
+    UpdateAlias(req: UpdateAliasRequest, cb?: (error: string, rep: UpdateAliasResponse) => void): Promise<UpdateAliasResponse>;
+    /**
      * 该接口根据传入参数删除函数。
      */
     DeleteFunction(req: DeleteFunctionRequest, cb?: (error: string, rep: DeleteFunctionResponse) => void): Promise<DeleteFunctionResponse>;
     /**
-     * 更新别名的配置
+     * 终止正在运行中的函数异步事件
      */
-    UpdateAlias(req: UpdateAliasRequest, cb?: (error: string, rep: UpdateAliasResponse) => void): Promise<UpdateAliasResponse>;
+    TerminateAsyncEvent(req: TerminateAsyncEventRequest, cb?: (error: string, rep: TerminateAsyncEventResponse) => void): Promise<TerminateAsyncEventResponse>;
     /**
      * 获取函数触发器列表
      */
@@ -102,6 +106,10 @@ export declare class Client extends AbstractClient {
      * 返回全部层的列表，其中包含了每个层最新版本的信息，可以通过适配运行时进行过滤。
      */
     ListLayers(req: ListLayersRequest, cb?: (error: string, rep: ListLayersResponse) => void): Promise<ListLayersResponse>;
+    /**
+     * 拉取函数异步事件列表
+     */
+    ListAsyncEvents(req: ListAsyncEventsRequest, cb?: (error: string, rep: ListAsyncEventsResponse) => void): Promise<ListAsyncEventsResponse>;
     /**
      * 返回指定层的全部版本的信息
      */

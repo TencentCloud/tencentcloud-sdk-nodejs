@@ -228,6 +228,16 @@ it("cwp.v20180228.DescribeReverseShellRules", async function () {
     }
 })
 
+it("cwp.v20180228.ExportTasks", async function () {
+    try {
+       const data = await client.ExportTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.RecoverMalwares", async function () {
     try {
        const data = await client.RecoverMalwares({})
@@ -468,9 +478,29 @@ it("cwp.v20180228.DeleteMalwares", async function () {
     }
 })
 
+it("cwp.v20180228.DescribeMachineList", async function () {
+    try {
+       const data = await client.DescribeMachineList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeWeeklyReportNonlocalLoginPlaces", async function () {
     try {
        const data = await client.DescribeWeeklyReportNonlocalLoginPlaces({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeScanMalwareSchedule", async function () {
+    try {
+       const data = await client.DescribeScanMalwareSchedule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -511,6 +541,16 @@ it("cwp.v20180228.CloseProVersion", async function () {
 it("cwp.v20180228.DescribeAccountStatistics", async function () {
     try {
        const data = await client.DescribeAccountStatistics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeExportMachines", async function () {
+    try {
+       const data = await client.DescribeExportMachines({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -651,6 +691,16 @@ it("cwp.v20180228.AddLoginWhiteList", async function () {
 it("cwp.v20180228.ExportNonlocalLoginPlaces", async function () {
     try {
        const data = await client.ExportNonlocalLoginPlaces({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeMalwareInfo", async function () {
+    try {
+       const data = await client.DescribeMalwareInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -861,6 +911,16 @@ it("cwp.v20180228.DescribeWeeklyReportVuls", async function () {
 it("cwp.v20180228.DescribeWeeklyReportInfo", async function () {
     try {
        const data = await client.DescribeWeeklyReportInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.ModifyMalwareTimingScanSettings", async function () {
+    try {
+       const data = await client.ModifyMalwareTimingScanSettings({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

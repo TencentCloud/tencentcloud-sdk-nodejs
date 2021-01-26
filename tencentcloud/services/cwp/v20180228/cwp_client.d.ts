@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ExportBashEventsRequest, ModifyAutoOpenProVersionConfigRequest, DescribeProcessTaskStatusResponse, ExportReverseShellEventsResponse, DescribeBashRulesRequest, ExportPrivilegeEventsResponse, DescribeAlarmAttributeResponse, DescribeWeeklyReportBruteAttacksResponse, DescribeAgentVulsRequest, DescribeTagsRequest, AddMachineTagResponse, DescribeReverseShellRulesRequest, SetBashEventsStatusRequest, DescribeAccountsRequest, DescribeReverseShellEventsRequest, DescribeWeeklyReportBruteAttacksRequest, CreateUsualLoginPlacesRequest, DescribeProcessTaskStatusRequest, DescribeVulScanResultResponse, ModifyAlarmAttributeRequest, DescribeAttackLogsRequest, InquiryPriceOpenProVersionPrepaidRequest, ExportMalwaresRequest, DescribeProcessesResponse, DeleteBashEventsResponse, ExportPrivilegeEventsRequest, CreateBaselineStrategyRequest, DescribeSecurityTrendsRequest, DescribeReverseShellEventsResponse, DescribePrivilegeRulesRequest, DescribeOpenPortsRequest, DescribeImpactedHostsRequest, DescribeMaliciousRequestsResponse, CreateProcessTaskResponse, RenewProVersionRequest, DescribeComponentsRequest, DescribeNonlocalLoginPlacesRequest, DeleteMachineTagRequest, CreateBaselineStrategyResponse, EditPrivilegeRuleResponse, DescribeHistoryAccountsResponse, UntrustMalwaresRequest, ExportAttackLogsResponse, DescribeAccountsResponse, DescribeLoginWhiteListRequest, UntrustMaliciousRequestRequest, ExportNonlocalLoginPlacesRequest, DescribeComponentInfoResponse, DescribeAccountStatisticsResponse, OpenProVersionPrepaidRequest, ModifyLoginWhiteListResponse, DescribeTagsResponse, DescribeProVersionInfoRequest, CreateProcessTaskRequest, DeleteMaliciousRequestsResponse, ExportBruteAttacksResponse, EditReverseShellRuleResponse, ExportBruteAttacksRequest, DeleteMachineResponse, DeleteLoginWhiteListRequest, DescribeAttackLogInfoResponse, DescribePrivilegeEventsResponse, DescribeOverviewStatisticsResponse, RecoverMalwaresRequest, TrustMalwaresResponse, DescribeWeeklyReportInfoRequest, EditTagsRequest, AddLoginWhiteListRequest, DeleteReverseShellRulesRequest, DescribeWeeklyReportsRequest, DescribeBashRulesResponse, DescribeImpactedHostsResponse, RescanImpactedHostRequest, DescribeBashEventsResponse, ModifyLoginWhiteListRequest, DescribeBashEventsRequest, DeleteTagsRequest, DescribeOpenPortStatisticsRequest, ExportAttackLogsRequest, DeleteMachineRequest, DescribeVulInfoRequest, UntrustMaliciousRequestResponse, DescribeComponentStatisticsResponse, SwitchBashRulesResponse, DeleteUsualLoginPlacesResponse, DeleteNonlocalLoginPlacesResponse, DescribeNonlocalLoginPlacesResponse, DeleteReverseShellRulesResponse, ExportMalwaresResponse, UntrustMalwaresResponse, DeletePrivilegeRulesResponse, CreateOpenPortTaskResponse, EditBashRuleRequest, DeletePrivilegeEventsResponse, InquiryPriceOpenProVersionPrepaidResponse, CloseProVersionRequest, SetBashEventsStatusResponse, DescribeUsualLoginPlacesResponse, DescribeProcessStatisticsResponse, MisAlarmNonlocalLoginPlacesRequest, TrustMaliciousRequestRequest, ExportMaliciousRequestsResponse, DescribeAttackLogInfoRequest, DescribeWeeklyReportMalwaresRequest, DescribeBruteAttacksResponse, ExportNonlocalLoginPlacesResponse, DescribeComponentStatisticsRequest, DescribeOverviewStatisticsRequest, DescribeOpenPortStatisticsResponse, DeleteAttackLogsResponse, DescribeLoginWhiteListResponse, DescribeVulInfoResponse, DescribeTagMachinesRequest, EditReverseShellRuleRequest, DescribeProVersionInfoResponse, DeleteTagsResponse, DescribeSecurityEventsCntRequest, DeleteBruteAttacksRequest, DescribeWeeklyReportVulsRequest, AddLoginWhiteListResponse, DescribeOpenPortTaskStatusResponse, DescribeWeeklyReportNonlocalLoginPlacesResponse, SeparateMalwaresRequest, RenewProVersionResponse, DescribeTagMachinesResponse, DescribeSecurityTrendsResponse, CreateOpenPortTaskRequest, DescribeWeeklyReportInfoResponse, DescribeSecurityDynamicsResponse, DeleteReverseShellEventsResponse, DeletePrivilegeEventsRequest, DeleteBashRulesRequest, CloseProVersionResponse, DeleteAttackLogsRequest, DescribeOpenPortsResponse, EditBashRuleResponse, OpenProVersionResponse, DescribeMachineInfoRequest, DescribeMaliciousRequestsRequest, DescribeProcessesRequest, DeleteUsualLoginPlacesRequest, DescribeOpenPortTaskStatusRequest, DeleteLoginWhiteListResponse, DescribeAccountStatisticsRequest, DescribeAttackLogsResponse, OpenProVersionPrepaidResponse, MisAlarmNonlocalLoginPlacesResponse, DeleteMalwaresResponse, DescribeWeeklyReportNonlocalLoginPlacesRequest, SeparateMalwaresResponse, DescribeBruteAttacksRequest, DescribeVulScanResultRequest, DescribePrivilegeEventsRequest, DescribeWeeklyReportMalwaresResponse, DescribeSecurityDynamicsRequest, ExportBashEventsResponse, DescribeReverseShellRulesResponse, DescribeComponentInfoRequest, DeleteNonlocalLoginPlacesRequest, EditPrivilegeRuleRequest, ExportMaliciousRequestsRequest, DescribeMachinesResponse, CreateUsualLoginPlacesResponse, DescribePrivilegeRulesResponse, ModifyProVersionRenewFlagResponse, TrustMalwaresRequest, DescribeWeeklyReportVulsResponse, ModifyProVersionRenewFlagRequest, TrustMaliciousRequestResponse, DescribeUsualLoginPlacesRequest, DescribeVulsRequest, DescribeAgentVulsResponse, SwitchBashRulesRequest, DescribeProcessStatisticsRequest, DeleteMachineTagResponse, DescribeHistoryAccountsRequest, DescribeSecurityEventsCntResponse, DescribeMachineInfoResponse, OpenProVersionRequest, DeleteBashRulesResponse, IgnoreImpactedHostsResponse, DeleteBashEventsRequest, DescribeComponentsResponse, RescanImpactedHostResponse, AddMachineTagRequest, DescribeWeeklyReportsResponse, DeleteReverseShellEventsRequest, ModifyAutoOpenProVersionConfigResponse, ExportReverseShellEventsRequest, DescribeVulsResponse, RecoverMalwaresResponse, EditTagsResponse, IgnoreImpactedHostsRequest, DescribeAlarmAttributeRequest, DescribeMalwaresRequest, DeleteBruteAttacksResponse, DeleteMaliciousRequestsRequest, DescribeMachinesRequest, ModifyAlarmAttributeResponse, DeleteMalwaresRequest, DescribeMalwaresResponse, DeletePrivilegeRulesRequest } from "./cwp_models";
+import { DescribeMalwareInfoRequest, ModifyAutoOpenProVersionConfigRequest, DescribeProcessTaskStatusResponse, ExportReverseShellEventsResponse, DescribeBashRulesRequest, ExportBashEventsRequest, ExportPrivilegeEventsResponse, DescribeAlarmAttributeResponse, DescribeWeeklyReportBruteAttacksResponse, DescribeTagsRequest, AddMachineTagResponse, DescribeReverseShellRulesRequest, SetBashEventsStatusRequest, DescribeAccountsRequest, DescribeReverseShellEventsRequest, DescribeWeeklyReportBruteAttacksRequest, CreateUsualLoginPlacesRequest, DescribeProcessTaskStatusRequest, DescribeVulScanResultResponse, ModifyAlarmAttributeRequest, DescribeAttackLogsRequest, InquiryPriceOpenProVersionPrepaidRequest, ExportMalwaresRequest, DescribeProcessesResponse, DeleteBashEventsResponse, DescribeMalwareInfoResponse, ExportPrivilegeEventsRequest, CreateBaselineStrategyRequest, DescribeSecurityTrendsRequest, DescribeReverseShellEventsResponse, DescribePrivilegeRulesRequest, DescribeOpenPortsRequest, DescribeImpactedHostsRequest, DescribeScanMalwareScheduleRequest, DescribeAgentVulsRequest, DescribeExportMachinesRequest, CreateProcessTaskResponse, RenewProVersionRequest, DescribeComponentsRequest, DescribeNonlocalLoginPlacesRequest, DeleteMachineTagRequest, CreateBaselineStrategyResponse, DescribeTagMachinesRequest, DescribeExportMachinesResponse, EditPrivilegeRuleResponse, DescribeHistoryAccountsResponse, UntrustMalwaresRequest, DescribeVulsResponse, DescribeAccountsResponse, DescribeLoginWhiteListRequest, UntrustMaliciousRequestRequest, ExportNonlocalLoginPlacesRequest, DescribeComponentInfoResponse, DescribeAccountStatisticsResponse, OpenProVersionPrepaidRequest, ModifyLoginWhiteListResponse, DescribeTagsResponse, DescribeProVersionInfoRequest, CreateProcessTaskRequest, DeleteMaliciousRequestsResponse, ExportBruteAttacksResponse, EditReverseShellRuleResponse, ExportBruteAttacksRequest, DeleteMachineResponse, DeleteLoginWhiteListRequest, DescribeAttackLogInfoResponse, DescribePrivilegeEventsResponse, DescribeOverviewStatisticsResponse, RecoverMalwaresRequest, TrustMalwaresResponse, DescribeWeeklyReportInfoRequest, EditTagsRequest, AddLoginWhiteListRequest, DeleteReverseShellRulesRequest, DescribeWeeklyReportsRequest, DescribeBashRulesResponse, DescribeImpactedHostsResponse, RescanImpactedHostRequest, DescribeBashEventsResponse, ModifyLoginWhiteListRequest, DescribeBashEventsRequest, DeleteTagsRequest, DescribeOpenPortStatisticsRequest, ExportAttackLogsRequest, ModifyMalwareTimingScanSettingsRequest, DeleteMachineRequest, DescribeVulInfoRequest, UntrustMaliciousRequestResponse, DescribeComponentStatisticsResponse, DescribeMachineListResponse, ModifyMalwareTimingScanSettingsResponse, SwitchBashRulesResponse, DeleteUsualLoginPlacesResponse, DeleteNonlocalLoginPlacesResponse, DescribeNonlocalLoginPlacesResponse, DeleteReverseShellRulesResponse, ExportMalwaresResponse, UntrustMalwaresResponse, DeletePrivilegeRulesResponse, CreateOpenPortTaskResponse, DescribeMachineListRequest, EditBashRuleRequest, DeletePrivilegeEventsResponse, InquiryPriceOpenProVersionPrepaidResponse, CloseProVersionRequest, SetBashEventsStatusResponse, DescribeUsualLoginPlacesResponse, DescribeProcessStatisticsResponse, MisAlarmNonlocalLoginPlacesRequest, TrustMaliciousRequestRequest, ExportMaliciousRequestsResponse, DescribeAttackLogInfoRequest, DescribeWeeklyReportMalwaresRequest, DescribeBruteAttacksResponse, ExportNonlocalLoginPlacesResponse, DescribeComponentStatisticsRequest, DescribeOverviewStatisticsRequest, DescribeOpenPortStatisticsResponse, DeleteAttackLogsResponse, DescribeLoginWhiteListResponse, DescribeVulInfoResponse, DescribeScanMalwareScheduleResponse, EditReverseShellRuleRequest, DescribeProVersionInfoResponse, DeleteTagsResponse, DescribeSecurityEventsCntRequest, DeleteBruteAttacksRequest, DescribeWeeklyReportVulsRequest, AddLoginWhiteListResponse, DescribeOpenPortTaskStatusResponse, DescribeWeeklyReportNonlocalLoginPlacesResponse, SeparateMalwaresRequest, RenewProVersionResponse, DescribeTagMachinesResponse, DescribeSecurityTrendsResponse, CreateOpenPortTaskRequest, DescribeWeeklyReportInfoResponse, DescribeSecurityDynamicsResponse, DeleteReverseShellEventsResponse, DeletePrivilegeEventsRequest, DeleteBashRulesRequest, CloseProVersionResponse, DeleteAttackLogsRequest, DescribeOpenPortsResponse, EditBashRuleResponse, OpenProVersionResponse, DescribeMachineInfoRequest, DescribeMaliciousRequestsRequest, DescribeProcessesRequest, DeleteUsualLoginPlacesRequest, DescribeOpenPortTaskStatusRequest, DeleteLoginWhiteListResponse, DescribeAccountStatisticsRequest, DescribeAttackLogsResponse, OpenProVersionPrepaidResponse, MisAlarmNonlocalLoginPlacesResponse, DeleteMalwaresResponse, DescribeWeeklyReportNonlocalLoginPlacesRequest, RecoverMalwaresResponse, DescribeBruteAttacksRequest, DescribeVulScanResultRequest, DescribePrivilegeEventsRequest, DescribeWeeklyReportMalwaresResponse, DescribeSecurityDynamicsRequest, ExportBashEventsResponse, DescribeReverseShellRulesResponse, DescribeComponentInfoRequest, DeleteNonlocalLoginPlacesRequest, EditPrivilegeRuleRequest, ExportMaliciousRequestsRequest, DescribeMachinesResponse, CreateUsualLoginPlacesResponse, DescribePrivilegeRulesResponse, ModifyProVersionRenewFlagResponse, TrustMalwaresRequest, DescribeWeeklyReportVulsResponse, ModifyProVersionRenewFlagRequest, TrustMaliciousRequestResponse, DescribeUsualLoginPlacesRequest, DescribeVulsRequest, DescribeAgentVulsResponse, SwitchBashRulesRequest, DescribeProcessStatisticsRequest, DeleteMachineTagResponse, DescribeHistoryAccountsRequest, DescribeSecurityEventsCntResponse, DescribeMachineInfoResponse, OpenProVersionRequest, DeleteBashRulesResponse, IgnoreImpactedHostsResponse, DeleteBashEventsRequest, DescribeComponentsResponse, RescanImpactedHostResponse, ExportTasksRequest, AddMachineTagRequest, DescribeWeeklyReportsResponse, DeleteReverseShellEventsRequest, ModifyAutoOpenProVersionConfigResponse, ExportReverseShellEventsRequest, DescribeMaliciousRequestsResponse, ExportAttackLogsResponse, EditTagsResponse, IgnoreImpactedHostsRequest, DescribeAlarmAttributeRequest, DescribeMalwaresRequest, DeleteBruteAttacksResponse, DeleteMaliciousRequestsRequest, DescribeMachinesRequest, ModifyAlarmAttributeResponse, DeleteMalwaresRequest, DescribeMalwaresResponse, SeparateMalwaresResponse, DeletePrivilegeRulesRequest, ExportTasksResponse } from "./cwp_models";
 /**
  * cwp client
  * @class
@@ -74,7 +74,7 @@ export declare class Client extends AbstractClient {
     /**
      * 导出网络攻击日志
      */
-    ExportAttackLogs(req?: ExportAttackLogsRequest, cb?: (error: string, rep: ExportAttackLogsResponse) => void): Promise<ExportAttackLogsResponse>;
+    ExportAttackLogs(req: ExportAttackLogsRequest, cb?: (error: string, rep: ExportAttackLogsResponse) => void): Promise<ExportAttackLogsResponse>;
     /**
      * 此接口（DescribeUsualLoginPlaces）用于查询常用登录地。
      */
@@ -91,6 +91,10 @@ export declare class Client extends AbstractClient {
      * 获取反弹Shell规则列表
      */
     DescribeReverseShellRules(req: DescribeReverseShellRulesRequest, cb?: (error: string, rep: DescribeReverseShellRulesResponse) => void): Promise<DescribeReverseShellRulesResponse>;
+    /**
+     * 用于异步导出数据量大的日志文件
+     */
+    ExportTasks(req: ExportTasksRequest, cb?: (error: string, rep: ExportTasksResponse) => void): Promise<ExportTasksResponse>;
     /**
      * 本接口（RecoverMalwares）用于批量恢复已经被隔离的木马文件。
      */
@@ -151,7 +155,7 @@ export declare class Client extends AbstractClient {
     /**
      * 本接口 (ExportMaliciousRequests) 用于导出下载恶意请求文件。
      */
-    ExportMaliciousRequests(req?: ExportMaliciousRequestsRequest, cb?: (error: string, rep: ExportMaliciousRequestsResponse) => void): Promise<ExportMaliciousRequestsResponse>;
+    ExportMaliciousRequests(req: ExportMaliciousRequestsRequest, cb?: (error: string, rep: ExportMaliciousRequestsResponse) => void): Promise<ExportMaliciousRequestsResponse>;
     /**
      * 获取指定标签关联的服务器信息
      */
@@ -163,7 +167,7 @@ export declare class Client extends AbstractClient {
     /**
      * 导出本地提权事件
      */
-    ExportPrivilegeEvents(req?: ExportPrivilegeEventsRequest, cb?: (error: string, rep: ExportPrivilegeEventsResponse) => void): Promise<ExportPrivilegeEventsResponse>;
+    ExportPrivilegeEvents(req: ExportPrivilegeEventsRequest, cb?: (error: string, rep: ExportPrivilegeEventsResponse) => void): Promise<ExportPrivilegeEventsResponse>;
     /**
      * 本接口用于（DescribeOverviewStatistics）获取概览统计数据。
      */
@@ -189,9 +193,17 @@ export declare class Client extends AbstractClient {
      */
     DeleteMalwares(req: DeleteMalwaresRequest, cb?: (error: string, rep: DeleteMalwaresResponse) => void): Promise<DeleteMalwaresResponse>;
     /**
+     * 本接口 (DescribeMachineList) 用于网页防篡改获取区域主机列表。
+     */
+    DescribeMachineList(req: DescribeMachineListRequest, cb?: (error: string, rep: DescribeMachineListResponse) => void): Promise<DescribeMachineListResponse>;
+    /**
      * 本接口 (DescribeWeeklyReportNonlocalLoginPlaces) 用于获取专业周报异地登录数据。
      */
     DescribeWeeklyReportNonlocalLoginPlaces(req: DescribeWeeklyReportNonlocalLoginPlacesRequest, cb?: (error: string, rep: DescribeWeeklyReportNonlocalLoginPlacesResponse) => void): Promise<DescribeWeeklyReportNonlocalLoginPlacesResponse>;
+    /**
+     * 查询木马扫描进度
+     */
+    DescribeScanMalwareSchedule(req?: DescribeScanMalwareScheduleRequest, cb?: (error: string, rep: DescribeScanMalwareScheduleResponse) => void): Promise<DescribeScanMalwareScheduleResponse>;
     /**
      * 删除白名单规则
      */
@@ -208,6 +220,10 @@ export declare class Client extends AbstractClient {
      * 本接口 (DescribeAccountStatistics) 用于获取帐号统计列表数据。
      */
     DescribeAccountStatistics(req: DescribeAccountStatisticsRequest, cb?: (error: string, rep: DescribeAccountStatisticsResponse) => void): Promise<DescribeAccountStatisticsResponse>;
+    /**
+     * 本接口 (DescribeExportMachines) 用于导出区域主机列表。
+     */
+    DescribeExportMachines(req: DescribeExportMachinesRequest, cb?: (error: string, rep: DescribeExportMachinesResponse) => void): Promise<DescribeExportMachinesResponse>;
     /**
      * 本接口（ModifyAlarmAttribute）用于修改告警设置。
      */
@@ -264,6 +280,10 @@ export declare class Client extends AbstractClient {
      * 本接口 (ExportNonlocalLoginPlaces) 用于导出异地登录事件记录CSV文件。
      */
     ExportNonlocalLoginPlaces(req: ExportNonlocalLoginPlacesRequest, cb?: (error: string, rep: ExportNonlocalLoginPlacesResponse) => void): Promise<ExportNonlocalLoginPlacesResponse>;
+    /**
+     * 查看恶意文件详情
+     */
+    DescribeMalwareInfo(req: DescribeMalwareInfoRequest, cb?: (error: string, rep: DescribeMalwareInfoResponse) => void): Promise<DescribeMalwareInfoResponse>;
     /**
      * 本接口 (DescribeMaliciousRequests) 用于获取恶意请求数据。
      */
@@ -350,6 +370,10 @@ export declare class Client extends AbstractClient {
      * 本接口 (DescribeWeeklyReportInfo) 用于获取专业周报详情数据。
      */
     DescribeWeeklyReportInfo(req: DescribeWeeklyReportInfoRequest, cb?: (error: string, rep: DescribeWeeklyReportInfoResponse) => void): Promise<DescribeWeeklyReportInfoResponse>;
+    /**
+     * 定时扫描设置
+     */
+    ModifyMalwareTimingScanSettings(req: ModifyMalwareTimingScanSettingsRequest, cb?: (error: string, rep: ModifyMalwareTimingScanSettingsResponse) => void): Promise<ModifyMalwareTimingScanSettingsResponse>;
     /**
      * 本接口 (DescribeComponentInfo) 用于获取组件信息数据。
      */

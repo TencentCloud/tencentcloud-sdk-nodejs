@@ -51,8 +51,10 @@ import {
   ClearTablesResponse,
   DescribeIdlFileInfosRequest,
   ClusterInfo,
+  DisableRestProxyRequest,
   DescribeTablesInRecycleResponse,
   ModifyTablesResponse,
+  EnableRestProxyRequest,
   ModifyTableGroupTagsResponse,
   ModifyClusterTagsRequest,
   DescribeTableGroupTagsResponse,
@@ -74,6 +76,7 @@ import {
   SetTableIndexResponse,
   ClearTablesRequest,
   DescribeIdlFileInfosResponse,
+  DisableRestProxyResponse,
   TagInfoUnit,
   CreateClusterResponse,
   DescribeClustersRequest,
@@ -86,6 +89,7 @@ import {
   DescribeTableTagsResponse,
   CreateTableGroupResponse,
   VerifyIdlFilesRequest,
+  EnableRestProxyResponse,
   ModifyClusterNameResponse,
   ModifyTablesRequest,
   DescribeTableGroupTagsRequest,
@@ -199,6 +203,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 当restful api为关闭状态时，可以通过此接口关闭restful api
+   */
+  async DisableRestProxy(
+    req: DisableRestProxyRequest,
+    cb?: (error: string, rep: DisableRestProxyResponse) => void
+  ): Promise<DisableRestProxyResponse> {
+    return this.request("DisableRestProxy", req, cb)
+  }
+
+  /**
    * 表格数据回档
    */
   async RollbackTables(
@@ -259,13 +273,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 设置表格分布式索引
+   * 当restful api为关闭状态时，可以通过此接口开启restful apu
    */
-  async SetTableIndex(
-    req: SetTableIndexRequest,
-    cb?: (error: string, rep: SetTableIndexResponse) => void
-  ): Promise<SetTableIndexResponse> {
-    return this.request("SetTableIndex", req, cb)
+  async EnableRestProxy(
+    req: EnableRestProxyRequest,
+    cb?: (error: string, rep: EnableRestProxyResponse) => void
+  ): Promise<EnableRestProxyResponse> {
+    return this.request("EnableRestProxy", req, cb)
   }
 
   /**
@@ -386,6 +400,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyTableGroupTagsResponse) => void
   ): Promise<ModifyTableGroupTagsResponse> {
     return this.request("ModifyTableGroupTags", req, cb)
+  }
+
+  /**
+   * 设置表格分布式索引
+   */
+  async SetTableIndex(
+    req: SetTableIndexRequest,
+    cb?: (error: string, rep: SetTableIndexResponse) => void
+  ): Promise<SetTableIndexResponse> {
+    return this.request("SetTableIndex", req, cb)
   }
 
   /**

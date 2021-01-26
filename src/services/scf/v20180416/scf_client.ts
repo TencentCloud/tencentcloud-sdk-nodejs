@@ -28,11 +28,13 @@ import {
   RoutingConfig,
   DeleteProvisionedConcurrencyConfigResponse,
   VersionWeight,
+  TimeInterval,
   LayerVersionInfo,
   PutProvisionedConcurrencyConfigResponse,
   UpdateFunctionConfigurationResponse,
   PublishLayerVersionResponse,
   PublicNetConfigIn,
+  DeleteProvisionedConcurrencyConfigRequest,
   DeleteReservedConcurrencyConfigResponse,
   GetAliasResponse,
   UpdateAliasResponse,
@@ -48,7 +50,7 @@ import {
   Namespace,
   GetFunctionRequest,
   ListNamespacesRequest,
-  PutReservedConcurrencyConfigResponse,
+  PublishVersionRequest,
   DeleteAliasRequest,
   ListVersionByFunctionResponse,
   GetAliasRequest,
@@ -58,7 +60,7 @@ import {
   UpdateFunctionConfigurationRequest,
   DeleteReservedConcurrencyConfigRequest,
   ListTriggersResponse,
-  UpdateNamespaceResponse,
+  TerminateAsyncEventRequest,
   ListLayersRequest,
   CopyFunctionRequest,
   DeleteNamespaceResponse,
@@ -67,8 +69,10 @@ import {
   DeleteNamespaceRequest,
   ListFunctionsRequest,
   CreateTriggerRequest,
+  UpdateNamespaceResponse,
   ListLayersResponse,
   DeleteFunctionResponse,
+  ListAsyncEventsRequest,
   Result,
   CreateAliasResponse,
   LogSearchContext,
@@ -77,8 +81,9 @@ import {
   PutTotalConcurrencyConfigResponse,
   DeleteAliasResponse,
   PublishVersionResponse,
-  DeleteProvisionedConcurrencyConfigRequest,
+  AsyncEvent,
   Environment,
+  TerminateAsyncEventResponse,
   GetFunctionAddressRequest,
   InvokeResponse,
   InvokeRequest,
@@ -97,7 +102,7 @@ import {
   PutTotalConcurrencyConfigRequest,
   UpdateNamespaceRequest,
   GetLayerVersionResponse,
-  PublishVersionRequest,
+  PutReservedConcurrencyConfigResponse,
   FunctionLog,
   GetFunctionAddressResponse,
   CfsInsInfo,
@@ -119,6 +124,7 @@ import {
   DeleteTriggerRequest,
   VpcConfig,
   GetProvisionedConcurrencyConfigResponse,
+  ListAsyncEventsResponse,
   ListNamespacesResponse,
   EipConfigOut,
   UpdateFunctionCodeResponse,
@@ -134,6 +140,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新别名的配置
+   */
+  async UpdateAlias(
+    req: UpdateAliasRequest,
+    cb?: (error: string, rep: UpdateAliasResponse) => void
+  ): Promise<UpdateAliasResponse> {
+    return this.request("UpdateAlias", req, cb)
+  }
+
+  /**
    * 该接口根据传入参数删除函数。
    */
   async DeleteFunction(
@@ -144,13 +160,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新别名的配置
+   * 终止正在运行中的函数异步事件
    */
-  async UpdateAlias(
-    req: UpdateAliasRequest,
-    cb?: (error: string, rep: UpdateAliasResponse) => void
-  ): Promise<UpdateAliasResponse> {
-    return this.request("UpdateAlias", req, cb)
+  async TerminateAsyncEvent(
+    req: TerminateAsyncEventRequest,
+    cb?: (error: string, rep: TerminateAsyncEventResponse) => void
+  ): Promise<TerminateAsyncEventResponse> {
+    return this.request("TerminateAsyncEvent", req, cb)
   }
 
   /**
@@ -358,6 +374,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListLayersResponse) => void
   ): Promise<ListLayersResponse> {
     return this.request("ListLayers", req, cb)
+  }
+
+  /**
+   * 拉取函数异步事件列表
+   */
+  async ListAsyncEvents(
+    req: ListAsyncEventsRequest,
+    cb?: (error: string, rep: ListAsyncEventsResponse) => void
+  ): Promise<ListAsyncEventsResponse> {
+    return this.request("ListAsyncEvents", req, cb)
   }
 
   /**

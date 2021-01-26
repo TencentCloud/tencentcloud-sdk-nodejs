@@ -28,16 +28,22 @@ class Client extends abstract_client_1.AbstractClient {
         super("scf.tencentcloudapi.com", "2018-04-16", clientConfig);
     }
     /**
+     * 更新别名的配置
+     */
+    async UpdateAlias(req, cb) {
+        return this.request("UpdateAlias", req, cb);
+    }
+    /**
      * 该接口根据传入参数删除函数。
      */
     async DeleteFunction(req, cb) {
         return this.request("DeleteFunction", req, cb);
     }
     /**
-     * 更新别名的配置
+     * 终止正在运行中的函数异步事件
      */
-    async UpdateAlias(req, cb) {
-        return this.request("UpdateAlias", req, cb);
+    async TerminateAsyncEvent(req, cb) {
+        return this.request("TerminateAsyncEvent", req, cb);
     }
     /**
      * 获取函数触发器列表
@@ -165,6 +171,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ListLayers(req, cb) {
         return this.request("ListLayers", req, cb);
+    }
+    /**
+     * 拉取函数异步事件列表
+     */
+    async ListAsyncEvents(req, cb) {
+        return this.request("ListAsyncEvents", req, cb);
     }
     /**
      * 返回指定层的全部版本的信息

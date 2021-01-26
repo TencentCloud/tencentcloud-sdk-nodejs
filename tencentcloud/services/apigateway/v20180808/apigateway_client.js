@@ -354,6 +354,12 @@ API 网关的服务创建后，需要发布到某个环境方生效后，使用�
         return this.request("DescribeApiKey", req, cb);
     }
     /**
+     * 展示插件列表和详情，支持分页，支持按照插件类型查询，支持按照插件ID批量查询，支持按照插件名称查询。
+     */
+    async DescribePlugins(req, cb) {
+        return this.request("DescribePlugins", req, cb);
+    }
+    /**
      * 本接口（DescribeUsagePlan）用于查询一个使用计划的详细信息，包括名称、QPS、创建时间绑定的环境等。
      */
     async DescribeUsagePlan(req, cb) {

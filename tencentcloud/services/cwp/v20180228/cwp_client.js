@@ -154,6 +154,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeReverseShellRules", req, cb);
     }
     /**
+     * 用于异步导出数据量大的日志文件
+     */
+    async ExportTasks(req, cb) {
+        return this.request("ExportTasks", req, cb);
+    }
+    /**
      * 本接口（RecoverMalwares）用于批量恢复已经被隔离的木马文件。
      */
     async RecoverMalwares(req, cb) {
@@ -299,10 +305,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteMalwares", req, cb);
     }
     /**
+     * 本接口 (DescribeMachineList) 用于网页防篡改获取区域主机列表。
+     */
+    async DescribeMachineList(req, cb) {
+        return this.request("DescribeMachineList", req, cb);
+    }
+    /**
      * 本接口 (DescribeWeeklyReportNonlocalLoginPlaces) 用于获取专业周报异地登录数据。
      */
     async DescribeWeeklyReportNonlocalLoginPlaces(req, cb) {
         return this.request("DescribeWeeklyReportNonlocalLoginPlaces", req, cb);
+    }
+    /**
+     * 查询木马扫描进度
+     */
+    async DescribeScanMalwareSchedule(req, cb) {
+        return this.request("DescribeScanMalwareSchedule", req, cb);
     }
     /**
      * 删除白名单规则
@@ -327,6 +345,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAccountStatistics(req, cb) {
         return this.request("DescribeAccountStatistics", req, cb);
+    }
+    /**
+     * 本接口 (DescribeExportMachines) 用于导出区域主机列表。
+     */
+    async DescribeExportMachines(req, cb) {
+        return this.request("DescribeExportMachines", req, cb);
     }
     /**
      * 本接口（ModifyAlarmAttribute）用于修改告警设置。
@@ -411,6 +435,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ExportNonlocalLoginPlaces(req, cb) {
         return this.request("ExportNonlocalLoginPlaces", req, cb);
+    }
+    /**
+     * 查看恶意文件详情
+     */
+    async DescribeMalwareInfo(req, cb) {
+        return this.request("DescribeMalwareInfo", req, cb);
     }
     /**
      * 本接口 (DescribeMaliciousRequests) 用于获取恶意请求数据。
@@ -539,6 +569,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeWeeklyReportInfo(req, cb) {
         return this.request("DescribeWeeklyReportInfo", req, cb);
+    }
+    /**
+     * 定时扫描设置
+     */
+    async ModifyMalwareTimingScanSettings(req, cb) {
+        return this.request("ModifyMalwareTimingScanSettings", req, cb);
     }
     /**
      * 本接口 (DescribeComponentInfo) 用于获取组件信息数据。

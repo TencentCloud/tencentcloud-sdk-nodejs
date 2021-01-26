@@ -28,16 +28,10 @@ class Client extends abstract_client_1.AbstractClient {
         super("mgobe.tencentcloudapi.com", "2020-10-14", clientConfig);
     }
     /**
-     * 修改房间玩家自定义属性
+     * 该接口用于查询玩家信息。支持两种用法，当OpenId不传的时候，PlayerId必传，传入PlayerId可以查询当前PlayerId的玩家信息，当OpenId传入的时候，PlayerId可不传，按照OpenId查询玩家信息。
      */
-    async ChangeRoomPlayerProfile(req, cb) {
-        return this.request("ChangeRoomPlayerProfile", req, cb);
-    }
-    /**
-     * 踢出房间玩家
-     */
-    async RemoveRoomPlayer(req, cb) {
-        return this.request("RemoveRoomPlayer", req, cb);
+    async DescribePlayer(req, cb) {
+        return this.request("DescribePlayer", req, cb);
     }
     /**
      * 修改玩家自定义状态
@@ -46,16 +40,34 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ChangeRoomPlayerStatus", req, cb);
     }
     /**
-     * 通过game_id、room_id解散房间
-     */
-    async DismissRoom(req, cb) {
-        return this.request("DismissRoom", req, cb);
-    }
-    /**
      * 修改房间
      */
     async ModifyRoom(req, cb) {
         return this.request("ModifyRoom", req, cb);
+    }
+    /**
+     * 踢出房间玩家
+     */
+    async RemoveRoomPlayer(req, cb) {
+        return this.request("RemoveRoomPlayer", req, cb);
+    }
+    /**
+     * 该接口用于查询房间信息。支持两种用法，当房间Id不传的时候，玩家Id必传，传入玩家Id可以查询当前玩家所在的房间信息，当房间Id传入的时候，玩家Id可不传，按照房间Id查询房间信息。
+     */
+    async DescribeRoom(req, cb) {
+        return this.request("DescribeRoom", req, cb);
+    }
+    /**
+     * 修改房间玩家自定义属性
+     */
+    async ChangeRoomPlayerProfile(req, cb) {
+        return this.request("ChangeRoomPlayerProfile", req, cb);
+    }
+    /**
+     * 通过game_id、room_id解散房间
+     */
+    async DismissRoom(req, cb) {
+        return this.request("DismissRoom", req, cb);
     }
 }
 exports.Client = Client;

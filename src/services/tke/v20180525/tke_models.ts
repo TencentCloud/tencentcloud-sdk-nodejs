@@ -3277,6 +3277,16 @@ export interface CreateClusterNodePoolRequest {
    * Taints互斥
    */
   Taints?: Array<Taint>
+
+  /**
+   * 节点池os
+   */
+  NodePoolOs?: string
+
+  /**
+   * 容器的镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值)
+   */
+  OsCustomizeType?: string
 }
 
 /**
@@ -4509,7 +4519,7 @@ export interface CreateClusterNodePoolResponse {
   /**
    * 节点池id
    */
-  NodePoolId?: string
+  NodePoolId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

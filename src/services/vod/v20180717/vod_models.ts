@@ -4056,7 +4056,7 @@ export interface TimeRange {
   After?: string
 
   /**
-      * <li>小于等于此时间（结束时间）。</li>
+      * <li>小于此时间（结束时间）。</li>
 <li>格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。</li>
       */
   Before?: string

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ModifyClusterNameRequest, ModifyTableGroupNameResponse, DescribeTableTagsRequest, ModifyClusterPasswordResponse, DeleteClusterResponse, DeleteTableIndexResponse, DescribeTablesResponse, DeleteClusterRequest, DeleteTableIndexRequest, DescribeTasksResponse, DeleteTablesRequest, DescribeRegionsResponse, ModifyClusterPasswordRequest, DescribeMachineResponse, DeleteTableGroupRequest, CreateTableGroupRequest, ModifyClusterMachineResponse, DeleteIdlFilesResponse, ModifyTableTagsRequest, DescribeTasksRequest, RecoverRecycleTablesResponse, ClearTablesResponse, DescribeIdlFileInfosRequest, DescribeTablesInRecycleResponse, ModifyTablesResponse, ModifyTableGroupTagsResponse, ModifyClusterTagsRequest, DescribeTableGroupTagsResponse, SetTableIndexRequest, ModifyTableQuotasResponse, RecoverRecycleTablesRequest, ModifyTableGroupNameRequest, DescribeTableGroupsRequest, ModifyTableTagsResponse, ModifyTableGroupTagsRequest, ModifyTableQuotasRequest, CompareIdlFilesResponse, CreateTablesResponse, DescribeRegionsRequest, DescribeClustersResponse, ModifyClusterTagsResponse, DescribeClusterTagsResponse, SetTableIndexResponse, ClearTablesRequest, DescribeIdlFileInfosResponse, CreateClusterResponse, DescribeClustersRequest, DeleteIdlFilesRequest, CreateBackupResponse, VerifyIdlFilesResponse, DescribeTableTagsResponse, CreateTableGroupResponse, VerifyIdlFilesRequest, ModifyClusterNameResponse, ModifyTablesRequest, DescribeTableGroupTagsRequest, DescribeTablesInRecycleRequest, DescribeTablesRequest, ModifyTableMemosRequest, DescribeUinInWhitelistResponse, RollbackTablesResponse, CreateBackupRequest, CreateClusterRequest, CreateTablesRequest, DescribeClusterTagsRequest, DescribeTableGroupsResponse, DeleteTableGroupResponse, DescribeMachineRequest, RollbackTablesRequest, DescribeUinInWhitelistRequest, CompareIdlFilesRequest, ModifyTableMemosResponse, ModifyClusterMachineRequest, DeleteTablesResponse } from "./tcaplusdb_models";
+import { ModifyClusterNameRequest, ModifyTableGroupNameResponse, DescribeTableTagsRequest, ModifyClusterPasswordResponse, DeleteClusterResponse, DeleteTableIndexResponse, DescribeTablesResponse, DeleteClusterRequest, DeleteTableIndexRequest, DescribeTasksResponse, DeleteTablesRequest, DescribeRegionsResponse, ModifyClusterPasswordRequest, DescribeMachineResponse, DeleteTableGroupRequest, CreateTableGroupRequest, ModifyClusterMachineResponse, DeleteIdlFilesResponse, ModifyTableTagsRequest, DescribeTasksRequest, RecoverRecycleTablesResponse, ClearTablesResponse, DescribeIdlFileInfosRequest, DisableRestProxyRequest, DescribeTablesInRecycleResponse, ModifyTablesResponse, EnableRestProxyRequest, ModifyTableGroupTagsResponse, ModifyClusterTagsRequest, DescribeTableGroupTagsResponse, SetTableIndexRequest, ModifyTableQuotasResponse, RecoverRecycleTablesRequest, ModifyTableGroupNameRequest, DescribeTableGroupsRequest, ModifyTableTagsResponse, ModifyTableGroupTagsRequest, ModifyTableQuotasRequest, CompareIdlFilesResponse, CreateTablesResponse, DescribeRegionsRequest, DescribeClustersResponse, ModifyClusterTagsResponse, DescribeClusterTagsResponse, SetTableIndexResponse, ClearTablesRequest, DescribeIdlFileInfosResponse, DisableRestProxyResponse, CreateClusterResponse, DescribeClustersRequest, DeleteIdlFilesRequest, CreateBackupResponse, VerifyIdlFilesResponse, DescribeTableTagsResponse, CreateTableGroupResponse, VerifyIdlFilesRequest, EnableRestProxyResponse, ModifyClusterNameResponse, ModifyTablesRequest, DescribeTableGroupTagsRequest, DescribeTablesInRecycleRequest, DescribeTablesRequest, ModifyTableMemosRequest, DescribeUinInWhitelistResponse, RollbackTablesResponse, CreateBackupRequest, CreateClusterRequest, CreateTablesRequest, DescribeClusterTagsRequest, DescribeTableGroupsResponse, DeleteTableGroupResponse, DescribeMachineRequest, RollbackTablesRequest, DescribeUinInWhitelistRequest, CompareIdlFilesRequest, ModifyTableMemosResponse, ModifyClusterMachineRequest, DeleteTablesResponse } from "./tcaplusdb_models";
 /**
  * tcaplusdb client
  * @class
@@ -36,6 +36,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeTablesInRecycle(req: DescribeTablesInRecycleRequest, cb?: (error: string, rep: DescribeTablesInRecycleResponse) => void): Promise<DescribeTablesInRecycleResponse>;
     /**
+     * 当restful api为关闭状态时，可以通过此接口关闭restful api
+     */
+    DisableRestProxy(req: DisableRestProxyRequest, cb?: (error: string, rep: DisableRestProxyResponse) => void): Promise<DisableRestProxyResponse>;
+    /**
      * 表格数据回档
      */
     RollbackTables(req: RollbackTablesRequest, cb?: (error: string, rep: RollbackTablesResponse) => void): Promise<RollbackTablesResponse>;
@@ -60,9 +64,9 @@ export declare class Client extends AbstractClient {
      */
     RecoverRecycleTables(req: RecoverRecycleTablesRequest, cb?: (error: string, rep: RecoverRecycleTablesResponse) => void): Promise<RecoverRecycleTablesResponse>;
     /**
-     * 设置表格分布式索引
+     * 当restful api为关闭状态时，可以通过此接口开启restful apu
      */
-    SetTableIndex(req: SetTableIndexRequest, cb?: (error: string, rep: SetTableIndexResponse) => void): Promise<SetTableIndexResponse>;
+    EnableRestProxy(req: EnableRestProxyRequest, cb?: (error: string, rep: EnableRestProxyResponse) => void): Promise<EnableRestProxyResponse>;
     /**
      * 用户创建备份任务
      */
@@ -111,6 +115,10 @@ export declare class Client extends AbstractClient {
      * 修改表格组标签
      */
     ModifyTableGroupTags(req: ModifyTableGroupTagsRequest, cb?: (error: string, rep: ModifyTableGroupTagsResponse) => void): Promise<ModifyTableGroupTagsResponse>;
+    /**
+     * 设置表格分布式索引
+     */
+    SetTableIndex(req: SetTableIndexRequest, cb?: (error: string, rep: SetTableIndexResponse) => void): Promise<SetTableIndexResponse>;
     /**
      * 获取表格组关联的标签列表
      */

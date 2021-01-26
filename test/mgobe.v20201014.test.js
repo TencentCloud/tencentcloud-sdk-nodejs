@@ -18,19 +18,9 @@ const client = new tencentcloud.mgobe.v20201014.Client({
 })
 describe("mgobe.v20201014.test.js", function () {
 
-it("mgobe.v20201014.ChangeRoomPlayerProfile", async function () {
+it("mgobe.v20201014.DescribePlayer", async function () {
     try {
-       const data = await client.ChangeRoomPlayerProfile({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("mgobe.v20201014.RemoveRoomPlayer", async function () {
-    try {
-       const data = await client.RemoveRoomPlayer({})
+       const data = await client.DescribePlayer({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,9 +38,9 @@ it("mgobe.v20201014.ChangeRoomPlayerStatus", async function () {
     }
 })
 
-it("mgobe.v20201014.DismissRoom", async function () {
+it("mgobe.v20201014.ModifyRoom", async function () {
     try {
-       const data = await client.DismissRoom({})
+       const data = await client.ModifyRoom({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,9 +48,39 @@ it("mgobe.v20201014.DismissRoom", async function () {
     }
 })
 
-it("mgobe.v20201014.ModifyRoom", async function () {
+it("mgobe.v20201014.RemoveRoomPlayer", async function () {
     try {
-       const data = await client.ModifyRoom({})
+       const data = await client.RemoveRoomPlayer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mgobe.v20201014.DescribeRoom", async function () {
+    try {
+       const data = await client.DescribeRoom({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mgobe.v20201014.ChangeRoomPlayerProfile", async function () {
+    try {
+       const data = await client.ChangeRoomPlayerProfile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mgobe.v20201014.DismissRoom", async function () {
+    try {
+       const data = await client.DismissRoom({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

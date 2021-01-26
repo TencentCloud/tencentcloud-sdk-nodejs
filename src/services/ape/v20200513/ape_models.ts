@@ -73,6 +73,11 @@ export interface ImageItem {
    * 图片供应商
    */
   Vendor: string
+
+  /**
+   * 图片关键词
+   */
+  Keywords: string
 }
 
 /**

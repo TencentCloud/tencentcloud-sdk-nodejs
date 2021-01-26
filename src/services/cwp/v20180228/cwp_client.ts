@@ -18,15 +18,16 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  ExportBashEventsRequest,
+  DescribeMalwareInfoRequest,
   ModifyAutoOpenProVersionConfigRequest,
   DescribeProcessTaskStatusResponse,
   ExportReverseShellEventsResponse,
   DescribeBashRulesRequest,
+  ExportBashEventsRequest,
   ExportPrivilegeEventsResponse,
   DescribeAlarmAttributeResponse,
   DescribeWeeklyReportBruteAttacksResponse,
-  DescribeAgentVulsRequest,
+  AssetFilters,
   DescribeTagsRequest,
   AddMachineTagResponse,
   UsualPlace,
@@ -47,6 +48,7 @@ import {
   ExportMalwaresRequest,
   DescribeProcessesResponse,
   DeleteBashEventsResponse,
+  DescribeMalwareInfoResponse,
   ExportPrivilegeEventsRequest,
   WeeklyReportMalware,
   CreateBaselineStrategyRequest,
@@ -57,8 +59,10 @@ import {
   BruteAttack,
   DescribeOpenPortsRequest,
   DescribeImpactedHostsRequest,
-  DescribeMaliciousRequestsResponse,
+  DescribeScanMalwareScheduleRequest,
+  DescribeAgentVulsRequest,
   NonLocalLoginPlace,
+  DescribeExportMachinesRequest,
   CreateProcessTaskResponse,
   SecurityDynamic,
   RenewProVersionRequest,
@@ -66,13 +70,15 @@ import {
   DescribeNonlocalLoginPlacesRequest,
   DeleteMachineTagRequest,
   CreateBaselineStrategyResponse,
+  DescribeTagMachinesRequest,
   ReverseShellRule,
   OpenPortStatistics,
+  DescribeExportMachinesResponse,
   EditPrivilegeRuleResponse,
   DescribeHistoryAccountsResponse,
   AgentVul,
   UntrustMalwaresRequest,
-  ExportAttackLogsResponse,
+  DescribeVulsResponse,
   DescribeAccountsResponse,
   DescribeLoginWhiteListRequest,
   ReverseShell,
@@ -116,11 +122,14 @@ import {
   DeleteTagsRequest,
   DescribeOpenPortStatisticsRequest,
   ExportAttackLogsRequest,
+  ModifyMalwareTimingScanSettingsRequest,
   DeleteMachineRequest,
   DescribeVulInfoRequest,
   UntrustMaliciousRequestResponse,
   DescribeComponentStatisticsResponse,
-  PrivilegeEscalationProcess,
+  DescribeMachineListResponse,
+  MalwareInfo,
+  ModifyMalwareTimingScanSettingsResponse,
   Place,
   SwitchBashRulesResponse,
   LoginWhiteLists,
@@ -132,9 +141,11 @@ import {
   UntrustMalwaresResponse,
   DeletePrivilegeRulesResponse,
   CreateOpenPortTaskResponse,
+  DescribeMachineListRequest,
   EditBashRuleRequest,
   DeletePrivilegeEventsResponse,
   InquiryPriceOpenProVersionPrepaidResponse,
+  PrivilegeEscalationProcess,
   CloseProVersionRequest,
   SetBashEventsStatusResponse,
   DescribeUsualLoginPlacesResponse,
@@ -152,7 +163,7 @@ import {
   DeleteAttackLogsResponse,
   DescribeLoginWhiteListResponse,
   DescribeVulInfoResponse,
-  DescribeTagMachinesRequest,
+  DescribeScanMalwareScheduleResponse,
   EditReverseShellRuleRequest,
   DescribeProVersionInfoResponse,
   DeleteTagsResponse,
@@ -195,7 +206,7 @@ import {
   DeleteMalwaresResponse,
   ChargePrepaid,
   DescribeWeeklyReportNonlocalLoginPlacesRequest,
-  SeparateMalwaresResponse,
+  RecoverMalwaresResponse,
   ProcessStatistics,
   Process,
   DescribeBruteAttacksRequest,
@@ -243,14 +254,15 @@ import {
   Tag,
   RescanImpactedHostResponse,
   SecurityTrend,
+  ExportTasksRequest,
   Vul,
   AddMachineTagRequest,
   DescribeWeeklyReportsResponse,
   DeleteReverseShellEventsRequest,
   ModifyAutoOpenProVersionConfigResponse,
   ExportReverseShellEventsRequest,
-  DescribeVulsResponse,
-  RecoverMalwaresResponse,
+  DescribeMaliciousRequestsResponse,
+  ExportAttackLogsResponse,
   EditTagsResponse,
   IgnoreImpactedHostsRequest,
   DescribeAlarmAttributeRequest,
@@ -263,7 +275,9 @@ import {
   BashEvent,
   DeleteMalwaresRequest,
   DescribeMalwaresResponse,
+  SeparateMalwaresResponse,
   DeletePrivilegeRulesRequest,
+  ExportTasksResponse,
 } from "./cwp_models"
 
 /**
@@ -439,7 +453,7 @@ export class Client extends AbstractClient {
    * 导出网络攻击日志
    */
   async ExportAttackLogs(
-    req?: ExportAttackLogsRequest,
+    req: ExportAttackLogsRequest,
     cb?: (error: string, rep: ExportAttackLogsResponse) => void
   ): Promise<ExportAttackLogsResponse> {
     return this.request("ExportAttackLogs", req, cb)
@@ -483,6 +497,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeReverseShellRulesResponse) => void
   ): Promise<DescribeReverseShellRulesResponse> {
     return this.request("DescribeReverseShellRules", req, cb)
+  }
+
+  /**
+   * 用于异步导出数据量大的日志文件
+   */
+  async ExportTasks(
+    req: ExportTasksRequest,
+    cb?: (error: string, rep: ExportTasksResponse) => void
+  ): Promise<ExportTasksResponse> {
+    return this.request("ExportTasks", req, cb)
   }
 
   /**
@@ -630,7 +654,7 @@ export class Client extends AbstractClient {
    * 本接口 (ExportMaliciousRequests) 用于导出下载恶意请求文件。
    */
   async ExportMaliciousRequests(
-    req?: ExportMaliciousRequestsRequest,
+    req: ExportMaliciousRequestsRequest,
     cb?: (error: string, rep: ExportMaliciousRequestsResponse) => void
   ): Promise<ExportMaliciousRequestsResponse> {
     return this.request("ExportMaliciousRequests", req, cb)
@@ -660,7 +684,7 @@ export class Client extends AbstractClient {
    * 导出本地提权事件
    */
   async ExportPrivilegeEvents(
-    req?: ExportPrivilegeEventsRequest,
+    req: ExportPrivilegeEventsRequest,
     cb?: (error: string, rep: ExportPrivilegeEventsResponse) => void
   ): Promise<ExportPrivilegeEventsResponse> {
     return this.request("ExportPrivilegeEvents", req, cb)
@@ -727,6 +751,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口 (DescribeMachineList) 用于网页防篡改获取区域主机列表。
+   */
+  async DescribeMachineList(
+    req: DescribeMachineListRequest,
+    cb?: (error: string, rep: DescribeMachineListResponse) => void
+  ): Promise<DescribeMachineListResponse> {
+    return this.request("DescribeMachineList", req, cb)
+  }
+
+  /**
    * 本接口 (DescribeWeeklyReportNonlocalLoginPlaces) 用于获取专业周报异地登录数据。
    */
   async DescribeWeeklyReportNonlocalLoginPlaces(
@@ -734,6 +768,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeWeeklyReportNonlocalLoginPlacesResponse) => void
   ): Promise<DescribeWeeklyReportNonlocalLoginPlacesResponse> {
     return this.request("DescribeWeeklyReportNonlocalLoginPlaces", req, cb)
+  }
+
+  /**
+   * 查询木马扫描进度
+   */
+  async DescribeScanMalwareSchedule(
+    req?: DescribeScanMalwareScheduleRequest,
+    cb?: (error: string, rep: DescribeScanMalwareScheduleResponse) => void
+  ): Promise<DescribeScanMalwareScheduleResponse> {
+    return this.request("DescribeScanMalwareSchedule", req, cb)
   }
 
   /**
@@ -774,6 +818,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAccountStatisticsResponse) => void
   ): Promise<DescribeAccountStatisticsResponse> {
     return this.request("DescribeAccountStatistics", req, cb)
+  }
+
+  /**
+   * 本接口 (DescribeExportMachines) 用于导出区域主机列表。
+   */
+  async DescribeExportMachines(
+    req: DescribeExportMachinesRequest,
+    cb?: (error: string, rep: DescribeExportMachinesResponse) => void
+  ): Promise<DescribeExportMachinesResponse> {
+    return this.request("DescribeExportMachines", req, cb)
   }
 
   /**
@@ -914,6 +968,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ExportNonlocalLoginPlacesResponse) => void
   ): Promise<ExportNonlocalLoginPlacesResponse> {
     return this.request("ExportNonlocalLoginPlaces", req, cb)
+  }
+
+  /**
+   * 查看恶意文件详情
+   */
+  async DescribeMalwareInfo(
+    req: DescribeMalwareInfoRequest,
+    cb?: (error: string, rep: DescribeMalwareInfoResponse) => void
+  ): Promise<DescribeMalwareInfoResponse> {
+    return this.request("DescribeMalwareInfo", req, cb)
   }
 
   /**
@@ -1126,6 +1190,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeWeeklyReportInfoResponse) => void
   ): Promise<DescribeWeeklyReportInfoResponse> {
     return this.request("DescribeWeeklyReportInfo", req, cb)
+  }
+
+  /**
+   * 定时扫描设置
+   */
+  async ModifyMalwareTimingScanSettings(
+    req: ModifyMalwareTimingScanSettingsRequest,
+    cb?: (error: string, rep: ModifyMalwareTimingScanSettingsResponse) => void
+  ): Promise<ModifyMalwareTimingScanSettingsResponse> {
+    return this.request("ModifyMalwareTimingScanSettings", req, cb)
   }
 
   /**

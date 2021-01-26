@@ -70,6 +70,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTablesInRecycle", req, cb);
     }
     /**
+     * 当restful api为关闭状态时，可以通过此接口关闭restful api
+     */
+    async DisableRestProxy(req, cb) {
+        return this.request("DisableRestProxy", req, cb);
+    }
+    /**
      * 表格数据回档
      */
     async RollbackTables(req, cb) {
@@ -106,10 +112,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RecoverRecycleTables", req, cb);
     }
     /**
-     * 设置表格分布式索引
+     * 当restful api为关闭状态时，可以通过此接口开启restful apu
      */
-    async SetTableIndex(req, cb) {
-        return this.request("SetTableIndex", req, cb);
+    async EnableRestProxy(req, cb) {
+        return this.request("EnableRestProxy", req, cb);
     }
     /**
      * 用户创建备份任务
@@ -182,6 +188,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyTableGroupTags(req, cb) {
         return this.request("ModifyTableGroupTags", req, cb);
+    }
+    /**
+     * 设置表格分布式索引
+     */
+    async SetTableIndex(req, cb) {
+        return this.request("SetTableIndex", req, cb);
     }
     /**
      * 获取表格组关联的标签列表

@@ -132,154 +132,154 @@ export interface DescribeCloudBaseRunServerVersionResponse {
     /**
       * 版本名称
       */
-    VersionName?: string;
+    VersionName: string;
     /**
       * 备注
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Remark?: string;
+    Remark: string;
     /**
       * Dockefile的路径
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DockerfilePath?: string;
+    DockerfilePath: string;
     /**
       * DockerBuild的目录
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    BuildDir?: string;
+    BuildDir: string;
     /**
       * 请使用CPUSize
       */
-    Cpu?: number;
+    Cpu: number;
     /**
       * 请使用MemSize
       */
-    Mem?: number;
+    Mem: number;
     /**
       * 副本最小值
       */
-    MinNum?: number;
+    MinNum: number;
     /**
       * 副本最大值
       */
-    MaxNum?: number;
+    MaxNum: number;
     /**
       * 策略类型
       */
-    PolicyType?: string;
+    PolicyType: string;
     /**
       * 策略阈值
       */
-    PolicyThreshold?: number;
+    PolicyThreshold: number;
     /**
       * 环境变量
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    EnvParams?: string;
+    EnvParams: string;
     /**
       * 创建时间
       */
-    CreatedTime?: string;
+    CreatedTime: string;
     /**
       * 更新时间
       */
-    UpdatedTime?: string;
+    UpdatedTime: string;
     /**
       * 版本的IP
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    VersionIP?: string;
+    VersionIP: string;
     /**
       * 版本的端口号
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    VersionPort?: number;
+    VersionPort: number;
     /**
       * 版本状态
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Status?: string;
+    Status: string;
     /**
       * 代码包的名字
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    PackageName?: string;
+    PackageName: string;
     /**
       * 代码版本的名字
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    PackageVersion?: string;
+    PackageVersion: string;
     /**
       * 枚举（package/repository/image)
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    UploadType?: string;
+    UploadType: string;
     /**
       * Repo的类型(coding/gitlab/github/coding)
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    RepoType?: string;
+    RepoType: string;
     /**
       * 地址
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Repo?: string;
+    Repo: string;
     /**
       * 分支
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Branch?: string;
+    Branch: string;
     /**
       * 服务名字
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ServerName?: string;
+    ServerName: string;
     /**
       * 是否对于外网开放
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    IsPublic?: boolean;
+    IsPublic: boolean;
     /**
       * vpc id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    VpcId?: string;
+    VpcId: string;
     /**
       * 子网实例id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    SubnetIds?: Array<string>;
+    SubnetIds: Array<string>;
     /**
       * 日志采集路径
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    CustomLogs?: string;
+    CustomLogs: string;
     /**
       * 监听端口
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ContainerPort?: number;
+    ContainerPort: number;
     /**
       * 延迟多长时间开始健康检查（单位s）
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    InitialDelaySeconds?: number;
+    InitialDelaySeconds: number;
     /**
       * 镜像地址
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ImageUrl?: string;
+    ImageUrl: string;
     /**
       * CPU 大小
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    CpuSize?: number;
+    CpuSize: number;
     /**
       * MEM 大小
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    MemSize?: number;
+    MemSize: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

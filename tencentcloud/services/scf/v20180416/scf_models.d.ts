@@ -187,6 +187,19 @@ export interface VersionWeight {
     Weight: number;
 }
 /**
+ * 左闭右开时间区间，包括起始时间和结束时间，格式为"%Y-%m-%d %H:%M:%S"
+ */
+export interface TimeInterval {
+    /**
+      * 起始时间（包括在内），格式"%Y-%m-%d %H:%M:%S"
+      */
+    Start: string;
+    /**
+      * 结束时间（不包括在内），格式"%Y-%m-%d %H:%M:%S"
+      */
+    End: string;
+}
+/**
  * 层版本信息
  */
 export interface LayerVersionInfo {
@@ -265,6 +278,23 @@ export interface PublicNetConfigIn {
       * Eip配置
       */
     EipConfig?: EipConfigIn;
+}
+/**
+ * DeleteProvisionedConcurrencyConfig请求参数结构体
+ */
+export interface DeleteProvisionedConcurrencyConfigRequest {
+    /**
+      * 需要删除预置并发的函数的名称
+      */
+    FunctionName: string;
+    /**
+      * 函数的版本号
+      */
+    Qualifier: string;
+    /**
+      * 函数所属命名空间，默认为default
+      */
+    Namespace?: string;
 }
 /**
  * DeleteReservedConcurrencyConfig返回参数结构体
@@ -555,13 +585,21 @@ export interface ListNamespacesRequest {
     Order?: string;
 }
 /**
- * PutReservedConcurrencyConfig返回参数结构体
+ * PublishVersion请求参数结构体
  */
-export interface PutReservedConcurrencyConfigResponse {
+export interface PublishVersionRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 发布函数的名称
       */
-    RequestId?: string;
+    FunctionName: string;
+    /**
+      * 函数的描述
+      */
+    Description?: string;
+    /**
+      * 函数的命名空间
+      */
+    Namespace?: string;
 }
 /**
  * DeleteAlias请求参数结构体
@@ -799,13 +837,21 @@ export interface ListTriggersResponse {
     RequestId?: string;
 }
 /**
- * UpdateNamespace返回参数结构体
+ * TerminateAsyncEvent请求参数结构体
  */
-export interface UpdateNamespaceResponse {
+export interface TerminateAsyncEventRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 函数名称
       */
-    RequestId?: string;
+    FunctionName: string;
+    /**
+      * 终止的调用请求id
+      */
+    InvokeRequestId: string;
+    /**
+      * 命名空间
+      */
+    Namespace?: string;
 }
 /**
  * ListLayers请求参数结构体
@@ -988,6 +1034,15 @@ export interface CreateTriggerRequest {
     CustomArgument?: string;
 }
 /**
+ * UpdateNamespace返回参数结构体
+ */
+export interface UpdateNamespaceResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ListLayers返回参数结构体
  */
 export interface ListLayersResponse {
@@ -1012,6 +1067,59 @@ export interface DeleteFunctionResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ListAsyncEvents请求参数结构体
+ */
+export interface ListAsyncEventsRequest {
+    /**
+      * 函数名称
+      */
+    FunctionName: string;
+    /**
+      * 命名空间
+      */
+    Namespace?: string;
+    /**
+      * 过滤条件，函数版本
+      */
+    Qualifier?: string;
+    /**
+      * 过滤条件，调用类型列表
+      */
+    InvokeType?: Array<string>;
+    /**
+      * 过滤条件，事件状态列表
+      */
+    Status?: Array<string>;
+    /**
+      * 过滤条件，开始执行时间左闭右开区间
+      */
+    StartTimeInterval?: TimeInterval;
+    /**
+      * 过滤条件，结束执行时间左闭右开区间
+      */
+    EndTimeInterval?: TimeInterval;
+    /**
+      * 可选值 ASC 和 DESC，默认 DESC
+      */
+    Order?: string;
+    /**
+      * 可选值 StartTime 和 EndTime，默认值 StartTime
+      */
+    Orderby?: string;
+    /**
+      * 数据偏移量，默认值为 0
+      */
+    Offset?: number;
+    /**
+      * 返回数据长度，默认值为 20，最大值 100
+      */
+    Limit?: number;
+    /**
+      * 过滤条件，事件调用请求id
+      */
+    InvokeRequestId?: string;
 }
 /**
  * 运行函数的返回
@@ -1283,21 +1391,33 @@ export interface PublishVersionResponse {
     RequestId?: string;
 }
 /**
- * DeleteProvisionedConcurrencyConfig请求参数结构体
+ * 异步事件
  */
-export interface DeleteProvisionedConcurrencyConfigRequest {
+export interface AsyncEvent {
     /**
-      * 需要删除预置并发的函数的名称
+      * 调用请求id
       */
-    FunctionName: string;
+    InvokeRequestId: string;
     /**
-      * 函数的版本号
+      * 调用类型
+      */
+    InvokeType: string;
+    /**
+      * 函数版本
       */
     Qualifier: string;
     /**
-      * 函数所属命名空间，默认为default
+      * 事件状态
       */
-    Namespace?: string;
+    Status: string;
+    /**
+      * 调用开始时间，格式: "%Y-%m-%d %H:%M:%S.%f"
+      */
+    StartTime: string;
+    /**
+      * 调用结束时间，格式: "%Y-%m-%d %H:%M:%S.%f"
+      */
+    EndTime: string;
 }
 /**
  * 函数的环境变量参数
@@ -1307,6 +1427,15 @@ export interface Environment {
       * 环境变量数组
       */
     Variables?: Array<Variable>;
+}
+/**
+ * TerminateAsyncEvent返回参数结构体
+ */
+export interface TerminateAsyncEventResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * GetFunctionAddress请求参数结构体
@@ -1862,21 +1991,13 @@ Deleted 已删除
     RequestId?: string;
 }
 /**
- * PublishVersion请求参数结构体
+ * PutReservedConcurrencyConfig返回参数结构体
  */
-export interface PublishVersionRequest {
+export interface PutReservedConcurrencyConfigResponse {
     /**
-      * 发布函数的名称
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    FunctionName: string;
-    /**
-      * 函数的描述
-      */
-    Description?: string;
-    /**
-      * 函数的命名空间
-      */
-    Namespace?: string;
+    RequestId?: string;
 }
 /**
  * 日志信息
@@ -2394,6 +2515,23 @@ export interface GetProvisionedConcurrencyConfigResponse {
       * 函数已预置的并发配置详情。
       */
     Allocated?: Array<VersionProvisionedConcurrencyInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ListAsyncEvents返回参数结构体
+ */
+export interface ListAsyncEventsResponse {
+    /**
+      * 满足过滤条件的事件总数
+      */
+    TotalCount: number;
+    /**
+      * 异步事件列表
+      */
+    EventList: Array<AsyncEvent>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

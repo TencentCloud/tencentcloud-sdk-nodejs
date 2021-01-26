@@ -88,6 +88,16 @@ it("tcaplusdb.v20190823.DescribeTablesInRecycle", async function () {
     }
 })
 
+it("tcaplusdb.v20190823.DisableRestProxy", async function () {
+    try {
+       const data = await client.DisableRestProxy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcaplusdb.v20190823.RollbackTables", async function () {
     try {
        const data = await client.RollbackTables({})
@@ -148,9 +158,9 @@ it("tcaplusdb.v20190823.RecoverRecycleTables", async function () {
     }
 })
 
-it("tcaplusdb.v20190823.SetTableIndex", async function () {
+it("tcaplusdb.v20190823.EnableRestProxy", async function () {
     try {
-       const data = await client.SetTableIndex({})
+       const data = await client.EnableRestProxy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -271,6 +281,16 @@ it("tcaplusdb.v20190823.ModifyClusterTags", async function () {
 it("tcaplusdb.v20190823.ModifyTableGroupTags", async function () {
     try {
        const data = await client.ModifyTableGroupTags({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcaplusdb.v20190823.SetTableIndex", async function () {
+    try {
+       const data = await client.SetTableIndex({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

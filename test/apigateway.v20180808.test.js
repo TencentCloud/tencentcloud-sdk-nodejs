@@ -528,6 +528,16 @@ it("apigateway.v20180808.DescribeApiKey", async function () {
     }
 })
 
+it("apigateway.v20180808.DescribePlugins", async function () {
+    try {
+       const data = await client.DescribePlugins({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("apigateway.v20180808.DescribeUsagePlan", async function () {
     try {
        const data = await client.DescribeUsagePlan({})

@@ -912,6 +912,16 @@ export interface ClusterInfo {
 }
 
 /**
+ * DisableRestProxy请求参数结构体
+ */
+export interface DisableRestProxyRequest {
+  /**
+   * 对应appid
+   */
+  ClusterId: string
+}
+
+/**
  * DescribeTablesInRecycle返回参数结构体
  */
 export interface DescribeTablesInRecycleResponse {
@@ -949,6 +959,16 @@ export interface ModifyTablesResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * EnableRestProxy请求参数结构体
+ */
+export interface EnableRestProxyRequest {
+  /**
+   * 对应于appid
+   */
+  ClusterId: string
 }
 
 /**
@@ -1348,6 +1368,26 @@ export interface DescribeIdlFileInfosResponse {
    * 文件详情列表
    */
   IdlFileInfos?: Array<IdlFileInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DisableRestProxy返回参数结构体
+ */
+export interface DisableRestProxyResponse {
+  /**
+   * RestProxy的状态，0为关闭，1为开启中，2为开启，3为关闭中
+   */
+  RestProxyStatus?: number
+
+  /**
+   * TaskId由 AppInstanceId-taskId 组成，以区分不同集群的任务
+   */
+  TaskId?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1786,6 +1826,26 @@ export interface VerifyIdlFilesRequest {
    * 待上传的IDL文件信息列表，与ExistingIdlFiles至少有一者
    */
   NewIdlFiles?: Array<IdlFileInfo>
+}
+
+/**
+ * EnableRestProxy返回参数结构体
+ */
+export interface EnableRestProxyResponse {
+  /**
+   * RestProxy的状态，0为关闭，1为开启中，2为开启，3为关闭中
+   */
+  RestProxyStatus?: number
+
+  /**
+   * TaskId由 AppInstanceId-taskId 组成，以区分不同集群的任务
+   */
+  TaskId?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -549,6 +549,47 @@ export interface HealthCheckConf {
 }
 
 /**
+ * API网关插件详情。
+ */
+export interface Plugin {
+  /**
+   * 插件ID。
+   */
+  PluginId: string
+
+  /**
+   * 插件名称。
+   */
+  PluginName: string
+
+  /**
+   * 插件类型。
+   */
+  PluginType: string
+
+  /**
+   * 插件定义语句。
+   */
+  PluginData: string
+
+  /**
+      * 插件描述。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Description: string
+
+  /**
+   * 插件创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
+   */
+  CreatedTime: string
+
+  /**
+   * 插件修改时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
+   */
+  ModifiedTime: string
+}
+
+/**
  * DescribeApiUsagePlan返回参数结构体
  */
 export interface DescribeApiUsagePlanResponse {
@@ -2782,6 +2823,21 @@ export interface ServiceReleaseHistoryInfo {
 }
 
 /**
+ * DescribePlugins返回参数结构体
+ */
+export interface DescribePluginsResponse {
+  /**
+   * 插件详情。
+   */
+  Result?: PluginSummary
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ReleaseService返回参数结构体
  */
 export interface ReleaseServiceResponse {
@@ -2819,6 +2875,21 @@ export interface UnBindIPStrategyRequest {
    * 待解绑的 API 列表。
    */
   UnBindApiIds: Array<string>
+}
+
+/**
+ * 插件列表详情。
+ */
+export interface PluginSummary {
+  /**
+   * 插件个数。
+   */
+  TotalCount: number
+
+  /**
+   * 插件详情。
+   */
+  PluginSet: Array<Plugin>
 }
 
 /**
@@ -3536,6 +3607,41 @@ export interface DocumentSDK {
    * 生成的 SDK 会存放到 COS 中，此出参返回产生 SDK 文件的下载链接。
    */
   SdkURL: string
+}
+
+/**
+ * DescribePlugins请求参数结构体
+ */
+export interface DescribePluginsRequest {
+  /**
+   * 要查询的插件列表。
+   */
+  PluginIds?: Array<string>
+
+  /**
+   * 要查询的插件名称。
+   */
+  PluginName?: string
+
+  /**
+   * 要查询的插件类型。
+   */
+  PluginType?: string
+
+  /**
+   * 返回数量，默认为 20，最大值为 100。
+   */
+  Limit?: number
+
+  /**
+   * 偏移量，默认为 0。
+   */
+  Offset?: number
+
+  /**
+   * 过滤条件。预留字段，目前不支持过滤。
+   */
+  Filters?: Array<Filter>
 }
 
 /**

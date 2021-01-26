@@ -20,15 +20,19 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DismissRoomRequest,
   ChangeRoomPlayerProfileResponse,
+  ModifyRoomRequest,
   Room,
   ChangeRoomPlayerProfileRequest,
-  RemoveRoomPlayerResponse,
+  DescribeRoomResponse,
   ModifyRoomResponse,
-  ModifyRoomRequest,
+  DescribePlayerRequest,
+  DismissRoomResponse,
   ChangeRoomPlayerStatusResponse,
   Player,
   ChangeRoomPlayerStatusRequest,
-  DismissRoomResponse,
+  RemoveRoomPlayerResponse,
+  DescribePlayerResponse,
+  DescribeRoomRequest,
   RemoveRoomPlayerRequest,
   Team,
 } from "./mgobe_models"
@@ -43,23 +47,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改房间玩家自定义属性
+   * 该接口用于查询玩家信息。支持两种用法，当OpenId不传的时候，PlayerId必传，传入PlayerId可以查询当前PlayerId的玩家信息，当OpenId传入的时候，PlayerId可不传，按照OpenId查询玩家信息。
    */
-  async ChangeRoomPlayerProfile(
-    req: ChangeRoomPlayerProfileRequest,
-    cb?: (error: string, rep: ChangeRoomPlayerProfileResponse) => void
-  ): Promise<ChangeRoomPlayerProfileResponse> {
-    return this.request("ChangeRoomPlayerProfile", req, cb)
-  }
-
-  /**
-   * 踢出房间玩家
-   */
-  async RemoveRoomPlayer(
-    req: RemoveRoomPlayerRequest,
-    cb?: (error: string, rep: RemoveRoomPlayerResponse) => void
-  ): Promise<RemoveRoomPlayerResponse> {
-    return this.request("RemoveRoomPlayer", req, cb)
+  async DescribePlayer(
+    req: DescribePlayerRequest,
+    cb?: (error: string, rep: DescribePlayerResponse) => void
+  ): Promise<DescribePlayerResponse> {
+    return this.request("DescribePlayer", req, cb)
   }
 
   /**
@@ -73,16 +67,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 通过game_id、room_id解散房间
-   */
-  async DismissRoom(
-    req: DismissRoomRequest,
-    cb?: (error: string, rep: DismissRoomResponse) => void
-  ): Promise<DismissRoomResponse> {
-    return this.request("DismissRoom", req, cb)
-  }
-
-  /**
    * 修改房间
    */
   async ModifyRoom(
@@ -90,5 +74,45 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyRoomResponse) => void
   ): Promise<ModifyRoomResponse> {
     return this.request("ModifyRoom", req, cb)
+  }
+
+  /**
+   * 踢出房间玩家
+   */
+  async RemoveRoomPlayer(
+    req: RemoveRoomPlayerRequest,
+    cb?: (error: string, rep: RemoveRoomPlayerResponse) => void
+  ): Promise<RemoveRoomPlayerResponse> {
+    return this.request("RemoveRoomPlayer", req, cb)
+  }
+
+  /**
+   * 该接口用于查询房间信息。支持两种用法，当房间Id不传的时候，玩家Id必传，传入玩家Id可以查询当前玩家所在的房间信息，当房间Id传入的时候，玩家Id可不传，按照房间Id查询房间信息。
+   */
+  async DescribeRoom(
+    req: DescribeRoomRequest,
+    cb?: (error: string, rep: DescribeRoomResponse) => void
+  ): Promise<DescribeRoomResponse> {
+    return this.request("DescribeRoom", req, cb)
+  }
+
+  /**
+   * 修改房间玩家自定义属性
+   */
+  async ChangeRoomPlayerProfile(
+    req: ChangeRoomPlayerProfileRequest,
+    cb?: (error: string, rep: ChangeRoomPlayerProfileResponse) => void
+  ): Promise<ChangeRoomPlayerProfileResponse> {
+    return this.request("ChangeRoomPlayerProfile", req, cb)
+  }
+
+  /**
+   * 通过game_id、room_id解散房间
+   */
+  async DismissRoom(
+    req: DismissRoomRequest,
+    cb?: (error: string, rep: DismissRoomResponse) => void
+  ): Promise<DismissRoomResponse> {
+    return this.request("DismissRoom", req, cb)
   }
 }

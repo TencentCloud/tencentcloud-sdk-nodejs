@@ -25,6 +25,55 @@ export interface ChangeRoomPlayerProfileResponse {
     RequestId?: string;
 }
 /**
+ * ModifyRoom请求参数结构体
+ */
+export interface ModifyRoomRequest {
+    /**
+      * 游戏资源Id。
+      */
+    GameId: string;
+    /**
+      * 房间ID。
+      */
+    RoomId: string;
+    /**
+      * 发起者的PlayerId。
+      */
+    PlayerId: string;
+    /**
+      * 需要修改的房间选项，0表示房间名称，1表示房主，2表示是否允许观战，3表示是否支持邀请码/密码，4表示是否私有，5表示是否自定义房间属性，6表示是否禁止加人。
+      */
+    ChangeRoomOptionList: Array<number>;
+    /**
+      * 房间名称。
+      */
+    RoomName?: string;
+    /**
+      * 变更房主。
+      */
+    Owner?: string;
+    /**
+      * 是否支持观战。
+      */
+    IsViewed?: boolean;
+    /**
+      * 是否支持邀请码/密码。
+      */
+    IsInvited?: boolean;
+    /**
+      * 是否私有。
+      */
+    IsPrivate?: boolean;
+    /**
+      * 自定义房间属性。
+      */
+    CustomProperties?: string;
+    /**
+      * 房间是否禁止加人。
+      */
+    IsForbidJoin?: boolean;
+}
+/**
  * 房间信息详情。
  */
 export interface Room {
@@ -115,13 +164,13 @@ export interface ChangeRoomPlayerProfileRequest {
     CustomProfile: string;
 }
 /**
- * RemoveRoomPlayer返回参数结构体
+ * DescribeRoom返回参数结构体
  */
-export interface RemoveRoomPlayerResponse {
+export interface DescribeRoomResponse {
     /**
-      * 房间信息
+      * 房间信息。
       */
-    Room?: Room;
+    Room: Room;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -141,53 +190,30 @@ export interface ModifyRoomResponse {
     RequestId?: string;
 }
 /**
- * ModifyRoom请求参数结构体
+ * DescribePlayer请求参数结构体
  */
-export interface ModifyRoomRequest {
+export interface DescribePlayerRequest {
     /**
       * 游戏资源Id。
       */
     GameId: string;
     /**
-      * 房间ID。
+      * 玩家OpenId。
       */
-    RoomId: string;
+    OpenId?: string;
     /**
-      * 发起者的PlayerId。
+      * 玩家PlayerId，由后台分配，当OpenId不传的时候，PlayerId必传，传入PlayerId可以查询当前PlayerId的玩家信息，当OpenId传入的时候，PlayerId可不传，按照OpenId查询玩家信息。
       */
-    PlayerId: string;
+    PlayerId?: string;
+}
+/**
+ * DismissRoom返回参数结构体
+ */
+export interface DismissRoomResponse {
     /**
-      * 需要修改的房间选项，0表示房间名称，1表示房主，2表示是否允许观战，3表示是否支持邀请码/密码，4表示是否私有，5表示是否自定义房间属性，6表示是否禁止加人。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    ChangeRoomOptionList: Array<number>;
-    /**
-      * 房间名称。
-      */
-    RoomName?: string;
-    /**
-      * 变更房主。
-      */
-    Owner?: string;
-    /**
-      * 是否支持观战。
-      */
-    IsViewed?: boolean;
-    /**
-      * 是否支持邀请码/密码。
-      */
-    IsInvited?: boolean;
-    /**
-      * 是否私有。
-      */
-    IsPrivate?: boolean;
-    /**
-      * 自定义房间属性。
-      */
-    CustomProperties?: string;
-    /**
-      * 房间是否禁止加人。
-      */
-    IsForbidJoin?: boolean;
+    RequestId?: string;
 }
 /**
  * ChangeRoomPlayerStatus返回参数结构体
@@ -253,13 +279,47 @@ export interface ChangeRoomPlayerStatusRequest {
     PlayerId: string;
 }
 /**
- * DismissRoom返回参数结构体
+ * RemoveRoomPlayer返回参数结构体
  */
-export interface DismissRoomResponse {
+export interface RemoveRoomPlayerResponse {
+    /**
+      * 房间信息
+      */
+    Room?: Room;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribePlayer返回参数结构体
+ */
+export interface DescribePlayerResponse {
+    /**
+      * 玩家信息。
+      */
+    Player: Player;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeRoom请求参数结构体
+ */
+export interface DescribeRoomRequest {
+    /**
+      * 游戏资源Id。
+      */
+    GameId: string;
+    /**
+      * 玩家Id。当房间Id不传的时候，玩家Id必传，传入玩家Id可以查询当前玩家所在的房间信息，当房间Id传入的时候，优先按照房间Id查询房间信息。
+      */
+    PlayerId?: string;
+    /**
+      * 房间Id。
+      */
+    RoomId?: string;
 }
 /**
  * RemoveRoomPlayer请求参数结构体

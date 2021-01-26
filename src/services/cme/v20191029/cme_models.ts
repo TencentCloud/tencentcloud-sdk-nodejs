@@ -1870,12 +1870,12 @@ export interface ImportMediaToProjectResponse {
   /**
    * 媒体 Id。
    */
-  MaterialId?: string
+  MaterialId: string
 
   /**
    * 媒体预处理任务 ID，如果未指定发起预处理任务则为空。
    */
-  TaskId?: string
+  TaskId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -5,7 +5,7 @@ export interface QueryInvoiceResponse {
     /**
       * 发票查询结果
       */
-    Result?: QueryInvoiceResult;
+    Result: QueryInvoiceResult;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -712,7 +712,7 @@ export interface CreateInvoiceResponse {
     /**
       * 发票开具结果
       */
-    Result?: CreateInvoiceResult;
+    Result: CreateInvoiceResult;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2831,7 +2831,7 @@ export interface CreateRedInvoiceResponse {
     /**
       * 红冲结果
       */
-    Result?: CreateRedInvoiceResult;
+    Result: CreateRedInvoiceResult;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4839,7 +4839,7 @@ export interface CreateInvoiceRequest {
       */
     StoreNo?: string;
     /**
-      * 开票渠道。0：线上渠道，1：线下渠道。不填默认为线上渠道
+      * 开票渠道。0：APP渠道，1：线下渠道，2：小程序渠道。不填默认为APP渠道
       */
     InvoiceChannel?: number;
 }
