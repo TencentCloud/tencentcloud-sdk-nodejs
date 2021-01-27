@@ -945,8 +945,7 @@ EndTime 需要大于等于 StartTime
     EndTime: string;
     /**
       * 排序对象，支持以下几种形式：
-url：访问 URL 排序，带参数统计，支持的 Filter 为 flux、request
-path：访问 URL 排序，不带参数统计，支持的 Filter 为 flux、request（白名单功能）
+url：访问 URL 排序（无参数的URL），支持的 Filter 为 flux、request
 district：省份、国家/地区排序，支持的 Filter 为 flux、request
 isp：运营商排序，支持的 Filter 为 flux、request
 host：域名访问数据排序，支持的 Filter 为：flux、request、bandwidth、fluxHitRate、2XX、3XX、4XX、5XX、statusCode
@@ -5933,7 +5932,7 @@ export interface ListTopDataResponse {
     /**
       * 各个资源的Top 访问数据详情。
       */
-    Data?: Array<TopData>;
+    Data: Array<TopData>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -5,7 +5,7 @@ export interface SendTtsVoiceResponse {
     /**
       * 语音通知发送状态。
       */
-    SendStatus?: SendStatus;
+    SendStatus: SendStatus;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -73,10 +73,6 @@ export interface SendTtsVoiceRequest {
       */
     TemplateId: string;
     /**
-      * 模板参数，若模板没有参数，请提供为空数组。
-      */
-    TemplateParamSet: Array<string>;
-    /**
       * 被叫手机号码，采用 e.164 标准，格式为+[国家或地区码][用户号码]。
 例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号。
       */
@@ -85,6 +81,10 @@ export interface SendTtsVoiceRequest {
       * 在[语音控制台](https://console.cloud.tencent.com/vms)添加应用后生成的实际SdkAppid，示例如1400006666。
       */
     VoiceSdkAppid: string;
+    /**
+      * 模板参数，若模板没有参数，请提供为空数组。
+      */
+    TemplateParamSet?: Array<string>;
     /**
       * 播放次数，可选，最多3次，默认2次。
       */

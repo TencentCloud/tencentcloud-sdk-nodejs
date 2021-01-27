@@ -29,6 +29,10 @@ export interface DescribeMatchCodesRequest {
       * 每页数量
       */
     Limit: number;
+    /**
+      * 搜索的字符串
+      */
+    MatchCode?: string;
 }
 /**
  * DeleteRule返回参数结构体
@@ -675,7 +679,7 @@ export interface MatchAttribute {
       */
     NumberValue?: number;
     /**
-      * 字符串属性值 长度 1024 默认 ""
+      * 字符串属性值 长度 128 默认 ""
       */
     StringValue?: string;
     /**
@@ -815,7 +819,7 @@ export interface DescribeRulesResponse {
     RequestId?: string;
 }
 /**
- * matchCode和TicketId组合结构
+ * matchCode和匹配票据 ID组合结构
  */
 export interface MTicket {
     /**
@@ -823,7 +827,7 @@ export interface MTicket {
       */
     MatchCode: string;
     /**
-      * 请求TicketId
+      * 匹配票据 ID
       */
     MatchTicketId: string;
 }
@@ -1007,11 +1011,11 @@ export interface DeleteMatchRequest {
     MatchCode: string;
 }
 /**
- * 匹配请求信息
+ * 匹配票据信息
  */
 export interface MatchTicket {
     /**
-      * MatchTicketId 长度 128 [a-zA-Z0-9-\.]*
+      * 匹配票据 ID长度 128 [a-zA-Z0-9-\.]*
       */
     Id: string;
     /**

@@ -204,6 +204,8 @@ var partners_1 = require("./partners");
 Object.defineProperty(exports, "partners", { enumerable: true, get: function () { return partners_1.partners; } });
 var postgres_1 = require("./postgres");
 Object.defineProperty(exports, "postgres", { enumerable: true, get: function () { return postgres_1.postgres; } });
+var rce_1 = require("./rce");
+Object.defineProperty(exports, "rce", { enumerable: true, get: function () { return rce_1.rce; } });
 var redis_1 = require("./redis");
 Object.defineProperty(exports, "redis", { enumerable: true, get: function () { return redis_1.redis; } });
 var rkp_1 = require("./rkp");

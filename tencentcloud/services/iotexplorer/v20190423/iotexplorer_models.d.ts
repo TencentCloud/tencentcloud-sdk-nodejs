@@ -477,6 +477,11 @@ export interface ProjectEntryEx {
       * WebApp数量
       */
     WebAppCount: number;
+    /**
+      * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceId: string;
 }
 /**
  * DeleteDevice请求参数结构体
