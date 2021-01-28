@@ -1405,6 +1405,16 @@ export interface DescribeDBInstanceRebootTimeResponse {
 }
 
 /**
+ * SwitchDrInstanceToMaster请求参数结构体
+ */
+export interface SwitchDrInstanceToMasterRequest {
+  /**
+   * 灾备实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
+   */
+  InstanceId: string
+}
+
+/**
  * DeleteParamTemplate请求参数结构体
  */
 export interface DeleteParamTemplateRequest {
@@ -4801,6 +4811,21 @@ export interface ModifyRoTypeRequest {
    * 延迟时间（s），将实例修改为延迟只读实例时必传。最小值1，最大值259200。
    */
   ReplicationDelay?: number
+}
+
+/**
+ * SwitchDrInstanceToMaster返回参数结构体
+ */
+export interface SwitchDrInstanceToMasterResponse {
+  /**
+   * 异步任务的请求ID，可使用此ID查询异步任务的执行结果。
+   */
+  AsyncRequestId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

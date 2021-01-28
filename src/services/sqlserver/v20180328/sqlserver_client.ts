@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeReadOnlyGroupDetailsRequest,
   CreateDBInstancesRequest,
+  CloneDBResponse,
   InstanceRenewInfo,
   DealInfo,
   CreateBasicDBInstancesResponse,
@@ -134,13 +135,12 @@ import {
   DbRollbackTimeInfo,
   ModifyDBInstanceNetworkResponse,
   AssociateSecurityGroupsResponse,
-  DescribeReadOnlyGroupListRequest,
+  AccountDetail,
   CreateBackupResponse,
   DBInstance,
   DescribeProductConfigResponse,
   CreateMigrationRequest,
   StartMigrationCheckRequest,
-  AccountDetail,
   CreateBasicDBInstancesRequest,
   ModifyDBNameResponse,
   DescribePublishSubscribeResponse,
@@ -170,6 +170,7 @@ import {
   ModifyPublishSubscribeNameRequest,
   DeletePublishSubscribeResponse,
   InquiryPriceUpgradeDBInstanceResponse,
+  CloneDBRequest,
   DescribeMigrationDetailResponse,
   ModifyMigrationRequest,
   DeleteDBInstanceRequest,
@@ -197,6 +198,7 @@ import {
   DeleteDBInstanceResponse,
   UpgradeDBInstanceResponse,
   DescribeRollbackTimeRequest,
+  DescribeReadOnlyGroupListRequest,
   ModifyDBRemarkResponse,
   DisassociateSecurityGroupsResponse,
   CreateDBInstancesResponse,
@@ -213,13 +215,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeReadOnlyGroupList）用于查询只读组列表。
+   * 本接口(DescribeDBSecurityGroups)用于查询实例的安全组详情。
    */
-  async DescribeReadOnlyGroupList(
-    req: DescribeReadOnlyGroupListRequest,
-    cb?: (error: string, rep: DescribeReadOnlyGroupListResponse) => void
-  ): Promise<DescribeReadOnlyGroupListResponse> {
-    return this.request("DescribeReadOnlyGroupList", req, cb)
+  async DescribeDBSecurityGroups(
+    req: DescribeDBSecurityGroupsRequest,
+    cb?: (error: string, rep: DescribeDBSecurityGroupsResponse) => void
+  ): Promise<DescribeDBSecurityGroupsResponse> {
+    return this.request("DescribeDBSecurityGroups", req, cb)
   }
 
   /**
@@ -353,6 +355,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（CloneDB）用于克隆数据库，只支持克隆到本实例，克隆时必须指定新库名称。
+   */
+  async CloneDB(
+    req: CloneDBRequest,
+    cb?: (error: string, rep: CloneDBResponse) => void
+  ): Promise<CloneDBResponse> {
+    return this.request("CloneDB", req, cb)
+  }
+
+  /**
    * 本接口(DescribeCrossRegionZone)根据主实例查询备机的容灾地域和可用区。
    */
   async DescribeCrossRegionZone(
@@ -453,13 +465,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DeleteDB)用于删除数据库。
+   * 本接口(TerminateDBInstance)用于主动隔离实例，使得实例进入回收站。
    */
-  async DeleteDB(
-    req: DeleteDBRequest,
-    cb?: (error: string, rep: DeleteDBResponse) => void
-  ): Promise<DeleteDBResponse> {
-    return this.request("DeleteDB", req, cb)
+  async TerminateDBInstance(
+    req: TerminateDBInstanceRequest,
+    cb?: (error: string, rep: TerminateDBInstanceResponse) => void
+  ): Promise<TerminateDBInstanceResponse> {
+    return this.request("TerminateDBInstance", req, cb)
   }
 
   /**
@@ -543,13 +555,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(TerminateDBInstance)用于主动隔离实例，使得实例进入回收站。
+   * 本接口（DescribeReadOnlyGroupList）用于查询只读组列表。
    */
-  async TerminateDBInstance(
-    req: TerminateDBInstanceRequest,
-    cb?: (error: string, rep: TerminateDBInstanceResponse) => void
-  ): Promise<TerminateDBInstanceResponse> {
-    return this.request("TerminateDBInstance", req, cb)
+  async DescribeReadOnlyGroupList(
+    req: DescribeReadOnlyGroupListRequest,
+    cb?: (error: string, rep: DescribeReadOnlyGroupListResponse) => void
+  ): Promise<DescribeReadOnlyGroupListResponse> {
+    return this.request("DescribeReadOnlyGroupList", req, cb)
   }
 
   /**
@@ -793,13 +805,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DescribeDBSecurityGroups)用于查询实例的安全组详情。
+   * 本接口(DeleteDB)用于删除数据库。
    */
-  async DescribeDBSecurityGroups(
-    req: DescribeDBSecurityGroupsRequest,
-    cb?: (error: string, rep: DescribeDBSecurityGroupsResponse) => void
-  ): Promise<DescribeDBSecurityGroupsResponse> {
-    return this.request("DescribeDBSecurityGroups", req, cb)
+  async DeleteDB(
+    req: DeleteDBRequest,
+    cb?: (error: string, rep: DeleteDBResponse) => void
+  ): Promise<DeleteDBResponse> {
+    return this.request("DeleteDB", req, cb)
   }
 
   /**

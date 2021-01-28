@@ -136,6 +136,21 @@ export interface CreateDBInstancesRequest {
 }
 
 /**
+ * CloneDB返回参数结构体
+ */
+export interface CloneDBResponse {
+  /**
+   * 异步流程任务ID，使用FlowId调用DescribeFlowStatus接口获取任务执行状态
+   */
+  FlowId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 实例续费状态信息
  */
 export interface InstanceRenewInfo {
@@ -2370,7 +2385,7 @@ export interface SecurityGroup {
 }
 
 /**
- * 用于RestoreInstance，RollbackInstance，CreateMigration 等接口；对恢复的库进行重命名，且支持选择要恢复的库。
+ * 用于RestoreInstance，RollbackInstance，CreateMigration、CloneDB 等接口；对恢复的库进行重命名，且支持选择要恢复的库。
  */
 export interface RenameRestoreDatabase {
   /**
@@ -2380,7 +2395,7 @@ export interface RenameRestoreDatabase {
   OldName?: string
 
   /**
-   * 库的新名字，如果不填则按照系统默认方式命名恢复的库。在用于离线迁移任务时，不填则按照OldName命名，OldName和NewName不能同时不填。
+   * 库的新名字，在用于离线迁移时，不填则按照OldName命名，OldName和NewName不能同时不填。在用于克隆数据库时，OldName和NewName都必须填写，且不能重复
    */
   NewName?: string
 }
@@ -2720,13 +2735,53 @@ export interface AssociateSecurityGroupsResponse {
 }
 
 /**
- * DescribeReadOnlyGroupList请求参数结构体
+ * 账户信息详情
  */
-export interface DescribeReadOnlyGroupListRequest {
+export interface AccountDetail {
   /**
-   * 主实例ID，格式如：mssql-3l3fgqn7
+   * 账户名
    */
-  InstanceId: string
+  Name: string
+
+  /**
+   * 账户备注
+   */
+  Remark: string
+
+  /**
+   * 账户创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 账户状态，1-创建中，2-正常，3-修改中，4-密码重置中，-1-删除中
+   */
+  Status: number
+
+  /**
+   * 账户更新时间
+   */
+  UpdateTime: string
+
+  /**
+   * 密码更新时间
+   */
+  PassTime: string
+
+  /**
+   * 账户内部状态，正常为enable
+   */
+  InternalStatus: string
+
+  /**
+   * 该账户对相关db的读写权限信息
+   */
+  Dbs: Array<DBPrivilege>
+
+  /**
+   * 是否为管理员账户
+   */
+  IsAdmin: boolean
 }
 
 /**
@@ -3007,56 +3062,6 @@ export interface StartMigrationCheckRequest {
    * 迁移任务id
    */
   MigrateId: number
-}
-
-/**
- * 账户信息详情
- */
-export interface AccountDetail {
-  /**
-   * 账户名
-   */
-  Name: string
-
-  /**
-   * 账户备注
-   */
-  Remark: string
-
-  /**
-   * 账户创建时间
-   */
-  CreateTime: string
-
-  /**
-   * 账户状态，1-创建中，2-正常，3-修改中，4-密码重置中，-1-删除中
-   */
-  Status: number
-
-  /**
-   * 账户更新时间
-   */
-  UpdateTime: string
-
-  /**
-   * 密码更新时间
-   */
-  PassTime: string
-
-  /**
-   * 账户内部状态，正常为enable
-   */
-  InternalStatus: string
-
-  /**
-   * 该账户对相关db的读写权限信息
-   */
-  Dbs: Array<DBPrivilege>
-
-  /**
-   * 是否为管理员账户
-   */
-  IsAdmin: boolean
 }
 
 /**
@@ -3780,6 +3785,21 @@ export interface InquiryPriceUpgradeDBInstanceResponse {
 }
 
 /**
+ * CloneDB请求参数结构体
+ */
+export interface CloneDBRequest {
+  /**
+   * 实例ID，形如mssql-j8kv137v
+   */
+  InstanceId: string
+
+  /**
+   * 按照ReNameRestoreDatabase中的库进行克隆，并重命名，新库名称必须指定
+   */
+  RenameRestore: Array<RenameRestoreDatabase>
+}
+
+/**
  * DescribeMigrationDetail返回参数结构体
  */
 export interface DescribeMigrationDetailResponse {
@@ -4417,6 +4437,16 @@ export interface DescribeRollbackTimeRequest {
    * 需要查询的数据库列表
    */
   DBs: Array<string>
+}
+
+/**
+ * DescribeReadOnlyGroupList请求参数结构体
+ */
+export interface DescribeReadOnlyGroupListRequest {
+  /**
+   * 主实例ID，格式如：mssql-3l3fgqn7
+   */
+  InstanceId: string
 }
 
 /**

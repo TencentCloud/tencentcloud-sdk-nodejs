@@ -19,25 +19,29 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribePSTNActiveSessionListRequest,
-  DescribeTelCallInfoResponse,
-  SeatUserInfo,
-  DescribeTelCdrRequest,
+  IVRKeyPressedElement,
+  CreateSDKLoginTokenResponse,
+  CreateStaffResponse,
   DescribeTelCdrResponse,
   DescribeIMCdrsResponse,
-  DescribeChatMessagesRequest,
-  CreateSDKLoginTokenResponse,
   DescribeIMCdrsRequest,
-  MessageBody,
-  CreateSDKLoginTokenRequest,
-  DescribeTelCallInfoRequest,
-  CreateStaffResponse,
   TelCdrInfo,
-  PSTNSessionInfo,
-  CreateStaffRequest,
+  DescribeTelCallInfoRequest,
   DescribeChatMessagesResponse,
-  Message,
   DescribePSTNActiveSessionListResponse,
   IMCdrInfo,
+  DescribeChatMessagesRequest,
+  ServeParticipant,
+  DescribeSeatUserListResponse,
+  DescribeSeatUserListRequest,
+  DescribeTelCallInfoResponse,
+  CreateStaffRequest,
+  DescribeTelCdrRequest,
+  MessageBody,
+  CreateSDKLoginTokenRequest,
+  SeatUserInfo,
+  PSTNSessionInfo,
+  Message,
 } from "./ccc_models"
 
 /**
@@ -70,13 +74,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建客服账号。
+   * 按实例获取电话消耗统计
    */
-  async CreateStaff(
-    req: CreateStaffRequest,
-    cb?: (error: string, rep: CreateStaffResponse) => void
-  ): Promise<CreateStaffResponse> {
-    return this.request("CreateStaff", req, cb)
+  async DescribeTelCallInfo(
+    req: DescribeTelCallInfoRequest,
+    cb?: (error: string, rep: DescribeTelCallInfoResponse) => void
+  ): Promise<DescribeTelCallInfoResponse> {
+    return this.request("DescribeTelCallInfo", req, cb)
   }
 
   /**
@@ -90,6 +94,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取坐席用户列表
+   */
+  async DescribeSeatUserList(
+    req: DescribeSeatUserListRequest,
+    cb?: (error: string, rep: DescribeSeatUserListResponse) => void
+  ): Promise<DescribeSeatUserListResponse> {
+    return this.request("DescribeSeatUserList", req, cb)
+  }
+
+  /**
    * 获取 PSTN 活动会话列表。
    */
   async DescribePSTNActiveSessionList(
@@ -100,13 +114,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 按实例获取电话消耗统计
+   * 创建客服账号。
    */
-  async DescribeTelCallInfo(
-    req: DescribeTelCallInfoRequest,
-    cb?: (error: string, rep: DescribeTelCallInfoResponse) => void
-  ): Promise<DescribeTelCallInfoResponse> {
-    return this.request("DescribeTelCallInfo", req, cb)
+  async CreateStaff(
+    req: CreateStaffRequest,
+    cb?: (error: string, rep: CreateStaffResponse) => void
+  ): Promise<CreateStaffResponse> {
+    return this.request("CreateStaff", req, cb)
   }
 
   /**

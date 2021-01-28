@@ -38,9 +38,9 @@ it("ccc.v20200210.DescribeIMCdrs", async function () {
     }
 })
 
-it("ccc.v20200210.CreateStaff", async function () {
+it("ccc.v20200210.DescribeTelCallInfo", async function () {
     try {
-       const data = await client.CreateStaff({})
+       const data = await client.DescribeTelCallInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,6 +58,16 @@ it("ccc.v20200210.CreateSDKLoginToken", async function () {
     }
 })
 
+it("ccc.v20200210.DescribeSeatUserList", async function () {
+    try {
+       const data = await client.DescribeSeatUserList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.DescribePSTNActiveSessionList", async function () {
     try {
        const data = await client.DescribePSTNActiveSessionList({})
@@ -68,9 +78,9 @@ it("ccc.v20200210.DescribePSTNActiveSessionList", async function () {
     }
 })
 
-it("ccc.v20200210.DescribeTelCallInfo", async function () {
+it("ccc.v20200210.CreateStaff", async function () {
     try {
-       const data = await client.DescribeTelCallInfo({})
+       const data = await client.CreateStaff({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

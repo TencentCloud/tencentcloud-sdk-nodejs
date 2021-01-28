@@ -28,10 +28,10 @@ class Client extends abstract_client_1.AbstractClient {
         super("sqlserver.tencentcloudapi.com", "2018-03-28", clientConfig);
     }
     /**
-     * 本接口（DescribeReadOnlyGroupList）用于查询只读组列表。
+     * 本接口(DescribeDBSecurityGroups)用于查询实例的安全组详情。
      */
-    async DescribeReadOnlyGroupList(req, cb) {
-        return this.request("DescribeReadOnlyGroupList", req, cb);
+    async DescribeDBSecurityGroups(req, cb) {
+        return this.request("DescribeDBSecurityGroups", req, cb);
     }
     /**
      * 本接口（ModifyMigration）可以修改已有的迁移任务信息
@@ -112,6 +112,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquiryPriceCreateDBInstances", req, cb);
     }
     /**
+     * 本接口（CloneDB）用于克隆数据库，只支持克隆到本实例，克隆时必须指定新库名称。
+     */
+    async CloneDB(req, cb) {
+        return this.request("CloneDB", req, cb);
+    }
+    /**
      * 本接口(DescribeCrossRegionZone)根据主实例查询备机的容灾地域和可用区。
      */
     async DescribeCrossRegionZone(req, cb) {
@@ -172,10 +178,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstanceName", req, cb);
     }
     /**
-     * 本接口(DeleteDB)用于删除数据库。
+     * 本接口(TerminateDBInstance)用于主动隔离实例，使得实例进入回收站。
      */
-    async DeleteDB(req, cb) {
-        return this.request("DeleteDB", req, cb);
+    async TerminateDBInstance(req, cb) {
+        return this.request("TerminateDBInstance", req, cb);
     }
     /**
      * 本接口(CreateBackup)用于创建备份。
@@ -226,10 +232,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RenewDBInstance", req, cb);
     }
     /**
-     * 本接口(TerminateDBInstance)用于主动隔离实例，使得实例进入回收站。
+     * 本接口（DescribeReadOnlyGroupList）用于查询只读组列表。
      */
-    async TerminateDBInstance(req, cb) {
-        return this.request("TerminateDBInstance", req, cb);
+    async DescribeReadOnlyGroupList(req, cb) {
+        return this.request("DescribeReadOnlyGroupList", req, cb);
     }
     /**
      * 本接口(DescribeProjectSecurityGroups)用于查询项目的安全组详情。
@@ -376,10 +382,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDB", req, cb);
     }
     /**
-     * 本接口(DescribeDBSecurityGroups)用于查询实例的安全组详情。
+     * 本接口(DeleteDB)用于删除数据库。
      */
-    async DescribeDBSecurityGroups(req, cb) {
-        return this.request("DescribeDBSecurityGroups", req, cb);
+    async DeleteDB(req, cb) {
+        return this.request("DeleteDB", req, cb);
     }
     /**
      * 本接口（DescribeMigrationDetail）用于查询迁移任务的详细情况

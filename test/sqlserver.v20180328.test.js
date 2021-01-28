@@ -18,9 +18,9 @@ const client = new tencentcloud.sqlserver.v20180328.Client({
 })
 describe("sqlserver.v20180328.test.js", function () {
 
-it("sqlserver.v20180328.DescribeReadOnlyGroupList", async function () {
+it("sqlserver.v20180328.DescribeDBSecurityGroups", async function () {
     try {
-       const data = await client.DescribeReadOnlyGroupList({})
+       const data = await client.DescribeDBSecurityGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,6 +158,16 @@ it("sqlserver.v20180328.InquiryPriceCreateDBInstances", async function () {
     }
 })
 
+it("sqlserver.v20180328.CloneDB", async function () {
+    try {
+       const data = await client.CloneDB({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sqlserver.v20180328.DescribeCrossRegionZone", async function () {
     try {
        const data = await client.DescribeCrossRegionZone({})
@@ -258,9 +268,9 @@ it("sqlserver.v20180328.ModifyDBInstanceName", async function () {
     }
 })
 
-it("sqlserver.v20180328.DeleteDB", async function () {
+it("sqlserver.v20180328.TerminateDBInstance", async function () {
     try {
-       const data = await client.DeleteDB({})
+       const data = await client.TerminateDBInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -348,9 +358,9 @@ it("sqlserver.v20180328.RenewDBInstance", async function () {
     }
 })
 
-it("sqlserver.v20180328.TerminateDBInstance", async function () {
+it("sqlserver.v20180328.DescribeReadOnlyGroupList", async function () {
     try {
-       const data = await client.TerminateDBInstance({})
+       const data = await client.DescribeReadOnlyGroupList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -598,9 +608,9 @@ it("sqlserver.v20180328.CreateDB", async function () {
     }
 })
 
-it("sqlserver.v20180328.DescribeDBSecurityGroups", async function () {
+it("sqlserver.v20180328.DeleteDB", async function () {
     try {
-       const data = await client.DescribeDBSecurityGroups({})
+       const data = await client.DeleteDB({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

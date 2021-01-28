@@ -964,51 +964,51 @@ export interface DescribeBillListResponse {
     /**
       * 收支明细列表
       */
-    TransactionList?: Array<BillTransactionInfo>;
+    TransactionList: Array<BillTransactionInfo>;
     /**
       * 总条数
       */
-    Total?: number;
+    Total: number;
     /**
       * 退费总额，单位（分）
       */
-    ReturnAmount?: number;
+    ReturnAmount: number;
     /**
       * 充值总额，单位（分）
       */
-    RechargeAmount?: number;
+    RechargeAmount: number;
     /**
       * 冻结总额，单位（分）
       */
-    BlockAmount?: number;
+    BlockAmount: number;
     /**
       * 解冻总额，单位（分）
       */
-    UnblockAmount?: number;
+    UnblockAmount: number;
     /**
       * 扣费总额，单位（分）
       */
-    DeductAmount?: number;
+    DeductAmount: number;
     /**
       * 资金转入总额，单位（分）
       */
-    AgentInAmount?: number;
+    AgentInAmount: number;
     /**
       * 垫付充值总额，单位（分）
       */
-    AdvanceRechargeAmount?: number;
+    AdvanceRechargeAmount: number;
     /**
       * 提现扣减总额，单位（分）
       */
-    WithdrawAmount?: number;
+    WithdrawAmount: number;
     /**
       * 资金转出总额，单位（分）
       */
-    AgentOutAmount?: number;
+    AgentOutAmount: number;
     /**
       * 还垫付总额，单位（分）
       */
-    AdvancePayAmount?: number;
+    AdvancePayAmount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

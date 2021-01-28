@@ -426,6 +426,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBinlogBackupOverview", req, cb);
     }
     /**
+     * 本接口(SwitchDrInstanceToMaster)用于将云数据库灾备实例切换为主实例，注意请求必须发到灾备实例所在的地域。
+     */
+    async SwitchDrInstanceToMaster(req, cb) {
+        return this.request("SwitchDrInstanceToMaster", req, cb);
+    }
+    /**
      * 本接口(DeleteAccounts)用于删除云数据库的账户。
      */
     async DeleteAccounts(req, cb) {

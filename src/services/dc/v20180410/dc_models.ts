@@ -81,68 +81,18 @@ export interface RejectDirectConnectTunnelRequest {
 }
 
 /**
- * ModifyDirectConnectAttribute请求参数结构体
+ * 坐标，经维度描述
  */
-export interface ModifyDirectConnectAttributeRequest {
+export interface Coordinate {
   /**
-   * 物理专线的ID。
+   * 纬度
    */
-  DirectConnectId: string
+  Lat: number
 
   /**
-   * 物理专线名称。
+   * 经度
    */
-  DirectConnectName?: string
-
-  /**
-   * 运营商或者服务商为物理专线提供的电路编码。
-   */
-  CircuitCode?: string
-
-  /**
-   * 物理专线调试VLAN。
-   */
-  Vlan?: number
-
-  /**
-   * 物理专线调试腾讯侧互联 IP。
-   */
-  TencentAddress?: string
-
-  /**
-   * 物理专线调试用户侧互联 IP。
-   */
-  CustomerAddress?: string
-
-  /**
-   * 物理专线申请者姓名。默认从账户体系获取。
-   */
-  CustomerName?: string
-
-  /**
-   * 物理专线申请者联系邮箱。默认从账户体系获取。
-   */
-  CustomerContactMail?: string
-
-  /**
-   * 物理专线申请者联系号码。默认从账户体系获取。
-   */
-  CustomerContactNumber?: string
-
-  /**
-   * 报障联系人。
-   */
-  FaultReportContactPerson?: string
-
-  /**
-   * 报障联系电话。
-   */
-  FaultReportContactNumber?: string
-
-  /**
-   * 物理专线申请者补签用户使用协议
-   */
-  SignLaw?: boolean
+  Lng: number
 }
 
 /**
@@ -1026,6 +976,71 @@ export interface DescribeDirectConnectTunnelsRequest {
 }
 
 /**
+ * ModifyDirectConnectAttribute请求参数结构体
+ */
+export interface ModifyDirectConnectAttributeRequest {
+  /**
+   * 物理专线的ID。
+   */
+  DirectConnectId: string
+
+  /**
+   * 物理专线名称。
+   */
+  DirectConnectName?: string
+
+  /**
+   * 运营商或者服务商为物理专线提供的电路编码。
+   */
+  CircuitCode?: string
+
+  /**
+   * 物理专线调试VLAN。
+   */
+  Vlan?: number
+
+  /**
+   * 物理专线调试腾讯侧互联 IP。
+   */
+  TencentAddress?: string
+
+  /**
+   * 物理专线调试用户侧互联 IP。
+   */
+  CustomerAddress?: string
+
+  /**
+   * 物理专线申请者姓名。默认从账户体系获取。
+   */
+  CustomerName?: string
+
+  /**
+   * 物理专线申请者联系邮箱。默认从账户体系获取。
+   */
+  CustomerContactMail?: string
+
+  /**
+   * 物理专线申请者联系号码。默认从账户体系获取。
+   */
+  CustomerContactNumber?: string
+
+  /**
+   * 报障联系人。
+   */
+  FaultReportContactPerson?: string
+
+  /**
+   * 报障联系电话。
+   */
+  FaultReportContactNumber?: string
+
+  /**
+   * 物理专线申请者补签用户使用协议
+   */
+  SignLaw?: boolean
+}
+
+/**
  * DescribeInternetAddress返回参数结构体
  */
 export interface DescribeInternetAddressResponse {
@@ -1474,6 +1489,18 @@ export interface AccessPoint {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AvailablePortType: Array<string>
+
+  /**
+      * 接入点经纬度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Coordinate: Coordinate
+
+  /**
+      * 接入点所在城市
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  City: string
 }
 
 /**

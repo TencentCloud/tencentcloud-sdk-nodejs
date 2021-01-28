@@ -72,6 +72,7 @@ import {
   OpenDBInstanceGTIDResponse,
   DescribeDBZoneConfigRequest,
   DescribeDBInstanceRebootTimeResponse,
+  SwitchDrInstanceToMasterRequest,
   DeleteParamTemplateRequest,
   DrInfo,
   RoGroup,
@@ -214,6 +215,7 @@ import {
   DescribeBackupTablesRequest,
   DescribeBinlogsResponse,
   ModifyRoTypeRequest,
+  SwitchDrInstanceToMasterResponse,
   DatabasePrivilege,
   RoGroupAttr,
   ModifyAuditConfigResponse,
@@ -968,6 +970,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBinlogBackupOverviewResponse) => void
   ): Promise<DescribeBinlogBackupOverviewResponse> {
     return this.request("DescribeBinlogBackupOverview", req, cb)
+  }
+
+  /**
+   * 本接口(SwitchDrInstanceToMaster)用于将云数据库灾备实例切换为主实例，注意请求必须发到灾备实例所在的地域。
+   */
+  async SwitchDrInstanceToMaster(
+    req: SwitchDrInstanceToMasterRequest,
+    cb?: (error: string, rep: SwitchDrInstanceToMasterResponse) => void
+  ): Promise<SwitchDrInstanceToMasterResponse> {
+    return this.request("SwitchDrInstanceToMaster", req, cb)
   }
 
   /**

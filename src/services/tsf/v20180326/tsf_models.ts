@@ -8136,6 +8136,12 @@ export interface ContainerGroupDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MaxUnavailable: string
+
+  /**
+      * 部署组健康检查设置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HealthCheckSettings: HealthCheckSettings
 }
 
 /**
