@@ -1250,7 +1250,7 @@ export interface UpdateImageConfigRequest {
  */
 export interface DisableCachesRequest {
   /**
-      * 需要禁用的 URL 列表
+      * 禁用的 URL 列表（分协议生效，必须包含http://或https://）
 每次最多可提交 100 条，每日最多可提交 3000 条
       */
   Urls: Array<string>
@@ -5844,7 +5844,7 @@ export interface DisableCachesResponse {
       * 提交结果
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CacheOptResult?: CacheOptResult
+  CacheOptResult: CacheOptResult
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

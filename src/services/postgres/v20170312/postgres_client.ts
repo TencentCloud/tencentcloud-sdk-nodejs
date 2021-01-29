@@ -19,89 +19,108 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreateDBInstancesRequest,
-  CloseServerlessDBExtranetAccessResponse,
-  DestroyDBInstanceRequest,
-  CreateServerlessDBInstanceRequest,
-  InquiryPriceRenewDBInstanceRequest,
   SetAutoRenewFlagRequest,
-  DescribeOrdersResponse,
-  DeleteServerlessDBInstanceRequest,
-  DescribeDBXlogsRequest,
-  InquiryPriceCreateDBInstancesResponse,
-  AccountInfo,
-  InquiryPriceUpgradeDBInstanceRequest,
-  DescribeAccountsRequest,
-  DescribeDBErrlogsResponse,
-  InquiryPriceCreateDBInstancesRequest,
-  ModifyDBInstanceNameRequest,
-  SpecItemInfo,
-  DescribeProductConfigRequest,
-  CreateDBInstancesResponse,
-  RestartDBInstanceRequest,
-  DescribeDBInstancesRequest,
-  ErrLogDetail,
-  ServerlessDBInstance,
-  DescribeServerlessDBInstancesResponse,
-  ModifyDBInstancesProjectResponse,
-  RenewInstanceResponse,
-  DescribeZonesRequest,
-  UpgradeDBInstanceRequest,
-  OpenServerlessDBExtranetAccessRequest,
-  RegionInfo,
-  DeleteServerlessDBInstanceResponse,
-  SlowlogDetail,
-  InitDBInstancesRequest,
-  RestartDBInstanceResponse,
-  SetAutoRenewFlagResponse,
-  DescribeDBInstancesResponse,
-  SpecInfo,
-  DBInstance,
-  DescribeProductConfigResponse,
-  ResetAccountPasswordResponse,
-  ResetAccountPasswordRequest,
-  DescribeOrdersRequest,
-  InquiryPriceUpgradeDBInstanceResponse,
-  InitDBInstancesResponse,
-  DescribeDBBackupsRequest,
-  ServerlessDBAccount,
-  OpenDBExtranetAccessResponse,
-  Filter,
-  RenewInstanceRequest,
-  Tag,
-  PgDeal,
-  DescribeRegionsResponse,
   DescribeDatabasesRequest,
-  DescribeAccountsResponse,
-  InquiryPriceRenewDBInstanceResponse,
-  DescribeDBErrlogsRequest,
-  ZoneInfo,
-  DBBackup,
+  DescribeDBXlogsRequest,
+  DescribeAccountsRequest,
+  DeleteReadOnlyGroupResponse,
+  SpecItemInfo,
+  ModifyDBInstanceReadOnlyGroupResponse,
+  OpenServerlessDBExtranetAccessRequest,
+  RenewInstanceResponse,
+  DeleteServerlessDBInstanceResponse,
+  ModifyReadOnlyGroupConfigRequest,
+  AddDBInstanceToReadOnlyGroupRequest,
+  DescribeProductConfigRequest,
+  InitDBInstancesResponse,
+  RenewInstanceRequest,
+  RebalanceReadOnlyGroupRequest,
+  DescribeRegionsResponse,
   DBInstanceNetInfo,
-  ModifyDBInstancesProjectRequest,
+  ZoneInfo,
+  InquiryPriceCreateDBInstancesRequest,
+  NormalQueryItem,
+  Tag,
+  DescribeDBInstanceAttributeRequest,
+  ModifyDBInstancesProjectResponse,
+  ServerlessDBAccount,
+  ModifyDBInstanceReadOnlyGroupRequest,
+  AddDBInstanceToReadOnlyGroupResponse,
+  CreateReadOnlyDBInstanceResponse,
+  DescribeOrdersResponse,
+  InquiryPriceCreateDBInstancesResponse,
   ServerlessDBInstanceNetInfo,
-  UpgradeDBInstanceResponse,
-  ModifyDBInstanceNameResponse,
+  DescribeDBInstancesRequest,
+  ModifyAccountRemarkResponse,
+  UpgradeDBInstanceRequest,
+  DescribeZonesRequest,
+  DescribeReadOnlyGroupsResponse,
+  SetAutoRenewFlagResponse,
+  SpecInfo,
+  ResetAccountPasswordResponse,
+  CloseServerlessDBExtranetAccessRequest,
+  ReadOnlyGroup,
+  PgDeal,
+  DescribeDBErrlogsRequest,
+  DestroyDBInstanceRequest,
   OpenServerlessDBExtranetAccessResponse,
-  CloseDBExtranetAccessResponse,
-  DestroyDBInstanceResponse,
-  DescribeDBInstanceAttributeResponse,
-  DescribeDBSlowlogsRequest,
+  Xlog,
   DescribeServerlessDBInstancesRequest,
-  OpenDBExtranetAccessRequest,
   DescribeDBBackupsResponse,
   DescribeRegionsRequest,
+  ServerlessDBInstance,
+  CreateReadOnlyGroupRequest,
+  CloseServerlessDBExtranetAccessResponse,
+  RestartDBInstanceRequest,
+  OpenDBExtranetAccessResponse,
+  InquiryPriceUpgradeDBInstanceRequest,
+  ModifyDBInstanceNameRequest,
+  InquiryPriceRenewDBInstanceResponse,
+  ErrLogDetail,
+  DescribeServerlessDBInstancesResponse,
+  RebalanceReadOnlyGroupResponse,
+  InitDBInstancesRequest,
+  DBInstance,
+  DescribeProductConfigResponse,
+  DeleteReadOnlyGroupRequest,
+  DescribeDBBackupsRequest,
+  Filter,
+  OpenDBExtranetAccessRequest,
+  SlowlogDetail,
+  RemoveDBInstanceFromReadOnlyGroupRequest,
+  ModifyDBInstanceNameResponse,
+  CloseDBExtranetAccessResponse,
+  CreateReadOnlyDBInstanceRequest,
   DescribeZonesResponse,
-  NormalQueryItem,
   CreateServerlessDBInstanceResponse,
   DescribeDatabasesResponse,
-  DescribeDBXlogsResponse,
-  DescribeDBInstanceAttributeRequest,
-  CloseServerlessDBExtranetAccessRequest,
-  ModifyAccountRemarkResponse,
-  DescribeDBSlowlogsResponse,
+  DescribeOrdersRequest,
   ModifyAccountRemarkRequest,
   CloseDBExtranetAccessRequest,
-  Xlog,
+  CreateServerlessDBInstanceRequest,
+  InquiryPriceRenewDBInstanceRequest,
+  CreateReadOnlyGroupResponse,
+  DeleteServerlessDBInstanceRequest,
+  ModifyReadOnlyGroupConfigResponse,
+  AccountInfo,
+  DBBackup,
+  DescribeDBErrlogsResponse,
+  InquiryPriceUpgradeDBInstanceResponse,
+  RegionInfo,
+  RestartDBInstanceResponse,
+  DescribeDBInstancesResponse,
+  RemoveDBInstanceFromReadOnlyGroupResponse,
+  ResetAccountPasswordRequest,
+  DescribeReadOnlyGroupsRequest,
+  DescribeAccountsResponse,
+  UpgradeDBInstanceResponse,
+  ModifyDBInstancesProjectRequest,
+  DescribeDBSlowlogsRequest,
+  DestroyDBInstanceResponse,
+  DescribeDBInstanceAttributeResponse,
+  DescribeDBXlogsResponse,
+  DescribeDBSlowlogsResponse,
+  CreateDBInstancesResponse,
 } from "./postgres_models"
 
 /**
@@ -111,6 +130,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("postgres.tencentcloudapi.com", "2017-03-12", clientConfig)
+  }
+
+  /**
+   * 本接口（ModifyDBInstancesProject）用于将实例转至其他项目。
+   */
+  async ModifyDBInstancesProject(
+    req: ModifyDBInstancesProjectRequest,
+    cb?: (error: string, rep: ModifyDBInstancesProjectResponse) => void
+  ): Promise<ModifyDBInstancesProjectResponse> {
+    return this.request("ModifyDBInstancesProject", req, cb)
   }
 
   /**
@@ -124,7 +153,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (DestroyDBInstance) 用于销毁指定DBInstanceId对应的实例。
+   * 本接口 (DestroyDBInstance) 用于销毁指定DBInstanceId对应的实例。当前仅适用于按量计费实例。
    */
   async DestroyDBInstance(
     req: DestroyDBInstanceRequest,
@@ -204,13 +233,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyDBInstancesProject）用于将实例转至其他项目。
+   * 本接口(DeleteReadOnlyGroup)用于删除指定的只读组
    */
-  async ModifyDBInstancesProject(
-    req: ModifyDBInstancesProjectRequest,
-    cb?: (error: string, rep: ModifyDBInstancesProjectResponse) => void
-  ): Promise<ModifyDBInstancesProjectResponse> {
-    return this.request("ModifyDBInstancesProject", req, cb)
+  async DeleteReadOnlyGroup(
+    req: DeleteReadOnlyGroupRequest,
+    cb?: (error: string, rep: DeleteReadOnlyGroupResponse) => void
+  ): Promise<DeleteReadOnlyGroupResponse> {
+    return this.request("DeleteReadOnlyGroup", req, cb)
   }
 
   /**
@@ -261,6 +290,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDBInstanceNameResponse) => void
   ): Promise<ModifyDBInstanceNameResponse> {
     return this.request("ModifyDBInstanceName", req, cb)
+  }
+
+  /**
+   * 本接口（UpgradeDBInstance）用于升级实例。
+   */
+  async UpgradeDBInstance(
+    req: UpgradeDBInstanceRequest,
+    cb?: (error: string, rep: UpgradeDBInstanceResponse) => void
+  ): Promise<UpgradeDBInstanceResponse> {
+    return this.request("UpgradeDBInstance", req, cb)
   }
 
   /**
@@ -334,6 +373,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（CreateReadOnlyGroup）用于创建只读组
+   */
+  async CreateReadOnlyGroup(
+    req: CreateReadOnlyGroupRequest,
+    cb?: (error: string, rep: CreateReadOnlyGroupResponse) => void
+  ): Promise<CreateReadOnlyGroupResponse> {
+    return this.request("CreateReadOnlyGroup", req, cb)
+  }
+
+  /**
    * 本接口 (DescribeRegions) 用于查询售卖地域信息。
    */
   async DescribeRegions(
@@ -354,6 +403,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（ModifyDBInstanceReadOnlyGroup）用于修改实例所属的只读组
+   */
+  async ModifyDBInstanceReadOnlyGroup(
+    req: ModifyDBInstanceReadOnlyGroupRequest,
+    cb?: (error: string, rep: ModifyDBInstanceReadOnlyGroupResponse) => void
+  ): Promise<ModifyDBInstanceReadOnlyGroupResponse> {
+    return this.request("ModifyDBInstanceReadOnlyGroup", req, cb)
+  }
+
+  /**
    * 本接口（CloseDBExtranetAccess）用于关闭实例外网链接。
    */
   async CloseDBExtranetAccess(
@@ -361,6 +420,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CloseDBExtranetAccessResponse) => void
   ): Promise<CloseDBExtranetAccessResponse> {
     return this.request("CloseDBExtranetAccess", req, cb)
+  }
+
+  /**
+   * 本接口（AddDBInstanceToReadOnlyGroup）用于添加只读实例到只读组
+   */
+  async AddDBInstanceToReadOnlyGroup(
+    req: AddDBInstanceToReadOnlyGroupRequest,
+    cb?: (error: string, rep: AddDBInstanceToReadOnlyGroupResponse) => void
+  ): Promise<AddDBInstanceToReadOnlyGroupResponse> {
+    return this.request("AddDBInstanceToReadOnlyGroup", req, cb)
   }
 
   /**
@@ -394,6 +463,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(RebalanceReadOnlyGroup)用于重新均衡 RO 组内实例的负载。注意，RO 组内 RO 实例会有一次数据库连接瞬断，请确保应用程序能重连数据库，谨慎操作。
+   */
+  async RebalanceReadOnlyGroup(
+    req: RebalanceReadOnlyGroupRequest,
+    cb?: (error: string, rep: RebalanceReadOnlyGroupResponse) => void
+  ): Promise<RebalanceReadOnlyGroupResponse> {
+    return this.request("RebalanceReadOnlyGroup", req, cb)
+  }
+
+  /**
    * 本接口（RenewInstance）用于续费实例。
    */
   async RenewInstance(
@@ -414,13 +493,43 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（UpgradeDBInstance）用于升级实例。
+   * 本接口(CreateReadOnlyDBInstance)用于创建只读实例
    */
-  async UpgradeDBInstance(
-    req: UpgradeDBInstanceRequest,
-    cb?: (error: string, rep: UpgradeDBInstanceResponse) => void
-  ): Promise<UpgradeDBInstanceResponse> {
-    return this.request("UpgradeDBInstance", req, cb)
+  async CreateReadOnlyDBInstance(
+    req: CreateReadOnlyDBInstanceRequest,
+    cb?: (error: string, rep: CreateReadOnlyDBInstanceResponse) => void
+  ): Promise<CreateReadOnlyDBInstanceResponse> {
+    return this.request("CreateReadOnlyDBInstance", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeReadOnlyGroups)用于查询用户输入指定实例的只读组
+   */
+  async DescribeReadOnlyGroups(
+    req: DescribeReadOnlyGroupsRequest,
+    cb?: (error: string, rep: DescribeReadOnlyGroupsResponse) => void
+  ): Promise<DescribeReadOnlyGroupsResponse> {
+    return this.request("DescribeReadOnlyGroups", req, cb)
+  }
+
+  /**
+   * 本接口(ModifyReadOnlyGroupConfig)用于更新只读组配置信息
+   */
+  async ModifyReadOnlyGroupConfig(
+    req: ModifyReadOnlyGroupConfigRequest,
+    cb?: (error: string, rep: ModifyReadOnlyGroupConfigResponse) => void
+  ): Promise<ModifyReadOnlyGroupConfigResponse> {
+    return this.request("ModifyReadOnlyGroupConfig", req, cb)
+  }
+
+  /**
+   * 本接口（RemoveDBInstanceFromReadOnlyGroup）用户将只读实例从只读组中移除
+   */
+  async RemoveDBInstanceFromReadOnlyGroup(
+    req: RemoveDBInstanceFromReadOnlyGroupRequest,
+    cb?: (error: string, rep: RemoveDBInstanceFromReadOnlyGroupResponse) => void
+  ): Promise<RemoveDBInstanceFromReadOnlyGroupResponse> {
+    return this.request("RemoveDBInstanceFromReadOnlyGroup", req, cb)
   }
 
   /**

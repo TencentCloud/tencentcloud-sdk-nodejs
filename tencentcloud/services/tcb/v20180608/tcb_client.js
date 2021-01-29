@@ -91,6 +91,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCloudBaseRunResource", req, cb);
     }
     /**
+     * 获取云开发项目列表
+     */
+    async DescribeCloudBaseProjectLatestVersionList(req, cb) {
+        return this.request("DescribeCloudBaseProjectLatestVersionList", req, cb);
+    }
+    /**
      * 针对已隔离的免费环境，可以通过本接口将其恢复访问。
      */
     async ReinstateEnv(req, cb) {
@@ -137,6 +143,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CommonServiceAPI(req, cb) {
         return this.request("CommonServiceAPI", req, cb);
+    }
+    /**
+     * 创建云开发项目
+     */
+    async CreateAndDeployCloudBaseProject(req, cb) {
+        return this.request("CreateAndDeployCloudBaseProject", req, cb);
     }
     /**
      * 检查是否开通Tcb服务

@@ -389,6 +389,60 @@ export interface DescribeVpcIpv6AddressesRequest {
 }
 
 /**
+ * NAT的SNAT规则
+ */
+export interface SourceIpTranslationNatRule {
+  /**
+   * 资源ID
+   */
+  ResourceId: string
+
+  /**
+      * 资源类型，目前包含SUBNET、NETWORKINTERFACE
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceType: string
+
+  /**
+   * 源IP/网段
+   */
+  PrivateIpAddress: string
+
+  /**
+   * 弹性IP地址池
+   */
+  PublicIpAddresses: Array<string>
+
+  /**
+   * 描述
+   */
+  Description: string
+
+  /**
+   * Snat规则ID
+   */
+  NatGatewaySnatId?: string
+
+  /**
+      * NAT网关的ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NatGatewayId?: string
+
+  /**
+      * 私有网络VPC的ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcId?: string
+
+  /**
+      * NAT网关SNAT规则创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreatedTime?: string
+}
+
+/**
  * DescribeCustomerGateways请求参数结构体
  */
 export interface DescribeCustomerGatewaysRequest {
@@ -1524,6 +1578,34 @@ export interface DescribeCcnAttachedInstancesRequest {
 }
 
 /**
+ * DescribeNatGatewaySourceIpTranslationNatRules请求参数结构体
+ */
+export interface DescribeNatGatewaySourceIpTranslationNatRulesRequest {
+  /**
+   * NAT网关统一 ID，形如：`nat-123xx454`。
+   */
+  NatGatewayId: string
+
+  /**
+      * 过滤条件:
+<li> resource-id，Subnet的ID或者Cvm ID，如`subnet-0yi4hekt`</li>
+<li> public-ip-address，弹性IP，如`139.199.232.238`</li>
+<li>description，规则描述。</li>
+      */
+  Filters?: Array<Filter>
+
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+
+  /**
+   * 返回数量，默认为20，最大值为100。
+   */
+  Limit?: number
+}
+
+/**
  * DescribeNatGateways请求参数结构体
  */
 export interface DescribeNatGatewaysRequest {
@@ -1648,6 +1730,27 @@ export interface DescribeIpGeolocationDatabaseUrlResponse {
  * DeleteIp6Translators返回参数结构体
  */
 export interface DeleteIp6TranslatorsResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeNatGatewaySourceIpTranslationNatRules返回参数结构体
+ */
+export interface DescribeNatGatewaySourceIpTranslationNatRulesResponse {
+  /**
+      * NAT网关SNAT规则对象数组。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SourceIpTranslationNatRuleSet?: Array<SourceIpTranslationNatRule>
+
+  /**
+   * 符合条件的NAT网关端口转发规则对象数目。
+   */
+  TotalCount?: number
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1954,6 +2057,11 @@ export interface DisassociateNatGatewayAddressResponse {
  */
 export interface DeleteRoutesResponse {
   /**
+   * 已删除的路由策略详情。
+   */
+  RouteSet?: Array<Route>
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2073,6 +2181,23 @@ export interface ModifyAssistantCidrResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 用于发布云联网的cidr信息
+ */
+export interface CidrForCcn {
+  /**
+      * local cidr值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Cidr: string
+
+  /**
+      * 是否发布到了云联网。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PublishedToVbc: boolean
 }
 
 /**
@@ -2493,6 +2618,21 @@ export interface DeleteAddressTemplateRequest {
    * IP地址模板实例ID，例如：ipm-09o5m8kc。
    */
   AddressTemplateId: string
+}
+
+/**
+ * CreateNatGatewaySourceIpTranslationNatRule请求参数结构体
+ */
+export interface CreateNatGatewaySourceIpTranslationNatRuleRequest {
+  /**
+   * NAT网关的ID，形如："nat-df45454"
+   */
+  NatGatewayId: string
+
+  /**
+   * NAT网关的SNAT转换规则
+   */
+  SourceIpTranslationNatRules: Array<SourceIpTranslationNatRule>
 }
 
 /**
@@ -3711,6 +3851,21 @@ export interface SecurityGroupPolicy {
 }
 
 /**
+ * NotifyRoutes请求参数结构体
+ */
+export interface NotifyRoutesRequest {
+  /**
+   * 路由表唯一ID。
+   */
+  RouteTableId: string
+
+  /**
+   * 路由策略唯一ID。
+   */
+  RouteItemIds: Array<string>
+}
+
+/**
  * DeleteVpc请求参数结构体
  */
 export interface DeleteVpcRequest {
@@ -3898,6 +4053,21 @@ export interface CreateCustomerGatewayResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * WithdrawNotifyRoutes请求参数结构体
+ */
+export interface WithdrawNotifyRoutesRequest {
+  /**
+   * 路由表唯一ID。
+   */
+  RouteTableId: string
+
+  /**
+   * 路由策略唯一ID。
+   */
+  RouteItemIds: Array<string>
 }
 
 /**
@@ -5376,6 +5546,21 @@ export interface CreateCcnRequest {
 }
 
 /**
+ * ModifyNatGatewaySourceIpTranslationNatRule请求参数结构体
+ */
+export interface ModifyNatGatewaySourceIpTranslationNatRuleRequest {
+  /**
+   * NAT网关的ID，形如：`nat-df453454`。
+   */
+  NatGatewayId: string
+
+  /**
+   * NAT网关的SNAT转换规则。
+   */
+  SourceIpTranslationNatRule: SourceIpTranslationNatRule
+}
+
+/**
  * RemoveIp6Rules请求参数结构体
  */
 export interface RemoveIp6RulesRequest {
@@ -5934,18 +6119,23 @@ export interface DeleteDirectConnectGatewayRequest {
 }
 
 /**
- * ReleaseIp6AddressesBandwidth请求参数结构体
+ * CreateNatGatewaySourceIpTranslationNatRule返回参数结构体
  */
-export interface ReleaseIp6AddressesBandwidthRequest {
+export interface CreateNatGatewaySourceIpTranslationNatRuleResponse {
   /**
-   * IPV6地址。Ip6Addresses和Ip6AddressIds必须且只能传一个
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Ip6Addresses?: Array<string>
+  RequestId?: string
+}
 
+/**
+ * DeleteNatGatewaySourceIpTranslationNatRule返回参数结构体
+ */
+export interface DeleteNatGatewaySourceIpTranslationNatRuleResponse {
   /**
-   * IPV6地址对应的唯一ID，形如eip-xxxxxxxx。Ip6Addresses和Ip6AddressIds必须且只能传一个。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Ip6AddressIds?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -7547,6 +7737,16 @@ export interface DeleteDirectConnectGatewayCcnRoutesRequest {
    * 路由ID。形如：ccnr-f49l6u0z。
    */
   RouteIds: Array<string>
+}
+
+/**
+ * ModifyNatGatewaySourceIpTranslationNatRule返回参数结构体
+ */
+export interface ModifyNatGatewaySourceIpTranslationNatRuleResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9319,6 +9519,12 @@ export interface RouteTable {
    * 标签键值对。
    */
   TagSet: Array<Tag>
+
+  /**
+      * local路由是否发布云联网。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LocalCidrForCcn: Array<CidrForCcn>
 }
 
 /**
@@ -9781,6 +9987,21 @@ export interface DescribeSecurityGroupsResponse {
 }
 
 /**
+ * DeleteNatGatewaySourceIpTranslationNatRule请求参数结构体
+ */
+export interface DeleteNatGatewaySourceIpTranslationNatRuleRequest {
+  /**
+   * NAT网关的ID，形如：`nat-df45454`。
+   */
+  NatGatewayId: string
+
+  /**
+   * NAT网关的SNAT ID列表，形如：`snat-df43254`。
+   */
+  NatGatewaySnatIds: Array<string>
+}
+
+/**
  * ModifyVpnGatewayCcnRoutes请求参数结构体
  */
 export interface ModifyVpnGatewayCcnRoutesRequest {
@@ -10220,7 +10441,7 @@ export interface DeleteRoutesRequest {
   RouteTableId: string
 
   /**
-   * 路由策略对象。
+   * 路由策略对象，删除路由策略时，仅需使用Route的RouteId字段。
    */
   Routes: Array<Route>
 }
@@ -10736,6 +10957,21 @@ export interface DescribeClassicLinkInstancesRequest {
 }
 
 /**
+ * ReleaseIp6AddressesBandwidth请求参数结构体
+ */
+export interface ReleaseIp6AddressesBandwidthRequest {
+  /**
+   * IPV6地址。Ip6Addresses和Ip6AddressIds必须且只能传一个
+   */
+  Ip6Addresses?: Array<string>
+
+  /**
+   * IPV6地址对应的唯一ID，形如eip-xxxxxxxx。Ip6Addresses和Ip6AddressIds必须且只能传一个。
+   */
+  Ip6AddressIds?: Array<string>
+}
+
+/**
  * CreateServiceTemplate返回参数结构体
  */
 export interface CreateServiceTemplateResponse {
@@ -10974,6 +11210,16 @@ export interface Quota {
 }
 
 /**
+ * WithdrawNotifyRoutes返回参数结构体
+ */
+export interface WithdrawNotifyRoutesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeNetworkInterfaces返回参数结构体
  */
 export interface DescribeNetworkInterfacesResponse {
@@ -11126,6 +11372,16 @@ export interface DescribeSecurityGroupAssociationStatisticsRequest {
 }
 
 /**
+ * NotifyRoutes返回参数结构体
+ */
+export interface NotifyRoutesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 路由策略对象
  */
 export interface Route {
@@ -11192,6 +11448,12 @@ CCN：云联网路由，系统默认下发，不可编辑与删除。
    * 路由唯一策略ID。
    */
   RouteItemId?: string
+
+  /**
+      * 路由策略是否发布到云联网。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PublishedToVbc?: boolean
 }
 
 /**

@@ -1447,6 +1447,53 @@ export interface DestroyEnvResponse {
 }
 
 /**
+ * 云开发项目来源
+ */
+export interface CodeSource {
+  /**
+      * 类型, 可能的枚举: "coding","package","package_url","github","gitlab","gitee","rawcode"
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Type?: string
+
+  /**
+      * 下载链接
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Url?: string
+
+  /**
+      * 名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name?: string
+
+  /**
+      * 工作目录
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WorkDir?: string
+
+  /**
+      * code包名, type为coding的时候需要填写
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CodingPackageName?: string
+
+  /**
+      * coding版本名, type为coding的时候需要填写
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CodingPackageVersion?: string
+
+  /**
+      * 源码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RawCode?: string
+}
+
+/**
  * DescribeEnvs返回参数结构体
  */
 export interface DescribeEnvsResponse {
@@ -1792,6 +1839,53 @@ export interface ReinstateEnvResponse {
 }
 
 /**
+ * 子网信息
+ */
+export interface CloudBaseRunVpcSubnet {
+  /**
+      * 子网id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Id: string
+
+  /**
+      * 子网的ipv4
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Cidr: string
+
+  /**
+      * 可用区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Zone: string
+
+  /**
+      * 类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Type: string
+
+  /**
+      * subnet类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Target: string
+
+  /**
+      * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Region: string
+
+  /**
+      * 名字
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name: string
+}
+
+/**
  * 后付费免费额度
  */
 export interface PackageFreeQuotaInfo {
@@ -1849,6 +1943,22 @@ export interface DescribeEnvFreeQuotaResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   QuotaItems?: Array<PostpayEnvQuota>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateAndDeployCloudBaseProject返回参数结构体
+ */
+export interface CreateAndDeployCloudBaseProjectResponse {
+  /**
+      * 环境Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnvId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1929,6 +2039,66 @@ export interface DescribeCloudBaseRunResourceForExtendResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateAndDeployCloudBaseProject请求参数结构体
+ */
+export interface CreateAndDeployCloudBaseProjectRequest {
+  /**
+   * 项目名
+   */
+  Name: string
+
+  /**
+   * 来源
+   */
+  Source: CodeSource
+
+  /**
+   * 环境id
+   */
+  EnvId?: string
+
+  /**
+   * 项目类型, 枚举值为: framework-oneclick,qci-extension-cicd
+   */
+  Type?: string
+
+  /**
+   * 环境变量
+   */
+  Parameters?: Array<KVPair>
+
+  /**
+   * 环境别名
+   */
+  EnvAlias?: string
+
+  /**
+   * rc.json的内容
+   */
+  RcJson?: string
+
+  /**
+   * 插件配置内容
+   */
+  AddonConfig?: string
+
+  /**
+   * 标签
+   */
+  Tags?: Array<string>
+
+  /**
+   * 网络配置
+   */
+  NetworkConfig?: string
+
+  /**
+   * 免费额度的"basic", 不使用的用""
+   */
+  FreeQuota?: string
 }
 
 /**
@@ -2056,6 +2226,28 @@ export interface DeleteCloudBaseProjectLatestVersionRequest {
    * 项目名
    */
   ProjectName: string
+}
+
+/**
+ * DescribeCloudBaseProjectLatestVersionList返回参数结构体
+ */
+export interface DescribeCloudBaseProjectLatestVersionListResponse {
+  /**
+      * 项目列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProjectList: Array<CloudBaseProjectVersion>
+
+  /**
+      * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2465,6 +2657,41 @@ export interface AuthDomain {
 }
 
 /**
+ * DescribeCloudBaseProjectLatestVersionList请求参数结构体
+ */
+export interface DescribeCloudBaseProjectLatestVersionListRequest {
+  /**
+   * 偏移量
+   */
+  Offset: number
+
+  /**
+   * 个数
+   */
+  PageSize: number
+
+  /**
+   * 环境id, 非必填
+   */
+  EnvId?: string
+
+  /**
+   * 项目名称, 非必填
+   */
+  ProjectName?: string
+
+  /**
+   * 项目类型: framework-oneclick,qci-extension-cicd
+   */
+  ProjectType?: string
+
+  /**
+   * 标签
+   */
+  Tags?: Array<string>
+}
+
+/**
  * 环境计费信息
  */
 export interface EnvBillingInfoItem {
@@ -2706,50 +2933,131 @@ export interface DescribeAuthDomainsRequest {
 }
 
 /**
- * 子网信息
+ * 云开发项目版本
  */
-export interface CloudBaseRunVpcSubnet {
+export interface CloudBaseProjectVersion {
   /**
-      * 子网id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Id: string
+   * 项目名
+   */
+  Name: string
 
   /**
-      * 子网的ipv4
+      * SAM json
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Cidr: string
+  Sam: string
 
   /**
-      * 可用区
+      * 来源类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Zone: string
+  Source: CodeSource
 
   /**
-      * 类型
+      * 创建时间, unix时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime: number
+
+  /**
+      * 更新时间 ,unix时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime: number
+
+  /**
+      * 项目状态, 枚举值: 
+        "creatingEnv"-创建环境中
+	"createEnvFail"-创建环境失败
+	"building"-构建中
+	"buildFail"-构建失败
+	"deploying"-部署中
+	 "deployFail"-部署失败
+	 "success"-部署成功
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
+
+  /**
+      * 环境变量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Parameters: Array<KVPair>
+
+  /**
+      * 项目类型, 枚举值:
+"framework-oneclick" 控制台一键部署
+"framework-local-oneclick" cli本地一键部署
+"qci-extension-cicd" 内网coding ci cd
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Type: string
 
   /**
-      * subnet类型
+      * ci的id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Target: string
+  CIId: string
 
   /**
-      * 地域
+      * cd的id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Region: string
+  CDId: string
 
   /**
-      * 名字
+      * 环境id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Name: string
+  EnvId: string
+
+  /**
+      * 版本号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VersionNum: number
+
+  /**
+      * 错误原因
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailReason: string
+
+  /**
+      * rc.json内容
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RcJson: string
+
+  /**
+      * 插件配置内容
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AddonConfig: string
+
+  /**
+      * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Tags: Array<string>
+
+  /**
+      * 网络配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NetworkConfig: string
+
+  /**
+      * 扩展id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExtensionId: string
+
+  /**
+      * 错误类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailType: string
 }
 
 /**

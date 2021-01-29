@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  TagInstance,
   DescribePolicyConditionListConfigManual,
   ModifyAlarmPolicyNoticeResponse,
   ModifyAlarmPolicyInfoRequest,

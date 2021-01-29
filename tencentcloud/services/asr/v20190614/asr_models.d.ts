@@ -156,7 +156,7 @@ export interface DescribeTaskStatusResponse {
     /**
       * 录音文件识别的请求返回结果。
       */
-    Data?: TaskStatus;
+    Data: TaskStatus;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -376,7 +376,7 @@ export interface CreateRecTaskRequest {
       */
     EngineModelType: string;
     /**
-      * 语音声道数。1：单声道；2：双声道（仅支持 8k_zh 引擎模型）。
+      * 识别声道数。1：单声道；2：双声道（仅支持 8k_zh 引擎模）。注意：录音识别会自动将音频转码为填写的识别声道数
       */
     ChannelNum: number;
     /**
@@ -397,7 +397,7 @@ export interface CreateRecTaskRequest {
       */
     SpeakerNumber?: number;
     /**
-      * 回调 URL，用户自行搭建的用于接收识别结果的服务器地址， 长度小于2048字节。如果用户使用回调方式获取识别结果，需提交该参数；如果用户使用轮询方式获取识别结果，则无需提交该参数。
+      * 回调 URL，用户自行搭建的用于接收识别结果的服务URL。如果用户使用轮询方式获取识别结果，则无需提交该参数。回调格式&内容详见：[录音识别回调说明](https://github.com/yunjianfei/qcloud-documents/blob/master/product/%E5%A4%A7%E6%95%B0%E6%8D%AE%E4%B8%8EAI/%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB/%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB%20API%202017/%E5%BD%95%E9%9F%B3%E8%AF%86%E5%88%AB%E5%9B%9E%E8%B0%83%E8%AF%B4%E6%98%8E.md)
       */
     CallbackUrl?: string;
     /**
@@ -547,7 +547,7 @@ export interface CloseAsyncRecognitionTaskRequest {
  */
 export interface Task {
     /**
-      * 任务ID，可通过此ID在轮询接口获取识别状态与结果
+      * 任务ID，可通过此ID在轮询接口获取识别状态与结果。注意：TaskId数据类型为uint64
       */
     TaskId: number;
 }

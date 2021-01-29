@@ -726,6 +726,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBandwidthPackageResources", req, cb);
     }
     /**
+     * 本接口（DeleteNatGatewaySourceIpTranslationNatRule）用于删除NAT网关端口SNAT转发规则。
+     */
+    async DeleteNatGatewaySourceIpTranslationNatRule(req, cb) {
+        return this.request("DeleteNatGatewaySourceIpTranslationNatRule", req, cb);
+    }
+    /**
      * 本接口（DeleteNetworkInterface）用于删除弹性网卡。
 * 弹性网卡上绑定了云服务器时，不能被删除。
 * 删除指定弹性网卡，弹性网卡必须先和子机解绑才能删除。删除之后弹性网卡上所有内网IP都将被退还。
@@ -904,6 +910,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAddressTemplate", req, cb);
     }
     /**
+     * 路由表列表页操作增加“发布到云联网”，用于发布路由到云联网。
+     */
+    async NotifyRoutes(req, cb) {
+        return this.request("NotifyRoutes", req, cb);
+    }
+    /**
      * 本接口(ModifyAssistantCidr)用于批量修改辅助CIDR，支持新增和删除。（接口灰度中，如需使用请提工单。）
      */
     async ModifyAssistantCidr(req, cb) {
@@ -1065,6 +1077,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DisassociateAddress", req, cb);
     }
     /**
+     * 路由表列表页操作增加“从云联网撤销”，用于撤销已发布到云联网的路由。
+     */
+    async WithdrawNotifyRoutes(req, cb) {
+        return this.request("WithdrawNotifyRoutes", req, cb);
+    }
+    /**
      * 本接口（DescribeVpcPrivateIpAddresses）用于查询VPC内网IP信息。<br />
 只能查询已使用的IP信息，当查询未使用的IP时，本接口不会报错，但不会出现在返回结果里。
      */
@@ -1180,6 +1198,12 @@ LimitTypes取值范围：
      */
     async HaVipAssociateAddressIp(req, cb) {
         return this.request("HaVipAssociateAddressIp", req, cb);
+    }
+    /**
+     * 本接口(CreateNatGatewaySourceIpTranslationNatRule)用于创建NAT网关SNAT规则
+     */
+    async CreateNatGatewaySourceIpTranslationNatRule(req, cb) {
+        return this.request("CreateNatGatewaySourceIpTranslationNatRule", req, cb);
     }
     /**
      * 1. 该接口用于删除IPV6转换规则
@@ -1367,6 +1391,12 @@ LimitTypes取值范围：
         return this.request("DisassociateNetworkAclSubnets", req, cb);
     }
     /**
+     * 本接口（DescribeNatGatewaySourceIpTranslationNatRules）用于查询NAT网关SNAT转发规则对象数组。
+     */
+    async DescribeNatGatewaySourceIpTranslationNatRules(req, cb) {
+        return this.request("DescribeNatGatewaySourceIpTranslationNatRules", req, cb);
+    }
+    /**
      * 本接口（EnableCcnRoutes）用于启用已经加入云联网（CCN）的路由。<br />
 本接口会校验启用后，是否与已有路由冲突，如果冲突，则无法启用，失败处理。路由冲突时，需要先禁用与之冲突的路由，才能启用该路由。
      */
@@ -1378,6 +1408,12 @@ LimitTypes取值范围：
      */
     async ModifyRouteTableAttribute(req, cb) {
         return this.request("ModifyRouteTableAttribute", req, cb);
+    }
+    /**
+     * 本接口（ReplaceRoutes）根据路由策略ID（RouteId）修改指定的路由策略（Route），支持批量修改。
+     */
+    async ReplaceRoutes(req, cb) {
+        return this.request("ReplaceRoutes", req, cb);
     }
     /**
      * 本接口(ModifyNetDetect)用于修改网络探测参数。
@@ -1449,10 +1485,10 @@ LimitTypes取值范围：
         return this.request("CreateDhcpIp", req, cb);
     }
     /**
-     * 本接口（ReplaceRoutes）根据路由策略ID（RouteId）修改指定的路由策略（Route），支持批量修改。
+     * 本接口（ModifyNatGatewaySourceIpTranslationNatRule）用于修改NAT网关SNAT转发规则。
      */
-    async ReplaceRoutes(req, cb) {
-        return this.request("ReplaceRoutes", req, cb);
+    async ModifyNatGatewaySourceIpTranslationNatRule(req, cb) {
+        return this.request("ModifyNatGatewaySourceIpTranslationNatRule", req, cb);
     }
     /**
      * 本接口（ModifyCcnAttribute）用于修改云联网（CCN）的相关属性。

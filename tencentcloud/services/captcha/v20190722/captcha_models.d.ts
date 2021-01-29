@@ -304,17 +304,17 @@ export interface DescribeCaptchaMiniDataResponse {
     /**
       * 返回码 0 成功 其它失败
       */
-    CaptchaCode?: number;
+    CaptchaCode: number;
     /**
       * 数据数组
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Data?: Array<CaptchaQueryData>;
+    Data: Array<CaptchaQueryData>;
     /**
       * 返回信息描述
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    CaptchaMsg?: string;
+    CaptchaMsg: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -455,7 +455,7 @@ export interface DescribeCaptchaTicketDataRequest {
       */
     CaptchaAppId: number;
     /**
-      * 查询开始时间
+      * 查询开始时间 例如：20200909
       */
     Start: number;
 }
@@ -927,17 +927,17 @@ export interface DescribeCaptchaTicketDataResponse {
     /**
       * 成功返回 0 其它失败
       */
-    CaptchaCode?: number;
+    CaptchaCode: number;
     /**
       * 返回信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    CaptchaMsg?: string;
+    CaptchaMsg: string;
     /**
       * 验证码票据信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Data?: CaptchaTicketDataRes;
+    Data: CaptchaTicketDataRes;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -995,15 +995,15 @@ export interface DescribeCaptchaMiniDataRequest {
       */
     CaptchaAppId: number;
     /**
-      * 查询开始时间
+      * 查询开始时间 例如：2019112900
       */
     Start: number;
     /**
-      * 查询结束时间
+      * 查询结束时间 例如：2019112902
       */
     End: number;
     /**
-      * 查询类型
+      * 查询类型 安全验证码小程序插件分类查询数据接口，请求量type=0、通过量type=1、验证量type=2、拦截量type=3 小时级查询（五小时左右延迟）
       */
     Type: number;
 }

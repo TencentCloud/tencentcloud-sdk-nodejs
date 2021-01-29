@@ -1028,6 +1028,16 @@ it("vpc.v20170312.DescribeBandwidthPackageResources", async function () {
     }
 })
 
+it("vpc.v20170312.DeleteNatGatewaySourceIpTranslationNatRule", async function () {
+    try {
+       const data = await client.DeleteNatGatewaySourceIpTranslationNatRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DeleteNetworkInterface", async function () {
     try {
        const data = await client.DeleteNetworkInterface({})
@@ -1288,6 +1298,16 @@ it("vpc.v20170312.DeleteAddressTemplate", async function () {
     }
 })
 
+it("vpc.v20170312.NotifyRoutes", async function () {
+    try {
+       const data = await client.NotifyRoutes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.ModifyAssistantCidr", async function () {
     try {
        const data = await client.ModifyAssistantCidr({})
@@ -1538,6 +1558,16 @@ it("vpc.v20170312.DisassociateAddress", async function () {
     }
 })
 
+it("vpc.v20170312.WithdrawNotifyRoutes", async function () {
+    try {
+       const data = await client.WithdrawNotifyRoutes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DescribeVpcPrivateIpAddresses", async function () {
     try {
        const data = await client.DescribeVpcPrivateIpAddresses({})
@@ -1661,6 +1691,16 @@ it("vpc.v20170312.DescribeVpcLimits", async function () {
 it("vpc.v20170312.HaVipAssociateAddressIp", async function () {
     try {
        const data = await client.HaVipAssociateAddressIp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.CreateNatGatewaySourceIpTranslationNatRule", async function () {
+    try {
+       const data = await client.CreateNatGatewaySourceIpTranslationNatRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1958,6 +1998,16 @@ it("vpc.v20170312.DisassociateNetworkAclSubnets", async function () {
     }
 })
 
+it("vpc.v20170312.DescribeNatGatewaySourceIpTranslationNatRules", async function () {
+    try {
+       const data = await client.DescribeNatGatewaySourceIpTranslationNatRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.EnableCcnRoutes", async function () {
     try {
        const data = await client.EnableCcnRoutes({})
@@ -1971,6 +2021,16 @@ it("vpc.v20170312.EnableCcnRoutes", async function () {
 it("vpc.v20170312.ModifyRouteTableAttribute", async function () {
     try {
        const data = await client.ModifyRouteTableAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.ReplaceRoutes", async function () {
+    try {
+       const data = await client.ReplaceRoutes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2088,9 +2148,9 @@ it("vpc.v20170312.CreateDhcpIp", async function () {
     }
 })
 
-it("vpc.v20170312.ReplaceRoutes", async function () {
+it("vpc.v20170312.ModifyNatGatewaySourceIpTranslationNatRule", async function () {
     try {
-       const data = await client.ReplaceRoutes({})
+       const data = await client.ModifyNatGatewaySourceIpTranslationNatRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

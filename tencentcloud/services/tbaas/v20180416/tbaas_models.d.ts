@@ -1,4 +1,13 @@
 /**
+ * 节点详情信息
+ */
+export interface PeerDetailForUser {
+    /**
+      * 节点名称
+      */
+    PeerName: string;
+}
+/**
  * Query请求参数结构体
  */
 export interface QueryRequest {
@@ -38,6 +47,40 @@ export interface QueryRequest {
       * 被调用的函数参数列表
       */
     Args?: Array<string>;
+}
+/**
+ * GetChaincodeInitializeResultForUser返回参数结构体
+ */
+export interface GetChaincodeInitializeResultForUserResponse {
+    /**
+      * 实例化结果：0，实例化中；1，实例化成功；2，实例化失败
+      */
+    InitResult?: number;
+    /**
+      * 实例化信息
+      */
+    InitMessage?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * GetClusterListForUser返回参数结构体
+ */
+export interface GetClusterListForUserResponse {
+    /**
+      * 网络总数量
+      */
+    TotalCount?: number;
+    /**
+      * 网络列表
+      */
+    ClusterList?: Array<ClusterDetailForUser>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * GetBlockTransactionListForUser返回参数结构体
@@ -169,6 +212,84 @@ export interface GetTransListHandlerResponse {
     RequestId?: string;
 }
 /**
+ * GetChaincodeInitializeResultForUser请求参数结构体
+ */
+export interface GetChaincodeInitializeResultForUserRequest {
+    /**
+      * 模块名，本接口取值：chaincode_mng
+      */
+    Module: string;
+    /**
+      * 操作名，本接口取值：chaincode_init_result_for_user
+      */
+    Operation: string;
+    /**
+      * 区块链网络ID，可在区块链网络详情或列表中获取
+      */
+    ClusterId: string;
+    /**
+      * 调用合约的组织名称
+      */
+    GroupName: string;
+    /**
+      * 业务所属通道名称
+      */
+    ChannelName: string;
+    /**
+      * 业务所属合约名称
+      */
+    ChaincodeName: string;
+    /**
+      * 业务所属智能合约版本
+      */
+    ChaincodeVersion: string;
+    /**
+      * 实例化任务ID
+      */
+    TaskId: number;
+}
+/**
+ * InitializeChaincodeForUser请求参数结构体
+ */
+export interface InitializeChaincodeForUserRequest {
+    /**
+      * 模块名，本接口取值：chaincode_mng
+      */
+    Module: string;
+    /**
+      * 操作名，本接口取值：chaincode_init_for_user
+      */
+    Operation: string;
+    /**
+      * 区块链网络ID，可在区块链网络详情或列表中获取
+      */
+    ClusterId: string;
+    /**
+      * 调用合约的组织名称
+      */
+    GroupName: string;
+    /**
+      * 业务所属智能合约名称
+      */
+    ChaincodeName: string;
+    /**
+      * 业务所属智能合约版本
+      */
+    ChaincodeVersion: string;
+    /**
+      * 业务所属通道名称
+      */
+    ChannelName: string;
+    /**
+      * 合约实例化节点名称，可以在通道详情中获取该通道上的节点名称
+      */
+    PeerName: string;
+    /**
+      * 实例化的函数参数列表
+      */
+    Args?: Array<string>;
+}
+/**
  * DeployDynamicContractHandler返回参数结构体
  */
 export interface DeployDynamicContractHandlerResponse {
@@ -197,6 +318,47 @@ export interface ApplyUserCertResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * GetChaincodeCompileLogForUser请求参数结构体
+ */
+export interface GetChaincodeCompileLogForUserRequest {
+    /**
+      * 模块名，本接口取值：chaincode_mng
+      */
+    Module: string;
+    /**
+      * 操作名，本接口取值：chaincode_compile_log_for_user
+      */
+    Operation: string;
+    /**
+      * 区块链网络ID，可在区块链网络详情或列表中获取
+      */
+    ClusterId: string;
+    /**
+      * 调用合约的组织名称
+      */
+    GroupName: string;
+    /**
+      * 业务所属智能合约名称
+      */
+    ChaincodeName: string;
+    /**
+      * 业务所属智能合约版本
+      */
+    ChaincodeVersion: string;
+    /**
+      * 合约安装节点名称，可以在通道详情中获取该通道上的节点名称
+      */
+    PeerName: string;
+    /**
+      * 返回数据项数，本接口默认取值：10
+      */
+    Limit?: number;
+    /**
+      * 返回数据起始偏移，本接口默认取值：0
+      */
+    Offset?: number;
 }
 /**
  * GetInvokeTx请求参数结构体
@@ -236,21 +398,50 @@ export interface GetInvokeTxRequest {
     GroupName: string;
 }
 /**
- * Invoke返回参数结构体
+ * GetPeerLogForUser返回参数结构体
  */
-export interface InvokeResponse {
+export interface GetPeerLogForUserResponse {
     /**
-      * 交易ID
+      * 返回日志总行数，不会超过入参的RowNum
       */
-    Txid: string;
+    TotalCount: number;
     /**
-      * 交易执行结果
+      * 日志列表
       */
-    Events: string;
+    PeerLogList: Array<LogDetailForUser>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * GetTransListHandler请求参数结构体
+ */
+export interface GetTransListHandlerRequest {
+    /**
+      * 模块名，固定字段：transaction
+      */
+    Module: string;
+    /**
+      * 操作名，固定字段：get_trans_list
+      */
+    Operation: string;
+    /**
+      * 记录偏移量
+      */
+    Offset: number;
+    /**
+      * 每页记录数
+      */
+    Limit: number;
+    /**
+      * 群组编号
+      */
+    GroupPk: string;
+    /**
+      * 交易哈希
+      */
+    TransHash?: string;
 }
 /**
  * DownloadUserCert返回参数结构体
@@ -268,6 +459,47 @@ export interface DownloadUserCertResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * GetChaincodeLogForUser请求参数结构体
+ */
+export interface GetChaincodeLogForUserRequest {
+    /**
+      * 模块名，本接口取值：chaincode_mng
+      */
+    Module: string;
+    /**
+      * 操作名，本接口取值：chaincode_log_for_user
+      */
+    Operation: string;
+    /**
+      * 区块链网络ID，可在区块链网络详情或列表中获取
+      */
+    ClusterId: string;
+    /**
+      * 调用合约的组织名称
+      */
+    GroupName: string;
+    /**
+      * 业务所属智能合约名称
+      */
+    ChaincodeName: string;
+    /**
+      * 业务所属智能合约版本
+      */
+    ChaincodeVersion: string;
+    /**
+      * 合约安装节点名称，可以在通道详情中获取该通道上的节点名称
+      */
+    PeerName: string;
+    /**
+      * 日志开始时间，如"2020-11-24 19:49:25"
+      */
+    BeginTime: string;
+    /**
+      * 返回日志行数的最大值，系统设定该参数最大为1000，且一行日志的最大字节数是500，即最大返回50万个字节数的日志数据
+      */
+    RowNum: number;
 }
 /**
  * GetLatesdTransactionList请求参数结构体
@@ -313,6 +545,23 @@ export interface GetLatesdTransactionListRequest {
       * 需要获取的交易数量
       */
     Limit?: number;
+}
+/**
+ * Invoke返回参数结构体
+ */
+export interface InvokeResponse {
+    /**
+      * 交易ID
+      */
+    Txid: string;
+    /**
+      * 交易执行结果
+      */
+    Events: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * GetTransactionDetailForUser请求参数结构体
@@ -382,6 +631,31 @@ export interface SrvInvokeRequest {
     Param: string;
 }
 /**
+ * GetClusterSummary请求参数结构体
+ */
+export interface GetClusterSummaryRequest {
+    /**
+      * 模块名称，固定字段：cluster_mng
+      */
+    Module: string;
+    /**
+      * 操作名称，固定字段：cluster_summary
+      */
+    Operation: string;
+    /**
+      * 区块链网络ID，可在区块链网络详情或列表中获取
+      */
+    ClusterId: string;
+    /**
+      * 组织ID，固定字段：0
+      */
+    GroupId: number;
+    /**
+      * 调用接口的组织名称，可以在组织管理列表中获取当前组织的名称
+      */
+    GroupName: string;
+}
+/**
  * BlockByNumberHandler返回参数结构体
  */
 export interface BlockByNumberHandlerResponse {
@@ -439,6 +713,56 @@ export interface DeployDynamicContractHandlerRequest {
       * 构造函数入参
       */
     ConstructorParams?: Array<string>;
+}
+/**
+ * 网络详情信息
+ */
+export interface ClusterDetailForUser {
+    /**
+      * 网络ID
+      */
+    ClusterId: string;
+    /**
+      * 组织列表
+      */
+    GroupList: Array<GroupDetailForUser>;
+    /**
+      * 网络名称
+      */
+    ClusterName: string;
+}
+/**
+ * GetPeerLogForUser请求参数结构体
+ */
+export interface GetPeerLogForUserRequest {
+    /**
+      * 模块名，本接口取值：peer_mng
+      */
+    Module: string;
+    /**
+      * 操作名，本接口取值：peer_log_for_user
+      */
+    Operation: string;
+    /**
+      * 区块链网络ID，可在区块链网络详情或列表中获取
+      */
+    ClusterId: string;
+    /**
+      * 调用合约的组织名称
+      */
+    GroupName: string;
+    /**
+      * 节点名称
+      */
+    PeerName: string;
+    /**
+      * 日志开始时间，如"2020-11-24 19:49:25"
+      */
+    BeginTime: string;
+    /**
+      * 返回日志行数的最大值，系统设定该参数最大为1000，且一行日志的最大字节数是500，即最大返回50万个字节数的日志数据
+      */
+    RowNum: number;
 }
 /**
  * GetLatesdTransactionList返回参数结构体
@@ -619,6 +943,51 @@ export interface GetBlockTransactionListForUserRequest {
     Limit?: number;
 }
 /**
+ * CreateChaincodeAndInstallForUser请求参数结构体
+ */
+export interface CreateChaincodeAndInstallForUserRequest {
+    /**
+      * 模块名，本接口取值：chaincode_mng
+      */
+    Module: string;
+    /**
+      * 操作名，本接口取值：chaincode_create_and_install_for_user
+      */
+    Operation: string;
+    /**
+      * 区块链网络ID，可在区块链网络详情或列表中获取
+      */
+    ClusterId: string;
+    /**
+      * 调用合约的组织名称，可以在组织管理列表中获取当前组织的名称
+      */
+    GroupName: string;
+    /**
+      * 合约安装节点名称，可以在通道详情中获取该通道上的节点名称
+      */
+    PeerName: string;
+    /**
+      * 智能合约名称，格式说明：以小写字母开头，由2-12位数字或小写字母组成
+      */
+    ChaincodeName: string;
+    /**
+      * 智能合约版本，格式说明：由1-12位数字、小写字母、特殊符号(“.”)组成，如v1.0
+      */
+    ChaincodeVersion: string;
+    /**
+      * 智能合约代码文件类型，支持类型：
+1. "go"：.go合约文件
+2. "gozip"：go合约工程zip包，要求压缩目录为代码根目录
+3. "javazip"：java合约工程zip包，要求压缩目录为代码根目录
+4. "nodezip"：nodejs合约工程zip包，要求压缩目录为代码根目录
+      */
+    ChaincodeFileType: string;
+    /**
+      * 合约内容，合约文件或压缩包内容的base64编码，大小要求小于等于5M
+      */
+    Chaincode: string;
+}
+/**
  * SrvInvoke返回参数结构体
  */
 export interface SrvInvokeResponse {
@@ -669,29 +1038,81 @@ export interface GetBlockListHandlerRequest {
     BlockHash: string;
 }
 /**
- * GetClusterSummary请求参数结构体
+ * GetChaincodeLogForUser返回参数结构体
  */
-export interface GetClusterSummaryRequest {
+export interface GetChaincodeLogForUserResponse {
     /**
-      * 模块名称，固定字段：cluster_mng
+      * 返回日志总行数，不会超过入参的RowNum
+      */
+    TotalCount: number;
+    /**
+      * 日志列表
+      */
+    ChaincodeLogList: Array<LogDetailForUser>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 日志详情信息
+ */
+export interface LogDetailForUser {
+    /**
+      * 日志行号
+      */
+    LineNumber: number;
+    /**
+      * 日志详情
+      */
+    LogMessage: string;
+}
+/**
+ * InitializeChaincodeForUser返回参数结构体
+ */
+export interface InitializeChaincodeForUserResponse {
+    /**
+      * 实例化任务ID，用于查询实例化结果
+      */
+    TaskId?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 组织详情信息
+ */
+export interface GroupDetailForUser {
+    /**
+      * 组织名称
+      */
+    GroupName: string;
+    /**
+      * 组织MSP Identity
+      */
+    GroupMSPId: string;
+}
+/**
+ * GetClusterListForUser请求参数结构体
+ */
+export interface GetClusterListForUserRequest {
+    /**
+      * 模块名，本接口取值：cluster_mng
       */
     Module: string;
     /**
-      * 操作名称，固定字段：cluster_summary
+      * 操作名，本接口取值：cluster_list_for_user
       */
     Operation: string;
     /**
-      * 区块链网络ID，可在区块链网络详情或列表中获取
+      * 返回数据项数，本接口默认取值：10，上限取值：20
       */
-    ClusterId: string;
+    Limit?: number;
     /**
-      * 组织ID，固定字段：0
+      * 返回数据起始偏移，本接口默认取值：0
       */
-    GroupId: number;
-    /**
-      * 调用接口的组织名称，可以在组织管理列表中获取当前组织的名称
-      */
-    GroupName: string;
+    Offset?: number;
 }
 /**
  * 区块对象
@@ -941,33 +1362,38 @@ export interface GetTransactionDetailForUserResponse {
     RequestId?: string;
 }
 /**
- * GetTransListHandler请求参数结构体
+ * GetChannelListForUser返回参数结构体
  */
-export interface GetTransListHandlerRequest {
+export interface GetChannelListForUserResponse {
     /**
-      * 模块名，固定字段：transaction
+      * 通道总数量
       */
-    Module: string;
+    TotalCount?: number;
     /**
-      * 操作名，固定字段：get_trans_list
+      * 通道列表
       */
-    Operation: string;
+    ChannelList?: Array<ChannelDetailForUser>;
     /**
-      * 记录偏移量
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Offset: number;
+    RequestId?: string;
+}
+/**
+ * GetChaincodeCompileLogForUser返回参数结构体
+ */
+export interface GetChaincodeCompileLogForUserResponse {
     /**
-      * 每页记录数
+      * 日志总行数，上限2000条日志
       */
-    Limit: number;
+    TotalCount?: number;
     /**
-      * 群组编号
+      * 日志列表
       */
-    GroupPk: string;
+    CompileLogList?: Array<LogDetailForUser>;
     /**
-      * 交易哈希
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    TransHash?: string;
+    RequestId?: string;
 }
 /**
  * SendTransactionHandler请求参数结构体
@@ -1094,6 +1520,19 @@ export interface BcosBlockObj {
     ModifyTime: string;
 }
 /**
+ * 通道详情信息
+ */
+export interface ChannelDetailForUser {
+    /**
+      * 通道名称
+      */
+    ChannelName: string;
+    /**
+      * 当前组织加入通道的节点列表
+      */
+    PeerList: Array<PeerDetailForUser>;
+}
+/**
  * GetTransByHashHandler请求参数结构体
  */
 export interface GetTransByHashHandlerRequest {
@@ -1113,6 +1552,44 @@ export interface GetTransByHashHandlerRequest {
       * 交易哈希
       */
     TransHash: string;
+}
+/**
+ * CreateChaincodeAndInstallForUser返回参数结构体
+ */
+export interface CreateChaincodeAndInstallForUserResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * GetChannelListForUser请求参数结构体
+ */
+export interface GetChannelListForUserRequest {
+    /**
+      * 模块名，本接口取值：channel_mng
+      */
+    Module: string;
+    /**
+      * 操作名，本接口取值：channel_list_for_user
+      */
+    Operation: string;
+    /**
+      * 区块链网络ID，可在区块链网络详情或列表中获取
+      */
+    ClusterId: string;
+    /**
+      * 组织名称
+      */
+    GroupName: string;
+    /**
+      * 返回数据项数，本接口默认取值：10，上限取值：20
+      */
+    Limit?: number;
+    /**
+      * 返回数据起始偏移，本接口默认取值：0
+      */
+    Offset?: number;
 }
 /**
  * Query返回参数结构体

@@ -18,6 +18,16 @@ const client = new tencentcloud.postgres.v20170312.Client({
 })
 describe("postgres.v20170312.test.js", function () {
 
+it("postgres.v20170312.ModifyDBInstancesProject", async function () {
+    try {
+       const data = await client.ModifyDBInstancesProject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("postgres.v20170312.DescribeOrders", async function () {
     try {
        const data = await client.DescribeOrders({})
@@ -108,9 +118,9 @@ it("postgres.v20170312.CloseServerlessDBExtranetAccess", async function () {
     }
 })
 
-it("postgres.v20170312.ModifyDBInstancesProject", async function () {
+it("postgres.v20170312.DeleteReadOnlyGroup", async function () {
     try {
-       const data = await client.ModifyDBInstancesProject({})
+       const data = await client.DeleteReadOnlyGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -161,6 +171,16 @@ it("postgres.v20170312.DescribeDBInstanceAttribute", async function () {
 it("postgres.v20170312.ModifyDBInstanceName", async function () {
     try {
        const data = await client.ModifyDBInstanceName({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.UpgradeDBInstance", async function () {
+    try {
+       const data = await client.UpgradeDBInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,6 +258,16 @@ it("postgres.v20170312.InquiryPriceUpgradeDBInstance", async function () {
     }
 })
 
+it("postgres.v20170312.CreateReadOnlyGroup", async function () {
+    try {
+       const data = await client.CreateReadOnlyGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("postgres.v20170312.DescribeRegions", async function () {
     try {
        const data = await client.DescribeRegions({})
@@ -258,9 +288,29 @@ it("postgres.v20170312.InquiryPriceRenewDBInstance", async function () {
     }
 })
 
+it("postgres.v20170312.ModifyDBInstanceReadOnlyGroup", async function () {
+    try {
+       const data = await client.ModifyDBInstanceReadOnlyGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("postgres.v20170312.CloseDBExtranetAccess", async function () {
     try {
        const data = await client.CloseDBExtranetAccess({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.AddDBInstanceToReadOnlyGroup", async function () {
+    try {
+       const data = await client.AddDBInstanceToReadOnlyGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -298,6 +348,16 @@ it("postgres.v20170312.DescribeServerlessDBInstances", async function () {
     }
 })
 
+it("postgres.v20170312.RebalanceReadOnlyGroup", async function () {
+    try {
+       const data = await client.RebalanceReadOnlyGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("postgres.v20170312.RenewInstance", async function () {
     try {
        const data = await client.RenewInstance({})
@@ -318,9 +378,39 @@ it("postgres.v20170312.DescribeDatabases", async function () {
     }
 })
 
-it("postgres.v20170312.UpgradeDBInstance", async function () {
+it("postgres.v20170312.CreateReadOnlyDBInstance", async function () {
     try {
-       const data = await client.UpgradeDBInstance({})
+       const data = await client.CreateReadOnlyDBInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.DescribeReadOnlyGroups", async function () {
+    try {
+       const data = await client.DescribeReadOnlyGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.ModifyReadOnlyGroupConfig", async function () {
+    try {
+       const data = await client.ModifyReadOnlyGroupConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.RemoveDBInstanceFromReadOnlyGroup", async function () {
+    try {
+       const data = await client.RemoveDBInstanceFromReadOnlyGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

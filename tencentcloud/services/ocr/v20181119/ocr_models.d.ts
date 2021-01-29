@@ -67,7 +67,7 @@ export interface TextArithmetic {
       */
     DetectedText: string;
     /**
-      * 算式运算结果
+      * 算式运算结果，true-正确   false-错误或非法参数
       */
     Result: boolean;
     /**
@@ -102,6 +102,10 @@ export interface TextArithmetic {
 ‘11’: 解方程
       */
     ExpressionType: string;
+    /**
+      * 错题推荐答案，算式运算结果正确返回为""，算式运算结果错误返回推荐答案 (注：暂不支持多个关系运算符（如1<10<7）、无关系运算符（如frac(1,2)+frac(2,3)）、单位换算（如1元=100角）错题的推荐答案返回)
+      */
+    Answer: string;
 }
 /**
  * HKIDCardOCR请求参数结构体
@@ -1301,7 +1305,11 @@ export interface ArithmeticOCRResponse {
     /**
       * 检测到的文本信息，具体内容请点击左侧链接。
       */
-    TextDetections?: Array<TextArithmetic>;
+    TextDetections: Array<TextArithmetic>;
+    /**
+      * 图片横屏的角度(90度或270度)
+      */
+    Angle: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3012,6 +3020,30 @@ export interface ArithmeticOCRRequest {
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
     ImageUrl?: string;
+    /**
+      * 用于选择是否支持横屏拍摄。打开则支持横屏拍摄图片角度判断，角度信息在返回参数的angle中，默认值为true
+      */
+    SupportHorizontalImage?: boolean;
+    /**
+      * 是否拒绝非速算图，打开则拒绝非速算图(注：非速算图是指风景人物等明显不是速算图片的图片)，默认值为false
+      */
+    RejectNonArithmeticPic?: boolean;
+    /**
+      * 是否展开耦合算式中的竖式计算，默认值为false
+      */
+    EnableDispRelatedVertical?: boolean;
+    /**
+      * 是否展示竖式算式的中间结果和格式控制字符，默认值为false
+      */
+    EnableDispMidResult?: boolean;
+    /**
+      * 是否开启pdf识别，默认值为true
+      */
+    EnablePdfRecognize?: boolean;
+    /**
+      * pdf页码，从0开始，默认为0
+      */
+    PdfPageIndex?: number;
 }
 /**
  * VerifyOfdVatInvoiceOCR请求参数结构体

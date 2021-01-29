@@ -2230,7 +2230,7 @@ export interface GetFunctionResponse {
  */
 export interface Code {
   /**
-   * 对象存储桶名称
+   * 对象存储桶名称（填写存储桶名称自定义部分，不包含-appid）
    */
   CosBucketName?: string
 

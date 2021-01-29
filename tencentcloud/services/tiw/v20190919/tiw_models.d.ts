@@ -337,7 +337,13 @@ VIDEO_GENERATION_MODE - 视频生成模式（内测中，需邮件申请开通�
       */
     ChatGroupId?: string;
     /**
-      * 内部参数
+      * 自动停止录制超时时间，单位秒，取值范围[300, 86400], 默认值为300秒。
+
+当超过设定时间房间内没有音视频上行且没有白板操作的时候，录制服务会自动停止当前录制任务。
+      */
+    AutoStopTimeout?: number;
+    /**
+      * 内部参数，可忽略
       */
     ExtraData?: string;
 }
@@ -669,7 +675,7 @@ export interface StartOnlineRecordResponse {
     /**
       * 录制任务Id
       */
-    TaskId?: string;
+    TaskId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

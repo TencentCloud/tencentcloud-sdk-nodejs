@@ -66,6 +66,7 @@ import {
   EnvInfo,
   DestroyEnvRequest,
   DestroyEnvResponse,
+  CodeSource,
   DescribeEnvsResponse,
   CreateAuthDomainRequest,
   CreateHostingDomainResponse,
@@ -75,10 +76,13 @@ import {
   EstablishCloudBaseRunServerRequest,
   DescribeDownloadFileRequest,
   ReinstateEnvResponse,
+  CloudBaseRunVpcSubnet,
   PackageFreeQuotaInfo,
   DescribeEnvFreeQuotaResponse,
+  CreateAndDeployCloudBaseProjectResponse,
   StaticStorageInfo,
   DescribeCloudBaseRunResourceForExtendResponse,
+  CreateAndDeployCloudBaseProjectRequest,
   DatabasesInfo,
   ReinstateEnvRequest,
   DescribeDatabaseACLRequest,
@@ -86,6 +90,7 @@ import {
   DescribeEndUserLoginStatisticRequest,
   PlatformStatistic,
   DeleteCloudBaseProjectLatestVersionRequest,
+  DescribeCloudBaseProjectLatestVersionListResponse,
   CloudBaseRunNfsVolumeSource,
   DescribeSmsQuotasResponse,
   CloudBaseRunImageSecretInfo,
@@ -101,6 +106,7 @@ import {
   DescribePostpayFreeQuotasResponse,
   DescribeEndUsersResponse,
   AuthDomain,
+  DescribeCloudBaseProjectLatestVersionListRequest,
   EnvBillingInfoItem,
   DescribeEndUserStatisticResponse,
   CreatePostpayPackageRequest,
@@ -110,7 +116,7 @@ import {
   CreateCloudBaseRunResourceRequest,
   ModifyEndUserResponse,
   DescribeAuthDomainsRequest,
-  CloudBaseRunVpcSubnet,
+  CloudBaseProjectVersion,
   DescribeDatabaseACLResponse,
   ModifyEnvRequest,
   PostpayEnvQuota,
@@ -233,6 +239,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取云开发项目列表
+   */
+  async DescribeCloudBaseProjectLatestVersionList(
+    req: DescribeCloudBaseProjectLatestVersionListRequest,
+    cb?: (error: string, rep: DescribeCloudBaseProjectLatestVersionListResponse) => void
+  ): Promise<DescribeCloudBaseProjectLatestVersionListResponse> {
+    return this.request("DescribeCloudBaseProjectLatestVersionList", req, cb)
+  }
+
+  /**
    * 针对已隔离的免费环境，可以通过本接口将其恢复访问。
    */
   async ReinstateEnv(
@@ -310,6 +326,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CommonServiceAPIResponse) => void
   ): Promise<CommonServiceAPIResponse> {
     return this.request("CommonServiceAPI", req, cb)
+  }
+
+  /**
+   * 创建云开发项目
+   */
+  async CreateAndDeployCloudBaseProject(
+    req: CreateAndDeployCloudBaseProjectRequest,
+    cb?: (error: string, rep: CreateAndDeployCloudBaseProjectResponse) => void
+  ): Promise<CreateAndDeployCloudBaseProjectResponse> {
+    return this.request("CreateAndDeployCloudBaseProject", req, cb)
   }
 
   /**

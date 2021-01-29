@@ -28,13 +28,19 @@ class Client extends abstract_client_1.AbstractClient {
         super("postgres.tencentcloudapi.com", "2017-03-12", clientConfig);
     }
     /**
+     * 本接口（ModifyDBInstancesProject）用于将实例转至其他项目。
+     */
+    async ModifyDBInstancesProject(req, cb) {
+        return this.request("ModifyDBInstancesProject", req, cb);
+    }
+    /**
      * 本接口（DescribeOrders）用于获取订单信息。
      */
     async DescribeOrders(req, cb) {
         return this.request("DescribeOrders", req, cb);
     }
     /**
-     * 本接口 (DestroyDBInstance) 用于销毁指定DBInstanceId对应的实例。
+     * 本接口 (DestroyDBInstance) 用于销毁指定DBInstanceId对应的实例。当前仅适用于按量计费实例。
      */
     async DestroyDBInstance(req, cb) {
         return this.request("DestroyDBInstance", req, cb);
@@ -82,10 +88,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CloseServerlessDBExtranetAccess", req, cb);
     }
     /**
-     * 本接口（ModifyDBInstancesProject）用于将实例转至其他项目。
+     * 本接口(DeleteReadOnlyGroup)用于删除指定的只读组
      */
-    async ModifyDBInstancesProject(req, cb) {
-        return this.request("ModifyDBInstancesProject", req, cb);
+    async DeleteReadOnlyGroup(req, cb) {
+        return this.request("DeleteReadOnlyGroup", req, cb);
     }
     /**
      * 本接口（ModifyAccountRemark）用于修改帐号备注。
@@ -116,6 +122,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyDBInstanceName(req, cb) {
         return this.request("ModifyDBInstanceName", req, cb);
+    }
+    /**
+     * 本接口（UpgradeDBInstance）用于升级实例。
+     */
+    async UpgradeDBInstance(req, cb) {
+        return this.request("UpgradeDBInstance", req, cb);
     }
     /**
      * 本接口 (CreateDBInstances) 用于创建一个或者多个PostgreSQL实例。
@@ -160,6 +172,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquiryPriceUpgradeDBInstance", req, cb);
     }
     /**
+     * 本接口（CreateReadOnlyGroup）用于创建只读组
+     */
+    async CreateReadOnlyGroup(req, cb) {
+        return this.request("CreateReadOnlyGroup", req, cb);
+    }
+    /**
      * 本接口 (DescribeRegions) 用于查询售卖地域信息。
      */
     async DescribeRegions(req, cb) {
@@ -172,10 +190,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InquiryPriceRenewDBInstance", req, cb);
     }
     /**
+     * 本接口（ModifyDBInstanceReadOnlyGroup）用于修改实例所属的只读组
+     */
+    async ModifyDBInstanceReadOnlyGroup(req, cb) {
+        return this.request("ModifyDBInstanceReadOnlyGroup", req, cb);
+    }
+    /**
      * 本接口（CloseDBExtranetAccess）用于关闭实例外网链接。
      */
     async CloseDBExtranetAccess(req, cb) {
         return this.request("CloseDBExtranetAccess", req, cb);
+    }
+    /**
+     * 本接口（AddDBInstanceToReadOnlyGroup）用于添加只读实例到只读组
+     */
+    async AddDBInstanceToReadOnlyGroup(req, cb) {
+        return this.request("AddDBInstanceToReadOnlyGroup", req, cb);
     }
     /**
      * 本接口（DescribeAccounts）用于获取实例用户列表。
@@ -196,6 +226,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeServerlessDBInstances", req, cb);
     }
     /**
+     * 本接口(RebalanceReadOnlyGroup)用于重新均衡 RO 组内实例的负载。注意，RO 组内 RO 实例会有一次数据库连接瞬断，请确保应用程序能重连数据库，谨慎操作。
+     */
+    async RebalanceReadOnlyGroup(req, cb) {
+        return this.request("RebalanceReadOnlyGroup", req, cb);
+    }
+    /**
      * 本接口（RenewInstance）用于续费实例。
      */
     async RenewInstance(req, cb) {
@@ -208,10 +244,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDatabases", req, cb);
     }
     /**
-     * 本接口（UpgradeDBInstance）用于升级实例。
+     * 本接口(CreateReadOnlyDBInstance)用于创建只读实例
      */
-    async UpgradeDBInstance(req, cb) {
-        return this.request("UpgradeDBInstance", req, cb);
+    async CreateReadOnlyDBInstance(req, cb) {
+        return this.request("CreateReadOnlyDBInstance", req, cb);
+    }
+    /**
+     * 本接口(DescribeReadOnlyGroups)用于查询用户输入指定实例的只读组
+     */
+    async DescribeReadOnlyGroups(req, cb) {
+        return this.request("DescribeReadOnlyGroups", req, cb);
+    }
+    /**
+     * 本接口(ModifyReadOnlyGroupConfig)用于更新只读组配置信息
+     */
+    async ModifyReadOnlyGroupConfig(req, cb) {
+        return this.request("ModifyReadOnlyGroupConfig", req, cb);
+    }
+    /**
+     * 本接口（RemoveDBInstanceFromReadOnlyGroup）用户将只读实例从只读组中移除
+     */
+    async RemoveDBInstanceFromReadOnlyGroup(req, cb) {
+        return this.request("RemoveDBInstanceFromReadOnlyGroup", req, cb);
     }
     /**
      * 本接口 (DescribeProductConfig) 用于查询售卖规格配置。

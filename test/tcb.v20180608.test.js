@@ -118,6 +118,16 @@ it("tcb.v20180608.DescribeCloudBaseRunResource", async function () {
     }
 })
 
+it("tcb.v20180608.DescribeCloudBaseProjectLatestVersionList", async function () {
+    try {
+       const data = await client.DescribeCloudBaseProjectLatestVersionList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.ReinstateEnv", async function () {
     try {
        const data = await client.ReinstateEnv({})
@@ -191,6 +201,16 @@ it("tcb.v20180608.EstablishCloudBaseRunServer", async function () {
 it("tcb.v20180608.CommonServiceAPI", async function () {
     try {
        const data = await client.CommonServiceAPI({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.CreateAndDeployCloudBaseProject", async function () {
+    try {
+       const data = await client.CreateAndDeployCloudBaseProject({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

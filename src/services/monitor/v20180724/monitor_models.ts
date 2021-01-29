@@ -16,6 +16,53 @@
  */
 
 /**
+ * 策略列表详情标签返回体
+ */
+export interface TagInstance {
+  /**
+      * 标签Key
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Key: string
+
+  /**
+      * 标签Value
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Value: string
+
+  /**
+      * 实例个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceSum: number
+
+  /**
+      * 产品类型，如：cvm
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceType: string
+
+  /**
+      * 地域ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RegionId: string
+
+  /**
+      * 绑定状态，2：绑定成功，1：绑定中
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BindingStatus: number
+
+  /**
+      * 标签状态，2：标签存在，1：标签不存在
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TagStatus: number
+}
+
+/**
  * DescribePolicyConditionList.ConfigManual
  */
 export interface DescribePolicyConditionListConfigManual {
@@ -811,12 +858,12 @@ export interface DescribeAlarmPoliciesResponse {
   /**
    * 策略总数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 策略数组
    */
-  Policies?: Array<AlarmPolicy>
+  Policies: Array<AlarmPolicy>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1451,6 +1498,12 @@ export interface AlarmPolicy {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   OriginId: string
+
+  /**
+      * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TagInstances: Array<TagInstance>
 }
 
 /**
@@ -2906,6 +2959,12 @@ export interface DescribeProductEventListEvents {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   GroupInfo: Array<DescribeProductEventListEventsGroupInfo>
+
+  /**
+      * 显示名称ViewName
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ViewName: string
 }
 
 /**
@@ -3108,6 +3167,11 @@ export interface DescribeAlarmPoliciesRequest {
    * 启停，1：启用   0：停止
    */
   Enable?: Array<number>
+
+  /**
+   * 是否未配置通知规则，1：未配置，0：配置
+   */
+  NotBindingNoticeRule?: number
 }
 
 /**
