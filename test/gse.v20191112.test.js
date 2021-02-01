@@ -18,6 +18,16 @@ const client = new tencentcloud.gse.v20191112.Client({
 })
 describe("gse.v20191112.test.js", function () {
 
+it("gse.v20191112.UpdateBucketCORSOpt", async function () {
+    try {
+       const data = await client.UpdateBucketCORSOpt({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gse.v20191112.DeleteFleet", async function () {
     try {
        const data = await client.DeleteFleet({})
@@ -91,6 +101,16 @@ it("gse.v20191112.DescribeGameServerSessionDetails", async function () {
 it("gse.v20191112.CreateAsset", async function () {
     try {
        const data = await client.CreateAsset({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gse.v20191112.UpdateBucketAccelerateOpt", async function () {
+    try {
+       const data = await client.UpdateBucketAccelerateOpt({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

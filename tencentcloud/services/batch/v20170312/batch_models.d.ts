@@ -1231,7 +1231,7 @@ export interface CreateCpmComputeEnvResponse {
     /**
       * 计算环境ID
       */
-    EnvId?: string;
+    EnvId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1878,7 +1878,7 @@ export interface CreateComputeEnvResponse {
     /**
       * 计算环境ID
       */
-    EnvId?: string;
+    EnvId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

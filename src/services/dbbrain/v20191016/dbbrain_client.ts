@@ -18,7 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  DescribeAllUserContactRequest,
+  DescribeSlowLogTimeSeriesStatsRequest,
   DescribeTopSpaceTableTimeSeriesResponse,
   ContactItem,
   DescribeDBDiagHistoryResponse,
@@ -29,13 +29,16 @@ import {
   MonitorMetric,
   CreateDBDiagReportTaskRequest,
   MonitorFloatMetric,
+  DescribeSecurityAuditLogDownloadUrlsRequest,
+  DescribeSecurityAuditLogExportTasksRequest,
   TableSpaceTimeSeries,
   DescribeAllUserGroupResponse,
   SchemaItem,
   CreateMailProfileResponse,
   DescribeTopSpaceTablesRequest,
-  DescribeSlowLogTimeSeriesStatsRequest,
+  DescribeAllUserContactRequest,
   DescribeDBDiagEventRequest,
+  CreateSecurityAuditLogExportTaskRequest,
   DescribeDBSpaceStatusResponse,
   DescribeDBDiagEventResponse,
   DescribeDBDiagHistoryRequest,
@@ -45,17 +48,23 @@ import {
   MonitorMetricSeriesData,
   ModifyDiagDBInstanceConfResponse,
   DiagHistoryEventItem,
+  DeleteSecurityAuditLogExportTasksRequest,
+  SecLogExportTaskInfo,
   SlowLogTopSqlItem,
+  DescribeSlowLogTopSqlsResponse,
   CreateMailProfileRequest,
   MonitorFloatMetricSeriesData,
   MailConfiguration,
   DescribeSlowLogTopSqlsRequest,
   TableSpaceData,
-  DescribeSlowLogTopSqlsResponse,
+  CreateSecurityAuditLogExportTaskResponse,
+  DeleteSecurityAuditLogExportTasksResponse,
   InstanceConfs,
   ProfileInfo,
   DescribeAllUserGroupRequest,
   DescribeSlowLogTimeSeriesStatsResponse,
+  DescribeSecurityAuditLogExportTasksResponse,
+  DescribeSecurityAuditLogDownloadUrlsResponse,
   DescribeTopSpaceTablesResponse,
 } from "./dbbrain_models"
 
@@ -86,6 +95,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAllUserContactResponse) => void
   ): Promise<DescribeAllUserContactResponse> {
     return this.request("DescribeAllUserContact", req, cb)
+  }
+
+  /**
+   * 查询安全审计日志导出文件下载链接。目前日志文件下载仅提供腾讯云内网地址，请通过广州地域的腾讯云服务器进行下载。
+   */
+  async DescribeSecurityAuditLogDownloadUrls(
+    req: DescribeSecurityAuditLogDownloadUrlsRequest,
+    cb?: (error: string, rep: DescribeSecurityAuditLogDownloadUrlsResponse) => void
+  ): Promise<DescribeSecurityAuditLogDownloadUrlsResponse> {
+    return this.request("DescribeSecurityAuditLogDownloadUrls", req, cb)
   }
 
   /**
@@ -159,6 +178,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建安全审计日志导出任务。
+   */
+  async CreateSecurityAuditLogExportTask(
+    req: CreateSecurityAuditLogExportTaskRequest,
+    cb?: (error: string, rep: CreateSecurityAuditLogExportTaskResponse) => void
+  ): Promise<CreateSecurityAuditLogExportTaskResponse> {
+    return this.request("CreateSecurityAuditLogExportTask", req, cb)
+  }
+
+  /**
+   * 删除安全审计日志导出任务。
+   */
+  async DeleteSecurityAuditLogExportTasks(
+    req: DeleteSecurityAuditLogExportTasksRequest,
+    cb?: (error: string, rep: DeleteSecurityAuditLogExportTasksResponse) => void
+  ): Promise<DeleteSecurityAuditLogExportTasksResponse> {
+    return this.request("DeleteSecurityAuditLogExportTasks", req, cb)
+  }
+
+  /**
    * 获取实例占用空间最大的前几张表在指定时间段内的每日由DBbrain定时采集的空间数据，默认返回按大小排序。
    */
   async DescribeTopSpaceTableTimeSeries(
@@ -186,5 +225,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSlowLogTopSqlsResponse) => void
   ): Promise<DescribeSlowLogTopSqlsResponse> {
     return this.request("DescribeSlowLogTopSqls", req, cb)
+  }
+
+  /**
+   * 查询安全审计日志导出任务列表。
+   */
+  async DescribeSecurityAuditLogExportTasks(
+    req: DescribeSecurityAuditLogExportTasksRequest,
+    cb?: (error: string, rep: DescribeSecurityAuditLogExportTasksResponse) => void
+  ): Promise<DescribeSecurityAuditLogExportTasksResponse> {
+    return this.request("DescribeSecurityAuditLogExportTasks", req, cb)
   }
 }

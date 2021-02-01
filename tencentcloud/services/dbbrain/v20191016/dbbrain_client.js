@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAllUserContact", req, cb);
     }
     /**
+     * 查询安全审计日志导出文件下载链接。目前日志文件下载仅提供腾讯云内网地址，请通过广州地域的腾讯云服务器进行下载。
+     */
+    async DescribeSecurityAuditLogDownloadUrls(req, cb) {
+        return this.request("DescribeSecurityAuditLogDownloadUrls", req, cb);
+    }
+    /**
      * 获取实例异常诊断事件的详情信息。
      */
     async DescribeDBDiagEvent(req, cb) {
@@ -82,6 +88,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDiagDBInstanceConf", req, cb);
     }
     /**
+     * 创建安全审计日志导出任务。
+     */
+    async CreateSecurityAuditLogExportTask(req, cb) {
+        return this.request("CreateSecurityAuditLogExportTask", req, cb);
+    }
+    /**
+     * 删除安全审计日志导出任务。
+     */
+    async DeleteSecurityAuditLogExportTasks(req, cb) {
+        return this.request("DeleteSecurityAuditLogExportTasks", req, cb);
+    }
+    /**
      * 获取实例占用空间最大的前几张表在指定时间段内的每日由DBbrain定时采集的空间数据，默认返回按大小排序。
      */
     async DescribeTopSpaceTableTimeSeries(req, cb) {
@@ -98,6 +116,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeSlowLogTopSqls(req, cb) {
         return this.request("DescribeSlowLogTopSqls", req, cb);
+    }
+    /**
+     * 查询安全审计日志导出任务列表。
+     */
+    async DescribeSecurityAuditLogExportTasks(req, cb) {
+        return this.request("DescribeSecurityAuditLogExportTasks", req, cb);
     }
 }
 exports.Client = Client;

@@ -38,6 +38,16 @@ it("dbbrain.v20191016.DescribeAllUserContact", async function () {
     }
 })
 
+it("dbbrain.v20191016.DescribeSecurityAuditLogDownloadUrls", async function () {
+    try {
+       const data = await client.DescribeSecurityAuditLogDownloadUrls({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20191016.DescribeDBDiagEvent", async function () {
     try {
        const data = await client.DescribeDBDiagEvent({})
@@ -108,6 +118,26 @@ it("dbbrain.v20191016.ModifyDiagDBInstanceConf", async function () {
     }
 })
 
+it("dbbrain.v20191016.CreateSecurityAuditLogExportTask", async function () {
+    try {
+       const data = await client.CreateSecurityAuditLogExportTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20191016.DeleteSecurityAuditLogExportTasks", async function () {
+    try {
+       const data = await client.DeleteSecurityAuditLogExportTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20191016.DescribeTopSpaceTableTimeSeries", async function () {
     try {
        const data = await client.DescribeTopSpaceTableTimeSeries({})
@@ -131,6 +161,16 @@ it("dbbrain.v20191016.DescribeAllUserGroup", async function () {
 it("dbbrain.v20191016.DescribeSlowLogTopSqls", async function () {
     try {
        const data = await client.DescribeSlowLogTopSqls({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20191016.DescribeSecurityAuditLogExportTasks", async function () {
+    try {
+       const data = await client.DescribeSecurityAuditLogExportTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

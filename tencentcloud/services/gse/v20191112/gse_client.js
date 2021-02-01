@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("gse.tencentcloudapi.com", "2019-11-12", clientConfig);
     }
     /**
+     * 本接口（UpdateBucketCORSOpt）用于设置cos跨域访问。
+     */
+    async UpdateBucketCORSOpt(req, cb) {
+        return this.request("UpdateBucketCORSOpt", req, cb);
+    }
+    /**
      * 本接口（DeleteFleet）用于删除服务器舰队。
      */
     async DeleteFleet(req, cb) {
@@ -87,6 +93,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateAsset(req, cb) {
         return this.request("CreateAsset", req, cb);
+    }
+    /**
+     * 本接口（UpdateBucketAccelerateOpt）用于开启cos全球加速。
+     */
+    async UpdateBucketAccelerateOpt(req, cb) {
+        return this.request("UpdateBucketAccelerateOpt", req, cb);
     }
     /**
      * 本接口（CreateGameServerSessionQueue）用于创建游戏服务器会话队列。

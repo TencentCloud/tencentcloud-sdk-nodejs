@@ -18,9 +18,9 @@ const client = new tencentcloud.cr.v20180321.Client({
 })
 describe("cr.v20180321.test.js", function () {
 
-it("cr.v20180321.DownloadDialogueText", async function () {
+it("cr.v20180321.UploadFile", async function () {
     try {
-       const data = await client.DownloadDialogueText({})
+       const data = await client.UploadFile({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -68,9 +68,29 @@ it("cr.v20180321.QueryInstantData", async function () {
     }
 })
 
+it("cr.v20180321.UpdateBotTask", async function () {
+    try {
+       const data = await client.UpdateBotTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cr.v20180321.UploadBotData", async function () {
     try {
        const data = await client.UploadBotData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cr.v20180321.ApplyBlackListData", async function () {
+    try {
+       const data = await client.ApplyBlackListData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,9 +118,9 @@ it("cr.v20180321.ExportBotData", async function () {
     }
 })
 
-it("cr.v20180321.DescribeCreditResult", async function () {
+it("cr.v20180321.DownloadDialogueText", async function () {
     try {
-       const data = await client.DescribeCreditResult({})
+       const data = await client.DownloadDialogueText({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,6 +148,16 @@ it("cr.v20180321.DescribeFileModel", async function () {
     }
 })
 
+it("cr.v20180321.ChangeBotCallStatus", async function () {
+    try {
+       const data = await client.ChangeBotCallStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cr.v20180321.ApplyBlackList", async function () {
     try {
        const data = await client.ApplyBlackList({})
@@ -138,9 +168,19 @@ it("cr.v20180321.ApplyBlackList", async function () {
     }
 })
 
-it("cr.v20180321.UploadFile", async function () {
+it("cr.v20180321.ChangeBotTaskStatus", async function () {
     try {
-       const data = await client.UploadFile({})
+       const data = await client.ChangeBotTaskStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cr.v20180321.DescribeCreditResult", async function () {
+    try {
+       const data = await client.DescribeCreditResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -231,6 +271,16 @@ it("cr.v20180321.UploadDataFile", async function () {
 it("cr.v20180321.CreateBotTask", async function () {
     try {
        const data = await client.CreateBotTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cr.v20180321.QueryCallList", async function () {
+    try {
+       const data = await client.QueryCallList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

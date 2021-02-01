@@ -25,6 +25,7 @@ import {
   GetInstanceAccessResponse,
   Asset,
   ListAliasesResponse,
+  UpdateBucketCORSOptResponse,
   DeleteGameServerSessionQueueResponse,
   DescribeFleetAttributesRequest,
   ResolveAliasRequest,
@@ -77,6 +78,7 @@ import {
   FleetUtilization,
   DescribeGameServerSessionQueuesResponse,
   DeleteAliasRequest,
+  UpdateBucketCORSOptRequest,
   DescribeAssetSystemsResponse,
   DescribeFleetAttributesResponse,
   GetUploadCredentialsResponse,
@@ -102,6 +104,7 @@ import {
   FleetCapacity,
   SetServerWeightRequest,
   GetGameServerSessionLogUrlResponse,
+  UpdateBucketAccelerateOptRequest,
   DeleteFleetResponse,
   StartGameServerSessionPlacementRequest,
   InstanceTypeInfo,
@@ -161,6 +164,7 @@ import {
   DescribeInstancesExtendRequest,
   DescribeGameServerSessionsResponse,
   StartFleetActionsResponse,
+  UpdateBucketAccelerateOptResponse,
   JoinGameServerSessionRequest,
   DescribeUserQuotasResponse,
   GetUploadFederationTokenRequest,
@@ -200,6 +204,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("gse.tencentcloudapi.com", "2019-11-12", clientConfig)
+  }
+
+  /**
+   * 本接口（UpdateBucketCORSOpt）用于设置cos跨域访问。
+   */
+  async UpdateBucketCORSOpt(
+    req: UpdateBucketCORSOptRequest,
+    cb?: (error: string, rep: UpdateBucketCORSOptResponse) => void
+  ): Promise<UpdateBucketCORSOptResponse> {
+    return this.request("UpdateBucketCORSOpt", req, cb)
   }
 
   /**
@@ -293,6 +307,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAssetResponse) => void
   ): Promise<CreateAssetResponse> {
     return this.request("CreateAsset", req, cb)
+  }
+
+  /**
+   * 本接口（UpdateBucketAccelerateOpt）用于开启cos全球加速。
+   */
+  async UpdateBucketAccelerateOpt(
+    req: UpdateBucketAccelerateOptRequest,
+    cb?: (error: string, rep: UpdateBucketAccelerateOptResponse) => void
+  ): Promise<UpdateBucketAccelerateOptResponse> {
+    return this.request("UpdateBucketAccelerateOpt", req, cb)
   }
 
   /**

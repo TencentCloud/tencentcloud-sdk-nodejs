@@ -18,29 +18,35 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  QueryCallListRequest,
   CreateBotTaskRequest,
-  BotInfo,
+  ChangeBotTaskStatusResponse,
   UploadFileRequest,
+  BotFlow,
   UploadFileResponse,
   UploadDataJsonResponse,
   DescribeBotFlowResponse,
   DescribeTaskStatusResponse,
+  QueryCallListResponse,
   DownloadBotRecordRequest,
   DownloadReportRequest,
   ApplyCreditAuditResponse,
   UploadDataFileResponse,
   DownloadRecordListRequest,
+  CallInfo,
+  BotFileData,
   DescribeFileModelRequest,
   QueryInstantDataResponse,
   CallTimeDict,
   UploadBotFileResponse,
   UploadDataJsonRequest,
   CallTimeInfo,
+  BlackListData,
   DescribeCreditResultResponse,
   DownloadDialogueTextResponse,
   DescribeBotFlowRequest,
   SingleBlackApply,
-  BotFlow,
+  BotInfo,
   ApplyBlackListResponse,
   DescribeRecordsRequest,
   QueryBotListRequest,
@@ -50,22 +56,28 @@ import {
   QueryRecordListResponse,
   QueryInstantDataRequest,
   ExportBotDataRequest,
-  DescribeCreditResultRequest,
+  ApplyBlackListDataRequest,
+  ChangeBotCallStatusResponse,
   ApplyBlackListRequest,
+  ApplyBlackListDataResponse,
   ApplyCreditAuditRequest,
   DownloadReportResponse,
   SmsTemplate,
   RecordInfo,
   PhonePool,
+  UpdateBotTaskResponse,
   UploadBotDataResponse,
+  ChangeBotTaskStatusRequest,
   DownloadRecordListResponse,
   CreateBotTaskResponse,
-  BotFileData,
+  UpdateBotTaskRequest,
+  DescribeCreditResultRequest,
   UploadBotFileRequest,
   UploadDataFileRequest,
   DescribeFileModelResponse,
   QueryBotListResponse,
   DescribeTaskStatusRequest,
+  ChangeBotCallStatusRequest,
   ProductQueryInfo,
   DownloadBotRecordResponse,
   QueryProductsRequest,
@@ -86,13 +98,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于获取指定案件的对话文本内容，次日早上8:00后可查询前日对话文本内容。
+   * 客户通过调用该接口上传需催收文档，格式需为excel格式。接口返回任务ID。
    */
-  async DownloadDialogueText(
-    req: DownloadDialogueTextRequest,
-    cb?: (error: string, rep: DownloadDialogueTextResponse) => void
-  ): Promise<DownloadDialogueTextResponse> {
-    return this.request("DownloadDialogueText", req, cb)
+  async UploadFile(
+    req: UploadFileRequest,
+    cb?: (error: string, rep: UploadFileResponse) => void
+  ): Promise<UploadFileResponse> {
+    return this.request("UploadFile", req, cb)
   }
 
   /**
@@ -136,6 +148,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新机器人任务
+   */
+  async UpdateBotTask(
+    req: UpdateBotTaskRequest,
+    cb?: (error: string, rep: UpdateBotTaskResponse) => void
+  ): Promise<UpdateBotTaskResponse> {
+    return this.request("UpdateBotTask", req, cb)
+  }
+
+  /**
    * 上传机器人任务数据
    */
   async UploadBotData(
@@ -143,6 +165,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UploadBotDataResponse) => void
   ): Promise<UploadBotDataResponse> {
     return this.request("UploadBotData", req, cb)
+  }
+
+  /**
+   * 提交机器人黑名单申请
+   */
+  async ApplyBlackListData(
+    req: ApplyBlackListDataRequest,
+    cb?: (error: string, rep: ApplyBlackListDataResponse) => void
+  ): Promise<ApplyBlackListDataResponse> {
+    return this.request("ApplyBlackListData", req, cb)
   }
 
   /**
@@ -166,13 +198,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据信审任务ID和请求日期，获取相关信审结果。
+   * 用于获取指定案件的对话文本内容，次日早上8:00后可查询前日对话文本内容。
    */
-  async DescribeCreditResult(
-    req: DescribeCreditResultRequest,
-    cb?: (error: string, rep: DescribeCreditResultResponse) => void
-  ): Promise<DescribeCreditResultResponse> {
-    return this.request("DescribeCreditResult", req, cb)
+  async DownloadDialogueText(
+    req: DownloadDialogueTextRequest,
+    cb?: (error: string, rep: DownloadDialogueTextResponse) => void
+  ): Promise<DownloadDialogueTextResponse> {
+    return this.request("DownloadDialogueText", req, cb)
   }
 
   /**
@@ -196,6 +228,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新机器人任务作业状态
+   */
+  async ChangeBotCallStatus(
+    req: ChangeBotCallStatusRequest,
+    cb?: (error: string, rep: ChangeBotCallStatusResponse) => void
+  ): Promise<ChangeBotCallStatusResponse> {
+    return this.request("ChangeBotCallStatus", req, cb)
+  }
+
+  /**
    * 提交黑名单后，黑名单中有效期内的号码将停止拨打，适用于到期/逾期提醒、回访场景。
    */
   async ApplyBlackList(
@@ -206,13 +248,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 客户通过调用该接口上传需催收文档，格式需为excel格式。接口返回任务ID。
+   * 更新机器人任务状态
    */
-  async UploadFile(
-    req: UploadFileRequest,
-    cb?: (error: string, rep: UploadFileResponse) => void
-  ): Promise<UploadFileResponse> {
-    return this.request("UploadFile", req, cb)
+  async ChangeBotTaskStatus(
+    req: ChangeBotTaskStatusRequest,
+    cb?: (error: string, rep: ChangeBotTaskStatusResponse) => void
+  ): Promise<ChangeBotTaskStatusResponse> {
+    return this.request("ChangeBotTaskStatus", req, cb)
+  }
+
+  /**
+   * 根据信审任务ID和请求日期，获取相关信审结果。
+   */
+  async DescribeCreditResult(
+    req: DescribeCreditResultRequest,
+    cb?: (error: string, rep: DescribeCreditResultResponse) => void
+  ): Promise<DescribeCreditResultResponse> {
+    return this.request("DescribeCreditResult", req, cb)
   }
 
   /**
@@ -307,5 +359,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateBotTaskResponse) => void
   ): Promise<CreateBotTaskResponse> {
     return this.request("CreateBotTask", req, cb)
+  }
+
+  /**
+   * 机器人任务查询
+   */
+  async QueryCallList(
+    req: QueryCallListRequest,
+    cb?: (error: string, rep: QueryCallListResponse) => void
+  ): Promise<QueryCallListResponse> {
+    return this.request("QueryCallList", req, cb)
   }
 }

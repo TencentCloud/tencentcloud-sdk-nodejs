@@ -66,7 +66,7 @@ export interface ListBlackEmailAddressRequest {
     TaskID?: string;
 }
 /**
- * 附件结构，包含附件名和base之后的附件内容。
+ * 附件结构，包含附件名和base64之后的附件内容。
  */
 export interface Attachment {
     /**

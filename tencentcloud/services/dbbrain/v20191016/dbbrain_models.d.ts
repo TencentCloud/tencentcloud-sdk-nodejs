@@ -1,15 +1,23 @@
 /**
- * DescribeAllUserContact请求参数结构体
+ * DescribeSlowLogTimeSeriesStats请求参数结构体
  */
-export interface DescribeAllUserContactRequest {
+export interface DescribeSlowLogTimeSeriesStatsRequest {
     /**
-      * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL。
+      * 实例 ID 。
       */
-    Product: string;
+    InstanceId: string;
     /**
-      * 联系人名数组，支持模糊搜索。
+      * 开始时间，如“2019-09-10 12:13:14”。
       */
-    Names?: Array<string>;
+    StartTime: string;
+    /**
+      * 结束时间，如“2019-09-10 12:13:14”，结束时间与开始时间的间隔最大可为7天。
+      */
+    EndTime: string;
+    /**
+      * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
+      */
+    Product?: string;
 }
 /**
  * DescribeTopSpaceTableTimeSeries返回参数结构体
@@ -193,6 +201,48 @@ export interface MonitorFloatMetric {
     Values: Array<number>;
 }
 /**
+ * DescribeSecurityAuditLogDownloadUrls请求参数结构体
+ */
+export interface DescribeSecurityAuditLogDownloadUrlsRequest {
+    /**
+      * 安全审计组Id。
+      */
+    SecAuditGroupId: string;
+    /**
+      * 异步任务Id。
+      */
+    AsyncRequestId: number;
+    /**
+      * 服务产品类型，支持值："mysql" - 云数据库 MySQL。
+      */
+    Product: string;
+}
+/**
+ * DescribeSecurityAuditLogExportTasks请求参数结构体
+ */
+export interface DescribeSecurityAuditLogExportTasksRequest {
+    /**
+      * 安全审计组Id。
+      */
+    SecAuditGroupId: string;
+    /**
+      * 服务产品类型，支持值："mysql" - 云数据库 MySQL。
+      */
+    Product: string;
+    /**
+      * 日志导出任务Id列表。
+      */
+    AsyncRequestIds?: Array<number>;
+    /**
+      * 偏移量，默认0。
+      */
+    Offset?: number;
+    /**
+      * 返回数量，默认20。
+      */
+    Limit?: number;
+}
+/**
  * 库表空间时序数据
  */
 export interface TableSpaceTimeSeries {
@@ -271,25 +321,17 @@ export interface DescribeTopSpaceTablesRequest {
     Product?: string;
 }
 /**
- * DescribeSlowLogTimeSeriesStats请求参数结构体
+ * DescribeAllUserContact请求参数结构体
  */
-export interface DescribeSlowLogTimeSeriesStatsRequest {
+export interface DescribeAllUserContactRequest {
     /**
-      * 实例 ID 。
+      * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL。
       */
-    InstanceId: string;
+    Product: string;
     /**
-      * 开始时间，如“2019-09-10 12:13:14”。
+      * 联系人名数组，支持模糊搜索。
       */
-    StartTime: string;
-    /**
-      * 结束时间，如“2019-09-10 12:13:14”，结束时间与开始时间的间隔最大可为7天。
-      */
-    EndTime: string;
-    /**
-      * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
-      */
-    Product?: string;
+    Names?: Array<string>;
 }
 /**
  * DescribeDBDiagEvent请求参数结构体
@@ -307,6 +349,31 @@ export interface DescribeDBDiagEventRequest {
       * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
       */
     Product?: string;
+}
+/**
+ * CreateSecurityAuditLogExportTask请求参数结构体
+ */
+export interface CreateSecurityAuditLogExportTaskRequest {
+    /**
+      * 安全审计组Id。
+      */
+    SecAuditGroupId: string;
+    /**
+      * 导出日志开始时间，例如2020-12-28 00:00:00。
+      */
+    StartTime: string;
+    /**
+      * 导出日志结束时间，例如2020-12-28 01:00:00。
+      */
+    EndTime: string;
+    /**
+      * 服务产品类型，支持值："mysql" - 云数据库 MySQL。
+      */
+    Product: string;
+    /**
+      * 日志风险等级列表，支持值包括：0 无风险；1 低风险；2 中风险；3 高风险。
+      */
+    DangerLevels?: Array<number>;
 }
 /**
  * DescribeDBSpaceStatus返回参数结构体
@@ -539,6 +606,74 @@ export interface DiagHistoryEventItem {
     Region: string;
 }
 /**
+ * DeleteSecurityAuditLogExportTasks请求参数结构体
+ */
+export interface DeleteSecurityAuditLogExportTasksRequest {
+    /**
+      * 安全审计组Id。
+      */
+    SecAuditGroupId: string;
+    /**
+      * 日志导出任务Id列表，接口会忽略不存在或已删除的任务Id。
+      */
+    AsyncRequestIds: Array<number>;
+    /**
+      * 服务产品类型，支持值： "mysql" - 云数据库 MySQL。
+      */
+    Product: string;
+}
+/**
+ * 安全审计日志导出任务信息
+ */
+export interface SecLogExportTaskInfo {
+    /**
+      * 异步任务Id。
+      */
+    AsyncRequestId: number;
+    /**
+      * 任务开始时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StartTime: string;
+    /**
+      * 任务结束时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EndTime: string;
+    /**
+      * 任务创建时间。
+      */
+    CreateTime: string;
+    /**
+      * 任务状态。
+      */
+    Status: string;
+    /**
+      * 任务执行进度。
+      */
+    Progress: number;
+    /**
+      * 导出日志开始时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LogStartTime: string;
+    /**
+      * 导出日志结束时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LogEndTime: string;
+    /**
+      * 日志文件总大小，单位KB。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalSize: number;
+    /**
+      * 风险等级列表。0 无风险；1 低风险；2 中风险；3 高风险。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DangerLevels: Array<number>;
+}
+/**
  * 慢日志TopSql
  */
 export interface SlowLogTopSqlItem {
@@ -622,6 +757,23 @@ export interface SlowLogTopSqlItem {
       * 总返回行数占比
       */
     RowsSentRatio: number;
+}
+/**
+ * DescribeSlowLogTopSqls返回参数结构体
+ */
+export interface DescribeSlowLogTopSqlsResponse {
+    /**
+      * 符合条件的记录总数。
+      */
+    TotalCount?: number;
+    /**
+      * 慢日志 top sql 列表
+      */
+    Rows?: Array<SlowLogTopSqlItem>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateMailProfile请求参数结构体
@@ -777,17 +929,22 @@ export interface TableSpaceData {
     PhysicalFileSize: number;
 }
 /**
- * DescribeSlowLogTopSqls返回参数结构体
+ * CreateSecurityAuditLogExportTask返回参数结构体
  */
-export interface DescribeSlowLogTopSqlsResponse {
+export interface CreateSecurityAuditLogExportTaskResponse {
     /**
-      * 符合条件的记录总数。
+      * 日志导出任务Id。
       */
-    TotalCount?: number;
+    AsyncRequestId: number;
     /**
-      * 慢日志 top sql 列表
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Rows?: Array<SlowLogTopSqlItem>;
+    RequestId?: string;
+}
+/**
+ * DeleteSecurityAuditLogExportTasks返回参数结构体
+ */
+export interface DeleteSecurityAuditLogExportTasksResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -844,6 +1001,36 @@ export interface DescribeSlowLogTimeSeriesStatsResponse {
       * 单位时间间隔内的实例 cpu 利用率监控数据。
       */
     SeriesData?: MonitorMetricSeriesData;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeSecurityAuditLogExportTasks返回参数结构体
+ */
+export interface DescribeSecurityAuditLogExportTasksResponse {
+    /**
+      * 安全审计日志导出任务列表。
+      */
+    Tasks: Array<SecLogExportTaskInfo>;
+    /**
+      * 安全审计日志导出任务总数。
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeSecurityAuditLogDownloadUrls返回参数结构体
+ */
+export interface DescribeSecurityAuditLogDownloadUrlsResponse {
+    /**
+      * 导出结果的COS链接列表。当结果集很大时，可能会切分为多个url下载。
+      */
+    Urls: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

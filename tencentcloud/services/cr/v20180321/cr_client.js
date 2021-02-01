@@ -28,10 +28,10 @@ class Client extends abstract_client_1.AbstractClient {
         super("cr.tencentcloudapi.com", "2018-03-21", clientConfig);
     }
     /**
-     * 用于获取指定案件的对话文本内容，次日早上8:00后可查询前日对话文本内容。
+     * 客户通过调用该接口上传需催收文档，格式需为excel格式。接口返回任务ID。
      */
-    async DownloadDialogueText(req, cb) {
-        return this.request("DownloadDialogueText", req, cb);
+    async UploadFile(req, cb) {
+        return this.request("UploadFile", req, cb);
     }
     /**
      * 查询机器人任务状态列表
@@ -58,10 +58,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryInstantData", req, cb);
     }
     /**
+     * 更新机器人任务
+     */
+    async UpdateBotTask(req, cb) {
+        return this.request("UpdateBotTask", req, cb);
+    }
+    /**
      * 上传机器人任务数据
      */
     async UploadBotData(req, cb) {
         return this.request("UploadBotData", req, cb);
+    }
+    /**
+     * 提交机器人黑名单申请
+     */
+    async ApplyBlackListData(req, cb) {
+        return this.request("ApplyBlackListData", req, cb);
     }
     /**
      * 用于获取指定案件的录音地址，次日早上8:00后可查询前日录音。
@@ -76,10 +88,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ExportBotData", req, cb);
     }
     /**
-     * 根据信审任务ID和请求日期，获取相关信审结果。
+     * 用于获取指定案件的对话文本内容，次日早上8:00后可查询前日对话文本内容。
      */
-    async DescribeCreditResult(req, cb) {
-        return this.request("DescribeCreditResult", req, cb);
+    async DownloadDialogueText(req, cb) {
+        return this.request("DownloadDialogueText", req, cb);
     }
     /**
      * 上传机器人文件
@@ -94,16 +106,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFileModel", req, cb);
     }
     /**
+     * 更新机器人任务作业状态
+     */
+    async ChangeBotCallStatus(req, cb) {
+        return this.request("ChangeBotCallStatus", req, cb);
+    }
+    /**
      * 提交黑名单后，黑名单中有效期内的号码将停止拨打，适用于到期/逾期提醒、回访场景。
      */
     async ApplyBlackList(req, cb) {
         return this.request("ApplyBlackList", req, cb);
     }
     /**
-     * 客户通过调用该接口上传需催收文档，格式需为excel格式。接口返回任务ID。
+     * 更新机器人任务状态
      */
-    async UploadFile(req, cb) {
-        return this.request("UploadFile", req, cb);
+    async ChangeBotTaskStatus(req, cb) {
+        return this.request("ChangeBotTaskStatus", req, cb);
+    }
+    /**
+     * 根据信审任务ID和请求日期，获取相关信审结果。
+     */
+    async DescribeCreditResult(req, cb) {
+        return this.request("DescribeCreditResult", req, cb);
     }
     /**
      * 根据上传文件接口的输出参数DataResId，获取相关上传结果。
@@ -162,6 +186,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateBotTask(req, cb) {
         return this.request("CreateBotTask", req, cb);
+    }
+    /**
+     * 机器人任务查询
+     */
+    async QueryCallList(req, cb) {
+        return this.request("QueryCallList", req, cb);
     }
 }
 exports.Client = Client;

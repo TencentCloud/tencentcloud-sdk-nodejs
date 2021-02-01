@@ -324,6 +324,11 @@ export interface CloudBaseRunSideSpec {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Mem?: number;
+    /**
+      * 安全特性
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Security?: CloudBaseSecurityContext;
 }
 /**
  * CommonServiceAPI返回参数结构体
@@ -362,19 +367,29 @@ export interface DescribeCloudBaseBuildServiceResponse {
     /**
       * 上传url
       */
-    UploadUrl?: string;
+    UploadUrl: string;
     /**
-      * heder
+      * 上传heder
       */
-    UploadHeaders?: Array<KVPair>;
+    UploadHeaders: Array<KVPair>;
     /**
       * 包名
       */
-    PackageName?: string;
+    PackageName: string;
     /**
       * 包版本
       */
-    PackageVersion?: string;
+    PackageVersion: string;
+    /**
+      * 下载链接
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DownloadUrl: string;
+    /**
+      * 下载Httpheader
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DownloadHeaders: Array<KVPair>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -987,6 +1002,23 @@ export interface DescribeEnvFreeQuotaRequest {
     ResourceTypes?: Array<string>;
 }
 /**
+ * cloudrun安全特性能力
+
+
+ */
+export interface CloudBaseCapabilities {
+    /**
+      * 启用安全能力项列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Add?: Array<string>;
+    /**
+      * 禁用安全能力向列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Drop?: Array<string>;
+}
+/**
  * DescribeEndUserLoginStatistic返回参数结构体
  */
 export interface DescribeEndUserLoginStatisticResponse {
@@ -1427,6 +1459,10 @@ export interface CreateCloudBaseRunServerVersionRequest {
       * 容器的描述文件
       */
     SidecarSpecs?: Array<CloudBaseRunSideSpec>;
+    /**
+      * 安全特性
+      */
+    Security?: CloudBaseSecurityContext;
 }
 /**
  * 终端用户登录新增统计
@@ -1785,6 +1821,18 @@ export interface DatabasesInfo {
     Region: string;
 }
 /**
+ * cloudrun安全特性
+
+
+ */
+export interface CloudBaseSecurityContext {
+    /**
+      * 安全特性
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Capabilities?: CloudBaseCapabilities;
+}
+/**
  * ReinstateEnv请求参数结构体
  */
 export interface ReinstateEnvRequest {
@@ -1814,12 +1862,12 @@ export interface CreateCloudBaseRunServerVersionResponse {
       * 状态(creating/succ)
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: string;
+    Result: string;
     /**
       * 版本名称（只有Result为succ的时候，才会返回VersionName)
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    VersionName?: string;
+    VersionName: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1908,6 +1956,14 @@ export interface CloudBaseRunNfsVolumeSource {
       * 是否只读
       */
     ReadOnly?: boolean;
+    /**
+      * secret名称
+      */
+    SecretName?: string;
+    /**
+      * 临时目录
+      */
+    EnableEmptyDirVolume?: boolean;
 }
 /**
  * DescribeSmsQuotas返回参数结构体
@@ -2424,6 +2480,10 @@ export interface DescribeCloudBaseBuildServiceRequest {
       * build类型,枚举值有: cloudbaserun, framework-ci
       */
     CIBusiness?: string;
+    /**
+      * 服务版本
+      */
+    ServiceVersion?: string;
 }
 /**
  * 代码仓库里 Repo的信息描述

@@ -16,6 +16,41 @@
  */
 
 /**
+ * QueryCallList请求参数结构体
+ */
+export interface QueryCallListRequest {
+  /**
+   * 模块名。默认值（固定）：AiApi
+   */
+  Module: string
+
+  /**
+   * 操作名。默认值（固定）：QueryCallList
+   */
+  Operation: string
+
+  /**
+   * 业务日期
+   */
+  BizDate: string
+
+  /**
+   * 任务ID，二者必填一个
+   */
+  BotId?: string
+
+  /**
+   * 任务名称，二者必填一个
+   */
+  BotName?: string
+
+  /**
+   * 通过API或平台上传的文件完整名称
+   */
+  FileName?: string
+}
+
+/**
  * CreateBotTask请求参数结构体
  */
 export interface CreateBotTaskRequest {
@@ -40,29 +75,29 @@ export interface CreateBotTaskRequest {
   FlowId: string
 
   /**
-   * 产品拨打时间集合
-   */
-  CallTimeCollection: CallTimeDict
-
-  /**
-   * 是否禁止拨打
+   * 是否禁止拨打，默认Y
    */
   BanCall: string
-
-  /**
-   * 禁止拨打起始时间
-   */
-  StartTimeBan: string
-
-  /**
-   * 禁止拨打结束时间
-   */
-  EndTimeBan: string
 
   /**
    * 拨打线路集合
    */
   PhoneCollection: string
+
+  /**
+   * 产品拨打时间集合
+   */
+  CallTimeCollection?: CallTimeDict
+
+  /**
+   * 禁止拨打起始时间。默认130000
+   */
+  StartTimeBan?: string
+
+  /**
+   * 禁止拨打结束时间。默认140000
+   */
+  EndTimeBan?: string
 
   /**
    * 重播方式，NON：未接通、LABEL：意向分级，可多选，用竖线分隔：NON|LABEL
@@ -93,26 +128,31 @@ export interface CreateBotTaskRequest {
    * 未接通引用短信模板ID
    */
   SmsTemplateId?: string
+
+  /**
+   * 拨打方式。NORMAL - 正常拨打；TIMER - 定时拨打
+   */
+  CallType?: string
+
+  /**
+   * 拨打开始日期。CallType=TIMER时有值，yyyy-MM-dd
+   */
+  CallStartDate?: string
+
+  /**
+   * 拨打结束日期。CallType=PERIOD 时有值，yyyy-MM-dd
+   */
+  CallEndDate?: string
 }
 
 /**
- * 机器人列表
+ * ChangeBotTaskStatus返回参数结构体
  */
-export interface BotInfo {
+export interface ChangeBotTaskStatusResponse {
   /**
-   * 机器人ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  BotId: string
-
-  /**
-   * 机器人名称
-   */
-  BotName: string
-
-  /**
-   * 机器人状态。0-停用 1-启用 2-待审核
-   */
-  BotStatus: string
+  RequestId?: string
 }
 
 /**
@@ -143,6 +183,26 @@ export interface UploadFileRequest {
    * 文件日期
    */
   FileDate: string
+}
+
+/**
+ * 机器人对话流信息
+ */
+export interface BotFlow {
+  /**
+   * 对话流ID
+   */
+  BotFlowId: string
+
+  /**
+   * 对话流名称
+   */
+  BotFlowName: string
+
+  /**
+   * 号码组信息列表
+   */
+  PhonePoolList: Array<PhonePool>
 }
 
 /**
@@ -223,6 +283,22 @@ export interface DescribeTaskStatusResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TaskFileUrl?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * QueryCallList返回参数结构体
+ */
+export interface QueryCallListResponse {
+  /**
+      * 任务作业状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CallList: Array<CallInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -331,6 +407,57 @@ export interface DownloadRecordListRequest {
 }
 
 /**
+ * 作业信息
+ */
+export interface CallInfo {
+  /**
+   * 业务日期
+   */
+  BizDate: string
+
+  /**
+   * 状态 WAIT：待执行；DOING：执行中；ERROR：执行错误；DONE：已完成；
+   */
+  Status: string
+
+  /**
+   * 成功总数
+   */
+  TotalCount: number
+
+  /**
+   * 文件名称
+   */
+  FileName: string
+
+  /**
+   * 文件类型 I：呼叫文件 R：停拨文件
+   */
+  FileType: string
+
+  /**
+      * 作业唯一标识
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CallId: string
+}
+
+/**
+ * 机器人文件结构
+ */
+export interface BotFileData {
+  /**
+   * 文件类型 A 拨打结果 T 记录详情
+   */
+  FileType: string
+
+  /**
+   * 文件地址
+   */
+  CosUrl: string
+}
+
+/**
  * DescribeFileModel请求参数结构体
  */
 export interface DescribeFileModelRequest {
@@ -389,37 +516,37 @@ export interface CallTimeDict {
   /**
    * 周一
    */
-  Monday: CallTimeInfo
+  Monday?: CallTimeInfo
 
   /**
    * 周二
    */
-  Tuesday: CallTimeInfo
+  Tuesday?: CallTimeInfo
 
   /**
    * 周三
    */
-  Wednesday: CallTimeInfo
+  Wednesday?: CallTimeInfo
 
   /**
    * 周四
    */
-  Thursday: CallTimeInfo
+  Thursday?: CallTimeInfo
 
   /**
    * 周五
    */
-  Friday: CallTimeInfo
+  Friday?: CallTimeInfo
 
   /**
    * 周六
    */
-  Saturday: CallTimeInfo
+  Saturday?: CallTimeInfo
 
   /**
    * 周日
    */
-  Sunday: CallTimeInfo
+  Sunday?: CallTimeInfo
 }
 
 /**
@@ -467,14 +594,58 @@ export interface UploadDataJsonRequest {
  */
 export interface CallTimeInfo {
   /**
-   * 产品开始拨打时间，HHmmss格式
+   * 产品开始拨打时间，HHmmss格式,默认090000
    */
-  StartTime: string
+  StartTime?: string
 
   /**
-   * 产品结束拨打时间，HHmmss格式
+   * 产品结束拨打时间，HHmmss格式.默认200000
    */
-  EndTime: string
+  EndTime?: string
+}
+
+/**
+ * 黑名单申请信息
+ */
+export interface BlackListData {
+  /**
+   * 黑名单类型，01代表手机号码。
+   */
+  BlackType: string
+
+  /**
+      * 操作类型，A为新增，D为删除。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OperType: string
+
+  /**
+   * 黑名单值，BlackType为01时，填写11位手机号码。
+   */
+  BlackValue: string
+
+  /**
+      * 备注。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BlackDescription: string
+
+  /**
+      * 黑名单生效截止日期，格式为YYYY-MM-DD，不填默认为永久。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BlackValidDate?: string
+
+  /**
+      * 黑名单加入日期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BlackAddDate?: string
+
+  /**
+   * 0-生效 1-失效
+   */
+  BlackStatus?: string
 }
 
 /**
@@ -581,23 +752,23 @@ export interface SingleBlackApply {
 }
 
 /**
- * 机器人对话流信息
+ * 机器人列表
  */
-export interface BotFlow {
+export interface BotInfo {
   /**
-   * 对话流ID
+   * 机器人ID
    */
-  BotFlowId: string
+  BotId: string
 
   /**
-   * 对话流名称
+   * 机器人名称
    */
-  BotFlowName: string
+  BotName: string
 
   /**
-   * 号码组信息列表
+   * 机器人状态。0-停用 1-启用 2-待审核
    */
-  PhonePoolList: Array<PhonePool>
+  BotStatus: string
 }
 
 /**
@@ -878,38 +1049,33 @@ export interface ExportBotDataRequest {
 }
 
 /**
- * DescribeCreditResult请求参数结构体
+ * ApplyBlackListData请求参数结构体
  */
-export interface DescribeCreditResultRequest {
+export interface ApplyBlackListDataRequest {
   /**
-   * 模块名，本接口取值：Credit
+   * 模块名，AiApi
    */
   Module: string
 
   /**
-   * 操作名，本接口取值：Get
+   * 操作名，ApplyBlackListData
    */
   Operation: string
 
   /**
-   * 实例ID
+   * 黑名单列表
    */
-  InstId: string
+  BlackList: Array<BlackListData>
+}
 
+/**
+ * ChangeBotCallStatus返回参数结构体
+ */
+export interface ChangeBotCallStatusResponse {
   /**
-   * 产品ID，形如P******。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ProductId: string
-
-  /**
-   * 信审任务ID
-   */
-  CaseId: string
-
-  /**
-   * 请求日期，格式为YYYY-MM-DD
-   */
-  RequestDate: string
+  RequestId?: string
 }
 
 /**
@@ -935,6 +1101,16 @@ export interface ApplyBlackListRequest {
    * 实例ID，不传默认为系统分配的初始实例
    */
   InstId?: string
+}
+
+/**
+ * ApplyBlackListData返回参数结构体
+ */
+export interface ApplyBlackListDataResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1081,6 +1257,11 @@ export interface RecordInfo {
    * 对话日志。JSON格式
    */
   DialogueLog: string
+
+  /**
+   * 录音文件名
+   */
+  CosFileName: string
 }
 
 /**
@@ -1099,6 +1280,16 @@ export interface PhonePool {
 }
 
 /**
+ * UpdateBotTask返回参数结构体
+ */
+export interface UpdateBotTaskResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UploadBotData返回参数结构体
  */
 export interface UploadBotDataResponse {
@@ -1106,6 +1297,37 @@ export interface UploadBotDataResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ChangeBotTaskStatus请求参数结构体
+ */
+export interface ChangeBotTaskStatusRequest {
+  /**
+   * 模块名。默认值（固定）：AiApi
+   */
+  Module: string
+
+  /**
+   * 操作名。默认值（固定）：ChangeBotTaskStatus
+   */
+  Operation: string
+
+  /**
+      * 作业变更状态
+SUSPEND：暂停；EXECUTE：恢复；
+      */
+  Status: string
+
+  /**
+   * 任务ID，二者必填一个
+   */
+  BotId?: string
+
+  /**
+   * 任务名称，二者必填一个
+   */
+  BotName?: string
 }
 
 /**
@@ -1128,24 +1350,129 @@ export interface DownloadRecordListResponse {
  */
 export interface CreateBotTaskResponse {
   /**
+   * 机器人任务Id
+   */
+  BotId: string
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
 
 /**
- * 机器人文件结构
+ * UpdateBotTask请求参数结构体
  */
-export interface BotFileData {
+export interface UpdateBotTaskRequest {
   /**
-   * 文件类型 A 拨打结果 T 记录详情
+   * 模块名。默认值（固定）：AiApi
    */
-  FileType: string
+  Module: string
 
   /**
-   * 文件地址
+   * 操作名。默认值（固定）：UpdateTask
    */
-  CosUrl: string
+  Operation: string
+
+  /**
+   * 任务名称
+   */
+  BotName?: string
+
+  /**
+   * 任务ID
+   */
+  BotId?: string
+
+  /**
+   * 产品拨打时间集合
+   */
+  CallTimeCollection?: CallTimeDict
+
+  /**
+   * 是否禁止拨打，默认Y
+   */
+  BanCall?: string
+
+  /**
+   * 禁止拨打起始时间。默认130000
+   */
+  StartTimeBan?: string
+
+  /**
+   * 禁止拨打结束时间。默认140000
+   */
+  EndTimeBan?: string
+
+  /**
+   * 拨打线路集合
+   */
+  PhoneCollection?: string
+
+  /**
+   * 重播方式，NON：未接通、LABEL：意向分级，可多选，用竖线分隔：NON|LABEL
+   */
+  CodeType?: string
+
+  /**
+   * 重播值集合，A：强意向、B：中意向、C：低意向、D：无意向、E：在忙、F：未接通、G：无效号码，可多选，用竖线分隔：A|B|C|D|E|F|G
+   */
+  CodeCollection?: string
+
+  /**
+   * 继续拨打次数
+   */
+  CallCount?: number
+
+  /**
+   * 拨打间隔
+   */
+  CallInterval?: number
+
+  /**
+   * 未接通引用短信签名ID
+   */
+  SmsSignId?: string
+
+  /**
+   * 未接通引用短信模板ID
+   */
+  SmsTemplateId?: string
+}
+
+/**
+ * DescribeCreditResult请求参数结构体
+ */
+export interface DescribeCreditResultRequest {
+  /**
+   * 模块名，本接口取值：Credit
+   */
+  Module: string
+
+  /**
+   * 操作名，本接口取值：Get
+   */
+  Operation: string
+
+  /**
+   * 实例ID
+   */
+  InstId: string
+
+  /**
+   * 产品ID，形如P******。
+   */
+  ProductId: string
+
+  /**
+   * 信审任务ID
+   */
+  CaseId: string
+
+  /**
+   * 请求日期，格式为YYYY-MM-DD
+   */
+  RequestDate: string
 }
 
 /**
@@ -1281,6 +1608,47 @@ export interface DescribeTaskStatusRequest {
    * 实例ID，不传默认为系统分配的初始实例。
    */
   InstId?: string
+}
+
+/**
+ * ChangeBotCallStatus请求参数结构体
+ */
+export interface ChangeBotCallStatusRequest {
+  /**
+   * 模块名。默认值（固定）：AiApi
+   */
+  Module: string
+
+  /**
+   * 操作名。默认值（固定）：ChangeBotCallStatus
+   */
+  Operation: string
+
+  /**
+      * 作业变更状态
+SUSPEND：暂停；EXECUTE：恢复；
+      */
+  Status: string
+
+  /**
+   * 作业唯一标识
+   */
+  CallId: string
+
+  /**
+   * 业务日期
+   */
+  BizDate: string
+
+  /**
+   * 任务ID，二者必填一个
+   */
+  BotId?: string
+
+  /**
+   * 任务名称，二者必填一个
+   */
+  BotName?: string
 }
 
 /**

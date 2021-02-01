@@ -2648,7 +2648,7 @@ export interface EksCluster {
   K8SVersion: string
 
   /**
-   * 集群状态
+   * 集群状态(running运行中，initializing 初始化中，failed异常)
    */
   Status?: string
 

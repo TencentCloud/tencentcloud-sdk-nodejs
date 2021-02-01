@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateBotTaskRequest, UploadFileRequest, UploadFileResponse, UploadDataJsonResponse, DescribeBotFlowResponse, DescribeTaskStatusResponse, DownloadBotRecordRequest, DownloadReportRequest, ApplyCreditAuditResponse, UploadDataFileResponse, DownloadRecordListRequest, DescribeFileModelRequest, QueryInstantDataResponse, UploadBotFileResponse, UploadDataJsonRequest, DescribeCreditResultResponse, DownloadDialogueTextResponse, DescribeBotFlowRequest, ApplyBlackListResponse, DescribeRecordsRequest, QueryBotListRequest, QueryRecordListRequest, ExportBotDataResponse, QueryRecordListResponse, QueryInstantDataRequest, ExportBotDataRequest, DescribeCreditResultRequest, ApplyBlackListRequest, ApplyCreditAuditRequest, DownloadReportResponse, UploadBotDataResponse, DownloadRecordListResponse, CreateBotTaskResponse, UploadBotFileRequest, UploadDataFileRequest, DescribeFileModelResponse, QueryBotListResponse, DescribeTaskStatusRequest, DownloadBotRecordResponse, QueryProductsRequest, UploadBotDataRequest, QueryProductsResponse, DescribeRecordsResponse, DownloadDialogueTextRequest } from "./cr_models";
+import { QueryCallListRequest, CreateBotTaskRequest, ChangeBotTaskStatusResponse, UploadFileRequest, UploadFileResponse, UploadDataJsonResponse, DescribeBotFlowResponse, DescribeTaskStatusResponse, QueryCallListResponse, DownloadBotRecordRequest, DownloadReportRequest, ApplyCreditAuditResponse, UploadDataFileResponse, DownloadRecordListRequest, DescribeFileModelRequest, QueryInstantDataResponse, UploadBotFileResponse, UploadDataJsonRequest, DescribeCreditResultResponse, DownloadDialogueTextResponse, DescribeBotFlowRequest, ApplyBlackListResponse, DescribeRecordsRequest, QueryBotListRequest, QueryRecordListRequest, ExportBotDataResponse, QueryRecordListResponse, QueryInstantDataRequest, ExportBotDataRequest, ApplyBlackListDataRequest, ChangeBotCallStatusResponse, ApplyBlackListRequest, ApplyBlackListDataResponse, ApplyCreditAuditRequest, DownloadReportResponse, UpdateBotTaskResponse, UploadBotDataResponse, ChangeBotTaskStatusRequest, DownloadRecordListResponse, CreateBotTaskResponse, UpdateBotTaskRequest, DescribeCreditResultRequest, UploadBotFileRequest, UploadDataFileRequest, DescribeFileModelResponse, QueryBotListResponse, DescribeTaskStatusRequest, ChangeBotCallStatusRequest, DownloadBotRecordResponse, QueryProductsRequest, UploadBotDataRequest, QueryProductsResponse, DescribeRecordsResponse, DownloadDialogueTextRequest } from "./cr_models";
 /**
  * cr client
  * @class
@@ -8,9 +8,9 @@ import { CreateBotTaskRequest, UploadFileRequest, UploadFileResponse, UploadData
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 用于获取指定案件的对话文本内容，次日早上8:00后可查询前日对话文本内容。
+     * 客户通过调用该接口上传需催收文档，格式需为excel格式。接口返回任务ID。
      */
-    DownloadDialogueText(req: DownloadDialogueTextRequest, cb?: (error: string, rep: DownloadDialogueTextResponse) => void): Promise<DownloadDialogueTextResponse>;
+    UploadFile(req: UploadFileRequest, cb?: (error: string, rep: UploadFileResponse) => void): Promise<UploadFileResponse>;
     /**
      * 查询机器人任务状态列表
      */
@@ -28,9 +28,17 @@ export declare class Client extends AbstractClient {
      */
     QueryInstantData(req: QueryInstantDataRequest, cb?: (error: string, rep: QueryInstantDataResponse) => void): Promise<QueryInstantDataResponse>;
     /**
+     * 更新机器人任务
+     */
+    UpdateBotTask(req: UpdateBotTaskRequest, cb?: (error: string, rep: UpdateBotTaskResponse) => void): Promise<UpdateBotTaskResponse>;
+    /**
      * 上传机器人任务数据
      */
     UploadBotData(req: UploadBotDataRequest, cb?: (error: string, rep: UploadBotDataResponse) => void): Promise<UploadBotDataResponse>;
+    /**
+     * 提交机器人黑名单申请
+     */
+    ApplyBlackListData(req: ApplyBlackListDataRequest, cb?: (error: string, rep: ApplyBlackListDataResponse) => void): Promise<ApplyBlackListDataResponse>;
     /**
      * 用于获取指定案件的录音地址，次日早上8:00后可查询前日录音。
      */
@@ -40,9 +48,9 @@ export declare class Client extends AbstractClient {
      */
     ExportBotData(req: ExportBotDataRequest, cb?: (error: string, rep: ExportBotDataResponse) => void): Promise<ExportBotDataResponse>;
     /**
-     * 根据信审任务ID和请求日期，获取相关信审结果。
+     * 用于获取指定案件的对话文本内容，次日早上8:00后可查询前日对话文本内容。
      */
-    DescribeCreditResult(req: DescribeCreditResultRequest, cb?: (error: string, rep: DescribeCreditResultResponse) => void): Promise<DescribeCreditResultResponse>;
+    DownloadDialogueText(req: DownloadDialogueTextRequest, cb?: (error: string, rep: DownloadDialogueTextResponse) => void): Promise<DownloadDialogueTextResponse>;
     /**
      * 上传机器人文件
      */
@@ -52,13 +60,21 @@ export declare class Client extends AbstractClient {
      */
     DescribeFileModel(req: DescribeFileModelRequest, cb?: (error: string, rep: DescribeFileModelResponse) => void): Promise<DescribeFileModelResponse>;
     /**
+     * 更新机器人任务作业状态
+     */
+    ChangeBotCallStatus(req: ChangeBotCallStatusRequest, cb?: (error: string, rep: ChangeBotCallStatusResponse) => void): Promise<ChangeBotCallStatusResponse>;
+    /**
      * 提交黑名单后，黑名单中有效期内的号码将停止拨打，适用于到期/逾期提醒、回访场景。
      */
     ApplyBlackList(req: ApplyBlackListRequest, cb?: (error: string, rep: ApplyBlackListResponse) => void): Promise<ApplyBlackListResponse>;
     /**
-     * 客户通过调用该接口上传需催收文档，格式需为excel格式。接口返回任务ID。
+     * 更新机器人任务状态
      */
-    UploadFile(req: UploadFileRequest, cb?: (error: string, rep: UploadFileResponse) => void): Promise<UploadFileResponse>;
+    ChangeBotTaskStatus(req: ChangeBotTaskStatusRequest, cb?: (error: string, rep: ChangeBotTaskStatusResponse) => void): Promise<ChangeBotTaskStatusResponse>;
+    /**
+     * 根据信审任务ID和请求日期，获取相关信审结果。
+     */
+    DescribeCreditResult(req: DescribeCreditResultRequest, cb?: (error: string, rep: DescribeCreditResultResponse) => void): Promise<DescribeCreditResultResponse>;
     /**
      * 根据上传文件接口的输出参数DataResId，获取相关上传结果。
      */
@@ -96,4 +112,8 @@ export declare class Client extends AbstractClient {
      * 创建机器人任务
      */
     CreateBotTask(req: CreateBotTaskRequest, cb?: (error: string, rep: CreateBotTaskResponse) => void): Promise<CreateBotTaskResponse>;
+    /**
+     * 机器人任务查询
+     */
+    QueryCallList(req: QueryCallListRequest, cb?: (error: string, rep: QueryCallListResponse) => void): Promise<QueryCallListResponse>;
 }
