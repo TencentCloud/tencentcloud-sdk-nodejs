@@ -2310,6 +2310,11 @@ export interface NetworkInterface {
       * 网卡类型。0 - 弹性网卡；1 - evm弹性网卡。
       */
     EniType: number;
+    /**
+      * 网卡绑定的子机类型：cvm，eks。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Business: string;
 }
 /**
  * TransformAddress请求参数结构体

@@ -590,7 +590,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 编辑白名单规则
+   * 本接口用于编辑异地登录白名单规则。
    */
   async ModifyLoginWhiteList(
     req: ModifyLoginWhiteListRequest,
@@ -781,7 +781,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除白名单规则
+   * 本接口用于删除异地登录白名单规则。
    */
   async DeleteLoginWhiteList(
     req: DeleteLoginWhiteListRequest,
@@ -951,7 +951,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（AddLoginWhiteList）用于添加白名单规则
+   * 本接口用于新增异地登录白名单规则。
    */
   async AddLoginWhiteList(
     req: AddLoginWhiteListRequest,

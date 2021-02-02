@@ -19,23 +19,30 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   ApplyCertificateResponse,
+  ManagerInfo,
   CompleteCertificateRequest,
   DeleteCertificateRequest,
   DescribeCertificateOperateLogsResponse,
   CommitCertificateInformationRequest,
   DownloadCertificateResponse,
   ReplaceCertificateResponse,
+  SubmitAuditManagerResponse,
   DownloadCertificateRequest,
   CancelCertificateOrderRequest,
   ModifyCertificateProjectResponse,
   Certificates,
   CertificateExtra,
+  CompanyInfo,
+  DescribeManagersResponse,
   DescribeCertificateResponse,
-  OperationLog,
   UploadCertificateRequest,
   UploadConfirmLetterRequest,
+  OperationLog,
+  VerifyManagerResponse,
   DescribeCertificateDetailRequest,
   Tags,
+  SubmitAuditManagerRequest,
+  DeleteManagerRequest,
   ApplyCertificateRequest,
   ReplaceCertificateRequest,
   UploadRevokeLetterResponse,
@@ -50,6 +57,7 @@ import {
   DvAuths,
   ModifyCertificateAliasRequest,
   DescribeCertificateRequest,
+  DescribeManagerDetailRequest,
   DvAuthDetail,
   ProjectInfo,
   DescribeCertificateOperateLogsRequest,
@@ -58,12 +66,16 @@ import {
   DescribeCertificatesResponse,
   CommitCertificateInformationResponse,
   UploadConfirmLetterResponse,
+  DeleteManagerResponse,
+  VerifyManagerRequest,
   UploadCertificateResponse,
   CheckCertificateChainRequest,
   ModifyCertificateAliasResponse,
-  SubmitCertificateInformationRequest,
+  DescribeManagerDetailResponse,
   SubmittedData,
+  SubmitCertificateInformationRequest,
   DescribeCertificatesRequest,
+  DescribeManagersRequest,
   CompleteCertificateResponse,
   SubmitCertificateInformationResponse,
   RevokeCertificateRequest,
@@ -99,6 +111,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除管理人
+   */
+  async DeleteManager(
+    req: DeleteManagerRequest,
+    cb?: (error: string, rep: DeleteManagerResponse) => void
+  ): Promise<DeleteManagerResponse> {
+    return this.request("DeleteManager", req, cb)
+  }
+
+  /**
    * 本接口（UploadConfirmLetter）用于上传证书确认函。
    */
   async UploadConfirmLetter(
@@ -109,23 +131,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateCertificate）用于创建付费证书。
+   * 重新提交审核管理人
    */
-  async CreateCertificate(
-    req: CreateCertificateRequest,
-    cb?: (error: string, rep: CreateCertificateResponse) => void
-  ): Promise<CreateCertificateResponse> {
-    return this.request("CreateCertificate", req, cb)
+  async SubmitAuditManager(
+    req: SubmitAuditManagerRequest,
+    cb?: (error: string, rep: SubmitAuditManagerResponse) => void
+  ): Promise<SubmitAuditManagerResponse> {
+    return this.request("SubmitAuditManager", req, cb)
   }
 
   /**
-   * 批量修改证书所属项目。
+   * 提交证书资料。输入参数信息可以分多次提交，但提交的证书资料应最低限度保持完整。
    */
-  async ModifyCertificateProject(
-    req: ModifyCertificateProjectRequest,
-    cb?: (error: string, rep: ModifyCertificateProjectResponse) => void
-  ): Promise<ModifyCertificateProjectResponse> {
-    return this.request("ModifyCertificateProject", req, cb)
+  async SubmitCertificateInformation(
+    req: SubmitCertificateInformationRequest,
+    cb?: (error: string, rep: SubmitCertificateInformationResponse) => void
+  ): Promise<SubmitCertificateInformationResponse> {
+    return this.request("SubmitCertificateInformation", req, cb)
+  }
+
+  /**
+   * 重新核验管理人
+   */
+  async VerifyManager(
+    req: VerifyManagerRequest,
+    cb?: (error: string, rep: VerifyManagerResponse) => void
+  ): Promise<VerifyManagerResponse> {
+    return this.request("VerifyManager", req, cb)
   }
 
   /**
@@ -139,13 +171,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 提交证书订单。
+   * 本接口（DownloadCertificate）用于下载证书。
    */
-  async CommitCertificateInformation(
-    req: CommitCertificateInformationRequest,
-    cb?: (error: string, rep: CommitCertificateInformationResponse) => void
-  ): Promise<CommitCertificateInformationResponse> {
-    return this.request("CommitCertificateInformation", req, cb)
+  async DownloadCertificate(
+    req: DownloadCertificateRequest,
+    cb?: (error: string, rep: DownloadCertificateResponse) => void
+  ): Promise<DownloadCertificateResponse> {
+    return this.request("DownloadCertificate", req, cb)
   }
 
   /**
@@ -179,6 +211,56 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（CheckCertificateChain）用于检查证书链是否完整。
+   */
+  async CheckCertificateChain(
+    req: CheckCertificateChainRequest,
+    cb?: (error: string, rep: CheckCertificateChainResponse) => void
+  ): Promise<CheckCertificateChainResponse> {
+    return this.request("CheckCertificateChain", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeCertificate）用于获取证书信息。
+   */
+  async DescribeCertificate(
+    req: DescribeCertificateRequest,
+    cb?: (error: string, rep: DescribeCertificateResponse) => void
+  ): Promise<DescribeCertificateResponse> {
+    return this.request("DescribeCertificate", req, cb)
+  }
+
+  /**
+   * 获取证书详情。
+   */
+  async DescribeCertificateDetail(
+    req: DescribeCertificateDetailRequest,
+    cb?: (error: string, rep: DescribeCertificateDetailResponse) => void
+  ): Promise<DescribeCertificateDetailResponse> {
+    return this.request("DescribeCertificateDetail", req, cb)
+  }
+
+  /**
+   * 查询管理人详情
+   */
+  async DescribeManagerDetail(
+    req: DescribeManagerDetailRequest,
+    cb?: (error: string, rep: DescribeManagerDetailResponse) => void
+  ): Promise<DescribeManagerDetailResponse> {
+    return this.request("DescribeManagerDetail", req, cb)
+  }
+
+  /**
+   * 批量修改证书所属项目。
+   */
+  async ModifyCertificateProject(
+    req: ModifyCertificateProjectRequest,
+    cb?: (error: string, rep: ModifyCertificateProjectResponse) => void
+  ): Promise<ModifyCertificateProjectResponse> {
+    return this.request("ModifyCertificateProject", req, cb)
+  }
+
+  /**
    * 用户传入证书id和备注来修改证书备注。
    */
   async ModifyCertificateAlias(
@@ -189,13 +271,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DownloadCertificate）用于下载证书。
+   * 本接口（CreateCertificate）用于创建付费证书。
    */
-  async DownloadCertificate(
-    req: DownloadCertificateRequest,
-    cb?: (error: string, rep: DownloadCertificateResponse) => void
-  ): Promise<DownloadCertificateResponse> {
-    return this.request("DownloadCertificate", req, cb)
+  async CreateCertificate(
+    req: CreateCertificateRequest,
+    cb?: (error: string, rep: CreateCertificateResponse) => void
+  ): Promise<CreateCertificateResponse> {
+    return this.request("CreateCertificate", req, cb)
+  }
+
+  /**
+   * 提交证书订单。
+   */
+  async CommitCertificateInformation(
+    req: CommitCertificateInformationRequest,
+    cb?: (error: string, rep: CommitCertificateInformationResponse) => void
+  ): Promise<CommitCertificateInformationResponse> {
+    return this.request("CommitCertificateInformation", req, cb)
+  }
+
+  /**
+   * 获取用户账号下有关证书的操作日志。
+   */
+  async DescribeCertificateOperateLogs(
+    req: DescribeCertificateOperateLogsRequest,
+    cb?: (error: string, rep: DescribeCertificateOperateLogsResponse) => void
+  ): Promise<DescribeCertificateOperateLogsResponse> {
+    return this.request("DescribeCertificateOperateLogs", req, cb)
   }
 
   /**
@@ -206,16 +308,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ReplaceCertificateResponse) => void
   ): Promise<ReplaceCertificateResponse> {
     return this.request("ReplaceCertificate", req, cb)
-  }
-
-  /**
-   * 本接口（CheckCertificateChain）用于检查证书链是否完整。
-   */
-  async CheckCertificateChain(
-    req: CheckCertificateChainRequest,
-    cb?: (error: string, rep: CheckCertificateChainResponse) => void
-  ): Promise<CheckCertificateChainResponse> {
-    return this.request("CheckCertificateChain", req, cb)
   }
 
   /**
@@ -239,42 +331,12 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取用户账号下有关证书的操作日志。
+   * 查询管理人列表
    */
-  async DescribeCertificateOperateLogs(
-    req: DescribeCertificateOperateLogsRequest,
-    cb?: (error: string, rep: DescribeCertificateOperateLogsResponse) => void
-  ): Promise<DescribeCertificateOperateLogsResponse> {
-    return this.request("DescribeCertificateOperateLogs", req, cb)
-  }
-
-  /**
-   * 提交证书资料。输入参数信息可以分多次提交，但提交的证书资料应最低限度保持完整。
-   */
-  async SubmitCertificateInformation(
-    req: SubmitCertificateInformationRequest,
-    cb?: (error: string, rep: SubmitCertificateInformationResponse) => void
-  ): Promise<SubmitCertificateInformationResponse> {
-    return this.request("SubmitCertificateInformation", req, cb)
-  }
-
-  /**
-   * 获取证书详情。
-   */
-  async DescribeCertificateDetail(
-    req: DescribeCertificateDetailRequest,
-    cb?: (error: string, rep: DescribeCertificateDetailResponse) => void
-  ): Promise<DescribeCertificateDetailResponse> {
-    return this.request("DescribeCertificateDetail", req, cb)
-  }
-
-  /**
-   * 本接口（DescribeCertificate）用于获取证书信息。
-   */
-  async DescribeCertificate(
-    req: DescribeCertificateRequest,
-    cb?: (error: string, rep: DescribeCertificateResponse) => void
-  ): Promise<DescribeCertificateResponse> {
-    return this.request("DescribeCertificate", req, cb)
+  async DescribeManagers(
+    req: DescribeManagersRequest,
+    cb?: (error: string, rep: DescribeManagersResponse) => void
+  ): Promise<DescribeManagersResponse> {
+    return this.request("DescribeManagers", req, cb)
   }
 }

@@ -93,6 +93,16 @@ export interface FleetAttributes {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Tags: Array<Tag>;
+    /**
+      * 数据盘，储存类型为 SSD 云硬盘（CLOUD_SSD）时，100-32000GB；储存类型为高性能云硬盘（CLOUD_PREMIUM）时，10-32000GB；容量以10为单位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DataDiskInfo: Array<DiskInfo>;
+    /**
+      * 系统盘，储存类型为 SSD 云硬盘（CLOUD_SSD）时，100-500GB；储存类型为高性能云硬盘（CLOUD_PREMIUM）时，50-500GB；容量以1为单位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SystemDiskInfo: DiskInfo;
 }
 /**
  * CreateAsset返回参数结构体
@@ -389,6 +399,14 @@ export interface CreateFleetRequest {
       * 标签列表，最大长度50组
       */
     Tags?: Array<Tag>;
+    /**
+      * 系统盘，储存类型为 SSD 云硬盘（CLOUD_SSD）时，100-500GB；储存类型为高性能云硬盘（CLOUD_PREMIUM）时，50-500GB；容量以1为单位
+      */
+    SystemDiskInfo?: DiskInfo;
+    /**
+      * 数据盘，储存类型为 SSD 云硬盘（CLOUD_SSD）时，100-32000GB；储存类型为高性能云硬盘（CLOUD_PREMIUM）时，10-32000GB；容量以10为单位
+      */
+    DataDiskInfo?: Array<DiskInfo>;
 }
 /**
  * StartFleetActions请求参数结构体
@@ -425,12 +443,12 @@ export interface DescribeInstancesResponse {
       * 实例信息列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Instances?: Array<Instance>;
+    Instances: Array<Instance>;
     /**
       * 结果返回最大数量
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -510,6 +528,36 @@ export interface DeleteFleetRequest {
       * 服务器舰队 Id
       */
     FleetId: string;
+}
+/**
+ * 定时器策略消息
+ */
+export interface TimerScalingPolicy {
+    /**
+      * 定时器ID，进行encode，填写时更新
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TimerId?: string;
+    /**
+      * 定时器名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TimerName?: string;
+    /**
+      * 定时器状态(未定义0、未生效1、生效中2、已停止3、已过期4)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TimerStatus?: number;
+    /**
+      * 定时器弹性伸缩策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TimerFleetCapacity?: TimerFleetCapacity;
+    /**
+      * 重复周期配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TimerConfiguration?: TimerConfiguration;
 }
 /**
  * DetachCcnInstances返回参数结构体
@@ -992,12 +1040,12 @@ export interface DescribeInstancesExtendResponse {
       * 实例信息列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Instances?: Array<InstanceExtend>;
+    Instances: Array<InstanceExtend>;
     /**
       * 梳理信息总数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1057,18 +1105,13 @@ export interface Event {
     ResourceId: string;
 }
 /**
- * UpdateRuntimeConfiguration返回参数结构体
+ * PutTimerScalingPolicy请求参数结构体
  */
-export interface UpdateRuntimeConfigurationResponse {
+export interface PutTimerScalingPolicyRequest {
     /**
-      * 服务器舰队配置
-注意：此字段可能返回 null，表示取不到有效值。
+      * 定时器策略消息
       */
-    RuntimeConfiguration?: RuntimeConfiguration;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    TimerScalingPolicy?: TimerScalingPolicy;
 }
 /**
  * DescribeCcnInstances返回参数结构体
@@ -1108,6 +1151,44 @@ export interface AssetSupportSys {
       * 生成包操作系统的版本
       */
     OsVersion: string;
+}
+/**
+ * DeleteTimerScalingPolicy返回参数结构体
+ */
+export interface DeleteTimerScalingPolicyResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeTimerScalingPolicies请求参数结构体
+ */
+export interface DescribeTimerScalingPoliciesRequest {
+    /**
+      * 扩缩容配置服务器舰队ID
+      */
+    FleetId?: string;
+    /**
+      * 定时器名称
+      */
+    TimerName?: string;
+    /**
+      * 定时器开始时间
+      */
+    BeginTime?: string;
+    /**
+      * 定时器结束时间
+      */
+    EndTime?: string;
+    /**
+      * 分页偏移量
+      */
+    Offset?: number;
+    /**
+      * 页大小
+      */
+    Limit?: number;
 }
 /**
  * DescribeInstanceLimit返回参数结构体
@@ -1274,11 +1355,11 @@ export interface DescribeFleetAttributesResponse {
       * 服务器舰队属性
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    FleetAttributes?: Array<FleetAttributes>;
+    FleetAttributes: Array<FleetAttributes>;
     /**
       * 服务器舰队总数，最小值0
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1585,25 +1666,21 @@ export interface DescribeFleetStatisticDetailsResponse {
     RequestId?: string;
 }
 /**
- * UpdateGameServerSessionQueue请求参数结构体
+ * DeleteTimerScalingPolicy请求参数结构体
  */
-export interface UpdateGameServerSessionQueueRequest {
+export interface DeleteTimerScalingPolicyRequest {
     /**
-      * 游戏服务器会话队列名字，长度1~128
+      * 定时器ID, 进行encode
       */
-    Name: string;
+    TimerId?: string;
     /**
-      * 目的服务器舰队（可为别名）列表
+      * 扩缩容配置服务器舰队ID
       */
-    Destinations?: Array<GameServerSessionQueueDestination>;
+    FleetId?: string;
     /**
-      * 延迟策略集合
+      * 定时器名称
       */
-    PlayerLatencyPolicies?: Array<PlayerLatencyPolicy>;
-    /**
-      * 超时时间
-      */
-    TimeoutInSeconds?: number;
+    TimerName?: string;
 }
 /**
  * JoinGameServerSession返回参数结构体
@@ -1644,7 +1721,7 @@ export interface TargetConfiguration {
       * 预留存率
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TargetValue: number;
+    TargetValue?: number;
 }
 /**
  * DescribeGameServerSessionPlacement请求参数结构体
@@ -1669,6 +1746,27 @@ export interface GameServerSessionQueueDestination {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     FleetStatus?: string;
+}
+/**
+ * UpdateGameServerSessionQueue请求参数结构体
+ */
+export interface UpdateGameServerSessionQueueRequest {
+    /**
+      * 游戏服务器会话队列名字，长度1~128
+      */
+    Name: string;
+    /**
+      * 目的服务器舰队（可为别名）列表
+      */
+    Destinations?: Array<GameServerSessionQueueDestination>;
+    /**
+      * 延迟策略集合
+      */
+    PlayerLatencyPolicies?: Array<PlayerLatencyPolicy>;
+    /**
+      * 超时时间
+      */
+    TimeoutInSeconds?: number;
 }
 /**
  * 服务部署组容量配置
@@ -1814,6 +1912,20 @@ export interface DescribeGameServerSessionPlacementResponse {
       * 游戏服务器会话放置
       */
     GameServerSessionPlacement?: GameServerSessionPlacement;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * UpdateRuntimeConfiguration返回参数结构体
+ */
+export interface UpdateRuntimeConfigurationResponse {
+    /**
+      * 服务器舰队配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RuntimeConfiguration?: RuntimeConfiguration;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2035,6 +2147,16 @@ export interface Instance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CreateTime: string;
+    /**
+      * 实例权重
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Weight: number;
+    /**
+      * 实例是否保留, 1-保留，0-不保留,默认
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReserveValue: number;
 }
 /**
  * SearchGameServerSessions请求参数结构体
@@ -2176,6 +2298,15 @@ export interface PlayerLatency {
     LatencyInMilliseconds?: number;
 }
 /**
+ * SetServerReserved返回参数结构体
+ */
+export interface SetServerReservedResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * StopGameServerSessionPlacement请求参数结构体
  */
 export interface StopGameServerSessionPlacementRequest {
@@ -2192,6 +2323,46 @@ export interface UpdateFleetNameResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 定时器弹性伸缩策略
+ */
+export interface TimerFleetCapacity {
+    /**
+      * 扩缩容配置服务器舰队ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FleetId?: string;
+    /**
+      * 期望实例数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DesiredInstances?: number;
+    /**
+      * 最小实例数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MinSize?: number;
+    /**
+      * 最大实例数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxSize?: number;
+    /**
+      * 伸缩容间隔，单位：分钟
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ScalingInterval?: number;
+    /**
+      * 扩缩容类型（手动1，自动2、未定义0）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ScalingType?: number;
+    /**
+      * 基于目标的扩展策略的设置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TargetConfiguration?: TargetConfiguration;
 }
 /**
  * DescribeAlias请求参数结构体
@@ -2224,6 +2395,31 @@ export interface CreateAliasRequest {
     Tags?: Array<Tag>;
 }
 /**
+ * 定时器取值配置
+ */
+export interface TimerValue {
+    /**
+      * 每X天，执行一次(重复周期-按天/单次)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Day?: number;
+    /**
+      * 每月从第x天，执行一次(重复周期-按月)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FromDay?: number;
+    /**
+      * 每月到第x天，执行一次(重复周期-按月)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ToDay?: number;
+    /**
+      * 重复周期-按周，周几（多个值,取值周一(1,2,3,4,5,6,7)周日）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WeekDays?: Array<number>;
+}
+/**
  * CopyFleet返回参数结构体
  */
 export interface CopyFleetResponse {
@@ -2231,11 +2427,11 @@ export interface CopyFleetResponse {
       * 服务器舰队属性
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    FleetAttributes?: Array<FleetAttributes>;
+    FleetAttributes: Array<FleetAttributes>;
     /**
       * 服务器舰队数量
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2484,57 +2680,42 @@ export interface DescribeFleetStatisticFlowsResponse {
     RequestId?: string;
 }
 /**
- * 服务器实例统计数据
+ * 磁盘存储信息
  */
-export interface InstanceCounts {
+export interface DiskInfo {
     /**
-      * 活跃的服务器实例数
-注意：此字段可能返回 null，表示取不到有效值。
+      * 磁盘类型，支持：高性能云硬盘（CLOUD_PREMIUM）、SSD云硬盘（CLOUD_SSD）
       */
-    Active: number;
+    DiskType: string;
     /**
-      * 期望的服务器实例数
-注意：此字段可能返回 null，表示取不到有效值。
+      * 系统盘：可选硬盘容量，50-500GB，数字以1为单位，数据盘：可选硬盘容量：10-32000GB，数字以10为单位；当磁盘类型为SSD云硬盘（CLOUD_SSD）最小大小为 100GB
       */
-    Desired: number;
-    /**
-      * 空闲的服务器实例数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Idle: number;
-    /**
-      * 服务器实例数最大限制
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MaxiNum: number;
-    /**
-      * 服务器实例数最小限制
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MiniNum: number;
-    /**
-      * 已开始创建，但未激活的服务器实例数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Pending: number;
-    /**
-      * 结束中的服务器实例数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Terminating: number;
+    DiskSize: number;
 }
 /**
- * UpdateFleetName请求参数结构体
+ * 重复周期配置
  */
-export interface UpdateFleetNameRequest {
+export interface TimerConfiguration {
     /**
-      * 服务器舰队 Id
+      * 定时器重复周期类型（未定义0，单次1、按天2、按月3、按周4）
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    FleetId: string;
+    TimerType?: number;
     /**
-      * 服务器舰队名称，最小长度1，最大长度50
+      * 定时器取值
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Name: string;
+    TimerValue?: TimerValue;
+    /**
+      * 定时器开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BeginTime?: string;
+    /**
+      * 定时器结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EndTime?: string;
 }
 /**
  * CreateFleet返回参数结构体
@@ -2544,7 +2725,7 @@ export interface CreateFleetResponse {
       * 服务器舰队属性
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    FleetAttributes?: FleetAttributes;
+    FleetAttributes: FleetAttributes;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2594,6 +2775,20 @@ export interface DescribeInstanceTypesResponse {
       * 服务器实例类型列表
       */
     InstanceTypeList?: Array<InstanceTypeInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * StartFleetActions返回参数结构体
+ */
+export interface StartFleetActionsResponse {
+    /**
+      * 服务器舰队 Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FleetId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2869,18 +3064,44 @@ export interface DescribeGameServerSessionsResponse {
     RequestId?: string;
 }
 /**
- * StartFleetActions返回参数结构体
+ * 服务器实例统计数据
  */
-export interface StartFleetActionsResponse {
+export interface InstanceCounts {
     /**
-      * 服务器舰队 Id
+      * 活跃的服务器实例数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    FleetId?: string;
+    Active: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 期望的服务器实例数
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RequestId?: string;
+    Desired: number;
+    /**
+      * 空闲的服务器实例数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Idle: number;
+    /**
+      * 服务器实例数最大限制
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxiNum: number;
+    /**
+      * 服务器实例数最小限制
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MiniNum: number;
+    /**
+      * 已开始创建，但未激活的服务器实例数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Pending: number;
+    /**
+      * 结束中的服务器实例数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Terminating: number;
 }
 /**
  * UpdateBucketAccelerateOpt返回参数结构体
@@ -2930,6 +3151,25 @@ export interface DescribeUserQuotasResponse {
  * GetUploadFederationToken请求参数结构体
  */
 export declare type GetUploadFederationTokenRequest = null;
+/**
+ * DescribeTimerScalingPolicies返回参数结构体
+ */
+export interface DescribeTimerScalingPoliciesResponse {
+    /**
+      * 定时器扩缩容策略配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TimerScalingPolicies: Array<TimerScalingPolicy>;
+    /**
+      * 定时器总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
 /**
  * CopyFleet请求参数结构体
  */
@@ -2994,6 +3234,18 @@ export interface CopyFleetRequest {
       * 标签列表，最大长度50组
       */
     Tags?: Array<Tag>;
+    /**
+      * 系统盘，储存类型为 SSD 云硬盘（CLOUD_SSD）时，100-500GB；储存类型为高性能云硬盘（CLOUD_PREMIUM）时，50-500GB；容量以1为单位
+      */
+    SystemDiskInfo?: DiskInfo;
+    /**
+      * 数据盘，储存类型为 SSD 云硬盘（CLOUD_SSD）时，100-32000GB；储存类型为高性能云硬盘（CLOUD_PREMIUM）时，10-32000GB；容量以10为单位
+      */
+    DataDiskInfo?: Array<DiskInfo>;
+    /**
+      * 是否选择复制定时器策略：TIMER_SELECTED 或者 TIMER_UNSELECTED；默认是 TIMER_UNSELECTED
+      */
+    SelectedTimerType?: string;
 }
 /**
  * SearchGameServerSessions返回参数结构体
@@ -3009,6 +3261,15 @@ export interface SearchGameServerSessionsResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     NextToken?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * PutTimerScalingPolicy返回参数结构体
+ */
+export interface PutTimerScalingPolicyResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3243,6 +3504,19 @@ export interface CreateGameServerSessionQueueRequest {
     Tags?: Array<Tag>;
 }
 /**
+ * UpdateFleetName请求参数结构体
+ */
+export interface UpdateFleetNameRequest {
+    /**
+      * 服务器舰队 Id
+      */
+    FleetId: string;
+    /**
+      * 服务器舰队名称，最小长度1，最大长度50
+      */
+    Name: string;
+}
+/**
  * 别名对象
  */
 export interface Alias {
@@ -3468,6 +3742,23 @@ export interface JoinGameServerSessionBatchResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * SetServerReserved请求参数结构体
+ */
+export interface SetServerReservedRequest {
+    /**
+      * 扩缩容配置服务器舰队ID
+      */
+    FleetId: string;
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 实例是否保留, 1-保留，0-不保留,默认
+      */
+    ReserveValue?: number;
 }
 /**
  * 实例扩展信息

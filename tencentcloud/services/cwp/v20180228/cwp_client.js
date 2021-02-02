@@ -208,7 +208,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMalwares", req, cb);
     }
     /**
-     * 编辑白名单规则
+     * 本接口用于编辑异地登录白名单规则。
      */
     async ModifyLoginWhiteList(req, cb) {
         return this.request("ModifyLoginWhiteList", req, cb);
@@ -323,7 +323,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeScanMalwareSchedule", req, cb);
     }
     /**
-     * 删除白名单规则
+     * 本接口用于删除异地登录白名单规则。
      */
     async DeleteLoginWhiteList(req, cb) {
         return this.request("DeleteLoginWhiteList", req, cb);
@@ -425,7 +425,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SeparateMalwares", req, cb);
     }
     /**
-     * 本接口（AddLoginWhiteList）用于添加白名单规则
+     * 本接口用于新增异地登录白名单规则。
      */
     async AddLoginWhiteList(req, cb) {
         return this.request("AddLoginWhiteList", req, cb);

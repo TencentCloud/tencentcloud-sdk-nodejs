@@ -31,6 +31,85 @@ export interface ApplyCertificateResponse {
 }
 
 /**
+ * 管理人信息
+ */
+export interface ManagerInfo {
+  /**
+   * 状态: audit: 审核中 ok: 审核通过 invalid: 失效 expiring: 即将过期 expired: 已过期
+   */
+  Status: string
+
+  /**
+   * 管理人姓名
+   */
+  ManagerFirstName: string
+
+  /**
+   * 管理人姓名
+   */
+  ManagerLastName: string
+
+  /**
+   * 管理人职位
+   */
+  ManagerPosition: string
+
+  /**
+   * 管理人电话
+   */
+  ManagerPhone: string
+
+  /**
+   * 管理人邮箱
+   */
+  ManagerMail: string
+
+  /**
+   * 管理人所属部门
+   */
+  ManagerDepartment: string
+
+  /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime: string
+
+  /**
+   * 管理人域名数量
+   */
+  DomainCount: number
+
+  /**
+   * 管理人证书数量
+   */
+  CertCount: number
+
+  /**
+   * 管理人ID
+   */
+  ManagerId: number
+
+  /**
+      * 审核有效到期时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExpireTime: string
+
+  /**
+      * 最近一次提交审核时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubmitAuditTime: string
+
+  /**
+      * 审核通过时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VerifyTime: string
+}
+
+/**
  * CompleteCertificate请求参数结构体
  */
 export interface CompleteCertificateRequest {
@@ -116,6 +195,21 @@ export interface ReplaceCertificateResponse {
    * 证书 ID。
    */
   CertificateId?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SubmitAuditManager返回参数结构体
+ */
+export interface SubmitAuditManagerResponse {
+  /**
+   * 管理人ID
+   */
+  ManagerId?: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -386,6 +480,66 @@ export interface CertificateExtra {
 }
 
 /**
+ * 公司信息
+ */
+export interface CompanyInfo {
+  /**
+   * 公司名称
+   */
+  CompanyName: string
+
+  /**
+   * 公司ID
+   */
+  CompanyId: number
+
+  /**
+   * 公司所在国家
+   */
+  CompanyCountry: string
+
+  /**
+   * 公司所在省份
+   */
+  CompanyProvince: string
+
+  /**
+   * 公司所在城市
+   */
+  CompanyCity: string
+
+  /**
+   * 公司所在详细地址
+   */
+  CompanyAddress: string
+
+  /**
+   * 公司电话
+   */
+  CompanyPhone: string
+}
+
+/**
+ * DescribeManagers返回参数结构体
+ */
+export interface DescribeManagersResponse {
+  /**
+   * 公司管理人列表
+   */
+  Managers: Array<ManagerInfo>
+
+  /**
+   * 公司管理人总数
+   */
+  TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCertificate返回参数结构体
  */
 export interface DescribeCertificateResponse {
@@ -588,21 +742,6 @@ export interface DescribeCertificateResponse {
 }
 
 /**
- * 证书操作日志。
- */
-export interface OperationLog {
-  /**
-   * 操作证书动作。
-   */
-  Action: string
-
-  /**
-   * 操作时间。
-   */
-  CreatedOn: string
-}
-
-/**
  * UploadCertificate请求参数结构体
  */
 export interface UploadCertificateRequest {
@@ -630,6 +769,11 @@ export interface UploadCertificateRequest {
    * 项目 ID。
    */
   ProjectId?: number
+
+  /**
+   * 证书用途/证书来源。“CLB，CDN，WAF，LIVE，DDOS”
+   */
+  CertificateUse?: string
 }
 
 /**
@@ -645,6 +789,36 @@ export interface UploadConfirmLetterRequest {
    * base64编码后的证书确认函文件，格式应为jpg、jpeg、png、pdf，大小应在1kb与1.4M之间。
    */
   ConfirmLetter: string
+}
+
+/**
+ * 证书操作日志。
+ */
+export interface OperationLog {
+  /**
+   * 操作证书动作。
+   */
+  Action: string
+
+  /**
+   * 操作时间。
+   */
+  CreatedOn: string
+}
+
+/**
+ * VerifyManager返回参数结构体
+ */
+export interface VerifyManagerResponse {
+  /**
+   * 管理人ID
+   */
+  ManagerId?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -670,6 +844,26 @@ export interface Tags {
    * 标签值
    */
   TagValue: string
+}
+
+/**
+ * SubmitAuditManager请求参数结构体
+ */
+export interface SubmitAuditManagerRequest {
+  /**
+   * 管理人ID
+   */
+  ManagerId: number
+}
+
+/**
+ * DeleteManager请求参数结构体
+ */
+export interface DeleteManagerRequest {
+  /**
+   * 管理人ID
+   */
+  ManagerId: number
 }
 
 /**
@@ -1208,6 +1402,26 @@ export interface DescribeCertificateRequest {
 }
 
 /**
+ * DescribeManagerDetail请求参数结构体
+ */
+export interface DescribeManagerDetailRequest {
+  /**
+   * 管理人ID
+   */
+  ManagerId: number
+
+  /**
+   * 分页每页数量
+   */
+  Limit?: number
+
+  /**
+   * 分页偏移量
+   */
+  Offset?: number
+}
+
+/**
  * 获取证书列表（DescribeCertificate）返回参数键为 DvAuthDetail 的内容。
  */
 export interface DvAuthDetail {
@@ -1412,13 +1626,38 @@ export interface UploadConfirmLetterResponse {
 }
 
 /**
+ * DeleteManager返回参数结构体
+ */
+export interface DeleteManagerResponse {
+  /**
+   * 管理人ID
+   */
+  ManagerId?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * VerifyManager请求参数结构体
+ */
+export interface VerifyManagerRequest {
+  /**
+   * 管理人ID
+   */
+  ManagerId: number
+}
+
+/**
  * UploadCertificate返回参数结构体
  */
 export interface UploadCertificateResponse {
   /**
    * 证书 ID。
    */
-  CertificateId?: string
+  CertificateId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1452,138 +1691,105 @@ export interface ModifyCertificateAliasResponse {
 }
 
 /**
- * SubmitCertificateInformation请求参数结构体
+ * DescribeManagerDetail返回参数结构体
  */
-export interface SubmitCertificateInformationRequest {
+export interface DescribeManagerDetailResponse {
   /**
-   * 证书 ID。
+   * 状态: audit: 审核中 ok: 审核通过 invalid: 失效 expiring: 即将过期 expired: 已过期
    */
-  CertificateId: string
+  Status: string
 
   /**
-   * CSR 生成方式：online = 在线生成, parse = 手动上传。
+   * 管理人姓名
    */
-  CsrType?: string
+  ManagerFirstName: string
 
   /**
-   * 上传的 CSR 内容。
+   * 管理人邮箱
    */
-  CsrContent?: string
+  ManagerMail: string
 
   /**
-   * 绑定证书的域名。
+   * 联系人姓名
    */
-  CertificateDomain?: string
+  ContactFirstName: string
 
   /**
-   * 上传的域名数组（多域名证书可以上传）。
+   * 管理人姓名
    */
-  DomainList?: Array<string>
+  ManagerLastName: string
 
   /**
-   * 私钥密码（非必填）。
+   * 联系人职位
    */
-  KeyPassword?: string
+  ContactPosition: string
 
   /**
-   * 公司名称。
+   * 管理人职位
    */
-  OrganizationName?: string
+  ManagerPosition: string
 
   /**
-   * 部门名称。
-   */
-  OrganizationDivision?: string
+      * 核验通过时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VerifyTime: string
 
   /**
-   * 公司详细地址。
+   * 创建时间
    */
-  OrganizationAddress?: string
+  CreateTime: string
 
   /**
-   * 国家名称，如中国：CN 。
-   */
-  OrganizationCountry?: string
+      * 核验过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExpireTime: string
 
   /**
-   * 公司所在城市。
+   * 联系人姓名
    */
-  OrganizationCity?: string
+  ContactLastName: string
 
   /**
-   * 公司所在省份。
+   * 管理人电话
    */
-  OrganizationRegion?: string
+  ManagerPhone: string
 
   /**
-   * 公司邮编。
+   * 联系人电话
    */
-  PostalCode?: string
+  ContactPhone: string
 
   /**
-   * 公司座机区号。
+   * 联系人邮箱
    */
-  PhoneAreaCode?: string
+  ContactMail: string
 
   /**
-   * 公司座机号码。
+   * 管理人所属部门
    */
-  PhoneNumber?: string
+  ManagerDepartment: string
 
   /**
-   * 证书验证方式。验证类型：DNS_AUTO = 自动DNS验证（仅支持在腾讯云解析且解析状态正常的域名使用该验证类型），DNS = 手动DNS验证，FILE = 文件验证。
+   * 管理人所属公司信息
    */
-  VerifyType?: string
+  CompanyInfo: CompanyInfo
 
   /**
-   * 管理人名。
+   * 管理人公司ID
    */
-  AdminFirstName?: string
+  CompanyId: number
 
   /**
-   * 管理人姓。
+   * 管理人ID
    */
-  AdminLastName?: string
+  ManagerId: number
 
   /**
-   * 管理人手机号码。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  AdminPhoneNum?: string
-
-  /**
-   * 管理人邮箱地址。
-   */
-  AdminEmail?: string
-
-  /**
-   * 管理人职位。
-   */
-  AdminPosition?: string
-
-  /**
-   * 联系人名。
-   */
-  ContactFirstName?: string
-
-  /**
-   * 联系人姓。
-   */
-  ContactLastName?: string
-
-  /**
-   * 联系人邮箱地址。
-   */
-  ContactEmail?: string
-
-  /**
-   * 联系人手机号码。
-   */
-  ContactNumber?: string
-
-  /**
-   * 联系人职位。
-   */
-  ContactPosition?: string
+  RequestId?: string
 }
 
 /**
@@ -1742,6 +1948,141 @@ export interface SubmittedData {
 }
 
 /**
+ * SubmitCertificateInformation请求参数结构体
+ */
+export interface SubmitCertificateInformationRequest {
+  /**
+   * 证书 ID。
+   */
+  CertificateId: string
+
+  /**
+   * CSR 生成方式：online = 在线生成, parse = 手动上传。
+   */
+  CsrType?: string
+
+  /**
+   * 上传的 CSR 内容。
+   */
+  CsrContent?: string
+
+  /**
+   * 绑定证书的域名。
+   */
+  CertificateDomain?: string
+
+  /**
+   * 上传的域名数组（多域名证书可以上传）。
+   */
+  DomainList?: Array<string>
+
+  /**
+   * 私钥密码（非必填）。
+   */
+  KeyPassword?: string
+
+  /**
+   * 公司名称。
+   */
+  OrganizationName?: string
+
+  /**
+   * 部门名称。
+   */
+  OrganizationDivision?: string
+
+  /**
+   * 公司详细地址。
+   */
+  OrganizationAddress?: string
+
+  /**
+   * 国家名称，如中国：CN 。
+   */
+  OrganizationCountry?: string
+
+  /**
+   * 公司所在城市。
+   */
+  OrganizationCity?: string
+
+  /**
+   * 公司所在省份。
+   */
+  OrganizationRegion?: string
+
+  /**
+   * 公司邮编。
+   */
+  PostalCode?: string
+
+  /**
+   * 公司座机区号。
+   */
+  PhoneAreaCode?: string
+
+  /**
+   * 公司座机号码。
+   */
+  PhoneNumber?: string
+
+  /**
+   * 证书验证方式。验证类型：DNS_AUTO = 自动DNS验证（仅支持在腾讯云解析且解析状态正常的域名使用该验证类型），DNS = 手动DNS验证，FILE = 文件验证。
+   */
+  VerifyType?: string
+
+  /**
+   * 管理人名。
+   */
+  AdminFirstName?: string
+
+  /**
+   * 管理人姓。
+   */
+  AdminLastName?: string
+
+  /**
+   * 管理人手机号码。
+   */
+  AdminPhoneNum?: string
+
+  /**
+   * 管理人邮箱地址。
+   */
+  AdminEmail?: string
+
+  /**
+   * 管理人职位。
+   */
+  AdminPosition?: string
+
+  /**
+   * 联系人名。
+   */
+  ContactFirstName?: string
+
+  /**
+   * 联系人姓。
+   */
+  ContactLastName?: string
+
+  /**
+   * 联系人邮箱地址。
+   */
+  ContactEmail?: string
+
+  /**
+   * 联系人手机号码。
+   */
+  ContactNumber?: string
+
+  /**
+   * 联系人职位。
+   */
+  ContactPosition?: string
+}
+
+/**
  * DescribeCertificates请求参数结构体
  */
 export interface DescribeCertificatesRequest {
@@ -1784,6 +2125,48 @@ export interface DescribeCertificatesRequest {
    * 是否可部署，可选值：1 = 可部署，0 =  不可部署。
    */
   Deployable?: number
+}
+
+/**
+ * DescribeManagers请求参数结构体
+ */
+export interface DescribeManagersRequest {
+  /**
+   * 公司ID
+   */
+  CompanyId: number
+
+  /**
+   * 分页偏移量
+   */
+  Offset?: number
+
+  /**
+   * 分页每页数量
+   */
+  Limit?: number
+
+  /**
+   * 管理人姓名
+   */
+  ManagerName?: string
+
+  /**
+   * 模糊查询管理人邮箱
+   */
+  ManagerMail?: string
+
+  /**
+      * 根据管理人状态进行筛选，取值有
+'none' 未提交审核
+'audit', 亚信审核中
+'CAaudit' CA审核中
+'ok' 已审核
+'invalid'  审核失败
+'expiring'  即将过期
+'expired' 已过期
+      */
+  Status?: string
 }
 
 /**

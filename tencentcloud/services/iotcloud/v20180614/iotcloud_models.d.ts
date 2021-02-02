@@ -2183,6 +2183,10 @@ export interface DescribeDevicesRequest {
       * 需要过滤的设备名称
       */
     DeviceName?: string;
+    /**
+      * 设备是否启用，0禁用状态1启用状态，默认不区分
+      */
+    EnableState?: number;
 }
 /**
  * DescribeDeviceClientKey返回参数结构体

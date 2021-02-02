@@ -2763,6 +2763,26 @@ export interface InstanceSet {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MonitorVersion: string;
+    /**
+      * 客户端最大连接数可设置的最小值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClientLimitMin: number;
+    /**
+      * 客户端最大连接数可设置的最大值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClientLimitMax: number;
+    /**
+      * 实例的节点详细信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NodeSet: Array<RedisNodeInfo>;
+    /**
+      * 实例所在的地域信息，比如ap-guangzhou
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Region: string;
 }
 /**
  * InquiryPriceRenewInstance请求参数结构体

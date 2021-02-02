@@ -118,6 +118,7 @@ export { ssm } from "./ssm";
 export { sts } from "./sts";
 export { taf } from "./taf";
 export { tag } from "./tag";
+export { tat } from "./tat";
 export { tav } from "./tav";
 export { tbaas } from "./tbaas";
 export { tbm } from "./tbm";

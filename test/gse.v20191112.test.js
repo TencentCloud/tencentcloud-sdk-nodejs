@@ -108,9 +108,9 @@ it("gse.v20191112.CreateAsset", async function () {
     }
 })
 
-it("gse.v20191112.UpdateBucketAccelerateOpt", async function () {
+it("gse.v20191112.SetServerReserved", async function () {
     try {
-       const data = await client.UpdateBucketAccelerateOpt({})
+       const data = await client.SetServerReserved({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,9 +128,9 @@ it("gse.v20191112.CreateGameServerSessionQueue", async function () {
     }
 })
 
-it("gse.v20191112.UpdateGameServerSession", async function () {
+it("gse.v20191112.DescribeInstanceLimit", async function () {
     try {
-       const data = await client.UpdateGameServerSession({})
+       const data = await client.DescribeInstanceLimit({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -181,6 +181,26 @@ it("gse.v20191112.UpdateRuntimeConfiguration", async function () {
 it("gse.v20191112.DescribeFleetCapacity", async function () {
     try {
        const data = await client.DescribeFleetCapacity({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gse.v20191112.StopGameServerSessionPlacement", async function () {
+    try {
+       const data = await client.StopGameServerSessionPlacement({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gse.v20191112.UpdateBucketAccelerateOpt", async function () {
+    try {
+       const data = await client.UpdateBucketAccelerateOpt({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -298,9 +318,9 @@ it("gse.v20191112.DeleteAlias", async function () {
     }
 })
 
-it("gse.v20191112.DescribeInstanceLimit", async function () {
+it("gse.v20191112.DeleteTimerScalingPolicy", async function () {
     try {
-       const data = await client.DescribeInstanceLimit({})
+       const data = await client.DeleteTimerScalingPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -448,9 +468,9 @@ it("gse.v20191112.CreateFleet", async function () {
     }
 })
 
-it("gse.v20191112.StopGameServerSessionPlacement", async function () {
+it("gse.v20191112.DescribeTimerScalingPolicies", async function () {
     try {
-       const data = await client.StopGameServerSessionPlacement({})
+       const data = await client.DescribeTimerScalingPolicies({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -501,6 +521,16 @@ it("gse.v20191112.DescribeUserQuota", async function () {
 it("gse.v20191112.DescribeFleetAttributes", async function () {
     try {
        const data = await client.DescribeFleetAttributes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gse.v20191112.UpdateGameServerSession", async function () {
+    try {
+       const data = await client.UpdateGameServerSession({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -681,6 +711,16 @@ it("gse.v20191112.DescribeInstances", async function () {
 it("gse.v20191112.UpdateFleetPortSettings", async function () {
     try {
        const data = await client.UpdateFleetPortSettings({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gse.v20191112.PutTimerScalingPolicy", async function () {
+    try {
+       const data = await client.PutTimerScalingPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

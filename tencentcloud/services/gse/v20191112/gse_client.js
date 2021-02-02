@@ -95,10 +95,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAsset", req, cb);
     }
     /**
-     * 本接口（UpdateBucketAccelerateOpt）用于开启cos全球加速。
+     * 本接口（SetServerReserved）用于将异常的实例标记为保留，用于问题排查。
+
+字段ReserveValue：0默认值，不保留；1 保留
+
      */
-    async UpdateBucketAccelerateOpt(req, cb) {
-        return this.request("UpdateBucketAccelerateOpt", req, cb);
+    async SetServerReserved(req, cb) {
+        return this.request("SetServerReserved", req, cb);
     }
     /**
      * 本接口（CreateGameServerSessionQueue）用于创建游戏服务器会话队列。
@@ -107,10 +110,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateGameServerSessionQueue", req, cb);
     }
     /**
-     * 本接口（UpdateGameServerSession）用于更新游戏服务器会话。
+     * 本接口（DescribeInstanceLimit）用于查询用户实例数限额。
      */
-    async UpdateGameServerSession(req, cb) {
-        return this.request("UpdateGameServerSession", req, cb);
+    async DescribeInstanceLimit(req, cb) {
+        return this.request("DescribeInstanceLimit", req, cb);
     }
     /**
      * 本接口（DeleteAsset）用于删除生成包。
@@ -141,6 +144,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeFleetCapacity(req, cb) {
         return this.request("DescribeFleetCapacity", req, cb);
+    }
+    /**
+     * 本接口（StopGameServerSessionPlacement）用于停止放置游戏服务器会话。
+     */
+    async StopGameServerSessionPlacement(req, cb) {
+        return this.request("StopGameServerSessionPlacement", req, cb);
+    }
+    /**
+     * 本接口（UpdateBucketAccelerateOpt）用于开启cos全球加速。
+     */
+    async UpdateBucketAccelerateOpt(req, cb) {
+        return this.request("UpdateBucketAccelerateOpt", req, cb);
     }
     /**
      * 本接口（DeleteGameServerSessionQueue）用于删除游戏服务器会话队列。
@@ -306,10 +321,11 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
         return this.request("DeleteAlias", req, cb);
     }
     /**
-     * 本接口（DescribeInstanceLimit）用于查询用户实例数限额。
+     * 本接口（DeleteTimerScalingPolicy）用于删除fleet下的定时器。
+
      */
-    async DescribeInstanceLimit(req, cb) {
-        return this.request("DescribeInstanceLimit", req, cb);
+    async DeleteTimerScalingPolicy(req, cb) {
+        return this.request("DeleteTimerScalingPolicy", req, cb);
     }
     /**
      * 本接口（UpdateAsset）用于修改生成包信息。
@@ -399,10 +415,11 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
         return this.request("CreateFleet", req, cb);
     }
     /**
-     * 本接口（StopGameServerSessionPlacement）用于停止放置游戏服务器会话。
+     * 本接口（DescribeTimerScalingPolicies）用于查询fleet下的定时器列表。可以通过fleetid，定时器名称分页查询。
+
      */
-    async StopGameServerSessionPlacement(req, cb) {
-        return this.request("StopGameServerSessionPlacement", req, cb);
+    async DescribeTimerScalingPolicies(req, cb) {
+        return this.request("DescribeTimerScalingPolicies", req, cb);
     }
     /**
      * 本接口（UpdateGameServerSessionQueue）用于修改游戏服务器会话队列。
@@ -433,6 +450,12 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
      */
     async DescribeFleetAttributes(req, cb) {
         return this.request("DescribeFleetAttributes", req, cb);
+    }
+    /**
+     * 本接口（UpdateGameServerSession）用于更新游戏服务器会话。
+     */
+    async UpdateGameServerSession(req, cb) {
+        return this.request("UpdateGameServerSession", req, cb);
     }
     /**
      * 本接口（GetUploadFederationToken）用于 获取生成包上传所需要的临时密钥。
@@ -541,6 +564,15 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
      */
     async UpdateFleetPortSettings(req, cb) {
         return this.request("UpdateFleetPortSettings", req, cb);
+    }
+    /**
+     * 本接口（PutTimerScalingPolicy）用于给fleet创建或更新定时器。
+
+填写字段timer_id，表示更新；不填字段timer_id表示新增。
+
+     */
+    async PutTimerScalingPolicy(req, cb) {
+        return this.request("PutTimerScalingPolicy", req, cb);
     }
 }
 exports.Client = Client;

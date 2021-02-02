@@ -2757,7 +2757,7 @@ export interface SwitchDBInstanceMasterSlaveRequest {
       */
     InstanceId: string;
     /**
-      * 模板从实例。可选值："first" - 第一备机；"second" - 第二备机。默认值为 "first"，仅多可用区实例支持设置为 "second"。
+      * 目标从实例。可选值："first" - 第一备机；"second" - 第二备机。默认值为 "first"，仅多可用区实例支持设置为 "second"。
       */
     DstSlave?: string;
     /**
@@ -3017,7 +3017,7 @@ export interface SwitchDBInstanceMasterSlaveResponse {
     /**
       * 异步任务 ID。
       */
-    AsyncRequestId?: string;
+    AsyncRequestId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

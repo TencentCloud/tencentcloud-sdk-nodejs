@@ -40,22 +40,34 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UploadRevokeLetter", req, cb);
     }
     /**
+     * 删除管理人
+     */
+    async DeleteManager(req, cb) {
+        return this.request("DeleteManager", req, cb);
+    }
+    /**
      * 本接口（UploadConfirmLetter）用于上传证书确认函。
      */
     async UploadConfirmLetter(req, cb) {
         return this.request("UploadConfirmLetter", req, cb);
     }
     /**
-     * 本接口（CreateCertificate）用于创建付费证书。
+     * 重新提交审核管理人
      */
-    async CreateCertificate(req, cb) {
-        return this.request("CreateCertificate", req, cb);
+    async SubmitAuditManager(req, cb) {
+        return this.request("SubmitAuditManager", req, cb);
     }
     /**
-     * 批量修改证书所属项目。
+     * 提交证书资料。输入参数信息可以分多次提交，但提交的证书资料应最低限度保持完整。
      */
-    async ModifyCertificateProject(req, cb) {
-        return this.request("ModifyCertificateProject", req, cb);
+    async SubmitCertificateInformation(req, cb) {
+        return this.request("SubmitCertificateInformation", req, cb);
+    }
+    /**
+     * 重新核验管理人
+     */
+    async VerifyManager(req, cb) {
+        return this.request("VerifyManager", req, cb);
     }
     /**
      * 取消证书订单。
@@ -64,10 +76,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CancelCertificateOrder", req, cb);
     }
     /**
-     * 提交证书订单。
+     * 本接口（DownloadCertificate）用于下载证书。
      */
-    async CommitCertificateInformation(req, cb) {
-        return this.request("CommitCertificateInformation", req, cb);
+    async DownloadCertificate(req, cb) {
+        return this.request("DownloadCertificate", req, cb);
     }
     /**
      * 本接口（DeleteCertificate）用于删除证书。
@@ -88,28 +100,64 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UploadCertificate", req, cb);
     }
     /**
+     * 本接口（CheckCertificateChain）用于检查证书链是否完整。
+     */
+    async CheckCertificateChain(req, cb) {
+        return this.request("CheckCertificateChain", req, cb);
+    }
+    /**
+     * 本接口（DescribeCertificate）用于获取证书信息。
+     */
+    async DescribeCertificate(req, cb) {
+        return this.request("DescribeCertificate", req, cb);
+    }
+    /**
+     * 获取证书详情。
+     */
+    async DescribeCertificateDetail(req, cb) {
+        return this.request("DescribeCertificateDetail", req, cb);
+    }
+    /**
+     * 查询管理人详情
+     */
+    async DescribeManagerDetail(req, cb) {
+        return this.request("DescribeManagerDetail", req, cb);
+    }
+    /**
+     * 批量修改证书所属项目。
+     */
+    async ModifyCertificateProject(req, cb) {
+        return this.request("ModifyCertificateProject", req, cb);
+    }
+    /**
      * 用户传入证书id和备注来修改证书备注。
      */
     async ModifyCertificateAlias(req, cb) {
         return this.request("ModifyCertificateAlias", req, cb);
     }
     /**
-     * 本接口（DownloadCertificate）用于下载证书。
+     * 本接口（CreateCertificate）用于创建付费证书。
      */
-    async DownloadCertificate(req, cb) {
-        return this.request("DownloadCertificate", req, cb);
+    async CreateCertificate(req, cb) {
+        return this.request("CreateCertificate", req, cb);
+    }
+    /**
+     * 提交证书订单。
+     */
+    async CommitCertificateInformation(req, cb) {
+        return this.request("CommitCertificateInformation", req, cb);
+    }
+    /**
+     * 获取用户账号下有关证书的操作日志。
+     */
+    async DescribeCertificateOperateLogs(req, cb) {
+        return this.request("DescribeCertificateOperateLogs", req, cb);
     }
     /**
      * 本接口（ReplaceCertificate）用于重颁发证书。已申请的免费证书仅支持 RSA 算法、密钥对参数为2048的证书重颁发，并且目前仅支持1次重颁发。
      */
     async ReplaceCertificate(req, cb) {
         return this.request("ReplaceCertificate", req, cb);
-    }
-    /**
-     * 本接口（CheckCertificateChain）用于检查证书链是否完整。
-     */
-    async CheckCertificateChain(req, cb) {
-        return this.request("CheckCertificateChain", req, cb);
     }
     /**
      * 本接口（ApplyCertificate）用于免费证书申请。
@@ -124,28 +172,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RevokeCertificate", req, cb);
     }
     /**
-     * 获取用户账号下有关证书的操作日志。
+     * 查询管理人列表
      */
-    async DescribeCertificateOperateLogs(req, cb) {
-        return this.request("DescribeCertificateOperateLogs", req, cb);
-    }
-    /**
-     * 提交证书资料。输入参数信息可以分多次提交，但提交的证书资料应最低限度保持完整。
-     */
-    async SubmitCertificateInformation(req, cb) {
-        return this.request("SubmitCertificateInformation", req, cb);
-    }
-    /**
-     * 获取证书详情。
-     */
-    async DescribeCertificateDetail(req, cb) {
-        return this.request("DescribeCertificateDetail", req, cb);
-    }
-    /**
-     * 本接口（DescribeCertificate）用于获取证书信息。
-     */
-    async DescribeCertificate(req, cb) {
-        return this.request("DescribeCertificate", req, cb);
+    async DescribeManagers(req, cb) {
+        return this.request("DescribeManagers", req, cb);
     }
 }
 exports.Client = Client;

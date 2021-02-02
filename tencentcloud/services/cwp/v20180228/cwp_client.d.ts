@@ -128,7 +128,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeMalwares(req: DescribeMalwaresRequest, cb?: (error: string, rep: DescribeMalwaresResponse) => void): Promise<DescribeMalwaresResponse>;
     /**
-     * 编辑白名单规则
+     * 本接口用于编辑异地登录白名单规则。
      */
     ModifyLoginWhiteList(req: ModifyLoginWhiteListRequest, cb?: (error: string, rep: ModifyLoginWhiteListResponse) => void): Promise<ModifyLoginWhiteListResponse>;
     /**
@@ -205,7 +205,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeScanMalwareSchedule(req?: DescribeScanMalwareScheduleRequest, cb?: (error: string, rep: DescribeScanMalwareScheduleResponse) => void): Promise<DescribeScanMalwareScheduleResponse>;
     /**
-     * 删除白名单规则
+     * 本接口用于删除异地登录白名单规则。
      */
     DeleteLoginWhiteList(req: DeleteLoginWhiteListRequest, cb?: (error: string, rep: DeleteLoginWhiteListResponse) => void): Promise<DeleteLoginWhiteListResponse>;
     /**
@@ -273,7 +273,7 @@ export declare class Client extends AbstractClient {
      */
     SeparateMalwares(req: SeparateMalwaresRequest, cb?: (error: string, rep: SeparateMalwaresResponse) => void): Promise<SeparateMalwaresResponse>;
     /**
-     * 本接口（AddLoginWhiteList）用于添加白名单规则
+     * 本接口用于新增异地登录白名单规则。
      */
     AddLoginWhiteList(req: AddLoginWhiteListRequest, cb?: (error: string, rep: AddLoginWhiteListResponse) => void): Promise<AddLoginWhiteListResponse>;
     /**

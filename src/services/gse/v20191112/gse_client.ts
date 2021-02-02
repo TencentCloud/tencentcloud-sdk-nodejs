@@ -42,6 +42,7 @@ import {
   DescribeFleetUtilizationResponse,
   DescribeScalingPoliciesRequest,
   DeleteFleetRequest,
+  TimerScalingPolicy,
   DetachCcnInstancesResponse,
   DescribeFleetPortSettingsResponse,
   DescribeUserQuotasRequest,
@@ -68,9 +69,11 @@ import {
   ResolveAliasResponse,
   DescribeInstancesExtendResponse,
   Event,
-  UpdateRuntimeConfigurationResponse,
+  PutTimerScalingPolicyRequest,
   DescribeCcnInstancesResponse,
   AssetSupportSys,
+  DeleteTimerScalingPolicyResponse,
+  DescribeTimerScalingPoliciesRequest,
   DescribeInstanceLimitResponse,
   DescribeAssetResponse,
   PlacedPlayerSession,
@@ -95,12 +98,13 @@ import {
   DescribeFleetCapacityRequest,
   DescribeCcnInstancesRequest,
   DescribeFleetStatisticDetailsResponse,
-  UpdateGameServerSessionQueueRequest,
+  DeleteTimerScalingPolicyRequest,
   JoinGameServerSessionResponse,
   AssetCredentials,
   TargetConfiguration,
   DescribeGameServerSessionPlacementRequest,
   GameServerSessionQueueDestination,
+  UpdateGameServerSessionQueueRequest,
   FleetCapacity,
   SetServerWeightRequest,
   GetGameServerSessionLogUrlResponse,
@@ -109,6 +113,7 @@ import {
   StartGameServerSessionPlacementRequest,
   InstanceTypeInfo,
   DescribeGameServerSessionPlacementResponse,
+  UpdateRuntimeConfigurationResponse,
   CreateAliasResponse,
   ResourceCreationLimitPolicy,
   ListFleetsRequest,
@@ -129,10 +134,13 @@ import {
   CreateGameServerSessionQueueResponse,
   DescribeInstanceTypesRequest,
   PlayerLatency,
+  SetServerReservedResponse,
   StopGameServerSessionPlacementRequest,
   UpdateFleetNameResponse,
+  TimerFleetCapacity,
   DescribeAliasRequest,
   CreateAliasRequest,
+  TimerValue,
   CopyFleetResponse,
   UpdateGameServerSessionRequest,
   ListAliasesRequest,
@@ -145,13 +153,14 @@ import {
   DescribeInstancesRequest,
   QuotaResource,
   DescribeFleetStatisticFlowsResponse,
-  InstanceCounts,
-  UpdateFleetNameRequest,
+  DiskInfo,
+  TimerConfiguration,
   CreateFleetResponse,
   Filter,
   UpdateFleetAttributesResponse,
   DescribeFleetUtilizationRequest,
   DescribeInstanceTypesResponse,
+  StartFleetActionsResponse,
   DescribeGameServerSessionDetailsRequest,
   GameServerSession,
   PlayerLatencyPolicy,
@@ -163,13 +172,15 @@ import {
   DescribeAssetRequest,
   DescribeInstancesExtendRequest,
   DescribeGameServerSessionsResponse,
-  StartFleetActionsResponse,
+  InstanceCounts,
   UpdateBucketAccelerateOptResponse,
   JoinGameServerSessionRequest,
   DescribeUserQuotasResponse,
   GetUploadFederationTokenRequest,
+  DescribeTimerScalingPoliciesResponse,
   CopyFleetRequest,
   SearchGameServerSessionsResponse,
+  PutTimerScalingPolicyResponse,
   DescribeFleetEventsResponse,
   RoutingStrategy,
   DescribeFleetCapacityResponse,
@@ -180,6 +191,7 @@ import {
   PlayerSession,
   PutScalingPolicyResponse,
   CreateGameServerSessionQueueRequest,
+  UpdateFleetNameRequest,
   Alias,
   DescribeRuntimeConfigurationRequest,
   RuntimeConfiguration,
@@ -191,6 +203,7 @@ import {
   UpdateFleetCapacityRequest,
   FleetStatisticDetail,
   JoinGameServerSessionBatchResponse,
+  SetServerReservedRequest,
   InstanceExtend,
   PutScalingPolicyRequest,
   StopGameServerSessionPlacementResponse,
@@ -310,13 +323,16 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（UpdateBucketAccelerateOpt）用于开启cos全球加速。
-   */
-  async UpdateBucketAccelerateOpt(
-    req: UpdateBucketAccelerateOptRequest,
-    cb?: (error: string, rep: UpdateBucketAccelerateOptResponse) => void
-  ): Promise<UpdateBucketAccelerateOptResponse> {
-    return this.request("UpdateBucketAccelerateOpt", req, cb)
+     * 本接口（SetServerReserved）用于将异常的实例标记为保留，用于问题排查。
+
+字段ReserveValue：0默认值，不保留；1 保留
+
+     */
+  async SetServerReserved(
+    req: SetServerReservedRequest,
+    cb?: (error: string, rep: SetServerReservedResponse) => void
+  ): Promise<SetServerReservedResponse> {
+    return this.request("SetServerReserved", req, cb)
   }
 
   /**
@@ -330,13 +346,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（UpdateGameServerSession）用于更新游戏服务器会话。
+   * 本接口（DescribeInstanceLimit）用于查询用户实例数限额。
    */
-  async UpdateGameServerSession(
-    req: UpdateGameServerSessionRequest,
-    cb?: (error: string, rep: UpdateGameServerSessionResponse) => void
-  ): Promise<UpdateGameServerSessionResponse> {
-    return this.request("UpdateGameServerSession", req, cb)
+  async DescribeInstanceLimit(
+    req?: DescribeInstanceLimitRequest,
+    cb?: (error: string, rep: DescribeInstanceLimitResponse) => void
+  ): Promise<DescribeInstanceLimitResponse> {
+    return this.request("DescribeInstanceLimit", req, cb)
   }
 
   /**
@@ -387,6 +403,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeFleetCapacityResponse) => void
   ): Promise<DescribeFleetCapacityResponse> {
     return this.request("DescribeFleetCapacity", req, cb)
+  }
+
+  /**
+   * 本接口（StopGameServerSessionPlacement）用于停止放置游戏服务器会话。
+   */
+  async StopGameServerSessionPlacement(
+    req: StopGameServerSessionPlacementRequest,
+    cb?: (error: string, rep: StopGameServerSessionPlacementResponse) => void
+  ): Promise<StopGameServerSessionPlacementResponse> {
+    return this.request("StopGameServerSessionPlacement", req, cb)
+  }
+
+  /**
+   * 本接口（UpdateBucketAccelerateOpt）用于开启cos全球加速。
+   */
+  async UpdateBucketAccelerateOpt(
+    req: UpdateBucketAccelerateOptRequest,
+    cb?: (error: string, rep: UpdateBucketAccelerateOptResponse) => void
+  ): Promise<UpdateBucketAccelerateOptResponse> {
+    return this.request("UpdateBucketAccelerateOpt", req, cb)
   }
 
   /**
@@ -597,13 +633,14 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
   }
 
   /**
-   * 本接口（DescribeInstanceLimit）用于查询用户实例数限额。
-   */
-  async DescribeInstanceLimit(
-    req?: DescribeInstanceLimitRequest,
-    cb?: (error: string, rep: DescribeInstanceLimitResponse) => void
-  ): Promise<DescribeInstanceLimitResponse> {
-    return this.request("DescribeInstanceLimit", req, cb)
+     * 本接口（DeleteTimerScalingPolicy）用于删除fleet下的定时器。
+
+     */
+  async DeleteTimerScalingPolicy(
+    req: DeleteTimerScalingPolicyRequest,
+    cb?: (error: string, rep: DeleteTimerScalingPolicyResponse) => void
+  ): Promise<DeleteTimerScalingPolicyResponse> {
+    return this.request("DeleteTimerScalingPolicy", req, cb)
   }
 
   /**
@@ -750,13 +787,14 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
   }
 
   /**
-   * 本接口（StopGameServerSessionPlacement）用于停止放置游戏服务器会话。
-   */
-  async StopGameServerSessionPlacement(
-    req: StopGameServerSessionPlacementRequest,
-    cb?: (error: string, rep: StopGameServerSessionPlacementResponse) => void
-  ): Promise<StopGameServerSessionPlacementResponse> {
-    return this.request("StopGameServerSessionPlacement", req, cb)
+     * 本接口（DescribeTimerScalingPolicies）用于查询fleet下的定时器列表。可以通过fleetid，定时器名称分页查询。
+
+     */
+  async DescribeTimerScalingPolicies(
+    req: DescribeTimerScalingPoliciesRequest,
+    cb?: (error: string, rep: DescribeTimerScalingPoliciesResponse) => void
+  ): Promise<DescribeTimerScalingPoliciesResponse> {
+    return this.request("DescribeTimerScalingPolicies", req, cb)
   }
 
   /**
@@ -807,6 +845,16 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     cb?: (error: string, rep: DescribeFleetAttributesResponse) => void
   ): Promise<DescribeFleetAttributesResponse> {
     return this.request("DescribeFleetAttributes", req, cb)
+  }
+
+  /**
+   * 本接口（UpdateGameServerSession）用于更新游戏服务器会话。
+   */
+  async UpdateGameServerSession(
+    req: UpdateGameServerSessionRequest,
+    cb?: (error: string, rep: UpdateGameServerSessionResponse) => void
+  ): Promise<UpdateGameServerSessionResponse> {
+    return this.request("UpdateGameServerSession", req, cb)
   }
 
   /**
@@ -987,5 +1035,18 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
     cb?: (error: string, rep: UpdateFleetPortSettingsResponse) => void
   ): Promise<UpdateFleetPortSettingsResponse> {
     return this.request("UpdateFleetPortSettings", req, cb)
+  }
+
+  /**
+     * 本接口（PutTimerScalingPolicy）用于给fleet创建或更新定时器。
+
+填写字段timer_id，表示更新；不填字段timer_id表示新增。
+
+     */
+  async PutTimerScalingPolicy(
+    req: PutTimerScalingPolicyRequest,
+    cb?: (error: string, rep: PutTimerScalingPolicyResponse) => void
+  ): Promise<PutTimerScalingPolicyResponse> {
+    return this.request("PutTimerScalingPolicy", req, cb)
   }
 }
