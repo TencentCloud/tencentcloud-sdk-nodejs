@@ -48,9 +48,19 @@ it("dbbrain.v20191016.DescribeSecurityAuditLogDownloadUrls", async function () {
     }
 })
 
-it("dbbrain.v20191016.DescribeDBDiagEvent", async function () {
+it("dbbrain.v20191016.DescribeMailProfile", async function () {
     try {
-       const data = await client.DescribeDBDiagEvent({})
+       const data = await client.DescribeMailProfile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20191016.CreateSchedulerMailProfile", async function () {
+    try {
+       const data = await client.CreateSchedulerMailProfile({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,9 +88,9 @@ it("dbbrain.v20191016.DescribeDBSpaceStatus", async function () {
     }
 })
 
-it("dbbrain.v20191016.DescribeTopSpaceTables", async function () {
+it("dbbrain.v20191016.DescribeDBDiagEvent", async function () {
     try {
-       const data = await client.DescribeTopSpaceTables({})
+       const data = await client.DescribeDBDiagEvent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,9 +118,29 @@ it("dbbrain.v20191016.CreateMailProfile", async function () {
     }
 })
 
-it("dbbrain.v20191016.ModifyDiagDBInstanceConf", async function () {
+it("dbbrain.v20191016.DescribeHealthScore", async function () {
     try {
-       const data = await client.ModifyDiagDBInstanceConf({})
+       const data = await client.DescribeHealthScore({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20191016.DescribeDiagDBInstances", async function () {
+    try {
+       const data = await client.DescribeDiagDBInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20191016.DescribeTopSpaceTables", async function () {
+    try {
+       const data = await client.DescribeTopSpaceTables({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -121,6 +151,16 @@ it("dbbrain.v20191016.ModifyDiagDBInstanceConf", async function () {
 it("dbbrain.v20191016.CreateSecurityAuditLogExportTask", async function () {
     try {
        const data = await client.CreateSecurityAuditLogExportTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20191016.ModifyDiagDBInstanceConf", async function () {
+    try {
+       const data = await client.ModifyDiagDBInstanceConf({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -141,6 +181,16 @@ it("dbbrain.v20191016.DeleteSecurityAuditLogExportTasks", async function () {
 it("dbbrain.v20191016.DescribeTopSpaceTableTimeSeries", async function () {
     try {
        const data = await client.DescribeTopSpaceTableTimeSeries({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20191016.AddUserContact", async function () {
+    try {
+       const data = await client.AddUserContact({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

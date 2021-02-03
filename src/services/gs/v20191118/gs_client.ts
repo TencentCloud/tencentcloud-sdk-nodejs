@@ -22,12 +22,14 @@ import {
   SaveGameArchiveResponse,
   SwitchGameArchiveRequest,
   TrylockWorkerResponse,
-  StopGameResponse,
+  DescribeInstancesCountResponse,
+  CreateSessionRequest,
   CreateSessionResponse,
+  DescribeInstancesCountRequest,
   SaveGameArchiveRequest,
   TrylockWorkerRequest,
   SwitchGameArchiveResponse,
-  CreateSessionRequest,
+  StopGameResponse,
 } from "./gs_models"
 
 /**
@@ -40,13 +42,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 保存游戏存档
+   * 获取实例总数和运行数
    */
-  async SaveGameArchive(
-    req: SaveGameArchiveRequest,
-    cb?: (error: string, rep: SaveGameArchiveResponse) => void
-  ): Promise<SaveGameArchiveResponse> {
-    return this.request("SaveGameArchive", req, cb)
+  async DescribeInstancesCount(
+    req: DescribeInstancesCountRequest,
+    cb?: (error: string, rep: DescribeInstancesCountResponse) => void
+  ): Promise<DescribeInstancesCountResponse> {
+    return this.request("DescribeInstancesCount", req, cb)
   }
 
   /**
@@ -60,16 +62,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建会话
-   */
-  async CreateSession(
-    req: CreateSessionRequest,
-    cb?: (error: string, rep: CreateSessionResponse) => void
-  ): Promise<CreateSessionResponse> {
-    return this.request("CreateSession", req, cb)
-  }
-
-  /**
    * 强制退出游戏
    */
   async StopGame(
@@ -80,6 +72,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 保存游戏存档
+   */
+  async SaveGameArchive(
+    req: SaveGameArchiveRequest,
+    cb?: (error: string, rep: SaveGameArchiveResponse) => void
+  ): Promise<SaveGameArchiveResponse> {
+    return this.request("SaveGameArchive", req, cb)
+  }
+
+  /**
    * 切换游戏存档
    */
   async SwitchGameArchive(
@@ -87,5 +89,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SwitchGameArchiveResponse) => void
   ): Promise<SwitchGameArchiveResponse> {
     return this.request("SwitchGameArchive", req, cb)
+  }
+
+  /**
+   * 创建会话
+   */
+  async CreateSession(
+    req: CreateSessionRequest,
+    cb?: (error: string, rep: CreateSessionResponse) => void
+  ): Promise<CreateSessionResponse> {
+    return this.request("CreateSession", req, cb)
   }
 }

@@ -28,6 +28,16 @@ it("ape.v20200513.DescribeAuthUsers", async function () {
     }
 })
 
+it("ape.v20200513.DescribeDownloadInfos", async function () {
+    try {
+       const data = await client.DescribeDownloadInfos({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ape.v20200513.BatchDescribeOrderCertificate", async function () {
     try {
        const data = await client.BatchDescribeOrderCertificate({})
@@ -41,6 +51,16 @@ it("ape.v20200513.BatchDescribeOrderCertificate", async function () {
 it("ape.v20200513.DescribeImages", async function () {
     try {
        const data = await client.DescribeImages({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ape.v20200513.CreateOrderAndDownloads", async function () {
+    try {
+       const data = await client.CreateOrderAndDownloads({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

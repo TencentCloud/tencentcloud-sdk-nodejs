@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { BatchDescribeOrderCertificateRequest, BatchDescribeOrderImageResponse, DescribeImagesResponse, DescribeAuthUsersRequest, BatchDescribeOrderCertificateResponse, DescribeImageResponse, DescribeAuthUsersResponse, DescribeImageRequest, CreateOrderAndPayResponse, DescribeImagesRequest, CreateOrderAndPayRequest, BatchDescribeOrderImageRequest } from "./ape_models";
+import { DescribeImagesRequest, BatchDescribeOrderCertificateRequest, BatchDescribeOrderImageResponse, DescribeImagesResponse, CreateOrderAndDownloadsRequest, BatchDescribeOrderCertificateResponse, DescribeImageResponse, DescribeAuthUsersResponse, DescribeImageRequest, DescribeDownloadInfosResponse, CreateOrderAndPayResponse, DescribeAuthUsersRequest, DescribeDownloadInfosRequest, CreateOrderAndPayRequest, CreateOrderAndDownloadsResponse, BatchDescribeOrderImageRequest } from "./ape_models";
 /**
  * ape client
  * @class
@@ -12,6 +12,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeAuthUsers(req: DescribeAuthUsersRequest, cb?: (error: string, rep: DescribeAuthUsersResponse) => void): Promise<DescribeAuthUsersResponse>;
     /**
+     * 获取用户图片下载记录
+     */
+    DescribeDownloadInfos(req: DescribeDownloadInfosRequest, cb?: (error: string, rep: DescribeDownloadInfosResponse) => void): Promise<DescribeDownloadInfosResponse>;
+    /**
      * 批量获取授权书下载地址
      */
     BatchDescribeOrderCertificate(req: BatchDescribeOrderCertificateRequest, cb?: (error: string, rep: BatchDescribeOrderCertificateResponse) => void): Promise<BatchDescribeOrderCertificateResponse>;
@@ -19,6 +23,10 @@ export declare class Client extends AbstractClient {
      * 根据关键字搜索图片列表
      */
     DescribeImages(req: DescribeImagesRequest, cb?: (error: string, rep: DescribeImagesResponse) => void): Promise<DescribeImagesResponse>;
+    /**
+     * 核销图片，获取原图URL地址
+     */
+    CreateOrderAndDownloads(req: CreateOrderAndDownloadsRequest, cb?: (error: string, rep: CreateOrderAndDownloadsResponse) => void): Promise<CreateOrderAndDownloadsResponse>;
     /**
      * 根据ID查询一张图片的详细信息
      */

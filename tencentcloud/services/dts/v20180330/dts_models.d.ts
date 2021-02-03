@@ -339,6 +339,11 @@ export interface SubscribeInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     AutoRenewFlag?: number;
+    /**
+      * 订阅实例版本；txdts-旧版数据订阅,kafka-kafka版本数据订阅
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubscribeVersion?: string;
 }
 /**
  * ModifySubscribeName请求参数结构体
@@ -945,6 +950,10 @@ export interface DescribeSubscribesRequest {
       * 标签过滤条件
       */
     TagFilters?: Array<TagFilter>;
+    /**
+      * 订阅实例版本;txdts-旧版数据订阅，kafka-kafka版本数据订阅
+      */
+    SubscribeVersion?: string;
 }
 /**
  * ResetSubscribe返回参数结构体

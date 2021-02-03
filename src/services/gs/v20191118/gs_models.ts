@@ -76,94 +76,19 @@ export interface TrylockWorkerResponse {
 }
 
 /**
- * StopGame返回参数结构体
+ * DescribeInstancesCount返回参数结构体
  */
-export interface StopGameResponse {
+export interface DescribeInstancesCountResponse {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 客户的实例总数
    */
-  RequestId?: string
-}
-
-/**
- * CreateSession返回参数结构体
- */
-export interface CreateSessionResponse {
-  /**
-   * 服务端session信息，返回给JSSDK
-   */
-  ServerSession?: string
+  Total: number
 
   /**
-   * 【多人游戏】角色编号；比如1、2、3、4
+   * 客户的实例运行数
    */
-  RoleNumber?: string
+  Running: number
 
-  /**
-   * 【多人云游】角色；Player表示玩家；Viewer表示观察者
-   */
-  Role?: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * SaveGameArchive请求参数结构体
- */
-export interface SaveGameArchiveRequest {
-  /**
-   * 游戏用户ID
-   */
-  UserId: string
-
-  /**
-   * 游戏ID
-   */
-  GameId: string
-}
-
-/**
- * TrylockWorker请求参数结构体
- */
-export interface TrylockWorkerRequest {
-  /**
-   * 游戏用户ID
-   */
-  UserId: string
-
-  /**
-   * 游戏ID
-   */
-  GameId: string
-
-  /**
-   * 游戏区域，ap-guangzhou、ap-shanghai、ap-beijing等，如果不为空，优先按照该区域进行调度分配机器
-   */
-  GameRegion?: string
-
-  /**
-   * 【废弃】资源池编号
-   */
-  SetNo?: number
-
-  /**
-   * 游戏用户IP，用于就近调度，例如125.127.178.228
-   */
-  UserIp?: string
-
-  /**
-   * 分组ID
-   */
-  GroupId?: string
-}
-
-/**
- * SwitchGameArchive返回参数结构体
- */
-export interface SwitchGameArchiveResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -258,4 +183,114 @@ export interface CreateSessionRequest {
    * 游戏相关参数
    */
   GameContext?: string
+}
+
+/**
+ * CreateSession返回参数结构体
+ */
+export interface CreateSessionResponse {
+  /**
+   * 服务端session信息，返回给JSSDK
+   */
+  ServerSession?: string
+
+  /**
+   * 【多人游戏】角色编号；比如1、2、3、4
+   */
+  RoleNumber?: string
+
+  /**
+   * 【多人云游】角色；Player表示玩家；Viewer表示观察者
+   */
+  Role?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeInstancesCount请求参数结构体
+ */
+export interface DescribeInstancesCountRequest {
+  /**
+   * 游戏ID
+   */
+  GameId?: string
+
+  /**
+   * 实例分组ID
+   */
+  GroupId?: string
+}
+
+/**
+ * SaveGameArchive请求参数结构体
+ */
+export interface SaveGameArchiveRequest {
+  /**
+   * 游戏用户ID
+   */
+  UserId: string
+
+  /**
+   * 游戏ID
+   */
+  GameId: string
+}
+
+/**
+ * TrylockWorker请求参数结构体
+ */
+export interface TrylockWorkerRequest {
+  /**
+   * 游戏用户ID
+   */
+  UserId: string
+
+  /**
+   * 游戏ID
+   */
+  GameId: string
+
+  /**
+   * 游戏区域，ap-guangzhou、ap-shanghai、ap-beijing等，如果不为空，优先按照该区域进行调度分配机器
+   */
+  GameRegion?: string
+
+  /**
+   * 【废弃】资源池编号
+   */
+  SetNo?: number
+
+  /**
+   * 游戏用户IP，用于就近调度，例如125.127.178.228
+   */
+  UserIp?: string
+
+  /**
+   * 分组ID
+   */
+  GroupId?: string
+}
+
+/**
+ * SwitchGameArchive返回参数结构体
+ */
+export interface SwitchGameArchiveResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * StopGame返回参数结构体
+ */
+export interface StopGameResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }

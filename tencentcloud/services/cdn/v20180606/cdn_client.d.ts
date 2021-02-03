@@ -68,7 +68,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeCdnData(req: DescribeCdnDataRequest, cb?: (error: string, rep: DescribeCdnDataResponse) => void): Promise<DescribeCdnDataResponse>;
     /**
-     * DisableCaches 用于禁用 CDN 上指定 URL 的访问，禁用完成后，全网访问会直接返回 403。（接口尚在内测中，暂未全量开放使用）
+     * DisableCaches 用于禁用 CDN 上指定 URL 的访问，禁用完成后，中国境内访问会直接返回 403。（接口尚在内测中，暂未全量开放使用）
      */
     DisableCaches(req: DisableCachesRequest, cb?: (error: string, rep: DisableCachesResponse) => void): Promise<DisableCachesResponse>;
     /**

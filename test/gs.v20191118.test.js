@@ -18,9 +18,9 @@ const client = new tencentcloud.gs.v20191118.Client({
 })
 describe("gs.v20191118.test.js", function () {
 
-it("gs.v20191118.SaveGameArchive", async function () {
+it("gs.v20191118.DescribeInstancesCount", async function () {
     try {
-       const data = await client.SaveGameArchive({})
+       const data = await client.DescribeInstancesCount({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -38,16 +38,6 @@ it("gs.v20191118.TrylockWorker", async function () {
     }
 })
 
-it("gs.v20191118.CreateSession", async function () {
-    try {
-       const data = await client.CreateSession({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("gs.v20191118.StopGame", async function () {
     try {
        const data = await client.StopGame({})
@@ -58,9 +48,29 @@ it("gs.v20191118.StopGame", async function () {
     }
 })
 
+it("gs.v20191118.SaveGameArchive", async function () {
+    try {
+       const data = await client.SaveGameArchive({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gs.v20191118.SwitchGameArchive", async function () {
     try {
        const data = await client.SwitchGameArchive({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gs.v20191118.CreateSession", async function () {
+    try {
+       const data = await client.CreateSession({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

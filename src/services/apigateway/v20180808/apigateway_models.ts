@@ -587,6 +587,18 @@ export interface Plugin {
    * 插件修改时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
    */
   ModifiedTime: string
+
+  /**
+      * 插件绑定的API总数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AttachedApiTotalCount: number
+
+  /**
+      * 插件绑定的API信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AttachedApis: Array<AttachedApiInfo>
 }
 
 /**
@@ -3811,6 +3823,53 @@ export interface CreateIPStrategyResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 插件绑定的API信息
+ */
+export interface AttachedApiInfo {
+  /**
+   * API所在服务ID。
+   */
+  ServiceId: string
+
+  /**
+   * API所在服务名称。
+   */
+  ServiceName: string
+
+  /**
+      * API所在服务描述信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ServiceDesc: string
+
+  /**
+   * API ID。
+   */
+  ApiId: string
+
+  /**
+   * API名称。
+   */
+  ApiName: string
+
+  /**
+      * API描述。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApiDesc: string
+
+  /**
+   * 插件绑定API的环境。
+   */
+  Environment: string
+
+  /**
+   * 插件和API绑定时间。
+   */
+  AttachedTime: string
 }
 
 /**

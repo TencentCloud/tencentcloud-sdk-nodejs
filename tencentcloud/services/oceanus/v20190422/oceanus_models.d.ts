@@ -158,6 +158,10 @@ export interface CreateJobConfigRequest {
       * 作业使用的 COS 存储桶名
       */
     COSBucket?: string;
+    /**
+      * 是否采集作业日志
+      */
+    LogCollect?: boolean;
 }
 /**
  * CreateResourceConfig请求参数结构体

@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAuthUsers", req, cb);
     }
     /**
+     * 获取用户图片下载记录
+     */
+    async DescribeDownloadInfos(req, cb) {
+        return this.request("DescribeDownloadInfos", req, cb);
+    }
+    /**
      * 批量获取授权书下载地址
      */
     async BatchDescribeOrderCertificate(req, cb) {
@@ -44,6 +50,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeImages(req, cb) {
         return this.request("DescribeImages", req, cb);
+    }
+    /**
+     * 核销图片，获取原图URL地址
+     */
+    async CreateOrderAndDownloads(req, cb) {
+        return this.request("CreateOrderAndDownloads", req, cb);
     }
     /**
      * 根据ID查询一张图片的详细信息

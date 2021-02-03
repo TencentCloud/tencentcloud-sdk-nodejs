@@ -162,6 +162,7 @@ import {
   BindSubDomainRequest,
   IPStrategyApiStatus,
   CreateIPStrategyResponse,
+  AttachedApiInfo,
   BindIPStrategyRequest,
   MicroServiceReq,
   ErrorCodes,

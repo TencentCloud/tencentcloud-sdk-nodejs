@@ -1,4 +1,33 @@
 /**
+ * DescribeImages请求参数结构体
+ */
+export interface DescribeImagesRequest {
+    /**
+      * 页偏移量
+      */
+    Offset: number;
+    /**
+      * 页大小
+      */
+    Limit: number;
+    /**
+      * 搜索关键字
+      */
+    Keyword: string;
+    /**
+      * 构图方式，可选以下值：horizontal、vertical、square，分别代表以下含义：横图、竖图、方图
+      */
+    Orientation?: string;
+    /**
+      * 图片类型，可选以下值：照片、插画
+      */
+    ImageSenseType?: string;
+    /**
+      * 分层图库id数组，可选以下数值：1(基础)，2(精选)，3(高级)
+      */
+    LayeredGalleryIds?: Array<number>;
+}
+/**
  * BatchDescribeOrderCertificate请求参数结构体
  */
 export interface BatchDescribeOrderCertificateRequest {
@@ -52,6 +81,14 @@ export interface ImageItem {
       * 图片关键词
       */
     Keywords: string;
+    /**
+      * 宽
+      */
+    Width: number;
+    /**
+      * 高
+      */
+    Height: number;
 }
 /**
  * DescribeImages返回参数结构体
@@ -60,40 +97,53 @@ export interface DescribeImagesResponse {
     /**
       * 页偏移量
       */
-    Offset?: number;
+    Offset: number;
     /**
       * 页大小
       */
-    Limit?: number;
+    Limit: number;
     /**
       * 总条数
       */
-    Total?: number;
+    Total: number;
     /**
       * 是否有下一页
       */
-    HaveMore?: boolean;
+    HaveMore: boolean;
     /**
       * 图片信息数组
       */
-    Items?: Array<ImageItem>;
+    Items: Array<ImageItem>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
 }
 /**
- * DescribeAuthUsers请求参数结构体
+ * 图片基础信息
  */
-export interface DescribeAuthUsersRequest {
+export interface ImageInfo {
     /**
-      * 分页大小
+      * 图片Id
       */
-    Limit: number;
+    ImageId: number;
     /**
-      * 页偏移量
+      * 授权场景Id
       */
-    Offset: number;
+    LicenseScopeId?: number;
+    /**
+      * 尺寸名称Id
+      */
+    DimensionsNameId?: number;
+}
+/**
+ * CreateOrderAndDownloads请求参数结构体
+ */
+export interface CreateOrderAndDownloadsRequest {
+    /**
+      * ImageId必填，单张购买，所有必填，会员身份可以省略部分参数
+      */
+    ImageInfos: Array<ImageInfo>;
 }
 /**
  * 图片售卖组合信息
@@ -131,6 +181,18 @@ export interface ImageMarshal {
       * 是否支持VIP购买
       */
     IsVip: boolean;
+    /**
+      * 授权范围id
+      */
+    LicenseScopeId: number;
+    /**
+      * 尺寸
+      */
+    DimensionsName: string;
+    /**
+      * 尺寸id
+      */
+    DimensionsNameId: number;
 }
 /**
  * BatchDescribeOrderCertificate返回参数结构体
@@ -152,31 +214,59 @@ export interface DescribeImageResponse {
     /**
       * 图片ID
       */
-    ImageId?: number;
+    ImageId: number;
     /**
       * 图片标题
       */
-    Title?: string;
+    Title: string;
     /**
       * 图片描述
       */
-    Description?: string;
+    Description: string;
     /**
       * 图片预览链接
       */
-    PreviewUrl?: string;
+    PreviewUrl: string;
     /**
       * 图片缩略图
       */
-    ThumbUrl?: string;
+    ThumbUrl: string;
     /**
       * 图片供应商
       */
-    Vendor?: string;
+    Vendor: string;
     /**
       * 图片售卖组合信息
       */
-    Marshals?: Array<ImageMarshal>;
+    Marshals: Array<ImageMarshal>;
+    /**
+      * 宽
+      */
+    Width: number;
+    /**
+      * 高
+      */
+    Height: number;
+    /**
+      * 图片格式 jpg/eps/psd/...
+      */
+    ImageFormat: string;
+    /**
+      * 图片类型 摄影图片、插画、漫画、图表、矢量、psd、全景、gif、模板
+      */
+    ImageSenseType: string;
+    /**
+      * 关键词，多关键词用空格分隔
+      */
+    Keywords: string;
+    /**
+      * 分层图库id
+      */
+    LayeredGalleryId: number;
+    /**
+      * 构图方式：horizontal:横图、vertical:竖图、square:方图
+      */
+    Orientation: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -203,6 +293,47 @@ export interface DescribeAuthUsersResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 图片下载信息
+ */
+export interface DownloadInfo {
+    /**
+      * 图片基础信息
+      */
+    ImageInfo: ImageInfo;
+    /**
+      * 图片原图URL
+      */
+    ImageUrl: string;
+    /**
+      * 图片缩略图URL
+      */
+    ImageThumbUrl: string;
+    /**
+      * 订单Id
+      */
+    OrderId: string;
+    /**
+      * 订单创建时间
+      */
+    OrderCreateTime: string;
+    /**
+      * 下载Id
+      */
+    DownloadId: string;
+    /**
+      * 下载时间
+      */
+    DownloadTime: string;
+    /**
+      * 图片购买类型，单张/会员
+      */
+    ConsumeType: number;
+    /**
+      * 是否首次下载
+      */
+    FirstDownload: boolean;
 }
 /**
  * 授权人信息
@@ -239,6 +370,24 @@ export interface DescribeImageRequest {
     ImageId: number;
 }
 /**
+ * DescribeDownloadInfos返回参数结构体
+ */
+export interface DescribeDownloadInfosResponse {
+    /**
+      * 核销下载记录
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DownloadInfos: Array<DownloadInfo>;
+    /**
+      * 总记录数量
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateOrderAndPay返回参数结构体
  */
 export interface CreateOrderAndPayResponse {
@@ -252,33 +401,42 @@ export interface CreateOrderAndPayResponse {
     RequestId?: string;
 }
 /**
- * DescribeImages请求参数结构体
+ * DescribeAuthUsers请求参数结构体
  */
-export interface DescribeImagesRequest {
+export interface DescribeAuthUsersRequest {
+    /**
+      * 分页大小
+      */
+    Limit: number;
     /**
       * 页偏移量
       */
     Offset: number;
+}
+/**
+ * DescribeDownloadInfos请求参数结构体
+ */
+export interface DescribeDownloadInfosRequest {
     /**
-      * 页大小
+      * 默认10
       */
-    Limit: number;
+    Limit?: number;
     /**
-      * 搜索关键字
+      * 默认0
       */
-    Keyword: string;
+    Offset?: number;
     /**
-      * 构图方式，可选以下值：horizontal、vertical、square，分别代表以下含义：横图、竖图、方图
+      * 开始时间晚于指定时间
       */
-    Orientation?: string;
+    BeginTime?: string;
     /**
-      * 图片类型，可选以下值：照片、插画
+      * 结束时间早于指定时间
       */
-    ImageSenseType?: string;
+    EndTime?: string;
     /**
-      * 分层图库id数组，可选以下数值：1(基础)，2(精选)，3(高级)
+      * 无效值，过滤结果为空
       */
-    LayeredGalleryIds?: Array<number>;
+    ImageIds?: Array<number>;
 }
 /**
  * CreateOrderAndPay请求参数结构体
@@ -296,6 +454,24 @@ export interface CreateOrderAndPayRequest {
       * 售卖组合id
       */
     MarshalId: number;
+}
+/**
+ * CreateOrderAndDownloads返回参数结构体
+ */
+export interface CreateOrderAndDownloadsResponse {
+    /**
+      * 成功核销后可以获取图片基本信息和原图地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DownloadInfos: Array<DownloadInfo>;
+    /**
+      * 可下载图片数量
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * BatchDescribeOrderImage请求参数结构体

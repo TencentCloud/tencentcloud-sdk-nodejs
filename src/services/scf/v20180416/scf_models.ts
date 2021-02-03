@@ -463,8 +463,10 @@ export interface VersionProvisionedConcurrencyInfo {
  */
 export interface GetFunctionLogsRequest {
   /**
-   * 函数的名称
-   */
+      * 函数的名称。
+- 为保证[获取函数运行日志](https://cloud.tencent.com/document/product/583/18583)接口`GetFunctionLogs`兼容性，输入参数`FunctionName`仍为非必填项，但建议填写该参数，否则可能导致日志获取失败。
+- 函数关联日志服务后，建议使用[日志服务](https://cloud.tencent.com/document/product/614/16875)相关接口以获得最佳日志检索体验。
+      */
   FunctionName?: string
 
   /**
@@ -2922,17 +2924,17 @@ export interface GetFunctionLogsResponse {
   /**
    * 函数日志的总数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 函数日志信息
    */
-  Data?: Array<FunctionLog>
+  Data: Array<FunctionLog>
 
   /**
    * 该字段已下线
    */
-  SearchContext?: LogSearchContext
+  SearchContext: LogSearchContext
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

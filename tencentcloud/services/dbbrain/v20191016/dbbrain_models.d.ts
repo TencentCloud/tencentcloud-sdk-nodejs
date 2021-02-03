@@ -1,4 +1,25 @@
 /**
+ * 库表空间时序数据
+ */
+export interface TableSpaceTimeSeries {
+    /**
+      * 表名。
+      */
+    TableName: string;
+    /**
+      * 库名。
+      */
+    TableSchema: string;
+    /**
+      * 库表的存储引擎。
+      */
+    Engine: string;
+    /**
+      * 单位时间间隔内的空间指标数据。
+      */
+    SeriesData: MonitorFloatMetricSeriesData;
+}
+/**
  * DescribeSlowLogTimeSeriesStats请求参数结构体
  */
 export interface DescribeSlowLogTimeSeriesStatsRequest {
@@ -20,6 +41,27 @@ export interface DescribeSlowLogTimeSeriesStatsRequest {
     Product?: string;
 }
 /**
+ * 获取健康得分返回的详情。
+ */
+export interface HealthScoreInfo {
+    /**
+      * 异常详情。
+      */
+    IssueTypes: Array<IssueTypeInfo>;
+    /**
+      * 异常事件总数。
+      */
+    EventsTotalCount: number;
+    /**
+      * 健康得分。
+      */
+    HealthScore: number;
+    /**
+      * 健康等级, 如："HEALTH", "SUB_HEALTH", "RISK", "HIGH_RISK"。
+      */
+    HealthLevel: string;
+}
+/**
  * DescribeTopSpaceTableTimeSeries返回参数结构体
  */
 export interface DescribeTopSpaceTableTimeSeriesResponse {
@@ -31,6 +73,31 @@ export interface DescribeTopSpaceTableTimeSeriesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * CreateSchedulerMailProfile请求参数结构体
+ */
+export interface CreateSchedulerMailProfileRequest {
+    /**
+      * 取值范围1-7，分别代表周一至周日。
+      */
+    WeekConfiguration: Array<number>;
+    /**
+      * 邮件配置内容。
+      */
+    ProfileInfo: ProfileInfo;
+    /**
+      * 配置名称，需要保持唯一性，定期生成邮件配置命名格式："scheduler_" + {instanceId}，如"schduler_cdb-test"。
+      */
+    ProfileName: string;
+    /**
+      * 配置订阅的实例ID。
+      */
+    BindInstanceId: string;
+    /**
+      * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
+      */
+    Product: string;
 }
 /**
  * 联系人contact描述。
@@ -50,6 +117,19 @@ export interface ContactItem {
     Mail: string;
 }
 /**
+ * DescribeHealthScore返回参数结构体
+ */
+export interface DescribeHealthScoreResponse {
+    /**
+      * 健康得分以及异常扣分项。
+      */
+    Data: HealthScoreInfo;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeDBDiagHistory返回参数结构体
  */
 export interface DescribeDBDiagHistoryResponse {
@@ -61,6 +141,39 @@ export interface DescribeDBDiagHistoryResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeDiagDBInstances请求参数结构体
+ */
+export interface DescribeDiagDBInstancesRequest {
+    /**
+      * 是否是DBbrain支持的实例，固定传 true。
+      */
+    IsSupported: boolean;
+    /**
+      * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
+      */
+    Product: string;
+    /**
+      * 分页参数，偏移量。
+      */
+    Offset: number;
+    /**
+      * 分页参数，分页值。
+      */
+    Limit: number;
+    /**
+      * 根据实例名称条件查询。
+      */
+    InstanceNames?: Array<string>;
+    /**
+      * 根据实例ID条件查询。
+      */
+    InstanceIds?: Array<string>;
+    /**
+      * 根据地域条件查询。
+      */
+    Regions?: Array<string>;
 }
 /**
  * DescribeDBSpaceStatus请求参数结构体
@@ -243,25 +356,21 @@ export interface DescribeSecurityAuditLogExportTasksRequest {
     Limit?: number;
 }
 /**
- * 库表空间时序数据
+ * AddUserContact请求参数结构体
  */
-export interface TableSpaceTimeSeries {
+export interface AddUserContactRequest {
     /**
-      * 表名。
+      * 联系人姓名，大小写字母+数字+下划线，最小 2 位最大 60 位的长度， 不能以"_"开头，且联系人名保持唯一。
       */
-    TableName: string;
+    Name: string;
     /**
-      * 库名。
+      * 邮箱地址，大小写字母、数字及下划线组成， 不能以"_"开头。
       */
-    TableSchema: string;
+    ContactInfo: string;
     /**
-      * 库表的存储引擎。
+      * 服务产品类型，固定值："mysql"。
       */
-    Engine: string;
-    /**
-      * 单位时间间隔内的空间指标数据。
-      */
-    SeriesData: MonitorFloatMetricSeriesData;
+    Product: string;
 }
 /**
  * DescribeAllUserGroup返回参数结构体
@@ -493,6 +602,123 @@ export interface GroupItem {
     MemberCount: number;
 }
 /**
+ * 查询实例列表，返回实例的相关信息的对象。
+ */
+export interface InstanceInfo {
+    /**
+      * 实例ID。
+      */
+    InstanceId: string;
+    /**
+      * 实例名称。
+      */
+    InstanceName: string;
+    /**
+      * 实例所属地域。
+      */
+    Region: string;
+    /**
+      * 健康得分。
+      */
+    HealthScore: number;
+    /**
+      * 所属产品。
+      */
+    Product: string;
+    /**
+      * 异常事件数量。
+      */
+    EventCount: number;
+    /**
+      * 实例类型：1:MASTER；2:DR，3：RO，4:SDR。
+      */
+    InstanceType: number;
+    /**
+      * 核心数。
+      */
+    Cpu: number;
+    /**
+      * 内存，单位MB。
+      */
+    Memory: number;
+    /**
+      * 硬盘存储，单位GB。
+      */
+    Volume: number;
+    /**
+      * 数据库版本。
+      */
+    EngineVersion: string;
+    /**
+      * 内网地址。
+      */
+    Vip: string;
+    /**
+      * 内网端口。
+      */
+    Vport: number;
+    /**
+      * 接入来源。
+      */
+    Source: string;
+    /**
+      * 分组ID。
+      */
+    GroupId: string;
+    /**
+      * 分组组名。
+      */
+    GroupName: string;
+    /**
+      * 实例状态：0：发货中；1：运行正常；4：销毁中；5：隔离中。
+      */
+    Status: number;
+    /**
+      * 子网统一ID。
+      */
+    UniqSubnetId: string;
+    /**
+      * cdb类型。
+      */
+    DeployMode: string;
+    /**
+      * cdb实例初始化标志：0：未初始化；1：已初始化。
+      */
+    InitFlag: number;
+    /**
+      * 任务状态。
+      */
+    TaskStatus: number;
+    /**
+      * 私有网络统一ID。
+      */
+    UniqVpcId: string;
+    /**
+      * 实例巡检/概览的状态。
+      */
+    InstanceConf: InstanceConfs;
+    /**
+      * 资源到期时间。
+      */
+    DeadlineTime: string;
+    /**
+      * 是否是DBbrain支持的实例。
+      */
+    IsSupported: boolean;
+    /**
+      * 实例安全审计日志开启状态：ON： 安全审计开启；OFF： 未开启安全审计。
+      */
+    SecAuditStatus: string;
+    /**
+      * 实例审计日志开启状态，ALL_AUDIT： 开启全审计；RULE_AUDIT： 开启规则审计；UNBOUND： 未开启审计。
+      */
+    AuditPolicyStatus: string;
+    /**
+      * 实例审计日志运行状态：normal： 运行中； paused： 欠费暂停。
+      */
+    AuditRunningStatus: string;
+}
+/**
  * DescribeTopSpaceTableTimeSeries请求参数结构体
  */
 export interface DescribeTopSpaceTableTimeSeriesRequest {
@@ -520,6 +746,19 @@ export interface DescribeTopSpaceTableTimeSeriesRequest {
       * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
       */
     Product?: string;
+}
+/**
+ * AddUserContact返回参数结构体
+ */
+export interface AddUserContactResponse {
+    /**
+      * 添加成功的联系人id。
+      */
+    Id: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateDBDiagReportTask返回参数结构体
@@ -623,55 +862,13 @@ export interface DeleteSecurityAuditLogExportTasksRequest {
     Product: string;
 }
 /**
- * 安全审计日志导出任务信息
+ * CreateSchedulerMailProfile返回参数结构体
  */
-export interface SecLogExportTaskInfo {
+export interface CreateSchedulerMailProfileResponse {
     /**
-      * 异步任务Id。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    AsyncRequestId: number;
-    /**
-      * 任务开始时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    StartTime: string;
-    /**
-      * 任务结束时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    EndTime: string;
-    /**
-      * 任务创建时间。
-      */
-    CreateTime: string;
-    /**
-      * 任务状态。
-      */
-    Status: string;
-    /**
-      * 任务执行进度。
-      */
-    Progress: number;
-    /**
-      * 导出日志开始时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    LogStartTime: string;
-    /**
-      * 导出日志结束时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    LogEndTime: string;
-    /**
-      * 日志文件总大小，单位KB。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TotalSize: number;
-    /**
-      * 风险等级列表。0 无风险；1 低风险；2 中风险；3 高风险。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DangerLevels: Array<number>;
+    RequestId?: string;
 }
 /**
  * 慢日志TopSql
@@ -776,6 +973,57 @@ export interface DescribeSlowLogTopSqlsResponse {
     RequestId?: string;
 }
 /**
+ * 安全审计日志导出任务信息
+ */
+export interface SecLogExportTaskInfo {
+    /**
+      * 异步任务Id。
+      */
+    AsyncRequestId: number;
+    /**
+      * 任务开始时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StartTime: string;
+    /**
+      * 任务结束时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EndTime: string;
+    /**
+      * 任务创建时间。
+      */
+    CreateTime: string;
+    /**
+      * 任务状态。
+      */
+    Status: string;
+    /**
+      * 任务执行进度。
+      */
+    Progress: number;
+    /**
+      * 导出日志开始时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LogStartTime: string;
+    /**
+      * 导出日志结束时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LogEndTime: string;
+    /**
+      * 日志文件总大小，单位KB。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalSize: number;
+    /**
+      * 风险等级列表。0 无风险；1 低风险；2 中风险；3 高风险。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DangerLevels: Array<number>;
+}
+/**
  * CreateMailProfile请求参数结构体
  */
 export interface CreateMailProfileRequest {
@@ -800,7 +1048,7 @@ export interface CreateMailProfileRequest {
       */
     Product: string;
     /**
-      * 配置绑定的实例ID，当配置级别为"Instance"时需要传入。
+      * 配置绑定的实例ID，当配置级别为"Instance"时需要传入，只能为一个实例。
       */
     BindInstanceIds?: Array<string>;
 }
@@ -826,7 +1074,7 @@ export interface MailConfiguration {
       */
     SendMail: number;
     /**
-      * 地域配置, 如["ap-guangzhou", "ap-shanghai"]。
+      * 地域配置, 如["ap-guangzhou", "ap-shanghai"]。巡检的邮件发送模版，配置需要发送巡检邮件的地域；订阅的邮件发送模版，配置当前订阅实例的所属地域。
       */
     Region: Array<string>;
     /**
@@ -884,6 +1132,25 @@ export interface DescribeSlowLogTopSqlsRequest {
     Product?: string;
 }
 /**
+ * DescribeMailProfile返回参数结构体
+ */
+export interface DescribeMailProfileResponse {
+    /**
+      * 邮件配置详情。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProfileList: Array<UserProfile>;
+    /**
+      * 邮件模版总数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 库表空间统计数据。
  */
 export interface TableSpaceData {
@@ -929,17 +1196,100 @@ export interface TableSpaceData {
     PhysicalFileSize: number;
 }
 /**
- * CreateSecurityAuditLogExportTask返回参数结构体
+ * DescribeSecurityAuditLogDownloadUrls返回参数结构体
  */
-export interface CreateSecurityAuditLogExportTaskResponse {
+export interface DescribeSecurityAuditLogDownloadUrlsResponse {
     /**
-      * 日志导出任务Id。
+      * 导出结果的COS链接列表。当结果集很大时，可能会切分为多个url下载。
       */
-    AsyncRequestId: number;
+    Urls: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 异常事件信息。
+ */
+export interface EventInfo {
+    /**
+      * 事件 ID 。
+      */
+    EventId: number;
+    /**
+      * 诊断类型。
+      */
+    DiagType: string;
+    /**
+      * 开始时间。
+      */
+    StartTime: string;
+    /**
+      * 结束时间。
+      */
+    EndTime: string;
+    /**
+      * 概要。
+      */
+    Outline: string;
+    /**
+      * 严重程度。严重程度分为5级，按影响程度从高至低分别为：1：致命，2：严重，3：告警，4：提示，5：健康。
+      */
+    Severity: number;
+    /**
+      * 扣分。
+      */
+    ScoreLost: number;
+    /**
+      * 保留字段。
+      */
+    Metric: string;
+    /**
+      * 告警数目。
+      */
+    Count: number;
+}
+/**
+ * DescribeMailProfile请求参数结构体
+ */
+export interface DescribeMailProfileRequest {
+    /**
+      * 配置类型，支持值包括："dbScan_mail_configuration" - 数据库巡检邮件配置，"scheduler_mail_configuration" - 定期生成邮件配置。
+      */
+    ProfileType: string;
+    /**
+      * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
+      */
+    Product: string;
+    /**
+      * 分页偏移量。
+      */
+    Offset: number;
+    /**
+      * 分页单位，最大支持50。
+      */
+    Limit: number;
+    /**
+      * 根据邮件配置名称查询，定期发送的邮件配置名称遵循："scheduler_"+{instanceId}的规则。
+      */
+    ProfileName?: string;
+}
+/**
+ * DescribeHealthScore请求参数结构体
+ */
+export interface DescribeHealthScoreRequest {
+    /**
+      * 需要获取健康得分的实例ID。
+      */
+    InstanceId: string;
+    /**
+      * 获取健康得分的时间。
+      */
+    Time: string;
+    /**
+      * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
+      */
+    Product: string;
 }
 /**
  * DeleteSecurityAuditLogExportTasks返回参数结构体
@@ -951,6 +1301,23 @@ export interface DeleteSecurityAuditLogExportTasksResponse {
     RequestId?: string;
 }
 /**
+ * 指标信息。
+ */
+export interface IssueTypeInfo {
+    /**
+      * 指标分类：AVAILABILITY：可用性，MAINTAINABILITY：可维护性，PERFORMANCE，性能，RELIABILITY可靠性。
+      */
+    IssueType: string;
+    /**
+      * 异常事件。
+      */
+    Events: Array<EventInfo>;
+    /**
+      * 异常事件总数。
+      */
+    TotalCount: number;
+}
+/**
  * 实例配置。
  */
 export interface InstanceConfs {
@@ -958,6 +1325,31 @@ export interface InstanceConfs {
       * 数据库巡检开关, Yes/No。
       */
     DailyInspection?: string;
+    /**
+      * 实例概览开关，Yes/No。
+      */
+    OverviewDisplay?: string;
+}
+/**
+ * DescribeDiagDBInstances返回参数结构体
+ */
+export interface DescribeDiagDBInstancesResponse {
+    /**
+      * 实例总数。
+      */
+    TotalCount: number;
+    /**
+      * 全实例巡检状态：0：开启全实例巡检；1：未开启全实例巡检。
+      */
+    DbScanStatus: number;
+    /**
+      * 实例相关信息。
+      */
+    Items: Array<InstanceInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 用户配置的信息
@@ -1024,17 +1416,46 @@ export interface DescribeSecurityAuditLogExportTasksResponse {
     RequestId?: string;
 }
 /**
- * DescribeSecurityAuditLogDownloadUrls返回参数结构体
+ * CreateSecurityAuditLogExportTask返回参数结构体
  */
-export interface DescribeSecurityAuditLogDownloadUrlsResponse {
+export interface CreateSecurityAuditLogExportTaskResponse {
     /**
-      * 导出结果的COS链接列表。当结果集很大时，可能会切分为多个url下载。
+      * 日志导出任务Id。
       */
-    Urls: Array<string>;
+    AsyncRequestId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 用户配置的相关信息，包括邮件配置。
+ */
+export interface UserProfile {
+    /**
+      * 配置的id。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProfileId: string;
+    /**
+      * 配置类型。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProfileType: string;
+    /**
+      * 配置级别，"User"或"Instance"。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProfileLevel: string;
+    /**
+      * 配置名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProfileName: string;
+    /**
+      * 配置详情。
+      */
+    ProfileInfo: ProfileInfo;
 }
 /**
  * DescribeTopSpaceTables返回参数结构体

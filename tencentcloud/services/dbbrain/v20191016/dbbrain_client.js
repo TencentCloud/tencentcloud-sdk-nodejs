@@ -46,10 +46,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSecurityAuditLogDownloadUrls", req, cb);
     }
     /**
-     * 获取实例异常诊断事件的详情信息。
+     * 获取发送邮件的配置， 包括数据库巡检的邮件配置以及定期生成健康报告的邮件发送配置。Region统一选择广州。
      */
-    async DescribeDBDiagEvent(req, cb) {
-        return this.request("DescribeDBDiagEvent", req, cb);
+    async DescribeMailProfile(req, cb) {
+        return this.request("DescribeMailProfile", req, cb);
+    }
+    /**
+     * 该接口用于创建定期生成健康报告并邮件发送的配置，将健康报告的定期生成时间作为参数传入（周一至周日），用于设置健康报告的定期生成时间，同时保存相应的定期邮件发送的配置。
+     */
+    async CreateSchedulerMailProfile(req, cb) {
+        return this.request("CreateSchedulerMailProfile", req, cb);
     }
     /**
      * 获取实例诊断事件的列表。
@@ -64,10 +70,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBSpaceStatus", req, cb);
     }
     /**
-     * 获取实例Top表的实时空间统计信息，默认返回按大小排序。
+     * 获取实例异常诊断事件的详情信息。
      */
-    async DescribeTopSpaceTables(req, cb) {
-        return this.request("DescribeTopSpaceTables", req, cb);
+    async DescribeDBDiagEvent(req, cb) {
+        return this.request("DescribeDBDiagEvent", req, cb);
     }
     /**
      * 创建健康报告，并可以选择是否发送邮件。
@@ -76,22 +82,40 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDBDiagReportTask", req, cb);
     }
     /**
-     * 创建邮件配置。其中入参ProfileType表示所创建配置的类型，ProfileType 取值包括：dbScan_mail_configuration（数据库巡检邮件配置）、scheduler_mail_configuration（定期生成邮件配置）。
+     * 创建邮件配置。其中入参ProfileType表示所创建配置的类型，ProfileType 取值包括：dbScan_mail_configuration（数据库巡检邮件配置）、scheduler_mail_configuration（定期生成健康报告的邮件发送配置）。Region统一选择广州，和实例所属地域无关。
      */
     async CreateMailProfile(req, cb) {
         return this.request("CreateMailProfile", req, cb);
     }
     /**
-     * 修改实例巡检开关。
+     * 根据实例ID获取指定时间段（30分钟）的健康得分，以及异常扣分项。
      */
-    async ModifyDiagDBInstanceConf(req, cb) {
-        return this.request("ModifyDiagDBInstanceConf", req, cb);
+    async DescribeHealthScore(req, cb) {
+        return this.request("DescribeHealthScore", req, cb);
+    }
+    /**
+     * 获取实例信息列表。Region统一选择广州。
+     */
+    async DescribeDiagDBInstances(req, cb) {
+        return this.request("DescribeDiagDBInstances", req, cb);
+    }
+    /**
+     * 获取实例Top表的实时空间统计信息，默认返回按大小排序。
+     */
+    async DescribeTopSpaceTables(req, cb) {
+        return this.request("DescribeTopSpaceTables", req, cb);
     }
     /**
      * 创建安全审计日志导出任务。
      */
     async CreateSecurityAuditLogExportTask(req, cb) {
         return this.request("CreateSecurityAuditLogExportTask", req, cb);
+    }
+    /**
+     * 修改实例巡检开关。
+     */
+    async ModifyDiagDBInstanceConf(req, cb) {
+        return this.request("ModifyDiagDBInstanceConf", req, cb);
     }
     /**
      * 删除安全审计日志导出任务。
@@ -104,6 +128,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeTopSpaceTableTimeSeries(req, cb) {
         return this.request("DescribeTopSpaceTableTimeSeries", req, cb);
+    }
+    /**
+     * 添加邮件接收联系人的姓名， 邮件地址，返回值为添加成功的联系人id。Region统一选择广州。
+     */
+    async AddUserContact(req, cb) {
+        return this.request("AddUserContact", req, cb);
     }
     /**
      * 获取邮件发送联系组的相关信息。

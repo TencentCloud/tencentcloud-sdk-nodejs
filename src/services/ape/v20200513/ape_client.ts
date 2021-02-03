@@ -18,20 +18,26 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeImagesRequest,
   BatchDescribeOrderCertificateRequest,
   BatchDescribeOrderImageResponse,
   ImageItem,
   DescribeImagesResponse,
-  DescribeAuthUsersRequest,
+  ImageInfo,
+  CreateOrderAndDownloadsRequest,
   ImageMarshal,
   BatchDescribeOrderCertificateResponse,
   DescribeImageResponse,
   DescribeAuthUsersResponse,
+  DownloadInfo,
   AuthInfo,
   DescribeImageRequest,
+  DescribeDownloadInfosResponse,
   CreateOrderAndPayResponse,
-  DescribeImagesRequest,
+  DescribeAuthUsersRequest,
+  DescribeDownloadInfosRequest,
   CreateOrderAndPayRequest,
+  CreateOrderAndDownloadsResponse,
   BatchDescribeOrderImageRequest,
 } from "./ape_models"
 
@@ -55,6 +61,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取用户图片下载记录
+   */
+  async DescribeDownloadInfos(
+    req: DescribeDownloadInfosRequest,
+    cb?: (error: string, rep: DescribeDownloadInfosResponse) => void
+  ): Promise<DescribeDownloadInfosResponse> {
+    return this.request("DescribeDownloadInfos", req, cb)
+  }
+
+  /**
    * 批量获取授权书下载地址
    */
   async BatchDescribeOrderCertificate(
@@ -72,6 +88,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeImagesResponse) => void
   ): Promise<DescribeImagesResponse> {
     return this.request("DescribeImages", req, cb)
+  }
+
+  /**
+   * 核销图片，获取原图URL地址
+   */
+  async CreateOrderAndDownloads(
+    req: CreateOrderAndDownloadsRequest,
+    cb?: (error: string, rep: CreateOrderAndDownloadsResponse) => void
+  ): Promise<CreateOrderAndDownloadsResponse> {
+    return this.request("CreateOrderAndDownloads", req, cb)
   }
 
   /**

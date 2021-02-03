@@ -3,19 +3,19 @@
  */
 export interface Item {
     /**
-      * 识别的算式是否正确
+      * 识别的算式是否正确，算式运算结果: ‘YES’:正确 ‘NO’: 错误 ‘NA’: 非法参数
       */
     Item: string;
     /**
-      * 识别的算式
+      * 识别出的算式，识别出的文本行字符串
       */
     ItemString: string;
     /**
-      * 识别的算式在图片上的位置信息
+      * 识别的算式在图片上的位置信息，文本行在旋转纠正之后的图像中的像素坐 标，表示为(左上角 x, 左上角 y，宽 width， 高 height)
       */
     ItemCoord: ItemCoord;
     /**
-      * 推荐的答案，暂不支持多个关系运算符、无关系运算符、单位换算错题的推荐答案返回。
+      * 错题推荐答案，算式运算结果正确返回为 ""，算式运算结果错误返回推荐答案 (注:暂不支持多个关系运算符(如 1<10<7)、 无关系运算符(如 frac(1,2)+frac(2,3))、单 位换算(如 1 元=100 角)错题的推荐答案 返回)
       */
     Answer: string;
     /**
@@ -28,6 +28,11 @@ export interface Item {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ItemConf: number;
+    /**
+      * 用于标识题目 id，如果有若干算式属于同一 题，则其对应的 id 相同。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    QuestionId: string;
 }
 /**
  * Evaluation请求参数结构体
@@ -81,6 +86,10 @@ export interface EvaluationRequest {
       * 是否返回LaTex，默认为0返回普通格式，设置成1返回LaTex格式
       */
     LaTex?: number;
+    /**
+      * 用于选择是否拒绝模糊题 目。打开则丢弃模糊题目， 不进行后续的判题返回结 果。
+      */
+    RejectVagueArithmetic?: boolean;
 }
 /**
  * Evaluation返回参数结构体
@@ -89,16 +98,16 @@ export interface EvaluationResponse {
     /**
       * 图片唯一标识，一张图片一个SessionId；
       */
-    SessionId?: string;
+    SessionId: string;
     /**
       * 识别出的算式信息；
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Items?: Array<Item>;
+    Items: Array<Item>;
     /**
       * 任务 id，用于查询接口
       */
-    TaskId?: string;
+    TaskId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
