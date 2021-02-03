@@ -20,6 +20,7 @@
 1. 执行以下安装命令：
    > npm install tencentcloud-sdk-nodejs --save
 2. 在您的代码中引用对应模块代码，可参考示例。
+3. 如上引用方式会将腾讯云所有产品sdk下载到本地，可以将tencentcloud-sdk-nodejs换成tencentcloud-sdk-nodejs-cvm/cbs/vpc等，即可引用特定产品的sdk，代码中可将require("tencentcloud-sdk-nodejs")改为require("tencentcloud-sdk-nodejs-cvm/cbs/vpc")，其余不变，可参考示例，可大大节省存储空间。
 
 ## 通过源码包安装
 
