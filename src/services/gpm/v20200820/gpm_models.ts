@@ -152,7 +152,7 @@ export interface StartMatchingResponse {
   ErrCode?: number
 
   /**
-   * 请求 id 长度 128。
+   * 匹配票据 ID长度 128。
    */
   MatchTicketId?: string
 
@@ -237,7 +237,7 @@ export interface CreateMatchRequest {
  */
 export interface DescribeMatchingProgressRequest {
   /**
-   * 请求 id 列表, 列表长度 128。
+   * 匹配票据 ID列表, 列表长度 12。
    */
   MatchTicketIds: Array<MTicket>
 }
@@ -855,7 +855,7 @@ export interface CancelMatchingRequest {
   MatchCode: string
 
   /**
-   * 要取消的匹配请求 Id
+   * 要取消的匹配匹配票据 ID
    */
   MatchTicketId: string
 }
@@ -1181,7 +1181,7 @@ export interface StartMatchingRequest {
   Players: Array<Player>
 
   /**
-   * 请求 Id 默认空字符串，为空则由 GPM 自动生成 长度 128，只能包含数字、字母、. 和 -
+   * 匹配票据 ID 默认空字符串，为空则由 GPM 自动生成 长度 128，只能包含数字、字母、. 和 -
    */
   MatchTicketId?: string
 }
@@ -1276,16 +1276,16 @@ export interface MatchTicket {
  */
 export interface DescribeMatchingProgressResponse {
   /**
-      * 请求结果列表
+      * 匹配票据列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  MatchTickets?: Array<MatchTicket>
+  MatchTickets: Array<MatchTicket>
 
   /**
       * 错误码
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ErrCode?: number
+  ErrCode: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

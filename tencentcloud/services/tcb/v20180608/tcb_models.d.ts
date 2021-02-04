@@ -329,6 +329,11 @@ export interface CloudBaseRunSideSpec {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Security?: CloudBaseSecurityContext;
+    /**
+      * 挂载信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VolumeMountInfos?: Array<CloudBaseRunVolumeMount>;
 }
 /**
  * CommonServiceAPI返回参数结构体
@@ -1463,6 +1468,10 @@ export interface CreateCloudBaseRunServerVersionRequest {
       * 安全特性
       */
     Security?: CloudBaseSecurityContext;
+    /**
+      * 服务磁盘挂载
+      */
+    ServiceVolumes?: Array<CloudRunServiceVolume>;
 }
 /**
  * 终端用户登录新增统计
@@ -2536,6 +2545,31 @@ export interface DescribeAuthDomainsRequest {
       * 环境ID
       */
     EnvId: string;
+}
+/**
+ * 服务的volume
+ */
+export interface CloudRunServiceVolume {
+    /**
+      * 名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name?: string;
+    /**
+      * NFS的挂载方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NFS?: CloudBaseRunNfsVolumeSource;
+    /**
+      * secret名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SecretName?: string;
+    /**
+      * 是否开启临时目录
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EnableEmptyDirVolume?: boolean;
 }
 /**
  * 云开发项目版本

@@ -76,12 +76,12 @@ export interface DescribeVsmsResponse {
     /**
       * 获取实例的总个数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 资源信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    VsmList?: Array<ResourceInfo>;
+    VsmList: Array<ResourceInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -104,7 +104,7 @@ export interface InquiryPriceBuyVsmRequest {
       */
     TimeSpan: string;
     /**
-      * 商品的时间单位
+      * 商品的时间单位，m表示月，y表示年
       */
     TimeUnit: string;
     /**
@@ -123,12 +123,12 @@ export interface DescribeVpcResponse {
     /**
       * 可查询到的所有Vpc实例总数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * Vpc对象列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    VpcList?: Array<Vpc>;
+    VpcList: Array<Vpc>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -173,12 +173,12 @@ export interface DescribeSubnetResponse {
     /**
       * 返回的子网数量。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 返回的子网实例列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    SubnetList?: Array<Subnet>;
+    SubnetList: Array<Subnet>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -418,102 +418,102 @@ export interface DescribeVsmAttributesResponse {
     /**
       * 资源Id
       */
-    ResourceId?: string;
+    ResourceId: string;
     /**
       * 资源名称
       */
-    ResourceName?: string;
+    ResourceName: string;
     /**
-      * 资源状态
+      * 资源状态，1表示资源为正常，2表示资源处于隔离状态
       */
-    Status?: number;
+    Status: number;
     /**
       * 资源IP
       */
-    Vip?: string;
+    Vip: string;
     /**
       * 资源所属Vpc
       */
-    VpcId?: string;
+    VpcId: string;
     /**
       * 资源所属子网
       */
-    SubnetId?: string;
+    SubnetId: string;
     /**
       * 资源所属HSM的规格
       */
-    Model?: string;
+    Model: string;
     /**
-      * 资源类型
+      * 资源类型，17表示EVSM，33表示GVSM，49表示SVSM
       */
-    VsmType?: number;
+    VsmType: number;
     /**
-      * 地域Id
+      * 地域Id，返回腾讯云地域代码，如广州为1，北京为8
       */
-    RegionId?: number;
+    RegionId: number;
     /**
-      * 区域Id
+      * 区域Id，返回腾讯云每个地域的可用区代码
       */
-    ZoneId?: number;
+    ZoneId: number;
     /**
       * 过期时间
       */
-    ExpireTime?: number;
+    ExpireTime: number;
     /**
       * 安全组详情信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    SgList?: Array<UsgRuleDetail>;
+    SgList: Array<UsgRuleDetail>;
     /**
       * 子网名
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    SubnetName?: string;
+    SubnetName: string;
     /**
       * 地域名
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    RegionName?: string;
+    RegionName: string;
     /**
       * 区域名
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ZoneName?: string;
+    ZoneName: string;
     /**
       * 实例是否已经过期
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Expired?: boolean;
+    Expired: boolean;
     /**
       * 为正数表示实例距离过期时间剩余秒数，为负数表示实例已经过期多少秒
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    RemainSeconds?: number;
+    RemainSeconds: number;
     /**
       * 私有虚拟网络名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    VpcName?: string;
+    VpcName: string;
     /**
       * VPC的IPv4 CIDR
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    VpcCidrBlock?: string;
+    VpcCidrBlock: string;
     /**
       * 子网的CIDR
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    SubnetCidrBlock?: string;
+    SubnetCidrBlock: string;
     /**
       * 资源所关联的Tag
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Tags?: Array<Tag>;
+    Tags: Array<Tag>;
     /**
       * 资源续费标识，0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费(用户设置)
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    RenewFlag?: number;
+    RenewFlag: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -602,30 +602,30 @@ export interface UsgRuleDetail {
  */
 export interface InquiryPriceBuyVsmResponse {
     /**
-      * 总金额
+      * 原始总金额
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TotalCost?: number;
+    TotalCost: number;
     /**
       * 购买的实例数量
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    GoodsNum?: number;
+    GoodsNum: number;
     /**
       * 商品的时间大小
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TimeSpan?: string;
+    TimeSpan: string;
     /**
       * 商品的时间单位
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TimeUnit?: string;
+    TimeUnit: string;
     /**
-      * 原始总金额
+      * 应付总金额
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    OriginalCost?: number;
+    OriginalCost: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -656,11 +656,11 @@ export interface DescribeUsgResponse {
       * 用户的安全组列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    SgList?: Array<SgUnit>;
+    SgList: Array<SgUnit>;
     /**
       * 返回的安全组数量
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

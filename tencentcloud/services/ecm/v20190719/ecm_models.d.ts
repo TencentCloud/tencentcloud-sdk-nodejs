@@ -1088,6 +1088,16 @@ export interface InstanceTypeConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ExtInfo: string;
+    /**
+      * GPU卡数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Vgpu: number;
+    /**
+      * GPU型号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GpuModelName: string;
 }
 /**
  * DescribeNode返回参数结构体

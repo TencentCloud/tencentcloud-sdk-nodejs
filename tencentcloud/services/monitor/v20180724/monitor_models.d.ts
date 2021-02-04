@@ -1652,11 +1652,11 @@ export interface DescribeAlarmHistoriesResponse {
     /**
       * 总数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 告警历史列表
       */
-    Histories?: Array<AlarmHistory>;
+    Histories: Array<AlarmHistory>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

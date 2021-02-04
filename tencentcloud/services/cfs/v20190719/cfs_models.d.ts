@@ -406,35 +406,35 @@ export interface CreateCfsFileSystemResponse {
     /**
       * 文件系统创建时间
       */
-    CreationTime?: string;
+    CreationTime: string;
     /**
       * 用户自定义文件系统名称
       */
-    CreationToken?: string;
+    CreationToken: string;
     /**
       * 文件系统 ID
       */
-    FileSystemId?: string;
+    FileSystemId: string;
     /**
       * 文件系统状态
       */
-    LifeCycleState?: string;
+    LifeCycleState: string;
     /**
       * 文件系统已使用容量大小
       */
-    SizeByte?: number;
+    SizeByte: number;
     /**
       * 可用区 ID
       */
-    ZoneId?: number;
+    ZoneId: number;
     /**
       * 用户自定义文件系统名称
       */
-    FsName?: string;
+    FsName: string;
     /**
       * 文件系统是否加密
       */
-    Encrypted?: boolean;
+    Encrypted: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

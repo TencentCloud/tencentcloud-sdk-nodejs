@@ -252,13 +252,13 @@ export interface DescribeAllUserContactResponse {
   /**
    * 联系人的总数量。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
       * 联系人的信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Contacts?: Array<ContactItem>
+  Contacts: Array<ContactItem>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -465,13 +465,13 @@ export interface DescribeAllUserGroupResponse {
   /**
    * 组总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
       * 组信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Groups?: Array<GroupItem>
+  Groups: Array<GroupItem>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -529,7 +529,7 @@ export interface DescribeTopSpaceTablesRequest {
  */
 export interface DescribeAllUserContactRequest {
   /**
-   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL。
+   * 服务产品类型，固定值：mysql。
    */
   Product: string
 
@@ -1652,7 +1652,7 @@ export interface ProfileInfo {
  */
 export interface DescribeAllUserGroupRequest {
   /**
-   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL。
+   * 服务产品类型，固定值：mysql。
    */
   Product: string
 

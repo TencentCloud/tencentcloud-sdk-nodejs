@@ -118,6 +118,7 @@ import {
   CreateCloudBaseRunResourceRequest,
   ModifyEndUserResponse,
   DescribeAuthDomainsRequest,
+  CloudRunServiceVolume,
   CloudBaseProjectVersion,
   DescribeDatabaseACLResponse,
   ModifyEnvRequest,
