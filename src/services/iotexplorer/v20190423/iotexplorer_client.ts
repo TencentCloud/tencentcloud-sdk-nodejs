@@ -25,6 +25,7 @@ import {
   DeleteStudioProductResponse,
   GetDeviceListResponse,
   ControlDeviceDataRequest,
+  DeleteLoRaFrequencyResponse,
   DeleteTopicRuleResponse,
   ModifyModelDefinitionRequest,
   CreateStudioProductResponse,
@@ -33,7 +34,7 @@ import {
   ModifyStudioProductRequest,
   CreateStudioProductRequest,
   ProductModelDefinition,
-  GetTopicRuleListResponse,
+  ReleaseStudioProductRequest,
   SearchTopicRuleRequest,
   DescribeDeviceDataRequest,
   DescribeStudioProductResponse,
@@ -42,11 +43,14 @@ import {
   DeviceDataHistoryItem,
   ProductEntry,
   ProjectEntryEx,
+  DescribeLoRaFrequencyRequest,
   DeleteDeviceRequest,
+  DeleteLoRaFrequencyRequest,
   ListEventHistoryRequest,
   ReleaseStudioProductResponse,
   DeleteLoRaGatewayRequest,
-  DeleteLoRaGatewayResponse,
+  LoRaFrequencyEntry,
+  SearchTopicRuleResponse,
   DescribeTopicRuleRequest,
   CallDeviceActionSyncResponse,
   CreateLoRaGatewayRequest,
@@ -57,7 +61,7 @@ import {
   CreateDeviceResponse,
   CreateDeviceRequest,
   GetProjectListResponse,
-  SearchStudioProductResponse,
+  GetStudioProductListRequest,
   DisableTopicRuleResponse,
   TopicRuleInfo,
   CreateProjectRequest,
@@ -65,7 +69,7 @@ import {
   GetStudioProductListResponse,
   PublishMessageRequest,
   GetDeviceListRequest,
-  ReleaseStudioProductRequest,
+  GetTopicRuleListResponse,
   DisableTopicRuleRequest,
   EventHistoryItem,
   TopicRule,
@@ -75,17 +79,22 @@ import {
   LoRaGatewayLocation,
   DescribeDeviceRequest,
   ModifyTopicRuleResponse,
-  GetStudioProductListRequest,
+  DescribeLoRaFrequencyResponse,
+  SearchStudioProductResponse,
   GetLoRaGatewayListRequest,
   DescribeProjectRequest,
   DeleteTopicRuleRequest,
   CreateLoRaGatewayResponse,
-  SearchTopicRuleResponse,
+  DeleteLoRaGatewayResponse,
+  CreateLoRaFrequencyRequest,
   LoRaGatewayItem,
   ControlDeviceDataResponse,
   DescribeDeviceDataHistoryRequest,
   DescribeStudioProductRequest,
+  ModifyLoRaFrequencyRequest,
+  ModifyModelDefinitionResponse,
   GetProjectListRequest,
+  CreateLoRaFrequencyResponse,
   SearchStudioProductRequest,
   GetTopicRuleListRequest,
   ModifyProjectResponse,
@@ -101,7 +110,7 @@ import {
   CreateTopicRuleRequest,
   DeleteDeviceResponse,
   DeviceInfo,
-  ModifyModelDefinitionResponse,
+  ModifyLoRaFrequencyResponse,
   ModifyLoRaGatewayRequest,
   ListEventHistoryResponse,
   EnableTopicRuleRequest,
@@ -167,13 +176,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 启用规则
+   * 修改LoRa自定义频点
    */
-  async EnableTopicRule(
-    req: EnableTopicRuleRequest,
-    cb?: (error: string, rep: EnableTopicRuleResponse) => void
-  ): Promise<EnableTopicRuleResponse> {
-    return this.request("EnableTopicRule", req, cb)
+  async ModifyLoRaFrequency(
+    req: ModifyLoRaFrequencyRequest,
+    cb?: (error: string, rep: ModifyLoRaFrequencyResponse) => void
+  ): Promise<ModifyLoRaFrequencyResponse> {
+    return this.request("ModifyLoRaFrequency", req, cb)
+  }
+
+  /**
+   * 用于查看某个设备的详细信息
+   */
+  async DescribeDevice(
+    req: DescribeDeviceRequest,
+    cb?: (error: string, rep: DescribeDeviceResponse) => void
+  ): Promise<DescribeDeviceResponse> {
+    return this.request("DescribeDevice", req, cb)
   }
 
   /**
@@ -194,6 +213,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateTopicRuleResponse) => void
   ): Promise<CreateTopicRuleResponse> {
     return this.request("CreateTopicRule", req, cb)
+  }
+
+  /**
+   * 创建 LoRa 自定义频点
+   */
+  async CreateLoRaFrequency(
+    req: CreateLoRaFrequencyRequest,
+    cb?: (error: string, rep: CreateLoRaFrequencyResponse) => void
+  ): Promise<CreateLoRaFrequencyResponse> {
+    return this.request("CreateLoRaFrequency", req, cb)
   }
 
   /**
@@ -277,6 +306,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 提供删除LoRa自定义频点的能力
+   */
+  async DeleteLoRaFrequency(
+    req: DeleteLoRaFrequencyRequest,
+    cb?: (error: string, rep: DeleteLoRaFrequencyResponse) => void
+  ): Promise<DeleteLoRaFrequencyResponse> {
+    return this.request("DeleteLoRaFrequency", req, cb)
+  }
+
+  /**
    * 本接口（PublishMessage）用于使用自定义透传协议进行设备远控
    */
   async PublishMessage(
@@ -354,6 +393,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetTopicRuleListResponse) => void
   ): Promise<GetTopicRuleListResponse> {
     return this.request("GetTopicRuleList", req, cb)
+  }
+
+  /**
+   * 提供查询LoRa自定义频点详情的能力
+   */
+  async DescribeLoRaFrequency(
+    req: DescribeLoRaFrequencyRequest,
+    cb?: (error: string, rep: DescribeLoRaFrequencyResponse) => void
+  ): Promise<DescribeLoRaFrequencyResponse> {
+    return this.request("DescribeLoRaFrequency", req, cb)
   }
 
   /**
@@ -437,13 +486,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于查看某个设备的详细信息
+   * 启用规则
    */
-  async DescribeDevice(
-    req: DescribeDeviceRequest,
-    cb?: (error: string, rep: DescribeDeviceResponse) => void
-  ): Promise<DescribeDeviceResponse> {
-    return this.request("DescribeDevice", req, cb)
+  async EnableTopicRule(
+    req: EnableTopicRuleRequest,
+    cb?: (error: string, rep: EnableTopicRuleResponse) => void
+  ): Promise<EnableTopicRuleResponse> {
+    return this.request("EnableTopicRule", req, cb)
   }
 
   /**

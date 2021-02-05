@@ -68,9 +68,19 @@ it("iotexplorer.v20190423.CreateStudioProduct", async function () {
     }
 })
 
-it("iotexplorer.v20190423.EnableTopicRule", async function () {
+it("iotexplorer.v20190423.ModifyLoRaFrequency", async function () {
     try {
-       const data = await client.EnableTopicRule({})
+       const data = await client.ModifyLoRaFrequency({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.DescribeDevice", async function () {
+    try {
+       const data = await client.DescribeDevice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -91,6 +101,16 @@ it("iotexplorer.v20190423.CreateLoRaGateway", async function () {
 it("iotexplorer.v20190423.CreateTopicRule", async function () {
     try {
        const data = await client.CreateTopicRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.CreateLoRaFrequency", async function () {
+    try {
+       const data = await client.CreateLoRaFrequency({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,6 +198,16 @@ it("iotexplorer.v20190423.ModifyProject", async function () {
     }
 })
 
+it("iotexplorer.v20190423.DeleteLoRaFrequency", async function () {
+    try {
+       const data = await client.DeleteLoRaFrequency({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.PublishMessage", async function () {
     try {
        const data = await client.PublishMessage({})
@@ -251,6 +281,16 @@ it("iotexplorer.v20190423.ReleaseStudioProduct", async function () {
 it("iotexplorer.v20190423.GetTopicRuleList", async function () {
     try {
        const data = await client.GetTopicRuleList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.DescribeLoRaFrequency", async function () {
+    try {
+       const data = await client.DescribeLoRaFrequency({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -338,9 +378,9 @@ it("iotexplorer.v20190423.CallDeviceActionAsync", async function () {
     }
 })
 
-it("iotexplorer.v20190423.DescribeDevice", async function () {
+it("iotexplorer.v20190423.EnableTopicRule", async function () {
     try {
-       const data = await client.DescribeDevice({})
+       const data = await client.EnableTopicRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

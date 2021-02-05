@@ -537,7 +537,7 @@ is-primary - Boolean - 是否必填：否 - （过滤条件）按照是否主网
       */
     Limit?: number;
     /**
-      * ECM 地域
+      * ECM 地域，形如ap-xian-ecm。
       */
     EcmRegion?: string;
 }
@@ -1336,7 +1336,7 @@ export interface CreateNetworkInterfaceRequest {
       */
     SubnetId: string;
     /**
-      * ECM 地域
+      * ECM 地域，形如ap-xian-ecm。
       */
     EcmRegion: string;
     /**
@@ -1441,6 +1441,18 @@ CUCC：中国联通
       * 需要关联的标签列表。
       */
     Tags?: Array<Tag>;
+    /**
+      * 要绑定的实例 ID。
+      */
+    InstanceId?: string;
+    /**
+      * 要绑定的弹性网卡 ID。 弹性网卡 ID 形如：eni-11112222。NetworkInterfaceId 与 InstanceId 不可同时指定。弹性网卡 ID 可通过DescribeNetworkInterfaces接口返回值中的networkInterfaceId获取。
+      */
+    NetworkInterfaceId?: string;
+    /**
+      * 要绑定的内网 IP。如果指定了 NetworkInterfaceId 则也必须指定 PrivateIpAddress ，表示将 EIP 绑定到指定弹性网卡的指定内网 IP 上。同时要确保指定的 PrivateIpAddress 是指定的 NetworkInterfaceId 上的一个内网 IP。指定弹性网卡的内网 IP 可通过DescribeNetworkInterfaces接口返回值中的privateIpAddress获取。
+      */
+    PrivateIpAddress?: string;
 }
 /**
  * 弹性网卡绑定关系
@@ -2098,6 +2110,12 @@ export interface TerminateInstancesRequest {
       * 定时销毁的时间，格式形如："2019-08-05 12:01:30"，若非定时销毁，则此参数被忽略。
       */
     TerminateTime?: string;
+    /**
+      * 是否关联删除已绑定的弹性网卡和弹性IP，默认为true。
+当为true时，一并删除弹性网卡和弹性IP；
+当为false时，只销毁主机，保留弹性网卡和弹性IP。
+      */
+    AssociatedResourceDestroy?: boolean;
 }
 /**
  * DescribeTaskStatus返回参数结构体
@@ -2353,6 +2371,15 @@ export interface ModuleCounter {
  * ReplaceSecurityGroupPolicy返回参数结构体
  */
 export interface ReplaceSecurityGroupPolicyResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyPrivateIpAddressesAttribute返回参数结构体
+ */
+export interface ModifyPrivateIpAddressesAttributeResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2676,7 +2703,7 @@ export interface RunInstancesResponse {
       * 创建中的实例ID列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    InstanceIdSet?: Array<string>;
+    InstanceIdSet: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3173,7 +3200,7 @@ export interface DetachNetworkInterfaceRequest {
       */
     InstanceId: string;
     /**
-      * ECM 地域
+      * ECM 地域，形如ap-xian-ecm。
       */
     EcmRegion: string;
 }
@@ -3338,7 +3365,7 @@ export interface ModifyModuleDisableWanIpRequest {
       */
     ModuleId: string;
     /**
-      * 是否禁止分配外网ip
+      * 是否禁止分配外网ip,true：统一分配外网ip，false：禁止分配外网ip.
       */
     DisableWanIp: boolean;
 }
@@ -4700,6 +4727,23 @@ export interface DescribeSecurityGroupAssociationStatisticsResponse {
     RequestId?: string;
 }
 /**
+ * ModifyPrivateIpAddressesAttribute请求参数结构体
+ */
+export interface ModifyPrivateIpAddressesAttributeRequest {
+    /**
+      * 弹性网卡实例ID，例如：eni-m6dyj72l。
+      */
+    NetworkInterfaceId: string;
+    /**
+      * 指定的内网IP信息。
+      */
+    PrivateIpAddresses: Array<PrivateIpAddressSpecification>;
+    /**
+      * ECM 节点Region信息，形如ap-xian-ecm。
+      */
+    EcmRegion: string;
+}
+/**
  * DescribeTargets返回参数结构体
  */
 export interface DescribeTargetsResponse {
@@ -5298,12 +5342,12 @@ export interface DescribeNetworkInterfacesResponse {
     /**
       * 符合条件的实例数量。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 实例详细信息列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    NetworkInterfaceSet?: Array<NetworkInterface>;
+    NetworkInterfaceSet: Array<NetworkInterface>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5587,11 +5631,11 @@ export interface AllocateAddressesResponse {
       * 申请到的 EIP 的唯一 ID 列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    AddressSet?: Array<string>;
+    AddressSet: Array<string>;
     /**
       * 异步任务TaskId。可以使用DescribeTaskResult接口查询任务状态。
       */
-    TaskId?: string;
+    TaskId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5664,7 +5708,7 @@ export interface AttachNetworkInterfaceRequest {
       */
     InstanceId: string;
     /**
-      * ECM 地域
+      * ECM 地域，形如ap-xian-ecm。
       */
     EcmRegion: string;
 }

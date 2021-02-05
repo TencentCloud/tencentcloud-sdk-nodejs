@@ -116,6 +116,15 @@ export interface ControlDeviceDataRequest {
     DataTimestamp?: number;
 }
 /**
+ * DeleteLoRaFrequency返回参数结构体
+ */
+export interface DeleteLoRaFrequencyResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteTopicRule返回参数结构体
  */
 export interface DeleteTopicRuleResponse {
@@ -269,21 +278,17 @@ export interface ProductModelDefinition {
     CategoryModel: string;
 }
 /**
- * GetTopicRuleList返回参数结构体
+ * ReleaseStudioProduct请求参数结构体
  */
-export interface GetTopicRuleListResponse {
+export interface ReleaseStudioProductRequest {
     /**
-      * 规则总数量
+      * 产品ID
       */
-    TotalCnt?: number;
+    ProductId: string;
     /**
-      * 规则列表
+      * 产品DevStatus
       */
-    Rules?: Array<TopicRuleInfo>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    DevStatus: string;
 }
 /**
  * SearchTopicRule请求参数结构体
@@ -484,6 +489,15 @@ export interface ProjectEntryEx {
     InstanceId: string;
 }
 /**
+ * DescribeLoRaFrequency请求参数结构体
+ */
+export interface DescribeLoRaFrequencyRequest {
+    /**
+      * 频点唯一ID
+      */
+    FreqId?: string;
+}
+/**
  * DeleteDevice请求参数结构体
  */
 export interface DeleteDeviceRequest {
@@ -495,6 +509,15 @@ export interface DeleteDeviceRequest {
       * 设备名称。
       */
     DeviceName: string;
+}
+/**
+ * DeleteLoRaFrequency请求参数结构体
+ */
+export interface DeleteLoRaFrequencyRequest {
+    /**
+      * 频点唯一ID
+      */
+    FreqId?: string;
 }
 /**
  * ListEventHistory请求参数结构体
@@ -552,9 +575,62 @@ export interface DeleteLoRaGatewayRequest {
     GatewayId: string;
 }
 /**
- * DeleteLoRaGateway返回参数结构体
+ * LoRa自定义频点信息
  */
-export interface DeleteLoRaGatewayResponse {
+export interface LoRaFrequencyEntry {
+    /**
+      * 频点唯一ID
+      */
+    FreqId: string;
+    /**
+      * 频点名称
+      */
+    FreqName: string;
+    /**
+      * 频点描述
+      */
+    Description: string;
+    /**
+      * 数据上行信道
+      */
+    ChannelsDataUp: Array<number>;
+    /**
+      * 数据下行信道RX1
+      */
+    ChannelsDataRX1: Array<number>;
+    /**
+      * 数据下行信道RX2
+      */
+    ChannelsDataRX2: Array<number>;
+    /**
+      * 入网上行信道
+      */
+    ChannelsJoinUp: Array<number>;
+    /**
+      * 入网下行RX1信道
+      */
+    ChannelsJoinRX1: Array<number>;
+    /**
+      * 入网下行RX2信道
+      */
+    ChannelsJoinRX2: Array<number>;
+    /**
+      * 创建时间
+      */
+    CreateTime: number;
+}
+/**
+ * SearchTopicRule返回参数结构体
+ */
+export interface SearchTopicRuleResponse {
+    /**
+      * 搜索到的规则总数
+      */
+    TotalCnt?: number;
+    /**
+      * 规则信息列表
+      */
+    Rules?: Array<TopicRuleInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -750,21 +826,25 @@ export interface GetProjectListResponse {
     RequestId?: string;
 }
 /**
- * SearchStudioProduct返回参数结构体
+ * GetStudioProductList请求参数结构体
  */
-export interface SearchStudioProductResponse {
+export interface GetStudioProductListRequest {
     /**
-      * 产品列表
+      * 项目ID
       */
-    Products?: Array<ProductEntry>;
+    ProjectId?: string;
     /**
-      * 产品数量
+      * 产品DevStatus
       */
-    Total?: number;
+    DevStatus?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * Offset
       */
-    RequestId?: string;
+    Offset?: number;
+    /**
+      * Limit
+      */
+    Limit?: number;
 }
 /**
  * DisableTopicRule返回参数结构体
@@ -898,17 +978,21 @@ export interface GetDeviceListRequest {
     DeviceName?: string;
 }
 /**
- * ReleaseStudioProduct请求参数结构体
+ * GetTopicRuleList返回参数结构体
  */
-export interface ReleaseStudioProductRequest {
+export interface GetTopicRuleListResponse {
     /**
-      * 产品ID
+      * 规则总数量
       */
-    ProductId: string;
+    TotalCnt?: number;
     /**
-      * 产品DevStatus
+      * 规则列表
       */
-    DevStatus: string;
+    Rules?: Array<TopicRuleInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DisableTopicRule请求参数结构体
@@ -1130,25 +1214,35 @@ export interface ModifyTopicRuleResponse {
     RequestId?: string;
 }
 /**
- * GetStudioProductList请求参数结构体
+ * DescribeLoRaFrequency返回参数结构体
  */
-export interface GetStudioProductListRequest {
+export interface DescribeLoRaFrequencyResponse {
     /**
-      * 项目ID
+      * 返回详情项
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ProjectId?: string;
+    Data: LoRaFrequencyEntry;
     /**
-      * 产品DevStatus
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    DevStatus?: string;
+    RequestId?: string;
+}
+/**
+ * SearchStudioProduct返回参数结构体
+ */
+export interface SearchStudioProductResponse {
     /**
-      * Offset
+      * 产品列表
       */
-    Offset?: number;
+    Products?: Array<ProductEntry>;
     /**
-      * Limit
+      * 产品数量
       */
-    Limit?: number;
+    Total?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * GetLoRaGatewayList请求参数结构体
@@ -1199,21 +1293,50 @@ export interface CreateLoRaGatewayResponse {
     RequestId?: string;
 }
 /**
- * SearchTopicRule返回参数结构体
+ * DeleteLoRaGateway返回参数结构体
  */
-export interface SearchTopicRuleResponse {
-    /**
-      * 搜索到的规则总数
-      */
-    TotalCnt?: number;
-    /**
-      * 规则信息列表
-      */
-    Rules?: Array<TopicRuleInfo>;
+export interface DeleteLoRaGatewayResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * CreateLoRaFrequency请求参数结构体
+ */
+export interface CreateLoRaFrequencyRequest {
+    /**
+      * 频点配置名称
+      */
+    FreqName?: string;
+    /**
+      * 数据上行信道
+      */
+    ChannelsDataUp?: Array<number>;
+    /**
+      * 数据下行RX1信道
+      */
+    ChannelsDataRX1?: Array<number>;
+    /**
+      * 数据下行RX2信道
+      */
+    ChannelsDataRX2?: Array<number>;
+    /**
+      * 入网上行信道
+      */
+    ChannelsJoinUp?: Array<number>;
+    /**
+      * 入网下行RX1信道
+      */
+    ChannelsJoinRX1?: Array<number>;
+    /**
+      * 入网下行RX2信道
+      */
+    ChannelsJoinRX2?: Array<number>;
+    /**
+      * 频点配置描述
+      */
+    Description?: string;
 }
 /**
  * LoRa 网关信息
@@ -1326,6 +1449,56 @@ export interface DescribeStudioProductRequest {
     ProductId: string;
 }
 /**
+ * ModifyLoRaFrequency请求参数结构体
+ */
+export interface ModifyLoRaFrequencyRequest {
+    /**
+      * 频点唯一ID
+      */
+    FreqId?: string;
+    /**
+      * 频点名称
+      */
+    FreqName?: string;
+    /**
+      * 频点描述
+      */
+    Description?: string;
+    /**
+      * 数据上行信道
+      */
+    ChannelsDataUp?: Array<number>;
+    /**
+      * 数据下行信道RX1
+      */
+    ChannelsDataRX1?: Array<number>;
+    /**
+      * 数据下行信道RX2
+      */
+    ChannelsDataRX2?: Array<number>;
+    /**
+      * 入网上行信道
+      */
+    ChannelsJoinUp?: Array<number>;
+    /**
+      * 入网下行信道RX1
+      */
+    ChannelsJoinRX1?: Array<number>;
+    /**
+      * 入网下行信道RX2
+      */
+    ChannelsJoinRX2?: Array<number>;
+}
+/**
+ * ModifyModelDefinition返回参数结构体
+ */
+export interface ModifyModelDefinitionResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * GetProjectList请求参数结构体
  */
 export interface GetProjectListRequest {
@@ -1341,6 +1514,19 @@ export interface GetProjectListRequest {
       * 实例ID
       */
     InstanceId?: string;
+}
+/**
+ * CreateLoRaFrequency返回参数结构体
+ */
+export interface CreateLoRaFrequencyResponse {
+    /**
+      * LoRa频点信息
+      */
+    Data: LoRaFrequencyEntry;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * SearchStudioProduct请求参数结构体
@@ -1625,9 +1811,13 @@ export interface DeviceInfo {
     NwkSKey: string;
 }
 /**
- * ModifyModelDefinition返回参数结构体
+ * ModifyLoRaFrequency返回参数结构体
  */
-export interface ModifyModelDefinitionResponse {
+export interface ModifyLoRaFrequencyResponse {
+    /**
+      * 频点信息
+      */
+    Data: LoRaFrequencyEntry;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

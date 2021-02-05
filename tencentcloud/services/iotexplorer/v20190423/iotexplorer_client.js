@@ -58,10 +58,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateStudioProduct", req, cb);
     }
     /**
-     * 启用规则
+     * 修改LoRa自定义频点
      */
-    async EnableTopicRule(req, cb) {
-        return this.request("EnableTopicRule", req, cb);
+    async ModifyLoRaFrequency(req, cb) {
+        return this.request("ModifyLoRaFrequency", req, cb);
+    }
+    /**
+     * 用于查看某个设备的详细信息
+     */
+    async DescribeDevice(req, cb) {
+        return this.request("DescribeDevice", req, cb);
     }
     /**
      * 创建新 LoRa 网关设备接口
@@ -74,6 +80,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateTopicRule(req, cb) {
         return this.request("CreateTopicRule", req, cb);
+    }
+    /**
+     * 创建 LoRa 自定义频点
+     */
+    async CreateLoRaFrequency(req, cb) {
+        return this.request("CreateLoRaFrequency", req, cb);
     }
     /**
      * 修改 LoRa 网关信息
@@ -124,6 +136,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyProject", req, cb);
     }
     /**
+     * 提供删除LoRa自定义频点的能力
+     */
+    async DeleteLoRaFrequency(req, cb) {
+        return this.request("DeleteLoRaFrequency", req, cb);
+    }
+    /**
      * 本接口（PublishMessage）用于使用自定义透传协议进行设备远控
      */
     async PublishMessage(req, cb) {
@@ -170,6 +188,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async GetTopicRuleList(req, cb) {
         return this.request("GetTopicRuleList", req, cb);
+    }
+    /**
+     * 提供查询LoRa自定义频点详情的能力
+     */
+    async DescribeLoRaFrequency(req, cb) {
+        return this.request("DescribeLoRaFrequency", req, cb);
     }
     /**
      * 搜索规则
@@ -220,10 +244,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CallDeviceActionAsync", req, cb);
     }
     /**
-     * 用于查看某个设备的详细信息
+     * 启用规则
      */
-    async DescribeDevice(req, cb) {
-        return this.request("DescribeDevice", req, cb);
+    async EnableTopicRule(req, cb) {
+        return this.request("EnableTopicRule", req, cb);
     }
     /**
      * 提供删除某个项目的能力

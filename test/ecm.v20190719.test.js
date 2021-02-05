@@ -108,6 +108,16 @@ it("ecm.v20190719.ResetRoutes", async function () {
     }
 })
 
+it("ecm.v20190719.ModifyPrivateIpAddressesAttribute", async function () {
+    try {
+       const data = await client.ModifyPrivateIpAddressesAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ecm.v20190719.RunInstances", async function () {
     try {
        const data = await client.RunInstances({})

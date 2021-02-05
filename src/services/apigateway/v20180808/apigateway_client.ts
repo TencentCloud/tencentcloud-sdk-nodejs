@@ -783,7 +783,7 @@ API 网关中每个服务都会提供一个默认的域名供用户调用，但�
   }
 
   /**
-   * 本接口（DescribeApi）用于查询用户部署于 API 网关的 API 接口的详细信息。​
+   * 本接口（DescribeApi）用于查询用户 API 网关的 API 接口的详细信息。​
    */
   async DescribeApi(
     req: DescribeApiRequest,

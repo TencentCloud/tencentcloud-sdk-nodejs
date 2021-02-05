@@ -18,7 +18,7 @@ export interface CreateCustomizationResponse {
     /**
       * 模型ID
       */
-    ModelId?: string;
+    ModelId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -95,7 +95,7 @@ export interface CreateAsyncRecognitionTaskRequest {
       */
     Url: string;
     /**
-      * 支持HTTP和HTTPS协议，用于接收识别结果，您需要自行搭建公网可调用的服务。回调格式&内容详见：[语音流异步识别回调说明](https://github.com/yunjianfei/qcloud-documents/blob/master/product/%E5%A4%A7%E6%95%B0%E6%8D%AE%E4%B8%8EAI/%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB/%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB%20API%202017/%E8%AF%AD%E9%9F%B3%E6%B5%81%E5%BC%82%E6%AD%A5%E8%AF%86%E5%88%AB%E5%9B%9E%E8%B0%83%E8%AF%B4%E6%98%8E.md)
+      * 支持HTTP和HTTPS协议，用于接收识别结果，您需要自行搭建公网可调用的服务。回调格式&内容详见：[语音流异步识别回调说明](https://cloud.tencent.com/document/product/1093/52633)
       */
     CallbackUrl: string;
     /**
@@ -330,7 +330,7 @@ export interface CreateAsyncRecognitionTaskResponse {
     /**
       * 请求返回结果，包含本次的任务ID(TaskId)
       */
-    Data?: Task;
+    Data: Task;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -352,7 +352,7 @@ export interface DownloadCustomizationResponse {
     /**
       * 下载地址
       */
-    DownloadUrl?: string;
+    DownloadUrl: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -467,12 +467,12 @@ export interface GetCustomizationListResponse {
       * 自学习模型数组
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Data?: Array<Model>;
+    Data: Array<Model>;
     /**
       * 自学习模型总量
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -869,7 +869,7 @@ export interface ModifyCustomizationStateResponse {
     /**
       * 自学习模型ID
       */
-    ModelId?: string;
+    ModelId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

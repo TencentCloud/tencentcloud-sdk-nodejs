@@ -82,6 +82,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ResetRoutes", req, cb);
     }
     /**
+     * 用于修改弹性网卡内网IP属性。
+     */
+    async ModifyPrivateIpAddressesAttribute(req, cb) {
+        return this.request("ModifyPrivateIpAddressesAttribute", req, cb);
+    }
+    /**
      * 创建ECM实例
      */
     async RunInstances(req, cb) {

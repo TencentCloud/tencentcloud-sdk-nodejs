@@ -128,6 +128,7 @@ import {
   TaskOutput,
   ModuleCounter,
   ReplaceSecurityGroupPolicyResponse,
+  ModifyPrivateIpAddressesAttributeResponse,
   ReplaceRoutesResponse,
   RuleHealth,
   Listener,
@@ -259,6 +260,7 @@ import {
   PeakNetwork,
   DescribeCustomImageTaskRequest,
   DescribeSecurityGroupAssociationStatisticsResponse,
+  ModifyPrivateIpAddressesAttributeRequest,
   DescribeTargetsResponse,
   ImageOsList,
   InstanceOperator,
@@ -437,6 +439,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ResetRoutesResponse) => void
   ): Promise<ResetRoutesResponse> {
     return this.request("ResetRoutes", req, cb)
+  }
+
+  /**
+   * 用于修改弹性网卡内网IP属性。
+   */
+  async ModifyPrivateIpAddressesAttribute(
+    req: ModifyPrivateIpAddressesAttributeRequest,
+    cb?: (error: string, rep: ModifyPrivateIpAddressesAttributeResponse) => void
+  ): Promise<ModifyPrivateIpAddressesAttributeResponse> {
+    return this.request("ModifyPrivateIpAddressesAttribute", req, cb)
   }
 
   /**
