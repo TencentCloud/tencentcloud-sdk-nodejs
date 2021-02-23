@@ -53,6 +53,31 @@ export interface CreateJobRequest {
     Remark?: string;
 }
 /**
+ * JobConfig引用资源信息
+ */
+export interface ResourceRefDetail {
+    /**
+      * 资源id
+      */
+    ResourceId: string;
+    /**
+      * 资源版本，-1表示使用最新版本
+      */
+    Version: number;
+    /**
+      * 资源名称
+      */
+    Name: string;
+    /**
+      * 1: 主资源
+      */
+    Type: number;
+    /**
+      * 1: 系统内置资源
+      */
+    SystemProvide: number;
+}
+/**
  * StopJobs请求参数结构体
  */
 export interface StopJobsRequest {
@@ -365,6 +390,35 @@ export interface DescribeSystemResourcesRequest {
     ClusterId?: string;
 }
 /**
+ * DescribeJobConfigs请求参数结构体
+ */
+export interface DescribeJobConfigsRequest {
+    /**
+      * 作业Id
+      */
+    JobId: string;
+    /**
+      * 作业配置版本
+      */
+    JobConfigVersions?: Array<number>;
+    /**
+      * 偏移量，默认0
+      */
+    Offset?: number;
+    /**
+      * 分页大小，默认20，最大100
+      */
+    Limit?: number;
+    /**
+      * 过滤条件
+      */
+    Filters?: Array<Filter>;
+    /**
+      * true 表示只展示草稿
+      */
+    OnlyDraft?: boolean;
+}
+/**
  * 作业启动详情
  */
 export interface RunJobDescription {
@@ -384,6 +438,23 @@ export interface RunJobDescription {
       * 已发布上线的作业配置版本
       */
     JobConfigVersion?: number;
+}
+/**
+ * DescribeJobConfigs返回参数结构体
+ */
+export interface DescribeJobConfigsResponse {
+    /**
+      * 总的配置版本数量
+      */
+    TotalCount: number;
+    /**
+      * 作业配置列表
+      */
+    JobConfigSet: Array<JobConfig>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 资源位置描述
@@ -575,6 +646,73 @@ export interface JobV1 {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ClusterStatus: number;
+}
+/**
+ * 作业配置详情
+ */
+export interface JobConfig {
+    /**
+      * 作业Id
+      */
+    JobId: string;
+    /**
+      * 主类
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EntrypointClass: string;
+    /**
+      * 主类入参
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProgramArgs: string;
+    /**
+      * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Remark: string;
+    /**
+      * 作业配置创建时间
+      */
+    CreateTime: string;
+    /**
+      * 作业配置的版本号
+      */
+    Version: number;
+    /**
+      * 作业默认并行度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DefaultParallelism: number;
+    /**
+      * 系统参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Properties: Array<Property>;
+    /**
+      * 引用资源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResourceRefDetails: Array<ResourceRefDetail>;
+    /**
+      * 创建者uin
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreatorUin: string;
+    /**
+      * 作业配置上次启动时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdateTime: string;
+    /**
+      * 作业绑定的存储桶
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    COSBucket: string;
+    /**
+      * 是否启用日志收集，0-未启用，1-已启用，2-历史集群未设置日志集，3-历史集群已开启
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LogCollect: number;
 }
 /**
  * DescribeSystemResources返回参数结构体

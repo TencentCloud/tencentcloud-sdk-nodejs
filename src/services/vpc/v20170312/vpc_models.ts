@@ -5398,7 +5398,7 @@ export interface CreateNetworkAclRequest {
  */
 export interface DescribeAddressesRequest {
   /**
-   * 标识 EIP 的唯一 ID 列表。EIP 唯一 ID 形如：`eip-11112222`。参数不支持同时指定`AddressIds`和`Filters`。
+   * 标识 EIP 的唯一 ID 列表。EIP 唯一 ID 形如：`eip-11112222`。参数不支持同时指定`AddressIds`和`Filters.address-id`。
    */
   AddressIds?: Array<string>
 
@@ -5412,6 +5412,8 @@ export interface DescribeAddressesRequest {
 <li> private-ip-address - String - 是否必填：否 - （过滤条件）按照 EIP 绑定的内网 IP 过滤。</li>
 <li> network-interface-id - String - 是否必填：否 - （过滤条件）按照 EIP 绑定的弹性网卡 ID 过滤。弹性网卡 ID 形如：eni-11112222。</li>
 <li> is-arrears - String - 是否必填：否 - （过滤条件）按照 EIP 是否欠费进行过滤。（TRUE：EIP 处于欠费状态|FALSE：EIP 费用状态正常）</li>
+<li> address-type - String - 是否必填：否 - （过滤条件）按照 IP类型 进行过滤。可选值：'EIP'，'AnycastEIP'，'HighQualityEIP'</li>
+<li> internet-service-provider - String - 是否必填：否 - （过滤条件）按照 运营商类型 进行过滤。可选值：'BGP'，'CMCC'，'CUCC', 'CTCC'</li>
       */
   Filters?: Array<Filter>
 
@@ -7448,12 +7450,12 @@ export interface DescribeAddressesResponse {
   /**
    * 符合条件的 EIP 数量。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * EIP 详细信息列表。
    */
-  AddressSet?: Array<Address>
+  AddressSet: Array<Address>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

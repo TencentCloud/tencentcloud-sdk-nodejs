@@ -366,13 +366,13 @@ export interface DeleteAcRuleResponse {
   /**
    * 状态值 0: 删除成功, !0: 删除失败
    */
-  Status?: number
+  Status: number
 
   /**
       * 返回多余的信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Info?: string
+  Info: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -929,7 +929,7 @@ export interface DescribeNatRuleOverviewResponse {
  */
 export interface DeleteAcRuleRequest {
   /**
-   * 删除规则对应的id值 669872
+   * 删除规则对应的id值, 对应获取规则列表接口的Id 值
    */
   Id: number
 
@@ -944,7 +944,7 @@ export interface DeleteAcRuleRequest {
   EdgeId?: string
 
   /**
-   * NAT地域
+   * NAT地域， 如ap-shanghai/ap-guangzhou/ap-chongqing等
    */
   Area?: string
 }

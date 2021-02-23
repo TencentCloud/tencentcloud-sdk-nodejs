@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateResourceRequest, CreateJobRequest, StopJobsRequest, CreateJobResponse, RunJobsRequest, DeleteTableConfigResponse, CreateResourceConfigResponse, CreateJobConfigRequest, CreateResourceConfigRequest, CreateResourceResponse, DeleteTableConfigRequest, StopJobsResponse, CreateJobConfigResponse, RunJobsResponse, DescribeJobsResponse, DescribeSystemResourcesRequest, DescribeJobsRequest, DescribeSystemResourcesResponse } from "./oceanus_models";
+import { CreateResourceRequest, CreateJobRequest, StopJobsRequest, CreateJobResponse, RunJobsRequest, DeleteTableConfigResponse, CreateResourceConfigResponse, CreateJobConfigRequest, CreateResourceConfigRequest, CreateResourceResponse, DeleteTableConfigRequest, StopJobsResponse, CreateJobConfigResponse, RunJobsResponse, DescribeJobsResponse, DescribeSystemResourcesRequest, DescribeJobConfigsRequest, DescribeJobConfigsResponse, DescribeJobsRequest, DescribeSystemResourcesResponse } from "./oceanus_models";
 /**
  * oceanus client
  * @class
@@ -43,4 +43,8 @@ export declare class Client extends AbstractClient {
      * 新建作业接口，一个 AppId 最多允许创建1000个作业
      */
     CreateJob(req: CreateJobRequest, cb?: (error: string, rep: CreateJobResponse) => void): Promise<CreateJobResponse>;
+    /**
+     * 查询作业配置列表，一次最多查询100个
+     */
+    DescribeJobConfigs(req: DescribeJobConfigsRequest, cb?: (error: string, rep: DescribeJobConfigsResponse) => void): Promise<DescribeJobConfigsResponse>;
 }

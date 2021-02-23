@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   CreateResourceRequest,
   CreateJobRequest,
+  ResourceRefDetail,
   StopJobsRequest,
   CreateJobResponse,
   RunJobsRequest,
@@ -39,11 +40,14 @@ import {
   DescribeJobsResponse,
   Property,
   DescribeSystemResourcesRequest,
+  DescribeJobConfigsRequest,
   RunJobDescription,
+  DescribeJobConfigsResponse,
   ResourceLoc,
   ResourceRef,
   DescribeJobsRequest,
   JobV1,
+  JobConfig,
   DescribeSystemResourcesResponse,
 } from "./oceanus_models"
 
@@ -144,5 +148,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateJobResponse) => void
   ): Promise<CreateJobResponse> {
     return this.request("CreateJob", req, cb)
+  }
+
+  /**
+   * 查询作业配置列表，一次最多查询100个
+   */
+  async DescribeJobConfigs(
+    req: DescribeJobConfigsRequest,
+    cb?: (error: string, rep: DescribeJobConfigsResponse) => void
+  ): Promise<DescribeJobConfigsResponse> {
+    return this.request("DescribeJobConfigs", req, cb)
   }
 }

@@ -81,6 +81,12 @@ export interface TopicDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Config: Config
+
+  /**
+      * 消息保留时间配置(用于动态配置变更记录)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RetentionTimeConfig: TopicRetentionTimeConfigRsp
 }
 
 /**
@@ -877,6 +883,35 @@ export interface DeleteAclResponse {
 }
 
 /**
+ * 动态消息保留时间配置
+ */
+export interface DynamicRetentionTime {
+  /**
+      * 动态消息保留时间配置开关（0: 关闭，1: 开启）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Enable?: number
+
+  /**
+      * 磁盘配额百分比触发条件，即消息达到此值触发消息保留时间变更事件
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiskQuotaPercentage?: number
+
+  /**
+      * 每次向前调整消息保留时间百分比
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StepForwardPercentage?: number
+
+  /**
+      * 保底时长，单位分钟
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BottomRetention?: number
+}
+
+/**
  * DescribeRoute请求参数结构体
  */
 export interface DescribeRouteRequest {
@@ -1223,6 +1258,16 @@ export interface ModifyInstanceAttributesRequest {
    * 实例配置
    */
   Config?: ModifyInstanceAttributesConfig
+
+  /**
+   * 动态消息保留策略配置
+   */
+  DynamicRetentionConfig?: DynamicRetentionTime
+
+  /**
+   * 修改升配置rebalance时间
+   */
+  RebalanceTime?: number
 }
 
 /**
@@ -1546,7 +1591,7 @@ export interface InstanceAttributesResponse {
   MaxGroupNum: number
 
   /**
-      * 售卖类型
+      * 售卖类型,0:标准版,1:专业版
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Cvm: number
@@ -1562,6 +1607,12 @@ export interface InstanceAttributesResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Features: Array<string>
+
+  /**
+      * 动态消息保留策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RetentionTimeConfig: DynamicRetentionTime
 }
 
 /**
@@ -2103,6 +2154,29 @@ export interface Acl {
 }
 
 /**
+ * Topic消息保留时间配置返回信息
+ */
+export interface TopicRetentionTimeConfigRsp {
+  /**
+      * 期望值，即用户配置的Topic消息保留时间(单位分钟)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Expect: number
+
+  /**
+      * 当前值，即当前生效值(可能存在动态调整，单位分钟)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Current: number
+
+  /**
+      * 最近变更时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ModTimeStamp: number
+}
+
+/**
  * ModifyTopicAttributes请求参数结构体
  */
 export interface ModifyTopicAttributesRequest {
@@ -2418,6 +2492,36 @@ export interface InstanceDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Cvm: number
+
+  /**
+      * ckafka实例类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceType: string
+
+  /**
+      * 磁盘类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DiskType: string
+
+  /**
+      * 当前规格最大Topic数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxTopicNumber: number
+
+  /**
+      * 当前规格最大Partition数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxPartitionNumber: number
+
+  /**
+      * 计划升级配置时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RebalanceTime: string
 }
 
 /**

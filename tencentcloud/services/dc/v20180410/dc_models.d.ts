@@ -1252,6 +1252,11 @@ export interface AccessPoint {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     City: string;
+    /**
+      * 接入点地域名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Area: string;
 }
 /**
  * DescribeInternetAddressStatistics返回参数结构体

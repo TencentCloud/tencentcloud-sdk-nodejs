@@ -872,7 +872,7 @@ export interface DescribeDetailEventResponse {
     /**
       * 返回的事件列表
       */
-    Data?: Array<EventList>;
+    Data: Array<EventList>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

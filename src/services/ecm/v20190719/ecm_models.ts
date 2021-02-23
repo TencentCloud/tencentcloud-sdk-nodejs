@@ -36,12 +36,12 @@ export interface DescribeTaskResultResponse {
   /**
    * 异步任务ID。
    */
-  TaskId?: string
+  TaskId: string
 
   /**
    * 执行结果，包括"SUCCESS", "FAILED", "RUNNING"
    */
-  Result?: string
+  Result: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -883,6 +883,23 @@ export interface DescribeSubnetsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 标签信息。
+ */
+export interface Tag {
+  /**
+      * 标签的键。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Key: string
+
+  /**
+      * 标签的值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Value: string
 }
 
 /**
@@ -2513,7 +2530,7 @@ export interface DescribeTaskStatusResponse {
   /**
    * 任务描述
    */
-  TaskSet?: Array<TaskOutput>
+  TaskSet: Array<TaskOutput>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3806,10 +3823,16 @@ export interface DescribeConfigResponse {
   NetworkStorageRange?: NetworkStorageRange
 
   /**
-      * 镜像操作系统白名单
+      * 镜像操作系统白名单。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ImageWhiteSet?: Array<string>
+
+  /**
+      * 网络限额信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InstanceNetworkLimitConfigs?: Array<InstanceNetworkLimitConfig>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6368,20 +6391,28 @@ export interface ModifyImageAttributeRequest {
 }
 
 /**
- * 标签信息。
+ * 机器网络资源限制
  */
-export interface Tag {
+export interface InstanceNetworkLimitConfig {
   /**
-      * 标签的键。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Key: string
+   * cpu核数
+   */
+  CpuNum: number
 
   /**
-      * 标签的值。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Value: string
+   * 网卡数量限制
+   */
+  NetworkInterfaceLimit: number
+
+  /**
+   * 每张网卡内网ip数量限制
+   */
+  InnerIpPerNetworkInterface: number
+
+  /**
+   * 每个实例的外网ip限制
+   */
+  PublicIpPerInstance: number
 }
 
 /**

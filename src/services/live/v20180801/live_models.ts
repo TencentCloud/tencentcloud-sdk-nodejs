@@ -2371,7 +2371,7 @@ export interface CreateLiveTranscodeTemplateResponse {
   /**
    * 模板Id。
    */
-  TemplateId?: number
+  TemplateId: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5398,16 +5398,16 @@ origin: 保持原始编码格式
   Description?: string
 
   /**
+   * 是否保留视频，0：否，1：是。默认1。
+   */
+  NeedVideo?: number
+
+  /**
       * 宽，默认0。
 范围[0-3000]
 数值必须是2的倍数，0是原始宽度
       */
   Width?: number
-
-  /**
-   * 是否保留视频，0：否，1：是。默认1。
-   */
-  NeedVideo?: number
 
   /**
    * 是否保留音频，0：否，1：是。默认1。
@@ -5417,7 +5417,7 @@ origin: 保持原始编码格式
   /**
       * 高，默认0。
 范围[0-3000]
-数值必须是2的倍数，0是原始宽度
+数值必须是2的倍数，0是原始高度。
       */
   Height?: number
 

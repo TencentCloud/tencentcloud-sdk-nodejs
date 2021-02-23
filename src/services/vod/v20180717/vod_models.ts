@@ -2338,12 +2338,12 @@ export interface DescribeCDNStatDetailsResponse {
   /**
    * 每条数据的时间粒度，单位：分钟。
    */
-  DataInterval?: number
+  DataInterval: number
 
   /**
    * CDN 用量数据。
    */
-  Data?: Array<StatDataItem>
+  Data: Array<StatDataItem>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

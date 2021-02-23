@@ -81,5 +81,11 @@ class Client extends abstract_client_1.AbstractClient {
     async CreateJob(req, cb) {
         return this.request("CreateJob", req, cb);
     }
+    /**
+     * 查询作业配置列表，一次最多查询100个
+     */
+    async DescribeJobConfigs(req, cb) {
+        return this.request("DescribeJobConfigs", req, cb);
+    }
 }
 exports.Client = Client;

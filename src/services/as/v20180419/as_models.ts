@@ -328,7 +328,7 @@ export interface CreateAutoScalingGroupResponse {
   /**
    * 伸缩组ID
    */
-  AutoScalingGroupId?: string
+  AutoScalingGroupId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1936,7 +1936,7 @@ export interface CreateAutoScalingGroupFromInstanceResponse {
   /**
    * 伸缩组ID
    */
-  AutoScalingGroupId?: string
+  AutoScalingGroupId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

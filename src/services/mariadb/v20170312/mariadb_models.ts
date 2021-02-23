@@ -1041,7 +1041,7 @@ export interface DescribeProjectSecurityGroupsResponse {
   /**
    * 安全组详情。
    */
-  Groups?: Array<SecurityGroup>
+  Groups: Array<SecurityGroup>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
