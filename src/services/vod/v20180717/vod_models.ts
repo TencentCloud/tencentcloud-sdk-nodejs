@@ -6296,6 +6296,12 @@ export interface ComposeMediaTask {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: ComposeMediaTaskOutput
+
+  /**
+      * 原始视频的元信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MetaData: MediaMetaData
 }
 
 /**
@@ -13382,6 +13388,11 @@ export interface EditMediaTask {
    * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
    */
   SessionId: string
+
+  /**
+   * 原始视频的元信息。
+   */
+  MetaData: MediaMetaData
 }
 
 /**
@@ -14206,6 +14217,11 @@ export interface PullUploadTask {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MediaBasicInfo: MediaBasicInfo
+
+  /**
+   * 原始视频的元信息。
+   */
+  MetaData: MediaMetaData
 
   /**
    * 转拉上传完成后生成的播放地址。

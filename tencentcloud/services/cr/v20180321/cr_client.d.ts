@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { QueryCallListRequest, CreateBotTaskRequest, ChangeBotTaskStatusResponse, UploadFileRequest, UploadFileResponse, UploadDataJsonResponse, DescribeBotFlowResponse, DescribeTaskStatusResponse, QueryCallListResponse, DownloadBotRecordRequest, DownloadReportRequest, ApplyCreditAuditResponse, UploadDataFileResponse, DownloadRecordListRequest, DescribeFileModelRequest, QueryInstantDataResponse, UploadBotFileResponse, UploadDataJsonRequest, DescribeCreditResultResponse, DownloadDialogueTextResponse, DescribeBotFlowRequest, ApplyBlackListResponse, DescribeRecordsRequest, QueryBotListRequest, QueryRecordListRequest, ExportBotDataResponse, QueryRecordListResponse, QueryInstantDataRequest, ExportBotDataRequest, ApplyBlackListDataRequest, ChangeBotCallStatusResponse, ApplyBlackListRequest, ApplyBlackListDataResponse, ApplyCreditAuditRequest, DownloadReportResponse, UpdateBotTaskResponse, UploadBotDataResponse, ChangeBotTaskStatusRequest, DownloadRecordListResponse, CreateBotTaskResponse, UpdateBotTaskRequest, DescribeCreditResultRequest, UploadBotFileRequest, UploadDataFileRequest, DescribeFileModelResponse, QueryBotListResponse, DescribeTaskStatusRequest, ChangeBotCallStatusRequest, DownloadBotRecordResponse, QueryProductsRequest, UploadBotDataRequest, QueryProductsResponse, DescribeRecordsResponse, DownloadDialogueTextRequest } from "./cr_models";
+import { QueryCallListRequest, CreateBotTaskRequest, ChangeBotTaskStatusResponse, UploadFileRequest, UploadFileResponse, UploadDataJsonResponse, DescribeBotFlowResponse, DescribeTaskStatusResponse, QueryBlackListDataRequest, DownloadBotRecordRequest, DownloadReportRequest, ApplyCreditAuditResponse, UploadDataFileResponse, DownloadRecordListRequest, DescribeFileModelRequest, QueryInstantDataResponse, UploadBotFileResponse, QueryBlackListDataResponse, DescribeCreditResultResponse, UploadBotDataRequest, DownloadDialogueTextResponse, DescribeBotFlowRequest, ApplyBlackListResponse, DescribeRecordsRequest, QueryBotListRequest, QueryRecordListRequest, ExportBotDataResponse, QueryRecordListResponse, QueryInstantDataRequest, ExportBotDataRequest, ApplyBlackListDataRequest, ChangeBotCallStatusResponse, ApplyBlackListRequest, ApplyBlackListDataResponse, ApplyCreditAuditRequest, DownloadReportResponse, UpdateBotTaskResponse, UploadBotDataResponse, ChangeBotTaskStatusRequest, DownloadRecordListResponse, CreateBotTaskResponse, UpdateBotTaskRequest, DescribeCreditResultRequest, UploadBotFileRequest, UploadDataFileRequest, UploadDataJsonRequest, DescribeFileModelResponse, QueryBotListResponse, DescribeTaskStatusRequest, ChangeBotCallStatusRequest, DownloadBotRecordResponse, QueryProductsRequest, QueryCallListResponse, QueryProductsResponse, DescribeRecordsResponse, DownloadDialogueTextRequest } from "./cr_models";
 /**
  * cr client
  * @class
@@ -36,9 +36,9 @@ export declare class Client extends AbstractClient {
      */
     UploadBotData(req: UploadBotDataRequest, cb?: (error: string, rep: UploadBotDataResponse) => void): Promise<UploadBotDataResponse>;
     /**
-     * 提交机器人黑名单申请
+     * 查看黑名单数据列表
      */
-    ApplyBlackListData(req: ApplyBlackListDataRequest, cb?: (error: string, rep: ApplyBlackListDataResponse) => void): Promise<ApplyBlackListDataResponse>;
+    QueryBlackListData(req: QueryBlackListDataRequest, cb?: (error: string, rep: QueryBlackListDataResponse) => void): Promise<QueryBlackListDataResponse>;
     /**
      * 用于获取指定案件的录音地址，次日早上8:00后可查询前日录音。
      */
@@ -79,6 +79,10 @@ export declare class Client extends AbstractClient {
      * 根据上传文件接口的输出参数DataResId，获取相关上传结果。
      */
     DescribeTaskStatus(req: DescribeTaskStatusRequest, cb?: (error: string, rep: DescribeTaskStatusResponse) => void): Promise<DescribeTaskStatusResponse>;
+    /**
+     * 提交机器人黑名单申请
+     */
+    ApplyBlackListData(req: ApplyBlackListDataRequest, cb?: (error: string, rep: ApplyBlackListDataResponse) => void): Promise<ApplyBlackListDataResponse>;
     /**
      * 查询产品列表
      */

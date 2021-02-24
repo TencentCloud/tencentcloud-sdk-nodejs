@@ -27,7 +27,7 @@ import {
   UploadDataJsonResponse,
   DescribeBotFlowResponse,
   DescribeTaskStatusResponse,
-  QueryCallListResponse,
+  QueryBlackListDataRequest,
   DownloadBotRecordRequest,
   DownloadReportRequest,
   ApplyCreditAuditResponse,
@@ -39,10 +39,11 @@ import {
   QueryInstantDataResponse,
   CallTimeDict,
   UploadBotFileResponse,
-  UploadDataJsonRequest,
+  QueryBlackListDataResponse,
   CallTimeInfo,
   BlackListData,
   DescribeCreditResultResponse,
+  UploadBotDataRequest,
   DownloadDialogueTextResponse,
   DescribeBotFlowRequest,
   SingleBlackApply,
@@ -74,6 +75,7 @@ import {
   DescribeCreditResultRequest,
   UploadBotFileRequest,
   UploadDataFileRequest,
+  UploadDataJsonRequest,
   DescribeFileModelResponse,
   QueryBotListResponse,
   DescribeTaskStatusRequest,
@@ -81,7 +83,7 @@ import {
   ProductQueryInfo,
   DownloadBotRecordResponse,
   QueryProductsRequest,
-  UploadBotDataRequest,
+  QueryCallListResponse,
   SmsSign,
   QueryProductsResponse,
   DescribeRecordsResponse,
@@ -168,13 +170,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 提交机器人黑名单申请
+   * 查看黑名单数据列表
    */
-  async ApplyBlackListData(
-    req: ApplyBlackListDataRequest,
-    cb?: (error: string, rep: ApplyBlackListDataResponse) => void
-  ): Promise<ApplyBlackListDataResponse> {
-    return this.request("ApplyBlackListData", req, cb)
+  async QueryBlackListData(
+    req: QueryBlackListDataRequest,
+    cb?: (error: string, rep: QueryBlackListDataResponse) => void
+  ): Promise<QueryBlackListDataResponse> {
+    return this.request("QueryBlackListData", req, cb)
   }
 
   /**
@@ -275,6 +277,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTaskStatusResponse) => void
   ): Promise<DescribeTaskStatusResponse> {
     return this.request("DescribeTaskStatus", req, cb)
+  }
+
+  /**
+   * 提交机器人黑名单申请
+   */
+  async ApplyBlackListData(
+    req: ApplyBlackListDataRequest,
+    cb?: (error: string, rep: ApplyBlackListDataResponse) => void
+  ): Promise<ApplyBlackListDataResponse> {
+    return this.request("ApplyBlackListData", req, cb)
   }
 
   /**

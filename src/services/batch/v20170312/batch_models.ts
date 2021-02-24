@@ -338,6 +338,11 @@ export interface SystemDisk {
    * 系统盘大小，单位：GB。默认值为 50
    */
   DiskSize?: number
+
+  /**
+   * 所属的独享集群ID。
+   */
+  CdcId?: string
 }
 
 /**
@@ -1797,6 +1802,12 @@ export interface DataDisk {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ThroughputPerformance?: number
+
+  /**
+      * 所属的独享集群ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CdcId?: string
 }
 
 /**

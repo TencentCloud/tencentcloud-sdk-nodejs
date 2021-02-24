@@ -70,10 +70,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UploadBotData", req, cb);
     }
     /**
-     * 提交机器人黑名单申请
+     * 查看黑名单数据列表
      */
-    async ApplyBlackListData(req, cb) {
-        return this.request("ApplyBlackListData", req, cb);
+    async QueryBlackListData(req, cb) {
+        return this.request("QueryBlackListData", req, cb);
     }
     /**
      * 用于获取指定案件的录音地址，次日早上8:00后可查询前日录音。
@@ -134,6 +134,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeTaskStatus(req, cb) {
         return this.request("DescribeTaskStatus", req, cb);
+    }
+    /**
+     * 提交机器人黑名单申请
+     */
+    async ApplyBlackListData(req, cb) {
+        return this.request("ApplyBlackListData", req, cb);
     }
     /**
      * 查询产品列表

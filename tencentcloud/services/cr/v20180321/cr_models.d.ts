@@ -229,18 +229,37 @@ export interface DescribeTaskStatusResponse {
     RequestId?: string;
 }
 /**
- * QueryCallList返回参数结构体
+ * QueryBlackListData请求参数结构体
  */
-export interface QueryCallListResponse {
+export interface QueryBlackListDataRequest {
     /**
-      * 任务作业状态
-注意：此字段可能返回 null，表示取不到有效值。
+      * 模块:AiApi
       */
-    CallList: Array<CallInfo>;
+    Module: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 操作:QueryBlackListData
       */
-    RequestId?: string;
+    Operation: string;
+    /**
+      * 页码
+      */
+    Offset?: number;
+    /**
+      * 每页数量
+      */
+    Limit?: number;
+    /**
+      * 开始日期
+      */
+    StartBizDate?: string;
+    /**
+      * 结束日期
+      */
+    EndBizDate?: string;
+    /**
+      * 电话号码、手机
+      */
+    BlackValue?: string;
 }
 /**
  * DownloadBotRecord请求参数结构体
@@ -457,29 +476,22 @@ export interface UploadBotFileResponse {
     RequestId?: string;
 }
 /**
- * UploadDataJson请求参数结构体
+ * QueryBlackListData返回参数结构体
  */
-export interface UploadDataJsonRequest {
+export interface QueryBlackListDataResponse {
     /**
-      * 模块名，本接口取值：Data
+      * 总数。
       */
-    Module: string;
+    TotalCount: number;
     /**
-      * 操作名，本接口取值：UploadJson
+      * 黑名单列表
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Operation: string;
+    Data: Array<BlackListData>;
     /**
-      * 报文信息
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Data: string;
-    /**
-      * <p>上传类型，不填默认到期/逾期提醒数据，取值范围：</p><ul style="margin-bottom:0px;"><li>data：到期/逾期提醒数据</li><li>repay：到期/逾期提醒停拨数据</li></ul>
-      */
-    UploadModel?: string;
-    /**
-      * 实例ID，不传默认为系统分配的初始实例。
-      */
-    InstanceId?: string;
+    RequestId?: string;
 }
 /**
  * 产品拨打时间信息
@@ -566,6 +578,31 @@ export interface DescribeCreditResultResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * UploadBotData请求参数结构体
+ */
+export interface UploadBotDataRequest {
+    /**
+      * 模块名。默认值（固定）：AiApi
+      */
+    Module: string;
+    /**
+      * 操作名。默认值（固定）：UploadData
+      */
+    Operation: string;
+    /**
+      * 任务数据。JSON格式
+      */
+    Data: string;
+    /**
+      * 任务ID，二者必填一个
+      */
+    BotId?: string;
+    /**
+      * 任务名称，二者必填一个
+      */
+    BotName?: string;
 }
 /**
  * DownloadDialogueText返回参数结构体
@@ -1292,6 +1329,31 @@ export interface UploadDataFileRequest {
     InstId?: string;
 }
 /**
+ * UploadDataJson请求参数结构体
+ */
+export interface UploadDataJsonRequest {
+    /**
+      * 模块名，本接口取值：Data
+      */
+    Module: string;
+    /**
+      * 操作名，本接口取值：UploadJson
+      */
+    Operation: string;
+    /**
+      * 报文信息
+      */
+    Data: string;
+    /**
+      * <p>上传类型，不填默认到期/逾期提醒数据，取值范围：</p><ul style="margin-bottom:0px;"><li>data：到期/逾期提醒数据</li><li>repay：到期/逾期提醒停拨数据</li></ul>
+      */
+    UploadModel?: string;
+    /**
+      * 实例ID，不传默认为系统分配的初始实例。
+      */
+    InstanceId?: string;
+}
+/**
  * DescribeFileModel返回参数结构体
  */
 export interface DescribeFileModelResponse {
@@ -1435,29 +1497,18 @@ export interface QueryProductsRequest {
     InstanceId: string;
 }
 /**
- * UploadBotData请求参数结构体
+ * QueryCallList返回参数结构体
  */
-export interface UploadBotDataRequest {
+export interface QueryCallListResponse {
     /**
-      * 模块名。默认值（固定）：AiApi
+      * 任务作业状态
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Module: string;
+    CallList: Array<CallInfo>;
     /**
-      * 操作名。默认值（固定）：UploadData
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Operation: string;
-    /**
-      * 任务数据。JSON格式
-      */
-    Data: string;
-    /**
-      * 任务ID，二者必填一个
-      */
-    BotId?: string;
-    /**
-      * 任务名称，二者必填一个
-      */
-    BotName?: string;
+    RequestId?: string;
 }
 /**
  * 短信签名信息

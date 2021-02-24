@@ -88,9 +88,9 @@ it("cr.v20180321.UploadBotData", async function () {
     }
 })
 
-it("cr.v20180321.ApplyBlackListData", async function () {
+it("cr.v20180321.QueryBlackListData", async function () {
     try {
-       const data = await client.ApplyBlackListData({})
+       const data = await client.QueryBlackListData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -191,6 +191,16 @@ it("cr.v20180321.DescribeCreditResult", async function () {
 it("cr.v20180321.DescribeTaskStatus", async function () {
     try {
        const data = await client.DescribeTaskStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cr.v20180321.ApplyBlackListData", async function () {
+    try {
+       const data = await client.ApplyBlackListData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

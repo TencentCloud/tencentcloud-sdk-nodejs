@@ -1793,6 +1793,12 @@ export interface InstanceIntegerParam {
    * 参数状态, 1: 修改中， 2：修改完成
    */
   Status: number
+
+  /**
+      * 参数单位
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Unit: string
 }
 
 /**
@@ -4361,4 +4367,9 @@ export interface InstanceSlowlogDetail {
    * 执行时间
    */
   ExecuteTime: string
+
+  /**
+   * 节点ID
+   */
+  Node: string
 }
