@@ -948,6 +948,16 @@ it("cwp.v20180228.ModifyProVersionRenewFlag", async function () {
     }
 })
 
+it("cwp.v20180228.DescribeGeneralStat", async function () {
+    try {
+       const data = await client.DescribeGeneralStat({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.SetBashEventsStatus", async function () {
     try {
        const data = await client.SetBashEventsStatus({})

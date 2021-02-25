@@ -28,6 +28,16 @@ it("tcr.v20190924.ModifyNamespace", async function () {
     }
 })
 
+it("tcr.v20190924.DescribeWebhookTrigger", async function () {
+    try {
+       const data = await client.DescribeWebhookTrigger({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.DescribeImageFilterPersonal", async function () {
     try {
        const data = await client.DescribeImageFilterPersonal({})
@@ -318,9 +328,9 @@ it("tcr.v20190924.DeleteApplicationTriggerPersonal", async function () {
     }
 })
 
-it("tcr.v20190924.DescribeWebhookTrigger", async function () {
+it("tcr.v20190924.CreateInternalEndpointDns", async function () {
     try {
-       const data = await client.DescribeWebhookTrigger({})
+       const data = await client.CreateInternalEndpointDns({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -448,6 +458,16 @@ it("tcr.v20190924.DescribeReplicationInstanceCreateTasks", async function () {
     }
 })
 
+it("tcr.v20190924.DescribeInternalEndpoints", async function () {
+    try {
+       const data = await client.DescribeInternalEndpoints({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.CreateRepository", async function () {
     try {
        const data = await client.CreateRepository({})
@@ -511,6 +531,16 @@ it("tcr.v20190924.CreateRepositoryPersonal", async function () {
 it("tcr.v20190924.BatchDeleteImagePersonal", async function () {
     try {
        const data = await client.BatchDeleteImagePersonal({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcr.v20190924.DescribeInternalEndpointDnsStatus", async function () {
+    try {
+       const data = await client.DescribeInternalEndpointDnsStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -598,9 +628,9 @@ it("tcr.v20190924.ModifyRepositoryAccessPersonal", async function () {
     }
 })
 
-it("tcr.v20190924.DescribeInternalEndpoints", async function () {
+it("tcr.v20190924.DeleteInternalEndpointDns", async function () {
     try {
-       const data = await client.DescribeInternalEndpoints({})
+       const data = await client.DeleteInternalEndpointDns({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

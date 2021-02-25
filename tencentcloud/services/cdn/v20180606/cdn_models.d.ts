@@ -5,11 +5,11 @@ export interface DescribeCdnDomainLogsResponse {
     /**
       * 日志包下载链接
       */
-    DomainLogs?: Array<DomainLog>;
+    DomainLogs: Array<DomainLog>;
     /**
       * 查询到的总条数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -534,7 +534,7 @@ export interface PurgePathCacheResponse {
     /**
       * 刷新任务 ID，同一批次提交的目录共用一个任务 ID
       */
-    TaskId?: string;
+    TaskId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -681,11 +681,11 @@ min：1 分钟粒度
 hour：1 小时粒度
 day：天粒度
       */
-    Interval?: string;
+    Interval: string;
     /**
       * 指定条件查询得到的数据明细
       */
-    Data?: Array<ResourceData>;
+    Data: Array<ResourceData>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1025,12 +1025,12 @@ export interface DescribeDomainsResponse {
     /**
       * 域名列表
       */
-    Domains?: Array<BriefDomain>;
+    Domains: Array<BriefDomain>;
     /**
       * 符合查询条件的域名总数
 用于分页查询
       */
-    TotalNumber?: number;
+    TotalNumber: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1746,11 +1746,11 @@ export interface DescribeReportDataResponse {
     /**
       * 域名维度数据详情
       */
-    DomainReport?: Array<ReportData>;
+    DomainReport: Array<ReportData>;
     /**
       * 项目维度数据详情
       */
-    ProjectReport?: Array<ReportData>;
+    ProjectReport: Array<ReportData>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1990,11 +1990,11 @@ export interface DescribeIpVisitResponse {
     /**
       * 数据统计的时间粒度，支持5min,  day，分别表示5分钟，1天的时间粒度。
       */
-    Interval?: string;
+    Interval: string;
     /**
       * 各个资源的回源数据详情。
       */
-    Data?: Array<ResourceData>;
+    Data: Array<ResourceData>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2703,9 +2703,9 @@ off：关闭
       */
     IgnoreCacheControl: string;
     /**
-      * 忽略源站的 Set-Cookie 头部
-on：开启
-off：关闭
+      * 当源站返回Set-Cookie头部时，节点是否缓存该头部及body
+on：开启，不缓存该头部及body
+off：关闭，遵循用户自定义的节点缓存规则
 默认为关闭状态
 注意：此字段可能返回 null，表示取不到有效值。
       */
@@ -2814,12 +2814,12 @@ export interface DescribeCertDomainsResponse {
       * 已接入CDN的域名列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Domains?: Array<string>;
+    Domains: Array<string>;
     /**
       * 已配置证书的CDN域名列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    CertifiedDomains?: Array<string>;
+    CertifiedDomains: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3028,12 +3028,12 @@ export interface DescribePushTasksResponse {
       * 预热历史记录
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    PushLogs?: Array<PushTask>;
+    PushLogs: Array<PushTask>;
     /**
       * 任务总数，用于分页
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3774,12 +3774,12 @@ export interface GetDisableRecordsResponse {
       * 封禁历史记录
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    UrlRecordList?: Array<UrlRecord>;
+    UrlRecordList: Array<UrlRecord>;
     /**
       * 任务总数，用于分页
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4081,7 +4081,7 @@ export interface SearchClsLogResponse {
     /**
       * 查询结果
       */
-    Logs?: ClsSearchLogs;
+    Logs: ClsSearchLogs;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4929,7 +4929,7 @@ export interface PurgeUrlsCacheResponse {
     /**
       * 刷新任务 ID，同一批次提交的 URL 共用一个任务 ID
       */
-    TaskId?: string;
+    TaskId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4999,11 +4999,11 @@ min：1 分钟粒度
 hour：1 小时粒度
 day：天粒度
       */
-    Interval?: string;
+    Interval: string;
     /**
       * 数据明细
       */
-    Data?: Array<ResourceBillingData>;
+    Data: Array<ResourceBillingData>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5362,7 +5362,7 @@ export interface DeleteScdnDomainResponse {
     /**
       * 创建结果，Success表示成功
       */
-    Result?: string;
+    Result: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5885,7 +5885,7 @@ export interface PushUrlsCacheResponse {
     /**
       * 此批提交的任务 ID
       */
-    TaskId?: string;
+    TaskId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6313,12 +6313,12 @@ export interface DescribePurgeTasksResponse {
       * 详细刷新记录
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    PurgeLogs?: Array<PurgeTask>;
+    PurgeLogs: Array<PurgeTask>;
     /**
       * 任务总数，用于分页
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6366,11 +6366,11 @@ export interface DescribeOriginDataResponse {
     /**
       * 数据统计的时间粒度，支持min, 5min, hour, day，分别表示1分钟，5分钟，1小时和1天的时间粒度。
       */
-    Interval?: string;
+    Interval: string;
     /**
       * 各个资源的回源数据详情。
       */
-    Data?: Array<ResourceOriginData>;
+    Data: Array<ResourceOriginData>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -438,6 +438,16 @@ it("iotvideo.v20191126.DescribeTraceStatus", async function () {
     }
 })
 
+it("iotvideo.v20191126.DescribeStream", async function () {
+    try {
+       const data = await client.DescribeStream({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideo.v20191126.DescribeRegistrationStatus", async function () {
     try {
        const data = await client.DescribeRegistrationStatus({})

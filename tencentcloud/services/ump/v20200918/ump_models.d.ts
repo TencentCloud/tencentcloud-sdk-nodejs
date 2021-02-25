@@ -1,4 +1,13 @@
 /**
+ * ModifyMultiBizConfig返回参数结构体
+ */
+export interface ModifyMultiBizConfigResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateMultiBizAlert返回参数结构体
  */
 export interface CreateMultiBizAlertResponse {
@@ -344,6 +353,22 @@ export interface CreateProgramStateResponse {
     RequestId?: string;
 }
 /**
+ * 用于服务注册时表示当前服务的具体信息
+ */
+export interface ServiceRegisterInfo {
+    /**
+      * 当前服务的回调地址
+      */
+    CgiUrl: string;
+    /**
+      * 当前服务类型:
+1: 多经服务
+2: 相机误报警确认
+3: 底图更新
+      */
+    ServiceType: number;
+}
+/**
  * DescribeTasks请求参数结构体
  */
 export interface DescribeTasksRequest {
@@ -392,21 +417,33 @@ export interface DeleteMultiBizAlertResponse {
     RequestId?: string;
 }
 /**
- * 以图搜图检索结果
+ * ReportServiceRegister请求参数结构体
  */
-export interface SearchResult {
+export interface ReportServiceRegisterRequest {
     /**
-      * 图片base64数据
+      * 集团编码
       */
-    Image: string;
+    GroupCode: string;
     /**
-      * 身份ID
+      * 广场ID
       */
-    PersonId: string;
+    MallId: number;
     /**
-      * 相似度
+      * 服务上报当前的服务能力信息
       */
-    Similarity: number;
+    ServiceRegisterInfos: Array<ServiceRegisterInfo>;
+    /**
+      * 服务内网Ip
+      */
+    ServerIp: string;
+    /**
+      * 上报服务所在服务器的唯一ID
+      */
+    ServerNodeId: string;
+    /**
+      * 上报时间戳, 单位毫秒
+      */
+    ReportTime: number;
 }
 /**
  * DescribeImage返回参数结构体
@@ -455,6 +492,15 @@ export interface CreateCameraAlertAlert {
     CoverAlert?: CreateCameraAlertsCoverAlert;
 }
 /**
+ * ReportServiceRegister返回参数结构体
+ */
+export interface ReportServiceRegisterResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 硬盘监控信息
  */
 export interface DiskInfo {
@@ -468,13 +514,53 @@ export interface DiskInfo {
     Usage: number;
 }
 /**
- * DeleteTask返回参数结构体
+ * CreateCameraState返回参数结构体
  */
-export interface DeleteTaskResponse {
+export interface CreateCameraStateResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * CreateMultiBizAlert请求参数结构体
+ */
+export interface CreateMultiBizAlertRequest {
+    /**
+      * 集团编码
+      */
+    GroupCode: string;
+    /**
+      * 广场ID
+      */
+    MallId: number;
+    /**
+      * 点位ID
+      */
+    ZoneId: number;
+    /**
+      * 摄像头ID
+      */
+    CameraId: number;
+    /**
+      * 时间戳，毫秒
+      */
+    CaptureTime: number;
+    /**
+      * 状态:
+1: 侵占
+2: 消失
+3: 即侵占又消失
+      */
+    State: number;
+    /**
+      * 图片base64字符串
+      */
+    Image?: string;
+    /**
+      * 告警列表
+      */
+    Warnings?: Array<MultiBizWarning>;
 }
 /**
  * CreateProgramState请求参数结构体
@@ -513,6 +599,30 @@ export interface DescribeMultiBizBaseImageRequest {
       * 点位ID
       */
     ZoneId: number;
+}
+/**
+ * 多经点位告警信息
+ */
+export interface MultiBizWarningInfo {
+    /**
+      * 告警类型：
+0: 无变化
+1: 侵占
+2: 消失
+      */
+    WarningType: number;
+    /**
+      * 告警侵占或消失面积
+      */
+    WarningAreaSize: number;
+    /**
+      * 告警侵占或消失坐标
+      */
+    WarningLocation: Point;
+    /**
+      * 告警侵占或消失轮廓
+      */
+    WarningAreaContour: Array<Point>;
 }
 /**
  * 任务信息
@@ -690,6 +800,43 @@ export interface ZoneArea {
     ShopArea: Array<Point>;
 }
 /**
+ * 以图搜图检索结果
+ */
+export interface SearchResult {
+    /**
+      * 图片base64数据
+      */
+    Image: string;
+    /**
+      * 身份ID
+      */
+    PersonId: string;
+    /**
+      * 相似度
+      */
+    Similarity: number;
+}
+/**
+ * 用于场内上报当前相机的状态
+ */
+export interface CameraState {
+    /**
+      * 相机ID
+      */
+    CameraId: number;
+    /**
+      * 相机状态:
+10: 初始化
+11: 未知状态
+12: 网络异常
+13: 未授权
+14: 相机App异常
+15: 相机取流异常
+16: 状态正常
+      */
+    State: number;
+}
+/**
  * CreateCapture请求参数结构体
  */
 export interface CreateCaptureRequest {
@@ -712,6 +859,23 @@ export interface CreateCameraAlertsMoveAlert {
     MoveConfidence?: number;
 }
 /**
+ * CreateCameraState请求参数结构体
+ */
+export interface CreateCameraStateRequest {
+    /**
+      * 集团编码
+      */
+    GroupCode: string;
+    /**
+      * 广场ID
+      */
+    MallId: number;
+    /**
+      * 场内所有相机的状态值
+      */
+    CameraStates: Array<CameraState>;
+}
+/**
  * DescribeCameras返回参数结构体
  */
 export interface DescribeCamerasResponse {
@@ -723,19 +887,6 @@ export interface DescribeCamerasResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * 点
- */
-export interface Point {
-    /**
-      * X坐标
-      */
-    X: number;
-    /**
-      * Y坐标
-      */
-    Y: number;
 }
 /**
  * DescribeConfig返回参数结构体
@@ -759,9 +910,31 @@ export interface DescribeConfigResponse {
     RequestId?: string;
 }
 /**
- * CreateMultiBizAlert请求参数结构体
+ * DeleteTask返回参数结构体
  */
-export interface CreateMultiBizAlertRequest {
+export interface DeleteTaskResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeZones返回参数结构体
+ */
+export interface DescribeZonesResponse {
+    /**
+      * 点位列表
+      */
+    Zones?: Array<ZoneConfig>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyMultiBizConfig请求参数结构体
+ */
+export interface ModifyMultiBizConfigRequest {
     /**
       * 集团编码
       */
@@ -779,33 +952,9 @@ export interface CreateMultiBizAlertRequest {
       */
     CameraId: number;
     /**
-      * 时间戳，毫秒
+      * 监控区域
       */
-    CaptureTime: number;
-    /**
-      * 状态:
-1: 侵占
-2: 消失
-3: 即侵占又消失
-      */
-    State: number;
-    /**
-      * 图片base64字符串
-      */
-    Image?: string;
-}
-/**
- * DescribeZones返回参数结构体
- */
-export interface DescribeZonesResponse {
-    /**
-      * 点位列表
-      */
-    Zones?: Array<ZoneConfig>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    MonitoringAreas: Array<Polygon>;
 }
 /**
  * 摄像头包含简单的点位信息
@@ -831,8 +980,15 @@ export interface CameraZones {
     CameraIp: string;
     /**
       * 摄像头状态:
-0: 异常
-1: 正常
+0: 异常 (不再使用)
+1: 正常 (不再使用)
+10: 初始化
+11: 未知状态 (因服务内部错误产生)
+12: 网络异常
+13: 未授权
+14: 相机App异常
+15: 相机取流异常
+16: 正常
       */
     CameraState: number;
     /**
@@ -846,6 +1002,11 @@ export interface CameraZones {
 400W(2560*1440)
       */
     Pixel: string;
+    /**
+      * 相机Rtsp地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RTSP: string;
 }
 /**
  * 遮挡告警
@@ -878,6 +1039,19 @@ export interface BunkZone {
     BunkCodes: string;
 }
 /**
+ * 点
+ */
+export interface Point {
+    /**
+      * X坐标
+      */
+    X: number;
+    /**
+      * Y坐标
+      */
+    Y: number;
+}
+/**
  * CreateServerState请求参数结构体
  */
 export interface CreateServerStateRequest {
@@ -897,4 +1071,21 @@ export interface CreateServerStateRequest {
       * 服务器监控信息上报时间戳，单位毫秒
       */
     ReportTime?: number;
+}
+/**
+ * 多经点位告警
+ */
+export interface MultiBizWarning {
+    /**
+      * 编号
+      */
+    Id: number;
+    /**
+      * 监控区域
+      */
+    MonitoringArea: Array<Point>;
+    /**
+      * 告警列表
+      */
+    WarningInfos: Array<MultiBizWarningInfo>;
 }

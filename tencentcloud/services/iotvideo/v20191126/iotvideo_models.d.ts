@@ -743,39 +743,29 @@ export interface DeviceData {
     StreamStatus: boolean;
 }
 /**
- * SetMessageQueue请求参数结构体
+ * DescribeStream请求参数结构体
  */
-export interface SetMessageQueueRequest {
+export interface DescribeStreamRequest {
     /**
-      * 产品ID
+      * 设备TID
       */
-    ProductId: string;
+    Tid?: string;
     /**
-      * 消息队列类型 1-CMQ; 2-Ckafka
+      * 终端用户ID
       */
-    MsgQueueType: number;
+    AccessId?: string;
     /**
-      * 消息类型,整型值（0-31）之间以“,”分隔
-0：在线状态变更
-1.固件版本变更
-2.设置参数变更
-3.控制状态变更
-4.状态信息变更
-5.事件发布
+      * 直播协议, 可选值：RTSP、RTMP、HLS、HLS-fmp4
       */
-    MsgType: string;
+    Protocol?: string;
     /**
-      * 消息队列主题，不超过32字符
+      * 音视频流地址
       */
-    Topic: string;
+    Address?: string;
     /**
-      * kafka消息队列的实例名，不超过64字符
+      * 设备访问token，访问用户未绑定的设备时，需提供该参数
       */
-    Instance: string;
-    /**
-      * 消息地域，不超过32字符
-      */
-    MsgRegion: string;
+    AccessToken?: string;
 }
 /**
  * 设备绑定的终端用户
@@ -1592,6 +1582,41 @@ export interface DeviceModelData {
     IotModel: string;
 }
 /**
+ * SetMessageQueue请求参数结构体
+ */
+export interface SetMessageQueueRequest {
+    /**
+      * 产品ID
+      */
+    ProductId: string;
+    /**
+      * 消息队列类型 1-CMQ; 2-Ckafka
+      */
+    MsgQueueType: number;
+    /**
+      * 消息类型,整型值（0-31）之间以“,”分隔
+0：在线状态变更
+1.固件版本变更
+2.设置参数变更
+3.控制状态变更
+4.状态信息变更
+5.事件发布
+      */
+    MsgType: string;
+    /**
+      * 消息队列主题，不超过32字符
+      */
+    Topic: string;
+    /**
+      * kafka消息队列的实例名，不超过64字符
+      */
+    Instance: string;
+    /**
+      * 消息地域，不超过32字符
+      */
+    MsgRegion: string;
+}
+/**
  * CreateStorageService返回参数结构体
  */
 export interface CreateStorageServiceResponse {
@@ -1676,6 +1701,36 @@ export interface SendOnlineMsgRequest {
       * 消息内容，最大长度不超过8k字节
       */
     MsgContent: string;
+}
+/**
+ * 接口DescribeStream输出参数
+ */
+export interface Data {
+    /**
+      * 直播协议
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Protocol: string;
+    /**
+      * 流媒体播放地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    URI: string;
+    /**
+      * 流媒体地址过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ExpireTime: number;
+    /**
+      * 视频编码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VideoCodec: string;
+    /**
+      * 音频编码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AudioCodec: string;
 }
 /**
  * DescribeDevice请求参数结构体
@@ -2240,6 +2295,20 @@ export interface DisableDeviceRequest {
       * 设备TID ≤100
       */
     Tids: Array<string>;
+}
+/**
+ * DescribeStream返回参数结构体
+ */
+export interface DescribeStreamResponse {
+    /**
+      * 返回参数结构
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Data: Data;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeAccountBalance返回参数结构体

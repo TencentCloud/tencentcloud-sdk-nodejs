@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  ModifyMultiBizConfigResponse,
   CreateMultiBizAlertResponse,
   CameraConfig,
   CreateServerStateResponse,
@@ -34,16 +35,20 @@ import {
   TaskContent,
   SearchImageResponse,
   CreateProgramStateResponse,
+  ServiceRegisterInfo,
   DescribeTasksRequest,
   SearchImageRequest,
   DeleteMultiBizAlertResponse,
-  SearchResult,
+  ReportServiceRegisterRequest,
   DescribeImageResponse,
   CreateCameraAlertAlert,
+  ReportServiceRegisterResponse,
   DiskInfo,
-  DeleteTaskResponse,
+  CreateCameraStateResponse,
+  CreateMultiBizAlertRequest,
   CreateProgramStateRequest,
   DescribeMultiBizBaseImageRequest,
+  MultiBizWarningInfo,
   Task,
   ZoneConfig,
   ProgramStateItem,
@@ -52,17 +57,22 @@ import {
   DescribeMultiBizBaseImageResponse,
   DescribeImageRequest,
   ZoneArea,
+  SearchResult,
+  CameraState,
   CreateCaptureRequest,
   CreateCameraAlertsMoveAlert,
+  CreateCameraStateRequest,
   DescribeCamerasResponse,
-  Point,
   DescribeConfigResponse,
-  CreateMultiBizAlertRequest,
+  DeleteTaskResponse,
   DescribeZonesResponse,
+  ModifyMultiBizConfigRequest,
   CameraZones,
   CreateCameraAlertsCoverAlert,
   BunkZone,
+  Point,
   CreateServerStateRequest,
+  MultiBizWarning,
 } from "./ump_models"
 
 /**
@@ -72,6 +82,26 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("ump.tencentcloudapi.com", "2020-09-18", clientConfig)
+  }
+
+  /**
+   * 上报服务注册自身的服务地址作为回调地址, 用于信息回传。
+   */
+  async ReportServiceRegister(
+    req: ReportServiceRegisterRequest,
+    cb?: (error: string, rep: ReportServiceRegisterResponse) => void
+  ): Promise<ReportServiceRegisterResponse> {
+    return this.request("ReportServiceRegister", req, cb)
+  }
+
+  /**
+   * 集团广场的多经点位配置更新
+   */
+  async ModifyMultiBizConfig(
+    req: ModifyMultiBizConfigRequest,
+    cb?: (error: string, rep: ModifyMultiBizConfigResponse) => void
+  ): Promise<ModifyMultiBizConfigResponse> {
+    return this.request("ModifyMultiBizConfig", req, cb)
   }
 
   /**
@@ -126,6 +156,16 @@ mac为空返回对应GroupCode和MallId全量配置
     cb?: (error: string, rep: DescribeCamerasResponse) => void
   ): Promise<DescribeCamerasResponse> {
     return this.request("DescribeCameras", req, cb)
+  }
+
+  /**
+   * 获取集团广场的点位列表
+   */
+  async DescribeZones(
+    req: DescribeZonesRequest,
+    cb?: (error: string, rep: DescribeZonesResponse) => void
+  ): Promise<DescribeZonesResponse> {
+    return this.request("DescribeZones", req, cb)
   }
 
   /**
@@ -199,13 +239,13 @@ mac为空返回对应GroupCode和MallId全量配置
   }
 
   /**
-   * 获取集团广场的点位列表
+   * 上报当前场内所有相机的当前状态
    */
-  async DescribeZones(
-    req: DescribeZonesRequest,
-    cb?: (error: string, rep: DescribeZonesResponse) => void
-  ): Promise<DescribeZonesResponse> {
-    return this.request("DescribeZones", req, cb)
+  async CreateCameraState(
+    req: CreateCameraStateRequest,
+    cb?: (error: string, rep: CreateCameraStateResponse) => void
+  ): Promise<CreateCameraStateResponse> {
+    return this.request("CreateCameraState", req, cb)
   }
 
   /**

@@ -3,11 +3,11 @@
  */
 export interface DetachDisksRequest {
     /**
-      * 将要解挂的云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询，单次请求最多可解挂10块弹性云盘。
+      * 将要卸载的云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询，单次请求最多可卸载10块弹性云盘。
       */
     DiskIds: Array<string>;
     /**
-      * 对于非共享型云盘，会忽略该参数；对于共享型云盘，该参数表示要从哪个CVM实例上解挂云盘。
+      * 对于非共享型云盘，会忽略该参数；对于共享型云盘，该参数表示要从哪个CVM实例上卸载云盘。
       */
     InstanceId?: string;
 }
@@ -377,7 +377,7 @@ export interface InquiryPriceRenewDisksResponse {
     /**
       * 描述了续费云盘的价格。
       */
-    DiskPrice?: PrepayPrice;
+    DiskPrice: PrepayPrice;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -512,7 +512,7 @@ export interface CreateSnapshotResponse {
     /**
       * 新创建的快照ID。
       */
-    SnapshotId?: string;
+    SnapshotId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

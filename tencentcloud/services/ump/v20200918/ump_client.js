@@ -28,6 +28,18 @@ class Client extends abstract_client_1.AbstractClient {
         super("ump.tencentcloudapi.com", "2020-09-18", clientConfig);
     }
     /**
+     * 上报服务注册自身的服务地址作为回调地址, 用于信息回传。
+     */
+    async ReportServiceRegister(req, cb) {
+        return this.request("ReportServiceRegister", req, cb);
+    }
+    /**
+     * 集团广场的多经点位配置更新
+     */
+    async ModifyMultiBizConfig(req, cb) {
+        return this.request("ModifyMultiBizConfig", req, cb);
+    }
+    /**
      * 上报相机移动、遮挡等告警信息
 
 
@@ -60,6 +72,12 @@ mac为空返回对应GroupCode和MallId全量配置
      */
     async DescribeCameras(req, cb) {
         return this.request("DescribeCameras", req, cb);
+    }
+    /**
+     * 获取集团广场的点位列表
+     */
+    async DescribeZones(req, cb) {
+        return this.request("DescribeZones", req, cb);
     }
     /**
      * 删除集团广场对应的任务
@@ -104,10 +122,10 @@ mac为空返回对应GroupCode和MallId全量配置
         return this.request("DescribeMultiBizBaseImage", req, cb);
     }
     /**
-     * 获取集团广场的点位列表
+     * 上报当前场内所有相机的当前状态
      */
-    async DescribeZones(req, cb) {
-        return this.request("DescribeZones", req, cb);
+    async CreateCameraState(req, cb) {
+        return this.request("CreateCameraState", req, cb);
     }
     /**
      * 场内抓拍上报接口

@@ -58,7 +58,7 @@ import {
   DescribePrivilegeRulesRequest,
   BruteAttack,
   DescribeOpenPortsRequest,
-  DescribeImpactedHostsRequest,
+  DeleteBashRulesResponse,
   DescribeScanMalwareScheduleRequest,
   DescribeAgentVulsRequest,
   NonLocalLoginPlace,
@@ -143,6 +143,7 @@ import {
   CreateOpenPortTaskResponse,
   DescribeMachineListRequest,
   EditBashRuleRequest,
+  SwitchBashRulesRequest,
   DeletePrivilegeEventsResponse,
   InquiryPriceOpenProVersionPrepaidResponse,
   PrivilegeEscalationProcess,
@@ -196,6 +197,7 @@ import {
   DescribeProcessesRequest,
   DeleteUsualLoginPlacesRequest,
   WeeklyReport,
+  DescribeGeneralStatRequest,
   DescribeOpenPortTaskStatusRequest,
   Filter,
   DeleteLoginWhiteListResponse,
@@ -240,14 +242,14 @@ import {
   Component,
   DescribeVulsRequest,
   DescribeAgentVulsResponse,
-  SwitchBashRulesRequest,
+  DescribeGeneralStatResponse,
   DescribeProcessStatisticsRequest,
   DeleteMachineTagResponse,
   DescribeHistoryAccountsRequest,
   DescribeSecurityEventsCntResponse,
   DescribeMachineInfoResponse,
   OpenProVersionRequest,
-  DeleteBashRulesResponse,
+  DescribeImpactedHostsRequest,
   IgnoreImpactedHostsResponse,
   DeleteBashEventsRequest,
   DescribeComponentsResponse,
@@ -1220,6 +1222,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyProVersionRenewFlagResponse) => void
   ): Promise<ModifyProVersionRenewFlagResponse> {
     return this.request("ModifyProVersionRenewFlag", req, cb)
+  }
+
+  /**
+   * 获取主机安全相关统计
+   */
+  async DescribeGeneralStat(
+    req: DescribeGeneralStatRequest,
+    cb?: (error: string, rep: DescribeGeneralStatResponse) => void
+  ): Promise<DescribeGeneralStatResponse> {
+    return this.request("DescribeGeneralStat", req, cb)
   }
 
   /**

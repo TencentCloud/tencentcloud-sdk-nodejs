@@ -35,20 +35,21 @@ import {
   DeleteInstanceTokenRequest,
   TaskDetail,
   ModifyRepositoryRequest,
-  DescribeWebhookTriggerLogResponse,
+  DescribeInternalEndpointDnsStatusRequest,
   CreateApplicationTriggerPersonalRequest,
   AutoDelStrategyInfo,
+  DeleteInternalEndpointDnsRequest,
   ValidateNamespaceExistPersonalRequest,
   RegistryChargePrepaid,
   RenewInstanceResponse,
   Registry,
   DescribeRepositoriesResponse,
+  VpcAndDomainInfo,
   DeleteInstanceTokenResponse,
   DescribeInstancesResponse,
   ModifyInstanceTokenResponse,
   DescribeApplicationTriggerLogPersonalResponse,
   FavorResp,
-  DescribeApplicationTriggerPersonalRequest,
   DeleteNamespacePersonalRequest,
   NamespaceInfo,
   RenewInstanceRequest,
@@ -74,6 +75,7 @@ import {
   DeleteImageLifecyclePersonalResponse,
   CreateNamespaceResponse,
   DescribeRepositoryOwnerPersonalResponse,
+  VpcPrivateDomainStatus,
   ModifyWebhookTriggerResponse,
   CreateImageLifecyclePersonalResponse,
   RepoIsExistResp,
@@ -90,6 +92,7 @@ import {
   DescribeRepositoryPersonalResponse,
   DescribeRepositoriesRequest,
   DescribeImageFilterPersonalRequest,
+  CreateInternalEndpointDnsResponse,
   ModifyNamespaceResponse,
   ValidateRepositoryExistPersonalRequest,
   ModifyUserPasswordPersonalResponse,
@@ -100,6 +103,7 @@ import {
   CreateUserPersonalRequest,
   RepoInfoResp,
   ManageImageLifecycleGlobalPersonalResponse,
+  DescribeInternalEndpointDnsStatusResponse,
   RegistryStatus,
   DescribeNamespacePersonalRequest,
   DeleteRepositoryPersonalResponse,
@@ -119,6 +123,7 @@ import {
   ModifyNamespaceRequest,
   ModifyRepositoryAccessPersonalRequest,
   TagSpecification,
+  DescribeNamespacesRequest,
   DescribeImageLifecycleGlobalPersonalRequest,
   DescribeImageLifecyclePersonalRequest,
   RepositoryInfoResp,
@@ -131,6 +136,7 @@ import {
   ValidateRepositoryExistPersonalResponse,
   NamespaceIsExistsResp,
   DescribeInstancesRequest,
+  CreateInternalEndpointDnsRequest,
   Filter,
   DescribeReplicationInstanceCreateTasksRequest,
   RepoInfo,
@@ -149,7 +155,7 @@ import {
   ModifyRepositoryInfoPersonalRequest,
   DescribeApplicationTriggerLogPersonalRequest,
   DescribeFavorRepositoryPersonalRequest,
-  DescribeNamespacesRequest,
+  DescribeApplicationTriggerPersonalRequest,
   ManageInternalEndpointResponse,
   DescribeRepositoryFilterPersonalResponse,
   DescribeFavorRepositoryPersonalResponse,
@@ -161,6 +167,7 @@ import {
   ReplicationRegistry,
   DescribeInternalEndpointsRequest,
   ValidateNamespaceExistPersonalResponse,
+  DescribeWebhookTriggerLogResponse,
   DescribeApplicationTriggerPersonalResp,
   TagInfo,
   CreateRepositoryRequest,
@@ -186,6 +193,7 @@ import {
   CreateApplicationTriggerPersonalResponse,
   ManageInternalEndpointRequest,
   BatchDeleteImagePersonalResponse,
+  DeleteInternalEndpointDnsResponse,
   DeleteRepositoryPersonalRequest,
 } from "./tcr_models"
 
@@ -206,6 +214,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyNamespaceResponse) => void
   ): Promise<ModifyNamespaceResponse> {
     return this.request("ModifyNamespace", req, cb)
+  }
+
+  /**
+   * 查询触发器
+   */
+  async DescribeWebhookTrigger(
+    req: DescribeWebhookTriggerRequest,
+    cb?: (error: string, rep: DescribeWebhookTriggerResponse) => void
+  ): Promise<DescribeWebhookTriggerResponse> {
+    return this.request("DescribeWebhookTrigger", req, cb)
   }
 
   /**
@@ -499,13 +517,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询触发器
+   * 创建tcr内网私有域名解析
    */
-  async DescribeWebhookTrigger(
-    req: DescribeWebhookTriggerRequest,
-    cb?: (error: string, rep: DescribeWebhookTriggerResponse) => void
-  ): Promise<DescribeWebhookTriggerResponse> {
-    return this.request("DescribeWebhookTrigger", req, cb)
+  async CreateInternalEndpointDns(
+    req: CreateInternalEndpointDnsRequest,
+    cb?: (error: string, rep: CreateInternalEndpointDnsResponse) => void
+  ): Promise<CreateInternalEndpointDnsResponse> {
+    return this.request("CreateInternalEndpointDns", req, cb)
   }
 
   /**
@@ -629,6 +647,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询实例内网访问VPC链接
+   */
+  async DescribeInternalEndpoints(
+    req: DescribeInternalEndpointsRequest,
+    cb?: (error: string, rep: DescribeInternalEndpointsResponse) => void
+  ): Promise<DescribeInternalEndpointsResponse> {
+    return this.request("DescribeInternalEndpoints", req, cb)
+  }
+
+  /**
    * 用于企业版创建镜像仓库
    */
   async CreateRepository(
@@ -696,6 +724,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BatchDeleteImagePersonalResponse) => void
   ): Promise<BatchDeleteImagePersonalResponse> {
     return this.request("BatchDeleteImagePersonal", req, cb)
+  }
+
+  /**
+   * 批量查询vpc是否已经添加私有域名解析
+   */
+  async DescribeInternalEndpointDnsStatus(
+    req: DescribeInternalEndpointDnsStatusRequest,
+    cb?: (error: string, rep: DescribeInternalEndpointDnsStatusResponse) => void
+  ): Promise<DescribeInternalEndpointDnsStatusResponse> {
+    return this.request("DescribeInternalEndpointDnsStatus", req, cb)
   }
 
   /**
@@ -779,13 +817,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询实例内网访问VPC链接
+   * 删除tcr内网私有域名解析
    */
-  async DescribeInternalEndpoints(
-    req: DescribeInternalEndpointsRequest,
-    cb?: (error: string, rep: DescribeInternalEndpointsResponse) => void
-  ): Promise<DescribeInternalEndpointsResponse> {
-    return this.request("DescribeInternalEndpoints", req, cb)
+  async DeleteInternalEndpointDns(
+    req: DeleteInternalEndpointDnsRequest,
+    cb?: (error: string, rep: DeleteInternalEndpointDnsResponse) => void
+  ): Promise<DeleteInternalEndpointDnsResponse> {
+    return this.request("DeleteInternalEndpointDns", req, cb)
   }
 
   /**

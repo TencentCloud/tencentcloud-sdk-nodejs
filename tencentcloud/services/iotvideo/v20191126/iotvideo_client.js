@@ -300,6 +300,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTraceStatus", req, cb);
     }
     /**
+     * 请求设备直播流地址
+     */
+    async DescribeStream(req, cb) {
+        return this.request("DescribeStream", req, cb);
+    }
+    /**
      * 本接口（DescribeRegistrationStatus）用于查询终端用户的注册状态。
      */
     async DescribeRegistrationStatus(req, cb) {

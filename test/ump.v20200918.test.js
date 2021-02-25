@@ -18,6 +18,26 @@ const client = new tencentcloud.ump.v20200918.Client({
 })
 describe("ump.v20200918.test.js", function () {
 
+it("ump.v20200918.ReportServiceRegister", async function () {
+    try {
+       const data = await client.ReportServiceRegister({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ump.v20200918.ModifyMultiBizConfig", async function () {
+    try {
+       const data = await client.ModifyMultiBizConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ump.v20200918.CreateCameraAlerts", async function () {
     try {
        const data = await client.CreateCameraAlerts({})
@@ -61,6 +81,16 @@ it("ump.v20200918.DeleteMultiBizAlert", async function () {
 it("ump.v20200918.DescribeCameras", async function () {
     try {
        const data = await client.DescribeCameras({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ump.v20200918.DescribeZones", async function () {
+    try {
+       const data = await client.DescribeZones({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,9 +168,9 @@ it("ump.v20200918.DescribeMultiBizBaseImage", async function () {
     }
 })
 
-it("ump.v20200918.DescribeZones", async function () {
+it("ump.v20200918.CreateCameraState", async function () {
     try {
-       const data = await client.DescribeZones({})
+       const data = await client.CreateCameraState({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -1,12 +1,20 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateMultiBizAlertResponse, CreateServerStateResponse, CreateCaptureResponse, DescribeConfigRequest, DeleteTaskRequest, CreateCameraAlertsRequest, CreateCameraAlertsResponse, DeleteMultiBizAlertRequest, DescribeZonesRequest, SearchImageResponse, CreateProgramStateResponse, DescribeTasksRequest, SearchImageRequest, DeleteMultiBizAlertResponse, DescribeImageResponse, DeleteTaskResponse, CreateProgramStateRequest, DescribeMultiBizBaseImageRequest, DescribeTasksResponse, DescribeCamerasRequest, DescribeMultiBizBaseImageResponse, DescribeImageRequest, CreateCaptureRequest, DescribeCamerasResponse, DescribeConfigResponse, CreateMultiBizAlertRequest, DescribeZonesResponse, CreateServerStateRequest } from "./ump_models";
+import { ModifyMultiBizConfigResponse, CreateMultiBizAlertResponse, CreateServerStateResponse, CreateCaptureResponse, DescribeConfigRequest, DeleteTaskRequest, CreateCameraAlertsRequest, CreateCameraAlertsResponse, DeleteMultiBizAlertRequest, DescribeZonesRequest, SearchImageResponse, CreateProgramStateResponse, DescribeTasksRequest, SearchImageRequest, DeleteMultiBizAlertResponse, ReportServiceRegisterRequest, DescribeImageResponse, ReportServiceRegisterResponse, CreateCameraStateResponse, CreateMultiBizAlertRequest, CreateProgramStateRequest, DescribeMultiBizBaseImageRequest, DescribeTasksResponse, DescribeCamerasRequest, DescribeMultiBizBaseImageResponse, DescribeImageRequest, CreateCaptureRequest, CreateCameraStateRequest, DescribeCamerasResponse, DescribeConfigResponse, DeleteTaskResponse, DescribeZonesResponse, ModifyMultiBizConfigRequest, CreateServerStateRequest } from "./ump_models";
 /**
  * ump client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 上报服务注册自身的服务地址作为回调地址, 用于信息回传。
+     */
+    ReportServiceRegister(req: ReportServiceRegisterRequest, cb?: (error: string, rep: ReportServiceRegisterResponse) => void): Promise<ReportServiceRegisterResponse>;
+    /**
+     * 集团广场的多经点位配置更新
+     */
+    ModifyMultiBizConfig(req: ModifyMultiBizConfigRequest, cb?: (error: string, rep: ModifyMultiBizConfigResponse) => void): Promise<ModifyMultiBizConfigResponse>;
     /**
      * 上报相机移动、遮挡等告警信息
 
@@ -31,6 +39,10 @@ mac为空返回对应GroupCode和MallId全量配置
      * 获取集团广场对应的摄像头列表
      */
     DescribeCameras(req: DescribeCamerasRequest, cb?: (error: string, rep: DescribeCamerasResponse) => void): Promise<DescribeCamerasResponse>;
+    /**
+     * 获取集团广场的点位列表
+     */
+    DescribeZones(req: DescribeZonesRequest, cb?: (error: string, rep: DescribeZonesResponse) => void): Promise<DescribeZonesResponse>;
     /**
      * 删除集团广场对应的任务
      */
@@ -60,9 +72,9 @@ mac为空返回对应GroupCode和MallId全量配置
      */
     DescribeMultiBizBaseImage(req: DescribeMultiBizBaseImageRequest, cb?: (error: string, rep: DescribeMultiBizBaseImageResponse) => void): Promise<DescribeMultiBizBaseImageResponse>;
     /**
-     * 获取集团广场的点位列表
+     * 上报当前场内所有相机的当前状态
      */
-    DescribeZones(req: DescribeZonesRequest, cb?: (error: string, rep: DescribeZonesResponse) => void): Promise<DescribeZonesResponse>;
+    CreateCameraState(req: CreateCameraStateRequest, cb?: (error: string, rep: CreateCameraStateResponse) => void): Promise<CreateCameraStateResponse>;
     /**
      * 场内抓拍上报接口
      */

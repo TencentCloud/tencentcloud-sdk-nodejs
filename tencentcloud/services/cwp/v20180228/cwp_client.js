@@ -589,6 +589,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyProVersionRenewFlag", req, cb);
     }
     /**
+     * 获取主机安全相关统计
+     */
+    async DescribeGeneralStat(req, cb) {
+        return this.request("DescribeGeneralStat", req, cb);
+    }
+    /**
      * 设置高危命令事件状态
      */
     async SetBashEventsStatus(req, cb) {

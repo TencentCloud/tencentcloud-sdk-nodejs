@@ -429,23 +429,13 @@ export interface ModifyRepositoryRequest {
 }
 
 /**
- * DescribeWebhookTriggerLog返回参数结构体
+ * DescribeInternalEndpointDnsStatus请求参数结构体
  */
-export interface DescribeWebhookTriggerLogResponse {
+export interface DescribeInternalEndpointDnsStatusRequest {
   /**
-   * 总数
+   * vpc列表
    */
-  TotalCount?: number
-
-  /**
-   * 日志列表
-   */
-  Logs?: Array<WebhookTriggerLog>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  VpcSet: Array<VpcAndDomainInfo>
 }
 
 /**
@@ -536,6 +526,32 @@ export interface AutoDelStrategyInfo {
    * 创建时间
    */
   CreationTime: string
+}
+
+/**
+ * DeleteInternalEndpointDns请求参数结构体
+ */
+export interface DeleteInternalEndpointDnsRequest {
+  /**
+   * tcr实例id
+   */
+  InstanceId: string
+
+  /**
+   * 私有网络id
+   */
+  VpcId: string
+
+  /**
+   * tcr内网访问链路ip
+   */
+  EniLBIp: string
+
+  /**
+      * true：use instance name as subdomain
+false: use instancename+"-vpc" as subdomain
+      */
+  UsePublicDomain?: boolean
 }
 
 /**
@@ -683,6 +699,32 @@ export interface DescribeRepositoriesResponse {
 }
 
 /**
+ * vpc和domain信息
+ */
+export interface VpcAndDomainInfo {
+  /**
+   * tcr实例id
+   */
+  InstanceId: string
+
+  /**
+   * 私有网络id
+   */
+  VpcId: string
+
+  /**
+   * tcr内网访问链路ip
+   */
+  EniLBIp: string
+
+  /**
+      * true：use instance name as subdomain
+false: use instancename+"-vpc" as subdomain
+      */
+  UsePublicDomain?: boolean
+}
+
+/**
  * DeleteInstanceToken返回参数结构体
  */
 export interface DeleteInstanceTokenResponse {
@@ -752,31 +794,6 @@ export interface FavorResp {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RepoInfo: Array<Favors>
-}
-
-/**
- * DescribeApplicationTriggerPersonal请求参数结构体
- */
-export interface DescribeApplicationTriggerPersonalRequest {
-  /**
-   * 仓库名称
-   */
-  RepoName?: string
-
-  /**
-   * 触发器名称
-   */
-  TriggerName?: string
-
-  /**
-   * 偏移量，默认为0
-   */
-  Offset?: number
-
-  /**
-   * 返回最大数量，默认 20, 最大值 100
-   */
-  Limit?: number
 }
 
 /**
@@ -1173,6 +1190,29 @@ export interface DescribeRepositoryOwnerPersonalResponse {
 }
 
 /**
+ * vpc私有域名解析状态
+ */
+export interface VpcPrivateDomainStatus {
+  /**
+      * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Region: string
+
+  /**
+      * unique vpc id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcId: string
+
+  /**
+      * ENABLE代表已经开启，DISABLE代表未开启，ERROR代表查询出错
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
+}
+
+/**
  * ModifyWebhookTrigger返回参数结构体
  */
 export interface ModifyWebhookTriggerResponse {
@@ -1450,6 +1490,16 @@ export interface DescribeImageFilterPersonalRequest {
 }
 
 /**
+ * CreateInternalEndpointDns返回参数结构体
+ */
+export interface CreateInternalEndpointDnsResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyNamespace返回参数结构体
  */
 export interface ModifyNamespaceResponse {
@@ -1588,6 +1638,22 @@ export interface RepoInfoResp {
  * ManageImageLifecycleGlobalPersonal返回参数结构体
  */
 export interface ManageImageLifecycleGlobalPersonalResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeInternalEndpointDnsStatus返回参数结构体
+ */
+export interface DescribeInternalEndpointDnsStatusResponse {
+  /**
+      * vpc私有域名解析状态列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VpcSet: Array<VpcPrivateDomainStatus>
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1938,6 +2004,31 @@ export interface TagSpecification {
 }
 
 /**
+ * DescribeNamespaces请求参数结构体
+ */
+export interface DescribeNamespacesRequest {
+  /**
+   * 实例Id
+   */
+  RegistryId: string
+
+  /**
+   * 指定命名空间，不填写默认查询所有命名空间
+   */
+  NamespaceName?: string
+
+  /**
+   * 每页个数
+   */
+  Limit?: number
+
+  /**
+   * 页偏移
+   */
+  Offset?: number
+}
+
+/**
  * DescribeImageLifecycleGlobalPersonal请求参数结构体
  */
 export type DescribeImageLifecycleGlobalPersonalRequest = null
@@ -2168,6 +2259,32 @@ export interface DescribeInstancesRequest {
    * 获取所有地域的实例，默认为False
    */
   AllRegion?: boolean
+}
+
+/**
+ * CreateInternalEndpointDns请求参数结构体
+ */
+export interface CreateInternalEndpointDnsRequest {
+  /**
+   * tcr实例id
+   */
+  InstanceId: string
+
+  /**
+   * 私有网络id
+   */
+  VpcId: string
+
+  /**
+   * tcr内网访问链路ip
+   */
+  EniLBIp: string
+
+  /**
+      * true：use instance name as subdomain
+false: use instancename+"-vpc" as subdomain
+      */
+  UsePublicDomain?: boolean
 }
 
 /**
@@ -2516,28 +2633,28 @@ export interface DescribeFavorRepositoryPersonalRequest {
 }
 
 /**
- * DescribeNamespaces请求参数结构体
+ * DescribeApplicationTriggerPersonal请求参数结构体
  */
-export interface DescribeNamespacesRequest {
+export interface DescribeApplicationTriggerPersonalRequest {
   /**
-   * 实例Id
+   * 仓库名称
    */
-  RegistryId: string
+  RepoName?: string
 
   /**
-   * 指定命名空间，不填写默认查询所有命名空间
+   * 触发器名称
    */
-  NamespaceName?: string
+  TriggerName?: string
 
   /**
-   * 每页个数
-   */
-  Limit?: number
-
-  /**
-   * 页偏移
+   * 偏移量，默认为0
    */
   Offset?: number
+
+  /**
+   * 返回最大数量，默认 20, 最大值 100
+   */
+  Limit?: number
 }
 
 /**
@@ -2753,6 +2870,26 @@ export interface ValidateNamespaceExistPersonalResponse {
    * 命名空间是否存在
    */
   Data?: NamespaceIsExistsResp
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeWebhookTriggerLog返回参数结构体
+ */
+export interface DescribeWebhookTriggerLogResponse {
+  /**
+   * 总数
+   */
+  TotalCount?: number
+
+  /**
+   * 日志列表
+   */
+  Logs?: Array<WebhookTriggerLog>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3335,6 +3472,16 @@ export interface ManageInternalEndpointRequest {
  * BatchDeleteImagePersonal返回参数结构体
  */
 export interface BatchDeleteImagePersonalResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteInternalEndpointDns返回参数结构体
+ */
+export interface DeleteInternalEndpointDnsResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

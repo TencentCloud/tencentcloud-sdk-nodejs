@@ -61,7 +61,7 @@ import {
   DeleteProductRequest,
   DescribeBindUsrResponse,
   DeviceData,
-  SetMessageQueueRequest,
+  DescribeStreamRequest,
   BindUsrInfo,
   DeleteOtaVersionRequest,
   DescribeIotDataTypeResponse,
@@ -108,9 +108,11 @@ import {
   RunOtaVersionRequest,
   CreateDevicesResponse,
   DeviceModelData,
+  SetMessageQueueRequest,
   CreateStorageServiceResponse,
   DescribeIotDataTypeRequest,
   SendOnlineMsgRequest,
+  Data,
   DescribeDeviceRequest,
   DescribeRunLogResponse,
   DeliverStorageServiceResponse,
@@ -145,6 +147,7 @@ import {
   DescribeAccountBalanceRequest,
   CreateDevicesRequest,
   DisableDeviceRequest,
+  DescribeStreamResponse,
   DescribeAccountBalanceResponse,
   DisableOtaVersionRequest,
   DescribeProductResponse,
@@ -616,6 +619,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTraceStatusResponse) => void
   ): Promise<DescribeTraceStatusResponse> {
     return this.request("DescribeTraceStatus", req, cb)
+  }
+
+  /**
+   * 请求设备直播流地址
+   */
+  async DescribeStream(
+    req: DescribeStreamRequest,
+    cb?: (error: string, rep: DescribeStreamResponse) => void
+  ): Promise<DescribeStreamResponse> {
+    return this.request("DescribeStream", req, cb)
   }
 
   /**

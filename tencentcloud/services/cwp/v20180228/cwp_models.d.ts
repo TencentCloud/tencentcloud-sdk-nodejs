@@ -834,26 +834,13 @@ export interface DescribeOpenPortsRequest {
     Filters?: Array<Filter>;
 }
 /**
- * DescribeImpactedHosts请求参数结构体
+ * DeleteBashRules返回参数结构体
  */
-export interface DescribeImpactedHostsRequest {
+export interface DeleteBashRulesResponse {
     /**
-      * 漏洞种类ID。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    VulId: number;
-    /**
-      * 返回数量，默认为10，最大值为100。
-      */
-    Limit?: number;
-    /**
-      * 偏移量，默认为0。
-      */
-    Offset?: number;
-    /**
-      * 过滤条件。
-<li>Status - String - 是否必填：否 - 状态筛选（UN_OPERATED：待处理 | FIXED：已修复）</li>
-      */
-    Filters?: Array<Filter>;
+    RequestId?: string;
 }
 /**
  * DescribeScanMalwareSchedule请求参数结构体
@@ -2526,6 +2513,19 @@ export interface EditBashRuleRequest {
     IsGlobal?: number;
 }
 /**
+ * SwitchBashRules请求参数结构体
+ */
+export interface SwitchBashRulesRequest {
+    /**
+      * 规则ID
+      */
+    Id: number;
+    /**
+      * 是否禁用
+      */
+    Disabled: number;
+}
+/**
  * DeletePrivilegeEvents返回参数结构体
  */
 export interface DeletePrivilegeEventsResponse {
@@ -3481,6 +3481,21 @@ export interface WeeklyReport {
       * 周报结束时间。
       */
     EndDate: string;
+}
+/**
+ * DescribeGeneralStat请求参数结构体
+ */
+export interface DescribeGeneralStatRequest {
+    /**
+      * 云主机类型。
+<li>CVM：表示虚拟主机</li>
+<li>BM:  表示黑石物理机</li>
+      */
+    MachineType?: string;
+    /**
+      * 机器所属地域。如：ap-guangzhou，ap-shanghai
+      */
+    MachineRegion?: string;
 }
 /**
  * DescribeOpenPortTaskStatus请求参数结构体
@@ -4440,17 +4455,49 @@ export interface DescribeAgentVulsResponse {
     RequestId?: string;
 }
 /**
- * SwitchBashRules请求参数结构体
+ * DescribeGeneralStat返回参数结构体
  */
-export interface SwitchBashRulesRequest {
+export interface DescribeGeneralStatResponse {
     /**
-      * 规则ID
+      * 云主机总数
       */
-    Id: number;
+    MachinesAll: number;
     /**
-      * 是否禁用
+      * 云主机没有安装主机安全客户端的总数
       */
-    Disabled: number;
+    MachinesUninstalled: number;
+    /**
+      * 主机安全客户端总数的总数
+      */
+    AgentsAll: number;
+    /**
+      * 主机安全客户端在线的总数
+      */
+    AgentsOnline: number;
+    /**
+      * 主机安全客户端离线的总数
+      */
+    AgentsOffline: number;
+    /**
+      * 主机安全客户端专业版的总数
+      */
+    AgentsPro: number;
+    /**
+      * 主机安全客户端基础版的总数
+      */
+    AgentsBasic: number;
+    /**
+      * 7天内到期的预付费专业版总数
+      */
+    AgentsProExpireWithInSevenDays: number;
+    /**
+      * 风险主机总数
+      */
+    RiskMachine: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeProcessStatistics请求参数结构体
@@ -4673,13 +4720,26 @@ export interface OpenProVersionRequest {
     ActivityId?: number;
 }
 /**
- * DeleteBashRules返回参数结构体
+ * DescribeImpactedHosts请求参数结构体
  */
-export interface DeleteBashRulesResponse {
+export interface DescribeImpactedHostsRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 漏洞种类ID。
       */
-    RequestId?: string;
+    VulId: number;
+    /**
+      * 返回数量，默认为10，最大值为100。
+      */
+    Limit?: number;
+    /**
+      * 偏移量，默认为0。
+      */
+    Offset?: number;
+    /**
+      * 过滤条件。
+<li>Status - String - 是否必填：否 - 状态筛选（UN_OPERATED：待处理 | FIXED：已修复）</li>
+      */
+    Filters?: Array<Filter>;
 }
 /**
  * IgnoreImpactedHosts返回参数结构体

@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyNamespace", req, cb);
     }
     /**
+     * 查询触发器
+     */
+    async DescribeWebhookTrigger(req, cb) {
+        return this.request("DescribeWebhookTrigger", req, cb);
+    }
+    /**
      * 用于在个人版中查询与指定tag镜像内容相同的tag列表
      */
     async DescribeImageFilterPersonal(req, cb) {
@@ -208,10 +214,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteApplicationTriggerPersonal", req, cb);
     }
     /**
-     * 查询触发器
+     * 创建tcr内网私有域名解析
      */
-    async DescribeWebhookTrigger(req, cb) {
-        return this.request("DescribeWebhookTrigger", req, cb);
+    async CreateInternalEndpointDns(req, cb) {
+        return this.request("CreateInternalEndpointDns", req, cb);
     }
     /**
      * 用于在个人版中删除tag
@@ -286,6 +292,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeReplicationInstanceCreateTasks", req, cb);
     }
     /**
+     * 查询实例内网访问VPC链接
+     */
+    async DescribeInternalEndpoints(req, cb) {
+        return this.request("DescribeInternalEndpoints", req, cb);
+    }
+    /**
      * 用于企业版创建镜像仓库
      */
     async CreateRepository(req, cb) {
@@ -326,6 +338,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async BatchDeleteImagePersonal(req, cb) {
         return this.request("BatchDeleteImagePersonal", req, cb);
+    }
+    /**
+     * 批量查询vpc是否已经添加私有域名解析
+     */
+    async DescribeInternalEndpointDnsStatus(req, cb) {
+        return this.request("DescribeInternalEndpointDnsStatus", req, cb);
     }
     /**
      * 用于在个人版镜像仓库中复制镜像版本
@@ -376,10 +394,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyRepositoryAccessPersonal", req, cb);
     }
     /**
-     * 查询实例内网访问VPC链接
+     * 删除tcr内网私有域名解析
      */
-    async DescribeInternalEndpoints(req, cb) {
-        return this.request("DescribeInternalEndpoints", req, cb);
+    async DeleteInternalEndpointDns(req, cb) {
+        return this.request("DeleteInternalEndpointDns", req, cb);
     }
     /**
      * 用于在个人版镜像仓库中删除仓库Tag自动清理策略

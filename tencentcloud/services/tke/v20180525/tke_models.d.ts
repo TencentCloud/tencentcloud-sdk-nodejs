@@ -2860,6 +2860,14 @@ ipvs-bpf模式: 设置KubeProxyMode为kube-proxy-bpf
       * 运行时版本
       */
     RuntimeVersion?: string;
+    /**
+      * 是否开节点podCIDR大小的自定义模式
+      */
+    EnableCustomizedPodCIDR?: boolean;
+    /**
+      * 自定义模式下的基础pod数量
+      */
+    BasePodNumber?: number;
 }
 /**
  * AcquireClusterAdminRole返回参数结构体

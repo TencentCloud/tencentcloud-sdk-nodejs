@@ -107,17 +107,17 @@ export interface ModifyAutoBackupConfigResponse {
   /**
    * 自动备份类型： 1 “定时回档”
    */
-  AutoBackupType?: number
+  AutoBackupType: number
 
   /**
    * 日期Monday，Tuesday，Wednesday，Thursday，Friday，Saturday，Sunday。
    */
-  WeekDays?: Array<string>
+  WeekDays: Array<string>
 
   /**
    * 时间段 00:00-01:00, 01:00-02:00...... 23:00-00:00
    */
-  TimePeriod?: string
+  TimePeriod: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -594,12 +594,12 @@ export interface DescribeSlowLogResponse {
   /**
    * 慢查询总数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 慢查询详情
    */
-  InstanceSlowlogDetail?: Array<InstanceSlowlogDetail>
+  InstanceSlowlogDetail: Array<InstanceSlowlogDetail>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -684,7 +684,7 @@ export interface DescribeDBSecurityGroupsResponse {
   /**
    * 安全组规则
    */
-  Groups?: Array<SecurityGroup>
+  Groups: Array<SecurityGroup>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2028,12 +2028,12 @@ export interface CreateInstancesResponse {
   /**
    * 交易的ID
    */
-  DealId?: string
+  DealId: string
 
   /**
    * 实例ID
    */
-  InstanceIds?: Array<string>
+  InstanceIds: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3028,7 +3028,7 @@ export interface UpgradeInstanceResponse {
   /**
    * 订单ID
    */
-  DealId?: string
+  DealId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3710,12 +3710,12 @@ export interface DescribeProxySlowLogResponse {
   /**
    * 慢查询总数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 慢查询详情
    */
-  InstanceProxySlowLogDetail?: Array<InstanceProxySlowlogDetail>
+  InstanceProxySlowLogDetail: Array<InstanceProxySlowlogDetail>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3822,27 +3822,27 @@ export interface DescribeInstanceParamsResponse {
   /**
    * 实例参数个数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 实例枚举类型参数
    */
-  InstanceEnumParam?: Array<InstanceEnumParam>
+  InstanceEnumParam: Array<InstanceEnumParam>
 
   /**
    * 实例整型参数
    */
-  InstanceIntegerParam?: Array<InstanceIntegerParam>
+  InstanceIntegerParam: Array<InstanceIntegerParam>
 
   /**
    * 实例字符型参数
    */
-  InstanceTextParam?: Array<InstanceTextParam>
+  InstanceTextParam: Array<InstanceTextParam>
 
   /**
    * 实例多选项型参数
    */
-  InstanceMultiParam?: Array<InstanceMultiParam>
+  InstanceMultiParam: Array<InstanceMultiParam>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
