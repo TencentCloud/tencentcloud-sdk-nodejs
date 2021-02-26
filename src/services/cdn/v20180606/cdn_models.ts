@@ -678,12 +678,12 @@ export interface DescribeCdnOriginIpResponse {
   /**
    * 回源节点IP详情。
    */
-  Ips?: Array<OriginIp>
+  Ips: Array<OriginIp>
 
   /**
    * 回源节点IP总个数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -955,14 +955,14 @@ flux：流量计费
 bandwidth：带宽计费
 日结计费方式切换时，若当日产生消耗，则此字段表示第二天即将生效的计费方式，若未产生消耗，则表示已经生效的计费方式。
       */
-  PayType?: string
+  PayType: string
 
   /**
       * 计费周期：
 day：日结计费
 month：月结计费
       */
-  BillingCycle?: string
+  BillingCycle: string
 
   /**
       * 计费方式：
@@ -972,21 +972,21 @@ month95：月95带宽计费，月结模式
 sum：总流量计费，日结与月结均有流量计费模式
 max：峰值带宽计费，日结模式
       */
-  StatType?: string
+  StatType: string
 
   /**
       * 境外计费类型：
 all：全地区统一计费
 multiple：分地区计费
       */
-  RegionType?: string
+  RegionType: string
 
   /**
       * 当前生效计费类型：
 flux：流量计费
 bandwidth：带宽计费
       */
-  CurrentPayType?: string
+  CurrentPayType: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

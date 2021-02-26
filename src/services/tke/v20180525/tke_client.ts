@@ -52,6 +52,7 @@ import {
   DescribeExistedInstancesRequest,
   Tag,
   DescribeRegionsResponse,
+  PrometheusAlertHistoryItem,
   CreateClusterRouteResponse,
   PrometheusTemplateSyncTarget,
   DescribePrometheusTemplatesRequest,
@@ -79,7 +80,7 @@ import {
   ExtensionAddon,
   RegionInstance,
   Label,
-  ModifyPrometheusTemplateResponse,
+  DescribePrometheusAlertHistoryRequest,
   DeletePrometheusTemplateSyncRequest,
   DescribePrometheusTemplatesResponse,
   DeleteClusterEndpointVipResponse,
@@ -155,6 +156,7 @@ import {
   CreateClusterNodePoolRequest,
   ClusterAdvancedSettings,
   AcquireClusterAdminRoleResponse,
+  ModifyPrometheusTemplateResponse,
   DeletePrometheusTemplateResponse,
   DescribePrometheusTemplateSyncRequest,
   DeleteClusterEndpointVipRequest,
@@ -197,6 +199,7 @@ import {
   DescribeClusterRouteTablesResponse,
   DescribeRouteTableConflictsRequest,
   InstanceUpgradePreCheckResultItem,
+  DescribePrometheusAlertHistoryResponse,
   ExistedInstancesPara,
   DescribeClusterAsGroupOptionResponse,
   ClusterAsGroupAttribute,
@@ -354,6 +357,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SyncPrometheusTemplateResponse) => void
   ): Promise<SyncPrometheusTemplateResponse> {
     return this.request("SyncPrometheusTemplate", req, cb)
+  }
+
+  /**
+   * 获取告警历史
+   */
+  async DescribePrometheusAlertHistory(
+    req: DescribePrometheusAlertHistoryRequest,
+    cb?: (error: string, rep: DescribePrometheusAlertHistoryResponse) => void
+  ): Promise<DescribePrometheusAlertHistoryResponse> {
+    return this.request("DescribePrometheusAlertHistory", req, cb)
   }
 
   /**

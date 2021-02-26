@@ -77,7 +77,7 @@ export interface CreateKeyRequest {
       */
     Description?: string;
     /**
-      * 指定key的用途，默认为  "ENCRYPT_DECRYPT" 表示创建对称加解密密钥，其它支持用途 “ASYMMETRIC_DECRYPT_RSA_2048” 表示创建用于加解密的RSA2048非对称密钥，“ASYMMETRIC_DECRYPT_SM2” 表示创建用于加解密的SM2非对称密钥, “ASYMMETRIC_SIGN_VERIFY_SM2” 表示创建用于签名验签的SM2非对称密钥,
+      * 指定key的用途，默认为  "ENCRYPT_DECRYPT" 表示创建对称加解密密钥，其它支持用途 “ASYMMETRIC_DECRYPT_RSA_2048” 表示创建用于加解密的RSA2048非对称密钥，“ASYMMETRIC_DECRYPT_SM2” 表示创建用于加解密的SM2非对称密钥, “ASYMMETRIC_SIGN_VERIFY_SM2” 表示创建用于签名验签的SM2非对称密钥, “ASYMMETRIC_SIGN_VERIFY_ECC” 表示创建用于签名验签的ECC非对称密钥, “ASYMMETRIC_SIGN_VERIFY_RSA_2048” 表示创建用于签名验签的RSA_2048非对称密钥
       */
     KeyUsage?: string;
     /**
@@ -124,11 +124,11 @@ export interface VerifyByAsymmetricKeyRequest {
       */
     SignatureValue: string;
     /**
-      * 消息原文或消息摘要。如果提供的是消息原文，则消息原文的长度（Base64编码前的长度）不超过4096字节。如果提供的是消息摘要，SM2签名算法的消息摘要长度（Base64编码前的长度）必须等于32字节
+      * 消息原文或消息摘要。如果提供的是消息原文，则消息原文的长度（Base64编码前的长度）不超过4096字节。如果提供的是消息摘要，则消息摘要长度（Base64编码前的长度）必须等于32字节
       */
     Message: string;
     /**
-      * 签名算法，支持的算法：SM2DSA
+      * 签名算法，支持的算法：SM2DSA，ECC_P256_R1，RSA_PSS_SHA_256，RSA_PKCS1_SHA_256
       */
     Algorithm: string;
     /**
@@ -327,12 +327,12 @@ export interface ListKeyDetailResponse {
     /**
       * CMK的总数量
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 返回的属性信息列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    KeyMetadatas?: Array<KeyMetadata>;
+    KeyMetadatas: Array<KeyMetadata>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -443,9 +443,9 @@ export interface ArchiveKeyResponse {
  */
 export interface VerifyByAsymmetricKeyResponse {
     /**
-      * 签名是否有效
+      * 签名是否有效。true：签名有效，false：签名无效。
       */
-    SignatureValid?: boolean;
+    SignatureValid: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -716,7 +716,7 @@ export interface ListKeyDetailRequest {
       */
     Origin?: string;
     /**
-      * 根据CMK的KeyUsage筛选，ALL表示筛选全部，可使用的参数为：ALL 或 ENCRYPT_DECRYPT 或 ASYMMETRIC_DECRYPT_RSA_2048 或 ASYMMETRIC_DECRYPT_SM2 或 ASYMMETRIC_SIGN_VERIFY_SM2，为空则默认筛选ENCRYPT_DECRYPT类型
+      * 根据CMK的KeyUsage筛选，ALL表示筛选全部，可使用的参数为：ALL 或 ENCRYPT_DECRYPT 或 ASYMMETRIC_DECRYPT_RSA_2048 或 ASYMMETRIC_DECRYPT_SM2 或 ASYMMETRIC_SIGN_VERIFY_SM2 或 ASYMMETRIC_SIGN_VERIFY_RSA_2048 或 ASYMMETRIC_SIGN_VERIFY_ECC，为空则默认筛选ENCRYPT_DECRYPT类型
       */
     KeyUsage?: string;
     /**
@@ -853,38 +853,38 @@ export interface CreateKeyResponse {
     /**
       * CMK的全局唯一标识符
       */
-    KeyId?: string;
+    KeyId: string;
     /**
       * 作为密钥更容易辨识，更容易被人看懂的别名
       */
-    Alias?: string;
+    Alias: string;
     /**
       * 密钥创建时间，unix时间戳
       */
-    CreateTime?: number;
+    CreateTime: number;
     /**
       * CMK的描述
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Description?: string;
+    Description: string;
     /**
       * CMK的状态
       */
-    KeyState?: string;
+    KeyState: string;
     /**
       * CMK的用途
       */
-    KeyUsage?: string;
+    KeyUsage: string;
     /**
       * 标签操作的返回码. 0: 成功；1: 内部错误；2: 业务处理错误
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TagCode?: number;
+    TagCode: number;
     /**
       * 标签操作的返回信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TagMsg?: string;
+    TagMsg: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1113,7 +1113,7 @@ export interface KeyMetadata {
       */
     KeyState: string;
     /**
-      * CMK用途，取值为: ENCRYPT_DECRYPT | ASYMMETRIC_DECRYPT_RSA_2048 | ASYMMETRIC_DECRYPT_SM2 | ASYMMETRIC_SIGN_VERIFY_SM2
+      * CMK用途，取值为: ENCRYPT_DECRYPT | ASYMMETRIC_DECRYPT_RSA_2048 | ASYMMETRIC_DECRYPT_SM2 | ASYMMETRIC_SIGN_VERIFY_SM2 | ASYMMETRIC_SIGN_VERIFY_RSA_2048 | ASYMMETRIC_SIGN_VERIFY_ECC
       */
     KeyUsage: string;
     /**
@@ -1309,11 +1309,11 @@ export interface EnableKeysResponse {
  */
 export interface SignByAsymmetricKeyRequest {
     /**
-      * 签名算法，支持的算法：SM2DSA
+      * 签名算法，支持的算法：SM2DSA，ECC_P256_R1，RSA_PSS_SHA_256，RSA_PKCS1_SHA_256
       */
     Algorithm: string;
     /**
-      * 消息原文或消息摘要。如果提供的是消息原文，则消息原文的长度（Base64编码前的长度）不超过4096字节。如果提供的是消息摘要，SM2签名算法的消息摘要长度（Base64编码前的长度）必须等于32字节
+      * 消息原文或消息摘要。如果提供的是消息原文，则消息原文的长度（Base64编码前的长度）不超过4096字节。如果提供的是消息摘要，消息摘要长度（Base64编码前的长度）必须等于32字节
       */
     Message: string;
     /**
@@ -1453,7 +1453,7 @@ export interface SignByAsymmetricKeyResponse {
     /**
       * 签名，Base64编码
       */
-    Signature?: string;
+    Signature: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

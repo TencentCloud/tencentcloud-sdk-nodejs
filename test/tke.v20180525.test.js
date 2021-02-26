@@ -148,6 +148,16 @@ it("tke.v20180525.SyncPrometheusTemplate", async function () {
     }
 })
 
+it("tke.v20180525.DescribePrometheusAlertHistory", async function () {
+    try {
+       const data = await client.DescribePrometheusAlertHistory({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.CreateClusterInstances", async function () {
     try {
        const data = await client.CreateClusterInstances({})

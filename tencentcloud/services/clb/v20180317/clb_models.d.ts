@@ -1954,7 +1954,7 @@ export interface CreateListenerResponse {
     /**
       * 创建的监听器的唯一标识数组
       */
-    ListenerIds?: Array<string>;
+    ListenerIds: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2340,6 +2340,10 @@ export interface CreateListenerRequest {
       * 是否开启长连接，此参数仅适用于HTTP/HTTPS监听器，0:关闭；1:开启， 默认关闭
       */
     KeepaliveEnable?: number;
+    /**
+      * 创建端口段监听器时必须传入此参数，用以标识结束端口。同时，入参Ports只允许传入一个成员，用以标识开始端口。【如果您需要体验端口段功能，请通过 [工单申请](https://console.cloud.tencent.com/workorder/category)】。
+      */
+    EndPort?: number;
 }
 /**
  * CreateClsLogSet请求参数结构体

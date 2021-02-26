@@ -131,7 +131,7 @@ export interface CreateDBInstanceRequest {
       */
     ClientToken?: string;
     /**
-      * 实例类型。支持值包括： "HA" - 高可用版实例， "BASIC" - 基础版实例。 不指定则默认为高可用版。
+      * 实例隔离类型。支持值包括： "UNIVERSAL" - 通用型实例， "EXCLUSIVE" - 独享型实例， "BASIC" - 基础版实例。 不指定则默认为通用型实例。
       */
     DeviceType?: string;
     /**
@@ -142,6 +142,14 @@ export interface CreateDBInstanceRequest {
       * 告警策略id数组。
       */
     AlarmPolicyList?: Array<number>;
+    /**
+      * 实例节点数。对于 RO 和 基础版实例， 该值默认为1。 如果需要购买三节点实例， 请将该值设置为3 或指定 BackupZone 参数。当购买主实例，且未指定该参数和 BackupZone 参数时，该值默认是 2， 即购买两节点实例。
+      */
+    InstanceNodes?: number;
+    /**
+      * 实例cpu核数， 如果不传将根据memory指定的内存值自动填充对应的cpu值。
+      */
+    Cpu?: number;
 }
 /**
  * 实例任务详情
@@ -966,11 +974,11 @@ export interface DescribeDBPriceResponse {
     /**
       * 实例价格，单位：分（人民币）。
       */
-    Price?: number;
+    Price: number;
     /**
       * 实例原价，单位：分（人民币）。
       */
-    OriginalPrice?: number;
+    OriginalPrice: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1467,11 +1475,11 @@ export interface CreateDBInstanceHourResponse {
     /**
       * 短订单 ID。
       */
-    DealIds?: Array<string>;
+    DealIds: Array<string>;
     /**
       * 实例 ID 列表。
       */
-    InstanceIds?: Array<string>;
+    InstanceIds: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1882,7 +1890,7 @@ export interface CreateDBInstanceHourRequest {
       */
     Volume: number;
     /**
-      * MySQL 版本，值包括：5.5、5.6 和 5.7，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229) 接口获取可创建的实例版本。
+      * MySQL 版本，值包括：5.5、5.6 、5.7 、8.0，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229) 接口获取可创建的实例版本。
       */
     EngineVersion?: string;
     /**
@@ -1970,7 +1978,7 @@ export interface CreateDBInstanceHourRequest {
       */
     ClientToken?: string;
     /**
-      * 实例类型。支持值包括： "HA" - 高可用版实例， "BASIC" - 基础版实例。 不指定则默认为高可用版。
+      * 实例隔离类型。支持值包括： "UNIVERSAL" - 通用型实例， "EXCLUSIVE" - 独享型实例， "BASIC" - 基础版实例。 不指定则默认为通用型实例。
       */
     DeviceType?: string;
     /**
@@ -1981,6 +1989,14 @@ export interface CreateDBInstanceHourRequest {
       * 告警策略id数组。
       */
     AlarmPolicyList?: Array<number>;
+    /**
+      * 实例节点数。对于 RO 和 基础版实例， 该值默认为1。 如果需要购买三节点实例， 请将该值设置为3 或指定 BackupZone 参数。当购买主实例，且未指定该参数和 BackupZone 参数时，该值默认是 2， 即购买两节点实例。
+      */
+    InstanceNodes?: number;
+    /**
+      * 实例cpu核数， 如果不传将根据memory指定的内存值自动填充对应的cpu值。
+      */
+    Cpu?: number;
 }
 /**
  * DescribeDeployGroupList请求参数结构体
@@ -2183,9 +2199,13 @@ export interface CreateCloneInstanceRequest {
       */
     BackupZone?: string;
     /**
-      * 克隆实例类型。支持值包括： "HA" - 高可用版实例， "EXCLUSIVE" - 独享型实例。 不指定则默认为高可用版。
+      * 克隆实例类型。支持值包括： "UNIVERSAL" - 通用型实例， "EXCLUSIVE" - 独享型实例。 不指定则默认为通用型。
       */
     DeviceType?: string;
+    /**
+      * 新克隆实例节点数。如果需要克隆出三节点实例， 请将该值设置为3 或指定 BackupZone 参数。如果需要克隆出两节点实例，请将该值设置为2。默认克隆出两节点实例。
+      */
+    InstanceNodes?: number;
 }
 /**
  * DescribeDBInstances请求参数结构体
@@ -2562,11 +2582,11 @@ export interface CreateDBInstanceResponse {
     /**
       * 短订单 ID。
       */
-    DealIds?: Array<string>;
+    DealIds: Array<string>;
     /**
       * 实例 ID 列表。
       */
-    InstanceIds?: Array<string>;
+    InstanceIds: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3421,7 +3441,7 @@ export interface CreateCloneInstanceResponse {
     /**
       * 异步任务的请求ID，可使用此 ID 查询异步任务的执行结果。
       */
-    AsyncRequestId?: string;
+    AsyncRequestId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3509,9 +3529,13 @@ export interface InquiryPriceUpgradeInstancesRequest {
       */
     ProtectMode?: number;
     /**
-      * 部署策略，取值范围：HA-高可用版
+      * 实例隔离类型。支持值包括： "UNIVERSAL" - 通用型实例， "EXCLUSIVE" - 独享型实例， "BASIC" - 基础版实例。 不指定则默认为通用型实例。
       */
     DeviceType?: string;
+    /**
+      * 实例节点数。对于 RO 和 基础版实例， 该值默认为1。 如果需要询价三节点实例， 请将该值设置为3。其余主实例该值默认为2。
+      */
+    InstanceNodes?: number;
 }
 /**
  * ModifyAuditRule返回参数结构体
@@ -3715,9 +3739,17 @@ export interface DescribeDBPriceRequest {
       */
     ProtectMode?: number;
     /**
-      * 部署策略，取值范围：HA-高可用版
+      * 实例隔离类型。支持值包括： "UNIVERSAL" - 通用型实例， "EXCLUSIVE" - 独享型实例， "BASIC" - 基础版实例。 不指定则默认为通用型实例。
       */
     DeviceType?: string;
+    /**
+      * 实例节点数。对于 RO 和 基础版实例， 该值默认为1。 如果需要询价三节点实例， 请将该值设置为3。其余主实例该值默认为2。
+      */
+    InstanceNodes?: number;
+    /**
+      * 询价实例的CPU核心数目，单位：核，为保证传入 CPU 值有效，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229) 接口获取可售卖的核心数目，当未指定该值时，将按照 Memory 大小补全一个默认值。
+      */
+    Cpu?: number;
 }
 /**
  * AssociateSecurityGroups返回参数结构体
@@ -4542,7 +4574,7 @@ export interface RoInstanceInfo {
       */
     DeviceType: string;
     /**
-      * RO实例数据库引擎版本，可能返回值：5.1、5.5、5.6和5.7
+      * RO实例数据库引擎版本，可能返回值：5.1、5.5、5.6、5.7、8.0
       */
     EngineVersion: string;
     /**

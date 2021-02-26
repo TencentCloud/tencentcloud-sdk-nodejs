@@ -106,6 +106,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SyncPrometheusTemplate", req, cb);
     }
     /**
+     * 获取告警历史
+     */
+    async DescribePrometheusAlertHistory(req, cb) {
+        return this.request("DescribePrometheusAlertHistory", req, cb);
+    }
+    /**
      * 扩展(新建)集群节点
      */
     async CreateClusterInstances(req, cb) {

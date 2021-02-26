@@ -246,6 +246,19 @@ export interface QueryMigrationCheckProcessRequest {
     MigrateId: number;
 }
 /**
+ * DeleteBackupMigration请求参数结构体
+ */
+export interface DeleteBackupMigrationRequest {
+    /**
+      * 目标实例ID，由DescribeBackupMigration接口返回
+      */
+    InstanceId: string;
+    /**
+      * 备份导入任务ID，由DescribeBackupMigration接口返回
+      */
+    BackupMigrationId: string;
+}
+/**
  * 该数据结构表示具有发布订阅关系的两个数据库。
  */
 export interface DatabaseTuple {
@@ -357,6 +370,19 @@ export interface DatabaseTupleStatus {
     Status: string;
 }
 /**
+ * StartBackupMigration返回参数结构体
+ */
+export interface StartBackupMigrationResponse {
+    /**
+      * 流程ID
+      */
+    FlowId?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyReadOnlyGroupDetails返回参数结构体
  */
 export interface ModifyReadOnlyGroupDetailsResponse {
@@ -383,6 +409,31 @@ export interface ModifyBackupStrategyResponse {
     RequestId?: string;
 }
 /**
+ * ModifyIncrementalMigration请求参数结构体
+ */
+export interface ModifyIncrementalMigrationRequest {
+    /**
+      * 导入目标实例ID
+      */
+    InstanceId: string;
+    /**
+      * 备份导入任务ID，由CreateBackupMigration接口返回
+      */
+    BackupMigrationId: string;
+    /**
+      * 增量导入任务ID
+      */
+    IncrementalMigrationId: string;
+    /**
+      * 是否需要恢复，NO-不需要，YES-需要
+      */
+    IsRecovery?: string;
+    /**
+      * UploadType是COS_URL时这里时URL，COS_UPLOAD这里填备份文件的名字；只支持1个备份文件，但1个备份文件内可包含多个库
+      */
+    BackupFiles?: Array<string>;
+}
+/**
  * DescribeDBSecurityGroups返回参数结构体
  */
 export interface DescribeDBSecurityGroupsResponse {
@@ -407,6 +458,27 @@ export interface MigrateDetail {
       * 当前环节的进度（单位是%）
       */
     Progress: number;
+}
+/**
+ * CreateIncrementalMigration请求参数结构体
+ */
+export interface CreateIncrementalMigrationRequest {
+    /**
+      * 导入目标实例ID
+      */
+    InstanceId: string;
+    /**
+      * 备份导入任务ID，由CreateBackupMigration接口返回
+      */
+    BackupMigrationId: string;
+    /**
+      * 增量备份文件，全量备份任务UploadType是COS_URL时这里填URL，是COS_UPLOAD这里填备份文件的名字；只支持1个备份文件，但1个备份文件内可包含多个库
+      */
+    BackupFiles?: Array<string>;
+    /**
+      * 是否需要恢复，NO-不需要，YES-需要，默认不需要
+      */
+    IsRecovery?: string;
 }
 /**
  * RunMigration返回参数结构体
@@ -453,19 +525,6 @@ export interface DescribeCrossRegionZoneRequest {
     InstanceId: string;
 }
 /**
- * CompleteMigration返回参数结构体
- */
-export interface CompleteMigrationResponse {
-    /**
-      * 完成迁移流程发起后，返回的流程id
-      */
-    FlowId?: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * RollbackInstance返回参数结构体
  */
 export interface RollbackInstanceResponse {
@@ -477,6 +536,23 @@ export interface RollbackInstanceResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DeleteIncrementalMigration请求参数结构体
+ */
+export interface DeleteIncrementalMigrationRequest {
+    /**
+      * 目标实例ID
+      */
+    InstanceId: string;
+    /**
+      * 备份导入任务ID
+      */
+    BackupMigrationId: string;
+    /**
+      * 增量备份导入任务ID
+      */
+    IncrementalMigrationId: string;
 }
 /**
  * 数据库备注信息
@@ -630,6 +706,47 @@ export interface RestoreInstanceRequest {
       * 按照ReNameRestoreDatabase中的库进行恢复，并重命名，不填则按照默认方式命名恢复的库，且恢复所有的库。
       */
     RenameRestore?: Array<RenameRestoreDatabase>;
+}
+/**
+ * DescribeIncrementalMigration请求参数结构体
+ */
+export interface DescribeIncrementalMigrationRequest {
+    /**
+      * 备份导入任务ID，由CreateBackupMigration接口返回
+      */
+    BackupMigrationId: string;
+    /**
+      * 导入目标实例ID
+      */
+    InstanceId: string;
+    /**
+      * 备份文件名称
+      */
+    BackupFileName?: string;
+    /**
+      * 导入任务状态集合
+      */
+    StatusSet?: Array<number>;
+    /**
+      * 分页，页大小
+      */
+    Limit?: number;
+    /**
+      * 分页，页数
+      */
+    Offset?: number;
+    /**
+      * 排序字段，name,createTime,startTime,endTime
+      */
+    OrderBy?: string;
+    /**
+      * 排序方式，desc,asc
+      */
+    OrderByType?: string;
+    /**
+      * 增量备份导入任务ID
+      */
+    IncrementalMigrationId?: string;
 }
 /**
  * DescribeReadOnlyGroupByReadOnlyInstance返回参数结构体
@@ -815,6 +932,94 @@ export interface InquiryPriceCreateDBInstancesRequest {
     MachineType?: string;
 }
 /**
+ * StartIncrementalMigration请求参数结构体
+ */
+export interface StartIncrementalMigrationRequest {
+    /**
+      * 导入目标实例ID
+      */
+    InstanceId: string;
+    /**
+      * 备份导入任务ID，由CreateBackupMigration接口返回
+      */
+    BackupMigrationId: string;
+    /**
+      * 增量备份导入任务ID
+      */
+    IncrementalMigrationId: string;
+}
+/**
+ * 冷备迁移导入
+ */
+export interface Migration {
+    /**
+      * 备份导入任务ID 或 增量导入任务ID
+      */
+    MigrationId: string;
+    /**
+      * 备份导入名称，增量导入任务该字段为空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MigrationName: string;
+    /**
+      * 应用ID
+      */
+    AppId: number;
+    /**
+      * 地域
+      */
+    Region: string;
+    /**
+      * 迁移目标实例ID
+      */
+    InstanceId: string;
+    /**
+      * 迁移任务恢复类型
+      */
+    RecoveryType: string;
+    /**
+      * 备份用户上传类型，COS_URL-备份放在用户的对象存储上，提供URL。COS_UPLOAD-备份放在业务的对象存储上，用户上传
+      */
+    UploadType: string;
+    /**
+      * 备份文件列表，UploadType确定，COS_URL则保存URL，COS_UPLOAD则保存备份名称
+      */
+    BackupFiles: Array<string>;
+    /**
+      * 迁移任务状态，
+      */
+    Status: number;
+    /**
+      * 迁移任务创建时间
+      */
+    CreateTime: string;
+    /**
+      * 迁移任务开始时间
+      */
+    StartTime: string;
+    /**
+      * 迁移任务结束时间
+      */
+    EndTime: string;
+    /**
+      * 说明信息
+      */
+    Message: string;
+    /**
+      * 迁移细节
+      */
+    Detail: MigrationDetail;
+    /**
+      * 当前状态允许的操作
+      */
+    Action: MigrationAction;
+    /**
+      * 是否是最终恢复，全量导入任务该字段为空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsRecovery: string;
+}
+/**
  * ModifyDBInstanceNetwork请求参数结构体
  */
 export interface ModifyDBInstanceNetworkRequest {
@@ -834,6 +1039,28 @@ export interface ModifyDBInstanceNetworkRequest {
       * 原vip保留时长，单位小时，默认为0，代表立即回收，最大为168小时
       */
     OldIpRetainTime?: number;
+}
+/**
+ * 冷备导入任务迁移细节
+ */
+export interface MigrationDetail {
+    /**
+      * 总步骤数
+      */
+    StepAll: number;
+    /**
+      * 当前步骤
+      */
+    StepNow: number;
+    /**
+      * 总进度,如："30"表示30%
+      */
+    Progress: number;
+    /**
+      * 步骤信息，null表示还未开始迁移
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StepInfo: Array<MigrationStep>;
 }
 /**
  * DescribeBackupByFlowId返回参数结构体
@@ -1550,6 +1777,19 @@ export interface ResetAccountPasswordResponse {
     RequestId?: string;
 }
 /**
+ * ModifyBackupMigration返回参数结构体
+ */
+export interface ModifyBackupMigrationResponse {
+    /**
+      * 备份导入任务ID
+      */
+    BackupMigrationId?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 只读组对象
  */
 export interface ReadOnlyGroup {
@@ -1730,6 +1970,31 @@ export interface ModifyAccountPrivilegeRequest {
     Accounts: Array<AccountPrivilegeModifyInfo>;
 }
 /**
+ * CreateBackupMigration请求参数结构体
+ */
+export interface CreateBackupMigrationRequest {
+    /**
+      * 导入目标实例ID
+      */
+    InstanceId: string;
+    /**
+      * 迁移任务恢复类型，FULL-全量备份恢复，FULL_LOG-全量备份+事务日志恢复，FULL_DIFF-全量备份+差异备份恢复
+      */
+    RecoveryType: string;
+    /**
+      * 备份上传类型，COS_URL-备份放在用户的对象存储上，提供URL。COS_UPLOAD-备份放在业务的对象存储上，需要用户上传。
+      */
+    UploadType: string;
+    /**
+      * 任务名称
+      */
+    MigrationName: string;
+    /**
+      * UploadType是COS_URL时这里填URL，COS_UPLOAD这里填备份文件的名字。只支持1个备份文件，但1个备份文件内可包含多个库
+      */
+    BackupFiles?: Array<string>;
+}
+/**
  * DescribeMigrations请求参数结构体
  */
 export interface DescribeMigrationsRequest {
@@ -1759,34 +2024,38 @@ export interface DescribeMigrationsRequest {
     OrderByType?: string;
 }
 /**
- * 实例的数据库信息
+ * InquiryPriceRenewDBInstance返回参数结构体
  */
-export interface InstanceDBDetail {
+export interface InquiryPriceRenewDBInstanceResponse {
     /**
-      * 实例ID
+      * 未打折的原价，其值除以100表示最终的价格。例如10094表示100.94元
+      */
+    OriginalPrice?: number;
+    /**
+      * 实际需要支付价格，其值除以100表示最终的价格。例如10094表示100.94元
+      */
+    Price?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeUploadIncrementalInfo请求参数结构体
+ */
+export interface DescribeUploadIncrementalInfoRequest {
+    /**
+      * 导入目标实例ID
       */
     InstanceId: string;
     /**
-      * 数据库信息列表
+      * 备份导入任务ID，由CreateBackupMigration接口返回
       */
-    DBDetails: Array<DBDetail>;
-}
-/**
- * 进度步骤详情
- */
-export interface StepDetail {
+    BackupMigrationId: string;
     /**
-      * 具体步骤返回信息
+      * 增量导入任务ID
       */
-    Msg: string;
-    /**
-      * 当前步骤状态，0成功，-2未开始
-      */
-    Status: number;
-    /**
-      * 步骤名称
-      */
-    Name: string;
+    IncrementalMigrationId: string;
 }
 /**
  * DescribeDBs请求参数结构体
@@ -1824,17 +2093,9 @@ export interface RenewPostpaidDBInstanceRequest {
     InstanceId: string;
 }
 /**
- * DescribeBackups返回参数结构体
+ * DeleteIncrementalMigration返回参数结构体
  */
-export interface DescribeBackupsResponse {
-    /**
-      * 备份总数量
-      */
-    TotalCount?: number;
-    /**
-      * 备份列表详情
-      */
-    Backups?: Array<Backup>;
+export interface DeleteIncrementalMigrationResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1889,13 +2150,17 @@ export interface DeleteMigrationRequest {
     MigrateId: number;
 }
 /**
- * DescribeMigrationDetail请求参数结构体
+ * CompleteMigration返回参数结构体
  */
-export interface DescribeMigrationDetailRequest {
+export interface CompleteMigrationResponse {
     /**
-      * 迁移任务ID
+      * 完成迁移流程发起后，返回的流程id
       */
-    MigrateId: number;
+    FlowId?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ModifyDBInstanceSecurityGroups请求参数结构体
@@ -1942,6 +2207,47 @@ export interface TerminateDBInstanceRequest {
     InstanceIdSet: Array<string>;
 }
 /**
+ * DescribeUploadIncrementalInfo返回参数结构体
+ */
+export interface DescribeUploadIncrementalInfoResponse {
+    /**
+      * 存储桶名称
+      */
+    BucketName?: string;
+    /**
+      * 存储桶地域信息
+      */
+    Region?: string;
+    /**
+      * 存储路径
+      */
+    Path?: string;
+    /**
+      * 临时密钥ID
+      */
+    TmpSecretId?: string;
+    /**
+      * 临时密钥Key
+      */
+    TmpSecretKey?: string;
+    /**
+      * 临时密钥Token
+      */
+    XCosSecurityToken?: string;
+    /**
+      * 临时密钥开始时间
+      */
+    StartTime?: string;
+    /**
+      * 临时密钥到期时间
+      */
+    ExpiredTime?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateDB请求参数结构体
  */
 export interface CreateDBRequest {
@@ -1962,6 +2268,19 @@ export interface DescribeProjectSecurityGroupsRequest {
       * 项目ID，可通过控制台项目管理中查看
       */
     ProjectId: number;
+}
+/**
+ * 实例的数据库信息
+ */
+export interface InstanceDBDetail {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 数据库信息列表
+      */
+    DBDetails: Array<DBDetail>;
 }
 /**
  * 安全组
@@ -2200,6 +2519,55 @@ export interface DeleteMigrationResponse {
     RequestId?: string;
 }
 /**
+ * DescribeBackupMigration请求参数结构体
+ */
+export interface DescribeBackupMigrationRequest {
+    /**
+      * 导入目标实例ID
+      */
+    InstanceId: string;
+    /**
+      * 备份导入任务ID，由CreateBackupMigration接口返回
+      */
+    BackupMigrationId?: string;
+    /**
+      * 导入任务名称
+      */
+    MigrationName?: string;
+    /**
+      * 备份文件名称
+      */
+    BackupFileName?: string;
+    /**
+      * 导入任务状态集合
+      */
+    StatusSet?: Array<number>;
+    /**
+      * 导入任务恢复类型，FULL,FULL_LOG,FULL_DIFF
+      */
+    RecoveryType?: string;
+    /**
+      * COS_URL-备份放在用户的对象存储上，提供URL。COS_UPLOAD-备份放在业务的对象存储上，用户上传
+      */
+    UploadType?: string;
+    /**
+      * 分页，页大小
+      */
+    Limit?: number;
+    /**
+      * 分页，页数
+      */
+    Offset?: number;
+    /**
+      * 排序字段，name,createTime,startTime,endTime
+      */
+    OrderBy?: string;
+    /**
+      * 排序方式，desc,asc
+      */
+    OrderByType?: string;
+}
+/**
  * RecycleReadOnlyGroup请求参数结构体
  */
 export interface RecycleReadOnlyGroupRequest {
@@ -2213,17 +2581,30 @@ export interface RecycleReadOnlyGroupRequest {
     ReadOnlyGroupId: string;
 }
 /**
- * InquiryPriceRenewDBInstance返回参数结构体
+ * 进度步骤详情
  */
-export interface InquiryPriceRenewDBInstanceResponse {
+export interface StepDetail {
     /**
-      * 未打折的原价，其值除以100表示最终的价格。例如10094表示100.94元
+      * 具体步骤返回信息
       */
-    OriginalPrice?: number;
+    Msg: string;
     /**
-      * 实际需要支付价格，其值除以100表示最终的价格。例如10094表示100.94元
+      * 当前步骤状态，0成功，-2未开始
       */
-    Price?: number;
+    Status: number;
+    /**
+      * 步骤名称
+      */
+    Name: string;
+}
+/**
+ * DescribeBackupUploadSize返回参数结构体
+ */
+export interface DescribeBackupUploadSizeResponse {
+    /**
+      * 已上传的备份的信息
+      */
+    CosUploadBackupFileSet?: Array<CosUploadBackupFile>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2245,6 +2626,19 @@ export interface InquiryPriceRenewDBInstanceRequest {
       * 续费周期单位。month表示按月续费，当前只支持按月付费查询价格
       */
     TimeUnit?: string;
+}
+/**
+ * StartIncrementalMigration返回参数结构体
+ */
+export interface StartIncrementalMigrationResponse {
+    /**
+      * 流程ID
+      */
+    FlowId?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * TerminateDBInstance返回参数结构体
@@ -2295,45 +2689,13 @@ export interface AssociateSecurityGroupsResponse {
     RequestId?: string;
 }
 /**
- * 账户信息详情
+ * DescribeMaintenanceSpan请求参数结构体
  */
-export interface AccountDetail {
+export interface DescribeMaintenanceSpanRequest {
     /**
-      * 账户名
+      * 实例ID，形如mssql-k8voqdlz
       */
-    Name: string;
-    /**
-      * 账户备注
-      */
-    Remark: string;
-    /**
-      * 账户创建时间
-      */
-    CreateTime: string;
-    /**
-      * 账户状态，1-创建中，2-正常，3-修改中，4-密码重置中，-1-删除中
-      */
-    Status: number;
-    /**
-      * 账户更新时间
-      */
-    UpdateTime: string;
-    /**
-      * 密码更新时间
-      */
-    PassTime: string;
-    /**
-      * 账户内部状态，正常为enable
-      */
-    InternalStatus: string;
-    /**
-      * 该账户对相关db的读写权限信息
-      */
-    Dbs: Array<DBPrivilege>;
-    /**
-      * 是否为管理员账户
-      */
-    IsAdmin: boolean;
+    InstanceId: string;
 }
 /**
  * CreateBackup返回参数结构体
@@ -2524,6 +2886,60 @@ export interface DescribeProductConfigResponse {
     RequestId?: string;
 }
 /**
+ * DescribeRollbackTime请求参数结构体
+ */
+export interface DescribeRollbackTimeRequest {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 需要查询的数据库列表
+      */
+    DBs: Array<string>;
+}
+/**
+ * DescribeUploadBackupInfo返回参数结构体
+ */
+export interface DescribeUploadBackupInfoResponse {
+    /**
+      * 存储桶名称
+      */
+    BucketName?: string;
+    /**
+      * 存储桶地域信息
+      */
+    Region?: string;
+    /**
+      * 存储路径
+      */
+    Path?: string;
+    /**
+      * 临时密钥ID
+      */
+    TmpSecretId?: string;
+    /**
+      * 临时密钥Key
+      */
+    TmpSecretKey?: string;
+    /**
+      * 临时密钥Token
+      */
+    XCosSecurityToken?: string;
+    /**
+      * 临时密钥开始时间
+      */
+    StartTime?: string;
+    /**
+      * 临时密钥到期时间
+      */
+    ExpiredTime?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateMigration请求参数结构体
  */
 export interface CreateMigrationRequest {
@@ -2564,6 +2980,47 @@ export interface StartMigrationCheckRequest {
       * 迁移任务id
       */
     MigrateId: number;
+}
+/**
+ * 账户信息详情
+ */
+export interface AccountDetail {
+    /**
+      * 账户名
+      */
+    Name: string;
+    /**
+      * 账户备注
+      */
+    Remark: string;
+    /**
+      * 账户创建时间
+      */
+    CreateTime: string;
+    /**
+      * 账户状态，1-创建中，2-正常，3-修改中，4-密码重置中，-1-删除中
+      */
+    Status: number;
+    /**
+      * 账户更新时间
+      */
+    UpdateTime: string;
+    /**
+      * 密码更新时间
+      */
+    PassTime: string;
+    /**
+      * 账户内部状态，正常为enable
+      */
+    InternalStatus: string;
+    /**
+      * 该账户对相关db的读写权限信息
+      */
+    Dbs: Array<DBPrivilege>;
+    /**
+      * 是否为管理员账户
+      */
+    IsAdmin: boolean;
 }
 /**
  * CreateBasicDBInstances请求参数结构体
@@ -2664,21 +3121,17 @@ export interface ModifyDBNameResponse {
     RequestId?: string;
 }
 /**
- * DescribePublishSubscribe返回参数结构体
+ * 查询已经上传的备份文件大小。
  */
-export interface DescribePublishSubscribeResponse {
+export interface CosUploadBackupFile {
     /**
-      * 总数
+      * 备份名称
       */
-    TotalCount?: number;
+    FileName: string;
     /**
-      * 发布订阅列表
+      * 备份大小
       */
-    PublishSubscribeSet?: Array<PublishSubscribe>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    Size: number;
 }
 /**
  * ModifyDBName请求参数结构体
@@ -2760,6 +3213,27 @@ export interface Backup {
     BackupName: string;
 }
 /**
+ * DescribeBackupCommand请求参数结构体
+ */
+export interface DescribeBackupCommandRequest {
+    /**
+      * 备份文件类型，FULL-全量备份，FULL_LOG-全量备份需要日志增量，FULL_DIFF-全量备份需要差异增量，LOG-日志备份，DIFF-差异备份
+      */
+    BackupFileType: string;
+    /**
+      * 数据库名称
+      */
+    DataBaseName: string;
+    /**
+      * 是否需要恢复，NO-不需要，YES-需要
+      */
+    IsRecovery: string;
+    /**
+      * 备份文件保存的路径；如果不填则默认在D:\\
+      */
+    LocalPath?: string;
+}
+/**
  * 账户备注信息
  */
 export interface AccountRemark {
@@ -2791,6 +3265,32 @@ export interface ModifyDBInstanceNameResponse {
     RequestId?: string;
 }
 /**
+ * CreateIncrementalMigration返回参数结构体
+ */
+export interface CreateIncrementalMigrationResponse {
+    /**
+      * 增量备份导入任务ID
+      */
+    IncrementalMigrationId?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 冷备导入任务允许的操作
+ */
+export interface MigrationAction {
+    /**
+      * 支持的所有操作，值包括：view(查看任务) ，modify(修改任务)， start(启动任务)，incremental(创建增量任务)，delete(删除任务)，upload(获取上传权限)。
+      */
+    AllAction: Array<string>;
+    /**
+      * 当前状态允许的操作，AllAction的子集,为空表示禁止所有操作
+      */
+    AllowedAction: Array<string>;
+}
+/**
  * 数据库账号权限变更信息
  */
 export interface AccountPrivilegeModifyInfo {
@@ -2804,21 +3304,21 @@ export interface AccountPrivilegeModifyInfo {
     DBPrivileges: Array<DBPrivilegeModifyInfo>;
 }
 /**
- * 迁移任务的目标类型
+ * DescribeBackupMigration返回参数结构体
  */
-export interface MigrateTarget {
+export interface DescribeBackupMigrationResponse {
     /**
-      * 迁移目标实例的ID，格式如：mssql-si2823jyl
+      * 迁移任务总数
       */
-    InstanceId?: string;
+    TotalCount?: number;
     /**
-      * 迁移目标实例的用户名
+      * 迁移任务集合
       */
-    UserName?: string;
+    BackupMigrationSet?: Array<Migration>;
     /**
-      * 迁移目标实例的密码
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Password?: string;
+    RequestId?: string;
 }
 /**
  * 账号创建信息
@@ -2946,6 +3446,23 @@ export interface DescribeReadOnlyGroupDetailsResponse {
     RequestId?: string;
 }
 /**
+ * DescribeBackups返回参数结构体
+ */
+export interface DescribeBackupsResponse {
+    /**
+      * 备份总数量
+      */
+    TotalCount?: number;
+    /**
+      * 备份列表详情
+      */
+    Backups?: Array<Backup>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 实例绑定的标签信息
  */
 export interface ResourceTag {
@@ -2957,6 +3474,19 @@ export interface ResourceTag {
       * 标签value
       */
     TagValue: string;
+}
+/**
+ * CreateBackupMigration返回参数结构体
+ */
+export interface CreateBackupMigrationResponse {
+    /**
+      * 备份导入任务ID
+      */
+    BackupMigrationId?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * RecycleDBInstance返回参数结构体
@@ -2994,13 +3524,13 @@ export interface DescribeReadOnlyGroupByReadOnlyInstanceRequest {
     InstanceId: string;
 }
 /**
- * DescribeMaintenanceSpan请求参数结构体
+ * DeleteBackupMigration返回参数结构体
  */
-export interface DescribeMaintenanceSpanRequest {
+export interface DeleteBackupMigrationResponse {
     /**
-      * 实例ID，形如mssql-k8voqdlz
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    InstanceId: string;
+    RequestId?: string;
 }
 /**
  * 发布订阅对象
@@ -3130,6 +3660,19 @@ export interface ModifyAccountRemarkRequest {
       * 修改备注的账户信息
       */
     Accounts: Array<AccountRemark>;
+}
+/**
+ * ModifyIncrementalMigration返回参数结构体
+ */
+export interface ModifyIncrementalMigrationResponse {
+    /**
+      * 增量备份导入任务ID
+      */
+    IncrementalMigrationId?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ModifyPublishSubscribeName请求参数结构体
@@ -3282,6 +3825,23 @@ export interface ModifyMigrationRequest {
     MigrateDBSet?: Array<MigrateDB>;
 }
 /**
+ * DescribeMigrationDatabases请求参数结构体
+ */
+export interface DescribeMigrationDatabasesRequest {
+    /**
+      * 迁移源实例的ID，格式如：mssql-si2823jyl
+      */
+    InstanceId: string;
+    /**
+      * 迁移源实例用户名
+      */
+    UserName: string;
+    /**
+      * 迁移源实例密码
+      */
+    Password: string;
+}
+/**
  * DeleteDBInstance请求参数结构体
  */
 export interface DeleteDBInstanceRequest {
@@ -3313,21 +3873,21 @@ export interface RenewPostpaidDBInstanceResponse {
     RequestId?: string;
 }
 /**
- * DescribeMigrationDatabases请求参数结构体
+ * DescribeBackupUploadSize请求参数结构体
  */
-export interface DescribeMigrationDatabasesRequest {
+export interface DescribeBackupUploadSizeRequest {
     /**
-      * 迁移源实例的ID，格式如：mssql-si2823jyl
+      * 导入目标实例ID
       */
     InstanceId: string;
     /**
-      * 迁移源实例用户名
+      * 备份导入任务ID，由CreateBackupMigration接口返回
       */
-    UserName: string;
+    BackupMigrationId: string;
     /**
-      * 迁移源实例密码
+      * 增量导入任务ID
       */
-    Password: string;
+    IncrementalMigrationId?: string;
 }
 /**
  * UpgradeDBInstance请求参数结构体
@@ -3654,6 +4214,27 @@ export interface StopMigrationResponse {
     RequestId?: string;
 }
 /**
+ * 冷备导入任务迁移步骤细节
+ */
+export interface MigrationStep {
+    /**
+      * 步骤序列
+      */
+    StepNo: number;
+    /**
+      * 步骤展现名称
+      */
+    StepName: string;
+    /**
+      * 英文ID标识
+      */
+    StepId: string;
+    /**
+      * 步骤状态:0-默认值,1-成功,2-失败,3-执行中,4-未执行
+      */
+    Status: number;
+}
+/**
  * CreatePublishSubscribe返回参数结构体
  */
 export interface CreatePublishSubscribeResponse {
@@ -3665,6 +4246,19 @@ export interface CreatePublishSubscribeResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeUploadBackupInfo请求参数结构体
+ */
+export interface DescribeUploadBackupInfoRequest {
+    /**
+      * 导入目标实例ID
+      */
+    InstanceId: string;
+    /**
+      * 备份导入任务ID，由CreateBackupMigration接口返回
+      */
+    BackupMigrationId: string;
 }
 /**
  * DescribeAccounts返回参数结构体
@@ -3710,17 +4304,56 @@ export interface UpgradeDBInstanceResponse {
     RequestId?: string;
 }
 /**
- * DescribeRollbackTime请求参数结构体
+ * DescribeBackupCommand返回参数结构体
  */
-export interface DescribeRollbackTimeRequest {
+export interface DescribeBackupCommandResponse {
     /**
-      * 实例ID
+      * 创建备份命令
+      */
+    Command?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * StartBackupMigration请求参数结构体
+ */
+export interface StartBackupMigrationRequest {
+    /**
+      * 导入目标实例ID
       */
     InstanceId: string;
     /**
-      * 需要查询的数据库列表
+      * 备份导入任务ID，由CreateBackupMigration接口返回
       */
-    DBs: Array<string>;
+    BackupMigrationId: string;
+}
+/**
+ * DescribePublishSubscribe返回参数结构体
+ */
+export interface DescribePublishSubscribeResponse {
+    /**
+      * 总数
+      */
+    TotalCount?: number;
+    /**
+      * 发布订阅列表
+      */
+    PublishSubscribeSet?: Array<PublishSubscribe>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeMigrationDetail请求参数结构体
+ */
+export interface DescribeMigrationDetailRequest {
+    /**
+      * 迁移任务ID
+      */
+    MigrateId: number;
 }
 /**
  * DescribeReadOnlyGroupList请求参数结构体
@@ -3732,6 +4365,23 @@ export interface DescribeReadOnlyGroupListRequest {
     InstanceId: string;
 }
 /**
+ * DescribeIncrementalMigration返回参数结构体
+ */
+export interface DescribeIncrementalMigrationResponse {
+    /**
+      * 增量导入任务总数
+      */
+    TotalCount?: number;
+    /**
+      * 增量导入任务集合
+      */
+    IncrementalMigrationSet?: Array<Migration>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyDBRemark返回参数结构体
  */
 export interface ModifyDBRemarkResponse {
@@ -3739,6 +4389,23 @@ export interface ModifyDBRemarkResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 迁移任务的目标类型
+ */
+export interface MigrateTarget {
+    /**
+      * 迁移目标实例的ID，格式如：mssql-si2823jyl
+      */
+    InstanceId?: string;
+    /**
+      * 迁移目标实例的用户名
+      */
+    UserName?: string;
+    /**
+      * 迁移目标实例的密码
+      */
+    Password?: string;
 }
 /**
  * DisassociateSecurityGroups返回参数结构体
@@ -3765,6 +4432,35 @@ export interface CreateDBInstancesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ModifyBackupMigration请求参数结构体
+ */
+export interface ModifyBackupMigrationRequest {
+    /**
+      * 导入目标实例ID
+      */
+    InstanceId: string;
+    /**
+      * 备份导入任务ID，由CreateBackupMigration接口返回
+      */
+    BackupMigrationId: string;
+    /**
+      * 任务名称
+      */
+    MigrationName?: string;
+    /**
+      * 迁移任务恢复类型，FULL,FULL_LOG,FULL_DIFF
+      */
+    RecoveryType?: string;
+    /**
+      * COS_URL-备份放在用户的对象存储上，提供URL。COS_UPLOAD-备份放在业务的对象存储上，用户上传
+      */
+    UploadType?: string;
+    /**
+      * UploadType是COS_URL时这里时URL，COS_UPLOAD这里填备份文件的名字；只支持1个备份文件，但1个备份文件内可包含多个库
+      */
+    BackupFiles?: Array<string>;
 }
 /**
  * DeleteAccount返回参数结构体

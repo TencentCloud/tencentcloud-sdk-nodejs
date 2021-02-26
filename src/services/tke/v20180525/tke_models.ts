@@ -860,6 +860,26 @@ export interface DescribeRegionsResponse {
 }
 
 /**
+ * prometheus告警历史
+ */
+export interface PrometheusAlertHistoryItem {
+  /**
+   * 告警名称
+   */
+  RuleName: string
+
+  /**
+   * 告警开始时间
+   */
+  StartTime: string
+
+  /**
+   * 告警内容
+   */
+  Content: string
+}
+
+/**
  * CreateClusterRoute返回参数结构体
  */
 export interface CreateClusterRouteResponse {
@@ -1614,13 +1634,43 @@ export interface Label {
 }
 
 /**
- * ModifyPrometheusTemplate返回参数结构体
+ * DescribePrometheusAlertHistory请求参数结构体
  */
-export interface ModifyPrometheusTemplateResponse {
+export interface DescribePrometheusAlertHistoryRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 实例id
    */
-  RequestId?: string
+  InstanceId: string
+
+  /**
+   * 告警名称
+   */
+  RuleName?: string
+
+  /**
+   * 开始时间
+   */
+  StartTime?: string
+
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+
+  /**
+   * label集合
+   */
+  Labels?: string
+
+  /**
+   * 分片
+   */
+  Offset?: number
+
+  /**
+   * 分片
+   */
+  Limit?: number
 }
 
 /**
@@ -3402,6 +3452,16 @@ export interface AcquireClusterAdminRoleResponse {
 }
 
 /**
+ * ModifyPrometheusTemplate返回参数结构体
+ */
+export interface ModifyPrometheusTemplateResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeletePrometheusTemplate返回参数结构体
  */
 export interface DeletePrometheusTemplateResponse {
@@ -4313,6 +4373,26 @@ export interface InstanceUpgradePreCheckResultItem {
    * 工作负载在本节点上的pod列表
    */
   Pods: Array<string>
+}
+
+/**
+ * DescribePrometheusAlertHistory返回参数结构体
+ */
+export interface DescribePrometheusAlertHistoryResponse {
+  /**
+   * 告警历史
+   */
+  Items: Array<PrometheusAlertHistoryItem>
+
+  /**
+   * 总数
+   */
+  Total: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
