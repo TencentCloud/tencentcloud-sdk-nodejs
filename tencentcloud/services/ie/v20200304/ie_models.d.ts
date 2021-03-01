@@ -288,6 +288,10 @@ hlg。
       * 画质增强参数信息。
       */
     VideoEnhance?: VideoEnhance;
+    /**
+      * 数字水印参数信息。
+      */
+    HiddenMarkInfo?: HiddenMarkInfo;
 }
 /**
  * DescribeQualityControlTaskResult请求参数结构体
@@ -1190,6 +1194,27 @@ export interface MediaQualityRestorationTaskResult {
       * 画质重生处理后文件的详细信息。
       */
     SubTaskResult: Array<SubTaskResultItem>;
+}
+/**
+ * 数字水印
+ */
+export interface HiddenMarkInfo {
+    /**
+      * 数字水印路径,，如果不从Cos拉取水印，则必填
+      */
+    Path: string;
+    /**
+      * 数字水印频率，可选值：[1,256]，默认值为30
+      */
+    Frequency?: number;
+    /**
+      * 数字水印强度，可选值：[32,128]，默认值为64
+      */
+    Strength?: number;
+    /**
+      * 数字水印的Cos 信息，从Cos上拉取图片水印时必填。
+      */
+    CosInfo?: CosInfo;
 }
 /**
  * 编辑处理/剪切任务/输出形式信息

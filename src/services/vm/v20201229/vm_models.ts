@@ -208,25 +208,25 @@ export interface DescribeTaskDetailResponse {
       * 任务Id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TaskId?: string
+  TaskId: string
 
   /**
       * 审核时传入的数据Id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DataId?: string
+  DataId: string
 
   /**
       * 业务类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  BizType?: string
+  BizType: string
 
   /**
       * 任务名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Name?: string
+  Name: string
 
   /**
       * 状态，可选值：
@@ -237,13 +237,13 @@ ERROR 出错
 CANCELLED 已取消
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Status?: string
+  Status: string
 
   /**
       * 类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Type?: string
+  Type: string
 
   /**
       * 审核建议
@@ -253,49 +253,51 @@ Reveiw 建议复审
 Block 确认违规
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Suggestion?: string
+  Suggestion: string
 
   /**
       * 审核结果
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Labels?: Array<TaskLabel>
+  Labels: Array<TaskLabel>
 
   /**
       * 媒体解码信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  MediaInfo?: MediaInfo
+  MediaInfo: MediaInfo
 
   /**
       * 任务信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  InputInfo?: InputInfo
+  InputInfo: InputInfo
 
   /**
       * 创建时间，格式为 ISO 8601
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CreatedAt?: string
+  CreatedAt: string
 
   /**
       * 更新时间，格式为 ISO 8601
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  UpdatedAt?: string
+  UpdatedAt: string
 
   /**
-      * 图片结果
+      * 视频中截帧审核的结果。
+数据有效期为24小时，如需要储存更长时间请在已配置的COS储存桶中设置。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ImageSegments?: Array<ImageSegments>
+  ImageSegments: Array<ImageSegments>
 
   /**
-      * 音频结果
+      * 视频中音频审核的结果。
+数据有效期为24小时，如需要储存更长时间请在已配置的COS储存桶中设置。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AudioSegments?: Array<AudioSegments>
+  AudioSegments: Array<AudioSegments>
 
   /**
       * 如果返回的状态为ERROR，该字段会标记错误类型。
@@ -305,13 +307,13 @@ URL_ERROR：下载地址验证失败。
 TIMEOUT_ERROR：处理超时。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ErrorType?: string
+  ErrorType: string
 
   /**
       * 审核任务错误日志。当Error不为空时，会展示该字段
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ErrorDescription?: string
+  ErrorDescription: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

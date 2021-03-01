@@ -79,6 +79,7 @@ import {
   DescribeEditingTaskResultResponse,
   QualityControlInfoTaskResult,
   MediaQualityRestorationTaskResult,
+  HiddenMarkInfo,
   MediaCuttingOutForm,
   StopMediaQualityRestorationTaskRequest,
   DescribeQualityControlTaskResultResponse,

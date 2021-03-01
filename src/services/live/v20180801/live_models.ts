@@ -1443,27 +1443,27 @@ export interface DescribeLiveStreamPushInfoListResponse {
   /**
    * 直播流的统计信息列表。
    */
-  DataInfoList?: Array<PushDataInfo>
+  DataInfoList: Array<PushDataInfo>
 
   /**
    * 所有在线流的总数量。
    */
-  TotalNum?: number
+  TotalNum: number
 
   /**
    * 总页数。
    */
-  TotalPage?: number
+  TotalPage: number
 
   /**
    * 当前数据所在页码。
    */
-  PageNum?: number
+  PageNum: number
 
   /**
    * 每页的在线流的个数。
    */
-  PageSize?: number
+  PageSize: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -425,6 +425,15 @@ export interface DeleteTeamResponse {
  */
 export interface VideoSegmentationProjectInput {
   /**
+      * 画布宽高比，取值有：
+<li>16:9；</li>
+<li>9:16；</li>
+<li>2:1。</li>
+默认值 16:9 。
+      */
+  AspectRatio?: string
+
+  /**
       * 视频拆条处理模型，不填则默认为手工分割视频。取值 ：
 <li>AI.GameHighlights.PUBG：和平精英集锦 ;</li>
 <li>AI.GameHighlights.Honor OfKings：王者荣耀集锦 ;</li>
@@ -940,10 +949,8 @@ export interface CreateProjectRequest {
   Owner: Entity
 
   /**
-      * 画布宽高比，取值有：
-<li>16:9；</li>
-<li>9:16。</li>
-该字段即将废弃，当项目类型为 VIDEO_EDIT 时，请在 VideoEditProjectInput 信息中填写该值；当项目类型为 VIDEO_SEGMENTATION 时，请在VideoSegmentationProjectInput 中填写该值。其他项目类型可不填。
+      * 画布宽高比。
+该字段已经废弃，请使用具体项目输入中的 AspectRatio 字段。
       */
   AspectRatio?: string
 
@@ -1351,7 +1358,7 @@ export interface CreateProjectResponse {
   /**
    * 项目 Id。
    */
-  ProjectId?: string
+  ProjectId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1363,6 +1370,15 @@ export interface CreateProjectResponse {
  * 视频编辑项目输入参数
  */
 export interface VideoEditProjectInput {
+  /**
+      * 画布宽高比，取值有：
+<li>16:9；</li>
+<li>9:16；</li>
+<li>2:1。</li>
+默认值 16:9 。
+      */
+  AspectRatio?: string
+
   /**
    * 视频编辑模板媒体 ID ，通过模板媒体导入项目轨道数据时填写。
    */

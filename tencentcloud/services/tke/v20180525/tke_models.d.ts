@@ -2093,6 +2093,11 @@ export interface ClusterExtraArgs {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     KubeScheduler?: Array<string>;
+    /**
+      * etcd自定义参数，只支持独立集群
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Etcd?: Array<string>;
 }
 /**
  * SyncPrometheusTemplate返回参数结构体

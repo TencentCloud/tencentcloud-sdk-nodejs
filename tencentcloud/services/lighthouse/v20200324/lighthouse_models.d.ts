@@ -303,7 +303,7 @@ export interface DescribeBundlesRequest {
  */
 export interface Blueprint {
     /**
-      * 镜像 ID  ，是 blueprint 的唯一标识。
+      * 镜像 ID  ，是 Blueprint 的唯一标识。
       */
     BlueprintId: string;
     /**
@@ -331,7 +331,7 @@ export interface Blueprint {
       */
     PlatformType: string;
     /**
-      * 镜像类型，如 APP_OS、PURE_OS。
+      * 镜像类型，如 APP_OS、PURE_OS、PRIVATE。
       */
     BlueprintType: string;
     /**
@@ -346,6 +346,20 @@ export interface Blueprint {
       * 镜像状态。
       */
     BlueprintState: string;
+    /**
+      * 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。
+格式为： YYYY-MM-DDThh:mm:ssZ。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreatedTime: string;
+    /**
+      * 镜像名称。
+      */
+    BlueprintName: string;
+    /**
+      * 镜像是否支持自动化助手。
+      */
+    SupportAutomationTools: boolean;
 }
 /**
  * 价格信息
@@ -473,7 +487,7 @@ export interface DescribeBlueprintsRequest {
 类型：String
 必选：否
 <li>blueprint-type</li>按照【镜像类型】进行过滤。
-取值： APP_OS（预置应用的系统 ）；PURE_OS（纯净的 OS 系统）。
+取值：APP_OS（预置应用的系统 ）；PURE_OS（纯净的 OS 系统）；PRIVATE（自定义镜像）。
 类型：String
 必选：否
 <li>platform-type</li>按照【镜像平台类型】进行过滤。
