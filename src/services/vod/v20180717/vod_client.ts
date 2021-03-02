@@ -53,6 +53,7 @@ import {
   ManageTaskRequest,
   CreateImageSpriteTemplateRequest,
   MediaSnapshotByTimePicInfoItem,
+  DescribeDailyMostPlayedStatRequest,
   UserDefineFaceReviewTemplateInfo,
   ContentReviewTemplateItem,
   DeleteAIRecognitionTemplateResponse,
@@ -64,6 +65,7 @@ import {
   DeleteSampleSnapshotTemplateRequest,
   DescribeStorageDataResponse,
   AudioTemplateInfoForUpdate,
+  DescribeDailyMediaPlayStatResponse,
   ModifySubAppIdInfoRequest,
   DeletePersonSampleRequest,
   AiRecognitionTaskAsrWordsSegmentItem,
@@ -79,6 +81,7 @@ import {
   CreateAdaptiveDynamicStreamingTemplateRequest,
   PushUrlCacheResponse,
   MediaProcessTaskSampleSnapshotResult,
+  DescribeDailyMediaPlayStatRequest,
   TerrorismImgReviewTemplateInfoForUpdate,
   ModifyTranscodeTemplateRequest,
   AiAnalysisTaskHighlightResult,
@@ -123,6 +126,7 @@ import {
   PoliticalOcrReviewTemplateInfoForUpdate,
   TaskOutputMediaInfo,
   ProcessMediaByUrlRequest,
+  DescribeDailyMostPlayedStatResponse,
   SplitMediaTaskConfig,
   PlayStatFileInfo,
   ModifyMediaInfoRequest,
@@ -242,6 +246,7 @@ import {
   DescribeContentReviewTemplatesResponse,
   TEHDConfig,
   AnimatedGraphicsTemplate,
+  DailyPlayStatInfo,
   TerrorismOcrReviewTemplateInfoForUpdate,
   DescribeEventsStateResponse,
   AiRecognitionTaskHeadTailResultOutput,
@@ -1122,6 +1127,17 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口用于查询指定日期范围内每天的播放统计数据。
+   * 可以查询最近30天的播放统计数据。
+   */
+  async DescribeDailyMediaPlayStat(
+    req: DescribeDailyMediaPlayStatRequest,
+    cb?: (error: string, rep: DescribeDailyMediaPlayStatResponse) => void
+  ): Promise<DescribeDailyMediaPlayStatResponse> {
+    return this.request("DescribeDailyMediaPlayStat", req, cb)
+  }
+
+  /**
    * 删除用户自定义视频内容智能识别模板。
    */
   async DeleteContentReviewTemplate(
@@ -1139,6 +1155,21 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAIAnalysisTemplateResponse) => void
   ): Promise<CreateAIAnalysisTemplateResponse> {
     return this.request("CreateAIAnalysisTemplate", req, cb)
+  }
+
+  /**
+     * 该接口用于查询每日播放Top100 的媒体文件的播放统计数据。
+* 可以查询最近30天的播放统计数据。
+* 可以按播放次数或者播放流量查询。
+* 播放次数统计说明：
+    1. HLS 文件：访问 M3U8 文件时统计播放次数；访问 TS 文件不统计播放次数。
+    2. 其它文件（如 MP4 文件）：播放请求带有 range 参数且 range 的 start 参数不等于0时不统计播放次数，其它情况统计播放次数。
+     */
+  async DescribeDailyMostPlayedStat(
+    req: DescribeDailyMostPlayedStatRequest,
+    cb?: (error: string, rep: DescribeDailyMostPlayedStatResponse) => void
+  ): Promise<DescribeDailyMostPlayedStatResponse> {
+    return this.request("DescribeDailyMostPlayedStat", req, cb)
   }
 
   /**

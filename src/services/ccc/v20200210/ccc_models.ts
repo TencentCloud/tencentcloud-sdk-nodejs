@@ -78,6 +78,26 @@ export interface CreateSDKLoginTokenResponse {
 }
 
 /**
+ * DescribeStaffInfoList返回参数结构体
+ */
+export interface DescribeStaffInfoListResponse {
+  /**
+   * 坐席用户总数
+   */
+  TotalCount: number
+
+  /**
+   * 坐席用户信息列表
+   */
+  StaffList: Array<StaffInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateStaff返回参数结构体
  */
 export interface CreateStaffResponse {
@@ -308,6 +328,82 @@ error	系统错误
 }
 
 /**
+ * 带有技能组优先级的坐席信息
+ */
+export interface StaffInfo {
+  /**
+      * 坐席名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name: string
+
+  /**
+   * 坐席邮箱
+   */
+  Mail: string
+
+  /**
+      * 坐席电话号码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Phone: string
+
+  /**
+      * 坐席昵称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Nick: string
+
+  /**
+      * 坐席工号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StaffNumber: string
+
+  /**
+      * 所属技能组列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SkillGroupList: Array<SkillGroupItem>
+
+  /**
+      * 最后修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LastModifyTimestamp: number
+}
+
+/**
+ * DescribeSkillGroupInfoList请求参数结构体
+ */
+export interface DescribeSkillGroupInfoListRequest {
+  /**
+   * 应用ID
+   */
+  SdkAppId: number
+
+  /**
+   * 分页尺寸，上限 100
+   */
+  PageSize: number
+
+  /**
+   * 分页页码，从 0 开始
+   */
+  PageNumber: number
+
+  /**
+   * 技能组ID，查询单个技能组时使用
+   */
+  SkillGroupId?: number
+
+  /**
+   * 查询修改时间大于等于ModifiedTime的技能组时使用
+   */
+  ModifiedTime?: number
+}
+
+/**
  * DescribeTelCallInfo请求参数结构体
  */
 export interface DescribeTelCallInfoRequest {
@@ -440,6 +536,80 @@ export interface DescribeChatMessagesRequest {
    * 1为从早到晚，2为从晚到早，默认为2
    */
   Order?: number
+}
+
+/**
+ * DescribeStaffInfoList请求参数结构体
+ */
+export interface DescribeStaffInfoListRequest {
+  /**
+   * 应用ID
+   */
+  SdkAppId: number
+
+  /**
+   * 分页尺寸，上限 100
+   */
+  PageSize: number
+
+  /**
+   * 分页页码，从 0 开始
+   */
+  PageNumber: number
+
+  /**
+   * 坐席账号，查询单个坐席时使用
+   */
+  StaffMail?: string
+
+  /**
+   * 查询修改时间大于等于ModifiedTime的坐席时使用
+   */
+  ModifiedTime?: number
+}
+
+/**
+ * 技能组信息
+ */
+export interface SkillGroupInfoItem {
+  /**
+   * 技能组ID
+   */
+  SkillGroupId: number
+
+  /**
+   * 技能组名称
+   */
+  SkillGroupName: string
+
+  /**
+   * 类型：IM、TEL、ALL（全媒体）
+   */
+  Type: string
+
+  /**
+      * 会话分配策略
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RoutePolicy: string
+
+  /**
+      * 会话分配是否优先上次服务坐席
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UsingLastSeat: number
+
+  /**
+      * 单客服最大并发数（电话类型默认1）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxConcurrency: number
+
+  /**
+      * 最后修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LastModifyTimestamp: number
 }
 
 /**
@@ -669,6 +839,31 @@ export interface DescribeTelCdrRequest {
 }
 
 /**
+ * 技能组信息
+ */
+export interface SkillGroupItem {
+  /**
+   * 技能组ID
+   */
+  SkillGroupId: number
+
+  /**
+   * 技能组名称
+   */
+  SkillGroupName: string
+
+  /**
+   * 优先级
+   */
+  Priority: number
+
+  /**
+   * 类型：IM、TEL、ALL（全媒体）
+   */
+  Type: string
+}
+
+/**
  * 聊天消息
  */
 export interface MessageBody {
@@ -818,4 +1013,24 @@ export interface Message {
    * 消息内容
    */
   Content: string
+}
+
+/**
+ * DescribeSkillGroupInfoList返回参数结构体
+ */
+export interface DescribeSkillGroupInfoListResponse {
+  /**
+   * 技能组总数
+   */
+  TotalCount: number
+
+  /**
+   * 技能组信息列表
+   */
+  SkillGroupList: Array<SkillGroupInfoItem>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }

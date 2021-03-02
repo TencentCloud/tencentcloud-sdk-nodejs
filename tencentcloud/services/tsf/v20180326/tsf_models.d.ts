@@ -2644,7 +2644,7 @@ export interface TaskRule {
       * 时间间隔， 单位毫秒
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    RepeatInterval: number;
+    RepeatInterval?: number;
 }
 /**
  * 命名空间
@@ -3841,7 +3841,7 @@ export interface CreateTaskResponse {
     /**
       * 任务ID
       */
-    Result?: string;
+    Result: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5072,7 +5072,7 @@ export interface CreateTaskRequest {
       */
     SuccessOperator?: string;
     /**
-      * 判断任务成功率的阈值，如99.99
+      * 判断任务成功率的阈值，如100
       */
     SuccessRatio?: string;
     /**

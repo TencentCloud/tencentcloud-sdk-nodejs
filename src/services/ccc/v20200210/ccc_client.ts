@@ -21,27 +21,34 @@ import {
   DescribePSTNActiveSessionListRequest,
   IVRKeyPressedElement,
   CreateSDKLoginTokenResponse,
+  DescribeStaffInfoListResponse,
   CreateStaffResponse,
   DescribeTelCdrResponse,
   DescribeIMCdrsResponse,
   DescribeIMCdrsRequest,
   TelCdrInfo,
+  StaffInfo,
+  DescribeSkillGroupInfoListRequest,
   DescribeTelCallInfoRequest,
   DescribeChatMessagesResponse,
   DescribePSTNActiveSessionListResponse,
   IMCdrInfo,
   DescribeChatMessagesRequest,
+  DescribeStaffInfoListRequest,
+  SkillGroupInfoItem,
   ServeParticipant,
   DescribeSeatUserListResponse,
   DescribeSeatUserListRequest,
   DescribeTelCallInfoResponse,
   CreateStaffRequest,
   DescribeTelCdrRequest,
+  SkillGroupItem,
   MessageBody,
   CreateSDKLoginTokenRequest,
   SeatUserInfo,
   PSTNSessionInfo,
   Message,
+  DescribeSkillGroupInfoListResponse,
 } from "./ccc_models"
 
 /**
@@ -71,6 +78,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIMCdrsResponse) => void
   ): Promise<DescribeIMCdrsResponse> {
     return this.request("DescribeIMCdrs", req, cb)
+  }
+
+  /**
+   * 获取技能组信息列表
+   */
+  async DescribeSkillGroupInfoList(
+    req: DescribeSkillGroupInfoListRequest,
+    cb?: (error: string, rep: DescribeSkillGroupInfoListResponse) => void
+  ): Promise<DescribeSkillGroupInfoListResponse> {
+    return this.request("DescribeSkillGroupInfoList", req, cb)
+  }
+
+  /**
+   * 获取坐席信息列表
+   */
+  async DescribeStaffInfoList(
+    req: DescribeStaffInfoListRequest,
+    cb?: (error: string, rep: DescribeStaffInfoListResponse) => void
+  ): Promise<DescribeStaffInfoListResponse> {
+    return this.request("DescribeStaffInfoList", req, cb)
   }
 
   /**

@@ -200,6 +200,11 @@ export interface CreateDBInstanceRequest {
    * 实例cpu核数， 如果不传将根据memory指定的内存值自动填充对应的cpu值。
    */
   Cpu?: number
+
+  /**
+   * 是否自动发起灾备同步功能。该参数仅对购买灾备实例生效。 可选值为：0 - 不自动发起灾备同步；1 - 自动发起灾备同步。
+   */
+  AutoSyncFlag?: number
 }
 
 /**
@@ -731,6 +736,11 @@ export interface Inbound {
    * 规则限定的方向，进站规则为 INPUT
    */
   Dir?: string
+
+  /**
+   * 规则描述
+   */
+  Desc: string
 }
 
 /**
@@ -746,6 +756,11 @@ export interface AssociateSecurityGroupsRequest {
    * 实例 ID 列表，一个或者多个实例 ID 组成的数组。
    */
   InstanceIds: Array<string>
+
+  /**
+   * 当传入只读实例ID时，默认操作的是对应只读组的安全组。如果需要操作只读实例ID的安全组， 需要将该入参置为True
+   */
+  ForReadonlyInstance?: boolean
 }
 
 /**
@@ -970,7 +985,7 @@ export interface DescribeDBSecurityGroupsResponse {
   /**
    * 安全组详情。
    */
-  Groups?: Array<SecurityGroup>
+  Groups: Array<SecurityGroup>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2395,6 +2410,11 @@ export interface CreateDBInstanceHourRequest {
    * 实例cpu核数， 如果不传将根据memory指定的内存值自动填充对应的cpu值。
    */
   Cpu?: number
+
+  /**
+   * 是否自动发起灾备同步功能。该参数仅对购买灾备实例生效。 可选值为：0 - 不自动发起灾备同步；1 - 自动发起灾备同步。
+   */
+  AutoSyncFlag?: number
 }
 
 /**
@@ -2793,6 +2813,11 @@ export interface DescribeDBSecurityGroupsRequest {
    * 实例ID，格式如：cdb-c1nl9rpv或者cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
    */
   InstanceId: string
+
+  /**
+   * 当传入只读实例ID时，默认操作的是对应只读组的安全组。如果需要操作只读实例ID的安全组， 需要将该入参置为True
+   */
+  ForReadonlyInstance?: boolean
 }
 
 /**
@@ -3692,6 +3717,11 @@ export interface ModifyDBInstanceSecurityGroupsRequest {
    * 要修改的安全组 ID 列表，一个或者多个安全组 ID 组成的数组。
    */
   SecurityGroupIds: Array<string>
+
+  /**
+   * 当传入只读实例ID时，默认操作的是对应只读组的安全组。如果需要操作只读实例ID的安全组， 需要将该入参置为True
+   */
+  ForReadonlyInstance?: boolean
 }
 
 /**
@@ -3762,6 +3792,11 @@ export interface Outbound {
    * 规则限定的方向，进站规则为 OUTPUT
    */
   Dir?: string
+
+  /**
+   * 规则描述
+   */
+  Desc: string
 }
 
 /**
@@ -6503,6 +6538,11 @@ export interface DisassociateSecurityGroupsRequest {
    * 实例 ID 列表，一个或者多个实例 ID 组成的数组。
    */
   InstanceIds: Array<string>
+
+  /**
+   * 当传入只读实例ID时，默认操作的是对应只读组的安全组。如果需要操作只读实例ID的安全组， 需要将该入参置为True
+   */
+  ForReadonlyInstance?: boolean
 }
 
 /**

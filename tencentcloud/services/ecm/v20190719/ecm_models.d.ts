@@ -3985,7 +3985,7 @@ export interface DescribePeakNetworkOverviewResponse {
       * 网络峰值数组。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    PeakNetworkRegionSet?: Array<PeakNetworkRegionInfo>;
+    PeakNetworkRegionSet: Array<PeakNetworkRegionInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4720,6 +4720,10 @@ export interface PeakNetwork {
       * 出带宽数据。
       */
     PeakOutNetwork: string;
+    /**
+      * 计费带宽。单位bps
+      */
+    ChargeNetwork: string;
 }
 /**
  * DescribeCustomImageTask请求参数结构体
@@ -4973,6 +4977,10 @@ isp         String      是否必填：否     （过滤条件）按照运营商
 region和area只应填写一个。
       */
     Filters?: Array<Filter>;
+    /**
+      * 统计周期，单位秒。取值60/300。
+      */
+    Period?: number;
 }
 /**
  * ModifyModuleIpDirect返回参数结构体

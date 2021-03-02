@@ -508,6 +508,16 @@ it("vod.v20180717.ModifyPersonSample", async function () {
     }
 })
 
+it("vod.v20180717.DescribeDailyMediaPlayStat", async function () {
+    try {
+       const data = await client.DescribeDailyMediaPlayStat({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.DeleteContentReviewTemplate", async function () {
     try {
        const data = await client.DeleteContentReviewTemplate({})
@@ -521,6 +531,16 @@ it("vod.v20180717.DeleteContentReviewTemplate", async function () {
 it("vod.v20180717.CreateAIAnalysisTemplate", async function () {
     try {
        const data = await client.CreateAIAnalysisTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.DescribeDailyMostPlayedStat", async function () {
+    try {
+       const data = await client.DescribeDailyMostPlayedStat({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -389,11 +389,11 @@ export interface PhoneVerificationResponse {
 -10: 认证未通过
 -11: 验证中心服务繁忙
       */
-    Result?: string;
+    Result: string;
     /**
       * 业务结果描述。
       */
-    Description?: string;
+    Description: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -441,11 +441,11 @@ export interface CheckPhoneAndNameResponse {
 -2:引擎未知错误
 -3:引擎服务异常
       */
-    Result?: string;
+    Result: string;
     /**
       * 业务结果描述
       */
-    Description?: string;
+    Description: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

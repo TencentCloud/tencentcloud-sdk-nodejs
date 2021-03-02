@@ -414,6 +414,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyPersonSample", req, cb);
     }
     /**
+     * 该接口用于查询指定日期范围内每天的播放统计数据。
+* 可以查询最近30天的播放统计数据。
+     */
+    async DescribeDailyMediaPlayStat(req, cb) {
+        return this.request("DescribeDailyMediaPlayStat", req, cb);
+    }
+    /**
      * 删除用户自定义视频内容智能识别模板。
      */
     async DeleteContentReviewTemplate(req, cb) {
@@ -424,6 +431,17 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateAIAnalysisTemplate(req, cb) {
         return this.request("CreateAIAnalysisTemplate", req, cb);
+    }
+    /**
+     * 该接口用于查询每日播放Top100 的媒体文件的播放统计数据。
+* 可以查询最近30天的播放统计数据。
+* 可以按播放次数或者播放流量查询。
+* 播放次数统计说明：
+    1. HLS 文件：访问 M3U8 文件时统计播放次数；访问 TS 文件不统计播放次数。
+    2. 其它文件（如 MP4 文件）：播放请求带有 range 参数且 range 的 start 参数不等于0时不统计播放次数，其它情况统计播放次数。
+     */
+    async DescribeDailyMostPlayedStat(req, cb) {
+        return this.request("DescribeDailyMostPlayedStat", req, cb);
     }
     /**
      * * 该接口用于业务服务器获取 [可靠回调](https://cloud.tencent.com/document/product/266/33779#.E5.8F.AF.E9.9D.A0.E5.9B.9E.E8.B0.83) 事件通知的状态。

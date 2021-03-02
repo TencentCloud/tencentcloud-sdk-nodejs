@@ -40,6 +40,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeIMCdrs", req, cb);
     }
     /**
+     * 获取技能组信息列表
+     */
+    async DescribeSkillGroupInfoList(req, cb) {
+        return this.request("DescribeSkillGroupInfoList", req, cb);
+    }
+    /**
+     * 获取坐席信息列表
+     */
+    async DescribeStaffInfoList(req, cb) {
+        return this.request("DescribeStaffInfoList", req, cb);
+    }
+    /**
      * 按实例获取电话消耗统计
      */
     async DescribeTelCallInfo(req, cb) {

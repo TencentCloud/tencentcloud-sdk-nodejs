@@ -1094,6 +1094,33 @@ export interface MediaSnapshotByTimePicInfoItem {
 }
 
 /**
+ * DescribeDailyMostPlayedStat请求参数结构体
+ */
+export interface DescribeDailyMostPlayedStatRequest {
+  /**
+   * 查询日期，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。该参数仅日期部分有效。
+   */
+  Date: string
+
+  /**
+   * 域名。查询该域名播放 Top100 的媒体文件的统计数据。默认查询所有域名的播放统计数据。
+   */
+  DomainName?: string
+
+  /**
+      * Top 数据的统计指标，取值有：
+<li>Traffic：播放流量，按播放流量统计 Top100 的数据。</li>
+<li>PlayTimes：播放次数，按播放次数统计播放 Top100 的数据。</li>
+      */
+  Metric?: string
+
+  /**
+   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+   */
+  SubAppId?: number
+}
+
+/**
  * 用户自定义人物审核任务控制参数
  */
 export interface UserDefineFaceReviewTemplateInfo {
@@ -1398,6 +1425,21 @@ export interface AudioTemplateInfoForUpdate {
 当媒体的封装格式是音频格式时（flac，ogg，mp3，m4a）时，声道数不允许设为立体声。
       */
   AudioChannel?: number
+}
+
+/**
+ * DescribeDailyMediaPlayStat返回参数结构体
+ */
+export interface DescribeDailyMediaPlayStatResponse {
+  /**
+   * 播放统计数据。
+   */
+  DailyPlayStatInfoSet: Array<DailyPlayStatInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1815,6 +1857,31 @@ export interface MediaProcessTaskSampleSnapshotResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: MediaSampleSnapshotItem
+}
+
+/**
+ * DescribeDailyMediaPlayStat请求参数结构体
+ */
+export interface DescribeDailyMediaPlayStatRequest {
+  /**
+   * 媒体文件 ID 。
+   */
+  FileId: string
+
+  /**
+   * 起始日期，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。该参数仅日期部分有效。
+   */
+  StartDate: string
+
+  /**
+   * 结束日期，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。该参数仅日期部分有效。
+   */
+  EndDate: string
+
+  /**
+   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+   */
+  SubAppId?: number
 }
 
 /**
@@ -2831,6 +2898,21 @@ export interface ProcessMediaByUrlRequest {
    * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
    */
   SubAppId?: number
+}
+
+/**
+ * DescribeDailyMostPlayedStat返回参数结构体
+ */
+export interface DescribeDailyMostPlayedStatResponse {
+  /**
+   * 媒体文件播放统计信息。
+   */
+  DailyPlayStatInfoSet: Array<DailyPlayStatInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5975,6 +6057,31 @@ export interface AnimatedGraphicsTemplate {
    * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
    */
   UpdateTime: string
+}
+
+/**
+ * 播放统计信息。
+ */
+export interface DailyPlayStatInfo {
+  /**
+   * 播放媒体文件的日期，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  Date: string
+
+  /**
+   * 媒体文件ID。
+   */
+  FileId: string
+
+  /**
+   * 播放次数。
+   */
+  PlayTimes: number
+
+  /**
+   * 播放流量，单位：字节。
+   */
+  Traffic: number
 }
 
 /**
@@ -11452,7 +11559,7 @@ export interface CreateTranscodeTemplateResponse {
   /**
    * 转码模板唯一标识。
    */
-  Definition?: number
+  Definition: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

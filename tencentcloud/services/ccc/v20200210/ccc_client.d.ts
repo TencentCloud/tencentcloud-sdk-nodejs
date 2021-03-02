@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribePSTNActiveSessionListRequest, CreateSDKLoginTokenResponse, CreateStaffResponse, DescribeTelCdrResponse, DescribeIMCdrsResponse, DescribeIMCdrsRequest, DescribeTelCallInfoRequest, DescribeChatMessagesResponse, DescribePSTNActiveSessionListResponse, DescribeChatMessagesRequest, DescribeSeatUserListResponse, DescribeSeatUserListRequest, DescribeTelCallInfoResponse, CreateStaffRequest, DescribeTelCdrRequest, CreateSDKLoginTokenRequest } from "./ccc_models";
+import { DescribePSTNActiveSessionListRequest, CreateSDKLoginTokenResponse, DescribeStaffInfoListResponse, CreateStaffResponse, DescribeTelCdrResponse, DescribeIMCdrsResponse, DescribeIMCdrsRequest, DescribeSkillGroupInfoListRequest, DescribeTelCallInfoRequest, DescribeChatMessagesResponse, DescribePSTNActiveSessionListResponse, DescribeChatMessagesRequest, DescribeStaffInfoListRequest, DescribeSeatUserListResponse, DescribeSeatUserListRequest, DescribeTelCallInfoResponse, CreateStaffRequest, DescribeTelCdrRequest, CreateSDKLoginTokenRequest, DescribeSkillGroupInfoListResponse } from "./ccc_models";
 /**
  * ccc client
  * @class
@@ -15,6 +15,14 @@ export declare class Client extends AbstractClient {
      * 包括全媒体和文本两种类型
      */
     DescribeIMCdrs(req: DescribeIMCdrsRequest, cb?: (error: string, rep: DescribeIMCdrsResponse) => void): Promise<DescribeIMCdrsResponse>;
+    /**
+     * 获取技能组信息列表
+     */
+    DescribeSkillGroupInfoList(req: DescribeSkillGroupInfoListRequest, cb?: (error: string, rep: DescribeSkillGroupInfoListResponse) => void): Promise<DescribeSkillGroupInfoListResponse>;
+    /**
+     * 获取坐席信息列表
+     */
+    DescribeStaffInfoList(req: DescribeStaffInfoListRequest, cb?: (error: string, rep: DescribeStaffInfoListResponse) => void): Promise<DescribeStaffInfoListResponse>;
     /**
      * 按实例获取电话消耗统计
      */
