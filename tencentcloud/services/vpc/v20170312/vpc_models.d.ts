@@ -4591,7 +4591,7 @@ export interface DescribeAddressesRequest {
 <li> network-interface-id - String - 是否必填：否 - （过滤条件）按照 EIP 绑定的弹性网卡 ID 过滤。弹性网卡 ID 形如：eni-11112222。</li>
 <li> is-arrears - String - 是否必填：否 - （过滤条件）按照 EIP 是否欠费进行过滤。（TRUE：EIP 处于欠费状态|FALSE：EIP 费用状态正常）</li>
 <li> address-type - String - 是否必填：否 - （过滤条件）按照 IP类型 进行过滤。可选值：'EIP'，'AnycastEIP'，'HighQualityEIP'</li>
-<li> internet-service-provider - String - 是否必填：否 - （过滤条件）按照 运营商类型 进行过滤。可选值：'BGP'，'CMCC'，'CUCC', 'CTCC'</li>
+<li> address-isp - String - 是否必填：否 - （过滤条件）按照 运营商类型 进行过滤。可选值：'BGP'，'CMCC'，'CUCC', 'CTCC'</li>
       */
     Filters?: Array<Filter>;
     /**
@@ -7898,11 +7898,11 @@ export interface DescribeSubnetsResponse {
     /**
       * 符合条件的实例数量。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 子网对象。
       */
-    SubnetSet?: Array<Subnet>;
+    SubnetSet: Array<Subnet>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

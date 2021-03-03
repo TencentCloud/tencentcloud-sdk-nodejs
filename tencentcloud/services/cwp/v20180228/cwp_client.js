@@ -275,6 +275,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOverviewStatistics", req, cb);
     }
     /**
+     * 获取网络攻击威胁类型列表
+     */
+    async DescribeAttackVulTypeList(req, cb) {
+        return this.request("DescribeAttackVulTypeList", req, cb);
+    }
+    /**
      * 本接口 (DescribeOpenPortTaskStatus) 用于获取实时拉取端口任务状态。
      */
     async DescribeOpenPortTaskStatus(req, cb) {

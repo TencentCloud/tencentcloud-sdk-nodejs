@@ -98,6 +98,23 @@ LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模�
     Optional?: string;
 }
 /**
+ * 敏感数据加密
+ */
+export interface Encryption {
+    /**
+      * 有加密需求的用户，接入传入kms的CiphertextBlob，关于数据加密可查阅<a href="https://cloud.tencent.com/document/product/1007/47180">数据加密</a> 文档。
+      */
+    CiphertextBlob: string;
+    /**
+      * 在使用加密服务时，填入要被加密的字段。本接口中可填入加密后的一个或多个字段
+      */
+    EncryptList: Array<string>;
+    /**
+      * 有加密需求的用户，传入CBC加密的初始向量
+      */
+    Iv: string;
+}
+/**
  * CheckBankCardInformation请求参数结构体
  */
 export interface CheckBankCardInformationRequest {
@@ -916,11 +933,11 @@ export interface MinorsVerificationResponse {
 -7: 未查询到身份信息
 -8: 权威数据源升级中，请稍后再试
       */
-    Result?: string;
+    Result: string;
     /**
       * 业务结果描述。
       */
-    Description?: string;
+    Description: string;
     /**
       * 该字段的值为年龄区间。格式为[a,b)，
 [0,8)表示年龄小于8周岁区间，不包括8岁；
@@ -928,7 +945,7 @@ export interface MinorsVerificationResponse {
 [16,18)表示年龄16-18周岁区间，不包括18岁；
 [18,+)表示年龄大于18周岁。
       */
-    AgeRange?: string;
+    AgeRange: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1114,6 +1131,10 @@ export interface MinorsVerificationRequest {
       * 姓名。
       */
     Name?: string;
+    /**
+      * 敏感数据加密信息。对传入信息（姓名、身份证号、手机号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+      */
+    Encryption?: Encryption;
 }
 /**
  * ImageRecognition返回参数结构体

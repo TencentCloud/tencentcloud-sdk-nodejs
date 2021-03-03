@@ -39,7 +39,7 @@ import {
   DescribeWeeklyReportBruteAttacksRequest,
   CreateUsualLoginPlacesRequest,
   DescribeProcessTaskStatusRequest,
-  RegionInfo,
+  DescribeAttackVulTypeListRequest,
   DescribeVulScanResultResponse,
   ModifyAlarmAttributeRequest,
   DescribeAttackLogsRequest,
@@ -53,6 +53,7 @@ import {
   WeeklyReportMalware,
   CreateBaselineStrategyRequest,
   DescribeSecurityTrendsRequest,
+  DescribeAttackVulTypeListResponse,
   Account,
   DescribeReverseShellEventsResponse,
   DescribePrivilegeRulesRequest,
@@ -157,6 +158,7 @@ import {
   DescribeAttackLogInfoRequest,
   DescribeWeeklyReportMalwaresRequest,
   DescribeBruteAttacksResponse,
+  RegionInfo,
   ExportNonlocalLoginPlacesResponse,
   DescribeComponentStatisticsRequest,
   DescribeOverviewStatisticsRequest,
@@ -700,6 +702,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeOverviewStatisticsResponse) => void
   ): Promise<DescribeOverviewStatisticsResponse> {
     return this.request("DescribeOverviewStatistics", req, cb)
+  }
+
+  /**
+   * 获取网络攻击威胁类型列表
+   */
+  async DescribeAttackVulTypeList(
+    req?: DescribeAttackVulTypeListRequest,
+    cb?: (error: string, rep: DescribeAttackVulTypeListResponse) => void
+  ): Promise<DescribeAttackVulTypeListResponse> {
+    return this.request("DescribeAttackVulTypeList", req, cb)
   }
 
   /**

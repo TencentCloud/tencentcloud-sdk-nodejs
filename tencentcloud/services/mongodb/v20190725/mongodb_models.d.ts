@@ -249,11 +249,11 @@ export interface DescribeSlowLogPatternsResponse {
     /**
       * 慢日志统计信息总数
       */
-    Count?: number;
+    Count: number;
     /**
       * 慢日志统计信息
       */
-    SlowLogPatterns?: Array<SlowLogPattern>;
+    SlowLogPatterns: Array<SlowLogPattern>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -373,12 +373,12 @@ export interface DescribeSlowLogsResponse {
     /**
       * 慢日志总数
       */
-    Count?: number;
+    Count: number;
     /**
       * 慢日志详情
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    SlowLogs?: Array<string>;
+    SlowLogs: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -574,6 +574,10 @@ export interface DescribeSlowLogPatternsRequest {
       * 分页大小，最小值为1，最大值为100，默认值为20。
       */
     Limit?: number;
+    /**
+      * 慢日志返回格式，可设置为json，不传默认返回原生慢日志格式。
+      */
+    Format?: string;
 }
 /**
  * FlushInstanceRouterConfig返回参数结构体
@@ -1177,6 +1181,10 @@ export interface DescribeSlowLogsRequest {
       * 分页大小，最小值为1，最大值为100，默认值为20。
       */
     Limit?: number;
+    /**
+      * 慢日志返回格式，可设置为json，不传默认返回原生慢日志格式。
+      */
+    Format?: string;
 }
 /**
  * DescribeBackupAccess返回参数结构体

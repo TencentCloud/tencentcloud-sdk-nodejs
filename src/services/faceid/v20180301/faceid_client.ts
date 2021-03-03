@@ -22,6 +22,7 @@ import {
   GetDetectInfoEnhancedRequest,
   GetFaceIdTokenRequest,
   LivenessRequest,
+  Encryption,
   CheckBankCardInformationRequest,
   MobileNetworkTimeVerificationResponse,
   GetLiveCodeRequest,

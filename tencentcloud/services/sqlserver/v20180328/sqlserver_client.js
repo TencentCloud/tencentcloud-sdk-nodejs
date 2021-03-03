@@ -286,6 +286,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StartMigrationCheck", req, cb);
     }
     /**
+     * 本接口（DescribeDBCharsets）用于查询实例支持的数据库字符集。
+     */
+    async DescribeDBCharsets(req, cb) {
+        return this.request("DescribeDBCharsets", req, cb);
+    }
+    /**
      * 本接口（DeletePublishSubscribe）用于删除两个数据库间的发布订阅关系。
      */
     async DeletePublishSubscribe(req, cb) {

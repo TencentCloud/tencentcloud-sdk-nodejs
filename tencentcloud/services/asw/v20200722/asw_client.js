@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StartExecution", req, cb);
     }
     /**
+     * 一次执行会有很多步骤，经过很多节点，这个接口描述某一次执行的事件的历史
+     */
+    async DescribeExecutionHistory(req, cb) {
+        return this.request("DescribeExecutionHistory", req, cb);
+    }
+    /**
      * 查询执行详细信息
      */
     async DescribeExecution(req, cb) {

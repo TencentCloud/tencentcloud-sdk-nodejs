@@ -111,13 +111,14 @@ import {
   ModifyAccountPrivilegeRequest,
   CreateBackupMigrationRequest,
   DescribeMigrationsRequest,
-  InquiryPriceRenewDBInstanceResponse,
+  DescribeDBCharsetsRequest,
   DescribeUploadIncrementalInfoRequest,
   DescribeDBsRequest,
   CompleteExpansionRequest,
   RenewPostpaidDBInstanceRequest,
   DeleteIncrementalMigrationResponse,
   DescribeRegionsRequest,
+  DescribeMaintenanceSpanRequest,
   DescribeFlowStatusResponse,
   StopMigrationRequest,
   CreateReadOnlyDBInstancesResponse,
@@ -150,7 +151,7 @@ import {
   DbRollbackTimeInfo,
   ModifyDBInstanceNetworkResponse,
   AssociateSecurityGroupsResponse,
-  DescribeMaintenanceSpanRequest,
+  AccountDetail,
   CreateBackupResponse,
   DBInstance,
   DescribeProductConfigResponse,
@@ -158,7 +159,6 @@ import {
   DescribeUploadBackupInfoResponse,
   CreateMigrationRequest,
   StartMigrationCheckRequest,
-  AccountDetail,
   CreateBasicDBInstancesRequest,
   ModifyDBNameResponse,
   CosUploadBackupFile,
@@ -207,6 +207,7 @@ import {
   DeleteDBResponse,
   CreateDBResponse,
   RestartDBInstanceResponse,
+  InquiryPriceRenewDBInstanceResponse,
   DescribeDBInstancesResponse,
   DescribeSlowlogsResponse,
   DBDetail,
@@ -236,6 +237,7 @@ import {
   CreateDBInstancesResponse,
   ModifyBackupMigrationRequest,
   DeleteAccountResponse,
+  DescribeDBCharsetsResponse,
 } from "./sqlserver_models"
 
 /**
@@ -675,6 +677,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StartMigrationCheckResponse) => void
   ): Promise<StartMigrationCheckResponse> {
     return this.request("StartMigrationCheck", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeDBCharsets）用于查询实例支持的数据库字符集。
+   */
+  async DescribeDBCharsets(
+    req: DescribeDBCharsetsRequest,
+    cb?: (error: string, rep: DescribeDBCharsetsResponse) => void
+  ): Promise<DescribeDBCharsetsResponse> {
+    return this.request("DescribeDBCharsets", req, cb)
   }
 
   /**

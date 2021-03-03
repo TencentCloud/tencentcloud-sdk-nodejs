@@ -47,6 +47,7 @@ import {
   DescribeSubnetsRequest,
   AssociateSecurityGroupsRequest,
   StartInstancesRequest,
+  ImageLimitConfig,
   HaVip,
   RouteConflict,
   SetLoadBalancerSecurityGroupsResponse,

@@ -1109,6 +1109,15 @@ export interface AdvancedAuthenticationTypeD {
     TimeFormat: string;
 }
 /**
+ * StartCdnDomain返回参数结构体
+ */
+export interface StartCdnDomainResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 压缩规则配置，最多可设置 100 条
  */
 export interface CompressionRule {
@@ -2302,6 +2311,10 @@ global：全球加速
       * 离线缓存
       */
     OfflineCache?: OfflineCache;
+    /**
+      * QUIC正在内测中，请先提交内测申请，详情请前往QUIC产品文档。
+      */
+    Quic?: Quic;
 }
 /**
  * UserAgent黑白名单规则配置
@@ -2499,6 +2512,10 @@ global：全球加速
       * 合并回源
       */
     OriginCombine?: OriginCombine;
+    /**
+      * QUIC正在内测中，请先提交内测申请，详情请前往QUIC产品文档。
+      */
+    Quic?: Quic;
 }
 /**
  * 域名标签配置
@@ -3765,6 +3782,16 @@ off：不支持
 注意：此字段可能返回 null，表示取不到有效值。
       */
     OriginCombine: OriginCombine;
+    /**
+      * POST上传配置项
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PostMaxSize: PostSize;
+    /**
+      * Quic配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Quic: Quic;
 }
 /**
  * GetDisableRecords返回参数结构体
@@ -3957,6 +3984,21 @@ export interface ScdnWafConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Rules?: Array<ScdnWafRule>;
+}
+/**
+ * POST请求上传文件流式传输最大限制
+ */
+export interface PostSize {
+    /**
+      * 是调整POST请求限制，平台默认为32MB。
+关闭：off，
+开启：on。
+      */
+    Switch: string;
+    /**
+      * 最大限制，取值在1MB和200MB之间。
+      */
+    MaxSize?: number;
 }
 /**
  * 节点缓存过期时间配置，分为以下两种：
@@ -5535,13 +5577,13 @@ export interface DescribeDiagnoseReportResponse {
     RequestId?: string;
 }
 /**
- * StartCdnDomain返回参数结构体
+ * Quic配置项
  */
-export interface StartCdnDomainResponse {
+export interface Quic {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 是否启动Quic配置
       */
-    RequestId?: string;
+    Switch: string;
 }
 /**
  * 访问明细数据类型

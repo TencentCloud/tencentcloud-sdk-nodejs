@@ -32,7 +32,7 @@ export declare class Client extends AbstractClient {
      */
     CreateSDKLoginToken(req: CreateSDKLoginTokenRequest, cb?: (error: string, rep: CreateSDKLoginTokenResponse) => void): Promise<CreateSDKLoginTokenResponse>;
     /**
-     * 获取坐席用户列表
+     * 获取坐席用户列表（废弃）
      */
     DescribeSeatUserList(req: DescribeSeatUserListRequest, cb?: (error: string, rep: DescribeSeatUserListResponse) => void): Promise<DescribeSeatUserListResponse>;
     /**

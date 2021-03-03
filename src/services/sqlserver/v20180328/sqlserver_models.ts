@@ -2428,23 +2428,13 @@ export interface DescribeMigrationsRequest {
 }
 
 /**
- * InquiryPriceRenewDBInstance返回参数结构体
+ * DescribeDBCharsets请求参数结构体
  */
-export interface InquiryPriceRenewDBInstanceResponse {
+export interface DescribeDBCharsetsRequest {
   /**
-   * 未打折的原价，其值除以100表示最终的价格。例如10094表示100.94元
+   * 实例ID，形如mssql-j8kv137v
    */
-  OriginalPrice?: number
-
-  /**
-   * 实际需要支付价格，其值除以100表示最终的价格。例如10094表示100.94元
-   */
-  Price?: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  InstanceId: string
 }
 
 /**
@@ -2521,6 +2511,16 @@ export interface DeleteIncrementalMigrationResponse {
  * DescribeRegions请求参数结构体
  */
 export type DescribeRegionsRequest = null
+
+/**
+ * DescribeMaintenanceSpan请求参数结构体
+ */
+export interface DescribeMaintenanceSpanRequest {
+  /**
+   * 实例ID，形如mssql-k8voqdlz
+   */
+  InstanceId: string
+}
 
 /**
  * DescribeFlowStatus返回参数结构体
@@ -3208,13 +3208,53 @@ export interface AssociateSecurityGroupsResponse {
 }
 
 /**
- * DescribeMaintenanceSpan请求参数结构体
+ * 账户信息详情
  */
-export interface DescribeMaintenanceSpanRequest {
+export interface AccountDetail {
   /**
-   * 实例ID，形如mssql-k8voqdlz
+   * 账户名
    */
-  InstanceId: string
+  Name: string
+
+  /**
+   * 账户备注
+   */
+  Remark: string
+
+  /**
+   * 账户创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 账户状态，1-创建中，2-正常，3-修改中，4-密码重置中，-1-删除中
+   */
+  Status: number
+
+  /**
+   * 账户更新时间
+   */
+  UpdateTime: string
+
+  /**
+   * 密码更新时间
+   */
+  PassTime: string
+
+  /**
+   * 账户内部状态，正常为enable
+   */
+  InternalStatus: string
+
+  /**
+   * 该账户对相关db的读写权限信息
+   */
+  Dbs: Array<DBPrivilege>
+
+  /**
+   * 是否为管理员账户
+   */
+  IsAdmin: boolean
 }
 
 /**
@@ -3560,56 +3600,6 @@ export interface StartMigrationCheckRequest {
    * 迁移任务id
    */
   MigrateId: number
-}
-
-/**
- * 账户信息详情
- */
-export interface AccountDetail {
-  /**
-   * 账户名
-   */
-  Name: string
-
-  /**
-   * 账户备注
-   */
-  Remark: string
-
-  /**
-   * 账户创建时间
-   */
-  CreateTime: string
-
-  /**
-   * 账户状态，1-创建中，2-正常，3-修改中，4-密码重置中，-1-删除中
-   */
-  Status: number
-
-  /**
-   * 账户更新时间
-   */
-  UpdateTime: string
-
-  /**
-   * 密码更新时间
-   */
-  PassTime: string
-
-  /**
-   * 账户内部状态，正常为enable
-   */
-  InternalStatus: string
-
-  /**
-   * 该账户对相关db的读写权限信息
-   */
-  Dbs: Array<DBPrivilege>
-
-  /**
-   * 是否为管理员账户
-   */
-  IsAdmin: boolean
 }
 
 /**
@@ -4753,6 +4743,26 @@ export interface RestartDBInstanceResponse {
 }
 
 /**
+ * InquiryPriceRenewDBInstance返回参数结构体
+ */
+export interface InquiryPriceRenewDBInstanceResponse {
+  /**
+   * 未打折的原价，其值除以100表示最终的价格。例如10094表示100.94元
+   */
+  OriginalPrice?: number
+
+  /**
+   * 实际需要支付价格，其值除以100表示最终的价格。例如10094表示100.94元
+   */
+  Price?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDBInstances返回参数结构体
  */
 export interface DescribeDBInstancesResponse {
@@ -5325,6 +5335,21 @@ export interface DeleteAccountResponse {
    * 任务流ID
    */
   FlowId?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDBCharsets返回参数结构体
+ */
+export interface DescribeDBCharsetsResponse {
+  /**
+   * 数据库字符集列表
+   */
+  DatabaseCharsets: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -372,26 +372,9 @@ export interface DescribeProcessTaskStatusRequest {
     Uuid: string;
 }
 /**
- * 地域信息
+ * DescribeAttackVulTypeList请求参数结构体
  */
-export interface RegionInfo {
-    /**
-      * 地域标志，如 ap-guangzhou，ap-shanghai，ap-beijing
-      */
-    Region: string;
-    /**
-      * 地域中文名，如华南地区（广州），华东地区（上海金融），华北地区（北京）
-      */
-    RegionName: string;
-    /**
-      * 地域ID
-      */
-    RegionId: number;
-    /**
-      * 地域代码，如 gz，sh，bj
-      */
-    RegionCode: string;
-}
+export declare type DescribeAttackVulTypeListRequest = null;
 /**
  * DescribeVulScanResult返回参数结构体
  */
@@ -455,8 +438,12 @@ export interface DescribeAttackLogsRequest {
     /**
       * 过滤条件。
 <li>HttpMethod - String - 是否必填：否 - 攻击方法(POST|GET)</li>
-<li>MachineIp - String - 是否必填：否 - 主机内网IP</li>
 <li>DateRange - String - 是否必填：否 - 时间范围(存储最近3个月的数据)，如最近一个月["2019-11-17", "2019-12-17"]</li>
+<li>VulType - String 威胁类型 - 是否必填: 否</li>
+<li>SrcIp - String 攻击源IP - 是否必填: 否</li>
+<li>DstIp - String 攻击目标IP - 是否必填: 否</li>
+<li>SrcPort - String 攻击源端口 - 是否必填: 否</li>
+<li>DstPort - String 攻击目标端口 - 是否必填: 否</li>
       */
     Filters?: Array<Filter>;
     /**
@@ -658,6 +645,19 @@ export interface DescribeSecurityTrendsRequest {
       * 结束时间。
       */
     EndDate: string;
+}
+/**
+ * DescribeAttackVulTypeList返回参数结构体
+ */
+export interface DescribeAttackVulTypeListResponse {
+    /**
+      * 威胁类型列表
+      */
+    List: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 帐号列表信息数据。
@@ -1185,11 +1185,11 @@ export interface DescribeHistoryAccountsResponse {
     /**
       * 帐号变更历史列表记录总数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 帐号变更历史数据数组。
       */
-    HistoryAccounts?: Array<HistoryAccount>;
+    HistoryAccounts: Array<HistoryAccount>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1418,25 +1418,25 @@ export interface DescribeComponentInfoResponse {
     /**
       * 组件ID。
       */
-    Id?: number;
+    Id: number;
     /**
       * 组件名称。
       */
-    ComponentName?: string;
+    ComponentName: string;
     /**
       * 组件类型。
 <li>WEB：web组件</li>
 <li>SYSTEM：系统组件</li>
       */
-    ComponentType?: string;
+    ComponentType: string;
     /**
       * 组件官网。
       */
-    Homepage?: string;
+    Homepage: string;
     /**
       * 组件描述。
       */
-    Description?: string;
+    Description: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1449,11 +1449,11 @@ export interface DescribeAccountStatisticsResponse {
     /**
       * 帐号统计列表记录总数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 帐号统计列表。
       */
-    AccountStatistics?: Array<AccountStatistics>;
+    AccountStatistics: Array<AccountStatistics>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1634,67 +1634,67 @@ export interface DescribeAttackLogInfoResponse {
     /**
       * 日志ID
       */
-    Id?: number;
+    Id: number;
     /**
       * 主机ID
       */
-    Quuid?: string;
+    Quuid: string;
     /**
       * 攻击来源端口
       */
-    SrcPort?: number;
+    SrcPort: number;
     /**
       * 攻击来源IP
       */
-    SrcIp?: string;
+    SrcIp: string;
     /**
       * 攻击目标端口
       */
-    DstPort?: number;
+    DstPort: number;
     /**
       * 攻击目标IP
       */
-    DstIp?: string;
+    DstIp: string;
     /**
       * 攻击方法
       */
-    HttpMethod?: string;
+    HttpMethod: string;
     /**
       * 攻击目标主机
       */
-    HttpHost?: string;
+    HttpHost: string;
     /**
       * 攻击头信息
       */
-    HttpHead?: string;
+    HttpHead: string;
     /**
       * 攻击者浏览器标识
       */
-    HttpUserAgent?: string;
+    HttpUserAgent: string;
     /**
       * 请求源
       */
-    HttpReferer?: string;
+    HttpReferer: string;
     /**
       * 威胁类型
       */
-    VulType?: string;
+    VulType: string;
     /**
       * 攻击路径
       */
-    HttpCgi?: string;
+    HttpCgi: string;
     /**
       * 攻击参数
       */
-    HttpParam?: string;
+    HttpParam: string;
     /**
       * 攻击时间
       */
-    CreatedAt?: string;
+    CreatedAt: string;
     /**
       * 攻击内容
       */
-    HttpContent?: string;
+    HttpContent: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1971,11 +1971,11 @@ export interface DescribeBashRulesResponse {
     /**
       * 列表内容
       */
-    List?: Array<BashRule>;
+    List: Array<BashRule>;
     /**
       * 总条数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2083,9 +2083,24 @@ export interface DescribeOpenPortStatisticsRequest {
  */
 export interface ExportAttackLogsRequest {
     /**
-      * 过滤参数
+      * 过滤条件。
+<li>HttpMethod - String - 是否必填：否 - 攻击方法(POST|GET)</li>
+<li>DateRange - String - 是否必填：否 - 时间范围(存储最近3个月的数据)，如最近一个月["2019-11-17", "2019-12-17"]</li>
+<li>VulType - String 威胁类型 - 是否必填: 否</li>
+<li>SrcIp - String 攻击源IP - 是否必填: 否</li>
+<li>DstIp - String 攻击目标IP - 是否必填: 否</li>
+<li>SrcPort - String 攻击源端口 - 是否必填: 否</li>
+<li>DstPort - String 攻击目标端口 - 是否必填: 否</li>
       */
     Filters?: Array<Filters>;
+    /**
+      * 主机安全客户端ID
+      */
+    Uuid?: string;
+    /**
+      * 云主机机器ID
+      */
+    Quuid?: string;
 }
 /**
  * ModifyMalwareTimingScanSettings请求参数结构体
@@ -2667,11 +2682,11 @@ export interface DescribeProcessStatisticsResponse {
     /**
       * 进程统计列表记录总数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 进程统计列表数据数组。
       */
-    ProcessStatistics?: Array<ProcessStatistics>;
+    ProcessStatistics: Array<ProcessStatistics>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2752,6 +2767,27 @@ export interface DescribeBruteAttacksResponse {
     RequestId?: string;
 }
 /**
+ * 地域信息
+ */
+export interface RegionInfo {
+    /**
+      * 地域标志，如 ap-guangzhou，ap-shanghai，ap-beijing
+      */
+    Region: string;
+    /**
+      * 地域中文名，如华南地区（广州），华东地区（上海金融），华北地区（北京）
+      */
+    RegionName: string;
+    /**
+      * 地域ID
+      */
+    RegionId: number;
+    /**
+      * 地域代码，如 gz，sh，bj
+      */
+    RegionCode: string;
+}
+/**
  * ExportNonlocalLoginPlaces返回参数结构体
  */
 export interface ExportNonlocalLoginPlacesResponse {
@@ -2797,11 +2833,11 @@ export interface DescribeOpenPortStatisticsResponse {
     /**
       * 端口统计列表总数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 端口统计数据列表
       */
-    OpenPortStatistics?: Array<OpenPortStatistics>;
+    OpenPortStatistics: Array<OpenPortStatistics>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2823,11 +2859,11 @@ export interface DescribeLoginWhiteListResponse {
     /**
       * 记录总数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 异地登录白名单数组
       */
-    LoginWhiteLists?: Array<LoginWhiteLists>;
+    LoginWhiteLists: Array<LoginWhiteLists>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2939,15 +2975,15 @@ export interface DescribeProVersionInfoResponse {
     /**
       * 后付费昨日扣费
       */
-    PostPayCost?: number;
+    PostPayCost: number;
     /**
       * 新增主机是否自动开通专业版
       */
-    IsAutoOpenProVersion?: boolean;
+    IsAutoOpenProVersion: boolean;
     /**
       * 开通专业版主机数
       */
-    ProVersionNum?: number;
+    ProVersionNum: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3163,43 +3199,43 @@ export interface DescribeSecurityTrendsResponse {
     /**
       * 木马事件统计数据数组。
       */
-    Malwares?: Array<SecurityTrend>;
+    Malwares: Array<SecurityTrend>;
     /**
       * 异地登录事件统计数据数组。
       */
-    NonLocalLoginPlaces?: Array<SecurityTrend>;
+    NonLocalLoginPlaces: Array<SecurityTrend>;
     /**
       * 密码破解事件统计数据数组。
       */
-    BruteAttacks?: Array<SecurityTrend>;
+    BruteAttacks: Array<SecurityTrend>;
     /**
       * 漏洞统计数据数组。
       */
-    Vuls?: Array<SecurityTrend>;
+    Vuls: Array<SecurityTrend>;
     /**
       * 基线统计数据数组。
       */
-    BaseLines?: Array<SecurityTrend>;
+    BaseLines: Array<SecurityTrend>;
     /**
       * 恶意请求统计数据数组。
       */
-    MaliciousRequests?: Array<SecurityTrend>;
+    MaliciousRequests: Array<SecurityTrend>;
     /**
       * 高危命令统计数据数组。
       */
-    HighRiskBashs?: Array<SecurityTrend>;
+    HighRiskBashs: Array<SecurityTrend>;
     /**
       * 反弹shell统计数据数组。
       */
-    ReverseShells?: Array<SecurityTrend>;
+    ReverseShells: Array<SecurityTrend>;
     /**
       * 本地提权统计数据数组。
       */
-    PrivilegeEscalations?: Array<SecurityTrend>;
+    PrivilegeEscalations: Array<SecurityTrend>;
     /**
       * 网络攻击统计数据数组。
       */
-    CyberAttacks?: Array<SecurityTrend>;
+    CyberAttacks: Array<SecurityTrend>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3306,11 +3342,11 @@ export interface DescribeSecurityDynamicsResponse {
     /**
       * 安全事件消息数组。
       */
-    SecurityDynamics?: Array<SecurityDynamic>;
+    SecurityDynamics: Array<SecurityDynamic>;
     /**
       * 记录总数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3368,11 +3404,11 @@ export interface DescribeOpenPortsResponse {
     /**
       * 端口列表记录总数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 端口列表。
       */
-    OpenPorts?: Array<OpenPort>;
+    OpenPorts: Array<OpenPort>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3565,11 +3601,11 @@ export interface DescribeAttackLogsResponse {
       * 日志列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    AttackLogs?: Array<DefendAttackLog>;
+    AttackLogs: Array<DefendAttackLog>;
     /**
       * 总条数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3867,11 +3903,11 @@ export interface DescribeReverseShellRulesResponse {
     /**
       * 列表内容
       */
-    List?: Array<ReverseShellRule>;
+    List: Array<ReverseShellRule>;
     /**
       * 总条数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3987,11 +4023,11 @@ export interface DescribePrivilegeRulesResponse {
     /**
       * 列表内容
       */
-    List?: Array<PrivilegeRule>;
+    List: Array<PrivilegeRule>;
     /**
       * 总条数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4444,11 +4480,11 @@ export interface DescribeAgentVulsResponse {
     /**
       * 记录总数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 主机漏洞信息
       */
-    AgentVuls?: Array<AgentVul>;
+    AgentVuls: Array<AgentVul>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4766,11 +4802,11 @@ export interface DescribeComponentsResponse {
     /**
       * 组件列表记录总数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 组件列表数据。
       */
-    Components?: Array<Component>;
+    Components: Array<Component>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4931,11 +4967,11 @@ export interface DescribeMaliciousRequestsResponse {
     /**
       * 记录总数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 恶意请求记录数组。
       */
-    MaliciousRequests?: Array<MaliciousRequest>;
+    MaliciousRequests: Array<MaliciousRequest>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4948,11 +4984,11 @@ export interface ExportAttackLogsResponse {
     /**
       * 导出文件下载链接地址。
       */
-    DownloadUrl?: string;
+    DownloadUrl: string;
     /**
       * 导出任务ID
       */
-    TaskId?: string;
+    TaskId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

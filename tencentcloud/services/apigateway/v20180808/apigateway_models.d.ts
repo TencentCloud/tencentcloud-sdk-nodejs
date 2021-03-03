@@ -363,7 +363,7 @@ export interface CreateIPStrategyRequest {
       */
     StrategyType: string;
     /**
-      * 策略详情。
+      * 策略详情，多个ip 使用\n 分隔符分开。
       */
     StrategyData: string;
 }
@@ -3221,7 +3221,7 @@ export interface CreateIPStrategyResponse {
       * 新建的IP策略详情。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: IPStrategy;
+    Result: IPStrategy;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

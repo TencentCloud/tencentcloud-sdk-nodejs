@@ -602,6 +602,15 @@ export interface StartInstancesRequest {
     InstanceIdSet: Array<string>;
 }
 /**
+ * 镜像限制配置
+ */
+export interface ImageLimitConfig {
+    /**
+      * 支持的最大镜像大小，包括可导入的自定义镜像大小，中心云镜像大小，单位为GB。
+      */
+    MaxImageSize: number;
+}
+/**
  * HAVIP对象。
  */
 export interface HaVip {
@@ -3239,17 +3248,22 @@ export interface DescribeConfigResponse {
     /**
       * 网络带宽硬盘大小的范围信息。
       */
-    NetworkStorageRange?: NetworkStorageRange;
+    NetworkStorageRange: NetworkStorageRange;
     /**
       * 镜像操作系统白名单。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ImageWhiteSet?: Array<string>;
+    ImageWhiteSet: Array<string>;
     /**
       * 网络限额信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    InstanceNetworkLimitConfigs?: Array<InstanceNetworkLimitConfig>;
+    InstanceNetworkLimitConfigs: Array<InstanceNetworkLimitConfig>;
+    /**
+      * 镜像限额信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ImageLimits: ImageLimitConfig;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

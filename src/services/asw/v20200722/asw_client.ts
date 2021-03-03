@@ -18,16 +18,19 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeExecutionHistoryResponse,
   DescribeExecutionsRequest,
   DescribeFlowServicesResponse,
   StateMachine,
+  DescribeFlowServiceDetailResponse,
   DescribeExecutionResponse,
   DescribeFlowServicesRequest,
   DescribeExecutionRequest,
-  DescribeFlowServiceDetailResponse,
+  DescribeExecutionHistoryRequest,
   CreateFlowServiceResponse,
-  Filter,
   StartExecutionRequest,
+  Filter,
+  ExecutionEvent,
   ModifyFlowServiceResponse,
   StartExecutionResponse,
   CreateFlowServiceRequest,
@@ -53,6 +56,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StartExecutionResponse) => void
   ): Promise<StartExecutionResponse> {
     return this.request("StartExecution", req, cb)
+  }
+
+  /**
+   * 一次执行会有很多步骤，经过很多节点，这个接口描述某一次执行的事件的历史
+   */
+  async DescribeExecutionHistory(
+    req: DescribeExecutionHistoryRequest,
+    cb?: (error: string, rep: DescribeExecutionHistoryResponse) => void
+  ): Promise<DescribeExecutionHistoryResponse> {
+    return this.request("DescribeExecutionHistory", req, cb)
   }
 
   /**

@@ -16,6 +16,21 @@
  */
 
 /**
+ * DescribeExecutionHistory返回参数结构体
+ */
+export interface DescribeExecutionHistoryResponse {
+  /**
+   * 执行的事件列表
+   */
+  Events: Array<ExecutionEvent>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeExecutions请求参数结构体
  */
 export interface DescribeExecutionsRequest {
@@ -133,6 +148,60 @@ export interface StateMachine {
 }
 
 /**
+ * DescribeFlowServiceDetail返回参数结构体
+ */
+export interface DescribeFlowServiceDetailResponse {
+  /**
+   * 状态机所属服务名
+   */
+  FlowServiceName?: string
+
+  /**
+   * 状态机状态
+   */
+  Status?: string
+
+  /**
+      * 定义文本（JSON格式）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Definition?: string
+
+  /**
+      * 角色资源名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RoleResource?: string
+
+  /**
+   * 状态机的类型，可以为 （EXPRESS/STANDARD）
+   */
+  Type?: string
+
+  /**
+   * 生成时间
+   */
+  CreateDate?: string
+
+  /**
+      * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Description?: string
+
+  /**
+      * 状态机所属服务中文名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FlowServiceChineseName?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeExecution返回参数结构体
  */
 export interface DescribeExecutionResponse {
@@ -220,57 +289,13 @@ export interface DescribeExecutionRequest {
 }
 
 /**
- * DescribeFlowServiceDetail返回参数结构体
+ * DescribeExecutionHistory请求参数结构体
  */
-export interface DescribeFlowServiceDetailResponse {
+export interface DescribeExecutionHistoryRequest {
   /**
-   * 状态机所属服务名
+   * 执行资源名
    */
-  FlowServiceName?: string
-
-  /**
-   * 状态机状态
-   */
-  Status?: string
-
-  /**
-      * 定义文本（JSON格式）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Definition?: string
-
-  /**
-      * 角色资源名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RoleResource?: string
-
-  /**
-   * 状态机的类型，可以为 （EXPRESS/STANDARD）
-   */
-  Type?: string
-
-  /**
-   * 生成时间
-   */
-  CreateDate?: string
-
-  /**
-      * 备注
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Description?: string
-
-  /**
-      * 状态机所属服务中文名
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FlowServiceChineseName?: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ExecutionResourceName: string
 }
 
 /**
@@ -294,21 +319,6 @@ export interface CreateFlowServiceResponse {
 }
 
 /**
- * 模版过滤类型
- */
-export interface Filter {
-  /**
-   * 过滤器名字
-   */
-  Name?: string
-
-  /**
-   * 过滤器值的数组
-   */
-  Values?: Array<string>
-}
-
-/**
  * StartExecution请求参数结构体
  */
 export interface StartExecutionRequest {
@@ -326,6 +336,67 @@ export interface StartExecutionRequest {
    * 本次执行名。如果不填，系统会自动生成。如果填，应保证状态机下唯一
    */
   Name?: string
+}
+
+/**
+ * 模版过滤类型
+ */
+export interface Filter {
+  /**
+   * 过滤器名字
+   */
+  Name?: string
+
+  /**
+   * 过滤器值的数组
+   */
+  Values?: Array<string>
+}
+
+/**
+ * 执行的事件历史
+ */
+export interface ExecutionEvent {
+  /**
+   * 执行资源名
+   */
+  ExecutionResourceName: string
+
+  /**
+   * 自增序号
+   */
+  EventId: number
+
+  /**
+   * 事件类型
+   */
+  EventCategory: string
+
+  /**
+   * 步骤节点名称
+   */
+  StepName: string
+
+  /**
+   * 该步骤引用的资源名
+   */
+  ResourceName: string
+
+  /**
+   * 该事件发生时间，毫秒
+   */
+  Timestamp: string
+
+  /**
+   * 事件内容
+   */
+  Content: string
+
+  /**
+      * 异常信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Exception: string
 }
 
 /**

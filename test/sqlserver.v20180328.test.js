@@ -448,6 +448,16 @@ it("sqlserver.v20180328.StartMigrationCheck", async function () {
     }
 })
 
+it("sqlserver.v20180328.DescribeDBCharsets", async function () {
+    try {
+       const data = await client.DescribeDBCharsets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sqlserver.v20180328.DeletePublishSubscribe", async function () {
     try {
        const data = await client.DeletePublishSubscribe({})
