@@ -138,9 +138,9 @@ it("tcb.v20180608.ReinstateEnv", async function () {
     }
 })
 
-it("tcb.v20180608.DescribeEndUserStatistic", async function () {
+it("tcb.v20180608.DescribeDatabaseACL", async function () {
     try {
-       const data = await client.DescribeEndUserStatistic({})
+       const data = await client.DescribeDatabaseACL({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -298,9 +298,9 @@ it("tcb.v20180608.ModifyEnv", async function () {
     }
 })
 
-it("tcb.v20180608.DescribeDatabaseACL", async function () {
+it("tcb.v20180608.DescribeEndUserStatistic", async function () {
     try {
-       const data = await client.DescribeDatabaseACL({})
+       const data = await client.DescribeEndUserStatistic({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -331,6 +331,16 @@ it("tcb.v20180608.DescribeCloudBaseBuildService", async function () {
 it("tcb.v20180608.DescribeCloudBaseRunVersionSnapshot", async function () {
     try {
        const data = await client.DescribeCloudBaseRunVersionSnapshot({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.DescribeCloudBaseRunVersion", async function () {
+    try {
+       const data = await client.DescribeCloudBaseRunVersion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

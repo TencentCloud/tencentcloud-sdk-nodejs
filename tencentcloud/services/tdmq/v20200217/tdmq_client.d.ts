@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DeleteTopicsResponse, DescribeBindClustersResponse, ModifyEnvironmentAttributesRequest, DescribeSubscriptionsRequest, DeleteClusterResponse, ModifyClusterRequest, DescribeEnvironmentAttributesRequest, DescribeBindClustersRequest, CreateClusterResponse, DescribeTopicsResponse, CreateClusterRequest, ModifyClusterResponse, CreateTopicResponse, DescribeClusterDetailRequest, DescribeEnvironmentsResponse, DescribeEnvironmentsRequest, ModifyTopicResponse, DescribeClustersRequest, DescribeProducersRequest, DescribeEnvironmentAttributesResponse, DeleteClusterRequest, DescribeSubscriptionsResponse, DescribeProducersResponse, CreateTopicRequest, DescribeTopicsRequest, DeleteEnvironmentsResponse, DeleteTopicsRequest, DescribeEnvironmentRolesResponse, CreateSubscriptionRequest, ModifyTopicRequest, DescribeBindVpcsResponse, ModifyEnvironmentAttributesResponse, DeleteSubscriptionsRequest, CreateEnvironmentResponse, ResetMsgSubOffsetByTimestampRequest, DeleteSubscriptionsResponse, CreateSubscriptionResponse, DeleteEnvironmentsRequest, DescribeClusterDetailResponse, DescribeBindVpcsRequest, DescribeClustersResponse, ResetMsgSubOffsetByTimestampResponse, CreateEnvironmentRequest, DescribeEnvironmentRolesRequest } from "./tdmq_models";
+import { DeleteTopicsResponse, DescribeBindClustersResponse, ModifyEnvironmentAttributesRequest, DescribeSubscriptionsRequest, DeleteClusterResponse, ModifyClusterRequest, DescribeEnvironmentAttributesRequest, SendBatchMessagesResponse, DescribeBindClustersRequest, CreateClusterResponse, DescribeTopicsResponse, CreateClusterRequest, ModifyClusterResponse, CreateTopicResponse, SendMessagesRequest, DescribeClusterDetailRequest, DescribeEnvironmentsResponse, DescribeEnvironmentsRequest, ModifyTopicResponse, DescribeClustersRequest, DescribeProducersRequest, DescribeEnvironmentAttributesResponse, DeleteClusterRequest, DescribeSubscriptionsResponse, DescribeProducersResponse, SendBatchMessagesRequest, SendMessagesResponse, CreateTopicRequest, DescribeTopicsRequest, DeleteEnvironmentsResponse, DeleteTopicsRequest, DescribeEnvironmentRolesResponse, CreateSubscriptionRequest, ModifyTopicRequest, DescribeBindVpcsResponse, ModifyEnvironmentAttributesResponse, DeleteSubscriptionsRequest, CreateEnvironmentResponse, ResetMsgSubOffsetByTimestampRequest, DeleteSubscriptionsResponse, CreateSubscriptionResponse, DeleteEnvironmentsRequest, DescribeClusterDetailResponse, DescribeBindVpcsRequest, DescribeClustersResponse, ResetMsgSubOffsetByTimestampResponse, CreateEnvironmentRequest, DescribeEnvironmentRolesRequest } from "./tdmq_models";
 /**
  * tdmq client
  * @class
@@ -23,6 +23,10 @@ export declare class Client extends AbstractClient {
      * 修改主题备注和分区数
      */
     ModifyTopic(req: ModifyTopicRequest, cb?: (error: string, rep: ModifyTopicResponse) => void): Promise<ModifyTopicResponse>;
+    /**
+     * 批量发送消息
+     */
+    SendBatchMessages(req: SendBatchMessagesRequest, cb?: (error: string, rep: SendBatchMessagesResponse) => void): Promise<SendBatchMessagesResponse>;
     /**
      * 删除集群
      */
@@ -71,6 +75,10 @@ export declare class Client extends AbstractClient {
      * 获取环境下主题列表
      */
     DescribeTopics(req: DescribeTopicsRequest, cb?: (error: string, rep: DescribeTopicsResponse) => void): Promise<DescribeTopicsResponse>;
+    /**
+     * 发送单条消息
+     */
+    SendMessages(req: SendMessagesRequest, cb?: (error: string, rep: SendMessagesResponse) => void): Promise<SendMessagesResponse>;
     /**
      * 更新集群信息
      */

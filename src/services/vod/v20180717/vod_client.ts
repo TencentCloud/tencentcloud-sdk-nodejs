@@ -140,7 +140,7 @@ import {
   TaskStatData,
   OcrFullTextConfigureInfoForUpdate,
   ProcessMediaByProcedureRequest,
-  MediaProcessTaskInput,
+  MediaImageSpriteInfo,
   MediaProcessTaskAnimatedGraphicResult,
   ProcessMediaResponse,
   CreateWordSamplesResponse,
@@ -242,6 +242,7 @@ import {
   DescribeSuperPlayerConfigsResponse,
   AsrWordsConfigureInfoForUpdate,
   DescribeStorageDataRequest,
+  LiveRealTimeClipMediaSegmentInfo,
   DeleteImageSpriteTemplateResponse,
   DescribeContentReviewTemplatesResponse,
   TEHDConfig,
@@ -298,6 +299,7 @@ import {
   PullEventsResponse,
   AiRecognitionTaskObjectResultInput,
   DescribeCdnLogsRequest,
+  MediaProcessTaskInput,
   OutputVideoStream,
   ProcedureTemplate,
   AiReviewTaskTerrorismResult,
@@ -440,7 +442,6 @@ import {
   CreateAIAnalysisTemplateRequest,
   AiReviewTerrorismTaskInput,
   MediaAudioStreamItem,
-  MediaImageSpriteInfo,
   SubAppIdInfo,
   DescribeAllClassResponse,
   ModifyImageSpriteTemplateRequest,
@@ -989,7 +990,7 @@ export class Client extends AbstractClient {
 注意：
 - 使用直播即时剪辑功能的前提是：目标直播流开启了[时移回看](https://cloud.tencent.com/document/product/267/32742)功能。
 - 直播即时剪辑是基于直播录制生成的 m3u8 文件进行的，故而其最小剪辑精度为一个 ts 切片，无法实现秒级或者更为精确的剪辑精度。
-
+- 由于直播过程中可能存在断流的情况，所以有可能导致剪辑生成的实际视频时长与期望不一致。例如剪辑某个直播流的时间区间为 2018-09-20T10:30:00Z 到 2018-09-20T10:40:00Z ，如果在该时间区间中发生过断流，那么返回的媒资文件的时长将少于 10 分钟，在这种情况下，可以通过输出参数 <a href="#p_segmentset">SegmentSet</a> 感知到。
 
 ### 剪辑固化
 所谓剪辑固化，是指将剪辑出来的视频是保存成一个独立的视频（拥有独立的 FileId）。其生命周期不受原始直播录制视频影响（即使原始录制视频被删除，剪辑结果也不会受到任何影响）；也可以对其进行转码、微信发布等二次处理。
@@ -1004,6 +1005,7 @@ export class Client extends AbstractClient {
 剪辑不固化，由于其剪辑结果不是一个独立的视频，因而也不会纳入点播媒资视频管理（例如控制台的视频总数不会统计这一片段）中，也无法单独针对这个片段做转码、微信发布等任何视频处理操作。
 
 剪辑不固化的优势在于其剪辑操作十分“轻量化”，不会产生额外的存储开销。但其不足之处在于生命周期与原始录制视频相同，且无法进一步进行转码等视频处理。
+
      */
   async LiveRealTimeClip(
     req: LiveRealTimeClipRequest,

@@ -33,6 +33,7 @@ import {
   PutProvisionedConcurrencyConfigResponse,
   UpdateFunctionConfigurationResponse,
   PublishLayerVersionResponse,
+  UsageInfo,
   PublicNetConfigIn,
   DeleteProvisionedConcurrencyConfigRequest,
   DeleteReservedConcurrencyConfigResponse,
@@ -65,12 +66,14 @@ import {
   CopyFunctionRequest,
   DeleteNamespaceResponse,
   LayerVersionSimple,
+  TriggerCount,
+  NamespaceLimit,
   CfsConfig,
   DeleteNamespaceRequest,
   ListFunctionsRequest,
   CreateTriggerRequest,
   UpdateNamespaceResponse,
-  ListLayersResponse,
+  GetAccountResponse,
   DeleteFunctionResponse,
   ListAsyncEventsRequest,
   Result,
@@ -78,6 +81,7 @@ import {
   LogSearchContext,
   TriggerInfo,
   CreateFunctionRequest,
+  GetAccountRequest,
   PutTotalConcurrencyConfigResponse,
   DeleteAliasResponse,
   PublishVersionResponse,
@@ -106,6 +110,8 @@ import {
   FunctionLog,
   GetFunctionAddressResponse,
   CfsInsInfo,
+  LimitsInfo,
+  ListLayersResponse,
   FunctionVersion,
   Function,
   DeadLetterConfig,
@@ -115,6 +121,7 @@ import {
   CreateFunctionResponse,
   GetReservedConcurrencyConfigRequest,
   PutProvisionedConcurrencyConfigRequest,
+  NamespaceUsage,
   ListAliasesRequest,
   EipOutConfig,
   Alias,
@@ -147,6 +154,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateAliasResponse) => void
   ): Promise<UpdateAliasResponse> {
     return this.request("UpdateAlias", req, cb)
+  }
+
+  /**
+   * 更新命名空间
+   */
+  async UpdateNamespace(
+    req: UpdateNamespaceRequest,
+    cb?: (error: string, rep: UpdateNamespaceResponse) => void
+  ): Promise<UpdateNamespaceResponse> {
+    return this.request("UpdateNamespace", req, cb)
   }
 
   /**
@@ -266,13 +283,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新命名空间
+   * 使用给定的zip文件或cos对象创建一个层的新版本，每次使用相同的层的名称调用本接口，都会生成一个新版本。
    */
-  async UpdateNamespace(
-    req: UpdateNamespaceRequest,
-    cb?: (error: string, rep: UpdateNamespaceResponse) => void
-  ): Promise<UpdateNamespaceResponse> {
-    return this.request("UpdateNamespace", req, cb)
+  async PublishLayerVersion(
+    req: PublishLayerVersionRequest,
+    cb?: (error: string, rep: PublishLayerVersionResponse) => void
+  ): Promise<PublishLayerVersionResponse> {
+    return this.request("PublishLayerVersion", req, cb)
   }
 
   /**
@@ -437,13 +454,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 使用给定的zip文件或cos对象创建一个层的新版本，每次使用相同的层的名称调用本接口，都会生成一个新版本。
+   * 获取账户信息
    */
-  async PublishLayerVersion(
-    req: PublishLayerVersionRequest,
-    cb?: (error: string, rep: PublishLayerVersionResponse) => void
-  ): Promise<PublishLayerVersionResponse> {
-    return this.request("PublishLayerVersion", req, cb)
+  async GetAccount(
+    req?: GetAccountRequest,
+    cb?: (error: string, rep: GetAccountResponse) => void
+  ): Promise<GetAccountResponse> {
+    return this.request("GetAccount", req, cb)
   }
 
   /**

@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyTopic", req, cb);
     }
     /**
+     * 批量发送消息
+     */
+    async SendBatchMessages(req, cb) {
+        return this.request("SendBatchMessages", req, cb);
+    }
+    /**
      * 删除集群
      */
     async DeleteCluster(req, cb) {
@@ -122,6 +128,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeTopics(req, cb) {
         return this.request("DescribeTopics", req, cb);
+    }
+    /**
+     * 发送单条消息
+     */
+    async SendMessages(req, cb) {
+        return this.request("SendMessages", req, cb);
     }
     /**
      * 更新集群信息

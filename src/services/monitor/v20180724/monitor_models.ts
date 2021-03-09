@@ -183,7 +183,7 @@ export interface DescribeProductEventListRequest {
   EventName?: Array<string>
 
   /**
-   * 影响对象，比如ins-19708ino
+   * 影响对象，比如"ins-19708ino"
    */
   InstanceId?: Array<string>
 
@@ -193,7 +193,7 @@ export interface DescribeProductEventListRequest {
   Dimensions?: Array<DescribeProductEventListDimensions>
 
   /**
-   * 地域过滤，比如gz
+   * 产品事件地域过滤参数，比如gz，各地域缩写可参见[地域列表](https://cloud.tencent.com/document/product/248/50863)
    */
   RegionList?: Array<string>
 
@@ -2176,8 +2176,10 @@ export interface BindingPolicyObjectDimension {
   RegionId?: number
 
   /**
-   * 维度信息
-   */
+      * 实例的维度信息，格式为
+{"unInstanceId":"ins-00jvv9mo"}。不同云产品的维度信息不同，详见
+[产品策略类型和命名空间](https://cloud.tencent.com/document/product/248/50397)
+      */
   Dimensions?: string
 
   /**
@@ -3472,18 +3474,18 @@ export interface DescribeProductEventListResponse {
       * 事件列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Events?: Array<DescribeProductEventListEvents>
+  Events: Array<DescribeProductEventListEvents>
 
   /**
    * 事件统计
    */
-  OverView?: DescribeProductEventListOverView
+  OverView: DescribeProductEventListOverView
 
   /**
       * 事件总数
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Total?: number
+  Total: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -276,6 +276,25 @@ export interface PartitionsTopic {
     TopicType: number;
 }
 /**
+ * SendBatchMessages返回参数结构体
+ */
+export interface SendBatchMessagesResponse {
+    /**
+      * 消息的唯一标识
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MessageId: string;
+    /**
+      * 错误消息，返回为 ""，代表没有错误
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ErrorMsg: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeBindClusters请求参数结构体
  */
 export declare type DescribeBindClustersRequest = null;
@@ -416,6 +435,35 @@ export interface CreateTopicResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * SendMessages请求参数结构体
+ */
+export interface SendMessagesRequest {
+    /**
+      * Token 是用来做鉴权使用的
+      */
+    StringToken: string;
+    /**
+      * 消息要发送的topic的名字
+      */
+    Topic: string;
+    /**
+      * 要发送的消息的内容
+      */
+    Payload: string;
+    /**
+      * 设置 producer 的名字，要求全局唯一，用户不配置，系统会随机生成
+      */
+    ProducerName?: string;
+    /**
+      * 设置消息发送的超时时间，默认为30s
+      */
+    SendTimeout?: number;
+    /**
+      * 内存中缓存的最大的生产消息的数量，默认为1000条
+      */
+    MaxPendingMessages?: number;
 }
 /**
  * DescribeClusterDetail请求参数结构体
@@ -733,6 +781,66 @@ export interface DescribeProducersResponse {
       * 记录总数。
       */
     TotalCount?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * SendBatchMessages请求参数结构体
+ */
+export interface SendBatchMessagesRequest {
+    /**
+      * Topic name
+      */
+    Topic: string;
+    /**
+      * 需要发送消息的内容
+      */
+    Payload: string;
+    /**
+      * String 类型的 token，用来校验客户端和服务端之间的连接
+      */
+    StringToken: string;
+    /**
+      * producer 的名字，要求全局是唯一的，如果不设置，系统会自动生成
+      */
+    ProducerName?: string;
+    /**
+      * 单位：s。消息发送的超时时间。默认值为：30s
+      */
+    SendTimeout?: number;
+    /**
+      * 内存中允许缓存的生产消息的最大数量，默认值：1000条
+      */
+    MaxPendingMessages?: number;
+    /**
+      * 每一个batch中消息的最大数量，默认值：1000条/batch
+      */
+    BatchingMaxMessages?: number;
+    /**
+      * 每一个batch最大等待的时间，超过这个时间，不管是否达到指定的batch中消息的数量和大小，都会将该batch发送出去，默认：10ms
+      */
+    BatchingMaxPublishDelay?: number;
+    /**
+      * 每一个batch中最大允许的消息的大小，默认：128KB
+      */
+    BatchingMaxBytes?: number;
+}
+/**
+ * SendMessages返回参数结构体
+ */
+export interface SendMessagesResponse {
+    /**
+      * 消息的messageID, 是全局唯一的，用来标识消息的元数据信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MessageId: string;
+    /**
+      * 返回的错误消息，如果返回为 “”，说明没有错误
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ErrorMsg: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

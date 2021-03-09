@@ -496,6 +496,10 @@ export interface OcrTextDetail {
       * OCR位置
       */
     Location: Location;
+    /**
+      * OCR文本识别置信度
+      */
+    Rate: number;
 }
 /**
  * 实体检测结果明细，当检测场景为实体、广告台标、二维码时表示模型检测目标框的标签名称、标签值、标签分数以及检测框的位置信息。

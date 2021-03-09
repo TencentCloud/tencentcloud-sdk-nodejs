@@ -84,6 +84,7 @@ import {
   StaticStorageInfo,
   DescribeCloudBaseRunResourceForExtendResponse,
   CreateAndDeployCloudBaseProjectRequest,
+  DescribeCloudBaseRunVersionRequest,
   DatabasesInfo,
   CloudBaseSecurityContext,
   ReinstateEnvRequest,
@@ -111,6 +112,7 @@ import {
   DescribeCloudBaseProjectLatestVersionListRequest,
   EnvBillingInfoItem,
   DescribeEndUserStatisticResponse,
+  DescribeCloudBaseRunVersionResponse,
   CreatePostpayPackageRequest,
   DescribeCloudBaseBuildServiceRequest,
   CloudBaseCodeRepoDetail,
@@ -262,13 +264,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取终端用户总量与平台分布情况
+   * 获取数据库权限
    */
-  async DescribeEndUserStatistic(
-    req: DescribeEndUserStatisticRequest,
-    cb?: (error: string, rep: DescribeEndUserStatisticResponse) => void
-  ): Promise<DescribeEndUserStatisticResponse> {
-    return this.request("DescribeEndUserStatistic", req, cb)
+  async DescribeDatabaseACL(
+    req: DescribeDatabaseACLRequest,
+    cb?: (error: string, rep: DescribeDatabaseACLResponse) => void
+  ): Promise<DescribeDatabaseACLResponse> {
+    return this.request("DescribeDatabaseACL", req, cb)
   }
 
   /**
@@ -422,13 +424,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取数据库权限
+   * 获取终端用户总量与平台分布情况
    */
-  async DescribeDatabaseACL(
-    req: DescribeDatabaseACLRequest,
-    cb?: (error: string, rep: DescribeDatabaseACLResponse) => void
-  ): Promise<DescribeDatabaseACLResponse> {
-    return this.request("DescribeDatabaseACL", req, cb)
+  async DescribeEndUserStatistic(
+    req: DescribeEndUserStatisticRequest,
+    cb?: (error: string, rep: DescribeEndUserStatisticResponse) => void
+  ): Promise<DescribeEndUserStatisticResponse> {
+    return this.request("DescribeEndUserStatistic", req, cb)
   }
 
   /**
@@ -459,6 +461,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudBaseRunVersionSnapshotResponse) => void
   ): Promise<DescribeCloudBaseRunVersionSnapshotResponse> {
     return this.request("DescribeCloudBaseRunVersionSnapshot", req, cb)
+  }
+
+  /**
+   * 查询服务版本详情(新)
+   */
+  async DescribeCloudBaseRunVersion(
+    req: DescribeCloudBaseRunVersionRequest,
+    cb?: (error: string, rep: DescribeCloudBaseRunVersionResponse) => void
+  ): Promise<DescribeCloudBaseRunVersionResponse> {
+    return this.request("DescribeCloudBaseRunVersion", req, cb)
   }
 
   /**

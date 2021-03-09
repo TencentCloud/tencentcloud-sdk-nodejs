@@ -142,6 +142,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StopTaskExecute", req, cb);
     }
     /**
+     * 查询任务详情
+     */
+    async DescribeTaskDetail(req, cb) {
+        return this.request("DescribeTaskDetail", req, cb);
+    }
+    /**
      *  容器部署组详情
      */
     async DescribeContainerGroupDetail(req, cb) {

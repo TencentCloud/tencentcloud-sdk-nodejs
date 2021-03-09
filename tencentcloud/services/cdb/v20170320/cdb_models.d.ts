@@ -1504,11 +1504,11 @@ export interface DescribeCloneListResponse {
     /**
       * 满足条件的条目数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 克隆任务列表。
       */
-    Items?: Array<CloneItem>;
+    Items: Array<CloneItem>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2072,11 +2072,11 @@ export interface DescribeCloneListRequest {
       */
     InstanceId: string;
     /**
-      * 分页查询时的偏移量。
+      * 分页查询时的偏移量，默认值为0。
       */
     Offset?: number;
     /**
-      * 分页查询时的每页条目数。
+      * 分页查询时的每页条目数，默认值为20。
       */
     Limit?: number;
 }
@@ -2195,7 +2195,7 @@ export interface CreateCloneInstanceRequest {
       */
     ResourceTags?: Array<TagInfo>;
     /**
-      * 实例Cpu核数，需要不低于克隆源实例。
+      * 实例Cpu核数，需要不低于克隆源实例，默认和源实例相同。
       */
     Cpu?: number;
     /**

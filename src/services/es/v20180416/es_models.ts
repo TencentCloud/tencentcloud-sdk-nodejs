@@ -1215,6 +1215,11 @@ export interface UpdatePluginsRequest {
    * 是否强制重启
    */
   ForceRestart?: boolean
+
+  /**
+   * 是否重新安装
+   */
+  ForceUpdate?: boolean
 }
 
 /**

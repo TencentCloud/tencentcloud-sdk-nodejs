@@ -376,20 +376,24 @@ export interface LiveRealTimeClipResponse {
     /**
       * 剪辑后的视频播放 URL。
       */
-    Url?: string;
+    Url: string;
     /**
       * 剪辑固化后的视频的媒体文件的唯一标识。
       */
-    FileId?: string;
+    FileId: string;
     /**
       * 剪辑固化后的视频任务流 ID。
       */
-    VodTaskId?: string;
+    VodTaskId: string;
     /**
       * 剪辑后的视频元信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    MetaData?: MediaMetaData;
+    MetaData: MediaMetaData;
+    /**
+      * <span id="p_segmentset">剪辑后的视频片段信息。</span>
+      */
+    SegmentSet: Array<LiveRealTimeClipMediaSegmentInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2826,37 +2830,13 @@ export interface ProcessMediaByProcedureRequest {
     SubAppId?: number;
 }
 /**
- * 视频处理任务类型
+ * 点播文件雪碧图信息
  */
-export interface MediaProcessTaskInput {
+export interface MediaImageSpriteInfo {
     /**
-      * 视频转码任务列表。
+      * 特定规格的雪碧图信息集合，每个元素代表一套相同规格的雪碧图。
       */
-    TranscodeTaskSet?: Array<TranscodeTaskInput>;
-    /**
-      * 视频转动图任务列表。
-      */
-    AnimatedGraphicTaskSet?: Array<AnimatedGraphicTaskInput>;
-    /**
-      * 对视频按时间点截图任务列表。
-      */
-    SnapshotByTimeOffsetTaskSet?: Array<SnapshotByTimeOffsetTaskInput>;
-    /**
-      * 对视频采样截图任务列表。
-      */
-    SampleSnapshotTaskSet?: Array<SampleSnapshotTaskInput>;
-    /**
-      * 对视频截雪碧图任务列表。
-      */
-    ImageSpriteTaskSet?: Array<ImageSpriteTaskInput>;
-    /**
-      * 对视频截图做封面任务列表。
-      */
-    CoverBySnapshotTaskSet?: Array<CoverBySnapshotTaskInput>;
-    /**
-      * 对视频转自适应码流任务列表。
-      */
-    AdaptiveDynamicStreamingTaskSet?: Array<AdaptiveDynamicStreamingTaskInput>;
+    ImageSpriteSet: Array<MediaImageSpriteItem>;
 }
 /**
  * 转动图任务结果类型
@@ -3221,7 +3201,7 @@ export interface LiveRealTimeClipRequest {
       */
     MetaDataRequired?: number;
     /**
-      * 即时剪辑使用的域名，必须在直播侧开通时移。
+      * 云点播中添加的用于时移播放的域名，必须在云直播已经[关联录制模板和开通时移服务](https://cloud.tencent.com/document/product/266/52220#.E6.AD.A5.E9.AA.A43.EF.BC.9A.E5.85.B3.E8.81.94.E5.BD.95.E5.88.B6.E6.A8.A1.E6.9D.BF.3Ca-id.3D.22step3.22.3E.3C.2Fa.3E)。**如果本接口的首次调用时间在 2021-01-01T00:00:00Z 之后，则此字段为必选字段。**
       */
     Host?: string;
     /**
@@ -5077,6 +5057,19 @@ export interface DescribeStorageDataRequest {
     SubAppId?: number;
 }
 /**
+ * 即时剪辑后媒资的片段信息。
+ */
+export interface LiveRealTimeClipMediaSegmentInfo {
+    /**
+      * 片段的起始时间。格式参照 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    StartTime: string;
+    /**
+      * 片段的结束时间。格式参照 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+    EndTime: string;
+}
+/**
  * DeleteImageSpriteTemplate返回参数结构体
  */
 export interface DeleteImageSpriteTemplateResponse {
@@ -6313,6 +6306,39 @@ export interface DescribeCdnLogsRequest {
       * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
       */
     SubAppId?: number;
+}
+/**
+ * 视频处理任务类型
+ */
+export interface MediaProcessTaskInput {
+    /**
+      * 视频转码任务列表。
+      */
+    TranscodeTaskSet?: Array<TranscodeTaskInput>;
+    /**
+      * 视频转动图任务列表。
+      */
+    AnimatedGraphicTaskSet?: Array<AnimatedGraphicTaskInput>;
+    /**
+      * 对视频按时间点截图任务列表。
+      */
+    SnapshotByTimeOffsetTaskSet?: Array<SnapshotByTimeOffsetTaskInput>;
+    /**
+      * 对视频采样截图任务列表。
+      */
+    SampleSnapshotTaskSet?: Array<SampleSnapshotTaskInput>;
+    /**
+      * 对视频截雪碧图任务列表。
+      */
+    ImageSpriteTaskSet?: Array<ImageSpriteTaskInput>;
+    /**
+      * 对视频截图做封面任务列表。
+      */
+    CoverBySnapshotTaskSet?: Array<CoverBySnapshotTaskInput>;
+    /**
+      * 对视频转自适应码流任务列表。
+      */
+    AdaptiveDynamicStreamingTaskSet?: Array<AdaptiveDynamicStreamingTaskInput>;
 }
 /**
  * 输出的视频流信息
@@ -9995,15 +10021,6 @@ export interface MediaAudioStreamItem {
       * 音频流的编码格式，例如 aac。
       */
     Codec: string;
-}
-/**
- * 点播文件雪碧图信息
- */
-export interface MediaImageSpriteInfo {
-    /**
-      * 特定规格的雪碧图信息集合，每个元素代表一套相同规格的雪碧图。
-      */
-    ImageSpriteSet: Array<MediaImageSpriteItem>;
 }
 /**
  * 子应用信息。

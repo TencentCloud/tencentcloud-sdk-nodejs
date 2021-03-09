@@ -402,6 +402,102 @@ export interface UnbindApiGroupRequest {
     GroupGatewayList: Array<GatewayGroupIds>;
 }
 /**
+ * 任务定义
+ */
+export interface TaskRecord {
+    /**
+      * 任务名称
+      */
+    TaskName: string;
+    /**
+      * 任务类型
+      */
+    TaskType: string;
+    /**
+      * 执行类型
+      */
+    ExecuteType: string;
+    /**
+      * 任务内容，长度限制65535字节
+      */
+    TaskContent?: string;
+    /**
+      * 分组ID
+      */
+    GroupId?: string;
+    /**
+      * 超时时间
+      */
+    TimeOut: number;
+    /**
+      * 重试次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RetryCount?: number;
+    /**
+      * 重试间隔
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RetryInterval?: number;
+    /**
+      * 触发规则
+      */
+    TaskRule: TaskRule;
+    /**
+      * 是否启用任务,ENABLED/DISABLED
+      */
+    TaskState: string;
+    /**
+      * 任务ID
+      */
+    TaskId: string;
+    /**
+      * 判断任务成功的操作符
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SuccessOperator: string;
+    /**
+      * 判断任务成功的阈值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SuccessRatio: number;
+    /**
+      * 分片数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ShardCount: number;
+    /**
+      * 高级设置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AdvanceSettings: AdvanceSettings;
+    /**
+      * 分片参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ShardArguments: Array<ShardArgument>;
+    /**
+      * 所属工作流ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BelongFlowIds: Array<string>;
+    /**
+      * 任务历史ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskLogId: string;
+    /**
+      * 触发类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TriggerType: string;
+    /**
+      * 任务参数，长度限制10000个字符
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskArgument: string;
+}
+/**
  * CreateNamespace返回参数结构体
  */
 export interface CreateNamespaceResponse {
@@ -1869,7 +1965,7 @@ export interface ModifyTaskRequest {
     /**
       * 分片参数
       */
-    ShardArguments?: ShardArgument;
+    ShardArguments?: Array<ShardArgument>;
     /**
       * 高级设置
       */
@@ -3390,7 +3486,7 @@ export interface ModifyTaskResponse {
     /**
       * 更新是否成功
       */
-    Result?: boolean;
+    Result: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3750,17 +3846,19 @@ export interface Microservice {
     CriticalInstanceCount?: number;
 }
 /**
- * StopTaskExecute返回参数结构体
+ * 健康检查参数
  */
-export interface StopTaskExecuteResponse {
+export interface HealthCheckSettings {
     /**
-      * 操作成功 or 失败
+      * 存活健康检查
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: boolean;
+    LivenessProbe?: HealthCheckSetting;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 就绪健康检查
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RequestId?: string;
+    ReadinessProbe?: HealthCheckSetting;
 }
 /**
  * StartGroup返回参数结构体
@@ -4709,7 +4807,7 @@ export interface CreateServerlessGroupResponse {
  */
 export interface ShardArgument {
     /**
-      * 分片参数 KEY，整形
+      * 分片参数 KEY，整形, 范围 [1,1000]
       */
     ShardKey: number;
     /**
@@ -5246,19 +5344,17 @@ export interface DeleteTaskRequest {
     TaskId: string;
 }
 /**
- * 健康检查参数
+ * StopTaskExecute返回参数结构体
  */
-export interface HealthCheckSettings {
+export interface StopTaskExecuteResponse {
     /**
-      * 存活健康检查
-注意：此字段可能返回 null，表示取不到有效值。
+      * 操作成功 or 失败
       */
-    LivenessProbe?: HealthCheckSetting;
+    Result?: boolean;
     /**
-      * 就绪健康检查
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    ReadinessProbe?: HealthCheckSetting;
+    RequestId?: string;
 }
 /**
  * 虚拟机部署组列表简要字段
@@ -5935,6 +6031,19 @@ export interface DescribeApplicationsRequest {
     ApplicationResourceTypeList?: Array<string>;
 }
 /**
+ * DescribeTaskDetail请求参数结构体
+ */
+export interface DescribeTaskDetailRequest {
+    /**
+      * 任务ID
+      */
+    TaskId: string;
+    /**
+      * 任务历史ID
+      */
+    TaskLogId?: string;
+}
+/**
  * DescribePublicConfigReleases请求参数结构体
  */
 export interface DescribePublicConfigReleasesRequest {
@@ -6284,6 +6393,19 @@ export interface DescribeClusterInstancesResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Result?: TsfPageInstance;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeTaskDetail返回参数结构体
+ */
+export interface DescribeTaskDetailResponse {
+    /**
+      * 任务详情
+      */
+    Result: TaskRecord;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -267,6 +267,31 @@ export interface PublishLayerVersionResponse {
     RequestId?: string;
 }
 /**
+ * 已使用的信息
+ */
+export interface UsageInfo {
+    /**
+      * 命名空间个数
+      */
+    NamespacesCount: number;
+    /**
+      * 命名空间详情
+      */
+    Namespace: Array<NamespaceUsage>;
+    /**
+      * 当前地域用户并发内存配额上限
+      */
+    TotalConcurrencyMem: number;
+    /**
+      * 当前地域用户已配置并发内存额度
+      */
+    TotalAllocatedConcurrencyMem: number;
+    /**
+      * 用户实际配置的账号并发配额
+      */
+    UserConcurrencyMemLimit: number;
+}
+/**
  * 公网访问配置
  */
 export interface PublicNetConfigIn {
@@ -941,6 +966,101 @@ export interface LayerVersionSimple {
     LayerVersion: number;
 }
 /**
+ * TriggerCount描述不同类型触发器的数量
+ */
+export interface TriggerCount {
+    /**
+      * Cos触发器数量
+      */
+    Cos: number;
+    /**
+      * Timer触发器数量
+      */
+    Timer: number;
+    /**
+      * Cmq触发器数量
+      */
+    Cmq: number;
+    /**
+      * 触发器总数
+      */
+    Total: number;
+    /**
+      * Ckafka触发器数量
+      */
+    Ckafka: number;
+    /**
+      * Apigw触发器数量
+      */
+    Apigw: number;
+    /**
+      * Cls触发器数量
+      */
+    Cls: number;
+    /**
+      * Clb触发器数量
+      */
+    Clb: number;
+    /**
+      * Mps触发器数量
+      */
+    Mps: number;
+    /**
+      * Cm触发器数量
+      */
+    Cm: number;
+    /**
+      * Vod触发器数量
+      */
+    Vod: number;
+}
+/**
+ * 命名空间限制
+ */
+export interface NamespaceLimit {
+    /**
+      * 函数总数
+      */
+    FunctionsCount: number;
+    /**
+      * Trigger信息
+      */
+    Trigger: TriggerCount;
+    /**
+      * Namespace名称
+      */
+    Namespace: string;
+    /**
+      * 并发量
+      */
+    ConcurrentExecutions: number;
+    /**
+      * Timeout限制
+      */
+    TimeoutLimit: number;
+    /**
+      * 测试事件限制
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TestModelLimit: number;
+    /**
+      * 初始化超时限制
+      */
+    InitTimeoutLimit: number;
+    /**
+      * 异步重试次数限制
+      */
+    RetryNumLimit: number;
+    /**
+      * 异步重试消息保留时间下限
+      */
+    MinMsgTTL: number;
+    /**
+      * 异步重试消息保留时间上限
+      */
+    MaxMsgTTL: number;
+}
+/**
  * 文件系统(cfs)配置描述
  */
 export interface CfsConfig {
@@ -1045,17 +1165,17 @@ export interface UpdateNamespaceResponse {
     RequestId?: string;
 }
 /**
- * ListLayers返回参数结构体
+ * GetAccount返回参数结构体
  */
-export interface ListLayersResponse {
+export interface GetAccountResponse {
     /**
-      * 层列表
+      * 命名空间已使用的信息
       */
-    Layers?: Array<LayerVersionInfo>;
+    AccountUsage: UsageInfo;
     /**
-      * 层总数
+      * 命名空间限制的信息
       */
-    TotalCount?: number;
+    AccountLimit: LimitsInfo;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1333,6 +1453,10 @@ export interface CreateFunctionRequest {
       */
     Tags?: Array<Tag>;
 }
+/**
+ * GetAccount请求参数结构体
+ */
+export declare type GetAccountRequest = null;
 /**
  * PutTotalConcurrencyConfig返回参数结构体
  */
@@ -2123,6 +2247,36 @@ export interface CfsInsInfo {
     MountSubnetId?: string;
 }
 /**
+ * 限制信息
+ */
+export interface LimitsInfo {
+    /**
+      * 命名空间个数限制
+      */
+    NamespacesCount: number;
+    /**
+      * 命名空间限制信息
+      */
+    Namespace: Array<NamespaceLimit>;
+}
+/**
+ * ListLayers返回参数结构体
+ */
+export interface ListLayersResponse {
+    /**
+      * 层列表
+      */
+    Layers?: Array<LayerVersionInfo>;
+    /**
+      * 层总数
+      */
+    TotalCount?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 函数版本信息
  */
 export interface FunctionVersion {
@@ -2348,6 +2502,23 @@ export interface PutProvisionedConcurrencyConfigRequest {
       * 函数所属命名空间，默认为default
       */
     Namespace?: string;
+}
+/**
+ * 名称空间已使用信息
+ */
+export interface NamespaceUsage {
+    /**
+      * 函数数组
+      */
+    Functions: Array<string>;
+    /**
+      * 命名空间名称
+      */
+    Namespace: string;
+    /**
+      * 命名空间函数个数
+      */
+    FunctionsCount: number;
 }
 /**
  * ListAliases请求参数结构体

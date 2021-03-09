@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateAlias", req, cb);
     }
     /**
+     * 更新命名空间
+     */
+    async UpdateNamespace(req, cb) {
+        return this.request("UpdateNamespace", req, cb);
+    }
+    /**
      * 该接口根据传入参数删除函数。
      */
     async DeleteFunction(req, cb) {
@@ -106,10 +112,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetProvisionedConcurrencyConfig", req, cb);
     }
     /**
-     * 更新命名空间
+     * 使用给定的zip文件或cos对象创建一个层的新版本，每次使用相同的层的名称调用本接口，都会生成一个新版本。
      */
-    async UpdateNamespace(req, cb) {
-        return this.request("UpdateNamespace", req, cb);
+    async PublishLayerVersion(req, cb) {
+        return this.request("PublishLayerVersion", req, cb);
     }
     /**
      * 该接口用于运行函数。
@@ -209,10 +215,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("PutReservedConcurrencyConfig", req, cb);
     }
     /**
-     * 使用给定的zip文件或cos对象创建一个层的新版本，每次使用相同的层的名称调用本接口，都会生成一个新版本。
+     * 获取账户信息
      */
-    async PublishLayerVersion(req, cb) {
-        return this.request("PublishLayerVersion", req, cb);
+    async GetAccount(req, cb) {
+        return this.request("GetAccount", req, cb);
     }
     /**
      * 删除函数的保留并发配置。

@@ -609,6 +609,11 @@ export interface OcrTextDetail {
    * OCR位置
    */
   Location: Location
+
+  /**
+   * OCR文本识别置信度
+   */
+  Rate: number
 }
 
 /**

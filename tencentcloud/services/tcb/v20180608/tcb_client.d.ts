@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeEnvLimitResponse, CheckTcbServiceResponse, DescribeCloudBaseRunServerVersionRequest, DescribeCloudBaseRunServerVersionResponse, CommonServiceAPIResponse, DescribePostpayPackageFreeQuotasRequest, DescribeEnvLimitRequest, DescribeCloudBaseBuildServiceResponse, DescribeEndUsersRequest, DescribeEndUserStatisticRequest, DescribeCloudBaseRunResourceForExtendRequest, ModifyEndUserRequest, DescribeAuthDomainsResponse, CreateHostingDomainRequest, DescribeCloudBaseRunResourceRequest, DescribePostpayFreeQuotasRequest, ModifyDatabaseACLRequest, DestroyStaticStoreRequest, DescribeSmsQuotasRequest, DescribeQuotaDataResponse, CommonServiceAPIRequest, CreateStaticStoreRequest, DeleteCloudBaseProjectLatestVersionResponse, CreateAuthDomainResponse, DescribeEnvsRequest, DescribeExtraPkgBillingInfoRequest, DeleteEndUserRequest, DescribeEnvFreeQuotaRequest, DescribeEndUserLoginStatisticResponse, CreateCloudBaseRunResourceResponse, DestroyStaticStoreResponse, DeleteEndUserResponse, ModifyDatabaseACLResponse, EstablishCloudBaseRunServerResponse, DestroyEnvRequest, DestroyEnvResponse, DescribeEnvsResponse, CreateAuthDomainRequest, CreateHostingDomainResponse, CreateCloudBaseRunServerVersionRequest, CreatePostpayPackageResponse, EstablishCloudBaseRunServerRequest, DescribeDownloadFileRequest, ReinstateEnvResponse, DescribeEnvFreeQuotaResponse, CreateAndDeployCloudBaseProjectResponse, DescribeCloudBaseRunResourceForExtendResponse, CreateAndDeployCloudBaseProjectRequest, ReinstateEnvRequest, DescribeDatabaseACLRequest, CreateCloudBaseRunServerVersionResponse, DescribeEndUserLoginStatisticRequest, DeleteCloudBaseProjectLatestVersionRequest, DescribeCloudBaseProjectLatestVersionListResponse, DescribeSmsQuotasResponse, ModifyEnvResponse, DescribeDownloadFileResponse, DescribeQuotaDataRequest, CreateStaticStoreResponse, DescribeCloudBaseRunResourceResponse, DescribeCloudBaseRunVersionSnapshotRequest, DescribePostpayFreeQuotasResponse, DescribeEndUsersResponse, DescribeCloudBaseProjectLatestVersionListRequest, DescribeEndUserStatisticResponse, CreatePostpayPackageRequest, DescribeCloudBaseBuildServiceRequest, CheckTcbServiceRequest, CreateCloudBaseRunResourceRequest, ModifyEndUserResponse, DescribeAuthDomainsRequest, DescribeDatabaseACLResponse, ModifyEnvRequest, DescribeCloudBaseRunVersionSnapshotResponse, DescribePostpayPackageFreeQuotasResponse, DescribeExtraPkgBillingInfoResponse } from "./tcb_models";
+import { DescribeEnvLimitResponse, CheckTcbServiceResponse, DescribeCloudBaseRunServerVersionRequest, DescribeCloudBaseRunServerVersionResponse, CommonServiceAPIResponse, DescribePostpayPackageFreeQuotasRequest, DescribeEnvLimitRequest, DescribeCloudBaseBuildServiceResponse, DescribeEndUsersRequest, DescribeEndUserStatisticRequest, DescribeCloudBaseRunResourceForExtendRequest, ModifyEndUserRequest, DescribeAuthDomainsResponse, CreateHostingDomainRequest, DescribeCloudBaseRunResourceRequest, DescribePostpayFreeQuotasRequest, ModifyDatabaseACLRequest, DestroyStaticStoreRequest, DescribeSmsQuotasRequest, DescribeQuotaDataResponse, CommonServiceAPIRequest, CreateStaticStoreRequest, DeleteCloudBaseProjectLatestVersionResponse, CreateAuthDomainResponse, DescribeEnvsRequest, DescribeExtraPkgBillingInfoRequest, DeleteEndUserRequest, DescribeEnvFreeQuotaRequest, DescribeEndUserLoginStatisticResponse, CreateCloudBaseRunResourceResponse, DestroyStaticStoreResponse, DeleteEndUserResponse, ModifyDatabaseACLResponse, EstablishCloudBaseRunServerResponse, DestroyEnvRequest, DestroyEnvResponse, DescribeEnvsResponse, CreateAuthDomainRequest, CreateHostingDomainResponse, CreateCloudBaseRunServerVersionRequest, CreatePostpayPackageResponse, EstablishCloudBaseRunServerRequest, DescribeDownloadFileRequest, ReinstateEnvResponse, DescribeEnvFreeQuotaResponse, CreateAndDeployCloudBaseProjectResponse, DescribeCloudBaseRunResourceForExtendResponse, CreateAndDeployCloudBaseProjectRequest, DescribeCloudBaseRunVersionRequest, ReinstateEnvRequest, DescribeDatabaseACLRequest, CreateCloudBaseRunServerVersionResponse, DescribeEndUserLoginStatisticRequest, DeleteCloudBaseProjectLatestVersionRequest, DescribeCloudBaseProjectLatestVersionListResponse, DescribeSmsQuotasResponse, ModifyEnvResponse, DescribeDownloadFileResponse, DescribeQuotaDataRequest, CreateStaticStoreResponse, DescribeCloudBaseRunResourceResponse, DescribeCloudBaseRunVersionSnapshotRequest, DescribePostpayFreeQuotasResponse, DescribeEndUsersResponse, DescribeCloudBaseProjectLatestVersionListRequest, DescribeEndUserStatisticResponse, DescribeCloudBaseRunVersionResponse, CreatePostpayPackageRequest, DescribeCloudBaseBuildServiceRequest, CheckTcbServiceRequest, CreateCloudBaseRunResourceRequest, ModifyEndUserResponse, DescribeAuthDomainsRequest, DescribeDatabaseACLResponse, ModifyEnvRequest, DescribeCloudBaseRunVersionSnapshotResponse, DescribePostpayPackageFreeQuotasResponse, DescribeExtraPkgBillingInfoResponse } from "./tcb_models";
 /**
  * tcb client
  * @class
@@ -59,9 +59,9 @@ export declare class Client extends AbstractClient {
      */
     ReinstateEnv(req: ReinstateEnvRequest, cb?: (error: string, rep: ReinstateEnvResponse) => void): Promise<ReinstateEnvResponse>;
     /**
-     * 获取终端用户总量与平台分布情况
+     * 获取数据库权限
      */
-    DescribeEndUserStatistic(req: DescribeEndUserStatisticRequest, cb?: (error: string, rep: DescribeEndUserStatisticResponse) => void): Promise<DescribeEndUserStatisticResponse>;
+    DescribeDatabaseACL(req: DescribeDatabaseACLRequest, cb?: (error: string, rep: DescribeDatabaseACLResponse) => void): Promise<DescribeDatabaseACLResponse>;
     /**
      * 查看容器托管的集群状态扩展使用
      */
@@ -123,9 +123,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyEnv(req: ModifyEnvRequest, cb?: (error: string, rep: ModifyEnvResponse) => void): Promise<ModifyEnvResponse>;
     /**
-     * 获取数据库权限
+     * 获取终端用户总量与平台分布情况
      */
-    DescribeDatabaseACL(req: DescribeDatabaseACLRequest, cb?: (error: string, rep: DescribeDatabaseACLResponse) => void): Promise<DescribeDatabaseACLResponse>;
+    DescribeEndUserStatistic(req: DescribeEndUserStatisticRequest, cb?: (error: string, rep: DescribeEndUserStatisticResponse) => void): Promise<DescribeEndUserStatisticResponse>;
     /**
      * 销毁环境
      */
@@ -138,6 +138,10 @@ export declare class Client extends AbstractClient {
      * 查询版本历史
      */
     DescribeCloudBaseRunVersionSnapshot(req: DescribeCloudBaseRunVersionSnapshotRequest, cb?: (error: string, rep: DescribeCloudBaseRunVersionSnapshotResponse) => void): Promise<DescribeCloudBaseRunVersionSnapshotResponse>;
+    /**
+     * 查询服务版本详情(新)
+     */
+    DescribeCloudBaseRunVersion(req: DescribeCloudBaseRunVersionRequest, cb?: (error: string, rep: DescribeCloudBaseRunVersionResponse) => void): Promise<DescribeCloudBaseRunVersionResponse>;
     /**
      * 销毁静态托管资源，该接口创建异步销毁任务，资源最终状态可从DestroyStaticStore接口查看
      */

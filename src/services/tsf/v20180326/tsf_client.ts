@@ -43,6 +43,7 @@ import {
   TsfPageConfigReleaseLog,
   DescribeGroupBindedGatewaysResponse,
   UnbindApiGroupRequest,
+  TaskRecord,
   CreateNamespaceResponse,
   RedoTaskBatchRequest,
   DescribeTaskLastStatusRequest,
@@ -191,7 +192,7 @@ import {
   Cluster,
   DescribeGroupUseDetailRequest,
   Microservice,
-  StopTaskExecuteResponse,
+  HealthCheckSettings,
   StartGroupResponse,
   DescribePathRewritesRequest,
   ShrinkGroupRequest,
@@ -262,7 +263,7 @@ import {
   DeleteApplicationRequest,
   RevocationPublicConfigRequest,
   DeleteTaskRequest,
-  HealthCheckSettings,
+  StopTaskExecuteResponse,
   VmGroupSimple,
   ApiResponseDescr,
   ApiRequestDescr,
@@ -287,6 +288,7 @@ import {
   ReleasePublicConfigResponse,
   GatewayGroupApiVo,
   DescribeApplicationsRequest,
+  DescribeTaskDetailRequest,
   DescribePublicConfigReleasesRequest,
   DescribeLaneRulesRequest,
   CreateServerlessGroupRequest,
@@ -307,6 +309,7 @@ import {
   ReleaseApiGroupRequest,
   StartGroupRequest,
   DescribeClusterInstancesResponse,
+  DescribeTaskDetailResponse,
   ExpandGroupRequest,
   ModifyLaneRuleResponse,
   TsfPageSimpleGroup,
@@ -597,6 +600,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StopTaskExecuteResponse) => void
   ): Promise<StopTaskExecuteResponse> {
     return this.request("StopTaskExecute", req, cb)
+  }
+
+  /**
+   * 查询任务详情
+   */
+  async DescribeTaskDetail(
+    req: DescribeTaskDetailRequest,
+    cb?: (error: string, rep: DescribeTaskDetailResponse) => void
+  ): Promise<DescribeTaskDetailResponse> {
+    return this.request("DescribeTaskDetail", req, cb)
   }
 
   /**

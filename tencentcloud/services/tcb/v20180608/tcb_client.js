@@ -103,10 +103,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ReinstateEnv", req, cb);
     }
     /**
-     * 获取终端用户总量与平台分布情况
+     * 获取数据库权限
      */
-    async DescribeEndUserStatistic(req, cb) {
-        return this.request("DescribeEndUserStatistic", req, cb);
+    async DescribeDatabaseACL(req, cb) {
+        return this.request("DescribeDatabaseACL", req, cb);
     }
     /**
      * 查看容器托管的集群状态扩展使用
@@ -199,10 +199,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyEnv", req, cb);
     }
     /**
-     * 获取数据库权限
+     * 获取终端用户总量与平台分布情况
      */
-    async DescribeDatabaseACL(req, cb) {
-        return this.request("DescribeDatabaseACL", req, cb);
+    async DescribeEndUserStatistic(req, cb) {
+        return this.request("DescribeEndUserStatistic", req, cb);
     }
     /**
      * 销毁环境
@@ -221,6 +221,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeCloudBaseRunVersionSnapshot(req, cb) {
         return this.request("DescribeCloudBaseRunVersionSnapshot", req, cb);
+    }
+    /**
+     * 查询服务版本详情(新)
+     */
+    async DescribeCloudBaseRunVersion(req, cb) {
+        return this.request("DescribeCloudBaseRunVersion", req, cb);
     }
     /**
      * 销毁静态托管资源，该接口创建异步销毁任务，资源最终状态可从DestroyStaticStore接口查看

@@ -29,6 +29,7 @@ import {
   ModifyClusterRequest,
   DescribeEnvironmentAttributesRequest,
   PartitionsTopic,
+  SendBatchMessagesResponse,
   DescribeBindClustersRequest,
   CreateClusterResponse,
   DescribeTopicsResponse,
@@ -37,6 +38,7 @@ import {
   BindCluster,
   ModifyClusterResponse,
   CreateTopicResponse,
+  SendMessagesRequest,
   DescribeClusterDetailRequest,
   DescribeEnvironmentsResponse,
   DescribeEnvironmentsRequest,
@@ -51,6 +53,8 @@ import {
   Tag,
   DescribeSubscriptionsResponse,
   DescribeProducersResponse,
+  SendBatchMessagesRequest,
+  SendMessagesResponse,
   CreateTopicRequest,
   DescribeTopicsRequest,
   DeleteEnvironmentsResponse,
@@ -127,6 +131,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyTopicResponse) => void
   ): Promise<ModifyTopicResponse> {
     return this.request("ModifyTopic", req, cb)
+  }
+
+  /**
+   * 批量发送消息
+   */
+  async SendBatchMessages(
+    req: SendBatchMessagesRequest,
+    cb?: (error: string, rep: SendBatchMessagesResponse) => void
+  ): Promise<SendBatchMessagesResponse> {
+    return this.request("SendBatchMessages", req, cb)
   }
 
   /**
@@ -247,6 +261,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTopicsResponse) => void
   ): Promise<DescribeTopicsResponse> {
     return this.request("DescribeTopics", req, cb)
+  }
+
+  /**
+   * 发送单条消息
+   */
+  async SendMessages(
+    req: SendMessagesRequest,
+    cb?: (error: string, rep: SendMessagesResponse) => void
+  ): Promise<SendMessagesResponse> {
+    return this.request("SendMessages", req, cb)
   }
 
   /**

@@ -28,6 +28,16 @@ it("scf.v20180416.UpdateAlias", async function () {
     }
 })
 
+it("scf.v20180416.UpdateNamespace", async function () {
+    try {
+       const data = await client.UpdateNamespace({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("scf.v20180416.DeleteFunction", async function () {
     try {
        const data = await client.DeleteFunction({})
@@ -138,9 +148,9 @@ it("scf.v20180416.GetProvisionedConcurrencyConfig", async function () {
     }
 })
 
-it("scf.v20180416.UpdateNamespace", async function () {
+it("scf.v20180416.PublishLayerVersion", async function () {
     try {
-       const data = await client.UpdateNamespace({})
+       const data = await client.PublishLayerVersion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,9 +318,9 @@ it("scf.v20180416.PutReservedConcurrencyConfig", async function () {
     }
 })
 
-it("scf.v20180416.PublishLayerVersion", async function () {
+it("scf.v20180416.GetAccount", async function () {
     try {
-       const data = await client.PublishLayerVersion({})
+       const data = await client.GetAccount({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
