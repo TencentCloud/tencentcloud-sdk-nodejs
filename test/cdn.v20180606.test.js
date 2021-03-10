@@ -478,6 +478,16 @@ it("cdn.v20180606.UpdateImageConfig", async function () {
     }
 })
 
+it("cdn.v20180606.CreateScdnFailedLogTask", async function () {
+    try {
+       const data = await client.CreateScdnFailedLogTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdn.v20180606.DisableClsLogTopic", async function () {
     try {
        const data = await client.DisableClsLogTopic({})

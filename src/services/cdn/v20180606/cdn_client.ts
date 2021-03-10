@@ -46,7 +46,7 @@ import {
   DescribePurgeQuotaRequest,
   Referer,
   StartScdnDomainRequest,
-  StopScdnDomainResponse,
+  PostSize,
   DescribeCdnDataResponse,
   EnableClsLogTopicRequest,
   UpdateImageConfigResponse,
@@ -98,6 +98,7 @@ import {
   BotCookie,
   DescribeCdnIpRequest,
   Ipv6,
+  WafSubRuleStatus,
   ScdnEventLogConditions,
   StatusCodeCache,
   DescribeIpVisitResponse,
@@ -158,7 +159,7 @@ import {
   ManageClsTopicDomainsRequest,
   ListDiagnoseReportRequest,
   ScdnWafConfig,
-  PostSize,
+  CreateScdnFailedLogTaskRequest,
   Cache,
   DiagnoseData,
   DescribeOriginDataRequest,
@@ -213,6 +214,7 @@ import {
   UrlRedirect,
   DownstreamCapping,
   CookieKey,
+  StopScdnDomainResponse,
   VerifyDomainRecordRequest,
   KeyRule,
   CappingRule,
@@ -225,7 +227,7 @@ import {
   RegionMapRelation,
   PurgePathCacheRequest,
   DescribeDiagnoseReportResponse,
-  Quic,
+  CreateScdnFailedLogTaskResponse,
   CdnData,
   PurgeUrlsCacheRequest,
   StartCdnDomainRequest,
@@ -279,6 +281,7 @@ import {
   CacheTagKey,
   StopScdnDomainRequest,
   ScdnTypeData,
+  Quic,
   DescribeDomainsRequest,
   OfflineCache,
   CreateEdgePackTaskRequest,
@@ -563,7 +566,7 @@ export class Client extends AbstractClient {
    * ListScdnLogTasks 用于查询SCDN日志下载任务列表,以及展示下载任务基本信息
    */
   async ListScdnLogTasks(
-    req?: ListScdnLogTasksRequest,
+    req: ListScdnLogTasksRequest,
     cb?: (error: string, rep: ListScdnLogTasksResponse) => void
   ): Promise<ListScdnLogTasksResponse> {
     return this.request("ListScdnLogTasks", req, cb)
@@ -793,6 +796,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateImageConfigResponse) => void
   ): Promise<UpdateImageConfigResponse> {
     return this.request("UpdateImageConfig", req, cb)
+  }
+
+  /**
+   * CreateScdnFailedLogTask 用于重试创建失败的事件日志任务
+   */
+  async CreateScdnFailedLogTask(
+    req: CreateScdnFailedLogTaskRequest,
+    cb?: (error: string, rep: CreateScdnFailedLogTaskResponse) => void
+  ): Promise<CreateScdnFailedLogTaskResponse> {
+    return this.request("CreateScdnFailedLogTask", req, cb)
   }
 
   /**

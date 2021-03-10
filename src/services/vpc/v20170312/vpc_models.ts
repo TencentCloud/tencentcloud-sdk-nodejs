@@ -6924,6 +6924,7 @@ export interface AllocateAddressesRequest {
   /**
       * EIP类型。默认值：EIP。
 <ul style="margin:0"><li>已开通Anycast公网加速白名单的用户，可选值：<ul><li>AnycastEIP：加速IP，可参见 [Anycast 公网加速](https://cloud.tencent.com/document/product/644)</li></ul>注意：仅部分地域支持加速IP。</li></ul>
+<ul style="margin:0"><li>已开通精品IP白名单的用户，可选值：<ul><li>HighQualityEIP：精品IP</li></ul>注意：仅部分地域支持精品IP。</li></ul>
       */
   AddressType?: string
 
@@ -6950,6 +6951,11 @@ AnycastEIP是否用于绑定负载均衡。
    * BGP带宽包唯一ID参数。设定该参数且InternetChargeType为BANDWIDTH_PACKAGE，则表示创建的EIP加入该BGP带宽包并采用带宽包计费
    */
   BandwidthPackageId?: string
+
+  /**
+   * EIP名称，用于申请EIP时用户自定义该EIP的个性化名称，默认值：未命名
+   */
+  AddressName?: string
 }
 
 /**
@@ -8805,12 +8811,12 @@ export interface AllocateAddressesResponse {
   /**
    * 申请到的 EIP 的唯一 ID 列表。
    */
-  AddressSet?: Array<string>
+  AddressSet: Array<string>
 
   /**
    * 异步任务TaskId。可以使用[DescribeTaskResult](https://cloud.tencent.com/document/api/215/36271)接口查询任务状态。
    */
-  TaskId?: string
+  TaskId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -2169,208 +2169,208 @@ export interface GetFunctionResponse {
   /**
    * 函数的最后修改时间
    */
-  ModTime?: string
+  ModTime: string
 
   /**
    * 函数的代码
    */
-  CodeInfo?: string
+  CodeInfo: string
 
   /**
    * 函数的描述信息
    */
-  Description?: string
+  Description: string
 
   /**
    * 函数的触发器列表
    */
-  Triggers?: Array<Trigger>
+  Triggers: Array<Trigger>
 
   /**
    * 函数的入口
    */
-  Handler?: string
+  Handler: string
 
   /**
    * 函数代码大小
    */
-  CodeSize?: number
+  CodeSize: number
 
   /**
    * 函数的超时时间
    */
-  Timeout?: number
+  Timeout: number
 
   /**
    * 函数的版本
    */
-  FunctionVersion?: string
+  FunctionVersion: string
 
   /**
    * 函数的最大可用内存
    */
-  MemorySize?: number
+  MemorySize: number
 
   /**
    * 函数的运行环境
    */
-  Runtime?: string
+  Runtime: string
 
   /**
    * 函数的名称
    */
-  FunctionName?: string
+  FunctionName: string
 
   /**
    * 函数的私有网络
    */
-  VpcConfig?: VpcConfig
+  VpcConfig: VpcConfig
 
   /**
    * 是否使用GPU
    */
-  UseGpu?: string
+  UseGpu: string
 
   /**
    * 函数的环境变量
    */
-  Environment?: Environment
+  Environment: Environment
 
   /**
    * 代码是否正确
    */
-  CodeResult?: string
+  CodeResult: string
 
   /**
    * 代码错误信息
    */
-  CodeError?: string
+  CodeError: string
 
   /**
    * 代码错误码
    */
-  ErrNo?: number
+  ErrNo: number
 
   /**
    * 函数的命名空间
    */
-  Namespace?: string
+  Namespace: string
 
   /**
    * 函数绑定的角色
    */
-  Role?: string
+  Role: string
 
   /**
    * 是否自动安装依赖
    */
-  InstallDependency?: string
+  InstallDependency: string
 
   /**
    * 函数状态，状态值及流转[参考说明](https://cloud.tencent.com/document/product/583/47175)
    */
-  Status?: string
+  Status: string
 
   /**
    * 状态描述
    */
-  StatusDesc?: string
+  StatusDesc: string
 
   /**
    * 日志投递到的Cls日志集
    */
-  ClsLogsetId?: string
+  ClsLogsetId: string
 
   /**
    * 日志投递到的Cls Topic
    */
-  ClsTopicId?: string
+  ClsTopicId: string
 
   /**
    * 函数ID
    */
-  FunctionId?: string
+  FunctionId: string
 
   /**
    * 函数的标签列表
    */
-  Tags?: Array<Tag>
+  Tags: Array<Tag>
 
   /**
    * EipConfig配置
    */
-  EipConfig?: EipOutConfig
+  EipConfig: EipOutConfig
 
   /**
    * 域名信息
    */
-  AccessInfo?: AccessInfo
+  AccessInfo: AccessInfo
 
   /**
    * 函数类型，取值为HTTP或者Event
    */
-  Type?: string
+  Type: string
 
   /**
    * 是否启用L5
    */
-  L5Enable?: string
+  L5Enable: string
 
   /**
    * 函数关联的Layer版本信息
    */
-  Layers?: Array<LayerVersionInfo>
+  Layers: Array<LayerVersionInfo>
 
   /**
    * 函数关联的死信队列信息
    */
-  DeadLetterConfig?: DeadLetterConfig
+  DeadLetterConfig: DeadLetterConfig
 
   /**
    * 函数创建回见
    */
-  AddTime?: string
+  AddTime: string
 
   /**
       * 公网访问配置
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  PublicNetConfig?: PublicNetConfigOut
+  PublicNetConfig: PublicNetConfigOut
 
   /**
       * 是否启用Ons
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  OnsEnable?: string
+  OnsEnable: string
 
   /**
       * 文件系统配置参数，用于云函数挂载文件系统
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  CfsConfig?: CfsConfig
+  CfsConfig: CfsConfig
 
   /**
       * 函数的计费状态，状态值[参考此处](https://cloud.tencent.com/document/product/583/47175#.E5.87.BD.E6.95.B0.E8.AE.A1.E8.B4.B9.E7.8A.B6.E6.80.81)
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  AvailableStatus?: string
+  AvailableStatus: string
 
   /**
       * 函数版本
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Qualifier?: string
+  Qualifier: string
 
   /**
    * 函数初始化超时时间
    */
-  InitTimeout?: number
+  InitTimeout: number
 
   /**
       * 函数状态失败原因
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  StatusReasons?: Array<StatusReason>
+  StatusReasons: Array<StatusReason>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -149,6 +149,12 @@ DefenceMode映射如下：
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Conditions: Array<ScdnEventLogConditions>
+
+  /**
+      * mainland或overseas
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Area: string
 }
 
 /**
@@ -772,18 +778,20 @@ export interface StartScdnDomainRequest {
 }
 
 /**
- * StopScdnDomain返回参数结构体
+ * POST请求上传文件流式传输最大限制
  */
-export interface StopScdnDomainResponse {
+export interface PostSize {
   /**
-   * 关闭结果，Success表示成功
-   */
-  Result?: string
+      * 是调整POST请求限制，平台默认为32MB。
+关闭：off，
+开启：on。
+      */
+  Switch: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 最大限制，取值在1MB和200MB之间。
    */
-  RequestId?: string
+  MaxSize?: number
 }
 
 /**
@@ -888,6 +896,12 @@ export interface ScdnDomain {
    * Bot 状态默认为‘/’，取值 close | open
    */
   Bot: string
+
+  /**
+      * 域名加速区域，取值global | mainland |  overseas
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Area: string
 }
 
 /**
@@ -2274,6 +2288,21 @@ export interface Ipv6 {
 }
 
 /**
+ * 门神子规则开关状态
+ */
+export interface WafSubRuleStatus {
+  /**
+   * 子规则状态，on|off
+   */
+  Switch: string
+
+  /**
+   * 规则id列表
+   */
+  SubIds: Array<number>
+}
+
+/**
  * SCDN 事件日志查询条件
  */
 export interface ScdnEventLogConditions {
@@ -3279,7 +3308,7 @@ export interface CreateScdnLogTaskResponse {
       * 创建结果, 
 "0" -> 创建成功
       */
-  Result?: string
+  Result: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3916,6 +3945,16 @@ DefenceMode 映射如下：
    * 查询条件
    */
   Conditions?: Array<ScdnEventLogConditions>
+
+  /**
+   * 来源产品 cdn ecdn
+   */
+  Source?: string
+
+  /**
+   * 地域：mainland 或 overseas
+   */
+  Area?: string
 }
 
 /**
@@ -4648,23 +4687,33 @@ export interface ScdnWafConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Rules?: Array<ScdnWafRule>
+
+  /**
+      * waf规则等级，可取100|200|300
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Level?: number
+
+  /**
+      * waf子规则开关
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubRuleSwitch?: Array<WafSubRuleStatus>
 }
 
 /**
- * POST请求上传文件流式传输最大限制
+ * CreateScdnFailedLogTask请求参数结构体
  */
-export interface PostSize {
+export interface CreateScdnFailedLogTaskRequest {
   /**
-      * 是调整POST请求限制，平台默认为32MB。
-关闭：off，
-开启：on。
-      */
-  Switch: string
+   * 重试失败任务的taskID
+   */
+  TaskId: string
 
   /**
-   * 最大限制，取值在1MB和200MB之间。
+   * 地域：mainland或overseas
    */
-  MaxSize?: number
+  Area?: string
 }
 
 /**
@@ -4796,7 +4845,17 @@ off：关闭
 /**
  * ListScdnLogTasks请求参数结构体
  */
-export type ListScdnLogTasksRequest = null
+export interface ListScdnLogTasksRequest {
+  /**
+   * 产品来源 cdn/ecdn
+   */
+  Source?: string
+
+  /**
+   * 地域：mainland 或 overseas 为空表示查询所有地域
+   */
+  Area?: string
+}
 
 /**
  * SearchClsLog返回参数结构体
@@ -6062,12 +6121,12 @@ export interface ListScdnLogTasksResponse {
   /**
    * 日志下载任务详情
    */
-  TaskList?: Array<ScdnLogTaskDetail>
+  TaskList: Array<ScdnLogTaskDetail>
 
   /**
    * 查询到的下载任务的总数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6195,6 +6254,21 @@ export interface CookieKey {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Value?: string
+}
+
+/**
+ * StopScdnDomain返回参数结构体
+ */
+export interface StopScdnDomainResponse {
+  /**
+   * 关闭结果，Success表示成功
+   */
+  Result?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6489,13 +6563,19 @@ export interface DescribeDiagnoseReportResponse {
 }
 
 /**
- * Quic配置项
+ * CreateScdnFailedLogTask返回参数结构体
  */
-export interface Quic {
+export interface CreateScdnFailedLogTaskResponse {
   /**
-   * 是否启动Quic配置
+      * 创建结果, 
+"0" -> 创建成功
+      */
+  Result: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Switch: string
+  RequestId?: string
 }
 
 /**
@@ -7782,6 +7862,16 @@ export interface ScdnTypeData {
    * 攻击值
    */
   Value: number
+}
+
+/**
+ * Quic配置项
+ */
+export interface Quic {
+  /**
+   * 是否启动Quic配置
+   */
+  Switch: string
 }
 
 /**

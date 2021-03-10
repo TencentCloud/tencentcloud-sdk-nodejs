@@ -508,9 +508,9 @@ it("cam.v20190116.DetachGroupPolicy", async function () {
     }
 })
 
-it("cam.v20190116.ListWeChatWorkSubAccounts", async function () {
+it("cam.v20190116.DescribeSubAccounts", async function () {
     try {
-       const data = await client.ListWeChatWorkSubAccounts({})
+       const data = await client.DescribeSubAccounts({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -561,6 +561,16 @@ it("cam.v20190116.AttachUserPolicy", async function () {
 it("cam.v20190116.ListEntitiesForPolicy", async function () {
     try {
        const data = await client.ListEntitiesForPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cam.v20190116.ListWeChatWorkSubAccounts", async function () {
+    try {
+       const data = await client.ListWeChatWorkSubAccounts({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

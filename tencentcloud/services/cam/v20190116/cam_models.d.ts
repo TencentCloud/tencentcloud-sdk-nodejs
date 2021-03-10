@@ -1,4 +1,34 @@
 /**
+ * 子用户信息
+ */
+export interface SubAccountUser {
+    /**
+      * 子用户用户 ID
+      */
+    Uin: number;
+    /**
+      * 子用户用户名
+      */
+    Name: string;
+    /**
+      * 子用户 UID
+      */
+    Uid: number;
+    /**
+      * 子用户备注
+      */
+    Remark: string;
+    /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime: string;
+    /**
+      * 用户类型(1:主账号;2:子用户;3:企业微信子用户;4:协作者;5:消息接收人)
+      */
+    UserType: number;
+}
+/**
  * GetUser返回参数结构体
  */
 export interface GetUserResponse {
@@ -347,6 +377,15 @@ export interface PolicyVersionItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     IsDefaultVersion: number;
+}
+/**
+ * DescribeSubAccounts请求参数结构体
+ */
+export interface DescribeSubAccountsRequest {
+    /**
+      * 子用户UIN列表，最多支持50个UIN
+      */
+    FilterSubAccountUin: Array<number>;
 }
 /**
  * DeleteUserPermissionsBoundary请求参数结构体
@@ -2115,6 +2154,19 @@ export interface AddUserResponse {
       * 子用户 UID
       */
     Uid?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeSubAccounts返回参数结构体
+ */
+export interface DescribeSubAccountsResponse {
+    /**
+      * 子用户列表
+      */
+    SubAccounts: Array<SubAccountUser>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

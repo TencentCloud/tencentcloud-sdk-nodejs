@@ -323,10 +323,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DetachGroupPolicy", req, cb);
     }
     /**
-     * 获取企业微信子用户列表
+     * 通过子用户UIN列表查询子用户
      */
-    async ListWeChatWorkSubAccounts(req, cb) {
-        return this.request("ListWeChatWorkSubAccounts", req, cb);
+    async DescribeSubAccounts(req, cb) {
+        return this.request("DescribeSubAccounts", req, cb);
     }
     /**
      * 从用户组删除用户
@@ -357,6 +357,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ListEntitiesForPolicy(req, cb) {
         return this.request("ListEntitiesForPolicy", req, cb);
+    }
+    /**
+     * 获取企业微信子用户列表
+     */
+    async ListWeChatWorkSubAccounts(req, cb) {
+        return this.request("ListWeChatWorkSubAccounts", req, cb);
     }
     /**
      * 本接口（AttachGroupPolicy）可用于绑定策略到用户组。

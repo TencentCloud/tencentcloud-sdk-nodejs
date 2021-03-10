@@ -292,7 +292,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyConnectionConfig", req, cb);
     }
     /**
-     * 查询Redis实例列表信息
+     * 查询Redis实例列表信息。该接口已废弃。
      */
     async DescribeCommonDBInstances(req, cb) {
         return this.request("DescribeCommonDBInstances", req, cb);

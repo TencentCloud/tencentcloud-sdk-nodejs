@@ -278,7 +278,7 @@ class Client extends abstract_client_1.AbstractClient {
 2. 单次创建实例最大支持 100 个，实例时长最大支持 36 个月；
 3. 支持创建 MySQL 5.5、MySQL 5.6 、MySQL 5.7 和 MySQL 8.0 版本；
 4. 支持创建主实例、灾备实例和只读实例；
-5. 当入参指定 Port，ParamList 或 Password 时，该实例会进行初始化操作；
+5. 当入参指定 Port，ParamList 或 Password 时，该实例会进行初始化操作（暂不支持基础版实例）；
      */
     async CreateDBInstanceHour(req, cb) {
         return this.request("CreateDBInstanceHour", req, cb);
@@ -354,7 +354,7 @@ class Client extends abstract_client_1.AbstractClient {
 2. 单次创建实例最大支持 100 个，实例时长最大支持 36 个月；
 3. 支持创建 MySQL 5.5 、 MySQL 5.6 、 MySQL 5.7 、 MySQL 8.0 版本；
 4. 支持创建主实例、只读实例、灾备实例；
-5. 当入参指定 Port，ParamList 或 Password 时，该实例会进行初始化操作；
+5. 当入参指定 Port，ParamList 或 Password 时，该实例会进行初始化操作（不支持基础版实例）；
      */
     async CreateDBInstance(req, cb) {
         return this.request("CreateDBInstance", req, cb);

@@ -184,7 +184,7 @@ export declare class Client extends AbstractClient {
      */
     ModifyConnectionConfig(req: ModifyConnectionConfigRequest, cb?: (error: string, rep: ModifyConnectionConfigResponse) => void): Promise<ModifyConnectionConfigResponse>;
     /**
-     * 查询Redis实例列表信息
+     * 查询Redis实例列表信息。该接口已废弃。
      */
     DescribeCommonDBInstances(req: DescribeCommonDBInstancesRequest, cb?: (error: string, rep: DescribeCommonDBInstancesResponse) => void): Promise<DescribeCommonDBInstancesResponse>;
     /**

@@ -342,6 +342,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateImageConfig", req, cb);
     }
     /**
+     * CreateScdnFailedLogTask 用于重试创建失败的事件日志任务
+     */
+    async CreateScdnFailedLogTask(req, cb) {
+        return this.request("CreateScdnFailedLogTask", req, cb);
+    }
+    /**
      * DisableClsLogTopic 用于停止日志主题投递。注意：停止后，所有绑定该日志主题域名的日志将不再继续投递至该主题，已经投递的日志将会继续保留。生效时间约为 5~15 分钟。
 
      */

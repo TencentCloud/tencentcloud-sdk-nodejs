@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  SubAccountUser,
   GetUserResponse,
   ListAccessKeysRequest,
   SetMfaFlagResponse,
@@ -42,6 +43,7 @@ import {
   GetGroupRequest,
   DeleteRoleResponse,
   PolicyVersionItem,
+  DescribeSubAccountsRequest,
   DeleteUserPermissionsBoundaryRequest,
   ListSAMLProvidersRequest,
   ListGroupsRequest,
@@ -144,6 +146,7 @@ import {
   ListUsersForGroupResponse,
   PolicyVersionDetail,
   AddUserResponse,
+  DescribeSubAccountsResponse,
   ListEntitiesForPolicyResponse,
   AddUserToGroupResponse,
   AttachUserPolicyResponse,
@@ -660,13 +663,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取企业微信子用户列表
+   * 通过子用户UIN列表查询子用户
    */
-  async ListWeChatWorkSubAccounts(
-    req: ListWeChatWorkSubAccountsRequest,
-    cb?: (error: string, rep: ListWeChatWorkSubAccountsResponse) => void
-  ): Promise<ListWeChatWorkSubAccountsResponse> {
-    return this.request("ListWeChatWorkSubAccounts", req, cb)
+  async DescribeSubAccounts(
+    req: DescribeSubAccountsRequest,
+    cb?: (error: string, rep: DescribeSubAccountsResponse) => void
+  ): Promise<DescribeSubAccountsResponse> {
+    return this.request("DescribeSubAccounts", req, cb)
   }
 
   /**
@@ -717,6 +720,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListEntitiesForPolicyResponse) => void
   ): Promise<ListEntitiesForPolicyResponse> {
     return this.request("ListEntitiesForPolicy", req, cb)
+  }
+
+  /**
+   * 获取企业微信子用户列表
+   */
+  async ListWeChatWorkSubAccounts(
+    req: ListWeChatWorkSubAccountsRequest,
+    cb?: (error: string, rep: ListWeChatWorkSubAccountsResponse) => void
+  ): Promise<ListWeChatWorkSubAccountsResponse> {
+    return this.request("ListWeChatWorkSubAccounts", req, cb)
   }
 
   /**

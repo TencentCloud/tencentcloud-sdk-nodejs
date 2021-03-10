@@ -986,7 +986,7 @@ export interface Migration {
       */
     BackupFiles: Array<string>;
     /**
-      * 迁移任务状态，
+      * 迁移任务状态，2-创建完成，7-全量导入中，8-等待增量，9-导入成功，10-导入失败，12-增量导入中
       */
     Status: number;
     /**
@@ -1355,17 +1355,17 @@ export interface DBCreateInfo {
       */
     DBName: string;
     /**
-      * 字符集。可选值包括：Chinese_PRC_CI_AS, Chinese_PRC_CS_AS, Chinese_PRC_BIN, Chinese_Taiwan_Stroke_CI_AS, SQL_Latin1_General_CP1_CI_AS, SQL_Latin1_General_CP1_CS_AS。不填默认为Chinese_PRC_CI_AS
+      * 字符集。可通过接口DescribeDBCharsets查到支持的字符集，不填默认为Chinese_PRC_CI_AS。
       */
-    Charset: string;
+    Charset?: string;
     /**
       * 数据库账号权限信息
       */
-    Accounts: Array<AccountPrivilege>;
+    Accounts?: Array<AccountPrivilege>;
     /**
       * 备注
       */
-    Remark: string;
+    Remark?: string;
 }
 /**
  * 数据库账号权限信息。创建数据库时设置
