@@ -62,7 +62,7 @@ export interface DescribeModelDefinitionResponse {
   /**
    * 产品数据模板
    */
-  Model?: ProductModelDefinition
+  Model: ProductModelDefinition
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -341,6 +341,12 @@ export interface ProductModelDefinition {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CategoryModel: string
+
+  /**
+      * 产品的连接类型的模型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NetTypeModel: string
 }
 
 /**
