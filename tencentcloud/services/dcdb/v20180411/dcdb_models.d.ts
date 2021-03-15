@@ -1299,6 +1299,23 @@ export interface OpenDBExtranetAccessResponse {
     RequestId?: string;
 }
 /**
+ * KillSession请求参数结构体
+ */
+export interface KillSessionRequest {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
+    /**
+      * 会话ID列表
+      */
+    SessionId: Array<number>;
+    /**
+      * 分片ID
+      */
+    ShardId?: string;
+}
+/**
  * DescribeDatabaseObjects返回参数结构体
  */
 export interface DescribeDatabaseObjectsResponse {
@@ -1592,6 +1609,19 @@ export interface ModifyAccountDescriptionRequest {
       * 新的账号备注，长度 0~256。
       */
     Description: string;
+}
+/**
+ * KillSession返回参数结构体
+ */
+export interface KillSessionResponse {
+    /**
+      * 任务ID
+      */
+    TaskId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeProjects请求参数结构体

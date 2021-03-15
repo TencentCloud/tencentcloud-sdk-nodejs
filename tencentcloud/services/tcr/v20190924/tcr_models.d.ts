@@ -12,6 +12,19 @@ export interface DuplicateImagePersonalRequest {
     DestImage: string;
 }
 /**
+ * ManageExternalEndpoint请求参数结构体
+ */
+export interface ManageExternalEndpointRequest {
+    /**
+      * 实例Id
+      */
+    RegistryId: string;
+    /**
+      * 操作（Create/Delete）
+      */
+    Operation: string;
+}
+/**
  * DescribeImagePersonal返回参数结构体
  */
 export interface DescribeImagePersonalResponse {
@@ -2313,6 +2326,19 @@ export interface CheckInstanceNameResponse {
  * ModifyRepositoryAccessPersonal返回参数结构体
  */
 export interface ModifyRepositoryAccessPersonalResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ManageExternalEndpoint返回参数结构体
+ */
+export interface ManageExternalEndpointResponse {
+    /**
+      * 实例Id
+      */
+    RegistryId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

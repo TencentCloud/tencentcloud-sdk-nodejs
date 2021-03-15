@@ -34,6 +34,7 @@ import {
   DescribePolicyGroupInfoRequest,
   DeleteServiceDiscoveryResponse,
   DescribePolicyGroupInfoCallback,
+  AlarmHistoryMetric,
   CreateAlarmPolicyRequest,
   DescribeAlarmEventsResponse,
   DescribeProductEventListDimensions,

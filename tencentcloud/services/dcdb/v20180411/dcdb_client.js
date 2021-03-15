@@ -183,6 +183,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAccount", req, cb);
     }
     /**
+     * 本接口（KillSession）用于杀死指定会话。
+     */
+    async KillSession(req, cb) {
+        return this.request("KillSession", req, cb);
+    }
+    /**
      * 本接口（ModifyDBInstanceSecurityGroups）用于修改云数据库安全组
      */
     async ModifyDBInstanceSecurityGroups(req, cb) {

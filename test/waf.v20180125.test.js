@@ -1,0 +1,101 @@
+
+const expect = require("chai").expect
+const tencentcloud = require("../../tencentcloud-sdk-nodejs")
+const client = new tencentcloud.waf.v20180125.Client({
+  credential: {
+    secretId: process.env.secretId,
+    secretKey: process.env.secretKey,
+  },
+  region: "ap-shanghai",
+  profile: {
+    signMethod: "TC3-HMAC-SHA256",
+    httpProfile: {
+      reqMethod: "POST",
+      reqTimeout: 30,
+      endpoint: "cvm.ap-shanghai.tencentcloudapi.com",
+    },
+  },
+})
+describe("waf.v20180125.test.js", function () {
+
+it("waf.v20180125.DeleteAttackDownloadRecord", async function () {
+    try {
+       const data = await client.DeleteAttackDownloadRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifyCustomRuleStatus", async function () {
+    try {
+       const data = await client.ModifyCustomRuleStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeCustomRules", async function () {
+    try {
+       const data = await client.DescribeCustomRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DeleteDownloadRecord", async function () {
+    try {
+       const data = await client.DeleteDownloadRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.AddCustomRule", async function () {
+    try {
+       const data = await client.AddCustomRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DeleteSession", async function () {
+    try {
+       const data = await client.DeleteSession({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeUserClbWafRegions", async function () {
+    try {
+       const data = await client.DescribeUserClbWafRegions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.CreateAttackDownloadTask", async function () {
+    try {
+       const data = await client.CreateAttackDownloadTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+})

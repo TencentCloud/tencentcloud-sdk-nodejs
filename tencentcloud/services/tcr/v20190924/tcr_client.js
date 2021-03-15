@@ -304,6 +304,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateRepository", req, cb);
     }
     /**
+     * 管理实例公网访问
+     */
+    async ManageExternalEndpoint(req, cb) {
+        return this.request("ManageExternalEndpoint", req, cb);
+    }
+    /**
      * 查询个人收藏仓库
      */
     async DescribeFavorRepositoryPersonal(req, cb) {

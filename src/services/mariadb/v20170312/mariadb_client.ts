@@ -80,6 +80,7 @@ import {
   CopyAccountPrivilegesRequest,
   SecurityGroup,
   OpenDBExtranetAccessResponse,
+  KillSessionRequest,
   ModifyDBInstanceNameRequest,
   ModifyBackupTimeRequest,
   CreateTmpInstancesResponse,
@@ -97,6 +98,7 @@ import {
   ModifyDBInstanceNameResponse,
   CloseDBExtranetAccessResponse,
   ModifyAccountDescriptionRequest,
+  KillSessionResponse,
   DescribeDBPerformanceDetailsRequest,
   DescribeBackupTimeResponse,
   SlowLogData,
@@ -176,6 +178,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeOrdersResponse) => void
   ): Promise<DescribeOrdersResponse> {
     return this.request("DescribeOrders", req, cb)
+  }
+
+  /**
+   * 本接口（KillSession）用于杀死指定会话。
+   */
+  async KillSession(
+    req: KillSessionRequest,
+    cb?: (error: string, rep: KillSessionResponse) => void
+  ): Promise<KillSessionResponse> {
+    return this.request("KillSession", req, cb)
   }
 
   /**

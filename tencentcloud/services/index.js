@@ -306,6 +306,8 @@ var vod_1 = require("./vod");
 Object.defineProperty(exports, "vod", { enumerable: true, get: function () { return vod_1.vod; } });
 var vpc_1 = require("./vpc");
 Object.defineProperty(exports, "vpc", { enumerable: true, get: function () { return vpc_1.vpc; } });
+var waf_1 = require("./waf");
+Object.defineProperty(exports, "waf", { enumerable: true, get: function () { return waf_1.waf; } });
 var wss_1 = require("./wss");
 Object.defineProperty(exports, "wss", { enumerable: true, get: function () { return wss_1.wss; } });
 var youmall_1 = require("./youmall");

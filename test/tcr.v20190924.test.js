@@ -478,6 +478,16 @@ it("tcr.v20190924.CreateRepository", async function () {
     }
 })
 
+it("tcr.v20190924.ManageExternalEndpoint", async function () {
+    try {
+       const data = await client.ManageExternalEndpoint({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.DescribeFavorRepositoryPersonal", async function () {
     try {
        const data = await client.DescribeFavorRepositoryPersonal({})

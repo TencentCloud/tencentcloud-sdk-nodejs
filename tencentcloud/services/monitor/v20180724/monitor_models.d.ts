@@ -345,6 +345,31 @@ export interface DescribePolicyGroupInfoCallback {
     VerifyCode: string;
 }
 /**
+ * 告警历史的指标信息
+ */
+export interface AlarmHistoryMetric {
+    /**
+      * 云产品监控类型查询数据使用的命名空间
+      */
+    QceNamespace: string;
+    /**
+      * 指标名
+      */
+    MetricName: string;
+    /**
+      * 统计周期
+      */
+    Period: number;
+    /**
+      * 触发告警的数值
+      */
+    Value: string;
+    /**
+      * 指标的展示名
+      */
+    Description: string;
+}
+/**
  * CreateAlarmPolicy请求参数结构体
  */
 export interface CreateAlarmPolicyRequest {
@@ -3047,6 +3072,11 @@ export interface AlarmHistory {
       * 策略是否存在 0=不存在 1=存在
       */
     PolicyExists: number;
+    /**
+      * 指标信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MetricsInfo: Array<AlarmHistoryMetric>;
 }
 /**
  * 策略类型

@@ -151,6 +151,7 @@ export { vm } from "./vm";
 export { vms } from "./vms";
 export { vod } from "./vod";
 export { vpc } from "./vpc";
+export { waf } from "./waf";
 export { wss } from "./wss";
 export { youmall } from "./youmall";
 export { yunjing } from "./yunjing";

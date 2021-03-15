@@ -268,6 +268,16 @@ it("dcdb.v20180411.CreateAccount", async function () {
     }
 })
 
+it("dcdb.v20180411.KillSession", async function () {
+    try {
+       const data = await client.KillSession({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dcdb.v20180411.ModifyDBInstanceSecurityGroups", async function () {
     try {
        const data = await client.ModifyDBInstanceSecurityGroups({})

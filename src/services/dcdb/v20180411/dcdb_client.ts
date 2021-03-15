@@ -77,6 +77,7 @@ import {
   SecurityGroup,
   DescribeDatabaseTableRequest,
   OpenDBExtranetAccessResponse,
+  KillSessionRequest,
   DescribeDatabaseObjectsResponse,
   TableColumn,
   SecurityGroupBound,
@@ -94,6 +95,7 @@ import {
   DescribeDBSyncModeRequest,
   CloseDBExtranetAccessResponse,
   ModifyAccountDescriptionRequest,
+  KillSessionResponse,
   DescribeProjectsRequest,
   DescribeDatabasesResponse,
   DescribeOrdersRequest,
@@ -395,6 +397,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAccountResponse) => void
   ): Promise<CreateAccountResponse> {
     return this.request("CreateAccount", req, cb)
+  }
+
+  /**
+   * 本接口（KillSession）用于杀死指定会话。
+   */
+  async KillSession(
+    req: KillSessionRequest,
+    cb?: (error: string, rep: KillSessionResponse) => void
+  ): Promise<KillSessionResponse> {
+    return this.request("KillSession", req, cb)
   }
 
   /**

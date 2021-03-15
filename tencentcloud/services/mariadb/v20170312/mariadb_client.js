@@ -47,6 +47,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOrders", req, cb);
     }
     /**
+     * 本接口（KillSession）用于杀死指定会话。
+     */
+    async KillSession(req, cb) {
+        return this.request("KillSession", req, cb);
+    }
+    /**
      * 本接口（ModifyBackupTime）用于设置云数据库实例的备份时间。后台系统将根据此配置定期进行实例备份。
      */
     async ModifyBackupTime(req, cb) {

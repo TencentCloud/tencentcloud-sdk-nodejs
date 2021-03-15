@@ -48,6 +48,16 @@ it("mariadb.v20170312.DescribeOrders", async function () {
     }
 })
 
+it("mariadb.v20170312.KillSession", async function () {
+    try {
+       const data = await client.KillSession({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mariadb.v20170312.ModifyBackupTime", async function () {
     try {
        const data = await client.ModifyBackupTime({})

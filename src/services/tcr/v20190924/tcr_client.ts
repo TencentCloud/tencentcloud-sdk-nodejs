@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DuplicateImagePersonalRequest,
+  ManageExternalEndpointRequest,
   DescribeImagePersonalResponse,
   DescribeUserQuotaPersonalRequest,
   WebhookTarget,
@@ -161,6 +162,7 @@ import {
   DescribeFavorRepositoryPersonalResponse,
   CheckInstanceNameResponse,
   ModifyRepositoryAccessPersonalResponse,
+  ManageExternalEndpointResponse,
   ModifyApplicationTriggerPersonalRequest,
   CreateInstanceTokenRequest,
   ModifyUserPasswordPersonalRequest,
@@ -664,6 +666,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateRepositoryResponse) => void
   ): Promise<CreateRepositoryResponse> {
     return this.request("CreateRepository", req, cb)
+  }
+
+  /**
+   * 管理实例公网访问
+   */
+  async ManageExternalEndpoint(
+    req: ManageExternalEndpointRequest,
+    cb?: (error: string, rep: ManageExternalEndpointResponse) => void
+  ): Promise<ManageExternalEndpointResponse> {
+    return this.request("ManageExternalEndpoint", req, cb)
   }
 
   /**
