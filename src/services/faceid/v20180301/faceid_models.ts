@@ -238,6 +238,11 @@ export interface BankCardVerificationRequest {
 目前默认：0 身份证，其他证件类型需求可以联系小助手faceid001确认。
       */
   CertType?: number
+
+  /**
+   * 敏感数据加密信息。对传入信息（姓名、身份证号、银行卡号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+   */
+  Encryption?: Encryption
 }
 
 /**
@@ -458,13 +463,13 @@ export interface DetectAuthResponse {
   /**
    * 用于发起核身流程的URL，仅微信H5场景使用。
    */
-  Url?: string
+  Url: string
 
   /**
       * 一次核身流程的标识，有效时间为7,200秒；
 完成核身后，可用该标识获取验证结果信息。
       */
-  BizToken?: string
+  BizToken: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -590,12 +595,12 @@ export interface BankCard4EVerificationResponse {
 '-5': '手机号码不合法'
 '-18': '验证中心服务繁忙'
       */
-  Result?: string
+  Result: string
 
   /**
    * 业务结果描述。
    */
-  Description?: string
+  Description: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1076,6 +1081,11 @@ export interface DetectAuthRequest {
 Base64编码后的图片数据大小不超过3M，仅支持jpg、png格式。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
       */
   ImageBase64?: string
+
+  /**
+   * 敏感数据加密信息。对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+   */
+  Encryption?: Encryption
 }
 
 /**
@@ -1146,12 +1156,12 @@ export interface BankCardVerificationResponse {
 '-4': '银行卡号码有误'
 '-17': '验证中心服务繁忙'
       */
-  Result?: string
+  Result: string
 
   /**
    * 业务结果描述。
    */
-  Description?: string
+  Description: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1215,6 +1225,11 @@ export interface BankCard4EVerificationRequest {
 目前默认为0：身份证，其他证件类型暂不支持。
       */
   CertType?: number
+
+  /**
+   * 敏感数据加密信息。对传入信息（姓名、身份证号、手机号、银行卡号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+   */
+  Encryption?: Encryption
 }
 
 /**

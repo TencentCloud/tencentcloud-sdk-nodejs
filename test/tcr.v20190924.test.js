@@ -608,6 +608,16 @@ it("tcr.v20190924.CreateUserPersonal", async function () {
     }
 })
 
+it("tcr.v20190924.DescribeExternalEndpointStatus", async function () {
+    try {
+       const data = await client.DescribeExternalEndpointStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.DeleteImageLifecycleGlobalPersonal", async function () {
     try {
        const data = await client.DeleteImageLifecycleGlobalPersonal({})

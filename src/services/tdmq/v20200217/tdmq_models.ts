@@ -498,23 +498,23 @@ export interface CreateTopicResponse {
   /**
    * 环境（命名空间）名称。
    */
-  EnvironmentId?: string
+  EnvironmentId: string
 
   /**
    * 主题名。
    */
-  TopicName?: string
+  TopicName: string
 
   /**
    * 0：非分区topic，无分区；非0：具体分区topic的分区数。
    */
-  Partitions?: number
+  Partitions: number
 
   /**
       * 备注，128字符以内。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Remark?: string
+  Remark: string
 
   /**
       * 0： 普通消息；
@@ -525,7 +525,7 @@ export interface CreateTopicResponse {
 5 ：事务消息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TopicType?: number
+  TopicType: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1030,7 +1030,7 @@ export interface CreateTopicRequest {
   EnvironmentId: string
 
   /**
-   * 主题名，不支持中字以及除了短线和下划线外的特殊字符且不超过32个字符。
+   * 主题名，不支持中字以及除了短线和下划线外的特殊字符且不超过64个字符。
    */
   TopicName: string
 

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DeleteProductRequest, DescribeDeviceDataHistoryRequest, CreateForwardRuleRequest, SetForwardAuthResponse, SetForwardAuthRequest, DescribeBatchsRequest, DescribeCategoryResponse, DescribeModelDefinitionResponse, CreateBatchRequest, ImportModelDefinitionRequest, DescribeDeviceActionHistoryResponse, DescribeDeviceCommLogResponse, DeleteDeviceRequest, DeleteProductResponse, DescribeProductsRequest, DescribeDeviceEventHistoryResponse, DescribeDeviceActionHistoryRequest, ImportModelDefinitionResponse, DescribeDevicesResponse, ModifyProductResponse, DescribeBatchResponse, ModifyProductRequest, ModifyModelDefinitionRequest, DescribeBatchsResponse, DeleteForwardRuleRequest, DescribeDeviceEventHistoryRequest, DescribeDeviceRequest, DescribeForwardRuleResponse, DescribeBatchRequest, ModifyForwardRuleRequest, DescribeCategoryRequest, DescribeDeviceCommLogRequest, CreateProductResponse, DescribeDeviceDataHistoryResponse, DescribeDevicesRequest, DescribeModelDefinitionRequest, ModifyForwardRuleResponse, CheckForwardAuthResponse, DescribeProductResponse, DescribeDeviceDataResponse, ModifyDeviceResponse, DescribeForwardRuleRequest, DeleteForwardRuleResponse, DescribeProductRequest, DescribeProductsResponse, CheckForwardAuthRequest, CreateProductRequest, DescribeDeviceDataRequest, DeleteDeviceResponse, ModifyModelDefinitionResponse, CreateForwardRuleResponse, ModifyDeviceRequest, DescribeDeviceResponse, CreateBatchResponse } from "./iotvideo_models";
+import { DeleteProductRequest, DescribeDeviceDataHistoryRequest, DescribeCloudStorageDateRequest, CreateCloudStorageRequest, SetForwardAuthResponse, SetForwardAuthRequest, DescribeBatchsRequest, DescribeCategoryResponse, DescribeModelDefinitionResponse, CreateBatchRequest, ImportModelDefinitionRequest, DescribeCloudStorageTimeResponse, DescribeDeviceCommLogResponse, DeleteDeviceRequest, DeleteProductResponse, ModifyForwardRuleResponse, DescribeProductsRequest, DescribeDeviceEventHistoryResponse, DescribeBatchResponse, ModifyProductRequest, DescribeDeviceActionHistoryRequest, ImportModelDefinitionResponse, DescribeDevicesResponse, ModifyProductResponse, CreateForwardRuleRequest, DescribeCloudStorageThumbnailRequest, ModifyModelDefinitionRequest, DescribeBatchsResponse, DescribeCloudStorageResponse, DeleteForwardRuleRequest, DescribeDeviceEventHistoryRequest, DescribeDeviceRequest, DescribeForwardRuleResponse, DeleteDeviceResponse, DescribeBatchRequest, ModifyForwardRuleRequest, DescribeCategoryRequest, DescribeDeviceCommLogRequest, DescribeCloudStorageRequest, CreateProductResponse, DescribeCloudStorageEventsResponse, DescribeDevicesRequest, DescribeDeviceDataHistoryResponse, DescribeCloudStorageDateResponse, DescribeCloudStorageThumbnailResponse, CheckForwardAuthResponse, DescribeProductResponse, DescribeDeviceDataResponse, DescribeForwardRuleRequest, ModifyDeviceResponse, DeleteForwardRuleResponse, DescribeProductRequest, DescribeProductsResponse, CheckForwardAuthRequest, CreateProductRequest, DescribeDeviceDataRequest, CreateBatchResponse, ModifyModelDefinitionResponse, DescribeDeviceActionHistoryResponse, ModifyDeviceRequest, CreateCloudStorageResponse, DescribeModelDefinitionRequest, DescribeDeviceResponse, DescribeCloudStorageEventsRequest, CreateForwardRuleResponse, DescribeCloudStorageTimeRequest } from "./iotvideo_models";
 /**
  * iotvideo client
  * @class
@@ -8,9 +8,9 @@ import { DeleteProductRequest, DescribeDeviceDataHistoryRequest, CreateForwardRu
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 删除转发规则
+     * 获取产品列表
      */
-    DeleteForwardRule(req: DeleteForwardRuleRequest, cb?: (error: string, rep: DeleteForwardRuleResponse) => void): Promise<DeleteForwardRuleResponse>;
+    DescribeProducts(req: DescribeProductsRequest, cb?: (error: string, rep: DescribeProductsResponse) => void): Promise<DescribeProductsResponse>;
     /**
      * 获取设备在指定时间范围内的通讯日志
      */
@@ -28,6 +28,10 @@ export declare class Client extends AbstractClient {
      */
     ModifyProduct(req: ModifyProductRequest, cb?: (error: string, rep: ModifyProductResponse) => void): Promise<ModifyProductResponse>;
     /**
+     * 获取具有云存的日期
+     */
+    DescribeCloudStorageDate(req: DescribeCloudStorageDateRequest, cb?: (error: string, rep: DescribeCloudStorageDateResponse) => void): Promise<DescribeCloudStorageDateResponse>;
+    /**
      * 查看设备详情
      */
     DescribeDevice(req: DescribeDeviceRequest, cb?: (error: string, rep: DescribeDeviceResponse) => void): Promise<DescribeDeviceResponse>;
@@ -44,6 +48,10 @@ export declare class Client extends AbstractClient {
      */
     ModifyForwardRule(req: ModifyForwardRuleRequest, cb?: (error: string, rep: ModifyForwardRuleResponse) => void): Promise<ModifyForwardRuleResponse>;
     /**
+     * 获取设备云存服务详情
+     */
+    DescribeCloudStorage(req: DescribeCloudStorageRequest, cb?: (error: string, rep: DescribeCloudStorageResponse) => void): Promise<DescribeCloudStorageResponse>;
+    /**
      * 获取批次列表
      */
     DescribeBatchs(req: DescribeBatchsRequest, cb?: (error: string, rep: DescribeBatchsResponse) => void): Promise<DescribeBatchsResponse>;
@@ -56,9 +64,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeDeviceActionHistory(req: DescribeDeviceActionHistoryRequest, cb?: (error: string, rep: DescribeDeviceActionHistoryResponse) => void): Promise<DescribeDeviceActionHistoryResponse>;
     /**
-     * 获取产品列表
+     * 删除转发规则
      */
-    DescribeProducts(req: DescribeProductsRequest, cb?: (error: string, rep: DescribeProductsResponse) => void): Promise<DescribeProductsResponse>;
+    DeleteForwardRule(req: DeleteForwardRuleRequest, cb?: (error: string, rep: DeleteForwardRuleResponse) => void): Promise<DeleteForwardRuleResponse>;
     /**
      * 创建批次
      */
@@ -92,9 +100,21 @@ export declare class Client extends AbstractClient {
      */
     DescribeDeviceEventHistory(req: DescribeDeviceEventHistoryRequest, cb?: (error: string, rep: DescribeDeviceEventHistoryResponse) => void): Promise<DescribeDeviceEventHistoryResponse>;
     /**
+     * 开通云存服务
+     */
+    CreateCloudStorage(req: CreateCloudStorageRequest, cb?: (error: string, rep: CreateCloudStorageResponse) => void): Promise<CreateCloudStorageResponse>;
+    /**
      * 导入其它产品的数据模板，覆盖现有数据模板的物模型和产品分类信息
      */
     ImportModelDefinition(req: ImportModelDefinitionRequest, cb?: (error: string, rep: ImportModelDefinitionResponse) => void): Promise<ImportModelDefinitionResponse>;
+    /**
+     * 拉取云存事件列表
+     */
+    DescribeCloudStorageEvents(req: DescribeCloudStorageEventsRequest, cb?: (error: string, rep: DescribeCloudStorageEventsResponse) => void): Promise<DescribeCloudStorageEventsResponse>;
+    /**
+     * 获取某一天云存时间轴
+     */
+    DescribeCloudStorageTime(req: DescribeCloudStorageTimeRequest, cb?: (error: string, rep: DescribeCloudStorageTimeResponse) => void): Promise<DescribeCloudStorageTimeResponse>;
     /**
      * 获取产品转发规则
      */
@@ -108,11 +128,15 @@ export declare class Client extends AbstractClient {
      */
     ModifyModelDefinition(req: ModifyModelDefinitionRequest, cb?: (error: string, rep: ModifyModelDefinitionResponse) => void): Promise<ModifyModelDefinitionResponse>;
     /**
-     * 查询产品配置的数据模板信息
+     * 拉取云存事件缩略图
      */
-    DescribeModelDefinition(req: DescribeModelDefinitionRequest, cb?: (error: string, rep: DescribeModelDefinitionResponse) => void): Promise<DescribeModelDefinitionResponse>;
+    DescribeCloudStorageThumbnail(req: DescribeCloudStorageThumbnailRequest, cb?: (error: string, rep: DescribeCloudStorageThumbnailResponse) => void): Promise<DescribeCloudStorageThumbnailResponse>;
     /**
      * 获取设备列表
      */
     DescribeDevices(req: DescribeDevicesRequest, cb?: (error: string, rep: DescribeDevicesResponse) => void): Promise<DescribeDevicesResponse>;
+    /**
+     * 查询产品配置的数据模板信息
+     */
+    DescribeModelDefinition(req: DescribeModelDefinitionRequest, cb?: (error: string, rep: DescribeModelDefinitionResponse) => void): Promise<DescribeModelDefinitionResponse>;
 }

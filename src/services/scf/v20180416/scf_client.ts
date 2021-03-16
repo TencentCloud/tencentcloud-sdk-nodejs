@@ -60,6 +60,7 @@ import {
   UpdateFunctionCodeRequest,
   UpdateFunctionConfigurationRequest,
   DeleteReservedConcurrencyConfigRequest,
+  GetFunctionEventInvokeConfigResponse,
   ListTriggersResponse,
   TerminateAsyncEventRequest,
   ListLayersRequest,
@@ -93,27 +94,31 @@ import {
   InvokeRequest,
   CreateAliasRequest,
   VersionMatch,
+  UpdateFunctionEventInvokeConfigResponse,
   PutReservedConcurrencyConfigRequest,
   ListLayerVersionsRequest,
   CreateTriggerResponse,
   PublishLayerVersionRequest,
   CreateNamespaceRequest,
+  UpdateFunctionEventInvokeConfigRequest,
   DeleteLayerVersionRequest,
   Filter,
   Variable,
   GetFunctionResponse,
+  GetFunctionEventInvokeConfigRequest,
   Code,
   PutTotalConcurrencyConfigRequest,
   UpdateNamespaceRequest,
   GetLayerVersionResponse,
   PutReservedConcurrencyConfigResponse,
   FunctionLog,
+  RetryConfig,
   GetFunctionAddressResponse,
   CfsInsInfo,
   LimitsInfo,
   ListLayersResponse,
   FunctionVersion,
-  Function,
+  AsyncTriggerConfig,
   DeadLetterConfig,
   ListVersionByFunctionRequest,
   ListFunctionsResponse,
@@ -121,6 +126,7 @@ import {
   CreateFunctionResponse,
   GetReservedConcurrencyConfigRequest,
   PutProvisionedConcurrencyConfigRequest,
+  Function,
   NamespaceUsage,
   ListAliasesRequest,
   EipOutConfig,
@@ -194,6 +200,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListTriggersResponse) => void
   ): Promise<ListTriggersResponse> {
     return this.request("ListTriggers", req, cb)
+  }
+
+  /**
+   * 该接口根据传入的参数查询函数的版本。
+   */
+  async ListVersionByFunction(
+    req: ListVersionByFunctionRequest,
+    cb?: (error: string, rep: ListVersionByFunctionResponse) => void
+  ): Promise<ListVersionByFunctionResponse> {
+    return this.request("ListVersionByFunction", req, cb)
   }
 
   /**
@@ -374,13 +390,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口根据传入的参数查询函数的版本。
+   * 更新函数的异步重试配置，包括重试次数和消息保留时间
    */
-  async ListVersionByFunction(
-    req: ListVersionByFunctionRequest,
-    cb?: (error: string, rep: ListVersionByFunctionResponse) => void
-  ): Promise<ListVersionByFunctionResponse> {
-    return this.request("ListVersionByFunction", req, cb)
+  async UpdateFunctionEventInvokeConfig(
+    req: UpdateFunctionEventInvokeConfigRequest,
+    cb?: (error: string, rep: UpdateFunctionEventInvokeConfigResponse) => void
+  ): Promise<UpdateFunctionEventInvokeConfigResponse> {
+    return this.request("UpdateFunctionEventInvokeConfig", req, cb)
+  }
+
+  /**
+   * 获取函数异步重试配置，包括重试次数和消息保留时间
+   */
+  async GetFunctionEventInvokeConfig(
+    req: GetFunctionEventInvokeConfigRequest,
+    cb?: (error: string, rep: GetFunctionEventInvokeConfigResponse) => void
+  ): Promise<GetFunctionEventInvokeConfigResponse> {
+    return this.request("GetFunctionEventInvokeConfig", req, cb)
   }
 
   /**

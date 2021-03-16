@@ -437,10 +437,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddLoginWhiteList", req, cb);
     }
     /**
-     * 本接口 (ExportNonlocalLoginPlaces) 用于导出异地登录事件记录CSV文件。
+     * 本接口 (DescribeProcessStatistics) 用于获取进程统计列表数据。
      */
-    async ExportNonlocalLoginPlaces(req, cb) {
-        return this.request("ExportNonlocalLoginPlaces", req, cb);
+    async DescribeProcessStatistics(req, cb) {
+        return this.request("DescribeProcessStatistics", req, cb);
     }
     /**
      * 查看恶意文件详情
@@ -533,11 +533,23 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeLoginWhiteList", req, cb);
     }
     /**
+     * 根据基线策略id更新策略信息
+     */
+    async UpdateBaselineStrategy(req, cb) {
+        return this.request("UpdateBaselineStrategy", req, cb);
+    }
+    /**
      * 本接口 (DescribeVulScanResult) 用于获取漏洞检测结果。
 
      */
     async DescribeVulScanResult(req, cb) {
         return this.request("DescribeVulScanResult", req, cb);
+    }
+    /**
+     * 入侵检测，获取恶意请求列表
+     */
+    async DescribeRiskDnsList(req, cb) {
+        return this.request("DescribeRiskDnsList", req, cb);
     }
     /**
      * 本接口 (DescribeHistoryAccounts) 用于获取帐号变更历史列表数据。
@@ -546,10 +558,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeHistoryAccounts", req, cb);
     }
     /**
-     * 本接口 (DescribeProcessStatistics) 用于获取进程统计列表数据。
+     * 本接口 (ExportNonlocalLoginPlaces) 用于导出异地登录事件记录CSV文件。
      */
-    async DescribeProcessStatistics(req, cb) {
-        return this.request("DescribeProcessStatistics", req, cb);
+    async ExportNonlocalLoginPlaces(req, cb) {
+        return this.request("ExportNonlocalLoginPlaces", req, cb);
     }
     /**
      * 本接口 (DescribeWeeklyReportBruteAttacks) 用于获取专业周报密码破解数据。

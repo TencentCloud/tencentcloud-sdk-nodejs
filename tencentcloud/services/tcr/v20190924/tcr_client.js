@@ -382,6 +382,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateUserPersonal", req, cb);
     }
     /**
+     * 查询实例公网访问入口状态
+     */
+    async DescribeExternalEndpointStatus(req, cb) {
+        return this.request("DescribeExternalEndpointStatus", req, cb);
+    }
+    /**
      * 用于删除个人版全局镜像版本自动清理策略
      */
     async DeleteImageLifecycleGlobalPersonal(req, cb) {

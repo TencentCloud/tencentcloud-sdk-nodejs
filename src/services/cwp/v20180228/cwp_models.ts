@@ -177,12 +177,12 @@ export interface DescribeWeeklyReportBruteAttacksResponse {
   /**
    * 专业周报密码破解数组。
    */
-  WeeklyReportBruteAttacks?: Array<WeeklyReportBruteAttack>
+  WeeklyReportBruteAttacks: Array<WeeklyReportBruteAttack>
 
   /**
    * 记录总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -229,6 +229,17 @@ export interface DescribeTagsRequest {
    * 机器所属地域。如：ap-guangzhou，ap-shanghai
    */
   MachineRegion?: string
+
+  /**
+      * 过滤条件。
+<li>Keywords - String - 是否必填：否 - 查询关键字(机器名称/机器IP </li>
+<li>Status - String - 是否必填：否 - 客户端在线状态（OFFLINE: 离线 | ONLINE: 在线 | UNINSTALLED：未安装 | SHUTDOWN 已关机）</li>
+<li>Version - String  是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版）</li>
+<li>Risk - String 是否必填: 否 - 风险主机( yes ) </li>
+<li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )
+每个过滤条件只支持一个值，暂不支持多个值“或”关系查询
+      */
+  Filters?: Array<Filters>
 }
 
 /**
@@ -1104,6 +1115,16 @@ export interface NonLocalLoginPlace {
 }
 
 /**
+ * DescribeRiskDnsList返回参数结构体
+ */
+export interface DescribeRiskDnsListResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeExportMachines请求参数结构体
  */
 export interface DescribeExportMachinesRequest {
@@ -1763,7 +1784,7 @@ export interface DescribeTagsResponse {
   /**
    * 列表信息
    */
-  List?: Array<Tag>
+  List: Array<Tag>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1772,53 +1793,38 @@ export interface DescribeTagsResponse {
 }
 
 /**
- * 端口列表
+ * DescribeRiskDnsList请求参数结构体
  */
-export interface OpenPort {
+export interface DescribeRiskDnsListRequest {
   /**
-   * 唯一ID。
+   * 需要返回的数量，默认为10，最大值为100
    */
-  Id: number
+  Limit?: number
 
   /**
-   * 云镜客户端唯一UUID。
+   * 偏移量，默认为0。
    */
-  Uuid: string
+  Offset?: number
 
   /**
-   * 开放端口号。
-   */
-  Port: number
+      * 过滤条件。
+<li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
+<li>Url - String - 是否必填：否 - Url筛选</li>
+<li>Status - String - 是否必填：否 - 状态筛选0:待处理；2:信任；3:不信任</li>
+<li>MergeBeginTime - String - 是否必填：否 - 最近访问开始时间</li>
+<li>MergeEndTime - String - 是否必填：否 - 最近访问结束时间</li>
+      */
+  Filters?: Array<Filter>
 
   /**
-   * 主机IP。
+   * 排序方式
    */
-  MachineIp: string
+  Order?: string
 
   /**
-   * 主机名。
+   * 排序字段
    */
-  MachineName: string
-
-  /**
-   * 端口对应进程名。
-   */
-  ProcessName: string
-
-  /**
-   * 端口对应进程Pid。
-   */
-  Pid: number
-
-  /**
-   * 记录创建时间。
-   */
-  CreateTime: string
-
-  /**
-   * 记录更新时间。
-   */
-  ModifyTime: string
+  By?: string
 }
 
 /**
@@ -2887,6 +2893,16 @@ export interface ExportMalwaresResponse {
 }
 
 /**
+ * UpdateBaselineStrategy返回参数结构体
+ */
+export interface UpdateBaselineStrategyResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UntrustMalwares返回参数结构体
  */
 export interface UntrustMalwaresResponse {
@@ -2977,12 +2993,12 @@ export interface EditBashRuleRequest {
   Id?: number
 
   /**
-   * 客户端ID(IsGlobal为1时，Uuid或Hostip必填一个)
+   * 客户端ID(IsGlobal为0时，Uuid或Hostip必填一个)
    */
   Uuid?: string
 
   /**
-   * 主机IP(IsGlobal为1时，Uuid或Hostip必填一个)
+   * 主机IP(IsGlobal为0时，Uuid或Hostip必填一个)
    */
   Hostip?: string
 
@@ -3401,42 +3417,42 @@ export interface DescribeVulInfoResponse {
   /**
    * 漏洞种类ID。
    */
-  VulId?: number
+  VulId: number
 
   /**
    * 漏洞名称。
    */
-  VulName?: string
+  VulName: string
 
   /**
    * 漏洞等级。
    */
-  VulLevel?: string
+  VulLevel: string
 
   /**
    * 漏洞类型。
    */
-  VulType?: string
+  VulType: string
 
   /**
    * 漏洞描述。
    */
-  Description?: string
+  Description: string
 
   /**
    * 修复方案。
    */
-  RepairPlan?: string
+  RepairPlan: string
 
   /**
    * 漏洞CVE。
    */
-  CveId?: string
+  CveId: string
 
   /**
    * 参考链接。
    */
-  Reference?: string
+  Reference: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3553,6 +3569,56 @@ export interface DeleteTagsResponse {
  * DescribeSecurityEventsCnt请求参数结构体
  */
 export type DescribeSecurityEventsCntRequest = null
+
+/**
+ * UpdateBaselineStrategy请求参数结构体
+ */
+export interface UpdateBaselineStrategyRequest {
+  /**
+   * 策略id
+   */
+  StrategyId: number
+
+  /**
+   * 策略名称
+   */
+  StrategyName: string
+
+  /**
+   * 检测周期
+   */
+  ScanCycle: number
+
+  /**
+   * 定期检测时间，该时间下发扫描
+   */
+  ScanAt: string
+
+  /**
+   * 该策略下选择的基线id数组
+   */
+  CategoryIds: Array<string>
+
+  /**
+   * 扫描范围是否全部服务器, 1:是  0:否, 为1则为全部专业版主机
+   */
+  IsGlobal: number
+
+  /**
+   * 云主机类型：cvm：虚拟主机，bms：裸金属，ecm：边缘计算主机
+   */
+  MachineType: string
+
+  /**
+   * 主机地域
+   */
+  RegionCode: string
+
+  /**
+   * 主机id数组
+   */
+  Quuids: Array<string>
+}
 
 /**
  * DeleteBruteAttacks请求参数结构体
@@ -3685,12 +3751,12 @@ export interface DescribeWeeklyReportNonlocalLoginPlacesResponse {
   /**
    * 专业周报异地登录数据。
    */
-  WeeklyReportNonlocalLoginPlaces?: Array<WeeklyReportNonlocalLoginPlace>
+  WeeklyReportNonlocalLoginPlaces: Array<WeeklyReportNonlocalLoginPlace>
 
   /**
    * 记录总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3879,37 +3945,37 @@ export interface DescribeWeeklyReportInfoResponse {
   /**
    * 账号所属公司或个人名称。
    */
-  CompanyName?: string
+  CompanyName: string
 
   /**
    * 机器总数。
    */
-  MachineNum?: number
+  MachineNum: number
 
   /**
    * 云镜客户端在线数。
    */
-  OnlineMachineNum?: number
+  OnlineMachineNum: number
 
   /**
    * 云镜客户端离线数。
    */
-  OfflineMachineNum?: number
+  OfflineMachineNum: number
 
   /**
    * 开通云镜专业版数量。
    */
-  ProVersionMachineNum?: number
+  ProVersionMachineNum: number
 
   /**
    * 周报开始时间。
    */
-  BeginDate?: string
+  BeginDate: string
 
   /**
    * 周报结束时间。
    */
-  EndDate?: string
+  EndDate: string
 
   /**
       * 安全等级。
@@ -3917,32 +3983,32 @@ export interface DescribeWeeklyReportInfoResponse {
 <li>MIDDLE：中</li>
 <li>LOW：低</li>
       */
-  Level?: string
+  Level: string
 
   /**
    * 木马记录数。
    */
-  MalwareNum?: number
+  MalwareNum: number
 
   /**
    * 异地登录数。
    */
-  NonlocalLoginNum?: number
+  NonlocalLoginNum: number
 
   /**
    * 密码破解成功数。
    */
-  BruteAttackSuccessNum?: number
+  BruteAttackSuccessNum: number
 
   /**
    * 漏洞数。
    */
-  VulNum?: number
+  VulNum: number
 
   /**
    * 导出文件下载地址。
    */
-  DownloadUrl?: string
+  DownloadUrl: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3998,6 +4064,56 @@ export interface DeleteBashRulesRequest {
    * ID数组，最大100条。
    */
   Ids: Array<number>
+}
+
+/**
+ * 端口列表
+ */
+export interface OpenPort {
+  /**
+   * 唯一ID。
+   */
+  Id: number
+
+  /**
+   * 云镜客户端唯一UUID。
+   */
+  Uuid: string
+
+  /**
+   * 开放端口号。
+   */
+  Port: number
+
+  /**
+   * 主机IP。
+   */
+  MachineIp: string
+
+  /**
+   * 主机名。
+   */
+  MachineName: string
+
+  /**
+   * 端口对应进程名。
+   */
+  ProcessName: string
+
+  /**
+   * 端口对应进程Pid。
+   */
+  Pid: number
+
+  /**
+   * 记录创建时间。
+   */
+  CreateTime: string
+
+  /**
+   * 记录更新时间。
+   */
+  ModifyTime: string
 }
 
 /**
@@ -4500,12 +4616,12 @@ export interface DescribeWeeklyReportMalwaresResponse {
   /**
    * 专业周报木马数据。
    */
-  WeeklyReportMalwares?: Array<WeeklyReportMalware>
+  WeeklyReportMalwares: Array<WeeklyReportMalware>
 
   /**
    * 记录总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4955,12 +5071,12 @@ export interface DescribeWeeklyReportVulsResponse {
   /**
    * 专业周报漏洞数据数组。
    */
-  WeeklyReportVuls?: Array<WeeklyReportVul>
+  WeeklyReportVuls: Array<WeeklyReportVul>
 
   /**
    * 记录总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5820,12 +5936,12 @@ export interface DescribeWeeklyReportsResponse {
   /**
    * 专业周报列表数组。
    */
-  WeeklyReports?: Array<WeeklyReport>
+  WeeklyReports: Array<WeeklyReport>
 
   /**
    * 记录总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

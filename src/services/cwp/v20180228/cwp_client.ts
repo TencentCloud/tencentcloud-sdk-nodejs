@@ -63,6 +63,7 @@ import {
   DescribeScanMalwareScheduleRequest,
   DescribeAgentVulsRequest,
   NonLocalLoginPlace,
+  DescribeRiskDnsListResponse,
   DescribeExportMachinesRequest,
   CreateProcessTaskResponse,
   SecurityDynamic,
@@ -91,7 +92,7 @@ import {
   OpenProVersionPrepaidRequest,
   ModifyLoginWhiteListResponse,
   DescribeTagsResponse,
-  OpenPort,
+  DescribeRiskDnsListRequest,
   DescribeProVersionInfoRequest,
   CreateProcessTaskRequest,
   DeleteMaliciousRequestsResponse,
@@ -139,6 +140,7 @@ import {
   DescribeNonlocalLoginPlacesResponse,
   DeleteReverseShellRulesResponse,
   ExportMalwaresResponse,
+  UpdateBaselineStrategyResponse,
   UntrustMalwaresResponse,
   DeletePrivilegeRulesResponse,
   CreateOpenPortTaskResponse,
@@ -171,6 +173,7 @@ import {
   DescribeProVersionInfoResponse,
   DeleteTagsResponse,
   DescribeSecurityEventsCntRequest,
+  UpdateBaselineStrategyRequest,
   DeleteBruteAttacksRequest,
   DescribeWeeklyReportVulsRequest,
   AddLoginWhiteListResponse,
@@ -189,6 +192,7 @@ import {
   DeleteReverseShellEventsResponse,
   DeletePrivilegeEventsRequest,
   DeleteBashRulesRequest,
+  OpenPort,
   CloseProVersionResponse,
   DeleteAttackLogsRequest,
   DescribeOpenPortsResponse,
@@ -975,13 +979,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (ExportNonlocalLoginPlaces) 用于导出异地登录事件记录CSV文件。
+   * 本接口 (DescribeProcessStatistics) 用于获取进程统计列表数据。
    */
-  async ExportNonlocalLoginPlaces(
-    req: ExportNonlocalLoginPlacesRequest,
-    cb?: (error: string, rep: ExportNonlocalLoginPlacesResponse) => void
-  ): Promise<ExportNonlocalLoginPlacesResponse> {
-    return this.request("ExportNonlocalLoginPlaces", req, cb)
+  async DescribeProcessStatistics(
+    req: DescribeProcessStatisticsRequest,
+    cb?: (error: string, rep: DescribeProcessStatisticsResponse) => void
+  ): Promise<DescribeProcessStatisticsResponse> {
+    return this.request("DescribeProcessStatistics", req, cb)
   }
 
   /**
@@ -1135,6 +1139,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 根据基线策略id更新策略信息
+   */
+  async UpdateBaselineStrategy(
+    req: UpdateBaselineStrategyRequest,
+    cb?: (error: string, rep: UpdateBaselineStrategyResponse) => void
+  ): Promise<UpdateBaselineStrategyResponse> {
+    return this.request("UpdateBaselineStrategy", req, cb)
+  }
+
+  /**
      * 本接口 (DescribeVulScanResult) 用于获取漏洞检测结果。
 
      */
@@ -1143,6 +1157,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeVulScanResultResponse) => void
   ): Promise<DescribeVulScanResultResponse> {
     return this.request("DescribeVulScanResult", req, cb)
+  }
+
+  /**
+   * 入侵检测，获取恶意请求列表
+   */
+  async DescribeRiskDnsList(
+    req: DescribeRiskDnsListRequest,
+    cb?: (error: string, rep: DescribeRiskDnsListResponse) => void
+  ): Promise<DescribeRiskDnsListResponse> {
+    return this.request("DescribeRiskDnsList", req, cb)
   }
 
   /**
@@ -1156,13 +1180,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (DescribeProcessStatistics) 用于获取进程统计列表数据。
+   * 本接口 (ExportNonlocalLoginPlaces) 用于导出异地登录事件记录CSV文件。
    */
-  async DescribeProcessStatistics(
-    req: DescribeProcessStatisticsRequest,
-    cb?: (error: string, rep: DescribeProcessStatisticsResponse) => void
-  ): Promise<DescribeProcessStatisticsResponse> {
-    return this.request("DescribeProcessStatistics", req, cb)
+  async ExportNonlocalLoginPlaces(
+    req: ExportNonlocalLoginPlacesRequest,
+    cb?: (error: string, rep: ExportNonlocalLoginPlacesResponse) => void
+  ): Promise<ExportNonlocalLoginPlacesResponse> {
+    return this.request("ExportNonlocalLoginPlaces", req, cb)
   }
 
   /**

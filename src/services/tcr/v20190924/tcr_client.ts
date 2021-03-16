@@ -55,7 +55,7 @@ import {
   NamespaceInfo,
   RenewInstanceRequest,
   Limit,
-  DescribeReplicationInstancesRequest,
+  DescribeExternalEndpointStatusRequest,
   DeleteRepositoryResponse,
   DeleteImagePersonalResponse,
   RegistryCondition,
@@ -78,6 +78,7 @@ import {
   DescribeRepositoryOwnerPersonalResponse,
   VpcPrivateDomainStatus,
   ModifyWebhookTriggerResponse,
+  DescribeReplicationInstancesRequest,
   CreateImageLifecyclePersonalResponse,
   RepoIsExistResp,
   TcrImageInfo,
@@ -135,6 +136,7 @@ import {
   BatchDeleteRepositoryPersonalRequest,
   TriggerInvokeCondition,
   ValidateRepositoryExistPersonalResponse,
+  DescribeExternalEndpointStatusResponse,
   NamespaceIsExistsResp,
   DescribeInstancesRequest,
   CreateInternalEndpointDnsRequest,
@@ -796,6 +798,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateUserPersonalResponse) => void
   ): Promise<CreateUserPersonalResponse> {
     return this.request("CreateUserPersonal", req, cb)
+  }
+
+  /**
+   * 查询实例公网访问入口状态
+   */
+  async DescribeExternalEndpointStatus(
+    req: DescribeExternalEndpointStatusRequest,
+    cb?: (error: string, rep: DescribeExternalEndpointStatusResponse) => void
+  ): Promise<DescribeExternalEndpointStatusResponse> {
+    return this.request("DescribeExternalEndpointStatus", req, cb)
   }
 
   /**

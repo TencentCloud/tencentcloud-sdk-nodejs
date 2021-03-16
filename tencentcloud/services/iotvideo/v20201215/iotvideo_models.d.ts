@@ -41,84 +41,47 @@ export interface DescribeDeviceDataHistoryRequest {
     Context?: string;
 }
 /**
- * 设备事件的搜索结果项
+ * DescribeCloudStorageDate请求参数结构体
  */
-export interface EventHistoryItem {
-    /**
-      * 事件的时间戳
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TimeStamp: number;
-    /**
-      * 事件的产品ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ProductId: string;
-    /**
-      * 事件的设备名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DeviceName: string;
-    /**
-      * 事件的标识符ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    EventId: string;
-    /**
-      * 事件的类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Type: string;
-    /**
-      * 事件的数据
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Data: string;
-}
-/**
- * CreateForwardRule请求参数结构体
- */
-export interface CreateForwardRuleRequest {
+export interface DescribeCloudStorageDateRequest {
     /**
       * 产品ID
       */
-    ProductID: string;
+    ProductId: string;
     /**
-      * 消息类型
+      * 设备名称
       */
-    MsgType: number;
+    DeviceName: string;
+}
+/**
+ * 云存时间轴接口返回数据
+ */
+export interface CloudStorageTimeData {
     /**
-      * 控制台Skey
+      * 云存时间轴信息列表
       */
-    Skey: string;
+    TimeList: Array<CloudStorageTimeInfo>;
     /**
-      * 队列区域
+      * 播放地址
       */
-    QueueRegion: string;
+    VideoURL: string;
+}
+/**
+ * CreateCloudStorage请求参数结构体
+ */
+export interface CreateCloudStorageRequest {
     /**
-      * 队列类型
+      * 产品ID
       */
-    QueueType: number;
+    ProductId: string;
     /**
-      * 临时密钥
+      * 设备名称
       */
-    Consecretid?: string;
+    DeviceName: string;
     /**
-      * 实例ID
+      * 云存套餐ID
       */
-    InstanceId?: string;
-    /**
-      * 实例名称
-      */
-    InstanceName?: string;
-    /**
-      * 队列或主题ID
-      */
-    QueueID?: string;
-    /**
-      * 队列或主题名称
-      */
-    QueueName?: string;
+    PackageId: string;
 }
 /**
  * SetForwardAuth返回参数结构体
@@ -253,28 +216,13 @@ export interface ImportModelDefinitionRequest {
     ModelSchema: string;
 }
 /**
- * DescribeDeviceActionHistory返回参数结构体
+ * DescribeCloudStorageTime返回参数结构体
  */
-export interface DescribeDeviceActionHistoryResponse {
+export interface DescribeCloudStorageTimeResponse {
     /**
-      * 总条数
+      * 接口返回数据
       */
-    TotalCounts: number;
-    /**
-      * 动作历史
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ActionHistories: Array<ActionHistory>;
-    /**
-      * 用于标识查询结果的上下文，翻页用。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Context: string;
-    /**
-      * 搜索结果是否已经结束。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Listover: boolean;
+    Data: CloudStorageTimeData;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -347,6 +295,41 @@ export interface DescribeDeviceCommLogResponse {
     RequestId?: string;
 }
 /**
+ * 设备事件的搜索结果项
+ */
+export interface EventHistoryItem {
+    /**
+      * 事件的时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TimeStamp: number;
+    /**
+      * 事件的产品ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProductId: string;
+    /**
+      * 事件的设备名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeviceName: string;
+    /**
+      * 事件的标识符ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EventId: string;
+    /**
+      * 事件的类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Type: string;
+    /**
+      * 事件的数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Data: string;
+}
+/**
  * DeleteDevice请求参数结构体
  */
 export interface DeleteDeviceRequest {
@@ -363,6 +346,35 @@ export interface DeleteDeviceRequest {
  * DeleteProduct返回参数结构体
  */
 export interface DeleteProductResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyForwardRule返回参数结构体
+ */
+export interface ModifyForwardRuleResponse {
+    /**
+      * 腾讯云账号
+      */
+    Endpoint: string;
+    /**
+      * 产品ID
+      */
+    ProductID: string;
+    /**
+      * 结果
+      */
+    Result: number;
+    /**
+      * 错误信息
+      */
+    ErrMsg: string;
+    /**
+      * 队列类型
+      */
+    QueueType: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -409,6 +421,36 @@ export interface DescribeDeviceEventHistoryResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeBatch返回参数结构体
+ */
+export interface DescribeBatchResponse {
+    /**
+      * 批次详情
+      */
+    Data: VideoBatch;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyProduct请求参数结构体
+ */
+export interface ModifyProductRequest {
+    /**
+      * 产品id
+      */
+    ProductId: string;
+    /**
+      * 修改的产品名称
+      */
+    ProductName?: string;
+    /**
+      * 修改的产品描述
+      */
+    ProductDescription?: string;
 }
 /**
  * DescribeDeviceActionHistory请求参数结构体
@@ -519,34 +561,66 @@ export interface ProductTemplate {
     IconUrlGrid: string;
 }
 /**
- * DescribeBatch返回参数结构体
+ * CreateForwardRule请求参数结构体
  */
-export interface DescribeBatchResponse {
+export interface CreateForwardRuleRequest {
     /**
-      * 批次详情
+      * 产品ID
       */
-    Data: VideoBatch;
+    ProductID: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 消息类型
       */
-    RequestId?: string;
+    MsgType: number;
+    /**
+      * 控制台Skey
+      */
+    Skey: string;
+    /**
+      * 队列区域
+      */
+    QueueRegion: string;
+    /**
+      * 队列类型
+      */
+    QueueType: number;
+    /**
+      * 临时密钥
+      */
+    Consecretid?: string;
+    /**
+      * 实例ID
+      */
+    InstanceId?: string;
+    /**
+      * 实例名称
+      */
+    InstanceName?: string;
+    /**
+      * 队列或主题ID
+      */
+    QueueID?: string;
+    /**
+      * 队列或主题名称
+      */
+    QueueName?: string;
 }
 /**
- * ModifyProduct请求参数结构体
+ * DescribeCloudStorageThumbnail请求参数结构体
  */
-export interface ModifyProductRequest {
+export interface DescribeCloudStorageThumbnailRequest {
     /**
-      * 产品id
+      * 产品ID
       */
     ProductId: string;
     /**
-      * 修改的产品名称
+      * 设备名称
       */
-    ProductName?: string;
+    DeviceName: string;
     /**
-      * 修改的产品描述
+      * 缩略图文件名
       */
-    ProductDescription?: string;
+    Thumbnail: string;
 }
 /**
  * ModifyModelDefinition请求参数结构体
@@ -573,6 +647,31 @@ export interface DescribeBatchsResponse {
       * 批次列表详情
       */
     Data: Array<VideoBatch>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeCloudStorage返回参数结构体
+ */
+export interface DescribeCloudStorageResponse {
+    /**
+      * 云存开启状态，1为开启，0为未开启或已过期
+      */
+    Status: number;
+    /**
+      * 云存类型，1为全时云存，2为事件云存
+      */
+    Type: number;
+    /**
+      * 云存套餐过期时间
+      */
+    ExpireTime: number;
+    /**
+      * 云存回看时长
+      */
+    ShiftDuration: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -707,6 +806,15 @@ export interface DescribeForwardRuleResponse {
     RequestId?: string;
 }
 /**
+ * DeleteDevice返回参数结构体
+ */
+export interface DeleteDeviceResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeBatch请求参数结构体
  */
 export interface DescribeBatchRequest {
@@ -803,6 +911,19 @@ export interface DescribeDeviceCommLogRequest {
     Type?: string;
 }
 /**
+ * DescribeCloudStorage请求参数结构体
+ */
+export interface DescribeCloudStorageRequest {
+    /**
+      * 产品ID
+      */
+    ProductId: string;
+    /**
+      * 设备名称
+      */
+    DeviceName: string;
+}
+/**
  * CreateProduct返回参数结构体
  */
 export interface CreateProductResponse {
@@ -816,29 +937,25 @@ export interface CreateProductResponse {
     RequestId?: string;
 }
 /**
- * DescribeDeviceDataHistory返回参数结构体
+ * DescribeCloudStorageEvents返回参数结构体
  */
-export interface DescribeDeviceDataHistoryResponse {
+export interface DescribeCloudStorageEventsResponse {
     /**
-      * 属性字段名称，对应数据模板中功能属性的标识符
-注意：此字段可能返回 null，表示取不到有效值。
+      * 云存事件列表
       */
-    FieldName: string;
+    Events: Array<CloudStorageEvent>;
     /**
-      * 数据是否已全部返回，true 表示数据全部返回，false 表示还有数据待返回，可将 Context 作为入参，继续查询返回结果。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Listover: boolean;
-    /**
-      * 检索上下文，当 ListOver 为false时，可以用此上下文，继续读取后续数据
-注意：此字段可能返回 null，表示取不到有效值。
+      * 请求上下文, 用作查询游标
       */
     Context: string;
     /**
-      * 历史数据结果数组，返回对应时间点及取值。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 拉取结果是否已经结束
       */
-    Results: Array<DeviceDataHistoryItem>;
+    Listover: boolean;
+    /**
+      * 拉取结果数量
+      */
+    Total: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -962,38 +1079,55 @@ export interface ActionHistory {
     Status: string;
 }
 /**
- * DescribeModelDefinition请求参数结构体
+ * DescribeDeviceDataHistory返回参数结构体
  */
-export interface DescribeModelDefinitionRequest {
+export interface DescribeDeviceDataHistoryResponse {
     /**
-      * 产品ID
+      * 属性字段名称，对应数据模板中功能属性的标识符
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ProductId: string;
+    FieldName: string;
+    /**
+      * 数据是否已全部返回，true 表示数据全部返回，false 表示还有数据待返回，可将 Context 作为入参，继续查询返回结果。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Listover: boolean;
+    /**
+      * 检索上下文，当 ListOver 为false时，可以用此上下文，继续读取后续数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Context: string;
+    /**
+      * 历史数据结果数组，返回对应时间点及取值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Results: Array<DeviceDataHistoryItem>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
- * ModifyForwardRule返回参数结构体
+ * DescribeCloudStorageDate返回参数结构体
  */
-export interface ModifyForwardRuleResponse {
+export interface DescribeCloudStorageDateResponse {
     /**
-      * 腾讯云账号
+      * 云存日期数组，["2021-01-05","2021-01-06"]
       */
-    Endpoint: string;
+    Data: Array<string>;
     /**
-      * 产品ID
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    ProductID: string;
+    RequestId?: string;
+}
+/**
+ * DescribeCloudStorageThumbnail返回参数结构体
+ */
+export interface DescribeCloudStorageThumbnailResponse {
     /**
-      * 结果
+      * 缩略图访问地址
       */
-    Result: number;
-    /**
-      * 错误信息
-      */
-    ErrMsg: string;
-    /**
-      * 队列类型
-      */
-    QueueType: number;
+    ThumbnailURL: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1055,15 +1189,6 @@ export interface DescribeDeviceDataResponse {
     RequestId?: string;
 }
 /**
- * ModifyDevice返回参数结构体
- */
-export interface ModifyDeviceResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * DescribeForwardRule请求参数结构体
  */
 export interface DescribeForwardRuleRequest {
@@ -1083,6 +1208,28 @@ export interface DescribeForwardRuleRequest {
       * 临时密钥
       */
     Consecretid?: string;
+}
+/**
+ * ModifyDevice返回参数结构体
+ */
+export interface ModifyDeviceResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 云存时间轴信息
+ */
+export interface CloudStorageTimeInfo {
+    /**
+      * 开始时间
+      */
+    StartTime: number;
+    /**
+      * 结束时间
+      */
+    EndTime: number;
 }
 /**
  * DeleteForwardRule返回参数结构体
@@ -1207,9 +1354,13 @@ export interface DescribeDeviceDataRequest {
     DeviceName: string;
 }
 /**
- * DeleteDevice返回参数结构体
+ * CreateBatch返回参数结构体
  */
-export interface DeleteDeviceResponse {
+export interface CreateBatchResponse {
+    /**
+      * 批次ID
+      */
+    BatchId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1252,6 +1403,173 @@ export interface ModifyModelDefinitionResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeDeviceActionHistory返回参数结构体
+ */
+export interface DescribeDeviceActionHistoryResponse {
+    /**
+      * 总条数
+      */
+    TotalCounts: number;
+    /**
+      * 动作历史
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ActionHistories: Array<ActionHistory>;
+    /**
+      * 用于标识查询结果的上下文，翻页用。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Context: string;
+    /**
+      * 搜索结果是否已经结束。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Listover: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyDevice请求参数结构体
+ */
+export interface ModifyDeviceRequest {
+    /**
+      * 设备所属产品id
+      */
+    ProductId: string;
+    /**
+      * 设备名称
+      */
+    DeviceName: string;
+    /**
+      * 要设置的设备状态，1为启用，0为禁用
+      */
+    EnableState?: number;
+}
+/**
+ * CreateCloudStorage返回参数结构体
+ */
+export interface CreateCloudStorageResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 云存事件
+ */
+export interface CloudStorageEvent {
+    /**
+      * 事件起始时间（Unix 时间戳，秒级
+      */
+    StartTime: number;
+    /**
+      * 事件结束时间（Unix 时间戳，秒级
+      */
+    EndTime: number;
+    /**
+      * 事件缩略图
+      */
+    Thumbnail: string;
+    /**
+      * 事件ID
+      */
+    EventId: string;
+}
+/**
+ * 设备通讯日志查询返回条目
+ */
+export interface DeviceCommLogItem {
+    /**
+      * 时间
+      */
+    Time: string;
+    /**
+      * 日志类型，device 设备上行，shadow 服务端下行。
+      */
+    Type: string;
+    /**
+      * 通讯数据。
+      */
+    Data: string;
+}
+/**
+ * DescribeModelDefinition请求参数结构体
+ */
+export interface DescribeModelDefinitionRequest {
+    /**
+      * 产品ID
+      */
+    ProductId: string;
+}
+/**
+ * DescribeDevice返回参数结构体
+ */
+export interface DescribeDeviceResponse {
+    /**
+      * 设备名
+      */
+    DeviceName: string;
+    /**
+      * 设备是否在线，0不在线，1在线，2获取失败，3未激活
+      */
+    Online: number;
+    /**
+      * 设备最后上线时间
+      */
+    LoginTime: number;
+    /**
+      * 设备密钥
+      */
+    DevicePsk: string;
+    /**
+      * 设备启用状态
+      */
+    EnableState: number;
+    /**
+      * 设备过期时间
+      */
+    ExpireTime: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeCloudStorageEvents请求参数结构体
+ */
+export interface DescribeCloudStorageEventsRequest {
+    /**
+      * 产品ID
+      */
+    ProductId: string;
+    /**
+      * 设备名称
+      */
+    DeviceName: string;
+    /**
+      * 起始时间（Unix 时间戳，秒级）, 为0 表示 当前时间 - 24h
+      */
+    StartTime?: number;
+    /**
+      * 结束时间（Unix 时间戳，秒级）, 为0 表示当前时间
+      */
+    EndTime?: number;
+    /**
+      * 请求上下文, 用作查询游标
+      */
+    Context?: string;
+    /**
+      * 单次获取的历史数据项目的最大数量, 缺省10
+      */
+    Size?: number;
+    /**
+      * 事件标识符，可以用来指定查询特定的事件，如果不指定，则查询所有事件。
+      */
+    EventId?: string;
 }
 /**
  * CreateForwardRule返回参数结构体
@@ -1311,11 +1629,11 @@ export interface CreateForwardRuleResponse {
     RequestId?: string;
 }
 /**
- * ModifyDevice请求参数结构体
+ * DescribeCloudStorageTime请求参数结构体
  */
-export interface ModifyDeviceRequest {
+export interface DescribeCloudStorageTimeRequest {
     /**
-      * 设备所属产品id
+      * 产品ID
       */
     ProductId: string;
     /**
@@ -1323,59 +1641,9 @@ export interface ModifyDeviceRequest {
       */
     DeviceName: string;
     /**
-      * 要设置的设备状态，1为启用，0为禁用
+      * 云存日期，例如"2020-01-05"
       */
-    EnableState?: number;
-}
-/**
- * 设备通讯日志查询返回条目
- */
-export interface DeviceCommLogItem {
-    /**
-      * 时间
-      */
-    Time: string;
-    /**
-      * 日志类型，device 设备上行，shadow 服务端下行。
-      */
-    Type: string;
-    /**
-      * 通讯数据。
-      */
-    Data: string;
-}
-/**
- * DescribeDevice返回参数结构体
- */
-export interface DescribeDeviceResponse {
-    /**
-      * 设备名
-      */
-    DeviceName: string;
-    /**
-      * 设备是否在线，0不在线，1在线，2获取失败，3未激活
-      */
-    Online: number;
-    /**
-      * 设备最后上线时间
-      */
-    LoginTime: number;
-    /**
-      * 设备密钥
-      */
-    DevicePsk: string;
-    /**
-      * 设备启用状态
-      */
-    EnableState: number;
-    /**
-      * 设备过期时间
-      */
-    ExpireTime: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    Date: string;
 }
 /**
  * 产品模型定义
@@ -1407,17 +1675,4 @@ export interface ProductModelDefinition {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     NetTypeModel: string;
-}
-/**
- * CreateBatch返回参数结构体
- */
-export interface CreateBatchResponse {
-    /**
-      * 批次ID
-      */
-    BatchId: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }

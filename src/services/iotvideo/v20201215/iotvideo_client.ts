@@ -20,8 +20,9 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DeleteProductRequest,
   DescribeDeviceDataHistoryRequest,
-  EventHistoryItem,
-  CreateForwardRuleRequest,
+  DescribeCloudStorageDateRequest,
+  CloudStorageTimeData,
+  CreateCloudStorageRequest,
   SetForwardAuthResponse,
   SetForwardAuthRequest,
   DeviceDataHistoryItem,
@@ -30,57 +31,71 @@ import {
   DescribeModelDefinitionResponse,
   CreateBatchRequest,
   ImportModelDefinitionRequest,
-  DescribeDeviceActionHistoryResponse,
+  DescribeCloudStorageTimeResponse,
   VideoBatch,
   DescribeDeviceCommLogResponse,
+  EventHistoryItem,
   DeleteDeviceRequest,
   DeleteProductResponse,
+  ModifyForwardRuleResponse,
   DescribeProductsRequest,
   DescribeDeviceEventHistoryResponse,
+  DescribeBatchResponse,
+  ModifyProductRequest,
   DescribeDeviceActionHistoryRequest,
   ImportModelDefinitionResponse,
   DescribeDevicesResponse,
   ModifyProductResponse,
   ProductTemplate,
-  DescribeBatchResponse,
-  ModifyProductRequest,
+  CreateForwardRuleRequest,
+  DescribeCloudStorageThumbnailRequest,
   ModifyModelDefinitionRequest,
   DescribeBatchsResponse,
+  DescribeCloudStorageResponse,
   DeleteForwardRuleRequest,
   DescribeDeviceEventHistoryRequest,
   DescribeDeviceRequest,
   DescribeForwardRuleResponse,
+  DeleteDeviceResponse,
   DescribeBatchRequest,
   ModifyForwardRuleRequest,
   DescribeCategoryRequest,
   DescribeDeviceCommLogRequest,
+  DescribeCloudStorageRequest,
   CreateProductResponse,
-  DescribeDeviceDataHistoryResponse,
+  DescribeCloudStorageEventsResponse,
   DescribeDevicesRequest,
   VideoProduct,
   ActionHistory,
-  DescribeModelDefinitionRequest,
-  ModifyForwardRuleResponse,
+  DescribeDeviceDataHistoryResponse,
+  DescribeCloudStorageDateResponse,
+  DescribeCloudStorageThumbnailResponse,
   CheckForwardAuthResponse,
   DescribeProductResponse,
   DescribeDeviceDataResponse,
-  ModifyDeviceResponse,
   DescribeForwardRuleRequest,
+  ModifyDeviceResponse,
+  CloudStorageTimeInfo,
   DeleteForwardRuleResponse,
   DescribeProductRequest,
   DescribeProductsResponse,
   CheckForwardAuthRequest,
   CreateProductRequest,
   DescribeDeviceDataRequest,
-  DeleteDeviceResponse,
+  CreateBatchResponse,
   DeviceInfo,
   ModifyModelDefinitionResponse,
-  CreateForwardRuleResponse,
+  DescribeDeviceActionHistoryResponse,
   ModifyDeviceRequest,
+  CreateCloudStorageResponse,
+  CloudStorageEvent,
   DeviceCommLogItem,
+  DescribeModelDefinitionRequest,
   DescribeDeviceResponse,
+  DescribeCloudStorageEventsRequest,
+  CreateForwardRuleResponse,
+  DescribeCloudStorageTimeRequest,
   ProductModelDefinition,
-  CreateBatchResponse,
 } from "./iotvideo_models"
 
 /**
@@ -93,13 +108,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除转发规则
+   * 获取产品列表
    */
-  async DeleteForwardRule(
-    req: DeleteForwardRuleRequest,
-    cb?: (error: string, rep: DeleteForwardRuleResponse) => void
-  ): Promise<DeleteForwardRuleResponse> {
-    return this.request("DeleteForwardRule", req, cb)
+  async DescribeProducts(
+    req: DescribeProductsRequest,
+    cb?: (error: string, rep: DescribeProductsResponse) => void
+  ): Promise<DescribeProductsResponse> {
+    return this.request("DescribeProducts", req, cb)
   }
 
   /**
@@ -143,6 +158,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取具有云存的日期
+   */
+  async DescribeCloudStorageDate(
+    req: DescribeCloudStorageDateRequest,
+    cb?: (error: string, rep: DescribeCloudStorageDateResponse) => void
+  ): Promise<DescribeCloudStorageDateResponse> {
+    return this.request("DescribeCloudStorageDate", req, cb)
+  }
+
+  /**
    * 查看设备详情
    */
   async DescribeDevice(
@@ -183,6 +208,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取设备云存服务详情
+   */
+  async DescribeCloudStorage(
+    req: DescribeCloudStorageRequest,
+    cb?: (error: string, rep: DescribeCloudStorageResponse) => void
+  ): Promise<DescribeCloudStorageResponse> {
+    return this.request("DescribeCloudStorage", req, cb)
+  }
+
+  /**
    * 获取批次列表
    */
   async DescribeBatchs(
@@ -213,13 +248,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取产品列表
+   * 删除转发规则
    */
-  async DescribeProducts(
-    req: DescribeProductsRequest,
-    cb?: (error: string, rep: DescribeProductsResponse) => void
-  ): Promise<DescribeProductsResponse> {
-    return this.request("DescribeProducts", req, cb)
+  async DeleteForwardRule(
+    req: DeleteForwardRuleRequest,
+    cb?: (error: string, rep: DeleteForwardRuleResponse) => void
+  ): Promise<DeleteForwardRuleResponse> {
+    return this.request("DeleteForwardRule", req, cb)
   }
 
   /**
@@ -303,6 +338,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 开通云存服务
+   */
+  async CreateCloudStorage(
+    req: CreateCloudStorageRequest,
+    cb?: (error: string, rep: CreateCloudStorageResponse) => void
+  ): Promise<CreateCloudStorageResponse> {
+    return this.request("CreateCloudStorage", req, cb)
+  }
+
+  /**
    * 导入其它产品的数据模板，覆盖现有数据模板的物模型和产品分类信息
    */
   async ImportModelDefinition(
@@ -310,6 +355,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ImportModelDefinitionResponse) => void
   ): Promise<ImportModelDefinitionResponse> {
     return this.request("ImportModelDefinition", req, cb)
+  }
+
+  /**
+   * 拉取云存事件列表
+   */
+  async DescribeCloudStorageEvents(
+    req: DescribeCloudStorageEventsRequest,
+    cb?: (error: string, rep: DescribeCloudStorageEventsResponse) => void
+  ): Promise<DescribeCloudStorageEventsResponse> {
+    return this.request("DescribeCloudStorageEvents", req, cb)
+  }
+
+  /**
+   * 获取某一天云存时间轴
+   */
+  async DescribeCloudStorageTime(
+    req: DescribeCloudStorageTimeRequest,
+    cb?: (error: string, rep: DescribeCloudStorageTimeResponse) => void
+  ): Promise<DescribeCloudStorageTimeResponse> {
+    return this.request("DescribeCloudStorageTime", req, cb)
   }
 
   /**
@@ -343,13 +408,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询产品配置的数据模板信息
+   * 拉取云存事件缩略图
    */
-  async DescribeModelDefinition(
-    req: DescribeModelDefinitionRequest,
-    cb?: (error: string, rep: DescribeModelDefinitionResponse) => void
-  ): Promise<DescribeModelDefinitionResponse> {
-    return this.request("DescribeModelDefinition", req, cb)
+  async DescribeCloudStorageThumbnail(
+    req: DescribeCloudStorageThumbnailRequest,
+    cb?: (error: string, rep: DescribeCloudStorageThumbnailResponse) => void
+  ): Promise<DescribeCloudStorageThumbnailResponse> {
+    return this.request("DescribeCloudStorageThumbnail", req, cb)
   }
 
   /**
@@ -360,5 +425,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDevicesResponse) => void
   ): Promise<DescribeDevicesResponse> {
     return this.request("DescribeDevices", req, cb)
+  }
+
+  /**
+   * 查询产品配置的数据模板信息
+   */
+  async DescribeModelDefinition(
+    req: DescribeModelDefinitionRequest,
+    cb?: (error: string, rep: DescribeModelDefinitionResponse) => void
+  ): Promise<DescribeModelDefinitionResponse> {
+    return this.request("DescribeModelDefinition", req, cb)
   }
 }

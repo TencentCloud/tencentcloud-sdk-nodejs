@@ -847,6 +847,19 @@ export interface DeleteReservedConcurrencyConfigRequest {
     Namespace?: string;
 }
 /**
+ * GetFunctionEventInvokeConfig返回参数结构体
+ */
+export interface GetFunctionEventInvokeConfigResponse {
+    /**
+      * 异步重试配置信息
+      */
+    AsyncTriggerConfig: AsyncTriggerConfig;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ListTriggers返回参数结构体
  */
 export interface ListTriggersResponse {
@@ -1684,6 +1697,15 @@ exact 匹配规则要求：
     Expression: string;
 }
 /**
+ * UpdateFunctionEventInvokeConfig返回参数结构体
+ */
+export interface UpdateFunctionEventInvokeConfigResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * PutReservedConcurrencyConfig请求参数结构体
  */
 export interface PutReservedConcurrencyConfigRequest {
@@ -1763,6 +1785,23 @@ export interface CreateNamespaceRequest {
       * 命名空间描述
       */
     Description?: string;
+}
+/**
+ * UpdateFunctionEventInvokeConfig请求参数结构体
+ */
+export interface UpdateFunctionEventInvokeConfigRequest {
+    /**
+      * 异步重试配置信息
+      */
+    AsyncTriggerConfig: AsyncTriggerConfig;
+    /**
+      * 函数名称
+      */
+    FunctionName: string;
+    /**
+      * 函数所属命名空间，默认为default
+      */
+    Namespace?: string;
 }
 /**
  * DeleteLayerVersion请求参数结构体
@@ -1981,6 +2020,23 @@ export interface GetFunctionResponse {
     RequestId?: string;
 }
 /**
+ * GetFunctionEventInvokeConfig请求参数结构体
+ */
+export interface GetFunctionEventInvokeConfigRequest {
+    /**
+      * 函数名称
+      */
+    FunctionName: string;
+    /**
+      * 函数所属命名空间，默认为default
+      */
+    Namespace?: string;
+    /**
+      * 函数版本，默认为$LATEST
+      */
+    Qualifier?: string;
+}
+/**
  * 函数代码
  */
 export interface Code {
@@ -2183,6 +2239,15 @@ export interface FunctionLog {
     RetryNum: number;
 }
 /**
+ * 异步重试配置
+ */
+export interface RetryConfig {
+    /**
+      * 重试次数
+      */
+    RetryNum: number;
+}
+/**
  * GetFunctionAddress返回参数结构体
  */
 export interface GetFunctionAddressResponse {
@@ -2301,67 +2366,17 @@ export interface FunctionVersion {
     ModTime?: string;
 }
 /**
- * 函数列表
+ * 函数的异步重试配置详情
  */
-export interface Function {
+export interface AsyncTriggerConfig {
     /**
-      * 修改时间
+      * 用户错误的异步重试重试配置
       */
-    ModTime: string;
+    RetryConfig: Array<RetryConfig>;
     /**
-      * 创建时间
+      * 消息保留时间
       */
-    AddTime: string;
-    /**
-      * 运行时
-      */
-    Runtime: string;
-    /**
-      * 函数名称
-      */
-    FunctionName: string;
-    /**
-      * 函数ID
-      */
-    FunctionId: string;
-    /**
-      * 命名空间
-      */
-    Namespace: string;
-    /**
-      * 函数状态，状态值及流转[参考此处](https://cloud.tencent.com/document/product/583/47175)
-      */
-    Status: string;
-    /**
-      * 函数状态详情
-      */
-    StatusDesc: string;
-    /**
-      * 函数描述
-      */
-    Description: string;
-    /**
-      * 函数标签
-      */
-    Tags: Array<Tag>;
-    /**
-      * 函数类型，取值为 HTTP 或者 Event
-      */
-    Type: string;
-    /**
-      * 函数状态失败原因
-      */
-    StatusReasons: Array<StatusReason>;
-    /**
-      * 函数所有版本预置并发内存总和
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TotalProvisionedConcurrencyMem: number;
-    /**
-      * 函数并发保留内存
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ReservedConcurrencyMem: number;
+    MsgTTL: number;
 }
 /**
  * 死信队列参数
@@ -2502,6 +2517,69 @@ export interface PutProvisionedConcurrencyConfigRequest {
       * 函数所属命名空间，默认为default
       */
     Namespace?: string;
+}
+/**
+ * 函数列表
+ */
+export interface Function {
+    /**
+      * 修改时间
+      */
+    ModTime: string;
+    /**
+      * 创建时间
+      */
+    AddTime: string;
+    /**
+      * 运行时
+      */
+    Runtime: string;
+    /**
+      * 函数名称
+      */
+    FunctionName: string;
+    /**
+      * 函数ID
+      */
+    FunctionId: string;
+    /**
+      * 命名空间
+      */
+    Namespace: string;
+    /**
+      * 函数状态，状态值及流转[参考此处](https://cloud.tencent.com/document/product/583/47175)
+      */
+    Status: string;
+    /**
+      * 函数状态详情
+      */
+    StatusDesc: string;
+    /**
+      * 函数描述
+      */
+    Description: string;
+    /**
+      * 函数标签
+      */
+    Tags: Array<Tag>;
+    /**
+      * 函数类型，取值为 HTTP 或者 Event
+      */
+    Type: string;
+    /**
+      * 函数状态失败原因
+      */
+    StatusReasons: Array<StatusReason>;
+    /**
+      * 函数所有版本预置并发内存总和
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalProvisionedConcurrencyMem: number;
+    /**
+      * 函数并发保留内存
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReservedConcurrencyMem: number;
 }
 /**
  * 名称空间已使用信息

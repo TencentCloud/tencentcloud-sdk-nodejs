@@ -698,9 +698,9 @@ it("cwp.v20180228.AddLoginWhiteList", async function () {
     }
 })
 
-it("cwp.v20180228.ExportNonlocalLoginPlaces", async function () {
+it("cwp.v20180228.DescribeProcessStatistics", async function () {
     try {
-       const data = await client.ExportNonlocalLoginPlaces({})
+       const data = await client.DescribeProcessStatistics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -858,9 +858,29 @@ it("cwp.v20180228.DescribeLoginWhiteList", async function () {
     }
 })
 
+it("cwp.v20180228.UpdateBaselineStrategy", async function () {
+    try {
+       const data = await client.UpdateBaselineStrategy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeVulScanResult", async function () {
     try {
        const data = await client.DescribeVulScanResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeRiskDnsList", async function () {
+    try {
+       const data = await client.DescribeRiskDnsList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -878,9 +898,9 @@ it("cwp.v20180228.DescribeHistoryAccounts", async function () {
     }
 })
 
-it("cwp.v20180228.DescribeProcessStatistics", async function () {
+it("cwp.v20180228.ExportNonlocalLoginPlaces", async function () {
     try {
-       const data = await client.DescribeProcessStatistics({})
+       const data = await client.ExportNonlocalLoginPlaces({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

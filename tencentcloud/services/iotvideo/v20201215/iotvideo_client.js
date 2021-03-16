@@ -28,10 +28,10 @@ class Client extends abstract_client_1.AbstractClient {
         super("iotvideo.tencentcloudapi.com", "2020-12-15", clientConfig);
     }
     /**
-     * 删除转发规则
+     * 获取产品列表
      */
-    async DeleteForwardRule(req, cb) {
-        return this.request("DeleteForwardRule", req, cb);
+    async DescribeProducts(req, cb) {
+        return this.request("DescribeProducts", req, cb);
     }
     /**
      * 获取设备在指定时间范围内的通讯日志
@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyProduct", req, cb);
     }
     /**
+     * 获取具有云存的日期
+     */
+    async DescribeCloudStorageDate(req, cb) {
+        return this.request("DescribeCloudStorageDate", req, cb);
+    }
+    /**
      * 查看设备详情
      */
     async DescribeDevice(req, cb) {
@@ -82,6 +88,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyForwardRule", req, cb);
     }
     /**
+     * 获取设备云存服务详情
+     */
+    async DescribeCloudStorage(req, cb) {
+        return this.request("DescribeCloudStorage", req, cb);
+    }
+    /**
      * 获取批次列表
      */
     async DescribeBatchs(req, cb) {
@@ -100,10 +112,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDeviceActionHistory", req, cb);
     }
     /**
-     * 获取产品列表
+     * 删除转发规则
      */
-    async DescribeProducts(req, cb) {
-        return this.request("DescribeProducts", req, cb);
+    async DeleteForwardRule(req, cb) {
+        return this.request("DeleteForwardRule", req, cb);
     }
     /**
      * 创建批次
@@ -154,10 +166,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDeviceEventHistory", req, cb);
     }
     /**
+     * 开通云存服务
+     */
+    async CreateCloudStorage(req, cb) {
+        return this.request("CreateCloudStorage", req, cb);
+    }
+    /**
      * 导入其它产品的数据模板，覆盖现有数据模板的物模型和产品分类信息
      */
     async ImportModelDefinition(req, cb) {
         return this.request("ImportModelDefinition", req, cb);
+    }
+    /**
+     * 拉取云存事件列表
+     */
+    async DescribeCloudStorageEvents(req, cb) {
+        return this.request("DescribeCloudStorageEvents", req, cb);
+    }
+    /**
+     * 获取某一天云存时间轴
+     */
+    async DescribeCloudStorageTime(req, cb) {
+        return this.request("DescribeCloudStorageTime", req, cb);
     }
     /**
      * 获取产品转发规则
@@ -178,16 +208,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyModelDefinition", req, cb);
     }
     /**
-     * 查询产品配置的数据模板信息
+     * 拉取云存事件缩略图
      */
-    async DescribeModelDefinition(req, cb) {
-        return this.request("DescribeModelDefinition", req, cb);
+    async DescribeCloudStorageThumbnail(req, cb) {
+        return this.request("DescribeCloudStorageThumbnail", req, cb);
     }
     /**
      * 获取设备列表
      */
     async DescribeDevices(req, cb) {
         return this.request("DescribeDevices", req, cb);
+    }
+    /**
+     * 查询产品配置的数据模板信息
+     */
+    async DescribeModelDefinition(req, cb) {
+        return this.request("DescribeModelDefinition", req, cb);
     }
 }
 exports.Client = Client;

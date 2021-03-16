@@ -733,21 +733,13 @@ export interface Limit {
     Value: number;
 }
 /**
- * DescribeReplicationInstances请求参数结构体
+ * DescribeExternalEndpointStatus请求参数结构体
  */
-export interface DescribeReplicationInstancesRequest {
+export interface DescribeExternalEndpointStatusRequest {
     /**
       * 实例Id
       */
     RegistryId: string;
-    /**
-      * 偏移量,默认0
-      */
-    Offset?: number;
-    /**
-      * 最大输出条数，默认20，最大为100
-      */
-    Limit?: number;
 }
 /**
  * DeleteRepository返回参数结构体
@@ -1040,6 +1032,23 @@ export interface ModifyWebhookTriggerResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeReplicationInstances请求参数结构体
+ */
+export interface DescribeReplicationInstancesRequest {
+    /**
+      * 实例Id
+      */
+    RegistryId: string;
+    /**
+      * 偏移量,默认0
+      */
+    Offset?: number;
+    /**
+      * 最大输出条数，默认20，最大为100
+      */
+    Limit?: number;
 }
 /**
  * CreateImageLifecyclePersonal返回参数结构体
@@ -1889,6 +1898,24 @@ export interface ValidateRepositoryExistPersonalResponse {
       * 仓库是否存在
       */
     Data?: RepoIsExistResp;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeExternalEndpointStatus返回参数结构体
+ */
+export interface DescribeExternalEndpointStatusResponse {
+    /**
+      * 开启公网访问状态，包括开启中，开启成功以及关闭和更新失败等
+      */
+    Status: string;
+    /**
+      * 原因
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Reason: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

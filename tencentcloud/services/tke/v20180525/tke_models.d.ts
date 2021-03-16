@@ -684,6 +684,10 @@ export interface DescribeExistedInstancesRequest {
       * 返回数量，默认为20，最大值为100。关于Limit的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
       */
     Limit?: number;
+    /**
+      * 根据多个实例IP进行过滤
+      */
+    IpAddresses?: Array<string>;
 }
 /**
  * 标签绑定的资源类型，当前支持类型："cluster"
@@ -733,6 +737,26 @@ export interface PrometheusAlertHistoryItem {
       * 告警内容
       */
     Content: string;
+    /**
+      * 告警状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    State?: string;
+    /**
+      * 触发的规则名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RuleItem?: string;
+    /**
+      * 告警渠道的id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TopicId?: string;
+    /**
+      * 告警渠道的名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TopicName?: string;
 }
 /**
  * CreateClusterRoute返回参数结构体
@@ -2190,11 +2214,11 @@ export interface DescribeExistedInstancesResponse {
       * 已经存在的实例信息数组。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ExistedInstanceSet?: Array<ExistedInstance>;
+    ExistedInstanceSet: Array<ExistedInstance>;
     /**
       * 符合条件的实例数量。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

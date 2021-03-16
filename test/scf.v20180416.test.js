@@ -68,6 +68,16 @@ it("scf.v20180416.ListTriggers", async function () {
     }
 })
 
+it("scf.v20180416.ListVersionByFunction", async function () {
+    try {
+       const data = await client.ListVersionByFunction({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("scf.v20180416.GetLayerVersion", async function () {
     try {
        const data = await client.GetLayerVersion({})
@@ -238,9 +248,19 @@ it("scf.v20180416.PutProvisionedConcurrencyConfig", async function () {
     }
 })
 
-it("scf.v20180416.ListVersionByFunction", async function () {
+it("scf.v20180416.UpdateFunctionEventInvokeConfig", async function () {
     try {
-       const data = await client.ListVersionByFunction({})
+       const data = await client.UpdateFunctionEventInvokeConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("scf.v20180416.GetFunctionEventInvokeConfig", async function () {
+    try {
+       const data = await client.GetFunctionEventInvokeConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

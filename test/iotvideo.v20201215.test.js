@@ -18,9 +18,9 @@ const client = new tencentcloud.iotvideo.v20201215.Client({
 })
 describe("iotvideo.v20201215.test.js", function () {
 
-it("iotvideo.v20201215.DeleteForwardRule", async function () {
+it("iotvideo.v20201215.DescribeProducts", async function () {
     try {
-       const data = await client.DeleteForwardRule({})
+       const data = await client.DescribeProducts({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -68,6 +68,16 @@ it("iotvideo.v20201215.ModifyProduct", async function () {
     }
 })
 
+it("iotvideo.v20201215.DescribeCloudStorageDate", async function () {
+    try {
+       const data = await client.DescribeCloudStorageDate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideo.v20201215.DescribeDevice", async function () {
     try {
        const data = await client.DescribeDevice({})
@@ -108,6 +118,16 @@ it("iotvideo.v20201215.ModifyForwardRule", async function () {
     }
 })
 
+it("iotvideo.v20201215.DescribeCloudStorage", async function () {
+    try {
+       const data = await client.DescribeCloudStorage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideo.v20201215.DescribeBatchs", async function () {
     try {
        const data = await client.DescribeBatchs({})
@@ -138,9 +158,9 @@ it("iotvideo.v20201215.DescribeDeviceActionHistory", async function () {
     }
 })
 
-it("iotvideo.v20201215.DescribeProducts", async function () {
+it("iotvideo.v20201215.DeleteForwardRule", async function () {
     try {
-       const data = await client.DescribeProducts({})
+       const data = await client.DeleteForwardRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,9 +248,39 @@ it("iotvideo.v20201215.DescribeDeviceEventHistory", async function () {
     }
 })
 
+it("iotvideo.v20201215.CreateCloudStorage", async function () {
+    try {
+       const data = await client.CreateCloudStorage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideo.v20201215.ImportModelDefinition", async function () {
     try {
        const data = await client.ImportModelDefinition({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotvideo.v20201215.DescribeCloudStorageEvents", async function () {
+    try {
+       const data = await client.DescribeCloudStorageEvents({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotvideo.v20201215.DescribeCloudStorageTime", async function () {
+    try {
+       const data = await client.DescribeCloudStorageTime({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -268,9 +318,9 @@ it("iotvideo.v20201215.ModifyModelDefinition", async function () {
     }
 })
 
-it("iotvideo.v20201215.DescribeModelDefinition", async function () {
+it("iotvideo.v20201215.DescribeCloudStorageThumbnail", async function () {
     try {
-       const data = await client.DescribeModelDefinition({})
+       const data = await client.DescribeCloudStorageThumbnail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -281,6 +331,16 @@ it("iotvideo.v20201215.DescribeModelDefinition", async function () {
 it("iotvideo.v20201215.DescribeDevices", async function () {
     try {
        const data = await client.DescribeDevices({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotvideo.v20201215.DescribeModelDefinition", async function () {
+    try {
+       const data = await client.DescribeModelDefinition({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

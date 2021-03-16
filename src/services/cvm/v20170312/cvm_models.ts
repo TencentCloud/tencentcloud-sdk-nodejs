@@ -446,7 +446,7 @@ export interface RunInstancesRequest {
   DisasterRecoverGroupIds?: Array<string>
 
   /**
-   * 标签描述列表。通过指定该参数可以同时绑定标签到相应的资源实例，当前仅支持绑定标签到云服务器实例。
+   * 标签描述列表。通过指定该参数可以同时绑定标签到相应的云服务器、云硬盘实例。
    */
   TagSpecification?: Array<TagSpecification>
 

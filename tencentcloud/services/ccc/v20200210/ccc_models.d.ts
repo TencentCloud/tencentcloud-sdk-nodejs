@@ -296,6 +296,11 @@ notInService       不在服务区
 注意：此字段可能返回 null，表示取不到有效值。
       */
     QueuedSkillGroupId: number;
+    /**
+      * 会话 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SessionId: string;
 }
 /**
  * 带有技能组优先级的坐席信息

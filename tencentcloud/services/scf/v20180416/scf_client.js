@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListTriggers", req, cb);
     }
     /**
+     * 该接口根据传入的参数查询函数的版本。
+     */
+    async ListVersionByFunction(req, cb) {
+        return this.request("ListVersionByFunction", req, cb);
+    }
+    /**
      * 获取层版本详细信息，包括用于下载层中文件的链接。
      */
     async GetLayerVersion(req, cb) {
@@ -167,10 +173,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("PutProvisionedConcurrencyConfig", req, cb);
     }
     /**
-     * 该接口根据传入的参数查询函数的版本。
+     * 更新函数的异步重试配置，包括重试次数和消息保留时间
      */
-    async ListVersionByFunction(req, cb) {
-        return this.request("ListVersionByFunction", req, cb);
+    async UpdateFunctionEventInvokeConfig(req, cb) {
+        return this.request("UpdateFunctionEventInvokeConfig", req, cb);
+    }
+    /**
+     * 获取函数异步重试配置，包括重试次数和消息保留时间
+     */
+    async GetFunctionEventInvokeConfig(req, cb) {
+        return this.request("GetFunctionEventInvokeConfig", req, cb);
     }
     /**
      * 返回全部层的列表，其中包含了每个层最新版本的信息，可以通过适配运行时进行过滤。

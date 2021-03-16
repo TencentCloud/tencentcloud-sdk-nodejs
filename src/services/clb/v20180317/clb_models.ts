@@ -174,7 +174,7 @@ OPEN：公网属性， INTERNAL：内网属性。
   LoadBalancerType: string
 
   /**
-   * 负载均衡实例的类型。1：通用的负载均衡实例，目前只支持传入1
+   * 负载均衡实例的类型。1：通用的负载均衡实例，目前只支持传入1。
    */
   Forward?: number
 
@@ -216,7 +216,7 @@ OPEN：公网属性， INTERNAL：内网属性。
   MasterZoneId?: string
 
   /**
-   * 仅适用于公网负载均衡。可用区ID，指定可用区以创建负载均衡实例。如：ap-guangzhou-1
+   * 仅适用于公网负载均衡。可用区ID，指定可用区以创建负载均衡实例。如：ap-guangzhou-1。
    */
   ZoneId?: string
 
@@ -231,22 +231,22 @@ OPEN：公网属性， INTERNAL：内网属性。
   VipIsp?: string
 
   /**
-   * 购买负载均衡同时，给负载均衡打上标签
+   * 购买负载均衡同时，给负载均衡打上标签。
    */
   Tags?: Array<TagInfo>
 
   /**
-   * 指定Vip申请负载均衡
+   * 指定Vip申请负载均衡。
    */
   Vip?: string
 
   /**
-   * 带宽包ID，指定此参数时，网络计费方式（InternetAccessible.InternetChargeType）只支持按带宽包计费（BANDWIDTH_PACKAGE）
+   * 带宽包ID，指定此参数时，网络计费方式（InternetAccessible.InternetChargeType）只支持按带宽包计费（BANDWIDTH_PACKAGE）。
    */
   BandwidthPackageId?: string
 
   /**
-   * 独占集群信息
+   * 独占集群信息。
    */
   ExclusiveCluster?: ExclusiveCluster
 
@@ -271,7 +271,7 @@ OPEN：公网属性， INTERNAL：内网属性。
   ClusterTag?: string
 
   /**
-   * EIP 的唯一 ID，形如：eip-11112222，仅适用于内网负载均衡绑定EIP
+   * EIP 的唯一 ID，形如：eip-11112222，仅适用于内网负载均衡绑定EIP。
    */
   EipAddressId?: string
 }
@@ -3892,7 +3892,7 @@ export interface CreateLoadBalancerResponse {
   /**
    * 由负载均衡实例唯一 ID 组成的数组。
    */
-  LoadBalancerIds?: Array<string>
+  LoadBalancerIds: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
