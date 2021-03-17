@@ -325,12 +325,12 @@ export interface CreateDCDBInstanceResponse {
       * 长订单号。可以据此调用 DescribeOrders
  查询订单详细信息，或在支付失败时调用用户账号相关接口进行支付。
       */
-    DealName?: string;
+    DealName: string;
     /**
       * 订单对应的实例 ID 列表，如果此处没有返回实例 ID，可以通过订单查询接口获取。还可通过实例查询接口查询实例是否创建完成。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    InstanceIds?: Array<string>;
+    InstanceIds: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1845,11 +1845,11 @@ export interface CreateDCDBInstanceRequest {
       */
     SubnetId?: string;
     /**
-      * 数据库引擎版本，当前可选：10.0.10，10.1.9，5.7.17。
-10.0.10 - Mariadb 10.0.10；
+      * 数据库引擎版本，当前可选：8.0.18，10.1.9，5.7.17。
+8.0.18 - MySQL 8.0.18；
 10.1.9 - Mariadb 10.1.9；
 5.7.17 - Percona 5.7.17。
-如果不填的话，默认为10.1.9，表示Mariadb 10.1.9。
+如果不填的话，默认为5.7.17，表示Percona 5.7.17。
       */
     DbVersionId?: string;
     /**

@@ -406,11 +406,11 @@ export interface DescribeInstancesResponse {
     /**
       * 符合条件的实例数量。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 实例详细信息列表。
       */
-    InstanceSet?: Array<Instance>;
+    InstanceSet: Array<Instance>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3177,6 +3177,8 @@ export interface DescribeInstancesRequest {
 <p style="padding-left: 30px;">按照【<strong>实例主网卡的内网IP</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
 <li><strong>public-ip-address</strong></li>
 <p style="padding-left: 30px;">按照【<strong>实例主网卡的公网IP</strong>】进行过滤，包含实例创建时自动分配的IP和实例创建后手动绑定的弹性IP。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>ipv6-address</strong></li>
+<p style="padding-left: 30px;">按照【<strong>实例的IPv6地址</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
 <li><strong>tag-key</strong></li>
 <p style="padding-left: 30px;">按照【<strong>标签键</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
 <li><strong>tag-value</strong></li>

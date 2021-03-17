@@ -22,6 +22,7 @@ import {
   OrderInfo,
   CheckTcbServiceResponse,
   DescribeCloudBaseRunServerVersionRequest,
+  DescribeExtensionUploadInfoRequest,
   DescribeCloudBaseRunServerVersionResponse,
   CloudBaseRunSideSpec,
   CommonServiceAPIResponse,
@@ -87,6 +88,7 @@ import {
   DescribeCloudBaseRunVersionRequest,
   DatabasesInfo,
   CloudBaseSecurityContext,
+  ExtensionFile,
   ReinstateEnvRequest,
   DescribeDatabaseACLRequest,
   CreateCloudBaseRunServerVersionResponse,
@@ -121,8 +123,10 @@ import {
   ModifyEndUserResponse,
   DescribeAuthDomainsRequest,
   CloudRunServiceVolume,
+  ExtensionFileInfo,
   CloudBaseProjectVersion,
   DescribeDatabaseACLResponse,
+  DescribeExtensionUploadInfoResponse,
   ModifyEnvRequest,
   PostpayEnvQuota,
   DescribeCloudBaseRunVersionSnapshotResponse,
@@ -191,6 +195,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAuthDomainResponse) => void
   ): Promise<CreateAuthDomainResponse> {
     return this.request("CreateAuthDomain", req, cb)
+  }
+
+  /**
+   * 获取后付费免费额度
+   */
+  async DescribePostpayPackageFreeQuotas(
+    req: DescribePostpayPackageFreeQuotasRequest,
+    cb?: (error: string, rep: DescribePostpayPackageFreeQuotasResponse) => void
+  ): Promise<DescribePostpayPackageFreeQuotasResponse> {
+    return this.request("DescribePostpayPackageFreeQuotas", req, cb)
   }
 
   /**
@@ -304,13 +318,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取后付费免费额度
+   * 描述扩展上传文件信息
    */
-  async DescribePostpayPackageFreeQuotas(
-    req: DescribePostpayPackageFreeQuotasRequest,
-    cb?: (error: string, rep: DescribePostpayPackageFreeQuotasResponse) => void
-  ): Promise<DescribePostpayPackageFreeQuotasResponse> {
-    return this.request("DescribePostpayPackageFreeQuotas", req, cb)
+  async DescribeExtensionUploadInfo(
+    req: DescribeExtensionUploadInfoRequest,
+    cb?: (error: string, rep: DescribeExtensionUploadInfoResponse) => void
+  ): Promise<DescribeExtensionUploadInfoResponse> {
+    return this.request("DescribeExtensionUploadInfo", req, cb)
   }
 
   /**

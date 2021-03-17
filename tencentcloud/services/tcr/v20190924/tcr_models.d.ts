@@ -1908,7 +1908,7 @@ export interface ValidateRepositoryExistPersonalResponse {
  */
 export interface DescribeExternalEndpointStatusResponse {
     /**
-      * 开启公网访问状态，包括开启中，开启成功以及关闭和更新失败等
+      * 开启公网访问状态，开启中（Opening）、已开启（Opened）、关闭（Closed）
       */
     Status: string;
     /**

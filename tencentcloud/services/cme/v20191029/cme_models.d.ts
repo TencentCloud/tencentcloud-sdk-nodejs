@@ -36,6 +36,10 @@ export interface DeleteProjectRequest {
       * 项目 Id。
       */
     ProjectId: string;
+    /**
+      * 操作者。填写用户的 Id，用于标识调用者及校验对项目删除操作权限。
+      */
+    Operator?: string;
 }
 /**
  * ExportVideoByVideoSegmentationData返回参数结构体
@@ -291,14 +295,14 @@ export interface SearchMaterialRequest {
       */
     SearchScopes: Array<SearchScope>;
     /**
-      * 素材类型，取值：
+      * 媒体类型，取值：
 <li>AUDIO：音频；</li>
 <li>VIDEO：视频 ；</li>
 <li>IMAGE：图片。</li>
       */
     MaterialTypes?: Array<string>;
     /**
-      * 搜索文本，模糊匹配素材名称或描述信息，匹配项越多，匹配度越高，排序越优先。长度限制：15个字符。
+      * 搜索文本，模糊匹配媒体名称或描述信息，匹配项越多，匹配度越高，排序越优先。长度限制：15个字符。
       */
     Text?: string;
     /**
@@ -306,11 +310,11 @@ export interface SearchMaterialRequest {
       */
     Resolution?: string;
     /**
-      * 按素材时长检索，单位s。
+      * 按媒体时长检索，单位s。
       */
     DurationRange?: IntegerRange;
     /**
-      * 按照素材创建时间检索。
+      * 按照媒体创建时间检索。
       */
     CreateTimeRange?: TimeRange;
     /**
@@ -330,7 +334,7 @@ export interface SearchMaterialRequest {
       */
     Limit?: number;
     /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+      * 操作者。填写用户的 Id，用于标识调用者及校验媒体访问权限。
       */
     Operator?: string;
 }
@@ -524,7 +528,7 @@ export interface DescribeTeamsRequest {
       */
     Platform: string;
     /**
-      * 团队 ID 列表，限30个。
+      * 团队 ID 列表，限30个。若不填，则默认获取平台下所有团队。
       */
     TeamIds?: Array<string>;
     /**
@@ -585,11 +589,11 @@ export interface FlattenListMediaRequest {
       */
     Platform: string;
     /**
-      * 素材分类路径，例如填写"/a/b"，则代表平铺该分类路径下及其子分类路径下的素材信息。
+      * 媒体分类路径，例如填写"/a/b"，则代表平铺该分类路径下及其子分类路径下的媒体信息。
       */
     ClassPath: string;
     /**
-      * 素材路径的归属者。
+      * 媒体分类的归属者。
       */
     Owner: Entity;
     /**
@@ -601,7 +605,7 @@ export interface FlattenListMediaRequest {
       */
     Limit?: number;
     /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+      * 操作者。填写用户的 Id，用于标识调用者及校验媒体访问权限。
       */
     Operator?: string;
 }
@@ -830,19 +834,19 @@ export interface ModifyMaterialRequest {
       */
     Platform: string;
     /**
-      * 素材 Id。
+      * 媒体 Id。
       */
     MaterialId: string;
     /**
-      * 素材归属。
+      * 媒体或分类路径归属。
       */
-    Owner: Entity;
+    Owner?: Entity;
     /**
-      * 素材名称，不能超过30个字符。
+      * 媒体名称，不能超过30个字符。
       */
     Name?: string;
     /**
-      * 素材分类路径，例如填写"/a/b"，则代表该素材存储的路径为"/a/b"。
+      * 媒体分类路径，例如填写"/a/b"，则代表该媒体存储的路径为"/a/b"。若修改分类路径，则 Owner 字段必填。
       */
     ClassPath?: string;
     /**
@@ -914,6 +918,10 @@ export interface DescribeTasksRequest {
       * 分页返回的记录条数，默认值：10。
       */
     Limit?: number;
+    /**
+      * 操作者。填写用户的 Id，用于标识调用者及校验对任务的访问权限。
+      */
+    Operator?: string;
 }
 /**
  * 媒体轨道的片段信息
@@ -1029,17 +1037,17 @@ export interface CreateLinkResponse {
  */
 export interface ListMediaResponse {
     /**
-      * 符合条件的素材记录总数。
+      * 符合条件的媒体记录总数。
       */
-    MaterialTotalCount?: number;
+    MaterialTotalCount: number;
     /**
-      * 浏览分类路径下的素材列表信息。
+      * 浏览分类路径下的媒体列表信息。
       */
-    MaterialInfoSet?: Array<MaterialInfo>;
+    MaterialInfoSet: Array<MaterialInfo>;
     /**
       * 浏览分类路径下的一级子类。
       */
-    ClassInfoSet?: Array<ClassInfo>;
+    ClassInfoSet: Array<ClassInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1052,11 +1060,11 @@ export interface SearchMaterialResponse {
     /**
       * 符合记录总条数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
-      * 素材信息，仅返回基础信息。
+      * 媒体信息，仅返回基础信息。
       */
-    MaterialInfoSet?: Array<MaterialInfo>;
+    MaterialInfoSet: Array<MaterialInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1130,11 +1138,11 @@ export interface DeleteMaterialRequest {
       */
     Platform: string;
     /**
-      * 素材 Id。
+      * 媒体 Id。
       */
     MaterialId: string;
     /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+      * 操作者。填写用户的 Id，用于标识调用者及校验媒体删除权限。
       */
     Operator?: string;
 }
@@ -1261,7 +1269,7 @@ export interface CreateClassRequest {
       */
     ClassPath: string;
     /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+      * 操作者。填写用户的 Id，用于标识调用者及校验分类创建权限。
       */
     Operator?: string;
 }
@@ -1270,7 +1278,7 @@ export interface CreateClassRequest {
  */
 export interface DescribeMaterialsResponse {
     /**
-      * 素材列表信息。
+      * 媒体列表信息。
       */
     MaterialInfoSet?: Array<MaterialInfo>;
     /**
@@ -1543,6 +1551,15 @@ export interface MediaMetaData {
     AudioStreamInfoSet: Array<AudioStreamInfo>;
 }
 /**
+ * MoveResource返回参数结构体
+ */
+export interface MoveResourceResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * MoveClass请求参数结构体
  */
 export interface MoveClassRequest {
@@ -1728,46 +1745,74 @@ export interface CreateTeamRequest {
     TeamId?: string;
 }
 /**
- * 素材基本信息。
+ * 媒体基本信息。
  */
 export interface MaterialBasicInfo {
     /**
-      * 素材 Id。
+      * 媒体 Id。
       */
     MaterialId: string;
     /**
-      * 素材类型，取值为：音频（AUDIO）、视频（VIDEO）、图片（IMAGE）、链接（LINK）、字幕 （SUBTITLE）、转场（TRANSITION）、滤镜（FILTER）、文本文字（TEXT）、图文动效（TEXT_IMAGE）。
+      * 媒体类型，取值为：
+<li> AUDIO :音频;</li>
+<li> VIDEO :视频;</li>
+<li> IMAGE :图片;</li>
+<li> LINK  :链接.</li>
+<li> OTHER : 其他.</li>
       */
     MaterialType: string;
     /**
-      * 素材归属实体。
+      * 媒体归属实体。
       */
     Owner: Entity;
     /**
-      * 素材名称。
+      * 媒体名称。
       */
     Name: string;
     /**
-      * 素材文件的创建时间，使用 ISO 日期格式。
+      * 媒体文件的创建时间，使用 ISO 日期格式。
       */
     CreateTime: string;
     /**
-      * 素材文件的最近更新时间（如修改视频属性、发起视频处理等会触发更新媒体文件信息的操作），使用 ISO 日期格式。
+      * 媒体文件的最近更新时间（如修改视频属性、发起视频处理等会触发更新媒体文件信息的操作），使用 ISO 日期格式。
       */
     UpdateTime: string;
     /**
-      * 素材的分类目录路径。
+      * 媒体的分类路径。
       */
     ClassPath: string;
     /**
-      * 素材绑定的标签信息列表 。
+      * 预置标签列表。
+      */
+    PresetTagSet: Array<PresetTagInfo>;
+    /**
+      * 人工标签列表。
+      */
+    TagSet: Array<string>;
+    /**
+      * 媒体文件的预览图。
+      */
+    PreviewUrl: string;
+    /**
+      * 媒体绑定的标签信息列表 。
+该字段已废弃。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TagInfoSet: Array<MaterialTagInfo>;
+}
+/**
+ * 资源信息，包含资源以及归属信息
+ */
+export interface ResourceInfo {
     /**
-      * 素材媒体文件的预览图。
+      * 媒资和分类资源。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    PreviewUrl: string;
+    Resource: Resource;
+    /**
+      * 资源归属，个人或团队。
+      */
+    Owner: Entity;
 }
 /**
  * 加入的团队信息
@@ -1822,6 +1867,19 @@ export interface CreateClassResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 其他类型素材
+ */
+export interface OtherMaterial {
+    /**
+      * 素材媒体文件的播放 URL 地址。
+      */
+    MaterialUrl: string;
+    /**
+      * 云点播媒资 FileId。
+      */
+    VodFileId: string;
 }
 /**
  * 视频流信息。
@@ -1912,11 +1970,11 @@ export interface ListMediaRequest {
       */
     Platform: string;
     /**
-      * 素材分类路径，例如填写"/a/b"，则代表浏览该分类路径下的素材和子分类信息。
+      * 媒体分类路径，例如填写"/a/b"，则代表浏览该分类路径下的媒体和子分类信息。
       */
     ClassPath: string;
     /**
-      * 素材和分类的归属者。
+      * 媒体和分类的归属者。
       */
     Owner: Entity;
     /**
@@ -1928,7 +1986,7 @@ export interface ListMediaRequest {
       */
     Limit?: number;
     /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+      * 操作者。填写用户的 Id，用于标识调用者及校验对媒体的访问权限。
       */
     Operator?: string;
 }
@@ -1989,6 +2047,27 @@ export interface DeleteTeamMembersRequest {
     MemberIds: Array<string>;
     /**
       * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+      */
+    Operator?: string;
+}
+/**
+ * MoveResource请求参数结构体
+ */
+export interface MoveResourceRequest {
+    /**
+      * 平台名称，指定访问的平台。
+      */
+    Platform: string;
+    /**
+      * 待移动的原始资源信息，包含原始媒体或分类资源，以及资源归属。
+      */
+    SourceResource: ResourceInfo;
+    /**
+      * 目标信息，包含分类及归属，仅支持移动资源到分类。
+      */
+    DestinationResource: ResourceInfo;
+    /**
+      * 操作者。填写用户的 Id，用于标识调用者及校验资源访问以及写权限。
       */
     Operator?: string;
 }
@@ -2089,11 +2168,11 @@ export interface FlattenListMediaResponse {
     /**
       * 符合条件的记录总数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
-      * 该分类路径下及其子分类下的所有素材。
+      * 该分类路径下及其子分类下的所有媒体基础信息列表。
       */
-    MaterialInfoSet?: Array<MaterialInfo>;
+    MaterialInfoSet: Array<MaterialInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2116,7 +2195,10 @@ export interface DescribeProjectsRequest {
       */
     AspectRatioSet?: Array<string>;
     /**
-      * 项目类别集合。
+      * 项目类别，取值有：
+<li>VIDEO_EDIT：视频编辑。</li>
+<li>SWITCHER：导播台。</li>
+<li>VIDEO_SEGMENTATION：视频拆条。</li>
       */
     CategorySet?: Array<string>;
     /**
@@ -2137,6 +2219,10 @@ export interface DescribeProjectsRequest {
       * 分页返回的记录条数，默认值：10。
       */
     Limit?: number;
+    /**
+      * 操作者。填写用户的 Id，用于标识调用者及校验项目访问权限。
+      */
+    Operator?: string;
 }
 /**
  * DescribeLoginStatus返回参数结构体
@@ -2201,7 +2287,7 @@ export interface DescribeTeamMembersRequest {
       */
     TeamId: string;
     /**
-      * 成员 ID 列表，限指定30个指定成员。
+      * 成员 ID 列表，限指定30个指定成员。如不填，则返回指定团队下的所有成员。
       */
     MemberIds?: Array<string>;
     /**
@@ -2317,6 +2403,10 @@ export interface DescribeTaskDetailRequest {
       * 任务 Id。
       */
     TaskId: string;
+    /**
+      * 操作者。填写用户的 Id，用于标识调用者及校验对任务的访问权限。
+      */
+    Operator?: string;
 }
 /**
  * 轨道信息
@@ -2358,38 +2448,43 @@ export interface ModifyProjectRequest {
       */
     AspectRatio?: string;
     /**
-      * 归属者。
+      * 项目归属者。
       */
     Owner?: Entity;
 }
 /**
- * 素材详情信息
+ * 媒体详情信息
  */
 export interface MaterialInfo {
     /**
-      * 素材基本信息。
+      * 媒体基本信息。
       */
     BasicInfo: MaterialBasicInfo;
     /**
-      * 视频素材信息。
+      * 视频媒体信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     VideoMaterial: VideoMaterial;
     /**
-      * 音频素材信息。
+      * 音频媒体信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     AudioMaterial: AudioMaterial;
     /**
-      * 图片素材信息。
+      * 图片媒体信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ImageMaterial: ImageMaterial;
     /**
-      * 链接素材信息。
+      * 链接媒体信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     LinkMaterial: LinkMaterial;
+    /**
+      * 其他类型媒体信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OtherMaterial: OtherMaterial;
 }
 /**
  * 登录态信息
@@ -2433,6 +2528,23 @@ export interface GenerateVideoSegmentationSchemeByAiResponse {
     RequestId?: string;
 }
 /**
+ * 预置标签信息
+ */
+export interface PresetTagInfo {
+    /**
+      * 标签 Id 。
+      */
+    Id: string;
+    /**
+      * 标签名称。
+      */
+    Name: string;
+    /**
+      * 父级预设 Id。
+      */
+    ParentTagId?: string;
+}
+/**
  * DescribeSharedSpace请求参数结构体
  */
 export interface DescribeSharedSpaceRequest {
@@ -2441,7 +2553,7 @@ export interface DescribeSharedSpaceRequest {
       */
     Platform: string;
     /**
-      * 被授权目标实体。
+      * 被授权目标,，个人或团队。
       */
     Authorizee: Entity;
     /**
@@ -2578,7 +2690,7 @@ export interface GrantResourceAuthorizationRequest {
       */
     Platform: string;
     /**
-      * 资源所属实体。
+      * 资源归属者，个人或者团队。
       */
     Owner: Entity;
     /**
@@ -2586,12 +2698,12 @@ export interface GrantResourceAuthorizationRequest {
       */
     Resources: Array<Resource>;
     /**
-      * 被授权目标实体。
+      * 被授权目标，个人或者团队。
       */
     Authorizees: Array<Entity>;
     /**
       * 详细授权值。 取值有：
-<li>R：可读，可以浏览素材，但不能使用该素材（将其添加到 Project），或复制到自己的媒资库中</li>
+<li>R：可读，可以浏览媒体，但不能使用该媒体文件（将其添加到 Project），或复制到自己的媒资库中</li>
 <li>X：可用，可以使用该素材（将其添加到 Project），但不能将其复制到自己的媒资库中，意味着被授权者无法将该资源进一步扩散给其他个人或团队。</li>
 <li>C：可复制，既可以使用该素材（将其添加到 Project），也可以将其复制到自己的媒资库中。</li>
 <li>W：可修改、删除媒资。</li>
@@ -2681,7 +2793,7 @@ export interface DescribeMaterialsRequest {
       */
     Platform: string;
     /**
-      * 素材 ID 列表，N 从 0 开始取值，最大 19。
+      * 媒体 ID 列表，N 从 0 开始取值，最大 19。
       */
     MaterialIds: Array<string>;
     /**
@@ -2691,7 +2803,7 @@ export interface DescribeMaterialsRequest {
       */
     Sort?: SortBy;
     /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+      * 操作者。填写用户的 Id，用于标识调用者及校验媒体的访问权限。
       */
     Operator?: string;
 }

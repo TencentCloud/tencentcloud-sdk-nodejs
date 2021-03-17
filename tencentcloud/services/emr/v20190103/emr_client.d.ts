@@ -1,12 +1,16 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { RunJobFlowRequest, ScaleOutInstanceResponse, InquiryPriceCreateInstanceRequest, TerminateInstanceRequest, TerminateTasksRequest, TerminateInstanceResponse, CreateInstanceResponse, InquiryPriceRenewInstanceResponse, DescribeJobFlowRequest, InquiryPriceCreateInstanceResponse, DescribeClusterNodesRequest, CreateInstanceRequest, DescribeInstancesResponse, InquiryPriceScaleOutInstanceRequest, DescribeInstancesRequest, InquiryPriceUpdateInstanceRequest, RunJobFlowResponse, InquiryPriceScaleOutInstanceResponse, TerminateTasksResponse, DescribeClusterNodesResponse, InquiryPriceUpdateInstanceResponse, DescribeJobFlowResponse, InquiryPriceRenewInstanceRequest, ScaleOutInstanceRequest } from "./emr_models";
+import { InquirePriceRenewEmrResponse, RunJobFlowRequest, DescribeInstanceRenewNodesRequest, ScaleOutInstanceResponse, InquiryPriceCreateInstanceRequest, TerminateInstanceRequest, TerminateTasksRequest, TerminateInstanceResponse, CreateInstanceResponse, InquiryPriceRenewInstanceResponse, DescribeJobFlowRequest, InquiryPriceCreateInstanceResponse, DescribeClusterNodesRequest, CreateInstanceRequest, InquirePriceRenewEmrRequest, DescribeInstancesResponse, InquiryPriceScaleOutInstanceRequest, DescribeInstancesRequest, InquiryPriceUpdateInstanceRequest, DescribeInstanceRenewNodesResponse, RunJobFlowResponse, InquiryPriceScaleOutInstanceResponse, TerminateTasksResponse, DescribeClusterNodesResponse, InquiryPriceUpdateInstanceResponse, DescribeJobFlowResponse, InquiryPriceRenewInstanceRequest, ScaleOutInstanceRequest } from "./emr_models";
 /**
  * emr client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 预付费集群隔离后续费资源查询
+     */
+    DescribeInstanceRenewNodes(req: DescribeInstanceRenewNodesRequest, cb?: (error: string, rep: DescribeInstanceRenewNodesResponse) => void): Promise<DescribeInstanceRenewNodesResponse>;
     /**
      * 缩容Task节点
      */
@@ -35,6 +39,10 @@ export declare class Client extends AbstractClient {
      * 创建实例询价
      */
     InquiryPriceCreateInstance(req: InquiryPriceCreateInstanceRequest, cb?: (error: string, rep: InquiryPriceCreateInstanceResponse) => void): Promise<InquiryPriceCreateInstanceResponse>;
+    /**
+     * 集群续费询价。
+     */
+    InquirePriceRenewEmr(req: InquirePriceRenewEmrRequest, cb?: (error: string, rep: InquirePriceRenewEmrResponse) => void): Promise<InquirePriceRenewEmrResponse>;
     /**
      * 扩容询价. 当扩容时候，请通过该接口查询价格。
      */

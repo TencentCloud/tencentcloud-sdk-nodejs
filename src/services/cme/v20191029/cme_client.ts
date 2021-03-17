@@ -86,6 +86,7 @@ import {
   DescribeClassRequest,
   DescribeSharedSpaceResponse,
   MediaMetaData,
+  MoveResourceResponse,
   MoveClassRequest,
   DeleteTeamMembersResponse,
   MoveClassResponse,
@@ -98,9 +99,11 @@ import {
   ModifyTeamMemberRequest,
   CreateTeamRequest,
   MaterialBasicInfo,
+  ResourceInfo,
   JoinTeamInfo,
   DescribeResourceAuthorizationRequest,
   CreateClassResponse,
+  OtherMaterial,
   VideoStreamInfo,
   AddTeamMemberRequest,
   ExportVideoEditProjectResponse,
@@ -110,6 +113,7 @@ import {
   DeleteLoginStatusRequest,
   GenerateVideoSegmentationSchemeByAiRequest,
   DeleteTeamMembersRequest,
+  MoveResourceRequest,
   DescribePlatformsRequest,
   SearchScope,
   VideoMaterial,
@@ -132,6 +136,7 @@ import {
   LoginStatusInfo,
   DescribeClassResponse,
   GenerateVideoSegmentationSchemeByAiResponse,
+  PresetTagInfo,
   DescribeSharedSpaceRequest,
   KuaishouPublishInfo,
   TaskBaseInfo,
@@ -156,7 +161,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据素材 Id 批量获取素材详情。
+   * 根据媒体 Id 批量获取媒体详情。
    */
   async DescribeMaterials(
     req: DescribeMaterialsRequest,
@@ -186,7 +191,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取共享空间。当实体A对实体B授权某资源以后，实体B的共享空间就会增加实体A。
+   * 获取共享空间。当个人或团队A对个人或团队B授权某资源以后，个人或团队B的共享空间就会增加个人或团队A。
    */
   async DescribeSharedSpace(
     req: DescribeSharedSpaceRequest,
@@ -218,7 +223,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 资源所属实体对目标实体授予目标资源的相应权限。
+   * 资源归属者对目标个人或团队授予目标资源的相应权限。
    */
   async GrantResourceAuthorization(
     req: GrantResourceAuthorizationRequest,
@@ -228,7 +233,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据检索条件搜索素材，返回素材的基本信息。
+   * 根据检索条件搜索媒体，返回媒体的基本信息。
    */
   async SearchMaterial(
     req: SearchMaterialRequest,
@@ -334,7 +339,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据素材 Id 删除素材。
+   * 根据媒体 Id 删除媒体。
    */
   async DeleteMaterial(
     req: DeleteMaterialRequest,
@@ -344,7 +349,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改素材信息，支持修改素材名称、分类路径、标签等信息。
+   * 修改媒体信息，支持修改媒体名称、分类路径、标签等信息。
    */
   async ModifyMaterial(
     req: ModifyMaterialRequest,
@@ -377,7 +382,9 @@ export class Client extends AbstractClient {
 
   /**
      * 移动某一个分类到另外一个分类下，也可用于分类重命名。
-<li>如果 SourceClassPath = /素材/视频/NBA，DestinationClassPath = /素材/视频/篮球，当 DestinationClassPath 不存在时候，操作结果为重命名 ClassPath，如果 DestinationClassPath 存在时候，操作结果为产生新目录 /素材/视频/篮球/NBA。</li>
+如果 SourceClassPath = /素材/视频/NBA，DestinationClassPath = /素材/视频/篮球
+<li>当 DestinationClassPath 不存在时候，操作结果为重命名 ClassPath；</li>
+<li>当 DestinationClassPath 存在时候，操作结果为产生新目录 /素材/视频/篮球/NBA</li>
      */
   async MoveClass(
     req: MoveClassRequest,
@@ -499,7 +506,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   *  浏览当前分类路径下的资源，包括素材和子分类。
+   *  浏览当前分类路径下的资源，包括媒体文件和子分类，返回媒资基础信息和分类信息。
    */
   async ListMedia(
     req: ListMediaRequest,
@@ -517,6 +524,22 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateProjectResponse) => void
   ): Promise<CreateProjectResponse> {
     return this.request("CreateProject", req, cb)
+  }
+
+  /**
+     * 移动资源，支持跨个人或团队移动媒体以及分类。如果填写了Operator，则需要校验用户对媒体和分类资源的访问以及写权限。
+<li>当原始资源为媒体时，该接口效果为将该媒体移动到目标分类下面；</li>
+<li>当原始资源为分类时，该接口效果为将原始分类移动到目标分类或者是重命名。</li>
+ 如果 SourceResource.Resource.Id = /素材/视频/NBA，DestinationResource.Resource.Id= /素材/视频/篮球 
+<li>当 DestinationResource.Resource.Id 不存在时候且原始资源与目标资源归属相同，操作结果为重命名原始分类；</li>
+<li>当 DestinationResource.Resource.Id 存在时候，操作结果为产生新目录 /素材/视频/篮球/NBA</li>
+
+     */
+  async MoveResource(
+    req: MoveResourceRequest,
+    cb?: (error: string, rep: MoveResourceResponse) => void
+  ): Promise<MoveResourceResponse> {
+    return this.request("MoveResource", req, cb)
   }
 
   /**
@@ -542,7 +565,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 平铺分类路径下及其子分类下的所有素材。
+   * 平铺分类路径下及其子分类下的所有媒体基础信息。
    */
   async FlattenListMedia(
     req: FlattenListMediaRequest,

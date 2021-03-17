@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { QueryRequest, GetChaincodeInitializeResultForUserResponse, GetClusterListForUserResponse, GetBlockTransactionListForUserResponse, SendTransactionHandlerResponse, ApplyUserCertRequest, TransByDynamicContractHandlerRequest, GetTransListHandlerResponse, GetChaincodeInitializeResultForUserRequest, InitializeChaincodeForUserRequest, DeployDynamicContractHandlerResponse, ApplyUserCertResponse, GetChaincodeCompileLogForUserRequest, GetInvokeTxRequest, GetPeerLogForUserResponse, GetTransListHandlerRequest, DownloadUserCertResponse, GetChaincodeLogForUserRequest, GetLatesdTransactionListRequest, InvokeResponse, GetTransactionDetailForUserRequest, GetBlockListResponse, SrvInvokeRequest, GetClusterSummaryRequest, BlockByNumberHandlerResponse, GetTransByHashHandlerResponse, DeployDynamicContractHandlerRequest, GetPeerLogForUserRequest, GetLatesdTransactionListResponse, DownloadUserCertRequest, GetClusterSummaryResponse, TransByDynamicContractHandlerResponse, GetBlockTransactionListForUserRequest, CreateChaincodeAndInstallForUserRequest, SrvInvokeResponse, GetBlockListHandlerRequest, GetChaincodeLogForUserResponse, InitializeChaincodeForUserResponse, GetClusterListForUserRequest, GetBlockListRequest, InvokeRequest, GetInvokeTxResponse, GetBlockListHandlerResponse, GetTransactionDetailForUserResponse, GetChannelListForUserResponse, GetChaincodeCompileLogForUserResponse, SendTransactionHandlerRequest, BlockByNumberHandlerRequest, GetTransByHashHandlerRequest, CreateChaincodeAndInstallForUserResponse, GetChannelListForUserRequest, QueryResponse } from "./tbaas_models";
+import { GetBcosTransListRequest, QueryRequest, DeployDynamicBcosContractResponse, GetClusterListForUserResponse, GetBlockTransactionListForUserResponse, SendTransactionHandlerResponse, ApplyUserCertRequest, TransByDynamicContractHandlerRequest, GetTransListHandlerResponse, InvokeBcosTransRequest, GetChaincodeInitializeResultForUserRequest, InitializeChaincodeForUserRequest, DeployDynamicContractHandlerResponse, SrvInvokeRequest, ApplyUserCertResponse, GetChaincodeCompileLogForUserRequest, GetBcosBlockByNumberRequest, GetPeerLogForUserResponse, GetBcosBlockListResponse, DownloadUserCertResponse, GetChaincodeLogForUserRequest, GetLatesdTransactionListRequest, InvokeResponse, GetTransactionDetailForUserRequest, GetBlockListResponse, GetBcosBlockListRequest, GetClusterSummaryRequest, BlockByNumberHandlerResponse, GetTransListHandlerRequest, GetTransByHashHandlerResponse, GetInvokeTxRequest, DeployDynamicContractHandlerRequest, GetPeerLogForUserRequest, GetLatesdTransactionListResponse, DownloadUserCertRequest, GetClusterSummaryResponse, TransByDynamicContractHandlerResponse, GetBlockTransactionListForUserRequest, CreateChaincodeAndInstallForUserRequest, SrvInvokeResponse, GetBcosTransByHashResponse, GetBlockListHandlerRequest, GetChaincodeLogForUserResponse, InvokeBcosTransResponse, InitializeChaincodeForUserResponse, GetBcosBlockByNumberResponse, GetClusterListForUserRequest, GetBlockListRequest, GetChaincodeInitializeResultForUserResponse, InvokeRequest, GetInvokeTxResponse, GetBlockListHandlerResponse, GetTransactionDetailForUserResponse, GetBcosTransByHashRequest, GetChannelListForUserResponse, GetChaincodeCompileLogForUserResponse, DeployDynamicBcosContractRequest, SendTransactionHandlerRequest, GetBcosTransListResponse, BlockByNumberHandlerRequest, GetTransByHashHandlerRequest, CreateChaincodeAndInstallForUserResponse, GetChannelListForUserRequest, QueryResponse } from "./tbaas_models";
 /**
  * tbaas client
  * @class
@@ -8,9 +8,21 @@ import { QueryRequest, GetChaincodeInitializeResultForUserResponse, GetClusterLi
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
+     * 执行Bcos交易，支持动态部署的合约
+     */
+    InvokeBcosTrans(req: InvokeBcosTransRequest, cb?: (error: string, rep: InvokeBcosTransResponse) => void): Promise<InvokeBcosTransResponse>;
+    /**
+     * 使用块高查询Bcos区块信息
+     */
+    GetBcosBlockByNumber(req: GetBcosBlockByNumberRequest, cb?: (error: string, rep: GetBcosBlockByNumberResponse) => void): Promise<GetBcosBlockByNumberResponse>;
+    /**
      * 获取合约容器日志
      */
     GetChaincodeLogForUser(req: GetChaincodeLogForUserRequest, cb?: (error: string, rep: GetChaincodeLogForUserResponse) => void): Promise<GetChaincodeLogForUserResponse>;
+    /**
+     * Bcos根据交易哈希查看交易详细信息
+     */
+    GetBcosTransByHash(req: GetBcosTransByHashRequest, cb?: (error: string, rep: GetBcosTransByHashResponse) => void): Promise<GetBcosTransByHashResponse>;
     /**
      * 获取该用户的网络列表。网络信息中包含组织信息，但仅包含该用户所在组织的信息。
      */
@@ -18,11 +30,15 @@ export declare class Client extends AbstractClient {
     /**
      * Bcos分页查询当前群组下的区块列表
      */
-    GetBlockListHandler(req: GetBlockListHandlerRequest, cb?: (error: string, rep: GetBlockListHandlerResponse) => void): Promise<GetBlockListHandlerResponse>;
+    GetBcosBlockList(req: GetBcosBlockListRequest, cb?: (error: string, rep: GetBcosBlockListResponse) => void): Promise<GetBcosBlockListResponse>;
     /**
-     * 动态部署合约
+     * 获取交易详情
      */
-    DeployDynamicContractHandler(req: DeployDynamicContractHandlerRequest, cb?: (error: string, rep: DeployDynamicContractHandlerResponse) => void): Promise<DeployDynamicContractHandlerResponse>;
+    GetTransactionDetailForUser(req: GetTransactionDetailForUserRequest, cb?: (error: string, rep: GetTransactionDetailForUserResponse) => void): Promise<GetTransactionDetailForUserResponse>;
+    /**
+     * Bcos分页查询当前群组的交易信息列表
+     */
+    GetTransListHandler(req: GetTransListHandlerRequest, cb?: (error: string, rep: GetTransListHandlerResponse) => void): Promise<GetTransListHandlerResponse>;
     /**
      * 新增交易
      */
@@ -36,6 +52,10 @@ export declare class Client extends AbstractClient {
      */
     GetPeerLogForUser(req: GetPeerLogForUserRequest, cb?: (error: string, rep: GetPeerLogForUserResponse) => void): Promise<GetPeerLogForUserResponse>;
     /**
+     * 动态部署并发布Bcos合约
+     */
+    DeployDynamicBcosContract(req: DeployDynamicBcosContractRequest, cb?: (error: string, rep: DeployDynamicBcosContractResponse) => void): Promise<DeployDynamicBcosContractResponse>;
+    /**
      * 下载用户证书
      */
     DownloadUserCert(req: DownloadUserCertRequest, cb?: (error: string, rep: DownloadUserCertResponse) => void): Promise<DownloadUserCertResponse>;
@@ -44,9 +64,13 @@ export declare class Client extends AbstractClient {
      */
     CreateChaincodeAndInstallForUser(req: CreateChaincodeAndInstallForUserRequest, cb?: (error: string, rep: CreateChaincodeAndInstallForUserResponse) => void): Promise<CreateChaincodeAndInstallForUserResponse>;
     /**
-     * 获取区块内的交易列表
+     * Bcos根据交易哈希查看交易详细信息
      */
-    GetBlockTransactionListForUser(req: GetBlockTransactionListForUserRequest, cb?: (error: string, rep: GetBlockTransactionListForUserResponse) => void): Promise<GetBlockTransactionListForUserResponse>;
+    GetTransByHashHandler(req: GetTransByHashHandlerRequest, cb?: (error: string, rep: GetTransByHashHandlerResponse) => void): Promise<GetTransByHashHandlerResponse>;
+    /**
+     * 获取最新交易列表
+     */
+    GetLatesdTransactionList(req: GetLatesdTransactionListRequest, cb?: (error: string, rep: GetLatesdTransactionListResponse) => void): Promise<GetLatesdTransactionListResponse>;
     /**
      * 申请用户证书
      */
@@ -72,13 +96,17 @@ export declare class Client extends AbstractClient {
      */
     InitializeChaincodeForUser(req: InitializeChaincodeForUserRequest, cb?: (error: string, rep: InitializeChaincodeForUserResponse) => void): Promise<InitializeChaincodeForUserResponse>;
     /**
-     * 获取交易详情
+     * 动态部署合约
      */
-    GetTransactionDetailForUser(req: GetTransactionDetailForUserRequest, cb?: (error: string, rep: GetTransactionDetailForUserResponse) => void): Promise<GetTransactionDetailForUserResponse>;
+    DeployDynamicContractHandler(req: DeployDynamicContractHandlerRequest, cb?: (error: string, rep: DeployDynamicContractHandlerResponse) => void): Promise<DeployDynamicContractHandlerResponse>;
     /**
      * trustsql服务统一接口
      */
     SrvInvoke(req: SrvInvokeRequest, cb?: (error: string, rep: SrvInvokeResponse) => void): Promise<SrvInvokeResponse>;
+    /**
+     * Bcos分页查询当前群组的交易信息列表
+     */
+    GetBcosTransList(req: GetBcosTransListRequest, cb?: (error: string, rep: GetBcosTransListResponse) => void): Promise<GetBcosTransListResponse>;
     /**
      * 根据动态部署的合约发送交易
      */
@@ -92,9 +120,9 @@ export declare class Client extends AbstractClient {
      */
     GetChaincodeCompileLogForUser(req: GetChaincodeCompileLogForUserRequest, cb?: (error: string, rep: GetChaincodeCompileLogForUserResponse) => void): Promise<GetChaincodeCompileLogForUserResponse>;
     /**
-     * Bcos分页查询当前群组的交易信息列表
+     * 获取区块内的交易列表
      */
-    GetTransListHandler(req: GetTransListHandlerRequest, cb?: (error: string, rep: GetTransListHandlerResponse) => void): Promise<GetTransListHandlerResponse>;
+    GetBlockTransactionListForUser(req: GetBlockTransactionListForUserRequest, cb?: (error: string, rep: GetBlockTransactionListForUserResponse) => void): Promise<GetBlockTransactionListForUserResponse>;
     /**
      * 查看当前网络下的所有区块列表，分页展示
      */
@@ -104,11 +132,7 @@ export declare class Client extends AbstractClient {
      */
     Query(req: QueryRequest, cb?: (error: string, rep: QueryResponse) => void): Promise<QueryResponse>;
     /**
-     * 获取最新交易列表
+     * Bcos分页查询当前群组下的区块列表
      */
-    GetLatesdTransactionList(req: GetLatesdTransactionListRequest, cb?: (error: string, rep: GetLatesdTransactionListResponse) => void): Promise<GetLatesdTransactionListResponse>;
-    /**
-     * Bcos根据交易哈希查看交易详细信息
-     */
-    GetTransByHashHandler(req: GetTransByHashHandlerRequest, cb?: (error: string, rep: GetTransByHashHandlerResponse) => void): Promise<GetTransByHashHandlerResponse>;
+    GetBlockListHandler(req: GetBlockListHandlerRequest, cb?: (error: string, rep: GetBlockListHandlerResponse) => void): Promise<GetBlockListHandlerResponse>;
 }

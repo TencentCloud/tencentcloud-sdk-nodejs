@@ -1630,7 +1630,8 @@ export interface TerrorismImgReviewTemplateInfoForUpdate {
 <li>banners：暴恐旗帜；</li>
 <li>militant：武装分子；</li>
 <li>explosion：爆炸火灾；</li>
-<li>terrorists：暴恐人物。</li>
+<li>terrorists：暴恐人物；</li>
+<li>scenario：暴恐画面。</li>
       */
     LabelSet?: Array<string>;
     /**
@@ -3710,7 +3711,7 @@ export interface CreateContentReviewTemplateResponse {
     /**
       * 内容智能识别模板唯一标识。
       */
-    Definition?: number;
+    Definition: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5085,11 +5086,11 @@ export interface DescribeContentReviewTemplatesResponse {
     /**
       * 符合过滤条件的记录总数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 内容智能识别模板详情列表。
       */
-    ContentReviewTemplateSet?: Array<ContentReviewTemplateItem>;
+    ContentReviewTemplateSet: Array<ContentReviewTemplateItem>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5966,6 +5967,7 @@ export interface AiReviewTerrorismTaskOutput {
 <li>militant：武装分子。</li>
 <li>explosion：爆炸火灾。</li>
 <li>terrorists：暴恐人物。</li>
+<li>scenario：暴恐画面。</li>
       */
     Label: string;
     /**
@@ -6271,7 +6273,7 @@ export interface PullEventsResponse {
       * 事件列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    EventSet?: Array<EventContent>;
+    EventSet: Array<EventContent>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6519,86 +6521,86 @@ export interface DescribeTaskDetailResponse {
 <li>Clip：视频剪辑任务；</li>
 <li>ImageSprites：截取雪碧图任务。</li>
       */
-    TaskType?: string;
+    TaskType: string;
     /**
       * 任务状态，取值：
 <li>WAITING：等待中；</li>
 <li>PROCESSING：处理中；</li>
 <li>FINISH：已完成。</li>
       */
-    Status?: string;
+    Status: string;
     /**
       * 任务的创建时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
       */
-    CreateTime?: string;
+    CreateTime: string;
     /**
       * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
       */
-    BeginProcessTime?: string;
+    BeginProcessTime: string;
     /**
       * 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
       */
-    FinishTime?: string;
+    FinishTime: string;
     /**
       * 视频处理任务信息，仅当 TaskType 为 Procedure，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ProcedureTask?: ProcedureTask;
+    ProcedureTask: ProcedureTask;
     /**
       * 视频编辑任务信息，仅当 TaskType 为 EditMedia，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    EditMediaTask?: EditMediaTask;
+    EditMediaTask: EditMediaTask;
     /**
       * 微信发布任务信息，仅当 TaskType 为 WechatPublish，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    WechatPublishTask?: WechatPublishTask;
+    WechatPublishTask: WechatPublishTask;
     /**
       * 制作媒体文件任务信息，仅当 TaskType 为 ComposeMedia，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ComposeMediaTask?: ComposeMediaTask;
+    ComposeMediaTask: ComposeMediaTask;
     /**
       * 视频拆条任务信息，仅当 TaskType 为 SplitMedia，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    SplitMediaTask?: SplitMediaTask;
+    SplitMediaTask: SplitMediaTask;
     /**
       * 微信小程序发布任务信息，仅当 TaskType 为 WechatMiniProgramPublish，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    WechatMiniProgramPublishTask?: WechatMiniProgramPublishTask;
+    WechatMiniProgramPublishTask: WechatMiniProgramPublishTask;
     /**
       * 拉取上传媒体文件任务信息，仅当 TaskType 为 PullUpload，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    PullUploadTask?: PullUploadTask;
+    PullUploadTask: PullUploadTask;
     /**
       * 视频转码任务信息，仅当 TaskType 为 Transcode，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    TranscodeTask?: TranscodeTask2017;
+    TranscodeTask: TranscodeTask2017;
     /**
       * 视频拼接任务信息，仅当 TaskType 为 Concat，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ConcatTask?: ConcatTask2017;
+    ConcatTask: ConcatTask2017;
     /**
       * 视频剪辑任务信息，仅当 TaskType 为 Clip，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ClipTask?: ClipTask2017;
+    ClipTask: ClipTask2017;
     /**
       * 截取雪碧图任务信息，仅当 TaskType 为 ImageSprite，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    CreateImageSpriteTask?: CreateImageSpriteTask2017;
+    CreateImageSpriteTask: CreateImageSpriteTask2017;
     /**
       * 视频指定时间点截图任务信息，仅当 TaskType 为 SnapshotByTimeOffset，该字段有值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    SnapshotByTimeOffsetTask?: SnapshotByTimeOffsetTask2017;
+    SnapshotByTimeOffsetTask: SnapshotByTimeOffsetTask2017;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -10405,7 +10407,8 @@ export interface TerrorismImgReviewTemplateInfo {
 <li>banners：暴恐旗帜；</li>
 <li>militant：武装分子；</li>
 <li>explosion：爆炸火灾；</li>
-<li>terrorists：暴恐人物。</li>
+<li>terrorists：暴恐人物；</li>
+<li>scenario：暴恐画面。</li>
       */
     LabelSet?: Array<string>;
     /**

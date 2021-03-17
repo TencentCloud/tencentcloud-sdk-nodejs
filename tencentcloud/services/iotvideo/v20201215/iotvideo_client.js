@@ -58,10 +58,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyProduct", req, cb);
     }
     /**
+     * 本接口（DescribeFirmware）用于查询固件信息
+     */
+    async DescribeFirmware(req, cb) {
+        return this.request("DescribeFirmware", req, cb);
+    }
+    /**
      * 获取具有云存的日期
      */
     async DescribeCloudStorageDate(req, cb) {
         return this.request("DescribeCloudStorageDate", req, cb);
+    }
+    /**
+     * 本接口用于重试设备升级任务
+     */
+    async RetryDeviceFirmwareTask(req, cb) {
+        return this.request("RetryDeviceFirmwareTask", req, cb);
     }
     /**
      * 查看设备详情
@@ -74,6 +86,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeProduct(req, cb) {
         return this.request("DescribeProduct", req, cb);
+    }
+    /**
+     * 获取批次详情
+     */
+    async DescribeBatch(req, cb) {
+        return this.request("DescribeBatch", req, cb);
     }
     /**
      * 修改设备信息
@@ -100,6 +118,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBatchs", req, cb);
     }
     /**
+     * 本接口（BatchUpdateFirmware）用于批量更新设备固件
+     */
+    async BatchUpdateFirmware(req, cb) {
+        return this.request("BatchUpdateFirmware", req, cb);
+    }
+    /**
      * 创建产品
      */
     async CreateProduct(req, cb) {
@@ -124,10 +148,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateBatch", req, cb);
     }
     /**
+     * 本接口用于查询固件升级任务统计信息
+     */
+    async DescribeFirmwareTaskStatistics(req, cb) {
+        return this.request("DescribeFirmwareTaskStatistics", req, cb);
+    }
+    /**
      * 获取设备在指定时间范围内上报的历史数据。
      */
     async DescribeDeviceDataHistory(req, cb) {
         return this.request("DescribeDeviceDataHistory", req, cb);
+    }
+    /**
+     * 本接口（UploadFirmware）用于上传设备固件信息
+     */
+    async UploadFirmware(req, cb) {
+        return this.request("UploadFirmware", req, cb);
+    }
+    /**
+     * 本接口（GetFirmwareURL）用于获取固件存储的URL
+     */
+    async GetFirmwareURL(req, cb) {
+        return this.request("GetFirmwareURL", req, cb);
     }
     /**
      * 删除设备
@@ -136,10 +178,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteDevice", req, cb);
     }
     /**
-     * 获取批次详情
+     * 开通云存服务
      */
-    async DescribeBatch(req, cb) {
-        return this.request("DescribeBatch", req, cb);
+    async CreateCloudStorage(req, cb) {
+        return this.request("CreateCloudStorage", req, cb);
     }
     /**
      * 设置转发权限
@@ -148,10 +190,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SetForwardAuth", req, cb);
     }
     /**
+     * 本接口（ListFirmwares）用于获取固件列表
+     */
+    async ListFirmwares(req, cb) {
+        return this.request("ListFirmwares", req, cb);
+    }
+    /**
+     * 本接口用于编辑固件信息
+     */
+    async EditFirmware(req, cb) {
+        return this.request("EditFirmware", req, cb);
+    }
+    /**
      * 获取Category详情
      */
     async DescribeCategory(req, cb) {
         return this.request("DescribeCategory", req, cb);
+    }
+    /**
+     * 本接口用于查询固件升级任务状态分布
+     */
+    async DescribeFirmwareTaskDistribution(req, cb) {
+        return this.request("DescribeFirmwareTaskDistribution", req, cb);
     }
     /**
      * 删除产品
@@ -166,10 +226,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDeviceEventHistory", req, cb);
     }
     /**
-     * 开通云存服务
+     * 本接口（CreateTaskFileUrl）用于获取产品级任务文件上传链接
      */
-    async CreateCloudStorage(req, cb) {
-        return this.request("CreateCloudStorage", req, cb);
+    async CreateTaskFileUrl(req, cb) {
+        return this.request("CreateTaskFileUrl", req, cb);
+    }
+    /**
+     * 此接口查询固件升级任务详情
+     */
+    async DescribeFirmwareTask(req, cb) {
+        return this.request("DescribeFirmwareTask", req, cb);
     }
     /**
      * 导入其它产品的数据模板，覆盖现有数据模板的物模型和产品分类信息
@@ -182,6 +248,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeCloudStorageEvents(req, cb) {
         return this.request("DescribeCloudStorageEvents", req, cb);
+    }
+    /**
+     * 本接口用于查询固件升级任务的设备列表
+     */
+    async DescribeFirmwareTaskDevices(req, cb) {
+        return this.request("DescribeFirmwareTaskDevices", req, cb);
+    }
+    /**
+     * 本接口用于取消设备升级任务
+     */
+    async CancelDeviceFirmwareTask(req, cb) {
+        return this.request("CancelDeviceFirmwareTask", req, cb);
     }
     /**
      * 获取某一天云存时间轴
@@ -202,6 +280,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateForwardRule", req, cb);
     }
     /**
+     * 本接口（GetAllFirmwareVersion）用于获取所有的版本列表
+     */
+    async GetAllFirmwareVersion(req, cb) {
+        return this.request("GetAllFirmwareVersion", req, cb);
+    }
+    /**
      * 提供修改产品的数据模板的能力
      */
     async ModifyModelDefinition(req, cb) {
@@ -218,6 +302,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDevices(req, cb) {
         return this.request("DescribeDevices", req, cb);
+    }
+    /**
+     * 本接口（DeleteFirmware）用于删除固件
+     */
+    async DeleteFirmware(req, cb) {
+        return this.request("DeleteFirmware", req, cb);
+    }
+    /**
+     * 本接口用于查询固件升级任务列表
+     */
+    async DescribeFirmwareTasks(req, cb) {
+        return this.request("DescribeFirmwareTasks", req, cb);
     }
     /**
      * 查询产品配置的数据模板信息

@@ -61,6 +61,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAuthDomain", req, cb);
     }
     /**
+     * 获取后付费免费额度
+     */
+    async DescribePostpayPackageFreeQuotas(req, cb) {
+        return this.request("DescribePostpayPackageFreeQuotas", req, cb);
+    }
+    /**
      * 创建服务版本
      */
     async CreateCloudBaseRunServerVersion(req, cb) {
@@ -127,10 +133,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeExtraPkgBillingInfo", req, cb);
     }
     /**
-     * 获取后付费免费额度
+     * 描述扩展上传文件信息
      */
-    async DescribePostpayPackageFreeQuotas(req, cb) {
-        return this.request("DescribePostpayPackageFreeQuotas", req, cb);
+    async DescribeExtensionUploadInfo(req, cb) {
+        return this.request("DescribeExtensionUploadInfo", req, cb);
     }
     /**
      * 创建云应用服务

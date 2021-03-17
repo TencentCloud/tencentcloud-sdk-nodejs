@@ -126,6 +126,15 @@ export interface DescribeCloudBaseRunServerVersionRequest {
     VersionName: string;
 }
 /**
+ * DescribeExtensionUploadInfo请求参数结构体
+ */
+export interface DescribeExtensionUploadInfoRequest {
+    /**
+      * 待上传的文件
+      */
+    ExtensionFiles: Array<ExtensionFile>;
+}
+/**
  * DescribeCloudBaseRunServerVersion返回参数结构体
  */
 export interface DescribeCloudBaseRunServerVersionResponse {
@@ -1864,6 +1873,22 @@ export interface CloudBaseSecurityContext {
     Capabilities?: CloudBaseCapabilities;
 }
 /**
+ * 扩展文件
+ */
+export interface ExtensionFile {
+    /**
+      * 文件类型。枚举值
+<li>FUNCTION：函数代码</li>
+<li>STATIC：静态托管代码</li>
+<li>SMS：短信文件</li>
+      */
+    FileType: string;
+    /**
+      * 文件名，长度不超过24
+      */
+    FileName: string;
+}
+/**
  * ReinstateEnv请求参数结构体
  */
 export interface ReinstateEnvRequest {
@@ -2751,6 +2776,27 @@ export interface CloudRunServiceVolume {
     EnableEmptyDirVolume?: boolean;
 }
 /**
+ * 扩展文件信息
+ */
+export interface ExtensionFileInfo {
+    /**
+      * 模板里使用的地址
+      */
+    CodeUri: string;
+    /**
+      * 上传文件的临时地址，含签名
+      */
+    UploadUrl: string;
+    /**
+      * 自定义密钥。如果为空，则表示不需要加密
+      */
+    CustomKey: string;
+    /**
+      * 文件大小限制，单位M，客户端上传前需要主动检查文件大小，超过限制的文件会被删除。
+      */
+    MaxSize: number;
+}
+/**
  * 云开发项目版本
  */
 export interface CloudBaseProjectVersion {
@@ -2871,6 +2917,19 @@ export interface DescribeDatabaseACLResponse {
 <li> ADMINONLY：仅管理员可读写</li>
       */
     AclTag?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeExtensionUploadInfo返回参数结构体
+ */
+export interface DescribeExtensionUploadInfoResponse {
+    /**
+      * 待上传文件的信息数组
+      */
+    FilesData: Array<ExtensionFileInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

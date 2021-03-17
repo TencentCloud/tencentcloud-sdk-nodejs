@@ -1718,6 +1718,16 @@ export interface DeletePrometheusTemplateSyncRequest {
 }
 
 /**
+ * SetNodePoolNodeProtection返回参数结构体
+ */
+export interface SetNodePoolNodeProtectionResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribePrometheusTemplates返回参数结构体
  */
 export interface DescribePrometheusTemplatesResponse {
@@ -4232,6 +4242,11 @@ export interface DescribeClusterNodePoolDetailRequest {
    */
   NodePoolId: string
 }
+
+/**
+ * SetNodePoolNodeProtection请求参数结构体
+ */
+export type SetNodePoolNodeProtectionRequest = null
 
 /**
  * DeletePrometheusTemplateSync返回参数结构体

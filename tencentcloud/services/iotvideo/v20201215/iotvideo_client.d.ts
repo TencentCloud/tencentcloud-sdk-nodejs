@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DeleteProductRequest, DescribeDeviceDataHistoryRequest, DescribeCloudStorageDateRequest, CreateCloudStorageRequest, SetForwardAuthResponse, SetForwardAuthRequest, DescribeBatchsRequest, DescribeCategoryResponse, DescribeModelDefinitionResponse, CreateBatchRequest, ImportModelDefinitionRequest, DescribeCloudStorageTimeResponse, DescribeDeviceCommLogResponse, DeleteDeviceRequest, DeleteProductResponse, ModifyForwardRuleResponse, DescribeProductsRequest, DescribeDeviceEventHistoryResponse, DescribeBatchResponse, ModifyProductRequest, DescribeDeviceActionHistoryRequest, ImportModelDefinitionResponse, DescribeDevicesResponse, ModifyProductResponse, CreateForwardRuleRequest, DescribeCloudStorageThumbnailRequest, ModifyModelDefinitionRequest, DescribeBatchsResponse, DescribeCloudStorageResponse, DeleteForwardRuleRequest, DescribeDeviceEventHistoryRequest, DescribeDeviceRequest, DescribeForwardRuleResponse, DeleteDeviceResponse, DescribeBatchRequest, ModifyForwardRuleRequest, DescribeCategoryRequest, DescribeDeviceCommLogRequest, DescribeCloudStorageRequest, CreateProductResponse, DescribeCloudStorageEventsResponse, DescribeDevicesRequest, DescribeDeviceDataHistoryResponse, DescribeCloudStorageDateResponse, DescribeCloudStorageThumbnailResponse, CheckForwardAuthResponse, DescribeProductResponse, DescribeDeviceDataResponse, DescribeForwardRuleRequest, ModifyDeviceResponse, DeleteForwardRuleResponse, DescribeProductRequest, DescribeProductsResponse, CheckForwardAuthRequest, CreateProductRequest, DescribeDeviceDataRequest, CreateBatchResponse, ModifyModelDefinitionResponse, DescribeDeviceActionHistoryResponse, ModifyDeviceRequest, CreateCloudStorageResponse, DescribeModelDefinitionRequest, DescribeDeviceResponse, DescribeCloudStorageEventsRequest, CreateForwardRuleResponse, DescribeCloudStorageTimeRequest } from "./iotvideo_models";
+import { DescribeCloudStorageDateRequest, CreateCloudStorageRequest, ImportModelDefinitionResponse, DescribeModelDefinitionResponse, CreateBatchRequest, DescribeCloudStorageTimeResponse, DescribeProductsRequest, DescribeDeviceEventHistoryResponse, DescribeDeviceActionHistoryRequest, DescribeDevicesResponse, ModifyProductResponse, ModifyProductRequest, ModifyModelDefinitionRequest, DescribeBatchsResponse, DescribeForwardRuleResponse, DescribeBatchRequest, ModifyDeviceRequest, DescribeFirmwareTaskStatisticsResponse, DescribeFirmwareRequest, DescribeProductRequest, DescribeProductsResponse, CheckForwardAuthRequest, DescribeDeviceDataRequest, CreateBatchResponse, DescribeDeviceActionHistoryResponse, GetAllFirmwareVersionRequest, DeleteFirmwareResponse, CreateForwardRuleResponse, BatchUpdateFirmwareResponse, DeleteProductRequest, SetForwardAuthResponse, EditFirmwareRequest, DescribeDeviceEventHistoryRequest, DescribeCategoryResponse, ImportModelDefinitionRequest, DescribeDeviceCommLogResponse, DeleteDeviceRequest, GetAllFirmwareVersionResponse, ListFirmwaresResponse, DescribeFirmwareTaskDevicesRequest, DescribeFirmwareResponse, DescribeDeviceCommLogRequest, DeleteForwardRuleRequest, CreateProductResponse, DescribeFirmwareTaskDevicesResponse, DescribeCloudStorageThumbnailResponse, RetryDeviceFirmwareTaskResponse, DescribeFirmwareTaskResponse, CreateProductRequest, DescribeFirmwareTasksRequest, GetFirmwareURLResponse, DescribeDeviceResponse, DescribeCloudStorageEventsRequest, ListFirmwaresRequest, RetryDeviceFirmwareTaskRequest, UploadFirmwareRequest, DescribeFirmwareTasksResponse, EditFirmwareResponse, DescribeFirmwareTaskDistributionRequest, DeleteProductResponse, ModifyForwardRuleResponse, DescribeFirmwareTaskDistributionResponse, DescribeBatchResponse, DescribeDeviceRequest, ModifyForwardRuleRequest, DescribeCloudStorageEventsResponse, DescribeCloudStorageDateResponse, DescribeForwardRuleRequest, UploadFirmwareResponse, CreateCloudStorageResponse, CancelDeviceFirmwareTaskRequest, CancelDeviceFirmwareTaskResponse, DeleteDeviceResponse, DescribeDeviceDataHistoryRequest, CreateForwardRuleRequest, CreateTaskFileUrlResponse, SetForwardAuthRequest, ModifyDeviceResponse, CreateTaskFileUrlRequest, BatchUpdateFirmwareRequest, DescribeCloudStorageThumbnailRequest, GetFirmwareURLRequest, DescribeCloudStorageResponse, DescribeProductResponse, DescribeCategoryRequest, DeleteFirmwareRequest, DescribeCloudStorageRequest, DescribeDeviceDataHistoryResponse, DescribeDevicesRequest, DescribeModelDefinitionRequest, CheckForwardAuthResponse, DescribeDeviceDataResponse, DeleteForwardRuleResponse, DescribeFirmwareTaskStatisticsRequest, DescribeBatchsRequest, ModifyModelDefinitionResponse, DescribeFirmwareTaskRequest, DescribeCloudStorageTimeRequest } from "./iotvideo_models";
 /**
  * iotvideo client
  * @class
@@ -28,9 +28,17 @@ export declare class Client extends AbstractClient {
      */
     ModifyProduct(req: ModifyProductRequest, cb?: (error: string, rep: ModifyProductResponse) => void): Promise<ModifyProductResponse>;
     /**
+     * 本接口（DescribeFirmware）用于查询固件信息
+     */
+    DescribeFirmware(req: DescribeFirmwareRequest, cb?: (error: string, rep: DescribeFirmwareResponse) => void): Promise<DescribeFirmwareResponse>;
+    /**
      * 获取具有云存的日期
      */
     DescribeCloudStorageDate(req: DescribeCloudStorageDateRequest, cb?: (error: string, rep: DescribeCloudStorageDateResponse) => void): Promise<DescribeCloudStorageDateResponse>;
+    /**
+     * 本接口用于重试设备升级任务
+     */
+    RetryDeviceFirmwareTask(req: RetryDeviceFirmwareTaskRequest, cb?: (error: string, rep: RetryDeviceFirmwareTaskResponse) => void): Promise<RetryDeviceFirmwareTaskResponse>;
     /**
      * 查看设备详情
      */
@@ -39,6 +47,10 @@ export declare class Client extends AbstractClient {
      * 获取产品详情
      */
     DescribeProduct(req: DescribeProductRequest, cb?: (error: string, rep: DescribeProductResponse) => void): Promise<DescribeProductResponse>;
+    /**
+     * 获取批次详情
+     */
+    DescribeBatch(req: DescribeBatchRequest, cb?: (error: string, rep: DescribeBatchResponse) => void): Promise<DescribeBatchResponse>;
     /**
      * 修改设备信息
      */
@@ -56,6 +68,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeBatchs(req: DescribeBatchsRequest, cb?: (error: string, rep: DescribeBatchsResponse) => void): Promise<DescribeBatchsResponse>;
     /**
+     * 本接口（BatchUpdateFirmware）用于批量更新设备固件
+     */
+    BatchUpdateFirmware(req: BatchUpdateFirmwareRequest, cb?: (error: string, rep: BatchUpdateFirmwareResponse) => void): Promise<BatchUpdateFirmwareResponse>;
+    /**
      * 创建产品
      */
     CreateProduct(req: CreateProductRequest, cb?: (error: string, rep: CreateProductResponse) => void): Promise<CreateProductResponse>;
@@ -72,25 +88,49 @@ export declare class Client extends AbstractClient {
      */
     CreateBatch(req: CreateBatchRequest, cb?: (error: string, rep: CreateBatchResponse) => void): Promise<CreateBatchResponse>;
     /**
+     * 本接口用于查询固件升级任务统计信息
+     */
+    DescribeFirmwareTaskStatistics(req: DescribeFirmwareTaskStatisticsRequest, cb?: (error: string, rep: DescribeFirmwareTaskStatisticsResponse) => void): Promise<DescribeFirmwareTaskStatisticsResponse>;
+    /**
      * 获取设备在指定时间范围内上报的历史数据。
      */
     DescribeDeviceDataHistory(req: DescribeDeviceDataHistoryRequest, cb?: (error: string, rep: DescribeDeviceDataHistoryResponse) => void): Promise<DescribeDeviceDataHistoryResponse>;
+    /**
+     * 本接口（UploadFirmware）用于上传设备固件信息
+     */
+    UploadFirmware(req: UploadFirmwareRequest, cb?: (error: string, rep: UploadFirmwareResponse) => void): Promise<UploadFirmwareResponse>;
+    /**
+     * 本接口（GetFirmwareURL）用于获取固件存储的URL
+     */
+    GetFirmwareURL(req: GetFirmwareURLRequest, cb?: (error: string, rep: GetFirmwareURLResponse) => void): Promise<GetFirmwareURLResponse>;
     /**
      * 删除设备
      */
     DeleteDevice(req: DeleteDeviceRequest, cb?: (error: string, rep: DeleteDeviceResponse) => void): Promise<DeleteDeviceResponse>;
     /**
-     * 获取批次详情
+     * 开通云存服务
      */
-    DescribeBatch(req: DescribeBatchRequest, cb?: (error: string, rep: DescribeBatchResponse) => void): Promise<DescribeBatchResponse>;
+    CreateCloudStorage(req: CreateCloudStorageRequest, cb?: (error: string, rep: CreateCloudStorageResponse) => void): Promise<CreateCloudStorageResponse>;
     /**
      * 设置转发权限
      */
     SetForwardAuth(req: SetForwardAuthRequest, cb?: (error: string, rep: SetForwardAuthResponse) => void): Promise<SetForwardAuthResponse>;
     /**
+     * 本接口（ListFirmwares）用于获取固件列表
+     */
+    ListFirmwares(req: ListFirmwaresRequest, cb?: (error: string, rep: ListFirmwaresResponse) => void): Promise<ListFirmwaresResponse>;
+    /**
+     * 本接口用于编辑固件信息
+     */
+    EditFirmware(req: EditFirmwareRequest, cb?: (error: string, rep: EditFirmwareResponse) => void): Promise<EditFirmwareResponse>;
+    /**
      * 获取Category详情
      */
     DescribeCategory(req: DescribeCategoryRequest, cb?: (error: string, rep: DescribeCategoryResponse) => void): Promise<DescribeCategoryResponse>;
+    /**
+     * 本接口用于查询固件升级任务状态分布
+     */
+    DescribeFirmwareTaskDistribution(req: DescribeFirmwareTaskDistributionRequest, cb?: (error: string, rep: DescribeFirmwareTaskDistributionResponse) => void): Promise<DescribeFirmwareTaskDistributionResponse>;
     /**
      * 删除产品
      */
@@ -100,9 +140,13 @@ export declare class Client extends AbstractClient {
      */
     DescribeDeviceEventHistory(req: DescribeDeviceEventHistoryRequest, cb?: (error: string, rep: DescribeDeviceEventHistoryResponse) => void): Promise<DescribeDeviceEventHistoryResponse>;
     /**
-     * 开通云存服务
+     * 本接口（CreateTaskFileUrl）用于获取产品级任务文件上传链接
      */
-    CreateCloudStorage(req: CreateCloudStorageRequest, cb?: (error: string, rep: CreateCloudStorageResponse) => void): Promise<CreateCloudStorageResponse>;
+    CreateTaskFileUrl(req: CreateTaskFileUrlRequest, cb?: (error: string, rep: CreateTaskFileUrlResponse) => void): Promise<CreateTaskFileUrlResponse>;
+    /**
+     * 此接口查询固件升级任务详情
+     */
+    DescribeFirmwareTask(req: DescribeFirmwareTaskRequest, cb?: (error: string, rep: DescribeFirmwareTaskResponse) => void): Promise<DescribeFirmwareTaskResponse>;
     /**
      * 导入其它产品的数据模板，覆盖现有数据模板的物模型和产品分类信息
      */
@@ -111,6 +155,14 @@ export declare class Client extends AbstractClient {
      * 拉取云存事件列表
      */
     DescribeCloudStorageEvents(req: DescribeCloudStorageEventsRequest, cb?: (error: string, rep: DescribeCloudStorageEventsResponse) => void): Promise<DescribeCloudStorageEventsResponse>;
+    /**
+     * 本接口用于查询固件升级任务的设备列表
+     */
+    DescribeFirmwareTaskDevices(req: DescribeFirmwareTaskDevicesRequest, cb?: (error: string, rep: DescribeFirmwareTaskDevicesResponse) => void): Promise<DescribeFirmwareTaskDevicesResponse>;
+    /**
+     * 本接口用于取消设备升级任务
+     */
+    CancelDeviceFirmwareTask(req: CancelDeviceFirmwareTaskRequest, cb?: (error: string, rep: CancelDeviceFirmwareTaskResponse) => void): Promise<CancelDeviceFirmwareTaskResponse>;
     /**
      * 获取某一天云存时间轴
      */
@@ -124,6 +176,10 @@ export declare class Client extends AbstractClient {
      */
     CreateForwardRule(req: CreateForwardRuleRequest, cb?: (error: string, rep: CreateForwardRuleResponse) => void): Promise<CreateForwardRuleResponse>;
     /**
+     * 本接口（GetAllFirmwareVersion）用于获取所有的版本列表
+     */
+    GetAllFirmwareVersion(req: GetAllFirmwareVersionRequest, cb?: (error: string, rep: GetAllFirmwareVersionResponse) => void): Promise<GetAllFirmwareVersionResponse>;
+    /**
      * 提供修改产品的数据模板的能力
      */
     ModifyModelDefinition(req: ModifyModelDefinitionRequest, cb?: (error: string, rep: ModifyModelDefinitionResponse) => void): Promise<ModifyModelDefinitionResponse>;
@@ -135,6 +191,14 @@ export declare class Client extends AbstractClient {
      * 获取设备列表
      */
     DescribeDevices(req: DescribeDevicesRequest, cb?: (error: string, rep: DescribeDevicesResponse) => void): Promise<DescribeDevicesResponse>;
+    /**
+     * 本接口（DeleteFirmware）用于删除固件
+     */
+    DeleteFirmware(req: DeleteFirmwareRequest, cb?: (error: string, rep: DeleteFirmwareResponse) => void): Promise<DeleteFirmwareResponse>;
+    /**
+     * 本接口用于查询固件升级任务列表
+     */
+    DescribeFirmwareTasks(req: DescribeFirmwareTasksRequest, cb?: (error: string, rep: DescribeFirmwareTasksResponse) => void): Promise<DescribeFirmwareTasksResponse>;
     /**
      * 查询产品配置的数据模板信息
      */

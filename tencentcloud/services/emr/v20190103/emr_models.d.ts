@@ -1,4 +1,34 @@
 /**
+ * InquirePriceRenewEmr返回参数结构体
+ */
+export interface InquirePriceRenewEmrResponse {
+    /**
+      * 原价，单位为元。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OriginalCost: number;
+    /**
+      * 折扣价，单位为元。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DiscountCost: number;
+    /**
+      * 实例续费的时间单位。取值范围：
+<li>m：表示月份。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TimeUnit: string;
+    /**
+      * 实例续费的时长。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TimeSpan: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 多云盘参数
  */
 export interface MultiDiskMC {
@@ -287,74 +317,13 @@ export interface VPCSettings {
     SubnetId: string;
 }
 /**
- * 询价资源
+ * DescribeInstanceRenewNodes请求参数结构体
  */
-export interface PriceResource {
+export interface DescribeInstanceRenewNodesRequest {
     /**
-      * 需要的规格
-注意：此字段可能返回 null，表示取不到有效值。
+      * 集群实例ID,实例ID形如: emr-xxxxxxxx
       */
-    Spec: string;
-    /**
-      * 硬盘类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    StorageType: number;
-    /**
-      * 硬盘类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DiskType: string;
-    /**
-      * 系统盘大小
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RootSize: number;
-    /**
-      * 内存大小
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MemSize: number;
-    /**
-      * 核心数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Cpu: number;
-    /**
-      * 硬盘大小
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DiskSize: number;
-    /**
-      * 云盘列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MultiDisks: Array<MultiDisk>;
-    /**
-      * 磁盘数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DiskCnt: number;
-    /**
-      * 规格
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    InstanceType: string;
-    /**
-      * 标签
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Tags: Array<Tag>;
-    /**
-      * 磁盘数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DiskNum: number;
-    /**
-      * 本地盘的数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    LocalDiskNum: number;
+    InstanceId: string;
 }
 /**
  * ScaleOutInstance返回参数结构体
@@ -987,41 +956,35 @@ export interface CreateInstanceRequest {
     ApplicationRole?: string;
 }
 /**
- * 流程作业资源描述
+ * InquirePriceRenewEmr请求参数结构体
  */
-export interface JobFlowResourceSpec {
+export interface InquirePriceRenewEmrRequest {
     /**
-      * 主节点数量。
+      * 实例续费的时长。需要结合TimeUnit一起使用。1表示续费1一个月
       */
-    MasterCount: number;
+    TimeSpan: number;
     /**
-      * 主节点配置。
+      * 待续费集群ID列表。
       */
-    MasterResourceSpec: JobFlowResource;
+    InstanceId: string;
     /**
-      * Core节点数量
+      * 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目等属性。
       */
-    CoreCount: number;
+    Placement: Placement;
     /**
-      * Core节点配置。
+      * 实例计费模式。此处只支持取值为1，表示包年包月。
       */
-    CoreResourceSpec: JobFlowResource;
+    PayMode: number;
     /**
-      * Task节点数量。
+      * 实例续费的时间单位。取值范围：
+<li>m：表示月份。</li>
       */
-    TaskCount?: number;
+    TimeUnit?: string;
     /**
-      * Common节点数量。
+      * 货币种类。取值范围：
+<li>CNY：表示人民币。</li>
       */
-    CommonCount?: number;
-    /**
-      * Task节点配置。
-      */
-    TaskResourceSpec?: JobFlowResource;
-    /**
-      * Common节点配置。
-      */
-    CommonResourceSpec?: JobFlowResource;
+    Currency?: string;
 }
 /**
  * 执行动作。
@@ -1137,6 +1100,19 @@ export interface Placement {
     Zone: string;
 }
 /**
+ * 搜索字段
+ */
+export interface SearchItem {
+    /**
+      * 支持搜索的类型
+      */
+    SearchType: string;
+    /**
+      * 支持搜索的值
+      */
+    SearchValue: string;
+}
+/**
  * 元数据库信息
  */
 export interface MetaDbInfo {
@@ -1233,6 +1209,43 @@ CLOUD_HSSD 增强型云SSD。
     DiskSize: number;
 }
 /**
+ * 流程作业资源描述
+ */
+export interface JobFlowResourceSpec {
+    /**
+      * 主节点数量。
+      */
+    MasterCount: number;
+    /**
+      * 主节点配置。
+      */
+    MasterResourceSpec: JobFlowResource;
+    /**
+      * Core节点数量
+      */
+    CoreCount: number;
+    /**
+      * Core节点配置。
+      */
+    CoreResourceSpec: JobFlowResource;
+    /**
+      * Task节点数量。
+      */
+    TaskCount?: number;
+    /**
+      * Common节点数量。
+      */
+    CommonCount?: number;
+    /**
+      * Task节点配置。
+      */
+    TaskResourceSpec?: JobFlowResource;
+    /**
+      * Common节点配置。
+      */
+    CommonResourceSpec?: JobFlowResource;
+}
+/**
  * InquiryPriceUpdateInstance请求参数结构体
  */
 export interface InquiryPriceUpdateInstanceRequest {
@@ -1267,6 +1280,29 @@ export interface InquiryPriceUpdateInstanceRequest {
 <li>CNY：表示人民币。</li>
       */
     Currency?: string;
+}
+/**
+ * DescribeInstanceRenewNodes返回参数结构体
+ */
+export interface DescribeInstanceRenewNodesResponse {
+    /**
+      * 查询到的节点总数
+      */
+    TotalCnt: number;
+    /**
+      * 节点详细信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NodeList: Array<RenewInstancesInfo>;
+    /**
+      * 用户所有的标签键列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MetaInfo: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * COS 相关配置
@@ -1530,17 +1566,46 @@ export interface RunJobFlowResponse {
     RequestId?: string;
 }
 /**
- * 搜索字段
+ * 集群续费实例信息
  */
-export interface SearchItem {
+export interface RenewInstancesInfo {
     /**
-      * 支持搜索的类型
+      * 节点资源ID
       */
-    SearchType: string;
+    EmrResourceId: string;
     /**
-      * 支持搜索的值
+      * 节点类型。0:common节点；1:master节点
+；2:core节点；3:task节点
       */
-    SearchValue: string;
+    Flag: number;
+    /**
+      * 内网IP
+      */
+    Ip: string;
+    /**
+      * 节点内存描述
+      */
+    MemDesc: string;
+    /**
+      * 节点核数
+      */
+    CpuNum: number;
+    /**
+      * 硬盘大小
+      */
+    DiskSize: string;
+    /**
+      * 过期时间
+      */
+    ExpireTime: string;
+    /**
+      * 节点规格
+      */
+    Spec: string;
+    /**
+      * 磁盘类型
+      */
+    StorageType: number;
 }
 /**
  * InquiryPriceScaleOutInstance返回参数结构体
@@ -1665,6 +1730,76 @@ export interface TerminateTasksResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 询价资源
+ */
+export interface PriceResource {
+    /**
+      * 需要的规格
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Spec: string;
+    /**
+      * 硬盘类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StorageType: number;
+    /**
+      * 硬盘类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DiskType: string;
+    /**
+      * 系统盘大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RootSize: number;
+    /**
+      * 内存大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MemSize: number;
+    /**
+      * 核心数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Cpu: number;
+    /**
+      * 硬盘大小
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DiskSize: number;
+    /**
+      * 云盘列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MultiDisks: Array<MultiDisk>;
+    /**
+      * 磁盘数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DiskCnt: number;
+    /**
+      * 规格
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceType: string;
+    /**
+      * 标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tags: Array<Tag>;
+    /**
+      * 磁盘数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DiskNum: number;
+    /**
+      * 本地盘的数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LocalDiskNum: number;
 }
 /**
  * DescribeClusterNodes返回参数结构体

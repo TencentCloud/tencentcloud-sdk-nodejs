@@ -28,10 +28,28 @@ class Client extends abstract_client_1.AbstractClient {
         super("tbaas.tencentcloudapi.com", "2018-04-16", clientConfig);
     }
     /**
+     * 执行Bcos交易，支持动态部署的合约
+     */
+    async InvokeBcosTrans(req, cb) {
+        return this.request("InvokeBcosTrans", req, cb);
+    }
+    /**
+     * 使用块高查询Bcos区块信息
+     */
+    async GetBcosBlockByNumber(req, cb) {
+        return this.request("GetBcosBlockByNumber", req, cb);
+    }
+    /**
      * 获取合约容器日志
      */
     async GetChaincodeLogForUser(req, cb) {
         return this.request("GetChaincodeLogForUser", req, cb);
+    }
+    /**
+     * Bcos根据交易哈希查看交易详细信息
+     */
+    async GetBcosTransByHash(req, cb) {
+        return this.request("GetBcosTransByHash", req, cb);
     }
     /**
      * 获取该用户的网络列表。网络信息中包含组织信息，但仅包含该用户所在组织的信息。
@@ -42,14 +60,20 @@ class Client extends abstract_client_1.AbstractClient {
     /**
      * Bcos分页查询当前群组下的区块列表
      */
-    async GetBlockListHandler(req, cb) {
-        return this.request("GetBlockListHandler", req, cb);
+    async GetBcosBlockList(req, cb) {
+        return this.request("GetBcosBlockList", req, cb);
     }
     /**
-     * 动态部署合约
+     * 获取交易详情
      */
-    async DeployDynamicContractHandler(req, cb) {
-        return this.request("DeployDynamicContractHandler", req, cb);
+    async GetTransactionDetailForUser(req, cb) {
+        return this.request("GetTransactionDetailForUser", req, cb);
+    }
+    /**
+     * Bcos分页查询当前群组的交易信息列表
+     */
+    async GetTransListHandler(req, cb) {
+        return this.request("GetTransListHandler", req, cb);
     }
     /**
      * 新增交易
@@ -70,6 +94,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetPeerLogForUser", req, cb);
     }
     /**
+     * 动态部署并发布Bcos合约
+     */
+    async DeployDynamicBcosContract(req, cb) {
+        return this.request("DeployDynamicBcosContract", req, cb);
+    }
+    /**
      * 下载用户证书
      */
     async DownloadUserCert(req, cb) {
@@ -82,10 +112,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateChaincodeAndInstallForUser", req, cb);
     }
     /**
-     * 获取区块内的交易列表
+     * Bcos根据交易哈希查看交易详细信息
      */
-    async GetBlockTransactionListForUser(req, cb) {
-        return this.request("GetBlockTransactionListForUser", req, cb);
+    async GetTransByHashHandler(req, cb) {
+        return this.request("GetTransByHashHandler", req, cb);
+    }
+    /**
+     * 获取最新交易列表
+     */
+    async GetLatesdTransactionList(req, cb) {
+        return this.request("GetLatesdTransactionList", req, cb);
     }
     /**
      * 申请用户证书
@@ -124,16 +160,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InitializeChaincodeForUser", req, cb);
     }
     /**
-     * 获取交易详情
+     * 动态部署合约
      */
-    async GetTransactionDetailForUser(req, cb) {
-        return this.request("GetTransactionDetailForUser", req, cb);
+    async DeployDynamicContractHandler(req, cb) {
+        return this.request("DeployDynamicContractHandler", req, cb);
     }
     /**
      * trustsql服务统一接口
      */
     async SrvInvoke(req, cb) {
         return this.request("SrvInvoke", req, cb);
+    }
+    /**
+     * Bcos分页查询当前群组的交易信息列表
+     */
+    async GetBcosTransList(req, cb) {
+        return this.request("GetBcosTransList", req, cb);
     }
     /**
      * 根据动态部署的合约发送交易
@@ -154,10 +196,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetChaincodeCompileLogForUser", req, cb);
     }
     /**
-     * Bcos分页查询当前群组的交易信息列表
+     * 获取区块内的交易列表
      */
-    async GetTransListHandler(req, cb) {
-        return this.request("GetTransListHandler", req, cb);
+    async GetBlockTransactionListForUser(req, cb) {
+        return this.request("GetBlockTransactionListForUser", req, cb);
     }
     /**
      * 查看当前网络下的所有区块列表，分页展示
@@ -172,16 +214,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("Query", req, cb);
     }
     /**
-     * 获取最新交易列表
+     * Bcos分页查询当前群组下的区块列表
      */
-    async GetLatesdTransactionList(req, cb) {
-        return this.request("GetLatesdTransactionList", req, cb);
-    }
-    /**
-     * Bcos根据交易哈希查看交易详细信息
-     */
-    async GetTransByHashHandler(req, cb) {
-        return this.request("GetTransByHashHandler", req, cb);
+    async GetBlockListHandler(req, cb) {
+        return this.request("GetBlockListHandler", req, cb);
     }
 }
 exports.Client = Client;

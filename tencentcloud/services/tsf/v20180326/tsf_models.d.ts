@@ -1106,14 +1106,14 @@ export interface StartContainerGroupRequest {
     GroupId: string;
 }
 /**
- * StopGroup返回参数结构体
+ * DescribeRepository返回参数结构体
  */
-export interface StopGroupResponse {
+export interface DescribeRepositoryResponse {
     /**
-      * 任务ID
+      * 查询的仓库信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: TaskId;
+    Result?: RepositoryInfo;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1308,6 +1308,11 @@ export interface Instance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Reason: string;
+    /**
+      * agent版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AgentVersion: string;
 }
 /**
  * UpdateHealthCheckSettings请求参数结构体
@@ -1638,7 +1643,7 @@ export interface DescribePkgsResponse {
     /**
       * 符合查询程序包信息列表
       */
-    Result?: PkgList;
+    Result: PkgList;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2634,6 +2639,19 @@ export interface DescribeContainerGroupDetailResponse {
     RequestId?: string;
 }
 /**
+ * 服务端口
+ */
+export interface Ports {
+    /**
+      * 服务端口
+      */
+    TargetPort: number;
+    /**
+      * 端口协议
+      */
+    Protocol: string;
+}
+/**
  * DescribeGroupGateways返回参数结构体
  */
 export interface DescribeGroupGatewaysResponse {
@@ -2840,7 +2858,7 @@ export interface Env {
       */
     Name: string;
     /**
-      * 服务端口
+      * 环境变量值
       */
     Value: string;
 }
@@ -4069,6 +4087,10 @@ export interface CreateApplicationRequest {
       * 需要绑定的数据集ID
       */
     ProgramId?: string;
+    /**
+      * 服务配置信息列表
+      */
+    ServiceConfigList?: Array<ServiceConfig>;
 }
 /**
  * DeployGroup请求参数结构体
@@ -4122,6 +4144,14 @@ export interface DeployGroupRequest {
       * 滚动发布每个批次的时间间隔
       */
     DeployWaitTime?: number;
+    /**
+      * 启动脚本 base64编码
+      */
+    StartScript?: string;
+    /**
+      * 停止脚本 base64编码
+      */
+    StopScript?: string;
 }
 /**
  * 泳道分页查询
@@ -4219,7 +4249,7 @@ export interface CreateApplicationResponse {
       * 应用ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: string;
+    Result: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4246,7 +4276,7 @@ export interface DeployGroupResponse {
       * 任务ID
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: TaskId;
+    Result: TaskId;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4599,6 +4629,21 @@ export interface VmGroup {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     HealthCheckSettings: HealthCheckSettings;
+    /**
+      * 程序包类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PackageType: string;
+    /**
+      * 启动脚本 base64编码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StartScript: string;
+    /**
+      * 停止脚本 base64编码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StopScript: string;
 }
 /**
  * DescribeApiUseDetail返回参数结构体
@@ -4730,6 +4775,11 @@ export interface ApplicationForPage {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ApplicationRemarkName: string;
+    /**
+      * 服务配置信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ServiceConfigList: Array<ServiceConfig>;
 }
 /**
  * UpdateGatewayApi返回参数结构体
@@ -5072,6 +5122,10 @@ export interface DescribePkgsRequest {
       * 程序包仓库id
       */
     RepositoryId?: string;
+    /**
+      * 程序包类型数组支持（fatjar jar war tar.gz zip）
+      */
+    PackageTypeList?: Array<string>;
 }
 /**
  * tsf 容器集群节点调度策略
@@ -5717,20 +5771,6 @@ export interface UpdateGatewayApiRequest {
       * api描述信息
       */
     Description?: string;
-}
-/**
- * DescribeRepository返回参数结构体
- */
-export interface DescribeRepositoryResponse {
-    /**
-      * 查询的仓库信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Result?: RepositoryInfo;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * 路径重写创建对象
@@ -6630,6 +6670,20 @@ export interface ApiInfo {
     Description?: string;
 }
 /**
+ * StopGroup返回参数结构体
+ */
+export interface StopGroupResponse {
+    /**
+      * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result?: TaskId;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateRepository请求参数结构体
  */
 export interface CreateRepositoryRequest {
@@ -6785,6 +6839,24 @@ export interface CreateApiGroupResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 服务配置
+ */
+export interface ServiceConfig {
+    /**
+      * 服务名
+      */
+    Name: string;
+    /**
+      * 端口信息列表
+      */
+    Ports: Array<Ports>;
+    /**
+      * 健康检查配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HealthCheck?: HealthCheckConfig;
 }
 /**
  * RedoTaskExecute请求参数结构体
@@ -8139,6 +8211,16 @@ export interface DescribeReleasedConfigResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 健康检查配置
+ */
+export interface HealthCheckConfig {
+    /**
+      * 健康检查路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Path?: string;
 }
 /**
  * TSF分页简单应用对象

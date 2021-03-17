@@ -26,6 +26,41 @@ export interface PeerDetailForUser {
 }
 
 /**
+ * GetBcosTransList请求参数结构体
+ */
+export interface GetBcosTransListRequest {
+  /**
+   * 网络ID，可在区块链网络详情或列表中获取
+   */
+  ClusterId: string
+
+  /**
+   * 群组编号，可在群组列表中获取
+   */
+  GroupId: number
+
+  /**
+   * 当前页数，默认是1
+   */
+  PageNumber?: number
+
+  /**
+   * 每页记录数，默认为10
+   */
+  PageSize?: number
+
+  /**
+   * 区块高度，可以从InvokeBcosTrans接口的返回值中解析获取
+   */
+  BlockNumber?: number
+
+  /**
+   * 交易哈希，可以从InvokeBcosTrans接口的返回值中解析获取
+   */
+  TransHash?: string
+}
+
+/**
  * Query请求参数结构体
  */
 export interface QueryRequest {
@@ -76,18 +111,13 @@ export interface QueryRequest {
 }
 
 /**
- * GetChaincodeInitializeResultForUser返回参数结构体
+ * DeployDynamicBcosContract返回参数结构体
  */
-export interface GetChaincodeInitializeResultForUserResponse {
+export interface DeployDynamicBcosContractResponse {
   /**
-   * 实例化结果：0，实例化中；1，实例化成功；2，实例化失败
+   * 部署成功返回的合约地址
    */
-  InitResult?: number
-
-  /**
-   * 实例化信息
-   */
-  InitMessage?: string
+  ContractAddress: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -271,6 +301,46 @@ export interface GetTransListHandlerResponse {
 }
 
 /**
+ * InvokeBcosTrans请求参数结构体
+ */
+export interface InvokeBcosTransRequest {
+  /**
+   * 网络ID，可在区块链网络详情或列表中获取
+   */
+  ClusterId: string
+
+  /**
+   * 群组编号，可在群组列表中获取
+   */
+  GroupId: number
+
+  /**
+   * 合约地址，可在合约详情获取
+   */
+  ContractAddress: string
+
+  /**
+   * 合约Abi的json数组格式的字符串，可在合约详情获取
+   */
+  AbiInfo: string
+
+  /**
+   * 合约方法名
+   */
+  FuncName: string
+
+  /**
+   * 签名用户编号，可在私钥管理页面获取
+   */
+  SignUserId: string
+
+  /**
+   * 合约方法入参，json格式字符串
+   */
+  FuncParam?: string
+}
+
+/**
  * GetChaincodeInitializeResultForUser请求参数结构体
  */
 export interface GetChaincodeInitializeResultForUserRequest {
@@ -381,6 +451,26 @@ export interface DeployDynamicContractHandlerResponse {
 }
 
 /**
+ * SrvInvoke请求参数结构体
+ */
+export interface SrvInvokeRequest {
+  /**
+   * 服务类型，iss或者dam
+   */
+  Service: string
+
+  /**
+   * 服务接口，要调用的方法函数名
+   */
+  Method: string
+
+  /**
+   * 用户自定义json字符串
+   */
+  Param: string
+}
+
+/**
  * ApplyUserCert返回参数结构体
  */
 export interface ApplyUserCertResponse {
@@ -451,48 +541,23 @@ export interface GetChaincodeCompileLogForUserRequest {
 }
 
 /**
- * GetInvokeTx请求参数结构体
+ * GetBcosBlockByNumber请求参数结构体
  */
-export interface GetInvokeTxRequest {
+export interface GetBcosBlockByNumberRequest {
   /**
-   * 模块名，固定字段：transaction
-   */
-  Module: string
-
-  /**
-   * 操作名，固定字段：query_txid
-   */
-  Operation: string
-
-  /**
-   * 区块链网络ID，可在区块链网络详情或列表中获取
+   * 网络ID，可在区块链网络详情或列表中获取
    */
   ClusterId: string
 
   /**
-   * 业务所属通道名称，可在通道详情或列表中获取
+   * 群组编号，可在群组列表中获取
    */
-  ChannelName: string
+  GroupId: number
 
   /**
-   * 执行该查询交易的节点名称，可以在通道详情中获取该通道上的节点名称极其所属组织名称
+   * 区块高度，可以从InvokeBcosTrans接口的返回值中解析获取
    */
-  PeerName: string
-
-  /**
-   * 执行该查询交易的节点所属组织名称，可以在通道详情中获取该通道上的节点名称极其所属组织名称
-   */
-  PeerGroup: string
-
-  /**
-   * 交易ID
-   */
-  TxId: string
-
-  /**
-   * 调用合约的组织名称，可以在组织管理列表中获取当前组织的名称
-   */
-  GroupName: string
+  BlockNumber: number
 }
 
 /**
@@ -516,38 +581,23 @@ export interface GetPeerLogForUserResponse {
 }
 
 /**
- * GetTransListHandler请求参数结构体
+ * GetBcosBlockList返回参数结构体
  */
-export interface GetTransListHandlerRequest {
+export interface GetBcosBlockListResponse {
   /**
-   * 模块名，固定字段：transaction
+   * 总记录数
    */
-  Module: string
+  TotalCount: number
 
   /**
-   * 操作名，固定字段：get_trans_list
+   * 返回数据列表
    */
-  Operation: string
+  List: Array<BcosBlockObj>
 
   /**
-   * 记录偏移量
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Offset: number
-
-  /**
-   * 每页记录数
-   */
-  Limit: number
-
-  /**
-   * 群组编号
-   */
-  GroupPk: string
-
-  /**
-   * 交易哈希
-   */
-  TransHash?: string
+  RequestId?: string
 }
 
 /**
@@ -756,23 +806,83 @@ export interface GetBlockListResponse {
 }
 
 /**
- * SrvInvoke请求参数结构体
+ * 交易列表项信息
  */
-export interface SrvInvokeRequest {
+export interface TransactionItem {
   /**
-   * 服务类型，iss或者dam
+   * 交易ID
    */
-  Service: string
+  TransactionId: string
 
   /**
-   * 服务接口，要调用的方法函数名
+   * 交易hash
    */
-  Method: string
+  TransactionHash: string
 
   /**
-   * 用户自定义json字符串
+   * 创建交易的组织名
    */
-  Param: string
+  CreateOrgName: string
+
+  /**
+   * 交易所在区块号
+   */
+  BlockId: number
+
+  /**
+   * 交易类型（普通交易和配置交易）
+   */
+  TransactionType: string
+
+  /**
+   * 交易创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 交易所在区块高度
+   */
+  BlockHeight: number
+
+  /**
+   * 交易状态
+   */
+  TransactionStatus: string
+}
+
+/**
+ * GetBcosBlockList请求参数结构体
+ */
+export interface GetBcosBlockListRequest {
+  /**
+   * 网络ID，可在区块链网络详情或列表中获取
+   */
+  ClusterId: string
+
+  /**
+   * 群组编号，可在群组列表中获取
+   */
+  GroupId: number
+
+  /**
+   * 当前页数，默认为1
+   */
+  PageNumber?: number
+
+  /**
+   * 每页记录数，默认为10
+   */
+  PageSize?: number
+
+  /**
+   * 区块高度，可以从InvokeBcosTrans接口的返回值中解析获取
+   */
+  BlockNumber?: number
+
+  /**
+   * 区块哈希，可以从InvokeBcosTrans接口的返回值中解析获取
+   */
+  BlockHash?: string
 }
 
 /**
@@ -821,6 +931,41 @@ export interface BlockByNumberHandlerResponse {
 }
 
 /**
+ * GetTransListHandler请求参数结构体
+ */
+export interface GetTransListHandlerRequest {
+  /**
+   * 模块名，固定字段：transaction
+   */
+  Module: string
+
+  /**
+   * 操作名，固定字段：get_trans_list
+   */
+  Operation: string
+
+  /**
+   * 记录偏移量
+   */
+  Offset: number
+
+  /**
+   * 每页记录数
+   */
+  Limit: number
+
+  /**
+   * 群组编号
+   */
+  GroupPk: string
+
+  /**
+   * 交易哈希
+   */
+  TransHash?: string
+}
+
+/**
  * GetTransByHashHandler返回参数结构体
  */
 export interface GetTransByHashHandlerResponse {
@@ -833,6 +978,51 @@ export interface GetTransByHashHandlerResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * GetInvokeTx请求参数结构体
+ */
+export interface GetInvokeTxRequest {
+  /**
+   * 模块名，固定字段：transaction
+   */
+  Module: string
+
+  /**
+   * 操作名，固定字段：query_txid
+   */
+  Operation: string
+
+  /**
+   * 区块链网络ID，可在区块链网络详情或列表中获取
+   */
+  ClusterId: string
+
+  /**
+   * 业务所属通道名称，可在通道详情或列表中获取
+   */
+  ChannelName: string
+
+  /**
+   * 执行该查询交易的节点名称，可以在通道详情中获取该通道上的节点名称极其所属组织名称
+   */
+  PeerName: string
+
+  /**
+   * 执行该查询交易的节点所属组织名称，可以在通道详情中获取该通道上的节点名称极其所属组织名称
+   */
+  PeerGroup: string
+
+  /**
+   * 交易ID
+   */
+  TxId: string
+
+  /**
+   * 调用合约的组织名称，可以在组织管理列表中获取当前组织的名称
+   */
+  GroupName: string
 }
 
 /**
@@ -1230,6 +1420,21 @@ export interface SrvInvokeResponse {
 }
 
 /**
+ * GetBcosTransByHash返回参数结构体
+ */
+export interface GetBcosTransByHashResponse {
+  /**
+   * 交易信息json字符串
+   */
+  TransactionJson: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetBlockListHandler请求参数结构体
  */
 export interface GetBlockListHandlerRequest {
@@ -1300,6 +1505,21 @@ export interface LogDetailForUser {
 }
 
 /**
+ * InvokeBcosTrans返回参数结构体
+ */
+export interface InvokeBcosTransResponse {
+  /**
+   * 交易结果json字符串
+   */
+  TransactionRsp: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * InitializeChaincodeForUser返回参数结构体
  */
 export interface InitializeChaincodeForUserResponse {
@@ -1327,6 +1547,21 @@ export interface GroupDetailForUser {
    * 组织MSP Identity
    */
   GroupMSPId: string
+}
+
+/**
+ * GetBcosBlockByNumber返回参数结构体
+ */
+export interface GetBcosBlockByNumberResponse {
+  /**
+   * 返回区块json字符串
+   */
+  BlockJson: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1472,6 +1707,26 @@ export interface BcosTransInfo {
    * 修改时间
    */
   ModifyTime: string
+}
+
+/**
+ * GetChaincodeInitializeResultForUser返回参数结构体
+ */
+export interface GetChaincodeInitializeResultForUserResponse {
+  /**
+   * 实例化结果：0，实例化中；1，实例化成功；2，实例化失败
+   */
+  InitResult?: number
+
+  /**
+   * 实例化信息
+   */
+  InitMessage?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1655,6 +1910,26 @@ export interface GetTransactionDetailForUserResponse {
 }
 
 /**
+ * GetBcosTransByHash请求参数结构体
+ */
+export interface GetBcosTransByHashRequest {
+  /**
+   * 网络ID，可在区块链网络详情或列表中获取
+   */
+  ClusterId: string
+
+  /**
+   * 群组编号，可在群组列表中获取
+   */
+  GroupId: number
+
+  /**
+   * 交易哈希值，可以从InvokeBcosTrans接口的返回值中解析获取
+   */
+  TransHash: string
+}
+
+/**
  * GetChannelListForUser返回参数结构体
  */
 export interface GetChannelListForUserResponse {
@@ -1695,6 +1970,41 @@ export interface GetChaincodeCompileLogForUserResponse {
 }
 
 /**
+ * DeployDynamicBcosContract请求参数结构体
+ */
+export interface DeployDynamicBcosContractRequest {
+  /**
+   * 网络ID，可在区块链网络详情或列表中获取
+   */
+  ClusterId: string
+
+  /**
+   * 群组编号，可在群组列表中获取
+   */
+  GroupId: number
+
+  /**
+   * 合约编译后的ABI，可在合约详情获取
+   */
+  AbiInfo: string
+
+  /**
+   * 合约编译得到的字节码，hex编码，可在合约详情获取
+   */
+  ByteCodeBin: string
+
+  /**
+   * 签名用户编号，可在私钥管理页面获取
+   */
+  SignUserId: string
+
+  /**
+   * 构造函数入参，Json数组，多个参数以逗号分隔（参数为数组时同理），如：["str1",["arr1","arr2"]]
+   */
+  ConstructorParams?: string
+}
+
+/**
  * SendTransactionHandler请求参数结构体
  */
 export interface SendTransactionHandlerRequest {
@@ -1730,48 +2040,23 @@ export interface SendTransactionHandlerRequest {
 }
 
 /**
- * 交易列表项信息
+ * GetBcosTransList返回参数结构体
  */
-export interface TransactionItem {
+export interface GetBcosTransListResponse {
   /**
-   * 交易ID
+   * 总记录数
    */
-  TransactionId: string
+  TotalCount: number
 
   /**
-   * 交易hash
+   * 返回数据列表
    */
-  TransactionHash: string
+  List: Array<BcosTransInfo>
 
   /**
-   * 创建交易的组织名
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  CreateOrgName: string
-
-  /**
-   * 交易所在区块号
-   */
-  BlockId: number
-
-  /**
-   * 交易类型（普通交易和配置交易）
-   */
-  TransactionType: string
-
-  /**
-   * 交易创建时间
-   */
-  CreateTime: string
-
-  /**
-   * 交易所在区块高度
-   */
-  BlockHeight: number
-
-  /**
-   * 交易状态
-   */
-  TransactionStatus: string
+  RequestId?: string
 }
 
 /**

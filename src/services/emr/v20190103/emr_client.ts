@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  InquirePriceRenewEmrResponse,
   MultiDiskMC,
   ClusterSetting,
   JobResult,
@@ -25,7 +26,7 @@ import {
   LoginSettings,
   RunJobFlowRequest,
   VPCSettings,
-  PriceResource,
+  DescribeInstanceRenewNodesRequest,
   ScaleOutInstanceResponse,
   InquiryPriceCreateInstanceRequest,
   Resource,
@@ -45,28 +46,32 @@ import {
   DescribeClusterNodesRequest,
   PreExecuteFileSettings,
   CreateInstanceRequest,
-  JobFlowResourceSpec,
+  InquirePriceRenewEmrRequest,
   Execution,
   DescribeInstancesResponse,
   InquiryPriceScaleOutInstanceRequest,
   Tag,
   Placement,
+  SearchItem,
   MetaDbInfo,
   DescribeInstancesRequest,
   CustomMetaInfo,
   DiskSpec,
+  JobFlowResourceSpec,
   InquiryPriceUpdateInstanceRequest,
+  DescribeInstanceRenewNodesResponse,
   COSSettings,
   ClusterInstancesInfo,
   PodSpec,
   MultiDisk,
   RunJobFlowResponse,
-  SearchItem,
+  RenewInstancesInfo,
   InquiryPriceScaleOutInstanceResponse,
   OutterResource,
   UpdateInstanceSettings,
   Configuration,
   TerminateTasksResponse,
+  PriceResource,
   DescribeClusterNodesResponse,
   NodeHardwareInfo,
   InquiryPriceUpdateInstanceResponse,
@@ -86,6 +91,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("emr.tencentcloudapi.com", "2019-01-03", clientConfig)
+  }
+
+  /**
+   * 预付费集群隔离后续费资源查询
+   */
+  async DescribeInstanceRenewNodes(
+    req: DescribeInstanceRenewNodesRequest,
+    cb?: (error: string, rep: DescribeInstanceRenewNodesResponse) => void
+  ): Promise<DescribeInstanceRenewNodesResponse> {
+    return this.request("DescribeInstanceRenewNodes", req, cb)
   }
 
   /**
@@ -156,6 +171,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InquiryPriceCreateInstanceResponse) => void
   ): Promise<InquiryPriceCreateInstanceResponse> {
     return this.request("InquiryPriceCreateInstance", req, cb)
+  }
+
+  /**
+   * 集群续费询价。
+   */
+  async InquirePriceRenewEmr(
+    req: InquirePriceRenewEmrRequest,
+    cb?: (error: string, rep: InquirePriceRenewEmrResponse) => void
+  ): Promise<InquirePriceRenewEmrResponse> {
+    return this.request("InquirePriceRenewEmr", req, cb)
   }
 
   /**

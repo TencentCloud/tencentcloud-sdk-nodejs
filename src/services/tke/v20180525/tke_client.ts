@@ -82,6 +82,7 @@ import {
   Label,
   DescribePrometheusAlertHistoryRequest,
   DeletePrometheusTemplateSyncRequest,
+  SetNodePoolNodeProtectionResponse,
   DescribePrometheusTemplatesResponse,
   DeleteClusterEndpointVipResponse,
   SyncPrometheusTemplateRequest,
@@ -190,6 +191,7 @@ import {
   DescribePrometheusTargetsRequest,
   DescribePrometheusTargetsResponse,
   DescribeClusterNodePoolDetailRequest,
+  SetNodePoolNodeProtectionRequest,
   DeletePrometheusTemplateSyncResponse,
   CreateClusterRouteTableRequest,
   RemoveNodeFromNodePoolRequest,
@@ -427,6 +429,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyPrometheusTemplateResponse) => void
   ): Promise<ModifyPrometheusTemplateResponse> {
     return this.request("ModifyPrometheusTemplate", req, cb)
+  }
+
+  /**
+   * 仅能设置节点池中处于伸缩组的节点
+   */
+  async SetNodePoolNodeProtection(
+    req?: SetNodePoolNodeProtectionRequest,
+    cb?: (error: string, rep: SetNodePoolNodeProtectionResponse) => void
+  ): Promise<SetNodePoolNodeProtectionResponse> {
+    return this.request("SetNodePoolNodeProtection", req, cb)
   }
 
   /**

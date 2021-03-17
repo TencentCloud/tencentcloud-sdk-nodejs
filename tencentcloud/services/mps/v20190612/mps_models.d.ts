@@ -1387,7 +1387,8 @@ export interface TerrorismImgReviewTemplateInfoForUpdate {
 <li>banners：暴恐旗帜；</li>
 <li>militant：武装分子；</li>
 <li>explosion：爆炸火灾；</li>
-<li>terrorists：暴恐人物。</li>
+<li>terrorists：暴恐人物；</li>
+<li>scenario：暴恐画面。</li>
       */
     LabelSet?: Array<string>;
     /**
@@ -2587,7 +2588,7 @@ export interface CreateContentReviewTemplateResponse {
     /**
       * 内容智能识别模板唯一标识。
       */
-    Definition?: number;
+    Definition: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3552,11 +3553,11 @@ export interface DescribeContentReviewTemplatesResponse {
     /**
       * 符合过滤条件的记录总数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 内容审核模板详情列表。
       */
-    ContentReviewTemplateSet?: Array<ContentReviewTemplateItem>;
+    ContentReviewTemplateSet: Array<ContentReviewTemplateItem>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4022,6 +4023,7 @@ export interface AiReviewTerrorismTaskOutput {
 <li>militant：武装分子。</li>
 <li>explosion：爆炸火灾。</li>
 <li>terrorists：暴恐人物。</li>
+<li>scenario：暴恐画面。</li>
       */
     Label: string;
     /**
@@ -7360,7 +7362,8 @@ export interface TerrorismImgReviewTemplateInfo {
 <li>banners：暴恐旗帜；</li>
 <li>militant：武装分子；</li>
 <li>explosion：爆炸火灾；</li>
-<li>terrorists：暴恐人物。</li>
+<li>terrorists：暴恐人物；</li>
+<li>scenario：暴恐画面。</li>
       */
     LabelSet?: Array<string>;
     /**

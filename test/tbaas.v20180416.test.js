@@ -18,9 +18,39 @@ const client = new tencentcloud.tbaas.v20180416.Client({
 })
 describe("tbaas.v20180416.test.js", function () {
 
+it("tbaas.v20180416.InvokeBcosTrans", async function () {
+    try {
+       const data = await client.InvokeBcosTrans({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tbaas.v20180416.GetBcosBlockByNumber", async function () {
+    try {
+       const data = await client.GetBcosBlockByNumber({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tbaas.v20180416.GetChaincodeLogForUser", async function () {
     try {
        const data = await client.GetChaincodeLogForUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tbaas.v20180416.GetBcosTransByHash", async function () {
+    try {
+       const data = await client.GetBcosTransByHash({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -38,9 +68,9 @@ it("tbaas.v20180416.GetClusterListForUser", async function () {
     }
 })
 
-it("tbaas.v20180416.GetBlockListHandler", async function () {
+it("tbaas.v20180416.GetBcosBlockList", async function () {
     try {
-       const data = await client.GetBlockListHandler({})
+       const data = await client.GetBcosBlockList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,9 +78,19 @@ it("tbaas.v20180416.GetBlockListHandler", async function () {
     }
 })
 
-it("tbaas.v20180416.DeployDynamicContractHandler", async function () {
+it("tbaas.v20180416.GetTransactionDetailForUser", async function () {
     try {
-       const data = await client.DeployDynamicContractHandler({})
+       const data = await client.GetTransactionDetailForUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tbaas.v20180416.GetTransListHandler", async function () {
+    try {
+       const data = await client.GetTransListHandler({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -88,6 +128,16 @@ it("tbaas.v20180416.GetPeerLogForUser", async function () {
     }
 })
 
+it("tbaas.v20180416.DeployDynamicBcosContract", async function () {
+    try {
+       const data = await client.DeployDynamicBcosContract({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tbaas.v20180416.DownloadUserCert", async function () {
     try {
        const data = await client.DownloadUserCert({})
@@ -108,9 +158,19 @@ it("tbaas.v20180416.CreateChaincodeAndInstallForUser", async function () {
     }
 })
 
-it("tbaas.v20180416.GetBlockTransactionListForUser", async function () {
+it("tbaas.v20180416.GetTransByHashHandler", async function () {
     try {
-       const data = await client.GetBlockTransactionListForUser({})
+       const data = await client.GetTransByHashHandler({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tbaas.v20180416.GetLatesdTransactionList", async function () {
+    try {
+       const data = await client.GetLatesdTransactionList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,9 +238,9 @@ it("tbaas.v20180416.InitializeChaincodeForUser", async function () {
     }
 })
 
-it("tbaas.v20180416.GetTransactionDetailForUser", async function () {
+it("tbaas.v20180416.DeployDynamicContractHandler", async function () {
     try {
-       const data = await client.GetTransactionDetailForUser({})
+       const data = await client.DeployDynamicContractHandler({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -191,6 +251,16 @@ it("tbaas.v20180416.GetTransactionDetailForUser", async function () {
 it("tbaas.v20180416.SrvInvoke", async function () {
     try {
        const data = await client.SrvInvoke({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tbaas.v20180416.GetBcosTransList", async function () {
+    try {
+       const data = await client.GetBcosTransList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,9 +298,9 @@ it("tbaas.v20180416.GetChaincodeCompileLogForUser", async function () {
     }
 })
 
-it("tbaas.v20180416.GetTransListHandler", async function () {
+it("tbaas.v20180416.GetBlockTransactionListForUser", async function () {
     try {
-       const data = await client.GetTransListHandler({})
+       const data = await client.GetBlockTransactionListForUser({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -258,19 +328,9 @@ it("tbaas.v20180416.Query", async function () {
     }
 })
 
-it("tbaas.v20180416.GetLatesdTransactionList", async function () {
+it("tbaas.v20180416.GetBlockListHandler", async function () {
     try {
-       const data = await client.GetLatesdTransactionList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tbaas.v20180416.GetTransByHashHandler", async function () {
-    try {
-       const data = await client.GetTransByHashHandler({})
+       const data = await client.GetBlockListHandler({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

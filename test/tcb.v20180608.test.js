@@ -68,6 +68,16 @@ it("tcb.v20180608.CreateAuthDomain", async function () {
     }
 })
 
+it("tcb.v20180608.DescribePostpayPackageFreeQuotas", async function () {
+    try {
+       const data = await client.DescribePostpayPackageFreeQuotas({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.CreateCloudBaseRunServerVersion", async function () {
     try {
        const data = await client.CreateCloudBaseRunServerVersion({})
@@ -178,9 +188,9 @@ it("tcb.v20180608.DescribeExtraPkgBillingInfo", async function () {
     }
 })
 
-it("tcb.v20180608.DescribePostpayPackageFreeQuotas", async function () {
+it("tcb.v20180608.DescribeExtensionUploadInfo", async function () {
     try {
-       const data = await client.DescribePostpayPackageFreeQuotas({})
+       const data = await client.DescribeExtensionUploadInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

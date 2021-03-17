@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("emr.tencentcloudapi.com", "2019-01-03", clientConfig);
     }
     /**
+     * 预付费集群隔离后续费资源查询
+     */
+    async DescribeInstanceRenewNodes(req, cb) {
+        return this.request("DescribeInstanceRenewNodes", req, cb);
+    }
+    /**
      * 缩容Task节点
      */
     async TerminateTasks(req, cb) {
@@ -68,6 +74,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async InquiryPriceCreateInstance(req, cb) {
         return this.request("InquiryPriceCreateInstance", req, cb);
+    }
+    /**
+     * 集群续费询价。
+     */
+    async InquirePriceRenewEmr(req, cb) {
+        return this.request("InquirePriceRenewEmr", req, cb);
     }
     /**
      * 扩容询价. 当扩容时候，请通过该接口查询价格。

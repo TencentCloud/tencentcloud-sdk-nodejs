@@ -3851,6 +3851,11 @@ export interface DescribeConfigResponse {
   ImageLimits: ImageLimitConfig
 
   /**
+   * 默认是否IP直通，用于模块创建，虚机购买等具有直通参数场景时的默认参数。
+   */
+  DefaultIPDirect: boolean
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string

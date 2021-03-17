@@ -368,6 +368,16 @@ it("cme.v20191029.CreateProject", async function () {
     }
 })
 
+it("cme.v20191029.MoveResource", async function () {
+    try {
+       const data = await client.MoveResource({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cme.v20191029.DeleteClass", async function () {
     try {
        const data = await client.DeleteClass({})

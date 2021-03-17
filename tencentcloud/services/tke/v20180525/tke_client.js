@@ -148,6 +148,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyPrometheusTemplate", req, cb);
     }
     /**
+     * 仅能设置节点池中处于伸缩组的节点
+     */
+    async SetNodePoolNodeProtection(req, cb) {
+        return this.request("SetNodePoolNodeProtection", req, cb);
+    }
+    /**
      * 查询集群开启端口流程状态(仅支持托管集群外网端口)
      */
     async DescribeClusterEndpointVipStatus(req, cb) {

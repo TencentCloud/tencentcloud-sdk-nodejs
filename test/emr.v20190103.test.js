@@ -18,6 +18,16 @@ const client = new tencentcloud.emr.v20190103.Client({
 })
 describe("emr.v20190103.test.js", function () {
 
+it("emr.v20190103.DescribeInstanceRenewNodes", async function () {
+    try {
+       const data = await client.DescribeInstanceRenewNodes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.TerminateTasks", async function () {
     try {
        const data = await client.TerminateTasks({})
@@ -81,6 +91,16 @@ it("emr.v20190103.CreateInstance", async function () {
 it("emr.v20190103.InquiryPriceCreateInstance", async function () {
     try {
        const data = await client.InquiryPriceCreateInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.InquirePriceRenewEmr", async function () {
+    try {
+       const data = await client.InquirePriceRenewEmr({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

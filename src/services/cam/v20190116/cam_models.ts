@@ -49,6 +49,17 @@ export interface SubAccountUser {
    * 用户类型(1:主账号;2:子用户;3:企业微信子用户;4:协作者;5:消息接收人)
    */
   UserType: number
+
+  /**
+   * 最近登录IP
+   */
+  LastLoginIp: string
+
+  /**
+      * 最近登录时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LastLoginTime: string
 }
 
 /**
