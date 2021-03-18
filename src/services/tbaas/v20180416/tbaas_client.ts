@@ -175,8 +175,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * Bcos分页查询当前群组的交易信息列表
-   */
+     * 版本升级
+
+Bcos分页查询当前群组的交易信息列表
+     */
   async GetTransListHandler(
     req: GetTransListHandlerRequest,
     cb?: (error: string, rep: GetTransListHandlerResponse) => void
@@ -245,8 +247,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * Bcos根据交易哈希查看交易详细信息
-   */
+     * 版本升级
+
+Bcos根据交易哈希查看交易详细信息
+     */
   async GetTransByHashHandler(
     req: GetTransByHashHandlerRequest,
     cb?: (error: string, rep: GetTransByHashHandlerResponse) => void
@@ -275,8 +279,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * Bcos根据块高查询区块信息
-   */
+     * 版本升级
+
+Bcos根据块高查询区块信息
+     */
   async BlockByNumberHandler(
     req: BlockByNumberHandlerRequest,
     cb?: (error: string, rep: BlockByNumberHandlerResponse) => void
@@ -325,8 +331,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 动态部署合约
-   */
+     * 版本升级
+
+动态部署合约
+     */
   async DeployDynamicContractHandler(
     req: DeployDynamicContractHandlerRequest,
     cb?: (error: string, rep: DeployDynamicContractHandlerResponse) => void
@@ -355,8 +363,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据动态部署的合约发送交易
-   */
+     * 版本升级
+
+根据动态部署的合约发送交易
+     */
   async TransByDynamicContractHandler(
     req: TransByDynamicContractHandlerRequest,
     cb?: (error: string, rep: TransByDynamicContractHandlerResponse) => void
@@ -365,8 +375,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * Bcos发送交易
-   */
+     * 版本升级
+
+Bcos发送交易
+     */
   async SendTransactionHandler(
     req: SendTransactionHandlerRequest,
     cb?: (error: string, rep: SendTransactionHandlerResponse) => void
@@ -415,8 +427,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * Bcos分页查询当前群组下的区块列表
-   */
+     * 版本升级
+
+Bcos分页查询当前群组下的区块列表
+     */
   async GetBlockListHandler(
     req: GetBlockListHandlerRequest,
     cb?: (error: string, rep: GetBlockListHandlerResponse) => void

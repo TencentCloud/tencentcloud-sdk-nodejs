@@ -2972,7 +2972,7 @@ export interface DescribePodInstancesResponse {
   /**
    * 查询的权限数据对象
    */
-  Result?: GroupPodResult
+  Result: GroupPodResult
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7028,6 +7028,11 @@ export interface DescribeMicroservicesRequest {
    * 状态过滤，online、offline、single_online
    */
   Status?: Array<string>
+
+  /**
+   * IdList
+   */
+  MicroserviceIdList?: Array<string>
 }
 
 /**
@@ -7152,6 +7157,11 @@ export interface DescribeApplicationsRequest {
    * 应用资源类型数组
    */
   ApplicationResourceTypeList?: Array<string>
+
+  /**
+   * IdList
+   */
+  ApplicationIdList?: Array<string>
 }
 
 /**
@@ -8724,6 +8734,11 @@ export interface DescribePodInstancesRequest {
    * 分页个数，默认为20， 取值应为1~50
    */
   Limit?: number
+
+  /**
+   * 过滤字段
+   */
+  PodNameList?: Array<string>
 }
 
 /**

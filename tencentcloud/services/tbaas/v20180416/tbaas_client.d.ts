@@ -36,7 +36,9 @@ export declare class Client extends AbstractClient {
      */
     GetTransactionDetailForUser(req: GetTransactionDetailForUserRequest, cb?: (error: string, rep: GetTransactionDetailForUserResponse) => void): Promise<GetTransactionDetailForUserResponse>;
     /**
-     * Bcos分页查询当前群组的交易信息列表
+     * 版本升级
+
+Bcos分页查询当前群组的交易信息列表
      */
     GetTransListHandler(req: GetTransListHandlerRequest, cb?: (error: string, rep: GetTransListHandlerResponse) => void): Promise<GetTransListHandlerResponse>;
     /**
@@ -64,7 +66,9 @@ export declare class Client extends AbstractClient {
      */
     CreateChaincodeAndInstallForUser(req: CreateChaincodeAndInstallForUserRequest, cb?: (error: string, rep: CreateChaincodeAndInstallForUserResponse) => void): Promise<CreateChaincodeAndInstallForUserResponse>;
     /**
-     * Bcos根据交易哈希查看交易详细信息
+     * 版本升级
+
+Bcos根据交易哈希查看交易详细信息
      */
     GetTransByHashHandler(req: GetTransByHashHandlerRequest, cb?: (error: string, rep: GetTransByHashHandlerResponse) => void): Promise<GetTransByHashHandlerResponse>;
     /**
@@ -76,7 +80,9 @@ export declare class Client extends AbstractClient {
      */
     ApplyUserCert(req: ApplyUserCertRequest, cb?: (error: string, rep: ApplyUserCertResponse) => void): Promise<ApplyUserCertResponse>;
     /**
-     * Bcos根据块高查询区块信息
+     * 版本升级
+
+Bcos根据块高查询区块信息
      */
     BlockByNumberHandler(req: BlockByNumberHandlerRequest, cb?: (error: string, rep: BlockByNumberHandlerResponse) => void): Promise<BlockByNumberHandlerResponse>;
     /**
@@ -96,7 +102,9 @@ export declare class Client extends AbstractClient {
      */
     InitializeChaincodeForUser(req: InitializeChaincodeForUserRequest, cb?: (error: string, rep: InitializeChaincodeForUserResponse) => void): Promise<InitializeChaincodeForUserResponse>;
     /**
-     * 动态部署合约
+     * 版本升级
+
+动态部署合约
      */
     DeployDynamicContractHandler(req: DeployDynamicContractHandlerRequest, cb?: (error: string, rep: DeployDynamicContractHandlerResponse) => void): Promise<DeployDynamicContractHandlerResponse>;
     /**
@@ -108,11 +116,15 @@ export declare class Client extends AbstractClient {
      */
     GetBcosTransList(req: GetBcosTransListRequest, cb?: (error: string, rep: GetBcosTransListResponse) => void): Promise<GetBcosTransListResponse>;
     /**
-     * 根据动态部署的合约发送交易
+     * 版本升级
+
+根据动态部署的合约发送交易
      */
     TransByDynamicContractHandler(req: TransByDynamicContractHandlerRequest, cb?: (error: string, rep: TransByDynamicContractHandlerResponse) => void): Promise<TransByDynamicContractHandlerResponse>;
     /**
-     * Bcos发送交易
+     * 版本升级
+
+Bcos发送交易
      */
     SendTransactionHandler(req: SendTransactionHandlerRequest, cb?: (error: string, rep: SendTransactionHandlerResponse) => void): Promise<SendTransactionHandlerResponse>;
     /**
@@ -132,7 +144,9 @@ export declare class Client extends AbstractClient {
      */
     Query(req: QueryRequest, cb?: (error: string, rep: QueryResponse) => void): Promise<QueryResponse>;
     /**
-     * Bcos分页查询当前群组下的区块列表
+     * 版本升级
+
+Bcos分页查询当前群组下的区块列表
      */
     GetBlockListHandler(req: GetBlockListHandlerRequest, cb?: (error: string, rep: GetBlockListHandlerResponse) => void): Promise<GetBlockListHandlerResponse>;
 }

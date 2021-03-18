@@ -28,17 +28,10 @@ export interface DescribeEcdnStatisticsRequest {
 flux：流量，单位为 byte
 bandwidth：带宽，单位为 bps
 request：请求数，单位为 次
-delay：响应时间，单位为ms
 2xx：返回 2xx 状态码汇总或者 2 开头状态码数据，单位为 个
 3xx：返回 3xx 状态码汇总或者 3 开头状态码数据，单位为 个
 4xx：返回 4xx 状态码汇总或者 4 开头状态码数据，单位为 个
 5xx：返回 5xx 状态码汇总或者 5 开头状态码数据，单位为 个
-static_request ： 静态请求数，单位为 次
-static_flux：静态流量，单位为 byte
-static_bandwidth ： 静态带宽，单位为 bps
-dynamic_request：动态请求数，单位为 次
-dynamic_flux：动态流量，单位为 byte
-dynamic_bandwidth：动态带宽，单位为 bps
       */
     Metrics: Array<string>;
     /**
@@ -60,6 +53,14 @@ dynamic_bandwidth：动态带宽，单位为 bps
 未填充域名情况下，指定项目查询，若填充了具体域名信息，以域名为主
       */
     Projects?: Array<number>;
+    /**
+      * 统计区域:
+mainland: 境内
+oversea: 境外
+global: 全部
+默认 global
+      */
+    Area?: string;
 }
 /**
  * StartEcdnDomain请求参数结构体
@@ -224,11 +225,11 @@ export interface DescribeEcdnDomainStatisticsResponse {
     /**
       * 域名数据
       */
-    Data?: Array<DomainData>;
+    Data: Array<DomainData>;
     /**
       * 数量
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -343,7 +344,7 @@ export interface DescribeEcdnStatisticsResponse {
     /**
       * 指定条件查询得到的数据明细
       */
-    Data?: Array<ResourceData>;
+    Data: Array<ResourceData>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1070,16 +1071,10 @@ export interface DescribeEcdnDomainStatisticsRequest {
       */
     EndTime: string;
     /**
-      * 统计指标名称。flux：流量，单位为 byte
+      * 统计指标名称:
+flux：流量，单位为 byte
 bandwidth：带宽，单位为 bps
 request：请求数，单位为 次
-delay：响应时间，单位为ms
-static_request ： 静态请求数，单位为 次
-static_flux：静态流量，单位为 byte
-static_bandwidth ： 静态带宽，单位为 bps
-dynamic_request：动态请求数，单位为 次
-dynamic_flux：动态流量，单位为 byte
-dynamic_bandwidth：动态带宽，单位为 bps
       */
     Metrics: Array<string>;
     /**
@@ -1099,6 +1094,14 @@ dynamic_bandwidth：动态带宽，单位为 bps
       * 列表分页记录条数，默认1000，最大3000。
       */
     Limit?: number;
+    /**
+      * 统计区域:
+mainland: 境内
+oversea: 境外
+global: 全部
+默认 global
+      */
+    Area?: string;
 }
 /**
  * 刷新用量及刷新配额

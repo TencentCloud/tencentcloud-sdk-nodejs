@@ -70,7 +70,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetTransactionDetailForUser", req, cb);
     }
     /**
-     * Bcos分页查询当前群组的交易信息列表
+     * 版本升级
+
+Bcos分页查询当前群组的交易信息列表
      */
     async GetTransListHandler(req, cb) {
         return this.request("GetTransListHandler", req, cb);
@@ -112,7 +114,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateChaincodeAndInstallForUser", req, cb);
     }
     /**
-     * Bcos根据交易哈希查看交易详细信息
+     * 版本升级
+
+Bcos根据交易哈希查看交易详细信息
      */
     async GetTransByHashHandler(req, cb) {
         return this.request("GetTransByHashHandler", req, cb);
@@ -130,7 +134,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ApplyUserCert", req, cb);
     }
     /**
-     * Bcos根据块高查询区块信息
+     * 版本升级
+
+Bcos根据块高查询区块信息
      */
     async BlockByNumberHandler(req, cb) {
         return this.request("BlockByNumberHandler", req, cb);
@@ -160,7 +166,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("InitializeChaincodeForUser", req, cb);
     }
     /**
-     * 动态部署合约
+     * 版本升级
+
+动态部署合约
      */
     async DeployDynamicContractHandler(req, cb) {
         return this.request("DeployDynamicContractHandler", req, cb);
@@ -178,13 +186,17 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetBcosTransList", req, cb);
     }
     /**
-     * 根据动态部署的合约发送交易
+     * 版本升级
+
+根据动态部署的合约发送交易
      */
     async TransByDynamicContractHandler(req, cb) {
         return this.request("TransByDynamicContractHandler", req, cb);
     }
     /**
-     * Bcos发送交易
+     * 版本升级
+
+Bcos发送交易
      */
     async SendTransactionHandler(req, cb) {
         return this.request("SendTransactionHandler", req, cb);
@@ -214,7 +226,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("Query", req, cb);
     }
     /**
-     * Bcos分页查询当前群组下的区块列表
+     * 版本升级
+
+Bcos分页查询当前群组下的区块列表
      */
     async GetBlockListHandler(req, cb) {
         return this.request("GetBlockListHandler", req, cb);

@@ -20,22 +20,22 @@
  */
 export interface DeleteRewriteRequest {
   /**
-   * 负载均衡实例ID
+   * 负载均衡实例ID。
    */
   LoadBalancerId: string
 
   /**
-   * 源监听器ID
+   * 源监听器ID。
    */
   SourceListenerId: string
 
   /**
-   * 目标监听器ID
+   * 目标监听器ID。
    */
   TargetListenerId: string
 
   /**
-   * 转发规则之间的重定向关系
+   * 转发规则之间的重定向关系。
    */
   RewriteInfos: Array<RewriteLocationMap>
 }
@@ -45,14 +45,14 @@ export interface DeleteRewriteRequest {
  */
 export interface DescribeTargetGroupListResponse {
   /**
-   * 显示的结果数量
+   * 显示的结果数量。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
-   * 显示的目标组信息集合
+   * 显示的目标组信息集合。
    */
-  TargetGroupSet?: Array<TargetGroupInfo>
+  TargetGroupSet: Array<TargetGroupInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -70,22 +70,22 @@ export type DescribeQuotaRequest = null
  */
 export interface DescribeTargetGroupListRequest {
   /**
-   * 目标组ID数组
+   * 目标组ID数组。
    */
   TargetGroupIds?: Array<string>
 
   /**
-   * 过滤条件数组，支持TargetGroupVpcId和TargetGroupName。与TargetGroupIds互斥，优先使用目标组ID，
+   * 过滤条件数组，支持TargetGroupVpcId和TargetGroupName。与TargetGroupIds互斥，优先使用目标组ID。
    */
   Filters?: Array<Filter>
 
   /**
-   * 显示的偏移起始量
+   * 显示的偏移起始量。
    */
   Offset?: number
 
   /**
-   * 显示条数限制，默认为20
+   * 显示条数限制，默认为20。
    */
   Limit?: number
 }
@@ -95,9 +95,9 @@ export interface DescribeTargetGroupListRequest {
  */
 export interface BatchDeregisterTargetsResponse {
   /**
-   * 解绑失败的监听器ID
+   * 解绑失败的监听器ID。
    */
-  FailListenerIdSet?: Array<string>
+  FailListenerIdSet: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -309,27 +309,27 @@ export interface RuleHealth {
  */
 export interface DeleteRuleRequest {
   /**
-   * 负载均衡实例 ID
+   * 负载均衡实例ID。
    */
   LoadBalancerId: string
 
   /**
-   * 负载均衡监听器 ID
+   * 负载均衡监听器ID。
    */
   ListenerId: string
 
   /**
-   * 要删除的转发规则的ID组成的数组
+   * 要删除的转发规则的ID组成的数组。
    */
   LocationIds?: Array<string>
 
   /**
-   * 要删除的转发规则的域名，已提供LocationIds参数时本参数不生效
+   * 要删除的转发规则的域名，已提供LocationIds参数时本参数不生效。
    */
   Domain?: string
 
   /**
-   * 要删除的转发规则的转发路径，已提供LocationIds参数时本参数不生效
+   * 要删除的转发规则的转发路径，已提供LocationIds参数时本参数不生效。
    */
   Url?: string
 
@@ -364,10 +364,10 @@ export interface SetLoadBalancerClsLogResponse {
  */
 export interface DescribeLoadBalancerTrafficResponse {
   /**
-      * 按出带宽从高到低排序后的负载均衡信息
+      * 按出带宽从高到低排序后的负载均衡信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  LoadBalancerTraffic?: Array<LoadBalancerTraffic>
+  LoadBalancerTraffic: Array<LoadBalancerTraffic>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -380,12 +380,12 @@ export interface DescribeLoadBalancerTrafficResponse {
  */
 export interface ModifyRuleRequest {
   /**
-   * 负载均衡实例 ID
+   * 负载均衡实例 ID。
    */
   LoadBalancerId: string
 
   /**
-   * 负载均衡监听器 ID
+   * 负载均衡监听器 ID。
    */
   ListenerId: string
 
@@ -395,12 +395,12 @@ export interface ModifyRuleRequest {
   LocationId: string
 
   /**
-   * 转发规则的新的转发路径，如不需修改Url，则不需提供此参数
+   * 转发规则的新的转发路径，如不需修改Url，则不需提供此参数。
    */
   Url?: string
 
   /**
-   * 健康检查信息
+   * 健康检查信息。
    */
   HealthCheck?: HealthCheck
 
@@ -411,22 +411,22 @@ export interface ModifyRuleRequest {
   Scheduler?: string
 
   /**
-   * 会话保持时间
+   * 会话保持时间。
    */
   SessionExpireTime?: number
 
   /**
-   * 负载均衡实例与后端服务之间的转发协议，默认HTTP，可取值：HTTP、HTTPS、TRPC
+   * 负载均衡实例与后端服务之间的转发协议，默认HTTP，可取值：HTTP、HTTPS、TRPC。
    */
   ForwardType?: string
 
   /**
-   * TRPC被调服务器路由，ForwardType为TRPC时必填
+   * TRPC被调服务器路由，ForwardType为TRPC时必填。
    */
   TrpcCallee?: string
 
   /**
-   * TRPC调用服务接口，ForwardType为TRPC时必填
+   * TRPC调用服务接口，ForwardType为TRPC时必填。
    */
   TrpcFunc?: string
 }
@@ -461,17 +461,17 @@ export interface DescribeBlockIPListResponse {
  */
 export interface DescribeRewriteRequest {
   /**
-   * 负载均衡实例ID
+   * 负载均衡实例ID。
    */
   LoadBalancerId: string
 
   /**
-   * 负载均衡监听器ID数组
+   * 负载均衡监听器ID数组。
    */
   SourceListenerIds?: Array<string>
 
   /**
-   * 负载均衡转发规则的ID数组
+   * 负载均衡转发规则的ID数组。
    */
   SourceLocationIds?: Array<string>
 }
@@ -484,7 +484,7 @@ export interface ModifyLoadBalancerAttributesResponse {
       * 切换负载均衡计费方式时，可用此参数查询切换任务是否成功。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DealName?: string
+  DealName: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -517,7 +517,7 @@ export interface DescribeTargetGroupInstancesRequest {
  */
 export interface AssociateTargetGroupsRequest {
   /**
-   * 绑定的关系数组
+   * 绑定的关系数组。
    */
   Associations: Array<TargetGroupAssociation>
 }
@@ -714,12 +714,12 @@ export interface RsWeightRule {
  */
 export interface DeregisterTargetsFromClassicalLBRequest {
   /**
-   * 负载均衡实例 ID
+   * 负载均衡实例ID。
    */
   LoadBalancerId: string
 
   /**
-   * 后端服务的实例ID列表
+   * 后端服务的实例ID列表。
    */
   InstanceIds: Array<string>
 }
@@ -764,7 +764,7 @@ export interface ModifyTargetWeightResponse {
  */
 export interface DescribeTaskStatusRequest {
   /**
-   * 请求ID，即接口返回的 RequestId 参数
+   * 请求ID，即接口返回的 RequestId 参数。
    */
   TaskId?: string
 }
@@ -799,9 +799,9 @@ export interface TargetGroupInstance {
  */
 export interface DescribeClassicalLBByInstanceIdResponse {
   /**
-   * 负载均衡相关信息列表
+   * 负载均衡相关信息列表。
    */
-  LoadBalancerInfoList?: Array<ClassicalLoadBalancerInfo>
+  LoadBalancerInfoList: Array<ClassicalLoadBalancerInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -814,9 +814,9 @@ export interface DescribeClassicalLBByInstanceIdResponse {
  */
 export interface CreateRuleResponse {
   /**
-   * 创建的转发规则的唯一标识数组
+   * 创建的转发规则的唯一标识数组。
    */
-  LocationIds?: Array<string>
+  LocationIds: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -829,14 +829,14 @@ export interface CreateRuleResponse {
  */
 export interface DescribeExclusiveClustersResponse {
   /**
-   * 集群列表
+   * 集群列表。
    */
-  ClusterSet?: Array<Cluster>
+  ClusterSet: Array<Cluster>
 
   /**
-   * 集群总数目
+   * 集群总数量。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -874,22 +874,22 @@ export interface ClassicalTargetInfo {
  */
 export interface DescribeTargetsRequest {
   /**
-   * 负载均衡实例 ID
+   * 负载均衡实例ID。
    */
   LoadBalancerId: string
 
   /**
-   * 监听器 ID列表
+   * 监听器ID列表。
    */
   ListenerIds?: Array<string>
 
   /**
-   * 监听器协议类型
+   * 监听器协议类型。
    */
   Protocol?: string
 
   /**
-   * 监听器端口
+   * 监听器端口。
    */
   Port?: number
 }
@@ -932,14 +932,14 @@ export interface RegisterTargetsWithClassicalLBResponse {
  */
 export interface DescribeTargetGroupsResponse {
   /**
-   * 显示的结果数量
+   * 显示的结果数量。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
-   * 显示的目标组信息集合
+   * 显示的目标组信息集合。
    */
-  TargetGroupSet?: Array<TargetGroupInfo>
+  TargetGroupSet: Array<TargetGroupInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -994,12 +994,12 @@ export interface SetLoadBalancerClsLogRequest {
  */
 export interface DeleteLoadBalancerListenersRequest {
   /**
-   * 负载均衡实例 ID
+   * 负载均衡实例ID。
    */
   LoadBalancerId: string
 
   /**
-   * 指定删除的监听器ID数组，若不填则删除负载均衡的所有监听器
+   * 指定删除的监听器ID数组，若不填则删除负载均衡的所有监听器。
    */
   ListenerIds?: Array<string>
 }
@@ -1039,7 +1039,7 @@ export interface ModifyRuleResponse {
  */
 export interface DescribeClassicalLBTargetsRequest {
   /**
-   * 负载均衡实例 ID
+   * 负载均衡实例 ID。
    */
   LoadBalancerId: string
 }
@@ -1049,15 +1049,15 @@ export interface DescribeClassicalLBTargetsRequest {
  */
 export interface DescribeListenersResponse {
   /**
-   * 监听器列表
+   * 监听器列表。
    */
-  Listeners?: Array<Listener>
+  Listeners: Array<Listener>
 
   /**
-      * 总的监听器个数
+      * 总的监听器个数（根据端口、协议、监听器ID过滤后）。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1080,17 +1080,17 @@ export interface AutoRewriteRequest {
   ListenerId: string
 
   /**
-   * HTTPS:443监听器下需要重定向的域名，若不填，对HTTPS:443监听器下的所有域名都设置重定向。
+   * HTTPS:443监听器下需要重定向的域名，若不填，则对HTTPS:443监听器下的所有域名都设置重定向。
    */
   Domains?: Array<string>
 
   /**
-   * 重定向状态码，可取值301,302,307
+   * 重定向状态码，可取值301,302,307。
    */
   RewriteCodes?: Array<number>
 
   /**
-   * 重定向是否携带匹配的url
+   * 重定向是否携带匹配的URL。
    */
   TakeUrls?: Array<boolean>
 }
@@ -1125,22 +1125,22 @@ export interface ModifyTargetGroupInstancesWeightResponse {
  */
 export interface DescribeTargetGroupsRequest {
   /**
-   * 目标组ID，与Filters互斥
+   * 目标组ID，与Filters互斥。
    */
   TargetGroupIds?: Array<string>
 
   /**
-   * 显示条数限制，默认为20
+   * 显示条数限制，默认为20。
    */
   Limit?: number
 
   /**
-   * 显示的偏移起始量
+   * 显示的偏移起始量。
    */
   Offset?: number
 
   /**
-   * 过滤条件数组，与TargetGroupIds互斥，支持TargetGroupVpcId和TargetGroupName
+   * 过滤条件数组，与TargetGroupIds互斥，支持TargetGroupVpcId和TargetGroupName。
    */
   Filters?: Array<Filter>
 }
@@ -1152,7 +1152,7 @@ export interface DescribeTaskStatusResponse {
   /**
    * 任务的当前状态。 0：成功，1：失败，2：进行中。
    */
-  Status?: number
+  Status: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1168,7 +1168,7 @@ export interface BatchRegisterTargetsResponse {
       * 绑定失败的监听器ID，如为空表示全部绑定成功。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  FailListenerIdSet?: Array<string>
+  FailListenerIdSet: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1299,10 +1299,10 @@ export interface CertIdRelatedWithLoadBalancers {
  */
 export interface DescribeClassicalLBHealthStatusResponse {
   /**
-      * 后端健康状态列表
+      * 后端健康状态列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  HealthList?: Array<ClassicalHealth>
+  HealthList: Array<ClassicalHealth>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1454,12 +1454,12 @@ export interface LoadBalancerTraffic {
  */
 export interface RegisterTargetsWithClassicalLBRequest {
   /**
-   * 负载均衡实例 ID
+   * 负载均衡实例ID。
    */
   LoadBalancerId: string
 
   /**
-   * 后端服务信息
+   * 后端服务信息。
    */
   Targets: Array<ClassicalTargetInfo>
 }
@@ -1489,10 +1489,10 @@ export interface ReplaceCertForLoadBalancersResponse {
  */
 export interface DescribeTargetsResponse {
   /**
-      * 监听器后端绑定的机器信息
+      * 监听器后端绑定的机器信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Listeners?: Array<ListenerBackend>
+  Listeners: Array<ListenerBackend>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1505,17 +1505,17 @@ export interface DescribeTargetsResponse {
  */
 export interface ModifyListenerRequest {
   /**
-   * 负载均衡实例 ID
+   * 负载均衡实例ID。
    */
   LoadBalancerId: string
 
   /**
-   * 负载均衡监听器 ID
+   * 负载均衡监听器ID。
    */
   ListenerId: string
 
   /**
-   * 新的监听器名称
+   * 新的监听器名称。
    */
   ListenerName?: string
 
@@ -1525,12 +1525,12 @@ export interface ModifyListenerRequest {
   SessionExpireTime?: number
 
   /**
-   * 健康检查相关参数，此参数仅适用于TCP/UDP/TCP_SSL监听器
+   * 健康检查相关参数，此参数仅适用于TCP/UDP/TCP_SSL监听器。
    */
   HealthCheck?: HealthCheck
 
   /**
-   * 证书相关信息，此参数仅适用于HTTPS/TCP_SSL监听器
+   * 证书相关信息，此参数仅适用于HTTPS/TCP_SSL监听器。
    */
   Certificate?: CertificateInput
 
@@ -1541,12 +1541,12 @@ export interface ModifyListenerRequest {
   Scheduler?: string
 
   /**
-   * 是否开启SNI特性，此参数仅适用于HTTPS监听器。注意：未开启SNI的监听器可以开启SNI；已开启SNI的监听器不能关闭SNI
+   * 是否开启SNI特性，此参数仅适用于HTTPS监听器。注意：未开启SNI的监听器可以开启SNI；已开启SNI的监听器不能关闭SNI。
    */
   SniSwitch?: number
 
   /**
-   * 是否开启长连接，此参数仅适用于HTTP/HTTPS监听器
+   * 是否开启长连接，此参数仅适用于HTTP/HTTPS监听器。
    */
   KeepaliveEnable?: number
 }
@@ -1566,32 +1566,32 @@ export interface DeregisterTargetGroupInstancesResponse {
  */
 export interface RegisterTargetsRequest {
   /**
-   * 负载均衡实例 ID
+   * 负载均衡实例ID。
    */
   LoadBalancerId: string
 
   /**
-   * 负载均衡监听器 ID
+   * 负载均衡监听器ID。
    */
   ListenerId: string
 
   /**
-   * 待绑定的后端服务列表，数组长度最大支持20
+   * 待绑定的后端服务列表，数组长度最大支持20。
    */
   Targets: Array<Target>
 
   /**
-   * 转发规则的ID，当绑定后端服务到七层转发规则时，必须提供此参数或Domain+Url两者之一
+   * 转发规则的ID，当绑定后端服务到七层转发规则时，必须提供此参数或Domain+Url两者之一。
    */
   LocationId?: string
 
   /**
-   * 目标转发规则的域名，提供LocationId参数时本参数不生效
+   * 目标转发规则的域名，提供LocationId参数时本参数不生效。
    */
   Domain?: string
 
   /**
-   * 目标转发规则的URL，提供LocationId参数时本参数不生效
+   * 目标转发规则的URL，提供LocationId参数时本参数不生效。
    */
   Url?: string
 }
@@ -1707,12 +1707,12 @@ export interface AssociateTargetGroupsResponse {
  */
 export interface CreateTopicRequest {
   /**
-   * 日志主题的名字
+   * 日志主题的名称。
    */
   TopicName: string
 
   /**
-   * 主题分区 partition个数，不传参默认创建1个，最大创建允许10个，分裂/合并操作会改变分区数量，整体上限50个。
+   * 主题分区Partition的数量，不传参默认创建1个，最大创建允许10个，分裂/合并操作会改变分区数量，整体上限50个。
    */
   PartitionCount?: number
 }
@@ -1722,12 +1722,12 @@ export interface CreateTopicRequest {
  */
 export interface DeleteListenerRequest {
   /**
-   * 负载均衡实例 ID
+   * 负载均衡实例ID。
    */
   LoadBalancerId: string
 
   /**
-   * 要删除的监听器 ID
+   * 要删除的监听器ID。
    */
   ListenerId: string
 }
@@ -1782,7 +1782,7 @@ export interface DescribeLoadBalancersDetailRequest {
   Limit?: number
 
   /**
-   * 返回负载均衡列表起始偏移量，默认0
+   * 返回负载均衡列表起始偏移量，默认0。
    */
   Offset?: number
 
@@ -1877,7 +1877,7 @@ export interface TargetGroupBackend {
  */
 export interface DescribeClassicalLBByInstanceIdRequest {
   /**
-   * 后端实例ID列表
+   * 后端实例ID列表。
    */
   InstanceIds: Array<string>
 }
@@ -1938,14 +1938,14 @@ export interface ModifyBlockIPListRequest {
  */
 export interface DescribeClusterResourcesResponse {
   /**
-   * 集群中资源列表
+   * 集群中资源列表。
    */
-  ClusterResourceSet?: Array<ClusterResource>
+  ClusterResourceSet: Array<ClusterResource>
 
   /**
-   * 集群中资源总数
+   * 集群中资源总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1973,12 +1973,12 @@ export interface ModifyBlockIPListResponse {
  */
 export interface DescribeClusterResourcesRequest {
   /**
-   * 返回集群中资源列表数目，默认20，最大值100
+   * 返回集群中资源列表数目，默认为20，最大值为100。
    */
   Limit?: number
 
   /**
-   * 返回集群中资源列表起始偏移量，默认0
+   * 返回集群中资源列表起始偏移量，默认为0。
    */
   Offset?: number
 
@@ -1997,22 +1997,22 @@ export interface DescribeClusterResourcesRequest {
  */
 export interface ModifyDomainAttributesRequest {
   /**
-   * 负载均衡实例 ID
+   * 负载均衡实例ID。
    */
   LoadBalancerId: string
 
   /**
-   * 负载均衡监听器 ID
+   * 负载均衡监听器ID。
    */
   ListenerId: string
 
   /**
-   * 域名（必须是已经创建的转发规则下的域名）
+   * 域名（必须是已经创建的转发规则下的域名）。
    */
   Domain: string
 
   /**
-   * 要修改的新域名
+   * 要修改的新域名。
    */
   NewDomain?: string
 
@@ -2042,12 +2042,12 @@ export interface ModifyDomainAttributesRequest {
  */
 export interface DescribeClassicalLBHealthStatusRequest {
   /**
-   * 负载均衡实例 ID
+   * 负载均衡实例ID。
    */
   LoadBalancerId: string
 
   /**
-   * 负载均衡监听器ID
+   * 负载均衡监听器ID。
    */
   ListenerId?: string
 }
@@ -2084,7 +2084,7 @@ export interface CreateClsLogSetResponse {
   /**
    * 日志集的 ID。
    */
-  LogsetId?: string
+  LogsetId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2264,7 +2264,7 @@ export interface ClassicalListener {
  */
 export interface DeleteLoadBalancerRequest {
   /**
-   * 要删除的负载均衡实例 ID数组，数组大小最大支持20
+   * 要删除的负载均衡实例 ID数组，数组大小最大支持20。
    */
   LoadBalancerIds: Array<string>
 }
@@ -2319,7 +2319,7 @@ export interface CertificateInput {
  */
 export interface CreateListenerResponse {
   /**
-   * 创建的监听器的唯一标识数组
+   * 创建的监听器的唯一标识数组。
    */
   ListenerIds: Array<string>
 
@@ -2336,7 +2336,7 @@ export interface CreateTargetGroupResponse {
   /**
    * 创建目标组后生成的id
    */
-  TargetGroupId?: string
+  TargetGroupId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2495,9 +2495,9 @@ export interface RuleOutput {
  */
 export interface CreateTopicResponse {
   /**
-   * 日志主题的 ID
+   * 日志主题的 ID。
    */
-  TopicId?: string
+  TopicId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2510,17 +2510,17 @@ export interface CreateTopicResponse {
  */
 export interface CreateRuleRequest {
   /**
-   * 负载均衡实例 ID
+   * 负载均衡实例 ID。
    */
   LoadBalancerId: string
 
   /**
-   * 监听器 ID
+   * 监听器 ID。
    */
   ListenerId: string
 
   /**
-   * 新建转发规则的信息
+   * 新建转发规则的信息。
    */
   Rules: Array<RuleInput>
 }
@@ -2566,12 +2566,12 @@ export interface RuleTargets {
  */
 export interface BatchDeregisterTargetsRequest {
   /**
-   * 负载均衡ID
+   * 负载均衡ID。
    */
   LoadBalancerId: string
 
   /**
-   * 解绑目标
+   * 解绑目标。
    */
   Targets: Array<BatchTarget>
 }
@@ -2581,12 +2581,12 @@ export interface BatchDeregisterTargetsRequest {
  */
 export interface DeregisterTargetGroupInstancesRequest {
   /**
-   * 目标组ID
+   * 目标组ID。
    */
   TargetGroupId: string
 
   /**
-   * 待解绑的服务器信息
+   * 待解绑的服务器信息。
    */
   TargetGroupInstances: Array<TargetGroupInstance>
 }
@@ -2596,22 +2596,22 @@ export interface DeregisterTargetGroupInstancesRequest {
  */
 export interface ManualRewriteRequest {
   /**
-   * 负载均衡实例ID
+   * 负载均衡实例 ID。
    */
   LoadBalancerId: string
 
   /**
-   * 源监听器ID
+   * 源监听器 ID。
    */
   SourceListenerId: string
 
   /**
-   * 目标监听器ID
+   * 目标监听器 ID。
    */
   TargetListenerId: string
 
   /**
-   * 转发规则之间的重定向关系
+   * 转发规则之间的重定向关系。
    */
   RewriteInfos: Array<RewriteLocationMap>
 }
@@ -2631,10 +2631,10 @@ export interface ModifyListenerResponse {
  */
 export interface DescribeTargetHealthResponse {
   /**
-      * 负载均衡实例列表
+      * 负载均衡实例列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  LoadBalancers?: Array<LoadBalancerHealth>
+  LoadBalancers: Array<LoadBalancerHealth>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2719,27 +2719,27 @@ export interface ClusterItem {
  */
 export interface CreateListenerRequest {
   /**
-   * 负载均衡实例 ID
+   * 负载均衡实例 ID。
    */
   LoadBalancerId: string
 
   /**
-   * 要将监听器创建到哪些端口，每个端口对应一个新的监听器
+   * 要将监听器创建到哪些端口，每个端口对应一个新的监听器。
    */
   Ports: Array<number>
 
   /**
-   * 监听器协议： TCP | UDP | HTTP | HTTPS | TCP_SSL（TCP_SSL 正在内测中，如需使用请通过工单申请）
+   * 监听器协议： TCP | UDP | HTTP | HTTPS | TCP_SSL（TCP_SSL 正在内测中，如需使用请通过工单申请）。
    */
   Protocol: string
 
   /**
-   * 要创建的监听器名称列表，名称与Ports数组按序一一对应，如不需立即命名，则无需提供此参数
+   * 要创建的监听器名称列表，名称与Ports数组按序一一对应，如不需立即命名，则无需提供此参数。
    */
   ListenerNames?: Array<string>
 
   /**
-   * 健康检查相关参数，此参数仅适用于TCP/UDP/TCP_SSL监听器
+   * 健康检查相关参数，此参数仅适用于TCP/UDP/TCP_SSL监听器。
    */
   HealthCheck?: HealthCheck
 
@@ -2775,7 +2775,7 @@ export interface CreateListenerRequest {
   SessionType?: string
 
   /**
-   * 是否开启长连接，此参数仅适用于HTTP/HTTPS监听器，0:关闭；1:开启， 默认关闭
+   * 是否开启长连接，此参数仅适用于HTTP/HTTPS监听器，0:关闭；1:开启， 默认关闭。
    */
   KeepaliveEnable?: number
 
@@ -2805,7 +2805,7 @@ export interface CreateClsLogSetRequest {
  */
 export interface DisassociateTargetGroupsRequest {
   /**
-   * 待解绑的规则关系数组
+   * 待解绑的规则关系数组。
    */
   Associations: Array<TargetGroupAssociation>
 }
@@ -3101,32 +3101,32 @@ export interface Cluster {
  */
 export interface ModifyTargetWeightRequest {
   /**
-   * 负载均衡实例 ID
+   * 负载均衡实例ID。
    */
   LoadBalancerId: string
 
   /**
-   * 负载均衡监听器 ID
+   * 负载均衡监听器ID。
    */
   ListenerId: string
 
   /**
-   * 转发规则的ID，当绑定机器到七层转发规则时，必须提供此参数或Domain+Url两者之一
+   * 转发规则的ID，当绑定机器到七层转发规则时，必须提供此参数或Domain+Url两者之一。
    */
   LocationId?: string
 
   /**
-   * 目标规则的域名，提供LocationId参数时本参数不生效
+   * 目标规则的域名，提供LocationId参数时本参数不生效。
    */
   Domain?: string
 
   /**
-   * 目标规则的URL，提供LocationId参数时本参数不生效
+   * 目标规则的URL，提供LocationId参数时本参数不生效。
    */
   Url?: string
 
   /**
-   * 要修改权重的后端服务列表
+   * 要修改权重的后端服务列表。
    */
   Targets?: Array<Target>
 
@@ -3143,13 +3143,13 @@ export interface DescribeLoadBalancersDetailResponse {
   /**
    * 负载均衡详情列表总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
       * 负载均衡详情列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  LoadBalancerDetailSet?: Array<LoadBalancerDetail>
+  LoadBalancerDetailSet: Array<LoadBalancerDetail>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3359,12 +3359,12 @@ Public：公网属性， Private：内网属性。
  */
 export interface BatchModifyTargetWeightRequest {
   /**
-   * 负载均衡实例 ID
+   * 负载均衡实例 ID。
    */
   LoadBalancerId: string
 
   /**
-   * 要批量修改权重的列表
+   * 要批量修改权重的列表。
    */
   ModifyList: Array<RsWeightRule>
 }
@@ -3444,7 +3444,7 @@ export interface TargetRegionInfo {
  */
 export interface DescribeTargetHealthRequest {
   /**
-   * 要查询的负载均衡实例 ID列表
+   * 要查询的负载均衡实例ID列表。
    */
   LoadBalancerIds: Array<string>
 }
@@ -3481,7 +3481,7 @@ export interface DescribeClsLogSetResponse {
   /**
    * 日志集的 ID。
    */
-  LogsetId?: string
+  LogsetId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3494,17 +3494,17 @@ export interface DescribeClsLogSetResponse {
  */
 export interface ModifyTargetGroupAttributeRequest {
   /**
-   * 目标组的ID
+   * 目标组的ID。
    */
   TargetGroupId: string
 
   /**
-   * 目标组的新名称
+   * 目标组的新名称。
    */
   TargetGroupName?: string
 
   /**
-   * 目标组的新默认端口
+   * 目标组的新默认端口。
    */
   Port?: number
 }
@@ -3537,32 +3537,32 @@ export interface ExclusiveCluster {
  */
 export interface DeregisterTargetsRequest {
   /**
-   * 负载均衡实例 ID，格式如 lb-12345678
+   * 负载均衡实例 ID，格式如 lb-12345678。
    */
   LoadBalancerId: string
 
   /**
-   * 监听器 ID，格式如 lbl-12345678
+   * 监听器 ID，格式如 lbl-12345678。
    */
   ListenerId: string
 
   /**
-   * 要解绑的后端服务列表，数组长度最大支持20
+   * 要解绑的后端服务列表，数组长度最大支持20。
    */
   Targets: Array<Target>
 
   /**
-   * 转发规则的ID，格式如 loc-12345678，当从七层转发规则解绑机器时，必须提供此参数或Domain+Url两者之一
+   * 转发规则的ID，格式如 loc-12345678，当从七层转发规则解绑机器时，必须提供此参数或Domain+URL两者之一。
    */
   LocationId?: string
 
   /**
-   * 目标规则的域名，提供LocationId参数时本参数不生效
+   * 目标规则的域名，提供LocationId参数时本参数不生效。
    */
   Domain?: string
 
   /**
-   * 目标规则的URL，提供LocationId参数时本参数不生效
+   * 目标规则的URL，提供LocationId参数时本参数不生效。
    */
   Url?: string
 }
@@ -3596,12 +3596,12 @@ BANDWIDTH_PACKAGE 按带宽包计费;
  */
 export interface CreateLoadBalancerSnatIpsRequest {
   /**
-   * 负载均衡唯一性Id，如lb-12345678
+   * 负载均衡唯一性ID，例如：lb-12345678。
    */
   LoadBalancerId: string
 
   /**
-   * 添加SnatIp信息，可指定Ip申请，或者指定子网自动申请
+   * 添加SnatIp信息，可指定IP申请，或者指定子网自动申请。
    */
   SnatIps: Array<SnatIp>
 }
@@ -3611,12 +3611,12 @@ export interface CreateLoadBalancerSnatIpsRequest {
  */
 export interface ModifyTargetGroupInstancesWeightRequest {
   /**
-   * 目标组ID
+   * 目标组ID。
    */
   TargetGroupId: string
 
   /**
-   * 待修改权重的服务器数组
+   * 待修改权重的服务器数组。
    */
   TargetGroupInstances: Array<TargetGroupInstance>
 }
@@ -3651,12 +3651,12 @@ export interface DeleteTargetGroupsResponse {
  */
 export interface ModifyTargetGroupInstancesPortRequest {
   /**
-   * 目标组ID
+   * 目标组ID。
    */
   TargetGroupId: string
 
   /**
-   * 待修改端口的服务器数组
+   * 待修改端口的服务器数组。
    */
   TargetGroupInstances: Array<TargetGroupInstance>
 }
@@ -3666,12 +3666,12 @@ export interface ModifyTargetGroupInstancesPortRequest {
  */
 export interface BatchRegisterTargetsRequest {
   /**
-   * 负载均衡ID
+   * 负载均衡ID。
    */
   LoadBalancerId: string
 
   /**
-   * 绑定目标
+   * 绑定目标。
    */
   Targets: Array<BatchTarget>
 }
@@ -3835,10 +3835,10 @@ export interface DescribeBlockIPTaskResponse {
  */
 export interface DescribeClassicalLBListenersResponse {
   /**
-      * 监听器列表
+      * 监听器列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Listeners?: Array<ClassicalListener>
+  Listeners: Array<ClassicalListener>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3851,12 +3851,12 @@ export interface DescribeClassicalLBListenersResponse {
  */
 export interface DescribeExclusiveClustersRequest {
   /**
-   * 返回集群列表数目，默认20，最大值100
+   * 返回集群列表数目，默认值为20，最大值为100。
    */
   Limit?: number
 
   /**
-   * 返回集群列表起始偏移量，默认0
+   * 返回集群列表起始偏移量，默认为0。
    */
   Offset?: number
 
@@ -3905,9 +3905,9 @@ export interface CreateLoadBalancerResponse {
  */
 export interface DescribeRewriteResponse {
   /**
-   * 重定向转发规则构成的数组，若无重定向规则，则返回空数组
+   * 重定向转发规则构成的数组，若无重定向规则，则返回空数组。
    */
-  RewriteSet?: Array<RuleOutput>
+  RewriteSet: Array<RuleOutput>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3966,22 +3966,22 @@ export interface DeleteLoadBalancerListenersResponse {
  */
 export interface DescribeListenersRequest {
   /**
-   * 负载均衡实例 ID
+   * 负载均衡实例ID。
    */
   LoadBalancerId: string
 
   /**
-   * 要查询的负载均衡监听器 ID数组
+   * 要查询的负载均衡监听器ID数组。
    */
   ListenerIds?: Array<string>
 
   /**
-   * 要查询的监听器协议类型，取值 TCP | UDP | HTTP | HTTPS | TCP_SSL
+   * 要查询的监听器协议类型，取值 TCP | UDP | HTTP | HTTPS | TCP_SSL。
    */
   Protocol?: string
 
   /**
-   * 要查询的监听器的端口
+   * 要查询的监听器的端口。
    */
   Port?: number
 }
@@ -3991,12 +3991,12 @@ export interface DescribeListenersRequest {
  */
 export interface DeleteLoadBalancerSnatIpsRequest {
   /**
-   * 负载均衡唯一Id，如lb-12345678
+   * 负载均衡唯一ID，例如：lb-12345678。
    */
   LoadBalancerId: string
 
   /**
-   * 删除SnatIp地址数组
+   * 删除SnatIp地址数组。
    */
   Ips: Array<string>
 }
@@ -4021,10 +4021,10 @@ export interface SetLoadBalancerSecurityGroupsRequest {
  */
 export interface DescribeClassicalLBTargetsResponse {
   /**
-      * 后端服务列表
+      * 后端服务列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Targets?: Array<ClassicalTarget>
+  Targets: Array<ClassicalTarget>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4067,37 +4067,37 @@ export interface RewriteLocationMap {
  */
 export interface ModifyTargetPortRequest {
   /**
-   * 负载均衡实例 ID
+   * 负载均衡实例ID。
    */
   LoadBalancerId: string
 
   /**
-   * 负载均衡监听器 ID
+   * 负载均衡监听器ID。
    */
   ListenerId: string
 
   /**
-   * 要修改端口的后端服务列表
+   * 要修改端口的后端服务列表。
    */
   Targets: Array<Target>
 
   /**
-   * 后端服务绑定到监听器或转发规则的新端口
+   * 后端服务绑定到监听器或转发规则的新端口。
    */
   NewPort: number
 
   /**
-   * 转发规则的ID，当后端服务绑定到七层转发规则时，必须提供此参数或Domain+Url两者之一
+   * 转发规则的ID，当后端服务绑定到七层转发规则时，必须提供此参数或Domain+Url两者之一。
    */
   LocationId?: string
 
   /**
-   * 目标规则的域名，提供LocationId参数时本参数不生效
+   * 目标规则的域名，提供LocationId参数时本参数不生效。
    */
   Domain?: string
 
   /**
-   * 目标规则的URL，提供LocationId参数时本参数不生效
+   * 目标规则的URL，提供LocationId参数时本参数不生效。
    */
   Url?: string
 }
@@ -4168,7 +4168,7 @@ export interface CertificateOutput {
  */
 export interface DeleteTargetGroupsRequest {
   /**
-   * 目标组的ID数组
+   * 目标组的ID数组。
    */
   TargetGroupIds: Array<string>
 }
@@ -4178,27 +4178,27 @@ export interface DeleteTargetGroupsRequest {
  */
 export interface DescribeClassicalLBListenersRequest {
   /**
-   * 负载均衡实例 ID
+   * 负载均衡实例ID。
    */
   LoadBalancerId: string
 
   /**
-   * 负载均衡监听器ID列表
+   * 负载均衡监听器ID列表。
    */
   ListenerIds?: Array<string>
 
   /**
-   * 负载均衡监听的协议, 'TCP', 'UDP', 'HTTP', 'HTTPS'
+   * 负载均衡监听的协议：'TCP', 'UDP', 'HTTP', 'HTTPS'。
    */
   Protocol?: string
 
   /**
-   * 负载均衡监听端口， 范围[1-65535]
+   * 负载均衡监听端口，范围为[1-65535]。
    */
   ListenerPort?: number
 
   /**
-   * 监听器的状态，0 表示创建中，1 表示运行中
+   * 监听器的状态，0：创建中，1：运行中。
    */
   Status?: number
 }
