@@ -2508,6 +2508,10 @@ export interface DescribeMicroserviceRequest {
       * 分页个数
       */
     Limit?: number;
+    /**
+      * 可选，根据部署组ID进行过滤
+      */
+    GroupIds?: Array<string>;
 }
 /**
  * DescribePodInstances返回参数结构体
@@ -8428,7 +8432,7 @@ export interface DescribeMicroserviceResponse {
       * 微服务详情实例列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: TsfPageMsInstance;
+    Result: TsfPageMsInstance;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

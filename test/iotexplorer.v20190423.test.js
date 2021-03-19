@@ -18,6 +18,16 @@ const client = new tencentcloud.iotexplorer.v20190423.Client({
 })
 describe("iotexplorer.v20190423.test.js", function () {
 
+it("iotexplorer.v20190423.GetTopicRuleList", async function () {
+    try {
+       const data = await client.GetTopicRuleList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.ModifyStudioProduct", async function () {
     try {
        const data = await client.ModifyStudioProduct({})
@@ -118,6 +128,26 @@ it("iotexplorer.v20190423.CreateLoRaFrequency", async function () {
     }
 })
 
+it("iotexplorer.v20190423.UpdateFirmware", async function () {
+    try {
+       const data = await client.UpdateFirmware({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.UploadFirmware", async function () {
+    try {
+       const data = await client.UploadFirmware({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.ModifyLoRaGateway", async function () {
     try {
        const data = await client.ModifyLoRaGateway({})
@@ -178,9 +208,9 @@ it("iotexplorer.v20190423.CallDeviceActionSync", async function () {
     }
 })
 
-it("iotexplorer.v20190423.DescribeStudioProduct", async function () {
+it("iotexplorer.v20190423.DeleteDevice", async function () {
     try {
-       const data = await client.DescribeStudioProduct({})
+       const data = await client.DeleteDevice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -201,6 +231,16 @@ it("iotexplorer.v20190423.ModifyProject", async function () {
 it("iotexplorer.v20190423.DeleteLoRaFrequency", async function () {
     try {
        const data = await client.DeleteLoRaFrequency({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.ListFirmwares", async function () {
+    try {
+       const data = await client.ListFirmwares({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -248,9 +288,9 @@ it("iotexplorer.v20190423.ListEventHistory", async function () {
     }
 })
 
-it("iotexplorer.v20190423.DeleteDevice", async function () {
+it("iotexplorer.v20190423.DescribeStudioProduct", async function () {
     try {
-       const data = await client.DeleteDevice({})
+       const data = await client.DescribeStudioProduct({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -278,9 +318,9 @@ it("iotexplorer.v20190423.ReleaseStudioProduct", async function () {
     }
 })
 
-it("iotexplorer.v20190423.GetTopicRuleList", async function () {
+it("iotexplorer.v20190423.DescribeFirmwareTask", async function () {
     try {
-       const data = await client.GetTopicRuleList({})
+       const data = await client.DescribeFirmwareTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -1971,7 +1971,7 @@ export interface Ipv6 {
     Switch: string;
 }
 /**
- * 门神子规则开关状态
+ * Waf子规则开关状态
  */
 export interface WafSubRuleStatus {
     /**

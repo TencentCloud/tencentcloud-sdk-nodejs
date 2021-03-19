@@ -2288,7 +2288,7 @@ export interface Ipv6 {
 }
 
 /**
- * 门神子规则开关状态
+ * Waf子规则开关状态
  */
 export interface WafSubRuleStatus {
   /**

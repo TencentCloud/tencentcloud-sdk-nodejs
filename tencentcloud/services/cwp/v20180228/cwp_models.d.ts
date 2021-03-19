@@ -19,22 +19,9 @@ export interface ModifyAutoOpenProVersionConfigRequest {
     Status: string;
 }
 /**
- * DescribeProcessTaskStatus返回参数结构体
+ * DescribeMachineOsList请求参数结构体
  */
-export interface DescribeProcessTaskStatusResponse {
-    /**
-      * 任务状态。
-<li>COMPLETE：完成（此时可以调用DescribeProcesses接口获取实时进程列表）</li>
-<li>AGENT_OFFLINE：云镜客户端离线</li>
-<li>COLLECTING：进程获取中</li>
-<li>FAILED：进程获取失败</li>
-      */
-    Status?: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
+export declare type DescribeMachineOsListRequest = null;
 /**
  * ExportReverseShellEvents返回参数结构体
  */
@@ -231,22 +218,21 @@ export interface UsualPlace {
     CityId: number;
 }
 /**
- * DescribeReverseShellRules请求参数结构体
+ * DescribeProcessTaskStatus返回参数结构体
  */
-export interface DescribeReverseShellRulesRequest {
+export interface DescribeProcessTaskStatusResponse {
     /**
-      * 返回数量，默认为10，最大值为100。
+      * 任务状态。
+<li>COMPLETE：完成（此时可以调用DescribeProcesses接口获取实时进程列表）</li>
+<li>AGENT_OFFLINE：云镜客户端离线</li>
+<li>COLLECTING：进程获取中</li>
+<li>FAILED：进程获取失败</li>
       */
-    Limit?: number;
+    Status?: string;
     /**
-      * 偏移量，默认为0。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Offset?: number;
-    /**
-      * 过滤条件。
-<li>Keywords - String - 是否必填：否 - 关键字(进程名称)</li>
-      */
-    Filters?: Array<Filter>;
+    RequestId?: string;
 }
 /**
  * SetBashEventsStatus请求参数结构体
@@ -1105,13 +1091,21 @@ export interface CreateBaselineStrategyResponse {
     RequestId?: string;
 }
 /**
- * DescribeTagMachines请求参数结构体
+ * DescribeMaliciousRequests返回参数结构体
  */
-export interface DescribeTagMachinesRequest {
+export interface DescribeMaliciousRequestsResponse {
     /**
-      * 标签ID
+      * 记录总数。
       */
-    Id: number;
+    TotalCount: number;
+    /**
+      * 恶意请求记录数组。
+      */
+    MaliciousRequests: Array<MaliciousRequest>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 反弹Shell规则
@@ -1590,6 +1584,19 @@ export interface EditReverseShellRuleResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 操作系统名称
+ */
+export interface OsName {
+    /**
+      * 系统名称
+      */
+    Name: string;
+    /**
+      * 操作系统类型枚举值
+      */
+    MachineOSType: number;
 }
 /**
  * ExportBruteAttacks请求参数结构体
@@ -3742,6 +3749,15 @@ export interface DeleteMalwaresResponse {
     RequestId?: string;
 }
 /**
+ * DescribeTagMachines请求参数结构体
+ */
+export interface DescribeTagMachinesRequest {
+    /**
+      * 标签ID
+      */
+    Id: number;
+}
+/**
  * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。
  */
 export interface ChargePrepaid {
@@ -3922,6 +3938,24 @@ export interface DescribeWeeklyReportMalwaresResponse {
     RequestId?: string;
 }
 /**
+ * DescribeReverseShellRules请求参数结构体
+ */
+export interface DescribeReverseShellRulesRequest {
+    /**
+      * 返回数量，默认为10，最大值为100。
+      */
+    Limit?: number;
+    /**
+      * 偏移量，默认为0。
+      */
+    Offset?: number;
+    /**
+      * 过滤条件。
+<li>Keywords - String - 是否必填：否 - 关键字(进程名称)</li>
+      */
+    Filters?: Array<Filter>;
+}
+/**
  * DescribeSecurityDynamics请求参数结构体
  */
 export interface DescribeSecurityDynamicsRequest {
@@ -4096,11 +4130,11 @@ export interface DescribeMachinesResponse {
     /**
       * 主机列表
       */
-    Machines?: Array<Machine>;
+    Machines: Array<Machine>;
     /**
       * 主机数量
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4157,7 +4191,7 @@ export interface Machine {
       * 主机状态。
 <li>OFFLINE: 离线  </li>
 <li>ONLINE: 在线</li>
-<li>MACHINE_STOPPED: 已关机</li>
+<li>SHUTDOWN: 已关机</li>
       */
     MachineStatus: string;
     /**
@@ -4235,6 +4269,10 @@ export interface Machine {
       * 项目ID
       */
     ProjectId: number;
+    /**
+      * 是否有资产扫描接口，0无，1有
+      */
+    HasAssetScan: number;
 }
 /**
  * TrustMalwares请求参数结构体
@@ -5060,17 +5098,13 @@ export interface ExportReverseShellEventsRequest {
     Filters?: Array<Filters>;
 }
 /**
- * DescribeMaliciousRequests返回参数结构体
+ * DescribeMachineOsList返回参数结构体
  */
-export interface DescribeMaliciousRequestsResponse {
+export interface DescribeMachineOsListResponse {
     /**
-      * 记录总数。
+      * 操作系统列表
       */
-    TotalCount: number;
-    /**
-      * 恶意请求记录数组。
-      */
-    MaliciousRequests: Array<MaliciousRequest>;
+    List?: Array<OsName>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5182,8 +5216,10 @@ export interface DescribeMachinesRequest {
     /**
       * 过滤条件。
 <li>Keywords - String - 是否必填：否 - 查询关键字 </li>
-<li>Status - String - 是否必填：否 - 客户端在线状态（OFFLINE: 离线 | ONLINE: 在线 | UNINSTALLED：未安装）</li>
+<li>Status - String - 是否必填：否 - 客户端在线状态（OFFLINE: 离线/关机 | ONLINE: 在线 | UNINSTALLED：未安装 | AGENT_OFFLINE 离线| AGENT_SHUTDOWN 已关机）</li>
 <li>Version - String  是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版）</li>
+<li>Risk - String 是否必填: 否 - 风险主机( yes ) </li>
+<li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )
 每个过滤条件只支持一个值，暂不支持多个值“或”关系查询
       */
     Filters?: Array<Filter>;

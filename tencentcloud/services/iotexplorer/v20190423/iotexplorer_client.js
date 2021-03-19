@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("iotexplorer.tencentcloudapi.com", "2019-04-23", clientConfig);
     }
     /**
+     * 获取规则列表
+     */
+    async GetTopicRuleList(req, cb) {
+        return this.request("GetTopicRuleList", req, cb);
+    }
+    /**
      * 提供修改产品的名称和描述等信息的能力，对于已发布产品不允许进行修改。
      */
     async ModifyStudioProduct(req, cb) {
@@ -88,6 +94,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateLoRaFrequency", req, cb);
     }
     /**
+     * 本接口（UpdateFirmware）用于对指定设备发起固件升级请求
+     */
+    async UpdateFirmware(req, cb) {
+        return this.request("UpdateFirmware", req, cb);
+    }
+    /**
+     * 本接口（UploadFirmware）用于上传设备固件至平台
+     */
+    async UploadFirmware(req, cb) {
+        return this.request("UploadFirmware", req, cb);
+    }
+    /**
      * 修改 LoRa 网关信息
      */
     async ModifyLoRaGateway(req, cb) {
@@ -124,10 +142,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CallDeviceActionSync", req, cb);
     }
     /**
-     * 提供查看产品详细信息的能力，包括产品的ID、数据协议、认证类型等重要参数
+     * 删除设备
      */
-    async DescribeStudioProduct(req, cb) {
-        return this.request("DescribeStudioProduct", req, cb);
+    async DeleteDevice(req, cb) {
+        return this.request("DeleteDevice", req, cb);
     }
     /**
      * 修改项目
@@ -140,6 +158,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteLoRaFrequency(req, cb) {
         return this.request("DeleteLoRaFrequency", req, cb);
+    }
+    /**
+     * 本接口（ListFirmwares）用于获取固件列表
+     */
+    async ListFirmwares(req, cb) {
+        return this.request("ListFirmwares", req, cb);
     }
     /**
      * 本接口（PublishMessage）用于使用自定义透传协议进行设备远控
@@ -166,10 +190,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListEventHistory", req, cb);
     }
     /**
-     * 删除设备
+     * 提供查看产品详细信息的能力，包括产品的ID、数据协议、认证类型等重要参数
      */
-    async DeleteDevice(req, cb) {
-        return this.request("DeleteDevice", req, cb);
+    async DescribeStudioProduct(req, cb) {
+        return this.request("DescribeStudioProduct", req, cb);
     }
     /**
      * 获取 LoRa 网关列表接口
@@ -184,10 +208,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ReleaseStudioProduct", req, cb);
     }
     /**
-     * 获取规则列表
+     * 查询固件升级任务列表
      */
-    async GetTopicRuleList(req, cb) {
-        return this.request("GetTopicRuleList", req, cb);
+    async DescribeFirmwareTask(req, cb) {
+        return this.request("DescribeFirmwareTask", req, cb);
     }
     /**
      * 提供查询LoRa自定义频点详情的能力

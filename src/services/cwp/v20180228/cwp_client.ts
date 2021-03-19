@@ -20,7 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeMalwareInfoRequest,
   ModifyAutoOpenProVersionConfigRequest,
-  DescribeProcessTaskStatusResponse,
+  DescribeMachineOsListRequest,
   ExportReverseShellEventsResponse,
   DescribeBashRulesRequest,
   ExportBashEventsRequest,
@@ -31,7 +31,7 @@ import {
   DescribeTagsRequest,
   AddMachineTagResponse,
   UsualPlace,
-  DescribeReverseShellRulesRequest,
+  DescribeProcessTaskStatusResponse,
   SetBashEventsStatusRequest,
   DescribeAccountsRequest,
   DescribeReverseShellEventsRequest,
@@ -72,7 +72,7 @@ import {
   DescribeNonlocalLoginPlacesRequest,
   DeleteMachineTagRequest,
   CreateBaselineStrategyResponse,
-  DescribeTagMachinesRequest,
+  DescribeMaliciousRequestsResponse,
   ReverseShellRule,
   OpenPortStatistics,
   DescribeExportMachinesResponse,
@@ -98,6 +98,7 @@ import {
   DeleteMaliciousRequestsResponse,
   ExportBruteAttacksResponse,
   EditReverseShellRuleResponse,
+  OsName,
   ExportBruteAttacksRequest,
   DeleteMachineResponse,
   DeleteLoginWhiteListRequest,
@@ -212,6 +213,7 @@ import {
   OpenProVersionPrepaidResponse,
   MisAlarmNonlocalLoginPlacesResponse,
   DeleteMalwaresResponse,
+  DescribeTagMachinesRequest,
   ChargePrepaid,
   DescribeWeeklyReportNonlocalLoginPlacesRequest,
   RecoverMalwaresResponse,
@@ -221,6 +223,7 @@ import {
   DescribeVulScanResultRequest,
   DescribePrivilegeEventsRequest,
   DescribeWeeklyReportMalwaresResponse,
+  DescribeReverseShellRulesRequest,
   DescribeSecurityDynamicsRequest,
   ExportBashEventsResponse,
   ImpactedHost,
@@ -269,7 +272,7 @@ import {
   DeleteReverseShellEventsRequest,
   ModifyAutoOpenProVersionConfigResponse,
   ExportReverseShellEventsRequest,
-  DescribeMaliciousRequestsResponse,
+  DescribeMachineOsListResponse,
   ExportAttackLogsResponse,
   EditTagsResponse,
   IgnoreImpactedHostsRequest,
@@ -1221,13 +1224,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (DescribeWeeklyReportInfo) 用于获取专业周报详情数据。
+   * 查询可筛选操作系统列表.
    */
-  async DescribeWeeklyReportInfo(
-    req: DescribeWeeklyReportInfoRequest,
-    cb?: (error: string, rep: DescribeWeeklyReportInfoResponse) => void
-  ): Promise<DescribeWeeklyReportInfoResponse> {
-    return this.request("DescribeWeeklyReportInfo", req, cb)
+  async DescribeMachineOsList(
+    req?: DescribeMachineOsListRequest,
+    cb?: (error: string, rep: DescribeMachineOsListResponse) => void
+  ): Promise<DescribeMachineOsListResponse> {
+    return this.request("DescribeMachineOsList", req, cb)
   }
 
   /**
@@ -1348,6 +1351,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSecurityTrendsResponse) => void
   ): Promise<DescribeSecurityTrendsResponse> {
     return this.request("DescribeSecurityTrends", req, cb)
+  }
+
+  /**
+   * 本接口 (DescribeWeeklyReportInfo) 用于获取专业周报详情数据。
+   */
+  async DescribeWeeklyReportInfo(
+    req: DescribeWeeklyReportInfoRequest,
+    cb?: (error: string, rep: DescribeWeeklyReportInfoResponse) => void
+  ): Promise<DescribeWeeklyReportInfoResponse> {
+    return this.request("DescribeWeeklyReportInfo", req, cb)
   }
 
   /**

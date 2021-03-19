@@ -938,9 +938,9 @@ it("cwp.v20180228.DescribeWeeklyReportVuls", async function () {
     }
 })
 
-it("cwp.v20180228.DescribeWeeklyReportInfo", async function () {
+it("cwp.v20180228.DescribeMachineOsList", async function () {
     try {
-       const data = await client.DescribeWeeklyReportInfo({})
+       const data = await client.DescribeMachineOsList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1061,6 +1061,16 @@ it("cwp.v20180228.DescribeTags", async function () {
 it("cwp.v20180228.DescribeSecurityTrends", async function () {
     try {
        const data = await client.DescribeSecurityTrends({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeWeeklyReportInfo", async function () {
+    try {
+       const data = await client.DescribeWeeklyReportInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

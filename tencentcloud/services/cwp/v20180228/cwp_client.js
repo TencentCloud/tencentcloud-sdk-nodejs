@@ -583,10 +583,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeWeeklyReportVuls", req, cb);
     }
     /**
-     * 本接口 (DescribeWeeklyReportInfo) 用于获取专业周报详情数据。
+     * 查询可筛选操作系统列表.
      */
-    async DescribeWeeklyReportInfo(req, cb) {
-        return this.request("DescribeWeeklyReportInfo", req, cb);
+    async DescribeMachineOsList(req, cb) {
+        return this.request("DescribeMachineOsList", req, cb);
     }
     /**
      * 定时扫描设置
@@ -659,6 +659,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeSecurityTrends(req, cb) {
         return this.request("DescribeSecurityTrends", req, cb);
+    }
+    /**
+     * 本接口 (DescribeWeeklyReportInfo) 用于获取专业周报详情数据。
+     */
+    async DescribeWeeklyReportInfo(req, cb) {
+        return this.request("DescribeWeeklyReportInfo", req, cb);
     }
     /**
      * 网络攻击日志详情

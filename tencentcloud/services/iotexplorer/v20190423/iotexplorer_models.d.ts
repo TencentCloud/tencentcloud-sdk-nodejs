@@ -190,6 +190,15 @@ export interface EnableTopicRuleResponse {
     RequestId?: string;
 }
 /**
+ * UpdateFirmware返回参数结构体
+ */
+export interface UpdateFirmwareResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyStudioProduct请求参数结构体
  */
 export interface ModifyStudioProductRequest {
@@ -562,6 +571,23 @@ export interface ListEventHistoryRequest {
     EventId?: string;
 }
 /**
+ * ListFirmwares返回参数结构体
+ */
+export interface ListFirmwaresResponse {
+    /**
+      * 固件总数
+      */
+    TotalCount: number;
+    /**
+      * 固件列表
+      */
+    Firmwares: Array<FirmwareInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ReleaseStudioProduct返回参数结构体
  */
 export interface ReleaseStudioProductResponse {
@@ -852,6 +878,92 @@ export interface GetStudioProductListRequest {
     Limit?: number;
 }
 /**
+ * DescribeFirmwareTask返回参数结构体
+ */
+export interface DescribeFirmwareTaskResponse {
+    /**
+      * 固件任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskId: number;
+    /**
+      * 固件任务状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Status: number;
+    /**
+      * 固件任务创建时间，单位：秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime: number;
+    /**
+      * 固件任务升级类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Type: number;
+    /**
+      * 产品名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProductName: string;
+    /**
+      * 固件任务升级模式。originalVersion（按版本号升级）、filename（提交文件升级）、devicenames（按设备名称升级）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpgradeMode: string;
+    /**
+      * 产品ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProductId: string;
+    /**
+      * 原始固件版本号，在UpgradeMode是originalVersion升级模式下会返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OriginalVersion: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 设备固件详细信息
+ */
+export interface FirmwareInfo {
+    /**
+      * 固件版本
+      */
+    Version: string;
+    /**
+      * 固件MD5值
+      */
+    Md5sum: string;
+    /**
+      * 固件创建时间
+      */
+    CreateTime: number;
+    /**
+      * 产品名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProductName: string;
+    /**
+      * 固件名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name: string;
+    /**
+      * 固件描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Description: string;
+    /**
+      * 产品ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProductId: string;
+}
+/**
  * DisableTopicRule返回参数结构体
  */
 export interface DisableTopicRuleResponse {
@@ -912,6 +1024,27 @@ export interface DescribeDeviceResponse {
     RequestId?: string;
 }
 /**
+ * ListFirmwares请求参数结构体
+ */
+export interface ListFirmwaresRequest {
+    /**
+      * 获取的页数
+      */
+    PageNum: number;
+    /**
+      * 分页的大小
+      */
+    PageSize: number;
+    /**
+      * 产品ID
+      */
+    ProductID?: string;
+    /**
+      * 搜索过滤条件
+      */
+    Filters?: Array<SearchKeyword>;
+}
+/**
  * GetStudioProductList返回参数结构体
  */
 export interface GetStudioProductListResponse {
@@ -956,6 +1089,35 @@ export interface PublishMessageRequest {
       * Payload的内容编码格式，取值为base64或空。base64表示云端将接收到的base64编码后的报文再转换成二进制报文下发至设备，为空表示不作转换，透传下发至设备
       */
     PayloadEncoding?: string;
+}
+/**
+ * UploadFirmware请求参数结构体
+ */
+export interface UploadFirmwareRequest {
+    /**
+      * 产品ID
+      */
+    ProductID: string;
+    /**
+      * 固件版本号
+      */
+    FirmwareVersion: string;
+    /**
+      * 固件的MD5值
+      */
+    Md5sum: string;
+    /**
+      * 固件的大小
+      */
+    FileSize: number;
+    /**
+      * 固件名称
+      */
+    FirmwareName?: string;
+    /**
+      * 固件描述
+      */
+    FirmwareDescription?: string;
 }
 /**
  * GetDeviceList请求参数结构体
@@ -1172,6 +1334,31 @@ export interface DescribeTopicRuleResponse {
     RequestId?: string;
 }
 /**
+ * UpdateFirmware请求参数结构体
+ */
+export interface UpdateFirmwareRequest {
+    /**
+      * 产品ID
+      */
+    ProductID: string;
+    /**
+      * 设备名
+      */
+    DeviceName: string;
+    /**
+      * 固件新的版本号
+      */
+    FirmwareVersion: string;
+    /**
+      * 固件原版本号
+      */
+    FirmwareOriVersion: string;
+    /**
+      * 固件升级方式；0 静默升级 1 用户确认升级   不填默认静默升级
+      */
+    UpgradeMethod?: number;
+}
+/**
  * 网关坐标
  */
 export interface LoRaGatewayLocation {
@@ -1274,6 +1461,15 @@ export interface DescribeProjectRequest {
       * 项目ID
       */
     ProjectId: string;
+}
+/**
+ * UploadFirmware返回参数结构体
+ */
+export interface UploadFirmwareResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DeleteTopicRule请求参数结构体
@@ -1662,6 +1858,19 @@ export interface DescribeDeviceDataHistoryResponse {
     RequestId?: string;
 }
 /**
+ * 搜索关键词
+ */
+export interface SearchKeyword {
+    /**
+      * 搜索条件的Key
+      */
+    Key: string;
+    /**
+      * 搜索条件的值
+      */
+    Value?: string;
+}
+/**
  * DescribeModelDefinition请求参数结构体
  */
 export interface DescribeModelDefinitionRequest {
@@ -1902,4 +2111,21 @@ export interface EnableTopicRuleRequest {
       * 规则名称
       */
     RuleName: string;
+}
+/**
+ * DescribeFirmwareTask请求参数结构体
+ */
+export interface DescribeFirmwareTaskRequest {
+    /**
+      * 产品ID
+      */
+    ProductID: string;
+    /**
+      * 固件版本号
+      */
+    FirmwareVersion: string;
+    /**
+      * 固件任务ID
+      */
+    TaskId: number;
 }

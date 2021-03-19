@@ -2697,19 +2697,19 @@ export interface CreateRoInstanceIpResponse {
     /**
       * 只读实例的私有网络的ID。
       */
-    RoVpcId?: number;
+    RoVpcId: number;
     /**
       * 只读实例的子网ID。
       */
-    RoSubnetId?: number;
+    RoSubnetId: number;
     /**
       * 只读实例的内网IP地址。
       */
-    RoVip?: string;
+    RoVip: string;
     /**
       * 只读实例的内网端口号。
       */
-    RoVport?: number;
+    RoVport: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2957,7 +2957,7 @@ export interface CreateRoInstanceIpRequest {
       */
     UniqSubnetId?: string;
     /**
-      * vpc描述符，例如：vpc-xxx,如果传了该字段则UniqSubnetId必传
+      * vpc描述符，例如：vpc-a23yt67j,如果传了该字段则UniqSubnetId必传
       */
     UniqVpcId?: string;
 }

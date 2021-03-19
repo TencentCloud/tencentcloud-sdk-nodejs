@@ -11469,6 +11469,11 @@ CCN：云联网路由，系统默认下发，不可编辑与删除。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   PublishedToVbc?: boolean
+
+  /**
+   * 路由策略创建时间
+   */
+  CreatedTime?: string
 }
 
 /**

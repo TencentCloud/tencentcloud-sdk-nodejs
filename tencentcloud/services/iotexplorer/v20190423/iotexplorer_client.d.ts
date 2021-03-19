@@ -1,12 +1,16 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DeleteProjectRequest, DescribeModelDefinitionResponse, ModifyStudioProductResponse, DeleteStudioProductResponse, GetDeviceListResponse, ControlDeviceDataRequest, DeleteLoRaFrequencyResponse, DeleteTopicRuleResponse, ModifyModelDefinitionRequest, CreateStudioProductResponse, CallDeviceActionSyncRequest, EnableTopicRuleResponse, ModifyStudioProductRequest, CreateStudioProductRequest, ReleaseStudioProductRequest, SearchTopicRuleRequest, DescribeDeviceDataRequest, DescribeStudioProductResponse, DescribeProjectResponse, DescribeLoRaFrequencyRequest, DeleteDeviceRequest, DeleteLoRaFrequencyRequest, ListEventHistoryRequest, ReleaseStudioProductResponse, DeleteLoRaGatewayRequest, SearchTopicRuleResponse, DescribeTopicRuleRequest, CallDeviceActionSyncResponse, CreateLoRaGatewayRequest, CreateProjectResponse, ModifyTopicRuleRequest, DeleteProjectResponse, CallDeviceActionAsyncRequest, CreateDeviceResponse, CreateDeviceRequest, GetProjectListResponse, GetStudioProductListRequest, DisableTopicRuleResponse, CreateProjectRequest, DescribeDeviceResponse, GetStudioProductListResponse, PublishMessageRequest, GetDeviceListRequest, GetTopicRuleListResponse, DisableTopicRuleRequest, CallDeviceActionAsyncResponse, DescribeTopicRuleResponse, DescribeDeviceRequest, ModifyTopicRuleResponse, DescribeLoRaFrequencyResponse, SearchStudioProductResponse, GetLoRaGatewayListRequest, DescribeProjectRequest, DeleteTopicRuleRequest, CreateLoRaGatewayResponse, DeleteLoRaGatewayResponse, CreateLoRaFrequencyRequest, ControlDeviceDataResponse, DescribeDeviceDataHistoryRequest, DescribeStudioProductRequest, ModifyLoRaFrequencyRequest, ModifyModelDefinitionResponse, GetProjectListRequest, CreateLoRaFrequencyResponse, SearchStudioProductRequest, GetTopicRuleListRequest, ModifyProjectResponse, DeleteStudioProductRequest, ModifyProjectRequest, PublishMessageResponse, ModifyLoRaGatewayResponse, DescribeDeviceDataHistoryResponse, DescribeModelDefinitionRequest, GetLoRaGatewayListResponse, CreateTopicRuleResponse, DescribeDeviceDataResponse, CreateTopicRuleRequest, DeleteDeviceResponse, ModifyLoRaFrequencyResponse, ModifyLoRaGatewayRequest, ListEventHistoryResponse, EnableTopicRuleRequest } from "./iotexplorer_models";
+import { DeleteProjectRequest, DescribeModelDefinitionResponse, ModifyStudioProductResponse, DeleteStudioProductResponse, GetDeviceListResponse, ControlDeviceDataRequest, DeleteLoRaFrequencyResponse, DeleteTopicRuleResponse, ModifyModelDefinitionRequest, CreateStudioProductResponse, CallDeviceActionSyncRequest, EnableTopicRuleResponse, UpdateFirmwareResponse, ModifyStudioProductRequest, CreateStudioProductRequest, ReleaseStudioProductRequest, SearchTopicRuleRequest, DescribeDeviceDataRequest, DescribeStudioProductResponse, DescribeProjectResponse, DescribeLoRaFrequencyRequest, DeleteDeviceRequest, DeleteLoRaFrequencyRequest, ListEventHistoryRequest, ListFirmwaresResponse, ReleaseStudioProductResponse, DeleteLoRaGatewayRequest, SearchTopicRuleResponse, DescribeTopicRuleRequest, CallDeviceActionSyncResponse, CreateLoRaGatewayRequest, CreateProjectResponse, ModifyTopicRuleRequest, DeleteProjectResponse, CallDeviceActionAsyncRequest, CreateDeviceResponse, CreateDeviceRequest, GetProjectListResponse, GetStudioProductListRequest, DescribeFirmwareTaskResponse, DisableTopicRuleResponse, CreateProjectRequest, DescribeDeviceResponse, ListFirmwaresRequest, GetStudioProductListResponse, PublishMessageRequest, UploadFirmwareRequest, GetDeviceListRequest, GetTopicRuleListResponse, DisableTopicRuleRequest, CallDeviceActionAsyncResponse, DescribeTopicRuleResponse, UpdateFirmwareRequest, DescribeDeviceRequest, ModifyTopicRuleResponse, DescribeLoRaFrequencyResponse, SearchStudioProductResponse, GetLoRaGatewayListRequest, DescribeProjectRequest, UploadFirmwareResponse, DeleteTopicRuleRequest, CreateLoRaGatewayResponse, DeleteLoRaGatewayResponse, CreateLoRaFrequencyRequest, ControlDeviceDataResponse, DescribeDeviceDataHistoryRequest, DescribeStudioProductRequest, ModifyLoRaFrequencyRequest, ModifyModelDefinitionResponse, GetProjectListRequest, CreateLoRaFrequencyResponse, SearchStudioProductRequest, GetTopicRuleListRequest, ModifyProjectResponse, DeleteStudioProductRequest, ModifyProjectRequest, PublishMessageResponse, ModifyLoRaGatewayResponse, DescribeDeviceDataHistoryResponse, DescribeModelDefinitionRequest, GetLoRaGatewayListResponse, CreateTopicRuleResponse, DescribeDeviceDataResponse, CreateTopicRuleRequest, DeleteDeviceResponse, ModifyLoRaFrequencyResponse, ModifyLoRaGatewayRequest, ListEventHistoryResponse, EnableTopicRuleRequest, DescribeFirmwareTaskRequest } from "./iotexplorer_models";
 /**
  * iotexplorer client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 获取规则列表
+     */
+    GetTopicRuleList(req: GetTopicRuleListRequest, cb?: (error: string, rep: GetTopicRuleListResponse) => void): Promise<GetTopicRuleListResponse>;
     /**
      * 提供修改产品的名称和描述等信息的能力，对于已发布产品不允许进行修改。
      */
@@ -48,6 +52,14 @@ export declare class Client extends AbstractClient {
      */
     CreateLoRaFrequency(req: CreateLoRaFrequencyRequest, cb?: (error: string, rep: CreateLoRaFrequencyResponse) => void): Promise<CreateLoRaFrequencyResponse>;
     /**
+     * 本接口（UpdateFirmware）用于对指定设备发起固件升级请求
+     */
+    UpdateFirmware(req: UpdateFirmwareRequest, cb?: (error: string, rep: UpdateFirmwareResponse) => void): Promise<UpdateFirmwareResponse>;
+    /**
+     * 本接口（UploadFirmware）用于上传设备固件至平台
+     */
+    UploadFirmware(req: UploadFirmwareRequest, cb?: (error: string, rep: UploadFirmwareResponse) => void): Promise<UploadFirmwareResponse>;
+    /**
      * 修改 LoRa 网关信息
      */
     ModifyLoRaGateway(req: ModifyLoRaGatewayRequest, cb?: (error: string, rep: ModifyLoRaGatewayResponse) => void): Promise<ModifyLoRaGatewayResponse>;
@@ -72,9 +84,9 @@ export declare class Client extends AbstractClient {
      */
     CallDeviceActionSync(req: CallDeviceActionSyncRequest, cb?: (error: string, rep: CallDeviceActionSyncResponse) => void): Promise<CallDeviceActionSyncResponse>;
     /**
-     * 提供查看产品详细信息的能力，包括产品的ID、数据协议、认证类型等重要参数
+     * 删除设备
      */
-    DescribeStudioProduct(req: DescribeStudioProductRequest, cb?: (error: string, rep: DescribeStudioProductResponse) => void): Promise<DescribeStudioProductResponse>;
+    DeleteDevice(req: DeleteDeviceRequest, cb?: (error: string, rep: DeleteDeviceResponse) => void): Promise<DeleteDeviceResponse>;
     /**
      * 修改项目
      */
@@ -83,6 +95,10 @@ export declare class Client extends AbstractClient {
      * 提供删除LoRa自定义频点的能力
      */
     DeleteLoRaFrequency(req: DeleteLoRaFrequencyRequest, cb?: (error: string, rep: DeleteLoRaFrequencyResponse) => void): Promise<DeleteLoRaFrequencyResponse>;
+    /**
+     * 本接口（ListFirmwares）用于获取固件列表
+     */
+    ListFirmwares(req: ListFirmwaresRequest, cb?: (error: string, rep: ListFirmwaresResponse) => void): Promise<ListFirmwaresResponse>;
     /**
      * 本接口（PublishMessage）用于使用自定义透传协议进行设备远控
      */
@@ -100,9 +116,9 @@ export declare class Client extends AbstractClient {
      */
     ListEventHistory(req: ListEventHistoryRequest, cb?: (error: string, rep: ListEventHistoryResponse) => void): Promise<ListEventHistoryResponse>;
     /**
-     * 删除设备
+     * 提供查看产品详细信息的能力，包括产品的ID、数据协议、认证类型等重要参数
      */
-    DeleteDevice(req: DeleteDeviceRequest, cb?: (error: string, rep: DeleteDeviceResponse) => void): Promise<DeleteDeviceResponse>;
+    DescribeStudioProduct(req: DescribeStudioProductRequest, cb?: (error: string, rep: DescribeStudioProductResponse) => void): Promise<DescribeStudioProductResponse>;
     /**
      * 获取 LoRa 网关列表接口
      */
@@ -112,9 +128,9 @@ export declare class Client extends AbstractClient {
      */
     ReleaseStudioProduct(req: ReleaseStudioProductRequest, cb?: (error: string, rep: ReleaseStudioProductResponse) => void): Promise<ReleaseStudioProductResponse>;
     /**
-     * 获取规则列表
+     * 查询固件升级任务列表
      */
-    GetTopicRuleList(req: GetTopicRuleListRequest, cb?: (error: string, rep: GetTopicRuleListResponse) => void): Promise<GetTopicRuleListResponse>;
+    DescribeFirmwareTask(req: DescribeFirmwareTaskRequest, cb?: (error: string, rep: DescribeFirmwareTaskResponse) => void): Promise<DescribeFirmwareTaskResponse>;
     /**
      * 提供查询LoRa自定义频点详情的能力
      */

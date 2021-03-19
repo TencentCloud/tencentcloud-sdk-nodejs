@@ -44,6 +44,10 @@ export interface DeleteFirewallRulesRequest {
       * 防火墙规则列表。
       */
     FirewallRules: Array<FirewallRule>;
+    /**
+      * 防火墙当前版本。用户每次更新防火墙规则时版本会自动加1，防止规则已过期，不填不考虑冲突。
+      */
+    FirewallVersion?: number;
 }
 /**
  * 描述了实例登录相关配置与信息。
@@ -360,6 +364,10 @@ export interface Blueprint {
       * 镜像是否支持自动化助手。
       */
     SupportAutomationTools: boolean;
+    /**
+      * 镜像所需内存大小, 单位: GB
+      */
+    RequiredMemorySize: number;
 }
 /**
  * 价格信息
@@ -661,6 +669,10 @@ export interface CreateFirewallRulesRequest {
       * 防火墙规则列表。
       */
     FirewallRules: Array<FirewallRule>;
+    /**
+      * 防火墙当前版本。用户每次更新防火墙规则时版本会自动加1，防止规则已过期，不填不考虑冲突。
+      */
+    FirewallVersion?: number;
 }
 /**
  * DescribeFirewallRules请求参数结构体
@@ -686,11 +698,15 @@ export interface DescribeFirewallRulesResponse {
     /**
       * 符合条件的防火墙规则数量。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 防火墙规则详细信息列表。
       */
-    FirewallRuleSet?: Array<FirewallRuleInfo>;
+    FirewallRuleSet: Array<FirewallRuleInfo>;
+    /**
+      * 防火墙版本号。
+      */
+    FirewallVersion: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -701,30 +717,54 @@ export interface DescribeFirewallRulesResponse {
  */
 export interface FirewallRule {
     /**
-      * 协议，取值：TCP，UDP，ALL。
+      * 协议，取值：TCP，UDP，ICMP，ALL。
       */
     Protocol: string;
     /**
       * 端口，取值：ALL，单独的端口，逗号分隔的离散端口，减号分隔的端口范围。
       */
     Port?: string;
+    /**
+      * 网段或 IP (互斥)。默认为 0.0.0.0/0，表示所有来源。
+      */
+    CidrBlock?: string;
+    /**
+      * 取值：ACCEPT，DROP。默认为 ACCEPT。
+      */
+    Action?: string;
+    /**
+      * 防火墙规则描述。
+      */
+    FirewallRuleDescription?: string;
 }
 /**
  * 描述防火墙规则详细信息。
  */
 export interface FirewallRuleInfo {
     /**
-      * 应用类型，取值：自定义，HTTP(80)，HTTPS(443)，Linux登录(22)，Windows登录(3389)，MySQL(3306)，SQL Server(1433)，全部TCP，全部UDP，ALL。
+      * 应用类型，取值：自定义，HTTP(80)，HTTPS(443)，Linux登录(22)，Windows登录(3389)，MySQL(3306)，SQL Server(1433)，全部TCP，全部UDP，Ping-ICMP，ALL。
       */
     AppType: string;
     /**
-      * 协议，取值：TCP，UDP，ALL。
+      * 协议，取值：TCP，UDP，ICMP，ALL。
       */
     Protocol: string;
     /**
       * 端口，取值：ALL，单独的端口，逗号分隔的离散端口，减号分隔的端口范围。
       */
     Port: string;
+    /**
+      * 网段或 IP (互斥)。默认为 0.0.0.0/0，表示所有来源。
+      */
+    CidrBlock: string;
+    /**
+      * 取值：ACCEPT，DROP。默认为 ACCEPT。
+      */
+    Action: string;
+    /**
+      * 防火墙规则描述。
+      */
+    FirewallRuleDescription: string;
 }
 /**
  * CreateFirewallRules返回参数结构体

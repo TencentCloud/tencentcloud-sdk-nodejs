@@ -31,6 +31,7 @@ import {
   CreateStudioProductResponse,
   CallDeviceActionSyncRequest,
   EnableTopicRuleResponse,
+  UpdateFirmwareResponse,
   ModifyStudioProductRequest,
   CreateStudioProductRequest,
   ProductModelDefinition,
@@ -47,6 +48,7 @@ import {
   DeleteDeviceRequest,
   DeleteLoRaFrequencyRequest,
   ListEventHistoryRequest,
+  ListFirmwaresResponse,
   ReleaseStudioProductResponse,
   DeleteLoRaGatewayRequest,
   LoRaFrequencyEntry,
@@ -62,12 +64,16 @@ import {
   CreateDeviceRequest,
   GetProjectListResponse,
   GetStudioProductListRequest,
+  DescribeFirmwareTaskResponse,
+  FirmwareInfo,
   DisableTopicRuleResponse,
   TopicRuleInfo,
   CreateProjectRequest,
   DescribeDeviceResponse,
+  ListFirmwaresRequest,
   GetStudioProductListResponse,
   PublishMessageRequest,
+  UploadFirmwareRequest,
   GetDeviceListRequest,
   GetTopicRuleListResponse,
   DisableTopicRuleRequest,
@@ -76,6 +82,7 @@ import {
   TopicRulePayload,
   CallDeviceActionAsyncResponse,
   DescribeTopicRuleResponse,
+  UpdateFirmwareRequest,
   LoRaGatewayLocation,
   DescribeDeviceRequest,
   ModifyTopicRuleResponse,
@@ -83,6 +90,7 @@ import {
   SearchStudioProductResponse,
   GetLoRaGatewayListRequest,
   DescribeProjectRequest,
+  UploadFirmwareResponse,
   DeleteTopicRuleRequest,
   CreateLoRaGatewayResponse,
   DeleteLoRaGatewayResponse,
@@ -103,6 +111,7 @@ import {
   PublishMessageResponse,
   ModifyLoRaGatewayResponse,
   DescribeDeviceDataHistoryResponse,
+  SearchKeyword,
   DescribeModelDefinitionRequest,
   GetLoRaGatewayListResponse,
   CreateTopicRuleResponse,
@@ -114,6 +123,7 @@ import {
   ModifyLoRaGatewayRequest,
   ListEventHistoryResponse,
   EnableTopicRuleRequest,
+  DescribeFirmwareTaskRequest,
 } from "./iotexplorer_models"
 
 /**
@@ -123,6 +133,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("iotexplorer.tencentcloudapi.com", "2019-04-23", clientConfig)
+  }
+
+  /**
+   * 获取规则列表
+   */
+  async GetTopicRuleList(
+    req: GetTopicRuleListRequest,
+    cb?: (error: string, rep: GetTopicRuleListResponse) => void
+  ): Promise<GetTopicRuleListResponse> {
+    return this.request("GetTopicRuleList", req, cb)
   }
 
   /**
@@ -226,6 +246,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（UpdateFirmware）用于对指定设备发起固件升级请求
+   */
+  async UpdateFirmware(
+    req: UpdateFirmwareRequest,
+    cb?: (error: string, rep: UpdateFirmwareResponse) => void
+  ): Promise<UpdateFirmwareResponse> {
+    return this.request("UpdateFirmware", req, cb)
+  }
+
+  /**
+   * 本接口（UploadFirmware）用于上传设备固件至平台
+   */
+  async UploadFirmware(
+    req: UploadFirmwareRequest,
+    cb?: (error: string, rep: UploadFirmwareResponse) => void
+  ): Promise<UploadFirmwareResponse> {
+    return this.request("UploadFirmware", req, cb)
+  }
+
+  /**
    * 修改 LoRa 网关信息
    */
   async ModifyLoRaGateway(
@@ -286,13 +326,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 提供查看产品详细信息的能力，包括产品的ID、数据协议、认证类型等重要参数
+   * 删除设备
    */
-  async DescribeStudioProduct(
-    req: DescribeStudioProductRequest,
-    cb?: (error: string, rep: DescribeStudioProductResponse) => void
-  ): Promise<DescribeStudioProductResponse> {
-    return this.request("DescribeStudioProduct", req, cb)
+  async DeleteDevice(
+    req: DeleteDeviceRequest,
+    cb?: (error: string, rep: DeleteDeviceResponse) => void
+  ): Promise<DeleteDeviceResponse> {
+    return this.request("DeleteDevice", req, cb)
   }
 
   /**
@@ -313,6 +353,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteLoRaFrequencyResponse) => void
   ): Promise<DeleteLoRaFrequencyResponse> {
     return this.request("DeleteLoRaFrequency", req, cb)
+  }
+
+  /**
+   * 本接口（ListFirmwares）用于获取固件列表
+   */
+  async ListFirmwares(
+    req: ListFirmwaresRequest,
+    cb?: (error: string, rep: ListFirmwaresResponse) => void
+  ): Promise<ListFirmwaresResponse> {
+    return this.request("ListFirmwares", req, cb)
   }
 
   /**
@@ -356,13 +406,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除设备
+   * 提供查看产品详细信息的能力，包括产品的ID、数据协议、认证类型等重要参数
    */
-  async DeleteDevice(
-    req: DeleteDeviceRequest,
-    cb?: (error: string, rep: DeleteDeviceResponse) => void
-  ): Promise<DeleteDeviceResponse> {
-    return this.request("DeleteDevice", req, cb)
+  async DescribeStudioProduct(
+    req: DescribeStudioProductRequest,
+    cb?: (error: string, rep: DescribeStudioProductResponse) => void
+  ): Promise<DescribeStudioProductResponse> {
+    return this.request("DescribeStudioProduct", req, cb)
   }
 
   /**
@@ -386,13 +436,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取规则列表
+   * 查询固件升级任务列表
    */
-  async GetTopicRuleList(
-    req: GetTopicRuleListRequest,
-    cb?: (error: string, rep: GetTopicRuleListResponse) => void
-  ): Promise<GetTopicRuleListResponse> {
-    return this.request("GetTopicRuleList", req, cb)
+  async DescribeFirmwareTask(
+    req: DescribeFirmwareTaskRequest,
+    cb?: (error: string, rep: DescribeFirmwareTaskResponse) => void
+  ): Promise<DescribeFirmwareTaskResponse> {
+    return this.request("DescribeFirmwareTask", req, cb)
   }
 
   /**
