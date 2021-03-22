@@ -98,6 +98,13 @@ export interface ModifyLaunchConfigurationAttributesRequest {
 本字段属复杂类型，修改时采取整字段全覆盖模式。即只修改复杂类型内部一个子字段时，也请提供全部所需子字段。
       */
   InstanceMarketOptions?: InstanceMarketOptionsRequest
+
+  /**
+      * 云盘类型选择策略，取值范围：
+<br><li>ORIGINAL：使用设置的云盘类型。
+<br><li>AUTOMATIC：自动选择当前可用的云盘类型。
+      */
+  DiskTypePolicy?: string
 }
 
 /**
@@ -388,7 +395,7 @@ export interface CreateLaunchConfigurationResponse {
   /**
    * 当通过本接口来创建启动配置时会返回该参数，表示启动配置ID。
    */
-  LaunchConfigurationId?: string
+  LaunchConfigurationId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1043,6 +1050,13 @@ export interface CreateLaunchConfigurationRequest {
    * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
    */
   InstanceChargePrepaid?: InstanceChargePrepaid
+
+  /**
+      * 云盘类型选择策略，默认取值 ORIGINAL，取值范围：
+<br><li>ORIGINAL：使用设置的云盘类型
+<br><li>AUTOMATIC：自动选择当前可用的云盘类型
+      */
+  DiskTypePolicy?: string
 }
 
 /**
@@ -1822,6 +1836,13 @@ export interface UpgradeLaunchConfigurationRequest {
    * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
    */
   InstanceChargePrepaid?: InstanceChargePrepaid
+
+  /**
+      * 云盘类型选择策略，取值范围：
+<br><li>ORIGINAL：使用设置的云盘类型
+<br><li>AUTOMATIC：自动选择当前可用的云盘类型
+      */
+  DiskTypePolicy?: string
 }
 
 /**

@@ -636,7 +636,7 @@ export interface DescribeCaptchaResultRequest {
       */
     Ticket: string;
     /**
-      * 用户操作来源的外网 IP
+      * 透传业务侧获取到的验证码使用者的IP
       */
     UserIp: string;
     /**
@@ -677,45 +677,46 @@ export interface DescribeCaptchaResultRequest {
  */
 export interface DescribeCaptchaResultResponse {
     /**
-      * 1	OK	验证通过
-6	user code len error	验证码长度不匹配
-7	captcha no match	验证码答案不匹配/Randstr参数不匹配
-8	verify timeout	验证码签名超时
-9	Sequnce repeat	验证码签名重放
-10	Sequnce invalid	验证码签名序列
-11	Cookie invalid	验证码cookie信息不合法
-12	sig len error	签名长度错误
-13	verify ip no match	ip不匹配
-15	decrypt fail	验证码签名解密失败
-16	appid no match	验证码强校验appid错误
-17	cmd no much	验证码系统命令不匹配
-18	uin no match	号码不匹配
-19	seq redirect	重定向验证
-20	opt no vcode	操作使用pt免验证码校验错误
-21	diff	差别，验证错误
-22	captcha type not match	验证码类型与拉取时不一致
-23	verify type error	验证类型错误
-24	invalid pkg	非法请求包
-25	bad visitor	策略拦截
-26	system busy	系统内部错误
-100	param err	appsecretkey 参数校验错误
+      * 1 OK 验证通过
+6 user code len error 验证码长度不匹配，请检查请求是否带Randstr参数，Randstr参数大小写是否有误
+7 captcha no match 验证码答案不匹配/Randstr参数不匹配，请重新生成Randstr、Ticket进行校验
+8 verify timeout 验证码签名超时，票据已过期，请重新生成Randstr、Ticket票进行校验
+9 Sequnce repeat 验证码签名重放，票据重复使用，请重新生成Randstr、Ticket进行校验
+10 Sequnce invalid 验证码签名序列
+11 Cookie invalid 验证码cookie信息不合法，非法请求，可能存在不规范接入
+12 sig len error 签名长度错误
+13 verify ip no match ip不匹配，非法请求，可能存在不规范接入
+15 decrypt fail 验证码签名解密失败，票据校验失败，请检查Ticket票据是否与前端返回Ticket一致
+16 appid no match 验证码强校验appid错误，请检查CaptchaAppId是否为控制台基础配置界面系统分配的APPID
+17 cmd no much 验证码系统命令不匹配
+18 uin no match 号码不匹配
+19 seq redirect 重定向验证
+20 opt no vcode 操作使用pt免验证码校验错误
+21 diff 差别，验证错误
+22 captcha type not match 验证码类型与拉取时不一致
+23 verify type error 验证类型错误
+24 invalid pkg 非法请求包
+25 bad visitor 策略拦截
+26 system busy 系统内部错误
+100 param err appsecretkey 参数校验错误，请检查AppSecretKey是否与控制台基础配置界面系统分配的APPID、AppSecretKey相对应
+104 Ticket Reuse 票据重复使用，同个票据验证多次，请重新生成Randstr、Ticket进行校验
       */
-    CaptchaCode?: number;
+    CaptchaCode: number;
     /**
       * 状态描述及验证错误信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    CaptchaMsg?: string;
+    CaptchaMsg: string;
     /**
       * [0,100]，恶意等级
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    EvilLevel?: number;
+    EvilLevel: number;
     /**
       * 前端获取验证码时间，时间戳格式
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    GetCaptchaTime?: number;
+    GetCaptchaTime: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -892,7 +893,7 @@ export interface DescribeCaptchaMiniResultRequest {
       */
     Ticket: string;
     /**
-      * 用户操作来源的外网 IP
+      * 透传业务侧获取到的验证码使用者的IP
       */
     UserIp: string;
     /**
@@ -975,12 +976,12 @@ export interface DescribeCaptchaMiniResultResponse {
 26     system internal error     系统内部错误
 100   param err     参数校验错误
       */
-    CaptchaCode?: number;
+    CaptchaCode: number;
     /**
       * 状态描述及验证错误信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    CaptchaMsg?: string;
+    CaptchaMsg: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

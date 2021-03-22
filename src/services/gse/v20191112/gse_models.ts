@@ -3087,6 +3087,11 @@ export interface DescribeInstancesRequest {
    * 返回结果偏移，最小值0
    */
   Limit?: number
+
+  /**
+   * CVM实例公网IP
+   */
+  IpAddress?: string
 }
 
 /**
@@ -3577,6 +3582,11 @@ export interface DescribeInstancesExtendRequest {
    * 结果返回最大数量，最小值0，最大值100
    */
   Limit: number
+
+  /**
+   * CVM实例公网IP
+   */
+  IpAddress?: string
 }
 
 /**

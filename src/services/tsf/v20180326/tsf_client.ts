@@ -28,7 +28,7 @@ import {
   StopContainerGroupResponse,
   DeletePathRewritesRequest,
   DeleteLaneResponse,
-  DescribeConfigReleaseLogsResponse,
+  SimpleApplication,
   ContinueRunFailedTaskBatchRequest,
   DescribeSimpleClustersResponse,
   DeleteRepositoryResponse,
@@ -50,6 +50,7 @@ import {
   ModifyUploadInfoResponse,
   TsfPageConfig,
   CreateApiRateLimitRuleRequest,
+  DeleteServerlessGroupRequest,
   ChangeApiUsableStatusRequest,
   DescribeApiRateLimitRulesRequest,
   DescribeApiGroupsResponse,
@@ -57,6 +58,7 @@ import {
   DeleteNamespaceResponse,
   CreateMicroserviceRequest,
   PathRewritePage,
+  DescribeUnitRuleResponse,
   DeleteImageTagsRequest,
   DescribeRepositoriesRequest,
   RollbackConfigRequest,
@@ -69,13 +71,13 @@ import {
   LaneRule,
   MsInstance,
   DescribeServerlessGroupsResponse,
-  DescribeConfigsRequest,
   ImageRepository,
   AddInstancesResponse,
   StartContainerGroupRequest,
   DescribeRepositoryResponse,
   Instance,
   UpdateHealthCheckSettingsRequest,
+  EnableUnitRuleRequest,
   CreateClusterResponse,
   CreateMicroserviceResponse,
   StopGroupRequest,
@@ -92,6 +94,8 @@ import {
   RepositoryInfo,
   DraftApiGroupRequest,
   CreateLaneResponse,
+  UpdateApiTimeoutsResponse,
+  UnitRule,
   DescribePkgsResponse,
   DescribeSimpleNamespacesResponse,
   DeleteImageTag,
@@ -111,6 +115,7 @@ import {
   RevocationConfigRequest,
   StartContainerGroupResponse,
   ModifyTaskRequest,
+  DeleteUnitNamespacesResponse,
   DisableTaskRequest,
   DescribeBasicResourceUsageResponse,
   PkgBind,
@@ -122,6 +127,7 @@ import {
   DescribeSimpleApplicationsRequest,
   ContainGroup,
   ContainGroupResult,
+  UpdateUnitRuleRequest,
   DescribePublicConfigsRequest,
   ReleaseApiGroupResponse,
   UpdateApiRateLimitRulesRequest,
@@ -130,6 +136,7 @@ import {
   DescribeUploadInfoResponse,
   DescribeMsApiListResponse,
   EnableTaskRequest,
+  RevocationPublicConfigResponse,
   DisableTaskResponse,
   DescribeMicroserviceRequest,
   DescribePodInstancesResponse,
@@ -141,58 +148,64 @@ import {
   DescribeContainerGroupDetailResponse,
   Ports,
   DescribeGroupGatewaysResponse,
+  RevocationConfigResponse,
   DeployServerlessGroupResponse,
   CreateAllGatewayApiAsyncResponse,
   DeleteTaskResponse,
   TsfPageMsInstance,
   DeleteMicroserviceRequest,
   RemoveInstancesResponse,
-  TaskRule,
+  DisableUnitRuleRequest,
   Namespace,
   DescribeGroupResponse,
   Env,
   DeleteContainerGroupResponse,
   DeleteServerlessGroupResponse,
   DeleteImageTagsResponse,
-  TsfPageApiGroupInfo,
+  DisableUnitRouteResponse,
   ExecuteTaskRequest,
   DescribeApplicationResponse,
   LaneInfo,
-  SimpleApplication,
-  DescribeApiUseDetailRequest,
+  DescribeConfigReleaseLogsResponse,
+  DeletePublicConfigResponse,
   DescribeSimpleGroupsResponse,
   DescribeFlowLastBatchStateRequest,
-  DeletePublicConfigResponse,
   TsfPageCluster,
   TerminateTaskFlowBatchResponse,
+  ShrinkInstancesRequest,
   ShrinkInstancesResponse,
   DescribeApiRateLimitRulesResponse,
   AddClusterInstancesRequest,
   DescribeGroupUseDetailResponse,
   TsfPageNamespace,
+  UpdateApiTimeoutsRequest,
   DescribeSimpleNamespacesRequest,
   ExecuteTaskFlowResponse,
   ExpandGroupResponse,
   DescribePublicConfigsResponse,
-  RevocationPublicConfigResponse,
+  DescribeUnitNamespacesResponse,
   ContinueRunFailedTaskBatchResponse,
   DescribeSimpleClustersRequest,
   DeployServerlessGroupRequest,
   ApiDefinitionDescr,
   DescribeLaneRulesResponse,
   DescribeImageRepositoryRequest,
+  TsfPageUnitRule,
   DescribeApiGroupRequest,
   RedoTaskExecuteResponse,
   DescribeContainerGroupDetailRequest,
   ImageRepositoryResult,
   ModifyTaskResponse,
+  DeleteUnitNamespacesRequest,
   DescribeGroupRequest,
+  UnitRuleItem,
   HealthCheckSetting,
   GatewayDeployGroup,
   PkgList,
   Cluster,
   DescribeGroupUseDetailRequest,
   Microservice,
+  UpdateUnitRuleResponse,
   HealthCheckSettings,
   StartGroupResponse,
   DescribePathRewritesRequest,
@@ -219,18 +232,23 @@ import {
   RedoTaskBatchResponse,
   TaskId,
   ModifyPathRewriteResponse,
+  EnableUnitRuleResponse,
+  DescribeEnabledUnitRuleResponse,
   UpdateApiGroupRequest,
   TsfApiListResponse,
+  EnableUnitRouteResponse,
+  DisableUnitRuleResponse,
   TsfPageGatewayDeployGroup,
   ImageTag,
   ExecuteTaskFlowRequest,
   TerminateTaskFlowBatchRequest,
-  DeleteServerlessGroupRequest,
+  CreateUnitRuleResponse,
   VmGroup,
   DescribeApiUseDetailResponse,
   ServiceSetting,
   ModifyUploadInfoRequest,
   ApplicationForPage,
+  DescribeUnitRuleRequest,
   UpdateGatewayApiResponse,
   ModifyLaneResponse,
   DescribePublicConfigSummaryResponse,
@@ -245,11 +263,13 @@ import {
   CreateAllGatewayApiAsyncRequest,
   PathRewrite,
   EnableTaskFlowResponse,
+  DeleteUnitRuleResponse,
   TsfPageConfigRelease,
   DisableTaskFlowResponse,
   DescribeGatewayMonitorOverviewRequest,
   DescribeImageTagsResponse,
   RedoTaskFlowBatchRequest,
+  TsfPageUnitNamespace,
   StopTaskExecuteRequest,
   DescribePkgsRequest,
   SchedulingStrategy,
@@ -258,13 +278,14 @@ import {
   CreateTaskRequest,
   OperationInfo,
   DescribePublicConfigResponse,
+  DescribeUsableUnitNamespacesResponse,
   DescribeConfigResponse,
   SimpleGroup,
   ModifyContainerGroupResponse,
   DeleteApplicationRequest,
-  RevocationPublicConfigRequest,
+  DescribeUnitNamespacesRequest,
   DeleteTaskRequest,
-  StopTaskExecuteResponse,
+  CreateUnitRuleRequest,
   VmGroupSimple,
   ApiResponseDescr,
   ApiRequestDescr,
@@ -273,10 +294,12 @@ import {
   CreateConfigRequest,
   DescribeUploadInfoRequest,
   TaskFlowLastBatchState,
+  DescribeUnitRulesResponse,
   UpdateGatewayApiRequest,
   PathRewriteCreateObject,
   DescribeApiGroupsRequest,
   DescribeServerlessGroupRequest,
+  DeleteUnitRuleRequest,
   ApplicationAttribute,
   DeletePkgsResponse,
   DescribeGroupsResponse,
@@ -292,6 +315,7 @@ import {
   DescribePublicConfigReleasesRequest,
   DescribeLaneRulesRequest,
   CreateServerlessGroupRequest,
+  UnitRuleTag,
   CreateRepositoryResponse,
   CreateLaneRuleRequest,
   DescribeServerlessGroupsRequest,
@@ -311,8 +335,10 @@ import {
   DescribeClusterInstancesResponse,
   DescribeTaskDetailResponse,
   ExpandGroupRequest,
+  RevocationPublicConfigRequest,
   ModifyLaneRuleResponse,
   TsfPageSimpleGroup,
+  TaskRule,
   PkgInfo,
   GroupPod,
   EnableTaskFlowRequest,
@@ -323,6 +349,7 @@ import {
   ModifyMicroserviceRequest,
   DescribeConfigReleasesRequest,
   GroupDailyUseStatistics,
+  DescribeEnabledUnitRuleRequest,
   DescribeApiGroupResponse,
   UpdateApiRateLimitRuleRequest,
   CreateLaneRequest,
@@ -331,6 +358,8 @@ import {
   RedoTaskExecuteRequest,
   DescribeApplicationsResponse,
   DescribeConfigRequest,
+  DisableUnitRouteRequest,
+  DescribeUnitRulesRequest,
   DescribeGatewayAllGroupApisRequest,
   DeleteGroupRequest,
   ContainerGroupDetail,
@@ -338,11 +367,13 @@ import {
   StopTaskBatchRequest,
   ServerlessGroup,
   ApiDetailInfo,
+  DescribeUsableUnitNamespacesRequest,
   DescribeContainerGroupsRequest,
   DisableTaskFlowRequest,
   DescribePodInstancesRequest,
   RedoTaskResponse,
-  ShrinkInstancesRequest,
+  DescribeConfigsRequest,
+  EnableUnitRouteRequest,
   TsfPageApplication,
   DeleteConfigRequest,
   DescribePublicConfigReleaseLogsResponse,
@@ -350,7 +381,7 @@ import {
   CreateApiRateLimitRuleResponse,
   Config,
   ProtocolPort,
-  RevocationConfigResponse,
+  DescribeApiUseDetailRequest,
   CreateClusterRequest,
   TsfPageMicroservice,
   ConfigRelease,
@@ -366,9 +397,11 @@ import {
   DescribePathRewritesResponse,
   AddInstanceResult,
   DescribeFlowLastBatchStateResponse,
+  StopTaskExecuteResponse,
   DescribeSimpleGroupsRequest,
   DescribeConfigReleasesResponse,
   ApiGroupInfo,
+  UnitNamespace,
   ModifyMicroserviceResponse,
   CreateApiGroupRequest,
   DescribeDownloadInfoResponse,
@@ -399,6 +432,7 @@ import {
   DraftApiGroupResponse,
   DescribeConfigSummaryRequest,
   DeleteLaneRequest,
+  TsfPageApiGroupInfo,
   ReleasePublicConfigRequest,
   TaskFlowEdge,
   RedoTaskFlowBatchResponse,
@@ -496,13 +530,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 撤回已发布的公共配置
+   * 查询可用于被导入的命名空间列表
    */
-  async RevocationPublicConfig(
-    req: RevocationPublicConfigRequest,
-    cb?: (error: string, rep: RevocationPublicConfigResponse) => void
-  ): Promise<RevocationPublicConfigResponse> {
-    return this.request("RevocationPublicConfig", req, cb)
+  async DescribeUsableUnitNamespaces(
+    req: DescribeUsableUnitNamespacesRequest,
+    cb?: (error: string, rep: DescribeUsableUnitNamespacesResponse) => void
+  ): Promise<DescribeUsableUnitNamespacesResponse> {
+    return this.request("DescribeUsableUnitNamespaces", req, cb)
   }
 
   /**
@@ -546,13 +580,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 新增微服务
+   * 容器部署组列表
    */
-  async CreateMicroservice(
-    req: CreateMicroserviceRequest,
-    cb?: (error: string, rep: CreateMicroserviceResponse) => void
-  ): Promise<CreateMicroserviceResponse> {
-    return this.request("CreateMicroservice", req, cb)
+  async DescribeContainerGroups(
+    req: DescribeContainerGroupsRequest,
+    cb?: (error: string, rep: DescribeContainerGroupsResponse) => void
+  ): Promise<DescribeContainerGroupsResponse> {
+    return this.request("DescribeContainerGroups", req, cb)
   }
 
   /**
@@ -583,6 +617,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeMsApiListResponse) => void
   ): Promise<DescribeMsApiListResponse> {
     return this.request("DescribeMsApiList", req, cb)
+  }
+
+  /**
+   * 撤回已发布的公共配置
+   */
+  async RevocationPublicConfig(
+    req: RevocationPublicConfigRequest,
+    cb?: (error: string, rep: RevocationPublicConfigResponse) => void
+  ): Promise<RevocationPublicConfigResponse> {
+    return this.request("RevocationPublicConfig", req, cb)
   }
 
   /**
@@ -623,6 +667,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeContainerGroupDetailResponse) => void
   ): Promise<DescribeContainerGroupDetailResponse> {
     return this.request("DescribeContainerGroupDetail", req, cb)
+  }
+
+  /**
+   * 启用单元化规则
+   */
+  async EnableUnitRule(
+    req: EnableUnitRuleRequest,
+    cb?: (error: string, rep: EnableUnitRuleResponse) => void
+  ): Promise<EnableUnitRuleResponse> {
+    return this.request("EnableUnitRule", req, cb)
   }
 
   /**
@@ -677,6 +731,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 禁用单元化路由
+   */
+  async DisableUnitRoute(
+    req: DisableUnitRouteRequest,
+    cb?: (error: string, rep: DisableUnitRouteResponse) => void
+  ): Promise<DisableUnitRouteResponse> {
+    return this.request("DisableUnitRoute", req, cb)
+  }
+
+  /**
    * 部署Serverless应用
    */
   async DeployServerlessGroup(
@@ -697,13 +761,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 容器部署组列表
+   * 新增微服务
    */
-  async DescribeContainerGroups(
-    req: DescribeContainerGroupsRequest,
-    cb?: (error: string, rep: DescribeContainerGroupsResponse) => void
-  ): Promise<DescribeContainerGroupsResponse> {
-    return this.request("DescribeContainerGroups", req, cb)
+  async CreateMicroservice(
+    req: CreateMicroserviceRequest,
+    cb?: (error: string, rep: CreateMicroserviceResponse) => void
+  ): Promise<CreateMicroserviceResponse> {
+    return this.request("CreateMicroservice", req, cb)
   }
 
   /**
@@ -758,6 +822,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
+   * 删除单元化规则
+   */
+  async DeleteUnitRule(
+    req: DeleteUnitRuleRequest,
+    cb?: (error: string, rep: DeleteUnitRuleResponse) => void
+  ): Promise<DeleteUnitRuleResponse> {
+    return this.request("DeleteUnitRule", req, cb)
+  }
+
+  /**
    * 获取应用详情
    */
   async DescribeApplication(
@@ -765,6 +839,26 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: DescribeApplicationResponse) => void
   ): Promise<DescribeApplicationResponse> {
     return this.request("DescribeApplication", req, cb)
+  }
+
+  /**
+   * 更新单元化规则
+   */
+  async UpdateUnitRule(
+    req: UpdateUnitRuleRequest,
+    cb?: (error: string, rep: UpdateUnitRuleResponse) => void
+  ): Promise<UpdateUnitRuleResponse> {
+    return this.request("UpdateUnitRule", req, cb)
+  }
+
+  /**
+   * 创建单元化规则
+   */
+  async CreateUnitRule(
+    req: CreateUnitRuleRequest,
+    cb?: (error: string, rep: CreateUnitRuleResponse) => void
+  ): Promise<CreateUnitRuleResponse> {
+    return this.request("CreateUnitRule", req, cb)
   }
 
   /**
@@ -795,6 +889,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: DescribePublicConfigResponse) => void
   ): Promise<DescribePublicConfigResponse> {
     return this.request("DescribePublicConfig", req, cb)
+  }
+
+  /**
+   * 批量更新API超时
+   */
+  async UpdateApiTimeouts(
+    req: UpdateApiTimeoutsRequest,
+    cb?: (error: string, rep: UpdateApiTimeoutsResponse) => void
+  ): Promise<UpdateApiTimeoutsResponse> {
+    return this.request("UpdateApiTimeouts", req, cb)
   }
 
   /**
@@ -1088,6 +1192,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
+   * 查询单元化命名空间列表
+   */
+  async DescribeUnitNamespaces(
+    req: DescribeUnitNamespacesRequest,
+    cb?: (error: string, rep: DescribeUnitNamespacesResponse) => void
+  ): Promise<DescribeUnitNamespacesResponse> {
+    return this.request("DescribeUnitNamespaces", req, cb)
+  }
+
+  /**
    * 添加云主机节点至TSF集群
    */
   async AddInstances(
@@ -1105,6 +1219,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: DescribeConfigSummaryResponse) => void
   ): Promise<DescribeConfigSummaryResponse> {
     return this.request("DescribeConfigSummary", req, cb)
+  }
+
+  /**
+   * 禁用单元化规则
+   */
+  async DisableUnitRule(
+    req: DisableUnitRuleRequest,
+    cb?: (error: string, rep: DisableUnitRuleResponse) => void
+  ): Promise<DisableUnitRuleResponse> {
+    return this.request("DisableUnitRule", req, cb)
   }
 
   /**
@@ -1399,6 +1523,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
+   * 查询单元化规则详情
+   */
+  async DescribeUnitRule(
+    req: DescribeUnitRuleRequest,
+    cb?: (error: string, rep: DescribeUnitRuleResponse) => void
+  ): Promise<DescribeUnitRuleResponse> {
+    return this.request("DescribeUnitRule", req, cb)
+  }
+
+  /**
    * 创建路径重写
    */
   async CreatePathRewrites(
@@ -1629,6 +1763,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
+   * 删除单元化命名空间
+   */
+  async DeleteUnitNamespaces(
+    req: DeleteUnitNamespacesRequest,
+    cb?: (error: string, rep: DeleteUnitNamespacesResponse) => void
+  ): Promise<DeleteUnitNamespacesResponse> {
+    return this.request("DeleteUnitNamespaces", req, cb)
+  }
+
+  /**
    * 下线Api分组
    */
   async DraftApiGroup(
@@ -1686,6 +1830,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: CreateContainGroupResponse) => void
   ): Promise<CreateContainGroupResponse> {
     return this.request("CreateContainGroup", req, cb)
+  }
+
+  /**
+   * 查询生效的单元化规则
+   */
+  async DescribeEnabledUnitRule(
+    req: DescribeEnabledUnitRuleRequest,
+    cb?: (error: string, rep: DescribeEnabledUnitRuleResponse) => void
+  ): Promise<DescribeEnabledUnitRuleResponse> {
+    return this.request("DescribeEnabledUnitRule", req, cb)
   }
 
   /**
@@ -1790,6 +1944,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
   }
 
   /**
+   * 启用单元化路由
+   */
+  async EnableUnitRoute(
+    req: EnableUnitRouteRequest,
+    cb?: (error: string, rep: EnableUnitRouteResponse) => void
+  ): Promise<EnableUnitRouteResponse> {
+    return this.request("EnableUnitRoute", req, cb)
+  }
+
+  /**
    * 更新API
    */
   async UpdateGatewayApi(
@@ -1837,5 +2001,15 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: ModifyContainerGroupResponse) => void
   ): Promise<ModifyContainerGroupResponse> {
     return this.request("ModifyContainerGroup", req, cb)
+  }
+
+  /**
+   * 查询单元化规则列表
+   */
+  async DescribeUnitRules(
+    req: DescribeUnitRulesRequest,
+    cb?: (error: string, rep: DescribeUnitRulesResponse) => void
+  ): Promise<DescribeUnitRulesResponse> {
+    return this.request("DescribeUnitRules", req, cb)
   }
 }

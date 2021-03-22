@@ -98,9 +98,9 @@ it("tsf.v20180326.DescribePodInstances", async function () {
     }
 })
 
-it("tsf.v20180326.RevocationPublicConfig", async function () {
+it("tsf.v20180326.DescribeUsableUnitNamespaces", async function () {
     try {
-       const data = await client.RevocationPublicConfig({})
+       const data = await client.DescribeUsableUnitNamespaces({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,9 +148,9 @@ it("tsf.v20180326.DescribePublicConfigSummary", async function () {
     }
 })
 
-it("tsf.v20180326.CreateMicroservice", async function () {
+it("tsf.v20180326.DescribeContainerGroups", async function () {
     try {
-       const data = await client.CreateMicroservice({})
+       const data = await client.DescribeContainerGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -181,6 +181,16 @@ it("tsf.v20180326.DisableTask", async function () {
 it("tsf.v20180326.DescribeMsApiList", async function () {
     try {
        const data = await client.DescribeMsApiList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tsf.v20180326.RevocationPublicConfig", async function () {
+    try {
+       const data = await client.RevocationPublicConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -221,6 +231,16 @@ it("tsf.v20180326.DescribeTaskDetail", async function () {
 it("tsf.v20180326.DescribeContainerGroupDetail", async function () {
     try {
        const data = await client.DescribeContainerGroupDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tsf.v20180326.EnableUnitRule", async function () {
+    try {
+       const data = await client.EnableUnitRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -278,6 +298,16 @@ it("tsf.v20180326.DescribeApiDetail", async function () {
     }
 })
 
+it("tsf.v20180326.DisableUnitRoute", async function () {
+    try {
+       const data = await client.DisableUnitRoute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tsf.v20180326.DeployServerlessGroup", async function () {
     try {
        const data = await client.DeployServerlessGroup({})
@@ -298,9 +328,9 @@ it("tsf.v20180326.CreateConfig", async function () {
     }
 })
 
-it("tsf.v20180326.DescribeContainerGroups", async function () {
+it("tsf.v20180326.CreateMicroservice", async function () {
     try {
-       const data = await client.DescribeContainerGroups({})
+       const data = await client.CreateMicroservice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -358,9 +388,39 @@ it("tsf.v20180326.DescribeGroupBindedGateways", async function () {
     }
 })
 
+it("tsf.v20180326.DeleteUnitRule", async function () {
+    try {
+       const data = await client.DeleteUnitRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tsf.v20180326.DescribeApplication", async function () {
     try {
        const data = await client.DescribeApplication({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tsf.v20180326.UpdateUnitRule", async function () {
+    try {
+       const data = await client.UpdateUnitRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tsf.v20180326.CreateUnitRule", async function () {
+    try {
+       const data = await client.CreateUnitRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -391,6 +451,16 @@ it("tsf.v20180326.DescribeGroupUseDetail", async function () {
 it("tsf.v20180326.DescribePublicConfig", async function () {
     try {
        const data = await client.DescribePublicConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tsf.v20180326.UpdateApiTimeouts", async function () {
+    try {
+       const data = await client.UpdateApiTimeouts({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -688,6 +758,16 @@ it("tsf.v20180326.DescribeGroupGateways", async function () {
     }
 })
 
+it("tsf.v20180326.DescribeUnitNamespaces", async function () {
+    try {
+       const data = await client.DescribeUnitNamespaces({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tsf.v20180326.AddInstances", async function () {
     try {
        const data = await client.AddInstances({})
@@ -701,6 +781,16 @@ it("tsf.v20180326.AddInstances", async function () {
 it("tsf.v20180326.DescribeConfigSummary", async function () {
     try {
        const data = await client.DescribeConfigSummary({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tsf.v20180326.DisableUnitRule", async function () {
+    try {
+       const data = await client.DisableUnitRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -998,6 +1088,16 @@ it("tsf.v20180326.DeleteNamespace", async function () {
     }
 })
 
+it("tsf.v20180326.DescribeUnitRule", async function () {
+    try {
+       const data = await client.DescribeUnitRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tsf.v20180326.CreatePathRewrites", async function () {
     try {
        const data = await client.CreatePathRewrites({})
@@ -1228,6 +1328,16 @@ it("tsf.v20180326.ReleasePublicConfig", async function () {
     }
 })
 
+it("tsf.v20180326.DeleteUnitNamespaces", async function () {
+    try {
+       const data = await client.DeleteUnitNamespaces({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tsf.v20180326.DraftApiGroup", async function () {
     try {
        const data = await client.DraftApiGroup({})
@@ -1281,6 +1391,16 @@ it("tsf.v20180326.ChangeApiUsableStatus", async function () {
 it("tsf.v20180326.CreateContainGroup", async function () {
     try {
        const data = await client.CreateContainGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tsf.v20180326.DescribeEnabledUnitRule", async function () {
+    try {
+       const data = await client.DescribeEnabledUnitRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1388,6 +1508,16 @@ it("tsf.v20180326.DescribeUploadInfo", async function () {
     }
 })
 
+it("tsf.v20180326.EnableUnitRoute", async function () {
+    try {
+       const data = await client.EnableUnitRoute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tsf.v20180326.UpdateGatewayApi", async function () {
     try {
        const data = await client.UpdateGatewayApi({})
@@ -1431,6 +1561,16 @@ it("tsf.v20180326.StartGroup", async function () {
 it("tsf.v20180326.ModifyContainerGroup", async function () {
     try {
        const data = await client.ModifyContainerGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tsf.v20180326.DescribeUnitRules", async function () {
+    try {
+       const data = await client.DescribeUnitRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

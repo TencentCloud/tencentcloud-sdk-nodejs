@@ -58,6 +58,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateImageLifecyclePersonal", req, cb);
     }
     /**
+     * 创建实例公网访问白名单策略
+     */
+    async CreateSecurityPolicy(req, cb) {
+        return this.request("CreateSecurityPolicy", req, cb);
+    }
+    /**
+     * 删除实例公网访问白名单策略
+     */
+    async DeleteSecurityPolicy(req, cb) {
+        return this.request("DeleteSecurityPolicy", req, cb);
+    }
+    /**
      * 用于获取个人版镜像仓库tag列表
      */
     async DescribeImagePersonal(req, cb) {
@@ -268,6 +280,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateApplicationTriggerPersonal", req, cb);
     }
     /**
+     * 查询实例公网访问白名单策略
+     */
+    async DescribeSecurityPolicies(req, cb) {
+        return this.request("DescribeSecurityPolicies", req, cb);
+    }
+    /**
      * 用于个人版镜像仓库中批量删除镜像仓库
      */
     async BatchDeleteRepositoryPersonal(req, cb) {
@@ -356,6 +374,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DuplicateImagePersonal(req, cb) {
         return this.request("DuplicateImagePersonal", req, cb);
+    }
+    /**
+     * 更新实例公网访问白名单
+     */
+    async ModifySecurityPolicy(req, cb) {
+        return this.request("ModifySecurityPolicy", req, cb);
     }
     /**
      * 用于在个人版镜像仓库中，获取满足输入搜索条件的用户镜像仓库

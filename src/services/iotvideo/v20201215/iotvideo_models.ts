@@ -60,8 +60,10 @@ export interface CreateCloudStorageRequest {
   DeviceName: string
 
   /**
-   * 云存套餐ID
-   */
+      * 云存套餐ID：
+yc1m3d：全时3天存储月套餐。
+ye1m3d：事件3天存储套餐。
+      */
   PackageId: string
 }
 

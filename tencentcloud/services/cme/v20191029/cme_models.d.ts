@@ -1033,6 +1033,19 @@ export interface CreateLinkResponse {
     RequestId?: string;
 }
 /**
+ * ExportVideoByTemplate返回参数结构体
+ */
+export interface ExportVideoByTemplateResponse {
+    /**
+      * 导出任务 Id。
+      */
+    TaskId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ListMedia返回参数结构体
  */
 export interface ListMediaResponse {
@@ -1351,6 +1364,27 @@ export interface CMEExportInfo {
       * 第三方平台发布信息列表。暂未正式对外，请勿使用。
       */
     ThirdPartyPublishInfos?: Array<ThirdPartyPublishInfo>;
+}
+/**
+ * MoveResource请求参数结构体
+ */
+export interface MoveResourceRequest {
+    /**
+      * 平台名称，指定访问的平台。
+      */
+    Platform: string;
+    /**
+      * 待移动的原始资源信息，包含原始媒体或分类资源，以及资源归属。
+      */
+    SourceResource: ResourceInfo;
+    /**
+      * 目标信息，包含分类及归属，仅支持移动资源到分类。
+      */
+    DestinationResource: ResourceInfo;
+    /**
+      * 操作者。填写用户的 Id，用于标识调用者及校验资源访问以及写权限。
+      */
+    Operator?: string;
 }
 /**
  * ImportMediaToProject请求参数结构体
@@ -1869,17 +1903,17 @@ export interface CreateClassResponse {
     RequestId?: string;
 }
 /**
- * 其他类型素材
+ * 媒体替换信息。
  */
-export interface OtherMaterial {
+export interface MediaReplacementInfo {
     /**
-      * 素材媒体文件的播放 URL 地址。
+      * 素材 ID。
       */
-    MaterialUrl: string;
+    MaterialId: string;
     /**
-      * 云点播媒资 FileId。
+      * 替换媒体选取的开始时间，单位为秒，默认为 0。
       */
-    VodFileId: string;
+    StartTimeOffset?: number;
 }
 /**
  * 视频流信息。
@@ -2051,23 +2085,44 @@ export interface DeleteTeamMembersRequest {
     Operator?: string;
 }
 /**
- * MoveResource请求参数结构体
+ * ExportVideoByTemplate请求参数结构体
  */
-export interface MoveResourceRequest {
+export interface ExportVideoByTemplateRequest {
     /**
       * 平台名称，指定访问的平台。
       */
     Platform: string;
     /**
-      * 待移动的原始资源信息，包含原始媒体或分类资源，以及资源归属。
+      * 视频编辑模板  Id。
       */
-    SourceResource: ResourceInfo;
+    TemplateId: string;
     /**
-      * 目标信息，包含分类及归属，仅支持移动资源到分类。
+      * 导出模板 Id，目前不支持自定义创建，只支持下面的预置模板 Id。
+<li>10：分辨率为 480P，输出视频格式为 MP4；</li>
+<li>11：分辨率为 720P，输出视频格式为 MP4；</li>
+<li>12：分辨率为 1080P，输出视频格式为 MP4。</li>
       */
-    DestinationResource: ResourceInfo;
+    Definition: number;
     /**
-      * 操作者。填写用户的 Id，用于标识调用者及校验资源访问以及写权限。
+      * 导出目标，可取值为：
+<li>CME：云剪，即导出为云剪媒体；</li>
+<li>VOD：云点播，即导出为云点播媒资。</li>
+      */
+    ExportDestination: string;
+    /**
+      * 需要替换的素材信息。
+      */
+    SlotReplacements?: Array<SlotReplacementInfo>;
+    /**
+      * 导出的云剪媒体信息。指定 ExportDestination = CME 时有效。
+      */
+    CMEExportInfo?: CMEExportInfo;
+    /**
+      * 导出的云点播媒资信息。指定 ExportDestination = VOD 时有效。
+      */
+    VODExportInfo?: VODExportInfo;
+    /**
+      * 操作者。填写用户的 Id，用于标识调用者及校验项目导出权限。
       */
     Operator?: string;
 }
@@ -2091,6 +2146,19 @@ export interface DescribePlatformsRequest {
       * 分页返回的记录条数，默认值：10。
       */
     Limit?: number;
+}
+/**
+ * 其他类型素材
+ */
+export interface OtherMaterial {
+    /**
+      * 素材媒体文件的播放 URL 地址。
+      */
+    MaterialUrl: string;
+    /**
+      * 云点播媒资 FileId。
+      */
+    VodFileId: string;
 }
 /**
  * 搜索空间
@@ -2348,6 +2416,27 @@ export interface AuthorizationInfo {
 <li>W：可修改、删除媒资。</li>
       */
     PermissionSet: Array<string>;
+}
+/**
+ * 卡槽替换信息。
+ */
+export interface SlotReplacementInfo {
+    /**
+      * 卡槽 Id。
+      */
+    Id: number;
+    /**
+      * 替换类型，可取值有：
+<li> AUDIO :音频;</li>
+<li> VIDEO :视频;</li>
+<li> IMAGE :图片。</li>
+注意：这里必须保证替换的素材类型与模板轨道数据的素材类型一致。
+      */
+    ReplacementType: string;
+    /**
+      * 媒体替换信息，仅当要替换的媒体类型为音频、视频、图片时有效。
+      */
+    MediaReplacementInfo?: MediaReplacementInfo;
 }
 /**
  * DeleteMaterial返回参数结构体

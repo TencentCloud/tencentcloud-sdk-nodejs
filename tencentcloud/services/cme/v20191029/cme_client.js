@@ -254,6 +254,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateProject", req, cb);
     }
     /**
+     * 使用视频编辑模板直接导出视频。
+     */
+    async ExportVideoByTemplate(req, cb) {
+        return this.request("ExportVideoByTemplate", req, cb);
+    }
+    /**
      * 移动资源，支持跨个人或团队移动媒体以及分类。如果填写了Operator，则需要校验用户对媒体和分类资源的访问以及写权限。
 <li>当原始资源为媒体时，该接口效果为将该媒体移动到目标分类下面；</li>
 <li>当原始资源为分类时，该接口效果为将原始分类移动到目标分类或者是重命名。</li>

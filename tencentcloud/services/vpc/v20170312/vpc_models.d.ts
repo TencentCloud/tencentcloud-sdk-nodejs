@@ -1254,11 +1254,11 @@ export interface DescribeRouteTablesResponse {
     /**
       * 符合条件的实例数量。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 路由表对象。
       */
-    RouteTableSet?: Array<RouteTable>;
+    RouteTableSet: Array<RouteTable>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3026,7 +3026,7 @@ export interface CreateVpnGatewayResponse {
     /**
       * VPN网关对象
       */
-    VpnGateway?: VpnGateway;
+    VpnGateway: VpnGateway;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6700,10 +6700,6 @@ export interface DescribeServiceTemplatesResponse {
  */
 export interface DescribeRouteTablesRequest {
     /**
-      * 路由表实例ID，例如：rtb-azd4dt1c。
-      */
-    RouteTableIds?: Array<string>;
-    /**
       * 过滤条件，参数不支持同时指定RouteTableIds和Filters。
 <li>route-table-id - String - （过滤条件）路由表实例ID。</li>
 <li>route-table-name - String - （过滤条件）路由表名称。</li>
@@ -6711,8 +6707,13 @@ export interface DescribeRouteTablesRequest {
 <li>association.main - String - （过滤条件）是否主路由表。</li>
 <li>tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。</li>
 <li>tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例2。</li>
+<li>is-need-router-info - String - （过滤条件）是否需要获取路由策略信息，默认不获取，减少耗时，当控制台需要拉取路由策略信息时，改为true，返回具体的路由策略，。</li>
       */
     Filters?: Array<Filter>;
+    /**
+      * 路由表实例ID，例如：rtb-azd4dt1c。
+      */
+    RouteTableIds?: Array<string>;
     /**
       * 偏移量。
       */

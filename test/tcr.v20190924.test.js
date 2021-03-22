@@ -68,6 +68,26 @@ it("tcr.v20190924.CreateImageLifecyclePersonal", async function () {
     }
 })
 
+it("tcr.v20190924.CreateSecurityPolicy", async function () {
+    try {
+       const data = await client.CreateSecurityPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcr.v20190924.DeleteSecurityPolicy", async function () {
+    try {
+       const data = await client.DeleteSecurityPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.DescribeImagePersonal", async function () {
     try {
        const data = await client.DescribeImagePersonal({})
@@ -418,6 +438,16 @@ it("tcr.v20190924.CreateApplicationTriggerPersonal", async function () {
     }
 })
 
+it("tcr.v20190924.DescribeSecurityPolicies", async function () {
+    try {
+       const data = await client.DescribeSecurityPolicies({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.BatchDeleteRepositoryPersonal", async function () {
     try {
        const data = await client.BatchDeleteRepositoryPersonal({})
@@ -561,6 +591,16 @@ it("tcr.v20190924.DescribeInternalEndpointDnsStatus", async function () {
 it("tcr.v20190924.DuplicateImagePersonal", async function () {
     try {
        const data = await client.DuplicateImagePersonal({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcr.v20190924.ModifySecurityPolicy", async function () {
+    try {
+       const data = await client.ModifySecurityPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

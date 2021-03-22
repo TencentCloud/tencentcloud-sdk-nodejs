@@ -77,7 +77,7 @@ import {
   CreateNamespaceResponse,
   DescribeRepositoryOwnerPersonalResponse,
   VpcPrivateDomainStatus,
-  ModifyWebhookTriggerResponse,
+  DescribeSecurityPoliciesResponse,
   DescribeReplicationInstancesRequest,
   CreateImageLifecyclePersonalResponse,
   RepoIsExistResp,
@@ -92,6 +92,7 @@ import {
   DeleteNamespaceResponse,
   Favors,
   DescribeRepositoryPersonalResponse,
+  CreateSecurityPolicyResponse,
   DescribeRepositoriesRequest,
   DescribeImageFilterPersonalRequest,
   CreateInternalEndpointDnsResponse,
@@ -105,8 +106,10 @@ import {
   CreateUserPersonalRequest,
   RepoInfoResp,
   ManageImageLifecycleGlobalPersonalResponse,
+  DeleteSecurityPolicyResponse,
   DescribeInternalEndpointDnsStatusResponse,
   RegistryStatus,
+  SecurityPolicy,
   DescribeNamespacePersonalRequest,
   DeleteRepositoryPersonalResponse,
   CreateInstanceTokenResponse,
@@ -128,6 +131,7 @@ import {
   DescribeNamespacesRequest,
   DescribeImageLifecycleGlobalPersonalRequest,
   DescribeImageLifecyclePersonalRequest,
+  DeleteSecurityPolicyRequest,
   RepositoryInfoResp,
   CreateInstanceRequest,
   DescribeInstanceTokenRequest,
@@ -137,15 +141,18 @@ import {
   TriggerInvokeCondition,
   ValidateRepositoryExistPersonalResponse,
   DescribeExternalEndpointStatusResponse,
+  ModifySecurityPolicyRequest,
   NamespaceIsExistsResp,
   DescribeInstancesRequest,
   CreateInternalEndpointDnsRequest,
   Filter,
   DescribeReplicationInstanceCreateTasksRequest,
+  ModifyWebhookTriggerResponse,
   RepoInfo,
   ManageImageLifecycleGlobalPersonalRequest,
   DescribeUserQuotaPersonalResponse,
   DescribeImagePersonalRequest,
+  ModifySecurityPolicyResponse,
   DeleteImageLifecyclePersonalRequest,
   ModifyApplicationTriggerPersonalResponse,
   DeleteInstanceRequest,
@@ -153,6 +160,7 @@ import {
   DescribeNamespacePersonalResponse,
   DeleteNamespacePersonalResponse,
   Header,
+  CreateSecurityPolicyRequest,
   CreateWebhookTriggerRequest,
   DescribeRepositoryOwnerPersonalRequest,
   ModifyRepositoryInfoPersonalRequest,
@@ -168,6 +176,7 @@ import {
   ModifyApplicationTriggerPersonalRequest,
   CreateInstanceTokenRequest,
   ModifyUserPasswordPersonalRequest,
+  DescribeSecurityPoliciesRequest,
   ReplicationRegistry,
   DescribeInternalEndpointsRequest,
   ValidateNamespaceExistPersonalResponse,
@@ -258,6 +267,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateImageLifecyclePersonalResponse) => void
   ): Promise<CreateImageLifecyclePersonalResponse> {
     return this.request("CreateImageLifecyclePersonal", req, cb)
+  }
+
+  /**
+   * 创建实例公网访问白名单策略
+   */
+  async CreateSecurityPolicy(
+    req: CreateSecurityPolicyRequest,
+    cb?: (error: string, rep: CreateSecurityPolicyResponse) => void
+  ): Promise<CreateSecurityPolicyResponse> {
+    return this.request("CreateSecurityPolicy", req, cb)
+  }
+
+  /**
+   * 删除实例公网访问白名单策略
+   */
+  async DeleteSecurityPolicy(
+    req: DeleteSecurityPolicyRequest,
+    cb?: (error: string, rep: DeleteSecurityPolicyResponse) => void
+  ): Promise<DeleteSecurityPolicyResponse> {
+    return this.request("DeleteSecurityPolicy", req, cb)
   }
 
   /**
@@ -611,6 +640,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询实例公网访问白名单策略
+   */
+  async DescribeSecurityPolicies(
+    req: DescribeSecurityPoliciesRequest,
+    cb?: (error: string, rep: DescribeSecurityPoliciesResponse) => void
+  ): Promise<DescribeSecurityPoliciesResponse> {
+    return this.request("DescribeSecurityPolicies", req, cb)
+  }
+
+  /**
    * 用于个人版镜像仓库中批量删除镜像仓库
    */
   async BatchDeleteRepositoryPersonal(
@@ -758,6 +797,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DuplicateImagePersonalResponse) => void
   ): Promise<DuplicateImagePersonalResponse> {
     return this.request("DuplicateImagePersonal", req, cb)
+  }
+
+  /**
+   * 更新实例公网访问白名单
+   */
+  async ModifySecurityPolicy(
+    req: ModifySecurityPolicyRequest,
+    cb?: (error: string, rep: ModifySecurityPolicyResponse) => void
+  ): Promise<ModifySecurityPolicyResponse> {
+    return this.request("ModifySecurityPolicy", req, cb)
   }
 
   /**

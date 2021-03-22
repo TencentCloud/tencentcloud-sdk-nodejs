@@ -62,6 +62,7 @@ import {
   WeiboPublishInfo,
   Resource,
   CreateLinkResponse,
+  ExportVideoByTemplateResponse,
   ListMediaResponse,
   SearchMaterialResponse,
   EmptyTrackItem,
@@ -78,6 +79,7 @@ import {
   GrantResourceAuthorizationResponse,
   SwitcherPgmOutputConfig,
   CMEExportInfo,
+  MoveResourceRequest,
   ImportMediaToProjectRequest,
   VODExportInfo,
   SortBy,
@@ -103,7 +105,7 @@ import {
   JoinTeamInfo,
   DescribeResourceAuthorizationRequest,
   CreateClassResponse,
-  OtherMaterial,
+  MediaReplacementInfo,
   VideoStreamInfo,
   AddTeamMemberRequest,
   ExportVideoEditProjectResponse,
@@ -113,8 +115,9 @@ import {
   DeleteLoginStatusRequest,
   GenerateVideoSegmentationSchemeByAiRequest,
   DeleteTeamMembersRequest,
-  MoveResourceRequest,
+  ExportVideoByTemplateRequest,
   DescribePlatformsRequest,
+  OtherMaterial,
   SearchScope,
   VideoMaterial,
   DescribeResourceAuthorizationResponse,
@@ -127,6 +130,7 @@ import {
   MaterialStatus,
   DescribeProjectsResponse,
   AuthorizationInfo,
+  SlotReplacementInfo,
   DeleteMaterialResponse,
   RevokeResourceAuthorizationRequest,
   DescribeTaskDetailRequest,
@@ -524,6 +528,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateProjectResponse) => void
   ): Promise<CreateProjectResponse> {
     return this.request("CreateProject", req, cb)
+  }
+
+  /**
+   * 使用视频编辑模板直接导出视频。
+   */
+  async ExportVideoByTemplate(
+    req: ExportVideoByTemplateRequest,
+    cb?: (error: string, rep: ExportVideoByTemplateResponse) => void
+  ): Promise<ExportVideoByTemplateResponse> {
+    return this.request("ExportVideoByTemplate", req, cb)
   }
 
   /**

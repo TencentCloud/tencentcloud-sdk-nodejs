@@ -76,10 +76,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePodInstances", req, cb);
     }
     /**
-     * 撤回已发布的公共配置
+     * 查询可用于被导入的命名空间列表
      */
-    async RevocationPublicConfig(req, cb) {
-        return this.request("RevocationPublicConfig", req, cb);
+    async DescribeUsableUnitNamespaces(req, cb) {
+        return this.request("DescribeUsableUnitNamespaces", req, cb);
     }
     /**
      * 创建命名空间
@@ -106,10 +106,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePublicConfigSummary", req, cb);
     }
     /**
-     * 新增微服务
+     * 容器部署组列表
      */
-    async CreateMicroservice(req, cb) {
-        return this.request("CreateMicroservice", req, cb);
+    async DescribeContainerGroups(req, cb) {
+        return this.request("DescribeContainerGroups", req, cb);
     }
     /**
      * 查询配置项列表
@@ -128,6 +128,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeMsApiList(req, cb) {
         return this.request("DescribeMsApiList", req, cb);
+    }
+    /**
+     * 撤回已发布的公共配置
+     */
+    async RevocationPublicConfig(req, cb) {
+        return this.request("RevocationPublicConfig", req, cb);
     }
     /**
      * 创建集群
@@ -152,6 +158,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeContainerGroupDetail(req, cb) {
         return this.request("DescribeContainerGroupDetail", req, cb);
+    }
+    /**
+     * 启用单元化规则
+     */
+    async EnableUnitRule(req, cb) {
+        return this.request("EnableUnitRule", req, cb);
     }
     /**
      * 回滚配置
@@ -185,6 +197,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeApiDetail", req, cb);
     }
     /**
+     * 禁用单元化路由
+     */
+    async DisableUnitRoute(req, cb) {
+        return this.request("DisableUnitRoute", req, cb);
+    }
+    /**
      * 部署Serverless应用
      */
     async DeployServerlessGroup(req, cb) {
@@ -197,10 +215,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateConfig", req, cb);
     }
     /**
-     * 容器部署组列表
+     * 新增微服务
      */
-    async DescribeContainerGroups(req, cb) {
-        return this.request("DescribeContainerGroups", req, cb);
+    async CreateMicroservice(req, cb) {
+        return this.request("CreateMicroservice", req, cb);
     }
     /**
      * 批量删除镜像版本
@@ -234,10 +252,28 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DescribeGroupBindedGateways", req, cb);
     }
     /**
+     * 删除单元化规则
+     */
+    async DeleteUnitRule(req, cb) {
+        return this.request("DeleteUnitRule", req, cb);
+    }
+    /**
      * 获取应用详情
      */
     async DescribeApplication(req, cb) {
         return this.request("DescribeApplication", req, cb);
+    }
+    /**
+     * 更新单元化规则
+     */
+    async UpdateUnitRule(req, cb) {
+        return this.request("UpdateUnitRule", req, cb);
+    }
+    /**
+     * 创建单元化规则
+     */
+    async CreateUnitRule(req, cb) {
+        return this.request("CreateUnitRule", req, cb);
     }
     /**
      * 查询Serverless部署组列表
@@ -256,6 +292,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async DescribePublicConfig(req, cb) {
         return this.request("DescribePublicConfig", req, cb);
+    }
+    /**
+     * 批量更新API超时
+     */
+    async UpdateApiTimeouts(req, cb) {
+        return this.request("UpdateApiTimeouts", req, cb);
     }
     /**
      * 查询泳道列表
@@ -432,6 +474,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DescribeGroupGateways", req, cb);
     }
     /**
+     * 查询单元化命名空间列表
+     */
+    async DescribeUnitNamespaces(req, cb) {
+        return this.request("DescribeUnitNamespaces", req, cb);
+    }
+    /**
      * 添加云主机节点至TSF集群
      */
     async AddInstances(req, cb) {
@@ -442,6 +490,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async DescribeConfigSummary(req, cb) {
         return this.request("DescribeConfigSummary", req, cb);
+    }
+    /**
+     * 禁用单元化规则
+     */
+    async DisableUnitRule(req, cb) {
+        return this.request("DisableUnitRule", req, cb);
     }
     /**
      * 重新执行任务
@@ -619,6 +673,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DeleteNamespace", req, cb);
     }
     /**
+     * 查询单元化规则详情
+     */
+    async DescribeUnitRule(req, cb) {
+        return this.request("DescribeUnitRule", req, cb);
+    }
+    /**
      * 创建路径重写
      */
     async CreatePathRewrites(req, cb) {
@@ -757,6 +817,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("ReleasePublicConfig", req, cb);
     }
     /**
+     * 删除单元化命名空间
+     */
+    async DeleteUnitNamespaces(req, cb) {
+        return this.request("DeleteUnitNamespaces", req, cb);
+    }
+    /**
      * 下线Api分组
      */
     async DraftApiGroup(req, cb) {
@@ -791,6 +857,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async CreateContainGroup(req, cb) {
         return this.request("CreateContainGroup", req, cb);
+    }
+    /**
+     * 查询生效的单元化规则
+     */
+    async DescribeEnabledUnitRule(req, cb) {
+        return this.request("DescribeEnabledUnitRule", req, cb);
     }
     /**
      * 查询Serverless部署组明细
@@ -854,6 +926,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DescribeUploadInfo", req, cb);
     }
     /**
+     * 启用单元化路由
+     */
+    async EnableUnitRoute(req, cb) {
+        return this.request("EnableUnitRoute", req, cb);
+    }
+    /**
      * 更新API
      */
     async UpdateGatewayApi(req, cb) {
@@ -882,6 +960,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async ModifyContainerGroup(req, cb) {
         return this.request("ModifyContainerGroup", req, cb);
+    }
+    /**
+     * 查询单元化规则列表
+     */
+    async DescribeUnitRules(req, cb) {
+        return this.request("DescribeUnitRules", req, cb);
     }
 }
 exports.Client = Client;

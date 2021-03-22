@@ -1025,9 +1025,14 @@ export interface VpcPrivateDomainStatus {
     Status: string;
 }
 /**
- * ModifyWebhookTrigger返回参数结构体
+ * DescribeSecurityPolicies返回参数结构体
  */
-export interface ModifyWebhookTriggerResponse {
+export interface DescribeSecurityPoliciesResponse {
+    /**
+      * 实例安全策略组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SecurityPolicySet: Array<SecurityPolicy>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1238,6 +1243,19 @@ export interface DescribeRepositoryPersonalResponse {
     RequestId?: string;
 }
 /**
+ * CreateSecurityPolicy返回参数结构体
+ */
+export interface CreateSecurityPolicyResponse {
+    /**
+      * 实例Id
+      */
+    RegistryId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeRepositories请求参数结构体
  */
 export interface DescribeRepositoriesRequest {
@@ -1415,6 +1433,19 @@ export interface ManageImageLifecycleGlobalPersonalResponse {
     RequestId?: string;
 }
 /**
+ * DeleteSecurityPolicy返回参数结构体
+ */
+export interface DeleteSecurityPolicyResponse {
+    /**
+      * 实例Id
+      */
+    RegistryId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeInternalEndpointDnsStatus返回参数结构体
  */
 export interface DescribeInternalEndpointDnsStatusResponse {
@@ -1445,6 +1476,27 @@ export interface RegistryStatus {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Conditions: Array<RegistryCondition>;
+}
+/**
+ * 安全策略
+ */
+export interface SecurityPolicy {
+    /**
+      * 策略索引
+      */
+    PolicyIndex: number;
+    /**
+      * 备注
+      */
+    Description: string;
+    /**
+      * 192.168.1.0/24
+      */
+    CidrBlock: string;
+    /**
+      * 安全策略的版本
+      */
+    PolicyVersion: string;
 }
 /**
  * DescribeNamespacePersonal请求参数结构体
@@ -1758,6 +1810,23 @@ export interface DescribeImageLifecyclePersonalRequest {
     RepoName: string;
 }
 /**
+ * DeleteSecurityPolicy请求参数结构体
+ */
+export interface DeleteSecurityPolicyRequest {
+    /**
+      * 实例Id
+      */
+    RegistryId: string;
+    /**
+      * 白名单Id
+      */
+    PolicyIndex: number;
+    /**
+      * 白名单版本
+      */
+    PolicyVersion: string;
+}
+/**
  * 查询共享版仓库信息返回
  */
 export interface RepositoryInfoResp {
@@ -1922,6 +1991,27 @@ export interface DescribeExternalEndpointStatusResponse {
     RequestId?: string;
 }
 /**
+ * ModifySecurityPolicy请求参数结构体
+ */
+export interface ModifySecurityPolicyRequest {
+    /**
+      * 实例的Id
+      */
+    RegistryId: string;
+    /**
+      * PolicyId
+      */
+    PolicyIndex: number;
+    /**
+      * 192.168.0.0/24 白名单Ip
+      */
+    CidrBlock: string;
+    /**
+      * 备注
+      */
+    Description: string;
+}
+/**
  * NamespaceIsExists返回类型
  */
 export interface NamespaceIsExistsResp {
@@ -2007,6 +2097,15 @@ export interface DescribeReplicationInstanceCreateTasksRequest {
       * 同步实例的地域ID
       */
     ReplicationRegionId: number;
+}
+/**
+ * ModifyWebhookTrigger返回参数结构体
+ */
+export interface ModifyWebhookTriggerResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 仓库的信息
@@ -2105,6 +2204,19 @@ export interface DescribeImagePersonalRequest {
     Tag?: string;
 }
 /**
+ * ModifySecurityPolicy返回参数结构体
+ */
+export interface ModifySecurityPolicyResponse {
+    /**
+      * 实例Id
+      */
+    RegistryId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteImageLifecyclePersonal请求参数结构体
  */
 export interface DeleteImageLifecyclePersonalRequest {
@@ -2186,6 +2298,23 @@ export interface Header {
       * Header Values
       */
     Values: Array<string>;
+}
+/**
+ * CreateSecurityPolicy请求参数结构体
+ */
+export interface CreateSecurityPolicyRequest {
+    /**
+      * 实例Id
+      */
+    RegistryId: string;
+    /**
+      * 192.168.0.0/24
+      */
+    CidrBlock: string;
+    /**
+      * 备注
+      */
+    Description: string;
 }
 /**
  * CreateWebhookTrigger请求参数结构体
@@ -2445,6 +2574,15 @@ export interface ModifyUserPasswordPersonalRequest {
       * 更新后的密码
       */
     Password: string;
+}
+/**
+ * DescribeSecurityPolicies请求参数结构体
+ */
+export interface DescribeSecurityPoliciesRequest {
+    /**
+      * 实例的Id
+      */
+    RegistryId: string;
 }
 /**
  * 企业版复制实例
