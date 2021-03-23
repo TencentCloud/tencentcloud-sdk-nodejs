@@ -18,13 +18,14 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  TaskResult,
+  PreviewReplacedCommandContentResponse,
   CreateCommandResponse,
   AutomationAgentInfo,
   RunCommandRequest,
   DescribeInvocationTasksRequest,
   Invocation,
   CommandDocument,
+  TaskResult,
   ModifyCommandResponse,
   RegionInfo,
   DeleteCommandResponse,
@@ -34,6 +35,7 @@ import {
   ModifyCommandRequest,
   DescribeCommandsRequest,
   DescribeInvocationsRequest,
+  PreviewReplacedCommandContentRequest,
   Filter,
   DescribeInvocationsResponse,
   DescribeInvocationTasksResponse,
@@ -96,6 +98,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRegionsResponse) => void
   ): Promise<DescribeRegionsResponse> {
     return this.request("DescribeRegions", req, cb)
+  }
+
+  /**
+   * 此接口用于预览自定义参数替换后的命令内容。不会触发真实执行。
+   */
+  async PreviewReplacedCommandContent(
+    req: PreviewReplacedCommandContentRequest,
+    cb?: (error: string, rep: PreviewReplacedCommandContentResponse) => void
+  ): Promise<PreviewReplacedCommandContentResponse> {
+    return this.request("PreviewReplacedCommandContent", req, cb)
   }
 
   /**

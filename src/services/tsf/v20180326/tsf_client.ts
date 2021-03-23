@@ -23,7 +23,7 @@ import {
   ApiDetailResponse,
   CosCredentials,
   DeletePathRewritesResponse,
-  ReleaseConfigResponse,
+  PathRewritePage,
   DescribeApiVersionsResponse,
   StopContainerGroupResponse,
   DeletePathRewritesRequest,
@@ -57,7 +57,7 @@ import {
   DeletePublicConfigRequest,
   DeleteNamespaceResponse,
   CreateMicroserviceRequest,
-  PathRewritePage,
+  ReleaseConfigResponse,
   DescribeUnitRuleResponse,
   DeleteImageTagsRequest,
   DescribeRepositoriesRequest,
@@ -70,6 +70,7 @@ import {
   DescribeGatewayAllGroupApisResponse,
   LaneRule,
   MsInstance,
+  GatewayPluginBoundParam,
   DescribeServerlessGroupsResponse,
   ImageRepository,
   AddInstancesResponse,
@@ -128,7 +129,7 @@ import {
   ContainGroup,
   ContainGroupResult,
   UpdateUnitRuleRequest,
-  DescribePublicConfigsRequest,
+  ReleasePublicConfigResponse,
   ReleaseApiGroupResponse,
   UpdateApiRateLimitRulesRequest,
   DescribeGroupInstancesRequest,
@@ -194,11 +195,13 @@ import {
   DescribeApiGroupRequest,
   RedoTaskExecuteResponse,
   DescribeContainerGroupDetailRequest,
+  DescribeGroupsWithPluginRequest,
   ImageRepositoryResult,
   ModifyTaskResponse,
   DeleteUnitNamespacesRequest,
   DescribeGroupRequest,
   UnitRuleItem,
+  BindPluginRequest,
   HealthCheckSetting,
   GatewayDeployGroup,
   PkgList,
@@ -215,13 +218,16 @@ import {
   CreateTaskResponse,
   DescribeContainerGroupsResponse,
   UpdateApiGroupResponse,
+  DescribeGroupsWithPluginResponse,
   AddInstancesRequest,
+  GatewayPlugin,
   GatewayApiGroupVo,
   CreateApplicationRequest,
   DeployGroupRequest,
   LaneInfos,
   CreateTaskFlowRequest,
   ModifyContainerReplicasResponse,
+  TsfPageGatewayPlugin,
   ApiUseStatisticsEntity,
   UnbindApiGroupResponse,
   DescribePathRewriteRequest,
@@ -268,6 +274,7 @@ import {
   DisableTaskFlowResponse,
   DescribeGatewayMonitorOverviewRequest,
   DescribeImageTagsResponse,
+  BindPluginResponse,
   RedoTaskFlowBatchRequest,
   TsfPageUnitNamespace,
   StopTaskExecuteRequest,
@@ -288,6 +295,7 @@ import {
   CreateUnitRuleRequest,
   VmGroupSimple,
   ApiResponseDescr,
+  DescribePluginInstancesRequest,
   ApiRequestDescr,
   ApiVersionArray,
   ConfigReleaseLog,
@@ -308,7 +316,7 @@ import {
   DescribeMicroservicesRequest,
   AddClusterInstancesResponse,
   DescribeTaskLastStatusResponse,
-  ReleasePublicConfigResponse,
+  DescribePublicConfigsRequest,
   GatewayGroupApiVo,
   DescribeApplicationsRequest,
   DescribeTaskDetailRequest,
@@ -316,6 +324,7 @@ import {
   DescribeLaneRulesRequest,
   CreateServerlessGroupRequest,
   UnitRuleTag,
+  DescribePluginInstancesResponse,
   CreateRepositoryResponse,
   CreateLaneRuleRequest,
   DescribeServerlessGroupsRequest,
@@ -731,6 +740,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询某个插件下绑定或未绑定的API分组
+   */
+  async DescribeGroupsWithPlugin(
+    req: DescribeGroupsWithPluginRequest,
+    cb?: (error: string, rep: DescribeGroupsWithPluginResponse) => void
+  ): Promise<DescribeGroupsWithPluginResponse> {
+    return this.request("DescribeGroupsWithPlugin", req, cb)
+  }
+
+  /**
    * 禁用单元化路由
    */
   async DisableUnitRoute(
@@ -809,6 +828,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: UpdateRepositoryResponse) => void
   ): Promise<UpdateRepositoryResponse> {
     return this.request("UpdateRepository", req, cb)
+  }
+
+  /**
+   * 插件与网关分组/API批量绑定
+   */
+  async BindPlugin(
+    req: BindPluginRequest,
+    cb?: (error: string, rep: BindPluginResponse) => void
+  ): Promise<BindPluginResponse> {
+    return this.request("BindPlugin", req, cb)
   }
 
   /**
@@ -1009,6 +1038,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: UpdateApiRateLimitRuleResponse) => void
   ): Promise<UpdateApiRateLimitRuleResponse> {
     return this.request("UpdateApiRateLimitRule", req, cb)
+  }
+
+  /**
+   * 分页查询网关分组/API绑定（或未绑定）的插件列表
+   */
+  async DescribePluginInstances(
+    req: DescribePluginInstancesRequest,
+    cb?: (error: string, rep: DescribePluginInstancesResponse) => void
+  ): Promise<DescribePluginInstancesResponse> {
+    return this.request("DescribePluginInstances", req, cb)
   }
 
   /**

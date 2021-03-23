@@ -58,6 +58,16 @@ it("tat.v20201028.DescribeRegions", async function () {
     }
 })
 
+it("tat.v20201028.PreviewReplacedCommandContent", async function () {
+    try {
+       const data = await client.PreviewReplacedCommandContent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tat.v20201028.CreateCommand", async function () {
     try {
        const data = await client.CreateCommand({})

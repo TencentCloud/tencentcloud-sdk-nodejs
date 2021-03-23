@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateCommandResponse, RunCommandRequest, DescribeInvocationTasksRequest, ModifyCommandResponse, DeleteCommandResponse, DescribeCommandsResponse, DescribeAutomationAgentStatusRequest, InvokeCommandResponse, ModifyCommandRequest, DescribeCommandsRequest, DescribeInvocationsRequest, DescribeInvocationsResponse, DescribeInvocationTasksResponse, DescribeAutomationAgentStatusResponse, DeleteCommandRequest, InvokeCommandRequest, DescribeRegionsRequest, RunCommandResponse, DescribeRegionsResponse, CreateCommandRequest } from "./tat_models";
+import { PreviewReplacedCommandContentResponse, CreateCommandResponse, RunCommandRequest, DescribeInvocationTasksRequest, ModifyCommandResponse, DeleteCommandResponse, DescribeCommandsResponse, DescribeAutomationAgentStatusRequest, InvokeCommandResponse, ModifyCommandRequest, DescribeCommandsRequest, DescribeInvocationsRequest, PreviewReplacedCommandContentRequest, DescribeInvocationsResponse, DescribeInvocationTasksResponse, DescribeAutomationAgentStatusResponse, DeleteCommandRequest, InvokeCommandRequest, DescribeRegionsRequest, RunCommandResponse, DescribeRegionsResponse, CreateCommandRequest } from "./tat_models";
 /**
  * tat client
  * @class
@@ -23,6 +23,10 @@ export declare class Client extends AbstractClient {
      * 此接口用于查询地域列表
      */
     DescribeRegions(req?: DescribeRegionsRequest, cb?: (error: string, rep: DescribeRegionsResponse) => void): Promise<DescribeRegionsResponse>;
+    /**
+     * 此接口用于预览自定义参数替换后的命令内容。不会触发真实执行。
+     */
+    PreviewReplacedCommandContent(req: PreviewReplacedCommandContentRequest, cb?: (error: string, rep: PreviewReplacedCommandContentResponse) => void): Promise<PreviewReplacedCommandContentResponse>;
     /**
      * 此接口用于创建命令。
      */

@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRegions", req, cb);
     }
     /**
+     * 此接口用于预览自定义参数替换后的命令内容。不会触发真实执行。
+     */
+    async PreviewReplacedCommandContent(req, cb) {
+        return this.request("PreviewReplacedCommandContent", req, cb);
+    }
+    /**
      * 此接口用于创建命令。
      */
     async CreateCommand(req, cb) {

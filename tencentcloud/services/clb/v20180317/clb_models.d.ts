@@ -213,6 +213,11 @@ OPEN：公网属性， INTERNAL：内网属性。
       */
     ClusterTag?: string;
     /**
+      * 仅适用于公网负载均衡。设置跨可用区容灾时的备可用区ID，例如 100001 或 ap-guangzhou-1
+注：备可用区是主可用区故障后，需要承载流量的可用区。可通过 DescribeMasterZones 接口查询一个地域的主/备可用区的列表。
+      */
+    SlaveZoneId?: string;
+    /**
       * EIP 的唯一 ID，形如：eip-11112222，仅适用于内网负载均衡绑定EIP。
       */
     EipAddressId?: string;
@@ -1584,6 +1589,11 @@ export interface TargetGroupBackend {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     EniId: string;
+    /**
+      * 后端服务的可用区ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ZoneId: number;
 }
 /**
  * DescribeClassicalLBByInstanceId请求参数结构体

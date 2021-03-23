@@ -353,7 +353,7 @@ export interface CreateInstanceResponse {
   /**
    * 企业版实例Id
    */
-  RegistryId?: string
+  RegistryId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2225,7 +2225,7 @@ export interface CreateInstanceRequest {
   TagSpecification?: TagSpecification
 
   /**
-   * 实例计费类型，0表示按量计费，1表示预付费，当前版本只支持后付费，默认为按量计费
+   * 实例计费类型，0表示按量计费，1表示预付费，默认为按量计费
    */
   RegistryChargeType?: number
 }

@@ -197,6 +197,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeApiDetail", req, cb);
     }
     /**
+     * 查询某个插件下绑定或未绑定的API分组
+     */
+    async DescribeGroupsWithPlugin(req, cb) {
+        return this.request("DescribeGroupsWithPlugin", req, cb);
+    }
+    /**
      * 禁用单元化路由
      */
     async DisableUnitRoute(req, cb) {
@@ -244,6 +250,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async UpdateRepository(req, cb) {
         return this.request("UpdateRepository", req, cb);
+    }
+    /**
+     * 插件与网关分组/API批量绑定
+     */
+    async BindPlugin(req, cb) {
+        return this.request("BindPlugin", req, cb);
     }
     /**
      * 查询某个API分组已绑定的网关部署组信息列表
@@ -364,6 +376,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async UpdateApiRateLimitRule(req, cb) {
         return this.request("UpdateApiRateLimitRule", req, cb);
+    }
+    /**
+     * 分页查询网关分组/API绑定（或未绑定）的插件列表
+     */
+    async DescribePluginInstances(req, cb) {
+        return this.request("DescribePluginInstances", req, cb);
     }
     /**
      * API分组批量与网关解绑

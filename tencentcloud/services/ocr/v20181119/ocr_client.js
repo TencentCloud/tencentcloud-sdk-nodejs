@@ -205,7 +205,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GeneralAccurateOCR", req, cb);
     }
     /**
-     * 本接口支持机票行程单关键字段的识别，包括姓名、身份证件号码、航班号、票价 、合计、电子客票号码、填开日期等。
+     * 本接口支持机票行程单关键字段的识别，包括旅客姓名、有效身份证件号码、电子客票号码、验证码、填开单位、其他税费、燃油附加费、民航发展基金、保险费、销售单位代号、始发地、目的地、航班号、时间、日期、座位等级、承运人、发票消费类型、票价、合计金额、填开日期、国内国际标签、印刷序号、客票级别/类别、客票生效日期、有效期截止日期、免费行李等字段，支持航班信息多行明细输出。
      */
     async FlightInvoiceOCR(req, cb) {
         return this.request("FlightInvoiceOCR", req, cb);

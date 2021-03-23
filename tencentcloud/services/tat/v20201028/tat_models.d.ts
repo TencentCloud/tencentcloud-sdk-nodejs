@@ -1,23 +1,15 @@
 /**
- * 任务结果。
+ * PreviewReplacedCommandContent返回参数结构体
  */
-export interface TaskResult {
+export interface PreviewReplacedCommandContentResponse {
     /**
-      * 命令执行ExitCode。
+      * 自定义参数替换后的，经Base64编码的命令内容。
       */
-    ExitCode: number;
+    ReplacedContent: string;
     /**
-      * Base64编码后的命令输出。最大长度24KB。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Output: string;
-    /**
-      * 命令执行开始时间。
-      */
-    ExecStartTime: string;
-    /**
-      * 命令执行结束时间。
-      */
-    ExecEndTime: string;
+    RequestId?: string;
 }
 /**
  * CreateCommand返回参数结构体
@@ -100,6 +92,28 @@ export interface RunCommandRequest {
 默认为 False。
       */
     SaveCommand?: boolean;
+    /**
+      * 是否启用自定义参数功能。
+一旦创建，此值不提供修改。
+默认值：false。
+      */
+    EnableParameter?: boolean;
+    /**
+      * 启用自定义参数功能时，自定义参数的默认取值。字段类型为json encoded string。如：{\"varA\": \"222\"}。
+key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。
+如果 Parameters 未提供，将使用这里的默认值进行替换。
+自定义参数最多20个。
+自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。
+      */
+    DefaultParameters?: string;
+    /**
+      * Command 的自定义参数。字段类型为json encoded string。如：{\"varA\": \"222\"}。
+key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。
+如果未提供该参数取值，将使用 DefaultParameters 进行替换。
+自定义参数最多20个。
+自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。
+      */
+    Parameters?: string;
 }
 /**
  * DescribeInvocationTasks请求参数结构体
@@ -172,6 +186,14 @@ export interface Invocation {
       * 执行活动更新时间。
       */
     UpdatedTime: string;
+    /**
+      * 自定义参数取值。
+      */
+    Parameters: string;
+    /**
+      * 自定义参数的默认取值。
+      */
+    DefaultParameters: string;
 }
 /**
  * 命令执行详情。
@@ -193,6 +215,27 @@ export interface CommandDocument {
       * 执行路径。
       */
     WorkingDirectory: string;
+}
+/**
+ * 任务结果。
+ */
+export interface TaskResult {
+    /**
+      * 命令执行ExitCode。
+      */
+    ExitCode: number;
+    /**
+      * Base64编码后的命令输出。最大长度24KB。
+      */
+    Output: string;
+    /**
+      * 命令执行开始时间。
+      */
+    ExecStartTime: string;
+    /**
+      * 命令执行结束时间。
+      */
+    ExecEndTime: string;
 }
 /**
  * ModifyCommand返回参数结构体
@@ -312,6 +355,15 @@ export interface ModifyCommandRequest {
       * 命令超时时间，默认60秒。取值范围[1, 86400]。
       */
     Timeout?: number;
+    /**
+      * 启用自定义参数功能时，自定义参数的默认取值。字段类型为json encoded string。如：{\"varA\": \"222\"}。
+采取整体全覆盖式修改，即修改时必须提供所有新默认值。
+必须 Command 的 EnableParameter 为 true 时，才允许修改这个值。
+key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。
+自定义参数最多20个。
+自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。
+      */
+    DefaultParameters?: string;
 }
 /**
  * DescribeCommands请求参数结构体
@@ -354,6 +406,29 @@ export interface DescribeInvocationsRequest {
       * 偏移量，默认为0。关于 `Offset` 的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。
       */
     Offset?: number;
+}
+/**
+ * PreviewReplacedCommandContent请求参数结构体
+ */
+export interface PreviewReplacedCommandContentRequest {
+    /**
+      * 本次预览采用的自定义参数。字段类型为 json encoded string，如：{\"varA\": \"222\"}。
+key 为自定义参数名称，value 为该参数的取值。kv 均为字符串型。
+自定义参数最多 20 个。
+自定义参数名称需符合以下规范：字符数目上限 64，可选范围【a-zA-Z0-9-_】。
+如果将预览的 CommandId 设置过 DefaultParameters，本参数可以为空。
+      */
+    Parameters?: string;
+    /**
+      * 要进行替换预览的命令，如果有设置过 DefaultParameters，会与 Parameters 进行叠加，后者覆盖前者。
+CommandId 与 Content，必须且只能提供一个。
+      */
+    CommandId?: string;
+    /**
+      * 要预览的命令内容，经 Base64 编码，长度不可超过 64KB。
+CommandId 与 Content，必须且只能提供一个。
+      */
+    Content?: string;
 }
 /**
  * >描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
@@ -453,6 +528,14 @@ export interface Command {
       * 命令更新时间。
       */
     UpdatedTime: string;
+    /**
+      * 是否启用自定义参数功能。
+      */
+    EnableParameter: boolean;
+    /**
+      * 自定义参数的默认取值。
+      */
+    DefaultParameters: string;
 }
 /**
  * 执行任务。
@@ -576,6 +659,14 @@ export interface InvokeCommandRequest {
       * 待执行命令的实例ID列表。
       */
     InstanceIds: Array<string>;
+    /**
+      * Command 的自定义参数。字段类型为json encoded string。如：{\"varA\": \"222\"}。
+key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。
+如果未提供该参数取值，将使用 Command 的 DefaultParameters 进行替换。
+自定义参数最多20个。
+自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。
+      */
+    Parameters?: string;
 }
 /**
  * DescribeRegions请求参数结构体
@@ -643,4 +734,18 @@ export interface CreateCommandRequest {
       * 命令超时时间，默认60秒。取值范围[1, 86400]。
       */
     Timeout?: number;
+    /**
+      * 是否启用自定义参数功能。
+一旦创建，此值不提供修改。
+默认值：false。
+      */
+    EnableParameter?: boolean;
+    /**
+      * 启用自定义参数功能时，自定义参数的默认取值。字段类型为json encoded string。如：{\"varA\": \"222\"}。
+key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。
+如果InvokeCommand时未提供参数取值，将使用这里的默认值进行替换。
+自定义参数最多20个。
+自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。
+      */
+    DefaultParameters?: string;
 }

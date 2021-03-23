@@ -258,9 +258,19 @@ export interface UpdateRecordPlanRequest {
       */
     TimeTemplateId?: string;
     /**
+      * 触发录制的事件 1：全部
+      */
+    EventId?: number;
+    /**
       * 录制设备列表
       */
     Devices?: Array<DeviceItem>;
+    /**
+      * 是否更新绑定此录制计划的设备列表
+0 - 不更新
+1 - 更新，如果Devices参数为空则清空设备列表，Devices不为空则全量更新设备列表
+      */
+    IsModifyDevices?: number;
 }
 /**
  * 分组信息详情
@@ -896,6 +906,10 @@ export interface CreateRecordPlanRequest {
       * 时间模板ID
       */
     TimeTemplateId: string;
+    /**
+      * 触发录制的事件类别 1:全部
+      */
+    EventId: number;
     /**
       * 该录制计划绑定的设备列表
       */

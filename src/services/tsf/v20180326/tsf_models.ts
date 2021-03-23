@@ -167,18 +167,18 @@ export interface DeletePathRewritesResponse {
 }
 
 /**
- * ReleaseConfig返回参数结构体
+ * 路径重写翻页对象
  */
-export interface ReleaseConfigResponse {
+export interface PathRewritePage {
   /**
-   * true：发布成功；false：发布失败
+   * 总记录数
    */
-  Result?: boolean
+  TotalCount: number
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 路径重写规则列表
    */
-  RequestId?: string
+  Content: Array<PathRewrite>
 }
 
 /**
@@ -836,18 +836,18 @@ export interface CreateMicroserviceRequest {
 }
 
 /**
- * 路径重写翻页对象
+ * ReleaseConfig返回参数结构体
  */
-export interface PathRewritePage {
+export interface ReleaseConfigResponse {
   /**
-   * 总记录数
+   * true：发布成功；false：发布失败
    */
-  TotalCount: number
+  Result?: boolean
 
   /**
-   * 路径重写规则列表
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Content: Array<PathRewrite>
+  RequestId?: string
 }
 
 /**
@@ -1234,6 +1234,26 @@ export interface MsInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   HiddenStatus: string
+}
+
+/**
+ * 微服务网关插件绑定对象
+ */
+export interface GatewayPluginBoundParam {
+  /**
+   * 插件id
+   */
+  PluginId: string
+
+  /**
+   * 插件绑定到的对象类型:group/api
+   */
+  ScopeType: string
+
+  /**
+   * 插件绑定到的对象主键值，例如分组的ID/API的ID
+   */
+  ScopeValue: string
 }
 
 /**
@@ -2908,38 +2928,19 @@ export interface UpdateUnitRuleRequest {
 }
 
 /**
- * DescribePublicConfigs请求参数结构体
+ * ReleasePublicConfig返回参数结构体
  */
-export interface DescribePublicConfigsRequest {
+export interface ReleasePublicConfigResponse {
   /**
-   * 配置项ID，不传入时查询全量，高优先级
-   */
-  ConfigId?: string
+      * true：发布成功；false：发布失败
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result?: boolean
 
   /**
-   * 偏移量，默认为0
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Offset?: number
-
-  /**
-   * 每页条数，默认为20
-   */
-  Limit?: number
-
-  /**
-   * 配置项ID列表，不传入时查询全量，低优先级
-   */
-  ConfigIdList?: Array<string>
-
-  /**
-   * 配置项名称，精确查询，不传入时查询全量
-   */
-  ConfigName?: string
-
-  /**
-   * 配置项版本，精确查询，不传入时查询全量
-   */
-  ConfigVersion?: string
+  RequestId?: string
 }
 
 /**
@@ -4239,6 +4240,41 @@ export interface DescribeContainerGroupDetailRequest {
 }
 
 /**
+ * DescribeGroupsWithPlugin请求参数结构体
+ */
+export interface DescribeGroupsWithPluginRequest {
+  /**
+   * 插件ID
+   */
+  PluginId: string
+
+  /**
+   * 绑定/未绑定: true / false
+   */
+  Bound: boolean
+
+  /**
+   * 翻页偏移量
+   */
+  Offset: number
+
+  /**
+   * 每页记录数量
+   */
+  Limit: number
+
+  /**
+   * 搜索关键字
+   */
+  SearchWord?: string
+
+  /**
+   * 网关实体ID
+   */
+  GatewayInstanceId?: string
+}
+
+/**
  * 镜像仓库列表
  */
 export interface ImageRepositoryResult {
@@ -4354,6 +4390,16 @@ export interface UnitRuleItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UnitRuleTagList?: Array<UnitRuleTag>
+}
+
+/**
+ * BindPlugin请求参数结构体
+ */
+export interface BindPluginRequest {
+  /**
+   * 分组/API绑定插件列表
+   */
+  PluginInstanceList: Array<GatewayPluginBoundParam>
 }
 
 /**
@@ -4926,6 +4972,21 @@ export interface UpdateApiGroupResponse {
 }
 
 /**
+ * DescribeGroupsWithPlugin返回参数结构体
+ */
+export interface DescribeGroupsWithPluginResponse {
+  /**
+   * API分组信息列表
+   */
+  Result: TsfPageApiGroupInfo
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AddInstances请求参数结构体
  */
 export interface AddInstancesRequest {
@@ -4968,6 +5029,53 @@ export interface AddInstancesRequest {
    * 云主机导入方式，虚拟机集群必填，容器集群不填写此字段，R：重装TSF系统镜像，M：手动安装agent
    */
   InstanceImportMode?: string
+}
+
+/**
+ * 微服务网关插件实例对象
+ */
+export interface GatewayPlugin {
+  /**
+      * 网关插件id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Id: string
+
+  /**
+      * 插件名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name: string
+
+  /**
+      * 插件类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Type: string
+
+  /**
+      * 插件描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Description: string
+
+  /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreatedTime: string
+
+  /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdatedTime: string
+
+  /**
+      * 发布状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
 }
 
 /**
@@ -5179,6 +5287,23 @@ export interface ModifyContainerReplicasResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * GatewayPlugin 翻页对象
+ */
+export interface TsfPageGatewayPlugin {
+  /**
+      * 记录总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
+
+  /**
+      * 记录实体列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Content: Array<GatewayPlugin>
 }
 
 /**
@@ -6285,6 +6410,21 @@ export interface DescribeImageTagsResponse {
 }
 
 /**
+ * BindPlugin返回参数结构体
+ */
+export interface BindPluginResponse {
+  /**
+   * 返回结果，成功失败
+   */
+  Result: boolean
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * RedoTaskFlowBatch请求参数结构体
  */
 export interface RedoTaskFlowBatchRequest {
@@ -6877,6 +7017,41 @@ export interface ApiResponseDescr {
    * 参数描述
    */
   Description: string
+}
+
+/**
+ * DescribePluginInstances请求参数结构体
+ */
+export interface DescribePluginInstancesRequest {
+  /**
+   * 分组或者API的ID
+   */
+  ScopeValue: string
+
+  /**
+   * 绑定: true; 未绑定: false
+   */
+  Bound: boolean
+
+  /**
+   * 翻页偏移量
+   */
+  Offset: number
+
+  /**
+   * 每页展示的条数
+   */
+  Limit: number
+
+  /**
+   * 插件类型
+   */
+  Type?: string
+
+  /**
+   * 搜索关键字
+   */
+  SearchWord?: string
 }
 
 /**
@@ -7480,19 +7655,38 @@ export interface DescribeTaskLastStatusResponse {
 }
 
 /**
- * ReleasePublicConfig返回参数结构体
+ * DescribePublicConfigs请求参数结构体
  */
-export interface ReleasePublicConfigResponse {
+export interface DescribePublicConfigsRequest {
   /**
-      * true：发布成功；false：发布失败
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Result?: boolean
+   * 配置项ID，不传入时查询全量，高优先级
+   */
+  ConfigId?: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 偏移量，默认为0
    */
-  RequestId?: string
+  Offset?: number
+
+  /**
+   * 每页条数，默认为20
+   */
+  Limit?: number
+
+  /**
+   * 配置项ID列表，不传入时查询全量，低优先级
+   */
+  ConfigIdList?: Array<string>
+
+  /**
+   * 配置项名称，精确查询，不传入时查询全量
+   */
+  ConfigName?: string
+
+  /**
+   * 配置项版本，精确查询，不传入时查询全量
+   */
+  ConfigVersion?: string
 }
 
 /**
@@ -7707,6 +7901,21 @@ export interface UnitRuleTag {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Id?: string
+}
+
+/**
+ * DescribePluginInstances返回参数结构体
+ */
+export interface DescribePluginInstancesResponse {
+  /**
+   * 插件信息列表
+   */
+  Result: TsfPageGatewayPlugin
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

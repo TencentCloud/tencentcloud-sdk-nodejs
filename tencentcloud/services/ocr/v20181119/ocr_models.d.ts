@@ -201,14 +201,14 @@ export interface TrainTicketOCRRequest {
     /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
     ImageBase64?: string;
     /**
       * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
@@ -278,14 +278,14 @@ export interface FlightInvoiceOCRRequest {
     /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
     ImageBase64?: string;
     /**
       * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
@@ -705,7 +705,7 @@ export interface WaybillOCRResponse {
     /**
       * 检测到的文本信息，具体内容请点击左侧链接。
       */
-    TextDetections?: TextWaybill;
+    TextDetections: TextWaybill;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1230,51 +1230,51 @@ export interface TrainTicketOCRResponse {
     /**
       * 编号
       */
-    TicketNum?: string;
+    TicketNum: string;
     /**
       * 出发站
       */
-    StartStation?: string;
+    StartStation: string;
     /**
       * 到达站
       */
-    DestinationStation?: string;
+    DestinationStation: string;
     /**
       * 出发时间
       */
-    Date?: string;
+    Date: string;
     /**
       * 车次
       */
-    TrainNum?: string;
+    TrainNum: string;
     /**
       * 座位号
       */
-    Seat?: string;
+    Seat: string;
     /**
       * 姓名
       */
-    Name?: string;
+    Name: string;
     /**
       * 票价
       */
-    Price?: string;
+    Price: string;
     /**
       * 席别
       */
-    SeatCategory?: string;
+    SeatCategory: string;
     /**
       * 身份证号
       */
-    ID?: string;
+    ID: string;
     /**
       * 发票消费类型
       */
-    InvoiceType?: string;
+    InvoiceType: string;
     /**
       * 序列号
       */
-    SerialNumber?: string;
+    SerialNumber: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1531,53 +1531,53 @@ export interface TaxiInvoiceOCRResponse {
     /**
       * 发票代码
       */
-    InvoiceNum?: string;
+    InvoiceNum: string;
     /**
       * 发票号码
       */
-    InvoiceCode?: string;
+    InvoiceCode: string;
     /**
       * 日期
       */
-    Date?: string;
+    Date: string;
     /**
       * 金额
       */
-    Fare?: string;
+    Fare: string;
     /**
       * 上车时间
       */
-    GetOnTime?: string;
+    GetOnTime: string;
     /**
       * 下车时间
       */
-    GetOffTime?: string;
+    GetOffTime: string;
     /**
       * 里程
       */
-    Distance?: string;
+    Distance: string;
     /**
       * 发票所在地
       */
-    Location?: string;
+    Location: string;
     /**
       * 车牌号
       */
-    PlateNumber?: string;
+    PlateNumber: string;
     /**
       * 发票消费类型
       */
-    InvoiceType?: string;
+    InvoiceType: string;
     /**
       * 省
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Province?: string;
+    Province: string;
     /**
       * 市
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    City?: string;
+    City: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2067,14 +2067,14 @@ export interface TaxiInvoiceOCRRequest {
     /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
     ImageBase64?: string;
     /**
       * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
@@ -2382,14 +2382,14 @@ export interface WaybillOCRRequest {
     /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
     ImageBase64?: string;
     /**
       * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
@@ -2824,7 +2824,7 @@ export interface FlightInvoiceOCRResponse {
     /**
       * 机票行程单识别结果，具体内容请点击左侧链接。
       */
-    FlightInvoiceInfos?: Array<FlightInvoiceInfo>;
+    FlightInvoiceInfos: Array<FlightInvoiceInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2880,13 +2880,17 @@ export interface CarInvoiceInfo {
 export interface FlightInvoiceInfo {
     /**
       * 识别出的字段名称(关键字)，支持以下字段：
-票价、合计金额、填开日期、有效身份证件号码、电子客票号码、验证码、旅客姓名、填开单位、其他税费、燃油附加费、民航发展基金、保险费、销售单位代号、始发地、目的地、航班号、时间、日期、座位等级、承运人、发票消费类型、国内国际标签、印刷序号。
+票价、合计金额、填开日期、有效身份证件号码、电子客票号码、验证码、旅客姓名、填开单位、其他税费、燃油附加费、民航发展基金、保险费、销售单位代号、始发地、目的地、航班号、时间、日期、座位等级、承运人、发票消费类型、国内国际标签、印刷序号、客票级别/类别、客票生效日期、有效期截止日期、免费行李。
       */
     Name: string;
     /**
       * 识别出的字段名称对应的值，也就是字段 Name 对应的字符串结果。
       */
     Value: string;
+    /**
+      * 多个行程的字段所在行号，下标从0开始，非行字段或未能识别行号的该值返回-1。
+      */
+    Row: number;
 }
 /**
  * 行驶证主页正面的识别结果
@@ -3632,18 +3636,26 @@ export interface GeneralFastOCRRequest {
     /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
     ImageBase64?: string;
     /**
       * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
     ImageUrl?: string;
+    /**
+      * 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。
+      */
+    IsPdf?: boolean;
+    /**
+      * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+      */
+    PdfPageNumber?: number;
 }
 /**
  * 文本的坐标，以四个顶点坐标表示
@@ -4913,16 +4925,20 @@ export interface GeneralFastOCRResponse {
     /**
       * 检测到的文本信息，具体内容请点击左侧链接。
       */
-    TextDetections?: Array<TextDetection>;
+    TextDetections: Array<TextDetection>;
     /**
       * 检测到的语言，目前支持的语种范围为：简体中文、繁体中文、英文、日文、韩文。未来将陆续新增对更多语种的支持。
 返回结果含义为：zh - 中英混合，jap - 日文，kor - 韩文。
       */
-    Language?: string;
+    Language: string;
     /**
       * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负
       */
-    Angel?: number;
+    Angel: number;
+    /**
+      * 图片为PDF时，返回PDF的总页数，默认为0
+      */
+    PdfPageSize: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

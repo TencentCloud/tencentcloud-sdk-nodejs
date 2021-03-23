@@ -298,6 +298,16 @@ it("tsf.v20180326.DescribeApiDetail", async function () {
     }
 })
 
+it("tsf.v20180326.DescribeGroupsWithPlugin", async function () {
+    try {
+       const data = await client.DescribeGroupsWithPlugin({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tsf.v20180326.DisableUnitRoute", async function () {
     try {
        const data = await client.DisableUnitRoute({})
@@ -371,6 +381,16 @@ it("tsf.v20180326.DescribeApplications", async function () {
 it("tsf.v20180326.UpdateRepository", async function () {
     try {
        const data = await client.UpdateRepository({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tsf.v20180326.BindPlugin", async function () {
+    try {
+       const data = await client.BindPlugin({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -571,6 +591,16 @@ it("tsf.v20180326.ModifyTask", async function () {
 it("tsf.v20180326.UpdateApiRateLimitRule", async function () {
     try {
        const data = await client.UpdateApiRateLimitRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tsf.v20180326.DescribePluginInstances", async function () {
+    try {
+       const data = await client.DescribePluginInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
