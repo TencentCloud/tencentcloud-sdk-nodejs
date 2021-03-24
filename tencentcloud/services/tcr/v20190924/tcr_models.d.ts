@@ -880,11 +880,11 @@ export interface DescribeInternalEndpointsResponse {
       * 内网接入信息的列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    AccessVpcSet?: Array<AccessVpc>;
+    AccessVpcSet: Array<AccessVpc>;
     /**
       * 内网接入总数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2067,8 +2067,9 @@ export interface CreateInternalEndpointDnsRequest {
       */
     EniLBIp: string;
     /**
-      * true：use instance name as subdomain
-false: use instancename+"-vpc" as subdomain
+      * true：为默认域名，公网域名一致
+false: 使用vpc域名
+默认为vpc域名
       */
     UsePublicDomain?: boolean;
 }
@@ -2433,7 +2434,7 @@ export interface ManageInternalEndpointResponse {
     /**
       * 实例Id
       */
-    RegistryId?: string;
+    RegistryId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

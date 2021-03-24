@@ -153,7 +153,7 @@ export interface CreateSecurityGroupApiRulesRequest {
   Direction: number
 
   /**
-   * 0：后插，1：前插，2：中插
+   * 插入类型，0：后插，1：前插，2：中插
    */
   Type?: number
 
@@ -170,23 +170,23 @@ export interface DescribeSecurityGroupListResponse {
   /**
    * 列表当前规则总条数
    */
-  Total?: number
+  Total: number
 
   /**
    * 安全组规则列表数据
    */
-  Data?: Array<SecurityGroupListData>
+  Data: Array<SecurityGroupListData>
 
   /**
    * 不算筛选条数的总条数
    */
-  AllTotal?: number
+  AllTotal: number
 
   /**
       * 访问控制规则全部启用/全部停用
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Enable?: number
+  Enable: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -298,7 +298,7 @@ export interface CreateSecurityGroupApiRulesResponse {
   /**
    * 状态值，0:添加成功，非0：添加失败
    */
-  Status?: number
+  Status: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -999,7 +999,7 @@ export interface ModifySecurityGroupAllRuleStatusResponse {
       * 0: 修改成功, 其他: 修改失败
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Status?: number
+  Status: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1178,17 +1178,17 @@ export interface DescribeSecurityGroupListRequest {
   SearchValue?: string
 
   /**
-   * 每页条数
+   * 每页条数，默认为10
    */
   Limit?: number
 
   /**
-   * 偏移值
+   * 偏移值，默认为0
    */
   Offset?: number
 
   /**
-   * '': 全部，'0'：筛选停用规则，'1'：筛选启用规则
+   * 状态，'': 全部，'0'：筛选停用规则，'1'：筛选启用规则
    */
   Status?: string
 
@@ -1273,15 +1273,15 @@ export interface ModifyTableStatusRequest {
  */
 export interface DeleteSecurityGroupRuleResponse {
   /**
-   * 状态值
+   * 状态值，0：成功，非0：失败
    */
-  Status?: number
+  Status: number
 
   /**
       * 返回多余的信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Info?: string
+  Info: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1339,7 +1339,7 @@ export interface ModifySecurityGroupAllRuleStatusRequest {
   EdgeId?: string
 
   /**
-   * NAT地域
+   * NAT地域, 腾讯云地域的英文简写
    */
   Area?: string
 }

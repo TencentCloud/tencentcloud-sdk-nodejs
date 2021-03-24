@@ -313,7 +313,19 @@ export interface DescribeDBSecurityGroupsResponse {
   /**
    * 安全组详情。
    */
-  Groups?: Array<SecurityGroup>
+  Groups: Array<SecurityGroup>
+
+  /**
+      * 实例VIP。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VIP: string
+
+  /**
+      * 实例端口。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VPort: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -999,7 +1011,7 @@ export interface DescribeDBSecurityGroupsRequest {
   Product: string
 
   /**
-   * 实例ID
+   * 实例ID。
    */
   InstanceId: string
 }

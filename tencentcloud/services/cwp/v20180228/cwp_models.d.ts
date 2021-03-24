@@ -2126,11 +2126,11 @@ export interface ModifyMalwareTimingScanSettingsRequest {
       */
     CheckPattern: number;
     /**
-      * 检测周期 开始时间
+      * 检测周期 开始时间，如：02:00:00
       */
     StartTime: string;
     /**
-      * 检测周期 超时结束时间
+      * 检测周期 超时结束时间，如：04:00:00
       */
     EndTime: string;
     /**
@@ -5373,11 +5373,11 @@ export interface ExportTasksResponse {
     /**
       * PENDING：正在生成下载链接，FINISHED：下载链接已生成，ERROR：网络异常等异常情况
       */
-    Status?: string;
+    Status: string;
     /**
       * 下载链接
       */
-    DownloadUrl?: string;
+    DownloadUrl: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

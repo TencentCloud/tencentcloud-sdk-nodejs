@@ -672,7 +672,7 @@ export interface DescribeScriptsRequest {
       */
     Offset?: number;
     /**
-      * 按字段爱旭，支持如下字段类型，update-time
+      * 按字段排序，支持如下字段类型，update-time
       */
     SortBy?: string;
     /**

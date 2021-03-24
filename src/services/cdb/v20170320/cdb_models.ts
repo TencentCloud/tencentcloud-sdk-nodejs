@@ -908,17 +908,17 @@ export interface DescribeTablesResponse {
  */
 export interface SellConfig {
   /**
-   * 设备类型
+   * 设备类型（废弃）
    */
   Device?: string
 
   /**
-   * 售卖规格描述
+   * 售卖规格描述（废弃）
    */
   Type: string
 
   /**
-   * 实例类型
+   * 实例类型（废弃）
    */
   CdbType: string
 
@@ -968,14 +968,26 @@ export interface SellConfig {
   Info: string
 
   /**
-   * 状态值
+   * 状态值，0 表示该规格对外售卖
    */
   Status: number
 
   /**
-   * 标签值
+   * 标签值（废弃）
    */
   Tag: number
+
+  /**
+      * 实例类型，可能的取值范围有：UNIVERSAL (通用型), EXCLUSIVE (独享型), BASIC (基础型)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeviceType: string
+
+  /**
+      * 实例类型描述，可能的取值范围有：通用型， 独享型， 基础型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeviceTypeName: string
 }
 
 /**

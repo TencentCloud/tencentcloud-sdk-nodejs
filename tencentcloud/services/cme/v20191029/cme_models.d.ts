@@ -720,7 +720,7 @@ export interface ExportVideoByEditorTrackDataRequest {
       */
     ExportDestination: string;
     /**
-      * 在线编辑轨道数据。
+      * 在线编辑轨道数据。轨道数据相关介绍，请查看 [视频合成协议](https://cloud.tencent.com/document/product/1156/51225)。
       */
     TrackData: string;
     /**
@@ -2764,7 +2764,7 @@ export interface ExportVideoByEditorTrackDataResponse {
     /**
       * 任务 Id。
       */
-    TaskId?: string;
+    TaskId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

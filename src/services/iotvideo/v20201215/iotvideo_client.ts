@@ -34,6 +34,7 @@ import {
   ModifyProductRequest,
   ModifyModelDefinitionRequest,
   DescribeBatchsResponse,
+  TransferCloudStorageResponse,
   DescribeForwardRuleResponse,
   DescribeBatchRequest,
   CloudStorageTimeInfo,
@@ -74,6 +75,7 @@ import {
   DescribeFirmwareTaskDevicesResponse,
   DescribeCloudStorageThumbnailResponse,
   RetryDeviceFirmwareTaskResponse,
+  ResetCloudStorageResponse,
   DescribeFirmwareTaskResponse,
   FirmwareInfo,
   CreateProductRequest,
@@ -127,10 +129,12 @@ import {
   CheckForwardAuthResponse,
   DescribeDeviceDataResponse,
   DeleteForwardRuleResponse,
+  TransferCloudStorageRequest,
   DescribeFirmwareTaskStatisticsRequest,
   DescribeBatchsRequest,
   DeviceInfo,
   ModifyModelDefinitionResponse,
+  ResetCloudStorageRequest,
   DescribeFirmwareTaskRequest,
   DescribeCloudStorageTimeRequest,
 } from "./iotvideo_models"
@@ -192,6 +196,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyProductResponse) => void
   ): Promise<ModifyProductResponse> {
     return this.request("ModifyProduct", req, cb)
+  }
+
+  /**
+   * 转移云存服务
+   */
+  async TransferCloudStorage(
+    req: TransferCloudStorageRequest,
+    cb?: (error: string, rep: TransferCloudStorageResponse) => void
+  ): Promise<TransferCloudStorageResponse> {
+    return this.request("TransferCloudStorage", req, cb)
   }
 
   /**
@@ -502,6 +516,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ImportModelDefinitionResponse) => void
   ): Promise<ImportModelDefinitionResponse> {
     return this.request("ImportModelDefinition", req, cb)
+  }
+
+  /**
+   * 重置云存服务
+   */
+  async ResetCloudStorage(
+    req: ResetCloudStorageRequest,
+    cb?: (error: string, rep: ResetCloudStorageResponse) => void
+  ): Promise<ResetCloudStorageResponse> {
+    return this.request("ResetCloudStorage", req, cb)
   }
 
   /**

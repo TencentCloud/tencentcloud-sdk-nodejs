@@ -1006,6 +1006,11 @@ export interface CreateTCPListenersRequest {
    * 监听器获取客户端 IP 的方式，0表示 TOA, 1表示Proxy Protocol
    */
   ClientIPMethod?: number
+
+  /**
+   * 源站是否开启主备模式：1开启，0关闭，DOMAIN类型源站不支持开启
+   */
+  FailoverSwitch?: number
 }
 
 /**
@@ -1123,22 +1128,22 @@ export interface DescribeListenerRealServersResponse {
   /**
    * 可绑定源站的个数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 源站信息列表
    */
-  RealServerSet?: Array<RealServer>
+  RealServerSet: Array<RealServer>
 
   /**
    * 已绑定源站的个数
    */
-  BindRealServerTotalCount?: number
+  BindRealServerTotalCount: number
 
   /**
    * 已绑定源站信息列表
    */
-  BindRealServerSet?: Array<BindRealServer>
+  BindRealServerSet: Array<BindRealServer>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1199,6 +1204,11 @@ export interface ModifyTCPListenerAttributeRequest {
    * 是否开启健康检查，1开启，0关闭。
    */
   HealthCheck?: number
+
+  /**
+   * 源站是否开启主备模式：1开启，0关闭，DOMAIN类型源站不支持开启
+   */
+  FailoverSwitch?: number
 }
 
 /**
@@ -1437,12 +1447,12 @@ export interface DescribeTCPListenersResponse {
   /**
    * 满足条件的监听器总个数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * TCP监听器列表
    */
-  ListenerSet?: Array<TCPListener>
+  ListenerSet: Array<TCPListener>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3333,7 +3343,7 @@ export interface CreateTCPListenersResponse {
   /**
    * 返回监听器ID
    */
-  ListenerIds?: Array<string>
+  ListenerIds: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5033,7 +5043,7 @@ export interface DescribeRulesByRuleIdsRequest {
 }
 
 /**
- * RealServerBindSetReq
+ * 绑定的源站信息
  */
 export interface RealServerBindSetReq {
   /**
@@ -5055,6 +5065,11 @@ export interface RealServerBindSetReq {
    * 源站权重
    */
   RealServerWeight?: number
+
+  /**
+   * 源站主备角色：master主，slave备，该参数必须在监听器打开了源站主备模式，且监听器类型为TCP监听器
+   */
+  RealServerFailoverRole?: string
 }
 
 /**

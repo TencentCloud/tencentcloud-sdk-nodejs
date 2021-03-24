@@ -175,18 +175,18 @@ export interface MobileNetworkTimeVerificationResponse {
 -1: 手机号格式不正确
 -4: 验证中心服务繁忙
       */
-  Result?: string
+  Result: string
 
   /**
    * 业务结果描述。
    */
-  Description?: string
+  Description: string
 
   /**
       * 在网时长区间。
 格式为(a,b]，表示在网时长在a个月以上，b个月以下。若b为+时表示没有上限。
       */
-  Range?: string
+  Range: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -616,6 +616,11 @@ export interface MobileStatusRequest {
    * 手机号码
    */
   Mobile: string
+
+  /**
+   * 敏感数据加密信息。对传入信息（手机号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+   */
+  Encryption?: Encryption
 }
 
 /**
@@ -785,12 +790,12 @@ export interface MobileStatusResponse {
 -2：手机号格式不正确
 -3：验证中心服务繁忙
       */
-  Result?: string
+  Result: string
 
   /**
    * 业务结果描述。
    */
-  Description?: string
+  Description: string
 
   /**
       * 状态码：
@@ -801,7 +806,7 @@ export interface MobileStatusResponse {
 4：不在网
 99：未知状态
       */
-  StatusCode?: number
+  StatusCode: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1240,6 +1245,11 @@ export interface MobileNetworkTimeVerificationRequest {
    * 手机号码
    */
   Mobile: string
+
+  /**
+   * 敏感数据加密信息。对传入信息（手机号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+   */
+  Encryption?: Encryption
 }
 
 /**

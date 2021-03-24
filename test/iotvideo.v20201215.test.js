@@ -68,6 +68,16 @@ it("iotvideo.v20201215.ModifyProduct", async function () {
     }
 })
 
+it("iotvideo.v20201215.TransferCloudStorage", async function () {
+    try {
+       const data = await client.TransferCloudStorage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideo.v20201215.DescribeFirmware", async function () {
     try {
        const data = await client.DescribeFirmware({})
@@ -371,6 +381,16 @@ it("iotvideo.v20201215.DescribeFirmwareTask", async function () {
 it("iotvideo.v20201215.ImportModelDefinition", async function () {
     try {
        const data = await client.ImportModelDefinition({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotvideo.v20201215.ResetCloudStorage", async function () {
+    try {
+       const data = await client.ResetCloudStorage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

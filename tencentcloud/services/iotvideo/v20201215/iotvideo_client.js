@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyProduct", req, cb);
     }
     /**
+     * 转移云存服务
+     */
+    async TransferCloudStorage(req, cb) {
+        return this.request("TransferCloudStorage", req, cb);
+    }
+    /**
      * 本接口（DescribeFirmware）用于查询固件信息
      */
     async DescribeFirmware(req, cb) {
@@ -242,6 +248,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ImportModelDefinition(req, cb) {
         return this.request("ImportModelDefinition", req, cb);
+    }
+    /**
+     * 重置云存服务
+     */
+    async ResetCloudStorage(req, cb) {
+        return this.request("ResetCloudStorage", req, cb);
     }
     /**
      * 拉取云存事件列表

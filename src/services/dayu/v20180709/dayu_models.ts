@@ -3126,7 +3126,7 @@ export interface DescribeResourceListRequest {
   Name?: string
 
   /**
-   * IP搜索列表，可选，当不为空时表示安装IP搜索资源；
+   * IP搜索列表，可选，当不为空时表示按照IP搜索资源；
    */
   IpList?: Array<string>
 
@@ -4278,7 +4278,7 @@ export interface DescribeResourceListResponse {
   /**
    * 总记录数
    */
-  Total?: number
+  Total: number
 
   /**
       * 资源记录列表，返回Key值说明：
@@ -4292,7 +4292,6 @@ export interface DescribeResourceListResponse {
 "Key": "Type" 此字段弃用
 "Key": "ElasticLimit" 表示资源实例的弹性防护值
 "Key": "DDoSAI" 表示资源实例的DDoS AI防护开关
-"Key": "Bandwidth" 表示资源实例的保底防护值
 "Key": "OverloadCount" 表示资源实例受到超过弹性防护值的次数
 "Key": "Status" 表示资源实例的状态(idle:运行中, attacking:攻击中, blocking:封堵中, isolate:隔离中)
 "Key": "Lbid" 此字段弃用
@@ -4309,13 +4308,17 @@ export interface DescribeResourceListResponse {
 "Key": "DefendStatus" 表示资源实例的DDoS防护状态(防护开启或临时关闭)
 "Key": "UndefendExpire" 表示资源实例的DDoS防护临时关闭结束时间
 "Key": "Tgw" 表示资源实例是否是新资源
+"Key": "Bandwidth" 表示资源实例的保底防护值，只针对高防包和高防IP
+"Key": "DdosMax" 表示资源实例的保底防护值，只针对高防IP专业版
+"Key": "GFBandwidth" 表示资源实例的保底业务带宽，只针对高防IP
+"Key": "ServiceBandwidth" 表示资源实例的保底业务带宽，只针对高防IP专业版
       */
-  ServicePacks?: Array<KeyValueRecord>
+  ServicePacks: Array<KeyValueRecord>
 
   /**
    * 大禹子产品代号（bgp表示独享包；bgp-multip表示共享包；bgpip表示高防IP；net表示高防IP专业版）
    */
-  Business?: string
+  Business: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

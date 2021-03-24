@@ -510,7 +510,6 @@ file 时填充后缀名，如 jpg、txt
 directory 时填充路径，如 /xxx/test
 path 时填充绝对路径，如 /xxx/test.html
 index 时填充 /
-default 时填充 "no max-age"
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RulePaths: Array<string>
@@ -522,7 +521,6 @@ file：指定文件后缀生效
 directory：指定路径生效
 path：指定绝对路径生效
 index：首页
-default: 源站无max-age时生效
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RuleType: string
@@ -1847,13 +1845,13 @@ export interface DescribeDomainsConfigResponse {
   /**
    * 域名列表
    */
-  Domains?: Array<DetailDomain>
+  Domains: Array<DetailDomain>
 
   /**
       * 符合查询条件的域名总数
 用于分页查询
       */
-  TotalNumber?: number
+  TotalNumber: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2028,9 +2026,9 @@ off：关闭
   IgnoreCacheControl: string
 
   /**
-      * 忽略源站的 Set-Cookie 头部
-on：开启
-off：关闭
+      * 当源站返回Set-Cookie头部时，节点是否缓存该头部及body
+on：开启，不缓存该头部及body
+off：关闭，遵循用户自定义的节点缓存规则
 默认为关闭状态
 注意：此字段可能返回 null，表示取不到有效值。
       */

@@ -289,6 +289,15 @@ export interface DescribeBatchsResponse {
     RequestId?: string;
 }
 /**
+ * TransferCloudStorage返回参数结构体
+ */
+export interface TransferCloudStorageResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeForwardRule返回参数结构体
  */
 export interface DescribeForwardRuleResponse {
@@ -1127,6 +1136,15 @@ export interface DescribeCloudStorageThumbnailResponse {
  * RetryDeviceFirmwareTask返回参数结构体
  */
 export interface RetryDeviceFirmwareTaskResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ResetCloudStorage返回参数结构体
+ */
+export interface ResetCloudStorageResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2293,6 +2311,23 @@ export interface DeleteForwardRuleResponse {
     RequestId?: string;
 }
 /**
+ * TransferCloudStorage请求参数结构体
+ */
+export interface TransferCloudStorageRequest {
+    /**
+      * 产品ID
+      */
+    ProductId: string;
+    /**
+      * 已开通云存的设备名称
+      */
+    DeviceName: string;
+    /**
+      * 未开通云存的设备名称
+      */
+    ToDeviceName: string;
+}
+/**
  * DescribeFirmwareTaskStatistics请求参数结构体
  */
 export interface DescribeFirmwareTaskStatisticsRequest {
@@ -2359,6 +2394,19 @@ export interface ModifyModelDefinitionResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ResetCloudStorage请求参数结构体
+ */
+export interface ResetCloudStorageRequest {
+    /**
+      * 产品ID
+      */
+    ProductId: string;
+    /**
+      * 设备名称
+      */
+    DeviceName: string;
 }
 /**
  * DescribeFirmwareTask请求参数结构体

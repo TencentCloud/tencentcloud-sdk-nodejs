@@ -2518,12 +2518,12 @@ export interface DescribeAlarmHistoriesRequest {
   Order?: string
 
   /**
-   * 起始时间，默认一天前的时间戳
+   * 起始时间，默认一天前的时间戳。对应 FirstOccurTime，告警首次出现时间。
    */
   StartTime?: number
 
   /**
-   * 结束时间，默认当前时间戳
+   * 结束时间，默认当前时间戳。对应 FirstOccurTime，告警首次出现时间。
    */
   EndTime?: number
 
@@ -3214,7 +3214,7 @@ export interface DescribeAlarmPoliciesRequest {
   Enable?: Array<number>
 
   /**
-   * 是否未配置通知规则，1：未配置，0：配置
+   * 传 1 查询未配置通知规则的告警策略；不传或传其他数值，查询所有策略。
    */
   NotBindingNoticeRule?: number
 }
