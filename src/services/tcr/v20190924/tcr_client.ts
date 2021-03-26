@@ -36,6 +36,7 @@ import {
   DeleteInstanceTokenRequest,
   TaskDetail,
   ModifyRepositoryRequest,
+  RegistryCondition,
   DescribeInternalEndpointDnsStatusRequest,
   CreateApplicationTriggerPersonalRequest,
   AutoDelStrategyInfo,
@@ -58,7 +59,7 @@ import {
   DescribeExternalEndpointStatusRequest,
   DeleteRepositoryResponse,
   DeleteImagePersonalResponse,
-  RegistryCondition,
+  ManageReplicationRequest,
   DeleteWebhookTriggerResponse,
   DeleteImageLifecycleGlobalPersonalResponse,
   DuplicateImagePersonalResponse,
@@ -104,6 +105,7 @@ import {
   ModifyRepositoryInfoPersonalResponse,
   DescribeWebhookTriggerLogRequest,
   CreateUserPersonalRequest,
+  ReplicationRule,
   RepoInfoResp,
   ManageImageLifecycleGlobalPersonalResponse,
   DeleteSecurityPolicyResponse,
@@ -146,6 +148,7 @@ import {
   DescribeInstancesRequest,
   CreateInternalEndpointDnsRequest,
   Filter,
+  ManageReplicationResponse,
   DescribeReplicationInstanceCreateTasksRequest,
   ModifyWebhookTriggerResponse,
   RepoInfo,
@@ -198,6 +201,7 @@ import {
   CreateNamespacePersonalRequest,
   WebhookTrigger,
   CreateWebhookTriggerResponse,
+  ReplicationFilter,
   TcrRepositoryInfo,
   TcrInstanceToken,
   DeleteRepositoryRequest,
@@ -797,6 +801,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DuplicateImagePersonalResponse) => void
   ): Promise<DuplicateImagePersonalResponse> {
     return this.request("DuplicateImagePersonal", req, cb)
+  }
+
+  /**
+   * 管理实例同步
+   */
+  async ManageReplication(
+    req: ManageReplicationRequest,
+    cb?: (error: string, rep: ManageReplicationResponse) => void
+  ): Promise<ManageReplicationResponse> {
+    return this.request("ManageReplication", req, cb)
   }
 
   /**

@@ -598,6 +598,16 @@ it("tcr.v20190924.DuplicateImagePersonal", async function () {
     }
 })
 
+it("tcr.v20190924.ManageReplication", async function () {
+    try {
+       const data = await client.ManageReplication({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.ModifySecurityPolicy", async function () {
     try {
        const data = await client.ModifySecurityPolicy({})

@@ -362,6 +362,24 @@ export interface ModifyRepositoryRequest {
     Description: string;
 }
 /**
+ * 实例创建过程
+ */
+export interface RegistryCondition {
+    /**
+      * 实例创建过程类型
+      */
+    Type: string;
+    /**
+      * 实例创建过程状态
+      */
+    Status: string;
+    /**
+      * 转换到该过程的简明原因
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Reason: string;
+}
+/**
  * DescribeInternalEndpointDnsStatus请求参数结构体
  */
 export interface DescribeInternalEndpointDnsStatusRequest {
@@ -760,22 +778,25 @@ export interface DeleteImagePersonalResponse {
     RequestId?: string;
 }
 /**
- * 实例创建过程
+ * ManageReplication请求参数结构体
  */
-export interface RegistryCondition {
+export interface ManageReplicationRequest {
     /**
-      * 实例创建过程类型
+      * 复制源实例ID
       */
-    Type: string;
+    SourceRegistryId: string;
     /**
-      * 实例创建过程状态
+      * 复制目标实例ID
       */
-    Status: string;
+    DestinationRegistryId: string;
     /**
-      * 转换到该过程的简明原因
-注意：此字段可能返回 null，表示取不到有效值。
+      * 同步规则
       */
-    Reason: string;
+    Rule: ReplicationRule;
+    /**
+      * 规则描述
+      */
+    Description?: string;
 }
 /**
  * DeleteWebhookTrigger返回参数结构体
@@ -837,11 +858,11 @@ export interface DescribeImagesResponse {
     /**
       * 容器镜像信息列表
       */
-    ImageInfoList?: Array<TcrImageInfo>;
+    ImageInfoList: Array<TcrImageInfo>;
     /**
       * 容器镜像总数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1405,6 +1426,27 @@ export interface CreateUserPersonalRequest {
       * 用户密码
       */
     Password: string;
+}
+/**
+ * 同步规则
+ */
+export interface ReplicationRule {
+    /**
+      * 同步规则名称
+      */
+    Name: string;
+    /**
+      * 目标命名空间
+      */
+    DestNamespace: string;
+    /**
+      * 是否覆盖
+      */
+    Override: boolean;
+    /**
+      * 同步过滤条件
+      */
+    Filters: Array<ReplicationFilter>;
 }
 /**
  * 仓库信息的返回信息
@@ -2085,6 +2127,15 @@ export interface Filter {
       * 属性值, 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
       */
     Values: Array<string>;
+}
+/**
+ * ManageReplication返回参数结构体
+ */
+export interface ManageReplicationResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeReplicationInstanceCreateTasks请求参数结构体
@@ -2826,7 +2877,7 @@ export interface DescribeImagesRequest {
       */
     RepositoryName: string;
     /**
-      * 指定镜像版本(Tag)，不填默认返回仓库内全部容器镜像
+      * 指定镜像版本进行查找，当前为模糊搜索
       */
     ImageVersion?: string;
     /**
@@ -2990,6 +3041,19 @@ export interface CreateWebhookTriggerResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 同步规则过滤器
+ */
+export interface ReplicationFilter {
+    /**
+      * 类型（name、tag和resource）
+      */
+    Type: string;
+    /**
+      * 默认为空
+      */
+    Value?: string;
 }
 /**
  * Tcr镜像仓库信息

@@ -328,6 +328,16 @@ it("vod.v20180717.DescribeMediaProcessUsageData", async function () {
     }
 })
 
+it("vod.v20180717.DescribePrepaidProducts", async function () {
+    try {
+       const data = await client.DescribePrepaidProducts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.DescribeSnapshotByTimeOffsetTemplates", async function () {
     try {
        const data = await client.DescribeSnapshotByTimeOffsetTemplates({})

@@ -98,7 +98,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * DescribeIpStatus 用于查询域名所在加速平台的所有节点明细。
+   * DescribeIpStatus 用于查询域名所在加速平台的所有节点信息, 如果您的源站有白名单设置,可以通过本接口获取ECDN服务的节点IP进行加白, 本接口为内测接口,请联系腾讯云工程师开白。
    */
   async DescribeIpStatus(
     req: DescribeIpStatusRequest,

@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  TargetConfiguration,
   DeleteGameServerSessionQueueRequest,
   FleetAttributes,
   CreateAssetResponse,
@@ -29,6 +30,7 @@ import {
   DeleteGameServerSessionQueueResponse,
   DescribeFleetAttributesRequest,
   ResolveAliasRequest,
+  GetGameServerInstanceLogUrlResponse,
   StartGameServerSessionPlacementResponse,
   DescribeFleetStatisticDetailsRequest,
   DescribeAssetSystemsRequest,
@@ -40,6 +42,7 @@ import {
   ListFleetsResponse,
   DeleteAssetResponse,
   DescribeFleetUtilizationResponse,
+  DescribeFleetRelatedResourcesResponse,
   DescribeScalingPoliciesRequest,
   DeleteFleetRequest,
   TimerScalingPolicy,
@@ -47,7 +50,7 @@ import {
   DescribeFleetPortSettingsResponse,
   DescribeUserQuotasRequest,
   UpdateAssetRequest,
-  DesiredPlayerSession,
+  CcnInfo,
   UpdateFleetPortSettingsRequest,
   CcnInstanceSets,
   UpdateAliasRequest,
@@ -70,6 +73,7 @@ import {
   DescribeInstancesExtendResponse,
   Event,
   PutTimerScalingPolicyRequest,
+  RelatedCcnInfo,
   DescribeCcnInstancesResponse,
   AssetSupportSys,
   DeleteTimerScalingPolicyResponse,
@@ -101,7 +105,7 @@ import {
   DeleteTimerScalingPolicyRequest,
   JoinGameServerSessionResponse,
   AssetCredentials,
-  TargetConfiguration,
+  DescribeFleetRelatedResourcesRequest,
   DescribeGameServerSessionPlacementRequest,
   GameServerSessionQueueDestination,
   UpdateGameServerSessionQueueRequest,
@@ -164,6 +168,7 @@ import {
   DescribeGameServerSessionDetailsRequest,
   GameServerSession,
   PlayerLatencyPolicy,
+  FleetRelatedResource,
   UpdateRuntimeConfigurationRequest,
   GameProperty,
   CreateAssetWithImageResponse,
@@ -183,6 +188,7 @@ import {
   PutTimerScalingPolicyResponse,
   DescribeFleetEventsResponse,
   RoutingStrategy,
+  GetGameServerInstanceLogUrlRequest,
   DescribeFleetCapacityResponse,
   DescribeUserQuotaResponse,
   DescribeFleetEventsRequest,
@@ -202,6 +208,7 @@ import {
   InstanceAccess,
   UpdateFleetCapacityRequest,
   FleetStatisticDetail,
+  DesiredPlayerSession,
   JoinGameServerSessionBatchResponse,
   SetServerReservedRequest,
   InstanceExtend,
@@ -250,13 +257,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（StartFleetActions）用于启用服务器舰队自动扩缩容。
+   * 本接口（DescribeFleetRelatedResources）用于获取与游戏服务器舰队关联的资源信息，如别名、队列
    */
-  async StartFleetActions(
-    req: StartFleetActionsRequest,
-    cb?: (error: string, rep: StartFleetActionsResponse) => void
-  ): Promise<StartFleetActionsResponse> {
-    return this.request("StartFleetActions", req, cb)
+  async DescribeFleetRelatedResources(
+    req: DescribeFleetRelatedResourcesRequest,
+    cb?: (error: string, rep: DescribeFleetRelatedResourcesResponse) => void
+  ): Promise<DescribeFleetRelatedResourcesResponse> {
+    return this.request("DescribeFleetRelatedResources", req, cb)
   }
 
   /**
@@ -593,6 +600,16 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
   }
 
   /**
+   * 本接口（StartGameServerSessionPlacement）用于开始放置游戏服务器会话。
+   */
+  async StartGameServerSessionPlacement(
+    req: StartGameServerSessionPlacementRequest,
+    cb?: (error: string, rep: StartGameServerSessionPlacementResponse) => void
+  ): Promise<StartGameServerSessionPlacementResponse> {
+    return this.request("StartGameServerSessionPlacement", req, cb)
+  }
+
+  /**
    * 本接口（JoinGameServerSession）用于加入游戏服务器会话。
    */
   async JoinGameServerSession(
@@ -654,13 +671,13 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
   }
 
   /**
-   * 本接口（StartGameServerSessionPlacement）用于开始放置游戏服务器会话。
+   * 本接口（StartFleetActions）用于启用服务器舰队自动扩缩容。
    */
-  async StartGameServerSessionPlacement(
-    req: StartGameServerSessionPlacementRequest,
-    cb?: (error: string, rep: StartGameServerSessionPlacementResponse) => void
-  ): Promise<StartGameServerSessionPlacementResponse> {
-    return this.request("StartGameServerSessionPlacement", req, cb)
+  async StartFleetActions(
+    req: StartFleetActionsRequest,
+    cb?: (error: string, rep: StartFleetActionsResponse) => void
+  ): Promise<StartFleetActionsResponse> {
+    return this.request("StartFleetActions", req, cb)
   }
 
   /**
@@ -868,13 +885,13 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
   }
 
   /**
-   * 本接口（ResolveAlias）用于获取别名当前指向的fleetId。
+   * 本接口用于获取游戏服务器实例的日志URL。
    */
-  async ResolveAlias(
-    req: ResolveAliasRequest,
-    cb?: (error: string, rep: ResolveAliasResponse) => void
-  ): Promise<ResolveAliasResponse> {
-    return this.request("ResolveAlias", req, cb)
+  async GetGameServerInstanceLogUrl(
+    req: GetGameServerInstanceLogUrlRequest,
+    cb?: (error: string, rep: GetGameServerInstanceLogUrlResponse) => void
+  ): Promise<GetGameServerInstanceLogUrlResponse> {
+    return this.request("GetGameServerInstanceLogUrl", req, cb)
   }
 
   /**
@@ -958,6 +975,16 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
   }
 
   /**
+   * 本接口（UpdateFleetPortSettings）用于更新服务器舰队安全组。
+   */
+  async UpdateFleetPortSettings(
+    req: UpdateFleetPortSettingsRequest,
+    cb?: (error: string, rep: UpdateFleetPortSettingsResponse) => void
+  ): Promise<UpdateFleetPortSettingsResponse> {
+    return this.request("UpdateFleetPortSettings", req, cb)
+  }
+
+  /**
    * 本接口（DescribeUserQuotas）用于获取用户配额
    */
   async DescribeUserQuotas(
@@ -1028,13 +1055,13 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
   }
 
   /**
-   * 本接口（UpdateFleetPortSettings）用于更新服务器舰队安全组。
+   * 本接口（ResolveAlias）用于获取别名当前指向的fleetId。
    */
-  async UpdateFleetPortSettings(
-    req: UpdateFleetPortSettingsRequest,
-    cb?: (error: string, rep: UpdateFleetPortSettingsResponse) => void
-  ): Promise<UpdateFleetPortSettingsResponse> {
-    return this.request("UpdateFleetPortSettings", req, cb)
+  async ResolveAlias(
+    req: ResolveAliasRequest,
+    cb?: (error: string, rep: ResolveAliasResponse) => void
+  ): Promise<ResolveAliasResponse> {
+    return this.request("ResolveAlias", req, cb)
   }
 
   /**

@@ -376,6 +376,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DuplicateImagePersonal", req, cb);
     }
     /**
+     * 管理实例同步
+     */
+    async ManageReplication(req, cb) {
+        return this.request("ManageReplication", req, cb);
+    }
+    /**
      * 更新实例公网访问白名单
      */
     async ModifySecurityPolicy(req, cb) {

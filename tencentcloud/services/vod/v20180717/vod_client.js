@@ -261,6 +261,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMediaProcessUsageData", req, cb);
     }
     /**
+     * 该接口可以查询用户已经购买的预付费商品的信息，包括：
+    1. 商品的类型、生效和失效日期。
+    2. 商品中每种资源的额度和剩余额度。
+     */
+    async DescribePrepaidProducts(req, cb) {
+        return this.request("DescribePrepaidProducts", req, cb);
+    }
+    /**
      * 查询指定时间点截图模板，支持根据条件，分页查询。
      */
     async DescribeSnapshotByTimeOffsetTemplates(req, cb) {

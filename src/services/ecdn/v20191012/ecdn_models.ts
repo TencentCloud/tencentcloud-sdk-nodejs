@@ -792,8 +792,10 @@ export interface Tag {
  */
 export interface WebSocket {
   /**
-   * WebSocket配置开关，on或off。
-   */
+      * WebSocket 超时配置开关, 开关为off时，平台仍支持WebSocket连接，此时超时时间默认为15秒，若需要调整超时时间，将开关置为on.
+
+* WebSocket 为内测功能,如需使用,请联系腾讯云工程师开白.
+      */
   Switch: string
 
   /**
@@ -1110,12 +1112,12 @@ export interface DescribeIpStatusResponse {
   /**
    * 节点列表
    */
-  Ips?: Array<IpStatus>
+  Ips: Array<IpStatus>
 
   /**
    * 节点总个数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

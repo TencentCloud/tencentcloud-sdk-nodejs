@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { GetDetectInfoEnhancedRequest, GetFaceIdTokenRequest, LivenessRequest, CheckBankCardInformationRequest, MobileNetworkTimeVerificationResponse, GetLiveCodeRequest, IdCardVerificationRequest, BankCardVerificationRequest, CheckBankCardInformationResponse, CheckIdCardInformationResponse, GetDetectInfoEnhancedResponse, PhoneVerificationRequest, GetRealNameAuthResultRequest, DetectAuthResponse, PhoneVerificationResponse, IdCardOCRVerificationRequest, CheckPhoneAndNameResponse, BankCard4EVerificationResponse, MobileStatusRequest, GetRealNameAuthTokenRequest, BankCard2EVerificationRequest, LivenessRecognitionRequest, GetFaceIdTokenResponse, IdCardOCRVerificationResponse, MobileStatusResponse, GetRealNameAuthTokenResponse, LivenessResponse, CheckIdCardInformationRequest, DetectAuthRequest, MinorsVerificationResponse, BankCardVerificationResponse, ImageRecognitionRequest, BankCard4EVerificationRequest, MobileNetworkTimeVerificationRequest, GetFaceIdResultRequest, GetActionSequenceResponse, LivenessRecognitionResponse, MinorsVerificationRequest, ImageRecognitionResponse, GetActionSequenceRequest, GetDetectInfoResponse, LivenessCompareResponse, GetLiveCodeResponse, GetDetectInfoRequest, BankCard2EVerificationResponse, IdCardVerificationResponse, CheckPhoneAndNameRequest, LivenessCompareRequest, GetFaceIdResultResponse, GetRealNameAuthResultResponse } from "./faceid_models";
+import { GetDetectInfoEnhancedRequest, GetFaceIdTokenRequest, LivenessRequest, CheckBankCardInformationRequest, MobileNetworkTimeVerificationResponse, GetLiveCodeRequest, GetEidResultResponse, IdCardVerificationRequest, BankCardVerificationRequest, CheckBankCardInformationResponse, CheckIdCardInformationResponse, GetDetectInfoEnhancedResponse, PhoneVerificationRequest, GetEidResultRequest, DetectAuthResponse, PhoneVerificationResponse, GetEidTokenRequest, IdCardOCRVerificationRequest, CheckPhoneAndNameResponse, BankCard4EVerificationResponse, MobileStatusRequest, GetRealNameAuthTokenRequest, BankCard2EVerificationRequest, LivenessRecognitionRequest, GetFaceIdTokenResponse, MobileStatusResponse, IdCardOCRVerificationResponse, GetRealNameAuthTokenResponse, LivenessResponse, CheckIdCardInformationRequest, DetectAuthRequest, MinorsVerificationResponse, BankCardVerificationResponse, GetRealNameAuthResultRequest, ImageRecognitionRequest, BankCard4EVerificationRequest, MobileNetworkTimeVerificationRequest, GetFaceIdResultRequest, GetActionSequenceResponse, LivenessRecognitionResponse, MinorsVerificationRequest, ImageRecognitionResponse, GetActionSequenceRequest, GetDetectInfoResponse, LivenessCompareResponse, GetLiveCodeResponse, GetDetectInfoRequest, BankCard2EVerificationResponse, IdCardVerificationResponse, CheckPhoneAndNameRequest, GetEidTokenResponse, LivenessCompareRequest, GetFaceIdResultResponse, GetRealNameAuthResultResponse } from "./faceid_models";
 /**
  * faceid client
  * @class
@@ -23,6 +23,10 @@ export declare class Client extends AbstractClient {
      * 本接口用于输入银行卡号、姓名、开户证件号、开户手机号，校验信息的真实性和一致性。
      */
     BankCard4EVerification(req: BankCard4EVerificationRequest, cb?: (error: string, rep: BankCard4EVerificationResponse) => void): Promise<BankCard4EVerificationResponse>;
+    /**
+     * 每次调用人脸核身SaaS化服务前，需先调用本接口获取BizToken，用来串联核身流程，在验证完成后，用于获取验证结果信息。
+     */
+    DetectAuth(req: DetectAuthRequest, cb?: (error: string, rep: DetectAuthResponse) => void): Promise<DetectAuthResponse>;
     /**
      * 每次调用人脸核身SDK服务前，需先调用本接口获取SDKToken，用来串联核身流程，在验证完成后，用于获取验证结果信息，该token仅能核身一次。
      */
@@ -58,6 +62,10 @@ export declare class Client extends AbstractClient {
      */
     ImageRecognition(req: ImageRecognitionRequest, cb?: (error: string, rep: ImageRecognitionResponse) => void): Promise<ImageRecognitionResponse>;
     /**
+     * 每次调用人脸核身小程序服务前，需先调用本接口获取EidToken，用来串联核身流程，在验证完成后，用于获取验证结果信息。
+     */
+    GetEidToken(req: GetEidTokenRequest, cb?: (error: string, rep: GetEidTokenResponse) => void): Promise<GetEidTokenResponse>;
+    /**
      * 本接口用于校验手机号、姓名和身份证号的真实性和一致性。支持的手机号段详情请查阅<a href="https://cloud.tencent.com/document/product/1007/46063">运营商类</a>文档。
      */
     PhoneVerification(req: PhoneVerificationRequest, cb?: (error: string, rep: PhoneVerificationResponse) => void): Promise<PhoneVerificationResponse>;
@@ -86,9 +94,9 @@ export declare class Client extends AbstractClient {
      */
     MobileNetworkTimeVerification(req: MobileNetworkTimeVerificationRequest, cb?: (error: string, rep: MobileNetworkTimeVerificationResponse) => void): Promise<MobileNetworkTimeVerificationResponse>;
     /**
-     * 每次调用人脸核身SaaS化服务前，需先调用本接口获取BizToken，用来串联核身流程，在验证完成后，用于获取验证结果信息。
+     * 完成验证后，用EidToken调用本接口获取结果信息，EidToken生成后三天内（3\*24\*3,600秒）可多次拉取。
      */
-    DetectAuth(req: DetectAuthRequest, cb?: (error: string, rep: DetectAuthResponse) => void): Promise<DetectAuthResponse>;
+    GetEidResult(req: GetEidResultRequest, cb?: (error: string, rep: GetEidResultResponse) => void): Promise<GetEidResultResponse>;
     /**
      * 完成验证后，用BizToken调用本接口获取结果信息，BizToken生成后三天内（3\*24\*3,600秒）可多次拉取。
      */

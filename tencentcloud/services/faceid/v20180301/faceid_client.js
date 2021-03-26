@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BankCard4EVerification", req, cb);
     }
     /**
+     * 每次调用人脸核身SaaS化服务前，需先调用本接口获取BizToken，用来串联核身流程，在验证完成后，用于获取验证结果信息。
+     */
+    async DetectAuth(req, cb) {
+        return this.request("DetectAuth", req, cb);
+    }
+    /**
      * 每次调用人脸核身SDK服务前，需先调用本接口获取SDKToken，用来串联核身流程，在验证完成后，用于获取验证结果信息，该token仅能核身一次。
      */
     async GetFaceIdToken(req, cb) {
@@ -102,6 +108,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ImageRecognition", req, cb);
     }
     /**
+     * 每次调用人脸核身小程序服务前，需先调用本接口获取EidToken，用来串联核身流程，在验证完成后，用于获取验证结果信息。
+     */
+    async GetEidToken(req, cb) {
+        return this.request("GetEidToken", req, cb);
+    }
+    /**
      * 本接口用于校验手机号、姓名和身份证号的真实性和一致性。支持的手机号段详情请查阅<a href="https://cloud.tencent.com/document/product/1007/46063">运营商类</a>文档。
      */
     async PhoneVerification(req, cb) {
@@ -144,10 +156,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("MobileNetworkTimeVerification", req, cb);
     }
     /**
-     * 每次调用人脸核身SaaS化服务前，需先调用本接口获取BizToken，用来串联核身流程，在验证完成后，用于获取验证结果信息。
+     * 完成验证后，用EidToken调用本接口获取结果信息，EidToken生成后三天内（3\*24\*3,600秒）可多次拉取。
      */
-    async DetectAuth(req, cb) {
-        return this.request("DetectAuth", req, cb);
+    async GetEidResult(req, cb) {
+        return this.request("GetEidResult", req, cb);
     }
     /**
      * 完成验证后，用BizToken调用本接口获取结果信息，BizToken生成后三天内（3\*24\*3,600秒）可多次拉取。

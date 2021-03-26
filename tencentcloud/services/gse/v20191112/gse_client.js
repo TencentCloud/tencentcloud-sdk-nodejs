@@ -46,10 +46,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateFleetCapacity", req, cb);
     }
     /**
-     * 本接口（StartFleetActions）用于启用服务器舰队自动扩缩容。
+     * 本接口（DescribeFleetRelatedResources）用于获取与游戏服务器舰队关联的资源信息，如别名、队列
      */
-    async StartFleetActions(req, cb) {
-        return this.request("StartFleetActions", req, cb);
+    async DescribeFleetRelatedResources(req, cb) {
+        return this.request("DescribeFleetRelatedResources", req, cb);
     }
     /**
      * 本接口（DescribeRuntimeConfiguration）用于获取服务器舰队运行配置。
@@ -297,6 +297,12 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
         return this.request("DescribeGameServerSessions", req, cb);
     }
     /**
+     * 本接口（StartGameServerSessionPlacement）用于开始放置游戏服务器会话。
+     */
+    async StartGameServerSessionPlacement(req, cb) {
+        return this.request("StartGameServerSessionPlacement", req, cb);
+    }
+    /**
      * 本接口（JoinGameServerSession）用于加入游戏服务器会话。
      */
     async JoinGameServerSession(req, cb) {
@@ -334,10 +340,10 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
         return this.request("UpdateAsset", req, cb);
     }
     /**
-     * 本接口（StartGameServerSessionPlacement）用于开始放置游戏服务器会话。
+     * 本接口（StartFleetActions）用于启用服务器舰队自动扩缩容。
      */
-    async StartGameServerSessionPlacement(req, cb) {
-        return this.request("StartGameServerSessionPlacement", req, cb);
+    async StartFleetActions(req, cb) {
+        return this.request("StartFleetActions", req, cb);
     }
     /**
      * 本接口（DescribeFleetPortSettings）用于获取服务器舰队安全组信息。
@@ -464,10 +470,10 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
         return this.request("GetUploadFederationToken", req, cb);
     }
     /**
-     * 本接口（ResolveAlias）用于获取别名当前指向的fleetId。
+     * 本接口用于获取游戏服务器实例的日志URL。
      */
-    async ResolveAlias(req, cb) {
-        return this.request("ResolveAlias", req, cb);
+    async GetGameServerInstanceLogUrl(req, cb) {
+        return this.request("GetGameServerInstanceLogUrl", req, cb);
     }
     /**
      * 本接口（SearchGameServerSessions）用于搜索游戏服务器会话列表。
@@ -518,6 +524,12 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
         return this.request("ListAliases", req, cb);
     }
     /**
+     * 本接口（UpdateFleetPortSettings）用于更新服务器舰队安全组。
+     */
+    async UpdateFleetPortSettings(req, cb) {
+        return this.request("UpdateFleetPortSettings", req, cb);
+    }
+    /**
      * 本接口（DescribeUserQuotas）用于获取用户配额
      */
     async DescribeUserQuotas(req, cb) {
@@ -560,10 +572,10 @@ if [AvailableGameServerSessions] >= [400] for [5] minutes, then scaling by [curr
         return this.request("DescribeInstances", req, cb);
     }
     /**
-     * 本接口（UpdateFleetPortSettings）用于更新服务器舰队安全组。
+     * 本接口（ResolveAlias）用于获取别名当前指向的fleetId。
      */
-    async UpdateFleetPortSettings(req, cb) {
-        return this.request("UpdateFleetPortSettings", req, cb);
+    async ResolveAlias(req, cb) {
+        return this.request("ResolveAlias", req, cb);
     }
     /**
      * 本接口（PutTimerScalingPolicy）用于给fleet创建或更新定时器。

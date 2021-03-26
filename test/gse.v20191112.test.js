@@ -48,9 +48,9 @@ it("gse.v20191112.UpdateFleetCapacity", async function () {
     }
 })
 
-it("gse.v20191112.StartFleetActions", async function () {
+it("gse.v20191112.DescribeFleetRelatedResources", async function () {
     try {
-       const data = await client.StartFleetActions({})
+       const data = await client.DescribeFleetRelatedResources({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -278,6 +278,16 @@ it("gse.v20191112.DescribeGameServerSessions", async function () {
     }
 })
 
+it("gse.v20191112.StartGameServerSessionPlacement", async function () {
+    try {
+       const data = await client.StartGameServerSessionPlacement({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gse.v20191112.JoinGameServerSession", async function () {
     try {
        const data = await client.JoinGameServerSession({})
@@ -338,9 +348,9 @@ it("gse.v20191112.UpdateAsset", async function () {
     }
 })
 
-it("gse.v20191112.StartGameServerSessionPlacement", async function () {
+it("gse.v20191112.StartFleetActions", async function () {
     try {
-       const data = await client.StartGameServerSessionPlacement({})
+       const data = await client.StartFleetActions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -548,9 +558,9 @@ it("gse.v20191112.GetUploadFederationToken", async function () {
     }
 })
 
-it("gse.v20191112.ResolveAlias", async function () {
+it("gse.v20191112.GetGameServerInstanceLogUrl", async function () {
     try {
-       const data = await client.ResolveAlias({})
+       const data = await client.GetGameServerInstanceLogUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -638,6 +648,16 @@ it("gse.v20191112.ListAliases", async function () {
     }
 })
 
+it("gse.v20191112.UpdateFleetPortSettings", async function () {
+    try {
+       const data = await client.UpdateFleetPortSettings({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gse.v20191112.DescribeUserQuotas", async function () {
     try {
        const data = await client.DescribeUserQuotas({})
@@ -708,9 +728,9 @@ it("gse.v20191112.DescribeInstances", async function () {
     }
 })
 
-it("gse.v20191112.UpdateFleetPortSettings", async function () {
+it("gse.v20191112.ResolveAlias", async function () {
     try {
-       const data = await client.UpdateFleetPortSettings({})
+       const data = await client.ResolveAlias({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

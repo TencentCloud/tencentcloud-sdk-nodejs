@@ -2239,17 +2239,17 @@ export interface LicensePlateOCRResponse {
   /**
    * 识别出的车牌号码。
    */
-  Number?: string
+  Number: string
 
   /**
    * 置信度，0 - 100 之间。
    */
-  Confidence?: number
+  Confidence: number
 
   /**
    * 文本行在原图片中的像素坐标框。
    */
-  Rect?: Rect
+  Rect: Rect
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2782,7 +2782,7 @@ export interface VehicleRegCertOCRRequest {
   /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
   ImageBase64?: string
@@ -2790,7 +2790,7 @@ export interface VehicleRegCertOCRRequest {
   /**
       * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
@@ -2930,7 +2930,7 @@ export interface LicensePlateOCRRequest {
   /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
   ImageBase64?: string
@@ -2938,7 +2938,7 @@ export interface LicensePlateOCRRequest {
   /**
       * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
@@ -3907,7 +3907,7 @@ export interface VinOCRResponse {
   /**
    * 检测到的车辆 VIN 码。
    */
-  Vin?: string
+  Vin: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4360,7 +4360,7 @@ export interface VehicleRegCertOCRResponse {
   /**
    * 机动车登记证书识别结果，具体内容请点击左侧链接。
    */
-  VehicleRegCertInfos?: Array<VehicleRegCertInfo>
+  VehicleRegCertInfos: Array<VehicleRegCertInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5312,7 +5312,7 @@ export interface VinOCRRequest {
   /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
   ImageBase64?: string
@@ -5320,7 +5320,7 @@ export interface VinOCRRequest {
   /**
       * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */

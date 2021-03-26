@@ -630,7 +630,7 @@ export interface RebootInstancesRequest {
       */
     InstanceIds: Array<string>;
     /**
-      * 是否在正常重启失败后选择强制重启实例。取值范围：<br><li>TRUE：表示在正常重启失败后进行强制重启<br><li>FALSE：表示在正常重启失败后不进行强制重启<br><br>默认取值：FALSE。
+      * 本参数已弃用，推荐使用StopType，不可以与参数StopType同时使用。表示是否在正常重启失败后选择强制重启实例。取值范围：<br><li>TRUE：表示在正常重启失败后进行强制重启<br><li>FALSE：表示在正常重启失败后不进行强制重启<br><br>默认取值：FALSE。
       */
     ForceReboot?: boolean;
     /**
@@ -772,11 +772,11 @@ export interface DescribeKeyPairsResponse {
     /**
       * 符合条件的密钥对数量。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 密钥对详细信息列表。
       */
-    KeyPairSet?: Array<KeyPair>;
+    KeyPairSet: Array<KeyPair>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -825,11 +825,11 @@ export interface DescribeImagesResponse {
     /**
       * 一个关于镜像详细信息的结构体，主要包括镜像的主要状态与属性。
       */
-    ImageSet?: Array<Image>;
+    ImageSet: Array<Image>;
     /**
       * 符合要求的镜像数量。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

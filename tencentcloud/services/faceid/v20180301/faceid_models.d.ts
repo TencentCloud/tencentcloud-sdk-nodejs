@@ -157,6 +157,35 @@ export interface MobileNetworkTimeVerificationResponse {
  */
 export declare type GetLiveCodeRequest = null;
 /**
+ * GetEidResult返回参数结构体
+ */
+export interface GetEidResultResponse {
+    /**
+      * 文本类信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Text: DetectInfoText;
+    /**
+      * 身份证照片信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IdCardData: DetectInfoIdCardData;
+    /**
+      * 最佳帧信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BestFrame: DetectInfoBestFrame;
+    /**
+      * Eid信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EidInfo: EidInfo;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * IdCardVerification请求参数结构体
  */
 export interface IdCardVerificationRequest {
@@ -366,13 +395,23 @@ export interface PhoneVerificationRequest {
     Iv?: string;
 }
 /**
- * GetRealNameAuthResult请求参数结构体
+ * GetEidResult请求参数结构体
  */
-export interface GetRealNameAuthResultRequest {
+export interface GetEidResultRequest {
     /**
-      * 实名认证凭证
+      * 人脸核身流程的标识，调用DetectAuth接口时生成。
       */
-    AuthToken: string;
+    EidToken: string;
+    /**
+      * 指定拉取的结果信息，取值（0：全部；1：文本类；2：身份证信息；3：最佳截图信息）。
+如 13表示拉取文本类、最佳截图信息。
+默认值：0
+      */
+    InfoType?: string;
+    /**
+      * 从活体视频中截取一定张数的最佳帧。默认为0，最大为3，超出3的最多只给3张。（InfoType需要包含3）
+      */
+    BestFramesCount?: number;
 }
 /**
  * DetectAuth返回参数结构体
@@ -419,6 +458,32 @@ export interface PhoneVerificationResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * GetEidToken请求参数结构体
+ */
+export interface GetEidTokenRequest {
+    /**
+      * EID商户id
+      */
+    MerchantId: string;
+    /**
+      * 身份标识（未使用OCR服务时，必须传入）。
+规则：a-zA-Z0-9组合。最长长度32位。
+      */
+    IdCard?: string;
+    /**
+      * 姓名。（未使用OCR服务时，必须传入）最长长度32位。中文请使用UTF-8编码。
+      */
+    Name?: string;
+    /**
+      * 透传字段，在获取验证结果时返回。
+      */
+    Extra?: string;
+    /**
+      * 小程序模式配置，包括如何传入姓名身份证的配置。
+      */
+    Config?: GetEidTokenConfig;
 }
 /**
  * IdCardOCRVerification请求参数结构体
@@ -590,6 +655,19 @@ LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模�
     Optional?: string;
 }
 /**
+ * Eid出参
+ */
+export interface EidInfo {
+    /**
+      * 商户方 appeIDcode 的数字证书
+      */
+    EidCode: string;
+    /**
+      * eID 中心针对商户方EidCode的电子签名
+      */
+    EidSign: string;
+}
+/**
  * GetFaceIdToken返回参数结构体
  */
 export interface GetFaceIdTokenResponse {
@@ -597,6 +675,54 @@ export interface GetFaceIdTokenResponse {
       * 有效期 10分钟。只能完成1次核身。
       */
     FaceIdToken?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 获取token时的的配置
+ */
+export interface GetEidTokenConfig {
+    /**
+      * 姓名身份证输入方式。
+1：传身份证正反面OCR
+2：传身份证正面OCR
+3：用户手动输入
+4：客户后台传入
+默认1
+注：使用OCR时仅支持用户修改结果中的姓名
+      */
+    InputType?: string;
+}
+/**
+ * MobileStatus返回参数结构体
+ */
+export interface MobileStatusResponse {
+    /**
+      * 认证结果码，收费情况如下。
+收费结果码：
+0：成功
+不收费结果码：
+-1：未查询到结果
+-2：手机号格式不正确
+-3：验证中心服务繁忙
+      */
+    Result: string;
+    /**
+      * 业务结果描述。
+      */
+    Description: string;
+    /**
+      * 状态码：
+0：正常
+1：停机
+2：销号
+3：空号
+4：不在网
+99：未知状态
+      */
+    StatusCode: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -650,39 +776,6 @@ export interface IdCardOCRVerificationResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Address?: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * MobileStatus返回参数结构体
- */
-export interface MobileStatusResponse {
-    /**
-      * 认证结果码，收费情况如下。
-收费结果码：
-0：成功
-不收费结果码：
--1：未查询到结果
--2：手机号格式不正确
--3：验证中心服务繁忙
-      */
-    Result: string;
-    /**
-      * 业务结果描述。
-      */
-    Description: string;
-    /**
-      * 状态码：
-0：正常
-1：停机
-2：销号
-3：空号
-4：不在网
-99：未知状态
-      */
-    StatusCode: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -999,6 +1092,15 @@ export interface BankCardVerificationResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * GetRealNameAuthResult请求参数结构体
+ */
+export interface GetRealNameAuthResultRequest {
+    /**
+      * 实名认证凭证
+      */
+    AuthToken: string;
 }
 /**
  * ImageRecognition请求参数结构体
@@ -1413,6 +1515,20 @@ export interface CheckPhoneAndNameRequest {
       * 姓名
       */
     Name: string;
+}
+/**
+ * GetEidToken返回参数结构体
+ */
+export interface GetEidTokenResponse {
+    /**
+      * 一次核身流程的标识，有效时间为7,200秒；
+完成核身后，可用该标识获取验证结果信息。
+      */
+    EidToken: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * LivenessCompare请求参数结构体

@@ -376,7 +376,7 @@ class Client extends abstract_client_1.AbstractClient {
         <tr>
           <td>自动旋转纠正</td>
           <td>支持旋转识别，返回角度信息</td>
-          <td>支持旋转识别，不支持角度返回</td>
+          <td>支持旋转识别，返回角度信息</td>
           <td>支持旋转识别，返回角度信息</td>
         </tr>
       </tbody>
@@ -554,7 +554,7 @@ class Client extends abstract_client_1.AbstractClient {
           <td>自动旋转纠正</td>
           <td>支持旋转识别，返回角度信息</td>
           <td>支持旋转识别，返回角度信息</td>
-          <td>支持旋转识别，不支持角度返回</td>
+          <td>支持旋转识别，返回角度信息</td>
           
          
         </tr>

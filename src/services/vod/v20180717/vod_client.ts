@@ -46,6 +46,7 @@ import {
   MediaSnapshotByTimeOffsetItem,
   ModifySampleSnapshotTemplateRequest,
   AiReviewPoliticalOcrTaskInput,
+  DescribePrepaidProductsRequest,
   MediaInputInfo,
   CreateImageSpriteTask2017,
   TempCertificate,
@@ -134,6 +135,7 @@ import {
   PornAsrReviewTemplateInfoForUpdate,
   MediaAnimatedGraphicsInfo,
   DescribeSnapshotByTimeOffsetTemplatesRequest,
+  ProductInstance,
   CdnLogInfo,
   AiRecognitionTaskAsrFullTextResultInput,
   MediaMiniProgramReviewInfoItem,
@@ -141,6 +143,7 @@ import {
   OcrFullTextConfigureInfoForUpdate,
   ProcessMediaByProcedureRequest,
   MediaImageSpriteInfo,
+  ProductInstanceRecource,
   MediaProcessTaskAnimatedGraphicResult,
   ProcessMediaResponse,
   CreateWordSamplesResponse,
@@ -359,6 +362,7 @@ import {
   ClipFileInfo2017,
   StatDataItem,
   MediaSourceData,
+  DescribePrepaidProductsResponse,
   ProhibitedAsrReviewTemplateInfo,
   PushUrlCacheRequest,
   CreateAIAnalysisTemplateResponse,
@@ -900,6 +904,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeMediaProcessUsageDataResponse) => void
   ): Promise<DescribeMediaProcessUsageDataResponse> {
     return this.request("DescribeMediaProcessUsageData", req, cb)
+  }
+
+  /**
+     * 该接口可以查询用户已经购买的预付费商品的信息，包括：
+    1. 商品的类型、生效和失效日期。
+    2. 商品中每种资源的额度和剩余额度。
+     */
+  async DescribePrepaidProducts(
+    req?: DescribePrepaidProductsRequest,
+    cb?: (error: string, rep: DescribePrepaidProductsResponse) => void
+  ): Promise<DescribePrepaidProductsResponse> {
+    return this.request("DescribePrepaidProducts", req, cb)
   }
 
   /**

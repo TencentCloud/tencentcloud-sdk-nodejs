@@ -58,6 +58,16 @@ it("faceid.v20180301.BankCard4EVerification", async function () {
     }
 })
 
+it("faceid.v20180301.DetectAuth", async function () {
+    try {
+       const data = await client.DetectAuth({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("faceid.v20180301.GetFaceIdToken", async function () {
     try {
        const data = await client.GetFaceIdToken({})
@@ -138,6 +148,16 @@ it("faceid.v20180301.ImageRecognition", async function () {
     }
 })
 
+it("faceid.v20180301.GetEidToken", async function () {
+    try {
+       const data = await client.GetEidToken({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("faceid.v20180301.PhoneVerification", async function () {
     try {
        const data = await client.PhoneVerification({})
@@ -208,9 +228,9 @@ it("faceid.v20180301.MobileNetworkTimeVerification", async function () {
     }
 })
 
-it("faceid.v20180301.DetectAuth", async function () {
+it("faceid.v20180301.GetEidResult", async function () {
     try {
-       const data = await client.DetectAuth({})
+       const data = await client.GetEidResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

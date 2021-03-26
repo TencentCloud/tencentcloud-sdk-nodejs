@@ -443,7 +443,7 @@ export interface StopAutoScalingInstancesResponse {
     /**
       * 伸缩活动ID
       */
-    ActivityId?: string;
+    ActivityId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -573,7 +573,7 @@ export interface StartAutoScalingInstancesResponse {
     /**
       * 伸缩活动ID
       */
-    ActivityId?: string;
+    ActivityId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -733,7 +733,7 @@ export interface RemoveInstancesResponse {
     /**
       * 伸缩活动ID
       */
-    ActivityId?: string;
+    ActivityId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -781,7 +781,7 @@ export interface DetachInstancesResponse {
     /**
       * 伸缩活动ID
       */
-    ActivityId?: string;
+    ActivityId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1007,7 +1007,7 @@ export interface AttachInstancesResponse {
     /**
       * 伸缩活动ID
       */
-    ActivityId?: string;
+    ActivityId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1140,7 +1140,7 @@ export interface ModifyLoadBalancersResponse {
     /**
       * 伸缩活动ID
       */
-    ActivityId?: string;
+    ActivityId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

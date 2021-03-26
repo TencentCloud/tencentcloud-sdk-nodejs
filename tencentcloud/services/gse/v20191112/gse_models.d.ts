@@ -1,4 +1,14 @@
 /**
+ * 基于规则的动态扩缩容配置项
+ */
+export interface TargetConfiguration {
+    /**
+      * 预留存率
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TargetValue?: number;
+}
+/**
  * DeleteGameServerSessionQueue请求参数结构体
  */
 export interface DeleteGameServerSessionQueueRequest {
@@ -103,6 +113,11 @@ export interface FleetAttributes {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SystemDiskInfo: DiskInfo;
+    /**
+      * 云联网相关信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RelatedCcnInfos: Array<RelatedCcnInfo>;
 }
 /**
  * CreateAsset返回参数结构体
@@ -280,6 +295,28 @@ export interface ResolveAliasRequest {
     AliasId: string;
 }
 /**
+ * GetGameServerInstanceLogUrl返回参数结构体
+ */
+export interface GetGameServerInstanceLogUrlResponse {
+    /**
+      * 日志下载URL的数组，最小长度不小于1个ASCII字符，最大长度不超过1024个ASCII字符
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PresignedUrls: Array<string>;
+    /**
+      * 总条数
+      */
+    Total: number;
+    /**
+      * 是否还有没拉取完的
+      */
+    HasNext: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * StartGameServerSessionPlacement返回参数结构体
  */
 export interface StartGameServerSessionPlacementResponse {
@@ -407,6 +444,10 @@ export interface CreateFleetRequest {
       * 数据盘，储存类型为 SSD 云硬盘（CLOUD_SSD）时，100-32000GB；储存类型为高性能云硬盘（CLOUD_PREMIUM）时，10-32000GB；容量以10为单位
       */
     DataDiskInfo?: Array<DiskInfo>;
+    /**
+      * 云联网信息，包含对应的账号信息及所属id
+      */
+    CcnInfos?: Array<CcnInfo>;
 }
 /**
  * StartFleetActions请求参数结构体
@@ -494,6 +535,20 @@ export interface DescribeFleetUtilizationResponse {
       * 总数，最小值0
       */
     TotalCount?: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeFleetRelatedResources返回参数结构体
+ */
+export interface DescribeFleetRelatedResourcesResponse {
+    /**
+      * 与服务器舰队关联的资源信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Resources: Array<FleetRelatedResource>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -604,17 +659,17 @@ export interface UpdateAssetRequest {
     AssetVersion: string;
 }
 /**
- * 玩家游戏会话信息
+ * 云联网相关信息
  */
-export interface DesiredPlayerSession {
+export interface CcnInfo {
     /**
-      * 与玩家会话关联的唯一玩家标识
+      * 云联网所属账号
       */
-    PlayerId: string;
+    AccountId: string;
     /**
-      * 开发人员定义的玩家数据
+      * 云联网id
       */
-    PlayerData: string;
+    CcnId: string;
 }
 /**
  * UpdateFleetPortSettings请求参数结构体
@@ -1112,6 +1167,23 @@ export interface PutTimerScalingPolicyRequest {
       * 定时器策略消息
       */
     TimerScalingPolicy?: TimerScalingPolicy;
+}
+/**
+ * 云联网相关信息描述
+ */
+export interface RelatedCcnInfo {
+    /**
+      * 云联网所属账号
+      */
+    AccountId: string;
+    /**
+      * 云联网 ID
+      */
+    CcnId: string;
+    /**
+      * 关联云联网状态
+      */
+    AttachType: string;
 }
 /**
  * DescribeCcnInstances返回参数结构体
@@ -1714,14 +1786,13 @@ export interface AssetCredentials {
     Token: string;
 }
 /**
- * 基于规则的动态扩缩容配置项
+ * DescribeFleetRelatedResources请求参数结构体
  */
-export interface TargetConfiguration {
+export interface DescribeFleetRelatedResourcesRequest {
     /**
-      * 预留存率
-注意：此字段可能返回 null，表示取不到有效值。
+      * 服务器舰队 Id
       */
-    TargetValue?: number;
+    FleetId: string;
 }
 /**
  * DescribeGameServerSessionPlacement请求参数结构体
@@ -2950,6 +3021,28 @@ export interface PlayerLatencyPolicy {
     PolicyDurationSeconds?: number;
 }
 /**
+ * 与服务器舰队关联的资源，如别名和队列
+ */
+export interface FleetRelatedResource {
+    /**
+      * 资源类型。
+- ALIAS：别名
+- QUEUE：队列
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Type: string;
+    /**
+      * 资源ID，目前仅支持别名ID和队列名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResourceId: string;
+    /**
+      * 资源所在区域，如ap-shanghai、na-siliconvalley等
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResourceRegion: string;
+}
+/**
  * UpdateRuntimeConfiguration请求参数结构体
  */
 export interface UpdateRuntimeConfigurationRequest {
@@ -3235,7 +3328,7 @@ export interface CopyFleetRequest {
       */
     SelectedScalingType?: string;
     /**
-      * 是否选择云联网：CCN_SELECTED 或者 CCN_UNSELECTED；默认是 CCN_UNSELECTED
+      * 是否选择云联网：CCN_SELECTED_BEFORE_CREATE（创建前关联）， CCN_SELECTED_AFTER_CREATE（创建后关联）或者 CCN_UNSELECTED（不关联）；默认是 CCN_UNSELECTED
       */
     SelectedCcnType?: string;
     /**
@@ -3254,6 +3347,10 @@ export interface CopyFleetRequest {
       * 是否选择复制定时器策略：TIMER_SELECTED 或者 TIMER_UNSELECTED；默认是 TIMER_UNSELECTED
       */
     SelectedTimerType?: string;
+    /**
+      * 云联网信息，包含对应的账号信息及所属id
+      */
+    CcnInfos?: Array<CcnInfo>;
 }
 /**
  * SearchGameServerSessions返回参数结构体
@@ -3318,6 +3415,31 @@ export interface RoutingStrategy {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Message?: string;
+}
+/**
+ * GetGameServerInstanceLogUrl请求参数结构体
+ */
+export interface GetGameServerInstanceLogUrlRequest {
+    /**
+      * 游戏舰队ID
+      */
+    FleetId: string;
+    /**
+      * 实例ID
+      */
+    InstanceId?: string;
+    /**
+      * 实例IP
+      */
+    ServerIp?: string;
+    /**
+      * 偏移量
+      */
+    Offset?: number;
+    /**
+      * 每次条数
+      */
+    Size?: number;
 }
 /**
  * DescribeFleetCapacity返回参数结构体
@@ -3736,6 +3858,19 @@ export interface FleetStatisticDetail {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     TotalUsedFlowMegaBytes: number;
+}
+/**
+ * 玩家游戏会话信息
+ */
+export interface DesiredPlayerSession {
+    /**
+      * 与玩家会话关联的唯一玩家标识
+      */
+    PlayerId: string;
+    /**
+      * 开发人员定义的玩家数据
+      */
+    PlayerData: string;
 }
 /**
  * JoinGameServerSessionBatch返回参数结构体
