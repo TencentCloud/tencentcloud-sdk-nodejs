@@ -1,4 +1,17 @@
 /**
+ * ResetDBInstancePassword返回参数结构体
+ */
+export interface ResetDBInstancePasswordResponse {
+    /**
+      * 异步请求Id，用户查询该流程的运行状态
+      */
+    AsyncRequestId?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeSpecInfo请求参数结构体
  */
 export interface DescribeSpecInfoRequest {
@@ -132,17 +145,30 @@ export interface DescribeCurrentOpResponse {
     RequestId?: string;
 }
 /**
- * ResetDBInstancePassword返回参数结构体
+ * IsolateDBInstance返回参数结构体
  */
-export interface ResetDBInstancePasswordResponse {
+export interface IsolateDBInstanceResponse {
     /**
-      * 异步请求Id，用户查询该流程的运行状态
+      * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
       */
     AsyncRequestId?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 创建备份下载任务结果
+ */
+export interface BackupDownloadTaskStatus {
+    /**
+      * 分片名
+      */
+    ReplicaSetId: string;
+    /**
+      * 任务当前状态。0-等待执行，1-正在下载，2-下载完成，3-下载失败，4-等待重试
+      */
+    Status: number;
 }
 /**
  * CreateBackupDBInstance返回参数结构体
@@ -176,17 +202,25 @@ export interface DBInstancePrice {
     DiscountPrice: number;
 }
 /**
- * 备份文件存储信息
+ * DescribeBackupAccess返回参数结构体
  */
-export interface BackupFile {
+export interface DescribeBackupAccessResponse {
     /**
-      * 备份文件所属的副本集/分片ID
+      * 实例所属地域
       */
-    ReplicateSetId: string;
+    Region?: string;
     /**
-      * 备份文件保存路径
+      * 备份文件所在存储桶
       */
-    File: string;
+    Bucket?: string;
+    /**
+      * 备份文件的存储信息
+      */
+    Files?: Array<BackupFile>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * InquirePriceCreateDBInstances请求参数结构体
@@ -260,25 +294,13 @@ export interface DescribeSlowLogPatternsResponse {
     RequestId?: string;
 }
 /**
- * 用于描述MongoDB数据库慢日志统计信息
+ * 分片信息
  */
-export interface SlowLogPattern {
+export interface ReplicaSetInfo {
     /**
-      * 慢日志模式
+      * 分片名称
       */
-    Pattern: string;
-    /**
-      * 最大执行时间
-      */
-    MaxTime: number;
-    /**
-      * 平均执行时间
-      */
-    AverageTime: number;
-    /**
-      * 该模式慢日志条数
-      */
-    Total: number;
+    ReplicaSetId: string;
 }
 /**
  * CreateDBInstanceHour请求参数结构体
@@ -367,18 +389,13 @@ export interface AssignProjectRequest {
     ProjectId: number;
 }
 /**
- * DescribeSlowLogs返回参数结构体
+ * CreateBackupDownloadTask返回参数结构体
  */
-export interface DescribeSlowLogsResponse {
+export interface CreateBackupDownloadTaskResponse {
     /**
-      * 慢日志总数
+      * 下载任务状态
       */
-    Count: number;
-    /**
-      * 慢日志详情
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SlowLogs: Array<string>;
+    Tasks: Array<BackupDownloadTaskStatus>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -499,52 +516,21 @@ export interface SpecificationInfo {
     SpecItems: Array<SpecItem>;
 }
 /**
- * 云数据库实例当前操作
+ * CreateBackupDownloadTask请求参数结构体
  */
-export interface CurrentOp {
+export interface CreateBackupDownloadTaskRequest {
     /**
-      * 操作序号
-注意：此字段可能返回 null，表示取不到有效值。
+      * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
       */
-    OpId: number;
+    InstanceId: string;
     /**
-      * 操作所在的命名空间，形式如db.collection
-注意：此字段可能返回 null，表示取不到有效值。
+      * 要下载的备份文件名，可通过DescribeDBBackups接口获取
       */
-    Ns: string;
+    BackupName: string;
     /**
-      * 操作执行语句
-注意：此字段可能返回 null，表示取不到有效值。
+      * 下载备份的分片列表
       */
-    Query: string;
-    /**
-      * 操作类型，可能的取值：aggregate、count、delete、distinct、find、findAndModify、getMore、insert、mapReduce、update和command
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Op: string;
-    /**
-      * 操作所在的分片名称
-      */
-    ReplicaSetName: string;
-    /**
-      * 筛选条件，节点状态，可能的取值为：Primary、Secondary
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    State: string;
-    /**
-      * 操作详细信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Operation: string;
-    /**
-      * 操作所在的节点名称
-      */
-    NodeName: string;
-    /**
-      * 操作已执行时间（ms）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MicrosecsRunning: number;
+    BackupSets: Array<ReplicaSetInfo>;
 }
 /**
  * DescribeSlowLogPatterns请求参数结构体
@@ -578,6 +564,24 @@ export interface DescribeSlowLogPatternsRequest {
       * 慢日志返回格式，可设置为json，不传默认返回原生慢日志格式。
       */
     Format?: string;
+}
+/**
+ * DescribeSlowLogs返回参数结构体
+ */
+export interface DescribeSlowLogsResponse {
+    /**
+      * 慢日志总数
+      */
+    Count: number;
+    /**
+      * 慢日志详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SlowLogs: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * FlushInstanceRouterConfig返回参数结构体
@@ -919,6 +923,39 @@ export interface CreateDBInstanceResponse {
     RequestId?: string;
 }
 /**
+ * DescribeSlowLogs请求参数结构体
+ */
+export interface DescribeSlowLogsRequest {
+    /**
+      * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+      */
+    InstanceId: string;
+    /**
+      * 慢日志起始时间，格式：yyyy-mm-dd hh:mm:ss，如：2019-06-01 10:00:00。查询起止时间间隔不能超过24小时，只允许查询最近7天内慢日志。
+      */
+    StartTime: string;
+    /**
+      * 慢日志终止时间，格式：yyyy-mm-dd hh:mm:ss，如：2019-06-02 12:00:00。查询起止时间间隔不能超过24小时，只允许查询最近7天内慢日志。
+      */
+    EndTime: string;
+    /**
+      * 慢日志执行时间阈值，返回执行时间超过该阈值的慢日志，单位为毫秒(ms)，最小为100毫秒。
+      */
+    SlowMS: number;
+    /**
+      * 偏移量，最小值为0，最大值为10000，默认值为0。
+      */
+    Offset?: number;
+    /**
+      * 分页大小，最小值为1，最大值为100，默认值为20。
+      */
+    Limit?: number;
+    /**
+      * 慢日志返回格式，可设置为json，不传默认返回原生慢日志格式。
+      */
+    Format?: string;
+}
+/**
  * AssignProject返回参数结构体
  */
 export interface AssignProjectResponse {
@@ -930,6 +967,43 @@ export interface AssignProjectResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 备份下载任务
+ */
+export interface BackupDownloadTask {
+    /**
+      * 任务创建时间
+      */
+    CreateTime: string;
+    /**
+      * 备份文件名
+      */
+    BackupName: string;
+    /**
+      * 分片名称
+      */
+    ReplicaSetId: string;
+    /**
+      * 备份数据大小，单位为字节
+      */
+    BackupSize: number;
+    /**
+      * 任务状态。0-等待执行，1-正在下载，2-下载完成，3-下载失败，4-等待重试
+      */
+    Status: number;
+    /**
+      * 任务进度百分比
+      */
+    Percent: number;
+    /**
+      * 耗时，单位为秒
+      */
+    TimeSpend: number;
+    /**
+      * 备份数据下载链接
+      */
+    Url: string;
 }
 /**
  * DescribeDBBackups请求参数结构体
@@ -1058,17 +1132,45 @@ export interface OfflineIsolatedDBInstanceResponse {
     RequestId?: string;
 }
 /**
- * IsolateDBInstance返回参数结构体
+ * DescribeBackupDownloadTask请求参数结构体
  */
-export interface IsolateDBInstanceResponse {
+export interface DescribeBackupDownloadTaskRequest {
     /**
-      * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
+      * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
       */
-    AsyncRequestId?: string;
+    InstanceId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 备份文件名，用来过滤指定文件的下载任务
       */
-    RequestId?: string;
+    BackupName?: string;
+    /**
+      * 指定要查询任务的时间范围，StartTime指定开始时间
+      */
+    StartTime?: string;
+    /**
+      * 指定要查询任务的时间范围，StartTime指定结束时间
+      */
+    EndTime?: string;
+    /**
+      * 此次查询返回的条数，取值范围为1-100，默认为20
+      */
+    Limit?: number;
+    /**
+      * 指定此次查询返回的页数，默认为0
+      */
+    Offset?: number;
+    /**
+      * 排序字段，取值为createTime，finishTime两种，默认为createTime
+      */
+    OrderBy?: string;
+    /**
+      * 排序方式，取值为asc，desc两种，默认desc
+      */
+    OrderByType?: string;
+    /**
+      * 根据任务状态过滤。0-等待执行，1-正在下载，2-下载完成，3-下载失败，4-等待重试
+      */
+    Status?: Array<number>;
 }
 /**
  * DescribeBackupAccess请求参数结构体
@@ -1100,6 +1202,23 @@ export interface RenameInstanceRequest {
  * RenewDBInstances返回参数结构体
  */
 export interface RenewDBInstancesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeBackupDownloadTask返回参数结构体
+ */
+export interface DescribeBackupDownloadTaskResponse {
+    /**
+      * 满足查询条件的所有条数
+      */
+    TotalCount: number;
+    /**
+      * 下载任务列表
+      */
+    Tasks: Array<BackupDownloadTask>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1154,58 +1273,65 @@ export interface DBInstanceInfo {
     Region: string;
 }
 /**
- * DescribeSlowLogs请求参数结构体
+ * 云数据库实例当前操作
  */
-export interface DescribeSlowLogsRequest {
+export interface CurrentOp {
     /**
-      * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+      * 操作序号
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    InstanceId: string;
+    OpId: number;
     /**
-      * 慢日志起始时间，格式：yyyy-mm-dd hh:mm:ss，如：2019-06-01 10:00:00。查询起止时间间隔不能超过24小时，只允许查询最近7天内慢日志。
+      * 操作所在的命名空间，形式如db.collection
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    StartTime: string;
+    Ns: string;
     /**
-      * 慢日志终止时间，格式：yyyy-mm-dd hh:mm:ss，如：2019-06-02 12:00:00。查询起止时间间隔不能超过24小时，只允许查询最近7天内慢日志。
+      * 操作执行语句
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    EndTime: string;
+    Query: string;
     /**
-      * 慢日志执行时间阈值，返回执行时间超过该阈值的慢日志，单位为毫秒(ms)，最小为100毫秒。
+      * 操作类型，可能的取值：aggregate、count、delete、distinct、find、findAndModify、getMore、insert、mapReduce、update和command
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    SlowMS: number;
+    Op: string;
     /**
-      * 偏移量，最小值为0，最大值为10000，默认值为0。
+      * 操作所在的分片名称
       */
-    Offset?: number;
+    ReplicaSetName: string;
     /**
-      * 分页大小，最小值为1，最大值为100，默认值为20。
+      * 筛选条件，节点状态，可能的取值为：Primary、Secondary
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Limit?: number;
+    State: string;
     /**
-      * 慢日志返回格式，可设置为json，不传默认返回原生慢日志格式。
+      * 操作详细信息
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Format?: string;
+    Operation: string;
+    /**
+      * 操作所在的节点名称
+      */
+    NodeName: string;
+    /**
+      * 操作已执行时间（ms）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MicrosecsRunning: number;
 }
 /**
- * DescribeBackupAccess返回参数结构体
+ * 备份文件存储信息
  */
-export interface DescribeBackupAccessResponse {
+export interface BackupFile {
     /**
-      * 实例所属地域
+      * 备份文件所属的副本集/分片ID
       */
-    Region?: string;
+    ReplicateSetId: string;
     /**
-      * 备份文件所在存储桶
+      * 备份文件保存路径
       */
-    Bucket?: string;
-    /**
-      * 备份文件的存储信息
-      */
-    Files?: Array<BackupFile>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    File: string;
 }
 /**
  * DescribeDBBackups返回参数结构体
@@ -1401,6 +1527,27 @@ export interface ModifyDBInstanceSpecRequest {
       * 实例配置变更后oplog的大小，单位：GB，默认为磁盘空间的10%，允许设置的最小值为磁盘的10%，最大值为磁盘的90%
       */
     OplogSize?: number;
+}
+/**
+ * 用于描述MongoDB数据库慢日志统计信息
+ */
+export interface SlowLogPattern {
+    /**
+      * 慢日志模式
+      */
+    Pattern: string;
+    /**
+      * 最大执行时间
+      */
+    MaxTime: number;
+    /**
+      * 平均执行时间
+      */
+    AverageTime: number;
+    /**
+      * 该模式慢日志条数
+      */
+    Total: number;
 }
 /**
  * CreateDBInstanceHour返回参数结构体

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeSpecInfoRequest, KillOpsRequest, CreateDBInstanceRequest, KillOpsResponse, DescribeCurrentOpResponse, ResetDBInstancePasswordResponse, CreateBackupDBInstanceResponse, InquirePriceCreateDBInstancesRequest, IsolateDBInstanceRequest, DescribeSlowLogPatternsResponse, CreateDBInstanceHourRequest, AssignProjectRequest, DescribeSlowLogsResponse, InquirePriceModifyDBInstanceSpecRequest, InquirePriceRenewDBInstancesRequest, DescribeAsyncRequestInfoRequest, DescribeSlowLogPatternsRequest, FlushInstanceRouterConfigResponse, InquirePriceModifyDBInstanceSpecResponse, DescribeSpecInfoResponse, InquirePriceRenewDBInstancesResponse, ResetDBInstancePasswordRequest, DescribeDBInstancesResponse, OfflineIsolatedDBInstanceRequest, DescribeCurrentOpRequest, DescribeDBInstanceDealRequest, DescribeDBInstancesRequest, DescribeAsyncRequestInfoResponse, CreateDBInstanceResponse, AssignProjectResponse, DescribeDBBackupsRequest, DescribeClientConnectionsRequest, DescribeDBInstanceDealResponse, ModifyDBInstanceSpecResponse, OfflineIsolatedDBInstanceResponse, IsolateDBInstanceResponse, DescribeBackupAccessRequest, RenameInstanceRequest, RenewDBInstancesResponse, RenameInstanceResponse, DescribeClientConnectionsResponse, FlushInstanceRouterConfigRequest, DescribeSlowLogsRequest, DescribeBackupAccessResponse, DescribeDBBackupsResponse, ModifyDBInstanceSpecRequest, CreateDBInstanceHourResponse, CreateBackupDBInstanceRequest, InquirePriceCreateDBInstancesResponse, RenewDBInstancesRequest } from "./mongodb_models";
+import { ResetDBInstancePasswordResponse, DescribeSpecInfoRequest, KillOpsRequest, CreateDBInstanceRequest, KillOpsResponse, DescribeCurrentOpResponse, IsolateDBInstanceResponse, CreateBackupDBInstanceResponse, DescribeBackupAccessResponse, InquirePriceCreateDBInstancesRequest, IsolateDBInstanceRequest, DescribeSlowLogPatternsResponse, CreateDBInstanceHourRequest, AssignProjectRequest, CreateBackupDownloadTaskResponse, InquirePriceModifyDBInstanceSpecRequest, InquirePriceRenewDBInstancesRequest, DescribeAsyncRequestInfoRequest, CreateBackupDownloadTaskRequest, DescribeSlowLogPatternsRequest, DescribeSlowLogsResponse, FlushInstanceRouterConfigResponse, InquirePriceModifyDBInstanceSpecResponse, DescribeSpecInfoResponse, InquirePriceRenewDBInstancesResponse, ResetDBInstancePasswordRequest, DescribeDBInstancesResponse, OfflineIsolatedDBInstanceRequest, DescribeCurrentOpRequest, DescribeDBInstanceDealRequest, DescribeDBInstancesRequest, DescribeAsyncRequestInfoResponse, CreateDBInstanceResponse, DescribeSlowLogsRequest, AssignProjectResponse, DescribeDBBackupsRequest, DescribeClientConnectionsRequest, DescribeDBInstanceDealResponse, ModifyDBInstanceSpecResponse, OfflineIsolatedDBInstanceResponse, DescribeBackupDownloadTaskRequest, DescribeBackupAccessRequest, RenameInstanceRequest, RenewDBInstancesResponse, DescribeBackupDownloadTaskResponse, RenameInstanceResponse, DescribeClientConnectionsResponse, FlushInstanceRouterConfigRequest, DescribeDBBackupsResponse, ModifyDBInstanceSpecRequest, CreateDBInstanceHourResponse, CreateBackupDBInstanceRequest, InquirePriceCreateDBInstancesResponse, RenewDBInstancesRequest } from "./mongodb_models";
 /**
  * mongodb client
  * @class
@@ -56,6 +56,10 @@ export declare class Client extends AbstractClient {
      */
     RenewDBInstances(req: RenewDBInstancesRequest, cb?: (error: string, rep: RenewDBInstancesResponse) => void): Promise<RenewDBInstancesResponse>;
     /**
+     * 本接口用来创建某个备份文件的下载任务
+     */
+    CreateBackupDownloadTask(req: CreateBackupDownloadTaskRequest, cb?: (error: string, rep: CreateBackupDownloadTaskResponse) => void): Promise<CreateBackupDownloadTaskResponse>;
+    /**
      * 本接口(DescribeDBInstances)用于查询云数据库实例列表，支持通过项目ID、实例ID、实例状态等过滤条件来筛选实例。支持查询主实例、灾备实例和只读实例信息列表。
      */
     DescribeDBInstances(req: DescribeDBInstancesRequest, cb?: (error: string, rep: DescribeDBInstancesResponse) => void): Promise<DescribeDBInstancesResponse>;
@@ -83,6 +87,10 @@ export declare class Client extends AbstractClient {
      * 本接口(DescribeSpecInfo)用于查询实例的售卖规格。
      */
     DescribeSpecInfo(req: DescribeSpecInfoRequest, cb?: (error: string, rep: DescribeSpecInfoResponse) => void): Promise<DescribeSpecInfoResponse>;
+    /**
+     * 查询备份下载任务信息
+     */
+    DescribeBackupDownloadTask(req: DescribeBackupDownloadTaskRequest, cb?: (error: string, rep: DescribeBackupDownloadTaskResponse) => void): Promise<DescribeBackupDownloadTaskResponse>;
     /**
      * 本接口用于创建数据库实例询价。本接口参数中必须传入region参数，否则无法通过校验。本接口仅允许针对购买限制范围内的实例配置进行询价。
      */

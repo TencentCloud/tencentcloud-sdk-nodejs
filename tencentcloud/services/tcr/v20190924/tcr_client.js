@@ -262,10 +262,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateInstance", req, cb);
     }
     /**
-     * 查询从实例列表
+     * 查询创建从实例任务状态
      */
-    async DescribeReplicationInstances(req, cb) {
-        return this.request("DescribeReplicationInstances", req, cb);
+    async DescribeReplicationInstanceCreateTasks(req, cb) {
+        return this.request("DescribeReplicationInstanceCreateTasks", req, cb);
     }
     /**
      * 创建触发器
@@ -304,10 +304,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteWebhookTrigger", req, cb);
     }
     /**
-     * 查询创建从实例任务状态
+     * 创建从实例
      */
-    async DescribeReplicationInstanceCreateTasks(req, cb) {
-        return this.request("DescribeReplicationInstanceCreateTasks", req, cb);
+    async CreateReplicationInstance(req, cb) {
+        return this.request("CreateReplicationInstance", req, cb);
     }
     /**
      * 查询实例内网访问VPC链接
@@ -458,6 +458,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteImage(req, cb) {
         return this.request("DeleteImage", req, cb);
+    }
+    /**
+     * 查询从实例列表
+     */
+    async DescribeReplicationInstances(req, cb) {
+        return this.request("DescribeReplicationInstances", req, cb);
     }
     /**
      * 创建实例的临时或长期访问凭证

@@ -118,7 +118,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeGroupByPath", req, cb);
     }
     /**
-     * 本接口()用于查询设备含有录像文件的日期列表。
+     * 本接口(GetRecordDatesByDev)用于查询设备含有录像文件的日期列表。
      */
     async GetRecordDatesByDev(req, cb) {
         return this.request("GetRecordDatesByDev", req, cb);

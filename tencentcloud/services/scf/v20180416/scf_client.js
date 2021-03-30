@@ -154,7 +154,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAlias", req, cb);
     }
     /**
-     * 该接口根据传入的参数创建命名空间。
+     * 该接口根据传入的参数删除命名空间。
      */
     async DeleteNamespace(req, cb) {
         return this.request("DeleteNamespace", req, cb);

@@ -89,7 +89,7 @@ export interface StatisticItem {
  */
 export interface CreateDeviceGroupResponse {
     /**
-      * 响应结果
+      * 响应结果，“OK”为成功，其他为失败
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Status: string;
@@ -140,7 +140,7 @@ export interface GetVideoListByConResponse {
  */
 export interface DeleteTimeTemplateResponse {
     /**
-      * 操作结果
+      * 操作结果，OK：成功，其他：失败
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Status: string;
@@ -166,7 +166,7 @@ export interface DescribeSubGroupsRequest {
       */
     GroupName?: string;
     /**
-      * 偏移量
+      * 偏移量，默认0
       */
     Offset?: number;
     /**
@@ -314,7 +314,7 @@ export interface GroupInfo {
  */
 export interface ModifyDeviceDataResponse {
     /**
-      * 操作结果
+      * 操作结果,“OK”表示成功，其他表示失败。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Status: string;
@@ -346,7 +346,7 @@ export interface DescribeGroupDevicesRequest {
       */
     GroupId: string;
     /**
-      * 偏移量
+      * 偏移量，默认0
       */
     Offset?: number;
     /**
@@ -533,7 +533,7 @@ export interface CreateTimeTemplateRequest {
       */
     Name: string;
     /**
-      * 是否为每周全时录制，即7*24h录制
+      * 是否为每周全时录制（即7*24h录制），0：非全时录制，1；全时录制，默认0
       */
     IsAllWeek: number;
     /**
@@ -679,7 +679,7 @@ export interface DescribeDeviceStreamsResponse {
  */
 export interface DescribeAllDeviceListRequest {
     /**
-      * 偏移量
+      * 偏移量，默认0
       */
     Offset?: number;
     /**
@@ -767,7 +767,7 @@ export interface DeleteDeviceGroupRequest {
  */
 export interface DeleteRecordPlanResponse {
     /**
-      * 操作结果
+      * 操作结果，OK：成功，其他：失败
       */
     Status: string;
     /**
@@ -826,7 +826,7 @@ export interface DescribeSubGroupsResponse {
  */
 export interface DescribeGroupByPathRequest {
     /**
-      * 分组路径
+      * 分组路径，格式为/aaa(/bbb/ccc)
       */
     GroupPath: string;
 }
@@ -854,12 +854,12 @@ export interface AllDeviceInfo {
       */
     DeviceId: string;
     /**
-      * 设备类型
+      * 设备类型；2：IPC
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DeviceType: number;
     /**
-      * 设备状态
+      * 设备状态；0：设备不在线；1：设备在线；2：设备隔离中；3：设备未注册
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Status?: number;
@@ -889,7 +889,7 @@ export interface AllDeviceInfo {
       */
     DeviceCode?: string;
     /**
-      * 是否存在录像
+      * 是否存在录像,，0:不存在；1：存在
 注意：此字段可能返回 null，表示取不到有效值。
       */
     IsRecord?: number;
@@ -975,7 +975,8 @@ export interface UpdateTimeTemplateRequest {
       */
     Name?: string;
     /**
-      * 是否全时录制，即7*24小时录制
+      * 是否全时录制，即7*24小时录制。
+0：非全时录制；1：全时录制。默认1
       */
     IsAllWeek?: number;
     /**
@@ -1007,7 +1008,7 @@ export interface GetRecordPlansResponse {
  */
 export interface UpdateDevicePassWordResponse {
     /**
-      * 操作结果
+      * 操作结果，“OK”表示成功，其他表示失败。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Status: string;
@@ -1025,15 +1026,15 @@ export interface GetVideoListByConRequest {
       */
     DeviceId: string;
     /**
-      * 偏移量
+      * 偏移量，默认0
       */
     Offset: number;
     /**
-      * 限制量
+      * 限制量，默认200
       */
     Limit: number;
     /**
-      * 0：查询指定日期的录像；1：查询最近一天的录像
+      * 0：查询指定日期的录像；1：查询最近一天的录像；默认0
       */
     LatestDay?: number;
     /**
@@ -1102,11 +1103,11 @@ export interface GetRecordDatesByDevRequest {
       */
     DeviceId: string;
     /**
-      * 偏移量
+      * 偏移量，默认0
       */
     Offset: number;
     /**
-      * 限制量
+      * 限制量，默认200
       */
     Limit: number;
 }
@@ -1264,7 +1265,7 @@ export interface DeleteDeviceResponse {
  */
 export interface UpdateTimeTemplateResponse {
     /**
-      * 操作结果
+      * 操作结果，“OK”表示成功，其他表示失败。
       */
     Status: string;
     /**

@@ -138,6 +138,16 @@ it("mongodb.v20190725.RenewDBInstances", async function () {
     }
 })
 
+it("mongodb.v20190725.CreateBackupDownloadTask", async function () {
+    try {
+       const data = await client.CreateBackupDownloadTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.DescribeDBInstances", async function () {
     try {
        const data = await client.DescribeDBInstances({})
@@ -201,6 +211,16 @@ it("mongodb.v20190725.ModifyDBInstanceSpec", async function () {
 it("mongodb.v20190725.DescribeSpecInfo", async function () {
     try {
        const data = await client.DescribeSpecInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mongodb.v20190725.DescribeBackupDownloadTask", async function () {
+    try {
+       const data = await client.DescribeBackupDownloadTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

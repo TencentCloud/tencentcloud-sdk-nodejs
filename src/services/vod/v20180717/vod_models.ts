@@ -1340,6 +1340,23 @@ export interface ComposeMediaResponse {
 }
 
 /**
+ * 基于签名的 Key 防盗链信息
+ */
+export interface UrlSignatureAuthPolicy {
+  /**
+      * [Key 防盗链](https://cloud.tencent.com/document/product/266/14047)设置状态，可选值：
+<li>Enabled: 启用；</li>
+<li>Disabled: 禁用。</li>
+      */
+  Status: string
+
+  /**
+   * [Key 防盗链](https://cloud.tencent.com/document/product/266/14047)中用于生成签名的密钥。
+   */
+  EncryptedKey: string
+}
+
+/**
  * DeleteSampleSnapshotTemplate请求参数结构体
  */
 export interface DeleteSampleSnapshotTemplateRequest {
@@ -3224,6 +3241,31 @@ export interface CdnLogInfo {
 }
 
 /**
+ * 简单加密加解密秘钥对。
+ */
+export interface SimpleAesEdkPair {
+  /**
+   * 加密后的数据密钥。
+   */
+  Edk: string
+
+  /**
+   * 数据密钥。返回的数据密钥 DK 为 Base64 编码字符串。
+   */
+  Dk: string
+}
+
+/**
+ * 字幕信息。
+ */
+export interface MediaSubtitleInfo {
+  /**
+   * 字幕信息列表。
+   */
+  SubtitleSet: Array<MediaSubtitleItem>
+}
+
+/**
  * 语音全文识别的输入。
  */
 export interface AiRecognitionTaskAsrFullTextResultInput {
@@ -3763,6 +3805,41 @@ export interface AiRecognitionTaskSegmentResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Output: AiRecognitionTaskSegmentResultOutput
+}
+
+/**
+ * 字幕信息。
+ */
+export interface MediaSubtitleItem {
+  /**
+   * 字幕的唯一标识。
+   */
+  Id: string
+
+  /**
+   * 字幕名字。
+   */
+  Name: string
+
+  /**
+      * 字幕语言。常见的取值如下：
+<li>cn：中文</li>
+<li>ja：日文</li>
+<li>en-US：英文</li>
+其他取值参考 [RFC5646](https://tools.ietf.org/html/rfc5646)
+      */
+  Language: string
+
+  /**
+      * 字幕格式。取值范围如下：
+<li>vtt</li>
+      */
+  Format: string
+
+  /**
+   * 字幕 URL。
+   */
+  Url: string
 }
 
 /**
@@ -4709,6 +4786,21 @@ export interface StickerTrackItem {
 }
 
 /**
+ * DescribeDrmDataKey返回参数结构体
+ */
+export interface DescribeDrmDataKeyResponse {
+  /**
+   * 密钥列表，包含加密的数据密钥。
+   */
+  KeyList: Array<SimpleAesEdkPair>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 视频流配置参数
  */
 export interface VideoTemplateInfo {
@@ -5619,6 +5711,54 @@ export interface MediaProcessTaskTranscodeResult {
 }
 
 /**
+ * 域名信息
+ */
+export interface DomainDetailInfo {
+  /**
+   * 域名名称。
+   */
+  Domain: string
+
+  /**
+      * 加速地区信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AccelerateAreaInfos: Array<AccelerateAreaInfo>
+
+  /**
+      * 部署状态，取值有：
+<li>Online：上线；</li>
+<li>Deploying：部署中；</li>
+<li>Locked: 锁定中，出现该状态时，无法对该域名进行部署变更。</li>
+      */
+  DeployStatus: string
+
+  /**
+      * HTTPS 配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  HTTPSConfig: DomainHTTPSConfig
+
+  /**
+      * [Key 防盗链](https://cloud.tencent.com/document/product/266/14047)配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UrlSignatureAuthPolicy: UrlSignatureAuthPolicy
+
+  /**
+      * [Referer 防盗链](https://cloud.tencent.com/document/product/266/14046)配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RefererAuthPolicy: RefererAuthPolicy
+
+  /**
+      * 域名添加到腾讯云点播系统中的时间。
+<li>格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。</li>
+      */
+  CreateTime: string
+}
+
+/**
  * 图片处理模板， 最多支持三次操作。例如：裁剪-缩略-裁剪。
  */
 export interface ImageProcessingTemplate {
@@ -6259,6 +6399,11 @@ export interface AdaptiveDynamicStreamingTaskInput {
    * 水印列表，支持多张图片或文字水印，最大可支持 10 张。
    */
   WatermarkSet?: Array<WatermarkInput>
+
+  /**
+   * 字幕列表，元素为字幕 ID，支持多个字幕，最大可支持10个。
+   */
+  SubtitleSet?: Array<string>
 }
 
 /**
@@ -8180,6 +8325,37 @@ export interface SnapshotByTimeOffsetTaskInput {
 }
 
 /**
+ * Referer 防盗链配置
+ */
+export interface RefererAuthPolicy {
+  /**
+      * [Referer 防盗链](https://cloud.tencent.com/document/product/266/14046)设置状态，可选值：
+<li>Enabled: 启用；</li>
+<li>Disabled: 禁用。</li>
+      */
+  Status: string
+
+  /**
+      * Referer 校验类型，可选值：
+<li>Black: 黑名单方式校验；</li>
+<li>White:白名单方式校验。</li>
+      */
+  AuthType?: string
+
+  /**
+   * 用于校验的 Referer 名单。
+   */
+  Referers?: Array<string>
+
+  /**
+      * 是否允许空 Referer 访问本域名，可选值：
+<li>Yes: 是；</li>
+<li>No: 否。</li>
+      */
+  BlankRefererAllowed?: string
+}
+
+/**
  * 任务统计数据，包括任务数和用量。
  */
 export interface TaskStatDataItem {
@@ -8399,7 +8575,7 @@ export interface MediaBasicInfo {
   SourceInfo: MediaSourceData
 
   /**
-   * 媒体文件存储地区，如 ap-guangzhou，参见[地域列表](https://cloud.tencent.com/document/api/213/15692#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8)。
+   * 媒体文件存储地区，如 ap-chongqing，参见[地域列表](https://cloud.tencent.com/document/product/266/9760#.E5.B7.B2.E6.94.AF.E6.8C.81.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8)。
    */
   StorageRegion: string
 
@@ -9081,6 +9257,26 @@ export interface UserDefineOcrTextReviewTemplateInfo {
 }
 
 /**
+ * DescribeVodDomains返回参数结构体
+ */
+export interface DescribeVodDomainsResponse {
+  /**
+   * 域名总数量。
+   */
+  TotalCount: number
+
+  /**
+   * 域名信息列表。
+   */
+  DomainSet: Array<DomainDetailInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 自适应转码流参数模板
  */
 export interface AdaptiveStreamTemplate {
@@ -9437,6 +9633,30 @@ export interface StatDataItem {
 <li>带宽数据，单位是比特每秒。</li>
       */
   Value: number
+}
+
+/**
+ * 域名的地区加速信息
+ */
+export interface AccelerateAreaInfo {
+  /**
+      * 加速地区，可选值：
+<li>Chinese Mainland：中国境内（不包含港澳台）。</li>
+<li>Outside Chinese Mainland：中国境外。</li>
+      */
+  Area: string
+
+  /**
+      * 腾讯禁用原因，可选值：
+<li>ForLegalReasons：因法律原因导致关闭加速；</li>
+<li>ForOverdueBills：因欠费停服导致关闭加速。</li>
+      */
+  TencentDisableReason: string
+
+  /**
+   * 加速域名对应的 CNAME 域名。
+   */
+  TencentEdgeDomain: string
 }
 
 /**
@@ -9896,6 +10116,16 @@ export interface ModifyPersonSampleRequest {
    * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
    */
   SubAppId?: number
+}
+
+/**
+ * DescribeDrmDataKey请求参数结构体
+ */
+export interface DescribeDrmDataKeyRequest {
+  /**
+   * 加密后的数据密钥列表，最大支持10个。
+   */
+  EdkList: Array<string>
 }
 
 /**
@@ -10581,6 +10811,12 @@ export interface MediaInfo {
   MiniProgramReviewInfo: MediaMiniProgramReviewInfo
 
   /**
+      * 字幕信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubtitleInfo: MediaSubtitleInfo
+
+  /**
    * 媒体文件唯一标识 ID。
    */
   FileId: string
@@ -11025,6 +11261,17 @@ export interface CreateProcedureTemplateResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 域名 HTTPS 配置信息
+ */
+export interface DomainHTTPSConfig {
+  /**
+      * 证书过期时间。
+<li>格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。</li>
+      */
+  CertExpireTime: string
 }
 
 /**
@@ -11677,6 +11924,32 @@ export interface ProhibitedOcrReviewTemplateInfoForUpdate {
    * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
    */
   ReviewConfidence?: number
+}
+
+/**
+ * DescribeVodDomains请求参数结构体
+ */
+export interface DescribeVodDomainsRequest {
+  /**
+      * 域名列表。当该字段不填时，则默认列出所有域名信息。本字段字段限制如下：
+<li>域名个数度最大为 20。</li>
+      */
+  Domains?: Array<string>
+
+  /**
+   * 分页拉取的最大返回结果数。默认值：20。
+   */
+  Limit?: number
+
+  /**
+   * 分页拉取的起始偏移量。默认值：0。
+   */
+  Offset?: number
+
+  /**
+   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+   */
+  SubAppId?: number
 }
 
 /**

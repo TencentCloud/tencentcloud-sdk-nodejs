@@ -655,6 +655,19 @@ export interface DescribeInstancesResponse {
     RequestId?: string;
 }
 /**
+ * CreateReplicationInstance请求参数结构体
+ */
+export interface CreateReplicationInstanceRequest {
+    /**
+      * 主实例iD
+      */
+    RegistryId: string;
+    /**
+      * 复制实例地域ID
+      */
+    ReplicationRegionId: number;
+}
+/**
  * ModifyInstanceToken返回参数结构体
  */
 export interface ModifyInstanceTokenResponse {
@@ -664,17 +677,25 @@ export interface ModifyInstanceTokenResponse {
     RequestId?: string;
 }
 /**
- * DescribeApplicationTriggerLogPersonal返回参数结构体
+ * DescribeApplicationTriggerPersonal请求参数结构体
  */
-export interface DescribeApplicationTriggerLogPersonalResponse {
+export interface DescribeApplicationTriggerPersonalRequest {
     /**
-      * 触发日志返回值
+      * 仓库名称
       */
-    Data?: DescribeApplicationTriggerLogPersonalResp;
+    RepoName?: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 触发器名称
       */
-    RequestId?: string;
+    TriggerName?: string;
+    /**
+      * 偏移量，默认为0
+      */
+    Offset?: number;
+    /**
+      * 返回最大数量，默认 20, 最大值 100
+      */
+    Limit?: number;
 }
 /**
  * 用于获取收藏仓库的响应
@@ -797,6 +818,10 @@ export interface ManageReplicationRequest {
       * 规则描述
       */
     Description?: string;
+    /**
+      * 目标实例的地域ID，如广州是1
+      */
+    DestinationRegionId?: number;
 }
 /**
  * DeleteWebhookTrigger返回参数结构体
@@ -1319,15 +1344,6 @@ export interface DescribeImageFilterPersonalRequest {
     Tag: string;
 }
 /**
- * CreateInternalEndpointDns返回参数结构体
- */
-export interface CreateInternalEndpointDnsResponse {
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
  * ModifyNamespace返回参数结构体
  */
 export interface ModifyNamespaceResponse {
@@ -1788,6 +1804,27 @@ export interface ModifyNamespaceRequest {
       * 访问级别，True为公开，False为私有
       */
     IsPublic: boolean;
+}
+/**
+ * DeleteImage请求参数结构体
+ */
+export interface DeleteImageRequest {
+    /**
+      * 实例Id
+      */
+    RegistryId: string;
+    /**
+      * 镜像仓库名称
+      */
+    RepositoryName: string;
+    /**
+      * 镜像版本
+      */
+    ImageVersion: string;
+    /**
+      * 命名空间名称
+      */
+    NamespaceName: string;
 }
 /**
  * ModifyRepositoryAccessPersonal请求参数结构体
@@ -2458,25 +2495,17 @@ export interface DescribeFavorRepositoryPersonalRequest {
     Offset: number;
 }
 /**
- * DescribeApplicationTriggerPersonal请求参数结构体
+ * DescribeApplicationTriggerLogPersonal返回参数结构体
  */
-export interface DescribeApplicationTriggerPersonalRequest {
+export interface DescribeApplicationTriggerLogPersonalResponse {
     /**
-      * 仓库名称
+      * 触发日志返回值
       */
-    RepoName?: string;
+    Data?: DescribeApplicationTriggerLogPersonalResp;
     /**
-      * 触发器名称
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    TriggerName?: string;
-    /**
-      * 偏移量，默认为0
-      */
-    Offset?: number;
-    /**
-      * 返回最大数量，默认 20, 最大值 100
-      */
-    Limit?: number;
+    RequestId?: string;
 }
 /**
  * ManageInternalEndpoint返回参数结构体
@@ -2600,6 +2629,19 @@ export interface ModifyApplicationTriggerPersonalRequest {
       * 新触发器名称
       */
     NewTriggerName?: string;
+}
+/**
+ * CreateReplicationInstance返回参数结构体
+ */
+export interface CreateReplicationInstanceResponse {
+    /**
+      * 企业版复制实例Id
+      */
+    ReplicationRegistryId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateInstanceToken请求参数结构体
@@ -3137,25 +3179,13 @@ export interface DeleteRepositoryRequest {
     RepositoryName: string;
 }
 /**
- * DeleteImage请求参数结构体
+ * CreateInternalEndpointDns返回参数结构体
  */
-export interface DeleteImageRequest {
+export interface CreateInternalEndpointDnsResponse {
     /**
-      * 实例Id
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    RegistryId: string;
-    /**
-      * 镜像仓库名称
-      */
-    RepositoryName: string;
-    /**
-      * 镜像版本
-      */
-    ImageVersion: string;
-    /**
-      * 命名空间名称
-      */
-    NamespaceName: string;
+    RequestId?: string;
 }
 /**
  * CreateRepositoryPersonal返回参数结构体

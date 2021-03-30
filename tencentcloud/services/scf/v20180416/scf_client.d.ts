@@ -94,7 +94,7 @@ export declare class Client extends AbstractClient {
      */
     DeleteAlias(req: DeleteAliasRequest, cb?: (error: string, rep: DeleteAliasResponse) => void): Promise<DeleteAliasResponse>;
     /**
-     * 该接口根据传入的参数创建命名空间。
+     * 该接口根据传入的参数删除命名空间。
      */
     DeleteNamespace(req: DeleteNamespaceRequest, cb?: (error: string, rep: DeleteNamespaceResponse) => void): Promise<DeleteNamespaceResponse>;
     /**

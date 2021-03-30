@@ -100,6 +100,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RenewDBInstances", req, cb);
     }
     /**
+     * 本接口用来创建某个备份文件的下载任务
+     */
+    async CreateBackupDownloadTask(req, cb) {
+        return this.request("CreateBackupDownloadTask", req, cb);
+    }
+    /**
      * 本接口(DescribeDBInstances)用于查询云数据库实例列表，支持通过项目ID、实例ID、实例状态等过滤条件来筛选实例。支持查询主实例、灾备实例和只读实例信息列表。
      */
     async DescribeDBInstances(req, cb) {
@@ -140,6 +146,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeSpecInfo(req, cb) {
         return this.request("DescribeSpecInfo", req, cb);
+    }
+    /**
+     * 查询备份下载任务信息
+     */
+    async DescribeBackupDownloadTask(req, cb) {
+        return this.request("DescribeBackupDownloadTask", req, cb);
     }
     /**
      * 本接口用于创建数据库实例询价。本接口参数中必须传入region参数，否则无法通过校验。本接口仅允许针对购买限制范围内的实例配置进行询价。

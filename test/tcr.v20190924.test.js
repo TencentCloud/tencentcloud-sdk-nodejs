@@ -408,9 +408,9 @@ it("tcr.v20190924.CreateInstance", async function () {
     }
 })
 
-it("tcr.v20190924.DescribeReplicationInstances", async function () {
+it("tcr.v20190924.DescribeReplicationInstanceCreateTasks", async function () {
     try {
-       const data = await client.DescribeReplicationInstances({})
+       const data = await client.DescribeReplicationInstanceCreateTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -478,9 +478,9 @@ it("tcr.v20190924.DeleteWebhookTrigger", async function () {
     }
 })
 
-it("tcr.v20190924.DescribeReplicationInstanceCreateTasks", async function () {
+it("tcr.v20190924.CreateReplicationInstance", async function () {
     try {
-       const data = await client.DescribeReplicationInstanceCreateTasks({})
+       const data = await client.CreateReplicationInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -731,6 +731,16 @@ it("tcr.v20190924.ValidateRepositoryExistPersonal", async function () {
 it("tcr.v20190924.DeleteImage", async function () {
     try {
        const data = await client.DeleteImage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcr.v20190924.DescribeReplicationInstances", async function () {
+    try {
+       const data = await client.DescribeReplicationInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

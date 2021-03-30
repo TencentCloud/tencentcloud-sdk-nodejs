@@ -18,30 +18,33 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  ResetDBInstancePasswordResponse,
   DescribeSpecInfoRequest,
   KillOpsRequest,
   CreateDBInstanceRequest,
   KillOpsResponse,
   DescribeCurrentOpResponse,
-  ResetDBInstancePasswordResponse,
+  IsolateDBInstanceResponse,
+  BackupDownloadTaskStatus,
   CreateBackupDBInstanceResponse,
   DBInstancePrice,
-  BackupFile,
+  DescribeBackupAccessResponse,
   InquirePriceCreateDBInstancesRequest,
   IsolateDBInstanceRequest,
   DescribeSlowLogPatternsResponse,
-  SlowLogPattern,
+  ReplicaSetInfo,
   CreateDBInstanceHourRequest,
   AssignProjectRequest,
-  DescribeSlowLogsResponse,
+  CreateBackupDownloadTaskResponse,
   ClientConnection,
   InquirePriceModifyDBInstanceSpecRequest,
   BackupInfo,
   InquirePriceRenewDBInstancesRequest,
   DescribeAsyncRequestInfoRequest,
   SpecificationInfo,
-  CurrentOp,
+  CreateBackupDownloadTaskRequest,
   DescribeSlowLogPatternsRequest,
+  DescribeSlowLogsResponse,
   FlushInstanceRouterConfigResponse,
   InquirePriceModifyDBInstanceSpecResponse,
   SpecItem,
@@ -56,26 +59,30 @@ import {
   DescribeDBInstancesRequest,
   DescribeAsyncRequestInfoResponse,
   CreateDBInstanceResponse,
+  DescribeSlowLogsRequest,
   AssignProjectResponse,
+  BackupDownloadTask,
   DescribeDBBackupsRequest,
   DescribeClientConnectionsRequest,
   DescribeDBInstanceDealResponse,
   ModifyDBInstanceSpecResponse,
   ShardInfo,
   OfflineIsolatedDBInstanceResponse,
-  IsolateDBInstanceResponse,
+  DescribeBackupDownloadTaskRequest,
   DescribeBackupAccessRequest,
   RenameInstanceRequest,
   RenewDBInstancesResponse,
+  DescribeBackupDownloadTaskResponse,
   RenameInstanceResponse,
   DescribeClientConnectionsResponse,
   FlushInstanceRouterConfigRequest,
   DBInstanceInfo,
-  DescribeSlowLogsRequest,
-  DescribeBackupAccessResponse,
+  CurrentOp,
+  BackupFile,
   DescribeDBBackupsResponse,
   InstanceDetail,
   ModifyDBInstanceSpecRequest,
+  SlowLogPattern,
   CreateDBInstanceHourResponse,
   CreateBackupDBInstanceRequest,
   Operation,
@@ -214,6 +221,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口用来创建某个备份文件的下载任务
+   */
+  async CreateBackupDownloadTask(
+    req: CreateBackupDownloadTaskRequest,
+    cb?: (error: string, rep: CreateBackupDownloadTaskResponse) => void
+  ): Promise<CreateBackupDownloadTaskResponse> {
+    return this.request("CreateBackupDownloadTask", req, cb)
+  }
+
+  /**
    * 本接口(DescribeDBInstances)用于查询云数据库实例列表，支持通过项目ID、实例ID、实例状态等过滤条件来筛选实例。支持查询主实例、灾备实例和只读实例信息列表。
    */
   async DescribeDBInstances(
@@ -281,6 +298,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSpecInfoResponse) => void
   ): Promise<DescribeSpecInfoResponse> {
     return this.request("DescribeSpecInfo", req, cb)
+  }
+
+  /**
+   * 查询备份下载任务信息
+   */
+  async DescribeBackupDownloadTask(
+    req: DescribeBackupDownloadTaskRequest,
+    cb?: (error: string, rep: DescribeBackupDownloadTaskResponse) => void
+  ): Promise<DescribeBackupDownloadTaskResponse> {
+    return this.request("DescribeBackupDownloadTask", req, cb)
   }
 
   /**

@@ -5,7 +5,7 @@ export interface UploadIdResponse {
     /**
       * 画像洞察任务ID等信息
       */
-    TaskData?: TaskData;
+    TaskData: TaskData;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -81,7 +81,7 @@ export interface GetTaskDetailResponse {
     /**
       * 画像洞察任务TAG详细数据列表
       */
-    TaskDetailDataList?: Array<TaskDetailData>;
+    TaskDetailDataList: Array<TaskDetailData>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -94,7 +94,7 @@ export interface QueryCallDetailsResponse {
     /**
       * 调用明细
       */
-    CallDetails?: CallDetails;
+    CallDetails: CallDetails;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -137,7 +137,7 @@ export interface QueryGeneralStatResponse {
     /**
       * 调用量信息
       */
-    GeneralStat?: GeneralStat;
+    GeneralStat: GeneralStat;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -163,7 +163,7 @@ export interface GetTaskListResponse {
     /**
       * 任务列表对象
       */
-    TaskListData?: TaskListData;
+    TaskListData: TaskListData;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -304,7 +304,7 @@ export interface QueryCallStatResponse {
     /**
       * 调用量数组
       */
-    CallSet?: Array<CallStatItem>;
+    CallSet: Array<CallStatItem>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -381,7 +381,7 @@ export interface PredictRatingResponse {
     /**
       * 意向评级
       */
-    RatingData?: RatingData;
+    RatingData: RatingData;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

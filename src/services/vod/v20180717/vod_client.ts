@@ -63,6 +63,7 @@ import {
   AudioTransform,
   ResetProcedureTemplateRequest,
   ComposeMediaResponse,
+  UrlSignatureAuthPolicy,
   DeleteSampleSnapshotTemplateRequest,
   DescribeStorageDataResponse,
   AudioTemplateInfoForUpdate,
@@ -137,6 +138,8 @@ import {
   DescribeSnapshotByTimeOffsetTemplatesRequest,
   ProductInstance,
   CdnLogInfo,
+  SimpleAesEdkPair,
+  MediaSubtitleInfo,
   AiRecognitionTaskAsrFullTextResultInput,
   MediaMiniProgramReviewInfoItem,
   TaskStatData,
@@ -158,6 +161,7 @@ import {
   AiRecognitionTaskOcrWordsResult,
   PornAsrReviewTemplateInfo,
   AiRecognitionTaskSegmentResult,
+  MediaSubtitleItem,
   ProhibitedAsrReviewTemplateInfoForUpdate,
   ModifyAnimatedGraphicsTemplateResponse,
   ModifyAIAnalysisTemplateResponse,
@@ -194,6 +198,7 @@ import {
   DeleteWordSamplesRequest,
   EmptyTrackItem,
   StickerTrackItem,
+  DescribeDrmDataKeyResponse,
   VideoTemplateInfo,
   PoliticalOcrReviewTemplateInfo,
   PornOcrReviewTemplateInfoForUpdate,
@@ -228,6 +233,7 @@ import {
   AiRecognitionTaskAsrWordsResultOutput,
   ModifyAdaptiveDynamicStreamingTemplateResponse,
   MediaProcessTaskTranscodeResult,
+  DomainDetailInfo,
   ImageProcessingTemplate,
   ImageSpriteTaskInput,
   ObjectConfigureInfoForUpdate,
@@ -323,6 +329,7 @@ import {
   AiRecognitionTaskSegmentResultOutput,
   SegmentConfigureInfo,
   SnapshotByTimeOffsetTaskInput,
+  RefererAuthPolicy,
   TaskStatDataItem,
   ParseStreamingManifestResponse,
   AiReviewPornOcrTaskOutput,
@@ -354,6 +361,7 @@ import {
   AiAnalysisTaskClassificationResult,
   PoliticalImgReviewTemplateInfoForUpdate,
   UserDefineOcrTextReviewTemplateInfo,
+  DescribeVodDomainsResponse,
   AdaptiveStreamTemplate,
   TranscodeTaskInput,
   ModifyAIRecognitionTemplateRequest,
@@ -361,6 +369,7 @@ import {
   DescribeCDNStatDetailsRequest,
   ClipFileInfo2017,
   StatDataItem,
+  AccelerateAreaInfo,
   MediaSourceData,
   DescribePrepaidProductsResponse,
   ProhibitedAsrReviewTemplateInfo,
@@ -378,6 +387,7 @@ import {
   ComposeMediaTaskOutput,
   DescribeMediaInfosRequest,
   ModifyPersonSampleRequest,
+  DescribeDrmDataKeyRequest,
   AsrFullTextConfigureInfo,
   CreateAIRecognitionTemplateRequest,
   DescribeTaskDetailRequest,
@@ -419,6 +429,7 @@ import {
   AiSampleFailFaceInfo,
   UserDefineFaceReviewTemplateInfoForUpdate,
   CreateProcedureTemplateResponse,
+  DomainHTTPSConfig,
   DescribeMediaProcessUsageDataResponse,
   DescribeSuperPlayerConfigsRequest,
   AiRecognitionTaskOcrFullTextResultInput,
@@ -438,6 +449,7 @@ import {
   SnapshotByTimeOffsetTemplate,
   DeleteSnapshotByTimeOffsetTemplateResponse,
   ProhibitedOcrReviewTemplateInfoForUpdate,
+  DescribeVodDomainsRequest,
   DescribeTasksRequest,
   DescribeReviewDetailsResponse,
   CreateTranscodeTemplateResponse,
@@ -591,6 +603,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: EditMediaResponse) => void
   ): Promise<EditMediaResponse> {
     return this.request("EditMedia", req, cb)
+  }
+
+  /**
+   * 该接口用于查询点播域名信息列表。
+   */
+  async DescribeVodDomains(
+    req: DescribeVodDomainsRequest,
+    cb?: (error: string, rep: DescribeVodDomainsResponse) => void
+  ): Promise<DescribeVodDomainsResponse> {
+    return this.request("DescribeVodDomains", req, cb)
   }
 
   /**
@@ -762,13 +784,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询采样截图模板，支持根据条件，分页查询。
-   */
-  async DescribeSampleSnapshotTemplates(
-    req: DescribeSampleSnapshotTemplatesRequest,
-    cb?: (error: string, rep: DescribeSampleSnapshotTemplatesResponse) => void
-  ): Promise<DescribeSampleSnapshotTemplatesResponse> {
-    return this.request("DescribeSampleSnapshotTemplates", req, cb)
+     * 本 API 是 [旧版本加密](https://cloud.tencent.com/document/product/266/9638) 中[DescribeDrmDataKey 的 API 2017 接口](https://cloud.tencent.com/document/product/266/9643)的升级版本。
+如果您是新接入点播加密的用户，不要使用该 API。请参考[视频加密综述](https://cloud.tencent.com/document/product/266/45552)使用。
+     */
+  async DescribeDrmDataKey(
+    req: DescribeDrmDataKeyRequest,
+    cb?: (error: string, rep: DescribeDrmDataKeyResponse) => void
+  ): Promise<DescribeDrmDataKeyResponse> {
+    return this.request("DescribeDrmDataKey", req, cb)
   }
 
   /**
@@ -864,13 +887,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改用户自定义雪碧图模板。
+   * 根据任务流模板名字，获取任务流模板详情列表。
    */
-  async ModifyImageSpriteTemplate(
-    req: ModifyImageSpriteTemplateRequest,
-    cb?: (error: string, rep: ModifyImageSpriteTemplateResponse) => void
-  ): Promise<ModifyImageSpriteTemplateResponse> {
-    return this.request("ModifyImageSpriteTemplate", req, cb)
+  async DescribeProcedureTemplates(
+    req: DescribeProcedureTemplatesRequest,
+    cb?: (error: string, rep: DescribeProcedureTemplatesResponse) => void
+  ): Promise<DescribeProcedureTemplatesResponse> {
+    return this.request("DescribeProcedureTemplates", req, cb)
   }
 
   /**
@@ -1062,13 +1085,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据任务流模板名字，获取任务流模板详情列表。
+   * 修改用户自定义雪碧图模板。
    */
-  async DescribeProcedureTemplates(
-    req: DescribeProcedureTemplatesRequest,
-    cb?: (error: string, rep: DescribeProcedureTemplatesResponse) => void
-  ): Promise<DescribeProcedureTemplatesResponse> {
-    return this.request("DescribeProcedureTemplates", req, cb)
+  async ModifyImageSpriteTemplate(
+    req: ModifyImageSpriteTemplateRequest,
+    cb?: (error: string, rep: ModifyImageSpriteTemplateResponse) => void
+  ): Promise<ModifyImageSpriteTemplateResponse> {
+    return this.request("ModifyImageSpriteTemplate", req, cb)
   }
 
   /**
@@ -1428,6 +1451,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAdaptiveDynamicStreamingTemplatesResponse) => void
   ): Promise<DescribeAdaptiveDynamicStreamingTemplatesResponse> {
     return this.request("DescribeAdaptiveDynamicStreamingTemplates", req, cb)
+  }
+
+  /**
+   * 查询采样截图模板，支持根据条件，分页查询。
+   */
+  async DescribeSampleSnapshotTemplates(
+    req: DescribeSampleSnapshotTemplatesRequest,
+    cb?: (error: string, rep: DescribeSampleSnapshotTemplatesResponse) => void
+  ): Promise<DescribeSampleSnapshotTemplatesResponse> {
+    return this.request("DescribeSampleSnapshotTemplates", req, cb)
   }
 
   /**

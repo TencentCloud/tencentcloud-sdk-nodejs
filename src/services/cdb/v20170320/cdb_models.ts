@@ -567,35 +567,35 @@ export interface DescribeDBInstanceInfoResponse {
   /**
    * 实例 ID 。
    */
-  InstanceId?: string
+  InstanceId: string
 
   /**
    * 实例名称。
    */
-  InstanceName?: string
+  InstanceName: string
 
   /**
    * 是否开通加密，YES 已开通，NO 未开通。
    */
-  Encryption?: string
+  Encryption: string
 
   /**
       * 加密使用的密钥 ID 。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  KeyId?: string
+  KeyId: string
 
   /**
       * 密钥所在地域。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  KeyRegion?: string
+  KeyRegion: string
 
   /**
       * 当前 CDB 后端服务使用的 KMS 服务的默认地域。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DefaultKmsRegion?: string
+  DefaultKmsRegion: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2957,7 +2957,12 @@ export interface DescribeProjectSecurityGroupsResponse {
   /**
    * 安全组详情。
    */
-  Groups?: Array<SecurityGroup>
+  Groups: Array<SecurityGroup>
+
+  /**
+   * 安全组规则数量。
+   */
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4576,27 +4581,34 @@ export interface DescribeDBInstanceConfigResponse {
   /**
    * 主实例数据保护方式，可能的返回值：0 - 异步复制方式，1 - 半同步复制方式，2 - 强同步复制方式。
    */
-  ProtectMode?: number
+  ProtectMode: number
 
   /**
    * 主实例部署方式，可能的返回值：0 - 单可用部署，1 - 多可用区部署。
    */
-  DeployMode?: number
+  DeployMode: number
 
   /**
    * 实例可用区信息，格式如 "ap-shanghai-1"。
    */
-  Zone?: string
+  Zone: string
 
   /**
-   * 备库的配置信息。
-   */
-  SlaveConfig?: SlaveConfig
+      * 备库的配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SlaveConfig: SlaveConfig
 
   /**
-   * 强同步实例第二备库的配置信息。
+      * 强同步实例第二备库的配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BackupConfig: BackupConfig
+
+  /**
+   * 是否切换备库。
    */
-  BackupConfig?: BackupConfig
+  Switched: boolean
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5159,6 +5171,11 @@ export interface DescribeDatabasesResponse {
    * 返回的实例信息。
    */
   Items: Array<string>
+
+  /**
+   * 数据库名以及字符集
+   */
+  DatabaseList: Array<DatabasesWithCharacterLists>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6026,12 +6043,17 @@ export interface DescribeAuditConfigResponse {
       * 审计日志保存时长。目前支持的值包括：[0，30，180，365，1095，1825]。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  LogExpireDay?: number
+  LogExpireDay: number
 
   /**
    * 审计日志存储类型。目前支持的值包括："storage" - 存储型。
    */
-  LogType?: string
+  LogType: string
+
+  /**
+   * 是否正在关闭审计。目前支持的值包括："false"-否，"true"-是
+   */
+  IsClosing: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6040,18 +6062,18 @@ export interface DescribeAuditConfigResponse {
 }
 
 /**
- * ModifyAccountDescription返回参数结构体
+ * 数据库名以及字符集
  */
-export interface ModifyAccountDescriptionResponse {
+export interface DatabasesWithCharacterLists {
   /**
-   * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
+   * 数据库名
    */
-  AsyncRequestId?: string
+  DatabaseName: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 字符集类型
    */
-  RequestId?: string
+  CharacterSet: string
 }
 
 /**
@@ -6384,27 +6406,32 @@ export interface DescribeParamTemplateInfoResponse {
   /**
    * 参数模板 ID。
    */
-  TemplateId?: number
+  TemplateId: number
 
   /**
    * 参数模板名称。
    */
-  Name?: string
+  Name: string
 
   /**
-   * 参数模板描述
+   * 参数模板对应实例版本
    */
-  EngineVersion?: string
+  EngineVersion: string
 
   /**
    * 参数模板中的参数数量
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 参数详情
    */
-  Items?: Array<ParameterDetail>
+  Items: Array<ParameterDetail>
+
+  /**
+   * 参数模板描述
+   */
+  Description: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6580,6 +6607,21 @@ export interface OfflineIsolatedInstancesRequest {
    * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
    */
   InstanceIds: Array<string>
+}
+
+/**
+ * ModifyAccountDescription返回参数结构体
+ */
+export interface ModifyAccountDescriptionResponse {
+  /**
+   * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
+   */
+  AsyncRequestId?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

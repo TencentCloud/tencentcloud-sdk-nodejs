@@ -135,6 +135,10 @@ export interface ImageInfo {
       * 尺寸名称Id
       */
     DimensionsNameId?: number;
+    /**
+      * 平台用户标识
+      */
+    UserId?: string;
 }
 /**
  * CreateOrderAndDownloads请求参数结构体

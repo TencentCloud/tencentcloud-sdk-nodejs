@@ -68,7 +68,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeGroupByPath(req: DescribeGroupByPathRequest, cb?: (error: string, rep: DescribeGroupByPathResponse) => void): Promise<DescribeGroupByPathResponse>;
     /**
-     * 本接口()用于查询设备含有录像文件的日期列表。
+     * 本接口(GetRecordDatesByDev)用于查询设备含有录像文件的日期列表。
      */
     GetRecordDatesByDev(req: GetRecordDatesByDevRequest, cb?: (error: string, rep: GetRecordDatesByDevResponse) => void): Promise<GetRecordDatesByDevResponse>;
     /**

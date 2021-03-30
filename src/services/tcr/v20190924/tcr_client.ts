@@ -49,8 +49,9 @@ import {
   VpcAndDomainInfo,
   DeleteInstanceTokenResponse,
   DescribeInstancesResponse,
+  CreateReplicationInstanceRequest,
   ModifyInstanceTokenResponse,
-  DescribeApplicationTriggerLogPersonalResponse,
+  DescribeApplicationTriggerPersonalRequest,
   FavorResp,
   DeleteNamespacePersonalRequest,
   NamespaceInfo,
@@ -96,7 +97,6 @@ import {
   CreateSecurityPolicyResponse,
   DescribeRepositoriesRequest,
   DescribeImageFilterPersonalRequest,
-  CreateInternalEndpointDnsResponse,
   ModifyNamespaceResponse,
   ValidateRepositoryExistPersonalRequest,
   ModifyUserPasswordPersonalResponse,
@@ -128,6 +128,7 @@ import {
   DescribeWebhookTriggerResponse,
   DescribeImageManifestsRequest,
   ModifyNamespaceRequest,
+  DeleteImageRequest,
   ModifyRepositoryAccessPersonalRequest,
   TagSpecification,
   DescribeNamespacesRequest,
@@ -169,7 +170,7 @@ import {
   ModifyRepositoryInfoPersonalRequest,
   DescribeApplicationTriggerLogPersonalRequest,
   DescribeFavorRepositoryPersonalRequest,
-  DescribeApplicationTriggerPersonalRequest,
+  DescribeApplicationTriggerLogPersonalResponse,
   ManageInternalEndpointResponse,
   DescribeRepositoryFilterPersonalResponse,
   DescribeFavorRepositoryPersonalResponse,
@@ -177,6 +178,7 @@ import {
   ModifyRepositoryAccessPersonalResponse,
   ManageExternalEndpointResponse,
   ModifyApplicationTriggerPersonalRequest,
+  CreateReplicationInstanceResponse,
   CreateInstanceTokenRequest,
   ModifyUserPasswordPersonalRequest,
   DescribeSecurityPoliciesRequest,
@@ -205,7 +207,7 @@ import {
   TcrRepositoryInfo,
   TcrInstanceToken,
   DeleteRepositoryRequest,
-  DeleteImageRequest,
+  CreateInternalEndpointDnsResponse,
   CreateRepositoryPersonalResponse,
   CreateApplicationTriggerPersonalResponse,
   ManageInternalEndpointRequest,
@@ -614,13 +616,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询从实例列表
+   * 查询创建从实例任务状态
    */
-  async DescribeReplicationInstances(
-    req: DescribeReplicationInstancesRequest,
-    cb?: (error: string, rep: DescribeReplicationInstancesResponse) => void
-  ): Promise<DescribeReplicationInstancesResponse> {
-    return this.request("DescribeReplicationInstances", req, cb)
+  async DescribeReplicationInstanceCreateTasks(
+    req: DescribeReplicationInstanceCreateTasksRequest,
+    cb?: (error: string, rep: DescribeReplicationInstanceCreateTasksResponse) => void
+  ): Promise<DescribeReplicationInstanceCreateTasksResponse> {
+    return this.request("DescribeReplicationInstanceCreateTasks", req, cb)
   }
 
   /**
@@ -684,13 +686,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询创建从实例任务状态
+   * 创建从实例
    */
-  async DescribeReplicationInstanceCreateTasks(
-    req: DescribeReplicationInstanceCreateTasksRequest,
-    cb?: (error: string, rep: DescribeReplicationInstanceCreateTasksResponse) => void
-  ): Promise<DescribeReplicationInstanceCreateTasksResponse> {
-    return this.request("DescribeReplicationInstanceCreateTasks", req, cb)
+  async CreateReplicationInstance(
+    req: CreateReplicationInstanceRequest,
+    cb?: (error: string, rep: CreateReplicationInstanceResponse) => void
+  ): Promise<CreateReplicationInstanceResponse> {
+    return this.request("CreateReplicationInstance", req, cb)
   }
 
   /**
@@ -941,6 +943,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteImageResponse) => void
   ): Promise<DeleteImageResponse> {
     return this.request("DeleteImage", req, cb)
+  }
+
+  /**
+   * 查询从实例列表
+   */
+  async DescribeReplicationInstances(
+    req: DescribeReplicationInstancesRequest,
+    cb?: (error: string, rep: DescribeReplicationInstancesResponse) => void
+  ): Promise<DescribeReplicationInstancesResponse> {
+    return this.request("DescribeReplicationInstances", req, cb)
   }
 
   /**

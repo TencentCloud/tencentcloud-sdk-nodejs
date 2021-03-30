@@ -60,6 +60,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("EditMedia", req, cb);
     }
     /**
+     * 该接口用于查询点播域名信息列表。
+     */
+    async DescribeVodDomains(req, cb) {
+        return this.request("DescribeVodDomains", req, cb);
+    }
+    /**
      * * 我们强烈建议您使用云点播提供的 [服务端上传 SDK](/document/product/266/9759#1.-.E5.8F.91.E8.B5.B7.E4.B8.8A.E4.BC.A0) 来上传文件。直接调用 API 进行上传的难度和工作量都显著大于使用 SDK。
 * 该接口用于申请媒体文件（和封面文件）的上传，获取文件上传到云点播的元信息（包括上传路径、上传签名等），用于后续上传接口。
 * 上传流程请参考 [服务端上传综述](/document/product/266/9759)。
@@ -168,10 +174,11 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAdaptiveDynamicStreamingTemplate", req, cb);
     }
     /**
-     * 查询采样截图模板，支持根据条件，分页查询。
+     * 本 API 是 [旧版本加密](https://cloud.tencent.com/document/product/266/9638) 中[DescribeDrmDataKey 的 API 2017 接口](https://cloud.tencent.com/document/product/266/9643)的升级版本。
+如果您是新接入点播加密的用户，不要使用该 API。请参考[视频加密综述](https://cloud.tencent.com/document/product/266/45552)使用。
      */
-    async DescribeSampleSnapshotTemplates(req, cb) {
-        return this.request("DescribeSampleSnapshotTemplates", req, cb);
+    async DescribeDrmDataKey(req, cb) {
+        return this.request("DescribeDrmDataKey", req, cb);
     }
     /**
      * 删除用户自定义指定时间点截图模板。
@@ -234,10 +241,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCDNStatDetails", req, cb);
     }
     /**
-     * 修改用户自定义雪碧图模板。
+     * 根据任务流模板名字，获取任务流模板详情列表。
      */
-    async ModifyImageSpriteTemplate(req, cb) {
-        return this.request("ModifyImageSpriteTemplate", req, cb);
+    async DescribeProcedureTemplates(req, cb) {
+        return this.request("DescribeProcedureTemplates", req, cb);
     }
     /**
      * * 仅当待删分类无子分类且无媒体关联情况下，可删除分类；
@@ -372,10 +379,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteSuperPlayerConfig", req, cb);
     }
     /**
-     * 根据任务流模板名字，获取任务流模板详情列表。
+     * 修改用户自定义雪碧图模板。
      */
-    async DescribeProcedureTemplates(req, cb) {
-        return this.request("DescribeProcedureTemplates", req, cb);
+    async ModifyImageSpriteTemplate(req, cb) {
+        return this.request("ModifyImageSpriteTemplate", req, cb);
     }
     /**
      * 根据转码模板唯一标识，获取转码模板详情列表。返回结果包含符合条件的所有用户自定义模板及[系统预置转码模板](https://cloud.tencent.com/document/product/266/33476#.E9.A2.84.E7.BD.AE.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF)。
@@ -599,6 +606,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAdaptiveDynamicStreamingTemplates(req, cb) {
         return this.request("DescribeAdaptiveDynamicStreamingTemplates", req, cb);
+    }
+    /**
+     * 查询采样截图模板，支持根据条件，分页查询。
+     */
+    async DescribeSampleSnapshotTemplates(req, cb) {
+        return this.request("DescribeSampleSnapshotTemplates", req, cb);
     }
     /**
      * 该接口用于修改关键词的应用场景、标签，关键词本身不可修改，如需修改，可删除重建。

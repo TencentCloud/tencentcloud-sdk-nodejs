@@ -359,7 +359,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口根据传入的参数创建命名空间。
+   * 该接口根据传入的参数删除命名空间。
    */
   async DeleteNamespace(
     req: DeleteNamespaceRequest,
