@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeVpcRuleOverviewResponse, DescribeSyncAssetStatusResponse, ModifyAllSwitchStatusRequest, ModifyAllRuleStatusResponse, DescribeRuleOverviewResponse, CreateSecurityGroupApiRulesRequest, DescribeSecurityGroupListResponse, ModifyItemSwitchStatusResponse, CreateSecurityGroupApiRulesResponse, ModifyAcRuleResponse, ModifySequenceRulesResponse, DescribeTableStatusResponse, DeleteAcRuleResponse, ModifySequenceRulesRequest, DescribeSwitchListsResponse, DescribeSyncAssetStatusRequest, DeleteAllAccessControlRuleRequest, RunSyncAssetResponse, RunSyncAssetRequest, DeleteSecurityGroupRuleRequest, ModifyTableStatusResponse, ModifyItemSwitchStatusRequest, DescribeRuleOverviewRequest, DescribeVpcRuleOverviewRequest, DescribeAcListsRequest, DescribeTableStatusRequest, CreateAcRulesResponse, DescribeAssociatedInstanceListResponse, DescribeAssociatedInstanceListRequest, ModifyAcRuleRequest, DescribeNatRuleOverviewResponse, DeleteAcRuleRequest, DeleteAllAccessControlRuleResponse, DeleteSecurityGroupAllRuleResponse, ModifySecurityGroupAllRuleStatusResponse, CreateAcRulesRequest, DescribeSecurityGroupListRequest, DescribeSwitchListsRequest, ModifyTableStatusRequest, DeleteSecurityGroupRuleResponse, DescribeNatRuleOverviewRequest, ModifySecurityGroupAllRuleStatusRequest, DeleteSecurityGroupAllRuleRequest, ModifyAllRuleStatusRequest, DescribeAcListsResponse, ModifyAllSwitchStatusResponse } from "./cfw_models";
+import { DescribeVpcRuleOverviewResponse, SetNatFwDnatRuleRequest, DescribeSyncAssetStatusResponse, ModifyAllSwitchStatusRequest, ModifyAllRuleStatusResponse, DescribeRuleOverviewResponse, CreateSecurityGroupApiRulesRequest, DescribeSecurityGroupListResponse, ExpandCfwVerticalResponse, ModifyItemSwitchStatusRequest, ModifyItemSwitchStatusResponse, CreateSecurityGroupApiRulesResponse, ModifyAcRuleResponse, ModifySequenceRulesResponse, DescribeTableStatusResponse, DeleteAcRuleResponse, ModifySequenceRulesRequest, DescribeSwitchListsResponse, DescribeSyncAssetStatusRequest, ModifySecurityGroupAllRuleStatusResponse, DescribeCfwEipsResponse, DeleteAllAccessControlRuleRequest, RunSyncAssetResponse, RunSyncAssetRequest, DeleteSecurityGroupRuleRequest, ModifyTableStatusResponse, SetNatFwDnatRuleResponse, DescribeCfwEipsRequest, DescribeRuleOverviewRequest, DescribeVpcRuleOverviewRequest, DescribeAcListsRequest, DescribeTableStatusRequest, CreateAcRulesResponse, DescribeAssociatedInstanceListResponse, DescribeAssociatedInstanceListRequest, ModifyAcRuleRequest, DescribeNatRuleOverviewResponse, DeleteAcRuleRequest, DeleteAllAccessControlRuleResponse, DeleteSecurityGroupAllRuleResponse, ExpandCfwVerticalRequest, CreateAcRulesRequest, DescribeSecurityGroupListRequest, DescribeSwitchListsRequest, ModifyTableStatusRequest, DeleteSecurityGroupRuleResponse, DescribeNatRuleOverviewRequest, ModifySecurityGroupAllRuleStatusRequest, DeleteSecurityGroupAllRuleRequest, ModifyAllRuleStatusRequest, DescribeAcListsResponse, ModifyAllSwitchStatusResponse } from "./cfw_models";
 /**
  * cfw client
  * @class
@@ -68,6 +68,10 @@ export declare class Client extends AbstractClient {
      */
     ModifyAllSwitchStatus(req: ModifyAllSwitchStatusRequest, cb?: (error: string, rep: ModifyAllSwitchStatusResponse) => void): Promise<ModifyAllSwitchStatusResponse>;
     /**
+     * 配置防火墙Dnat规则
+     */
+    SetNatFwDnatRule(req: SetNatFwDnatRuleRequest, cb?: (error: string, rep: SetNatFwDnatRuleResponse) => void): Promise<SetNatFwDnatRuleResponse>;
+    /**
      * 启用停用全部规则
      */
     ModifyAllRuleStatus(req: ModifyAllRuleStatusRequest, cb?: (error: string, rep: ModifyAllRuleStatusResponse) => void): Promise<ModifyAllRuleStatusResponse>;
@@ -75,6 +79,10 @@ export declare class Client extends AbstractClient {
      * 查询规则表状态
      */
     DescribeTableStatus(req: DescribeTableStatusRequest, cb?: (error: string, rep: DescribeTableStatusResponse) => void): Promise<DescribeTableStatusResponse>;
+    /**
+     * 查询防火墙弹性公网ip
+     */
+    DescribeCfwEips(req: DescribeCfwEipsRequest, cb?: (error: string, rep: DescribeCfwEipsResponse) => void): Promise<DescribeCfwEipsResponse>;
     /**
      * 同步资产-互联网&VPC
      */
@@ -95,6 +103,10 @@ export declare class Client extends AbstractClient {
      * 全部删除规则
      */
     DeleteAllAccessControlRule(req: DeleteAllAccessControlRuleRequest, cb?: (error: string, rep: DeleteAllAccessControlRuleResponse) => void): Promise<DeleteAllAccessControlRuleResponse>;
+    /**
+     * 防火墙垂直扩容
+     */
+    ExpandCfwVertical(req: ExpandCfwVerticalRequest, cb?: (error: string, rep: ExpandCfwVerticalResponse) => void): Promise<ExpandCfwVerticalResponse>;
     /**
      * 修改单个防火墙开关
      */

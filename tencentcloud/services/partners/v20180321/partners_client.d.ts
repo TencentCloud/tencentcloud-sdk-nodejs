@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeAgentDealsCacheRequest, DescribeSalesmansRequest, DescribeAgentAuditedClientsRequest, RemovePayRelationForClientRequest, AgentPayDealsRequest, DescribeAgentClientGradeResponse, DescribeClientBalanceResponse, DescribeAgentSelfPayDealsResponse, AgentTransferMoneyRequest, DescribeClientBalanceRequest, RemovePayRelationForClientResponse, DescribeRebateInfosRequest, CreatePayRelationForClientResponse, DescribeAgentAuditedClientsResponse, DescribeAgentBillsResponse, DescribeAgentPayDealsRequest, AuditApplyClientRequest, ModifyClientRemarkResponse, DescribeAgentClientsResponse, DescribeAgentClientsRequest, DescribeSalesmansResponse, DescribeUnbindClientListRequest, DescribeAgentPayDealsResponse, DescribeAgentSelfPayDealsRequest, ModifyClientRemarkRequest, CreatePayRelationForClientRequest, AgentTransferMoneyResponse, DescribeUnbindClientListResponse, AuditApplyClientResponse, DescribeAgentDealsCacheResponse, DescribeAgentBillsRequest, AgentPayDealsResponse, DescribeRebateInfosResponse, DescribeAgentClientGradeRequest } from "./partners_models";
+import { DescribeAgentDealsCacheRequest, DescribeSalesmansRequest, DescribeAgentAuditedClientsRequest, RemovePayRelationForClientRequest, AgentPayDealsRequest, DescribeAgentClientGradeResponse, DescribeAgentDealsByCacheResponse, DescribeClientBalanceResponse, DescribeAgentSelfPayDealsResponse, AgentTransferMoneyRequest, DescribeClientBalanceRequest, RemovePayRelationForClientResponse, DescribeRebateInfosRequest, CreatePayRelationForClientResponse, DescribeAgentAuditedClientsResponse, DescribeAgentBillsResponse, DescribeAgentPayDealsRequest, AuditApplyClientRequest, ModifyClientRemarkResponse, DescribeAgentClientsResponse, DescribeAgentClientsRequest, DescribeSalesmansResponse, DescribeUnbindClientListRequest, DescribeAgentPayDealsResponse, DescribeAgentDealsByCacheRequest, DescribeAgentSelfPayDealsRequest, ModifyClientRemarkRequest, CreatePayRelationForClientRequest, AgentTransferMoneyResponse, DescribeUnbindClientListResponse, AuditApplyClientResponse, DescribeAgentDealsCacheResponse, DescribeAgentBillsRequest, AgentPayDealsResponse, DescribeRebateInfosResponse, DescribeAgentClientGradeRequest } from "./partners_models";
 /**
  * partners client
  * @class
@@ -12,7 +12,8 @@ export declare class Client extends AbstractClient {
      */
     DescribeAgentSelfPayDeals(req: DescribeAgentSelfPayDealsRequest, cb?: (error: string, rep: DescribeAgentSelfPayDealsResponse) => void): Promise<DescribeAgentSelfPayDealsResponse>;
     /**
-     * 供超大型代理商（代客数量>=3000 ）拉取缓存的全量客户订单。
+     * 【该接口将逐步下线，请切换使用升级版本DescribeAgentDealsByCache】供超大型代理商（代客数量>=3000 ）拉取缓存的全量客户订单。
+
      */
     DescribeAgentDealsCache(req: DescribeAgentDealsCacheRequest, cb?: (error: string, rep: DescribeAgentDealsCacheResponse) => void): Promise<DescribeAgentDealsCacheResponse>;
     /**
@@ -75,4 +76,8 @@ export declare class Client extends AbstractClient {
      * 代理商可以审核其名下申请中代客
      */
     AuditApplyClient(req: AuditApplyClientRequest, cb?: (error: string, rep: AuditApplyClientResponse) => void): Promise<AuditApplyClientResponse>;
+    /**
+     * 供超大型代理商（代客数量>=3000 ）拉取缓存的全量客户订单。
+     */
+    DescribeAgentDealsByCache(req: DescribeAgentDealsByCacheRequest, cb?: (error: string, rep: DescribeAgentDealsByCacheResponse) => void): Promise<DescribeAgentDealsByCacheResponse>;
 }

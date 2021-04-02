@@ -1952,7 +1952,7 @@ export interface CreateClusterInstancesRequest {
  */
 export interface ManuallyAdded {
   /**
-   * 加入中节的点数量
+   * 加入中的节点数量
    */
   Joining: number
 

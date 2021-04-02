@@ -968,6 +968,16 @@ it("vod.v20180717.ModifyAnimatedGraphicsTemplate", async function () {
     }
 })
 
+it("vod.v20180717.AttachMediaSubtitles", async function () {
+    try {
+       const data = await client.AttachMediaSubtitles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.DescribeDailyPlayStatFileList", async function () {
     try {
        const data = await client.DescribeDailyPlayStatFileList({})

@@ -97,6 +97,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCloudBaseRunResource", req, cb);
     }
     /**
+     * 云项目部署列表
+     */
+    async DescribeCloudBaseProjectVersionList(req, cb) {
+        return this.request("DescribeCloudBaseProjectVersionList", req, cb);
+    }
+    /**
      * 获取云开发项目列表
      */
     async DescribeCloudBaseProjectLatestVersionList(req, cb) {

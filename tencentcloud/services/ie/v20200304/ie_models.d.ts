@@ -187,6 +187,10 @@ export interface MuxInfo {
       * 删除流，可选项：video,audio。
       */
     DeleteStream?: string;
+    /**
+      * Flv 参数，目前支持add_keyframe_index
+      */
+    FlvFlags?: string;
 }
 /**
  * 目标视频信息。
@@ -1317,6 +1321,13 @@ export interface AudioInfo {
       * 音频降噪信息
       */
     Denoise?: Denoise;
+    /**
+      * 开启添加静音，可选项：
+0：不开启，
+1：开启，
+默认不开启
+      */
+    EnableMuteAudio?: number;
 }
 /**
  * 画质重生子任务结果

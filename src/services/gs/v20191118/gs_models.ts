@@ -115,7 +115,7 @@ export interface CreateSessionRequest {
   GameId: string
 
   /**
-   * 游戏区域，ap-guangzhou、ap-shanghai、ap-beijing、ap-chengdu、ap-chongqing、ap-nanjing等
+   * 【已废弃】只在TrylockWorker时生效
    */
   GameRegion?: string
 
@@ -125,7 +125,7 @@ export interface CreateSessionRequest {
   GameParas?: string
 
   /**
-   * 分辨率,，可设置为1080p或720p
+   * 分辨率,，可设置为1080p或720p或1920x1080格式
    */
   Resolution?: string
 
@@ -135,22 +135,22 @@ export interface CreateSessionRequest {
   ImageUrl?: string
 
   /**
-   * 【废弃】资源池编号
+   * 【已废弃】
    */
   SetNo?: number
 
   /**
-   * 单位Mbps，固定码率，后端不动态调整(MaxBitrate和MinBitrate将无效)
+   * 单位Mbps，固定码率，有一定浮动范围，后端不动态调整(MaxBitrate和MinBitrate将无效)
    */
   Bitrate?: number
 
   /**
-   * 单位Mbps，动态调整最大码率
+   * 单位Mbps，动态调整最大码率，有一定浮动范围
    */
   MaxBitrate?: number
 
   /**
-   * 单位Mbps，动态调整最小码率
+   * 单位Mbps，动态调整最小码率，有一定浮动范围
    */
   MinBitrate?: number
 
@@ -160,22 +160,22 @@ export interface CreateSessionRequest {
   Fps?: number
 
   /**
-   * 游戏用户IP，用于就近调度，例如125.127.178.228
+   * 【已废弃】只在TrylockWorker时生效
    */
   UserIp?: string
 
   /**
-   * 优化项，便于客户灰度开启新的优化项，默认为0
+   * 【已废弃】优化项，便于客户灰度开启新的优化项，默认为0
    */
   Optimization?: number
 
   /**
-   * 【多人云游】游戏主机用户ID
+   * 【互动云游】游戏主机用户ID
    */
   HostUserId?: string
 
   /**
-   * 【多人云游】角色；Player表示玩家；Viewer表示观察者
+   * 【互动云游】角色；Player表示玩家；Viewer表示观察者
    */
   Role?: string
 
@@ -192,17 +192,17 @@ export interface CreateSessionResponse {
   /**
    * 服务端session信息，返回给JSSDK
    */
-  ServerSession?: string
+  ServerSession: string
 
   /**
-   * 【多人游戏】角色编号；比如1、2、3、4
+   * 【已废弃】
    */
-  RoleNumber?: string
+  RoleNumber: string
 
   /**
-   * 【多人云游】角色；Player表示玩家；Viewer表示观察者
+   * 【互动云游】角色；Player表示玩家；Viewer表示观察者
    */
-  Role?: string
+  Role: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

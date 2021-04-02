@@ -50,6 +50,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("PreviewPaiDomainName", req, cb);
     }
     /**
+     * 本接口（ClearLaunchConfigurationAttributes）用于将启动配置内的特定属性完全清空。
+     */
+    async ClearLaunchConfigurationAttributes(req, cb) {
+        return this.request("ClearLaunchConfigurationAttributes", req, cb);
+    }
+    /**
      * 本接口（ModifyScalingPolicy）用于修改告警触发策略。
      */
     async ModifyScalingPolicy(req, cb) {

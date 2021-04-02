@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeExecutionHistoryResponse, DescribeExecutionsRequest, DescribeFlowServicesResponse, DescribeFlowServiceDetailResponse, DescribeExecutionResponse, DescribeFlowServicesRequest, DescribeExecutionRequest, DescribeExecutionHistoryRequest, CreateFlowServiceResponse, StartExecutionRequest, ModifyFlowServiceResponse, StartExecutionResponse, CreateFlowServiceRequest, DescribeExecutionsResponse, ModifyFlowServiceRequest, DescribeFlowServiceDetailRequest } from "./asw_models";
+import { DescribeExecutionHistoryResponse, DescribeExecutionsRequest, DescribeFlowServicesResponse, DescribeFlowServiceDetailResponse, DescribeExecutionResponse, DescribeFlowServicesRequest, DescribeExecutionRequest, DescribeExecutionHistoryRequest, CreateFlowServiceResponse, StartExecutionRequest, ModifyFlowServiceResponse, StartExecutionResponse, CreateFlowServiceRequest, DescribeExecutionsResponse, ModifyFlowServiceRequest, DescribeFlowServiceDetailRequest, StopExecutionResponse, StopExecutionRequest } from "./asw_models";
 /**
  * asw client
  * @class
@@ -11,6 +11,10 @@ export declare class Client extends AbstractClient {
      * 为指定的状态机启动一次执行
      */
     StartExecution(req: StartExecutionRequest, cb?: (error: string, rep: StartExecutionResponse) => void): Promise<StartExecutionResponse>;
+    /**
+     * 终止某个状态机
+     */
+    StopExecution(req: StopExecutionRequest, cb?: (error: string, rep: StopExecutionResponse) => void): Promise<StopExecutionResponse>;
     /**
      * 一次执行会有很多步骤，经过很多节点，这个接口描述某一次执行的事件的历史
      */

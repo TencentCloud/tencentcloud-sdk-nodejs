@@ -108,6 +108,7 @@ import {
   DeleteAIRecognitionTemplateRequest,
   FileUploadTask,
   DescribeCDNStatDetailsResponse,
+  AttachMediaSubtitlesRequest,
   AiAnalysisTaskCoverResult,
   AiAnalysisTaskClassificationOutput,
   FileDeleteTask,
@@ -225,6 +226,7 @@ import {
   SearchMediaResponse,
   AiAnalysisTaskTagOutput,
   AiAnalysisTaskHighlightOutput,
+  MediaSubtitleInput,
   ProcessMediaRequest,
   ModifyMediaInfoResponse,
   AiRecognitionTaskOcrFullTextResult,
@@ -296,6 +298,7 @@ import {
   SplitMediaRequest,
   AiReviewTerrorismOcrTaskOutput,
   AiAnalysisResult,
+  ImageWatermarkInputForUpdate,
   DescribeAIAnalysisTemplatesRequest,
   MediaTranscodeInfo,
   ResolutionNameInfo,
@@ -319,7 +322,7 @@ import {
   DeletePersonSampleResponse,
   CreateSnapshotByTimeOffsetTemplateResponse,
   ModifyContentReviewTemplateRequest,
-  ImageWatermarkInputForUpdate,
+  AttachMediaSubtitlesResponse,
   AiContentReviewTaskInput,
   CreateAdaptiveDynamicStreamingTemplateResponse,
   ClassificationConfigureInfo,
@@ -1658,6 +1661,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 关联媒资字幕，将指定的字幕关联到转自适应码流模板号对应的媒体输出文件中（或解除关联）。
+   */
+  async AttachMediaSubtitles(
+    req: AttachMediaSubtitlesRequest,
+    cb?: (error: string, rep: AttachMediaSubtitlesResponse) => void
+  ): Promise<AttachMediaSubtitlesResponse> {
+    return this.request("AttachMediaSubtitles", req, cb)
+  }
+
+  /**
      * 该接口用于查询播放统计文件的下载地址。
 * 可以查询最近30天的播放统计文件下载地址。
 * 云点播每天对前一天的 CDN 请求日志进行分析处理，生成播放统计文件。
@@ -1789,7 +1802,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改媒体文件的属性，包括分类、名称、描述、标签、过期时间、打点信息、视频封面等。
+   * 修改媒体文件的属性，包括分类、名称、描述、标签、过期时间、打点信息、视频封面、字幕信息等。
    */
   async ModifyMediaInfo(
     req: ModifyMediaInfoRequest,

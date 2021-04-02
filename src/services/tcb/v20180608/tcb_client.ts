@@ -68,6 +68,7 @@ import {
   EnvInfo,
   DestroyEnvRequest,
   DestroyEnvResponse,
+  DescribeCloudBaseProjectVersionListRequest,
   CodeSource,
   DescribeEnvsResponse,
   CreateAuthDomainRequest,
@@ -76,6 +77,7 @@ import {
   LoginStatistic,
   CreatePostpayPackageResponse,
   EstablishCloudBaseRunServerRequest,
+  DescribeCloudBaseProjectVersionListResponse,
   DescribeDownloadFileRequest,
   ReinstateEnvResponse,
   CloudBaseRunVpcSubnet,
@@ -255,6 +257,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudBaseRunResourceResponse) => void
   ): Promise<DescribeCloudBaseRunResourceResponse> {
     return this.request("DescribeCloudBaseRunResource", req, cb)
+  }
+
+  /**
+   * 云项目部署列表
+   */
+  async DescribeCloudBaseProjectVersionList(
+    req: DescribeCloudBaseProjectVersionListRequest,
+    cb?: (error: string, rep: DescribeCloudBaseProjectVersionListResponse) => void
+  ): Promise<DescribeCloudBaseProjectVersionListResponse> {
+    return this.request("DescribeCloudBaseProjectVersionList", req, cb)
   }
 
   /**

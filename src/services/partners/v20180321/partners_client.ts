@@ -25,6 +25,7 @@ import {
   RemovePayRelationForClientRequest,
   AgentPayDealsRequest,
   DescribeAgentClientGradeResponse,
+  DescribeAgentDealsByCacheResponse,
   RebateInfoElem,
   DescribeClientBalanceResponse,
   DescribeAgentSelfPayDealsResponse,
@@ -41,12 +42,14 @@ import {
   AuditApplyClientRequest,
   ModifyClientRemarkResponse,
   DescribeAgentClientsResponse,
+  AgentDealNewElem,
   DescribeAgentClientsRequest,
   DescribeSalesmansResponse,
   AgentAuditedClient,
   DescribeUnbindClientListRequest,
   DescribeAgentPayDealsResponse,
   DealGoodsPriceElem,
+  DescribeAgentDealsByCacheRequest,
   DescribeAgentSelfPayDealsRequest,
   ModifyClientRemarkRequest,
   CreatePayRelationForClientRequest,
@@ -59,6 +62,7 @@ import {
   AgentPayDealsResponse,
   AgentDealElem,
   AgentSalesmanElem,
+  DealGoodsPriceNewElem,
   DescribeRebateInfosResponse,
   DescribeAgentClientGradeRequest,
 } from "./partners_models"
@@ -83,8 +87,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 供超大型代理商（代客数量>=3000 ）拉取缓存的全量客户订单。
-   */
+     * 【该接口将逐步下线，请切换使用升级版本DescribeAgentDealsByCache】供超大型代理商（代客数量>=3000 ）拉取缓存的全量客户订单。
+
+     */
   async DescribeAgentDealsCache(
     req: DescribeAgentDealsCacheRequest,
     cb?: (error: string, rep: DescribeAgentDealsCacheResponse) => void
@@ -240,5 +245,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AuditApplyClientResponse) => void
   ): Promise<AuditApplyClientResponse> {
     return this.request("AuditApplyClient", req, cb)
+  }
+
+  /**
+   * 供超大型代理商（代客数量>=3000 ）拉取缓存的全量客户订单。
+   */
+  async DescribeAgentDealsByCache(
+    req: DescribeAgentDealsByCacheRequest,
+    cb?: (error: string, rep: DescribeAgentDealsByCacheResponse) => void
+  ): Promise<DescribeAgentDealsByCacheResponse> {
+    return this.request("DescribeAgentDealsByCache", req, cb)
   }
 }

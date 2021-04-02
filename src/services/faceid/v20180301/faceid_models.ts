@@ -61,6 +61,11 @@ export interface GetDetectInfoEnhancedRequest {
    * 是否需要从身份证中抠出头像。默认为false。（InfoType需要包含2）
    */
   IsNeedIdCardAvatar?: boolean
+
+  /**
+   * 是否需要对返回中的敏感信息进行加密。其中敏感信息包括：Response.Text.IdCard、Response.Text.Name、Response.Text.OcrIdCard、Response.Text.OcrName
+   */
+  IsEncrypt?: boolean
 }
 
 /**
@@ -419,25 +424,31 @@ export interface GetDetectInfoEnhancedResponse {
       * 文本类信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Text?: DetectInfoText
+  Text: DetectInfoText
 
   /**
       * 身份证照片信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  IdCardData?: DetectInfoIdCardData
+  IdCardData: DetectInfoIdCardData
 
   /**
       * 最佳帧信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  BestFrame?: DetectInfoBestFrame
+  BestFrame: DetectInfoBestFrame
 
   /**
       * 视频信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  VideoData?: DetectInfoVideoData
+  VideoData: DetectInfoVideoData
+
+  /**
+      * 敏感数据加密信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Encryption: Encryption
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -615,6 +626,11 @@ export interface IdCardOCRVerificationRequest {
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
   ImageUrl?: string
+
+  /**
+   * 敏感数据加密信息。对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+   */
+  Encryption?: Encryption
 }
 
 /**
@@ -875,46 +891,46 @@ export interface IdCardOCRVerificationResponse {
 -4: 证件库服务异常
 -5: 证件库中无此身份证记录
       */
-  Result?: string
+  Result: string
 
   /**
    * 业务结果描述。
    */
-  Description?: string
+  Description: string
 
   /**
    * 用于验证的姓名
    */
-  Name?: string
+  Name: string
 
   /**
    * 用于验证的身份证号
    */
-  IdCard?: string
+  IdCard: string
 
   /**
       * OCR得到的性别
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Sex?: string
+  Sex: string
 
   /**
       * OCR得到的民族
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Nation?: string
+  Nation: string
 
   /**
       * OCR得到的生日
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Birth?: string
+  Birth: string
 
   /**
       * OCR得到的地址
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Address?: string
+  Address: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

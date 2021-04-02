@@ -1422,6 +1422,19 @@ export interface DescribeBasicDeviceThresholdRequest {
     BasicIspCode?: number;
 }
 /**
+ * ModifyDDoSWaterKey返回参数结构体
+ */
+export interface ModifyDDoSWaterKeyResponse {
+    /**
+      * 水印密钥列表
+      */
+    KeyList?: Array<WaterPrintKey>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribleNewL7Rules返回参数结构体
  */
 export interface DescribleNewL7RulesResponse {
@@ -1566,21 +1579,41 @@ export interface DescribeDDoSDefendStatusResponse {
     RequestId?: string;
 }
 /**
- * DescribeCCSelfDefinePolicy返回参数结构体
+ * DescribeBizHttpStatus请求参数结构体
  */
-export interface DescribeCCSelfDefinePolicyResponse {
+export interface DescribeBizHttpStatusRequest {
     /**
-      * 自定义规则总数
+      * 大禹子产品代号（bgpip表示高防IP）
       */
-    Total?: number;
+    Business: string;
     /**
-      * 策略列表
+      * 资源Id
       */
-    Policys?: Array<CCPolicy>;
+    Id: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 统计周期，可取值300，1800，3600， 21600，86400，单位秒
       */
-    RequestId?: string;
+    Period: number;
+    /**
+      * 统计开始时间
+      */
+    StartTime: string;
+    /**
+      * 统计结束时间
+      */
+    EndTime: string;
+    /**
+      * 统计方式，仅支持sum
+      */
+    Statistics: string;
+    /**
+      * 协议及端口列表，协议可取值TCP, UDP, HTTP, HTTPS，仅统计纬度为连接数时有效
+      */
+    ProtoInfo?: Array<ProtocolPort>;
+    /**
+      * 特定域名查询
+      */
+    Domain?: string;
 }
 /**
  * cc自定义规则
@@ -2081,17 +2114,49 @@ export interface DescribeDDoSDefendStatusRequest {
     IPRegion?: string;
 }
 /**
- * ModifyDDoSWaterKey返回参数结构体
+ * 业务流量的http状态码聚合数据
  */
-export interface ModifyDDoSWaterKeyResponse {
+export interface HttpStatusMap {
     /**
-      * 水印密钥列表
+      * http2xx状态码
       */
-    KeyList?: Array<WaterPrintKey>;
+    Http2xx: Array<number>;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * http3xx状态码
       */
-    RequestId?: string;
+    Http3xx: Array<number>;
+    /**
+      * http404状态码
+      */
+    Http404: Array<number>;
+    /**
+      * http4xx状态码
+      */
+    Http4xx: Array<number>;
+    /**
+      * http5xx状态码
+      */
+    Http5xx: Array<number>;
+    /**
+      * http2xx回源状态码
+      */
+    SourceHttp2xx: Array<number>;
+    /**
+      * http3xx回源状态码
+      */
+    SourceHttp3xx: Array<number>;
+    /**
+      * http404回源状态码
+      */
+    SourceHttp404: Array<number>;
+    /**
+      * http4xx回源状态码
+      */
+    SourceHttp4xx: Array<number>;
+    /**
+      * http5xx回源状态码
+      */
+    SourceHttp5xx: Array<number>;
 }
 /**
  * ModifyL4Health请求参数结构体
@@ -2376,6 +2441,19 @@ export interface CreateL7CCRuleResponse {
     RequestId?: string;
 }
 /**
+ * ModifyCCFrequencyRulesStatus返回参数结构体
+ */
+export interface ModifyCCFrequencyRulesStatusResponse {
+    /**
+      * 成功码
+      */
+    Success?: SuccessCode;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyNetReturnSwitch请求参数结构体
  */
 export interface ModifyNetReturnSwitchRequest {
@@ -2439,21 +2517,17 @@ export interface CreateL7RulesRequest {
     Rules: Array<L7RuleEntry>;
 }
 /**
- * CreateL4Rules请求参数结构体
+ * DescribeBizHttpStatus返回参数结构体
  */
-export interface CreateL4RulesRequest {
+export interface DescribeBizHttpStatusResponse {
     /**
-      * 大禹子产品代号（bgpip表示高防IP；net表示高防IP专业版）
+      * 业务流量http状态码统计数据
       */
-    Business: string;
+    HttpStatusMap: HttpStatusMap;
     /**
-      * 资源ID
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Id: string;
-    /**
-      * 规则列表
-      */
-    Rules: Array<L4RuleEntry>;
+    RequestId?: string;
 }
 /**
  * DescribeNewL7RulesErrHealth返回参数结构体
@@ -2506,17 +2580,21 @@ export interface DescribeDDoSNetEvListResponse {
     RequestId?: string;
 }
 /**
- * ModifyCCFrequencyRulesStatus返回参数结构体
+ * CreateL4Rules请求参数结构体
  */
-export interface ModifyCCFrequencyRulesStatusResponse {
+export interface CreateL4RulesRequest {
     /**
-      * 成功码
+      * 大禹子产品代号（bgpip表示高防IP；net表示高防IP专业版）
       */
-    Success?: SuccessCode;
+    Business: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 资源ID
       */
-    RequestId?: string;
+    Id: string;
+    /**
+      * 规则列表
+      */
+    Rules: Array<L4RuleEntry>;
 }
 /**
  * ModifyNewL4Rule请求参数结构体
@@ -3591,6 +3669,23 @@ export interface ModifyDDoSAIStatusRequest {
     DDoSAI?: string;
 }
 /**
+ * DescribeDDoSAttackSource返回参数结构体
+ */
+export interface DescribeDDoSAttackSourceResponse {
+    /**
+      * 总攻击源条数
+      */
+    Total?: number;
+    /**
+      * 攻击源列表
+      */
+    AttackSourceList?: Array<DDoSAttackSourceRecord>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeResourceList返回参数结构体
  */
 export interface DescribeResourceListResponse {
@@ -4511,17 +4606,17 @@ export interface L4DelRule {
     RuleIdList: Array<string>;
 }
 /**
- * DescribeDDoSAttackSource返回参数结构体
+ * DescribeCCSelfDefinePolicy返回参数结构体
  */
-export interface DescribeDDoSAttackSourceResponse {
+export interface DescribeCCSelfDefinePolicyResponse {
     /**
-      * 总攻击源条数
+      * 自定义规则总数
       */
     Total?: number;
     /**
-      * 攻击源列表
+      * 策略列表
       */
-    AttackSourceList?: Array<DDoSAttackSourceRecord>;
+    Policys?: Array<CCPolicy>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

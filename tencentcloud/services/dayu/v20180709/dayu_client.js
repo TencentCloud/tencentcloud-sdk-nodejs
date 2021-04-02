@@ -304,6 +304,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeResourceList", req, cb);
     }
     /**
+     * 获取业务流量状态码统计
+     */
+    async DescribeBizHttpStatus(req, cb) {
+        return this.request("DescribeBizHttpStatus", req, cb);
+    }
+    /**
      * 删除CC自定义策略
      */
     async DeleteCCSelfDefinePolicy(req, cb) {
@@ -448,10 +454,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateL7RulesUpload", req, cb);
     }
     /**
-     * 获取DDoS攻击源IP地域分布图，支持全球攻击分布和国内省份攻击分布；
+     * 获取DDoS高级策略
      */
-    async DescribeDDoSAttackIPRegionMap(req, cb) {
-        return this.request("DescribeDDoSAttackIPRegionMap", req, cb);
+    async DescribeDDoSPolicy(req, cb) {
+        return this.request("DescribeDDoSPolicy", req, cb);
     }
     /**
      * 获取业务转发统计数据，支持转发流量和转发包速率
@@ -689,10 +695,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDDoSEvInfo", req, cb);
     }
     /**
-     * 获取DDoS高级策略
+     * 获取DDoS攻击源IP地域分布图，支持全球攻击分布和国内省份攻击分布；
      */
-    async DescribeDDoSPolicy(req, cb) {
-        return this.request("DescribeDDoSPolicy", req, cb);
+    async DescribeDDoSAttackIPRegionMap(req, cb) {
+        return this.request("DescribeDDoSAttackIPRegionMap", req, cb);
     }
 }
 exports.Client = Client;

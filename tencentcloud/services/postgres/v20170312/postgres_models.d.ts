@@ -70,6 +70,10 @@ export interface CreateDBInstancesRequest {
       * 实例需要绑定的Tag信息，默认为空
       */
     TagList?: Array<Tag>;
+    /**
+      * 安全组id
+      */
+    SecurityGroupIds?: Array<string>;
 }
 /**
  * SetAutoRenewFlag请求参数结构体
@@ -1177,6 +1181,10 @@ export interface CreateReadOnlyGroupRequest {
       * 延迟剔除最小保留实例数
       */
     MinDelayEliminateReserve?: number;
+    /**
+      * 安全组id
+      */
+    SecurityGroupIds?: Array<string>;
 }
 /**
  * CloseServerlessDBExtranetAccess返回参数结构体
@@ -1461,6 +1469,11 @@ export interface DBInstance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     StatusInReadonlyGroup: string;
+    /**
+      * 下线时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OfflineTime: string;
 }
 /**
  * DescribeProductConfig返回参数结构体
@@ -1673,6 +1686,10 @@ export interface CreateReadOnlyDBInstanceRequest {
       * 实例需要绑定的Tag信息，默认为空
       */
     TagList?: Tag;
+    /**
+      * 安全组id
+      */
+    SecurityGroupIds?: Array<string>;
 }
 /**
  * DescribeZones返回参数结构体
@@ -2216,15 +2233,15 @@ export interface CreateDBInstancesResponse {
     /**
       * 订单号列表。每个实例对应一个订单号。
       */
-    DealNames?: Array<string>;
+    DealNames: Array<string>;
     /**
       * 冻结流水号
       */
-    BillId?: string;
+    BillId: string;
     /**
       * 创建成功的实例ID集合，只在后付费情景下有返回值
       */
-    DBInstanceIdSet?: Array<string>;
+    DBInstanceIdSet: Array<string>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

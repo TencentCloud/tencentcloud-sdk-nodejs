@@ -478,6 +478,16 @@ it("dayu.v20180709.DescribeResourceList", async function () {
     }
 })
 
+it("dayu.v20180709.DescribeBizHttpStatus", async function () {
+    try {
+       const data = await client.DescribeBizHttpStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dayu.v20180709.DeleteCCSelfDefinePolicy", async function () {
     try {
        const data = await client.DeleteCCSelfDefinePolicy({})
@@ -718,9 +728,9 @@ it("dayu.v20180709.CreateL7RulesUpload", async function () {
     }
 })
 
-it("dayu.v20180709.DescribeDDoSAttackIPRegionMap", async function () {
+it("dayu.v20180709.DescribeDDoSPolicy", async function () {
     try {
-       const data = await client.DescribeDDoSAttackIPRegionMap({})
+       const data = await client.DescribeDDoSPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1118,9 +1128,9 @@ it("dayu.v20180709.DescribeDDoSEvInfo", async function () {
     }
 })
 
-it("dayu.v20180709.DescribeDDoSPolicy", async function () {
+it("dayu.v20180709.DescribeDDoSAttackIPRegionMap", async function () {
     try {
-       const data = await client.DescribeDDoSPolicy({})
+       const data = await client.DescribeDDoSAttackIPRegionMap({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

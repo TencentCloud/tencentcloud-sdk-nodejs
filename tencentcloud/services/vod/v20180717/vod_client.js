@@ -744,6 +744,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAnimatedGraphicsTemplate", req, cb);
     }
     /**
+     * 关联媒资字幕，将指定的字幕关联到转自适应码流模板号对应的媒体输出文件中（或解除关联）。
+     */
+    async AttachMediaSubtitles(req, cb) {
+        return this.request("AttachMediaSubtitles", req, cb);
+    }
+    /**
      * 该接口用于查询播放统计文件的下载地址。
 * 可以查询最近30天的播放统计文件下载地址。
 * 云点播每天对前一天的 CDN 请求日志进行分析处理，生成播放统计文件。
@@ -839,7 +845,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSuperPlayerConfigs", req, cb);
     }
     /**
-     * 修改媒体文件的属性，包括分类、名称、描述、标签、过期时间、打点信息、视频封面等。
+     * 修改媒体文件的属性，包括分类、名称、描述、标签、过期时间、打点信息、视频封面、字幕信息等。
      */
     async ModifyMediaInfo(req, cb) {
         return this.request("ModifyMediaInfo", req, cb);

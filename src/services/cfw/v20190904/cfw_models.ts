@@ -38,6 +38,41 @@ export interface DescribeVpcRuleOverviewResponse {
 }
 
 /**
+ * SetNatFwDnatRule请求参数结构体
+ */
+export interface SetNatFwDnatRuleRequest {
+  /**
+   * 0：cfw新增模式，1：cfw接入模式。
+   */
+  Mode: number
+
+  /**
+   * 操作类型，可选值：add，del，modify。
+   */
+  OperationType: string
+
+  /**
+   * 防火墙实例id。
+   */
+  CfwInstance?: string
+
+  /**
+   * 添加或删除操作的Dnat规则列表。
+   */
+  AddOrDelDnatRules?: Array<CfwNatDnatRule>
+
+  /**
+   * 修改操作的原始Dnat规则
+   */
+  OriginDnat?: CfwNatDnatRule
+
+  /**
+   * 修改操作的新的Dnat规则
+   */
+  NewDnat?: CfwNatDnatRule
+}
+
+/**
  * DescribeSyncAssetStatus返回参数结构体
  */
 export interface DescribeSyncAssetStatusResponse {
@@ -139,6 +174,41 @@ export interface DescribeRuleOverviewResponse {
 }
 
 /**
+ * NAT防火墙Dnat规则
+ */
+export interface CfwNatDnatRule {
+  /**
+   * 网络协议，可选值：TCP、UDP。
+   */
+  IpProtocol: string
+
+  /**
+   * 弹性IP。
+   */
+  PublicIpAddress: string
+
+  /**
+   * 公网端口。
+   */
+  PublicPort: number
+
+  /**
+   * 内网地址。
+   */
+  PrivateIpAddress: string
+
+  /**
+   * 内网端口。
+   */
+  PrivatePort: number
+
+  /**
+   * NAT防火墙转发规则描述。
+   */
+  Description: string
+}
+
+/**
  * CreateSecurityGroupApiRules请求参数结构体
  */
 export interface CreateSecurityGroupApiRulesRequest {
@@ -188,6 +258,16 @@ export interface DescribeSecurityGroupListResponse {
       */
   Enable: number
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ExpandCfwVertical返回参数结构体
+ */
+export interface ExpandCfwVerticalResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -254,6 +334,26 @@ export interface AcListsData {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   LogId: string
+}
+
+/**
+ * ModifyItemSwitchStatus请求参数结构体
+ */
+export interface ModifyItemSwitchStatusRequest {
+  /**
+   * id值
+   */
+  Id: number
+
+  /**
+   * 状态值，0: 关闭 ,1:开启
+   */
+  Status: number
+
+  /**
+   * 0: 互联网边界边界防火墙开关，1：vpc防火墙开关
+   */
+  Type?: number
 }
 
 /**
@@ -406,6 +506,28 @@ export interface ModifySequenceRulesRequest {
 }
 
 /**
+ * Nat防火墙弹性公网ip列表
+ */
+export interface NatFwEipsInfo {
+  /**
+   * 弹性公网ip
+   */
+  Eip: string
+
+  /**
+      * 所属的Nat网关Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NatGatewayId: string
+
+  /**
+      * Nat网关名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NatGatewayName: string
+}
+
+/**
  * 添加安全组Api规则对象
  */
 export interface SecurityGroupApiRuleData {
@@ -503,6 +625,37 @@ export interface DescribeSyncAssetStatusRequest {
 }
 
 /**
+ * ModifySecurityGroupAllRuleStatus返回参数结构体
+ */
+export interface ModifySecurityGroupAllRuleStatusResponse {
+  /**
+      * 0: 修改成功, 其他: 修改失败
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCfwEips返回参数结构体
+ */
+export interface DescribeCfwEipsResponse {
+  /**
+   * 返回值信息
+   */
+  NatFwEipList: Array<NatFwEipsInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteAllAccessControlRule请求参数结构体
  */
 export interface DeleteAllAccessControlRuleRequest {
@@ -589,23 +742,33 @@ export interface ModifyTableStatusResponse {
 }
 
 /**
- * ModifyItemSwitchStatus请求参数结构体
+ * SetNatFwDnatRule返回参数结构体
  */
-export interface ModifyItemSwitchStatusRequest {
+export interface SetNatFwDnatRuleResponse {
   /**
-   * id值
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Id: number
+  RequestId?: string
+}
+
+/**
+ * DescribeCfwEips请求参数结构体
+ */
+export interface DescribeCfwEipsRequest {
+  /**
+   * 0：cfw新增模式，1：cfw接入模式
+   */
+  Mode: number
 
   /**
-   * 状态值，0: 关闭 ,1:开启
+   * ALL：查询所有弹性公网ip; nat-xxxxx：接入模式场景指定网关的弹性公网ip
    */
-  Status: number
+  NatGatewayId: string
 
   /**
-   * 0: 互联网边界边界防火墙开关，1：vpc防火墙开关
+   * 防火墙实例id
    */
-  Type?: number
+  CfwInstance?: string
 }
 
 /**
@@ -992,19 +1155,23 @@ export interface DeleteSecurityGroupAllRuleResponse {
 }
 
 /**
- * ModifySecurityGroupAllRuleStatus返回参数结构体
+ * ExpandCfwVertical请求参数结构体
  */
-export interface ModifySecurityGroupAllRuleStatusResponse {
+export interface ExpandCfwVerticalRequest {
   /**
-      * 0: 修改成功, 其他: 修改失败
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Status: number
+   * nat：nat防火墙，ew：东西向防火墙
+   */
+  FwType: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 带宽值
    */
-  RequestId?: string
+  Width: number
+
+  /**
+   * 防火墙实例id
+   */
+  CfwInstance?: string
 }
 
 /**

@@ -63,18 +63,18 @@ export interface AgeInfo {
 }
 
 /**
- * 人脸框位置
+ * 人脸框信息
  */
 export interface FaceRect {
-  /**
-   * 人脸框左上角横坐标。
-   */
-  X: number
-
   /**
    * 人脸框左上角纵坐标。
    */
   Y: number
+
+  /**
+   * 人脸框左上角横坐标。
+   */
+  X: number
 
   /**
    * 人脸框宽度。

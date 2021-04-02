@@ -651,6 +651,11 @@ export interface PushQualityData {
    * metadata 中的帧率。
    */
   MateFps: number
+
+  /**
+   * 推流参数
+   */
+  StreamParam: string
 }
 
 /**

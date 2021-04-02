@@ -37,6 +37,8 @@ import {
   DescribeExecutionsResponse,
   ModifyFlowServiceRequest,
   DescribeFlowServiceDetailRequest,
+  StopExecutionResponse,
+  StopExecutionRequest,
 } from "./asw_models"
 
 /**
@@ -56,6 +58,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StartExecutionResponse) => void
   ): Promise<StartExecutionResponse> {
     return this.request("StartExecution", req, cb)
+  }
+
+  /**
+   * 终止某个状态机
+   */
+  async StopExecution(
+    req: StopExecutionRequest,
+    cb?: (error: string, rep: StopExecutionResponse) => void
+  ): Promise<StopExecutionResponse> {
+    return this.request("StopExecution", req, cb)
   }
 
   /**

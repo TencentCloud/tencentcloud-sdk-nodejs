@@ -2011,7 +2011,7 @@ export interface PoolInfo {
  */
 export interface DescribeMachineRequest {
     /**
-      * 是否按ipv6过滤
+      * 不为0，表示查询支持ipv6的机器
       */
     Ipv6Enable?: number;
 }

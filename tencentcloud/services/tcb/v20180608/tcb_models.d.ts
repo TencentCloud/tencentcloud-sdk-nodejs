@@ -1264,6 +1264,35 @@ export interface DestroyEnvResponse {
     RequestId?: string;
 }
 /**
+ * DescribeCloudBaseProjectVersionList请求参数结构体
+ */
+export interface DescribeCloudBaseProjectVersionListRequest {
+    /**
+      * 环境id
+      */
+    EnvId: string;
+    /**
+      * 项目名称
+      */
+    ProjectName: string;
+    /**
+      * 页大小
+      */
+    PageSize?: number;
+    /**
+      * 第几页,从0开始
+      */
+    PageNum?: number;
+    /**
+      * 起始时间
+      */
+    StartTime?: string;
+    /**
+      * 终止时间
+      */
+    EndTime?: string;
+}
+/**
  * 云开发项目来源
  */
 export interface CodeSource {
@@ -1302,6 +1331,11 @@ export interface CodeSource {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RawCode?: string;
+    /**
+      * 代码分支
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Branch?: string;
 }
 /**
  * DescribeEnvs返回参数结构体
@@ -1580,6 +1614,25 @@ export interface EstablishCloudBaseRunServerRequest {
     PublicAccess?: number;
 }
 /**
+ * DescribeCloudBaseProjectVersionList返回参数结构体
+ */
+export interface DescribeCloudBaseProjectVersionListResponse {
+    /**
+      * 版本列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProjectVersions: Array<CloudBaseProjectVersion>;
+    /**
+      * 总个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeDownloadFile请求参数结构体
  */
 export interface DescribeDownloadFileRequest {
@@ -1820,6 +1873,14 @@ export interface CreateAndDeployCloudBaseProjectRequest {
       * 免费额度的"basic", 不使用的用""
       */
     FreeQuota?: string;
+    /**
+      * 是否代码变更触发自动部署
+      */
+    AutoDeployOnCodeChange?: boolean;
+    /**
+      * 私有仓库地址
+      */
+    RepoUrl?: string;
 }
 /**
  * DescribeCloudBaseRunVersion请求参数结构体
@@ -2904,6 +2965,16 @@ export interface CloudBaseProjectVersion {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     FailType: string;
+    /**
+      * 私有仓库地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RepoUrl: string;
+    /**
+      * 是否私有仓库代码变更触发自动部署
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AutoDeployOnCodeChange: boolean;
 }
 /**
  * DescribeDatabaseACL返回参数结构体

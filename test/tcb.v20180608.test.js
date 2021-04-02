@@ -128,6 +128,16 @@ it("tcb.v20180608.DescribeCloudBaseRunResource", async function () {
     }
 })
 
+it("tcb.v20180608.DescribeCloudBaseProjectVersionList", async function () {
+    try {
+       const data = await client.DescribeCloudBaseProjectVersionList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.DescribeCloudBaseProjectLatestVersionList", async function () {
     try {
        const data = await client.DescribeCloudBaseProjectLatestVersionList({})

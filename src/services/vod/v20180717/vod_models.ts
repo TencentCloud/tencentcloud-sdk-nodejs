@@ -2447,6 +2447,33 @@ export interface DescribeCDNStatDetailsResponse {
 }
 
 /**
+ * AttachMediaSubtitles请求参数结构体
+ */
+export interface AttachMediaSubtitlesRequest {
+  /**
+   * 媒体文件唯一标识。
+   */
+  FileId: string
+
+  /**
+      * 操作。取值如下：
+<li>Attach：关联字幕。</li>
+<li>Detach：解除关联字幕。</li>
+      */
+  Operation: string
+
+  /**
+   * [转自适应码流模板号](https://cloud.tencent.com/document/product/266/34071#zsy)。
+   */
+  AdaptiveDynamicStreamingDefinition: number
+
+  /**
+   * 字幕的唯一标识。
+   */
+  SubtitleIds: Array<string>
+}
+
+/**
  * 智能封面结果类型
  */
 export interface AiAnalysisTaskCoverResult {
@@ -3064,6 +3091,22 @@ export interface ModifyMediaInfoRequest {
 同一个请求里，ClearTags 与 AddTags 不能同时出现。
       */
   ClearTags?: number
+
+  /**
+   * 新增一组字幕。单个媒体文件最多 16 个字幕。同一个请求中，AddSubtitles 中指定的字幕 Id 必须与 DeleteSubtitleIds 都不相同。
+   */
+  AddSubtitles?: Array<MediaSubtitleInput>
+
+  /**
+   * 待删除字幕的唯一标识。同一个请求中，AddSubtitles 中指定的字幕 Id 必须与 DeleteSubtitleIds 都不相同。
+   */
+  DeleteSubtitleIds?: Array<string>
+
+  /**
+      * 取值 1 表示清空媒体文件所有的字幕信息，其他值无意义。
+同一个请求里，ClearSubtitles 与 AddSubtitles不能同时出现。
+      */
+  ClearSubtitles?: number
 
   /**
    * 点播[子应用](/document/product/266/14574) ID 。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
@@ -5472,6 +5515,41 @@ export interface AiAnalysisTaskHighlightOutput {
 }
 
 /**
+ * 字幕信息输入参数。
+ */
+export interface MediaSubtitleInput {
+  /**
+   * 字幕名字，长度限制：64 个字符。
+   */
+  Name: string
+
+  /**
+      * 字幕语言。常见的取值如下：
+<li>cn：中文</li>
+<li>ja：日文</li>
+<li>en-US：英文</li>
+其他取值参考 [RFC5646](https://tools.ietf.org/html/rfc5646)
+      */
+  Language: string
+
+  /**
+      * 字幕格式。取值范围如下：
+<li>vtt</li>
+      */
+  Format: string
+
+  /**
+   * 字幕内容，进行 [Base64](https://tools.ietf.org/html/rfc4648) 编码后的字符串。
+   */
+  Content: string
+
+  /**
+   * 字幕的唯一标识。长度不能超过16个字符，可以使用大小写字母、数字、下划线（_）或横杠（-）。不能与媒资文件中现有字幕的唯一标识重复。
+   */
+  Id?: string
+}
+
+/**
  * ProcessMedia请求参数结构体
  */
 export interface ProcessMediaRequest {
@@ -5539,7 +5617,12 @@ export interface ModifyMediaInfoResponse {
    * 新的视频封面 URL。
    * 注意：仅当请求携带 CoverData 时此返回值有效。 *
    */
-  CoverUrl?: string
+  CoverUrl: string
+
+  /**
+   * 新增的字幕信息。
+   */
+  AddedSubtitleSet: Array<MediaSubtitleItem>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7415,6 +7498,38 @@ export interface AiAnalysisResult {
 }
 
 /**
+ * 图片水印模板输入参数
+ */
+export interface ImageWatermarkInputForUpdate {
+  /**
+   * 水印图片 [Base64](https://tools.ietf.org/html/rfc4648) 编码后的字符串。支持 jpeg、png 图片格式。
+   */
+  ImageContent?: string
+
+  /**
+      * 水印的宽度。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示水印 Width 为视频宽度的百分比大小，如 10% 表示 Width 为视频宽度的 10%；</li>
+<li>当字符串以 px 结尾，表示水印 Width 单位为像素，如 100px 表示 Width 为 100 像素。取值范围为[8, 4096]。</li>
+      */
+  Width?: string
+
+  /**
+      * 水印的高度。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示水印 Height 为视频高度的百分比大小，如 10% 表示 Height 为视频高度的 10%；</li>
+<li>当字符串以 px 结尾，表示水印 Height 单位为像素，如 100px 表示 Height 为 100 像素。取值范围为0或[8, 4096]。</li>
+      */
+  Height?: string
+
+  /**
+      * 水印重复类型。使用场景：水印为动态图像。取值范围：
+<li>once：动态水印播放完后，不再出现；</li>
+<li>repeat_last_frame：水印播放完后，停留在最后一帧；</li>
+<li>repeat：水印循环播放，直到视频结束。</li>
+      */
+  RepeatType?: string
+}
+
+/**
  * DescribeAIAnalysisTemplates请求参数结构体
  */
 export interface DescribeAIAnalysisTemplatesRequest {
@@ -8084,35 +8199,13 @@ export interface ModifyContentReviewTemplateRequest {
 }
 
 /**
- * 图片水印模板输入参数
+ * AttachMediaSubtitles返回参数结构体
  */
-export interface ImageWatermarkInputForUpdate {
+export interface AttachMediaSubtitlesResponse {
   /**
-   * 水印图片 [Base64](https://tools.ietf.org/html/rfc4648) 编码后的字符串。支持 jpeg、png 图片格式。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  ImageContent?: string
-
-  /**
-      * 水印的宽度。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示水印 Width 为视频宽度的百分比大小，如 10% 表示 Width 为视频宽度的 10%；</li>
-<li>当字符串以 px 结尾，表示水印 Width 单位为像素，如 100px 表示 Width 为 100 像素。取值范围为[8, 4096]。</li>
-      */
-  Width?: string
-
-  /**
-      * 水印的高度。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示水印 Height 为视频高度的百分比大小，如 10% 表示 Height 为视频高度的 10%；</li>
-<li>当字符串以 px 结尾，表示水印 Height 单位为像素，如 100px 表示 Height 为 100 像素。取值范围为0或[8, 4096]。</li>
-      */
-  Height?: string
-
-  /**
-      * 水印重复类型。使用场景：水印为动态图像。取值范围：
-<li>once：动态水印播放完后，不再出现；</li>
-<li>repeat_last_frame：水印播放完后，停留在最后一帧；</li>
-<li>repeat：水印循环播放，直到视频结束。</li>
-      */
-  RepeatType?: string
+  RequestId?: string
 }
 
 /**
@@ -13501,6 +13594,13 @@ export interface SearchMediaRequest {
 <li>miniProgramReviewInfo（小程序审核信息）。</li>
       */
   Filters?: Array<string>
+
+  /**
+      * 媒体文件存储地区，如 ap-chongqing，参见[地域列表](https://cloud.tencent.com/document/product/266/9760#.E5.B7.B2.E6.94.AF.E6.8C.81.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8)。
+<li>单个存储地区长度限制：20个字符。</li>
+<li>数组长度限制：20。</li>
+      */
+  StorageRegions?: Array<string>
 
   /**
    * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。

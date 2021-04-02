@@ -168,6 +168,16 @@ it("cfw.v20190904.ModifyAllSwitchStatus", async function () {
     }
 })
 
+it("cfw.v20190904.SetNatFwDnatRule", async function () {
+    try {
+       const data = await client.SetNatFwDnatRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.ModifyAllRuleStatus", async function () {
     try {
        const data = await client.ModifyAllRuleStatus({})
@@ -181,6 +191,16 @@ it("cfw.v20190904.ModifyAllRuleStatus", async function () {
 it("cfw.v20190904.DescribeTableStatus", async function () {
     try {
        const data = await client.DescribeTableStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.DescribeCfwEips", async function () {
+    try {
+       const data = await client.DescribeCfwEips({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -231,6 +251,16 @@ it("cfw.v20190904.DescribeAcLists", async function () {
 it("cfw.v20190904.DeleteAllAccessControlRule", async function () {
     try {
        const data = await client.DeleteAllAccessControlRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.ExpandCfwVertical", async function () {
+    try {
+       const data = await client.ExpandCfwVertical({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

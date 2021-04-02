@@ -118,6 +118,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAllSwitchStatus", req, cb);
     }
     /**
+     * 配置防火墙Dnat规则
+     */
+    async SetNatFwDnatRule(req, cb) {
+        return this.request("SetNatFwDnatRule", req, cb);
+    }
+    /**
      * 启用停用全部规则
      */
     async ModifyAllRuleStatus(req, cb) {
@@ -128,6 +134,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeTableStatus(req, cb) {
         return this.request("DescribeTableStatus", req, cb);
+    }
+    /**
+     * 查询防火墙弹性公网ip
+     */
+    async DescribeCfwEips(req, cb) {
+        return this.request("DescribeCfwEips", req, cb);
     }
     /**
      * 同步资产-互联网&VPC
@@ -158,6 +170,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteAllAccessControlRule(req, cb) {
         return this.request("DeleteAllAccessControlRule", req, cb);
+    }
+    /**
+     * 防火墙垂直扩容
+     */
+    async ExpandCfwVertical(req, cb) {
+        return this.request("ExpandCfwVertical", req, cb);
     }
     /**
      * 修改单个防火墙开关

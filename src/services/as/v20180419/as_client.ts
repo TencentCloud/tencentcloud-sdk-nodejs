@@ -30,6 +30,7 @@ import {
   CreatePaiInstanceResponse,
   CreateLaunchConfigurationResponse,
   CreateLifecycleHookResponse,
+  ClearLaunchConfigurationAttributesResponse,
   DescribeAutoScalingGroupsResponse,
   CreatePaiInstanceRequest,
   SystemDisk,
@@ -123,6 +124,7 @@ import {
   DescribeNotificationConfigurationsRequest,
   LifecycleHook,
   ForwardLoadBalancer,
+  ClearLaunchConfigurationAttributesRequest,
   PreviewPaiDomainNameResponse,
   DeleteAutoScalingGroupRequest,
   RemoveInstancesRequest,
@@ -184,6 +186,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: PreviewPaiDomainNameResponse) => void
   ): Promise<PreviewPaiDomainNameResponse> {
     return this.request("PreviewPaiDomainName", req, cb)
+  }
+
+  /**
+   * 本接口（ClearLaunchConfigurationAttributes）用于将启动配置内的特定属性完全清空。
+   */
+  async ClearLaunchConfigurationAttributes(
+    req: ClearLaunchConfigurationAttributesRequest,
+    cb?: (error: string, rep: ClearLaunchConfigurationAttributesResponse) => void
+  ): Promise<ClearLaunchConfigurationAttributesResponse> {
+    return this.request("ClearLaunchConfigurationAttributes", req, cb)
   }
 
   /**

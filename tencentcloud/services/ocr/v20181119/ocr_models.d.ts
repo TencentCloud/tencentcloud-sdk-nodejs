@@ -4122,36 +4122,44 @@ export interface HmtResidentPermitOCRResponse {
     /**
       * 证件姓名
       */
-    Name?: string;
+    Name: string;
     /**
       * 性别
       */
-    Sex?: string;
+    Sex: string;
     /**
       * 出生日期
       */
-    Birth?: string;
+    Birth: string;
     /**
       * 地址
       */
-    Address?: string;
+    Address: string;
     /**
       * 身份证号
       */
-    IdCardNo?: string;
+    IdCardNo: string;
     /**
       * 0-正面
 1-反面
       */
-    CardType?: number;
+    CardType: number;
     /**
       * 证件有效期限
       */
-    ValidDate?: string;
+    ValidDate: string;
     /**
       * 签发机关
       */
-    Authority?: string;
+    Authority: string;
+    /**
+      * 签发次数
+      */
+    VisaNum: string;
+    /**
+      * 通行证号码
+      */
+    PassNo: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -19,13 +19,17 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeVpcRuleOverviewResponse,
+  SetNatFwDnatRuleRequest,
   DescribeSyncAssetStatusResponse,
   ModifyAllSwitchStatusRequest,
   ModifyAllRuleStatusResponse,
   DescribeRuleOverviewResponse,
+  CfwNatDnatRule,
   CreateSecurityGroupApiRulesRequest,
   DescribeSecurityGroupListResponse,
+  ExpandCfwVerticalResponse,
   AcListsData,
+  ModifyItemSwitchStatusRequest,
   SequenceData,
   ModifyItemSwitchStatusResponse,
   CreateSecurityGroupApiRulesResponse,
@@ -34,15 +38,19 @@ import {
   DescribeTableStatusResponse,
   DeleteAcRuleResponse,
   ModifySequenceRulesRequest,
+  NatFwEipsInfo,
   SecurityGroupApiRuleData,
   DescribeSwitchListsResponse,
   DescribeSyncAssetStatusRequest,
+  ModifySecurityGroupAllRuleStatusResponse,
+  DescribeCfwEipsResponse,
   DeleteAllAccessControlRuleRequest,
   RunSyncAssetResponse,
   RunSyncAssetRequest,
   DeleteSecurityGroupRuleRequest,
   ModifyTableStatusResponse,
-  ModifyItemSwitchStatusRequest,
+  SetNatFwDnatRuleResponse,
+  DescribeCfwEipsRequest,
   DescribeRuleOverviewRequest,
   DescribeVpcRuleOverviewRequest,
   DescribeAcListsRequest,
@@ -56,7 +64,7 @@ import {
   DeleteAcRuleRequest,
   DeleteAllAccessControlRuleResponse,
   DeleteSecurityGroupAllRuleResponse,
-  ModifySecurityGroupAllRuleStatusResponse,
+  ExpandCfwVerticalRequest,
   SecurityGroupListData,
   CreateAcRulesRequest,
   DescribeSecurityGroupListRequest,
@@ -233,6 +241,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 配置防火墙Dnat规则
+   */
+  async SetNatFwDnatRule(
+    req: SetNatFwDnatRuleRequest,
+    cb?: (error: string, rep: SetNatFwDnatRuleResponse) => void
+  ): Promise<SetNatFwDnatRuleResponse> {
+    return this.request("SetNatFwDnatRule", req, cb)
+  }
+
+  /**
    * 启用停用全部规则
    */
   async ModifyAllRuleStatus(
@@ -250,6 +268,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTableStatusResponse) => void
   ): Promise<DescribeTableStatusResponse> {
     return this.request("DescribeTableStatus", req, cb)
+  }
+
+  /**
+   * 查询防火墙弹性公网ip
+   */
+  async DescribeCfwEips(
+    req: DescribeCfwEipsRequest,
+    cb?: (error: string, rep: DescribeCfwEipsResponse) => void
+  ): Promise<DescribeCfwEipsResponse> {
+    return this.request("DescribeCfwEips", req, cb)
   }
 
   /**
@@ -300,6 +328,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAllAccessControlRuleResponse) => void
   ): Promise<DeleteAllAccessControlRuleResponse> {
     return this.request("DeleteAllAccessControlRule", req, cb)
+  }
+
+  /**
+   * 防火墙垂直扩容
+   */
+  async ExpandCfwVertical(
+    req: ExpandCfwVerticalRequest,
+    cb?: (error: string, rep: ExpandCfwVerticalResponse) => void
+  ): Promise<ExpandCfwVerticalResponse> {
+    return this.request("ExpandCfwVertical", req, cb)
   }
 
   /**

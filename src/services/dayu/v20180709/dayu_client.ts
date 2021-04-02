@@ -85,13 +85,14 @@ import {
   DescribeDDoSAlarmThresholdResponse,
   KeyValueRecord,
   DescribeBasicDeviceThresholdRequest,
+  ModifyDDoSWaterKeyResponse,
   DescribleNewL7RulesResponse,
   ModifyResBindDDoSPolicyResponse,
   ModifyDDoSWaterKeyRequest,
   ModifyCCLevelResponse,
   DescribeBaradDataRequest,
   DescribeDDoSDefendStatusResponse,
-  DescribeCCSelfDefinePolicyResponse,
+  DescribeBizHttpStatusRequest,
   CCPolicy,
   ModifyDDoSAIStatusResponse,
   DescribeDDoSNetEvInfoRequest,
@@ -113,7 +114,7 @@ import {
   ModifyCCIpAllowDenyRequest,
   CreateInstanceNameResponse,
   DescribeDDoSDefendStatusRequest,
-  ModifyDDoSWaterKeyResponse,
+  HttpStatusMap,
   ModifyL4HealthRequest,
   ModifyCCHostProtectionResponse,
   CreateL4RulesResponse,
@@ -128,13 +129,14 @@ import {
   L4RuleEntry,
   DescribeL4HealthConfigRequest,
   CreateL7CCRuleResponse,
+  ModifyCCFrequencyRulesStatusResponse,
   ModifyNetReturnSwitchRequest,
   CreateL7CCRuleRequest,
   CreateL7RulesRequest,
-  CreateL4RulesRequest,
+  DescribeBizHttpStatusResponse,
   DescribeNewL7RulesErrHealthResponse,
   DescribeDDoSNetEvListResponse,
-  ModifyCCFrequencyRulesStatusResponse,
+  CreateL4RulesRequest,
   ModifyNewL4RuleRequest,
   DescribeL4RulesErrHealthRequest,
   L4RuleSource,
@@ -179,6 +181,7 @@ import {
   ModifyDDoSSwitchRequest,
   CreateNetReturnRequest,
   ModifyDDoSAIStatusRequest,
+  DescribeDDoSAttackSourceResponse,
   DescribeResourceListResponse,
   DescribeNewL4RulesResponse,
   ModifyCCThresholdRequest,
@@ -216,7 +219,7 @@ import {
   CreateCCSelfDefinePolicyResponse,
   NewL7RuleEntry,
   L4DelRule,
-  DescribeDDoSAttackSourceResponse,
+  DescribeCCSelfDefinePolicyResponse,
   CreateBoundIPResponse,
   DescribeDDoSUsedStatisRequest,
   DDoSPolicyDropOption,
@@ -751,6 +754,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取业务流量状态码统计
+   */
+  async DescribeBizHttpStatus(
+    req: DescribeBizHttpStatusRequest,
+    cb?: (error: string, rep: DescribeBizHttpStatusResponse) => void
+  ): Promise<DescribeBizHttpStatusResponse> {
+    return this.request("DescribeBizHttpStatus", req, cb)
+  }
+
+  /**
    * 删除CC自定义策略
    */
   async DeleteCCSelfDefinePolicy(
@@ -991,13 +1004,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取DDoS攻击源IP地域分布图，支持全球攻击分布和国内省份攻击分布；
+   * 获取DDoS高级策略
    */
-  async DescribeDDoSAttackIPRegionMap(
-    req: DescribeDDoSAttackIPRegionMapRequest,
-    cb?: (error: string, rep: DescribeDDoSAttackIPRegionMapResponse) => void
-  ): Promise<DescribeDDoSAttackIPRegionMapResponse> {
-    return this.request("DescribeDDoSAttackIPRegionMap", req, cb)
+  async DescribeDDoSPolicy(
+    req: DescribeDDoSPolicyRequest,
+    cb?: (error: string, rep: DescribeDDoSPolicyResponse) => void
+  ): Promise<DescribeDDoSPolicyResponse> {
+    return this.request("DescribeDDoSPolicy", req, cb)
   }
 
   /**
@@ -1392,12 +1405,12 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取DDoS高级策略
+   * 获取DDoS攻击源IP地域分布图，支持全球攻击分布和国内省份攻击分布；
    */
-  async DescribeDDoSPolicy(
-    req: DescribeDDoSPolicyRequest,
-    cb?: (error: string, rep: DescribeDDoSPolicyResponse) => void
-  ): Promise<DescribeDDoSPolicyResponse> {
-    return this.request("DescribeDDoSPolicy", req, cb)
+  async DescribeDDoSAttackIPRegionMap(
+    req: DescribeDDoSAttackIPRegionMapRequest,
+    cb?: (error: string, rep: DescribeDDoSAttackIPRegionMapResponse) => void
+  ): Promise<DescribeDDoSAttackIPRegionMapResponse> {
+    return this.request("DescribeDDoSAttackIPRegionMap", req, cb)
   }
 }

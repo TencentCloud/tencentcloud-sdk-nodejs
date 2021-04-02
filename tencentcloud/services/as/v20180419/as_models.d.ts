@@ -76,6 +76,14 @@ export interface ModifyLaunchConfigurationAttributesRequest {
 <br><li>AUTOMATIC：自动选择当前可用的云盘类型。
       */
     DiskTypePolicy?: string;
+    /**
+      * 实例系统盘配置信息。
+      */
+    SystemDisk?: SystemDisk;
+    /**
+      * 实例数据盘配置信息。最多支持指定11块数据盘。采取整体修改，因此请提供修改后的全部值。
+      */
+    DataDisks?: Array<DataDisk>;
 }
 /**
  * DisableAutoScalingGroup请求参数结构体
@@ -336,6 +344,15 @@ export interface CreateLifecycleHookResponse {
       * 生命周期挂钩ID
       */
     LifecycleHookId?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ClearLaunchConfigurationAttributes返回参数结构体
+ */
+export interface ClearLaunchConfigurationAttributesResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2493,6 +2510,20 @@ export interface ForwardLoadBalancer {
       * 负载均衡实例所属地域，默认取AS服务所在地域。格式与公共参数Region相同，如："ap-guangzhou"。
       */
     Region?: string;
+}
+/**
+ * ClearLaunchConfigurationAttributes请求参数结构体
+ */
+export interface ClearLaunchConfigurationAttributesRequest {
+    /**
+      * 启动配置ID。
+      */
+    LaunchConfigurationId: string;
+    /**
+      * 是否清空数据盘信息，非必填，默认为 false。
+填 true 代表清空“数据盘”信息，清空后基于此新创建的云主机将不含有任何数据盘。
+      */
+    ClearDataDisks?: boolean;
 }
 /**
  * PreviewPaiDomainName返回参数结构体

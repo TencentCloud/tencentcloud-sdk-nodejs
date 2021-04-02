@@ -154,46 +154,64 @@ export interface DescribeFlowServiceDetailResponse {
   /**
    * 状态机所属服务名
    */
-  FlowServiceName?: string
+  FlowServiceName: string
 
   /**
    * 状态机状态
    */
-  Status?: string
+  Status: string
 
   /**
       * 定义文本（JSON格式）
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Definition?: string
+  Definition: string
 
   /**
       * 角色资源名
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  RoleResource?: string
+  RoleResource: string
 
   /**
    * 状态机的类型，可以为 （EXPRESS/STANDARD）
    */
-  Type?: string
+  Type: string
 
   /**
    * 生成时间
    */
-  CreateDate?: string
+  CreateDate: string
 
   /**
       * 备注
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Description?: string
+  Description: string
 
   /**
       * 状态机所属服务中文名
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  FlowServiceChineseName?: string
+  FlowServiceChineseName: string
+
+  /**
+      * 是否开启日志CLS服务
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnableCLS: boolean
+
+  /**
+      * CLS日志查看地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CLSUrl: string
+
+  /**
+      * 工作流提示输入
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FlowInput: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -305,12 +323,12 @@ export interface CreateFlowServiceResponse {
   /**
    * 状态机所属服务资源
    */
-  FlowServiceResource?: string
+  FlowServiceResource: string
 
   /**
    * 生成日期
    */
-  CreateDate?: string
+  CreateDate: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -406,12 +424,12 @@ export interface ModifyFlowServiceResponse {
   /**
    * 状态机资源名
    */
-  FlowServiceResource?: string
+  FlowServiceResource: string
 
   /**
    * 更新时间
    */
-  UpdateDate?: string
+  UpdateDate: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -477,6 +495,16 @@ export interface CreateFlowServiceRequest {
    * 备注
    */
   Description?: string
+
+  /**
+   * 是否开启CLS日志投递功能
+   */
+  EnableCLS?: boolean
+
+  /**
+   * 该状态机的默认输入
+   */
+  Input?: string
 }
 
 /**
@@ -532,6 +560,11 @@ export interface ModifyFlowServiceRequest {
    * 状态机备注
    */
   Description?: string
+
+  /**
+   * 是否允许日志投递
+   */
+  EnableCLS?: boolean
 }
 
 /**
@@ -542,4 +575,24 @@ export interface DescribeFlowServiceDetailRequest {
    * 状态机所属服务资源名
    */
   FlowServiceResource: string
+}
+
+/**
+ * StopExecution返回参数结构体
+ */
+export interface StopExecutionResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * StopExecution请求参数结构体
+ */
+export interface StopExecutionRequest {
+  /**
+   * 执行名称
+   */
+  ExecutionQrn: string
 }

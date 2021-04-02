@@ -332,27 +332,27 @@ export interface ScaleOutInstanceResponse {
     /**
       * 实例ID。
       */
-    InstanceId?: string;
+    InstanceId: string;
     /**
       * 订单号。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DealNames?: Array<string>;
+    DealNames: Array<string>;
     /**
       * 客户端Token。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ClientToken?: string;
+    ClientToken: string;
     /**
       * 扩容流程ID。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    FlowId?: number;
+    FlowId: number;
     /**
       * 大订单号。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    BillId?: string;
+    BillId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -987,6 +987,40 @@ export interface InquirePriceRenewEmrRequest {
     Currency?: string;
 }
 /**
+ * POD自定义权限和自定义参数
+ */
+export interface PodParameter {
+    /**
+      * TKE或EKS集群ID
+      */
+    ClusterId: string;
+    /**
+      * 自定义权限
+      */
+    Config: string;
+    /**
+      * 自定义参数
+      */
+    Parameter: string;
+}
+/**
+ * 元数据库信息
+ */
+export interface MetaDbInfo {
+    /**
+      * 元数据类型。
+      */
+    MetaType: string;
+    /**
+      * 统一元数据库实例ID。
+      */
+    UnifyMetaInstanceId: string;
+    /**
+      * 自建元数据库信息。
+      */
+    MetaDBInfo: CustomMetaInfo;
+}
+/**
  * 执行动作。
  */
 export interface Execution {
@@ -1113,21 +1147,25 @@ export interface SearchItem {
     SearchValue: string;
 }
 /**
- * 元数据库信息
+ * POD浮动规格
  */
-export interface MetaDbInfo {
+export interface DynamicPodSpec {
     /**
-      * 元数据类型。
+      * 需求最小cpu核数
       */
-    MetaType: string;
+    RequestCpu?: number;
     /**
-      * 统一元数据库实例ID。
+      * 需求最大cpu核数
       */
-    UnifyMetaInstanceId: string;
+    LimitCpu?: number;
     /**
-      * 自建元数据库信息。
+      * 需求最小memory，单位MB
       */
-    MetaDBInfo: CustomMetaInfo;
+    RequestMemory?: number;
+    /**
+      * 需求最大memory，单位MB
+      */
+    LimitMemory?: number;
 }
 /**
  * DescribeInstances请求参数结构体
@@ -1534,6 +1572,15 @@ export interface PodSpec {
       * Pod节点数据目录挂载信息。
       */
     PodVolumes?: Array<PodVolume>;
+    /**
+      * 是否浮动规格，1是，0否
+      */
+    IsDynamicSpec?: number;
+    /**
+      * 浮动规格
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DynamicPodSpec?: DynamicPodSpec;
 }
 /**
  * 多云盘参数
@@ -2019,6 +2066,16 @@ export interface NodeHardwareInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     HardwareResourceType: string;
+    /**
+      * 是否浮动规格，1是，0否
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsDynamicSpec: number;
+    /**
+      * 浮动规格值json字符串
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DynamicPodSpec: string;
 }
 /**
  * InquiryPriceUpdateInstance返回参数结构体
@@ -2345,4 +2402,12 @@ export interface ScaleOutInstanceRequest {
       * 规则扩容指定 yarn node label
       */
     YarnNodeLabel?: string;
+    /**
+      * POD自定义权限和自定义参数
+      */
+    PodParameter?: PodParameter;
+    /**
+      * 扩容的Master节点的数量。
+      */
+    MasterCount?: number;
 }

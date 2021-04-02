@@ -188,4 +188,14 @@ it("partners.v20180321.AuditApplyClient", async function () {
     }
 })
 
+it("partners.v20180321.DescribeAgentDealsByCache", async function () {
+    try {
+       const data = await client.DescribeAgentDealsByCache({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

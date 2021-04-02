@@ -34,7 +34,8 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAgentSelfPayDeals", req, cb);
     }
     /**
-     * 供超大型代理商（代客数量>=3000 ）拉取缓存的全量客户订单。
+     * 【该接口将逐步下线，请切换使用升级版本DescribeAgentDealsByCache】供超大型代理商（代客数量>=3000 ）拉取缓存的全量客户订单。
+
      */
     async DescribeAgentDealsCache(req, cb) {
         return this.request("DescribeAgentDealsCache", req, cb);
@@ -128,6 +129,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async AuditApplyClient(req, cb) {
         return this.request("AuditApplyClient", req, cb);
+    }
+    /**
+     * 供超大型代理商（代客数量>=3000 ）拉取缓存的全量客户订单。
+     */
+    async DescribeAgentDealsByCache(req, cb) {
+        return this.request("DescribeAgentDealsByCache", req, cb);
     }
 }
 exports.Client = Client;

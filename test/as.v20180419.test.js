@@ -48,6 +48,16 @@ it("as.v20180419.PreviewPaiDomainName", async function () {
     }
 })
 
+it("as.v20180419.ClearLaunchConfigurationAttributes", async function () {
+    try {
+       const data = await client.ClearLaunchConfigurationAttributes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("as.v20180419.ModifyScalingPolicy", async function () {
     try {
        const data = await client.ModifyScalingPolicy({})
