@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { UnbindDevicesRequest, BindDevicesRequest, DescribeProductsRequest, DescribeFirmwareRequest, DescribeDevicesResponse, DeleteTopicRuleResponse, EnableTopicRuleResponse, DescribeTasksResponse, UpdateDeviceShadowRequest, DescribeMultiDevTaskRequest, DescribeProductsResponse, DescribeDeviceShadowResponse, CreateMultiDeviceResponse, PublishRRPCMessageRequest, UpdateTopicPolicyResponse, DeleteProductRequest, DescribeTasksRequest, EditFirmwareRequest, ResetDeviceStateRequest, DescribeDeviceClientKeyRequest, UpdateTopicPolicyRequest, DeleteDeviceRequest, DescribeFirmwareTaskDevicesRequest, DescribeFirmwareResponse, CreateMultiDevicesTaskRequest, DescribeFirmwareTaskStatisticsResponse, CreateLoraDeviceRequest, CreateProductResponse, CreateMultiDeviceRequest, DeleteLoraDeviceResponse, CreateTaskRequest, DescribeAllDevicesRequest, DescribeFirmwareTaskDevicesResponse, PublishToDeviceResponse, RetryDeviceFirmwareTaskResponse, CreateDeviceResponse, DeleteLoraDeviceRequest, CreateDeviceRequest, DescribeProductTaskRequest, DescribeFirmwareTaskResponse, CreateProductRequest, DescribeFirmwareTasksRequest, DisableTopicRuleResponse, DescribeProductTaskResponse, DescribeDeviceResponse, PublishBroadcastMessageRequest, PublishMessageRequest, RetryDeviceFirmwareTaskRequest, DescribeFirmwareTasksResponse, UpdateDeviceAvailableStateResponse, EditFirmwareResponse, CancelTaskRequest, DescribeFirmwareTaskDistributionRequest, UpdateDeviceAvailableStateRequest, DeleteProductResponse, CreateTopicPolicyResponse, PublishToDeviceRequest, UploadFirmwareResponse, DescribeFirmwareTaskDistributionResponse, PublishBroadcastMessageResponse, DescribeDeviceRequest, CreateMultiDevicesTaskResponse, CreateTopicPolicyRequest, DescribeLoraDeviceResponse, ReplaceTopicRuleRequest, PublishRRPCMessageResponse, CancelTaskResponse, CreateLoraDeviceResponse, DeleteTopicRuleRequest, ReplaceTopicRuleResponse, PublishAsDeviceRequest, CancelDeviceFirmwareTaskRequest, CancelDeviceFirmwareTaskResponse, DescribeMultiDevicesResponse, DescribeDeviceShadowRequest, UnbindDevicesResponse, CreateTaskFileUrlResponse, DescribeMultiDevicesRequest, CreateTaskFileUrlRequest, UpdateDeviceShadowResponse, DescribeTaskResponse, CreateTaskResponse, DescribeMultiDevTaskResponse, DescribeProductTasksRequest, DescribeAllDevicesResponse, DescribeLoraDeviceRequest, DescribeTaskRequest, PublishMessageResponse, BindDevicesResponse, DescribeDevicesRequest, DescribeDeviceClientKeyResponse, UploadFirmwareRequest, DisableTopicRuleRequest, ResetDeviceStateResponse, CreateTopicRuleResponse, CreateTopicRuleRequest, DescribeFirmwareTaskStatisticsRequest, DeleteDeviceResponse, DescribeProductTasksResponse, PublishAsDeviceResponse, EnableTopicRuleRequest, DescribeFirmwareTaskRequest } from "./iotcloud_models";
+import { UnbindDevicesRequest, DescribeDeviceResourcesRequest, BindDevicesRequest, DescribeProductsRequest, DescribeFirmwareRequest, DescribeDevicesResponse, DeleteTopicRuleResponse, DescribeProductTasksRequest, DescribeTasksResponse, UpdateDeviceShadowRequest, DescribeMultiDevTaskRequest, DescribeDeviceResourceResponse, DescribeProductResourcesRequest, DescribeProductsResponse, DescribeDeviceShadowResponse, EnableTopicRuleResponse, DescribePushResourceTaskStatisticsResponse, CreateMultiDeviceResponse, PublishRRPCMessageRequest, UpdateTopicPolicyResponse, DeleteProductRequest, DescribeTasksRequest, DescribeDeviceResourceRequest, EditFirmwareRequest, ResetDeviceStateRequest, DescribeDeviceClientKeyRequest, UpdateTopicPolicyRequest, DeleteDeviceRequest, DescribeFirmwareTaskDevicesRequest, DescribeFirmwareResponse, DescribeResourceTasksRequest, CreateMultiDevicesTaskRequest, DescribeFirmwareTaskStatisticsResponse, DescribePushResourceTaskStatisticsRequest, CreateLoraDeviceRequest, CreateProductResponse, CreateMultiDeviceRequest, DeleteLoraDeviceResponse, CreateTaskRequest, DescribeAllDevicesRequest, DescribeProductResourceResponse, CreateTopicPolicyResponse, PublishToDeviceResponse, RetryDeviceFirmwareTaskResponse, CreateDeviceResponse, DeleteLoraDeviceRequest, CreateDeviceRequest, DescribeProductTaskRequest, DescribeFirmwareTaskResponse, CreateProductRequest, DescribeFirmwareTasksRequest, DisableTopicRuleResponse, DescribeProductTaskResponse, DescribeDeviceResponse, PublishBroadcastMessageRequest, PublishMessageRequest, RetryDeviceFirmwareTaskRequest, DescribeFirmwareTaskDevicesResponse, DescribeFirmwareTasksResponse, UpdateDeviceAvailableStateResponse, EditFirmwareResponse, CancelTaskRequest, DescribeFirmwareTaskDistributionRequest, UpdateDeviceAvailableStateRequest, GetUserResourceInfoResponse, DeleteProductResponse, PublishToDeviceRequest, UploadFirmwareResponse, DescribeFirmwareTaskDistributionResponse, PublishBroadcastMessageResponse, DescribeDeviceRequest, CreateMultiDevicesTaskResponse, DescribeProductResourcesResponse, CreateTopicPolicyRequest, DescribeProductResourceRequest, DescribeLoraDeviceResponse, ReplaceTopicRuleRequest, PublishRRPCMessageResponse, CancelTaskResponse, DescribeDeviceResourcesResponse, CreateLoraDeviceResponse, DeleteTopicRuleRequest, ReplaceTopicRuleResponse, PublishAsDeviceRequest, CancelDeviceFirmwareTaskRequest, CancelDeviceFirmwareTaskResponse, DescribeMultiDevicesResponse, DescribeDeviceShadowRequest, UnbindDevicesResponse, DescribeMultiDevicesRequest, CreateTaskFileUrlRequest, UpdateDeviceShadowResponse, DescribeTaskResponse, CreateTaskResponse, DescribeMultiDevTaskResponse, GetUserResourceInfoRequest, DescribeAllDevicesResponse, DescribeLoraDeviceRequest, DescribeTaskRequest, PublishMessageResponse, BindDevicesResponse, DescribeDevicesRequest, DescribeDeviceClientKeyResponse, UploadFirmwareRequest, DisableTopicRuleRequest, ResetDeviceStateResponse, CreateTopicRuleResponse, CreateTopicRuleRequest, DescribeResourceTasksResponse, DescribeFirmwareTaskStatisticsRequest, DeleteDeviceResponse, CreateTaskFileUrlResponse, DescribeProductTasksResponse, PublishAsDeviceResponse, EnableTopicRuleRequest, DescribeFirmwareTaskRequest } from "./iotcloud_models";
 /**
  * iotcloud client
  * @class
@@ -12,9 +12,9 @@ export declare class Client extends AbstractClient {
      */
     CreateTask(req: CreateTaskRequest, cb?: (error: string, rep: CreateTaskResponse) => void): Promise<CreateTaskResponse>;
     /**
-     * 查询所有设备列表
+     * 本接口（DescribeDevices）用于查询物联网通信设备的设备列表。
      */
-    DescribeAllDevices(req: DescribeAllDevicesRequest, cb?: (error: string, rep: DescribeAllDevicesResponse) => void): Promise<DescribeAllDevicesResponse>;
+    DescribeDevices(req: DescribeDevicesRequest, cb?: (error: string, rep: DescribeDevicesResponse) => void): Promise<DescribeDevicesResponse>;
     /**
      * 发布RRPC消息
      */
@@ -24,9 +24,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteLoraDevice(req: DeleteLoraDeviceRequest, cb?: (error: string, rep: DeleteLoraDeviceResponse) => void): Promise<DeleteLoraDeviceResponse>;
     /**
-     * 服务器端下发消息给lora类型的设备
+     * 本接口（DescribeMultiDevices）用于查询批量创建设备的执行结果。
      */
-    PublishToDevice(req: PublishToDeviceRequest, cb?: (error: string, rep: PublishToDeviceResponse) => void): Promise<PublishToDeviceResponse>;
+    DescribeMultiDevices(req: DescribeMultiDevicesRequest, cb?: (error: string, rep: DescribeMultiDevicesResponse) => void): Promise<DescribeMultiDevicesResponse>;
     /**
      * 查询固件信息
      */
@@ -44,6 +44,10 @@ export declare class Client extends AbstractClient {
      */
     CreateMultiDevice(req: CreateMultiDeviceRequest, cb?: (error: string, rep: CreateMultiDeviceResponse) => void): Promise<CreateMultiDeviceResponse>;
     /**
+     * 启用或者禁用设备
+     */
+    UpdateDeviceAvailableState(req: UpdateDeviceAvailableStateRequest, cb?: (error: string, rep: UpdateDeviceAvailableStateResponse) => void): Promise<UpdateDeviceAvailableStateResponse>;
+    /**
      * 本接口（CreateTopicRule）用于创建一个规则
      */
     CreateTopicRule(req: CreateTopicRuleRequest, cb?: (error: string, rep: CreateTopicRuleResponse) => void): Promise<CreateTopicRuleResponse>;
@@ -60,13 +64,17 @@ export declare class Client extends AbstractClient {
      */
     CreateTopicPolicy(req: CreateTopicPolicyRequest, cb?: (error: string, rep: CreateTopicPolicyResponse) => void): Promise<CreateTopicPolicyResponse>;
     /**
-     * 启用或者禁用设备
+     * 本接口（DescribeProductResource）用于查询产品资源详情。
      */
-    UpdateDeviceAvailableState(req: UpdateDeviceAvailableStateRequest, cb?: (error: string, rep: UpdateDeviceAvailableStateResponse) => void): Promise<UpdateDeviceAvailableStateResponse>;
+    DescribeProductResource(req: DescribeProductResourceRequest, cb?: (error: string, rep: DescribeProductResourceResponse) => void): Promise<DescribeProductResourceResponse>;
     /**
      * 本接口（CreateProduct）用于创建一个新的物联网通信产品
      */
     CreateProduct(req: CreateProductRequest, cb?: (error: string, rep: CreateProductResponse) => void): Promise<CreateProductResponse>;
+    /**
+     * 本接口（GetUserResourceInfo）用于查询用户资源使用信息。
+     */
+    GetUserResourceInfo(req?: GetUserResourceInfoRequest, cb?: (error: string, rep: GetUserResourceInfoResponse) => void): Promise<GetUserResourceInfoResponse>;
     /**
      * 本接口（UploadFirmware）用于上传设备固件信息
      */
@@ -83,6 +91,10 @@ export declare class Client extends AbstractClient {
      * 本接口（CreateMultiDevicesTask）用于创建产品级别的批量创建设备任务
      */
     CreateMultiDevicesTask(req: CreateMultiDevicesTaskRequest, cb?: (error: string, rep: CreateMultiDevicesTaskResponse) => void): Promise<CreateMultiDevicesTaskResponse>;
+    /**
+     * 查询资源推送任务列表
+     */
+    DescribeResourceTasks(req: DescribeResourceTasksRequest, cb?: (error: string, rep: DescribeResourceTasksResponse) => void): Promise<DescribeResourceTasksResponse>;
     /**
      * 查询固件升级任务统计信息
      */
@@ -104,6 +116,10 @@ export declare class Client extends AbstractClient {
      */
     ReplaceTopicRule(req: ReplaceTopicRuleRequest, cb?: (error: string, rep: ReplaceTopicRuleResponse) => void): Promise<ReplaceTopicRuleResponse>;
     /**
+     * 查询推送资源任务统计信息
+     */
+    DescribePushResourceTaskStatistics(req: DescribePushResourceTaskStatisticsRequest, cb?: (error: string, rep: DescribePushResourceTaskStatisticsResponse) => void): Promise<DescribePushResourceTaskStatisticsResponse>;
+    /**
      * 编辑固件信息
      */
     EditFirmware(req: EditFirmwareRequest, cb?: (error: string, rep: EditFirmwareResponse) => void): Promise<EditFirmwareResponse>;
@@ -111,6 +127,10 @@ export declare class Client extends AbstractClient {
      * 本接口（CreateDevice）用于新建一个物联网通信设备。
      */
     CreateDevice(req: CreateDeviceRequest, cb?: (error: string, rep: CreateDeviceResponse) => void): Promise<CreateDeviceResponse>;
+    /**
+     * 本接口（DescribeDeviceResource）用于查询设备资源详情。
+     */
+    DescribeDeviceResource(req: DescribeDeviceResourceRequest, cb?: (error: string, rep: DescribeDeviceResourceResponse) => void): Promise<DescribeDeviceResourceResponse>;
     /**
      * 本接口（PublishMessage）用于向某个主题发消息。
      */
@@ -140,9 +160,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeTasks(req: DescribeTasksRequest, cb?: (error: string, rep: DescribeTasksResponse) => void): Promise<DescribeTasksResponse>;
     /**
-     * 本接口（DescribeMultiDevices）用于查询批量创建设备的执行结果。
+     * 本接口（DescribeDeviceResources）用于查询设备资源列表。
      */
-    DescribeMultiDevices(req: DescribeMultiDevicesRequest, cb?: (error: string, rep: DescribeMultiDevicesResponse) => void): Promise<DescribeMultiDevicesResponse>;
+    DescribeDeviceResources(req: DescribeDeviceResourcesRequest, cb?: (error: string, rep: DescribeDeviceResourcesResponse) => void): Promise<DescribeDeviceResourcesResponse>;
     /**
      * 查询固件升级任务的设备列表
      */
@@ -184,9 +204,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeProductTasks(req: DescribeProductTasksRequest, cb?: (error: string, rep: DescribeProductTasksResponse) => void): Promise<DescribeProductTasksResponse>;
     /**
-     * 本接口（DescribeDevices）用于查询物联网通信设备的设备列表。
+     * 查询所有设备列表
      */
-    DescribeDevices(req: DescribeDevicesRequest, cb?: (error: string, rep: DescribeDevicesResponse) => void): Promise<DescribeDevicesResponse>;
+    DescribeAllDevices(req: DescribeAllDevicesRequest, cb?: (error: string, rep: DescribeAllDevicesResponse) => void): Promise<DescribeAllDevicesResponse>;
     /**
      * 本接口（DisableTopicRule）用于禁用规则
      */
@@ -203,6 +223,14 @@ export declare class Client extends AbstractClient {
      * 查询固件升级任务列表
      */
     DescribeFirmwareTasks(req: DescribeFirmwareTasksRequest, cb?: (error: string, rep: DescribeFirmwareTasksResponse) => void): Promise<DescribeFirmwareTasksResponse>;
+    /**
+     * 服务器端下发消息给lora类型的设备
+     */
+    PublishToDevice(req: PublishToDeviceRequest, cb?: (error: string, rep: PublishToDeviceResponse) => void): Promise<PublishToDeviceResponse>;
+    /**
+     * 本接口（DescribeProductResources）用于查询产品资源列表。
+     */
+    DescribeProductResources(req: DescribeProductResourcesRequest, cb?: (error: string, rep: DescribeProductResourcesResponse) => void): Promise<DescribeProductResourcesResponse>;
     /**
      * 本接口（DescribeProductTask）用于查看产品级别的任务信息
      */

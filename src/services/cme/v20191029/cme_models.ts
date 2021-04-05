@@ -101,6 +101,26 @@ export interface ImportMaterialResponse {
 }
 
 /**
+ * 云转推项目输入信息。
+ */
+export interface StreamConnectProjectInput {
+  /**
+   * 云转推主输入源信息。
+   */
+  MainInput?: StreamInputInfo
+
+  /**
+   * 云转推备输入源信息。
+   */
+  BackupInput?: StreamInputInfo
+
+  /**
+   * 云转推输出源信息。
+   */
+  Outputs?: Array<StreamConnectOutput>
+}
+
+/**
  * ExportVideoByVideoSegmentationData请求参数结构体
  */
 export interface ExportVideoByVideoSegmentationDataRequest {
@@ -153,6 +173,21 @@ export interface ExportVideoByVideoSegmentationDataRequest {
    * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
    */
   Operator?: string
+}
+
+/**
+ * 转场信息
+ */
+export interface MediaTransitionItem {
+  /**
+   * 转场 Id 。暂只支持一个转场。
+   */
+  TransitionId: string
+
+  /**
+   * 转场持续时间，单位为秒，默认为2秒。进行转场处理的两个媒体片段，第二个片段在轨道上的起始时间会自动进行调整，设置为前面一个片段的结束时间减去转场的持续时间。
+   */
+  Duration?: number
 }
 
 /**
@@ -426,6 +461,33 @@ export interface DeleteTeamResponse {
 }
 
 /**
+ * 云转推输出源。
+ */
+export interface StreamConnectOutput {
+  /**
+   * 云转推输出源标识，转推项目级别唯一。若不填则由后端生成。
+   */
+  Id?: string
+
+  /**
+   * 云转推输出源名称。
+   */
+  Name?: string
+
+  /**
+      * 云转推输出源类型，取值：
+<li>URL ：URL类型</li>
+不填默认为URL类型。
+      */
+  Type?: string
+
+  /**
+   * 云转推推流地址。
+   */
+  PushUrl?: string
+}
+
+/**
  * 视频拆条项目的输入信息。
  */
 export interface VideoSegmentationProjectInput {
@@ -500,8 +562,13 @@ export interface ProjectInfo {
   AspectRatio: string
 
   /**
-   * 项目类别。
-   */
+      * 项目类别，取值：
+项目类别，取值有：
+<li>VIDEO_EDIT：视频编辑。</li>
+<li>SWITCHER：导播台。</li>
+<li>VIDEO_SEGMENTATION：视频拆条。</li>
+<li>STREAM_CONNECT：云转推。</li>
+      */
   Category: string
 
   /**
@@ -730,6 +797,21 @@ export interface FlattenListMediaRequest {
 }
 
 /**
+ * 直播推流信息，包括推流地址有效时长，云剪后端生成直播推流地址。
+ */
+export interface RtmpPushInputInfo {
+  /**
+   * 直播推流地址有效期，单位：秒 。
+   */
+  ExpiredSecond: number
+
+  /**
+   * 直播推流地址，入参不填默认由云剪生成。
+   */
+  PushUrl?: string
+}
+
+/**
  * 音频素材信息
  */
 export interface AudioMaterial {
@@ -940,6 +1022,7 @@ export interface CreateProjectRequest {
 <li>VIDEO_EDIT：视频编辑。</li>
 <li>SWITCHER：导播台。</li>
 <li>VIDEO_SEGMENTATION：视频拆条。</li>
+<li>STREAM_CONNECT：云转推。</li>
       */
   Category: string
 
@@ -983,6 +1066,11 @@ export interface CreateProjectRequest {
    * 视频拆条信息，仅当项目类型为 VIDEO_SEGMENTATION  时必填。
    */
   VideoSegmentationProjectInput?: VideoSegmentationProjectInput
+
+  /**
+   * 云转推项目信息，仅当项目类型为 STREAM_CONNECT 时必填。
+   */
+  StreamConnectProjectInput?: StreamConnectProjectInput
 }
 
 /**
@@ -1107,9 +1195,10 @@ export interface DescribeTasksRequest {
 export interface MediaTrackItem {
   /**
       * 片段类型。取值有：
-<li>Video：视频片段。</li>
-<li>Audio：音频片段。</li>
-<li>Empty：空白片段。</li>
+<li>Video：视频片段；</li>
+<li>Audio：音频片段；</li>
+<li>Empty：空白片段；</li>
+<li>Transition：转场。</li>
       */
   Type: string
 
@@ -1128,6 +1217,11 @@ export interface MediaTrackItem {
 <li>使用 EmptyTrackItem 进行占位，来定位某个Item。</li>
       */
   EmptyItem?: EmptyTrackItem
+
+  /**
+   * 转场，当 Type = Transition 时有效。
+   */
+  TransitionItem?: MediaTransitionItem
 }
 
 /**
@@ -1239,6 +1333,37 @@ export interface ExportVideoByTemplateResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 输入流信息。
+ */
+export interface StreamInputInfo {
+  /**
+      * 流输入类型，取值：
+<li>VodPull ： 点播拉流；</li>
+<li>LivePull ：直播拉流；</li>
+<li>RtmpPush ： 直播推流。</li>
+      */
+  InputType: string
+
+  /**
+      * 点播拉流信息，当 InputType = VodPull 时必填。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VodPullInputInfo?: VodPullInputInfo
+
+  /**
+      * 直播拉流信息，当 InputType = LivePull  时必填。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LivePullInputInfo?: LivePullInputInfo
+
+  /**
+      * 直播推流信息，当 InputType = RtmpPush 时必填。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RtmpPushInputInfo?: RtmpPushInputInfo
 }
 
 /**
@@ -1641,6 +1766,16 @@ export interface MoveResourceRequest {
    * 操作者。填写用户的 Id，用于标识调用者及校验资源访问以及写权限。
    */
   Operator?: string
+}
+
+/**
+ * 直播拉流信息
+ */
+export interface LivePullInputInfo {
+  /**
+   * 直播拉流地址。
+   */
+  InputUrl: string
 }
 
 /**
@@ -2398,6 +2533,25 @@ export interface ListMediaRequest {
 }
 
 /**
+ * 点播拉流信息，包括输入拉流地址和播放次数。
+ */
+export interface VodPullInputInfo {
+  /**
+   * 点播输入拉流 URL 。
+   */
+  InputUrls: Array<string>
+
+  /**
+      * 播放次数，取值有：
+<li>-1 : 循环播放，直到转推结束；</li>
+<li>0 : 不循环；</li>
+<li>大于0 : 具体循环次数，次数和时间以先结束的为准。</li>
+默认不循环。
+      */
+  LoopTimes?: number
+}
+
+/**
  * ModifyTeam返回参数结构体
  */
 export interface ModifyTeamResponse {
@@ -2683,6 +2837,7 @@ export interface DescribeProjectsRequest {
 <li>VIDEO_EDIT：视频编辑。</li>
 <li>SWITCHER：导播台。</li>
 <li>VIDEO_SEGMENTATION：视频拆条。</li>
+<li>STREAM_CONNECT：云转推。</li>
       */
   CategorySet?: Array<string>
 
@@ -2827,12 +2982,12 @@ export interface DescribeProjectsResponse {
   /**
    * 符合条件的记录总数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 项目信息列表。
    */
-  ProjectInfoSet?: Array<ProjectInfo>
+  ProjectInfoSet: Array<ProjectInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2959,7 +3114,7 @@ export interface MediaTrack {
   /**
       * 轨道类型，取值有：
 <ul>
-<li>Video ：视频轨道。视频轨道由以下 Item 组成：<ul><li>VideoTrackItem</li><li>EmptyTrackItem</li></ul> </li>
+<li>Video ：视频轨道。视频轨道由以下 Item 组成：<ul><li>VideoTrackItem</li><li>EmptyTrackItem</li><li>MediaTransitionItem</li></ul> </li>
 <li>Audio ：音频轨道。音频轨道由以下 Item 组成：<ul><li>AudioTrackItem</li><li>EmptyTrackItem</li></ul> </li>
 </ul>
       */

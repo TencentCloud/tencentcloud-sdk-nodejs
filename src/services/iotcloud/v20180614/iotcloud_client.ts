@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   UnbindDevicesRequest,
+  DescribeDeviceResourcesRequest,
   BindDevicesRequest,
   DescribeProductsRequest,
   TopicRulePayload,
@@ -26,12 +27,17 @@ import {
   DescribeDevicesResponse,
   DeleteTopicRuleResponse,
   Task,
-  EnableTopicRuleResponse,
+  DescribeProductTasksRequest,
   DescribeTasksResponse,
   UpdateDeviceShadowRequest,
+  ProductResourceInfo,
   DescribeMultiDevTaskRequest,
+  DescribeDeviceResourceResponse,
+  DescribeProductResourcesRequest,
   DescribeProductsResponse,
   DescribeDeviceShadowResponse,
+  EnableTopicRuleResponse,
+  DescribePushResourceTaskStatisticsResponse,
   CreateMultiDeviceResponse,
   PublishRRPCMessageRequest,
   ProductProperties,
@@ -41,6 +47,7 @@ import {
   DeleteProductRequest,
   StatusStatistic,
   DescribeTasksRequest,
+  DescribeDeviceResourceRequest,
   EditFirmwareRequest,
   MultiDevicesInfo,
   ResetDeviceStateRequest,
@@ -50,16 +57,18 @@ import {
   DeleteDeviceRequest,
   DescribeFirmwareTaskDevicesRequest,
   DescribeFirmwareResponse,
+  DescribeResourceTasksRequest,
   CreateMultiDevicesTaskRequest,
   DescribeFirmwareTaskStatisticsResponse,
+  DescribePushResourceTaskStatisticsRequest,
   CreateLoraDeviceRequest,
   CreateProductResponse,
   CreateMultiDeviceRequest,
   DeleteLoraDeviceResponse,
   CreateTaskRequest,
   DescribeAllDevicesRequest,
-  DescribeFirmwareTaskDevicesResponse,
-  DeviceProperty,
+  DescribeProductResourceResponse,
+  CreateTopicPolicyResponse,
   PublishToDeviceResponse,
   RetryDeviceFirmwareTaskResponse,
   CreateDeviceResponse,
@@ -76,6 +85,7 @@ import {
   PublishBroadcastMessageRequest,
   PublishMessageRequest,
   RetryDeviceFirmwareTaskRequest,
+  DescribeFirmwareTaskDevicesResponse,
   DescribeFirmwareTasksResponse,
   DeviceLabel,
   UpdateDeviceAvailableStateResponse,
@@ -83,8 +93,9 @@ import {
   CancelTaskRequest,
   DescribeFirmwareTaskDistributionRequest,
   UpdateDeviceAvailableStateRequest,
+  GetUserResourceInfoResponse,
   DeleteProductResponse,
-  CreateTopicPolicyResponse,
+  DeviceProperty,
   PublishToDeviceRequest,
   UploadFirmwareResponse,
   ProductInfo,
@@ -92,14 +103,16 @@ import {
   PublishBroadcastMessageResponse,
   DescribeDeviceRequest,
   CreateMultiDevicesTaskResponse,
+  DescribeProductResourcesResponse,
   CreateTopicPolicyRequest,
-  ProductMetadata,
+  DescribeProductResourceRequest,
   DescribeLoraDeviceResponse,
   ProductTaskInfo,
   ReplaceTopicRuleRequest,
   PublishRRPCMessageResponse,
   CancelTaskResponse,
   Attribute,
+  DescribeDeviceResourcesResponse,
   CreateLoraDeviceResponse,
   DeleteTopicRuleRequest,
   ReplaceTopicRuleResponse,
@@ -109,7 +122,7 @@ import {
   DescribeMultiDevicesResponse,
   DescribeDeviceShadowRequest,
   UnbindDevicesResponse,
-  CreateTaskFileUrlResponse,
+  DeviceInfo,
   DescribeMultiDevicesRequest,
   CreateTaskFileUrlRequest,
   UpdateDeviceShadowResponse,
@@ -117,9 +130,10 @@ import {
   CreateTaskResponse,
   BatchPublishMessage,
   DescribeMultiDevTaskResponse,
-  DescribeProductTasksRequest,
+  GetUserResourceInfoRequest,
   DeviceTag,
   DescribeAllDevicesResponse,
+  ProductMetadata,
   DescribeLoraDeviceRequest,
   DescribeTaskRequest,
   PublishMessageResponse,
@@ -134,12 +148,14 @@ import {
   FirmwareTaskInfo,
   CreateTopicRuleResponse,
   CreateTopicRuleRequest,
+  DescribeResourceTasksResponse,
   DescribeFirmwareTaskStatisticsRequest,
   DeleteDeviceResponse,
-  DeviceInfo,
+  CreateTaskFileUrlResponse,
   DescribeProductTasksResponse,
   PublishAsDeviceResponse,
   EnableTopicRuleRequest,
+  DeviceResourceInfo,
   DescribeFirmwareTaskRequest,
 } from "./iotcloud_models"
 
@@ -163,13 +179,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询所有设备列表
+   * 本接口（DescribeDevices）用于查询物联网通信设备的设备列表。
    */
-  async DescribeAllDevices(
-    req: DescribeAllDevicesRequest,
-    cb?: (error: string, rep: DescribeAllDevicesResponse) => void
-  ): Promise<DescribeAllDevicesResponse> {
-    return this.request("DescribeAllDevices", req, cb)
+  async DescribeDevices(
+    req: DescribeDevicesRequest,
+    cb?: (error: string, rep: DescribeDevicesResponse) => void
+  ): Promise<DescribeDevicesResponse> {
+    return this.request("DescribeDevices", req, cb)
   }
 
   /**
@@ -193,13 +209,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 服务器端下发消息给lora类型的设备
+   * 本接口（DescribeMultiDevices）用于查询批量创建设备的执行结果。
    */
-  async PublishToDevice(
-    req: PublishToDeviceRequest,
-    cb?: (error: string, rep: PublishToDeviceResponse) => void
-  ): Promise<PublishToDeviceResponse> {
-    return this.request("PublishToDevice", req, cb)
+  async DescribeMultiDevices(
+    req: DescribeMultiDevicesRequest,
+    cb?: (error: string, rep: DescribeMultiDevicesResponse) => void
+  ): Promise<DescribeMultiDevicesResponse> {
+    return this.request("DescribeMultiDevices", req, cb)
   }
 
   /**
@@ -243,6 +259,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 启用或者禁用设备
+   */
+  async UpdateDeviceAvailableState(
+    req: UpdateDeviceAvailableStateRequest,
+    cb?: (error: string, rep: UpdateDeviceAvailableStateResponse) => void
+  ): Promise<UpdateDeviceAvailableStateResponse> {
+    return this.request("UpdateDeviceAvailableState", req, cb)
+  }
+
+  /**
    * 本接口（CreateTopicRule）用于创建一个规则
    */
   async CreateTopicRule(
@@ -283,13 +309,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 启用或者禁用设备
+   * 本接口（DescribeProductResource）用于查询产品资源详情。
    */
-  async UpdateDeviceAvailableState(
-    req: UpdateDeviceAvailableStateRequest,
-    cb?: (error: string, rep: UpdateDeviceAvailableStateResponse) => void
-  ): Promise<UpdateDeviceAvailableStateResponse> {
-    return this.request("UpdateDeviceAvailableState", req, cb)
+  async DescribeProductResource(
+    req: DescribeProductResourceRequest,
+    cb?: (error: string, rep: DescribeProductResourceResponse) => void
+  ): Promise<DescribeProductResourceResponse> {
+    return this.request("DescribeProductResource", req, cb)
   }
 
   /**
@@ -300,6 +326,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateProductResponse) => void
   ): Promise<CreateProductResponse> {
     return this.request("CreateProduct", req, cb)
+  }
+
+  /**
+   * 本接口（GetUserResourceInfo）用于查询用户资源使用信息。
+   */
+  async GetUserResourceInfo(
+    req?: GetUserResourceInfoRequest,
+    cb?: (error: string, rep: GetUserResourceInfoResponse) => void
+  ): Promise<GetUserResourceInfoResponse> {
+    return this.request("GetUserResourceInfo", req, cb)
   }
 
   /**
@@ -340,6 +376,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateMultiDevicesTaskResponse) => void
   ): Promise<CreateMultiDevicesTaskResponse> {
     return this.request("CreateMultiDevicesTask", req, cb)
+  }
+
+  /**
+   * 查询资源推送任务列表
+   */
+  async DescribeResourceTasks(
+    req: DescribeResourceTasksRequest,
+    cb?: (error: string, rep: DescribeResourceTasksResponse) => void
+  ): Promise<DescribeResourceTasksResponse> {
+    return this.request("DescribeResourceTasks", req, cb)
   }
 
   /**
@@ -393,6 +439,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询推送资源任务统计信息
+   */
+  async DescribePushResourceTaskStatistics(
+    req: DescribePushResourceTaskStatisticsRequest,
+    cb?: (error: string, rep: DescribePushResourceTaskStatisticsResponse) => void
+  ): Promise<DescribePushResourceTaskStatisticsResponse> {
+    return this.request("DescribePushResourceTaskStatistics", req, cb)
+  }
+
+  /**
    * 编辑固件信息
    */
   async EditFirmware(
@@ -410,6 +466,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateDeviceResponse) => void
   ): Promise<CreateDeviceResponse> {
     return this.request("CreateDevice", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeDeviceResource）用于查询设备资源详情。
+   */
+  async DescribeDeviceResource(
+    req: DescribeDeviceResourceRequest,
+    cb?: (error: string, rep: DescribeDeviceResourceResponse) => void
+  ): Promise<DescribeDeviceResourceResponse> {
+    return this.request("DescribeDeviceResource", req, cb)
   }
 
   /**
@@ -483,13 +549,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeMultiDevices）用于查询批量创建设备的执行结果。
+   * 本接口（DescribeDeviceResources）用于查询设备资源列表。
    */
-  async DescribeMultiDevices(
-    req: DescribeMultiDevicesRequest,
-    cb?: (error: string, rep: DescribeMultiDevicesResponse) => void
-  ): Promise<DescribeMultiDevicesResponse> {
-    return this.request("DescribeMultiDevices", req, cb)
+  async DescribeDeviceResources(
+    req: DescribeDeviceResourcesRequest,
+    cb?: (error: string, rep: DescribeDeviceResourcesResponse) => void
+  ): Promise<DescribeDeviceResourcesResponse> {
+    return this.request("DescribeDeviceResources", req, cb)
   }
 
   /**
@@ -593,13 +659,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeDevices）用于查询物联网通信设备的设备列表。
+   * 查询所有设备列表
    */
-  async DescribeDevices(
-    req: DescribeDevicesRequest,
-    cb?: (error: string, rep: DescribeDevicesResponse) => void
-  ): Promise<DescribeDevicesResponse> {
-    return this.request("DescribeDevices", req, cb)
+  async DescribeAllDevices(
+    req: DescribeAllDevicesRequest,
+    cb?: (error: string, rep: DescribeAllDevicesResponse) => void
+  ): Promise<DescribeAllDevicesResponse> {
+    return this.request("DescribeAllDevices", req, cb)
   }
 
   /**
@@ -640,6 +706,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeFirmwareTasksResponse) => void
   ): Promise<DescribeFirmwareTasksResponse> {
     return this.request("DescribeFirmwareTasks", req, cb)
+  }
+
+  /**
+   * 服务器端下发消息给lora类型的设备
+   */
+  async PublishToDevice(
+    req: PublishToDeviceRequest,
+    cb?: (error: string, rep: PublishToDeviceResponse) => void
+  ): Promise<PublishToDeviceResponse> {
+    return this.request("PublishToDevice", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeProductResources）用于查询产品资源列表。
+   */
+  async DescribeProductResources(
+    req: DescribeProductResourcesRequest,
+    cb?: (error: string, rep: DescribeProductResourcesResponse) => void
+  ): Promise<DescribeProductResourcesResponse> {
+    return this.request("DescribeProductResources", req, cb)
   }
 
   /**

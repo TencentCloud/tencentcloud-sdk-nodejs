@@ -23,7 +23,9 @@ import {
   DeleteProjectRequest,
   ExportVideoByVideoSegmentationDataResponse,
   ImportMaterialResponse,
+  StreamConnectProjectInput,
   ExportVideoByVideoSegmentationDataRequest,
+  MediaTransitionItem,
   DescribeTeamsResponse,
   DescribeTaskDetailResponse,
   ExportVideoEditProjectRequest,
@@ -33,6 +35,7 @@ import {
   IntegerRange,
   SearchMaterialRequest,
   DeleteTeamResponse,
+  StreamConnectOutput,
   VideoSegmentationProjectInput,
   RevokeResourceAuthorizationResponse,
   DescribeTasksResponse,
@@ -43,6 +46,7 @@ import {
   LinkMaterial,
   SwitcherProjectInput,
   FlattenListMediaRequest,
+  RtmpPushInputInfo,
   AudioMaterial,
   AddMemberInfo,
   Entity,
@@ -63,6 +67,7 @@ import {
   Resource,
   CreateLinkResponse,
   ExportVideoByTemplateResponse,
+  StreamInputInfo,
   ListMediaResponse,
   SearchMaterialResponse,
   EmptyTrackItem,
@@ -80,6 +85,7 @@ import {
   SwitcherPgmOutputConfig,
   CMEExportInfo,
   MoveResourceRequest,
+  LivePullInputInfo,
   ImportMediaToProjectRequest,
   VODExportInfo,
   SortBy,
@@ -111,6 +117,7 @@ import {
   ExportVideoEditProjectResponse,
   ThirdPartyPublishInfo,
   ListMediaRequest,
+  VodPullInputInfo,
   ModifyTeamResponse,
   DeleteLoginStatusRequest,
   GenerateVideoSegmentationSchemeByAiRequest,
@@ -520,7 +527,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 创建云剪的编辑项目，支持创建视频剪辑、直播剪辑、导播台项目以及视频拆条项目。
+     * 创建云剪的编辑项目，支持创建视频剪辑、直播剪辑、导播台、视频拆条、录制回放以及云转推项目。
 
      */
   async CreateProject(

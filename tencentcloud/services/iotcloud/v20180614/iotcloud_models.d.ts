@@ -24,6 +24,35 @@ export interface UnbindDevicesRequest {
     Skey?: string;
 }
 /**
+ * DescribeDeviceResources请求参数结构体
+ */
+export interface DescribeDeviceResourcesRequest {
+    /**
+      * 偏移量，Offset从0开始
+      */
+    Offset: number;
+    /**
+      * 分页的大小，数值范围 10-250
+      */
+    Limit: number;
+    /**
+      * 产品ID
+      */
+    ProductID?: string;
+    /**
+      * 需要过滤的设备名称
+      */
+    DeviceName?: string;
+    /**
+      * 资源搜索开始时间
+      */
+    StartTime?: string;
+    /**
+      * 资源搜索结束时间
+      */
+    EndTime?: string;
+}
+/**
  * BindDevices请求参数结构体
  */
 export interface BindDevicesRequest {
@@ -184,13 +213,21 @@ export interface Task {
     PublishMessageTask?: BatchPublishMessage;
 }
 /**
- * EnableTopicRule返回参数结构体
+ * DescribeProductTasks请求参数结构体
  */
-export interface EnableTopicRuleResponse {
+export interface DescribeProductTasksRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 产品ID
       */
-    RequestId?: string;
+    ProductId: string;
+    /**
+      * 产品级别任务列表偏移量
+      */
+    Offset: number;
+    /**
+      * 产品级别任务列表拉取个数
+      */
+    Limit: number;
 }
 /**
  * DescribeTasks返回参数结构体
@@ -235,6 +272,40 @@ export interface UpdateDeviceShadowRequest {
     Prefix?: string;
 }
 /**
+ * 产品资源详细信息
+ */
+export interface ProductResourceInfo {
+    /**
+      * 产品ID
+      */
+    ProductID: string;
+    /**
+      * 产品名
+      */
+    ProductName: string;
+    /**
+      * 资源名称
+      */
+    Name: string;
+    /**
+      * 资源文件md5
+      */
+    Md5: string;
+    /**
+      * 资源文件大小
+      */
+    Size: number;
+    /**
+      * 资源文件描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Description: string;
+    /**
+      * 资源创建时间
+      */
+    CreateTime: string;
+}
+/**
  * DescribeMultiDevTask请求参数结构体
  */
 export interface DescribeMultiDevTaskRequest {
@@ -246,6 +317,40 @@ export interface DescribeMultiDevTaskRequest {
       * 产品 ID，创建产品时腾讯云为用户分配全局唯一的 ID
       */
     ProductId: string;
+}
+/**
+ * DescribeDeviceResource返回参数结构体
+ */
+export interface DescribeDeviceResourceResponse {
+    /**
+      * 设备资源详情
+      */
+    Result: DeviceResourceInfo;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeProductResources请求参数结构体
+ */
+export interface DescribeProductResourcesRequest {
+    /**
+      * 偏移量，Offset从0开始
+      */
+    Offset: number;
+    /**
+      * 分页的大小，数值范围 10-250
+      */
+    Limit: number;
+    /**
+      * 需要查看资源列表的产品 ID
+      */
+    ProductID?: string;
+    /**
+      * 需要过滤的资源名称
+      */
+    Name?: string;
 }
 /**
  * DescribeProducts返回参数结构体
@@ -272,6 +377,39 @@ export interface DescribeDeviceShadowResponse {
       * 设备影子数据
       */
     Data?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * EnableTopicRule返回参数结构体
+ */
+export interface EnableTopicRuleResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribePushResourceTaskStatistics返回参数结构体
+ */
+export interface DescribePushResourceTaskStatisticsResponse {
+    /**
+      * 推送成功的设备总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SuccessTotal: number;
+    /**
+      * 推送失败的设备总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FailureTotal: number;
+    /**
+      * 正在推送的设备总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpgradingTotal: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -497,6 +635,23 @@ export interface DescribeTasksRequest {
     Limit: number;
 }
 /**
+ * DescribeDeviceResource请求参数结构体
+ */
+export interface DescribeDeviceResourceRequest {
+    /**
+      * 设备名称
+      */
+    DeviceName: string;
+    /**
+      * 产品ID
+      */
+    ProductID?: string;
+    /**
+      * 具体的设备资源名称
+      */
+    Name?: string;
+}
+/**
  * EditFirmware请求参数结构体
  */
 export interface EditFirmwareRequest {
@@ -690,6 +845,31 @@ export interface DescribeFirmwareResponse {
     RequestId?: string;
 }
 /**
+ * DescribeResourceTasks请求参数结构体
+ */
+export interface DescribeResourceTasksRequest {
+    /**
+      * 产品ID
+      */
+    ProductID: string;
+    /**
+      * 资源名称
+      */
+    Name: string;
+    /**
+      * 查询偏移量
+      */
+    Offset: number;
+    /**
+      * 返回查询结果条数
+      */
+    Limit: number;
+    /**
+      * 搜索过滤条件
+      */
+    Filters?: Array<SearchKeyword>;
+}
+/**
  * CreateMultiDevicesTask请求参数结构体
  */
 export interface CreateMultiDevicesTaskRequest {
@@ -741,6 +921,19 @@ export interface DescribeFirmwareTaskStatisticsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribePushResourceTaskStatistics请求参数结构体
+ */
+export interface DescribePushResourceTaskStatisticsRequest {
+    /**
+      * 产品ID
+      */
+    ProductID: string;
+    /**
+      * 资源名称
+      */
+    Name: string;
 }
 /**
  * CreateLoraDevice请求参数结构体
@@ -865,48 +1058,27 @@ export interface DescribeAllDevicesRequest {
     Limit: number;
 }
 /**
- * DescribeFirmwareTaskDevices返回参数结构体
+ * DescribeProductResource返回参数结构体
  */
-export interface DescribeFirmwareTaskDevicesResponse {
+export interface DescribeProductResourceResponse {
     /**
-      * 固件升级任务的设备总数
+      * 资源详情
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Total?: number;
-    /**
-      * 固件升级任务的设备列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Devices?: Array<DeviceUpdateStatus>;
+    Result: ProductResourceInfo;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
 }
 /**
- * 设备资源信息。
+ * CreateTopicPolicy返回参数结构体
  */
-export interface DeviceProperty {
+export interface CreateTopicPolicyResponse {
     /**
-      * 产品ID。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    ProductId: string;
-    /**
-      * 产品名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ProductName: string;
-    /**
-      * 设备名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DeviceName: string;
-    /**
-      * 设备资源ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ResourceId: string;
+    RequestId?: string;
 }
 /**
  * PublishToDevice返回参数结构体
@@ -1341,6 +1513,25 @@ export interface RetryDeviceFirmwareTaskRequest {
     TaskId: number;
 }
 /**
+ * DescribeFirmwareTaskDevices返回参数结构体
+ */
+export interface DescribeFirmwareTaskDevicesResponse {
+    /**
+      * 固件升级任务的设备总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Total?: number;
+    /**
+      * 固件升级任务的设备列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Devices?: Array<DeviceUpdateStatus>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeFirmwareTasks返回参数结构体
  */
 export interface DescribeFirmwareTasksResponse {
@@ -1434,6 +1625,23 @@ export interface UpdateDeviceAvailableStateRequest {
     EnableState: number;
 }
 /**
+ * GetUserResourceInfo返回参数结构体
+ */
+export interface GetUserResourceInfoResponse {
+    /**
+      * 已使用的资源字节数
+      */
+    UsedSize: number;
+    /**
+      * 可以使用资源的总大小
+      */
+    Limit: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteProduct返回参数结构体
  */
 export interface DeleteProductResponse {
@@ -1443,13 +1651,29 @@ export interface DeleteProductResponse {
     RequestId?: string;
 }
 /**
- * CreateTopicPolicy返回参数结构体
+ * 设备资源信息。
  */
-export interface CreateTopicPolicyResponse {
+export interface DeviceProperty {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 产品ID。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RequestId?: string;
+    ProductId: string;
+    /**
+      * 产品名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ProductName: string;
+    /**
+      * 设备名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DeviceName: string;
+    /**
+      * 设备资源ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResourceId: string;
 }
 /**
  * PublishToDevice请求参数结构体
@@ -1555,6 +1779,24 @@ export interface CreateMultiDevicesTaskResponse {
     RequestId?: string;
 }
 /**
+ * DescribeProductResources返回参数结构体
+ */
+export interface DescribeProductResourcesResponse {
+    /**
+      * 资源总数
+      */
+    TotalCount: number;
+    /**
+      * 资源详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: Array<ProductResourceInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateTopicPolicy请求参数结构体
  */
 export interface CreateTopicPolicyRequest {
@@ -1576,13 +1818,17 @@ export interface CreateTopicPolicyRequest {
     BrokerSubscribe?: BrokerSubscribe;
 }
 /**
- * 产品元数据
+ * DescribeProductResource请求参数结构体
  */
-export interface ProductMetadata {
+export interface DescribeProductResourceRequest {
     /**
-      * 产品创建时间
+      * 需要查看资源列表的产品 ID
       */
-    CreationDate: number;
+    ProductID?: string;
+    /**
+      * 需要过滤的资源名称
+      */
+    Name?: string;
 }
 /**
  * DescribeLoraDevice返回参数结构体
@@ -1732,6 +1978,24 @@ export interface Attribute {
     Tags?: Array<DeviceTag>;
 }
 /**
+ * DescribeDeviceResources返回参数结构体
+ */
+export interface DescribeDeviceResourcesResponse {
+    /**
+      * 资源总数
+      */
+    TotalCount: number;
+    /**
+      * 资源列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: Array<DeviceResourceInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateLoraDevice返回参数结构体
  */
 export interface CreateLoraDeviceResponse {
@@ -1869,21 +2133,114 @@ export interface UnbindDevicesResponse {
     RequestId?: string;
 }
 /**
- * CreateTaskFileUrl返回参数结构体
+ * 设备详细信息
  */
-export interface CreateTaskFileUrlResponse {
+export interface DeviceInfo {
     /**
-      * 任务文件上传链接
+      * 设备名
       */
-    Url?: string;
+    DeviceName: string;
     /**
-      * 任务文件名
+      * 设备是否在线，0不在线，1在线
       */
-    FileName?: string;
+    Online: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 设备登录时间
       */
-    RequestId?: string;
+    LoginTime: number;
+    /**
+      * 设备版本
+      */
+    Version: string;
+    /**
+      * 设备证书，证书加密的设备返回
+      */
+    DeviceCert: string;
+    /**
+      * 设备密钥，密钥加密的设备返回
+      */
+    DevicePsk: string;
+    /**
+      * 设备属性
+      */
+    Tags: Array<DeviceTag>;
+    /**
+      * 设备类型
+      */
+    DeviceType: number;
+    /**
+      * 国际移动设备识别码 IMEI
+      */
+    Imei: string;
+    /**
+      * 运营商类型
+      */
+    Isp: number;
+    /**
+      * NB IOT运营商处的DeviceID
+      */
+    NbiotDeviceID: string;
+    /**
+      * IP地址
+      */
+    ConnIP: number;
+    /**
+      * 设备最后更新时间
+      */
+    LastUpdateTime: number;
+    /**
+      * LoRa设备的dev eui
+      */
+    LoraDevEui: string;
+    /**
+      * LoRa设备的Mote type
+      */
+    LoraMoteType: number;
+    /**
+      * 首次上线时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FirstOnlineTime: number;
+    /**
+      * 最近下线时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LastOfflineTime: number;
+    /**
+      * 设备创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime: number;
+    /**
+      * 设备日志级别
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LogLevel: number;
+    /**
+      * 设备证书获取状态, 1 已获取过设备密钥，0 未获取过设备密钥
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CertState: number;
+    /**
+      * 设备可用状态，0禁用，1启用
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EnableState: number;
+    /**
+      * 设备标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Labels: Array<DeviceLabel>;
+    /**
+      * MQTT客户端IP地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClientIP: string;
+    /**
+      * ota最后更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FirmwareUpdateTime: number;
 }
 /**
  * DescribeMultiDevices请求参数结构体
@@ -2033,22 +2390,9 @@ export interface DescribeMultiDevTaskResponse {
     RequestId?: string;
 }
 /**
- * DescribeProductTasks请求参数结构体
+ * GetUserResourceInfo请求参数结构体
  */
-export interface DescribeProductTasksRequest {
-    /**
-      * 产品ID
-      */
-    ProductId: string;
-    /**
-      * 产品级别任务列表偏移量
-      */
-    Offset: number;
-    /**
-      * 产品级别任务列表拉取个数
-      */
-    Limit: number;
-}
+export declare type GetUserResourceInfoRequest = null;
 /**
  * 设备属性
  */
@@ -2087,6 +2431,15 @@ export interface DescribeAllDevicesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 产品元数据
+ */
+export interface ProductMetadata {
+    /**
+      * 产品创建时间
+      */
+    CreationDate: number;
 }
 /**
  * DescribeLoraDevice请求参数结构体
@@ -2304,6 +2657,25 @@ export interface CreateTopicRuleRequest {
     TopicRulePayload: TopicRulePayload;
 }
 /**
+ * DescribeResourceTasks返回参数结构体
+ */
+export interface DescribeResourceTasksResponse {
+    /**
+      * 资源任务列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskInfos: Array<FirmwareTaskInfo>;
+    /**
+      * 资源任务总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Total: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeFirmwareTaskStatistics请求参数结构体
  */
 export interface DescribeFirmwareTaskStatisticsRequest {
@@ -2326,114 +2698,21 @@ export interface DeleteDeviceResponse {
     RequestId?: string;
 }
 /**
- * 设备详细信息
+ * CreateTaskFileUrl返回参数结构体
  */
-export interface DeviceInfo {
+export interface CreateTaskFileUrlResponse {
     /**
-      * 设备名
+      * 任务文件上传链接
       */
-    DeviceName: string;
+    Url?: string;
     /**
-      * 设备是否在线，0不在线，1在线
+      * 任务文件名
       */
-    Online: number;
+    FileName?: string;
     /**
-      * 设备登录时间
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    LoginTime: number;
-    /**
-      * 设备版本
-      */
-    Version: string;
-    /**
-      * 设备证书，证书加密的设备返回
-      */
-    DeviceCert: string;
-    /**
-      * 设备密钥，密钥加密的设备返回
-      */
-    DevicePsk: string;
-    /**
-      * 设备属性
-      */
-    Tags: Array<DeviceTag>;
-    /**
-      * 设备类型
-      */
-    DeviceType: number;
-    /**
-      * 国际移动设备识别码 IMEI
-      */
-    Imei: string;
-    /**
-      * 运营商类型
-      */
-    Isp: number;
-    /**
-      * NB IOT运营商处的DeviceID
-      */
-    NbiotDeviceID: string;
-    /**
-      * IP地址
-      */
-    ConnIP: number;
-    /**
-      * 设备最后更新时间
-      */
-    LastUpdateTime: number;
-    /**
-      * LoRa设备的dev eui
-      */
-    LoraDevEui: string;
-    /**
-      * LoRa设备的Mote type
-      */
-    LoraMoteType: number;
-    /**
-      * 首次上线时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FirstOnlineTime: number;
-    /**
-      * 最近下线时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    LastOfflineTime: number;
-    /**
-      * 设备创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CreateTime: number;
-    /**
-      * 设备日志级别
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    LogLevel: number;
-    /**
-      * 设备证书获取状态, 1 已获取过设备密钥，0 未获取过设备密钥
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CertState: number;
-    /**
-      * 设备可用状态，0禁用，1启用
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    EnableState: number;
-    /**
-      * 设备标签
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Labels: Array<DeviceLabel>;
-    /**
-      * MQTT客户端IP地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ClientIP: string;
-    /**
-      * ota最后更新时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    FirmwareUpdateTime: number;
+    RequestId?: string;
 }
 /**
  * DescribeProductTasks返回参数结构体
@@ -2469,6 +2748,47 @@ export interface EnableTopicRuleRequest {
       * 规则名称
       */
     RuleName: string;
+}
+/**
+ * 设备资源详细信息
+ */
+export interface DeviceResourceInfo {
+    /**
+      * 产品ID
+      */
+    ProductID: string;
+    /**
+      * 产品名
+      */
+    ProductName: string;
+    /**
+      * 资源名称
+      */
+    Name: string;
+    /**
+      * 资源文件md5
+      */
+    Md5: string;
+    /**
+      * 资源文件大小
+      */
+    Size: number;
+    /**
+      * 资源更新时间
+      */
+    UpdateTime: string;
+    /**
+      * 设备名称
+      */
+    DeviceName: string;
+    /**
+      * 设备资源上传状态
+      */
+    Status: number;
+    /**
+      * 设备资源上传百分比
+      */
+    Percent: number;
 }
 /**
  * DescribeFirmwareTask请求参数结构体

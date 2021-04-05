@@ -34,10 +34,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTask", req, cb);
     }
     /**
-     * 查询所有设备列表
+     * 本接口（DescribeDevices）用于查询物联网通信设备的设备列表。
      */
-    async DescribeAllDevices(req, cb) {
-        return this.request("DescribeAllDevices", req, cb);
+    async DescribeDevices(req, cb) {
+        return this.request("DescribeDevices", req, cb);
     }
     /**
      * 发布RRPC消息
@@ -52,10 +52,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteLoraDevice", req, cb);
     }
     /**
-     * 服务器端下发消息给lora类型的设备
+     * 本接口（DescribeMultiDevices）用于查询批量创建设备的执行结果。
      */
-    async PublishToDevice(req, cb) {
-        return this.request("PublishToDevice", req, cb);
+    async DescribeMultiDevices(req, cb) {
+        return this.request("DescribeMultiDevices", req, cb);
     }
     /**
      * 查询固件信息
@@ -82,6 +82,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateMultiDevice", req, cb);
     }
     /**
+     * 启用或者禁用设备
+     */
+    async UpdateDeviceAvailableState(req, cb) {
+        return this.request("UpdateDeviceAvailableState", req, cb);
+    }
+    /**
      * 本接口（CreateTopicRule）用于创建一个规则
      */
     async CreateTopicRule(req, cb) {
@@ -106,16 +112,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTopicPolicy", req, cb);
     }
     /**
-     * 启用或者禁用设备
+     * 本接口（DescribeProductResource）用于查询产品资源详情。
      */
-    async UpdateDeviceAvailableState(req, cb) {
-        return this.request("UpdateDeviceAvailableState", req, cb);
+    async DescribeProductResource(req, cb) {
+        return this.request("DescribeProductResource", req, cb);
     }
     /**
      * 本接口（CreateProduct）用于创建一个新的物联网通信产品
      */
     async CreateProduct(req, cb) {
         return this.request("CreateProduct", req, cb);
+    }
+    /**
+     * 本接口（GetUserResourceInfo）用于查询用户资源使用信息。
+     */
+    async GetUserResourceInfo(req, cb) {
+        return this.request("GetUserResourceInfo", req, cb);
     }
     /**
      * 本接口（UploadFirmware）用于上传设备固件信息
@@ -140,6 +152,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateMultiDevicesTask(req, cb) {
         return this.request("CreateMultiDevicesTask", req, cb);
+    }
+    /**
+     * 查询资源推送任务列表
+     */
+    async DescribeResourceTasks(req, cb) {
+        return this.request("DescribeResourceTasks", req, cb);
     }
     /**
      * 查询固件升级任务统计信息
@@ -172,6 +190,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ReplaceTopicRule", req, cb);
     }
     /**
+     * 查询推送资源任务统计信息
+     */
+    async DescribePushResourceTaskStatistics(req, cb) {
+        return this.request("DescribePushResourceTaskStatistics", req, cb);
+    }
+    /**
      * 编辑固件信息
      */
     async EditFirmware(req, cb) {
@@ -182,6 +206,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateDevice(req, cb) {
         return this.request("CreateDevice", req, cb);
+    }
+    /**
+     * 本接口（DescribeDeviceResource）用于查询设备资源详情。
+     */
+    async DescribeDeviceResource(req, cb) {
+        return this.request("DescribeDeviceResource", req, cb);
     }
     /**
      * 本接口（PublishMessage）用于向某个主题发消息。
@@ -226,10 +256,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTasks", req, cb);
     }
     /**
-     * 本接口（DescribeMultiDevices）用于查询批量创建设备的执行结果。
+     * 本接口（DescribeDeviceResources）用于查询设备资源列表。
      */
-    async DescribeMultiDevices(req, cb) {
-        return this.request("DescribeMultiDevices", req, cb);
+    async DescribeDeviceResources(req, cb) {
+        return this.request("DescribeDeviceResources", req, cb);
     }
     /**
      * 查询固件升级任务的设备列表
@@ -292,10 +322,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeProductTasks", req, cb);
     }
     /**
-     * 本接口（DescribeDevices）用于查询物联网通信设备的设备列表。
+     * 查询所有设备列表
      */
-    async DescribeDevices(req, cb) {
-        return this.request("DescribeDevices", req, cb);
+    async DescribeAllDevices(req, cb) {
+        return this.request("DescribeAllDevices", req, cb);
     }
     /**
      * 本接口（DisableTopicRule）用于禁用规则
@@ -320,6 +350,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeFirmwareTasks(req, cb) {
         return this.request("DescribeFirmwareTasks", req, cb);
+    }
+    /**
+     * 服务器端下发消息给lora类型的设备
+     */
+    async PublishToDevice(req, cb) {
+        return this.request("PublishToDevice", req, cb);
+    }
+    /**
+     * 本接口（DescribeProductResources）用于查询产品资源列表。
+     */
+    async DescribeProductResources(req, cb) {
+        return this.request("DescribeProductResources", req, cb);
     }
     /**
      * 本接口（DescribeProductTask）用于查看产品级别的任务信息

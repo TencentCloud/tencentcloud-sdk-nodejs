@@ -338,13 +338,13 @@ export interface DescribeHaVipsResponse {
   /**
    * 符合条件的对象数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
       * HAVIP对象数组。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  HaVipSet?: Array<HaVip>
+  HaVipSet: Array<HaVip>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3412,13 +3412,13 @@ export interface CreateRoutesResponse {
   /**
    * 新增的实例个数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
       * 路由表对象。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  RouteTableSet?: Array<RouteTable>
+  RouteTableSet: Array<RouteTable>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4838,7 +4838,7 @@ export interface DescribeRouteConflictsResponse {
       * 路由策略冲突列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  RouteConflictSet?: Array<RouteConflict>
+  RouteConflictSet: Array<RouteConflict>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4892,7 +4892,7 @@ export interface CreateHaVipResponse {
   /**
    * HAVIP对象。
    */
-  HaVip?: HaVip
+  HaVip: HaVip
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5494,7 +5494,7 @@ export interface CreateRouteTableResponse {
   /**
    * 路由表对象
    */
-  RouteTable?: RouteTable
+  RouteTable: RouteTable
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6099,12 +6099,12 @@ subnet-id - String - HAVIP所在子网ID。
   Filters?: Array<Filter>
 
   /**
-   * 偏移量。
+   * 偏移量，默认值是0。
    */
   Offset?: number
 
   /**
-   * 返回数量。
+   * 返回数量，默认值是20，最大是100。
    */
   Limit?: number
 
@@ -6591,13 +6591,13 @@ export interface DescribeRouteTablesResponse {
   /**
    * 符合条件的实例数量
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
       * 路由表列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  RouteTableSet?: Array<RouteTable>
+  RouteTableSet: Array<RouteTable>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

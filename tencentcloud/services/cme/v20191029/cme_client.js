@@ -247,7 +247,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ListMedia", req, cb);
     }
     /**
-     * 创建云剪的编辑项目，支持创建视频剪辑、直播剪辑、导播台项目以及视频拆条项目。
+     * 创建云剪的编辑项目，支持创建视频剪辑、直播剪辑、导播台、视频拆条、录制回放以及云转推项目。
 
      */
     async CreateProject(req, cb) {
