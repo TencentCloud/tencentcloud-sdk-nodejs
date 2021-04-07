@@ -148,6 +148,21 @@ export interface DescribeIMCdrsResponse {
 }
 
 /**
+ * DescribeTelSession请求参数结构体
+ */
+export interface DescribeTelSessionRequest {
+  /**
+   * 应用ID
+   */
+  SdkAppId: number
+
+  /**
+   * 会话ID
+   */
+  SessionId: string
+}
+
+/**
  * DescribeIMCdrs请求参数结构体
  */
 export interface DescribeIMCdrsRequest {
@@ -578,6 +593,95 @@ export interface DescribeChatMessagesRequest {
    * 1为从早到晚，2为从晚到早，默认为2
    */
   Order?: number
+}
+
+/**
+ * PSTN 会话类型。
+ */
+export interface PSTNSession {
+  /**
+   * 会话 ID
+   */
+  SessionID: string
+
+  /**
+   * 会话临时房间 ID
+   */
+  RoomID: string
+
+  /**
+   * 主叫
+   */
+  Caller: string
+
+  /**
+   * 被叫
+   */
+  Callee: string
+
+  /**
+   * 开始时间，Unix 时间戳
+   */
+  StartTimestamp: number
+
+  /**
+   * 振铃时间，Unix 时间戳
+   */
+  RingTimestamp: number
+
+  /**
+   * 接听时间，Unix 时间戳
+   */
+  AcceptTimestamp: number
+
+  /**
+   * 坐席邮箱
+   */
+  StaffEmail: string
+
+  /**
+   * 坐席工号
+   */
+  StaffNumber: string
+
+  /**
+      * 会话状态
+ringing 振铃中
+seatJoining  等待坐席接听
+inProgress 进行中
+finished 已完成
+      */
+  SessionStatus: string
+
+  /**
+   * 会话呼叫方向， 0 呼入 | 1 - 呼出
+   */
+  Direction: number
+
+  /**
+   * 转外线使用的号码（转外线主叫）
+   */
+  OutBoundCaller: string
+
+  /**
+   * 转外线被叫
+   */
+  OutBoundCallee: string
+}
+
+/**
+ * DescribeTelSession返回参数结构体
+ */
+export interface DescribeTelSessionResponse {
+  /**
+   * 会话信息
+   */
+  Session: PSTNSession
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

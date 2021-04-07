@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  ImportSnapshotsResponse,
   ModifyClusterNameRequest,
   ModifyTableGroupNameResponse,
   DescribeTableTagsRequest,
@@ -27,6 +28,7 @@ import {
   TableRollbackResultNew,
   ServerMachineInfo,
   DescribeTablesResponse,
+  ModifySnapshotsResponse,
   DeleteClusterRequest,
   SelectedTableWithField,
   DeleteTableIndexRequest,
@@ -38,6 +40,7 @@ import {
   ModifyClusterPasswordRequest,
   DescribeMachineResponse,
   DeleteTableGroupRequest,
+  DescribeSnapshotsRequest,
   TagsInfoOfTableGroup,
   CreateTableGroupRequest,
   ModifyClusterMachineResponse,
@@ -47,24 +50,30 @@ import {
   ModifyTableTagsRequest,
   IdlFileInfo,
   DescribeTasksRequest,
+  SnapshotInfoNew,
   RecoverRecycleTablesResponse,
   ClearTablesResponse,
   DescribeIdlFileInfosRequest,
+  SnapshotResult,
   ClusterInfo,
   DisableRestProxyRequest,
   DescribeTablesInRecycleResponse,
   ModifyTablesResponse,
-  EnableRestProxyRequest,
+  DeleteSnapshotsRequest,
   ModifyTableGroupTagsResponse,
   ModifyClusterTagsRequest,
+  CreateSnapshotsRequest,
   DescribeTableGroupTagsResponse,
   SetTableIndexRequest,
   ModifyTableQuotasResponse,
   RecoverRecycleTablesRequest,
+  DeleteSnapshotsResponse,
+  DeleteTablesResponse,
   ModifyTableGroupNameRequest,
   DescribeTableGroupsRequest,
   ModifyTableTagsResponse,
   ModifyTableGroupTagsRequest,
+  EnableRestProxyRequest,
   ModifyTableQuotasRequest,
   CompareIdlFilesResponse,
   CreateTablesResponse,
@@ -76,6 +85,7 @@ import {
   SetTableIndexResponse,
   ClearTablesRequest,
   DescribeIdlFileInfosResponse,
+  CreateSnapshotsResponse,
   DisableRestProxyResponse,
   TagInfoUnit,
   CreateClusterResponse,
@@ -85,9 +95,11 @@ import {
   TaskInfoNew,
   DeleteIdlFilesRequest,
   CreateBackupResponse,
+  KeyFile,
   VerifyIdlFilesResponse,
   DescribeTableTagsResponse,
   CreateTableGroupResponse,
+  DescribeSnapshotsResponse,
   VerifyIdlFilesRequest,
   EnableRestProxyResponse,
   ModifyClusterNameResponse,
@@ -97,6 +109,7 @@ import {
   DescribeTablesRequest,
   ModifyTableMemosRequest,
   DescribeUinInWhitelistResponse,
+  SnapshotInfo,
   ParsedTableInfoNew,
   RollbackTablesResponse,
   MachineInfo,
@@ -118,7 +131,8 @@ import {
   ModifyTableMemosResponse,
   ModifyClusterMachineRequest,
   Filter,
-  DeleteTablesResponse,
+  ModifySnapshotsRequest,
+  ImportSnapshotsRequest,
   ErrorInfo,
   TableGroupInfo,
 } from "./tcaplusdb_models"
@@ -263,13 +277,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 恢复回收站中，用户自行删除的表。对欠费待释放的表无效。
+   * 构造表格过去时间点的快照
    */
-  async RecoverRecycleTables(
-    req: RecoverRecycleTablesRequest,
-    cb?: (error: string, rep: RecoverRecycleTablesResponse) => void
-  ): Promise<RecoverRecycleTablesResponse> {
-    return this.request("RecoverRecycleTables", req, cb)
+  async CreateSnapshots(
+    req: CreateSnapshotsRequest,
+    cb?: (error: string, rep: CreateSnapshotsResponse) => void
+  ): Promise<CreateSnapshotsResponse> {
+    return this.request("CreateSnapshots", req, cb)
   }
 
   /**
@@ -353,6 +367,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除表格的快照
+   */
+  async DeleteSnapshots(
+    req: DeleteSnapshotsRequest,
+    cb?: (error: string, rep: DeleteSnapshotsResponse) => void
+  ): Promise<DeleteSnapshotsResponse> {
+    return this.request("DeleteSnapshots", req, cb)
+  }
+
+  /**
    * 在TcaplusDB集群下创建表格组
    */
   async CreateTableGroup(
@@ -360,6 +384,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateTableGroupResponse) => void
   ): Promise<CreateTableGroupResponse> {
     return this.request("CreateTableGroup", req, cb)
+  }
+
+  /**
+   * 恢复回收站中，用户自行删除的表。对欠费待释放的表无效。
+   */
+  async RecoverRecycleTables(
+    req: RecoverRecycleTablesRequest,
+    cb?: (error: string, rep: RecoverRecycleTablesResponse) => void
+  ): Promise<RecoverRecycleTablesResponse> {
+    return this.request("RecoverRecycleTables", req, cb)
   }
 
   /**
@@ -380,6 +414,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTasksResponse) => void
   ): Promise<DescribeTasksResponse> {
     return this.request("DescribeTasks", req, cb)
+  }
+
+  /**
+   * 查询快照列表
+   */
+  async DescribeSnapshots(
+    req: DescribeSnapshotsRequest,
+    cb?: (error: string, rep: DescribeSnapshotsResponse) => void
+  ): Promise<DescribeSnapshotsResponse> {
+    return this.request("DescribeSnapshots", req, cb)
   }
 
   /**
@@ -420,6 +464,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTableGroupTagsResponse) => void
   ): Promise<DescribeTableGroupTagsResponse> {
     return this.request("DescribeTableGroupTags", req, cb)
+  }
+
+  /**
+   * 将快照数据导入到新表或当前表
+   */
+  async ImportSnapshots(
+    req: ImportSnapshotsRequest,
+    cb?: (error: string, rep: ImportSnapshotsResponse) => void
+  ): Promise<ImportSnapshotsResponse> {
+    return this.request("ImportSnapshots", req, cb)
   }
 
   /**
@@ -470,6 +524,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyTableMemosResponse) => void
   ): Promise<ModifyTableMemosResponse> {
     return this.request("ModifyTableMemos", req, cb)
+  }
+
+  /**
+   * 修改表格快照的过期时间
+   */
+  async ModifySnapshots(
+    req: ModifySnapshotsRequest,
+    cb?: (error: string, rep: ModifySnapshotsResponse) => void
+  ): Promise<ModifySnapshotsResponse> {
+    return this.request("ModifySnapshots", req, cb)
   }
 
   /**

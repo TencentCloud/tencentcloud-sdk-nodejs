@@ -2020,6 +2020,30 @@ export interface CreateClassResponse {
     RequestId?: string;
 }
 /**
+ * 卡槽信息。
+ */
+export interface SlotInfo {
+    /**
+      * 卡槽 Id。
+      */
+    Id: number;
+    /**
+      * 素材类型，同素材素材，可取值有：
+<li> AUDIO :音频;</li>
+<li> VIDEO :视频;</li>
+<li> IMAGE :图片。</li>
+      */
+    Type: string;
+    /**
+      * 默认素材 Id。
+      */
+    DefaultMaterialId: string;
+    /**
+      * 素材时长，单位秒。
+      */
+    Duration: number;
+}
+/**
  * 媒体替换信息。
  */
 export interface MediaReplacementInfo {
@@ -2553,6 +2577,19 @@ export interface AuthorizationInfo {
     PermissionSet: Array<string>;
 }
 /**
+ * 视频编辑模板素材信息。
+ */
+export interface VideoEditTemplateMaterial {
+    /**
+      * 视频编辑模板宽高比。
+      */
+    AspectRatio: string;
+    /**
+      * 卡槽信息。
+      */
+    SlotSet: Array<SlotInfo>;
+}
+/**
  * 卡槽替换信息。
  */
 export interface SlotReplacementInfo {
@@ -2704,6 +2741,11 @@ export interface MaterialInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     LinkMaterial: LinkMaterial;
+    /**
+      * 模板媒体信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VideoEditTemplateMaterial: VideoEditTemplateMaterial;
     /**
       * 其他类型媒体信息。
 注意：此字段可能返回 null，表示取不到有效值。

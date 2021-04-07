@@ -25,6 +25,7 @@ import {
   CreateStaffResponse,
   DescribeTelCdrResponse,
   DescribeIMCdrsResponse,
+  DescribeTelSessionRequest,
   DescribeIMCdrsRequest,
   TelCdrInfo,
   StaffInfo,
@@ -34,6 +35,8 @@ import {
   DescribePSTNActiveSessionListResponse,
   IMCdrInfo,
   DescribeChatMessagesRequest,
+  PSTNSession,
+  DescribeTelSessionResponse,
   DescribeStaffInfoListRequest,
   SkillGroupInfoItem,
   ServeParticipant,
@@ -108,6 +111,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTelCallInfoResponse) => void
   ): Promise<DescribeTelCallInfoResponse> {
     return this.request("DescribeTelCallInfo", req, cb)
+  }
+
+  /**
+   * 获取 PSTN 会话信息
+   */
+  async DescribeTelSession(
+    req: DescribeTelSessionRequest,
+    cb?: (error: string, rep: DescribeTelSessionResponse) => void
+  ): Promise<DescribeTelSessionResponse> {
+    return this.request("DescribeTelSession", req, cb)
   }
 
   /**

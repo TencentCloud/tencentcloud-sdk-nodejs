@@ -3033,7 +3033,7 @@ export interface ResetInstancesMaxBandwidthRequest {
  */
 export interface LoadBalancerInternetAccessible {
     /**
-      * 最大出带宽，单位Mbps。
+      * 最大出带宽，单位Mbps。默认值10
       */
     InternetMaxBandwidthOut?: number;
 }

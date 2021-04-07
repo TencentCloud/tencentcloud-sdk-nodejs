@@ -1103,6 +1103,18 @@ export interface NodePool {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ImageId: string
+
+  /**
+      * 集群属于节点podCIDR大小自定义模式时，节点池需要带上pod数量属性
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DesiredPodNum: number
+
+  /**
+      * 用户自定义脚本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserScript: string
 }
 
 /**

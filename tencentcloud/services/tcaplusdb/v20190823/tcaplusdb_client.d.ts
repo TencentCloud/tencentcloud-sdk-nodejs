@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ModifyClusterNameRequest, ModifyTableGroupNameResponse, DescribeTableTagsRequest, ModifyClusterPasswordResponse, DeleteClusterResponse, DeleteTableIndexResponse, DescribeTablesResponse, DeleteClusterRequest, DeleteTableIndexRequest, DescribeTasksResponse, DeleteTablesRequest, DescribeRegionsResponse, ModifyClusterPasswordRequest, DescribeMachineResponse, DeleteTableGroupRequest, CreateTableGroupRequest, ModifyClusterMachineResponse, DeleteIdlFilesResponse, ModifyTableTagsRequest, DescribeTasksRequest, RecoverRecycleTablesResponse, ClearTablesResponse, DescribeIdlFileInfosRequest, DisableRestProxyRequest, DescribeTablesInRecycleResponse, ModifyTablesResponse, EnableRestProxyRequest, ModifyTableGroupTagsResponse, ModifyClusterTagsRequest, DescribeTableGroupTagsResponse, SetTableIndexRequest, ModifyTableQuotasResponse, RecoverRecycleTablesRequest, ModifyTableGroupNameRequest, DescribeTableGroupsRequest, ModifyTableTagsResponse, ModifyTableGroupTagsRequest, ModifyTableQuotasRequest, CompareIdlFilesResponse, CreateTablesResponse, DescribeRegionsRequest, DescribeClustersResponse, ModifyClusterTagsResponse, DescribeClusterTagsResponse, SetTableIndexResponse, ClearTablesRequest, DescribeIdlFileInfosResponse, DisableRestProxyResponse, CreateClusterResponse, DescribeClustersRequest, DeleteIdlFilesRequest, CreateBackupResponse, VerifyIdlFilesResponse, DescribeTableTagsResponse, CreateTableGroupResponse, VerifyIdlFilesRequest, EnableRestProxyResponse, ModifyClusterNameResponse, ModifyTablesRequest, DescribeTableGroupTagsRequest, DescribeTablesInRecycleRequest, DescribeTablesRequest, ModifyTableMemosRequest, DescribeUinInWhitelistResponse, RollbackTablesResponse, CreateBackupRequest, CreateClusterRequest, CreateTablesRequest, DescribeClusterTagsRequest, DescribeTableGroupsResponse, DeleteTableGroupResponse, DescribeMachineRequest, RollbackTablesRequest, DescribeUinInWhitelistRequest, CompareIdlFilesRequest, ModifyTableMemosResponse, ModifyClusterMachineRequest, DeleteTablesResponse } from "./tcaplusdb_models";
+import { ImportSnapshotsResponse, ModifyClusterNameRequest, ModifyTableGroupNameResponse, DescribeTableTagsRequest, ModifyClusterPasswordResponse, DeleteClusterResponse, DeleteTableIndexResponse, DescribeTablesResponse, ModifySnapshotsResponse, DeleteClusterRequest, DeleteTableIndexRequest, DescribeTasksResponse, DeleteTablesRequest, DescribeRegionsResponse, ModifyClusterPasswordRequest, DescribeMachineResponse, DeleteTableGroupRequest, DescribeSnapshotsRequest, CreateTableGroupRequest, ModifyClusterMachineResponse, DeleteIdlFilesResponse, ModifyTableTagsRequest, DescribeTasksRequest, RecoverRecycleTablesResponse, ClearTablesResponse, DescribeIdlFileInfosRequest, DisableRestProxyRequest, DescribeTablesInRecycleResponse, ModifyTablesResponse, DeleteSnapshotsRequest, ModifyTableGroupTagsResponse, ModifyClusterTagsRequest, CreateSnapshotsRequest, DescribeTableGroupTagsResponse, SetTableIndexRequest, ModifyTableQuotasResponse, RecoverRecycleTablesRequest, DeleteSnapshotsResponse, DeleteTablesResponse, ModifyTableGroupNameRequest, DescribeTableGroupsRequest, ModifyTableTagsResponse, ModifyTableGroupTagsRequest, EnableRestProxyRequest, ModifyTableQuotasRequest, CompareIdlFilesResponse, CreateTablesResponse, DescribeRegionsRequest, DescribeClustersResponse, ModifyClusterTagsResponse, DescribeClusterTagsResponse, SetTableIndexResponse, ClearTablesRequest, DescribeIdlFileInfosResponse, CreateSnapshotsResponse, DisableRestProxyResponse, CreateClusterResponse, DescribeClustersRequest, DeleteIdlFilesRequest, CreateBackupResponse, VerifyIdlFilesResponse, DescribeTableTagsResponse, CreateTableGroupResponse, DescribeSnapshotsResponse, VerifyIdlFilesRequest, EnableRestProxyResponse, ModifyClusterNameResponse, ModifyTablesRequest, DescribeTableGroupTagsRequest, DescribeTablesInRecycleRequest, DescribeTablesRequest, ModifyTableMemosRequest, DescribeUinInWhitelistResponse, RollbackTablesResponse, CreateBackupRequest, CreateClusterRequest, CreateTablesRequest, DescribeClusterTagsRequest, DescribeTableGroupsResponse, DeleteTableGroupResponse, DescribeMachineRequest, RollbackTablesRequest, DescribeUinInWhitelistRequest, CompareIdlFilesRequest, ModifyTableMemosResponse, ModifyClusterMachineRequest, ModifySnapshotsRequest, ImportSnapshotsRequest } from "./tcaplusdb_models";
 /**
  * tcaplusdb client
  * @class
@@ -60,9 +60,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteIdlFiles(req: DeleteIdlFilesRequest, cb?: (error: string, rep: DeleteIdlFilesResponse) => void): Promise<DeleteIdlFilesResponse>;
     /**
-     * 恢复回收站中，用户自行删除的表。对欠费待释放的表无效。
+     * 构造表格过去时间点的快照
      */
-    RecoverRecycleTables(req: RecoverRecycleTablesRequest, cb?: (error: string, rep: RecoverRecycleTablesResponse) => void): Promise<RecoverRecycleTablesResponse>;
+    CreateSnapshots(req: CreateSnapshotsRequest, cb?: (error: string, rep: CreateSnapshotsResponse) => void): Promise<CreateSnapshotsResponse>;
     /**
      * 当restful api为关闭状态时，可以通过此接口开启restful apu
      */
@@ -96,9 +96,17 @@ export declare class Client extends AbstractClient {
      */
     ModifyTableGroupName(req: ModifyTableGroupNameRequest, cb?: (error: string, rep: ModifyTableGroupNameResponse) => void): Promise<ModifyTableGroupNameResponse>;
     /**
+     * 删除表格的快照
+     */
+    DeleteSnapshots(req: DeleteSnapshotsRequest, cb?: (error: string, rep: DeleteSnapshotsResponse) => void): Promise<DeleteSnapshotsResponse>;
+    /**
      * 在TcaplusDB集群下创建表格组
      */
     CreateTableGroup(req: CreateTableGroupRequest, cb?: (error: string, rep: CreateTableGroupResponse) => void): Promise<CreateTableGroupResponse>;
+    /**
+     * 恢复回收站中，用户自行删除的表。对欠费待释放的表无效。
+     */
+    RecoverRecycleTables(req: RecoverRecycleTablesRequest, cb?: (error: string, rep: RecoverRecycleTablesResponse) => void): Promise<RecoverRecycleTablesResponse>;
     /**
      * 查询TcaplusDB服务支持的地域列表
      */
@@ -107,6 +115,10 @@ export declare class Client extends AbstractClient {
      * 查询任务列表
      */
     DescribeTasks(req: DescribeTasksRequest, cb?: (error: string, rep: DescribeTasksResponse) => void): Promise<DescribeTasksResponse>;
+    /**
+     * 查询快照列表
+     */
+    DescribeSnapshots(req: DescribeSnapshotsRequest, cb?: (error: string, rep: DescribeSnapshotsResponse) => void): Promise<DescribeSnapshotsResponse>;
     /**
      * 修改集群标签
      */
@@ -123,6 +135,10 @@ export declare class Client extends AbstractClient {
      * 获取表格组关联的标签列表
      */
     DescribeTableGroupTags(req: DescribeTableGroupTagsRequest, cb?: (error: string, rep: DescribeTableGroupTagsResponse) => void): Promise<DescribeTableGroupTagsResponse>;
+    /**
+     * 将快照数据导入到新表或当前表
+     */
+    ImportSnapshots(req: ImportSnapshotsRequest, cb?: (error: string, rep: ImportSnapshotsResponse) => void): Promise<ImportSnapshotsResponse>;
     /**
      * 查询表格组列表
      */
@@ -143,6 +159,10 @@ export declare class Client extends AbstractClient {
      * 修改表备注信息
      */
     ModifyTableMemos(req: ModifyTableMemosRequest, cb?: (error: string, rep: ModifyTableMemosResponse) => void): Promise<ModifyTableMemosResponse>;
+    /**
+     * 修改表格快照的过期时间
+     */
+    ModifySnapshots(req: ModifySnapshotsRequest, cb?: (error: string, rep: ModifySnapshotsResponse) => void): Promise<ModifySnapshotsResponse>;
     /**
      * 上传并校验创建表格文件，返回校验合法的表格定义
      */

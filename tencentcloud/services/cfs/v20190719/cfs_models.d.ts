@@ -886,7 +886,7 @@ export interface UpdateCfsFileSystemSizeLimitRequest {
       */
     FsLimit: number;
     /**
-      * 文件系统ID
+      * 文件系统ID，目前仅支持标准型文件系统。
       */
     FileSystemId: string;
 }

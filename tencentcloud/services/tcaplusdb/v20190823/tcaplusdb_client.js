@@ -106,10 +106,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteIdlFiles", req, cb);
     }
     /**
-     * 恢复回收站中，用户自行删除的表。对欠费待释放的表无效。
+     * 构造表格过去时间点的快照
      */
-    async RecoverRecycleTables(req, cb) {
-        return this.request("RecoverRecycleTables", req, cb);
+    async CreateSnapshots(req, cb) {
+        return this.request("CreateSnapshots", req, cb);
     }
     /**
      * 当restful api为关闭状态时，可以通过此接口开启restful apu
@@ -160,10 +160,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyTableGroupName", req, cb);
     }
     /**
+     * 删除表格的快照
+     */
+    async DeleteSnapshots(req, cb) {
+        return this.request("DeleteSnapshots", req, cb);
+    }
+    /**
      * 在TcaplusDB集群下创建表格组
      */
     async CreateTableGroup(req, cb) {
         return this.request("CreateTableGroup", req, cb);
+    }
+    /**
+     * 恢复回收站中，用户自行删除的表。对欠费待释放的表无效。
+     */
+    async RecoverRecycleTables(req, cb) {
+        return this.request("RecoverRecycleTables", req, cb);
     }
     /**
      * 查询TcaplusDB服务支持的地域列表
@@ -176,6 +188,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeTasks(req, cb) {
         return this.request("DescribeTasks", req, cb);
+    }
+    /**
+     * 查询快照列表
+     */
+    async DescribeSnapshots(req, cb) {
+        return this.request("DescribeSnapshots", req, cb);
     }
     /**
      * 修改集群标签
@@ -200,6 +218,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeTableGroupTags(req, cb) {
         return this.request("DescribeTableGroupTags", req, cb);
+    }
+    /**
+     * 将快照数据导入到新表或当前表
+     */
+    async ImportSnapshots(req, cb) {
+        return this.request("ImportSnapshots", req, cb);
     }
     /**
      * 查询表格组列表
@@ -230,6 +254,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyTableMemos(req, cb) {
         return this.request("ModifyTableMemos", req, cb);
+    }
+    /**
+     * 修改表格快照的过期时间
+     */
+    async ModifySnapshots(req, cb) {
+        return this.request("ModifySnapshots", req, cb);
     }
     /**
      * 上传并校验创建表格文件，返回校验合法的表格定义

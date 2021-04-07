@@ -58,6 +58,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTelCallInfo", req, cb);
     }
     /**
+     * 获取 PSTN 会话信息
+     */
+    async DescribeTelSession(req, cb) {
+        return this.request("DescribeTelSession", req, cb);
+    }
+    /**
      * 创建 SDK 登录 Token。
      */
     async CreateSDKLoginToken(req, cb) {

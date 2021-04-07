@@ -863,6 +863,10 @@ export interface ModifyDirectConnectAttributeRequest {
       * 物理专线申请者补签用户使用协议
       */
     SignLaw?: boolean;
+    /**
+      * 物理专线带宽
+      */
+    Bandwidth?: number;
 }
 /**
  * DescribeInternetAddress返回参数结构体

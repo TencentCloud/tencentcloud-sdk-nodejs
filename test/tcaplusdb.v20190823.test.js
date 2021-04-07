@@ -148,9 +148,9 @@ it("tcaplusdb.v20190823.DeleteIdlFiles", async function () {
     }
 })
 
-it("tcaplusdb.v20190823.RecoverRecycleTables", async function () {
+it("tcaplusdb.v20190823.CreateSnapshots", async function () {
     try {
-       const data = await client.RecoverRecycleTables({})
+       const data = await client.CreateSnapshots({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,9 +238,29 @@ it("tcaplusdb.v20190823.ModifyTableGroupName", async function () {
     }
 })
 
+it("tcaplusdb.v20190823.DeleteSnapshots", async function () {
+    try {
+       const data = await client.DeleteSnapshots({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcaplusdb.v20190823.CreateTableGroup", async function () {
     try {
        const data = await client.CreateTableGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcaplusdb.v20190823.RecoverRecycleTables", async function () {
+    try {
+       const data = await client.RecoverRecycleTables({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -261,6 +281,16 @@ it("tcaplusdb.v20190823.DescribeRegions", async function () {
 it("tcaplusdb.v20190823.DescribeTasks", async function () {
     try {
        const data = await client.DescribeTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcaplusdb.v20190823.DescribeSnapshots", async function () {
+    try {
+       const data = await client.DescribeSnapshots({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -301,6 +331,16 @@ it("tcaplusdb.v20190823.SetTableIndex", async function () {
 it("tcaplusdb.v20190823.DescribeTableGroupTags", async function () {
     try {
        const data = await client.DescribeTableGroupTags({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcaplusdb.v20190823.ImportSnapshots", async function () {
+    try {
+       const data = await client.ImportSnapshots({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -351,6 +391,16 @@ it("tcaplusdb.v20190823.DeleteTables", async function () {
 it("tcaplusdb.v20190823.ModifyTableMemos", async function () {
     try {
        const data = await client.ModifyTableMemos({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcaplusdb.v20190823.ModifySnapshots", async function () {
+    try {
+       const data = await client.ModifySnapshots({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

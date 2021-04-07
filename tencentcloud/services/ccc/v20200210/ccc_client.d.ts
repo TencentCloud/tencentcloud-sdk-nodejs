@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribePSTNActiveSessionListRequest, CreateSDKLoginTokenResponse, DescribeStaffInfoListResponse, CreateStaffResponse, DescribeTelCdrResponse, DescribeIMCdrsResponse, DescribeIMCdrsRequest, DescribeSkillGroupInfoListRequest, DescribeTelCallInfoRequest, DescribeChatMessagesResponse, DescribePSTNActiveSessionListResponse, DescribeChatMessagesRequest, DescribeStaffInfoListRequest, DescribeSeatUserListResponse, DescribeSeatUserListRequest, DescribeTelCallInfoResponse, CreateStaffRequest, DescribeTelCdrRequest, CreateSDKLoginTokenRequest, DescribeSkillGroupInfoListResponse } from "./ccc_models";
+import { DescribePSTNActiveSessionListRequest, CreateSDKLoginTokenResponse, DescribeStaffInfoListResponse, CreateStaffResponse, DescribeTelCdrResponse, DescribeIMCdrsResponse, DescribeTelSessionRequest, DescribeIMCdrsRequest, DescribeSkillGroupInfoListRequest, DescribeTelCallInfoRequest, DescribeChatMessagesResponse, DescribePSTNActiveSessionListResponse, DescribeChatMessagesRequest, DescribeTelSessionResponse, DescribeStaffInfoListRequest, DescribeSeatUserListResponse, DescribeSeatUserListRequest, DescribeTelCallInfoResponse, CreateStaffRequest, DescribeTelCdrRequest, CreateSDKLoginTokenRequest, DescribeSkillGroupInfoListResponse } from "./ccc_models";
 /**
  * ccc client
  * @class
@@ -27,6 +27,10 @@ export declare class Client extends AbstractClient {
      * 按实例获取电话消耗统计
      */
     DescribeTelCallInfo(req: DescribeTelCallInfoRequest, cb?: (error: string, rep: DescribeTelCallInfoResponse) => void): Promise<DescribeTelCallInfoResponse>;
+    /**
+     * 获取 PSTN 会话信息
+     */
+    DescribeTelSession(req: DescribeTelSessionRequest, cb?: (error: string, rep: DescribeTelSessionResponse) => void): Promise<DescribeTelSessionResponse>;
     /**
      * 创建 SDK 登录 Token。
      */
