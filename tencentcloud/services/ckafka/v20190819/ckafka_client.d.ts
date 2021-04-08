@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DeleteAclRequest, DeleteUserRequest, DescribeACLRequest, DescribeTopicAttributesRequest, DescribeInstanceAttributesRequest, DescribeConsumerGroupResponse, DeleteTopicRequest, DescribeInstancesResponse, DescribeInstancesDetailResponse, DescribeACLResponse, DescribeTopicAttributesResponse, DescribeGroupResponse, CreateUserResponse, CreatePartitionResponse, DeleteUserResponse, CreateAclRequest, DescribeAppInfoRequest, DescribeTopicResponse, CreateTopicIpWhiteListResponse, ModifyInstanceAttributesResponse, ModifyGroupOffsetsResponse, CreateAclResponse, CreateTopicRequest, DeleteAclResponse, DescribeRouteRequest, DescribeGroupInfoRequest, DescribeGroupInfoResponse, DescribeUserResponse, DescribeTopicRequest, CreatePartitionRequest, DescribeAppInfoResponse, DescribeInstanceAttributesResponse, ModifyPasswordRequest, ModifyInstanceAttributesRequest, ModifyTopicAttributesResponse, DescribeConsumerGroupRequest, DeleteTopicResponse, DescribeInstancesRequest, DescribeGroupRequest, CreateUserRequest, DeleteTopicIpWhiteListResponse, CreateInstancePreResponse, DescribeInstancesDetailRequest, ModifyPasswordResponse, DescribeRouteResponse, DescribeTopicDetailRequest, DescribeGroupOffsetsResponse, ModifyGroupOffsetsRequest, CreateTopicIpWhiteListRequest, ModifyTopicAttributesRequest, CreateTopicResponse, CreateInstancePreRequest, DeleteTopicIpWhiteListRequest, DescribeGroupOffsetsRequest, DescribeUserRequest, DescribeTopicDetailResponse } from "./ckafka_models";
+import { DeleteAclRequest, DeleteUserRequest, DescribeACLRequest, DescribeTopicAttributesRequest, DescribeInstanceAttributesRequest, DescribeConsumerGroupResponse, DeleteTopicRequest, DescribeInstancesResponse, DescribeInstancesDetailResponse, DescribeACLResponse, DeleteAclRuleRequest, DescribeTopicAttributesResponse, DescribeGroupResponse, CreateUserResponse, CreatePartitionResponse, DeleteUserResponse, CreateAclRequest, DescribeAppInfoRequest, DescribeTopicResponse, CreateTopicIpWhiteListResponse, ModifyInstanceAttributesResponse, ModifyGroupOffsetsResponse, CreateAclResponse, CreateTopicRequest, DeleteAclResponse, DescribeRouteRequest, DeleteAclRuleResponse, DescribeGroupInfoRequest, DescribeGroupInfoResponse, DescribeUserResponse, DescribeTopicRequest, CreatePartitionRequest, DescribeAppInfoResponse, DescribeInstanceAttributesResponse, ModifyPasswordRequest, ModifyInstanceAttributesRequest, ModifyTopicAttributesResponse, DescribeConsumerGroupRequest, DeleteTopicResponse, DescribeInstancesRequest, DescribeGroupRequest, CreateUserRequest, DeleteTopicIpWhiteListResponse, CreateInstancePreResponse, DescribeInstancesDetailRequest, ModifyPasswordResponse, DescribeRouteResponse, DescribeTopicDetailRequest, DescribeGroupOffsetsResponse, ModifyGroupOffsetsRequest, CreateTopicIpWhiteListRequest, ModifyTopicAttributesRequest, CreateTopicResponse, CreateInstancePreRequest, DeleteTopicIpWhiteListRequest, DescribeGroupOffsetsRequest, DescribeUserRequest, DescribeTopicDetailResponse } from "./ckafka_models";
 /**
  * ckafka client
  * @class
@@ -100,6 +100,10 @@ export declare class Client extends AbstractClient {
      * 用户账户下获取实例列表详情
      */
     DescribeInstancesDetail(req: DescribeInstancesDetailRequest, cb?: (error: string, rep: DescribeInstancesDetailResponse) => void): Promise<DescribeInstancesDetailResponse>;
+    /**
+     * 删除ACL规则
+     */
+    DeleteAclRule(req: DeleteAclRuleRequest, cb?: (error: string, rep: DeleteAclRuleResponse) => void): Promise<DeleteAclRuleResponse>;
     /**
      * 删除用户
      */

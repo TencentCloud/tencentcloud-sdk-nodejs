@@ -1009,13 +1009,19 @@ export interface EndUserInfo {
 }
 
 /**
- * DescribeSmsQuotas请求参数结构体
+ * DescribeEndUserLoginStatistic返回参数结构体
  */
-export interface DescribeSmsQuotasRequest {
+export interface DescribeEndUserLoginStatisticResponse {
   /**
-   * 环境ID
+      * 环境终端用户新增与登录统计
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LoginStatistics?: Array<LoginStatistic>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  EnvId: string
+  RequestId?: string
 }
 
 /**
@@ -1182,6 +1188,21 @@ export interface DescribeEnvsRequest {
 }
 
 /**
+ * DeleteWxGatewayRoute请求参数结构体
+ */
+export interface DeleteWxGatewayRouteRequest {
+  /**
+   * 环境id
+   */
+  EnvId: string
+
+  /**
+   * 服务名称
+   */
+  GatewayRouteName: string
+}
+
+/**
  * DescribeExtraPkgBillingInfo请求参数结构体
  */
 export interface DescribeExtraPkgBillingInfoRequest {
@@ -1189,21 +1210,6 @@ export interface DescribeExtraPkgBillingInfoRequest {
    * 已购买增值包的环境ID
    */
   EnvId?: string
-}
-
-/**
- * DeleteEndUser请求参数结构体
- */
-export interface DeleteEndUserRequest {
-  /**
-   * 环境ID
-   */
-  EnvId: string
-
-  /**
-   * 用户列表，每一项都是uuid
-   */
-  UserList: Array<string>
 }
 
 /**
@@ -1242,19 +1248,18 @@ export interface CloudBaseCapabilities {
 }
 
 /**
- * DescribeEndUserLoginStatistic返回参数结构体
+ * DeleteEndUser请求参数结构体
  */
-export interface DescribeEndUserLoginStatisticResponse {
+export interface DeleteEndUserRequest {
   /**
-      * 环境终端用户新增与登录统计
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  LoginStatistics?: Array<LoginStatistic>
+   * 环境ID
+   */
+  EnvId: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 用户列表，每一项都是uuid
    */
-  RequestId?: string
+  UserList: Array<string>
 }
 
 /**
@@ -1634,6 +1639,46 @@ export interface CreateHostingDomainResponse {
 }
 
 /**
+ * EstablishWxGatewayRoute返回参数结构体
+ */
+export interface EstablishWxGatewayRouteResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * EstablishWxGatewayRoute请求参数结构体
+ */
+export interface EstablishWxGatewayRouteRequest {
+  /**
+   * 网关id
+   */
+  GatewayId: string
+
+  /**
+   * 服务名称
+   */
+  GatewayRouteName: string
+
+  /**
+   * 服务地址
+   */
+  GatewayRouteAddr: string
+
+  /**
+   * 协议类型 http/https
+   */
+  GatewayRouteProtocol: string
+
+  /**
+   * 服务描述
+   */
+  GatewayRouteDesc?: string
+}
+
+/**
  * CreateCloudBaseRunServerVersion请求参数结构体
  */
 export interface CreateCloudBaseRunServerVersionRequest {
@@ -1862,6 +1907,16 @@ export interface CreatePostpayPackageResponse {
       */
   EnvId?: string
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteWxGatewayRoute返回参数结构体
+ */
+export interface DeleteWxGatewayRouteResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2999,6 +3054,16 @@ export interface DescribeEndUserStatisticResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeSmsQuotas请求参数结构体
+ */
+export interface DescribeSmsQuotasRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
 }
 
 /**

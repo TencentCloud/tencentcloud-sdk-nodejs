@@ -424,6 +424,21 @@ export interface JgwOperateResponse {
 }
 
 /**
+ * DeleteAclRule请求参数结构体
+ */
+export interface DeleteAclRuleRequest {
+  /**
+   * 实例id信息
+   */
+  InstanceId: string
+
+  /**
+   * acl规则名称
+   */
+  RuleName: string
+}
+
+/**
  * 返回的topic对象
  */
 export interface Topic {
@@ -624,11 +639,6 @@ export interface CreateAclRequest {
   ResourceType: number
 
   /**
-   * 资源名称，和resourceType相关，如当resourceType为TOPIC时，则该字段表示topic名称，当resourceType为GROUP时，该字段表示group名称
-   */
-  ResourceName: string
-
-  /**
    * Acl操作方式，(0:UNKNOWN，1:ANY，2:ALL，3:READ，4:WRITE，5:CREATE，6:DELETE，7:ALTER，8:DESCRIBE，9:CLUSTER_ACTION，10:DESCRIBE_CONFIGS，11:ALTER_CONFIGS)
    */
   Operation: number
@@ -639,12 +649,17 @@ export interface CreateAclRequest {
   PermissionType: number
 
   /**
+   * 资源名称，和resourceType相关，如当resourceType为TOPIC时，则该字段表示topic名称，当resourceType为GROUP时，该字段表示group名称
+   */
+  ResourceName?: string
+
+  /**
    * 默认为\*，表示任何host都可以访问，当前ckafka不支持host为\*，但是后面开源kafka的产品化会直接支持
    */
   Host?: string
 
   /**
-   * 用户列表，默认为*，表示任何user都可以访问，当前用户只能是用户列表中包含的用户
+   * 用户列表，默认为User:*，表示任何user都可以访问，当前用户只能是用户列表中包含的用户。传入时需要加 User: 前缀,如用户A则传入User:A。
    */
   Principal?: string
 }
@@ -794,7 +809,7 @@ export interface CreateAclResponse {
   /**
    * 返回结果
    */
-  Result?: JgwOperateResponse
+  Result: JgwOperateResponse
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -939,6 +954,21 @@ export interface InstanceConfigDO {
    * 默认的复制Factor
    */
   DefaultReplicationFactor: number
+}
+
+/**
+ * DeleteAclRule返回参数结构体
+ */
+export interface DeleteAclRuleResponse {
+  /**
+   * 返回被删除的规则的ID
+   */
+  Result: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

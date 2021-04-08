@@ -37,6 +37,7 @@ import {
   CreateInstancePreData,
   DescribeACLResponse,
   JgwOperateResponse,
+  DeleteAclRuleRequest,
   Topic,
   Tag,
   GroupResponse,
@@ -63,6 +64,7 @@ import {
   DynamicRetentionTime,
   DescribeRouteRequest,
   InstanceConfigDO,
+  DeleteAclRuleResponse,
   UserResponse,
   DescribeGroupInfoRequest,
   DescribeGroupInfoResponse,
@@ -360,6 +362,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstancesDetailResponse) => void
   ): Promise<DescribeInstancesDetailResponse> {
     return this.request("DescribeInstancesDetail", req, cb)
+  }
+
+  /**
+   * 删除ACL规则
+   */
+  async DeleteAclRule(
+    req: DeleteAclRuleRequest,
+    cb?: (error: string, rep: DeleteAclRuleResponse) => void
+  ): Promise<DeleteAclRuleResponse> {
+    return this.request("DeleteAclRule", req, cb)
   }
 
   /**

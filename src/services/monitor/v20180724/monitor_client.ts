@@ -572,7 +572,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取基础指标详情
+   * 获取基础指标属性
    */
   async DescribeBaseMetrics(
     req: DescribeBaseMetricsRequest,

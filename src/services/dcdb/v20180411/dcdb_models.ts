@@ -1594,9 +1594,14 @@ export interface KillSessionRequest {
   SessionId: Array<number>
 
   /**
-   * 分片ID
+   * 分片ID，与ShardSerialId设置一个
    */
   ShardId?: string
+
+  /**
+   * 分片序列ID，与ShardId设置一个
+   */
+  ShardSerialId?: string
 }
 
 /**

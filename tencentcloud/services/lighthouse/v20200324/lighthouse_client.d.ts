@@ -1,12 +1,16 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeBlueprintsResponse, DescribeInstancesTrafficPackagesRequest, DeleteFirewallRulesRequest, StartInstancesResponse, DescribeInstancesTrafficPackagesResponse, RebootInstancesResponse, DescribeBundlesRequest, StartInstancesRequest, DeleteFirewallRulesResponse, RebootInstancesRequest, DescribeBlueprintsRequest, DescribeInstancesResponse, ResetInstanceRequest, DescribeBundlesResponse, DescribeInstancesRequest, ResetInstanceResponse, CreateFirewallRulesRequest, DescribeFirewallRulesRequest, DescribeFirewallRulesResponse, CreateFirewallRulesResponse, StopInstancesResponse, StopInstancesRequest } from "./lighthouse_models";
+import { DescribeBlueprintsResponse, ApplyInstanceSnapshotResponse, ApplyInstanceSnapshotRequest, CreateBlueprintRequest, DeleteFirewallRulesRequest, StartInstancesResponse, DescribeInstancesTrafficPackagesResponse, ModifySnapshotAttributeResponse, RebootInstancesResponse, DescribeBundlesRequest, ResetInstanceResponse, StartInstancesRequest, CreateInstanceSnapshotResponse, ModifyBlueprintAttributeRequest, DeleteFirewallRulesResponse, DeleteSnapshotsRequest, DescribeBlueprintsRequest, DescribeInstancesResponse, ResetInstanceRequest, DescribeBundlesResponse, DescribeInstancesRequest, DeleteSnapshotsResponse, RebootInstancesRequest, DescribeSnapshotsResponse, DescribeInstancesTrafficPackagesRequest, DeleteBlueprintsResponse, CreateFirewallRulesRequest, DescribeFirewallRulesRequest, DescribeFirewallRulesResponse, DeleteBlueprintsRequest, ModifyBlueprintAttributeResponse, DescribeSnapshotsRequest, CreateFirewallRulesResponse, StopInstancesResponse, ModifySnapshotAttributeRequest, CreateBlueprintResponse, CreateInstanceSnapshotRequest, StopInstancesRequest } from "./lighthouse_models";
 /**
  * lighthouse client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 本接口（DescribeInstancesTrafficPackages）用于查询一个或多个实例的流量包详情。
+     */
+    DescribeInstancesTrafficPackages(req: DescribeInstancesTrafficPackagesRequest, cb?: (error: string, rep: DescribeInstancesTrafficPackagesResponse) => void): Promise<DescribeInstancesTrafficPackagesResponse>;
     /**
      * 本接口（StopInstances）用于关闭一个或多个实例。
 * 只有状态为 RUNNING 的实例才可以进行此操作。
@@ -25,9 +29,14 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstances(req: DescribeInstancesRequest, cb?: (error: string, rep: DescribeInstancesResponse) => void): Promise<DescribeInstancesResponse>;
     /**
-     * 本接口（DescribeInstancesTrafficPackages）用于查询一个或多个实例的流量包详情。
+     * 本接口 (DeleteBlueprints) 用于删除镜像。
      */
-    DescribeInstancesTrafficPackages(req: DescribeInstancesTrafficPackagesRequest, cb?: (error: string, rep: DescribeInstancesTrafficPackagesResponse) => void): Promise<DescribeInstancesTrafficPackagesResponse>;
+    DeleteBlueprints(req: DeleteBlueprintsRequest, cb?: (error: string, rep: DeleteBlueprintsResponse) => void): Promise<DeleteBlueprintsResponse>;
+    /**
+     * 本接口（DeleteSnapshots）用于删除快照。
+快照必须处于 NORMAL 状态，快照状态可以通过 DescribeSnapshots 接口查询，见输出参数中 SnapshotState 字段解释。
+     */
+    DeleteSnapshots(req: DeleteSnapshotsRequest, cb?: (error: string, rep: DeleteSnapshotsResponse) => void): Promise<DeleteSnapshotsResponse>;
     /**
      * 本接口（RebootInstances）用于重启实例。
 
@@ -47,6 +56,10 @@ export declare class Client extends AbstractClient {
      */
     StartInstances(req: StartInstancesRequest, cb?: (error: string, rep: StartInstancesResponse) => void): Promise<StartInstancesResponse>;
     /**
+     * 本接口（CreateInstanceSnapshot）用于创建指定实例的系统盘快照。
+     */
+    CreateInstanceSnapshot(req: CreateInstanceSnapshotRequest, cb?: (error: string, rep: CreateInstanceSnapshotResponse) => void): Promise<CreateInstanceSnapshotResponse>;
+    /**
      * 本接口（DeleteFirewallRules）用于删除实例的防火墙规则。
 
 * FirewallVersion 用于指定要操作的防火墙的版本。传入 FirewallVersion 版本号若不等于当前防火墙的最新版本，将返回失败；若不传 FirewallVersion 则直接删除指定的规则。
@@ -60,9 +73,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteFirewallRules(req: DeleteFirewallRulesRequest, cb?: (error: string, rep: DeleteFirewallRulesResponse) => void): Promise<DeleteFirewallRulesResponse>;
     /**
-     * 本接口（DescribeBundles）用于查询套餐信息。
+     * 本接口（DescribeFirewallRules）用于查询实例的防火墙规则。
      */
-    DescribeBundles(req: DescribeBundlesRequest, cb?: (error: string, rep: DescribeBundlesResponse) => void): Promise<DescribeBundlesResponse>;
+    DescribeFirewallRules(req: DescribeFirewallRulesRequest, cb?: (error: string, rep: DescribeFirewallRulesResponse) => void): Promise<DescribeFirewallRulesResponse>;
     /**
      * 本接口（CreateFirewallRules）用于在实例上添加防火墙规则。
 
@@ -82,6 +95,17 @@ export declare class Client extends AbstractClient {
      */
     DescribeBlueprints(req: DescribeBlueprintsRequest, cb?: (error: string, rep: DescribeBlueprintsResponse) => void): Promise<DescribeBlueprintsResponse>;
     /**
+     * 本接口 (ModifyBlueprintAttribute) 用于修改镜像属性。
+     */
+    ModifyBlueprintAttribute(req: ModifyBlueprintAttributeRequest, cb?: (error: string, rep: ModifyBlueprintAttributeResponse) => void): Promise<ModifyBlueprintAttributeResponse>;
+    /**
+     * 本接口（ApplyInstanceSnapshot）用于回滚指定实例的系统盘快照。
+<li>仅支持回滚到原系统盘。</li>
+<li>用于回滚的快照必须处于 NORMAL 状态。快照状态可以通 DescribeSnapshots 接口查询，见输出参数中 SnapshotState 字段解释。</li>
+<li>回滚快照时，实例的状态必须为 STOPPED 或 RUNNING，可通过 DescribeInstances 接口查询实例状态。处于 RUNNING 状态的实例会强制关机，然后回滚快照。</li>
+     */
+    ApplyInstanceSnapshot(req: ApplyInstanceSnapshotRequest, cb?: (error: string, rep: ApplyInstanceSnapshotResponse) => void): Promise<ApplyInstanceSnapshotResponse>;
+    /**
      * 本接口（ResetInstance）用于重装指定实例上的镜像。
 
 * 如果指定了 BlueprintId 参数，则使用指定的镜像重装；否则按照当前实例使用的镜像进行重装。
@@ -91,7 +115,20 @@ export declare class Client extends AbstractClient {
      */
     ResetInstance(req: ResetInstanceRequest, cb?: (error: string, rep: ResetInstanceResponse) => void): Promise<ResetInstanceResponse>;
     /**
-     * 本接口（DescribeFirewallRules）用于查询实例的防火墙规则。
+     * 本接口 (CreateBlueprint) 用于创建镜像。
      */
-    DescribeFirewallRules(req: DescribeFirewallRulesRequest, cb?: (error: string, rep: DescribeFirewallRulesResponse) => void): Promise<DescribeFirewallRulesResponse>;
+    CreateBlueprint(req: CreateBlueprintRequest, cb?: (error: string, rep: CreateBlueprintResponse) => void): Promise<CreateBlueprintResponse>;
+    /**
+     * 本接口（DescribeSnapshots）用于查询快照的详细信息。
+     */
+    DescribeSnapshots(req: DescribeSnapshotsRequest, cb?: (error: string, rep: DescribeSnapshotsResponse) => void): Promise<DescribeSnapshotsResponse>;
+    /**
+     * 本接口（DescribeBundles）用于查询套餐信息。
+     */
+    DescribeBundles(req: DescribeBundlesRequest, cb?: (error: string, rep: DescribeBundlesResponse) => void): Promise<DescribeBundlesResponse>;
+    /**
+     * 本接口（ModifySnapshotAttribute）用于修改指定快照的属性。
+<li>“快照名称”仅为方便用户自己管理之用，腾讯云并不以此名称作为提交工单或是进行快照管理操作的依据。</li>
+     */
+    ModifySnapshotAttribute(req: ModifySnapshotAttributeRequest, cb?: (error: string, rep: ModifySnapshotAttributeResponse) => void): Promise<ModifySnapshotAttributeResponse>;
 }

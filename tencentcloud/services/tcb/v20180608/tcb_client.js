@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateHostingDomain", req, cb);
     }
     /**
+     * 删除安全网关路由
+     */
+    async DeleteWxGatewayRoute(req, cb) {
+        return this.request("DeleteWxGatewayRoute", req, cb);
+    }
+    /**
      * 获取终端用户列表
      */
     async DescribeEndUsers(req, cb) {
@@ -179,6 +185,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeEndUserLoginStatistic(req, cb) {
         return this.request("DescribeEndUserLoginStatistic", req, cb);
+    }
+    /**
+     * 创建或修改安全网关路由
+     */
+    async EstablishWxGatewayRoute(req, cb) {
+        return this.request("EstablishWxGatewayRoute", req, cb);
     }
     /**
      * 查询指定指标的配额使用量

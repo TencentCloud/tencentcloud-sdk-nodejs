@@ -44,7 +44,7 @@ import {
   ModifyDatabaseACLRequest,
   DestroyStaticStoreRequest,
   EndUserInfo,
-  DescribeSmsQuotasRequest,
+  DescribeEndUserLoginStatisticResponse,
   DescribeQuotaDataResponse,
   KVPair,
   SmsFreeQuota,
@@ -54,11 +54,11 @@ import {
   DeleteCloudBaseProjectLatestVersionResponse,
   CreateAuthDomainResponse,
   DescribeEnvsRequest,
+  DeleteWxGatewayRouteRequest,
   DescribeExtraPkgBillingInfoRequest,
-  DeleteEndUserRequest,
   DescribeEnvFreeQuotaRequest,
   CloudBaseCapabilities,
-  DescribeEndUserLoginStatisticResponse,
+  DeleteEndUserRequest,
   CreateCloudBaseRunResourceResponse,
   DestroyStaticStoreResponse,
   DeleteEndUserResponse,
@@ -73,9 +73,12 @@ import {
   DescribeEnvsResponse,
   CreateAuthDomainRequest,
   CreateHostingDomainResponse,
+  EstablishWxGatewayRouteResponse,
+  EstablishWxGatewayRouteRequest,
   CreateCloudBaseRunServerVersionRequest,
   LoginStatistic,
   CreatePostpayPackageResponse,
+  DeleteWxGatewayRouteResponse,
   EstablishCloudBaseRunServerRequest,
   DescribeCloudBaseProjectVersionListResponse,
   DescribeDownloadFileRequest,
@@ -116,6 +119,7 @@ import {
   DescribeCloudBaseProjectLatestVersionListRequest,
   EnvBillingInfoItem,
   DescribeEndUserStatisticResponse,
+  DescribeSmsQuotasRequest,
   DescribeCloudBaseRunVersionResponse,
   CreatePostpayPackageRequest,
   DescribeCloudBaseBuildServiceRequest,
@@ -154,6 +158,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateHostingDomainResponse) => void
   ): Promise<CreateHostingDomainResponse> {
     return this.request("CreateHostingDomain", req, cb)
+  }
+
+  /**
+   * 删除安全网关路由
+   */
+  async DeleteWxGatewayRoute(
+    req: DeleteWxGatewayRouteRequest,
+    cb?: (error: string, rep: DeleteWxGatewayRouteResponse) => void
+  ): Promise<DeleteWxGatewayRouteResponse> {
+    return this.request("DeleteWxGatewayRoute", req, cb)
   }
 
   /**
@@ -397,6 +411,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEndUserLoginStatisticResponse) => void
   ): Promise<DescribeEndUserLoginStatisticResponse> {
     return this.request("DescribeEndUserLoginStatistic", req, cb)
+  }
+
+  /**
+   * 创建或修改安全网关路由
+   */
+  async EstablishWxGatewayRoute(
+    req: EstablishWxGatewayRouteRequest,
+    cb?: (error: string, rep: EstablishWxGatewayRouteResponse) => void
+  ): Promise<EstablishWxGatewayRouteResponse> {
+    return this.request("EstablishWxGatewayRoute", req, cb)
   }
 
   /**

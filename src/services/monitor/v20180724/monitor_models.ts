@@ -736,7 +736,7 @@ export interface DescribeBaseMetricsResponse {
   /**
    * 查询得到的指标描述列表
    */
-  MetricSet?: Array<MetricSet>
+  MetricSet: Array<MetricSet>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -28,6 +28,16 @@ it("tcb.v20180608.CreateHostingDomain", async function () {
     }
 })
 
+it("tcb.v20180608.DeleteWxGatewayRoute", async function () {
+    try {
+       const data = await client.DeleteWxGatewayRoute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.DescribeEndUsers", async function () {
     try {
        const data = await client.DescribeEndUsers({})
@@ -261,6 +271,16 @@ it("tcb.v20180608.DeleteEndUser", async function () {
 it("tcb.v20180608.DescribeEndUserLoginStatistic", async function () {
     try {
        const data = await client.DescribeEndUserLoginStatistic({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.EstablishWxGatewayRoute", async function () {
+    try {
+       const data = await client.EstablishWxGatewayRoute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

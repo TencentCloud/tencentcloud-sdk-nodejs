@@ -36,23 +36,48 @@ export interface DescribeBlueprintsResponse {
 }
 
 /**
- * DescribeInstancesTrafficPackages请求参数结构体
+ * ApplyInstanceSnapshot返回参数结构体
  */
-export interface DescribeInstancesTrafficPackagesRequest {
+export interface ApplyInstanceSnapshotResponse {
   /**
-   * 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceIds?: Array<string>
+  RequestId?: string
+}
+
+/**
+ * ApplyInstanceSnapshot请求参数结构体
+ */
+export interface ApplyInstanceSnapshotRequest {
+  /**
+   * 实例 ID。
+   */
+  InstanceId: string
 
   /**
-   * 偏移量，默认为 0。
+   * 快照 ID。
    */
-  Offset?: number
+  SnapshotId: string
+}
+
+/**
+ * CreateBlueprint请求参数结构体
+ */
+export interface CreateBlueprintRequest {
+  /**
+   * 镜像名称。最大长度60。
+   */
+  BlueprintName: string
 
   /**
-   * 返回数量，默认为 20，最大值为 100。
+   * 镜像描述。最大长度60。
    */
-  Limit?: number
+  Description?: string
+
+  /**
+   * 需要制作镜像的实例ID。
+   */
+  InstanceId?: string
 }
 
 /**
@@ -331,6 +356,16 @@ export interface TrafficPackage {
 }
 
 /**
+ * ModifySnapshotAttribute返回参数结构体
+ */
+export interface ModifySnapshotAttributeResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * RebootInstances返回参数结构体
  */
 export interface RebootInstancesResponse {
@@ -456,6 +491,16 @@ export interface Blueprint {
 }
 
 /**
+ * ResetInstance返回参数结构体
+ */
+export interface ResetInstanceResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 价格信息
  */
 export interface Price {
@@ -463,6 +508,16 @@ export interface Price {
    * 实例价格。
    */
   InstancePrice: InstancePrice
+}
+
+/**
+ * StartInstances请求参数结构体
+ */
+export interface StartInstancesRequest {
+  /**
+   * 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
+   */
+  InstanceIds: Array<string>
 }
 
 /**
@@ -549,13 +604,38 @@ export interface Bundle {
 }
 
 /**
- * StartInstances请求参数结构体
+ * CreateInstanceSnapshot返回参数结构体
  */
-export interface StartInstancesRequest {
+export interface CreateInstanceSnapshotResponse {
   /**
-   * 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
+   * 快照 ID。
    */
-  InstanceIds: Array<string>
+  SnapshotId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyBlueprintAttribute请求参数结构体
+ */
+export interface ModifyBlueprintAttributeRequest {
+  /**
+   * 镜像 ID。可通过[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)接口返回值中的BlueprintId获取。
+   */
+  BlueprintId: string
+
+  /**
+   * 设置新的镜像名称。最大长度60。
+   */
+  BlueprintName?: string
+
+  /**
+   * 设置新的镜像描述。最大长度60。
+   */
+  Description?: string
 }
 
 /**
@@ -569,13 +649,13 @@ export interface DeleteFirewallRulesResponse {
 }
 
 /**
- * RebootInstances请求参数结构体
+ * DeleteSnapshots请求参数结构体
  */
-export interface RebootInstancesRequest {
+export interface DeleteSnapshotsRequest {
   /**
-   * 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
+   * 要删除的快照 ID 列表，可通过 DescribeSnapshots 查询。
    */
-  InstanceIds: Array<string>
+  SnapshotIds: Array<string>
 }
 
 /**
@@ -754,6 +834,26 @@ export interface DescribeInstancesRequest {
 }
 
 /**
+ * DeleteSnapshots返回参数结构体
+ */
+export interface DeleteSnapshotsResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RebootInstances请求参数结构体
+ */
+export interface RebootInstancesRequest {
+  /**
+   * 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
+   */
+  InstanceIds: Array<string>
+}
+
+/**
  * >描述键值对过滤器，用于条件过滤查询。例如过滤名称等
 > * 若存在多个`Filter`时，`Filter`间的关系为逻辑与（`AND`）关系。
 > * 若同一个`Filter`存在多个`Values`，同一`Filter`下`Values`间的关系为逻辑或（`OR`）关系。
@@ -779,9 +879,49 @@ export interface Filter {
 }
 
 /**
- * ResetInstance返回参数结构体
+ * DescribeSnapshots返回参数结构体
  */
-export interface ResetInstanceResponse {
+export interface DescribeSnapshotsResponse {
+  /**
+   * 快照的数量。
+   */
+  TotalCount: number
+
+  /**
+   * 快照的详情列表。
+   */
+  SnapshotSet: Array<Snapshot>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeInstancesTrafficPackages请求参数结构体
+ */
+export interface DescribeInstancesTrafficPackagesRequest {
+  /**
+   * 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。
+   */
+  InstanceIds?: Array<string>
+
+  /**
+   * 偏移量，默认为 0。
+   */
+  Offset?: number
+
+  /**
+   * 返回数量，默认为 20，最大值为 100。
+   */
+  Limit?: number
+}
+
+/**
+ * DeleteBlueprints返回参数结构体
+ */
+export interface DeleteBlueprintsResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -884,6 +1024,65 @@ export interface FirewallRule {
 }
 
 /**
+ * DeleteBlueprints请求参数结构体
+ */
+export interface DeleteBlueprintsRequest {
+  /**
+   * 镜像ID列表。镜像ID，可通过[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)接口返回值中的BlueprintId获取。
+   */
+  BlueprintIds: Array<string>
+}
+
+/**
+ * ModifyBlueprintAttribute返回参数结构体
+ */
+export interface ModifyBlueprintAttributeResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeSnapshots请求参数结构体
+ */
+export interface DescribeSnapshotsRequest {
+  /**
+      * 要查询快照的 ID 列表。
+参数不支持同时指定 SnapshotIds 和 Filters。
+      */
+  SnapshotIds?: Array<string>
+
+  /**
+      * 过滤器列表。
+<li>snapshot-id</li>按照【快照 ID】进行过滤。
+类型：String
+必选：否
+<li>disk-id</li>按照【磁盘 ID】进行过滤。
+类型：String
+必选：否
+<li>snapshot-name</li>按照【快照名称】进行过滤。
+类型：String
+必选：否
+<li>instance-id</li>按照【实例 ID 】进行过滤。
+类型：String
+必选：否
+每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。参数不支持同时指定 SnapshotIds 和 Filters。
+      */
+  Filters?: Array<Filter>
+
+  /**
+   * 偏移量，默认为 0。
+   */
+  Offset?: number
+
+  /**
+   * 返回数量，默认为 20，最大值为 100。
+   */
+  Limit?: number
+}
+
+/**
  * 描述防火墙规则详细信息。
  */
 export interface FirewallRuleInfo {
@@ -956,6 +1155,122 @@ export interface InternetAccessible {
    * 是否分配公网 IP。
    */
   PublicIpAssigned: boolean
+}
+
+/**
+ * ModifySnapshotAttribute请求参数结构体
+ */
+export interface ModifySnapshotAttributeRequest {
+  /**
+   * 快照 ID, 可通过 DescribeSnapshots 查询。
+   */
+  SnapshotId: string
+
+  /**
+   * 新的快照名称，最长为 60 个字符。
+   */
+  SnapshotName?: string
+}
+
+/**
+ * CreateBlueprint返回参数结构体
+ */
+export interface CreateBlueprintResponse {
+  /**
+   * 自定义镜像ID。
+   */
+  BlueprintId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateInstanceSnapshot请求参数结构体
+ */
+export interface CreateInstanceSnapshotRequest {
+  /**
+   * 需要创建快照的实例 ID。
+   */
+  InstanceId: string
+
+  /**
+   * 快照名称，最长为 60 个字符。
+   */
+  SnapshotName?: string
+}
+
+/**
+ * 描述了快照相关信息。
+ */
+export interface Snapshot {
+  /**
+   * 快照 ID。
+   */
+  SnapshotId: string
+
+  /**
+   * 创建此快照的磁盘类型。取值：<li>SYSTEM_DISK：系统盘</li>
+   */
+  DiskUsage: string
+
+  /**
+   * 创建此快照的磁盘 ID。
+   */
+  DiskId: string
+
+  /**
+   * 创建此快照的磁盘大小，单位 GB。
+   */
+  DiskSize: number
+
+  /**
+   * 快照名称，用户自定义的快照别名。
+   */
+  SnapshotName: string
+
+  /**
+      * 快照的状态。取值范围：
+<li>NORMAL：正常 </li>
+<li>CREATING：创建中</li>
+<li>ROLLBACKING：回滚中。</li>
+      */
+  SnapshotState: string
+
+  /**
+   * 创建或回滚快照进度百分比，成功后此字段取值为 100。
+   */
+  Percent: number
+
+  /**
+      * 快照的最新操作，只有创建、回滚快照时记录。
+取值如 CreateInstanceSnapshot，RollbackInstanceSnapshot。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LatestOperation: string
+
+  /**
+      * 快照的最新操作状态，只有创建、回滚快照时记录。
+取值范围：
+<li>SUCCESS：表示操作成功</li>
+<li>OPERATING：表示操作执行中</li>
+<li>FAILED：表示操作失败</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LatestOperationState: string
+
+  /**
+      * 快照最新操作的唯一请求 ID，只有创建、回滚快照时记录。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LatestOperationRequestId: string
+
+  /**
+   * 快照的创建时间。
+   */
+  CreatedTime: string
 }
 
 /**

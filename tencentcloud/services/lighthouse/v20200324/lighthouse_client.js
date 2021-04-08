@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("lighthouse.tencentcloudapi.com", "2020-03-24", clientConfig);
     }
     /**
+     * 本接口（DescribeInstancesTrafficPackages）用于查询一个或多个实例的流量包详情。
+     */
+    async DescribeInstancesTrafficPackages(req, cb) {
+        return this.request("DescribeInstancesTrafficPackages", req, cb);
+    }
+    /**
      * 本接口（StopInstances）用于关闭一个或多个实例。
 * 只有状态为 RUNNING 的实例才可以进行此操作。
 * 接口调用成功时，实例会进入 STOPPING 状态；关闭实例成功时，实例会进入 STOPPED 状态。
@@ -49,10 +55,17 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstances", req, cb);
     }
     /**
-     * 本接口（DescribeInstancesTrafficPackages）用于查询一个或多个实例的流量包详情。
+     * 本接口 (DeleteBlueprints) 用于删除镜像。
      */
-    async DescribeInstancesTrafficPackages(req, cb) {
-        return this.request("DescribeInstancesTrafficPackages", req, cb);
+    async DeleteBlueprints(req, cb) {
+        return this.request("DeleteBlueprints", req, cb);
+    }
+    /**
+     * 本接口（DeleteSnapshots）用于删除快照。
+快照必须处于 NORMAL 状态，快照状态可以通过 DescribeSnapshots 接口查询，见输出参数中 SnapshotState 字段解释。
+     */
+    async DeleteSnapshots(req, cb) {
+        return this.request("DeleteSnapshots", req, cb);
     }
     /**
      * 本接口（RebootInstances）用于重启实例。
@@ -77,6 +90,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StartInstances", req, cb);
     }
     /**
+     * 本接口（CreateInstanceSnapshot）用于创建指定实例的系统盘快照。
+     */
+    async CreateInstanceSnapshot(req, cb) {
+        return this.request("CreateInstanceSnapshot", req, cb);
+    }
+    /**
      * 本接口（DeleteFirewallRules）用于删除实例的防火墙规则。
 
 * FirewallVersion 用于指定要操作的防火墙的版本。传入 FirewallVersion 版本号若不等于当前防火墙的最新版本，将返回失败；若不传 FirewallVersion 则直接删除指定的规则。
@@ -92,10 +111,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteFirewallRules", req, cb);
     }
     /**
-     * 本接口（DescribeBundles）用于查询套餐信息。
+     * 本接口（DescribeFirewallRules）用于查询实例的防火墙规则。
      */
-    async DescribeBundles(req, cb) {
-        return this.request("DescribeBundles", req, cb);
+    async DescribeFirewallRules(req, cb) {
+        return this.request("DescribeFirewallRules", req, cb);
     }
     /**
      * 本接口（CreateFirewallRules）用于在实例上添加防火墙规则。
@@ -120,6 +139,21 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBlueprints", req, cb);
     }
     /**
+     * 本接口 (ModifyBlueprintAttribute) 用于修改镜像属性。
+     */
+    async ModifyBlueprintAttribute(req, cb) {
+        return this.request("ModifyBlueprintAttribute", req, cb);
+    }
+    /**
+     * 本接口（ApplyInstanceSnapshot）用于回滚指定实例的系统盘快照。
+<li>仅支持回滚到原系统盘。</li>
+<li>用于回滚的快照必须处于 NORMAL 状态。快照状态可以通 DescribeSnapshots 接口查询，见输出参数中 SnapshotState 字段解释。</li>
+<li>回滚快照时，实例的状态必须为 STOPPED 或 RUNNING，可通过 DescribeInstances 接口查询实例状态。处于 RUNNING 状态的实例会强制关机，然后回滚快照。</li>
+     */
+    async ApplyInstanceSnapshot(req, cb) {
+        return this.request("ApplyInstanceSnapshot", req, cb);
+    }
+    /**
      * 本接口（ResetInstance）用于重装指定实例上的镜像。
 
 * 如果指定了 BlueprintId 参数，则使用指定的镜像重装；否则按照当前实例使用的镜像进行重装。
@@ -131,10 +165,29 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ResetInstance", req, cb);
     }
     /**
-     * 本接口（DescribeFirewallRules）用于查询实例的防火墙规则。
+     * 本接口 (CreateBlueprint) 用于创建镜像。
      */
-    async DescribeFirewallRules(req, cb) {
-        return this.request("DescribeFirewallRules", req, cb);
+    async CreateBlueprint(req, cb) {
+        return this.request("CreateBlueprint", req, cb);
+    }
+    /**
+     * 本接口（DescribeSnapshots）用于查询快照的详细信息。
+     */
+    async DescribeSnapshots(req, cb) {
+        return this.request("DescribeSnapshots", req, cb);
+    }
+    /**
+     * 本接口（DescribeBundles）用于查询套餐信息。
+     */
+    async DescribeBundles(req, cb) {
+        return this.request("DescribeBundles", req, cb);
+    }
+    /**
+     * 本接口（ModifySnapshotAttribute）用于修改指定快照的属性。
+<li>“快照名称”仅为方便用户自己管理之用，腾讯云并不以此名称作为提交工单或是进行快照管理操作的依据。</li>
+     */
+    async ModifySnapshotAttribute(req, cb) {
+        return this.request("ModifySnapshotAttribute", req, cb);
     }
 }
 exports.Client = Client;

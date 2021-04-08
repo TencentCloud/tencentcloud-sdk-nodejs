@@ -845,6 +845,14 @@ Windows 实例：名字符长度为[2, 15]，允许字母（不限制大小写�
 2.如果未传该参数或者传的值为0且未指定模块，则使用InternetMaxBandwidthOut
       */
     InternetMaxBandwidthIn?: number;
+    /**
+      * 实例计费类型。其中：
+0，按资源维度后付费，计算当日用量峰值，例如CPU，内存，硬盘等，仅适用于非GNR系列机型；
+1，按小时后付费，单价：xx元/实例/小时，仅适用于GNR机型，如需开通该计费方式请提工单申请；
+2，按月后付费，单价：xx元/实例/月，仅适用于GNR机型；
+该字段不填时，非GNR机型会默认选择0；GNR机型默认选择2。
+      */
+    InstanceChargeType?: number;
 }
 /**
  * ReleaseAddresses请求参数结构体

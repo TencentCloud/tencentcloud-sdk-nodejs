@@ -18,6 +18,16 @@ const client = new tencentcloud.lighthouse.v20200324.Client({
 })
 describe("lighthouse.v20200324.test.js", function () {
 
+it("lighthouse.v20200324.DescribeInstancesTrafficPackages", async function () {
+    try {
+       const data = await client.DescribeInstancesTrafficPackages({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lighthouse.v20200324.StopInstances", async function () {
     try {
        const data = await client.StopInstances({})
@@ -38,9 +48,19 @@ it("lighthouse.v20200324.DescribeInstances", async function () {
     }
 })
 
-it("lighthouse.v20200324.DescribeInstancesTrafficPackages", async function () {
+it("lighthouse.v20200324.DeleteBlueprints", async function () {
     try {
-       const data = await client.DescribeInstancesTrafficPackages({})
+       const data = await client.DeleteBlueprints({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.DeleteSnapshots", async function () {
+    try {
+       const data = await client.DeleteSnapshots({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -68,6 +88,16 @@ it("lighthouse.v20200324.StartInstances", async function () {
     }
 })
 
+it("lighthouse.v20200324.CreateInstanceSnapshot", async function () {
+    try {
+       const data = await client.CreateInstanceSnapshot({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lighthouse.v20200324.DeleteFirewallRules", async function () {
     try {
        const data = await client.DeleteFirewallRules({})
@@ -78,9 +108,9 @@ it("lighthouse.v20200324.DeleteFirewallRules", async function () {
     }
 })
 
-it("lighthouse.v20200324.DescribeBundles", async function () {
+it("lighthouse.v20200324.DescribeFirewallRules", async function () {
     try {
-       const data = await client.DescribeBundles({})
+       const data = await client.DescribeFirewallRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,6 +138,26 @@ it("lighthouse.v20200324.DescribeBlueprints", async function () {
     }
 })
 
+it("lighthouse.v20200324.ModifyBlueprintAttribute", async function () {
+    try {
+       const data = await client.ModifyBlueprintAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.ApplyInstanceSnapshot", async function () {
+    try {
+       const data = await client.ApplyInstanceSnapshot({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lighthouse.v20200324.ResetInstance", async function () {
     try {
        const data = await client.ResetInstance({})
@@ -118,9 +168,39 @@ it("lighthouse.v20200324.ResetInstance", async function () {
     }
 })
 
-it("lighthouse.v20200324.DescribeFirewallRules", async function () {
+it("lighthouse.v20200324.CreateBlueprint", async function () {
     try {
-       const data = await client.DescribeFirewallRules({})
+       const data = await client.CreateBlueprint({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.DescribeSnapshots", async function () {
+    try {
+       const data = await client.DescribeSnapshots({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.DescribeBundles", async function () {
+    try {
+       const data = await client.DescribeBundles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lighthouse.v20200324.ModifySnapshotAttribute", async function () {
+    try {
+       const data = await client.ModifySnapshotAttribute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

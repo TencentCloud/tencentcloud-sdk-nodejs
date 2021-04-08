@@ -265,7 +265,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyAlarmPolicyStatus", req, cb);
     }
     /**
-     * 获取基础指标详情
+     * 获取基础指标属性
      */
     async DescribeBaseMetrics(req, cb) {
         return this.request("DescribeBaseMetrics", req, cb);

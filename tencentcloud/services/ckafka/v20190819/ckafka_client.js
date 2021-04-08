@@ -167,6 +167,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstancesDetail", req, cb);
     }
     /**
+     * 删除ACL规则
+     */
+    async DeleteAclRule(req, cb) {
+        return this.request("DeleteAclRule", req, cb);
+    }
+    /**
      * 删除用户
      */
     async DeleteUser(req, cb) {
