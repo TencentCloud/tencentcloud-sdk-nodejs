@@ -142,10 +142,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ReplaceRouteTableAssociation", req, cb);
     }
     /**
-     * 修改负载均衡实例的属性。
+     * 查询负载均衡实例列表。
      */
-    async ModifyLoadBalancerAttributes(req, cb) {
-        return this.request("ModifyLoadBalancerAttributes", req, cb);
+    async DescribeLoadBalancers(req, cb) {
+        return this.request("DescribeLoadBalancers", req, cb);
     }
     /**
      * 查询负载均衡相关的任务状态
@@ -237,6 +237,12 @@ EIP 如果被封堵，则不能进行解绑定操作。
         return this.request("CreateVpc", req, cb);
     }
     /**
+     * 修改负载均衡实例的属性。
+     */
+    async ModifyLoadBalancerAttributes(req, cb) {
+        return this.request("ModifyLoadBalancerAttributes", req, cb);
+    }
+    /**
      * 设置负载均衡实例的安全组。
      */
     async SetLoadBalancerSecurityGroups(req, cb) {
@@ -268,6 +274,12 @@ EIP 如果被封堵，则不能进行解绑定操作。
      */
     async AssociateAddress(req, cb) {
         return this.request("AssociateAddress", req, cb);
+    }
+    /**
+     * 修改在一个可用区下创建实例时使用的默认子网（创建实例时，未填写VPC参数时使用的sunbetId）
+     */
+    async ModifyDefaultSubnet(req, cb) {
+        return this.request("ModifyDefaultSubnet", req, cb);
     }
     /**
      * 删除子网，若子网为可用区下的默认子网，则默认子网会回退到系统自动创建的默认子网，非用户最新创建的子网。若默认子网不满足需求，可调用设置默认子网接口设置。
@@ -306,6 +318,12 @@ EIP 如果被封堵，则不能进行解绑定操作。
      */
     async DescribeImportImageOs(req, cb) {
         return this.request("DescribeImportImageOs", req, cb);
+    }
+    /**
+     * 获取客户节点上的出入带宽月峰和计费带宽信息
+     */
+    async DescribeMonthPeakNetwork(req, cb) {
+        return this.request("DescribeMonthPeakNetwork", req, cb);
     }
     /**
      * 弹性网卡解绑云主机
@@ -373,12 +391,6 @@ EIP 如果被封堵，则不能进行解绑定操作。
      */
     async DisableRoutes(req, cb) {
         return this.request("DisableRoutes", req, cb);
-    }
-    /**
-     * 本接口（ModifyIpv6AddressesAttribute）用于修改弹性网卡IPv6地址属性。
-     */
-    async ModifyIpv6AddressesAttribute(req, cb) {
-        return this.request("ModifyIpv6AddressesAttribute", req, cb);
     }
     /**
      * 获取概览页统计的基本数据
@@ -465,12 +477,6 @@ EIP 如果被封堵，则不能进行解绑定操作。
         return this.request("ModifyImageAttribute", req, cb);
     }
     /**
-     * 查询负载均衡实例列表。
-     */
-    async DescribeLoadBalancers(req, cb) {
-        return this.request("DescribeLoadBalancers", req, cb);
-    }
-    /**
      * 本接口(DescribeTaskStatus)用于获取异步任务状态
      */
     async DescribeTaskStatus(req, cb) {
@@ -525,10 +531,10 @@ EIP 如果被封堵，则不能进行解绑定操作。
         return this.request("SetSecurityGroupForLoadbalancers", req, cb);
     }
     /**
-     * 修改在一个可用区下创建实例时使用的默认子网（创建实例时，未填写VPC参数时使用的sunbetId）
+     * 本接口（ModifyIpv6AddressesAttribute）用于修改弹性网卡IPv6地址属性。
      */
-    async ModifyDefaultSubnet(req, cb) {
-        return this.request("ModifyDefaultSubnet", req, cb);
+    async ModifyIpv6AddressesAttribute(req, cb) {
+        return this.request("ModifyIpv6AddressesAttribute", req, cb);
     }
     /**
      * 只有状态为RUNNING的实例才可以进行此操作；接口调用成功时，实例会进入REBOOTING状态；重启实例成功时，实例会进入RUNNING状态；支持强制重启，强制重启的效果等同于关闭物理计算机的电源开关再重新启动。强制重启可能会导致数据丢失或文件系统损坏，请仅在服务器不能正常重启时使用。

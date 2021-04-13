@@ -233,6 +233,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAddresses", req, cb);
     }
     /**
+     * 该接口用于删除CDC的本地网关。
+     */
+    async DeleteLocalGateway(req, cb) {
+        return this.request("DeleteLocalGateway", req, cb);
+    }
+    /**
      * 本接口（DetachCcnInstances）用于从云联网实例中解关联指定的网络实例。<br />
 解关联网络实例后，相应的路由策略会一并删除。
      */
@@ -580,6 +586,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DisassociateNatGatewayAddress", req, cb);
     }
     /**
+     * 该接口用于查询CDC的本地网关。
+     */
+    async DescribeLocalGateway(req, cb) {
+        return this.request("DescribeLocalGateway", req, cb);
+    }
+    /**
      * 本接口（DescribeFlowLogs）用于查询获取流日志集合
      */
     async DescribeFlowLogs(req, cb) {
@@ -726,6 +738,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBandwidthPackageResources", req, cb);
     }
     /**
+     * 修改CCN关联实例属性，目前仅修改备注description
+     */
+    async ModifyCcnAttachedInstancesAttribute(req, cb) {
+        return this.request("ModifyCcnAttachedInstancesAttribute", req, cb);
+    }
+    /**
      * 本接口（DeleteNatGatewaySourceIpTranslationNatRule）用于删除NAT网关端口SNAT转发规则。
      */
     async DeleteNatGatewaySourceIpTranslationNatRule(req, cb) {
@@ -738,6 +756,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteNetworkInterface(req, cb) {
         return this.request("DeleteNetworkInterface", req, cb);
+    }
+    /**
+     * 该接口用于修改CDC的本地网关。
+     */
+    async ModifyLocalGateway(req, cb) {
+        return this.request("ModifyLocalGateway", req, cb);
     }
     /**
      *  本接口（DescribeVpnConnections）查询VPN通道列表。
@@ -1008,12 +1032,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAddressTemplateGroup", req, cb);
     }
     /**
-     * 本接口（CreateAddressTemplate）用于创建IP地址模版
-     */
-    async CreateAddressTemplate(req, cb) {
-        return this.request("CreateAddressTemplate", req, cb);
-    }
-    /**
      * 本接口（CreateSecurityGroup）用于创建新的安全组（SecurityGroup）。
 * 每个账户下每个地域的每个项目的<a href="https://cloud.tencent.com/document/product/213/12453">安全组数量限制</a>。
 * 新建的安全组的入站和出站规则默认都是全部拒绝，在创建后通常您需要再调用CreateSecurityGroupPolicies将安全组的规则设置为需要的规则。
@@ -1225,6 +1243,12 @@ LimitTypes取值范围：
         return this.request("DescribeHaVips", req, cb);
     }
     /**
+     * 该接口用于创建用于CDC的本地网关。
+     */
+    async CreateLocalGateway(req, cb) {
+        return this.request("CreateLocalGateway", req, cb);
+    }
+    /**
      * 本接口（AssociateNetworkInterfaceSecurityGroups）用于弹性网卡绑定安全组（SecurityGroup）。
      */
     async AssociateNetworkInterfaceSecurityGroups(req, cb) {
@@ -1250,10 +1274,10 @@ LimitTypes取值范围：
         return this.request("ModifyBandwidthPackageAttribute", req, cb);
     }
     /**
-     * 本接口 (DescribeAddressQuota) 用于查询您账户的[弹性公网IP](https://cloud.tencent.com/document/product/213/1941)（简称 EIP）在当前地域的配额信息。配额详情可参见 [EIP 产品简介](https://cloud.tencent.com/document/product/213/5733)。
+     * 本接口（CreateAddressTemplate）用于创建IP地址模版
      */
-    async DescribeAddressQuota(req, cb) {
-        return this.request("DescribeAddressQuota", req, cb);
+    async CreateAddressTemplate(req, cb) {
+        return this.request("CreateAddressTemplate", req, cb);
     }
     /**
      * 本接口（ModifyVpnGatewayAttribute）用于修改VPN网关属性。
@@ -1280,6 +1304,12 @@ LimitTypes取值范围：
      */
     async DescribeSubnets(req, cb) {
         return this.request("DescribeSubnets", req, cb);
+    }
+    /**
+     * 本接口 (DescribeAddressQuota) 用于查询您账户的[弹性公网IP](https://cloud.tencent.com/document/product/213/1941)（简称 EIP）在当前地域的配额信息。配额详情可参见 [EIP 产品简介](https://cloud.tencent.com/document/product/213/5733)。
+     */
+    async DescribeAddressQuota(req, cb) {
+        return this.request("DescribeAddressQuota", req, cb);
     }
     /**
      * 本接口（CreateCcn）用于创建云联网（CCN）。<br />

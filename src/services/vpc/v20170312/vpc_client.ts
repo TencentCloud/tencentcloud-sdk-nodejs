@@ -40,7 +40,7 @@ import {
   DescribeCustomerGatewaysRequest,
   ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse,
   ModifyIp6RuleResponse,
-  ModifyNetworkAclAttributeResponse,
+  ModifyCcnRegionBandwidthLimitsTypeResponse,
   DescribeVpnGatewaysResponse,
   ServiceTemplateGroup,
   CreateDhcpIpResponse,
@@ -51,6 +51,7 @@ import {
   DescribeBandwidthPackageBillUsageResponse,
   DeleteBandwidthPackageResponse,
   ModifyNatGatewayAttributeRequest,
+  DescribeLocalGatewayRequest,
   FlowLog,
   DescribeVpcLimitsResponse,
   IpField,
@@ -127,11 +128,13 @@ import {
   AssignPrivateIpAddressesResponse,
   DescribeSecurityGroupsRequest,
   DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest,
+  ModifyNetworkAclAttributeResponse,
   AddBandwidthPackageResourcesResponse,
   DisassociateNetworkAclSubnetsResponse,
   SetCcnRegionBandwidthLimitsRequest,
   ModifyAddressInternetChargeTypeRequest,
   ModifyIp6AddressesBandwidthRequest,
+  CreateLocalGatewayRequest,
   DescribeDirectConnectGatewaysResponse,
   ModifyVpnConnectionAttributeRequest,
   Ip6RuleInfo,
@@ -139,6 +142,7 @@ import {
   DeleteAddressTemplateResponse,
   ModifySubnetAttributeResponse,
   ResetNatGatewayConnectionRequest,
+  ModifyCcnAttachedInstancesAttributeRequest,
   DeleteAddressTemplateRequest,
   CreateNatGatewaySourceIpTranslationNatRuleRequest,
   NetworkInterface,
@@ -252,7 +256,7 @@ import {
   CreateSubnetsRequest,
   ModifyServiceTemplateAttributeRequest,
   AssociateAddressResponse,
-  ResetVpnConnectionResponse,
+  ModifyCcnAttachedInstancesAttributeResponse,
   CreateNetworkAclRequest,
   DescribeAddressesRequest,
   DescribeSecurityGroupPoliciesRequest,
@@ -297,6 +301,7 @@ import {
   DeleteNatGatewaySourceIpTranslationNatRuleResponse,
   CcnAttachedInstance,
   SecurityPolicyDatabase,
+  ResetVpnConnectionResponse,
   Ipv6Address,
   CreateNetworkInterfaceRequest,
   BandwidthPackageBillBandwidth,
@@ -312,7 +317,7 @@ import {
   DeleteBandwidthPackageRequest,
   HaVip,
   ModifyAddressesBandwidthResponse,
-  ModifyCcnRegionBandwidthLimitsTypeResponse,
+  LocalGateway,
   RejectAttachCcnInstancesResponse,
   SetCcnRegionBandwidthLimitsResponse,
   DescribeAccountAttributesRequest,
@@ -342,6 +347,7 @@ import {
   AttachCcnInstancesRequest,
   DescribeDirectConnectGatewayCcnRoutesRequest,
   CcnInstance,
+  DescribeLocalGatewayResponse,
   ItemPrice,
   DeleteNatGatewayRequest,
   ModifyCustomerGatewayAttributeResponse,
@@ -394,6 +400,7 @@ import {
   MigrateNetworkInterfaceRequest,
   DisableCcnRoutesRequest,
   RenewAddressesRequest,
+  DeleteLocalGatewayRequest,
   ModifyAddressAttributeRequest,
   DhcpIp,
   DeleteAssistantCidrRequest,
@@ -401,6 +408,7 @@ import {
   UnassignIpv6SubnetCidrBlockResponse,
   CreateNetDetectResponse,
   DeleteCcnRequest,
+  ModifyLocalGatewayResponse,
   AssociateNetworkInterfaceSecurityGroupsResponse,
   ModifyVpnGatewayAttributeRequest,
   CreateNatGatewayRequest,
@@ -462,8 +470,10 @@ import {
   InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse,
   DeleteAddressTemplateGroupResponse,
   ReplaceRoutesResponse,
+  ModifyLocalGatewayRequest,
   DirectConnectGatewayCcnRoute,
   DeleteHaVipRequest,
+  CreateLocalGatewayResponse,
   MigratePrivateIpAddressRequest,
   DescribeServiceTemplatesRequest,
   DeleteRouteTableRequest,
@@ -512,6 +522,7 @@ import {
   CcnRegionBandwidthLimit,
   CreateDefaultSecurityGroupResponse,
   ClassicLinkInstance,
+  DeleteLocalGatewayResponse,
   NetworkInterfaceAttachment,
   ModifyNetworkInterfaceAttributeRequest,
   ModifyHaVipAttributeRequest,
@@ -917,6 +928,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAddressesResponse) => void
   ): Promise<DescribeAddressesResponse> {
     return this.request("DescribeAddresses", req, cb)
+  }
+
+  /**
+   * 该接口用于删除CDC的本地网关。
+   */
+  async DeleteLocalGateway(
+    req: DeleteLocalGatewayRequest,
+    cb?: (error: string, rep: DeleteLocalGatewayResponse) => void
+  ): Promise<DeleteLocalGatewayResponse> {
+    return this.request("DeleteLocalGateway", req, cb)
   }
 
   /**
@@ -1467,6 +1488,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口用于查询CDC的本地网关。
+   */
+  async DescribeLocalGateway(
+    req: DescribeLocalGatewayRequest,
+    cb?: (error: string, rep: DescribeLocalGatewayResponse) => void
+  ): Promise<DescribeLocalGatewayResponse> {
+    return this.request("DescribeLocalGateway", req, cb)
+  }
+
+  /**
    * 本接口（DescribeFlowLogs）用于查询获取流日志集合
    */
   async DescribeFlowLogs(
@@ -1689,6 +1720,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改CCN关联实例属性，目前仅修改备注description
+   */
+  async ModifyCcnAttachedInstancesAttribute(
+    req: ModifyCcnAttachedInstancesAttributeRequest,
+    cb?: (error: string, rep: ModifyCcnAttachedInstancesAttributeResponse) => void
+  ): Promise<ModifyCcnAttachedInstancesAttributeResponse> {
+    return this.request("ModifyCcnAttachedInstancesAttribute", req, cb)
+  }
+
+  /**
    * 本接口（DeleteNatGatewaySourceIpTranslationNatRule）用于删除NAT网关端口SNAT转发规则。
    */
   async DeleteNatGatewaySourceIpTranslationNatRule(
@@ -1708,6 +1749,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteNetworkInterfaceResponse) => void
   ): Promise<DeleteNetworkInterfaceResponse> {
     return this.request("DeleteNetworkInterface", req, cb)
+  }
+
+  /**
+   * 该接口用于修改CDC的本地网关。
+   */
+  async ModifyLocalGateway(
+    req: ModifyLocalGatewayRequest,
+    cb?: (error: string, rep: ModifyLocalGatewayResponse) => void
+  ): Promise<ModifyLocalGatewayResponse> {
+    return this.request("ModifyLocalGateway", req, cb)
   }
 
   /**
@@ -2143,16 +2194,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateAddressTemplate）用于创建IP地址模版
-   */
-  async CreateAddressTemplate(
-    req: CreateAddressTemplateRequest,
-    cb?: (error: string, rep: CreateAddressTemplateResponse) => void
-  ): Promise<CreateAddressTemplateResponse> {
-    return this.request("CreateAddressTemplate", req, cb)
-  }
-
-  /**
    * 本接口（CreateSecurityGroup）用于创建新的安全组（SecurityGroup）。
    * 每个账户下每个地域的每个项目的<a href="https://cloud.tencent.com/document/product/213/12453">安全组数量限制</a>。
    * 新建的安全组的入站和出站规则默认都是全部拒绝，在创建后通常您需要再调用CreateSecurityGroupPolicies将安全组的规则设置为需要的规则。
@@ -2472,6 +2513,16 @@ LimitTypes取值范围：
   }
 
   /**
+   * 该接口用于创建用于CDC的本地网关。
+   */
+  async CreateLocalGateway(
+    req: CreateLocalGatewayRequest,
+    cb?: (error: string, rep: CreateLocalGatewayResponse) => void
+  ): Promise<CreateLocalGatewayResponse> {
+    return this.request("CreateLocalGateway", req, cb)
+  }
+
+  /**
    * 本接口（AssociateNetworkInterfaceSecurityGroups）用于弹性网卡绑定安全组（SecurityGroup）。
    */
   async AssociateNetworkInterfaceSecurityGroups(
@@ -2513,13 +2564,13 @@ LimitTypes取值范围：
   }
 
   /**
-   * 本接口 (DescribeAddressQuota) 用于查询您账户的[弹性公网IP](https://cloud.tencent.com/document/product/213/1941)（简称 EIP）在当前地域的配额信息。配额详情可参见 [EIP 产品简介](https://cloud.tencent.com/document/product/213/5733)。
+   * 本接口（CreateAddressTemplate）用于创建IP地址模版
    */
-  async DescribeAddressQuota(
-    req?: DescribeAddressQuotaRequest,
-    cb?: (error: string, rep: DescribeAddressQuotaResponse) => void
-  ): Promise<DescribeAddressQuotaResponse> {
-    return this.request("DescribeAddressQuota", req, cb)
+  async CreateAddressTemplate(
+    req: CreateAddressTemplateRequest,
+    cb?: (error: string, rep: CreateAddressTemplateResponse) => void
+  ): Promise<CreateAddressTemplateResponse> {
+    return this.request("CreateAddressTemplate", req, cb)
   }
 
   /**
@@ -2562,6 +2613,16 @@ LimitTypes取值范围：
     cb?: (error: string, rep: DescribeSubnetsResponse) => void
   ): Promise<DescribeSubnetsResponse> {
     return this.request("DescribeSubnets", req, cb)
+  }
+
+  /**
+   * 本接口 (DescribeAddressQuota) 用于查询您账户的[弹性公网IP](https://cloud.tencent.com/document/product/213/1941)（简称 EIP）在当前地域的配额信息。配额详情可参见 [EIP 产品简介](https://cloud.tencent.com/document/product/213/5733)。
+   */
+  async DescribeAddressQuota(
+    req?: DescribeAddressQuotaRequest,
+    cb?: (error: string, rep: DescribeAddressQuotaResponse) => void
+  ): Promise<DescribeAddressQuotaResponse> {
+    return this.request("DescribeAddressQuota", req, cb)
   }
 
   /**

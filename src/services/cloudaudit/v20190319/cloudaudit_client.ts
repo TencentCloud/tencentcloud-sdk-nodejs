@@ -25,6 +25,7 @@ import {
   DeleteAuditResponse,
   UpdateAuditRequest,
   InquireAuditCreditRequest,
+  DescribeEventsResponse,
   ListCosEnableRegionResponse,
   LookUpEventsRequest,
   StartLoggingRequest,
@@ -39,6 +40,7 @@ import {
   LookupAttribute,
   ListAuditsResponse,
   KeyMetadata,
+  DescribeEventsRequest,
   UpdateAuditResponse,
   DescribeAuditRequest,
   ListKeyAliasByRegionRequest,
@@ -101,6 +103,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAuditResponse) => void
   ): Promise<DeleteAuditResponse> {
     return this.request("DeleteAudit", req, cb)
+  }
+
+  /**
+   * 查询云审计日志
+   */
+  async DescribeEvents(
+    req: DescribeEventsRequest,
+    cb?: (error: string, rep: DescribeEventsResponse) => void
+  ): Promise<DescribeEventsResponse> {
+    return this.request("DescribeEvents", req, cb)
   }
 
   /**

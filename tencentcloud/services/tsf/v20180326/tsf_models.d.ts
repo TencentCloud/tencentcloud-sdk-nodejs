@@ -5602,11 +5602,11 @@ export interface CreateTaskRequest {
       */
     TaskContent: string;
     /**
-      * 执行类型，UNICAST/BROADCAST
+      * 执行类型，unicast/broadcast
       */
     ExecuteType: string;
     /**
-      * 任务类型
+      * 任务类型,java
       */
     TaskType: string;
     /**

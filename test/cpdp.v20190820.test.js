@@ -28,9 +28,9 @@ it("cpdp.v20190820.QueryMemberTransaction", async function () {
     }
 })
 
-it("cpdp.v20190820.QuerySinglePay", async function () {
+it("cpdp.v20190820.CreateRedInvoiceV2", async function () {
     try {
-       const data = await client.QuerySinglePay({})
+       const data = await client.CreateRedInvoiceV2({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -61,6 +61,16 @@ it("cpdp.v20190820.DescribeOrderStatus", async function () {
 it("cpdp.v20190820.QueryAnchorContractInfo", async function () {
     try {
        const data = await client.QueryAnchorContractInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.QueryInvoiceV2", async function () {
+    try {
+       const data = await client.QueryInvoiceV2({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,9 +158,9 @@ it("cpdp.v20190820.DescribeChargeDetail", async function () {
     }
 })
 
-it("cpdp.v20190820.RegisterBillSupportWithdraw", async function () {
+it("cpdp.v20190820.QuerySinglePay", async function () {
     try {
-       const data = await client.RegisterBillSupportWithdraw({})
+       const data = await client.QuerySinglePay({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -568,6 +578,16 @@ it("cpdp.v20190820.QueryBankTransactionDetails", async function () {
     }
 })
 
+it("cpdp.v20190820.RegisterBillSupportWithdraw", async function () {
+    try {
+       const data = await client.RegisterBillSupportWithdraw({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cpdp.v20190820.ApplyApplicationMaterial", async function () {
     try {
        const data = await client.ApplyApplicationMaterial({})
@@ -621,6 +641,16 @@ it("cpdp.v20190820.QuerySmallAmountTransfer", async function () {
 it("cpdp.v20190820.MigrateOrderRefund", async function () {
     try {
        const data = await client.MigrateOrderRefund({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cpdp.v20190820.CreateInvoiceV2", async function () {
+    try {
+       const data = await client.CreateInvoiceV2({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

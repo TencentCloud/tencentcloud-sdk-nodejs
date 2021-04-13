@@ -653,6 +653,16 @@ export interface TaskResultFile {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Url: string;
+    /**
+      * 文件大小，部分任务支持，单位：字节
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FileSize: number;
+    /**
+      * 媒体信息，对于媒体文件，部分任务支持返回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MediaInfo: MediaResultInfo;
 }
 /**
  * CreateEditingTask返回参数结构体
@@ -698,6 +708,7 @@ export interface MediaSourceInfo {
     DownInfo: DownInfo;
     /**
       * 媒体源ID标记，用于多个输入源时，请内媒体源的定位，对于多输入的任务，一般要求必选。
+ID只能包含字母、数字、下划线、中划线，长读不能超过128。
       */
     Id?: string;
     /**
@@ -746,6 +757,36 @@ zh：中文
 en：英文
       */
     TransDst?: string;
+}
+/**
+ * 结果媒体文件的视频流信息
+ */
+export interface ResultVideoInfo {
+    /**
+      * 流在媒体文件中的流ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StreamId: number;
+    /**
+      * 流的时长，单位：毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Duration: number;
+    /**
+      * 画面宽度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Width: number;
+    /**
+      * 画面高度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Height: number;
+    /**
+      * 视频帧率
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Fps: number;
 }
 /**
  * 图片水印信息
@@ -1454,6 +1495,21 @@ export interface FileInfo {
     AudioInfoResult: Array<AudioInfoResultItem>;
 }
 /**
+ * 结果媒体文件的视频流信息
+ */
+export interface ResultAudioInfo {
+    /**
+      * 流在媒体文件中的流ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    StreamId: number;
+    /**
+      * 流的时长，单位：毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Duration: number;
+}
+/**
  * 片头片尾识别结果信息
  */
 export interface OpeningEndingTaskResult {
@@ -1647,6 +1703,26 @@ export interface CosInfo {
       * cos 授权信息，不填默认为公有权限。
       */
     CosAuthMode?: CosAuthMode;
+}
+/**
+ * 结果文件媒体信息
+ */
+export interface MediaResultInfo {
+    /**
+      * 媒体时长，单位：毫秒
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Duration: number;
+    /**
+      * 视频流信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResultVideoInfoSet: Array<ResultVideoInfo>;
+    /**
+      * 音频流信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResultAudioInfoSet: Array<ResultAudioInfo>;
 }
 /**
  * 帧标签结果

@@ -826,17 +826,21 @@ export interface LoadBalancerHealth {
  */
 export interface SetLoadBalancerClsLogRequest {
     /**
-      * 负载均衡实例 ID
+      * 负载均衡实例 ID。
       */
     LoadBalancerId: string;
     /**
-      * 日志服务(CLS)的日志集ID
+      * 日志服务(CLS)的日志集ID。
       */
     LogSetId: string;
     /**
-      * 日志服务(CLS)的日志主题ID
+      * 日志服务(CLS)的日志主题ID。
       */
     LogTopicId: string;
+    /**
+      * 日志类型，ACCESS：访问日志，HEALTH：健康检查日志，默认ACCESS。
+      */
+    LogType?: string;
 }
 /**
  * DeleteLoadBalancerListeners请求参数结构体
@@ -1457,6 +1461,10 @@ export interface CreateTopicRequest {
       * 主题分区Partition的数量，不传参默认创建1个，最大创建允许10个，分裂/合并操作会改变分区数量，整体上限50个。
       */
     PartitionCount?: number;
+    /**
+      * 日志类型，ACCESS：访问日志，HEALTH：健康检查日志，默认ACCESS。
+      */
+    TopicType?: string;
 }
 /**
  * DeleteListener请求参数结构体
@@ -2377,6 +2385,10 @@ export interface CreateClsLogSetRequest {
       * 日志集的名字，不能和cls其他日志集重名。不填默认为clb_logset。
       */
     LogsetName?: string;
+    /**
+      * 日志集类型，ACCESS：访问日志，HEALTH：健康检查日志，默认ACCESS。
+      */
+    LogsetType?: string;
 }
 /**
  * DisassociateTargetGroups请求参数结构体
@@ -2960,6 +2972,10 @@ export interface DescribeClsLogSetResponse {
       * 日志集的 ID。
       */
     LogsetId: string;
+    /**
+      * 健康检查日志集的 ID。
+      */
+    HealthLogsetId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3988,4 +4004,14 @@ OPEN：公网属性， INTERNAL：内网属性。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     NfvInfo?: string;
+    /**
+      * 负载均衡日志服务(CLS)的健康检查日志集ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HealthLogSetId?: string;
+    /**
+      * 负载均衡日志服务(CLS)的健康检查日志主题ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HealthLogTopicId?: string;
 }

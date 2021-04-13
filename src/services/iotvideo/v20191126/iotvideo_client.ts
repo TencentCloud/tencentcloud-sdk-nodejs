@@ -123,6 +123,8 @@ import {
   DeleteMessageQueueRequest,
   CreateUsrTokenRequest,
   RunDeviceRequest,
+  RunOtaVersionResponse,
+  ModifyDeviceRequest,
   DescribeDeviceModelResponse,
   DescribeStorageServiceRequest,
   ProductBase,
@@ -139,7 +141,7 @@ import {
   CreateAnonymousAccessTokenRequest,
   DeliverStorageServiceRequest,
   RunDeviceStreamResponse,
-  RunOtaVersionResponse,
+  ModifyDeviceResponse,
   DescribeDeviceModelRequest,
   DescribeLogsResponse,
   ModifyDeviceActionResponse,
@@ -305,19 +307,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口（ModifyDeviceAction）用于修改设备物模型的行为（Action）。
-
-可对ctlVal数据属性进行写入,如:Action.takePhoto.ctlVal,设备在线且成功发送到设备才返回,物模型写入数据时,不需要传入时标信息,平台以当前时标作为数据的时标更新物模型中的时标信息。
-注意:
-  1.若设备当前不在线,会直接返回错误
-  2.若设备网络出现异常时,消息发送可能超时,超时等待最长时间为3秒
-  3.value的内容必须与实际物模型的定义一致
-     */
-  async ModifyDeviceAction(
-    req: ModifyDeviceActionRequest,
-    cb?: (error: string, rep: ModifyDeviceActionResponse) => void
-  ): Promise<ModifyDeviceActionResponse> {
-    return this.request("ModifyDeviceAction", req, cb)
+   * 修改设备信息
+   */
+  async ModifyDevice(
+    req: ModifyDeviceRequest,
+    cb?: (error: string, rep: ModifyDeviceResponse) => void
+  ): Promise<ModifyDeviceResponse> {
+    return this.request("ModifyDevice", req, cb)
   }
 
   /**
@@ -400,6 +396,22 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIotModelResponse) => void
   ): Promise<DescribeIotModelResponse> {
     return this.request("DescribeIotModel", req, cb)
+  }
+
+  /**
+     * 本接口（ModifyDeviceAction）用于修改设备物模型的行为（Action）。
+
+可对ctlVal数据属性进行写入,如:Action.takePhoto.ctlVal,设备在线且成功发送到设备才返回,物模型写入数据时,不需要传入时标信息,平台以当前时标作为数据的时标更新物模型中的时标信息。
+注意:
+  1.若设备当前不在线,会直接返回错误
+  2.若设备网络出现异常时,消息发送可能超时,超时等待最长时间为3秒
+  3.value的内容必须与实际物模型的定义一致
+     */
+  async ModifyDeviceAction(
+    req: ModifyDeviceActionRequest,
+    cb?: (error: string, rep: ModifyDeviceActionResponse) => void
+  ): Promise<ModifyDeviceActionResponse> {
+    return this.request("ModifyDeviceAction", req, cb)
   }
 
   /**

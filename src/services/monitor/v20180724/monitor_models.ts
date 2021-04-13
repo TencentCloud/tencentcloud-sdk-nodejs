@@ -328,7 +328,7 @@ export interface DescribePolicyGroupListResponse {
  */
 export interface BindingPolicyObjectRequest {
   /**
-   * 策略组id，如传入PolicyId则该字段可传入任意值
+   * 策略组id，如传入 PolicyId 则该字段会被忽略可传入任意值如 0
    */
   GroupId: number
 
@@ -348,7 +348,7 @@ export interface BindingPolicyObjectRequest {
   Dimensions?: Array<BindingPolicyObjectDimension>
 
   /**
-   * 告警策略ID，使用此字段时GroupId可传入任意值
+   * 告警策略ID，使用此字段时 GroupId 会被忽略
    */
   PolicyId?: string
 }
@@ -473,7 +473,7 @@ export interface CreateAlarmPolicyRequest {
   MonitorType: string
 
   /**
-   * 告警策略类型，由 DescribeAllNamespaces 获得，例如 cvm_device
+   * 告警策略类型，由 [DescribeAllNamespaces](https://cloud.tencent.com/document/product/248/48683) 获得，例如 cvm_device
    */
   Namespace: string
 
@@ -488,22 +488,27 @@ export interface CreateAlarmPolicyRequest {
   Enable?: number
 
   /**
-   * 项目 Id -1=无项目 0=默认项目，可不传 默认为-1
+   * 项目 Id，对于区分项目的产品必须传入非 -1 的值。 -1=无项目 0=默认项目，如不传 默认为 -1。支持的项目 Id 可以在控制台 [账号中心-项目管理](https://console.cloud.tencent.com/project) 中查看。
    */
   ProjectId?: number
 
   /**
-   * 指标触发条件
+   * 触发条件模板 Id ，可不传
+   */
+  ConditionTemplateId?: number
+
+  /**
+   * 指标触发条件，支持的指标可以从 [DescribeAlarmMetrics](https://cloud.tencent.com/document/product/248/51283) 查询。
    */
   Condition?: AlarmPolicyCondition
 
   /**
-   * 事件触发条件
+   * 事件触发条件，支持的事件可以从 [DescribeAlarmEvents](https://cloud.tencent.com/document/product/248/51284) 查询。
    */
   EventCondition?: AlarmPolicyEventCondition
 
   /**
-   * 通知规则 Id 列表，由 DescribeAlarmNotices 获得
+   * 通知规则 Id 列表，由 [DescribeAlarmNotices](https://cloud.tencent.com/document/product/248/51280) 获得
    */
   NoticeIds?: Array<string>
 
@@ -996,7 +1001,7 @@ export interface UnBindingPolicyObjectRequest {
   Module: string
 
   /**
-   * 策略组id，如传入PolicyId则该字段可传入任意值
+   * 策略组id，如传入 PolicyId 则该字段被忽略可传入任意值如 0
    */
   GroupId: number
 
@@ -1006,12 +1011,12 @@ export interface UnBindingPolicyObjectRequest {
   UniqueId: Array<string>
 
   /**
-   * 实例分组id, 如果按实例分组删除的话UniqueId参数是无效的
+   * 实例分组id，如果按实例分组删除的话UniqueId参数是无效的
    */
   InstanceGroupId?: number
 
   /**
-   * 告警策略ID，使用此字段时GroupId可传入任意值
+   * 告警策略ID，使用此字段时 GroupId 会被忽略
    */
   PolicyId?: string
 }
@@ -1543,12 +1548,12 @@ export interface CreateAlarmPolicyResponse {
   /**
    * 告警策略 ID
    */
-  PolicyId?: string
+  PolicyId: string
 
   /**
-   * 用于实例、实例组绑定和解绑接口（BindingPolicyObject、UnBindingAllPolicyObject、UnBindingPolicyObject）的策略 ID
+   * 可用于实例、实例组的绑定和解绑接口（[BindingPolicyObject](https://cloud.tencent.com/document/product/248/40421)、[UnBindingAllPolicyObject](https://cloud.tencent.com/document/product/248/40568)、[UnBindingPolicyObject](https://cloud.tencent.com/document/product/248/40567)）的策略 ID
    */
-  OriginId?: string
+  OriginId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1689,13 +1694,13 @@ export interface ModifyAlarmReceiversRequest {
  */
 export interface AlarmPolicyRule {
   /**
-      * 指标名
+      * 指标名或事件名，支持的指标可以从 [DescribeAlarmMetrics](https://cloud.tencent.com/document/product/248/51283) 查询，支持的事件可以从 [DescribeAlarmEvents](https://cloud.tencent.com/document/product/248/51284) 查询 。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   MetricName?: string
 
   /**
-      * 秒数 统计周期
+      * 秒数 统计周期，支持的值可以从 [DescribeAlarmMetrics](https://cloud.tencent.com/document/product/248/51283) 查询。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Period?: number
@@ -1719,18 +1724,19 @@ cycle_increase=环比增长
 cycle_decrease=环比下降
 cycle_wave=环比波动
 re=正则匹配
+支持的值可以从 [DescribeAlarmMetrics](https://cloud.tencent.com/document/product/248/51283) 查询。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Operator?: string
 
   /**
-      * 阈值
+      * 阈值，支持的范围可以从 [DescribeAlarmMetrics](https://cloud.tencent.com/document/product/248/51283) 查询。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Value?: string
 
   /**
-      * 周期数 持续通知周期 1=持续1个周期 2=持续2个周期...
+      * 周期数 持续通知周期 1=持续1个周期 2=持续2个周期...，支持的值可以从 [DescribeAlarmMetrics](https://cloud.tencent.com/document/product/248/51283) 查询
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ContinuePeriod?: number
@@ -1766,7 +1772,7 @@ re=正则匹配
   Unit?: string
 
   /**
-      * 触发条件类型 STATIC=静态阈值 DYNAMIC=动态阈值
+      * 触发条件类型 STATIC=静态阈值 DYNAMIC=动态阈值。创建或编辑策略时，如不填则默认为 STATIC。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   RuleType?: string
@@ -2159,6 +2165,11 @@ export interface ModifyAlarmPolicyConditionRequest {
    * 告警策略 ID
    */
   PolicyId: string
+
+  /**
+   * 触发条件模板 Id，可不传
+   */
+  ConditionTemplateId?: number
 
   /**
    * 指标触发条件
@@ -3626,7 +3637,7 @@ export interface AlarmHistory {
   NoticeWays: Array<string>
 
   /**
-   * 兼容告警1.0策略组 Id
+   * 可用于实例、实例组的绑定和解绑接口（[BindingPolicyObject](https://cloud.tencent.com/document/product/248/40421)、[UnBindingAllPolicyObject](https://cloud.tencent.com/document/product/248/40568)、[UnBindingPolicyObject](https://cloud.tencent.com/document/product/248/40567)）的策略 ID
    */
   OriginId: string
 
@@ -4696,12 +4707,12 @@ export interface UnBindingAllPolicyObjectRequest {
   Module: string
 
   /**
-   * 策略组id，如传入PolicyId则该字段可传入任意值
+   * 策略组id，如传入 PolicyId 则该字段被忽略可传入任意值如 0
    */
   GroupId: number
 
   /**
-   * 告警策略ID，使用此字段时GroupId可传入任意值
+   * 告警策略ID，使用此字段时 GroupId 会被忽略
    */
   PolicyId?: string
 }

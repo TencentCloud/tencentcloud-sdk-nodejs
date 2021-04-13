@@ -181,7 +181,7 @@ Url、Image必须提供一个，如果都提供，只使用 Url。图片存储�
       */
     Fps?: number;
     /**
-      * 视频类型，取值[0,2]，其中0为MP4，1为GIF，2为MOV。目前仅支持MP4格式，默认为MP4格式
+      * 视频类型，取值0。目前仅支持MP4格式，默认为MP4格式
       */
     OutputType?: number;
     /**
@@ -305,11 +305,11 @@ export interface MorphFaceResponse {
     /**
       * 人像渐变任务的Job id
       */
-    JobId?: string;
+    JobId: string;
     /**
       * 预估处理时间，粒度为秒
       */
-    EstimatedProcessTime?: number;
+    EstimatedProcessTime: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

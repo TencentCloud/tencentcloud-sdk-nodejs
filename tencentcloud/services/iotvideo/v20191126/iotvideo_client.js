@@ -103,16 +103,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RunIotModel", req, cb);
     }
     /**
-     * 本接口（ModifyDeviceAction）用于修改设备物模型的行为（Action）。
-
-可对ctlVal数据属性进行写入,如:Action.takePhoto.ctlVal,设备在线且成功发送到设备才返回,物模型写入数据时,不需要传入时标信息,平台以当前时标作为数据的时标更新物模型中的时标信息。
-注意:
-  1.若设备当前不在线,会直接返回错误
-  2.若设备网络出现异常时,消息发送可能超时,超时等待最长时间为3秒
-  3.value的内容必须与实际物模型的定义一致
+     * 修改设备信息
      */
-    async ModifyDeviceAction(req, cb) {
-        return this.request("ModifyDeviceAction", req, cb);
+    async ModifyDevice(req, cb) {
+        return this.request("ModifyDevice", req, cb);
     }
     /**
      * 本接口（CreateIotDataType）用于创建自定义物模型数据类型。
@@ -163,6 +157,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeIotModel(req, cb) {
         return this.request("DescribeIotModel", req, cb);
+    }
+    /**
+     * 本接口（ModifyDeviceAction）用于修改设备物模型的行为（Action）。
+
+可对ctlVal数据属性进行写入,如:Action.takePhoto.ctlVal,设备在线且成功发送到设备才返回,物模型写入数据时,不需要传入时标信息,平台以当前时标作为数据的时标更新物模型中的时标信息。
+注意:
+  1.若设备当前不在线,会直接返回错误
+  2.若设备网络出现异常时,消息发送可能超时,超时等待最长时间为3秒
+  3.value的内容必须与实际物模型的定义一致
+     */
+    async ModifyDeviceAction(req, cb) {
+        return this.request("ModifyDeviceAction", req, cb);
     }
     /**
      * 本接口（DescribeProducts）用于列出用户账号下的物联网智能视频产品列表。

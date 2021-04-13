@@ -19,10 +19,11 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   QueryInvoiceResponse,
+  QueryOrderOutOrderList,
   ApplyTradeRequest,
   QueryOutwardOrderResponse,
   QueryExchangeRateResponse,
-  QueryAcctInfoListResponse,
+  UnifiedOrderInSubOrderList,
   QueryAcctBindingRequest,
   ModifyMntMbrBindRelateAcctBankCodeRequest,
   CreateMerchantResult,
@@ -41,7 +42,7 @@ import {
   RevResigterBillSupportWithdrawRequest,
   CreateInvoiceResponse,
   AgentTaxPayment,
-  QueryOutwardOrderRequest,
+  CreateRedInvoiceResultV2,
   QueryAnchorContractInfoRequest,
   CreateRedInvoiceResult,
   QueryBankWithdrawCashDetailsResponse,
@@ -49,23 +50,25 @@ import {
   ApplyTradeResult,
   RefundOutSubOrderRefundList,
   UnbindRelateAcctRequest,
+  WithdrawBill,
   QueryAcctInfoListRequest,
   CreateMerchantRequest,
   ApplyDeclareResult,
   DeleteAgentTaxPaymentInfoRequest,
-  UnifiedOrderInSubOrderList,
   QueryInvoiceResult,
   QueryAcctBindingResponse,
   QueryCommonTransferRechargeResponse,
   QueryTradeData,
+  ApplyOutwardOrderResponse,
   ApplyReWithdrawalResponse,
-  ModifyAgentTaxPaymentInfoResponse,
   RegisterBillRequest,
   CreateInvoiceItem,
   ApplyOutwardOrderData,
   RevokeRechargeByThirdPayResponse,
   ReviseMbrPropertyResponse,
+  QueryInvoiceV2Response,
   CreateAcctRequest,
+  CreateSinglePayRequest,
   CreateAgentTaxPaymentInfosRequest,
   Acct,
   CloseOrderResponse,
@@ -91,8 +94,8 @@ import {
   QueryTradeResponse,
   DownloadBillResponse,
   RevokeMemberRechargeThirdPayResponse,
-  CreateRedInvoiceRequest,
-  ApplyOutwardOrderResponse,
+  CreateInvoiceV2Request,
+  QueryAcctInfoListResponse,
   DeleteAgentTaxPaymentInfosRequest,
   WithdrawCashMembershipRequest,
   ExecuteMemberTransactionResponse,
@@ -106,7 +109,7 @@ import {
   RegisterBillSupportWithdrawResponse,
   QueryTransferResultResponse,
   QuerySmallAmountTransferResponse,
-  CreateRedInvoiceResponse,
+  CreateInvoiceResultV2,
   QueryInvoiceResultData,
   QueryBillDownloadURLData,
   QuerySingleTransactionStatusResponse,
@@ -125,13 +128,15 @@ import {
   QueryMemberTransactionRequest,
   QueryExchangerateResult,
   QueryBillDownloadURLResponse,
+  CreateRedInvoiceV2Request,
+  QueryOutwardOrderRequest,
   QueryMerchantBalanceRequest,
   CreateAcctResponse,
   DescribeChargeDetailRequest,
   BindAcctResponse,
-  CreateSinglePayRequest,
+  CreateRedInvoiceResponse,
   QueryExchangerateData,
-  WithdrawBill,
+  ModifyAgentTaxPaymentInfoResponse,
   QueryRefundRequest,
   QueryTransferResultData,
   QueryTransferDetailResponse,
@@ -144,6 +149,7 @@ import {
   QueryAgentTaxPaymentBatchRequest,
   QueryPayerinfoResult,
   TransferItem,
+  QueryInvoiceV2Request,
   OrderItem,
   RefundMemberTransactionRequest,
   QueryMemberBindResponse,
@@ -161,7 +167,8 @@ import {
   QueryDeclareResult,
   CreateCustAcctIdRequest,
   UnBindAcctResponse,
-  QueryOrderOutOrderList,
+  MigrateOrderRefundRequest,
+  CreateRedInvoiceV2Response,
   QueryCommonTransferRechargeRequest,
   QueryAgentStatementsResponse,
   QueryTransferDetailRequest,
@@ -170,6 +177,7 @@ import {
   RevResigterBillSupportWithdrawResponse,
   QueryBalanceResponse,
   QueryOutwardOrderData,
+  UnBindAcctRequest,
   TransactionItem,
   QueryTransferBatchRequest,
   TransferSinglePayData,
@@ -187,7 +195,7 @@ import {
   ApplyPayerInfoRequest,
   CreateSinglePayResponse,
   RefundMemberTransactionResponse,
-  MigrateOrderRefundRequest,
+  CreateInvoiceV2Response,
   QueryBankClearRequest,
   QueryInvoiceRequest,
   ApplyApplicationMaterialResponse,
@@ -227,13 +235,13 @@ import {
   QueryReconciliationDocumentRequest,
   QueryOrderResponse,
   UnifiedOrderRequest,
-  UnBindAcctRequest,
+  BankCardItem,
   MigrateOrderRefundResponse,
   QueryAnchorContractInfoResponse,
   DeleteAgentTaxPaymentInfoResponse,
   RefundRequest,
   BindRelateAccReUnionPayResponse,
-  BankCardItem,
+  CreateRedInvoiceRequest,
 } from "./cpdp_models"
 
 /**
@@ -256,13 +264,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 银企直连-单笔支付状态查询接口
+   * 智慧零售-发票红冲V2
    */
-  async QuerySinglePay(
-    req: QuerySinglePayRequest,
-    cb?: (error: string, rep: QuerySinglePayResponse) => void
-  ): Promise<QuerySinglePayResponse> {
-    return this.request("QuerySinglePay", req, cb)
+  async CreateRedInvoiceV2(
+    req: CreateRedInvoiceV2Request,
+    cb?: (error: string, rep: CreateRedInvoiceV2Response) => void
+  ): Promise<CreateRedInvoiceV2Response> {
+    return this.request("CreateRedInvoiceV2", req, cb)
   }
 
   /**
@@ -293,6 +301,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryAnchorContractInfoResponse) => void
   ): Promise<QueryAnchorContractInfoResponse> {
     return this.request("QueryAnchorContractInfo", req, cb)
+  }
+
+  /**
+   * 智慧零售-发票查询V2
+   */
+  async QueryInvoiceV2(
+    req: QueryInvoiceV2Request,
+    cb?: (error: string, rep: QueryInvoiceV2Response) => void
+  ): Promise<QueryInvoiceV2Response> {
+    return this.request("QueryInvoiceV2", req, cb)
   }
 
   /**
@@ -380,13 +398,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 登记挂账(支持撤销)。此接口可实现把不明来账或自有资金等已登记在挂账子账户下的资金调整到普通会员子账户。即通过申请调用此接口，将会减少挂账子账户的资金，调增指定的普通会员子账户的可提现余额及可用余额。此接口不支持把挂账子账户资金清分到功能子账户。
+   * 银企直连-单笔支付状态查询接口
    */
-  async RegisterBillSupportWithdraw(
-    req: RegisterBillSupportWithdrawRequest,
-    cb?: (error: string, rep: RegisterBillSupportWithdrawResponse) => void
-  ): Promise<RegisterBillSupportWithdrawResponse> {
-    return this.request("RegisterBillSupportWithdraw", req, cb)
+  async QuerySinglePay(
+    req: QuerySinglePayRequest,
+    cb?: (error: string, rep: QuerySinglePayResponse) => void
+  ): Promise<QuerySinglePayResponse> {
+    return this.request("QuerySinglePay", req, cb)
   }
 
   /**
@@ -805,6 +823,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 登记挂账(支持撤销)。此接口可实现把不明来账或自有资金等已登记在挂账子账户下的资金调整到普通会员子账户。即通过申请调用此接口，将会减少挂账子账户的资金，调增指定的普通会员子账户的可提现余额及可用余额。此接口不支持把挂账子账户资金清分到功能子账户。
+   */
+  async RegisterBillSupportWithdraw(
+    req: RegisterBillSupportWithdrawRequest,
+    cb?: (error: string, rep: RegisterBillSupportWithdrawResponse) => void
+  ): Promise<RegisterBillSupportWithdrawResponse> {
+    return this.request("RegisterBillSupportWithdraw", req, cb)
+  }
+
+  /**
    * 跨境-提交申报材料。申报材料的主体是付款人，需要提前调用【跨境-付款人申请】接口提交付款人信息且审核通过后调用。
    */
   async ApplyApplicationMaterial(
@@ -862,6 +890,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: MigrateOrderRefundResponse) => void
   ): Promise<MigrateOrderRefundResponse> {
     return this.request("MigrateOrderRefund", req, cb)
+  }
+
+  /**
+   * 智慧零售-发票开具V2
+   */
+  async CreateInvoiceV2(
+    req: CreateInvoiceV2Request,
+    cb?: (error: string, rep: CreateInvoiceV2Response) => void
+  ): Promise<CreateInvoiceV2Response> {
+    return this.request("CreateInvoiceV2", req, cb)
   }
 
   /**

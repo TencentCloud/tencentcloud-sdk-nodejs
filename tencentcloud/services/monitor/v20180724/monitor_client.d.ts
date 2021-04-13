@@ -66,7 +66,7 @@ export declare class Client extends AbstractClient {
      */
     DescribePolicyConditionList(req: DescribePolicyConditionListRequest, cb?: (error: string, rep: DescribePolicyConditionListResponse) => void): Promise<DescribePolicyConditionListResponse>;
     /**
-     * 编辑告警策略触发条件
+     * 修改告警策略触发条件
      */
     ModifyAlarmPolicyCondition(req: ModifyAlarmPolicyConditionRequest, cb?: (error: string, rep: ModifyAlarmPolicyConditionResponse) => void): Promise<ModifyAlarmPolicyConditionResponse>;
     /**

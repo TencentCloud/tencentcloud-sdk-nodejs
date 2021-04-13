@@ -22,7 +22,7 @@ export interface InquireAuditCreditResponse {
   /**
    * 可创建跟踪集的数量
    */
-  AuditAmount?: number
+  AuditAmount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -45,14 +45,14 @@ export interface StopLoggingRequest {
  */
 export interface CmqRegionInfo {
   /**
-   * cmq地域
-   */
-  CmqRegion?: string
-
-  /**
    * 地域描述
    */
   CmqRegionName?: string
+
+  /**
+   * cmq地域
+   */
+  CmqRegion?: string
 }
 
 /**
@@ -72,7 +72,7 @@ export interface DeleteAuditResponse {
   /**
    * 是否删除成功
    */
-  IsSuccess?: number
+  IsSuccess: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -90,44 +90,14 @@ export interface UpdateAuditRequest {
   AuditName: string
 
   /**
-   * 队列名称。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。如果IsEnableCmqNotify值是1的话，此值属于必填字段。如果不是新创建的队列，云审计不会去校验该队列是否真的存在，请谨慎填写，避免日志通知不成功，导致您的数据丢失。
-   */
-  CmqQueueName?: string
-
-  /**
-   * 队列所在的地域。可以通过ListCmqEnableRegion获取支持的cmq地域。如果IsEnableCmqNotify值是1的话，此值属于必填字段。
-   */
-  CmqRegion?: string
-
-  /**
-   * cos的存储桶名称。仅支持小写英文字母和数字即[a-z，0-9]、中划线“-”及其组合。用户自定义的字符串支持1 - 40个字符。存储桶命名不能以“-”开头或结尾。如果不是新创建的存储桶，云审计不会去校验该存储桶是否真的存在，请谨慎填写，避免日志投递不成功，导致您的数据丢失。
-   */
-  CosBucketName?: string
-
-  /**
-   * cos地域。目前支持的地域可以使用ListCosEnableRegion来获取。
-   */
-  CosRegion?: string
-
-  /**
-   * 是否创建新的cos存储桶。1：是，0：否。
-   */
-  IsCreateNewBucket?: number
-
-  /**
-   * 是否创建新的队列。1：是，0：否。如果IsEnableCmqNotify值是1的话，此值属于必填字段。
-   */
-  IsCreateNewQueue?: number
-
-  /**
    * 是否开启cmq消息通知。1：是，0：否。目前仅支持cmq的队列服务。如果开启cmq消息通知服务，云审计会将您的日志内容实时投递到您指定地域的指定队列中。
    */
   IsEnableCmqNotify?: number
 
   /**
-   * 是否开启kms加密。1：是，0：否。如果开启KMS加密，数据在投递到cos时，会将数据加密。
+   * 管理事件的读写属性。1：只读，2：只写，3：全部。
    */
-  IsEnableKmsEncry?: number
+  ReadWriteAttribute?: number
 
   /**
    * CMK的全局唯一标识符，如果不是新创建的kms，该值是必填值。可以通过ListKeyAliasByRegion来获取。云审计不会校验KeyId的合法性，请您谨慎填写，避免给您的数据造成损失。
@@ -135,9 +105,39 @@ export interface UpdateAuditRequest {
   KeyId?: string
 
   /**
+   * cos地域。目前支持的地域可以使用ListCosEnableRegion来获取。
+   */
+  CosRegion?: string
+
+  /**
+   * 队列名称。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。如果IsEnableCmqNotify值是1的话，此值属于必填字段。如果不是新创建的队列，云审计不会去校验该队列是否真的存在，请谨慎填写，避免日志通知不成功，导致您的数据丢失。
+   */
+  CmqQueueName?: string
+
+  /**
+   * 是否创建新的cos存储桶。1：是，0：否。
+   */
+  IsCreateNewBucket?: number
+
+  /**
    * kms地域。目前支持的地域可以使用ListKmsEnableRegion来获取。必须要和cos的地域保持一致。
    */
   KmsRegion?: string
+
+  /**
+   * 是否开启kms加密。1：是，0：否。如果开启KMS加密，数据在投递到cos时，会将数据加密。
+   */
+  IsEnableKmsEncry?: number
+
+  /**
+   * cos的存储桶名称。仅支持小写英文字母和数字即[a-z，0-9]、中划线“-”及其组合。用户自定义的字符串支持1 - 40个字符。存储桶命名不能以“-”开头或结尾。如果不是新创建的存储桶，云审计不会去校验该存储桶是否真的存在，请谨慎填写，避免日志投递不成功，导致您的数据丢失。
+   */
+  CosBucketName?: string
+
+  /**
+   * 队列所在的地域。可以通过ListCmqEnableRegion获取支持的cmq地域。如果IsEnableCmqNotify值是1的话，此值属于必填字段。
+   */
+  CmqRegion?: string
 
   /**
    * 日志文件前缀。3-40个字符，只能包含 ASCII 编码字母 a-z，A-Z，数字 0-9。
@@ -145,9 +145,9 @@ export interface UpdateAuditRequest {
   LogFilePrefix?: string
 
   /**
-   * 管理事件的读写属性。1：只读，2：只写，3：全部。
+   * 是否创建新的队列。1：是，0：否。如果IsEnableCmqNotify值是1的话，此值属于必填字段。
    */
-  ReadWriteAttribute?: number
+  IsCreateNewQueue?: number
 }
 
 /**
@@ -156,13 +156,39 @@ export interface UpdateAuditRequest {
 export type InquireAuditCreditRequest = null
 
 /**
+ * DescribeEvents返回参数结构体
+ */
+export interface DescribeEventsResponse {
+  /**
+   * 日志集合是否结束
+   */
+  ListOver: boolean
+
+  /**
+   * 查看更多日志的凭证
+   */
+  NextToken: number
+
+  /**
+      * 日志集合
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Events: Array<Event>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ListCosEnableRegion返回参数结构体
  */
 export interface ListCosEnableRegionResponse {
   /**
    * 云审计支持的cos可用区
    */
-  EnableRegions?: Array<CosRegionInfo>
+  EnableRegions: Array<CosRegionInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -175,19 +201,24 @@ export interface ListCosEnableRegionResponse {
  */
 export interface LookUpEventsRequest {
   /**
-   * 结束时间
-   */
-  EndTime: number
-
-  /**
    * 开始时间
    */
   StartTime: number
 
   /**
+   * 结束时间
+   */
+  EndTime: number
+
+  /**
    * 检索条件
    */
   LookupAttributes?: Array<LookupAttribute>
+
+  /**
+   * 查看更多日志的凭证
+   */
+  NextToken?: string
 
   /**
    * 返回日志的最大条数
@@ -198,11 +229,6 @@ export interface LookUpEventsRequest {
    * 云审计模式，有效值：standard | quick，其中standard是标准模式，quick是极速模式。默认为标准模式
    */
   Mode?: string
-
-  /**
-   * 查看更多日志的凭证
-   */
-  NextToken?: string
 }
 
 /**
@@ -222,7 +248,7 @@ export interface CreateAuditResponse {
   /**
    * 是否创建成功。
    */
-  IsSuccess?: number
+  IsSuccess: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -237,7 +263,7 @@ export interface StartLoggingResponse {
   /**
    * 是否开启成功
    */
-  IsSuccess?: number
+  IsSuccess: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -250,19 +276,9 @@ export interface StartLoggingResponse {
  */
 export interface AttributeKeyDetail {
   /**
-   * 中文标签
-   */
-  Label: string
-
-  /**
    * 输入框类型
    */
   LabelType: string
-
-  /**
-   * 展示排序
-   */
-  Order: number
 
   /**
    * 初始化展示
@@ -270,9 +286,19 @@ export interface AttributeKeyDetail {
   Starter: string
 
   /**
+   * 展示排序
+   */
+  Order: number
+
+  /**
    * AttributeKey值
    */
   Value: string
+
+  /**
+   * 中文标签
+   */
+  Label: string
 }
 
 /**
@@ -290,14 +316,14 @@ export interface ListCosEnableRegionRequest {
  */
 export interface ListKeyAliasByRegionResponse {
   /**
-   * 密钥别名
-   */
-  KeyMetadatas?: Array<KeyMetadata>
-
-  /**
    * CMK的总数量
    */
-  TotalCount?: number
+  TotalCount: number
+
+  /**
+   * 密钥别名
+   */
+  KeyMetadatas: Array<KeyMetadata>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -310,14 +336,15 @@ export interface ListKeyAliasByRegionResponse {
  */
 export interface Resource {
   /**
-   * 资源名称
-   */
-  ResourceName?: string
-
-  /**
    * 资源类型
    */
   ResourceType?: string
+
+  /**
+      * 资源名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResourceName?: string
 }
 
 /**
@@ -332,7 +359,7 @@ export interface StopLoggingResponse {
   /**
    * 是否关闭成功
    */
-  IsSuccess?: number
+  IsSuccess: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -345,13 +372,15 @@ export interface StopLoggingResponse {
  */
 export interface LookupAttribute {
   /**
-   * AttributeKey的有效取值范围是:RequestId、EventName、ReadOnly、Username、ResourceType、ResourceName和AccessKeyId，EventId
-   */
+      * AttributeKey的有效取值范围是:RequestId、EventName、ReadOnly、Username、ResourceType、ResourceName和AccessKeyId，EventId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   AttributeKey: string
 
   /**
-   * AttributeValue
-   */
+      * AttributeValue的值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   AttributeValue?: string
 }
 
@@ -360,9 +389,10 @@ export interface LookupAttribute {
  */
 export interface ListAuditsResponse {
   /**
-   * 查询跟踪集概要集合
-   */
-  AuditSummarys?: Array<AuditSummary>
+      * 查询跟踪集概要集合
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AuditSummarys: Array<AuditSummary>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -386,13 +416,43 @@ export interface KeyMetadata {
 }
 
 /**
+ * DescribeEvents请求参数结构体
+ */
+export interface DescribeEventsRequest {
+  /**
+   * 起始时间戳（单位秒，不超过当前时间 90 天）
+   */
+  StartTime: number
+
+  /**
+   * 结束时间戳（单位秒，查询时间跨度小于 30 天）
+   */
+  EndTime: number
+
+  /**
+   * 查看更多日志的凭证
+   */
+  NextToken?: number
+
+  /**
+   * 返回日志的最大条数（最大 50 条）
+   */
+  MaxResults?: number
+
+  /**
+   * 检索条件（目前支持 RequestId：请求 ID、EventName：事件名称、ActionType：操作类型（Write：写；Read：读）、PrincipalId：子账号、ResourceType：资源类型、ResourceName：资源名称、AccessKeyId：密钥 ID、SensitiveAction：是否敏感操作、ApiErrorCode：API 错误码、CamErrorCode：CAM 错误码）
+   */
+  LookupAttributes?: Array<LookupAttribute>
+}
+
+/**
  * UpdateAudit返回参数结构体
  */
 export interface UpdateAuditResponse {
   /**
    * 是否更新成功
    */
-  IsSuccess?: number
+  IsSuccess: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -435,14 +495,19 @@ export interface ListKeyAliasByRegionRequest {
  */
 export interface CreateAuditRequest {
   /**
+   * 是否开启cmq消息通知。1：是，0：否。目前仅支持cmq的队列服务。如果开启cmq消息通知服务，云审计会将您的日志内容实时投递到您指定地域的指定队列中。
+   */
+  IsEnableCmqNotify: number
+
+  /**
+   * 管理事件的读写属性。1：只读，2：只写，3：全部。
+   */
+  ReadWriteAttribute: number
+
+  /**
    * 跟踪集名称。3-128字符，只能包含 ASCII 编码字母 a-z，A-Z，数字 0-9，下划线 _。
    */
   AuditName: string
-
-  /**
-   * cos的存储桶名称。仅支持小写英文字母和数字即[a-z，0-9]、中划线“-”及其组合。用户自定义的字符串支持1 - 40个字符。存储桶命名不能以“-”开头或结尾。如果不是新创建的存储桶，云审计不会去校验该存储桶是否真的存在，请谨慎填写，避免日志投递不成功，导致您的数据丢失。
-   */
-  CosBucketName: string
 
   /**
    * cos地域。目前支持的地域可以使用ListCosEnableRegion来获取。
@@ -455,34 +520,9 @@ export interface CreateAuditRequest {
   IsCreateNewBucket: number
 
   /**
-   * 是否开启cmq消息通知。1：是，0：否。目前仅支持cmq的队列服务。如果开启cmq消息通知服务，云审计会将您的日志内容实时投递到您指定地域的指定队列中。
+   * cos的存储桶名称。仅支持小写英文字母和数字即[a-z，0-9]、中划线“-”及其组合。用户自定义的字符串支持1 - 40个字符。存储桶命名不能以“-”开头或结尾。如果不是新创建的存储桶，云审计不会去校验该存储桶是否真的存在，请谨慎填写，避免日志投递不成功，导致您的数据丢失。
    */
-  IsEnableCmqNotify: number
-
-  /**
-   * 管理事件的读写属性。1：只读，2：只写，3：全部。
-   */
-  ReadWriteAttribute: number
-
-  /**
-   * 队列名称。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。如果IsEnableCmqNotify值是1的话，此值属于必填字段。如果不是新创建的队列，云审计不会去校验该队列是否真的存在，请谨慎填写，避免日志通知不成功，导致您的数据丢失。
-   */
-  CmqQueueName?: string
-
-  /**
-   * 队列所在的地域。可以通过ListCmqEnableRegion获取支持的cmq地域。如果IsEnableCmqNotify值是1的话，此值属于必填字段。
-   */
-  CmqRegion?: string
-
-  /**
-   * 是否创建新的队列。1：是，0：否。如果IsEnableCmqNotify值是1的话，此值属于必填字段。
-   */
-  IsCreateNewQueue?: number
-
-  /**
-   * 是否开启kms加密。1：是，0：否。如果开启KMS加密，数据在投递到cos时，会将数据加密。
-   */
-  IsEnableKmsEncry?: number
+  CosBucketName: string
 
   /**
    * CMK的全局唯一标识符，如果不是新创建的kms，该值是必填值。可以通过ListKeyAliasByRegion来获取。云审计不会校验KeyId的合法性，请您谨慎填写，避免给您的数据造成损失。
@@ -490,14 +530,34 @@ export interface CreateAuditRequest {
   KeyId?: string
 
   /**
+   * 队列名称。队列名称是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)。如果IsEnableCmqNotify值是1的话，此值属于必填字段。如果不是新创建的队列，云审计不会去校验该队列是否真的存在，请谨慎填写，避免日志通知不成功，导致您的数据丢失。
+   */
+  CmqQueueName?: string
+
+  /**
    * kms地域。目前支持的地域可以使用ListKmsEnableRegion来获取。必须要和cos的地域保持一致。
    */
   KmsRegion?: string
 
   /**
+   * 是否开启kms加密。1：是，0：否。如果开启KMS加密，数据在投递到cos时，会将数据加密。
+   */
+  IsEnableKmsEncry?: number
+
+  /**
+   * 队列所在的地域。可以通过ListCmqEnableRegion获取支持的cmq地域。如果IsEnableCmqNotify值是1的话，此值属于必填字段。
+   */
+  CmqRegion?: string
+
+  /**
    * 日志文件前缀。3-40个字符，只能包含 ASCII 编码字母 a-z，A-Z，数字 0-9。可以不填，默认以账号ID作为日志前缀。
    */
   LogFilePrefix?: string
+
+  /**
+   * 是否创建新的队列。1：是，0：否。如果IsEnableCmqNotify值是1的话，此值属于必填字段。
+   */
+  IsCreateNewQueue?: number
 }
 
 /**
@@ -527,7 +587,7 @@ export interface GetAttributeKeyResponse {
   /**
    * AttributeKey的有效取值范围
    */
-  AttributeKeyDetails?: Array<AttributeKeyDetail>
+  AttributeKeyDetails: Array<AttributeKeyDetail>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -542,7 +602,7 @@ export interface ListCmqEnableRegionResponse {
   /**
    * 云审计支持的cmq的可用区
    */
-  EnableRegions?: Array<CmqRegionInfo>
+  EnableRegions: Array<CmqRegionInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -555,19 +615,22 @@ export interface ListCmqEnableRegionResponse {
  */
 export interface LookUpEventsResponse {
   /**
-   * 日志集合
-   */
-  Events?: Array<Event>
+      * 查看更多日志的凭证
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NextToken: string
 
   /**
-   * 日志集合是否结束
-   */
-  ListOver?: boolean
+      * 日志集合
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Events: Array<Event>
 
   /**
-   * 查看更多日志的凭证
-   */
-  NextToken?: string
+      * 日志集合是否结束
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ListOver: boolean
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -595,69 +658,69 @@ export interface CosRegionInfo {
  */
 export interface DescribeAuditResponse {
   /**
-   * 跟踪集名称。
-   */
-  AuditName?: string
-
-  /**
-   * 跟踪集状态，1：开启，0：停止。
-   */
-  AuditStatus?: number
-
-  /**
-   * 队列名称。
-   */
-  CmqQueueName?: string
-
-  /**
-   * 队列所在地域。
-   */
-  CmqRegion?: string
-
-  /**
-   * cos存储桶名称。
-   */
-  CosBucketName?: string
-
-  /**
-   * cos存储桶所在地域。
-   */
-  CosRegion?: string
-
-  /**
    * 是否开启cmq消息通知。1：是，0：否。
    */
-  IsEnableCmqNotify?: number
-
-  /**
-   * 是否开启kms加密。1：是，0：否。如果开启KMS加密，数据在投递到cos时，会将数据加密。
-   */
-  IsEnableKmsEncry?: number
-
-  /**
-   * CMK的全局唯一标识符。
-   */
-  KeyId?: string
-
-  /**
-   * CMK别名。
-   */
-  KmsAlias?: string
-
-  /**
-   * kms地域。
-   */
-  KmsRegion?: string
-
-  /**
-   * 日志前缀。
-   */
-  LogFilePrefix?: string
+  IsEnableCmqNotify: number
 
   /**
    * 管理事件读写属性，1：只读，2：只写，3：全部
    */
-  ReadWriteAttribute?: number
+  ReadWriteAttribute: number
+
+  /**
+   * CMK的全局唯一标识符。
+   */
+  KeyId: string
+
+  /**
+   * 跟踪集状态，1：开启，0：停止。
+   */
+  AuditStatus: number
+
+  /**
+   * 跟踪集名称。
+   */
+  AuditName: string
+
+  /**
+   * cos存储桶所在地域。
+   */
+  CosRegion: string
+
+  /**
+   * 队列名称。
+   */
+  CmqQueueName: string
+
+  /**
+   * CMK别名。
+   */
+  KmsAlias: string
+
+  /**
+   * kms地域。
+   */
+  KmsRegion: string
+
+  /**
+   * 是否开启kms加密。1：是，0：否。如果开启KMS加密，数据在投递到cos时，会将数据加密。
+   */
+  IsEnableKmsEncry: number
+
+  /**
+   * cos存储桶名称。
+   */
+  CosBucketName: string
+
+  /**
+   * 队列所在地域。
+   */
+  CmqRegion: string
+
+  /**
+   * 日志前缀。
+   */
+  LogFilePrefix: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -670,14 +733,19 @@ export interface DescribeAuditResponse {
  */
 export interface Event {
   /**
-   * 资源对
+   * 日志ID
    */
-  Resources?: Resource
+  EventId?: string
 
   /**
-   * 主账号ID
+   * 用户名
    */
-  AccountID?: number
+  Username?: string
+
+  /**
+   * 事件时间
+   */
+  EventTime?: string
 
   /**
    * 日志详情
@@ -685,14 +753,14 @@ export interface Event {
   CloudAuditEvent?: string
 
   /**
+   * 资源类型中文描述（此字段请按需使用，如果您是其他语言使用者，可以忽略该字段描述）
+   */
+  ResourceTypeCn?: string
+
+  /**
    * 鉴权错误码
    */
   ErrorCode?: number
-
-  /**
-   * 日志ID
-   */
-  EventId?: string
 
   /**
    * 事件名称
@@ -700,24 +768,15 @@ export interface Event {
   EventName?: string
 
   /**
-   * 事件名称中文描述（此字段请按需使用，如果您是其他语言使用者，可以忽略该字段描述）
-   */
-  EventNameCn?: string
-
-  /**
-   * 事件地域
-   */
-  EventRegion?: string
+      * 证书ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SecretId?: string
 
   /**
    * 请求来源
    */
   EventSource?: string
-
-  /**
-   * 事件时间
-   */
-  EventTime?: string
 
   /**
    * 请求ID
@@ -730,35 +789,36 @@ export interface Event {
   ResourceRegion?: string
 
   /**
-   * 资源类型中文描述（此字段请按需使用，如果您是其他语言使用者，可以忽略该字段描述）
+   * 主账号ID
    */
-  ResourceTypeCn?: string
+  AccountID?: number
 
   /**
-   * 证书ID
-   */
-  SecretId?: string
-
-  /**
-   * 源IP
-   */
+      * 源IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
   SourceIPAddress?: string
 
   /**
-   * 用户名
+   * 事件名称中文描述（此字段请按需使用，如果您是其他语言使用者，可以忽略该字段描述）
    */
-  Username?: string
+  EventNameCn?: string
+
+  /**
+   * 资源对
+   */
+  Resources?: Resource
+
+  /**
+   * 事件地域
+   */
+  EventRegion?: string
 }
 
 /**
  * 跟踪集概览
  */
 export interface AuditSummary {
-  /**
-   * 跟踪集名称
-   */
-  AuditName?: string
-
   /**
    * 跟踪集状态，1：开启，0：关闭
    */
@@ -768,6 +828,11 @@ export interface AuditSummary {
    * COS存储桶名称
    */
   CosBucketName?: string
+
+  /**
+   * 跟踪集名称
+   */
+  AuditName?: string
 
   /**
    * 日志前缀

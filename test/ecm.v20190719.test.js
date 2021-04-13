@@ -208,9 +208,9 @@ it("ecm.v20190719.ReplaceRouteTableAssociation", async function () {
     }
 })
 
-it("ecm.v20190719.ModifyLoadBalancerAttributes", async function () {
+it("ecm.v20190719.DescribeLoadBalancers", async function () {
     try {
-       const data = await client.ModifyLoadBalancerAttributes({})
+       const data = await client.DescribeLoadBalancers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -358,6 +358,16 @@ it("ecm.v20190719.CreateVpc", async function () {
     }
 })
 
+it("ecm.v20190719.ModifyLoadBalancerAttributes", async function () {
+    try {
+       const data = await client.ModifyLoadBalancerAttributes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ecm.v20190719.SetLoadBalancerSecurityGroups", async function () {
     try {
        const data = await client.SetLoadBalancerSecurityGroups({})
@@ -401,6 +411,16 @@ it("ecm.v20190719.ModifyListener", async function () {
 it("ecm.v20190719.AssociateAddress", async function () {
     try {
        const data = await client.AssociateAddress({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ecm.v20190719.ModifyDefaultSubnet", async function () {
+    try {
+       const data = await client.ModifyDefaultSubnet({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -461,6 +481,16 @@ it("ecm.v20190719.StopInstances", async function () {
 it("ecm.v20190719.DescribeImportImageOs", async function () {
     try {
        const data = await client.DescribeImportImageOs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ecm.v20190719.DescribeMonthPeakNetwork", async function () {
+    try {
+       const data = await client.DescribeMonthPeakNetwork({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -571,16 +601,6 @@ it("ecm.v20190719.RemovePrivateIpAddresses", async function () {
 it("ecm.v20190719.DisableRoutes", async function () {
     try {
        const data = await client.DisableRoutes({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ecm.v20190719.ModifyIpv6AddressesAttribute", async function () {
-    try {
-       const data = await client.ModifyIpv6AddressesAttribute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -728,16 +748,6 @@ it("ecm.v20190719.ModifyImageAttribute", async function () {
     }
 })
 
-it("ecm.v20190719.DescribeLoadBalancers", async function () {
-    try {
-       const data = await client.DescribeLoadBalancers({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("ecm.v20190719.DescribeTaskStatus", async function () {
     try {
        const data = await client.DescribeTaskStatus({})
@@ -828,9 +838,9 @@ it("ecm.v20190719.SetSecurityGroupForLoadbalancers", async function () {
     }
 })
 
-it("ecm.v20190719.ModifyDefaultSubnet", async function () {
+it("ecm.v20190719.ModifyIpv6AddressesAttribute", async function () {
     try {
-       const data = await client.ModifyDefaultSubnet({})
+       const data = await client.ModifyIpv6AddressesAttribute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -338,6 +338,16 @@ it("vpc.v20170312.DescribeAddresses", async function () {
     }
 })
 
+it("vpc.v20170312.DeleteLocalGateway", async function () {
+    try {
+       const data = await client.DeleteLocalGateway({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DetachCcnInstances", async function () {
     try {
        const data = await client.DetachCcnInstances({})
@@ -838,6 +848,16 @@ it("vpc.v20170312.DisassociateNatGatewayAddress", async function () {
     }
 })
 
+it("vpc.v20170312.DescribeLocalGateway", async function () {
+    try {
+       const data = await client.DescribeLocalGateway({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DescribeFlowLogs", async function () {
     try {
        const data = await client.DescribeFlowLogs({})
@@ -1028,6 +1048,16 @@ it("vpc.v20170312.DescribeBandwidthPackageResources", async function () {
     }
 })
 
+it("vpc.v20170312.ModifyCcnAttachedInstancesAttribute", async function () {
+    try {
+       const data = await client.ModifyCcnAttachedInstancesAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DeleteNatGatewaySourceIpTranslationNatRule", async function () {
     try {
        const data = await client.DeleteNatGatewaySourceIpTranslationNatRule({})
@@ -1041,6 +1071,16 @@ it("vpc.v20170312.DeleteNatGatewaySourceIpTranslationNatRule", async function ()
 it("vpc.v20170312.DeleteNetworkInterface", async function () {
     try {
        const data = await client.DeleteNetworkInterface({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.ModifyLocalGateway", async function () {
+    try {
+       const data = await client.ModifyLocalGateway({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1458,16 +1498,6 @@ it("vpc.v20170312.CreateAddressTemplateGroup", async function () {
     }
 })
 
-it("vpc.v20170312.CreateAddressTemplate", async function () {
-    try {
-       const data = await client.CreateAddressTemplate({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("vpc.v20170312.CreateSecurityGroup", async function () {
     try {
        const data = await client.CreateSecurityGroup({})
@@ -1738,6 +1768,16 @@ it("vpc.v20170312.DescribeHaVips", async function () {
     }
 })
 
+it("vpc.v20170312.CreateLocalGateway", async function () {
+    try {
+       const data = await client.CreateLocalGateway({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.AssociateNetworkInterfaceSecurityGroups", async function () {
     try {
        const data = await client.AssociateNetworkInterfaceSecurityGroups({})
@@ -1778,9 +1818,9 @@ it("vpc.v20170312.ModifyBandwidthPackageAttribute", async function () {
     }
 })
 
-it("vpc.v20170312.DescribeAddressQuota", async function () {
+it("vpc.v20170312.CreateAddressTemplate", async function () {
     try {
-       const data = await client.DescribeAddressQuota({})
+       const data = await client.CreateAddressTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1821,6 +1861,16 @@ it("vpc.v20170312.DeleteVpc", async function () {
 it("vpc.v20170312.DescribeSubnets", async function () {
     try {
        const data = await client.DescribeSubnets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.DescribeAddressQuota", async function () {
+    try {
+       const data = await client.DescribeAddressQuota({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

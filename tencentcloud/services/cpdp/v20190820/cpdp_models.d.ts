@@ -12,6 +12,108 @@ export interface QueryInvoiceResponse {
     RequestId?: string;
 }
 /**
+ * 查询订单接口的出参，订单列表
+ */
+export interface QueryOrderOutOrderList {
+    /**
+      * 聚鑫分配的支付主MidasAppId
+      */
+    MidasAppId: string;
+    /**
+      * 支付金额，单位：分
+      */
+    Amt: number;
+    /**
+      * 用户Id
+      */
+    UserId: string;
+    /**
+      * 现金支付金额
+      */
+    CashAmt: string;
+    /**
+      * 发货标识，由业务在调用聚鑫下单 接口的时候下发
+      */
+    Metadata: string;
+    /**
+      * 支付时间unix时间戳
+      */
+    PayTime: string;
+    /**
+      * 抵扣券金额
+      */
+    CouponAmt: string;
+    /**
+      * 下单时间unix时间戳
+      */
+    OrderTime: string;
+    /**
+      * 物品id
+      */
+    ProductId: string;
+    /**
+      * 高速场景信息
+      */
+    SceneInfo: string;
+    /**
+      * 当前订单的订单状态
+0：初始状态，获取聚鑫交易订单成功；
+1：拉起聚鑫支付页面成功，用户未 支付；
+2：用户支付成功，正在发货；
+3：用户支付成功，发货失败；
+4：用户支付成功，发货成功；
+5：聚鑫支付页面正在失效中；
+6：聚鑫支付页面已经失效；
+      */
+    OrderState: string;
+    /**
+      * 支付渠道：wechat：微信支付;
+qqwallet：QQ钱包;
+bank：网银
+      */
+    Channel: string;
+    /**
+      * 是否曾退款
+      */
+    RefundFlag: string;
+    /**
+      * 务支付订单号
+      */
+    OutTradeNo: string;
+    /**
+      * 商品名称
+      */
+    ProductName: string;
+    /**
+      * 支付回调时间，unix时间戳
+      */
+    CallBackTime: string;
+    /**
+      * ISO 货币代码，CNY
+      */
+    CurrencyType: string;
+    /**
+      * 微校场景账户Id
+      */
+    AcctSubAppId: string;
+    /**
+      * 调用下单接口获取的聚鑫交易订单
+      */
+    TransactionId: string;
+    /**
+      * 聚鑫内部渠道订单号
+      */
+    ChannelOrderId: string;
+    /**
+      * 调用下单接口传进来的 SubOutTradeNoList
+      */
+    SubOrderList: Array<QueryOrderOutSubOrderList>;
+    /**
+      * 支付机构订单号
+      */
+    ChannelExternalOrderId: string;
+}
+/**
  * ApplyTrade请求参数结构体
  */
 export interface ApplyTradeRequest {
@@ -105,25 +207,45 @@ export interface QueryExchangeRateResponse {
     RequestId?: string;
 }
 /**
- * QueryAcctInfoList返回参数结构体
+ * 子订单列表
  */
-export interface QueryAcctInfoListResponse {
+export interface UnifiedOrderInSubOrderList {
     /**
-      * 本次交易返回查询结果记录数
+      * 子订单结算应收金额，单位： 分
       */
-    ResultCount?: number;
+    SubMchIncome: number;
     /**
-      * 符合业务查询条件的记录总数
+      * 子订单平台应收金额，单位：分
       */
-    TotalCount?: number;
+    PlatformIncome: number;
     /**
-      * 查询结果项 [object,object]
+      * 子订单商品详情
       */
-    QueryAcctItems?: Array<QueryAcctItem>;
+    ProductDetail: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 子订单商品名称
       */
-    RequestId?: string;
+    ProductName: string;
+    /**
+      * 聚鑫计费SubAppId，代表子商户
+      */
+    SubAppId: string;
+    /**
+      * 子订单号
+      */
+    SubOutTradeNo: string;
+    /**
+      * 子订单支付金额
+      */
+    Amt: number;
+    /**
+      * 发货标识，由业务在调用聚鑫下单接口的 时候下发
+      */
+    Metadata: string;
+    /**
+      * 子订单原始金额
+      */
+    OriginalAmt: number;
 }
 /**
  * QueryAcctBinding请求参数结构体
@@ -752,17 +874,13 @@ export interface AgentTaxPayment {
     Tax: number;
 }
 /**
- * QueryOutwardOrder请求参数结构体
+ * 红票结果V2
  */
-export interface QueryOutwardOrderRequest {
+export interface CreateRedInvoiceResultV2 {
     /**
-      * 对接方汇出指令编号
+      * 红票ID
       */
-    TransactionId: string;
-    /**
-      * 接入环境。沙箱环境填sandbox
-      */
-    Profile?: string;
+    InvoiceId: string;
 }
 /**
  * QueryAnchorContractInfo请求参数结构体
@@ -952,6 +1070,43 @@ export interface UnbindRelateAcctRequest {
     Profile?: string;
 }
 /**
+ * 聚鑫提现订单内容
+ */
+export interface WithdrawBill {
+    /**
+      * 业务提现订单号
+      */
+    WithdrawOrderId: string;
+    /**
+      * 提现日期
+      */
+    Date: string;
+    /**
+      * 提现金额，单位： 分
+      */
+    PayAmt: string;
+    /**
+      * 聚鑫分配转入账户appid
+      */
+    InSubAppId: string;
+    /**
+      * 聚鑫分配转出账户appid
+      */
+    OutSubAppId: string;
+    /**
+      * ISO货币代码
+      */
+    CurrencyType: string;
+    /**
+      * 透传字段
+      */
+    MetaData?: string;
+    /**
+      * 扩展字段
+      */
+    ExtendFieldData?: string;
+}
+/**
  * QueryAcctInfoList请求参数结构体
  */
 export interface QueryAcctInfoListRequest {
@@ -1113,47 +1268,6 @@ export interface DeleteAgentTaxPaymentInfoRequest {
       * 接入环境。沙箱环境填sandbox
       */
     Profile?: string;
-}
-/**
- * 子订单列表
- */
-export interface UnifiedOrderInSubOrderList {
-    /**
-      * 子订单结算应收金额，单位： 分
-      */
-    SubMchIncome: number;
-    /**
-      * 子订单平台应收金额，单位：分
-      */
-    PlatformIncome: number;
-    /**
-      * 子订单商品详情
-      */
-    ProductDetail: string;
-    /**
-      * 子订单商品名称
-      */
-    ProductName: string;
-    /**
-      * 聚鑫计费SubAppId，代表子商户
-      */
-    SubAppId: string;
-    /**
-      * 子订单号
-      */
-    SubOutTradeNo: string;
-    /**
-      * 子订单支付金额
-      */
-    Amt: number;
-    /**
-      * 发货标识，由业务在调用聚鑫下单接口的 时候下发
-      */
-    Metadata: string;
-    /**
-      * 子订单原始金额
-      */
-    OriginalAmt: number;
 }
 /**
  * 查询发票结果
@@ -1324,6 +1438,19 @@ export interface QueryTradeData {
     ServiceTime: string;
 }
 /**
+ * ApplyOutwardOrder返回参数结构体
+ */
+export interface ApplyOutwardOrderResponse {
+    /**
+      * 汇出指令申请
+      */
+    Result?: ApplyOutwardOrderResult;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ApplyReWithdrawal返回参数结构体
  */
 export interface ApplyReWithdrawalResponse {
@@ -1331,19 +1458,6 @@ export interface ApplyReWithdrawalResponse {
       * 重新提现业务订单号
       */
     WithdrawOrderId?: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * ModifyAgentTaxPaymentInfo返回参数结构体
- */
-export interface ModifyAgentTaxPaymentInfoResponse {
-    /**
-      * 代理商完税证明批次信息
-      */
-    AgentTaxPaymentBatch?: AgentTaxPaymentBatch;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1562,6 +1676,28 @@ export interface ReviseMbrPropertyResponse {
     RequestId?: string;
 }
 /**
+ * QueryInvoiceV2返回参数结构体
+ */
+export interface QueryInvoiceV2Response {
+    /**
+      * 发票查询结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: QueryInvoiceResultData;
+    /**
+      * 错误码
+      */
+    ErrCode: string;
+    /**
+      * 错误消息
+      */
+    ErrMessage: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateAcct请求参数结构体
  */
 export interface CreateAcctRequest {
@@ -1651,6 +1787,83 @@ development: 开发环境
 缺省: release
       */
     MidasEnvironment?: string;
+}
+/**
+ * CreateSinglePay请求参数结构体
+ */
+export interface CreateSinglePayRequest {
+    /**
+      * 业务流水号，历史唯一
+      */
+    SerialNumber: string;
+    /**
+      * 付方账户号
+      */
+    PayAccountNumber: string;
+    /**
+      * 付方账户名称
+      */
+    PayAccountName: string;
+    /**
+      * 金额
+      */
+    Amount: number;
+    /**
+      * 收方账户号
+      */
+    RecvAccountNumber: string;
+    /**
+      * 收方账户名称
+      */
+    RecvAccountName: string;
+    /**
+      * 付方账户CNAPS号
+      */
+    PayBankCnaps?: string;
+    /**
+      * 付方账户银行大类，PayBankCnaps为空时必传（见常见问题-银企直连银行类型）
+      */
+    PayBankType?: string;
+    /**
+      * 付方账户银行所在省，PayBankCnaps为空时必传（见常见问题-银企直连省份枚举信息）
+      */
+    PayBankProvince?: string;
+    /**
+      * 付方账户银行所在地区，PayBankCnaps为空时必传（见常见问题-银企直连城市枚举信息）
+      */
+    PayBankCity?: string;
+    /**
+      * 收方账户CNAPS号
+      */
+    RecvBankCnaps?: string;
+    /**
+      * 收方账户银行大类，RecvBankCnaps为空时必传（见常见问题-银企直连银行类型）
+      */
+    RecvBankType?: string;
+    /**
+      * 收方账户银行所在省，RecvBankCnaps为空时必传（见常见问题-银企直连省份枚举信息）
+      */
+    RecvBankProvince?: string;
+    /**
+      * 收方账户银行所在地区，RecvBankCnaps为空时必传（见常见问题-银企直连城市枚举信息）
+      */
+    RecvBankCity?: string;
+    /**
+      * 收款方证件类型（见常见问题-银企直连证件类型枚举信息）
+      */
+    RecvCertType?: string;
+    /**
+      * 收款方证件号码
+      */
+    RecvCertNo?: string;
+    /**
+      * 摘要信息
+      */
+    Summary?: string;
+    /**
+      * 接入环境。沙箱环境填sandbox
+      */
+    Profile?: string;
 }
 /**
  * CreateAgentTaxPaymentInfos请求参数结构体
@@ -2411,34 +2624,176 @@ export interface RevokeMemberRechargeThirdPayResponse {
     RequestId?: string;
 }
 /**
- * CreateRedInvoice请求参数结构体
+ * CreateInvoiceV2请求参数结构体
  */
-export interface CreateRedInvoiceRequest {
+export interface CreateInvoiceV2Request {
     /**
-      * 开票平台ID
+      * 开票平台ID。0：高灯，1：票易通
       */
     InvoicePlatformId: number;
     /**
-      * 红冲明细
+      * 抬头类型：1：个人/政府事业单位；2：企业
       */
-    Invoices: Array<CreateRedInvoiceItem>;
+    TitleType: number;
     /**
-      * 接入环境。沙箱环境填 sandbox。
+      * 购方名称
+      */
+    BuyerTitle: string;
+    /**
+      * 业务开票号
+      */
+    OrderId: string;
+    /**
+      * 含税总金额（单位为分）
+      */
+    AmountHasTax: number;
+    /**
+      * 总税额（单位为分）
+      */
+    TaxAmount: number;
+    /**
+      * 不含税总金额（单位为分）。InvoicePlatformId 为1时，传默认值-1
+      */
+    AmountWithoutTax: number;
+    /**
+      * 销方纳税人识别号
+      */
+    SellerTaxpayerNum: string;
+    /**
+      * 销方名称。（不填默认读取商户注册时输入的信息）
+      */
+    SellerName?: string;
+    /**
+      * 销方地址。（不填默认读取商户注册时输入的信息）
+      */
+    SellerAddress?: string;
+    /**
+      * 销方电话。（不填默认读取商户注册时输入的信息）
+      */
+    SellerPhone?: string;
+    /**
+      * 销方银行名称。（不填默认读取商户注册时输入的信息）
+      */
+    SellerBankName?: string;
+    /**
+      * 销方银行账号。（不填默认读取商户注册时输入的信息）
+      */
+    SellerBankAccount?: string;
+    /**
+      * 购方纳税人识别号（购方票面信息）,若抬头类型为2时，必传
+      */
+    BuyerTaxpayerNum?: string;
+    /**
+      * 购方地址。开具专用发票时必填
+      */
+    BuyerAddress?: string;
+    /**
+      * 购方银行名称。开具专用发票时必填
+      */
+    BuyerBankName?: string;
+    /**
+      * 购方银行账号。开具专用发票时必填
+      */
+    BuyerBankAccount?: string;
+    /**
+      * 购方电话。开具专用发票时必填
+      */
+    BuyerPhone?: string;
+    /**
+      * 收票人邮箱。若填入，会收到发票推送邮件
+      */
+    BuyerEmail?: string;
+    /**
+      * 收票人手机号。若填入，会收到发票推送短信
+      */
+    TakerPhone?: string;
+    /**
+      * 开票类型：
+1：增值税专用发票；
+2：增值税普通发票；
+3：增值税电子发票；
+4：增值税卷式发票；
+5：区块链电子发票。
+若该字段不填，或值不为1-5，则认为开具”增值税电子发票”
+      */
+    InvoiceType?: number;
+    /**
+      * 发票结果回传地址
+      */
+    CallbackUrl?: string;
+    /**
+      * 开票人姓名。（不填默认读取商户注册时输入的信息）
+      */
+    Drawer?: string;
+    /**
+      * 收款人姓名。（不填默认读取商户注册时输入的信息）
+      */
+    Payee?: string;
+    /**
+      * 复核人姓名。（不填默认读取商户注册时输入的信息）
+      */
+    Checker?: string;
+    /**
+      * 税盘号
+      */
+    TerminalCode?: string;
+    /**
+      * 征收方式。开具差额征税发票时必填2。开具普通征税发票时为空
+      */
+    LevyMethod?: string;
+    /**
+      * 差额征税扣除额（单位为分）
+      */
+    Deduction?: number;
+    /**
+      * 备注（票面信息）
+      */
+    Remark?: string;
+    /**
+      * 项目商品明细
+      */
+    Items?: Array<CreateInvoiceItem>;
+    /**
+      * 接入环境。沙箱环境填sandbox。
       */
     Profile?: string;
     /**
-      * 开票渠道。0：线上渠道，1：线下渠道。不填默认为线上渠道
+      * 撤销部分商品。0-不撤销，1-撤销
+      */
+    UndoPart?: number;
+    /**
+      * 订单下单时间（格式 YYYYMMDD）
+      */
+    OrderDate?: string;
+    /**
+      * 订单级别折扣（单位为分）
+      */
+    Discount?: number;
+    /**
+      * 门店编码
+      */
+    StoreNo?: string;
+    /**
+      * 开票渠道。0：APP渠道，1：线下渠道，2：小程序渠道。不填默认为APP渠道
       */
     InvoiceChannel?: number;
 }
 /**
- * ApplyOutwardOrder返回参数结构体
+ * QueryAcctInfoList返回参数结构体
  */
-export interface ApplyOutwardOrderResponse {
+export interface QueryAcctInfoListResponse {
     /**
-      * 汇出指令申请
+      * 本次交易返回查询结果记录数
       */
-    Result?: ApplyOutwardOrderResult;
+    ResultCount?: number;
+    /**
+      * 符合业务查询条件的记录总数
+      */
+    TotalCount?: number;
+    /**
+      * 查询结果项 [object,object]
+      */
+    QueryAcctItems?: Array<QueryAcctItem>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2825,17 +3180,13 @@ export interface QuerySmallAmountTransferResponse {
     RequestId?: string;
 }
 /**
- * CreateRedInvoice返回参数结构体
+ * 发票结果V2
  */
-export interface CreateRedInvoiceResponse {
+export interface CreateInvoiceResultV2 {
     /**
-      * 红冲结果
+      * 发票ID
       */
-    Result: CreateRedInvoiceResult;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    InvoiceId: string;
 }
 /**
  * 查询发票结果数据
@@ -3523,6 +3874,40 @@ export interface QueryBillDownloadURLResponse {
     RequestId?: string;
 }
 /**
+ * CreateRedInvoiceV2请求参数结构体
+ */
+export interface CreateRedInvoiceV2Request {
+    /**
+      * 开票平台ID
+      */
+    InvoicePlatformId: number;
+    /**
+      * 订单号
+      */
+    OrderId: string;
+    /**
+      * 接入环境。沙箱环境填 sandbox。
+      */
+    Profile?: string;
+    /**
+      * 开票渠道。0：线上渠道，1：线下渠道。不填默认为线上渠道
+      */
+    InvoiceChannel?: number;
+}
+/**
+ * QueryOutwardOrder请求参数结构体
+ */
+export interface QueryOutwardOrderRequest {
+    /**
+      * 对接方汇出指令编号
+      */
+    TransactionId: string;
+    /**
+      * 接入环境。沙箱环境填sandbox
+      */
+    Profile?: string;
+}
+/**
  * QueryMerchantBalance请求参数结构体
  */
 export interface QueryMerchantBalanceRequest {
@@ -3623,81 +4008,17 @@ export interface BindAcctResponse {
     RequestId?: string;
 }
 /**
- * CreateSinglePay请求参数结构体
+ * CreateRedInvoice返回参数结构体
  */
-export interface CreateSinglePayRequest {
+export interface CreateRedInvoiceResponse {
     /**
-      * 业务流水号，历史唯一
+      * 红冲结果
       */
-    SerialNumber: string;
+    Result: CreateRedInvoiceResult;
     /**
-      * 付方账户号
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    PayAccountNumber: string;
-    /**
-      * 付方账户名称
-      */
-    PayAccountName: string;
-    /**
-      * 金额
-      */
-    Amount: number;
-    /**
-      * 收方账户号
-      */
-    RecvAccountNumber: string;
-    /**
-      * 收方账户名称
-      */
-    RecvAccountName: string;
-    /**
-      * 付方账户CNAPS号
-      */
-    PayBankCnaps?: string;
-    /**
-      * 付方账户银行大类，PayBankCnaps为空时必传（见常见问题-银企直连银行类型）
-      */
-    PayBankType?: string;
-    /**
-      * 付方账户银行所在省，PayBankCnaps为空时必传（见常见问题-银企直连省份枚举信息）
-      */
-    PayBankProvince?: string;
-    /**
-      * 付方账户银行所在地区，PayBankCnaps为空时必传（见常见问题-银企直连城市枚举信息）
-      */
-    PayBankCity?: string;
-    /**
-      * 收方账户CNAPS号
-      */
-    RecvBankCnaps?: string;
-    /**
-      * 收方账户银行大类，RecvBankCnaps为空时必传（见常见问题-银企直连银行类型）
-      */
-    RecvBankType?: string;
-    /**
-      * 收方账户银行所在省，RecvBankCnaps为空时必传（见常见问题-银企直连省份枚举信息）
-      */
-    RecvBankProvince?: string;
-    /**
-      * 收方账户银行所在地区，RecvBankCnaps为空时必传（见常见问题-银企直连城市枚举信息）
-      */
-    RecvBankCity?: string;
-    /**
-      * 收款方证件类型（见常见问题-银企直连证件类型枚举信息）
-      */
-    RecvCertType?: string;
-    /**
-      * 收款方证件号码
-      */
-    RecvCertNo?: string;
-    /**
-      * 摘要信息
-      */
-    Summary?: string;
-    /**
-      * 接入环境。沙箱环境填sandbox
-      */
-    Profile?: string;
+    RequestId?: string;
 }
 /**
  * 查询汇率数据
@@ -3725,41 +4046,17 @@ export interface QueryExchangerateData {
     BaseCurrency: string;
 }
 /**
- * 聚鑫提现订单内容
+ * ModifyAgentTaxPaymentInfo返回参数结构体
  */
-export interface WithdrawBill {
+export interface ModifyAgentTaxPaymentInfoResponse {
     /**
-      * 业务提现订单号
+      * 代理商完税证明批次信息
       */
-    WithdrawOrderId: string;
+    AgentTaxPaymentBatch?: AgentTaxPaymentBatch;
     /**
-      * 提现日期
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Date: string;
-    /**
-      * 提现金额，单位： 分
-      */
-    PayAmt: string;
-    /**
-      * 聚鑫分配转入账户appid
-      */
-    InSubAppId: string;
-    /**
-      * 聚鑫分配转出账户appid
-      */
-    OutSubAppId: string;
-    /**
-      * ISO货币代码
-      */
-    CurrencyType: string;
-    /**
-      * 透传字段
-      */
-    MetaData?: string;
-    /**
-      * 扩展字段
-      */
-    ExtendFieldData?: string;
+    RequestId?: string;
 }
 /**
  * QueryRefund请求参数结构体
@@ -4215,6 +4512,37 @@ export interface TransferItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     FrontSeqNo: string;
+}
+/**
+ * QueryInvoiceV2请求参数结构体
+ */
+export interface QueryInvoiceV2Request {
+    /**
+      * 开票平台ID
+      */
+    InvoicePlatformId: number;
+    /**
+      * 订单号
+      */
+    OrderId: string;
+    /**
+      * 发票种类：
+0：蓝票
+1：红票【该字段默认为0， 如果需要查询红票信息，本字段必须传1，否则可能查询不到需要的发票信息】。
+      */
+    IsRed?: number;
+    /**
+      * 接入环境。沙箱环境填sandbox。
+      */
+    Profile?: string;
+    /**
+      * 开票渠道。0：线上渠道，1：线下渠道。不填默认为线上渠道
+      */
+    InvoiceChannel?: number;
+    /**
+      * 当渠道为线下渠道时，必填
+      */
+    SellerTaxpayerNum?: string;
 }
 /**
  * 线下查票-订单明细
@@ -5014,106 +5342,67 @@ export interface UnBindAcctResponse {
     RequestId?: string;
 }
 /**
- * 查询订单接口的出参，订单列表
+ * MigrateOrderRefund请求参数结构体
  */
-export interface QueryOrderOutOrderList {
+export interface MigrateOrderRefundRequest {
     /**
-      * 聚鑫分配的支付主MidasAppId
+      * 商户代码
       */
-    MidasAppId: string;
+    MerchantId: string;
     /**
-      * 支付金额，单位：分
+      * 支付渠道，ALIPAY对应支付宝渠道；UNIONPAY对应银联渠道
       */
-    Amt: number;
+    PayChannel: string;
     /**
-      * 用户Id
+      * 正向支付商户订单号
       */
-    UserId: string;
+    PayOrderId: string;
     /**
-      * 现金支付金额
+      * 退款订单号，最长64位，仅支持数字、 字母
       */
-    CashAmt: string;
+    RefundOrderId: string;
     /**
-      * 发货标识，由业务在调用聚鑫下单 接口的时候下发
+      * 退款金额，单位：分。备注：改字段必须大于0 和小于10000000000的整数。
       */
-    Metadata: string;
+    RefundAmt: number;
     /**
-      * 支付时间unix时间戳
+      * 第三方支付机构支付交易号
       */
-    PayTime: string;
+    ThirdChannelOrderId: string;
     /**
-      * 抵扣券金额
+      * 原始支付金额，单位：分。备注：当该字段为空或者为0 时，系统会默认使用订单当 实付金额作为退款金额
       */
-    CouponAmt: string;
+    PayAmt?: number;
     /**
-      * 下单时间unix时间戳
+      * 接入环境。沙箱环境填 sandbox。
       */
-    OrderTime: string;
+    Profile?: string;
     /**
-      * 物品id
+      * 退款原因
       */
-    ProductId: string;
+    RefundReason?: string;
+}
+/**
+ * CreateRedInvoiceV2返回参数结构体
+ */
+export interface CreateRedInvoiceV2Response {
     /**
-      * 高速场景信息
+      * 红冲结果
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    SceneInfo: string;
+    Result: CreateRedInvoiceResultV2;
     /**
-      * 当前订单的订单状态
-0：初始状态，获取聚鑫交易订单成功；
-1：拉起聚鑫支付页面成功，用户未 支付；
-2：用户支付成功，正在发货；
-3：用户支付成功，发货失败；
-4：用户支付成功，发货成功；
-5：聚鑫支付页面正在失效中；
-6：聚鑫支付页面已经失效；
+      * 错误码
       */
-    OrderState: string;
+    ErrCode: string;
     /**
-      * 支付渠道：wechat：微信支付;
-qqwallet：QQ钱包;
-bank：网银
+      * 错误消息
       */
-    Channel: string;
+    ErrMessage: string;
     /**
-      * 是否曾退款
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    RefundFlag: string;
-    /**
-      * 务支付订单号
-      */
-    OutTradeNo: string;
-    /**
-      * 商品名称
-      */
-    ProductName: string;
-    /**
-      * 支付回调时间，unix时间戳
-      */
-    CallBackTime: string;
-    /**
-      * ISO 货币代码，CNY
-      */
-    CurrencyType: string;
-    /**
-      * 微校场景账户Id
-      */
-    AcctSubAppId: string;
-    /**
-      * 调用下单接口获取的聚鑫交易订单
-      */
-    TransactionId: string;
-    /**
-      * 聚鑫内部渠道订单号
-      */
-    ChannelOrderId: string;
-    /**
-      * 调用下单接口传进来的 SubOutTradeNoList
-      */
-    SubOrderList: Array<QueryOrderOutSubOrderList>;
-    /**
-      * 支付机构订单号
-      */
-    ChannelExternalOrderId: string;
+    RequestId?: string;
 }
 /**
  * QueryCommonTransferRecharge请求参数结构体
@@ -5426,6 +5715,47 @@ export interface QueryOutwardOrderData {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RefundCurrency: string;
+}
+/**
+ * UnBindAcct请求参数结构体
+ */
+export interface UnBindAcctRequest {
+    /**
+      * 聚鑫分配的支付主MidasAppId
+      */
+    MidasAppId: string;
+    /**
+      * 聚鑫计费SubAppId，代表子商户
+      */
+    SubAppId: string;
+    /**
+      * 用于提现
+<敏感信息>加密详见<a href="https://cloud.tencent.com/document/product/1122/48979" target="_blank">《商户端接口敏感信息加密说明》</a>
+      */
+    SettleAcctNo: string;
+    /**
+      * 聚鑫分配的安全ID
+      */
+    MidasSecretId: string;
+    /**
+      * 按照聚鑫安全密钥计算的签名
+      */
+    MidasSignature: string;
+    /**
+      * 敏感信息加密类型:
+RSA: rsa非对称加密，使用RSA-PKCS1-v1_5
+AES: aes对称加密，使用AES256-CBC-PCKS7padding
+缺省: RSA
+      */
+    EncryptType?: string;
+    /**
+      * 环境名:
+release: 现网环境
+sandbox: 沙箱环境
+development: 开发环境
+缺省: release
+      */
+    MidasEnvironment?: string;
 }
 /**
  * 交易明细信息
@@ -5934,45 +6264,26 @@ export interface RefundMemberTransactionResponse {
     RequestId?: string;
 }
 /**
- * MigrateOrderRefund请求参数结构体
+ * CreateInvoiceV2返回参数结构体
  */
-export interface MigrateOrderRefundRequest {
+export interface CreateInvoiceV2Response {
     /**
-      * 商户代码
+      * 发票开具结果
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    MerchantId: string;
+    Result: CreateInvoiceResultV2;
     /**
-      * 支付渠道，ALIPAY对应支付宝渠道；UNIONPAY对应银联渠道
+      * 错误码
       */
-    PayChannel: string;
+    ErrCode: string;
     /**
-      * 正向支付商户订单号
+      * 错误消息
       */
-    PayOrderId: string;
+    ErrMessage: string;
     /**
-      * 退款订单号，最长64位，仅支持数字、 字母
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    RefundOrderId: string;
-    /**
-      * 退款金额，单位：分。备注：改字段必须大于0 和小于10000000000的整数。
-      */
-    RefundAmt: number;
-    /**
-      * 第三方支付机构支付交易号
-      */
-    ThirdChannelOrderId: string;
-    /**
-      * 原始支付金额，单位：分。备注：当该字段为空或者为0 时，系统会默认使用订单当 实付金额作为退款金额
-      */
-    PayAmt?: number;
-    /**
-      * 接入环境。沙箱环境填 sandbox。
-      */
-    Profile?: string;
-    /**
-      * 退款原因
-      */
-    RefundReason?: string;
+    RequestId?: string;
 }
 /**
  * QueryBankClear请求参数结构体
@@ -7486,45 +7797,62 @@ development: 开发环境
     PaymentNotifyUrl?: string;
 }
 /**
- * UnBindAcct请求参数结构体
+ * 绑卡列表
  */
-export interface UnBindAcctRequest {
+export interface BankCardItem {
     /**
-      * 聚鑫分配的支付主MidasAppId
+      * 超级网银行号
       */
-    MidasAppId: string;
+    EiconBankBranchId: string;
+    /**
+      * 大小额行号
+      */
+    CnapsBranchId: string;
+    /**
+      * 结算账户类型
+1 – 本行账户
+2 – 他行账户
+      */
+    SettleAcctType: number;
+    /**
+      * 结算账户户名
+<敏感信息>
+      */
+    SettleAcctName: string;
+    /**
+      * 开户行名称
+      */
+    AcctBranchName: string;
+    /**
+      * 用于提现
+<敏感信息>
+      */
+    SettleAcctNo: string;
     /**
       * 聚鑫计费SubAppId，代表子商户
       */
     SubAppId: string;
     /**
-      * 用于提现
-<敏感信息>加密详见<a href="https://cloud.tencent.com/document/product/1122/48979" target="_blank">《商户端接口敏感信息加密说明》</a>
+      * 验证类型
+1 – 小额转账验证
+2 – 短信验证
       */
-    SettleAcctNo: string;
+    BindType: number;
     /**
-      * 聚鑫分配的安全ID
+      * 用于短信验证
+BindType==2时必填
+<敏感信息>
       */
-    MidasSecretId: string;
+    Mobile: string;
     /**
-      * 按照聚鑫安全密钥计算的签名
+      * 证件类型
       */
-    MidasSignature: string;
+    IdType: string;
     /**
-      * 敏感信息加密类型:
-RSA: rsa非对称加密，使用RSA-PKCS1-v1_5
-AES: aes对称加密，使用AES256-CBC-PCKS7padding
-缺省: RSA
+      * 证件号码
+<敏感信息>
       */
-    EncryptType?: string;
-    /**
-      * 环境名:
-release: 现网环境
-sandbox: 沙箱环境
-development: 开发环境
-缺省: release
-      */
-    MidasEnvironment?: string;
+    IdCode: string;
 }
 /**
  * MigrateOrderRefund返回参数结构体
@@ -7658,60 +7986,23 @@ export interface BindRelateAccReUnionPayResponse {
     RequestId?: string;
 }
 /**
- * 绑卡列表
+ * CreateRedInvoice请求参数结构体
  */
-export interface BankCardItem {
+export interface CreateRedInvoiceRequest {
     /**
-      * 超级网银行号
+      * 开票平台ID
       */
-    EiconBankBranchId: string;
+    InvoicePlatformId: number;
     /**
-      * 大小额行号
+      * 红冲明细
       */
-    CnapsBranchId: string;
+    Invoices: Array<CreateRedInvoiceItem>;
     /**
-      * 结算账户类型
-1 – 本行账户
-2 – 他行账户
+      * 接入环境。沙箱环境填 sandbox。
       */
-    SettleAcctType: number;
+    Profile?: string;
     /**
-      * 结算账户户名
-<敏感信息>
+      * 开票渠道。0：线上渠道，1：线下渠道。不填默认为线上渠道
       */
-    SettleAcctName: string;
-    /**
-      * 开户行名称
-      */
-    AcctBranchName: string;
-    /**
-      * 用于提现
-<敏感信息>
-      */
-    SettleAcctNo: string;
-    /**
-      * 聚鑫计费SubAppId，代表子商户
-      */
-    SubAppId: string;
-    /**
-      * 验证类型
-1 – 小额转账验证
-2 – 短信验证
-      */
-    BindType: number;
-    /**
-      * 用于短信验证
-BindType==2时必填
-<敏感信息>
-      */
-    Mobile: string;
-    /**
-      * 证件类型
-      */
-    IdType: string;
-    /**
-      * 证件号码
-<敏感信息>
-      */
-    IdCode: string;
+    InvoiceChannel?: number;
 }

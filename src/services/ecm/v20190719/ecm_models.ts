@@ -494,18 +494,14 @@ export interface Province {
 }
 
 /**
- * ImportCustomImage返回参数结构体
+ * DescribeMonthPeakNetwork返回参数结构体
  */
-export interface ImportCustomImageResponse {
+export interface DescribeMonthPeakNetworkResponse {
   /**
-   * 镜像ID
-   */
-  ImageId?: string
-
-  /**
-   * 异步任务ID，可根据DescribeCustomImageTask查询任务信息
-   */
-  TaskId?: number
+      * 无
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MonthNetWorkData: Array<MonthNetwork>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1119,104 +1115,38 @@ export interface DescribeInstancesResponse {
 }
 
 /**
- * 弹性网卡
+ * DescribeMonthPeakNetwork请求参数结构体
  */
-export interface NetworkInterface {
+export interface DescribeMonthPeakNetworkRequest {
   /**
-   * 弹性网卡实例ID，例如：eni-f1xjkw1b。
+   * 月份时间(xxxx-xx) 如2021-03,默认取当前时间的上一个月份
    */
-  NetworkInterfaceId: string
+  Month: string
 
   /**
-   * 弹性网卡名称。
+   * 过滤条件
    */
-  NetworkInterfaceName: string
+  Filters?: Array<Filter>
+}
 
+/**
+ * ImportImage请求参数结构体
+ */
+export interface ImportImageRequest {
   /**
-   * 弹性网卡描述。
+   * 镜像的Id。
    */
-  NetworkInterfaceDescription: string
+  ImageId: string
 
   /**
-   * 子网实例ID。
+   * 镜像的描述。
    */
-  SubnetId: string
+  ImageDescription: string
 
   /**
-   * VPC实例ID。
+   * 源地域
    */
-  VpcId: string
-
-  /**
-      * 绑定的安全组。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  GroupSet: Array<string>
-
-  /**
-   * 是否是主网卡。
-   */
-  Primary: boolean
-
-  /**
-   * MAC地址。
-   */
-  MacAddress: string
-
-  /**
-      * 弹性网卡状态：
-PENDING：创建中
-AVAILABLE：可用的
-ATTACHING：绑定中
-DETACHING：解绑中
-DELETING：删除中
-      */
-  State: string
-
-  /**
-      * 内网IP信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PrivateIpAddressSet: Array<PrivateIpAddressSpecification>
-
-  /**
-      * 绑定的云服务器对象。
-注意：此字段可能返回 null，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Attachment: NetworkInterfaceAttachment
-
-  /**
-   * 可用区。
-   */
-  Zone: string
-
-  /**
-   * 创建时间。
-   */
-  CreatedTime: string
-
-  /**
-      * IPv6地址列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Ipv6AddressSet: Array<Ipv6Address>
-
-  /**
-      * 标签键值对。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TagSet: Array<Tag>
-
-  /**
-   * 网卡类型。0 - 弹性网卡；1 - evm弹性网卡。
-   */
-  EniType: number
-
-  /**
-   * EcmRegion ecm区域
-   */
-  EcmRegion: string
+  SourceRegion: string
 }
 
 /**
@@ -3436,6 +3366,107 @@ export interface CreateRoutesResponse {
 }
 
 /**
+ * 弹性网卡
+ */
+export interface NetworkInterface {
+  /**
+   * 弹性网卡实例ID，例如：eni-f1xjkw1b。
+   */
+  NetworkInterfaceId: string
+
+  /**
+   * 弹性网卡名称。
+   */
+  NetworkInterfaceName: string
+
+  /**
+   * 弹性网卡描述。
+   */
+  NetworkInterfaceDescription: string
+
+  /**
+   * 子网实例ID。
+   */
+  SubnetId: string
+
+  /**
+   * VPC实例ID。
+   */
+  VpcId: string
+
+  /**
+      * 绑定的安全组。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupSet: Array<string>
+
+  /**
+   * 是否是主网卡。
+   */
+  Primary: boolean
+
+  /**
+   * MAC地址。
+   */
+  MacAddress: string
+
+  /**
+      * 弹性网卡状态：
+PENDING：创建中
+AVAILABLE：可用的
+ATTACHING：绑定中
+DETACHING：解绑中
+DELETING：删除中
+      */
+  State: string
+
+  /**
+      * 内网IP信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PrivateIpAddressSet: Array<PrivateIpAddressSpecification>
+
+  /**
+      * 绑定的云服务器对象。
+注意：此字段可能返回 null，表示取不到有效值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Attachment: NetworkInterfaceAttachment
+
+  /**
+   * 可用区。
+   */
+  Zone: string
+
+  /**
+   * 创建时间。
+   */
+  CreatedTime: string
+
+  /**
+      * IPv6地址列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Ipv6AddressSet: Array<Ipv6Address>
+
+  /**
+      * 标签键值对。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TagSet: Array<Tag>
+
+  /**
+   * 网卡类型。0 - 弹性网卡；1 - evm弹性网卡。
+   */
+  EniType: number
+
+  /**
+   * EcmRegion ecm区域
+   */
+  EcmRegion: string
+}
+
+/**
  * DeleteListener请求参数结构体
  */
 export interface DeleteListenerRequest {
@@ -3471,23 +3502,23 @@ export interface DescribeSecurityGroupsResponse {
 }
 
 /**
- * ImportImage请求参数结构体
+ * ImportCustomImage返回参数结构体
  */
-export interface ImportImageRequest {
+export interface ImportCustomImageResponse {
   /**
-   * 镜像的Id。
+   * 镜像ID
    */
-  ImageId: string
+  ImageId?: string
 
   /**
-   * 镜像的描述。
+   * 异步任务ID，可根据DescribeCustomImageTask查询任务信息
    */
-  ImageDescription: string
+  TaskId?: number
 
   /**
-   * 源地域
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  SourceRegion: string
+  RequestId?: string
 }
 
 /**
@@ -3513,6 +3544,76 @@ export interface InstanceFamilyConfig {
    * 机型ID
    */
   InstanceFamily: string
+}
+
+/**
+ * 客户对应月份的带宽信息
+ */
+export interface MonthNetwork {
+  /**
+   * 节点zone信息
+   */
+  ZoneInfo: ZoneInfo
+
+  /**
+   * 带宽月份 示例"202103"
+   */
+  Month: string
+
+  /**
+   * 带宽包id 格式如"bwp-xxxxxxxx"
+   */
+  BandwidthPkgId: string
+
+  /**
+   * 运营商简称 取值范围"CUCC;CTCC;CMCC"
+   */
+  Isp: string
+
+  /**
+   * 入网带宽包峰值,取值范围0.0-xxx.xxx
+   */
+  TrafficMaxIn: number
+
+  /**
+   * 出网带宽包峰值,取值范围0.0-xxx.xxx
+   */
+  TrafficMaxOut: number
+
+  /**
+   * 计费带宽,取值范围0.0-xxx.xxx
+   */
+  FeeTraffic: number
+
+  /**
+   * 月计费带宽起始时间 格式"yyyy-mm-dd HH:mm:ss"
+   */
+  StartTime: string
+
+  /**
+   * 月计费带宽结束时间 格式"yyyy-mm-dd HH:mm:ss"
+   */
+  EndTime: string
+
+  /**
+   * 月计费带宽实际有效天数 整形必须大于等于0
+   */
+  EffectiveDays: number
+
+  /**
+   * 指定月份的实际天数 实例 30
+   */
+  MonthDays: number
+
+  /**
+   * 有效天占比 保留小数点后四位0.2134
+   */
+  EffectiveDaysRate: number
+
+  /**
+   * 计费带宽包类型 实例"Address","LoadBalance","AddressIpv6"
+   */
+  BandwidthPkgType: string
 }
 
 /**

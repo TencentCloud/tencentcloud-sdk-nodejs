@@ -125,7 +125,7 @@ export interface CreateDBInstanceRequest {
   SubnetId?: string
 
   /**
-   * 实例密码，不设置该参数则需要在创建完成后通过设置密码接口初始化实例密码。密码必须是8-16位字符，且至少包含字母、数字和字符 !@#%^*() 中的两种
+   * 实例密码，不设置该参数则默认密码规则为 实例ID+"@"+主账户uin。举例实例id为cmgo-higv73ed，uin为100000001，则默认密码为"cmgo-higv73ed@100000001"。密码必须是8-16位字符，且至少包含字母、数字和字符 !@#%^*() 中的两种
    */
   Password?: string
 
@@ -436,7 +436,7 @@ export interface CreateDBInstanceHourRequest {
   SubnetId?: string
 
   /**
-   * 实例密码，不设置该参数则需要在创建完成后通过设置密码接口初始化实例密码。密码必须是8-16位字符，且至少包含字母、数字和字符 !@#%^*() 中的两种
+   * 实例密码，不设置该参数则默认密码规则为 实例ID+"@"+主账户uin。举例实例id为cmgo-higv73ed，uin为100000001，则默认密码为"cmgo-higv73ed@100000001"。密码必须是8-16位字符，且至少包含字母、数字和字符 !@#%^*() 中的两种
    */
   Password?: string
 
@@ -751,7 +751,7 @@ export interface SpecItem {
   Status: number
 
   /**
-   * 规格有效标志，取值：0-停止售卖，1-开放售卖
+   * 计算资源规格，单位为CPU核心数
    */
   Cpu: number
 
@@ -1104,12 +1104,12 @@ export interface CreateDBInstanceResponse {
   /**
    * 订单ID
    */
-  DealId?: string
+  DealId: string
 
   /**
    * 创建的实例ID列表
    */
-  InstanceIds?: Array<string>
+  InstanceIds: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1382,12 +1382,12 @@ export interface DescribeBackupDownloadTaskRequest {
   BackupName?: string
 
   /**
-   * 指定要查询任务的时间范围，StartTime指定开始时间
+   * 指定要查询任务的时间范围，StartTime指定开始时间，不填默认不限制开始时间
    */
   StartTime?: string
 
   /**
-   * 指定要查询任务的时间范围，StartTime指定结束时间
+   * 指定要查询任务的时间范围，EndTime指定结束时间，不填默认不限制结束时间
    */
   EndTime?: string
 
@@ -1412,7 +1412,7 @@ export interface DescribeBackupDownloadTaskRequest {
   OrderByType?: string
 
   /**
-   * 根据任务状态过滤。0-等待执行，1-正在下载，2-下载完成，3-下载失败，4-等待重试
+   * 根据任务状态过滤。0-等待执行，1-正在下载，2-下载完成，3-下载失败，4-等待重试。不填默认返回所有类型
    */
   Status?: Array<number>
 }
@@ -1876,12 +1876,12 @@ export interface CreateDBInstanceHourResponse {
   /**
    * 订单ID
    */
-  DealId?: string
+  DealId: string
 
   /**
    * 创建的实例ID列表
    */
-  InstanceIds?: Array<string>
+  InstanceIds: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

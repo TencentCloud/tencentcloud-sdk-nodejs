@@ -308,6 +308,16 @@ export interface GroupInfo {
       * 创建时间
       */
     CreateTime?: number;
+    /**
+      * 分组状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GroupStatus?: number;
+    /**
+      * 设备不存在时产生的错误
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Error?: string;
 }
 /**
  * ModifyDeviceData返回参数结构体
@@ -357,6 +367,10 @@ export interface DescribeGroupDevicesRequest {
       * 设备名称，根据设备名称模糊匹配时必填
       */
     NickName?: string;
+    /**
+      * 过滤不可录制设备
+      */
+    Recordable?: number;
 }
 /**
  * GetRecordPlanByDev请求参数结构体
@@ -605,6 +619,11 @@ export interface GroupItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     CreateTime?: number;
+    /**
+      * 分组状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GroupStatus?: number;
 }
 /**
  * DescribeDeviceStreams请求参数结构体
@@ -752,6 +771,11 @@ export interface GroupDeviceItem {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     IsRecord?: number;
+    /**
+      * 该设备是否可录制
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Recordable?: number;
 }
 /**
  * DeleteDeviceGroup请求参数结构体
@@ -893,6 +917,11 @@ export interface AllDeviceInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     IsRecord?: number;
+    /**
+      * 该设备是否可录制
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Recordable?: number;
 }
 /**
  * CreateRecordPlan请求参数结构体
@@ -1152,6 +1181,11 @@ export interface CreateDeviceResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DeviceId: string;
+    /**
+      * 设备虚拟组信息，仅在创建NVR/VMS时返回该值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VirtualGroupId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

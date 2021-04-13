@@ -39,7 +39,7 @@ import {
   DeleteSecurityGroupPoliciesRequest,
   ImageTask,
   Province,
-  ImportCustomImageResponse,
+  DescribeMonthPeakNetworkResponse,
   ModifyModuleConfigResponse,
   NetworkStorageRange,
   ModifyModuleNameResponse,
@@ -60,7 +60,8 @@ import {
   ReleaseAddressesRequest,
   DescribeLoadBalancersRequest,
   DescribeInstancesResponse,
-  NetworkInterface,
+  DescribeMonthPeakNetworkRequest,
+  ImportImageRequest,
   ModifyModuleSecurityGroupsResponse,
   SrcImage,
   SetSecurityGroupForLoadbalancersResponse,
@@ -154,11 +155,13 @@ import {
   DescribeAddressesResponse,
   AssignIpv6AddressesResponse,
   CreateRoutesResponse,
+  NetworkInterface,
   DeleteListenerRequest,
   DescribeSecurityGroupsResponse,
-  ImportImageRequest,
+  ImportCustomImageResponse,
   DetachNetworkInterfaceResponse,
   InstanceFamilyConfig,
+  MonthNetwork,
   ResetRoutesResponse,
   DeleteModuleRequest,
   CreateImageResponse,
@@ -544,13 +547,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改负载均衡实例的属性。
+   * 查询负载均衡实例列表。
    */
-  async ModifyLoadBalancerAttributes(
-    req: ModifyLoadBalancerAttributesRequest,
-    cb?: (error: string, rep: ModifyLoadBalancerAttributesResponse) => void
-  ): Promise<ModifyLoadBalancerAttributesResponse> {
-    return this.request("ModifyLoadBalancerAttributes", req, cb)
+  async DescribeLoadBalancers(
+    req: DescribeLoadBalancersRequest,
+    cb?: (error: string, rep: DescribeLoadBalancersResponse) => void
+  ): Promise<DescribeLoadBalancersResponse> {
+    return this.request("DescribeLoadBalancers", req, cb)
   }
 
   /**
@@ -699,6 +702,16 @@ EIP 如果被封堵，则不能进行解绑定操作。
   }
 
   /**
+   * 修改负载均衡实例的属性。
+   */
+  async ModifyLoadBalancerAttributes(
+    req: ModifyLoadBalancerAttributesRequest,
+    cb?: (error: string, rep: ModifyLoadBalancerAttributesResponse) => void
+  ): Promise<ModifyLoadBalancerAttributesResponse> {
+    return this.request("ModifyLoadBalancerAttributes", req, cb)
+  }
+
+  /**
    * 设置负载均衡实例的安全组。
    */
   async SetLoadBalancerSecurityGroups(
@@ -749,6 +762,16 @@ EIP 如果被封堵，则不能进行解绑定操作。
     cb?: (error: string, rep: AssociateAddressResponse) => void
   ): Promise<AssociateAddressResponse> {
     return this.request("AssociateAddress", req, cb)
+  }
+
+  /**
+   * 修改在一个可用区下创建实例时使用的默认子网（创建实例时，未填写VPC参数时使用的sunbetId）
+   */
+  async ModifyDefaultSubnet(
+    req: ModifyDefaultSubnetRequest,
+    cb?: (error: string, rep: ModifyDefaultSubnetResponse) => void
+  ): Promise<ModifyDefaultSubnetResponse> {
+    return this.request("ModifyDefaultSubnet", req, cb)
   }
 
   /**
@@ -811,6 +834,16 @@ EIP 如果被封堵，则不能进行解绑定操作。
     cb?: (error: string, rep: DescribeImportImageOsResponse) => void
   ): Promise<DescribeImportImageOsResponse> {
     return this.request("DescribeImportImageOs", req, cb)
+  }
+
+  /**
+   * 获取客户节点上的出入带宽月峰和计费带宽信息
+   */
+  async DescribeMonthPeakNetwork(
+    req: DescribeMonthPeakNetworkRequest,
+    cb?: (error: string, rep: DescribeMonthPeakNetworkResponse) => void
+  ): Promise<DescribeMonthPeakNetworkResponse> {
+    return this.request("DescribeMonthPeakNetwork", req, cb)
   }
 
   /**
@@ -922,16 +955,6 @@ EIP 如果被封堵，则不能进行解绑定操作。
     cb?: (error: string, rep: DisableRoutesResponse) => void
   ): Promise<DisableRoutesResponse> {
     return this.request("DisableRoutes", req, cb)
-  }
-
-  /**
-   * 本接口（ModifyIpv6AddressesAttribute）用于修改弹性网卡IPv6地址属性。
-   */
-  async ModifyIpv6AddressesAttribute(
-    req: ModifyIpv6AddressesAttributeRequest,
-    cb?: (error: string, rep: ModifyIpv6AddressesAttributeResponse) => void
-  ): Promise<ModifyIpv6AddressesAttributeResponse> {
-    return this.request("ModifyIpv6AddressesAttribute", req, cb)
   }
 
   /**
@@ -1075,16 +1098,6 @@ EIP 如果被封堵，则不能进行解绑定操作。
   }
 
   /**
-   * 查询负载均衡实例列表。
-   */
-  async DescribeLoadBalancers(
-    req: DescribeLoadBalancersRequest,
-    cb?: (error: string, rep: DescribeLoadBalancersResponse) => void
-  ): Promise<DescribeLoadBalancersResponse> {
-    return this.request("DescribeLoadBalancers", req, cb)
-  }
-
-  /**
    * 本接口(DescribeTaskStatus)用于获取异步任务状态
    */
   async DescribeTaskStatus(
@@ -1175,13 +1188,13 @@ EIP 如果被封堵，则不能进行解绑定操作。
   }
 
   /**
-   * 修改在一个可用区下创建实例时使用的默认子网（创建实例时，未填写VPC参数时使用的sunbetId）
+   * 本接口（ModifyIpv6AddressesAttribute）用于修改弹性网卡IPv6地址属性。
    */
-  async ModifyDefaultSubnet(
-    req: ModifyDefaultSubnetRequest,
-    cb?: (error: string, rep: ModifyDefaultSubnetResponse) => void
-  ): Promise<ModifyDefaultSubnetResponse> {
-    return this.request("ModifyDefaultSubnet", req, cb)
+  async ModifyIpv6AddressesAttribute(
+    req: ModifyIpv6AddressesAttributeRequest,
+    cb?: (error: string, rep: ModifyIpv6AddressesAttributeResponse) => void
+  ): Promise<ModifyIpv6AddressesAttributeResponse> {
+    return this.request("ModifyIpv6AddressesAttribute", req, cb)
   }
 
   /**

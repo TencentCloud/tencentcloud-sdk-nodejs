@@ -138,9 +138,9 @@ it("iotvideo.v20191126.RunIotModel", async function () {
     }
 })
 
-it("iotvideo.v20191126.ModifyDeviceAction", async function () {
+it("iotvideo.v20191126.ModifyDevice", async function () {
     try {
-       const data = await client.ModifyDeviceAction({})
+       const data = await client.ModifyDevice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -221,6 +221,16 @@ it("iotvideo.v20191126.DescribeMessageQueue", async function () {
 it("iotvideo.v20191126.DescribeIotModel", async function () {
     try {
        const data = await client.DescribeIotModel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotvideo.v20191126.ModifyDeviceAction", async function () {
+    try {
+       const data = await client.ModifyDeviceAction({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -4018,6 +4018,10 @@ export interface UpdateClusterVersionRequest {
       */
     DstVersion: string;
     /**
+      * 集群自定义参数
+      */
+    ExtraArgs?: ClusterExtraArgs;
+    /**
       * 可容忍的最大不可用pod数目
       */
     MaxNotReadyPercent?: number;

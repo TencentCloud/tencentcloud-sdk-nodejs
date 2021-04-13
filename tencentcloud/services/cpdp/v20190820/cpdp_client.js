@@ -34,10 +34,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryMemberTransaction", req, cb);
     }
     /**
-     * 银企直连-单笔支付状态查询接口
+     * 智慧零售-发票红冲V2
      */
-    async QuerySinglePay(req, cb) {
-        return this.request("QuerySinglePay", req, cb);
+    async CreateRedInvoiceV2(req, cb) {
+        return this.request("CreateRedInvoiceV2", req, cb);
     }
     /**
      * 跨境-付款人查询
@@ -56,6 +56,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async QueryAnchorContractInfo(req, cb) {
         return this.request("QueryAnchorContractInfo", req, cb);
+    }
+    /**
+     * 智慧零售-发票查询V2
+     */
+    async QueryInvoiceV2(req, cb) {
+        return this.request("QueryInvoiceV2", req, cb);
     }
     /**
      * 商户绑定提现银行卡，每个商户只能绑定一张提现银行卡
@@ -110,10 +116,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeChargeDetail", req, cb);
     }
     /**
-     * 登记挂账(支持撤销)。此接口可实现把不明来账或自有资金等已登记在挂账子账户下的资金调整到普通会员子账户。即通过申请调用此接口，将会减少挂账子账户的资金，调增指定的普通会员子账户的可提现余额及可用余额。此接口不支持把挂账子账户资金清分到功能子账户。
+     * 银企直连-单笔支付状态查询接口
      */
-    async RegisterBillSupportWithdraw(req, cb) {
-        return this.request("RegisterBillSupportWithdraw", req, cb);
+    async QuerySinglePay(req, cb) {
+        return this.request("QuerySinglePay", req, cb);
     }
     /**
      * 会员子账户开立。会员在银行注册，并开立会员子账户，交易网会员代码即会员在平台端系统的会员编号。
@@ -367,6 +373,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("QueryBankTransactionDetails", req, cb);
     }
     /**
+     * 登记挂账(支持撤销)。此接口可实现把不明来账或自有资金等已登记在挂账子账户下的资金调整到普通会员子账户。即通过申请调用此接口，将会减少挂账子账户的资金，调增指定的普通会员子账户的可提现余额及可用余额。此接口不支持把挂账子账户资金清分到功能子账户。
+     */
+    async RegisterBillSupportWithdraw(req, cb) {
+        return this.request("RegisterBillSupportWithdraw", req, cb);
+    }
+    /**
      * 跨境-提交申报材料。申报材料的主体是付款人，需要提前调用【跨境-付款人申请】接口提交付款人信息且审核通过后调用。
      */
     async ApplyApplicationMaterial(req, cb) {
@@ -401,6 +413,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async MigrateOrderRefund(req, cb) {
         return this.request("MigrateOrderRefund", req, cb);
+    }
+    /**
+     * 智慧零售-发票开具V2
+     */
+    async CreateInvoiceV2(req, cb) {
+        return this.request("CreateInvoiceV2", req, cb);
     }
     /**
      * 会员在途充值(经第三方支付渠道)接口

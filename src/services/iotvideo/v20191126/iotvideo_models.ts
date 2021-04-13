@@ -2221,6 +2221,36 @@ export interface RunDeviceRequest {
 }
 
 /**
+ * RunOtaVersion返回参数结构体
+ */
+export interface RunOtaVersionResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyDevice请求参数结构体
+ */
+export interface ModifyDeviceRequest {
+  /**
+   * 设备ID
+   */
+  Tid: string
+
+  /**
+   * 用户ID
+   */
+  AccessId: string
+
+  /**
+   * 设备昵称
+   */
+  Nick: string
+}
+
+/**
  * DescribeDeviceModel返回参数结构体
  */
 export interface DescribeDeviceModelResponse {
@@ -2569,9 +2599,9 @@ export interface RunDeviceStreamResponse {
 }
 
 /**
- * RunOtaVersion返回参数结构体
+ * ModifyDevice返回参数结构体
  */
-export interface RunOtaVersionResponse {
+export interface ModifyDeviceResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

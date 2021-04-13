@@ -491,9 +491,9 @@ export interface ModifyIp6RuleResponse {
 }
 
 /**
- * ModifyNetworkAclAttribute返回参数结构体
+ * ModifyCcnRegionBandwidthLimitsType返回参数结构体
  */
-export interface ModifyNetworkAclAttributeResponse {
+export interface ModifyCcnRegionBandwidthLimitsTypeResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -678,6 +678,27 @@ export interface ModifyNatGatewayAttributeRequest {
    * NAT网关绑定的安全组列表，最终状态，空列表表示删除所有安全组，形如: `['sg-1n232323', 'sg-o4242424']`
    */
   SecurityGroupIds?: Array<string>
+}
+
+/**
+ * DescribeLocalGateway请求参数结构体
+ */
+export interface DescribeLocalGatewayRequest {
+  /**
+      * 查询条件：
+vpc-id：按照VPCID过滤，local-gateway-name：按照本地网关名称过滤，名称支持模糊搜索，local-gateway-id：按照本地网关实例ID过滤，cdc-id：按照cdc实例ID过滤查询。
+      */
+  Filters?: Array<Filter>
+
+  /**
+   * 偏移量，默认为0。关于`Offset`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/11646)中的相关小节。
+   */
+  Offset?: number
+
+  /**
+   * 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/11646)中的相关小节。
+   */
+  Limit?: number
 }
 
 /**
@@ -2386,6 +2407,16 @@ export interface DescribeNatGatewayDestinationIpPortTranslationNatRulesRequest {
 }
 
 /**
+ * ModifyNetworkAclAttribute返回参数结构体
+ */
+export interface ModifyNetworkAclAttributeResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AddBandwidthPackageResources返回参数结构体
  */
 export interface AddBandwidthPackageResourcesResponse {
@@ -2463,6 +2494,26 @@ export interface ModifyIp6AddressesBandwidthRequest {
    * IPV6地址对应的唯一ID，形如eip-xxxxxxxx。Ip6Addresses和Ip6AddressId必须且只能传一个
    */
   Ip6AddressIds?: Array<string>
+}
+
+/**
+ * CreateLocalGateway请求参数结构体
+ */
+export interface CreateLocalGatewayRequest {
+  /**
+   * 本地网关名称
+   */
+  LocalGatewayName: string
+
+  /**
+   * VPC实例ID
+   */
+  VpcId: string
+
+  /**
+   * CDC实例ID
+   */
+  CdcId: string
 }
 
 /**
@@ -2611,6 +2662,21 @@ export interface ResetNatGatewayConnectionRequest {
 }
 
 /**
+ * ModifyCcnAttachedInstancesAttribute请求参数结构体
+ */
+export interface ModifyCcnAttachedInstancesAttributeRequest {
+  /**
+   * CCN实例ID。形如：ccn-f49l6u0z。
+   */
+  CcnId: string
+
+  /**
+   * 关联网络实例列表
+   */
+  Instances: Array<CcnInstance>
+}
+
+/**
  * DeleteAddressTemplate请求参数结构体
  */
 export interface DeleteAddressTemplateRequest {
@@ -2730,6 +2796,12 @@ export interface NetworkInterface {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Business: string
+
+  /**
+      * 网卡所关联的CDC实例ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CdcId: string
 }
 
 /**
@@ -3943,7 +4015,7 @@ export interface CreateSubnetResponse {
   /**
    * 子网对象。
    */
-  Subnet?: Subnet
+  Subnet: Subnet
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4256,7 +4328,7 @@ export interface CreateSubnetsResponse {
   /**
    * 新创建的子网列表。
    */
-  SubnetSet?: Array<Subnet>
+  SubnetSet: Array<Subnet>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5331,6 +5403,11 @@ export interface CreateSubnetsRequest {
    * 指定绑定的标签列表，注意这里的标签集合为列表中所有子网对象所共享，不能为每个子网对象单独指定标签，例如：[{"Key": "city", "Value": "shanghai"}]
    */
   Tags?: Array<Tag>
+
+  /**
+   * 需要增加到的CDC实例ID。
+   */
+  CdcId?: string
 }
 
 /**
@@ -5369,9 +5446,9 @@ export interface AssociateAddressResponse {
 }
 
 /**
- * ResetVpnConnection返回参数结构体
+ * ModifyCcnAttachedInstancesAttribute返回参数结构体
  */
-export interface ResetVpnConnectionResponse {
+export interface ModifyCcnAttachedInstancesAttributeResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6216,6 +6293,11 @@ export interface CcnAttachedInstance {
    * 关联实例所属的大地域，如: CHINA_MAINLAND
    */
   InstanceArea: string
+
+  /**
+   * 备注
+   */
+  Description: string
 }
 
 /**
@@ -6231,6 +6313,16 @@ export interface SecurityPolicyDatabase {
    * 对端网段
    */
   RemoteCidrBlock: Array<string>
+}
+
+/**
+ * ResetVpnConnection返回参数结构体
+ */
+export interface ResetVpnConnectionResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6537,6 +6629,11 @@ export interface CreateSubnetRequest {
    * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]
    */
   Tags?: Array<Tag>
+
+  /**
+   * CDC实例ID。
+   */
+  CdcId?: string
 }
 
 /**
@@ -6682,13 +6779,38 @@ export interface ModifyAddressesBandwidthResponse {
 }
 
 /**
- * ModifyCcnRegionBandwidthLimitsType返回参数结构体
+ * 本地网关信息
  */
-export interface ModifyCcnRegionBandwidthLimitsTypeResponse {
+export interface LocalGateway {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * CDC实例ID
    */
-  RequestId?: string
+  CdcId: string
+
+  /**
+   * VPC实例ID
+   */
+  VpcId: string
+
+  /**
+   * 本地网关实例ID
+   */
+  UniqLocalGwId: string
+
+  /**
+   * 本地网关名称
+   */
+  LocalGatewayName: string
+
+  /**
+   * 本地网关IP地址
+   */
+  LocalGwIp: string
+
+  /**
+   * 本地网关创建时间
+   */
+  CreateTime: string
 }
 
 /**
@@ -7332,6 +7454,31 @@ export interface CcnInstance {
 <li>`VPNGW`：VPNGW类型</li>
       */
   InstanceType?: string
+
+  /**
+   * 备注
+   */
+  Description?: string
+}
+
+/**
+ * DescribeLocalGateway返回参数结构体
+ */
+export interface DescribeLocalGatewayResponse {
+  /**
+   * 本地网关信息集合
+   */
+  LocalGatewaySet: Array<LocalGateway>
+
+  /**
+   * 本地网关总数
+   */
+  TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8166,6 +8313,26 @@ export interface RenewAddressesRequest {
 }
 
 /**
+ * DeleteLocalGateway请求参数结构体
+ */
+export interface DeleteLocalGatewayRequest {
+  /**
+   * 本地网关实例ID
+   */
+  LocalGatewayId: string
+
+  /**
+   * CDC实例ID
+   */
+  CdcId: string
+
+  /**
+   * VPC实例ID
+   */
+  VpcId?: string
+}
+
+/**
  * ModifyAddressAttribute请求参数结构体
  */
 export interface ModifyAddressAttributeRequest {
@@ -8315,6 +8482,16 @@ export interface DeleteCcnRequest {
    * CCN实例ID。形如：ccn-f49l6u0z。
    */
   CcnId: string
+}
+
+/**
+ * ModifyLocalGateway返回参数结构体
+ */
+export interface ModifyLocalGatewayResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9582,9 +9759,44 @@ export interface DeleteAddressTemplateGroupResponse {
  */
 export interface ReplaceRoutesResponse {
   /**
+   * 原路由策略信息。
+   */
+  OldRouteSet: Array<Route>
+
+  /**
+   * 修改后的路由策略信息。
+   */
+  NewRouteSet: Array<Route>
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyLocalGateway请求参数结构体
+ */
+export interface ModifyLocalGatewayRequest {
+  /**
+   * 本地网关名称
+   */
+  LocalGatewayName: string
+
+  /**
+   * CDC实例ID
+   */
+  CdcId: string
+
+  /**
+   * 本地网关实例ID
+   */
+  LocalGatewayId: string
+
+  /**
+   * VPC实例ID
+   */
+  VpcId?: string
 }
 
 /**
@@ -9615,6 +9827,21 @@ export interface DeleteHaVipRequest {
    * `HAVIP`唯一`ID`，形如：`havip-9o233uri`。
    */
   HaVipId: string
+}
+
+/**
+ * CreateLocalGateway返回参数结构体
+ */
+export interface CreateLocalGatewayResponse {
+  /**
+   * 本地网关信息
+   */
+  LocalGateway: LocalGateway
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9968,12 +10195,12 @@ export interface CreateRoutesResponse {
   /**
    * 新增的实例个数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 路由表对象。
    */
-  RouteTableSet?: Array<RouteTable>
+  RouteTableSet: Array<RouteTable>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -10298,6 +10525,18 @@ export interface Subnet {
    * 标签键值对。
    */
   TagSet: Array<Tag>
+
+  /**
+      * CDC实例ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CdcId: string
+
+  /**
+      * 是否是CDC所属子网。0:否 1:是
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsCdcSubnet: number
 }
 
 /**
@@ -10546,6 +10785,16 @@ export interface ClassicLinkInstance {
    * 云服务器实例唯一ID
    */
   InstanceId: string
+}
+
+/**
+ * DeleteLocalGateway返回参数结构体
+ */
+export interface DeleteLocalGatewayResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11416,7 +11665,8 @@ SSLVPN：sslvpn网关；
 NAT：NAT网关; 
 NORMAL_CVM：普通云服务器；
 EIP：云服务器的公网IP；
-CCN：云联网。
+CCN：云联网；
+LOCAL_GATEWAY：本地网关。
       */
   GatewayType: string
 

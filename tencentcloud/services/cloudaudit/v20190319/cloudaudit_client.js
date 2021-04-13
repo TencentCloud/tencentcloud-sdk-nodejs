@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAudit", req, cb);
     }
     /**
+     * 查询云审计日志
+     */
+    async DescribeEvents(req, cb) {
+        return this.request("DescribeEvents", req, cb);
+    }
+    /**
      * 关闭跟踪集
      */
     async StopLogging(req, cb) {

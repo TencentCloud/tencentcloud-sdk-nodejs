@@ -56,7 +56,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeExclusiveClusters(req: DescribeExclusiveClustersRequest, cb?: (error: string, rep: DescribeExclusiveClustersResponse) => void): Promise<DescribeExclusiveClustersResponse>;
     /**
-     * 增加、删除、更新负载均衡的日志服务(CLS)主题
+     * 增加、删除、更新负载均衡的日志服务(CLS)主题。
      */
     SetLoadBalancerClsLog(req: SetLoadBalancerClsLogRequest, cb?: (error: string, rep: SetLoadBalancerClsLogResponse) => void): Promise<SetLoadBalancerClsLogResponse>;
     /**

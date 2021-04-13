@@ -145,6 +145,7 @@ export { tkgdq } from "./tkgdq";
 export { tms } from "./tms";
 export { tmt } from "./tmt";
 export { trtc } from "./trtc";
+export { tse } from "./tse";
 export { tsf } from "./tsf";
 export { tsw } from "./tsw";
 export { tts } from "./tts";

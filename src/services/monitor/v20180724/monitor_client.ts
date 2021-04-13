@@ -317,7 +317,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 编辑告警策略触发条件
+   * 修改告警策略触发条件
    */
   async ModifyAlarmPolicyCondition(
     req: ModifyAlarmPolicyConditionRequest,

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeRechargeRecordsResponse, UploadOtaVersionResponse, CreateGencodeResponse, DescribeLogsRequest, CreateIotDataTypeRequest, DescribePubVersionsRequest, RefundStorageServiceResponse, DescribeIotModelResponse, DisableDeviceResponse, DescribeRunLogRequest, DescribeProductsRequest, DeleteTraceIdsRequest, CreateStorageServiceRequest, DescribeOsListResponse, ModifyProductResponse, ModifyProductRequest, DisableDeviceStreamRequest, CreateIotModelRequest, DescribeTraceStatusResponse, CreateUploadPathRequest, CreateDevTokenRequest, DescribeStorageServiceResponse, DeleteIotDataTypeRequest, DescribeRechargeRecordsRequest, ModifyVerContentResponse, DescribeMessageQueueRequest, DeleteAppUsrResponse, DescribeRegistrationStatusResponse, DescribeProductRequest, DescribeProductsResponse, UpgradeDeviceRequest, DescribeModelDataRetResponse, CreateDevTokenResponse, RunIotModelResponse, RunIotModelRequest, DeleteProductRequest, DescribeBindUsrResponse, DescribeStreamRequest, DeleteOtaVersionRequest, DescribeIotDataTypeResponse, CreateBindingRequest, DeleteDeviceRequest, CreateAppUsrRequest, ModifyDevicePropertyRequest, RunDeviceStreamRequest, RunDeviceResponse, DeleteIotDataTypeResponse, DescribeTraceStatusRequest, CreateUsrTokenResponse, CreateTraceIdsRequest, DeleteMessageQueueResponse, DescribeOtaVersionsRequest, DescribeTraceIdsResponse, ClearDeviceActiveCodeResponse, CreateProductResponse, DescribeRegistrationStatusRequest, CreateStorageRequest, UpgradeDeviceResponse, DisableOtaVersionResponse, DescribeBindDevResponse, CreateProductRequest, RunTestOtaVersionResponse, RunTestOtaVersionRequest, DescribeDeviceResponse, SetMessageQueueResponse, DeleteOtaVersionResponse, UploadOtaVersionRequest, DescribeIotModelsRequest, DescribeModelDataRetRequest, CreateTraceIdsResponse, DescribeDevicesResponse, ModifyVerContentRequest, DeleteBindingRequest, DescribeOtaVersionsResponse, DeleteProductResponse, RunOtaVersionRequest, CreateDevicesResponse, SetMessageQueueRequest, CreateStorageServiceResponse, DescribeIotDataTypeRequest, SendOnlineMsgRequest, DescribeDeviceRequest, DescribeRunLogResponse, DeliverStorageServiceResponse, DescribeIotModelRequest, DescribeTraceIdsRequest, CreateAppUsrResponse, DeleteTraceIdsResponse, DeleteMessageQueueRequest, CreateUsrTokenRequest, RunDeviceRequest, DescribeDeviceModelResponse, DescribeStorageServiceRequest, CreateGencodeRequest, DescribePubVersionsResponse, ClearDeviceActiveCodeRequest, ModifyDeviceActionRequest, CreateIotModelResponse, DescribeBindDevRequest, CreateAnonymousAccessTokenRequest, DeliverStorageServiceRequest, RunDeviceStreamResponse, RunOtaVersionResponse, DescribeDeviceModelRequest, DescribeLogsResponse, ModifyDeviceActionResponse, CreateBindingResponse, DescribeAccountBalanceRequest, CreateDevicesRequest, DisableDeviceRequest, DescribeStreamResponse, DescribeAccountBalanceResponse, DisableOtaVersionRequest, DescribeProductResponse, CreateAnonymousAccessTokenResponse, DescribeBindUsrRequest, SendOnlineMsgResponse, DeleteAppUsrRequest, DescribeIotModelsResponse, DescribeMessageQueueResponse, DescribeOsListRequest, DescribeDevicesRequest, CreateIotDataTypeResponse, ModifyDevicePropertyResponse, DeleteBindingResponse, RefundStorageServiceRequest, CreateStorageResponse, DisableDeviceStreamResponse, DeleteDeviceResponse, CreateUploadPathResponse } from "./iotvideo_models";
+import { DescribeRechargeRecordsResponse, UploadOtaVersionResponse, CreateGencodeResponse, DescribeLogsRequest, CreateIotDataTypeRequest, DescribePubVersionsRequest, RefundStorageServiceResponse, DescribeIotModelResponse, DisableDeviceResponse, DescribeRunLogRequest, DescribeProductsRequest, DeleteTraceIdsRequest, CreateStorageServiceRequest, DescribeOsListResponse, ModifyProductResponse, ModifyProductRequest, DisableDeviceStreamRequest, CreateIotModelRequest, DescribeTraceStatusResponse, CreateUploadPathRequest, CreateDevTokenRequest, DescribeStorageServiceResponse, DeleteIotDataTypeRequest, DescribeRechargeRecordsRequest, ModifyVerContentResponse, DescribeMessageQueueRequest, DeleteAppUsrResponse, DescribeRegistrationStatusResponse, DescribeProductRequest, DescribeProductsResponse, UpgradeDeviceRequest, DescribeModelDataRetResponse, CreateDevTokenResponse, RunIotModelResponse, RunIotModelRequest, DeleteProductRequest, DescribeBindUsrResponse, DescribeStreamRequest, DeleteOtaVersionRequest, DescribeIotDataTypeResponse, CreateBindingRequest, DeleteDeviceRequest, CreateAppUsrRequest, ModifyDevicePropertyRequest, RunDeviceStreamRequest, RunDeviceResponse, DeleteIotDataTypeResponse, DescribeTraceStatusRequest, CreateUsrTokenResponse, CreateTraceIdsRequest, DeleteMessageQueueResponse, DescribeOtaVersionsRequest, DescribeTraceIdsResponse, ClearDeviceActiveCodeResponse, CreateProductResponse, DescribeRegistrationStatusRequest, CreateStorageRequest, UpgradeDeviceResponse, DisableOtaVersionResponse, DescribeBindDevResponse, CreateProductRequest, RunTestOtaVersionResponse, RunTestOtaVersionRequest, DescribeDeviceResponse, SetMessageQueueResponse, DeleteOtaVersionResponse, UploadOtaVersionRequest, DescribeIotModelsRequest, DescribeModelDataRetRequest, CreateTraceIdsResponse, DescribeDevicesResponse, ModifyVerContentRequest, DeleteBindingRequest, DescribeOtaVersionsResponse, DeleteProductResponse, RunOtaVersionRequest, CreateDevicesResponse, SetMessageQueueRequest, CreateStorageServiceResponse, DescribeIotDataTypeRequest, SendOnlineMsgRequest, DescribeDeviceRequest, DescribeRunLogResponse, DeliverStorageServiceResponse, DescribeIotModelRequest, DescribeTraceIdsRequest, CreateAppUsrResponse, DeleteTraceIdsResponse, DeleteMessageQueueRequest, CreateUsrTokenRequest, RunDeviceRequest, RunOtaVersionResponse, ModifyDeviceRequest, DescribeDeviceModelResponse, DescribeStorageServiceRequest, CreateGencodeRequest, DescribePubVersionsResponse, ClearDeviceActiveCodeRequest, ModifyDeviceActionRequest, CreateIotModelResponse, DescribeBindDevRequest, CreateAnonymousAccessTokenRequest, DeliverStorageServiceRequest, RunDeviceStreamResponse, ModifyDeviceResponse, DescribeDeviceModelRequest, DescribeLogsResponse, ModifyDeviceActionResponse, CreateBindingResponse, DescribeAccountBalanceRequest, CreateDevicesRequest, DisableDeviceRequest, DescribeStreamResponse, DescribeAccountBalanceResponse, DisableOtaVersionRequest, DescribeProductResponse, CreateAnonymousAccessTokenResponse, DescribeBindUsrRequest, SendOnlineMsgResponse, DeleteAppUsrRequest, DescribeIotModelsResponse, DescribeMessageQueueResponse, DescribeOsListRequest, DescribeDevicesRequest, CreateIotDataTypeResponse, ModifyDevicePropertyResponse, DeleteBindingResponse, RefundStorageServiceRequest, CreateStorageResponse, DisableDeviceStreamResponse, DeleteDeviceResponse, CreateUploadPathResponse } from "./iotvideo_models";
 /**
  * iotvideo client
  * @class
@@ -59,15 +59,9 @@ export declare class Client extends AbstractClient {
      */
     RunIotModel(req: RunIotModelRequest, cb?: (error: string, rep: RunIotModelResponse) => void): Promise<RunIotModelResponse>;
     /**
-     * 本接口（ModifyDeviceAction）用于修改设备物模型的行为（Action）。
-
-可对ctlVal数据属性进行写入,如:Action.takePhoto.ctlVal,设备在线且成功发送到设备才返回,物模型写入数据时,不需要传入时标信息,平台以当前时标作为数据的时标更新物模型中的时标信息。
-注意:
-  1.若设备当前不在线,会直接返回错误
-  2.若设备网络出现异常时,消息发送可能超时,超时等待最长时间为3秒
-  3.value的内容必须与实际物模型的定义一致
+     * 修改设备信息
      */
-    ModifyDeviceAction(req: ModifyDeviceActionRequest, cb?: (error: string, rep: ModifyDeviceActionResponse) => void): Promise<ModifyDeviceActionResponse>;
+    ModifyDevice(req: ModifyDeviceRequest, cb?: (error: string, rep: ModifyDeviceResponse) => void): Promise<ModifyDeviceResponse>;
     /**
      * 本接口（CreateIotDataType）用于创建自定义物模型数据类型。
      */
@@ -102,6 +96,16 @@ export declare class Client extends AbstractClient {
      * 本接口（DescribeIotModel）用于获取物模型定义详情。
      */
     DescribeIotModel(req: DescribeIotModelRequest, cb?: (error: string, rep: DescribeIotModelResponse) => void): Promise<DescribeIotModelResponse>;
+    /**
+     * 本接口（ModifyDeviceAction）用于修改设备物模型的行为（Action）。
+
+可对ctlVal数据属性进行写入,如:Action.takePhoto.ctlVal,设备在线且成功发送到设备才返回,物模型写入数据时,不需要传入时标信息,平台以当前时标作为数据的时标更新物模型中的时标信息。
+注意:
+  1.若设备当前不在线,会直接返回错误
+  2.若设备网络出现异常时,消息发送可能超时,超时等待最长时间为3秒
+  3.value的内容必须与实际物模型的定义一致
+     */
+    ModifyDeviceAction(req: ModifyDeviceActionRequest, cb?: (error: string, rep: ModifyDeviceActionResponse) => void): Promise<ModifyDeviceActionResponse>;
     /**
      * 本接口（DescribeProducts）用于列出用户账号下的物联网智能视频产品列表。
      */

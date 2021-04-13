@@ -110,7 +110,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePolicyConditionList", req, cb);
     }
     /**
-     * 编辑告警策略触发条件
+     * 修改告警策略触发条件
      */
     async ModifyAlarmPolicyCondition(req, cb) {
         return this.request("ModifyAlarmPolicyCondition", req, cb);

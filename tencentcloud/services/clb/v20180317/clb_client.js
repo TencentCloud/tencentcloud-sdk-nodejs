@@ -98,7 +98,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeExclusiveClusters", req, cb);
     }
     /**
-     * 增加、删除、更新负载均衡的日志服务(CLS)主题
+     * 增加、删除、更新负载均衡的日志服务(CLS)主题。
      */
     async SetLoadBalancerClsLog(req, cb) {
         return this.request("SetLoadBalancerClsLog", req, cb);

@@ -374,7 +374,7 @@ export interface DescribeCommandsRequest {
       */
     CommandIds?: Array<string>;
     /**
-      * 过滤条件。<br> <li> command-id - String - 是否必填：否 -（过滤条件）按照命令ID过滤。<br> <li> command-name - String - 是否必填：否 -（过滤条件）按照命令名称过滤。 <br>每次请求的 `Filters` 的上限为10， `Filter.Values` 的上限为5。参数不支持同时指定 `CommandIds` 和 `Filters` 。
+      * 过滤条件。<br> <li> command-id - String - 是否必填：否 -（过滤条件）按照命令ID过滤。<br> <li> command-name - String - 是否必填：否 -（过滤条件）按照命令名称过滤。<br> <li> created-by - String - 是否必填：否 -（过滤条件）按照命令创建者过滤，取值为 TAT 或 USER，TAT 代表公共命令，USER 代表由用户创建的命令。 <br>每次请求的 `Filters` 的上限为10， `Filter.Values` 的上限为5。参数不支持同时指定 `CommandIds` 和 `Filters` 。
       */
     Filters?: Array<Filter>;
     /**
@@ -536,6 +536,14 @@ export interface Command {
       * 自定义参数的默认取值。
       */
     DefaultParameters: string;
+    /**
+      * 命令的结构化描述。公共命令有值，用户命令为空字符串。
+      */
+    FormattedDescription: string;
+    /**
+      * 命令创建者。TAT 代表公共命令，USER 代表个人命令。
+      */
+    CreatedBy: string;
 }
 /**
  * 执行任务。

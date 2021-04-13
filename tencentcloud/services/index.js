@@ -294,6 +294,8 @@ var tmt_1 = require("./tmt");
 Object.defineProperty(exports, "tmt", { enumerable: true, get: function () { return tmt_1.tmt; } });
 var trtc_1 = require("./trtc");
 Object.defineProperty(exports, "trtc", { enumerable: true, get: function () { return trtc_1.trtc; } });
+var tse_1 = require("./tse");
+Object.defineProperty(exports, "tse", { enumerable: true, get: function () { return tse_1.tse; } });
 var tsf_1 = require("./tsf");
 Object.defineProperty(exports, "tsf", { enumerable: true, get: function () { return tsf_1.tsf; } });
 var tsw_1 = require("./tsw");

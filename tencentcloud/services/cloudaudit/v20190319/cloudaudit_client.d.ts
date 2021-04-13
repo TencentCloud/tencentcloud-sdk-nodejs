@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { InquireAuditCreditResponse, StopLoggingRequest, GetAttributeKeyRequest, DeleteAuditResponse, UpdateAuditRequest, InquireAuditCreditRequest, ListCosEnableRegionResponse, LookUpEventsRequest, StartLoggingRequest, CreateAuditResponse, StartLoggingResponse, ListCosEnableRegionRequest, ListKeyAliasByRegionResponse, ListAuditsRequest, StopLoggingResponse, ListAuditsResponse, UpdateAuditResponse, DescribeAuditRequest, ListKeyAliasByRegionRequest, CreateAuditRequest, DeleteAuditRequest, ListCmqEnableRegionRequest, GetAttributeKeyResponse, ListCmqEnableRegionResponse, LookUpEventsResponse, DescribeAuditResponse } from "./cloudaudit_models";
+import { InquireAuditCreditResponse, StopLoggingRequest, GetAttributeKeyRequest, DeleteAuditResponse, UpdateAuditRequest, InquireAuditCreditRequest, DescribeEventsResponse, ListCosEnableRegionResponse, LookUpEventsRequest, StartLoggingRequest, CreateAuditResponse, StartLoggingResponse, ListCosEnableRegionRequest, ListKeyAliasByRegionResponse, ListAuditsRequest, StopLoggingResponse, ListAuditsResponse, DescribeEventsRequest, UpdateAuditResponse, DescribeAuditRequest, ListKeyAliasByRegionRequest, CreateAuditRequest, DeleteAuditRequest, ListCmqEnableRegionRequest, GetAttributeKeyResponse, ListCmqEnableRegionResponse, LookUpEventsResponse, DescribeAuditResponse } from "./cloudaudit_models";
 /**
  * cloudaudit client
  * @class
@@ -23,6 +23,10 @@ export declare class Client extends AbstractClient {
      * 删除跟踪集
      */
     DeleteAudit(req: DeleteAuditRequest, cb?: (error: string, rep: DeleteAuditResponse) => void): Promise<DeleteAuditResponse>;
+    /**
+     * 查询云审计日志
+     */
+    DescribeEvents(req: DescribeEventsRequest, cb?: (error: string, rep: DescribeEventsResponse) => void): Promise<DescribeEventsResponse>;
     /**
      * 关闭跟踪集
      */

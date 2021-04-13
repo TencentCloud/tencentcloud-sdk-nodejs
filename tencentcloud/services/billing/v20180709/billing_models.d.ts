@@ -1021,7 +1021,55 @@ export interface DescribeAccountBalanceResponse {
     /**
       * 云账户信息中的”展示可用余额”字段，单位为"分"
       */
-    Balance?: number;
+    Balance: number;
+    /**
+      * 查询的用户Uin
+      */
+    Uin: number;
+    /**
+      * 当前真实可用余额
+      */
+    RealBalance: number;
+    /**
+      * 现金账户余额
+      */
+    CashAccountBalance: number;
+    /**
+      * 收益转入账户余额
+      */
+    IncomeIntoAccountBalance: number;
+    /**
+      * 赠送账户余额
+      */
+    PresentAccountBalance: number;
+    /**
+      * 冻结金额
+      */
+    FreezeAmount: number;
+    /**
+      * 欠费金额
+      */
+    OweAmount: number;
+    /**
+      * 是否允许欠费消费
+      */
+    IsAllowArrears: boolean;
+    /**
+      * 是否限制信用额度
+      */
+    IsCreditLimited: boolean;
+    /**
+      * 信用额度
+      */
+    CreditAmount: number;
+    /**
+      * 可用信用额度
+      */
+    CreditBalance: number;
+    /**
+      * 真实可用信用额度
+      */
+    RealCreditBalance: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
