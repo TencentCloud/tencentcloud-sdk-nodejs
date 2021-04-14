@@ -28,9 +28,19 @@ it("oceanus.v20190422.StopJobs", async function () {
     }
 })
 
-it("oceanus.v20190422.DeleteTableConfig", async function () {
+it("oceanus.v20190422.DescribeResources", async function () {
     try {
-       const data = await client.DeleteTableConfig({})
+       const data = await client.DescribeResources({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("oceanus.v20190422.CreateJob", async function () {
+    try {
+       const data = await client.CreateJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,9 +58,29 @@ it("oceanus.v20190422.CreateResource", async function () {
     }
 })
 
+it("oceanus.v20190422.DescribeResourceRelatedJobs", async function () {
+    try {
+       const data = await client.DescribeResourceRelatedJobs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("oceanus.v20190422.RunJobs", async function () {
     try {
        const data = await client.RunJobs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("oceanus.v20190422.DeleteResources", async function () {
+    try {
+       const data = await client.DeleteResources({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,6 +108,16 @@ it("oceanus.v20190422.DescribeSystemResources", async function () {
     }
 })
 
+it("oceanus.v20190422.DeleteResourceConfigs", async function () {
+    try {
+       const data = await client.DeleteResourceConfigs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("oceanus.v20190422.CreateResourceConfig", async function () {
     try {
        const data = await client.CreateResourceConfig({})
@@ -98,9 +138,19 @@ it("oceanus.v20190422.CreateJobConfig", async function () {
     }
 })
 
-it("oceanus.v20190422.CreateJob", async function () {
+it("oceanus.v20190422.DeleteTableConfig", async function () {
     try {
-       const data = await client.CreateJob({})
+       const data = await client.DeleteTableConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("oceanus.v20190422.DescribeResourceConfigs", async function () {
+    try {
+       const data = await client.DescribeResourceConfigs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

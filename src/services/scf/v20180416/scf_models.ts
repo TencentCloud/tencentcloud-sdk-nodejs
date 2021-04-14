@@ -1920,7 +1920,7 @@ export interface InvokeResponse {
   /**
    * 函数执行结果
    */
-  Result?: Result
+  Result: Result
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1943,7 +1943,7 @@ export interface InvokeRequest {
   InvocationType?: string
 
   /**
-   * 触发函数的版本号
+   * 触发函数的版本号或别名
    */
   Qualifier?: string
 
@@ -1953,7 +1953,7 @@ export interface InvokeRequest {
   ClientContext?: string
 
   /**
-   * 同步调用时指定该字段，返回值会包含4K的日志，可选值为None和Tail，默认值为None。当该值为Tail时，返回参数中的logMsg字段会包含对应的函数执行日志
+   * 同步调用时指定该字段，返回值会包含4K的日志，可选值为None和Tail，默认值为None。当该值为Tail时，返回参数中的Log字段会包含对应的函数执行日志
    */
   LogType?: string
 

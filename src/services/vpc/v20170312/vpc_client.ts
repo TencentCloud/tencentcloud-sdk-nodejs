@@ -37,7 +37,7 @@ import {
   ReleaseIp6AddressesBandwidthResponse,
   DescribeVpcIpv6AddressesRequest,
   SourceIpTranslationNatRule,
-  DescribeCustomerGatewaysRequest,
+  DisableCcnRoutesRequest,
   ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse,
   ModifyIp6RuleResponse,
   ModifyCcnRegionBandwidthLimitsTypeResponse,
@@ -47,6 +47,7 @@ import {
   DescribeIpGeolocationInfosRequest,
   CreateDefaultSecurityGroupRequest,
   DescribeServiceTemplateGroupsResponse,
+  DescribeVpcEndPointRequest,
   DetachClassicLinkVpcRequest,
   DescribeBandwidthPackageBillUsageResponse,
   DeleteBandwidthPackageResponse,
@@ -71,11 +72,14 @@ import {
   CloneSecurityGroupRequest,
   AssociateNatGatewayAddressRequest,
   CreateDirectConnectGatewayRequest,
+  CreateVpcEndPointRequest,
   ModifyBandwidthPackageAttributeRequest,
   TransformAddressResponse,
   DisassociateNetworkInterfaceSecurityGroupsRequest,
   SecurityGroupPolicySet,
   ModifyFlowLogAttributeRequest,
+  UnassignIpv6SubnetCidrBlockResponse,
+  ModifyVpcEndPointServiceAttributeRequest,
   FilterObject,
   DescribeIpGeolocationInfosResponse,
   AssociateNetworkAclSubnetsResponse,
@@ -86,6 +90,8 @@ import {
   RouteTableAssociation,
   ModifyCustomerGatewayAttributeRequest,
   DescribeRouteTablesResponse,
+  DeleteVpcEndPointServiceWhiteListRequest,
+  DeleteVpcEndPointServiceRequest,
   DeleteCcnResponse,
   ServiceTemplate,
   DescribeCcnAttachedInstancesRequest,
@@ -94,7 +100,9 @@ import {
   ModifyFlowLogAttributeResponse,
   DescribeBandwidthPackagesResponse,
   DescribeDirectConnectGatewaysRequest,
+  DisassociateVpcEndPointSecurityGroupsRequest,
   ModifyIp6TranslatorResponse,
+  CreateVpcEndPointServiceWhiteListResponse,
   DescribeIpGeolocationDatabaseUrlResponse,
   DeleteIp6TranslatorsResponse,
   DescribeNatGatewaySourceIpTranslationNatRulesResponse,
@@ -109,9 +117,10 @@ import {
   DescribeTaskResultRequest,
   ModifyAddressInternetChargeTypeResponse,
   UnassignIpv6SubnetCidrBlockRequest,
-  ModifyVpcAttributeRequest,
+  DeleteVpcEndPointServiceResponse,
   AssignIpv6CidrBlockRequest,
   CreateSecurityGroupPoliciesResponse,
+  UnassignIpv6CidrBlockResponse,
   HaVipAssociateAddressIpRequest,
   DisassociateNatGatewayAddressResponse,
   DeleteRoutesResponse,
@@ -120,7 +129,9 @@ import {
   ModifyAssistantCidrResponse,
   CidrForCcn,
   NatGatewayAddress,
+  DescribeVpcEndPointServiceResponse,
   ModifyNetworkAclEntriesResponse,
+  ModifyVpcEndPointAttributeResponse,
   DescribeFlowLogRequest,
   DescribeIp6AddressesRequest,
   AddIp6RulesRequest,
@@ -160,7 +171,7 @@ import {
   DescribeNetDetectStatesRequest,
   DescribeNatGatewaysResponse,
   DescribeFlowLogResponse,
-  HaVipAssociateAddressIpResponse,
+  DownloadCustomerGatewayConfigurationResponse,
   DescribeBandwidthPackagesRequest,
   DeleteDirectConnectGatewayCcnRoutesResponse,
   DescribeAssistantCidrResponse,
@@ -200,7 +211,7 @@ import {
   DescribeSecurityGroupPoliciesResponse,
   DescribeGatewayFlowQosResponse,
   ModifySecurityGroupPoliciesRequest,
-  RemoveIp6RulesResponse,
+  NatGateway,
   AssociateDhcpIpWithAddressIpRequest,
   ReplaceRoutesRequest,
   CreateCustomerGatewayResponse,
@@ -237,9 +248,10 @@ import {
   NetDetect,
   ModifyIpv6AddressesAttributeResponse,
   ReplaceSecurityGroupPolicyRequest,
-  NatGateway,
+  ModifyVpcEndPointServiceAttributeResponse,
   ResourceDashboard,
   DescribeVpcPrivateIpAddressesResponse,
+  HaVipAssociateAddressIpResponse,
   DeleteCustomerGatewayResponse,
   CreateNetDetectRequest,
   CreateAddressTemplateResponse,
@@ -254,6 +266,7 @@ import {
   NetDetectIpState,
   ModifyIp6AddressesBandwidthResponse,
   CreateSubnetsRequest,
+  DescribeVpcEndPointServiceRequest,
   ModifyServiceTemplateAttributeRequest,
   AssociateAddressResponse,
   ModifyCcnAttachedInstancesAttributeResponse,
@@ -270,7 +283,8 @@ import {
   ModifyNatGatewaySourceIpTranslationNatRuleRequest,
   RemoveIp6RulesRequest,
   DescribeIpGeolocationDatabaseUrlRequest,
-  AddIp6RulesResponse,
+  DescribeVpcEndPointResponse,
+  DisableGatewayFlowMonitorRequest,
   EnableRoutesResponse,
   DeleteVpnConnectionRequest,
   NetworkAclEntry,
@@ -280,6 +294,7 @@ import {
   DeleteDirectConnectGatewayResponse,
   ModifyAddressesBandwidthRequest,
   ResetVpnGatewayInternetMaxBandwidthRequest,
+  EndPoint,
   DirectConnectGateway,
   DescribeProductQuotaResponse,
   Price,
@@ -288,6 +303,7 @@ import {
   DescribeCrossBorderComplianceResponse,
   ModifyVpnGatewayAttributeResponse,
   AssociateDirectConnectGatewayNatGatewayResponse,
+  EndPointService,
   DescribeVpnGatewayCcnRoutesRequest,
   DisassociateDirectConnectGatewayNatGatewayResponse,
   CreateServiceTemplateGroupRequest,
@@ -302,6 +318,7 @@ import {
   CcnAttachedInstance,
   SecurityPolicyDatabase,
   ResetVpnConnectionResponse,
+  CreateVpcEndPointServiceRequest,
   Ipv6Address,
   CreateNetworkInterfaceRequest,
   BandwidthPackageBillBandwidth,
@@ -325,7 +342,7 @@ import {
   DescribeCcnRoutesRequest,
   ModifyDhcpIpAttributeResponse,
   CreateAndAttachNetworkInterfaceRequest,
-  DownloadCustomerGatewayConfigurationResponse,
+  DeleteVpcEndPointResponse,
   DeleteDhcpIpResponse,
   ModifyGatewayFlowQosRequest,
   DeleteNetDetectResponse,
@@ -354,13 +371,14 @@ import {
   ConflictItem,
   InquiryPriceRenewVpnGatewayResponse,
   AssignIpv6SubnetCidrBlockResponse,
+  CreateVpcEndPointResponse,
   DeleteAssistantCidrResponse,
   DescribeCcnRegionBandwidthLimitsResponse,
   DescribeAddressesResponse,
   GatewayQos,
   ModifyIpv6AddressesAttributeRequest,
   DescribeCustomerGatewayVendorsRequest,
-  DisableRoutesResponse,
+  DeleteLocalGatewayRequest,
   ResetVpnGatewayInternetMaxBandwidthResponse,
   AddressChargePrepaid,
   DescribeNetworkAclsResponse,
@@ -398,14 +416,15 @@ import {
   CreateDirectConnectGatewayCcnRoutesResponse,
   CreateRouteTableRequest,
   MigrateNetworkInterfaceRequest,
-  DisableCcnRoutesRequest,
+  DescribeCustomerGatewaysRequest,
   RenewAddressesRequest,
-  DeleteLocalGatewayRequest,
+  DisableRoutesResponse,
   ModifyAddressAttributeRequest,
   DhcpIp,
   DeleteAssistantCidrRequest,
+  ModifyVpcEndPointServiceWhiteListResponse,
   SubnetInput,
-  UnassignIpv6SubnetCidrBlockResponse,
+  EnableVpcEndPointConnectResponse,
   CreateNetDetectResponse,
   DeleteCcnRequest,
   ModifyLocalGatewayResponse,
@@ -419,31 +438,36 @@ import {
   ModifyCcnAttributeRequest,
   DeleteSecurityGroupPoliciesResponse,
   DisassociateDhcpIpWithAddressIpResponse,
+  CreateVpcEndPointServiceResponse,
   ModifyNetworkAclAttributeRequest,
   DeleteVpnGatewayResponse,
   DescribeHaVipsRequest,
   UnassignPrivateIpAddressesResponse,
   Address,
   VpnGateway,
+  EnableVpcEndPointConnectRequest,
   EnableGatewayFlowMonitorResponse,
   Resource,
   DeleteDhcpIpRequest,
   AllocateAddressesResponse,
   BandwidthPackage,
+  ModifyVpcAttributeRequest,
   DescribeIp6TranslatorsResponse,
   CreateSecurityGroupPoliciesRequest,
   ModifyRouteTableAttributeResponse,
   DescribeSecurityGroupReferencesResponse,
-  DisableGatewayFlowMonitorRequest,
+  AddIp6RulesResponse,
   CreateAddressTemplateGroupResponse,
   DescribeBandwidthPackageQuotaResponse,
   DeleteServiceTemplateGroupRequest,
   DeleteNatGatewayResponse,
   CreateDirectConnectGatewayResponse,
+  ModifyVpcEndPointAttributeRequest,
   DescribeTaskResultResponse,
   DisassociateNetworkAclSubnetsRequest,
   ModifyAddressTemplateGroupAttributeRequest,
   ModifyServiceTemplateGroupAttributeRequest,
+  DeleteVpcEndPointRequest,
   UnassignIpv6CidrBlockRequest,
   CCN,
   InquirePriceCreateDirectConnectGatewayResponse,
@@ -462,12 +486,14 @@ import {
   DeleteSubnetRequest,
   DescribeAddressTemplateGroupsRequest,
   CheckNetDetectStateResponse,
+  DisassociateVpcEndPointSecurityGroupsResponse,
   AssociateNatGatewayAddressResponse,
   RemoveBandwidthPackageResourcesRequest,
   VpngwCcnRoutes,
   RouteTable,
   DeleteNetworkInterfaceRequest,
   InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse,
+  DescribeVpcEndPointServiceWhiteListRequest,
   DeleteAddressTemplateGroupResponse,
   ReplaceRoutesResponse,
   ModifyLocalGatewayRequest,
@@ -479,7 +505,7 @@ import {
   DeleteRouteTableRequest,
   CreateVpnGatewayRequest,
   DescribeVpcInstancesRequest,
-  UnassignIpv6CidrBlockResponse,
+  DeleteVpcEndPointServiceWhiteListResponse,
   CreateBandwidthPackageResponse,
   ResetVpnConnectionRequest,
   ReleaseAddressesResponse,
@@ -497,6 +523,7 @@ import {
   AssignIpv6AddressesResponse,
   CreateRoutesResponse,
   DescribeSecurityGroupsResponse,
+  CreateVpcEndPointServiceWhiteListRequest,
   DeleteNatGatewaySourceIpTranslationNatRuleRequest,
   ModifyVpnGatewayCcnRoutesRequest,
   DescribeGatewayFlowQosRequest,
@@ -520,17 +547,20 @@ import {
   DeleteRoutesRequest,
   AssociateAddressRequest,
   CcnRegionBandwidthLimit,
+  VpcEndPointServiceUser,
   CreateDefaultSecurityGroupResponse,
   ClassicLinkInstance,
   DeleteLocalGatewayResponse,
   NetworkInterfaceAttachment,
   ModifyNetworkInterfaceAttributeRequest,
+  RemoveIp6RulesResponse,
   ModifyHaVipAttributeRequest,
   ModifyAddressTemplateGroupAttributeResponse,
   VpcLimit,
   DetachClassicLinkVpcResponse,
   MigrateNetworkInterfaceResponse,
   UnassignPrivateIpAddressesRequest,
+  ModifyVpcEndPointServiceWhiteListRequest,
   DescribeProductQuotaRequest,
   ModifyNetDetectResponse,
   CreateHaVipRequest,
@@ -579,6 +609,7 @@ import {
   DescribeBandwidthPackageQuotaRequest,
   DeleteVpcResponse,
   DescribeTemplateLimitsRequest,
+  DescribeVpcEndPointServiceWhiteListResponse,
   AcceptAttachCcnInstancesResponse,
   InstanceChargePrepaid,
   AuditCrossBorderComplianceRequest,
@@ -751,6 +782,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除终端节点服务白名单。
+   */
+  async DeleteVpcEndPointServiceWhiteList(
+    req: DeleteVpcEndPointServiceWhiteListRequest,
+    cb?: (error: string, rep: DeleteVpcEndPointServiceWhiteListResponse) => void
+  ): Promise<DeleteVpcEndPointServiceWhiteListResponse> {
+    return this.request("DeleteVpcEndPointServiceWhiteList", req, cb)
+  }
+
+  /**
    * 本接口（DescribeNatGatewayDestinationIpPortTranslationNatRules）用于查询NAT网关端口转发规则对象数组。
    */
   async DescribeNatGatewayDestinationIpPortTranslationNatRules(
@@ -837,13 +878,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyCcnRegionBandwidthLimitsType）用于修改后付费云联网实例修改带宽限速策略。
+   * 本接口（DescribePriceCreateDirectConnectGateway）用于创建专线网关询价。
    */
-  async ModifyCcnRegionBandwidthLimitsType(
-    req: ModifyCcnRegionBandwidthLimitsTypeRequest,
-    cb?: (error: string, rep: ModifyCcnRegionBandwidthLimitsTypeResponse) => void
-  ): Promise<ModifyCcnRegionBandwidthLimitsTypeResponse> {
-    return this.request("ModifyCcnRegionBandwidthLimitsType", req, cb)
+  async InquirePriceCreateDirectConnectGateway(
+    req?: InquirePriceCreateDirectConnectGatewayRequest,
+    cb?: (error: string, rep: InquirePriceCreateDirectConnectGatewayResponse) => void
+  ): Promise<InquirePriceCreateDirectConnectGatewayResponse> {
+    return this.request("InquirePriceCreateDirectConnectGateway", req, cb)
   }
 
   /**
@@ -900,6 +941,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 是否接受终端节点连接请求。
+   */
+  async EnableVpcEndPointConnect(
+    req: EnableVpcEndPointConnectRequest,
+    cb?: (error: string, rep: EnableVpcEndPointConnectResponse) => void
+  ): Promise<EnableVpcEndPointConnectResponse> {
+    return this.request("EnableVpcEndPointConnect", req, cb)
+  }
+
+  /**
    * 本接口（ModifyAddressTemplateGroupAttribute）用于修改IP地址模板集合
    */
   async ModifyAddressTemplateGroupAttribute(
@@ -941,6 +992,18 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（ModifyNetworkAclEntries）用于修改（包括添加和删除）网络ACL的入站规则和出站规则。在NetworkAclEntrySet参数中：
+   * 若同时传入入站规则和出站规则，则重置原有的入站规则和出站规则，并分别导入传入的规则。
+   * 若仅传入入站规则，则仅重置原有的入站规则，并导入传入的规则，不影响原有的出站规则（若仅传入出站规则，处理方式类似入站方向）。
+   */
+  async ModifyNetworkAclEntries(
+    req: ModifyNetworkAclEntriesRequest,
+    cb?: (error: string, rep: ModifyNetworkAclEntriesResponse) => void
+  ): Promise<ModifyNetworkAclEntriesResponse> {
+    return this.request("ModifyNetworkAclEntries", req, cb)
+  }
+
+  /**
      * 本接口（DetachCcnInstances）用于从云联网实例中解关联指定的网络实例。<br />
 解关联网络实例后，相应的路由策略会一并删除。
      */
@@ -969,6 +1032,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyPrivateIpAddressesAttributeResponse) => void
   ): Promise<ModifyPrivateIpAddressesAttributeResponse> {
     return this.request("ModifyPrivateIpAddressesAttribute", req, cb)
+  }
+
+  /**
+   * 修改终端节点属性。
+   */
+  async ModifyVpcEndPointAttribute(
+    req: ModifyVpcEndPointAttributeRequest,
+    cb?: (error: string, rep: ModifyVpcEndPointAttributeResponse) => void
+  ): Promise<ModifyVpcEndPointAttributeResponse> {
+    return this.request("ModifyVpcEndPointAttribute", req, cb)
+  }
+
+  /**
+   * 终端节点解绑安全组。
+   */
+  async DisassociateVpcEndPointSecurityGroups(
+    req: DisassociateVpcEndPointSecurityGroupsRequest,
+    cb?: (error: string, rep: DisassociateVpcEndPointSecurityGroupsResponse) => void
+  ): Promise<DisassociateVpcEndPointSecurityGroupsResponse> {
+    return this.request("DisassociateVpcEndPointSecurityGroups", req, cb)
   }
 
   /**
@@ -1015,13 +1098,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribePriceCreateDirectConnectGateway）用于创建专线网关询价。
+   * 查询终端节点服务列表。
    */
-  async InquirePriceCreateDirectConnectGateway(
-    req?: InquirePriceCreateDirectConnectGatewayRequest,
-    cb?: (error: string, rep: InquirePriceCreateDirectConnectGatewayResponse) => void
-  ): Promise<InquirePriceCreateDirectConnectGatewayResponse> {
-    return this.request("InquirePriceCreateDirectConnectGateway", req, cb)
+  async DescribeVpcEndPointService(
+    req: DescribeVpcEndPointServiceRequest,
+    cb?: (error: string, rep: DescribeVpcEndPointServiceResponse) => void
+  ): Promise<DescribeVpcEndPointServiceResponse> {
+    return this.request("DescribeVpcEndPointService", req, cb)
   }
 
   /**
@@ -1037,6 +1120,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAndAttachNetworkInterfaceResponse) => void
   ): Promise<CreateAndAttachNetworkInterfaceResponse> {
     return this.request("CreateAndAttachNetworkInterface", req, cb)
+  }
+
+  /**
+   * 修改终端节点服务白名单属性。
+   */
+  async ModifyVpcEndPointServiceWhiteList(
+    req: ModifyVpcEndPointServiceWhiteListRequest,
+    cb?: (error: string, rep: ModifyVpcEndPointServiceWhiteListResponse) => void
+  ): Promise<ModifyVpcEndPointServiceWhiteListResponse> {
+    return this.request("ModifyVpcEndPointServiceWhiteList", req, cb)
   }
 
   /**
@@ -1625,15 +1718,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyNetworkAclEntries）用于修改（包括添加和删除）网络ACL的入站规则和出站规则。在NetworkAclEntrySet参数中：
-   * 若同时传入入站规则和出站规则，则重置原有的入站规则和出站规则，并分别导入传入的规则。
-   * 若仅传入入站规则，则仅重置原有的入站规则，并导入传入的规则，不影响原有的出站规则（若仅传入出站规则，处理方式类似入站方向）。
+   * 创建终端节点服务。
    */
-  async ModifyNetworkAclEntries(
-    req: ModifyNetworkAclEntriesRequest,
-    cb?: (error: string, rep: ModifyNetworkAclEntriesResponse) => void
-  ): Promise<ModifyNetworkAclEntriesResponse> {
-    return this.request("ModifyNetworkAclEntries", req, cb)
+  async CreateVpcEndPointService(
+    req: CreateVpcEndPointServiceRequest,
+    cb?: (error: string, rep: CreateVpcEndPointServiceResponse) => void
+  ): Promise<CreateVpcEndPointServiceResponse> {
+    return this.request("CreateVpcEndPointService", req, cb)
   }
 
   /**
@@ -1706,6 +1797,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDhcpIpAttributeResponse) => void
   ): Promise<ModifyDhcpIpAttributeResponse> {
     return this.request("ModifyDhcpIpAttribute", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyCcnRegionBandwidthLimitsType）用于修改后付费云联网实例修改带宽限速策略。
+   */
+  async ModifyCcnRegionBandwidthLimitsType(
+    req: ModifyCcnRegionBandwidthLimitsTypeRequest,
+    cb?: (error: string, rep: ModifyCcnRegionBandwidthLimitsTypeResponse) => void
+  ): Promise<ModifyCcnRegionBandwidthLimitsTypeResponse> {
+    return this.request("ModifyCcnRegionBandwidthLimitsType", req, cb)
   }
 
   /**
@@ -2042,6 +2143,18 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 删除终端节点服务。
+
+
+     */
+  async DeleteVpcEndPointService(
+    req: DeleteVpcEndPointServiceRequest,
+    cb?: (error: string, rep: DeleteVpcEndPointServiceResponse) => void
+  ): Promise<DeleteVpcEndPointServiceResponse> {
+    return this.request("DeleteVpcEndPointService", req, cb)
+  }
+
+  /**
    * 本接口(ModifyAssistantCidr)用于批量修改辅助CIDR，支持新增和删除。（接口灰度中，如需使用请提工单。）
    */
   async ModifyAssistantCidr(
@@ -2049,6 +2162,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAssistantCidrResponse) => void
   ): Promise<ModifyAssistantCidrResponse> {
     return this.request("ModifyAssistantCidr", req, cb)
+  }
+
+  /**
+   * 删除终端节点。
+   */
+  async DeleteVpcEndPoint(
+    req: DeleteVpcEndPointRequest,
+    cb?: (error: string, rep: DeleteVpcEndPointResponse) => void
+  ): Promise<DeleteVpcEndPointResponse> {
+    return this.request("DeleteVpcEndPoint", req, cb)
   }
 
   /**
@@ -2143,13 +2266,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（InquiryPriceCreateVpnGateway）用于创建VPN网关询价。
+   * 查询终端节点服务的服务白名单列表。
    */
-  async InquiryPriceCreateVpnGateway(
-    req: InquiryPriceCreateVpnGatewayRequest,
-    cb?: (error: string, rep: InquiryPriceCreateVpnGatewayResponse) => void
-  ): Promise<InquiryPriceCreateVpnGatewayResponse> {
-    return this.request("InquiryPriceCreateVpnGateway", req, cb)
+  async DescribeVpcEndPointServiceWhiteList(
+    req: DescribeVpcEndPointServiceWhiteListRequest,
+    cb?: (error: string, rep: DescribeVpcEndPointServiceWhiteListResponse) => void
+  ): Promise<DescribeVpcEndPointServiceWhiteListResponse> {
+    return this.request("DescribeVpcEndPointServiceWhiteList", req, cb)
   }
 
   /**
@@ -2554,6 +2677,16 @@ LimitTypes取值范围：
   }
 
   /**
+   * 本接口（InquiryPriceCreateVpnGateway）用于创建VPN网关询价。
+   */
+  async InquiryPriceCreateVpnGateway(
+    req: InquiryPriceCreateVpnGatewayRequest,
+    cb?: (error: string, rep: InquiryPriceCreateVpnGatewayResponse) => void
+  ): Promise<InquiryPriceCreateVpnGatewayResponse> {
+    return this.request("InquiryPriceCreateVpnGateway", req, cb)
+  }
+
+  /**
    * 接口用于修改带宽包属性，包括带宽包名字等
    */
   async ModifyBandwidthPackageAttribute(
@@ -2917,6 +3050,18 @@ LimitTypes取值范围：
   }
 
   /**
+     * 修改终端节点服务属性。
+
+
+     */
+  async ModifyVpcEndPointServiceAttribute(
+    req: ModifyVpcEndPointServiceAttributeRequest,
+    cb?: (error: string, rep: ModifyVpcEndPointServiceAttributeResponse) => void
+  ): Promise<ModifyVpcEndPointServiceAttributeResponse> {
+    return this.request("ModifyVpcEndPointServiceAttribute", req, cb)
+  }
+
+  /**
    * 接口用于查询带宽包详细信息，包括带宽包唯一标识ID，类型，计费模式，名称，资源信息等
    */
   async DescribeBandwidthPackages(
@@ -3068,6 +3213,16 @@ LimitTypes取值范围：
   }
 
   /**
+   * 创建终端节点。
+   */
+  async CreateVpcEndPoint(
+    req: CreateVpcEndPointRequest,
+    cb?: (error: string, rep: CreateVpcEndPointResponse) => void
+  ): Promise<CreateVpcEndPointResponse> {
+    return this.request("CreateVpcEndPoint", req, cb)
+  }
+
+  /**
    * 本接口(DetachClassicLinkVpc)用于删除私有网络和基础网络设备互通。
    */
   async DetachClassicLinkVpc(
@@ -3142,6 +3297,16 @@ LimitTypes取值范围：
   }
 
   /**
+   * 查询终端节点列表。
+   */
+  async DescribeVpcEndPoint(
+    req: DescribeVpcEndPointRequest,
+    cb?: (error: string, rep: DescribeVpcEndPointResponse) => void
+  ): Promise<DescribeVpcEndPointResponse> {
+    return this.request("DescribeVpcEndPoint", req, cb)
+  }
+
+  /**
      * 本接口（CreateSecurityGroupWithPolicies）用于创建新的安全组（SecurityGroup），并且可以同时添加安全组规则（SecurityGroupPolicy）。
 * 每个账户下每个地域的每个项目的<a href="https://cloud.tencent.com/document/product/213/12453">安全组数量限制</a>。
 * 新建的安全组的入站和出站规则默认都是全部拒绝，在创建后通常您需要再调用CreateSecurityGroupPolicies将安全组的规则设置为需要的规则。
@@ -3162,5 +3327,15 @@ LimitTypes取值范围：
     cb?: (error: string, rep: CreateSecurityGroupWithPoliciesResponse) => void
   ): Promise<CreateSecurityGroupWithPoliciesResponse> {
     return this.request("CreateSecurityGroupWithPolicies", req, cb)
+  }
+
+  /**
+   * 创建终端服务白名单。
+   */
+  async CreateVpcEndPointServiceWhiteList(
+    req: CreateVpcEndPointServiceWhiteListRequest,
+    cb?: (error: string, rep: CreateVpcEndPointServiceWhiteListResponse) => void
+  ): Promise<CreateVpcEndPointServiceWhiteListResponse> {
+    return this.request("CreateVpcEndPointServiceWhiteList", req, cb)
   }
 }

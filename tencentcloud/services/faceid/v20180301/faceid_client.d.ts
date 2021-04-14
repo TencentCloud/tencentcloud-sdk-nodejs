@@ -62,7 +62,7 @@ export declare class Client extends AbstractClient {
      */
     ImageRecognition(req: ImageRecognitionRequest, cb?: (error: string, rep: ImageRecognitionResponse) => void): Promise<ImageRecognitionResponse>;
     /**
-     * 每次调用人脸核身小程序服务前，需先调用本接口获取EidToken，用来串联核身流程，在验证完成后，用于获取验证结果信息。
+     * 每次调用E证通小程序服务前，需先调用本接口获取EidToken，用来串联核身流程，在验证完成后，用于获取验证结果信息。
      */
     GetEidToken(req: GetEidTokenRequest, cb?: (error: string, rep: GetEidTokenResponse) => void): Promise<GetEidTokenResponse>;
     /**

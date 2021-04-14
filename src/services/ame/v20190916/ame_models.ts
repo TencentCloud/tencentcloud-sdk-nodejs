@@ -64,6 +64,16 @@ export interface DescribeLyricResponse {
 }
 
 /**
+ * ModifyMusicOnShelves返回参数结构体
+ */
+export interface ModifyMusicOnShelvesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 分类内容
  */
 export interface Station {
@@ -413,6 +423,16 @@ export interface ReportDataResponse {
 }
 
 /**
+ * ModifyMusicOnShelves请求参数结构体
+ */
+export interface ModifyMusicOnShelvesRequest {
+  /**
+   * 无
+   */
+  MusicDetailInfos: MusicDetailInfo
+}
+
+/**
  * DescribePackageItems请求参数结构体
  */
 export interface DescribePackageItemsRequest {
@@ -477,6 +497,31 @@ export interface AuthInfo {
    * 加密后Id
    */
   Id: string
+}
+
+/**
+ * TakeMusicOffShelves请求参数结构体
+ */
+export interface TakeMusicOffShelvesRequest {
+  /**
+   * 资源方下架必传结构
+   */
+  TakeMusicOffShelves: Array<TakeMusicOffShelves>
+}
+
+/**
+ * 下架歌曲复合结构
+ */
+export interface TakeMusicOffShelves {
+  /**
+   * 资源方对应音乐Id
+   */
+  MusicIds: string
+
+  /**
+   * 当曲目临时下架时：已订购客户无影响，无需消息通知。当曲目封杀下架后，推送消息至已订购老客户，枚举值，判断是否上/下架
+   */
+  SaleStatus: string
 }
 
 /**
@@ -574,6 +619,32 @@ export interface DescribeStationsRequest {
    * offset (Default = 0)，Offset=Offset+Limit
    */
   Offset: number
+}
+
+/**
+ * PutMusicOnTheShelves返回参数结构体
+ */
+export interface PutMusicOnTheShelvesResponse {
+  /**
+   * 操作成功数量
+   */
+  SuccessNum: number
+
+  /**
+   * 操作失败数量
+   */
+  FailedNum: number
+
+  /**
+      * 失败歌曲Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailedMusicIds: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -694,6 +765,41 @@ export interface DescribePackagesRequest {
 }
 
 /**
+ * 歌曲变更细节
+ */
+export interface MusicDetailInfo {
+  /**
+   * 资源方音乐Id
+   */
+  MusicId: string
+
+  /**
+   * 资源方识别信息
+   */
+  AmeId: string
+
+  /**
+   * 分类标签
+   */
+  Tags?: Array<string>
+
+  /**
+   * 关键词
+   */
+  HitWords?: Array<string>
+
+  /**
+   * 节奏信息
+   */
+  Bpm?: number
+
+  /**
+   * 商业化权益
+   */
+  Score?: number
+}
+
+/**
  * 图片路径
  */
 export interface ImagePath {
@@ -764,6 +870,16 @@ export interface DescribeItemByIdResponse {
 }
 
 /**
+ * PutMusicOnTheShelves请求参数结构体
+ */
+export interface PutMusicOnTheShelvesRequest {
+  /**
+   * 资源方歌曲Id
+   */
+  MusicIds: Array<string>
+}
+
+/**
  * DescribePackages返回参数结构体
  */
 export interface DescribePackagesResponse {
@@ -807,6 +923,32 @@ export interface DescribeAuthInfoResponse {
    * 总数
    */
   TotalCount?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * TakeMusicOffShelves返回参数结构体
+ */
+export interface TakeMusicOffShelvesResponse {
+  /**
+   * 返回成功数量
+   */
+  SuccessNum: number
+
+  /**
+   * 返回失败数量
+   */
+  FailedNum: number
+
+  /**
+      * 返回失败歌曲musicId
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FailedMusicIds: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

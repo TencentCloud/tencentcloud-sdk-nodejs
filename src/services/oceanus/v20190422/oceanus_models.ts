@@ -16,6 +16,26 @@
  */
 
 /**
+ * DescribeResourceConfigs返回参数结构体
+ */
+export interface DescribeResourceConfigsResponse {
+  /**
+   * 资源配置描述数组
+   */
+  ResourceConfigSet: Array<ResourceConfigItem>
+
+  /**
+   * 资源配置数量
+   */
+  TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateResource请求参数结构体
  */
 export interface CreateResourceRequest {
@@ -133,6 +153,21 @@ export interface CreateJobResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 资源位置描述
+ */
+export interface ResourceLoc {
+  /**
+   * 资源位置的存储类型，目前只支持COS
+   */
+  StorageType: number
+
+  /**
+   * 描述资源位置的json
+   */
+  Param: ResourceLocParam
 }
 
 /**
@@ -266,23 +301,18 @@ export interface CreateResourceConfigRequest {
 }
 
 /**
- * CreateResource返回参数结构体
+ * 系统配置属性
  */
-export interface CreateResourceResponse {
+export interface Property {
   /**
-   * 资源ID
+   * 系统配置的Key
    */
-  ResourceId?: string
+  Key: string
 
   /**
-   * 资源版本
+   * 系统配置的Value
    */
-  Version?: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Value: string
 }
 
 /**
@@ -341,9 +371,34 @@ export interface SystemResourceItem {
 }
 
 /**
- * StopJobs返回参数结构体
+ * DescribeResourceRelatedJobs请求参数结构体
  */
-export interface StopJobsResponse {
+export interface DescribeResourceRelatedJobsRequest {
+  /**
+   * 资源ID
+   */
+  ResourceId: string
+
+  /**
+   * 默认0;   1： 按照作业版本创建时间降序
+   */
+  DESCByJobConfigCreateTime?: number
+
+  /**
+   * 偏移量，默认为0
+   */
+  Offset?: number
+
+  /**
+   * 分页大小，默认为20，最大值为100
+   */
+  Limit?: number
+}
+
+/**
+ * DeleteResources返回参数结构体
+ */
+export interface DeleteResourcesResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -366,6 +421,98 @@ export interface CreateJobConfigResponse {
 }
 
 /**
+ * 描述资源配置的返回参数
+ */
+export interface ResourceConfigItem {
+  /**
+   * 资源ID
+   */
+  ResourceId: string
+
+  /**
+   * 资源类型
+   */
+  ResourceType: number
+
+  /**
+   * 资源所属地域
+   */
+  Region: string
+
+  /**
+   * 资源所属AppId
+   */
+  AppId: number
+
+  /**
+   * 主账号Uin
+   */
+  OwnerUin: string
+
+  /**
+   * 子账号Uin
+   */
+  CreatorUin: string
+
+  /**
+   * 资源位置描述
+   */
+  ResourceLoc: ResourceLoc
+
+  /**
+   * 资源创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 资源版本
+   */
+  Version: number
+
+  /**
+   * 资源描述
+   */
+  Remark: string
+
+  /**
+      * 资源状态：0: 资源同步中，1:资源已就绪
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: number
+
+  /**
+      * 关联作业个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RefJobCount: number
+}
+
+/**
+ * DescribeResources请求参数结构体
+ */
+export interface DescribeResourcesRequest {
+  /**
+   * 需要查询的资源ID数组
+   */
+  ResourceIds?: Array<string>
+
+  /**
+   * 偏移量
+   */
+  Offset?: number
+
+  /**
+   * 条数限制
+   */
+  Limit?: number
+
+  /**
+   * 查询资源配置列表， 如果不填写，返回该ResourceId下所有作业配置列表
+   */
+  Filters?: Array<Filter>
+}
+
+/**
  * 资源参数描述
  */
 export interface ResourceLocParam {
@@ -384,6 +531,21 @@ export interface ResourceLocParam {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Region?: string
+}
+
+/**
+ * DeleteResourceConfigs请求参数结构体
+ */
+export interface DeleteResourceConfigsRequest {
+  /**
+   * 资源ID
+   */
+  ResourceId: string
+
+  /**
+   * 资源版本数组
+   */
+  ResourceConfigVersions: Array<number>
 }
 
 /**
@@ -412,6 +574,16 @@ export interface Filter {
 }
 
 /**
+ * DeleteResources请求参数结构体
+ */
+export interface DeleteResourcesRequest {
+  /**
+   * 待删除资源ID列表
+   */
+  ResourceIds: Array<string>
+}
+
+/**
  * DescribeJobs返回参数结构体
  */
 export interface DescribeJobsResponse {
@@ -432,18 +604,111 @@ export interface DescribeJobsResponse {
 }
 
 /**
- * 系统配置属性
+ * 资源详细描述
  */
-export interface Property {
+export interface ResourceItem {
   /**
-   * 系统配置的Key
+   * 资源ID
    */
-  Key: string
+  ResourceId: string
 
   /**
-   * 系统配置的Value
+   * 资源名称
    */
-  Value: string
+  Name: string
+
+  /**
+   * 资源类型
+   */
+  ResourceType: number
+
+  /**
+   * 资源位置
+   */
+  ResourceLoc: ResourceLoc
+
+  /**
+   * 资源地域
+   */
+  Region: string
+
+  /**
+   * 应用ID
+   */
+  AppId: number
+
+  /**
+   * 主账号Uin
+   */
+  OwnerUin: string
+
+  /**
+   * 子账号Uin
+   */
+  CreatorUin: string
+
+  /**
+   * 资源创建时间
+   */
+  CreateTime: string
+
+  /**
+   * 资源最后更新时间
+   */
+  UpdateTime: string
+
+  /**
+   * 资源的资源版本ID
+   */
+  LatestResourceConfigVersion: number
+
+  /**
+      * 资源备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Remark: string
+
+  /**
+      * 版本个数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VersionCount: number
+
+  /**
+      * 关联作业数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RefJobCount: number
+}
+
+/**
+ * StopJobs返回参数结构体
+ */
+export interface StopJobsResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateResource返回参数结构体
+ */
+export interface CreateResourceResponse {
+  /**
+   * 资源ID
+   */
+  ResourceId?: string
+
+  /**
+   * 资源版本
+   */
+  Version?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -512,6 +777,26 @@ export interface DescribeJobConfigsRequest {
 }
 
 /**
+ * DescribeResources返回参数结构体
+ */
+export interface DescribeResourcesResponse {
+  /**
+   * 资源详细信息集合
+   */
+  ResourceSet: Array<ResourceItem>
+
+  /**
+   * 总数量
+   */
+  TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 作业启动详情
  */
 export interface RunJobDescription {
@@ -557,18 +842,73 @@ export interface DescribeJobConfigsResponse {
 }
 
 /**
- * 资源位置描述
+ * DeleteResourceConfigs返回参数结构体
  */
-export interface ResourceLoc {
+export interface DeleteResourceConfigsResponse {
   /**
-   * 资源位置的存储类型，目前只支持COS
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  StorageType: number
+  RequestId?: string
+}
+
+/**
+ * DescribeResourceRelatedJobs返回参数结构体
+ */
+export interface DescribeResourceRelatedJobsResponse {
+  /**
+   * 总数
+   */
+  TotalCount: number
 
   /**
-   * 描述资源位置的json
+   * 关联作业信息
    */
-  Param: ResourceLocParam
+  RefJobInfos: Array<ResourceRefJobInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeSystemResources返回参数结构体
+ */
+export interface DescribeSystemResourcesResponse {
+  /**
+   * 资源详细信息集合
+   */
+  ResourceSet?: Array<SystemResourceItem>
+
+  /**
+   * 总数量
+   */
+  TotalCount?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 资源被Job 引用信息
+ */
+export interface ResourceRefJobInfo {
+  /**
+   * Job id
+   */
+  JobId: string
+
+  /**
+   * Job配置版本
+   */
+  JobConfigVersion: number
+
+  /**
+   * 资源版本
+   */
+  ResourceVersion: number
 }
 
 /**
@@ -864,21 +1204,36 @@ export interface JobConfig {
 }
 
 /**
- * DescribeSystemResources返回参数结构体
+ * DescribeResourceConfigs请求参数结构体
  */
-export interface DescribeSystemResourcesResponse {
+export interface DescribeResourceConfigsRequest {
   /**
-   * 资源详细信息集合
+   * 资源ID
    */
-  ResourceSet?: Array<SystemResourceItem>
+  ResourceId?: string
 
   /**
-   * 总数量
+   * 偏移量
    */
-  TotalCount?: number
+  Offset?: number
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 返回值大小
    */
-  RequestId?: string
+  Limit?: number
+
+  /**
+   * 资源配置Versions集合
+   */
+  ResourceConfigVersions?: Array<number>
+
+  /**
+   * 作业配置版本
+   */
+  JobConfigVersion?: number
+
+  /**
+   * 作业ID
+   */
+  JobId?: string
 }

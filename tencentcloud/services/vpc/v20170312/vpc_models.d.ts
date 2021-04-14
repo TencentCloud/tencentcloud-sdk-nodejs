@@ -364,28 +364,17 @@ export interface SourceIpTranslationNatRule {
     CreatedTime?: string;
 }
 /**
- * DescribeCustomerGateways请求参数结构体
+ * DisableCcnRoutes请求参数结构体
  */
-export interface DescribeCustomerGatewaysRequest {
+export interface DisableCcnRoutesRequest {
     /**
-      * 对端网关ID，例如：cgw-2wqq41m9。每次请求的实例的上限为100。参数不支持同时指定CustomerGatewayIds和Filters。
+      * CCN实例ID。形如：ccn-f49l6u0z。
       */
-    CustomerGatewayIds?: Array<string>;
+    CcnId: string;
     /**
-      * 过滤条件，详见下表：实例过滤条件表。每次请求的Filters的上限为10，Filter.Values的上限为5。参数不支持同时指定CustomerGatewayIds和Filters。
-<li>customer-gateway-id - String - （过滤条件）用户网关唯一ID形如：`cgw-mgp33pll`。</li>
-<li>customer-gateway-name - String - （过滤条件）用户网关名称形如：`test-cgw`。</li>
-<li>ip-address - String - （过滤条件）公网地址形如：`58.211.1.12`。</li>
+      * CCN路由策略唯一ID。形如：ccnr-f49l6u0z。
       */
-    Filters?: Array<Filter>;
-    /**
-      * 偏移量，默认为0。关于Offset的更进一步介绍请参考 API 简介中的相关小节。
-      */
-    Offset?: number;
-    /**
-      * 返回数量，默认为20，最大值为100。
-      */
-    Limit?: number;
+    RouteIds: Array<string>;
 }
 /**
  * ModifyNatGatewayDestinationIpPortTranslationNatRule返回参数结构体
@@ -507,6 +496,31 @@ export interface DescribeServiceTemplateGroupsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeVpcEndPoint请求参数结构体
+ */
+export interface DescribeVpcEndPointRequest {
+    /**
+      * 过滤条件。
+<li> end-point-service-id- String - （过滤条件）终端节点服务ID。</li>
+<li>end-point-name - String - （过滤条件）终端节点实例名称。</li>
+<li> end-point-id- String - （过滤条件）终端节点实例ID。</li>
+<li> vpc-id- String - （过滤条件）VPC实例ID。</li>
+      */
+    Filters?: Array<Filter>;
+    /**
+      * 偏移量，默认为0。
+      */
+    Offset?: number;
+    /**
+      * 单页返回数量，默认为20，最大值为100。
+      */
+    Limit?: number;
+    /**
+      * 终端节点ID列表。
+      */
+    EndPointId?: Array<string>;
 }
 /**
  * DetachClassicLinkVpc请求参数结构体
@@ -1042,6 +1056,35 @@ export interface CreateDirectConnectGatewayRequest {
     ModeType?: string;
 }
 /**
+ * CreateVpcEndPoint请求参数结构体
+ */
+export interface CreateVpcEndPointRequest {
+    /**
+      * VPC实例ID。
+      */
+    VpcId: string;
+    /**
+      * 子网实例ID。
+      */
+    SubnetId: string;
+    /**
+      * 终端节点名称。
+      */
+    EndPointName: string;
+    /**
+      * 终端节点服务ID。
+      */
+    EndPointServiceId: string;
+    /**
+      * 终端节点VIP，可以指定IP申请。
+      */
+    EndPointVip?: string;
+    /**
+      * 安全组ID。
+      */
+    SecurityGroupId?: string;
+}
+/**
  * ModifyBandwidthPackageAttribute请求参数结构体
  */
 export interface ModifyBandwidthPackageAttributeRequest {
@@ -1117,6 +1160,40 @@ export interface ModifyFlowLogAttributeRequest {
       * 流日志实例描述
       */
     FlowLogDescription?: string;
+}
+/**
+ * UnassignIpv6SubnetCidrBlock返回参数结构体
+ */
+export interface UnassignIpv6SubnetCidrBlockResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyVpcEndPointServiceAttribute请求参数结构体
+ */
+export interface ModifyVpcEndPointServiceAttributeRequest {
+    /**
+      * 终端节点服务ID。
+      */
+    EndPointServiceId: string;
+    /**
+      * VPCID。
+      */
+    VpcId: string;
+    /**
+      * 终端节点服务名称。
+      */
+    EndPointServiceName?: string;
+    /**
+      * 是否自动接受。
+      */
+    AutoAcceptFlag?: boolean;
+    /**
+      * 后端服务的ID，比如lb-xxx。
+      */
+    ServiceInstanceId?: string;
 }
 /**
  * 过滤器键值对
@@ -1281,6 +1358,28 @@ export interface DescribeRouteTablesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DeleteVpcEndPointServiceWhiteList请求参数结构体
+ */
+export interface DeleteVpcEndPointServiceWhiteListRequest {
+    /**
+      * 用户UIN数组。
+      */
+    UserUin: Array<string>;
+    /**
+      * 终端节点服务ID。
+      */
+    EndPointServiceId: string;
+}
+/**
+ * DeleteVpcEndPointService请求参数结构体
+ */
+export interface DeleteVpcEndPointServiceRequest {
+    /**
+      * 终端节点ID。
+      */
+    EndPointServiceId: string;
 }
 /**
  * DeleteCcn返回参数结构体
@@ -1449,9 +1548,31 @@ export interface DescribeDirectConnectGatewaysRequest {
     Limit?: number;
 }
 /**
+ * DisassociateVpcEndPointSecurityGroups请求参数结构体
+ */
+export interface DisassociateVpcEndPointSecurityGroupsRequest {
+    /**
+      * 安全组ID数组。
+      */
+    SecurityGroupIds: Array<string>;
+    /**
+      * 终端节点ID。
+      */
+    EndPointId: string;
+}
+/**
  * ModifyIp6Translator返回参数结构体
  */
 export interface ModifyIp6TranslatorResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateVpcEndPointServiceWhiteList返回参数结构体
+ */
+export interface CreateVpcEndPointServiceWhiteListResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1692,29 +1813,13 @@ export interface UnassignIpv6SubnetCidrBlockRequest {
     Ipv6SubnetCidrBlocks: Array<Ipv6SubnetCidrBlock>;
 }
 /**
- * ModifyVpcAttribute请求参数结构体
+ * DeleteVpcEndPointService返回参数结构体
  */
-export interface ModifyVpcAttributeRequest {
+export interface DeleteVpcEndPointServiceResponse {
     /**
-      * VPC实例ID。形如：vpc-f49l6u0z。每次请求的实例的上限为100。参数不支持同时指定VpcIds和Filters。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    VpcId: string;
-    /**
-      * 私有网络名称，可任意命名，但不得超过60个字符。
-      */
-    VpcName?: string;
-    /**
-      * 是否开启组播。true: 开启, false: 关闭。
-      */
-    EnableMulticast?: string;
-    /**
-      * DNS地址，最多支持4个，第1个默认为主，其余为备
-      */
-    DnsServers?: Array<string>;
-    /**
-      * 域名
-      */
-    DomainName?: string;
+    RequestId?: string;
 }
 /**
  * AssignIpv6CidrBlock请求参数结构体
@@ -1729,6 +1834,15 @@ export interface AssignIpv6CidrBlockRequest {
  * CreateSecurityGroupPolicies返回参数结构体
  */
 export interface CreateSecurityGroupPoliciesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * UnassignIpv6CidrBlock返回参数结构体
+ */
+export interface UnassignIpv6CidrBlockResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1898,9 +2012,35 @@ export interface NatGatewayAddress {
     IsBlocked?: boolean;
 }
 /**
+ * DescribeVpcEndPointService返回参数结构体
+ */
+export interface DescribeVpcEndPointServiceResponse {
+    /**
+      * 终端节点服务对象数组。
+      */
+    EndPointServiceSet: Array<EndPointService>;
+    /**
+      * 符合查询条件的个数。
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyNetworkAclEntries返回参数结构体
  */
 export interface ModifyNetworkAclEntriesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyVpcEndPointAttribute返回参数结构体
+ */
+export interface ModifyVpcEndPointAttributeResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2622,9 +2762,13 @@ export interface DescribeFlowLogResponse {
     RequestId?: string;
 }
 /**
- * HaVipAssociateAddressIp返回参数结构体
+ * DownloadCustomerGatewayConfiguration返回参数结构体
  */
-export interface HaVipAssociateAddressIpResponse {
+export interface DownloadCustomerGatewayConfigurationResponse {
+    /**
+      * XML格式配置信息。
+      */
+    CustomerGatewayConfiguration?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3457,13 +3601,74 @@ export interface ModifySecurityGroupPoliciesRequest {
     SortPolicys?: boolean;
 }
 /**
- * RemoveIp6Rules返回参数结构体
+ * NAT网关对象。
  */
-export interface RemoveIp6RulesResponse {
+export interface NatGateway {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * NAT网关的ID。
       */
-    RequestId?: string;
+    NatGatewayId: string;
+    /**
+      * NAT网关的名称。
+      */
+    NatGatewayName: string;
+    /**
+      * NAT网关创建的时间。
+      */
+    CreatedTime: string;
+    /**
+      * NAT网关的状态。
+ 'PENDING'：生产中，'DELETING'：删除中，'AVAILABLE'：运行中，'UPDATING'：升级中，
+‘FAILED’：失败。
+      */
+    State: string;
+    /**
+      * 网关最大外网出带宽(单位:Mbps)。
+      */
+    InternetMaxBandwidthOut: number;
+    /**
+      * 网关并发连接上限。
+      */
+    MaxConcurrentConnection: number;
+    /**
+      * 绑定NAT网关的公网IP对象数组。
+      */
+    PublicIpAddressSet: Array<NatGatewayAddress>;
+    /**
+      * NAT网关网络状态。“AVAILABLE”:运行中, “UNAVAILABLE”:不可用, “INSUFFICIENT”:欠费停服。
+      */
+    NetworkState: string;
+    /**
+      * NAT网关的端口转发规则。
+      */
+    DestinationIpPortTranslationNatRuleSet: Array<DestinationIpPortTranslationNatRule>;
+    /**
+      * VPC实例ID。
+      */
+    VpcId: string;
+    /**
+      * NAT网关所在的可用区。
+      */
+    Zone: string;
+    /**
+      * 绑定的专线网关ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DirectConnectGatewayIds: Array<string>;
+    /**
+      * 所属子网ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SubnetId: string;
+    /**
+      * 标签键值对。
+      */
+    TagSet: Array<Tag>;
+    /**
+      * NAT网关绑定的安全组列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SecurityGroupSet: Array<string>;
 }
 /**
  * AssociateDhcpIpWithAddressIp请求参数结构体
@@ -4083,74 +4288,13 @@ export interface ReplaceSecurityGroupPolicyRequest {
     OriginalSecurityGroupPolicySet?: SecurityGroupPolicySet;
 }
 /**
- * NAT网关对象。
+ * ModifyVpcEndPointServiceAttribute返回参数结构体
  */
-export interface NatGateway {
+export interface ModifyVpcEndPointServiceAttributeResponse {
     /**
-      * NAT网关的ID。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    NatGatewayId: string;
-    /**
-      * NAT网关的名称。
-      */
-    NatGatewayName: string;
-    /**
-      * NAT网关创建的时间。
-      */
-    CreatedTime: string;
-    /**
-      * NAT网关的状态。
- 'PENDING'：生产中，'DELETING'：删除中，'AVAILABLE'：运行中，'UPDATING'：升级中，
-‘FAILED’：失败。
-      */
-    State: string;
-    /**
-      * 网关最大外网出带宽(单位:Mbps)。
-      */
-    InternetMaxBandwidthOut: number;
-    /**
-      * 网关并发连接上限。
-      */
-    MaxConcurrentConnection: number;
-    /**
-      * 绑定NAT网关的公网IP对象数组。
-      */
-    PublicIpAddressSet: Array<NatGatewayAddress>;
-    /**
-      * NAT网关网络状态。“AVAILABLE”:运行中, “UNAVAILABLE”:不可用, “INSUFFICIENT”:欠费停服。
-      */
-    NetworkState: string;
-    /**
-      * NAT网关的端口转发规则。
-      */
-    DestinationIpPortTranslationNatRuleSet: Array<DestinationIpPortTranslationNatRule>;
-    /**
-      * VPC实例ID。
-      */
-    VpcId: string;
-    /**
-      * NAT网关所在的可用区。
-      */
-    Zone: string;
-    /**
-      * 绑定的专线网关ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    DirectConnectGatewayIds: Array<string>;
-    /**
-      * 所属子网ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SubnetId: string;
-    /**
-      * 标签键值对。
-      */
-    TagSet: Array<Tag>;
-    /**
-      * NAT网关绑定的安全组列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SecurityGroupSet: Array<string>;
+    RequestId?: string;
 }
 /**
  * VPC资源看板（各资源个数）
@@ -4333,6 +4477,15 @@ export interface DescribeVpcPrivateIpAddressesResponse {
       * 内网`IP`地址信息列表。
       */
     VpcPrivateIpAddressSet?: Array<VpcPrivateIpAddress>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * HaVipAssociateAddressIp返回参数结构体
+ */
+export interface HaVipAssociateAddressIpResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4587,6 +4740,30 @@ export interface CreateSubnetsRequest {
     CdcId?: string;
 }
 /**
+ * DescribeVpcEndPointService请求参数结构体
+ */
+export interface DescribeVpcEndPointServiceRequest {
+    /**
+      * 过滤条件。
+<li> service-id- String - （过滤条件）终端节点服务唯一ID。</li>
+<li>service-name - String - （过滤条件）终端节点实例名称。</li>
+<li>service-instance-id - String - （过滤条件）后端服务的唯一ID，比如lb-xxx。</li>
+      */
+    Filters?: Array<Filter>;
+    /**
+      * 偏移量，默认为0。
+      */
+    Offset?: number;
+    /**
+      * 单页返回数量，默认为20，最大值为100。
+      */
+    Limit?: number;
+    /**
+      * 终端节点服务ID。
+      */
+    EndPointServiceIds?: Array<string>;
+}
+/**
  * ModifyServiceTemplateAttribute请求参数结构体
  */
 export interface ModifyServiceTemplateAttributeRequest {
@@ -4658,6 +4835,7 @@ export interface DescribeAddressesRequest {
 <li> is-arrears - String - 是否必填：否 - （过滤条件）按照 EIP 是否欠费进行过滤。（TRUE：EIP 处于欠费状态|FALSE：EIP 费用状态正常）</li>
 <li> address-type - String - 是否必填：否 - （过滤条件）按照 IP类型 进行过滤。可选值：'EIP'，'AnycastEIP'，'HighQualityEIP'</li>
 <li> address-isp - String - 是否必填：否 - （过滤条件）按照 运营商类型 进行过滤。可选值：'BGP'，'CMCC'，'CUCC', 'CTCC'</li>
+<li> dedicated-cluster-id - String - 是否必填：否 - （过滤条件）按照 CDC 的唯一 ID 过滤。CDC 唯一 ID 形如：cluster-11112222。</li>
       */
     Filters?: Array<Filter>;
     /**
@@ -4813,17 +4991,33 @@ export interface DescribeIpGeolocationDatabaseUrlRequest {
     Type: string;
 }
 /**
- * AddIp6Rules返回参数结构体
+ * DescribeVpcEndPoint返回参数结构体
  */
-export interface AddIp6RulesResponse {
+export interface DescribeVpcEndPointResponse {
     /**
-      * IPV6转换规则唯一ID数组，形如rule6-xxxxxxxx
+      * 终端节点对象。
       */
-    Ip6RuleSet?: Array<string>;
+    EndPointSet: Array<EndPoint>;
+    /**
+      * 符合查询条件的终端节点个数。
+      */
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DisableGatewayFlowMonitor请求参数结构体
+ */
+export interface DisableGatewayFlowMonitorRequest {
+    /**
+      * 网关实例ID，目前我们支持的网关实例类型有，
+专线网关实例ID，形如，`dcg-ltjahce6`；
+Nat网关实例ID，形如，`nat-ltjahce6`；
+VPN网关实例ID，形如，`vpn-ltjahce6`。
+      */
+    GatewayId: string;
 }
 /**
  * EnableRoutes返回参数结构体
@@ -4979,6 +5173,64 @@ export interface ResetVpnGatewayInternetMaxBandwidthRequest {
       * 公网带宽设置。可选带宽规格：5, 10, 20, 50, 100；单位：Mbps。
       */
     InternetMaxBandwidthOut: number;
+}
+/**
+ * 终端节点详情。
+ */
+export interface EndPoint {
+    /**
+      * 终端节点ID。
+      */
+    EndPointId: string;
+    /**
+      * VPCID。
+      */
+    VpcId: string;
+    /**
+      * 子网ID。
+      */
+    SubnetId: string;
+    /**
+      * APPID。
+      */
+    EndPointOwner: string;
+    /**
+      * 终端节点名称。
+      */
+    EndPointName: string;
+    /**
+      * 终端节点服务的VPCID。
+      */
+    ServiceVpcId: string;
+    /**
+      * 终端节点服务的VIP。
+      */
+    ServiceVip: string;
+    /**
+      * 终端节点服务的ID。
+      */
+    EndPointServiceId: string;
+    /**
+      * 终端节点的VIP。
+      */
+    EndPointVip: string;
+    /**
+      * 终端节点状态，ACTIVE：可用，PENDING：待接受，ACCEPTING：接受中，REJECTED：已拒绝，FAILED：失败。
+      */
+    State: string;
+    /**
+      * 创建时间。
+      */
+    CreateTime: string;
+    /**
+      * 终端节点绑定的安全组实例ID列表。
+      */
+    GroupSet: Array<string>;
+    /**
+      * 终端节点服务名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ServiceName: string;
 }
 /**
  * 专线网关对象。
@@ -5147,6 +5399,53 @@ export interface AssociateDirectConnectGatewayNatGatewayResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 终端节点服务对象。
+ */
+export interface EndPointService {
+    /**
+      * 终端节点服务ID
+      */
+    EndPointServiceId: string;
+    /**
+      * VPCID。
+      */
+    VpcId: string;
+    /**
+      * APPID。
+      */
+    ServiceOwner: string;
+    /**
+      * 终端节点服务名称。
+      */
+    ServiceName: string;
+    /**
+      * 后端服务的VIP。
+      */
+    ServiceVip: string;
+    /**
+      * 后端服务的ID，比如lb-xxx。
+      */
+    ServiceInstanceId: string;
+    /**
+      * 是否自动接受。
+      */
+    AutoAcceptFlag: boolean;
+    /**
+      * 关联的终端节点个数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EndPointCount: number;
+    /**
+      * 终端节点对象数组。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EndPointSet: Array<EndPoint>;
+    /**
+      * 创建时间。
+      */
+    CreateTime: string;
 }
 /**
  * DescribeVpnGatewayCcnRoutes请求参数结构体
@@ -5373,6 +5672,31 @@ export interface ResetVpnConnectionResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * CreateVpcEndPointService请求参数结构体
+ */
+export interface CreateVpcEndPointServiceRequest {
+    /**
+      * VPC实例ID。
+      */
+    VpcId: string;
+    /**
+      * 终端节点服务名称。
+      */
+    EndPointServiceName: string;
+    /**
+      * 是否自动接受。
+      */
+    AutoAcceptFlag: boolean;
+    /**
+      * 后端服务ID，比如lb-xxx。
+      */
+    ServiceInstanceId: string;
+    /**
+      * 是否是PassService类型。
+      */
+    IsPassService?: boolean;
 }
 /**
  * `IPv6`地址信息。
@@ -5896,13 +6220,9 @@ export interface CreateAndAttachNetworkInterfaceRequest {
     Tags?: Array<Tag>;
 }
 /**
- * DownloadCustomerGatewayConfiguration返回参数结构体
+ * DeleteVpcEndPoint返回参数结构体
  */
-export interface DownloadCustomerGatewayConfigurationResponse {
-    /**
-      * XML格式配置信息。
-      */
-    CustomerGatewayConfiguration?: string;
+export interface DeleteVpcEndPointResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6433,6 +6753,19 @@ export interface AssignIpv6SubnetCidrBlockResponse {
     RequestId?: string;
 }
 /**
+ * CreateVpcEndPoint返回参数结构体
+ */
+export interface CreateVpcEndPointResponse {
+    /**
+      * 终端节点对象详细信息。
+      */
+    EndPoint: EndPoint;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteAssistantCidr返回参数结构体
  */
 export interface DeleteAssistantCidrResponse {
@@ -6510,13 +6843,21 @@ export interface ModifyIpv6AddressesAttributeRequest {
  */
 export declare type DescribeCustomerGatewayVendorsRequest = null;
 /**
- * DisableRoutes返回参数结构体
+ * DeleteLocalGateway请求参数结构体
  */
-export interface DisableRoutesResponse {
+export interface DeleteLocalGatewayRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 本地网关实例ID
       */
-    RequestId?: string;
+    LocalGatewayId: string;
+    /**
+      * CDC实例ID
+      */
+    CdcId: string;
+    /**
+      * VPC实例ID
+      */
+    VpcId?: string;
 }
 /**
  * ResetVpnGatewayInternetMaxBandwidth返回参数结构体
@@ -7046,17 +7387,28 @@ export interface MigrateNetworkInterfaceRequest {
     DestinationInstanceId: string;
 }
 /**
- * DisableCcnRoutes请求参数结构体
+ * DescribeCustomerGateways请求参数结构体
  */
-export interface DisableCcnRoutesRequest {
+export interface DescribeCustomerGatewaysRequest {
     /**
-      * CCN实例ID。形如：ccn-f49l6u0z。
+      * 对端网关ID，例如：cgw-2wqq41m9。每次请求的实例的上限为100。参数不支持同时指定CustomerGatewayIds和Filters。
       */
-    CcnId: string;
+    CustomerGatewayIds?: Array<string>;
     /**
-      * CCN路由策略唯一ID。形如：ccnr-f49l6u0z。
+      * 过滤条件，详见下表：实例过滤条件表。每次请求的Filters的上限为10，Filter.Values的上限为5。参数不支持同时指定CustomerGatewayIds和Filters。
+<li>customer-gateway-id - String - （过滤条件）用户网关唯一ID形如：`cgw-mgp33pll`。</li>
+<li>customer-gateway-name - String - （过滤条件）用户网关名称形如：`test-cgw`。</li>
+<li>ip-address - String - （过滤条件）公网地址形如：`58.211.1.12`。</li>
       */
-    RouteIds: Array<string>;
+    Filters?: Array<Filter>;
+    /**
+      * 偏移量，默认为0。关于Offset的更进一步介绍请参考 API 简介中的相关小节。
+      */
+    Offset?: number;
+    /**
+      * 返回数量，默认为20，最大值为100。
+      */
+    Limit?: number;
 }
 /**
  * RenewAddresses请求参数结构体
@@ -7072,21 +7424,13 @@ export interface RenewAddressesRequest {
     AddressChargePrepaid: AddressChargePrepaid;
 }
 /**
- * DeleteLocalGateway请求参数结构体
+ * DisableRoutes返回参数结构体
  */
-export interface DeleteLocalGatewayRequest {
+export interface DisableRoutesResponse {
     /**
-      * 本地网关实例ID
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    LocalGatewayId: string;
-    /**
-      * CDC实例ID
-      */
-    CdcId: string;
-    /**
-      * VPC实例ID
-      */
-    VpcId?: string;
+    RequestId?: string;
 }
 /**
  * ModifyAddressAttribute请求参数结构体
@@ -7166,6 +7510,15 @@ export interface DeleteAssistantCidrRequest {
     CidrBlocks: Array<string>;
 }
 /**
+ * ModifyVpcEndPointServiceWhiteList返回参数结构体
+ */
+export interface ModifyVpcEndPointServiceWhiteListResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 子网对象
  */
 export interface SubnetInput {
@@ -7187,9 +7540,9 @@ export interface SubnetInput {
     RouteTableId?: string;
 }
 /**
- * UnassignIpv6SubnetCidrBlock返回参数结构体
+ * EnableVpcEndPointConnect返回参数结构体
  */
-export interface UnassignIpv6SubnetCidrBlockResponse {
+export interface EnableVpcEndPointConnectResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -7383,6 +7736,19 @@ export interface DeleteSecurityGroupPoliciesResponse {
  * DisassociateDhcpIpWithAddressIp返回参数结构体
  */
 export interface DisassociateDhcpIpWithAddressIpResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateVpcEndPointService返回参数结构体
+ */
+export interface CreateVpcEndPointServiceResponse {
+    /**
+      * 终端节点服务对象详细信息。
+      */
+    EndPointService: EndPointService;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -7603,6 +7969,23 @@ export interface VpnGateway {
     NetworkInstanceId: string;
 }
 /**
+ * EnableVpcEndPointConnect请求参数结构体
+ */
+export interface EnableVpcEndPointConnectRequest {
+    /**
+      * 终端节点服务ID。
+      */
+    EndPointServiceId: string;
+    /**
+      * 终端节点ID。
+      */
+    EndPointId: Array<string>;
+    /**
+      * 是否接受终端节点连接请求。
+      */
+    AcceptFlag: boolean;
+}
+/**
  * EnableGatewayFlowMonitor返回参数结构体
  */
 export interface EnableGatewayFlowMonitorResponse {
@@ -7692,6 +8075,31 @@ export interface BandwidthPackage {
     Bandwidth: number;
 }
 /**
+ * ModifyVpcAttribute请求参数结构体
+ */
+export interface ModifyVpcAttributeRequest {
+    /**
+      * VPC实例ID。形如：vpc-f49l6u0z。每次请求的实例的上限为100。参数不支持同时指定VpcIds和Filters。
+      */
+    VpcId: string;
+    /**
+      * 私有网络名称，可任意命名，但不得超过60个字符。
+      */
+    VpcName?: string;
+    /**
+      * 是否开启组播。true: 开启, false: 关闭。
+      */
+    EnableMulticast?: string;
+    /**
+      * DNS地址，最多支持4个，第1个默认为主，其余为备
+      */
+    DnsServers?: Array<string>;
+    /**
+      * 域名
+      */
+    DomainName?: string;
+}
+/**
  * DescribeIp6Translators返回参数结构体
  */
 export interface DescribeIp6TranslatorsResponse {
@@ -7744,16 +8152,17 @@ export interface DescribeSecurityGroupReferencesResponse {
     RequestId?: string;
 }
 /**
- * DisableGatewayFlowMonitor请求参数结构体
+ * AddIp6Rules返回参数结构体
  */
-export interface DisableGatewayFlowMonitorRequest {
+export interface AddIp6RulesResponse {
     /**
-      * 网关实例ID，目前我们支持的网关实例类型有，
-专线网关实例ID，形如，`dcg-ltjahce6`；
-Nat网关实例ID，形如，`nat-ltjahce6`；
-VPN网关实例ID，形如，`vpn-ltjahce6`。
+      * IPV6转换规则唯一ID数组，形如rule6-xxxxxxxx
       */
-    GatewayId: string;
+    Ip6RuleSet?: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateAddressTemplateGroup返回参数结构体
@@ -7811,6 +8220,23 @@ export interface CreateDirectConnectGatewayResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ModifyVpcEndPointAttribute请求参数结构体
+ */
+export interface ModifyVpcEndPointAttributeRequest {
+    /**
+      * 终端节点ID。
+      */
+    EndPointId: string;
+    /**
+      * 终端节点名称。
+      */
+    EndPointName?: string;
+    /**
+      * 安全组ID列表。
+      */
+    SecurityGroupIds?: Array<string>;
 }
 /**
  * DescribeTaskResult返回参数结构体
@@ -7875,6 +8301,15 @@ export interface ModifyServiceTemplateGroupAttributeRequest {
       * 协议端口模板实例ID，例如：ppm-4dw6agho。
       */
     ServiceTemplateIds?: Array<string>;
+}
+/**
+ * DeleteVpcEndPoint请求参数结构体
+ */
+export interface DeleteVpcEndPointRequest {
+    /**
+      * 终端节点ID。
+      */
+    EndPointId: string;
 }
 /**
  * UnassignIpv6CidrBlock请求参数结构体
@@ -8185,6 +8620,15 @@ export interface CheckNetDetectStateResponse {
     RequestId?: string;
 }
 /**
+ * DisassociateVpcEndPointSecurityGroups返回参数结构体
+ */
+export interface DisassociateVpcEndPointSecurityGroupsResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * AssociateNatGatewayAddress返回参数结构体
  */
 export interface AssociateNatGatewayAddressResponse {
@@ -8288,6 +8732,25 @@ export interface InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeVpcEndPointServiceWhiteList请求参数结构体
+ */
+export interface DescribeVpcEndPointServiceWhiteListRequest {
+    /**
+      * 偏移量，默认为0。
+      */
+    Offset?: number;
+    /**
+      * 单页返回数量，默认为20，最大值为100。
+      */
+    Limit?: number;
+    /**
+      * 过滤条件。
+<li> user-uin String - （过滤条件）用户UIN。</li>
+<li> end-point-service-id String - （过滤条件）终端节点服务ID。</li>
+      */
+    Filters?: Array<Filter>;
 }
 /**
  * DeleteAddressTemplateGroup返回参数结构体
@@ -8478,9 +8941,9 @@ export interface DescribeVpcInstancesRequest {
     Limit?: number;
 }
 /**
- * UnassignIpv6CidrBlock返回参数结构体
+ * DeleteVpcEndPointServiceWhiteList返回参数结构体
  */
-export interface UnassignIpv6CidrBlockResponse {
+export interface DeleteVpcEndPointServiceWhiteListResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -8707,6 +9170,23 @@ export interface DescribeSecurityGroupsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * CreateVpcEndPointServiceWhiteList请求参数结构体
+ */
+export interface CreateVpcEndPointServiceWhiteListRequest {
+    /**
+      * UIN。
+      */
+    UserUin: string;
+    /**
+      * 终端节点服务ID。
+      */
+    EndPointServiceId: string;
+    /**
+      * 白名单描述。
+      */
+    Description?: string;
 }
 /**
  * DeleteNatGatewaySourceIpTranslationNatRule请求参数结构体
@@ -9156,6 +9636,31 @@ export interface CcnRegionBandwidthLimit {
     DstIsBm?: boolean;
 }
 /**
+ * 终端节点服务的服务白名单对象详情。
+ */
+export interface VpcEndPointServiceUser {
+    /**
+      * AppId。
+      */
+    Owner: number;
+    /**
+      * Uin。
+      */
+    UserUin: string;
+    /**
+      * 描述信息。
+      */
+    Description: string;
+    /**
+      * 创建时间。
+      */
+    CreateTime: string;
+    /**
+      * 终端节点服务ID。
+      */
+    EndPointServiceId: string;
+}
+/**
  * CreateDefaultSecurityGroup返回参数结构体
  */
 export interface CreateDefaultSecurityGroupResponse {
@@ -9233,6 +9738,15 @@ export interface ModifyNetworkInterfaceAttributeRequest {
     SecurityGroupIds?: Array<string>;
 }
 /**
+ * RemoveIp6Rules返回参数结构体
+ */
+export interface RemoveIp6RulesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyHaVipAttribute请求参数结构体
  */
 export interface ModifyHaVipAttributeRequest {
@@ -9297,6 +9811,23 @@ export interface UnassignPrivateIpAddressesRequest {
       * 指定的内网IP信息，单次最多指定10个。
       */
     PrivateIpAddresses: Array<PrivateIpAddressSpecification>;
+}
+/**
+ * ModifyVpcEndPointServiceWhiteList请求参数结构体
+ */
+export interface ModifyVpcEndPointServiceWhiteListRequest {
+    /**
+      * 用户UIN。
+      */
+    UserUin: string;
+    /**
+      * 终端节点服务ID。
+      */
+    EndPointServiceId: string;
+    /**
+      * 白名单描述信息。
+      */
+    Description?: string;
 }
 /**
  * DescribeProductQuota请求参数结构体
@@ -10024,6 +10555,23 @@ export interface DeleteVpcResponse {
  * DescribeTemplateLimits请求参数结构体
  */
 export declare type DescribeTemplateLimitsRequest = null;
+/**
+ * DescribeVpcEndPointServiceWhiteList返回参数结构体
+ */
+export interface DescribeVpcEndPointServiceWhiteListResponse {
+    /**
+      * 白名单对象数组。
+      */
+    VpcEndpointServiceUserSet: Array<VpcEndPointServiceUser>;
+    /**
+      * 符合条件的白名单个数。
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
 /**
  * AcceptAttachCcnInstances返回参数结构体
  */

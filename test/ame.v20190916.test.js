@@ -18,6 +18,16 @@ const client = new tencentcloud.ame.v20190916.Client({
 })
 describe("ame.v20190916.test.js", function () {
 
+it("ame.v20190916.PutMusicOnTheShelves", async function () {
+    try {
+       const data = await client.PutMusicOnTheShelves({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ame.v20190916.DescribeItemById", async function () {
     try {
        const data = await client.DescribeItemById({})
@@ -98,9 +108,29 @@ it("ame.v20190916.DescribeCloudMusic", async function () {
     }
 })
 
+it("ame.v20190916.ModifyMusicOnShelves", async function () {
+    try {
+       const data = await client.ModifyMusicOnShelves({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ame.v20190916.DescribePackageItems", async function () {
     try {
        const data = await client.DescribePackageItems({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ame.v20190916.TakeMusicOffShelves", async function () {
+    try {
+       const data = await client.TakeMusicOffShelves({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

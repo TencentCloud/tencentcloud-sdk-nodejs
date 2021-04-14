@@ -865,7 +865,7 @@ export interface NodePool {
       */
     ClusterInstanceId: string;
     /**
-      * LifeState 状态
+      * LifeState 状态，当前节点池生命周期状态包括：creating，normal，updating，deleting，deleted
       */
     LifeState: string;
     /**

@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("ame.tencentcloudapi.com", "2019-09-16", clientConfig);
     }
     /**
+     * 根据资源方所传歌曲信息，进行歌曲上架，多个歌曲同时请求时，需构造复合结构进行请求
+     */
+    async PutMusicOnTheShelves(req, cb) {
+        return this.request("PutMusicOnTheShelves", req, cb);
+    }
+    /**
      * 根据歌曲ID查询歌曲信息
      */
     async DescribeItemById(req, cb) {
@@ -76,10 +82,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCloudMusic", req, cb);
     }
     /**
+     * 根据资源方，需要变更的参数，请求该接口进行变更，为空的参数默认为无变更
+     */
+    async ModifyMusicOnShelves(req, cb) {
+        return this.request("ModifyMusicOnShelves", req, cb);
+    }
+    /**
      * 获取曲库包下已核销歌曲列表接口
      */
     async DescribePackageItems(req, cb) {
         return this.request("DescribePackageItems", req, cb);
+    }
+    /**
+     * 根据资源方所传MusicId进行将歌曲进行下架，多个MusicId使用逗号隔开
+     */
+    async TakeMusicOffShelves(req, cb) {
+        return this.request("TakeMusicOffShelves", req, cb);
     }
     /**
      * 获取授权项目下已购云音乐列表

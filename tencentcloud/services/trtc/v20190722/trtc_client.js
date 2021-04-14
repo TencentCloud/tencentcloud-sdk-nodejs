@@ -28,49 +28,6 @@ class Client extends abstract_client_1.AbstractClient {
         super("trtc.tencentcloudapi.com", "2019-07-22", clientConfig);
     }
     /**
-     * 查询云端录制计费时长。
-
-- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
-- 单次查询统计区间最多不能超过31天。
-- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
-- 日结后付费将于次日上午推送账单，建议次日上午9点以后再来查询前一天的用量。
-     */
-    async DescribeRecordStatistic(req, cb) {
-        return this.request("DescribeRecordStatistic", req, cb);
-    }
-    /**
-     * 查询旁路转码计费时长。
-- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
-- 单次查询统计区间最多不能超过31天。
-- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
-- 日结后付费将于次日上午推送账单，建议次日上午9点以后再来查询前一天的用量。
-     */
-    async DescribeTrtcMcuTranscodeTime(req, cb) {
-        return this.request("DescribeTrtcMcuTranscodeTime", req, cb);
-    }
-    /**
-     * 创建异常信息
-     */
-    async CreateTroubleInfo(req, cb) {
-        return this.request("CreateTroubleInfo", req, cb);
-    }
-    /**
-     * 可查询sdkqppid 每天的房间数和用户数，每分钟1次，可查询最近14天的数据。当天未结束，无法查到当天的房间数与用户数。
-     */
-    async DescribeHistoryScale(req, cb) {
-        return this.request("DescribeHistoryScale", req, cb);
-    }
-    /**
-     * 查询音视频互动计费时长。
-- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
-- 单次查询统计区间最多不能超过31天。
-- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
-- 日结后付费将于次日上午推送账单，建议次日上午9点以后再来查询前一天的用量。
-     */
-    async DescribeTrtcInteractiveTime(req, cb) {
-        return this.request("DescribeTrtcInteractiveTime", req, cb);
-    }
-    /**
      * 接口说明：启动云端混流，并指定混流画面中各路画面的布局位置。
 
 TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过此 API 接口，通知腾讯云服务端将多路视频画面合成一路，并指定每一路画面的位置，同时将多路声音进行混音，最终形成一路音视频流，以便用于录制和直播观看。房间销毁后混流自动结束。
@@ -94,6 +51,62 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
         return this.request("StartMCUMixTranscode", req, cb);
     }
     /**
+     * 查询sdkappid下的房间列表。默认返回10条通话，一次最多返回100条通话。可查询14天内的数据。
+注意：不建议依赖接口做实时类业务逻辑处理
+     */
+    async DescribeRoomInformation(req, cb) {
+        return this.request("DescribeRoomInformation", req, cb);
+    }
+    /**
+     * 接口说明：结束云端混流
+     */
+    async StopMCUMixTranscode(req, cb) {
+        return this.request("StopMCUMixTranscode", req, cb);
+    }
+    /**
+     * 创建异常信息
+     */
+    async CreateTroubleInfo(req, cb) {
+        return this.request("CreateTroubleInfo", req, cb);
+    }
+    /**
+     * 可查询sdkqppid 每天的房间数和用户数，每分钟1次，可查询最近14天的数据。当天未结束，无法查到当天的房间数与用户数。
+     */
+    async DescribeHistoryScale(req, cb) {
+        return this.request("DescribeHistoryScale", req, cb);
+    }
+    /**
+     * 删除图片
+     */
+    async DeletePicture(req, cb) {
+        return this.request("DeletePicture", req, cb);
+    }
+    /**
+     * 上传图片
+     */
+    async CreatePicture(req, cb) {
+        return this.request("CreatePicture", req, cb);
+    }
+    /**
+     * 接口说明：将用户从房间移出，适用于主播/房主/管理员踢人等场景。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
+     */
+    async RemoveUser(req, cb) {
+        return this.request("RemoveUser", req, cb);
+    }
+    /**
+     * 查询指定时间内的用户列表及用户通话质量数据，可查询14天内数据。DataType 不为null，查询实时数据时，查询起止时间不超过1个小时，每次查询用户不超过6个，支持跨天查询。DataType，UserIds为null时，默认查询6个用户，同时支持每页查询100以内用户个数（PageSize不超过100）。接口用于查询质量问题，不推荐作为计费使用。
+注意：不建议依赖接口做实时类业务逻辑处理
+     */
+    async DescribeCallDetail(req, cb) {
+        return this.request("DescribeCallDetail", req, cb);
+    }
+    /**
+     * 查询sdkappid维度下每分钟实时质量数据，包括：进房成功率，首帧秒开率，音频卡顿率，视频卡顿率。可查询24小时内数据，查询起止时间不低于1分钟，不超过1个小时。
+     */
+    async DescribeRealtimeQuality(req, cb) {
+        return this.request("DescribeRealtimeQuality", req, cb);
+    }
+    /**
      *  查询sdkappid维度下每分钟实时规模，可查询24小时内数据，查询起止时间不低于1分钟，不超过1个小时。
      */
     async DescribeRealtimeScale(req, cb) {
@@ -112,36 +125,10 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
         return this.request("StopMCUMixTranscodeByStrRoomId", req, cb);
     }
     /**
-     * 查询sdkappid下的房间列表。默认返回10条通话，一次最多返回100条通话。可查询14天内的数据。
-注意：不建议依赖接口做实时类业务逻辑处理
+     * 修改图片相关参数。
      */
-    async DescribeRoomInformation(req, cb) {
-        return this.request("DescribeRoomInformation", req, cb);
-    }
-    /**
-     * 接口说明：将用户从房间移出，适用于主播/房主/管理员踢人等场景。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
-     */
-    async RemoveUser(req, cb) {
-        return this.request("RemoveUser", req, cb);
-    }
-    /**
-     * 查询用户某次通话内的进退房，视频开关等详细事件。可查询14天内数据。
-     */
-    async DescribeDetailEvent(req, cb) {
-        return this.request("DescribeDetailEvent", req, cb);
-    }
-    /**
-     * 接口说明：结束云端混流
-     */
-    async StopMCUMixTranscode(req, cb) {
-        return this.request("StopMCUMixTranscode", req, cb);
-    }
-    /**
-     * 查询指定时间内的用户列表及用户通话质量数据，可查询14天内数据。DataType 不为null，查询实时数据时，查询起止时间不超过1个小时，每次查询用户不超过6个，支持跨天查询。DataType，UserIds为null时，默认查询6个用户，同时支持每页查询100以内用户个数（PageSize不超过100）。接口用于查询质量问题，不推荐作为计费使用。
-注意：不建议依赖接口做实时类业务逻辑处理
-     */
-    async DescribeCallDetail(req, cb) {
-        return this.request("DescribeCallDetail", req, cb);
+    async ModifyPicture(req, cb) {
+        return this.request("ModifyPicture", req, cb);
     }
     /**
      * 接口说明：把房间所有用户从房间移出，解散房间。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
@@ -154,12 +141,6 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
      */
     async DescribeAbnormalEvent(req, cb) {
         return this.request("DescribeAbnormalEvent", req, cb);
-    }
-    /**
-     * 查询sdkappid维度下每分钟实时质量数据，包括：进房成功率，首帧秒开率，音频卡顿率，视频卡顿率。可查询24小时内数据，查询起止时间不低于1分钟，不超过1个小时。
-     */
-    async DescribeRealtimeQuality(req, cb) {
-        return this.request("DescribeRealtimeQuality", req, cb);
     }
     /**
      * 接口说明：启动云端混流，并指定混流画面中各路画面的布局位置。
@@ -195,6 +176,49 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
      */
     async DismissRoom(req, cb) {
         return this.request("DismissRoom", req, cb);
+    }
+    /**
+     * 查询云端录制计费时长。
+
+- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
+- 单次查询统计区间最多不能超过31天。
+- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
+- 日结后付费将于次日上午推送账单，建议次日上午9点以后再来查询前一天的用量。
+     */
+    async DescribeRecordStatistic(req, cb) {
+        return this.request("DescribeRecordStatistic", req, cb);
+    }
+    /**
+     * 查询旁路转码计费时长。
+- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
+- 单次查询统计区间最多不能超过31天。
+- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
+- 日结后付费将于次日上午推送账单，建议次日上午9点以后再来查询前一天的用量。
+     */
+    async DescribeTrtcMcuTranscodeTime(req, cb) {
+        return this.request("DescribeTrtcMcuTranscodeTime", req, cb);
+    }
+    /**
+     * 查询音视频互动计费时长。
+- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
+- 单次查询统计区间最多不能超过31天。
+- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
+- 日结后付费将于次日上午推送账单，建议次日上午9点以后再来查询前一天的用量。
+     */
+    async DescribeTrtcInteractiveTime(req, cb) {
+        return this.request("DescribeTrtcInteractiveTime", req, cb);
+    }
+    /**
+     * 查询某图片相关参数。
+     */
+    async DescribePicture(req, cb) {
+        return this.request("DescribePicture", req, cb);
+    }
+    /**
+     * 查询用户某次通话内的进退房，视频开关等详细事件。可查询14天内数据。
+     */
+    async DescribeDetailEvent(req, cb) {
+        return this.request("DescribeDetailEvent", req, cb);
     }
     /**
      * 查询指定时间内的用户列表，可查询14天内数据，查询起止时间不超过4小时。默认每页查询6个用户，支持每页最大查询100个用户PageSize不超过100）。

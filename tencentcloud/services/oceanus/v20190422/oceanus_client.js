@@ -34,10 +34,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StopJobs", req, cb);
     }
     /**
-     * 删除作业表配置
+     * 描述资源接口
      */
-    async DeleteTableConfig(req, cb) {
-        return this.request("DeleteTableConfig", req, cb);
+    async DescribeResources(req, cb) {
+        return this.request("DescribeResources", req, cb);
+    }
+    /**
+     * 新建作业接口，一个 AppId 最多允许创建1000个作业
+     */
+    async CreateJob(req, cb) {
+        return this.request("CreateJob", req, cb);
     }
     /**
      * 创建资源接口
@@ -46,10 +52,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateResource", req, cb);
     }
     /**
+     * 获取资源关联作业信息
+     */
+    async DescribeResourceRelatedJobs(req, cb) {
+        return this.request("DescribeResourceRelatedJobs", req, cb);
+    }
+    /**
      * 批量启动或者恢复作业，批量操作数量上限20
      */
     async RunJobs(req, cb) {
         return this.request("RunJobs", req, cb);
+    }
+    /**
+     * 删除资源接口
+     */
+    async DeleteResources(req, cb) {
+        return this.request("DeleteResources", req, cb);
     }
     /**
      * 查询作业
@@ -64,6 +82,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSystemResources", req, cb);
     }
     /**
+     * 删除资源版本
+     */
+    async DeleteResourceConfigs(req, cb) {
+        return this.request("DeleteResourceConfigs", req, cb);
+    }
+    /**
      * 创建资源配置接口
      */
     async CreateResourceConfig(req, cb) {
@@ -76,10 +100,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateJobConfig", req, cb);
     }
     /**
-     * 新建作业接口，一个 AppId 最多允许创建1000个作业
+     * 删除作业表配置
      */
-    async CreateJob(req, cb) {
-        return this.request("CreateJob", req, cb);
+    async DeleteTableConfig(req, cb) {
+        return this.request("DeleteTableConfig", req, cb);
+    }
+    /**
+     * 描述资源配置接口
+     */
+    async DescribeResourceConfigs(req, cb) {
+        return this.request("DescribeResourceConfigs", req, cb);
     }
     /**
      * 查询作业配置列表，一次最多查询100个

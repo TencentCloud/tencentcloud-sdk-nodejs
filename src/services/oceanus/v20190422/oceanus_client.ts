@@ -18,37 +18,50 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeResourceConfigsResponse,
   CreateResourceRequest,
   CreateJobRequest,
   ResourceRefDetail,
   StopJobsRequest,
   CreateJobResponse,
+  ResourceLoc,
   RunJobsRequest,
   StopJobDescription,
   DeleteTableConfigResponse,
   CreateResourceConfigResponse,
   CreateJobConfigRequest,
   CreateResourceConfigRequest,
-  CreateResourceResponse,
+  Property,
   DeleteTableConfigRequest,
   SystemResourceItem,
-  StopJobsResponse,
+  DescribeResourceRelatedJobsRequest,
+  DeleteResourcesResponse,
   CreateJobConfigResponse,
+  ResourceConfigItem,
+  DescribeResourcesRequest,
   ResourceLocParam,
+  DeleteResourceConfigsRequest,
   RunJobsResponse,
   Filter,
+  DeleteResourcesRequest,
   DescribeJobsResponse,
-  Property,
+  ResourceItem,
+  StopJobsResponse,
+  CreateResourceResponse,
   DescribeSystemResourcesRequest,
   DescribeJobConfigsRequest,
+  DescribeResourcesResponse,
   RunJobDescription,
   DescribeJobConfigsResponse,
-  ResourceLoc,
+  DeleteResourceConfigsResponse,
+  DescribeResourceRelatedJobsResponse,
+  DescribeSystemResourcesResponse,
+  ResourceRefJobInfo,
   ResourceRef,
   DescribeJobsRequest,
   JobV1,
   JobConfig,
-  DescribeSystemResourcesResponse,
+  DescribeResourceConfigsRequest,
 } from "./oceanus_models"
 
 /**
@@ -71,13 +84,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除作业表配置
+   * 描述资源接口
    */
-  async DeleteTableConfig(
-    req: DeleteTableConfigRequest,
-    cb?: (error: string, rep: DeleteTableConfigResponse) => void
-  ): Promise<DeleteTableConfigResponse> {
-    return this.request("DeleteTableConfig", req, cb)
+  async DescribeResources(
+    req: DescribeResourcesRequest,
+    cb?: (error: string, rep: DescribeResourcesResponse) => void
+  ): Promise<DescribeResourcesResponse> {
+    return this.request("DescribeResources", req, cb)
+  }
+
+  /**
+   * 新建作业接口，一个 AppId 最多允许创建1000个作业
+   */
+  async CreateJob(
+    req: CreateJobRequest,
+    cb?: (error: string, rep: CreateJobResponse) => void
+  ): Promise<CreateJobResponse> {
+    return this.request("CreateJob", req, cb)
   }
 
   /**
@@ -91,6 +114,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取资源关联作业信息
+   */
+  async DescribeResourceRelatedJobs(
+    req: DescribeResourceRelatedJobsRequest,
+    cb?: (error: string, rep: DescribeResourceRelatedJobsResponse) => void
+  ): Promise<DescribeResourceRelatedJobsResponse> {
+    return this.request("DescribeResourceRelatedJobs", req, cb)
+  }
+
+  /**
    * 批量启动或者恢复作业，批量操作数量上限20
    */
   async RunJobs(
@@ -98,6 +131,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RunJobsResponse) => void
   ): Promise<RunJobsResponse> {
     return this.request("RunJobs", req, cb)
+  }
+
+  /**
+   * 删除资源接口
+   */
+  async DeleteResources(
+    req: DeleteResourcesRequest,
+    cb?: (error: string, rep: DeleteResourcesResponse) => void
+  ): Promise<DeleteResourcesResponse> {
+    return this.request("DeleteResources", req, cb)
   }
 
   /**
@@ -121,6 +164,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除资源版本
+   */
+  async DeleteResourceConfigs(
+    req: DeleteResourceConfigsRequest,
+    cb?: (error: string, rep: DeleteResourceConfigsResponse) => void
+  ): Promise<DeleteResourceConfigsResponse> {
+    return this.request("DeleteResourceConfigs", req, cb)
+  }
+
+  /**
    * 创建资源配置接口
    */
   async CreateResourceConfig(
@@ -141,13 +194,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 新建作业接口，一个 AppId 最多允许创建1000个作业
+   * 删除作业表配置
    */
-  async CreateJob(
-    req: CreateJobRequest,
-    cb?: (error: string, rep: CreateJobResponse) => void
-  ): Promise<CreateJobResponse> {
-    return this.request("CreateJob", req, cb)
+  async DeleteTableConfig(
+    req: DeleteTableConfigRequest,
+    cb?: (error: string, rep: DeleteTableConfigResponse) => void
+  ): Promise<DeleteTableConfigResponse> {
+    return this.request("DeleteTableConfig", req, cb)
+  }
+
+  /**
+   * 描述资源配置接口
+   */
+  async DescribeResourceConfigs(
+    req: DescribeResourceConfigsRequest,
+    cb?: (error: string, rep: DescribeResourceConfigsResponse) => void
+  ): Promise<DescribeResourceConfigsResponse> {
+    return this.request("DescribeResourceConfigs", req, cb)
   }
 
   /**

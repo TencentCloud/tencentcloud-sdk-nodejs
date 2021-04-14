@@ -108,7 +108,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ImageRecognition", req, cb);
     }
     /**
-     * 每次调用人脸核身小程序服务前，需先调用本接口获取EidToken，用来串联核身流程，在验证完成后，用于获取验证结果信息。
+     * 每次调用E证通小程序服务前，需先调用本接口获取EidToken，用来串联核身流程，在验证完成后，用于获取验证结果信息。
      */
     async GetEidToken(req, cb) {
         return this.request("GetEidToken", req, cb);

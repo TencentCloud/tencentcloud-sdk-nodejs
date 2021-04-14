@@ -124,6 +124,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteNetworkAcl", req, cb);
     }
     /**
+     * 删除终端节点服务白名单。
+     */
+    async DeleteVpcEndPointServiceWhiteList(req, cb) {
+        return this.request("DeleteVpcEndPointServiceWhiteList", req, cb);
+    }
+    /**
      * 本接口（DescribeNatGatewayDestinationIpPortTranslationNatRules）用于查询NAT网关端口转发规则对象数组。
      */
     async DescribeNatGatewayDestinationIpPortTranslationNatRules(req, cb) {
@@ -175,10 +181,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeNetDetects", req, cb);
     }
     /**
-     * 本接口（ModifyCcnRegionBandwidthLimitsType）用于修改后付费云联网实例修改带宽限速策略。
+     * 本接口（DescribePriceCreateDirectConnectGateway）用于创建专线网关询价。
      */
-    async ModifyCcnRegionBandwidthLimitsType(req, cb) {
-        return this.request("ModifyCcnRegionBandwidthLimitsType", req, cb);
+    async InquirePriceCreateDirectConnectGateway(req, cb) {
+        return this.request("InquirePriceCreateDirectConnectGateway", req, cb);
     }
     /**
      * 本接口（DescribeGatewayFlowMonitorDetail）用于查询网关流量监控明细。
@@ -214,6 +220,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteVpnConnection", req, cb);
     }
     /**
+     * 是否接受终端节点连接请求。
+     */
+    async EnableVpcEndPointConnect(req, cb) {
+        return this.request("EnableVpcEndPointConnect", req, cb);
+    }
+    /**
      * 本接口（ModifyAddressTemplateGroupAttribute）用于修改IP地址模板集合
      */
     async ModifyAddressTemplateGroupAttribute(req, cb) {
@@ -239,6 +251,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteLocalGateway", req, cb);
     }
     /**
+     * 本接口（ModifyNetworkAclEntries）用于修改（包括添加和删除）网络ACL的入站规则和出站规则。在NetworkAclEntrySet参数中：
+* 若同时传入入站规则和出站规则，则重置原有的入站规则和出站规则，并分别导入传入的规则。
+* 若仅传入入站规则，则仅重置原有的入站规则，并导入传入的规则，不影响原有的出站规则（若仅传入出站规则，处理方式类似入站方向）。
+     */
+    async ModifyNetworkAclEntries(req, cb) {
+        return this.request("ModifyNetworkAclEntries", req, cb);
+    }
+    /**
      * 本接口（DetachCcnInstances）用于从云联网实例中解关联指定的网络实例。<br />
 解关联网络实例后，相应的路由策略会一并删除。
      */
@@ -256,6 +276,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyPrivateIpAddressesAttribute(req, cb) {
         return this.request("ModifyPrivateIpAddressesAttribute", req, cb);
+    }
+    /**
+     * 修改终端节点属性。
+     */
+    async ModifyVpcEndPointAttribute(req, cb) {
+        return this.request("ModifyVpcEndPointAttribute", req, cb);
+    }
+    /**
+     * 终端节点解绑安全组。
+     */
+    async DisassociateVpcEndPointSecurityGroups(req, cb) {
+        return this.request("DisassociateVpcEndPointSecurityGroups", req, cb);
     }
     /**
      * 本接口（CreateDirectConnectGatewayCcnRoutes）用于创建专线网关的云联网路由（IDC网段）
@@ -285,10 +317,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AssignPrivateIpAddresses", req, cb);
     }
     /**
-     * 本接口（DescribePriceCreateDirectConnectGateway）用于创建专线网关询价。
+     * 查询终端节点服务列表。
      */
-    async InquirePriceCreateDirectConnectGateway(req, cb) {
-        return this.request("InquirePriceCreateDirectConnectGateway", req, cb);
+    async DescribeVpcEndPointService(req, cb) {
+        return this.request("DescribeVpcEndPointService", req, cb);
     }
     /**
      * 本接口（CreateAndAttachNetworkInterface）用于创建弹性网卡并绑定云服务器。
@@ -300,6 +332,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateAndAttachNetworkInterface(req, cb) {
         return this.request("CreateAndAttachNetworkInterface", req, cb);
+    }
+    /**
+     * 修改终端节点服务白名单属性。
+     */
+    async ModifyVpcEndPointServiceWhiteList(req, cb) {
+        return this.request("ModifyVpcEndPointServiceWhiteList", req, cb);
     }
     /**
      * 本接口（DescribeNatGateways）用于查询 NAT 网关。
@@ -679,12 +717,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteCcn", req, cb);
     }
     /**
-     * 本接口（ModifyNetworkAclEntries）用于修改（包括添加和删除）网络ACL的入站规则和出站规则。在NetworkAclEntrySet参数中：
-* 若同时传入入站规则和出站规则，则重置原有的入站规则和出站规则，并分别导入传入的规则。
-* 若仅传入入站规则，则仅重置原有的入站规则，并导入传入的规则，不影响原有的出站规则（若仅传入出站规则，处理方式类似入站方向）。
+     * 创建终端节点服务。
      */
-    async ModifyNetworkAclEntries(req, cb) {
-        return this.request("ModifyNetworkAclEntries", req, cb);
+    async CreateVpcEndPointService(req, cb) {
+        return this.request("CreateVpcEndPointService", req, cb);
     }
     /**
      * 本接口（HaVipDisassociateAddressIp）用于将高可用虚拟IP（HAVIP）已绑定的弹性公网IP（EIP）解除绑定<br />
@@ -729,6 +765,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyDhcpIpAttribute(req, cb) {
         return this.request("ModifyDhcpIpAttribute", req, cb);
+    }
+    /**
+     * 本接口（ModifyCcnRegionBandwidthLimitsType）用于修改后付费云联网实例修改带宽限速策略。
+     */
+    async ModifyCcnRegionBandwidthLimitsType(req, cb) {
+        return this.request("ModifyCcnRegionBandwidthLimitsType", req, cb);
     }
     /**
      * 本接口 (DescribeBandwidthPackageResources) 用于根据共享带宽包唯一ID查询共享带宽包内的资源列表，支持按条件过滤查询结果和分页查询。
@@ -940,10 +982,24 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("NotifyRoutes", req, cb);
     }
     /**
+     * 删除终端节点服务。
+
+
+     */
+    async DeleteVpcEndPointService(req, cb) {
+        return this.request("DeleteVpcEndPointService", req, cb);
+    }
+    /**
      * 本接口(ModifyAssistantCidr)用于批量修改辅助CIDR，支持新增和删除。（接口灰度中，如需使用请提工单。）
      */
     async ModifyAssistantCidr(req, cb) {
         return this.request("ModifyAssistantCidr", req, cb);
+    }
+    /**
+     * 删除终端节点。
+     */
+    async DeleteVpcEndPoint(req, cb) {
+        return this.request("DeleteVpcEndPoint", req, cb);
     }
     /**
      * 本接口（DeleteVpnGateway）用于删除VPN网关。目前只支持删除运行中的按量计费的IPSEC网关实例。
@@ -1001,10 +1057,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DisableCcnRoutes", req, cb);
     }
     /**
-     * 本接口（InquiryPriceCreateVpnGateway）用于创建VPN网关询价。
+     * 查询终端节点服务的服务白名单列表。
      */
-    async InquiryPriceCreateVpnGateway(req, cb) {
-        return this.request("InquiryPriceCreateVpnGateway", req, cb);
+    async DescribeVpcEndPointServiceWhiteList(req, cb) {
+        return this.request("DescribeVpcEndPointServiceWhiteList", req, cb);
     }
     /**
      * 本接口(ResetVpnConnection)用于重置VPN通道。
@@ -1268,6 +1324,12 @@ LimitTypes取值范围：
         return this.request("DescribeProductQuota", req, cb);
     }
     /**
+     * 本接口（InquiryPriceCreateVpnGateway）用于创建VPN网关询价。
+     */
+    async InquiryPriceCreateVpnGateway(req, cb) {
+        return this.request("InquiryPriceCreateVpnGateway", req, cb);
+    }
+    /**
      * 接口用于修改带宽包属性，包括带宽包名字等
      */
     async ModifyBandwidthPackageAttribute(req, cb) {
@@ -1491,6 +1553,14 @@ LimitTypes取值范围：
         return this.request("ReleaseAddresses", req, cb);
     }
     /**
+     * 修改终端节点服务属性。
+
+
+     */
+    async ModifyVpcEndPointServiceAttribute(req, cb) {
+        return this.request("ModifyVpcEndPointServiceAttribute", req, cb);
+    }
+    /**
      * 接口用于查询带宽包详细信息，包括带宽包唯一标识ID，类型，计费模式，名称，资源信息等
      */
     async DescribeBandwidthPackages(req, cb) {
@@ -1582,6 +1652,12 @@ LimitTypes取值范围：
         return this.request("DescribeAddressTemplateGroups", req, cb);
     }
     /**
+     * 创建终端节点。
+     */
+    async CreateVpcEndPoint(req, cb) {
+        return this.request("CreateVpcEndPoint", req, cb);
+    }
+    /**
      * 本接口(DetachClassicLinkVpc)用于删除私有网络和基础网络设备互通。
      */
     async DetachClassicLinkVpc(req, cb) {
@@ -1632,6 +1708,12 @@ LimitTypes取值范围：
         return this.request("ModifyVpcAttribute", req, cb);
     }
     /**
+     * 查询终端节点列表。
+     */
+    async DescribeVpcEndPoint(req, cb) {
+        return this.request("DescribeVpcEndPoint", req, cb);
+    }
+    /**
      * 本接口（CreateSecurityGroupWithPolicies）用于创建新的安全组（SecurityGroup），并且可以同时添加安全组规则（SecurityGroupPolicy）。
 * 每个账户下每个地域的每个项目的<a href="https://cloud.tencent.com/document/product/213/12453">安全组数量限制</a>。
 * 新建的安全组的入站和出站规则默认都是全部拒绝，在创建后通常您需要再调用CreateSecurityGroupPolicies将安全组的规则设置为需要的规则。
@@ -1649,6 +1731,12 @@ LimitTypes取值范围：
      */
     async CreateSecurityGroupWithPolicies(req, cb) {
         return this.request("CreateSecurityGroupWithPolicies", req, cb);
+    }
+    /**
+     * 创建终端服务白名单。
+     */
+    async CreateVpcEndPointServiceWhiteList(req, cb) {
+        return this.request("CreateVpcEndPointServiceWhiteList", req, cb);
     }
 }
 exports.Client = Client;

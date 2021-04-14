@@ -408,7 +408,7 @@ export interface PhoneVerificationRequest {
  */
 export interface GetEidResultRequest {
     /**
-      * 人脸核身流程的标识，调用DetectAuth接口时生成。
+      * 人脸核身流程的标识，调用GetEidToken接口时生成的。
       */
     EidToken: string;
     /**
@@ -959,7 +959,7 @@ export interface DetectInfoText {
       */
     Comparemsg: string;
     /**
-      * 本次流程活体一比一的分数。
+      * 本次流程活体一比一的分数，取值范围 [0.00, 100.00]。相似度大于等于70时才判断为同一人，也可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Sim: string;

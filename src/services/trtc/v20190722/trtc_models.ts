@@ -92,6 +92,16 @@ export interface DescribeTrtcInteractiveTimeResponse {
 }
 
 /**
+ * ModifyPicture返回参数结构体
+ */
+export interface ModifyPictureResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * StartMCUMixTranscodeByStrRoomId请求参数结构体
  */
 export interface StartMCUMixTranscodeByStrRoomIdRequest {
@@ -192,18 +202,43 @@ export interface TimeValue {
 }
 
 /**
- * DismissRoomByStrRoomId请求参数结构体
+ * CreatePicture请求参数结构体
  */
-export interface DismissRoomByStrRoomIdRequest {
+export interface CreatePictureRequest {
   /**
-   * TRTC的SDKAppId。
+   * 应用id
    */
   SdkAppId: number
 
   /**
-   * 房间号。
+   * 图片内容经base64编码后的string格式
    */
-  RoomId: string
+  Content: string
+
+  /**
+   * 图片后缀名
+   */
+  Suffix: string
+
+  /**
+   * 图片长度
+   */
+  Height: number
+
+  /**
+   * 图片宽度
+   */
+  Width: number
+
+  /**
+   * 显示位置x轴方向
+   */
+  XPosition: number
+
+  /**
+   * 显示位置y轴方向
+   */
+  YPosition: number
 }
 
 /**
@@ -693,6 +728,21 @@ export interface DescribeHistoryScaleRequest {
 }
 
 /**
+ * DeletePicture请求参数结构体
+ */
+export interface DeletePictureRequest {
+  /**
+   * 图片id
+   */
+  PictureId: number
+
+  /**
+   * 应用id
+   */
+  SdkAppId: number
+}
+
+/**
  * DescribeRoomInformation返回参数结构体
  */
 export interface DescribeRoomInformationResponse {
@@ -822,6 +872,41 @@ export interface EventMessage {
 }
 
 /**
+ * ModifyPicture请求参数结构体
+ */
+export interface ModifyPictureRequest {
+  /**
+   * 图片id
+   */
+  PictureId: number
+
+  /**
+   * 应用id
+   */
+  SdkAppId: number
+
+  /**
+   * 图片长度
+   */
+  Height?: number
+
+  /**
+   * 图片宽度
+   */
+  Width?: number
+
+  /**
+   * 显示位置x轴方向
+   */
+  XPosition?: number
+
+  /**
+   * 显示位置y轴方向
+   */
+  YPosition?: number
+}
+
+/**
  * CreateTroubleInfo返回参数结构体
  */
 export interface CreateTroubleInfoResponse {
@@ -928,31 +1013,13 @@ audioBlockPercent：音频卡顿率
 }
 
 /**
- * 历史规模信息
+ * DeletePicture返回参数结构体
  */
-export interface ScaleInfomation {
+export interface DeletePictureResponse {
   /**
-   * 每天开始的时间
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Time: number
-
-  /**
-      * 房间人数，用户重复进入同一个房间为1次
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UserNumber: number
-
-  /**
-      * 房间人次，用户每次进入房间为一次
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UserCount: number
-
-  /**
-      * sdkappid下一天内的房间数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RoomNumbers: number
+  RequestId?: string
 }
 
 /**
@@ -1064,6 +1131,21 @@ export interface DescribeDetailEventResponse {
 }
 
 /**
+ * DismissRoomByStrRoomId请求参数结构体
+ */
+export interface DismissRoomByStrRoomIdRequest {
+  /**
+   * TRTC的SDKAppId。
+   */
+  SdkAppId: number
+
+  /**
+   * 房间号。
+   */
+  RoomId: string
+}
+
+/**
  * StartMCUMixTranscode返回参数结构体
  */
 export interface StartMCUMixTranscodeResponse {
@@ -1106,6 +1188,31 @@ export interface DescribeTrtcMcuTranscodeTimeResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribePicture请求参数结构体
+ */
+export interface DescribePictureRequest {
+  /**
+   * 应用id
+   */
+  SdkAppId: number
+
+  /**
+   * 图片id,不传时返回该应用下所有图片
+   */
+  PictureId?: number
+
+  /**
+   * 每页数量
+   */
+  PageSize?: number
+
+  /**
+   * 页码
+   */
+  PageNo?: number
 }
 
 /**
@@ -1298,6 +1405,26 @@ export interface DescribeCallDetailResponse {
 }
 
 /**
+ * DescribePicture返回参数结构体
+ */
+export interface DescribePictureResponse {
+  /**
+   * 返回的图片记录数
+   */
+  Total: number
+
+  /**
+   * 图片信息列表
+   */
+  PictureInfo: Array<PictureInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 查询音视频互动时长的输出数据。
 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
  */
@@ -1406,6 +1533,34 @@ export interface DescribeRoomInformationRequest {
 }
 
 /**
+ * 历史规模信息
+ */
+export interface ScaleInfomation {
+  /**
+   * 每天开始的时间
+   */
+  Time: number
+
+  /**
+      * 房间人数，用户重复进入同一个房间为1次
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserNumber: number
+
+  /**
+      * 房间人次，用户每次进入房间为一次
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserCount: number
+
+  /**
+      * sdkappid下一天内的房间数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RoomNumbers: number
+}
+
+/**
  * DescribeDetailEvent请求参数结构体
  */
 export interface DescribeDetailEventRequest {
@@ -1501,6 +1656,21 @@ export interface RoomState {
 }
 
 /**
+ * CreatePicture返回参数结构体
+ */
+export interface CreatePictureResponse {
+  /**
+   * 图片id
+   */
+  PictureId: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeRecordStatistic返回参数结构体
  */
 export interface DescribeRecordStatisticResponse {
@@ -1554,4 +1724,39 @@ export interface StartMCUMixTranscodeByStrRoomIdResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 图片列表信息
+ */
+export interface PictureInfo {
+  /**
+   * 图片长度
+   */
+  Height: number
+
+  /**
+   * 图片宽度
+   */
+  Width: number
+
+  /**
+   * 显示位置x轴方向
+   */
+  XPosition: number
+
+  /**
+   * 显示位置y轴方向
+   */
+  YPosition: number
+
+  /**
+   * 应用id
+   */
+  SdkAppId: number
+
+  /**
+   * 图片id
+   */
+  PictureId: number
 }

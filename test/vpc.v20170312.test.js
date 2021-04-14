@@ -168,6 +168,16 @@ it("vpc.v20170312.DeleteNetworkAcl", async function () {
     }
 })
 
+it("vpc.v20170312.DeleteVpcEndPointServiceWhiteList", async function () {
+    try {
+       const data = await client.DeleteVpcEndPointServiceWhiteList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DescribeNatGatewayDestinationIpPortTranslationNatRules", async function () {
     try {
        const data = await client.DescribeNatGatewayDestinationIpPortTranslationNatRules({})
@@ -248,9 +258,9 @@ it("vpc.v20170312.DescribeNetDetects", async function () {
     }
 })
 
-it("vpc.v20170312.ModifyCcnRegionBandwidthLimitsType", async function () {
+it("vpc.v20170312.InquirePriceCreateDirectConnectGateway", async function () {
     try {
-       const data = await client.ModifyCcnRegionBandwidthLimitsType({})
+       const data = await client.InquirePriceCreateDirectConnectGateway({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,6 +318,16 @@ it("vpc.v20170312.DeleteVpnConnection", async function () {
     }
 })
 
+it("vpc.v20170312.EnableVpcEndPointConnect", async function () {
+    try {
+       const data = await client.EnableVpcEndPointConnect({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.ModifyAddressTemplateGroupAttribute", async function () {
     try {
        const data = await client.ModifyAddressTemplateGroupAttribute({})
@@ -348,6 +368,16 @@ it("vpc.v20170312.DeleteLocalGateway", async function () {
     }
 })
 
+it("vpc.v20170312.ModifyNetworkAclEntries", async function () {
+    try {
+       const data = await client.ModifyNetworkAclEntries({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DetachCcnInstances", async function () {
     try {
        const data = await client.DetachCcnInstances({})
@@ -371,6 +401,26 @@ it("vpc.v20170312.AssociateNatGatewayAddress", async function () {
 it("vpc.v20170312.ModifyPrivateIpAddressesAttribute", async function () {
     try {
        const data = await client.ModifyPrivateIpAddressesAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.ModifyVpcEndPointAttribute", async function () {
+    try {
+       const data = await client.ModifyVpcEndPointAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.DisassociateVpcEndPointSecurityGroups", async function () {
+    try {
+       const data = await client.DisassociateVpcEndPointSecurityGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -418,9 +468,9 @@ it("vpc.v20170312.AssignPrivateIpAddresses", async function () {
     }
 })
 
-it("vpc.v20170312.InquirePriceCreateDirectConnectGateway", async function () {
+it("vpc.v20170312.DescribeVpcEndPointService", async function () {
     try {
-       const data = await client.InquirePriceCreateDirectConnectGateway({})
+       const data = await client.DescribeVpcEndPointService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -431,6 +481,16 @@ it("vpc.v20170312.InquirePriceCreateDirectConnectGateway", async function () {
 it("vpc.v20170312.CreateAndAttachNetworkInterface", async function () {
     try {
        const data = await client.CreateAndAttachNetworkInterface({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.ModifyVpcEndPointServiceWhiteList", async function () {
+    try {
+       const data = await client.ModifyVpcEndPointServiceWhiteList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -958,9 +1018,9 @@ it("vpc.v20170312.DeleteCcn", async function () {
     }
 })
 
-it("vpc.v20170312.ModifyNetworkAclEntries", async function () {
+it("vpc.v20170312.CreateVpcEndPointService", async function () {
     try {
-       const data = await client.ModifyNetworkAclEntries({})
+       const data = await client.CreateVpcEndPointService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1031,6 +1091,16 @@ it("vpc.v20170312.UnassignIpv6CidrBlock", async function () {
 it("vpc.v20170312.ModifyDhcpIpAttribute", async function () {
     try {
        const data = await client.ModifyDhcpIpAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.ModifyCcnRegionBandwidthLimitsType", async function () {
+    try {
+       const data = await client.ModifyCcnRegionBandwidthLimitsType({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1348,9 +1418,29 @@ it("vpc.v20170312.NotifyRoutes", async function () {
     }
 })
 
+it("vpc.v20170312.DeleteVpcEndPointService", async function () {
+    try {
+       const data = await client.DeleteVpcEndPointService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.ModifyAssistantCidr", async function () {
     try {
        const data = await client.ModifyAssistantCidr({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.DeleteVpcEndPoint", async function () {
+    try {
+       const data = await client.DeleteVpcEndPoint({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1448,9 +1538,9 @@ it("vpc.v20170312.DisableCcnRoutes", async function () {
     }
 })
 
-it("vpc.v20170312.InquiryPriceCreateVpnGateway", async function () {
+it("vpc.v20170312.DescribeVpcEndPointServiceWhiteList", async function () {
     try {
-       const data = await client.InquiryPriceCreateVpnGateway({})
+       const data = await client.DescribeVpcEndPointServiceWhiteList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1808,6 +1898,16 @@ it("vpc.v20170312.DescribeProductQuota", async function () {
     }
 })
 
+it("vpc.v20170312.InquiryPriceCreateVpnGateway", async function () {
+    try {
+       const data = await client.InquiryPriceCreateVpnGateway({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.ModifyBandwidthPackageAttribute", async function () {
     try {
        const data = await client.ModifyBandwidthPackageAttribute({})
@@ -2158,6 +2258,16 @@ it("vpc.v20170312.ReleaseAddresses", async function () {
     }
 })
 
+it("vpc.v20170312.ModifyVpcEndPointServiceAttribute", async function () {
+    try {
+       const data = await client.ModifyVpcEndPointServiceAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DescribeBandwidthPackages", async function () {
     try {
        const data = await client.DescribeBandwidthPackages({})
@@ -2308,6 +2418,16 @@ it("vpc.v20170312.DescribeAddressTemplateGroups", async function () {
     }
 })
 
+it("vpc.v20170312.CreateVpcEndPoint", async function () {
+    try {
+       const data = await client.CreateVpcEndPoint({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DetachClassicLinkVpc", async function () {
     try {
        const data = await client.DetachClassicLinkVpc({})
@@ -2368,9 +2488,29 @@ it("vpc.v20170312.ModifyVpcAttribute", async function () {
     }
 })
 
+it("vpc.v20170312.DescribeVpcEndPoint", async function () {
+    try {
+       const data = await client.DescribeVpcEndPoint({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.CreateSecurityGroupWithPolicies", async function () {
     try {
        const data = await client.CreateSecurityGroupWithPolicies({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.CreateVpcEndPointServiceWhiteList", async function () {
+    try {
+       const data = await client.CreateVpcEndPointServiceWhiteList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

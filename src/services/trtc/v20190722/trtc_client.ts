@@ -22,10 +22,11 @@ import {
   RealtimeData,
   DescribeAbnormalEventRequest,
   DescribeTrtcInteractiveTimeResponse,
+  ModifyPictureResponse,
   StartMCUMixTranscodeByStrRoomIdRequest,
   LayoutParams,
   TimeValue,
-  DismissRoomByStrRoomIdRequest,
+  CreatePictureRequest,
   DescribeTrtcMcuTranscodeTimeRequest,
   SdkAppIdTrtcMcuTranscodeTimeUsage,
   RemoveUserByStrRoomIdRequest,
@@ -44,26 +45,30 @@ import {
   StopMCUMixTranscodeRequest,
   UserInformation,
   DescribeHistoryScaleRequest,
+  DeletePictureRequest,
   DescribeRoomInformationResponse,
   RecordUsage,
   RemoveUserRequest,
   OutputParams,
   EventMessage,
+  ModifyPictureRequest,
   CreateTroubleInfoResponse,
   StopMCUMixTranscodeByStrRoomIdRequest,
   QualityData,
   AbnormalEvent,
   StopMCUMixTranscodeByStrRoomIdResponse,
   DescribeRealtimeQualityRequest,
-  ScaleInfomation,
+  DeletePictureResponse,
   StopMCUMixTranscodeResponse,
   CreateTroubleInfoRequest,
   EventList,
   DismissRoomRequest,
   DescribeDetailEventResponse,
+  DismissRoomByStrRoomIdRequest,
   StartMCUMixTranscodeResponse,
   OneSdkAppIdTranscodeTimeUsagesInfo,
   DescribeTrtcMcuTranscodeTimeResponse,
+  DescribePictureRequest,
   SdkAppIdRecordUsage,
   OneSdkAppIdUsagesInfo,
   SmallVideoLayoutParams,
@@ -71,17 +76,21 @@ import {
   PresetLayoutConfig,
   DescribeRealtimeScaleRequest,
   DescribeCallDetailResponse,
+  DescribePictureResponse,
   SdkAppIdTrtcUsage,
   DescribeTrtcInteractiveTimeRequest,
   PublishCdnParams,
   DescribeRoomInformationRequest,
+  ScaleInfomation,
   DescribeDetailEventRequest,
   AbnormalExperience,
   RoomState,
+  CreatePictureResponse,
   DescribeRecordStatisticResponse,
   DismissRoomByStrRoomIdResponse,
   DescribeHistoryScaleResponse,
   StartMCUMixTranscodeByStrRoomIdResponse,
+  PictureInfo,
 } from "./trtc_models"
 
 /**
@@ -91,69 +100,6 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("trtc.tencentcloudapi.com", "2019-07-22", clientConfig)
-  }
-
-  /**
-     * 查询云端录制计费时长。
-
-- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
-- 单次查询统计区间最多不能超过31天。
-- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
-- 日结后付费将于次日上午推送账单，建议次日上午9点以后再来查询前一天的用量。
-     */
-  async DescribeRecordStatistic(
-    req: DescribeRecordStatisticRequest,
-    cb?: (error: string, rep: DescribeRecordStatisticResponse) => void
-  ): Promise<DescribeRecordStatisticResponse> {
-    return this.request("DescribeRecordStatistic", req, cb)
-  }
-
-  /**
-     * 查询旁路转码计费时长。
-- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
-- 单次查询统计区间最多不能超过31天。
-- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
-- 日结后付费将于次日上午推送账单，建议次日上午9点以后再来查询前一天的用量。
-     */
-  async DescribeTrtcMcuTranscodeTime(
-    req: DescribeTrtcMcuTranscodeTimeRequest,
-    cb?: (error: string, rep: DescribeTrtcMcuTranscodeTimeResponse) => void
-  ): Promise<DescribeTrtcMcuTranscodeTimeResponse> {
-    return this.request("DescribeTrtcMcuTranscodeTime", req, cb)
-  }
-
-  /**
-   * 创建异常信息
-   */
-  async CreateTroubleInfo(
-    req: CreateTroubleInfoRequest,
-    cb?: (error: string, rep: CreateTroubleInfoResponse) => void
-  ): Promise<CreateTroubleInfoResponse> {
-    return this.request("CreateTroubleInfo", req, cb)
-  }
-
-  /**
-   * 可查询sdkqppid 每天的房间数和用户数，每分钟1次，可查询最近14天的数据。当天未结束，无法查到当天的房间数与用户数。
-   */
-  async DescribeHistoryScale(
-    req: DescribeHistoryScaleRequest,
-    cb?: (error: string, rep: DescribeHistoryScaleResponse) => void
-  ): Promise<DescribeHistoryScaleResponse> {
-    return this.request("DescribeHistoryScale", req, cb)
-  }
-
-  /**
-     * 查询音视频互动计费时长。
-- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
-- 单次查询统计区间最多不能超过31天。
-- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
-- 日结后付费将于次日上午推送账单，建议次日上午9点以后再来查询前一天的用量。
-     */
-  async DescribeTrtcInteractiveTime(
-    req: DescribeTrtcInteractiveTimeRequest,
-    cb?: (error: string, rep: DescribeTrtcInteractiveTimeResponse) => void
-  ): Promise<DescribeTrtcInteractiveTimeResponse> {
-    return this.request("DescribeTrtcInteractiveTime", req, cb)
   }
 
   /**
@@ -181,6 +127,98 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     cb?: (error: string, rep: StartMCUMixTranscodeResponse) => void
   ): Promise<StartMCUMixTranscodeResponse> {
     return this.request("StartMCUMixTranscode", req, cb)
+  }
+
+  /**
+     * 查询sdkappid下的房间列表。默认返回10条通话，一次最多返回100条通话。可查询14天内的数据。
+注意：不建议依赖接口做实时类业务逻辑处理
+     */
+  async DescribeRoomInformation(
+    req: DescribeRoomInformationRequest,
+    cb?: (error: string, rep: DescribeRoomInformationResponse) => void
+  ): Promise<DescribeRoomInformationResponse> {
+    return this.request("DescribeRoomInformation", req, cb)
+  }
+
+  /**
+   * 接口说明：结束云端混流
+   */
+  async StopMCUMixTranscode(
+    req: StopMCUMixTranscodeRequest,
+    cb?: (error: string, rep: StopMCUMixTranscodeResponse) => void
+  ): Promise<StopMCUMixTranscodeResponse> {
+    return this.request("StopMCUMixTranscode", req, cb)
+  }
+
+  /**
+   * 创建异常信息
+   */
+  async CreateTroubleInfo(
+    req: CreateTroubleInfoRequest,
+    cb?: (error: string, rep: CreateTroubleInfoResponse) => void
+  ): Promise<CreateTroubleInfoResponse> {
+    return this.request("CreateTroubleInfo", req, cb)
+  }
+
+  /**
+   * 可查询sdkqppid 每天的房间数和用户数，每分钟1次，可查询最近14天的数据。当天未结束，无法查到当天的房间数与用户数。
+   */
+  async DescribeHistoryScale(
+    req: DescribeHistoryScaleRequest,
+    cb?: (error: string, rep: DescribeHistoryScaleResponse) => void
+  ): Promise<DescribeHistoryScaleResponse> {
+    return this.request("DescribeHistoryScale", req, cb)
+  }
+
+  /**
+   * 删除图片
+   */
+  async DeletePicture(
+    req: DeletePictureRequest,
+    cb?: (error: string, rep: DeletePictureResponse) => void
+  ): Promise<DeletePictureResponse> {
+    return this.request("DeletePicture", req, cb)
+  }
+
+  /**
+   * 上传图片
+   */
+  async CreatePicture(
+    req: CreatePictureRequest,
+    cb?: (error: string, rep: CreatePictureResponse) => void
+  ): Promise<CreatePictureResponse> {
+    return this.request("CreatePicture", req, cb)
+  }
+
+  /**
+   * 接口说明：将用户从房间移出，适用于主播/房主/管理员踢人等场景。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
+   */
+  async RemoveUser(
+    req: RemoveUserRequest,
+    cb?: (error: string, rep: RemoveUserResponse) => void
+  ): Promise<RemoveUserResponse> {
+    return this.request("RemoveUser", req, cb)
+  }
+
+  /**
+     * 查询指定时间内的用户列表及用户通话质量数据，可查询14天内数据。DataType 不为null，查询实时数据时，查询起止时间不超过1个小时，每次查询用户不超过6个，支持跨天查询。DataType，UserIds为null时，默认查询6个用户，同时支持每页查询100以内用户个数（PageSize不超过100）。接口用于查询质量问题，不推荐作为计费使用。
+注意：不建议依赖接口做实时类业务逻辑处理
+     */
+  async DescribeCallDetail(
+    req: DescribeCallDetailRequest,
+    cb?: (error: string, rep: DescribeCallDetailResponse) => void
+  ): Promise<DescribeCallDetailResponse> {
+    return this.request("DescribeCallDetail", req, cb)
+  }
+
+  /**
+   * 查询sdkappid维度下每分钟实时质量数据，包括：进房成功率，首帧秒开率，音频卡顿率，视频卡顿率。可查询24小时内数据，查询起止时间不低于1分钟，不超过1个小时。
+   */
+  async DescribeRealtimeQuality(
+    req: DescribeRealtimeQualityRequest,
+    cb?: (error: string, rep: DescribeRealtimeQualityResponse) => void
+  ): Promise<DescribeRealtimeQualityResponse> {
+    return this.request("DescribeRealtimeQuality", req, cb)
   }
 
   /**
@@ -214,55 +252,13 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
   }
 
   /**
-     * 查询sdkappid下的房间列表。默认返回10条通话，一次最多返回100条通话。可查询14天内的数据。
-注意：不建议依赖接口做实时类业务逻辑处理
-     */
-  async DescribeRoomInformation(
-    req: DescribeRoomInformationRequest,
-    cb?: (error: string, rep: DescribeRoomInformationResponse) => void
-  ): Promise<DescribeRoomInformationResponse> {
-    return this.request("DescribeRoomInformation", req, cb)
-  }
-
-  /**
-   * 接口说明：将用户从房间移出，适用于主播/房主/管理员踢人等场景。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
+   * 修改图片相关参数。
    */
-  async RemoveUser(
-    req: RemoveUserRequest,
-    cb?: (error: string, rep: RemoveUserResponse) => void
-  ): Promise<RemoveUserResponse> {
-    return this.request("RemoveUser", req, cb)
-  }
-
-  /**
-   * 查询用户某次通话内的进退房，视频开关等详细事件。可查询14天内数据。
-   */
-  async DescribeDetailEvent(
-    req: DescribeDetailEventRequest,
-    cb?: (error: string, rep: DescribeDetailEventResponse) => void
-  ): Promise<DescribeDetailEventResponse> {
-    return this.request("DescribeDetailEvent", req, cb)
-  }
-
-  /**
-   * 接口说明：结束云端混流
-   */
-  async StopMCUMixTranscode(
-    req: StopMCUMixTranscodeRequest,
-    cb?: (error: string, rep: StopMCUMixTranscodeResponse) => void
-  ): Promise<StopMCUMixTranscodeResponse> {
-    return this.request("StopMCUMixTranscode", req, cb)
-  }
-
-  /**
-     * 查询指定时间内的用户列表及用户通话质量数据，可查询14天内数据。DataType 不为null，查询实时数据时，查询起止时间不超过1个小时，每次查询用户不超过6个，支持跨天查询。DataType，UserIds为null时，默认查询6个用户，同时支持每页查询100以内用户个数（PageSize不超过100）。接口用于查询质量问题，不推荐作为计费使用。
-注意：不建议依赖接口做实时类业务逻辑处理
-     */
-  async DescribeCallDetail(
-    req: DescribeCallDetailRequest,
-    cb?: (error: string, rep: DescribeCallDetailResponse) => void
-  ): Promise<DescribeCallDetailResponse> {
-    return this.request("DescribeCallDetail", req, cb)
+  async ModifyPicture(
+    req: ModifyPictureRequest,
+    cb?: (error: string, rep: ModifyPictureResponse) => void
+  ): Promise<ModifyPictureResponse> {
+    return this.request("ModifyPicture", req, cb)
   }
 
   /**
@@ -283,16 +279,6 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     cb?: (error: string, rep: DescribeAbnormalEventResponse) => void
   ): Promise<DescribeAbnormalEventResponse> {
     return this.request("DescribeAbnormalEvent", req, cb)
-  }
-
-  /**
-   * 查询sdkappid维度下每分钟实时质量数据，包括：进房成功率，首帧秒开率，音频卡顿率，视频卡顿率。可查询24小时内数据，查询起止时间不低于1分钟，不超过1个小时。
-   */
-  async DescribeRealtimeQuality(
-    req: DescribeRealtimeQualityRequest,
-    cb?: (error: string, rep: DescribeRealtimeQualityResponse) => void
-  ): Promise<DescribeRealtimeQualityResponse> {
-    return this.request("DescribeRealtimeQuality", req, cb)
   }
 
   /**
@@ -340,6 +326,69 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     cb?: (error: string, rep: DismissRoomResponse) => void
   ): Promise<DismissRoomResponse> {
     return this.request("DismissRoom", req, cb)
+  }
+
+  /**
+     * 查询云端录制计费时长。
+
+- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
+- 单次查询统计区间最多不能超过31天。
+- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
+- 日结后付费将于次日上午推送账单，建议次日上午9点以后再来查询前一天的用量。
+     */
+  async DescribeRecordStatistic(
+    req: DescribeRecordStatisticRequest,
+    cb?: (error: string, rep: DescribeRecordStatisticResponse) => void
+  ): Promise<DescribeRecordStatisticResponse> {
+    return this.request("DescribeRecordStatistic", req, cb)
+  }
+
+  /**
+     * 查询旁路转码计费时长。
+- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
+- 单次查询统计区间最多不能超过31天。
+- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
+- 日结后付费将于次日上午推送账单，建议次日上午9点以后再来查询前一天的用量。
+     */
+  async DescribeTrtcMcuTranscodeTime(
+    req: DescribeTrtcMcuTranscodeTimeRequest,
+    cb?: (error: string, rep: DescribeTrtcMcuTranscodeTimeResponse) => void
+  ): Promise<DescribeTrtcMcuTranscodeTimeResponse> {
+    return this.request("DescribeTrtcMcuTranscodeTime", req, cb)
+  }
+
+  /**
+     * 查询音视频互动计费时长。
+- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
+- 单次查询统计区间最多不能超过31天。
+- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
+- 日结后付费将于次日上午推送账单，建议次日上午9点以后再来查询前一天的用量。
+     */
+  async DescribeTrtcInteractiveTime(
+    req: DescribeTrtcInteractiveTimeRequest,
+    cb?: (error: string, rep: DescribeTrtcInteractiveTimeResponse) => void
+  ): Promise<DescribeTrtcInteractiveTimeResponse> {
+    return this.request("DescribeTrtcInteractiveTime", req, cb)
+  }
+
+  /**
+   * 查询某图片相关参数。
+   */
+  async DescribePicture(
+    req: DescribePictureRequest,
+    cb?: (error: string, rep: DescribePictureResponse) => void
+  ): Promise<DescribePictureResponse> {
+    return this.request("DescribePicture", req, cb)
+  }
+
+  /**
+   * 查询用户某次通话内的进退房，视频开关等详细事件。可查询14天内数据。
+   */
+  async DescribeDetailEvent(
+    req: DescribeDetailEventRequest,
+    cb?: (error: string, rep: DescribeDetailEventResponse) => void
+  ): Promise<DescribeDetailEventResponse> {
+    return this.request("DescribeDetailEvent", req, cb)
   }
 
   /**
