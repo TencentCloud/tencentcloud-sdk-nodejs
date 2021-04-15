@@ -209,6 +209,12 @@ Type表示过滤类型，1：政治，2：色情，3：谩骂
         return this.request("ScanVoice", req, cb);
     }
     /**
+     * 修改房间信息
+     */
+    async ModifyRoomInfo(req, cb) {
+        return this.request("ModifyRoomInfo", req, cb);
+    }
+    /**
      * 本接口(CreateApp)用于创建一个GME应用。
      */
     async CreateApp(req, cb) {

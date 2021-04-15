@@ -322,6 +322,31 @@ export interface TriggerLogResp {
 }
 
 /**
+ * DownloadHelmChart请求参数结构体
+ */
+export interface DownloadHelmChartRequest {
+  /**
+   * 实例ID
+   */
+  RegistryId: string
+
+  /**
+   * 命名空间名称
+   */
+  NamespaceName: string
+
+  /**
+   * Helm chart名称
+   */
+  ChartName: string
+
+  /**
+   * Helm chart版本
+   */
+  ChartVersion: string
+}
+
+/**
  * Tag列表的返回值
  */
 export interface TagInfoResp {
@@ -951,6 +976,56 @@ export interface DeleteRepositoryResponse {
  * DeleteImagePersonal返回参数结构体
  */
 export interface DeleteImagePersonalResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DownloadHelmChart返回参数结构体
+ */
+export interface DownloadHelmChartResponse {
+  /**
+   * 临时token
+   */
+  TmpToken: string
+
+  /**
+   * 临时的secretId
+   */
+  TmpSecretId: string
+
+  /**
+   * 临时的secretKey
+   */
+  TmpSecretKey: string
+
+  /**
+   * 存储桶信息
+   */
+  Bucket: string
+
+  /**
+   * 实例ID
+   */
+  Region: string
+
+  /**
+   * chart信息
+   */
+  Path: string
+
+  /**
+   * 开始时间时间戳
+   */
+  StartTime: number
+
+  /**
+   * token过期时间时间戳
+   */
+  ExpiredTime: number
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

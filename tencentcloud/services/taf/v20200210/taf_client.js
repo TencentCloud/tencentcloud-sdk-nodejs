@@ -40,7 +40,9 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("RecognizeTargetAudience", req, cb);
     }
     /**
-     * 筛选敏感易骚扰人群
+     * 该服务已不再对外提供能力
+
+筛选敏感易骚扰人群
      */
     async RecognizeEffectiveFlow(req, cb) {
         return this.request("RecognizeEffectiveFlow", req, cb);

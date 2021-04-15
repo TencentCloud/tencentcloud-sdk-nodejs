@@ -16,7 +16,9 @@ export declare class Client extends AbstractClient {
      */
     RecognizeTargetAudience(req: RecognizeTargetAudienceRequest, cb?: (error: string, rep: RecognizeTargetAudienceResponse) => void): Promise<RecognizeTargetAudienceResponse>;
     /**
-     * 筛选敏感易骚扰人群
+     * 该服务已不再对外提供能力
+
+筛选敏感易骚扰人群
      */
     RecognizeEffectiveFlow(req: RecognizeEffectiveFlowRequest, cb?: (error: string, rep: RecognizeEffectiveFlowResponse) => void): Promise<RecognizeEffectiveFlowResponse>;
     /**

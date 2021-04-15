@@ -190,6 +190,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstanceToken", req, cb);
     }
     /**
+     * 用于在TCR中下载helm chart
+     */
+    async DownloadHelmChart(req, cb) {
+        return this.request("DownloadHelmChart", req, cb);
+    }
+    /**
      * 用于设置个人版全局镜像版本自动清理策略
      */
     async ManageImageLifecycleGlobalPersonal(req, cb) {

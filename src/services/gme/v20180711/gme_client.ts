@@ -41,10 +41,12 @@ import {
   DescribeUserInAndOutTimeResponse,
   VoiceFilterInfo,
   DescribeFilterResultResponse,
+  ModifyRoomInfoResponse,
   DescribeScanResult,
   DescribeFilterResultListRequest,
   VoiceFilter,
   ScanDetail,
+  ModifyRoomInfoRequest,
   CreateAppRequest,
   RealtimeSpeechConf,
   ScanVoiceResult,
@@ -274,6 +276,16 @@ Type表示过滤类型，1：政治，2：色情，3：谩骂
     cb?: (error: string, rep: ScanVoiceResponse) => void
   ): Promise<ScanVoiceResponse> {
     return this.request("ScanVoice", req, cb)
+  }
+
+  /**
+   * 修改房间信息
+   */
+  async ModifyRoomInfo(
+    req: ModifyRoomInfoRequest,
+    cb?: (error: string, rep: ModifyRoomInfoResponse) => void
+  ): Promise<ModifyRoomInfoResponse> {
+    return this.request("ModifyRoomInfo", req, cb)
   }
 
   /**

@@ -288,6 +288,16 @@ it("tcr.v20190924.DescribeInstanceToken", async function () {
     }
 })
 
+it("tcr.v20190924.DownloadHelmChart", async function () {
+    try {
+       const data = await client.DownloadHelmChart({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.ManageImageLifecycleGlobalPersonal", async function () {
     try {
        const data = await client.ManageImageLifecycleGlobalPersonal({})

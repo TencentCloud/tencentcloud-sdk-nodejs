@@ -999,6 +999,11 @@ export interface JobConfig {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     LogCollect: number;
+    /**
+      * 作业的最大并行度
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxParallelism: number;
 }
 /**
  * DescribeResourceConfigs请求参数结构体

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ScanVoiceResponse, ModifyAppStatusRequest, DescribeScanResultListResponse, DescribeApplicationDataRequest, VoiceFilterRequest, DescribeScanResultListRequest, VoiceFilterResponse, DescribeFilterResultListResponse, DescribeAppStatisticsResponse, DescribeApplicationDataResponse, DescribeUserInAndOutTimeResponse, DescribeFilterResultResponse, DescribeFilterResultListRequest, CreateAppRequest, CreateAppResponse, DescribeAppStatisticsRequest, ModifyAppStatusResponse, ScanVoiceRequest, DescribeFilterResultRequest, DescribeUserInAndOutTimeRequest } from "./gme_models";
+import { ScanVoiceResponse, ModifyAppStatusRequest, DescribeScanResultListResponse, DescribeApplicationDataRequest, VoiceFilterRequest, DescribeScanResultListRequest, VoiceFilterResponse, DescribeFilterResultListResponse, DescribeAppStatisticsResponse, DescribeApplicationDataResponse, DescribeUserInAndOutTimeResponse, DescribeFilterResultResponse, ModifyRoomInfoResponse, DescribeFilterResultListRequest, ModifyRoomInfoRequest, CreateAppRequest, CreateAppResponse, DescribeAppStatisticsRequest, ModifyAppStatusResponse, ScanVoiceRequest, DescribeFilterResultRequest, DescribeUserInAndOutTimeRequest } from "./gme_models";
 /**
  * gme client
  * @class
@@ -174,6 +174,10 @@ Type表示过滤类型，1：政治，2：色情，3：谩骂
 </code></pre>
      */
     ScanVoice(req: ScanVoiceRequest, cb?: (error: string, rep: ScanVoiceResponse) => void): Promise<ScanVoiceResponse>;
+    /**
+     * 修改房间信息
+     */
+    ModifyRoomInfo(req: ModifyRoomInfoRequest, cb?: (error: string, rep: ModifyRoomInfoResponse) => void): Promise<ModifyRoomInfoResponse>;
     /**
      * 本接口(CreateApp)用于创建一个GME应用。
      */

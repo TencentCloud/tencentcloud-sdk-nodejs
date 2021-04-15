@@ -31,6 +31,7 @@ import {
   TriggerInvokePara,
   DescribeNamespacesResponse,
   TriggerLogResp,
+  DownloadHelmChartRequest,
   TagInfoResp,
   CreateInstanceResponse,
   DeleteInstanceTokenRequest,
@@ -60,6 +61,7 @@ import {
   DescribeExternalEndpointStatusRequest,
   DeleteRepositoryResponse,
   DeleteImagePersonalResponse,
+  DownloadHelmChartResponse,
   ManageReplicationRequest,
   DeleteWebhookTriggerResponse,
   DeleteImageLifecycleGlobalPersonalResponse,
@@ -493,6 +495,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceTokenResponse) => void
   ): Promise<DescribeInstanceTokenResponse> {
     return this.request("DescribeInstanceToken", req, cb)
+  }
+
+  /**
+   * 用于在TCR中下载helm chart
+   */
+  async DownloadHelmChart(
+    req: DownloadHelmChartRequest,
+    cb?: (error: string, rep: DownloadHelmChartResponse) => void
+  ): Promise<DownloadHelmChartResponse> {
+    return this.request("DownloadHelmChart", req, cb)
   }
 
   /**

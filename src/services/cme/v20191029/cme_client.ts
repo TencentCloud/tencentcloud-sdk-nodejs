@@ -113,6 +113,7 @@ import {
   CreateClassResponse,
   SlotInfo,
   MediaReplacementInfo,
+  RecordReplayProjectInput,
   VideoStreamInfo,
   AddTeamMemberRequest,
   ExportVideoEditProjectResponse,

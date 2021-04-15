@@ -234,6 +234,10 @@ export interface ExportVideoEditProjectRequest {
       */
     ExportDestination: string;
     /**
+      * 视频封面图片文件（如 jpeg, png 等）进行 Base64 编码后的字符串，仅支持 gif、jpeg、png 三种图片格式，原图片文件不能超过2 M大 小。
+      */
+    CoverData?: string;
+    /**
       * 导出的云剪媒体信息。指定 ExportDestination = CME 时有效。
       */
     CMEExportInfo?: CMEExportInfo;
@@ -862,6 +866,7 @@ export interface CreateProjectRequest {
 <li>SWITCHER：导播台。</li>
 <li>VIDEO_SEGMENTATION：视频拆条。</li>
 <li>STREAM_CONNECT：云转推。</li>
+<li>RECORD_REPLAY：录制回放。</li>
       */
     Category: string;
     /**
@@ -901,6 +906,10 @@ export interface CreateProjectRequest {
       * 云转推项目信息，仅当项目类型为 STREAM_CONNECT 时必填。
       */
     StreamConnectProjectInput?: StreamConnectProjectInput;
+    /**
+      * 录制回放项目信息，仅当项目类型为 RECORD_REPLAY 时必填。
+      */
+    RecordReplayProjectInput?: RecordReplayProjectInput;
 }
 /**
  * ModifyMaterial请求参数结构体
@@ -2058,6 +2067,27 @@ export interface MediaReplacementInfo {
     StartTimeOffset?: number;
 }
 /**
+ * 录制回放项目输入信息。
+ */
+export interface RecordReplayProjectInput {
+    /**
+      * 录制拉流地址。
+      */
+    PullStreamUrl: string;
+    /**
+      * 录制文件归属者。
+      */
+    MaterialOwner: Entity;
+    /**
+      * 录制文件存储分类路径。
+      */
+    MaterialClassPath: string;
+    /**
+      * 回放推流地址。
+      */
+    PushStreamUrl: string;
+}
+/**
  * 视频流信息。
  */
 export interface VideoStreamInfo {
@@ -2110,7 +2140,7 @@ export interface ExportVideoEditProjectResponse {
     /**
       * 任务 Id。
       */
-    TaskId?: string;
+    TaskId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2427,6 +2457,7 @@ export interface DescribeProjectsRequest {
 <li>SWITCHER：导播台。</li>
 <li>VIDEO_SEGMENTATION：视频拆条。</li>
 <li>STREAM_CONNECT：云转推。</li>
+<li>RECORD_REPLAY：录制回放。</li>
       */
     CategorySet?: Array<string>;
     /**
