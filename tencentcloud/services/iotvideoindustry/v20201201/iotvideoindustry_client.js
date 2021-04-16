@@ -52,6 +52,15 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDeviceGroup", req, cb);
     }
     /**
+     * 获取回放视频流(NVR录制用)
+RecordId和StartTime/EndTime互斥
+当存在RecordId时，StartTime和EndTime无效
+当RecordId为空，StartTime和EndTime生效
+     */
+    async DescribeRecordStream(req, cb) {
+        return this.request("DescribeRecordStream", req, cb);
+    }
+    /**
      * 本接口(DescribeStatisticSummary)用于查询用户昨日的概览数据。
      */
     async DescribeStatisticSummary(req, cb) {
@@ -201,6 +210,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ControlDevicePTZ(req, cb) {
         return this.request("ControlDevicePTZ", req, cb);
+    }
+    /**
+     * 根据时间获取回放文件列表(云端录制用)
+     */
+    async DescribeVideoList(req, cb) {
+        return this.request("DescribeVideoList", req, cb);
     }
     /**
      * 本接口(DescribeAllDeviceList) 用于获取设备列表。

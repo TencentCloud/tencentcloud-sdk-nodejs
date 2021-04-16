@@ -12,6 +12,23 @@ export interface QueryInvoiceResponse {
     RequestId?: string;
 }
 /**
+ * UploadTaxPayment请求参数结构体
+ */
+export interface UploadTaxPaymentRequest {
+    /**
+      * 平台渠道
+      */
+    Channel: number;
+    /**
+      * 完税ID
+      */
+    TaxId: string;
+    /**
+      * 完税列表下载地址
+      */
+    FileUrl: string;
+}
+/**
  * 查询订单接口的出参，订单列表
  */
 export interface QueryOrderOutOrderList {
@@ -1014,6 +1031,67 @@ export interface ApplyTradeResult {
       * 提交贸易材料数据
       */
     Data: ApplyTradeData;
+}
+/**
+ * WithdrawCashMembership请求参数结构体
+ */
+export interface WithdrawCashMembershipRequest {
+    /**
+      * String(22)，商户号（签约客户号）
+      */
+    MrchCode: string;
+    /**
+      * STRING(150)，交易网名称（市场名称）
+      */
+    TranWebName: string;
+    /**
+      * STRING(5)，会员证件类型（详情见“常见问题”）
+      */
+    MemberGlobalType: string;
+    /**
+      * STRING(32)，会员证件号码
+      */
+    MemberGlobalId: string;
+    /**
+      * STRING(32)，交易网会员代码
+      */
+    TranNetMemberCode: string;
+    /**
+      * STRING(150)，会员名称
+      */
+    MemberName: string;
+    /**
+      * STRING(50)，提现账号（银行卡）
+      */
+    TakeCashAcctNo: string;
+    /**
+      * STRING(150)，出金账户名称（银行卡户名）
+      */
+    OutAmtAcctName: string;
+    /**
+      * STRING(3)，币种（默认为RMB）
+      */
+    Ccy: string;
+    /**
+      * STRING(20)，可提现金额
+      */
+    CashAmt: string;
+    /**
+      * STRING(300)，备注（建议可送订单号，可在对账文件的备注字段获取到）
+      */
+    Remark?: string;
+    /**
+      * STRING(1027)，保留域
+      */
+    ReservedMsg?: string;
+    /**
+      * STRING(300)，网银签名
+      */
+    WebSign?: string;
+    /**
+      * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
+      */
+    Profile?: string;
 }
 /**
  * 退款子订单列表
@@ -2809,65 +2887,17 @@ export interface DeleteAgentTaxPaymentInfosRequest {
     BatchNum: number;
 }
 /**
- * WithdrawCashMembership请求参数结构体
+ * UploadTaxList返回参数结构体
  */
-export interface WithdrawCashMembershipRequest {
+export interface UploadTaxListResponse {
     /**
-      * String(22)，商户号（签约客户号）
+      * 完税ID
       */
-    MrchCode: string;
+    TaxId?: string;
     /**
-      * STRING(150)，交易网名称（市场名称）
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    TranWebName: string;
-    /**
-      * STRING(5)，会员证件类型（详情见“常见问题”）
-      */
-    MemberGlobalType: string;
-    /**
-      * STRING(32)，会员证件号码
-      */
-    MemberGlobalId: string;
-    /**
-      * STRING(32)，交易网会员代码
-      */
-    TranNetMemberCode: string;
-    /**
-      * STRING(150)，会员名称
-      */
-    MemberName: string;
-    /**
-      * STRING(50)，提现账号（银行卡）
-      */
-    TakeCashAcctNo: string;
-    /**
-      * STRING(150)，出金账户名称（银行卡户名）
-      */
-    OutAmtAcctName: string;
-    /**
-      * STRING(3)，币种（默认为RMB）
-      */
-    Ccy: string;
-    /**
-      * STRING(20)，可提现金额
-      */
-    CashAmt: string;
-    /**
-      * STRING(300)，备注（建议可送订单号，可在对账文件的备注字段获取到）
-      */
-    Remark?: string;
-    /**
-      * STRING(1027)，保留域
-      */
-    ReservedMsg?: string;
-    /**
-      * STRING(300)，网银签名
-      */
-    WebSign?: string;
-    /**
-      * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
-      */
-    Profile?: string;
+    RequestId?: string;
 }
 /**
  * ExecuteMemberTransaction返回参数结构体
@@ -3837,6 +3867,15 @@ export interface QueryMemberTransactionRequest {
       * STRING(12)，接入环境，默认接入沙箱环境。接入正式环境填"prod"
       */
     Profile?: string;
+}
+/**
+ * UploadTaxPayment返回参数结构体
+ */
+export interface UploadTaxPaymentResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 查询汇率结果
@@ -7146,6 +7185,27 @@ development: 开发环境
 缺省: release
       */
     MidasEnvironment?: string;
+}
+/**
+ * UploadTaxList请求参数结构体
+ */
+export interface UploadTaxListRequest {
+    /**
+      * 平台渠道
+      */
+    Channel: number;
+    /**
+      * 起始月份，YYYY-MM
+      */
+    BeginMonth: string;
+    /**
+      * 结束月份。如果只上传一个月，结束月份等于起始月份
+      */
+    EndMonth: string;
+    /**
+      * 完税列表下载地址
+      */
+    FileUrl: string;
 }
 /**
  * ApplyWithdrawal请求参数结构体

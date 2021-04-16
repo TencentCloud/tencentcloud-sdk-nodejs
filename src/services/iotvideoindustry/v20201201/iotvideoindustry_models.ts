@@ -16,18 +16,488 @@
  */
 
 /**
- * CreateTimeTemplate返回参数结构体
+ * DeleteTimeTemplate返回参数结构体
  */
-export interface CreateTimeTemplateResponse {
+export interface DeleteTimeTemplateResponse {
   /**
-   * 时间模板ID
-   */
-  TemplateId: string
+      * 操作结果，OK：成功，其他：失败
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * GetTimeTemplates请求参数结构体
+ */
+export type GetTimeTemplatesRequest = null
+
+/**
+ * SIIP服务器相关配置项
+ */
+export interface ServerConfiguration {
+  /**
+   * SIP服务器地址
+   */
+  Host: string
+
+  /**
+   * SIP服务器端口
+   */
+  Port: number
+
+  /**
+   * SIP服务器编码
+   */
+  Serial: string
+
+  /**
+   * SIP服务器域
+   */
+  Realm: string
+}
+
+/**
+ * GetRecordPlanByDev请求参数结构体
+ */
+export interface GetRecordPlanByDevRequest {
+  /**
+   * 设备唯一标识
+   */
+  DeviceId: string
+}
+
+/**
+ * GetRecordDatesByDev返回参数结构体
+ */
+export interface GetRecordDatesByDevResponse {
+  /**
+      * 含有录像文件的日期列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Dates: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDeviceStreams返回参数结构体
+ */
+export interface DescribeDeviceStreamsResponse {
+  /**
+   * 设备实时流地址列表
+   */
+  Data: DescribeDeviceStreamsData
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeSIPServer请求参数结构体
+ */
+export type DescribeSIPServerRequest = null
+
+/**
+ * GetRecordPlanById请求参数结构体
+ */
+export interface GetRecordPlanByIdRequest {
+  /**
+   * 录制计划ID
+   */
+  PlanId: string
+}
+
+/**
+ * GetRecordPlans请求参数结构体
+ */
+export type GetRecordPlansRequest = null
+
+/**
+ * 用于描述唯一一个设备
+ */
+export interface DeviceItem {
+  /**
+      * 设备唯一标识
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeviceId?: string
+}
+
+/**
+ * DeleteDeviceGroup返回参数结构体
+ */
+export interface DeleteDeviceGroupResponse {
+  /**
+      * 响应结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteRecordPlan返回参数结构体
+ */
+export interface DeleteRecordPlanResponse {
+  /**
+   * 操作结果，OK：成功，其他：失败
+   */
+  Status: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateDeviceGroup返回参数结构体
+ */
+export interface UpdateDeviceGroupResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetVideoListByCon请求参数结构体
+ */
+export interface GetVideoListByConRequest {
+  /**
+   * 设备唯一标识
+   */
+  DeviceId: string
+
+  /**
+   * 偏移量，默认0
+   */
+  Offset: number
+
+  /**
+   * 限制量，默认200
+   */
+  Limit: number
+
+  /**
+   * 0：查询指定日期的录像；1：查询最近一天的录像；默认0
+   */
+  LatestDay?: number
+
+  /**
+      * 指定某天。取值【YYYY-MM-DD】
+当LatestDay为空或为0时，本参数不允许为空。
+      */
+  Date?: string
+}
+
+/**
+ * 设备所在分组信息
+ */
+export interface DevGroupInfo {
+  /**
+   * 设备唯一标识
+   */
+  DeviceId?: string
+
+  /**
+   * 分组ID
+   */
+  GroupId?: string
+
+  /**
+   * 分组路径
+   */
+  GroupPath?: string
+
+  /**
+   * 父分组ID
+   */
+  ParentId?: string
+
+  /**
+   * 设备错误，仅在用户没权限或者设备已删除时返回具体结果
+   */
+  Error?: string
+}
+
+/**
+ * DescribeSubGroups请求参数结构体
+ */
+export interface DescribeSubGroupsRequest {
+  /**
+   * 分组ID
+   */
+  GroupId?: string
+
+  /**
+   * 分组名称，根据名称模糊匹配子分组时为必填
+   */
+  GroupName?: string
+
+  /**
+   * 偏移量，默认0
+   */
+  Offset?: number
+
+  /**
+   * 限制数，默认200
+   */
+  Limit?: number
+
+  /**
+   * 是否统计子分组下的设备数，0：统计，1：不统计
+   */
+  OnlyGroup?: number
+}
+
+/**
+ * DeleteRecordPlan请求参数结构体
+ */
+export interface DeleteRecordPlanRequest {
+  /**
+   * 录制计划ID
+   */
+  PlanId: string
+}
+
+/**
+ * CreateDeviceGroup返回参数结构体
+ */
+export interface CreateDeviceGroupResponse {
+  /**
+      * 响应结果，“OK”为成功，其他为失败
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
+
+  /**
+      * 分组ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetVideoListByCon返回参数结构体
+ */
+export interface GetVideoListByConResponse {
+  /**
+      * 录像详情列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VideoList: Array<RecordTaskItem>
+
+  /**
+      * 录像总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeStatisticDetails返回参数结构体
+ */
+export interface DescribeStatisticDetailsResponse {
+  /**
+      * 统计详情列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Data: Array<StatisticItem>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 分组下设备信息
+ */
+export interface GroupDeviceItem {
+  /**
+      * 设备唯一标识
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeviceId: string
+
+  /**
+      * 设备名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NickName?: string
+
+  /**
+      * 设备状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status?: number
+
+  /**
+      * 扩展信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExtraInformation?: string
+
+  /**
+      * 设备类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeviceType?: number
+
+  /**
+      * rtsp地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RTSPUrl?: string
+
+  /**
+      * 设备编码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeviceCode?: string
+
+  /**
+      * 是否存在录像
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsRecord?: number
+
+  /**
+      * 该设备是否可录制
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Recordable?: number
+}
+
+/**
+ * DescribeStatisticSummary请求参数结构体
+ */
+export interface DescribeStatisticSummaryRequest {
+  /**
+   * 指定日期。格式【YYYY-MM-DD】
+   */
+  Date: string
+}
+
+/**
+ * GetRecordPlanById返回参数结构体
+ */
+export interface GetRecordPlanByIdResponse {
+  /**
+      * 录制计划详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Plan: RecordPlanItem
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteDevice请求参数结构体
+ */
+export interface DeleteDeviceRequest {
+  /**
+   * 设备唯一标识
+   */
+  DeviceId: string
+}
+
+/**
+ * UpdateDevicePassWord请求参数结构体
+ */
+export interface UpdateDevicePassWordRequest {
+  /**
+   * 设备密码
+   */
+  PassWord: string
+
+  /**
+   * 设备唯一标识
+   */
+  DeviceId: string
+}
+
+/**
+ * CreateTimeTemplate请求参数结构体
+ */
+export interface CreateTimeTemplateRequest {
+  /**
+   * 时间模板名称
+   */
+  Name: string
+
+  /**
+   * 是否为每周全时录制（即7*24h录制），0：非全时录制，1；全时录制，默认0
+   */
+  IsAllWeek: number
+
+  /**
+   * 当IsAllWeek为0时必选，用于描述模板的各个时间片段
+   */
+  TimeTemplateSpecs?: Array<TimeTemplateSpec>
+}
+
+/**
+ * DescribeAllDeviceList请求参数结构体
+ */
+export interface DescribeAllDeviceListRequest {
+  /**
+   * 偏移量，默认0
+   */
+  Offset?: number
+
+  /**
+   * 限制，默认200
+   */
+  Limit?: number
+
+  /**
+   * 设备名称，需要模糊匹配设备名称时为必填
+   */
+  NickName?: string
+
+  /**
+   * DeviceId列表，需要精确查找设备时为必填
+   */
+  DeviceIds?: Array<string>
+}
+
+/**
+ * DescribeDevicePassWord请求参数结构体
+ */
+export interface DescribeDevicePassWordRequest {
+  /**
+   * 设备唯一标识
+   */
+  DeviceId: string
 }
 
 /**
@@ -78,221 +548,19 @@ export interface RecordTaskItem {
 }
 
 /**
- * ControlDevicePTZ返回参数结构体
+ * GetRecordPlanByDev返回参数结构体
  */
-export interface ControlDevicePTZResponse {
+export interface GetRecordPlanByDevResponse {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeleteRecordPlan请求参数结构体
- */
-export interface DeleteRecordPlanRequest {
-  /**
-   * 录制计划ID
-   */
-  PlanId: string
-}
-
-/**
- * 某天的统计数额
- */
-export interface StatisticItem {
-  /**
-      * 日期。格式【YYYY-MM-DD】
+      * 录制计划详情
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Date: string
-
-  /**
-      * 统计数额
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Sum: number
-}
-
-/**
- * CreateDeviceGroup返回参数结构体
- */
-export interface CreateDeviceGroupResponse {
-  /**
-      * 响应结果，“OK”为成功，其他为失败
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Status: string
-
-  /**
-      * 分组ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  GroupId: string
+  Plan: RecordPlanItem
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeSIPServer返回参数结构体
- */
-export interface DescribeSIPServerResponse {
-  /**
-   * SIP服务器相关配置项
-   */
-  Data: ServerConfiguration
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * GetVideoListByCon返回参数结构体
- */
-export interface GetVideoListByConResponse {
-  /**
-      * 录像详情列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  VideoList: Array<RecordTaskItem>
-
-  /**
-      * 录像总数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TotalCount: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeleteTimeTemplate返回参数结构体
- */
-export interface DeleteTimeTemplateResponse {
-  /**
-      * 操作结果，OK：成功，其他：失败
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Status: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * GetTimeTemplates请求参数结构体
- */
-export type GetTimeTemplatesRequest = null
-
-/**
- * DescribeSubGroups请求参数结构体
- */
-export interface DescribeSubGroupsRequest {
-  /**
-   * 分组ID
-   */
-  GroupId?: string
-
-  /**
-   * 分组名称，根据名称模糊匹配子分组时为必填
-   */
-  GroupName?: string
-
-  /**
-   * 偏移量，默认0
-   */
-  Offset?: number
-
-  /**
-   * 限制数，默认200
-   */
-  Limit?: number
-
-  /**
-   * 是否统计子分组下的设备数，0：统计，1：不统计
-   */
-  OnlyGroup?: number
-}
-
-/**
- * ControlDevicePTZ请求参数结构体
- */
-export interface ControlDevicePTZRequest {
-  /**
-   * 设备唯一标识
-   */
-  DeviceId: string
-
-  /**
-      * PTZ控制命令类型：
-stop - 停止当前PTZ信令
-left - 向左移动
-right - 向右移动
-up - 向上移动
-down - 向下移动
-leftUp - 左上移动
-leftDown - 左下移动
-rightUp - 右上移动
-rightDown - 右下移动
-zoomOut - 镜头缩小
-zoomIn - 镜头放大
-irisIn - 光圈缩小
-irisOut - 光圈放大
-focusIn - 焦距变近
-focusOut - 焦距变远
-      */
-  Command: string
-}
-
-/**
- * DescribeGroups返回参数结构体
- */
-export interface DescribeGroupsResponse {
-  /**
-      * 分组详细信息列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Groups: Array<GroupInfo>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * SIIP服务器相关配置项
- */
-export interface ServerConfiguration {
-  /**
-   * SIP服务器地址
-   */
-  Host: string
-
-  /**
-   * SIP服务器端口
-   */
-  Port: number
-
-  /**
-   * SIP服务器编码
-   */
-  Serial: string
-
-  /**
-   * SIP服务器域
-   */
-  Realm: string
 }
 
 /**
@@ -390,207 +658,6 @@ export interface GroupInfo {
 }
 
 /**
- * ModifyDeviceData返回参数结构体
- */
-export interface ModifyDeviceDataResponse {
-  /**
-      * 操作结果,“OK”表示成功，其他表示失败。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Status: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeStatisticDetails返回参数结构体
- */
-export interface DescribeStatisticDetailsResponse {
-  /**
-      * 统计详情列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Data: Array<StatisticItem>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeGroupDevices请求参数结构体
- */
-export interface DescribeGroupDevicesRequest {
-  /**
-   * 分组ID
-   */
-  GroupId: string
-
-  /**
-   * 偏移量，默认0
-   */
-  Offset?: number
-
-  /**
-   * 限制值，默认200
-   */
-  Limit?: number
-
-  /**
-   * 设备名称，根据设备名称模糊匹配时必填
-   */
-  NickName?: string
-
-  /**
-   * 过滤不可录制设备
-   */
-  Recordable?: number
-}
-
-/**
- * GetRecordPlanByDev请求参数结构体
- */
-export interface GetRecordPlanByDevRequest {
-  /**
-   * 设备唯一标识
-   */
-  DeviceId: string
-}
-
-/**
- * GetRecordDatesByDev返回参数结构体
- */
-export interface GetRecordDatesByDevResponse {
-  /**
-      * 含有录像文件的日期列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Dates: Array<string>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * GetRecordPlanByDev返回参数结构体
- */
-export interface GetRecordPlanByDevResponse {
-  /**
-      * 录制计划详情
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Plan: RecordPlanItem
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeDeviceGroup请求参数结构体
- */
-export interface DescribeDeviceGroupRequest {
-  /**
-   * 设备唯一标识列表
-   */
-  DeviceIds?: Array<string>
-}
-
-/**
- * UpdateDeviceGroup返回参数结构体
- */
-export interface UpdateDeviceGroupResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 录制计划详情
- */
-export interface RecordPlanItem {
-  /**
-      * 计划ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PlanId: string
-
-  /**
-      * 计划名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Name: string
-
-  /**
-      * 时间模板ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TimeTemplateId: string
-
-  /**
-      * 时间模板名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TimeTemplateName: string
-
-  /**
-      * 录制类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  EventId: number
-
-  /**
-      * 绑定的设备列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Devices: Array<DeviceItem>
-}
-
-/**
- * GetRecordPlanById返回参数结构体
- */
-export interface GetRecordPlanByIdResponse {
-  /**
-      * 录制计划详情
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Plan: RecordPlanItem
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeGroups请求参数结构体
- */
-export interface DescribeGroupsRequest {
-  /**
-   * 分组ID列表
-   */
-  GroupIds?: Array<string>
-}
-
-/**
- * DeleteDevice请求参数结构体
- */
-export interface DeleteDeviceRequest {
-  /**
-   * 设备唯一标识
-   */
-  DeviceId: string
-}
-
-/**
  * DescribeStatisticDetails请求参数结构体
  */
 export interface DescribeStatisticDetailsRequest {
@@ -612,480 +679,6 @@ export interface DescribeStatisticDetailsRequest {
 4.已用存储容量总数：StorageUsage
       */
   StatisticField: string
-}
-
-/**
- * DescribeGroupById请求参数结构体
- */
-export interface DescribeGroupByIdRequest {
-  /**
-   * 分组ID
-   */
-  GroupId: string
-}
-
-/**
- * DescribeGroupById返回参数结构体
- */
-export interface DescribeGroupByIdResponse {
-  /**
-      * 分组信息详情
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Group: GroupItem
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateTimeTemplate请求参数结构体
- */
-export interface CreateTimeTemplateRequest {
-  /**
-   * 时间模板名称
-   */
-  Name: string
-
-  /**
-   * 是否为每周全时录制（即7*24h录制），0：非全时录制，1；全时录制，默认0
-   */
-  IsAllWeek: number
-
-  /**
-   * 当IsAllWeek为0时必选，用于描述模板的各个时间片段
-   */
-  TimeTemplateSpecs?: Array<TimeTemplateSpec>
-}
-
-/**
- * 用于描述唯一一个设备
- */
-export interface DeviceItem {
-  /**
-      * 设备唯一标识
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DeviceId?: string
-}
-
-/**
- * 分组信息
- */
-export interface GroupItem {
-  /**
-      * 分组名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  GroupName: string
-
-  /**
-      * 父分组ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ParentId: string
-
-  /**
-      * 分组ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  GroupId: string
-
-  /**
-      * 分组路径
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  GroupPath?: string
-
-  /**
-      * 分组描述
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  GroupDescribe?: string
-
-  /**
-      * 分组绑定设备数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DeviceNum?: number
-
-  /**
-      * 子分组数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SubGroupNum?: number
-
-  /**
-      * 分组附加信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ExtraInformation?: string
-
-  /**
-      * 分组类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  GroupType?: string
-
-  /**
-      * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CreateTime?: number
-
-  /**
-      * 分组状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  GroupStatus?: number
-}
-
-/**
- * DescribeDeviceStreams请求参数结构体
- */
-export interface DescribeDeviceStreamsRequest {
-  /**
-   * 设备唯一标识
-   */
-  DeviceId: string
-
-  /**
-   * 流地址失效时间
-   */
-  ExpireTime: number
-}
-
-/**
- * GetTimeTemplateById请求参数结构体
- */
-export interface GetTimeTemplateByIdRequest {
-  /**
-   * 时间模板ID
-   */
-  TemplateId: string
-}
-
-/**
- * 在操作时间模板时，用于描述各个时间片段
- */
-export interface TimeTemplateSpec {
-  /**
-      * 一周中的周几
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DayofWeek: number
-
-  /**
-      * 时间片段的开始时分。格式【HH:MM】
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BeginTime: string
-
-  /**
-      * 时间片段的结束时分。格式【HH:MM】
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  EndTime: string
-}
-
-/**
- * CreateRecordPlan返回参数结构体
- */
-export interface CreateRecordPlanResponse {
-  /**
-   * 录制计划ID
-   */
-  PlanId: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeDeviceStreams返回参数结构体
- */
-export interface DescribeDeviceStreamsResponse {
-  /**
-   * 设备实时流地址列表
-   */
-  Data: DescribeDeviceStreamsData
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeAllDeviceList请求参数结构体
- */
-export interface DescribeAllDeviceListRequest {
-  /**
-   * 偏移量，默认0
-   */
-  Offset?: number
-
-  /**
-   * 限制，默认200
-   */
-  Limit?: number
-
-  /**
-   * 设备名称，需要模糊匹配设备名称时为必填
-   */
-  NickName?: string
-
-  /**
-   * DeviceId列表，需要精确查找设备时为必填
-   */
-  DeviceIds?: Array<string>
-}
-
-/**
- * DeleteTimeTemplate请求参数结构体
- */
-export interface DeleteTimeTemplateRequest {
-  /**
-   * 时间模板ID
-   */
-  TemplateId: string
-}
-
-/**
- * DescribeSIPServer请求参数结构体
- */
-export type DescribeSIPServerRequest = null
-
-/**
- * 分组下设备信息
- */
-export interface GroupDeviceItem {
-  /**
-      * 设备唯一标识
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DeviceId: string
-
-  /**
-      * 设备名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  NickName?: string
-
-  /**
-      * 设备状态
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Status?: number
-
-  /**
-      * 扩展信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ExtraInformation?: string
-
-  /**
-      * 设备类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DeviceType?: number
-
-  /**
-      * rtsp地址
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  RTSPUrl?: string
-
-  /**
-      * 设备编码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DeviceCode?: string
-
-  /**
-      * 是否存在录像
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  IsRecord?: number
-
-  /**
-      * 该设备是否可录制
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Recordable?: number
-}
-
-/**
- * DeleteDeviceGroup请求参数结构体
- */
-export interface DeleteDeviceGroupRequest {
-  /**
-   * 分组ID
-   */
-  GroupId: string
-}
-
-/**
- * DeleteRecordPlan返回参数结构体
- */
-export interface DeleteRecordPlanResponse {
-  /**
-   * 操作结果，OK：成功，其他：失败
-   */
-  Status: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * GetRecordPlanById请求参数结构体
- */
-export interface GetRecordPlanByIdRequest {
-  /**
-   * 录制计划ID
-   */
-  PlanId: string
-}
-
-/**
- * GetRecordPlans请求参数结构体
- */
-export type GetRecordPlansRequest = null
-
-/**
- * DescribeDeviceGroup返回参数结构体
- */
-export interface DescribeDeviceGroupResponse {
-  /**
-      * 设备所在分组信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DevGroups: Array<DevGroupInfo>
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeSubGroups返回参数结构体
- */
-export interface DescribeSubGroupsResponse {
-  /**
-      * 子分组详情列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  GroupList: Array<GroupItem>
-
-  /**
-      * 子分组总数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TotalCount: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeGroupByPath请求参数结构体
- */
-export interface DescribeGroupByPathRequest {
-  /**
-   * 分组路径，格式为/aaa(/bbb/ccc)
-   */
-  GroupPath: string
-}
-
-/**
- * DeleteDeviceGroup返回参数结构体
- */
-export interface DeleteDeviceGroupResponse {
-  /**
-      * 响应结果
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Status: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 查询全部设备出参
- */
-export interface AllDeviceInfo {
-  /**
-      * 设备唯一标识
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DeviceId: string
-
-  /**
-      * 设备类型；2：IPC
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DeviceType: number
-
-  /**
-      * 设备状态；0：设备不在线；1：设备在线；2：设备隔离中；3：设备未注册
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Status?: number
-
-  /**
-      * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CreateTime?: number
-
-  /**
-      * 设备扩展属性
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ExtraInformation?: string
-
-  /**
-      * 设备名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  NickName?: string
-
-  /**
-      * 设备绑定分组路径
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  GroupPath?: string
-
-  /**
-      * 设备编码
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DeviceCode?: string
-
-  /**
-      * 是否存在录像,，0:不存在；1：存在
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  IsRecord?: number
-
-  /**
-      * 该设备是否可录制
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Recordable?: number
 }
 
 /**
@@ -1114,38 +707,33 @@ export interface CreateRecordPlanRequest {
 }
 
 /**
- * 时间模板详情
+ * DescribeRecordStreamData 复杂类型
  */
-export interface TimeTemplateItem {
+export interface DescribeRecordStreamData {
   /**
-      * 时间模板ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TemplateId: string
+   * Rtsp地址
+   */
+  RtspAddr: string
 
   /**
-      * 模板名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Name: string
+   * Rtmp地址
+   */
+  RtmpAddr: string
 
   /**
-      * 是否全时录制，即7*24小时录制
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  IsAllWeek: number
+   * Hls地址
+   */
+  HlsAddr: string
 
   /**
-      * 是否为自定义模板
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Type?: number
+   * Flv地址
+   */
+  FlvAddr: string
 
   /**
-      * 时间片段详情
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TimeTemplateSpecs?: Array<TimeTemplateSpec>
+   * 流Id
+   */
+  StreamId: string
 }
 
 /**
@@ -1192,186 +780,6 @@ export interface UpdateTimeTemplateRequest {
    * 录制时间片段
    */
   TimeTemplateSpecs?: Array<TimeTemplateSpec>
-}
-
-/**
- * GetRecordPlans返回参数结构体
- */
-export interface GetRecordPlansResponse {
-  /**
-      * 录制计划详情·列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Plans: Array<RecordPlanItem>
-
-  /**
-      * 录制计划总数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TotalCount: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * UpdateDevicePassWord返回参数结构体
- */
-export interface UpdateDevicePassWordResponse {
-  /**
-      * 操作结果，“OK”表示成功，其他表示失败。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Status: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * GetVideoListByCon请求参数结构体
- */
-export interface GetVideoListByConRequest {
-  /**
-   * 设备唯一标识
-   */
-  DeviceId: string
-
-  /**
-   * 偏移量，默认0
-   */
-  Offset: number
-
-  /**
-   * 限制量，默认200
-   */
-  Limit: number
-
-  /**
-   * 0：查询指定日期的录像；1：查询最近一天的录像；默认0
-   */
-  LatestDay?: number
-
-  /**
-      * 指定某天。取值【YYYY-MM-DD】
-当LatestDay为空或为0时，本参数不允许为空。
-      */
-  Date?: string
-}
-
-/**
- * UpdateDevicePassWord请求参数结构体
- */
-export interface UpdateDevicePassWordRequest {
-  /**
-   * 设备密码
-   */
-  PassWord: string
-
-  /**
-   * 设备唯一标识
-   */
-  DeviceId: string
-}
-
-/**
- * ModifyDeviceData请求参数结构体
- */
-export interface ModifyDeviceDataRequest {
-  /**
-   * 设备唯一标识
-   */
-  DeviceId: string
-
-  /**
-   * 设备名称
-   */
-  NickName: string
-}
-
-/**
- * 设备所在分组信息
- */
-export interface DevGroupInfo {
-  /**
-   * 设备唯一标识
-   */
-  DeviceId?: string
-
-  /**
-   * 分组ID
-   */
-  GroupId?: string
-
-  /**
-   * 分组路径
-   */
-  GroupPath?: string
-
-  /**
-   * 父分组ID
-   */
-  ParentId?: string
-
-  /**
-   * 设备错误，仅在用户没权限或者设备已删除时返回具体结果
-   */
-  Error?: string
-}
-
-/**
- * GetRecordDatesByDev请求参数结构体
- */
-export interface GetRecordDatesByDevRequest {
-  /**
-   * 设备唯一标识
-   */
-  DeviceId: string
-
-  /**
-   * 偏移量，默认0
-   */
-  Offset: number
-
-  /**
-   * 限制量，默认200
-   */
-  Limit: number
-}
-
-/**
- * GetTimeTemplates返回参数结构体
- */
-export interface GetTimeTemplatesResponse {
-  /**
-      * 时间模板列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Templates: Array<TimeTemplateItem>
-
-  /**
-   * 时间模板总数
-   */
-  TotalCount: number
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * BindGroupDevices返回参数结构体
- */
-export interface BindGroupDevicesResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -1457,18 +865,112 @@ export interface DescribeStatisticSummaryResponse {
 }
 
 /**
- * DescribeDevicePassWord返回参数结构体
+ * DescribeRecordStream请求参数结构体
  */
-export interface DescribeDevicePassWordResponse {
+export interface DescribeRecordStreamRequest {
   /**
-   * 设备密码
+   * 设备Id
    */
-  PassWord: string
+  DeviceId: string
+
+  /**
+   * 流失效时间
+   */
+  ExpireTime: number
+
+  /**
+   * 录像文件Id
+   */
+  RecordId?: string
+
+  /**
+   * 录像流开始时间，当录像文件Id为空时有效
+   */
+  StartTime?: number
+
+  /**
+   * 录像流结束时间，当录像文件Id为空时有效
+   */
+  EndTime?: number
+}
+
+/**
+ * GetTimeTemplateById返回参数结构体
+ */
+export interface GetTimeTemplateByIdResponse {
+  /**
+      * 时间模板详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Template: TimeTemplateItem
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ControlDevicePTZ返回参数结构体
+ */
+export interface ControlDevicePTZResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 在操作时间模板时，用于描述各个时间片段
+ */
+export interface TimeTemplateSpec {
+  /**
+      * 一周中的周几
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DayofWeek: number
+
+  /**
+      * 时间片段的开始时分。格式【HH:MM】
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BeginTime: string
+
+  /**
+      * 时间片段的结束时分。格式【HH:MM】
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EndTime: string
+}
+
+/**
+ * ControlDevicePTZ请求参数结构体
+ */
+export interface ControlDevicePTZRequest {
+  /**
+   * 设备唯一标识
+   */
+  DeviceId: string
+
+  /**
+      * PTZ控制命令类型：
+stop - 停止当前PTZ信令
+left - 向左移动
+right - 向右移动
+up - 向上移动
+down - 向下移动
+leftUp - 左上移动
+leftDown - 左下移动
+rightUp - 右上移动
+rightDown - 右下移动
+zoomOut - 镜头缩小
+zoomIn - 镜头放大
+irisIn - 光圈缩小
+irisOut - 光圈放大
+focusIn - 焦距变近
+focusOut - 焦距变远
+      */
+  Command: string
 }
 
 /**
@@ -1497,24 +999,261 @@ export interface UpdateDeviceGroupRequest {
 }
 
 /**
- * DescribeDevicePassWord请求参数结构体
+ * DescribeGroupDevices请求参数结构体
  */
-export interface DescribeDevicePassWordRequest {
+export interface DescribeGroupDevicesRequest {
+  /**
+   * 分组ID
+   */
+  GroupId: string
+
+  /**
+   * 偏移量，默认0
+   */
+  Offset?: number
+
+  /**
+   * 限制值，默认200
+   */
+  Limit?: number
+
+  /**
+   * 设备名称，根据设备名称模糊匹配时必填
+   */
+  NickName?: string
+
+  /**
+   * 过滤不可录制设备
+   */
+  Recordable?: number
+}
+
+/**
+ * DescribeGroupById请求参数结构体
+ */
+export interface DescribeGroupByIdRequest {
+  /**
+   * 分组ID
+   */
+  GroupId: string
+}
+
+/**
+ * UpdateDevicePassWord返回参数结构体
+ */
+export interface UpdateDevicePassWordResponse {
+  /**
+      * 操作结果，“OK”表示成功，其他表示失败。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDeviceStreams请求参数结构体
+ */
+export interface DescribeDeviceStreamsRequest {
   /**
    * 设备唯一标识
    */
   DeviceId: string
+
+  /**
+   * 流地址失效时间
+   */
+  ExpireTime: number
 }
 
 /**
- * DeleteDevice返回参数结构体
+ * DescribeRecordStream返回参数结构体
  */
-export interface DeleteDeviceResponse {
+export interface DescribeRecordStreamResponse {
   /**
-      * 操作结果
+   * 结果
+   */
+  Data: DescribeRecordStreamData
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateRecordPlan返回参数结构体
+ */
+export interface CreateRecordPlanResponse {
+  /**
+   * 录制计划ID
+   */
+  PlanId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 查询全部设备出参
+ */
+export interface AllDeviceInfo {
+  /**
+      * 设备唯一标识
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Status: string
+  DeviceId: string
+
+  /**
+      * 设备类型；2：IPC
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeviceType: number
+
+  /**
+      * 设备状态；0：设备不在线；1：设备在线；2：设备隔离中；3：设备未注册
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status?: number
+
+  /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime?: number
+
+  /**
+      * 设备扩展属性
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExtraInformation?: string
+
+  /**
+      * 设备名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NickName?: string
+
+  /**
+      * 设备绑定分组路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupPath?: string
+
+  /**
+      * 设备编码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeviceCode?: string
+
+  /**
+      * 是否存在录像,，0:不存在；1：存在
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsRecord?: number
+
+  /**
+      * 该设备是否可录制
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Recordable?: number
+}
+
+/**
+ * DeleteDeviceGroup请求参数结构体
+ */
+export interface DeleteDeviceGroupRequest {
+  /**
+   * 分组ID
+   */
+  GroupId: string
+}
+
+/**
+ * DescribeDeviceGroup返回参数结构体
+ */
+export interface DescribeDeviceGroupResponse {
+  /**
+      * 设备所在分组信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DevGroups: Array<DevGroupInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyDeviceData请求参数结构体
+ */
+export interface ModifyDeviceDataRequest {
+  /**
+   * 设备唯一标识
+   */
+  DeviceId: string
+
+  /**
+   * 设备名称
+   */
+  NickName: string
+}
+
+/**
+ * GetRecordDatesByDev请求参数结构体
+ */
+export interface GetRecordDatesByDevRequest {
+  /**
+   * 设备唯一标识
+   */
+  DeviceId: string
+
+  /**
+   * 偏移量，默认0
+   */
+  Offset: number
+
+  /**
+   * 限制量，默认200
+   */
+  Limit: number
+}
+
+/**
+ * GetTimeTemplates返回参数结构体
+ */
+export interface GetTimeTemplatesResponse {
+  /**
+      * 时间模板列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Templates: Array<TimeTemplateItem>
+
+  /**
+   * 时间模板总数
+   */
+  TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDevicePassWord返回参数结构体
+ */
+export interface DescribeDevicePassWordResponse {
+  /**
+   * 设备密码
+   */
+  PassWord: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1560,61 +1299,36 @@ export interface DescribeAllDeviceListResponse {
 }
 
 /**
- * DescribeStatisticSummary请求参数结构体
+ * DescribeSubGroups返回参数结构体
  */
-export interface DescribeStatisticSummaryRequest {
+export interface DescribeSubGroupsResponse {
   /**
-   * 指定日期。格式【YYYY-MM-DD】
-   */
-  Date: string
-}
-
-/**
- * DescribeGroupByPath返回参数结构体
- */
-export interface DescribeGroupByPathResponse {
-  /**
-      * 分组信息详情
+      * 子分组详情列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Group: GroupItem
+  GroupList: Array<GroupItem>
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * UpdateRecordPlan返回参数结构体
- */
-export interface UpdateRecordPlanResponse {
-  /**
-   * 操作结果
-   */
-  Status: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeGroupDevices返回参数结构体
- */
-export interface DescribeGroupDevicesResponse {
-  /**
-      * 分组绑定的设备数
+      * 子分组总数
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TotalCount: number
 
   /**
-      * 设备详情列表
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeGroups返回参数结构体
+ */
+export interface DescribeGroupsResponse {
+  /**
+      * 分组详细信息列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DeviceList: Array<GroupDeviceItem>
+  Groups: Array<GroupInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1648,22 +1362,6 @@ export interface DescribeDeviceStreamsData {
 }
 
 /**
- * GetTimeTemplateById返回参数结构体
- */
-export interface GetTimeTemplateByIdResponse {
-  /**
-      * 时间模板详情
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Template: TimeTemplateItem
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * BindGroupDevices请求参数结构体
  */
 export interface BindGroupDevicesRequest {
@@ -1676,4 +1374,426 @@ export interface BindGroupDevicesRequest {
    * 设备唯一标识列表
    */
   DeviceList: Array<string>
+}
+
+/**
+ * CreateTimeTemplate返回参数结构体
+ */
+export interface CreateTimeTemplateResponse {
+  /**
+   * 时间模板ID
+   */
+  TemplateId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 某天的统计数额
+ */
+export interface StatisticItem {
+  /**
+      * 日期。格式【YYYY-MM-DD】
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Date: string
+
+  /**
+      * 统计数额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Sum: number
+}
+
+/**
+ * DescribeSIPServer返回参数结构体
+ */
+export interface DescribeSIPServerResponse {
+  /**
+   * SIP服务器相关配置项
+   */
+  Data: ServerConfiguration
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeGroupByPath请求参数结构体
+ */
+export interface DescribeGroupByPathRequest {
+  /**
+   * 分组路径，格式为/aaa(/bbb/ccc)
+   */
+  GroupPath: string
+}
+
+/**
+ * UpdateRecordPlan返回参数结构体
+ */
+export interface UpdateRecordPlanResponse {
+  /**
+   * 操作结果
+   */
+  Status: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 时间模板详情
+ */
+export interface TimeTemplateItem {
+  /**
+      * 时间模板ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TemplateId: string
+
+  /**
+      * 模板名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name: string
+
+  /**
+      * 是否全时录制，即7*24小时录制
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  IsAllWeek: number
+
+  /**
+      * 是否为自定义模板
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Type?: number
+
+  /**
+      * 时间片段详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TimeTemplateSpecs?: Array<TimeTemplateSpec>
+}
+
+/**
+ * DescribeDeviceGroup请求参数结构体
+ */
+export interface DescribeDeviceGroupRequest {
+  /**
+   * 设备唯一标识列表
+   */
+  DeviceIds?: Array<string>
+}
+
+/**
+ * 录制计划详情
+ */
+export interface RecordPlanItem {
+  /**
+      * 计划ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PlanId: string
+
+  /**
+      * 计划名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Name: string
+
+  /**
+      * 时间模板ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TimeTemplateId: string
+
+  /**
+      * 时间模板名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TimeTemplateName: string
+
+  /**
+      * 录制类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EventId: number
+
+  /**
+      * 绑定的设备列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Devices: Array<DeviceItem>
+}
+
+/**
+ * DescribeGroups请求参数结构体
+ */
+export interface DescribeGroupsRequest {
+  /**
+   * 分组ID列表
+   */
+  GroupIds?: Array<string>
+}
+
+/**
+ * GetRecordPlans返回参数结构体
+ */
+export interface GetRecordPlansResponse {
+  /**
+      * 录制计划详情·列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Plans: Array<RecordPlanItem>
+
+  /**
+      * 录制计划总数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeGroupById返回参数结构体
+ */
+export interface DescribeGroupByIdResponse {
+  /**
+      * 分组信息详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Group: GroupItem
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetTimeTemplateById请求参数结构体
+ */
+export interface GetTimeTemplateByIdRequest {
+  /**
+   * 时间模板ID
+   */
+  TemplateId: string
+}
+
+/**
+ * 分组信息
+ */
+export interface GroupItem {
+  /**
+      * 分组名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupName: string
+
+  /**
+      * 父分组ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ParentId: string
+
+  /**
+      * 分组ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupId: string
+
+  /**
+      * 分组路径
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupPath?: string
+
+  /**
+      * 分组描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupDescribe?: string
+
+  /**
+      * 分组绑定设备数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeviceNum?: number
+
+  /**
+      * 子分组数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubGroupNum?: number
+
+  /**
+      * 分组附加信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExtraInformation?: string
+
+  /**
+      * 分组类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupType?: string
+
+  /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateTime?: number
+
+  /**
+      * 分组状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  GroupStatus?: number
+}
+
+/**
+ * DeleteTimeTemplate请求参数结构体
+ */
+export interface DeleteTimeTemplateRequest {
+  /**
+   * 时间模板ID
+   */
+  TemplateId: string
+}
+
+/**
+ * DescribeVideoList返回参数结构体
+ */
+export interface DescribeVideoListResponse {
+  /**
+   * 总数
+   */
+  TotalCount: number
+
+  /**
+   * 录像详情列表
+   */
+  VideoList: RecordTaskItem
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * BindGroupDevices返回参数结构体
+ */
+export interface BindGroupDevicesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeVideoList请求参数结构体
+ */
+export interface DescribeVideoListRequest {
+  /**
+   * 开始时间戳，秒级
+   */
+  StartTime: number
+
+  /**
+   * 结束时间戳，秒级
+   */
+  EndTime: number
+
+  /**
+   * 偏移
+   */
+  Offset: number
+
+  /**
+   * 限制
+   */
+  Limit: number
+}
+
+/**
+ * ModifyDeviceData返回参数结构体
+ */
+export interface ModifyDeviceDataResponse {
+  /**
+      * 操作结果,“OK”表示成功，其他表示失败。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteDevice返回参数结构体
+ */
+export interface DeleteDeviceResponse {
+  /**
+      * 操作结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Status: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeGroupByPath返回参数结构体
+ */
+export interface DescribeGroupByPathResponse {
+  /**
+      * 分组信息详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Group: GroupItem
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeGroupDevices返回参数结构体
+ */
+export interface DescribeGroupDevicesResponse {
+  /**
+      * 分组绑定的设备数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalCount: number
+
+  /**
+      * 设备详情列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeviceList: Array<GroupDeviceItem>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }

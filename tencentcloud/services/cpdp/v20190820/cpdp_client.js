@@ -385,6 +385,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ApplyApplicationMaterial", req, cb);
     }
     /**
+     * 直播平台-上传代理商完税列表
+     */
+    async UploadTaxList(req, cb) {
+        return this.request("UploadTaxList", req, cb);
+    }
+    /**
      * 跨境-汇出指令申请。通过该接口可将对接方账户中的人民币余额汇兑成外币，再汇出至指定银行账户。
      */
     async ApplyOutwardOrder(req, cb) {
@@ -395,6 +401,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateTransferBatch(req, cb) {
         return this.request("CreateTransferBatch", req, cb);
+    }
+    /**
+     * 直播平台-上传代理商完税证明
+     */
+    async UploadTaxPayment(req, cb) {
+        return this.request("UploadTaxPayment", req, cb);
     }
     /**
      * 查询银行子账户余额。查询会员子账户以及平台的功能子账户的余额。

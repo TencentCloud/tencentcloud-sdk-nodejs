@@ -292,6 +292,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyConnectionConfig", req, cb);
     }
     /**
+     * 升级实例支持多AZ
+     */
+    async UpgradeVersionToMultiAvailabilityZones(req, cb) {
+        return this.request("UpgradeVersionToMultiAvailabilityZones", req, cb);
+    }
+    /**
      * 查询Redis实例列表信息。该接口已废弃。
      */
     async DescribeCommonDBInstances(req, cb) {

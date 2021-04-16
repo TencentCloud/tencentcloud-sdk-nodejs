@@ -1246,7 +1246,7 @@ export interface DescribeBillListResponse {
  */
 export interface DescribeAccountBalanceResponse {
   /**
-   * 云账户信息中的”展示可用余额”字段，单位为"分"
+   * 接口做过变更,为兼容老接口,本字段与RealBalance相同,为当前真实可用余额,单位 分
    */
   Balance: number
 
@@ -1256,32 +1256,32 @@ export interface DescribeAccountBalanceResponse {
   Uin: number
 
   /**
-   * 当前真实可用余额
+   * 当前真实可用余额,单位 分
    */
   RealBalance: number
 
   /**
-   * 现金账户余额
+   * 现金账户余额,单位 分
    */
   CashAccountBalance: number
 
   /**
-   * 收益转入账户余额
+   * 收益转入账户余额,单位 分
    */
   IncomeIntoAccountBalance: number
 
   /**
-   * 赠送账户余额
+   * 赠送账户余额,单位 分
    */
   PresentAccountBalance: number
 
   /**
-   * 冻结金额
+   * 冻结金额,单位 分
    */
   FreezeAmount: number
 
   /**
-   * 欠费金额
+   * 欠费金额,单位 分
    */
   OweAmount: number
 

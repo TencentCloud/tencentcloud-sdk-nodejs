@@ -800,6 +800,19 @@ export interface RenewInstanceRequest {
     InstanceId: string;
 }
 /**
+ * UpgradeVersionToMultiAvailabilityZones返回参数结构体
+ */
+export interface UpgradeVersionToMultiAvailabilityZonesResponse {
+    /**
+      * 任务ID
+      */
+    FlowId: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeInstanceParamRecords返回参数结构体
  */
 export interface DescribeInstanceParamRecordsResponse {
@@ -1504,6 +1517,15 @@ export interface InstanceIntegerParam {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Unit: string;
+}
+/**
+ * UpgradeVersionToMultiAvailabilityZones请求参数结构体
+ */
+export interface UpgradeVersionToMultiAvailabilityZonesRequest {
+    /**
+      * 实例ID
+      */
+    InstanceId: string;
 }
 /**
  * DescribeInstanceMonitorTookDist请求参数结构体

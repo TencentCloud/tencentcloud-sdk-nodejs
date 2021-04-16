@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   QueryInvoiceResponse,
+  UploadTaxPaymentRequest,
   QueryOrderOutOrderList,
   ApplyTradeRequest,
   QueryOutwardOrderResponse,
@@ -48,6 +49,7 @@ import {
   QueryBankWithdrawCashDetailsResponse,
   QueryItem,
   ApplyTradeResult,
+  WithdrawCashMembershipRequest,
   RefundOutSubOrderRefundList,
   UnbindRelateAcctRequest,
   WithdrawBill,
@@ -97,7 +99,7 @@ import {
   CreateInvoiceV2Request,
   QueryAcctInfoListResponse,
   DeleteAgentTaxPaymentInfosRequest,
-  WithdrawCashMembershipRequest,
+  UploadTaxListResponse,
   ExecuteMemberTransactionResponse,
   BindRelateAcctUnionPayRequest,
   CreateInvoiceResultData,
@@ -126,6 +128,7 @@ import {
   QueryPayerinfoData,
   QueryMerchantBalanceData,
   QueryMemberTransactionRequest,
+  UploadTaxPaymentResponse,
   QueryExchangerateResult,
   QueryBillDownloadURLResponse,
   CreateRedInvoiceV2Request,
@@ -221,6 +224,7 @@ import {
   BindRelateAcctSmallAmountResponse,
   ModifyMntMbrBindRelateAcctBankCodeResponse,
   QueryBalanceRequest,
+  UploadTaxListRequest,
   ApplyWithdrawalRequest,
   CreateRedInvoiceResultData,
   BindRelateAcctSmallAmountRequest,
@@ -843,6 +847,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 直播平台-上传代理商完税列表
+   */
+  async UploadTaxList(
+    req: UploadTaxListRequest,
+    cb?: (error: string, rep: UploadTaxListResponse) => void
+  ): Promise<UploadTaxListResponse> {
+    return this.request("UploadTaxList", req, cb)
+  }
+
+  /**
    * 跨境-汇出指令申请。通过该接口可将对接方账户中的人民币余额汇兑成外币，再汇出至指定银行账户。
    */
   async ApplyOutwardOrder(
@@ -860,6 +874,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateTransferBatchResponse) => void
   ): Promise<CreateTransferBatchResponse> {
     return this.request("CreateTransferBatch", req, cb)
+  }
+
+  /**
+   * 直播平台-上传代理商完税证明
+   */
+  async UploadTaxPayment(
+    req: UploadTaxPaymentRequest,
+    cb?: (error: string, rep: UploadTaxPaymentResponse) => void
+  ): Promise<UploadTaxPaymentResponse> {
+    return this.request("UploadTaxPayment", req, cb)
   }
 
   /**

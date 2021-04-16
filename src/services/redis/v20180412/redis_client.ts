@@ -53,6 +53,7 @@ import {
   RegionConf,
   BigKeyInfo,
   RenewInstanceRequest,
+  UpgradeVersionToMultiAvailabilityZonesResponse,
   DescribeInstanceParamRecordsResponse,
   ModifyAutoBackupConfigRequest,
   InstanceMultiParam,
@@ -89,6 +90,7 @@ import {
   DescribeInstanceMonitorTookDistResponse,
   DescribeInstanceBackupsResponse,
   InstanceIntegerParam,
+  UpgradeVersionToMultiAvailabilityZonesRequest,
   DescribeInstanceMonitorTookDistRequest,
   ModifyMaintenanceWindowRequest,
   InstanceTextParam,
@@ -636,6 +638,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyConnectionConfigResponse) => void
   ): Promise<ModifyConnectionConfigResponse> {
     return this.request("ModifyConnectionConfig", req, cb)
+  }
+
+  /**
+   * 升级实例支持多AZ
+   */
+  async UpgradeVersionToMultiAvailabilityZones(
+    req: UpgradeVersionToMultiAvailabilityZonesRequest,
+    cb?: (error: string, rep: UpgradeVersionToMultiAvailabilityZonesResponse) => void
+  ): Promise<UpgradeVersionToMultiAvailabilityZonesResponse> {
+    return this.request("UpgradeVersionToMultiAvailabilityZones", req, cb)
   }
 
   /**

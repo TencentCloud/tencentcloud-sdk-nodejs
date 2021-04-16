@@ -58,6 +58,16 @@ it("iotvideoindustry.v20201201.CreateDeviceGroup", async function () {
     }
 })
 
+it("iotvideoindustry.v20201201.DescribeRecordStream", async function () {
+    try {
+       const data = await client.DescribeRecordStream({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideoindustry.v20201201.DescribeStatisticSummary", async function () {
     try {
        const data = await client.DescribeStatisticSummary({})
@@ -301,6 +311,16 @@ it("iotvideoindustry.v20201201.DeleteDeviceGroup", async function () {
 it("iotvideoindustry.v20201201.ControlDevicePTZ", async function () {
     try {
        const data = await client.ControlDevicePTZ({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotvideoindustry.v20201201.DescribeVideoList", async function () {
+    try {
+       const data = await client.DescribeVideoList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

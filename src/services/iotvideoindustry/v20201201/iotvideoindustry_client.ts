@@ -18,87 +18,92 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  CreateTimeTemplateResponse,
-  RecordTaskItem,
-  ControlDevicePTZResponse,
-  DeleteRecordPlanRequest,
-  StatisticItem,
-  CreateDeviceGroupResponse,
-  DescribeSIPServerResponse,
-  GetVideoListByConResponse,
   DeleteTimeTemplateResponse,
   GetTimeTemplatesRequest,
-  DescribeSubGroupsRequest,
-  ControlDevicePTZRequest,
-  DescribeGroupsResponse,
   ServerConfiguration,
-  UpdateRecordPlanRequest,
-  GroupInfo,
-  ModifyDeviceDataResponse,
-  DescribeStatisticDetailsResponse,
-  DescribeGroupDevicesRequest,
   GetRecordPlanByDevRequest,
   GetRecordDatesByDevResponse,
-  GetRecordPlanByDevResponse,
-  DescribeDeviceGroupRequest,
-  UpdateDeviceGroupResponse,
-  RecordPlanItem,
-  GetRecordPlanByIdResponse,
-  DescribeGroupsRequest,
-  DeleteDeviceRequest,
-  DescribeStatisticDetailsRequest,
-  DescribeGroupByIdRequest,
-  DescribeGroupByIdResponse,
-  CreateTimeTemplateRequest,
-  DeviceItem,
-  GroupItem,
-  DescribeDeviceStreamsRequest,
-  GetTimeTemplateByIdRequest,
-  TimeTemplateSpec,
-  CreateRecordPlanResponse,
   DescribeDeviceStreamsResponse,
-  DescribeAllDeviceListRequest,
-  DeleteTimeTemplateRequest,
   DescribeSIPServerRequest,
-  GroupDeviceItem,
-  DeleteDeviceGroupRequest,
-  DeleteRecordPlanResponse,
   GetRecordPlanByIdRequest,
   GetRecordPlansRequest,
-  DescribeDeviceGroupResponse,
-  DescribeSubGroupsResponse,
-  DescribeGroupByPathRequest,
+  DeviceItem,
   DeleteDeviceGroupResponse,
-  AllDeviceInfo,
+  DeleteRecordPlanResponse,
+  UpdateDeviceGroupResponse,
+  GetVideoListByConRequest,
+  DevGroupInfo,
+  DescribeSubGroupsRequest,
+  DeleteRecordPlanRequest,
+  CreateDeviceGroupResponse,
+  GetVideoListByConResponse,
+  DescribeStatisticDetailsResponse,
+  GroupDeviceItem,
+  DescribeStatisticSummaryRequest,
+  GetRecordPlanByIdResponse,
+  DeleteDeviceRequest,
+  UpdateDevicePassWordRequest,
+  CreateTimeTemplateRequest,
+  DescribeAllDeviceListRequest,
+  DescribeDevicePassWordRequest,
+  RecordTaskItem,
+  GetRecordPlanByDevResponse,
+  UpdateRecordPlanRequest,
+  GroupInfo,
+  DescribeStatisticDetailsRequest,
   CreateRecordPlanRequest,
-  TimeTemplateItem,
+  DescribeRecordStreamData,
   CreateDeviceGroupRequest,
   UpdateTimeTemplateRequest,
-  GetRecordPlansResponse,
-  UpdateDevicePassWordResponse,
-  GetVideoListByConRequest,
-  UpdateDevicePassWordRequest,
-  ModifyDeviceDataRequest,
-  DevGroupInfo,
-  GetRecordDatesByDevRequest,
-  GetTimeTemplatesResponse,
-  BindGroupDevicesResponse,
   CreateDeviceResponse,
   CreateDeviceRequest,
   DescribeStatisticSummaryResponse,
-  DescribeDevicePassWordResponse,
+  DescribeRecordStreamRequest,
+  GetTimeTemplateByIdResponse,
+  ControlDevicePTZResponse,
+  TimeTemplateSpec,
+  ControlDevicePTZRequest,
   UpdateDeviceGroupRequest,
-  DescribeDevicePassWordRequest,
-  DeleteDeviceResponse,
+  DescribeGroupDevicesRequest,
+  DescribeGroupByIdRequest,
+  UpdateDevicePassWordResponse,
+  DescribeDeviceStreamsRequest,
+  DescribeRecordStreamResponse,
+  CreateRecordPlanResponse,
+  AllDeviceInfo,
+  DeleteDeviceGroupRequest,
+  DescribeDeviceGroupResponse,
+  ModifyDeviceDataRequest,
+  GetRecordDatesByDevRequest,
+  GetTimeTemplatesResponse,
+  DescribeDevicePassWordResponse,
   UpdateTimeTemplateResponse,
   DescribeAllDeviceListResponse,
-  DescribeStatisticSummaryRequest,
-  DescribeGroupByPathResponse,
-  UpdateRecordPlanResponse,
-  DescribeGroupDevicesResponse,
+  DescribeSubGroupsResponse,
+  DescribeGroupsResponse,
   DescribeDeviceStreamsData,
-  GetTimeTemplateByIdResponse,
   BindGroupDevicesRequest,
+  CreateTimeTemplateResponse,
+  StatisticItem,
+  DescribeSIPServerResponse,
+  DescribeGroupByPathRequest,
+  UpdateRecordPlanResponse,
+  TimeTemplateItem,
+  DescribeDeviceGroupRequest,
+  RecordPlanItem,
+  DescribeGroupsRequest,
+  GetRecordPlansResponse,
+  DescribeGroupByIdResponse,
+  GetTimeTemplateByIdRequest,
+  GroupItem,
+  DeleteTimeTemplateRequest,
+  DescribeVideoListResponse,
+  BindGroupDevicesResponse,
+  DescribeVideoListRequest,
+  ModifyDeviceDataResponse,
+  DeleteDeviceResponse,
+  DescribeGroupByPathResponse,
+  DescribeGroupDevicesResponse,
 } from "./iotvideoindustry_models"
 
 /**
@@ -148,6 +153,19 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateDeviceGroupResponse) => void
   ): Promise<CreateDeviceGroupResponse> {
     return this.request("CreateDeviceGroup", req, cb)
+  }
+
+  /**
+     * 获取回放视频流(NVR录制用)
+RecordId和StartTime/EndTime互斥
+当存在RecordId时，StartTime和EndTime无效
+当RecordId为空，StartTime和EndTime生效
+     */
+  async DescribeRecordStream(
+    req: DescribeRecordStreamRequest,
+    cb?: (error: string, rep: DescribeRecordStreamResponse) => void
+  ): Promise<DescribeRecordStreamResponse> {
+    return this.request("DescribeRecordStream", req, cb)
   }
 
   /**
@@ -399,6 +417,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ControlDevicePTZResponse) => void
   ): Promise<ControlDevicePTZResponse> {
     return this.request("ControlDevicePTZ", req, cb)
+  }
+
+  /**
+   * 根据时间获取回放文件列表(云端录制用)
+   */
+  async DescribeVideoList(
+    req: DescribeVideoListRequest,
+    cb?: (error: string, rep: DescribeVideoListResponse) => void
+  ): Promise<DescribeVideoListResponse> {
+    return this.request("DescribeVideoList", req, cb)
   }
 
   /**

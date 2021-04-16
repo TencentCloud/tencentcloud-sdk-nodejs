@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateTimeTemplateResponse, ControlDevicePTZResponse, DeleteRecordPlanRequest, CreateDeviceGroupResponse, DescribeSIPServerResponse, GetVideoListByConResponse, DeleteTimeTemplateResponse, GetTimeTemplatesRequest, DescribeSubGroupsRequest, ControlDevicePTZRequest, DescribeGroupsResponse, UpdateRecordPlanRequest, ModifyDeviceDataResponse, DescribeStatisticDetailsResponse, DescribeGroupDevicesRequest, GetRecordPlanByDevRequest, GetRecordDatesByDevResponse, GetRecordPlanByDevResponse, DescribeDeviceGroupRequest, UpdateDeviceGroupResponse, GetRecordPlanByIdResponse, DescribeGroupsRequest, DeleteDeviceRequest, DescribeStatisticDetailsRequest, DescribeGroupByIdRequest, DescribeGroupByIdResponse, CreateTimeTemplateRequest, DescribeDeviceStreamsRequest, GetTimeTemplateByIdRequest, CreateRecordPlanResponse, DescribeDeviceStreamsResponse, DescribeAllDeviceListRequest, DeleteTimeTemplateRequest, DescribeSIPServerRequest, DeleteDeviceGroupRequest, DeleteRecordPlanResponse, GetRecordPlanByIdRequest, GetRecordPlansRequest, DescribeDeviceGroupResponse, DescribeSubGroupsResponse, DescribeGroupByPathRequest, DeleteDeviceGroupResponse, CreateRecordPlanRequest, CreateDeviceGroupRequest, UpdateTimeTemplateRequest, GetRecordPlansResponse, UpdateDevicePassWordResponse, GetVideoListByConRequest, UpdateDevicePassWordRequest, ModifyDeviceDataRequest, GetRecordDatesByDevRequest, GetTimeTemplatesResponse, BindGroupDevicesResponse, CreateDeviceResponse, CreateDeviceRequest, DescribeStatisticSummaryResponse, DescribeDevicePassWordResponse, UpdateDeviceGroupRequest, DescribeDevicePassWordRequest, DeleteDeviceResponse, UpdateTimeTemplateResponse, DescribeAllDeviceListResponse, DescribeStatisticSummaryRequest, DescribeGroupByPathResponse, UpdateRecordPlanResponse, DescribeGroupDevicesResponse, GetTimeTemplateByIdResponse, BindGroupDevicesRequest } from "./iotvideoindustry_models";
+import { DeleteTimeTemplateResponse, GetTimeTemplatesRequest, GetRecordPlanByDevRequest, GetRecordDatesByDevResponse, DescribeDeviceStreamsResponse, DescribeSIPServerRequest, GetRecordPlanByIdRequest, GetRecordPlansRequest, DeleteDeviceGroupResponse, DeleteRecordPlanResponse, UpdateDeviceGroupResponse, GetVideoListByConRequest, DescribeSubGroupsRequest, DeleteRecordPlanRequest, CreateDeviceGroupResponse, GetVideoListByConResponse, DescribeStatisticDetailsResponse, DescribeStatisticSummaryRequest, GetRecordPlanByIdResponse, DeleteDeviceRequest, UpdateDevicePassWordRequest, CreateTimeTemplateRequest, DescribeAllDeviceListRequest, DescribeDevicePassWordRequest, GetRecordPlanByDevResponse, UpdateRecordPlanRequest, DescribeStatisticDetailsRequest, CreateRecordPlanRequest, CreateDeviceGroupRequest, UpdateTimeTemplateRequest, CreateDeviceResponse, CreateDeviceRequest, DescribeStatisticSummaryResponse, DescribeRecordStreamRequest, GetTimeTemplateByIdResponse, ControlDevicePTZResponse, ControlDevicePTZRequest, UpdateDeviceGroupRequest, DescribeGroupDevicesRequest, DescribeGroupByIdRequest, UpdateDevicePassWordResponse, DescribeDeviceStreamsRequest, DescribeRecordStreamResponse, CreateRecordPlanResponse, DeleteDeviceGroupRequest, DescribeDeviceGroupResponse, ModifyDeviceDataRequest, GetRecordDatesByDevRequest, GetTimeTemplatesResponse, DescribeDevicePassWordResponse, UpdateTimeTemplateResponse, DescribeAllDeviceListResponse, DescribeSubGroupsResponse, DescribeGroupsResponse, BindGroupDevicesRequest, CreateTimeTemplateResponse, DescribeSIPServerResponse, DescribeGroupByPathRequest, UpdateRecordPlanResponse, DescribeDeviceGroupRequest, DescribeGroupsRequest, GetRecordPlansResponse, DescribeGroupByIdResponse, GetTimeTemplateByIdRequest, DeleteTimeTemplateRequest, DescribeVideoListResponse, BindGroupDevicesResponse, DescribeVideoListRequest, ModifyDeviceDataResponse, DeleteDeviceResponse, DescribeGroupByPathResponse, DescribeGroupDevicesResponse } from "./iotvideoindustry_models";
 /**
  * iotvideoindustry client
  * @class
@@ -23,6 +23,13 @@ export declare class Client extends AbstractClient {
      * 本接口(CreateDeviceGroup) 用于创建设备管理分组。
      */
     CreateDeviceGroup(req: CreateDeviceGroupRequest, cb?: (error: string, rep: CreateDeviceGroupResponse) => void): Promise<CreateDeviceGroupResponse>;
+    /**
+     * 获取回放视频流(NVR录制用)
+RecordId和StartTime/EndTime互斥
+当存在RecordId时，StartTime和EndTime无效
+当RecordId为空，StartTime和EndTime生效
+     */
+    DescribeRecordStream(req: DescribeRecordStreamRequest, cb?: (error: string, rep: DescribeRecordStreamResponse) => void): Promise<DescribeRecordStreamResponse>;
     /**
      * 本接口(DescribeStatisticSummary)用于查询用户昨日的概览数据。
      */
@@ -124,6 +131,10 @@ export declare class Client extends AbstractClient {
      * 本接口(ControlDevicePTZ) 用于对支持GB28181 PTZ信令的设备进行远程控制。
      */
     ControlDevicePTZ(req: ControlDevicePTZRequest, cb?: (error: string, rep: ControlDevicePTZResponse) => void): Promise<ControlDevicePTZResponse>;
+    /**
+     * 根据时间获取回放文件列表(云端录制用)
+     */
+    DescribeVideoList(req: DescribeVideoListRequest, cb?: (error: string, rep: DescribeVideoListResponse) => void): Promise<DescribeVideoListResponse>;
     /**
      * 本接口(DescribeAllDeviceList) 用于获取设备列表。
      */
