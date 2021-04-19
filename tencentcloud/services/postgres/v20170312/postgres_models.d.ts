@@ -662,6 +662,27 @@ export interface InquiryPriceCreateDBInstancesResponse {
     RequestId?: string;
 }
 /**
+ * DisIsolateDBInstances请求参数结构体
+ */
+export interface DisIsolateDBInstancesRequest {
+    /**
+      * 资源ID列表
+      */
+    DBInstanceIdSet: Array<string>;
+    /**
+      * 包年包月实例解隔离时购买时常 以月为单位
+      */
+    Period?: number;
+    /**
+      * 是否使用代金券
+      */
+    AutoVoucher?: boolean;
+    /**
+      * 代金券id列表
+      */
+    VoucherIds?: Array<string>;
+}
+/**
  * serverless实例网络信息描述
  */
 export interface ServerlessDBInstanceNetInfo {
@@ -969,7 +990,7 @@ export interface DescribeDBErrlogsRequest {
  */
 export interface DestroyDBInstanceRequest {
     /**
-      * 待删除实例标识符
+      * 待下线实例ID
       */
     DBInstanceId: string;
 }
@@ -1205,6 +1226,15 @@ export interface RestartDBInstanceRequest {
     DBInstanceId: string;
 }
 /**
+ * IsolateDBInstances返回参数结构体
+ */
+export interface IsolateDBInstancesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * OpenDBExtranetAccess返回参数结构体
  */
 export interface OpenDBExtranetAccessResponse {
@@ -1237,6 +1267,15 @@ export interface InquiryPriceUpgradeDBInstanceRequest {
       * 实例计费类型，预付费或者后付费。PREPAID-预付费。目前只支持预付费。
       */
     InstanceChargeType?: string;
+}
+/**
+ * IsolateDBInstances请求参数结构体
+ */
+export interface IsolateDBInstancesRequest {
+    /**
+      * 实例ID集合
+      */
+    DBInstanceIdSet: Array<string>;
 }
 /**
  * ModifyDBInstanceName请求参数结构体
@@ -1540,6 +1579,15 @@ export interface Filter {
       * 一个或者多个过滤值。
       */
     Values?: Array<string>;
+}
+/**
+ * DisIsolateDBInstances返回参数结构体
+ */
+export interface DisIsolateDBInstancesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * OpenDBExtranetAccess请求参数结构体

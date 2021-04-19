@@ -26,6 +26,8 @@ import {
   DescribeApplicationDataRequest,
   VoiceFilterRequest,
   VoiceMessageStatisticsItem,
+  RoomUser,
+  DescribeRoomInfoRequest,
   DescribeScanResultListRequest,
   RealTimeSpeechStatisticsItem,
   VoiceFilterResponse,
@@ -38,6 +40,7 @@ import {
   Task,
   VoiceFilterStatisticsItem,
   StatisticsItem,
+  DescribeRoomInfoResponse,
   DescribeUserInAndOutTimeResponse,
   VoiceFilterInfo,
   DescribeFilterResultResponse,
@@ -70,13 +73,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据应用ID和文件ID查询识别结果
+   * 获取房间内用户信息
    */
-  async DescribeFilterResult(
-    req: DescribeFilterResultRequest,
-    cb?: (error: string, rep: DescribeFilterResultResponse) => void
-  ): Promise<DescribeFilterResultResponse> {
-    return this.request("DescribeFilterResult", req, cb)
+  async DescribeRoomInfo(
+    req: DescribeRoomInfoRequest,
+    cb?: (error: string, rep: DescribeRoomInfoResponse) => void
+  ): Promise<DescribeRoomInfoResponse> {
+    return this.request("DescribeRoomInfo", req, cb)
   }
 
   /**
@@ -120,6 +123,16 @@ Type表示过滤类型，1：政治，2：色情，3：谩骂
     cb?: (error: string, rep: DescribeApplicationDataResponse) => void
   ): Promise<DescribeApplicationDataResponse> {
     return this.request("DescribeApplicationData", req, cb)
+  }
+
+  /**
+   * 根据应用ID和文件ID查询识别结果
+   */
+  async DescribeFilterResult(
+    req: DescribeFilterResultRequest,
+    cb?: (error: string, rep: DescribeFilterResultResponse) => void
+  ): Promise<DescribeFilterResultResponse> {
+    return this.request("DescribeFilterResult", req, cb)
   }
 
   /**

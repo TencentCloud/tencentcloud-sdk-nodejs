@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ScanVoiceResponse, ModifyAppStatusRequest, DescribeScanResultListResponse, DescribeApplicationDataRequest, VoiceFilterRequest, DescribeScanResultListRequest, VoiceFilterResponse, DescribeFilterResultListResponse, DescribeAppStatisticsResponse, DescribeApplicationDataResponse, DescribeUserInAndOutTimeResponse, DescribeFilterResultResponse, ModifyRoomInfoResponse, DescribeFilterResultListRequest, ModifyRoomInfoRequest, CreateAppRequest, CreateAppResponse, DescribeAppStatisticsRequest, ModifyAppStatusResponse, ScanVoiceRequest, DescribeFilterResultRequest, DescribeUserInAndOutTimeRequest } from "./gme_models";
+import { ScanVoiceResponse, ModifyAppStatusRequest, DescribeScanResultListResponse, DescribeApplicationDataRequest, VoiceFilterRequest, DescribeRoomInfoRequest, DescribeScanResultListRequest, VoiceFilterResponse, DescribeFilterResultListResponse, DescribeAppStatisticsResponse, DescribeApplicationDataResponse, DescribeRoomInfoResponse, DescribeUserInAndOutTimeResponse, DescribeFilterResultResponse, ModifyRoomInfoResponse, DescribeFilterResultListRequest, ModifyRoomInfoRequest, CreateAppRequest, CreateAppResponse, DescribeAppStatisticsRequest, ModifyAppStatusResponse, ScanVoiceRequest, DescribeFilterResultRequest, DescribeUserInAndOutTimeRequest } from "./gme_models";
 /**
  * gme client
  * @class
@@ -8,9 +8,9 @@ import { ScanVoiceResponse, ModifyAppStatusRequest, DescribeScanResultListRespon
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 根据应用ID和文件ID查询识别结果
+     * 获取房间内用户信息
      */
-    DescribeFilterResult(req: DescribeFilterResultRequest, cb?: (error: string, rep: DescribeFilterResultResponse) => void): Promise<DescribeFilterResultResponse>;
+    DescribeRoomInfo(req: DescribeRoomInfoRequest, cb?: (error: string, rep: DescribeRoomInfoResponse) => void): Promise<DescribeRoomInfoResponse>;
     /**
      * 本接口(DescribeAppStatistics)用于获取某个GME应用的用量数据。包括实时语音，语音消息及转文本，语音分析等。最长查询周期为最近30天。
      */
@@ -30,6 +30,10 @@ Type表示过滤类型，1：政治，2：色情，3：谩骂
      * 本接口(DescribeApplicationData)用于获取数据详情信息，最多可拉取最近90天的数据。
      */
     DescribeApplicationData(req: DescribeApplicationDataRequest, cb?: (error: string, rep: DescribeApplicationDataResponse) => void): Promise<DescribeApplicationDataResponse>;
+    /**
+     * 根据应用ID和文件ID查询识别结果
+     */
+    DescribeFilterResult(req: DescribeFilterResultRequest, cb?: (error: string, rep: DescribeFilterResultResponse) => void): Promise<DescribeFilterResultResponse>;
     /**
      * 根据日期查询识别结果列表
      */

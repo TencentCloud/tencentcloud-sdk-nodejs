@@ -171,6 +171,37 @@ export interface VoiceMessageStatisticsItem {
 }
 
 /**
+ * 房间内用户信息
+ */
+export interface RoomUser {
+  /**
+   * 房间id
+   */
+  RoomId: number
+
+  /**
+      * 房间里用户uin列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Uins: Array<number>
+}
+
+/**
+ * DescribeRoomInfo请求参数结构体
+ */
+export interface DescribeRoomInfoRequest {
+  /**
+   * 应用ID，登录[控制台 - 服务管理](https://console.cloud.tencent.com/gamegme)创建应用得到的AppID
+   */
+  SdkAppId: number
+
+  /**
+   * 房间号列表，最大不能超过10个
+   */
+  RoomIds: Array<number>
+}
+
+/**
  * DescribeScanResultList请求参数结构体
  */
 export interface DescribeScanResultListRequest {
@@ -432,6 +463,28 @@ export interface StatisticsItem {
    * 统计值
    */
   Data: number
+}
+
+/**
+ * DescribeRoomInfo返回参数结构体
+ */
+export interface DescribeRoomInfoResponse {
+  /**
+      * 操作结果, 0成功, 非0失败
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: number
+
+  /**
+      * 房间用户信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RoomUsers: Array<RoomUser>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

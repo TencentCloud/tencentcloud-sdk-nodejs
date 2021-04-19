@@ -49,6 +49,7 @@ import {
   CreateReadOnlyDBInstanceResponse,
   DescribeOrdersResponse,
   InquiryPriceCreateDBInstancesResponse,
+  DisIsolateDBInstancesRequest,
   ServerlessDBInstanceNetInfo,
   DescribeDBInstancesRequest,
   ModifyAccountRemarkResponse,
@@ -72,8 +73,10 @@ import {
   CreateReadOnlyGroupRequest,
   CloseServerlessDBExtranetAccessResponse,
   RestartDBInstanceRequest,
+  IsolateDBInstancesResponse,
   OpenDBExtranetAccessResponse,
   InquiryPriceUpgradeDBInstanceRequest,
+  IsolateDBInstancesRequest,
   ModifyDBInstanceNameRequest,
   InquiryPriceRenewDBInstanceResponse,
   ErrLogDetail,
@@ -85,6 +88,7 @@ import {
   DeleteReadOnlyGroupRequest,
   DescribeDBBackupsRequest,
   Filter,
+  DisIsolateDBInstancesResponse,
   OpenDBExtranetAccessRequest,
   SlowlogDetail,
   RemoveDBInstanceFromReadOnlyGroupRequest,
@@ -153,7 +157,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (DestroyDBInstance) 用于销毁指定DBInstanceId对应的实例。当前仅适用于按量计费实例。
+   * 本接口 (DestroyDBInstance) 用于彻底下线指定DBInstanceId对应的实例，下线后实例数据将彻底删除，无法找回，只能下线隔离中的实例。
    */
   async DestroyDBInstance(
     req: DestroyDBInstanceRequest,
@@ -343,6 +347,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（IsolateDBInstances）用于隔离实例
+   */
+  async IsolateDBInstances(
+    req: IsolateDBInstancesRequest,
+    cb?: (error: string, rep: IsolateDBInstancesResponse) => void
+  ): Promise<IsolateDBInstancesResponse> {
+    return this.request("IsolateDBInstances", req, cb)
+  }
+
+  /**
    * 本接口 (DeleteServerlessDBInstance) 用于删除一个ServerlessDB实例。
    */
   async DeleteServerlessDBInstance(
@@ -443,13 +457,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 开通serverlessDB实例外网
+   * 本接口（DisIsolateDBInstances）用于解隔离实例
    */
-  async OpenServerlessDBExtranetAccess(
-    req: OpenServerlessDBExtranetAccessRequest,
-    cb?: (error: string, rep: OpenServerlessDBExtranetAccessResponse) => void
-  ): Promise<OpenServerlessDBExtranetAccessResponse> {
-    return this.request("OpenServerlessDBExtranetAccess", req, cb)
+  async DisIsolateDBInstances(
+    req: DisIsolateDBInstancesRequest,
+    cb?: (error: string, rep: DisIsolateDBInstancesResponse) => void
+  ): Promise<DisIsolateDBInstancesResponse> {
+    return this.request("DisIsolateDBInstances", req, cb)
   }
 
   /**
@@ -550,5 +564,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDBSlowlogsResponse) => void
   ): Promise<DescribeDBSlowlogsResponse> {
     return this.request("DescribeDBSlowlogs", req, cb)
+  }
+
+  /**
+   * 开通serverlessDB实例外网
+   */
+  async OpenServerlessDBExtranetAccess(
+    req: OpenServerlessDBExtranetAccessRequest,
+    cb?: (error: string, rep: OpenServerlessDBExtranetAccessResponse) => void
+  ): Promise<OpenServerlessDBExtranetAccessResponse> {
+    return this.request("OpenServerlessDBExtranetAccess", req, cb)
   }
 }

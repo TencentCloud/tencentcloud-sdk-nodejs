@@ -18,9 +18,9 @@ const client = new tencentcloud.gme.v20180711.Client({
 })
 describe("gme.v20180711.test.js", function () {
 
-it("gme.v20180711.DescribeFilterResult", async function () {
+it("gme.v20180711.DescribeRoomInfo", async function () {
     try {
-       const data = await client.DescribeFilterResult({})
+       const data = await client.DescribeRoomInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -61,6 +61,16 @@ it("gme.v20180711.VoiceFilter", async function () {
 it("gme.v20180711.DescribeApplicationData", async function () {
     try {
        const data = await client.DescribeApplicationData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("gme.v20180711.DescribeFilterResult", async function () {
+    try {
+       const data = await client.DescribeFilterResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

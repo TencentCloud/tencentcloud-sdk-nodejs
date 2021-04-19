@@ -28,10 +28,10 @@ class Client extends abstract_client_1.AbstractClient {
         super("gme.tencentcloudapi.com", "2018-07-11", clientConfig);
     }
     /**
-     * 根据应用ID和文件ID查询识别结果
+     * 获取房间内用户信息
      */
-    async DescribeFilterResult(req, cb) {
-        return this.request("DescribeFilterResult", req, cb);
+    async DescribeRoomInfo(req, cb) {
+        return this.request("DescribeRoomInfo", req, cb);
     }
     /**
      * 本接口(DescribeAppStatistics)用于获取某个GME应用的用量数据。包括实时语音，语音消息及转文本，语音分析等。最长查询周期为最近30天。
@@ -59,6 +59,12 @@ Type表示过滤类型，1：政治，2：色情，3：谩骂
      */
     async DescribeApplicationData(req, cb) {
         return this.request("DescribeApplicationData", req, cb);
+    }
+    /**
+     * 根据应用ID和文件ID查询识别结果
+     */
+    async DescribeFilterResult(req, cb) {
+        return this.request("DescribeFilterResult", req, cb);
     }
     /**
      * 根据日期查询识别结果列表

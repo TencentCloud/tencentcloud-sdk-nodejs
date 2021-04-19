@@ -40,7 +40,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOrders", req, cb);
     }
     /**
-     * 本接口 (DestroyDBInstance) 用于销毁指定DBInstanceId对应的实例。当前仅适用于按量计费实例。
+     * 本接口 (DestroyDBInstance) 用于彻底下线指定DBInstanceId对应的实例，下线后实例数据将彻底删除，无法找回，只能下线隔离中的实例。
      */
     async DestroyDBInstance(req, cb) {
         return this.request("DestroyDBInstance", req, cb);
@@ -154,6 +154,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeZones", req, cb);
     }
     /**
+     * 本接口（IsolateDBInstances）用于隔离实例
+     */
+    async IsolateDBInstances(req, cb) {
+        return this.request("IsolateDBInstances", req, cb);
+    }
+    /**
      * 本接口 (DeleteServerlessDBInstance) 用于删除一个ServerlessDB实例。
      */
     async DeleteServerlessDBInstance(req, cb) {
@@ -214,10 +220,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAccounts", req, cb);
     }
     /**
-     * 开通serverlessDB实例外网
+     * 本接口（DisIsolateDBInstances）用于解隔离实例
      */
-    async OpenServerlessDBExtranetAccess(req, cb) {
-        return this.request("OpenServerlessDBExtranetAccess", req, cb);
+    async DisIsolateDBInstances(req, cb) {
+        return this.request("DisIsolateDBInstances", req, cb);
     }
     /**
      * 用于查询一个或多个serverlessDB实例的详细信息
@@ -278,6 +284,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeDBSlowlogs(req, cb) {
         return this.request("DescribeDBSlowlogs", req, cb);
+    }
+    /**
+     * 开通serverlessDB实例外网
+     */
+    async OpenServerlessDBExtranetAccess(req, cb) {
+        return this.request("OpenServerlessDBExtranetAccess", req, cb);
     }
 }
 exports.Client = Client;

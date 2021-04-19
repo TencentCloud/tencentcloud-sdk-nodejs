@@ -1726,6 +1726,11 @@ export interface DescribeVideoListRequest {
    * 限制
    */
   Limit: number
+
+  /**
+   * 设备Id
+   */
+  DeviceId?: string
 }
 
 /**

@@ -228,6 +228,16 @@ it("postgres.v20170312.DescribeZones", async function () {
     }
 })
 
+it("postgres.v20170312.IsolateDBInstances", async function () {
+    try {
+       const data = await client.IsolateDBInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("postgres.v20170312.DeleteServerlessDBInstance", async function () {
     try {
        const data = await client.DeleteServerlessDBInstance({})
@@ -328,9 +338,9 @@ it("postgres.v20170312.DescribeAccounts", async function () {
     }
 })
 
-it("postgres.v20170312.OpenServerlessDBExtranetAccess", async function () {
+it("postgres.v20170312.DisIsolateDBInstances", async function () {
     try {
-       const data = await client.OpenServerlessDBExtranetAccess({})
+       const data = await client.DisIsolateDBInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -431,6 +441,16 @@ it("postgres.v20170312.DescribeProductConfig", async function () {
 it("postgres.v20170312.DescribeDBSlowlogs", async function () {
     try {
        const data = await client.DescribeDBSlowlogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.OpenServerlessDBExtranetAccess", async function () {
+    try {
+       const data = await client.OpenServerlessDBExtranetAccess({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
