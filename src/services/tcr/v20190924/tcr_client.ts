@@ -27,12 +27,13 @@ import {
   DescribeReplicationInstanceCreateTasksResponse,
   WebhookTriggerLog,
   AccessVpc,
+  ModifyTagRetentionRuleRequest,
   ModifyRepositoryResponse,
   TriggerInvokePara,
   DescribeNamespacesResponse,
   TriggerLogResp,
   DownloadHelmChartRequest,
-  TagInfoResp,
+  RetentionRule,
   CreateInstanceResponse,
   DeleteInstanceTokenRequest,
   TaskDetail,
@@ -57,6 +58,7 @@ import {
   DeleteNamespacePersonalRequest,
   NamespaceInfo,
   RenewInstanceRequest,
+  CreateTagRetentionRuleResponse,
   Limit,
   DescribeExternalEndpointStatusRequest,
   DeleteRepositoryResponse,
@@ -68,13 +70,16 @@ import {
   DuplicateImagePersonalResponse,
   Tag,
   DupImageTagResp,
-  DescribeImagesResponse,
+  DeleteApplicationTriggerPersonalResponse,
   DescribeRepositoryFilterPersonalRequest,
+  DescribeTagRetentionExecutionTaskResponse,
   DescribeInternalEndpointsResponse,
   DescribeRepositoryPersonalRequest,
   AutoDelStrategyInfoResp,
+  TriggerResp,
   DeleteApplicationTriggerPersonalRequest,
   SearchUserRepositoryResp,
+  CreateTagRetentionRuleRequest,
   DescribeImageLifecyclePersonalResponse,
   ModifyInstanceTokenRequest,
   DeleteImageLifecyclePersonalResponse,
@@ -94,6 +99,7 @@ import {
   ModifyWebhookTriggerRequest,
   DescribeInstanceStatusResponse,
   DeleteNamespaceResponse,
+  TagInfoResp,
   Favors,
   DescribeRepositoryPersonalResponse,
   CreateSecurityPolicyResponse,
@@ -103,13 +109,14 @@ import {
   ValidateRepositoryExistPersonalRequest,
   ModifyUserPasswordPersonalResponse,
   TcrNamespaceInfo,
-  DeleteApplicationTriggerPersonalResponse,
+  DescribeImagesResponse,
   ModifyRepositoryInfoPersonalResponse,
   DescribeWebhookTriggerLogRequest,
   CreateUserPersonalRequest,
+  DescribeTagRetentionExecutionTaskRequest,
   ReplicationRule,
   RepoInfoResp,
-  ManageImageLifecycleGlobalPersonalResponse,
+  DeleteTagRetentionRuleResponse,
   DeleteSecurityPolicyResponse,
   DescribeInternalEndpointDnsStatusResponse,
   RegistryStatus,
@@ -120,6 +127,7 @@ import {
   DescribeApplicationTriggerLogPersonalResp,
   DeleteImagePersonalRequest,
   DescribeApplicationTriggerPersonalResponse,
+  RetentionTask,
   NamespaceInfoResp,
   CreateRepositoryPersonalRequest,
   DescribeImageFilterPersonalResponse,
@@ -151,6 +159,7 @@ import {
   DescribeInstancesRequest,
   CreateInternalEndpointDnsRequest,
   Filter,
+  RetentionExecution,
   ManageReplicationResponse,
   DescribeReplicationInstanceCreateTasksRequest,
   ModifyWebhookTriggerResponse,
@@ -166,6 +175,7 @@ import {
   DescribeNamespacePersonalResponse,
   DeleteNamespacePersonalResponse,
   Header,
+  RetentionPolicy,
   CreateSecurityPolicyRequest,
   CreateWebhookTriggerRequest,
   DescribeRepositoryOwnerPersonalRequest,
@@ -174,9 +184,13 @@ import {
   DescribeFavorRepositoryPersonalRequest,
   DescribeApplicationTriggerLogPersonalResponse,
   ManageInternalEndpointResponse,
+  CreateRepositoryPersonalResponse,
   DescribeRepositoryFilterPersonalResponse,
+  CreateTagRetentionExecutionResponse,
   DescribeFavorRepositoryPersonalResponse,
   CheckInstanceNameResponse,
+  ManageImageLifecycleGlobalPersonalResponse,
+  DescribeTagRetentionRulesResponse,
   ModifyRepositoryAccessPersonalResponse,
   ManageExternalEndpointResponse,
   ModifyApplicationTriggerPersonalRequest,
@@ -196,21 +210,25 @@ import {
   DeleteNamespaceRequest,
   BatchDeleteImagePersonalRequest,
   DescribeImagesRequest,
-  TriggerResp,
+  ModifyTagRetentionRuleResponse,
+  DescribeTagRetentionExecutionRequest,
   CreateRepositoryResponse,
+  DescribeTagRetentionRulesRequest,
   RespLimit,
   CheckInstanceNameRequest,
   DescribeInstanceTokenResponse,
   SameImagesResp,
+  DescribeTagRetentionExecutionResponse,
   CreateNamespacePersonalRequest,
   WebhookTrigger,
   CreateWebhookTriggerResponse,
   ReplicationFilter,
+  DeleteTagRetentionRuleRequest,
   TcrRepositoryInfo,
   TcrInstanceToken,
   DeleteRepositoryRequest,
   CreateInternalEndpointDnsResponse,
-  CreateRepositoryPersonalResponse,
+  CreateTagRetentionExecutionRequest,
   CreateApplicationTriggerPersonalResponse,
   ManageInternalEndpointRequest,
   BatchDeleteImagePersonalResponse,
@@ -298,6 +316,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 管理实例内网访问VPC链接
+   */
+  async ManageInternalEndpoint(
+    req: ManageInternalEndpointRequest,
+    cb?: (error: string, rep: ManageInternalEndpointResponse) => void
+  ): Promise<ManageInternalEndpointResponse> {
+    return this.request("ManageInternalEndpoint", req, cb)
+  }
+
+  /**
+   * 查询版本保留规则
+   */
+  async DescribeTagRetentionRules(
+    req: DescribeTagRetentionRulesRequest,
+    cb?: (error: string, rep: DescribeTagRetentionRulesResponse) => void
+  ): Promise<DescribeTagRetentionRulesResponse> {
+    return this.request("DescribeTagRetentionRules", req, cb)
+  }
+
+  /**
    * 用于获取个人版镜像仓库tag列表
    */
   async DescribeImagePersonal(
@@ -328,6 +366,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建个人版镜像仓库命名空间，此命名空间全局唯一
+   */
+  async CreateNamespacePersonal(
+    req: CreateNamespacePersonalRequest,
+    cb?: (error: string, rep: CreateNamespacePersonalResponse) => void
+  ): Promise<CreateNamespacePersonalResponse> {
+    return this.request("CreateNamespacePersonal", req, cb)
+  }
+
+  /**
    * 用于在企业版中创建命名空间
    */
   async CreateNamespace(
@@ -338,13 +386,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于修改应用更新触发器
+   * 删除版本保留规则
    */
-  async ModifyApplicationTriggerPersonal(
-    req: ModifyApplicationTriggerPersonalRequest,
-    cb?: (error: string, rep: ModifyApplicationTriggerPersonalResponse) => void
-  ): Promise<ModifyApplicationTriggerPersonalResponse> {
-    return this.request("ModifyApplicationTriggerPersonal", req, cb)
+  async DeleteTagRetentionRule(
+    req: DeleteTagRetentionRuleRequest,
+    cb?: (error: string, rep: DeleteTagRetentionRuleResponse) => void
+  ): Promise<DeleteTagRetentionRuleResponse> {
+    return this.request("DeleteTagRetentionRule", req, cb)
+  }
+
+  /**
+   * 查询版本保留执行记录
+   */
+  async DescribeTagRetentionExecution(
+    req: DescribeTagRetentionExecutionRequest,
+    cb?: (error: string, rep: DescribeTagRetentionExecutionResponse) => void
+  ): Promise<DescribeTagRetentionExecutionResponse> {
+    return this.request("DescribeTagRetentionExecution", req, cb)
+  }
+
+  /**
+   * 查询个人用户配额
+   */
+  async DescribeUserQuotaPersonal(
+    req?: DescribeUserQuotaPersonalRequest,
+    cb?: (error: string, rep: DescribeUserQuotaPersonalResponse) => void
+  ): Promise<DescribeUserQuotaPersonalResponse> {
+    return this.request("DescribeUserQuotaPersonal", req, cb)
   }
 
   /**
@@ -408,6 +476,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 用于修改应用更新触发器
+   */
+  async ModifyApplicationTriggerPersonal(
+    req: ModifyApplicationTriggerPersonalRequest,
+    cb?: (error: string, rep: ModifyApplicationTriggerPersonalResponse) => void
+  ): Promise<ModifyApplicationTriggerPersonalResponse> {
+    return this.request("ModifyApplicationTriggerPersonal", req, cb)
+  }
+
+  /**
    * 用于在个人版镜像仓库中更新容器镜像描述
    */
   async ModifyRepositoryInfoPersonal(
@@ -418,13 +496,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取触发器日志
+   * 手动执行版本保留
    */
-  async DescribeWebhookTriggerLog(
-    req: DescribeWebhookTriggerLogRequest,
-    cb?: (error: string, rep: DescribeWebhookTriggerLogResponse) => void
-  ): Promise<DescribeWebhookTriggerLogResponse> {
-    return this.request("DescribeWebhookTriggerLog", req, cb)
+  async CreateTagRetentionExecution(
+    req: CreateTagRetentionExecutionRequest,
+    cb?: (error: string, rep: CreateTagRetentionExecutionResponse) => void
+  ): Promise<CreateTagRetentionExecutionResponse> {
+    return this.request("CreateTagRetentionExecution", req, cb)
   }
 
   /**
@@ -588,13 +666,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 管理实例内网访问VPC链接
+   * 获取触发器日志
    */
-  async ManageInternalEndpoint(
-    req: ManageInternalEndpointRequest,
-    cb?: (error: string, rep: ManageInternalEndpointResponse) => void
-  ): Promise<ManageInternalEndpointResponse> {
-    return this.request("ManageInternalEndpoint", req, cb)
+  async DescribeWebhookTriggerLog(
+    req: DescribeWebhookTriggerLogRequest,
+    cb?: (error: string, rep: DescribeWebhookTriggerLogResponse) => void
+  ): Promise<DescribeWebhookTriggerLogResponse> {
+    return this.request("DescribeWebhookTriggerLog", req, cb)
   }
 
   /**
@@ -678,13 +756,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询个人用户配额
+   * 更新版本保留规则
    */
-  async DescribeUserQuotaPersonal(
-    req?: DescribeUserQuotaPersonalRequest,
-    cb?: (error: string, rep: DescribeUserQuotaPersonalResponse) => void
-  ): Promise<DescribeUserQuotaPersonalResponse> {
-    return this.request("DescribeUserQuotaPersonal", req, cb)
+  async ModifyTagRetentionRule(
+    req: ModifyTagRetentionRuleRequest,
+    cb?: (error: string, rep: ModifyTagRetentionRuleResponse) => void
+  ): Promise<ModifyTagRetentionRuleResponse> {
+    return this.request("ModifyTagRetentionRule", req, cb)
+  }
+
+  /**
+   * 查询版本保留执行任务
+   */
+  async DescribeTagRetentionExecutionTask(
+    req: DescribeTagRetentionExecutionTaskRequest,
+    cb?: (error: string, rep: DescribeTagRetentionExecutionTaskResponse) => void
+  ): Promise<DescribeTagRetentionExecutionTaskResponse> {
+    return this.request("DescribeTagRetentionExecutionTask", req, cb)
   }
 
   /**
@@ -858,13 +946,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建个人版镜像仓库命名空间，此命名空间全局唯一
+   * 创建版本保留规则
    */
-  async CreateNamespacePersonal(
-    req: CreateNamespacePersonalRequest,
-    cb?: (error: string, rep: CreateNamespacePersonalResponse) => void
-  ): Promise<CreateNamespacePersonalResponse> {
-    return this.request("CreateNamespacePersonal", req, cb)
+  async CreateTagRetentionRule(
+    req: CreateTagRetentionRuleRequest,
+    cb?: (error: string, rep: CreateTagRetentionRuleResponse) => void
+  ): Promise<CreateTagRetentionRuleResponse> {
+    return this.request("CreateTagRetentionRule", req, cb)
   }
 
   /**

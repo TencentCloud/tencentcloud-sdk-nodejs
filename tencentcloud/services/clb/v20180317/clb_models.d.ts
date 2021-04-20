@@ -2643,6 +2643,11 @@ export interface Cluster {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ClustersZone: ClustersZone;
+    /**
+      * 集群版本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ClustersVersion: string;
 }
 /**
  * ModifyTargetWeight请求参数结构体

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DuplicateImagePersonalRequest, ManageExternalEndpointRequest, DescribeImagePersonalResponse, DescribeUserQuotaPersonalRequest, DescribeReplicationInstancesResponse, DescribeReplicationInstanceCreateTasksResponse, ModifyRepositoryResponse, DescribeNamespacesResponse, DownloadHelmChartRequest, CreateInstanceResponse, DeleteInstanceTokenRequest, ModifyRepositoryRequest, DescribeInternalEndpointDnsStatusRequest, CreateApplicationTriggerPersonalRequest, DeleteInternalEndpointDnsRequest, ValidateNamespaceExistPersonalRequest, RenewInstanceResponse, DescribeRepositoriesResponse, DeleteInstanceTokenResponse, DescribeInstancesResponse, CreateReplicationInstanceRequest, ModifyInstanceTokenResponse, DescribeApplicationTriggerPersonalRequest, DeleteNamespacePersonalRequest, RenewInstanceRequest, DescribeExternalEndpointStatusRequest, DeleteRepositoryResponse, DeleteImagePersonalResponse, DownloadHelmChartResponse, ManageReplicationRequest, DeleteWebhookTriggerResponse, DeleteImageLifecycleGlobalPersonalResponse, DuplicateImagePersonalResponse, DescribeImagesResponse, DescribeRepositoryFilterPersonalRequest, DescribeInternalEndpointsResponse, DescribeRepositoryPersonalRequest, DeleteApplicationTriggerPersonalRequest, DescribeImageLifecyclePersonalResponse, ModifyInstanceTokenRequest, DeleteImageLifecyclePersonalResponse, CreateNamespaceResponse, DescribeRepositoryOwnerPersonalResponse, DescribeSecurityPoliciesResponse, DescribeReplicationInstancesRequest, CreateImageLifecyclePersonalResponse, DescribeImageLifecycleGlobalPersonalResponse, CreateNamespacePersonalResponse, DeleteInstanceResponse, DeleteImageLifecycleGlobalPersonalRequest, DescribeInstanceStatusRequest, ModifyWebhookTriggerRequest, DescribeInstanceStatusResponse, DeleteNamespaceResponse, DescribeRepositoryPersonalResponse, CreateSecurityPolicyResponse, DescribeRepositoriesRequest, DescribeImageFilterPersonalRequest, ModifyNamespaceResponse, ValidateRepositoryExistPersonalRequest, ModifyUserPasswordPersonalResponse, DeleteApplicationTriggerPersonalResponse, ModifyRepositoryInfoPersonalResponse, DescribeWebhookTriggerLogRequest, CreateUserPersonalRequest, ManageImageLifecycleGlobalPersonalResponse, DeleteSecurityPolicyResponse, DescribeInternalEndpointDnsStatusResponse, DescribeNamespacePersonalRequest, DeleteRepositoryPersonalResponse, CreateInstanceTokenResponse, DeleteImagePersonalRequest, DescribeApplicationTriggerPersonalResponse, CreateRepositoryPersonalRequest, DescribeImageFilterPersonalResponse, CreateImageLifecyclePersonalRequest, DeleteWebhookTriggerRequest, CreateUserPersonalResponse, DescribeWebhookTriggerResponse, DescribeImageManifestsRequest, ModifyNamespaceRequest, DeleteImageRequest, ModifyRepositoryAccessPersonalRequest, DescribeNamespacesRequest, DescribeImageLifecycleGlobalPersonalRequest, DescribeImageLifecyclePersonalRequest, DeleteSecurityPolicyRequest, CreateInstanceRequest, DescribeInstanceTokenRequest, BatchDeleteRepositoryPersonalResponse, CreateNamespaceRequest, BatchDeleteRepositoryPersonalRequest, ValidateRepositoryExistPersonalResponse, DescribeExternalEndpointStatusResponse, ModifySecurityPolicyRequest, DescribeInstancesRequest, CreateInternalEndpointDnsRequest, ManageReplicationResponse, DescribeReplicationInstanceCreateTasksRequest, ModifyWebhookTriggerResponse, ManageImageLifecycleGlobalPersonalRequest, DescribeUserQuotaPersonalResponse, DescribeImagePersonalRequest, ModifySecurityPolicyResponse, DeleteImageLifecyclePersonalRequest, ModifyApplicationTriggerPersonalResponse, DeleteInstanceRequest, DescribeImageManifestsResponse, DescribeNamespacePersonalResponse, DeleteNamespacePersonalResponse, CreateSecurityPolicyRequest, CreateWebhookTriggerRequest, DescribeRepositoryOwnerPersonalRequest, ModifyRepositoryInfoPersonalRequest, DescribeApplicationTriggerLogPersonalRequest, DescribeFavorRepositoryPersonalRequest, DescribeApplicationTriggerLogPersonalResponse, ManageInternalEndpointResponse, DescribeRepositoryFilterPersonalResponse, DescribeFavorRepositoryPersonalResponse, CheckInstanceNameResponse, ModifyRepositoryAccessPersonalResponse, ManageExternalEndpointResponse, ModifyApplicationTriggerPersonalRequest, CreateReplicationInstanceResponse, CreateInstanceTokenRequest, ModifyUserPasswordPersonalRequest, DescribeSecurityPoliciesRequest, DescribeInternalEndpointsRequest, ValidateNamespaceExistPersonalResponse, DescribeWebhookTriggerLogResponse, CreateRepositoryRequest, DeleteImageResponse, DescribeWebhookTriggerRequest, DeleteNamespaceRequest, BatchDeleteImagePersonalRequest, DescribeImagesRequest, CreateRepositoryResponse, CheckInstanceNameRequest, DescribeInstanceTokenResponse, CreateNamespacePersonalRequest, CreateWebhookTriggerResponse, DeleteRepositoryRequest, CreateInternalEndpointDnsResponse, CreateRepositoryPersonalResponse, CreateApplicationTriggerPersonalResponse, ManageInternalEndpointRequest, BatchDeleteImagePersonalResponse, DeleteInternalEndpointDnsResponse, DeleteRepositoryPersonalRequest } from "./tcr_models";
+import { DuplicateImagePersonalRequest, ManageExternalEndpointRequest, DescribeImagePersonalResponse, DescribeUserQuotaPersonalRequest, DescribeReplicationInstancesResponse, DescribeReplicationInstanceCreateTasksResponse, ModifyTagRetentionRuleRequest, ModifyRepositoryResponse, DescribeNamespacesResponse, DownloadHelmChartRequest, CreateInstanceResponse, DeleteInstanceTokenRequest, ModifyRepositoryRequest, DescribeInternalEndpointDnsStatusRequest, CreateApplicationTriggerPersonalRequest, DeleteInternalEndpointDnsRequest, ValidateNamespaceExistPersonalRequest, RenewInstanceResponse, DescribeRepositoriesResponse, DeleteInstanceTokenResponse, DescribeInstancesResponse, CreateReplicationInstanceRequest, ModifyInstanceTokenResponse, DescribeApplicationTriggerPersonalRequest, DeleteNamespacePersonalRequest, RenewInstanceRequest, CreateTagRetentionRuleResponse, DescribeExternalEndpointStatusRequest, DeleteRepositoryResponse, DeleteImagePersonalResponse, DownloadHelmChartResponse, ManageReplicationRequest, DeleteWebhookTriggerResponse, DeleteImageLifecycleGlobalPersonalResponse, DuplicateImagePersonalResponse, DeleteApplicationTriggerPersonalResponse, DescribeRepositoryFilterPersonalRequest, DescribeTagRetentionExecutionTaskResponse, DescribeInternalEndpointsResponse, DescribeRepositoryPersonalRequest, DeleteApplicationTriggerPersonalRequest, CreateTagRetentionRuleRequest, DescribeImageLifecyclePersonalResponse, ModifyInstanceTokenRequest, DeleteImageLifecyclePersonalResponse, CreateNamespaceResponse, DescribeRepositoryOwnerPersonalResponse, DescribeSecurityPoliciesResponse, DescribeReplicationInstancesRequest, CreateImageLifecyclePersonalResponse, DescribeImageLifecycleGlobalPersonalResponse, CreateNamespacePersonalResponse, DeleteInstanceResponse, DeleteImageLifecycleGlobalPersonalRequest, DescribeInstanceStatusRequest, ModifyWebhookTriggerRequest, DescribeInstanceStatusResponse, DeleteNamespaceResponse, DescribeRepositoryPersonalResponse, CreateSecurityPolicyResponse, DescribeRepositoriesRequest, DescribeImageFilterPersonalRequest, ModifyNamespaceResponse, ValidateRepositoryExistPersonalRequest, ModifyUserPasswordPersonalResponse, DescribeImagesResponse, ModifyRepositoryInfoPersonalResponse, DescribeWebhookTriggerLogRequest, CreateUserPersonalRequest, DescribeTagRetentionExecutionTaskRequest, DeleteTagRetentionRuleResponse, DeleteSecurityPolicyResponse, DescribeInternalEndpointDnsStatusResponse, DescribeNamespacePersonalRequest, DeleteRepositoryPersonalResponse, CreateInstanceTokenResponse, DeleteImagePersonalRequest, DescribeApplicationTriggerPersonalResponse, CreateRepositoryPersonalRequest, DescribeImageFilterPersonalResponse, CreateImageLifecyclePersonalRequest, DeleteWebhookTriggerRequest, CreateUserPersonalResponse, DescribeWebhookTriggerResponse, DescribeImageManifestsRequest, ModifyNamespaceRequest, DeleteImageRequest, ModifyRepositoryAccessPersonalRequest, DescribeNamespacesRequest, DescribeImageLifecycleGlobalPersonalRequest, DescribeImageLifecyclePersonalRequest, DeleteSecurityPolicyRequest, CreateInstanceRequest, DescribeInstanceTokenRequest, BatchDeleteRepositoryPersonalResponse, CreateNamespaceRequest, BatchDeleteRepositoryPersonalRequest, ValidateRepositoryExistPersonalResponse, DescribeExternalEndpointStatusResponse, ModifySecurityPolicyRequest, DescribeInstancesRequest, CreateInternalEndpointDnsRequest, ManageReplicationResponse, DescribeReplicationInstanceCreateTasksRequest, ModifyWebhookTriggerResponse, ManageImageLifecycleGlobalPersonalRequest, DescribeUserQuotaPersonalResponse, DescribeImagePersonalRequest, ModifySecurityPolicyResponse, DeleteImageLifecyclePersonalRequest, ModifyApplicationTriggerPersonalResponse, DeleteInstanceRequest, DescribeImageManifestsResponse, DescribeNamespacePersonalResponse, DeleteNamespacePersonalResponse, CreateSecurityPolicyRequest, CreateWebhookTriggerRequest, DescribeRepositoryOwnerPersonalRequest, ModifyRepositoryInfoPersonalRequest, DescribeApplicationTriggerLogPersonalRequest, DescribeFavorRepositoryPersonalRequest, DescribeApplicationTriggerLogPersonalResponse, ManageInternalEndpointResponse, CreateRepositoryPersonalResponse, DescribeRepositoryFilterPersonalResponse, CreateTagRetentionExecutionResponse, DescribeFavorRepositoryPersonalResponse, CheckInstanceNameResponse, ManageImageLifecycleGlobalPersonalResponse, DescribeTagRetentionRulesResponse, ModifyRepositoryAccessPersonalResponse, ManageExternalEndpointResponse, ModifyApplicationTriggerPersonalRequest, CreateReplicationInstanceResponse, CreateInstanceTokenRequest, ModifyUserPasswordPersonalRequest, DescribeSecurityPoliciesRequest, DescribeInternalEndpointsRequest, ValidateNamespaceExistPersonalResponse, DescribeWebhookTriggerLogResponse, CreateRepositoryRequest, DeleteImageResponse, DescribeWebhookTriggerRequest, DeleteNamespaceRequest, BatchDeleteImagePersonalRequest, DescribeImagesRequest, ModifyTagRetentionRuleResponse, DescribeTagRetentionExecutionRequest, CreateRepositoryResponse, DescribeTagRetentionRulesRequest, CheckInstanceNameRequest, DescribeInstanceTokenResponse, DescribeTagRetentionExecutionResponse, CreateNamespacePersonalRequest, CreateWebhookTriggerResponse, DeleteTagRetentionRuleRequest, DeleteRepositoryRequest, CreateInternalEndpointDnsResponse, CreateTagRetentionExecutionRequest, CreateApplicationTriggerPersonalResponse, ManageInternalEndpointRequest, BatchDeleteImagePersonalResponse, DeleteInternalEndpointDnsResponse, DeleteRepositoryPersonalRequest } from "./tcr_models";
 /**
  * tcr client
  * @class
@@ -36,6 +36,14 @@ export declare class Client extends AbstractClient {
      */
     DeleteSecurityPolicy(req: DeleteSecurityPolicyRequest, cb?: (error: string, rep: DeleteSecurityPolicyResponse) => void): Promise<DeleteSecurityPolicyResponse>;
     /**
+     * 管理实例内网访问VPC链接
+     */
+    ManageInternalEndpoint(req: ManageInternalEndpointRequest, cb?: (error: string, rep: ManageInternalEndpointResponse) => void): Promise<ManageInternalEndpointResponse>;
+    /**
+     * 查询版本保留规则
+     */
+    DescribeTagRetentionRules(req: DescribeTagRetentionRulesRequest, cb?: (error: string, rep: DescribeTagRetentionRulesResponse) => void): Promise<DescribeTagRetentionRulesResponse>;
+    /**
      * 用于获取个人版镜像仓库tag列表
      */
     DescribeImagePersonal(req: DescribeImagePersonalRequest, cb?: (error: string, rep: DescribeImagePersonalResponse) => void): Promise<DescribeImagePersonalResponse>;
@@ -48,13 +56,25 @@ export declare class Client extends AbstractClient {
      */
     DescribeImageLifecycleGlobalPersonal(req?: DescribeImageLifecycleGlobalPersonalRequest, cb?: (error: string, rep: DescribeImageLifecycleGlobalPersonalResponse) => void): Promise<DescribeImageLifecycleGlobalPersonalResponse>;
     /**
+     * 创建个人版镜像仓库命名空间，此命名空间全局唯一
+     */
+    CreateNamespacePersonal(req: CreateNamespacePersonalRequest, cb?: (error: string, rep: CreateNamespacePersonalResponse) => void): Promise<CreateNamespacePersonalResponse>;
+    /**
      * 用于在企业版中创建命名空间
      */
     CreateNamespace(req: CreateNamespaceRequest, cb?: (error: string, rep: CreateNamespaceResponse) => void): Promise<CreateNamespaceResponse>;
     /**
-     * 用于修改应用更新触发器
+     * 删除版本保留规则
      */
-    ModifyApplicationTriggerPersonal(req: ModifyApplicationTriggerPersonalRequest, cb?: (error: string, rep: ModifyApplicationTriggerPersonalResponse) => void): Promise<ModifyApplicationTriggerPersonalResponse>;
+    DeleteTagRetentionRule(req: DeleteTagRetentionRuleRequest, cb?: (error: string, rep: DeleteTagRetentionRuleResponse) => void): Promise<DeleteTagRetentionRuleResponse>;
+    /**
+     * 查询版本保留执行记录
+     */
+    DescribeTagRetentionExecution(req: DescribeTagRetentionExecutionRequest, cb?: (error: string, rep: DescribeTagRetentionExecutionResponse) => void): Promise<DescribeTagRetentionExecutionResponse>;
+    /**
+     * 查询个人用户配额
+     */
+    DescribeUserQuotaPersonal(req?: DescribeUserQuotaPersonalRequest, cb?: (error: string, rep: DescribeUserQuotaPersonalResponse) => void): Promise<DescribeUserQuotaPersonalResponse>;
     /**
      * 更新镜像仓库信息，可修改仓库描述信息
      */
@@ -80,13 +100,17 @@ export declare class Client extends AbstractClient {
      */
     DescribeInstances(req: DescribeInstancesRequest, cb?: (error: string, rep: DescribeInstancesResponse) => void): Promise<DescribeInstancesResponse>;
     /**
+     * 用于修改应用更新触发器
+     */
+    ModifyApplicationTriggerPersonal(req: ModifyApplicationTriggerPersonalRequest, cb?: (error: string, rep: ModifyApplicationTriggerPersonalResponse) => void): Promise<ModifyApplicationTriggerPersonalResponse>;
+    /**
      * 用于在个人版镜像仓库中更新容器镜像描述
      */
     ModifyRepositoryInfoPersonal(req: ModifyRepositoryInfoPersonalRequest, cb?: (error: string, rep: ModifyRepositoryInfoPersonalResponse) => void): Promise<ModifyRepositoryInfoPersonalResponse>;
     /**
-     * 获取触发器日志
+     * 手动执行版本保留
      */
-    DescribeWebhookTriggerLog(req: DescribeWebhookTriggerLogRequest, cb?: (error: string, rep: DescribeWebhookTriggerLogResponse) => void): Promise<DescribeWebhookTriggerLogResponse>;
+    CreateTagRetentionExecution(req: CreateTagRetentionExecutionRequest, cb?: (error: string, rep: CreateTagRetentionExecutionResponse) => void): Promise<CreateTagRetentionExecutionResponse>;
     /**
      * 检查待创建的实例名称是否符合规范
      */
@@ -152,9 +176,9 @@ export declare class Client extends AbstractClient {
      */
     DeleteImagePersonal(req: DeleteImagePersonalRequest, cb?: (error: string, rep: DeleteImagePersonalResponse) => void): Promise<DeleteImagePersonalResponse>;
     /**
-     * 管理实例内网访问VPC链接
+     * 获取触发器日志
      */
-    ManageInternalEndpoint(req: ManageInternalEndpointRequest, cb?: (error: string, rep: ManageInternalEndpointResponse) => void): Promise<ManageInternalEndpointResponse>;
+    DescribeWebhookTriggerLog(req: DescribeWebhookTriggerLogRequest, cb?: (error: string, rep: DescribeWebhookTriggerLogResponse) => void): Promise<DescribeWebhookTriggerLogResponse>;
     /**
      * 更新触发器
      */
@@ -188,9 +212,13 @@ export declare class Client extends AbstractClient {
      */
     BatchDeleteRepositoryPersonal(req: BatchDeleteRepositoryPersonalRequest, cb?: (error: string, rep: BatchDeleteRepositoryPersonalResponse) => void): Promise<BatchDeleteRepositoryPersonalResponse>;
     /**
-     * 查询个人用户配额
+     * 更新版本保留规则
      */
-    DescribeUserQuotaPersonal(req?: DescribeUserQuotaPersonalRequest, cb?: (error: string, rep: DescribeUserQuotaPersonalResponse) => void): Promise<DescribeUserQuotaPersonalResponse>;
+    ModifyTagRetentionRule(req: ModifyTagRetentionRuleRequest, cb?: (error: string, rep: ModifyTagRetentionRuleResponse) => void): Promise<ModifyTagRetentionRuleResponse>;
+    /**
+     * 查询版本保留执行任务
+     */
+    DescribeTagRetentionExecutionTask(req: DescribeTagRetentionExecutionTaskRequest, cb?: (error: string, rep: DescribeTagRetentionExecutionTaskResponse) => void): Promise<DescribeTagRetentionExecutionTaskResponse>;
     /**
      * 删除触发器
      */
@@ -260,9 +288,9 @@ export declare class Client extends AbstractClient {
      */
     ValidateNamespaceExistPersonal(req: ValidateNamespaceExistPersonalRequest, cb?: (error: string, rep: ValidateNamespaceExistPersonalResponse) => void): Promise<ValidateNamespaceExistPersonalResponse>;
     /**
-     * 创建个人版镜像仓库命名空间，此命名空间全局唯一
+     * 创建版本保留规则
      */
-    CreateNamespacePersonal(req: CreateNamespacePersonalRequest, cb?: (error: string, rep: CreateNamespacePersonalResponse) => void): Promise<CreateNamespacePersonalResponse>;
+    CreateTagRetentionRule(req: CreateTagRetentionRuleRequest, cb?: (error: string, rep: CreateTagRetentionRuleResponse) => void): Promise<CreateTagRetentionRuleResponse>;
     /**
      * 创建个人用户
      */

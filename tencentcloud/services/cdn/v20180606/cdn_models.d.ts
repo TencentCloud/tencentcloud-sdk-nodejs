@@ -6816,13 +6816,13 @@ export interface CreateEdgePackTaskRequest {
       */
     CosUriFrom: string;
     /**
-      * 拓展之后的 apk 目标存储路径,如 /out/xxxx.apk
-      */
-    CosUriTo: string;
-    /**
       * BlockID 的值, WALLE为1903654775(0x71777777)，VasDolly为2282837503(0x881155ff),传0或不传时默认为 WALLE 方案
       */
     BlockID?: number;
+    /**
+      * 拓展之后的 apk 目标存储路径,如 /out/xxxx.apk
+      */
+    CosUriTo?: string;
 }
 /**
  * StopCdnDomain返回参数结构体

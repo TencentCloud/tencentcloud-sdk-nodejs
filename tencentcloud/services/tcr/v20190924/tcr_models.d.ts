@@ -148,6 +148,35 @@ export interface AccessVpc {
     AccessIp: string;
 }
 /**
+ * ModifyTagRetentionRule请求参数结构体
+ */
+export interface ModifyTagRetentionRuleRequest {
+    /**
+      * 主实例iD
+      */
+    RegistryId: string;
+    /**
+      * 命名空间的Id，必须填写原有的命名空间id
+      */
+    NamespaceId: number;
+    /**
+      * 保留策略
+      */
+    RetentionRule: RetentionRule;
+    /**
+      * 执行周期，必须填写为原来的设置
+      */
+    CronSetting: string;
+    /**
+      * 规则Id
+      */
+    RetentionId: number;
+    /**
+      * 是否禁用规则
+      */
+    Disabled?: boolean;
+}
+/**
  * ModifyRepository返回参数结构体
  */
 export interface ModifyRepositoryResponse {
@@ -280,25 +309,17 @@ export interface DownloadHelmChartRequest {
     ChartVersion: string;
 }
 /**
- * Tag列表的返回值
+ * 版本保留规则
  */
-export interface TagInfoResp {
+export interface RetentionRule {
     /**
-      * Tag的总数
+      * 支持的策略，可选值为latestPushedK（保留最新推送多少个版本）nDaysSinceLastPush（保留近天内推送）
       */
-    TagCount: number;
+    Key: string;
     /**
-      * TagInfo列表
+      * 规则设置下的对应值
       */
-    TagInfo: Array<TagInfo>;
-    /**
-      * Server
-      */
-    Server: string;
-    /**
-      * 仓库名称
-      */
-    RepoName: string;
+    Value: number;
 }
 /**
  * CreateInstance返回参数结构体
@@ -776,6 +797,15 @@ export interface RenewInstanceRequest {
     Flag: number;
 }
 /**
+ * CreateTagRetentionRule返回参数结构体
+ */
+export interface CreateTagRetentionRuleResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 共享镜像仓库用户配额
  */
 export interface Limit {
@@ -939,17 +969,9 @@ export interface DupImageTagResp {
     Digest: string;
 }
 /**
- * DescribeImages返回参数结构体
+ * DeleteApplicationTriggerPersonal返回参数结构体
  */
-export interface DescribeImagesResponse {
-    /**
-      * 容器镜像信息列表
-      */
-    ImageInfoList: Array<TcrImageInfo>;
-    /**
-      * 容器镜像总数
-      */
-    TotalCount: number;
+export interface DeleteApplicationTriggerPersonalResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -979,6 +1001,23 @@ export interface DescribeRepositoryFilterPersonalRequest {
       * 命名空间
       */
     Namespace?: string;
+}
+/**
+ * DescribeTagRetentionExecutionTask返回参数结构体
+ */
+export interface DescribeTagRetentionExecutionTaskResponse {
+    /**
+      * 版本保留执行任务列表
+      */
+    RetentionTaskList: Array<RetentionTask>;
+    /**
+      * 版本保留执行任务总数
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeInternalEndpoints返回参数结构体
@@ -1022,6 +1061,46 @@ export interface AutoDelStrategyInfoResp {
     StrategyInfo: Array<AutoDelStrategyInfo>;
 }
 /**
+ * 触发器返回值
+ */
+export interface TriggerResp {
+    /**
+      * 触发器名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TriggerName: string;
+    /**
+      * 触发来源
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InvokeSource: string;
+    /**
+      * 触发动作
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InvokeAction: string;
+    /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime: string;
+    /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdateTime: string;
+    /**
+      * 触发条件
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InvokeCondition: TriggerInvokeCondition;
+    /**
+      * 触发器参数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InvokePara: TriggerInvokePara;
+}
+/**
  * DeleteApplicationTriggerPersonal请求参数结构体
  */
 export interface DeleteApplicationTriggerPersonalRequest {
@@ -1050,6 +1129,31 @@ export interface SearchUserRepositoryResp {
       * PrivilegeFiltered
       */
     PrivilegeFiltered: boolean;
+}
+/**
+ * CreateTagRetentionRule请求参数结构体
+ */
+export interface CreateTagRetentionRuleRequest {
+    /**
+      * 主实例iD
+      */
+    RegistryId: string;
+    /**
+      * 命名空间的Id
+      */
+    NamespaceId: number;
+    /**
+      * 保留策略
+      */
+    RetentionRule: RetentionRule;
+    /**
+      * 执行周期，当前只能选择： manual;daily;weekly;monthly
+      */
+    CronSetting: string;
+    /**
+      * 是否禁用规则
+      */
+    Disabled?: boolean;
 }
 /**
  * DescribeImageLifecyclePersonal返回参数结构体
@@ -1287,6 +1391,27 @@ export interface DeleteNamespaceResponse {
     RequestId?: string;
 }
 /**
+ * Tag列表的返回值
+ */
+export interface TagInfoResp {
+    /**
+      * Tag的总数
+      */
+    TagCount: number;
+    /**
+      * TagInfo列表
+      */
+    TagInfo: Array<TagInfo>;
+    /**
+      * Server
+      */
+    Server: string;
+    /**
+      * 仓库名称
+      */
+    RepoName: string;
+}
+/**
  * 仓库收藏
  */
 export interface Favors {
@@ -1454,9 +1579,17 @@ export interface TcrNamespaceInfo {
     NamespaceId: number;
 }
 /**
- * DeleteApplicationTriggerPersonal返回参数结构体
+ * DescribeImages返回参数结构体
  */
-export interface DeleteApplicationTriggerPersonalResponse {
+export interface DescribeImagesResponse {
+    /**
+      * 容器镜像信息列表
+      */
+    ImageInfoList: Array<TcrImageInfo>;
+    /**
+      * 容器镜像总数
+      */
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1506,6 +1639,31 @@ export interface CreateUserPersonalRequest {
     Password: string;
 }
 /**
+ * DescribeTagRetentionExecutionTask请求参数结构体
+ */
+export interface DescribeTagRetentionExecutionTaskRequest {
+    /**
+      * 主实例iD
+      */
+    RegistryId: string;
+    /**
+      * 规则Id
+      */
+    RetentionId: number;
+    /**
+      * 规则执行Id
+      */
+    ExecutionId: number;
+    /**
+      * 分页Page
+      */
+    Offset?: number;
+    /**
+      * 分页PageSize
+      */
+    Limit?: number;
+}
+/**
  * 同步规则
  */
 export interface ReplicationRule {
@@ -1544,9 +1702,9 @@ export interface RepoInfoResp {
     Server: string;
 }
 /**
- * ManageImageLifecycleGlobalPersonal返回参数结构体
+ * DeleteTagRetentionRule返回参数结构体
  */
-export interface ManageImageLifecycleGlobalPersonalResponse {
+export interface DeleteTagRetentionRuleResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1710,6 +1868,43 @@ export interface DescribeApplicationTriggerPersonalResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 版本保留执行的规则
+ */
+export interface RetentionTask {
+    /**
+      * 任务Id
+      */
+    TaskId: number;
+    /**
+      * 所属的规则执行Id
+      */
+    ExecutionId: number;
+    /**
+      * 任务开始时间
+      */
+    StartTime: string;
+    /**
+      * 任务结束时间
+      */
+    EndTime: string;
+    /**
+      * 任务的执行状态，Failed, Succeed, Stopped, InProgress
+      */
+    Status: string;
+    /**
+      * 总tag数
+      */
+    Total: number;
+    /**
+      * 保留tag数
+      */
+    Retained: number;
+    /**
+      * 应用的仓库
+      */
+    Repository: string;
 }
 /**
  * 获取命名空间信息返回
@@ -2228,6 +2423,31 @@ export interface Filter {
     Values: Array<string>;
 }
 /**
+ * 版本保留规则执行
+ */
+export interface RetentionExecution {
+    /**
+      * 执行Id
+      */
+    ExecutionId: number;
+    /**
+      * 所属规则id
+      */
+    RetentionId: number;
+    /**
+      * 执行的开始时间
+      */
+    StartTime: string;
+    /**
+      * 执行的结束时间
+      */
+    EndTime: string;
+    /**
+      * 执行的状态，Failed, Succeed, Stopped, InProgress
+      */
+    Status: string;
+}
+/**
  * ManageReplication返回参数结构体
  */
 export interface ManageReplicationResponse {
@@ -2451,6 +2671,35 @@ export interface Header {
     Values: Array<string>;
 }
 /**
+ * 版本保留策略
+ */
+export interface RetentionPolicy {
+    /**
+      * 版本保留策略Id
+      */
+    RetentionId: number;
+    /**
+      * 命名空间的名称
+      */
+    NamespaceName: string;
+    /**
+      * 规则列表
+      */
+    RetentionRuleList: Array<RetentionRule>;
+    /**
+      * 定期执行方式
+      */
+    CronSetting: string;
+    /**
+      * 是否启用规则
+      */
+    Disabled: boolean;
+    /**
+      * 基于当前时间根据cronSetting后下一次任务要执行的时间，仅做参考使用
+      */
+    NextExecutionTime: string;
+}
+/**
  * CreateSecurityPolicy请求参数结构体
  */
 export interface CreateSecurityPolicyRequest {
@@ -2583,6 +2832,15 @@ export interface ManageInternalEndpointResponse {
     RequestId?: string;
 }
 /**
+ * CreateRepositoryPersonal返回参数结构体
+ */
+export interface CreateRepositoryPersonalResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeRepositoryFilterPersonal返回参数结构体
  */
 export interface DescribeRepositoryFilterPersonalResponse {
@@ -2590,6 +2848,15 @@ export interface DescribeRepositoryFilterPersonalResponse {
       * 仓库信息
       */
     Data?: SearchUserRepositoryResp;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateTagRetentionExecution返回参数结构体
+ */
+export interface CreateTagRetentionExecutionResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2616,6 +2883,32 @@ export interface CheckInstanceNameResponse {
       * 检查结果，true为合法，false为非法
       */
     IsValidated?: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ManageImageLifecycleGlobalPersonal返回参数结构体
+ */
+export interface ManageImageLifecycleGlobalPersonalResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeTagRetentionRules返回参数结构体
+ */
+export interface DescribeTagRetentionRulesResponse {
+    /**
+      * 版本保留策略列表
+      */
+    RetentionPolicyList: Array<RetentionPolicy>;
+    /**
+      * 版本保留策略总数
+      */
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2994,44 +3287,34 @@ export interface DescribeImagesRequest {
     Offset?: number;
 }
 /**
- * 触发器返回值
+ * ModifyTagRetentionRule返回参数结构体
  */
-export interface TriggerResp {
+export interface ModifyTagRetentionRuleResponse {
     /**
-      * 触发器名称
-注意：此字段可能返回 null，表示取不到有效值。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    TriggerName: string;
+    RequestId?: string;
+}
+/**
+ * DescribeTagRetentionExecution请求参数结构体
+ */
+export interface DescribeTagRetentionExecutionRequest {
     /**
-      * 触发来源
-注意：此字段可能返回 null，表示取不到有效值。
+      * 主实例iD
       */
-    InvokeSource: string;
+    RegistryId: string;
     /**
-      * 触发动作
-注意：此字段可能返回 null，表示取不到有效值。
+      * 规则Id
       */
-    InvokeAction: string;
+    RetentionId: number;
     /**
-      * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
+      * 分页PageSize
       */
-    CreateTime: string;
+    Limit?: number;
     /**
-      * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
+      * 分页Page
       */
-    UpdateTime: string;
-    /**
-      * 触发条件
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    InvokeCondition: TriggerInvokeCondition;
-    /**
-      * 触发器参数
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    InvokePara: TriggerInvokePara;
+    Offset?: number;
 }
 /**
  * CreateRepository返回参数结构体
@@ -3041,6 +3324,27 @@ export interface CreateRepositoryResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeTagRetentionRules请求参数结构体
+ */
+export interface DescribeTagRetentionRulesRequest {
+    /**
+      * 主实例iD
+      */
+    RegistryId: string;
+    /**
+      * 命名空间的名称
+      */
+    NamespaceName?: string;
+    /**
+      * 分页PageSize
+      */
+    Limit?: number;
+    /**
+      * 分页Page
+      */
+    Offset?: number;
 }
 /**
  * 用户配额返回值
@@ -3086,6 +3390,23 @@ export interface SameImagesResp {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SameImages: Array<string>;
+}
+/**
+ * DescribeTagRetentionExecution返回参数结构体
+ */
+export interface DescribeTagRetentionExecutionResponse {
+    /**
+      * 版本保留执行记录列表
+      */
+    RetentionExecutionList: Array<RetentionExecution>;
+    /**
+      * 版本保留执行记录总数
+      */
+    TotalCount: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * CreateNamespacePersonal请求参数结构体
@@ -3158,6 +3479,19 @@ export interface ReplicationFilter {
       * 默认为空
       */
     Value?: string;
+}
+/**
+ * DeleteTagRetentionRule请求参数结构体
+ */
+export interface DeleteTagRetentionRuleRequest {
+    /**
+      * 主实例iD
+      */
+    RegistryId: string;
+    /**
+      * 版本保留规则的Id
+      */
+    RetentionId: number;
 }
 /**
  * Tcr镜像仓库信息
@@ -3250,13 +3584,21 @@ export interface CreateInternalEndpointDnsResponse {
     RequestId?: string;
 }
 /**
- * CreateRepositoryPersonal返回参数结构体
+ * CreateTagRetentionExecution请求参数结构体
  */
-export interface CreateRepositoryPersonalResponse {
+export interface CreateTagRetentionExecutionRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 主实例iD
       */
-    RequestId?: string;
+    RegistryId: string;
+    /**
+      * 版本保留规则Id
+      */
+    RetentionId: number;
+    /**
+      * 是否模拟执行
+      */
+    DryRun?: boolean;
 }
 /**
  * CreateApplicationTriggerPersonal返回参数结构体

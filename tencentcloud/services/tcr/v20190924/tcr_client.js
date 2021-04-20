@@ -70,6 +70,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteSecurityPolicy", req, cb);
     }
     /**
+     * 管理实例内网访问VPC链接
+     */
+    async ManageInternalEndpoint(req, cb) {
+        return this.request("ManageInternalEndpoint", req, cb);
+    }
+    /**
+     * 查询版本保留规则
+     */
+    async DescribeTagRetentionRules(req, cb) {
+        return this.request("DescribeTagRetentionRules", req, cb);
+    }
+    /**
      * 用于获取个人版镜像仓库tag列表
      */
     async DescribeImagePersonal(req, cb) {
@@ -88,16 +100,34 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeImageLifecycleGlobalPersonal", req, cb);
     }
     /**
+     * 创建个人版镜像仓库命名空间，此命名空间全局唯一
+     */
+    async CreateNamespacePersonal(req, cb) {
+        return this.request("CreateNamespacePersonal", req, cb);
+    }
+    /**
      * 用于在企业版中创建命名空间
      */
     async CreateNamespace(req, cb) {
         return this.request("CreateNamespace", req, cb);
     }
     /**
-     * 用于修改应用更新触发器
+     * 删除版本保留规则
      */
-    async ModifyApplicationTriggerPersonal(req, cb) {
-        return this.request("ModifyApplicationTriggerPersonal", req, cb);
+    async DeleteTagRetentionRule(req, cb) {
+        return this.request("DeleteTagRetentionRule", req, cb);
+    }
+    /**
+     * 查询版本保留执行记录
+     */
+    async DescribeTagRetentionExecution(req, cb) {
+        return this.request("DescribeTagRetentionExecution", req, cb);
+    }
+    /**
+     * 查询个人用户配额
+     */
+    async DescribeUserQuotaPersonal(req, cb) {
+        return this.request("DescribeUserQuotaPersonal", req, cb);
     }
     /**
      * 更新镜像仓库信息，可修改仓库描述信息
@@ -136,16 +166,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeInstances", req, cb);
     }
     /**
+     * 用于修改应用更新触发器
+     */
+    async ModifyApplicationTriggerPersonal(req, cb) {
+        return this.request("ModifyApplicationTriggerPersonal", req, cb);
+    }
+    /**
      * 用于在个人版镜像仓库中更新容器镜像描述
      */
     async ModifyRepositoryInfoPersonal(req, cb) {
         return this.request("ModifyRepositoryInfoPersonal", req, cb);
     }
     /**
-     * 获取触发器日志
+     * 手动执行版本保留
      */
-    async DescribeWebhookTriggerLog(req, cb) {
-        return this.request("DescribeWebhookTriggerLog", req, cb);
+    async CreateTagRetentionExecution(req, cb) {
+        return this.request("CreateTagRetentionExecution", req, cb);
     }
     /**
      * 检查待创建的实例名称是否符合规范
@@ -244,10 +280,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteImagePersonal", req, cb);
     }
     /**
-     * 管理实例内网访问VPC链接
+     * 获取触发器日志
      */
-    async ManageInternalEndpoint(req, cb) {
-        return this.request("ManageInternalEndpoint", req, cb);
+    async DescribeWebhookTriggerLog(req, cb) {
+        return this.request("DescribeWebhookTriggerLog", req, cb);
     }
     /**
      * 更新触发器
@@ -298,10 +334,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BatchDeleteRepositoryPersonal", req, cb);
     }
     /**
-     * 查询个人用户配额
+     * 更新版本保留规则
      */
-    async DescribeUserQuotaPersonal(req, cb) {
-        return this.request("DescribeUserQuotaPersonal", req, cb);
+    async ModifyTagRetentionRule(req, cb) {
+        return this.request("ModifyTagRetentionRule", req, cb);
+    }
+    /**
+     * 查询版本保留执行任务
+     */
+    async DescribeTagRetentionExecutionTask(req, cb) {
+        return this.request("DescribeTagRetentionExecutionTask", req, cb);
     }
     /**
      * 删除触发器
@@ -406,10 +448,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ValidateNamespaceExistPersonal", req, cb);
     }
     /**
-     * 创建个人版镜像仓库命名空间，此命名空间全局唯一
+     * 创建版本保留规则
      */
-    async CreateNamespacePersonal(req, cb) {
-        return this.request("CreateNamespacePersonal", req, cb);
+    async CreateTagRetentionRule(req, cb) {
+        return this.request("CreateTagRetentionRule", req, cb);
     }
     /**
      * 创建个人用户

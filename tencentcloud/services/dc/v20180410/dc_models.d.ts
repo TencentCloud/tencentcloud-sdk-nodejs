@@ -251,6 +251,26 @@ export interface DirectConnect {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     SignLaw: boolean;
+    /**
+      * 物理专线是否为LocalZone
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LocalZone: boolean;
+    /**
+      * 该物理专线下vlan 0的专线通道数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VlanZeroDirectConnectTunnelCount: number;
+    /**
+      * 该物理专线下非vlan 0的专线通道数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OtherVlanDirectConnectTunnelCount: number;
+    /**
+      * 物理专线最小带宽
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MinBandwidth: number;
 }
 /**
  * 互联网地址详细信息

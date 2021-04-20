@@ -88,6 +88,26 @@ it("tcr.v20190924.DeleteSecurityPolicy", async function () {
     }
 })
 
+it("tcr.v20190924.ManageInternalEndpoint", async function () {
+    try {
+       const data = await client.ManageInternalEndpoint({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcr.v20190924.DescribeTagRetentionRules", async function () {
+    try {
+       const data = await client.DescribeTagRetentionRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.DescribeImagePersonal", async function () {
     try {
        const data = await client.DescribeImagePersonal({})
@@ -118,6 +138,16 @@ it("tcr.v20190924.DescribeImageLifecycleGlobalPersonal", async function () {
     }
 })
 
+it("tcr.v20190924.CreateNamespacePersonal", async function () {
+    try {
+       const data = await client.CreateNamespacePersonal({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.CreateNamespace", async function () {
     try {
        const data = await client.CreateNamespace({})
@@ -128,9 +158,29 @@ it("tcr.v20190924.CreateNamespace", async function () {
     }
 })
 
-it("tcr.v20190924.ModifyApplicationTriggerPersonal", async function () {
+it("tcr.v20190924.DeleteTagRetentionRule", async function () {
     try {
-       const data = await client.ModifyApplicationTriggerPersonal({})
+       const data = await client.DeleteTagRetentionRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcr.v20190924.DescribeTagRetentionExecution", async function () {
+    try {
+       const data = await client.DescribeTagRetentionExecution({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcr.v20190924.DescribeUserQuotaPersonal", async function () {
+    try {
+       const data = await client.DescribeUserQuotaPersonal({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,6 +248,16 @@ it("tcr.v20190924.DescribeInstances", async function () {
     }
 })
 
+it("tcr.v20190924.ModifyApplicationTriggerPersonal", async function () {
+    try {
+       const data = await client.ModifyApplicationTriggerPersonal({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.ModifyRepositoryInfoPersonal", async function () {
     try {
        const data = await client.ModifyRepositoryInfoPersonal({})
@@ -208,9 +268,9 @@ it("tcr.v20190924.ModifyRepositoryInfoPersonal", async function () {
     }
 })
 
-it("tcr.v20190924.DescribeWebhookTriggerLog", async function () {
+it("tcr.v20190924.CreateTagRetentionExecution", async function () {
     try {
-       const data = await client.DescribeWebhookTriggerLog({})
+       const data = await client.CreateTagRetentionExecution({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -378,9 +438,9 @@ it("tcr.v20190924.DeleteImagePersonal", async function () {
     }
 })
 
-it("tcr.v20190924.ManageInternalEndpoint", async function () {
+it("tcr.v20190924.DescribeWebhookTriggerLog", async function () {
     try {
-       const data = await client.ManageInternalEndpoint({})
+       const data = await client.DescribeWebhookTriggerLog({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -468,9 +528,19 @@ it("tcr.v20190924.BatchDeleteRepositoryPersonal", async function () {
     }
 })
 
-it("tcr.v20190924.DescribeUserQuotaPersonal", async function () {
+it("tcr.v20190924.ModifyTagRetentionRule", async function () {
     try {
-       const data = await client.DescribeUserQuotaPersonal({})
+       const data = await client.ModifyTagRetentionRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcr.v20190924.DescribeTagRetentionExecutionTask", async function () {
+    try {
+       const data = await client.DescribeTagRetentionExecutionTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -648,9 +718,9 @@ it("tcr.v20190924.ValidateNamespaceExistPersonal", async function () {
     }
 })
 
-it("tcr.v20190924.CreateNamespacePersonal", async function () {
+it("tcr.v20190924.CreateTagRetentionRule", async function () {
     try {
-       const data = await client.CreateNamespacePersonal({})
+       const data = await client.CreateTagRetentionRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
