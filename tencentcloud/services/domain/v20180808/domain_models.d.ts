@@ -757,7 +757,7 @@ export interface CreateDomainBatchRequest {
       */
     Domains: Array<string>;
     /**
-      * 付费模式 0手动在线付费，1使用余额付费
+      * 付费模式 0手动在线付费，1使用余额付费，2使用特惠包
       */
     PayMode: number;
     /**
@@ -766,6 +766,10 @@ export interface CreateDomainBatchRequest {
 1 表示开启，将自动续费
       */
     AutoRenewFlag?: number;
+    /**
+      * 使用的特惠包ID，PayMode为2时必填
+      */
+    PackageResourceId?: string;
 }
 /**
  * DescribeDomainBaseInfo请求参数结构体

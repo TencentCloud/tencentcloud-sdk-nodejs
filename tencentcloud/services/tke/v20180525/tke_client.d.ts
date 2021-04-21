@@ -40,7 +40,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeClusterNodePoolDetail(req: DescribeClusterNodePoolDetailRequest, cb?: (error: string, rep: DescribeClusterNodePoolDetailResponse) => void): Promise<DescribeClusterNodePoolDetailResponse>;
     /**
-     * 删除一个云原生Promehtheus配置模板
+     * 删除一个云原生Prometheus配置模板
      */
     DeletePrometheusTemplate(req: DeletePrometheusTemplateRequest, cb?: (error: string, rep: DeletePrometheusTemplateResponse) => void): Promise<DeletePrometheusTemplateResponse>;
     /**

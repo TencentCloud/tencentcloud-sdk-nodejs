@@ -312,7 +312,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除一个云原生Promehtheus配置模板
+   * 删除一个云原生Prometheus配置模板
    */
   async DeletePrometheusTemplate(
     req: DeletePrometheusTemplateRequest,

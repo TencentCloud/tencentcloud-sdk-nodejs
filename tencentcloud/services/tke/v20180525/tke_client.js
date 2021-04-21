@@ -76,7 +76,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeClusterNodePoolDetail", req, cb);
     }
     /**
-     * 删除一个云原生Promehtheus配置模板
+     * 删除一个云原生Prometheus配置模板
      */
     async DeletePrometheusTemplate(req, cb) {
         return this.request("DeletePrometheusTemplate", req, cb);

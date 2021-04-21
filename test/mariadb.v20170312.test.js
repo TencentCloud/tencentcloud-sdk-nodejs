@@ -38,9 +38,9 @@ it("mariadb.v20170312.DescribeRenewalPrice", async function () {
     }
 })
 
-it("mariadb.v20170312.DescribeOrders", async function () {
+it("mariadb.v20170312.DescribeInstanceNodeInfo", async function () {
     try {
-       const data = await client.DescribeOrders({})
+       const data = await client.DescribeInstanceNodeInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,9 +178,9 @@ it("mariadb.v20170312.RestartDBInstances", async function () {
     }
 })
 
-it("mariadb.v20170312.GrantAccountPrivileges", async function () {
+it("mariadb.v20170312.DescribeOrders", async function () {
     try {
-       const data = await client.GrantAccountPrivileges({})
+       const data = await client.DescribeOrders({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -381,6 +381,16 @@ it("mariadb.v20170312.DescribeAccounts", async function () {
 it("mariadb.v20170312.FlushBinlog", async function () {
     try {
        const data = await client.FlushBinlog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mariadb.v20170312.GrantAccountPrivileges", async function () {
+    try {
+       const data = await client.GrantAccountPrivileges({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

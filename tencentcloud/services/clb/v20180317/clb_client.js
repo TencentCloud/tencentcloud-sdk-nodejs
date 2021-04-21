@@ -221,7 +221,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeregisterTargetGroupInstances", req, cb);
     }
     /**
-     * 查询一个地域的负载均衡实例列表
+     * 查询一个地域的负载均衡实例列表。
 
      */
     async DescribeLoadBalancers(req, cb) {

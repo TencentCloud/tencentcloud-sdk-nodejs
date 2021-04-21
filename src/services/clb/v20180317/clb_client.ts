@@ -515,7 +515,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 查询一个地域的负载均衡实例列表
+     * 查询一个地域的负载均衡实例列表。
 
      */
   async DescribeLoadBalancers(

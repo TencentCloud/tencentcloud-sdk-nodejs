@@ -797,6 +797,21 @@ export interface DescribeDBResourceUsageResponse {
 }
 
 /**
+ * 描述实例的各个DB节点信息
+ */
+export interface NodeInfo {
+  /**
+   * DB节点ID
+   */
+  NodeId: string
+
+  /**
+   * DB节点角色，取值为master或者slave
+   */
+  Role: string
+}
+
+/**
  * DescribeOrders返回参数结构体
  */
 export interface DescribeOrdersResponse {
@@ -2486,6 +2501,26 @@ export interface DescribeDBPerformanceResponse {
 }
 
 /**
+ * DescribeInstanceNodeInfo请求参数结构体
+ */
+export interface DescribeInstanceNodeInfoRequest {
+  /**
+   * 实例ID，形如tdsql-6ltok4u9
+   */
+  InstanceId: string
+
+  /**
+   * 一次最多返回多少条数据。默认为无穷大，返回符合要求的所有数据
+   */
+  Limit?: number
+
+  /**
+   * 返回数据的偏移量，默认为0
+   */
+  Offset?: number
+}
+
+/**
  * CreateAccount返回参数结构体
  */
 export interface CreateAccountResponse {
@@ -2982,6 +3017,26 @@ export interface MonitorData {
    * 监控数据
    */
   Data: Array<number>
+}
+
+/**
+ * DescribeInstanceNodeInfo返回参数结构体
+ */
+export interface DescribeInstanceNodeInfoResponse {
+  /**
+   * 节点总个数
+   */
+  TotalCount: number
+
+  /**
+   * 节点信息
+   */
+  NodesInfo: Array<NodeInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

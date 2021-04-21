@@ -18,8 +18,11 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  TableSpaceTimeSeries,
+  SchemaSpaceTimeSeries,
+  DescribeSlowLogUserHostStatsRequest,
   DescribeSlowLogTimeSeriesStatsRequest,
+  DescribeTopSpaceSchemasResponse,
+  TimeSlice,
   HealthScoreInfo,
   DescribeTopSpaceTableTimeSeriesResponse,
   CreateSchedulerMailProfileRequest,
@@ -29,7 +32,7 @@ import {
   DescribeDiagDBInstancesRequest,
   DescribeDBSpaceStatusRequest,
   DescribeAllUserContactResponse,
-  TimeSlice,
+  DescribeTopSpaceSchemasRequest,
   ModifyDiagDBInstanceConfRequest,
   MonitorMetric,
   CreateDBDiagReportTaskRequest,
@@ -38,31 +41,43 @@ import {
   DescribeSecurityAuditLogExportTasksRequest,
   AddUserContactRequest,
   DescribeAllUserGroupResponse,
+  InstanceBasicInfo,
   SchemaItem,
   CreateMailProfileResponse,
   DescribeTopSpaceTablesRequest,
+  SchemaSpaceData,
   DescribeAllUserContactRequest,
   DescribeDBDiagEventRequest,
   CreateSecurityAuditLogExportTaskRequest,
   DescribeDBSpaceStatusResponse,
+  DiagHistoryEventItem,
   DescribeDBDiagEventResponse,
   DescribeDBDiagHistoryRequest,
+  TableSpaceTimeSeries,
   GroupItem,
   InstanceInfo,
-  DescribeTopSpaceTableTimeSeriesRequest,
+  DescribeSlowLogUserHostStatsResponse,
+  DescribeDBDiagReportTasksResponse,
   AddUserContactResponse,
+  HealthReportTask,
+  DescribeDBDiagReportTasksRequest,
   CreateDBDiagReportTaskResponse,
   MonitorMetricSeriesData,
   ModifyDiagDBInstanceConfResponse,
-  DiagHistoryEventItem,
+  CreateDBDiagReportUrlResponse,
+  ScoreDetail,
+  DescribeTopSpaceSchemaTimeSeriesResponse,
   DeleteSecurityAuditLogExportTasksRequest,
   CreateSchedulerMailProfileResponse,
   SlowLogTopSqlItem,
+  SlowLogHost,
   DescribeSlowLogTopSqlsResponse,
   SecLogExportTaskInfo,
   CreateMailProfileRequest,
+  DescribeTopSpaceSchemaTimeSeriesRequest,
   MonitorFloatMetricSeriesData,
   MailConfiguration,
+  DescribeTopSpaceTableTimeSeriesRequest,
   DescribeSlowLogTopSqlsRequest,
   DescribeMailProfileResponse,
   TableSpaceData,
@@ -74,12 +89,15 @@ import {
   IssueTypeInfo,
   InstanceConfs,
   DescribeDiagDBInstancesResponse,
+  HealthStatus,
   ProfileInfo,
   DescribeAllUserGroupRequest,
+  CreateDBDiagReportUrlRequest,
   DescribeSlowLogTimeSeriesStatsResponse,
   DescribeSecurityAuditLogExportTasksResponse,
   CreateSecurityAuditLogExportTaskResponse,
   UserProfile,
+  ScoreItem,
   DescribeTopSpaceTablesResponse,
 } from "./dbbrain_models"
 
@@ -90,26 +108,6 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("dbbrain.tencentcloudapi.com", "2019-10-16", clientConfig)
-  }
-
-  /**
-   * 获取慢日志统计柱状图。
-   */
-  async DescribeSlowLogTimeSeriesStats(
-    req: DescribeSlowLogTimeSeriesStatsRequest,
-    cb?: (error: string, rep: DescribeSlowLogTimeSeriesStatsResponse) => void
-  ): Promise<DescribeSlowLogTimeSeriesStatsResponse> {
-    return this.request("DescribeSlowLogTimeSeriesStats", req, cb)
-  }
-
-  /**
-   * 获取邮件发送中联系人的相关信息。
-   */
-  async DescribeAllUserContact(
-    req: DescribeAllUserContactRequest,
-    cb?: (error: string, rep: DescribeAllUserContactResponse) => void
-  ): Promise<DescribeAllUserContactResponse> {
-    return this.request("DescribeAllUserContact", req, cb)
   }
 
   /**
@@ -143,13 +141,63 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取实例诊断事件的列表。
+   * 获取实例Top库的实时空间统计信息，默认返回按大小排序。
    */
-  async DescribeDBDiagHistory(
-    req: DescribeDBDiagHistoryRequest,
-    cb?: (error: string, rep: DescribeDBDiagHistoryResponse) => void
-  ): Promise<DescribeDBDiagHistoryResponse> {
-    return this.request("DescribeDBDiagHistory", req, cb)
+  async DescribeTopSpaceSchemas(
+    req: DescribeTopSpaceSchemasRequest,
+    cb?: (error: string, rep: DescribeTopSpaceSchemasResponse) => void
+  ): Promise<DescribeTopSpaceSchemasResponse> {
+    return this.request("DescribeTopSpaceSchemas", req, cb)
+  }
+
+  /**
+   * 查询健康报告生成任务列表。
+   */
+  async DescribeDBDiagReportTasks(
+    req: DescribeDBDiagReportTasksRequest,
+    cb?: (error: string, rep: DescribeDBDiagReportTasksResponse) => void
+  ): Promise<DescribeDBDiagReportTasksResponse> {
+    return this.request("DescribeDBDiagReportTasks", req, cb)
+  }
+
+  /**
+   * 获取邮件发送联系组的相关信息。
+   */
+  async DescribeAllUserGroup(
+    req: DescribeAllUserGroupRequest,
+    cb?: (error: string, rep: DescribeAllUserGroupResponse) => void
+  ): Promise<DescribeAllUserGroupResponse> {
+    return this.request("DescribeAllUserGroup", req, cb)
+  }
+
+  /**
+   * 获取慢日志统计柱状图。
+   */
+  async DescribeSlowLogTimeSeriesStats(
+    req: DescribeSlowLogTimeSeriesStatsRequest,
+    cb?: (error: string, rep: DescribeSlowLogTimeSeriesStatsResponse) => void
+  ): Promise<DescribeSlowLogTimeSeriesStatsResponse> {
+    return this.request("DescribeSlowLogTimeSeriesStats", req, cb)
+  }
+
+  /**
+   * 获取慢日志来源地址统计分布图。
+   */
+  async DescribeSlowLogUserHostStats(
+    req: DescribeSlowLogUserHostStatsRequest,
+    cb?: (error: string, rep: DescribeSlowLogUserHostStatsResponse) => void
+  ): Promise<DescribeSlowLogUserHostStatsResponse> {
+    return this.request("DescribeSlowLogUserHostStats", req, cb)
+  }
+
+  /**
+   * 获取实例Top表的实时空间统计信息，默认返回按大小排序。
+   */
+  async DescribeTopSpaceTables(
+    req: DescribeTopSpaceTablesRequest,
+    cb?: (error: string, rep: DescribeTopSpaceTablesResponse) => void
+  ): Promise<DescribeTopSpaceTablesResponse> {
+    return this.request("DescribeTopSpaceTables", req, cb)
   }
 
   /**
@@ -160,26 +208,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDBSpaceStatusResponse) => void
   ): Promise<DescribeDBSpaceStatusResponse> {
     return this.request("DescribeDBSpaceStatus", req, cb)
-  }
-
-  /**
-   * 获取实例异常诊断事件的详情信息。
-   */
-  async DescribeDBDiagEvent(
-    req: DescribeDBDiagEventRequest,
-    cb?: (error: string, rep: DescribeDBDiagEventResponse) => void
-  ): Promise<DescribeDBDiagEventResponse> {
-    return this.request("DescribeDBDiagEvent", req, cb)
-  }
-
-  /**
-   * 创建健康报告，并可以选择是否发送邮件。
-   */
-  async CreateDBDiagReportTask(
-    req: CreateDBDiagReportTaskRequest,
-    cb?: (error: string, rep: CreateDBDiagReportTaskResponse) => void
-  ): Promise<CreateDBDiagReportTaskResponse> {
-    return this.request("CreateDBDiagReportTask", req, cb)
   }
 
   /**
@@ -203,26 +231,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取实例信息列表。Region统一选择广州。
-   */
-  async DescribeDiagDBInstances(
-    req: DescribeDiagDBInstancesRequest,
-    cb?: (error: string, rep: DescribeDiagDBInstancesResponse) => void
-  ): Promise<DescribeDiagDBInstancesResponse> {
-    return this.request("DescribeDiagDBInstances", req, cb)
-  }
-
-  /**
-   * 获取实例Top表的实时空间统计信息，默认返回按大小排序。
-   */
-  async DescribeTopSpaceTables(
-    req: DescribeTopSpaceTablesRequest,
-    cb?: (error: string, rep: DescribeTopSpaceTablesResponse) => void
-  ): Promise<DescribeTopSpaceTablesResponse> {
-    return this.request("DescribeTopSpaceTables", req, cb)
-  }
-
-  /**
    * 创建安全审计日志导出任务。
    */
   async CreateSecurityAuditLogExportTask(
@@ -233,16 +241,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改实例巡检开关。
-   */
-  async ModifyDiagDBInstanceConf(
-    req: ModifyDiagDBInstanceConfRequest,
-    cb?: (error: string, rep: ModifyDiagDBInstanceConfResponse) => void
-  ): Promise<ModifyDiagDBInstanceConfResponse> {
-    return this.request("ModifyDiagDBInstanceConf", req, cb)
-  }
-
-  /**
    * 删除安全审计日志导出任务。
    */
   async DeleteSecurityAuditLogExportTasks(
@@ -250,36 +248,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteSecurityAuditLogExportTasksResponse) => void
   ): Promise<DeleteSecurityAuditLogExportTasksResponse> {
     return this.request("DeleteSecurityAuditLogExportTasks", req, cb)
-  }
-
-  /**
-   * 获取实例占用空间最大的前几张表在指定时间段内的每日由DBbrain定时采集的空间数据，默认返回按大小排序。
-   */
-  async DescribeTopSpaceTableTimeSeries(
-    req: DescribeTopSpaceTableTimeSeriesRequest,
-    cb?: (error: string, rep: DescribeTopSpaceTableTimeSeriesResponse) => void
-  ): Promise<DescribeTopSpaceTableTimeSeriesResponse> {
-    return this.request("DescribeTopSpaceTableTimeSeries", req, cb)
-  }
-
-  /**
-   * 添加邮件接收联系人的姓名， 邮件地址，返回值为添加成功的联系人id。Region统一选择广州。
-   */
-  async AddUserContact(
-    req: AddUserContactRequest,
-    cb?: (error: string, rep: AddUserContactResponse) => void
-  ): Promise<AddUserContactResponse> {
-    return this.request("AddUserContact", req, cb)
-  }
-
-  /**
-   * 获取邮件发送联系组的相关信息。
-   */
-  async DescribeAllUserGroup(
-    req: DescribeAllUserGroupRequest,
-    cb?: (error: string, rep: DescribeAllUserGroupResponse) => void
-  ): Promise<DescribeAllUserGroupResponse> {
-    return this.request("DescribeAllUserGroup", req, cb)
   }
 
   /**
@@ -300,5 +268,105 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSecurityAuditLogExportTasksResponse) => void
   ): Promise<DescribeSecurityAuditLogExportTasksResponse> {
     return this.request("DescribeSecurityAuditLogExportTasks", req, cb)
+  }
+
+  /**
+   * 获取邮件发送中联系人的相关信息。
+   */
+  async DescribeAllUserContact(
+    req: DescribeAllUserContactRequest,
+    cb?: (error: string, rep: DescribeAllUserContactResponse) => void
+  ): Promise<DescribeAllUserContactResponse> {
+    return this.request("DescribeAllUserContact", req, cb)
+  }
+
+  /**
+   * 获取实例异常诊断事件的详情信息。
+   */
+  async DescribeDBDiagEvent(
+    req: DescribeDBDiagEventRequest,
+    cb?: (error: string, rep: DescribeDBDiagEventResponse) => void
+  ): Promise<DescribeDBDiagEventResponse> {
+    return this.request("DescribeDBDiagEvent", req, cb)
+  }
+
+  /**
+   * 获取实例诊断事件的列表。
+   */
+  async DescribeDBDiagHistory(
+    req: DescribeDBDiagHistoryRequest,
+    cb?: (error: string, rep: DescribeDBDiagHistoryResponse) => void
+  ): Promise<DescribeDBDiagHistoryResponse> {
+    return this.request("DescribeDBDiagHistory", req, cb)
+  }
+
+  /**
+   * 创建健康报告，并可以选择是否发送邮件。
+   */
+  async CreateDBDiagReportTask(
+    req: CreateDBDiagReportTaskRequest,
+    cb?: (error: string, rep: CreateDBDiagReportTaskResponse) => void
+  ): Promise<CreateDBDiagReportTaskResponse> {
+    return this.request("CreateDBDiagReportTask", req, cb)
+  }
+
+  /**
+   * 获取实例信息列表。Region统一选择广州。
+   */
+  async DescribeDiagDBInstances(
+    req: DescribeDiagDBInstancesRequest,
+    cb?: (error: string, rep: DescribeDiagDBInstancesResponse) => void
+  ): Promise<DescribeDiagDBInstancesResponse> {
+    return this.request("DescribeDiagDBInstances", req, cb)
+  }
+
+  /**
+   * 添加邮件接收联系人的姓名， 邮件地址，返回值为添加成功的联系人id。Region统一选择广州。
+   */
+  async AddUserContact(
+    req: AddUserContactRequest,
+    cb?: (error: string, rep: AddUserContactResponse) => void
+  ): Promise<AddUserContactResponse> {
+    return this.request("AddUserContact", req, cb)
+  }
+
+  /**
+   * 获取实例占用空间最大的前几个库在指定时间段内的每日由DBbrain定时采集的空间数据，默认返回按大小排序。
+   */
+  async DescribeTopSpaceSchemaTimeSeries(
+    req: DescribeTopSpaceSchemaTimeSeriesRequest,
+    cb?: (error: string, rep: DescribeTopSpaceSchemaTimeSeriesResponse) => void
+  ): Promise<DescribeTopSpaceSchemaTimeSeriesResponse> {
+    return this.request("DescribeTopSpaceSchemaTimeSeries", req, cb)
+  }
+
+  /**
+   * 获取实例占用空间最大的前几张表在指定时间段内的每日由DBbrain定时采集的空间数据，默认返回按大小排序。
+   */
+  async DescribeTopSpaceTableTimeSeries(
+    req: DescribeTopSpaceTableTimeSeriesRequest,
+    cb?: (error: string, rep: DescribeTopSpaceTableTimeSeriesResponse) => void
+  ): Promise<DescribeTopSpaceTableTimeSeriesResponse> {
+    return this.request("DescribeTopSpaceTableTimeSeries", req, cb)
+  }
+
+  /**
+   * 修改实例巡检开关。
+   */
+  async ModifyDiagDBInstanceConf(
+    req: ModifyDiagDBInstanceConfRequest,
+    cb?: (error: string, rep: ModifyDiagDBInstanceConfResponse) => void
+  ): Promise<ModifyDiagDBInstanceConfResponse> {
+    return this.request("ModifyDiagDBInstanceConf", req, cb)
+  }
+
+  /**
+   * 创建健康报告的浏览地址。
+   */
+  async CreateDBDiagReportUrl(
+    req: CreateDBDiagReportUrlRequest,
+    cb?: (error: string, rep: CreateDBDiagReportUrlResponse) => void
+  ): Promise<CreateDBDiagReportUrlResponse> {
+    return this.request("CreateDBDiagReportUrl", req, cb)
   }
 }

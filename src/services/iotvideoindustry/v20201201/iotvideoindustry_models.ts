@@ -1683,9 +1683,14 @@ export interface DescribeVideoListResponse {
   TotalCount: number
 
   /**
-   * 录像详情列表
+   * 已废弃
    */
   VideoList: RecordTaskItem
+
+  /**
+   * 录像详情列表
+   */
+  RecordList: Array<RecordTaskItem>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { CreateDBInstanceRequest, DescribeAccountPrivilegesResponse, DescribeDatabasesRequest, DescribeDBParametersRequest, DescribeAccountsRequest, DescribeRenewalPriceResponse, CreateTmpInstancesRequest, RestartDBInstancesResponse, AssociateSecurityGroupsRequest, DescribeUpgradePriceRequest, FlushBinlogResponse, DescribeDBSecurityGroupsResponse, DescribeDBResourceUsageDetailsResponse, DescribeDBInstanceSpecsResponse, DescribeProjectSecurityGroupsRequest, DescribeDBSlowLogsRequest, CreateAccountRequest, InitDBInstancesResponse, DescribeDBParametersResponse, ModifyLogFileRetentionPeriodRequest, DescribeFlowResponse, CloneAccountResponse, ModifyAccountDescriptionResponse, DescribeDBResourceUsageRequest, ModifyDBInstancesProjectResponse, DescribeDBLogFilesRequest, DescribeDBResourceUsageResponse, DescribeOrdersResponse, ModifyDBInstanceSecurityGroupsResponse, ResetAccountPasswordRequest, CopyAccountPrivilegesResponse, CloneAccountRequest, DescribeDBInstancesRequest, DescribeDBSecurityGroupsRequest, DescribeSaleInfoRequest, RenewDBInstanceRequest, DescribeProjectSecurityGroupsResponse, DescribeSqlLogsRequest, ResetAccountPasswordResponse, DescribeDBInstanceSpecsRequest, DescribePriceRequest, CreateDBInstanceResponse, DescribeBackupTimeRequest, DescribeSaleInfoResponse, GrantAccountPrivilegesRequest, ModifyDBParametersRequest, ModifyDBInstanceSecurityGroupsRequest, ModifyDBParametersResponse, CopyAccountPrivilegesRequest, OpenDBExtranetAccessResponse, KillSessionRequest, ModifyDBInstanceNameRequest, ModifyBackupTimeRequest, CreateTmpInstancesResponse, UpgradeDBInstanceRequest, DescribeUpgradePriceResponse, AssociateSecurityGroupsResponse, DescribePriceResponse, InitDBInstancesRequest, ModifyBackupTimeResponse, GrantAccountPrivilegesResponse, OpenDBExtranetAccessRequest, ModifyDBInstanceNameResponse, CloseDBExtranetAccessResponse, ModifyAccountDescriptionRequest, KillSessionResponse, DescribeDBPerformanceDetailsRequest, DescribeBackupTimeResponse, RenewDBInstanceResponse, DescribeDatabasesResponse, DescribeOrdersRequest, DescribeDBLogFilesResponse, CloseDBExtranetAccessRequest, DescribeSqlLogsResponse, DeleteAccountRequest, DescribeFlowRequest, DescribeDBPerformanceResponse, CreateAccountResponse, DescribeLogFileRetentionPeriodResponse, DescribeDBInstancesResponse, DescribeRenewalPriceRequest, RestartDBInstancesRequest, DescribeDBResourceUsageDetailsRequest, DisassociateSecurityGroupsRequest, DescribeAccountPrivilegesRequest, DescribeDBPerformanceDetailsResponse, DescribeAccountsResponse, DescribeDBSlowLogsResponse, UpgradeDBInstanceResponse, DescribeLogFileRetentionPeriodRequest, ModifyDBInstancesProjectRequest, FlushBinlogRequest, ModifyLogFileRetentionPeriodResponse, DisassociateSecurityGroupsResponse, DescribeDBPerformanceRequest, DeleteAccountResponse } from "./mariadb_models";
+import { CreateDBInstanceRequest, DescribeAccountPrivilegesResponse, DescribeDatabasesRequest, DescribeDBParametersRequest, DescribeAccountsRequest, DescribeRenewalPriceResponse, CreateTmpInstancesRequest, RestartDBInstancesResponse, AssociateSecurityGroupsRequest, DescribeUpgradePriceRequest, FlushBinlogResponse, DescribeDBSecurityGroupsResponse, DescribeDBResourceUsageDetailsResponse, DescribeDBInstanceSpecsResponse, DescribeProjectSecurityGroupsRequest, DescribeDBSlowLogsRequest, CreateAccountRequest, InitDBInstancesResponse, DescribeDBParametersResponse, ModifyLogFileRetentionPeriodRequest, DescribeFlowResponse, CloneAccountResponse, ModifyAccountDescriptionResponse, DescribeDBResourceUsageRequest, ModifyDBInstancesProjectResponse, DescribeDBLogFilesRequest, DescribeDBResourceUsageResponse, DescribeOrdersResponse, ModifyDBInstanceSecurityGroupsResponse, ResetAccountPasswordRequest, CopyAccountPrivilegesResponse, CloneAccountRequest, DescribeDBInstancesRequest, DescribeDBSecurityGroupsRequest, DescribeSaleInfoRequest, RenewDBInstanceRequest, DescribeProjectSecurityGroupsResponse, DescribeSqlLogsRequest, ResetAccountPasswordResponse, DescribeDBInstanceSpecsRequest, DescribePriceRequest, CreateDBInstanceResponse, DescribeBackupTimeRequest, DescribeSaleInfoResponse, GrantAccountPrivilegesRequest, ModifyDBParametersRequest, ModifyDBInstanceSecurityGroupsRequest, ModifyDBParametersResponse, CopyAccountPrivilegesRequest, OpenDBExtranetAccessResponse, KillSessionRequest, ModifyDBInstanceNameRequest, ModifyBackupTimeRequest, CreateTmpInstancesResponse, UpgradeDBInstanceRequest, DescribeUpgradePriceResponse, AssociateSecurityGroupsResponse, DescribePriceResponse, InitDBInstancesRequest, ModifyBackupTimeResponse, GrantAccountPrivilegesResponse, OpenDBExtranetAccessRequest, ModifyDBInstanceNameResponse, CloseDBExtranetAccessResponse, ModifyAccountDescriptionRequest, KillSessionResponse, DescribeDBPerformanceDetailsRequest, DescribeBackupTimeResponse, RenewDBInstanceResponse, DescribeDatabasesResponse, DescribeOrdersRequest, DescribeDBLogFilesResponse, CloseDBExtranetAccessRequest, DescribeSqlLogsResponse, DeleteAccountRequest, DescribeFlowRequest, DescribeDBPerformanceResponse, DescribeInstanceNodeInfoRequest, CreateAccountResponse, DescribeLogFileRetentionPeriodResponse, DescribeDBInstancesResponse, DescribeRenewalPriceRequest, RestartDBInstancesRequest, DescribeDBResourceUsageDetailsRequest, DisassociateSecurityGroupsRequest, DescribeAccountPrivilegesRequest, DescribeDBPerformanceDetailsResponse, DescribeAccountsResponse, DescribeDBSlowLogsResponse, UpgradeDBInstanceResponse, DescribeLogFileRetentionPeriodRequest, ModifyDBInstancesProjectRequest, FlushBinlogRequest, DescribeInstanceNodeInfoResponse, ModifyLogFileRetentionPeriodResponse, DisassociateSecurityGroupsResponse, DescribeDBPerformanceRequest, DeleteAccountResponse } from "./mariadb_models";
 /**
  * mariadb client
  * @class
@@ -17,9 +17,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeRenewalPrice(req: DescribeRenewalPriceRequest, cb?: (error: string, rep: DescribeRenewalPriceResponse) => void): Promise<DescribeRenewalPriceResponse>;
     /**
-     * 本接口（DescribeOrders）用于查询云数据库订单信息。传入订单ID来查询订单关联的云数据库实例，和对应的任务流程ID。
+     * 本接口（DescribeInstanceNodeInfo）用于获取数据库实例主备节点信息
      */
-    DescribeOrders(req: DescribeOrdersRequest, cb?: (error: string, rep: DescribeOrdersResponse) => void): Promise<DescribeOrdersResponse>;
+    DescribeInstanceNodeInfo(req: DescribeInstanceNodeInfoRequest, cb?: (error: string, rep: DescribeInstanceNodeInfoResponse) => void): Promise<DescribeInstanceNodeInfoResponse>;
     /**
      * 本接口（KillSession）用于杀死指定会话。
      */
@@ -75,10 +75,9 @@ export declare class Client extends AbstractClient {
      */
     RestartDBInstances(req: RestartDBInstancesRequest, cb?: (error: string, rep: RestartDBInstancesResponse) => void): Promise<RestartDBInstancesResponse>;
     /**
-     * 本接口（GrantAccountPrivileges）用于给云数据库账号赋权。
-注意：相同用户名，不同Host是不同的账号。
+     * 本接口（DescribeOrders）用于查询云数据库订单信息。传入订单ID来查询订单关联的云数据库实例，和对应的任务流程ID。
      */
-    GrantAccountPrivileges(req: GrantAccountPrivilegesRequest, cb?: (error: string, rep: GrantAccountPrivilegesResponse) => void): Promise<GrantAccountPrivilegesResponse>;
+    DescribeOrders(req: DescribeOrdersRequest, cb?: (error: string, rep: DescribeOrdersResponse) => void): Promise<DescribeOrdersResponse>;
     /**
      * 本接口（DeleteAccount）用于删除云数据库账号。用户名+host唯一确定一个账号。
      */
@@ -160,6 +159,11 @@ export declare class Client extends AbstractClient {
      * 相当于在mysqld中执行flush logs，完成切分的binlog将展示在实例控制台binlog列表里。
      */
     FlushBinlog(req: FlushBinlogRequest, cb?: (error: string, rep: FlushBinlogResponse) => void): Promise<FlushBinlogResponse>;
+    /**
+     * 本接口（GrantAccountPrivileges）用于给云数据库账号赋权。
+注意：相同用户名，不同Host是不同的账号。
+     */
+    GrantAccountPrivileges(req: GrantAccountPrivilegesRequest, cb?: (error: string, rep: GrantAccountPrivilegesResponse) => void): Promise<GrantAccountPrivilegesResponse>;
     /**
      * 本接口（CopyAccountPrivileges）用于复制云数据库账号的权限。
 注意：相同用户名，不同Host是不同的账号，Readonly属性相同的账号之间才能复制权限。

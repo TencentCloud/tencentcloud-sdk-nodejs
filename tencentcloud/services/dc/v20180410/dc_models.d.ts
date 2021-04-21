@@ -1141,6 +1141,12 @@ export interface ModifyDirectConnectTunnelExtraRequest {
       * 去往用户侧的路由信息
       */
     CustomerIDCRoutes?: Array<RouteFilterPrefix>;
+    /**
+      * 是否开启巨帧
+1：开启
+0：不开启
+      */
+    JumboEnable?: number;
 }
 /**
  * RejectDirectConnectTunnel返回参数结构体

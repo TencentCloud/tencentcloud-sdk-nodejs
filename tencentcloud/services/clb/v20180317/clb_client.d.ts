@@ -143,7 +143,7 @@ export declare class Client extends AbstractClient {
      */
     DeregisterTargetGroupInstances(req: DeregisterTargetGroupInstancesRequest, cb?: (error: string, rep: DeregisterTargetGroupInstancesResponse) => void): Promise<DeregisterTargetGroupInstancesResponse>;
     /**
-     * 查询一个地域的负载均衡实例列表
+     * 查询一个地域的负载均衡实例列表。
 
      */
     DescribeLoadBalancers(req: DescribeLoadBalancersRequest, cb?: (error: string, rep: DescribeLoadBalancersResponse) => void): Promise<DescribeLoadBalancersResponse>;

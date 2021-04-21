@@ -3804,27 +3804,27 @@ export interface DescribeLiveForbidStreamListResponse {
   /**
    * 符合条件的总个数。
    */
-  TotalNum?: number
+  TotalNum: number
 
   /**
    * 总页数。
    */
-  TotalPage?: number
+  TotalPage: number
 
   /**
    * 分页的页码。
    */
-  PageNum?: number
+  PageNum: number
 
   /**
    * 每页显示的条数。
    */
-  PageSize?: number
+  PageSize: number
 
   /**
    * 禁推流列表。
    */
-  ForbidStreamList?: Array<ForbidStreamInfo>
+  ForbidStreamList: Array<ForbidStreamInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4163,6 +4163,11 @@ export interface DescribeLiveForbidStreamListRequest {
 默认值：10。
       */
   PageSize?: number
+
+  /**
+   * 搜索的推流 id 名称。
+   */
+  StreamName?: string
 }
 
 /**

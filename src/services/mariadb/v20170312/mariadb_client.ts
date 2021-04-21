@@ -51,6 +51,7 @@ import {
   DBBackupTimeConfig,
   DescribeDBLogFilesRequest,
   DescribeDBResourceUsageResponse,
+  NodeInfo,
   DescribeOrdersResponse,
   ModifyDBInstanceSecurityGroupsResponse,
   ResetAccountPasswordRequest,
@@ -113,6 +114,7 @@ import {
   InstanceSpec,
   DescribeFlowRequest,
   DescribeDBPerformanceResponse,
+  DescribeInstanceNodeInfoRequest,
   CreateAccountResponse,
   DescribeLogFileRetentionPeriodResponse,
   RegionInfo,
@@ -134,6 +136,7 @@ import {
   ModifyDBInstancesProjectRequest,
   FlushBinlogRequest,
   MonitorData,
+  DescribeInstanceNodeInfoResponse,
   ModifyLogFileRetentionPeriodResponse,
   DisassociateSecurityGroupsResponse,
   DescribeDBPerformanceRequest,
@@ -171,13 +174,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeOrders）用于查询云数据库订单信息。传入订单ID来查询订单关联的云数据库实例，和对应的任务流程ID。
+   * 本接口（DescribeInstanceNodeInfo）用于获取数据库实例主备节点信息
    */
-  async DescribeOrders(
-    req: DescribeOrdersRequest,
-    cb?: (error: string, rep: DescribeOrdersResponse) => void
-  ): Promise<DescribeOrdersResponse> {
-    return this.request("DescribeOrders", req, cb)
+  async DescribeInstanceNodeInfo(
+    req: DescribeInstanceNodeInfoRequest,
+    cb?: (error: string, rep: DescribeInstanceNodeInfoResponse) => void
+  ): Promise<DescribeInstanceNodeInfoResponse> {
+    return this.request("DescribeInstanceNodeInfo", req, cb)
   }
 
   /**
@@ -313,14 +316,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口（GrantAccountPrivileges）用于给云数据库账号赋权。
-注意：相同用户名，不同Host是不同的账号。
-     */
-  async GrantAccountPrivileges(
-    req: GrantAccountPrivilegesRequest,
-    cb?: (error: string, rep: GrantAccountPrivilegesResponse) => void
-  ): Promise<GrantAccountPrivilegesResponse> {
-    return this.request("GrantAccountPrivileges", req, cb)
+   * 本接口（DescribeOrders）用于查询云数据库订单信息。传入订单ID来查询订单关联的云数据库实例，和对应的任务流程ID。
+   */
+  async DescribeOrders(
+    req: DescribeOrdersRequest,
+    cb?: (error: string, rep: DescribeOrdersResponse) => void
+  ): Promise<DescribeOrdersResponse> {
+    return this.request("DescribeOrders", req, cb)
   }
 
   /**
@@ -522,6 +524,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: FlushBinlogResponse) => void
   ): Promise<FlushBinlogResponse> {
     return this.request("FlushBinlog", req, cb)
+  }
+
+  /**
+     * 本接口（GrantAccountPrivileges）用于给云数据库账号赋权。
+注意：相同用户名，不同Host是不同的账号。
+     */
+  async GrantAccountPrivileges(
+    req: GrantAccountPrivilegesRequest,
+    cb?: (error: string, rep: GrantAccountPrivilegesResponse) => void
+  ): Promise<GrantAccountPrivilegesResponse> {
+    return this.request("GrantAccountPrivileges", req, cb)
   }
 
   /**
