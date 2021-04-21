@@ -20,6 +20,7 @@ export { bmeip } from "./bmeip";
 export { bmlb } from "./bmlb";
 export { bmvpc } from "./bmvpc";
 export { bri } from "./bri";
+export { btoe } from "./btoe";
 export { cam } from "./cam";
 export { captcha } from "./captcha";
 export { cat } from "./cat";

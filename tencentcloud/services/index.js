@@ -44,6 +44,8 @@ var bmvpc_1 = require("./bmvpc");
 Object.defineProperty(exports, "bmvpc", { enumerable: true, get: function () { return bmvpc_1.bmvpc; } });
 var bri_1 = require("./bri");
 Object.defineProperty(exports, "bri", { enumerable: true, get: function () { return bri_1.bri; } });
+var btoe_1 = require("./btoe");
+Object.defineProperty(exports, "btoe", { enumerable: true, get: function () { return btoe_1.btoe; } });
 var cam_1 = require("./cam");
 Object.defineProperty(exports, "cam", { enumerable: true, get: function () { return cam_1.cam; } });
 var captcha_1 = require("./captcha");
