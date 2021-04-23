@@ -1191,6 +1191,26 @@ export interface TopicRuleInfo {
 }
 
 /**
+ * GetCOSURL请求参数结构体
+ */
+export interface GetCOSURLRequest {
+  /**
+   * 产品ID
+   */
+  ProductID: string
+
+  /**
+   * 固件版本
+   */
+  FirmwareVersion: string
+
+  /**
+   * 文件大小
+   */
+  FileSize?: number
+}
+
+/**
  * CreateProject请求参数结构体
  */
 export interface CreateProjectRequest {
@@ -1368,6 +1388,21 @@ export interface GetDeviceListRequest {
    * 需要过滤的设备名称
    */
   DeviceName?: string
+}
+
+/**
+ * GetCOSURL返回参数结构体
+ */
+export interface GetCOSURLResponse {
+  /**
+   * 固件URL
+   */
+  Url: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -228,6 +228,16 @@ it("dcdb.v20180411.DescribeDBLogFiles", async function () {
     }
 })
 
+it("dcdb.v20180411.UpgradeDCDBInstance", async function () {
+    try {
+       const data = await client.UpgradeDCDBInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dcdb.v20180411.DescribeDBSyncMode", async function () {
     try {
        const data = await client.DescribeDBSyncMode({})
@@ -288,9 +298,9 @@ it("dcdb.v20180411.ModifyDBInstanceSecurityGroups", async function () {
     }
 })
 
-it("dcdb.v20180411.UpgradeDCDBInstance", async function () {
+it("dcdb.v20180411.DescribeDCDBInstanceNodeInfo", async function () {
     try {
-       const data = await client.UpgradeDCDBInstance({})
+       const data = await client.DescribeDCDBInstanceNodeInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -368,9 +378,9 @@ it("dcdb.v20180411.DescribeDCDBShards", async function () {
     }
 })
 
-it("dcdb.v20180411.CreateDCDBInstance", async function () {
+it("dcdb.v20180411.DescribeDatabases", async function () {
     try {
-       const data = await client.CreateDCDBInstance({})
+       const data = await client.DescribeDatabases({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -378,9 +388,9 @@ it("dcdb.v20180411.CreateDCDBInstance", async function () {
     }
 })
 
-it("dcdb.v20180411.DescribeDatabases", async function () {
+it("dcdb.v20180411.CreateDCDBInstance", async function () {
     try {
-       const data = await client.DescribeDatabases({})
+       const data = await client.CreateDCDBInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

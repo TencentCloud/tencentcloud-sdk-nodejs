@@ -336,11 +336,11 @@ export interface DescribeEipAclsResponse {
     /**
       * 返回 EIPACL 列表总数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * EIPACL列表
       */
-    EipAclList?: Array<EipAcl>;
+    EipAclList: Array<EipAcl>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -551,7 +551,7 @@ export interface BindHostedResponse {
     /**
       * 异步任务ID，可以通过EipBmQueryTask查询任务状态
       */
-    TaskId?: number;
+    TaskId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -657,7 +657,7 @@ export interface DescribeEipTaskResponse {
     /**
       * 当前任务状态码：0-成功，1-失败，2-进行中
       */
-    Status?: number;
+    Status: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -820,19 +820,19 @@ export interface CreateEipAclResponse {
     /**
       * ACL 实例 ID
       */
-    AclId?: string;
+    AclId: string;
     /**
       * ACL 实例状态
       */
-    Status?: number;
+    Status: number;
     /**
       * ACL 实例名称
       */
-    AclName?: string;
+    AclName: string;
     /**
       * ACL 实例创建时间
       */
-    CreatedAt?: string;
+    CreatedAt: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

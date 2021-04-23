@@ -35,6 +35,12 @@ API 网关使用的最大单元为服务，每个服务中可创建多个 API �
         return this.request("CreateService", req, cb);
     }
     /**
+     * 构建 API 文档
+     */
+    async BuildAPIDoc(req, cb) {
+        return this.request("BuildAPIDoc", req, cb);
+    }
+    /**
      * 本接口（DescribeUsagePlanStatus）用于查询使用计划的列表。
      */
     async DescribeUsagePlansStatus(req, cb) {
@@ -45,6 +51,12 @@ API 网关使用的最大单元为服务，每个服务中可创建多个 API �
      */
     async DeleteUsagePlan(req, cb) {
         return this.request("DeleteUsagePlan", req, cb);
+    }
+    /**
+     * 查询 API 文档详情
+     */
+    async DescribeAPIDocDetail(req, cb) {
+        return this.request("DescribeAPIDocDetail", req, cb);
     }
     /**
      * 本接口（ModifyApi）用于修改 API 接口，可调用此接口对已经配置的 API 接口进行编辑修改。修改后的 API 需要重新发布 API 所在的服务到对应环境方能生效。
@@ -66,6 +78,12 @@ API 网关使用的最大单元为服务，每个服务中可创建多个 API �
      */
     async DescribeApiKeysStatus(req, cb) {
         return this.request("DescribeApiKeysStatus", req, cb);
+    }
+    /**
+     * 本接口（ModifySubDomain）用于修改服务的自定义域名设置中的路径映射，可以修改绑定自定义域名之前的路径映射规则。
+     */
+    async ModifySubDomain(req, cb) {
+        return this.request("ModifySubDomain", req, cb);
     }
     /**
      * 本接口（ModifyApiEnvironmentStrategy）用于修改API限流策略
@@ -118,6 +136,12 @@ API 网关可绑定自定义域名到服务，用于服务调用。此接口用�
         return this.request("UnBindIPStrategy", req, cb);
     }
     /**
+     * 创建 API 文档
+     */
+    async CreateAPIDoc(req, cb) {
+        return this.request("CreateAPIDoc", req, cb);
+    }
+    /**
      * 本接口（UpdateService）用于从服务发布的环境中运行版本切换到特定版本。用户在使用 API 网关创建服务并发布服务到某个环境后，多因为开发过程会产生多个版本，此时可调用本接口。
      */
     async UpdateService(req, cb) {
@@ -161,6 +185,12 @@ API 网关可绑定自定义域名到服务，用于服务调用。此接口用�
      */
     async DeleteApi(req, cb) {
         return this.request("DeleteApi", req, cb);
+    }
+    /**
+     * 查询 API 文档列表
+     */
+    async DescribeAPIDocs(req, cb) {
+        return this.request("DescribeAPIDocs", req, cb);
     }
     /**
      * 本接口（DescribeIPStrategysStatus）用于查询服务IP策略列表。
@@ -216,6 +246,12 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
         return this.request("BindEnvironment", req, cb);
     }
     /**
+     * 修改 API 文档
+     */
+    async ModifyAPIDoc(req, cb) {
+        return this.request("ModifyAPIDoc", req, cb);
+    }
+    /**
      * 本接口（UnBindSecretIds）用于为使用计划解绑密钥。
      */
     async UnBindSecretIds(req, cb) {
@@ -253,6 +289,12 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
         return this.request("EnableApiKey", req, cb);
     }
     /**
+     * 重置API文档密码
+     */
+    async ResetAPIDocPassword(req, cb) {
+        return this.request("ResetAPIDocPassword", req, cb);
+    }
+    /**
      * 本接口（CreateIPStrategy）用于创建服务IP策略。
      */
     async CreateIPStrategy(req, cb) {
@@ -278,10 +320,10 @@ API 网关可绑定自定义域名到服务，并且可以对自定义域名的�
         return this.request("CreateApiKey", req, cb);
     }
     /**
-     * 本接口（ModifySubDomain）用于修改服务的自定义域名设置中的路径映射，可以修改绑定自定义域名之前的路径映射规则。
+     * 删除 API 文档
      */
-    async ModifySubDomain(req, cb) {
-        return this.request("ModifySubDomain", req, cb);
+    async DeleteAPIDoc(req, cb) {
+        return this.request("DeleteAPIDoc", req, cb);
     }
     /**
      * 本接口（DeleteIPStrategy）用于删除服务IP策略。

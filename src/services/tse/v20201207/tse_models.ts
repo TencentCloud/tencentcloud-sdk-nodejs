@@ -16,6 +16,26 @@
  */
 
 /**
+ * DescribeSREInstances请求参数结构体
+ */
+export interface DescribeSREInstancesRequest {
+  /**
+   * 请求过滤参数
+   */
+  Filters?: Array<Filter>
+
+  /**
+   * 翻页单页查询限制数量[0,1000], 默认值0
+   */
+  Limit?: number
+
+  /**
+   * 翻页单页偏移量，默认值0
+   */
+  Offset?: number
+}
+
+/**
  * ManageConfig请求参数结构体
  */
 export interface ManageConfigRequest {
@@ -43,6 +63,141 @@ export interface ManageConfigRequest {
    * 配置的Value
    */
   Value?: string
+}
+
+/**
+ * 微服务注册引擎实例
+ */
+export interface SREInstance {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 名称
+   */
+  Name: string
+
+  /**
+   * 版本号
+   */
+  Edition: string
+
+  /**
+   * 状态, 枚举值:creating/create_fail/running/updating/update_fail/restarting/restart_fail/destroying/destroy_fail
+   */
+  Status: string
+
+  /**
+   * 规格ID
+   */
+  SpecId: string
+
+  /**
+   * 副本数
+   */
+  Replica: number
+
+  /**
+   * 类型
+   */
+  Type: string
+
+  /**
+   * Vpc iD
+   */
+  VpcId: string
+
+  /**
+      * 子网ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SubnetIds: Array<string>
+
+  /**
+      * 是否开启持久化存储
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EnableStorage: boolean
+
+  /**
+      * 数据存储方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StorageType: string
+
+  /**
+      * 云硬盘容量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StorageCapacity: number
+
+  /**
+      * 计费方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Paymode: string
+}
+
+/**
+ * DescribeSREInstanceAccessAddress返回参数结构体
+ */
+export interface DescribeSREInstanceAccessAddressResponse {
+  /**
+   * 内网访问地址
+   */
+  IntranetAddress: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeSREInstances返回参数结构体
+ */
+export interface DescribeSREInstancesResponse {
+  /**
+   * 总数量
+   */
+  TotalCount: number
+
+  /**
+   * 实例记录
+   */
+  Content: Array<SREInstance>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 查询过滤通用对象
+ */
+export interface Filter {
+  /**
+   * 过滤参数名
+   */
+  Name: string
+
+  /**
+   * 过滤参数值
+   */
+  Values: Array<string>
+}
+
+/**
+ * DescribeSREInstanceAccessAddress请求参数结构体
+ */
+export interface DescribeSREInstanceAccessAddressRequest {
+  /**
+   * 注册引擎实例Id
+   */
+  InstanceId?: string
 }
 
 /**

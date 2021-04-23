@@ -406,6 +406,21 @@ export interface ModifyAccountDescriptionResponse {
 }
 
 /**
+ * OpenDBExtranetAccess返回参数结构体
+ */
+export interface OpenDBExtranetAccessResponse {
+  /**
+   * 异步任务ID，可通过 DescribeFlow 查询任务状态。
+   */
+  FlowId?: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateDCDBInstance返回参数结构体
  */
 export interface CreateDCDBInstanceResponse {
@@ -428,29 +443,23 @@ export interface CreateDCDBInstanceResponse {
 }
 
 /**
- * 参数约束
+ * 描述分片DB节点信息
  */
-export interface ParamConstraint {
+export interface BriefNodeInfo {
   /**
-   * 约束类型,如枚举enum，区间section
+   * DB节点ID
    */
-  Type: string
+  NodeId: string
 
   /**
-   * 约束类型为enum时的可选值列表
+   * DB节点角色，取值为master或者slave
    */
-  Enum: string
+  Role: string
 
   /**
-      * 约束类型为section时的范围
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Range: ConstraintRange
-
-  /**
-   * 约束类型为string时的可选值列表
+   * 节点所属分片的分片ID
    */
-  String: string
+  ShardId: string
 }
 
 /**
@@ -461,6 +470,26 @@ export interface ModifyDBInstancesProjectResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeDCDBInstanceNodeInfo请求参数结构体
+ */
+export interface DescribeDCDBInstanceNodeInfoRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 单次最多返回多少条，取值范围为(0-100]，默认为100
+   */
+  Limit?: number
+
+  /**
+   * 返回数据的偏移值，默认为0
+   */
+  Offset?: number
 }
 
 /**
@@ -729,6 +758,32 @@ export interface DescribeSqlLogsRequest {
    * 拉取数量（0-10000，为0时拉取总数信息）。
    */
   Limit?: number
+}
+
+/**
+ * 参数约束
+ */
+export interface ParamConstraint {
+  /**
+   * 约束类型,如枚举enum，区间section
+   */
+  Type: string
+
+  /**
+   * 约束类型为enum时的可选值列表
+   */
+  Enum: string
+
+  /**
+      * 约束类型为section时的范围
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Range: ConstraintRange
+
+  /**
+   * 约束类型为string时的可选值列表
+   */
+  String: string
 }
 
 /**
@@ -1565,13 +1620,18 @@ export interface DescribeDatabaseTableRequest {
 }
 
 /**
- * OpenDBExtranetAccess返回参数结构体
+ * DescribeDCDBInstanceNodeInfo返回参数结构体
  */
-export interface OpenDBExtranetAccessResponse {
+export interface DescribeDCDBInstanceNodeInfoResponse {
   /**
-   * 异步任务ID，可通过 DescribeFlow 查询任务状态。
+   * 节点总个数
    */
-  FlowId?: number
+  TotalCount: number
+
+  /**
+   * 节点信息
+   */
+  NodesInfo: Array<BriefNodeInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

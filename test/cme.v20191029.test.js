@@ -418,6 +418,16 @@ it("cme.v20191029.FlattenListMedia", async function () {
     }
 })
 
+it("cme.v20191029.HandleStreamConnectProject", async function () {
+    try {
+       const data = await client.HandleStreamConnectProject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cme.v20191029.DescribeTeamMembers", async function () {
     try {
        const data = await client.DescribeTeamMembers({})

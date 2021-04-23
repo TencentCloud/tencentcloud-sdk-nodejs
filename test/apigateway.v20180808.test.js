@@ -28,6 +28,16 @@ it("apigateway.v20180808.CreateService", async function () {
     }
 })
 
+it("apigateway.v20180808.BuildAPIDoc", async function () {
+    try {
+       const data = await client.BuildAPIDoc({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("apigateway.v20180808.DescribeUsagePlansStatus", async function () {
     try {
        const data = await client.DescribeUsagePlansStatus({})
@@ -41,6 +51,16 @@ it("apigateway.v20180808.DescribeUsagePlansStatus", async function () {
 it("apigateway.v20180808.DeleteUsagePlan", async function () {
     try {
        const data = await client.DeleteUsagePlan({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("apigateway.v20180808.DescribeAPIDocDetail", async function () {
+    try {
+       const data = await client.DescribeAPIDocDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -71,6 +91,16 @@ it("apigateway.v20180808.DemoteServiceUsagePlan", async function () {
 it("apigateway.v20180808.DescribeApiKeysStatus", async function () {
     try {
        const data = await client.DescribeApiKeysStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("apigateway.v20180808.ModifySubDomain", async function () {
+    try {
+       const data = await client.ModifySubDomain({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,6 +188,16 @@ it("apigateway.v20180808.UnBindIPStrategy", async function () {
     }
 })
 
+it("apigateway.v20180808.CreateAPIDoc", async function () {
+    try {
+       const data = await client.CreateAPIDoc({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("apigateway.v20180808.UpdateService", async function () {
     try {
        const data = await client.UpdateService({})
@@ -221,6 +261,16 @@ it("apigateway.v20180808.DescribeApiUsagePlan", async function () {
 it("apigateway.v20180808.DeleteApi", async function () {
     try {
        const data = await client.DeleteApi({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("apigateway.v20180808.DescribeAPIDocs", async function () {
+    try {
+       const data = await client.DescribeAPIDocs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,6 +358,16 @@ it("apigateway.v20180808.BindEnvironment", async function () {
     }
 })
 
+it("apigateway.v20180808.ModifyAPIDoc", async function () {
+    try {
+       const data = await client.ModifyAPIDoc({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("apigateway.v20180808.UnBindSecretIds", async function () {
     try {
        const data = await client.UnBindSecretIds({})
@@ -368,6 +428,16 @@ it("apigateway.v20180808.EnableApiKey", async function () {
     }
 })
 
+it("apigateway.v20180808.ResetAPIDocPassword", async function () {
+    try {
+       const data = await client.ResetAPIDocPassword({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("apigateway.v20180808.CreateIPStrategy", async function () {
     try {
        const data = await client.CreateIPStrategy({})
@@ -408,9 +478,9 @@ it("apigateway.v20180808.CreateApiKey", async function () {
     }
 })
 
-it("apigateway.v20180808.ModifySubDomain", async function () {
+it("apigateway.v20180808.DeleteAPIDoc", async function () {
     try {
-       const data = await client.ModifySubDomain({})
+       const data = await client.DeleteAPIDoc({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

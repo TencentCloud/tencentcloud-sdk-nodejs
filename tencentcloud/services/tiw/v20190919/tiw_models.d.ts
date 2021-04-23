@@ -25,6 +25,19 @@ export interface SetWhiteboardPushCallbackKeyRequest {
     CallbackKey: string;
 }
 /**
+ * 查询指标返回的时间序列
+ */
+export interface TimeValue {
+    /**
+      * Unix时间戳，单位秒
+      */
+    Time: number;
+    /**
+      * 查询指标对应当前时间的值
+      */
+    Value: number;
+}
+/**
  * 自定义混流配置布局参数
  */
 export interface LayoutParams {
@@ -263,17 +276,17 @@ export interface DescribeWhiteboardPushRequest {
     TaskId: string;
 }
 /**
- * DescribeVideoGenerationTaskCallback返回参数结构体
+ * DescribeQualityMetrics返回参数结构体
  */
-export interface DescribeVideoGenerationTaskCallbackResponse {
+export interface DescribeQualityMetricsResponse {
     /**
-      * 录制视频生成回调地址
+      * 输入的查询指标
       */
-    Callback?: string;
+    Metric: string;
     /**
-      * 录制视频生成回调鉴权密钥
+      * 时间序列
       */
-    CallbackKey?: string;
+    Content: Array<TimeValue>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -399,6 +412,23 @@ VIDEO_GENERATION_MODE - 视频生成模式（内测中，需邮件申请开通�
     ExtraData?: string;
 }
 /**
+ * DescribeVideoGenerationTaskCallback返回参数结构体
+ */
+export interface DescribeVideoGenerationTaskCallbackResponse {
+    /**
+      * 录制视频生成回调地址
+      */
+    Callback?: string;
+    /**
+      * 录制视频生成回调鉴权密钥
+      */
+    CallbackKey?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * StartWhiteboardPush返回参数结构体
  */
 export interface StartWhiteboardPushResponse {
@@ -493,7 +523,7 @@ export interface CreateTranscodeResponse {
     /**
       * 文档转码任务的唯一标识Id，用于查询该任务的进度以及转码结果
       */
-    TaskId?: string;
+    TaskId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -785,7 +815,7 @@ export interface CreateTranscodeRequest {
       */
     SdkAppId: number;
     /**
-      * 需要进行转码文件地址
+      * 经过URL编码后的转码文件地址。URL 编码会将字符转换为可通过因特网传输的格式，比如文档地址为http://example.com/测试.pdf，经过URL编码之后为http://example.com/%E6%B5%8B%E8%AF%95.pdf。为了提高URL解析的成功率，请对URL进行编码。
       */
     Url: string;
     /**
@@ -1008,13 +1038,35 @@ export interface StreamLayout {
     FillMode?: number;
 }
 /**
- * SetOnlineRecordCallback返回参数结构体
+ * DescribeQualityMetrics请求参数结构体
  */
-export interface SetOnlineRecordCallbackResponse {
+export interface DescribeQualityMetricsRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 白板应用的SdkAppId
       */
-    RequestId?: string;
+    SdkAppId: number;
+    /**
+      * 开始时间，Unix时间戳，单位秒，时间跨度不能超过7天
+      */
+    StartTime: number;
+    /**
+      * 结束时间，Unix时间戳，单位秒，时间跨度不能超过7天
+      */
+    EndTime: number;
+    /**
+      * 查询的指标，目前支持以下值
+  - image_load_total_count: 图片加载总数
+  - image_load_fail_count: 图片加载失败数量
+  - image_load_success_rate: 图片加载成功率
+  - ppt_load_total_count: PPT加载总数
+  - ppt_load_fail_count: PPT加载失败总数
+  - ppt_load_success_rate: PPT加载成功率
+      */
+    Metric: string;
+    /**
+      * 聚合的时间维度，目前只支持1小时，输入值为"1h"
+      */
+    Interval?: string;
 }
 /**
  * SetOnlineRecordCallbackKey请求参数结构体
@@ -1275,6 +1327,15 @@ export interface StopWhiteboardPushResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Backup?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * SetOnlineRecordCallback返回参数结构体
+ */
+export interface SetOnlineRecordCallbackResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

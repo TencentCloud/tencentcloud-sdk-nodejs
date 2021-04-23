@@ -17,7 +17,16 @@
  */
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
-import { ManageConfigRequest, ManageConfigResponse } from "./tse_models"
+import {
+  DescribeSREInstancesRequest,
+  ManageConfigRequest,
+  SREInstance,
+  DescribeSREInstanceAccessAddressResponse,
+  DescribeSREInstancesResponse,
+  Filter,
+  DescribeSREInstanceAccessAddressRequest,
+  ManageConfigResponse,
+} from "./tse_models"
 
 /**
  * tse client
@@ -36,5 +45,25 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ManageConfigResponse) => void
   ): Promise<ManageConfigResponse> {
     return this.request("ManageConfig", req, cb)
+  }
+
+  /**
+   * 查询微服务注册引擎实例访问地址
+   */
+  async DescribeSREInstanceAccessAddress(
+    req: DescribeSREInstanceAccessAddressRequest,
+    cb?: (error: string, rep: DescribeSREInstanceAccessAddressResponse) => void
+  ): Promise<DescribeSREInstanceAccessAddressResponse> {
+    return this.request("DescribeSREInstanceAccessAddress", req, cb)
+  }
+
+  /**
+   * 用于查询微服务注册中心实例列表
+   */
+  async DescribeSREInstances(
+    req: DescribeSREInstancesRequest,
+    cb?: (error: string, rep: DescribeSREInstancesResponse) => void
+  ): Promise<DescribeSREInstancesResponse> {
+    return this.request("DescribeSREInstances", req, cb)
   }
 }

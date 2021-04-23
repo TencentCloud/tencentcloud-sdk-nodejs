@@ -39,7 +39,7 @@ export interface DescribeMusicResponse {
       * 音乐相关信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Music?: Music
+  Music: Music
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -569,7 +569,7 @@ export interface DescribeMusicRequest {
   IdentityId: string
 
   /**
-      * MP3-64K-FTD-P  为获取64kbps歌曲热门片段。
+      * MP3-320K-FTD-P  为获取64kbps歌曲热门片段。
 MP3-320K-FTD 为获取320kbps已核验歌曲完整资源。
       */
   SubItemType?: string
@@ -713,35 +713,35 @@ export interface DescribeCloudMusicResponse {
   /**
    * 歌曲Id
    */
-  MusicId?: string
+  MusicId: string
 
   /**
    * 歌曲名称
    */
-  MusicName?: string
+  MusicName: string
 
   /**
       * 歌曲时长
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Duration?: number
+  Duration: number
 
   /**
    * 歌曲链接
    */
-  MusicUrl?: string
+  MusicUrl: string
 
   /**
       * 歌曲图片
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  MusicImageUrl?: string
+  MusicImageUrl: string
 
   /**
       * 歌手列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Singers?: Array<string>
+  Singers: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -905,8 +905,9 @@ export interface DescribeCloudMusicRequest {
   MusicId: string
 
   /**
-   * 歌曲类型，请填写：MP3-320K-FTD
-   */
+      * MP3-320K-FTD-P  为获取320kbps歌曲热门片段。
+MP3-320K-FTD 为获取320kbps已核验歌曲完整资源。
+      */
   MusicType?: string
 }
 

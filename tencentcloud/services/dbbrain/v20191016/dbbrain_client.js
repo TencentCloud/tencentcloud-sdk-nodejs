@@ -166,6 +166,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTopSpaceSchemaTimeSeries", req, cb);
     }
     /**
+     * 获取SQL优化建议。
+     */
+    async DescribeUserSqlAdvice(req, cb) {
+        return this.request("DescribeUserSqlAdvice", req, cb);
+    }
+    /**
      * 获取实例占用空间最大的前几张表在指定时间段内的每日由DBbrain定时采集的空间数据，默认返回按大小排序。
      */
     async DescribeTopSpaceTableTimeSeries(req, cb) {

@@ -68,6 +68,7 @@ import {
   FirmwareInfo,
   DisableTopicRuleResponse,
   TopicRuleInfo,
+  GetCOSURLRequest,
   CreateProjectRequest,
   DescribeDeviceResponse,
   ListFirmwaresRequest,
@@ -75,6 +76,7 @@ import {
   PublishMessageRequest,
   UploadFirmwareRequest,
   GetDeviceListRequest,
+  GetCOSURLResponse,
   GetTopicRuleListResponse,
   DisableTopicRuleRequest,
   EventHistoryItem,
@@ -143,6 +145,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetTopicRuleListResponse) => void
   ): Promise<GetTopicRuleListResponse> {
     return this.request("GetTopicRuleList", req, cb)
+  }
+
+  /**
+   * 本接口（GetCOSURL）用于获取固件存储在COS的URL
+   */
+  async GetCOSURL(
+    req: GetCOSURLRequest,
+    cb?: (error: string, rep: GetCOSURLResponse) => void
+  ): Promise<GetCOSURLResponse> {
+    return this.request("GetCOSURL", req, cb)
   }
 
   /**

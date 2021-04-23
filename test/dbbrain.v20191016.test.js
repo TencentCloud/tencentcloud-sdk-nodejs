@@ -248,6 +248,16 @@ it("dbbrain.v20191016.DescribeTopSpaceSchemaTimeSeries", async function () {
     }
 })
 
+it("dbbrain.v20191016.DescribeUserSqlAdvice", async function () {
+    try {
+       const data = await client.DescribeUserSqlAdvice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20191016.DescribeTopSpaceTableTimeSeries", async function () {
     try {
        const data = await client.DescribeTopSpaceTableTimeSeries({})

@@ -2522,32 +2522,32 @@ export interface AddUserResponse {
   /**
    * 子用户 UIN
    */
-  Uin?: number
+  Uin: number
 
   /**
    * 子用户用户名
    */
-  Name?: string
+  Name: string
 
   /**
    * 如果输入参数组合为自动生成随机密码，则返回生成的密码
    */
-  Password?: string
+  Password: string
 
   /**
    * 子用户密钥 ID
    */
-  SecretId?: string
+  SecretId: string
 
   /**
    * 子用户密钥 Key
    */
-  SecretKey?: string
+  SecretKey: string
 
   /**
    * 子用户 UID
    */
-  Uid?: number
+  Uid: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

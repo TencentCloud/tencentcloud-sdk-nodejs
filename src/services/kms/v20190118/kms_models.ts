@@ -1091,14 +1091,14 @@ export interface ReEncryptResponse {
  */
 export interface EncryptResponse {
   /**
-   * 加密后经过base64编码的密文
+   * 加密后的密文，base64编码。注意：本字段中打包了密文和密钥的相关信息，不是对明文的直接加密结果，只有将该字段作为Decrypt接口的输入参数，才可以解密出原文。
    */
-  CiphertextBlob?: string
+  CiphertextBlob: string
 
   /**
    * 加密使用的CMK的全局唯一标识
    */
-  KeyId?: string
+  KeyId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

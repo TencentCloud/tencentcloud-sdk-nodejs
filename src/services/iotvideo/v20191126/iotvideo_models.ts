@@ -130,47 +130,51 @@ export interface RefundStorageServiceResponse {
   /**
    * 云存服务ID
    */
-  ServiceId?: string
+  ServiceId: string
 
   /**
    * 云存服务所在的区域
    */
-  StorageRegion?: string
+  StorageRegion: string
 
   /**
    * 设备TID
    */
-  Tid?: string
+  Tid: string
 
   /**
    * 视频流通道号。(对于存在多路视频流的设备，如NVR设备，与设备实际视频流通道号对应)
    */
-  ChnNum?: number
+  ChnNum: number
 
   /**
    * 终端用户在IoT Video平台的注册ID
    */
-  AccessId?: string
+  AccessId: string
 
   /**
    * 服务开始时间
    */
-  StartTime?: number
+  StartTime: number
 
   /**
    * 服务失效时间
    */
-  EndTime?: number
+  EndTime: number
 
   /**
-   * 服务状态
-   */
-  Status?: number
+      * 服务状态
+1：正常使用中
+2：待续费。设备云存服务已到期，但是历史云存数据未过期。续费后仍可查看这些历史数据。
+3：已过期。查询不到设备保存在云端的数据。
+4：等待服务生效。
+      */
+  Status: number
 
   /**
    * 有效云存定单列表
    */
-  Data?: Array<StorageOrder>
+  Data: Array<StorageOrder>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -462,47 +466,51 @@ export interface DescribeStorageServiceResponse {
   /**
    * 云存服务ID
    */
-  ServiceId?: string
+  ServiceId: string
 
   /**
    * 云存服务所在的区域
    */
-  StorageRegion?: string
+  StorageRegion: string
 
   /**
    * 设备TID
    */
-  Tid?: string
+  Tid: string
 
   /**
    * 视频流通道号。(对于存在多路视频流的设备，如NVR设备，与设备实际视频流通道号对应)
    */
-  ChnNum?: number
+  ChnNum: number
 
   /**
    * 终端用户在IoT Video平台的注册ID
    */
-  AccessId?: string
+  AccessId: string
 
   /**
    * 服务开始时间
    */
-  StartTime?: number
+  StartTime: number
 
   /**
    * 服务失效时间
    */
-  EndTime?: number
+  EndTime: number
 
   /**
-   * 服务状态
-   */
-  Status?: number
+      * 服务状态
+1：正常使用中
+2：待续费。设备云存服务已到期，但是历史云存数据未过期。续费后仍可查看这些历史数据。
+3：已过期。查询不到设备保存在云端的数据。
+4：等待服务生效。
+      */
+  Status: number
 
   /**
    * 云存定单列表
    */
-  Data?: Array<StorageOrder>
+  Data: Array<StorageOrder>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1080,6 +1088,11 @@ export interface CreateBindingRequest {
    * 是否踢掉之前的主人，true：踢掉；false：不踢掉。当role为guest时，可以不填
    */
   ForceBind?: boolean
+
+  /**
+   * 设备昵称
+   */
+  Nick?: string
 }
 
 /**
@@ -1199,22 +1212,22 @@ export interface CreateUsrTokenResponse {
   /**
    * 终端用户在IoT Video上的唯一标识ID
    */
-  AccessId?: string
+  AccessId: string
 
   /**
    * IoT Video平台的AccessToken
    */
-  AccessToken?: string
+  AccessToken: string
 
   /**
    * Token的过期时间，单位秒(UTC时间)
    */
-  ExpireTime?: number
+  ExpireTime: number
 
   /**
    * 终端ID
    */
-  TerminalId?: string
+  TerminalId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1882,6 +1895,7 @@ export interface SetMessageQueueRequest {
 3.控制状态变更
 4.状态信息变更
 5.事件发布
+6.系统事件
       */
   MsgType: string
 
@@ -1908,52 +1922,56 @@ export interface CreateStorageServiceResponse {
   /**
    * 标志是否为续订
    */
-  IsRenew?: boolean
+  IsRenew: boolean
 
   /**
    * 云存服务ID
    */
-  ServiceId?: string
+  ServiceId: string
 
   /**
    * 云存服务所在的区域
    */
-  StorageRegion?: string
+  StorageRegion: string
 
   /**
    * 设备TID
    */
-  Tid?: string
+  Tid: string
 
   /**
    * 视频流通道号。(对于存在多路视频流的设备，如NVR设备，与设备实际视频流通道号对应)
    */
-  ChnNum?: number
+  ChnNum: number
 
   /**
    * 终端用户在IoT Video平台的注册ID
    */
-  AccessId?: string
+  AccessId: string
 
   /**
    * 服务开始时间
    */
-  StartTime?: number
+  StartTime: number
 
   /**
    * 服务失效时间
    */
-  EndTime?: number
+  EndTime: number
 
   /**
-   * 服务状态
-   */
-  Status?: number
+      * 服务状态
+1：正常使用中
+2：待续费。设备云存服务已到期，但是历史云存数据未过期。续费后仍可查看这些历史数据。
+3：已过期。查询不到设备保存在云端的数据。
+4：等待服务生效。
+      */
+  Status: number
 
   /**
    * 新增的云存定单列表
    */
-  Data?: Array<StorageOrder>
+  Data: Array<StorageOrder>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2072,52 +2090,56 @@ export interface DeliverStorageServiceResponse {
   /**
    * 被转出的云存服务ID
    */
-  SrcServiceId?: string
+  SrcServiceId: string
 
   /**
    * 被转入的云存服务ID
    */
-  ServiceId?: string
+  ServiceId: string
 
   /**
    * 云存服务所在的区域
    */
-  StorageRegion?: string
+  StorageRegion: string
 
   /**
    * 设备TID
    */
-  Tid?: string
+  Tid: string
 
   /**
    * 视频流通道号。(对于存在多路视频流的设备，如NVR设备，与设备实际视频流通道号对应)
    */
-  ChnNum?: number
+  ChnNum: number
 
   /**
    * 终端用户在IoT Video平台的注册ID
    */
-  AccessId?: string
+  AccessId: string
 
   /**
    * 服务开始时间
    */
-  StartTime?: number
+  StartTime: number
 
   /**
    * 服务失效时间
    */
-  EndTime?: number
+  EndTime: number
 
   /**
-   * 服务状态
-   */
-  Status?: number
+      * 服务状态
+1：正常使用中
+2：待续费。设备云存服务已到期，但是历史云存数据未过期。续费后仍可查看这些历史数据。
+3：已过期。查询不到设备保存在云端的数据。
+4：等待服务生效。
+      */
+  Status: number
 
   /**
    * 新增的云存定单列表
    */
-  Data?: Array<StorageOrder>
+  Data: Array<StorageOrder>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2208,6 +2230,11 @@ export interface CreateUsrTokenRequest {
    * Token的TTL(time to alive)分钟数
    */
   TtlMinutes: number
+
+  /**
+   * 旧的AccessToken。续期Token时，此参数为必须。
+   */
+  OldAccessToken?: string
 }
 
 /**
@@ -2483,8 +2510,14 @@ export interface StorageOrder {
   PkgId: string
 
   /**
-   * 定单服务状态
-   */
+      * 定单服务状态
+1;订单正在使用。
+2:订单未开始。
+3:订单已经使用过，现在暂时未开始使用(该订单从其他服务转移而来)。
+4:订单已过期。
+5:订单已被退订。
+6:定单已被转移到其他云存服务。
+      */
   Status: number
 
   /**
@@ -2674,7 +2707,7 @@ export interface CreateBindingResponse {
   /**
    * 访问设备的AccessToken
    */
-  AccessToken?: string
+  AccessToken: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

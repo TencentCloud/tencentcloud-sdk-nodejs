@@ -28,6 +28,16 @@ it("iotexplorer.v20190423.GetTopicRuleList", async function () {
     }
 })
 
+it("iotexplorer.v20190423.GetCOSURL", async function () {
+    try {
+       const data = await client.GetCOSURL({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.ModifyStudioProduct", async function () {
     try {
        const data = await client.ModifyStudioProduct({})

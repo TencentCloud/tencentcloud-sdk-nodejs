@@ -373,6 +373,57 @@ export interface AudioTrackItem {
 }
 
 /**
+ * 云转推项目信息，包含输入源、输出源、当前转推开始时间等信息。
+ */
+export interface StreamConnectProjectInfo {
+  /**
+      * 转推项目状态，取值有：
+<li>Working ：转推中；</li>
+<li>Idle ：空闲中。</li>
+      */
+  Status: string
+
+  /**
+      * 当前转推输入源，取值有：
+<li>Main ：主输入源；</li>
+<li>Backup ：备输入源。</li>
+      */
+  CurrentInputEndpoint: string
+
+  /**
+   * 当前转推开始时间， 采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。仅 Status 取值 Working 时有效。
+   */
+  CurrentStartTime: string
+
+  /**
+   * 当前转推计划结束时间， 采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。仅 Status 取值 Working 时有效。
+   */
+  CurrentStopTime: string
+
+  /**
+   * 上一次转推结束时间， 采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。仅 Status 取值 Idle 时有效。
+   */
+  LastStopTime: string
+
+  /**
+      * 云转推主输入源。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MainInput: StreamInputInfo
+
+  /**
+      * 云转推备输入源。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BackupInput: StreamInputInfo
+
+  /**
+   * 云转推输出源。
+   */
+  OutputSet: Array<StreamConnectOutputInfo>
+}
+
+/**
  * 整型范围
  */
 export interface IntegerRange {
@@ -528,23 +579,45 @@ export interface RevokeResourceAuthorizationResponse {
 }
 
 /**
- * DescribeTasks返回参数结构体
+ * HandleStreamConnectProject请求参数结构体
  */
-export interface DescribeTasksResponse {
+export interface HandleStreamConnectProjectRequest {
   /**
-   * 符合搜索条件的记录总数。
+   * 平台名称，指定访问的平台。
    */
-  TotalCount?: number
+  Platform: string
 
   /**
-   * 任务基础信息列表。
+   * 云转推项目Id 。
    */
-  TaskBaseInfoSet?: Array<TaskBaseInfo>
+  ProjectId: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 请参考 [操作类型](#Operation)
    */
-  RequestId?: string
+  Operation: string
+
+  /**
+   * 转推输入源操作参数。具体操作方式详见 [操作类型](#Operation) 及下文示例。
+   */
+  InputInfo?: StreamInputInfo
+
+  /**
+      * 主备输入源标识，取值有：
+<li> Main ：主源；</li>
+<li> Backup ：备源。</li>
+      */
+  InputEndpoint?: string
+
+  /**
+   * 转推输出源操作参数。具体操作方式详见 [操作类型](#Operation) 及下文示例。
+   */
+  OutputInfo?: StreamConnectOutput
+
+  /**
+   * 云转推当前预计结束时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。具体操作方式详见 [操作类型](#Operation) 及下文示例。
+   */
+  CurrentStopTime?: string
 }
 
 /**
@@ -567,8 +640,7 @@ export interface ProjectInfo {
   AspectRatio: string
 
   /**
-      * 项目类别，取值：
-项目类别，取值有：
+      * 项目类别，取值有：
 <li>VIDEO_EDIT：视频编辑。</li>
 <li>SWITCHER：导播台。</li>
 <li>VIDEO_SEGMENTATION：视频拆条。</li>
@@ -586,6 +658,12 @@ export interface ProjectInfo {
    * 项目封面图片地址。
    */
   CoverUrl: string
+
+  /**
+      * 云转推项目信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StreamConnectProjectInfo: StreamConnectProjectInfo
 
   /**
    * 项目创建时间，格式按照 ISO 8601 标准表示。
@@ -1024,16 +1102,6 @@ export interface CreateProjectRequest {
   Platform: string
 
   /**
-      * 项目类别，取值有：
-<li>VIDEO_EDIT：视频编辑。</li>
-<li>SWITCHER：导播台。</li>
-<li>VIDEO_SEGMENTATION：视频拆条。</li>
-<li>STREAM_CONNECT：云转推。</li>
-<li>RECORD_REPLAY：录制回放。</li>
-      */
-  Category: string
-
-  /**
    * 项目名称，不可超过30个字符。
    */
   Name: string
@@ -1042,6 +1110,16 @@ export interface CreateProjectRequest {
    * 项目归属者。
    */
   Owner: Entity
+
+  /**
+      * 项目类别，取值有：
+<li>VIDEO_EDIT：视频编辑。</li>
+<li>SWITCHER：导播台。</li>
+<li>VIDEO_SEGMENTATION：视频拆条。</li>
+<li>STREAM_CONNECT：云转推。</li>
+<li>RECORD_REPLAY：录制回放。</li>
+      */
+  Category: string
 
   /**
       * 画布宽高比。
@@ -1267,6 +1345,25 @@ export interface DescribeLoginStatusRequest {
 }
 
 /**
+ * 轨道信息
+ */
+export interface MediaTrack {
+  /**
+      * 轨道类型，取值有：
+<ul>
+<li>Video ：视频轨道。视频轨道由以下 Item 组成：<ul><li>VideoTrackItem</li><li>EmptyTrackItem</li><li>MediaTransitionItem</li></ul> </li>
+<li>Audio ：音频轨道。音频轨道由以下 Item 组成：<ul><li>AudioTrackItem</li><li>EmptyTrackItem</li></ul> </li>
+</ul>
+      */
+  Type: string
+
+  /**
+   * 轨道上的媒体片段列表。
+   */
+  TrackItems: Array<MediaTrackItem>
+}
+
+/**
  * DeleteLoginStatus返回参数结构体
  */
 export interface DeleteLoginStatusResponse {
@@ -1421,6 +1518,24 @@ export interface SearchMaterialResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 云转推输出源信息，包含输出源和输出源转推状态。
+ */
+export interface StreamConnectOutputInfo {
+  /**
+      * 输出源。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StreamConnectOutput: StreamConnectOutput
+
+  /**
+      * 输出流状态：
+<li>On ：开；</li>
+<li>Off ：关 。</li>
+      */
+  PushSwitch: string
 }
 
 /**
@@ -1671,6 +1786,16 @@ export interface DescribeMaterialsResponse {
    */
   MaterialInfoSet?: Array<MaterialInfo>
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * HandleStreamConnectProject返回参数结构体
+ */
+export interface HandleStreamConnectProjectResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2662,6 +2787,21 @@ export interface GenerateVideoSegmentationSchemeByAiRequest {
 }
 
 /**
+ * 直播剪辑项目输入参数。
+ */
+export interface LiveStreamClipProjectInput {
+  /**
+   * 直播流播放地址，目前仅支持 HLS 和 FLV 格式。
+   */
+  Url: string
+
+  /**
+   * 直播流录制时长，单位为秒，最大值为 7200。
+   */
+  StreamRecordDuration: number
+}
+
+/**
  * DeleteTeamMembers请求参数结构体
  */
 export interface DeleteTeamMembersRequest {
@@ -3189,22 +3329,23 @@ export interface DescribeTaskDetailRequest {
 }
 
 /**
- * 轨道信息
+ * DescribeTasks返回参数结构体
  */
-export interface MediaTrack {
+export interface DescribeTasksResponse {
   /**
-      * 轨道类型，取值有：
-<ul>
-<li>Video ：视频轨道。视频轨道由以下 Item 组成：<ul><li>VideoTrackItem</li><li>EmptyTrackItem</li><li>MediaTransitionItem</li></ul> </li>
-<li>Audio ：音频轨道。音频轨道由以下 Item 组成：<ul><li>AudioTrackItem</li><li>EmptyTrackItem</li></ul> </li>
-</ul>
-      */
-  Type: string
+   * 符合搜索条件的记录总数。
+   */
+  TotalCount?: number
 
   /**
-   * 轨道上的媒体片段列表。
+   * 任务基础信息列表。
    */
-  TrackItems: Array<MediaTrackItem>
+  TaskBaseInfoSet?: Array<TaskBaseInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3439,18 +3580,42 @@ export interface DeleteClassResponse {
 }
 
 /**
- * 直播剪辑项目输入参数。
+ * GrantResourceAuthorization请求参数结构体
  */
-export interface LiveStreamClipProjectInput {
+export interface GrantResourceAuthorizationRequest {
   /**
-   * 直播流播放地址，目前仅支持 HLS 和 FLV 格式。
+   * 平台名称，指定访问的平台。
    */
-  Url: string
+  Platform: string
 
   /**
-   * 直播流录制时长，单位为秒，最大值为 7200。
+   * 资源归属者，个人或者团队。
    */
-  StreamRecordDuration: number
+  Owner: Entity
+
+  /**
+   * 被授权资源。
+   */
+  Resources: Array<Resource>
+
+  /**
+   * 被授权目标，个人或者团队。
+   */
+  Authorizees: Array<Entity>
+
+  /**
+      * 详细授权值。 取值有：
+<li>R：可读，可以浏览媒体，但不能使用该媒体文件（将其添加到 Project），或复制到自己的媒资库中</li>
+<li>X：可用，可以使用该素材（将其添加到 Project），但不能将其复制到自己的媒资库中，意味着被授权者无法将该资源进一步扩散给其他个人或团队。</li>
+<li>C：可复制，既可以使用该素材（将其添加到 Project），也可以将其复制到自己的媒资库中。</li>
+<li>W：可修改、删除媒资。</li>
+      */
+  Permissions: Array<string>
+
+  /**
+   * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
+   */
+  Operator?: string
 }
 
 /**
@@ -3509,45 +3674,6 @@ export interface ExportVideoByEditorTrackDataResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * GrantResourceAuthorization请求参数结构体
- */
-export interface GrantResourceAuthorizationRequest {
-  /**
-   * 平台名称，指定访问的平台。
-   */
-  Platform: string
-
-  /**
-   * 资源归属者，个人或者团队。
-   */
-  Owner: Entity
-
-  /**
-   * 被授权资源。
-   */
-  Resources: Array<Resource>
-
-  /**
-   * 被授权目标，个人或者团队。
-   */
-  Authorizees: Array<Entity>
-
-  /**
-      * 详细授权值。 取值有：
-<li>R：可读，可以浏览媒体，但不能使用该媒体文件（将其添加到 Project），或复制到自己的媒资库中</li>
-<li>X：可用，可以使用该素材（将其添加到 Project），但不能将其复制到自己的媒资库中，意味着被授权者无法将该资源进一步扩散给其他个人或团队。</li>
-<li>C：可复制，既可以使用该素材（将其添加到 Project），也可以将其复制到自己的媒资库中。</li>
-<li>W：可修改、删除媒资。</li>
-      */
-  Permissions: Array<string>
-
-  /**
-   * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
-   */
-  Operator?: string
 }
 
 /**

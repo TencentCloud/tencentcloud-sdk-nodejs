@@ -1616,7 +1616,7 @@ export interface DeleteNetworkInterfaceRequest {
       */
     NetworkInterfaceId: string;
     /**
-      * ECM 地域
+      * ECM 地域，形如ap-xian-ecm。
       */
     EcmRegion: string;
 }

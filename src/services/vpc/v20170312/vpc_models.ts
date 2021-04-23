@@ -3052,12 +3052,12 @@ export interface DescribeVpcsResponse {
   /**
    * 符合条件的对象数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * VPC对象。
    */
-  VpcSet?: Array<Vpc>
+  VpcSet: Array<Vpc>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

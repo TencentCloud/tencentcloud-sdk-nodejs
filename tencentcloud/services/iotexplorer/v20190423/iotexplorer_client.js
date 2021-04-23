@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetTopicRuleList", req, cb);
     }
     /**
+     * 本接口（GetCOSURL）用于获取固件存储在COS的URL
+     */
+    async GetCOSURL(req, cb) {
+        return this.request("GetCOSURL", req, cb);
+    }
+    /**
      * 提供修改产品的名称和描述等信息的能力，对于已发布产品不允许进行修改。
      */
     async ModifyStudioProduct(req, cb) {

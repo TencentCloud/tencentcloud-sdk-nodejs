@@ -108,21 +108,25 @@ export interface Service {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Tags: Array<Tag>;
+    /**
+      * 独享实例
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceId: string;
+    /**
+      * 集群类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SetType: string;
 }
 /**
- * 服务发布版本
+ * DeleteAPIDoc请求参数结构体
  */
-export interface ServiceReleaseVersion {
+export interface DeleteAPIDocRequest {
     /**
-      * 发布版本总数量。
-注意：此字段可能返回 null，表示取不到有效值。
+      * API文档ID
       */
-    TotalCount: number;
-    /**
-      * 发布版本列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    VersionList: Array<ServiceReleaseHistoryInfo>;
+    ApiDocId: string;
 }
 /**
  * api绑定使用计划列表
@@ -138,6 +142,45 @@ export interface ApiUsagePlanSet {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ApiUsagePlanList: Array<ApiUsagePlan>;
+}
+/**
+ * DemoteServiceUsagePlan请求参数结构体
+ */
+export interface DemoteServiceUsagePlanRequest {
+    /**
+      * 使用计划ID。
+      */
+    UsagePlanId: string;
+    /**
+      * 待降级的服务唯一 ID。
+      */
+    ServiceId: string;
+    /**
+      * 环境名称。
+      */
+    Environment: string;
+}
+/**
+ * DescribeAPIDocDetail请求参数结构体
+ */
+export interface DescribeAPIDocDetailRequest {
+    /**
+      * API文档ID
+      */
+    ApiDocId: string;
+}
+/**
+ * ModifyAPIDoc返回参数结构体
+ */
+export interface ModifyAPIDocResponse {
+    /**
+      * API文档基本信息
+      */
+    Result: APIDoc;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeUsagePlan请求参数结构体
@@ -231,6 +274,23 @@ export interface ModifySubDomainRequest {
     IsForcedHttps?: boolean;
 }
 /**
+ * DescribeServiceUsagePlan请求参数结构体
+ */
+export interface DescribeServiceUsagePlanRequest {
+    /**
+      * 待查询的服务唯一 ID。
+      */
+    ServiceId: string;
+    /**
+      * 返回数量，默认为20，最大值为100。
+      */
+    Limit?: number;
+    /**
+      * 偏移量，默认为0。
+      */
+    Offset?: number;
+}
+/**
  * DescribeServiceEnvironmentList返回参数结构体
  */
 export interface DescribeServiceEnvironmentListResponse {
@@ -278,23 +338,24 @@ export interface ServiceEnvironmentStrategy {
       * 限流值。
       */
     Strategy: number;
+    /**
+      * 最大限流值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxStrategy: number;
 }
 /**
- * DemoteServiceUsagePlan请求参数结构体
+ * DescribeApi返回参数结构体
  */
-export interface DemoteServiceUsagePlanRequest {
+export interface DescribeApiResponse {
     /**
-      * 使用计划ID。
+      * API 详情。
       */
-    UsagePlanId: string;
+    Result?: ApiInfo;
     /**
-      * 待降级的服务唯一 ID。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    ServiceId: string;
-    /**
-      * 环境名称。
-      */
-    Environment: string;
+    RequestId?: string;
 }
 /**
  * tsf serverless入参
@@ -524,6 +585,31 @@ export interface DeleteIPStrategyRequest {
     StrategyId: string;
 }
 /**
+ * ModifyAPIDoc请求参数结构体
+ */
+export interface ModifyAPIDocRequest {
+    /**
+      * API文档ID
+      */
+    ApiDocId: string;
+    /**
+      * API文档名称
+      */
+    ApiDocName?: string;
+    /**
+      * 服务名称
+      */
+    ServiceId?: string;
+    /**
+      * 环境名称
+      */
+    Environment?: string;
+    /**
+      * 生成文档的API列表
+      */
+    ApiIds?: Array<string>;
+}
+/**
  * 自定义服务域名展示
  */
 export interface DomainSets {
@@ -640,94 +726,109 @@ export interface DescribeServiceResponse {
     /**
       * 服务唯一ID。
       */
-    ServiceId?: string;
+    ServiceId: string;
     /**
       * 服务 环境列表。
       */
-    AvailableEnvironments?: Array<string>;
+    AvailableEnvironments: Array<string>;
     /**
       * 服务名称。
       */
-    ServiceName?: string;
+    ServiceName: string;
     /**
       * 服务描述。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ServiceDesc?: string;
+    ServiceDesc: string;
     /**
       * 服务支持协议，可选值为http、https、http&https。
       */
-    Protocol?: string;
+    Protocol: string;
     /**
       * 服务创建时间。
       */
-    CreatedTime?: string;
+    CreatedTime: string;
     /**
       * 服务修改时间。
       */
-    ModifiedTime?: string;
+    ModifiedTime: string;
     /**
       * 独立集群名称。
       */
-    ExclusiveSetName?: string;
+    ExclusiveSetName: string;
     /**
       * 网络类型列表，INNER为内网访问，OUTER为外网访问。
       */
-    NetTypes?: Array<string>;
+    NetTypes: Array<string>;
     /**
       * 内网访问子域名。
       */
-    InternalSubDomain?: string;
+    InternalSubDomain: string;
     /**
       * 外网访问子域名。
       */
-    OuterSubDomain?: string;
+    OuterSubDomain: string;
     /**
       * 内网访问http服务端口号。
       */
-    InnerHttpPort?: number;
+    InnerHttpPort: number;
     /**
       * 内网访问https端口号。
       */
-    InnerHttpsPort?: number;
+    InnerHttpsPort: number;
     /**
       * API总数。
       */
-    ApiTotalCount?: number;
+    ApiTotalCount: number;
     /**
       * API列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ApiIdStatusSet?: Array<ApiIdStatus>;
+    ApiIdStatusSet: Array<ApiIdStatus>;
     /**
       * 使用计划总数量。
       */
-    UsagePlanTotalCount?: number;
+    UsagePlanTotalCount: number;
     /**
       * 使用计划数组。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    UsagePlanList?: Array<UsagePlan>;
+    UsagePlanList: Array<UsagePlan>;
     /**
       * IP版本。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    IpVersion?: string;
+    IpVersion: string;
     /**
       * 此服务的用户类型。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    UserType?: string;
+    UserType: string;
     /**
       * 预留字段。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    SetId?: number;
+    SetId: number;
     /**
       * 服务绑定的标签。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Tags?: Array<Tag>;
+    Tags: Array<Tag>;
+    /**
+      * 独享实例id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceId: string;
+    /**
+      * 独享实例name
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceName: string;
+    /**
+      * 集群类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SetType: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -804,18 +905,17 @@ export interface Tag {
     Value: string;
 }
 /**
- * DescribeServiceEnvironmentStrategy返回参数结构体
+ * DescribeIPStrategysStatus请求参数结构体
  */
-export interface DescribeServiceEnvironmentStrategyResponse {
+export interface DescribeIPStrategysStatusRequest {
     /**
-      * 限流策略列表。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 服务唯一ID。
       */
-    Result?: ServiceEnvironmentStrategyStatus;
+    ServiceId: string;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 过滤条件。支持StrategyName。
       */
-    RequestId?: string;
+    Filters?: Array<Filter>;
 }
 /**
  * 常量参数
@@ -854,17 +954,17 @@ export interface UsagePlansStatus {
     UsagePlanStatusSet: Array<UsagePlanStatusInfo>;
 }
 /**
- * ModifySubDomain返回参数结构体
+ * API文档列表
  */
-export interface ModifySubDomainResponse {
+export interface APIDocs {
     /**
-      * 修改自定义域名操作是否成功。
+      * API文档数量
       */
-    Result?: boolean;
+    TotalCount: number;
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * API文档基本信息
       */
-    RequestId?: string;
+    APIDocSet: Array<APIDoc>;
 }
 /**
  * 检索条件入参
@@ -1021,6 +1121,39 @@ export interface DeleteServiceSubDomainMappingRequest {
     Environment: string;
 }
 /**
+ * 策略绑定api列表
+ */
+export interface IPStrategyApi {
+    /**
+      * API 唯一 ID。
+      */
+    ApiId: string;
+    /**
+      * 用户自定义的 API 名称。
+      */
+    ApiName: string;
+    /**
+      * API 类型。取值为NORMAL（普通API）和TSF （微服务API）。
+      */
+    ApiType: string;
+    /**
+      * API 的路径。如 /path。
+      */
+    Path: string;
+    /**
+      * API 的请求方法。如 GET。
+      */
+    Method: string;
+    /**
+      * API 已经绑定的其他策略唯一ID。
+      */
+    OtherIPStrategyId: string;
+    /**
+      * API 已经绑定的环境。
+      */
+    OtherEnvironmentName: string;
+}
+/**
  * DescribeIPStrategy返回参数结构体
  */
 export interface DescribeIPStrategyResponse {
@@ -1033,6 +1166,19 @@ export interface DescribeIPStrategyResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * api文档下载
+ */
+export interface DocumentSDK {
+    /**
+      * 生成的 document 会存放到 COS 中，此出参返回产生文件的下载链接。
+      */
+    DocumentURL: string;
+    /**
+      * 生成的 SDK 会存放到 COS 中，此出参返回产生 SDK 文件的下载链接。
+      */
+    SdkURL: string;
 }
 /**
  * DeleteApi返回参数结构体
@@ -1056,7 +1202,7 @@ export interface CreateApiResponse {
       * api信息
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: CreateApiRsp;
+    Result: CreateApiRsp;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1212,21 +1358,24 @@ export interface ReqParameter {
     Desc: string;
 }
 /**
- * DescribeServicesStatus请求参数结构体
+ * Base64编码的header触发规则
  */
-export interface DescribeServicesStatusRequest {
+export interface Base64EncodedTriggerRule {
     /**
-      * 返回数量，默认为 20，最大值为 100。
+      * 进行编码触发的header，可选值 "Accept"和"Content_Type" 对应实际数据流请求header中的Accept和 Content-Type。
       */
-    Limit?: number;
+    Name: string;
     /**
-      * 偏移量，默认为 0。
+      * 进行编码触发的header的可选值数组, 数组元素的字符串最大长度为40，元素可以包括数字，英文字母以及特殊字符，特殊字符的可选值为： `.`    `+`    `*`   `-`   `/`  `_`
+
+例如 [
+    "application/x-vpeg005",
+    "application/xhtml+xml",
+    "application/vnd.ms-project",
+    "application/vnd.rn-rn_music_package"
+] 等都是合法的。
       */
-    Offset?: number;
-    /**
-      * 过滤条件。支持ServiceId、ServiceName、NotUsagePlanId、Environment、IpVersion。
-      */
-    Filters?: Array<Filter>;
+    Value: Array<string>;
 }
 /**
  * 前端路径配置
@@ -1371,29 +1520,50 @@ req_id：请求id。
     RequestId?: string;
 }
 /**
+ * UnBindIPStrategy请求参数结构体
+ */
+export interface UnBindIPStrategyRequest {
+    /**
+      * 待解绑的服务唯一ID。
+      */
+    ServiceId: string;
+    /**
+      * 待解绑的IP策略唯一ID。
+      */
+    StrategyId: string;
+    /**
+      * 待解绑的环境。
+      */
+    EnvironmentName: string;
+    /**
+      * 待解绑的 API 列表。
+      */
+    UnBindApiIds: Array<string>;
+}
+/**
  * 错误码入参
  */
 export interface ResponseErrorCodeReq {
     /**
       * 自定义响应配置错误码。
       */
-    Code: number;
+    Code?: number;
     /**
       * 自定义响应配置错误信息。
       */
-    Msg: string;
+    Msg?: string;
     /**
       * 自定义响应配置错误码备注。
       */
-    Desc: string;
+    Desc?: string;
     /**
       * 自定义错误码转换。
       */
-    ConvertedCode: number;
+    ConvertedCode?: number;
     /**
       * 是否需要开启错误码转换。
       */
-    NeedConvert: boolean;
+    NeedConvert?: boolean;
 }
 /**
  * CreateService请求参数结构体
@@ -1435,19 +1605,24 @@ export interface CreateServiceRequest {
       * 标签。
       */
     Tags?: Array<Tag>;
+    /**
+      * 独享实例id
+      */
+    InstanceId?: string;
 }
 /**
- * DescribeIPStrategysStatus请求参数结构体
+ * DescribeServiceEnvironmentStrategy返回参数结构体
  */
-export interface DescribeIPStrategysStatusRequest {
+export interface DescribeServiceEnvironmentStrategyResponse {
     /**
-      * 服务唯一ID。
+      * 限流策略列表。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    ServiceId: string;
+    Result?: ServiceEnvironmentStrategyStatus;
     /**
-      * 过滤条件。支持StrategyName。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Filters?: Array<Filter>;
+    RequestId?: string;
 }
 /**
  * DemoteServiceUsagePlan返回参数结构体
@@ -1501,6 +1676,19 @@ export interface UnReleaseServiceResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Result?: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateAPIDoc返回参数结构体
+ */
+export interface CreateAPIDocResponse {
+    /**
+      * API文档基本信息
+      */
+    Result: APIDoc;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1572,32 +1760,63 @@ export interface UpdateServiceRequest {
     UpdateDesc?: string;
 }
 /**
- * 发布服务返回
+ * tsf类型入参
  */
-export interface ReleaseService {
+export interface MicroServiceReq {
     /**
-      * 发布时的备注信息填写。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 微服务集群。
       */
-    ReleaseDesc: string;
+    ClusterId: string;
     /**
-      * 发布的版本id。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 微服务命名空间。
       */
-    ReleaseVersion: string;
+    NamespaceId: string;
+    /**
+      * 微服务名称。
+      */
+    MicroServiceName: string;
 }
 /**
- * DescribeServiceSubDomainMappings返回参数结构体
+ * ModifySubDomain返回参数结构体
  */
-export interface DescribeServiceSubDomainMappingsResponse {
+export interface ModifySubDomainResponse {
     /**
-      * 自定义路径映射列表。
+      * 修改自定义域名操作是否成功。
       */
-    Result?: ServiceSubDomainMappings;
+    Result?: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribePlugins请求参数结构体
+ */
+export interface DescribePluginsRequest {
+    /**
+      * 要查询的插件列表。
+      */
+    PluginIds?: Array<string>;
+    /**
+      * 要查询的插件名称。
+      */
+    PluginName?: string;
+    /**
+      * 要查询的插件类型。
+      */
+    PluginType?: string;
+    /**
+      * 返回数量，默认为 20，最大值为 100。
+      */
+    Limit?: number;
+    /**
+      * 偏移量，默认为 0。
+      */
+    Offset?: number;
+    /**
+      * 过滤条件。预留字段，目前不支持过滤。
+      */
+    Filters?: Array<Filter>;
 }
 /**
  * BindSecretIds请求参数结构体
@@ -1769,7 +1988,7 @@ export interface ModifyApiRequest {
       */
     ApiType?: string;
     /**
-      * API 鉴权类型。支持SECRET、NONE、OAUTH。默认为NONE。
+      * API 鉴权类型。支持SECRET、NONE、OAUTH、APP。默认为NONE。
       */
     AuthType?: string;
     /**
@@ -2121,7 +2340,7 @@ export interface CreateApiRequest {
       */
     ApiType?: string;
     /**
-      * API 鉴权类型。支持SECRET（密钥对鉴权）、NONE（免鉴权）、OAUTH。默认为NONE。
+      * API 鉴权类型。支持SECRET（密钥对鉴权）、NONE（免鉴权）、OAUTH、APP（应用认证）。默认为NONE。
       */
     AuthType?: string;
     /**
@@ -2361,6 +2580,19 @@ export interface Environment {
     VersionName: string;
 }
 /**
+ * DescribeAPIDocs请求参数结构体
+ */
+export interface DescribeAPIDocsRequest {
+    /**
+      * 返回数量，默认为 20，最大值为 100。
+      */
+    Limit?: number;
+    /**
+      * 偏移量，默认为 0。
+      */
+    Offset?: number;
+}
+/**
  * 服务发布列表详情
  */
 export interface ServiceReleaseHistoryInfo {
@@ -2407,25 +2639,65 @@ export interface ReleaseServiceResponse {
     RequestId?: string;
 }
 /**
- * UnBindIPStrategy请求参数结构体
+ * API文档详细信息
  */
-export interface UnBindIPStrategyRequest {
+export interface APIDocInfo {
     /**
-      * 待解绑的服务唯一ID。
+      * API文档ID
+      */
+    ApiDocId: string;
+    /**
+      * API文档名称
+      */
+    ApiDocName: string;
+    /**
+      * API文档构建状态
+      */
+    ApiDocStatus: string;
+    /**
+      * API文档API数量
+      */
+    ApiCount: number;
+    /**
+      * API文档查看次数
+      */
+    ViewCount: number;
+    /**
+      * API文档发布次数
+      */
+    ReleaseCount: number;
+    /**
+      * API文档访问URI
+      */
+    ApiDocUri: string;
+    /**
+      * API文档分享密码
+      */
+    SharePassword: string;
+    /**
+      * API文档更新时间
+      */
+    UpdatedTime: string;
+    /**
+      * 服务ID
       */
     ServiceId: string;
     /**
-      * 待解绑的IP策略唯一ID。
+      * 环境信息
       */
-    StrategyId: string;
+    Environment: string;
     /**
-      * 待解绑的环境。
+      * 生成API文档的API ID
       */
-    EnvironmentName: string;
+    ApiIds: Array<string>;
     /**
-      * 待解绑的 API 列表。
+      * 服务名称
       */
-    UnBindApiIds: Array<string>;
+    ServiceName: string;
+    /**
+      * 生成API文档的API名称
+      */
+    ApiNames: Array<string>;
 }
 /**
  * 插件列表详情。
@@ -2568,1461 +2840,6 @@ export interface DescribeApiKeysStatusRequest {
       * 过滤条件。支持AccessKeyId、AccessKeySecret、SecretName、NotUsagePlanId、Status、KeyWord（ 可以匹配name或者path）。
       */
     Filters?: Array<Filter>;
-}
-/**
- * DescribeApi返回参数结构体
- */
-export interface DescribeApiResponse {
-    /**
-      * API 详情。
-      */
-    Result?: ApiInfo;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * BindSecretIds返回参数结构体
- */
-export interface BindSecretIdsResponse {
-    /**
-      * 绑定操作是否成功。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Result?: boolean;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * 创建api返回
- */
-export interface CreateApiRsp {
-    /**
-      * api id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ApiId: string;
-    /**
-      * path
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Path: string;
-    /**
-      * method
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Method: string;
-    /**
-      * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CreatedTime: string;
-}
-/**
- * 使用计划绑定环境信息
- */
-export interface UsagePlanBindEnvironment {
-    /**
-      * 环境名。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    EnvironmentName: string;
-    /**
-      * 服务唯一ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ServiceId: string;
-}
-/**
- * DeleteApi请求参数结构体
- */
-export interface DeleteApiRequest {
-    /**
-      * API 所在的服务唯一 ID。
-      */
-    ServiceId: string;
-    /**
-      * API 接口唯一 ID。
-      */
-    ApiId: string;
-}
-/**
- * DescribeServiceSubDomainMappings请求参数结构体
- */
-export interface DescribeServiceSubDomainMappingsRequest {
-    /**
-      * 服务唯一 ID。
-      */
-    ServiceId: string;
-    /**
-      * 服务绑定的自定义域名。
-      */
-    SubDomain: string;
-}
-/**
- * DescribeServiceEnvironmentList请求参数结构体
- */
-export interface DescribeServiceEnvironmentListRequest {
-    /**
-      * 待查询的服务唯一 ID。
-      */
-    ServiceId: string;
-    /**
-      * 返回数量，默认为 20，最大值为 100。
-      */
-    Limit?: number;
-    /**
-      * 偏移量，默认为 0。
-      */
-    Offset?: number;
-}
-/**
- * 服务自定义域名路径映射
- */
-export interface ServiceSubDomainMappings {
-    /**
-      * 是否使用默认路径映射，为 True 表示使用默认路径映射；为 False 的话，表示使用自定义路径映射，此时 PathMappingSet 不为空。
-      */
-    IsDefaultMapping: boolean;
-    /**
-      * 自定义路径映射列表。
-      */
-    PathMappingSet: Array<PathMapping>;
-}
-/**
- * DescribeApiKey请求参数结构体
- */
-export interface DescribeApiKeyRequest {
-    /**
-      * API 密钥 ID。
-      */
-    AccessKeyId: string;
-}
-/**
- * DescribeUsagePlan返回参数结构体
- */
-export interface DescribeUsagePlanResponse {
-    /**
-      * 使用计划详情。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Result?: UsagePlanInfo;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * >描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
-> * 若存在多个`Filter`时，`Filter`间的关系为逻辑与（`AND`）关系。
-> * 若同一个`Filter`存在多个`Values`，同一`Filter`下`Values`间的关系为逻辑或（`OR`）关系。
->
-
- */
-export interface Filter {
-    /**
-      * 需要过滤的字段。
-      */
-    Name: string;
-    /**
-      * 字段的过滤值。
-      */
-    Values: Array<string>;
-}
-/**
- * 使用计划绑定密钥列表
- */
-export interface UsagePlanBindSecretStatus {
-    /**
-      * 使用计划绑定密钥的数量。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TotalCount: number;
-    /**
-      * 密钥详情列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AccessKeyList: Array<UsagePlanBindSecret>;
-}
-/**
- * DeleteServiceSubDomainMapping返回参数结构体
- */
-export interface DeleteServiceSubDomainMappingResponse {
-    /**
-      * 删除自定义域名的路径映射操作是否成功。
-      */
-    Result?: boolean;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribeServiceUsagePlan请求参数结构体
- */
-export interface DescribeServiceUsagePlanRequest {
-    /**
-      * 待查询的服务唯一 ID。
-      */
-    ServiceId: string;
-    /**
-      * 返回数量，默认为20，最大值为100。
-      */
-    Limit?: number;
-    /**
-      * 偏移量，默认为0。
-      */
-    Offset?: number;
-}
-/**
- * DescribeUsagePlansStatus请求参数结构体
- */
-export interface DescribeUsagePlansStatusRequest {
-    /**
-      * 返回数量，默认为 20，最大值为 100。
-      */
-    Limit?: number;
-    /**
-      * 偏移量，默认为 0。
-      */
-    Offset?: number;
-    /**
-      * 使用计划过滤条件。支持UsagePlanId、UsagePlanName、NotServiceId、NotApiId、Environment。
-      */
-    Filters?: Array<Filter>;
-}
-/**
- * 使用计划绑定环境详情。
- */
-export interface UsagePlanEnvironment {
-    /**
-      * 绑定的服务唯一 ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ServiceId: string;
-    /**
-      * API 的唯一ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ApiId: string;
-    /**
-      * API 的名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ApiName: string;
-    /**
-      * API 的路径。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Path: string;
-    /**
-      * API 的方法。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Method: string;
-    /**
-      * 已经绑定的环境名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Environment: string;
-    /**
-      * 已经使用的配额。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    InUseRequestNum: number;
-    /**
-      * 最大请求量。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MaxRequestNum: number;
-    /**
-      * 每秒最大请求次数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MaxRequestNumPreSec: number;
-    /**
-      * 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CreatedTime: string;
-    /**
-      * 最后修改时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ModifiedTime: string;
-    /**
-      * 服务名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ServiceName: string;
-}
-/**
- * ModifyIPStrategy请求参数结构体
- */
-export interface ModifyIPStrategyRequest {
-    /**
-      * 待修改的策略所属服务的唯一ID。
-      */
-    ServiceId: string;
-    /**
-      * 待修改的策略唯一ID。
-      */
-    StrategyId: string;
-    /**
-      * 待修改的策略详情。
-      */
-    StrategyData: string;
-}
-/**
- * UnBindSecretIds请求参数结构体
- */
-export interface UnBindSecretIdsRequest {
-    /**
-      * 待解绑的使用计划唯一 ID。
-      */
-    UsagePlanId: string;
-    /**
-      * 待解绑的密钥 ID 数组。
-      */
-    AccessKeyIds: Array<string>;
-}
-/**
- * api环境绑定策略
- */
-export interface ApiEnvironmentStrategy {
-    /**
-      * API唯一ID。
-      */
-    ApiId: string;
-    /**
-      * 用户自定义API名称。
-      */
-    ApiName: string;
-    /**
-      * API的路径。如/path。
-      */
-    Path: string;
-    /**
-      * API的方法。如GET。
-      */
-    Method: string;
-    /**
-      * 环境的限流信息。
-      */
-    EnvironmentStrategySet: Array<EnvironmentStrategy>;
-}
-/**
- * UnBindSecretIds返回参数结构体
- */
-export interface UnBindSecretIdsResponse {
-    /**
-      * 解绑操作是否成功。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Result?: boolean;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * api或service绑定使用计划详情
- */
-export interface ApiUsagePlan {
-    /**
-      * 服务唯一ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ServiceId: string;
-    /**
-      * API 唯一 ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ApiId: string;
-    /**
-      * API 名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ApiName: string;
-    /**
-      * API 路径。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Path: string;
-    /**
-      * API 方法。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Method: string;
-    /**
-      * 使用计划的唯一 ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UsagePlanId: string;
-    /**
-      * 使用计划的名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UsagePlanName: string;
-    /**
-      * 使用计划的描述。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UsagePlanDesc: string;
-    /**
-      * 使用计划绑定的服务环境。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Environment: string;
-    /**
-      * 已经使用的配额。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    InUseRequestNum: number;
-    /**
-      * 请求配额总量，-1表示没有限制。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MaxRequestNum: number;
-    /**
-      * 请求 QPS 上限，-1 表示没有限制。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MaxRequestNumPreSec: number;
-    /**
-      * 使用计划创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CreatedTime: string;
-    /**
-      * 使用计划最后修改时间。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ModifiedTime: string;
-    /**
-      * 服务名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ServiceName: string;
-}
-/**
- * 策略绑定api列表
- */
-export interface IPStrategyApi {
-    /**
-      * API 唯一 ID。
-      */
-    ApiId: string;
-    /**
-      * 用户自定义的 API 名称。
-      */
-    ApiName: string;
-    /**
-      * API 类型。取值为NORMAL（普通API）和TSF （微服务API）。
-      */
-    ApiType: string;
-    /**
-      * API 的路径。如 /path。
-      */
-    Path: string;
-    /**
-      * API 的请求方法。如 GET。
-      */
-    Method: string;
-    /**
-      * API 已经绑定的其他策略唯一ID。
-      */
-    OtherIPStrategyId: string;
-    /**
-      * API 已经绑定的环境。
-      */
-    OtherEnvironmentName: string;
-}
-/**
- * api文档下载
- */
-export interface DocumentSDK {
-    /**
-      * 生成的 document 会存放到 COS 中，此出参返回产生文件的下载链接。
-      */
-    DocumentURL: string;
-    /**
-      * 生成的 SDK 会存放到 COS 中，此出参返回产生 SDK 文件的下载链接。
-      */
-    SdkURL: string;
-}
-/**
- * DescribePlugins请求参数结构体
- */
-export interface DescribePluginsRequest {
-    /**
-      * 要查询的插件列表。
-      */
-    PluginIds?: Array<string>;
-    /**
-      * 要查询的插件名称。
-      */
-    PluginName?: string;
-    /**
-      * 要查询的插件类型。
-      */
-    PluginType?: string;
-    /**
-      * 返回数量，默认为 20，最大值为 100。
-      */
-    Limit?: number;
-    /**
-      * 偏移量，默认为 0。
-      */
-    Offset?: number;
-    /**
-      * 过滤条件。预留字段，目前不支持过滤。
-      */
-    Filters?: Array<Filter>;
-}
-/**
- * ModifyServiceEnvironmentStrategy请求参数结构体
- */
-export interface ModifyServiceEnvironmentStrategyRequest {
-    /**
-      * 服务的唯一ID。
-      */
-    ServiceId: string;
-    /**
-      * 限流值。
-      */
-    Strategy: number;
-    /**
-      * 环境列表。
-      */
-    EnvironmentNames: Array<string>;
-}
-/**
- * DescribeServiceSubDomains请求参数结构体
- */
-export interface DescribeServiceSubDomainsRequest {
-    /**
-      * 服务唯一 ID。
-      */
-    ServiceId: string;
-    /**
-      * 返回数量，默认为 20，最大值为 100。
-      */
-    Limit?: number;
-    /**
-      * 偏移量，默认为 0。
-      */
-    Offset?: number;
-}
-/**
- * GenerateApiDocument返回参数结构体
- */
-export interface GenerateApiDocumentResponse {
-    /**
-      * api文档&sdk链接。
-      */
-    Result?: DocumentSDK;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribeUsagePlanEnvironments返回参数结构体
- */
-export interface DescribeUsagePlanEnvironmentsResponse {
-    /**
-      * 使用计划绑定详情。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Result?: UsagePlanEnvironmentStatus;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribeServiceSubDomains返回参数结构体
- */
-export interface DescribeServiceSubDomainsResponse {
-    /**
-      * 查询服务自定义域名列表。
-      */
-    Result?: DomainSets;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * BindSubDomain请求参数结构体
- */
-export interface BindSubDomainRequest {
-    /**
-      * 服务唯一 ID。
-      */
-    ServiceId: string;
-    /**
-      * 待绑定的自定义的域名。
-      */
-    SubDomain: string;
-    /**
-      * 服务支持协议，可选值为http、https、http&https。
-      */
-    Protocol: string;
-    /**
-      * 网络类型，可选值为OUTER、INNER。
-      */
-    NetType: string;
-    /**
-      * 是否使用默认路径映射，默认为 true。为 false 时，表示自定义路径映射，此时 PathMappingSet 必填。
-      */
-    IsDefaultMapping: boolean;
-    /**
-      * 默认域名。
-      */
-    NetSubDomain: string;
-    /**
-      * 待绑定自定义域名的证书唯一 ID。针对Protocol 为https或http&https可以选择上传。
-      */
-    CertificateId?: string;
-    /**
-      * 自定义域名路径映射，最多输入三个Environment，并且只能分别取值“test”、 ”prepub“、”release“。
-      */
-    PathMappingSet?: Array<PathMapping>;
-    /**
-      * 是否将HTTP请求强制跳转 HTTPS，默认为false。参数为 true时，API网关会将所有使用该自定义域名的 HTTP 协议的请求重定向至 HTTPS 协议进行转发。
-      */
-    IsForcedHttps?: boolean;
-}
-/**
- * ip策略绑定api详情
- */
-export interface IPStrategyApiStatus {
-    /**
-      * 环境绑定API数量。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TotalCount: number;
-    /**
-      * 环境绑定API详情。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ApiIdStatusSet: Array<IPStrategyApi>;
-}
-/**
- * CreateIPStrategy返回参数结构体
- */
-export interface CreateIPStrategyResponse {
-    /**
-      * 新建的IP策略详情。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Result: IPStrategy;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * 插件绑定的API信息
- */
-export interface AttachedApiInfo {
-    /**
-      * API所在服务ID。
-      */
-    ServiceId: string;
-    /**
-      * API所在服务名称。
-      */
-    ServiceName: string;
-    /**
-      * API所在服务描述信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ServiceDesc: string;
-    /**
-      * API ID。
-      */
-    ApiId: string;
-    /**
-      * API名称。
-      */
-    ApiName: string;
-    /**
-      * API描述。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ApiDesc: string;
-    /**
-      * 插件绑定API的环境。
-      */
-    Environment: string;
-    /**
-      * 插件和API绑定时间。
-      */
-    AttachedTime: string;
-}
-/**
- * BindIPStrategy请求参数结构体
- */
-export interface BindIPStrategyRequest {
-    /**
-      * 待绑定的IP策略所属的服务唯一ID。
-      */
-    ServiceId: string;
-    /**
-      * 待绑定的IP策略唯一ID。
-      */
-    StrategyId: string;
-    /**
-      * IP策略待绑定的环境。
-      */
-    EnvironmentName: string;
-    /**
-      * IP策略待绑定的API列表。
-      */
-    BindApiIds: Array<string>;
-}
-/**
- * tsf类型入参
- */
-export interface MicroServiceReq {
-    /**
-      * 微服务集群。
-      */
-    ClusterId: string;
-    /**
-      * 微服务命名空间。
-      */
-    NamespaceId: string;
-    /**
-      * 微服务名称。
-      */
-    MicroServiceName: string;
-}
-/**
- * 用户自定义错误码
- */
-export interface ErrorCodes {
-    /**
-      * 自定义响应配置错误码。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Code?: number;
-    /**
-      * 自定义响应配置错误信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Msg?: string;
-    /**
-      * 自定义响应配置错误码备注。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Desc?: string;
-    /**
-      * 自定义错误码转换。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ConvertedCode?: number;
-    /**
-      * 是否需要开启错误码转换。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    NeedConvert?: boolean;
-}
-/**
- * 环境绑定策略列表
- */
-export interface ServiceEnvironmentStrategyStatus {
-    /**
-      * 限流策略数量。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TotalCount: number;
-    /**
-      * 限流策略列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    EnvironmentList: Array<ServiceEnvironmentStrategy>;
-}
-/**
- * DescribeApiEnvironmentStrategy返回参数结构体
- */
-export interface DescribeApiEnvironmentStrategyResponse {
-    /**
-      * api绑定策略详情
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Result?: ApiEnvironmentStrategyStataus;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * API绑定的微服务信息。
- */
-export interface MicroService {
-    /**
-      * 微服务集群ID。
-      */
-    ClusterId?: string;
-    /**
-      * 微服务命名空间ID。
-      */
-    NamespaceId?: string;
-    /**
-      * 微服务名称。
-      */
-    MicroServiceName?: string;
-}
-/**
- * API绑定策略列表
- */
-export interface ApiEnvironmentStrategyStataus {
-    /**
-      * API绑定的限流策略数量。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TotalCount: number;
-    /**
-      * API绑定的限流策略列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ApiEnvironmentStrategySet: Array<ApiEnvironmentStrategy>;
-}
-/**
- * DeleteIPStrategy返回参数结构体
- */
-export interface DeleteIPStrategyResponse {
-    /**
-      * 删除操作是否成功。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Result?: boolean;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * 密钥详情
- */
-export interface ApiKey {
-    /**
-      * 创建的 API 密钥 ID 。
-      */
-    AccessKeyId: string;
-    /**
-      * 创建的 API 密钥 Key。
-      */
-    AccessKeySecret: string;
-    /**
-      * 密钥类型，auto 或者 manual。
-      */
-    AccessKeyType: string;
-    /**
-      * 用户自定义密钥名称。
-      */
-    SecretName: string;
-    /**
-      * 最后一次修改时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
-      */
-    ModifiedTime: string;
-    /**
-      * 密钥状态。0表示禁用，1表示启用。
-      */
-    Status: number;
-    /**
-      * 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
-      */
-    CreatedTime: string;
-}
-/**
- * BindEnvironment请求参数结构体
- */
-export interface BindEnvironmentRequest {
-    /**
-      * 待绑定的使用计划唯一 ID 列表。
-      */
-    UsagePlanIds: Array<string>;
-    /**
-      * 绑定类型，取值为API、SERVICE，默认值为SERVICE。
-      */
-    BindType: string;
-    /**
-      * 待绑定的环境。
-      */
-    Environment: string;
-    /**
-      * 待绑定的服务唯一 ID。
-      */
-    ServiceId: string;
-    /**
-      * API唯一ID数组，当bindType=API时，需要传入此参数。
-      */
-    ApiIds?: Array<string>;
-}
-/**
- * DescribeIPStrategy请求参数结构体
- */
-export interface DescribeIPStrategyRequest {
-    /**
-      * 服务唯一ID。
-      */
-    ServiceId: string;
-    /**
-      * IP 策略唯一ID。
-      */
-    StrategyId: string;
-    /**
-      * 策略关联的环境。
-      */
-    EnvironmentName?: string;
-    /**
-      * 返回数量，默认为 20，最大值为 100。
-      */
-    Limit?: number;
-    /**
-      * 偏移量，默认为 0。
-      */
-    Offset?: number;
-    /**
-      * 过滤条件。预留字段，目前不支持过滤。
-      */
-    Filters?: Array<Filter>;
-}
-/**
- * DescribeUsagePlanEnvironments请求参数结构体
- */
-export interface DescribeUsagePlanEnvironmentsRequest {
-    /**
-      * 待查询的使用计划唯一 ID。
-      */
-    UsagePlanId: string;
-    /**
-      * 定类型，取值为 API、SERVICE，默认值为 SERVICE。
-      */
-    BindType: string;
-    /**
-      * 返回数量，默认为 20，最大值为 100。
-      */
-    Limit?: number;
-    /**
-      * 偏移量，默认为 0。
-      */
-    Offset?: number;
-}
-/**
- * CreateApiKey返回参数结构体
- */
-export interface CreateApiKeyResponse {
-    /**
-      * 新增的密钥详情。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Result?: ApiKey;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribeServiceReleaseVersion返回参数结构体
- */
-export interface DescribeServiceReleaseVersionResponse {
-    /**
-      * 服务发布版本列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Result?: ServiceReleaseVersion;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * 请求参数
- */
-export interface RequestParameter {
-    /**
-      * 请求参数名称
-      */
-    Name?: string;
-    /**
-      * 描述
-      */
-    Desc?: string;
-    /**
-      * 参数位置
-      */
-    Position?: string;
-    /**
-      * 参数类型
-      */
-    Type?: string;
-    /**
-      * 默认值
-      */
-    DefaultValue?: string;
-    /**
-      * 是否必须
-      */
-    Required?: boolean;
-}
-/**
- * 使用计划详情。
- */
-export interface UsagePlanInfo {
-    /**
-      * 使用计划唯一 ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UsagePlanId: string;
-    /**
-      * 使用计划名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UsagePlanName: string;
-    /**
-      * 使用计划描述。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UsagePlanDesc: string;
-    /**
-      * 初始化调用次数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    InitQuota: number;
-    /**
-      * 每秒请求限制数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MaxRequestNumPreSec: number;
-    /**
-      * 最大调用次数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MaxRequestNum: number;
-    /**
-      * 是否隐藏。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    IsHide: number;
-    /**
-      * 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CreatedTime: string;
-    /**
-      * 最后修改时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ModifiedTime: string;
-    /**
-      * 绑定密钥的数量。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    BindSecretIdTotalCount: number;
-    /**
-      * 绑定密钥的详情。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    BindSecretIds: Array<string>;
-    /**
-      * 绑定环境数量。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    BindEnvironmentTotalCount: number;
-    /**
-      * 绑定环境详情。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    BindEnvironments: Array<UsagePlanBindEnvironment>;
-}
-/**
- * DescribeServiceEnvironmentReleaseHistory请求参数结构体
- */
-export interface DescribeServiceEnvironmentReleaseHistoryRequest {
-    /**
-      * 待查询的服务唯一 ID。
-      */
-    ServiceId: string;
-    /**
-      * 环境名称。
-      */
-    EnvironmentName: string;
-    /**
-      * 返回数量，默认为 20，最大值为 100。
-      */
-    Limit?: number;
-    /**
-      * 偏移量，默认为 0。
-      */
-    Offset?: number;
-}
-/**
- * 用于使用计划列表展示
- */
-export interface UsagePlanStatusInfo {
-    /**
-      * 使用计划唯一 ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UsagePlanId: string;
-    /**
-      * 用户自定义的使用计划名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UsagePlanName: string;
-    /**
-      * 用户自定义的使用计划描述。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UsagePlanDesc: string;
-    /**
-      * 每秒最大请求次数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MaxRequestNumPreSec: number;
-    /**
-      * 请求配额总量，-1表示没有限制。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    MaxRequestNum: number;
-    /**
-      * 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CreatedTime: string;
-    /**
-      * 最后修改时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ModifiedTime: string;
-}
-/**
- * CreateService返回参数结构体
- */
-export interface CreateServiceResponse {
-    /**
-      * 服务唯一ID。
-      */
-    ServiceId?: string;
-    /**
-      * 用户自定义服务名称。
-      */
-    ServiceName?: string;
-    /**
-      * 用户自定义服务描述。
-      */
-    ServiceDesc?: string;
-    /**
-      * 外网默认域名。
-      */
-    OuterSubDomain?: string;
-    /**
-      * vpc内网默认域名。
-      */
-    InnerSubDomain?: string;
-    /**
-      * 服务创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
-      */
-    CreatedTime?: string;
-    /**
-      * 网络类型列表，INNER为内网访问，OUTER为外网访问。
-      */
-    NetTypes?: Array<string>;
-    /**
-      * IP版本号。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    IpVersion?: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * api状态详情
- */
-export interface DesApisStatus {
-    /**
-      * 服务唯一ID。
-      */
-    ServiceId: string;
-    /**
-      * API唯一ID。
-      */
-    ApiId: string;
-    /**
-      * 用户自定义的 API 接口描述。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ApiDesc: string;
-    /**
-      * 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    CreatedTime: string;
-    /**
-      * 最后修改时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ModifiedTime: string;
-    /**
-      * API 接口的名称。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ApiName: string;
-    /**
-      * VPCID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    VpcId: number;
-    /**
-      * VPC唯一ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    UniqVpcId: string;
-    /**
-      * API类型。取值为NORMAL（普通API）和TSF（微服务API）。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ApiType: string;
-    /**
-      * API协议。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Protocol: string;
-    /**
-      * 是否买后调试。（云市场预留字段）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    IsDebugAfterCharge: boolean;
-    /**
-      * API 鉴权类型。取值为SECRET（密钥对鉴权）、NONE（免鉴权）、OAUTH。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AuthType: string;
-    /**
-      * OAUTH API的类型。当AuthType 为 OAUTH时该字段有效， 取值为NORMAL（业务API）和 OAUTH（授权API）。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ApiBusinessType: string;
-    /**
-      * 关联的授权API 唯一 ID，当AuthType为OAUTH且ApiBusinessType为NORMAL时生效。标示业务API绑定的oauth2.0授权API唯一ID。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    AuthRelationApiId: string;
-    /**
-      * OAUTH 配置信息。当AuthType是OAUTH时生效。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    OauthConfig: OauthConfig;
-    /**
-      * 授权API关联的业务API列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    RelationBuniessApiIds: Array<string>;
-    /**
-      * API关联的标签信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Tags: Array<string>;
-    /**
-      * API 的路径，如 /path。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Path: string;
-    /**
-      * API 的请求方法，如 GET。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Method: string;
-}
-/**
- * DescribeApiKeysStatus返回参数结构体
- */
-export interface DescribeApiKeysStatusResponse {
-    /**
-      * 密钥列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Result?: ApiKeysStatus;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * 服务列表展示
- */
-export interface ServicesStatus {
-    /**
-      * 服务列表总数。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TotalCount: number;
-    /**
-      * 服务列表详情。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ServiceSet: Array<Service>;
-}
-/**
- * DescribeLogSearch请求参数结构体
- */
-export interface DescribeLogSearchRequest {
-    /**
-      * 日志开始时间
-      */
-    StartTime: string;
-    /**
-      * 日志结束时间
-      */
-    EndTime: string;
-    /**
-      * 服务id
-      */
-    ServiceId: string;
-    /**
-      * 保留字段
-      */
-    Filters?: Array<Filter>;
-    /**
-      * 单次要返回的日志条数，单次返回的最大条数为100
-      */
-    Limit?: number;
-    /**
-      * 根据上次返回的ConText，获取后续的内容，最多可获取10000条
-      */
-    ConText?: string;
-    /**
-      * 按时间排序 asc（升序）或者 desc（降序），默认为 desc
-      */
-    Sort?: string;
-    /**
-      * 保留字段
-      */
-    Query?: string;
-    /**
-      * 检索条件,支持的检索条件如下：
-req_id：“=”
-api_id：“=”
-cip：“=”
-uip：“:”
-err_msg：“:”
-rsp_st：“=” 、“!=” 、 “:” 、 “>” 、 “<”
-req_t：”>=“ 、 ”<=“
-
-说明：
-“:”表示包含，“!=”表示不等于，字段含义见输出参数的LogSet说明
-      */
-    LogQuerys?: Array<LogQuery>;
-}
-/**
- * 描述api列表状态
- */
-export interface ApisStatus {
-    /**
-      * 符合条件的 API 接口数量。
-      */
-    TotalCount: number;
-    /**
-      * API 接口列表。
-      */
-    ApiIdStatusSet: Array<DesApisStatus>;
-}
-/**
- * 密钥列表
- */
-export interface ApiKeysStatus {
-    /**
-      * 符合条件的 API 密钥数量。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    TotalCount: number;
-    /**
-      * API 密钥列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    ApiKeySet: Array<ApiKey>;
-}
-/**
- * DescribeServiceUsagePlan返回参数结构体
- */
-export interface DescribeServiceUsagePlanResponse {
-    /**
-      * 服务绑定使用计划列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Result?: ServiceUsagePlanSet;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
-/**
- * DescribeApiUsagePlan请求参数结构体
- */
-export interface DescribeApiUsagePlanRequest {
-    /**
-      * 待查询的服务唯一 ID。
-      */
-    ServiceId: string;
-    /**
-      * 返回数量，默认为 20，最大值为 100。
-      */
-    Limit?: number;
-    /**
-      * 偏移量，默认为 0。
-      */
-    Offset?: number;
-}
-/**
- * UnBindSubDomain请求参数结构体
- */
-export interface UnBindSubDomainRequest {
-    /**
-      * 服务唯一 ID。
-      */
-    ServiceId: string;
-    /**
-      * 待解绑的自定义的域名。
-      */
-    SubDomain: string;
-}
-/**
- * DescribeApi请求参数结构体
- */
-export interface DescribeApiRequest {
-    /**
-      * API 所在的服务唯一 ID。
-      */
-    ServiceId: string;
-    /**
-      * API 接口唯一 ID。
-      */
-    ApiId: string;
-}
-/**
- * DescribeIPStrategysStatus返回参数结构体
- */
-export interface DescribeIPStrategysStatusResponse {
-    /**
-      * 符合条件的策略列表。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Result?: IPStrategysStatus;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
 }
 /**
  * 展示api信息
@@ -4285,6 +3102,1475 @@ export interface ApiInfo {
     Base64EncodedTriggerRules: Array<Base64EncodedTriggerRule>;
 }
 /**
+ * BindSecretIds返回参数结构体
+ */
+export interface BindSecretIdsResponse {
+    /**
+      * 绑定操作是否成功。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result?: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 创建api返回
+ */
+export interface CreateApiRsp {
+    /**
+      * api id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApiId: string;
+    /**
+      * path
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Path: string;
+    /**
+      * method
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Method: string;
+    /**
+      * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreatedTime: string;
+}
+/**
+ * 使用计划绑定环境信息
+ */
+export interface UsagePlanBindEnvironment {
+    /**
+      * 环境名。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EnvironmentName: string;
+    /**
+      * 服务唯一ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ServiceId: string;
+}
+/**
+ * DeleteApi请求参数结构体
+ */
+export interface DeleteApiRequest {
+    /**
+      * API 所在的服务唯一 ID。
+      */
+    ServiceId: string;
+    /**
+      * API 接口唯一 ID。
+      */
+    ApiId: string;
+}
+/**
+ * DescribeServiceSubDomainMappings请求参数结构体
+ */
+export interface DescribeServiceSubDomainMappingsRequest {
+    /**
+      * 服务唯一 ID。
+      */
+    ServiceId: string;
+    /**
+      * 服务绑定的自定义域名。
+      */
+    SubDomain: string;
+}
+/**
+ * DescribeServiceSubDomainMappings返回参数结构体
+ */
+export interface DescribeServiceSubDomainMappingsResponse {
+    /**
+      * 自定义路径映射列表。
+      */
+    Result?: ServiceSubDomainMappings;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeServiceEnvironmentList请求参数结构体
+ */
+export interface DescribeServiceEnvironmentListRequest {
+    /**
+      * 待查询的服务唯一 ID。
+      */
+    ServiceId: string;
+    /**
+      * 返回数量，默认为 20，最大值为 100。
+      */
+    Limit?: number;
+    /**
+      * 偏移量，默认为 0。
+      */
+    Offset?: number;
+}
+/**
+ * 服务自定义域名路径映射
+ */
+export interface ServiceSubDomainMappings {
+    /**
+      * 是否使用默认路径映射，为 True 表示使用默认路径映射；为 False 的话，表示使用自定义路径映射，此时 PathMappingSet 不为空。
+      */
+    IsDefaultMapping: boolean;
+    /**
+      * 自定义路径映射列表。
+      */
+    PathMappingSet: Array<PathMapping>;
+}
+/**
+ * DescribeApiKey请求参数结构体
+ */
+export interface DescribeApiKeyRequest {
+    /**
+      * API 密钥 ID。
+      */
+    AccessKeyId: string;
+}
+/**
+ * DescribeAPIDocDetail返回参数结构体
+ */
+export interface DescribeAPIDocDetailResponse {
+    /**
+      * API文档详细信息
+      */
+    Result: APIDocInfo;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * >描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
+> * 若存在多个`Filter`时，`Filter`间的关系为逻辑与（`AND`）关系。
+> * 若同一个`Filter`存在多个`Values`，同一`Filter`下`Values`间的关系为逻辑或（`OR`）关系。
+>
+
+ */
+export interface Filter {
+    /**
+      * 需要过滤的字段。
+      */
+    Name: string;
+    /**
+      * 字段的过滤值。
+      */
+    Values: Array<string>;
+}
+/**
+ * 使用计划绑定密钥列表
+ */
+export interface UsagePlanBindSecretStatus {
+    /**
+      * 使用计划绑定密钥的数量。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
+    /**
+      * 密钥详情列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AccessKeyList: Array<UsagePlanBindSecret>;
+}
+/**
+ * DeleteServiceSubDomainMapping返回参数结构体
+ */
+export interface DeleteServiceSubDomainMappingResponse {
+    /**
+      * 删除自定义域名的路径映射操作是否成功。
+      */
+    Result?: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateApiKey返回参数结构体
+ */
+export interface CreateApiKeyResponse {
+    /**
+      * 新增的密钥详情。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result?: ApiKey;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeUsagePlansStatus请求参数结构体
+ */
+export interface DescribeUsagePlansStatusRequest {
+    /**
+      * 返回数量，默认为 20，最大值为 100。
+      */
+    Limit?: number;
+    /**
+      * 偏移量，默认为 0。
+      */
+    Offset?: number;
+    /**
+      * 使用计划过滤条件。支持UsagePlanId、UsagePlanName、NotServiceId、NotApiId、Environment。
+      */
+    Filters?: Array<Filter>;
+}
+/**
+ * 使用计划绑定环境详情。
+ */
+export interface UsagePlanEnvironment {
+    /**
+      * 绑定的服务唯一 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ServiceId: string;
+    /**
+      * API 的唯一ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApiId: string;
+    /**
+      * API 的名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApiName: string;
+    /**
+      * API 的路径。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Path: string;
+    /**
+      * API 的方法。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Method: string;
+    /**
+      * 已经绑定的环境名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Environment: string;
+    /**
+      * 已经使用的配额。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InUseRequestNum: number;
+    /**
+      * 最大请求量。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxRequestNum: number;
+    /**
+      * 每秒最大请求次数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxRequestNumPreSec: number;
+    /**
+      * 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreatedTime: string;
+    /**
+      * 最后修改时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModifiedTime: string;
+    /**
+      * 服务名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ServiceName: string;
+}
+/**
+ * ModifyIPStrategy请求参数结构体
+ */
+export interface ModifyIPStrategyRequest {
+    /**
+      * 待修改的策略所属服务的唯一ID。
+      */
+    ServiceId: string;
+    /**
+      * 待修改的策略唯一ID。
+      */
+    StrategyId: string;
+    /**
+      * 待修改的策略详情。
+      */
+    StrategyData: string;
+}
+/**
+ * UnBindSecretIds请求参数结构体
+ */
+export interface UnBindSecretIdsRequest {
+    /**
+      * 待解绑的使用计划唯一 ID。
+      */
+    UsagePlanId: string;
+    /**
+      * 待解绑的密钥 ID 数组。
+      */
+    AccessKeyIds: Array<string>;
+}
+/**
+ * api环境绑定策略
+ */
+export interface ApiEnvironmentStrategy {
+    /**
+      * API唯一ID。
+      */
+    ApiId: string;
+    /**
+      * 用户自定义API名称。
+      */
+    ApiName: string;
+    /**
+      * API的路径。如/path。
+      */
+    Path: string;
+    /**
+      * API的方法。如GET。
+      */
+    Method: string;
+    /**
+      * 环境的限流信息。
+      */
+    EnvironmentStrategySet: Array<EnvironmentStrategy>;
+}
+/**
+ * UnBindSecretIds返回参数结构体
+ */
+export interface UnBindSecretIdsResponse {
+    /**
+      * 解绑操作是否成功。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result?: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ResetAPIDocPassword请求参数结构体
+ */
+export interface ResetAPIDocPasswordRequest {
+    /**
+      * API文档ID
+      */
+    ApiDocId: string;
+}
+/**
+ * api或service绑定使用计划详情
+ */
+export interface ApiUsagePlan {
+    /**
+      * 服务唯一ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ServiceId: string;
+    /**
+      * API 唯一 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApiId: string;
+    /**
+      * API 名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApiName: string;
+    /**
+      * API 路径。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Path: string;
+    /**
+      * API 方法。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Method: string;
+    /**
+      * 使用计划的唯一 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UsagePlanId: string;
+    /**
+      * 使用计划的名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UsagePlanName: string;
+    /**
+      * 使用计划的描述。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UsagePlanDesc: string;
+    /**
+      * 使用计划绑定的服务环境。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Environment: string;
+    /**
+      * 已经使用的配额。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InUseRequestNum: number;
+    /**
+      * 请求配额总量，-1表示没有限制。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxRequestNum: number;
+    /**
+      * 请求 QPS 上限，-1 表示没有限制。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxRequestNumPreSec: number;
+    /**
+      * 使用计划创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreatedTime: string;
+    /**
+      * 使用计划最后修改时间。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModifiedTime: string;
+    /**
+      * 服务名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ServiceName: string;
+}
+/**
+ * BuildAPIDoc请求参数结构体
+ */
+export interface BuildAPIDocRequest {
+    /**
+      * API文档ID
+      */
+    ApiDocId: string;
+}
+/**
+ * DescribeAPIDocs返回参数结构体
+ */
+export interface DescribeAPIDocsResponse {
+    /**
+      * API文档列表信息
+      */
+    Result: APIDocs;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyServiceEnvironmentStrategy请求参数结构体
+ */
+export interface ModifyServiceEnvironmentStrategyRequest {
+    /**
+      * 服务的唯一ID。
+      */
+    ServiceId: string;
+    /**
+      * 限流值。
+      */
+    Strategy: number;
+    /**
+      * 环境列表。
+      */
+    EnvironmentNames: Array<string>;
+}
+/**
+ * CreateAPIDoc请求参数结构体
+ */
+export interface CreateAPIDocRequest {
+    /**
+      * API文档名称
+      */
+    ApiDocName: string;
+    /**
+      * 服务名称
+      */
+    ServiceId: string;
+    /**
+      * 环境名称
+      */
+    Environment: string;
+    /**
+      * 生成文档的API列表
+      */
+    ApiIds: Array<string>;
+}
+/**
+ * DescribeServiceSubDomains请求参数结构体
+ */
+export interface DescribeServiceSubDomainsRequest {
+    /**
+      * 服务唯一 ID。
+      */
+    ServiceId: string;
+    /**
+      * 返回数量，默认为 20，最大值为 100。
+      */
+    Limit?: number;
+    /**
+      * 偏移量，默认为 0。
+      */
+    Offset?: number;
+}
+/**
+ * GenerateApiDocument返回参数结构体
+ */
+export interface GenerateApiDocumentResponse {
+    /**
+      * api文档&sdk链接。
+      */
+    Result?: DocumentSDK;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeUsagePlanEnvironments返回参数结构体
+ */
+export interface DescribeUsagePlanEnvironmentsResponse {
+    /**
+      * 使用计划绑定详情。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result?: UsagePlanEnvironmentStatus;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeServiceSubDomains返回参数结构体
+ */
+export interface DescribeServiceSubDomainsResponse {
+    /**
+      * 查询服务自定义域名列表。
+      */
+    Result?: DomainSets;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * BindSubDomain请求参数结构体
+ */
+export interface BindSubDomainRequest {
+    /**
+      * 服务唯一 ID。
+      */
+    ServiceId: string;
+    /**
+      * 待绑定的自定义的域名。
+      */
+    SubDomain: string;
+    /**
+      * 服务支持协议，可选值为http、https、http&https。
+      */
+    Protocol: string;
+    /**
+      * 网络类型，可选值为OUTER、INNER。
+      */
+    NetType: string;
+    /**
+      * 是否使用默认路径映射，默认为 true。为 false 时，表示自定义路径映射，此时 PathMappingSet 必填。
+      */
+    IsDefaultMapping: boolean;
+    /**
+      * 默认域名。
+      */
+    NetSubDomain: string;
+    /**
+      * 待绑定自定义域名的证书唯一 ID。针对Protocol 为https或http&https可以选择上传。
+      */
+    CertificateId?: string;
+    /**
+      * 自定义域名路径映射，最多输入三个Environment，并且只能分别取值“test”、 ”prepub“、”release“。
+      */
+    PathMappingSet?: Array<PathMapping>;
+    /**
+      * 是否将HTTP请求强制跳转 HTTPS，默认为false。参数为 true时，API网关会将所有使用该自定义域名的 HTTP 协议的请求重定向至 HTTPS 协议进行转发。
+      */
+    IsForcedHttps?: boolean;
+}
+/**
+ * ip策略绑定api详情
+ */
+export interface IPStrategyApiStatus {
+    /**
+      * 环境绑定API数量。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
+    /**
+      * 环境绑定API详情。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApiIdStatusSet: Array<IPStrategyApi>;
+}
+/**
+ * CreateIPStrategy返回参数结构体
+ */
+export interface CreateIPStrategyResponse {
+    /**
+      * 新建的IP策略详情。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: IPStrategy;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 插件绑定的API信息
+ */
+export interface AttachedApiInfo {
+    /**
+      * API所在服务ID。
+      */
+    ServiceId: string;
+    /**
+      * API所在服务名称。
+      */
+    ServiceName: string;
+    /**
+      * API所在服务描述信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ServiceDesc: string;
+    /**
+      * API ID。
+      */
+    ApiId: string;
+    /**
+      * API名称。
+      */
+    ApiName: string;
+    /**
+      * API描述。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApiDesc: string;
+    /**
+      * 插件绑定API的环境。
+      */
+    Environment: string;
+    /**
+      * 插件和API绑定时间。
+      */
+    AttachedTime: string;
+}
+/**
+ * BindIPStrategy请求参数结构体
+ */
+export interface BindIPStrategyRequest {
+    /**
+      * 待绑定的IP策略所属的服务唯一ID。
+      */
+    ServiceId: string;
+    /**
+      * 待绑定的IP策略唯一ID。
+      */
+    StrategyId: string;
+    /**
+      * IP策略待绑定的环境。
+      */
+    EnvironmentName: string;
+    /**
+      * IP策略待绑定的API列表。
+      */
+    BindApiIds: Array<string>;
+}
+/**
+ * BuildAPIDoc返回参数结构体
+ */
+export interface BuildAPIDocResponse {
+    /**
+      * 操作是否成功
+      */
+    Result: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 用户自定义错误码
+ */
+export interface ErrorCodes {
+    /**
+      * 自定义响应配置错误码。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Code?: number;
+    /**
+      * 自定义响应配置错误信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Msg?: string;
+    /**
+      * 自定义响应配置错误码备注。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Desc?: string;
+    /**
+      * 自定义错误码转换。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ConvertedCode?: number;
+    /**
+      * 是否需要开启错误码转换。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    NeedConvert?: boolean;
+}
+/**
+ * 环境绑定策略列表
+ */
+export interface ServiceEnvironmentStrategyStatus {
+    /**
+      * 限流策略数量。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
+    /**
+      * 限流策略列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EnvironmentList: Array<ServiceEnvironmentStrategy>;
+}
+/**
+ * DescribeApiEnvironmentStrategy返回参数结构体
+ */
+export interface DescribeApiEnvironmentStrategyResponse {
+    /**
+      * api绑定策略详情
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result?: ApiEnvironmentStrategyStataus;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * API绑定的微服务信息。
+ */
+export interface MicroService {
+    /**
+      * 微服务集群ID。
+      */
+    ClusterId?: string;
+    /**
+      * 微服务命名空间ID。
+      */
+    NamespaceId?: string;
+    /**
+      * 微服务名称。
+      */
+    MicroServiceName?: string;
+}
+/**
+ * API绑定策略列表
+ */
+export interface ApiEnvironmentStrategyStataus {
+    /**
+      * API绑定的限流策略数量。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
+    /**
+      * API绑定的限流策略列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApiEnvironmentStrategySet: Array<ApiEnvironmentStrategy>;
+}
+/**
+ * DeleteIPStrategy返回参数结构体
+ */
+export interface DeleteIPStrategyResponse {
+    /**
+      * 删除操作是否成功。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result?: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 密钥详情
+ */
+export interface ApiKey {
+    /**
+      * 创建的 API 密钥 ID 。
+      */
+    AccessKeyId: string;
+    /**
+      * 创建的 API 密钥 Key。
+      */
+    AccessKeySecret: string;
+    /**
+      * 密钥类型，auto 或者 manual。
+      */
+    AccessKeyType: string;
+    /**
+      * 用户自定义密钥名称。
+      */
+    SecretName: string;
+    /**
+      * 最后一次修改时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
+      */
+    ModifiedTime: string;
+    /**
+      * 密钥状态。0表示禁用，1表示启用。
+      */
+    Status: number;
+    /**
+      * 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
+      */
+    CreatedTime: string;
+}
+/**
+ * DescribeUsagePlan返回参数结构体
+ */
+export interface DescribeUsagePlanResponse {
+    /**
+      * 使用计划详情。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result?: UsagePlanInfo;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * BindEnvironment请求参数结构体
+ */
+export interface BindEnvironmentRequest {
+    /**
+      * 待绑定的使用计划唯一 ID 列表。
+      */
+    UsagePlanIds: Array<string>;
+    /**
+      * 绑定类型，取值为API、SERVICE，默认值为SERVICE。
+      */
+    BindType: string;
+    /**
+      * 待绑定的环境。
+      */
+    Environment: string;
+    /**
+      * 待绑定的服务唯一 ID。
+      */
+    ServiceId: string;
+    /**
+      * API唯一ID数组，当bindType=API时，需要传入此参数。
+      */
+    ApiIds?: Array<string>;
+}
+/**
+ * DescribeIPStrategy请求参数结构体
+ */
+export interface DescribeIPStrategyRequest {
+    /**
+      * 服务唯一ID。
+      */
+    ServiceId: string;
+    /**
+      * IP 策略唯一ID。
+      */
+    StrategyId: string;
+    /**
+      * 策略关联的环境。
+      */
+    EnvironmentName?: string;
+    /**
+      * 返回数量，默认为 20，最大值为 100。
+      */
+    Limit?: number;
+    /**
+      * 偏移量，默认为 0。
+      */
+    Offset?: number;
+    /**
+      * 过滤条件。预留字段，目前不支持过滤。
+      */
+    Filters?: Array<Filter>;
+}
+/**
+ * DescribeUsagePlanEnvironments请求参数结构体
+ */
+export interface DescribeUsagePlanEnvironmentsRequest {
+    /**
+      * 待查询的使用计划唯一 ID。
+      */
+    UsagePlanId: string;
+    /**
+      * 定类型，取值为 API、SERVICE，默认值为 SERVICE。
+      */
+    BindType: string;
+    /**
+      * 返回数量，默认为 20，最大值为 100。
+      */
+    Limit?: number;
+    /**
+      * 偏移量，默认为 0。
+      */
+    Offset?: number;
+}
+/**
+ * DescribeServiceReleaseVersion返回参数结构体
+ */
+export interface DescribeServiceReleaseVersionResponse {
+    /**
+      * 服务发布版本列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result?: ServiceReleaseVersion;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 请求参数
+ */
+export interface RequestParameter {
+    /**
+      * 请求参数名称
+      */
+    Name?: string;
+    /**
+      * 描述
+      */
+    Desc?: string;
+    /**
+      * 参数位置
+      */
+    Position?: string;
+    /**
+      * 参数类型
+      */
+    Type?: string;
+    /**
+      * 默认值
+      */
+    DefaultValue?: string;
+    /**
+      * 是否必须
+      */
+    Required?: boolean;
+}
+/**
+ * 使用计划详情。
+ */
+export interface UsagePlanInfo {
+    /**
+      * 使用计划唯一 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UsagePlanId: string;
+    /**
+      * 使用计划名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UsagePlanName: string;
+    /**
+      * 使用计划描述。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UsagePlanDesc: string;
+    /**
+      * 初始化调用次数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InitQuota: number;
+    /**
+      * 每秒请求限制数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxRequestNumPreSec: number;
+    /**
+      * 最大调用次数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxRequestNum: number;
+    /**
+      * 是否隐藏。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsHide: number;
+    /**
+      * 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreatedTime: string;
+    /**
+      * 最后修改时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModifiedTime: string;
+    /**
+      * 绑定密钥的数量。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BindSecretIdTotalCount: number;
+    /**
+      * 绑定密钥的详情。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BindSecretIds: Array<string>;
+    /**
+      * 绑定环境数量。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BindEnvironmentTotalCount: number;
+    /**
+      * 绑定环境详情。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    BindEnvironments: Array<UsagePlanBindEnvironment>;
+}
+/**
+ * DescribeServiceEnvironmentReleaseHistory请求参数结构体
+ */
+export interface DescribeServiceEnvironmentReleaseHistoryRequest {
+    /**
+      * 待查询的服务唯一 ID。
+      */
+    ServiceId: string;
+    /**
+      * 环境名称。
+      */
+    EnvironmentName: string;
+    /**
+      * 返回数量，默认为 20，最大值为 100。
+      */
+    Limit?: number;
+    /**
+      * 偏移量，默认为 0。
+      */
+    Offset?: number;
+}
+/**
+ * 用于使用计划列表展示
+ */
+export interface UsagePlanStatusInfo {
+    /**
+      * 使用计划唯一 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UsagePlanId: string;
+    /**
+      * 用户自定义的使用计划名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UsagePlanName: string;
+    /**
+      * 用户自定义的使用计划描述。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UsagePlanDesc: string;
+    /**
+      * 每秒最大请求次数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxRequestNumPreSec: number;
+    /**
+      * 请求配额总量，-1表示没有限制。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxRequestNum: number;
+    /**
+      * 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreatedTime: string;
+    /**
+      * 最后修改时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModifiedTime: string;
+}
+/**
+ * 发布服务返回
+ */
+export interface ReleaseService {
+    /**
+      * 发布时的备注信息填写。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReleaseDesc: string;
+    /**
+      * 发布的版本id。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ReleaseVersion: string;
+}
+/**
+ * CreateService返回参数结构体
+ */
+export interface CreateServiceResponse {
+    /**
+      * 服务唯一ID。
+      */
+    ServiceId: string;
+    /**
+      * 用户自定义服务名称。
+      */
+    ServiceName: string;
+    /**
+      * 用户自定义服务描述。
+      */
+    ServiceDesc: string;
+    /**
+      * 外网默认域名。
+      */
+    OuterSubDomain: string;
+    /**
+      * vpc内网默认域名。
+      */
+    InnerSubDomain: string;
+    /**
+      * 服务创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
+      */
+    CreatedTime: string;
+    /**
+      * 网络类型列表，INNER为内网访问，OUTER为外网访问。
+      */
+    NetTypes: Array<string>;
+    /**
+      * IP版本号。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IpVersion: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeleteAPIDoc返回参数结构体
+ */
+export interface DeleteAPIDocResponse {
+    /**
+      * 操作是否成功
+      */
+    Result: boolean;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * api状态详情
+ */
+export interface DesApisStatus {
+    /**
+      * 服务唯一ID。
+      */
+    ServiceId: string;
+    /**
+      * API唯一ID。
+      */
+    ApiId: string;
+    /**
+      * 用户自定义的 API 接口描述。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApiDesc: string;
+    /**
+      * 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreatedTime: string;
+    /**
+      * 最后修改时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ModifiedTime: string;
+    /**
+      * API 接口的名称。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApiName: string;
+    /**
+      * VPCID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VpcId: number;
+    /**
+      * VPC唯一ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UniqVpcId: string;
+    /**
+      * API类型。取值为NORMAL（普通API）和TSF（微服务API）。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApiType: string;
+    /**
+      * API协议。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Protocol: string;
+    /**
+      * 是否买后调试。（云市场预留字段）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    IsDebugAfterCharge: boolean;
+    /**
+      * API 鉴权类型。取值为SECRET（密钥对鉴权）、NONE（免鉴权）、OAUTH。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AuthType: string;
+    /**
+      * OAUTH API的类型。当AuthType 为 OAUTH时该字段有效， 取值为NORMAL（业务API）和 OAUTH（授权API）。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApiBusinessType: string;
+    /**
+      * 关联的授权API 唯一 ID，当AuthType为OAUTH且ApiBusinessType为NORMAL时生效。标示业务API绑定的oauth2.0授权API唯一ID。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AuthRelationApiId: string;
+    /**
+      * OAUTH 配置信息。当AuthType是OAUTH时生效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OauthConfig: OauthConfig;
+    /**
+      * 授权API关联的业务API列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RelationBuniessApiIds: Array<string>;
+    /**
+      * API关联的标签信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tags: Array<string>;
+    /**
+      * API 的路径，如 /path。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Path: string;
+    /**
+      * API 的请求方法，如 GET。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Method: string;
+}
+/**
+ * DescribeApiKeysStatus返回参数结构体
+ */
+export interface DescribeApiKeysStatusResponse {
+    /**
+      * 密钥列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result?: ApiKeysStatus;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * 服务列表展示
+ */
+export interface ServicesStatus {
+    /**
+      * 服务列表总数。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
+    /**
+      * 服务列表详情。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ServiceSet: Array<Service>;
+}
+/**
+ * DescribeLogSearch请求参数结构体
+ */
+export interface DescribeLogSearchRequest {
+    /**
+      * 日志开始时间
+      */
+    StartTime: string;
+    /**
+      * 日志结束时间
+      */
+    EndTime: string;
+    /**
+      * 服务id
+      */
+    ServiceId: string;
+    /**
+      * 保留字段
+      */
+    Filters?: Array<Filter>;
+    /**
+      * 单次要返回的日志条数，单次返回的最大条数为100
+      */
+    Limit?: number;
+    /**
+      * 根据上次返回的ConText，获取后续的内容，最多可获取10000条
+      */
+    ConText?: string;
+    /**
+      * 按时间排序 asc（升序）或者 desc（降序），默认为 desc
+      */
+    Sort?: string;
+    /**
+      * 保留字段
+      */
+    Query?: string;
+    /**
+      * 检索条件,支持的检索条件如下：
+req_id：“=”
+api_id：“=”
+cip：“=”
+uip：“:”
+err_msg：“:”
+rsp_st：“=” 、“!=” 、 “:” 、 “>” 、 “<”
+req_t：”>=“ 、 ”<=“
+
+说明：
+“:”表示包含，“!=”表示不等于，字段含义见输出参数的LogSet说明
+      */
+    LogQuerys?: Array<LogQuery>;
+}
+/**
+ * 描述api列表状态
+ */
+export interface ApisStatus {
+    /**
+      * 符合条件的 API 接口数量。
+      */
+    TotalCount: number;
+    /**
+      * API 接口列表。
+      */
+    ApiIdStatusSet: Array<DesApisStatus>;
+}
+/**
+ * 密钥列表
+ */
+export interface ApiKeysStatus {
+    /**
+      * 符合条件的 API 密钥数量。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
+    /**
+      * API 密钥列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ApiKeySet: Array<ApiKey>;
+}
+/**
+ * API文档基本信息
+ */
+export interface APIDoc {
+    /**
+      * API文档ID
+      */
+    ApiDocId: string;
+    /**
+      * API文档名称
+      */
+    ApiDocName: string;
+    /**
+      * API文档构建状态
+      */
+    ApiDocStatus: string;
+}
+/**
+ * DescribeServiceUsagePlan返回参数结构体
+ */
+export interface DescribeServiceUsagePlanResponse {
+    /**
+      * 服务绑定使用计划列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result?: ServiceUsagePlanSet;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeApiUsagePlan请求参数结构体
+ */
+export interface DescribeApiUsagePlanRequest {
+    /**
+      * 待查询的服务唯一 ID。
+      */
+    ServiceId: string;
+    /**
+      * 返回数量，默认为 20，最大值为 100。
+      */
+    Limit?: number;
+    /**
+      * 偏移量，默认为 0。
+      */
+    Offset?: number;
+}
+/**
+ * UnBindSubDomain请求参数结构体
+ */
+export interface UnBindSubDomainRequest {
+    /**
+      * 服务唯一 ID。
+      */
+    ServiceId: string;
+    /**
+      * 待解绑的自定义的域名。
+      */
+    SubDomain: string;
+}
+/**
+ * DescribeApi请求参数结构体
+ */
+export interface DescribeApiRequest {
+    /**
+      * API 所在的服务唯一 ID。
+      */
+    ServiceId: string;
+    /**
+      * API 接口唯一 ID。
+      */
+    ApiId: string;
+}
+/**
+ * DescribeIPStrategysStatus返回参数结构体
+ */
+export interface DescribeIPStrategysStatusResponse {
+    /**
+      * 符合条件的策略列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result?: IPStrategysStatus;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 环境限流
  */
 export interface EnvironmentStrategy {
@@ -4296,6 +4582,11 @@ export interface EnvironmentStrategy {
       * 限流值
       */
     Quota: number;
+    /**
+      * 限流最大值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MaxQuota: number;
 }
 /**
  * EnableApiKey请求参数结构体
@@ -4307,24 +4598,49 @@ export interface EnableApiKeyRequest {
     AccessKeyId: string;
 }
 /**
- * Base64编码的header触发规则
+ * ResetAPIDocPassword返回参数结构体
  */
-export interface Base64EncodedTriggerRule {
+export interface ResetAPIDocPasswordResponse {
     /**
-      * 进行编码触发的header，可选值 "Accept"和"Content_Type" 对应实际数据流请求header中的Accept和 Content-Type。
+      * API文档基本信息
       */
-    Name: string;
+    Result: APIDoc;
     /**
-      * 进行编码触发的header的可选值数组, 数组元素的字符串最大长度为40，元素可以包括数字，英文字母以及特殊字符，特殊字符的可选值为： `.`    `+`    `*`   `-`   `/`  `_`
-
-例如 [
-    "application/x-vpeg005",
-    "application/xhtml+xml",
-    "application/vnd.ms-project",
-    "application/vnd.rn-rn_music_package"
-] 等都是合法的。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Value: Array<string>;
+    RequestId?: string;
+}
+/**
+ * DescribeServicesStatus请求参数结构体
+ */
+export interface DescribeServicesStatusRequest {
+    /**
+      * 返回数量，默认为 20，最大值为 100。
+      */
+    Limit?: number;
+    /**
+      * 偏移量，默认为 0。
+      */
+    Offset?: number;
+    /**
+      * 过滤条件。支持ServiceId、ServiceName、NotUsagePlanId、Environment、IpVersion。InstanceId
+      */
+    Filters?: Array<Filter>;
+}
+/**
+ * 服务发布版本
+ */
+export interface ServiceReleaseVersion {
+    /**
+      * 发布版本总数量。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TotalCount: number;
+    /**
+      * 发布版本列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VersionList: Array<ServiceReleaseHistoryInfo>;
 }
 /**
  * DescribeServicesStatus返回参数结构体
@@ -4334,7 +4650,7 @@ export interface DescribeServicesStatusResponse {
       * 服务列表查询结果。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: ServicesStatus;
+    Result: ServicesStatus;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

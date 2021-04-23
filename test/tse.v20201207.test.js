@@ -28,4 +28,24 @@ it("tse.v20201207.ManageConfig", async function () {
     }
 })
 
+it("tse.v20201207.DescribeSREInstanceAccessAddress", async function () {
+    try {
+       const data = await client.DescribeSREInstanceAccessAddress({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tse.v20201207.DescribeSREInstances", async function () {
+    try {
+       const data = await client.DescribeSREInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 })

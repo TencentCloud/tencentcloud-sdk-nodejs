@@ -186,6 +186,31 @@ export interface DescribeDBDiagHistoryResponse {
     RequestId?: string;
 }
 /**
+ * 诊断扣分项。
+ */
+export interface ScoreItem {
+    /**
+      * 异常诊断项名称。
+      */
+    DiagItem: string;
+    /**
+      * 诊断项分类，取值包括：可用性、可维护性、性能及可靠性。
+      */
+    IssueType: string;
+    /**
+      * 健康等级，取值包括：信息、提示、告警、严重、致命。
+      */
+    TopSeverity: string;
+    /**
+      * 该异常诊断项出现次数。
+      */
+    Count: number;
+    /**
+      * 扣分分数。
+      */
+    ScoreLost: number;
+}
+/**
  * DescribeDiagDBInstances请求参数结构体
  */
 export interface DescribeDiagDBInstancesRequest {
@@ -248,6 +273,43 @@ export interface DescribeAllUserContactResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Contacts: Array<ContactItem>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeUserSqlAdvice返回参数结构体
+ */
+export interface DescribeUserSqlAdviceResponse {
+    /**
+      * SQL优化建议，可解析为JSON数组。
+      */
+    Advices: string;
+    /**
+      * SQL优化建议备注，可解析为String数组。
+      */
+    Comments: string;
+    /**
+      * SQL语句。
+      */
+    SqlText: string;
+    /**
+      * 库名。
+      */
+    Schema: string;
+    /**
+      * 相关表的DDL信息，可解析为JSON数组。
+      */
+    Tables: string;
+    /**
+      * SQL执行计划，可解析为JSON。
+      */
+    SqlPlan: string;
+    /**
+      * SQL优化后的成本节约详情，可解析为JSON。
+      */
+    Cost: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -510,42 +572,17 @@ export interface DescribeTopSpaceTablesRequest {
     Product?: string;
 }
 /**
- * 库空间统计数据。
+ * 用户配置的信息
  */
-export interface SchemaSpaceData {
+export interface ProfileInfo {
     /**
-      * 库名。
+      * 语言, 如"zh"。
       */
-    TableSchema: string;
+    Language: string;
     /**
-      * 数据空间（MB）。
+      * 邮件模板的内容。
       */
-    DataLength: number;
-    /**
-      * 索引空间（MB）。
-      */
-    IndexLength: number;
-    /**
-      * 碎片空间（MB）。
-      */
-    DataFree: number;
-    /**
-      * 总使用空间（MB）。
-      */
-    TotalLength: number;
-    /**
-      * 碎片率（%）。
-      */
-    FragRatio: number;
-    /**
-      * 行数。
-      */
-    TableRows: number;
-    /**
-      * 库中所有表对应的独立物理文件大小加和（MB）。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    PhysicalFileSize: number;
+    MailConfiguration: MailConfiguration;
 }
 /**
  * DescribeAllUserContact请求参数结构体
@@ -1739,17 +1776,21 @@ export interface HealthStatus {
     ScoreDetails: Array<ScoreDetail>;
 }
 /**
- * 用户配置的信息
+ * DescribeUserSqlAdvice请求参数结构体
  */
-export interface ProfileInfo {
+export interface DescribeUserSqlAdviceRequest {
     /**
-      * 语言, 如"zh"。
+      * 实例ID。
       */
-    Language: string;
+    InstanceId: string;
     /**
-      * 邮件模板的内容。
+      * SQL语句。
       */
-    MailConfiguration: MailConfiguration;
+    SqlText: string;
+    /**
+      * 库名。
+      */
+    Schema?: string;
 }
 /**
  * DescribeAllUserGroup请求参数结构体
@@ -1862,29 +1903,42 @@ export interface UserProfile {
     ProfileInfo: ProfileInfo;
 }
 /**
- * 诊断扣分项。
+ * 库空间统计数据。
  */
-export interface ScoreItem {
+export interface SchemaSpaceData {
     /**
-      * 异常诊断项名称。
+      * 库名。
       */
-    DiagItem: string;
+    TableSchema: string;
     /**
-      * 诊断项分类，取值包括：可用性、可维护性、性能及可靠性。
+      * 数据空间（MB）。
       */
-    IssueType: string;
+    DataLength: number;
     /**
-      * 健康等级，取值包括：信息、提示、告警、严重、致命。
+      * 索引空间（MB）。
       */
-    TopSeverity: string;
+    IndexLength: number;
     /**
-      * 该异常诊断项出现次数。
+      * 碎片空间（MB）。
       */
-    Count: number;
+    DataFree: number;
     /**
-      * 扣分分数。
+      * 总使用空间（MB）。
       */
-    ScoreLost: number;
+    TotalLength: number;
+    /**
+      * 碎片率（%）。
+      */
+    FragRatio: number;
+    /**
+      * 行数。
+      */
+    TableRows: number;
+    /**
+      * 库中所有表对应的独立物理文件大小加和（MB）。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PhysicalFileSize: number;
 }
 /**
  * DescribeTopSpaceTables返回参数结构体

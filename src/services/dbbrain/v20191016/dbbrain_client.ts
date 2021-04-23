@@ -29,9 +29,11 @@ import {
   ContactItem,
   DescribeHealthScoreResponse,
   DescribeDBDiagHistoryResponse,
+  ScoreItem,
   DescribeDiagDBInstancesRequest,
   DescribeDBSpaceStatusRequest,
   DescribeAllUserContactResponse,
+  DescribeUserSqlAdviceResponse,
   DescribeTopSpaceSchemasRequest,
   ModifyDiagDBInstanceConfRequest,
   MonitorMetric,
@@ -45,7 +47,7 @@ import {
   SchemaItem,
   CreateMailProfileResponse,
   DescribeTopSpaceTablesRequest,
-  SchemaSpaceData,
+  ProfileInfo,
   DescribeAllUserContactRequest,
   DescribeDBDiagEventRequest,
   CreateSecurityAuditLogExportTaskRequest,
@@ -90,14 +92,14 @@ import {
   InstanceConfs,
   DescribeDiagDBInstancesResponse,
   HealthStatus,
-  ProfileInfo,
+  DescribeUserSqlAdviceRequest,
   DescribeAllUserGroupRequest,
   CreateDBDiagReportUrlRequest,
   DescribeSlowLogTimeSeriesStatsResponse,
   DescribeSecurityAuditLogExportTasksResponse,
   CreateSecurityAuditLogExportTaskResponse,
   UserProfile,
-  ScoreItem,
+  SchemaSpaceData,
   DescribeTopSpaceTablesResponse,
 } from "./dbbrain_models"
 
@@ -338,6 +340,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTopSpaceSchemaTimeSeriesResponse) => void
   ): Promise<DescribeTopSpaceSchemaTimeSeriesResponse> {
     return this.request("DescribeTopSpaceSchemaTimeSeries", req, cb)
+  }
+
+  /**
+   * 获取SQL优化建议。
+   */
+  async DescribeUserSqlAdvice(
+    req: DescribeUserSqlAdviceRequest,
+    cb?: (error: string, rep: DescribeUserSqlAdviceResponse) => void
+  ): Promise<DescribeUserSqlAdviceResponse> {
+    return this.request("DescribeUserSqlAdvice", req, cb)
   }
 
   /**

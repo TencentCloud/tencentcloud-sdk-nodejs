@@ -4317,6 +4317,11 @@ export interface CommonMixControlParams {
 填1时，当InputStreamList中个数为1时，且OutputParams.OutputStreamType为1时，不执行取消操作，执行拷贝流操作
       */
     AllowCopy?: number;
+    /**
+      * 取值范围[0,1]
+填1时，透传原始流的sei
+      */
+    PassInputSei?: number;
 }
 /**
  * DescribeAreaBillBandwidthAndFluxList返回参数结构体

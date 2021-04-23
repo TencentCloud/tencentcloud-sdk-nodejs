@@ -159,6 +159,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDBLogFiles", req, cb);
     }
     /**
+     * 本接口（UpgradeDCDBInstance）用于升级分布式数据库实例。本接口完成下单和支付两个动作，如果发生支付失败的错误，调用用户账户相关接口中的支付订单接口（PayDeals）重新支付即可。
+     */
+    async UpgradeDCDBInstance(req, cb) {
+        return this.request("UpgradeDCDBInstance", req, cb);
+    }
+    /**
      * 本接口（DescribeDBSyncMode）用于查询云数据库实例的同步模式。
      */
     async DescribeDBSyncMode(req, cb) {
@@ -195,10 +201,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDBInstanceSecurityGroups", req, cb);
     }
     /**
-     * 本接口（UpgradeDCDBInstance）用于升级分布式数据库实例。本接口完成下单和支付两个动作，如果发生支付失败的错误，调用用户账户相关接口中的支付订单接口（PayDeals）重新支付即可。
+     * 本接口（DescribeDCDBInstanceNodeInfo）用于获取实例节点信息
      */
-    async UpgradeDCDBInstance(req, cb) {
-        return this.request("UpgradeDCDBInstance", req, cb);
+    async DescribeDCDBInstanceNodeInfo(req, cb) {
+        return this.request("DescribeDCDBInstanceNodeInfo", req, cb);
     }
     /**
      * 本接口（ModifyDBSyncMode）用于修改云数据库实例的同步模式。
@@ -244,16 +250,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDCDBShards", req, cb);
     }
     /**
-     * 本接口（CreateDCDBInstance）用于创建包年包月的云数据库实例，可通过传入实例规格、数据库版本号、购买时长等信息创建云数据库实例。
-     */
-    async CreateDCDBInstance(req, cb) {
-        return this.request("CreateDCDBInstance", req, cb);
-    }
-    /**
      * 本接口（DescribeDatabases）用于查询云数据库实例的数据库列表。
      */
     async DescribeDatabases(req, cb) {
         return this.request("DescribeDatabases", req, cb);
+    }
+    /**
+     * 本接口（CreateDCDBInstance）用于创建包年包月的云数据库实例，可通过传入实例规格、数据库版本号、购买时长等信息创建云数据库实例。
+     */
+    async CreateDCDBInstance(req, cb) {
+        return this.request("CreateDCDBInstance", req, cb);
     }
     /**
      * 本接口（DescribeDBSecurityGroups）用于查询实例安全组信息

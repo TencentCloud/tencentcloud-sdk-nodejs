@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   Canvas,
   SetWhiteboardPushCallbackKeyRequest,
+  TimeValue,
   LayoutParams,
   SetVideoGenerationTaskCallbackRequest,
   StreamControl,
@@ -28,12 +29,13 @@ import {
   StartWhiteboardPushRequest,
   OmittedDuration,
   DescribeWhiteboardPushRequest,
-  DescribeVideoGenerationTaskCallbackResponse,
+  DescribeQualityMetricsResponse,
   ResumeOnlineRecordResponse,
   SetVideoGenerationTaskCallbackResponse,
   SetWhiteboardPushCallbackKeyResponse,
   WhiteboardPushBackupParam,
   StartOnlineRecordRequest,
+  DescribeVideoGenerationTaskCallbackResponse,
   StartWhiteboardPushResponse,
   DescribeOnlineRecordCallbackRequest,
   DescribeOnlineRecordCallbackResponse,
@@ -62,7 +64,7 @@ import {
   DescribeTranscodeRequest,
   DescribeTranscodeResponse,
   StreamLayout,
-  SetOnlineRecordCallbackResponse,
+  DescribeQualityMetricsRequest,
   SetOnlineRecordCallbackKeyRequest,
   CreateVideoGenerationTaskRequest,
   DescribeTranscodeCallbackRequest,
@@ -78,6 +80,7 @@ import {
   DescribeVideoGenerationTaskCallbackRequest,
   PauseOnlineRecordRequest,
   StopWhiteboardPushResponse,
+  SetOnlineRecordCallbackResponse,
 } from "./tiw_models"
 
 /**
@@ -277,6 +280,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StopWhiteboardPushResponse) => void
   ): Promise<StopWhiteboardPushResponse> {
     return this.request("StopWhiteboardPush", req, cb)
+  }
+
+  /**
+   * 查询互动白板质量数据
+   */
+  async DescribeQualityMetrics(
+    req: DescribeQualityMetricsRequest,
+    cb?: (error: string, rep: DescribeQualityMetricsResponse) => void
+  ): Promise<DescribeQualityMetricsResponse> {
+    return this.request("DescribeQualityMetrics", req, cb)
   }
 
   /**

@@ -38,9 +38,11 @@ import {
   DescribeDBParametersResponse,
   CloneAccountResponse,
   ModifyAccountDescriptionResponse,
+  OpenDBExtranetAccessResponse,
   CreateDCDBInstanceResponse,
-  ParamConstraint,
+  BriefNodeInfo,
   ModifyDBInstancesProjectResponse,
+  DescribeDCDBInstanceNodeInfoRequest,
   DatabaseView,
   DescribeDBLogFilesRequest,
   DescribeOrdersResponse,
@@ -55,6 +57,7 @@ import {
   DescribeProjectSecurityGroupsResponse,
   DatabaseFunction,
   DescribeSqlLogsRequest,
+  ParamConstraint,
   ResetAccountPasswordResponse,
   DescribeDCDBSaleInfoRequest,
   ExpandShardConfig,
@@ -76,7 +79,7 @@ import {
   CopyAccountPrivilegesRequest,
   SecurityGroup,
   DescribeDatabaseTableRequest,
-  OpenDBExtranetAccessResponse,
+  DescribeDCDBInstanceNodeInfoResponse,
   KillSessionRequest,
   DescribeDatabaseObjectsResponse,
   TableColumn,
@@ -360,6 +363,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（UpgradeDCDBInstance）用于升级分布式数据库实例。本接口完成下单和支付两个动作，如果发生支付失败的错误，调用用户账户相关接口中的支付订单接口（PayDeals）重新支付即可。
+   */
+  async UpgradeDCDBInstance(
+    req: UpgradeDCDBInstanceRequest,
+    cb?: (error: string, rep: UpgradeDCDBInstanceResponse) => void
+  ): Promise<UpgradeDCDBInstanceResponse> {
+    return this.request("UpgradeDCDBInstance", req, cb)
+  }
+
+  /**
    * 本接口（DescribeDBSyncMode）用于查询云数据库实例的同步模式。
    */
   async DescribeDBSyncMode(
@@ -420,13 +433,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（UpgradeDCDBInstance）用于升级分布式数据库实例。本接口完成下单和支付两个动作，如果发生支付失败的错误，调用用户账户相关接口中的支付订单接口（PayDeals）重新支付即可。
+   * 本接口（DescribeDCDBInstanceNodeInfo）用于获取实例节点信息
    */
-  async UpgradeDCDBInstance(
-    req: UpgradeDCDBInstanceRequest,
-    cb?: (error: string, rep: UpgradeDCDBInstanceResponse) => void
-  ): Promise<UpgradeDCDBInstanceResponse> {
-    return this.request("UpgradeDCDBInstance", req, cb)
+  async DescribeDCDBInstanceNodeInfo(
+    req: DescribeDCDBInstanceNodeInfoRequest,
+    cb?: (error: string, rep: DescribeDCDBInstanceNodeInfoResponse) => void
+  ): Promise<DescribeDCDBInstanceNodeInfoResponse> {
+    return this.request("DescribeDCDBInstanceNodeInfo", req, cb)
   }
 
   /**
@@ -501,16 +514,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateDCDBInstance）用于创建包年包月的云数据库实例，可通过传入实例规格、数据库版本号、购买时长等信息创建云数据库实例。
-   */
-  async CreateDCDBInstance(
-    req: CreateDCDBInstanceRequest,
-    cb?: (error: string, rep: CreateDCDBInstanceResponse) => void
-  ): Promise<CreateDCDBInstanceResponse> {
-    return this.request("CreateDCDBInstance", req, cb)
-  }
-
-  /**
    * 本接口（DescribeDatabases）用于查询云数据库实例的数据库列表。
    */
   async DescribeDatabases(
@@ -518,6 +521,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDatabasesResponse) => void
   ): Promise<DescribeDatabasesResponse> {
     return this.request("DescribeDatabases", req, cb)
+  }
+
+  /**
+   * 本接口（CreateDCDBInstance）用于创建包年包月的云数据库实例，可通过传入实例规格、数据库版本号、购买时长等信息创建云数据库实例。
+   */
+  async CreateDCDBInstance(
+    req: CreateDCDBInstanceRequest,
+    cb?: (error: string, rep: CreateDCDBInstanceResponse) => void
+  ): Promise<CreateDCDBInstanceResponse> {
+    return this.request("CreateDCDBInstance", req, cb)
   }
 
   /**

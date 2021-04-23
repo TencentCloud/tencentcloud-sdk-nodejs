@@ -1904,7 +1904,7 @@ export interface RunJobFlowResponse {
   /**
    * 作业流程ID。
    */
-  JobFlowId?: number
+  JobFlowId: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2599,12 +2599,12 @@ JobFlowStepsComplete，流程任务步骤已完成。
 JobFlowTerminating，流程任务所需资源销毁中。
 JobFlowFinish，流程任务已完成。
       */
-  State?: string
+  State: string
 
   /**
    * 流程任务步骤结果。
    */
-  Details?: Array<JobResult>
+  Details: Array<JobResult>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

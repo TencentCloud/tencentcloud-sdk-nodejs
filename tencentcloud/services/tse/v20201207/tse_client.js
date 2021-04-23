@@ -33,5 +33,17 @@ class Client extends abstract_client_1.AbstractClient {
     async ManageConfig(req, cb) {
         return this.request("ManageConfig", req, cb);
     }
+    /**
+     * 查询微服务注册引擎实例访问地址
+     */
+    async DescribeSREInstanceAccessAddress(req, cb) {
+        return this.request("DescribeSREInstanceAccessAddress", req, cb);
+    }
+    /**
+     * 用于查询微服务注册中心实例列表
+     */
+    async DescribeSREInstances(req, cb) {
+        return this.request("DescribeSREInstances", req, cb);
+    }
 }
 exports.Client = Client;
