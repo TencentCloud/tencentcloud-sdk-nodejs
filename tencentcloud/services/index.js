@@ -16,6 +16,8 @@ var apcas_1 = require("./apcas");
 Object.defineProperty(exports, "apcas", { enumerable: true, get: function () { return apcas_1.apcas; } });
 var ape_1 = require("./ape");
 Object.defineProperty(exports, "ape", { enumerable: true, get: function () { return ape_1.ape; } });
+var api_1 = require("./api");
+Object.defineProperty(exports, "api", { enumerable: true, get: function () { return api_1.api; } });
 var apigateway_1 = require("./apigateway");
 Object.defineProperty(exports, "apigateway", { enumerable: true, get: function () { return apigateway_1.apigateway; } });
 var as_1 = require("./as");

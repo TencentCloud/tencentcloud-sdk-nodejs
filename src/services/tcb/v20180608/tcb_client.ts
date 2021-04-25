@@ -36,6 +36,7 @@ import {
   DescribeCloudBaseRunResourceForExtendRequest,
   ModifyEndUserRequest,
   DescribeAuthDomainsResponse,
+  DescribeWxCloudBaseRunEnvsResponse,
   CreateHostingDomainRequest,
   DescribeCloudBaseRunResourceRequest,
   CloudBaseRunVolumeMount,
@@ -50,12 +51,14 @@ import {
   SmsFreeQuota,
   FunctionInfo,
   CommonServiceAPIRequest,
+  CreateWxCloudBaseRunEnvRequest,
   CreateStaticStoreRequest,
   DeleteCloudBaseProjectLatestVersionResponse,
   CreateAuthDomainResponse,
   DescribeEnvsRequest,
   DeleteWxGatewayRouteRequest,
   DescribeExtraPkgBillingInfoRequest,
+  DescribeWxCloudBaseRunSubNetsResponse,
   DescribeEnvFreeQuotaRequest,
   CloudBaseCapabilities,
   DeleteEndUserRequest,
@@ -74,9 +77,11 @@ import {
   CreateAuthDomainRequest,
   CreateHostingDomainResponse,
   EstablishWxGatewayRouteResponse,
+  CreateWxCloudBaseRunEnvResponse,
   EstablishWxGatewayRouteRequest,
   CreateCloudBaseRunServerVersionRequest,
   LoginStatistic,
+  DescribeWxCloudBaseRunSubNetsRequest,
   CreatePostpayPackageResponse,
   DeleteWxGatewayRouteResponse,
   EstablishCloudBaseRunServerRequest,
@@ -103,6 +108,7 @@ import {
   DescribeCloudBaseProjectLatestVersionListResponse,
   CloudBaseRunNfsVolumeSource,
   DescribeSmsQuotasResponse,
+  DescribeWxCloudBaseRunEnvsRequest,
   CloudBaseRunImageSecretInfo,
   ModifyEnvResponse,
   DescribeDownloadFileResponse,
@@ -151,6 +157,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询微信云托管子网
+   */
+  async DescribeWxCloudBaseRunSubNets(
+    req: DescribeWxCloudBaseRunSubNetsRequest,
+    cb?: (error: string, rep: DescribeWxCloudBaseRunSubNetsResponse) => void
+  ): Promise<DescribeWxCloudBaseRunSubNetsResponse> {
+    return this.request("DescribeWxCloudBaseRunSubNets", req, cb)
+  }
+
+  /**
    * 创建托管域名
    */
   async CreateHostingDomain(
@@ -181,6 +197,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询微信云托管环境信息
+   */
+  async DescribeWxCloudBaseRunEnvs(
+    req: DescribeWxCloudBaseRunEnvsRequest,
+    cb?: (error: string, rep: DescribeWxCloudBaseRunEnvsResponse) => void
+  ): Promise<DescribeWxCloudBaseRunEnvsResponse> {
+    return this.request("DescribeWxCloudBaseRunEnvs", req, cb)
+  }
+
+  /**
      * 查询后付费短信资源量
 1 有免费包的返回SmsFreeQuota结构所有字段
 2 没有免费包，有付费包，付费返回复用SmsFreeQuota结构，其中只有 TodayUsedQuota 字段有效
@@ -201,6 +227,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEnvsResponse) => void
   ): Promise<DescribeEnvsResponse> {
     return this.request("DescribeEnvs", req, cb)
+  }
+
+  /**
+   * 创建微信云托管
+   */
+  async CreateWxCloudBaseRunEnv(
+    req: CreateWxCloudBaseRunEnvRequest,
+    cb?: (error: string, rep: CreateWxCloudBaseRunEnvResponse) => void
+  ): Promise<CreateWxCloudBaseRunEnvResponse> {
+    return this.request("CreateWxCloudBaseRunEnv", req, cb)
   }
 
   /**

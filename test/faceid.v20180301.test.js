@@ -38,9 +38,9 @@ it("faceid.v20180301.GetActionSequence", async function () {
     }
 })
 
-it("faceid.v20180301.LivenessCompare", async function () {
+it("faceid.v20180301.CheckIdCardInformation", async function () {
     try {
-       const data = await client.LivenessCompare({})
+       const data = await client.CheckIdCardInformation({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,9 +58,19 @@ it("faceid.v20180301.BankCard4EVerification", async function () {
     }
 })
 
-it("faceid.v20180301.DetectAuth", async function () {
+it("faceid.v20180301.EncryptedPhoneVerification", async function () {
     try {
-       const data = await client.DetectAuth({})
+       const data = await client.EncryptedPhoneVerification({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("faceid.v20180301.GetDetectInfoEnhanced", async function () {
+    try {
+       const data = await client.GetDetectInfoEnhanced({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,9 +108,9 @@ it("faceid.v20180301.BankCardVerification", async function () {
     }
 })
 
-it("faceid.v20180301.CheckIdCardInformation", async function () {
+it("faceid.v20180301.LivenessCompare", async function () {
     try {
-       const data = await client.CheckIdCardInformation({})
+       const data = await client.LivenessCompare({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,9 +248,9 @@ it("faceid.v20180301.GetEidResult", async function () {
     }
 })
 
-it("faceid.v20180301.GetDetectInfoEnhanced", async function () {
+it("faceid.v20180301.DetectAuth", async function () {
     try {
-       const data = await client.GetDetectInfoEnhanced({})
+       const data = await client.DetectAuth({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

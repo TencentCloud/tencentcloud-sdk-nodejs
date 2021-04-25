@@ -296,6 +296,11 @@ export interface TaskResult {
    * 命令执行结束时间。
    */
   ExecEndTime: string
+
+  /**
+   * 命令最终输出被截断的字节数。
+   */
+  Dropped: number
 }
 
 /**

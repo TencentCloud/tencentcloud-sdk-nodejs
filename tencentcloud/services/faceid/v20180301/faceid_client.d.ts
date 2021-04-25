@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { GetDetectInfoEnhancedRequest, GetFaceIdTokenRequest, LivenessRequest, CheckBankCardInformationRequest, MobileNetworkTimeVerificationResponse, GetLiveCodeRequest, GetEidResultResponse, IdCardVerificationRequest, BankCardVerificationRequest, CheckBankCardInformationResponse, CheckIdCardInformationResponse, GetDetectInfoEnhancedResponse, PhoneVerificationRequest, GetEidResultRequest, DetectAuthResponse, PhoneVerificationResponse, GetEidTokenRequest, IdCardOCRVerificationRequest, CheckPhoneAndNameResponse, BankCard4EVerificationResponse, MobileStatusRequest, GetRealNameAuthTokenRequest, BankCard2EVerificationRequest, LivenessRecognitionRequest, GetFaceIdTokenResponse, MobileStatusResponse, IdCardOCRVerificationResponse, GetRealNameAuthTokenResponse, LivenessResponse, CheckIdCardInformationRequest, DetectAuthRequest, MinorsVerificationResponse, BankCardVerificationResponse, GetRealNameAuthResultRequest, ImageRecognitionRequest, BankCard4EVerificationRequest, MobileNetworkTimeVerificationRequest, GetFaceIdResultRequest, GetActionSequenceResponse, LivenessRecognitionResponse, MinorsVerificationRequest, ImageRecognitionResponse, GetActionSequenceRequest, GetDetectInfoResponse, LivenessCompareResponse, GetLiveCodeResponse, GetDetectInfoRequest, BankCard2EVerificationResponse, IdCardVerificationResponse, CheckPhoneAndNameRequest, GetEidTokenResponse, LivenessCompareRequest, GetFaceIdResultResponse, GetRealNameAuthResultResponse } from "./faceid_models";
+import { GetDetectInfoEnhancedRequest, GetFaceIdTokenRequest, LivenessRequest, CheckBankCardInformationRequest, MobileNetworkTimeVerificationResponse, GetLiveCodeRequest, GetEidResultResponse, IdCardVerificationRequest, BankCardVerificationRequest, CheckBankCardInformationResponse, CheckIdCardInformationResponse, GetDetectInfoEnhancedResponse, PhoneVerificationRequest, GetEidResultRequest, DetectAuthResponse, PhoneVerificationResponse, GetEidTokenRequest, IdCardOCRVerificationRequest, CheckPhoneAndNameResponse, BankCard4EVerificationResponse, MobileStatusRequest, GetRealNameAuthTokenRequest, BankCard2EVerificationRequest, LivenessRecognitionRequest, GetFaceIdTokenResponse, MobileStatusResponse, IdCardOCRVerificationResponse, GetRealNameAuthTokenResponse, LivenessResponse, CheckIdCardInformationRequest, DetectAuthRequest, MinorsVerificationResponse, BankCardVerificationResponse, GetRealNameAuthResultRequest, ImageRecognitionRequest, BankCard4EVerificationRequest, MobileNetworkTimeVerificationRequest, GetFaceIdResultRequest, GetActionSequenceResponse, LivenessRecognitionResponse, MinorsVerificationRequest, ImageRecognitionResponse, GetActionSequenceRequest, GetDetectInfoResponse, LivenessCompareResponse, GetLiveCodeResponse, GetDetectInfoRequest, BankCard2EVerificationResponse, IdCardVerificationResponse, CheckPhoneAndNameRequest, GetEidTokenResponse, LivenessCompareRequest, GetFaceIdResultResponse, EncryptedPhoneVerificationRequest, GetRealNameAuthResultResponse, EncryptedPhoneVerificationResponse } from "./faceid_models";
 /**
  * faceid client
  * @class
@@ -16,17 +16,21 @@ export declare class Client extends AbstractClient {
      */
     GetActionSequence(req: GetActionSequenceRequest, cb?: (error: string, rep: GetActionSequenceResponse) => void): Promise<GetActionSequenceResponse>;
     /**
-     * 传入视频和照片，先判断视频中是否为真人，判断为真人后，再判断该视频中的人与上传照片是否属于同一个人。
+     * 传入身份证人像面照片，识别身份证照片上的信息，并将姓名、身份证号、身份证人像照片与公安权威库的证件照进行比对，是否属于同一个人，从而验证身份证信息的真实性。
      */
-    LivenessCompare(req: LivenessCompareRequest, cb?: (error: string, rep: LivenessCompareResponse) => void): Promise<LivenessCompareResponse>;
+    CheckIdCardInformation(req: CheckIdCardInformationRequest, cb?: (error: string, rep: CheckIdCardInformationResponse) => void): Promise<CheckIdCardInformationResponse>;
     /**
      * 本接口用于输入银行卡号、姓名、开户证件号、开户手机号，校验信息的真实性和一致性。
      */
     BankCard4EVerification(req: BankCard4EVerificationRequest, cb?: (error: string, rep: BankCard4EVerificationResponse) => void): Promise<BankCard4EVerificationResponse>;
     /**
-     * 每次调用人脸核身SaaS化服务前，需先调用本接口获取BizToken，用来串联核身流程，在验证完成后，用于获取验证结果信息。
+     * 本接口用于校验手机号、姓名和身份证号的真实性和一致性，入参支持MD5加密传输。
      */
-    DetectAuth(req: DetectAuthRequest, cb?: (error: string, rep: DetectAuthResponse) => void): Promise<DetectAuthResponse>;
+    EncryptedPhoneVerification(req: EncryptedPhoneVerificationRequest, cb?: (error: string, rep: EncryptedPhoneVerificationResponse) => void): Promise<EncryptedPhoneVerificationResponse>;
+    /**
+     * 完成验证后，用BizToken调用本接口获取结果信息，BizToken生成后三天内（3\*24\*3,600秒）可多次拉取。
+     */
+    GetDetectInfoEnhanced(req: GetDetectInfoEnhancedRequest, cb?: (error: string, rep: GetDetectInfoEnhancedResponse) => void): Promise<GetDetectInfoEnhancedResponse>;
     /**
      * 每次调用人脸核身SDK服务前，需先调用本接口获取SDKToken，用来串联核身流程，在验证完成后，用于获取验证结果信息，该token仅能核身一次。
      */
@@ -41,9 +45,9 @@ export declare class Client extends AbstractClient {
      */
     BankCardVerification(req: BankCardVerificationRequest, cb?: (error: string, rep: BankCardVerificationResponse) => void): Promise<BankCardVerificationResponse>;
     /**
-     * 传入身份证人像面照片，识别身份证照片上的信息，并将姓名、身份证号、身份证人像照片与公安权威库的证件照进行比对，是否属于同一个人，从而验证身份证信息的真实性。
+     * 传入视频和照片，先判断视频中是否为真人，判断为真人后，再判断该视频中的人与上传照片是否属于同一个人。
      */
-    CheckIdCardInformation(req: CheckIdCardInformationRequest, cb?: (error: string, rep: CheckIdCardInformationResponse) => void): Promise<CheckIdCardInformationResponse>;
+    LivenessCompare(req: LivenessCompareRequest, cb?: (error: string, rep: LivenessCompareResponse) => void): Promise<LivenessCompareResponse>;
     /**
      * 该接口仅限微信公众号中使用，传入姓名和身份证号获取回调URL，在微信公众号中打开验证姓名和身份证号与微信实名的信息是否一致。
 
@@ -98,9 +102,9 @@ export declare class Client extends AbstractClient {
      */
     GetEidResult(req: GetEidResultRequest, cb?: (error: string, rep: GetEidResultResponse) => void): Promise<GetEidResultResponse>;
     /**
-     * 完成验证后，用BizToken调用本接口获取结果信息，BizToken生成后三天内（3\*24\*3,600秒）可多次拉取。
+     * 每次调用人脸核身SaaS化服务前，需先调用本接口获取BizToken，用来串联核身流程，在验证完成后，用于获取验证结果信息。
      */
-    GetDetectInfoEnhanced(req: GetDetectInfoEnhancedRequest, cb?: (error: string, rep: GetDetectInfoEnhancedResponse) => void): Promise<GetDetectInfoEnhancedResponse>;
+    DetectAuth(req: DetectAuthRequest, cb?: (error: string, rep: DetectAuthResponse) => void): Promise<DetectAuthResponse>;
     /**
      * 银行卡基础信息查询
      */

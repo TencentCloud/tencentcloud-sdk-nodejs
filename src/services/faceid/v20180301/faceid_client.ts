@@ -79,7 +79,9 @@ import {
   LivenessCompareRequest,
   DetectDetail,
   GetFaceIdResultResponse,
+  EncryptedPhoneVerificationRequest,
   GetRealNameAuthResultResponse,
+  EncryptedPhoneVerificationResponse,
 } from "./faceid_models"
 
 /**
@@ -112,13 +114,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 传入视频和照片，先判断视频中是否为真人，判断为真人后，再判断该视频中的人与上传照片是否属于同一个人。
+   * 传入身份证人像面照片，识别身份证照片上的信息，并将姓名、身份证号、身份证人像照片与公安权威库的证件照进行比对，是否属于同一个人，从而验证身份证信息的真实性。
    */
-  async LivenessCompare(
-    req: LivenessCompareRequest,
-    cb?: (error: string, rep: LivenessCompareResponse) => void
-  ): Promise<LivenessCompareResponse> {
-    return this.request("LivenessCompare", req, cb)
+  async CheckIdCardInformation(
+    req: CheckIdCardInformationRequest,
+    cb?: (error: string, rep: CheckIdCardInformationResponse) => void
+  ): Promise<CheckIdCardInformationResponse> {
+    return this.request("CheckIdCardInformation", req, cb)
   }
 
   /**
@@ -132,13 +134,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 每次调用人脸核身SaaS化服务前，需先调用本接口获取BizToken，用来串联核身流程，在验证完成后，用于获取验证结果信息。
+   * 本接口用于校验手机号、姓名和身份证号的真实性和一致性，入参支持MD5加密传输。
    */
-  async DetectAuth(
-    req: DetectAuthRequest,
-    cb?: (error: string, rep: DetectAuthResponse) => void
-  ): Promise<DetectAuthResponse> {
-    return this.request("DetectAuth", req, cb)
+  async EncryptedPhoneVerification(
+    req: EncryptedPhoneVerificationRequest,
+    cb?: (error: string, rep: EncryptedPhoneVerificationResponse) => void
+  ): Promise<EncryptedPhoneVerificationResponse> {
+    return this.request("EncryptedPhoneVerification", req, cb)
+  }
+
+  /**
+   * 完成验证后，用BizToken调用本接口获取结果信息，BizToken生成后三天内（3\*24\*3,600秒）可多次拉取。
+   */
+  async GetDetectInfoEnhanced(
+    req: GetDetectInfoEnhancedRequest,
+    cb?: (error: string, rep: GetDetectInfoEnhancedResponse) => void
+  ): Promise<GetDetectInfoEnhancedResponse> {
+    return this.request("GetDetectInfoEnhanced", req, cb)
   }
 
   /**
@@ -173,13 +185,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 传入身份证人像面照片，识别身份证照片上的信息，并将姓名、身份证号、身份证人像照片与公安权威库的证件照进行比对，是否属于同一个人，从而验证身份证信息的真实性。
+   * 传入视频和照片，先判断视频中是否为真人，判断为真人后，再判断该视频中的人与上传照片是否属于同一个人。
    */
-  async CheckIdCardInformation(
-    req: CheckIdCardInformationRequest,
-    cb?: (error: string, rep: CheckIdCardInformationResponse) => void
-  ): Promise<CheckIdCardInformationResponse> {
-    return this.request("CheckIdCardInformation", req, cb)
+  async LivenessCompare(
+    req: LivenessCompareRequest,
+    cb?: (error: string, rep: LivenessCompareResponse) => void
+  ): Promise<LivenessCompareResponse> {
+    return this.request("LivenessCompare", req, cb)
   }
 
   /**
@@ -314,13 +326,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 完成验证后，用BizToken调用本接口获取结果信息，BizToken生成后三天内（3\*24\*3,600秒）可多次拉取。
+   * 每次调用人脸核身SaaS化服务前，需先调用本接口获取BizToken，用来串联核身流程，在验证完成后，用于获取验证结果信息。
    */
-  async GetDetectInfoEnhanced(
-    req: GetDetectInfoEnhancedRequest,
-    cb?: (error: string, rep: GetDetectInfoEnhancedResponse) => void
-  ): Promise<GetDetectInfoEnhancedResponse> {
-    return this.request("GetDetectInfoEnhanced", req, cb)
+  async DetectAuth(
+    req: DetectAuthRequest,
+    cb?: (error: string, rep: DetectAuthResponse) => void
+  ): Promise<DetectAuthResponse> {
+    return this.request("DetectAuth", req, cb)
   }
 
   /**

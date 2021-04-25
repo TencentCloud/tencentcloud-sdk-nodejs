@@ -40,10 +40,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetActionSequence", req, cb);
     }
     /**
-     * 传入视频和照片，先判断视频中是否为真人，判断为真人后，再判断该视频中的人与上传照片是否属于同一个人。
+     * 传入身份证人像面照片，识别身份证照片上的信息，并将姓名、身份证号、身份证人像照片与公安权威库的证件照进行比对，是否属于同一个人，从而验证身份证信息的真实性。
      */
-    async LivenessCompare(req, cb) {
-        return this.request("LivenessCompare", req, cb);
+    async CheckIdCardInformation(req, cb) {
+        return this.request("CheckIdCardInformation", req, cb);
     }
     /**
      * 本接口用于输入银行卡号、姓名、开户证件号、开户手机号，校验信息的真实性和一致性。
@@ -52,10 +52,16 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BankCard4EVerification", req, cb);
     }
     /**
-     * 每次调用人脸核身SaaS化服务前，需先调用本接口获取BizToken，用来串联核身流程，在验证完成后，用于获取验证结果信息。
+     * 本接口用于校验手机号、姓名和身份证号的真实性和一致性，入参支持MD5加密传输。
      */
-    async DetectAuth(req, cb) {
-        return this.request("DetectAuth", req, cb);
+    async EncryptedPhoneVerification(req, cb) {
+        return this.request("EncryptedPhoneVerification", req, cb);
+    }
+    /**
+     * 完成验证后，用BizToken调用本接口获取结果信息，BizToken生成后三天内（3\*24\*3,600秒）可多次拉取。
+     */
+    async GetDetectInfoEnhanced(req, cb) {
+        return this.request("GetDetectInfoEnhanced", req, cb);
     }
     /**
      * 每次调用人脸核身SDK服务前，需先调用本接口获取SDKToken，用来串联核身流程，在验证完成后，用于获取验证结果信息，该token仅能核身一次。
@@ -77,10 +83,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BankCardVerification", req, cb);
     }
     /**
-     * 传入身份证人像面照片，识别身份证照片上的信息，并将姓名、身份证号、身份证人像照片与公安权威库的证件照进行比对，是否属于同一个人，从而验证身份证信息的真实性。
+     * 传入视频和照片，先判断视频中是否为真人，判断为真人后，再判断该视频中的人与上传照片是否属于同一个人。
      */
-    async CheckIdCardInformation(req, cb) {
-        return this.request("CheckIdCardInformation", req, cb);
+    async LivenessCompare(req, cb) {
+        return this.request("LivenessCompare", req, cb);
     }
     /**
      * 该接口仅限微信公众号中使用，传入姓名和身份证号获取回调URL，在微信公众号中打开验证姓名和身份证号与微信实名的信息是否一致。
@@ -162,10 +168,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("GetEidResult", req, cb);
     }
     /**
-     * 完成验证后，用BizToken调用本接口获取结果信息，BizToken生成后三天内（3\*24\*3,600秒）可多次拉取。
+     * 每次调用人脸核身SaaS化服务前，需先调用本接口获取BizToken，用来串联核身流程，在验证完成后，用于获取验证结果信息。
      */
-    async GetDetectInfoEnhanced(req, cb) {
-        return this.request("GetDetectInfoEnhanced", req, cb);
+    async DetectAuth(req, cb) {
+        return this.request("DetectAuth", req, cb);
     }
     /**
      * 银行卡基础信息查询

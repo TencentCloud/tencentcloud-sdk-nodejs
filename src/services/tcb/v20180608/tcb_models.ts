@@ -800,6 +800,21 @@ export interface DescribeAuthDomainsResponse {
 }
 
 /**
+ * DescribeWxCloudBaseRunEnvs返回参数结构体
+ */
+export interface DescribeWxCloudBaseRunEnvsResponse {
+  /**
+   * env列表
+   */
+  EnvList: Array<EnvInfo>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateHostingDomain请求参数结构体
  */
 export interface CreateHostingDomainRequest {
@@ -1132,6 +1147,43 @@ export interface CommonServiceAPIRequest {
 }
 
 /**
+ * CreateWxCloudBaseRunEnv请求参数结构体
+ */
+export interface CreateWxCloudBaseRunEnvRequest {
+  /**
+   * wx应用Id
+   */
+  WxAppId: string
+
+  /**
+   * 环境别名，要以a-z开头，不能包含 a-z,0-9,- 以外的字符
+   */
+  Alias?: string
+
+  /**
+   * 用户享有的免费额度级别，目前只能为“basic”，不传该字段或该字段为空，标识不享受免费额度。
+   */
+  FreeQuota?: string
+
+  /**
+      * 订单标记。建议使用方统一转大小写之后再判断。
+QuickStart：快速启动来源
+Activity：活动来源
+      */
+  Flag?: string
+
+  /**
+   * 私有网络Id
+   */
+  VpcId?: string
+
+  /**
+   * 子网列表
+   */
+  SubNetIds?: Array<string>
+}
+
+/**
  * CreateStaticStore请求参数结构体
  */
 export interface CreateStaticStoreRequest {
@@ -1210,6 +1262,21 @@ export interface DescribeExtraPkgBillingInfoRequest {
    * 已购买增值包的环境ID
    */
   EnvId?: string
+}
+
+/**
+ * DescribeWxCloudBaseRunSubNets返回参数结构体
+ */
+export interface DescribeWxCloudBaseRunSubNetsResponse {
+  /**
+   * 子网Id列表
+   */
+  SubNetIds: Array<string>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1649,6 +1716,26 @@ export interface EstablishWxGatewayRouteResponse {
 }
 
 /**
+ * CreateWxCloudBaseRunEnv返回参数结构体
+ */
+export interface CreateWxCloudBaseRunEnvResponse {
+  /**
+   * 环境Id
+   */
+  EnvId: string
+
+  /**
+   * 后付费订单号
+   */
+  TranId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * EstablishWxGatewayRoute请求参数结构体
  */
 export interface EstablishWxGatewayRouteRequest {
@@ -1890,6 +1977,21 @@ export interface LoginStatistic {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UpdateTime?: string
+}
+
+/**
+ * DescribeWxCloudBaseRunSubNets请求参数结构体
+ */
+export interface DescribeWxCloudBaseRunSubNetsRequest {
+  /**
+   * VPC id
+   */
+  VpcId: string
+
+  /**
+   * 查询个数限制，不填或小于等于0，等于不限制
+   */
+  Limit?: number
 }
 
 /**
@@ -2548,6 +2650,16 @@ export interface DescribeSmsQuotasResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeWxCloudBaseRunEnvs请求参数结构体
+ */
+export interface DescribeWxCloudBaseRunEnvsRequest {
+  /**
+   * wx应用Id
+   */
+  WxAppId: string
 }
 
 /**

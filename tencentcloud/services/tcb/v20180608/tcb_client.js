@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("tcb.tencentcloudapi.com", "2018-06-08", clientConfig);
     }
     /**
+     * 查询微信云托管子网
+     */
+    async DescribeWxCloudBaseRunSubNets(req, cb) {
+        return this.request("DescribeWxCloudBaseRunSubNets", req, cb);
+    }
+    /**
      * 创建托管域名
      */
     async CreateHostingDomain(req, cb) {
@@ -46,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEndUsers", req, cb);
     }
     /**
+     * 查询微信云托管环境信息
+     */
+    async DescribeWxCloudBaseRunEnvs(req, cb) {
+        return this.request("DescribeWxCloudBaseRunEnvs", req, cb);
+    }
+    /**
      * 查询后付费短信资源量
 1 有免费包的返回SmsFreeQuota结构所有字段
 2 没有免费包，有付费包，付费返回复用SmsFreeQuota结构，其中只有 TodayUsedQuota 字段有效
@@ -59,6 +71,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeEnvs(req, cb) {
         return this.request("DescribeEnvs", req, cb);
+    }
+    /**
+     * 创建微信云托管
+     */
+    async CreateWxCloudBaseRunEnv(req, cb) {
+        return this.request("CreateWxCloudBaseRunEnv", req, cb);
     }
     /**
      * 增加安全域名

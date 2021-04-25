@@ -1978,6 +1978,34 @@ export interface GetFaceIdResultResponse {
 }
 
 /**
+ * EncryptedPhoneVerification请求参数结构体
+ */
+export interface EncryptedPhoneVerificationRequest {
+  /**
+   * 身份证号，加密方式以EncryptionMode为准
+   */
+  IdCard: string
+
+  /**
+   * 姓名，加密方式以EncryptionMode为准
+   */
+  Name: string
+
+  /**
+   * 手机号，加密方式以EncryptionMode为准
+   */
+  Phone: string
+
+  /**
+      * 敏感信息的加密方式，目前只支持MD5加密传输，参数取值：
+
+0：明文，不加密
+1：使用MD5加密
+      */
+  EncryptionMode: string
+}
+
+/**
  * GetRealNameAuthResult返回参数结构体
  */
 export interface GetRealNameAuthResultResponse {
@@ -1993,6 +2021,34 @@ export interface GetRealNameAuthResultResponse {
 -3: 微信号未实名
       */
   ResultType?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * EncryptedPhoneVerification返回参数结构体
+ */
+export interface EncryptedPhoneVerificationResponse {
+  /**
+      * 认证结果码:
+【收费结果码】
+0: 认证通过
+-4: 信息不一致
+
+【不收费结果码】
+-7: 身份证号码有误
+-9: 没有记录
+-11: 验证中心服务繁忙
+      */
+  Result: string
+
+  /**
+   * 业务结果描述。
+   */
+  Description: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

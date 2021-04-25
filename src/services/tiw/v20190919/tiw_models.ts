@@ -1247,12 +1247,17 @@ export interface DescribeQualityMetricsRequest {
 
   /**
       * 查询的指标，目前支持以下值
-  - image_load_total_count: 图片加载总数
-  - image_load_fail_count: 图片加载失败数量
-  - image_load_success_rate: 图片加载成功率
-  - ppt_load_total_count: PPT加载总数
-  - ppt_load_fail_count: PPT加载失败总数
-  - ppt_load_success_rate: PPT加载成功率
+  - image_load_total_count: 图片加载总数（单位，次）
+  - image_load_fail_count: 图片加载失败数量（单位，次）
+  - image_load_success_rate: 图片加载成功率（百分比）
+  - ppt_load_total_count: PPT加载总数（单位，次）
+  - ppt_load_fail_count: PPT加载失败总数（单位，次）
+  - ppt_load_success_rate: PPT加载成功率（单位，百分比）
+  - verify_sdk_total_count: 白板鉴权总次数（单位，次）
+  - verify_sdk_fail_count: 白板鉴权失败次数（单位，次）
+  - verify_sdk_success_rate: 白板鉴权成功率（单位，百分比）
+  - verify_sdk_in_one_second_rate: 白板鉴权秒开率（单位，百分比）
+  - verify_sdk_cost_avg: 白板鉴权耗时平均时间（单位，毫秒）
       */
   Metric: string
 

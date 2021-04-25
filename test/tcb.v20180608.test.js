@@ -18,6 +18,16 @@ const client = new tencentcloud.tcb.v20180608.Client({
 })
 describe("tcb.v20180608.test.js", function () {
 
+it("tcb.v20180608.DescribeWxCloudBaseRunSubNets", async function () {
+    try {
+       const data = await client.DescribeWxCloudBaseRunSubNets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.CreateHostingDomain", async function () {
     try {
        const data = await client.CreateHostingDomain({})
@@ -48,6 +58,16 @@ it("tcb.v20180608.DescribeEndUsers", async function () {
     }
 })
 
+it("tcb.v20180608.DescribeWxCloudBaseRunEnvs", async function () {
+    try {
+       const data = await client.DescribeWxCloudBaseRunEnvs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.DescribeSmsQuotas", async function () {
     try {
        const data = await client.DescribeSmsQuotas({})
@@ -61,6 +81,16 @@ it("tcb.v20180608.DescribeSmsQuotas", async function () {
 it("tcb.v20180608.DescribeEnvs", async function () {
     try {
        const data = await client.DescribeEnvs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.CreateWxCloudBaseRunEnv", async function () {
+    try {
+       const data = await client.CreateWxCloudBaseRunEnv({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
