@@ -1761,6 +1761,16 @@ export interface CreateFunctionRequest {
    * 函数 Tag 参数，以键值对数组形式传入
    */
   Tags?: Array<Tag>
+
+  /**
+   * 是否开启异步属性，TRUE 为开启，FALSE为关闭
+   */
+  AsyncRunEnable?: string
+
+  /**
+   * 是否开启事件追踪，TRUE 为开启，FALSE为关闭
+   */
+  TraceEnable?: string
 }
 
 /**
@@ -2458,7 +2468,7 @@ export interface Code {
   CosObjectName?: string
 
   /**
-   * 包含函数代码文件及其依赖项的 zip 格式文件，使用该接口时要求将 zip 文件的内容转成 base64 编码，最大支持20M
+   * 包含函数代码文件及其依赖项的 zip 格式文件，zip包大小上限为 50MB，使用该接口时要求将 zip 文件的内容转成 base64 编码
    */
   ZipFile?: string
 

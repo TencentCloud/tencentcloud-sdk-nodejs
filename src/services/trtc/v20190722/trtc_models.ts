@@ -1195,22 +1195,22 @@ export interface DescribeTrtcMcuTranscodeTimeResponse {
  */
 export interface DescribePictureRequest {
   /**
-   * 应用id
+   * 应用ID
    */
   SdkAppId: number
 
   /**
-   * 图片id,不传时返回该应用下所有图片
+   * 图片ID，不填时返回该应用下所有图片
    */
   PictureId?: number
 
   /**
-   * 每页数量
+   * 每页数量，不填时默认为10
    */
   PageSize?: number
 
   /**
-   * 页码
+   * 页码，不填时默认为1
    */
   PageNo?: number
 }

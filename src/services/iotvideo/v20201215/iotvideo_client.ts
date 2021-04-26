@@ -65,7 +65,7 @@ import {
   ImportModelDefinitionRequest,
   DescribeDeviceCommLogResponse,
   DeleteDeviceRequest,
-  GetAllFirmwareVersionResponse,
+  GenerateSignedVideoURLResponse,
   ListFirmwaresResponse,
   DescribeFirmwareTaskDevicesRequest,
   DescribeFirmwareResponse,
@@ -75,6 +75,7 @@ import {
   DescribeFirmwareTaskDevicesResponse,
   DescribeCloudStorageThumbnailResponse,
   RetryDeviceFirmwareTaskResponse,
+  GenerateSignedVideoURLRequest,
   ResetCloudStorageResponse,
   DescribeFirmwareTaskResponse,
   FirmwareInfo,
@@ -122,6 +123,7 @@ import {
   DescribeCategoryRequest,
   DeleteFirmwareRequest,
   DescribeCloudStorageRequest,
+  GetAllFirmwareVersionResponse,
   DescribeDeviceDataHistoryResponse,
   SearchKeyword,
   DescribeDevicesRequest,
@@ -416,6 +418,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCloudStorageResponse) => void
   ): Promise<CreateCloudStorageResponse> {
     return this.request("CreateCloudStorage", req, cb)
+  }
+
+  /**
+   * 获取视频防盗链播放URL
+   */
+  async GenerateSignedVideoURL(
+    req: GenerateSignedVideoURLRequest,
+    cb?: (error: string, rep: GenerateSignedVideoURLResponse) => void
+  ): Promise<GenerateSignedVideoURLResponse> {
+    return this.request("GenerateSignedVideoURL", req, cb)
   }
 
   /**

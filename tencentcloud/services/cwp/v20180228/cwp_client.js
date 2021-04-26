@@ -257,6 +257,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTagMachines", req, cb);
     }
     /**
+     * 本接口（ModifyAlarmAttribute）用于修改告警设置。
+     */
+    async ModifyAlarmAttribute(req, cb) {
+        return this.request("ModifyAlarmAttribute", req, cb);
+    }
+    /**
      * 本接口(DescribeNonlocalLoginPlaces)用于获取异地登录事件。
      */
     async DescribeNonlocalLoginPlaces(req, cb) {
@@ -359,10 +365,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeExportMachines", req, cb);
     }
     /**
-     * 本接口（ModifyAlarmAttribute）用于修改告警设置。
+     * 获取机器地域列表
      */
-    async ModifyAlarmAttribute(req, cb) {
-        return this.request("ModifyAlarmAttribute", req, cb);
+    async DescribeMachineRegions(req, cb) {
+        return this.request("DescribeMachineRegions", req, cb);
     }
     /**
      * 本接口 (DescribeOpenPortStatistics) 用于获取端口统计列表。

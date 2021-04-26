@@ -6480,6 +6480,15 @@ export interface ModifyGatewayFlowQosResponse {
     RequestId?: string;
 }
 /**
+ * ModifyNetworkInterfaceQos返回参数结构体
+ */
+export interface ModifyNetworkInterfaceQosResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifySecurityGroupAttribute返回参数结构体
  */
 export interface ModifySecurityGroupAttributeResponse {
@@ -8762,21 +8771,17 @@ export interface DeleteAddressTemplateGroupResponse {
     RequestId?: string;
 }
 /**
- * ReplaceRoutes返回参数结构体
+ * ModifyNetworkInterfaceQos请求参数结构体
  */
-export interface ReplaceRoutesResponse {
+export interface ModifyNetworkInterfaceQosRequest {
     /**
-      * 原路由策略信息。
+      * 弹性网卡ID，支持批量修改。
       */
-    OldRouteSet: Array<Route>;
+    NetworkInterfaceIds: Array<string>;
     /**
-      * 修改后的路由策略信息。
+      * 服务质量，可选值：AU、AG、PT，分别代表金、银、白金三个等级。
       */
-    NewRouteSet: Array<Route>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    QosLevel: string;
 }
 /**
  * ModifyLocalGateway请求参数结构体
@@ -9039,6 +9044,23 @@ VPN网关实例ID，形如，`vpn-ltjahce6`。
  * ModifyPrivateIpAddressesAttribute返回参数结构体
  */
 export interface ModifyPrivateIpAddressesAttributeResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ReplaceRoutes返回参数结构体
+ */
+export interface ReplaceRoutesResponse {
+    /**
+      * 原路由策略信息。
+      */
+    OldRouteSet: Array<Route>;
+    /**
+      * 修改后的路由策略信息。
+      */
+    NewRouteSet: Array<Route>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

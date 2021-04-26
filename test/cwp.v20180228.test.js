@@ -398,6 +398,16 @@ it("cwp.v20180228.DescribeTagMachines", async function () {
     }
 })
 
+it("cwp.v20180228.ModifyAlarmAttribute", async function () {
+    try {
+       const data = await client.ModifyAlarmAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeNonlocalLoginPlaces", async function () {
     try {
        const data = await client.DescribeNonlocalLoginPlaces({})
@@ -568,9 +578,9 @@ it("cwp.v20180228.DescribeExportMachines", async function () {
     }
 })
 
-it("cwp.v20180228.ModifyAlarmAttribute", async function () {
+it("cwp.v20180228.DescribeMachineRegions", async function () {
     try {
-       const data = await client.ModifyAlarmAttribute({})
+       const data = await client.DescribeMachineRegions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

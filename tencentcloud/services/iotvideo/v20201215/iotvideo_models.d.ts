@@ -951,13 +951,13 @@ export interface DeleteDeviceRequest {
     DeviceName: string;
 }
 /**
- * GetAllFirmwareVersion返回参数结构体
+ * GenerateSignedVideoURL返回参数结构体
  */
-export interface GetAllFirmwareVersionResponse {
+export interface GenerateSignedVideoURLResponse {
     /**
-      * 无
+      * 视频防盗链播放URL
       */
-    Version: Array<string>;
+    SignedVideoURL: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1152,6 +1152,19 @@ export interface RetryDeviceFirmwareTaskResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * GenerateSignedVideoURL请求参数结构体
+ */
+export interface GenerateSignedVideoURLRequest {
+    /**
+      * 视频播放原始URL地址
+      */
+    VideoURL: string;
+    /**
+      * 播放链接过期时间
+      */
+    ExpireTime: number;
 }
 /**
  * ResetCloudStorage返回参数结构体
@@ -2182,6 +2195,19 @@ export interface DescribeCloudStorageRequest {
       * 设备名称
       */
     DeviceName: string;
+}
+/**
+ * GetAllFirmwareVersion返回参数结构体
+ */
+export interface GetAllFirmwareVersionResponse {
+    /**
+      * 无
+      */
+    Version: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeDeviceDataHistory返回参数结构体

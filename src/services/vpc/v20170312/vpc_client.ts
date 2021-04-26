@@ -352,6 +352,7 @@ import {
   CreateIp6TranslatorsRequest,
   AssociateDhcpIpWithAddressIpResponse,
   ModifyGatewayFlowQosResponse,
+  ModifyNetworkInterfaceQosResponse,
   ModifySecurityGroupAttributeResponse,
   AssociateDirectConnectGatewayNatGatewayRequest,
   AddressTemplateItem,
@@ -495,7 +496,7 @@ import {
   InquiryPriceResetVpnGatewayInternetMaxBandwidthResponse,
   DescribeVpcEndPointServiceWhiteListRequest,
   DeleteAddressTemplateGroupResponse,
-  ReplaceRoutesResponse,
+  ModifyNetworkInterfaceQosRequest,
   ModifyLocalGatewayRequest,
   DirectConnectGatewayCcnRoute,
   DeleteHaVipRequest,
@@ -514,6 +515,7 @@ import {
   ReplaceSecurityGroupPolicyResponse,
   EnableGatewayFlowMonitorRequest,
   ModifyPrivateIpAddressesAttributeResponse,
+  ReplaceRoutesResponse,
   ModifyHaVipAttributeResponse,
   CcnBandwidthInfo,
   DeleteSecurityGroupResponse,
@@ -1324,6 +1326,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AcceptAttachCcnInstancesResponse) => void
   ): Promise<AcceptAttachCcnInstancesResponse> {
     return this.request("AcceptAttachCcnInstances", req, cb)
+  }
+
+  /**
+   * 修改弹性网卡服务质量
+   */
+  async ModifyNetworkInterfaceQos(
+    req: ModifyNetworkInterfaceQosRequest,
+    cb?: (error: string, rep: ModifyNetworkInterfaceQosResponse) => void
+  ): Promise<ModifyNetworkInterfaceQosResponse> {
+    return this.request("ModifyNetworkInterfaceQos", req, cb)
   }
 
   /**

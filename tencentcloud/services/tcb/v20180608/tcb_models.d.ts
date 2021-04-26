@@ -225,7 +225,7 @@ export interface DescribeCloudBaseRunServerVersionResponse {
       */
     UploadType: string;
     /**
-      * Repo的类型(coding/gitlab/github/coding)
+      * Repo的类型(gitlab/github/coding)
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RepoType: string;

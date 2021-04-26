@@ -76,6 +76,7 @@ import {
   ReverseShellRule,
   OpenPortStatistics,
   DescribeExportMachinesResponse,
+  DescribeVulInfoResponse,
   EditPrivilegeRuleResponse,
   DescribeHistoryAccountsResponse,
   AgentVul,
@@ -89,6 +90,7 @@ import {
   SecurityEventInfo,
   DescribeComponentInfoResponse,
   DescribeAccountStatisticsResponse,
+  SwitchBashRulesResponse,
   OpenProVersionPrepaidRequest,
   ModifyLoginWhiteListResponse,
   DescribeTagsResponse,
@@ -134,7 +136,7 @@ import {
   MalwareInfo,
   ModifyMalwareTimingScanSettingsResponse,
   Place,
-  SwitchBashRulesResponse,
+  DescribeMachineRegionsRequest,
   LoginWhiteLists,
   DeleteUsualLoginPlacesResponse,
   DeleteNonlocalLoginPlacesResponse,
@@ -168,7 +170,7 @@ import {
   DescribeOpenPortStatisticsResponse,
   DeleteAttackLogsResponse,
   DescribeLoginWhiteListResponse,
-  DescribeVulInfoResponse,
+  DescribeMachineRegionsResponse,
   DescribeScanMalwareScheduleResponse,
   EditReverseShellRuleRequest,
   DescribeProVersionInfoResponse,
@@ -682,6 +684,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（ModifyAlarmAttribute）用于修改告警设置。
+   */
+  async ModifyAlarmAttribute(
+    req: ModifyAlarmAttributeRequest,
+    cb?: (error: string, rep: ModifyAlarmAttributeResponse) => void
+  ): Promise<ModifyAlarmAttributeResponse> {
+    return this.request("ModifyAlarmAttribute", req, cb)
+  }
+
+  /**
    * 本接口(DescribeNonlocalLoginPlaces)用于获取异地登录事件。
    */
   async DescribeNonlocalLoginPlaces(
@@ -852,13 +864,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyAlarmAttribute）用于修改告警设置。
+   * 获取机器地域列表
    */
-  async ModifyAlarmAttribute(
-    req: ModifyAlarmAttributeRequest,
-    cb?: (error: string, rep: ModifyAlarmAttributeResponse) => void
-  ): Promise<ModifyAlarmAttributeResponse> {
-    return this.request("ModifyAlarmAttribute", req, cb)
+  async DescribeMachineRegions(
+    req?: DescribeMachineRegionsRequest,
+    cb?: (error: string, rep: DescribeMachineRegionsResponse) => void
+  ): Promise<DescribeMachineRegionsResponse> {
+    return this.request("DescribeMachineRegions", req, cb)
   }
 
   /**

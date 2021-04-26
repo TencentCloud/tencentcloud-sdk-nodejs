@@ -678,6 +678,16 @@ it("vpc.v20170312.AcceptAttachCcnInstances", async function () {
     }
 })
 
+it("vpc.v20170312.ModifyNetworkInterfaceQos", async function () {
+    try {
+       const data = await client.ModifyNetworkInterfaceQos({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DeleteServiceTemplateGroup", async function () {
     try {
        const data = await client.DeleteServiceTemplateGroup({})

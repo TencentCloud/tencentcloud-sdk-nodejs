@@ -288,6 +288,16 @@ it("iotvideo.v20201215.CreateCloudStorage", async function () {
     }
 })
 
+it("iotvideo.v20201215.GenerateSignedVideoURL", async function () {
+    try {
+       const data = await client.GenerateSignedVideoURL({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideo.v20201215.SetForwardAuth", async function () {
     try {
        const data = await client.SetForwardAuth({})

@@ -462,6 +462,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AcceptAttachCcnInstances", req, cb);
     }
     /**
+     * 修改弹性网卡服务质量
+     */
+    async ModifyNetworkInterfaceQos(req, cb) {
+        return this.request("ModifyNetworkInterfaceQos", req, cb);
+    }
+    /**
      * 本接口（DeleteServiceTemplateGroup）用于删除协议端口模板集合
      */
     async DeleteServiceTemplateGroup(req, cb) {

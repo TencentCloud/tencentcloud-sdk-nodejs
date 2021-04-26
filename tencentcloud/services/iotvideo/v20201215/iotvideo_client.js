@@ -190,6 +190,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateCloudStorage", req, cb);
     }
     /**
+     * 获取视频防盗链播放URL
+     */
+    async GenerateSignedVideoURL(req, cb) {
+        return this.request("GenerateSignedVideoURL", req, cb);
+    }
+    /**
      * 设置转发权限
      */
     async SetForwardAuth(req, cb) {

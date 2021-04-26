@@ -6489,7 +6489,7 @@ export interface AdaptiveDynamicStreamingTaskInput {
   WatermarkSet?: Array<WatermarkInput>
 
   /**
-   * 字幕列表，元素为字幕 ID，支持多个字幕，最大可支持10个。
+   * 字幕列表，元素为字幕 ID，支持多个字幕，最大可支持16个。
    */
   SubtitleSet?: Array<string>
 }

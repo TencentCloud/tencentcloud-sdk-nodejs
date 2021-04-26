@@ -1403,6 +1403,56 @@ export interface DescribeExportMachinesResponse {
 }
 
 /**
+ * DescribeVulInfo返回参数结构体
+ */
+export interface DescribeVulInfoResponse {
+  /**
+   * 漏洞种类ID。
+   */
+  VulId: number
+
+  /**
+   * 漏洞名称。
+   */
+  VulName: string
+
+  /**
+   * 漏洞等级。
+   */
+  VulLevel: string
+
+  /**
+   * 漏洞类型。
+   */
+  VulType: string
+
+  /**
+   * 漏洞描述。
+   */
+  Description: string
+
+  /**
+   * 修复方案。
+   */
+  RepairPlan: string
+
+  /**
+   * 漏洞CVE。
+   */
+  CveId: string
+
+  /**
+   * 参考链接。
+   */
+  Reference: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * EditPrivilegeRule返回参数结构体
  */
 export interface EditPrivilegeRuleResponse {
@@ -1740,6 +1790,16 @@ export interface DescribeAccountStatisticsResponse {
    */
   AccountStatistics: Array<AccountStatistics>
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SwitchBashRules返回参数结构体
+ */
+export interface SwitchBashRulesResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2757,14 +2817,9 @@ export interface Place {
 }
 
 /**
- * SwitchBashRules返回参数结构体
+ * DescribeMachineRegions请求参数结构体
  */
-export interface SwitchBashRulesResponse {
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type DescribeMachineRegionsRequest = null
 
 /**
  * 异地登录白名单
@@ -3321,6 +3376,11 @@ export interface RegionInfo {
    * 地域代码，如 gz，sh，bj
    */
   RegionCode: string
+
+  /**
+   * 地域英文名
+   */
+  RegionNameEn: string
 }
 
 /**
@@ -3420,49 +3480,9 @@ export interface DescribeLoginWhiteListResponse {
 }
 
 /**
- * DescribeVulInfo返回参数结构体
+ * DescribeMachineRegions返回参数结构体
  */
-export interface DescribeVulInfoResponse {
-  /**
-   * 漏洞种类ID。
-   */
-  VulId: number
-
-  /**
-   * 漏洞名称。
-   */
-  VulName: string
-
-  /**
-   * 漏洞等级。
-   */
-  VulLevel: string
-
-  /**
-   * 漏洞类型。
-   */
-  VulType: string
-
-  /**
-   * 漏洞描述。
-   */
-  Description: string
-
-  /**
-   * 修复方案。
-   */
-  RepairPlan: string
-
-  /**
-   * 漏洞CVE。
-   */
-  CveId: string
-
-  /**
-   * 参考链接。
-   */
-  Reference: string
-
+export interface DescribeMachineRegionsResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

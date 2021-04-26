@@ -695,7 +695,7 @@ export interface GetMonitorDataRequest {
       */
     Namespace: string;
     /**
-      * 指标名称，如CPUUsage。各个云产品的详细指标说明请参阅各个产品[监控指标](https://cloud.tencent.com/document/product/248/6140)文档，对应的指标英文名即为MetricName
+      * 指标名称，如CPUUsage，仅支持单指标拉取。各个云产品的详细指标说明请参阅各个产品[监控指标](https://cloud.tencent.com/document/product/248/6140)文档，对应的指标英文名即为MetricName
       */
     MetricName: string;
     /**
@@ -3852,23 +3852,23 @@ export interface GetMonitorDataResponse {
     /**
       * 统计周期
       */
-    Period?: number;
+    Period: number;
     /**
       * 指标名
       */
-    MetricName?: string;
+    MetricName: string;
     /**
       * 数据点数组
       */
-    DataPoints?: Array<DataPoint>;
+    DataPoints: Array<DataPoint>;
     /**
       * 开始时间
       */
-    StartTime?: string;
+    StartTime: string;
     /**
       * 结束时间
       */
-    EndTime?: string;
+    EndTime: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
