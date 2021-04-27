@@ -148,6 +148,16 @@ it("cwp.v20180228.CreateBaselineStrategy", async function () {
     }
 })
 
+it("cwp.v20180228.DescribeImportMachineInfo", async function () {
+    try {
+       const data = await client.DescribeImportMachineInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeBashRules", async function () {
     try {
        const data = await client.DescribeBashRules({})
@@ -1108,6 +1118,16 @@ it("cwp.v20180228.IgnoreImpactedHosts", async function () {
     }
 })
 
+it("cwp.v20180228.ExportVulDetectionExcel", async function () {
+    try {
+       const data = await client.ExportVulDetectionExcel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeBashEvents", async function () {
     try {
        const data = await client.DescribeBashEvents({})
@@ -1131,6 +1151,16 @@ it("cwp.v20180228.DescribeMachines", async function () {
 it("cwp.v20180228.CreateUsualLoginPlaces", async function () {
     try {
        const data = await client.CreateUsualLoginPlaces({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.ExportVulDetectionReport", async function () {
+    try {
+       const data = await client.ExportVulDetectionReport({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

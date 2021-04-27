@@ -41,6 +41,19 @@ export interface ModifyPathRewriteRequest {
     Order?: number;
 }
 /**
+ * 分页的 ContainerEvent
+ */
+export interface TsfPageContainerEvent {
+    /**
+      * 返回个数
+      */
+    TotalCount: number;
+    /**
+      * events 数组
+      */
+    Content: Array<ContainerEvent>;
+}
+/**
  * ApiDetailResponse描述
  */
 export interface ApiDetailResponse {
@@ -138,6 +151,47 @@ export interface PathRewritePage {
       * 路径重写规则列表
       */
     Content: Array<PathRewrite>;
+}
+/**
+ * DescribeUnitApiUseDetail请求参数结构体
+ */
+export interface DescribeUnitApiUseDetailRequest {
+    /**
+      * 网关部署组ID
+      */
+    GatewayDeployGroupId: string;
+    /**
+      * 网关分组Api ID
+      */
+    ApiId: string;
+    /**
+      * 查询的日期,格式：yyyy-MM-dd HH:mm:ss
+      */
+    StartTime: string;
+    /**
+      * 查询的日期,格式：yyyy-MM-dd HH:mm:ss
+      */
+    EndTime: string;
+    /**
+      * 网关实例ID
+      */
+    GatewayInstanceId: string;
+    /**
+      * 网关分组ID
+      */
+    GroupId: string;
+    /**
+      * 翻页查询偏移量
+      */
+    Offset: number;
+    /**
+      * 翻页查询每页记录数
+      */
+    Limit: number;
+    /**
+      * 监控统计数据粒度
+      */
+    Period?: number;
 }
 /**
  * DescribeApiVersions返回参数结构体
@@ -1984,6 +2038,10 @@ export interface ModifyContainerGroupRequest {
       * 子网ID
       */
     SubnetId?: string;
+    /**
+      * 部署组备注
+      */
+    Alias?: string;
 }
 /**
  * UpdateRepository返回参数结构体
@@ -2443,6 +2501,11 @@ export interface ContainGroup {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MemLimit: string;
+    /**
+      * 部署组备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Alias: string;
 }
 /**
  * 部署组列表（应用下钻）
@@ -2745,6 +2808,10 @@ export interface CreateGroupRequest {
       * 部署组资源类型
       */
     GroupResourceType?: string;
+    /**
+      * 部署组备注
+      */
+    Alias?: string;
 }
 /**
  * StopTaskBatch返回参数结构体
@@ -2902,6 +2969,31 @@ export interface RemoveInstancesResponse {
     RequestId?: string;
 }
 /**
+ * DescribeContainerEvents请求参数结构体
+ */
+export interface DescribeContainerEventsRequest {
+    /**
+      * event 的资源类型, group 或者 instance
+      */
+    ResourceType: string;
+    /**
+      * event 的资源 id
+      */
+    ResourceId: string;
+    /**
+      * 偏移量，取值从0开始
+      */
+    Offset?: number;
+    /**
+      * 分页个数，默认为20， 取值应为1~50
+      */
+    Limit?: number;
+    /**
+      * 当类型是 instance 时需要
+      */
+    GroupId?: string;
+}
+/**
  * DisableUnitRule请求参数结构体
  */
 export interface DisableUnitRuleRequest {
@@ -3010,7 +3102,22 @@ export interface Env {
     /**
       * 环境变量值
       */
-    Value: string;
+    Value?: string;
+    /**
+      * k8s ValueFrom
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ValueFrom?: ValueFrom;
+}
+/**
+ * k8s env 的 ResourceFieldRef
+ */
+export interface ResourceFieldRef {
+    /**
+      * k8s 的 Resource
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Resource?: string;
 }
 /**
  * DeleteContainerGroup返回参数结构体
@@ -3054,6 +3161,31 @@ false：失败。
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * CreateLaneRule请求参数结构体
+ */
+export interface CreateLaneRuleRequest {
+    /**
+      * 泳道规则名称
+      */
+    RuleName: string;
+    /**
+      * 泳道规则备注
+      */
+    Remark: string;
+    /**
+      * 泳道规则标签列表
+      */
+    RuleTagList: Array<LaneRuleTag>;
+    /**
+      * 泳道规则标签关系
+      */
+    RuleTagRelationship: string;
+    /**
+      * 泳道Id
+      */
+    LaneId: string;
 }
 /**
  * DisableUnitRoute返回参数结构体
@@ -3228,6 +3360,21 @@ export interface ShrinkInstancesRequest {
       * 下线机器实例ID列表
       */
     InstanceIdList: Array<string>;
+}
+/**
+ * k8s env 的 ValueFrom
+ */
+export interface ValueFrom {
+    /**
+      * k8s env 的 FieldRef
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FieldRef?: FieldRef;
+    /**
+      * k8s env 的 ResourceFieldRef
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ResourceFieldRef?: ResourceFieldRef;
 }
 /**
  * ShrinkInstances返回参数结构体
@@ -4342,6 +4489,16 @@ export interface GatewayApiGroupVo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     GroupApis: Array<GatewayGroupApiVo>;
+    /**
+      * 网关实例的类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GatewayInstanceType: string;
+    /**
+      * 网关实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GatewayInstanceId: string;
 }
 /**
  * CreateApplication请求参数结构体
@@ -4604,27 +4761,34 @@ export interface DescribeServerlessGroupResponse {
     RequestId?: string;
 }
 /**
- * RedoTaskBatch返回参数结构体
+ * BindApiGroup返回参数结构体
  */
-export interface RedoTaskBatchResponse {
+export interface BindApiGroupResponse {
     /**
-      * 批次ID
+      * 返回结果，成功失败
       */
-    Result?: string;
+    Result?: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
 }
 /**
- * 任务id
+ * 监控统计数据点Map集合（单元化网关使用）
  */
-export interface TaskId {
+export interface MetricDataPointMap {
     /**
-      * 任务ID
-注意：此字段可能返回 null，表示取不到有效值。
+      * 总调用次数监控数据点集合
       */
-    TaskId: string;
+    SumReqAmount: Array<MetricDataPoint>;
+    /**
+      * 平均错误率监控数据点集合
+      */
+    AvgFailureRate: Array<MetricDataPoint>;
+    /**
+      * 平均响应时间监控数据点集合
+      */
+    AvgTimeCost: Array<MetricDataPoint>;
 }
 /**
  * ModifyPathRewrite返回参数结构体
@@ -5012,6 +5176,11 @@ export interface VmGroup {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     StopScript: string;
+    /**
+      * 部署组备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Alias: string;
 }
 /**
  * DescribeApiUseDetail返回参数结构体
@@ -5172,6 +5341,51 @@ export interface UpdateGatewayApiResponse {
     RequestId?: string;
 }
 /**
+ * 返回容器的事件，比如 k8s deployment 或者 pod 的 events
+ */
+export interface ContainerEvent {
+    /**
+      * 第一次出现的时间，以 ms 为单位的时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FirstTimestamp: number;
+    /**
+      * 最后一次出现的时间，以 ms 为单位的时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LastTimestamp: number;
+    /**
+      * 级别
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Type: string;
+    /**
+      * 资源类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Kind: string;
+    /**
+      * 资源名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Name: string;
+    /**
+      * 内容
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Reason: string;
+    /**
+      * 详细描述
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Message: string;
+    /**
+      * 出现次数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Count: number;
+}
+/**
  * ModifyLane返回参数结构体
  */
 export interface ModifyLaneResponse {
@@ -5242,6 +5456,26 @@ export interface ShardArgument {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ShardValue: string;
+}
+/**
+ * 监控统计数据点
+ */
+export interface MetricDataPoint {
+    /**
+      * 数据点键
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Key: string;
+    /**
+      * 数据点值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Value: string;
+    /**
+      * 数据点标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tag: string;
 }
 /**
  * DescribeApplicationAttribute返回参数结构体
@@ -5787,6 +6021,20 @@ export interface SimpleGroup {
     AppMicroServiceType: string;
 }
 /**
+ * DescribeContainerEvents返回参数结构体
+ */
+export interface DescribeContainerEventsResponse {
+    /**
+      * events 分页列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Result: TsfPageContainerEvent;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * ModifyContainerGroup返回参数结构体
  */
 export interface ModifyContainerGroupResponse {
@@ -5796,7 +6044,7 @@ true：成功。
 false：失败。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: boolean;
+    Result: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -5951,6 +6199,11 @@ export interface VmGroupSimple {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     DeployDesc: string;
+    /**
+      * 部署组备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Alias: string;
 }
 /**
  * API 响应的参数结构描述
@@ -6740,29 +6993,45 @@ export interface CreateRepositoryResponse {
     RequestId?: string;
 }
 /**
- * CreateLaneRule请求参数结构体
+ * 单元化API使用详情统计对象列表
  */
-export interface CreateLaneRuleRequest {
+export interface GroupUnitApiDailyUseStatistics {
     /**
-      * 泳道规则名称
+      * 命名空间ID
       */
-    RuleName: string;
+    NamespaceId: string;
     /**
-      * 泳道规则备注
+      * 命名空间名称
       */
-    Remark: string;
+    NamespaceName: string;
     /**
-      * 泳道规则标签列表
+      * 该API在该命名空间下的总调用次数
       */
-    RuleTagList: Array<LaneRuleTag>;
+    SumReqAmount: string;
     /**
-      * 泳道规则标签关系
+      * 该API在该命名空间下的平均错误率
       */
-    RuleTagRelationship: string;
+    AvgFailureRate: string;
     /**
-      * 泳道Id
+      * 该API在该命名空间下的平均响应时间
       */
-    LaneId: string;
+    AvgTimeCost: string;
+    /**
+      * 监控数据曲线点位图Map集合
+      */
+    MetricDataPointMap: MetricDataPointMap;
+    /**
+      * 状态码分布详情
+      */
+    TopStatusCode: Array<ApiUseStatisticsEntity>;
+    /**
+      * 耗时分布详情
+      */
+    TopTimeCost: Array<ApiUseStatisticsEntity>;
+    /**
+      * 分位值对象
+      */
+    Quantile: QuantileEntity;
 }
 /**
  * DescribeServerlessGroups请求参数结构体
@@ -6936,6 +7205,19 @@ export interface UpdateApiRateLimitRulesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 查询网关API监控明细数据（单元化网关使用详情）
+ */
+export interface GroupUnitApiUseStatistics {
+    /**
+      * 总记录数
+      */
+    TotalCount: number;
+    /**
+      * 查询网关API监控明细对象集合
+      */
+    Content: Array<GroupUnitApiDailyUseStatistics>;
 }
 /**
  * DescribeGroupInstances返回参数结构体
@@ -7989,6 +8271,19 @@ export interface ApiDetailInfo {
     Description: string;
 }
 /**
+ * DescribeUnitApiUseDetail返回参数结构体
+ */
+export interface DescribeUnitApiUseDetailResponse {
+    /**
+      * 单元化使用统计对象
+      */
+    Result: GroupUnitApiUseStatistics;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeUsableUnitNamespaces请求参数结构体
  */
 export interface DescribeUsableUnitNamespacesRequest {
@@ -8298,6 +8593,16 @@ export interface DescribeApiUseDetailRequest {
       * 查询的日期,格式：yyyy-MM-dd HH:mm:ss
       */
     EndTime: string;
+}
+/**
+ * 容器 env 的 FieldRef
+ */
+export interface FieldRef {
+    /**
+      * k8s 的 FieldPath
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FieldPath?: string;
 }
 /**
  * CreateCluster请求参数结构体
@@ -8803,6 +9108,16 @@ export interface ApiGroupInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     GroupType: string;
+    /**
+      * 网关实例的类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GatewayInstanceType: string;
+    /**
+      * 网关实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    GatewayInstanceId: string;
 }
 /**
  * 微服务网关单元化命名空间
@@ -9135,13 +9450,13 @@ export interface DeleteNamespaceRequest {
     ClusterId?: string;
 }
 /**
- * BindApiGroup返回参数结构体
+ * RedoTaskBatch返回参数结构体
  */
-export interface BindApiGroupResponse {
+export interface RedoTaskBatchResponse {
     /**
-      * 返回结果，成功失败
+      * 批次ID
       */
-    Result?: boolean;
+    Result?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -9173,6 +9488,16 @@ export interface DescribeImageRepositoryResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 任务id
+ */
+export interface TaskId {
+    /**
+      * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TaskId: string;
 }
 /**
  * DescribeImageTags请求参数结构体
@@ -9571,7 +9896,7 @@ export interface CreateGroupResponse {
       * groupId， null表示创建失败
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Result?: string;
+    Result: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

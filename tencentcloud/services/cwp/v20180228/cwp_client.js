@@ -106,6 +106,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateBaselineStrategy", req, cb);
     }
     /**
+     * 查询批量导入机器信息
+     */
+    async DescribeImportMachineInfo(req, cb) {
+        return this.request("DescribeImportMachineInfo", req, cb);
+    }
+    /**
      * 获取高危命令规则列表
      */
     async DescribeBashRules(req, cb) {
@@ -685,6 +691,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("IgnoreImpactedHosts", req, cb);
     }
     /**
+     * 导出本次漏洞检测Excel
+     */
+    async ExportVulDetectionExcel(req, cb) {
+        return this.request("ExportVulDetectionExcel", req, cb);
+    }
+    /**
      * 获取高危命令列表
      */
     async DescribeBashEvents(req, cb) {
@@ -701,6 +713,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateUsualLoginPlaces(req, cb) {
         return this.request("CreateUsualLoginPlaces", req, cb);
+    }
+    /**
+     * 导出漏洞检测报告。
+     */
+    async ExportVulDetectionReport(req, cb) {
+        return this.request("ExportVulDetectionReport", req, cb);
     }
     /**
      * 本接口 (InquiryPriceOpenProVersionPrepaid) 用于开通专业版询价(预付费)。

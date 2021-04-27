@@ -38,6 +38,16 @@ it("partners.v20180321.DescribeAgentDealsCache", async function () {
     }
 })
 
+it("partners.v20180321.DescribeAgentSelfPayDealsV2", async function () {
+    try {
+       const data = await client.DescribeAgentSelfPayDealsV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("partners.v20180321.AgentPayDeals", async function () {
     try {
        const data = await client.AgentPayDeals({})
@@ -151,6 +161,16 @@ it("partners.v20180321.DescribeClientBalance", async function () {
 it("partners.v20180321.DescribeAgentClientGrade", async function () {
     try {
        const data = await client.DescribeAgentClientGrade({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("partners.v20180321.DescribeAgentPayDealsV2", async function () {
+    try {
+       const data = await client.DescribeAgentPayDealsV2({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

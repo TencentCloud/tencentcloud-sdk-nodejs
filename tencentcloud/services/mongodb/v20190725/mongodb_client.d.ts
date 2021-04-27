@@ -36,7 +36,9 @@ export declare class Client extends AbstractClient {
      */
     IsolateDBInstance(req: IsolateDBInstanceRequest, cb?: (error: string, rep: IsolateDBInstanceResponse) => void): Promise<IsolateDBInstanceResponse>;
     /**
-     * 本接口（DescribeBackupAccess）用于获取备份文件的下载授权，具体的备份文件信息可通过查询实例备份列表（DescribeDBBackups）接口获取
+     * 备份下载功能已调整，此接口即将下线
+
+本接口（DescribeBackupAccess）用于获取备份文件的下载授权，具体的备份文件信息可通过查询实例备份列表（DescribeDBBackups）接口获取
      */
     DescribeBackupAccess(req: DescribeBackupAccessRequest, cb?: (error: string, rep: DescribeBackupAccessResponse) => void): Promise<DescribeBackupAccessResponse>;
     /**

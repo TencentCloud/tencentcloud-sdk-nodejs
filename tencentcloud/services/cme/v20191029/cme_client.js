@@ -209,6 +209,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTasks", req, cb);
     }
     /**
+     * 获取用户账号信息。
+     */
+    async DescribeAccounts(req, cb) {
+        return this.request("DescribeAccounts", req, cb);
+    }
+    /**
      * 获取指定归属者下所有的分类信息。
      */
     async DescribeClass(req, cb) {

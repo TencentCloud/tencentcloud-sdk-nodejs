@@ -29,8 +29,10 @@ import {
   RebateInfoElem,
   DescribeClientBalanceResponse,
   DescribeAgentSelfPayDealsResponse,
+  DescribeAgentPayDealsV2Response,
   AgentTransferMoneyRequest,
   DescribeClientBalanceRequest,
+  DescribeAgentPayDealsV2Request,
   ProductInfoElem,
   UnbindClientElem,
   RemovePayRelationForClientResponse,
@@ -44,6 +46,7 @@ import {
   DescribeAgentClientsResponse,
   AgentDealNewElem,
   DescribeAgentClientsRequest,
+  DescribeAgentSelfPayDealsV2Request,
   DescribeSalesmansResponse,
   AgentAuditedClient,
   DescribeUnbindClientListRequest,
@@ -55,6 +58,7 @@ import {
   CreatePayRelationForClientRequest,
   AgentTransferMoneyResponse,
   DescribeUnbindClientListResponse,
+  DescribeAgentSelfPayDealsV2Response,
   AgentBillElem,
   AuditApplyClientResponse,
   DescribeAgentDealsCacheResponse,
@@ -77,7 +81,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 可以查询代理商下指定客户的自付订单
+   * 【该接口将逐步下线，请切换使用升级版本DescribeAgentSelfPayDealsV2】可以查询代理商下指定客户的自付订单
    */
   async DescribeAgentSelfPayDeals(
     req: DescribeAgentSelfPayDealsRequest,
@@ -95,6 +99,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAgentDealsCacheResponse) => void
   ): Promise<DescribeAgentDealsCacheResponse> {
     return this.request("DescribeAgentDealsCache", req, cb)
+  }
+
+  /**
+   * 可以查询代理商下指定客户的自付订单
+   */
+  async DescribeAgentSelfPayDealsV2(
+    req: DescribeAgentSelfPayDealsV2Request,
+    cb?: (error: string, rep: DescribeAgentSelfPayDealsV2Response) => void
+  ): Promise<DescribeAgentSelfPayDealsV2Response> {
+    return this.request("DescribeAgentSelfPayDealsV2", req, cb)
   }
 
   /**
@@ -168,7 +182,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 可以查询代理商代付的所有订单
+   * 【该接口将逐步下线，请切换使用升级版本DescribeAgentPayDealsV2】可以查询代理商代付的所有订单
    */
   async DescribeAgentPayDeals(
     req: DescribeAgentPayDealsRequest,
@@ -215,6 +229,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAgentClientGradeResponse) => void
   ): Promise<DescribeAgentClientGradeResponse> {
     return this.request("DescribeAgentClientGrade", req, cb)
+  }
+
+  /**
+   * 可以查询代理商代付的所有订单
+   */
+  async DescribeAgentPayDealsV2(
+    req: DescribeAgentPayDealsV2Request,
+    cb?: (error: string, rep: DescribeAgentPayDealsV2Response) => void
+  ): Promise<DescribeAgentPayDealsV2Response> {
+    return this.request("DescribeAgentPayDealsV2", req, cb)
   }
 
   /**

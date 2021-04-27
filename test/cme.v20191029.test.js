@@ -298,6 +298,16 @@ it("cme.v20191029.DescribeTasks", async function () {
     }
 })
 
+it("cme.v20191029.DescribeAccounts", async function () {
+    try {
+       const data = await client.DescribeAccounts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cme.v20191029.DescribeClass", async function () {
     try {
        const data = await client.DescribeClass({})

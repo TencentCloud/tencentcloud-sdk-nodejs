@@ -121,6 +121,31 @@ export interface StreamConnectProjectInput {
 }
 
 /**
+ * DescribeAccounts请求参数结构体
+ */
+export interface DescribeAccountsRequest {
+  /**
+   * 平台唯一标识。
+   */
+  Platform: string
+
+  /**
+   * 手机号码。
+   */
+  Phone?: string
+
+  /**
+   * 分页返回的起始偏移量，默认值：0。
+   */
+  Offset?: number
+
+  /**
+   * 分页返回的记录条数，默认值：10，最大值：20。
+   */
+  Limit?: number
+}
+
+/**
  * ExportVideoByVideoSegmentationData请求参数结构体
  */
 export interface ExportVideoByVideoSegmentationDataRequest {
@@ -2102,53 +2127,23 @@ export interface DescribeSharedSpaceResponse {
 }
 
 /**
- * 文件元信息。
+ * DescribeAccounts返回参数结构体
  */
-export interface MediaMetaData {
+export interface DescribeAccountsResponse {
   /**
-   * 大小。
+   * 符合搜索条件的记录总数。
    */
-  Size: number
+  TotalCount: number
 
   /**
-   * 容器类型。
+   * 账号信息列表。
    */
-  Container: string
+  AccountInfoSet: Array<AccountInfo>
 
   /**
-   * 视频流码率平均值与音频流码率平均值之和，单位：bps。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Bitrate: number
-
-  /**
-   * 视频流高度的最大值，单位：px。
-   */
-  Height: number
-
-  /**
-   * 视频流宽度的最大值，单位：px。
-   */
-  Width: number
-
-  /**
-   * 时长，单位：秒。
-   */
-  Duration: number
-
-  /**
-   * 视频拍摄时的选择角度，单位：度
-   */
-  Rotate: number
-
-  /**
-   * 视频流信息。
-   */
-  VideoStreamInfoSet: Array<VideoStreamInfo>
-
-  /**
-   * 音频流信息。
-   */
-  AudioStreamInfoSet: Array<AudioStreamInfo>
+  RequestId?: string
 }
 
 /**
@@ -3019,6 +3014,33 @@ export interface FlattenListMediaResponse {
 }
 
 /**
+ * 制作云用户账号信息。
+ */
+export interface AccountInfo {
+  /**
+   * 用户 Id。
+   */
+  UserId: string
+
+  /**
+   * 用户手机号码。
+   */
+  Phone: string
+
+  /**
+   * 用户昵称。
+   */
+  Nick: string
+
+  /**
+      * 账号状态，取值：
+<li>Normal：有效；</li>
+<li>Stopped：无效。</li>
+      */
+  Status: string
+}
+
+/**
  * DescribeProjects请求参数结构体
  */
 export interface DescribeProjectsRequest {
@@ -3616,6 +3638,56 @@ export interface GrantResourceAuthorizationRequest {
    * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
    */
   Operator?: string
+}
+
+/**
+ * 文件元信息。
+ */
+export interface MediaMetaData {
+  /**
+   * 大小。
+   */
+  Size: number
+
+  /**
+   * 容器类型。
+   */
+  Container: string
+
+  /**
+   * 视频流码率平均值与音频流码率平均值之和，单位：bps。
+   */
+  Bitrate: number
+
+  /**
+   * 视频流高度的最大值，单位：px。
+   */
+  Height: number
+
+  /**
+   * 视频流宽度的最大值，单位：px。
+   */
+  Width: number
+
+  /**
+   * 时长，单位：秒。
+   */
+  Duration: number
+
+  /**
+   * 视频拍摄时的选择角度，单位：度
+   */
+  Rotate: number
+
+  /**
+   * 视频流信息。
+   */
+  VideoStreamInfoSet: Array<VideoStreamInfo>
+
+  /**
+   * 音频流信息。
+   */
+  AudioStreamInfoSet: Array<AudioStreamInfo>
 }
 
 /**

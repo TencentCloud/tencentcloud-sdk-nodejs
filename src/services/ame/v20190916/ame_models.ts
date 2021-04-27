@@ -427,9 +427,14 @@ export interface ReportDataResponse {
  */
 export interface ModifyMusicOnShelvesRequest {
   /**
-   * 无
+   * 歌曲变更信息
    */
   MusicDetailInfos: MusicDetailInfo
+
+  /**
+   * ame对接资源方密钥
+   */
+  AmeKey?: string
 }
 
 /**

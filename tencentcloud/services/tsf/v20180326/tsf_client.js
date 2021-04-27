@@ -246,10 +246,10 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("DescribeApplications", req, cb);
     }
     /**
-     * 更新仓库信息
+     * 查询网关API监控明细数据（仅单元化网关），非单元化网关使用DescribeApiUseDetail
      */
-    async UpdateRepository(req, cb) {
-        return this.request("UpdateRepository", req, cb);
+    async DescribeUnitApiUseDetail(req, cb) {
+        return this.request("DescribeUnitApiUseDetail", req, cb);
     }
     /**
      * 插件与网关分组/API批量绑定
@@ -304,6 +304,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
      */
     async DescribePublicConfig(req, cb) {
         return this.request("DescribePublicConfig", req, cb);
+    }
+    /**
+     * 更新仓库信息
+     */
+    async UpdateRepository(req, cb) {
+        return this.request("UpdateRepository", req, cb);
     }
     /**
      * 批量更新API超时
@@ -655,6 +661,12 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("CreateLane", req, cb);
     }
     /**
+     * 停止虚拟机部署组
+     */
+    async StopGroup(req, cb) {
+        return this.request("StopGroup", req, cb);
+    }
+    /**
      * 查询网关监控概览
      */
     async DescribeGatewayMonitorOverview(req, cb) {
@@ -956,10 +968,10 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
         return this.request("UpdateGatewayApi", req, cb);
     }
     /**
-     * 停止虚拟机部署组
+     * 获取容器事件列表
      */
-    async StopGroup(req, cb) {
-        return this.request("StopGroup", req, cb);
+    async DescribeContainerEvents(req, cb) {
+        return this.request("DescribeContainerEvents", req, cb);
     }
     /**
      * 下线部署组所有机器实例

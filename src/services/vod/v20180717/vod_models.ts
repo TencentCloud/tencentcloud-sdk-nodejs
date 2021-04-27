@@ -8701,6 +8701,13 @@ export interface MediaBasicInfo {
 *注意：此字段暂不支持。
       */
   Status: string
+
+  /**
+      * 媒体文件的存储类别：
+<li>STANDARD：标准存储。</li>
+<li>STANDARD_IA：低频存储。</li>
+      */
+  StorageClass: string
 }
 
 /**
@@ -11472,12 +11479,12 @@ export interface DescribeTasksResponse {
   /**
    * 任务概要列表。
    */
-  TaskSet?: Array<TaskSimpleInfo>
+  TaskSet: Array<TaskSimpleInfo>
 
   /**
    * 翻页标识，当请求未返回所有数据，该字段表示下一条记录的 ID。当该字段为空，说明已无更多数据。
    */
-  ScrollToken?: string
+  ScrollToken: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -11823,6 +11830,16 @@ export interface TaskSimpleInfo {
   TaskId: string
 
   /**
+   * 任务状态。取值：WAITING（等待中）、PROCESSING（处理中）、FINISH（已完成）。
+   */
+  Status: string
+
+  /**
+   * 视频 ID。
+   */
+  FileId: string
+
+  /**
       * 任务类型，取值：
 <li>Procedure：视频处理任务；</li>
 <li>EditMedia：视频编辑任务</li>
@@ -12057,12 +12074,29 @@ export interface DescribeTasksRequest {
   /**
    * 过滤条件：任务状态，可选值：WAITING（等待中）、PROCESSING（处理中）、FINISH（已完成）。
    */
-  Status: string
+  Status?: string
 
   /**
    * 过滤条件：文件 ID。
    */
   FileId?: string
+
+  /**
+   * 过滤条件：任务创建时间。
+   */
+  CreateTime?: TimeRange
+
+  /**
+   * 过滤条件：任务结束时间。
+   */
+  FinishTime?: TimeRange
+
+  /**
+      * 排序方式。Sort.Field 可选：
+<li> CreateTime 任务创建时间。</li>
+<li>FinishTime 任务结束时间。</li>
+      */
+  Sort?: SortBy
 
   /**
    * 返回记录条数，默认值：10，最大值：100。

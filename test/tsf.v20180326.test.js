@@ -378,9 +378,9 @@ it("tsf.v20180326.DescribeApplications", async function () {
     }
 })
 
-it("tsf.v20180326.UpdateRepository", async function () {
+it("tsf.v20180326.DescribeUnitApiUseDetail", async function () {
     try {
-       const data = await client.UpdateRepository({})
+       const data = await client.DescribeUnitApiUseDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -471,6 +471,16 @@ it("tsf.v20180326.DescribeGroupUseDetail", async function () {
 it("tsf.v20180326.DescribePublicConfig", async function () {
     try {
        const data = await client.DescribePublicConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tsf.v20180326.UpdateRepository", async function () {
+    try {
+       const data = await client.UpdateRepository({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1058,6 +1068,16 @@ it("tsf.v20180326.CreateLane", async function () {
     }
 })
 
+it("tsf.v20180326.StopGroup", async function () {
+    try {
+       const data = await client.StopGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tsf.v20180326.DescribeGatewayMonitorOverview", async function () {
     try {
        const data = await client.DescribeGatewayMonitorOverview({})
@@ -1558,9 +1578,9 @@ it("tsf.v20180326.UpdateGatewayApi", async function () {
     }
 })
 
-it("tsf.v20180326.StopGroup", async function () {
+it("tsf.v20180326.DescribeContainerEvents", async function () {
     try {
-       const data = await client.StopGroup({})
+       const data = await client.DescribeContainerEvents({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

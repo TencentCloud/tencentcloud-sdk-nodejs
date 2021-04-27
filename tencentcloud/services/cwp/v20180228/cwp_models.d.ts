@@ -138,6 +138,25 @@ export interface DescribeWeeklyReportBruteAttacksResponse {
     RequestId?: string;
 }
 /**
+ * DescribeImportMachineInfo返回参数结构体
+ */
+export interface DescribeImportMachineInfoResponse {
+    /**
+      * 有效的机器信息列表：机器名称、机器公网/内网ip、机器标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EffectiveMachineInfoList: Array<EffectiveMachineInfo>;
+    /**
+      * 用户批量导入失败的机器列表（比如机器不存在等...）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InvalidMachineList: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 容器安全
 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
@@ -1453,17 +1472,21 @@ export interface ExportNonlocalLoginPlacesRequest {
     Filters?: Array<Filter>;
 }
 /**
- * 安全事件统计列表
+ * ExportVulDetectionReport返回参数结构体
  */
-export interface SecurityEventInfo {
+export interface ExportVulDetectionReportResponse {
     /**
-      * 安全事件数
+      * 导出文件下载链接地址
       */
-    EventCnt: number;
+    DownloadUrl: string;
     /**
-      * 受影响机器数
+      * 导出检测报告的任务Id（不同于入参的漏洞扫描任务id）
       */
-    UuidCnt: number;
+    TaskId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeComponentInfo返回参数结构体
@@ -2515,6 +2538,15 @@ export interface UntrustMalwaresResponse {
     RequestId?: string;
 }
 /**
+ * RenewProVersion返回参数结构体
+ */
+export interface RenewProVersionResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeletePrivilegeRules返回参数结构体
  */
 export interface DeletePrivilegeRulesResponse {
@@ -2595,6 +2627,23 @@ export interface EditBashRuleRequest {
       * 是否全局规则(默认否)
       */
     IsGlobal?: number;
+}
+/**
+ * ExportVulDetectionExcel返回参数结构体
+ */
+export interface ExportVulDetectionExcelResponse {
+    /**
+      * 导出文件下载链接地址
+      */
+    DownloadUrl: string;
+    /**
+      * 导出本次漏洞检测Excel的任务Id（不同于入参的本次漏洞检测任务id）
+      */
+    TaskId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * SwitchBashRules请求参数结构体
@@ -2730,6 +2779,19 @@ export interface SetBashEventsStatusResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeImportMachineInfo请求参数结构体
+ */
+export interface DescribeImportMachineInfoRequest {
+    /**
+      * 服务器内网IP（默认）/ 服务器名称 / 服务器ID 数组
+      */
+    MachineList: Array<string>;
+    /**
+      * 批量导入的数据类型：Ip、Name、Id 三选一
+      */
+    ImportType: string;
 }
 /**
  * DescribeUsualLoginPlaces返回参数结构体
@@ -3216,13 +3278,34 @@ export interface SeparateMalwaresRequest {
     Ids: Array<number>;
 }
 /**
- * RenewProVersion返回参数结构体
+ * 批量导入机器信息.
  */
-export interface RenewProVersionResponse {
+export interface EffectiveMachineInfo {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 机器名称
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    RequestId?: string;
+    MachineName: string;
+    /**
+      * 机器公网ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MachinePublicIp: string;
+    /**
+      * 机器内网ip
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MachinePrivateIp: string;
+    /**
+      * 机器标签
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    MachineTag: Array<MachineTag>;
+    /**
+      * 机器Quuid
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Quuid: string;
 }
 /**
  * 白名单规则
@@ -3503,6 +3586,15 @@ export interface OpenPort {
     ModifyTime: string;
 }
 /**
+ * TrustMalwares请求参数结构体
+ */
+export interface TrustMalwaresRequest {
+    /**
+      * 木马ID数组。
+      */
+    Ids: Array<number>;
+}
+/**
  * CloseProVersion返回参数结构体
  */
 export interface CloseProVersionResponse {
@@ -3733,6 +3825,19 @@ export interface DescribeAttackLogsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 安全事件统计列表
+ */
+export interface SecurityEventInfo {
+    /**
+      * 安全事件数
+      */
+    EventCnt: number;
+    /**
+      * 受影响机器数
+      */
+    UuidCnt: number;
 }
 /**
  * OpenProVersionPrepaid返回参数结构体
@@ -4292,13 +4397,25 @@ export interface Machine {
     HasAssetScan: number;
 }
 /**
- * TrustMalwares请求参数结构体
+ * ExportVulDetectionReport请求参数结构体
  */
-export interface TrustMalwaresRequest {
+export interface ExportVulDetectionReportRequest {
     /**
-      * 木马ID数组。
+      * 漏洞扫描任务id（不同于出参的导出检测报告的任务Id）
       */
-    Ids: Array<number>;
+    TaskId: number;
+    /**
+      * 过滤参数
+      */
+    Filters?: Array<Filters>;
+    /**
+      * 需要返回的数量，默认为10，最大值为100
+      */
+    Limit?: number;
+    /**
+      * 偏移量，默认为0。
+      */
+    Offset?: number;
 }
 /**
  * 木马相关信息
@@ -5069,6 +5186,15 @@ export interface AddMachineTagRequest {
       * 云服务器类型(CVM|BM)
       */
     MArea: string;
+}
+/**
+ * ExportVulDetectionExcel请求参数结构体
+ */
+export interface ExportVulDetectionExcelRequest {
+    /**
+      * 本次漏洞检测任务id（不同于出参的导出本次漏洞检测Excel的任务Id）
+      */
+    TaskId: number;
 }
 /**
  * DescribeWeeklyReports返回参数结构体

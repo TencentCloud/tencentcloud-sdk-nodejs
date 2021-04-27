@@ -27,6 +27,7 @@ import {
   ExportPrivilegeEventsResponse,
   DescribeAlarmAttributeResponse,
   DescribeWeeklyReportBruteAttacksResponse,
+  DescribeImportMachineInfoResponse,
   AssetFilters,
   DescribeTagsRequest,
   AddMachineTagResponse,
@@ -87,7 +88,7 @@ import {
   ReverseShell,
   UntrustMaliciousRequestRequest,
   ExportNonlocalLoginPlacesRequest,
-  SecurityEventInfo,
+  ExportVulDetectionReportResponse,
   DescribeComponentInfoResponse,
   DescribeAccountStatisticsResponse,
   SwitchBashRulesResponse,
@@ -145,16 +146,19 @@ import {
   ExportMalwaresResponse,
   UpdateBaselineStrategyResponse,
   UntrustMalwaresResponse,
+  RenewProVersionResponse,
   DeletePrivilegeRulesResponse,
   CreateOpenPortTaskResponse,
   DescribeMachineListRequest,
   EditBashRuleRequest,
+  ExportVulDetectionExcelResponse,
   SwitchBashRulesRequest,
   DeletePrivilegeEventsResponse,
   InquiryPriceOpenProVersionPrepaidResponse,
   PrivilegeEscalationProcess,
   CloseProVersionRequest,
   SetBashEventsStatusResponse,
+  DescribeImportMachineInfoRequest,
   DescribeUsualLoginPlacesResponse,
   DescribeProcessStatisticsResponse,
   MisAlarmNonlocalLoginPlacesRequest,
@@ -184,7 +188,7 @@ import {
   DescribeOpenPortTaskStatusResponse,
   DescribeWeeklyReportNonlocalLoginPlacesResponse,
   SeparateMalwaresRequest,
-  RenewProVersionResponse,
+  EffectiveMachineInfo,
   LoginWhiteListsRule,
   DescribeTagMachinesResponse,
   DescribeSecurityTrendsResponse,
@@ -196,6 +200,7 @@ import {
   DeletePrivilegeEventsRequest,
   DeleteBashRulesRequest,
   OpenPort,
+  TrustMalwaresRequest,
   CloseProVersionResponse,
   DeleteAttackLogsRequest,
   DescribeOpenPortsResponse,
@@ -212,6 +217,7 @@ import {
   DeleteLoginWhiteListResponse,
   DescribeAccountStatisticsRequest,
   DescribeAttackLogsResponse,
+  SecurityEventInfo,
   OpenProVersionPrepaidResponse,
   MisAlarmNonlocalLoginPlacesResponse,
   DeleteMalwaresResponse,
@@ -240,7 +246,7 @@ import {
   DescribePrivilegeRulesResponse,
   ModifyProVersionRenewFlagResponse,
   Machine,
-  TrustMalwaresRequest,
+  ExportVulDetectionReportRequest,
   Malware,
   DescribeWeeklyReportVulsResponse,
   WeeklyReportBruteAttack,
@@ -270,6 +276,7 @@ import {
   ExportTasksRequest,
   Vul,
   AddMachineTagRequest,
+  ExportVulDetectionExcelRequest,
   DescribeWeeklyReportsResponse,
   DeleteReverseShellEventsRequest,
   ModifyAutoOpenProVersionConfigResponse,
@@ -430,6 +437,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateBaselineStrategyResponse) => void
   ): Promise<CreateBaselineStrategyResponse> {
     return this.request("CreateBaselineStrategy", req, cb)
+  }
+
+  /**
+   * 查询批量导入机器信息
+   */
+  async DescribeImportMachineInfo(
+    req: DescribeImportMachineInfoRequest,
+    cb?: (error: string, rep: DescribeImportMachineInfoResponse) => void
+  ): Promise<DescribeImportMachineInfoResponse> {
+    return this.request("DescribeImportMachineInfo", req, cb)
   }
 
   /**
@@ -1396,6 +1413,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 导出本次漏洞检测Excel
+   */
+  async ExportVulDetectionExcel(
+    req: ExportVulDetectionExcelRequest,
+    cb?: (error: string, rep: ExportVulDetectionExcelResponse) => void
+  ): Promise<ExportVulDetectionExcelResponse> {
+    return this.request("ExportVulDetectionExcel", req, cb)
+  }
+
+  /**
    * 获取高危命令列表
    */
   async DescribeBashEvents(
@@ -1423,6 +1450,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateUsualLoginPlacesResponse) => void
   ): Promise<CreateUsualLoginPlacesResponse> {
     return this.request("CreateUsualLoginPlaces", req, cb)
+  }
+
+  /**
+   * 导出漏洞检测报告。
+   */
+  async ExportVulDetectionReport(
+    req: ExportVulDetectionReportRequest,
+    cb?: (error: string, rep: ExportVulDetectionReportResponse) => void
+  ): Promise<ExportVulDetectionReportResponse> {
+    return this.request("ExportVulDetectionReport", req, cb)
   }
 
   /**

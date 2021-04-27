@@ -359,12 +359,32 @@ export interface DescribeAgentSelfPayDealsResponse {
   /**
    * 订单数组
    */
-  AgentPayDealSet?: Array<AgentDealElem>
+  AgentPayDealSet: Array<AgentDealElem>
 
   /**
    * 符合条件的订单总数量
    */
-  TotalCount?: number
+  TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAgentPayDealsV2返回参数结构体
+ */
+export interface DescribeAgentPayDealsV2Response {
+  /**
+   * 订单数组
+   */
+  AgentPayDealSet: Array<AgentDealNewElem>
+
+  /**
+   * 符合条件的订单总数量
+   */
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -395,6 +415,51 @@ export interface DescribeClientBalanceRequest {
    * 客户(代客)账号ID
    */
   ClientUin: string
+}
+
+/**
+ * DescribeAgentPayDealsV2请求参数结构体
+ */
+export interface DescribeAgentPayDealsV2Request {
+  /**
+   * 偏移量
+   */
+  Offset: number
+
+  /**
+   * 限制数目
+   */
+  Limit: number
+
+  /**
+   * 下单时间范围起始点(不传时会默认查15天内订单，传值时需要传15天内的起始时间)
+   */
+  CreatTimeRangeStart?: string
+
+  /**
+   * 下单时间范围终止点
+   */
+  CreatTimeRangeEnd?: string
+
+  /**
+   * 0:下单时间降序；其他：下单时间升序
+   */
+  Order?: number
+
+  /**
+   * 订单的状态(1：未支付;2：已支付;3：发货中;4：已发货;5：发货失败;6：已退款;7：已关单;8：订单过期;9：订单已失效;10：产品已失效;11：代付拒绝;12：支付中)
+   */
+  Status?: number
+
+  /**
+   * 下单人账号ID列表
+   */
+  OwnerUins?: Array<string>
+
+  /**
+   * 订单号列表
+   */
+  DealNames?: Array<string>
 }
 
 /**
@@ -822,6 +887,51 @@ export interface DescribeAgentClientsRequest {
 }
 
 /**
+ * DescribeAgentSelfPayDealsV2请求参数结构体
+ */
+export interface DescribeAgentSelfPayDealsV2Request {
+  /**
+   * 下单人账号ID
+   */
+  OwnerUin: string
+
+  /**
+   * 偏移量
+   */
+  Offset: number
+
+  /**
+   * 限制数目
+   */
+  Limit: number
+
+  /**
+   * 下单时间范围起始点(不传时会默认查15天内订单，传值时需要传15天内的起始时间)
+   */
+  CreatTimeRangeStart?: string
+
+  /**
+   * 下单时间范围终止点
+   */
+  CreatTimeRangeEnd?: string
+
+  /**
+   * 0:下单时间降序；其他：下单时间升序
+   */
+  Order?: number
+
+  /**
+   * 订单的状态(1：未支付;2：已支付;3：发货中;4：已发货;5：发货失败;6：已退款;7：已关单;8：订单过期;9：订单已失效;10：产品已失效;11：代付拒绝;12：支付中)
+   */
+  Status?: number
+
+  /**
+   * 订单号列表
+   */
+  DealNames?: Array<string>
+}
+
+/**
  * DescribeSalesmans返回参数结构体
  */
 export interface DescribeSalesmansResponse {
@@ -976,12 +1086,12 @@ export interface DescribeAgentPayDealsResponse {
   /**
    * 订单数组
    */
-  AgentPayDealSet?: Array<AgentDealElem>
+  AgentPayDealSet: Array<AgentDealElem>
 
   /**
    * 符合条件的订单总数量
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1142,6 +1252,26 @@ export interface DescribeUnbindClientListResponse {
    * 符合条件的解绑客户列表
    */
   UnbindClientList?: Array<UnbindClientElem>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAgentSelfPayDealsV2返回参数结构体
+ */
+export interface DescribeAgentSelfPayDealsV2Response {
+  /**
+   * 订单数组
+   */
+  AgentPayDealSet: Array<AgentDealNewElem>
+
+  /**
+   * 符合条件的订单总数量
+   */
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

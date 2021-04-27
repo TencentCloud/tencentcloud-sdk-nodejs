@@ -28,7 +28,7 @@ class Client extends abstract_client_1.AbstractClient {
         super("partners.tencentcloudapi.com", "2018-03-21", clientConfig);
     }
     /**
-     * 可以查询代理商下指定客户的自付订单
+     * 【该接口将逐步下线，请切换使用升级版本DescribeAgentSelfPayDealsV2】可以查询代理商下指定客户的自付订单
      */
     async DescribeAgentSelfPayDeals(req, cb) {
         return this.request("DescribeAgentSelfPayDeals", req, cb);
@@ -39,6 +39,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAgentDealsCache(req, cb) {
         return this.request("DescribeAgentDealsCache", req, cb);
+    }
+    /**
+     * 可以查询代理商下指定客户的自付订单
+     */
+    async DescribeAgentSelfPayDealsV2(req, cb) {
+        return this.request("DescribeAgentSelfPayDealsV2", req, cb);
     }
     /**
      * 代理商支付订单接口，支持自付/代付
@@ -83,7 +89,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyClientRemark", req, cb);
     }
     /**
-     * 可以查询代理商代付的所有订单
+     * 【该接口将逐步下线，请切换使用升级版本DescribeAgentPayDealsV2】可以查询代理商代付的所有订单
      */
     async DescribeAgentPayDeals(req, cb) {
         return this.request("DescribeAgentPayDeals", req, cb);
@@ -111,6 +117,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeAgentClientGrade(req, cb) {
         return this.request("DescribeAgentClientGrade", req, cb);
+    }
+    /**
+     * 可以查询代理商代付的所有订单
+     */
+    async DescribeAgentPayDealsV2(req, cb) {
+        return this.request("DescribeAgentPayDealsV2", req, cb);
     }
     /**
      * 查询已审核客户列表

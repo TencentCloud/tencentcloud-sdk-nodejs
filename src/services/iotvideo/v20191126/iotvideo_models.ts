@@ -1090,7 +1090,7 @@ export interface CreateBindingRequest {
   ForceBind?: boolean
 
   /**
-   * 设备昵称
+   * 设备昵称，最多不超过64个字符
    */
   Nick?: string
 }
@@ -2272,7 +2272,7 @@ export interface ModifyDeviceRequest {
   AccessId: string
 
   /**
-   * 设备昵称
+   * 设备昵称，最多不超过64个字符
    */
   Nick: string
 }

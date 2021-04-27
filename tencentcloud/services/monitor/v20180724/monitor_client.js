@@ -248,6 +248,8 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 查询告警历史
+
+请注意，**如果使用子用户进行告警历史的查询，只能查询到被授权项目下的告警历史**，或不区分项目的产品的告警历史。如何对子账户授予项目的权限，请参考 [访问管理-项目与标签](https://cloud.tencent.com/document/product/598/32738)。
      */
     async DescribeAlarmHistories(req, cb) {
         return this.request("DescribeAlarmHistories", req, cb);

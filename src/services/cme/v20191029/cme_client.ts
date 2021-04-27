@@ -24,6 +24,7 @@ import {
   ExportVideoByVideoSegmentationDataResponse,
   ImportMaterialResponse,
   StreamConnectProjectInput,
+  DescribeAccountsRequest,
   ExportVideoByVideoSegmentationDataRequest,
   MediaTransitionItem,
   DescribeTeamsResponse,
@@ -97,7 +98,7 @@ import {
   ImageMaterial,
   DescribeClassRequest,
   DescribeSharedSpaceResponse,
-  MediaMetaData,
+  DescribeAccountsResponse,
   MoveResourceResponse,
   MoveClassRequest,
   DeleteTeamMembersResponse,
@@ -136,6 +137,7 @@ import {
   VideoMaterial,
   DescribeResourceAuthorizationResponse,
   FlattenListMediaResponse,
+  AccountInfo,
   DescribeProjectsRequest,
   DescribeLoginStatusResponse,
   TeamMemberInfo,
@@ -161,6 +163,7 @@ import {
   TaskBaseInfo,
   DeleteClassResponse,
   GrantResourceAuthorizationRequest,
+  MediaMetaData,
   ExternalMediaInfo,
   LinkMaterialInfo,
   ExportVideoByEditorTrackDataResponse,
@@ -469,6 +472,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTasksResponse) => void
   ): Promise<DescribeTasksResponse> {
     return this.request("DescribeTasks", req, cb)
+  }
+
+  /**
+   * 获取用户账号信息。
+   */
+  async DescribeAccounts(
+    req: DescribeAccountsRequest,
+    cb?: (error: string, rep: DescribeAccountsResponse) => void
+  ): Promise<DescribeAccountsResponse> {
+    return this.request("DescribeAccounts", req, cb)
   }
 
   /**
