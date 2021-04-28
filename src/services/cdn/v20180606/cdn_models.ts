@@ -1789,7 +1789,7 @@ export interface DescribeDistrictIspDataResponse {
       * 地区运营商数据明细
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Data?: Array<DistrictIspInfo>
+  Data: Array<DistrictIspInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6111,6 +6111,13 @@ ipv6：指定查询 ipv6 对应指标
 指定IP协议查询时，不可同时指定省份、运营商查询
       */
   IpProtocol?: string
+
+  /**
+      * 时间粒度，支持以下几种模式（默认5min）：
+min：1 分钟粒度，支持近 60 天内的数据查询，每次查询时间区间不超过10分钟，可返回 1 分钟粒度明细数据
+5min：5 分钟粒度，支持近 60 天内的数据查询，每次查询时间区间不超过3 小时，可返回 5 分钟粒度明细数据
+      */
+  Interval?: string
 }
 
 /**

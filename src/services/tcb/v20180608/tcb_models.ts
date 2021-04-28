@@ -2902,12 +2902,12 @@ export interface DescribeCloudBaseRunVersionSnapshotRequest {
   SnapshotName?: string
 
   /**
-   * 偏移量
+   * 偏移量。默认0
    */
   Offset?: number
 
   /**
-   * 限制大小
+   * 限制大小。默认10，最大20
    */
   Limit?: number
 }
@@ -3789,7 +3789,7 @@ export interface DescribeCloudBaseRunVersionSnapshotResponse {
       * 版本历史
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Snapshots?: Array<CloudRunServiceSimpleVersionSnapshot>
+  Snapshots: Array<CloudRunServiceSimpleVersionSnapshot>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

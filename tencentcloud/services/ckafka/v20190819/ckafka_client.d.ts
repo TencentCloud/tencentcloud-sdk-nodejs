@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DeleteAclRequest, DeleteUserRequest, DescribeACLRequest, DescribeTopicAttributesRequest, DescribeInstanceAttributesRequest, DescribeConsumerGroupResponse, DeleteTopicRequest, DescribeInstancesResponse, DescribeInstancesDetailResponse, DescribeACLResponse, DeleteAclRuleRequest, DescribeTopicAttributesResponse, DescribeGroupResponse, CreateUserResponse, CreatePartitionResponse, DeleteUserResponse, CreateAclRequest, DescribeAppInfoRequest, DescribeTopicResponse, CreateTopicIpWhiteListResponse, ModifyInstanceAttributesResponse, ModifyGroupOffsetsResponse, CreateAclResponse, CreateTopicRequest, DeleteAclResponse, DescribeRouteRequest, DeleteAclRuleResponse, DescribeGroupInfoRequest, DescribeGroupInfoResponse, DescribeUserResponse, DescribeTopicRequest, CreatePartitionRequest, DescribeAppInfoResponse, DescribeInstanceAttributesResponse, ModifyPasswordRequest, ModifyInstanceAttributesRequest, ModifyTopicAttributesResponse, DescribeConsumerGroupRequest, DeleteTopicResponse, DescribeInstancesRequest, DescribeGroupRequest, CreateUserRequest, DeleteTopicIpWhiteListResponse, CreateInstancePreResponse, DescribeInstancesDetailRequest, ModifyPasswordResponse, DescribeRouteResponse, DescribeTopicDetailRequest, DescribeGroupOffsetsResponse, ModifyGroupOffsetsRequest, CreateTopicIpWhiteListRequest, ModifyTopicAttributesRequest, CreateTopicResponse, CreateInstancePreRequest, DeleteTopicIpWhiteListRequest, DescribeGroupOffsetsRequest, DescribeUserRequest, DescribeTopicDetailResponse } from "./ckafka_models";
+import { DeleteAclRequest, DeleteUserRequest, DescribeACLRequest, DescribeTopicAttributesRequest, DescribeInstanceAttributesRequest, DescribeConsumerGroupResponse, DeleteTopicRequest, DescribeInstancesResponse, DescribeInstancesDetailResponse, DescribeACLResponse, DescribeCkafkaZoneRequest, DescribeTopicAttributesResponse, DescribeGroupResponse, DeleteAclRuleRequest, CreateUserResponse, ModifyInstanceAttributesResponse, CreatePartitionResponse, DescribeConsumerGroupRequest, DeleteUserResponse, CreateAclRequest, DescribeAppInfoRequest, DescribeTopicResponse, CreateTopicIpWhiteListResponse, ModifyGroupOffsetsResponse, CreateAclResponse, CreateTopicRequest, DeleteAclResponse, DescribeRouteRequest, DescribeRegionRequest, DeleteAclRuleResponse, DescribeGroupInfoRequest, DescribeGroupInfoResponse, ModifyTopicAttributesResponse, DescribeUserResponse, DescribeTopicRequest, CreatePartitionRequest, DescribeAppInfoResponse, DescribeInstanceAttributesResponse, ModifyPasswordRequest, CreateInstancePreRequest, ModifyInstanceAttributesRequest, DescribeRegionResponse, CreateTopicResponse, DeleteTopicResponse, DescribeInstancesRequest, DescribeCkafkaZoneResponse, CreateUserRequest, DeleteTopicIpWhiteListResponse, CreateInstancePreResponse, DescribeInstancesDetailRequest, ModifyPasswordResponse, DescribeRouteResponse, DescribeTopicDetailRequest, DescribeGroupOffsetsResponse, ModifyGroupOffsetsRequest, CreateTopicIpWhiteListRequest, ModifyTopicAttributesRequest, DescribeGroupRequest, DeleteTopicIpWhiteListRequest, DescribeGroupOffsetsRequest, DescribeUserRequest, DescribeTopicDetailResponse } from "./ckafka_models";
 /**
  * ckafka client
  * @class
@@ -117,6 +117,14 @@ export declare class Client extends AbstractClient {
 本接口（DescribeTopic）用于在用户获取消息队列 CKafka 实例的主题列表
      */
     DescribeTopic(req: DescribeTopicRequest, cb?: (error: string, rep: DescribeTopicResponse) => void): Promise<DescribeTopicResponse>;
+    /**
+     * 用于查看ckafka的可用区列表
+     */
+    DescribeCkafkaZone(req?: DescribeCkafkaZoneRequest, cb?: (error: string, rep: DescribeCkafkaZoneResponse) => void): Promise<DescribeCkafkaZoneResponse>;
+    /**
+     * 枚举地域,只支持广州地域
+     */
+    DescribeRegion(req: DescribeRegionRequest, cb?: (error: string, rep: DescribeRegionResponse) => void): Promise<DescribeRegionResponse>;
     /**
      * 添加用户
      */

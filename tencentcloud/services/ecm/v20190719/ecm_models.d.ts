@@ -302,12 +302,12 @@ export interface ModifyModuleSecurityGroupsRequest {
  */
 export interface Internet {
     /**
-      * 实例的内网相关信息列表。
+      * 实例的内网相关信息列表。顺序为主网卡在前，辅助网卡按绑定先后顺序排列。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PrivateIPAddressSet: Array<PrivateIPAddressInfo>;
     /**
-      * 实例的公网相关信息列表。
+      * 实例的公网相关信息列表。顺序为主网卡在前，辅助网卡按绑定先后顺序排列。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     PublicIPAddressSet: Array<PublicIPAddressInfo>;
@@ -1374,21 +1374,14 @@ SOFT_FIRST：表示优先软关机，失败再执行硬关机
     StopType?: string;
 }
 /**
- * 安全组规则集合
+ * 转发规则及健康状态列表
  */
-export interface SecurityGroupPolicySet {
+export interface RuleHealth {
     /**
-      * 安全组规则当前版本。用户每次更新安全规则版本会自动加1，防止更新的路由规则已过期，不填不考虑冲突。
+      * 本规则上绑定的后端的健康检查状态
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Version?: string;
-    /**
-      * 出站规则。其中出站规则和入站规则必须选一个。
-      */
-    Egress?: Array<SecurityGroupPolicy>;
-    /**
-      * 入站规则。其中出站规则和入站规则必须选一个。
-      */
-    Ingress?: Array<SecurityGroupPolicy>;
+    Targets: Array<TargetHealth>;
 }
 /**
  * AllocateAddresses请求参数结构体
@@ -1606,6 +1599,11 @@ PROTECTIVELY_ISOLATED：表示被安全隔离的实例。
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ISP: string;
+    /**
+      * 物理位置信息。注意该字段目前为保留字段，均为空值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PhysicalPosition: PhysicalPosition;
 }
 /**
  * DeleteNetworkInterface请求参数结构体
@@ -2370,14 +2368,24 @@ export interface ReplaceRoutesResponse {
     RequestId?: string;
 }
 /**
- * 转发规则及健康状态列表
+ * 物理位置信息
  */
-export interface RuleHealth {
+export interface PhysicalPosition {
     /**
-      * 本规则上绑定的后端的健康检查状态
+      * 机位
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Targets: Array<TargetHealth>;
+    PosId: string;
+    /**
+      * 机架
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RackId: string;
+    /**
+      * 交换机
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SwitchId: string;
 }
 /**
  * 负载均衡监听器
@@ -3704,6 +3712,23 @@ export interface RouteTableAssociation {
       * 路由表实例ID
       */
     RouteTableId?: string;
+}
+/**
+ * 安全组规则集合
+ */
+export interface SecurityGroupPolicySet {
+    /**
+      * 安全组规则当前版本。用户每次更新安全规则版本会自动加1，防止更新的路由规则已过期，不填不考虑冲突。
+      */
+    Version?: string;
+    /**
+      * 出站规则。其中出站规则和入站规则必须选一个。
+      */
+    Egress?: Array<SecurityGroupPolicy>;
+    /**
+      * 入站规则。其中出站规则和入站规则必须选一个。
+      */
+    Ingress?: Array<SecurityGroupPolicy>;
 }
 /**
  * DescribeVpcs返回参数结构体

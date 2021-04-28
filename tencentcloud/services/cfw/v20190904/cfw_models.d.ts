@@ -99,6 +99,23 @@ export interface ModifyAllRuleStatusResponse {
     RequestId?: string;
 }
 /**
+ * 黑白名单IOC列表
+ */
+export interface IocListData {
+    /**
+      * 待处置IP地址，IP/Domain字段二选一
+      */
+    IP: string;
+    /**
+      * 只能为0或者1   0代表出站 1代表入站
+      */
+    Direction: number;
+    /**
+      * 待处置域名，IP/Domain字段二选一
+      */
+    Domain?: string;
+}
+/**
  * DescribeRuleOverview返回参数结构体
  */
 export interface DescribeRuleOverviewResponse {
@@ -946,6 +963,23 @@ export interface DeleteAllAccessControlRuleResponse {
     RequestId?: string;
 }
 /**
+ * ModifyBlockIgnoreList返回参数结构体
+ */
+export interface ModifyBlockIgnoreListResponse {
+    /**
+      * 接口返回信息
+      */
+    ReturnMsg: string;
+    /**
+      * 接口返回错误码，0请求成功  非0失败
+      */
+    ReturnCode: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DeleteSecurityGroupAllRule返回参数结构体
  */
 export interface DeleteSecurityGroupAllRuleResponse {
@@ -1066,6 +1100,31 @@ export interface SecurityGroupListData {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Cidr: string;
+}
+/**
+ * ModifyBlockIgnoreList请求参数结构体
+ */
+export interface ModifyBlockIgnoreListRequest {
+    /**
+      * 1拦截列表 2 忽略列表
+      */
+    RuleType: number;
+    /**
+      * IP、Domain二选一，不能同时为空
+      */
+    IOC: Array<IocListData>;
+    /**
+      * 默认值:delete（删除）、edit（编辑）、add（添加）  其他值无效
+      */
+    IocAction: string;
+    /**
+      * 时间格式：yyyy-MM-dd HH:mm:ss
+      */
+    StartTime?: string;
+    /**
+      * 时间格式：yyyy-MM-dd HH:mm:ss
+      */
+    EndTime?: string;
 }
 /**
  * CreateAcRules请求参数结构体

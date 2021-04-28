@@ -978,9 +978,19 @@ it("vod.v20180717.AttachMediaSubtitles", async function () {
     }
 })
 
-it("vod.v20180717.DescribeDailyPlayStatFileList", async function () {
+it("vod.v20180717.ModifyEventConfig", async function () {
     try {
-       const data = await client.DescribeDailyPlayStatFileList({})
+       const data = await client.ModifyEventConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.ModifyMediaInfo", async function () {
+    try {
+       const data = await client.ModifyMediaInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1068,9 +1078,9 @@ it("vod.v20180717.DescribeSuperPlayerConfigs", async function () {
     }
 })
 
-it("vod.v20180717.ModifyMediaInfo", async function () {
+it("vod.v20180717.DescribeDailyPlayStatFileList", async function () {
     try {
-       const data = await client.ModifyMediaInfo({})
+       const data = await client.DescribeDailyPlayStatFileList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

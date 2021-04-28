@@ -620,6 +620,15 @@ export interface CreateImageProcessingTemplateRequest {
     SubAppId?: number;
 }
 /**
+ * ModifyEventConfig返回参数结构体
+ */
+export interface ModifyEventConfigResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 智能封面结果信息
  */
 export interface AiAnalysisTaskCoverOutput {
@@ -4909,6 +4918,34 @@ export interface AiSampleWord {
       * 最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
       */
     UpdateTime: string;
+}
+/**
+ * ModifyEventConfig请求参数结构体
+ */
+export interface ModifyEventConfigRequest {
+    /**
+      * 接收事件通知的方式。
+<li>PUSH：[HTTP 回调通知](https://cloud.tencent.com/document/product/266/33779)；</li>
+<li>PULL：[基于消息队列的可靠通知](https://cloud.tencent.com/document/product/266/33779)。</li>
+      */
+    Mode?: string;
+    /**
+      * 采用 [HTTP 回调通知](https://cloud.tencent.com/document/product/266/33779) 接收方式时，用于接收 3.0 格式回调的地址。
+注意：如果带 NotificationUrl  参数且值为空字符串时将会清空 3.0 格式回调地址。
+      */
+    NotificationUrl?: string;
+    /**
+      * 是否接收 [视频上传完成](https://cloud.tencent.com/document/product/266/7830) 事件通知， 默认 "OFF" 为忽略该事件通知，"ON" 为接收事件通知。
+      */
+    UploadMediaCompleteEventSwitch?: string;
+    /**
+      * 是否接收 [视频删除完成](https://cloud.tencent.com/document/product/266/13434) 事件通知，  默认 "OFF" 为忽略该事件通知，"ON" 为接收事件通知。
+      */
+    DeleteMediaCompleteEventSwitch?: string;
+    /**
+      * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+      */
+    SubAppId?: number;
 }
 /**
  * 语音关键词识别输出。

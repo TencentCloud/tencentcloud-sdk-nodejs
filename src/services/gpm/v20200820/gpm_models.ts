@@ -891,6 +891,31 @@ export interface StringKV {
 }
 
 /**
+ * StartMatchingBackfill请求参数结构体
+ */
+export interface StartMatchingBackfillRequest {
+  /**
+   * 匹配code
+   */
+  MatchCode: string
+
+  /**
+   * 玩家信息
+   */
+  Players: Array<Player>
+
+  /**
+   * 游戏服务器回话 ID [1-256] 个ASCII 字符
+   */
+  GameServerSessionId: string
+
+  /**
+   * 匹配票据 Id 默认 "" 为空则由 GPM 自动生成 长度 [1, 128]
+   */
+  MatchTicketId?: string
+}
+
+/**
  * CancelMatching返回参数结构体
  */
 export interface CancelMatchingResponse {
@@ -1083,6 +1108,22 @@ export interface ModifyTokenRequest {
    * Token，[a-zA-Z0-9-_.], 长度0-64。如果为空，将由GPM随机生成。
    */
   MatchToken?: string
+}
+
+/**
+ * StartMatchingBackfill返回参数结构体
+ */
+export interface StartMatchingBackfillResponse {
+  /**
+      * 匹配票据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MatchTicket: MatchTicket
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

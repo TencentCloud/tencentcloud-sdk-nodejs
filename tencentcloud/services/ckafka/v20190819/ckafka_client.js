@@ -192,6 +192,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTopic", req, cb);
     }
     /**
+     * 用于查看ckafka的可用区列表
+     */
+    async DescribeCkafkaZone(req, cb) {
+        return this.request("DescribeCkafkaZone", req, cb);
+    }
+    /**
+     * 枚举地域,只支持广州地域
+     */
+    async DescribeRegion(req, cb) {
+        return this.request("DescribeRegion", req, cb);
+    }
+    /**
      * 添加用户
      */
     async CreateUser(req, cb) {

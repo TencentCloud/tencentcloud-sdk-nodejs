@@ -33,29 +33,34 @@ import {
   DescribeInstancesResponse,
   GroupInfoTopics,
   TopicResult,
+  Region,
   DescribeInstancesDetailResponse,
   CreateInstancePreData,
   DescribeACLResponse,
   JgwOperateResponse,
-  DeleteAclRuleRequest,
+  ZoneInfo,
+  DescribeCkafkaZoneRequest,
   Topic,
   Tag,
   GroupResponse,
   DescribeTopicAttributesResponse,
   RouteResponse,
   DescribeGroupResponse,
+  DeleteAclRuleRequest,
   ModifyInstanceAttributesConfig,
   OperateResponseData,
   CreateUserResponse,
-  GroupOffsetTopic,
+  ModifyInstanceAttributesResponse,
   CreatePartitionResponse,
+  ClusterInfo,
+  DescribeConsumerGroupRequest,
   DeleteUserResponse,
   CreateAclRequest,
   DescribeAppInfoRequest,
   DescribeTopicResponse,
   ConsumerGroupResponse,
   CreateTopicIpWhiteListResponse,
-  ModifyInstanceAttributesResponse,
+  GroupOffsetTopic,
   ModifyGroupOffsetsResponse,
   Partition,
   CreateAclResponse,
@@ -63,11 +68,13 @@ import {
   DeleteAclResponse,
   DynamicRetentionTime,
   DescribeRouteRequest,
+  DescribeRegionRequest,
   InstanceConfigDO,
   DeleteAclRuleResponse,
   UserResponse,
   DescribeGroupInfoRequest,
   DescribeGroupInfoResponse,
+  ModifyTopicAttributesResponse,
   DescribeUserResponse,
   AppIdResponse,
   DescribeTopicRequest,
@@ -75,14 +82,16 @@ import {
   Group,
   DescribeAppInfoResponse,
   AclResponse,
+  ZoneResponse,
   Instance,
   DescribeInstanceAttributesResponse,
   TopicDetailResponse,
   Config,
   ModifyPasswordRequest,
+  CreateInstancePreRequest,
   ModifyInstanceAttributesRequest,
-  ModifyTopicAttributesResponse,
-  DescribeConsumerGroupRequest,
+  DescribeRegionResponse,
+  CreateTopicResponse,
   VipEntity,
   ConsumerGroupTopic,
   User,
@@ -90,7 +99,7 @@ import {
   DeleteTopicResponse,
   DescribeInstancesRequest,
   InstanceAttributesResponse,
-  DescribeGroupRequest,
+  DescribeCkafkaZoneResponse,
   Filter,
   GroupOffsetResponse,
   CreateUserRequest,
@@ -114,14 +123,14 @@ import {
   Acl,
   TopicRetentionTimeConfigRsp,
   ModifyTopicAttributesRequest,
-  CreateTopicResponse,
-  CreateInstancePreRequest,
+  DescribeGroupRequest,
   DeleteTopicIpWhiteListRequest,
   DescribeGroupOffsetsRequest,
   DescribeUserRequest,
   InstanceDetail,
   DescribeTopicDetailResponse,
   SubscribedInfo,
+  Price,
 } from "./ckafka_models"
 
 /**
@@ -403,6 +412,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTopicResponse) => void
   ): Promise<DescribeTopicResponse> {
     return this.request("DescribeTopic", req, cb)
+  }
+
+  /**
+   * 用于查看ckafka的可用区列表
+   */
+  async DescribeCkafkaZone(
+    req?: DescribeCkafkaZoneRequest,
+    cb?: (error: string, rep: DescribeCkafkaZoneResponse) => void
+  ): Promise<DescribeCkafkaZoneResponse> {
+    return this.request("DescribeCkafkaZone", req, cb)
+  }
+
+  /**
+   * 枚举地域,只支持广州地域
+   */
+  async DescribeRegion(
+    req: DescribeRegionRequest,
+    cb?: (error: string, rep: DescribeRegionResponse) => void
+  ): Promise<DescribeRegionResponse> {
+    return this.request("DescribeRegion", req, cb)
   }
 
   /**

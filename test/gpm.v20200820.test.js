@@ -88,6 +88,16 @@ it("gpm.v20200820.DescribeRule", async function () {
     }
 })
 
+it("gpm.v20200820.StartMatchingBackfill", async function () {
+    try {
+       const data = await client.StartMatchingBackfill({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("gpm.v20200820.DescribeMatch", async function () {
     try {
        const data = await client.DescribeMatch({})

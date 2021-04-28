@@ -70,6 +70,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRule", req, cb);
     }
     /**
+     * 通过调用StartMatchingBackfill，用户可以传入一个回填的匹配请求，GPM为回填请求搜索符合条件的ticket并形成一个新的match。
+     */
+    async StartMatchingBackfill(req, cb) {
+        return this.request("StartMatchingBackfill", req, cb);
+    }
+    /**
      * 查询匹配详情
      */
     async DescribeMatch(req, cb) {

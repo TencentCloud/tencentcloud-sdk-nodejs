@@ -148,6 +148,16 @@ it("cfw.v20190904.DescribeRuleOverview", async function () {
     }
 })
 
+it("cfw.v20190904.ModifyBlockIgnoreList", async function () {
+    try {
+       const data = await client.ModifyBlockIgnoreList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.ModifySequenceRules", async function () {
     try {
        const data = await client.ModifySequenceRules({})

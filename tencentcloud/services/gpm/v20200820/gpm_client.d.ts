@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeDataResponse, DescribeMatchCodesRequest, DeleteRuleResponse, ModifyMatchRequest, StartMatchingResponse, CreateMatchRequest, DescribeMatchingProgressRequest, ModifyMatchResponse, CreateMatchResponse, DescribeMatchesRequest, DeleteRuleRequest, DescribeRulesRequest, DescribeTokenResponse, DescribeRuleResponse, DescribeMatchRequest, ModifyRuleRequest, DescribeTokenRequest, DescribeDataRequest, CreateRuleRequest, DescribeRuleRequest, DescribeMatchResponse, ModifyTokenResponse, DeleteMatchResponse, CancelMatchingRequest, CancelMatchingResponse, DescribeMatchCodesResponse, CreateRuleResponse, DescribeRulesResponse, ModifyTokenRequest, DescribeMatchesResponse, StartMatchingRequest, DeleteMatchRequest, DescribeMatchingProgressResponse, ModifyRuleResponse } from "./gpm_models";
+import { DescribeDataResponse, DescribeMatchCodesRequest, DeleteRuleResponse, ModifyMatchRequest, StartMatchingResponse, CreateMatchRequest, DescribeMatchingProgressRequest, ModifyMatchResponse, CreateMatchResponse, DescribeMatchesRequest, DeleteRuleRequest, DescribeRulesRequest, DescribeTokenResponse, DescribeRuleResponse, DescribeMatchRequest, ModifyRuleRequest, DescribeTokenRequest, DescribeDataRequest, CreateRuleRequest, DescribeRuleRequest, DescribeMatchResponse, ModifyTokenResponse, DeleteMatchResponse, CancelMatchingRequest, StartMatchingBackfillRequest, CancelMatchingResponse, DescribeMatchCodesResponse, CreateRuleResponse, DescribeRulesResponse, ModifyTokenRequest, StartMatchingBackfillResponse, DescribeMatchesResponse, StartMatchingRequest, DeleteMatchRequest, DescribeMatchingProgressResponse, ModifyRuleResponse } from "./gpm_models";
 /**
  * gpm client
  * @class
@@ -35,6 +35,10 @@ export declare class Client extends AbstractClient {
      * 查询规则详情
      */
     DescribeRule(req: DescribeRuleRequest, cb?: (error: string, rep: DescribeRuleResponse) => void): Promise<DescribeRuleResponse>;
+    /**
+     * 通过调用StartMatchingBackfill，用户可以传入一个回填的匹配请求，GPM为回填请求搜索符合条件的ticket并形成一个新的match。
+     */
+    StartMatchingBackfill(req: StartMatchingBackfillRequest, cb?: (error: string, rep: StartMatchingBackfillResponse) => void): Promise<StartMatchingBackfillResponse>;
     /**
      * 查询匹配详情
      */

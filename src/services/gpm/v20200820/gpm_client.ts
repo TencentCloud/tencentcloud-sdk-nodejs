@@ -51,6 +51,7 @@ import {
   CancelMatchingRequest,
   AttributeMap,
   StringKV,
+  StartMatchingBackfillRequest,
   CancelMatchingResponse,
   DescribeMatchCodesResponse,
   CreateRuleResponse,
@@ -58,6 +59,7 @@ import {
   MTicket,
   RuleInfo,
   ModifyTokenRequest,
+  StartMatchingBackfillResponse,
   DescribeMatchesResponse,
   Player,
   StartMatchingRequest,
@@ -145,6 +147,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRuleResponse) => void
   ): Promise<DescribeRuleResponse> {
     return this.request("DescribeRule", req, cb)
+  }
+
+  /**
+   * 通过调用StartMatchingBackfill，用户可以传入一个回填的匹配请求，GPM为回填请求搜索符合条件的ticket并形成一个新的match。
+   */
+  async StartMatchingBackfill(
+    req: StartMatchingBackfillRequest,
+    cb?: (error: string, rep: StartMatchingBackfillResponse) => void
+  ): Promise<StartMatchingBackfillResponse> {
+    return this.request("StartMatchingBackfill", req, cb)
   }
 
   /**

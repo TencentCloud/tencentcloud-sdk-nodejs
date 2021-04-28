@@ -288,6 +288,26 @@ it("ckafka.v20190819.DescribeTopic", async function () {
     }
 })
 
+it("ckafka.v20190819.DescribeCkafkaZone", async function () {
+    try {
+       const data = await client.DescribeCkafkaZone({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ckafka.v20190819.DescribeRegion", async function () {
+    try {
+       const data = await client.DescribeRegion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ckafka.v20190819.CreateUser", async function () {
     try {
        const data = await client.CreateUser({})

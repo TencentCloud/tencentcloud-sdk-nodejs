@@ -685,7 +685,7 @@ export interface ProjectInfo {
   CoverUrl: string
 
   /**
-      * 云转推项目信息。
+      * 云转推项目信息，仅当项目类别取值 STREAM_CONNECT 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
       */
   StreamConnectProjectInfo: StreamConnectProjectInfo
@@ -1145,6 +1145,14 @@ export interface CreateProjectRequest {
 <li>RECORD_REPLAY：录制回放。</li>
       */
   Category: string
+
+  /**
+      * 项目模式，一个项目可以有多种模式并相互切换。
+当 Category 为 VIDEO_EDIT 时，可选模式有：
+<li>Default：默认模式。</li>
+<li>VideoEditTemplate：视频编辑模板制作模式。</li>
+      */
+  Mode?: string
 
   /**
       * 画布宽高比。
@@ -3070,6 +3078,14 @@ export interface DescribeProjectsRequest {
   CategorySet?: Array<string>
 
   /**
+      * 项目模式，一个项目可以有多种模式并相互切换。
+当 Category 为 VIDEO_EDIT 时，可选模式有：
+<li>Default：默认模式。</li>
+<li>VideoEditTemplate：视频编辑模板制作模式。</li>
+      */
+  Modes?: Array<string>
+
+  /**
       * 列表排序，支持下列排序字段：
 <li>CreateTime：创建时间；</li>
 <li>UpdateTime：更新时间。</li>
@@ -3400,6 +3416,14 @@ export interface ModifyProjectRequest {
    * 项目归属者。
    */
   Owner?: Entity
+
+  /**
+      * 项目模式，一个项目可以有多种模式并相互切换。
+当 Category 为 VIDEO_EDIT 时，可选模式有：
+<li>Defualt：默认模式。</li>
+<li>VideoEditTemplate：视频编辑模板制作模式。</li>
+      */
+  Mode?: string
 }
 
 /**

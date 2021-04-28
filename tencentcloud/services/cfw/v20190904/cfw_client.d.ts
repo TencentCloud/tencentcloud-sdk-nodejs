@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeVpcRuleOverviewResponse, SetNatFwDnatRuleRequest, DescribeSyncAssetStatusResponse, ModifyAllSwitchStatusRequest, ModifyAllRuleStatusResponse, DescribeRuleOverviewResponse, CreateSecurityGroupApiRulesRequest, DescribeSecurityGroupListResponse, ExpandCfwVerticalResponse, ModifyItemSwitchStatusRequest, ModifyItemSwitchStatusResponse, CreateSecurityGroupApiRulesResponse, ModifyAcRuleResponse, ModifySequenceRulesResponse, DescribeTableStatusResponse, DeleteAcRuleResponse, ModifySequenceRulesRequest, DescribeSwitchListsResponse, DescribeSyncAssetStatusRequest, ModifySecurityGroupAllRuleStatusResponse, DescribeCfwEipsResponse, DeleteAllAccessControlRuleRequest, RunSyncAssetResponse, RunSyncAssetRequest, DeleteSecurityGroupRuleRequest, ModifyTableStatusResponse, SetNatFwDnatRuleResponse, DescribeCfwEipsRequest, DescribeRuleOverviewRequest, DescribeVpcRuleOverviewRequest, DescribeAcListsRequest, DescribeTableStatusRequest, CreateAcRulesResponse, DescribeAssociatedInstanceListResponse, DescribeAssociatedInstanceListRequest, ModifyAcRuleRequest, DescribeNatRuleOverviewResponse, DeleteAcRuleRequest, DeleteAllAccessControlRuleResponse, DeleteSecurityGroupAllRuleResponse, ExpandCfwVerticalRequest, CreateAcRulesRequest, DescribeSecurityGroupListRequest, DescribeSwitchListsRequest, ModifyTableStatusRequest, DeleteSecurityGroupRuleResponse, DescribeNatRuleOverviewRequest, ModifySecurityGroupAllRuleStatusRequest, DeleteSecurityGroupAllRuleRequest, ModifyAllRuleStatusRequest, DescribeAcListsResponse, ModifyAllSwitchStatusResponse } from "./cfw_models";
+import { DescribeVpcRuleOverviewResponse, SetNatFwDnatRuleRequest, DescribeSyncAssetStatusResponse, ModifyAllSwitchStatusRequest, ModifyAllRuleStatusResponse, DescribeRuleOverviewResponse, CreateSecurityGroupApiRulesRequest, DescribeSecurityGroupListResponse, ExpandCfwVerticalResponse, ModifyItemSwitchStatusRequest, ModifyItemSwitchStatusResponse, CreateSecurityGroupApiRulesResponse, ModifyAcRuleResponse, ModifySequenceRulesResponse, DescribeTableStatusResponse, DeleteAcRuleResponse, ModifySequenceRulesRequest, DescribeSwitchListsResponse, DescribeSyncAssetStatusRequest, ModifySecurityGroupAllRuleStatusResponse, DescribeCfwEipsResponse, DeleteAllAccessControlRuleRequest, RunSyncAssetResponse, RunSyncAssetRequest, DeleteSecurityGroupRuleRequest, ModifyTableStatusResponse, SetNatFwDnatRuleResponse, DescribeCfwEipsRequest, DescribeRuleOverviewRequest, DescribeVpcRuleOverviewRequest, DescribeAcListsRequest, DescribeTableStatusRequest, CreateAcRulesResponse, DescribeAssociatedInstanceListResponse, DescribeAssociatedInstanceListRequest, ModifyAcRuleRequest, DescribeNatRuleOverviewResponse, DeleteAcRuleRequest, DeleteAllAccessControlRuleResponse, ModifyBlockIgnoreListResponse, DeleteSecurityGroupAllRuleResponse, ExpandCfwVerticalRequest, ModifyBlockIgnoreListRequest, CreateAcRulesRequest, DescribeSecurityGroupListRequest, DescribeSwitchListsRequest, ModifyTableStatusRequest, DeleteSecurityGroupRuleResponse, DescribeNatRuleOverviewRequest, ModifySecurityGroupAllRuleStatusRequest, DeleteSecurityGroupAllRuleRequest, ModifyAllRuleStatusRequest, DescribeAcListsResponse, ModifyAllSwitchStatusResponse } from "./cfw_models";
 /**
  * cfw client
  * @class
@@ -59,6 +59,13 @@ export declare class Client extends AbstractClient {
      * 查询规则列表概况
      */
     DescribeRuleOverview(req: DescribeRuleOverviewRequest, cb?: (error: string, rep: DescribeRuleOverviewResponse) => void): Promise<DescribeRuleOverviewResponse>;
+    /**
+     * 支持对拦截列表、忽略列表如下操作：
+批量增加拦截IP、忽略IP/域名
+批量删除拦截IP、忽略IP/域名
+批量修改拦截IP、忽略IP/域名生效事件
+     */
+    ModifyBlockIgnoreList(req: ModifyBlockIgnoreListRequest, cb?: (error: string, rep: ModifyBlockIgnoreListResponse) => void): Promise<ModifyBlockIgnoreListResponse>;
     /**
      * 修改规则执行顺序
      */

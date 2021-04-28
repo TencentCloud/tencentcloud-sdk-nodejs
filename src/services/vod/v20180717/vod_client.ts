@@ -42,6 +42,7 @@ import {
   MediaMiniProgramReviewElem,
   ManageTaskResponse,
   CreateImageProcessingTemplateRequest,
+  ModifyEventConfigResponse,
   AiAnalysisTaskCoverOutput,
   MediaSnapshotByTimeOffsetItem,
   ModifySampleSnapshotTemplateRequest,
@@ -232,6 +233,7 @@ import {
   AiRecognitionTaskOcrFullTextResult,
   MediaProcessTaskSnapshotByTimeOffsetResult,
   AiSampleWord,
+  ModifyEventConfigRequest,
   AiRecognitionTaskAsrWordsResultOutput,
   ModifyAdaptiveDynamicStreamingTemplateResponse,
   MediaProcessTaskTranscodeResult,
@@ -1671,20 +1673,28 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 该接口用于查询播放统计文件的下载地址。
-* 可以查询最近30天的播放统计文件下载地址。
-* 云点播每天对前一天的 CDN 请求日志进行分析处理，生成播放统计文件。
-* 播放统计文件内容包含媒体文件的播放次数、播放流量等统计信息。
-* 播放次数统计说明：
-    1. HLS 文件：访问M3U8 文件时统计播放次数；访问TS 文件不统计播放次数。
-    2. 其它文件（如 MP4 文件）：播放请求带有 range 参数且 range 的 start 参数不等于0时不统计播放次数，其它情况统计播放次数。
-* 播放设备的统计：播放请求带了 UserAgent 参数，并且 UserAgent 包含 Android 或者 iPhone 等标识，会统计为移动端播放次数，否则统计为 PC 端播放次数。
+     * 腾讯云点播为客户提供了媒体上传、媒体管理、媒体处理等等服务，在这些服务执行过程或执行结束时，腾讯云点播也提供各种对应的事件通知，方便开发者感知服务处理状态，并做下一步的业务操作。
+
+开发者可以通过调用本接口来实现：
+- 设置接收回调通知的类型，目前有[ HTTP 回调通知](https://cloud.tencent.com/document/product/266/33779) 和 [基于消息队列的可靠通知](https://cloud.tencent.com/document/product/266/33779) 两种类型。
+- 对于[ HTTP 回调通知](https://cloud.tencent.com/document/product/266/33779)，可设置 3.0 格式回调的地址。3.0 格式回调的说明参见 [历史格式回调](https://cloud.tencent.com/document/product/266/33796)。
+- 对具体事件服务的通知事件选择设置接收或者忽略。
      */
-  async DescribeDailyPlayStatFileList(
-    req: DescribeDailyPlayStatFileListRequest,
-    cb?: (error: string, rep: DescribeDailyPlayStatFileListResponse) => void
-  ): Promise<DescribeDailyPlayStatFileListResponse> {
-    return this.request("DescribeDailyPlayStatFileList", req, cb)
+  async ModifyEventConfig(
+    req: ModifyEventConfigRequest,
+    cb?: (error: string, rep: ModifyEventConfigResponse) => void
+  ): Promise<ModifyEventConfigResponse> {
+    return this.request("ModifyEventConfig", req, cb)
+  }
+
+  /**
+   * 修改媒体文件的属性，包括分类、名称、描述、标签、过期时间、打点信息、视频封面、字幕信息等。
+   */
+  async ModifyMediaInfo(
+    req: ModifyMediaInfoRequest,
+    cb?: (error: string, rep: ModifyMediaInfoResponse) => void
+  ): Promise<ModifyMediaInfoResponse> {
+    return this.request("ModifyMediaInfo", req, cb)
   }
 
   /**
@@ -1802,13 +1812,20 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改媒体文件的属性，包括分类、名称、描述、标签、过期时间、打点信息、视频封面、字幕信息等。
-   */
-  async ModifyMediaInfo(
-    req: ModifyMediaInfoRequest,
-    cb?: (error: string, rep: ModifyMediaInfoResponse) => void
-  ): Promise<ModifyMediaInfoResponse> {
-    return this.request("ModifyMediaInfo", req, cb)
+     * 该接口用于查询播放统计文件的下载地址。
+* 可以查询最近30天的播放统计文件下载地址。
+* 云点播每天对前一天的 CDN 请求日志进行分析处理，生成播放统计文件。
+* 播放统计文件内容包含媒体文件的播放次数、播放流量等统计信息。
+* 播放次数统计说明：
+    1. HLS 文件：访问M3U8 文件时统计播放次数；访问TS 文件不统计播放次数。
+    2. 其它文件（如 MP4 文件）：播放请求带有 range 参数且 range 的 start 参数不等于0时不统计播放次数，其它情况统计播放次数。
+* 播放设备的统计：播放请求带了 UserAgent 参数，并且 UserAgent 包含 Android 或者 iPhone 等标识，会统计为移动端播放次数，否则统计为 PC 端播放次数。
+     */
+  async DescribeDailyPlayStatFileList(
+    req: DescribeDailyPlayStatFileListRequest,
+    cb?: (error: string, rep: DescribeDailyPlayStatFileListResponse) => void
+  ): Promise<DescribeDailyPlayStatFileListResponse> {
+    return this.request("DescribeDailyPlayStatFileList", req, cb)
   }
 
   /**

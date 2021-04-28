@@ -106,6 +106,15 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeRuleOverview", req, cb);
     }
     /**
+     * 支持对拦截列表、忽略列表如下操作：
+批量增加拦截IP、忽略IP/域名
+批量删除拦截IP、忽略IP/域名
+批量修改拦截IP、忽略IP/域名生效事件
+     */
+    async ModifyBlockIgnoreList(req, cb) {
+        return this.request("ModifyBlockIgnoreList", req, cb);
+    }
+    /**
      * 修改规则执行顺序
      */
     async ModifySequenceRules(req, cb) {

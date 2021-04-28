@@ -356,6 +356,56 @@ export interface TopicResult {
 }
 
 /**
+ * 地域实体对象
+ */
+export interface Region {
+  /**
+   * 地域ID
+   */
+  RegionId: number
+
+  /**
+   * 地域名称
+   */
+  RegionName: string
+
+  /**
+   * 区域名称
+   */
+  AreaName: string
+
+  /**
+      * 地域代码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RegionCode: string
+
+  /**
+      * 地域代码（V3版本）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RegionCodeV3: string
+
+  /**
+      * NONE:默认值不支持任何特殊机型\nCVM:支持CVM类型
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Support: string
+
+  /**
+      * 是否支持ipv6, 0：表示不支持，1：表示支持
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Ipv6: number
+
+  /**
+      * 是否支持跨可用区, 0：表示不支持，1：表示支持
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MultiZone: number
+}
+
+/**
  * DescribeInstancesDetail返回参数结构体
  */
 export interface DescribeInstancesDetailResponse {
@@ -424,19 +474,54 @@ export interface JgwOperateResponse {
 }
 
 /**
- * DeleteAclRule请求参数结构体
+ * zone信息实体
  */
-export interface DeleteAclRuleRequest {
+export interface ZoneInfo {
   /**
-   * 实例id信息
+   * zone的id
    */
-  InstanceId: string
+  ZoneId: string
 
   /**
-   * acl规则名称
+   * 是否内部APP
    */
-  RuleName: string
+  IsInternalApp: number
+
+  /**
+   * app id
+   */
+  AppId: number
+
+  /**
+   * 标识
+   */
+  Flag: boolean
+
+  /**
+   * zone名称
+   */
+  ZoneName: string
+
+  /**
+   * zone状态
+   */
+  ZoneStatus: number
+
+  /**
+   * 额外标识
+   */
+  Exflag: string
+
+  /**
+   * json对象，key为机型，value true为售罄，false为未售罄
+   */
+  SoldOut: string
 }
+
+/**
+ * DescribeCkafkaZone请求参数结构体
+ */
+export type DescribeCkafkaZoneRequest = null
 
 /**
  * 返回的topic对象
@@ -533,6 +618,21 @@ export interface DescribeGroupResponse {
 }
 
 /**
+ * DeleteAclRule请求参数结构体
+ */
+export interface DeleteAclRuleRequest {
+  /**
+   * 实例id信息
+   */
+  InstanceId: string
+
+  /**
+   * acl规则名称
+   */
+  RuleName: string
+}
+
+/**
  * 修改实例属性的配置对象
  */
 export interface ModifyInstanceAttributesConfig {
@@ -579,19 +679,18 @@ export interface CreateUserResponse {
 }
 
 /**
- * 消费分组主题对象
+ * ModifyInstanceAttributes返回参数结构体
  */
-export interface GroupOffsetTopic {
+export interface ModifyInstanceAttributesResponse {
   /**
-   * 主题名称
+   * 返回结果
    */
-  Topic: string
+  Result?: JgwOperateResponse
 
   /**
-      * 该主题分区数组，其中每个元素为一个 json object
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Partitions: Array<GroupOffsetPartition>
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -607,6 +706,87 @@ export interface CreatePartitionResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 集群信息实体
+ */
+export interface ClusterInfo {
+  /**
+   * 集群Id
+   */
+  ClusterId: number
+
+  /**
+   * 集群名称
+   */
+  ClusterName: string
+
+  /**
+      * 集群最大磁盘 单位GB
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxDiskSize: number
+
+  /**
+      * 集群最大带宽 单位MB/s
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxBandWidth: number
+
+  /**
+      * 集群当前可用磁盘  单位GB
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AvailableDiskSize: number
+
+  /**
+      * 集群当前可用带宽 单位MB/s
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AvailableBandWidth: number
+
+  /**
+      * 集群所属可用区，表明集群归属的可用区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ZoneId: number
+
+  /**
+      * 集群节点所在的可用区，若该集群为跨可用区集群，则包含该集群节点所在的多个可用区。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ZoneIds: Array<number>
+}
+
+/**
+ * DescribeConsumerGroup请求参数结构体
+ */
+export interface DescribeConsumerGroupRequest {
+  /**
+   * ckafka实例id。
+   */
+  InstanceId: string
+
+  /**
+   * 可选，用户需要查询的group名称。
+   */
+  GroupName?: string
+
+  /**
+   * 可选，用户需要查询的group中的对应的topic名称，如果指定了该参数，而group又未指定则忽略该参数。
+   */
+  TopicName?: string
+
+  /**
+   * 本次返回个数限制
+   */
+  Limit?: number
+
+  /**
+   * 偏移位置
+   */
+  Offset?: number
 }
 
 /**
@@ -763,18 +943,19 @@ export interface CreateTopicIpWhiteListResponse {
 }
 
 /**
- * ModifyInstanceAttributes返回参数结构体
+ * 消费分组主题对象
  */
-export interface ModifyInstanceAttributesResponse {
+export interface GroupOffsetTopic {
   /**
-   * 返回结果
+   * 主题名称
    */
-  Result?: JgwOperateResponse
+  Topic: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+      * 该主题分区数组，其中每个元素为一个 json object
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Partitions: Array<GroupOffsetPartition>
 }
 
 /**
@@ -937,6 +1118,26 @@ export interface DescribeRouteRequest {
 }
 
 /**
+ * DescribeRegion请求参数结构体
+ */
+export interface DescribeRegionRequest {
+  /**
+   * 偏移量
+   */
+  Offset?: number
+
+  /**
+   * 返回最大结果数
+   */
+  Limit?: number
+
+  /**
+   * 业务字段，可忽略
+   */
+  Business?: string
+}
+
+/**
  * 实例配置实体
  */
 export interface InstanceConfigDO {
@@ -1011,6 +1212,21 @@ export interface DescribeGroupInfoResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Result?: Array<GroupInfoResponse>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyTopicAttributes返回参数结构体
+ */
+export interface ModifyTopicAttributesResponse {
+  /**
+   * 返回结果集
+   */
+  Result?: JgwOperateResponse
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1133,6 +1349,66 @@ export interface AclResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   AclList: Array<Acl>
+}
+
+/**
+ * 查询kafka的zone信息返回的实体
+ */
+export interface ZoneResponse {
+  /**
+   * zone列表
+   */
+  ZoneList: Array<ZoneInfo>
+
+  /**
+   * 最大购买实例个数
+   */
+  MaxBuyInstanceNum: number
+
+  /**
+   * 最大购买带宽 单位Mb/s
+   */
+  MaxBandwidth: number
+
+  /**
+   * 后付费单位价格
+   */
+  UnitPrice: Price
+
+  /**
+   * 后付费消息单价
+   */
+  MessagePrice: Price
+
+  /**
+      * 用户独占集群信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClusterInfo: Array<ClusterInfo>
+
+  /**
+      * 购买标准版配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Standard: string
+
+  /**
+      * 购买标准版S2配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StandardS2: string
+
+  /**
+      * 购买专业版配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Profession: string
+
+  /**
+      * 购买物理独占版配置
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Physical: string
 }
 
 /**
@@ -1266,6 +1542,56 @@ export interface ModifyPasswordRequest {
 }
 
 /**
+ * CreateInstancePre请求参数结构体
+ */
+export interface CreateInstancePreRequest {
+  /**
+   * 实例名称，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)
+   */
+  InstanceName: string
+
+  /**
+   * 可用区
+   */
+  ZoneId: number
+
+  /**
+   * 预付费购买时长，例如 "1m",就是一个月
+   */
+  Period: string
+
+  /**
+   * 实例规格，1：入门型 ，2： 标准型，3 ：进阶型，4 ：容量型，5： 高阶型1，6：高阶性2, 7： 高阶型3,8： 高阶型4， 9 ：独占型。
+   */
+  InstanceType: number
+
+  /**
+   * vpcId，不填默认基础网络
+   */
+  VpcId?: string
+
+  /**
+   * 子网id，vpc网络需要传该参数，基础网络可以不传
+   */
+  SubnetId?: string
+
+  /**
+   * 可选。实例日志的最长保留时间，单位分钟，默认为10080（7天），最大30天，不填默认0，代表不开启日志保留时间回收策略
+   */
+  MsgRetentionTime?: number
+
+  /**
+   * 创建实例时可以选择集群Id, 该入参表示集群Id
+   */
+  ClusterId?: number
+
+  /**
+   * 预付费自动续费标记，0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费(用户设置)
+   */
+  RenewFlag?: number
+}
+
+/**
  * ModifyInstanceAttributes请求参数结构体
  */
 export interface ModifyInstanceAttributesRequest {
@@ -1301,13 +1627,14 @@ export interface ModifyInstanceAttributesRequest {
 }
 
 /**
- * ModifyTopicAttributes返回参数结构体
+ * DescribeRegion返回参数结构体
  */
-export interface ModifyTopicAttributesResponse {
+export interface DescribeRegionResponse {
   /**
-   * 返回结果集
-   */
-  Result?: JgwOperateResponse
+      * 返回地域枚举结果列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: Array<Region>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1316,33 +1643,18 @@ export interface ModifyTopicAttributesResponse {
 }
 
 /**
- * DescribeConsumerGroup请求参数结构体
+ * CreateTopic返回参数结构体
  */
-export interface DescribeConsumerGroupRequest {
+export interface CreateTopicResponse {
   /**
-   * ckafka实例id。
+   * 返回创建结果
    */
-  InstanceId: string
+  Result?: CreateTopicResp
 
   /**
-   * 可选，用户需要查询的group名称。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  GroupName?: string
-
-  /**
-   * 可选，用户需要查询的group中的对应的topic名称，如果指定了该参数，而group又未指定则忽略该参数。
-   */
-  TopicName?: string
-
-  /**
-   * 本次返回个数限制
-   */
-  Limit?: number
-
-  /**
-   * 偏移位置
-   */
-  Offset?: number
+  RequestId?: string
 }
 
 /**
@@ -1646,28 +1958,18 @@ export interface InstanceAttributesResponse {
 }
 
 /**
- * DescribeGroup请求参数结构体
+ * DescribeCkafkaZone返回参数结构体
  */
-export interface DescribeGroupRequest {
+export interface DescribeCkafkaZoneResponse {
   /**
-   * 实例ID
+   * 查询结果复杂对象实体
    */
-  InstanceId: string
+  Result: ZoneResponse
 
   /**
-   * 搜索关键字
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  SearchWord?: string
-
-  /**
-   * 偏移量
-   */
-  Offset?: number
-
-  /**
-   * 最大返回数量
-   */
-  Limit?: number
+  RequestId?: string
 }
 
 /**
@@ -2262,68 +2564,28 @@ export interface ModifyTopicAttributesRequest {
 }
 
 /**
- * CreateTopic返回参数结构体
+ * DescribeGroup请求参数结构体
  */
-export interface CreateTopicResponse {
+export interface DescribeGroupRequest {
   /**
-   * 返回创建结果
+   * 实例ID
    */
-  Result?: CreateTopicResp
+  InstanceId: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 搜索关键字
    */
-  RequestId?: string
-}
-
-/**
- * CreateInstancePre请求参数结构体
- */
-export interface CreateInstancePreRequest {
-  /**
-   * 实例名称，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)
-   */
-  InstanceName: string
+  SearchWord?: string
 
   /**
-   * 可用区
+   * 偏移量
    */
-  ZoneId: number
+  Offset?: number
 
   /**
-   * 预付费购买时长，例如 "1m",就是一个月
+   * 最大返回数量
    */
-  Period: string
-
-  /**
-   * 实例规格，1：入门型 ，2： 标准型，3 ：进阶型，4 ：容量型，5： 高阶型1，6：高阶性2, 7： 高阶型3,8： 高阶型4， 9 ：独占型。
-   */
-  InstanceType: number
-
-  /**
-   * vpcId，不填默认基础网络
-   */
-  VpcId?: string
-
-  /**
-   * 子网id，vpc网络需要传该参数，基础网络可以不传
-   */
-  SubnetId?: string
-
-  /**
-   * 可选。实例日志的最长保留时间，单位分钟，默认为10080（7天），最大30天，不填默认0，代表不开启日志保留时间回收策略
-   */
-  MsgRetentionTime?: number
-
-  /**
-   * 创建实例时可以选择集群Id, 该入参表示集群Id
-   */
-  ClusterId?: number
-
-  /**
-   * 预付费自动续费标记，0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费(用户设置)
-   */
-  RenewFlag?: number
+  Limit?: number
 }
 
 /**
@@ -2595,4 +2857,19 @@ export interface SubscribedInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TopicId: string
+}
+
+/**
+ * 消息价格实体
+ */
+export interface Price {
+  /**
+   * 折扣价
+   */
+  RealTotalCost?: number
+
+  /**
+   * 原价
+   */
+  TotalCost?: number
 }

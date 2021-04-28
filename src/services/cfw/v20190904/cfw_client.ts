@@ -23,6 +23,7 @@ import {
   DescribeSyncAssetStatusResponse,
   ModifyAllSwitchStatusRequest,
   ModifyAllRuleStatusResponse,
+  IocListData,
   DescribeRuleOverviewResponse,
   CfwNatDnatRule,
   CreateSecurityGroupApiRulesRequest,
@@ -63,9 +64,11 @@ import {
   DescribeNatRuleOverviewResponse,
   DeleteAcRuleRequest,
   DeleteAllAccessControlRuleResponse,
+  ModifyBlockIgnoreListResponse,
   DeleteSecurityGroupAllRuleResponse,
   ExpandCfwVerticalRequest,
   SecurityGroupListData,
+  ModifyBlockIgnoreListRequest,
   CreateAcRulesRequest,
   DescribeSecurityGroupListRequest,
   DescribeSwitchListsRequest,
@@ -218,6 +221,19 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRuleOverviewResponse) => void
   ): Promise<DescribeRuleOverviewResponse> {
     return this.request("DescribeRuleOverview", req, cb)
+  }
+
+  /**
+     * 支持对拦截列表、忽略列表如下操作：
+批量增加拦截IP、忽略IP/域名
+批量删除拦截IP、忽略IP/域名
+批量修改拦截IP、忽略IP/域名生效事件
+     */
+  async ModifyBlockIgnoreList(
+    req: ModifyBlockIgnoreListRequest,
+    cb?: (error: string, rep: ModifyBlockIgnoreListResponse) => void
+  ): Promise<ModifyBlockIgnoreListResponse> {
+    return this.request("ModifyBlockIgnoreList", req, cb)
   }
 
   /**
