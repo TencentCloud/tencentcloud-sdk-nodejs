@@ -501,7 +501,7 @@ export interface DescribeConfigsResponse {
       * 分页后的配置项列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Result?: TsfPageConfig
+  Result: TsfPageConfig
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4213,7 +4213,7 @@ export interface DescribePublicConfigsResponse {
       * 分页后的全局配置项列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Result?: TsfPageConfig
+  Result: TsfPageConfig
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -10286,6 +10286,12 @@ export interface ConfigRelease {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ReleaseDesc: string
+
+  /**
+      * 应用ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationId: string
 }
 
 /**

@@ -67,7 +67,7 @@ import {
   ManageReplicationRequest,
   DeleteWebhookTriggerResponse,
   DeleteImageLifecycleGlobalPersonalResponse,
-  DuplicateImagePersonalResponse,
+  DescribeReplicationInstanceSyncStatusResponse,
   Tag,
   DupImageTagResp,
   DeleteApplicationTriggerPersonalResponse,
@@ -80,6 +80,7 @@ import {
   DeleteApplicationTriggerPersonalRequest,
   SearchUserRepositoryResp,
   CreateTagRetentionRuleRequest,
+  DuplicateImagePersonalResponse,
   DescribeImageLifecyclePersonalResponse,
   ModifyInstanceTokenRequest,
   DeleteImageLifecyclePersonalResponse,
@@ -93,6 +94,7 @@ import {
   TcrImageInfo,
   DescribeImageLifecycleGlobalPersonalResponse,
   CreateNamespacePersonalResponse,
+  DescribeReplicationInstanceSyncStatusRequest,
   DeleteInstanceResponse,
   DeleteImageLifecycleGlobalPersonalRequest,
   DescribeInstanceStatusRequest,
@@ -983,6 +985,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteImageLifecycleGlobalPersonalResponse) => void
   ): Promise<DeleteImageLifecycleGlobalPersonalResponse> {
     return this.request("DeleteImageLifecycleGlobalPersonal", req, cb)
+  }
+
+  /**
+   * 查询从实例同步状态
+   */
+  async DescribeReplicationInstanceSyncStatus(
+    req: DescribeReplicationInstanceSyncStatusRequest,
+    cb?: (error: string, rep: DescribeReplicationInstanceSyncStatusResponse) => void
+  ): Promise<DescribeReplicationInstanceSyncStatusResponse> {
+    return this.request("DescribeReplicationInstanceSyncStatus", req, cb)
   }
 
   /**

@@ -111,6 +111,7 @@ import {
   DescribeCDNStatDetailsResponse,
   AttachMediaSubtitlesRequest,
   AiAnalysisTaskCoverResult,
+  DescribeEventConfigRequest,
   AiAnalysisTaskClassificationOutput,
   FileDeleteTask,
   ResourceTag,
@@ -319,6 +320,7 @@ import {
   AiReviewTaskTerrorismResult,
   ProcessMediaByUrlResponse,
   MediaContentReviewAsrTextSegmentItem,
+  DescribeEventConfigResponse,
   DescribeCdnLogsResponse,
   DescribeTaskDetailResponse,
   DeletePersonSampleResponse,
@@ -892,13 +894,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据任务流模板名字，获取任务流模板详情列表。
+   * 修改用户自定义雪碧图模板。
    */
-  async DescribeProcedureTemplates(
-    req: DescribeProcedureTemplatesRequest,
-    cb?: (error: string, rep: DescribeProcedureTemplatesResponse) => void
-  ): Promise<DescribeProcedureTemplatesResponse> {
-    return this.request("DescribeProcedureTemplates", req, cb)
+  async ModifyImageSpriteTemplate(
+    req: ModifyImageSpriteTemplateRequest,
+    cb?: (error: string, rep: ModifyImageSpriteTemplateResponse) => void
+  ): Promise<ModifyImageSpriteTemplateResponse> {
+    return this.request("ModifyImageSpriteTemplate", req, cb)
   }
 
   /**
@@ -1090,13 +1092,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改用户自定义雪碧图模板。
+   * 根据任务流模板名字，获取任务流模板详情列表。
    */
-  async ModifyImageSpriteTemplate(
-    req: ModifyImageSpriteTemplateRequest,
-    cb?: (error: string, rep: ModifyImageSpriteTemplateResponse) => void
-  ): Promise<ModifyImageSpriteTemplateResponse> {
-    return this.request("ModifyImageSpriteTemplate", req, cb)
+  async DescribeProcedureTemplates(
+    req: DescribeProcedureTemplatesRequest,
+    cb?: (error: string, rep: DescribeProcedureTemplatesResponse) => void
+  ): Promise<DescribeProcedureTemplatesResponse> {
+    return this.request("DescribeProcedureTemplates", req, cb)
   }
 
   /**
@@ -1446,6 +1448,20 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateWordSamplesResponse) => void
   ): Promise<CreateWordSamplesResponse> {
     return this.request("CreateWordSamples", req, cb)
+  }
+
+  /**
+     * 腾讯云点播为客户提供了媒体上传、媒体管理、媒体处理等等服务，在这些服务执行过程或执行结束时，腾讯云点播也提供各种对应的事件通知，方便开发者感知服务处理状态，并做下一步的业务操作。
+
+开发者可以通过本接口来查询当前配置事件通知的接收方式、接收地址以及哪些事件开启了接收回调通知。
+
+默认接口请求频率限制：100次/秒。
+     */
+  async DescribeEventConfig(
+    req: DescribeEventConfigRequest,
+    cb?: (error: string, rep: DescribeEventConfigResponse) => void
+  ): Promise<DescribeEventConfigResponse> {
+    return this.request("DescribeEventConfig", req, cb)
   }
 
   /**

@@ -472,6 +472,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteImageLifecycleGlobalPersonal", req, cb);
     }
     /**
+     * 查询从实例同步状态
+     */
+    async DescribeReplicationInstanceSyncStatus(req, cb) {
+        return this.request("DescribeReplicationInstanceSyncStatus", req, cb);
+    }
+    /**
      * 删除共享版命名空间
      */
     async DeleteNamespacePersonal(req, cb) {

@@ -758,6 +758,16 @@ it("tcr.v20190924.DeleteImageLifecycleGlobalPersonal", async function () {
     }
 })
 
+it("tcr.v20190924.DescribeReplicationInstanceSyncStatus", async function () {
+    try {
+       const data = await client.DescribeReplicationInstanceSyncStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.DeleteNamespacePersonal", async function () {
     try {
        const data = await client.DeleteNamespacePersonal({})

@@ -241,10 +241,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeCDNStatDetails", req, cb);
     }
     /**
-     * 根据任务流模板名字，获取任务流模板详情列表。
+     * 修改用户自定义雪碧图模板。
      */
-    async DescribeProcedureTemplates(req, cb) {
-        return this.request("DescribeProcedureTemplates", req, cb);
+    async ModifyImageSpriteTemplate(req, cb) {
+        return this.request("ModifyImageSpriteTemplate", req, cb);
     }
     /**
      * * 仅当待删分类无子分类且无媒体关联情况下，可删除分类；
@@ -379,10 +379,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteSuperPlayerConfig", req, cb);
     }
     /**
-     * 修改用户自定义雪碧图模板。
+     * 根据任务流模板名字，获取任务流模板详情列表。
      */
-    async ModifyImageSpriteTemplate(req, cb) {
-        return this.request("ModifyImageSpriteTemplate", req, cb);
+    async DescribeProcedureTemplates(req, cb) {
+        return this.request("DescribeProcedureTemplates", req, cb);
     }
     /**
      * 根据转码模板唯一标识，获取转码模板详情列表。返回结果包含符合条件的所有用户自定义模板及[系统预置转码模板](https://cloud.tencent.com/document/product/266/33476#.E9.A2.84.E7.BD.AE.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF)。
@@ -600,6 +600,16 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateWordSamples(req, cb) {
         return this.request("CreateWordSamples", req, cb);
+    }
+    /**
+     * 腾讯云点播为客户提供了媒体上传、媒体管理、媒体处理等等服务，在这些服务执行过程或执行结束时，腾讯云点播也提供各种对应的事件通知，方便开发者感知服务处理状态，并做下一步的业务操作。
+
+开发者可以通过本接口来查询当前配置事件通知的接收方式、接收地址以及哪些事件开启了接收回调通知。
+
+默认接口请求频率限制：100次/秒。
+     */
+    async DescribeEventConfig(req, cb) {
+        return this.request("DescribeEventConfig", req, cb);
     }
     /**
      * 查询转自适应码流模板，支持根据条件，分页查询。

@@ -87,13 +87,13 @@ export interface DescribeReplicationInstancesResponse {
   /**
    * 总实例个数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
       * 同步实例列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ReplicationRegistries?: Array<ReplicationRegistry>
+  ReplicationRegistries: Array<ReplicationRegistry>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -108,12 +108,12 @@ export interface DescribeReplicationInstanceCreateTasksResponse {
   /**
    * 任务详情
    */
-  TaskDetail?: Array<TaskDetail>
+  TaskDetail: Array<TaskDetail>
 
   /**
    * 整体任务状态
    */
-  Status?: string
+  Status: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1118,13 +1118,18 @@ export interface DeleteImageLifecycleGlobalPersonalResponse {
 }
 
 /**
- * DuplicateImagePersonal返回参数结构体
+ * DescribeReplicationInstanceSyncStatus返回参数结构体
  */
-export interface DuplicateImagePersonalResponse {
+export interface DescribeReplicationInstanceSyncStatusResponse {
   /**
-   * 复制镜像返回值
+   * 同步状态
    */
-  Data?: DupImageTagResp
+  ReplicationStatus: string
+
+  /**
+   * 同步完成时间
+   */
+  ReplicationTime: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1377,6 +1382,21 @@ export interface CreateTagRetentionRuleRequest {
 }
 
 /**
+ * DuplicateImagePersonal返回参数结构体
+ */
+export interface DuplicateImagePersonalResponse {
+  /**
+   * 复制镜像返回值
+   */
+  Data: DupImageTagResp
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeImageLifecyclePersonal返回参数结构体
  */
 export interface DescribeImageLifecyclePersonalResponse {
@@ -1573,6 +1593,26 @@ export interface CreateNamespacePersonalResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeReplicationInstanceSyncStatus请求参数结构体
+ */
+export interface DescribeReplicationInstanceSyncStatusRequest {
+  /**
+   * 主实例Id
+   */
+  RegistryId: string
+
+  /**
+   * 复制实例Id
+   */
+  ReplicationRegistryId: string
+
+  /**
+   * 复制实例的地域Id
+   */
+  ReplicationRegionId: number
 }
 
 /**
