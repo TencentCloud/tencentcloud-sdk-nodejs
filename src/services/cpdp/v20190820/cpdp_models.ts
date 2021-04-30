@@ -263,7 +263,7 @@ export interface QueryOutwardOrderResponse {
   /**
    * 查询汇出结果
    */
-  Result?: QueryOutwardOrderResult
+  Result: QueryOutwardOrderResult
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -278,7 +278,7 @@ export interface QueryExchangeRateResponse {
   /**
    * 查询汇率结果
    */
-  Result?: QueryExchangerateResult
+  Result: QueryExchangerateResult
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -451,7 +451,7 @@ export interface ApplyPayerInfoResponse {
   /**
    * 付款人申请结果
    */
-  Result?: ApplyPayerinfoResult
+  Result: ApplyPayerinfoResult
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -721,7 +721,7 @@ export interface QueryPayerInfoResponse {
   /**
    * 付款人查询结果
    */
-  Result?: QueryPayerinfoResult
+  Result: QueryPayerinfoResult
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1843,7 +1843,7 @@ export interface ApplyOutwardOrderResponse {
   /**
    * 汇出指令申请
    */
-  Result?: ApplyOutwardOrderResult
+  Result: ApplyOutwardOrderResult
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2697,7 +2697,7 @@ export interface CreateAgentTaxPaymentInfosResponse {
   /**
    * 代理商完税证明批次信息
    */
-  AgentTaxPaymentBatch?: AgentTaxPaymentBatch
+  AgentTaxPaymentBatch: AgentTaxPaymentBatch
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2848,7 +2848,7 @@ export interface QueryMerchantInfoForManagementResponse {
       * 商户结果
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Result?: MerchantManagementResult
+  Result: MerchantManagementResult
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3106,7 +3106,7 @@ export interface QuerySinglePayResponse {
   /**
    * 返回结果
    */
-  Result?: QuerySinglePayResult
+  Result: QuerySinglePayResult
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3182,7 +3182,7 @@ export interface QueryTradeResponse {
   /**
    * 贸易材料明细查询结果
    */
-  Result?: QueryTradeResult
+  Result: QueryTradeResult
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3739,7 +3739,7 @@ export interface QueryAgentTaxPaymentBatchResponse {
   /**
    * 代理商完税证明批次信息
    */
-  AgentTaxPaymentBatch?: AgentTaxPaymentBatch
+  AgentTaxPaymentBatch: AgentTaxPaymentBatch
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3802,18 +3802,18 @@ export interface QueryTransferResultResponse {
   /**
    * 错误码。响应成功："SUCCESS"，其他为不成功
    */
-  ErrCode?: string
+  ErrCode: string
 
   /**
    * 响应消息
    */
-  ErrMessage?: string
+  ErrMessage: string
 
   /**
       * 返回结果
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Result?: QueryTransferResultData
+  Result: QueryTransferResultData
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4684,18 +4684,18 @@ export interface QueryBillDownloadURLResponse {
   /**
    * 错误码。响应成功："SUCCESS"，其他为不成功
    */
-  ErrCode?: string
+  ErrCode: string
 
   /**
    * 响应消息
    */
-  ErrMessage?: string
+  ErrMessage: string
 
   /**
       * 返回结果
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Result?: QueryBillDownloadURLData
+  Result: QueryBillDownloadURLData
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4915,7 +4915,7 @@ export interface ModifyAgentTaxPaymentInfoResponse {
   /**
    * 代理商完税证明批次信息
    */
-  AgentTaxPaymentBatch?: AgentTaxPaymentBatch
+  AgentTaxPaymentBatch: AgentTaxPaymentBatch
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -5197,7 +5197,7 @@ export interface QueryMerchantBalanceResponse {
   /**
    * 对接方账户余额查询结果
    */
-  Result?: QueryMerchantBalanceResult
+  Result: QueryMerchantBalanceResult
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7161,7 +7161,7 @@ export interface QueryApplicationMaterialResponse {
   /**
    * 成功申报材料查询结果
    */
-  Result?: QueryDeclareResult
+  Result: QueryDeclareResult
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7410,7 +7410,7 @@ export interface TransferSinglePayRequest {
   PayeeId: string
 
   /**
-   * 收款方姓名，微信，支付宝可选；平安模式下必传
+   * 收款方姓名。支付宝可选；微信，平安模式下必传
    */
   PayeeName?: string
 
@@ -7520,7 +7520,7 @@ export interface CreateSinglePayResponse {
   /**
    * 返回结果
    */
-  Result?: CreateSinglePayResult
+  Result: CreateSinglePayResult
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7668,7 +7668,7 @@ export interface ApplyApplicationMaterialResponse {
   /**
    * 提交申报材料结果
    */
-  Result?: ApplyDeclareResult
+  Result: ApplyDeclareResult
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -7979,7 +7979,7 @@ export interface ApplyTradeResponse {
   /**
    * 提交贸易材料结果
    */
-  Result?: ApplyTradeResult
+  Result: ApplyTradeResult
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -8217,7 +8217,7 @@ export interface CreateMerchantResponse {
   /**
    * 商户注册结果
    */
-  Result?: CreateMerchantResult
+  Result: CreateMerchantResult
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -9156,18 +9156,18 @@ export interface TransferSinglePayResponse {
   /**
    * 错误码。响应成功："SUCCESS"，其他为不成功
    */
-  ErrCode?: string
+  ErrCode: string
 
   /**
    * 响应消息
    */
-  ErrMessage?: string
+  ErrMessage: string
 
   /**
       * 返回结果
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Result?: TransferSinglePayData
+  Result: TransferSinglePayData
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -9514,7 +9514,7 @@ export interface QueryAnchorContractInfoResponse {
   /**
    * 签约主播数据
    */
-  AnchorContractInfoList?: Array<AnchorContractInfo>
+  AnchorContractInfoList: Array<AnchorContractInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

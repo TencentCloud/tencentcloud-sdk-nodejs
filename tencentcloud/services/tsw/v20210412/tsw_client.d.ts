@@ -1,12 +1,16 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeServiceAlertObjectResponse, DescribeComponentAlertObjectRequest, DescribeComponentAlertObjectResponse, DescribeServiceAlertObjectRequest } from "./tsw_models";
+import { DescribeTokenRequest, DescribeServiceAlertObjectResponse, DescribeComponentAlertObjectResponse, DescribeServiceAlertObjectRequest, DescribeComponentAlertObjectRequest, DescribeTokenResponse } from "./tsw_models";
 /**
  * tsw client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 查询token
+     */
+    DescribeToken(req: DescribeTokenRequest, cb?: (error: string, rep: DescribeTokenResponse) => void): Promise<DescribeTokenResponse>;
     /**
      * 获取告警对象-服务告警表
      */

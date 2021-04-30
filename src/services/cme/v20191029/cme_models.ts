@@ -1671,6 +1671,12 @@ export interface CreateProjectResponse {
   ProjectId: string
 
   /**
+      * 输入源推流信息。
+ <li> 当 Catagory 为 STREAM_CONNECT 时，数组返回长度为 2 ，第 0 个代表主输入源，第 1 个代表备输入源。只有当各自输入源类型为推流时才有有效内容。</li>
+      */
+  RtmpPushInputInfoSet: Array<RtmpPushInputInfo>
+
+  /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1829,6 +1835,11 @@ export interface DescribeMaterialsResponse {
  * HandleStreamConnectProject返回参数结构体
  */
 export interface HandleStreamConnectProjectResponse {
+  /**
+   * 输入源推流地址，当 Operation 取值 AddInput 且 InputType 为 RtmpPush 类型时有效。
+   */
+  StreamInputRtmpPushUrl: string
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

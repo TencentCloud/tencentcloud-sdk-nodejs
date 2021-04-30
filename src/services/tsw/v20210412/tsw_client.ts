@@ -18,10 +18,12 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeTokenRequest,
   DescribeServiceAlertObjectResponse,
-  DescribeComponentAlertObjectRequest,
   DescribeComponentAlertObjectResponse,
   DescribeServiceAlertObjectRequest,
+  DescribeComponentAlertObjectRequest,
+  DescribeTokenResponse,
 } from "./tsw_models"
 
 /**
@@ -31,6 +33,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("tsw.tencentcloudapi.com", "2021-04-12", clientConfig)
+  }
+
+  /**
+   * 查询token
+   */
+  async DescribeToken(
+    req: DescribeTokenRequest,
+    cb?: (error: string, rep: DescribeTokenResponse) => void
+  ): Promise<DescribeTokenResponse> {
+    return this.request("DescribeToken", req, cb)
   }
 
   /**

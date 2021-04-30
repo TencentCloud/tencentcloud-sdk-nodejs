@@ -148,12 +148,12 @@ export interface FaceFusionLiteResponse {
     /**
       * RspImgType 为 url 时，返回结果的 url， RspImgType 为 base64 时返回 base64 数据。
       */
-    Image?: string;
+    Image: string;
     /**
       * 鉴政结果
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ReviewResultSet?: Array<FuseFaceReviewResult>;
+    ReviewResultSet: Array<FuseFaceReviewResult>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("tsw.tencentcloudapi.com", "2021-04-12", clientConfig);
     }
     /**
+     * 查询token
+     */
+    async DescribeToken(req, cb) {
+        return this.request("DescribeToken", req, cb);
+    }
+    /**
      * 获取告警对象-服务告警表
      */
     async DescribeServiceAlertObject(req, cb) {

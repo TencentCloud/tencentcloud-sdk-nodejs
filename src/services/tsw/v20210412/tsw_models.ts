@@ -16,6 +16,16 @@
  */
 
 /**
+ * DescribeToken请求参数结构体
+ */
+export interface DescribeTokenRequest {
+  /**
+   * 命名空间
+   */
+  Namespace: string
+}
+
+/**
  * DescribeServiceAlertObject返回参数结构体
  */
 export interface DescribeServiceAlertObjectResponse {
@@ -24,11 +34,6 @@ export interface DescribeServiceAlertObjectResponse {
    */
   RequestId?: string
 }
-
-/**
- * DescribeComponentAlertObject请求参数结构体
- */
-export type DescribeComponentAlertObjectRequest = null
 
 /**
  * DescribeComponentAlertObject返回参数结构体
@@ -44,3 +49,23 @@ export interface DescribeComponentAlertObjectResponse {
  * DescribeServiceAlertObject请求参数结构体
  */
 export type DescribeServiceAlertObjectRequest = null
+
+/**
+ * DescribeComponentAlertObject请求参数结构体
+ */
+export type DescribeComponentAlertObjectRequest = null
+
+/**
+ * DescribeToken返回参数结构体
+ */
+export interface DescribeTokenResponse {
+  /**
+   * token
+   */
+  Result: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}

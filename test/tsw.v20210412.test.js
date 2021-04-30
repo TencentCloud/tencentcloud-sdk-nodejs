@@ -18,6 +18,16 @@ const client = new tencentcloud.tsw.v20210412.Client({
 })
 describe("tsw.v20210412.test.js", function () {
 
+it("tsw.v20210412.DescribeToken", async function () {
+    try {
+       const data = await client.DescribeToken({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tsw.v20210412.DescribeServiceAlertObject", async function () {
     try {
        const data = await client.DescribeServiceAlertObject({})

@@ -10427,7 +10427,8 @@ export interface DescribeTasksRequest {
       */
     FinishTime?: TimeRange;
     /**
-      * 排序方式。Sort.Field 可选：
+      * (该字段暂不支持)
+排序方式。Sort.Field 可选：
 <li> CreateTime 任务创建时间。</li>
 <li>FinishTime 任务结束时间。</li>
       */

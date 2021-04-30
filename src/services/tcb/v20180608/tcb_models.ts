@@ -2659,7 +2659,7 @@ export interface DescribeWxCloudBaseRunEnvsRequest {
   /**
    * wx应用Id
    */
-  WxAppId: string
+  WxAppId?: string
 }
 
 /**
