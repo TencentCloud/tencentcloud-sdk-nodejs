@@ -1,0 +1,100 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/*
+ * Copyright (c) 2018 THL A29 Limited, a Tencent company. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+import { AbstractClient } from "../../../common/abstract_client"
+import { ClientConfig } from "../../../common/interface"
+import {
+  ModifyNamespaceRequest,
+  TemNamespaceInfo,
+  NamespacePage,
+  ModifyIngressRequest,
+  DescribeNamespacesRequest,
+  CosToken,
+  IngressRuleBackend,
+  IngressInfo,
+  IngressTls,
+  CreateCosTokenResponse,
+  IngressRule,
+  IngressRulePath,
+  CreateCosTokenRequest,
+  ModifyNamespaceResponse,
+  DescribeNamespacesResponse,
+  CreateNamespaceRequest,
+  ModifyIngressResponse,
+  IngressRuleValue,
+  CreateNamespaceResponse,
+} from "./tem_models"
+
+/**
+ * tem client
+ * @class
+ */
+export class Client extends AbstractClient {
+  constructor(clientConfig: ClientConfig) {
+    super("tem.tencentcloudapi.com", "2020-12-21", clientConfig)
+  }
+
+  /**
+   * 编辑命名空间
+   */
+  async ModifyNamespace(
+    req: ModifyNamespaceRequest,
+    cb?: (error: string, rep: ModifyNamespaceResponse) => void
+  ): Promise<ModifyNamespaceResponse> {
+    return this.request("ModifyNamespace", req, cb)
+  }
+
+  /**
+   * 生成Cos临时秘钥
+   */
+  async CreateCosToken(
+    req: CreateCosTokenRequest,
+    cb?: (error: string, rep: CreateCosTokenResponse) => void
+  ): Promise<CreateCosTokenResponse> {
+    return this.request("CreateCosToken", req, cb)
+  }
+
+  /**
+   * 创建或者更新 Ingress 规则
+   */
+  async ModifyIngress(
+    req: ModifyIngressRequest,
+    cb?: (error: string, rep: ModifyIngressResponse) => void
+  ): Promise<ModifyIngressResponse> {
+    return this.request("ModifyIngress", req, cb)
+  }
+
+  /**
+   * 获取租户命名空间列表
+   */
+  async DescribeNamespaces(
+    req: DescribeNamespacesRequest,
+    cb?: (error: string, rep: DescribeNamespacesResponse) => void
+  ): Promise<DescribeNamespacesResponse> {
+    return this.request("DescribeNamespaces", req, cb)
+  }
+
+  /**
+   * 创建命名空间
+   */
+  async CreateNamespace(
+    req: CreateNamespaceRequest,
+    cb?: (error: string, rep: CreateNamespaceResponse) => void
+  ): Promise<CreateNamespaceResponse> {
+    return this.request("CreateNamespace", req, cb)
+  }
+}
