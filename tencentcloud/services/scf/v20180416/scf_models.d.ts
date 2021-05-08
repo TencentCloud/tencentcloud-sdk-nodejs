@@ -260,7 +260,7 @@ export interface PublishLayerVersionResponse {
     /**
       * 本次创建的层的版本号
       */
-    LayerVersion?: number;
+    LayerVersion: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2339,11 +2339,11 @@ export interface ListLayersResponse {
     /**
       * 层列表
       */
-    Layers?: Array<LayerVersionInfo>;
+    Layers: Array<LayerVersionInfo>;
     /**
       * 层总数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2803,11 +2803,11 @@ export interface ListNamespacesResponse {
     /**
       * namespace详情
       */
-    Namespaces?: Array<Namespace>;
+    Namespaces: Array<Namespace>;
     /**
       * 返回的namespace数量
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

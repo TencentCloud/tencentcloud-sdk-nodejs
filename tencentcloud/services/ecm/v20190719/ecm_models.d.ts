@@ -1319,7 +1319,7 @@ export interface CreateNetworkInterfaceRequest {
       */
     NetworkInterfaceDescription?: string;
     /**
-      * 新申请的内网IP地址个数，内网IP地址个数总和不能超过配数。
+      * 新申请的内网IP地址个数，内网IP地址个数总和不能超过配额数。
       */
     SecondaryPrivateIpAddressCount?: number;
     /**
@@ -2642,7 +2642,7 @@ export interface CreateNetworkInterfaceResponse {
     /**
       * 弹性网卡实例。
       */
-    NetworkInterface?: NetworkInterface;
+    NetworkInterface: NetworkInterface;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

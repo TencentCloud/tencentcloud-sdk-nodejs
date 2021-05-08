@@ -118,6 +118,11 @@ export interface FleetAttributes {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     RelatedCcnInfos: Array<RelatedCcnInfo>;
+    /**
+      * fleet公网出带宽最大值，默认100Mbps，范围1-200Mbps
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InternetMaxBandwidthOut: number;
 }
 /**
  * CreateAsset返回参数结构体
@@ -126,11 +131,11 @@ export interface CreateAssetResponse {
     /**
       * 生成包ID
       */
-    AssetId?: string;
+    AssetId: string;
     /**
       * 生成包的全局唯一资源标识符
       */
-    AssetArn?: string;
+    AssetArn: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -448,6 +453,10 @@ export interface CreateFleetRequest {
       * 云联网信息，包含对应的账号信息及所属id
       */
     CcnInfos?: Array<CcnInfo>;
+    /**
+      * fleet公网出带宽最大值，默认100Mbps，范围1-200Mbps
+      */
+    InternetMaxBandwidthOut?: number;
 }
 /**
  * StartFleetActions请求参数结构体
@@ -2587,7 +2596,7 @@ export interface CreateAssetRequest {
       */
     AssetRegion: string;
     /**
-      * 生成包可运行的操作系统，若传入参数为CentOS7.16则不需要传入ImageId字段，否则，需要传入Imageid字段（该方式是为了兼容之前的版本，后续建议使用ImageId来替代该字段）
+      * 生成包可运行的操作系统，若传入参数为CentOS7.16则不需要传入ImageId字段，否则，需要传入Imageid字段（该方式是为了兼容之前的版本，后续建议使用ImageId来替代该字段）。这里可通过[DescribeAssetSystems](https://cloud.tencent.com/document/product/1165/49191)接口获取asset支持的操作系统进行传入（使用AssetSupportSys的OsVersion字段）
       */
     OperateSystem: string;
     /**
@@ -3351,6 +3360,10 @@ export interface CopyFleetRequest {
       * 云联网信息，包含对应的账号信息及所属id
       */
     CcnInfos?: Array<CcnInfo>;
+    /**
+      * fleet公网出带宽最大值，默认100Mbps，范围1-200Mbps
+      */
+    InternetMaxBandwidthOut?: number;
 }
 /**
  * SearchGameServerSessions返回参数结构体
@@ -3387,11 +3400,11 @@ export interface DescribeFleetEventsResponse {
     /**
       * 返回的事件列表
       */
-    Events?: Array<Event>;
+    Events: Array<Event>;
     /**
       * 返回的事件总数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3490,6 +3503,18 @@ export interface DescribeFleetEventsRequest {
       * 分页时的数据偏移量，默认为0
       */
     Offset?: number;
+    /**
+      * 事件代码
+      */
+    EventCode?: string;
+    /**
+      * 发生事件的开始时间
+      */
+    StartTime?: string;
+    /**
+      * 发生事件的结束时间
+      */
+    EndTime?: string;
 }
 /**
  * UpdateAsset返回参数结构体

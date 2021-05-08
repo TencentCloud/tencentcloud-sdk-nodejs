@@ -274,27 +274,27 @@ export interface SentenceRecognitionRequest {
   HotwordId?: string
 
   /**
-   * 是否过滤脏词（目前支持中文普通话引擎）。0：不过滤脏词；1：过滤脏词；2：将脏词替换为 * 。
+   * 是否过滤脏词（目前支持中文普通话引擎）。0：不过滤脏词；1：过滤脏词；2：将脏词替换为 * 。默认值为 0。
    */
   FilterDirty?: number
 
   /**
-   * 是否过语气词（目前支持中文普通话引擎）。0：不过滤语气词；1：部分过滤；2：严格过滤 。
+   * 是否过语气词（目前支持中文普通话引擎）。0：不过滤语气词；1：部分过滤；2：严格过滤 。默认值为 0。
    */
   FilterModal?: number
 
   /**
-   * 是否过滤标点符号（目前支持中文普通话引擎）。 0：不过滤，1：过滤句末标点，2：过滤所有标点。默认为0。
+   * 是否过滤标点符号（目前支持中文普通话引擎）。 0：不过滤，1：过滤句末标点，2：过滤所有标点。默认值为 0。
    */
   FilterPunc?: number
 
   /**
-   * 是否进行阿拉伯数字智能转换。0：不转换，直接输出中文数字，1：根据场景智能转换为阿拉伯数字。默认值为1
+   * 是否进行阿拉伯数字智能转换。0：不转换，直接输出中文数字，1：根据场景智能转换为阿拉伯数字。默认值为1。
    */
   ConvertNumMode?: number
 
   /**
-   * 是否显示词级别时间戳。0：不显示；1：显示，不包含标点时间戳，2：显示，包含标点时间戳。支持引擎8k_zh，16k_zh，16k_en，16k_ca，16k_ja，16k_wuu-SH
+   * 是否显示词级别时间戳。0：不显示；1：显示，不包含标点时间戳，2：显示，包含标点时间戳。支持引擎8k_zh，16k_zh，16k_en，16k_ca，16k_ja，16k_wuu-SH。默认值为 0。
    */
   WordInfo?: number
 }
@@ -477,12 +477,12 @@ export interface CreateRecTaskRequest {
   SourceType: number
 
   /**
-   * 是否开启说话人分离，0：不开启，1：开启(仅支持8k_zh，16k_zh，16k_zh_video引擎模型，单声道音频)
+   * 是否开启说话人分离，0：不开启，1：开启(仅支持8k_zh，16k_zh，16k_zh_video引擎模型，单声道音频)，默认值为 0。
    */
   SpeakerDiarization?: number
 
   /**
-      * 说话人分离人数（需配合开启说话人分离使用），取值范围：0-10，0代表自动分离（目前仅支持≤6个人），1-10代表指定说话人数分离。
+      * 说话人分离人数（需配合开启说话人分离使用），取值范围：0-10，0代表自动分离（目前仅支持≤6个人），1-10代表指定说话人数分离。默认值为 0。
 注：话者分离目前是beta版本，请根据您的需要谨慎使用
       */
   SpeakerNumber?: number
@@ -528,12 +528,12 @@ export interface CreateRecTaskRequest {
   ConvertNumMode?: number
 
   /**
-   * 附加参数
+   * 附加参数(该参数无意义，忽略即可)
    */
   Extra?: string
 
   /**
-   * 是否过滤标点符号（目前支持中文普通话引擎）。 0：不过滤，1：过滤句末标点，2：过滤所有标点。默认为0。
+   * 是否过滤标点符号（目前支持中文普通话引擎）。 0：不过滤，1：过滤句末标点，2：过滤所有标点。默认值为 0。
    */
   FilterPunc?: number
 }
@@ -773,12 +773,12 @@ export interface GetCustomizationListRequest {
   TagInfos?: Array<string>
 
   /**
-   * 分页大小
+   * 分页大小，默认1000
    */
   Limit?: number
 
   /**
-   * 分页offset
+   * 分页offset，默认0
    */
   Offset?: number
 }
@@ -790,7 +790,7 @@ export interface UpdateAsrVocabResponse {
   /**
    * 热词表ID
    */
-  VocabId?: string
+  VocabId: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -942,7 +942,7 @@ export interface UpdateAsrVocabRequest {
   VocabId: string
 
   /**
-   * 热词表名称
+   * 热词表名称，长度在1-255之间
    */
   Name?: string
 
@@ -958,7 +958,7 @@ export interface UpdateAsrVocabRequest {
   WordWeightStr?: string
 
   /**
-   * 热词表描述
+   * 热词表描述，长度在0-1000之间
    */
   Description?: string
 }

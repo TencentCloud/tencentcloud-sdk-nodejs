@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ModifyNamespaceRequest, ModifyIngressRequest, DescribeNamespacesRequest, CreateCosTokenResponse, CreateCosTokenRequest, ModifyNamespaceResponse, DescribeNamespacesResponse, CreateNamespaceRequest, ModifyIngressResponse, CreateNamespaceResponse } from "./tem_models";
+import { CreateResourceRequest, CreateServiceV2Response, CreateCosTokenV2Request, DeployServiceV2Response, DescribeNamespacesResponse, ModifyIngressResponse, DeleteIngressRequest, CreateNamespaceResponse, DescribeNamespacesRequest, CreateCosTokenRequest, DeployServiceV2Request, ModifyIngressRequest, CreateNamespaceRequest, DescribeIngressesRequest, DescribeServiceRunPodListV2Request, DescribeIngressesResponse, DeleteIngressResponse, ModifyNamespaceRequest, DescribeIngressResponse, CreateCosTokenResponse, ModifyNamespaceResponse, CreateResourceResponse, DescribeServiceRunPodListV2Response, CreateCosTokenV2Response, DescribeIngressRequest, CreateServiceV2Request } from "./tem_models";
 /**
  * tem client
  * @class
@@ -8,23 +8,58 @@ import { ModifyNamespaceRequest, ModifyIngressRequest, DescribeNamespacesRequest
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
     /**
-     * 编辑命名空间
+     * 编辑环境
      */
     ModifyNamespace(req: ModifyNamespaceRequest, cb?: (error: string, rep: ModifyNamespaceResponse) => void): Promise<ModifyNamespaceResponse>;
     /**
-     * 生成Cos临时秘钥
+     * 创建环境
      */
-    CreateCosToken(req: CreateCosTokenRequest, cb?: (error: string, rep: CreateCosTokenResponse) => void): Promise<CreateCosTokenResponse>;
+    CreateNamespace(req: CreateNamespaceRequest, cb?: (error: string, rep: CreateNamespaceResponse) => void): Promise<CreateNamespaceResponse>;
     /**
      * 创建或者更新 Ingress 规则
      */
     ModifyIngress(req: ModifyIngressRequest, cb?: (error: string, rep: ModifyIngressResponse) => void): Promise<ModifyIngressResponse>;
     /**
-     * 获取租户命名空间列表
+     * 生成Cos临时秘钥
+     */
+    CreateCosToken(req: CreateCosTokenRequest, cb?: (error: string, rep: CreateCosTokenResponse) => void): Promise<CreateCosTokenResponse>;
+    /**
+     * 查询 Ingress 规则
+     */
+    DescribeIngress(req: DescribeIngressRequest, cb?: (error: string, rep: DescribeIngressResponse) => void): Promise<DescribeIngressResponse>;
+    /**
+     * 生成Cos临时秘钥
+     */
+    CreateCosTokenV2(req: CreateCosTokenV2Request, cb?: (error: string, rep: CreateCosTokenV2Response) => void): Promise<CreateCosTokenV2Response>;
+    /**
+     * 服务部署
+ - 创建新版本
+ - 部署新版本
+ - 一个服务只能有一个版本，所以前端无需关心版本及版本ID
+     */
+    DeployServiceV2(req: DeployServiceV2Request, cb?: (error: string, rep: DeployServiceV2Response) => void): Promise<DeployServiceV2Response>;
+    /**
+     * 创建服务
+     */
+    CreateServiceV2(req: CreateServiceV2Request, cb?: (error: string, rep: CreateServiceV2Response) => void): Promise<CreateServiceV2Response>;
+    /**
+     * 绑定云资源
+     */
+    CreateResource(req: CreateResourceRequest, cb?: (error: string, rep: CreateResourceResponse) => void): Promise<CreateResourceResponse>;
+    /**
+     * 获取服务下面运行pod列表
+     */
+    DescribeServiceRunPodListV2(req: DescribeServiceRunPodListV2Request, cb?: (error: string, rep: DescribeServiceRunPodListV2Response) => void): Promise<DescribeServiceRunPodListV2Response>;
+    /**
+     * 查询 Ingress 规则列表
+     */
+    DescribeIngresses(req: DescribeIngressesRequest, cb?: (error: string, rep: DescribeIngressesResponse) => void): Promise<DescribeIngressesResponse>;
+    /**
+     * 获取租户环境列表
      */
     DescribeNamespaces(req: DescribeNamespacesRequest, cb?: (error: string, rep: DescribeNamespacesResponse) => void): Promise<DescribeNamespacesResponse>;
     /**
-     * 创建命名空间
+     * 删除 Ingress 规则
      */
-    CreateNamespace(req: CreateNamespaceRequest, cb?: (error: string, rep: CreateNamespaceResponse) => void): Promise<CreateNamespaceResponse>;
+    DeleteIngress(req: DeleteIngressRequest, cb?: (error: string, rep: DeleteIngressResponse) => void): Promise<DeleteIngressResponse>;
 }

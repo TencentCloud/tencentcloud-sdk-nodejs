@@ -690,6 +690,10 @@ export interface CreateDeviceRequest {
       */
     PassWord: string;
     /**
+      * 设备类型 2:国标IPC设备; 3:NVR设备
+      */
+    DeviceType?: number;
+    /**
       * 设备需要绑定的分组ID，参数为空则默认绑定到根分组
       */
     GroupId?: string;

@@ -18,25 +18,48 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  ModifyNamespaceRequest,
-  TemNamespaceInfo,
-  NamespacePage,
-  ModifyIngressRequest,
-  DescribeNamespacesRequest,
-  CosToken,
-  IngressRuleBackend,
-  IngressInfo,
+  CreateResourceRequest,
+  CreateServiceV2Response,
+  CreateCosTokenV2Request,
+  DeployServiceV2Response,
   IngressTls,
+  DescribeNamespacesResponse,
+  ModifyIngressResponse,
+  DeleteIngressRequest,
+  CreateNamespaceResponse,
+  StorageMountConf,
+  CosToken,
+  DescribeNamespacesRequest,
+  CreateCosTokenRequest,
+  DeployServiceV2Request,
+  ModifyIngressRequest,
+  Pair,
+  CreateNamespaceRequest,
+  DescribeIngressesRequest,
+  DescribeRunPodPage,
+  DescribeServiceRunPodListV2Request,
+  LogOutputConf,
+  DescribeIngressesResponse,
+  IngressInfo,
+  DeleteIngressResponse,
+  ModifyNamespaceRequest,
+  IngressRuleBackend,
+  DescribeIngressResponse,
   CreateCosTokenResponse,
   IngressRule,
   IngressRulePath,
-  CreateCosTokenRequest,
+  StorageConf,
   ModifyNamespaceResponse,
-  DescribeNamespacesResponse,
-  CreateNamespaceRequest,
-  ModifyIngressResponse,
+  RunVersionPod,
   IngressRuleValue,
-  CreateNamespaceResponse,
+  CreateResourceResponse,
+  DescribeServiceRunPodListV2Response,
+  TemNamespaceInfo,
+  NamespacePage,
+  CreateCosTokenV2Response,
+  EsInfo,
+  DescribeIngressRequest,
+  CreateServiceV2Request,
 } from "./tem_models"
 
 /**
@@ -49,7 +72,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 编辑命名空间
+   * 编辑环境
    */
   async ModifyNamespace(
     req: ModifyNamespaceRequest,
@@ -59,13 +82,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 生成Cos临时秘钥
+   * 创建环境
    */
-  async CreateCosToken(
-    req: CreateCosTokenRequest,
-    cb?: (error: string, rep: CreateCosTokenResponse) => void
-  ): Promise<CreateCosTokenResponse> {
-    return this.request("CreateCosToken", req, cb)
+  async CreateNamespace(
+    req: CreateNamespaceRequest,
+    cb?: (error: string, rep: CreateNamespaceResponse) => void
+  ): Promise<CreateNamespaceResponse> {
+    return this.request("CreateNamespace", req, cb)
   }
 
   /**
@@ -79,7 +102,90 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取租户命名空间列表
+   * 生成Cos临时秘钥
+   */
+  async CreateCosToken(
+    req: CreateCosTokenRequest,
+    cb?: (error: string, rep: CreateCosTokenResponse) => void
+  ): Promise<CreateCosTokenResponse> {
+    return this.request("CreateCosToken", req, cb)
+  }
+
+  /**
+   * 查询 Ingress 规则
+   */
+  async DescribeIngress(
+    req: DescribeIngressRequest,
+    cb?: (error: string, rep: DescribeIngressResponse) => void
+  ): Promise<DescribeIngressResponse> {
+    return this.request("DescribeIngress", req, cb)
+  }
+
+  /**
+   * 生成Cos临时秘钥
+   */
+  async CreateCosTokenV2(
+    req: CreateCosTokenV2Request,
+    cb?: (error: string, rep: CreateCosTokenV2Response) => void
+  ): Promise<CreateCosTokenV2Response> {
+    return this.request("CreateCosTokenV2", req, cb)
+  }
+
+  /**
+     * 服务部署
+ - 创建新版本
+ - 部署新版本
+ - 一个服务只能有一个版本，所以前端无需关心版本及版本ID
+     */
+  async DeployServiceV2(
+    req: DeployServiceV2Request,
+    cb?: (error: string, rep: DeployServiceV2Response) => void
+  ): Promise<DeployServiceV2Response> {
+    return this.request("DeployServiceV2", req, cb)
+  }
+
+  /**
+   * 创建服务
+   */
+  async CreateServiceV2(
+    req: CreateServiceV2Request,
+    cb?: (error: string, rep: CreateServiceV2Response) => void
+  ): Promise<CreateServiceV2Response> {
+    return this.request("CreateServiceV2", req, cb)
+  }
+
+  /**
+   * 绑定云资源
+   */
+  async CreateResource(
+    req: CreateResourceRequest,
+    cb?: (error: string, rep: CreateResourceResponse) => void
+  ): Promise<CreateResourceResponse> {
+    return this.request("CreateResource", req, cb)
+  }
+
+  /**
+   * 获取服务下面运行pod列表
+   */
+  async DescribeServiceRunPodListV2(
+    req: DescribeServiceRunPodListV2Request,
+    cb?: (error: string, rep: DescribeServiceRunPodListV2Response) => void
+  ): Promise<DescribeServiceRunPodListV2Response> {
+    return this.request("DescribeServiceRunPodListV2", req, cb)
+  }
+
+  /**
+   * 查询 Ingress 规则列表
+   */
+  async DescribeIngresses(
+    req: DescribeIngressesRequest,
+    cb?: (error: string, rep: DescribeIngressesResponse) => void
+  ): Promise<DescribeIngressesResponse> {
+    return this.request("DescribeIngresses", req, cb)
+  }
+
+  /**
+   * 获取租户环境列表
    */
   async DescribeNamespaces(
     req: DescribeNamespacesRequest,
@@ -89,12 +195,12 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建命名空间
+   * 删除 Ingress 规则
    */
-  async CreateNamespace(
-    req: CreateNamespaceRequest,
-    cb?: (error: string, rep: CreateNamespaceResponse) => void
-  ): Promise<CreateNamespaceResponse> {
-    return this.request("CreateNamespace", req, cb)
+  async DeleteIngress(
+    req: DeleteIngressRequest,
+    cb?: (error: string, rep: DeleteIngressResponse) => void
+  ): Promise<DeleteIngressResponse> {
+    return this.request("DeleteIngress", req, cb)
   }
 }
