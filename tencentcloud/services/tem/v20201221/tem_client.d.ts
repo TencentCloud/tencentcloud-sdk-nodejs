@@ -33,9 +33,6 @@ export declare class Client extends AbstractClient {
     CreateCosTokenV2(req: CreateCosTokenV2Request, cb?: (error: string, rep: CreateCosTokenV2Response) => void): Promise<CreateCosTokenV2Response>;
     /**
      * 服务部署
- - 创建新版本
- - 部署新版本
- - 一个服务只能有一个版本，所以前端无需关心版本及版本ID
      */
     DeployServiceV2(req: DeployServiceV2Request, cb?: (error: string, rep: DeployServiceV2Response) => void): Promise<DeployServiceV2Response>;
     /**

@@ -120,6 +120,7 @@ import {
   UserDefineAsrTextReviewTemplateInfo,
   DescribeWordSamplesResponse,
   AiSampleFaceInfo,
+  MediaImageSpriteItem,
   MediaProcessTaskAdaptiveDynamicStreamingResult,
   OcrWordsConfigureInfoForUpdate,
   WatermarkTemplate,
@@ -139,6 +140,7 @@ import {
   PornAsrReviewTemplateInfoForUpdate,
   MediaAnimatedGraphicsInfo,
   DescribeSnapshotByTimeOffsetTemplatesRequest,
+  ModifyHeadTailTemplateResponse,
   ProductInstance,
   CdnLogInfo,
   SimpleAesEdkPair,
@@ -189,13 +191,13 @@ import {
   ImageWatermarkInput,
   ObjectConfigureInfo,
   AsrFullTextConfigureInfoForUpdate,
-  AiRecognitionTaskHeadTailResult,
+  DeleteHeadTailTemplateResponse,
   TranscodeTask2017,
   CreatePersonSampleResponse,
   CreateContentReviewTemplateResponse,
   ModifyAnimatedGraphicsTemplateRequest,
   DescribeProcedureTemplatesRequest,
-  ProhibitedConfigureInfoForUpdate,
+  CreateHeadTailTemplateRequest,
   MediaSampleSnapshotItem,
   TagConfigureInfoForUpdate,
   DeleteWordSamplesRequest,
@@ -223,7 +225,7 @@ import {
   AiRecognitionTaskFaceSegmentItem,
   DeleteMediaResponse,
   ModifySnapshotByTimeOffsetTemplateResponse,
-  AiRecognitionTaskObjectResult,
+  DeleteHeadTailTemplateRequest,
   AiAnalysisTaskTagResult,
   SearchMediaResponse,
   AiAnalysisTaskTagOutput,
@@ -232,10 +234,12 @@ import {
   ProcessMediaRequest,
   ModifyMediaInfoResponse,
   AiRecognitionTaskOcrFullTextResult,
+  MediaTrackItem,
   MediaProcessTaskSnapshotByTimeOffsetResult,
   AiSampleWord,
   ModifyEventConfigRequest,
   AiRecognitionTaskAsrWordsResultOutput,
+  DescribeHeadTailTemplatesRequest,
   ModifyAdaptiveDynamicStreamingTemplateResponse,
   MediaProcessTaskTranscodeResult,
   DomainDetailInfo,
@@ -309,7 +313,7 @@ import {
   ParseStreamingManifestRequest,
   DeleteSampleSnapshotTemplateResponse,
   AiAnalysisTaskTagInput,
-  MediaTrackItem,
+  HeadTailTemplate,
   DescribeStorageDetailsResponse,
   PullEventsResponse,
   AiRecognitionTaskObjectResultInput,
@@ -322,7 +326,7 @@ import {
   MediaContentReviewAsrTextSegmentItem,
   DescribeEventConfigResponse,
   DescribeCdnLogsResponse,
-  DescribeTaskDetailResponse,
+  MediaContentReviewPoliticalSegmentItem,
   DeletePersonSampleResponse,
   CreateSnapshotByTimeOffsetTemplateResponse,
   ModifyContentReviewTemplateRequest,
@@ -374,6 +378,7 @@ import {
   ModifyAIRecognitionTemplateRequest,
   WechatPublishTask,
   DescribeCDNStatDetailsRequest,
+  AiRecognitionTaskOcrFullTextResultInput,
   ClipFileInfo2017,
   StatDataItem,
   AccelerateAreaInfo,
@@ -385,6 +390,7 @@ import {
   HeadTailConfigureInfo,
   EventContent,
   HighlightsConfigureInfoForUpdate,
+  AiRecognitionTaskObjectResult,
   UserDefineConfigureInfoForUpdate,
   AiReviewPoliticalAsrTaskOutput,
   OutputAudioStream,
@@ -406,6 +412,7 @@ import {
   PoliticalImgReviewTemplateInfo,
   PoliticalConfigureInfo,
   HighlightsConfigureInfo,
+  CreateHeadTailTemplateResponse,
   AiRecognitionTaskOcrWordsSegmentItem,
   MediaProcessTaskResult,
   DeleteWordSamplesResponse,
@@ -429,7 +436,7 @@ import {
   MediaAiAnalysisFrameTagSegmentItem,
   AiRecognitionTaskAsrWordsResultItem,
   MediaAiAnalysisTagItem,
-  MediaContentReviewPoliticalSegmentItem,
+  DescribeTaskDetailResponse,
   MediaKeyFrameDescInfo,
   DeleteImageSpriteTemplateRequest,
   CreateClassRequest,
@@ -439,9 +446,10 @@ import {
   DomainHTTPSConfig,
   DescribeMediaProcessUsageDataResponse,
   DescribeSuperPlayerConfigsRequest,
-  AiRecognitionTaskOcrFullTextResultInput,
+  HeadTailTaskInput,
   SplitMediaOutputConfig,
   AiRecognitionTaskSegmentResultInput,
+  ModifyHeadTailTemplateRequest,
   DescribeTasksResponse,
   DescribeSubAppIdsRequest,
   AiRecognitionTaskFaceResultInput,
@@ -535,11 +543,12 @@ import {
   MediaAiAnalysisFrameTagItem,
   DescribeImageProcessingTemplatesResponse,
   SampleSnapshotTaskInput,
+  DescribeHeadTailTemplatesResponse,
   TerrorismConfigureInfo,
   PoliticalAsrReviewTemplateInfo,
   CreateAnimatedGraphicsTemplateResponse,
   SampleSnapshotTemplate,
-  MediaImageSpriteItem,
+  AiRecognitionTaskHeadTailResult,
   DescribePersonSamplesRequest,
   AiRecognitionTaskFaceResultItem,
   AiAnalysisTaskCoverInput,
@@ -552,6 +561,7 @@ import {
   DeleteWatermarkTemplateResponse,
   ComposeMediaOutput,
   PullUploadTask,
+  ProhibitedConfigureInfoForUpdate,
   FrameTagConfigureInfoForUpdate,
   CreateImageSpriteTemplateResponse,
   DescribeAIRecognitionTemplatesRequest,
@@ -642,6 +652,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAnimatedGraphicsTemplateResponse) => void
   ): Promise<DeleteAnimatedGraphicsTemplateResponse> {
     return this.request("DeleteAnimatedGraphicsTemplate", req, cb)
+  }
+
+  /**
+   * 查询指定时间点截图模板，支持根据条件，分页查询。
+   */
+  async DescribeSnapshotByTimeOffsetTemplates(
+    req: DescribeSnapshotByTimeOffsetTemplatesRequest,
+    cb?: (error: string, rep: DescribeSnapshotByTimeOffsetTemplatesResponse) => void
+  ): Promise<DescribeSnapshotByTimeOffsetTemplatesResponse> {
+    return this.request("DescribeSnapshotByTimeOffsetTemplates", req, cb)
   }
 
   /**
@@ -949,13 +969,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询指定时间点截图模板，支持根据条件，分页查询。
+   * 修改用户自定义转动图模板。
    */
-  async DescribeSnapshotByTimeOffsetTemplates(
-    req: DescribeSnapshotByTimeOffsetTemplatesRequest,
-    cb?: (error: string, rep: DescribeSnapshotByTimeOffsetTemplatesResponse) => void
-  ): Promise<DescribeSnapshotByTimeOffsetTemplatesResponse> {
-    return this.request("DescribeSnapshotByTimeOffsetTemplates", req, cb)
+  async ModifyAnimatedGraphicsTemplate(
+    req: ModifyAnimatedGraphicsTemplateRequest,
+    cb?: (error: string, rep: ModifyAnimatedGraphicsTemplateResponse) => void
+  ): Promise<ModifyAnimatedGraphicsTemplateResponse> {
+    return this.request("ModifyAnimatedGraphicsTemplate", req, cb)
   }
 
   /**
@@ -1274,6 +1294,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改片头片尾模板。
+   */
+  async ModifyHeadTailTemplate(
+    req: ModifyHeadTailTemplateRequest,
+    cb?: (error: string, rep: ModifyHeadTailTemplateResponse) => void
+  ): Promise<ModifyHeadTailTemplateResponse> {
+    return this.request("ModifyHeadTailTemplate", req, cb)
+  }
+
+  /**
    * 删除用户自定义图片处理模板。
    */
   async DeleteImageProcessingTemplate(
@@ -1281,6 +1311,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteImageProcessingTemplateResponse) => void
   ): Promise<DeleteImageProcessingTemplateResponse> {
     return this.request("DeleteImageProcessingTemplate", req, cb)
+  }
+
+  /**
+   * 创建片头片尾模板。
+   */
+  async CreateHeadTailTemplate(
+    req: CreateHeadTailTemplateRequest,
+    cb?: (error: string, rep: CreateHeadTailTemplateResponse) => void
+  ): Promise<CreateHeadTailTemplateResponse> {
+    return this.request("CreateHeadTailTemplate", req, cb)
   }
 
   /**
@@ -1566,6 +1606,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取片头片尾模板列表。
+   */
+  async DescribeHeadTailTemplates(
+    req: DescribeHeadTailTemplatesRequest,
+    cb?: (error: string, rep: DescribeHeadTailTemplatesResponse) => void
+  ): Promise<DescribeHeadTailTemplatesResponse> {
+    return this.request("DescribeHeadTailTemplates", req, cb)
+  }
+
+  /**
    * 该接口用于确认媒体文件（和封面文件）上传到腾讯云点播的结果，并存储媒体信息，返回文件的播放地址和文件 ID。
    */
   async CommitUpload(
@@ -1669,16 +1719,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改用户自定义转动图模板。
-   */
-  async ModifyAnimatedGraphicsTemplate(
-    req: ModifyAnimatedGraphicsTemplateRequest,
-    cb?: (error: string, rep: ModifyAnimatedGraphicsTemplateResponse) => void
-  ): Promise<ModifyAnimatedGraphicsTemplateResponse> {
-    return this.request("ModifyAnimatedGraphicsTemplate", req, cb)
-  }
-
-  /**
    * 关联媒资字幕，将指定的字幕关联到转自适应码流模板号对应的媒体输出文件中（或解除关联）。
    */
   async AttachMediaSubtitles(
@@ -1763,6 +1803,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SimpleHlsClipResponse) => void
   ): Promise<SimpleHlsClipResponse> {
     return this.request("SimpleHlsClip", req, cb)
+  }
+
+  /**
+   * 删除片头片尾模板。
+   */
+  async DeleteHeadTailTemplate(
+    req: DeleteHeadTailTemplateRequest,
+    cb?: (error: string, rep: DeleteHeadTailTemplateResponse) => void
+  ): Promise<DeleteHeadTailTemplateResponse> {
+    return this.request("DeleteHeadTailTemplate", req, cb)
   }
 
   /**

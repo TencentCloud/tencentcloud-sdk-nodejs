@@ -1318,6 +1318,11 @@ export interface InquiryPriceScaleOutInstanceRequest {
    * 扩容的Router节点数量。
    */
   RouterCount?: number
+
+  /**
+   * 扩容的Master节点数量。
+   */
+  MasterCount?: number
 }
 
 /**
@@ -1971,13 +1976,13 @@ export interface InquiryPriceScaleOutInstanceResponse {
       * 原价，单位为元。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  OriginalCost?: string
+  OriginalCost: string
 
   /**
       * 折扣价，单位为元。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  DiscountCost?: string
+  DiscountCost: string
 
   /**
       * 扩容的时间单位。取值范围：
@@ -1985,13 +1990,13 @@ export interface InquiryPriceScaleOutInstanceResponse {
 <li>m：表示月份。</li>
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Unit?: string
+  Unit: string
 
   /**
       * 询价的节点规格。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  PriceSpec?: PriceResource
+  PriceSpec: PriceResource
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

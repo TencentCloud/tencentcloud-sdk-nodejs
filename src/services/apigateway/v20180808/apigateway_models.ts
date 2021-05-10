@@ -766,6 +766,11 @@ export interface DeleteServiceRequest {
    * 待删除服务的唯一 ID。
    */
   ServiceId: string
+
+  /**
+   * 跳过删除前置条件校验（仅支持独享实例上的服务）
+   */
+  SkipVerification?: number
 }
 
 /**

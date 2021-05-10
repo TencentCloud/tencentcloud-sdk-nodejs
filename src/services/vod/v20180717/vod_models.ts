@@ -2663,6 +2663,41 @@ export interface AiSampleFaceInfo {
 }
 
 /**
+ * 雪碧图信息
+ */
+export interface MediaImageSpriteItem {
+  /**
+   * 雪碧图规格，参见[雪碧图参数模板](https://cloud.tencent.com/document/product/266/33480#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
+   */
+  Definition: number
+
+  /**
+   * 雪碧图小图的高度。
+   */
+  Height: number
+
+  /**
+   * 雪碧图小图的宽度。
+   */
+  Width: number
+
+  /**
+   * 每一张雪碧图大图里小图的数量。
+   */
+  TotalCount: number
+
+  /**
+   * 每一张雪碧图大图的地址。
+   */
+  ImageUrlSet: Array<string>
+
+  /**
+   * 雪碧图子图位置与时间关系的 WebVtt 文件地址。WebVtt 文件表明了各个雪碧图小图对应的时间点，以及在雪碧大图里的坐标位置，一般被播放器用于实现预览。
+   */
+  WebVttUrl: string
+}
+
+/**
  * 对视频转自适应码流任务结果类型
  */
 export interface MediaProcessTaskAdaptiveDynamicStreamingResult {
@@ -3216,6 +3251,16 @@ export interface DescribeSnapshotByTimeOffsetTemplatesRequest {
    * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
    */
   SubAppId?: number
+}
+
+/**
+ * ModifyHeadTailTemplate返回参数结构体
+ */
+export interface ModifyHeadTailTemplateResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4480,39 +4525,13 @@ export interface AsrFullTextConfigureInfoForUpdate {
 }
 
 /**
- * 视频片头片尾识别结果。
+ * DeleteHeadTailTemplate返回参数结构体
  */
-export interface AiRecognitionTaskHeadTailResult {
+export interface DeleteHeadTailTemplateResponse {
   /**
-   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Status: string
-
-  /**
-   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
-   */
-  ErrCodeExt: string
-
-  /**
-   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
-   */
-  ErrCode: number
-
-  /**
-   * 错误信息。
-   */
-  Message: string
-
-  /**
-   * 视频片头片尾识别任务输入信息。
-   */
-  Input: AiRecognitionTaskHeadTailResultInput
-
-  /**
-      * 视频片头片尾识别任务输出信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Output: AiRecognitionTaskHeadTailResultOutput
+  RequestId?: string
 }
 
 /**
@@ -4698,18 +4717,43 @@ export interface DescribeProcedureTemplatesRequest {
 }
 
 /**
- * 违禁任务控制参数
+ * CreateHeadTailTemplate请求参数结构体
  */
-export interface ProhibitedConfigureInfoForUpdate {
+export interface CreateHeadTailTemplateRequest {
   /**
-   * 语音违禁控制参数。
+   * 模板名，长度限制 64 个字符。
    */
-  AsrReviewInfo?: ProhibitedAsrReviewTemplateInfoForUpdate
+  Name: string
 
   /**
-   * 文本违禁控制参数。
+   * 模板描述信息，长度限制 256 个字符。
    */
-  OcrReviewInfo?: ProhibitedOcrReviewTemplateInfoForUpdate
+  Comment?: string
+
+  /**
+   * 片头候选列表，填写视频的 FileId。转码时将自动选择与正片宽高比最接近的一个片头（相同宽高比时，靠前的候选项优先）。最多支持 5 个候选片头。
+   */
+  HeadCandidateSet?: Array<string>
+
+  /**
+   * 片尾候选列表，填写视频的 FileId。转码时将自动选择与正片宽高比最接近的一个片尾（相同宽高比时，靠前的候选项优先）。最多支持 5 个候选片尾。
+   */
+  TailCandidateSet?: Array<string>
+
+  /**
+      * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
+<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
+<li> gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊；</li>
+<li> white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充；</li>
+<li> black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
+默认值：stretch 。
+      */
+  FillType?: string
+
+  /**
+   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+   */
+  SubAppId?: number
 }
 
 /**
@@ -5427,39 +5471,18 @@ export interface ModifySnapshotByTimeOffsetTemplateResponse {
 }
 
 /**
- * 物体识别结果。
+ * DeleteHeadTailTemplate请求参数结构体
  */
-export interface AiRecognitionTaskObjectResult {
+export interface DeleteHeadTailTemplateRequest {
   /**
-   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   * 片头片尾模板号。
    */
-  Status: string
+  Definition: number
 
   /**
-   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
    */
-  ErrCodeExt: string
-
-  /**
-   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
-   */
-  ErrCode: number
-
-  /**
-   * 错误信息。
-   */
-  Message: string
-
-  /**
-   * 物体识别任务输入信息。
-   */
-  Input: AiRecognitionTaskObjectResultInput
-
-  /**
-      * 物体识别任务输出信息。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Output: AiRecognitionTaskObjectResultOutput
+  SubAppId?: number
 }
 
 /**
@@ -5692,6 +5715,52 @@ export interface AiRecognitionTaskOcrFullTextResult {
 }
 
 /**
+ * 媒体轨道的片段信息
+ */
+export interface MediaTrackItem {
+  /**
+      * 片段类型。取值有：
+<li>Video：视频片段。</li>
+<li>Audio：音频片段。</li>
+<li>Sticker：贴图片段。</li>
+<li>Transition：转场。</li>
+<li>Empty：空白片段。</li>
+      */
+  Type: string
+
+  /**
+      * 视频片段，当 Type = Video 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VideoItem?: VideoTrackItem
+
+  /**
+      * 音频片段，当 Type = Audio 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AudioItem?: AudioTrackItem
+
+  /**
+      * 贴图片段，当 Type = Sticker 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StickerItem?: StickerTrackItem
+
+  /**
+      * 转场，当 Type = Transition 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TransitionItem?: MediaTransitionItem
+
+  /**
+      * 空白片段，当 Type = Empty 时有效。空片段用于时间轴的占位。<li>如需要两个音频片段之间有一段时间的静音，可以用 EmptyTrackItem 来进行占位。</li>
+<li>使用 EmptyTrackItem 进行占位，来定位某个Item。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EmptyItem?: EmptyTrackItem
+}
+
+/**
  * 对视频按指定时间点截图任务结果类型
  */
 export interface MediaProcessTaskSnapshotByTimeOffsetResult {
@@ -5798,6 +5867,31 @@ export interface AiRecognitionTaskAsrWordsResultOutput {
    * 语音关键词识别结果集。
    */
   ResultSet: Array<AiRecognitionTaskAsrWordsResultItem>
+}
+
+/**
+ * DescribeHeadTailTemplates请求参数结构体
+ */
+export interface DescribeHeadTailTemplatesRequest {
+  /**
+   * 片头片尾模板号，数组长度限制：100。
+   */
+  Definitions?: Array<number>
+
+  /**
+   * 分页偏移量，默认值：0。
+   */
+  Offset?: number
+
+  /**
+   * 返回记录条数，默认值：10，最大值：100。
+   */
+  Limit?: number
+
+  /**
+   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+   */
+  SubAppId?: number
 }
 
 /**
@@ -7690,49 +7784,43 @@ export interface AiAnalysisTaskTagInput {
 }
 
 /**
- * 媒体轨道的片段信息
+ * 片头片尾模板详情
  */
-export interface MediaTrackItem {
+export interface HeadTailTemplate {
   /**
-      * 片段类型。取值有：
-<li>Video：视频片段。</li>
-<li>Audio：音频片段。</li>
-<li>Sticker：贴图片段。</li>
-<li>Transition：转场。</li>
-<li>Empty：空白片段。</li>
-      */
-  Type: string
+   * 片头片尾模板号。
+   */
+  Definition: number
 
   /**
-      * 视频片段，当 Type = Video 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  VideoItem?: VideoTrackItem
+   * 模板名，最大支持 64 个字符。
+   */
+  Name: string
 
   /**
-      * 音频片段，当 Type = Audio 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AudioItem?: AudioTrackItem
+   * 模板描述，最大支持 256 个字符。
+   */
+  Comment: string
 
   /**
-      * 贴图片段，当 Type = Sticker 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  StickerItem?: StickerTrackItem
+   * 片头候选列表。使用时会选择跟正片分辨率最贴近的一个使用，当存在相同的候选时，选择第一个使用，最大支持 5 个。
+   */
+  HeadCandidateSet: Array<string>
 
   /**
-      * 转场，当 Type = Transition 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TransitionItem?: MediaTransitionItem
+   * 片尾候选列表。使用时会选择跟正片分辨率最贴近的一个使用，当存在相同的候选时，选择第一个使用，最大支持 5 个。
+   */
+  TailCandidateSet: Array<string>
 
   /**
-      * 空白片段，当 Type = Empty 时有效。空片段用于时间轴的占位。<li>如需要两个音频片段之间有一段时间的静音，可以用 EmptyTrackItem 来进行占位。</li>
-<li>使用 EmptyTrackItem 进行占位，来定位某个Item。</li>
-注意：此字段可能返回 null，表示取不到有效值。
+      * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
+<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
+<li> gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊；</li>
+<li> white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充；</li>
+<li> black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
+默认值：stretch 。
       */
-  EmptyItem?: EmptyTrackItem
+  FillType: string
 }
 
 /**
@@ -8074,127 +8162,85 @@ export interface DescribeCdnLogsResponse {
 }
 
 /**
- * DescribeTaskDetail返回参数结构体
+ * 内容审核涉政嫌疑片段
  */
-export interface DescribeTaskDetailResponse {
+export interface MediaContentReviewPoliticalSegmentItem {
   /**
-      * 任务类型，取值：
-<li>Procedure：视频处理任务；</li>
-<li>EditMedia：视频编辑任务；</li>
-<li>SplitMedia：视频拆条任务；</li>
-<li>ComposeMedia：制作媒体文件任务；</li>
-<li>WechatPublish：微信发布任务；</li>
-<li>WechatMiniProgramPublish：微信小程序视频发布任务；</li>
-<li>PullUpload：拉取上传媒体文件任务。</li>
-
-兼容 2017 版的任务类型：
-<li>Transcode：视频转码任务；</li>
-<li>SnapshotByTimeOffset：视频截图任务；</li>
-<li>Concat：视频拼接任务；</li>
-<li>Clip：视频剪辑任务；</li>
-<li>ImageSprites：截取雪碧图任务。</li>
-      */
-  TaskType: string
-
-  /**
-      * 任务状态，取值：
-<li>WAITING：等待中；</li>
-<li>PROCESSING：处理中；</li>
-<li>FINISH：已完成。</li>
-      */
-  Status: string
-
-  /**
-   * 任务的创建时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   * 嫌疑片段起始的偏移时间，单位：秒。
    */
-  CreateTime: string
+  StartTimeOffset: number
 
   /**
-   * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   * 嫌疑片段结束的偏移时间，单位：秒。
    */
-  BeginProcessTime: string
+  EndTimeOffset: number
 
   /**
-   * 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   * 嫌疑片段涉政分数。
    */
-  FinishTime: string
+  Confidence: number
 
   /**
-      * 视频处理任务信息，仅当 TaskType 为 Procedure，该字段有值。
-注意：此字段可能返回 null，表示取不到有效值。
+      * 嫌疑片段鉴政结果建议，取值范围：
+<li>pass。</li>
+<li>review。</li>
+<li>block。</li>
       */
-  ProcedureTask: ProcedureTask
+  Suggestion: string
 
   /**
-      * 视频编辑任务信息，仅当 TaskType 为 EditMedia，该字段有值。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  EditMediaTask: EditMediaTask
-
-  /**
-      * 微信发布任务信息，仅当 TaskType 为 WechatPublish，该字段有值。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  WechatPublishTask: WechatPublishTask
-
-  /**
-      * 制作媒体文件任务信息，仅当 TaskType 为 ComposeMedia，该字段有值。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ComposeMediaTask: ComposeMediaTask
-
-  /**
-      * 视频拆条任务信息，仅当 TaskType 为 SplitMedia，该字段有值。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SplitMediaTask: SplitMediaTask
-
-  /**
-      * 微信小程序发布任务信息，仅当 TaskType 为 WechatMiniProgramPublish，该字段有值。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  WechatMiniProgramPublishTask: WechatMiniProgramPublishTask
-
-  /**
-      * 拉取上传媒体文件任务信息，仅当 TaskType 为 PullUpload，该字段有值。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  PullUploadTask: PullUploadTask
-
-  /**
-      * 视频转码任务信息，仅当 TaskType 为 Transcode，该字段有值。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TranscodeTask: TranscodeTask2017
-
-  /**
-      * 视频拼接任务信息，仅当 TaskType 为 Concat，该字段有值。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ConcatTask: ConcatTask2017
-
-  /**
-      * 视频剪辑任务信息，仅当 TaskType 为 Clip，该字段有值。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ClipTask: ClipTask2017
-
-  /**
-      * 截取雪碧图任务信息，仅当 TaskType 为 ImageSprite，该字段有值。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  CreateImageSpriteTask: CreateImageSpriteTask2017
-
-  /**
-      * 视频指定时间点截图任务信息，仅当 TaskType 为 SnapshotByTimeOffset，该字段有值。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SnapshotByTimeOffsetTask: SnapshotByTimeOffsetTask2017
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 涉政人物、违规图标名字。
    */
-  RequestId?: string
+  Name: string
+
+  /**
+      * 嫌疑片段鉴政结果标签。内容审核模板[画面鉴政任务控制参数](https://cloud.tencent.com/document/api/266/31773#PoliticalImgReviewTemplateInfo)里 LabelSet 参数与此参数取值范围的对应关系：
+violation_photo：
+<li>violation_photo：违规图标。</li>
+politician：
+<li>nation_politician：国家领导人；</li>
+<li>province_politician: 省部级领导人；</li>
+<li>bureau_politician：厅局级领导人；</li>
+<li>county_politician：县处级领导人；</li>
+<li>rural_politician：乡科级领导人；</li>
+<li>sensitive_politician：敏感政治人物；</li>
+<li>foreign_politician：国外领导人。</li>
+entertainment：
+<li>sensitive_entertainment：敏感娱乐人物。</li>
+sport：
+<li>sensitive_sport：敏感体育人物。</li>
+entrepreneur：
+<li>sensitive_entrepreneur：敏感商业人物。</li>
+scholar：
+<li>sensitive_scholar：敏感教育学者。</li>
+celebrity：
+<li>sensitive_celebrity：敏感知名人物；</li>
+<li>historical_celebrity：历史知名人物。</li>
+military：
+<li>sensitive_military：敏感军事人物。</li>
+      */
+  Label: string
+
+  /**
+      * 嫌疑图片 URL （图片不会永久存储，到达
+ PicUrlExpireTime 时间点后图片将被删除）。
+      */
+  Url: string
+
+  /**
+   * 涉政人物、违规图标出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
+   */
+  AreaCoordSet: Array<number>
+
+  /**
+   * 该字段已废弃，请使用 PicUrlExpireTime。
+   */
+  PicUrlExpireTimeStamp: number
+
+  /**
+   * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  PicUrlExpireTime: string
 }
 
 /**
@@ -9513,6 +9559,11 @@ export interface TranscodeTaskInput {
   MosaicSet?: Array<MosaicInput>
 
   /**
+   * 片头片尾列表，支持多片头片尾，最大可支持 10 个。
+   */
+  HeadTailSet?: Array<HeadTailTaskInput>
+
+  /**
       * 转码后的视频的起始时间偏移，单位：秒。
 <li>不填或填0，表示转码后的视频从原始视频的起始位置开始；</li>
 <li>当数值大于0时（假设为 n），表示转码后的视频从原始视频的第 n 秒位置开始；</li>
@@ -9768,6 +9819,16 @@ export interface DescribeCDNStatDetailsRequest {
    * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
    */
   SubAppId?: number
+}
+
+/**
+ * 文本全文识别输入。
+ */
+export interface AiRecognitionTaskOcrFullTextResultInput {
+  /**
+   * 文本全文识别模板 ID。
+   */
+  Definition: number
 }
 
 /**
@@ -10069,6 +10130,42 @@ export interface HighlightsConfigureInfoForUpdate {
 <li>OFF：关闭智能精彩片段任务。</li>
       */
   Switch?: string
+}
+
+/**
+ * 物体识别结果。
+ */
+export interface AiRecognitionTaskObjectResult {
+  /**
+   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   */
+  Status: string
+
+  /**
+   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   */
+  ErrCodeExt: string
+
+  /**
+   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
+   */
+  ErrCode: number
+
+  /**
+   * 错误信息。
+   */
+  Message: string
+
+  /**
+   * 物体识别任务输入信息。
+   */
+  Input: AiRecognitionTaskObjectResultInput
+
+  /**
+      * 物体识别任务输出信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Output: AiRecognitionTaskObjectResultOutput
 }
 
 /**
@@ -10611,6 +10708,21 @@ export interface HighlightsConfigureInfo {
 <li>OFF：关闭智能精彩片段任务。</li>
       */
   Switch: string
+}
+
+/**
+ * CreateHeadTailTemplate返回参数结构体
+ */
+export interface CreateHeadTailTemplateResponse {
+  /**
+   * 片头片尾模板号。
+   */
+  Definition: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11265,85 +11377,127 @@ export interface MediaAiAnalysisTagItem {
 }
 
 /**
- * 内容审核涉政嫌疑片段
+ * DescribeTaskDetail返回参数结构体
  */
-export interface MediaContentReviewPoliticalSegmentItem {
+export interface DescribeTaskDetailResponse {
   /**
-   * 嫌疑片段起始的偏移时间，单位：秒。
-   */
-  StartTimeOffset: number
+      * 任务类型，取值：
+<li>Procedure：视频处理任务；</li>
+<li>EditMedia：视频编辑任务；</li>
+<li>SplitMedia：视频拆条任务；</li>
+<li>ComposeMedia：制作媒体文件任务；</li>
+<li>WechatPublish：微信发布任务；</li>
+<li>WechatMiniProgramPublish：微信小程序视频发布任务；</li>
+<li>PullUpload：拉取上传媒体文件任务。</li>
 
-  /**
-   * 嫌疑片段结束的偏移时间，单位：秒。
-   */
-  EndTimeOffset: number
-
-  /**
-   * 嫌疑片段涉政分数。
-   */
-  Confidence: number
-
-  /**
-      * 嫌疑片段鉴政结果建议，取值范围：
-<li>pass。</li>
-<li>review。</li>
-<li>block。</li>
+兼容 2017 版的任务类型：
+<li>Transcode：视频转码任务；</li>
+<li>SnapshotByTimeOffset：视频截图任务；</li>
+<li>Concat：视频拼接任务；</li>
+<li>Clip：视频剪辑任务；</li>
+<li>ImageSprites：截取雪碧图任务。</li>
       */
-  Suggestion: string
+  TaskType: string
 
   /**
-   * 涉政人物、违规图标名字。
-   */
-  Name: string
-
-  /**
-      * 嫌疑片段鉴政结果标签。内容审核模板[画面鉴政任务控制参数](https://cloud.tencent.com/document/api/266/31773#PoliticalImgReviewTemplateInfo)里 LabelSet 参数与此参数取值范围的对应关系：
-violation_photo：
-<li>violation_photo：违规图标。</li>
-politician：
-<li>nation_politician：国家领导人；</li>
-<li>province_politician: 省部级领导人；</li>
-<li>bureau_politician：厅局级领导人；</li>
-<li>county_politician：县处级领导人；</li>
-<li>rural_politician：乡科级领导人；</li>
-<li>sensitive_politician：敏感政治人物；</li>
-<li>foreign_politician：国外领导人。</li>
-entertainment：
-<li>sensitive_entertainment：敏感娱乐人物。</li>
-sport：
-<li>sensitive_sport：敏感体育人物。</li>
-entrepreneur：
-<li>sensitive_entrepreneur：敏感商业人物。</li>
-scholar：
-<li>sensitive_scholar：敏感教育学者。</li>
-celebrity：
-<li>sensitive_celebrity：敏感知名人物；</li>
-<li>historical_celebrity：历史知名人物。</li>
-military：
-<li>sensitive_military：敏感军事人物。</li>
+      * 任务状态，取值：
+<li>WAITING：等待中；</li>
+<li>PROCESSING：处理中；</li>
+<li>FINISH：已完成。</li>
       */
-  Label: string
+  Status: string
 
   /**
-      * 嫌疑图片 URL （图片不会永久存储，到达
- PicUrlExpireTime 时间点后图片将被删除）。
+   * 任务的创建时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  CreateTime: string
+
+  /**
+   * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  BeginProcessTime: string
+
+  /**
+   * 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  FinishTime: string
+
+  /**
+      * 视频处理任务信息，仅当 TaskType 为 Procedure，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-  Url: string
+  ProcedureTask: ProcedureTask
 
   /**
-   * 涉政人物、违规图标出现的区域坐标 (像素级)，[x1, y1, x2, y2]，即左上角坐标、右下角坐标。
-   */
-  AreaCoordSet: Array<number>
+      * 视频编辑任务信息，仅当 TaskType 为 EditMedia，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EditMediaTask: EditMediaTask
 
   /**
-   * 该字段已废弃，请使用 PicUrlExpireTime。
-   */
-  PicUrlExpireTimeStamp: number
+      * 微信发布任务信息，仅当 TaskType 为 WechatPublish，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WechatPublishTask: WechatPublishTask
 
   /**
-   * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+      * 制作媒体文件任务信息，仅当 TaskType 为 ComposeMedia，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ComposeMediaTask: ComposeMediaTask
+
+  /**
+      * 视频拆条任务信息，仅当 TaskType 为 SplitMedia，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SplitMediaTask: SplitMediaTask
+
+  /**
+      * 微信小程序发布任务信息，仅当 TaskType 为 WechatMiniProgramPublish，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  WechatMiniProgramPublishTask: WechatMiniProgramPublishTask
+
+  /**
+      * 拉取上传媒体文件任务信息，仅当 TaskType 为 PullUpload，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  PullUploadTask: PullUploadTask
+
+  /**
+      * 视频转码任务信息，仅当 TaskType 为 Transcode，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TranscodeTask: TranscodeTask2017
+
+  /**
+      * 视频拼接任务信息，仅当 TaskType 为 Concat，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ConcatTask: ConcatTask2017
+
+  /**
+      * 视频剪辑任务信息，仅当 TaskType 为 Clip，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ClipTask: ClipTask2017
+
+  /**
+      * 截取雪碧图任务信息，仅当 TaskType 为 ImageSprite，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CreateImageSpriteTask: CreateImageSpriteTask2017
+
+  /**
+      * 视频指定时间点截图任务信息，仅当 TaskType 为 SnapshotByTimeOffset，该字段有值。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  SnapshotByTimeOffsetTask: SnapshotByTimeOffsetTask2017
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  PicUrlExpireTime: string
+  RequestId?: string
 }
 
 /**
@@ -11510,11 +11664,11 @@ export interface DescribeSuperPlayerConfigsRequest {
 }
 
 /**
- * 文本全文识别输入。
+ * 片尾任务输入类型。
  */
-export interface AiRecognitionTaskOcrFullTextResultInput {
+export interface HeadTailTaskInput {
   /**
-   * 文本全文识别模板 ID。
+   * 片头片尾模板号。
    */
   Definition: number
 }
@@ -11553,6 +11707,51 @@ export interface AiRecognitionTaskSegmentResultInput {
    * 视频拆条模板 ID。
    */
   Definition: number
+}
+
+/**
+ * ModifyHeadTailTemplate请求参数结构体
+ */
+export interface ModifyHeadTailTemplateRequest {
+  /**
+   * 片头片尾模板号。
+   */
+  Definition: number
+
+  /**
+   * 模板名，长度限制 64 个字符。不传代表不修改。
+   */
+  Name?: string
+
+  /**
+   * 模板描述，长度限制 256 个字符。不传代表不修改，传空代表清空。
+   */
+  Comment?: string
+
+  /**
+   * 片头候选列表，填写视频的 FileId。转码时将自动选择与正片宽高比最接近的一个片头（相同宽高比时，靠前的候选项优先）。最多支持 5 个候选片头。不传代表不修改，传空数组代表清空。
+   */
+  HeadCandidateSet?: Array<string>
+
+  /**
+   * 片尾候选列表，填写视频的 FileId。转码时将自动选择与正片宽高比最接近的一个片尾（相同宽高比时，靠前的候选项优先）。最多支持 5 个候选片头。不传代表不修改，传空数组代表清空。
+   */
+  TailCandidateSet?: Array<string>
+
+  /**
+      * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
+<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
+<li> gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊；</li>
+<li> white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充；</li>
+<li> black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
+默认值为不修改。
+      */
+  FillType?: string
+
+  /**
+   * 点播[子应用](/document/product/266/14574) ID。如果要访问子应用中的资源，则将该字段填写为子应用 ID；否则无需填写该字段。
+   */
+  SubAppId?: number
 }
 
 /**
@@ -14455,6 +14654,26 @@ export interface SampleSnapshotTaskInput {
 }
 
 /**
+ * DescribeHeadTailTemplates返回参数结构体
+ */
+export interface DescribeHeadTailTemplatesResponse {
+  /**
+   * 符合过滤条件的记录总数。
+   */
+  TotalCount: number
+
+  /**
+   * 片头片尾模板详情列表。
+   */
+  HeadTailTemplateSet: Array<HeadTailTemplate>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 鉴恐任务控制参数
  */
 export interface TerrorismConfigureInfo {
@@ -14599,38 +14818,39 @@ export interface SampleSnapshotTemplate {
 }
 
 /**
- * 雪碧图信息
+ * 视频片头片尾识别结果。
  */
-export interface MediaImageSpriteItem {
+export interface AiRecognitionTaskHeadTailResult {
   /**
-   * 雪碧图规格，参见[雪碧图参数模板](https://cloud.tencent.com/document/product/266/33480#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
+   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
    */
-  Definition: number
+  Status: string
 
   /**
-   * 雪碧图小图的高度。
+   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
    */
-  Height: number
+  ErrCodeExt: string
 
   /**
-   * 雪碧图小图的宽度。
+   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
    */
-  Width: number
+  ErrCode: number
 
   /**
-   * 每一张雪碧图大图里小图的数量。
+   * 错误信息。
    */
-  TotalCount: number
+  Message: string
 
   /**
-   * 每一张雪碧图大图的地址。
+   * 视频片头片尾识别任务输入信息。
    */
-  ImageUrlSet: Array<string>
+  Input: AiRecognitionTaskHeadTailResultInput
 
   /**
-   * 雪碧图子图位置与时间关系的 WebVtt 文件地址。WebVtt 文件表明了各个雪碧图小图对应的时间点，以及在雪碧大图里的坐标位置，一般被播放器用于实现预览。
-   */
-  WebVttUrl: string
+      * 视频片头片尾识别任务输出信息。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Output: AiRecognitionTaskHeadTailResultOutput
 }
 
 /**
@@ -15017,6 +15237,21 @@ export interface PullUploadTask {
    * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
    */
   SessionId: string
+}
+
+/**
+ * 违禁任务控制参数
+ */
+export interface ProhibitedConfigureInfoForUpdate {
+  /**
+   * 语音违禁控制参数。
+   */
+  AsrReviewInfo?: ProhibitedAsrReviewTemplateInfoForUpdate
+
+  /**
+   * 文本违禁控制参数。
+   */
+  OcrReviewInfo?: ProhibitedOcrReviewTemplateInfoForUpdate
 }
 
 /**

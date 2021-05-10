@@ -391,12 +391,12 @@ export interface TollInvoiceOCRResponse {
   /**
    * 过路过桥费发票识别结果，具体内容请点击左侧链接。
    */
-  TollInvoiceInfos?: Array<TollInvoiceInfo>
+  TollInvoiceInfos: Array<TollInvoiceInfo>
 
   /**
    * 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。
    */
-  Angle?: number
+  Angle: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -805,7 +805,7 @@ export interface InvoiceGeneralOCRRequest {
   /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
   ImageBase64?: string
@@ -813,7 +813,7 @@ export interface InvoiceGeneralOCRRequest {
   /**
       * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
@@ -1185,23 +1185,22 @@ export interface RecognizeTableOCRResponse {
   /**
    * 检测到的文本信息，具体内容请点击左侧链接。
    */
-  TableDetections?: Array<TableDetectInfo>
+  TableDetections: Array<TableDetectInfo>
 
   /**
    * Base64 编码后的 Excel 数据。
    */
-  Data?: string
+  Data: string
 
   /**
    * 图片为PDF时，返回PDF的总页数，默认为0
    */
-  PdfPageSize?: number
+  PdfPageSize: number
 
   /**
-      * 图片旋转角度（角度制），文本的水平
-方向为 0°；顺时针为正，逆时针为负
-      */
-  Angle?: number
+   * 图片旋转角度（角度制），文本的水平方向为0°，统一以逆时针方向旋转，逆时针为负，角度范围为-360°至0°。
+   */
+  Angle: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1399,32 +1398,32 @@ export interface PropOwnerCertOCRResponse {
   /**
    * 房地产权利人
    */
-  Owner?: string
+  Owner: string
 
   /**
    * 共有情况
    */
-  Possession?: string
+  Possession: string
 
   /**
    * 登记时间
    */
-  RegisterTime?: string
+  RegisterTime: string
 
   /**
    * 规划用途
    */
-  Purpose?: string
+  Purpose: string
 
   /**
    * 房屋性质
    */
-  Nature?: string
+  Nature: string
 
   /**
    * 房地坐落
    */
-  Location?: string
+  Location: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1571,12 +1570,12 @@ export interface FormulaOCRResponse {
   /**
    * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负
    */
-  Angle?: number
+  Angle: number
 
   /**
    * 检测到的文本信息，具体内容请点击左侧链接。
    */
-  FormulaInfos?: Array<TextFormula>
+  FormulaInfos: Array<TextFormula>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2217,7 +2216,7 @@ export interface TollInvoiceOCRRequest {
   /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
   ImageBase64?: string
@@ -2225,7 +2224,7 @@ export interface TollInvoiceOCRRequest {
   /**
       * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
@@ -2418,12 +2417,12 @@ export interface InvoiceGeneralOCRResponse {
   /**
    * 通用机打发票识别结果，具体内容请点击左侧链接。
    */
-  InvoiceGeneralInfos?: Array<InvoiceGeneralInfo>
+  InvoiceGeneralInfos: Array<InvoiceGeneralInfo>
 
   /**
    * 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。
    */
-  Angle?: number
+  Angle: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2460,7 +2459,7 @@ export interface PropOwnerCertOCRRequest {
   /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
   ImageBase64?: string
@@ -2468,7 +2467,7 @@ export interface PropOwnerCertOCRRequest {
   /**
       * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
@@ -2504,12 +2503,12 @@ export interface VatRollInvoiceOCRResponse {
   /**
    * 增值税发票（卷票）识别结果，具体内容请点击左侧链接。
    */
-  VatRollInvoiceInfos?: Array<VatRollInvoiceInfo>
+  VatRollInvoiceInfos: Array<VatRollInvoiceInfo>
 
   /**
    * 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。
    */
-  Angle?: number
+  Angle: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3698,7 +3697,7 @@ export interface VatRollInvoiceOCRRequest {
   /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
   ImageBase64?: string
@@ -3706,7 +3705,7 @@ export interface VatRollInvoiceOCRRequest {
   /**
       * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
@@ -3955,7 +3954,7 @@ export interface FormulaOCRRequest {
   /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
   ImageBase64?: string
@@ -3963,7 +3962,7 @@ export interface FormulaOCRRequest {
   /**
       * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
@@ -4602,12 +4601,12 @@ export interface BusInvoiceOCRResponse {
   /**
    * 汽车票识别结果，具体内容请点击左侧链接。
    */
-  BusInvoiceInfos?: Array<BusInvoiceInfo>
+  BusInvoiceInfos: Array<BusInvoiceInfo>
 
   /**
    * 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。
    */
-  Angle?: number
+  Angle: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4919,7 +4918,7 @@ export interface BusInvoiceOCRRequest {
   /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
   ImageBase64?: string
@@ -4927,7 +4926,7 @@ export interface BusInvoiceOCRRequest {
   /**
       * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */

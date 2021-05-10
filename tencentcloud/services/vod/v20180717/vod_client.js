@@ -80,6 +80,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteAnimatedGraphicsTemplate", req, cb);
     }
     /**
+     * 查询指定时间点截图模板，支持根据条件，分页查询。
+     */
+    async DescribeSnapshotByTimeOffsetTemplates(req, cb) {
+        return this.request("DescribeSnapshotByTimeOffsetTemplates", req, cb);
+    }
+    /**
      * 根据视频内容分析模板唯一标识，获取视频内容分析模板详情列表。返回结果包含符合条件的所有用户自定义视频内容分析模板及[系统预置视频内容分析模板](https://cloud.tencent.com/document/product/266/33476#.E9.A2.84.E7.BD.AE.E8.A7.86.E9.A2.91.E5.86.85.E5.AE.B9.E5.88.86.E6.9E.90.E6.A8.A1.E6.9D.BF)。
      */
     async DescribeAIAnalysisTemplates(req, cb) {
@@ -276,10 +282,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribePrepaidProducts", req, cb);
     }
     /**
-     * 查询指定时间点截图模板，支持根据条件，分页查询。
+     * 修改用户自定义转动图模板。
      */
-    async DescribeSnapshotByTimeOffsetTemplates(req, cb) {
-        return this.request("DescribeSnapshotByTimeOffsetTemplates", req, cb);
+    async ModifyAnimatedGraphicsTemplate(req, cb) {
+        return this.request("ModifyAnimatedGraphicsTemplate", req, cb);
     }
     /**
      * 该接口用于制作媒体文件，可以
@@ -493,10 +499,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeContentReviewTemplates", req, cb);
     }
     /**
+     * 修改片头片尾模板。
+     */
+    async ModifyHeadTailTemplate(req, cb) {
+        return this.request("ModifyHeadTailTemplate", req, cb);
+    }
+    /**
      * 删除用户自定义图片处理模板。
      */
     async DeleteImageProcessingTemplate(req, cb) {
         return this.request("DeleteImageProcessingTemplate", req, cb);
+    }
+    /**
+     * 创建片头片尾模板。
+     */
+    async CreateHeadTailTemplate(req, cb) {
+        return this.request("CreateHeadTailTemplate", req, cb);
     }
     /**
      * 修改用户自定义水印模板，水印类型不允许修改。
@@ -673,6 +691,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSubAppIds", req, cb);
     }
     /**
+     * 获取片头片尾模板列表。
+     */
+    async DescribeHeadTailTemplates(req, cb) {
+        return this.request("DescribeHeadTailTemplates", req, cb);
+    }
+    /**
      * 该接口用于确认媒体文件（和封面文件）上传到腾讯云点播的结果，并存储媒体信息，返回文件的播放地址和文件 ID。
      */
     async CommitUpload(req, cb) {
@@ -748,12 +772,6 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateAnimatedGraphicsTemplate", req, cb);
     }
     /**
-     * 修改用户自定义转动图模板。
-     */
-    async ModifyAnimatedGraphicsTemplate(req, cb) {
-        return this.request("ModifyAnimatedGraphicsTemplate", req, cb);
-    }
-    /**
      * 关联媒资字幕，将指定的字幕关联到转自适应码流模板号对应的媒体输出文件中（或解除关联）。
      */
     async AttachMediaSubtitles(req, cb) {
@@ -815,6 +833,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async SimpleHlsClip(req, cb) {
         return this.request("SimpleHlsClip", req, cb);
+    }
+    /**
+     * 删除片头片尾模板。
+     */
+    async DeleteHeadTailTemplate(req, cb) {
+        return this.request("DeleteHeadTailTemplate", req, cb);
     }
     /**
      * 该接口用于创建素材样本，用于通过五官定位等技术，进行内容识别、不适宜视频识别等视频处理。

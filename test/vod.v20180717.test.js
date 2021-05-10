@@ -78,6 +78,16 @@ it("vod.v20180717.DeleteAnimatedGraphicsTemplate", async function () {
     }
 })
 
+it("vod.v20180717.DescribeSnapshotByTimeOffsetTemplates", async function () {
+    try {
+       const data = await client.DescribeSnapshotByTimeOffsetTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.DescribeAIAnalysisTemplates", async function () {
     try {
        const data = await client.DescribeAIAnalysisTemplates({})
@@ -348,9 +358,9 @@ it("vod.v20180717.DescribePrepaidProducts", async function () {
     }
 })
 
-it("vod.v20180717.DescribeSnapshotByTimeOffsetTemplates", async function () {
+it("vod.v20180717.ModifyAnimatedGraphicsTemplate", async function () {
     try {
-       const data = await client.DescribeSnapshotByTimeOffsetTemplates({})
+       const data = await client.ModifyAnimatedGraphicsTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -618,9 +628,29 @@ it("vod.v20180717.DescribeContentReviewTemplates", async function () {
     }
 })
 
+it("vod.v20180717.ModifyHeadTailTemplate", async function () {
+    try {
+       const data = await client.ModifyHeadTailTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.DeleteImageProcessingTemplate", async function () {
     try {
        const data = await client.DeleteImageProcessingTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.CreateHeadTailTemplate", async function () {
+    try {
+       const data = await client.CreateHeadTailTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -898,6 +928,16 @@ it("vod.v20180717.DescribeSubAppIds", async function () {
     }
 })
 
+it("vod.v20180717.DescribeHeadTailTemplates", async function () {
+    try {
+       const data = await client.DescribeHeadTailTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.CommitUpload", async function () {
     try {
        const data = await client.CommitUpload({})
@@ -968,16 +1008,6 @@ it("vod.v20180717.CreateAnimatedGraphicsTemplate", async function () {
     }
 })
 
-it("vod.v20180717.ModifyAnimatedGraphicsTemplate", async function () {
-    try {
-       const data = await client.ModifyAnimatedGraphicsTemplate({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("vod.v20180717.AttachMediaSubtitles", async function () {
     try {
        const data = await client.AttachMediaSubtitles({})
@@ -1031,6 +1061,16 @@ it("vod.v20180717.WeChatMiniProgramPublish", async function () {
 it("vod.v20180717.SimpleHlsClip", async function () {
     try {
        const data = await client.SimpleHlsClip({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.DeleteHeadTailTemplate", async function () {
+    try {
+       const data = await client.DeleteHeadTailTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
