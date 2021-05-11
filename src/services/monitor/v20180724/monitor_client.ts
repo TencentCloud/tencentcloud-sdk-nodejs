@@ -27,11 +27,14 @@ import {
   AlarmPolicyTriggerTask,
   DescribeServiceDiscoveryResponse,
   DescribePolicyConditionListMetric,
+  DescribeAlertRulesRequest,
   DescribePolicyGroupListResponse,
   BindingPolicyObjectRequest,
   CreateServiceDiscoveryResponse,
+  PrometheusRuleKV,
   PutMonitorDataResponse,
   DescribePolicyGroupInfoRequest,
+  UpdateAlertRuleStateResponse,
   DeleteServiceDiscoveryResponse,
   DescribePolicyGroupInfoCallback,
   AlarmHistoryMetric,
@@ -42,22 +45,23 @@ import {
   ModifyAlarmPolicyNoticeRequest,
   DeleteAlarmPolicyRequest,
   PutMonitorDataRequest,
+  CreateAlertRuleResponse,
   CreatePolicyGroupResponse,
   ModifyAlarmPolicyTasksResponse,
   DescribeBaseMetricsResponse,
   MetricDataPoint,
   DescribePolicyConditionListConfigManualContinueTime,
-  CommonNamespace,
+  DeleteAlertRulesResponse,
   GetMonitorDataRequest,
   DataPoint,
   DescribeAlarmPoliciesResponse,
-  ModifyAlarmPolicyStatusRequest,
+  DescribeStatisticDataRequest,
   ConditionsTemp,
   SendCustomAlarmMsgRequest,
   DescribePolicyConditionListConfigManualPeriod,
   UnBindingPolicyObjectRequest,
   DescribeServiceDiscoveryRequest,
-  InstanceGroup,
+  CommonNamespace,
   DescribePolicyConditionListRequest,
   DeletePolicyGroupResponse,
   DescribeMonitorTypesRequest,
@@ -68,13 +72,14 @@ import {
   SetDefaultAlarmPolicyRequest,
   ModifyAlarmNoticeRequest,
   CreateServiceDiscoveryRequest,
-  DescribePolicyConditionListCondition,
+  DescribeAlertRulesResponse,
   DescribeProductListRequest,
   PeriodsSt,
   AlarmPolicy,
   CreateAlarmPolicyResponse,
   ModifyAlarmReceiversResponse,
   DescribePolicyConditionListResponse,
+  PrometheusRuleSet,
   DescribeAllNamespacesResponse,
   DeleteAlarmNoticesResponse,
   DescribeBasicAlarmListResponse,
@@ -87,6 +92,7 @@ import {
   Dimension,
   DescribeBindingPolicyObjectListInstance,
   Point,
+  UpdateAlertRuleStateRequest,
   ModifyPolicyGroupEventCondition,
   Metric,
   ModifyPolicyGroupRequest,
@@ -100,6 +106,7 @@ import {
   ModifyAlarmPolicyStatusResponse,
   Instance,
   BindingPolicyObjectDimension,
+  DeletePolicyGroupRequest,
   DescribeAlarmPolicyResponse,
   UpdateServiceDiscoveryResponse,
   DescribeMonitorTypesResponse,
@@ -109,20 +116,24 @@ import {
   CreateAlarmNoticeResponse,
   DescribeAlarmHistoriesRequest,
   MetricObjectMeaning,
-  AlarmEvent,
+  DescribeAccidentEventListAlarms,
   ModifyPolicyGroupResponse,
   DescribePolicyConditionListConfigManualCalcType,
+  ModifyAlarmPolicyStatusRequest,
   MetricData,
-  DeletePolicyGroupRequest,
+  AlarmEvent,
   DescribePolicyGroupInfoCondition,
+  UpdateAlertRuleRequest,
   DescribeBindingPolicyObjectListResponse,
   DescribePolicyGroupInfoConditionTpl,
   DescribeBindingPolicyObjectListRequest,
   UnBindingPolicyObjectResponse,
+  InstanceGroup,
   DescribeProductEventListEvents,
   DeleteAlarmNoticesRequest,
   DescribePolicyConditionListConfigManualPeriodNum,
   DescribeAllNamespacesRequest,
+  UpdateAlertRuleResponse,
   DescribeAlarmMetricsResponse,
   DescribePolicyGroupListGroupInstanceGroup,
   DescribeAlarmPoliciesRequest,
@@ -134,7 +145,7 @@ import {
   DescribeAlarmEventsRequest,
   MidQueryCondition,
   ModifyAlarmNoticeResponse,
-  DescribeAccidentEventListAlarms,
+  CreateAlertRuleRequest,
   DescribeProductListResponse,
   DescribeProductEventListResponse,
   AlarmHistory,
@@ -157,7 +168,7 @@ import {
   DescribeAlarmNoticeResponse,
   DescribeBindingPolicyObjectListInstanceGroup,
   DescribeProductEventListEventsGroupInfo,
-  DescribeStatisticDataRequest,
+  DeleteAlertRulesRequest,
   DescribeAlarmNoticeRequest,
   DescribeBindingPolicyObjectListDimension,
   CreateAlarmNoticeRequest,
@@ -169,6 +180,7 @@ import {
   SendCustomAlarmMsgResponse,
   AlarmPolicyCondition,
   ModifyPolicyGroupCondition,
+  DescribePolicyConditionListCondition,
   DeleteServiceDiscoveryRequest,
   AlarmPolicyEventCondition,
   DescribeProductEventListOverView,
@@ -220,6 +232,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UnBindingPolicyObjectResponse) => void
   ): Promise<UnBindingPolicyObjectResponse> {
     return this.request("UnBindingPolicyObject", req, cb)
+  }
+
+  /**
+   * 创建 Prometheus 告警规则
+   */
+  async CreateAlertRule(
+    req: CreateAlertRuleRequest,
+    cb?: (error: string, rep: CreateAlertRuleResponse) => void
+  ): Promise<CreateAlertRuleResponse> {
+    return this.request("CreateAlertRule", req, cb)
   }
 
   /**
@@ -347,6 +369,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 告警2.0编辑告警策略基本信息，包括策略名、备注
+   */
+  async ModifyAlarmPolicyInfo(
+    req: ModifyAlarmPolicyInfoRequest,
+    cb?: (error: string, rep: ModifyAlarmPolicyInfoResponse) => void
+  ): Promise<ModifyAlarmPolicyInfoResponse> {
+    return this.request("ModifyAlarmPolicyInfo", req, cb)
+  }
+
+  /**
    * 创建通知模板
    */
   async CreateAlarmNotice(
@@ -354,6 +386,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAlarmNoticeResponse) => void
   ): Promise<CreateAlarmNoticeResponse> {
     return this.request("CreateAlarmNotice", req, cb)
+  }
+
+  /**
+   * 更新 Prometheus 报警策略状态
+   */
+  async UpdateAlertRuleState(
+    req: UpdateAlertRuleStateRequest,
+    cb?: (error: string, rep: UpdateAlertRuleStateResponse) => void
+  ): Promise<UpdateAlertRuleStateResponse> {
+    return this.request("UpdateAlertRuleState", req, cb)
   }
 
   /**
@@ -491,6 +533,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新 Prometheus 的报警规则
+   */
+  async UpdateAlertRule(
+    req: UpdateAlertRuleRequest,
+    cb?: (error: string, rep: UpdateAlertRuleResponse) => void
+  ): Promise<UpdateAlertRuleResponse> {
+    return this.request("UpdateAlertRule", req, cb)
+  }
+
+  /**
      * 设置一个策略为该告警策略类型、该项目的默认告警策略。
 同一项目下相同的告警策略类型，就会被设置为非默认。
      */
@@ -532,13 +584,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 告警2.0编辑告警策略基本信息，包括策略名、备注
+   * 批量删除 Prometheus 报警规则
    */
-  async ModifyAlarmPolicyInfo(
-    req: ModifyAlarmPolicyInfoRequest,
-    cb?: (error: string, rep: ModifyAlarmPolicyInfoResponse) => void
-  ): Promise<ModifyAlarmPolicyInfoResponse> {
-    return this.request("ModifyAlarmPolicyInfo", req, cb)
+  async DeleteAlertRules(
+    req: DeleteAlertRulesRequest,
+    cb?: (error: string, rep: DeleteAlertRulesResponse) => void
+  ): Promise<DeleteAlertRulesResponse> {
+    return this.request("DeleteAlertRules", req, cb)
   }
 
   /**
@@ -643,6 +695,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyPolicyGroupResponse) => void
   ): Promise<ModifyPolicyGroupResponse> {
     return this.request("ModifyPolicyGroup", req, cb)
+  }
+
+  /**
+   * Prometheus 报警规则查询接口
+   */
+  async DescribeAlertRules(
+    req: DescribeAlertRulesRequest,
+    cb?: (error: string, rep: DescribeAlertRulesResponse) => void
+  ): Promise<DescribeAlertRulesResponse> {
+    return this.request("DescribeAlertRules", req, cb)
   }
 
   /**

@@ -28,7 +28,7 @@ export interface CreateResourceRequest {
       */
     Name: string;
     /**
-      * 资源类型，占时只支持jar，填1
+      * 资源类型。目前只支持 JAR，取值为 1
       */
     ResourceType: number;
     /**
@@ -282,7 +282,7 @@ export interface SystemResourceItem {
       */
     Name: string;
     /**
-      * 资源类型
+      * 资源类型。1 表示 JAR 包，目前只支持该值。
       */
     ResourceType: number;
     /**
@@ -405,11 +405,11 @@ export interface DescribeResourcesRequest {
       */
     ResourceIds?: Array<string>;
     /**
-      * 偏移量
+      * 偏移量，仅当设置 Limit 参数时有效
       */
     Offset?: number;
     /**
-      * 条数限制
+      * 条数限制。如果不填，默认返回 20 条
       */
     Limit?: number;
     /**
@@ -486,11 +486,11 @@ export interface DescribeJobsResponse {
     /**
       * 作业总数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 作业列表
       */
-    JobSet?: Array<JobV1>;
+    JobSet: Array<JobV1>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -576,11 +576,11 @@ export interface CreateResourceResponse {
     /**
       * 资源ID
       */
-    ResourceId?: string;
+    ResourceId: string;
     /**
       * 资源版本
       */
-    Version?: number;
+    Version: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -595,15 +595,15 @@ export interface DescribeSystemResourcesRequest {
       */
     ResourceIds?: Array<string>;
     /**
-      * 偏移量
+      * 偏移量，仅当设置 Limit 参数时有效
       */
     Offset?: number;
     /**
-      * 条数限制
+      * 条数限制，默认返回 20 条
       */
     Limit?: number;
     /**
-      * 查询资源配置列表， 如果不填写，返回该ResourceId下所有作业配置列表
+      * 查询资源配置列表， 如果不填写，返回该 ResourceIds.N 下所有作业配置列表
       */
     Filters?: Array<Filter>;
     /**
@@ -670,11 +670,11 @@ export interface RunJobDescription {
       */
     RunType: number;
     /**
-      * SQL类型作业启动参数：指定数据源消费起始时间点
+      * 已废弃。旧版 SQL 类型作业启动参数：指定数据源消费起始时间点
       */
     StartMode?: string;
     /**
-      * 已发布上线的作业配置版本
+      * 当前作业的某个版本
       */
     JobConfigVersion?: number;
 }
@@ -728,11 +728,11 @@ export interface DescribeSystemResourcesResponse {
     /**
       * 资源详细信息集合
       */
-    ResourceSet?: Array<SystemResourceItem>;
+    ResourceSet: Array<SystemResourceItem>;
     /**
       * 总数量
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -781,7 +781,7 @@ export interface DescribeJobsRequest {
       */
     JobIds?: Array<string>;
     /**
-      * 过滤条件，详见作业过滤条件表。每次请求的Filters的上限为10，Filter.Values的上限为5。参数不支持同时指定JobIds和Filters。
+      * 过滤条件，支持的 Filter.Name 为：作业名 Name、作业状态 Status、所属集群 ClusterId。每次请求的 Filters 个数的上限为 3，Filter.Values 的个数上限为 5。参数不支持同时指定 JobIds 和 Filters。
       */
     Filters?: Array<Filter>;
     /**
@@ -1014,11 +1014,11 @@ export interface DescribeResourceConfigsRequest {
       */
     ResourceId?: string;
     /**
-      * 偏移量
+      * 偏移量，仅当设置 Limit 时该参数有效
       */
     Offset?: number;
     /**
-      * 返回值大小
+      * 返回值大小，不填则返回全量数据
       */
     Limit?: number;
     /**

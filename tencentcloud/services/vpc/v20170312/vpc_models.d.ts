@@ -1054,6 +1054,10 @@ export interface CreateDirectConnectGatewayRequest {
       * 云联网路由发布模式，可选值：`standard`（标准模式）、`exquisite`（精细模式）。只有云联网类型专线网关才支持`ModeType`。
       */
     ModeType?: string;
+    /**
+      * 专线网关可用区
+      */
+    Zone?: string;
 }
 /**
  * CreateVpcEndPoint请求参数结构体
@@ -5308,6 +5312,16 @@ NAT类型支持网络地址转换配置，类型确定后不能修改；一个�
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ModeType: string;
+    /**
+      * 是否为localZone专线网关。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    LocalZone: boolean;
+    /**
+      * 专线网关所在可用区
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Zone: string;
 }
 /**
  * DescribeProductQuota返回参数结构体
@@ -8223,7 +8237,7 @@ export interface CreateDirectConnectGatewayResponse {
     /**
       * 专线网关对象。
       */
-    DirectConnectGateway?: DirectConnectGateway;
+    DirectConnectGateway: DirectConnectGateway;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -274,6 +274,35 @@ export interface InquirePriceRenewInstancesRequest {
     InstanceChargePrepaid?: InstanceChargePrepaid;
 }
 /**
+ * 套餐折扣详情（仅用于控制台调用询价相关接口返回）。
+ */
+export interface DiscountDetail {
+    /**
+      * 计费时长。
+      */
+    TimeSpan: number;
+    /**
+      * 计费单元。
+      */
+    TimeUnit: string;
+    /**
+      * 总价。
+      */
+    TotalCost: number;
+    /**
+      * 折后总价。
+      */
+    RealTotalCost: number;
+    /**
+      * 折扣。
+      */
+    Discount: number;
+    /**
+      * 具体折扣详情。
+      */
+    PolicyDetail: PolicyDetail;
+}
+/**
  * DescribeRegions返回参数结构体
  */
 export interface DescribeRegionsResponse {
@@ -725,6 +754,23 @@ export interface ModifySnapshotAttributeRequest {
       * 新的快照名称，最长为 60 个字符。
       */
     SnapshotName?: string;
+}
+/**
+ * DescribeBundleDiscount返回参数结构体
+ */
+export interface DescribeBundleDiscountResponse {
+    /**
+      * 币种：CNY人民币，USD 美元。
+      */
+    Currency: string;
+    /**
+      * 折扣梯度详情，每个梯度包含的信息有：时长，折扣数，总价，折扣价，折扣详情（用户折扣、官网折扣、最终折扣）。
+      */
+    DiscountDetail: Array<DiscountDetail>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DeleteSnapshots返回参数结构体
@@ -1651,6 +1697,23 @@ export interface CreateBlueprintResponse {
     RequestId?: string;
 }
 /**
+ * 折扣详情信息。
+ */
+export interface PolicyDetail {
+    /**
+      * 用户折扣。
+      */
+    UserDiscount: number;
+    /**
+      * 公共折扣。
+      */
+    CommonDiscount: number;
+    /**
+      * 最终折扣。
+      */
+    FinalDiscount: number;
+}
+/**
  * DescribeResetInstanceBlueprints请求参数结构体
  */
 export interface DescribeResetInstanceBlueprintsRequest {
@@ -1748,6 +1811,15 @@ export interface DescribeInstanceLoginKeyPairAttributeRequest {
       * 实例ID。
       */
     InstanceId: string;
+}
+/**
+ * DescribeBundleDiscount请求参数结构体
+ */
+export interface DescribeBundleDiscountRequest {
+    /**
+      * 套餐 ID。
+      */
+    BundleId: string;
 }
 /**
  * 价格信息

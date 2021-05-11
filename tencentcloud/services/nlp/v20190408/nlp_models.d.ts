@@ -8,6 +8,7 @@ export interface LexicalAnalysisResponse {
 <li>LOC：表示地名，如北京、华山</li>
 <li>ORG：表示机构团体名，如腾讯、最高人民法院、人大附中</li>
 <li>PRODUCTION：表示产品名，如QQ、微信、iPhone</li>
+注意：此字段可能返回 null，表示取不到有效值。
       */
     NerTokens?: Array<NerToken>;
     /**
@@ -56,8 +57,9 @@ export interface WordSimilarityRequest {
 export interface SearchWordItemsResponse {
     /**
       * 词条检索结果集合。
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Results?: Array<SearchResult>;
+    Results: Array<SearchResult>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -68,21 +70,25 @@ export interface SearchWordItemsResponse {
  */
 export interface DpToken {
     /**
-      * 当前词父节点的序号
-      */
-    HeadId?: number;
-    /**
-      * 基础词的序号
-      */
-    Id?: number;
-    /**
       * 句法依存关系的类型
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Relation?: string;
     /**
+      * 当前词父节点的序号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    HeadId?: number;
+    /**
       * 基础词
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Word?: string;
+    /**
+      * 基础词的序号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Id?: number;
 }
 /**
  * TextSimilarity返回参数结构体
@@ -91,7 +97,7 @@ export interface TextSimilarityResponse {
     /**
       * 每个目标句子与源句子的相似度分值，按照分值降序排列
       */
-    Similarity?: Array<Similarity>;
+    Similarity: Array<Similarity>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -111,13 +117,13 @@ export interface WordEmbeddingRequest {
  */
 export interface ChatBotResponse {
     /**
-      * 对于当前输出回复的自信度
-      */
-    Confidence?: number;
-    /**
       * 闲聊回复
       */
     Reply?: string;
+    /**
+      * 对于当前输出回复的自信度
+      */
+    Confidence?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -129,6 +135,7 @@ export interface ChatBotResponse {
 export interface KeywordsExtractionResponse {
     /**
       * 关键词提取结果
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Keywords?: Array<Keyword>;
     /**
@@ -159,13 +166,13 @@ export interface ChatBotRequest {
       */
     Query: string;
     /**
-      * 0: 通用闲聊, 1:儿童闲聊, 默认是通用闲聊
-      */
-    Flag?: number;
-    /**
       * 服务的id,  主要用于儿童闲聊接口，比如手Q的openid
       */
     OpenId?: string;
+    /**
+      * 0: 通用闲聊, 1:儿童闲聊, 默认是通用闲聊
+      */
+    Flag?: number;
 }
 /**
  * DescribeRelation请求参数结构体
@@ -198,25 +205,28 @@ export interface KeywordsExtractionRequest {
  */
 export interface DictInfo {
     /**
-      * 自定义词库ID。
-      */
-    Id: string;
-    /**
       * 自定义词库名称。
       */
     Name: string;
     /**
-      * 自定义词库创建时间，形式为:yyyy-mm-dd hh:mm:ss。
+      * 自定义词库ID。
       */
-    CreateTime?: string;
+    Id: string;
     /**
       * 自定义词库描述信息。
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Description?: string;
     /**
       * 自定义词库修改时间，形式为:yyyy-mm-dd hh:mm:ss。
+注意：此字段可能返回 null，表示取不到有效值。
       */
     UpdateTime?: string;
+    /**
+      * 自定义词库创建时间，形式为:yyyy-mm-dd hh:mm:ss。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreateTime?: string;
 }
 /**
  * DescribeEntity返回参数结构体
@@ -245,6 +255,7 @@ export interface WordItem {
     CreateTime?: string;
     /**
       * 词条的词性。
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Pos?: string;
 }
@@ -257,17 +268,49 @@ export interface ClassificationResult {
       */
     FirstClassName?: string;
     /**
-      * 一级分类概率
-      */
-    FirstClassProbability?: number;
-    /**
       * 二级分类名称
       */
     SecondClassName?: string;
     /**
+      * 一级分类概率
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FirstClassProbability?: number;
+    /**
       * 二级分类概率
+注意：此字段可能返回 null，表示取不到有效值。
       */
     SecondClassProbability?: number;
+    /**
+      * 三级分类名称，仅有当新闻领域五分类可能出现，详情见文本分类文档
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ThirdClassName?: string;
+    /**
+      * 三级分类概率，仅有当新闻领域五分类可能出现，详情见文本分类文档
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    ThirdClassProbability?: number;
+    /**
+      * 四级分类名称，仅有当新闻领域五分类可能出现，详情见文本分类文档
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FourthClassName?: string;
+    /**
+      * 四级分类概率，仅有当新闻领域五分类可能出现，详情见文本分类文档
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FourthClassProbability?: number;
+    /**
+      * 五级分类名称，仅有当新闻领域五分类可能出现，详情见文本分类文档
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FifthClassName?: string;
+    /**
+      * 五级分类概率，仅有当新闻领域五分类可能出现，详情见文本分类文档
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FifthClassProbability?: number;
 }
 /**
  * DescribeEntity请求参数结构体
@@ -331,19 +374,21 @@ export interface DescribeRelationResponse {
  */
 export interface SearchResult {
     /**
+      * 被搜索的词条文本。
+      */
+    Text: string;
+    /**
       * 0表示词条不存在，1表示存在。
       */
     IsExist: number;
     /**
       * 匹配到的词条文本。
+注意：此字段可能返回 null，表示取不到有效值。
       */
     MatchText: string;
     /**
-      * 被搜索的词条文本。
-      */
-    Text: string;
-    /**
       * 词条的词性。
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Pos?: string;
 }
@@ -352,20 +397,20 @@ export interface SearchResult {
  */
 export interface CreateWordItemsRequest {
     /**
-      * 待添加的词条集合。
-      */
-    WordItems: Array<WordItem>;
-    /**
       * 自定义词库ID。
       */
     DictId: string;
+    /**
+      * 待添加的词条集合。
+      */
+    WordItems: Array<WordItem>;
 }
 /**
  * TextCorrection请求参数结构体
  */
 export interface TextCorrectionRequest {
     /**
-      * 待纠错的文本（仅支持UTF-8格式，不超过2000字）
+      * 待纠错的文本（仅支持UTF-8格式，不超过2000字符）
       */
     Text: string;
 }
@@ -383,13 +428,13 @@ export interface DeleteWordItemsResponse {
  */
 export interface SentenceEmbeddingResponse {
     /**
-      * 句向量的维度
-      */
-    Dimension?: number;
-    /**
       * 句向量数组
       */
     Vector?: Array<number>;
+    /**
+      * 句向量的维度
+      */
+    Dimension?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -419,7 +464,7 @@ export interface TextClassificationResponse {
     /**
       * 文本分类结果（文本分类映射表请参见附录）
       */
-    Classes?: Array<ClassificationResult>;
+    Classes: Array<ClassificationResult>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -443,13 +488,13 @@ export interface DescribeWordItemsRequest {
       */
     DictId: string;
     /**
-      * 每页数据量，范围为1~100，默认为10。
-      */
-    Limit?: number;
-    /**
       * 分页偏移量，从0开始，默认为0。
       */
     Offset?: number;
+    /**
+      * 每页数据量，范围为1~100，默认为10。
+      */
+    Limit?: number;
     /**
       * 待检索的词条文本，支持模糊匹配。
       */
@@ -460,13 +505,13 @@ export interface DescribeWordItemsRequest {
  */
 export interface SearchWordItemsRequest {
     /**
-      * 待检索的词条集合。
-      */
-    WordItems: Array<WordItem>;
-    /**
       * 自定义词库ID。
       */
     DictId: string;
+    /**
+      * 待检索的词条集合。
+      */
+    WordItems: Array<WordItem>;
 }
 /**
  * TextClassification请求参数结构体
@@ -478,8 +523,8 @@ export interface TextClassificationRequest {
     Text: string;
     /**
       * 领域分类体系（默认取1值）：
-1、通用领域
-2、新闻领域
+1、通用领域，二分类
+2、新闻领域，五分类。类别数据不一定全部返回，详情见类目映射表
       */
     Flag?: number;
 }
@@ -489,6 +534,7 @@ export interface TextClassificationRequest {
 export interface CreateDictResponse {
     /**
       * 创建的自定义词库ID。
+注意：此字段可能返回 null，表示取不到有效值。
       */
     DictId?: string;
     /**
@@ -505,8 +551,7 @@ export interface TextSimilarityRequest {
       */
     SrcText: string;
     /**
-      * 需要与源句子计算相似度的一个或多个目标句子（仅支持UTF-8格式，目标句子的数量不超过100个，每个句子不超过500字符）
-注意：每成功计算1个目标句子与源句子的相似度算1次调用
+      * 目标句子
       */
     TargetText: Array<string>;
 }
@@ -528,13 +573,13 @@ export interface AutoSummarizationResponse {
  */
 export interface WordEmbeddingResponse {
     /**
-      * 词向量的维度
-      */
-    Dimension?: number;
-    /**
       * 词向量数组
       */
     Vector?: Array<number>;
+    /**
+      * 词向量的维度
+      */
+    Dimension?: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -558,13 +603,14 @@ export interface DescribeTripleResponse {
  */
 export interface DescribeWordItemsResponse {
     /**
-      * 词条信息列表。
-      */
-    WordItems?: Array<WordItem>;
-    /**
       * 词条记录总条数。
       */
     TotalCount?: number;
+    /**
+      * 词条信息列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    WordItems?: Array<WordItem>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -601,38 +647,39 @@ export interface DescribeDictRequest {
  */
 export interface PosToken {
     /**
-      * 起始位置
+      * 基础词
       */
-    BeginOffset?: number;
+    Word: string;
     /**
       * 长度
       */
-    Length?: number;
+    Length: number;
+    /**
+      * 起始位置
+      */
+    BeginOffset: number;
     /**
       * 词性
       */
-    Pos?: string;
-    /**
-      * 基础词
-      */
-    Word?: string;
+    Pos: string;
 }
 /**
  * SentimentAnalysis返回参数结构体
  */
 export interface SentimentAnalysisResponse {
     /**
-      * 负面情感概率
-      */
-    Negative?: number;
-    /**
-      * 中性情感概率，当输入参数Mode取值为3class时有效，否则值为空
-      */
-    Neutral?: number;
-    /**
       * 正面情感概率
       */
     Positive?: number;
+    /**
+      * 中性情感概率，当输入参数Mode取值为3class时有效，否则值为空
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Neutral?: number;
+    /**
+      * 负面情感概率
+      */
+    Negative?: number;
     /**
       * 情感分类结果：
 1、positive，表示正面情感
@@ -650,13 +697,13 @@ export interface SentimentAnalysisResponse {
  */
 export interface DeleteWordItemsRequest {
     /**
-      * 待删除的词条集合。
-      */
-    WordItems: Array<WordItem>;
-    /**
       * 自定义词库ID。
       */
     DictId: string;
+    /**
+      * 待删除的词条集合。
+      */
+    WordItems: Array<WordItem>;
 }
 /**
  * DescribeDict返回参数结构体
@@ -664,6 +711,7 @@ export interface DeleteWordItemsRequest {
 export interface DescribeDictResponse {
     /**
       * 查询到的词库信息列表。
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Dicts?: Array<DictInfo>;
     /**
@@ -677,6 +725,7 @@ export interface DescribeDictResponse {
 export interface TextCorrectionResponse {
     /**
       * 纠错详情
+注意：此字段可能返回 null，表示取不到有效值。
       */
     CCITokens?: Array<CCIToken>;
     /**
@@ -693,13 +742,14 @@ export interface TextCorrectionResponse {
  */
 export interface DescribeDictsResponse {
     /**
-      * 自定义词库信息列表。
-      */
-    Dicts?: Array<DictInfo>;
-    /**
       * 记录总条数。
       */
     TotalCount?: number;
+    /**
+      * 自定义词库信息列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Dicts?: Array<DictInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -728,21 +778,21 @@ export interface DeleteDictRequest {
  */
 export interface NerToken {
     /**
-      * 起始位置
+      * 基础词
       */
-    BeginOffset?: number;
+    Word: string;
     /**
       * 长度
       */
-    Length?: number;
+    Length: number;
+    /**
+      * 起始位置
+      */
+    BeginOffset: number;
     /**
       * 命名实体类型
       */
-    Type?: string;
-    /**
-      * 基础词
-      */
-    Word?: string;
+    Type: string;
 }
 /**
  * SimilarWords返回参数结构体
@@ -762,17 +812,20 @@ export interface SimilarWordsResponse {
  */
 export interface EntityRelationObject {
     /**
+      * object对应popular值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Popular?: Array<number>;
+    /**
       * object对应id
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Id?: Array<string>;
     /**
       * object对应name
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Name?: Array<string>;
-    /**
-      * object对应popular值
-      */
-    Popular?: Array<number>;
 }
 /**
  * DependencyParsing返回参数结构体
@@ -807,18 +860,22 @@ export interface DependencyParsingResponse {
  */
 export interface Similarity {
     /**
-      * 相似度分数
-      */
-    Score: number;
-    /**
       * 目标文本句子
       */
     Text: string;
+    /**
+      * 相似度分数
+      */
+    Score: number;
 }
 /**
  * 文本纠错结果
  */
 export interface CCIToken {
+    /**
+      * 错别字内容
+      */
+    Word?: string;
     /**
       * 错别字的起始位置，从0开始
       */
@@ -827,10 +884,6 @@ export interface CCIToken {
       * 错别字纠错结果
       */
     CorrectWord?: string;
-    /**
-      * 错别字内容
-      */
-    Word?: string;
 }
 /**
  * LexicalAnalysis请求参数结构体
@@ -888,6 +941,10 @@ export interface SentimentAnalysisRequest {
  */
 export interface EntityRelationSubject {
     /**
+      * Subject对应popular
+      */
+    Popular?: Array<number>;
+    /**
       * Subject对应id
       */
     Id?: Array<string>;
@@ -895,10 +952,6 @@ export interface EntityRelationSubject {
       * Subject对应name
       */
     Name?: Array<string>;
-    /**
-      * Subject对应popular
-      */
-    Popular?: Array<number>;
 }
 /**
  * 返回的实体关系查询结果详细内容
@@ -906,16 +959,19 @@ export interface EntityRelationSubject {
 export interface EntityRelationContent {
     /**
       * 实体关系查询返回关系的object
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Object?: Array<EntityRelationObject>;
     /**
-      * 实体关系查询返回关系的subject
-      */
-    Subject?: Array<EntityRelationSubject>;
-    /**
       * 实体关系查询返回的关系名称
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Relation?: string;
+    /**
+      * 实体关系查询返回关系的subject
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Subject?: Array<EntityRelationSubject>;
 }
 /**
  * WordSimilarity返回参数结构体
@@ -935,21 +991,25 @@ export interface WordSimilarityResponse {
  */
 export interface TripleContent {
     /**
-      * 实体id
+      * 实体流行度
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Id?: string;
+    Popular?: number;
     /**
       * 实体名称
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Name?: string;
     /**
       * 实体order
+注意：此字段可能返回 null，表示取不到有效值。
       */
     Order?: number;
     /**
-      * 实体流行度
+      * 实体id
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Popular?: number;
+    Id?: string;
 }
 /**
  * CreateDict请求参数结构体

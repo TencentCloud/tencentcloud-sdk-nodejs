@@ -78,6 +78,16 @@ it("tcb.v20180608.DescribeSmsQuotas", async function () {
     }
 })
 
+it("tcb.v20180608.CreateWxCloudBaseRunServerDBCluster", async function () {
+    try {
+       const data = await client.CreateWxCloudBaseRunServerDBCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.DescribeEnvs", async function () {
     try {
        const data = await client.DescribeEnvs({})

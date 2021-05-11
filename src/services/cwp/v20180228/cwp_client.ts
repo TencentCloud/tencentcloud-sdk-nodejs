@@ -87,7 +87,7 @@ import {
   DescribeLoginWhiteListRequest,
   ReverseShell,
   UntrustMaliciousRequestRequest,
-  ExportNonlocalLoginPlacesRequest,
+  ExportBruteAttacksResponse,
   ExportVulDetectionReportResponse,
   DescribeComponentInfoResponse,
   DescribeAccountStatisticsResponse,
@@ -99,7 +99,7 @@ import {
   DescribeProVersionInfoRequest,
   CreateProcessTaskRequest,
   DeleteMaliciousRequestsResponse,
-  ExportBruteAttacksResponse,
+  DescribeESHitsResponse,
   EditReverseShellRuleResponse,
   OsName,
   ExportBruteAttacksRequest,
@@ -167,6 +167,7 @@ import {
   DescribeAttackLogInfoRequest,
   DescribeWeeklyReportMalwaresRequest,
   DescribeBruteAttacksResponse,
+  ModifyProVersionRenewFlagResponse,
   RegionInfo,
   ExportNonlocalLoginPlacesResponse,
   DescribeComponentStatisticsRequest,
@@ -244,7 +245,7 @@ import {
   DescribeMachinesResponse,
   CreateUsualLoginPlacesResponse,
   DescribePrivilegeRulesResponse,
-  ModifyProVersionRenewFlagResponse,
+  ExportNonlocalLoginPlacesRequest,
   Machine,
   ExportVulDetectionReportRequest,
   Malware,
@@ -254,8 +255,9 @@ import {
   PrivilegeRule,
   HistoryAccount,
   ModifyProVersionRenewFlagRequest,
-  TrustMaliciousRequestResponse,
+  DescribeESHitsRequest,
   DescribeUsualLoginPlacesRequest,
+  TrustMaliciousRequestResponse,
   Component,
   DescribeVulsRequest,
   DescribeAgentVulsResponse,
@@ -1108,6 +1110,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeProVersionInfoResponse) => void
   ): Promise<DescribeProVersionInfoResponse> {
     return this.request("DescribeProVersionInfo", req, cb)
+  }
+
+  /**
+   * 获取ES查询文档列表
+   */
+  async DescribeESHits(
+    req: DescribeESHitsRequest,
+    cb?: (error: string, rep: DescribeESHitsResponse) => void
+  ): Promise<DescribeESHitsResponse> {
+    return this.request("DescribeESHits", req, cb)
   }
 
   /**

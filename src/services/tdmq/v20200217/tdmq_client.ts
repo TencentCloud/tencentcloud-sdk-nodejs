@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DeleteTopicsResponse,
+  ModifyEnvironmentAttributesResponse,
   DescribeBindClustersResponse,
   SubscriptionTopic,
   ModifyEnvironmentAttributesRequest,
@@ -66,7 +67,7 @@ import {
   Topic,
   Consumer,
   DescribeBindVpcsResponse,
-  ModifyEnvironmentAttributesResponse,
+  Filter,
   DeleteSubscriptionsRequest,
   CreateEnvironmentResponse,
   ResetMsgSubOffsetByTimestampRequest,

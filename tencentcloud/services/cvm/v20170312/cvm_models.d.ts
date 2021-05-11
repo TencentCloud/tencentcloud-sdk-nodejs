@@ -167,37 +167,29 @@ export interface ModifyInstancesChargeTypeResponse {
     RequestId?: string;
 }
 /**
- * CreateDisasterRecoverGroup返回参数结构体
+ * 配额详情
  */
-export interface CreateDisasterRecoverGroupResponse {
+export interface AccountQuota {
     /**
-      * 分散置放群组ID列表。
+      * 后付费配额列表
       */
-    DisasterRecoverGroupId?: string;
+    PostPaidQuotaSet: Array<PostPaidQuota>;
     /**
-      * 分散置放群组类型，取值范围：<br><li>HOST：物理机<br><li>SW：交换机<br><li>RACK：机架
+      * 预付费配额列表
       */
-    Type?: string;
+    PrePaidQuotaSet: Array<PrePaidQuota>;
     /**
-      * 分散置放群组名称，长度1-60个字符，支持中、英文。
+      * spot配额列表
       */
-    Name?: string;
+    SpotPaidQuotaSet: Array<SpotPaidQuota>;
     /**
-      * 置放群组内可容纳的云服务器数量。
+      * 镜像配额列表
       */
-    CvmQuotaTotal?: number;
+    ImageQuotaSet: Array<ImageQuota>;
     /**
-      * 置放群组内已有的云服务器数量。
+      * 置放群组配额列表
       */
-    CurrentNum?: number;
-    /**
-      * 置放群组创建时间。
-      */
-    CreateTime?: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    DisasterRecoverGroupQuotaSet: Array<DisasterRecoverGroupQuota>;
 }
 /**
  * InquiryPriceResetInstancesInternetMaxBandwidth返回参数结构体
@@ -243,6 +235,27 @@ export interface AssociateSecurityGroupsRequest {
     InstanceIds: Array<string>;
 }
 /**
+ * 后付费实例配额
+ */
+export interface PostPaidQuota {
+    /**
+      * 累计已使用配额
+      */
+    UsedQuota: number;
+    /**
+      * 剩余配额
+      */
+    RemainingQuota: number;
+    /**
+      * 总配额
+      */
+    TotalQuota: number;
+    /**
+      * 可用区
+      */
+    Zone: string;
+}
+/**
  * ResetInstancesType请求参数结构体
  */
 export interface ResetInstancesTypeRequest {
@@ -285,110 +298,13 @@ export interface InquiryPriceResetInstanceRequest {
     EnhancedService?: EnhancedService;
 }
 /**
- * RunInstances请求参数结构体
+ * ModifyImageSharePermission返回参数结构体
  */
-export interface RunInstancesRequest {
+export interface ModifyImageSharePermissionResponse {
     /**
-      * 实例[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br><li>CDHPAID：独享子机（基于专用宿主机创建，宿主机部分的资源不收费）<br><li>SPOTPAID：竞价付费<br>默认值：POSTPAID_BY_HOUR。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    InstanceChargeType?: string;
-    /**
-      * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
-      */
-    InstanceChargePrepaid?: InstanceChargePrepaid;
-    /**
-      * 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目，所属宿主机（在专用宿主机上创建子机时指定）等属性。
-      */
-    Placement?: Placement;
-    /**
-      * 实例机型。不同实例机型指定了不同的资源规格。
-<br><li>对于付费模式为PREPAID或POSTPAID\_BY\_HOUR的实例创建，具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。若不指定该参数，则系统将根据当前地域的资源售卖情况动态指定默认机型。<br><li>对于付费模式为CDHPAID的实例创建，该参数以"CDH_"为前缀，根据CPU和内存配置生成，具体形式为：CDH_XCXG，例如对于创建CPU为1核，内存为1G大小的专用宿主机的实例，该参数应该为CDH_1C1G。
-      */
-    InstanceType?: string;
-    /**
-      * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。镜像类型分为四种：<br/><li>公共镜像</li><li>自定义镜像</li><li>共享镜像</li><li>服务市场镜像</li><br/>可通过以下方式获取可用的镜像ID：<br/><li>`公共镜像`、`自定义镜像`、`共享镜像`的镜像ID可通过登录[控制台](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE)查询；`服务镜像市场`的镜像ID可通过[云市场](https://market.cloud.tencent.com/list)查询。</li><li>通过调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) ，传入InstanceType获取当前机型支持的镜像列表，取返回信息中的`ImageId`字段。</li>
-      */
-    ImageId?: string;
-    /**
-      * 实例系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。
-      */
-    SystemDisk?: SystemDisk;
-    /**
-      * 实例数据盘配置信息。若不指定该参数，则默认不购买数据盘。支持购买的时候指定21块数据盘，其中最多包含1块LOCAL_BASIC数据盘或者LOCAL_SSD数据盘，最多包含20块CLOUD_BASIC数据盘、CLOUD_PREMIUM数据盘或者CLOUD_SSD数据盘。
-      */
-    DataDisks?: Array<DataDisk>;
-    /**
-      * 私有网络相关信息配置。通过该参数可以指定私有网络的ID，子网ID等信息。若不指定该参数，则默认使用基础网络。若在此参数中指定了私有网络IP，即表示每个实例的主网卡IP；同时，InstanceCount参数必须与私有网络IP的个数一致且不能大于20。
-      */
-    VirtualPrivateCloud?: VirtualPrivateCloud;
-    /**
-      * 公网带宽相关信息设置。若不指定该参数，则默认公网带宽为0Mbps。
-      */
-    InternetAccessible?: InternetAccessible;
-    /**
-      * 购买实例数量。包年包月实例取值范围：[1，300]，按量计费实例取值范围：[1，100]。默认取值：1。指定购买实例的数量不能超过用户所能购买的剩余配额数量，具体配额相关限制详见[CVM实例购买限制](https://cloud.tencent.com/document/product/213/2664)。
-      */
-    InstanceCount?: number;
-    /**
-      * 实例显示名称。<br><li>不指定实例显示名称则默认显示‘未命名’。</li><li>购买多台实例，如果指定模式串`{R:x}`，表示生成数字`[x, x+n-1]`，其中`n`表示购买实例的数量，例如`server_{R:3}`，购买1台时，实例显示名称为`server_3`；购买2台时，实例显示名称分别为`server_3`，`server_4`。支持指定多个模式串`{R:x}`。</li><li>购买多台实例，如果不指定模式串，则在实例显示名称添加后缀`1、2...n`，其中`n`表示购买实例的数量，例如`server_`，购买2台时，实例显示名称分别为`server_1`，`server_2`。</li><li>最多支持60个字符（包含模式串）。
-      */
-    InstanceName?: string;
-    /**
-      * 实例登录设置。通过该参数可以设置实例的登录方式密码、密钥或保持镜像的原始登录设置。默认情况下会随机生成密码，并以站内信方式知会到用户。
-      */
-    LoginSettings?: LoginSettings;
-    /**
-      * 实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。
-      */
-    SecurityGroupIds?: Array<string>;
-    /**
-      * 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。若不指定该参数，则默认公共镜像开启云监控、云安全服务；自定义镜像与镜像市场镜像默认不开启云监控，云安全服务，而使用镜像里保留的服务。
-      */
-    EnhancedService?: EnhancedService;
-    /**
-      * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
-      */
-    ClientToken?: string;
-    /**
-      * 云服务器的主机名。<br><li>点号（.）和短横线（-）不能作为 HostName 的首尾字符，不能连续使用。<br><li>Windows 实例：名字符长度为[2, 15]，允许字母（不限制大小写）、数字和短横线（-）组成，不支持点号（.），不能全是数字。<br><li>其他类型（Linux 等）实例：字符长度为[2, 60]，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。
-      */
-    HostName?: string;
-    /**
-      * 定时任务。通过该参数可以为实例指定定时任务，目前仅支持定时销毁。
-      */
-    ActionTimer?: ActionTimer;
-    /**
-      * 置放群组id，仅支持指定一个。
-      */
-    DisasterRecoverGroupIds?: Array<string>;
-    /**
-      * 标签描述列表。通过指定该参数可以同时绑定标签到相应的云服务器、云硬盘实例。
-      */
-    TagSpecification?: Array<TagSpecification>;
-    /**
-      * 实例的市场相关选项，如竞价实例相关参数，若指定实例的付费模式为竞价付费则该参数必传。
-      */
-    InstanceMarketOptions?: InstanceMarketOptionsRequest;
-    /**
-      * 提供给实例使用的用户数据，需要以 base64 方式编码，支持的最大数据大小为 16KB。关于获取此参数的详细介绍，请参阅[Windows](https://cloud.tencent.com/document/product/213/17526)和[Linux](https://cloud.tencent.com/document/product/213/17525)启动时运行命令。
-      */
-    UserData?: string;
-    /**
-      * 是否只预检此次请求。
-true：发送检查请求，不会创建实例。检查项包括是否填写了必需参数，请求格式，业务限制和云服务器库存。
-如果检查不通过，则返回对应错误码；
-如果检查通过，则返回RequestId.
-false（默认）：发送正常请求，通过检查后直接创建实例
-      */
-    DryRun?: boolean;
-    /**
-      * CAM角色名称。可通过[`DescribeRoleList`](https://cloud.tencent.com/document/product/598/13887)接口返回值中的`roleName`获取。
-      */
-    CamRoleName?: string;
-    /**
-      * 高性能计算集群ID。若创建的实例为高性能计算实例，需指定实例放置的集群，否则不可指定。
-      */
-    HpcClusterId?: string;
+    RequestId?: string;
 }
 /**
  * DeleteImages请求参数结构体
@@ -755,17 +671,17 @@ export interface ZoneInfo {
     ZoneState: string;
 }
 /**
- * InquiryPriceModifyInstancesChargeType返回参数结构体
+ * DescribeInstanceTypeConfigs请求参数结构体
  */
-export interface InquiryPriceModifyInstancesChargeTypeResponse {
+export interface DescribeInstanceTypeConfigsRequest {
     /**
-      * 该参数表示对应配置实例转换计费模式的价格。
+      * <li><strong>zone</strong></li>
+<p style="padding-left: 30px;">按照【<strong>可用区</strong>】进行过滤。可用区形如：ap-guangzhou-1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p>
+<li><strong>instance-family</strong></li>
+<p style="padding-left: 30px;">按照【<strong>实例机型系列</strong>】进行过滤。实例机型系列形如：S1、I1、M1等。</p><p style="padding-left: 30px;">类型：Integer</p><p style="padding-left: 30px;">必选：否</p>
+每次请求的`Filters`的上限为10，`Filter.Values`的上限为1。
       */
-    Price?: Price;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    Filters?: Array<Filter>;
 }
 /**
  * DescribeKeyPairs返回参数结构体
@@ -977,13 +893,29 @@ export interface ReservedInstancePrice {
     DiscountUsagePrice: number;
 }
 /**
- * ResetInstancesInternetMaxBandwidth返回参数结构体
+ * 置放群组配置数据
  */
-export interface ResetInstancesInternetMaxBandwidthResponse {
+export interface DisasterRecoverGroupQuota {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 可创建置放群组数量的上限。
       */
-    RequestId?: string;
+    GroupQuota: number;
+    /**
+      * 当前用户已经创建的置放群组数量。
+      */
+    CurrentNum: number;
+    /**
+      * 物理机类型容灾组内实例的配额数。
+      */
+    CvmInHostGroupQuota: number;
+    /**
+      * 交换机类型容灾组内实例的配额数。
+      */
+    CvmInSwitchGroupQuota: number;
+    /**
+      * 机架类型容灾组内实例的配额数。
+      */
+    CvmInRackGroupQuota: number;
 }
 /**
  * ModifyInstancesAttribute返回参数结构体
@@ -995,9 +927,13 @@ export interface ModifyInstancesAttributeResponse {
     RequestId?: string;
 }
 /**
- * ModifyImageSharePermission返回参数结构体
+ * InquiryPriceModifyInstancesChargeType返回参数结构体
  */
-export interface ModifyImageSharePermissionResponse {
+export interface InquiryPriceModifyInstancesChargeTypeResponse {
+    /**
+      * 该参数表示对应配置实例转换计费模式的价格。
+      */
+    Price?: Price;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1209,6 +1145,36 @@ export interface DisassociateInstancesKeyPairsRequest {
  * DescribeImageQuota请求参数结构体
  */
 export declare type DescribeImageQuotaRequest = null;
+/**
+ * 竞价实例配额
+ */
+export interface SpotPaidQuota {
+    /**
+      * 已使用配额，单位：vCPU核心数
+      */
+    UsedQuota: number;
+    /**
+      * 剩余配额，单位：vCPU核心数
+      */
+    RemainingQuota: number;
+    /**
+      * 总配额，单位：vCPU核心数
+      */
+    TotalQuota: number;
+    /**
+      * 可用区
+      */
+    Zone: string;
+}
+/**
+ * ResetInstancesInternetMaxBandwidth返回参数结构体
+ */
+export interface ResetInstancesInternetMaxBandwidthResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
 /**
  * DescribeInstanceFamilyConfigs返回参数结构体
  */
@@ -1557,6 +1523,31 @@ export interface InquirePricePurchaseReservedInstancesOfferingRequest {
       * 预留实例显示名称。<br><li>不指定实例显示名称则默认显示‘未命名’。</li><li>最多支持60个字符（包含模式串）。</li>
       */
     ReservedInstanceName?: string;
+}
+/**
+ * 预付费实例配额
+ */
+export interface PrePaidQuota {
+    /**
+      * 当月已使用配额
+      */
+    UsedQuota: number;
+    /**
+      * 单次购买最大数量
+      */
+    OnceQuota: number;
+    /**
+      * 剩余配额
+      */
+    RemainingQuota: number;
+    /**
+      * 总配额
+      */
+    TotalQuota: number;
+    /**
+      * 可用区
+      */
+    Zone: string;
 }
 /**
  * 描述了数据盘的信息
@@ -2072,6 +2063,19 @@ export interface ReservedInstanceFamilyItem {
     InstanceTypes: Array<ReservedInstanceTypeItem>;
 }
 /**
+ * 镜像配额
+ */
+export interface ImageQuota {
+    /**
+      * 已使用配额
+      */
+    UsedQuota: number;
+    /**
+      * 总配额
+      */
+    TotalQuota: number;
+}
+/**
  * DescribeDisasterRecoverGroups返回参数结构体
  */
 export interface DescribeDisasterRecoverGroupsResponse {
@@ -2364,17 +2368,134 @@ export interface InquiryPriceResetInstanceResponse {
     RequestId?: string;
 }
 /**
- * DescribeInstanceTypeConfigs请求参数结构体
+ * RunInstances请求参数结构体
  */
-export interface DescribeInstanceTypeConfigsRequest {
+export interface RunInstancesRequest {
     /**
-      * <li><strong>zone</strong></li>
-<p style="padding-left: 30px;">按照【<strong>可用区</strong>】进行过滤。可用区形如：ap-guangzhou-1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p>
-<li><strong>instance-family</strong></li>
-<p style="padding-left: 30px;">按照【<strong>实例机型系列</strong>】进行过滤。实例机型系列形如：S1、I1、M1等。</p><p style="padding-left: 30px;">类型：Integer</p><p style="padding-left: 30px;">必选：否</p>
-每次请求的`Filters`的上限为10，`Filter.Values`的上限为1。
+      * 实例[计费类型](https://cloud.tencent.com/document/product/213/2180)。<br><li>PREPAID：预付费，即包年包月<br><li>POSTPAID_BY_HOUR：按小时后付费<br><li>CDHPAID：独享子机（基于专用宿主机创建，宿主机部分的资源不收费）<br><li>SPOTPAID：竞价付费<br>默认值：POSTPAID_BY_HOUR。
       */
-    Filters?: Array<Filter>;
+    InstanceChargeType?: string;
+    /**
+      * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
+      */
+    InstanceChargePrepaid?: InstanceChargePrepaid;
+    /**
+      * 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目，所属宿主机（在专用宿主机上创建子机时指定）等属性。
+      */
+    Placement?: Placement;
+    /**
+      * 实例机型。不同实例机型指定了不同的资源规格。
+<br><li>对于付费模式为PREPAID或POSTPAID\_BY\_HOUR的实例创建，具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。若不指定该参数，则系统将根据当前地域的资源售卖情况动态指定默认机型。<br><li>对于付费模式为CDHPAID的实例创建，该参数以"CDH_"为前缀，根据CPU和内存配置生成，具体形式为：CDH_XCXG，例如对于创建CPU为1核，内存为1G大小的专用宿主机的实例，该参数应该为CDH_1C1G。
+      */
+    InstanceType?: string;
+    /**
+      * 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。镜像类型分为四种：<br/><li>公共镜像</li><li>自定义镜像</li><li>共享镜像</li><li>服务市场镜像</li><br/>可通过以下方式获取可用的镜像ID：<br/><li>`公共镜像`、`自定义镜像`、`共享镜像`的镜像ID可通过登录[控制台](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE)查询；`服务镜像市场`的镜像ID可通过[云市场](https://market.cloud.tencent.com/list)查询。</li><li>通过调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) ，传入InstanceType获取当前机型支持的镜像列表，取返回信息中的`ImageId`字段。</li>
+      */
+    ImageId?: string;
+    /**
+      * 实例系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。
+      */
+    SystemDisk?: SystemDisk;
+    /**
+      * 实例数据盘配置信息。若不指定该参数，则默认不购买数据盘。支持购买的时候指定21块数据盘，其中最多包含1块LOCAL_BASIC数据盘或者LOCAL_SSD数据盘，最多包含20块CLOUD_BASIC数据盘、CLOUD_PREMIUM数据盘或者CLOUD_SSD数据盘。
+      */
+    DataDisks?: Array<DataDisk>;
+    /**
+      * 私有网络相关信息配置。通过该参数可以指定私有网络的ID，子网ID等信息。若不指定该参数，则默认使用基础网络。若在此参数中指定了私有网络IP，即表示每个实例的主网卡IP；同时，InstanceCount参数必须与私有网络IP的个数一致且不能大于20。
+      */
+    VirtualPrivateCloud?: VirtualPrivateCloud;
+    /**
+      * 公网带宽相关信息设置。若不指定该参数，则默认公网带宽为0Mbps。
+      */
+    InternetAccessible?: InternetAccessible;
+    /**
+      * 购买实例数量。包年包月实例取值范围：[1，300]，按量计费实例取值范围：[1，100]。默认取值：1。指定购买实例的数量不能超过用户所能购买的剩余配额数量，具体配额相关限制详见[CVM实例购买限制](https://cloud.tencent.com/document/product/213/2664)。
+      */
+    InstanceCount?: number;
+    /**
+      * 实例显示名称。<br><li>不指定实例显示名称则默认显示‘未命名’。</li><li>购买多台实例，如果指定模式串`{R:x}`，表示生成数字`[x, x+n-1]`，其中`n`表示购买实例的数量，例如`server_{R:3}`，购买1台时，实例显示名称为`server_3`；购买2台时，实例显示名称分别为`server_3`，`server_4`。支持指定多个模式串`{R:x}`。</li><li>购买多台实例，如果不指定模式串，则在实例显示名称添加后缀`1、2...n`，其中`n`表示购买实例的数量，例如`server_`，购买2台时，实例显示名称分别为`server_1`，`server_2`。</li><li>最多支持60个字符（包含模式串）。
+      */
+    InstanceName?: string;
+    /**
+      * 实例登录设置。通过该参数可以设置实例的登录方式密码、密钥或保持镜像的原始登录设置。默认情况下会随机生成密码，并以站内信方式知会到用户。
+      */
+    LoginSettings?: LoginSettings;
+    /**
+      * 实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。
+      */
+    SecurityGroupIds?: Array<string>;
+    /**
+      * 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。若不指定该参数，则默认公共镜像开启云监控、云安全服务；自定义镜像与镜像市场镜像默认不开启云监控，云安全服务，而使用镜像里保留的服务。
+      */
+    EnhancedService?: EnhancedService;
+    /**
+      * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
+      */
+    ClientToken?: string;
+    /**
+      * 云服务器的主机名。<br><li>点号（.）和短横线（-）不能作为 HostName 的首尾字符，不能连续使用。<br><li>Windows 实例：名字符长度为[2, 15]，允许字母（不限制大小写）、数字和短横线（-）组成，不支持点号（.），不能全是数字。<br><li>其他类型（Linux 等）实例：字符长度为[2, 60]，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。
+      */
+    HostName?: string;
+    /**
+      * 定时任务。通过该参数可以为实例指定定时任务，目前仅支持定时销毁。
+      */
+    ActionTimer?: ActionTimer;
+    /**
+      * 置放群组id，仅支持指定一个。
+      */
+    DisasterRecoverGroupIds?: Array<string>;
+    /**
+      * 标签描述列表。通过指定该参数可以同时绑定标签到相应的云服务器、云硬盘实例。
+      */
+    TagSpecification?: Array<TagSpecification>;
+    /**
+      * 实例的市场相关选项，如竞价实例相关参数，若指定实例的付费模式为竞价付费则该参数必传。
+      */
+    InstanceMarketOptions?: InstanceMarketOptionsRequest;
+    /**
+      * 提供给实例使用的用户数据，需要以 base64 方式编码，支持的最大数据大小为 16KB。关于获取此参数的详细介绍，请参阅[Windows](https://cloud.tencent.com/document/product/213/17526)和[Linux](https://cloud.tencent.com/document/product/213/17525)启动时运行命令。
+      */
+    UserData?: string;
+    /**
+      * 是否只预检此次请求。
+true：发送检查请求，不会创建实例。检查项包括是否填写了必需参数，请求格式，业务限制和云服务器库存。
+如果检查不通过，则返回对应错误码；
+如果检查通过，则返回RequestId.
+false（默认）：发送正常请求，通过检查后直接创建实例
+      */
+    DryRun?: boolean;
+    /**
+      * CAM角色名称。可通过[`DescribeRoleList`](https://cloud.tencent.com/document/product/598/13887)接口返回值中的`roleName`获取。
+      */
+    CamRoleName?: string;
+    /**
+      * 高性能计算集群ID。若创建的实例为高性能计算实例，需指定实例放置的集群，否则不可指定。
+      */
+    HpcClusterId?: string;
+}
+/**
+ * >描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
+> * 若存在多个`Filter`时，`Filter`间的关系为逻辑与（`AND`）关系。
+> * 若同一个`Filter`存在多个`Values`，同一`Filter`下`Values`间的关系为逻辑或（`OR`）关系。
+>
+> 以[DescribeInstances](https://cloud.tencent.com/document/api/213/15728)接口的`Filter`为例。若我们需要查询可用区（`zone`）为广州一区 ***并且*** 实例计费模式（`instance-charge-type`）为包年包月 ***或者*** 按量计费的实例时，可如下实现：
+```
+Filters.0.Name=zone
+&Filters.0.Values.0=ap-guangzhou-1
+&Filters.1.Name=instance-charge-type
+&Filters.1.Values.0=PREPAID
+&Filters.1.Values.1=POSTPAID_BY_HOUR
+```
+ */
+export interface Filter {
+    /**
+      * 需要过滤的字段。
+      */
+    Name: string;
+    /**
+      * 字段的过滤值。
+      */
+    Values: Array<string>;
 }
 /**
  * InquiryPriceResetInstancesInternetMaxBandwidth请求参数结构体
@@ -2490,6 +2611,19 @@ export interface DescribeInternetChargeTypeConfigsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 配额详情概览
+ */
+export interface AccountQuotaOverview {
+    /**
+      * 地域
+      */
+    Region: string;
+    /**
+      * 配额数据
+      */
+    AccountQuota: AccountQuota;
 }
 /**
  * DescribeZoneInstanceConfigInfos请求参数结构体
@@ -2838,6 +2972,18 @@ export interface DescribeHostsRequest {
     Limit?: number;
 }
 /**
+ * DescribeAccountQuota请求参数结构体
+ */
+export interface DescribeAccountQuotaRequest {
+    /**
+      * <li><strong>zone</strong></li>
+<p style="padding-left: 30px;">按照【<strong>可用区</strong>】进行过滤。可用区形如：ap-guangzhou-1。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p>
+<li><strong>quota-type</strong></li>
+<p style="padding-left: 30px;">按照【<strong>配额类型</strong>】进行过滤。配额类型形如：PostPaidQuotaSet。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：PostPaidQuotaSet,DisasterRecoverGroupQuotaSet,PrePaidQuotaSet,SpotPaidQuotaSet</p>
+      */
+    Filters?: Array<Filter>;
+}
+/**
  * ModifyInstancesRenewFlag返回参数结构体
  */
 export interface ModifyInstancesRenewFlagResponse {
@@ -3029,6 +3175,39 @@ export interface ReservedInstancePriceItem {
  * RebootInstances返回参数结构体
  */
 export interface RebootInstancesResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * CreateDisasterRecoverGroup返回参数结构体
+ */
+export interface CreateDisasterRecoverGroupResponse {
+    /**
+      * 分散置放群组ID列表。
+      */
+    DisasterRecoverGroupId?: string;
+    /**
+      * 分散置放群组类型，取值范围：<br><li>HOST：物理机<br><li>SW：交换机<br><li>RACK：机架
+      */
+    Type?: string;
+    /**
+      * 分散置放群组名称，长度1-60个字符，支持中、英文。
+      */
+    Name?: string;
+    /**
+      * 置放群组内可容纳的云服务器数量。
+      */
+    CvmQuotaTotal?: number;
+    /**
+      * 置放群组内已有的云服务器数量。
+      */
+    CurrentNum?: number;
+    /**
+      * 置放群组创建时间。
+      */
+    CreateTime?: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3429,6 +3608,23 @@ export interface RenewInstancesResponse {
     RequestId?: string;
 }
 /**
+ * DescribeAccountQuota返回参数结构体
+ */
+export interface DescribeAccountQuotaResponse {
+    /**
+      * 用户appid
+      */
+    AppId: string;
+    /**
+      * 配额数据
+      */
+    AccountQuotaOverview: AccountQuotaOverview;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 描述了 “云监控” 服务相关的信息
  */
 export interface RunMonitorServiceEnabled {
@@ -3445,30 +3641,6 @@ export interface ResetInstanceResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
-}
-/**
- * >描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
-> * 若存在多个`Filter`时，`Filter`间的关系为逻辑与（`AND`）关系。
-> * 若同一个`Filter`存在多个`Values`，同一`Filter`下`Values`间的关系为逻辑或（`OR`）关系。
->
-> 以[DescribeInstances](https://cloud.tencent.com/document/api/213/15728)接口的`Filter`为例。若我们需要查询可用区（`zone`）为广州一区 ***并且*** 实例计费模式（`instance-charge-type`）为包年包月 ***或者*** 按量计费的实例时，可如下实现：
-```
-Filters.0.Name=zone
-&Filters.0.Values.0=ap-guangzhou-1
-&Filters.1.Name=instance-charge-type
-&Filters.1.Values.0=PREPAID
-&Filters.1.Values.1=POSTPAID_BY_HOUR
-```
- */
-export interface Filter {
-    /**
-      * 需要过滤的字段。
-      */
-    Name: string;
-    /**
-      * 字段的过滤值。
-      */
-    Values: Array<string>;
 }
 /**
  * 描述了VPC相关信息，包括子网，IP信息等

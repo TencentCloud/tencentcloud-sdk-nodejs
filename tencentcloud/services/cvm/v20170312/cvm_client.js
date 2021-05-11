@@ -360,6 +360,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AssociateSecurityGroups", req, cb);
     }
     /**
+     * 本接口(DescribeAccountQuota)用于查询用户配额详情。
+     */
+    async DescribeAccountQuota(req, cb) {
+        return this.request("DescribeAccountQuota", req, cb);
+    }
+    /**
      * 本接口 (ResetInstancesType) 用于调整实例的机型。
 * 目前只支持[系统盘类型](/document/api/213/9452#block_device)是`CLOUD_BASIC`、`CLOUD_PREMIUM`、`CLOUD_SSD`类型的实例使用该接口进行机型调整。
 * 目前不支持[CDH](https://cloud.tencent.com/document/product/416)实例使用该接口调整机型。对于包年包月实例，使用该接口会涉及扣费，请确保账户余额充足。可通过[`DescribeAccountBalance`](https://cloud.tencent.com/document/product/555/20253)接口查询账户余额。

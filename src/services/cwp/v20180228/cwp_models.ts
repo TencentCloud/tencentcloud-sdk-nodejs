@@ -1737,13 +1737,23 @@ export interface UntrustMaliciousRequestRequest {
 }
 
 /**
- * ExportNonlocalLoginPlaces请求参数结构体
+ * ExportBruteAttacks返回参数结构体
  */
-export interface ExportNonlocalLoginPlacesRequest {
+export interface ExportBruteAttacksResponse {
   /**
-   * <li>Status - int - 是否必填：否 - 状态筛选1:正常登录；2：异地登录</li>
+   * 导出文件下载链接地址。
    */
-  Filters?: Array<Filter>
+  DownloadUrl?: string
+
+  /**
+   * 导出任务ID
+   */
+  TaskId?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1934,18 +1944,13 @@ export interface DeleteMaliciousRequestsResponse {
 }
 
 /**
- * ExportBruteAttacks返回参数结构体
+ * DescribeESHits返回参数结构体
  */
-export interface ExportBruteAttacksResponse {
+export interface DescribeESHitsResponse {
   /**
-   * 导出文件下载链接地址。
+   * ES查询结果JSON
    */
-  DownloadUrl?: string
-
-  /**
-   * 导出任务ID
-   */
-  TaskId?: string
+  Data: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -3419,6 +3424,16 @@ export interface DescribeBruteAttacksResponse {
    */
   BruteAttacks?: Array<BruteAttack>
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyProVersionRenewFlag返回参数结构体
+ */
+export interface ModifyProVersionRenewFlagResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5060,13 +5075,13 @@ export interface DescribePrivilegeRulesResponse {
 }
 
 /**
- * ModifyProVersionRenewFlag返回参数结构体
+ * ExportNonlocalLoginPlaces请求参数结构体
  */
-export interface ModifyProVersionRenewFlagResponse {
+export interface ExportNonlocalLoginPlacesRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * <li>Status - int - 是否必填：否 - 状态筛选1:正常登录；2：异地登录</li>
    */
-  RequestId?: string
+  Filters?: Array<Filter>
 }
 
 /**
@@ -5508,13 +5523,23 @@ export interface ModifyProVersionRenewFlagRequest {
 }
 
 /**
- * TrustMaliciousRequest返回参数结构体
+ * DescribeESHits请求参数结构体
  */
-export interface TrustMaliciousRequestResponse {
+export interface DescribeESHitsRequest {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * ES查询条件JSON
    */
-  RequestId?: string
+  Query: string
+
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+
+  /**
+   * 返回数量，默认为10，最大值为100。
+   */
+  Limit?: number
 }
 
 /**
@@ -5525,6 +5550,16 @@ export interface DescribeUsualLoginPlacesRequest {
    * 云镜客户端UUID
    */
   Uuid: string
+}
+
+/**
+ * TrustMaliciousRequest返回参数结构体
+ */
+export interface TrustMaliciousRequestResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

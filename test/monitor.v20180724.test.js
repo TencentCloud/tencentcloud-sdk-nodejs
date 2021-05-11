@@ -48,6 +48,16 @@ it("monitor.v20180724.UnBindingPolicyObject", async function () {
     }
 })
 
+it("monitor.v20180724.CreateAlertRule", async function () {
+    try {
+       const data = await client.CreateAlertRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.SendCustomAlarmMsg", async function () {
     try {
        const data = await client.SendCustomAlarmMsg({})
@@ -168,9 +178,29 @@ it("monitor.v20180724.BindingPolicyObject", async function () {
     }
 })
 
+it("monitor.v20180724.ModifyAlarmPolicyInfo", async function () {
+    try {
+       const data = await client.ModifyAlarmPolicyInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.CreateAlarmNotice", async function () {
     try {
        const data = await client.CreateAlarmNotice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.UpdateAlertRuleState", async function () {
+    try {
+       const data = await client.UpdateAlertRuleState({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,6 +338,16 @@ it("monitor.v20180724.DescribeMonitorTypes", async function () {
     }
 })
 
+it("monitor.v20180724.UpdateAlertRule", async function () {
+    try {
+       const data = await client.UpdateAlertRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.SetDefaultAlarmPolicy", async function () {
     try {
        const data = await client.SetDefaultAlarmPolicy({})
@@ -348,9 +388,9 @@ it("monitor.v20180724.DescribeAccidentEventList", async function () {
     }
 })
 
-it("monitor.v20180724.ModifyAlarmPolicyInfo", async function () {
+it("monitor.v20180724.DeleteAlertRules", async function () {
     try {
-       const data = await client.ModifyAlarmPolicyInfo({})
+       const data = await client.DeleteAlertRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -451,6 +491,16 @@ it("monitor.v20180724.ModifyAlarmNotice", async function () {
 it("monitor.v20180724.ModifyPolicyGroup", async function () {
     try {
        const data = await client.ModifyPolicyGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DescribeAlertRules", async function () {
+    try {
+       const data = await client.DescribeAlertRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

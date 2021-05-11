@@ -25,6 +25,7 @@ import {
   GetRequestTargetNodeTypesRequest,
   DescribeInstanceOperationsRequest,
   OperationDetail,
+  DiagnoseInstanceResponse,
   EsPublicAcl,
   DictInfo,
   RestartInstanceResponse,
@@ -42,15 +43,18 @@ import {
   DescribeInstancesResponse,
   DescribeInstanceLogsResponse,
   UpdatePluginsResponse,
+  DiagnoseInstanceRequest,
   RestartInstanceRequest,
   ZoneDetail,
   DescribeInstancesRequest,
+  UpdateDiagnoseSettingsRequest,
   UpdateInstanceRequest,
   EsDictionaryInfo,
   DescribeInstanceOperationsResponse,
   RestartNodesRequest,
   UpdatePluginsRequest,
   UpdateRequestTargetNodeTypesResponse,
+  UpdateDiagnoseSettingsResponse,
   UpgradeLicenseResponse,
   EsAcl,
   MasterNodeInfo,
@@ -82,6 +86,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateRequestTargetNodeTypesResponse) => void
   ): Promise<UpdateRequestTargetNodeTypesResponse> {
     return this.request("UpdateRequestTargetNodeTypes", req, cb)
+  }
+
+  /**
+   * 智能运维诊断集群
+   */
+  async DiagnoseInstance(
+    req: DiagnoseInstanceRequest,
+    cb?: (error: string, rep: DiagnoseInstanceResponse) => void
+  ): Promise<DiagnoseInstanceResponse> {
+    return this.request("DiagnoseInstance", req, cb)
   }
 
   /**
@@ -132,6 +146,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateInstanceResponse) => void
   ): Promise<CreateInstanceResponse> {
     return this.request("CreateInstance", req, cb)
+  }
+
+  /**
+   * 更新智能运维配置
+   */
+  async UpdateDiagnoseSettings(
+    req: UpdateDiagnoseSettingsRequest,
+    cb?: (error: string, rep: UpdateDiagnoseSettingsResponse) => void
+  ): Promise<UpdateDiagnoseSettingsResponse> {
+    return this.request("UpdateDiagnoseSettings", req, cb)
   }
 
   /**

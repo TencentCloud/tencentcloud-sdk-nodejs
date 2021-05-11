@@ -339,7 +339,7 @@ export interface CreateCustomizationRequest {
   ModelName: string
 
   /**
-   * 文本文件的下载地址，服务会从该地址下载文件， 以训练模型，目前仅支持腾讯云cos
+   * 文本文件的下载地址，服务会从该地址下载文件，目前仅支持腾讯云cos
    */
   TextUrl: string
 

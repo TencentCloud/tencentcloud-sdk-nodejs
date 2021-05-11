@@ -509,6 +509,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeProVersionInfo", req, cb);
     }
     /**
+     * 获取ES查询文档列表
+     */
+    async DescribeESHits(req, cb) {
+        return this.request("DescribeESHits", req, cb);
+    }
+    /**
      * 概览页抽屉侧边弹窗：安全概览“立即处理”页面中的相关事件数统计接口。
      */
     async DescribeSecurityEventsCnt(req, cb) {

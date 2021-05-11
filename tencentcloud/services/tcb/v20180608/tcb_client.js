@@ -67,6 +67,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSmsQuotas", req, cb);
     }
     /**
+     * 开通微信云托管MySQL数据库服务
+     */
+    async CreateWxCloudBaseRunServerDBCluster(req, cb) {
+        return this.request("CreateWxCloudBaseRunServerDBCluster", req, cb);
+    }
+    /**
      * 获取环境列表，含环境下的各个资源信息。尤其是各资源的唯一标识，是请求各资源的关键参数
      */
     async DescribeEnvs(req, cb) {

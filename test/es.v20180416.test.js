@@ -28,6 +28,16 @@ it("es.v20180416.UpdateRequestTargetNodeTypes", async function () {
     }
 })
 
+it("es.v20180416.DiagnoseInstance", async function () {
+    try {
+       const data = await client.DiagnoseInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("es.v20180416.DescribeInstanceOperations", async function () {
     try {
        const data = await client.DescribeInstanceOperations({})
@@ -71,6 +81,16 @@ it("es.v20180416.UpdatePlugins", async function () {
 it("es.v20180416.CreateInstance", async function () {
     try {
        const data = await client.CreateInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.UpdateDiagnoseSettings", async function () {
+    try {
+       const data = await client.UpdateDiagnoseSettings({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

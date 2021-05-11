@@ -183,6 +183,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DisassociateInstancesKeyPairs", req, cb);
     }
     /**
+     * 本接口（DescribeBundleDiscount）用于查询套餐折扣信息。
+     */
+    async DescribeBundleDiscount(req, cb) {
+        return this.request("DescribeBundleDiscount", req, cb);
+    }
+    /**
      * 本接口（DescribeBlueprints）用于查询镜像信息。
      */
     async DescribeBlueprints(req, cb) {

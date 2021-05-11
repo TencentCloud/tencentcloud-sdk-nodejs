@@ -34,6 +34,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpdateRequestTargetNodeTypes", req, cb);
     }
     /**
+     * 智能运维诊断集群
+     */
+    async DiagnoseInstance(req, cb) {
+        return this.request("DiagnoseInstance", req, cb);
+    }
+    /**
      * 查询实例指定条件下的操作记录
      */
     async DescribeInstanceOperations(req, cb) {
@@ -62,6 +68,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateInstance(req, cb) {
         return this.request("CreateInstance", req, cb);
+    }
+    /**
+     * 更新智能运维配置
+     */
+    async UpdateDiagnoseSettings(req, cb) {
+        return this.request("UpdateDiagnoseSettings", req, cb);
     }
     /**
      * 升级ES集群版本

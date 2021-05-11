@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UnBindingPolicyObject", req, cb);
     }
     /**
+     * 创建 Prometheus 告警规则
+     */
+    async CreateAlertRule(req, cb) {
+        return this.request("CreateAlertRule", req, cb);
+    }
+    /**
      * 发送自定义消息告警
      */
     async SendCustomAlarmMsg(req, cb) {
@@ -128,10 +134,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("BindingPolicyObject", req, cb);
     }
     /**
+     * 告警2.0编辑告警策略基本信息，包括策略名、备注
+     */
+    async ModifyAlarmPolicyInfo(req, cb) {
+        return this.request("ModifyAlarmPolicyInfo", req, cb);
+    }
+    /**
      * 创建通知模板
      */
     async CreateAlarmNotice(req, cb) {
         return this.request("CreateAlarmNotice", req, cb);
+    }
+    /**
+     * 更新 Prometheus 报警策略状态
+     */
+    async UpdateAlertRuleState(req, cb) {
+        return this.request("UpdateAlertRuleState", req, cb);
     }
     /**
      * 创建告警策略
@@ -216,6 +234,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeMonitorTypes", req, cb);
     }
     /**
+     * 更新 Prometheus 的报警规则
+     */
+    async UpdateAlertRule(req, cb) {
+        return this.request("UpdateAlertRule", req, cb);
+    }
+    /**
      * 设置一个策略为该告警策略类型、该项目的默认告警策略。
 同一项目下相同的告警策略类型，就会被设置为非默认。
      */
@@ -241,10 +265,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAccidentEventList", req, cb);
     }
     /**
-     * 告警2.0编辑告警策略基本信息，包括策略名、备注
+     * 批量删除 Prometheus 报警规则
      */
-    async ModifyAlarmPolicyInfo(req, cb) {
-        return this.request("ModifyAlarmPolicyInfo", req, cb);
+    async DeleteAlertRules(req, cb) {
+        return this.request("DeleteAlertRules", req, cb);
     }
     /**
      * 查询告警历史
@@ -309,6 +333,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ModifyPolicyGroup(req, cb) {
         return this.request("ModifyPolicyGroup", req, cb);
+    }
+    /**
+     * Prometheus 报警规则查询接口
+     */
+    async DescribeAlertRules(req, cb) {
+        return this.request("DescribeAlertRules", req, cb);
     }
     /**
      * 获取单个告警策略详情

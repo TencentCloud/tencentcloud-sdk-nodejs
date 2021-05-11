@@ -241,6 +241,41 @@ export interface DescribePolicyConditionListMetric {
     MetricUnit: string;
 }
 /**
+ * DescribeAlertRules请求参数结构体
+ */
+export interface DescribeAlertRulesRequest {
+    /**
+      * Prometheus 实例 ID
+      */
+    InstanceId: string;
+    /**
+      * 返回数量，默认为 20，最大值为 100
+      */
+    Limit?: number;
+    /**
+      * 偏移量，默认为 0
+      */
+    Offset?: number;
+    /**
+      * 规则 ID
+      */
+    RuleId?: string;
+    /**
+      * 规则状态码，取值如下：
+<li>2=RuleEnabled</li>
+<li>3=RuleDisabled</li>
+      */
+    RuleState?: number;
+    /**
+      * 规则名称
+      */
+    RuleName?: string;
+    /**
+      * 报警策略模板分类
+      */
+    Type?: string;
+}
+/**
  * DescribePolicyGroupList返回参数结构体
  */
 export interface DescribePolicyGroupListResponse {
@@ -297,6 +332,19 @@ export interface CreateServiceDiscoveryResponse {
     RequestId?: string;
 }
 /**
+ * prometheus 报警规则 KV 参数
+ */
+export interface PrometheusRuleKV {
+    /**
+      * 键
+      */
+    Key: string;
+    /**
+      * 值
+      */
+    Value: string;
+}
+/**
  * PutMonitorData返回参数结构体
  */
 export interface PutMonitorDataResponse {
@@ -317,6 +365,15 @@ export interface DescribePolicyGroupInfoRequest {
       * 策略组id
       */
     GroupId: number;
+}
+/**
+ * UpdateAlertRuleState返回参数结构体
+ */
+export interface UpdateAlertRuleStateResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DeleteServiceDiscovery返回参数结构体
@@ -583,6 +640,20 @@ export interface PutMonitorDataRequest {
     AnnounceInstance?: string;
 }
 /**
+ * CreateAlertRule返回参数结构体
+ */
+export interface CreateAlertRuleResponse {
+    /**
+      * 规则 ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RuleId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreatePolicyGroup返回参数结构体
  */
 export interface CreatePolicyGroupResponse {
@@ -650,41 +721,13 @@ export interface DescribePolicyConditionListConfigManualContinueTime {
     Need: boolean;
 }
 /**
- * 统一的命名空间信息
+ * DeleteAlertRules返回参数结构体
  */
-export interface CommonNamespace {
+export interface DeleteAlertRulesResponse {
     /**
-      * 命名空间标示
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Id: string;
-    /**
-      * 命名空间名称
-      */
-    Name: string;
-    /**
-      * 命名空间值
-      */
-    Value: string;
-    /**
-      * 产品名称
-      */
-    ProductName: string;
-    /**
-      * 配置信息
-      */
-    Config: string;
-    /**
-      * 支持地域列表
-      */
-    AvailableRegions: Array<string>;
-    /**
-      * 排序Id
-      */
-    SortId: number;
-    /**
-      * Dashboard中的唯一表示
-      */
-    DashboardId: string;
+    RequestId?: string;
 }
 /**
  * GetMonitorData请求参数结构体
@@ -750,21 +793,41 @@ export interface DescribeAlarmPoliciesResponse {
     RequestId?: string;
 }
 /**
- * ModifyAlarmPolicyStatus请求参数结构体
+ * DescribeStatisticData请求参数结构体
  */
-export interface ModifyAlarmPolicyStatusRequest {
+export interface DescribeStatisticDataRequest {
     /**
-      * 模块名，固定值 monitor
+      * 所属模块，固定值，为monitor
       */
     Module: string;
     /**
-      * 告警策略 ID
+      * 命名空间，目前只支持QCE/TKE
       */
-    PolicyId: string;
+    Namespace: string;
     /**
-      * 启停状态 0=停用 1=启用
+      * 指标名列表
       */
-    Enable: number;
+    MetricNames: Array<string>;
+    /**
+      * 维度条件，操作符支持=、in
+      */
+    Conditions?: Array<MidQueryCondition>;
+    /**
+      * 统计粒度。默认取值为300，单位为s
+      */
+    Period?: number;
+    /**
+      * 起始时间，默认为当前时间，如2020-12-08T19:51:23+08:00
+      */
+    StartTime?: string;
+    /**
+      * 结束时间，默认为当前时间，如2020-12-08T19:51:23+08:00
+      */
+    EndTime?: string;
+    /**
+      * 按指定维度groupBy
+      */
+    GroupBys?: Array<string>;
 }
 /**
  * 告警条件模版
@@ -866,19 +929,41 @@ export interface DescribeServiceDiscoveryRequest {
     KubeType: number;
 }
 /**
- * DescribeBasicAlarmList返回的Alarms里的InstanceGroup
+ * 统一的命名空间信息
  */
-export interface InstanceGroup {
+export interface CommonNamespace {
     /**
-      * 实例组ID
-注意：此字段可能返回 null，表示取不到有效值。
+      * 命名空间标示
       */
-    InstanceGroupId: number;
+    Id: string;
     /**
-      * 实例组名
-注意：此字段可能返回 null，表示取不到有效值。
+      * 命名空间名称
       */
-    InstanceGroupName: string;
+    Name: string;
+    /**
+      * 命名空间值
+      */
+    Value: string;
+    /**
+      * 产品名称
+      */
+    ProductName: string;
+    /**
+      * 配置信息
+      */
+    Config: string;
+    /**
+      * 支持地域列表
+      */
+    AvailableRegions: Array<string>;
+    /**
+      * 排序Id
+      */
+    SortId: number;
+    /**
+      * Dashboard中的唯一表示
+      */
+    DashboardId: string;
 }
 /**
  * DescribePolicyConditionList请求参数结构体
@@ -1062,44 +1147,22 @@ export interface CreateServiceDiscoveryRequest {
     Yaml: string;
 }
 /**
- * DescribePolicyConditionList策略条件
+ * DescribeAlertRules返回参数结构体
  */
-export interface DescribePolicyConditionListCondition {
+export interface DescribeAlertRulesResponse {
     /**
-      * 策略视图名称
+      * 报警规则数量
       */
-    PolicyViewName: string;
+    TotalCount: number;
     /**
-      * 事件告警条件
+      * 报警规则详情
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    EventMetrics: Array<DescribePolicyConditionListEventMetric>;
+    AlertRuleSet: Array<PrometheusRuleSet>;
     /**
-      * 是否支持多地域
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    IsSupportMultiRegion: boolean;
-    /**
-      * 指标告警条件
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    Metrics: Array<DescribePolicyConditionListMetric>;
-    /**
-      * 策略类型名称
-      */
-    Name: string;
-    /**
-      * 排序id
-      */
-    SortId: number;
-    /**
-      * 是否支持默认策略
-      */
-    SupportDefault: boolean;
-    /**
-      * 支持该策略类型的地域列表
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-    SupportRegions: Array<string>;
+    RequestId?: string;
 }
 /**
  * DescribeProductList请求参数结构体
@@ -1326,6 +1389,71 @@ export interface DescribePolicyConditionListResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * prometheus 报警规则集
+ */
+export interface PrometheusRuleSet {
+    /**
+      * 规则 ID
+      */
+    RuleId: string;
+    /**
+      * 规则名称
+      */
+    RuleName: string;
+    /**
+      * 规则状态码
+      */
+    RuleState: number;
+    /**
+      * 规则类别
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Type: string;
+    /**
+      * 规则标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Labels: Array<PrometheusRuleKV>;
+    /**
+      * 规则注释列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Annotations: Array<PrometheusRuleKV>;
+    /**
+      * 规则表达式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Expr: string;
+    /**
+      * 规则报警持续时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Duration: string;
+    /**
+      * 报警接收组列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Receivers: Array<string>;
+    /**
+      * 规则运行健康状态，取值如下：
+<li>unknown 未知状态</li>
+<li>pending 加载中</li>
+<li>ok 运行正常</li>
+<li>err 运行错误</li>
+      */
+    Health: string;
+    /**
+      * 规则创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    CreatedAt: string;
+    /**
+      * 规则更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdatedAt: string;
 }
 /**
  * DescribeAllNamespaces返回参数结构体
@@ -1578,6 +1706,26 @@ export interface Point {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Value: number;
+}
+/**
+ * UpdateAlertRuleState请求参数结构体
+ */
+export interface UpdateAlertRuleStateRequest {
+    /**
+      * 规则 ID 列表
+      */
+    RuleIds: Array<string>;
+    /**
+      * Prometheus 实例 ID
+      */
+    InstanceId: string;
+    /**
+      * 规则状态码，取值如下：
+<li>2=RuleEnabled</li>
+<li>3=RuleDisabled</li>
+默认状态码为 2 启用。
+      */
+    RuleState: number;
 }
 /**
  * 修改告警策略组传入的事件告警条件
@@ -1876,6 +2024,19 @@ export interface BindingPolicyObjectDimension {
       * 事件维度信息
       */
     EventDimensions?: string;
+}
+/**
+ * DeletePolicyGroup请求参数结构体
+ */
+export interface DeletePolicyGroupRequest {
+    /**
+      * 固定值，为"monitor"
+      */
+    Module: string;
+    /**
+      * 策略组id
+      */
+    GroupId: Array<number>;
 }
 /**
  * DescribeAlarmPolicy返回参数结构体
@@ -2202,21 +2363,49 @@ export interface MetricObjectMeaning {
     Zh: string;
 }
 /**
- * 告警事件
+ * DescribeAccidentEventList接口的出参类型
  */
-export interface AlarmEvent {
+export interface DescribeAccidentEventListAlarms {
     /**
-      * 事件名
+      * 事件分类
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    EventName: string;
+    BusinessTypeDesc: string;
     /**
-      * 展示的事件名
+      * 事件类型
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Description: string;
+    AccidentTypeDesc: string;
     /**
-      * 告警策略类型
+      * 事件分类的ID，1表示服务问题，2表示其他订阅
+注意：此字段可能返回 null，表示取不到有效值。
       */
-    Namespace: string;
+    BusinessID: number;
+    /**
+      * 事件状态的ID，0表示已恢复，1表示未恢复
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EventStatus: number;
+    /**
+      * 影响的对象
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    AffectResource: string;
+    /**
+      * 事件的地域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Region: string;
+    /**
+      * 事件发生的时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    OccurTime: string;
+    /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    UpdateTime: string;
 }
 /**
  * ModifyPolicyGroup返回参数结构体
@@ -2246,6 +2435,23 @@ export interface DescribePolicyConditionListConfigManualCalcType {
     Need: boolean;
 }
 /**
+ * ModifyAlarmPolicyStatus请求参数结构体
+ */
+export interface ModifyAlarmPolicyStatusRequest {
+    /**
+      * 模块名，固定值 monitor
+      */
+    Module: string;
+    /**
+      * 告警策略 ID
+      */
+    PolicyId: string;
+    /**
+      * 启停状态 0=停用 1=启用
+      */
+    Enable: number;
+}
+/**
  * DescribeMetricData接口出参
  */
 export interface MetricData {
@@ -2259,17 +2465,21 @@ export interface MetricData {
     Points: Array<MetricDataPoint>;
 }
 /**
- * DeletePolicyGroup请求参数结构体
+ * 告警事件
  */
-export interface DeletePolicyGroupRequest {
+export interface AlarmEvent {
     /**
-      * 固定值，为"monitor"
+      * 事件名
       */
-    Module: string;
+    EventName: string;
     /**
-      * 策略组id
+      * 展示的事件名
       */
-    GroupId: Array<number>;
+    Description: string;
+    /**
+      * 告警策略类型
+      */
+    Namespace: string;
 }
 /**
  * 查询策略输出的阈值告警条件
@@ -2323,6 +2533,55 @@ export interface DescribePolicyGroupInfoCondition {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     MetricName: string;
+}
+/**
+ * UpdateAlertRule请求参数结构体
+ */
+export interface UpdateAlertRuleRequest {
+    /**
+      * Prometheus 报警规则 ID
+      */
+    RuleId: string;
+    /**
+      * Prometheus 实例 ID
+      */
+    InstanceId: string;
+    /**
+      * 规则状态码，取值如下：
+<li>1=RuleDeleted</li>
+<li>2=RuleEnabled</li>
+<li>3=RuleDisabled</li>
+默认状态码为 2 启用。
+      */
+    RuleState: number;
+    /**
+      * 报警规则名称
+      */
+    RuleName: string;
+    /**
+      * 报警规则表达式
+      */
+    Expr: string;
+    /**
+      * 报警规则持续时间
+      */
+    Duration: string;
+    /**
+      * 报警规则接收组列表
+      */
+    Receivers: Array<string>;
+    /**
+      * 报警规则标签列表
+      */
+    Labels?: Array<PrometheusRuleKV>;
+    /**
+      * 报警规则注释列表
+      */
+    Annotations?: Array<PrometheusRuleKV>;
+    /**
+      * 报警策略模板分类
+      */
+    Type?: string;
 }
 /**
  * DescribeBindingPolicyObjectList返回参数结构体
@@ -2424,6 +2683,21 @@ export interface UnBindingPolicyObjectResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeBasicAlarmList返回的Alarms里的InstanceGroup
+ */
+export interface InstanceGroup {
+    /**
+      * 实例组ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceGroupId: number;
+    /**
+      * 实例组名
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    InstanceGroupName: string;
 }
 /**
  * DescribeProductEventList返回的Events
@@ -2587,6 +2861,19 @@ export interface DescribeAllNamespacesRequest {
       * 根据namespace的Id过滤 不填默认查询所有
       */
     Ids?: Array<string>;
+}
+/**
+ * UpdateAlertRule返回参数结构体
+ */
+export interface UpdateAlertRuleResponse {
+    /**
+      * 规则 ID
+      */
+    RuleId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeAlarmMetrics返回参数结构体
@@ -2899,49 +3186,47 @@ export interface ModifyAlarmNoticeResponse {
     RequestId?: string;
 }
 /**
- * DescribeAccidentEventList接口的出参类型
+ * CreateAlertRule请求参数结构体
  */
-export interface DescribeAccidentEventListAlarms {
+export interface CreateAlertRuleRequest {
     /**
-      * 事件分类
-注意：此字段可能返回 null，表示取不到有效值。
+      * Prometheus 实例 ID
       */
-    BusinessTypeDesc: string;
+    InstanceId: string;
     /**
-      * 事件类型
-注意：此字段可能返回 null，表示取不到有效值。
+      * 规则名称
       */
-    AccidentTypeDesc: string;
+    RuleName: string;
     /**
-      * 事件分类的ID，1表示服务问题，2表示其他订阅
-注意：此字段可能返回 null，表示取不到有效值。
+      * 规则表达式
       */
-    BusinessID: number;
+    Expr: string;
     /**
-      * 事件状态的ID，0表示已恢复，1表示未恢复
-注意：此字段可能返回 null，表示取不到有效值。
+      * 告警通知模板 ID 列表
       */
-    EventStatus: number;
+    Receivers: Array<string>;
     /**
-      * 影响的对象
-注意：此字段可能返回 null，表示取不到有效值。
+      * 规则状态码，取值如下：
+<li>2=RuleEnabled</li>
+<li>3=RuleDisabled</li>
       */
-    AffectResource: string;
+    RuleState?: number;
     /**
-      * 事件的地域
-注意：此字段可能返回 null，表示取不到有效值。
+      * 规则报警持续时间
       */
-    Region: string;
+    Duration?: string;
     /**
-      * 事件发生的时间
-注意：此字段可能返回 null，表示取不到有效值。
+      * 标签列表
       */
-    OccurTime: string;
+    Labels?: Array<PrometheusRuleKV>;
     /**
-      * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
+      * 注释列表
       */
-    UpdateTime: string;
+    Annotations?: Array<PrometheusRuleKV>;
+    /**
+      * 报警策略模板分类
+      */
+    Type?: string;
 }
 /**
  * DescribeProductList返回参数结构体
@@ -3729,41 +4014,17 @@ export interface DescribeProductEventListEventsGroupInfo {
     GroupName: string;
 }
 /**
- * DescribeStatisticData请求参数结构体
+ * DeleteAlertRules请求参数结构体
  */
-export interface DescribeStatisticDataRequest {
+export interface DeleteAlertRulesRequest {
     /**
-      * 所属模块，固定值，为monitor
+      * 规则 ID 列表
       */
-    Module: string;
+    RuleIds: Array<string>;
     /**
-      * 命名空间，目前只支持QCE/TKE
+      * Prometheus 实例 ID
       */
-    Namespace: string;
-    /**
-      * 指标名列表
-      */
-    MetricNames: Array<string>;
-    /**
-      * 维度条件，操作符支持=、in
-      */
-    Conditions?: Array<MidQueryCondition>;
-    /**
-      * 统计粒度。默认取值为300，单位为s
-      */
-    Period?: number;
-    /**
-      * 起始时间，默认为当前时间，如2020-12-08T19:51:23+08:00
-      */
-    StartTime?: string;
-    /**
-      * 结束时间，默认为当前时间，如2020-12-08T19:51:23+08:00
-      */
-    EndTime?: string;
-    /**
-      * 按指定维度groupBy
-      */
-    GroupBys?: Array<string>;
+    InstanceId: string;
 }
 /**
  * DescribeAlarmNotice请求参数结构体
@@ -4037,6 +4298,46 @@ export interface ModifyPolicyGroupCondition {
       * 规则id，不填表示新增，填写了ruleId表示在已存在的规则基础上进行修改
       */
     RuleId?: number;
+}
+/**
+ * DescribePolicyConditionList策略条件
+ */
+export interface DescribePolicyConditionListCondition {
+    /**
+      * 策略视图名称
+      */
+    PolicyViewName: string;
+    /**
+      * 事件告警条件
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EventMetrics: Array<DescribePolicyConditionListEventMetric>;
+    /**
+      * 是否支持多地域
+      */
+    IsSupportMultiRegion: boolean;
+    /**
+      * 指标告警条件
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Metrics: Array<DescribePolicyConditionListMetric>;
+    /**
+      * 策略类型名称
+      */
+    Name: string;
+    /**
+      * 排序id
+      */
+    SortId: number;
+    /**
+      * 是否支持默认策略
+      */
+    SupportDefault: boolean;
+    /**
+      * 支持该策略类型的地域列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SupportRegions: Array<string>;
 }
 /**
  * DeleteServiceDiscovery请求参数结构体

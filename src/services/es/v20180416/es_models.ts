@@ -190,6 +190,16 @@ export interface OperationDetail {
 }
 
 /**
+ * DiagnoseInstance返回参数结构体
+ */
+export interface DiagnoseInstanceResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ES公网访问访问控制信息
  */
 export interface EsPublicAcl {
@@ -912,6 +922,26 @@ export interface UpdatePluginsResponse {
 }
 
 /**
+ * DiagnoseInstance请求参数结构体
+ */
+export interface DiagnoseInstanceRequest {
+  /**
+   * ES实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 需要触发的诊断项
+   */
+  DiagnoseJobs?: Array<string>
+
+  /**
+   * 需要诊断的索引，支持通配符
+   */
+  DiagnoseIndices?: string
+}
+
+/**
  * RestartInstance请求参数结构体
  */
 export interface RestartInstanceRequest {
@@ -989,6 +1019,26 @@ export interface DescribeInstancesRequest {
    * 私有网络vip列表
    */
   IpList?: Array<string>
+}
+
+/**
+ * UpdateDiagnoseSettings请求参数结构体
+ */
+export interface UpdateDiagnoseSettingsRequest {
+  /**
+   * ES实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 0：开启智能运维；-1：关闭智能运维
+   */
+  Status?: number
+
+  /**
+   * 智能运维每天定时巡检时间
+   */
+  CronTime?: string
 }
 
 /**
@@ -1226,6 +1276,16 @@ export interface UpdatePluginsRequest {
  * UpdateRequestTargetNodeTypes返回参数结构体
  */
 export interface UpdateRequestTargetNodeTypesResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateDiagnoseSettings返回参数结构体
+ */
+export interface UpdateDiagnoseSettingsResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

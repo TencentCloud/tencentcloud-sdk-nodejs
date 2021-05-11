@@ -198,6 +198,16 @@ it("lighthouse.v20200324.DisassociateInstancesKeyPairs", async function () {
     }
 })
 
+it("lighthouse.v20200324.DescribeBundleDiscount", async function () {
+    try {
+       const data = await client.DescribeBundleDiscount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lighthouse.v20200324.DescribeBlueprints", async function () {
     try {
        const data = await client.DescribeBlueprints({})

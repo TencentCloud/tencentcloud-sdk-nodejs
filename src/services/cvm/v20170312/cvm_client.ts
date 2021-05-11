@@ -30,13 +30,14 @@ import {
   DeleteKeyPairsResponse,
   TerminateInstancesResponse,
   ModifyInstancesChargeTypeResponse,
-  CreateDisasterRecoverGroupResponse,
+  AccountQuota,
   InquiryPriceResetInstancesInternetMaxBandwidthResponse,
   ModifyKeyPairAttributeRequest,
   AssociateSecurityGroupsRequest,
+  PostPaidQuota,
   ResetInstancesTypeRequest,
   InquiryPriceResetInstanceRequest,
-  RunInstancesRequest,
+  ModifyImageSharePermissionResponse,
   DeleteImagesRequest,
   DescribeInstancesResponse,
   DescribeHostsResponse,
@@ -53,7 +54,7 @@ import {
   ImportKeyPairResponse,
   DescribeInstancesStatusResponse,
   ZoneInfo,
-  InquiryPriceModifyInstancesChargeTypeResponse,
+  DescribeInstanceTypeConfigsRequest,
   DescribeKeyPairsResponse,
   ResetInstancesPasswordRequest,
   InternetChargeTypeConfig,
@@ -68,9 +69,9 @@ import {
   InquiryPriceResizeInstanceDisksRequest,
   RunInstancesResponse,
   ReservedInstancePrice,
-  ResetInstancesInternetMaxBandwidthResponse,
+  DisasterRecoverGroupQuota,
   ModifyInstancesAttributeResponse,
-  ModifyImageSharePermissionResponse,
+  InquiryPriceModifyInstancesChargeTypeResponse,
   DescribeInstancesOperationLimitResponse,
   SyncImagesResponse,
   DescribeZoneInstanceConfigInfosResponse,
@@ -87,6 +88,8 @@ import {
   SyncImagesRequest,
   DisassociateInstancesKeyPairsRequest,
   DescribeImageQuotaRequest,
+  SpotPaidQuota,
+  ResetInstancesInternetMaxBandwidthResponse,
   DescribeInstanceFamilyConfigsResponse,
   CreateImageResponse,
   StopInstancesResponse,
@@ -102,6 +105,7 @@ import {
   DescribeReservedInstancesResponse,
   DescribeImportImageOsResponse,
   InquirePricePurchaseReservedInstancesOfferingRequest,
+  PrePaidQuota,
   DataDisk,
   DescribeKeyPairsRequest,
   OperationCountLimit,
@@ -117,6 +121,7 @@ import {
   DescribeInstanceVncUrlResponse,
   DescribeReservedInstancesOfferingsRequest,
   ReservedInstanceFamilyItem,
+  ImageQuota,
   DescribeDisasterRecoverGroupsResponse,
   RunSecurityServiceEnabled,
   ActionTimer,
@@ -135,7 +140,8 @@ import {
   DescribeImageSharePermissionRequest,
   DisasterRecoverGroup,
   InquiryPriceResetInstanceResponse,
-  DescribeInstanceTypeConfigsRequest,
+  RunInstancesRequest,
+  Filter,
   InquiryPriceResetInstancesInternetMaxBandwidthRequest,
   ModifyHostsAttributeResponse,
   DescribeDisasterRecoverGroupQuotaRequest,
@@ -143,6 +149,7 @@ import {
   ModifyInstancesVpcAttributeRequest,
   DescribeReservedInstancesRequest,
   DescribeInternetChargeTypeConfigsResponse,
+  AccountQuotaOverview,
   DescribeZoneInstanceConfigInfosRequest,
   DescribeZonesResponse,
   ItemPrice,
@@ -151,6 +158,7 @@ import {
   ReservedInstanceTypeItem,
   InquiryPriceRunInstancesResponse,
   DescribeHostsRequest,
+  DescribeAccountQuotaRequest,
   ModifyInstancesRenewFlagResponse,
   DescribeInstancesStatusRequest,
   InquiryPriceResizeInstanceDisksResponse,
@@ -162,6 +170,7 @@ import {
   ModifyDisasterRecoverGroupAttributeRequest,
   ReservedInstancePriceItem,
   RebootInstancesResponse,
+  CreateDisasterRecoverGroupResponse,
   InquiryPriceResetInstancesTypeResponse,
   ReservedInstancesOffering,
   OsVersion,
@@ -181,9 +190,9 @@ import {
   KeyPair,
   DescribeReservedInstancesOfferingsResponse,
   RenewInstancesResponse,
+  DescribeAccountQuotaResponse,
   RunMonitorServiceEnabled,
   ResetInstanceResponse,
-  Filter,
   VirtualPrivateCloud,
   InternetBandwidthConfig,
   ModifyDisasterRecoverGroupAttributeResponse,
@@ -689,6 +698,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AssociateSecurityGroupsResponse) => void
   ): Promise<AssociateSecurityGroupsResponse> {
     return this.request("AssociateSecurityGroups", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeAccountQuota)用于查询用户配额详情。
+   */
+  async DescribeAccountQuota(
+    req: DescribeAccountQuotaRequest,
+    cb?: (error: string, rep: DescribeAccountQuotaResponse) => void
+  ): Promise<DescribeAccountQuotaResponse> {
+    return this.request("DescribeAccountQuota", req, cb)
   }
 
   /**

@@ -595,6 +595,15 @@ export interface CloudRunServiceSimpleVersionSnapshot {
     Status?: string;
 }
 /**
+ * CreateWxCloudBaseRunServerDBCluster返回参数结构体
+ */
+export interface CreateWxCloudBaseRunServerDBClusterResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 云日志服务相关信息
  */
 export interface LogServiceInfo {
@@ -642,6 +651,8 @@ export interface ModifyEndUserRequest {
     UUId: string;
     /**
       * 帐号的状态
+<li>ENABLE</li>
+<li>DISABLE</li>
       */
     Status?: string;
 }
@@ -998,6 +1009,23 @@ export interface CreateStaticStoreRequest {
     EnableUnion?: boolean;
 }
 /**
+ * CreateWxCloudBaseRunServerDBCluster请求参数结构体
+ */
+export interface CreateWxCloudBaseRunServerDBClusterRequest {
+    /**
+      * 账户密码
+      */
+    AccountPassword: string;
+    /**
+      * 环境ID
+      */
+    EnvId: string;
+    /**
+      * 微信appid
+      */
+    WxAppId?: string;
+}
+/**
  * DeleteCloudBaseProjectLatestVersion返回参数结构体
  */
 export interface DeleteCloudBaseProjectLatestVersionResponse {
@@ -1345,11 +1373,11 @@ export interface DescribeCloudBaseProjectVersionListRequest {
       */
     PageNum?: number;
     /**
-      * 起始时间
+      * 起始时间 2021-03-27 12:00:00
       */
     StartTime?: string;
     /**
-      * 终止时间
+      * 终止时间 2021-03-27 12:00:00
       */
     EndTime?: string;
 }
@@ -1984,7 +2012,7 @@ export interface CreateAndDeployCloudBaseProjectRequest {
       */
     Parameters?: Array<KVPair>;
     /**
-      * 环境别名
+      * 环境别名。要以a-z开头，不能包含a-zA-z0-9-以外的字符
       */
     EnvAlias?: string;
     /**
@@ -2004,7 +2032,7 @@ export interface CreateAndDeployCloudBaseProjectRequest {
       */
     NetworkConfig?: string;
     /**
-      * 免费额度的"basic", 不使用的用""
+      * 用户享有的免费额度级别，目前只能为“basic”，不传该字段或该字段为空，标识不享受免费额度。
       */
     FreeQuota?: string;
     /**
@@ -2282,17 +2310,17 @@ export interface DescribeDownloadFileResponse {
       * 文件路径
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    FilePath?: string;
+    FilePath: string;
     /**
       * 加密key
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    CustomKey?: string;
+    CustomKey: string;
     /**
       * 下载链接
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DownloadUrl?: string;
+    DownloadUrl: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

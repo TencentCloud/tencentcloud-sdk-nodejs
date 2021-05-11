@@ -31,6 +31,38 @@ export interface DeleteTopicsResponse {
 }
 
 /**
+ * ModifyEnvironmentAttributes返回参数结构体
+ */
+export interface ModifyEnvironmentAttributesResponse {
+  /**
+   * 命名空间名称。
+   */
+  EnvironmentId?: string
+
+  /**
+   * 未消费消息过期时间，单位：秒。
+   */
+  MsgTTL?: number
+
+  /**
+      * 备注，字符串最长不超过128。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Remark?: string
+
+  /**
+      * 命名空间ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NamespaceId?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeBindClusters返回参数结构体
  */
 export interface DescribeBindClustersResponse {
@@ -393,12 +425,12 @@ export interface DescribeTopicsResponse {
   /**
    * 主题集合数组。
    */
-  TopicSets?: Array<Topic>
+  TopicSets: Array<Topic>
 
   /**
    * 主题数量。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -585,12 +617,12 @@ export interface DescribeEnvironmentsResponse {
   /**
    * 命名空间记录数。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 命名空间集合数组。
    */
-  EnvironmentSet?: Array<Environment>
+  EnvironmentSet: Array<Environment>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -621,6 +653,14 @@ export interface DescribeEnvironmentsRequest {
    * Pulsar 集群的ID
    */
   ClusterId?: string
+
+  /**
+      * * EnvironmentId
+按照名称空间进行过滤，精确查询。
+类型：String
+必选：否
+      */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -891,6 +931,11 @@ export interface FilterSubscription {
    * 是否仅展示存在消息超期丢弃的订阅。
    */
   ConsumerHasExpired?: boolean
+
+  /**
+   * 按照订阅名过滤，精确查询。
+   */
+  SubscriptionNames?: Array<string>
 }
 
 /**
@@ -1099,6 +1144,14 @@ export interface DescribeTopicsRequest {
    * Pulsar 集群的ID
    */
   ClusterId?: string
+
+  /**
+      * * TopicName
+按照主题名字查询，精确查询。
+类型：String
+必选：否
+      */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -1396,6 +1449,18 @@ export interface Topic {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   UpdateTime: string
+
+  /**
+      * 生产者上限。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ProducerLimit: string
+
+  /**
+      * 消费者上限。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ConsumerLimit: string
 }
 
 /**
@@ -1448,35 +1513,18 @@ export interface DescribeBindVpcsResponse {
 }
 
 /**
- * ModifyEnvironmentAttributes返回参数结构体
+ * 过滤参数
  */
-export interface ModifyEnvironmentAttributesResponse {
+export interface Filter {
   /**
-   * 命名空间名称。
+   * 过滤参数的名字
    */
-  EnvironmentId?: string
+  Name?: string
 
   /**
-   * 未消费消息过期时间，单位：秒。
+   * 数值
    */
-  MsgTTL?: number
-
-  /**
-      * 备注，字符串最长不超过128。
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Remark?: string
-
-  /**
-      * 命名空间ID
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  NamespaceId?: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Values?: Array<string>
 }
 
 /**

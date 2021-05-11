@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { GetRequestTargetNodeTypesRequest, DescribeInstanceOperationsRequest, RestartInstanceResponse, RestartKibanaRequest, CreateInstanceResponse, DescribeInstanceLogsRequest, UpdateRequestTargetNodeTypesRequest, UpgradeLicenseRequest, CreateInstanceRequest, DeleteInstanceResponse, DescribeInstancesResponse, DescribeInstanceLogsResponse, UpdatePluginsResponse, RestartInstanceRequest, DescribeInstancesRequest, UpdateInstanceRequest, DescribeInstanceOperationsResponse, RestartNodesRequest, UpdatePluginsRequest, UpdateRequestTargetNodeTypesResponse, UpgradeLicenseResponse, DeleteInstanceRequest, RestartNodesResponse, UpgradeInstanceResponse, UpdateInstanceResponse, UpgradeInstanceRequest, GetRequestTargetNodeTypesResponse, RestartKibanaResponse } from "./es_models";
+import { GetRequestTargetNodeTypesRequest, DescribeInstanceOperationsRequest, DiagnoseInstanceResponse, RestartInstanceResponse, RestartKibanaRequest, CreateInstanceResponse, DescribeInstanceLogsRequest, UpdateRequestTargetNodeTypesRequest, UpgradeLicenseRequest, CreateInstanceRequest, DeleteInstanceResponse, DescribeInstancesResponse, DescribeInstanceLogsResponse, UpdatePluginsResponse, DiagnoseInstanceRequest, RestartInstanceRequest, DescribeInstancesRequest, UpdateDiagnoseSettingsRequest, UpdateInstanceRequest, DescribeInstanceOperationsResponse, RestartNodesRequest, UpdatePluginsRequest, UpdateRequestTargetNodeTypesResponse, UpdateDiagnoseSettingsResponse, UpgradeLicenseResponse, DeleteInstanceRequest, RestartNodesResponse, UpgradeInstanceResponse, UpdateInstanceResponse, UpgradeInstanceRequest, GetRequestTargetNodeTypesResponse, RestartKibanaResponse } from "./es_models";
 /**
  * es client
  * @class
@@ -11,6 +11,10 @@ export declare class Client extends AbstractClient {
      * 更新接收客户端请求的节点类型
      */
     UpdateRequestTargetNodeTypes(req: UpdateRequestTargetNodeTypesRequest, cb?: (error: string, rep: UpdateRequestTargetNodeTypesResponse) => void): Promise<UpdateRequestTargetNodeTypesResponse>;
+    /**
+     * 智能运维诊断集群
+     */
+    DiagnoseInstance(req: DiagnoseInstanceRequest, cb?: (error: string, rep: DiagnoseInstanceResponse) => void): Promise<DiagnoseInstanceResponse>;
     /**
      * 查询实例指定条件下的操作记录
      */
@@ -31,6 +35,10 @@ export declare class Client extends AbstractClient {
      * 创建指定规格的ES集群实例
      */
     CreateInstance(req: CreateInstanceRequest, cb?: (error: string, rep: CreateInstanceResponse) => void): Promise<CreateInstanceResponse>;
+    /**
+     * 更新智能运维配置
+     */
+    UpdateDiagnoseSettings(req: UpdateDiagnoseSettingsRequest, cb?: (error: string, rep: UpdateDiagnoseSettingsResponse) => void): Promise<UpdateDiagnoseSettingsResponse>;
     /**
      * 升级ES集群版本
      */

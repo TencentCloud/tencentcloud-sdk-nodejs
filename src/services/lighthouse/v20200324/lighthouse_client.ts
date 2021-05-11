@@ -38,6 +38,7 @@ import {
   ResetInstanceRequest,
   DescribeBundlesResponse,
   InquirePriceRenewInstancesRequest,
+  DiscountDetail,
   DescribeRegionsResponse,
   RebootInstancesRequest,
   AssociateInstancesKeyPairsRequest,
@@ -67,6 +68,7 @@ import {
   SnapshotDeniedActions,
   DeleteSnapshotsRequest,
   ModifySnapshotAttributeRequest,
+  DescribeBundleDiscountResponse,
   DeleteSnapshotsResponse,
   DisassociateInstancesKeyPairsRequest,
   ImportKeyPairRequest,
@@ -112,6 +114,7 @@ import {
   CreateFirewallRulesResponse,
   DescribeInstancesResponse,
   CreateBlueprintResponse,
+  PolicyDetail,
   DescribeResetInstanceBlueprintsRequest,
   ModifyInstancesRenewFlagResponse,
   ApplyInstanceSnapshotRequest,
@@ -119,6 +122,7 @@ import {
   InternetAccessible,
   RebootInstancesResponse,
   DescribeInstanceLoginKeyPairAttributeRequest,
+  DescribeBundleDiscountRequest,
   Price,
   BlueprintPrice,
   GeneralResourceQuota,
@@ -374,6 +378,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DisassociateInstancesKeyPairsResponse) => void
   ): Promise<DisassociateInstancesKeyPairsResponse> {
     return this.request("DisassociateInstancesKeyPairs", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeBundleDiscount）用于查询套餐折扣信息。
+   */
+  async DescribeBundleDiscount(
+    req: DescribeBundleDiscountRequest,
+    cb?: (error: string, rep: DescribeBundleDiscountResponse) => void
+  ): Promise<DescribeBundleDiscountResponse> {
+    return this.request("DescribeBundleDiscount", req, cb)
   }
 
   /**

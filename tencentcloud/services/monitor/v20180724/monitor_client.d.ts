@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ModifyAlarmPolicyNoticeResponse, ModifyAlarmPolicyInfoRequest, DescribeProductEventListRequest, DescribeServiceDiscoveryResponse, DescribePolicyGroupListResponse, BindingPolicyObjectRequest, CreateServiceDiscoveryResponse, PutMonitorDataResponse, DescribePolicyGroupInfoRequest, DeleteServiceDiscoveryResponse, CreateAlarmPolicyRequest, DescribeAlarmEventsResponse, DescribePolicyGroupInfoResponse, ModifyAlarmPolicyNoticeRequest, DeleteAlarmPolicyRequest, PutMonitorDataRequest, CreatePolicyGroupResponse, ModifyAlarmPolicyTasksResponse, DescribeBaseMetricsResponse, GetMonitorDataRequest, DescribeAlarmPoliciesResponse, ModifyAlarmPolicyStatusRequest, SendCustomAlarmMsgRequest, UnBindingPolicyObjectRequest, DescribeServiceDiscoveryRequest, DescribePolicyConditionListRequest, DeletePolicyGroupResponse, DescribeMonitorTypesRequest, DescribeAlarmNoticesResponse, ModifyAlarmPolicyTasksRequest, SetDefaultAlarmPolicyRequest, ModifyAlarmNoticeRequest, CreateServiceDiscoveryRequest, DescribeProductListRequest, CreateAlarmPolicyResponse, ModifyAlarmReceiversResponse, DescribePolicyConditionListResponse, DescribeAllNamespacesResponse, DeleteAlarmNoticesResponse, DescribeBasicAlarmListResponse, ModifyAlarmReceiversRequest, DescribeAlarmNoticeCallbacksRequest, ModifyAlarmPolicyConditionResponse, ModifyPolicyGroupRequest, DescribeAlarmHistoriesResponse, DescribeAlarmMetricsRequest, DescribeBaseMetricsRequest, DescribeAlarmNoticeCallbacksResponse, ModifyAlarmPolicyConditionRequest, ModifyAlarmPolicyStatusResponse, DescribeAlarmPolicyResponse, UpdateServiceDiscoveryResponse, DescribeMonitorTypesResponse, UpdateServiceDiscoveryRequest, CreateAlarmNoticeResponse, DescribeAlarmHistoriesRequest, ModifyPolicyGroupResponse, DeletePolicyGroupRequest, DescribeBindingPolicyObjectListResponse, DescribeBindingPolicyObjectListRequest, UnBindingPolicyObjectResponse, DeleteAlarmNoticesRequest, DescribeAllNamespacesRequest, DescribeAlarmMetricsResponse, DescribeAlarmPoliciesRequest, DescribeAccidentEventListResponse, ModifyAlarmPolicyInfoResponse, DescribeAlarmEventsRequest, ModifyAlarmNoticeResponse, DescribeProductListResponse, DescribeProductEventListResponse, DeleteAlarmPolicyResponse, DescribeAlarmPolicyRequest, CreatePolicyGroupRequest, DescribeStatisticDataResponse, DescribePolicyGroupListRequest, DescribeBasicAlarmListRequest, UnBindingAllPolicyObjectResponse, DescribeAlarmNoticesRequest, DescribeAccidentEventListRequest, DescribeAlarmNoticeResponse, DescribeStatisticDataRequest, DescribeAlarmNoticeRequest, CreateAlarmNoticeRequest, GetMonitorDataResponse, UnBindingAllPolicyObjectRequest, SendCustomAlarmMsgResponse, DeleteServiceDiscoveryRequest, SetDefaultAlarmPolicyResponse, BindingPolicyObjectResponse } from "./monitor_models";
+import { ModifyAlarmPolicyNoticeResponse, ModifyAlarmPolicyInfoRequest, DescribeProductEventListRequest, DescribeServiceDiscoveryResponse, DescribeAlertRulesRequest, DescribePolicyGroupListResponse, BindingPolicyObjectRequest, CreateServiceDiscoveryResponse, PutMonitorDataResponse, DescribePolicyGroupInfoRequest, UpdateAlertRuleStateResponse, DeleteServiceDiscoveryResponse, CreateAlarmPolicyRequest, DescribeAlarmEventsResponse, DescribePolicyGroupInfoResponse, ModifyAlarmPolicyNoticeRequest, DeleteAlarmPolicyRequest, PutMonitorDataRequest, CreateAlertRuleResponse, CreatePolicyGroupResponse, ModifyAlarmPolicyTasksResponse, DescribeBaseMetricsResponse, DeleteAlertRulesResponse, GetMonitorDataRequest, DescribeAlarmPoliciesResponse, DescribeStatisticDataRequest, SendCustomAlarmMsgRequest, UnBindingPolicyObjectRequest, DescribeServiceDiscoveryRequest, DescribePolicyConditionListRequest, DeletePolicyGroupResponse, DescribeMonitorTypesRequest, DescribeAlarmNoticesResponse, ModifyAlarmPolicyTasksRequest, SetDefaultAlarmPolicyRequest, ModifyAlarmNoticeRequest, CreateServiceDiscoveryRequest, DescribeAlertRulesResponse, DescribeProductListRequest, CreateAlarmPolicyResponse, ModifyAlarmReceiversResponse, DescribePolicyConditionListResponse, DescribeAllNamespacesResponse, DeleteAlarmNoticesResponse, DescribeBasicAlarmListResponse, ModifyAlarmReceiversRequest, DescribeAlarmNoticeCallbacksRequest, ModifyAlarmPolicyConditionResponse, UpdateAlertRuleStateRequest, ModifyPolicyGroupRequest, DescribeAlarmHistoriesResponse, DescribeAlarmMetricsRequest, DescribeBaseMetricsRequest, DescribeAlarmNoticeCallbacksResponse, ModifyAlarmPolicyConditionRequest, ModifyAlarmPolicyStatusResponse, DeletePolicyGroupRequest, DescribeAlarmPolicyResponse, UpdateServiceDiscoveryResponse, DescribeMonitorTypesResponse, UpdateServiceDiscoveryRequest, CreateAlarmNoticeResponse, DescribeAlarmHistoriesRequest, ModifyPolicyGroupResponse, ModifyAlarmPolicyStatusRequest, UpdateAlertRuleRequest, DescribeBindingPolicyObjectListResponse, DescribeBindingPolicyObjectListRequest, UnBindingPolicyObjectResponse, DeleteAlarmNoticesRequest, DescribeAllNamespacesRequest, UpdateAlertRuleResponse, DescribeAlarmMetricsResponse, DescribeAlarmPoliciesRequest, DescribeAccidentEventListResponse, ModifyAlarmPolicyInfoResponse, DescribeAlarmEventsRequest, ModifyAlarmNoticeResponse, CreateAlertRuleRequest, DescribeProductListResponse, DescribeProductEventListResponse, DeleteAlarmPolicyResponse, DescribeAlarmPolicyRequest, CreatePolicyGroupRequest, DescribeStatisticDataResponse, DescribePolicyGroupListRequest, DescribeBasicAlarmListRequest, UnBindingAllPolicyObjectResponse, DescribeAlarmNoticesRequest, DescribeAccidentEventListRequest, DescribeAlarmNoticeResponse, DeleteAlertRulesRequest, DescribeAlarmNoticeRequest, CreateAlarmNoticeRequest, GetMonitorDataResponse, UnBindingAllPolicyObjectRequest, SendCustomAlarmMsgResponse, DeleteServiceDiscoveryRequest, SetDefaultAlarmPolicyResponse, BindingPolicyObjectResponse } from "./monitor_models";
 /**
  * monitor client
  * @class
@@ -25,6 +25,10 @@ export declare class Client extends AbstractClient {
      * 删除策略的关联对象
      */
     UnBindingPolicyObject(req: UnBindingPolicyObjectRequest, cb?: (error: string, rep: UnBindingPolicyObjectResponse) => void): Promise<UnBindingPolicyObjectResponse>;
+    /**
+     * 创建 Prometheus 告警规则
+     */
+    CreateAlertRule(req: CreateAlertRuleRequest, cb?: (error: string, rep: CreateAlertRuleResponse) => void): Promise<CreateAlertRuleResponse>;
     /**
      * 发送自定义消息告警
      */
@@ -78,9 +82,17 @@ export declare class Client extends AbstractClient {
      */
     BindingPolicyObject(req: BindingPolicyObjectRequest, cb?: (error: string, rep: BindingPolicyObjectResponse) => void): Promise<BindingPolicyObjectResponse>;
     /**
+     * 告警2.0编辑告警策略基本信息，包括策略名、备注
+     */
+    ModifyAlarmPolicyInfo(req: ModifyAlarmPolicyInfoRequest, cb?: (error: string, rep: ModifyAlarmPolicyInfoResponse) => void): Promise<ModifyAlarmPolicyInfoResponse>;
+    /**
      * 创建通知模板
      */
     CreateAlarmNotice(req: CreateAlarmNoticeRequest, cb?: (error: string, rep: CreateAlarmNoticeResponse) => void): Promise<CreateAlarmNoticeResponse>;
+    /**
+     * 更新 Prometheus 报警策略状态
+     */
+    UpdateAlertRuleState(req: UpdateAlertRuleStateRequest, cb?: (error: string, rep: UpdateAlertRuleStateResponse) => void): Promise<UpdateAlertRuleStateResponse>;
     /**
      * 创建告警策略
      */
@@ -138,6 +150,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeMonitorTypes(req: DescribeMonitorTypesRequest, cb?: (error: string, rep: DescribeMonitorTypesResponse) => void): Promise<DescribeMonitorTypesResponse>;
     /**
+     * 更新 Prometheus 的报警规则
+     */
+    UpdateAlertRule(req: UpdateAlertRuleRequest, cb?: (error: string, rep: UpdateAlertRuleResponse) => void): Promise<UpdateAlertRuleResponse>;
+    /**
      * 设置一个策略为该告警策略类型、该项目的默认告警策略。
 同一项目下相同的告警策略类型，就会被设置为非默认。
      */
@@ -155,9 +171,9 @@ export declare class Client extends AbstractClient {
      */
     DescribeAccidentEventList(req: DescribeAccidentEventListRequest, cb?: (error: string, rep: DescribeAccidentEventListResponse) => void): Promise<DescribeAccidentEventListResponse>;
     /**
-     * 告警2.0编辑告警策略基本信息，包括策略名、备注
+     * 批量删除 Prometheus 报警规则
      */
-    ModifyAlarmPolicyInfo(req: ModifyAlarmPolicyInfoRequest, cb?: (error: string, rep: ModifyAlarmPolicyInfoResponse) => void): Promise<ModifyAlarmPolicyInfoResponse>;
+    DeleteAlertRules(req: DeleteAlertRulesRequest, cb?: (error: string, rep: DeleteAlertRulesResponse) => void): Promise<DeleteAlertRulesResponse>;
     /**
      * 查询告警历史
 
@@ -202,6 +218,10 @@ export declare class Client extends AbstractClient {
      * 更新策略组
      */
     ModifyPolicyGroup(req: ModifyPolicyGroupRequest, cb?: (error: string, rep: ModifyPolicyGroupResponse) => void): Promise<ModifyPolicyGroupResponse>;
+    /**
+     * Prometheus 报警规则查询接口
+     */
+    DescribeAlertRules(req: DescribeAlertRulesRequest, cb?: (error: string, rep: DescribeAlertRulesResponse) => void): Promise<DescribeAlertRulesResponse>;
     /**
      * 获取单个告警策略详情
      */

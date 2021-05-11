@@ -32,6 +32,7 @@ import {
   DescribeEndUsersRequest,
   DescribeEndUserStatisticRequest,
   CloudRunServiceSimpleVersionSnapshot,
+  CreateWxCloudBaseRunServerDBClusterResponse,
   LogServiceInfo,
   DescribeCloudBaseRunResourceForExtendRequest,
   ModifyEndUserRequest,
@@ -53,6 +54,7 @@ import {
   CommonServiceAPIRequest,
   CreateWxCloudBaseRunEnvRequest,
   CreateStaticStoreRequest,
+  CreateWxCloudBaseRunServerDBClusterRequest,
   DeleteCloudBaseProjectLatestVersionResponse,
   CreateAuthDomainResponse,
   DescribeEnvsRequest,
@@ -217,6 +219,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSmsQuotasResponse) => void
   ): Promise<DescribeSmsQuotasResponse> {
     return this.request("DescribeSmsQuotas", req, cb)
+  }
+
+  /**
+   * 开通微信云托管MySQL数据库服务
+   */
+  async CreateWxCloudBaseRunServerDBCluster(
+    req: CreateWxCloudBaseRunServerDBClusterRequest,
+    cb?: (error: string, rep: CreateWxCloudBaseRunServerDBClusterResponse) => void
+  ): Promise<CreateWxCloudBaseRunServerDBClusterResponse> {
+    return this.request("CreateWxCloudBaseRunServerDBCluster", req, cb)
   }
 
   /**

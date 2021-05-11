@@ -1194,13 +1194,21 @@ export interface ModifyInstanceTokenRequest {
       */
     TokenId: string;
     /**
-      * 启用或禁用实例长期访问凭证
-      */
-    Enable: boolean;
-    /**
       * 实例 ID
       */
     RegistryId: string;
+    /**
+      * 启用或禁用实例长期访问凭证
+      */
+    Enable?: boolean;
+    /**
+      * 访问凭证描述
+      */
+    Desc?: string;
+    /**
+      * 1为修改描述 2为启动禁用，不填写默认为修改启动禁用
+      */
+    ModifyFlag?: number;
 }
 /**
  * DeleteImageLifecyclePersonal返回参数结构体

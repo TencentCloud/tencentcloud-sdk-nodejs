@@ -818,6 +818,16 @@ it("cwp.v20180228.DescribeProVersionInfo", async function () {
     }
 })
 
+it("cwp.v20180228.DescribeESHits", async function () {
+    try {
+       const data = await client.DescribeESHits({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeSecurityEventsCnt", async function () {
     try {
        const data = await client.DescribeSecurityEventsCnt({})

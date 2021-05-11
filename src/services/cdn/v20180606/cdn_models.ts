@@ -3404,7 +3404,7 @@ export interface AuthenticationTypeD {
 
   /**
       * 签名过期时间设置
-单位为秒，最大可设置为 31536000
+单位为秒，最大可设置为 630720000
       */
   ExpireTime: number
 
@@ -3456,7 +3456,7 @@ export interface AuthenticationTypeC {
 
   /**
       * 签名过期时间设置
-单位为秒，最大可设置为 31536000
+单位为秒，最大可设置为 630720000
       */
   ExpireTime: number
 
@@ -3494,7 +3494,7 @@ export interface AuthenticationTypeB {
 
   /**
       * 签名过期时间设置
-单位为秒，最大可设置为 31536000
+单位为秒，最大可设置为 630720000
       */
   ExpireTime: number
 
@@ -3536,7 +3536,7 @@ export interface AuthenticationTypeA {
 
   /**
       * 签名过期时间设置
-单位为秒，最大可设置为 31536000
+单位为秒，最大可设置为 630720000
       */
   ExpireTime: number
 
