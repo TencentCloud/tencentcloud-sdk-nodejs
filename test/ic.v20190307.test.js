@@ -58,6 +58,16 @@ it("ic.v20190307.SendMultiSms", async function () {
     }
 })
 
+it("ic.v20190307.ModifyUserCardRemark", async function () {
+    try {
+       const data = await client.ModifyUserCardRemark({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ic.v20190307.RenewCards", async function () {
     try {
        const data = await client.RenewCards({})

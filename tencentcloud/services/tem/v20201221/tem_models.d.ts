@@ -490,6 +490,14 @@ export interface LogOutputConf {
       * cls日志主题
       */
     ClsLogTopicId?: string;
+    /**
+      * cls日志集id
+      */
+    ClsLogsetId?: string;
+    /**
+      * cls日志名称
+      */
+    ClsLogTopicName?: string;
 }
 /**
  * DescribeIngresses返回参数结构体
@@ -822,6 +830,10 @@ export interface TemNamespaceInfo {
       * eks cluster status
       */
     ClusterStatus: string;
+    /**
+      * 是否开启tsw
+      */
+    EnableTswTraceService: boolean;
 }
 /**
  * 命名空间分页

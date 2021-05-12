@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { SendMultiSmsResponse, RenewCardsResponse, DescribeCardsResponse, DescribeCardResponse, DescribeAppResponse, DescribeCardRequest, DescribeAppRequest, SendSmsResponse, SendSmsRequest, DescribeCardsRequest, SendMultiSmsRequest, RenewCardsRequest } from "./ic_models";
+import { SendMultiSmsResponse, RenewCardsResponse, DescribeCardsResponse, ModifyUserCardRemarkRequest, DescribeCardResponse, DescribeAppResponse, DescribeCardRequest, DescribeAppRequest, SendSmsResponse, ModifyUserCardRemarkResponse, SendSmsRequest, DescribeCardsRequest, SendMultiSmsRequest, RenewCardsRequest } from "./ic_models";
 /**
  * ic client
  * @class
@@ -23,6 +23,10 @@ export declare class Client extends AbstractClient {
      * 群发短信
      */
     SendMultiSms(req: SendMultiSmsRequest, cb?: (error: string, rep: SendMultiSmsResponse) => void): Promise<SendMultiSmsResponse>;
+    /**
+     * 编辑卡片备注
+     */
+    ModifyUserCardRemark(req: ModifyUserCardRemarkRequest, cb?: (error: string, rep: ModifyUserCardRemarkResponse) => void): Promise<ModifyUserCardRemarkResponse>;
     /**
      * 批量为卡片续费，此接口建议调用至少间隔10s,如果出现返回deal lock failed相关的错误，请过10s再重试。
 续费的必要条件：

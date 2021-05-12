@@ -23,12 +23,14 @@ import {
   RenewCardsResponse,
   CardList,
   DescribeCardsResponse,
+  ModifyUserCardRemarkRequest,
   DescribeCardResponse,
   CardInfo,
   DescribeAppResponse,
   DescribeCardRequest,
   DescribeAppRequest,
   SendSmsResponse,
+  ModifyUserCardRemarkResponse,
   SendSmsRequest,
   DescribeCardsRequest,
   SendMultiSmsRequest,
@@ -85,6 +87,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SendMultiSmsResponse) => void
   ): Promise<SendMultiSmsResponse> {
     return this.request("SendMultiSms", req, cb)
+  }
+
+  /**
+   * 编辑卡片备注
+   */
+  async ModifyUserCardRemark(
+    req: ModifyUserCardRemarkRequest,
+    cb?: (error: string, rep: ModifyUserCardRemarkResponse) => void
+  ): Promise<ModifyUserCardRemarkResponse> {
+    return this.request("ModifyUserCardRemark", req, cb)
   }
 
   /**

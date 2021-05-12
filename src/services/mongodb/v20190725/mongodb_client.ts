@@ -22,7 +22,7 @@ import {
   DescribeSpecInfoRequest,
   KillOpsRequest,
   CreateDBInstanceRequest,
-  KillOpsResponse,
+  DescribeSecurityGroupResponse,
   DescribeCurrentOpResponse,
   IsolateDBInstanceResponse,
   BackupDownloadTaskStatus,
@@ -35,12 +35,14 @@ import {
   ReplicaSetInfo,
   CreateDBInstanceHourRequest,
   AssignProjectRequest,
+  SecurityGroupBound,
   CreateBackupDownloadTaskResponse,
   ClientConnection,
   InquirePriceModifyDBInstanceSpecRequest,
   BackupInfo,
   InquirePriceRenewDBInstancesRequest,
   DescribeAsyncRequestInfoRequest,
+  KillOpsResponse,
   SpecificationInfo,
   CreateBackupDownloadTaskRequest,
   DescribeSlowLogPatternsRequest,
@@ -66,11 +68,12 @@ import {
   DescribeClientConnectionsRequest,
   DescribeDBInstanceDealResponse,
   ModifyDBInstanceSpecResponse,
-  ShardInfo,
+  SecurityGroup,
   OfflineIsolatedDBInstanceResponse,
   DescribeBackupDownloadTaskRequest,
   DescribeBackupAccessRequest,
   RenameInstanceRequest,
+  DescribeSecurityGroupRequest,
   RenewDBInstancesResponse,
   DescribeBackupDownloadTaskResponse,
   RenameInstanceResponse,
@@ -89,6 +92,7 @@ import {
   InstanceChargePrepaid,
   InquirePriceCreateDBInstancesResponse,
   RenewDBInstancesRequest,
+  ShardInfo,
 } from "./mongodb_models"
 
 /**
@@ -138,6 +142,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ResetDBInstancePasswordResponse) => void
   ): Promise<ResetDBInstancePasswordResponse> {
     return this.request("ResetDBInstancePassword", req, cb)
+  }
+
+  /**
+   * 查询实例绑定的安全组
+   */
+  async DescribeSecurityGroup(
+    req: DescribeSecurityGroupRequest,
+    cb?: (error: string, rep: DescribeSecurityGroupResponse) => void
+  ): Promise<DescribeSecurityGroupResponse> {
+    return this.request("DescribeSecurityGroup", req, cb)
   }
 
   /**

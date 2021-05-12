@@ -857,6 +857,33 @@ export interface DescribeCloudBaseRunResourceRequest {
 }
 
 /**
+ * RollUpdateCloudBaseRunServerVersion返回参数结构体
+ */
+export interface RollUpdateCloudBaseRunServerVersionResponse {
+  /**
+   * succ为成功
+   */
+  Result: string
+
+  /**
+      * 滚动更新的VersionName
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  VersionName: string
+
+  /**
+      * 操作记录id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RunId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * cfs挂载点
  */
 export interface CloudBaseRunVolumeMount {
@@ -1980,6 +2007,11 @@ export interface CreateCloudBaseRunServerVersionRequest {
    * 服务磁盘挂载
    */
   ServiceVolumes?: Array<CloudRunServiceVolume>
+
+  /**
+   * 是否创建JnsGw 0未传默认创建 1创建 2不创建
+   */
+  IsCreateJnsGw?: number
 }
 
 /**
@@ -3880,4 +3912,169 @@ export interface CloudBaseCodeRepoName {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FullName?: string
+}
+
+/**
+ * RollUpdateCloudBaseRunServerVersion请求参数结构体
+ */
+export interface RollUpdateCloudBaseRunServerVersionRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+
+  /**
+   * 要替换的版本名称，可以为latest
+   */
+  VersionName: string
+
+  /**
+   * 枚举（package/repository/image)
+   */
+  UploadType?: string
+
+  /**
+   * repository的类型(coding/gitlab/github)
+   */
+  RepositoryType?: string
+
+  /**
+   * 流量占比
+   */
+  FlowRatio?: number
+
+  /**
+   * dockerfile地址
+   */
+  DockerfilePath?: string
+
+  /**
+   * 构建目录
+   */
+  BuildDir?: string
+
+  /**
+   * Cpu的大小，单位：核
+   */
+  Cpu?: string
+
+  /**
+   * Mem的大小，单位：G
+   */
+  Mem?: string
+
+  /**
+   * 最小副本数，最小值：0
+   */
+  MinNum?: string
+
+  /**
+   * 最大副本数
+   */
+  MaxNum?: string
+
+  /**
+   * 策略类型
+   */
+  PolicyType?: string
+
+  /**
+   * 策略阈值
+   */
+  PolicyThreshold?: string
+
+  /**
+   * 环境变量
+   */
+  EnvParams?: string
+
+  /**
+   * 容器端口
+   */
+  ContainerPort?: number
+
+  /**
+   * 服务名称
+   */
+  ServerName?: string
+
+  /**
+   * repository地址
+   */
+  Repository?: string
+
+  /**
+   * 分支
+   */
+  Branch?: string
+
+  /**
+   * 版本备注
+   */
+  VersionRemark?: string
+
+  /**
+   * 代码包名字
+   */
+  PackageName?: string
+
+  /**
+   * 代码包版本
+   */
+  PackageVersion?: string
+
+  /**
+   * Image的详情
+   */
+  ImageInfo?: CloudBaseRunImageInfo
+
+  /**
+   * Github等拉取代码的详情
+   */
+  CodeDetail?: CloudBaseCodeRepoDetail
+
+  /**
+   * 是否回放流量
+   */
+  IsRebuild?: boolean
+
+  /**
+   * 延迟多长时间开始健康检查（单位s）
+   */
+  InitialDelaySeconds?: number
+
+  /**
+   * cfs挂载信息
+   */
+  MountVolumeInfo?: Array<CloudBaseRunVolumeMount>
+
+  /**
+   * 是否回滚
+   */
+  Rollback?: boolean
+
+  /**
+   * 版本历史名
+   */
+  SnapshotName?: string
+
+  /**
+   * 自定义采集路径
+   */
+  CustomLogs?: string
+
+  /**
+   * 是否启用统一域名
+   */
+  EnableUnion?: boolean
+
+  /**
+   * 操作备注
+   */
+  OperatorRemark?: string
+
+  /**
+   * 服务路径（只会第一次生效）
+   */
+  ServerPath?: string
 }

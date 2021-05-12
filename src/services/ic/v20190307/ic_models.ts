@@ -125,6 +125,26 @@ export interface DescribeCardsResponse {
 }
 
 /**
+ * ModifyUserCardRemark请求参数结构体
+ */
+export interface ModifyUserCardRemarkRequest {
+  /**
+   * 应用ID
+   */
+  Sdkappid: number
+
+  /**
+   * 物联卡ICCID
+   */
+  Iccid: string
+
+  /**
+   * 备注信息，限50字
+   */
+  Remark?: string
+}
+
+/**
  * DescribeCard返回参数结构体
  */
 export interface DescribeCardResponse {
@@ -349,6 +369,16 @@ export interface SendSmsResponse {
       */
   Data?: SmsSid
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyUserCardRemark返回参数结构体
+ */
+export interface ModifyUserCardRemarkResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

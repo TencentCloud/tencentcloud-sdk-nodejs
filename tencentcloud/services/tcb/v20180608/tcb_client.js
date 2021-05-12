@@ -67,6 +67,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSmsQuotas", req, cb);
     }
     /**
+     * 针对特定的版本，进行滚动更新
+     */
+    async RollUpdateCloudBaseRunServerVersion(req, cb) {
+        return this.request("RollUpdateCloudBaseRunServerVersion", req, cb);
+    }
+    /**
      * 开通微信云托管MySQL数据库服务
      */
     async CreateWxCloudBaseRunServerDBCluster(req, cb) {

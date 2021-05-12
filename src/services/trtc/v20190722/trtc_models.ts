@@ -1330,7 +1330,7 @@ export interface PresetLayoutConfig {
   LocationY?: number
 
   /**
-   * 该画面在输出时的层级，单位为像素值，不填默认为0。
+   * 该画面在输出时的层级，不填默认为0。
    */
   ZOrder?: number
 

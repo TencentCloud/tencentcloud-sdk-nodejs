@@ -487,60 +487,60 @@ export interface ImageModerationResponse {
       * 建议您拿到判断结果后的执行操作。
 建议值，Block：建议屏蔽，Review：建议复审，Pass：建议通过
       */
-    Suggestion?: string;
+    Suggestion: string;
     /**
       * 恶意标签，Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义图片。
 以及其他令人反感、不安全或不适宜的内容类型。
       */
-    Label?: string;
+    Label: string;
     /**
       * 子标签名称，如色情--性行为；当未命中子标签时，返回空字符串；
       */
-    SubLabel?: string;
+    SubLabel: string;
     /**
       * 机器判断当前分类的置信度，取值范围：0.00~100.00。分数越高，表示越有可能属于当前分类。
 （如：色情 99.99，则该样本属于色情的置信度非常高。）
       */
-    Score?: number;
+    Score: number;
     /**
       * 智能模型的识别结果，包括涉黄、广告等令人反感、不安全或不适宜的内容类型识别结果。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    LabelResults?: Array<LabelResult>;
+    LabelResults: Array<LabelResult>;
     /**
       * 物体检测模型的审核结果，包括实体、广告台标/二维码等物体坐标信息与内容审核信息。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ObjectResults?: Array<ObjectResult>;
+    ObjectResults: Array<ObjectResult>;
     /**
       * OCR识别后的文本识别结果，包括文本所处图片的OCR坐标信息以及图片文本的识别结果。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    OcrResults?: Array<OcrResult>;
+    OcrResults: Array<OcrResult>;
     /**
       * 基于图片风险库识别的结果。
 风险库包括不安全黑库与正常白库的结果。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    LibResults?: Array<LibResult>;
+    LibResults: Array<LibResult>;
     /**
       * 请求参数中的DataId。
       */
-    DataId?: string;
+    DataId: string;
     /**
       * 您在入参时所填入的Biztype参数。 -- 该字段暂未开放。
       */
-    BizType?: string;
+    BizType: string;
     /**
       * 扩展字段，用于特定信息返回，不同客户/Biztype下返回信息不同。
 注意：此字段可能返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    Extra?: string;
+    Extra: string;
     /**
       * 图片MD5值
       */
-    FileMD5?: string;
+    FileMD5: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

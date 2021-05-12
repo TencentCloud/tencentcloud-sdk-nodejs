@@ -119,9 +119,13 @@ export interface CreateDBInstanceRequest {
     SecurityGroup?: Array<string>;
 }
 /**
- * KillOps返回参数结构体
+ * DescribeSecurityGroup返回参数结构体
  */
-export interface KillOpsResponse {
+export interface DescribeSecurityGroupResponse {
+    /**
+      * 实例绑定的安全组
+      */
+    Groups: Array<SecurityGroup>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -389,6 +393,27 @@ export interface AssignProjectRequest {
     ProjectId: number;
 }
 /**
+ * 安全组规则
+ */
+export interface SecurityGroupBound {
+    /**
+      * 执行规则。ACCEPT或DROP
+      */
+    Action: string;
+    /**
+      * ip段。
+      */
+    CidrIp: string;
+    /**
+      * 端口范围
+      */
+    PortRange: string;
+    /**
+      * 传输层协议。tcp，udp或ALL
+      */
+    IpProtocol: string;
+}
+/**
  * CreateBackupDownloadTask返回参数结构体
  */
 export interface CreateBackupDownloadTaskResponse {
@@ -497,6 +522,15 @@ export interface DescribeAsyncRequestInfoRequest {
       * 异步请求Id，涉及到异步流程的接口返回，如CreateBackupDBInstance
       */
     AsyncRequestId: string;
+}
+/**
+ * KillOps返回参数结构体
+ */
+export interface KillOpsResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * 实例规格信息
@@ -1082,41 +1116,37 @@ export interface ModifyDBInstanceSpecResponse {
     RequestId?: string;
 }
 /**
- * 实例分片详情
+ * 安全组信息
  */
-export interface ShardInfo {
+export interface SecurityGroup {
     /**
-      * 分片已使用容量
+      * 所属项目id
       */
-    UsedVolume: number;
+    ProjectId: number;
     /**
-      * 分片ID
+      * 创建时间
       */
-    ReplicaSetId: string;
+    CreateTime: string;
     /**
-      * 分片名
+      * 入站规则
       */
-    ReplicaSetName: string;
+    Inbound: Array<SecurityGroupBound>;
     /**
-      * 分片内存规格，单位为MB
+      * 出站规则
       */
-    Memory: number;
+    Outbound: Array<SecurityGroupBound>;
     /**
-      * 分片磁盘规格，单位为MB
+      * 安全组id
       */
-    Volume: number;
+    SecurityGroupId: string;
     /**
-      * 分片Oplog大小，单位为MB
+      * 安全组名称
       */
-    OplogSize: number;
+    SecurityGroupName: string;
     /**
-      * 分片从节点数
+      * 安全组备注
       */
-    SecondaryNum: number;
-    /**
-      * 分片物理id
-      */
-    RealReplicaSetId: string;
+    SecurityGroupRemark: string;
 }
 /**
  * OfflineIsolatedDBInstance返回参数结构体
@@ -1197,6 +1227,15 @@ export interface RenameInstanceRequest {
       * 实例名称
       */
     NewName: string;
+}
+/**
+ * DescribeSecurityGroup请求参数结构体
+ */
+export interface DescribeSecurityGroupRequest {
+    /**
+      * 实例ID，格式如：cmgo-p8vnipr5。
+      */
+    InstanceId: string;
 }
 /**
  * RenewDBInstances返回参数结构体
@@ -1645,4 +1684,41 @@ export interface RenewDBInstancesRequest {
       * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的续费时长、是否设置自动续费等属性。包年包月实例该参数为必传参数。
       */
     InstanceChargePrepaid: InstanceChargePrepaid;
+}
+/**
+ * 实例分片详情
+ */
+export interface ShardInfo {
+    /**
+      * 分片已使用容量
+      */
+    UsedVolume: number;
+    /**
+      * 分片ID
+      */
+    ReplicaSetId: string;
+    /**
+      * 分片名
+      */
+    ReplicaSetName: string;
+    /**
+      * 分片内存规格，单位为MB
+      */
+    Memory: number;
+    /**
+      * 分片磁盘规格，单位为MB
+      */
+    Volume: number;
+    /**
+      * 分片Oplog大小，单位为MB
+      */
+    OplogSize: number;
+    /**
+      * 分片从节点数
+      */
+    SecondaryNum: number;
+    /**
+      * 分片物理id
+      */
+    RealReplicaSetId: string;
 }

@@ -52,6 +52,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SendMultiSms", req, cb);
     }
     /**
+     * 编辑卡片备注
+     */
+    async ModifyUserCardRemark(req, cb) {
+        return this.request("ModifyUserCardRemark", req, cb);
+    }
+    /**
      * 批量为卡片续费，此接口建议调用至少间隔10s,如果出现返回deal lock failed相关的错误，请过10s再重试。
 续费的必要条件：
 1、单次续费的卡片不可以超过 100张。

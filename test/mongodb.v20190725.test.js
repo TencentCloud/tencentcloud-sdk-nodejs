@@ -58,6 +58,16 @@ it("mongodb.v20190725.ResetDBInstancePassword", async function () {
     }
 })
 
+it("mongodb.v20190725.DescribeSecurityGroup", async function () {
+    try {
+       const data = await client.DescribeSecurityGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.FlushInstanceRouterConfig", async function () {
     try {
        const data = await client.FlushInstanceRouterConfig({})

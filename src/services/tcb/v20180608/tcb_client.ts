@@ -40,6 +40,7 @@ import {
   DescribeWxCloudBaseRunEnvsResponse,
   CreateHostingDomainRequest,
   DescribeCloudBaseRunResourceRequest,
+  RollUpdateCloudBaseRunServerVersionResponse,
   CloudBaseRunVolumeMount,
   DescribePostpayFreeQuotasRequest,
   CloudBaseRunImageInfo,
@@ -147,6 +148,7 @@ import {
   DescribePostpayPackageFreeQuotasResponse,
   DescribeExtraPkgBillingInfoResponse,
   CloudBaseCodeRepoName,
+  RollUpdateCloudBaseRunServerVersionRequest,
 } from "./tcb_models"
 
 /**
@@ -219,6 +221,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSmsQuotasResponse) => void
   ): Promise<DescribeSmsQuotasResponse> {
     return this.request("DescribeSmsQuotas", req, cb)
+  }
+
+  /**
+   * 针对特定的版本，进行滚动更新
+   */
+  async RollUpdateCloudBaseRunServerVersion(
+    req: RollUpdateCloudBaseRunServerVersionRequest,
+    cb?: (error: string, rep: RollUpdateCloudBaseRunServerVersionResponse) => void
+  ): Promise<RollUpdateCloudBaseRunServerVersionResponse> {
+    return this.request("RollUpdateCloudBaseRunServerVersion", req, cb)
   }
 
   /**
