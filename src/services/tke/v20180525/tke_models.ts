@@ -358,6 +358,26 @@ export interface CreateClusterRouteTableResponse {
 }
 
 /**
+ * DescribeClusterCommonNames请求参数结构体
+ */
+export interface DescribeClusterCommonNamesRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 子账户列表，不可超出最大值50
+   */
+  SubaccountUins?: Array<string>
+
+  /**
+   * 角色ID列表，不可超出最大值50
+   */
+  RoleIds?: Array<string>
+}
+
+/**
  * DeleteClusterEndpoint返回参数结构体
  */
 export interface DeleteClusterEndpointResponse {
@@ -4464,6 +4484,21 @@ export interface DescribePrometheusAlertHistoryResponse {
 }
 
 /**
+ * DescribeClusterCommonNames返回参数结构体
+ */
+export interface DescribeClusterCommonNamesResponse {
+  /**
+   * 子账户Uin与其客户端证书的CN字段映射
+   */
+  CommonNames: Array<CommonName>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 已存在实例的重装参数
  */
 export interface ExistedInstancesPara {
@@ -4496,6 +4531,21 @@ export interface ExistedInstancesPara {
    * 重装系统时，可以指定修改实例的HostName(集群为HostName模式时，此参数必传，规则名称除不支持大写字符外与[CVM创建实例](https://cloud.tencent.com/document/product/213/15730)接口HostName一致)
    */
   HostName?: string
+}
+
+/**
+ * 账户UIN与客户端证书CommonName的映射
+ */
+export interface CommonName {
+  /**
+   * 子账户UIN
+   */
+  SubaccountUin: string
+
+  /**
+   * 子账户客户端证书中的CommonName字段
+   */
+  CN: string
 }
 
 /**

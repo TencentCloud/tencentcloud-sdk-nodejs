@@ -29,7 +29,7 @@ export declare class Client extends AbstractClient {
      */
     CreateEmailTemplate(req: CreateEmailTemplateRequest, cb?: (error: string, rep: CreateEmailTemplateResponse) => void): Promise<CreateEmailTemplateResponse>;
     /**
-     * 获取近期发送的统计情况，包含发送量、送达率、打开率、退信率等一系列数据。最大跨度为14天。
+     * 获取近期发送的统计情况，包含发送量、送达率、打开率、退信率等一系列数据。
      */
     GetStatisticsReport(req: GetStatisticsReportRequest, cb?: (error: string, rep: GetStatisticsReportResponse) => void): Promise<GetStatisticsReportResponse>;
     /**

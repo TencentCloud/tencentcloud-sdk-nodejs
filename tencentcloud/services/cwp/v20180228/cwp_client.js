@@ -58,10 +58,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAttackLogs", req, cb);
     }
     /**
-     * 本接口 (OpenProVersion) 用于开通专业版。
+     * 导出ES查询文档列表
      */
-    async OpenProVersion(req, cb) {
-        return this.request("OpenProVersion", req, cb);
+    async DescribeSearchExportList(req, cb) {
+        return this.request("DescribeSearchExportList", req, cb);
     }
     /**
      * 本接口 (DescribeWeeklyReportMalwares) 用于获取专业周报木马数据。
@@ -70,10 +70,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeWeeklyReportMalwares", req, cb);
     }
     /**
-     * 本接口 (DescribeVulInfo) 用于获取漏洞详情。
+     * 删除检索模板
      */
-    async DescribeVulInfo(req, cb) {
-        return this.request("DescribeVulInfo", req, cb);
+    async DeleteSearchTemplate(req, cb) {
+        return this.request("DeleteSearchTemplate", req, cb);
     }
     /**
      * 新增或修改高危命令规则
@@ -118,6 +118,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBashRules", req, cb);
     }
     /**
+     * 获取历史搜索记录
+     */
+    async DescribeSearchLogs(req, cb) {
+        return this.request("DescribeSearchLogs", req, cb);
+    }
+    /**
      * 根据Ids删除本地提权
      */
     async DeletePrivilegeEvents(req, cb) {
@@ -154,6 +160,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteMaliciousRequests", req, cb);
     }
     /**
+     * 获取索引列表
+     */
+    async DescribeIndexList(req, cb) {
+        return this.request("DescribeIndexList", req, cb);
+    }
+    /**
      * 获取反弹Shell规则列表
      */
     async DescribeReverseShellRules(req, cb) {
@@ -176,6 +188,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteReverseShellRules(req, cb) {
         return this.request("DeleteReverseShellRules", req, cb);
+    }
+    /**
+     * 查询日志检索服务信息
+     */
+    async DescribeHistoryService(req, cb) {
+        return this.request("DescribeHistoryService", req, cb);
     }
     /**
      * 本接口 (DeleteBruteAttacks) 用于删除暴力破解记录。
@@ -212,6 +230,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeMalwares(req, cb) {
         return this.request("DescribeMalwares", req, cb);
+    }
+    /**
+     * 获取ES字段聚合结果
+     */
+    async DescribeESAggregations(req, cb) {
+        return this.request("DescribeESAggregations", req, cb);
+    }
+    /**
+     * 添加历史搜索记录
+     */
+    async CreateSearchLog(req, cb) {
+        return this.request("CreateSearchLog", req, cb);
     }
     /**
      * 本接口用于编辑异地登录白名单规则。
@@ -287,10 +317,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeOverviewStatistics", req, cb);
     }
     /**
+     * 本接口 (DescribeVulInfo) 用于获取漏洞详情。
+     */
+    async DescribeVulInfo(req, cb) {
+        return this.request("DescribeVulInfo", req, cb);
+    }
+    /**
      * 获取网络攻击威胁类型列表
      */
     async DescribeAttackVulTypeList(req, cb) {
         return this.request("DescribeAttackVulTypeList", req, cb);
+    }
+    /**
+     * 添加检索模板
+     */
+    async CreateSearchTemplate(req, cb) {
+        return this.request("CreateSearchTemplate", req, cb);
     }
     /**
      * 本接口 (DescribeOpenPortTaskStatus) 用于获取实时拉取端口任务状态。
@@ -431,6 +473,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("AddMachineTag", req, cb);
     }
     /**
+     * 获取快速检索列表
+     */
+    async DescribeSearchTemplates(req, cb) {
+        return this.request("DescribeSearchTemplates", req, cb);
+    }
+    /**
      * 新增或编辑标签
      */
     async EditTags(req, cb) {
@@ -539,6 +587,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAlarmAttribute", req, cb);
     }
     /**
+     * 获取日志检索容量使用统计
+     */
+    async DescribeLogStorageStatistic(req, cb) {
+        return this.request("DescribeLogStorageStatistic", req, cb);
+    }
+    /**
      * 本接口 (DescribeComponents) 用于获取组件列表数据。
      */
     async DescribeComponents(req, cb) {
@@ -592,6 +646,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async UntrustMalwares(req, cb) {
         return this.request("UntrustMalwares", req, cb);
+    }
+    /**
+     * 本接口 (OpenProVersion) 用于开通专业版。
+     */
+    async OpenProVersion(req, cb) {
+        return this.request("OpenProVersion", req, cb);
     }
     /**
      * 本接口 (DescribeWeeklyReportVuls) 用于专业版周报漏洞数据。

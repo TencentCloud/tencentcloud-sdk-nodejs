@@ -578,11 +578,11 @@ export interface GetStatisticsReportResponse {
     /**
       * 发信统计报告，按天
       */
-    DailyVolumes?: Array<Volume>;
+    DailyVolumes: Array<Volume>;
     /**
       * 发信统计报告，总览
       */
-    OverallVolume?: Volume;
+    OverallVolume: Volume;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

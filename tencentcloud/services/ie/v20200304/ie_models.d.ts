@@ -346,6 +346,19 @@ export interface CreateQualityControlTaskResponse {
     RequestId?: string;
 }
 /**
+ * 音频响度信息
+ */
+export interface LoudnessInfo {
+    /**
+      * 音频整体响度
+      */
+    Loudness?: number;
+    /**
+      * 音频响度范围
+      */
+    LoudnessRange?: number;
+}
+/**
  * 画质重生子任务参数信息
  */
 export interface SubTaskTranscodeInfo {
@@ -1105,6 +1118,15 @@ export interface EditInfo {
     EndTime: number;
 }
 /**
+ * 音频去除混响
+ */
+export interface RemoveReverb {
+    /**
+      * 去混响类型，可选项：normal
+      */
+    Type?: string;
+}
+/**
  * StopMediaProcessTask返回参数结构体
  */
 export interface StopMediaProcessTaskResponse {
@@ -1369,6 +1391,18 @@ export interface AudioInfo {
 默认不开启
       */
     EnableMuteAudio?: number;
+    /**
+      * 音频响度信息
+      */
+    LoudnessInfo?: LoudnessInfo;
+    /**
+      * 音频音效增强
+      */
+    AudioEnhance?: AudioEnhance;
+    /**
+      * 去除混音
+      */
+    RemoveReverb?: RemoveReverb;
 }
 /**
  * 画质重生子任务结果
@@ -1680,6 +1714,15 @@ export interface TagTaskResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ItemSet: Array<TagTaskResultItem>;
+}
+/**
+ * 音频音效增强，只支持无背景音的音频
+ */
+export interface AudioEnhance {
+    /**
+      * 音效增强种类，可选项：normal
+      */
+    Type?: string;
 }
 /**
  * 任务视频cos信息

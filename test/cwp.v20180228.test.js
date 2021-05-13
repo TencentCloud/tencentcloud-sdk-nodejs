@@ -68,9 +68,9 @@ it("cwp.v20180228.DescribeAttackLogs", async function () {
     }
 })
 
-it("cwp.v20180228.OpenProVersion", async function () {
+it("cwp.v20180228.DescribeSearchExportList", async function () {
     try {
-       const data = await client.OpenProVersion({})
+       const data = await client.DescribeSearchExportList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -88,9 +88,9 @@ it("cwp.v20180228.DescribeWeeklyReportMalwares", async function () {
     }
 })
 
-it("cwp.v20180228.DescribeVulInfo", async function () {
+it("cwp.v20180228.DeleteSearchTemplate", async function () {
     try {
-       const data = await client.DescribeVulInfo({})
+       const data = await client.DeleteSearchTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -168,6 +168,16 @@ it("cwp.v20180228.DescribeBashRules", async function () {
     }
 })
 
+it("cwp.v20180228.DescribeSearchLogs", async function () {
+    try {
+       const data = await client.DescribeSearchLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DeletePrivilegeEvents", async function () {
     try {
        const data = await client.DeletePrivilegeEvents({})
@@ -228,6 +238,16 @@ it("cwp.v20180228.DeleteMaliciousRequests", async function () {
     }
 })
 
+it("cwp.v20180228.DescribeIndexList", async function () {
+    try {
+       const data = await client.DescribeIndexList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeReverseShellRules", async function () {
     try {
        const data = await client.DescribeReverseShellRules({})
@@ -261,6 +281,16 @@ it("cwp.v20180228.RecoverMalwares", async function () {
 it("cwp.v20180228.DeleteReverseShellRules", async function () {
     try {
        const data = await client.DeleteReverseShellRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeHistoryService", async function () {
+    try {
+       const data = await client.DescribeHistoryService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -321,6 +351,26 @@ it("cwp.v20180228.DescribeProcesses", async function () {
 it("cwp.v20180228.DescribeMalwares", async function () {
     try {
        const data = await client.DescribeMalwares({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeESAggregations", async function () {
+    try {
+       const data = await client.DescribeESAggregations({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.CreateSearchLog", async function () {
+    try {
+       const data = await client.CreateSearchLog({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -448,9 +498,29 @@ it("cwp.v20180228.DescribeOverviewStatistics", async function () {
     }
 })
 
+it("cwp.v20180228.DescribeVulInfo", async function () {
+    try {
+       const data = await client.DescribeVulInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeAttackVulTypeList", async function () {
     try {
        const data = await client.DescribeAttackVulTypeList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.CreateSearchTemplate", async function () {
+    try {
+       const data = await client.CreateSearchTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -688,6 +758,16 @@ it("cwp.v20180228.AddMachineTag", async function () {
     }
 })
 
+it("cwp.v20180228.DescribeSearchTemplates", async function () {
+    try {
+       const data = await client.DescribeSearchTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.EditTags", async function () {
     try {
        const data = await client.EditTags({})
@@ -868,6 +948,16 @@ it("cwp.v20180228.DescribeAlarmAttribute", async function () {
     }
 })
 
+it("cwp.v20180228.DescribeLogStorageStatistic", async function () {
+    try {
+       const data = await client.DescribeLogStorageStatistic({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeComponents", async function () {
     try {
        const data = await client.DescribeComponents({})
@@ -951,6 +1041,16 @@ it("cwp.v20180228.DescribeWeeklyReportBruteAttacks", async function () {
 it("cwp.v20180228.UntrustMalwares", async function () {
     try {
        const data = await client.UntrustMalwares({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.OpenProVersion", async function () {
+    try {
+       const data = await client.OpenProVersion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

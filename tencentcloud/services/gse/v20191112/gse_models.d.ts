@@ -2237,6 +2237,11 @@ export interface Instance {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ReserveValue: number;
+    /**
+      * 实例的私有IP地址
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    PrivateIpAddress: string;
 }
 /**
  * SearchGameServerSessions请求参数结构体

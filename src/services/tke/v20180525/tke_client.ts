@@ -35,6 +35,7 @@ import {
   DescribePrometheusTemplateSyncResponse,
   UpdateEKSClusterRequest,
   CreateClusterRouteTableResponse,
+  DescribeClusterCommonNamesRequest,
   DeleteClusterEndpointResponse,
   PrometheusTemplateModify,
   PrometheusNotification,
@@ -202,7 +203,9 @@ import {
   DescribeRouteTableConflictsRequest,
   InstanceUpgradePreCheckResultItem,
   DescribePrometheusAlertHistoryResponse,
+  DescribeClusterCommonNamesResponse,
   ExistedInstancesPara,
+  CommonName,
   DescribeClusterAsGroupOptionResponse,
   ClusterAsGroupAttribute,
   DeleteClusterNodePoolResponse,
@@ -459,6 +462,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteClusterResponse) => void
   ): Promise<DeleteClusterResponse> {
     return this.request("DeleteCluster", req, cb)
+  }
+
+  /**
+   * 获取指定子账户在RBAC授权模式中对应kube-apiserver客户端证书的CommonName字段，如果没有客户端证书，将会签发一个，此接口有最大传入子账户数量上限，当前为50
+   */
+  async DescribeClusterCommonNames(
+    req: DescribeClusterCommonNamesRequest,
+    cb?: (error: string, rep: DescribeClusterCommonNamesResponse) => void
+  ): Promise<DescribeClusterCommonNamesResponse> {
+    return this.request("DescribeClusterCommonNames", req, cb)
   }
 
   /**

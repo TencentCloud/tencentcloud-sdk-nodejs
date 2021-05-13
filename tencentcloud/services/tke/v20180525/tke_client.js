@@ -166,6 +166,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteCluster", req, cb);
     }
     /**
+     * 获取指定子账户在RBAC授权模式中对应kube-apiserver客户端证书的CommonName字段，如果没有客户端证书，将会签发一个，此接口有最大传入子账户数量上限，当前为50
+     */
+    async DescribeClusterCommonNames(req, cb) {
+        return this.request("DescribeClusterCommonNames", req, cb);
+    }
+    /**
      * 为已经存在的集群创建伸缩组
      */
     async CreateClusterAsGroup(req, cb) {

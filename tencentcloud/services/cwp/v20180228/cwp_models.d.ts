@@ -8,15 +8,21 @@ export interface DescribeMalwareInfoRequest {
     Id: number;
 }
 /**
- * ModifyAutoOpenProVersionConfig请求参数结构体
+ * DescribeSearchTemplates返回参数结构体
  */
-export interface ModifyAutoOpenProVersionConfigRequest {
+export interface DescribeSearchTemplatesResponse {
     /**
-      * 设置自动开通状态。
-<li>CLOSE：关闭</li>
-<li>OPEN：打开</li>
+      * 总数
       */
-    Status: string;
+    TotalCount: number;
+    /**
+      * 模板列表
+      */
+    List: Array<SearchTemplate>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeMachineOsList请求参数结构体
@@ -365,6 +371,19 @@ export interface DescribeWeeklyReportBruteAttacksRequest {
     Offset?: number;
 }
 /**
+ * CreateSearchTemplate返回参数结构体
+ */
+export interface CreateSearchTemplateResponse {
+    /**
+      * 0：成功，非0：失败
+      */
+    Status: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * CreateUsualLoginPlaces请求参数结构体
  */
 export interface CreateUsualLoginPlacesRequest {
@@ -391,34 +410,9 @@ export interface DescribeProcessTaskStatusRequest {
  */
 export declare type DescribeAttackVulTypeListRequest = null;
 /**
- * DescribeVulScanResult返回参数结构体
+ * DescribeLogStorageStatistic请求参数结构体
  */
-export interface DescribeVulScanResultResponse {
-    /**
-      * 漏洞数量。
-      */
-    VulNum?: number;
-    /**
-      * 专业版机器数。
-      */
-    ProVersionNum?: number;
-    /**
-      * 受影响的专业版主机数。
-      */
-    ImpactedHostNum?: number;
-    /**
-      * 主机总数。
-      */
-    HostNum?: number;
-    /**
-      * 基础版机器数。
-      */
-    BasicVersionNum?: number;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
+export declare type DescribeLogStorageStatisticRequest = null;
 /**
  * ModifyAlarmAttribute请求参数结构体
  */
@@ -509,6 +503,19 @@ export interface InquiryPriceOpenProVersionPrepaidRequest {
       * 需要开通专业版机器列表数组。
       */
     Machines: Array<ProVersionMachine>;
+}
+/**
+ * DescribeSearchTemplates请求参数结构体
+ */
+export interface DescribeSearchTemplatesRequest {
+    /**
+      * 偏移量，默认为0。
+      */
+    Offset?: number;
+    /**
+      * 返回数量，默认为10，最大值为100。
+      */
+    Limit?: number;
 }
 /**
  * ExportMalwares请求参数结构体
@@ -891,55 +898,25 @@ export interface DescribeAgentVulsRequest {
     Filters?: Array<Filter>;
 }
 /**
- * 异地登录
+ * DescribeProVersionInfo返回参数结构体
  */
-export interface NonLocalLoginPlace {
+export interface DescribeProVersionInfoResponse {
     /**
-      * 事件ID。
+      * 后付费昨日扣费
       */
-    Id: number;
+    PostPayCost: number;
     /**
-      * 主机IP。
+      * 新增主机是否自动开通专业版
       */
-    MachineIp: string;
+    IsAutoOpenProVersion: boolean;
     /**
-      * 登录状态
-<li>NON_LOCAL_LOGIN：异地登录</li>
-<li>NORMAL_LOGIN：正常登录</li>
+      * 开通专业版主机数
       */
-    Status: string;
+    ProVersionNum: number;
     /**
-      * 用户名。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    UserName: string;
-    /**
-      * 城市ID。
-      */
-    City: number;
-    /**
-      * 国家ID。
-      */
-    Country: number;
-    /**
-      * 省份ID。
-      */
-    Province: number;
-    /**
-      * 登录IP。
-      */
-    SrcIp: string;
-    /**
-      * 机器名称。
-      */
-    MachineName: string;
-    /**
-      * 登录时间。
-      */
-    LoginTime: string;
-    /**
-      * 云镜客户端唯一标识Uuid。
-      */
-    Uuid: string;
+    RequestId?: string;
 }
 /**
  * DescribeRiskDnsList返回参数结构体
@@ -995,38 +972,37 @@ export interface CreateProcessTaskResponse {
     RequestId?: string;
 }
 /**
- * 安全事件消息数据。
+ * DescribeHistoryService返回参数结构体
  */
-export interface SecurityDynamic {
+export interface DescribeHistoryServiceResponse {
     /**
-      * 云镜客户端UUID。
+      * 1 可购买 2 只能升降配 3 只能跳到续费管理页
       */
-    Uuid: string;
+    BuyStatus: number;
     /**
-      * 安全事件发生事件。
+      * 用户已购容量 单位 G
       */
-    EventTime: string;
+    InquireNum: number;
     /**
-      * 安全事件类型。
-<li>MALWARE：木马事件</li>
-<li>NON_LOCAL_LOGIN：异地登录</li>
-<li>BRUTEATTACK_SUCCESS：密码破解成功</li>
-<li>VUL：漏洞</li>
-<li>BASELINE：安全基线</li>
+      * 到期时间
       */
-    EventType: string;
+    EndTime: string;
     /**
-      * 安全事件消息。
+      * 是否自动续费,0 初始值, 1 开通 2 没开通
       */
-    Message: string;
+    IsAutoOpenRenew: number;
     /**
-      * 安全事件等级。
-<li>RISK: 严重</li>
-<li>HIGH: 高危</li>
-<li>NORMAL: 中危</li>
-<li>LOW: 低危</li>
+      * 资源ID
       */
-    SecurityLevel: string;
+    ResourceId: string;
+    /**
+      * 0 没开通 1 正常 2隔离 3销毁
+      */
+    Status: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * RenewProVersion请求参数结构体
@@ -1252,6 +1228,15 @@ export interface EditPrivilegeRuleResponse {
     RequestId?: string;
 }
 /**
+ * UntrustMaliciousRequest请求参数结构体
+ */
+export interface UntrustMaliciousRequestRequest {
+    /**
+      * 受信任记录ID。
+      */
+    Id: number;
+}
+/**
  * DescribeHistoryAccounts返回参数结构体
  */
 export interface DescribeHistoryAccountsResponse {
@@ -1454,13 +1439,38 @@ export interface ReverseShell {
     ProcTree: string;
 }
 /**
- * UntrustMaliciousRequest请求参数结构体
+ * 安全事件消息数据。
  */
-export interface UntrustMaliciousRequestRequest {
+export interface SecurityDynamic {
     /**
-      * 受信任记录ID。
+      * 云镜客户端UUID。
       */
-    Id: number;
+    Uuid: string;
+    /**
+      * 安全事件发生事件。
+      */
+    EventTime: string;
+    /**
+      * 安全事件类型。
+<li>MALWARE：木马事件</li>
+<li>NON_LOCAL_LOGIN：异地登录</li>
+<li>BRUTEATTACK_SUCCESS：密码破解成功</li>
+<li>VUL：漏洞</li>
+<li>BASELINE：安全基线</li>
+      */
+    EventType: string;
+    /**
+      * 安全事件消息。
+      */
+    Message: string;
+    /**
+      * 安全事件等级。
+<li>RISK: 严重</li>
+<li>HIGH: 高危</li>
+<li>NORMAL: 中危</li>
+<li>LOW: 低危</li>
+      */
+    SecurityLevel: string;
 }
 /**
  * ExportBruteAttacks返回参数结构体
@@ -1554,17 +1564,13 @@ export interface SwitchBashRulesResponse {
     RequestId?: string;
 }
 /**
- * OpenProVersionPrepaid请求参数结构体
+ * DescribeSearchExportList请求参数结构体
  */
-export interface OpenProVersionPrepaidRequest {
+export interface DescribeSearchExportListRequest {
     /**
-      * 购买相关参数。
+      * ES查询条件JSON
       */
-    ChargePrepaid: ChargePrepaid;
-    /**
-      * 需要开通专业版主机信息数组。
-      */
-    Machines: Array<ProVersionMachine>;
+    Query: string;
 }
 /**
  * ModifyLoginWhiteList返回参数结构体
@@ -1589,11 +1595,11 @@ export interface DescribeTagsResponse {
     RequestId?: string;
 }
 /**
- * DescribeRiskDnsList请求参数结构体
+ * DescribePrivilegeEvents请求参数结构体
  */
-export interface DescribeRiskDnsListRequest {
+export interface DescribePrivilegeEventsRequest {
     /**
-      * 需要返回的数量，默认为10，最大值为100
+      * 返回数量，默认为10，最大值为100。
       */
     Limit?: number;
     /**
@@ -1602,21 +1608,9 @@ export interface DescribeRiskDnsListRequest {
     Offset?: number;
     /**
       * 过滤条件。
-<li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
-<li>Url - String - 是否必填：否 - Url筛选</li>
-<li>Status - String - 是否必填：否 - 状态筛选0:待处理；2:信任；3:不信任</li>
-<li>MergeBeginTime - String - 是否必填：否 - 最近访问开始时间</li>
-<li>MergeEndTime - String - 是否必填：否 - 最近访问结束时间</li>
+<li>Keywords - String - 是否必填：否 - 关键词(主机IP)</li>
       */
     Filters?: Array<Filter>;
-    /**
-      * 排序方式
-      */
-    Order?: string;
-    /**
-      * 排序字段
-      */
-    By?: string;
 }
 /**
  * DescribeProVersionInfo请求参数结构体
@@ -1652,6 +1646,43 @@ export interface DescribeESHitsResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 快速搜索模板
+ */
+export interface SearchTemplate {
+    /**
+      * 检索名称
+      */
+    Name: string;
+    /**
+      * 检索索引类型
+      */
+    LogType: string;
+    /**
+      * 检索语句
+      */
+    Condition: string;
+    /**
+      * 时间范围
+      */
+    TimeRange: string;
+    /**
+      * 转换的检索语句内容
+      */
+    Query: string;
+    /**
+      * 检索方式。输入框检索：standard,过滤，检索：simple
+      */
+    Flag: string;
+    /**
+      * 展示数据
+      */
+    DisplayData: string;
+    /**
+      * 规则ID
+      */
+    Id?: number;
 }
 /**
  * EditReverseShellRule返回参数结构体
@@ -1718,6 +1749,23 @@ export interface MachineTag {
       * 标签ID
       */
     TagId: number;
+}
+/**
+ * DescribeLogStorageStatistic返回参数结构体
+ */
+export interface DescribeLogStorageStatisticResponse {
+    /**
+      * 总容量
+      */
+    TotalSize: number;
+    /**
+      * 已使用容量
+      */
+    UsedSize: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeAttackLogInfo返回参数结构体
@@ -2000,6 +2048,23 @@ export interface TagMachine {
     MachineType: string;
 }
 /**
+ * DescribeOpenPortTaskStatus返回参数结构体
+ */
+export interface DescribeOpenPortTaskStatusResponse {
+    /**
+      * 任务状态。
+<li>COMPLETE：完成（此时可以调用DescribeOpenPorts接口获取实时进程列表）</li>
+<li>AGENT_OFFLINE：云镜客户端离线</li>
+<li>COLLECTING：端口获取中</li>
+<li>FAILED：进程获取失败</li>
+      */
+    Status?: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeWeeklyReportInfo请求参数结构体
  */
 export interface DescribeWeeklyReportInfoRequest {
@@ -2126,6 +2191,50 @@ export interface ModifyLoginWhiteListRequest {
     Rules: LoginWhiteListsRule;
 }
 /**
+ * 漏洞列表数据
+ */
+export interface Vul {
+    /**
+      * 漏洞种类ID
+      */
+    VulId: number;
+    /**
+      * 漏洞名称
+      */
+    VulName: string;
+    /**
+      * 漏洞危害等级:
+HIGH：高危
+MIDDLE：中危
+LOW：低危
+NOTICE：提示
+      */
+    VulLevel: string;
+    /**
+      * 最后扫描时间
+      */
+    LastScanTime: string;
+    /**
+      * 受影响机器数量
+      */
+    ImpactedHostNum: number;
+    /**
+      * 漏洞状态
+* UN_OPERATED : 待处理
+* FIXED : 已修复
+      */
+    VulStatus: string;
+}
+/**
+ * CreateSearchTemplate请求参数结构体
+ */
+export interface CreateSearchTemplateRequest {
+    /**
+      * 搜索模板
+      */
+    SearchTemplate: SearchTemplate;
+}
+/**
  * DescribeBashEvents请求参数结构体
  */
 export interface DescribeBashEventsRequest {
@@ -2243,6 +2352,15 @@ export interface DeleteMachineRequest {
       * 云镜客户端Uuid。
       */
     Uuid: string;
+}
+/**
+ * SetBashEventsStatus返回参数结构体
+ */
+export interface SetBashEventsStatusResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeVulInfo请求参数结构体
@@ -2472,6 +2590,32 @@ export interface DeleteUsualLoginPlacesResponse {
     RequestId?: string;
 }
 /**
+ * DescribeSearchExportList返回参数结构体
+ */
+export interface DescribeSearchExportListResponse {
+    /**
+      * 导出的任务号
+      */
+    TaskId: number;
+    /**
+      * 下载地址
+      */
+    DownloadUrl: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DeleteSearchTemplate请求参数结构体
+ */
+export interface DeleteSearchTemplateRequest {
+    /**
+      * 模板ID
+      */
+    Id: number;
+}
+/**
  * DeleteNonlocalLoginPlaces返回参数结构体
  */
 export interface DeleteNonlocalLoginPlacesResponse {
@@ -2650,6 +2794,23 @@ export interface ExportVulDetectionExcelResponse {
     RequestId?: string;
 }
 /**
+ * SeparateMalwares返回参数结构体
+ */
+export interface SeparateMalwaresResponse {
+    /**
+      * 隔离成功的id数组。
+      */
+    SuccessIds?: Array<number>;
+    /**
+      * 隔离失败的id数组。
+      */
+    FailedIds?: Array<number>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * SwitchBashRules请求参数结构体
  */
 export interface SwitchBashRulesRequest {
@@ -2776,9 +2937,13 @@ export interface CloseProVersionRequest {
     Quuid?: string;
 }
 /**
- * SetBashEventsStatus返回参数结构体
+ * DescribeIndexList返回参数结构体
  */
-export interface SetBashEventsStatusResponse {
+export interface DescribeIndexListResponse {
+    /**
+      * ES 索引信息
+      */
+    Data: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2809,6 +2974,36 @@ export interface DescribeUsualLoginPlacesResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * DescribeRiskDnsList请求参数结构体
+ */
+export interface DescribeRiskDnsListRequest {
+    /**
+      * 需要返回的数量，默认为10，最大值为100
+      */
+    Limit?: number;
+    /**
+      * 偏移量，默认为0。
+      */
+    Offset?: number;
+    /**
+      * 过滤条件。
+<li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
+<li>Url - String - 是否必填：否 - Url筛选</li>
+<li>Status - String - 是否必填：否 - 状态筛选0:待处理；2:信任；3:不信任</li>
+<li>MergeBeginTime - String - 是否必填：否 - 最近访问开始时间</li>
+<li>MergeEndTime - String - 是否必填：否 - 最近访问结束时间</li>
+      */
+    Filters?: Array<Filter>;
+    /**
+      * 排序方式
+      */
+    Order?: string;
+    /**
+      * 排序字段
+      */
+    By?: string;
 }
 /**
  * DescribeProcessStatistics返回参数结构体
@@ -2858,6 +3053,10 @@ export interface ExportMaliciousRequestsResponse {
       */
     RequestId?: string;
 }
+/**
+ * DescribeSearchLogs请求参数结构体
+ */
+export declare type DescribeSearchLogsRequest = null;
 /**
  * DescribeAttackLogInfo请求参数结构体
  */
@@ -3027,6 +3226,19 @@ export interface DescribeMachineRegionsResponse {
     RequestId?: string;
 }
 /**
+ * OpenProVersionPrepaid请求参数结构体
+ */
+export interface OpenProVersionPrepaidRequest {
+    /**
+      * 购买相关参数。
+      */
+    ChargePrepaid: ChargePrepaid;
+    /**
+      * 需要开通专业版主机信息数组。
+      */
+    Machines: Array<ProVersionMachine>;
+}
+/**
  * DescribeScanMalwareSchedule返回参数结构体
  */
 export interface DescribeScanMalwareScheduleResponse {
@@ -3085,21 +3297,13 @@ export interface EditReverseShellRuleRequest {
     IsGlobal?: number;
 }
 /**
- * DescribeProVersionInfo返回参数结构体
+ * DescribeESAggregations返回参数结构体
  */
-export interface DescribeProVersionInfoResponse {
+export interface DescribeESAggregationsResponse {
     /**
-      * 后付费昨日扣费
+      * ES聚合结果JSON
       */
-    PostPayCost: number;
-    /**
-      * 新增主机是否自动开通专业版
-      */
-    IsAutoOpenProVersion: boolean;
-    /**
-      * 开通专业版主机数
-      */
-    ProVersionNum: number;
+    Data: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3248,22 +3452,9 @@ export interface BashRule {
     Hostip: string;
 }
 /**
- * DescribeOpenPortTaskStatus返回参数结构体
+ * DescribeIndexList请求参数结构体
  */
-export interface DescribeOpenPortTaskStatusResponse {
-    /**
-      * 任务状态。
-<li>COMPLETE：完成（此时可以调用DescribeOpenPorts接口获取实时进程列表）</li>
-<li>AGENT_OFFLINE：云镜客户端离线</li>
-<li>COLLECTING：端口获取中</li>
-<li>FAILED：进程获取失败</li>
-      */
-    Status?: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
-}
+export declare type DescribeIndexListRequest = null;
 /**
  * DescribeWeeklyReportNonlocalLoginPlaces返回参数结构体
  */
@@ -3356,6 +3547,19 @@ export interface LoginWhiteListsRule {
       * 结束时间
       */
     EndTime?: string;
+}
+/**
+ * CreateSearchLog返回参数结构体
+ */
+export interface CreateSearchLogResponse {
+    /**
+      * 0：成功，非0：失败
+      */
+    Status: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * DescribeTagMachines返回参数结构体
@@ -3840,6 +4044,57 @@ export interface DescribeAttackLogsResponse {
     RequestId?: string;
 }
 /**
+ * 异地登录
+ */
+export interface NonLocalLoginPlace {
+    /**
+      * 事件ID。
+      */
+    Id: number;
+    /**
+      * 主机IP。
+      */
+    MachineIp: string;
+    /**
+      * 登录状态
+<li>NON_LOCAL_LOGIN：异地登录</li>
+<li>NORMAL_LOGIN：正常登录</li>
+      */
+    Status: string;
+    /**
+      * 用户名。
+      */
+    UserName: string;
+    /**
+      * 城市ID。
+      */
+    City: number;
+    /**
+      * 国家ID。
+      */
+    Country: number;
+    /**
+      * 省份ID。
+      */
+    Province: number;
+    /**
+      * 登录IP。
+      */
+    SrcIp: string;
+    /**
+      * 机器名称。
+      */
+    MachineName: string;
+    /**
+      * 登录时间。
+      */
+    LoginTime: string;
+    /**
+      * 云镜客户端唯一标识Uuid。
+      */
+    Uuid: string;
+}
+/**
  * 安全事件统计列表
  */
 export interface SecurityEventInfo {
@@ -4038,22 +4293,29 @@ export interface DescribeBruteAttacksRequest {
  */
 export declare type DescribeVulScanResultRequest = null;
 /**
- * DescribePrivilegeEvents请求参数结构体
+ * DescribeHistoryService请求参数结构体
  */
-export interface DescribePrivilegeEventsRequest {
+export declare type DescribeHistoryServiceRequest = null;
+/**
+ * ExportVulDetectionReport请求参数结构体
+ */
+export interface ExportVulDetectionReportRequest {
     /**
-      * 返回数量，默认为10，最大值为100。
+      * 漏洞扫描任务id（不同于出参的导出检测报告的任务Id）
+      */
+    TaskId: number;
+    /**
+      * 过滤参数
+      */
+    Filters?: Array<Filters>;
+    /**
+      * 需要返回的数量，默认为10，最大值为100
       */
     Limit?: number;
     /**
       * 偏移量，默认为0。
       */
     Offset?: number;
-    /**
-      * 过滤条件。
-<li>Keywords - String - 是否必填：否 - 关键词(主机IP)</li>
-      */
-    Filters?: Array<Filter>;
 }
 /**
  * DescribeWeeklyReportMalwares返回参数结构体
@@ -4163,6 +4425,15 @@ export interface ImpactedHost {
       * 是否为专业版。
       */
     IsProVersion: boolean;
+}
+/**
+ * DescribeESAggregations请求参数结构体
+ */
+export interface DescribeESAggregationsRequest {
+    /**
+      * ES聚合条件JSON
+      */
+    Query: string;
 }
 /**
  * DescribeReverseShellRules返回参数结构体
@@ -4410,25 +4681,17 @@ export interface Machine {
     HasAssetScan: number;
 }
 /**
- * ExportVulDetectionReport请求参数结构体
+ * DeleteSearchTemplate返回参数结构体
  */
-export interface ExportVulDetectionReportRequest {
+export interface DeleteSearchTemplateResponse {
     /**
-      * 漏洞扫描任务id（不同于出参的导出检测报告的任务Id）
+      * 0：成功，非0：失败
       */
-    TaskId: number;
+    Status: number;
     /**
-      * 过滤参数
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    Filters?: Array<Filters>;
-    /**
-      * 需要返回的数量，默认为10，最大值为100
-      */
-    Limit?: number;
-    /**
-      * 偏移量，默认为0。
-      */
-    Offset?: number;
+    RequestId?: string;
 }
 /**
  * 木马相关信息
@@ -5162,39 +5425,44 @@ export interface ExportTasksRequest {
     TaskId: string;
 }
 /**
- * 漏洞列表数据
+ * DescribeVulScanResult返回参数结构体
  */
-export interface Vul {
+export interface DescribeVulScanResultResponse {
     /**
-      * 漏洞种类ID
+      * 漏洞数量。
       */
-    VulId: number;
+    VulNum?: number;
     /**
-      * 漏洞名称
+      * 专业版机器数。
       */
-    VulName: string;
+    ProVersionNum?: number;
     /**
-      * 漏洞危害等级:
-HIGH：高危
-MIDDLE：中危
-LOW：低危
-NOTICE：提示
+      * 受影响的专业版主机数。
       */
-    VulLevel: string;
+    ImpactedHostNum?: number;
     /**
-      * 最后扫描时间
+      * 主机总数。
       */
-    LastScanTime: string;
+    HostNum?: number;
     /**
-      * 受影响机器数量
+      * 基础版机器数。
       */
-    ImpactedHostNum: number;
+    BasicVersionNum?: number;
     /**
-      * 漏洞状态
-* UN_OPERATED : 待处理
-* FIXED : 已修复
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    VulStatus: string;
+    RequestId?: string;
+}
+/**
+ * ModifyAutoOpenProVersionConfig请求参数结构体
+ */
+export interface ModifyAutoOpenProVersionConfigRequest {
+    /**
+      * 设置自动开通状态。
+<li>CLOSE：关闭</li>
+<li>OPEN：打开</li>
+      */
+    Status: string;
 }
 /**
  * AddMachineTag请求参数结构体
@@ -5251,6 +5519,19 @@ export interface DeleteReverseShellEventsRequest {
       * ID数组，最大100条。
       */
     Ids: Array<number>;
+}
+/**
+ * DescribeSearchLogs返回参数结构体
+ */
+export interface DescribeSearchLogsResponse {
+    /**
+      * 历史搜索记录
+      */
+    Data: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ModifyAutoOpenProVersionConfig返回参数结构体
@@ -5514,21 +5795,13 @@ export interface DescribeMalwaresResponse {
     RequestId?: string;
 }
 /**
- * SeparateMalwares返回参数结构体
+ * CreateSearchLog请求参数结构体
  */
-export interface SeparateMalwaresResponse {
+export interface CreateSearchLogRequest {
     /**
-      * 隔离成功的id数组。
+      * 搜索内容
       */
-    SuccessIds?: Array<number>;
-    /**
-      * 隔离失败的id数组。
-      */
-    FailedIds?: Array<number>;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    SearchContent: string;
 }
 /**
  * DeletePrivilegeRules请求参数结构体
