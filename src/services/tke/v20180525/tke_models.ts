@@ -16,6 +16,31 @@
  */
 
 /**
+ * EnableVpcCniNetworkType请求参数结构体
+ */
+export interface EnableVpcCniNetworkTypeRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+
+  /**
+   * 开启vpc-cni的模式，tke-route-eni开启的是策略路由模式，tke-direct-eni开启的是独立网卡模式
+   */
+  VpcCniType: string
+
+  /**
+   * 是否开启固定IP模式
+   */
+  EnableStaticIp: boolean
+
+  /**
+   * 使用的容器子网
+   */
+  Subnets: Array<string>
+}
+
+/**
  * DescribeClusterEndpointVipStatus请求参数结构体
  */
 export interface DescribeClusterEndpointVipStatusRequest {
@@ -610,6 +635,110 @@ pending 还未开始
 }
 
 /**
+ * 节点池描述
+ */
+export interface NodePool {
+  /**
+   * NodePoolId 资源池id
+   */
+  NodePoolId: string
+
+  /**
+   * Name 资源池名称
+   */
+  Name: string
+
+  /**
+   * ClusterInstanceId 集群实例id
+   */
+  ClusterInstanceId: string
+
+  /**
+   * LifeState 状态，当前节点池生命周期状态包括：creating，normal，updating，deleting，deleted
+   */
+  LifeState: string
+
+  /**
+   * LaunchConfigurationId 配置
+   */
+  LaunchConfigurationId: string
+
+  /**
+   * AutoscalingGroupId 分组id
+   */
+  AutoscalingGroupId: string
+
+  /**
+   * Labels 标签
+   */
+  Labels: Array<Label>
+
+  /**
+   * Taints 污点标记
+   */
+  Taints: Array<Taint>
+
+  /**
+   * NodeCountSummary 节点列表
+   */
+  NodeCountSummary: NodeCountSummary
+
+  /**
+      * 状态信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AutoscalingGroupStatus: string
+
+  /**
+      * 最大节点数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MaxNodesNum: number
+
+  /**
+      * 最小节点数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  MinNodesNum: number
+
+  /**
+      * 期望的节点数量
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DesiredNodesNum: number
+
+  /**
+      * 节点池osName
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  NodePoolOs: string
+
+  /**
+      * 容器的镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值)
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OsCustomizeType: string
+
+  /**
+      * 镜像id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ImageId: string
+
+  /**
+      * 集群属于节点podCIDR大小自定义模式时，节点池需要带上pod数量属性
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DesiredPodNum: number
+
+  /**
+      * 用户自定义脚本
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserScript: string
+}
+
+/**
  * DescribeEKSClusters返回参数结构体
  */
 export interface DescribeEKSClustersResponse {
@@ -1034,107 +1163,13 @@ export interface AddNodeToNodePoolRequest {
 }
 
 /**
- * 节点池描述
+ * EnableVpcCniNetworkType返回参数结构体
  */
-export interface NodePool {
+export interface EnableVpcCniNetworkTypeResponse {
   /**
-   * NodePoolId 资源池id
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  NodePoolId: string
-
-  /**
-   * Name 资源池名称
-   */
-  Name: string
-
-  /**
-   * ClusterInstanceId 集群实例id
-   */
-  ClusterInstanceId: string
-
-  /**
-   * LifeState 状态，当前节点池生命周期状态包括：creating，normal，updating，deleting，deleted
-   */
-  LifeState: string
-
-  /**
-   * LaunchConfigurationId 配置
-   */
-  LaunchConfigurationId: string
-
-  /**
-   * AutoscalingGroupId 分组id
-   */
-  AutoscalingGroupId: string
-
-  /**
-   * Labels 标签
-   */
-  Labels: Array<Label>
-
-  /**
-   * Taints 污点标记
-   */
-  Taints: Array<Taint>
-
-  /**
-   * NodeCountSummary 节点列表
-   */
-  NodeCountSummary: NodeCountSummary
-
-  /**
-      * 状态信息
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AutoscalingGroupStatus: string
-
-  /**
-      * 最大节点数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MaxNodesNum: number
-
-  /**
-      * 最小节点数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  MinNodesNum: number
-
-  /**
-      * 期望的节点数量
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DesiredNodesNum: number
-
-  /**
-      * 节点池osName
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  NodePoolOs: string
-
-  /**
-      * 容器的镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值)
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OsCustomizeType: string
-
-  /**
-      * 镜像id
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ImageId: string
-
-  /**
-      * 集群属于节点podCIDR大小自定义模式时，节点池需要带上pod数量属性
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  DesiredPodNum: number
-
-  /**
-      * 用户自定义脚本
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  UserScript: string
+  RequestId?: string
 }
 
 /**
@@ -2832,6 +2867,16 @@ export interface CreateClusterNodePoolFromExistingAsgResponse {
 }
 
 /**
+ * DescribeEnableVpcCniProgress请求参数结构体
+ */
+export interface DescribeEnableVpcCniProgressRequest {
+  /**
+   * 开启vpc-cni的集群ID
+   */
+  ClusterId: string
+}
+
+/**
  * DescribeClusterEndpointStatus请求参数结构体
  */
 export interface DescribeClusterEndpointStatusRequest {
@@ -3223,6 +3268,27 @@ export interface DescribePrometheusAgentsRequest {
    * 用于分页
    */
   Limit?: number
+}
+
+/**
+ * DescribeEnableVpcCniProgress返回参数结构体
+ */
+export interface DescribeEnableVpcCniProgressResponse {
+  /**
+   * 任务进度的描述：Running/Succeed/Failed
+   */
+  Status: string
+
+  /**
+      * 当任务进度为Failed时，对任务状态的进一步描述，例如IPAMD组件安装失败
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ErrorMessage: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

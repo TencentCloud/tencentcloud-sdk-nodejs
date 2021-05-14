@@ -158,6 +158,16 @@ it("cfw.v20190904.ModifyBlockIgnoreList", async function () {
     }
 })
 
+it("cfw.v20190904.DescribeGuideScanInfo", async function () {
+    try {
+       const data = await client.DescribeGuideScanInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.ModifySequenceRules", async function () {
     try {
        const data = await client.ModifySequenceRules({})

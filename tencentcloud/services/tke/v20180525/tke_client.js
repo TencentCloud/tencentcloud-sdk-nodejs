@@ -100,6 +100,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DeleteClusterEndpoint", req, cb);
     }
     /**
+     * 本接口用于查询开启vpc-cni模式的任务进度
+     */
+    async DescribeEnableVpcCniProgress(req, cb) {
+        return this.request("DescribeEnableVpcCniProgress", req, cb);
+    }
+    /**
      * 同步模板到实例或者集群
      */
     async SyncPrometheusTemplate(req, cb) {
@@ -140,6 +146,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DeleteClusterRoute(req, cb) {
         return this.request("DeleteClusterRoute", req, cb);
+    }
+    /**
+     * GR集群可以通过本接口附加vpc-cni容器网络插件，开启vpc-cni容器网络能力
+     */
+    async EnableVpcCniNetworkType(req, cb) {
+        return this.request("EnableVpcCniNetworkType", req, cb);
     }
     /**
      * 修改模板内容

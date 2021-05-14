@@ -38,6 +38,71 @@ export interface DescribeVpcRuleOverviewResponse {
 }
 
 /**
+ * 新手引导扫描结果信息PortNum   int
+	LeakNum   int
+	IPNum     int
+	IPStatus  bool
+	IdpStatus bool
+	BanStatus bool
+ */
+export interface ScanResultInfo {
+  /**
+   * 暴漏漏洞数量
+   */
+  LeakNum: number
+
+  /**
+   * 防护ip数量
+   */
+  IPNum: number
+
+  /**
+   * 暴漏端口数量
+   */
+  PortNum: number
+
+  /**
+   * 是否开启防护
+   */
+  IPStatus: boolean
+
+  /**
+   * 是否拦截攻击
+   */
+  IdpStatus: boolean
+
+  /**
+   * 是否禁封端口
+   */
+  BanStatus: boolean
+}
+
+/**
+ * 新手引导扫描信息
+ */
+export interface ScanInfo {
+  /**
+   * 扫描结果信息
+   */
+  ScanResultInfo: ScanResultInfo
+
+  /**
+   * 扫描状态 0扫描中 1完成   2没赠送过扫描显示开启界面
+   */
+  ScanStatus: number
+
+  /**
+   * 进度
+   */
+  ScanPercent: number
+
+  /**
+   * 预计完成时间
+   */
+  ScanTime: string
+}
+
+/**
  * SetNatFwDnatRule请求参数结构体
  */
 export interface SetNatFwDnatRuleRequest {
@@ -132,6 +197,11 @@ export interface ModifyAllRuleStatusResponse {
    */
   RequestId?: string
 }
+
+/**
+ * DescribeGuideScanInfo请求参数结构体
+ */
+export type DescribeGuideScanInfoRequest = null
 
 /**
  * 黑白名单IOC列表
@@ -1215,6 +1285,101 @@ export interface ExpandCfwVerticalRequest {
 }
 
 /**
+ * 规则输入对象
+ */
+export interface RuleInfoData {
+  /**
+   * 执行顺序
+   */
+  OrderIndex: number
+
+  /**
+   * 访问源
+   */
+  SourceIp: string
+
+  /**
+   * 访问目的
+   */
+  TargetIp: string
+
+  /**
+   * 协议
+   */
+  Protocol: string
+
+  /**
+   * 策略
+   */
+  Strategy: string
+
+  /**
+   * 访问源类型，1是IP，3是域名，4是IP地址模版，5是域名地址模版
+   */
+  SourceType: number
+
+  /**
+   * 方向，0：出站，1：入站
+   */
+  Direction: number
+
+  /**
+   * 描述
+   */
+  Detail: string
+
+  /**
+   * 访问目的类型，1是IP，3是域名，4是IP地址模版，5是域名地址模版
+   */
+  TargetType: number
+
+  /**
+   * 端口
+   */
+  Port?: string
+
+  /**
+   * id值
+   */
+  Id?: number
+
+  /**
+   * 日志id，从告警处创建必传，其它为空
+   */
+  LogId?: string
+
+  /**
+   * 城市Code
+   */
+  City?: number
+
+  /**
+   * 国家Code
+   */
+  Country?: number
+
+  /**
+   * 云厂商，支持多个，以逗号分隔， 1:腾讯云（仅中国香港及海外）,2:阿里云,3:亚马逊云,4:华为云,5:微软云
+   */
+  CloudCode?: string
+
+  /**
+   * 是否为地域
+   */
+  IsRegion?: number
+
+  /**
+   * 城市名
+   */
+  CityName?: string
+
+  /**
+   * 国家名
+   */
+  CountryName?: string
+}
+
+/**
  * 安全组列表数据
  */
 export interface SecurityGroupListData {
@@ -1622,98 +1787,18 @@ export interface ModifyAllRuleStatusRequest {
 }
 
 /**
- * 规则输入对象
+ * DescribeGuideScanInfo返回参数结构体
  */
-export interface RuleInfoData {
+export interface DescribeGuideScanInfoResponse {
   /**
-   * 执行顺序
+   * 扫描信息
    */
-  OrderIndex: number
+  Data: ScanInfo
 
   /**
-   * 访问源
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  SourceIp: string
-
-  /**
-   * 访问目的
-   */
-  TargetIp: string
-
-  /**
-   * 协议
-   */
-  Protocol: string
-
-  /**
-   * 策略
-   */
-  Strategy: string
-
-  /**
-   * 访问源类型，1是IP，3是域名，4是IP地址模版，5是域名地址模版
-   */
-  SourceType: number
-
-  /**
-   * 方向，0：出站，1：入站
-   */
-  Direction: number
-
-  /**
-   * 描述
-   */
-  Detail: string
-
-  /**
-   * 访问目的类型，1是IP，3是域名，4是IP地址模版，5是域名地址模版
-   */
-  TargetType: number
-
-  /**
-   * 端口
-   */
-  Port?: string
-
-  /**
-   * id值
-   */
-  Id?: number
-
-  /**
-   * 日志id，从告警处创建必传，其它为空
-   */
-  LogId?: string
-
-  /**
-   * 城市Code
-   */
-  City?: number
-
-  /**
-   * 国家Code
-   */
-  Country?: number
-
-  /**
-   * 云厂商，支持多个，以逗号分隔， 1:腾讯云（仅中国香港及海外）,2:阿里云,3:亚马逊云,4:华为云,5:微软云
-   */
-  CloudCode?: string
-
-  /**
-   * 是否为地域
-   */
-  IsRegion?: number
-
-  /**
-   * 城市名
-   */
-  CityName?: string
-
-  /**
-   * 国家名
-   */
-  CountryName?: string
+  RequestId?: string
 }
 
 /**

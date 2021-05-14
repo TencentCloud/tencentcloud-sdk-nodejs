@@ -198,6 +198,16 @@ it("tcr.v20190924.ModifyRepository", async function () {
     }
 })
 
+it("tcr.v20190924.DescribeChartDownloadInfo", async function () {
+    try {
+       const data = await client.DescribeChartDownloadInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.DeleteNamespace", async function () {
     try {
        const data = await client.DeleteNamespace({})

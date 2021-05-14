@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  EnableVpcCniNetworkTypeRequest,
   DescribeClusterEndpointVipStatusRequest,
   DescribeClusterSecurityResponse,
   DescribeClusterSecurityRequest,
@@ -43,6 +44,7 @@ import {
   CreatePrometheusTemplateRequest,
   DeletePrometheusTemplateRequest,
   InstanceUpgradeProgressItem,
+  NodePool,
   DescribeEKSClustersResponse,
   RouteTableInfo,
   IPAddress,
@@ -58,7 +60,7 @@ import {
   PrometheusTemplateSyncTarget,
   DescribePrometheusTemplatesRequest,
   AddNodeToNodePoolRequest,
-  NodePool,
+  EnableVpcCniNetworkTypeResponse,
   DescribePrometheusAlertRuleResponse,
   ClusterAsGroup,
   Instance,
@@ -132,6 +134,7 @@ import {
   DnsServerConf,
   EksCluster,
   CreateClusterNodePoolFromExistingAsgResponse,
+  DescribeEnableVpcCniProgressRequest,
   DescribeClusterEndpointStatusRequest,
   ModifyClusterAttributeResponse,
   EnhancedService,
@@ -150,6 +153,7 @@ import {
   DescribeClusterInstancesRequest,
   InstanceAdvancedSettings,
   DescribePrometheusAgentsRequest,
+  DescribeEnableVpcCniProgressResponse,
   PrometheusAgentOverview,
   Filter,
   ModifyClusterNodePoolRequest,
@@ -355,6 +359,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口用于查询开启vpc-cni模式的任务进度
+   */
+  async DescribeEnableVpcCniProgress(
+    req: DescribeEnableVpcCniProgressRequest,
+    cb?: (error: string, rep: DescribeEnableVpcCniProgressResponse) => void
+  ): Promise<DescribeEnableVpcCniProgressResponse> {
+    return this.request("DescribeEnableVpcCniProgress", req, cb)
+  }
+
+  /**
    * 同步模板到实例或者集群
    */
   async SyncPrometheusTemplate(
@@ -422,6 +436,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteClusterRouteResponse) => void
   ): Promise<DeleteClusterRouteResponse> {
     return this.request("DeleteClusterRoute", req, cb)
+  }
+
+  /**
+   * GR集群可以通过本接口附加vpc-cni容器网络插件，开启vpc-cni容器网络能力
+   */
+  async EnableVpcCniNetworkType(
+    req: EnableVpcCniNetworkTypeRequest,
+    cb?: (error: string, rep: EnableVpcCniNetworkTypeResponse) => void
+  ): Promise<EnableVpcCniNetworkTypeResponse> {
+    return this.request("EnableVpcCniNetworkType", req, cb)
   }
 
   /**

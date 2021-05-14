@@ -311,7 +311,7 @@ export interface TextDetectResponse {
     /**
       * 图片中是否包含文字。
       */
-    HasText?: boolean;
+    HasText: boolean;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -341,139 +341,139 @@ export interface VerifyBizLicenseResponse {
     /**
       * 状态码
       */
-    ErrorCode?: number;
+    ErrorCode: number;
     /**
       * 统一社会信用代码
       */
-    CreditCode?: string;
+    CreditCode: string;
     /**
       * 组织机构代码
       */
-    OrgCode?: string;
+    OrgCode: string;
     /**
       * 经营期限自（YYYY-MM-DD）
       */
-    OpenFrom?: string;
+    OpenFrom: string;
     /**
       * 经营期限至（YYYY-MM-DD）
       */
-    OpenTo?: string;
+    OpenTo: string;
     /**
       * 法人姓名
       */
-    FrName?: string;
+    FrName: string;
     /**
-      * 经营状态（在营、注销、吊销、其他）
+      * 经营状态，包括：成立、筹建、存续、在营、开业、在册、正常经营、开业登记中、登记成立、撤销、撤销登记、非正常户、告解、个体暂时吊销、个体转企业、吊销（未注销）、拟注销、已注销、（待）迁入、（待）迁出、停业、歇业、清算等。
       */
-    EnterpriseStatus?: string;
+    EnterpriseStatus: string;
     /**
       * 经营（业务）范围及方式
       */
-    OperateScopeAndForm?: string;
+    OperateScopeAndForm: string;
     /**
       * 注册资金（单位:万元）
       */
-    RegCap?: string;
+    RegCap: string;
     /**
       * 注册币种
       */
-    RegCapCur?: string;
+    RegCapCur: string;
     /**
       * 登记机关
       */
-    RegOrg?: string;
+    RegOrg: string;
     /**
       * 开业日期（YYYY-MM-DD）
       */
-    EsDate?: string;
+    EsDate: string;
     /**
       * 企业（机构）类型
       */
-    EnterpriseType?: string;
+    EnterpriseType: string;
     /**
       * 注销日期
       */
-    CancelDate?: string;
+    CancelDate: string;
     /**
       * 吊销日期
       */
-    RevokeDate?: string;
+    RevokeDate: string;
     /**
       * 许可经营项目
       */
-    AbuItem?: string;
+    AbuItem: string;
     /**
       * 一般经营项目
       */
-    CbuItem?: string;
+    CbuItem: string;
     /**
       * 核准时间
       */
-    ApprDate?: string;
+    ApprDate: string;
     /**
       * 省
       */
-    Province?: string;
+    Province: string;
     /**
       * 地级市
       */
-    City?: string;
+    City: string;
     /**
       * 区\县
       */
-    County?: string;
+    County: string;
     /**
       * 住所所在行政区划代码
       */
-    AreaCode?: string;
+    AreaCode: string;
     /**
       * 行业门类代码
       */
-    IndustryPhyCode?: string;
+    IndustryPhyCode: string;
     /**
       * 行业门类名称
       */
-    IndustryPhyName?: string;
+    IndustryPhyName: string;
     /**
       * 国民经济行业代码
       */
-    IndustryCode?: string;
+    IndustryCode: string;
     /**
       * 国民经济行业名称
       */
-    IndustryName?: string;
+    IndustryName: string;
     /**
       * 经营（业务）范围
       */
-    OperateScope?: string;
+    OperateScope: string;
     /**
       * 要核验的工商注册号
       */
-    VerifyRegNo?: string;
+    VerifyRegNo: string;
     /**
       * 工商注册号
       */
-    RegNo?: string;
+    RegNo: string;
     /**
       * 要核验的企业名称
       */
-    VerifyEnterpriseName?: string;
+    VerifyEnterpriseName: string;
     /**
       * 企业名称
       */
-    EnterpriseName?: string;
+    EnterpriseName: string;
     /**
       * 要核验的注册地址
       */
-    VerifyAddress?: string;
+    VerifyAddress: string;
     /**
       * 注册地址
       */
-    Address?: string;
+    Address: string;
     /**
       * 验证结果
       */
-    RegNumResult?: BizLicenseVerifyResult;
+    RegNumResult: BizLicenseVerifyResult;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -623,35 +623,35 @@ export interface PermitOCRResponse {
     /**
       * 姓名
       */
-    Name?: string;
+    Name: string;
     /**
       * 英文姓名
       */
-    EnglishName?: string;
+    EnglishName: string;
     /**
       * 证件号
       */
-    Number?: string;
+    Number: string;
     /**
       * 性别
       */
-    Sex?: string;
+    Sex: string;
     /**
       * 有效期限
       */
-    ValidDate?: string;
+    ValidDate: string;
     /**
       * 签发机关
       */
-    IssueAuthority?: string;
+    IssueAuthority: string;
     /**
       * 签发地点
       */
-    IssueAddress?: string;
+    IssueAddress: string;
     /**
       * 出生日期
       */
-    Birthday?: string;
+    Birthday: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -740,13 +740,13 @@ export interface MLIDCardOCRRequest {
     /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
       */
     ImageBase64?: string;
     /**
       * 图片的 Url 地址。( 中国地区之外不支持这个字段 )
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
@@ -849,11 +849,11 @@ export interface EnterpriseLicenseOCRResponse {
     /**
       * 企业证照识别结果，具体内容请点击左侧链接。
       */
-    EnterpriseLicenseInfos?: Array<EnterpriseLicenseInfo>;
+    EnterpriseLicenseInfos: Array<EnterpriseLicenseInfo>;
     /**
       * 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。
       */
-    Angle?: number;
+    Angle: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -893,23 +893,23 @@ export interface InstitutionOCRResponse {
     /**
       * 注册号
       */
-    RegId?: string;
+    RegId: string;
     /**
       * 有效期
       */
-    ValidDate?: string;
+    ValidDate: string;
     /**
       * 住所
       */
-    Location?: string;
+    Location: string;
     /**
       * 名称
       */
-    Name?: string;
+    Name: string;
     /**
       * 法定代表人
       */
-    LegalPerson?: string;
+    LegalPerson: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1034,11 +1034,11 @@ export interface QrcodeOCRResponse {
     /**
       * 二维码/条形码识别结果信息，具体内容请点击左侧链接。
       */
-    CodeResults?: Array<QrcodeResultsInfo>;
+    CodeResults: Array<QrcodeResultsInfo>;
     /**
       * 图片大小，具体内容请点击左侧链接。
       */
-    ImgSize?: QrcodeImgSize;
+    ImgSize: QrcodeImgSize;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1098,14 +1098,14 @@ export interface MainlandPermitOCRRequest {
     /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
     ImageBase64?: string;
     /**
       * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
@@ -1122,14 +1122,14 @@ export interface EnterpriseLicenseOCRRequest {
     /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
     ImageBase64?: string;
     /**
       * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
@@ -1425,7 +1425,7 @@ export interface MixedInvoiceDetectResponse {
     /**
       * 检测出的票据类型列表，具体内容请点击左侧链接。
       */
-    InvoiceDetectInfos?: Array<InvoiceDetectInfo>;
+    InvoiceDetectInfos: Array<InvoiceDetectInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1459,7 +1459,7 @@ export interface InsuranceBillOCRResponse {
     /**
       * 保险单据识别结果，具体内容请点击左侧链接。
       */
-    InsuranceBillInfos?: Array<InsuranceBillInfo>;
+    InsuranceBillInfos: Array<InsuranceBillInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1489,14 +1489,14 @@ export interface HmtResidentPermitOCRRequest {
     /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
     ImageBase64?: string;
     /**
       * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
@@ -1513,12 +1513,12 @@ BACK：无照片的一面（国徽面），
  */
 export interface QrcodeOCRRequest {
     /**
-      * 图片的 Base64 值。要求图片经Base64编码后不超过 3M，支持PNG、JPG、JPEG格式。
+      * 图片的 Base64 值。要求图片经Base64编码后不超过 7M，支持PNG、JPG、JPEG格式。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
     ImageBase64?: string;
     /**
-      * 图片的 Url 地址。要求图片经Base64编码后不超过 3M，支持PNG、JPG、JPEG格式。
+      * 图片的 Url 地址。要求图片经Base64编码后不超过 7M，支持PNG、JPG、JPEG格式。
 建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
       */
     ImageUrl?: string;
@@ -1861,11 +1861,11 @@ export interface DutyPaidProofOCRResponse {
     /**
       * 完税证明识别结果，具体内容请点击左侧链接。
       */
-    DutyPaidProofInfos?: Array<DutyPaidProofInfo>;
+    DutyPaidProofInfos: Array<DutyPaidProofInfo>;
     /**
       * 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。
       */
-    Angle?: number;
+    Angle: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2029,14 +2029,14 @@ export interface PermitOCRRequest {
     /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
     ImageBase64?: string;
     /**
       * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
@@ -2106,14 +2106,14 @@ export interface TextDetectRequest {
     /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
     ImageBase64?: string;
     /**
       * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
@@ -2284,71 +2284,71 @@ export interface VerifyBasicBizLicenseResponse {
     /**
       * 状态码，成功时返回0
       */
-    ErrorCode?: number;
+    ErrorCode: number;
     /**
       * 统一社会信用代码
       */
-    CreditCode?: string;
+    CreditCode: string;
     /**
       * 经营期限自（YYYY-MM-DD）
       */
-    Opfrom?: string;
+    Opfrom: string;
     /**
       * 经营期限至（YYYY-MM-DD）
       */
-    Opto?: string;
+    Opto: string;
     /**
       * 法人姓名
       */
-    Frname?: string;
+    Frname: string;
     /**
-      * 经营状态（在营、注销、吊销、其他）
+      * 经营状态，包括：成立、筹建、存续、在营、开业、在册、正常经营、开业登记中、登记成立、撤销、撤销登记、非正常户、告解、个体暂时吊销、个体转企业、吊销（未注销）、拟注销、已注销、（待）迁入、（待）迁出、停业、歇业、清算等。
       */
-    Entstatus?: string;
+    Entstatus: string;
     /**
       * 经营业务范围
       */
-    Zsopscope?: string;
+    Zsopscope: string;
     /**
       * 查询的状态信息
       */
-    Reason?: string;
+    Reason: string;
     /**
       * 原注册号
       */
-    Oriregno?: string;
+    Oriregno: string;
     /**
       * 要核验的工商注册号
       */
-    VerifyRegno?: string;
+    VerifyRegno: string;
     /**
       * 工商注册号
       */
-    Regno?: string;
+    Regno: string;
     /**
       * 要核验的企业名称
       */
-    VerifyEntname?: string;
+    VerifyEntname: string;
     /**
       * 企业名称
       */
-    Entname?: string;
+    Entname: string;
     /**
       * 要核验的住址
       */
-    VerifyDom?: string;
+    VerifyDom: string;
     /**
       * 住址
       */
-    Dom?: string;
+    Dom: string;
     /**
       * 验证结果
       */
-    RegNumResult?: BizLicenseVerifyResult;
+    RegNumResult: BizLicenseVerifyResult;
     /**
       * 注册资本（单位：万元）,只有输入参数regCapital为1的时候才输出
       */
-    RegCapital?: string;
+    RegCapital: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2803,14 +2803,14 @@ export interface OrgCodeCertOCRRequest {
     /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
     ImageBase64?: string;
     /**
       * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
@@ -2836,14 +2836,14 @@ export interface InstitutionOCRRequest {
     /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
     ImageBase64?: string;
     /**
       * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
@@ -3011,14 +3011,14 @@ export interface ArithmeticOCRRequest {
     /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
     ImageBase64?: string;
     /**
       * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
@@ -3231,7 +3231,7 @@ export interface FinanBillOCRResponse {
     /**
       * 金融票据整单识别结果，具体内容请点击左侧链接。
       */
-    FinanBillInfos?: Array<FinanBillInfo>;
+    FinanBillInfos: Array<FinanBillInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3244,14 +3244,14 @@ export interface ShipInvoiceOCRRequest {
     /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
     ImageBase64?: string;
     /**
       * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
@@ -3349,7 +3349,7 @@ export interface EduPaperOCRRequest {
     /**
       * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
@@ -3412,14 +3412,14 @@ export interface DutyPaidProofOCRRequest {
     /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
     ImageBase64?: string;
     /**
       * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
@@ -3477,19 +3477,19 @@ export interface OrgCodeCertOCRResponse {
     /**
       * 代码
       */
-    OrgCode?: string;
+    OrgCode: string;
     /**
       * 机构名称
       */
-    Name?: string;
+    Name: string;
     /**
       * 地址
       */
-    Address?: string;
+    Address: string;
     /**
       * 有效期
       */
-    ValidDate?: string;
+    ValidDate: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3565,51 +3565,51 @@ export interface ResidenceBookletOCRResponse {
     /**
       * 户号
       */
-    HouseholdNumber?: string;
+    HouseholdNumber: string;
     /**
       * 姓名
       */
-    Name?: string;
+    Name: string;
     /**
       * 性别
       */
-    Sex?: string;
+    Sex: string;
     /**
       * 出生地
       */
-    BirthPlace?: string;
+    BirthPlace: string;
     /**
       * 民族
       */
-    Nation?: string;
+    Nation: string;
     /**
       * 籍贯
       */
-    NativePlace?: string;
+    NativePlace: string;
     /**
       * 出生日期
       */
-    BirthDate?: string;
+    BirthDate: string;
     /**
       * 公民身份证件编号
       */
-    IdCardNumber?: string;
+    IdCardNumber: string;
     /**
       * 文化程度
       */
-    EducationDegree?: string;
+    EducationDegree: string;
     /**
       * 服务处所
       */
-    ServicePlace?: string;
+    ServicePlace: string;
     /**
       * 户别
       */
-    Household?: string;
+    Household: string;
     /**
       * 住址
       */
-    Address?: string;
+    Address: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3685,11 +3685,11 @@ export interface ShipInvoiceOCRResponse {
     /**
       * 轮船票识别结果，具体内容请点击左侧链接。
       */
-    ShipInvoiceInfos?: Array<ShipInvoiceInfo>;
+    ShipInvoiceInfos: Array<ShipInvoiceInfo>;
     /**
       * 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。
       */
-    Angle?: number;
+    Angle: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3906,14 +3906,14 @@ export interface ResidenceBookletOCRRequest {
     /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
     ImageBase64?: string;
     /**
       * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
@@ -3960,47 +3960,47 @@ export interface MainlandPermitOCRResponse {
     /**
       * 中文姓名
       */
-    Name?: string;
+    Name: string;
     /**
       * 英文姓名
       */
-    EnglishName?: string;
+    EnglishName: string;
     /**
       * 性别
       */
-    Sex?: string;
+    Sex: string;
     /**
       * 出生日期
       */
-    Birthday?: string;
+    Birthday: string;
     /**
       * 签发机关
       */
-    IssueAuthority?: string;
+    IssueAuthority: string;
     /**
       * 有效期限
       */
-    ValidDate?: string;
+    ValidDate: string;
     /**
       * 证件号
       */
-    Number?: string;
+    Number: string;
     /**
       * 签发地点
       */
-    IssueAddress?: string;
+    IssueAddress: string;
     /**
       * 签发次数
       */
-    IssueNumber?: string;
+    IssueNumber: string;
     /**
       * 证件类别， 如：台湾居民来往大陆通行证、港澳居民来往内地通行证。
       */
-    Type?: string;
+    Type: string;
     /**
       * RetProfile为True时返回头像字段， Base64编码
       */
-    Profile?: string;
+    Profile: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4308,14 +4308,14 @@ export interface InsuranceBillOCRRequest {
     /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
     ImageBase64?: string;
     /**
       * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
@@ -4515,14 +4515,14 @@ export interface MixedInvoiceDetectRequest {
     /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
     ImageBase64?: string;
     /**
       * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
@@ -4570,30 +4570,30 @@ export interface MLIDCardOCRResponse {
     /**
       * 身份证号
       */
-    ID?: string;
+    ID: string;
     /**
       * 姓名
       */
-    Name?: string;
+    Name: string;
     /**
       * 地址
       */
-    Address?: string;
+    Address: string;
     /**
       * 性别
       */
-    Sex?: string;
+    Sex: string;
     /**
       * 告警码
 -9103	证照翻拍告警
 -9102	证照复印件告警
 -9106       证件遮挡告警
       */
-    Warn?: Array<number>;
+    Warn: Array<number>;
     /**
       * 证件图片
       */
-    Image?: string;
+    Image: string;
     /**
       * 扩展字段：
 {
@@ -4605,21 +4605,22 @@ export interface MLIDCardOCRResponse {
     }
 }
       */
-    AdvancedInfo?: string;
+    AdvancedInfo: string;
     /**
       * 证件类型
 MyKad  身份证
 MyPR    永居证
 MyTentera   军官证
 MyKAS    临时身份证
-POLIS  警察
+POLIS  警察证
 IKAD   劳工证
+MyKid 儿童卡
       */
-    Type?: string;
+    Type: string;
     /**
       * 出生日期（目前该字段仅支持IKAD劳工证）
       */
-    Birthday?: string;
+    Birthday: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4912,14 +4913,14 @@ export interface FinanBillOCRRequest {
     /**
       * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
       */
     ImageBase64?: string;
     /**
       * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */

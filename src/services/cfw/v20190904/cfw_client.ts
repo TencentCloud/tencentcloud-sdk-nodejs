@@ -19,10 +19,13 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeVpcRuleOverviewResponse,
+  ScanResultInfo,
+  ScanInfo,
   SetNatFwDnatRuleRequest,
   DescribeSyncAssetStatusResponse,
   ModifyAllSwitchStatusRequest,
   ModifyAllRuleStatusResponse,
+  DescribeGuideScanInfoRequest,
   IocListData,
   DescribeRuleOverviewResponse,
   CfwNatDnatRule,
@@ -67,6 +70,7 @@ import {
   ModifyBlockIgnoreListResponse,
   DeleteSecurityGroupAllRuleResponse,
   ExpandCfwVerticalRequest,
+  RuleInfoData,
   SecurityGroupListData,
   ModifyBlockIgnoreListRequest,
   CreateAcRulesRequest,
@@ -78,7 +82,7 @@ import {
   ModifySecurityGroupAllRuleStatusRequest,
   DeleteSecurityGroupAllRuleRequest,
   ModifyAllRuleStatusRequest,
-  RuleInfoData,
+  DescribeGuideScanInfoResponse,
   DescribeAcListsResponse,
   SwitchListsData,
   ModifyAllSwitchStatusResponse,
@@ -234,6 +238,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyBlockIgnoreListResponse) => void
   ): Promise<ModifyBlockIgnoreListResponse> {
     return this.request("ModifyBlockIgnoreList", req, cb)
+  }
+
+  /**
+   * DescribeGuideScanInfo新手引导扫描接口信息
+   */
+  async DescribeGuideScanInfo(
+    req?: DescribeGuideScanInfoRequest,
+    cb?: (error: string, rep: DescribeGuideScanInfoResponse) => void
+  ): Promise<DescribeGuideScanInfoResponse> {
+    return this.request("DescribeGuideScanInfo", req, cb)
   }
 
   /**

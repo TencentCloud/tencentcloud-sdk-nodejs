@@ -136,6 +136,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyRepository", req, cb);
     }
     /**
+     * 用于在企业版中返回Chart的下载信息
+     */
+    async DescribeChartDownloadInfo(req, cb) {
+        return this.request("DescribeChartDownloadInfo", req, cb);
+    }
+    /**
      * 删除命名空间
      */
     async DeleteNamespace(req, cb) {

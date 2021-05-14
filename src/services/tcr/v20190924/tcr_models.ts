@@ -988,6 +988,21 @@ export interface Limit {
 }
 
 /**
+ * DescribeChartDownloadInfo返回参数结构体
+ */
+export interface DescribeChartDownloadInfoResponse {
+  /**
+   * 用于下载的url的预签名地址
+   */
+  PreSignedDownloadURL: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeExternalEndpointStatus请求参数结构体
  */
 export interface DescribeExternalEndpointStatusRequest {
@@ -2756,6 +2771,31 @@ export interface TriggerInvokeCondition {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   InvokeExpr: string
+}
+
+/**
+ * DescribeChartDownloadInfo请求参数结构体
+ */
+export interface DescribeChartDownloadInfoRequest {
+  /**
+   * 实例ID
+   */
+  RegistryId: string
+
+  /**
+   * 命名空间
+   */
+  NamespaceName: string
+
+  /**
+   * Chart包的名称
+   */
+  ChartName: string
+
+  /**
+   * Chart包的版本
+   */
+  ChartVersion: string
 }
 
 /**

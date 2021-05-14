@@ -115,6 +115,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyBlockIgnoreList", req, cb);
     }
     /**
+     * DescribeGuideScanInfo新手引导扫描接口信息
+     */
+    async DescribeGuideScanInfo(req, cb) {
+        return this.request("DescribeGuideScanInfo", req, cb);
+    }
+    /**
      * 修改规则执行顺序
      */
     async ModifySequenceRules(req, cb) {

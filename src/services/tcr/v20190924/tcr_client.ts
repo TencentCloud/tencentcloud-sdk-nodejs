@@ -60,6 +60,7 @@ import {
   RenewInstanceRequest,
   CreateTagRetentionRuleResponse,
   Limit,
+  DescribeChartDownloadInfoResponse,
   DescribeExternalEndpointStatusRequest,
   DeleteRepositoryResponse,
   DeleteImagePersonalResponse,
@@ -154,6 +155,7 @@ import {
   CreateNamespaceRequest,
   BatchDeleteRepositoryPersonalRequest,
   TriggerInvokeCondition,
+  DescribeChartDownloadInfoRequest,
   ValidateRepositoryExistPersonalResponse,
   DescribeExternalEndpointStatusResponse,
   ModifySecurityPolicyRequest,
@@ -425,6 +427,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyRepositoryResponse) => void
   ): Promise<ModifyRepositoryResponse> {
     return this.request("ModifyRepository", req, cb)
+  }
+
+  /**
+   * 用于在企业版中返回Chart的下载信息
+   */
+  async DescribeChartDownloadInfo(
+    req: DescribeChartDownloadInfoRequest,
+    cb?: (error: string, rep: DescribeChartDownloadInfoResponse) => void
+  ): Promise<DescribeChartDownloadInfoResponse> {
+    return this.request("DescribeChartDownloadInfo", req, cb)
   }
 
   /**

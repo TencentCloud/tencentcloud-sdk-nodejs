@@ -138,6 +138,16 @@ it("tke.v20180525.DeleteClusterEndpoint", async function () {
     }
 })
 
+it("tke.v20180525.DescribeEnableVpcCniProgress", async function () {
+    try {
+       const data = await client.DescribeEnableVpcCniProgress({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.SyncPrometheusTemplate", async function () {
     try {
        const data = await client.SyncPrometheusTemplate({})
@@ -201,6 +211,16 @@ it("tke.v20180525.DeleteClusterAsGroups", async function () {
 it("tke.v20180525.DeleteClusterRoute", async function () {
     try {
        const data = await client.DeleteClusterRoute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.EnableVpcCniNetworkType", async function () {
+    try {
+       const data = await client.EnableVpcCniNetworkType({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
