@@ -405,6 +405,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("FinanBillSliceOCR", req, cb);
     }
     /**
+     * 此接口基于企业四要素授权“姓名、证件号码、企业标识、企业全称”，验证企业信息是否一致。
+     */
+    async VerifyEnterpriseFourFactors(req, cb) {
+        return this.request("VerifyEnterpriseFourFactors", req, cb);
+    }
+    /**
      * 本接口支持识别公路汽车客票的发票代码、发票号码、日期、姓名、票价等字段。
      */
     async BusInvoiceOCR(req, cb) {

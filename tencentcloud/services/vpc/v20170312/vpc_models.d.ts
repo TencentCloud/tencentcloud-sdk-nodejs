@@ -824,11 +824,11 @@ export interface AddressTemplate {
  */
 export interface IKEOptionsSpecification {
     /**
-      * 加密算法，可选值：'3DES-CBC', 'AES-CBC-128', 'AES-CBS-192', 'AES-CBC-256', 'DES-CBC'，默认为3DES-CBC
+      * 加密算法，可选值：'3DES-CBC', 'AES-CBC-128', 'AES-CBS-192', 'AES-CBC-256', 'DES-CBC'，'SM4', 默认为3DES-CBC
       */
     PropoEncryAlgorithm?: string;
     /**
-      * 认证算法：可选值：'MD5', 'SHA1'，默认为MD5
+      * 认证算法：可选值：'MD5', 'SHA1'，'SHA-256' 默认为MD5
       */
     PropoAuthenAlgorithm?: string;
     /**
@@ -7234,7 +7234,7 @@ export interface CreateHaVipResponse {
     /**
       * `HAVIP`对象。
       */
-    HaVip?: HaVip;
+    HaVip: HaVip;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

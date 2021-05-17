@@ -114,9 +114,11 @@ import {
   GeneralEfficientOCRRequest,
   AdvertiseOCRRequest,
   RideHailingDriverLicenseOCRResponse,
+  Detail,
   EnglishOCRRequest,
   VatInvoiceVerifyResponse,
   PassportOCRResponse,
+  VerifyEnterpriseFourFactorsRequest,
   GeneralAccurateOCRRequest,
   OrgCodeCertOCRRequest,
   FlightInvoiceOCRResponse,
@@ -197,6 +199,7 @@ import {
   BankCardOCRResponse,
   BusinessCardOCRRequest,
   FinanBillOCRRequest,
+  VerifyEnterpriseFourFactorsResponse,
   GeneralFastOCRResponse,
   QrcodePositionObj,
 } from "./ocr_models"
@@ -717,6 +720,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: FinanBillSliceOCRResponse) => void
   ): Promise<FinanBillSliceOCRResponse> {
     return this.request("FinanBillSliceOCR", req, cb)
+  }
+
+  /**
+   * 此接口基于企业四要素授权“姓名、证件号码、企业标识、企业全称”，验证企业信息是否一致。
+   */
+  async VerifyEnterpriseFourFactors(
+    req: VerifyEnterpriseFourFactorsRequest,
+    cb?: (error: string, rep: VerifyEnterpriseFourFactorsResponse) => void
+  ): Promise<VerifyEnterpriseFourFactorsResponse> {
+    return this.request("VerifyEnterpriseFourFactors", req, cb)
   }
 
   /**

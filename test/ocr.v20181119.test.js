@@ -348,6 +348,16 @@ it("ocr.v20181119.FinanBillSliceOCR", async function () {
     }
 })
 
+it("ocr.v20181119.VerifyEnterpriseFourFactors", async function () {
+    try {
+       const data = await client.VerifyEnterpriseFourFactors({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.BusInvoiceOCR", async function () {
     try {
        const data = await client.BusInvoiceOCR({})

@@ -188,6 +188,8 @@ var memcached_1 = require("./memcached");
 Object.defineProperty(exports, "memcached", { enumerable: true, get: function () { return memcached_1.memcached; } });
 var mgobe_1 = require("./mgobe");
 Object.defineProperty(exports, "mgobe", { enumerable: true, get: function () { return mgobe_1.mgobe; } });
+var mna_1 = require("./mna");
+Object.defineProperty(exports, "mna", { enumerable: true, get: function () { return mna_1.mna; } });
 var mongodb_1 = require("./mongodb");
 Object.defineProperty(exports, "mongodb", { enumerable: true, get: function () { return mongodb_1.mongodb; } });
 var monitor_1 = require("./monitor");

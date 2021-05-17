@@ -92,6 +92,7 @@ export { lp } from "./lp";
 export { mariadb } from "./mariadb";
 export { memcached } from "./memcached";
 export { mgobe } from "./mgobe";
+export { mna } from "./mna";
 export { mongodb } from "./mongodb";
 export { monitor } from "./monitor";
 export { mps } from "./mps";

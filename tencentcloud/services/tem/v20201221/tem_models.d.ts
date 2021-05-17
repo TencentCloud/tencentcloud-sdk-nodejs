@@ -7,7 +7,7 @@ export interface CreateResourceRequest {
       */
     NamespaceId: string;
     /**
-      * 资源类型
+      * 资源类型，目前支持文件系统：CFS；日志服务：CLS；注册中心：TSE_SRE
       */
     ResourceType: string;
     /**
@@ -15,7 +15,7 @@ export interface CreateResourceRequest {
       */
     ResourceId: string;
     /**
-      * 来源
+      * 来源渠道
       */
     SourceChannel?: number;
 }
@@ -412,7 +412,7 @@ export interface DescribeIngressesRequest {
       */
     EksNamespace?: string;
     /**
-      * 来源
+      * 来源渠道
       */
     SourceChannel?: number;
 }
@@ -454,19 +454,22 @@ export interface DescribeServiceRunPodListV2Request {
       */
     ServiceId: string;
     /**
-      * 单页条数
+      * 单页条数，默认值20
       */
     Limit?: number;
     /**
-      * 分页下标
+      * 分页下标，默认值0
       */
     Offset?: number;
     /**
-      * pod状态
+      * 实例状态
+- Running
+- Pending
+- Error
       */
     Status?: string;
     /**
-      * 名字
+      * 实例名字
       */
     PodName?: string;
     /**
@@ -619,7 +622,7 @@ export interface IngressRuleBackend {
  */
 export interface DescribeIngressResponse {
     /**
-      * ingressInfo
+      * Ingress 规则配置
       */
     Result: IngressInfo;
     /**
@@ -929,7 +932,7 @@ export interface CreateServiceV2Request {
       */
     Description: string;
     /**
-      * 是否使用默认镜像服务
+      * 是否使用默认镜像服务 1-是，0-否
       */
     UseDefaultImageService?: number;
     /**
@@ -958,10 +961,15 @@ export interface CreateServiceV2Request {
     SubnetList?: Array<string>;
     /**
       * 编程语言
+- JAVA
+- OTHER
       */
     CodingLanguage?: string;
     /**
       * 部署方式
+- IMAGE
+- JAR
+- WAR
       */
     DeployMode?: string;
 }

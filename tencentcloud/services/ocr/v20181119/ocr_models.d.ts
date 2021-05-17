@@ -2668,6 +2668,19 @@ export interface RideHailingDriverLicenseOCRResponse {
     RequestId?: string;
 }
 /**
+ * 企业四要素核验结果
+ */
+export interface Detail {
+    /**
+      * 企业四要素核验结果状态码
+      */
+    Result: number;
+    /**
+      * 企业四要素核验结果描述
+      */
+    Desc: string;
+}
+/**
  * EnglishOCR请求参数结构体
  */
 export interface EnglishOCRRequest {
@@ -2778,6 +2791,27 @@ export interface PassportOCRResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * VerifyEnterpriseFourFactors请求参数结构体
+ */
+export interface VerifyEnterpriseFourFactorsRequest {
+    /**
+      * 姓名
+      */
+    RealName: string;
+    /**
+      * 证件号码（公司注册证件号）
+      */
+    IdCard: string;
+    /**
+      * 企业全称
+      */
+    EnterpriseName: string;
+    /**
+      * 企业标识（注册号，统一社会信用代码）
+      */
+    EnterpriseMark: string;
 }
 /**
  * GeneralAccurateOCR请求参数结构体
@@ -4925,6 +4959,24 @@ export interface FinanBillOCRRequest {
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
       */
     ImageUrl?: string;
+}
+/**
+ * VerifyEnterpriseFourFactors返回参数结构体
+ */
+export interface VerifyEnterpriseFourFactorsResponse {
+    /**
+      * 核验一致性（1:一致，2:不一致）
+      */
+    State: number;
+    /**
+      * 返回不一致时，返回明细，-22：姓名不一致，-23：证件号码不一致，-24：企业名称不一致，-25：企业标识不一致
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Detail: Detail;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * GeneralFastOCR返回参数结构体

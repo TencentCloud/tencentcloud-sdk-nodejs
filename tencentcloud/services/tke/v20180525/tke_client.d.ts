@@ -98,7 +98,7 @@ export declare class Client extends AbstractClient {
     /**
      * 仅能设置节点池中处于伸缩组的节点
      */
-    SetNodePoolNodeProtection(req?: SetNodePoolNodeProtectionRequest, cb?: (error: string, rep: SetNodePoolNodeProtectionResponse) => void): Promise<SetNodePoolNodeProtectionResponse>;
+    SetNodePoolNodeProtection(req: SetNodePoolNodeProtectionRequest, cb?: (error: string, rep: SetNodePoolNodeProtectionResponse) => void): Promise<SetNodePoolNodeProtectionResponse>;
     /**
      * 查询集群开启端口流程状态(仅支持托管集群外网端口)
      */

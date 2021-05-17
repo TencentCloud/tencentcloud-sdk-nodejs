@@ -1505,6 +1505,16 @@ export interface DeletePrometheusTemplateSyncRequest {
  */
 export interface SetNodePoolNodeProtectionResponse {
     /**
+      * 成功设置的节点id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    SucceedInstanceIds: Array<string>;
+    /**
+      * 没有成功设置的节点id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    FailedInstanceIds: Array<string>;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -3686,7 +3696,24 @@ export interface DescribeClusterNodePoolDetailRequest {
 /**
  * SetNodePoolNodeProtection请求参数结构体
  */
-export declare type SetNodePoolNodeProtectionRequest = null;
+export interface SetNodePoolNodeProtectionRequest {
+    /**
+      * 集群id
+      */
+    ClusterId: string;
+    /**
+      * 节点池id
+      */
+    NodePoolId: string;
+    /**
+      * 节点id
+      */
+    InstanceIds: Array<string>;
+    /**
+      * 节点是否需要移出保护
+      */
+    ProtectedFromScaleIn: boolean;
+}
 /**
  * DeletePrometheusTemplateSync返回参数结构体
  */
