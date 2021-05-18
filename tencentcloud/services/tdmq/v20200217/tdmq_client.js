@@ -28,6 +28,12 @@ class Client extends abstract_client_1.AbstractClient {
         super("tdmq.tencentcloudapi.com", "2020-02-17", clientConfig);
     }
     /**
+     * 删除cmq主题
+     */
+    async DeleteCmqTopic(req, cb) {
+        return this.request("DeleteCmqTopic", req, cb);
+    }
+    /**
      * 批量删除租户下的命名空间
      */
     async DeleteEnvironments(req, cb) {
@@ -52,16 +58,58 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyTopic", req, cb);
     }
     /**
-     * 批量发送消息
+     * 清空cmq消息队列中的消息
      */
-    async SendBatchMessages(req, cb) {
-        return this.request("SendBatchMessages", req, cb);
+    async ClearCmqQueue(req, cb) {
+        return this.request("ClearCmqQueue", req, cb);
     }
     /**
-     * 删除集群
+     * 创建cmq队列接口
      */
-    async DeleteCluster(req, cb) {
-        return this.request("DeleteCluster", req, cb);
+    async CreateCmqQueue(req, cb) {
+        return this.request("CreateCmqQueue", req, cb);
+    }
+    /**
+     * 修改cmq主题属性
+     */
+    async ModifyCmqTopicAttribute(req, cb) {
+        return this.request("ModifyCmqTopicAttribute", req, cb);
+    }
+    /**
+     * 修改cmq队列属性
+     */
+    async ModifyCmqQueueAttribute(req, cb) {
+        return this.request("ModifyCmqQueueAttribute", req, cb);
+    }
+    /**
+     * 创建cmq主题
+     */
+    async CreateCmqTopic(req, cb) {
+        return this.request("CreateCmqTopic", req, cb);
+    }
+    /**
+     * 查询cmq订阅详情
+     */
+    async DescribeCmqSubscriptionDetail(req, cb) {
+        return this.request("DescribeCmqSubscriptionDetail", req, cb);
+    }
+    /**
+     * 删除cmq队列
+     */
+    async DeleteCmqQueue(req, cb) {
+        return this.request("DeleteCmqQueue", req, cb);
+    }
+    /**
+     * 枚举cmq全量主题
+     */
+    async DescribeCmqTopics(req, cb) {
+        return this.request("DescribeCmqTopics", req, cb);
+    }
+    /**
+     * 枚举cmq死信队列源队列
+     */
+    async DescribeCmqDeadLetterSourceQueues(req, cb) {
+        return this.request("DescribeCmqDeadLetterSourceQueues", req, cb);
     }
     /**
      * 获取命名空间角色列表
@@ -70,16 +118,28 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeEnvironmentRoles", req, cb);
     }
     /**
-     * 批量删除topics
+     * 删除集群
      */
-    async DeleteTopics(req, cb) {
-        return this.request("DeleteTopics", req, cb);
+    async DeleteCluster(req, cb) {
+        return this.request("DeleteCluster", req, cb);
     }
     /**
      * 获取用户绑定的专享集群列表
      */
     async DescribeBindClusters(req, cb) {
         return this.request("DescribeBindClusters", req, cb);
+    }
+    /**
+     * 查询cmq队列详情
+     */
+    async DescribeCmqQueueDetail(req, cb) {
+        return this.request("DescribeCmqQueueDetail", req, cb);
+    }
+    /**
+     * 回溯cmq队列
+     */
+    async RewindCmqQueue(req, cb) {
+        return this.request("RewindCmqQueue", req, cb);
     }
     /**
      * 获取集群列表
@@ -92,6 +152,18 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateTopic(req, cb) {
         return this.request("CreateTopic", req, cb);
+    }
+    /**
+     * 查询cmq全量队列
+     */
+    async DescribeCmqQueues(req, cb) {
+        return this.request("DescribeCmqQueues", req, cb);
+    }
+    /**
+     * 发送cmq主题消息
+     */
+    async PublishCmqMsg(req, cb) {
+        return this.request("PublishCmqMsg", req, cb);
     }
     /**
      * 获取租户下命名空间列表
@@ -112,6 +184,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeSubscriptions", req, cb);
     }
     /**
+     * 删除cmq订阅
+     */
+    async DeleteCmqSubscribe(req, cb) {
+        return this.request("DeleteCmqSubscribe", req, cb);
+    }
+    /**
+     * 查询cmq主题详情
+     */
+    async DescribeCmqTopicDetail(req, cb) {
+        return this.request("DescribeCmqTopicDetail", req, cb);
+    }
+    /**
      * 用于在用户账户下创建消息队列 Tdmq 命名空间
      */
     async CreateEnvironment(req, cb) {
@@ -130,10 +214,22 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTopics", req, cb);
     }
     /**
+     * 清空订阅者消息标签
+     */
+    async ClearCmqSubscriptionFilterTags(req, cb) {
+        return this.request("ClearCmqSubscriptionFilterTags", req, cb);
+    }
+    /**
      * 发送单条消息
      */
     async SendMessages(req, cb) {
         return this.request("SendMessages", req, cb);
+    }
+    /**
+     * 发送cmq消息
+     */
+    async SendCmqMsg(req, cb) {
+        return this.request("SendCmqMsg", req, cb);
     }
     /**
      * 更新集群信息
@@ -148,16 +244,46 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyEnvironmentAttributes", req, cb);
     }
     /**
+     * 修改cmq订阅属性
+     */
+    async ModifyCmqSubscriptionAttribute(req, cb) {
+        return this.request("ModifyCmqSubscriptionAttribute", req, cb);
+    }
+    /**
+     * 解绑cmq死信队列
+     */
+    async UnbindCmqDeadLetter(req, cb) {
+        return this.request("UnbindCmqDeadLetter", req, cb);
+    }
+    /**
      * 创建一个主题的订阅关系
      */
     async CreateSubscription(req, cb) {
         return this.request("CreateSubscription", req, cb);
     }
     /**
+     * 批量发送消息
+     */
+    async SendBatchMessages(req, cb) {
+        return this.request("SendBatchMessages", req, cb);
+    }
+    /**
      * 获取指定命名空间的属性
      */
     async DescribeEnvironmentAttributes(req, cb) {
         return this.request("DescribeEnvironmentAttributes", req, cb);
+    }
+    /**
+     * 创建cmq订阅接口
+     */
+    async CreateCmqSubscribe(req, cb) {
+        return this.request("CreateCmqSubscribe", req, cb);
+    }
+    /**
+     * 批量删除topics
+     */
+    async DeleteTopics(req, cb) {
+        return this.request("DeleteTopics", req, cb);
     }
     /**
      * 根据时间戳进行消息回溯，精确到毫秒

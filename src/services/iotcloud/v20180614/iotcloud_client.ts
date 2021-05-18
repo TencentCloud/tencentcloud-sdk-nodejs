@@ -42,7 +42,7 @@ import {
   PublishRRPCMessageRequest,
   ProductProperties,
   DeviceUpdateStatus,
-  UpdateTopicPolicyResponse,
+  BatchUpdateFirmwareResponse,
   TaskInfo,
   DeleteProductRequest,
   StatusStatistic,
@@ -80,6 +80,8 @@ import {
   DescribeFirmwareTasksRequest,
   DisableTopicRuleResponse,
   BrokerSubscribe,
+  GetCOSURLRequest,
+  UpdateTopicPolicyResponse,
   DescribeProductTaskResponse,
   DescribeDeviceResponse,
   PublishBroadcastMessageRequest,
@@ -88,6 +90,7 @@ import {
   DescribeFirmwareTaskDevicesResponse,
   DescribeFirmwareTasksResponse,
   DeviceLabel,
+  GetCOSURLResponse,
   UpdateDeviceAvailableStateResponse,
   EditFirmwareResponse,
   CancelTaskRequest,
@@ -129,6 +132,7 @@ import {
   DescribeTaskResponse,
   CreateTaskResponse,
   BatchPublishMessage,
+  BatchUpdateFirmwareRequest,
   DescribeMultiDevTaskResponse,
   GetUserResourceInfoRequest,
   DeviceTag,
@@ -186,6 +190,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDevicesResponse) => void
   ): Promise<DescribeDevicesResponse> {
     return this.request("DescribeDevices", req, cb)
+  }
+
+  /**
+   * 本接口（GetCOSURL）用于获取固件存储在COS的URL
+   */
+  async GetCOSURL(
+    req: GetCOSURLRequest,
+    cb?: (error: string, rep: GetCOSURLResponse) => void
+  ): Promise<GetCOSURLResponse> {
+    return this.request("GetCOSURL", req, cb)
   }
 
   /**
@@ -309,13 +323,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeProductResource）用于查询产品资源详情。
+   * 本接口（BatchUpdateFirmware）用于批量更新设备固件
    */
-  async DescribeProductResource(
-    req: DescribeProductResourceRequest,
-    cb?: (error: string, rep: DescribeProductResourceResponse) => void
-  ): Promise<DescribeProductResourceResponse> {
-    return this.request("DescribeProductResource", req, cb)
+  async BatchUpdateFirmware(
+    req: BatchUpdateFirmwareRequest,
+    cb?: (error: string, rep: BatchUpdateFirmwareResponse) => void
+  ): Promise<BatchUpdateFirmwareResponse> {
+    return this.request("BatchUpdateFirmware", req, cb)
   }
 
   /**
@@ -436,6 +450,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ReplaceTopicRuleResponse) => void
   ): Promise<ReplaceTopicRuleResponse> {
     return this.request("ReplaceTopicRule", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeProductResource）用于查询产品资源详情。
+   */
+  async DescribeProductResource(
+    req: DescribeProductResourceRequest,
+    cb?: (error: string, rep: DescribeProductResourceResponse) => void
+  ): Promise<DescribeProductResourceResponse> {
+    return this.request("DescribeProductResource", req, cb)
   }
 
   /**

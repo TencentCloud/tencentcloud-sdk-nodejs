@@ -1706,12 +1706,12 @@ export interface DescribeTopSpaceSchemaTimeSeriesRequest {
   SortBy?: string
 
   /**
-   * 开始日期，最早为当日的前第29天，默认为截止日期的前第6天。
+   * 开始日期，如“2021-01-01”，最早为当日的前第29天，默认为截止日期的前第6天。
    */
   StartDate?: string
 
   /**
-   * 截止日期，最早为当日的前第29天，默认为当日。
+   * 截止日期，如“2021-01-01”，最早为当日的前第29天，默认为当日。
    */
   EndDate?: string
 
@@ -1786,12 +1786,12 @@ export interface DescribeTopSpaceTableTimeSeriesRequest {
   SortBy?: string
 
   /**
-   * 开始日期，最早为当日的前第29天，默认为截止日期的前第6天。
+   * 开始日期，如“2021-01-01”，最早为当日的前第29天，默认为截止日期的前第6天。
    */
   StartDate?: string
 
   /**
-   * 截止日期，最早为当日的前第29天，默认为当日。
+   * 截止日期，如“2021-01-01”，最早为当日的前第29天，默认为当日。
    */
   EndDate?: string
 

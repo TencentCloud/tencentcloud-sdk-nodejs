@@ -38,6 +38,16 @@ it("partners.v20180321.DescribeAgentDealsCache", async function () {
     }
 })
 
+it("partners.v20180321.DescribeUnbindClientList", async function () {
+    try {
+       const data = await client.DescribeUnbindClientList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("partners.v20180321.DescribeAgentSelfPayDealsV2", async function () {
     try {
        const data = await client.DescribeAgentSelfPayDealsV2({})
@@ -88,9 +98,9 @@ it("partners.v20180321.DescribeRebateInfos", async function () {
     }
 })
 
-it("partners.v20180321.DescribeSalesmans", async function () {
+it("partners.v20180321.DescribeClientBaseInfo", async function () {
     try {
-       const data = await client.DescribeSalesmans({})
+       const data = await client.DescribeClientBaseInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,9 +138,9 @@ it("partners.v20180321.DescribeAgentPayDeals", async function () {
     }
 })
 
-it("partners.v20180321.DescribeUnbindClientList", async function () {
+it("partners.v20180321.DescribeSalesmans", async function () {
     try {
-       const data = await client.DescribeUnbindClientList({})
+       const data = await client.DescribeSalesmans({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

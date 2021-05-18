@@ -142,6 +142,18 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDeviceActionHistory", req, cb);
     }
     /**
+     * 拉取账户流水
+     */
+    async DescribeBalanceTransactions(req, cb) {
+        return this.request("DescribeBalanceTransactions", req, cb);
+    }
+    /**
+     * 查询产品配置的数据模板信息
+     */
+    async DescribeModelDefinition(req, cb) {
+        return this.request("DescribeModelDefinition", req, cb);
+    }
+    /**
      * 删除转发规则
      */
     async DeleteForwardRule(req, cb) {
@@ -310,10 +322,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyModelDefinition", req, cb);
     }
     /**
-     * 拉取云存事件缩略图
+     * 查询账户余额
      */
-    async DescribeCloudStorageThumbnail(req, cb) {
-        return this.request("DescribeCloudStorageThumbnail", req, cb);
+    async DescribeBalance(req, cb) {
+        return this.request("DescribeBalance", req, cb);
     }
     /**
      * 获取设备列表
@@ -334,10 +346,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeFirmwareTasks", req, cb);
     }
     /**
-     * 查询产品配置的数据模板信息
+     * 拉取云存事件缩略图
      */
-    async DescribeModelDefinition(req, cb) {
-        return this.request("DescribeModelDefinition", req, cb);
+    async DescribeCloudStorageThumbnail(req, cb) {
+        return this.request("DescribeCloudStorageThumbnail", req, cb);
     }
 }
 exports.Client = Client;

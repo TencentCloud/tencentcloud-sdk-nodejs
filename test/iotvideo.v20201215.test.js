@@ -208,6 +208,26 @@ it("iotvideo.v20201215.DescribeDeviceActionHistory", async function () {
     }
 })
 
+it("iotvideo.v20201215.DescribeBalanceTransactions", async function () {
+    try {
+       const data = await client.DescribeBalanceTransactions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotvideo.v20201215.DescribeModelDefinition", async function () {
+    try {
+       const data = await client.DescribeModelDefinition({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotvideo.v20201215.DeleteForwardRule", async function () {
     try {
        const data = await client.DeleteForwardRule({})
@@ -488,9 +508,9 @@ it("iotvideo.v20201215.ModifyModelDefinition", async function () {
     }
 })
 
-it("iotvideo.v20201215.DescribeCloudStorageThumbnail", async function () {
+it("iotvideo.v20201215.DescribeBalance", async function () {
     try {
-       const data = await client.DescribeCloudStorageThumbnail({})
+       const data = await client.DescribeBalance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -528,9 +548,9 @@ it("iotvideo.v20201215.DescribeFirmwareTasks", async function () {
     }
 })
 
-it("iotvideo.v20201215.DescribeModelDefinition", async function () {
+it("iotvideo.v20201215.DescribeCloudStorageThumbnail", async function () {
     try {
-       const data = await client.DescribeModelDefinition({})
+       const data = await client.DescribeCloudStorageThumbnail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -38,6 +38,11 @@ export interface EnableVpcCniNetworkTypeRequest {
    * 使用的容器子网
    */
   Subnets: Array<string>
+
+  /**
+   * 在固定IP模式下，Pod销毁后退还IP的时间，传参必须大于300；不传默认IP永不销毁。
+   */
+  ExpiredSeconds?: number
 }
 
 /**

@@ -1442,6 +1442,12 @@ export interface Listener {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Toa: boolean
+
+  /**
+      * 解绑后端目标时，是否发RST给客户端，（此参数仅对于TCP监听器有意义）。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DeregisterTargetRst: boolean
 }
 
 /**
@@ -1574,6 +1580,11 @@ export interface ModifyListenerRequest {
    * 是否开启长连接，此参数仅适用于HTTP/HTTPS监听器。
    */
   KeepaliveEnable?: number
+
+  /**
+   * 解绑后端目标时，是否发RST给客户端，此参数仅适用于TCP监听器。
+   */
+  DeregisterTargetRst?: boolean
 }
 
 /**
@@ -2819,6 +2830,11 @@ export interface CreateListenerRequest {
    * 创建端口段监听器时必须传入此参数，用以标识结束端口。同时，入参Ports只允许传入一个成员，用以标识开始端口。【如果您需要体验端口段功能，请通过 [工单申请](https://console.cloud.tencent.com/workorder/category)】。
    */
   EndPort?: number
+
+  /**
+   * 解绑后端目标时，是否发RST给客户端，此参数仅适用于TCP监听器。
+   */
+  DeregisterTargetRst?: boolean
 }
 
 /**

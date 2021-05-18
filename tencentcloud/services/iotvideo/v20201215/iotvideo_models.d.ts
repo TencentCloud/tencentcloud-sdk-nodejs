@@ -904,6 +904,15 @@ export interface DescribeCategoryResponse {
     RequestId?: string;
 }
 /**
+ * DescribeBalance请求参数结构体
+ */
+export interface DescribeBalanceRequest {
+    /**
+      * 账户类型：1-设备接入；2-云存。
+      */
+    AccountType: number;
+}
+/**
  * ImportModelDefinition请求参数结构体
  */
 export interface ImportModelDefinitionRequest {
@@ -1099,6 +1108,27 @@ export interface DeleteForwardRuleRequest {
       * 队列名称
       */
     QueueName: string;
+}
+/**
+ * DescribeBalanceTransactions请求参数结构体
+ */
+export interface DescribeBalanceTransactionsRequest {
+    /**
+      * 账户类型：1-设备接入；2-云存。
+      */
+    AccountType: number;
+    /**
+      * 分页游标开始，默认为0开始拉取第一条。
+      */
+    Offset: number;
+    /**
+      * 分页每页数量。
+      */
+    Limit: number;
+    /**
+      * 流水类型：All-全部类型；Recharge-充值；CreateOrder-新购。
+      */
+    Operation?: string;
 }
 /**
  * CreateProduct返回参数结构体
@@ -1445,6 +1475,19 @@ export interface RetryDeviceFirmwareTaskRequest {
     TaskId: number;
 }
 /**
+ * DescribeBalance返回参数结构体
+ */
+export interface DescribeBalanceResponse {
+    /**
+      * 账户余额，单位：分（人民币）。
+      */
+    Balance: number;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * UploadFirmware请求参数结构体
  */
 export interface UploadFirmwareRequest {
@@ -1595,6 +1638,35 @@ export interface ModifyForwardRuleResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * 账户流水
+ */
+export interface BalanceTransaction {
+    /**
+      * 账户类型：1-设备接入 2-云存。
+      */
+    AccountType: number;
+    /**
+      * 账户变更类型：Rechareg-充值；CreateOrder-新购。
+      */
+    Operation: string;
+    /**
+      * 流水ID。
+      */
+    DealId: string;
+    /**
+      * 变更金额，单位：分（人民币）。
+      */
+    Amount: number;
+    /**
+      * 变更后账户余额，单位：分（人民币）。
+      */
+    Balance: number;
+    /**
+      * 变更时间。
+      */
+    OperationTime: number;
 }
 /**
  * 固件升级任务信息
@@ -2037,6 +2109,23 @@ export interface SetForwardAuthRequest {
       * 消息队列类型
       */
     QueueType: number;
+}
+/**
+ * DescribeBalanceTransactions返回参数结构体
+ */
+export interface DescribeBalanceTransactionsResponse {
+    /**
+      * 账户流水总数。
+      */
+    TotalCount: number;
+    /**
+      * 账户流水详情数组。
+      */
+    Transactions: Array<BalanceTransaction>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * ModifyDevice返回参数结构体

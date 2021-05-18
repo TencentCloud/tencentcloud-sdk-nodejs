@@ -1623,7 +1623,7 @@ export interface DeleteNetworkInterfaceRequest {
  */
 export interface RemovePrivateIpAddressesRequest {
     /**
-      * ECM 地域。
+      * ECM 地域，形如ap-xian-ecm。
       */
     EcmRegion: string;
     /**
@@ -1814,11 +1814,11 @@ export interface DeleteLoadBalancerListenersRequest {
  */
 export interface MigratePrivateIpAddressRequest {
     /**
-      * ECM 地域
+      * ECM 地域，形如ap-xian-ecm。
       */
     EcmRegion: string;
     /**
-      * 当内网IP绑定的弹性网卡实例ID，例如：eni-11112222。
+      * 当前内网IP绑定的弹性网卡实例ID，例如：eni-11112222。
       */
     SourceNetworkInterfaceId: string;
     /**
@@ -4688,7 +4688,7 @@ export interface DescribeSecurityGroupPoliciesRequest {
  */
 export interface MigrateNetworkInterfaceRequest {
     /**
-      * ECM 地域
+      * ECM 地域，形如ap-xian-ecm。
       */
     EcmRegion: string;
     /**
@@ -5534,7 +5534,7 @@ export interface AssignPrivateIpAddressesRequest {
       */
     NetworkInterfaceId: string;
     /**
-      * ECM 地域
+      * ECM 地域，形如ap-xian-ecm。
       */
     EcmRegion: string;
     /**

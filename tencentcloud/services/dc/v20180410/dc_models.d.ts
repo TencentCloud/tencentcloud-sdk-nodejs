@@ -16,7 +16,7 @@ export interface BgpPeer {
     AuthKey?: string;
 }
 /**
- * 专线通道路由
+ * 专用通道路由
  */
 export interface DirectConnectTunnelRoute {
     /**
@@ -257,12 +257,12 @@ export interface DirectConnect {
       */
     LocalZone: boolean;
     /**
-      * 该物理专线下vlan 0的专线通道数量
+      * 该物理专线下vlan 0的专用通道数量
 注意：此字段可能返回 null，表示取不到有效值。
       */
     VlanZeroDirectConnectTunnelCount: number;
     /**
-      * 该物理专线下非vlan 0的专线通道数量
+      * 该物理专线下非vlan 0的专用通道数量
 注意：此字段可能返回 null，表示取不到有效值。
       */
     OtherVlanDirectConnectTunnelCount: number;

@@ -20,7 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   AgentClientElem,
   DescribeAgentDealsCacheRequest,
-  DescribeSalesmansRequest,
+  DescribeClientBaseInfoResponse,
   DescribeAgentAuditedClientsRequest,
   RemovePayRelationForClientRequest,
   AgentPayDealsRequest,
@@ -36,6 +36,8 @@ import {
   ProductInfoElem,
   UnbindClientElem,
   RemovePayRelationForClientResponse,
+  DescribeSalesmansRequest,
+  DescribeClientBaseInfoRequest,
   DescribeRebateInfosRequest,
   CreatePayRelationForClientResponse,
   DescribeAgentAuditedClientsResponse,
@@ -50,6 +52,7 @@ import {
   DescribeSalesmansResponse,
   AgentAuditedClient,
   DescribeUnbindClientListRequest,
+  DescribeRebateInfosResponse,
   DescribeAgentPayDealsResponse,
   DealGoodsPriceElem,
   DescribeAgentDealsByCacheRequest,
@@ -61,13 +64,13 @@ import {
   DescribeAgentSelfPayDealsV2Response,
   AgentBillElem,
   AuditApplyClientResponse,
-  DescribeAgentDealsCacheResponse,
+  ClientBaseElem,
   DescribeAgentBillsRequest,
   AgentPayDealsResponse,
   AgentDealElem,
   AgentSalesmanElem,
   DealGoodsPriceNewElem,
-  DescribeRebateInfosResponse,
+  DescribeAgentDealsCacheResponse,
   DescribeAgentClientGradeRequest,
 } from "./partners_models"
 
@@ -99,6 +102,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAgentDealsCacheResponse) => void
   ): Promise<DescribeAgentDealsCacheResponse> {
     return this.request("DescribeAgentDealsCache", req, cb)
+  }
+
+  /**
+   * 代理商名下客户解绑记录查询接口
+   */
+  async DescribeUnbindClientList(
+    req: DescribeUnbindClientListRequest,
+    cb?: (error: string, rep: DescribeUnbindClientListResponse) => void
+  ): Promise<DescribeUnbindClientListResponse> {
+    return this.request("DescribeUnbindClientList", req, cb)
   }
 
   /**
@@ -152,13 +165,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 代理商查询名下业务员列表信息
+   * 国际站根据UIN查询代客基础信息
    */
-  async DescribeSalesmans(
-    req: DescribeSalesmansRequest,
-    cb?: (error: string, rep: DescribeSalesmansResponse) => void
-  ): Promise<DescribeSalesmansResponse> {
-    return this.request("DescribeSalesmans", req, cb)
+  async DescribeClientBaseInfo(
+    req: DescribeClientBaseInfoRequest,
+    cb?: (error: string, rep: DescribeClientBaseInfoResponse) => void
+  ): Promise<DescribeClientBaseInfoResponse> {
+    return this.request("DescribeClientBaseInfo", req, cb)
   }
 
   /**
@@ -192,13 +205,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 代理商名下客户解绑记录查询接口
+   * 代理商查询名下业务员列表信息
    */
-  async DescribeUnbindClientList(
-    req: DescribeUnbindClientListRequest,
-    cb?: (error: string, rep: DescribeUnbindClientListResponse) => void
-  ): Promise<DescribeUnbindClientListResponse> {
-    return this.request("DescribeUnbindClientList", req, cb)
+  async DescribeSalesmans(
+    req: DescribeSalesmansRequest,
+    cb?: (error: string, rep: DescribeSalesmansResponse) => void
+  ): Promise<DescribeSalesmansResponse> {
+    return this.request("DescribeSalesmans", req, cb)
   }
 
   /**

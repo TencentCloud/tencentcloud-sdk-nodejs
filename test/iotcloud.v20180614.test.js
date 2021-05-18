@@ -38,6 +38,16 @@ it("iotcloud.v20180614.DescribeDevices", async function () {
     }
 })
 
+it("iotcloud.v20180614.GetCOSURL", async function () {
+    try {
+       const data = await client.GetCOSURL({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotcloud.v20180614.PublishRRPCMessage", async function () {
     try {
        const data = await client.PublishRRPCMessage({})
@@ -158,9 +168,9 @@ it("iotcloud.v20180614.CreateTopicPolicy", async function () {
     }
 })
 
-it("iotcloud.v20180614.DescribeProductResource", async function () {
+it("iotcloud.v20180614.BatchUpdateFirmware", async function () {
     try {
-       const data = await client.DescribeProductResource({})
+       const data = await client.BatchUpdateFirmware({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -281,6 +291,16 @@ it("iotcloud.v20180614.DeleteDevice", async function () {
 it("iotcloud.v20180614.ReplaceTopicRule", async function () {
     try {
        const data = await client.ReplaceTopicRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotcloud.v20180614.DescribeProductResource", async function () {
+    try {
+       const data = await client.DescribeProductResource({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

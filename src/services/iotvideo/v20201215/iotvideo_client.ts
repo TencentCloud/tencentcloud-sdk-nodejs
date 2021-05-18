@@ -62,6 +62,7 @@ import {
   DeviceDataHistoryItem,
   DescribeDeviceEventHistoryRequest,
   DescribeCategoryResponse,
+  DescribeBalanceRequest,
   ImportModelDefinitionRequest,
   DescribeDeviceCommLogResponse,
   DeleteDeviceRequest,
@@ -71,6 +72,7 @@ import {
   DescribeFirmwareResponse,
   DescribeDeviceCommLogRequest,
   DeleteForwardRuleRequest,
+  DescribeBalanceTransactionsRequest,
   CreateProductResponse,
   DescribeFirmwareTaskDevicesResponse,
   DescribeCloudStorageThumbnailResponse,
@@ -86,6 +88,7 @@ import {
   DescribeCloudStorageEventsRequest,
   ListFirmwaresRequest,
   RetryDeviceFirmwareTaskRequest,
+  DescribeBalanceResponse,
   UploadFirmwareRequest,
   DescribeFirmwareTasksResponse,
   EditFirmwareResponse,
@@ -93,6 +96,7 @@ import {
   ProductTemplate,
   DeleteProductResponse,
   ModifyForwardRuleResponse,
+  BalanceTransaction,
   FirmwareTaskInfo,
   DescribeFirmwareTaskDistributionResponse,
   DescribeBatchResponse,
@@ -113,6 +117,7 @@ import {
   CreateForwardRuleRequest,
   CreateTaskFileUrlResponse,
   SetForwardAuthRequest,
+  DescribeBalanceTransactionsResponse,
   ModifyDeviceResponse,
   CreateTaskFileUrlRequest,
   BatchUpdateFirmwareRequest,
@@ -338,6 +343,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDeviceActionHistoryResponse) => void
   ): Promise<DescribeDeviceActionHistoryResponse> {
     return this.request("DescribeDeviceActionHistory", req, cb)
+  }
+
+  /**
+   * 拉取账户流水
+   */
+  async DescribeBalanceTransactions(
+    req: DescribeBalanceTransactionsRequest,
+    cb?: (error: string, rep: DescribeBalanceTransactionsResponse) => void
+  ): Promise<DescribeBalanceTransactionsResponse> {
+    return this.request("DescribeBalanceTransactions", req, cb)
+  }
+
+  /**
+   * 查询产品配置的数据模板信息
+   */
+  async DescribeModelDefinition(
+    req: DescribeModelDefinitionRequest,
+    cb?: (error: string, rep: DescribeModelDefinitionResponse) => void
+  ): Promise<DescribeModelDefinitionResponse> {
+    return this.request("DescribeModelDefinition", req, cb)
   }
 
   /**
@@ -621,13 +646,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 拉取云存事件缩略图
+   * 查询账户余额
    */
-  async DescribeCloudStorageThumbnail(
-    req: DescribeCloudStorageThumbnailRequest,
-    cb?: (error: string, rep: DescribeCloudStorageThumbnailResponse) => void
-  ): Promise<DescribeCloudStorageThumbnailResponse> {
-    return this.request("DescribeCloudStorageThumbnail", req, cb)
+  async DescribeBalance(
+    req: DescribeBalanceRequest,
+    cb?: (error: string, rep: DescribeBalanceResponse) => void
+  ): Promise<DescribeBalanceResponse> {
+    return this.request("DescribeBalance", req, cb)
   }
 
   /**
@@ -661,12 +686,12 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询产品配置的数据模板信息
+   * 拉取云存事件缩略图
    */
-  async DescribeModelDefinition(
-    req: DescribeModelDefinitionRequest,
-    cb?: (error: string, rep: DescribeModelDefinitionResponse) => void
-  ): Promise<DescribeModelDefinitionResponse> {
-    return this.request("DescribeModelDefinition", req, cb)
+  async DescribeCloudStorageThumbnail(
+    req: DescribeCloudStorageThumbnailRequest,
+    cb?: (error: string, rep: DescribeCloudStorageThumbnailResponse) => void
+  ): Promise<DescribeCloudStorageThumbnailResponse> {
+    return this.request("DescribeCloudStorageThumbnail", req, cb)
   }
 }

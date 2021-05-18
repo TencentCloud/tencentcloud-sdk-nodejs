@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeCloudStorageDateRequest, CreateCloudStorageRequest, ImportModelDefinitionResponse, DescribeModelDefinitionResponse, CreateBatchRequest, DescribeCloudStorageTimeResponse, DescribeProductsRequest, DescribeDeviceEventHistoryResponse, DescribeDeviceActionHistoryRequest, DescribeDevicesResponse, ModifyProductResponse, ModifyProductRequest, ModifyModelDefinitionRequest, DescribeBatchsResponse, TransferCloudStorageResponse, DescribeForwardRuleResponse, DescribeBatchRequest, ModifyDeviceRequest, DescribeFirmwareTaskStatisticsResponse, DescribeFirmwareRequest, DescribeProductRequest, DescribeProductsResponse, CheckForwardAuthRequest, DescribeDeviceDataRequest, CreateBatchResponse, DescribeDeviceActionHistoryResponse, GetAllFirmwareVersionRequest, DeleteFirmwareResponse, CreateForwardRuleResponse, BatchUpdateFirmwareResponse, DeleteProductRequest, SetForwardAuthResponse, EditFirmwareRequest, DescribeDeviceEventHistoryRequest, DescribeCategoryResponse, ImportModelDefinitionRequest, DescribeDeviceCommLogResponse, DeleteDeviceRequest, GenerateSignedVideoURLResponse, ListFirmwaresResponse, DescribeFirmwareTaskDevicesRequest, DescribeFirmwareResponse, DescribeDeviceCommLogRequest, DeleteForwardRuleRequest, CreateProductResponse, DescribeFirmwareTaskDevicesResponse, DescribeCloudStorageThumbnailResponse, RetryDeviceFirmwareTaskResponse, GenerateSignedVideoURLRequest, ResetCloudStorageResponse, DescribeFirmwareTaskResponse, CreateProductRequest, DescribeFirmwareTasksRequest, GetFirmwareURLResponse, DescribeDeviceResponse, DescribeCloudStorageEventsRequest, ListFirmwaresRequest, RetryDeviceFirmwareTaskRequest, UploadFirmwareRequest, DescribeFirmwareTasksResponse, EditFirmwareResponse, DescribeFirmwareTaskDistributionRequest, DeleteProductResponse, ModifyForwardRuleResponse, DescribeFirmwareTaskDistributionResponse, DescribeBatchResponse, DescribeDeviceRequest, ModifyForwardRuleRequest, DescribeCloudStorageEventsResponse, DescribeCloudStorageDateResponse, DescribeForwardRuleRequest, UploadFirmwareResponse, CreateCloudStorageResponse, CancelDeviceFirmwareTaskRequest, CancelDeviceFirmwareTaskResponse, DeleteDeviceResponse, DescribeDeviceDataHistoryRequest, CreateForwardRuleRequest, CreateTaskFileUrlResponse, SetForwardAuthRequest, ModifyDeviceResponse, CreateTaskFileUrlRequest, BatchUpdateFirmwareRequest, DescribeCloudStorageThumbnailRequest, GetFirmwareURLRequest, DescribeCloudStorageResponse, DescribeProductResponse, DescribeCategoryRequest, DeleteFirmwareRequest, DescribeCloudStorageRequest, GetAllFirmwareVersionResponse, DescribeDeviceDataHistoryResponse, DescribeDevicesRequest, DescribeModelDefinitionRequest, CheckForwardAuthResponse, DescribeDeviceDataResponse, DeleteForwardRuleResponse, TransferCloudStorageRequest, DescribeFirmwareTaskStatisticsRequest, DescribeBatchsRequest, ModifyModelDefinitionResponse, ResetCloudStorageRequest, DescribeFirmwareTaskRequest, DescribeCloudStorageTimeRequest } from "./iotvideo_models";
+import { DescribeCloudStorageDateRequest, CreateCloudStorageRequest, ImportModelDefinitionResponse, DescribeModelDefinitionResponse, CreateBatchRequest, DescribeCloudStorageTimeResponse, DescribeProductsRequest, DescribeDeviceEventHistoryResponse, DescribeDeviceActionHistoryRequest, DescribeDevicesResponse, ModifyProductResponse, ModifyProductRequest, ModifyModelDefinitionRequest, DescribeBatchsResponse, TransferCloudStorageResponse, DescribeForwardRuleResponse, DescribeBatchRequest, ModifyDeviceRequest, DescribeFirmwareTaskStatisticsResponse, DescribeFirmwareRequest, DescribeProductRequest, DescribeProductsResponse, CheckForwardAuthRequest, DescribeDeviceDataRequest, CreateBatchResponse, DescribeDeviceActionHistoryResponse, GetAllFirmwareVersionRequest, DeleteFirmwareResponse, CreateForwardRuleResponse, BatchUpdateFirmwareResponse, DeleteProductRequest, SetForwardAuthResponse, EditFirmwareRequest, DescribeDeviceEventHistoryRequest, DescribeCategoryResponse, DescribeBalanceRequest, ImportModelDefinitionRequest, DescribeDeviceCommLogResponse, DeleteDeviceRequest, GenerateSignedVideoURLResponse, ListFirmwaresResponse, DescribeFirmwareTaskDevicesRequest, DescribeFirmwareResponse, DescribeDeviceCommLogRequest, DeleteForwardRuleRequest, DescribeBalanceTransactionsRequest, CreateProductResponse, DescribeFirmwareTaskDevicesResponse, DescribeCloudStorageThumbnailResponse, RetryDeviceFirmwareTaskResponse, GenerateSignedVideoURLRequest, ResetCloudStorageResponse, DescribeFirmwareTaskResponse, CreateProductRequest, DescribeFirmwareTasksRequest, GetFirmwareURLResponse, DescribeDeviceResponse, DescribeCloudStorageEventsRequest, ListFirmwaresRequest, RetryDeviceFirmwareTaskRequest, DescribeBalanceResponse, UploadFirmwareRequest, DescribeFirmwareTasksResponse, EditFirmwareResponse, DescribeFirmwareTaskDistributionRequest, DeleteProductResponse, ModifyForwardRuleResponse, DescribeFirmwareTaskDistributionResponse, DescribeBatchResponse, DescribeDeviceRequest, ModifyForwardRuleRequest, DescribeCloudStorageEventsResponse, DescribeCloudStorageDateResponse, DescribeForwardRuleRequest, UploadFirmwareResponse, CreateCloudStorageResponse, CancelDeviceFirmwareTaskRequest, CancelDeviceFirmwareTaskResponse, DeleteDeviceResponse, DescribeDeviceDataHistoryRequest, CreateForwardRuleRequest, CreateTaskFileUrlResponse, SetForwardAuthRequest, DescribeBalanceTransactionsResponse, ModifyDeviceResponse, CreateTaskFileUrlRequest, BatchUpdateFirmwareRequest, DescribeCloudStorageThumbnailRequest, GetFirmwareURLRequest, DescribeCloudStorageResponse, DescribeProductResponse, DescribeCategoryRequest, DeleteFirmwareRequest, DescribeCloudStorageRequest, GetAllFirmwareVersionResponse, DescribeDeviceDataHistoryResponse, DescribeDevicesRequest, DescribeModelDefinitionRequest, CheckForwardAuthResponse, DescribeDeviceDataResponse, DeleteForwardRuleResponse, TransferCloudStorageRequest, DescribeFirmwareTaskStatisticsRequest, DescribeBatchsRequest, ModifyModelDefinitionResponse, ResetCloudStorageRequest, DescribeFirmwareTaskRequest, DescribeCloudStorageTimeRequest } from "./iotvideo_models";
 /**
  * iotvideo client
  * @class
@@ -83,6 +83,14 @@ export declare class Client extends AbstractClient {
      * 为用户提供获取动作历史的能力。
      */
     DescribeDeviceActionHistory(req: DescribeDeviceActionHistoryRequest, cb?: (error: string, rep: DescribeDeviceActionHistoryResponse) => void): Promise<DescribeDeviceActionHistoryResponse>;
+    /**
+     * 拉取账户流水
+     */
+    DescribeBalanceTransactions(req: DescribeBalanceTransactionsRequest, cb?: (error: string, rep: DescribeBalanceTransactionsResponse) => void): Promise<DescribeBalanceTransactionsResponse>;
+    /**
+     * 查询产品配置的数据模板信息
+     */
+    DescribeModelDefinition(req: DescribeModelDefinitionRequest, cb?: (error: string, rep: DescribeModelDefinitionResponse) => void): Promise<DescribeModelDefinitionResponse>;
     /**
      * 删除转发规则
      */
@@ -196,9 +204,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyModelDefinition(req: ModifyModelDefinitionRequest, cb?: (error: string, rep: ModifyModelDefinitionResponse) => void): Promise<ModifyModelDefinitionResponse>;
     /**
-     * 拉取云存事件缩略图
+     * 查询账户余额
      */
-    DescribeCloudStorageThumbnail(req: DescribeCloudStorageThumbnailRequest, cb?: (error: string, rep: DescribeCloudStorageThumbnailResponse) => void): Promise<DescribeCloudStorageThumbnailResponse>;
+    DescribeBalance(req: DescribeBalanceRequest, cb?: (error: string, rep: DescribeBalanceResponse) => void): Promise<DescribeBalanceResponse>;
     /**
      * 获取设备列表
      */
@@ -212,7 +220,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeFirmwareTasks(req: DescribeFirmwareTasksRequest, cb?: (error: string, rep: DescribeFirmwareTasksResponse) => void): Promise<DescribeFirmwareTasksResponse>;
     /**
-     * 查询产品配置的数据模板信息
+     * 拉取云存事件缩略图
      */
-    DescribeModelDefinition(req: DescribeModelDefinitionRequest, cb?: (error: string, rep: DescribeModelDefinitionResponse) => void): Promise<DescribeModelDefinitionResponse>;
+    DescribeCloudStorageThumbnail(req: DescribeCloudStorageThumbnailRequest, cb?: (error: string, rep: DescribeCloudStorageThumbnailResponse) => void): Promise<DescribeCloudStorageThumbnailResponse>;
 }

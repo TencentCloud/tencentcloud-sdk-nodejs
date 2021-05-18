@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeDevices", req, cb);
     }
     /**
+     * 本接口（GetCOSURL）用于获取固件存储在COS的URL
+     */
+    async GetCOSURL(req, cb) {
+        return this.request("GetCOSURL", req, cb);
+    }
+    /**
      * 发布RRPC消息
      */
     async PublishRRPCMessage(req, cb) {
@@ -112,10 +118,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateTopicPolicy", req, cb);
     }
     /**
-     * 本接口（DescribeProductResource）用于查询产品资源详情。
+     * 本接口（BatchUpdateFirmware）用于批量更新设备固件
      */
-    async DescribeProductResource(req, cb) {
-        return this.request("DescribeProductResource", req, cb);
+    async BatchUpdateFirmware(req, cb) {
+        return this.request("BatchUpdateFirmware", req, cb);
     }
     /**
      * 本接口（CreateProduct）用于创建一个新的物联网通信产品
@@ -188,6 +194,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async ReplaceTopicRule(req, cb) {
         return this.request("ReplaceTopicRule", req, cb);
+    }
+    /**
+     * 本接口（DescribeProductResource）用于查询产品资源详情。
+     */
+    async DescribeProductResource(req, cb) {
+        return this.request("DescribeProductResource", req, cb);
     }
     /**
      * 查询推送资源任务统计信息

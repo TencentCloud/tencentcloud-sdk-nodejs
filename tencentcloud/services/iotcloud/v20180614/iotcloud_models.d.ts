@@ -548,9 +548,13 @@ export interface DeviceUpdateStatus {
     TaskId: number;
 }
 /**
- * UpdateTopicPolicy返回参数结构体
+ * BatchUpdateFirmware返回参数结构体
  */
-export interface UpdateTopicPolicyResponse {
+export interface BatchUpdateFirmwareResponse {
+    /**
+      * 任务ID
+      */
+    TaskId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1319,6 +1323,28 @@ export interface BrokerSubscribe {
     DeviceName: string;
 }
 /**
+ * GetCOSURL请求参数结构体
+ */
+export interface GetCOSURLRequest {
+    /**
+      * 产品ID
+      */
+    ProductID: string;
+    /**
+      * 固件版本
+      */
+    FirmwareVersion: string;
+}
+/**
+ * UpdateTopicPolicy返回参数结构体
+ */
+export interface UpdateTopicPolicyResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeProductTask返回参数结构体
  */
 export interface DescribeProductTaskResponse {
@@ -1562,6 +1588,19 @@ export interface DeviceLabel {
       * 标签值
       */
     Value: string;
+}
+/**
+ * GetCOSURL返回参数结构体
+ */
+export interface GetCOSURLResponse {
+    /**
+      * 固件URL
+      */
+    Url: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
 }
 /**
  * UpdateDeviceAvailableState返回参数结构体
@@ -2371,6 +2410,47 @@ export interface BatchPublishMessage {
       * 消息内容
       */
     Payload: string;
+}
+/**
+ * BatchUpdateFirmware请求参数结构体
+ */
+export interface BatchUpdateFirmwareRequest {
+    /**
+      * 产品ID
+      */
+    ProductID: string;
+    /**
+      * 固件新版本号
+      */
+    FirmwareVersion: string;
+    /**
+      * 固件原版本号，根据文件列表升级固件不需要填写此参数
+      */
+    FirmwareOriVersion?: string;
+    /**
+      * 升级方式，0 静默升级  1 用户确认升级。 不填默认为静默升级方式
+      */
+    UpgradeMethod?: number;
+    /**
+      * 设备列表文件名称，根据文件列表升级固件需要填写此参数
+      */
+    FileName?: string;
+    /**
+      * 设备列表的文件md5值
+      */
+    FileMd5?: string;
+    /**
+      * 设备列表的文件大小值
+      */
+    FileSize?: number;
+    /**
+      * 需要升级的设备名称列表
+      */
+    DeviceNames?: Array<string>;
+    /**
+      * 固件升级任务，默认超时时间。 最小取值60秒，最大为3600秒
+      */
+    TimeoutInterval?: number;
 }
 /**
  * DescribeMultiDevTask返回参数结构体

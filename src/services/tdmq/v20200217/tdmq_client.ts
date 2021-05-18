@@ -18,71 +18,119 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  DeleteTopicsResponse,
-  ModifyEnvironmentAttributesResponse,
   DescribeBindClustersResponse,
-  SubscriptionTopic,
-  ModifyEnvironmentAttributesRequest,
+  CmqDeadLetterPolicy,
   DescribeSubscriptionsRequest,
-  Environment,
-  VpcBindRecord,
   DeleteClusterResponse,
-  ModifyClusterRequest,
-  DescribeEnvironmentAttributesRequest,
-  PartitionsTopic,
   SendBatchMessagesResponse,
-  DescribeBindClustersRequest,
-  CreateClusterResponse,
-  DescribeTopicsResponse,
-  EnvironmentRole,
-  CreateClusterRequest,
+  DescribeClusterDetailRequest,
+  CreateCmqTopicRequest,
   BindCluster,
   ModifyClusterResponse,
-  CreateTopicResponse,
-  SendMessagesRequest,
-  DescribeClusterDetailRequest,
-  DescribeEnvironmentsResponse,
-  DescribeEnvironmentsRequest,
-  ModifyTopicResponse,
-  DescribeClustersRequest,
-  DescribeProducersRequest,
-  DescribeEnvironmentAttributesResponse,
-  TopicRecord,
-  Subscription,
+  DescribeCmqQueuesResponse,
+  PublishCmqMsgRequest,
+  CreateCmqSubscribeRequest,
+  RewindCmqQueueResponse,
   DeleteClusterRequest,
-  FilterSubscription,
+  CmqSubscription,
+  DeleteCmqTopicResponse,
+  CreateSubscriptionRequest,
+  DescribeCmqTopicDetailResponse,
+  CmqQueue,
+  CreateEnvironmentResponse,
+  Producer,
+  CreateSubscriptionResponse,
+  ModifyCmqTopicAttributeResponse,
+  DescribeCmqSubscriptionDetailRequest,
+  Topic,
+  DescribeEnvironmentsRequest,
+  DescribeCmqQueueDetailResponse,
+  CreateEnvironmentRequest,
+  DeleteTopicsResponse,
+  DescribeClustersRequest,
+  ModifyEnvironmentAttributesRequest,
+  DescribeCmqSubscriptionDetailResponse,
+  VpcBindRecord,
+  RewindCmqQueueRequest,
+  ModifyClusterRequest,
+  DescribeEnvironmentAttributesRequest,
+  DescribeTopicsResponse,
+  PublishCmqMsgResponse,
+  SendCmqMsgRequest,
+  ModifyCmqSubscriptionAttributeResponse,
   Tag,
+  DeleteCmqQueueResponse,
+  SendMessagesRequest,
+  ModifyCmqTopicAttributeRequest,
+  Subscription,
+  CreateCmqSubscribeResponse,
   DescribeSubscriptionsResponse,
-  DescribeProducersResponse,
-  SendBatchMessagesRequest,
   SendMessagesResponse,
   CreateTopicRequest,
   DescribeTopicsRequest,
   DeleteEnvironmentsResponse,
-  Connection,
-  DeleteTopicsRequest,
   DescribeEnvironmentRolesResponse,
-  CreateSubscriptionRequest,
-  ModifyTopicRequest,
-  Topic,
-  Consumer,
-  DescribeBindVpcsResponse,
-  Filter,
-  DeleteSubscriptionsRequest,
-  CreateEnvironmentResponse,
-  ResetMsgSubOffsetByTimestampRequest,
-  Producer,
-  DeleteSubscriptionsResponse,
-  CreateSubscriptionResponse,
-  ConsumersSchedule,
+  ClearCmqQueueRequest,
+  FilterSubscription,
+  DescribeCmqTopicsResponse,
+  DescribeCmqTopicDetailRequest,
+  CmqTopic,
+  UnbindCmqDeadLetterResponse,
   DeleteEnvironmentsRequest,
-  DescribeClusterDetailResponse,
-  Cluster,
   DescribeBindVpcsRequest,
   DescribeClustersResponse,
-  ResetMsgSubOffsetByTimestampResponse,
-  CreateEnvironmentRequest,
+  ClearCmqSubscriptionFilterTagsRequest,
+  TopicRecord,
   DescribeEnvironmentRolesRequest,
+  Environment,
+  CreateCmqQueueResponse,
+  PartitionsTopic,
+  ResetMsgSubOffsetByTimestampResponse,
+  CreateClusterResponse,
+  DescribeCmqDeadLetterSourceQueuesRequest,
+  CreateClusterRequest,
+  ModifyCmqQueueAttributeResponse,
+  CreateTopicResponse,
+  DescribeCmqQueuesRequest,
+  DescribeEnvironmentsResponse,
+  ModifyCmqSubscriptionAttributeRequest,
+  ModifyTopicResponse,
+  CreateCmqTopicResponse,
+  CmqDeadLetterSource,
+  ClearCmqSubscriptionFilterTagsResponse,
+  DescribeCmqTopicsRequest,
+  Filter,
+  Connection,
+  DeleteTopicsRequest,
+  CmqTransactionPolicy,
+  ModifyTopicRequest,
+  ResetMsgSubOffsetByTimestampRequest,
+  Consumer,
+  DescribeBindVpcsResponse,
+  DeleteCmqSubscribeRequest,
+  DescribeCmqDeadLetterSourceQueuesResponse,
+  DeleteSubscriptionsResponse,
+  ConsumersSchedule,
+  Cluster,
+  DescribeCmqQueueDetailRequest,
+  ClearCmqQueueResponse,
+  DescribeBindClustersRequest,
+  DescribeClusterDetailResponse,
+  CreateCmqQueueRequest,
+  DeleteCmqQueueRequest,
+  DescribeProducersRequest,
+  DescribeEnvironmentAttributesResponse,
+  SubscriptionTopic,
+  DescribeProducersResponse,
+  SendBatchMessagesRequest,
+  DeleteCmqTopicRequest,
+  SendCmqMsgResponse,
+  UnbindCmqDeadLetterRequest,
+  ModifyCmqQueueAttributeRequest,
+  DeleteCmqSubscribeResponse,
+  ModifyEnvironmentAttributesResponse,
+  DeleteSubscriptionsRequest,
+  EnvironmentRole,
 } from "./tdmq_models"
 
 /**
@@ -92,6 +140,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("tdmq.tencentcloudapi.com", "2020-02-17", clientConfig)
+  }
+
+  /**
+   * 删除cmq主题
+   */
+  async DeleteCmqTopic(
+    req: DeleteCmqTopicRequest,
+    cb?: (error: string, rep: DeleteCmqTopicResponse) => void
+  ): Promise<DeleteCmqTopicResponse> {
+    return this.request("DeleteCmqTopic", req, cb)
   }
 
   /**
@@ -135,23 +193,93 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量发送消息
+   * 清空cmq消息队列中的消息
    */
-  async SendBatchMessages(
-    req: SendBatchMessagesRequest,
-    cb?: (error: string, rep: SendBatchMessagesResponse) => void
-  ): Promise<SendBatchMessagesResponse> {
-    return this.request("SendBatchMessages", req, cb)
+  async ClearCmqQueue(
+    req: ClearCmqQueueRequest,
+    cb?: (error: string, rep: ClearCmqQueueResponse) => void
+  ): Promise<ClearCmqQueueResponse> {
+    return this.request("ClearCmqQueue", req, cb)
   }
 
   /**
-   * 删除集群
+   * 创建cmq队列接口
    */
-  async DeleteCluster(
-    req: DeleteClusterRequest,
-    cb?: (error: string, rep: DeleteClusterResponse) => void
-  ): Promise<DeleteClusterResponse> {
-    return this.request("DeleteCluster", req, cb)
+  async CreateCmqQueue(
+    req: CreateCmqQueueRequest,
+    cb?: (error: string, rep: CreateCmqQueueResponse) => void
+  ): Promise<CreateCmqQueueResponse> {
+    return this.request("CreateCmqQueue", req, cb)
+  }
+
+  /**
+   * 修改cmq主题属性
+   */
+  async ModifyCmqTopicAttribute(
+    req: ModifyCmqTopicAttributeRequest,
+    cb?: (error: string, rep: ModifyCmqTopicAttributeResponse) => void
+  ): Promise<ModifyCmqTopicAttributeResponse> {
+    return this.request("ModifyCmqTopicAttribute", req, cb)
+  }
+
+  /**
+   * 修改cmq队列属性
+   */
+  async ModifyCmqQueueAttribute(
+    req: ModifyCmqQueueAttributeRequest,
+    cb?: (error: string, rep: ModifyCmqQueueAttributeResponse) => void
+  ): Promise<ModifyCmqQueueAttributeResponse> {
+    return this.request("ModifyCmqQueueAttribute", req, cb)
+  }
+
+  /**
+   * 创建cmq主题
+   */
+  async CreateCmqTopic(
+    req: CreateCmqTopicRequest,
+    cb?: (error: string, rep: CreateCmqTopicResponse) => void
+  ): Promise<CreateCmqTopicResponse> {
+    return this.request("CreateCmqTopic", req, cb)
+  }
+
+  /**
+   * 查询cmq订阅详情
+   */
+  async DescribeCmqSubscriptionDetail(
+    req: DescribeCmqSubscriptionDetailRequest,
+    cb?: (error: string, rep: DescribeCmqSubscriptionDetailResponse) => void
+  ): Promise<DescribeCmqSubscriptionDetailResponse> {
+    return this.request("DescribeCmqSubscriptionDetail", req, cb)
+  }
+
+  /**
+   * 删除cmq队列
+   */
+  async DeleteCmqQueue(
+    req: DeleteCmqQueueRequest,
+    cb?: (error: string, rep: DeleteCmqQueueResponse) => void
+  ): Promise<DeleteCmqQueueResponse> {
+    return this.request("DeleteCmqQueue", req, cb)
+  }
+
+  /**
+   * 枚举cmq全量主题
+   */
+  async DescribeCmqTopics(
+    req: DescribeCmqTopicsRequest,
+    cb?: (error: string, rep: DescribeCmqTopicsResponse) => void
+  ): Promise<DescribeCmqTopicsResponse> {
+    return this.request("DescribeCmqTopics", req, cb)
+  }
+
+  /**
+   * 枚举cmq死信队列源队列
+   */
+  async DescribeCmqDeadLetterSourceQueues(
+    req: DescribeCmqDeadLetterSourceQueuesRequest,
+    cb?: (error: string, rep: DescribeCmqDeadLetterSourceQueuesResponse) => void
+  ): Promise<DescribeCmqDeadLetterSourceQueuesResponse> {
+    return this.request("DescribeCmqDeadLetterSourceQueues", req, cb)
   }
 
   /**
@@ -165,13 +293,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量删除topics
+   * 删除集群
    */
-  async DeleteTopics(
-    req: DeleteTopicsRequest,
-    cb?: (error: string, rep: DeleteTopicsResponse) => void
-  ): Promise<DeleteTopicsResponse> {
-    return this.request("DeleteTopics", req, cb)
+  async DeleteCluster(
+    req: DeleteClusterRequest,
+    cb?: (error: string, rep: DeleteClusterResponse) => void
+  ): Promise<DeleteClusterResponse> {
+    return this.request("DeleteCluster", req, cb)
   }
 
   /**
@@ -182,6 +310,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBindClustersResponse) => void
   ): Promise<DescribeBindClustersResponse> {
     return this.request("DescribeBindClusters", req, cb)
+  }
+
+  /**
+   * 查询cmq队列详情
+   */
+  async DescribeCmqQueueDetail(
+    req: DescribeCmqQueueDetailRequest,
+    cb?: (error: string, rep: DescribeCmqQueueDetailResponse) => void
+  ): Promise<DescribeCmqQueueDetailResponse> {
+    return this.request("DescribeCmqQueueDetail", req, cb)
+  }
+
+  /**
+   * 回溯cmq队列
+   */
+  async RewindCmqQueue(
+    req: RewindCmqQueueRequest,
+    cb?: (error: string, rep: RewindCmqQueueResponse) => void
+  ): Promise<RewindCmqQueueResponse> {
+    return this.request("RewindCmqQueue", req, cb)
   }
 
   /**
@@ -202,6 +350,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateTopicResponse) => void
   ): Promise<CreateTopicResponse> {
     return this.request("CreateTopic", req, cb)
+  }
+
+  /**
+   * 查询cmq全量队列
+   */
+  async DescribeCmqQueues(
+    req: DescribeCmqQueuesRequest,
+    cb?: (error: string, rep: DescribeCmqQueuesResponse) => void
+  ): Promise<DescribeCmqQueuesResponse> {
+    return this.request("DescribeCmqQueues", req, cb)
+  }
+
+  /**
+   * 发送cmq主题消息
+   */
+  async PublishCmqMsg(
+    req: PublishCmqMsgRequest,
+    cb?: (error: string, rep: PublishCmqMsgResponse) => void
+  ): Promise<PublishCmqMsgResponse> {
+    return this.request("PublishCmqMsg", req, cb)
   }
 
   /**
@@ -235,6 +403,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除cmq订阅
+   */
+  async DeleteCmqSubscribe(
+    req: DeleteCmqSubscribeRequest,
+    cb?: (error: string, rep: DeleteCmqSubscribeResponse) => void
+  ): Promise<DeleteCmqSubscribeResponse> {
+    return this.request("DeleteCmqSubscribe", req, cb)
+  }
+
+  /**
+   * 查询cmq主题详情
+   */
+  async DescribeCmqTopicDetail(
+    req: DescribeCmqTopicDetailRequest,
+    cb?: (error: string, rep: DescribeCmqTopicDetailResponse) => void
+  ): Promise<DescribeCmqTopicDetailResponse> {
+    return this.request("DescribeCmqTopicDetail", req, cb)
+  }
+
+  /**
    * 用于在用户账户下创建消息队列 Tdmq 命名空间
    */
   async CreateEnvironment(
@@ -265,6 +453,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 清空订阅者消息标签
+   */
+  async ClearCmqSubscriptionFilterTags(
+    req: ClearCmqSubscriptionFilterTagsRequest,
+    cb?: (error: string, rep: ClearCmqSubscriptionFilterTagsResponse) => void
+  ): Promise<ClearCmqSubscriptionFilterTagsResponse> {
+    return this.request("ClearCmqSubscriptionFilterTags", req, cb)
+  }
+
+  /**
    * 发送单条消息
    */
   async SendMessages(
@@ -272,6 +470,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SendMessagesResponse) => void
   ): Promise<SendMessagesResponse> {
     return this.request("SendMessages", req, cb)
+  }
+
+  /**
+   * 发送cmq消息
+   */
+  async SendCmqMsg(
+    req: SendCmqMsgRequest,
+    cb?: (error: string, rep: SendCmqMsgResponse) => void
+  ): Promise<SendCmqMsgResponse> {
+    return this.request("SendCmqMsg", req, cb)
   }
 
   /**
@@ -295,6 +503,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改cmq订阅属性
+   */
+  async ModifyCmqSubscriptionAttribute(
+    req: ModifyCmqSubscriptionAttributeRequest,
+    cb?: (error: string, rep: ModifyCmqSubscriptionAttributeResponse) => void
+  ): Promise<ModifyCmqSubscriptionAttributeResponse> {
+    return this.request("ModifyCmqSubscriptionAttribute", req, cb)
+  }
+
+  /**
+   * 解绑cmq死信队列
+   */
+  async UnbindCmqDeadLetter(
+    req: UnbindCmqDeadLetterRequest,
+    cb?: (error: string, rep: UnbindCmqDeadLetterResponse) => void
+  ): Promise<UnbindCmqDeadLetterResponse> {
+    return this.request("UnbindCmqDeadLetter", req, cb)
+  }
+
+  /**
    * 创建一个主题的订阅关系
    */
   async CreateSubscription(
@@ -305,6 +533,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 批量发送消息
+   */
+  async SendBatchMessages(
+    req: SendBatchMessagesRequest,
+    cb?: (error: string, rep: SendBatchMessagesResponse) => void
+  ): Promise<SendBatchMessagesResponse> {
+    return this.request("SendBatchMessages", req, cb)
+  }
+
+  /**
    * 获取指定命名空间的属性
    */
   async DescribeEnvironmentAttributes(
@@ -312,6 +550,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEnvironmentAttributesResponse) => void
   ): Promise<DescribeEnvironmentAttributesResponse> {
     return this.request("DescribeEnvironmentAttributes", req, cb)
+  }
+
+  /**
+   * 创建cmq订阅接口
+   */
+  async CreateCmqSubscribe(
+    req: CreateCmqSubscribeRequest,
+    cb?: (error: string, rep: CreateCmqSubscribeResponse) => void
+  ): Promise<CreateCmqSubscribeResponse> {
+    return this.request("CreateCmqSubscribe", req, cb)
+  }
+
+  /**
+   * 批量删除topics
+   */
+  async DeleteTopics(
+    req: DeleteTopicsRequest,
+    cb?: (error: string, rep: DeleteTopicsResponse) => void
+  ): Promise<DeleteTopicsResponse> {
+    return this.request("DeleteTopics", req, cb)
   }
 
   /**
