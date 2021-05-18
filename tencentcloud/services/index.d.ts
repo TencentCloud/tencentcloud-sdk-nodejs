@@ -106,6 +106,7 @@ export { ocr } from "./ocr";
 export { organization } from "./organization";
 export { partners } from "./partners";
 export { postgres } from "./postgres";
+export { privatedns } from "./privatedns";
 export { rce } from "./rce";
 export { redis } from "./redis";
 export { rkp } from "./rkp";

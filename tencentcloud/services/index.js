@@ -216,6 +216,8 @@ var partners_1 = require("./partners");
 Object.defineProperty(exports, "partners", { enumerable: true, get: function () { return partners_1.partners; } });
 var postgres_1 = require("./postgres");
 Object.defineProperty(exports, "postgres", { enumerable: true, get: function () { return postgres_1.postgres; } });
+var privatedns_1 = require("./privatedns");
+Object.defineProperty(exports, "privatedns", { enumerable: true, get: function () { return privatedns_1.privatedns; } });
 var rce_1 = require("./rce");
 Object.defineProperty(exports, "rce", { enumerable: true, get: function () { return rce_1.rce; } });
 var redis_1 = require("./redis");
