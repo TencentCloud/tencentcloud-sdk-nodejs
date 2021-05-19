@@ -52,7 +52,7 @@ export interface ModifySmsTemplateResponse {
   /**
    * 修改模板参数响应
    */
-  ModifyTemplateStatus?: ModifyTemplateStatus
+  ModifyTemplateStatus: ModifyTemplateStatus
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

@@ -4305,7 +4305,7 @@ export interface ModifyVpcEndPointServiceAttributeResponse {
  */
 export interface ResourceDashboard {
     /**
-      * Vpc实例ID，例如：vpc-f1xjkw1b。
+      * Vpc实例ID，例如：vpc-bq4bzxpj。
       */
     VpcId: string;
     /**
@@ -4325,7 +4325,7 @@ export interface ResourceDashboard {
       */
     Pcx: number;
     /**
-      * 当前已使用的IP总数。
+      * 统计当前除云服务器 IP、弹性网卡IP和网络探测IP以外的所有已使用的IP总数。云服务器 IP、弹性网卡IP和网络探测IP单独计数。
       */
     Ip: number;
     /**
