@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ImportSnapshotsResponse, ModifyClusterNameRequest, ModifyTableGroupNameResponse, DescribeTableTagsRequest, ModifyClusterPasswordResponse, DeleteClusterResponse, DeleteTableIndexResponse, DescribeTablesResponse, ModifySnapshotsResponse, DeleteClusterRequest, DeleteTableIndexRequest, DescribeTasksResponse, DeleteTablesRequest, DescribeRegionsResponse, ModifyClusterPasswordRequest, DescribeMachineResponse, DeleteTableGroupRequest, DescribeSnapshotsRequest, CreateTableGroupRequest, ModifyClusterMachineResponse, DeleteIdlFilesResponse, ModifyTableTagsRequest, DescribeTasksRequest, RecoverRecycleTablesResponse, ClearTablesResponse, DescribeIdlFileInfosRequest, DisableRestProxyRequest, DescribeTablesInRecycleResponse, ModifyTablesResponse, DeleteSnapshotsRequest, ModifyTableGroupTagsResponse, ModifyClusterTagsRequest, CreateSnapshotsRequest, DescribeTableGroupTagsResponse, SetTableIndexRequest, ModifyTableQuotasResponse, RecoverRecycleTablesRequest, DeleteSnapshotsResponse, DeleteTablesResponse, ModifyTableGroupNameRequest, DescribeTableGroupsRequest, ModifyTableTagsResponse, ModifyTableGroupTagsRequest, EnableRestProxyRequest, ModifyTableQuotasRequest, CompareIdlFilesResponse, CreateTablesResponse, DescribeRegionsRequest, DescribeClustersResponse, ModifyClusterTagsResponse, DescribeClusterTagsResponse, SetTableIndexResponse, ClearTablesRequest, DescribeIdlFileInfosResponse, CreateSnapshotsResponse, DisableRestProxyResponse, CreateClusterResponse, DescribeClustersRequest, DeleteIdlFilesRequest, CreateBackupResponse, VerifyIdlFilesResponse, DescribeTableTagsResponse, CreateTableGroupResponse, DescribeSnapshotsResponse, VerifyIdlFilesRequest, EnableRestProxyResponse, ModifyClusterNameResponse, ModifyTablesRequest, DescribeTableGroupTagsRequest, DescribeTablesInRecycleRequest, DescribeTablesRequest, ModifyTableMemosRequest, DescribeUinInWhitelistResponse, RollbackTablesResponse, CreateBackupRequest, CreateClusterRequest, CreateTablesRequest, DescribeClusterTagsRequest, DescribeTableGroupsResponse, DeleteTableGroupResponse, DescribeMachineRequest, RollbackTablesRequest, DescribeUinInWhitelistRequest, CompareIdlFilesRequest, ModifyTableMemosResponse, ModifyClusterMachineRequest, ModifySnapshotsRequest, ImportSnapshotsRequest } from "./tcaplusdb_models";
+import { ImportSnapshotsResponse, ModifyClusterNameRequest, ModifyTableGroupNameResponse, DescribeTableTagsRequest, ModifyClusterPasswordResponse, DeleteClusterResponse, DeleteTableIndexResponse, DescribeTablesResponse, ModifySnapshotsResponse, UpdateApplyResponse, DeleteClusterRequest, DeleteTableIndexRequest, DescribeTasksResponse, DeleteTablesRequest, DescribeRegionsResponse, ModifyClusterPasswordRequest, DescribeMachineResponse, DeleteTableGroupRequest, DescribeSnapshotsRequest, DescribeApplicationsResponse, CreateTableGroupRequest, ModifyClusterMachineResponse, DeleteIdlFilesResponse, ModifyTableTagsRequest, DescribeTasksRequest, ClearTablesResponse, DescribeIdlFileInfosRequest, ModifyTableTagsResponse, ModifyCensorshipRequest, DisableRestProxyRequest, DescribeTablesInRecycleResponse, ModifyTablesResponse, DeleteSnapshotsRequest, ModifyTableGroupTagsResponse, ModifyClusterTagsRequest, CreateSnapshotsRequest, DescribeTableGroupTagsResponse, SetTableIndexRequest, ModifyTableQuotasResponse, RecoverRecycleTablesRequest, DeleteSnapshotsResponse, DeleteTablesResponse, ModifyTableGroupNameRequest, DescribeTableGroupsRequest, DescribeUinInWhitelistRequest, MergeTablesDataRequest, CreateClusterRequest, ModifyTableGroupTagsRequest, EnableRestProxyRequest, ModifyTableQuotasRequest, CompareIdlFilesResponse, CreateTablesResponse, DescribeRegionsRequest, DescribeClustersResponse, ModifyClusterTagsResponse, DescribeClusterTagsResponse, SetTableIndexResponse, ClearTablesRequest, DescribeIdlFileInfosResponse, CreateSnapshotsResponse, DisableRestProxyResponse, CreateClusterResponse, DescribeClustersRequest, DeleteIdlFilesRequest, CreateBackupResponse, VerifyIdlFilesResponse, DescribeTableTagsResponse, CreateTableGroupResponse, DescribeSnapshotsResponse, VerifyIdlFilesRequest, EnableRestProxyResponse, ModifyClusterNameResponse, ModifyTablesRequest, DescribeTableGroupTagsRequest, DescribeTablesInRecycleRequest, DescribeTablesRequest, UpdateApplyRequest, ModifyTableMemosRequest, DescribeUinInWhitelistResponse, RollbackTablesResponse, CreateBackupRequest, CreateTablesRequest, DescribeClusterTagsRequest, RecoverRecycleTablesResponse, MergeTablesDataResponse, DescribeApplicationsRequest, DescribeTableGroupsResponse, DeleteTableGroupResponse, DescribeMachineRequest, RollbackTablesRequest, ModifyCensorshipResponse, CompareIdlFilesRequest, ModifyTableMemosResponse, ModifyClusterMachineRequest, ModifySnapshotsRequest, ImportSnapshotsRequest } from "./tcaplusdb_models";
 /**
  * tcaplusdb client
  * @class
@@ -16,6 +16,10 @@ export declare class Client extends AbstractClient {
      */
     DescribeTableTags(req: DescribeTableTagsRequest, cb?: (error: string, rep: DescribeTableTagsResponse) => void): Promise<DescribeTableTagsResponse>;
     /**
+     * 更新申请单状态
+     */
+    UpdateApply(req: UpdateApplyRequest, cb?: (error: string, rep: UpdateApplyResponse) => void): Promise<UpdateApplyResponse>;
+    /**
      * 修改表格标签
      */
     ModifyTableTags(req: ModifyTableTagsRequest, cb?: (error: string, rep: ModifyTableTagsResponse) => void): Promise<ModifyTableTagsResponse>;
@@ -27,6 +31,10 @@ export declare class Client extends AbstractClient {
      * 查询独占集群可以申请的剩余机器
      */
     DescribeMachine(req: DescribeMachineRequest, cb?: (error: string, rep: DescribeMachineResponse) => void): Promise<DescribeMachineResponse>;
+    /**
+     * 合并指定表格
+     */
+    MergeTablesData(req: MergeTablesDataRequest, cb?: (error: string, rep: MergeTablesDataResponse) => void): Promise<MergeTablesDataResponse>;
     /**
      * 查询本用户是否在白名单中，控制是否能创建TDR类型的APP或表
      */
@@ -56,6 +64,10 @@ export declare class Client extends AbstractClient {
      */
     ModifyClusterPassword(req: ModifyClusterPasswordRequest, cb?: (error: string, rep: ModifyClusterPasswordResponse) => void): Promise<ModifyClusterPasswordResponse>;
     /**
+     * 设置表格分布式索引
+     */
+    SetTableIndex(req: SetTableIndexRequest, cb?: (error: string, rep: SetTableIndexResponse) => void): Promise<SetTableIndexResponse>;
+    /**
      * 指定集群ID和待删除IDL文件的信息，删除目标文件，如果文件正在被表关联则删除失败。
      */
     DeleteIdlFiles(req: DeleteIdlFilesRequest, cb?: (error: string, rep: DeleteIdlFilesResponse) => void): Promise<DeleteIdlFilesResponse>;
@@ -71,6 +83,10 @@ export declare class Client extends AbstractClient {
      * 用户创建备份任务
      */
     CreateBackup(req: CreateBackupRequest, cb?: (error: string, rep: CreateBackupResponse) => void): Promise<CreateBackupResponse>;
+    /**
+     * 修改集群审批状态
+     */
+    ModifyCensorship(req: ModifyCensorshipRequest, cb?: (error: string, rep: ModifyCensorshipResponse) => void): Promise<ModifyCensorshipResponse>;
     /**
      * 根据选择的IDL文件列表，批量创建表格
      */
@@ -128,9 +144,9 @@ export declare class Client extends AbstractClient {
      */
     ModifyTableGroupTags(req: ModifyTableGroupTagsRequest, cb?: (error: string, rep: ModifyTableGroupTagsResponse) => void): Promise<ModifyTableGroupTagsResponse>;
     /**
-     * 设置表格分布式索引
+     * 获取审批管理的申请单
      */
-    SetTableIndex(req: SetTableIndexRequest, cb?: (error: string, rep: SetTableIndexResponse) => void): Promise<SetTableIndexResponse>;
+    DescribeApplications(req: DescribeApplicationsRequest, cb?: (error: string, rep: DescribeApplicationsResponse) => void): Promise<DescribeApplicationsResponse>;
     /**
      * 获取表格组关联的标签列表
      */

@@ -38,6 +38,16 @@ it("tcaplusdb.v20190823.DescribeTableTags", async function () {
     }
 })
 
+it("tcaplusdb.v20190823.UpdateApply", async function () {
+    try {
+       const data = await client.UpdateApply({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcaplusdb.v20190823.ModifyTableTags", async function () {
     try {
        const data = await client.ModifyTableTags({})
@@ -61,6 +71,16 @@ it("tcaplusdb.v20190823.CreateCluster", async function () {
 it("tcaplusdb.v20190823.DescribeMachine", async function () {
     try {
        const data = await client.DescribeMachine({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcaplusdb.v20190823.MergeTablesData", async function () {
+    try {
+       const data = await client.MergeTablesData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,6 +158,16 @@ it("tcaplusdb.v20190823.ModifyClusterPassword", async function () {
     }
 })
 
+it("tcaplusdb.v20190823.SetTableIndex", async function () {
+    try {
+       const data = await client.SetTableIndex({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcaplusdb.v20190823.DeleteIdlFiles", async function () {
     try {
        const data = await client.DeleteIdlFiles({})
@@ -171,6 +201,16 @@ it("tcaplusdb.v20190823.EnableRestProxy", async function () {
 it("tcaplusdb.v20190823.CreateBackup", async function () {
     try {
        const data = await client.CreateBackup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcaplusdb.v20190823.ModifyCensorship", async function () {
+    try {
+       const data = await client.ModifyCensorship({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -318,9 +358,9 @@ it("tcaplusdb.v20190823.ModifyTableGroupTags", async function () {
     }
 })
 
-it("tcaplusdb.v20190823.SetTableIndex", async function () {
+it("tcaplusdb.v20190823.DescribeApplications", async function () {
     try {
-       const data = await client.SetTableIndex({})
+       const data = await client.DescribeApplications({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

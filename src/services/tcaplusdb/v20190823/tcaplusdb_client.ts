@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   ImportSnapshotsResponse,
+  CompareTablesInfo,
   ModifyClusterNameRequest,
   ModifyTableGroupNameResponse,
   DescribeTableTagsRequest,
@@ -26,9 +27,11 @@ import {
   DeleteClusterResponse,
   DeleteTableIndexResponse,
   TableRollbackResultNew,
-  ServerMachineInfo,
+  ApplyStatus,
+  RegionInfo,
   DescribeTablesResponse,
   ModifySnapshotsResponse,
+  UpdateApplyResponse,
   DeleteClusterRequest,
   SelectedTableWithField,
   DeleteTableIndexRequest,
@@ -42,19 +45,23 @@ import {
   DeleteTableGroupRequest,
   DescribeSnapshotsRequest,
   TagsInfoOfTableGroup,
+  DescribeApplicationsResponse,
   CreateTableGroupRequest,
   ModifyClusterMachineResponse,
   TagsInfoOfTable,
   DeleteIdlFilesResponse,
   FieldInfo,
   ModifyTableTagsRequest,
-  IdlFileInfo,
+  MergeTableResult,
+  ApplyResult,
   DescribeTasksRequest,
   SnapshotInfoNew,
-  RecoverRecycleTablesResponse,
+  Application,
   ClearTablesResponse,
   DescribeIdlFileInfosRequest,
+  ModifyTableTagsResponse,
   SnapshotResult,
+  ModifyCensorshipRequest,
   ClusterInfo,
   DisableRestProxyRequest,
   DescribeTablesInRecycleResponse,
@@ -71,7 +78,9 @@ import {
   DeleteTablesResponse,
   ModifyTableGroupNameRequest,
   DescribeTableGroupsRequest,
-  ModifyTableTagsResponse,
+  DescribeUinInWhitelistRequest,
+  MergeTablesDataRequest,
+  CreateClusterRequest,
   ModifyTableGroupTagsRequest,
   EnableRestProxyRequest,
   ModifyTableQuotasRequest,
@@ -79,13 +88,16 @@ import {
   CreateTablesResponse,
   DescribeRegionsRequest,
   DescribeClustersResponse,
+  MergeTablesInfo,
   ModifyClusterTagsResponse,
   DescribeClusterTagsResponse,
   TagsInfoOfCluster,
   SetTableIndexResponse,
   ClearTablesRequest,
   DescribeIdlFileInfosResponse,
+  ServerMachineInfo,
   CreateSnapshotsResponse,
+  IdlFileInfo,
   DisableRestProxyResponse,
   TagInfoUnit,
   CreateClusterResponse,
@@ -107,6 +119,7 @@ import {
   DescribeTableGroupTagsRequest,
   DescribeTablesInRecycleRequest,
   DescribeTablesRequest,
+  UpdateApplyRequest,
   ModifyTableMemosRequest,
   DescribeUinInWhitelistResponse,
   SnapshotInfo,
@@ -114,17 +127,18 @@ import {
   RollbackTablesResponse,
   MachineInfo,
   CreateBackupRequest,
-  CreateClusterRequest,
   TableResultNew,
   CreateTablesRequest,
   DescribeClusterTagsRequest,
-  RegionInfo,
+  RecoverRecycleTablesResponse,
+  MergeTablesDataResponse,
+  DescribeApplicationsRequest,
   DescribeTableGroupsResponse,
   DeleteTableGroupResponse,
   PoolInfo,
   DescribeMachineRequest,
   RollbackTablesRequest,
-  DescribeUinInWhitelistRequest,
+  ModifyCensorshipResponse,
   CompareIdlFilesRequest,
   ProxyDetailInfo,
   IdlFileInfoWithoutContent,
@@ -167,6 +181,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新申请单状态
+   */
+  async UpdateApply(
+    req: UpdateApplyRequest,
+    cb?: (error: string, rep: UpdateApplyResponse) => void
+  ): Promise<UpdateApplyResponse> {
+    return this.request("UpdateApply", req, cb)
+  }
+
+  /**
    * 修改表格标签
    */
   async ModifyTableTags(
@@ -194,6 +218,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeMachineResponse) => void
   ): Promise<DescribeMachineResponse> {
     return this.request("DescribeMachine", req, cb)
+  }
+
+  /**
+   * 合并指定表格
+   */
+  async MergeTablesData(
+    req: MergeTablesDataRequest,
+    cb?: (error: string, rep: MergeTablesDataResponse) => void
+  ): Promise<MergeTablesDataResponse> {
+    return this.request("MergeTablesData", req, cb)
   }
 
   /**
@@ -267,6 +301,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 设置表格分布式索引
+   */
+  async SetTableIndex(
+    req: SetTableIndexRequest,
+    cb?: (error: string, rep: SetTableIndexResponse) => void
+  ): Promise<SetTableIndexResponse> {
+    return this.request("SetTableIndex", req, cb)
+  }
+
+  /**
    * 指定集群ID和待删除IDL文件的信息，删除目标文件，如果文件正在被表关联则删除失败。
    */
   async DeleteIdlFiles(
@@ -304,6 +348,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateBackupResponse) => void
   ): Promise<CreateBackupResponse> {
     return this.request("CreateBackup", req, cb)
+  }
+
+  /**
+   * 修改集群审批状态
+   */
+  async ModifyCensorship(
+    req: ModifyCensorshipRequest,
+    cb?: (error: string, rep: ModifyCensorshipResponse) => void
+  ): Promise<ModifyCensorshipResponse> {
+    return this.request("ModifyCensorship", req, cb)
   }
 
   /**
@@ -447,13 +501,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 设置表格分布式索引
+   * 获取审批管理的申请单
    */
-  async SetTableIndex(
-    req: SetTableIndexRequest,
-    cb?: (error: string, rep: SetTableIndexResponse) => void
-  ): Promise<SetTableIndexResponse> {
-    return this.request("SetTableIndex", req, cb)
+  async DescribeApplications(
+    req: DescribeApplicationsRequest,
+    cb?: (error: string, rep: DescribeApplicationsResponse) => void
+  ): Promise<DescribeApplicationsResponse> {
+    return this.request("DescribeApplications", req, cb)
   }
 
   /**

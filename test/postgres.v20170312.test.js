@@ -268,6 +268,16 @@ it("postgres.v20170312.InquiryPriceUpgradeDBInstance", async function () {
     }
 })
 
+it("postgres.v20170312.RemoveDBInstanceFromReadOnlyGroup", async function () {
+    try {
+       const data = await client.RemoveDBInstanceFromReadOnlyGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("postgres.v20170312.CreateReadOnlyGroup", async function () {
     try {
        const data = await client.CreateReadOnlyGroup({})
@@ -418,9 +428,9 @@ it("postgres.v20170312.ModifyReadOnlyGroupConfig", async function () {
     }
 })
 
-it("postgres.v20170312.RemoveDBInstanceFromReadOnlyGroup", async function () {
+it("postgres.v20170312.CreateInstances", async function () {
     try {
-       const data = await client.RemoveDBInstanceFromReadOnlyGroup({})
+       const data = await client.CreateInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

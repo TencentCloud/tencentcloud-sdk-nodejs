@@ -130,7 +130,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("UpgradeDBInstance", req, cb);
     }
     /**
-     * 本接口 (CreateDBInstances) 用于创建一个或者多个PostgreSQL实例。
+     * 本接口 (CreateDBInstances) 用于创建一个或者多个PostgreSQL实例,仅发货实例不会进行初始化。
      */
     async CreateDBInstances(req, cb) {
         return this.request("CreateDBInstances", req, cb);
@@ -176,6 +176,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async InquiryPriceUpgradeDBInstance(req, cb) {
         return this.request("InquiryPriceUpgradeDBInstance", req, cb);
+    }
+    /**
+     * 本接口（RemoveDBInstanceFromReadOnlyGroup）用户将只读实例从只读组中移除
+     */
+    async RemoveDBInstanceFromReadOnlyGroup(req, cb) {
+        return this.request("RemoveDBInstanceFromReadOnlyGroup", req, cb);
     }
     /**
      * 本接口（CreateReadOnlyGroup）用于创建只读组
@@ -268,10 +274,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyReadOnlyGroupConfig", req, cb);
     }
     /**
-     * 本接口（RemoveDBInstanceFromReadOnlyGroup）用户将只读实例从只读组中移除
+     * 本接口 (CreateInstances) 用于创建一个或者多个PostgreSQL实例，通过此接口创建的实例无需进行初始化，可直接使用。
      */
-    async RemoveDBInstanceFromReadOnlyGroup(req, cb) {
-        return this.request("RemoveDBInstanceFromReadOnlyGroup", req, cb);
+    async CreateInstances(req, cb) {
+        return this.request("CreateInstances", req, cb);
     }
     /**
      * 本接口 (DescribeProductConfig) 用于查询售卖规格配置。

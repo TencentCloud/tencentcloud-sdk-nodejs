@@ -4820,19 +4820,19 @@ export interface VatInvoiceOCRResponse {
     /**
       * 检测到的文本信息，具体内容请点击左侧链接。
       */
-    VatInvoiceInfos?: Array<TextVatInvoice>;
+    VatInvoiceInfos: Array<TextVatInvoice>;
     /**
       * 明细条目。VatInvoiceInfos中关于明细项的具体条目。
       */
-    Items?: Array<VatInvoiceItem>;
+    Items: Array<VatInvoiceItem>;
     /**
-      * 图片为PDF时，返回PDF的总页数，默认为0
+      * 默认值为0。如果图片为PDF时，返回PDF的总页数。
       */
-    PdfPageSize?: number;
+    PdfPageSize: number;
     /**
       * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看<a href="https://cloud.tencent.com/document/product/866/45139">如何纠正倾斜文本</a>
       */
-    Angle?: number;
+    Angle: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

@@ -32,6 +32,51 @@ export interface ImportSnapshotsResponse {
 }
 
 /**
+ * 比较表格的Meta信息
+ */
+export interface CompareTablesInfo {
+  /**
+   * 源表格的集群id
+   */
+  SrcTableClusterId: string
+
+  /**
+   * 源表格的表格组id
+   */
+  SrcTableGroupId: string
+
+  /**
+   * 源表格的表名
+   */
+  SrcTableName: string
+
+  /**
+   * 目标表格的集群id
+   */
+  DstTableClusterId: string
+
+  /**
+   * 目标表格的表格组id
+   */
+  DstTableGroupId: string
+
+  /**
+   * 目标表格的表名
+   */
+  DstTableName: string
+
+  /**
+   * 源表格的实例id
+   */
+  SrcTableInstanceId: string
+
+  /**
+   * 目标表格的实例id
+   */
+  DstTableInstanceId: string
+}
+
+/**
  * ModifyClusterName请求参数结构体
  */
 export interface ModifyClusterNameRequest {
@@ -188,18 +233,53 @@ export interface TableRollbackResultNew {
 }
 
 /**
- * svr的机器列表ServerList
+ * 申请单id及其状态
  */
-export interface ServerMachineInfo {
+export interface ApplyStatus {
   /**
-   * 机器唯一id
+   * 集群id-申请单id
    */
-  ServerUid: string
+  ApplicationId: string
 
   /**
-   * 机器类型
+   * 处理状态-1-撤回 1-通过 2-驳回，非0状态的申请单不可改变状态。
    */
-  MachineType: string
+  ApplicationStatus: number
+
+  /**
+   * 申请单类型
+   */
+  ApplicationType: number
+
+  /**
+   * 集群Id
+   */
+  ClusterId: string
+}
+
+/**
+ * TcaplusDB服务地域信息详情
+ */
+export interface RegionInfo {
+  /**
+   * 地域Ap-Code
+   */
+  RegionName: string
+
+  /**
+   * 地域缩写
+   */
+  RegionAbbr: string
+
+  /**
+   * 地域ID
+   */
+  RegionId: number
+
+  /**
+   * 是否支持ipv6，0:不支持，1:支持
+   */
+  Ipv6Enable: number
 }
 
 /**
@@ -235,6 +315,27 @@ export interface ModifySnapshotsResponse {
    * 批量创建的快照结果列表
    */
   TableResults: Array<SnapshotResult>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateApply返回参数结构体
+ */
+export interface UpdateApplyResponse {
+  /**
+      * 已更新的申请单列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplyResults: Array<ApplyResult>
+
+  /**
+   * 更新数量
+   */
+  TotalCount: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -567,6 +668,26 @@ export interface TagsInfoOfTableGroup {
 }
 
 /**
+ * DescribeApplications返回参数结构体
+ */
+export interface DescribeApplicationsResponse {
+  /**
+   * 申请单列表
+   */
+  Applications: Array<Application>
+
+  /**
+   * 申请单个数
+   */
+  TotalCount: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateTableGroup请求参数结构体
  */
 export interface CreateTableGroupRequest {
@@ -712,40 +833,64 @@ export interface ModifyTableTagsRequest {
 }
 
 /**
- * 表定义描述文件详情，包含文件内容
+ * 合服结果
  */
-export interface IdlFileInfo {
+export interface MergeTableResult {
   /**
-   * 文件名称，不包含扩展名
-   */
-  FileName: string
-
-  /**
-   * 数据描述语言（IDL）类型
-   */
-  FileType: string
-
-  /**
-   * 文件扩展名
-   */
-  FileExtType: string
-
-  /**
-   * 文件大小（Bytes）
-   */
-  FileSize: number
-
-  /**
-      * 文件ID，对于已上传的文件有意义
+      * 任务Id
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  FileId?: number
+  TaskId: string
 
   /**
-      * 文件内容，对于本次新上传的文件有意义
+      * 成功时此字段返回 null，表示取不到有效值。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  FileContent?: string
+  Error: ErrorInfo
+
+  /**
+   * 对比的表格信息
+   */
+  Table: CompareTablesInfo
+
+  /**
+      * 申请单Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationId: string
+}
+
+/**
+ * 更新申请单结果
+ */
+export interface ApplyResult {
+  /**
+   * 申请单id
+   */
+  ApplicationId: string
+
+  /**
+   * 申请类型
+   */
+  ApplicationType: number
+
+  /**
+      * 处理状态 0-待审核 1-已经审核并提交任务 2-已驳回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationStatus: number
+
+  /**
+      * 已提交的任务Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskId: string
+
+  /**
+      * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Error: ErrorInfo
 }
 
 /**
@@ -804,23 +949,100 @@ export interface SnapshotInfoNew {
 }
 
 /**
- * RecoverRecycleTables返回参数结构体
+ * 审批申请单
  */
-export interface RecoverRecycleTablesResponse {
+export interface Application {
   /**
-   * 恢复表结果数量
+   * 审批单号
    */
-  TotalCount?: number
+  ApplicationId: string
 
   /**
-   * 恢复表信息列表
+   * 申请类型
    */
-  TableResults?: Array<TableResultNew>
+  ApplicationType: number
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 集群Id
    */
-  RequestId?: string
+  ClusterId: string
+
+  /**
+   * 集群名称
+   */
+  ClusterName: string
+
+  /**
+      * 表格组名称
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TableGroupName: string
+
+  /**
+   * 表格名称
+   */
+  TableName: string
+
+  /**
+   * 申请人
+   */
+  Applicant: string
+
+  /**
+   * 建单时间
+   */
+  CreatedTime: string
+
+  /**
+   * 处理状态 -1 撤回 0-待审核 1-已经审核并提交任务 2-已驳回
+   */
+  ApplicationStatus: number
+
+  /**
+   * 表格组Id
+   */
+  TableGroupId: string
+
+  /**
+   * 已提交的任务Id，未提交申请为0
+   */
+  TaskId: string
+
+  /**
+      * 腾讯云上table的唯一键
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TableInstanceId: string
+
+  /**
+      * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UpdateTime: string
+
+  /**
+      * 审批人
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExecuteUser: string
+
+  /**
+      * 执行状态
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExecuteStatus: string
+
+  /**
+      * 该申请单是否可以被当前用户审批
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CanCensor: boolean
+
+  /**
+      * 该申请单是否可以被当前用户撤回
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  CanWithdrawal: boolean
 }
 
 /**
@@ -871,6 +1093,26 @@ export interface DescribeIdlFileInfosRequest {
    * 查询列表返回记录数
    */
   Limit?: number
+}
+
+/**
+ * ModifyTableTags返回参数结构体
+ */
+export interface ModifyTableTagsResponse {
+  /**
+   * 返回结果总数
+   */
+  TotalCount?: number
+
+  /**
+   * 返回结果
+   */
+  TableResults?: Array<TableResultNew>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -936,6 +1178,26 @@ export interface SnapshotResult {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SnapshotStatus: number
+}
+
+/**
+ * ModifyCensorship请求参数结构体
+ */
+export interface ModifyCensorshipRequest {
+  /**
+   * 集群id
+   */
+  ClusterId: string
+
+  /**
+   * 集群是否开启审核 0-关闭 1-开启
+   */
+  Censorship: number
+
+  /**
+   * 审批人uin列表
+   */
+  Uins?: Array<string>
 }
 
 /**
@@ -1060,6 +1322,17 @@ export interface ClusterInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ProxyList: Array<ProxyDetailInfo>
+
+  /**
+   * 是否开启审核 0-不开启 1-开启
+   */
+  Censorship: number
+
+  /**
+      * 审批人uin列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  DbaUins: Array<string>
 }
 
 /**
@@ -1341,23 +1614,78 @@ export interface DescribeTableGroupsRequest {
 }
 
 /**
- * ModifyTableTags返回参数结构体
+ * DescribeUinInWhitelist请求参数结构体
  */
-export interface ModifyTableTagsResponse {
+export type DescribeUinInWhitelistRequest = null
+
+/**
+ * MergeTablesData请求参数结构体
+ */
+export interface MergeTablesDataRequest {
   /**
-   * 返回结果总数
+   * 选取的表格
    */
-  TotalCount?: number
+  SelectedTables: Array<MergeTablesInfo>
 
   /**
-   * 返回结果
+   * true只做对比，false既对比又执行
    */
-  TableResults?: Array<TableResultNew>
+  IsOnlyCompare: boolean
+}
+
+/**
+ * CreateCluster请求参数结构体
+ */
+export interface CreateClusterRequest {
+  /**
+   * 集群数据描述语言类型，如：`PROTO`，`TDR`或`MIX`
+   */
+  IdlType: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 集群名称，可使用中文或英文字符，最大长度32个字符
    */
-  RequestId?: string
+  ClusterName: string
+
+  /**
+   * 集群所绑定的私有网络实例ID，形如：vpc-f49l6u0z
+   */
+  VpcId: string
+
+  /**
+   * 集群所绑定的子网实例ID，形如：subnet-pxir56ns
+   */
+  SubnetId: string
+
+  /**
+   * 集群访问密码，必须是a-zA-Z0-9的字符,且必须包含数字和大小写字母
+   */
+  Password: string
+
+  /**
+   * 集群标签列表
+   */
+  ResourceTags?: Array<TagInfoUnit>
+
+  /**
+   * 集群是否开启IPv6功能
+   */
+  Ipv6Enable?: number
+
+  /**
+   * 独占集群占用的svr机器
+   */
+  ServerList?: Array<MachineInfo>
+
+  /**
+   * 独占集群占用的proxy机器
+   */
+  ProxyList?: Array<MachineInfo>
+
+  /**
+   * 集群类型1共享2独占
+   */
+  ClusterType?: number
 }
 
 /**
@@ -1467,17 +1795,32 @@ export interface DescribeClustersResponse {
   /**
    * 集群实例数
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 集群实例列表
    */
-  Clusters?: Array<ClusterInfo>
+  Clusters: Array<ClusterInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 合服请求入参
+ */
+export interface MergeTablesInfo {
+  /**
+   * 合服的表格信息
+   */
+  MergeTables: CompareTablesInfo
+
+  /**
+   * 是否检查索引
+   */
+  CheckIndex: boolean
 }
 
 /**
@@ -1597,6 +1940,21 @@ export interface DescribeIdlFileInfosResponse {
 }
 
 /**
+ * svr的机器列表ServerList
+ */
+export interface ServerMachineInfo {
+  /**
+   * 机器唯一id
+   */
+  ServerUid: string
+
+  /**
+   * 机器类型
+   */
+  MachineType: string
+}
+
+/**
  * CreateSnapshots返回参数结构体
  */
 export interface CreateSnapshotsResponse {
@@ -1614,6 +1972,43 @@ export interface CreateSnapshotsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 表定义描述文件详情，包含文件内容
+ */
+export interface IdlFileInfo {
+  /**
+   * 文件名称，不包含扩展名
+   */
+  FileName: string
+
+  /**
+   * 数据描述语言（IDL）类型
+   */
+  FileType: string
+
+  /**
+   * 文件扩展名
+   */
+  FileExtType: string
+
+  /**
+   * 文件大小（Bytes）
+   */
+  FileSize: number
+
+  /**
+      * 文件ID，对于已上传的文件有意义
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FileId?: number
+
+  /**
+      * 文件内容，对于本次新上传的文件有意义
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FileContent?: string
 }
 
 /**
@@ -1974,9 +2369,16 @@ export interface DeleteIdlFilesRequest {
  */
 export interface CreateBackupResponse {
   /**
-   * 创建的备份任务ID列表
-   */
-  TaskIds?: Array<string>
+      * 创建的备份任务ID列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TaskIds: Array<string>
+
+  /**
+      * 创建的备份申请ID列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationIds: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2245,6 +2647,16 @@ export interface DescribeTablesRequest {
 }
 
 /**
+ * UpdateApply请求参数结构体
+ */
+export interface UpdateApplyRequest {
+  /**
+   * 申请单状态
+   */
+  ApplyStatus: Array<ApplyStatus>
+}
+
+/**
  * ModifyTableMemos请求参数结构体
  */
 export interface ModifyTableMemosRequest {
@@ -2473,61 +2885,6 @@ export interface CreateBackupRequest {
 }
 
 /**
- * CreateCluster请求参数结构体
- */
-export interface CreateClusterRequest {
-  /**
-   * 集群数据描述语言类型，如：`PROTO`，`TDR`或`MIX`
-   */
-  IdlType: string
-
-  /**
-   * 集群名称，可使用中文或英文字符，最大长度32个字符
-   */
-  ClusterName: string
-
-  /**
-   * 集群所绑定的私有网络实例ID，形如：vpc-f49l6u0z
-   */
-  VpcId: string
-
-  /**
-   * 集群所绑定的子网实例ID，形如：subnet-pxir56ns
-   */
-  SubnetId: string
-
-  /**
-   * 集群访问密码，必须是a-zA-Z0-9的字符,且必须包含数字和大小写字母
-   */
-  Password: string
-
-  /**
-   * 集群标签列表
-   */
-  ResourceTags?: Array<TagInfoUnit>
-
-  /**
-   * 集群是否开启IPv6功能
-   */
-  Ipv6Enable?: number
-
-  /**
-   * 独占集群占用的svr机器
-   */
-  ServerList?: Array<MachineInfo>
-
-  /**
-   * 独占集群占用的proxy机器
-   */
-  ProxyList?: Array<MachineInfo>
-
-  /**
-   * 集群类型1共享2独占
-   */
-  ClusterType?: number
-}
-
-/**
  * 表处理结果信息
  */
 export interface TableResultNew {
@@ -2578,6 +2935,12 @@ export interface TableResultNew {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   TaskIds: Array<string>
+
+  /**
+      * 腾讯云申请审核单Id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ApplicationId: string
 }
 
 /**
@@ -2616,28 +2979,83 @@ export interface DescribeClusterTagsRequest {
 }
 
 /**
- * TcaplusDB服务地域信息详情
+ * RecoverRecycleTables返回参数结构体
  */
-export interface RegionInfo {
+export interface RecoverRecycleTablesResponse {
   /**
-   * 地域Ap-Code
+   * 恢复表结果数量
    */
-  RegionName: string
+  TotalCount?: number
 
   /**
-   * 地域缩写
+   * 恢复表信息列表
    */
-  RegionAbbr: string
+  TableResults?: Array<TableResultNew>
 
   /**
-   * 地域ID
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  RegionId: number
+  RequestId?: string
+}
+
+/**
+ * MergeTablesData返回参数结构体
+ */
+export interface MergeTablesDataResponse {
+  /**
+   * 合服结果集
+   */
+  Results: Array<MergeTableResult>
 
   /**
-   * 是否支持ipv6，0:不支持，1:支持
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  Ipv6Enable: number
+  RequestId?: string
+}
+
+/**
+ * DescribeApplications请求参数结构体
+ */
+export interface DescribeApplicationsRequest {
+  /**
+   * 集群ID，用于获取指定集群的单据
+   */
+  ClusterId?: string
+
+  /**
+   * 分页
+   */
+  Limit?: number
+
+  /**
+   * 分页
+   */
+  Offset?: number
+
+  /**
+   * 申请单状态，用于过滤
+   */
+  CensorStatus?: number
+
+  /**
+   * 表格组id，用于过滤
+   */
+  TableGroupId?: string
+
+  /**
+   * 表格名，用于过滤
+   */
+  TableName?: string
+
+  /**
+   * 申请人uin，用于过滤
+   */
+  Applicant?: string
+
+  /**
+   * 申请类型，用于过滤
+   */
+  ApplyType?: number
 }
 
 /**
@@ -2741,9 +3159,30 @@ export interface RollbackTablesRequest {
 }
 
 /**
- * DescribeUinInWhitelist请求参数结构体
+ * ModifyCensorship返回参数结构体
  */
-export type DescribeUinInWhitelistRequest = null
+export interface ModifyCensorshipResponse {
+  /**
+   * 集群id
+   */
+  ClusterId: string
+
+  /**
+      * 已加入审批人的uin
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Uins: Array<string>
+
+  /**
+   * 集群是否开启审核 0-关闭 1-开启
+   */
+  Censorship: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * CompareIdlFiles请求参数结构体
@@ -2898,7 +3337,12 @@ export interface Filter {
   /**
    * 过滤字段值
    */
-  Value: string
+  Value?: string
+
+  /**
+   * 过滤字段值
+   */
+  Values?: Array<string>
 }
 
 /**

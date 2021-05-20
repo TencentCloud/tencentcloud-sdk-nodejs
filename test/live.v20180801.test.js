@@ -178,6 +178,16 @@ it("live.v20180801.DeleteLiveTranscodeTemplate", async function () {
     }
 })
 
+it("live.v20180801.DescribeLiveDomainReferer", async function () {
+    try {
+       const data = await client.DescribeLiveDomainReferer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DescribeTopClientIpSumInfoList", async function () {
     try {
        const data = await client.DescribeTopClientIpSumInfoList({})
@@ -981,6 +991,16 @@ it("live.v20180801.DescribeLivePlayAuthKey", async function () {
 it("live.v20180801.DescribeLiveStreamState", async function () {
     try {
        const data = await client.DescribeLiveStreamState({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.ModifyLiveDomainReferer", async function () {
+    try {
+       const data = await client.ModifyLiveDomainReferer({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

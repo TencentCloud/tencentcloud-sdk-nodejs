@@ -477,13 +477,13 @@ export interface DescribeDomainBaseInfoResponse {
   /**
    * 域名信息
    */
-  DomainInfo?: DomainBaseInfo
+  DomainInfo: DomainBaseInfo
 
   /**
       * 用户Uin
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  Uin?: string
+  Uin: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -498,12 +498,12 @@ export interface DescribeTemplateListResponse {
   /**
    * 模板数量。
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 模板详细信息列表。
    */
-  TemplateSet?: Array<TemplateInfo>
+  TemplateSet: Array<TemplateInfo>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -1211,6 +1211,11 @@ export interface DescribeTemplateListRequest {
    * 认证状态：未实名认证:NotUpload, 实名审核中:InAudit，已实名认证:Approved，实名审核失败:Reject
    */
   Status?: string
+
+  /**
+   * 域名所有者筛选
+   */
+  Keyword?: string
 }
 
 /**

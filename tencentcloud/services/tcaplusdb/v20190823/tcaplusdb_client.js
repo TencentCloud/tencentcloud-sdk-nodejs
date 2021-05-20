@@ -40,6 +40,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTableTags", req, cb);
     }
     /**
+     * 更新申请单状态
+     */
+    async UpdateApply(req, cb) {
+        return this.request("UpdateApply", req, cb);
+    }
+    /**
      * 修改表格标签
      */
     async ModifyTableTags(req, cb) {
@@ -56,6 +62,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeMachine(req, cb) {
         return this.request("DescribeMachine", req, cb);
+    }
+    /**
+     * 合并指定表格
+     */
+    async MergeTablesData(req, cb) {
+        return this.request("MergeTablesData", req, cb);
     }
     /**
      * 查询本用户是否在白名单中，控制是否能创建TDR类型的APP或表
@@ -100,6 +112,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyClusterPassword", req, cb);
     }
     /**
+     * 设置表格分布式索引
+     */
+    async SetTableIndex(req, cb) {
+        return this.request("SetTableIndex", req, cb);
+    }
+    /**
      * 指定集群ID和待删除IDL文件的信息，删除目标文件，如果文件正在被表关联则删除失败。
      */
     async DeleteIdlFiles(req, cb) {
@@ -122,6 +140,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateBackup(req, cb) {
         return this.request("CreateBackup", req, cb);
+    }
+    /**
+     * 修改集群审批状态
+     */
+    async ModifyCensorship(req, cb) {
+        return this.request("ModifyCensorship", req, cb);
     }
     /**
      * 根据选择的IDL文件列表，批量创建表格
@@ -208,10 +232,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyTableGroupTags", req, cb);
     }
     /**
-     * 设置表格分布式索引
+     * 获取审批管理的申请单
      */
-    async SetTableIndex(req, cb) {
-        return this.request("SetTableIndex", req, cb);
+    async DescribeApplications(req, cb) {
+        return this.request("DescribeApplications", req, cb);
     }
     /**
      * 获取表格组关联的标签列表

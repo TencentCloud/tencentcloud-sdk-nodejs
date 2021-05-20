@@ -41,7 +41,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeRebateInfos(req: DescribeRebateInfosRequest, cb?: (error: string, rep: DescribeRebateInfosResponse) => void): Promise<DescribeRebateInfosResponse>;
     /**
-     * 国际站根据UIN查询代客基础信息
+     * 国际站根据UIN查询代客基础信息【本接口仅限主账号访问】
      */
     DescribeClientBaseInfo(req: DescribeClientBaseInfoRequest, cb?: (error: string, rep: DescribeClientBaseInfoResponse) => void): Promise<DescribeClientBaseInfoResponse>;
     /**

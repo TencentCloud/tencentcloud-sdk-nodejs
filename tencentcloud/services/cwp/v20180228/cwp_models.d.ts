@@ -1755,11 +1755,11 @@ export interface MachineTag {
  */
 export interface DescribeLogStorageStatisticResponse {
     /**
-      * 总容量
+      * 总容量（单位：GB）
       */
     TotalSize: number;
     /**
-      * 已使用容量
+      * 已使用容量（单位：GB）
       */
     UsedSize: number;
     /**
@@ -4477,6 +4477,10 @@ export interface DeleteNonlocalLoginPlacesRequest {
       * 异地登录事件的Ip。DelType为Ip时必填
       */
     Ip?: Array<string>;
+    /**
+      * 主机Uuid
+      */
+    Uuid?: string;
 }
 /**
  * EditPrivilegeRule请求参数结构体

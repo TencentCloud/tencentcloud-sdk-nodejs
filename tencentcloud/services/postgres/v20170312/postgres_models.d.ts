@@ -7,7 +7,7 @@ export interface CreateDBInstancesRequest {
       */
     SpecCode: string;
     /**
-      * PostgreSQL内核版本，目前支持：9.3.5、9.5.4、10.4三种版本。
+      * PostgreSQL内核版本，目前支持以下版本：9.3.5、9.5.4、10.4、11.8、12.4 。
       */
     DBVersion: string;
     /**
@@ -160,6 +160,95 @@ export interface DeleteReadOnlyGroupResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * CreateInstances请求参数结构体
+ */
+export interface CreateInstancesRequest {
+    /**
+      * 售卖规格ID。该参数可以通过调用DescribeProductConfig的返回值中的SpecCode字段来获取。
+      */
+    SpecCode: string;
+    /**
+      * PostgreSQL内核版本，目前支持：9.3.5、9.5.4、10.4、11.8、12.4五种版本。
+      */
+    DBVersion: string;
+    /**
+      * 实例容量大小，单位：GB。
+      */
+    Storage: number;
+    /**
+      * 一次性购买的实例数量。取值1-10。
+      */
+    InstanceCount: number;
+    /**
+      * 购买时长，单位：月。目前只支持1,2,3,4,5,6,7,8,9,10,11,12,24,36这些值，按量计费模式下该参数传1。
+      */
+    Period: number;
+    /**
+      * 可用区ID。该参数可以通过调用 DescribeZones 接口的返回值中的Zone字段来获取。
+      */
+    Zone: string;
+    /**
+      * 实例字符集，目前只支持：UTF8、LATIN1。
+      */
+    Charset: string;
+    /**
+      * 实例根账号用户名。
+      */
+    AdminName: string;
+    /**
+      * 实例根账号用户名对应的密码。
+      */
+    AdminPassword: string;
+    /**
+      * 项目ID。
+      */
+    ProjectId?: number;
+    /**
+      * 实例计费类型。目前支持：PREPAID（预付费，即包年包月），POSTPAID_BY_HOUR（后付费，即按量计费）。
+      */
+    InstanceChargeType?: string;
+    /**
+      * 是否自动使用代金券。1（是），0（否），默认不使用。
+      */
+    AutoVoucher?: number;
+    /**
+      * 代金券ID列表，目前仅支持指定一张代金券。
+      */
+    VoucherIds?: Array<string>;
+    /**
+      * 私有网络ID。
+      */
+    VpcId?: string;
+    /**
+      * 已配置的私有网络中的子网ID。
+      */
+    SubnetId?: string;
+    /**
+      * 续费标记：0-正常续费（默认）；1-自动续费。
+      */
+    AutoRenewFlag?: number;
+    /**
+      * 活动ID。
+      */
+    ActivityId?: number;
+    /**
+      * 实例名。
+      */
+    Name?: string;
+    /**
+      * 是否需要支持Ipv6，1：是，0：否。
+      */
+    NeedSupportIpv6?: number;
+    /**
+      * 实例需要绑定的Tag信息，默认为空。
+      */
+    TagList?: Array<Tag>;
+    /**
+      * 安全组ID。
+      */
+    SecurityGroupIds?: Array<string>;
 }
 /**
  * 描述一种规格的信息
@@ -628,6 +717,27 @@ export interface CreateReadOnlyDBInstanceResponse {
     RequestId?: string;
 }
 /**
+ * CreateInstances返回参数结构体
+ */
+export interface CreateInstancesResponse {
+    /**
+      * 订单号列表。每个实例对应一个订单号。
+      */
+    DealNames: Array<string>;
+    /**
+      * 冻结流水号。
+      */
+    BillId: string;
+    /**
+      * 创建成功的实例ID集合，只在后付费情景下有返回值。
+      */
+    DBInstanceIdSet: Array<string>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeOrders返回参数结构体
  */
 export interface DescribeOrdersResponse {
@@ -674,7 +784,7 @@ export interface DisIsolateDBInstancesRequest {
       */
     Period?: number;
     /**
-      * 是否使用代金券
+      * 是否使用代金券：true-使用,false-不使用，默认不使用
       */
     AutoVoucher?: boolean;
     /**
@@ -1269,13 +1379,13 @@ export interface InquiryPriceUpgradeDBInstanceRequest {
     InstanceChargeType?: string;
 }
 /**
- * IsolateDBInstances请求参数结构体
+ * RebalanceReadOnlyGroup返回参数结构体
  */
-export interface IsolateDBInstancesRequest {
+export interface RebalanceReadOnlyGroupResponse {
     /**
-      * 实例ID集合
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    DBInstanceIdSet: Array<string>;
+    RequestId?: string;
 }
 /**
  * ModifyDBInstanceName请求参数结构体
@@ -1347,13 +1457,13 @@ export interface DescribeServerlessDBInstancesResponse {
     RequestId?: string;
 }
 /**
- * RebalanceReadOnlyGroup返回参数结构体
+ * IsolateDBInstances请求参数结构体
  */
-export interface RebalanceReadOnlyGroupResponse {
+export interface IsolateDBInstancesRequest {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 实例ID集合
       */
-    RequestId?: string;
+    DBInstanceIdSet: Array<string>;
 }
 /**
  * InitDBInstances请求参数结构体

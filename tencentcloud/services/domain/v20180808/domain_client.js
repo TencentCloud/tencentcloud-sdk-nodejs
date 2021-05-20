@@ -69,8 +69,6 @@ class Client extends abstract_client_1.AbstractClient {
     /**
      * 本接口 (  DescribeDomainBaseInfo) 获取域名基础信息。
 
-默认接口请求频率限制：20次/秒。
-
      */
     async DescribeDomainBaseInfo(req, cb) {
         return this.request("DescribeDomainBaseInfo", req, cb);

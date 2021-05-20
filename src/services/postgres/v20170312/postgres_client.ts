@@ -24,6 +24,7 @@ import {
   DescribeDBXlogsRequest,
   DescribeAccountsRequest,
   DeleteReadOnlyGroupResponse,
+  CreateInstancesRequest,
   SpecItemInfo,
   ModifyDBInstanceReadOnlyGroupResponse,
   OpenServerlessDBExtranetAccessRequest,
@@ -47,6 +48,7 @@ import {
   ModifyDBInstanceReadOnlyGroupRequest,
   AddDBInstanceToReadOnlyGroupResponse,
   CreateReadOnlyDBInstanceResponse,
+  CreateInstancesResponse,
   DescribeOrdersResponse,
   InquiryPriceCreateDBInstancesResponse,
   DisIsolateDBInstancesRequest,
@@ -76,12 +78,12 @@ import {
   IsolateDBInstancesResponse,
   OpenDBExtranetAccessResponse,
   InquiryPriceUpgradeDBInstanceRequest,
-  IsolateDBInstancesRequest,
+  RebalanceReadOnlyGroupResponse,
   ModifyDBInstanceNameRequest,
   InquiryPriceRenewDBInstanceResponse,
   ErrLogDetail,
   DescribeServerlessDBInstancesResponse,
-  RebalanceReadOnlyGroupResponse,
+  IsolateDBInstancesRequest,
   InitDBInstancesRequest,
   DBInstance,
   DescribeProductConfigResponse,
@@ -307,7 +309,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (CreateDBInstances) 用于创建一个或者多个PostgreSQL实例。
+   * 本接口 (CreateDBInstances) 用于创建一个或者多个PostgreSQL实例,仅发货实例不会进行初始化。
    */
   async CreateDBInstances(
     req: CreateDBInstancesRequest,
@@ -384,6 +386,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InquiryPriceUpgradeDBInstanceResponse) => void
   ): Promise<InquiryPriceUpgradeDBInstanceResponse> {
     return this.request("InquiryPriceUpgradeDBInstance", req, cb)
+  }
+
+  /**
+   * 本接口（RemoveDBInstanceFromReadOnlyGroup）用户将只读实例从只读组中移除
+   */
+  async RemoveDBInstanceFromReadOnlyGroup(
+    req: RemoveDBInstanceFromReadOnlyGroupRequest,
+    cb?: (error: string, rep: RemoveDBInstanceFromReadOnlyGroupResponse) => void
+  ): Promise<RemoveDBInstanceFromReadOnlyGroupResponse> {
+    return this.request("RemoveDBInstanceFromReadOnlyGroup", req, cb)
   }
 
   /**
@@ -537,13 +549,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（RemoveDBInstanceFromReadOnlyGroup）用户将只读实例从只读组中移除
+   * 本接口 (CreateInstances) 用于创建一个或者多个PostgreSQL实例，通过此接口创建的实例无需进行初始化，可直接使用。
    */
-  async RemoveDBInstanceFromReadOnlyGroup(
-    req: RemoveDBInstanceFromReadOnlyGroupRequest,
-    cb?: (error: string, rep: RemoveDBInstanceFromReadOnlyGroupResponse) => void
-  ): Promise<RemoveDBInstanceFromReadOnlyGroupResponse> {
-    return this.request("RemoveDBInstanceFromReadOnlyGroup", req, cb)
+  async CreateInstances(
+    req: CreateInstancesRequest,
+    cb?: (error: string, rep: CreateInstancesResponse) => void
+  ): Promise<CreateInstancesResponse> {
+    return this.request("CreateInstances", req, cb)
   }
 
   /**

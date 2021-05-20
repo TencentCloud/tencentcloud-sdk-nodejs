@@ -1438,7 +1438,7 @@ export interface AuditApplyClientResponse {
 }
 
 /**
- * 代客基础信息，for国际站查代客API
+ * 代客基础信息
  */
 export interface ClientBaseElem {
   /**

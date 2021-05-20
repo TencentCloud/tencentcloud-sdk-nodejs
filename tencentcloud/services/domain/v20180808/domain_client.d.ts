@@ -37,8 +37,6 @@ export declare class Client extends AbstractClient {
     /**
      * 本接口 (  DescribeDomainBaseInfo) 获取域名基础信息。
 
-默认接口请求频率限制：20次/秒。
-
      */
     DescribeDomainBaseInfo(req: DescribeDomainBaseInfoRequest, cb?: (error: string, rep: DescribeDomainBaseInfoResponse) => void): Promise<DescribeDomainBaseInfoResponse>;
     /**

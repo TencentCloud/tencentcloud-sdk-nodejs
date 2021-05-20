@@ -2400,7 +2400,7 @@ active：活跃，
 inactive：非活跃，
 forbid：禁播。
       */
-    StreamState?: string;
+    StreamState: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2621,6 +2621,31 @@ export interface CreateCommonMixStreamRequest {
       * 混流的特殊控制参数。如无特殊需求，无需填写。
       */
     ControlParams?: CommonMixControlParams;
+}
+/**
+ * 直播域名Referer黑白名单配置
+ */
+export interface RefererAuthConfig {
+    /**
+      * 域名。
+      */
+    DomainName: string;
+    /**
+      * 是否启用，0：关闭，1：启用。
+      */
+    Enable: number;
+    /**
+      * 名单类型，0：黑名单，1：白名单。
+      */
+    Type: number;
+    /**
+      * 是否允许空Referer，0：不允许，1：允许。
+      */
+    AllowEmpty: number;
+    /**
+      * 名单列表，以分号(;)分隔。
+      */
+    Rules: string;
 }
 /**
  * CreateLiveCert返回参数结构体
@@ -2882,6 +2907,19 @@ export interface DescribeLiveTranscodeRulesResponse {
       * 转码规则列表。
       */
     Rules?: Array<RuleInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * DescribeLiveDomainReferer返回参数结构体
+ */
+export interface DescribeLiveDomainRefererResponse {
+    /**
+      * 域名 Referer 黑白名单配置。
+      */
+    RefererAuthConfig: RefererAuthConfig;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3159,6 +3197,39 @@ export interface ModifyLiveCallbackTemplateRequest {
 [事件消息通知](/document/product/267/32744)。
       */
     CallbackKey?: string;
+}
+/**
+ * 播放错误码信息
+ */
+export interface ProIspPlayCodeDataInfo {
+    /**
+      * 国家或地区。
+      */
+    CountryAreaName: string;
+    /**
+      * 省份。
+      */
+    ProvinceName: string;
+    /**
+      * 运营商。
+      */
+    IspName: string;
+    /**
+      * 错误码为2开头的次数。
+      */
+    Code2xx: number;
+    /**
+      * 错误码为3开头的次数。
+      */
+    Code3xx: number;
+    /**
+      * 错误码为4开头的次数。
+      */
+    Code4xx: number;
+    /**
+      * 错误码为5开头的次数。
+      */
+    Code5xx: number;
 }
 /**
  * DescribeProvinceIspPlayInfoList请求参数结构体
@@ -3766,37 +3837,13 @@ export interface DescribeLiveTranscodeDetailInfoRequest {
     EndDayTime?: string;
 }
 /**
- * 播放错误码信息
+ * ModifyLiveDomainReferer返回参数结构体
  */
-export interface ProIspPlayCodeDataInfo {
+export interface ModifyLiveDomainRefererResponse {
     /**
-      * 国家或地区。
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
-    CountryAreaName: string;
-    /**
-      * 省份。
-      */
-    ProvinceName: string;
-    /**
-      * 运营商。
-      */
-    IspName: string;
-    /**
-      * 错误码为2开头的次数。
-      */
-    Code2xx: number;
-    /**
-      * 错误码为3开头的次数。
-      */
-    Code3xx: number;
-    /**
-      * 错误码为4开头的次数。
-      */
-    Code4xx: number;
-    /**
-      * 错误码为5开头的次数。
-      */
-    Code5xx: number;
+    RequestId?: string;
 }
 /**
  * DeleteLiveWatermark请求参数结构体
@@ -4501,6 +4548,15 @@ export interface StopRecordTaskRequest {
       * 录制任务ID。
       */
     TaskId: string;
+}
+/**
+ * DescribeLiveDomainReferer请求参数结构体
+ */
+export interface DescribeLiveDomainRefererRequest {
+    /**
+      * 播放域名。
+      */
+    DomainName: string;
 }
 /**
  * 播放错误码信息
@@ -5284,6 +5340,31 @@ export interface CreateCommonMixStreamResponse {
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
+}
+/**
+ * ModifyLiveDomainReferer请求参数结构体
+ */
+export interface ModifyLiveDomainRefererRequest {
+    /**
+      * 播放域名。
+      */
+    DomainName: string;
+    /**
+      * 是否开启当前域名的 Referer 黑白名单鉴权。
+      */
+    Enable: number;
+    /**
+      * 名单类型，0：黑名单，1：白名单。
+      */
+    Type: number;
+    /**
+      * 是否允许空 Referer，0：不允许，1：允许。
+      */
+    AllowEmpty: number;
+    /**
+      * Referer 名单列表，以;分隔。
+      */
+    Rules: string;
 }
 /**
  * CreateLiveCallbackTemplate返回参数结构体

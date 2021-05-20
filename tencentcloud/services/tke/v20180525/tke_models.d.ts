@@ -2764,6 +2764,11 @@ export interface InstanceAdvancedSettings {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     ExtraArgs?: InstanceExtraArgs;
+    /**
+      * 该节点属于podCIDR大小自定义模式时，可指定节点上运行的pod数量上限
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    DesiredPodNumber: number;
 }
 /**
  * DescribePrometheusAgents请求参数结构体
