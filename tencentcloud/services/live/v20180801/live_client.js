@@ -79,10 +79,14 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyLiveSnapshotTemplate", req, cb);
     }
     /**
-     * 修改录制模板配置。
+     * 查询指定时间段范围内启动和结束的录制任务列表。
+- 使用前提
+1. 仅用于查询由 CreateRecordTask 接口创建的录制任务。
+2. 不能查询被 DeleteRecordTask 接口删除以及已过期（平台侧保留3个月）的录制任务。
+
      */
-    async ModifyLiveRecordTemplate(req, cb) {
-        return this.request("ModifyLiveRecordTemplate", req, cb);
+    async DescribeRecordTask(req, cb) {
+        return this.request("DescribeRecordTask", req, cb);
     }
     /**
      * 创建水印规则，需要先调用[AddLiveWatermark](/document/product/267/30154)接口添加水印，将返回的水印id绑定到流使用。
@@ -177,6 +181,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async DescribeVisitTopSumInfoList(req, cb) {
         return this.request("DescribeVisitTopSumInfoList", req, cb);
+    }
+    /**
+     * 修改录制模板配置。
+     */
+    async ModifyLiveRecordTemplate(req, cb) {
+        return this.request("ModifyLiveRecordTemplate", req, cb);
     }
     /**
      * 获取域名证书信息。

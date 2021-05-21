@@ -1793,12 +1793,12 @@ export interface DescribeBandwidthPackagesResponse {
   /**
    * 符合条件的带宽包数量
    */
-  TotalCount?: number
+  TotalCount: number
 
   /**
    * 描述带宽包详细信息
    */
-  BandwidthPackageSet?: Array<BandwidthPackage>
+  BandwidthPackageSet: Array<BandwidthPackage>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -2968,6 +2968,12 @@ export interface NetworkInterface {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   CdcId: string
+
+  /**
+      * 弹性网卡类型：0:标准型/1:扩展型。默认值为0。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  AttachType: number
 }
 
 /**
@@ -3281,11 +3287,14 @@ export interface DescribeBandwidthPackagesRequest {
       * 每次请求的`Filters`的上限为10。参数不支持同时指定`BandwidthPackageIds`和`Filters`。详细的过滤条件如下：
 <li> bandwidth-package_id - String - 是否必填：否 - （过滤条件）按照带宽包的唯一标识ID过滤。</li>
 <li> bandwidth-package-name - String - 是否必填：否 - （过滤条件）按照 带宽包名称过滤。不支持模糊过滤。</li>
-<li> network-type - String - 是否必填：否 - （过滤条件）按照带宽包的类型过滤。类型包括'BGP','SINGLEISP'和'ANYCAST'。</li>
-<li> charge-type - String - 是否必填：否 - （过滤条件）按照带宽包的计费类型过滤。计费类型包括'TOP5_POSTPAID_BY_MONTH'和'PERCENT95_POSTPAID_BY_MONTH'</li>
+<li> network-type - String - 是否必填：否 - （过滤条件）按照带宽包的类型过滤。类型包括'HIGH_QUALITY_BGP','BGP','SINGLEISP'和'ANYCAST'。</li>
+<li> charge-type - String - 是否必填：否 - （过滤条件）按照带宽包的计费类型过滤。计费类型包括'TOP5_POSTPAID_BY_MONTH'和'PERCENT95_POSTPAID_BY_MONTH'。</li>
 <li> resource.resource-type - String - 是否必填：否 - （过滤条件）按照带宽包资源类型过滤。资源类型包括'Address'和'LoadBalance'</li>
 <li> resource.resource-id - String - 是否必填：否 - （过滤条件）按照带宽包资源Id过滤。资源Id形如'eip-xxxx','lb-xxxx'</li>
 <li> resource.address-ip - String - 是否必填：否 - （过滤条件）按照带宽包资源Ip过滤。</li>
+<li> tag-key - String - 是否必填：否 - （过滤条件）按照标签键进行过滤。</li>
+<li> tag-value - String - 是否必填：否 - （过滤条件）按照标签值进行过滤。</li>
+<li> tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。tag-key使用具体的标签键进行替换。</li>
       */
   Filters?: Array<Filter>
 
@@ -5701,6 +5710,9 @@ export interface DescribeAddressesRequest {
 <li> address-type - String - 是否必填：否 - （过滤条件）按照 IP类型 进行过滤。可选值：'EIP'，'AnycastEIP'，'HighQualityEIP'</li>
 <li> address-isp - String - 是否必填：否 - （过滤条件）按照 运营商类型 进行过滤。可选值：'BGP'，'CMCC'，'CUCC', 'CTCC'</li>
 <li> dedicated-cluster-id - String - 是否必填：否 - （过滤条件）按照 CDC 的唯一 ID 过滤。CDC 唯一 ID 形如：cluster-11112222。</li>
+<li> tag-key - String - 是否必填：否 - （过滤条件）按照标签键进行过滤。</li>
+<li> tag-value - String - 是否必填：否 - （过滤条件）按照标签值进行过滤。</li>
+<li> tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。tag-key使用具体的标签键进行替换。</li>
       */
   Filters?: Array<Filter>
 
@@ -5775,14 +5787,26 @@ export interface DescribeIp6TranslatorQuotaRequest {
  */
 export interface DescribeNetworkInterfaceLimitResponse {
   /**
-   * 弹性网卡配额
+   * 标准型弹性网卡配额
    */
-  EniQuantity?: number
+  EniQuantity: number
 
   /**
-   * 每个弹性网卡可以分配的IP配额
+   * 每个标准型弹性网卡可以分配的IP配额
    */
-  EniPrivateIpAddressQuantity?: number
+  EniPrivateIpAddressQuantity: number
+
+  /**
+      * 扩展型网卡配额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExtendEniQuantity: number
+
+  /**
+      * 每个扩展型弹性网卡可以分配的IP配额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExtendEniPrivateIpAddressQuantity: number
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6985,6 +7009,8 @@ export interface DescribeSubnetsRequest {
 <li>zone - String - （过滤条件）可用区。</li>
 <li>tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。</li>
 <li>tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例2。</li>
+<li>cdc-id - String - 是否必填：否 - （过滤条件）按照cdc信息进行过滤。过滤出来制定cdc下的子网。</li>
+<li>is-cdc-subnet - String - 是否必填：否 - （过滤条件）按照是否是cdc子网进行过滤。取值：“0”-非cdc子网，“1”--cdc子网</li>
       */
   Filters?: Array<Filter>
 
@@ -7339,6 +7365,11 @@ export interface CreateAndAttachNetworkInterfaceRequest {
    * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]
    */
   Tags?: Array<Tag>
+
+  /**
+   * 绑定类型：0 标准型 1 扩展型。
+   */
+  AttachType?: number
 }
 
 /**
@@ -8707,6 +8738,11 @@ export interface MigrateNetworkInterfaceRequest {
    * 待迁移的目的CVM实例ID。
    */
   DestinationInstanceId: string
+
+  /**
+   * 网卡绑定类型：0 标准型 1 扩展型。
+   */
+  AttachType?: number
 }
 
 /**
@@ -9076,7 +9112,7 @@ export interface CreateAndAttachNetworkInterfaceResponse {
   /**
    * 弹性网卡实例。
    */
-  NetworkInterface?: NetworkInterface
+  NetworkInterface: NetworkInterface
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -9300,6 +9336,12 @@ export interface Address {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   InternetChargeType: string
+
+  /**
+      * 弹性公网IP关联的标签列表。
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TagSet: Array<Tag>
 }
 
 /**
@@ -11156,6 +11198,11 @@ export interface AttachNetworkInterfaceRequest {
    * CVM实例ID。形如：ins-r8hr2upy。
    */
   InstanceId: string
+
+  /**
+   * 网卡的挂载类型：0 标准型，1扩展型，默认值0。
+   */
+  AttachType?: number
 }
 
 /**

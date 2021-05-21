@@ -804,6 +804,21 @@ export interface CreateApiRateLimitRuleRequest {
 }
 
 /**
+ * 翻页查询的任务记录返回
+ */
+export interface TaskRecordPage {
+  /**
+   * 总数量
+   */
+  TotalCount: number
+
+  /**
+   * 任务记录列表
+   */
+  Content: Array<TaskRecord>
+}
+
+/**
  * DeleteServerlessGroup请求参数结构体
  */
 export interface DeleteServerlessGroupRequest {
@@ -5885,6 +5900,21 @@ export interface CreateUnitRuleResponse {
 }
 
 /**
+ * DescribeTaskRecords返回参数结构体
+ */
+export interface DescribeTaskRecordsResponse {
+  /**
+   * 任务记录列表
+   */
+  Result: TaskRecordPage
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 虚拟机部署组信息
  */
 export interface VmGroup {
@@ -7096,6 +7126,46 @@ export interface DescribeContainerEventsResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeTaskRecords请求参数结构体
+ */
+export interface DescribeTaskRecordsRequest {
+  /**
+   * 翻页偏移量。
+   */
+  Offset?: number
+
+  /**
+   * 翻页查询单页数量。
+   */
+  Limit?: number
+
+  /**
+   * 模糊查询关键字，支持任务ID和任务名称。
+   */
+  SearchWord?: string
+
+  /**
+   * 任务启用状态。enabled/disabled
+   */
+  TaskState?: string
+
+  /**
+   * 分组ID。
+   */
+  GroupId?: string
+
+  /**
+   * 任务类型。
+   */
+  TaskType?: string
+
+  /**
+   * 任务触发类型，UNICAST、BROADCAST。
+   */
+  ExecuteType?: string
 }
 
 /**

@@ -78,9 +78,9 @@ it("live.v20180801.ModifyLiveSnapshotTemplate", async function () {
     }
 })
 
-it("live.v20180801.ModifyLiveRecordTemplate", async function () {
+it("live.v20180801.DescribeRecordTask", async function () {
     try {
-       const data = await client.ModifyLiveRecordTemplate({})
+       const data = await client.DescribeRecordTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -231,6 +231,16 @@ it("live.v20180801.ModifyLiveDomainCert", async function () {
 it("live.v20180801.DescribeVisitTopSumInfoList", async function () {
     try {
        const data = await client.DescribeVisitTopSumInfoList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.ModifyLiveRecordTemplate", async function () {
+    try {
+       const data = await client.ModifyLiveRecordTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

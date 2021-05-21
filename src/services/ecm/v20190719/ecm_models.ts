@@ -1997,8 +1997,12 @@ export interface ZoneInstanceCountISP {
   InstanceCount: number
 
   /**
-   * 运营商，CTCC电信，CUCC联通，CMCC移动，多个运营商用英文分号连接";"。多运营商需要开通白名单，请直接联系腾讯云客服。
-   */
+      * 运营商如下：
+CTCC：中国电信
+CUCC：中国联通
+CMCC：中国移动
+多个运营商用英文分号连接";"，例如："CMCC;CUCC;CTCC"。多运营商需要开通白名单，请直接联系腾讯云客服。
+      */
   ISP: string
 
   /**

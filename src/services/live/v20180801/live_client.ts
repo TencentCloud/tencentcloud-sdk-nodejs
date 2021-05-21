@@ -105,6 +105,7 @@ import {
   CreateLiveRecordResponse,
   RuleInfo,
   UpdateLiveWatermarkResponse,
+  DescribeRecordTaskRequest,
   LivePackageInfo,
   CreateLiveTranscodeTemplateResponse,
   BillAreaInfo,
@@ -115,6 +116,7 @@ import {
   ModifyLivePlayDomainResponse,
   CancelCommonMixStreamResponse,
   DescribeConcurrentRecordStreamNumResponse,
+  RecordTask,
   DescribeLiveCertsResponse,
   CommonMixInputParam,
   DescribeProvinceIspPlayInfoListResponse,
@@ -164,6 +166,7 @@ import {
   DescribeLivePlayAuthKeyRequest,
   DescribeLiveForbidStreamListResponse,
   DescribeStreamPushInfoListRequest,
+  ModifyLivePushAuthKeyResponse,
   DomainInfoList,
   DescribeLiveWatermarkResponse,
   ResumeLiveStreamResponse,
@@ -199,7 +202,7 @@ import {
   CancelCommonMixStreamRequest,
   UpdateLiveWatermarkRequest,
   CertInfo,
-  ModifyLivePushAuthKeyResponse,
+  DescribeRecordTaskResponse,
   DescribeLiveDelayInfoListResponse,
   DeleteLiveTranscodeTemplateRequest,
   DescribeLiveCallbackRulesRequest,
@@ -381,13 +384,17 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改录制模板配置。
-   */
-  async ModifyLiveRecordTemplate(
-    req: ModifyLiveRecordTemplateRequest,
-    cb?: (error: string, rep: ModifyLiveRecordTemplateResponse) => void
-  ): Promise<ModifyLiveRecordTemplateResponse> {
-    return this.request("ModifyLiveRecordTemplate", req, cb)
+     * 查询指定时间段范围内启动和结束的录制任务列表。
+- 使用前提
+1. 仅用于查询由 CreateRecordTask 接口创建的录制任务。
+2. 不能查询被 DeleteRecordTask 接口删除以及已过期（平台侧保留3个月）的录制任务。
+
+     */
+  async DescribeRecordTask(
+    req: DescribeRecordTaskRequest,
+    cb?: (error: string, rep: DescribeRecordTaskResponse) => void
+  ): Promise<DescribeRecordTaskResponse> {
+    return this.request("DescribeRecordTask", req, cb)
   }
 
   /**
@@ -542,6 +549,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeVisitTopSumInfoListResponse) => void
   ): Promise<DescribeVisitTopSumInfoListResponse> {
     return this.request("DescribeVisitTopSumInfoList", req, cb)
+  }
+
+  /**
+   * 修改录制模板配置。
+   */
+  async ModifyLiveRecordTemplate(
+    req: ModifyLiveRecordTemplateRequest,
+    cb?: (error: string, rep: ModifyLiveRecordTemplateResponse) => void
+  ): Promise<ModifyLiveRecordTemplateResponse> {
+    return this.request("ModifyLiveRecordTemplate", req, cb)
   }
 
   /**

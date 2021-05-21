@@ -2307,6 +2307,41 @@ export interface UpdateLiveWatermarkResponse {
 }
 
 /**
+ * DescribeRecordTask请求参数结构体
+ */
+export interface DescribeRecordTaskRequest {
+  /**
+   * 查询任务开始时间，Unix 时间戳。设置时间不早于当前时间之前90天的时间，且查询时间跨度不超过一周。
+   */
+  StartTime: number
+
+  /**
+   * 查询任务结束时间，Unix 时间戳。EndTime 必须大于 StartTime，设置时间不早于当前时间之前90天的时间，且查询时间跨度不超过一周。（注意：任务开始结束时间必须在查询时间范围内）。
+   */
+  EndTime: number
+
+  /**
+   * 流名称。
+   */
+  StreamName?: string
+
+  /**
+   * 推流域名。
+   */
+  DomainName?: string
+
+  /**
+   * 推流路径。
+   */
+  AppName?: string
+
+  /**
+   * 翻页标识，分批拉取时使用：当单次请求无法拉取所有数据，接口将会返回 ScrollToken，下一次请求携带该 Token，将会从下一条记录开始获取。
+   */
+  ScrollToken?: string
+}
+
+/**
  * 直播包信息。
  */
 export interface LivePackageInfo {
@@ -2531,6 +2566,51 @@ export interface DescribeConcurrentRecordStreamNumResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 录制任务
+ */
+export interface RecordTask {
+  /**
+   * 录制任务ID。
+   */
+  TaskId: string
+
+  /**
+   * 推流域名。
+   */
+  DomainName: string
+
+  /**
+   * 推流路径。
+   */
+  AppName: string
+
+  /**
+   * 流名称。
+   */
+  StreamName: string
+
+  /**
+   * 任务开始时间，Unix时间戳。
+   */
+  StartTime: number
+
+  /**
+   * 任务结束时间，Unix时间戳。
+   */
+  EndTime: number
+
+  /**
+   * 录制模板ID。
+   */
+  TemplateId: number
+
+  /**
+   * 调用 StopRecordTask 停止任务时间，Unix时间戳。值为0表示未曾调用接口停止任务。
+   */
+  Stopped: number
 }
 
 /**
@@ -3948,6 +4028,16 @@ export interface DescribeStreamPushInfoListRequest {
 }
 
 /**
+ * ModifyLivePushAuthKey返回参数结构体
+ */
+export interface ModifyLivePushAuthKeyResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 多个域名信息列表
  */
 export interface DomainInfoList {
@@ -4903,9 +4993,19 @@ export interface CertInfo {
 }
 
 /**
- * ModifyLivePushAuthKey返回参数结构体
+ * DescribeRecordTask返回参数结构体
  */
-export interface ModifyLivePushAuthKeyResponse {
+export interface DescribeRecordTaskResponse {
+  /**
+   * 翻页标识，当请求未返回所有数据，该字段表示下一条记录的 Token。当该字段为空，说明已无更多数据。
+   */
+  ScrollToken: string
+
+  /**
+   * 录制任务列表。当该字段为空，说明已返回所有数据。
+   */
+  TaskList: Array<RecordTask>
+
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

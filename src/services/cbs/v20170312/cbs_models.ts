@@ -1390,19 +1390,24 @@ export interface CreateDisksRequest {
  */
 export interface AttachDisksRequest {
   /**
-   * 将要被挂载的弹性云盘ID。通过[DescribeDisks](/document/product/362/16315)接口查询。单次最多可挂载10块弹性云盘。
-   */
-  DiskIds: Array<string>
-
-  /**
    * 云服务器实例ID。云盘将被挂载到此云服务器上，通过[DescribeInstances](/document/product/213/15728)接口查询。
    */
   InstanceId: string
 
   /**
+   * 将要被挂载的弹性云盘ID。通过[DescribeDisks](/document/product/362/16315)接口查询。单次最多可挂载10块弹性云盘。
+   */
+  DiskIds: Array<string>
+
+  /**
    * 可选参数，不传该参数则仅执行挂载操作。传入`True`时，会在挂载成功后将云硬盘设置为随云主机销毁模式，仅对按量计费云硬盘有效。
    */
   DeleteWithInstance?: boolean
+
+  /**
+   * 可选参数，用于控制云盘挂载时使用的挂载模式，目前仅对黑石裸金属机型有效。取值范围：<br><li>PF<br><li>VF
+   */
+  AttachMode?: string
 }
 
 /**

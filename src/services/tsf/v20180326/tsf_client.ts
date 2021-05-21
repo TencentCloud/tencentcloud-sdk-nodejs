@@ -52,6 +52,7 @@ import {
   ModifyUploadInfoResponse,
   TsfPageConfig,
   CreateApiRateLimitRuleRequest,
+  TaskRecordPage,
   DeleteServerlessGroupRequest,
   ChangeApiUsableStatusRequest,
   DescribeApiRateLimitRulesRequest,
@@ -255,6 +256,7 @@ import {
   ExecuteTaskFlowRequest,
   TerminateTaskFlowBatchRequest,
   CreateUnitRuleResponse,
+  DescribeTaskRecordsResponse,
   VmGroup,
   DescribeApiUseDetailResponse,
   ServiceSetting,
@@ -297,6 +299,7 @@ import {
   DescribeConfigResponse,
   SimpleGroup,
   DescribeContainerEventsResponse,
+  DescribeTaskRecordsRequest,
   ModifyContainerGroupResponse,
   DeleteApplicationRequest,
   DescribeUnitNamespacesRequest,
@@ -971,6 +974,16 @@ COS相关文档请查阅：https://cloud.tencent.com/document/product/436
     cb?: (error: string, rep: UpdateHealthCheckSettingsResponse) => void
   ): Promise<UpdateHealthCheckSettingsResponse> {
     return this.request("UpdateHealthCheckSettings", req, cb)
+  }
+
+  /**
+   * 翻页查询任务列表
+   */
+  async DescribeTaskRecords(
+    req: DescribeTaskRecordsRequest,
+    cb?: (error: string, rep: DescribeTaskRecordsResponse) => void
+  ): Promise<DescribeTaskRecordsResponse> {
+    return this.request("DescribeTaskRecords", req, cb)
   }
 
   /**

@@ -657,6 +657,29 @@ export interface ModifyEndUserRequest {
     Status?: string;
 }
 /**
+ * RollUpdateCloudBaseRunServerVersion返回参数结构体
+ */
+export interface RollUpdateCloudBaseRunServerVersionResponse {
+    /**
+      * succ为成功
+      */
+    Result: string;
+    /**
+      * 滚动更新的VersionName
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    VersionName: string;
+    /**
+      * 操作记录id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    RunId: string;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * DescribeAuthDomains返回参数结构体
  */
 export interface DescribeAuthDomainsResponse {
@@ -709,27 +732,21 @@ export interface DescribeCloudBaseRunResourceRequest {
     EnvId: string;
 }
 /**
- * RollUpdateCloudBaseRunServerVersion返回参数结构体
+ * emptydir 数据卷详细信息
  */
-export interface RollUpdateCloudBaseRunServerVersionResponse {
+export interface CloudBaseRunEmptyDirVolumeSource {
     /**
-      * succ为成功
+      * 启用emptydir数据卷
       */
-    Result: string;
+    EnableEmptyDirVolume?: boolean;
     /**
-      * 滚动更新的VersionName
-注意：此字段可能返回 null，表示取不到有效值。
+      * "","Memory","HugePages"
       */
-    VersionName: string;
+    Medium?: string;
     /**
-      * 操作记录id
-注意：此字段可能返回 null，表示取不到有效值。
+      * emptydir数据卷大小
       */
-    RunId: string;
-    /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-      */
-    RequestId?: string;
+    SizeLimit?: string;
 }
 /**
  * cfs挂载点
@@ -1085,6 +1102,19 @@ export interface DescribeEnvsRequest {
     Channels?: Array<string>;
 }
 /**
+ * 标签键值对
+ */
+export interface Tag {
+    /**
+      * 标签键
+      */
+    Key: string;
+    /**
+      * 标签值
+      */
+    Value: string;
+}
+/**
  * DeleteWxGatewayRoute请求参数结构体
  */
 export interface DeleteWxGatewayRouteRequest {
@@ -1348,6 +1378,11 @@ export interface EnvInfo {
 注意：此字段可能返回 null，表示取不到有效值。
       */
     Region: string;
+    /**
+      * 环境标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    Tags: Array<Tag>;
 }
 /**
  * DestroyEnv请求参数结构体
@@ -1456,7 +1491,7 @@ export interface DescribeEnvsResponse {
     /**
       * 环境信息列表
       */
-    EnvList?: Array<EnvInfo>;
+    EnvList: Array<EnvInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1687,6 +1722,10 @@ export interface CreateCloudBaseRunServerVersionRequest {
       * 是否创建JnsGw 0未传默认创建 1创建 2不创建
       */
     IsCreateJnsGw?: number;
+    /**
+      * 数据卷挂载参数
+      */
+    ServiceVolumeMounts?: Array<CloudBaseRunServiceVolumeMount>;
 }
 /**
  * 终端用户登录新增统计
@@ -1801,6 +1840,31 @@ export interface EstablishCloudBaseRunServerRequest {
       * 0/1=允许公网访问;2=关闭公网访问
       */
     PublicAccess?: number;
+}
+/**
+ * 对标 EKS VolumeMount
+ */
+export interface CloudBaseRunServiceVolumeMount {
+    /**
+      * Volume 名称
+      */
+    Name?: string;
+    /**
+      * 挂载路径
+      */
+    MountPath?: string;
+    /**
+      * 是否只读
+      */
+    ReadOnly?: boolean;
+    /**
+      * 子路径
+      */
+    SubPath?: string;
+    /**
+      * 传播挂载方式
+      */
+    MountPropagation?: string;
 }
 /**
  * DescribeCloudBaseProjectVersionList返回参数结构体
@@ -3038,10 +3102,15 @@ export interface CloudRunServiceVolume {
       */
     SecretName?: string;
     /**
-      * 是否开启临时目录
+      * 是否开启临时目录逐步废弃，请使用 EmptyDir
 注意：此字段可能返回 null，表示取不到有效值。
       */
     EnableEmptyDirVolume?: boolean;
+    /**
+      * emptydir数据卷详细信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    EmptyDir?: CloudBaseRunEmptyDirVolumeSource;
 }
 /**
  * 扩展文件信息
