@@ -112,6 +112,8 @@ var dcdb_1 = require("./dcdb");
 Object.defineProperty(exports, "dcdb", { enumerable: true, get: function () { return dcdb_1.dcdb; } });
 var dlc_1 = require("./dlc");
 Object.defineProperty(exports, "dlc", { enumerable: true, get: function () { return dlc_1.dlc; } });
+var dnspod_1 = require("./dnspod");
+Object.defineProperty(exports, "dnspod", { enumerable: true, get: function () { return dnspod_1.dnspod; } });
 var domain_1 = require("./domain");
 Object.defineProperty(exports, "domain", { enumerable: true, get: function () { return domain_1.domain; } });
 var drm_1 = require("./drm");

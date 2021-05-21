@@ -54,6 +54,7 @@ export { dbbrain } from "./dbbrain";
 export { dc } from "./dc";
 export { dcdb } from "./dcdb";
 export { dlc } from "./dlc";
+export { dnspod } from "./dnspod";
 export { domain } from "./domain";
 export { drm } from "./drm";
 export { ds } from "./ds";
