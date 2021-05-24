@@ -1,6 +1,6 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { ModifyMaterialResponse, DeleteProjectRequest, ExportVideoByVideoSegmentationDataResponse, ImportMaterialResponse, DescribeAccountsRequest, ExportVideoByVideoSegmentationDataRequest, DescribeTeamsResponse, DescribeTaskDetailResponse, ExportVideoEditProjectRequest, ModifyProjectResponse, SearchMaterialRequest, DeleteTeamResponse, RevokeResourceAuthorizationResponse, HandleStreamConnectProjectRequest, DeleteTeamRequest, DescribeTeamsRequest, FlattenListMediaRequest, ExportVideoByEditorTrackDataRequest, CreateProjectRequest, ModifyMaterialRequest, DescribePlatformsResponse, DescribeTasksRequest, DescribeLoginStatusRequest, DeleteLoginStatusResponse, CreateLinkResponse, ExportVideoByTemplateResponse, ListMediaResponse, SearchMaterialResponse, DescribeJoinTeamsRequest, DeleteMaterialRequest, CreateProjectResponse, DeleteProjectResponse, DeleteClassRequest, CreateLinkRequest, CreateClassRequest, DescribeMaterialsResponse, HandleStreamConnectProjectResponse, GrantResourceAuthorizationResponse, MoveResourceRequest, ImportMediaToProjectRequest, DescribeClassRequest, DescribeSharedSpaceResponse, DescribeAccountsResponse, MoveResourceResponse, MoveClassRequest, DeleteTeamMembersResponse, MoveClassResponse, ImportMediaToProjectResponse, ModifyTeamMemberResponse, DescribeTeamMembersResponse, AddTeamMemberResponse, CreateTeamResponse, ModifyTeamRequest, ModifyTeamMemberRequest, CreateTeamRequest, DescribeResourceAuthorizationRequest, CreateClassResponse, AddTeamMemberRequest, ExportVideoEditProjectResponse, ListMediaRequest, ModifyTeamResponse, DeleteLoginStatusRequest, GenerateVideoSegmentationSchemeByAiRequest, DeleteTeamMembersRequest, ExportVideoByTemplateRequest, DescribePlatformsRequest, DescribeResourceAuthorizationResponse, FlattenListMediaResponse, DescribeProjectsRequest, DescribeLoginStatusResponse, DescribeJoinTeamsResponse, DescribeTeamMembersRequest, DescribeProjectsResponse, DeleteMaterialResponse, RevokeResourceAuthorizationRequest, DescribeTaskDetailRequest, DescribeTasksResponse, ModifyProjectRequest, DescribeClassResponse, GenerateVideoSegmentationSchemeByAiResponse, DescribeSharedSpaceRequest, DeleteClassResponse, GrantResourceAuthorizationRequest, ExportVideoByEditorTrackDataResponse, ImportMaterialRequest, DescribeMaterialsRequest } from "./cme_models";
+import { ModifyMaterialResponse, DeleteProjectRequest, ExportVideoByVideoSegmentationDataResponse, ImportMaterialResponse, DescribeAccountsRequest, ExportVideoByVideoSegmentationDataRequest, DescribeTeamsResponse, DescribeTaskDetailResponse, ExportVideoEditProjectRequest, ModifyProjectResponse, SearchMaterialRequest, DeleteTeamResponse, RevokeResourceAuthorizationResponse, HandleStreamConnectProjectRequest, DeleteTeamRequest, DescribeTeamsRequest, FlattenListMediaRequest, ExportVideoByEditorTrackDataRequest, CreateProjectRequest, ModifyMaterialRequest, DescribePlatformsResponse, DescribeTasksRequest, DescribeLoginStatusRequest, DeleteLoginStatusResponse, CreateLinkResponse, ExportVideoByTemplateResponse, ListMediaResponse, SearchMaterialResponse, ParseEventRequest, DescribeJoinTeamsRequest, DeleteMaterialRequest, CreateProjectResponse, DeleteProjectResponse, DeleteClassRequest, CreateLinkRequest, CreateClassRequest, DescribeMaterialsResponse, HandleStreamConnectProjectResponse, GrantResourceAuthorizationResponse, MoveResourceRequest, ImportMediaToProjectRequest, DescribeClassRequest, DescribeSharedSpaceResponse, DescribeAccountsResponse, MoveResourceResponse, MoveClassRequest, DeleteTeamMembersResponse, MoveClassResponse, ImportMediaToProjectResponse, ModifyTeamMemberResponse, DescribeTeamMembersResponse, AddTeamMemberResponse, CreateTeamResponse, ModifyTeamRequest, ModifyTeamMemberRequest, CreateTeamRequest, DescribeResourceAuthorizationRequest, CreateClassResponse, AddTeamMemberRequest, ExportVideoEditProjectResponse, ListMediaRequest, ModifyTeamResponse, DeleteLoginStatusRequest, GenerateVideoSegmentationSchemeByAiRequest, DeleteTeamMembersRequest, ExportVideoByTemplateRequest, DescribePlatformsRequest, DescribeResourceAuthorizationResponse, FlattenListMediaResponse, DescribeProjectsRequest, DescribeLoginStatusResponse, DescribeJoinTeamsResponse, DescribeTeamMembersRequest, DescribeProjectsResponse, ParseEventResponse, DeleteMaterialResponse, RevokeResourceAuthorizationRequest, DescribeTaskDetailRequest, DescribeTasksResponse, ModifyProjectRequest, DescribeClassResponse, GenerateVideoSegmentationSchemeByAiResponse, DescribeSharedSpaceRequest, DeleteClassResponse, GrantResourceAuthorizationRequest, ExportVideoByEditorTrackDataResponse, ImportMaterialRequest, DescribeMaterialsRequest } from "./cme_models";
 /**
  * cme client
  * @class
@@ -42,9 +42,9 @@ export declare class Client extends AbstractClient {
      */
     SearchMaterial(req: SearchMaterialRequest, cb?: (error: string, rep: SearchMaterialResponse) => void): Promise<SearchMaterialResponse>;
     /**
-     *  资源所属实体对目标实体回收目标资源的相应权限，若原本没有相应权限则不产生变更。
+     * 该接口接受制作云回调给客户的事件内容，将其转化为对应的 EventContent 结构，请不要实际调用该接口，只需要将接收到的事件内容直接使用 JSON 解析到 EventContent  即可使用。
      */
-    RevokeResourceAuthorization(req: RevokeResourceAuthorizationRequest, cb?: (error: string, rep: RevokeResourceAuthorizationResponse) => void): Promise<RevokeResourceAuthorizationResponse>;
+    ParseEvent(req: ParseEventRequest, cb?: (error: string, rep: ParseEventResponse) => void): Promise<ParseEventResponse>;
     /**
      * 获取指定的团队成员所加入的团队列表。
      */
@@ -154,6 +154,10 @@ export declare class Client extends AbstractClient {
 <li>子分类数不能超过10。</li>
      */
     CreateClass(req: CreateClassRequest, cb?: (error: string, rep: CreateClassResponse) => void): Promise<CreateClassResponse>;
+    /**
+     *  资源所属实体对目标实体回收目标资源的相应权限，若原本没有相应权限则不产生变更。
+     */
+    RevokeResourceAuthorization(req: RevokeResourceAuthorizationRequest, cb?: (error: string, rep: RevokeResourceAuthorizationResponse) => void): Promise<RevokeResourceAuthorizationResponse>;
     /**
      * 将云点播中的媒资或者用户自有媒资文件添加到媒体库中，跟项目关联，供后续视频编辑使用。目前仅普通编辑项目和智能视频拆条项目有效。
      */

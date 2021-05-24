@@ -627,13 +627,28 @@ export interface AssociateSecurityGroupsRequest {
     ForReadonlyInstance?: boolean;
 }
 /**
+ * 标签信息
+ */
+export interface TagInfoItem {
+    /**
+      * 标签键
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TagKey: string;
+    /**
+      * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TagValue: string;
+}
+/**
  * CreateAccounts返回参数结构体
  */
 export interface CreateAccountsResponse {
     /**
       * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
       */
-    AsyncRequestId?: string;
+    AsyncRequestId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1525,6 +1540,23 @@ export interface DescribeCloneListResponse {
     RequestId?: string;
 }
 /**
+ * ModifyAccountMaxUserConnections请求参数结构体
+ */
+export interface ModifyAccountMaxUserConnectionsRequest {
+    /**
+      * 云数据库账号。
+      */
+    Accounts: Array<Account>;
+    /**
+      * 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。
+      */
+    InstanceId: string;
+    /**
+      * 设置账户最大可用连接数。
+      */
+    MaxUserConnections: number;
+}
+/**
  * ReleaseIsolatedDBInstances请求参数结构体
  */
 export interface ReleaseIsolatedDBInstancesRequest {
@@ -1894,6 +1926,10 @@ export interface CreateAccountsRequest {
       * 备注信息。
       */
     Description?: string;
+    /**
+      * 新账户最大可用连接数。
+      */
+    MaxUserConnections?: number;
 }
 /**
  * CreateDBInstanceHour请求参数结构体
@@ -2763,6 +2799,19 @@ export interface VerifyRootAccountRequest {
  * SwitchForUpgrade返回参数结构体
  */
 export interface SwitchForUpgradeResponse {
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyAccountMaxUserConnections返回参数结构体
+ */
+export interface ModifyAccountMaxUserConnectionsResponse {
+    /**
+      * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
+      */
+    AsyncRequestId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -3904,7 +3953,7 @@ export interface ModifyAccountPrivilegesResponse {
     /**
       * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
       */
-    AsyncRequestId?: string;
+    AsyncRequestId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -4801,6 +4850,10 @@ export interface ModifyAccountPrivilegesRequest {
 注意，不传该参数表示清除该权限。
       */
     ColumnPrivileges?: Array<ColumnPrivilege>;
+    /**
+      * 该参数不为空时，为批量修改权限。可选值为：grant，revoke。
+      */
+    ModifyAction?: string;
 }
 /**
  * 数据库账号信息
@@ -4867,9 +4920,13 @@ export interface AccountInfo {
       */
     ModifyPasswordTime: string;
     /**
-      * 账号的创建时间
+      * 该值已废弃
       */
     CreateTime: string;
+    /**
+      * 用户最大可用实例连接数
+      */
+    MaxUserConnections: number;
 }
 /**
  * DescribeDBInstanceCharset请求参数结构体
@@ -5603,11 +5660,15 @@ export interface DescribeAccountsResponse {
     /**
       * 符合查询条件的账号数量。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 符合查询条件的账号详细信息。
       */
-    Items?: Array<AccountInfo>;
+    Items: Array<AccountInfo>;
+    /**
+      * 用户可设置实例最大连接数。
+      */
+    MaxUserConnections: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -6024,6 +6085,11 @@ export interface InstanceInfo {
       * 节点数
       */
     InstanceNodes: number;
+    /**
+      * 标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+    TagList: Array<TagInfoItem>;
 }
 /**
  * OpenWanService返回参数结构体

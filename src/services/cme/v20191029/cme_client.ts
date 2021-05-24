@@ -39,6 +39,7 @@ import {
   DeleteTeamResponse,
   StreamConnectOutput,
   VideoSegmentationProjectInput,
+  SearchScope,
   RevokeResourceAuthorizationResponse,
   HandleStreamConnectProjectRequest,
   ProjectInfo,
@@ -62,7 +63,7 @@ import {
   DescribePlatformsResponse,
   DescribeTasksRequest,
   MediaTrackItem,
-  TimeRange,
+  StorageNewFileCreatedEvent,
   DescribeLoginStatusRequest,
   MediaTrack,
   DeleteLoginStatusResponse,
@@ -74,6 +75,7 @@ import {
   ListMediaResponse,
   SearchMaterialResponse,
   StreamConnectOutputInfo,
+  ParseEventRequest,
   EmptyTrackItem,
   PlatformInfo,
   DescribeJoinTeamsRequest,
@@ -101,6 +103,7 @@ import {
   DescribeAccountsResponse,
   MoveResourceResponse,
   MoveClassRequest,
+  TimeRange,
   DeleteTeamMembersResponse,
   MoveClassResponse,
   ImportMediaToProjectResponse,
@@ -133,7 +136,7 @@ import {
   ExportVideoByTemplateRequest,
   DescribePlatformsRequest,
   OtherMaterial,
-  SearchScope,
+  EventContent,
   VideoMaterial,
   DescribeResourceAuthorizationResponse,
   FlattenListMediaResponse,
@@ -148,6 +151,7 @@ import {
   AuthorizationInfo,
   VideoEditTemplateMaterial,
   SlotReplacementInfo,
+  ParseEventResponse,
   DeleteMaterialResponse,
   RevokeResourceAuthorizationRequest,
   DescribeTaskDetailRequest,
@@ -264,13 +268,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   *  资源所属实体对目标实体回收目标资源的相应权限，若原本没有相应权限则不产生变更。
+   * 该接口接受制作云回调给客户的事件内容，将其转化为对应的 EventContent 结构，请不要实际调用该接口，只需要将接收到的事件内容直接使用 JSON 解析到 EventContent  即可使用。
    */
-  async RevokeResourceAuthorization(
-    req: RevokeResourceAuthorizationRequest,
-    cb?: (error: string, rep: RevokeResourceAuthorizationResponse) => void
-  ): Promise<RevokeResourceAuthorizationResponse> {
-    return this.request("RevokeResourceAuthorization", req, cb)
+  async ParseEvent(
+    req: ParseEventRequest,
+    cb?: (error: string, rep: ParseEventResponse) => void
+  ): Promise<ParseEventResponse> {
+    return this.request("ParseEvent", req, cb)
   }
 
   /**
@@ -524,6 +528,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateClassResponse) => void
   ): Promise<CreateClassResponse> {
     return this.request("CreateClass", req, cb)
+  }
+
+  /**
+   *  资源所属实体对目标实体回收目标资源的相应权限，若原本没有相应权限则不产生变更。
+   */
+  async RevokeResourceAuthorization(
+    req: RevokeResourceAuthorizationRequest,
+    cb?: (error: string, rep: RevokeResourceAuthorizationResponse) => void
+  ): Promise<RevokeResourceAuthorizationResponse> {
+    return this.request("RevokeResourceAuthorization", req, cb)
   }
 
   /**

@@ -81,7 +81,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口 (  DescribeDomainNameList ) 获取域名列表。
+     * 本接口 (  DescribeDomainNameList ) 我的域名列表。
 
      */
   async DescribeDomainNameList(
@@ -92,7 +92,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 ( UploadImage ) 用于上传资质照片 。
+   * 本接口 ( UploadImage ) 用于证件图片上传 。
    */
   async UploadImage(
     req: UploadImageRequest,
@@ -132,10 +132,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口 ( CreateDomainBatch ) 用于批量注册域名 。
-
-默认接口请求频率限制：20次/秒。
-     */
+   * 本接口 ( CreateDomainBatch ) 用于批量域名注册 。
+   */
   async CreateDomainBatch(
     req: CreateDomainBatchRequest,
     cb?: (error: string, rep: CreateDomainBatchResponse) => void
@@ -144,7 +142,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口 (  DescribeDomainBaseInfo) 获取域名基础信息。
+     * 本接口 (  DescribeDomainBaseInfo) 获取域名基本信息。
 
      */
   async DescribeDomainBaseInfo(
@@ -175,7 +173,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 ( DeleteTemplate ) 用于删除域名信息模板。
+   * 本接口 ( DeleteTemplate ) 用于删除信息模板。
    */
   async DeleteTemplate(
     req: DeleteTemplateRequest,
@@ -185,7 +183,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口 (DescribeTemplateList) 用于获取模板列表。
+     * 本接口 (DescribeTemplateList) 用于获取信息模板列表。
 
      */
   async DescribeTemplateList(
@@ -198,8 +196,6 @@ export class Client extends AbstractClient {
   /**
      * 本接口 ( RenewDomainBatch ) 用于批量续费域名 。
 
-默认接口请求频率限制：20次/秒。
-
      */
   async RenewDomainBatch(
     req: RenewDomainBatchRequest,
@@ -209,10 +205,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口 ( TransferInDomainBatch ) 用于批量禁止域名转移 。
-
-默认接口请求频率限制：20次/秒。
-     */
+   * 本接口 ( TransferProhibitionBatch ) 用于批量禁止域名转移 。
+   */
   async TransferProhibitionBatch(
     req: TransferProhibitionBatchRequest,
     cb?: (error: string, rep: TransferProhibitionBatchResponse) => void
@@ -241,10 +235,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口 ( CheckBatchStatus ) 用于查询批量操作日志状态 。
-
-默认接口请求频率限制：20次/秒。
-     */
+   * 本接口 ( CheckBatchStatus ) 用于查询批量操作日志状态 。
+   */
   async CheckBatchStatus(
     req: CheckBatchStatusRequest,
     cb?: (error: string, rep: CheckBatchStatusResponse) => void
@@ -263,10 +255,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口 ( TransferInDomainBatch ) 用于批量转入域名 。
-
-默认接口请求频率限制：20次/秒。
-     */
+   * 本接口 ( TransferInDomainBatch ) 用于批量转入域名 。
+   */
   async TransferInDomainBatch(
     req: TransferInDomainBatchRequest,
     cb?: (error: string, rep: TransferInDomainBatchResponse) => void
@@ -275,7 +265,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 ( UpdateProhibitionBatch ) 用于批量设置禁止域名更新 。
+   * 本接口 ( UpdateProhibitionBatch ) 用于批量禁止更新锁。
    */
   async UpdateProhibitionBatch(
     req: UpdateProhibitionBatchRequest,
@@ -285,10 +275,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口 ( ModifyDomainDNSBatch) 用于批量修改域名DNS信息 。
-
-默认接口请求频率限制：20次/秒。
-     */
+   * 本接口 ( ModifyDomainDNSBatch) 用于批量域名 DNS 修改 。
+   */
   async ModifyDomainDNSBatch(
     req: ModifyDomainDNSBatchRequest,
     cb?: (error: string, rep: ModifyDomainDNSBatchResponse) => void
@@ -297,10 +285,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口 ( SetDomainAutoRenew ) 用于设置域名自动续费。
-
-默认接口请求频率限制：20次/秒。
-     */
+   * 本接口 ( SetDomainAutoRenew ) 用于设置域名自动续费。
+   */
   async SetDomainAutoRenew(
     req: SetDomainAutoRenewRequest,
     cb?: (error: string, rep: SetDomainAutoRenewResponse) => void

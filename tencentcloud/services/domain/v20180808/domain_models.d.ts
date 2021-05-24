@@ -5,7 +5,7 @@ export interface UploadImageResponse {
     /**
       * 资质照片地址。
       */
-    AccessUrl?: string;
+    AccessUrl: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -190,7 +190,7 @@ export interface ModifyDomainDNSBatchResponse {
     /**
       * 日志ID。
       */
-    LogId?: number;
+    LogId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -240,7 +240,7 @@ export interface UpdateProhibitionBatchResponse {
     /**
       * 日志ID
       */
-    LogId?: number;
+    LogId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -318,7 +318,7 @@ export interface RenewDomainBatchResponse {
     /**
       * 操作日志ID。
       */
-    LogId?: number;
+    LogId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -365,7 +365,7 @@ export interface TransferInDomainBatchResponse {
     /**
       * 日志ID
       */
-    LogId?: number;
+    LogId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -378,7 +378,7 @@ export interface BatchModifyDomainInfoResponse {
     /**
       * 日志ID
       */
-    LogId?: number;
+    LogId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -459,11 +459,11 @@ export interface DescribeDomainNameListResponse {
       * 域名信息集合
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DomainSet?: Array<DomainList>;
+    DomainSet: Array<DomainList>;
     /**
       * 域名总数量
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -545,7 +545,7 @@ export interface DescribeDomainPriceListResponse {
     /**
       * 域名价格列表
       */
-    PriceList?: Array<PriceInfo>;
+    PriceList: Array<PriceInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -937,12 +937,12 @@ export interface DescribeBatchOperationLogsResponse {
     /**
       * 总数量
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 日志列表
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DomainBatchLogSet?: Array<DomainBatchLogSet>;
+    DomainBatchLogSet: Array<DomainBatchLogSet>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -955,7 +955,7 @@ export interface TransferProhibitionBatchResponse {
     /**
       * 日志ID
       */
-    LogId?: number;
+    LogId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -981,12 +981,12 @@ export interface DescribeBatchOperationLogDetailsResponse {
     /**
       * 总数量。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 日志详情列表。
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    DomainBatchDetailSet?: Array<DomainBatchDetailSet>;
+    DomainBatchDetailSet: Array<DomainBatchDetailSet>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -999,7 +999,7 @@ export interface CheckBatchStatusResponse {
     /**
       * 批量任务状态集
       */
-    StatusSet?: Array<BatchStatus>;
+    StatusSet: Array<BatchStatus>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -1037,7 +1037,7 @@ export interface ModifyDomainOwnerBatchResponse {
     /**
       * 日志id
       */
-    LogId?: number;
+    LogId: number;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

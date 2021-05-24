@@ -298,6 +298,16 @@ it("cdb.v20170320.DescribeTables", async function () {
     }
 })
 
+it("cdb.v20170320.DeleteTimeWindow", async function () {
+    try {
+       const data = await client.DeleteTimeWindow({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.DescribeAccountPrivileges", async function () {
     try {
        const data = await client.DescribeAccountPrivileges({})
@@ -1148,9 +1158,9 @@ it("cdb.v20170320.CreateDeployGroup", async function () {
     }
 })
 
-it("cdb.v20170320.DeleteTimeWindow", async function () {
+it("cdb.v20170320.ModifyAccountMaxUserConnections", async function () {
     try {
-       const data = await client.DeleteTimeWindow({})
+       const data = await client.ModifyAccountMaxUserConnections({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

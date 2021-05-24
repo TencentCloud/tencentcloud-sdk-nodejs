@@ -204,6 +204,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeTables", req, cb);
     }
     /**
+     * 本接口(DeleteTimeWindow)用于删除云数据库实例的维护时间窗口。删除实例维护时间窗口之后，默认的维护时间窗为 03:00-04:00，即当选择在维护时间窗口内切换访问新实例时，默认会在 03:00-04:00 点进行切换访问新实例。
+     */
+    async DeleteTimeWindow(req, cb) {
+        return this.request("DeleteTimeWindow", req, cb);
+    }
+    /**
      * 本接口(DescribeAccountPrivileges)用于查询云数据库账户支持的权限信息。
      */
     async DescribeAccountPrivileges(req, cb) {
@@ -384,7 +390,7 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("StopDBImportJob", req, cb);
     }
     /**
-     * 本接口(CreateAccounts)用于创建云数据库的账户，需要指定新的账户名和域名，以及所对应的密码，同时可以设置账号的备注信息。
+     * 本接口(CreateAccounts)用于创建云数据库的账户，需要指定新的账户名和域名，以及所对应的密码，同时可以设置账号的备注信息以及最大可用连接数。
      */
     async CreateAccounts(req, cb) {
         return this.request("CreateAccounts", req, cb);
@@ -743,10 +749,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("CreateDeployGroup", req, cb);
     }
     /**
-     * 本接口(DeleteTimeWindow)用于删除云数据库实例的维护时间窗口。删除实例维护时间窗口之后，默认的维护时间窗为 03:00-04:00，即当选择在维护时间窗口内切换访问新实例时，默认会在 03:00-04:00 点进行切换访问新实例。
+     * 本接口(ModifyAccountMaxUserConnections)用于修改云数据库账户最大可用连接数。
      */
-    async DeleteTimeWindow(req, cb) {
-        return this.request("DeleteTimeWindow", req, cb);
+    async ModifyAccountMaxUserConnections(req, cb) {
+        return this.request("ModifyAccountMaxUserConnections", req, cb);
     }
 }
 exports.Client = Client;

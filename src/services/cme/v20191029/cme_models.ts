@@ -594,6 +594,21 @@ export interface VideoSegmentationProjectInput {
 }
 
 /**
+ * 搜索空间
+ */
+export interface SearchScope {
+  /**
+   * 分类路径归属。
+   */
+  Owner: Entity
+
+  /**
+   * 按分类路径检索。 不填则默认按根分类路径检索。
+   */
+  ClassPath?: string
+}
+
+/**
  * RevokeResourceAuthorization返回参数结构体
  */
 export interface RevokeResourceAuthorizationResponse {
@@ -1348,18 +1363,41 @@ export interface MediaTrackItem {
 }
 
 /**
- * 时间范围
+ * 新文件生成事件
  */
-export interface TimeRange {
+export interface StorageNewFileCreatedEvent {
   /**
-   * 开始时间，使用 ISO 日期格式。
+   * 云点播文件  Id。
    */
-  StartTime: string
+  FileId: string
 
   /**
-   * 结束时间，使用 ISO 日期格式。
+   * 媒体 Id。
    */
-  EndTime: string
+  MaterialId: string
+
+  /**
+   * 操作者 Id。
+   */
+  Operator: string
+
+  /**
+      * 操作类型，可取值为：
+<li>Upload：上传；</li>
+<li>PullUpload：拉取上传；</li>
+<li>Record：直播录制。</li>
+      */
+  OperationType: string
+
+  /**
+   * 媒体归属。
+   */
+  Owner: Entity
+
+  /**
+   * 媒体分类路径。
+   */
+  ClassPath: string
 }
 
 /**
@@ -1569,6 +1607,21 @@ export interface StreamConnectOutputInfo {
 <li>Off ：关 。</li>
       */
   PushSwitch: string
+}
+
+/**
+ * ParseEvent请求参数结构体
+ */
+export interface ParseEventRequest {
+  /**
+   * 平台名称，指定访问的平台。
+   */
+  Platform: string
+
+  /**
+   * 回调事件内容。
+   */
+  EventContent: string
 }
 
 /**
@@ -2203,6 +2256,21 @@ export interface MoveClassRequest {
    * 操作者。填写用户的 Id，用于标识调用者及校验操作权限。
    */
   Operator?: string
+}
+
+/**
+ * 时间范围
+ */
+export interface TimeRange {
+  /**
+   * 开始时间，使用 ISO 日期格式。
+   */
+  StartTime: string
+
+  /**
+   * 结束时间，使用 ISO 日期格式。
+   */
+  EndTime: string
 }
 
 /**
@@ -2931,18 +2999,19 @@ export interface OtherMaterial {
 }
 
 /**
- * 搜索空间
+ * 回调事件内容。
  */
-export interface SearchScope {
+export interface EventContent {
   /**
-   * 分类路径归属。
-   */
-  Owner: Entity
+      * 事件类型，可取值为：
+<li>Storage.NewFileCreated：新文件产生。</li>
+      */
+  EventType: string
 
   /**
-   * 按分类路径检索。 不填则默认按根分类路径检索。
+   * 新文件产生事件信息。仅当 EventType 为 Storage.NewFileCreated 时有效。
    */
-  ClassPath?: string
+  StorageNewFileCreatedEvent: StorageNewFileCreatedEvent
 }
 
 /**
@@ -3306,6 +3375,21 @@ export interface SlotReplacementInfo {
    * 媒体替换信息，仅当要替换的媒体类型为音频、视频、图片时有效。
    */
   MediaReplacementInfo?: MediaReplacementInfo
+}
+
+/**
+ * ParseEvent返回参数结构体
+ */
+export interface ParseEventResponse {
+  /**
+   * 事件内容。
+   */
+  EventContent: EventContent
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -98,9 +98,9 @@ it("cme.v20191029.SearchMaterial", async function () {
     }
 })
 
-it("cme.v20191029.RevokeResourceAuthorization", async function () {
+it("cme.v20191029.ParseEvent", async function () {
     try {
-       const data = await client.RevokeResourceAuthorization({})
+       const data = await client.ParseEvent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -341,6 +341,16 @@ it("cme.v20191029.ModifyProject", async function () {
 it("cme.v20191029.CreateClass", async function () {
     try {
        const data = await client.CreateClass({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cme.v20191029.RevokeResourceAuthorization", async function () {
+    try {
+       const data = await client.RevokeResourceAuthorization({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -78,10 +78,10 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("SearchMaterial", req, cb);
     }
     /**
-     *  资源所属实体对目标实体回收目标资源的相应权限，若原本没有相应权限则不产生变更。
+     * 该接口接受制作云回调给客户的事件内容，将其转化为对应的 EventContent 结构，请不要实际调用该接口，只需要将接收到的事件内容直接使用 JSON 解析到 EventContent  即可使用。
      */
-    async RevokeResourceAuthorization(req, cb) {
-        return this.request("RevokeResourceAuthorization", req, cb);
+    async ParseEvent(req, cb) {
+        return this.request("ParseEvent", req, cb);
     }
     /**
      * 获取指定的团队成员所加入的团队列表。
@@ -239,6 +239,12 @@ class Client extends abstract_client_1.AbstractClient {
      */
     async CreateClass(req, cb) {
         return this.request("CreateClass", req, cb);
+    }
+    /**
+     *  资源所属实体对目标实体回收目标资源的相应权限，若原本没有相应权限则不产生变更。
+     */
+    async RevokeResourceAuthorization(req, cb) {
+        return this.request("RevokeResourceAuthorization", req, cb);
     }
     /**
      * 将云点播中的媒资或者用户自有媒资文件添加到媒体库中，跟项目关联，供后续视频编辑使用。目前仅普通编辑项目和智能视频拆条项目有效。

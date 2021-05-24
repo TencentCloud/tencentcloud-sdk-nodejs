@@ -28,14 +28,14 @@ class Client extends abstract_client_1.AbstractClient {
         super("domain.tencentcloudapi.com", "2018-08-08", clientConfig);
     }
     /**
-     * 本接口 (  DescribeDomainNameList ) 获取域名列表。
+     * 本接口 (  DescribeDomainNameList ) 我的域名列表。
 
      */
     async DescribeDomainNameList(req, cb) {
         return this.request("DescribeDomainNameList", req, cb);
     }
     /**
-     * 本接口 ( UploadImage ) 用于上传资质照片 。
+     * 本接口 ( UploadImage ) 用于证件图片上传 。
      */
     async UploadImage(req, cb) {
         return this.request("UploadImage", req, cb);
@@ -59,15 +59,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("ModifyDomainOwnerBatch", req, cb);
     }
     /**
-     * 本接口 ( CreateDomainBatch ) 用于批量注册域名 。
-
-默认接口请求频率限制：20次/秒。
+     * 本接口 ( CreateDomainBatch ) 用于批量域名注册 。
      */
     async CreateDomainBatch(req, cb) {
         return this.request("CreateDomainBatch", req, cb);
     }
     /**
-     * 本接口 (  DescribeDomainBaseInfo) 获取域名基础信息。
+     * 本接口 (  DescribeDomainBaseInfo) 获取域名基本信息。
 
      */
     async DescribeDomainBaseInfo(req, cb) {
@@ -86,13 +84,13 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeBatchOperationLogDetails", req, cb);
     }
     /**
-     * 本接口 ( DeleteTemplate ) 用于删除域名信息模板。
+     * 本接口 ( DeleteTemplate ) 用于删除信息模板。
      */
     async DeleteTemplate(req, cb) {
         return this.request("DeleteTemplate", req, cb);
     }
     /**
-     * 本接口 (DescribeTemplateList) 用于获取模板列表。
+     * 本接口 (DescribeTemplateList) 用于获取信息模板列表。
 
      */
     async DescribeTemplateList(req, cb) {
@@ -101,16 +99,12 @@ class Client extends abstract_client_1.AbstractClient {
     /**
      * 本接口 ( RenewDomainBatch ) 用于批量续费域名 。
 
-默认接口请求频率限制：20次/秒。
-
      */
     async RenewDomainBatch(req, cb) {
         return this.request("RenewDomainBatch", req, cb);
     }
     /**
-     * 本接口 ( TransferInDomainBatch ) 用于批量禁止域名转移 。
-
-默认接口请求频率限制：20次/秒。
+     * 本接口 ( TransferProhibitionBatch ) 用于批量禁止域名转移 。
      */
     async TransferProhibitionBatch(req, cb) {
         return this.request("TransferProhibitionBatch", req, cb);
@@ -129,8 +123,6 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 本接口 ( CheckBatchStatus ) 用于查询批量操作日志状态 。
-
-默认接口请求频率限制：20次/秒。
      */
     async CheckBatchStatus(req, cb) {
         return this.request("CheckBatchStatus", req, cb);
@@ -143,30 +135,24 @@ class Client extends abstract_client_1.AbstractClient {
     }
     /**
      * 本接口 ( TransferInDomainBatch ) 用于批量转入域名 。
-
-默认接口请求频率限制：20次/秒。
      */
     async TransferInDomainBatch(req, cb) {
         return this.request("TransferInDomainBatch", req, cb);
     }
     /**
-     * 本接口 ( UpdateProhibitionBatch ) 用于批量设置禁止域名更新 。
+     * 本接口 ( UpdateProhibitionBatch ) 用于批量禁止更新锁。
      */
     async UpdateProhibitionBatch(req, cb) {
         return this.request("UpdateProhibitionBatch", req, cb);
     }
     /**
-     * 本接口 ( ModifyDomainDNSBatch) 用于批量修改域名DNS信息 。
-
-默认接口请求频率限制：20次/秒。
+     * 本接口 ( ModifyDomainDNSBatch) 用于批量域名 DNS 修改 。
      */
     async ModifyDomainDNSBatch(req, cb) {
         return this.request("ModifyDomainDNSBatch", req, cb);
     }
     /**
      * 本接口 ( SetDomainAutoRenew ) 用于设置域名自动续费。
-
-默认接口请求频率限制：20次/秒。
      */
     async SetDomainAutoRenew(req, cb) {
         return this.request("SetDomainAutoRenew", req, cb);
