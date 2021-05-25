@@ -156,6 +156,26 @@ export interface DescribeSREInstanceAccessAddressResponse {
 }
 
 /**
+ * DescribeConfig请求参数结构体
+ */
+export interface DescribeConfigRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+
+  /**
+   * 配置中心类型（consul、zookeeper、apollo等）
+   */
+  Type: string
+
+  /**
+   * 配置项的节点路径key
+   */
+  Key: string
+}
+
+/**
  * DescribeSREInstances返回参数结构体
  */
 export interface DescribeSREInstancesResponse {
@@ -168,6 +188,36 @@ export interface DescribeSREInstancesResponse {
    * 实例记录
    */
   Content: Array<SREInstance>
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeConfig返回参数结构体
+ */
+export interface DescribeConfigResponse {
+  /**
+   * 配置项或路径key
+   */
+  Key: string
+
+  /**
+   * 配置项的值
+   */
+  Value: string
+
+  /**
+   * 当前key是否为路径
+   */
+  IsDir: boolean
+
+  /**
+   * 当前key下的子路径
+   */
+  List: Array<string>
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -209,6 +259,12 @@ export interface ManageConfigResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   Result: string
+
+  /**
+      * 操作是否成功
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OpResult: boolean
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

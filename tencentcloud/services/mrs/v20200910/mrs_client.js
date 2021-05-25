@@ -20,36 +20,36 @@ exports.Client = void 0;
  */
 const abstract_client_1 = require("../../../common/abstract_client");
 /**
- * tse client
+ * mrs client
  * @class
  */
 class Client extends abstract_client_1.AbstractClient {
     constructor(clientConfig) {
-        super("tse.tencentcloudapi.com", "2020-12-07", clientConfig);
+        super("mrs.tencentcloudapi.com", "2020-09-10", clientConfig);
     }
     /**
-     * 用于查询微服务注册中心实例列表
+     * 图片分类
      */
-    async DescribeSREInstances(req, cb) {
-        return this.request("DescribeSREInstances", req, cb);
+    async ImageToClass(req, cb) {
+        return this.request("ImageToClass", req, cb);
     }
     /**
-     * 管理配置
+     * 图片转结构化对象
      */
-    async ManageConfig(req, cb) {
-        return this.request("ManageConfig", req, cb);
+    async ImageToObject(req, cb) {
+        return this.request("ImageToObject", req, cb);
     }
     /**
-     * 查询微服务注册引擎实例访问地址
+     * 文本分类
      */
-    async DescribeSREInstanceAccessAddress(req, cb) {
-        return this.request("DescribeSREInstanceAccessAddress", req, cb);
+    async TextToClass(req, cb) {
+        return this.request("TextToClass", req, cb);
     }
     /**
-     * 查看配置项
+     * 文本转结构化对象
      */
-    async DescribeConfig(req, cb) {
-        return this.request("DescribeConfig", req, cb);
+    async TextToObject(req, cb) {
+        return this.request("TextToObject", req, cb);
     }
 }
 exports.Client = Client;

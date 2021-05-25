@@ -114,6 +114,17 @@ export interface CreateLiveCertRequest {
 }
 
 /**
+ * HLS专属录制参数
+ */
+export interface HlsSpecialParam {
+  /**
+      * HLS续流超时时间。
+取值范围[0，1800]。
+      */
+  FlowContinueDuration?: number
+}
+
+/**
  * StopRecordTask返回参数结构体
  */
 export interface StopRecordTaskResponse {
@@ -424,6 +435,123 @@ export interface DescribeLiveCallbackTemplateResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateLivePullStreamTask请求参数结构体
+ */
+export interface CreateLivePullStreamTaskRequest {
+  /**
+      * 拉流源的类型：
+PullLivePushLive -直播，
+PullVodPushLive -点播。
+      */
+  SourceType: string
+
+  /**
+      * 拉流源 url 列表。
+SourceType 为直播（PullLivePushLive）只可以填1个，
+SourceType 为点播（PullVodPushLive）可以填多个，上限30个。
+当前支持的文件格式：flv，mp4，hls。
+当前支持的拉流协议：http，https，rtmp。
+      */
+  SourceUrls: Array<string>
+
+  /**
+      * 推流域名。
+将拉取过来的流推到该域名。
+注意：请使用已在云直播配置的推流域名。
+      */
+  DomainName: string
+
+  /**
+      * 推流路径。
+将拉取过来的流推到该路径。
+      */
+  AppName: string
+
+  /**
+      * 推流名称。
+将拉取过来的流推到该流名称。
+      */
+  StreamName: string
+
+  /**
+      * 开始时间。
+使用 UTC 格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+  StartTime: string
+
+  /**
+      * 结束时间，注意：
+1. 结束时间必须大于开始时间；
+2. 结束时间和开始时间必须大于当前时间；
+3. 结束时间 和 开始时间 间隔必须小于七天。
+使用 UTC 格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+  EndTime: string
+
+  /**
+   * 任务操作人备注。
+   */
+  Operator: string
+
+  /**
+      * 推流参数。
+推流时携带自定义参数。
+示例：
+bak=1&test=2 。
+      */
+  PushArgs?: string
+
+  /**
+      * 选择需要回调的事件（不填则回调全部）：
+TaskStart：任务启动回调，
+TaskExit：任务停止回调，
+VodSourceFileStart：从点播源文件开始拉流回调，
+VodSourceFileFinish：从点播源文件拉流结束回调，
+ResetTaskConfig：任务更新回调。
+      */
+  CallbackEvents?: Array<string>
+
+  /**
+      * 点播拉流转推循环次数。默认：-1。
+-1：无限循环，直到任务结束。
+0：不循环。
+>0：具体循环次数。次数和时间以先结束的为准。
+注意：该配置仅对拉流源为点播时生效。
+      */
+  VodLoopTimes?: string
+
+  /**
+      * 点播更新SourceUrls后的播放方式：
+ImmediateNewSource：立即播放新的拉流源内容；
+ContinueBreakPoint：播放完当前正在播放的点播 url 后再使用新的拉流源播放。（旧拉流源未播放的点播 url 不会再播放）
+
+注意：该配置生效仅对变更前拉流源为点播时生效。
+      */
+  VodRefreshType?: string
+
+  /**
+      * 自定义回调地址。
+拉流转推任务相关事件会回调到该地址。
+      */
+  CallbackUrl?: string
+
+  /**
+      * 其他参数。
+示例: ignore_region  用于忽略传入地域, 内部按负载分配。
+      */
+  ExtraCmd?: string
+
+  /**
+   * 任务描述，限制 512 字节。
+   */
+  Comment?: string
 }
 
 /**
@@ -894,6 +1022,21 @@ export interface DescribeLiveCertRequest {
 }
 
 /**
+ * CreateLivePullStreamTask返回参数结构体
+ */
+export interface CreateLivePullStreamTaskResponse {
+  /**
+   * 任务 Id 。
+   */
+  TaskId: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyLivePushAuthKey请求参数结构体
  */
 export interface ModifyLivePushAuthKeyRequest {
@@ -1131,46 +1274,18 @@ export interface DescribePlayErrorCodeDetailInfoListRequest {
 }
 
 /**
- * DescribeBillBandwidthAndFluxList请求参数结构体
+ * DeleteLivePullStreamTask请求参数结构体
  */
-export interface DescribeBillBandwidthAndFluxListRequest {
+export interface DeleteLivePullStreamTaskRequest {
   /**
-   * 起始时间点，格式为yyyy-mm-dd HH:MM:SS。
+   * 任务 Id。
    */
-  StartTime: string
+  TaskId: string
 
   /**
-   * 结束时间点，格式为yyyy-mm-dd HH:MM:SS，起始和结束时间跨度不支持超过31天。支持最近3年的数据查询
+   * 操作人姓名。
    */
-  EndTime: string
-
-  /**
-   * 直播播放域名，若不填，表示总体数据。
-   */
-  PlayDomains?: Array<string>
-
-  /**
-      * 可选值：
-Mainland：查询国内数据，
-Oversea：则查询国外数据，
-默认：查询国内+国外的数据。
-注：LEB（快直播）只支持国内+国外数据查询。
-      */
-  MainlandOrOversea?: string
-
-  /**
-      * 数据粒度，支持如下粒度：
-5：5分钟粒度，（跨度不支持超过1天），
-60：1小时粒度（跨度不支持超过一个月），
-1440：天粒度（跨度不支持超过一个月）。
-默认值：5。
-      */
-  Granularity?: number
-
-  /**
-   * 服务名称，可选值包括LVB(标准直播)，LEB(快直播)，不填则查LVB+LEB总值。
-   */
-  ServiceName?: string
+  Operator: string
 }
 
 /**
@@ -2192,6 +2307,110 @@ export interface TimeValue {
 }
 
 /**
+ * ModifyLivePullStreamTask请求参数结构体
+ */
+export interface ModifyLivePullStreamTaskRequest {
+  /**
+   * 任务Id。
+   */
+  TaskId: string
+
+  /**
+   * 操作人姓名。
+   */
+  Operator: string
+
+  /**
+      * 拉流源url列表。
+SourceType为直播（PullLivePushLive）只可以填1个，
+SourceType为点播（PullVodPushLive）可以填多个，上限30个。
+      */
+  SourceUrls?: Array<string>
+
+  /**
+      * 开始时间。
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+  StartTime?: string
+
+  /**
+      * 结束时间，注意：
+1. 结束时间必须大于开始时间；
+2. 结束时间和开始时间必须大于当前时间；
+3. 结束时间 和 开始时间 间隔必须小于七天。
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+  EndTime?: string
+
+  /**
+      * 点播拉流转推循环次数。
+-1：无限循环，直到任务结束。
+0：不循环。
+>0：具体循环次数。次数和时间以先结束的为准。
+注意：拉流源为点播，该配置生效。
+      */
+  VodLoopTimes?: number
+
+  /**
+      * 点播更新SourceUrls后的播放方式：
+ImmediateNewSource：立即从更新的拉流源开始播放；
+ContinueBreakPoint：从上次断流url源的断点处继续，结束后再使用新的拉流源。
+注意：拉流源为点播，该配置生效。
+      */
+  VodRefreshType?: string
+
+  /**
+      * 任务状态：
+enable - 启用，
+pause - 暂停。
+      */
+  Status?: string
+
+  /**
+      * 选择需要回调的事件（不填则回调全部）：
+TaskStart：任务启动回调，
+TaskExit：任务停止回调，
+VodSourceFileStart：从点播源文件开始拉流回调，
+VodSourceFileFinish：从点播源文件拉流结束回调，
+ResetTaskConfig：任务更新回调。
+      */
+  CallbackEvents?: Array<string>
+
+  /**
+      * 自定义回调地址。
+相关事件会回调到该地址。
+      */
+  CallbackUrl?: string
+
+  /**
+      * 指定播放文件索引。
+注意：
+1. 从1开始，不大于SourceUrls中文件个数。
+2. 只有VodRefreshType为ContinueBeginPoint时指定才有效。
+3. 只有当前任务处于暂停时，指定后启动任务才会生效。
+      */
+  FileIndex?: number
+
+  /**
+      * 指定播放文件偏移。
+注意：
+1. 单位：秒，配合FileIndex使用。
+2. 只有VodRefreshType为ContinueBeginPoint时指定才有效。
+3. 只有当前任务处于暂停时，指定后启动任务才会生效。
+      */
+  OffsetTime?: number
+
+  /**
+   * 任务备注。
+   */
+  Comment?: string
+}
+
+/**
  * 拉流配置。
  */
 export interface PullStreamConfig {
@@ -3138,6 +3357,60 @@ export interface DropLiveStreamRequest {
 }
 
 /**
+ * StopLiveRecord返回参数结构体
+ */
+export interface StopLiveRecordResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateLiveWatermark请求参数结构体
+ */
+export interface UpdateLiveWatermarkRequest {
+  /**
+      * 水印 ID。
+在添加水印接口 [AddLiveWatermark](/document/product/267/30154) 调用返回值中获取水印 ID。
+      */
+  WatermarkId: number
+
+  /**
+      * 水印图片 URL。
+URL中禁止包含的字符：
+ ;(){}$>`#"\'|
+      */
+  PictureUrl: string
+
+  /**
+   * 显示位置，X轴偏移，单位是百分比，默认 0。
+   */
+  XPosition: number
+
+  /**
+   * 显示位置，Y轴偏移，单位是百分比，默认 0。
+   */
+  YPosition: number
+
+  /**
+      * 水印名称。
+最长16字节。
+      */
+  WatermarkName?: string
+
+  /**
+   * 水印宽度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始宽度。
+   */
+  Width?: number
+
+  /**
+   * 水印高度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始高度。
+   */
+  Height?: number
+}
+
+/**
  * CreateCommonMixStream请求参数结构体
  */
 export interface CreateCommonMixStreamRequest {
@@ -3728,6 +4001,29 @@ export interface CreatePullStreamConfigRequest {
 export type DescribeLiveCertsRequest = null
 
 /**
+ * DescribeLivePullStreamTasks请求参数结构体
+ */
+export interface DescribeLivePullStreamTasksRequest {
+  /**
+      * 任务 ID。 
+来源：调用 CreateLivePullStreamTask 接口时返回。
+不填默认查询所有任务，按更新时间倒序排序。
+      */
+  TaskId?: string
+
+  /**
+   * 取得第几页，默认值：1。
+   */
+  PageNum?: number
+
+  /**
+      * 分页大小，默认值：10。
+取值范围：1~20 之前的任意整数。
+      */
+  PageSize?: number
+}
+
+/**
  * 下行播放统计指标
  */
 export interface CdnPlayStatData {
@@ -3963,6 +4259,16 @@ export interface DescribeLivePlayAuthKeyRequest {
 }
 
 /**
+ * DeleteLivePullStreamTask返回参数结构体
+ */
+export interface DeleteLivePullStreamTaskResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeLiveForbidStreamList返回参数结构体
  */
 export interface DescribeLiveForbidStreamListResponse {
@@ -4025,6 +4331,46 @@ export interface DescribeStreamPushInfoListRequest {
    * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
    */
   AppName?: string
+}
+
+/**
+ * DescribeLivePullStreamTasks返回参数结构体
+ */
+export interface DescribeLivePullStreamTasksResponse {
+  /**
+   * 直播拉流任务信息列表。
+   */
+  TaskInfos: Array<PullStreamTaskInfo>
+
+  /**
+   * 分页的页码。
+   */
+  PageNum: number
+
+  /**
+   * 每页大小。
+   */
+  PageSize: number
+
+  /**
+   * 符合条件的总个数。
+   */
+  TotalNum: number
+
+  /**
+   * 总页数。
+   */
+  TotalPage: number
+
+  /**
+   * 限制可创建的最大任务数。
+   */
+  LimitTaskNum: number
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4902,47 +5248,30 @@ export interface CancelCommonMixStreamRequest {
 }
 
 /**
- * UpdateLiveWatermark请求参数结构体
+ * 直播拉流当前正在拉的文件信息。
  */
-export interface UpdateLiveWatermarkRequest {
+export interface RecentPullInfo {
   /**
-      * 水印 ID。
-在添加水印接口 [AddLiveWatermark](/document/product/267/30154) 调用返回值中获取水印 ID。
+   * 当前正在拉的文件地址。
+   */
+  FileUrl: string
+
+  /**
+   * 当前正在拉的文件偏移，单位：秒。
+   */
+  OffsetTime: number
+
+  /**
+      * 最新上报偏移信息时间。UTC格式。
+如：2020-07-23T03:20:39Z。
+注意：与北京时间相差八小时。
       */
-  WatermarkId: number
+  ReportTime: string
 
   /**
-      * 水印图片 URL。
-URL中禁止包含的字符：
- ;(){}$>`#"\'|
-      */
-  PictureUrl: string
-
-  /**
-   * 显示位置，X轴偏移，单位是百分比，默认 0。
+   * 已经轮播的次数。
    */
-  XPosition: number
-
-  /**
-   * 显示位置，Y轴偏移，单位是百分比，默认 0。
-   */
-  YPosition: number
-
-  /**
-      * 水印名称。
-最长16字节。
-      */
-  WatermarkName?: string
-
-  /**
-   * 水印宽度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始宽度。
-   */
-  Width?: number
-
-  /**
-   * 水印高度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始高度。
-   */
-  Height?: number
+  LoopedTimes: number
 }
 
 /**
@@ -6150,14 +6479,46 @@ export interface PlaySumStatInfo {
 export type DescribeLiveTranscodeTemplatesRequest = null
 
 /**
- * HLS专属录制参数
+ * DescribeBillBandwidthAndFluxList请求参数结构体
  */
-export interface HlsSpecialParam {
+export interface DescribeBillBandwidthAndFluxListRequest {
   /**
-      * HLS续流超时时间。
-取值范围[0，1800]。
+   * 起始时间点，格式为yyyy-mm-dd HH:MM:SS。
+   */
+  StartTime: string
+
+  /**
+   * 结束时间点，格式为yyyy-mm-dd HH:MM:SS，起始和结束时间跨度不支持超过31天。支持最近3年的数据查询
+   */
+  EndTime: string
+
+  /**
+   * 直播播放域名，若不填，表示总体数据。
+   */
+  PlayDomains?: Array<string>
+
+  /**
+      * 可选值：
+Mainland：查询国内数据，
+Oversea：则查询国外数据，
+默认：查询国内+国外的数据。
+注：LEB（快直播）只支持国内+国外数据查询。
       */
-  FlowContinueDuration?: number
+  MainlandOrOversea?: string
+
+  /**
+      * 数据粒度，支持如下粒度：
+5：5分钟粒度，（跨度不支持超过1天），
+60：1小时粒度（跨度不支持超过一个月），
+1440：天粒度（跨度不支持超过一个月）。
+默认值：5。
+      */
+  Granularity?: number
+
+  /**
+   * 服务名称，可选值包括LVB(标准直播)，LEB(快直播)，不填则查LVB+LEB总值。
+   */
+  ServiceName?: string
 }
 
 /**
@@ -6697,13 +7058,169 @@ export interface DeleteRecordTaskRequest {
 }
 
 /**
- * StopLiveRecord返回参数结构体
+ * 直播拉流任务信息。
  */
-export interface StopLiveRecordResponse {
+export interface PullStreamTaskInfo {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 拉流任务Id。
    */
-  RequestId?: string
+  TaskId: string
+
+  /**
+      * 拉流源的类型：
+PullLivePushLive -直播，
+PullVodPushLive -点播。
+      */
+  SourceType: string
+
+  /**
+      * 拉流源url列表。
+SourceType为直播（PullLiveToLive）只可以填1个，
+SourceType为点播（PullVodToLive）可以填多个，上限10个。
+      */
+  SourceUrls: Array<string>
+
+  /**
+      * 推流域名。
+将拉到的源推到该域名。
+      */
+  DomainName: string
+
+  /**
+      * 推流路径。
+将拉到的源推到该路径。
+      */
+  AppName: string
+
+  /**
+      * 流名称。
+将拉到的源推到该流名称。
+      */
+  StreamName: string
+
+  /**
+      * 推流参数。
+推流携带的自定义参数。
+      */
+  PushArgs: string
+
+  /**
+      * 开始时间。
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+  StartTime: string
+
+  /**
+      * 结束时间，注意：
+1. 结束时间必须大于开始时间；
+2. 结束时间和开始时间必须大于当前时间；
+3. 结束时间 和 开始时间 间隔必须小于七天。
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+  EndTime: string
+
+  /**
+      * 拉流源所在地域（请就近选取）：
+ap-beijing - 华北地区(北京)，
+ap-shanghai -华东地区(上海)，
+ap-guangzhou -华南地区(广州)，
+ap-mumbai - 印度。
+      */
+  Region: string
+
+  /**
+      * 点播拉流转推循环次数。
+-1：无限循环，直到任务结束。
+0：不循环。
+>0：具体循环次数。次数和时间以先结束的为准。
+注意：拉流源为点播，该配置生效。
+      */
+  VodLoopTimes: number
+
+  /**
+      * 点播更新SourceUrls后的播放方式：
+ImmediateNewSource：立即从更新的拉流源开始播放；
+ContinueBreakPoint：从上次断流url源的断点处继续，结束后再使用新的拉流源。
+
+注意：拉流源为点播，该配置生效。
+      */
+  VodRefreshType: string
+
+  /**
+      * 任务创建时间。
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+  CreateTime: string
+
+  /**
+      * 任务更新时间。
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+      */
+  UpdateTime: string
+
+  /**
+   * 创建任务的操作者。
+   */
+  CreateBy: string
+
+  /**
+   * 最后更新任务的操作者。
+   */
+  UpdateBy: string
+
+  /**
+   * 回调地址。
+   */
+  CallbackUrl: string
+
+  /**
+      * 选择需要回调的事件：
+TaskStart：任务启动回调，
+TaskExit：任务停止回调，
+VodSourceFileStart：从点播源文件开始拉流回调，
+VodSourceFileFinish：从点播源文件拉流结束回调，
+ResetTaskConfig：任务更新回调。
+      */
+  CallbackEvents: Array<string>
+
+  /**
+      * 注意：该信息暂不返回。
+最后一次回调信息。
+      */
+  CallbackInfo: string
+
+  /**
+      * 注意：该信息暂不返回。
+错误信息。
+      */
+  ErrorInfo: string
+
+  /**
+      * 状态。
+enable：生效中。
+pause：暂停中。
+      */
+  Status: string
+
+  /**
+      * 注意：该信息仅在查询单个任务时返回。
+任务最新拉流信息。
+包含：源 url，偏移时间，上报时间。
+      */
+  RecentPullInfo: RecentPullInfo
+
+  /**
+   * 任务备注信息。
+   */
+  Comment: string
 }
 
 /**
@@ -6783,6 +7300,16 @@ export interface DescribeVisitTopSumInfoListResponse {
    */
   DataInfoList?: Array<PlaySumStatInfo>
 
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyLivePullStreamTask返回参数结构体
+ */
+export interface ModifyLivePullStreamTaskResponse {
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */

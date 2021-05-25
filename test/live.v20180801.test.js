@@ -468,9 +468,29 @@ it("live.v20180801.DeleteLiveSnapshotRule", async function () {
     }
 })
 
+it("live.v20180801.DeleteLivePullStreamTask", async function () {
+    try {
+       const data = await client.DeleteLivePullStreamTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DescribeLiveForbidStreamList", async function () {
     try {
        const data = await client.DescribeLiveForbidStreamList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.CreateLivePullStreamTask", async function () {
+    try {
+       const data = await client.CreateLivePullStreamTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -501,6 +521,16 @@ it("live.v20180801.ModifyLiveCert", async function () {
 it("live.v20180801.DescribeLiveDomains", async function () {
     try {
        const data = await client.DescribeLiveDomains({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.ModifyLivePullStreamTask", async function () {
+    try {
+       const data = await client.ModifyLivePullStreamTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -561,6 +591,16 @@ it("live.v20180801.DeleteLiveDomain", async function () {
 it("live.v20180801.ModifyLiveCallbackTemplate", async function () {
     try {
        const data = await client.ModifyLiveCallbackTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.DescribeLivePullStreamTasks", async function () {
+    try {
+       const data = await client.DescribeLivePullStreamTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

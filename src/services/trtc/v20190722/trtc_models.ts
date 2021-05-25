@@ -184,6 +184,11 @@ export interface LayoutParams {
    * 悬浮模板、九宫格、屏幕分享模板生效，用于控制纯音频上行是否占用画面布局位置。设置为0是代表后台默认处理方式，悬浮小画面占布局位置，九宫格画面占布局位置、屏幕分享小画面不占布局位置；设置为1时代表纯音频上行占布局位置；设置为2时代表纯音频上行不占布局位置。默认为0。
    */
   PureAudioHoldPlaceMode?: number
+
+  /**
+   * 水印参数。
+   */
+  WaterMarkParams?: WaterMarkParams
 }
 
 /**
@@ -1668,6 +1673,36 @@ export interface CreatePictureResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * MCU混流水印参数
+ */
+export interface WaterMarkParams {
+  /**
+   * 混流-水印图片ID。取值为实时音视频控制台上传的图片ID。
+   */
+  WaterMarkId: number
+
+  /**
+   * 混流-水印宽。单位为像素值。
+   */
+  WaterMarkWidth: number
+
+  /**
+   * 混流-水印高。单位为像素值。
+   */
+  WaterMarkHeight: number
+
+  /**
+   * 水印在输出时的X偏移。单位为像素值。
+   */
+  LocationX: number
+
+  /**
+   * 水印在输出时的Y偏移。单位为像素值。
+   */
+  LocationY: number
 }
 
 /**

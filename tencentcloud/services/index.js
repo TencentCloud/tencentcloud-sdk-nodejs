@@ -198,6 +198,8 @@ var monitor_1 = require("./monitor");
 Object.defineProperty(exports, "monitor", { enumerable: true, get: function () { return monitor_1.monitor; } });
 var mps_1 = require("./mps");
 Object.defineProperty(exports, "mps", { enumerable: true, get: function () { return mps_1.mps; } });
+var mrs_1 = require("./mrs");
+Object.defineProperty(exports, "mrs", { enumerable: true, get: function () { return mrs_1.mrs; } });
 var ms_1 = require("./ms");
 Object.defineProperty(exports, "ms", { enumerable: true, get: function () { return ms_1.ms; } });
 var msp_1 = require("./msp");

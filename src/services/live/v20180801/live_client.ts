@@ -22,6 +22,7 @@ import {
   BillDataInfo,
   EnableLiveDomainResponse,
   CreateLiveCertRequest,
+  HlsSpecialParam,
   StopRecordTaskResponse,
   DescribeDeliverBandwidthListResponse,
   DeleteLiveRecordRuleRequest,
@@ -33,6 +34,7 @@ import {
   ResumeDelayLiveStreamRequest,
   DescribeLiveWatermarkRulesResponse,
   DescribeLiveCallbackTemplateResponse,
+  CreateLivePullStreamTaskRequest,
   DeleteLiveSnapshotTemplateRequest,
   DescribeGroupProIspPlayInfoListResponse,
   PushAuthKeyInfo,
@@ -51,6 +53,7 @@ import {
   DescribeStreamPlayInfoListResponse,
   DescribeScreenShotSheetNumListResponse,
   DescribeLiveCertRequest,
+  CreateLivePullStreamTaskResponse,
   ModifyLivePushAuthKeyRequest,
   DeleteLiveCallbackTemplateRequest,
   DescribeLiveStreamStateRequest,
@@ -60,7 +63,7 @@ import {
   DescribeLiveTranscodeRulesRequest,
   DeleteLiveSnapshotRuleRequest,
   DescribePlayErrorCodeDetailInfoListRequest,
-  DescribeBillBandwidthAndFluxListRequest,
+  DeleteLivePullStreamTaskRequest,
   CommonMixOutputParams,
   DescribeUploadStreamNumsRequest,
   DescribeLiveSnapshotRulesResponse,
@@ -101,6 +104,7 @@ import {
   ForbidLiveStreamRequest,
   DescribeLiveDomainsResponse,
   TimeValue,
+  ModifyLivePullStreamTaskRequest,
   PullStreamConfig,
   CreateLiveRecordResponse,
   RuleInfo,
@@ -139,6 +143,8 @@ import {
   CreateLiveTranscodeRuleRequest,
   DescribeLiveWatermarkRulesRequest,
   DropLiveStreamRequest,
+  StopLiveRecordResponse,
+  UpdateLiveWatermarkRequest,
   CreateCommonMixStreamRequest,
   RefererAuthConfig,
   CreateLiveCertResponse,
@@ -156,6 +162,7 @@ import {
   DescribeLivePackageInfoRequest,
   CreatePullStreamConfigRequest,
   DescribeLiveCertsRequest,
+  DescribeLivePullStreamTasksRequest,
   CdnPlayStatData,
   AddLiveDomainResponse,
   DescribeHttpStatusInfoListRequest,
@@ -164,8 +171,10 @@ import {
   ProIspPlayCodeDataInfo,
   DescribeProvinceIspPlayInfoListRequest,
   DescribeLivePlayAuthKeyRequest,
+  DeleteLivePullStreamTaskResponse,
   DescribeLiveForbidStreamListResponse,
   DescribeStreamPushInfoListRequest,
+  DescribeLivePullStreamTasksResponse,
   ModifyLivePushAuthKeyResponse,
   DomainInfoList,
   DescribeLiveWatermarkResponse,
@@ -200,7 +209,7 @@ import {
   BandwidthInfo,
   DescribeLogDownloadListResponse,
   CancelCommonMixStreamRequest,
-  UpdateLiveWatermarkRequest,
+  RecentPullInfo,
   CertInfo,
   DescribeRecordTaskResponse,
   DescribeLiveDelayInfoListResponse,
@@ -251,7 +260,7 @@ import {
   CallBackRuleInfo,
   PlaySumStatInfo,
   DescribeLiveTranscodeTemplatesRequest,
-  HlsSpecialParam,
+  DescribeBillBandwidthAndFluxListRequest,
   DescribeLiveRecordRulesResponse,
   CreateLiveSnapshotTemplateRequest,
   DescribeLiveDomainPlayInfoListResponse,
@@ -278,9 +287,10 @@ import {
   DescribeAllStreamPlayInfoListRequest,
   DescribeLiveDomainResponse,
   DeleteRecordTaskRequest,
-  StopLiveRecordResponse,
+  PullStreamTaskInfo,
   DescribeStreamDayPlayInfoListResponse,
   DescribeVisitTopSumInfoListResponse,
+  ModifyLivePullStreamTaskResponse,
   CreateLiveSnapshotRuleResponse,
   DelayInfo,
   DescribeLiveStreamEventListResponse,
@@ -792,6 +802,19 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
+     * 删除接口 CreateLivePullStreamTask 创建的拉流任务。
+注意：
+1. 入参中的 TaskId 为 CreateLivePullStreamTask 接口创建时返回的TaskId。
+2. 也可通过 DescribeLivePullStreamTasks 进行查询创建的任务。
+     */
+  async DeleteLivePullStreamTask(
+    req: DeleteLivePullStreamTaskRequest,
+    cb?: (error: string, rep: DeleteLivePullStreamTaskResponse) => void
+  ): Promise<DeleteLivePullStreamTaskResponse> {
+    return this.request("DeleteLivePullStreamTask", req, cb)
+  }
+
+  /**
    * 获取禁推流列表。
    */
   async DescribeLiveForbidStreamList(
@@ -799,6 +822,22 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: DescribeLiveForbidStreamListResponse) => void
   ): Promise<DescribeLiveForbidStreamListResponse> {
     return this.request("DescribeLiveForbidStreamList", req, cb)
+  }
+
+  /**
+     * 创建直播拉流任务。支持将外部已有的点播文件，或者直播源拉取过来转推到直播系统。
+注意：
+1. 源流视频编码目前只支持: H264, H265。其他编码格式建议先进行转码处理。
+2. 源流音频编码目前只支持: AAC。其他编码格式建议先进行转码处理。
+3. 拉流转推功能为计费增值服务，计费规则详情可参见[计费文档](https://cloud.tencent.com/document/product/267/53308)。
+4. 拉流转推功能仅提供内容拉取与推送服务，请确保内容已获得授权并符合内容传播相关的法律法规。若内容有侵权或违规相关问题，云直播会停止相关的功能服务并保留追究法律责任的权利。
+
+     */
+  async CreateLivePullStreamTask(
+    req: CreateLivePullStreamTaskRequest,
+    cb?: (error: string, rep: CreateLivePullStreamTaskResponse) => void
+  ): Promise<CreateLivePullStreamTaskResponse> {
+    return this.request("CreateLivePullStreamTask", req, cb)
   }
 
   /**
@@ -829,6 +868,18 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: DescribeLiveDomainsResponse) => void
   ): Promise<DescribeLiveDomainsResponse> {
     return this.request("DescribeLiveDomains", req, cb)
+  }
+
+  /**
+     * 更新直播拉流任务。 
+1. 不支持修改目标地址，如需推到新地址，请创建新任务。
+2. 不支持修改任务类型，如需更换，请创建新任务。
+     */
+  async ModifyLivePullStreamTask(
+    req: ModifyLivePullStreamTaskRequest,
+    cb?: (error: string, rep: ModifyLivePullStreamTaskResponse) => void
+  ): Promise<ModifyLivePullStreamTaskResponse> {
+    return this.request("ModifyLivePullStreamTask", req, cb)
   }
 
   /**
@@ -891,6 +942,17 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: ModifyLiveCallbackTemplateResponse) => void
   ): Promise<ModifyLiveCallbackTemplateResponse> {
     return this.request("ModifyLiveCallbackTemplate", req, cb)
+  }
+
+  /**
+     * 查询使用 CreateLivePullStreamTask 接口创建的直播拉流任务。
+排序方式：默认按更新时间 倒序排列。
+     */
+  async DescribeLivePullStreamTasks(
+    req: DescribeLivePullStreamTasksRequest,
+    cb?: (error: string, rep: DescribeLivePullStreamTasksResponse) => void
+  ): Promise<DescribeLivePullStreamTasksResponse> {
+    return this.request("DescribeLivePullStreamTasks", req, cb)
   }
 
   /**

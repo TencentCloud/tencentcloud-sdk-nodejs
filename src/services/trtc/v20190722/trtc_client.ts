@@ -86,6 +86,7 @@ import {
   AbnormalExperience,
   RoomState,
   CreatePictureResponse,
+  WaterMarkParams,
   DescribeRecordStatisticResponse,
   DismissRoomByStrRoomIdResponse,
   DescribeHistoryScaleResponse,

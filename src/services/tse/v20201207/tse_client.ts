@@ -22,7 +22,9 @@ import {
   ManageConfigRequest,
   SREInstance,
   DescribeSREInstanceAccessAddressResponse,
+  DescribeConfigRequest,
   DescribeSREInstancesResponse,
+  DescribeConfigResponse,
   Filter,
   DescribeSREInstanceAccessAddressRequest,
   ManageConfigResponse,
@@ -35,6 +37,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("tse.tencentcloudapi.com", "2020-12-07", clientConfig)
+  }
+
+  /**
+   * 用于查询微服务注册中心实例列表
+   */
+  async DescribeSREInstances(
+    req: DescribeSREInstancesRequest,
+    cb?: (error: string, rep: DescribeSREInstancesResponse) => void
+  ): Promise<DescribeSREInstancesResponse> {
+    return this.request("DescribeSREInstances", req, cb)
   }
 
   /**
@@ -58,12 +70,12 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于查询微服务注册中心实例列表
+   * 查看配置项
    */
-  async DescribeSREInstances(
-    req: DescribeSREInstancesRequest,
-    cb?: (error: string, rep: DescribeSREInstancesResponse) => void
-  ): Promise<DescribeSREInstancesResponse> {
-    return this.request("DescribeSREInstances", req, cb)
+  async DescribeConfig(
+    req: DescribeConfigRequest,
+    cb?: (error: string, rep: DescribeConfigResponse) => void
+  ): Promise<DescribeConfigResponse> {
+    return this.request("DescribeConfig", req, cb)
   }
 }

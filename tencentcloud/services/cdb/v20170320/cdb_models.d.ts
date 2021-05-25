@@ -2377,6 +2377,10 @@ export interface DescribeDBInstancesRequest {
       * 置放群组ID列表。
       */
     DeployGroupIds?: Array<string>;
+    /**
+      * 是否以标签键为过滤条件。
+      */
+    TagKeysForSearch?: Array<string>;
 }
 /**
  * DescribeDBSecurityGroups请求参数结构体
@@ -3798,33 +3802,33 @@ export interface DescribeDeviceMonitorInfoRequest {
  */
 export interface DescribeDBPriceRequest {
     /**
-      * 可用区信息，格式如 "ap-guangzhou-2"。具体能设置的值请通过 <a href="https://cloud.tencent.com/document/api/236/17229">DescribeDBZoneConfig</a> 接口查询。
-      */
-    Zone: string;
-    /**
-      * 实例数量，默认值为 1，最小值 1，最大值为 100。
-      */
-    GoodsNum: number;
-    /**
-      * 实例内存大小，单位：MB。
-      */
-    Memory: number;
-    /**
-      * 实例硬盘大小，单位：GB。
-      */
-    Volume: number;
-    /**
-      * 付费类型，支持值包括：PRE_PAID - 包年包月，HOUR_PAID - 按量计费。
-      */
-    PayType: string;
-    /**
       * 实例时长，单位：月，最小值 1，最大值为 36；查询按量计费价格时，该字段无效。
       */
     Period: number;
     /**
-      * 实例类型，默认为 master，支持值包括：master - 表示主实例，ro - 表示只读实例，dr - 表示灾备实例。
+      * 可用区信息，格式如 "ap-guangzhou-2"。具体能设置的值请通过 <a href="https://cloud.tencent.com/document/api/236/17229">DescribeDBZoneConfig</a> 接口查询。InstanceId为空时该参数为必填项。
+      */
+    Zone?: string;
+    /**
+      * 实例数量，默认值为 1，最小值 1，最大值为 100。InstanceId为空时该参数为必填项。
+      */
+    GoodsNum?: number;
+    /**
+      * 实例内存大小，单位：MB。InstanceId为空时该参数为必填项。
+      */
+    Memory?: number;
+    /**
+      * 实例硬盘大小，单位：GB。InstanceId为空时该参数为必填项。
+      */
+    Volume?: number;
+    /**
+      * 实例类型，默认为 master，支持值包括：master - 表示主实例，ro - 表示只读实例，dr - 表示灾备实例。InstanceId为空时该参数为必填项。
       */
     InstanceRole?: string;
+    /**
+      * 付费类型，支持值包括：PRE_PAID - 包年包月，HOUR_PAID - 按量计费。InstanceId为空时该参数为必填项。
+      */
+    PayType?: string;
     /**
       * 数据复制方式，默认为 0，支持值包括：0 - 表示异步复制，1 - 表示半同步复制，2 - 表示强同步复制。
       */
@@ -3841,6 +3845,10 @@ export interface DescribeDBPriceRequest {
       * 询价实例的CPU核心数目，单位：核，为保证传入 CPU 值有效，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229) 接口获取可售卖的核心数目，当未指定该值时，将按照 Memory 大小补全一个默认值。
       */
     Cpu?: number;
+    /**
+      * 续费询价实例ID。如需查询实例续费价格，填写InstanceId和Period即可。
+      */
+    InstanceId?: string;
 }
 /**
  * AssociateSecurityGroups返回参数结构体
@@ -5375,11 +5383,11 @@ export interface DescribeDBInstancesResponse {
     /**
       * 符合查询条件的实例总数。
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 实例详细信息。
       */
-    Items?: Array<InstanceInfo>;
+    Items: Array<InstanceInfo>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

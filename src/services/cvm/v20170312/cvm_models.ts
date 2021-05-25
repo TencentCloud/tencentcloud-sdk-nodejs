@@ -747,6 +747,7 @@ export interface ZoneInfo {
 <li> ap-guangzhou-4 </li>
 <li> ap-guangzhou-6 </li>
 <li> ap-tokyo-1 </li>
+<li> ap-tokyo-2 </li>
 <li> ap-singapore-1 </li>
 <li> ap-singapore-2 </li>
 <li> ap-singapore-3 </li>
@@ -3796,7 +3797,7 @@ export interface InquiryPriceResetInstancesTypeResponse {
   /**
    * 该参数表示调整成对应机型实例的价格。
    */
-  Price?: Price
+  Price: Price
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

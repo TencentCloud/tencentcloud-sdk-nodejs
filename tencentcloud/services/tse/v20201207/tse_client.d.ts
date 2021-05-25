@@ -1,12 +1,16 @@
 import { AbstractClient } from "../../../common/abstract_client";
 import { ClientConfig } from "../../../common/interface";
-import { DescribeSREInstancesRequest, ManageConfigRequest, DescribeSREInstanceAccessAddressResponse, DescribeSREInstancesResponse, DescribeSREInstanceAccessAddressRequest, ManageConfigResponse } from "./tse_models";
+import { DescribeSREInstancesRequest, ManageConfigRequest, DescribeSREInstanceAccessAddressResponse, DescribeConfigRequest, DescribeSREInstancesResponse, DescribeConfigResponse, DescribeSREInstanceAccessAddressRequest, ManageConfigResponse } from "./tse_models";
 /**
  * tse client
  * @class
  */
 export declare class Client extends AbstractClient {
     constructor(clientConfig: ClientConfig);
+    /**
+     * 用于查询微服务注册中心实例列表
+     */
+    DescribeSREInstances(req: DescribeSREInstancesRequest, cb?: (error: string, rep: DescribeSREInstancesResponse) => void): Promise<DescribeSREInstancesResponse>;
     /**
      * 管理配置
      */
@@ -16,7 +20,7 @@ export declare class Client extends AbstractClient {
      */
     DescribeSREInstanceAccessAddress(req: DescribeSREInstanceAccessAddressRequest, cb?: (error: string, rep: DescribeSREInstanceAccessAddressResponse) => void): Promise<DescribeSREInstanceAccessAddressResponse>;
     /**
-     * 用于查询微服务注册中心实例列表
+     * 查看配置项
      */
-    DescribeSREInstances(req: DescribeSREInstancesRequest, cb?: (error: string, rep: DescribeSREInstancesResponse) => void): Promise<DescribeSREInstancesResponse>;
+    DescribeConfig(req: DescribeConfigRequest, cb?: (error: string, rep: DescribeConfigResponse) => void): Promise<DescribeConfigResponse>;
 }

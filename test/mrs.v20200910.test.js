@@ -1,7 +1,7 @@
 
 const expect = require("chai").expect
 const tencentcloud = require("../../tencentcloud-sdk-nodejs")
-const client = new tencentcloud.tse.v20201207.Client({
+const client = new tencentcloud.mrs.v20200910.Client({
   credential: {
     secretId: process.env.secretId,
     secretKey: process.env.secretKey,
@@ -16,11 +16,11 @@ const client = new tencentcloud.tse.v20201207.Client({
     },
   },
 })
-describe("tse.v20201207.test.js", function () {
+describe("mrs.v20200910.test.js", function () {
 
-it("tse.v20201207.DescribeSREInstances", async function () {
+it("mrs.v20200910.ImageToClass", async function () {
     try {
-       const data = await client.DescribeSREInstances({})
+       const data = await client.ImageToClass({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -28,9 +28,9 @@ it("tse.v20201207.DescribeSREInstances", async function () {
     }
 })
 
-it("tse.v20201207.ManageConfig", async function () {
+it("mrs.v20200910.ImageToObject", async function () {
     try {
-       const data = await client.ManageConfig({})
+       const data = await client.ImageToObject({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -38,9 +38,9 @@ it("tse.v20201207.ManageConfig", async function () {
     }
 })
 
-it("tse.v20201207.DescribeSREInstanceAccessAddress", async function () {
+it("mrs.v20200910.TextToClass", async function () {
     try {
-       const data = await client.DescribeSREInstanceAccessAddress({})
+       const data = await client.TextToClass({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,9 +48,9 @@ it("tse.v20201207.DescribeSREInstanceAccessAddress", async function () {
     }
 })
 
-it("tse.v20201207.DescribeConfig", async function () {
+it("mrs.v20200910.TextToObject", async function () {
     try {
-       const data = await client.DescribeConfig({})
+       const data = await client.TextToObject({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
