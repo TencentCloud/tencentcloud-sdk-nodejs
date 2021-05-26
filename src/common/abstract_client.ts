@@ -254,6 +254,9 @@ export class AbstractClient {
     const keys = Object.keys(params)
     keys.sort()
     for (const k in keys) {
+      if (!keys.hasOwnProperty(k)) {
+        continue
+      }
       //k = k.replace(/_/g, '.');
       strParam += "&" + keys[k] + "=" + params[keys[k]]
     }

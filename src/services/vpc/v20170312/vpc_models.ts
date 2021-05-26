@@ -3843,9 +3843,7 @@ export interface DescribeNatGatewayDestinationIpPortTranslationNatRulesResponse 
   /**
    * NAT网关端口转发规则对象数组。
    */
-  NatGatewayDestinationIpPortTranslationNatRuleSet?: Array<
-    NatGatewayDestinationIpPortTranslationNatRule
-  >
+  NatGatewayDestinationIpPortTranslationNatRuleSet?: Array<NatGatewayDestinationIpPortTranslationNatRule>
 
   /**
    * 符合条件的NAT网关端口转发规则对象数目。
