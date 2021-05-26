@@ -128,6 +128,8 @@ var ecdn_1 = require("./ecdn");
 Object.defineProperty(exports, "ecdn", { enumerable: true, get: function () { return ecdn_1.ecdn; } });
 var ecm_1 = require("./ecm");
 Object.defineProperty(exports, "ecm", { enumerable: true, get: function () { return ecm_1.ecm; } });
+var eis_1 = require("./eis");
+Object.defineProperty(exports, "eis", { enumerable: true, get: function () { return eis_1.eis; } });
 var emr_1 = require("./emr");
 Object.defineProperty(exports, "emr", { enumerable: true, get: function () { return emr_1.emr; } });
 var es_1 = require("./es");

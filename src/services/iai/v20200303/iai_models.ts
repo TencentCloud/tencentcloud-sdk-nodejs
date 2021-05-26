@@ -1938,12 +1938,12 @@ export interface CompareMaskFaceResponse {
 2.0版本误识率千分之一对应分数为70分，误识率万分之一对应分数为80分，误识率十万分之一对应分数为90分。 一般超过80分则可认定为同一人。 
 若需要验证两张图片中的人脸是否为同一人，建议使用人脸验证接口。
       */
-  Score?: number
+  Score: number
 
   /**
    * 人脸识别所用的算法模型版本。
    */
-  FaceModelVersion?: string
+  FaceModelVersion: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。

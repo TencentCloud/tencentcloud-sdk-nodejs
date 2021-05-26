@@ -473,7 +473,7 @@ export interface PhoneVerificationResponse {
  */
 export interface GetEidTokenRequest {
     /**
-      * EID商户id
+      * EID商户id，字段长度最长50位。
       */
     MerchantId: string;
     /**
@@ -486,7 +486,7 @@ export interface GetEidTokenRequest {
       */
     Name?: string;
     /**
-      * 透传字段，在获取验证结果时返回。
+      * 透传字段，在获取验证结果时返回。最长长度1024位。
       */
     Extra?: string;
     /**

@@ -155,6 +155,7 @@ import {
   DeleteMaterialResponse,
   RevokeResourceAuthorizationRequest,
   DescribeTaskDetailRequest,
+  CosPublishInputInfo,
   DescribeTasksResponse,
   ModifyProjectRequest,
   MaterialInfo,

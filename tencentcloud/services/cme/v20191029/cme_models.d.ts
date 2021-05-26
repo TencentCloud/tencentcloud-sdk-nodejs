@@ -2344,6 +2344,10 @@ export interface ThirdPartyPublishInfo {
       * 快手发布信息，如果使用的发布通道为快手时必填。
       */
     KuaishouPublishInfo?: KuaishouPublishInfo;
+    /**
+      * 腾讯云对象存储发布信息， 如果使用的发布通道为腾讯云对象存储时必填。
+      */
+    CosPublishInfo?: CosPublishInputInfo;
 }
 /**
  * ListMedia请求参数结构体
@@ -2935,6 +2939,27 @@ export interface DescribeTaskDetailRequest {
       * 操作者。填写用户的 Id，用于标识调用者及校验对任务的访问权限。
       */
     Operator?: string;
+}
+/**
+ * COS 发布信息。
+ */
+export interface CosPublishInputInfo {
+    /**
+      * 发布生成的对象存储文件所在的 COS Bucket 名，如 TopRankVideo-125xxx88。
+      */
+    Bucket: string;
+    /**
+      * 发布生成的对象存储文件所在的 COS Bucket 所属园区，如 ap-chongqing。
+      */
+    Region: string;
+    /**
+      * 发布生成的视频在 COS 存储的对象键。对象键（ObjectKey）是对象（Object）在存储桶（Bucket）中的唯一标识。
+      */
+    VideoKey: string;
+    /**
+      * 发布生成的封面在 COS 存储的对象键。
+      */
+    CoverKey: string;
 }
 /**
  * DescribeTasks返回参数结构体

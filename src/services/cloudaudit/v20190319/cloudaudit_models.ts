@@ -813,6 +813,11 @@ export interface Event {
    * 事件地域
    */
   EventRegion?: string
+
+  /**
+   * IP 归属地
+   */
+  Location?: string
 }
 
 /**
