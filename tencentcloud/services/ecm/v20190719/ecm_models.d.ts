@@ -1342,7 +1342,7 @@ export interface CreateModuleResponse {
     /**
       * 模块ID，创建模块成功后分配给该模块的ID。
       */
-    ModuleId?: string;
+    ModuleId: string;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
@@ -2151,8 +2151,8 @@ export interface CreateModuleRequest {
     DefaultDataDiskSize: number;
     /**
       * 是否关闭IP直通。取值范围：
-1：表示关闭IP直通
-0：表示开通IP直通
+true：表示关闭IP直通
+false：表示开通IP直通
       */
     CloseIpDirect?: boolean;
     /**
@@ -2628,6 +2628,7 @@ image-id - String - 是否必填： 否 - （过滤条件）按照镜像ID进行
 image-type - String - 是否必填： 否 - （过滤条件）按照镜像类型进行过滤。取值范围：
 PRIVATE_IMAGE: 私有镜像 (本帐户创建的镜像)
 PUBLIC_IMAGE: 公共镜像 (腾讯云官方镜像)
+instance-type -String - 是否必填: 否 - (过滤条件) 按机型过滤支持的镜像
       */
     Filters?: Array<Filter>;
     /**
@@ -5352,12 +5353,12 @@ export interface DescribeImageResponse {
     /**
       * 镜像总数
       */
-    TotalCount?: number;
+    TotalCount: number;
     /**
       * 镜像数组
 注意：此字段可能返回 null，表示取不到有效值。
       */
-    ImageSet?: Array<Image>;
+    ImageSet: Array<Image>;
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

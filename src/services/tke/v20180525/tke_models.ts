@@ -1661,6 +1661,11 @@ export interface ClusterPublicLB {
    * 安全策略放通单个IP或CIDR(例如: "192.168.1.0/24",默认为拒绝所有)
    */
   SecurityPolicies?: Array<string>
+
+  /**
+   * 外网访问相关的扩展参数，格式为json
+   */
+  ExtraParam?: string
 }
 
 /**

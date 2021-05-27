@@ -76,13 +76,13 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
         return this.request("DescribeHistoryScale", req, cb);
     }
     /**
-     * 删除图片
+     * 此接口已废弃，调用将报错。如需使用相关功能请参见 [控制台指南 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769)  。
      */
     async DeletePicture(req, cb) {
         return this.request("DeletePicture", req, cb);
     }
     /**
-     * 上传图片
+     * 此接口已废弃，调用将报错。如需使用相关功能请参见 [控制台指南 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769)  。
      */
     async CreatePicture(req, cb) {
         return this.request("CreatePicture", req, cb);
@@ -125,7 +125,7 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
         return this.request("StopMCUMixTranscodeByStrRoomId", req, cb);
     }
     /**
-     * 修改图片相关参数。
+     * 此接口已废弃，调用将报错。如需使用相关功能请参见 [控制台指南 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769)  。
      */
     async ModifyPicture(req, cb) {
         return this.request("ModifyPicture", req, cb);
@@ -209,7 +209,7 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
         return this.request("DescribeTrtcInteractiveTime", req, cb);
     }
     /**
-     * 查询某图片相关参数。
+     * 此接口已废弃，调用将报错。如需使用相关功能请参见 [控制台指南 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769)  。
      */
     async DescribePicture(req, cb) {
         return this.request("DescribePicture", req, cb);

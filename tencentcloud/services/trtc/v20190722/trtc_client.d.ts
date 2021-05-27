@@ -46,11 +46,11 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
      */
     DescribeHistoryScale(req: DescribeHistoryScaleRequest, cb?: (error: string, rep: DescribeHistoryScaleResponse) => void): Promise<DescribeHistoryScaleResponse>;
     /**
-     * 删除图片
+     * 此接口已废弃，调用将报错。如需使用相关功能请参见 [控制台指南 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769)  。
      */
     DeletePicture(req: DeletePictureRequest, cb?: (error: string, rep: DeletePictureResponse) => void): Promise<DeletePictureResponse>;
     /**
-     * 上传图片
+     * 此接口已废弃，调用将报错。如需使用相关功能请参见 [控制台指南 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769)  。
      */
     CreatePicture(req: CreatePictureRequest, cb?: (error: string, rep: CreatePictureResponse) => void): Promise<CreatePictureResponse>;
     /**
@@ -79,7 +79,7 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
      */
     StopMCUMixTranscodeByStrRoomId(req: StopMCUMixTranscodeByStrRoomIdRequest, cb?: (error: string, rep: StopMCUMixTranscodeByStrRoomIdResponse) => void): Promise<StopMCUMixTranscodeByStrRoomIdResponse>;
     /**
-     * 修改图片相关参数。
+     * 此接口已废弃，调用将报错。如需使用相关功能请参见 [控制台指南 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769)  。
      */
     ModifyPicture(req: ModifyPictureRequest, cb?: (error: string, rep: ModifyPictureResponse) => void): Promise<ModifyPictureResponse>;
     /**
@@ -145,7 +145,7 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
      */
     DescribeTrtcInteractiveTime(req: DescribeTrtcInteractiveTimeRequest, cb?: (error: string, rep: DescribeTrtcInteractiveTimeResponse) => void): Promise<DescribeTrtcInteractiveTimeResponse>;
     /**
-     * 查询某图片相关参数。
+     * 此接口已废弃，调用将报错。如需使用相关功能请参见 [控制台指南 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769)  。
      */
     DescribePicture(req: DescribePictureRequest, cb?: (error: string, rep: DescribePictureResponse) => void): Promise<DescribePictureResponse>;
     /**

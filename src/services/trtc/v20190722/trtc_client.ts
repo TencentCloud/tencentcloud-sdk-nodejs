@@ -172,7 +172,7 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
   }
 
   /**
-   * 删除图片
+   * 此接口已废弃，调用将报错。如需使用相关功能请参见 [控制台指南 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769)  。
    */
   async DeletePicture(
     req: DeletePictureRequest,
@@ -182,7 +182,7 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
   }
 
   /**
-   * 上传图片
+   * 此接口已废弃，调用将报错。如需使用相关功能请参见 [控制台指南 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769)  。
    */
   async CreatePicture(
     req: CreatePictureRequest,
@@ -253,7 +253,7 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
   }
 
   /**
-   * 修改图片相关参数。
+   * 此接口已废弃，调用将报错。如需使用相关功能请参见 [控制台指南 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769)  。
    */
   async ModifyPicture(
     req: ModifyPictureRequest,
@@ -373,7 +373,7 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
   }
 
   /**
-   * 查询某图片相关参数。
+   * 此接口已废弃，调用将报错。如需使用相关功能请参见 [控制台指南 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769)  。
    */
   async DescribePicture(
     req: DescribePictureRequest,

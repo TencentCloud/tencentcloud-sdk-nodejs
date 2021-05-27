@@ -109,6 +109,26 @@ export interface CreateDBInstanceRequest {
 }
 
 /**
+ * 可用区信息
+ */
+export interface ZonesInfo {
+  /**
+   * 可用区英文ID
+   */
+  Zone: string
+
+  /**
+   * 可用区数字ID
+   */
+  ZoneId: number
+
+  /**
+   * 可用区中文名
+   */
+  ZoneName: string
+}
+
+/**
  * DescribeAccountPrivileges返回参数结构体
  */
 export interface DescribeAccountPrivilegesResponse {
@@ -752,6 +772,26 @@ export interface DBBackupTimeConfig {
 }
 
 /**
+ * ModifyBackupTime请求参数结构体
+ */
+export interface ModifyBackupTimeRequest {
+  /**
+   * 实例ID，形如：tdsql-ow728lmc，可以通过 DescribeDBInstances 查询实例详情获得。
+   */
+  InstanceId: string
+
+  /**
+   * 每天备份执行的区间的开始时间，格式 mm:ss，形如 22:00
+   */
+  StartBackupTime: string
+
+  /**
+   * 每天备份执行的区间的结束时间，格式 mm:ss，形如 23:59
+   */
+  EndBackupTime: string
+}
+
+/**
  * DescribeDBLogFiles请求参数结构体
  */
 export interface DescribeDBLogFilesRequest {
@@ -767,33 +807,18 @@ export interface DescribeDBLogFilesRequest {
 }
 
 /**
- * DescribeDBResourceUsage返回参数结构体
+ * DescribeRenewalPrice请求参数结构体
  */
-export interface DescribeDBResourceUsageResponse {
+export interface DescribeRenewalPriceRequest {
   /**
-   * binlog日志磁盘可用空间,单位GB
+   * 待续费的实例ID。形如：tdsql-ow728lmc，可以通过 DescribeDBInstances 查询实例详情获得。
    */
-  BinlogDiskAvailable?: MonitorData
+  InstanceId: string
 
   /**
-   * 磁盘可用空间,单位GB
+   * 续费时长，单位：月。不传则默认为1个月。
    */
-  DataDiskAvailable?: MonitorData
-
-  /**
-   * CPU利用率
-   */
-  CpuUsageRate?: MonitorData
-
-  /**
-   * 内存可用空间,单位GB
-   */
-  MemAvailable?: MonitorData
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Period?: number
 }
 
 /**
@@ -832,13 +857,63 @@ export interface DescribeOrdersResponse {
 }
 
 /**
- * ModifyDBInstanceSecurityGroups返回参数结构体
+ * DCN详情条目
  */
-export interface ModifyDBInstanceSecurityGroupsResponse {
+export interface DcnDetailItem {
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 实例ID
    */
-  RequestId?: string
+  InstanceId: string
+
+  /**
+   * 实例名称
+   */
+  InstanceName: string
+
+  /**
+   * 实例地域
+   */
+  Region: string
+
+  /**
+   * 实例可用区
+   */
+  Zone: string
+
+  /**
+   * 实例IP地址
+   */
+  Vip: string
+
+  /**
+   * 实例IPv6地址
+   */
+  Vipv6: string
+
+  /**
+   * 实例端口
+   */
+  Vport: number
+
+  /**
+   * 实例状态
+   */
+  Status: number
+
+  /**
+   * 实例状态描述
+   */
+  StatusDesc: string
+
+  /**
+   * 实例DCN标志，1-主，2-备
+   */
+  DcnFlag: number
+
+  /**
+   * 实例DCN状态，0-无，1-创建中，2-同步中，3-已断开
+   */
+  DcnStatus: number
 }
 
 /**
@@ -1387,23 +1462,13 @@ export interface ModifyDBInstanceSecurityGroupsRequest {
 }
 
 /**
- * 可用区信息
+ * DescribeDcnDetail请求参数结构体
  */
-export interface ZonesInfo {
+export interface DescribeDcnDetailRequest {
   /**
-   * 可用区英文ID
+   * 实例ID
    */
-  Zone: string
-
-  /**
-   * 可用区数字ID
-   */
-  ZoneId: number
-
-  /**
-   * 可用区中文名
-   */
-  ZoneName: string
+  InstanceId: string
 }
 
 /**
@@ -1552,23 +1617,23 @@ export interface ModifyDBInstanceNameRequest {
 }
 
 /**
- * ModifyBackupTime请求参数结构体
+ * DeleteAccount请求参数结构体
  */
-export interface ModifyBackupTimeRequest {
+export interface DeleteAccountRequest {
   /**
    * 实例ID，形如：tdsql-ow728lmc，可以通过 DescribeDBInstances 查询实例详情获得。
    */
   InstanceId: string
 
   /**
-   * 每天备份执行的区间的开始时间，格式 mm:ss，形如 22:00
+   * 用户名
    */
-  StartBackupTime: string
+  UserName: string
 
   /**
-   * 每天备份执行的区间的结束时间，格式 mm:ss，形如 23:59
+   * 用户允许的访问 host
    */
-  EndBackupTime: string
+  Host: string
 }
 
 /**
@@ -2028,6 +2093,16 @@ export interface OpenDBExtranetAccessRequest {
 }
 
 /**
+ * ModifyDBInstanceSecurityGroups返回参数结构体
+ */
+export interface ModifyDBInstanceSecurityGroupsResponse {
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyDBInstanceName返回参数结构体
  */
 export interface ModifyDBInstanceNameResponse {
@@ -2396,23 +2471,18 @@ export interface DescribeSqlLogsResponse {
 }
 
 /**
- * DeleteAccount请求参数结构体
+ * DescribeDcnDetail返回参数结构体
  */
-export interface DeleteAccountRequest {
+export interface DescribeDcnDetailResponse {
   /**
-   * 实例ID，形如：tdsql-ow728lmc，可以通过 DescribeDBInstances 查询实例详情获得。
+   * DCN同步详情
    */
-  InstanceId: string
+  DcnDetails: Array<DcnDetailItem>
 
   /**
-   * 用户名
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
-  UserName: string
-
-  /**
-   * 用户允许的访问 host
-   */
-  Host: string
+  RequestId?: string
 }
 
 /**
@@ -2636,18 +2706,33 @@ export interface ConstraintRange {
 }
 
 /**
- * DescribeRenewalPrice请求参数结构体
+ * DescribeDBResourceUsage返回参数结构体
  */
-export interface DescribeRenewalPriceRequest {
+export interface DescribeDBResourceUsageResponse {
   /**
-   * 待续费的实例ID。形如：tdsql-ow728lmc，可以通过 DescribeDBInstances 查询实例详情获得。
+   * binlog日志磁盘可用空间,单位GB
    */
-  InstanceId: string
+  BinlogDiskAvailable?: MonitorData
 
   /**
-   * 续费时长，单位：月。不传则默认为1个月。
+   * 磁盘可用空间,单位GB
    */
-  Period?: number
+  DataDiskAvailable?: MonitorData
+
+  /**
+   * CPU利用率
+   */
+  CpuUsageRate?: MonitorData
+
+  /**
+   * 内存可用空间,单位GB
+   */
+  MemAvailable?: MonitorData
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

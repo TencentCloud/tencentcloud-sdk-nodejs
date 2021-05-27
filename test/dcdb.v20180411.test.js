@@ -348,6 +348,16 @@ it("dcdb.v20180411.DescribeAccounts", async function () {
     }
 })
 
+it("dcdb.v20180411.DescribeDcnDetail", async function () {
+    try {
+       const data = await client.DescribeDcnDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dcdb.v20180411.FlushBinlog", async function () {
     try {
        const data = await client.FlushBinlog({})

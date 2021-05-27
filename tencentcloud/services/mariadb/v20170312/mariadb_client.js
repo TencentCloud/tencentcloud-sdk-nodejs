@@ -248,6 +248,12 @@ class Client extends abstract_client_1.AbstractClient {
         return this.request("DescribeAccounts", req, cb);
     }
     /**
+     * 获取实例灾备详情
+     */
+    async DescribeDcnDetail(req, cb) {
+        return this.request("DescribeDcnDetail", req, cb);
+    }
+    /**
      * 相当于在mysqld中执行flush logs，完成切分的binlog将展示在实例控制台binlog列表里。
      */
     async FlushBinlog(req, cb) {

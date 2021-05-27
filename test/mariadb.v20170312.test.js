@@ -378,6 +378,16 @@ it("mariadb.v20170312.DescribeAccounts", async function () {
     }
 })
 
+it("mariadb.v20170312.DescribeDcnDetail", async function () {
+    try {
+       const data = await client.DescribeDcnDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mariadb.v20170312.FlushBinlog", async function () {
     try {
        const data = await client.FlushBinlog({})

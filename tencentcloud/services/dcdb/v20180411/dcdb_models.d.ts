@@ -450,13 +450,53 @@ export interface DescribeOrdersResponse {
     RequestId?: string;
 }
 /**
- * ModifyDBInstanceSecurityGroups返回参数结构体
+ * DCN详情条目
  */
-export interface ModifyDBInstanceSecurityGroupsResponse {
+export interface DcnDetailItem {
     /**
-      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 实例ID
       */
-    RequestId?: string;
+    InstanceId: string;
+    /**
+      * 实例名称
+      */
+    InstanceName: string;
+    /**
+      * 实例地域
+      */
+    Region: string;
+    /**
+      * 实例可用区
+      */
+    Zone: string;
+    /**
+      * 实例IP地址
+      */
+    Vip: string;
+    /**
+      * 实例IPv6地址
+      */
+    Vipv6: string;
+    /**
+      * 实例端口
+      */
+    Vport: number;
+    /**
+      * 实例状态
+      */
+    Status: number;
+    /**
+      * 实例状态描述
+      */
+    StatusDesc: string;
+    /**
+      * 实例DCN标志，1-主，2-备
+      */
+    DcnFlag: number;
+    /**
+      * 实例DCN状态，0-无，1-创建中，2-同步中，3-已断开
+      */
+    DcnStatus: number;
 }
 /**
  * ResetAccountPassword请求参数结构体
@@ -1122,21 +1162,13 @@ export interface ModifyDBInstanceSecurityGroupsRequest {
     SecurityGroupIds: Array<string>;
 }
 /**
- * 可用区信息
+ * DescribeDcnDetail请求参数结构体
  */
-export interface ZonesInfo {
+export interface DescribeDcnDetailRequest {
     /**
-      * 可用区英文ID
+      * 实例ID
       */
-    Zone: string;
-    /**
-      * 可用区数字ID
-      */
-    ZoneId: number;
-    /**
-      * 可用区中文名
-      */
-    ZoneName: string;
+    InstanceId: string;
 }
 /**
  * ModifyDBParameters返回参数结构体
@@ -1418,6 +1450,19 @@ export interface DescribeDatabaseObjectsResponse {
     RequestId?: string;
 }
 /**
+ * DescribeDcnDetail返回参数结构体
+ */
+export interface DescribeDcnDetailResponse {
+    /**
+      * DCN同步详情
+      */
+    DcnDetails: Array<DcnDetailItem>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
  * 数据库列信息
  */
 export interface TableColumn {
@@ -1548,6 +1593,23 @@ export interface DescribeDCDBShardsResponse {
     RequestId?: string;
 }
 /**
+ * 可用区信息
+ */
+export interface ZonesInfo {
+    /**
+      * 可用区英文ID
+      */
+    Zone: string;
+    /**
+      * 可用区数字ID
+      */
+    ZoneId: number;
+    /**
+      * 可用区中文名
+      */
+    ZoneName: string;
+}
+/**
  * 数据库信息
  */
 export interface Database {
@@ -1631,6 +1693,15 @@ export interface DescribeDCDBSaleInfoResponse {
       * 可售卖地域信息列表
       */
     RegionList?: Array<RegionInfo>;
+    /**
+      * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      */
+    RequestId?: string;
+}
+/**
+ * ModifyDBInstanceSecurityGroups返回参数结构体
+ */
+export interface ModifyDBInstanceSecurityGroupsResponse {
     /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */

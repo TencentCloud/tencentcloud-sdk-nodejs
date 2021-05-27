@@ -2350,6 +2350,10 @@ export interface VerifyBasicBizLicenseResponse {
       */
     RegCapital: string;
     /**
+      * 成立/注册日期，只有输入参数EstablishTime为true时展示，默认为空
+      */
+    EstablishTime: string;
+    /**
       * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
       */
     RequestId?: string;
@@ -4751,6 +4755,10 @@ Config = {"Name":true,"Address":true}
       * 1表示输出注册资本字段（单位：万元），其他值表示不输出。默认不输出。
       */
     RegCapital?: number;
+    /**
+      * true表示展示成立/注册日期
+      */
+    EstablishTime?: boolean;
 }
 /**
  * BizLicenseOCR返回参数结构体

@@ -412,6 +412,22 @@ export interface SecurityGroupBound {
       * 传输层协议。tcp，udp或ALL
       */
     IpProtocol: string;
+    /**
+      * 安全组id代表的地址集合
+      */
+    Id: string;
+    /**
+      * 地址组id代表的地址集合
+      */
+    AddressModule: string;
+    /**
+      * 服务组id代表的协议和端口集合
+      */
+    ServiceModule: string;
+    /**
+      * 描述
+      */
+    Desc: string;
 }
 /**
  * CreateBackupDownloadTask返回参数结构体

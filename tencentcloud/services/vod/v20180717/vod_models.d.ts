@@ -12872,6 +12872,14 @@ export interface StorageStatData {
       * 当前标准存储量，单位是字节。
       */
     StandardStorage: number;
+    /**
+      * 当前归档存储量，单位是字节。
+      */
+    ArchiveStorage: number;
+    /**
+      * 当前深度归档存储量，单位是字节。
+      */
+    DeepArchiveStorage: number;
 }
 /**
  * 视频处理输出文件信息参数。

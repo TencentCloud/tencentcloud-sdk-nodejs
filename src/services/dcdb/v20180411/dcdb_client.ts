@@ -46,7 +46,7 @@ import {
   DatabaseView,
   DescribeDBLogFilesRequest,
   DescribeOrdersResponse,
-  ModifyDBInstanceSecurityGroupsResponse,
+  DcnDetailItem,
   ResetAccountPasswordRequest,
   CopyAccountPrivilegesResponse,
   CloneAccountRequest,
@@ -73,7 +73,7 @@ import {
   ModifyDBParametersRequest,
   DCDBInstanceInfo,
   ModifyDBInstanceSecurityGroupsRequest,
-  ZonesInfo,
+  DescribeDcnDetailRequest,
   ModifyDBParametersResponse,
   DCDBShardInfo,
   CopyAccountPrivilegesRequest,
@@ -82,6 +82,7 @@ import {
   DescribeDCDBInstanceNodeInfoResponse,
   KillSessionRequest,
   DescribeDatabaseObjectsResponse,
+  DescribeDcnDetailResponse,
   TableColumn,
   SecurityGroupBound,
   SplitShardConfig,
@@ -90,11 +91,13 @@ import {
   AssociateSecurityGroupsResponse,
   DescribeDCDBRenewalPriceResponse,
   DescribeDCDBShardsResponse,
+  ZonesInfo,
   Database,
   GrantAccountPrivilegesResponse,
   ShardInfo,
   OpenDBExtranetAccessRequest,
   DescribeDCDBSaleInfoResponse,
+  ModifyDBInstanceSecurityGroupsResponse,
   DescribeDBSyncModeRequest,
   CloseDBExtranetAccessResponse,
   ModifyAccountDescriptionRequest,
@@ -480,6 +483,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAccountsResponse) => void
   ): Promise<DescribeAccountsResponse> {
     return this.request("DescribeAccounts", req, cb)
+  }
+
+  /**
+   * 获取实例灾备详情
+   */
+  async DescribeDcnDetail(
+    req: DescribeDcnDetailRequest,
+    cb?: (error: string, rep: DescribeDcnDetailResponse) => void
+  ): Promise<DescribeDcnDetailResponse> {
+    return this.request("DescribeDcnDetail", req, cb)
   }
 
   /**

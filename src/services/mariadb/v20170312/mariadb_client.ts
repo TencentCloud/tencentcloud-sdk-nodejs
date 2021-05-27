@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreateDBInstanceRequest,
+  ZonesInfo,
   DescribeAccountPrivilegesResponse,
   DescribeDatabasesRequest,
   ParamDesc,
@@ -49,11 +50,12 @@ import {
   ParamConstraint,
   ModifyDBInstancesProjectResponse,
   DBBackupTimeConfig,
+  ModifyBackupTimeRequest,
   DescribeDBLogFilesRequest,
-  DescribeDBResourceUsageResponse,
+  DescribeRenewalPriceRequest,
   NodeInfo,
   DescribeOrdersResponse,
-  ModifyDBInstanceSecurityGroupsResponse,
+  DcnDetailItem,
   ResetAccountPasswordRequest,
   CopyAccountPrivilegesResponse,
   CloneAccountRequest,
@@ -76,14 +78,14 @@ import {
   SpecConfigInfo,
   ModifyDBParametersRequest,
   ModifyDBInstanceSecurityGroupsRequest,
-  ZonesInfo,
+  DescribeDcnDetailRequest,
   ModifyDBParametersResponse,
   CopyAccountPrivilegesRequest,
   SecurityGroup,
   OpenDBExtranetAccessResponse,
   KillSessionRequest,
   ModifyDBInstanceNameRequest,
-  ModifyBackupTimeRequest,
+  DeleteAccountRequest,
   CreateTmpInstancesResponse,
   UpgradeDBInstanceRequest,
   SecurityGroupBound,
@@ -96,6 +98,7 @@ import {
   Database,
   GrantAccountPrivilegesResponse,
   OpenDBExtranetAccessRequest,
+  ModifyDBInstanceSecurityGroupsResponse,
   ModifyDBInstanceNameResponse,
   CloseDBExtranetAccessResponse,
   ModifyAccountDescriptionRequest,
@@ -110,7 +113,7 @@ import {
   CloseDBExtranetAccessRequest,
   ResourceTag,
   DescribeSqlLogsResponse,
-  DeleteAccountRequest,
+  DescribeDcnDetailResponse,
   InstanceSpec,
   DescribeFlowRequest,
   DescribeDBPerformanceResponse,
@@ -120,7 +123,7 @@ import {
   RegionInfo,
   DescribeDBInstancesResponse,
   ConstraintRange,
-  DescribeRenewalPriceRequest,
+  DescribeDBResourceUsageResponse,
   LogFileInfo,
   RestartDBInstancesRequest,
   DescribeDBResourceUsageDetailsRequest,
@@ -514,6 +517,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAccountsResponse) => void
   ): Promise<DescribeAccountsResponse> {
     return this.request("DescribeAccounts", req, cb)
+  }
+
+  /**
+   * 获取实例灾备详情
+   */
+  async DescribeDcnDetail(
+    req: DescribeDcnDetailRequest,
+    cb?: (error: string, rep: DescribeDcnDetailResponse) => void
+  ): Promise<DescribeDcnDetailResponse> {
+    return this.request("DescribeDcnDetail", req, cb)
   }
 
   /**
