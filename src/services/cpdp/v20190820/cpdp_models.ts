@@ -31,23 +31,68 @@ export interface QueryInvoiceResponse {
 }
 
 /**
- * UploadTaxPayment请求参数结构体
+ * 交易明细信息
  */
-export interface UploadTaxPaymentRequest {
+export interface TransactionItem {
   /**
-   * 平台渠道
-   */
-  Channel: number
+      * STRING(2)，记账标志（1: 转出; 2: 转入）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BookingFlag: string
 
   /**
-   * 完税ID
-   */
-  TaxId: string
+      * STRING(32)，交易状态（0: 成功）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TranStatus: string
 
   /**
-   * 完税列表下载地址
-   */
-  FileUrl: string
+      * STRING(20)，交易金额
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TranAmt: string
+
+  /**
+      * STRING(8)，交易日期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TranDate: string
+
+  /**
+      * STRING(20)，交易时间
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TranTime: string
+
+  /**
+      * STRING(52)，见证系统流水号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FrontSeqNo: string
+
+  /**
+      * STRING(20)，记账类型（详情见“常见问题”）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  BookingType: string
+
+  /**
+      * STRING(50)，转入见证子账户的帐号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  InSubAcctNo: string
+
+  /**
+      * STRING(50)，转出见证子账户的帐号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OutSubAcctNo: string
+
+  /**
+      * STRING(300)，备注（返回交易订单号）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Remark: string
 }
 
 /**
@@ -457,6 +502,21 @@ export interface ApplyPayerInfoResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 提交贸易材料结果
+ */
+export interface ApplyTradeResult {
+  /**
+   * 错误码
+   */
+  Code: string
+
+  /**
+   * 提交贸易材料数据
+   */
+  Data: ApplyTradeData
 }
 
 /**
@@ -941,6 +1001,21 @@ export interface ReviseMbrPropertyRequest {
 }
 
 /**
+ * UploadTaxList返回参数结构体
+ */
+export interface UploadTaxListResponse {
+  /**
+   * 完税ID
+   */
+  TaxId?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * MigrateOrderRefundQuery返回参数结构体
  */
 export interface MigrateOrderRefundQueryResponse {
@@ -1239,18 +1314,174 @@ export interface QueryItem {
 }
 
 /**
- * 提交贸易材料结果
+ * ContractOrder请求参数结构体
  */
-export interface ApplyTradeResult {
+export interface ContractOrderRequest {
   /**
-   * 错误码
+   * ISO 货币代码，CNY
    */
-  Code: string
+  CurrencyType: string
 
   /**
-   * 提交贸易材料数据
+   * 聚鑫分配的支付主MidasAppId
    */
-  Data: ApplyTradeData
+  MidasAppId: string
+
+  /**
+   * 支付订单号，仅支持数字、字母、下划线（_）、横杠字符（-）、点（.）的组合
+   */
+  OutTradeNo: string
+
+  /**
+   * 商品详情，需要URL编码
+   */
+  ProductDetail: string
+
+  /**
+   * 商品ID，仅支持数字、字母、下划线（_）、横杠字符（-）、点（.）的组合
+   */
+  ProductId: string
+
+  /**
+   * 商品名称，需要URL编码
+   */
+  ProductName: string
+
+  /**
+   * 支付金额，单位： 分
+   */
+  TotalAmt: number
+
+  /**
+   * 用户ID，长度不小于5位，仅支持字母和数字的组合
+   */
+  UserId: string
+
+  /**
+   * 银行真实渠道.如:bank_pingan
+   */
+  RealChannel: string
+
+  /**
+   * 原始金额
+   */
+  OriginalAmt: number
+
+  /**
+   * 聚鑫分配的安全ID
+   */
+  MidasSecretId: string
+
+  /**
+   * 按照聚鑫安全密钥计算的签名
+   */
+  MidasSignature: string
+
+  /**
+   * 签约通知地址
+   */
+  ContractNotifyUrl: string
+
+  /**
+   * Web端回调地址
+   */
+  CallbackUrl?: string
+
+  /**
+      * 指定支付渠道：  wechat：微信支付  qqwallet：QQ钱包 
+ bank：网银支付  只有一个渠道时需要指定
+      */
+  Channel?: string
+
+  /**
+   * 透传字段，支付成功回调透传给应用，用于业务透传自定义内容
+   */
+  Metadata?: string
+
+  /**
+   * 购买数量，不传默认为1
+   */
+  Quantity?: number
+
+  /**
+   * 聚鑫计费SubAppId，代表子商户
+   */
+  SubAppId?: string
+
+  /**
+      * 子订单信息列表，格式：子订单号、子应用ID、金额。 压缩后最长不可超过65535字节(去除空格，换行，制表符等无意义字符)
+注：接入银行或其他支付渠道服务商模式下，必传
+      */
+  SubOrderList?: Array<ContractOrderInSubOrder>
+
+  /**
+   * 结算应收金额，单位：分
+   */
+  TotalMchIncome?: number
+
+  /**
+   * 平台应收金额，单位：分
+   */
+  TotalPlatformIncome?: number
+
+  /**
+   * 微信公众号/小程序支付时为必选，需要传微信下的openid
+   */
+  WxOpenId?: string
+
+  /**
+   * 在服务商模式下，微信公众号/小程序支付时wx_sub_openid和wx_openid二选一
+   */
+  WxSubOpenId?: string
+
+  /**
+      * 环境名:
+release: 现网环境
+sandbox: 沙箱环境
+development: 开发环境
+缺省: release
+      */
+  MidasEnvironment?: string
+
+  /**
+   * 微信商户应用ID
+   */
+  WxAppId?: string
+
+  /**
+   * 微信商户子应用ID
+   */
+  WxSubAppId?: string
+
+  /**
+   * 支付通知地址
+   */
+  PaymentNotifyUrl?: string
+
+  /**
+   * 传入调用方在Midas注册签约信息时获得的ContractSceneId。若未在Midas注册签约信息，则传入ExternalContractData。注意：ContractSceneId与ExternalContractData必须二选一传入其中一个
+   */
+  ContractSceneId?: string
+
+  /**
+   * 需要按照各个渠道的扩展签约信息规范组装好该字段。若未在Midas注册签约信息，则传入该字段。注意：ContractSceneId与ExternalContractData必须二选一传入其中一个
+   */
+  ExternalContractData?: string
+
+  /**
+   * 外部签约协议号，唯一标记一个签约关系。仅支持数字、字母、下划线（_）、横杠字符（-）、点（.）的组合
+   */
+  OutContractCode?: string
+
+  /**
+   * 透传给第三方渠道的附加数据
+   */
+  AttachData?: string
+
+  /**
+   * 展示用的签约用户名称，若不传入时，默认取UserId
+   */
+  ContractDisplayName?: string
 }
 
 /**
@@ -2093,34 +2324,82 @@ export interface RevokeRechargeByThirdPayResponse {
 }
 
 /**
- * ReviseMbrProperty返回参数结构体
+ * QueryContract请求参数结构体
  */
-export interface ReviseMbrPropertyResponse {
+export interface QueryContractRequest {
   /**
-   * String(20)，返回码
+   * 聚鑫分配的支付主MidasAppId
    */
-  TxnReturnCode?: string
+  MidasAppId: string
 
   /**
-   * String(100)，返回信息
+   * 用户ID，长度不小于5位，仅支持字母和数字的组合
    */
-  TxnReturnMsg?: string
+  UserId: string
 
   /**
-   * String(22)，交易流水号
-   */
-  CnsmrSeqNo?: string
-
-  /**
-      * STRING(1027)，保留域
-注意：此字段可能返回 null，表示取不到有效值。
+      * 指定渠道：  wechat：微信支付  qqwallet：QQ钱包 
+ bank：网银支付  只有一个渠道时需要指定
       */
-  ReservedMsg?: string
+  Channel: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 枚举值：
+CONTRACT_QUERY_MODE_BY_OUT_CONTRACT_CODE：按 OutContractCode + ContractSceneId 查询
+CONTRACT_QUERY_MODE_BY_CHANNEL_CONTRACT_CODE：按ChannelContractCode查询
+      */
+  ContractQueryMode: string
+
+  /**
+   * 按照聚鑫安全密钥计算的签名
    */
-  RequestId?: string
+  MidasSignature: string
+
+  /**
+   * 聚鑫分配的安全ID
+   */
+  MidasSecretId: string
+
+  /**
+   * 聚鑫计费SubAppId，代表子商户
+   */
+  SubAppId?: string
+
+  /**
+   * 业务签约合同协议号 当 ContractQueryMode=CONTRACT_QUERY_MODE_BY_OUT_CONTRACT_CODE 时 ，必填
+   */
+  OutContractCode?: string
+
+  /**
+   * 签约场景ID，当 ContractQueryMode=CONTRACT_QUERY_MODE_BY_OUT_CONTRACT_CODE 时 必填，在米大师侧托管后生成
+   */
+  ContractSceneId?: string
+
+  /**
+   * 米大师生成的协议号 ，当 ContractQueryMode=CONTRACT_QUERY_MODE_BY_CHANNEL_CONTRACT_CODE 时必填
+   */
+  ChannelContractCode?: string
+
+  /**
+   * 第三方渠道合约数据，为json字符串，与特定渠道有关
+   */
+  ExternalContractData?: string
+
+  /**
+      * 环境名:
+release: 现网环境
+sandbox: 沙箱环境
+development: 开发环境
+缺省: release
+      */
+  MidasEnvironment?: string
+
+  /**
+      * USER_ID: 用户ID
+ANONYMOUS: 匿名类型 USER_ID
+默认值为 USER_ID
+      */
+  UserType?: string
 }
 
 /**
@@ -2473,6 +2752,26 @@ export interface ApplyPayerinfoData {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FailReason: string
+}
+
+/**
+ * UploadTaxPayment请求参数结构体
+ */
+export interface UploadTaxPaymentRequest {
+  /**
+   * 平台渠道
+   */
+  Channel: number
+
+  /**
+   * 完税ID
+   */
+  TaxId: string
+
+  /**
+   * 完税列表下载地址
+   */
+  FileUrl: string
 }
 
 /**
@@ -3058,6 +3357,43 @@ export interface DescribeOrderStatusRequest {
 }
 
 /**
+ * QueryMemberTransaction返回参数结构体
+ */
+export interface QueryMemberTransactionResponse {
+  /**
+   * String(20)，返回码
+   */
+  TxnReturnCode?: string
+
+  /**
+   * String(100)，返回信息
+   */
+  TxnReturnMsg?: string
+
+  /**
+   * String(22)，交易流水号
+   */
+  CnsmrSeqNo?: string
+
+  /**
+      * STRING(52)，见证系统流水号（即电商见证宝系统生成的流水号，可关联具体一笔请求）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  FrontSeqNo?: string
+
+  /**
+      * STRING(1027)，保留域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReservedMsg?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 对接账户余额查询结果
  */
 export interface QueryMerchantBalanceResult {
@@ -3112,6 +3448,29 @@ export interface QuerySinglePayResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 解约数据
+ */
+export interface ResponseTerminateContract {
+  /**
+      * 第三方渠道错误码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExternalReturnCode: string
+
+  /**
+      * 第三方渠道错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExternalReturnMessage: string
+
+  /**
+      * 第三方渠道返回的原始数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExternalReturnData: string
 }
 
 /**
@@ -3259,192 +3618,26 @@ export interface RevokeMemberRechargeThirdPayResponse {
 }
 
 /**
- * CreateInvoiceV2请求参数结构体
+ * CreateRedInvoice请求参数结构体
  */
-export interface CreateInvoiceV2Request {
+export interface CreateRedInvoiceRequest {
   /**
-   * 开票平台ID。0：高灯，1：票易通
+   * 开票平台ID
    */
   InvoicePlatformId: number
 
   /**
-   * 抬头类型：1：个人/政府事业单位；2：企业
+   * 红冲明细
    */
-  TitleType: number
+  Invoices: Array<CreateRedInvoiceItem>
 
   /**
-   * 购方名称
-   */
-  BuyerTitle: string
-
-  /**
-   * 业务开票号
-   */
-  OrderId: string
-
-  /**
-   * 含税总金额（单位为分）
-   */
-  AmountHasTax: number
-
-  /**
-   * 总税额（单位为分）
-   */
-  TaxAmount: number
-
-  /**
-   * 不含税总金额（单位为分）。InvoicePlatformId 为1时，传默认值-1
-   */
-  AmountWithoutTax: number
-
-  /**
-   * 销方纳税人识别号
-   */
-  SellerTaxpayerNum: string
-
-  /**
-   * 销方名称。（不填默认读取商户注册时输入的信息）
-   */
-  SellerName?: string
-
-  /**
-   * 销方地址。（不填默认读取商户注册时输入的信息）
-   */
-  SellerAddress?: string
-
-  /**
-   * 销方电话。（不填默认读取商户注册时输入的信息）
-   */
-  SellerPhone?: string
-
-  /**
-   * 销方银行名称。（不填默认读取商户注册时输入的信息）
-   */
-  SellerBankName?: string
-
-  /**
-   * 销方银行账号。（不填默认读取商户注册时输入的信息）
-   */
-  SellerBankAccount?: string
-
-  /**
-   * 购方纳税人识别号（购方票面信息）,若抬头类型为2时，必传
-   */
-  BuyerTaxpayerNum?: string
-
-  /**
-   * 购方地址。开具专用发票时必填
-   */
-  BuyerAddress?: string
-
-  /**
-   * 购方银行名称。开具专用发票时必填
-   */
-  BuyerBankName?: string
-
-  /**
-   * 购方银行账号。开具专用发票时必填
-   */
-  BuyerBankAccount?: string
-
-  /**
-   * 购方电话。开具专用发票时必填
-   */
-  BuyerPhone?: string
-
-  /**
-   * 收票人邮箱。若填入，会收到发票推送邮件
-   */
-  BuyerEmail?: string
-
-  /**
-   * 收票人手机号。若填入，会收到发票推送短信
-   */
-  TakerPhone?: string
-
-  /**
-      * 开票类型：
-1：增值税专用发票；
-2：增值税普通发票；
-3：增值税电子发票；
-4：增值税卷式发票；
-5：区块链电子发票。
-若该字段不填，或值不为1-5，则认为开具”增值税电子发票”
-      */
-  InvoiceType?: number
-
-  /**
-   * 发票结果回传地址
-   */
-  CallbackUrl?: string
-
-  /**
-   * 开票人姓名。（不填默认读取商户注册时输入的信息）
-   */
-  Drawer?: string
-
-  /**
-   * 收款人姓名。（不填默认读取商户注册时输入的信息）
-   */
-  Payee?: string
-
-  /**
-   * 复核人姓名。（不填默认读取商户注册时输入的信息）
-   */
-  Checker?: string
-
-  /**
-   * 税盘号
-   */
-  TerminalCode?: string
-
-  /**
-   * 征收方式。开具差额征税发票时必填2。开具普通征税发票时为空
-   */
-  LevyMethod?: string
-
-  /**
-   * 差额征税扣除额（单位为分）
-   */
-  Deduction?: number
-
-  /**
-   * 备注（票面信息）
-   */
-  Remark?: string
-
-  /**
-   * 项目商品明细
-   */
-  Items?: Array<CreateInvoiceItem>
-
-  /**
-   * 接入环境。沙箱环境填sandbox。
+   * 接入环境。沙箱环境填 sandbox。
    */
   Profile?: string
 
   /**
-   * 撤销部分商品。0-不撤销，1-撤销
-   */
-  UndoPart?: number
-
-  /**
-   * 订单下单时间（格式 YYYYMMDD）
-   */
-  OrderDate?: string
-
-  /**
-   * 订单级别折扣（单位为分）
-   */
-  Discount?: number
-
-  /**
-   * 门店编码
-   */
-  StoreNo?: string
-
-  /**
-   * 开票渠道。0：APP渠道，1：线下渠道，2：小程序渠道。不填默认为APP渠道
+   * 开票渠道。0：线上渠道，1：线下渠道。不填默认为线上渠道
    */
   InvoiceChannel?: number
 }
@@ -3485,18 +3678,132 @@ export interface DeleteAgentTaxPaymentInfosRequest {
 }
 
 /**
- * UploadTaxList返回参数结构体
+ * 合约信息
  */
-export interface UploadTaxListResponse {
+export interface ContractInfo {
   /**
-   * 完税ID
+   * 米大师内部签约商户号
    */
-  TaxId?: string
+  ChannelContractMerchantId: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+      * 米大师内部签约子商户号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ChannelContractSubMerchantId: string
+
+  /**
+      * 米大师内部签约应用ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ChannelContractAppId: string
+
+  /**
+      * 米大师内部签约子应用ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ChannelContractSubAppId: string
+
+  /**
+   * 业务合约协议号
    */
-  RequestId?: string
+  OutContractCode: string
+
+  /**
+      * 第三方渠道用户信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExternalContractUserInfoList: Array<ExternalContractUserInfo>
+
+  /**
+   * 签约方式，如 wechat_app ，使用app方式下的微信签
+   */
+  ContractMethod: string
+
+  /**
+      * 合约场景id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ContractSceneId: string
+
+  /**
+   * 用户信息
+   */
+  UserInfo: ContractUserInfo
+
+  /**
+   * 第三方渠道签约数据
+   */
+  ExternalContractData: string
+}
+
+/**
+ * 第三方渠道合约信息
+ */
+export interface ExternalReturnContractInfo {
+  /**
+      * 第三方渠道协议id
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExternalReturnAgreementId: string
+
+  /**
+      * 第三方渠道协议生效时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExternalReturnContractEffectiveTimestamp: string
+
+  /**
+      * 第三方渠道协议解约时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExternalReturnContractTerminationTimestamp: string
+
+  /**
+      * 平台合约状态
+协议状态，枚举值：
+CONTRACT_STATUS_SIGNED：已签约
+CONTRACT_STATUS_TERMINATED：未签约
+CONTRACT_STATUS_PENDING：签约进行中
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExternalReturnContractStatus: string
+
+  /**
+      * 第三方渠道请求序列号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExternalReturnRequestId: string
+
+  /**
+      * 第三方渠道协议签署时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExternalReturnContractSignedTimestamp: string
+
+  /**
+      * 第三方渠道协议到期时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExternalReturnContractExpiredTimestamp: string
+
+  /**
+      * 第三方渠道返回的合约数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExternalReturnContractData: string
+
+  /**
+      * 第三方渠道解约备注
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExternalReturnContractTerminationRemark?: string
+
+  /**
+      * 第三方渠道协议解约方式
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExternalReturnContractTerminationMode?: string
 }
 
 /**
@@ -3758,6 +4065,26 @@ export interface DeleteAgentTaxPaymentInfosResponse {
 }
 
 /**
+ * 返回的合约信息
+ */
+export interface ReturnContractInfo {
+  /**
+   * 合约信息
+   */
+  ContractInfo: ContractInfo
+
+  /**
+   * 米大师内部生成的合约信息
+   */
+  ChannelReturnContractInfo: ChannelReturnContractInfo
+
+  /**
+   * 第三方渠道合约信息
+   */
+  ExternalReturnContractInfo: ExternalReturnContractInfo
+}
+
+/**
  * RegisterBillSupportWithdraw返回参数结构体
  */
 export interface RegisterBillSupportWithdrawResponse {
@@ -3857,6 +4184,49 @@ export interface QuerySmallAmountTransferResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   ReservedMsg?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 场景信息
+ */
+export interface SceneInfo {
+  /**
+      * 语言代码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  LocaleCode: string
+
+  /**
+      * 地区代码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  RegionCode: string
+
+  /**
+      * 用户IP
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  UserClientIp: string
+}
+
+/**
+ * QueryContract返回参数结构体
+ */
+export interface QueryContractResponse {
+  /**
+   * 签约数据
+   */
+  ContractData: ResponseQueryContract
+
+  /**
+   * 请求处理信息
+   */
+  Msg: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -4466,6 +4836,21 @@ export interface QueryTransferResultRequest {
    * 接入环境。沙箱环境填sandbox。
    */
   Profile?: string
+}
+
+/**
+ * SyncContractData返回参数结构体
+ */
+export interface SyncContractDataResponse {
+  /**
+   * 请求处理信息
+   */
+  Msg: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5679,64 +6064,68 @@ development 开发环境
 }
 
 /**
- * QueryMemberBind返回参数结构体
+ * 线下查票-订单信息
  */
-export interface QueryMemberBindResponse {
+export interface Order {
   /**
-      * STRING (10)，本次交易返回查询结果记录数
+      * 含税金额
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ResultNum?: string
+  AmountHasTax: number
 
   /**
-      * STRING(30)，起始记录号
+      * 优惠金额
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  StartRecordNo?: string
+  Discount: number
 
   /**
-      * STRING(2)，结束标志（0: 否; 1: 是）
+      * 销方名称
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  EndFlag?: string
+  SellerName: string
 
   /**
-      * STRING (10)，符合业务查询条件的记录总数（重复次数，一次最多返回20条记录）
+      * 发票类型
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TotalNum?: string
+  InvoiceType: number
 
   /**
-      * 交易信息数组
+      * 默认“”
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  TranItemArray?: Array<TranItem>
+  Name: string
 
   /**
-      * STRING(1027)，保留域
+      * 支付金额
 注意：此字段可能返回 null，表示取不到有效值。
       */
-  ReservedMsg?: string
+  Amount: number
 
   /**
-   * String(20)，返回码
-   */
-  TxnReturnCode?: string
+      * 下单日期
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OrderDate: string
 
   /**
-   * String(100)，返回信息
-   */
-  TxnReturnMsg?: string
+      * 订单号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  OrderId: string
 
   /**
-   * String(22)，交易流水号
-   */
-  CnsmrSeqNo?: string
+      * 门店号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StoreNo: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+      * 明细
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Items: Array<OrderItem>
 }
 
 /**
@@ -6256,6 +6645,32 @@ export interface CreateInvoiceRequest {
 }
 
 /**
+ * TransferSinglePay返回参数结构体
+ */
+export interface TransferSinglePayResponse {
+  /**
+   * 错误码。响应成功："SUCCESS"，其他为不成功
+   */
+  ErrCode: string
+
+  /**
+   * 响应消息
+   */
+  ErrMessage: string
+
+  /**
+      * 返回结果
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Result: TransferSinglePayData
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 贸易材料明细查询结果
  */
 export interface QueryTradeResult {
@@ -6268,6 +6683,67 @@ export interface QueryTradeResult {
    * 错误码
    */
   Code: string
+}
+
+/**
+ * QueryMemberBind返回参数结构体
+ */
+export interface QueryMemberBindResponse {
+  /**
+      * STRING (10)，本次交易返回查询结果记录数
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ResultNum?: string
+
+  /**
+      * STRING(30)，起始记录号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  StartRecordNo?: string
+
+  /**
+      * STRING(2)，结束标志（0: 否; 1: 是）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  EndFlag?: string
+
+  /**
+      * STRING (10)，符合业务查询条件的记录总数（重复次数，一次最多返回20条记录）
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TotalNum?: string
+
+  /**
+      * 交易信息数组
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  TranItemArray?: Array<TranItem>
+
+  /**
+      * STRING(1027)，保留域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReservedMsg?: string
+
+  /**
+   * String(20)，返回码
+   */
+  TxnReturnCode?: string
+
+  /**
+   * String(100)，返回信息
+   */
+  TxnReturnMsg?: string
+
+  /**
+   * String(22)，交易流水号
+   */
+  CnsmrSeqNo?: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6451,6 +6927,25 @@ export interface CreateCustAcctIdRequest {
 }
 
 /**
+ * 米大师内部生成的合约信息
+ */
+export interface ChannelReturnContractInfo {
+  /**
+      * 平台合约状态
+协议状态，枚举值：
+CONTRACT_STATUS_SIGNED：已签约
+CONTRACT_STATUS_TERMINATED：未签约
+CONTRACT_STATUS_PENDING：签约进行中
+      */
+  ContractStatus: string
+
+  /**
+   * 米大师内部存放的合约信息
+   */
+  ChannelContractInfo: ChannelContractInfo
+}
+
+/**
  * UnBindAcct返回参数结构体
  */
 export interface UnBindAcctResponse {
@@ -6585,6 +7080,37 @@ export interface QueryAgentStatementsResponse {
 注意：此字段可能返回 null，表示取不到有效值。
       */
   FileUrl: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ReviseMbrProperty返回参数结构体
+ */
+export interface ReviseMbrPropertyResponse {
+  /**
+   * String(20)，返回码
+   */
+  TxnReturnCode?: string
+
+  /**
+   * String(100)，返回信息
+   */
+  TxnReturnMsg?: string
+
+  /**
+   * String(22)，交易流水号
+   */
+  CnsmrSeqNo?: string
+
+  /**
+      * STRING(1027)，保留域
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReservedMsg?: string
 
   /**
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
@@ -6956,68 +7482,87 @@ development: 开发环境
 }
 
 /**
- * 交易明细信息
+ * TerminateContract请求参数结构体
  */
-export interface TransactionItem {
+export interface TerminateContractRequest {
   /**
-      * STRING(2)，记账标志（1: 转出; 2: 转入）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BookingFlag: string
+   * 聚鑫分配的支付主MidasAppId
+   */
+  MidasAppId: string
 
   /**
-      * STRING(32)，交易状态（0: 成功）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TranStatus: string
+   * 用户ID，长度不小于5位，仅支持字母和数字的组合
+   */
+  UserId: string
 
   /**
-      * STRING(20)，交易金额
-注意：此字段可能返回 null，表示取不到有效值。
+      * 指定渠道：  wechat：微信支付  qqwallet：QQ钱包 
+ bank：网银支付  只有一个渠道时需要指定
       */
-  TranAmt: string
+  Channel: string
 
   /**
-      * STRING(8)，交易日期
-注意：此字段可能返回 null，表示取不到有效值。
+      * 枚举值：
+CONTRACT_TERMINATION_MODE_BY_OUT_CONTRACT_CODE: 按OutContractCode+ContractSceneId解约
+CONTRACT_TERMINATION_MODE_BY_CHANNEL_CONTRACT_CODE：按ChannelContractCode解约
       */
-  TranDate: string
+  TerminateMode: string
 
   /**
-      * STRING(20)，交易时间
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  TranTime: string
+   * 聚鑫分配的安全ID
+   */
+  MidasSecretId: string
 
   /**
-      * STRING(52)，见证系统流水号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  FrontSeqNo: string
+   * 按照聚鑫安全密钥计算的签名
+   */
+  MidasSignature: string
 
   /**
-      * STRING(20)，记账类型（详情见“常见问题”）
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  BookingType: string
+   * 聚鑫计费SubAppId，代表子商户
+   */
+  SubAppId?: string
 
   /**
-      * STRING(50)，转入见证子账户的帐号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  InSubAcctNo: string
+   * 业务签约合同协议号 当TerminateMode=CONTRACT_TERMINATION_MODE_BY_OUT_CONTRACT_CODE 时 必填
+   */
+  OutContractCode?: string
 
   /**
-      * STRING(50)，转出见证子账户的帐号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OutSubAcctNo: string
+   * 签约场景ID，当 TerminateMode=CONTRACT_TERMINATION_MODE_BY_OUT_CONTRACT_CODE 时 必填，在米大师侧托管后生成
+   */
+  ContractSceneId?: string
 
   /**
-      * STRING(300)，备注（返回交易订单号）
-注意：此字段可能返回 null，表示取不到有效值。
+   * 米大师生成的协议号 当 TerminateMode=CONTRACT_TERMINATION_MODE_BY_CHANNEL_CONTRACT_CODE 时 必填
+   */
+  ChannelContractCode?: string
+
+  /**
+   * 第三方渠道合约数据，json字符串，与特定渠道有关
+   */
+  ExternalContractData?: string
+
+  /**
+   * 终止合约原因
+   */
+  TerminationReason?: string
+
+  /**
+      * 环境名:
+release: 现网环境
+sandbox: 沙箱环境
+development: 开发环境
+缺省: release
       */
-  Remark: string
+  MidasEnvironment?: string
+
+  /**
+      * USER_ID: 用户ID
+ANONYMOUS: 匿名类型 USER_ID
+默认值为 USER_ID
+      */
+  UserType?: string
 }
 
 /**
@@ -7826,135 +8371,28 @@ export interface RevokeMemberRechargeThirdPayRequest {
 }
 
 /**
- * ExecuteMemberTransaction请求参数结构体
+ * 红票结果数据
  */
-export interface ExecuteMemberTransactionRequest {
+export interface CreateRedInvoiceResultData {
   /**
-   * 请求类型此接口固定填：MemberTransactionReq
+   * 红冲状态码
    */
-  RequestType: string
+  Code: number
 
   /**
-   * 银行注册商户号
+   * 红冲状态消息
    */
-  MerchantCode: string
+  Message: string
 
   /**
-   * 支付渠道
+   * 发票ID
    */
-  PayChannel: string
+  InvoiceId: string
 
   /**
-   * 子渠道
+   * 业务开票号
    */
-  PayChannelSubId: number
-
-  /**
-   * 转出交易网会员代码
-   */
-  OutTransNetMemberCode: string
-
-  /**
-   * 转出见证子账户的户名
-   */
-  OutSubAccountName: string
-
-  /**
-   * 转入见证子账户的户名
-   */
-  InSubAccountName: string
-
-  /**
-   * 转出子账户账号
-   */
-  OutSubAccountNumber: string
-
-  /**
-   * 转入子账户账号
-   */
-  InSubAccountNumber: string
-
-  /**
-   * 父账户账号，资金汇总账号
-   */
-  BankAccountNumber: string
-
-  /**
-   * 货币单位 单位，1：元，2：角，3：分
-   */
-  CurrencyUnit: string
-
-  /**
-   * 币种
-   */
-  CurrencyType: string
-
-  /**
-   * 交易金额
-   */
-  CurrencyAmount: string
-
-  /**
-   * 订单号
-   */
-  OrderId: string
-
-  /**
-   * 聚鑫分配的支付主MidasAppId
-   */
-  MidasAppId: string
-
-  /**
-   * 聚鑫分配的安全ID
-   */
-  MidasSecretId: string
-
-  /**
-   * 计费签名
-   */
-  MidasSignature: string
-
-  /**
-      * 交易流水号 
-生成方式：用户短号+日期（6位）+ 随机编号（10位）例如：F088722005120904930798
-短号：F08872  日期： 200512   随机编号：0904930798
-      */
-  TransSequenceNumber: string
-
-  /**
-   * 转入交易网会员代码
-   */
-  InTransNetMemberCode: string
-
-  /**
-      * Midas环境标识 release 现网环境 sandbox 沙箱环境
-development 开发环境
-      */
-  MidasEnvironment: string
-
-  /**
-   * 平台短号(银行分配)
-   */
-  PlatformShortNumber?: string
-
-  /**
-      * 1：下单预支付 
-2：确认并付款
-3：退款
-6：直接支付T+1
-9：直接支付T+0
-      */
-  TransType?: string
-
-  /**
-   * 交易手续费
-   */
-  TransFee?: string
-
-  /**
-   * 保留域
-   */
-  ReservedMessage?: string
+  OrderSn: string
 }
 
 /**
@@ -8226,40 +8664,34 @@ export interface CreateMerchantResponse {
 }
 
 /**
- * QueryMemberTransaction返回参数结构体
+ * 第三方渠道用户信息
  */
-export interface QueryMemberTransactionResponse {
+export interface ExternalContractUserInfo {
   /**
-   * String(20)，返回码
+   * 第三方用户类型，例如:  WX_OPENID, WX_SUB_OPENID,WX_PAYER_OPENID
    */
-  TxnReturnCode?: string
+  ExternalUserType: string
 
   /**
-   * String(100)，返回信息
+   * 第三方用户ID
    */
-  TxnReturnMsg?: string
+  ExternalUserId: string
+}
 
+/**
+ * 用户信息
+ */
+export interface ContractUserInfo {
   /**
-   * String(22)，交易流水号
-   */
-  CnsmrSeqNo?: string
-
-  /**
-      * STRING(52)，见证系统流水号（即电商见证宝系统生成的流水号，可关联具体一笔请求）
-注意：此字段可能返回 null，表示取不到有效值。
+      * USER_ID: 用户ID
+ANONYMOUS: 匿名类型用户ID
       */
-  FrontSeqNo?: string
+  UserType: string
 
   /**
-      * STRING(1027)，保留域
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  ReservedMsg?: string
-
-  /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 用户类型
    */
-  RequestId?: string
+  UserId: string
 }
 
 /**
@@ -8449,6 +8881,21 @@ merchant:商户子账户
 注意：此字段可能返回 null，表示取不到有效值。
       */
   SubMerchantMemberType: string
+}
+
+/**
+ * 米大师内部存放的合约信息
+ */
+export interface ChannelContractInfo {
+  /**
+   * 外部合约协议号
+   */
+  OutContractCode: string
+
+  /**
+   * 米大师内部生成的合约协议号
+   */
+  ChannelContractCode: string
 }
 
 /**
@@ -8734,28 +9181,197 @@ development: 开发环境
 }
 
 /**
- * 红票结果数据
+ * ExecuteMemberTransaction请求参数结构体
  */
-export interface CreateRedInvoiceResultData {
+export interface ExecuteMemberTransactionRequest {
   /**
-   * 红冲状态码
+   * 请求类型此接口固定填：MemberTransactionReq
    */
-  Code: number
+  RequestType: string
 
   /**
-   * 红冲状态消息
+   * 银行注册商户号
    */
-  Message: string
+  MerchantCode: string
 
   /**
-   * 发票ID
+   * 支付渠道
    */
-  InvoiceId: string
+  PayChannel: string
 
   /**
-   * 业务开票号
+   * 子渠道
    */
-  OrderSn: string
+  PayChannelSubId: number
+
+  /**
+   * 转出交易网会员代码
+   */
+  OutTransNetMemberCode: string
+
+  /**
+   * 转出见证子账户的户名
+   */
+  OutSubAccountName: string
+
+  /**
+   * 转入见证子账户的户名
+   */
+  InSubAccountName: string
+
+  /**
+   * 转出子账户账号
+   */
+  OutSubAccountNumber: string
+
+  /**
+   * 转入子账户账号
+   */
+  InSubAccountNumber: string
+
+  /**
+   * 父账户账号，资金汇总账号
+   */
+  BankAccountNumber: string
+
+  /**
+   * 货币单位 单位，1：元，2：角，3：分
+   */
+  CurrencyUnit: string
+
+  /**
+   * 币种
+   */
+  CurrencyType: string
+
+  /**
+   * 交易金额
+   */
+  CurrencyAmount: string
+
+  /**
+   * 订单号
+   */
+  OrderId: string
+
+  /**
+   * 聚鑫分配的支付主MidasAppId
+   */
+  MidasAppId: string
+
+  /**
+   * 聚鑫分配的安全ID
+   */
+  MidasSecretId: string
+
+  /**
+   * 计费签名
+   */
+  MidasSignature: string
+
+  /**
+      * 交易流水号 
+生成方式：用户短号+日期（6位）+ 随机编号（10位）例如：F088722005120904930798
+短号：F08872  日期： 200512   随机编号：0904930798
+      */
+  TransSequenceNumber: string
+
+  /**
+   * 转入交易网会员代码
+   */
+  InTransNetMemberCode: string
+
+  /**
+      * Midas环境标识 release 现网环境 sandbox 沙箱环境
+development 开发环境
+      */
+  MidasEnvironment: string
+
+  /**
+   * 平台短号(银行分配)
+   */
+  PlatformShortNumber?: string
+
+  /**
+      * 1：下单预支付 
+2：确认并付款
+3：退款
+6：直接支付T+1
+9：直接支付T+0
+      */
+  TransType?: string
+
+  /**
+   * 交易手续费
+   */
+  TransFee?: string
+
+  /**
+   * 保留域
+   */
+  ReservedMessage?: string
+}
+
+/**
+ * 签约数据
+ */
+export interface ResponseQueryContract {
+  /**
+      * 第三方渠道错误码
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExternalReturnCode: string
+
+  /**
+      * 第三方渠道错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExternalReturnMessage: string
+
+  /**
+      * 第三方渠道返回的原始数据
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ExternalReturnData: string
+
+  /**
+   * 米大师内部商户号
+   */
+  ChannelMerchantId: string
+
+  /**
+      * 米大师内部子商户号
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ChannelSubMerchantId: string
+
+  /**
+      * 米大师内部应用ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ChannelAppId: string
+
+  /**
+      * 米大师内部子应用ID
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ChannelSubAppId: string
+
+  /**
+   * 渠道名称
+   */
+  ChannelName: string
+
+  /**
+      * 返回的合约信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  ReturnContractInfo: ReturnContractInfo
+
+  /**
+   * 签约通知地址
+   */
+  NotifyUrl: string
 }
 
 /**
@@ -8841,6 +9457,41 @@ export interface QueryRefundResponse {
    * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 签约同步信息
+ */
+export interface ContractSyncInfo {
+  /**
+   * 第三方渠道合约信息
+   */
+  ExternalReturnContractInfo: ExternalReturnContractInfo
+
+  /**
+   * 第三方渠道用户信息
+   */
+  ExternalContractUserInfo: Array<ExternalContractUserInfo>
+
+  /**
+      * 签约方式，枚举值，
+<br/>CONTRACT_METHOD_WECHAT_INVALID: 无效
+CONTRACT_METHOD_WECHAT_APP: 微信APP
+CONTRACT_METHOD_WECHAT_PUBLIC: 微信公众号
+CONTRACT_METHOD_WECHAT_MINIPROGRAM: 微信小程序
+CONTRACT_METHOD_WECHAT_H5: 微信H5
+      */
+  ContractMethod?: string
+
+  /**
+   * 在米大师侧分配的场景id
+   */
+  ContractSceneId?: string
+
+  /**
+   * 调用方从第三方渠道查询到的签约数据，由各个渠道定义
+   */
+  ExternalReturnContractData?: string
 }
 
 /**
@@ -8986,68 +9637,53 @@ OVERDUE_CLOSE：系统超时关闭。
 }
 
 /**
- * 线下查票-订单信息
+ * 支付中签约子订单列表
  */
-export interface Order {
+export interface ContractOrderInSubOrder {
   /**
-      * 含税金额
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  AmountHasTax: number
+   * 子订单结算应收金额，单位： 分
+   */
+  SubMchIncome: number
 
   /**
-      * 优惠金额
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Discount: number
+   * 子订单平台应收金额，单位：分
+   */
+  PlatformIncome: number
 
   /**
-      * 销方名称
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  SellerName: string
+   * 子订单商品详情
+   */
+  ProductDetail: string
 
   /**
-      * 发票类型
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  InvoiceType: number
+   * 子订单商品名称
+   */
+  ProductName: string
 
   /**
-      * 默认“”
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Name: string
+   * 聚鑫计费SubAppId，代表子商户
+   */
+  SubAppId: string
 
   /**
-      * 支付金额
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Amount: number
+   * 子订单号
+   */
+  SubOutTradeNo: string
 
   /**
-      * 下单日期
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OrderDate: string
+   * 子订单支付金额
+   */
+  Amt: number
 
   /**
-      * 订单号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  OrderId: string
+   * 子订单原始金额
+   */
+  OriginalAmt: number
 
   /**
-      * 门店号
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  StoreNo: string
-
-  /**
-      * 明细
-注意：此字段可能返回 null，表示取不到有效值。
-      */
-  Items: Array<OrderItem>
+   * 发货标识，由业务在调用聚鑫下单接口的 时候下发
+   */
+  Metadata?: string
 }
 
 /**
@@ -9115,6 +9751,27 @@ export interface QueryDeclareData {
 }
 
 /**
+ * TerminateContract返回参数结构体
+ */
+export interface TerminateContractResponse {
+  /**
+   * 解约数据
+   */
+  ContractTerminateData: ResponseTerminateContract
+
+  /**
+      * 请求处理信息
+注意：此字段可能返回 null，表示取不到有效值。
+      */
+  Msg: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * QueryMemberBind请求参数结构体
  */
 export interface QueryMemberBindRequest {
@@ -9150,29 +9807,79 @@ export interface QueryMemberBindRequest {
 }
 
 /**
- * TransferSinglePay返回参数结构体
+ * SyncContractData请求参数结构体
  */
-export interface TransferSinglePayResponse {
+export interface SyncContractDataRequest {
   /**
-   * 错误码。响应成功："SUCCESS"，其他为不成功
+   * 聚鑫分配的支付主MidasAppId
    */
-  ErrCode: string
+  MidasAppId: string
 
   /**
-   * 响应消息
+   * 用户ID，长度不小于5位，仅支持字母和数字的组合
    */
-  ErrMessage: string
+  UserId: string
 
   /**
-      * 返回结果
-注意：此字段可能返回 null，表示取不到有效值。
+   * 签约使用的渠道
+   */
+  Channel: string
+
+  /**
+   * 业务签约合同协议号
+   */
+  OutContractCode: string
+
+  /**
+      * 签约状态，枚举值
+CONTRACT_STATUS_INVALID=无效状态
+CONTRACT_STATUS_SIGNED=已签约
+CONTRACT_STATUS_TERMINATED=已解约
+CONTRACT_STATUS_PENDING=签约进行中
       */
-  Result: TransferSinglePayData
+  ContractStatus: string
 
   /**
-   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   * 签约同步信息
    */
-  RequestId?: string
+  ContractSyncInfo: ContractSyncInfo
+
+  /**
+   * 按照聚鑫安全密钥计算的签名
+   */
+  MidasSignature: string
+
+  /**
+   * 聚鑫分配的安全ID
+   */
+  MidasSecretId: string
+
+  /**
+   * 聚鑫计费SubAppId，代表子商户
+   */
+  SubAppId?: string
+
+  /**
+      * 用户类型，枚举值
+USER_ID: 用户ID
+ANONYMOUS: 匿名类型 USER_ID
+默认值为 USER_ID
+      */
+  UserType?: string
+
+  /**
+   * 场景信息
+   */
+  SceneInfo?: SceneInfo
+
+  /**
+      * 环境名:
+release: 现网环境
+sandbox: 沙箱环境
+development: 开发环境
+缺省: release
+      */
+  MidasEnvironment?: string
 }
 
 /**
@@ -9639,26 +10346,227 @@ export interface BindRelateAccReUnionPayResponse {
 }
 
 /**
- * CreateRedInvoice请求参数结构体
+ * ContractOrder返回参数结构体
  */
-export interface CreateRedInvoiceRequest {
+export interface ContractOrderResponse {
   /**
-   * 开票平台ID
+   * 支付金额，单位： 分
+   */
+  TotalAmt: number
+
+  /**
+   * 应用支付订单号
+   */
+  OutTradeNo: string
+
+  /**
+   * 支付参数透传给聚鑫SDK（原文透传给SDK即可，不需要解码）
+   */
+  PayInfo: string
+
+  /**
+   * 聚鑫的交易订单号
+   */
+  TransactionId: string
+
+  /**
+   * 外部签约协议号
+   */
+  OutContractCode: string
+
+  /**
+   * 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateInvoiceV2请求参数结构体
+ */
+export interface CreateInvoiceV2Request {
+  /**
+   * 开票平台ID。0：高灯，1：票易通
    */
   InvoicePlatformId: number
 
   /**
-   * 红冲明细
+   * 抬头类型：1：个人/政府事业单位；2：企业
    */
-  Invoices: Array<CreateRedInvoiceItem>
+  TitleType: number
 
   /**
-   * 接入环境。沙箱环境填 sandbox。
+   * 购方名称
+   */
+  BuyerTitle: string
+
+  /**
+   * 业务开票号
+   */
+  OrderId: string
+
+  /**
+   * 含税总金额（单位为分）
+   */
+  AmountHasTax: number
+
+  /**
+   * 总税额（单位为分）
+   */
+  TaxAmount: number
+
+  /**
+   * 不含税总金额（单位为分）。InvoicePlatformId 为1时，传默认值-1
+   */
+  AmountWithoutTax: number
+
+  /**
+   * 销方纳税人识别号
+   */
+  SellerTaxpayerNum: string
+
+  /**
+   * 销方名称。（不填默认读取商户注册时输入的信息）
+   */
+  SellerName?: string
+
+  /**
+   * 销方地址。（不填默认读取商户注册时输入的信息）
+   */
+  SellerAddress?: string
+
+  /**
+   * 销方电话。（不填默认读取商户注册时输入的信息）
+   */
+  SellerPhone?: string
+
+  /**
+   * 销方银行名称。（不填默认读取商户注册时输入的信息）
+   */
+  SellerBankName?: string
+
+  /**
+   * 销方银行账号。（不填默认读取商户注册时输入的信息）
+   */
+  SellerBankAccount?: string
+
+  /**
+   * 购方纳税人识别号（购方票面信息）,若抬头类型为2时，必传
+   */
+  BuyerTaxpayerNum?: string
+
+  /**
+   * 购方地址。开具专用发票时必填
+   */
+  BuyerAddress?: string
+
+  /**
+   * 购方银行名称。开具专用发票时必填
+   */
+  BuyerBankName?: string
+
+  /**
+   * 购方银行账号。开具专用发票时必填
+   */
+  BuyerBankAccount?: string
+
+  /**
+   * 购方电话。开具专用发票时必填
+   */
+  BuyerPhone?: string
+
+  /**
+   * 收票人邮箱。若填入，会收到发票推送邮件
+   */
+  BuyerEmail?: string
+
+  /**
+   * 收票人手机号。若填入，会收到发票推送短信
+   */
+  TakerPhone?: string
+
+  /**
+      * 开票类型：
+1：增值税专用发票；
+2：增值税普通发票；
+3：增值税电子发票；
+4：增值税卷式发票；
+5：区块链电子发票。
+若该字段不填，或值不为1-5，则认为开具”增值税电子发票”
+      */
+  InvoiceType?: number
+
+  /**
+   * 发票结果回传地址
+   */
+  CallbackUrl?: string
+
+  /**
+   * 开票人姓名。（不填默认读取商户注册时输入的信息）
+   */
+  Drawer?: string
+
+  /**
+   * 收款人姓名。（不填默认读取商户注册时输入的信息）
+   */
+  Payee?: string
+
+  /**
+   * 复核人姓名。（不填默认读取商户注册时输入的信息）
+   */
+  Checker?: string
+
+  /**
+   * 税盘号
+   */
+  TerminalCode?: string
+
+  /**
+   * 征收方式。开具差额征税发票时必填2。开具普通征税发票时为空
+   */
+  LevyMethod?: string
+
+  /**
+   * 差额征税扣除额（单位为分）
+   */
+  Deduction?: number
+
+  /**
+   * 备注（票面信息）
+   */
+  Remark?: string
+
+  /**
+   * 项目商品明细
+   */
+  Items?: Array<CreateInvoiceItem>
+
+  /**
+   * 接入环境。沙箱环境填sandbox。
    */
   Profile?: string
 
   /**
-   * 开票渠道。0：线上渠道，1：线下渠道。不填默认为线上渠道
+   * 撤销部分商品。0-不撤销，1-撤销
+   */
+  UndoPart?: number
+
+  /**
+   * 订单下单时间（格式 YYYYMMDD）
+   */
+  OrderDate?: string
+
+  /**
+   * 订单级别折扣（单位为分）
+   */
+  Discount?: number
+
+  /**
+   * 门店编码
+   */
+  StoreNo?: string
+
+  /**
+   * 开票渠道。0：APP渠道，1：线下渠道，2：小程序渠道。不填默认为APP渠道
    */
   InvoiceChannel?: number
 }
